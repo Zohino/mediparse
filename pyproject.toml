@@ -1,0 +1,30 @@
+[project]
+name = "mediparse"
+version = "0.1.0"
+description = "Repozitar k bakalarske praci zamerene na NLP v lekarskych zpravach. Obsahuje experimenty s klasifikaci nalezu, NER a porovnani klasickych ML metod a transformatorovych modelu na datove sade MIMIC-IV."
+readme = "README.md"
+authors = [
+    { name = "Martin Žoha", email = "193829878+Zohino@users.noreply.github.com" }
+]
+requires-python = ">=3.13"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/Zohino/mediparse"
+
+[build-system]
+requires = ["uv_build>=0.11.6,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "commitizen>=4.18.0",
+]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_scheme = "pep440"
+version_provider = "uv"
+update_changelog_on_bump = true
+major_version_zero = true
