@@ -1,1 +1,2 @@
-print("Mediparse žije!")
+if __name__ == "__main__":
+    print("Mediparse žije!")
