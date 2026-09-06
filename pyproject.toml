@@ -6,6 +6,7 @@ readme = "README.md"
 authors = [
     { name = "Martin Žoha", email = "193829878+Zohino@users.noreply.github.com" }
 ]
+license = { file = "LICENSE" }
 requires-python = ">=3.13"
 dependencies = []
 
@@ -20,6 +21,7 @@ build-backend = "uv_build"
 dev = [
     "commitizen>=4.18.0",
     "import-linter[ui]>=2.15",
+    "ruff>=0.16.6",
 ]
 
 [tool.commitizen]
@@ -44,3 +46,44 @@ source_modules = [
 forbidden_modules = [
     "workflow",
 ]
+
+[tool.ruff]
+extend-exclude = ["workflow"]   # Snakemake používá vlastní importy a fmt
+fix = true
+preview = true
+show-fixes = true
+
+[tool.ruff.lint]
+future-annotations = true
+select = ["ALL"]
+# recommended ignore list https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
+ignore = [
+    "tab-indentation",
+    "indentation-with-invalid-multiple",
+    "indentation-with-invalid-multiple-comment",
+    "over-indented",
+    "incorrect-blank-line-before-class",
+    "docstring-tab-indentation",
+    "triple-single-quotes",
+    "bad-quotes-inline-string",
+    "bad-quotes-multiline-string",
+    "bad-quotes-docstring",
+    "avoidable-escaped-quote",
+    "unnecessary-escaped-quote",
+    "missing-trailing-comma",
+    "prohibited-trailing-comma",
+    "line-too-long",
+
+    # Vyjmutá pravidla pro nadbytečnost nebo striktnost, která není v projektu vyžadována
+    "missing-copyright-notice", # Copyright je uveden v LICENSE souboru a odkazován v pyproject.toml
+]
+
+[tool.ruff.lint.pydocstyle]
+# Use Google-style docstrings.
+convention = "google"
+
+[tool.ruff.lint.pylint]
+max-nested-blocks = 3
+
+[tool.ruff.format]
+docstring-code-format = true

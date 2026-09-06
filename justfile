@@ -73,3 +73,11 @@ lint-imports:
     fi
 
     exit "$failed"
+
+# Linting pomocí ruff
+lint:
+    {{runner}} ruff check
+
+# Statistika lintingu pomocí ruff pro vyloučení omezujících pravidel
+ruff-statistics:
+    {{runner}} ruff check --statistics --no-fix
