@@ -19,6 +19,7 @@ build-backend = "uv_build"
 [dependency-groups]
 dev = [
     "commitizen>=4.18.0",
+    "import-linter[ui]>=2.15",
 ]
 
 [tool.commitizen]
@@ -28,3 +29,18 @@ version_scheme = "pep440"
 version_provider = "uv"
 update_changelog_on_bump = true
 major_version_zero = true
+
+[tool.importlinter]
+root_package =  "mediparse"
+include_external_packages = true
+exclude_type_checking_imports = true
+
+[[tool.importlinter.contracts]]
+name = "Zákaz importu z workflow do mediparse"
+type = "forbidden"
+source_modules = [
+    "mediparse",
+]
+forbidden_modules = [
+    "workflow",
+]
