@@ -78,6 +78,14 @@ lint-imports:
 lint:
     {{runner}} ruff check
 
+# Formátovat kód pomocí ruff
+format:
+    {{runner}} ruff format
+
+# Kontrola statického typování pomocí ty
+typecheck:
+    {{runner}} ty check
+
 # Statistika lintingu pomocí ruff pro vyloučení omezujících pravidel
 ruff-statistics:
     {{runner}} ruff check --statistics --no-fix
