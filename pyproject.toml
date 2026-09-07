@@ -22,6 +22,7 @@ dev = [
     "commitizen>=4.18.0",
     "import-linter[ui]>=2.15",
     "ruff>=0.16.6",
+    "ty>=0.0.78",
 ]
 
 [tool.commitizen]
@@ -33,18 +34,68 @@ update_changelog_on_bump = true
 major_version_zero = true
 
 [tool.importlinter]
-root_package =  "mediparse"
+root_packages = ["mediparse", "tests", "workflow"]
 include_external_packages = true
 exclude_type_checking_imports = true
 
+# Architektura:
+# application a infrastructure:
+# - mohou záviset na domain
+# - nesmí záviset jedna na druhé
+#
+# domain:
+# - nesmí záviset na application
+# - nesmí záviset na infrastructure
 [[tool.importlinter.contracts]]
-name = "Zákaz importu z workflow do mediparse"
+name = "Vrstvená architektura mediparse"
+type = "layers"
+layers = [
+    "mediparse.application | mediparse.infrastructure",
+    "mediparse.domain",
+]
+
+# Zabraňuje cyklickým závislostem mezi siblings
+# uvnitř mediparse (včetně vnořených modulů).
+[[tool.importlinter.contracts]]
+name = "Mediparse je acyklické"
+type = "acyclic_siblings"
+ancestors = [
+    "mediparse",
+]
+
+# workflow je orchestrace mimo samotný package.
+# Mediparse může být použit workflow,
+# ale nikdy nesmí záviset na workflow.
+[[tool.importlinter.contracts]]
+name = "Mediparse nesmí záviset na workflow"
 type = "forbidden"
 source_modules = [
     "mediparse",
 ]
 forbidden_modules = [
     "workflow",
+]
+
+[[tool.importlinter.contracts]]
+name = "Workflow importuje přímo pouze mediparse.application"
+type = "forbidden"
+allow_indirect_imports = true
+source_modules = [
+    "workflow",
+]
+forbidden_modules = [
+    "mediparse.domain",
+    "mediparse.infrastructure",
+]
+
+[[tool.importlinter.contracts]]
+name = "Testy nejsou součástí mediparse"
+type = "forbidden"
+source_modules = [
+    "mediparse",
+]
+forbidden_modules = [
+    "tests",
 ]
 
 [tool.ruff]
