@@ -1,6 +1,7 @@
 *
 !src/
 !tests/
+!config/matrix.json
 !pyproject.toml
 !uv.lock
 !README.md
