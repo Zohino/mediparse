@@ -19,12 +19,19 @@ build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
+    { include-group = "lint" },
+    { include-group = "test" },
     "commitizen>=4.19.0",
-    "import-linter[ui]>=2.15",
     "prek>=0.5.3",
-    "pytest>=9.1.1",
+]
+lint = [
+    "hadolint-py>=2.15.1.2",
+    "import-linter[ui]>=2.15",
     "ruff>=0.16.9",
     "ty>=0.0.84",
+]
+test = [
+    "pytest>=9.1.1",
 ]
 
 [tool.commitizen]

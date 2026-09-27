@@ -83,6 +83,14 @@ types_or = ["python", "pyi"]
 pass_filenames = false
 
 [[repos.hooks]]
+id = "hadolint"
+groups = ["ci-job"]
+name = "hadolint"
+language = "system"
+entry = "uv run --frozen hadolint"
+types = ["dockerfile"]
+
+[[repos.hooks]]
 id = "lint-imports"
 name = "just lint-imports"
 language = "system"
