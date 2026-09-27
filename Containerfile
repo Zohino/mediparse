@@ -27,6 +27,7 @@ WORKDIR /app
 
 COPY --from=builder /app/.venv /app/.venv
 COPY pyproject.toml ./
+COPY config/matrix.json config/
 COPY tests/ tests/
 
 ENV PATH="/app/.venv/bin:$PATH" \
