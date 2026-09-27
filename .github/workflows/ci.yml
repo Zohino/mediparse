@@ -1,0 +1,149 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 5 * * 1"
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-uv-env
+      - name: ruff check
+        run: uv run --frozen ruff check --no-fix --output-format=github
+      - name: ruff format
+        run: uv run --frozen ruff format --check --diff
+
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-uv-env
+      - name: ty check
+        run: uv run --frozen ty check --output-format github
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-uv-env
+      - name: pytest
+        run: uv run --frozen pytest
+
+  hygiene:
+    name: Repo hygiene
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-uv-env
+      - name: prek builtin hooks
+        run: >-
+          uv run --frozen prek run --all-files --stage pre-commit
+          --no-group local-only --no-group ci-job --show-diff-on-failure
+      - name: no submodules
+        run: |
+          submodules=$(git ls-files --stage | awk '$1 == "160000" {print $4}')
+          if [[ -n "$submodules" ]]; then
+            echo "::error::Repo nesmí obsahovat submoduly: $submodules"
+            exit 1
+          fi
+
+  secrets:
+    name: Secrets
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: read # gitleaks-action čte seznam commitů PR přes API
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: gitleaks
+        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_VERSION: "8.30.1"
+          GITLEAKS_ENABLE_COMMENTS: "false"
+
+  commits:
+    name: Commit messages
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: ./.github/actions/setup-uv-env
+      - name: prek commit-msg hooks
+        env:
+          RANGE: ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
+        run: |
+          status=0
+          for sha in $(git rev-list --no-merges --reverse "$RANGE"); do
+            echo "::group::$(git log -1 --format='%h %s' "$sha")"
+            git log -1 --format=%B "$sha" > "$RUNNER_TEMP/commit-msg"
+            if ! uv run --frozen prek run --stage commit-msg --commit-msg-filename "$RUNNER_TEMP/commit-msg"; then
+              echo "::error::Commit $sha neprošel kontrolou commit zprávy"
+              status=1
+            fi
+            echo "::endgroup::"
+          done
+          exit "$status"
+
+  ci-ok:
+    name: CI OK
+    if: always()
+    needs: [lint, typecheck, test, hygiene, secrets, commits]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - uses: re-actors/alls-green@b5b5b37504aa4183270bd3d855c52a67f212be35 # v1.3.0
+        with:
+          allowed-skips: commits
+          jobs: ${{ toJSON(needs) }}

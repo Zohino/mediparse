@@ -17,14 +17,14 @@ repo = "builtin"
 hooks = [
     { id = "no-commit-to-branch", groups = ["local-only"] },
     { id = "forbid-new-submodules" },
-    { id = "check-added-large-files" },
+    { id = "check-added-large-files", args = ["--enforce-all"] },
     { id = "check-case-conflict" },
     { id = "check-illegal-windows-names" },
     { id = "check-symlinks" },
     { id = "destroyed-symlinks" },
     { id = "check-executables-have-shebangs" },
     { id = "check-shebang-scripts-are-executable" },
-    { id = "check-merge-conflict" },
+    { id = "check-merge-conflict", args = ["--assume-in-merge"] },
     { id = "detect-private-key" },
     { id = "fix-byte-order-marker" },
     { id = "mixed-line-ending", args = ["--fix=lf"] },
@@ -40,7 +40,7 @@ hooks = [
 repo = "https://github.com/gitleaks/gitleaks"
 rev = "v8.30.1"
 hooks = [
-    { id = "gitleaks" },
+    { id = "gitleaks", groups = ["ci-job"] },
 ]
 
 [[repos]]
@@ -48,6 +48,7 @@ repo = "local"
 
 [[repos.hooks]]
 id = "uv-lock"
+groups = ["ci-job"]
 name = "uv lock --check"
 language = "system"
 entry = "uv lock --check"
@@ -56,6 +57,7 @@ pass_filenames = false
 
 [[repos.hooks]]
 id = "ruff-check"
+groups = ["ci-job"]
 name = "ruff check"
 language = "system"
 entry = "uv run --frozen ruff check --force-exclude"
@@ -64,6 +66,7 @@ require_serial = true
 
 [[repos.hooks]]
 id = "ruff-format"
+groups = ["ci-job"]
 name = "ruff format"
 language = "system"
 entry = "uv run --frozen ruff format --force-exclude"
@@ -72,6 +75,7 @@ require_serial = true
 
 [[repos.hooks]]
 id = "ty"
+groups = ["ci-job"]
 name = "ty check"
 language = "system"
 entry = "uv run --frozen ty check"
