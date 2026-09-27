@@ -21,6 +21,7 @@ build-backend = "uv_build"
 dev = [
     "commitizen>=4.18.0",
     "import-linter[ui]>=2.15",
+    "prek>=0.5.3",
     "ruff>=0.16.6",
     "ty>=0.0.78",
 ]
