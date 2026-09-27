@@ -1,0 +1,17 @@
+name: Setup uv environment
+description: Nainstaluje zamčenou verzi uv a synchronizuje prostředí přesně podle uv.lock.
+
+runs:
+  using: composite
+  steps:
+    - name: Install uv
+      uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+      with:
+        version: "0.12.19"
+        enable-cache: true
+        cache-dependency-glob: uv.lock
+        cache-python: true
+
+    - name: Sync environment
+      shell: bash
+      run: uv sync --locked
