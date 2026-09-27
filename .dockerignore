@@ -1,0 +1,9 @@
+*
+!src/
+!tests/
+!pyproject.toml
+!uv.lock
+!README.md
+!LICENSE
+!.python-version
+**/__pycache__/

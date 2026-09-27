@@ -1,0 +1,8 @@
+name: mediparse
+
+services:
+  mediparse:
+    image: mediparse
+    build:
+      context: .
+      dockerfile: Containerfile

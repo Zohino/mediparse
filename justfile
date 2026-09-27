@@ -1,5 +1,6 @@
 # spust pres uv
 runner := "uv run"
+container-engine := env("CONTAINER_ENGINE", `command -v podman || command -v docker || echo docker`)
 
 max-src-lines := "4000"
 max-test-lines := "2000"
@@ -89,3 +90,7 @@ typecheck:
 # Statistika lintingu pomocí ruff pro vyloučení omezujících pravidel
 ruff-statistics:
     {{runner}} ruff check --statistics --no-fix
+
+# build kontejnerového image přes podman, nebo docker
+build:
+    {{container-engine}} build -f Containerfile -t mediparse .
