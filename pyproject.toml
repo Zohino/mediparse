@@ -22,6 +22,7 @@ dev = [
     "commitizen>=4.18.0",
     "import-linter[ui]>=2.15",
     "prek>=0.5.3",
+    "pytest>=9.1.1",
     "ruff>=0.16.6",
     "ty>=0.0.78",
 ]
@@ -33,6 +34,13 @@ version_scheme = "pep440"
 version_provider = "uv"
 update_changelog_on_bump = true
 major_version_zero = true
+
+[tool.pytest]
+minversion = "9.0"
+strict = true
+testpaths = ["tests"]
+addopts = ["-ra", "--import-mode=importlib"]
+filterwarnings = ["error"]
 
 [tool.importlinter]
 root_packages = ["mediparse", "tests", "workflow"]
@@ -128,6 +136,12 @@ ignore = [
 
     # Vyjmutá pravidla pro nadbytečnost nebo striktnost, která není v projektu vyžadována
     "missing-copyright-notice", # Copyright je uveden v LICENSE souboru a odkazován v pyproject.toml
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+    "assert",                     # pytest staví na holém assert
+    "implicit-namespace-package", # --import-mode=importlib nepotřebuje __init__.py
 ]
 
 [tool.ruff.lint.pydocstyle]
