@@ -3,7 +3,7 @@
 #:schema https://www.schemastore.org/prek.json
 
 minimum_prek_version = "0.5.3"
-default_install_hook_types = ["pre-commit", "commit-msg"]
+default_install_hook_types = ["pre-commit", "commit-msg", "pre-push"]
 default_stages = ["pre-commit", "pre-push", "manual"]
 
 [[repos]]
@@ -89,6 +89,15 @@ name = "hadolint"
 language = "system"
 entry = "uv run --frozen hadolint"
 types = ["dockerfile"]
+
+[[repos.hooks]]
+id = "synthetic-corpus-gate"
+groups = ["ci-job"]
+name = "brána syntetického korpusu"
+language = "system"
+entry = "uv run --frozen python -m mediparse.infrastructure.corpus_gate_cli"
+files = "^resources/synthetic/"
+pass_filenames = false
 
 [[repos.hooks]]
 id = "lint-imports"
