@@ -91,6 +91,10 @@ typecheck:
 ruff-statistics:
     {{runner}} ruff check --statistics --no-fix
 
+# audit syntetického korpusu proti MIMIC-IV-Note; jen lokálně, mimo CI a Claude Code
+audit-corpus discharge radiology report:
+    {{runner}} python -m mediparse.infrastructure.corpus_audit_cli --reference "{{discharge}}" --reference "{{radiology}}" --report "{{report}}" --commit "$(git rev-parse HEAD)"
+
 # build kontejnerového image přes podman, nebo docker
 build:
     {{container-engine}} build -f Containerfile -t mediparse .
