@@ -107,6 +107,19 @@ ignore_imports = [
 broken_contract_guidance = "Knihovny, soubory, síť a procesy patří do infrastructure; doména a use casy k nim přistupují přes porty. Modul, který je opravdu čistý, přidej do ignore_imports vědomě a s důvodem v těle commitu."
 
 [[tool.importlinter.contracts]]
+name = "Do jádra se vstupuje jen přes entrypoints"
+type = "protected"
+protected_modules = [
+    "mediparse.domain",
+    "mediparse.infrastructure",
+]
+allowed_importers = [
+    "mediparse",
+    "tests",
+]
+broken_contract_guidance = "Zvenku, například ze skriptu Snakemake, se do mediparse vstupuje jen přes mediparse.entrypoints, který složí use case s adaptéry. Chybí-li vstupní bod, přidej ho tam."
+
+[[tool.importlinter.contracts]]
 name = "Mediparse je acyklické"
 type = "acyclic_siblings"
 ancestors = [
