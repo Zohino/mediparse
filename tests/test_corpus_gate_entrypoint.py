@@ -7,8 +7,9 @@ from pathlib import Path
 import pytest
 
 from mediparse.domain.corpus_audit import InvalidAuditRecordError
-from mediparse.infrastructure.corpus_audit_cli import Exit, run_audit
-from mediparse.infrastructure.corpus_gate_cli import main
+from mediparse.entrypoints.corpus_audit import run_audit
+from mediparse.entrypoints.corpus_gate import run
+from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.synthetic_corpus import RECORD_NAME, load_record
 
 REPOSITORY_CORPUS = Path(__file__).parents[1] / "resources" / "synthetic"
@@ -28,18 +29,18 @@ def _audited_corpus(tmp_path: Path) -> Path:
         ])
     assert (
         run_audit(root, [reference], tmp_path / "report.json", "c" * 40, {})
-        == Exit.CLEAN
+        == ExitCode.OK
     )
     return root
 
 
 def _gate(root: Path) -> int:
-    return main(["--corpus", str(root)])
+    return run(["--corpus", str(root)])
 
 
 def test_gate_passes_without_corpus(tmp_path: Path) -> None:
     """Dokud korpus neexistuje, brána commit ani push neblokuje."""
-    assert _gate(tmp_path / "missing") == Exit.CLEAN
+    assert _gate(tmp_path / "missing") == ExitCode.OK
 
 
 def test_gate_rejects_unaudited_corpus(tmp_path: Path) -> None:
@@ -47,12 +48,12 @@ def test_gate_rejects_unaudited_corpus(tmp_path: Path) -> None:
     root = _audited_corpus(tmp_path)
     (root / RECORD_NAME).unlink()
 
-    assert _gate(root) == Exit.FOUND
+    assert _gate(root) == ExitCode.BLOCKED
 
 
 def test_gate_passes_audited_corpus(tmp_path: Path) -> None:
     """Korpus beze změny od auditu projde."""
-    assert _gate(_audited_corpus(tmp_path)) == Exit.CLEAN
+    assert _gate(_audited_corpus(tmp_path)) == ExitCode.OK
 
 
 def test_gate_rejects_corpus_changed_after_audit(tmp_path: Path) -> None:
@@ -60,7 +61,7 @@ def test_gate_rejects_corpus_changed_after_audit(tmp_path: Path) -> None:
     root = _audited_corpus(tmp_path)
     (root / NOTE).write_text("a regenerated synthetic note", encoding="utf-8")
 
-    assert _gate(root) == Exit.FOUND
+    assert _gate(root) == ExitCode.BLOCKED
 
 
 def test_gate_rejects_added_note(tmp_path: Path) -> None:
@@ -68,7 +69,7 @@ def test_gate_rejects_added_note(tmp_path: Path) -> None:
     root = _audited_corpus(tmp_path)
     (root / "en" / "90000002-DS-1.txt").write_text("another note", encoding="utf-8")
 
-    assert _gate(root) == Exit.FOUND
+    assert _gate(root) == ExitCode.BLOCKED
 
 
 def test_gate_rejects_invalid_record(tmp_path: Path) -> None:
@@ -76,7 +77,7 @@ def test_gate_rejects_invalid_record(tmp_path: Path) -> None:
     root = _audited_corpus(tmp_path)
     (root / RECORD_NAME).write_text("{}", encoding="utf-8")
 
-    assert _gate(root) == Exit.FOUND
+    assert _gate(root) == ExitCode.BLOCKED
 
 
 def test_invalid_record_surfaces_as_domain_error(tmp_path: Path) -> None:
@@ -89,4 +90,4 @@ def test_invalid_record_surfaces_as_domain_error(tmp_path: Path) -> None:
 
 def test_repository_corpus_passes_gate() -> None:
     """Korpus v repu odpovídá svému auditu — neauditovaný korpus neprojde CI."""
-    assert _gate(REPOSITORY_CORPUS) == Exit.CLEAN
+    assert _gate(REPOSITORY_CORPUS) == ExitCode.OK
