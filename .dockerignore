@@ -3,6 +3,7 @@
 !tests/
 !config/matrix.json
 !config/synthetic_plan.json
+!resources/synthetic/plans.jsonl
 !pyproject.toml
 !uv.lock
 !README.md
