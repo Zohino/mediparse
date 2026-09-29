@@ -15,12 +15,11 @@ from mediparse.domain.corpus_audit import (
     NGRAM_SIZE,
     NORMALIZATION,
     AuditRecord,
-    InvalidNoteIdError,
     NgramIndex,
     ReferenceFile,
     scan,
-    subject_of,
 )
+from mediparse.domain.note import InvalidNoteIdError, subject_of
 
 if TYPE_CHECKING:
     from collections.abc import Collection, Iterable, Mapping, Sequence

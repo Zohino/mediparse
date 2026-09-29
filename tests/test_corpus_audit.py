@@ -9,13 +9,11 @@ from mediparse.domain.corpus_audit import (
     NGRAM_SIZE,
     NORMALIZATION,
     AuditRecord,
-    InvalidNoteIdError,
     NgramIndex,
     ReferenceNote,
     fingerprint,
     gate_violations,
     scan,
-    subject_of,
     tokenize,
 )
 
@@ -120,18 +118,6 @@ def test_scan_counts_rows_matches_and_subject_collisions() -> None:
     assert result.rows == len(rows)
     assert result.colliding_subjects == {"90000001"}
     assert result.shared
-
-
-def test_subject_is_parsed_from_note_id() -> None:
-    """Subject_id je první část note_id ve skladbě MIMIC-IV-Note."""
-    assert subject_of("90000123-DS-4") == "90000123"
-
-
-@pytest.mark.parametrize("note_id", ["90000123", "abc-DS-1", "90000123-RR-1"])
-def test_malformed_note_id_is_rejected(note_id: str) -> None:
-    """Soubor, jehož jméno není note_id propouštěcí zprávy, do korpusu nepatří."""
-    with pytest.raises(InvalidNoteIdError, match="note_id"):
-        subject_of(note_id)
 
 
 def test_fingerprint_ignores_order_but_not_content_or_names() -> None:
