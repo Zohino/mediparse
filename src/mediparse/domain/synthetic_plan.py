@@ -5,6 +5,7 @@ from __future__ import annotations
 from pydantic import BaseModel, ConfigDict
 
 from mediparse.domain.labels import LabelModel
+from mediparse.domain.note_structure import StructureModel
 from mediparse.domain.synthetic_patients import PatientModel
 
 
@@ -15,3 +16,4 @@ class SamplerConfig(BaseModel):
 
     labels: LabelModel
     patients: PatientModel
+    structure: StructureModel

@@ -8,11 +8,41 @@
       "aki": 0.1577
     },
     "conditional": {
-      "diabetes": {"diabetes": 1.0, "ckd": 0.342, "heart_failure": 0.2984, "atrial_fibrillation": 0.2112, "aki": 0.2427},
-      "ckd": {"diabetes": 0.5258, "ckd": 1.0, "heart_failure": 0.447, "atrial_fibrillation": 0.3082, "aki": 0.3827},
-      "heart_failure": {"diabetes": 0.4738, "ckd": 0.4618, "heart_failure": 1.0, "atrial_fibrillation": 0.4659, "aki": 0.3383},
-      "atrial_fibrillation": {"diabetes": 0.3431, "ckd": 0.3256, "heart_failure": 0.4766, "atrial_fibrillation": 1.0, "aki": 0.2658},
-      "aki": {"diabetes": 0.4175, "ckd": 0.4283, "heart_failure": 0.3665, "atrial_fibrillation": 0.2815, "aki": 1.0}
+      "diabetes": {
+        "diabetes": 1.0,
+        "ckd": 0.342,
+        "heart_failure": 0.2984,
+        "atrial_fibrillation": 0.2112,
+        "aki": 0.2427
+      },
+      "ckd": {
+        "diabetes": 0.5258,
+        "ckd": 1.0,
+        "heart_failure": 0.447,
+        "atrial_fibrillation": 0.3082,
+        "aki": 0.3827
+      },
+      "heart_failure": {
+        "diabetes": 0.4738,
+        "ckd": 0.4618,
+        "heart_failure": 1.0,
+        "atrial_fibrillation": 0.4659,
+        "aki": 0.3383
+      },
+      "atrial_fibrillation": {
+        "diabetes": 0.3431,
+        "ckd": 0.3256,
+        "heart_failure": 0.4766,
+        "atrial_fibrillation": 1.0,
+        "aki": 0.2658
+      },
+      "aki": {
+        "diabetes": 0.4175,
+        "ckd": 0.4283,
+        "heart_failure": 0.3665,
+        "atrial_fibrillation": 0.2815,
+        "aki": 1.0
+      }
     },
     "prevalence_tolerance": 0.02,
     "ipf_tolerance": 1e-10,
@@ -25,5 +55,301 @@
     "max_notes": 8,
     "mean_notes_when_multiple": 4.07,
     "max_attempts": 10000
+  },
+  "structure": {
+    "sections": [
+      {
+        "key": "allergies",
+        "header": "Allergies",
+        "probability": 0.9997
+      },
+      {
+        "key": "chief_complaint",
+        "header": "Chief Complaint",
+        "probability": 0.9655
+      },
+      {
+        "key": "major_procedure",
+        "header": "Major Surgical or Invasive Procedure",
+        "probability": 0.996
+      },
+      {
+        "key": "history_of_present_illness",
+        "header": "History of Present Illness",
+        "probability": 0.9836,
+        "narrative_share": 0.18,
+        "subheadings": [
+          [
+            {
+              "header": "REVIEW OF SYSTEMS",
+              "probability": 0.1215
+            }
+          ]
+        ]
+      },
+      {
+        "key": "past_medical_history",
+        "header": "Past Medical History",
+        "probability": 0.9853
+      },
+      {
+        "key": "past_surgical_history",
+        "header": "Past Surgical History",
+        "probability": 0.1406
+      },
+      {
+        "key": "social_history",
+        "header": "Social History",
+        "probability": 0.9737
+      },
+      {
+        "key": "family_history",
+        "header": "Family History",
+        "probability": 0.969
+      },
+      {
+        "key": "physical_exam",
+        "header": "Physical Exam",
+        "probability": 0.9638,
+        "narrative_share": 0.09,
+        "subheadings": [
+          [
+            {
+              "header": "ADMISSION PHYSICAL EXAM",
+              "probability": 0.1414
+            }
+          ],
+          [
+            {
+              "header": "DISCHARGE PHYSICAL EXAM",
+              "probability": 0.1332
+            }
+          ],
+          [
+            {
+              "header": "Vitals",
+              "probability": 0.2907
+            }
+          ],
+          [
+            {
+              "header": "General",
+              "probability": 0.51
+            },
+            {
+              "header": "Gen",
+              "probability": 0.2986
+            }
+          ],
+          [
+            {
+              "header": "HEENT",
+              "probability": 0.6513
+            }
+          ],
+          [
+            {
+              "header": "Neck",
+              "probability": 0.4462
+            }
+          ],
+          [
+            {
+              "header": "Lungs",
+              "probability": 0.3807
+            },
+            {
+              "header": "PULM",
+              "probability": 0.1625
+            }
+          ],
+          [
+            {
+              "header": "CARDIAC",
+              "probability": 0.209
+            }
+          ],
+          [
+            {
+              "header": "Abdomen",
+              "probability": 0.4209
+            },
+            {
+              "header": "ABD",
+              "probability": 0.3261
+            }
+          ],
+          [
+            {
+              "header": "Ext",
+              "probability": 0.389
+            },
+            {
+              "header": "EXTREMITIES",
+              "probability": 0.2952
+            }
+          ],
+          [
+            {
+              "header": "SKIN",
+              "probability": 0.4104
+            }
+          ],
+          [
+            {
+              "header": "Neuro",
+              "probability": 0.5072
+            }
+          ],
+          [
+            {
+              "header": "PULSES",
+              "probability": 0.1116
+            }
+          ]
+        ]
+      },
+      {
+        "key": "pertinent_results",
+        "header": "Pertinent Results",
+        "probability": 0.9638,
+        "narrative_share": 0.2,
+        "subheadings": [
+          [
+            {
+              "header": "ADMISSION LABS",
+              "probability": 0.2028
+            }
+          ],
+          [
+            {
+              "header": "DISCHARGE LABS",
+              "probability": 0.1819
+            }
+          ],
+          [
+            {
+              "header": "IMAGING",
+              "probability": 0.1655
+            }
+          ],
+          [
+            {
+              "header": "IMPRESSION",
+              "probability": 0.3742
+            }
+          ],
+          [
+            {
+              "header": "FINDINGS",
+              "probability": 0.1264
+            }
+          ]
+        ]
+      },
+      {
+        "key": "hospital_course",
+        "header": "Brief Hospital Course",
+        "probability": 0.8835,
+        "narrative_share": 0.25,
+        "subheadings": [
+          [
+            {
+              "header": "TRANSITIONAL ISSUES",
+              "probability": 0.2002
+            }
+          ]
+        ]
+      },
+      {
+        "key": "medications_on_admission",
+        "header": "Medications on Admission",
+        "probability": 0.9422,
+        "narrative_share": 0.04
+      },
+      {
+        "key": "discharge_medications",
+        "header": "Discharge Medications",
+        "probability": 0.9794,
+        "narrative_share": 0.11
+      },
+      {
+        "key": "discharge_disposition",
+        "header": "Discharge Disposition",
+        "probability": 0.9865,
+        "subheadings": [
+          [
+            {
+              "header": "Facility",
+              "probability": 0.4594
+            }
+          ]
+        ]
+      },
+      {
+        "key": "discharge_diagnosis",
+        "header": "Discharge Diagnosis",
+        "probability": 0.968,
+        "subheadings": [
+          [
+            {
+              "header": "Primary",
+              "probability": 0.1265
+            }
+          ],
+          [
+            {
+              "header": "Secondary",
+              "probability": 0.1071
+            }
+          ]
+        ]
+      },
+      {
+        "key": "discharge_condition",
+        "header": "Discharge Condition",
+        "probability": 0.9987,
+        "subheadings": [
+          [
+            {
+              "header": "Mental Status",
+              "probability": 0.778
+            }
+          ],
+          [
+            {
+              "header": "Level of Consciousness",
+              "probability": 0.7612
+            }
+          ],
+          [
+            {
+              "header": "Activity Status",
+              "probability": 0.7585
+            }
+          ]
+        ]
+      },
+      {
+        "key": "discharge_instructions",
+        "header": "Discharge Instructions",
+        "probability": 0.9922,
+        "narrative_share": 0.13
+      },
+      {
+        "key": "followup_instructions",
+        "header": "Followup Instructions",
+        "probability": 0.9825
+      }
+    ],
+    "narrative": {
+      "median_words": 197,
+      "sigma": 0.387,
+      "min_words": 75,
+      "max_words": 510,
+      "deid_per_word": 0.0347
+    },
+    "female_probability": 0.513,
+    "age_marker_probability": 0.5908
   }
 }
