@@ -5,6 +5,7 @@ from pathlib import Path
 from random import Random
 
 from mediparse.domain.labels import max_entropy_joint
+from mediparse.domain.note_structure import sample_structure
 from mediparse.domain.synthetic_patients import sample_notes
 from mediparse.infrastructure.sampler_config import load_sampler_config
 
@@ -34,3 +35,18 @@ def test_repository_config_samples_a_corpus() -> None:
     notes = sample_notes(config.patients, config.labels, Random(1))
 
     assert len(notes) == config.patients.notes
+
+
+def test_repository_config_samples_structure() -> None:
+    """S parametry z repa dostane každá zpráva strukturu s délkou v mezích a přesným rozdělením."""
+    config = load_sampler_config(REPO_CONFIG)
+    notes = sample_notes(config.patients, config.labels, Random(1))
+
+    structures = sample_structure(notes, config.structure, Random(1))
+
+    assert len(structures) == len(notes)
+    for structure in structures:
+        assert (
+            sum(words for _, words in structure.section_words)
+            == structure.narrative_words
+        )
