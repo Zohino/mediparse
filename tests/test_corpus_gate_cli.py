@@ -4,9 +4,12 @@ import csv
 import gzip
 from pathlib import Path
 
+import pytest
+
+from mediparse.domain.corpus_audit import InvalidAuditRecordError
 from mediparse.infrastructure.corpus_audit_cli import Exit, run_audit
 from mediparse.infrastructure.corpus_gate_cli import main
-from mediparse.infrastructure.synthetic_corpus import RECORD_NAME
+from mediparse.infrastructure.synthetic_corpus import RECORD_NAME, load_record
 
 REPOSITORY_CORPUS = Path(__file__).parents[1] / "resources" / "synthetic"
 NOTE = "en/90000001-DS-1.txt"
@@ -74,6 +77,14 @@ def test_gate_rejects_invalid_record(tmp_path: Path) -> None:
     (root / RECORD_NAME).write_text("{}", encoding="utf-8")
 
     assert _gate(root) == Exit.FOUND
+
+
+def test_invalid_record_surfaces_as_domain_error(tmp_path: Path) -> None:
+    """Adaptér přeloží chybu schématu na doménovou výjimku, pydantic za něj neprosákne."""
+    (tmp_path / RECORD_NAME).write_text("{}", encoding="utf-8")
+
+    with pytest.raises(InvalidAuditRecordError):
+        load_record(tmp_path)
 
 
 def test_repository_corpus_passes_gate() -> None:

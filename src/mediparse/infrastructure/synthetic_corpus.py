@@ -5,7 +5,13 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Final
 
-from mediparse.domain.corpus_audit import AuditRecord, fingerprint
+from pydantic import ValidationError
+
+from mediparse.domain.corpus_audit import (
+    AuditRecord,
+    InvalidAuditRecordError,
+    fingerprint,
+)
 
 CORPUS_ROOT: Final = Path("resources/synthetic")
 RECORD_NAME: Final = "audit.json"
@@ -46,15 +52,21 @@ def corpus_sha256(root: Path) -> str | None:
 
 
 def load_record(root: Path) -> AuditRecord | None:
-    """Záznam posledního auditu; obsah, který neodpovídá schématu, vyhodí ValidationError.
+    """Záznam posledního auditu.
 
     Returns:
         Záznam auditu, nebo None, když chybí.
+
+    Raises:
+        InvalidAuditRecordError: Obsah záznamu neodpovídá schématu.
     """
     path = root / RECORD_NAME
     if not path.exists():
         return None
-    return AuditRecord.model_validate_json(path.read_text(encoding="utf-8"))
+    try:
+        return AuditRecord.model_validate_json(path.read_text(encoding="utf-8"))
+    except ValidationError as error:
+        raise InvalidAuditRecordError from error
 
 
 def save_record(root: Path, record: AuditRecord) -> None:

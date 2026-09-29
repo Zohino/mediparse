@@ -11,9 +11,7 @@ import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from pydantic import ValidationError
-
-from mediparse.domain.corpus_audit import gate_violations
+from mediparse.domain.corpus_audit import InvalidAuditRecordError, gate_violations
 from mediparse.infrastructure.corpus_audit_cli import Exit
 from mediparse.infrastructure.synthetic_corpus import (
     CORPUS_ROOT,
@@ -34,7 +32,7 @@ def main(argv: Sequence[str]) -> Exit:
     corpus = _parser().parse_args(argv).corpus
     try:
         record = load_record(corpus)
-    except ValidationError:
+    except InvalidAuditRecordError:
         violations: tuple[str, ...] = ("Záznam auditu neodpovídá schématu.",)
     else:
         violations = gate_violations(corpus_sha256(corpus), record)
