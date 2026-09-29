@@ -96,6 +96,7 @@ ignore_imports = [
     "mediparse.** -> typing",
     "mediparse.domain.** -> hashlib",
     "mediparse.domain.** -> itertools",
+    "mediparse.domain.** -> math",
     "mediparse.domain.** -> pydantic",
     "mediparse.domain.** -> re",
     "mediparse.domain.** -> unicodedata",

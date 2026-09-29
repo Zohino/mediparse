@@ -1,13 +1,16 @@
-"""Struktura plánu zprávy: pohlaví pacienta, věková značka, sekce a vylučující se podnadpisy."""
+"""Struktura plánu zprávy: pohlaví, věková značka, sekce, vylučující se podnadpisy a délka narativu."""
 
 from __future__ import annotations
 
+from math import log
 from random import Random
+from statistics import median, stdev
 
 import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.note_structure import (
+    NarrativeModel,
     SectionModel,
     Sex,
     StructureModel,
@@ -22,11 +25,27 @@ SLACK = 0.015
 FEMALE = 0.513
 AGE_MARKER = 0.5908
 RARE = 0.14
+HOSPITAL_COURSE = 0.88
+HOSPITAL_COURSE_SHARE = 0.4
+MEDIAN_WORDS = 197
+SIGMA = 0.387
+MIN_WORDS = 75
+MAX_WORDS = 510
+DEID_PER_WORD = 0.0347
+MEDIAN_TOLERANCE = 0.1
+SIGMA_TOLERANCE = 0.1
 PAIR = (
     Subheading(header="Lungs", probability=0.38),
     Subheading(header="PULM", probability=0.16),
 )
 SINGLE = (Subheading(header="Vitals", probability=0.29),)
+NARRATIVE = NarrativeModel(
+    median_words=MEDIAN_WORDS,
+    sigma=SIGMA,
+    min_words=MIN_WORDS,
+    max_words=MAX_WORDS,
+    deid_per_word=DEID_PER_WORD,
+)
 
 
 def _model() -> StructureModel:
@@ -42,9 +61,17 @@ def _model() -> StructureModel:
                 key="physical_exam",
                 header="Physical Exam",
                 probability=1.0,
+                narrative_share=1 - HOSPITAL_COURSE_SHARE,
                 subheadings=(PAIR, SINGLE),
             ),
+            SectionModel(
+                key="hospital_course",
+                header="Brief Hospital Course",
+                probability=HOSPITAL_COURSE,
+                narrative_share=HOSPITAL_COURSE_SHARE,
+            ),
         ),
+        narrative=NARRATIVE,
         female_probability=FEMALE,
         age_marker_probability=AGE_MARKER,
     )
@@ -103,17 +130,47 @@ def test_exclusive_variants_never_appear_together() -> None:
 def test_frequencies_follow_the_model() -> None:
     """Na velkém vzorku sedí četnost sekce, varianty podnadpisu, pohlaví i věkové značky."""
     structures = sample_structure(_notes(LARGE, per_patient=1), _model(), Random(SEED))
+    rare = _share(["past_surgical_history" in s.sections for s in structures])
+    variant = _share(["PULM" in s.subheadings for s in structures])
 
-    assert (
-        abs(_share(["past_surgical_history" in s.sections for s in structures]) - RARE)
-        <= SLACK
-    )
-    assert (
-        abs(_share(["PULM" in s.subheadings for s in structures]) - PAIR[1].probability)
-        <= SLACK
-    )
+    assert abs(rare - RARE) <= SLACK
+    assert abs(variant - PAIR[1].probability) <= SLACK
     assert abs(_share([s.sex is Sex.FEMALE for s in structures]) - FEMALE) <= SLACK
     assert abs(_share([s.age_marker for s in structures]) - AGE_MARKER) <= SLACK
+
+
+def test_narrative_length_stays_within_bounds() -> None:
+    """Délka narativu leží v mezích oříznutí a počet značek odpovídá hustotě."""
+    for structure in sample_structure(_notes(LARGE), _model(), Random(SEED)):
+        assert MIN_WORDS <= structure.narrative_words <= MAX_WORDS
+        expected_deid = round(structure.narrative_words * DEID_PER_WORD)
+        assert structure.narrative_deid == expected_deid
+
+
+def test_allocation_sums_exactly_over_present_sections() -> None:
+    """Délka se rozdělí jen mezi přítomné narativní sekce a sečte se přesně."""
+    for structure in sample_structure(_notes(LARGE), _model(), Random(SEED)):
+        allocated = sum(words for _, words in structure.section_words)
+        assert allocated == structure.narrative_words
+        assert {key for key, _ in structure.section_words} <= set(structure.sections)
+
+
+def test_allocation_follows_shares() -> None:
+    """Při obou narativních sekcích dostane každá podíl zaokrouhlený nejvýš o slovo."""
+    for structure in sample_structure(_notes(2000), _model(), Random(SEED)):
+        words = dict(structure.section_words)
+        if "hospital_course" in words:
+            quota = HOSPITAL_COURSE_SHARE * structure.narrative_words
+            assert abs(words["hospital_course"] - quota) < 1
+
+
+def test_length_distribution_matches_notes_synthesis() -> None:
+    """Medián a rozptyl logaritmu délky leží v tolerancích kontrol z notes-synthesis."""
+    structures = sample_structure(_notes(LARGE), _model(), Random(SEED))
+    lengths = [structure.narrative_words for structure in structures]
+
+    assert abs(median(lengths) / MEDIAN_WORDS - 1) <= MEDIAN_TOLERANCE
+    assert abs(stdev(log(words) for words in lengths) - SIGMA) <= SIGMA_TOLERANCE
 
 
 def test_variants_over_one_are_rejected() -> None:
@@ -129,11 +186,37 @@ def test_variants_over_one_are_rejected() -> None:
 
 def test_duplicate_section_keys_are_rejected() -> None:
     """Dvě sekce se stejným klíčem schéma odmítne."""
-    section = SectionModel(key="x", header="X", probability=1.0)
+    section = SectionModel(key="x", header="X", probability=1.0, narrative_share=0.5)
 
     with pytest.raises(ValidationError, match="opakují"):
         StructureModel(
             sections=(section, section),
+            narrative=NARRATIVE,
             female_probability=0.5,
             age_marker_probability=0.5,
+        )
+
+
+def test_shares_not_summing_to_one_are_rejected() -> None:
+    """Podíly narativních sekcí, které nedávají jedničku, schéma odmítne."""
+    section = SectionModel(key="x", header="X", probability=1.0, narrative_share=0.5)
+
+    with pytest.raises(ValidationError, match="dávat 1"):
+        StructureModel(
+            sections=(section,),
+            narrative=NARRATIVE,
+            female_probability=0.5,
+            age_marker_probability=0.5,
+        )
+
+
+def test_median_outside_bounds_is_rejected() -> None:
+    """Medián mimo meze oříznutí schéma odmítne."""
+    with pytest.raises(ValidationError, match="uvnitř mezí"):
+        NarrativeModel(
+            median_words=MEDIAN_WORDS,
+            sigma=SIGMA,
+            min_words=MEDIAN_WORDS,
+            max_words=MAX_WORDS,
+            deid_per_word=DEID_PER_WORD,
         )
