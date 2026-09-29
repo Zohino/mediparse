@@ -101,12 +101,12 @@ pass_filenames = false
 
 [[repos.hooks]]
 id = "lint-imports"
-name = "just lint-imports"
+groups = ["ci-job"]
+name = "import-linter"
 language = "system"
-entry = "just lint-imports"
+entry = "uv run --frozen lint-imports"
 types_or = ["python", "pyi", "toml"]
 pass_filenames = false
-stages = ["manual"]
 
 [[repos.hooks]]
 id = "commitizen"
