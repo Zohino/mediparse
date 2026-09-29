@@ -1,0 +1,29 @@
+{
+  "labels": {
+    "prevalence": {
+      "diabetes": 0.2713,
+      "ckd": 0.1765,
+      "heart_failure": 0.1708,
+      "atrial_fibrillation": 0.167,
+      "aki": 0.1577
+    },
+    "conditional": {
+      "diabetes": {"diabetes": 1.0, "ckd": 0.342, "heart_failure": 0.2984, "atrial_fibrillation": 0.2112, "aki": 0.2427},
+      "ckd": {"diabetes": 0.5258, "ckd": 1.0, "heart_failure": 0.447, "atrial_fibrillation": 0.3082, "aki": 0.3827},
+      "heart_failure": {"diabetes": 0.4738, "ckd": 0.4618, "heart_failure": 1.0, "atrial_fibrillation": 0.4659, "aki": 0.3383},
+      "atrial_fibrillation": {"diabetes": 0.3431, "ckd": 0.3256, "heart_failure": 0.4766, "atrial_fibrillation": 1.0, "aki": 0.2658},
+      "aki": {"diabetes": 0.4175, "ckd": 0.4283, "heart_failure": 0.3665, "atrial_fibrillation": 0.2815, "aki": 1.0}
+    },
+    "prevalence_tolerance": 0.02,
+    "ipf_tolerance": 1e-10,
+    "ipf_max_passes": 1000
+  },
+  "patients": {
+    "notes": 200,
+    "first_subject_id": 90000001,
+    "single_note_probability": 0.587,
+    "max_notes": 8,
+    "mean_notes_when_multiple": 4.07,
+    "max_attempts": 10000
+  }
+}
