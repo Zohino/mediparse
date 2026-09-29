@@ -119,6 +119,10 @@ class AuditRecord(BaseModel):
     created_at: AwareDatetime
 
 
+class InvalidAuditRecordError(ValueError):
+    """Záznam auditu neodpovídá schématu, a korpus proto neatestuje."""
+
+
 def tokenize(text: str) -> list[str]:
     """Rozdělí text na tokeny po normalizaci NFKC a převodu na malá písmena.
 
