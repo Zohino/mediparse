@@ -1,10 +1,11 @@
-"""Proudové čtení volného textu MIMIC-IV-Note ze staženého souboru ``.csv.gz``."""
+"""Referenční soubor MIMIC-IV-Note stažený jako ``.csv.gz``, čtený proudově."""
 
 from __future__ import annotations
 
 import csv
 import gzip
 import hashlib
+from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from mediparse.domain.corpus_audit import ReferenceNote
@@ -14,22 +15,32 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 
-def reference_notes(path: Path) -> Iterator[ReferenceNote]:
-    """Zprávy tabulky discharge nebo radiology po jedné, bez načtení celého souboru do paměti.
+@dataclass(frozen=True)
+class MimicReference:
+    """Tabulka discharge nebo radiology z MIMIC-IV-Note na lokálním disku."""
 
-    Yields:
-        Pacient a text každé zprávy.
-    """
-    with gzip.open(path, mode="rt", encoding="utf-8", newline="") as stream:
-        for row in csv.DictReader(stream):
-            yield ReferenceNote(subject_id=row["subject_id"], text=row["text"])
+    path: Path
 
+    @property
+    def name(self) -> str:
+        """Jméno souboru, pod kterým se reference uvede v záznamu auditu."""
+        return self.path.name
 
-def file_sha256(path: Path) -> str:
-    """SHA-256 souboru, srovnatelný s ``SHA256SUMS.txt`` na PhysioNetu.
+    def notes(self) -> Iterator[ReferenceNote]:
+        """Zprávy po jedné, bez načtení celého souboru do paměti.
 
-    Returns:
-        Hexadecimální otisk.
-    """
-    with path.open("rb") as stream:
-        return hashlib.file_digest(stream, "sha256").hexdigest()
+        Yields:
+            Pacient a text každé zprávy.
+        """
+        with gzip.open(self.path, mode="rt", encoding="utf-8", newline="") as stream:
+            for row in csv.DictReader(stream):
+                yield ReferenceNote(subject_id=row["subject_id"], text=row["text"])
+
+    def sha256(self) -> str:
+        """SHA-256 souboru, srovnatelný s ``SHA256SUMS.txt`` na PhysioNetu.
+
+        Returns:
+            Hexadecimální otisk.
+        """
+        with self.path.open("rb") as stream:
+            return hashlib.file_digest(stream, "sha256").hexdigest()

@@ -27,14 +27,9 @@ from mediparse.domain.corpus_audit import (
     subject_of,
 )
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.mimic_reference import file_sha256, reference_notes
-from mediparse.infrastructure.overlap_report import write_overlap_report
-from mediparse.infrastructure.synthetic_corpus import (
-    CORPUS_ROOT,
-    corpus_sha256,
-    read_notes,
-    save_record,
-)
+from mediparse.infrastructure.mimic_reference import MimicReference
+from mediparse.infrastructure.overlap_report import OverlapReportFile
+from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirectory
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -87,10 +82,11 @@ def run_audit(
     )
     if problem is not None:
         return _refuse(problem)
-    sha256 = corpus_sha256(corpus)
+    directory = CorpusDirectory(corpus)
+    sha256 = directory.fingerprint()
     if sha256 is None:
         return _refuse("Korpus neobsahuje žádnou zprávu.")
-    notes = read_notes(corpus)
+    notes = directory.notes()
     index = NgramIndex(notes)
     scans = _scan_references(index, notes, references)
     if any(result.rows == 0 for result in scans.values()):
@@ -101,7 +97,7 @@ def run_audit(
     }
     if shared or colliding:
         return _report_overlap(index, shared, colliding, report)
-    save_record(corpus, _record(sha256, len(notes), len(index), scans, commit))
+    directory.save_record(_record(sha256, len(notes), len(index), scans, commit))
     rows = sum(result.rows for result in scans.values())
     _say(
         f"Audit čistý: {len(notes)} zpráv, {len(index)} n-gramů, {rows} referenčních zpráv."
@@ -113,14 +109,16 @@ def _scan_references(
     index: NgramIndex, notes: Mapping[str, str], references: Sequence[Path]
 ) -> dict[Path, ScanResult]:
     subjects = frozenset(subject_of(Path(note).stem) for note in notes)
-    return {path: scan(index, subjects, reference_notes(path)) for path in references}
+    return {
+        path: scan(index, subjects, MimicReference(path).notes()) for path in references
+    }
 
 
 def _report_overlap(
     index: NgramIndex, shared: set[Ngram], colliding: set[str], report: Path
 ) -> ExitCode:
     positions = index.positions(shared)
-    write_overlap_report(report, positions, colliding)
+    OverlapReportFile(report).write(positions, colliding)
     notes = sorted({position.note for position in positions})
     _say(
         f"Sdílené {NGRAM_SIZE}-gramy: {len(shared)}, kolize subject_id: {len(colliding)}."
@@ -134,7 +132,9 @@ def _record(
     sha256: str, files: int, ngrams: int, scans: Mapping[Path, ScanResult], commit: str
 ) -> AuditRecord:
     reference = tuple(
-        ReferenceFile(name=path.name, sha256=file_sha256(path), rows=result.rows)
+        ReferenceFile(
+            name=path.name, sha256=MimicReference(path).sha256(), rows=result.rows
+        )
         for path, result in scans.items()
     )
     return AuditRecord(
