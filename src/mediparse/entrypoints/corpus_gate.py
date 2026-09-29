@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from mediparse.domain.corpus_audit import InvalidAuditRecordError, gate_violations
+from mediparse.application.corpus_gate import CorpusGate
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirectory
 
@@ -29,18 +29,13 @@ def main() -> ExitCode:
 
 
 def run(argv: Sequence[str]) -> ExitCode:
-    """Porovná otisk korpusu se záznamem auditu.
+    """Složí bránu nad korpusem z argumentů a přeloží porušení na návratový kód.
 
     Returns:
         OK, když korpus neexistuje nebo odpovídá auditu, jinak BLOCKED.
     """
-    corpus = CorpusDirectory(_parser().parse_args(argv).corpus)
-    try:
-        record = corpus.audit_record()
-    except InvalidAuditRecordError:
-        violations: tuple[str, ...] = ("Záznam auditu neodpovídá schématu.",)
-    else:
-        violations = gate_violations(corpus.fingerprint(), record)
+    corpus = _parser().parse_args(argv).corpus
+    violations = CorpusGate(CorpusDirectory(corpus)).run()
     for violation in violations:
         sys.stderr.write(f"{violation}\n")
     return ExitCode.BLOCKED if violations else ExitCode.OK

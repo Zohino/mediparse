@@ -68,7 +68,7 @@ containers = [
 ]
 layers = [
     "entrypoints",
-    "(application) | infrastructure",
+    "application | infrastructure",
     "domain",
 ]
 exhaustive = true
@@ -78,6 +78,7 @@ broken_contract_guidance = "Doména nezná nic nad sebou. Application a infrastr
 name = "Technologie jen v infrastructure"
 type = "forbidden"
 source_modules = [
+    "mediparse.application",
     "mediparse.domain",
     "mediparse.entrypoints",
 ]
@@ -110,6 +111,7 @@ broken_contract_guidance = "Knihovny, soubory, síť a procesy patří do infras
 name = "Do jádra se vstupuje jen přes entrypoints"
 type = "protected"
 protected_modules = [
+    "mediparse.application",
     "mediparse.domain",
     "mediparse.infrastructure",
 ]
