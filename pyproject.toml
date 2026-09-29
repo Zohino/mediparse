@@ -15,6 +15,7 @@ dependencies = [
 [project.scripts]
 mediparse-corpus-audit = "mediparse.entrypoints.corpus_audit:main"
 mediparse-corpus-gate = "mediparse.entrypoints.corpus_gate:main"
+mediparse-sample-plans = "mediparse.entrypoints.synthetic_plans:main"
 
 [project.urls]
 Repository = "https://github.com/Zohino/mediparse"
@@ -104,6 +105,7 @@ ignore_imports = [
     "mediparse.entrypoints.** -> datetime",
     "mediparse.entrypoints.** -> os",
     "mediparse.entrypoints.** -> pathlib",
+    "mediparse.entrypoints.** -> random",
     "mediparse.entrypoints.** -> re",
     "mediparse.entrypoints.** -> sys",
 ]
@@ -186,6 +188,10 @@ ignore = [
     "assert",                     # pytest staví na holém assert
     "implicit-namespace-package", # --import-mode=importlib nepotřebuje __init__.py
     "suspicious-non-cryptographic-random-usage", # seedovaná simulace, ne kryptografie
+]
+
+"src/mediparse/entrypoints/synthetic_plans.py" = [
+    "suspicious-non-cryptographic-random-usage", # seedovaná simulace plánů, ne kryptografie
 ]
 
 [tool.ruff.lint.flake8-type-checking]
