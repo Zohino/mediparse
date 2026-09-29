@@ -36,6 +36,14 @@ class CorpusDirectory:
             for path in self._paths()
         }
 
+    def note_ids(self) -> list[str]:
+        """Note_id zpráv podle jmen souborů.
+
+        Returns:
+            Jména souborů bez přípony, seřazená podle cesty.
+        """
+        return [path.stem for path in self._paths()]
+
     def fingerprint(self) -> str | None:
         """Otisk zpráv tak, jak leží na disku.
 

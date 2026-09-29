@@ -14,19 +14,17 @@ import re
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
-from types import MappingProxyType
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Final, assert_never
 
-from mediparse.domain.corpus_audit import (
-    NGRAM_SIZE,
-    NORMALIZATION,
-    AuditRecord,
-    NgramIndex,
-    ReferenceFile,
-    scan,
-    subject_of,
+from mediparse.application.corpus_audit import (
+    AuditClean,
+    AuditOverlap,
+    AuditRefused,
+    CorpusAudit,
 )
+from mediparse.domain.corpus_audit import NGRAM_SIZE
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.audit_workspace import LocalWorkspace
 from mediparse.infrastructure.mimic_reference import MimicReference
 from mediparse.infrastructure.overlap_report import OverlapReportFile
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirectory
@@ -34,12 +32,8 @@ from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirecto
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
-    from mediparse.domain.corpus_audit import Ngram, ScanResult
+    from mediparse.application.corpus_audit import AuditOutcome
 
-_BLOCKING_VARIABLES: Final = MappingProxyType({
-    "CI": "Audit čte MIMIC, a proto ve veřejném CI neběží.",
-    "CLAUDECODE": "Audit neběží v relaci Claude Code: jeho výstup by odešel hostovanému modelu.",
-})
 _COMMIT: Final = re.compile(r"[0-9a-f]{40}")
 
 
@@ -53,135 +47,44 @@ def main() -> ExitCode:
 
 
 def run(argv: Sequence[str], environ: Mapping[str, str]) -> ExitCode:
-    """Spustí audit s argumenty z příkazové řádky.
+    """Složí audit z adaptérů podle argumentů a přeloží jeho výsledek na návratový kód.
 
     Returns:
-        Výsledek auditu.
+        OK bez shod, BLOCKED při shodě, REFUSED při odmítnutí.
     """
     args = _parser().parse_args(argv)
-    return run_audit(args.corpus, args.reference, args.report, args.commit, environ)
-
-
-def run_audit(
-    corpus: Path,
-    references: Sequence[Path],
-    report: Path,
-    commit: str,
-    environ: Mapping[str, str],
-) -> ExitCode:
-    """Porovná korpus s referencí; čistý audit zapíše záznam, shoda jen report mimo repozitář.
-
-    Odmítne běžet ve veřejném CI, v relaci Claude Code a s reportem uvnitř
-    repozitáře, protože čte MIMIC a jeho výstup nesmí opustit kontrolované prostředí.
-
-    Returns:
-        OK bez shod a kolizí subject_id, BLOCKED při shodě, REFUSED při odmítnutí.
-    """
-    problem = _environment_problem(environ) or _input_problem(
-        corpus, references, report
+    references = tuple(args.reference)
+    audit = CorpusAudit(
+        workspace=LocalWorkspace(args.corpus, references, args.report),
+        corpus=CorpusDirectory(args.corpus),
+        references=tuple(MimicReference(path) for path in references),
+        report=OverlapReportFile(args.report),
     )
-    if problem is not None:
-        return _refuse(problem)
-    directory = CorpusDirectory(corpus)
-    sha256 = directory.fingerprint()
-    if sha256 is None:
-        return _refuse("Korpus neobsahuje žádnou zprávu.")
-    notes = directory.notes()
-    index = NgramIndex(notes)
-    scans = _scan_references(index, notes, references)
-    if any(result.rows == 0 for result in scans.values()):
-        return _refuse("Referenční soubor neobsahuje žádnou zprávu.")
-    shared = {gram for result in scans.values() for gram in result.shared}
-    colliding = {
-        subject for result in scans.values() for subject in result.colliding_subjects
-    }
-    if shared or colliding:
-        return _report_overlap(index, shared, colliding, report)
-    directory.save_record(_record(sha256, len(notes), len(index), scans, commit))
-    rows = sum(result.rows for result in scans.values())
-    _say(
-        f"Audit čistý: {len(notes)} zpráv, {len(index)} n-gramů, {rows} referenčních zpráv."
-    )
-    return ExitCode.OK
+    outcome = audit.run(environ, args.commit, datetime.now(tz=UTC))
+    return _present(outcome, args.report)
 
 
-def _scan_references(
-    index: NgramIndex, notes: Mapping[str, str], references: Sequence[Path]
-) -> dict[Path, ScanResult]:
-    subjects = frozenset(subject_of(Path(note).stem) for note in notes)
-    return {
-        path: scan(index, subjects, MimicReference(path).notes()) for path in references
-    }
-
-
-def _report_overlap(
-    index: NgramIndex, shared: set[Ngram], colliding: set[str], report: Path
-) -> ExitCode:
-    positions = index.positions(shared)
-    OverlapReportFile(report).write(positions, colliding)
-    notes = sorted({position.note for position in positions})
-    _say(
-        f"Sdílené {NGRAM_SIZE}-gramy: {len(shared)}, kolize subject_id: {len(colliding)}."
-    )
-    _say(f"Zprávy k přegenerování: {', '.join(notes) or 'žádné'}")
-    _say(f"Pozice shod: {report}")
-    return ExitCode.BLOCKED
-
-
-def _record(
-    sha256: str, files: int, ngrams: int, scans: Mapping[Path, ScanResult], commit: str
-) -> AuditRecord:
-    reference = tuple(
-        ReferenceFile(
-            name=path.name, sha256=MimicReference(path).sha256(), rows=result.rows
-        )
-        for path, result in scans.items()
-    )
-    return AuditRecord(
-        corpus_sha256=sha256,
-        corpus_files=files,
-        ngram_size=NGRAM_SIZE,
-        normalization=NORMALIZATION,
-        synthetic_ngrams=ngrams,
-        reference=reference,
-        shared_ngrams=0,
-        colliding_subjects=0,
-        tool_commit=commit,
-        created_at=datetime.now(tz=UTC),
-    )
-
-
-def _environment_problem(environ: Mapping[str, str]) -> str | None:
-    return next(
-        (reason for name, reason in _BLOCKING_VARIABLES.items() if environ.get(name)),
-        None,
-    )
-
-
-def _input_problem(
-    corpus: Path, references: Sequence[Path], report: Path
-) -> str | None:
-    missing = [str(path) for path in references if not path.is_file()]
-    if missing:
-        return f"Referenční soubory neexistují: {', '.join(missing)}"
-    repository = _repository_root(corpus)
-    if repository is None:
-        return "Korpus neleží v git repozitáři."
-    if report.resolve().is_relative_to(repository):
-        return "Report s pozicemi shod musí ležet mimo repozitář."
-    return None
-
-
-def _repository_root(path: Path) -> Path | None:
-    resolved = path.resolve()
-    return next(
-        (
-            folder
-            for folder in (resolved, *resolved.parents)
-            if (folder / ".git").exists()
-        ),
-        None,
-    )
+def _present(outcome: AuditOutcome, report: Path) -> ExitCode:
+    match outcome:
+        case AuditClean(notes=notes, ngrams=ngrams, reference_notes=rows):
+            _say(
+                f"Audit čistý: {notes} zpráv, {ngrams} n-gramů, {rows} referenčních zpráv."
+            )
+            return ExitCode.OK
+        case AuditOverlap(
+            shared_ngrams=shared, colliding_subjects=colliding, notes=notes
+        ):
+            _say(
+                f"Sdílené {NGRAM_SIZE}-gramy: {shared}, kolize subject_id: {colliding}."
+            )
+            _say(f"Zprávy k přegenerování: {', '.join(notes) or 'žádné'}")
+            _say(f"Pozice shod: {report}")
+            return ExitCode.BLOCKED
+        case AuditRefused(reason=reason):
+            sys.stderr.write(f"{reason}\n")
+            return ExitCode.REFUSED
+        case _:
+            assert_never(outcome)
 
 
 def _commit(value: str) -> str:
@@ -223,8 +126,3 @@ def _parser() -> argparse.ArgumentParser:
 
 def _say(message: str) -> None:
     sys.stdout.write(f"{message}\n")
-
-
-def _refuse(reason: str) -> ExitCode:
-    sys.stderr.write(f"{reason}\n")
-    return ExitCode.REFUSED
