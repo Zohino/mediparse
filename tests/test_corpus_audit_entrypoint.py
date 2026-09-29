@@ -12,11 +12,10 @@ import pytest
 from mediparse.domain.corpus_audit import ReferenceNote
 from mediparse.entrypoints.corpus_audit import run, run_audit
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.mimic_reference import reference_notes
+from mediparse.infrastructure.mimic_reference import MimicReference
 from mediparse.infrastructure.synthetic_corpus import (
     RECORD_NAME,
-    corpus_sha256,
-    load_record,
+    CorpusDirectory,
 )
 
 if TYPE_CHECKING:
@@ -94,7 +93,7 @@ def test_reference_reader_keeps_multiline_quoted_text(tmp_path: Path) -> None:
     """Víceřádkový text v uvozovkách se přečte jako jedna zpráva beze změny."""
     text = 'first line\nsecond "quoted" line, with comma'
 
-    notes = list(reference_notes(_reference(tmp_path, [("10000032", text)])))
+    notes = list(MimicReference(_reference(tmp_path, [("10000032", text)])).notes())
 
     assert notes == [ReferenceNote(subject_id="10000032", text=text)]
 
@@ -105,11 +104,11 @@ def test_clean_corpus_gets_audit_record(tmp_path: Path) -> None:
         tmp_path, {NOTE: "a short synthetic note"}, [("10000032", SENTENCE)]
     )
 
-    record = load_record(corpus)
+    record = CorpusDirectory(corpus).audit_record()
 
     assert code == ExitCode.OK
     assert record is not None
-    assert record.corpus_sha256 == corpus_sha256(corpus)
+    assert record.corpus_sha256 == CorpusDirectory(corpus).fingerprint()
     assert record.reference[0].rows == 1
 
 

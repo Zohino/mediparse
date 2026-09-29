@@ -13,11 +13,7 @@ from typing import TYPE_CHECKING
 
 from mediparse.domain.corpus_audit import InvalidAuditRecordError, gate_violations
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.synthetic_corpus import (
-    CORPUS_ROOT,
-    corpus_sha256,
-    load_record,
-)
+from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirectory
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -38,13 +34,13 @@ def run(argv: Sequence[str]) -> ExitCode:
     Returns:
         OK, když korpus neexistuje nebo odpovídá auditu, jinak BLOCKED.
     """
-    corpus = _parser().parse_args(argv).corpus
+    corpus = CorpusDirectory(_parser().parse_args(argv).corpus)
     try:
-        record = load_record(corpus)
+        record = corpus.audit_record()
     except InvalidAuditRecordError:
         violations: tuple[str, ...] = ("Záznam auditu neodpovídá schématu.",)
     else:
-        violations = gate_violations(corpus_sha256(corpus), record)
+        violations = gate_violations(corpus.fingerprint(), record)
     for violation in violations:
         sys.stderr.write(f"{violation}\n")
     return ExitCode.BLOCKED if violations else ExitCode.OK
