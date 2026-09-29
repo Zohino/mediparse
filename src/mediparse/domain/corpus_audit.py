@@ -123,6 +123,10 @@ class InvalidAuditRecordError(ValueError):
     """Záznam auditu neodpovídá schématu, a korpus proto neatestuje."""
 
 
+class InvalidNoteIdError(ValueError):
+    """Jméno zprávy není note_id propouštěcí zprávy ve skladbě MIMIC-IV-Note."""
+
+
 def tokenize(text: str) -> list[str]:
     """Rozdělí text na tokeny po normalizaci NFKC a převodu na malá písmena.
 
@@ -160,12 +164,12 @@ def subject_of(note_id: str) -> str:
         Identifikátor pacienta.
 
     Raises:
-        ValueError: Jméno neodpovídá skladbě ``subject_id-DS-pořadí``.
+        InvalidNoteIdError: Jméno neodpovídá skladbě ``subject_id-DS-pořadí``.
     """
     match = _NOTE_ID.fullmatch(note_id)
     if match is None:
         msg = f"Neplatné note_id propouštěcí zprávy: {note_id!r}"
-        raise ValueError(msg)
+        raise InvalidNoteIdError(msg)
     return match["subject"]
 
 
