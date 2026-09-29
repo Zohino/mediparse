@@ -1,9 +1,9 @@
-"""Lokální audit syntetického korpusu proti volnému textu MIMIC-IV-Note.
+"""Vstupní bod lokálního auditu syntetického korpusu proti volnému textu MIMIC-IV-Note.
 
-Spouští se jen v kontrolovaném prostředí autora, mimo veřejné CI i mimo relaci
-hostovaného modelu, receptem ``just audit-corpus``. Na výstup jde jen počet shod
-a note_id dotčených syntetických zpráv. Pozice shod jdou do reportu mimo
-repozitář a shodný text se nevypisuje nikdy.
+Konzolový skript ``mediparse-corpus-audit`` spouští jen autor v kontrolovaném
+prostředí, mimo veřejné CI i mimo relaci hostovaného modelu. Na výstup jde jen
+počet shod a note_id dotčených syntetických zpráv. Pozice shod jdou do reportu
+mimo repozitář a shodný text se nevypisuje nikdy.
 """
 
 from __future__ import annotations
@@ -13,7 +13,6 @@ import os
 import re
 import sys
 from datetime import UTC, datetime
-from enum import IntEnum
 from pathlib import Path
 from types import MappingProxyType
 from typing import TYPE_CHECKING, Final
@@ -27,6 +26,7 @@ from mediparse.domain.corpus_audit import (
     scan,
     subject_of,
 )
+from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.mimic_reference import file_sha256, reference_notes
 from mediparse.infrastructure.overlap_report import write_overlap_report
 from mediparse.infrastructure.synthetic_corpus import (
@@ -48,15 +48,16 @@ _BLOCKING_VARIABLES: Final = MappingProxyType({
 _COMMIT: Final = re.compile(r"[0-9a-f]{40}")
 
 
-class Exit(IntEnum):
-    """Návratový kód auditu i brány."""
+def main() -> ExitCode:
+    """Konzolový skript ``mediparse-corpus-audit``.
 
-    CLEAN = 0
-    FOUND = 1
-    REFUSED = 2
+    Returns:
+        Návratový kód auditu.
+    """
+    return run(sys.argv[1:], os.environ)
 
 
-def main(argv: Sequence[str], environ: Mapping[str, str]) -> Exit:
+def run(argv: Sequence[str], environ: Mapping[str, str]) -> ExitCode:
     """Spustí audit s argumenty z příkazové řádky.
 
     Returns:
@@ -72,14 +73,14 @@ def run_audit(
     report: Path,
     commit: str,
     environ: Mapping[str, str],
-) -> Exit:
-    """Porovná korpus s referencí; čistý audit zapíše záznam, nález jen report mimo repozitář.
+) -> ExitCode:
+    """Porovná korpus s referencí; čistý audit zapíše záznam, shoda jen report mimo repozitář.
 
     Odmítne běžet ve veřejném CI, v relaci Claude Code a s reportem uvnitř
     repozitáře, protože čte MIMIC a jeho výstup nesmí opustit kontrolované prostředí.
 
     Returns:
-        CLEAN bez shod a kolizí subject_id, FOUND při nálezu, REFUSED při odmítnutí.
+        OK bez shod a kolizí subject_id, BLOCKED při shodě, REFUSED při odmítnutí.
     """
     problem = _environment_problem(environ) or _input_problem(
         corpus, references, report
@@ -105,7 +106,7 @@ def run_audit(
     _say(
         f"Audit čistý: {len(notes)} zpráv, {len(index)} n-gramů, {rows} referenčních zpráv."
     )
-    return Exit.CLEAN
+    return ExitCode.OK
 
 
 def _scan_references(
@@ -117,7 +118,7 @@ def _scan_references(
 
 def _report_overlap(
     index: NgramIndex, shared: set[Ngram], colliding: set[str], report: Path
-) -> Exit:
+) -> ExitCode:
     positions = index.positions(shared)
     write_overlap_report(report, positions, colliding)
     notes = sorted({position.note for position in positions})
@@ -126,7 +127,7 @@ def _report_overlap(
     )
     _say(f"Zprávy k přegenerování: {', '.join(notes) or 'žádné'}")
     _say(f"Pozice shod: {report}")
-    return Exit.FOUND
+    return ExitCode.BLOCKED
 
 
 def _record(
@@ -192,7 +193,8 @@ def _commit(value: str) -> str:
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Audit syntetického korpusu proti volnému textu MIMIC-IV-Note."
+        prog="mediparse-corpus-audit",
+        description="Audit syntetického korpusu proti volnému textu MIMIC-IV-Note.",
     )
     parser.add_argument(
         "--corpus", type=Path, default=CORPUS_ROOT, help="kořen syntetického korpusu"
@@ -223,10 +225,6 @@ def _say(message: str) -> None:
     sys.stdout.write(f"{message}\n")
 
 
-def _refuse(reason: str) -> Exit:
+def _refuse(reason: str) -> ExitCode:
     sys.stderr.write(f"{reason}\n")
-    return Exit.REFUSED
-
-
-if __name__ == "__main__":
-    raise SystemExit(main(sys.argv[1:], os.environ))
+    return ExitCode.REFUSED

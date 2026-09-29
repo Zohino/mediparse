@@ -1,7 +1,7 @@
-"""Brána syntetického korpusu: do repozitáře smí jen korpus, jehož otisk sedí se záznamem auditu.
+"""Vstupní bod brány syntetického korpusu: do repozitáře smí jen korpus, jehož otisk sedí se záznamem auditu.
 
-Běží jako hook prek při commitu i pushi a jako test v CI. S daty MIMIC nepracuje,
-proto smí běžet i ve veřejném CI.
+Konzolový skript ``mediparse-corpus-gate`` běží jako hook prek při commitu i pushi
+a jako test v CI. S daty MIMIC nepracuje, proto smí běžet i ve veřejném CI.
 """
 
 from __future__ import annotations
@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.domain.corpus_audit import InvalidAuditRecordError, gate_violations
-from mediparse.infrastructure.corpus_audit_cli import Exit
+from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.synthetic_corpus import (
     CORPUS_ROOT,
     corpus_sha256,
@@ -23,11 +23,20 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
 
-def main(argv: Sequence[str]) -> Exit:
+def main() -> ExitCode:
+    """Konzolový skript ``mediparse-corpus-gate``.
+
+    Returns:
+        Návratový kód brány.
+    """
+    return run(sys.argv[1:])
+
+
+def run(argv: Sequence[str]) -> ExitCode:
     """Porovná otisk korpusu se záznamem auditu.
 
     Returns:
-        CLEAN, když korpus neexistuje nebo odpovídá auditu, jinak FOUND.
+        OK, když korpus neexistuje nebo odpovídá auditu, jinak BLOCKED.
     """
     corpus = _parser().parse_args(argv).corpus
     try:
@@ -38,18 +47,15 @@ def main(argv: Sequence[str]) -> Exit:
         violations = gate_violations(corpus_sha256(corpus), record)
     for violation in violations:
         sys.stderr.write(f"{violation}\n")
-    return Exit.FOUND if violations else Exit.CLEAN
+    return ExitCode.BLOCKED if violations else ExitCode.OK
 
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Brána: korpus v repozitáři odpovídá svému auditu."
+        prog="mediparse-corpus-gate",
+        description="Brána: korpus v repozitáři odpovídá svému auditu.",
     )
     parser.add_argument(
         "--corpus", type=Path, default=CORPUS_ROOT, help="kořen syntetického korpusu"
     )
     return parser
-
-
-if __name__ == "__main__":
-    raise SystemExit(main(sys.argv[1:]))

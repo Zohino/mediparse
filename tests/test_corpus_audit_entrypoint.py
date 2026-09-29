@@ -1,4 +1,4 @@
-"""Lokální audit korpusu: čtení MIMIC-IV-Note, výstupní kontrakt a odmítnutí mimo kontrolované prostředí."""
+"""Vstupní bod auditu korpusu: čtení MIMIC-IV-Note, výstupní kontrakt a odmítnutí mimo kontrolované prostředí."""
 
 from __future__ import annotations
 
@@ -10,7 +10,8 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.domain.corpus_audit import ReferenceNote
-from mediparse.infrastructure.corpus_audit_cli import Exit, main, run_audit
+from mediparse.entrypoints.corpus_audit import run, run_audit
+from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.mimic_reference import reference_notes
 from mediparse.infrastructure.synthetic_corpus import (
     RECORD_NAME,
@@ -80,7 +81,7 @@ def _audit(
     notes: dict[str, str],
     rows: list[tuple[str, str]],
     environ: dict[str, str] | None = None,
-) -> tuple[Exit, Path]:
+) -> tuple[ExitCode, Path]:
     corpus = _corpus(tmp_path, notes)
     reference = _reference(tmp_path, rows)
     code = run_audit(
@@ -106,7 +107,7 @@ def test_clean_corpus_gets_audit_record(tmp_path: Path) -> None:
 
     record = load_record(corpus)
 
-    assert code == Exit.CLEAN
+    assert code == ExitCode.OK
     assert record is not None
     assert record.corpus_sha256 == corpus_sha256(corpus)
     assert record.reference[0].rows == 1
@@ -121,7 +122,7 @@ def test_overlap_blocks_record_and_never_prints_text(
     output = capsys.readouterr()
     report = (tmp_path / "report.json").read_text(encoding="utf-8")
 
-    assert code == Exit.FOUND
+    assert code == ExitCode.BLOCKED
     assert not (corpus / RECORD_NAME).exists()
     assert NOTE in output.out
     assert "lighthouse" not in output.out + output.err + report
@@ -134,7 +135,7 @@ def test_subject_collision_blocks_record(tmp_path: Path) -> None:
         tmp_path, {NOTE: "a short synthetic note"}, [("90000001", "unrelated text")]
     )
 
-    assert code == Exit.FOUND
+    assert code == ExitCode.BLOCKED
     assert not (corpus / RECORD_NAME).exists()
 
 
@@ -142,7 +143,7 @@ def test_empty_corpus_is_refused(tmp_path: Path) -> None:
     """Prázdný korpus nemá co auditovat a záznam nevznikne."""
     code, corpus = _audit(tmp_path, {}, [("10000032", SENTENCE)])
 
-    assert code == Exit.REFUSED
+    assert code == ExitCode.REFUSED
     assert not (corpus / RECORD_NAME).exists()
 
 
@@ -155,7 +156,7 @@ def test_audit_refuses_ci_and_ai_session(
     """Audit čte MIMIC, proto odmítne veřejné CI i relaci hostovaného modelu."""
     code, corpus = _audit(tmp_path, {NOTE: SENTENCE}, [("10000032", SENTENCE)], environ)
 
-    assert code == Exit.REFUSED
+    assert code == ExitCode.REFUSED
     assert not (corpus / RECORD_NAME).exists()
     assert not (tmp_path / "report.json").exists()
 
@@ -168,14 +169,14 @@ def test_missing_reference_is_refused(tmp_path: Path) -> None:
         corpus, [tmp_path / "missing.csv.gz"], tmp_path / "r.json", COMMIT, {}
     )
 
-    assert code == Exit.REFUSED
+    assert code == ExitCode.REFUSED
 
 
 def test_empty_reference_is_refused(tmp_path: Path) -> None:
     """Reference bez jediné zprávy by atestovala nic, záznam nevznikne."""
     code, corpus = _audit(tmp_path, {NOTE: "a short synthetic note"}, [])
 
-    assert code == Exit.REFUSED
+    assert code == ExitCode.REFUSED
     assert not (corpus / RECORD_NAME).exists()
 
 
@@ -188,7 +189,7 @@ def test_corpus_outside_repository_is_refused(tmp_path: Path) -> None:
 
     code = run_audit(root, [reference], tmp_path / "r.json", COMMIT, {})
 
-    assert code == Exit.REFUSED
+    assert code == ExitCode.REFUSED
 
 
 def test_report_inside_repository_is_refused(tmp_path: Path) -> None:
@@ -196,7 +197,7 @@ def test_report_inside_repository_is_refused(tmp_path: Path) -> None:
     corpus = _corpus(tmp_path, {NOTE: "a short synthetic note"})
     report = corpus / "r.json"
 
-    assert main(_argv(corpus, _reference(tmp_path, []), report), {}) == Exit.REFUSED
+    assert run(_argv(corpus, _reference(tmp_path, []), report), {}) == ExitCode.REFUSED
 
 
 def test_malformed_commit_is_rejected(tmp_path: Path) -> None:
@@ -208,6 +209,6 @@ def test_malformed_commit_is_rejected(tmp_path: Path) -> None:
     ]
 
     with pytest.raises(SystemExit) as raised:
-        main(argv, {})
+        run(argv, {})
 
-    assert raised.value.code == Exit.REFUSED
+    assert raised.value.code == ExitCode.REFUSED

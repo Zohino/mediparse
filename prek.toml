@@ -95,7 +95,7 @@ id = "synthetic-corpus-gate"
 groups = ["ci-job"]
 name = "brána syntetického korpusu"
 language = "system"
-entry = "uv run --frozen python -m mediparse.infrastructure.corpus_gate_cli"
+entry = "uv run --frozen mediparse-corpus-gate"
 files = "^resources/synthetic/"
 pass_filenames = false
 

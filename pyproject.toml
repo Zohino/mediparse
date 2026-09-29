@@ -12,6 +12,10 @@ dependencies = [
     "pydantic>=2.13.5",
 ]
 
+[project.scripts]
+mediparse-corpus-audit = "mediparse.entrypoints.corpus_audit:main"
+mediparse-corpus-gate = "mediparse.entrypoints.corpus_gate:main"
+
 [project.urls]
 Repository = "https://github.com/Zohino/mediparse"
 
@@ -63,7 +67,7 @@ containers = [
     "mediparse",
 ]
 layers = [
-    "(entrypoints)",
+    "entrypoints",
     "(application) | infrastructure",
     "domain",
 ]
@@ -75,6 +79,7 @@ name = "Technologie jen v infrastructure"
 type = "forbidden"
 source_modules = [
     "mediparse.domain",
+    "mediparse.entrypoints",
 ]
 forbidden_modules = [
     "*",
@@ -92,6 +97,12 @@ ignore_imports = [
     "mediparse.domain.** -> pydantic",
     "mediparse.domain.** -> re",
     "mediparse.domain.** -> unicodedata",
+    "mediparse.entrypoints.** -> argparse",
+    "mediparse.entrypoints.** -> datetime",
+    "mediparse.entrypoints.** -> os",
+    "mediparse.entrypoints.** -> pathlib",
+    "mediparse.entrypoints.** -> re",
+    "mediparse.entrypoints.** -> sys",
 ]
 broken_contract_guidance = "Knihovny, soubory, síť a procesy patří do infrastructure; doména a use casy k nim přistupují přes porty. Modul, který je opravdu čistý, přidej do ignore_imports vědomě a s důvodem v těle commitu."
 
