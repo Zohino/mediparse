@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from mediparse.domain.corpus_audit import InvalidAuditRecordError
-from mediparse.entrypoints.corpus_audit import run_audit
+from mediparse.entrypoints import corpus_audit
 from mediparse.entrypoints.corpus_gate import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.synthetic_corpus import RECORD_NAME, CorpusDirectory
@@ -27,10 +27,17 @@ def _audited_corpus(tmp_path: Path) -> Path:
             ["note_id", "subject_id", "text"],
             ["1-DS-1", "1", "reference text"],
         ])
-    assert (
-        run_audit(root, [reference], tmp_path / "report.json", "c" * 40, {})
-        == ExitCode.OK
-    )
+    argv = [
+        "--corpus",
+        str(root),
+        "--reference",
+        str(reference),
+        "--report",
+        str(tmp_path / "report.json"),
+        "--commit",
+        "c" * 40,
+    ]
+    assert corpus_audit.run(argv, {}) == ExitCode.OK
     return root
 
 

@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.domain.corpus_audit import ReferenceNote
-from mediparse.entrypoints.corpus_audit import run, run_audit
+from mediparse.entrypoints.corpus_audit import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.mimic_reference import MimicReference
 from mediparse.infrastructure.synthetic_corpus import (
@@ -83,9 +83,7 @@ def _audit(
 ) -> tuple[ExitCode, Path]:
     corpus = _corpus(tmp_path, notes)
     reference = _reference(tmp_path, rows)
-    code = run_audit(
-        corpus, [reference], tmp_path / "report.json", COMMIT, environ or {}
-    )
+    code = run(_argv(corpus, reference, tmp_path / "report.json"), environ or {})
     return code, corpus
 
 
@@ -160,13 +158,22 @@ def test_audit_refuses_ci_and_ai_session(
     assert not (tmp_path / "report.json").exists()
 
 
+def test_invalid_note_id_is_refused(tmp_path: Path) -> None:
+    """Soubor, jehož jméno není note_id, audit odmítne kódem 2, ne tracebackem."""
+    code, corpus = _audit(
+        tmp_path, {"en/not-a-note.txt": SENTENCE}, [("10000032", SENTENCE)]
+    )
+
+    assert code == ExitCode.REFUSED
+    assert not (corpus / RECORD_NAME).exists()
+    assert not (tmp_path / "report.json").exists()
+
+
 def test_missing_reference_is_refused(tmp_path: Path) -> None:
     """Chybějící referenční soubor audit odmítne, místo aby spadl při čtení."""
     corpus = _corpus(tmp_path, {NOTE: "a short synthetic note"})
 
-    code = run_audit(
-        corpus, [tmp_path / "missing.csv.gz"], tmp_path / "r.json", COMMIT, {}
-    )
+    code = run(_argv(corpus, tmp_path / "missing.csv.gz", tmp_path / "r.json"), {})
 
     assert code == ExitCode.REFUSED
 
@@ -186,7 +193,7 @@ def test_corpus_outside_repository_is_refused(tmp_path: Path) -> None:
     (root / NOTE).write_text("a short synthetic note", encoding="utf-8")
     reference = _reference(tmp_path, [("10000032", SENTENCE)])
 
-    code = run_audit(root, [reference], tmp_path / "r.json", COMMIT, {})
+    code = run(_argv(root, reference, tmp_path / "r.json"), {})
 
     assert code == ExitCode.REFUSED
 
