@@ -8,6 +8,15 @@ from typing import Final
 _NOTE_ID: Final = re.compile(r"(?P<subject>\d+)-DS-\d+")
 
 
+def note_id(subject_id: int, order: int) -> str:
+    """Note_id propouštěcí zprávy pacienta ve skladbě MIMIC-IV-Note.
+
+    Returns:
+        Identifikátor ``subject_id-DS-pořadí``.
+    """
+    return f"{subject_id}-DS-{order}"
+
+
 class InvalidNoteIdError(ValueError):
     """Jméno zprávy není note_id propouštěcí zprávy ve skladbě MIMIC-IV-Note."""
 

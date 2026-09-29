@@ -184,6 +184,7 @@ ignore = [
 "tests/**" = [
     "assert",                     # pytest staví na holém assert
     "implicit-namespace-package", # --import-mode=importlib nepotřebuje __init__.py
+    "suspicious-non-cryptographic-random-usage", # seedovaná simulace, ne kryptografie
 ]
 
 [tool.ruff.lint.flake8-type-checking]
