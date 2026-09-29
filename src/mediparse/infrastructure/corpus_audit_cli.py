@@ -9,7 +9,6 @@ repozitář a shodný text se nevypisuje nikdy.
 from __future__ import annotations
 
 import argparse
-import json
 import os
 import re
 import sys
@@ -29,6 +28,7 @@ from mediparse.domain.corpus_audit import (
     subject_of,
 )
 from mediparse.infrastructure.mimic_reference import file_sha256, reference_notes
+from mediparse.infrastructure.overlap_report import write_overlap_report
 from mediparse.infrastructure.synthetic_corpus import (
     CORPUS_ROOT,
     corpus_sha256,
@@ -99,7 +99,7 @@ def run_audit(
         subject for result in scans.values() for subject in result.colliding_subjects
     }
     if shared or colliding:
-        return _report_findings(index, shared, colliding, report)
+        return _report_overlap(index, shared, colliding, report)
     save_record(corpus, _record(sha256, len(notes), len(index), scans, commit))
     rows = sum(result.rows for result in scans.values())
     _say(
@@ -115,18 +115,11 @@ def _scan_references(
     return {path: scan(index, subjects, reference_notes(path)) for path in references}
 
 
-def _report_findings(
+def _report_overlap(
     index: NgramIndex, shared: set[Ngram], colliding: set[str], report: Path
 ) -> Exit:
     positions = index.positions(shared)
-    content = {
-        "positions": [
-            {"note": position.note, "token": position.token} for position in positions
-        ],
-        "colliding_subjects": sorted(colliding),
-    }
-    report.parent.mkdir(parents=True, exist_ok=True)
-    report.write_text(f"{json.dumps(content, indent=2)}\n", encoding="utf-8")
+    write_overlap_report(report, positions, colliding)
     notes = sorted({position.note for position in positions})
     _say(
         f"Sdílené {NGRAM_SIZE}-gramy: {len(shared)}, kolize subject_id: {len(colliding)}."
