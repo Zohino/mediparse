@@ -122,6 +122,14 @@ allowed_importers = [
 broken_contract_guidance = "Zvenku, například ze skriptu Snakemake, se do mediparse vstupuje jen přes mediparse.entrypoints, který složí use case s adaptéry. Chybí-li vstupní bod, přidej ho tam."
 
 [[tool.importlinter.contracts]]
+name = "Use casy se navzájem nevolají"
+type = "independence"
+modules = [
+    "mediparse.application.*",
+]
+broken_contract_guidance = "Kroky pipeline skládá Snakemake, ne use case. Co dva use casy sdílejí, patří do domain; port si každý use case popíše sám."
+
+[[tool.importlinter.contracts]]
 name = "Mediparse je acyklické"
 type = "acyclic_siblings"
 ancestors = [
