@@ -351,5 +351,102 @@
     },
     "female_probability": 0.513,
     "age_marker_probability": 0.5908
+  },
+  "mentions": {
+    "diagnoses": {
+      "diabetes": {
+        "given_positive": 0.937,
+        "given_negative": 0.1735,
+        "keywords": [
+          "diabetes",
+          "diabetic",
+          "diabetes mellitus",
+          "DM",
+          "DM2"
+        ]
+      },
+      "ckd": {
+        "given_positive": 0.8682,
+        "given_negative": 0.0249,
+        "keywords": [
+          "chronic kidney disease",
+          "CKD",
+          "ESRD",
+          "end-stage renal disease",
+          "chronic renal",
+          "renal insufficiency"
+        ]
+      },
+      "heart_failure": {
+        "given_positive": 0.855,
+        "given_negative": 0.0653,
+        "keywords": [
+          "heart failure",
+          "congestive heart failure",
+          "CHF",
+          "HF",
+          "cardiac failure",
+          "systolic heart failure",
+          "diastolic heart failure"
+        ]
+      },
+      "atrial_fibrillation": {
+        "given_positive": 0.9384,
+        "given_negative": 0.0361,
+        "keywords": [
+          "atrial fibrillation",
+          "AFib",
+          "AF",
+          "a-fib",
+          "atrial flutter"
+        ]
+      },
+      "aki": {
+        "given_positive": 0.4725,
+        "given_negative": 0.0149,
+        "keywords": [
+          "acute kidney injury",
+          "AKI",
+          "acute renal failure",
+          "ARF",
+          "acute renal injury"
+        ]
+      }
+    },
+    "diagnosis_section": "discharge_diagnosis",
+    "family_section": "family_history",
+    "diagnosis_section_probability": 0.85,
+    "narrative_probability": 0.75,
+    "chronic_sections": {
+      "past_medical_history": 0.6,
+      "history_of_present_illness": 0.2,
+      "hospital_course": 0.2
+    },
+    "acute_sections": {
+      "history_of_present_illness": 0.5,
+      "hospital_course": 0.5
+    },
+    "negative_statuses": {
+      "negated": 0.4,
+      "family_history": 0.2,
+      "uncertain": 0.2,
+      "affirmed_uncoded": 0.2
+    },
+    "negation": {
+      "cues": [
+        "no",
+        "not",
+        "denies",
+        "denied",
+        "without",
+        "negative for",
+        "no evidence of",
+        "absence of",
+        "family history",
+        "ruled out",
+        "r/o"
+      ],
+      "window_chars": 40
+    }
   }
 }
