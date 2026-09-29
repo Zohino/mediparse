@@ -36,6 +36,8 @@ jobs:
         run: uv run --frozen ruff format --check --diff
       - name: hadolint
         run: uv run --frozen hadolint Containerfile
+      - name: import-linter
+        run: uv run --frozen lint-imports
 
   typecheck:
     name: Typecheck
