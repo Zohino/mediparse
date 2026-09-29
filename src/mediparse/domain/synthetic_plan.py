@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, NonNegativeInt
 
 from mediparse.domain.labels import LabelModel
 from mediparse.domain.mentions import MentionModel
@@ -15,6 +15,7 @@ class SamplerConfig(BaseModel):
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
+    seed: NonNegativeInt
     labels: LabelModel
     patients: PatientModel
     structure: StructureModel
