@@ -36,6 +36,12 @@ jobs:
         run: uv run --frozen ruff format --check --diff
       - name: hadolint
         run: uv run --frozen hadolint Containerfile
+      - name: snakefmt
+        run: uv run --frozen snakefmt --check workflow
+      - name: shfmt
+        run: uv run --frozen shfmt --diff workflow/scripts
+      - name: ShellCheck
+        run: uv run --frozen shellcheck workflow/scripts/*.sh
       - name: import-linter
         run: uv run --frozen lint-imports
 

@@ -91,6 +91,30 @@ entry = "uv run --frozen hadolint"
 types = ["dockerfile"]
 
 [[repos.hooks]]
+id = "snakefmt"
+groups = ["ci-job"]
+name = "snakefmt"
+language = "system"
+entry = "uv run --frozen snakefmt"
+files = "(^|/)Snakefile$|\\.smk$"
+
+[[repos.hooks]]
+id = "shfmt"
+groups = ["ci-job"]
+name = "shfmt"
+language = "system"
+entry = "uv run --frozen shfmt --write"
+types = ["shell"]
+
+[[repos.hooks]]
+id = "shellcheck"
+groups = ["ci-job"]
+name = "ShellCheck"
+language = "system"
+entry = "uv run --frozen shellcheck"
+types = ["shell"]
+
+[[repos.hooks]]
 id = "synthetic-corpus-gate"
 groups = ["ci-job"]
 name = "brána syntetického korpusu"
