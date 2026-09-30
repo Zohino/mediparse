@@ -1,0 +1,52 @@
+{
+  "mimic_tables": [
+    {
+      "url": "https://physionet.org/files/mimic-iv-note/2.2/note/discharge.csv.gz",
+      "sha256": "27bc552edaf81c2af322040cb7e8eb36417173b23c79405bb92fcf73bef2dbc5"
+    },
+    {
+      "url": "https://physionet.org/files/mimic-iv-note/2.2/note/radiology.csv.gz",
+      "sha256": "2c09bc76ee12d5f3b8f572deb7218fbaf3e59b32eccfdae14686e05ae099eebb"
+    },
+    {
+      "url": "https://physionet.org/files/mimiciv/3.1/hosp/admissions.csv.gz",
+      "sha256": "a9584ed88e9ed664a2f66f86a5cf9fd175c8bb0af50e3b6115598b19e978384e"
+    },
+    {
+      "url": "https://physionet.org/files/mimiciv/3.1/hosp/d_icd_diagnoses.csv.gz",
+      "sha256": "a81065bf45ccf74f589bec855bbb0a07b5c014907b34ff76fe20583a2c87cc79"
+    },
+    {
+      "url": "https://physionet.org/files/mimiciv/3.1/hosp/d_icd_procedures.csv.gz",
+      "sha256": "a2ac8afcb99fd16bce2e6c7ad445e3bd1dfd658e521823130ab08b66fdd3d6d4"
+    },
+    {
+      "url": "https://physionet.org/files/mimiciv/3.1/hosp/diagnoses_icd.csv.gz",
+      "sha256": "47665a41b2a3ad990d6f314062d5bd6d29d467b0fd402dd94662044ec8b073d2"
+    },
+    {
+      "url": "https://physionet.org/files/mimiciv/3.1/hosp/omr.csv.gz",
+      "sha256": "8280a8023203bddc6cc4419bd8cd253a015b8bc0bc53852ec92f98c7353f31e2"
+    },
+    {
+      "url": "https://physionet.org/files/mimiciv/3.1/hosp/patients.csv.gz",
+      "sha256": "4c7507de7ecad8c5ba7647ea4d26018e88ff6672c5fc22ab59c2a5697d687cdd"
+    },
+    {
+      "url": "https://physionet.org/files/mimiciv/3.1/hosp/pharmacy.csv.gz",
+      "sha256": "c9885721e4c968f0773145d7f6ba4d3cc3755d5600ee400ff95b1d3238053811"
+    },
+    {
+      "url": "https://physionet.org/files/mimiciv/3.1/hosp/prescriptions.csv.gz",
+      "sha256": "0d8481c7d5d7c9ec2fea3fc543ddaaadb5a933cd22c7b9dda4289361e4d77199"
+    },
+    {
+      "url": "https://physionet.org/files/mimiciv/3.1/hosp/procedures_icd.csv.gz",
+      "sha256": "3271397d0517131f84399b698cbb0c2f435aaab0f873a3806e13b097661596f7"
+    },
+    {
+      "url": "https://physionet.org/files/mimiciv/3.1/hosp/services.csv.gz",
+      "sha256": "31c82ebee94e0c04d6966fbfec30579ec00f9c7816b80852f9580656e6183888"
+    }
+  ]
+}

@@ -187,6 +187,8 @@ tempCodeRunnerFile.py
 # MIMIC-IV / PhysioNet data — nikdy do gitu (DUA, viz guard/audit.py, T17)
 # ============================================================
 /data/
+/resources/mimic/
+/.netrc
 
 # ============================================================
 # mediparse tooling stack
@@ -194,6 +196,7 @@ tempCodeRunnerFile.py
 
 # Snakemake lokální stav běhu
 .snakemake/
+/logs/
 
 # Quarto — .quarto/ je lokální metadata, _freeze/ se commituje záměrně
 # (freeze: auto — reprodukovatelnost renderu)
