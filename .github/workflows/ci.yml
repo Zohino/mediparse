@@ -72,6 +72,8 @@ jobs:
       - uses: ./.github/actions/setup-uv-env
       - name: pytest
         run: uv run --frozen pytest
+      - name: snakemake dry-run
+        run: uv run --frozen snakemake --dry-run download_mimic
 
   hygiene:
     name: Repo hygiene
