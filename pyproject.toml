@@ -181,6 +181,7 @@ ignore = [
 
     # Vyjmutá pravidla pro nadbytečnost nebo striktnost, která není v projektu vyžadována
     "missing-copyright-notice", # Copyright je uveden v LICENSE souboru a odkazován v pyproject.toml
+    "reimplemented-starmap",    # Nerozliší komprehenzi od generátoru: komprehenze zůstávají, generátory na starmap hlídá review
 ]
 
 [tool.ruff.lint.per-file-ignores]
