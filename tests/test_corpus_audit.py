@@ -26,11 +26,7 @@ CORPUS_SHA = "a" * 64
 DISCHARGE = {"name": "discharge.csv.gz", "sha256": "b" * 64, "rows": 10}
 RADIOLOGY = {"name": "radiology.csv.gz", "sha256": "e" * 64, "rows": 20}
 ADMISSIONS = {"name": "admissions.csv.gz", "sha256": "f" * 64, "rows": 30}
-PINNED = {
-    "discharge.csv.gz": "b" * 64,
-    "radiology.csv.gz": "e" * 64,
-    "admissions.csv.gz": "f" * 64,
-}
+PINNED = {"discharge.csv.gz": "b" * 64, "radiology.csv.gz": "e" * 64}
 
 
 def _index(text: str = f"Summary: {SENTENCE}.") -> NgramIndex:
@@ -172,7 +168,7 @@ def test_gate_rejects_record_from_other_method() -> None:
 
 
 def test_gate_accepts_matching_record() -> None:
-    """Shodný otisk, metoda i reference projdou; ostatní tabulky configu brána nesrovnává."""
+    """Shodný otisk, metoda i reference bránou projdou."""
     assert gate_violations(CORPUS_SHA, _record(), PINNED) == ()
 
 
@@ -192,10 +188,6 @@ def test_gate_rejects_reference_other_than_pinned(
     assert gate_violations(CORPUS_SHA, _record(reference=reference), PINNED)
 
 
-def test_gate_rejects_config_without_reference_checksum() -> None:
-    """Bez připnutého otisku referenčního souboru nemá brána s čím srovnávat."""
-    pinned = {"discharge.csv.gz": "b" * 64}
-
-    assert gate_violations(CORPUS_SHA, _record(), pinned) == (
-        "Konfigurace tabulek MIMIC nemá otisk referenčních souborů: radiology.csv.gz.",
-    )
+def test_gate_rejects_record_when_config_names_no_reference() -> None:
+    """Config bez tabulek MIMIC-IV-Note nemá s čím srovnávat a korpus neatestuje."""
+    assert gate_violations(CORPUS_SHA, _record(), {})

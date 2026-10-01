@@ -14,7 +14,7 @@ from typing import TYPE_CHECKING
 
 from mediparse.application.corpus_gate import CorpusGate
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_pinned_sha256
+from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_reference_sha256
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirectory
 
 if TYPE_CHECKING:
@@ -38,7 +38,7 @@ def run(argv: Sequence[str]) -> ExitCode:
     """
     args = _parser().parse_args(argv)
     gate = CorpusGate(CorpusDirectory(args.corpus))
-    violations = gate.run(load_pinned_sha256(args.tables))
+    violations = gate.run(load_reference_sha256(args.tables))
     for violation in violations:
         sys.stderr.write(f"{violation}\n")
     return ExitCode.BLOCKED if violations else ExitCode.OK
