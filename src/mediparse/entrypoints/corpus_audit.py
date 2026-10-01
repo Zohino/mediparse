@@ -26,6 +26,7 @@ from mediparse.domain.corpus_audit import NGRAM_SIZE
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.audit_workspace import LocalWorkspace
 from mediparse.infrastructure.mimic_reference import MimicReference
+from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_reference_sha256
 from mediparse.infrastructure.overlap_report import OverlapReportFile
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirectory
 
@@ -60,7 +61,9 @@ def run(argv: Sequence[str], environ: Mapping[str, str]) -> ExitCode:
         references=tuple(MimicReference(path) for path in references),
         report=OverlapReportFile(args.report),
     )
-    outcome = audit.run(environ, args.commit, datetime.now(tz=UTC))
+    outcome = audit.run(
+        environ, args.commit, datetime.now(tz=UTC), load_reference_sha256(args.tables)
+    )
     return _present(outcome, args.report)
 
 
@@ -108,6 +111,12 @@ def _parser() -> argparse.ArgumentParser:
         action="append",
         required=True,
         help="discharge.csv.gz nebo radiology.csv.gz z MIMIC-IV-Note; opakovatelný",
+    )
+    parser.add_argument(
+        "--tables",
+        type=Path,
+        default=TABLES_PATH,
+        help="config tabulek MIMIC, z něhož se bere reference a její otisky",
     )
     parser.add_argument(
         "--report",

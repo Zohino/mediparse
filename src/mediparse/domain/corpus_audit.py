@@ -122,6 +122,10 @@ class InvalidAuditRecordError(ValueError):
     """Záznam auditu neodpovídá schématu, a korpus proto neatestuje."""
 
 
+class ReferenceMismatchError(ValueError):
+    """Referenční soubory nejsou přesně reference z configu s jejími otisky."""
+
+
 def tokenize(text: str) -> list[str]:
     """Rozdělí text na tokeny po normalizaci NFKC a převodu na malá písmena.
 
