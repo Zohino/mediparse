@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.domain.corpus_audit import REFERENCE_FILES, InvalidAuditRecordError
+from mediparse.domain.corpus_audit import InvalidAuditRecordError
 from mediparse.entrypoints import corpus_audit
 from mediparse.entrypoints.corpus_gate import run
 from mediparse.entrypoints.exit_code import ExitCode
@@ -25,6 +25,11 @@ REPOSITORY_CORPUS = REPOSITORY / "resources" / "synthetic"
 REPOSITORY_TABLES = REPOSITORY / "config" / "mimic_tables.json"
 NOTE = "en/90000001-DS-1.txt"
 TABLES = "mimic_tables.json"
+REFERENCE_FILES = ("discharge.csv.gz", "radiology.csv.gz")
+HOSP = {
+    "url": "https://physionet.org/files/mimiciv/3.1/hosp/admissions.csv.gz",
+    "sha256": "f" * 64,
+}
 
 
 def _reference(path: Path, subject_id: str) -> Path:
@@ -44,6 +49,7 @@ def _pin(tables: Path, references: Sequence[Path]) -> None:
         }
         for path in references
     ]
+    entries.append(HOSP)
     tables.write_text(json.dumps({"mimic_tables": entries}), encoding="utf-8")
 
 

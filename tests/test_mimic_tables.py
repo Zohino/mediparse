@@ -1,4 +1,4 @@
-"""Config tabulek MIMIC: oficiální otisky stažených souborů podle jména souboru."""
+"""Config tabulek MIMIC: otisky souborů MIMIC-IV-Note, proti kterým běží audit."""
 
 import json
 from pathlib import Path
@@ -6,37 +6,36 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from mediparse.infrastructure.mimic_tables import load_pinned_sha256
+from mediparse.infrastructure.mimic_tables import load_reference_sha256
 
 REPO_TABLES = Path(__file__).parents[1] / "config" / "mimic_tables.json"
 NOTE_URL = "https://physionet.org/files/mimic-iv-note/2.2/note/discharge.csv.gz"
+HOSP_URL = "https://physionet.org/files/mimiciv/3.1/hosp/admissions.csv.gz"
 
 
-def _tables(path: Path, sha256: str) -> Path:
-    path.write_text(
-        json.dumps({"mimic_tables": [{"url": NOTE_URL, "sha256": sha256}]}),
-        encoding="utf-8",
-    )
+def _tables(path: Path, *tables: tuple[str, str]) -> Path:
+    entries = [{"url": url, "sha256": sha256} for url, sha256 in tables]
+    path.write_text(json.dumps({"mimic_tables": entries}), encoding="utf-8")
     return path
 
 
-def test_checksums_are_keyed_by_file_name_from_url(tmp_path: Path) -> None:
-    """Klíčem je jméno souboru z URL, stejně jako ve Snakefile a v záznamu auditu."""
-    tables = _tables(tmp_path / "mimic_tables.json", "b" * 64)
+def test_reference_is_note_project_keyed_by_file_name(tmp_path: Path) -> None:
+    """Reference jsou tabulky MIMIC-IV-Note pod jménem souboru z URL; hosp mezi ně nepatří."""
+    tables = _tables(tmp_path / "t.json", (NOTE_URL, "b" * 64), (HOSP_URL, "f" * 64))
 
-    assert load_pinned_sha256(tables) == {"discharge.csv.gz": "b" * 64}
+    assert load_reference_sha256(tables) == {"discharge.csv.gz": "b" * 64}
 
 
 def test_invalid_checksum_is_rejected(tmp_path: Path) -> None:
     """Otisk, který není SHA-256 v hexadecimálním tvaru, config neprojde."""
-    tables = _tables(tmp_path / "mimic_tables.json", "B" * 64)
+    tables = _tables(tmp_path / "t.json", (NOTE_URL, "B" * 64))
 
     with pytest.raises(ValidationError):
-        load_pinned_sha256(tables)
+        load_reference_sha256(tables)
 
 
-def test_repository_config_pins_note_tables() -> None:
-    """Config v repu připíná otisky obou souborů MIMIC-IV-Note, proti kterým běží audit."""
-    pinned = load_pinned_sha256(REPO_TABLES)
+def test_repository_reference_is_discharge_and_radiology() -> None:
+    """Config v repu vymezuje referenci auditu přesně na discharge a radiology."""
+    reference = load_reference_sha256(REPO_TABLES)
 
-    assert {"discharge.csv.gz", "radiology.csv.gz"} <= pinned.keys()
+    assert reference.keys() == {"discharge.csv.gz", "radiology.csv.gz"}

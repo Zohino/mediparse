@@ -40,7 +40,7 @@ class CorpusGate:
 
     corpus: AuditedCorpus
 
-    def run(self, pinned_sha256: Mapping[str, str]) -> tuple[str, ...]:
+    def run(self, reference_sha256: Mapping[str, str]) -> tuple[str, ...]:
         """Důvody, proč korpus nesmí do repozitáře; prázdný výsledek znamená, že smí.
 
         Returns:
@@ -50,4 +50,4 @@ class CorpusGate:
             record = self.corpus.audit_record()
         except InvalidAuditRecordError:
             return ("Záznam auditu neodpovídá schématu.",)
-        return gate_violations(self.corpus.fingerprint(), record, pinned_sha256)
+        return gate_violations(self.corpus.fingerprint(), record, reference_sha256)
