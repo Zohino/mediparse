@@ -13,6 +13,7 @@ from mediparse.domain.corpus_audit import (
     ReferenceNote,
     fingerprint,
     gate_violations,
+    reference_mismatch,
     scan,
     tokenize,
 )
@@ -27,6 +28,8 @@ DISCHARGE = {"name": "discharge.csv.gz", "sha256": "b" * 64, "rows": 10}
 RADIOLOGY = {"name": "radiology.csv.gz", "sha256": "e" * 64, "rows": 20}
 ADMISSIONS = {"name": "admissions.csv.gz", "sha256": "f" * 64, "rows": 30}
 PINNED = {"discharge.csv.gz": "b" * 64, "radiology.csv.gz": "e" * 64}
+DISCHARGE_FILE = ("discharge.csv.gz", "b" * 64)
+RADIOLOGY_FILE = ("radiology.csv.gz", "e" * 64)
 
 
 def _index(text: str = f"Summary: {SENTENCE}.") -> NgramIndex:
@@ -191,3 +194,32 @@ def test_gate_rejects_reference_other_than_pinned(
 def test_gate_rejects_record_when_config_names_no_reference() -> None:
     """Config bez tabulek MIMIC-IV-Note nemá s čím srovnávat a korpus neatestuje."""
     assert gate_violations(CORPUS_SHA, _record(), {})
+
+
+@pytest.mark.parametrize(
+    ("files", "mismatch"),
+    [
+        pytest.param([DISCHARGE_FILE, RADIOLOGY_FILE], (), id="presna-shoda"),
+        pytest.param([DISCHARGE_FILE], ("radiology.csv.gz",), id="bez-radiology"),
+        pytest.param(
+            [DISCHARGE_FILE, RADIOLOGY_FILE, ("admissions.csv.gz", "f" * 64)],
+            ("admissions.csv.gz",),
+            id="soubor-navic",
+        ),
+        pytest.param(
+            [("discharge.csv.gz", "d" * 64), RADIOLOGY_FILE],
+            ("discharge.csv.gz",),
+            id="jiny-otisk",
+        ),
+        pytest.param(
+            [DISCHARGE_FILE, DISCHARGE_FILE, RADIOLOGY_FILE],
+            ("discharge.csv.gz",),
+            id="discharge-dvakrat",
+        ),
+    ],
+)
+def test_reference_mismatch_names_differing_files(
+    files: list[tuple[str, str]], mismatch: tuple[str, ...]
+) -> None:
+    """Pravidlo shody jmenuje chybějící, přebývající, zdvojené i jinak otištěné soubory."""
+    assert reference_mismatch(files, PINNED) == mismatch

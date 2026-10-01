@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import re
 import unicodedata
-from collections import defaultdict
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Annotated, Final, Literal, NamedTuple
 
@@ -186,12 +186,28 @@ def gate_violations(
         )
     if (record.ngram_size, record.normalization) != (NGRAM_SIZE, NORMALIZATION):
         violations.append("Záznam auditu vznikl jinou metodou, je nutný nový audit.")
-    audited = sorted((file.name, file.sha256) for file in record.reference)
-    if audited != sorted(reference_sha256.items()):
+    audited = ((file.name, file.sha256) for file in record.reference)
+    if reference_mismatch(audited, reference_sha256):
         violations.append(
             f"Audit neběžel přesně proti referenci z configu ({', '.join(sorted(reference_sha256))}), je nutný nový audit."
         )
     return tuple(violations)
+
+
+def reference_mismatch(
+    files: Iterable[tuple[str, str]], reference_sha256: Mapping[str, str]
+) -> tuple[str, ...]:
+    """Soubory, kterými se auditovaná reference liší od reference z configu.
+
+    Returns:
+        Seřazená jména chybějících, přebývajících a zdvojených souborů i souborů s jiným
+        otiskem; prázdný výsledek znamená přesnou shodu.
+    """
+    audited = Counter(files)
+    expected = Counter(reference_sha256.items())
+    return tuple(
+        sorted({name for name, _ in (audited - expected) + (expected - audited)})
+    )
 
 
 def _ngrams(tokens: Sequence[str]) -> Iterator[Ngram]:
