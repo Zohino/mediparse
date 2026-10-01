@@ -19,6 +19,7 @@ from mediparse.infrastructure.synthetic_corpus import (
 )
 
 if TYPE_CHECKING:
+    from collections.abc import Sequence
     from pathlib import Path
 
 SENTENCE = (
@@ -37,6 +38,7 @@ HEADER = [
     "storetime",
     "text",
 ]
+RADIOLOGY_ROWS = [("10000033", "an unrelated radiology report")]
 
 
 def _corpus(tmp_path: Path, notes: dict[str, str]) -> Path:
@@ -50,8 +52,7 @@ def _corpus(tmp_path: Path, notes: dict[str, str]) -> Path:
     return root
 
 
-def _reference(tmp_path: Path, rows: list[tuple[str, str]]) -> Path:
-    path = tmp_path / "discharge.csv.gz"
+def _reference(path: Path, rows: list[tuple[str, str]]) -> Path:
     with gzip.open(path, mode="wt", encoding="utf-8", newline="") as stream:
         writer = csv.writer(stream)
         writer.writerow(HEADER)
@@ -62,12 +63,35 @@ def _reference(tmp_path: Path, rows: list[tuple[str, str]]) -> Path:
     return path
 
 
-def _argv(corpus: Path, reference: Path, report: Path) -> list[str]:
+def _references(tmp_path: Path, rows: list[tuple[str, str]]) -> tuple[Path, Path]:
+    return (
+        _reference(tmp_path / "discharge.csv.gz", rows),
+        _reference(tmp_path / "radiology.csv.gz", RADIOLOGY_ROWS),
+    )
+
+
+def _pin(tmp_path: Path, references: Sequence[Path]) -> Path:
+    tables = tmp_path / "mimic_tables.json"
+    entries = [
+        {
+            "url": f"https://physionet.org/files/mimic-iv-note/2.2/note/{path.name}",
+            "sha256": MimicReference(path).sha256(),
+        }
+        for path in references
+    ]
+    tables.write_text(json.dumps({"mimic_tables": entries}), encoding="utf-8")
+    return tables
+
+
+def _argv(
+    corpus: Path, references: Sequence[Path], report: Path, tables: Path
+) -> list[str]:
     return [
         "--corpus",
         str(corpus),
-        "--reference",
-        str(reference),
+        *(f"--reference={path}" for path in references),
+        "--tables",
+        str(tables),
         "--report",
         str(report),
         "--commit",
@@ -82,16 +106,19 @@ def _audit(
     environ: dict[str, str] | None = None,
 ) -> tuple[ExitCode, Path]:
     corpus = _corpus(tmp_path, notes)
-    reference = _reference(tmp_path, rows)
-    code = run(_argv(corpus, reference, tmp_path / "report.json"), environ or {})
-    return code, corpus
+    references = _references(tmp_path, rows)
+    tables = _pin(tmp_path, references)
+    argv = _argv(corpus, references, tmp_path / "report.json", tables)
+    return run(argv, environ or {}), corpus
 
 
 def test_reference_reader_keeps_multiline_quoted_text(tmp_path: Path) -> None:
     """Víceřádkový text v uvozovkách se přečte jako jedna zpráva beze změny."""
     text = 'first line\nsecond "quoted" line, with comma'
 
-    notes = list(MimicReference(_reference(tmp_path, [("10000032", text)])).notes())
+    path = _reference(tmp_path / "discharge.csv.gz", [("10000032", text)])
+
+    notes = list(MimicReference(path).notes())
 
     assert notes == [ReferenceNote(subject_id="10000032", text=text)]
 
@@ -107,7 +134,15 @@ def test_clean_corpus_gets_audit_record(tmp_path: Path) -> None:
     assert code == ExitCode.OK
     assert record is not None
     assert record.corpus_sha256 == CorpusDirectory(corpus).fingerprint()
+    assert [file.name for file in record.reference] == [
+        "discharge.csv.gz",
+        "radiology.csv.gz",
+    ]
     assert record.reference[0].rows == 1
+    assert (
+        record.reference[0].sha256
+        == MimicReference(tmp_path / "discharge.csv.gz").sha256()
+    )
 
 
 def test_overlap_blocks_record_and_never_prints_text(
@@ -169,13 +204,54 @@ def test_invalid_note_id_is_refused(tmp_path: Path) -> None:
     assert not (tmp_path / "report.json").exists()
 
 
-def test_missing_reference_is_refused(tmp_path: Path) -> None:
-    """Chybějící referenční soubor audit odmítne, místo aby spadl při čtení."""
+def test_missing_reference_is_refused(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Chybějící referenční soubor audit odmítne jako chybějící, ne jako neshodu otisku."""
     corpus = _corpus(tmp_path, {NOTE: "a short synthetic note"})
+    references = _references(tmp_path, [("10000032", SENTENCE)])
+    tables = _pin(tmp_path, references)
+    argv = _argv(
+        corpus,
+        (tmp_path / "missing.csv.gz", references[1]),
+        tmp_path / "r.json",
+        tables,
+    )
 
-    code = run(_argv(corpus, tmp_path / "missing.csv.gz", tmp_path / "r.json"), {})
+    assert run(argv, {}) == ExitCode.REFUSED
+    assert "neexistují" in capsys.readouterr().err
+
+
+def test_reference_changed_after_pin_is_refused(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Soubor, který se liší od otisku v configu, audit odmítne dřív, než vznikne záznam či report."""
+    corpus = _corpus(tmp_path, {NOTE: "a short synthetic note"})
+    references = _references(tmp_path, [("10000032", SENTENCE)])
+    tables = _pin(tmp_path, references)
+    _reference(references[0], [("10000032", "a different reference text")])
+
+    code = run(_argv(corpus, references, tmp_path / "report.json", tables), {})
 
     assert code == ExitCode.REFUSED
+    assert "discharge.csv.gz" in capsys.readouterr().err
+    assert not (corpus / RECORD_NAME).exists()
+    assert not (tmp_path / "report.json").exists()
+
+
+def test_audit_against_part_of_reference_is_refused(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Audit jen proti discharge reference z configu nepokryje, a proto neproběhne."""
+    corpus = _corpus(tmp_path, {NOTE: "a short synthetic note"})
+    references = _references(tmp_path, [("10000032", SENTENCE)])
+    tables = _pin(tmp_path, references)
+
+    code = run(_argv(corpus, references[:1], tmp_path / "report.json", tables), {})
+
+    assert code == ExitCode.REFUSED
+    assert "radiology.csv.gz" in capsys.readouterr().err
+    assert not (corpus / RECORD_NAME).exists()
 
 
 def test_empty_reference_is_refused(tmp_path: Path) -> None:
@@ -191,9 +267,10 @@ def test_corpus_outside_repository_is_refused(tmp_path: Path) -> None:
     root = tmp_path / "loose"
     (root / "en").mkdir(parents=True)
     (root / NOTE).write_text("a short synthetic note", encoding="utf-8")
-    reference = _reference(tmp_path, [("10000032", SENTENCE)])
+    references = _references(tmp_path, [("10000032", SENTENCE)])
+    tables = _pin(tmp_path, references)
 
-    code = run(_argv(root, reference, tmp_path / "r.json"), {})
+    code = run(_argv(root, references, tmp_path / "r.json", tables), {})
 
     assert code == ExitCode.REFUSED
 
@@ -202,15 +279,19 @@ def test_report_inside_repository_is_refused(tmp_path: Path) -> None:
     """Report s pozicemi shod nesmí vzniknout uvnitř repozitáře."""
     corpus = _corpus(tmp_path, {NOTE: "a short synthetic note"})
     report = corpus / "r.json"
+    references = _references(tmp_path, [])
+    tables = _pin(tmp_path, references)
 
-    assert run(_argv(corpus, _reference(tmp_path, []), report), {}) == ExitCode.REFUSED
+    assert run(_argv(corpus, references, report, tables), {}) == ExitCode.REFUSED
 
 
 def test_malformed_commit_is_rejected(tmp_path: Path) -> None:
     """Commit nástroje musí být celý hash, zkratka ani jiný text záznam nepodepíše."""
     corpus = _corpus(tmp_path, {NOTE: "a short synthetic note"})
+    references = _references(tmp_path, [])
+    tables = _pin(tmp_path, references)
     argv = [
-        *_argv(corpus, _reference(tmp_path, []), tmp_path / "r.json")[:-1],
+        *_argv(corpus, references, tmp_path / "r.json", tables)[:-1],
         "abc123",
     ]
 

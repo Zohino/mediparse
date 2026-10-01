@@ -53,7 +53,7 @@ def _pin(tables: Path, references: Sequence[Path]) -> None:
     tables.write_text(json.dumps({"mimic_tables": entries}), encoding="utf-8")
 
 
-def _audited_corpus(tmp_path: Path, audited: Sequence[str] = REFERENCE_FILES) -> Path:
+def _audited_corpus(tmp_path: Path) -> Path:
     root = tmp_path / "repo" / "resources" / "synthetic"
     (root / "en").mkdir(parents=True)
     (tmp_path / "repo" / ".git").mkdir()
@@ -66,7 +66,9 @@ def _audited_corpus(tmp_path: Path, audited: Sequence[str] = REFERENCE_FILES) ->
     argv = [
         "--corpus",
         str(root),
-        *(f"--reference={path}" for path in references if path.name in audited),
+        *(f"--reference={path}" for path in references),
+        "--tables",
+        str(tmp_path / TABLES),
         "--report",
         str(tmp_path / "report.json"),
         "--commit",
@@ -122,9 +124,13 @@ def test_gate_rejects_invalid_record(tmp_path: Path) -> None:
     assert _gate(root, tmp_path / TABLES) == ExitCode.BLOCKED
 
 
-def test_gate_rejects_audit_against_part_of_reference(tmp_path: Path) -> None:
-    """Čistý audit jen proti discharge korpus neatestuje, radiology je součástí reference."""
-    root = _audited_corpus(tmp_path, audited=("discharge.csv.gz",))
+def test_gate_rejects_record_against_part_of_reference(tmp_path: Path) -> None:
+    """Záznam jen proti discharge (ručně upravený nebo ze starší verze auditu) korpus neatestuje."""
+    root = _audited_corpus(tmp_path)
+    path = root / RECORD_NAME
+    record = json.loads(path.read_text(encoding="utf-8"))
+    record["reference"] = record["reference"][:1]
+    path.write_text(json.dumps(record), encoding="utf-8")
 
     assert _gate(root, tmp_path / TABLES) == ExitCode.BLOCKED
 
