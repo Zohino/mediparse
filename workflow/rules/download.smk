@@ -33,4 +33,10 @@ rule download_mimic_table:
     params:
         url=lambda wildcards: MIMIC_TABLES[wildcards.file]["url"],
     shell:
-        "workflow/scripts/download.sh .netrc {params.url:q} {output:q} {log:q}"
+        """
+        workflow/scripts/download.sh \
+            .netrc \
+            {params.url:q} \
+            {output:q} \
+            {log:q}
+        """

@@ -12,17 +12,22 @@ netrc=$1
 url=$2
 output=$3
 log=$4
-partial=.cache/download/$output
-attempts=.cache/download/$log
+partial=$output.part
+attempts=$log.part
 
 [[ -r $netrc ]] || fail "chybí $netrc s přihlašovacími údaji" 1
 [[ -z $(find -L "$netrc" -perm /077) ]] || fail "$netrc smí číst jen vlastník: chmod 600 $netrc" 1
 
-mkdir -p "$(dirname "$partial")" "$(dirname "$attempts")"
 echo "== $(date --utc +%FT%TZ) stahuji $url" >>"$attempts"
 
-wget2 --no-config --netrc-file="$netrc" --continue --progress=none \
-    --output-document="$partial" --append-output="$attempts" "$url" || {
+wget2 \
+    --no-config \
+    --netrc-file="$netrc" \
+    --continue \
+    --progress=none \
+    --output-document="$partial" \
+    "$url" \
+    >>"$attempts" 2>&1 || {
     status=$?
     case $status in
         6) fail "server odmítl přihlášení k $url, zkontroluj $netrc (detail v $attempts)" "$status" ;;
@@ -31,7 +36,7 @@ wget2 --no-config --netrc-file="$netrc" --continue --progress=none \
     esac
 }
 
-mv "$partial" "$output"
+mv -- "$partial" "$output"
 echo "== $(date --utc +%FT%TZ) staženo do $output" >>"$attempts"
-cat "$attempts" >>"$log"
-rm "$attempts"
+cat -- "$attempts" >>"$log"
+rm -- "$attempts"
