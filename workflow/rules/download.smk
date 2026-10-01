@@ -1,3 +1,4 @@
+from collections import Counter
 import posixpath
 import re
 
@@ -5,13 +6,18 @@ import re
 configfile: "config/mimic_tables.json"
 
 
+filenames = [posixpath.basename(table["url"]) for table in config["mimic_tables"]]
+duplicates = [name for name, count in Counter(filenames).items() if count > 1]
+
+if duplicates:
+    raise ValueError(
+        "config/mimic_tables.json obsahuje duplicitní názvy souborů: "
+        + ", ".join(duplicates)
+    )
+
 MIMIC_TABLES = {
     posixpath.basename(table["url"]): table for table in config["mimic_tables"]
 }
-
-assert len(MIMIC_TABLES) == len(
-    config["mimic_tables"]
-), "config/mimic_tables.json obsahuje záznamy, které mají stejný název souboru"
 
 
 rule download_mimic:
