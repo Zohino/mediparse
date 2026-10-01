@@ -9,6 +9,10 @@ MIMIC_TABLES = {
     posixpath.basename(table["url"]): table for table in config["mimic_tables"]
 }
 
+assert len(MIMIC_TABLES) == len(
+    config["mimic_tables"]
+), "config/mimic_tables.json obsahuje záznamy, které mají stejný název souboru"
+
 
 rule download_mimic:
     input:
