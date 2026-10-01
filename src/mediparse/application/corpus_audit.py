@@ -18,7 +18,6 @@ from mediparse.domain.corpus_audit import (
     AuditRecord,
     NgramIndex,
     ReferenceFile,
-    ReferenceMismatchError,
     reference_mismatch,
     scan,
 )
@@ -148,6 +147,10 @@ class AuditRefused:
 type AuditOutcome = AuditClean | AuditOverlap | AuditRefused
 
 
+class _ReferenceMismatchError(ValueError):
+    pass
+
+
 @dataclass(frozen=True)
 class CorpusAudit:
     """Audit syntetického korpusu proti referenci MIMIC-IV-Note."""
@@ -177,8 +180,8 @@ class CorpusAudit:
             return AuditRefused("Korpus neobsahuje žádnou zprávu.")
         try:
             subjects = frozenset(subject_of(note) for note in self.corpus.note_ids())
-            digests = _verified_digests(self.references, reference_sha256)
-        except (InvalidNoteIdError, ReferenceMismatchError) as error:
+            _verify_reference(self.references, reference_sha256)
+        except (InvalidNoteIdError, _ReferenceMismatchError) as error:
             return AuditRefused(str(error))
         notes = self.corpus.notes()
         index = NgramIndex(notes)
@@ -200,10 +203,12 @@ class CorpusAudit:
             normalization=NORMALIZATION,
             synthetic_ngrams=len(index),
             reference=tuple(
-                ReferenceFile(name=reference.name, sha256=digest, rows=result.rows)
-                for reference, digest, result in zip(
-                    self.references, digests, scans, strict=True
+                ReferenceFile(
+                    name=reference.name,
+                    sha256=reference_sha256[reference.name],
+                    rows=result.rows,
                 )
+                for reference, result in zip(self.references, scans, strict=True)
             ),
             shared_ngrams=0,
             colliding_subjects=0,
@@ -230,16 +235,16 @@ def _overlap(
     )
 
 
-def _verified_digests(
+def _verify_reference(
     references: Sequence[Reference], reference_sha256: Mapping[str, str]
-) -> tuple[str, ...]:
-    digests = tuple(reference.sha256() for reference in references)
-    names = (reference.name for reference in references)
-    mismatch = reference_mismatch(zip(names, digests, strict=True), reference_sha256)
+) -> None:
+    mismatch = reference_mismatch(
+        ((reference.name, reference.sha256()) for reference in references),
+        reference_sha256,
+    )
     if mismatch:
         msg = f"Referenční soubory nesedí s referencí z configu: {', '.join(mismatch)}."
-        raise ReferenceMismatchError(msg)
-    return digests
+        raise _ReferenceMismatchError(msg)
 
 
 def _environment_problem(environ: Mapping[str, str]) -> str | None:

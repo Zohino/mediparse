@@ -122,10 +122,6 @@ class InvalidAuditRecordError(ValueError):
     """Záznam auditu neodpovídá schématu, a korpus proto neatestuje."""
 
 
-class ReferenceMismatchError(ValueError):
-    """Referenční soubory nejsou přesně reference z configu s jejími otisky."""
-
-
 def tokenize(text: str) -> list[str]:
     """Rozdělí text na tokeny po normalizaci NFKC a převodu na malá písmena.
 
@@ -190,10 +186,12 @@ def gate_violations(
         )
     if (record.ngram_size, record.normalization) != (NGRAM_SIZE, NORMALIZATION):
         violations.append("Záznam auditu vznikl jinou metodou, je nutný nový audit.")
-    audited = ((file.name, file.sha256) for file in record.reference)
-    if reference_mismatch(audited, reference_sha256):
+    mismatch = reference_mismatch(
+        ((file.name, file.sha256) for file in record.reference), reference_sha256
+    )
+    if mismatch:
         violations.append(
-            f"Audit neběžel přesně proti referenci z configu ({', '.join(sorted(reference_sha256))}), je nutný nový audit."
+            f"Audit neběžel přesně proti referenci z configu, liší se: {', '.join(mismatch)}; je nutný nový audit."
         )
     return tuple(violations)
 

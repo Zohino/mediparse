@@ -63,11 +63,14 @@ def _reference(path: Path, rows: list[tuple[str, str]]) -> Path:
     return path
 
 
-def _references(tmp_path: Path, rows: list[tuple[str, str]]) -> tuple[Path, Path]:
-    return (
+def _pinned_references(
+    tmp_path: Path, rows: list[tuple[str, str]]
+) -> tuple[tuple[Path, Path], Path]:
+    references = (
         _reference(tmp_path / "discharge.csv.gz", rows),
         _reference(tmp_path / "radiology.csv.gz", RADIOLOGY_ROWS),
     )
+    return references, _pin(tmp_path, references)
 
 
 def _pin(tmp_path: Path, references: Sequence[Path]) -> Path:
@@ -106,8 +109,7 @@ def _audit(
     environ: dict[str, str] | None = None,
 ) -> tuple[ExitCode, Path]:
     corpus = _corpus(tmp_path, notes)
-    references = _references(tmp_path, rows)
-    tables = _pin(tmp_path, references)
+    references, tables = _pinned_references(tmp_path, rows)
     argv = _argv(corpus, references, tmp_path / "report.json", tables)
     return run(argv, environ or {}), corpus
 
@@ -209,8 +211,7 @@ def test_missing_reference_is_refused(
 ) -> None:
     """Chybějící referenční soubor audit odmítne jako chybějící, ne jako neshodu otisku."""
     corpus = _corpus(tmp_path, {NOTE: "a short synthetic note"})
-    references = _references(tmp_path, [("10000032", SENTENCE)])
-    tables = _pin(tmp_path, references)
+    references, tables = _pinned_references(tmp_path, [("10000032", SENTENCE)])
     argv = _argv(
         corpus,
         (tmp_path / "missing.csv.gz", references[1]),
@@ -227,8 +228,7 @@ def test_reference_changed_after_pin_is_refused(
 ) -> None:
     """Soubor, který se liší od otisku v configu, audit odmítne dřív, než vznikne záznam či report."""
     corpus = _corpus(tmp_path, {NOTE: "a short synthetic note"})
-    references = _references(tmp_path, [("10000032", SENTENCE)])
-    tables = _pin(tmp_path, references)
+    references, tables = _pinned_references(tmp_path, [("10000032", SENTENCE)])
     _reference(references[0], [("10000032", "a different reference text")])
 
     code = run(_argv(corpus, references, tmp_path / "report.json", tables), {})
@@ -244,8 +244,7 @@ def test_audit_against_part_of_reference_is_refused(
 ) -> None:
     """Audit jen proti discharge reference z configu nepokryje, a proto neproběhne."""
     corpus = _corpus(tmp_path, {NOTE: "a short synthetic note"})
-    references = _references(tmp_path, [("10000032", SENTENCE)])
-    tables = _pin(tmp_path, references)
+    references, tables = _pinned_references(tmp_path, [("10000032", SENTENCE)])
 
     code = run(_argv(corpus, references[:1], tmp_path / "report.json", tables), {})
 
@@ -267,8 +266,7 @@ def test_corpus_outside_repository_is_refused(tmp_path: Path) -> None:
     root = tmp_path / "loose"
     (root / "en").mkdir(parents=True)
     (root / NOTE).write_text("a short synthetic note", encoding="utf-8")
-    references = _references(tmp_path, [("10000032", SENTENCE)])
-    tables = _pin(tmp_path, references)
+    references, tables = _pinned_references(tmp_path, [("10000032", SENTENCE)])
 
     code = run(_argv(root, references, tmp_path / "r.json", tables), {})
 
@@ -279,8 +277,7 @@ def test_report_inside_repository_is_refused(tmp_path: Path) -> None:
     """Report s pozicemi shod nesmí vzniknout uvnitř repozitáře."""
     corpus = _corpus(tmp_path, {NOTE: "a short synthetic note"})
     report = corpus / "r.json"
-    references = _references(tmp_path, [])
-    tables = _pin(tmp_path, references)
+    references, tables = _pinned_references(tmp_path, [])
 
     assert run(_argv(corpus, references, report, tables), {}) == ExitCode.REFUSED
 
@@ -288,8 +285,7 @@ def test_report_inside_repository_is_refused(tmp_path: Path) -> None:
 def test_malformed_commit_is_rejected(tmp_path: Path) -> None:
     """Commit nástroje musí být celý hash, zkratka ani jiný text záznam nepodepíše."""
     corpus = _corpus(tmp_path, {NOTE: "a short synthetic note"})
-    references = _references(tmp_path, [])
-    tables = _pin(tmp_path, references)
+    references, tables = _pinned_references(tmp_path, [])
     argv = [
         *_argv(corpus, references, tmp_path / "r.json", tables)[:-1],
         "abc123",
