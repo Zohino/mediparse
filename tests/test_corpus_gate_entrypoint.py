@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import csv
 import gzip
-import hashlib
 import json
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -15,6 +14,7 @@ from mediparse.domain.corpus_audit import REFERENCE_FILES, InvalidAuditRecordErr
 from mediparse.entrypoints import corpus_audit
 from mediparse.entrypoints.corpus_gate import run
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.mimic_reference import MimicReference
 from mediparse.infrastructure.synthetic_corpus import RECORD_NAME, CorpusDirectory
 
 if TYPE_CHECKING:
@@ -40,7 +40,7 @@ def _pin(tables: Path, references: Sequence[Path]) -> None:
     entries = [
         {
             "url": f"https://physionet.org/files/mimic-iv-note/2.2/note/{path.name}",
-            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            "sha256": MimicReference(path).sha256(),
         }
         for path in references
     ]
