@@ -23,6 +23,7 @@ if TYPE_CHECKING:
 
 NGRAM_SIZE: Final = 13
 NORMALIZATION: Final = "nfkc-lower-alnum-deid-v1"
+REFERENCE_FILES: Final = ("discharge.csv.gz", "radiology.csv.gz")
 
 _TOKEN: Final = re.compile(r"___|[^\W_]+")
 
@@ -166,7 +167,9 @@ def fingerprint(files: Iterable[tuple[str, bytes]]) -> str:
 
 
 def gate_violations(
-    corpus_sha256: str | None, record: AuditRecord | None
+    corpus_sha256: str | None,
+    record: AuditRecord | None,
+    pinned_sha256: Mapping[str, str],
 ) -> tuple[str, ...]:
     """Důvody, proč korpus nesmí do repozitáře; prázdný výsledek znamená, že smí.
 
@@ -184,7 +187,22 @@ def gate_violations(
         )
     if (record.ngram_size, record.normalization) != (NGRAM_SIZE, NORMALIZATION):
         violations.append("Záznam auditu vznikl jinou metodou, je nutný nový audit.")
+    reference = _reference_violation(record.reference, pinned_sha256)
+    if reference is not None:
+        violations.append(reference)
     return tuple(violations)
+
+
+def _reference_violation(
+    reference: Iterable[ReferenceFile], pinned_sha256: Mapping[str, str]
+) -> str | None:
+    unpinned = [name for name in REFERENCE_FILES if name not in pinned_sha256]
+    if unpinned:
+        return f"Konfigurace tabulek MIMIC nemá otisk referenčních souborů: {', '.join(unpinned)}."
+    audited = sorted((file.name, file.sha256) for file in reference)
+    if audited != sorted((name, pinned_sha256[name]) for name in REFERENCE_FILES):
+        return f"Audit neběžel přesně proti {' a '.join(REFERENCE_FILES)} s připnutými otisky, je nutný nový audit."
+    return None
 
 
 def _ngrams(tokens: Sequence[str]) -> Iterator[Ngram]:

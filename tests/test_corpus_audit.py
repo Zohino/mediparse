@@ -23,6 +23,14 @@ SENTENCE = (
 )
 NOTE = "en/90000001-DS-1.txt"
 CORPUS_SHA = "a" * 64
+DISCHARGE = {"name": "discharge.csv.gz", "sha256": "b" * 64, "rows": 10}
+RADIOLOGY = {"name": "radiology.csv.gz", "sha256": "e" * 64, "rows": 20}
+ADMISSIONS = {"name": "admissions.csv.gz", "sha256": "f" * 64, "rows": 30}
+PINNED = {
+    "discharge.csv.gz": "b" * 64,
+    "radiology.csv.gz": "e" * 64,
+    "admissions.csv.gz": "f" * 64,
+}
 
 
 def _index(text: str = f"Summary: {SENTENCE}.") -> NgramIndex:
@@ -36,7 +44,7 @@ def _record(**overrides: object) -> AuditRecord:
         "ngram_size": NGRAM_SIZE,
         "normalization": NORMALIZATION,
         "synthetic_ngrams": 3,
-        "reference": [{"name": "discharge.csv.gz", "sha256": "b" * 64, "rows": 10}],
+        "reference": [DISCHARGE, RADIOLOGY],
         "shared_ngrams": 0,
         "colliding_subjects": 0,
         "tool_commit": "c" * 40,
@@ -144,25 +152,50 @@ def test_record_requires_timezone() -> None:
 
 def test_gate_passes_when_there_is_no_corpus() -> None:
     """Dokud korpus neexistuje, brána nemá co kontrolovat."""
-    assert gate_violations(None, None) == ()
+    assert gate_violations(None, None, PINNED) == ()
 
 
 def test_gate_requires_record_for_existing_corpus() -> None:
     """Korpus bez záznamu auditu neprojde."""
-    assert gate_violations(CORPUS_SHA, None)
+    assert gate_violations(CORPUS_SHA, None, PINNED)
 
 
 def test_gate_rejects_corpus_changed_after_audit() -> None:
     """Změna korpusu po auditu změní otisk a brána ji zachytí."""
-    assert gate_violations("d" * 64, _record())
+    assert gate_violations("d" * 64, _record(), PINNED)
 
 
 def test_gate_rejects_record_from_other_method() -> None:
     """Záznam z jiné délky n-gramu nebo normalizace už korpus neatestuje."""
-    assert gate_violations(CORPUS_SHA, _record(ngram_size=NGRAM_SIZE - 1))
-    assert gate_violations(CORPUS_SHA, _record(normalization="other"))
+    assert gate_violations(CORPUS_SHA, _record(ngram_size=NGRAM_SIZE - 1), PINNED)
+    assert gate_violations(CORPUS_SHA, _record(normalization="other"), PINNED)
 
 
 def test_gate_accepts_matching_record() -> None:
-    """Shodný otisk i metoda bránou projdou."""
-    assert gate_violations(CORPUS_SHA, _record()) == ()
+    """Shodný otisk, metoda i reference projdou; ostatní tabulky configu brána nesrovnává."""
+    assert gate_violations(CORPUS_SHA, _record(), PINNED) == ()
+
+
+@pytest.mark.parametrize(
+    "reference",
+    [
+        pytest.param([DISCHARGE], id="bez-radiology"),
+        pytest.param([DISCHARGE, RADIOLOGY, ADMISSIONS], id="soubor-navic"),
+        pytest.param([DISCHARGE | {"sha256": "d" * 64}, RADIOLOGY], id="jiny-otisk"),
+        pytest.param([DISCHARGE, DISCHARGE, RADIOLOGY], id="discharge-dvakrat"),
+    ],
+)
+def test_gate_rejects_reference_other_than_pinned(
+    reference: list[dict[str, object]],
+) -> None:
+    """Audit, který neběžel přesně proti discharge a radiology s připnutými otisky, korpus neatestuje."""
+    assert gate_violations(CORPUS_SHA, _record(reference=reference), PINNED)
+
+
+def test_gate_rejects_config_without_reference_checksum() -> None:
+    """Bez připnutého otisku referenčního souboru nemá brána s čím srovnávat."""
+    pinned = {"discharge.csv.gz": "b" * 64}
+
+    assert gate_violations(CORPUS_SHA, _record(), pinned) == (
+        "Konfigurace tabulek MIMIC nemá otisk referenčních souborů: radiology.csv.gz.",
+    )

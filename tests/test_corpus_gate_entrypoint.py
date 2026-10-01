@@ -1,37 +1,66 @@
 """Brána syntetického korpusu: commitnout ani pushnout jde jen korpus, který prošel auditem."""
 
+from __future__ import annotations
+
 import csv
 import gzip
+import hashlib
+import json
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.domain.corpus_audit import InvalidAuditRecordError
+from mediparse.domain.corpus_audit import REFERENCE_FILES, InvalidAuditRecordError
 from mediparse.entrypoints import corpus_audit
 from mediparse.entrypoints.corpus_gate import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.synthetic_corpus import RECORD_NAME, CorpusDirectory
 
-REPOSITORY_CORPUS = Path(__file__).parents[1] / "resources" / "synthetic"
+if TYPE_CHECKING:
+    from collections.abc import Sequence
+
+REPOSITORY = Path(__file__).parents[1]
+REPOSITORY_CORPUS = REPOSITORY / "resources" / "synthetic"
+REPOSITORY_TABLES = REPOSITORY / "config" / "mimic_tables.json"
 NOTE = "en/90000001-DS-1.txt"
+TABLES = "mimic_tables.json"
 
 
-def _audited_corpus(tmp_path: Path) -> Path:
+def _reference(path: Path, subject_id: str) -> Path:
+    with gzip.open(path, mode="wt", encoding="utf-8", newline="") as stream:
+        csv.writer(stream).writerows([
+            ["note_id", "subject_id", "text"],
+            [f"{subject_id}-DS-1", subject_id, f"reference text of {path.name}"],
+        ])
+    return path
+
+
+def _pin(tables: Path, references: Sequence[Path]) -> None:
+    entries = [
+        {
+            "url": f"https://physionet.org/files/mimic-iv-note/2.2/note/{path.name}",
+            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        }
+        for path in references
+    ]
+    tables.write_text(json.dumps({"mimic_tables": entries}), encoding="utf-8")
+
+
+def _audited_corpus(tmp_path: Path, audited: Sequence[str] = REFERENCE_FILES) -> Path:
     root = tmp_path / "repo" / "resources" / "synthetic"
     (root / "en").mkdir(parents=True)
     (tmp_path / "repo" / ".git").mkdir()
     (root / NOTE).write_text("a short synthetic note", encoding="utf-8")
-    reference = tmp_path / "discharge.csv.gz"
-    with gzip.open(reference, mode="wt", encoding="utf-8", newline="") as stream:
-        csv.writer(stream).writerows([
-            ["note_id", "subject_id", "text"],
-            ["1-DS-1", "1", "reference text"],
-        ])
+    references = [
+        _reference(tmp_path / name, str(subject_id))
+        for subject_id, name in enumerate(REFERENCE_FILES, start=1)
+    ]
+    _pin(tmp_path / TABLES, references)
     argv = [
         "--corpus",
         str(root),
-        "--reference",
-        str(reference),
+        *(f"--reference={path}" for path in references if path.name in audited),
         "--report",
         str(tmp_path / "report.json"),
         "--commit",
@@ -41,13 +70,13 @@ def _audited_corpus(tmp_path: Path) -> Path:
     return root
 
 
-def _gate(root: Path) -> int:
-    return run(["--corpus", str(root)])
+def _gate(root: Path, tables: Path) -> int:
+    return run(["--corpus", str(root), "--tables", str(tables)])
 
 
 def test_gate_passes_without_corpus(tmp_path: Path) -> None:
     """Dokud korpus neexistuje, brána commit ani push neblokuje."""
-    assert _gate(tmp_path / "missing") == ExitCode.OK
+    assert _gate(tmp_path / "missing", REPOSITORY_TABLES) == ExitCode.OK
 
 
 def test_gate_rejects_unaudited_corpus(tmp_path: Path) -> None:
@@ -55,12 +84,12 @@ def test_gate_rejects_unaudited_corpus(tmp_path: Path) -> None:
     root = _audited_corpus(tmp_path)
     (root / RECORD_NAME).unlink()
 
-    assert _gate(root) == ExitCode.BLOCKED
+    assert _gate(root, tmp_path / TABLES) == ExitCode.BLOCKED
 
 
 def test_gate_passes_audited_corpus(tmp_path: Path) -> None:
     """Korpus beze změny od auditu projde."""
-    assert _gate(_audited_corpus(tmp_path)) == ExitCode.OK
+    assert _gate(_audited_corpus(tmp_path), tmp_path / TABLES) == ExitCode.OK
 
 
 def test_gate_rejects_corpus_changed_after_audit(tmp_path: Path) -> None:
@@ -68,7 +97,7 @@ def test_gate_rejects_corpus_changed_after_audit(tmp_path: Path) -> None:
     root = _audited_corpus(tmp_path)
     (root / NOTE).write_text("a regenerated synthetic note", encoding="utf-8")
 
-    assert _gate(root) == ExitCode.BLOCKED
+    assert _gate(root, tmp_path / TABLES) == ExitCode.BLOCKED
 
 
 def test_gate_rejects_added_note(tmp_path: Path) -> None:
@@ -76,7 +105,7 @@ def test_gate_rejects_added_note(tmp_path: Path) -> None:
     root = _audited_corpus(tmp_path)
     (root / "en" / "90000002-DS-1.txt").write_text("another note", encoding="utf-8")
 
-    assert _gate(root) == ExitCode.BLOCKED
+    assert _gate(root, tmp_path / TABLES) == ExitCode.BLOCKED
 
 
 def test_gate_rejects_invalid_record(tmp_path: Path) -> None:
@@ -84,7 +113,14 @@ def test_gate_rejects_invalid_record(tmp_path: Path) -> None:
     root = _audited_corpus(tmp_path)
     (root / RECORD_NAME).write_text("{}", encoding="utf-8")
 
-    assert _gate(root) == ExitCode.BLOCKED
+    assert _gate(root, tmp_path / TABLES) == ExitCode.BLOCKED
+
+
+def test_gate_rejects_audit_against_part_of_reference(tmp_path: Path) -> None:
+    """Čistý audit jen proti discharge korpus neatestuje, radiology je součástí reference."""
+    root = _audited_corpus(tmp_path, audited=("discharge.csv.gz",))
+
+    assert _gate(root, tmp_path / TABLES) == ExitCode.BLOCKED
 
 
 def test_invalid_record_surfaces_as_domain_error(tmp_path: Path) -> None:
@@ -96,5 +132,5 @@ def test_invalid_record_surfaces_as_domain_error(tmp_path: Path) -> None:
 
 
 def test_repository_corpus_passes_gate() -> None:
-    """Korpus v repu odpovídá svému auditu — neauditovaný korpus neprojde CI."""
-    assert _gate(REPOSITORY_CORPUS) == ExitCode.OK
+    """Korpus v repu odpovídá svému auditu i připnuté referenci — jinak neprojde CI."""
+    assert _gate(REPOSITORY_CORPUS, REPOSITORY_TABLES) == ExitCode.OK
