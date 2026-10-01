@@ -1,4 +1,4 @@
-"""Use case brány: korpus smí do repozitáře, jen když jeho otisk sedí se záznamem auditu."""
+"""Use case brány: korpus smí do repozitáře, jen když jeho otisk sedí se záznamem auditu a audit běžel proti připnuté referenci."""
 
 from __future__ import annotations
 
@@ -8,6 +8,8 @@ from typing import TYPE_CHECKING, Protocol
 from mediparse.domain.corpus_audit import InvalidAuditRecordError, gate_violations
 
 if TYPE_CHECKING:
+    from collections.abc import Mapping
+
     from mediparse.domain.corpus_audit import AuditRecord
 
 
@@ -38,7 +40,7 @@ class CorpusGate:
 
     corpus: AuditedCorpus
 
-    def run(self) -> tuple[str, ...]:
+    def run(self, pinned_sha256: Mapping[str, str]) -> tuple[str, ...]:
         """Důvody, proč korpus nesmí do repozitáře; prázdný výsledek znamená, že smí.
 
         Returns:
@@ -48,4 +50,4 @@ class CorpusGate:
             record = self.corpus.audit_record()
         except InvalidAuditRecordError:
             return ("Záznam auditu neodpovídá schématu.",)
-        return gate_violations(self.corpus.fingerprint(), record)
+        return gate_violations(self.corpus.fingerprint(), record, pinned_sha256)
