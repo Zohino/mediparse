@@ -120,7 +120,7 @@ groups = ["ci-job"]
 name = "brána syntetického korpusu"
 language = "system"
 entry = "uv run --frozen mediparse-corpus-gate"
-files = "^resources/synthetic/"
+files = "^(resources/synthetic/|config/mimic_tables\\.json$)"
 pass_filenames = false
 
 [[repos.hooks]]
