@@ -2,30 +2,27 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 import pytest
 
 from mediparse.domain.note_consistency import note_violations
-from mediparse.infrastructure.sampler_config import load_sampler_config
 
 if TYPE_CHECKING:
     from mediparse.domain.note_plan import NotePlan
+    from mediparse.domain.synthetic_plan import SamplerConfig
     from tests.conftest import PlannedNote
 
-CONFIG = load_sampler_config(
-    Path(__file__).parents[1] / "config" / "synthetic_plan.json"
-)
+
+def _violations(text: str, plan: NotePlan, config: SamplerConfig) -> tuple[str, ...]:
+    return note_violations(text, plan, config.structure, config.mentions)
 
 
-def _violations(text: str, plan: NotePlan) -> tuple[str, ...]:
-    return note_violations(text, plan, CONFIG.structure, CONFIG.mentions)
-
-
-def test_matching_note_passes(planned_note: PlannedNote) -> None:
+def test_matching_note_passes(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
     """Zpráva, která dodržuje plán, nemá žádné porušení."""
-    assert _violations(planned_note.text, planned_note.plan) == ()
+    assert _violations(planned_note.text, planned_note.plan, sampler_config) == ()
 
 
 @pytest.mark.parametrize(
@@ -82,19 +79,23 @@ def test_matching_note_passes(planned_note: PlannedNote) -> None:
     ],
 )
 def test_violation_is_reported(
-    planned_note: PlannedNote, old: str, new: str, rule: str
+    planned_note: PlannedNote,
+    sampler_config: SamplerConfig,
+    old: str,
+    new: str,
+    rule: str,
 ) -> None:
     """Každé porušení pravidel jedné zprávy se projeví důvodem, který ho jmenuje."""
     text = planned_note.text.replace(old, new)
     assert text != planned_note.text
 
-    violations = _violations(text, planned_note.plan)
+    violations = _violations(text, planned_note.plan, sampler_config)
 
     assert any(rule.lower() in reason.lower() for reason in violations), violations
 
 
 def test_diagnosis_section_keyword_outside_plan_is_reported(
-    planned_note: PlannedNote,
+    planned_note: PlannedNote, sampler_config: SamplerConfig
 ) -> None:
     """Klíčové slovo v Discharge Diagnosis, kam ho plán nedává, je porušení."""
     plan = planned_note.plan
@@ -103,15 +104,17 @@ def test_diagnosis_section_keyword_outside_plan_is_reported(
     )
     moved = plan.model_copy(update={"mentions": (mention,)})
 
-    violations = _violations(planned_note.text, moved)
+    violations = _violations(planned_note.text, moved, sampler_config)
 
     assert any("Discharge Diagnosis" in reason for reason in violations)
 
 
-def test_age_without_planned_marker_is_reported(planned_note: PlannedNote) -> None:
+def test_age_without_planned_marker_is_reported(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
     """Věk v textu, když ho plán nemá, je porušení."""
     plan = planned_note.plan.model_copy(update={"age_marker": False})
 
-    violations = _violations(planned_note.text, plan)
+    violations = _violations(planned_note.text, plan, sampler_config)
 
     assert any("věk" in reason.lower() for reason in violations)

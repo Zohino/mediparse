@@ -6,6 +6,7 @@ import csv
 import gzip
 import json
 from dataclasses import dataclass
+from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
 import pytest
@@ -15,12 +16,16 @@ from mediparse.domain.mentions import MentionStatus
 from mediparse.domain.note_plan import NotePlan, PlannedMention
 from mediparse.domain.note_structure import Sex
 from mediparse.infrastructure.mimic_reference import MimicReference
+from mediparse.infrastructure.sampler_config import load_sampler_config
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
-    from pathlib import Path
+
+    from mediparse.domain.synthetic_plan import SamplerConfig
 
 type Rows = Sequence[tuple[str, str]]
+
+REPOSITORY_CONFIG: Final = Path(__file__).parents[1] / "config" / "synthetic_plan.json"
 
 COMMIT: Final = "c" * 40
 HEADER: Final = (
@@ -222,3 +227,13 @@ def planned_note() -> PlannedNote:
         Plán a text pro kontroly shody.
     """
     return PlannedNote(_PLAN, _NOTE)
+
+
+@pytest.fixture(scope="session")
+def sampler_config() -> SamplerConfig:
+    """Config vzorkovače v repu: hlavičky sekcí a klíčová slova diagnóz.
+
+    Returns:
+        Config načtený jednou za běh testů.
+    """
+    return load_sampler_config(REPOSITORY_CONFIG)

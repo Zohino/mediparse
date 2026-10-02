@@ -61,18 +61,17 @@ class CorpusConsistency:
             Zprávy k přegenerování seřazené podle note_id; prázdný výsledek znamená shodu.
         """
         plans = {plan.note_id: plan for plan in self.plans.load()}
+        prefix = f"{LANGUAGE}/"
         texts = {
-            path.removeprefix(f"{LANGUAGE}/").removesuffix(_SUFFIX): text
+            path.removeprefix(prefix).removesuffix(_SUFFIX): text
             for path, text in self.corpus.notes().items()
-            if path.startswith(f"{LANGUAGE}/")
+            if path.startswith(prefix)
         }
-        results = (
-            NoteViolations(
-                note_id, _reasons(texts[note_id], plans.get(note_id), config)
-            )
+        return tuple(
+            NoteViolations(note_id, reasons)
             for note_id in sorted(texts)
+            if (reasons := _reasons(texts[note_id], plans.get(note_id), config))
         )
-        return tuple(result for result in results if result.reasons)
 
 
 def _reasons(

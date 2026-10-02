@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
     from mediparse.domain.labels import Diagnosis
     from mediparse.domain.mentions import MentionModel
-    from mediparse.domain.note_plan import NotePlan, PlannedMention
+    from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.note_structure import StructureModel
 
 DEID: Final = "___"
@@ -28,15 +28,13 @@ _PREAMBLE_MARKED: Final = (
 _MARKED_SECTIONS: Final = ("social_history", "followup_instructions")
 _MARKED_SUBHEADING: Final = "Facility"
 _SEX_CODES: Final = {Sex.FEMALE: "F", Sex.MALE: "M"}
-_AGE_MARKER: Final = re.compile(r"___[ -]?(?:years?[ -]old|y/?o)\b", re.IGNORECASE)
-_NUMERIC_AGE: Final = re.compile(
-    r"\b\d{1,3}[ -]?(?:years?[ -]old|y/?o)\b", re.IGNORECASE
-)
+_AGE_SUFFIX: Final = r"[ -]?(?:years?[ -]old|y/?o)\b"
+_AGE_MARKER: Final = re.compile(rf"___{_AGE_SUFFIX}", re.IGNORECASE)
+_NUMERIC_AGE: Final = re.compile(rf"\b\d{{1,3}}{_AGE_SUFFIX}", re.IGNORECASE)
 _FOREIGN_MARK: Final = re.compile(r"\[\*\*|\bXXX\b|(?<!_)(?:_{1,2}|_{4,})(?!_)")
-_SEX_VALUE: Final = re.compile(r"\bSex:[ \t]*(\S*)")
-_SERVICE_VALUE: Final = re.compile(r"\bService:[ \t]*(\S*)")
 
 type Sections = tuple[tuple[str, str], ...]
+type Patterns = Mapping[Diagnosis, re.Pattern[str]]
 
 
 def note_violations(
@@ -50,12 +48,19 @@ def note_violations(
     headers = {section.key: section.header for section in structure.sections}
     preamble, sections = _segment(text, headers)
     bodies = dict(sections)
+    patterns = {
+        diagnosis: _keywords(parameters.keywords)
+        for diagnosis, parameters in mentions.diagnoses.items()
+    }
+    section = mentions.diagnosis_section
     return (
         *_section_violations(sections, plan, headers),
         *_preamble_violations(preamble, plan),
         *_mark_violations(text, bodies, plan, headers),
-        *_mention_violations(text, bodies, plan, mentions),
-        *_diagnosis_section_violations(bodies, plan, mentions),
+        *_mention_violations(text, bodies, plan, patterns),
+        *_diagnosis_section_violations(
+            bodies.get(section), plan, patterns, section, headers[section]
+        ),
     )
 
 
@@ -88,9 +93,9 @@ def _preamble_violations(preamble: str, plan: NotePlan) -> list[str]:
         for field in _PREAMBLE_MARKED
         if re.search(rf"\b{re.escape(field)}:[ \t]*{DEID}", preamble) is None
     ]
-    if _value(_SEX_VALUE, preamble) != _SEX_CODES[plan.sex]:
+    if _field("Sex", preamble) != _SEX_CODES[plan.sex]:
         violations.append(f"Pole Sex neodpovídá plánu ({_SEX_CODES[plan.sex]}).")
-    service = _value(_SERVICE_VALUE, preamble)
+    service = _field("Service", preamble)
     if not service or service == DEID or service.endswith(":"):
         violations.append("Pole Service nemá hodnotu.")
     return violations
@@ -108,7 +113,11 @@ def _mark_violations(
     if _MARKED_SUBHEADING in plan.subheadings and facility is None:
         violations.append(f"Podnadpis {_MARKED_SUBHEADING} nemá hodnotu {DEID}.")
     if (_AGE_MARKER.search(text) is not None) != plan.age_marker:
-        violations.append(_age_reason(planned=plan.age_marker))
+        violations.append(
+            "Věková značka chybí, ačkoli ji plán má."
+            if plan.age_marker
+            else "Text uvádí věk, ačkoli plán věkovou značku nemá."
+        )
     if _NUMERIC_AGE.search(text) is not None:
         violations.append("Text uvádí číselný věk.")
     if _FOREIGN_MARK.search(text) is not None:
@@ -119,57 +128,36 @@ def _mark_violations(
 
 
 def _mention_violations(
-    text: str, bodies: Mapping[str, str], plan: NotePlan, mentions: MentionModel
+    text: str, bodies: Mapping[str, str], plan: NotePlan, patterns: Patterns
 ) -> list[str]:
-    planned = {mention.diagnosis: mention for mention in plan.mentions}
-    return [
-        reason
-        for diagnosis, parameters in mentions.diagnoses.items()
-        if (
-            reason := _mention_reason(
-                diagnosis,
-                planned.get(diagnosis),
-                _keywords(parameters.keywords),
-                text,
-                bodies,
-            )
-        )
-        is not None
+    planned = {mention.diagnosis for mention in plan.mentions}
+    unplanned = [
+        f"Diagnóza {diagnosis} nemá v plánu zmínku, ale text obsahuje její klíčové slovo."
+        for diagnosis, pattern in patterns.items()
+        if diagnosis not in planned and pattern.search(text)
     ]
-
-
-def _mention_reason(
-    diagnosis: Diagnosis,
-    mention: PlannedMention | None,
-    keywords: re.Pattern[str],
-    text: str,
-    bodies: Mapping[str, str],
-) -> str | None:
-    if mention is None:
-        if keywords.search(text) is None:
-            return None
-        return f"Diagnóza {diagnosis} nemá v plánu zmínku, ale text obsahuje její klíčové slovo."
-    if any(keywords.search(bodies.get(key, "")) for key in mention.sections):
-        return None
-    return (
-        f"Plánovaná zmínka {diagnosis} chybí v sekcích {', '.join(mention.sections)}."
-    )
+    missing = [
+        f"Plánovaná zmínka {mention.diagnosis} chybí v sekcích {', '.join(mention.sections)}."
+        for mention in plan.mentions
+        if not any(
+            patterns[mention.diagnosis].search(bodies.get(key, ""))
+            for key in mention.sections
+        )
+    ]
+    return unplanned + missing
 
 
 def _diagnosis_section_violations(
-    bodies: Mapping[str, str], plan: NotePlan, mentions: MentionModel
+    body: str | None, plan: NotePlan, patterns: Patterns, section: str, header: str
 ) -> list[str]:
-    section = mentions.diagnosis_section
-    if section not in plan.sections:
+    if body is None or section not in plan.sections:
         return []
-    body = bodies.get(section, "")
     planned = {m.diagnosis for m in plan.mentions if section in m.sections}
     return [
-        f"Discharge Diagnosis {'obsahuje' if diagnosis not in planned else 'neobsahuje'} "
+        f"{header} {'neobsahuje' if diagnosis in planned else 'obsahuje'} "
         f"klíčové slovo {diagnosis} v rozporu s plánem."
-        for diagnosis, parameters in mentions.diagnoses.items()
-        if (_keywords(parameters.keywords).search(body) is not None)
-        != (diagnosis in planned)
+        for diagnosis, pattern in patterns.items()
+        if (pattern.search(body) is not None) != (diagnosis in planned)
     ]
 
 
@@ -178,12 +166,6 @@ def _keywords(keywords: Iterable[str]) -> re.Pattern[str]:
     return re.compile(rf"\b(?:{alternatives})\b", re.IGNORECASE)
 
 
-def _value(pattern: re.Pattern[str], text: str) -> str | None:
-    match = pattern.search(text)
+def _field(name: str, preamble: str) -> str | None:
+    match = re.search(rf"\b{name}:[ \t]*(\S*)", preamble)
     return match[1] if match else None
-
-
-def _age_reason(*, planned: bool) -> str:
-    if planned:
-        return "Věková značka chybí, ačkoli ji plán má."
-    return "Text uvádí věk, ačkoli plán věkovou značku nemá."
