@@ -105,6 +105,7 @@ ignore_imports = [
     "mediparse.domain.** -> math",
     "mediparse.domain.** -> pydantic",
     "mediparse.domain.** -> re",
+    "mediparse.domain.** -> string",
     "mediparse.domain.** -> unicodedata",
     "mediparse.entrypoints.** -> argparse",
     "mediparse.entrypoints.** -> datetime",

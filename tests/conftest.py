@@ -17,6 +17,10 @@ from mediparse.domain.note_plan import NotePlan, PlannedMention
 from mediparse.domain.note_structure import Sex
 from mediparse.infrastructure.mimic_reference import MimicReference
 from mediparse.infrastructure.sampler_config import load_sampler_config
+from mediparse.infrastructure.verbalization_template import (
+    VERBALIZATION_TEMPLATE_PATH,
+    load_verbalization_template,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -237,3 +241,15 @@ def sampler_config() -> SamplerConfig:
         Config načtený jednou za běh testů.
     """
     return load_sampler_config(REPOSITORY_CONFIG)
+
+
+@pytest.fixture(scope="session")
+def verbalization_template() -> str:
+    """Šablona instrukcí verbalizace v repu.
+
+    Returns:
+        Text šablony načtený jednou za běh testů.
+    """
+    return load_verbalization_template(
+        REPOSITORY_CONFIG.parents[1] / VERBALIZATION_TEMPLATE_PATH
+    )
