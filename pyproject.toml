@@ -18,6 +18,7 @@ mediparse-corpus-audit = "mediparse.entrypoints.corpus_audit:main"
 mediparse-corpus-check = "mediparse.entrypoints.corpus_consistency:main"
 mediparse-corpus-gate = "mediparse.entrypoints.corpus_gate:main"
 mediparse-sample-plans = "mediparse.entrypoints.synthetic_plans:main"
+mediparse-verbalization-prompt = "mediparse.entrypoints.verbalization_prompt:main"
 
 [project.urls]
 Repository = "https://github.com/Zohino/mediparse"
