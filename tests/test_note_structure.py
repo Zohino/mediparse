@@ -11,6 +11,8 @@ from pydantic import ValidationError
 
 from mediparse.domain.note_structure import (
     NarrativeModel,
+    PreambleField,
+    PreambleValue,
     SectionModel,
     Sex,
     StructureModel,
@@ -39,6 +41,11 @@ PAIR = (
     Subheading(header="PULM", probability=0.16),
 )
 SINGLE = (Subheading(header="Vitals", probability=0.29),)
+PREAMBLE = (
+    PreambleField(name="Name", value=PreambleValue.DEID),
+    PreambleField(name="Sex", value=PreambleValue.SEX),
+    PreambleField(name="Service", value=PreambleValue.TEXT),
+)
 NARRATIVE = NarrativeModel(
     median_words=MEDIAN_WORDS,
     sigma=SIGMA,
@@ -48,8 +55,9 @@ NARRATIVE = NarrativeModel(
 )
 
 
-def _model() -> StructureModel:
+def _model(preamble: tuple[PreambleField, ...] = PREAMBLE) -> StructureModel:
     return StructureModel(
+        preamble=preamble,
         sections=(
             SectionModel(key="allergies", header="Allergies", probability=1.0),
             SectionModel(
@@ -190,6 +198,7 @@ def test_duplicate_section_keys_are_rejected() -> None:
 
     with pytest.raises(ValidationError, match="opakují"):
         StructureModel(
+            preamble=PREAMBLE,
             sections=(section, section),
             narrative=NARRATIVE,
             female_probability=0.5,
@@ -203,6 +212,7 @@ def test_shares_not_summing_to_one_are_rejected() -> None:
 
     with pytest.raises(ValidationError, match="dávat 1"):
         StructureModel(
+            preamble=PREAMBLE,
             sections=(section,),
             narrative=NARRATIVE,
             female_probability=0.5,
@@ -220,3 +230,18 @@ def test_median_outside_bounds_is_rejected() -> None:
             max_words=MAX_WORDS,
             deid_per_word=DEID_PER_WORD,
         )
+
+
+@pytest.mark.parametrize(
+    "preamble",
+    [
+        pytest.param(PREAMBLE[:1] + PREAMBLE[2:], id="bez-sex"),
+        pytest.param((*PREAMBLE, PREAMBLE[1]), id="sex-dvakrat"),
+    ],
+)
+def test_preamble_has_exactly_one_sex_field(
+    preamble: tuple[PreambleField, ...],
+) -> None:
+    """Pohlaví z plánu nese v preambuli právě jedno pole."""
+    with pytest.raises(ValidationError):
+        _model(preamble)
