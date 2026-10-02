@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from pathlib import Path
+from typing import Final
 
 from mediparse.domain.synthetic_plan import SamplerConfig
 
-if TYPE_CHECKING:
-    from pathlib import Path
+SAMPLER_CONFIG_PATH: Final = Path("config/synthetic_plan.json")
 
 
 def load_sampler_config(path: Path) -> SamplerConfig:
