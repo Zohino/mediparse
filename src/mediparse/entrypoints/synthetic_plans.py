@@ -11,17 +11,18 @@ import argparse
 import sys
 from pathlib import Path
 from random import Random
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING
 
 from mediparse.application.plan_sampling import PlanSampling
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.plans_file import PLANS_PATH, PlansFile
-from mediparse.infrastructure.sampler_config import load_sampler_config
+from mediparse.infrastructure.sampler_config import (
+    SAMPLER_CONFIG_PATH,
+    load_sampler_config,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
-
-CONFIG_PATH: Final = Path("config/synthetic_plan.json")
 
 
 def main() -> ExitCode:
@@ -52,7 +53,10 @@ def _parser() -> argparse.ArgumentParser:
         description="Vzorkovač plánů syntetických propouštěcích zpráv.",
     )
     parser.add_argument(
-        "--config", type=Path, default=CONFIG_PATH, help="konfigurace vzorkovače"
+        "--config",
+        type=Path,
+        default=SAMPLER_CONFIG_PATH,
+        help="konfigurace vzorkovače",
     )
     parser.add_argument(
         "--output", type=Path, default=PLANS_PATH, help="soubor plánů JSON Lines"
