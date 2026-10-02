@@ -5,6 +5,7 @@
 !config/synthetic_plan.json
 !config/mimic_tables.json
 !resources/synthetic/plans.jsonl
+!resources/synthetic/labels.csv
 !pyproject.toml
 !uv.lock
 !README.md
