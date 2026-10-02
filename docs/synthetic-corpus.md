@@ -75,10 +75,11 @@ ze šablony instrukcí v repu a z plánu zprávy; model dostane přesně tento t
 Model rozhoduje jen o povrchové podobě textu, tedy o formulacích a klinických
 detailech konzistentních s plánem. O struktuře ani labelech nerozhoduje.
 
-**Preambule.** Osm polí, po dvou na řádku: Name, Unit No, Admission Date,
-Discharge Date, Date of Birth, Sex, Service, Attending. Hodnotou je `___`, kromě
-Service (volí verbalizace v souladu s plánem) a Sex (`F` nebo `M` podle pohlaví
-z plánu). Pořadí a párování polí se liší od šablony MIMIC. Počet nad MIMIC-IV-Note
+**Preambule.** Pole preambule a druh jejich hodnoty deklaruje `structure.preamble`:
+`deid` je `___`, `sex` je `F` nebo `M` podle pohlaví z plánu a `text` volí
+verbalizace v souladu s plánem (Service). Dnes osm polí: Name, Unit No, Admission
+Date, Discharge Date, Date of Birth, Sex, Service, Attending. Pole stojí po dvou na
+řádku; pořadí a párování určuje šablona zadání a liší se od šablony MIMIC. Počet nad MIMIC-IV-Note
 (331 793 zpráv) potvrdil, že tato pole jsou v reálných zprávách téměř vždy
 a stojí na řádku za jiným polem; Sex nese `M`/`F` v 99,99 % zpráv.
 
@@ -91,9 +92,9 @@ hlavičkou.
 
 **De-identifikační značky.** Jediná forma značky je `___`.
 
-- Strukturní značky podle plánu: šest hodnot preambule, těla sekcí Social History
-  a Followup Instructions, hodnota podnadpisu Facility a věková značka, je-li
-  v plánu. Věková značka je `___` hned před `year old` nebo `y/o`
+- Strukturní značky podle plánu: pole preambule s hodnotou `deid`, těla sekcí
+  s `deid_body` (Social History, Followup Instructions), hodnoty podnadpisů
+  s `deid_value` (Facility) a věková značka, je-li v plánu. Věková značka je `___` hned před `year old` nebo `y/o`
   (`___ year old`, `___-year-old`, `___ y/o`); bez věkové značky v plánu text věk
   neuvádí vůbec.
 - Narativní značky: přesně `narrative_deid` z plánu, na místech, kde by text nesl
