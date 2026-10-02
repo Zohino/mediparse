@@ -26,6 +26,8 @@ if TYPE_CHECKING:
 
 _SHARE_TOLERANCE: Final = 1e-9
 
+DEID: Final = "___"
+
 
 class Sex(StrEnum):
     """Pohlaví pacienta, které se ve zprávě projeví polem Sex a zájmeny."""
@@ -33,14 +35,41 @@ class Sex(StrEnum):
     FEMALE = "female"
     MALE = "male"
 
+    @property
+    def code(self) -> str:
+        """Hodnota pole Sex v preambuli.
+
+        Returns:
+            ``F`` nebo ``M``.
+        """
+        return "F" if self is Sex.FEMALE else "M"
+
+
+class PreambleValue(StrEnum):
+    """Hodnota pole preambule: de-identifikační značka, pohlaví z plánu, nebo text verbalizace."""
+
+    DEID = "deid"
+    SEX = "sex"
+    TEXT = "text"
+
+
+class PreambleField(BaseModel):
+    """Pole preambule a druh jeho hodnoty."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+
+    name: str
+    value: PreambleValue
+
 
 class Subheading(BaseModel):
-    """Podnadpis uvnitř sekce a pravděpodobnost jeho výskytu."""
+    """Podnadpis uvnitř sekce, pravděpodobnost jeho výskytu a zda je jeho hodnotou značka."""
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     header: str
     probability: Probability
+    deid_value: bool = False
 
 
 class SectionModel(BaseModel):
@@ -55,6 +84,7 @@ class SectionModel(BaseModel):
     header: str
     probability: Probability
     narrative_share: Probability = 0.0
+    deid_body: bool = False
     subheadings: tuple[Annotated[tuple[Subheading, ...], Field(min_length=1)], ...] = ()
 
     @model_validator(mode="after")
@@ -85,14 +115,22 @@ class NarrativeModel(BaseModel):
 
 
 class StructureModel(BaseModel):
-    """Sekce v pořadí, v němž se ve zprávě vyskytují, a atributy pacienta a zprávy."""
+    """Preambule, sekce v pořadí, v němž se ve zprávě vyskytují, a atributy pacienta a zprávy."""
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
+    preamble: Annotated[tuple[PreambleField, ...], Field(min_length=1)]
     sections: Annotated[tuple[SectionModel, ...], Field(min_length=1)]
     narrative: NarrativeModel
     female_probability: Probability
     age_marker_probability: Probability
+
+    @model_validator(mode="after")
+    def _preamble_carries_sex_once(self) -> Self:
+        if sum(field.value is PreambleValue.SEX for field in self.preamble) != 1:
+            msg = "Preambule musí mít právě jedno pole s pohlavím."
+            raise ValueError(msg)
+        return self
 
     @model_validator(mode="after")
     def _keys_are_unique(self) -> Self:

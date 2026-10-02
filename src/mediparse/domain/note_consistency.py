@@ -5,29 +5,16 @@ from __future__ import annotations
 import re
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.note_structure import Sex
+from mediparse.domain.note_structure import DEID, PreambleValue
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable, Mapping
+    from collections.abc import Iterable, Mapping, Sequence
 
     from mediparse.domain.labels import Diagnosis
     from mediparse.domain.mentions import MentionModel
     from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.note_structure import StructureModel
+    from mediparse.domain.note_structure import PreambleField, StructureModel
 
-DEID: Final = "___"
-
-_PREAMBLE_MARKED: Final = (
-    "Name",
-    "Unit No",
-    "Admission Date",
-    "Discharge Date",
-    "Date of Birth",
-    "Attending",
-)
-_MARKED_SECTIONS: Final = ("social_history", "followup_instructions")
-_MARKED_SUBHEADING: Final = "Facility"
-_SEX_CODES: Final = {Sex.FEMALE: "F", Sex.MALE: "M"}
 _AGE_SUFFIX: Final = r"[ -]?(?:years?[ -]old|y/?o)\b"
 _AGE_MARKER: Final = re.compile(rf"___{_AGE_SUFFIX}", re.IGNORECASE)
 _NUMERIC_AGE: Final = re.compile(rf"\b\d{{1,3}}{_AGE_SUFFIX}", re.IGNORECASE)
@@ -55,8 +42,9 @@ def note_violations(
     section = mentions.diagnosis_section
     return (
         *_section_violations(sections, plan, headers),
-        *_preamble_violations(preamble, plan),
-        *_mark_violations(text, bodies, plan, headers),
+        *_preamble_violations(preamble, plan, structure.preamble),
+        *_marked_place_violations(bodies, plan, structure),
+        *_form_violations(text, plan),
         *_mention_violations(text, bodies, plan, patterns),
         *_diagnosis_section_violations(
             bodies.get(section), plan, patterns, section, headers[section]
@@ -87,31 +75,65 @@ def _section_violations(
     return [f"Hlavičky sekcí neodpovídají plánu: plán {expected}; text {actual}."]
 
 
-def _preamble_violations(preamble: str, plan: NotePlan) -> list[str]:
-    violations = [
-        f"Pole preambule {field} nemá hodnotu {DEID}."
-        for field in _PREAMBLE_MARKED
-        if re.search(rf"\b{re.escape(field)}:[ \t]*{DEID}", preamble) is None
-    ]
-    if _field("Sex", preamble) != _SEX_CODES[plan.sex]:
-        violations.append(f"Pole Sex neodpovídá plánu ({_SEX_CODES[plan.sex]}).")
-    service = _field("Service", preamble)
-    if not service or service == DEID or service.endswith(":"):
-        violations.append("Pole Service nemá hodnotu.")
+def _preamble_violations(
+    preamble: str, plan: NotePlan, fields: Sequence[PreambleField]
+) -> list[str]:
+    values = _preamble_values(preamble, fields)
+    violations: list[str] = []
+    for field in fields:
+        value = values.get(field.name)
+        if field.value is PreambleValue.DEID and value != DEID:
+            violations.append(f"Pole preambule {field.name} nemá hodnotu {DEID}.")
+        if field.value is PreambleValue.SEX and value != plan.sex.code:
+            violations.append(f"Pole {field.name} neodpovídá plánu ({plan.sex.code}).")
+        if field.value is PreambleValue.TEXT and value in {None, "", DEID}:
+            violations.append(f"Pole {field.name} nemá hodnotu.")
     return violations
 
 
-def _mark_violations(
-    text: str, bodies: Mapping[str, str], plan: NotePlan, headers: Mapping[str, str]
+def _preamble_values(preamble: str, fields: Sequence[PreambleField]) -> dict[str, str]:
+    names = "|".join(re.escape(field.name) for field in fields)
+    pattern = rf"\b(?P<name>{names}):[ \t]*(?P<value>.*?)[ \t]*(?=\b(?:{names}):|$)"
+    return {
+        match["name"]: match["value"]
+        for match in re.finditer(pattern, preamble, re.MULTILINE)
+    }
+
+
+def _marked_place_violations(
+    bodies: Mapping[str, str], plan: NotePlan, structure: StructureModel
 ) -> list[str]:
-    violations = [
-        f"Tělo sekce {headers[key]} není {DEID}."
-        for key in _MARKED_SECTIONS
-        if key in plan.sections and bodies.get(key, "").strip() != DEID
+    body_reasons = [
+        f"Tělo sekce {section.header} není {DEID}."
+        for section in structure.sections
+        if section.deid_body
+        and section.key in plan.sections
+        and bodies.get(section.key, "").strip() != DEID
     ]
-    facility = re.search(rf"^{_MARKED_SUBHEADING}:\s*{DEID}", text, re.MULTILINE)
-    if _MARKED_SUBHEADING in plan.subheadings and facility is None:
-        violations.append(f"Podnadpis {_MARKED_SUBHEADING} nemá hodnotu {DEID}.")
+    subheading_reasons = [
+        f"Podnadpis {header} nemá hodnotu {DEID}."
+        for key, header in _deid_subheadings(structure)
+        if header in plan.subheadings
+        and re.search(
+            rf"^{re.escape(header)}:\s*{DEID}", bodies.get(key, ""), re.MULTILINE
+        )
+        is None
+    ]
+    return body_reasons + subheading_reasons
+
+
+def _deid_subheadings(structure: StructureModel) -> list[tuple[str, str]]:
+    return [
+        (section.key, subheading.header)
+        for section in structure.sections
+        for group in section.subheadings
+        for subheading in group
+        if subheading.deid_value
+    ]
+
+
+def _form_violations(text: str, plan: NotePlan) -> list[str]:
+    violations: list[str] = []
     if (_AGE_MARKER.search(text) is not None) != plan.age_marker:
         violations.append(
             "Věková značka chybí, ačkoli ji plán má."
@@ -164,8 +186,3 @@ def _diagnosis_section_violations(
 def _keywords(keywords: Iterable[str]) -> re.Pattern[str]:
     alternatives = "|".join(map(re.escape, sorted(keywords, key=len, reverse=True)))
     return re.compile(rf"\b(?:{alternatives})\b", re.IGNORECASE)
-
-
-def _field(name: str, preamble: str) -> str | None:
-    match = re.search(rf"\b{name}:[ \t]*(\S*)", preamble)
-    return match[1] if match else None
