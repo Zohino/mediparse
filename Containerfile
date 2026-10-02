@@ -27,7 +27,7 @@ WORKDIR /app
 
 COPY --from=builder /app/.venv /app/.venv
 COPY pyproject.toml ./
-COPY config/matrix.json config/synthetic_plan.json config/mimic_tables.json config/
+COPY config/matrix.json config/synthetic_plan.json config/mimic_tables.json config/verbalization_template.md config/
 COPY resources/synthetic/plans.jsonl resources/synthetic/labels.csv resources/synthetic/
 COPY tests/ tests/
 
