@@ -15,7 +15,11 @@ from typing import TYPE_CHECKING
 
 from mediparse.application.plan_sampling import PlanSampling
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.plans_file import PLANS_PATH, PlansFile
+from mediparse.infrastructure.plans_file import (
+    LABELS_PATH,
+    PLANS_PATH,
+    SyntheticPlanFiles,
+)
 from mediparse.infrastructure.sampler_config import (
     SAMPLER_CONFIG_PATH,
     load_sampler_config,
@@ -41,9 +45,12 @@ def run(argv: Sequence[str]) -> ExitCode:
         OK po zapsání plánů.
     """
     args = _parser().parse_args(argv)
-    sampling = PlanSampling(store=PlansFile(args.output), random_source=Random)
+    store = SyntheticPlanFiles(args.output, args.labels)
+    sampling = PlanSampling(store=store, random_source=Random)
     count = sampling.run(load_sampler_config(args.config))
-    sys.stdout.write(f"Zapsáno {count} plánů do {args.output}.\n")
+    sys.stdout.write(
+        f"Zapsáno {count} plánů do {args.output} a labelů do {args.labels}.\n"
+    )
     return ExitCode.OK
 
 
@@ -60,5 +67,8 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--output", type=Path, default=PLANS_PATH, help="soubor plánů JSON Lines"
+    )
+    parser.add_argument(
+        "--labels", type=Path, default=LABELS_PATH, help="soubor labelů CSV"
     )
     return parser
