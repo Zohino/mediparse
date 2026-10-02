@@ -5,13 +5,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
+from mediparse.domain.note_plan import NotePlan
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
     from pathlib import Path
-
-    from mediparse.domain.note_plan import NotePlan
 
 PLANS_PATH: Final = CORPUS_ROOT / "plans.jsonl"
 
@@ -27,3 +26,12 @@ class PlansFile:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         content = "".join(f"{plan.model_dump_json()}\n" for plan in plans)
         self.path.write_bytes(content.encode("utf-8"))
+
+    def load(self) -> tuple[NotePlan, ...]:
+        """Načte plány v pořadí souboru; neplatný řádek vyhodí ValidationError.
+
+        Returns:
+            Plány zpráv.
+        """
+        lines = self.path.read_text(encoding="utf-8").splitlines()
+        return tuple(NotePlan.model_validate_json(line) for line in lines)
