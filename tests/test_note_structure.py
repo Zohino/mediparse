@@ -34,8 +34,6 @@ SIGMA = 0.387
 MIN_WORDS = 75
 MAX_WORDS = 510
 DEID_PER_WORD = 0.0347
-MEDIAN_TOLERANCE = 0.1
-SIGMA_TOLERANCE = 0.1
 PAIR = (
     Subheading(header="Lungs", probability=0.38),
     Subheading(header="PULM", probability=0.16),
@@ -51,6 +49,9 @@ NARRATIVE = NarrativeModel(
     min_words=MIN_WORDS,
     max_words=MAX_WORDS,
     deid_per_word=DEID_PER_WORD,
+    median_tolerance=0.1,
+    sigma_tolerance=0.1,
+    deid_tolerance=0.15,
 )
 
 
@@ -178,8 +179,10 @@ def test_length_distribution_matches_notes_synthesis() -> None:
     structures = sample_structure(_notes(LARGE), _model(), Random(SEED))
     lengths = [structure.narrative_words for structure in structures]
 
-    assert abs(median(lengths) / MEDIAN_WORDS - 1) <= MEDIAN_TOLERANCE
-    assert abs(stdev(log(words) for words in lengths) - SIGMA) <= SIGMA_TOLERANCE
+    assert abs(median(lengths) / MEDIAN_WORDS - 1) <= NARRATIVE.median_tolerance
+    assert (
+        abs(stdev(log(words) for words in lengths) - SIGMA) <= NARRATIVE.sigma_tolerance
+    )
 
 
 def test_variants_over_one_are_rejected() -> None:
@@ -230,6 +233,9 @@ def test_median_outside_bounds_is_rejected() -> None:
             min_words=MEDIAN_WORDS,
             max_words=MAX_WORDS,
             deid_per_word=DEID_PER_WORD,
+            median_tolerance=0.1,
+            sigma_tolerance=0.1,
+            deid_tolerance=0.15,
         )
 
 

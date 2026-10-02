@@ -96,7 +96,11 @@ class SectionModel(BaseModel):
 
 
 class NarrativeModel(BaseModel):
-    """Délka narativu ve slovech: oříznuté log-normální rozdělení a hustota narativních značek."""
+    """Délka narativu ve slovech, hustota narativních značek a tolerance korpusu.
+
+    Délka má oříznuté log-normální rozdělení. Tolerance mediánu a hustoty jsou
+    relativní, tolerance rozptylu logaritmu délky absolutní.
+    """
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
@@ -105,6 +109,9 @@ class NarrativeModel(BaseModel):
     min_words: PositiveInt
     max_words: PositiveInt
     deid_per_word: Probability
+    median_tolerance: PositiveFloat
+    sigma_tolerance: PositiveFloat
+    deid_tolerance: PositiveFloat
 
     @model_validator(mode="after")
     def _median_lies_inside_bounds(self) -> Self:
