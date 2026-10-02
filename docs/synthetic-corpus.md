@@ -83,14 +83,19 @@ z plánu). Pořadí a párování polí se liší od šablony MIMIC. Počet nad 
 a stojí na řádku za jiným polem; Sex nese `M`/`F` v 99,99 % zpráv.
 
 **Sekce a podnadpisy.** Kanonické hlavičky sekcí (`structure.sections[].header`)
-právě v pořadí a výběru podle plánu, žádné jiné kanonické hlavičky. Podnadpisy jen
-ty z plánu, uvnitř sekce, ke které patří.
+právě v pořadí a výběru podle plánu, žádné jiné kanonické hlavičky. Hlavička stojí
+na začátku řádku a končí dvojtečkou (`Brief Hospital Course:`), jako v MIMIC;
+tělo sekce sahá do další hlavičky. Podnadpisy jen ty z plánu, uvnitř sekce, ke které
+patří, ve stejném tvaru (`Facility:` na začátku řádku). Preambule stojí před první
+hlavičkou.
 
 **De-identifikační značky.** Jediná forma značky je `___`.
 
 - Strukturní značky podle plánu: šest hodnot preambule, těla sekcí Social History
   a Followup Instructions, hodnota podnadpisu Facility a věková značka, je-li
-  v plánu.
+  v plánu. Věková značka je `___` hned před `year old` nebo `y/o`
+  (`___ year old`, `___-year-old`, `___ y/o`); bez věkové značky v plánu text věk
+  neuvádí vůbec.
 - Narativní značky: přesně `narrative_deid` z plánu, na místech, kde by text nesl
   chráněný údaj (jména, data, místa, instituce, telefonní čísla).
 - Text nikdy neobsahuje číselný věk ani čitelné jméno, datum či místo.
@@ -122,8 +127,10 @@ Kontroly jedné zprávy (výstupem jsou `note_id` zpráv k přegenerování):
 
 1. Hlavičky sekcí odpovídají plánu včetně pořadí a jiné kanonické hlavičky se
    nevyskytují.
-2. Strukturní značky stojí na všech místech, která určuje plán; text neobsahuje
-   číselný věk ani jinou formu značky než `___`.
+2. Strukturní značky stojí na všech místech, která určuje plán, a věková značka je
+   v textu právě tehdy, když ji plán má; text neobsahuje číselný věk ani jinou
+   formu značky než `___` (`[**`, `XXX`, podtržítka jiné délky). Pole Sex
+   v preambuli odpovídá pohlaví z plánu a Service má hodnotu.
 3. Pro diagnózu bez zmínky se v textu nevyskytuje žádné její klíčové slovo; pro
    diagnózu se zmínkou alespoň jedno v plánovaných sekcích.
 4. Sekce Discharge Diagnosis obsahuje klíčové slovo diagnózy právě tehdy, když to
@@ -138,8 +145,10 @@ Kontroly korpusu (tolerance NÁVRH):
 | hustota narativních značek | `structure.narrative.deid_per_word` | ±15 % |
 | prevalence každého labelu | `labels.prevalence` | `labels.prevalence_tolerance` |
 
-Kontroly ověřují jen explicitní vlastnosti textu, ne klinickou věrohodnost; tu
-posuzuje autor při review. Kontroly běží jako příkaz pro smyčku přegenerování
+Kontroly jedné zprávy se týkají zpráv, které v korpusu jsou: zpráva bez plánu je
+porušení, plán bez zprávy ne (korpus vzniká po polovinách); úplnost hlídají
+kontroly korpusu. Kontroly ověřují jen explicitní vlastnosti textu, ne klinickou
+věrohodnost; tu posuzuje autor při review. Kontroly běží jako příkaz pro smyčku přegenerování
 a jako test v CI nad korpusem v repu.
 
 ## Audit a brána
