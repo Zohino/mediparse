@@ -5,7 +5,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from mediparse.application.corpus_consistency import CorpusConsistency
+from mediparse.application.corpus_consistency import (
+    ConsistencyReport,
+    CorpusConsistency,
+)
 
 if TYPE_CHECKING:
     from mediparse.domain.note_plan import NotePlan
@@ -40,14 +43,19 @@ def test_matching_corpus_has_nothing_to_regenerate(
     plan = planned_note.plan
     texts = {f"en/{plan.note_id}.txt": planned_note.text}
 
-    assert _check((plan,), texts).run(sampler_config) == ()
+    report = _check((plan,), texts).run(sampler_config)
+
+    assert report.notes == ()
+    assert report.corpus
 
 
 def test_plan_without_note_is_skipped(
     planned_note: PlannedNote, sampler_config: SamplerConfig
 ) -> None:
-    """Korpus vzniká po polovinách, chybějící zpráva proto porušením není."""
-    assert _check((planned_note.plan,), {}).run(sampler_config) == ()
+    """Plán bez zprávy není porušení jedné zprávy; korpus bez zpráv nemá co splňovat."""
+    report = _check((planned_note.plan,), {}).run(sampler_config)
+
+    assert report == ConsistencyReport((), ())
 
 
 def test_note_without_plan_is_reported(
@@ -58,7 +66,7 @@ def test_note_without_plan_is_reported(
         sampler_config
     )
 
-    assert [result.note_id for result in results] == ["90000099-DS-1"]
+    assert [result.note_id for result in results.notes] == ["90000099-DS-1"]
 
 
 def test_violating_note_is_reported_once_with_reasons(
@@ -68,7 +76,9 @@ def test_violating_note_is_reported_once_with_reasons(
     plan = planned_note.plan
     text = planned_note.text.replace("Sex: F", "Sex: M")
 
-    (result,) = _check((plan,), {f"en/{plan.note_id}.txt": text}).run(sampler_config)
+    (result,) = (
+        _check((plan,), {f"en/{plan.note_id}.txt": text}).run(sampler_config).notes
+    )
 
     assert result.note_id == plan.note_id
     assert any("Sex" in reason for reason in result.reasons)
@@ -80,4 +90,6 @@ def test_other_languages_are_not_checked(
     """Český korpus má vlastní slovník (S11e), anglické kontroly se ho netýkají."""
     texts = {f"cs/{planned_note.plan.note_id}.txt": "Jiný text"}
 
-    assert _check((planned_note.plan,), texts).run(sampler_config) == ()
+    assert _check((planned_note.plan,), texts).run(sampler_config) == ConsistencyReport(
+        (), ()
+    )
