@@ -39,11 +39,18 @@ def _corpus(
     return root, plans
 
 
-def test_matching_corpus_passes(
-    audit_files: AuditFiles, planned_note: PlannedNote
+def test_matching_notes_leave_only_corpus_findings(
+    audit_files: AuditFiles,
+    planned_note: PlannedNote,
+    capsys: pytest.CaptureFixture[str],
 ) -> None:
-    """Korpus, jehož zprávy odpovídají plánům, projde."""
-    assert _run(*_corpus(audit_files, planned_note, planned_note.text)) == ExitCode.OK
+    """Zpráva shodná s plánem se k přegenerování nehlásí; korpus z jediné zprávy model nesplní."""
+    code = _run(*_corpus(audit_files, planned_note, planned_note.text))
+
+    output = capsys.readouterr().out
+    assert code == ExitCode.BLOCKED
+    assert "Korpus: " in output
+    assert "Zprávy k přegenerování" not in output
 
 
 def test_violation_names_note_to_regenerate(

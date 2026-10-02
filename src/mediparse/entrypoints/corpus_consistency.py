@@ -38,22 +38,24 @@ def run(argv: Sequence[str]) -> ExitCode:
     """Složí kontroly z plánů, korpusu a configu a vypíše zprávy k přegenerování.
 
     Returns:
-        OK, když všechny zprávy odpovídají plánu, jinak BLOCKED.
+        OK, když zprávy odpovídají plánům a neprázdný korpus modelu, jinak BLOCKED.
     """
     args = _parser().parse_args(argv)
     check = CorpusConsistency(
         plans=PlansFile(args.plans), corpus=CorpusDirectory(args.corpus)
     )
-    results = check.run(load_sampler_config(args.config))
-    for result in results:
+    report = check.run(load_sampler_config(args.config))
+    for result in report.notes:
         sys.stdout.writelines(
             f"{result.note_id}: {reason}\n" for reason in result.reasons
         )
-    if not results:
-        sys.stdout.write("Kontroly shody: všechny zprávy odpovídají plánu.\n")
+    sys.stdout.writelines(f"Korpus: {reason}\n" for reason in report.corpus)
+    if not report.notes and not report.corpus:
+        sys.stdout.write("Kontroly shody: korpus odpovídá plánům i modelu.\n")
         return ExitCode.OK
-    notes = ", ".join(result.note_id for result in results)
-    sys.stdout.write(f"Zprávy k přegenerování: {notes}\n")
+    if report.notes:
+        notes = ", ".join(result.note_id for result in report.notes)
+        sys.stdout.write(f"Zprávy k přegenerování: {notes}\n")
     return ExitCode.BLOCKED
 
 

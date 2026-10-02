@@ -50,7 +50,7 @@ def test_prompt_has_no_unfilled_placeholders(prompt: str) -> None:
     [
         pytest.param("Name: ___  Date of Birth: ___", id="preambule-par"),
         pytest.param("Sex: F  Service: <", id="pohlavi-a-service"),
-        pytest.param("- History of Present Illness: about 30 words", id="delka-sekce"),
+        pytest.param("- History of Present Illness: about 28 words", id="delka-sekce"),
         pytest.param("- Social History: the body is exactly ___", id="telo-deid"),
         pytest.param("  - Facility: ___", id="podnadpis-deid"),
         pytest.param("use exactly 1 more `___`", id="narativni-znacky"),

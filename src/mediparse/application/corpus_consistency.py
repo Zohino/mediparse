@@ -1,10 +1,11 @@
-"""Use case kontrol shody: každá zpráva korpusu odpovídá svému plánu."""
+"""Use case kontrol shody: každá zpráva korpusu odpovídá svému plánu a korpus jako celek modelu."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final, Protocol
 
+from mediparse.domain.corpus_statistics import corpus_violations
 from mediparse.domain.note_consistency import note_violations
 
 if TYPE_CHECKING:
@@ -48,17 +49,26 @@ class NoteViolations:
 
 
 @dataclass(frozen=True)
+class ConsistencyReport:
+    """Výsledek kontrol: zprávy k přegenerování a porušení korpusu jako celku."""
+
+    notes: tuple[NoteViolations, ...]
+    corpus: tuple[str, ...]
+
+
+@dataclass(frozen=True)
 class CorpusConsistency:
-    """Kontroly shody anglických zpráv s plány; plán bez zprávy se přeskočí."""
+    """Kontroly shody anglických zpráv s plány a korpusu s modelem."""
 
     plans: PlanSource
     corpus: NoteSource
 
-    def run(self, config: SamplerConfig) -> tuple[NoteViolations, ...]:
-        """Zkontroluje každou zprávu, která v korpusu je, proti jejímu plánu.
+    def run(self, config: SamplerConfig) -> ConsistencyReport:
+        """Zkontroluje každou zprávu proti plánu a neprázdný korpus proti modelu.
 
         Returns:
-            Zprávy k přegenerování seřazené podle note_id; prázdný výsledek znamená shodu.
+            Zprávy k přegenerování seřazené podle note_id a porušení korpusu; korpus bez
+            zpráv nic neporušuje, částečný korpus je neúplný.
         """
         plans = {plan.note_id: plan for plan in self.plans.load()}
         prefix = f"{LANGUAGE}/"
@@ -67,11 +77,12 @@ class CorpusConsistency:
             for path, text in self.corpus.notes().items()
             if path.startswith(prefix)
         }
-        return tuple(
+        notes = tuple(
             NoteViolations(note_id, reasons)
             for note_id in sorted(texts)
             if (reasons := _reasons(texts[note_id], plans.get(note_id), config))
         )
+        return ConsistencyReport(notes, corpus_violations(texts, plans, config))
 
 
 def _reasons(
