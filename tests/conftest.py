@@ -10,6 +10,10 @@ from typing import TYPE_CHECKING, Final
 
 import pytest
 
+from mediparse.domain.labels import Diagnosis
+from mediparse.domain.mentions import MentionStatus
+from mediparse.domain.note_plan import NotePlan, PlannedMention
+from mediparse.domain.note_structure import Sex
 from mediparse.infrastructure.mimic_reference import MimicReference
 
 if TYPE_CHECKING:
@@ -34,6 +38,77 @@ HOSP: Final = {
     "url": "https://physionet.org/files/mimiciv/3.1/hosp/admissions.csv.gz",
     "sha256": "f" * 64,
 }
+
+
+_PLAN: Final = NotePlan(
+    note_id="90000001-DS-1",
+    subject_id=90000001,
+    labels=(Diagnosis.CKD,),
+    sex=Sex.FEMALE,
+    age_marker=True,
+    sections=(
+        "allergies",
+        "chief_complaint",
+        "history_of_present_illness",
+        "past_medical_history",
+        "social_history",
+        "discharge_disposition",
+        "discharge_diagnosis",
+        "followup_instructions",
+    ),
+    subheadings=("Facility",),
+    narrative_words=30,
+    section_words={"history_of_present_illness": 30},
+    narrative_deid=1,
+    mentions=(
+        PlannedMention(
+            diagnosis=Diagnosis.CKD,
+            status=MentionStatus.AFFIRMED,
+            sections=("past_medical_history", "discharge_diagnosis"),
+        ),
+    ),
+)
+_NOTE: Final = """\
+Name: ___  Unit No: ___
+Admission Date: ___  Discharge Date: ___
+Date of Birth: ___  Sex: F
+Service: MEDICINE  Attending: ___
+
+Allergies:
+No Known Allergies / Adverse Drug Reactions
+
+Chief Complaint:
+Fatigue
+
+History of Present Illness:
+Ms. ___ is a ___ year old woman who presented with two days of fatigue and poor
+oral intake. She was given intravenous fluids in the emergency department.
+
+Past Medical History:
+Chronic kidney disease, stage 3
+
+Social History:
+___
+
+Discharge Disposition:
+Home With Service
+Facility:
+___
+
+Discharge Diagnosis:
+Chronic kidney disease, dehydration
+
+Followup Instructions:
+___
+"""
+
+
+@dataclass(frozen=True)
+class PlannedNote:
+    """Plán syntetické zprávy a text, který ho přesně dodržuje."""
+
+    plan: NotePlan
+    text: str
 
 
 @dataclass(frozen=True)
@@ -137,3 +212,13 @@ def audit_files(tmp_path: Path) -> AuditFiles:
         Továrna na korpus, reference a config tabulek.
     """
     return AuditFiles(tmp_path)
+
+
+@pytest.fixture
+def planned_note() -> PlannedNote:
+    """Malý plán s jedinou zmínkou CKD a zpráva, která mu odpovídá.
+
+    Returns:
+        Plán a text pro kontroly shody.
+    """
+    return PlannedNote(_PLAN, _NOTE)
