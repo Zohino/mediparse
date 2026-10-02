@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING, Annotated, Final, Self
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Mapping
+    from collections.abc import Callable, Collection, Mapping, Sequence
 
 Probability = Annotated[float, Field(ge=0.0, le=1.0)]
 type LabelSet = frozenset[Diagnosis]
@@ -72,6 +72,33 @@ class LabelModel(BaseModel):
             Součin prevalence první diagnózy a podmíněné pravděpodobnosti druhé.
         """
         return self.prevalence[first] * self.conditional[first][second]
+
+
+def label_shares(label_sets: Sequence[Collection[Diagnosis]]) -> dict[Diagnosis, float]:
+    """Podíl zpráv s každým labelem.
+
+    Returns:
+        Slovník diagnóza → podíl zpráv, které label nesou.
+    """
+    return {
+        diagnosis: sum(diagnosis in labels for labels in label_sets) / len(label_sets)
+        for diagnosis in Diagnosis
+    }
+
+
+def prevalence_outliers(
+    shares: Mapping[Diagnosis, float], model: LabelModel
+) -> tuple[Diagnosis, ...]:
+    """Diagnózy, jejichž podíl leží dál od cílové prevalence než tolerance modelu.
+
+    Returns:
+        Diagnózy mimo toleranci v pořadí configu.
+    """
+    return tuple(
+        diagnosis
+        for diagnosis, target in model.prevalence.items()
+        if abs(shares[diagnosis] - target) > model.prevalence_tolerance
+    )
 
 
 class IpfNotConvergedError(ValueError):
