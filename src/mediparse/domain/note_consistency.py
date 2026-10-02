@@ -32,7 +32,7 @@ def note_violations(
     Returns:
         Popisy porušení pravidel jedné zprávy ze specifikace korpusu.
     """
-    headers = {section.key: section.header for section in structure.sections}
+    headers = structure.headers
     preamble, sections = _segment(text, headers)
     bodies = dict(sections)
     patterns = {
@@ -42,7 +42,7 @@ def note_violations(
     section = mentions.diagnosis_section
     return (
         *_section_violations(sections, plan, headers),
-        *_preamble_violations(preamble, plan, structure.preamble),
+        *_preamble_violations(preamble, plan, structure.preamble_fields),
         *_marked_place_violations(bodies, plan, structure),
         *_form_violations(text, plan),
         *_mention_violations(text, bodies, plan, patterns),
