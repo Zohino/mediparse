@@ -12,7 +12,7 @@ from mediparse.infrastructure.plans_file import PlansFile
 if TYPE_CHECKING:
     import pytest
 
-    from tests.conftest import PlannedNote
+    from tests.conftest import AuditFiles, PlannedNote
 
 REPOSITORY = Path(__file__).parents[1]
 REPOSITORY_CORPUS = REPOSITORY / "resources" / "synthetic"
@@ -30,29 +30,31 @@ def _run(corpus: Path, plans: Path) -> int:
     ])
 
 
-def _corpus(tmp_path: Path, planned_note: PlannedNote, text: str) -> tuple[Path, Path]:
-    plans = tmp_path / "plans.jsonl"
+def _corpus(
+    audit_files: AuditFiles, planned_note: PlannedNote, text: str
+) -> tuple[Path, Path]:
+    plans = audit_files.root / "plans.jsonl"
     PlansFile(plans).save((planned_note.plan,))
-    root = tmp_path / "synthetic"
-    (root / "en").mkdir(parents=True)
-    (root / "en" / f"{planned_note.plan.note_id}.txt").write_text(
-        text, encoding="utf-8"
-    )
+    root = audit_files.corpus({f"en/{planned_note.plan.note_id}.txt": text})
     return root, plans
 
 
-def test_matching_corpus_passes(tmp_path: Path, planned_note: PlannedNote) -> None:
+def test_matching_corpus_passes(
+    audit_files: AuditFiles, planned_note: PlannedNote
+) -> None:
     """Korpus, jehož zprávy odpovídají plánům, projde."""
-    assert _run(*_corpus(tmp_path, planned_note, planned_note.text)) == ExitCode.OK
+    assert _run(*_corpus(audit_files, planned_note, planned_note.text)) == ExitCode.OK
 
 
 def test_violation_names_note_to_regenerate(
-    tmp_path: Path, planned_note: PlannedNote, capsys: pytest.CaptureFixture[str]
+    audit_files: AuditFiles,
+    planned_note: PlannedNote,
+    capsys: pytest.CaptureFixture[str],
 ) -> None:
     """Porušení zablokuje a výstup jmenuje zprávu k přegenerování."""
     text = planned_note.text.replace("Sex: F", "Sex: M")
 
-    code = _run(*_corpus(tmp_path, planned_note, text))
+    code = _run(*_corpus(audit_files, planned_note, text))
 
     assert code == ExitCode.BLOCKED
     output = capsys.readouterr().out
