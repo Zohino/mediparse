@@ -71,15 +71,18 @@ Pravidla vzorkování, která config sám nevyjadřuje:
 ## Pravidla verbalizace
 
 Verbalizuje `claude-opus-5-5` v Claude Code. Vstupem je zadání, které kód vyrobí
-ze šablony instrukcí v repu a z plánu zprávy; model dostane přesně tento text.
+ze šablony instrukcí `config/verbalization_template.md`, z plánu zprávy a z configu
+vzorkovače; model dostane přesně tento text (`mediparse-verbalization-prompt
+<note_id>`). Zadání je anglicky, stejně jako text zprávy.
 Model rozhoduje jen o povrchové podobě textu, tedy o formulacích a klinických
 detailech konzistentních s plánem. O struktuře ani labelech nerozhoduje.
 
 **Preambule.** Pole preambule a druh jejich hodnoty deklaruje `structure.preamble`:
 `deid` je `___`, `sex` je `F` nebo `M` podle pohlaví z plánu a `text` volí
-verbalizace v souladu s plánem (Service). Dnes osm polí: Name, Unit No, Admission
-Date, Discharge Date, Date of Birth, Sex, Service, Attending. Pole stojí po dvou na
-řádku; pořadí a párování určuje šablona zadání a liší se od šablony MIMIC. Počet nad MIMIC-IV-Note
+verbalizace v souladu s plánem (Service). Dnes osm polí ve čtyřech řádcích po
+dvou; řádky deklaruje `structure.preamble` jako seznam řádků polí. Párování se
+záměrně liší od šablony MIMIC (R2), kontroly čtou pole podle jména, ne podle
+pořadí. Počet nad MIMIC-IV-Note
 (331 793 zpráv) potvrdil, že tato pole jsou v reálných zprávách téměř vždy
 a stojí na řádku za jiným polem; Sex nese `M`/`F` v 99,99 % zpráv.
 
