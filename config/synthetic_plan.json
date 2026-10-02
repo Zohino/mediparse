@@ -59,38 +59,46 @@
   },
   "structure": {
     "preamble": [
-      {
-        "name": "Name",
-        "value": "deid"
-      },
-      {
-        "name": "Unit No",
-        "value": "deid"
-      },
-      {
-        "name": "Admission Date",
-        "value": "deid"
-      },
-      {
-        "name": "Discharge Date",
-        "value": "deid"
-      },
-      {
-        "name": "Date of Birth",
-        "value": "deid"
-      },
-      {
-        "name": "Sex",
-        "value": "sex"
-      },
-      {
-        "name": "Service",
-        "value": "text"
-      },
-      {
-        "name": "Attending",
-        "value": "deid"
-      }
+      [
+        {
+          "name": "Name",
+          "value": "deid"
+        },
+        {
+          "name": "Date of Birth",
+          "value": "deid"
+        }
+      ],
+      [
+        {
+          "name": "Sex",
+          "value": "sex"
+        },
+        {
+          "name": "Service",
+          "value": "text"
+        }
+      ],
+      [
+        {
+          "name": "Admission Date",
+          "value": "deid"
+        },
+        {
+          "name": "Unit No",
+          "value": "deid"
+        }
+      ],
+      [
+        {
+          "name": "Discharge Date",
+          "value": "deid"
+        },
+        {
+          "name": "Attending",
+          "value": "deid"
+        }
+      ]
     ],
     "sections": [
       {

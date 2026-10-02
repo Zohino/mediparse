@@ -119,15 +119,36 @@ class StructureModel(BaseModel):
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
-    preamble: Annotated[tuple[PreambleField, ...], Field(min_length=1)]
+    preamble: Annotated[
+        tuple[Annotated[tuple[PreambleField, ...], Field(min_length=1)], ...],
+        Field(min_length=1),
+    ]
     sections: Annotated[tuple[SectionModel, ...], Field(min_length=1)]
     narrative: NarrativeModel
     female_probability: Probability
     age_marker_probability: Probability
 
+    @property
+    def preamble_fields(self) -> tuple[PreambleField, ...]:
+        """Pole preambule bez ohledu na řádky.
+
+        Returns:
+            Pole v pořadí řádků.
+        """
+        return tuple(field for line in self.preamble for field in line)
+
+    @property
+    def headers(self) -> dict[str, str]:
+        """Hlavičky sekcí podle kanonického klíče.
+
+        Returns:
+            Slovník klíč sekce → hlavička.
+        """
+        return {section.key: section.header for section in self.sections}
+
     @model_validator(mode="after")
     def _preamble_carries_sex_once(self) -> Self:
-        if sum(field.value is PreambleValue.SEX for field in self.preamble) != 1:
+        if sum(field.value is PreambleValue.SEX for field in self.preamble_fields) != 1:
             msg = "Preambule musí mít právě jedno pole s pohlavím."
             raise ValueError(msg)
         return self

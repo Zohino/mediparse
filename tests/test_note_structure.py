@@ -41,11 +41,10 @@ PAIR = (
     Subheading(header="PULM", probability=0.16),
 )
 SINGLE = (Subheading(header="Vitals", probability=0.29),)
-PREAMBLE = (
-    PreambleField(name="Name", value=PreambleValue.DEID),
-    PreambleField(name="Sex", value=PreambleValue.SEX),
-    PreambleField(name="Service", value=PreambleValue.TEXT),
-)
+NAME = PreambleField(name="Name", value=PreambleValue.DEID)
+SEX = PreambleField(name="Sex", value=PreambleValue.SEX)
+SERVICE = PreambleField(name="Service", value=PreambleValue.TEXT)
+PREAMBLE = ((NAME, SEX), (SERVICE,))
 NARRATIVE = NarrativeModel(
     median_words=MEDIAN_WORDS,
     sigma=SIGMA,
@@ -55,7 +54,9 @@ NARRATIVE = NarrativeModel(
 )
 
 
-def _model(preamble: tuple[PreambleField, ...] = PREAMBLE) -> StructureModel:
+def _model(
+    preamble: tuple[tuple[PreambleField, ...], ...] = PREAMBLE,
+) -> StructureModel:
     return StructureModel(
         preamble=preamble,
         sections=(
@@ -235,13 +236,14 @@ def test_median_outside_bounds_is_rejected() -> None:
 @pytest.mark.parametrize(
     "preamble",
     [
-        pytest.param(PREAMBLE[:1] + PREAMBLE[2:], id="bez-sex"),
-        pytest.param((*PREAMBLE, PREAMBLE[1]), id="sex-dvakrat"),
+        pytest.param(((NAME,), (SERVICE,)), id="bez-sex"),
+        pytest.param(((NAME, SEX), (SEX, SERVICE)), id="sex-dvakrat"),
+        pytest.param(((NAME, SEX), ()), id="prazdny-radek"),
     ],
 )
 def test_preamble_has_exactly_one_sex_field(
-    preamble: tuple[PreambleField, ...],
+    preamble: tuple[tuple[PreambleField, ...], ...],
 ) -> None:
-    """Pohlaví z plánu nese v preambuli právě jedno pole."""
+    """Pohlaví z plánu nese v preambuli právě jedno pole a žádný řádek není prázdný."""
     with pytest.raises(ValidationError):
         _model(preamble)
