@@ -34,3 +34,14 @@ def test_repository_plans_survive_hygiene_hooks() -> None:
     assert not content.endswith(b"\n\n")
     assert b"\r" not in content
     assert all(line == line.rstrip() for line in content.splitlines())
+
+
+def test_saved_plans_load_back_unchanged(tmp_path: Path) -> None:
+    """Plány zapsané do souboru se načtou zpět beze změny a ve stejném pořadí."""
+    plans = PlansFile(REPO_PLANS).load()
+    copy = PlansFile(tmp_path / "plans.jsonl")
+
+    copy.save(plans)
+
+    assert copy.load() == plans
+    assert len(plans) == load_sampler_config(REPO_CONFIG).patients.notes
