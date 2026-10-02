@@ -140,20 +140,26 @@ Kontroly jedné zprávy (výstupem jsou `note_id` zpráv k přegenerování):
 4. Sekce Discharge Diagnosis obsahuje klíčové slovo diagnózy právě tehdy, když to
    plán určuje.
 
-Kontroly korpusu (tolerance NÁVRH):
+Kontroly korpusu (tolerance NÁVRH, v configu):
 
 | Vlastnost | Cíl | Tolerance |
 |---|---|---|
-| medián délky narativu | `structure.narrative.median_words` | ±10 % |
-| σ logaritmu délky narativu | `structure.narrative.sigma` | ±0,1 |
-| hustota narativních značek | `structure.narrative.deid_per_word` | ±15 % |
-| prevalence každého labelu | `labels.prevalence` | `labels.prevalence_tolerance` |
+| medián délky narativu | `structure.narrative.median_words` | `structure.narrative.median_tolerance` (relativní, dnes ±10 %) |
+| σ logaritmu délky narativu | `structure.narrative.sigma` | `structure.narrative.sigma_tolerance` (absolutní, dnes ±0,1) |
+| hustota narativních značek | `structure.narrative.deid_per_word` | `structure.narrative.deid_tolerance` (relativní, dnes ±15 %) |
+| prevalence každého labelu | `labels.prevalence` | `labels.prevalence_tolerance` (absolutní, dnes ±2 p. b.) |
+
+Kontroly korpusu měří text: narativ tvoří těla sekcí, které mají v plánu délku,
+bez názvů podnadpisů; hustota značek je počet `___` v narativu bez věkové značky
+na slovo narativu. Prevalence se počítá z labelů zpráv korpusu.
 
 Kontroly jedné zprávy se týkají zpráv, které v korpusu jsou: zpráva bez plánu je
-porušení, plán bez zprávy ne (korpus vzniká po polovinách); úplnost hlídají
-kontroly korpusu. Kontroly ověřují jen explicitní vlastnosti textu, ne klinickou
-věrohodnost; tu posuzuje autor při review. Kontroly běží jako příkaz pro smyčku přegenerování
-a jako test v CI nad korpusem v repu.
+porušení, plán bez zprávy ne. Korpus bez zpráv kontroly korpusu nic neporušuje;
+jakmile korpus nějaké zprávy má, musí být úplný (každý plán má zprávu) a teprve
+pak se měří tolerance. Částečný korpus proto CI neprojde. Kontroly ověřují jen
+explicitní vlastnosti textu, ne klinickou věrohodnost; tu posuzuje autor při
+review. Kontroly běží jako příkaz pro smyčku přegenerování a jako test v CI nad
+korpusem v repu.
 
 ## Audit a brána
 
