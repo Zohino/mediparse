@@ -138,6 +138,20 @@ class StructureModel(BaseModel):
         return tuple(field for line in self.preamble for field in line)
 
     @property
+    def subheadings(self) -> tuple[tuple[str, Subheading], ...]:
+        """Podnadpisy všech sekcí s klíčem sekce, ke které patří.
+
+        Returns:
+            Dvojice klíč sekce, podnadpis v pořadí configu.
+        """
+        return tuple(
+            (section.key, subheading)
+            for section in self.sections
+            for group in section.subheadings
+            for subheading in group
+        )
+
+    @property
     def headers(self) -> dict[str, str]:
         """Hlavičky sekcí podle kanonického klíče.
 

@@ -13,7 +13,9 @@ from mediparse.domain.labels import (
     LabelSet,
     Probability,
     acute_given_chronic,
+    label_shares,
     max_entropy_joint,
+    prevalence_outliers,
 )
 from mediparse.domain.note import note_id
 
@@ -142,11 +144,8 @@ def _patient_notes(
 
 
 def _within_tolerance(notes: Sequence[SyntheticNote], labels: LabelModel) -> bool:
-    return all(
-        abs(sum(d in note.labels for note in notes) / len(notes) - prevalence)
-        <= labels.prevalence_tolerance
-        for d, prevalence in labels.prevalence.items()
-    )
+    shares = label_shares([note.labels for note in notes])
+    return not prevalence_outliers(shares, labels)
 
 
 def _mean_count(ratio: float, max_notes: int) -> float:

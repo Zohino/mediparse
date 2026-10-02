@@ -6,6 +6,7 @@ import re
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.note_structure import DEID, PreambleValue
+from mediparse.domain.note_text import AGE_MARKER, AGE_SUFFIX, alternation, segment
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping, Sequence
@@ -14,13 +15,11 @@ if TYPE_CHECKING:
     from mediparse.domain.mentions import MentionModel
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.note_structure import PreambleField, StructureModel
+    from mediparse.domain.note_text import Sections
 
-_AGE_SUFFIX: Final = r"[ -]?(?:years?[ -]old|y/?o)\b"
-_AGE_MARKER: Final = re.compile(rf"___{_AGE_SUFFIX}", re.IGNORECASE)
-_NUMERIC_AGE: Final = re.compile(rf"\b\d{{1,3}}{_AGE_SUFFIX}", re.IGNORECASE)
+_NUMERIC_AGE: Final = re.compile(rf"\b\d{{1,3}}{AGE_SUFFIX}", re.IGNORECASE)
 _FOREIGN_MARK: Final = re.compile(r"\[\*\*|\bXXX\b|(?<!_)(?:_{1,2}|_{4,})(?!_)")
 
-type Sections = tuple[tuple[str, str], ...]
 type Patterns = Mapping[Diagnosis, re.Pattern[str]]
 
 
@@ -33,7 +32,7 @@ def note_violations(
         Popisy porušení pravidel jedné zprávy ze specifikace korpusu.
     """
     headers = structure.headers
-    preamble, sections = _segment(text, headers)
+    preamble, sections = segment(text, headers)
     bodies = dict(sections)
     patterns = {
         diagnosis: _keywords(parameters.keywords)
@@ -50,18 +49,6 @@ def note_violations(
             bodies.get(section), plan, patterns, section, headers[section]
         ),
     )
-
-
-def _segment(text: str, headers: Mapping[str, str]) -> tuple[str, Sections]:
-    keys = {header: key for key, header in headers.items()}
-    alternatives = "|".join(map(re.escape, sorted(keys, key=len, reverse=True)))
-    matches = list(re.finditer(rf"^(?P<header>{alternatives}):", text, re.MULTILINE))
-    ends = [match.start() for match in matches[1:]] + [len(text)]
-    sections = tuple(
-        (keys[match["header"]], text[match.end() : end])
-        for match, end in zip(matches, ends, strict=True)
-    )
-    return text[: matches[0].start()] if matches else text, sections
 
 
 def _section_violations(
@@ -124,17 +111,15 @@ def _marked_place_violations(
 
 def _deid_subheadings(structure: StructureModel) -> list[tuple[str, str]]:
     return [
-        (section.key, subheading.header)
-        for section in structure.sections
-        for group in section.subheadings
-        for subheading in group
+        (key, subheading.header)
+        for key, subheading in structure.subheadings
         if subheading.deid_value
     ]
 
 
 def _form_violations(text: str, plan: NotePlan) -> list[str]:
     violations: list[str] = []
-    if (_AGE_MARKER.search(text) is not None) != plan.age_marker:
+    if (AGE_MARKER.search(text) is not None) != plan.age_marker:
         violations.append(
             "Věková značka chybí, ačkoli ji plán má."
             if plan.age_marker
@@ -184,5 +169,4 @@ def _diagnosis_section_violations(
 
 
 def _keywords(keywords: Iterable[str]) -> re.Pattern[str]:
-    alternatives = "|".join(map(re.escape, sorted(keywords, key=len, reverse=True)))
-    return re.compile(rf"\b(?:{alternatives})\b", re.IGNORECASE)
+    return re.compile(rf"\b(?:{alternation(keywords)})\b", re.IGNORECASE)
