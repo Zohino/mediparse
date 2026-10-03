@@ -44,9 +44,10 @@ def test_statistics_measure_narrative_of_the_text(
         [(plan, planned_note.text)], sampler_config.structure
     )
 
-    assert statistics.median_words == plan.narrative_words
+    words = sum(plan.section_words.values())
+    assert statistics.median_words == words
     assert statistics.log_sigma == pytest.approx(0.0)
-    assert statistics.deid_density == plan.narrative_deid / plan.narrative_words
+    assert statistics.deid_density == plan.narrative_deid / words
     assert statistics.prevalence[Diagnosis.CKD] == pytest.approx(1.0)
     assert statistics.prevalence[Diagnosis.DIABETES] == pytest.approx(0.0)
 
@@ -64,7 +65,7 @@ def test_subheadings_are_not_narrative(
         [(planned_note.plan, text)], sampler_config.structure
     )
 
-    assert statistics.median_words == planned_note.plan.narrative_words
+    assert statistics.median_words == sum(planned_note.plan.section_words.values())
 
 
 def test_statistics_on_target_pass(sampler_config: SamplerConfig) -> None:

@@ -29,7 +29,6 @@ class NotePlan(BaseModel):
     age_marker: bool
     sections: tuple[str, ...]
     subheadings: tuple[str, ...]
-    narrative_words: PositiveInt
     section_words: dict[str, NonNegativeInt]
     narrative_deid: NonNegativeInt
     mentions: tuple[Mention, ...]
@@ -61,7 +60,6 @@ def note_plan(
         age_marker=structure.age_marker,
         sections=structure.sections,
         subheadings=structure.subheadings,
-        narrative_words=structure.narrative_words,
         section_words=dict(structure.section_words),
         narrative_deid=structure.narrative_deid,
         mentions=tuple(mentions),
