@@ -117,7 +117,6 @@ ignore_imports = [
     "mediparse.entrypoints.** -> os",
     "mediparse.entrypoints.** -> pathlib",
     "mediparse.entrypoints.** -> random",
-    "mediparse.entrypoints.** -> re",
     "mediparse.entrypoints.** -> sys",
 ]
 broken_contract_guidance = "Knihovny, soubory, síť a procesy patří do infrastructure; doména a use casy k nim přistupují přes porty. Modul, který je opravdu čistý, přidej do ignore_imports vědomě a s důvodem v těle commitu."

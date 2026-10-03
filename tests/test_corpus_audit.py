@@ -8,6 +8,7 @@ from mediparse.domain.corpus_audit import (
     NgramIndex,
     ReferenceNote,
     audit_record_violations,
+    commit_sha,
     fingerprint,
     reference_mismatch,
     scan,
@@ -203,3 +204,10 @@ def test_reference_mismatch_names_differing_files(
 ) -> None:
     """Pravidlo shody jmenuje chybějící, přebývající, zdvojené i jinak otištěné soubory."""
     assert reference_mismatch(files, PINNED) == mismatch
+
+
+@pytest.mark.parametrize("value", ["abc123", "HEAD", "C" * 40, "c" * 41])
+def test_commit_sha_rejects_anything_but_full_hash(value: str) -> None:
+    """Commit je jen celý SHA-1 hash malými písmeny."""
+    with pytest.raises(ValueError, match="SHA-1"):
+        commit_sha(value)

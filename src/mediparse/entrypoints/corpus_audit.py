@@ -10,11 +10,10 @@ from __future__ import annotations
 
 import argparse
 import os
-import re
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import TYPE_CHECKING, Final, assert_never
+from typing import TYPE_CHECKING, assert_never
 
 from mediparse.application.corpus_audit import (
     AuditClean,
@@ -22,8 +21,8 @@ from mediparse.application.corpus_audit import (
     AuditRefused,
     CorpusAudit,
 )
-from mediparse.domain.corpus_audit import COMMIT_PATTERN, NGRAM_SIZE
-from mediparse.entrypoints.cli import refusing_invalid_input
+from mediparse.domain.corpus_audit import NGRAM_SIZE, commit_sha
+from mediparse.entrypoints.cli import argument, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.audit_workspace import LocalWorkspace
 from mediparse.infrastructure.mimic_reference import MimicReference
@@ -35,8 +34,6 @@ if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
     from mediparse.application.corpus_audit import AuditOutcome
-
-_COMMIT: Final = re.compile(COMMIT_PATTERN)
 
 
 def main() -> ExitCode:
@@ -93,13 +90,6 @@ def _present(outcome: AuditOutcome, report: Path) -> ExitCode:
             assert_never(outcome)
 
 
-def _commit(value: str) -> str:
-    if _COMMIT.fullmatch(value) is None:
-        msg = "Commit nástroje musí být celý SHA-1 hash, například z `git rev-parse HEAD`."
-        raise argparse.ArgumentTypeError(msg)
-    return value
-
-
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="mediparse-corpus-audit",
@@ -129,7 +119,7 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--commit",
-        type=_commit,
+        type=argument(commit_sha),
         required=True,
         help="commit nástroje, `git rev-parse HEAD`",
     )
