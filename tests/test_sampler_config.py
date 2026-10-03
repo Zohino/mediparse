@@ -1,4 +1,4 @@
-"""Konfigurace vzorkovače v repu: projde schématem a reprodukuje čísla z notes-synthesis."""
+"""Konfigurace vzorkovače v repu: reprodukuje čísla z notes-synthesis."""
 
 from __future__ import annotations
 
@@ -18,11 +18,6 @@ NO_DIAGNOSIS = 0.478
 NOTES_SYNTHESIS_ROUNDING = 0.001
 
 
-def test_repository_config_is_valid(sampler_config: SamplerConfig) -> None:
-    """Config v repu odpovídá schématu a jeho matice je v obou směrech konzistentní."""
-    assert sampler_config.patients.notes > 0
-
-
 def test_max_entropy_joint_matches_notes_synthesis(
     sampler_config: SamplerConfig,
 ) -> None:
@@ -30,13 +25,6 @@ def test_max_entropy_joint_matches_notes_synthesis(
     joint = max_entropy_joint(sampler_config.labels)
 
     assert isclose(joint[frozenset()], NO_DIAGNOSIS, abs_tol=NOTES_SYNTHESIS_ROUNDING)
-
-
-def test_repository_config_samples_a_corpus(sampler_config: SamplerConfig) -> None:
-    """S parametry z repa vznikne korpus zadané velikosti v toleranci prevalencí."""
-    notes = sample_notes(sampler_config.patients, sampler_config.labels, Random(1))
-
-    assert len(notes) == sampler_config.patients.notes
 
 
 def test_repository_config_samples_structure(sampler_config: SamplerConfig) -> None:

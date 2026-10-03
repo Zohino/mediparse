@@ -31,9 +31,11 @@ def test_entrypoint_writes_one_valid_plan_per_note(
         str(labels),
     ])
 
-    lines = output.read_text(encoding="utf-8").splitlines()
+    plans = [
+        NotePlan.model_validate_json(line)
+        for line in output.read_text(encoding="utf-8").splitlines()
+    ]
     notes = sampler_config.patients.notes
     assert code == ExitCode.OK
-    assert len(lines) == notes
-    assert all(NotePlan.model_validate_json(line) for line in lines)
+    assert len(plans) == notes
     assert len(labels.read_text(encoding="utf-8").splitlines()) == notes + 1
