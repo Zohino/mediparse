@@ -11,7 +11,11 @@ import pytest
 from mediparse.domain.corpus_audit import InvalidAuditRecordError
 from mediparse.entrypoints.corpus_gate import run
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.synthetic_corpus import RECORD_NAME, CorpusDirectory
+from mediparse.infrastructure.synthetic_corpus import (
+    PROVENANCE_NAME,
+    RECORD_NAME,
+    CorpusDirectory,
+)
 
 if TYPE_CHECKING:
     from tests.conftest import AuditFiles
@@ -43,9 +47,34 @@ def test_gate_rejects_unaudited_corpus(audit_files: AuditFiles) -> None:
     assert _gate(root, audit_files.tables) == ExitCode.BLOCKED
 
 
-def test_gate_passes_audited_corpus(audit_files: AuditFiles) -> None:
-    """Korpus beze změny od auditu projde."""
-    assert _gate(_audited_corpus(audit_files), audit_files.tables) == ExitCode.OK
+def test_gate_passes_audited_corpus_with_provenance(audit_files: AuditFiles) -> None:
+    """Korpus beze změny od auditu s provenance, která na audit ukazuje, projde."""
+    root = audit_files.released_corpus({NOTE: "a short synthetic note"})
+
+    assert _gate(root, audit_files.tables) == ExitCode.OK
+
+
+def test_gate_rejects_audited_corpus_without_provenance(
+    audit_files: AuditFiles,
+) -> None:
+    """Auditovaný korpus bez záznamu provenance neprojde."""
+    assert _gate(_audited_corpus(audit_files), audit_files.tables) == ExitCode.BLOCKED
+
+
+def test_gate_rejects_provenance_of_previous_audit(audit_files: AuditFiles) -> None:
+    """Nový audit bez nově zapsané provenance neprojde."""
+    root = audit_files.released_corpus({NOTE: "a short synthetic note"})
+    audit_files.audited_corpus({NOTE: "a regenerated synthetic note"})
+
+    assert _gate(root, audit_files.tables) == ExitCode.BLOCKED
+
+
+def test_gate_rejects_invalid_provenance(audit_files: AuditFiles) -> None:
+    """Záznam provenance, který neodpovídá schématu, neprojde."""
+    root = audit_files.released_corpus({NOTE: "a short synthetic note"})
+    (root / PROVENANCE_NAME).write_text("{}", encoding="utf-8")
+
+    assert _gate(root, audit_files.tables) == ExitCode.BLOCKED
 
 
 def test_gate_rejects_corpus_changed_after_audit(audit_files: AuditFiles) -> None:
@@ -92,5 +121,5 @@ def test_invalid_record_surfaces_as_domain_error(tmp_path: Path) -> None:
 
 
 def test_repository_corpus_passes_gate() -> None:
-    """Korpus v repu odpovídá svému auditu i připnuté referenci — jinak neprojde CI."""
+    """Korpus v repu odpovídá svému auditu, připnuté referenci i provenance — jinak neprojde CI."""
     assert _gate(REPOSITORY_CORPUS, REPOSITORY_TABLES) == ExitCode.OK

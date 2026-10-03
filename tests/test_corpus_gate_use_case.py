@@ -1,9 +1,9 @@
-"""Use case brány nad fakem korpusu: porušení, neplatný záznam a korpus beze změny."""
+"""Use case brány nad fakem korpusu: porušení, neplatné záznamy a korpus beze změny."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 
 from mediparse.application.corpus_gate import CorpusGate
 from mediparse.domain.corpus_audit import (
@@ -13,9 +13,33 @@ from mediparse.domain.corpus_audit import (
     InvalidAuditRecordError,
     ReferenceFile,
 )
+from mediparse.domain.corpus_provenance import (
+    Generation,
+    InvalidProvenanceRecordError,
+    ProvenanceRecord,
+)
 
 AUDITED = "a" * 64
 PINNED = {"discharge.csv.gz": "b" * 64, "radiology.csv.gz": "e" * 64}
+AUDIT_FILE = "9" * 64
+
+
+def _provenance(audit_sha256: str) -> ProvenanceRecord:
+    return ProvenanceRecord(
+        generation=Generation(
+            seed=0,
+            sampler_config_sha256="1" * 64,
+            verbalization_template_sha256="2" * 64,
+            model="claude-opus-5-5",
+            claude_code_version="2.1.5",
+            generated_on=date(2026, 10, 10),
+            specification_commit="d" * 40,
+        ),
+        audit_sha256=audit_sha256,
+    )
+
+
+PROVENANCE = _provenance(AUDIT_FILE)
 
 
 @dataclass(frozen=True)
@@ -23,6 +47,9 @@ class _Corpus:
     sha256: str | None
     record: AuditRecord | None = None
     invalid_record: bool = False
+    provenance: ProvenanceRecord | None = PROVENANCE
+    invalid_provenance: bool = False
+    audit_file: str = AUDIT_FILE
 
     def fingerprint(self) -> str | None:
         return self.sha256
@@ -31,6 +58,14 @@ class _Corpus:
         if self.invalid_record:
             raise InvalidAuditRecordError
         return self.record
+
+    def audit_sha256(self) -> str:
+        return self.audit_file
+
+    def provenance_record(self) -> ProvenanceRecord | None:
+        if self.invalid_provenance:
+            raise InvalidProvenanceRecordError
+        return self.provenance
 
 
 def _record(corpus_sha256: str) -> AuditRecord:
@@ -73,3 +108,24 @@ def test_record_against_other_reference_is_blocked() -> None:
     pinned = PINNED | {"radiology.csv.gz": "f" * 64}
 
     assert CorpusGate(_Corpus(AUDITED, _record(AUDITED))).run(pinned)
+
+
+def test_missing_provenance_is_blocked() -> None:
+    """Auditovaný korpus bez provenance neprojde."""
+    corpus = _Corpus(AUDITED, _record(AUDITED), provenance=None)
+
+    assert CorpusGate(corpus).run(PINNED) == ("Korpus nemá záznam provenance.",)
+
+
+def test_provenance_of_other_audit_is_blocked() -> None:
+    """Provenance s otiskem jiného záznamu auditu neprojde."""
+    corpus = _Corpus(AUDITED, _record(AUDITED), provenance=_provenance("8" * 64))
+
+    assert CorpusGate(corpus).run(PINNED)
+
+
+def test_invalid_provenance_is_blocked() -> None:
+    """Záznam provenance, který neodpovídá schématu, neprojde."""
+    corpus = _Corpus(AUDITED, _record(AUDITED), invalid_provenance=True)
+
+    assert CorpusGate(corpus).run(PINNED) == ("Záznam provenance neodpovídá schématu.",)

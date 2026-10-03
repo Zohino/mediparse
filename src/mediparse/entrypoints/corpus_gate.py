@@ -1,4 +1,4 @@
-"""Vstupní bod brány syntetického korpusu: do repozitáře smí jen korpus, jehož otisk sedí se záznamem auditu proti připnuté referenci.
+"""Vstupní bod brány syntetického korpusu: do repozitáře smí jen korpus, jehož otisk sedí se záznamem auditu proti připnuté referenci a jehož provenance na tento audit ukazuje.
 
 Konzolový skript ``mediparse-corpus-gate`` běží jako hook prek při commitu i pushi
 a jako test v CI. S daty MIMIC nepracuje, jen s jejich oficiálními otisky z configu,
@@ -34,7 +34,7 @@ def run(argv: Sequence[str]) -> ExitCode:
     """Složí bránu nad korpusem z argumentů a přeloží porušení na návratový kód.
 
     Returns:
-        OK, když korpus neexistuje nebo odpovídá auditu, jinak BLOCKED.
+        OK, když korpus neexistuje nebo odpovídá auditu i provenance, jinak BLOCKED.
     """
     args = _parser().parse_args(argv)
     gate = CorpusGate(CorpusDirectory(args.corpus))
