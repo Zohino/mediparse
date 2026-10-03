@@ -70,10 +70,12 @@ Pravidla vzorkování, která config sám nevyjadřuje:
 
 ## Pravidla verbalizace
 
-Verbalizuje `claude-opus-5-5` v Claude Code. Vstupem je zadání, které kód vyrobí
-ze šablony instrukcí `config/verbalization_template.md`, z plánu zprávy a z configu
-vzorkovače; model dostane přesně tento text (`mediparse-verbalization-prompt
-<note_id>`). Zadání je anglicky, stejně jako text zprávy.
+Verbalizuje `claude-sonnet-5-5` s úsilím `medium` v Claude Code, každou zprávu
+samostatný subagent s čistým kontextem. Vstupem je zadání, které kód vyrobí ze
+šablony instrukcí `config/verbalization_template.md`, z plánu zprávy a z configu
+vzorkovače; model dostane přesně tento text, protože si ho subagent vyrenderuje sám
+(`mediparse-verbalization-prompt <note_id>`) a zprávu rovnou uloží. Zadání je
+anglicky, stejně jako text zprávy.
 Model rozhoduje jen o povrchové podobě textu, tedy o formulacích a klinických
 detailech konzistentních s plánem. O struktuře ani labelech nerozhoduje.
 
@@ -203,7 +205,7 @@ Vstup smoketestu ze souborů korpusu sestavuje S12a.
 `provenance.json` obsahuje:
 
 - seed vzorkovače a otisk jeho configu;
-- model (`claude-opus-5-5`) a verzi Claude Code v době generování;
+- model (`claude-sonnet-5-5`) a verzi Claude Code v době generování;
 - datum generování a otisk zadání všech zpráv;
 - commit této specifikace;
 - otisk `audit.json`.

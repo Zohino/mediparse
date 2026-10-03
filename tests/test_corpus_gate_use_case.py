@@ -26,7 +26,7 @@ def _provenance(audit_sha256: str) -> ProvenanceRecord:
             seed=0,
             sampler_config_sha256="1" * 64,
             prompts_sha256="3" * 64,
-            model="claude-opus-5-5",
+            model="claude-sonnet-5-5",
             claude_code_version="2.1.5",
             generated_on=date(2026, 10, 10),
             specification_commit="d" * 40,

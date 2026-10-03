@@ -45,7 +45,7 @@ def test_provenance_records_generation_and_audit(
             "prompts_sha256": prompts_sha256(
                 verbalization_template, repository_plans, sampler_config
             ),
-            "model": "claude-opus-5-5",
+            "model": "claude-sonnet-5-5",
             "claude_code_version": "2.1.5",
             "generated_on": "2026-10-10",
             "specification_commit": COMMIT,

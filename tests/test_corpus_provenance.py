@@ -34,7 +34,7 @@ def test_prompts_fingerprint_covers_rendered_prompt(
 @pytest.mark.parametrize(
     ("validate", "valid", "invalid", "message"),
     [
-        (model_id, "claude-opus-5-5", "gpt-4o", "Model"),
+        (model_id, "claude-sonnet-5-5", "gpt-4o", "Model"),
         (version, "2.1.288", "2.1", "Verze"),
     ],
     ids=["model", "version"],
