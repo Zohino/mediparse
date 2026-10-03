@@ -6,8 +6,8 @@ import json
 from typing import TYPE_CHECKING
 
 import pytest
-from pydantic import ValidationError
 
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.mimic_tables import load_reference_sha256
 from tests.support import REPOSITORY_TABLES
 
@@ -35,7 +35,7 @@ def test_invalid_checksum_is_rejected(tmp_path: Path) -> None:
     """Otisk, který není SHA-256 v hexadecimálním tvaru, config neprojde."""
     tables = _tables(tmp_path / "t.json", (NOTE_URL, "B" * 64))
 
-    with pytest.raises(ValidationError):
+    with pytest.raises(InvalidInputError, match=r"t\.json"):
         load_reference_sha256(tables)
 
 

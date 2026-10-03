@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.labels import Diagnosis
 from mediparse.domain.note_plan import NotePlan
+from mediparse.infrastructure.input_file import parse_file
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT
 
 if TYPE_CHECKING:
@@ -31,13 +32,12 @@ class PlansFile:
         self.path.write_bytes(content.encode("utf-8"))
 
     def load(self) -> tuple[NotePlan, ...]:
-        """Načte plány v pořadí souboru; neplatný řádek vyhodí ValidationError.
+        """Načte plány v pořadí souboru.
 
         Returns:
             Plány zpráv.
         """
-        lines = self.path.read_text(encoding="utf-8").splitlines()
-        return tuple(NotePlan.model_validate_json(line) for line in lines)
+        return parse_file(self.path, _plans)
 
 
 @dataclass(frozen=True)
@@ -70,3 +70,7 @@ class SyntheticPlanFiles:
 
 def _label_row(plan: NotePlan) -> tuple[str | int, ...]:
     return (plan.note_id, plan.subject_id, *(int(d in plan.labels) for d in Diagnosis))
+
+
+def _plans(content: str) -> tuple[NotePlan, ...]:
+    return tuple(NotePlan.model_validate_json(line) for line in content.splitlines())
