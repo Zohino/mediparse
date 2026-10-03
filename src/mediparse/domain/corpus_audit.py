@@ -153,14 +153,14 @@ def scan(
 
 
 def fingerprint(files: Iterable[tuple[str, bytes]]) -> str:
-    """Otisk korpusu: SHA-256 seznamu ve tvaru výstupu ``sha256sum`` seřazeného podle cesty.
+    """Otisk dvojic jméno a obsah: SHA-256 seznamu ve tvaru výstupu ``sha256sum`` seřazeného podle jména.
 
     Returns:
         Hexadecimální SHA-256 otisk.
     """
     listing = "".join(
-        f"{hashlib.sha256(content).hexdigest()}  {path}\n"
-        for path, content in sorted(files)
+        f"{hashlib.sha256(content).hexdigest()}  {name}\n"
+        for name, content in sorted(files)
     )
     return hashlib.sha256(listing.encode()).hexdigest()
 

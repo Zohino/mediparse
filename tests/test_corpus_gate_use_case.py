@@ -29,7 +29,7 @@ def _provenance(audit_sha256: str) -> ProvenanceRecord:
         generation=Generation(
             seed=0,
             sampler_config_sha256="1" * 64,
-            verbalization_template_sha256="2" * 64,
+            prompts_sha256="3" * 64,
             model="claude-opus-5-5",
             claude_code_version="2.1.5",
             generated_on=date(2026, 10, 10),

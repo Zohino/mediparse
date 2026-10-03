@@ -9,20 +9,20 @@ from typing import TYPE_CHECKING, Final
 
 import pytest
 
+from mediparse.domain.corpus_provenance import prompts_sha256
 from mediparse.entrypoints.corpus_provenance import run
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.plans_file import PLANS_PATH, PlansFile
 from mediparse.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
 from mediparse.infrastructure.synthetic_corpus import PROVENANCE_NAME, RECORD_NAME
-from mediparse.infrastructure.verbalization_template import (
-    VERBALIZATION_TEMPLATE_PATH,
-)
 
 if TYPE_CHECKING:
+    from mediparse.domain.synthetic_plan import SamplerConfig
     from tests.conftest import AuditFiles
 
 REPOSITORY: Final = Path(__file__).parents[1]
 CONFIG: Final = REPOSITORY / SAMPLER_CONFIG_PATH
-TEMPLATE: Final = REPOSITORY / VERBALIZATION_TEMPLATE_PATH
+PLANS: Final = REPOSITORY / PLANS_PATH
 NOTE: Final = "en/90000001-DS-1.txt"
 
 
@@ -30,8 +30,10 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def test_provenance_records_generation_and_audit(audit_files: AuditFiles) -> None:
-    """Záznam nese argumenty, seed a otisky configu i šablony a otisk záznamu auditu."""
+def test_provenance_records_generation_and_audit(
+    audit_files: AuditFiles, sampler_config: SamplerConfig, verbalization_template: str
+) -> None:
+    """Záznam nese argumenty, seed, otisky configu a zadání a otisk záznamu auditu."""
     root = audit_files.audited_corpus({NOTE: "a short synthetic note"})
 
     assert run(audit_files.provenance_argv(root)) == ExitCode.OK
@@ -39,9 +41,11 @@ def test_provenance_records_generation_and_audit(audit_files: AuditFiles) -> Non
     record = json.loads((root / PROVENANCE_NAME).read_text(encoding="utf-8"))
     assert record == {
         "generation": {
-            "seed": json.loads(CONFIG.read_text(encoding="utf-8"))["seed"],
+            "seed": sampler_config.seed,
             "sampler_config_sha256": _sha256(CONFIG),
-            "verbalization_template_sha256": _sha256(TEMPLATE),
+            "prompts_sha256": prompts_sha256(
+                verbalization_template, PlansFile(PLANS).load(), sampler_config
+            ),
             "model": "claude-opus-5-5",
             "claude_code_version": "2.1.5",
             "generated_on": "2026-10-10",
