@@ -71,7 +71,6 @@ _PLAN: Final = NotePlan(
         "followup_instructions",
     ),
     subheadings=("Facility",),
-    narrative_words=28,
     section_words={"history_of_present_illness": 28},
     narrative_deid=1,
     mentions=(
