@@ -34,3 +34,24 @@ class ProvenanceRecord(BaseModel):
 
     generation: Generation
     audit_sha256: Sha256
+
+
+class InvalidProvenanceRecordError(ValueError):
+    """Záznam provenance neodpovídá schématu."""
+
+
+def provenance_violations(
+    record: ProvenanceRecord | None, audit_sha256: str
+) -> tuple[str, ...]:
+    """Důvody, proč provenance auditovaného korpusu neplatí; prázdný výsledek znamená, že platí.
+
+    Returns:
+        Popis chybějícího záznamu nebo záznamu, který ukazuje na jiný audit.
+    """
+    if record is None:
+        return ("Korpus nemá záznam provenance.",)
+    if record.audit_sha256 != audit_sha256:
+        return (
+            "Provenance ukazuje na jiný audit, po novém auditu je nutné ji zapsat znovu.",
+        )
+    return ()

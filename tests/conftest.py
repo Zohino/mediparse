@@ -15,7 +15,7 @@ from mediparse.domain.labels import Diagnosis
 from mediparse.domain.mentions import MentionStatus
 from mediparse.domain.note_plan import NotePlan, PlannedMention
 from mediparse.domain.note_structure import Sex
-from mediparse.entrypoints import corpus_audit
+from mediparse.entrypoints import corpus_audit, corpus_provenance
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.mimic_reference import MimicReference
 from mediparse.infrastructure.sampler_config import load_sampler_config
@@ -205,6 +205,16 @@ class AuditFiles:
         references = self.pinned_references([("10000032", "a reference text")])
         argv = self.audit_argv(root, references, self.root / "report.json")
         assert corpus_audit.run(argv, {}) == ExitCode.OK
+        return root
+
+    def released_corpus(self, notes: Mapping[str, str]) -> Path:
+        """Zapíše korpus, projde ho čistým auditem a zapíše k němu provenance.
+
+        Returns:
+            Kořen korpusu, který smí do repozitáře.
+        """
+        root = self.audited_corpus(notes)
+        assert corpus_provenance.run(self.provenance_argv(root)) == ExitCode.OK
         return root
 
     def provenance_argv(self, corpus: Path, **overrides: str) -> list[str]:

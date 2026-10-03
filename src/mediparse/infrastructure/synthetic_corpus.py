@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, Final
+from typing import Final
 
 from pydantic import BaseModel, ValidationError
 
@@ -13,10 +13,11 @@ from mediparse.domain.corpus_audit import (
     InvalidAuditRecordError,
     fingerprint,
 )
+from mediparse.domain.corpus_provenance import (
+    InvalidProvenanceRecordError,
+    ProvenanceRecord,
+)
 from mediparse.infrastructure.file_digest import file_sha256
-
-if TYPE_CHECKING:
-    from mediparse.domain.corpus_provenance import ProvenanceRecord
 
 CORPUS_ROOT: Final = Path("resources/synthetic")
 RECORD_NAME: Final = "audit.json"
@@ -88,6 +89,25 @@ class CorpusDirectory:
     def save_record(self, record: AuditRecord) -> None:
         """Zapíše záznam auditu do kořene korpusu."""
         self._write(RECORD_NAME, record)
+
+    def provenance_record(self) -> ProvenanceRecord | None:
+        """Záznam provenance korpusu.
+
+        Returns:
+            Záznam provenance, nebo None, když chybí.
+
+        Raises:
+            InvalidProvenanceRecordError: Obsah záznamu neodpovídá schématu.
+        """
+        path = self.root / PROVENANCE_NAME
+        if not path.exists():
+            return None
+        try:
+            return ProvenanceRecord.model_validate_json(
+                path.read_text(encoding="utf-8")
+            )
+        except ValidationError as error:
+            raise InvalidProvenanceRecordError from error
 
     def save_provenance(self, record: ProvenanceRecord) -> None:
         """Zapíše záznam provenance do kořene korpusu."""
