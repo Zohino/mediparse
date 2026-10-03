@@ -15,6 +15,8 @@ from mediparse.domain.labels import Diagnosis
 from mediparse.domain.mentions import MentionStatus
 from mediparse.domain.note_plan import NotePlan, PlannedMention
 from mediparse.domain.note_structure import Sex
+from mediparse.entrypoints import corpus_audit
+from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.mimic_reference import MimicReference
 from mediparse.infrastructure.sampler_config import load_sampler_config
 from mediparse.infrastructure.verbalization_template import (
@@ -191,6 +193,18 @@ class AuditFiles:
         )
         self.pin(references)
         return references
+
+    def audited_corpus(self, notes: Mapping[str, str]) -> Path:
+        """Zapíše korpus a projde ho čistým auditem proti připnuté referenci.
+
+        Returns:
+            Kořen korpusu se záznamem auditu.
+        """
+        root = self.corpus(notes)
+        references = self.pinned_references([("10000032", "a reference text")])
+        argv = self.audit_argv(root, references, self.root / "report.json")
+        assert corpus_audit.run(argv, {}) == ExitCode.OK
+        return root
 
     def audit_argv(
         self, corpus: Path, references: Sequence[Path], report: Path
