@@ -141,6 +141,11 @@ Kontroly jedné zprávy (výstupem jsou `note_id` zpráv k přegenerování):
    diagnózu se zmínkou alespoň jedno v plánovaných sekcích.
 4. Sekce Discharge Diagnosis obsahuje klíčové slovo diagnózy právě tehdy, když to
    plán určuje.
+5. Délka narativu zprávy se od součtu délek sekcí v plánu liší nejvýš o
+   `structure.narrative.note_tolerance` (relativní, dnes ±20 %). Narativ se měří
+   stejně jako v kontrolách korpusu. Bez téhle kontroly by medián korpusu závisel
+   jen na tom, jak dlouze model píše, a zprávu mimo plán by smyčka přegenerování
+   nepoznala.
 
 Kontroly korpusu (tolerance NÁVRH, v configu):
 
