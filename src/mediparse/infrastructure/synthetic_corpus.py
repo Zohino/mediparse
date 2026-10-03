@@ -1,21 +1,26 @@
-"""Syntetický korpus na disku: zprávy ve tvaru ``<jazyk>/<note_id>.txt`` a záznam auditu v kořeni."""
+"""Syntetický korpus na disku: zprávy ve tvaru ``<jazyk>/<note_id>.txt``, záznam auditu a provenance v kořeni."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Final
+from typing import TYPE_CHECKING, Final
 
-from pydantic import ValidationError
+from pydantic import BaseModel, ValidationError
 
 from mediparse.domain.corpus_audit import (
     AuditRecord,
     InvalidAuditRecordError,
     fingerprint,
 )
+from mediparse.infrastructure.file_digest import file_sha256
+
+if TYPE_CHECKING:
+    from mediparse.domain.corpus_provenance import ProvenanceRecord
 
 CORPUS_ROOT: Final = Path("resources/synthetic")
 RECORD_NAME: Final = "audit.json"
+PROVENANCE_NAME: Final = "provenance.json"
 _NOTES: Final = "*/*.txt"
 
 
@@ -72,9 +77,24 @@ class CorpusDirectory:
         except ValidationError as error:
             raise InvalidAuditRecordError from error
 
+    def audit_sha256(self) -> str:
+        """Otisk souboru se záznamem auditu tak, jak leží na disku.
+
+        Returns:
+            SHA-256 otisk.
+        """
+        return file_sha256(self.root / RECORD_NAME)
+
     def save_record(self, record: AuditRecord) -> None:
         """Zapíše záznam auditu do kořene korpusu."""
-        (self.root / RECORD_NAME).write_text(
+        self._write(RECORD_NAME, record)
+
+    def save_provenance(self, record: ProvenanceRecord) -> None:
+        """Zapíše záznam provenance do kořene korpusu."""
+        self._write(PROVENANCE_NAME, record)
+
+    def _write(self, name: str, record: BaseModel) -> None:
+        (self.root / name).write_text(
             f"{record.model_dump_json(indent=2)}\n", encoding="utf-8"
         )
 

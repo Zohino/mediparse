@@ -17,6 +17,7 @@ dependencies = [
 mediparse-corpus-audit = "mediparse.entrypoints.corpus_audit:main"
 mediparse-corpus-check = "mediparse.entrypoints.corpus_consistency:main"
 mediparse-corpus-gate = "mediparse.entrypoints.corpus_gate:main"
+mediparse-corpus-provenance = "mediparse.entrypoints.corpus_provenance:main"
 mediparse-sample-plans = "mediparse.entrypoints.synthetic_plans:main"
 mediparse-verbalization-prompt = "mediparse.entrypoints.verbalization_prompt:main"
 
@@ -102,6 +103,7 @@ ignore_imports = [
     "mediparse.** -> itertools",
     "mediparse.** -> types",
     "mediparse.** -> typing",
+    "mediparse.domain.** -> datetime",
     "mediparse.domain.** -> hashlib",
     "mediparse.domain.** -> math",
     "mediparse.domain.** -> pydantic",

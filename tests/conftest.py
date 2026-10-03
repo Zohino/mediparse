@@ -32,6 +32,7 @@ if TYPE_CHECKING:
 type Rows = Sequence[tuple[str, str]]
 
 REPOSITORY_CONFIG: Final = Path(__file__).parents[1] / "config" / "synthetic_plan.json"
+REPOSITORY_TEMPLATE: Final = Path(__file__).parents[1] / VERBALIZATION_TEMPLATE_PATH
 
 COMMIT: Final = "c" * 40
 HEADER: Final = (
@@ -206,6 +207,26 @@ class AuditFiles:
         assert corpus_audit.run(argv, {}) == ExitCode.OK
         return root
 
+    def provenance_argv(self, corpus: Path, **overrides: str) -> list[str]:
+        """Argumenty provenance korpusu s configem a šablonou z repa.
+
+        Returns:
+            Argumenty vstupního bodu provenance; ``overrides`` nahradí údaje o generování.
+        """
+        generation = {
+            "model": "claude-opus-5-5",
+            "claude-code-version": "2.1.5",
+            "date": "2026-10-10",
+            "specification-commit": COMMIT,
+        } | overrides
+        return [
+            *(f"--{name}={value}" for name, value in generation.items()),
+            f"--corpus={corpus}",
+            f"--config={REPOSITORY_CONFIG}",
+            f"--template={REPOSITORY_TEMPLATE}",
+            f"--tables={self.tables}",
+        ]
+
     def audit_argv(
         self, corpus: Path, references: Sequence[Path], report: Path
     ) -> list[str]:
@@ -264,6 +285,4 @@ def verbalization_template() -> str:
     Returns:
         Text šablony načtený jednou za běh testů.
     """
-    return load_verbalization_template(
-        REPOSITORY_CONFIG.parents[1] / VERBALIZATION_TEMPLATE_PATH
-    )
+    return load_verbalization_template(REPOSITORY_TEMPLATE)
