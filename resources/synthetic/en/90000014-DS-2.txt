@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Excessive thirst and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with long-standing obesity and hypertension presented to ___ after three days of polyuria, thirst, blurry vision and worsening fatigue. Fingerstick glucose at home read high. He was transferred from ___ for further management after laboratory studies showed marked hyperglycemia and a low bicarbonate. He denied chest pain, fever, or abdominal pain.
+
+Past Medical History:
+Hypertension
+Obesity
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother and brother with elevated blood sugars requiring pills.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: T 98.4 HR 104 BP 138/84 RR 18 SpO2 98% RA
+General: Tired appearing, dry mucous membranes, no distress.
+Neck: Supple, no JVD.
+ABD: Soft, obese, nontender.
+Ext: Warm, no edema.
+
+Pertinent Results:
+ADMISSION LABS:
+Glucose 642, sodium 128, potassium 5.1, bicarbonate 14, anion gap 24, creatinine 1.3, BUN 28. Beta-hydroxybutyrate elevated. HbA1c 13.2%. Urinalysis with large glucose and ketones. WBC 12.4.
+Chest radiograph at ___ without acute process. ECG showed sinus tachycardia without ischemic changes.
+Glucose at discharge 148, bicarbonate 25, anion gap 10.
+
+Brief Hospital Course:
+He was admitted to the intensive care unit and treated with intravenous fluids and an insulin infusion, with electrolytes replaced frequently. His gap closed within a day and he moved to the floor on ___. The endocrine team from ___ started basal and mealtime insulin and metformin, and taught injection technique. Nursing reviewed meter use with him before ___. Dr. ___ adjusted doses to glucoses of 110 to 180 prior to discharge.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. List obtained from ___ pharmacy records.
+
+Discharge Medications:
+Insulin glargine 20 units nightly. Insulin lispro with meals per sliding scale. Metformin 500 mg twice daily. Lisinopril 10 mg daily. Atorvastatin 40 mg nightly. Glucose test strips and pen needles prescribed; first supplies dispensed ___.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Hyperglycemic crisis with ketoacidosis
+Hypertension
+Hyperlipidemia
+Obesity
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for dangerously high blood sugar. Check your glucose before meals and at bedtime and keep a log. Take insulin exactly as taught. Return for vomiting, confusion, or readings above 400. Call the clinic at ___ with questions, or the office line ___ after hours. Eat regular meals.
+
+Followup Instructions:
+___

@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented with four days of productive cough, fever, and shortness of breath. She was seen at ___ and sent to the emergency department. On arrival she was febrile and mildly hypoxic. Chest imaging showed a right lower lobe infiltrate. She was admitted to ___ for treatment.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Osteoarthritis, followed at ___
+
+Social History:
+___
+
+Family History:
+Mother with stroke. Father with hypertension.
+
+Physical Exam:
+Gen: Tired, no distress.
+HEENT: Moist mucous membranes.
+Lungs: Crackles at right base.
+Abdomen: Soft, nontender.
+Ext: No edema.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 14.2, hemoglobin 12.1, creatinine 0.9, lactate 1.4. Results reviewed with ___.
+IMPRESSION:
+Right lower lobe consolidation.
+FINDINGS:
+Airspace opacity at the right base with small parapneumonic effusion. No pneumothorax. Heart size normal.
+
+Brief Hospital Course:
+She was treated for pneumonia with ceftriaxone changed to oral azithromycin and doxycycline given her allergy history, reviewed with ___. Oxygen was weaned to room air by day three. Fever resolved and cough improved. Home blood pressure medication was continued. She was ambulating independently and discharged home with ___ support.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth daily.
+2. Atorvastatin 20 mg by mouth nightly.
+3. Doxycycline 100 mg by mouth twice daily for five more days.
+4. Acetaminophen as needed for fever.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Community-acquired pneumonia
+Hypoxia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with a lung infection. Finish your antibiotics as prescribed and drink plenty of fluids. Rest at home and return for fever, worsening breathing, or chest pain. Call ___ with questions, and keep your visit at ___.
+
+Followup Instructions:
+___

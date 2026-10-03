@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with ___ who presented with three days of productive cough, fever and shortness of breath. He was first evaluated at ___ where chest imaging showed a right lower lobe opacity, and he was transferred for further care.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Remote tobacco use, quit ___
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: T 38.4, HR 98, BP 128/76, RR 22, SpO2 92% on room air
+Gen: Ill appearing, mildly tachypneic
+Neck: Supple
+PULM: Crackles at right base
+Abdomen: Soft, nontender
+EXTREMITIES: No edema
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+WBC 14.2 with neutrophil predominance. Lactate normal. Chest radiograph: right lower lobe consolidation. Blood cultures from ___ showed no growth.
+
+Brief Hospital Course:
+He was treated for community acquired pneumonia with intravenous antibiotics, then switched to oral therapy once afebrile. Oxygen was weaned to room air by ___. He walked unassisted and tolerated diet, so he was discharged home on ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Amoxicillin-clavulanate 875 mg by mouth twice daily for four more days
+
+Discharge Disposition:
+Home with ___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypoxemia, resolved
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with a lung infection. Finish the full antibiotic course, rest, and drink plenty of fluids. Return for worsening breathing, high fever or chest pain. Please see your doctor at ___.
+
+Followup Instructions:
+___

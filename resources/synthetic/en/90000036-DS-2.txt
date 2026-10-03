@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Vomiting and low urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with three days of vomiting, poor intake and scant urine after starting ___ for a urinary infection at ___. Possible chronic kidney disease was mentioned by her clinician at ___. She was hypotensive in the emergency department and improved with intravenous fluids.
+REVIEW OF SYSTEMS:
+Positive for nausea; no fever or chest pain.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Recurrent urinary infections
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General: tired, comfortable
+HEENT: dry mucosa
+Lungs: clear
+CARDIAC: regular rhythm
+ABD: soft, nontender
+Neuro: nonfocal
+
+Pertinent Results:
+Creatinine elevated on arrival and fell steadily with hydration. Potassium mildly high, then normal. Urinalysis showed few cells and no blood. Renal ultrasound at ___ showed no obstruction. Urine culture grew no organisms.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+Antibiotic from ___
+
+Discharge Medications:
+1. Atorvastatin 20 mg by mouth nightly.
+2. Amlodipine 5 mg by mouth daily, started for blood pressure.
+3. Acetaminophen as needed for pain.
+Hold lisinopril until your follow-up at ___.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary: Acute kidney injury
+
+Discharge Condition:
+Mental Status: Alert and oriented
+Level of Consciousness: Awake and attentive
+Activity Status: Walks independently
+
+Discharge Instructions:
+You were hospitalized because your kidneys were strained by dehydration. Drink fluids regularly and avoid anti-inflammatory pain medicines. Keep your lab appointment at ___. Return for vomiting, fainting, or very little urine, and call ___ with questions.
+
+Followup Instructions:
+___

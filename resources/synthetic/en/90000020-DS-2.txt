@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with three days of productive cough, fever and shortness of breath. His primary physician ___ sent him to the emergency department. Chest imaging showed right lower lobe consolidation, and he was admitted for treatment.
+REVIEW OF SYSTEMS:
+Positive for chills and fatigue. Negative for chest pain.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: tired, no distress
+HEENT: moist mucosa
+PULM: right basilar crackles
+ABD: soft
+Ext: no edema
+PULSES: palpable
+DISCHARGE PHYSICAL EXAM:
+General: comfortable
+PULM: clear
+
+Pertinent Results:
+ADMISSION LABS:
+White count elevated at 14.2, lactate normal, creatinine at baseline. Blood cultures drawn.
+DISCHARGE LABS:
+White count 8.1, creatinine stable. Blood cultures without growth. Chest film showed right lower lobe pneumonia.
+
+Brief Hospital Course:
+He was treated with intravenous antibiotics at ___ and improved quickly. Fever resolved by day two and oxygen was weaned to room air. His home blood pressure medicines were continued. After review by ___ he was changed to oral antibiotics and judged ready for discharge to ___ with outpatient follow up.
+
+Medications on Admission:
+Lisinopril and atorvastatin daily
+
+Discharge Medications:
+1. Lisinopril daily
+2. Atorvastatin nightly
+3. Amoxicillin-clavulanate twice daily for five more days
+4. Acetaminophen as needed, from ___
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized for pneumonia and treated with antibiotics. Finish the full antibiotic course, drink plenty of fluids and rest. Call ___ or return if fever, worsening breathlessness or chest pain develops. Do not smoke. Bring this summary to ___.
+
+Followup Instructions:
+___

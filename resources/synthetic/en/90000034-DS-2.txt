@@ -1,0 +1,81 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman sent from ___ with intermittent palpitations since ___. Rhythm strip raised possible atrial fibrillation. Otherwise stable, no chest pain.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals:
+Afebrile, stable
+General:
+Comfortable
+HEENT:
+Normal
+ABD:
+Soft, nontender
+EXTREMITIES:
+No edema
+SKIN:
+Warm, dry
+Neuro:
+Nonfocal
+
+Pertinent Results:
+ADMISSION LABS:
+Glucose elevated, electrolytes normal, troponin negative.
+IMAGING:
+Chest film without acute findings.
+
+Brief Hospital Course:
+Observed on telemetry without sustained arrhythmia. Glucose was high and followed by Dr. ___. Symptoms resolved, and she was cleared for discharge home.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+
+Discharge Medications:
+Continue lisinopril and atorvastatin as before. Start metformin twice daily with meals for glucose control.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes mellitus
+Secondary:
+Hypertension
+
+Discharge Condition:
+Good
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake and attentive
+Activity Status:
+Walks independently
+
+Discharge Instructions:
+Take medicines as prescribed and follow a low-sugar diet. Return for fainting or chest pain. Call ___ with questions.
+
+Followup Instructions:
+___

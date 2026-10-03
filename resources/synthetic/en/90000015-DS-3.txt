@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with long-standing chronic kidney disease and chronic heart failure who presented with three days of worsening leg swelling and shortness of breath on exertion. She was seen at ___ by her outpatient physician on ___ and sent in for evaluation. She reported poor appetite, orthopnea, and a weight gain of several pounds. No chest pain or fever.
+REVIEW OF SYSTEMS:
+Positive for fatigue and dyspnea. Negative for cough, vomiting, diarrhea, dysuria.
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Father with stroke, cared for at ___.
+
+Physical Exam:
+Elderly woman, comfortable at rest, seen by ___ team.
+Neck:
+JVP elevated to the jaw.
+CARDIAC:
+Regular rate, soft systolic murmur.
+Abdomen:
+Soft, nontender, mildly distended.
+Ext:
+Pitting edema to the knees bilaterally.
+Neuro:
+Alert, oriented, nonfocal.
+
+Pertinent Results:
+Admission labs notable for creatinine above her baseline, mildly low sodium, and normal potassium. BNP markedly elevated. Troponin negative twice. Hemoglobin stable and mildly low. Chest radiograph showed pulmonary vascular congestion with small bilateral effusions, read by ___. Echocardiogram performed at ___ showed reduced ejection fraction, unchanged from prior study. ECG with sinus rhythm and no acute ischemic changes. Urinalysis bland. Creatinine improved gradually over the stay with diuresis and returned close to baseline before discharge.
+
+Medications on Admission:
+Furosemide 40 mg daily, carvedilol 6.25 mg twice daily, lisinopril 5 mg daily, aspirin 81 mg daily.
+
+Discharge Medications:
+1. Furosemide 60 mg by mouth once daily.
+2. Carvedilol 6.25 mg by mouth twice daily.
+3. Aspirin 81 mg by mouth once daily.
+4. Calcium acetate 667 mg with meals.
+5. Lisinopril was held; restart only when told by ___.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory with a walker, independent.
+
+Discharge Instructions:
+You were hospitalized because of fluid buildup causing swelling and breathlessness. You were given medication through the vein to remove the extra fluid and your breathing improved. Weigh yourself every morning and call ___ if you gain more than three pounds in a day or five pounds in a week. Limit salt and fluids as advised. Take your medications as listed. Return to the emergency department for chest pain, severe breathlessness, or fainting. Keep your visit with ___ as arranged.
+
+Followup Instructions:
+___

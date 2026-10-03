@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Cardiology
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient is a woman who presented to ___ with several days of intermittent palpitations, lightheadedness and mild exertional dyspnea. Symptoms began after a trip to ___ and worsened the morning of presentation. She denied chest pain, syncope or fever. In the emergency department her heart rate was irregular and rapid, and she was observed on telemetry. She was referred by her primary care physician, Dr. ___, and admitted for rate control and further evaluation.
+
+Past Medical History:
+Hypertension, hyperlipidemia, hypothyroidism, status post cholecystectomy at ___.
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Brother treated at ___ for thyroid disease.
+
+Physical Exam:
+General: Well-appearing woman in no acute distress, alert, conversant and oriented.
+HEENT: Normocephalic, atraumatic, moist mucous membranes, anicteric.
+Neck: Supple, no JVD, no lymphadenopathy.
+Lungs: Clear to auscultation bilaterally.
+Abdomen: Soft, nontender, nondistended, normal bowel sounds.
+
+Pertinent Results:
+Admission labs notable for normal electrolytes and thyroid stimulating hormone within normal limits. Troponin negative x2. Hemoglobin stable through discharge. ECG on arrival showed an irregularly irregular narrow complex rhythm with a rapid ventricular rate; repeat ECG after treatment showed a controlled rate. Chest radiograph: no acute cardiopulmonary process. Transthoracic echocardiogram performed at ___ showed normal ejection fraction and no significant valvular disease. Results reviewed with cardiology, Dr. ___.
+
+Brief Hospital Course:
+She was admitted to telemetry and started on metoprolol with good control of her heart rate. Cardiology evaluated her and recommended starting an anticoagulant after calculating her stroke risk score. Thyroid function and electrolytes were unremarkable, and no reversible trigger was identified. She remained hemodynamically stable and symptoms resolved by hospital day two. She was counseled about bleeding precautions by the pharmacist at ___. Her primary care physician at ___ was updated by phone. Follow up was arranged with the clinic at ___.
+TRANSITIONAL ISSUES:
+- Recheck heart rate and blood pressure at first visit; titrate metoprolol.
+- Confirm adherence to anticoagulation and check kidney function and blood count in ___ weeks.
+
+Medications on Admission:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly, levothyroxine 75 mcg daily, ibuprofen as needed.
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg by mouth daily.
+2. Apixaban 5 mg by mouth twice daily.
+3. Lisinopril 10 mg by mouth daily.
+4. Atorvastatin 20 mg by mouth nightly.
+5. Levothyroxine 75 mcg by mouth daily.
+6. Stop ibuprofen; avoid NSAIDs while on apixaban.
+
+Discharge Disposition:
+Home with ___ services
+
+Discharge Diagnosis:
+Atrial fibrillation with rapid ventricular response
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for a fast, irregular heartbeat. Your heart rate was controlled with medication and a blood thinner was started to lower your stroke risk. Take all medicines as prescribed and do not skip doses. Call ___ or return to the emergency department for chest pain, fainting, bleeding or black stools. Please keep your appointment with Dr. ___.
+
+Followup Instructions:
+___

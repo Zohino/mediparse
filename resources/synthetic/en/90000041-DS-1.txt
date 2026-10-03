@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and lightheadedness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman presenting with two days of rapid irregular palpitations and mild lightheadedness, seen first at ___ clinic and sent to ___ emergency department. No syncope or chest pain. Heart rate was elevated on arrival.
+REVIEW OF SYSTEMS:
+Positive for fatigue. Negative for fever, cough, dyspnea.
+
+Past Medical History:
+Atrial fibrillation, diagnosed ___
+Hypertension
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Mother with stroke. No sudden cardiac death.
+
+Physical Exam:
+General: Comfortable, no distress.
+HEENT: Moist mucous membranes.
+Neck: Supple, no JVD.
+Lungs: Clear bilaterally.
+ABD: Soft, nontender.
+Ext: Warm, no edema.
+SKIN: Intact.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+Labs on ___ showed normal electrolytes and thyroid function. Troponin negative twice. ECG showed irregularly irregular rhythm with rapid ventricular response.
+IMAGING:
+Chest radiograph obtained.
+IMPRESSION:
+No acute cardiopulmonary process.
+
+Brief Hospital Course:
+Rate was controlled with oral metoprolol and symptoms resolved within a day. Anticoagulation was continued after discussion with cardiology at ___. She remained hemodynamically stable and ambulated independently. Discharged home with outpatient cardiology review arranged through ___.
+TRANSITIONAL ISSUES:
+Recheck heart rate and blood pressure at follow-up.
+
+Medications on Admission:
+Metoprolol, apixaban, levothyroxine, lisinopril
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Atrial fibrillation with rapid ventricular response
+
+Discharge Condition:
+Good
+Mental Status: Clear and coherent.
+Activity Status: Independent, ambulatory.
+
+Discharge Instructions:
+You were hospitalized for a fast irregular heartbeat. Take your medicines as prescribed and do not skip blood thinner doses. Call ___ or return to the emergency department for fainting, chest pain, or worsening palpitations. Keep your appointment at ___.
+
+Followup Instructions:
+___

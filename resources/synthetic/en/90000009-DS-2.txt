@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Nausea and low urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman presented to ___ with three days of nausea, poor oral intake and decreased urine output. Labs showed AKI with creatinine well above her baseline. She denied fever, chest pain or new medications. She was admitted for hydration and close monitoring of kidney function.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension, diagnosed ___
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension, ___
+
+Physical Exam:
+General:
+Tired, comfortable, no distress
+HEENT:
+Dry mucous membranes
+Neck:
+Supple
+ABD:
+Soft, nontender
+SKIN:
+Warm, decreased turgor
+
+Pertinent Results:
+Admission creatinine elevated, improved steadily with fluids. Urinalysis bland, no infection. Renal ultrasound showed no obstruction.
+DISCHARGE LABS:
+Creatinine near baseline, potassium normal, bicarbonate normal, glucose acceptable, hemoglobin stable.
+
+Brief Hospital Course:
+She received intravenous fluids and her home blood pressure medicines were held. Urine output recovered and creatinine fell toward baseline. Nephrology from ___ reviewed her on ___ and noted underlying chronic kidney disease. Oral intake normalized and nausea resolved. She was stable for discharge with early laboratory follow up.
+
+Medications on Admission:
+Metformin
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+Atorvastatin 20 mg nightly. Resume lisinopril only after the follow up blood test. Stop metformin until kidney function is rechecked. Acetaminophen as needed for discomfort.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Primary:
+Acute kidney injury
+Chronic kidney disease
+
+Discharge Condition:
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake and attentive
+Activity Status:
+Walks independently
+
+Discharge Instructions:
+Drink plenty of fluids and avoid ibuprofen and similar pain medicines. Take your medicines as listed. Have blood work repeated within one week. Call Dr. ___ at ___ or return if urine output drops, vomiting returns, or you feel faint.
+
+Followup Instructions:
+___

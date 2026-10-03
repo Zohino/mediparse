@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Shortness of breath and leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with long-standing diabetes sent from ___ clinic after a week of worsening breathlessness, weight gain and ankle swelling. No chest pain or fever.
+REVIEW OF SYSTEMS:
+Positive for orthopnea and fatigue.
+
+Past Medical History:
+Heart failure
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Comfortable at rest, irregular pulse, bibasilar crackles.
+DISCHARGE PHYSICAL EXAM:
+Vitals: T 98.2 HR 78 BP 124/72 RR 16 SpO2 97% RA
+Gen: Alert, no distress
+EXTREMITIES: Trace edema bilaterally
+SKIN: Warm and dry
+
+Brief Hospital Course:
+She was diuresed with intravenous furosemide and improved steadily. Rate control was started for an irregular rhythm and anticoagulation was begun. Blood sugars were managed with insulin. She was discharged on ___ oral regimen.
+
+Medications on Admission:
+Lisinopril, metformin, atorvastatin
+
+Discharge Medications:
+Furosemide 40 mg daily, metoprolol succinate 50 mg daily, apixaban 5 mg twice daily, lisinopril 10 mg daily, metformin 500 mg twice daily.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Acute on chronic systolic heart failure
+Atrial fibrillation, diabetes mellitus
+
+Discharge Condition:
+Stable
+Level of Consciousness: Alert and oriented
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+Weigh yourself every morning and call ___ if you gain more than three pounds. Limit salt and fluids. Take all medicines as prescribed and keep follow-up visits with the ___ clinic.
+
+Followup Instructions:
+___

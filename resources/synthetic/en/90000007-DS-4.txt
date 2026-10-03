@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and weakness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with several days of poor intake, swelling and rising creatinine, sent in by ___.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Chronic kidney disease
+Atrial fibrillation
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General:
+Tired, comfortable
+Lungs:
+Bibasilar crackles
+Ext:
+Pitting edema
+SKIN:
+Warm, dry
+PULSES:
+Palpable, irregular
+
+Pertinent Results:
+ADMISSION LABS:
+Creatinine 3.1, baseline 1.8, potassium 5.4, BNP elevated
+IMPRESSION:
+Pulmonary vascular congestion
+
+Brief Hospital Course:
+Creatinine improved at ___ with fluid adjustment and held nephrotoxins. Diuresed gently, rate controlled, glucose managed with insulin.
+
+Medications on Admission:
+Metformin, apixaban, lisinopril
+
+Discharge Medications:
+Furosemide daily, apixaban continued, insulin glargine nightly; metformin and lisinopril held.
+
+Discharge Disposition:
+Home with services
+
+Discharge Diagnosis:
+Diabetes
+Chronic kidney disease
+Heart failure
+
+Discharge Condition:
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake
+Activity Status:
+Ambulatory with walker
+
+Discharge Instructions:
+Weigh yourself daily, limit salt, avoid ibuprofen, and return for worsening swelling or breathlessness.
+
+Followup Instructions:
+___

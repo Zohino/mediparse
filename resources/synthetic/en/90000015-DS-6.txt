@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with known heart failure sent from ___ with two weeks of worsening dyspnea, orthopnea and swollen legs after missing doses.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Osteoarthritis
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Gen: Comfortable, no distress
+Neck: JVP elevated
+Abdomen: Soft, nontender
+EXTREMITIES: Bilateral pitting edema
+SKIN: Warm, dry
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Admission labs showed elevated BNP and creatinine above baseline. Chest film at ___ demonstrated pulmonary vascular congestion.
+IMPRESSION:
+Mild bilateral effusions
+
+Brief Hospital Course:
+Diuresed with intravenous furosemide, with good response and resolution of congestion. Kidney function remained stable given her chronic kidney disease. Discharged at ___ weight.
+
+Medications on Admission:
+Lisinopril, furosemide, atorvastatin
+
+Discharge Medications:
+Furosemide 40 mg daily, lisinopril 5 mg daily, atorvastatin 20 mg nightly. Follow up with ___ regarding dosing.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary: Congestive heart failure
+Secondary: Chronic kidney disease
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+Weigh yourself every morning, limit salt and fluids, take medications as prescribed, and return for worsening breathlessness or swelling.

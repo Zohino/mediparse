@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs
+
+Chief Complaint:
+Shortness of breath, leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with several days of worsening shortness of breath and leg swelling. She was seen at ___ the previous week without improvement. Symptoms progressed overnight, prompting emergency evaluation.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Heart failure
+Hypertension
+
+Family History:
+Mother with hypertension. Otherwise noncontributory.
+
+Physical Exam:
+General: Alert, mildly dyspneic.
+Neck: JVP elevated.
+Lungs: Bibasilar crackles.
+ABD: Soft, nontender, nondistended.
+PULSES: Palpable, irregular.
+
+Pertinent Results:
+IMPRESSION: Pulmonary vascular congestion with small bilateral effusions.
+FINDINGS: Chest radiograph shows cardiomegaly, interstitial edema and blunted costophrenic angles. BNP elevated. ECG reviewed with ___.
+
+Brief Hospital Course:
+She was diuresed with intravenous furosemide with good response and improved oxygenation. Telemetry showed atrial fibrillation with controlled rates, and anticoagulation was started after discussion with ___. She was transitioned to oral diuretics and ambulated safely before discharge from ___.
+
+Medications on Admission:
+Metformin, lisinopril, furosemide, aspirin
+
+Discharge Medications:
+Furosemide 40 mg daily, apixaban 5 mg twice daily, metformin 500 mg twice daily, lisinopril 10 mg daily.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic kidney disease
+Heart failure
+Primary: Decompensated heart failure
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory with assistance as needed.
+
+Discharge Instructions:
+Weigh yourself every morning and call your doctor if weight rises more than two pounds in a day. Limit salt and fluids as advised. Take medications as prescribed and return for worsening breathlessness. Bring this list to ___.
+
+Followup Instructions:
+___

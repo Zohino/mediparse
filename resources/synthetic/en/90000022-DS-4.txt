@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath and leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man who presented with three days of worsening exertional dyspnea and bilateral leg swelling. He was seen at ___ by his primary physician and sent to ___ for further evaluation. He describes orthopnea and fatigue starting around ___. He denies chest pain, fever, or syncope.
+REVIEW OF SYSTEMS:
+Positive for dyspnea and fatigue. Negative for fever, cough, chest pain.
+
+Past Medical History:
+Possible heart failure, not yet confirmed, followed at ___
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Family history of diabetes mellitus in his mother. Father had hypertension.
+
+Physical Exam:
+Vitals: Afebrile, blood pressure 138/82, heart rate 78, oxygen saturation 96 percent on room air.
+General: Comfortable, no distress.
+EXTREMITIES: Mild bilateral pitting edema to the shins.
+Neuro: Alert, oriented, no focal deficits.
+
+Pertinent Results:
+Labs on ___ notable for mildly elevated BNP. Chest radiograph at ___ showed mild vascular congestion. Echocardiogram on ___ showed preserved ejection fraction with mild left atrial enlargement. Troponin negative twice. Creatinine at baseline. Electrolytes and blood counts unremarkable.
+
+Brief Hospital Course:
+He was admitted for volume overload and received intravenous furosemide with good urine output and gradual improvement in breathing and swelling. Cardiology, Dr. ___, reviewed the echocardiogram and recommended outpatient follow up. Troponin was negative and telemetry showed no arrhythmia. He was transitioned to oral furosemide and walked comfortably before discharge on ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Furosemide 20 mg by mouth daily, new.
+Lisinopril 10 mg by mouth daily, continue.
+Atorvastatin 20 mg by mouth nightly, continue.
+Potassium supplement as directed by ___ until labs are rechecked.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Volume overload
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with fluid buildup causing swelling and shortness of breath. Take your new water pill every morning and weigh yourself daily. Limit salt in your diet. Call ___ or return to the hospital if your weight rises by three pounds in a day, or if you have worsening breathlessness or chest pain.
+
+Followup Instructions:
+___

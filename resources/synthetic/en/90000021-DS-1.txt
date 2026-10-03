@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Palpitations and lightheadedness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman presenting with palpitations and lightheadedness for three days, worse with exertion. She was first seen at ___ and transferred on ___ for further evaluation. Vital signs were stable, and the initial ECG showed an irregular rhythm.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+
+Past Surgical History:
+Cholecystectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+HEENT: Moist mucous membranes, no icterus.
+Lungs: Clear bilaterally.
+Abdomen: Soft, nontender.
+Ext: Warm, no edema.
+
+Pertinent Results:
+FINDINGS:
+Chest radiograph showed clear lung fields and normal cardiac silhouette. Thyroid function was within normal limits. Electrolytes were unremarkable. Troponin was negative on two checks. Echocardiogram showed preserved ventricular function and mild left atrial enlargement.
+
+Brief Hospital Course:
+Telemetry showed atrial fibrillation with rapid ventricular response, controlled with metoprolol, and anticoagulation was started. Creatinine stayed at baseline, with no evidence of acute kidney injury. Echocardiogram performed at ___ was reassuring. She improved steadily and was discharged home to follow up with cardiology at ___.
+
+Medications on Admission:
+Lisinopril
+Levothyroxine
+
+Discharge Medications:
+1. Metoprolol succinate daily.
+2. Apixaban twice daily, as directed by ___.
+3. Lisinopril daily.
+4. Levothyroxine each morning.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Palpitations with rapid heart rate
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Mental Status: Alert and fully oriented.
+Level of Consciousness: Awake and attentive.
+Activity Status: Walks independently.
+
+Discharge Instructions:
+You were hospitalized because of a fast, irregular heartbeat. Take the new medicines exactly as prescribed, and do not skip doses of your blood thinner. Return for chest pain, fainting, or bleeding. Call ___ with questions.
+
+Followup Instructions:
+___

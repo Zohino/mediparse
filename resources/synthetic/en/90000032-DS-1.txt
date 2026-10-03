@@ -1,0 +1,78 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Woman with two days of postprandial right upper quadrant pain and nausea, sent by ___ clinic. Ultrasound suggested gallstones.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Prior cesarean section
+
+Social History:
+___
+
+Family History:
+Mother had gallstones.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals:
+Afebrile, stable.
+General:
+Uncomfortable.
+HEENT:
+Anicteric.
+Lungs:
+Clear.
+ABD:
+Tender at ___.
+
+Pertinent Results:
+ADMISSION LABS:
+Mild leukocytosis, normal bilirubin.
+IMAGING:
+Ultrasound done at ___.
+IMPRESSION:
+Gallstones with wall thickening.
+
+Brief Hospital Course:
+Admitted with acute cholecystitis, given antibiotics, and underwent uncomplicated laparoscopic cholecystectomy. Diet advanced, pain controlled orally, and she was discharged on ___ in good condition.
+
+Medications on Admission:
+Lisinopril
+Levothyroxine
+
+Discharge Medications:
+1. Lisinopril daily.
+2. Levothyroxine daily.
+3. Acetaminophen as needed for pain.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Stable, alert and oriented.
+Activity Status:
+Walks independently.
+
+Discharge Instructions:
+Keep incisions clean and dry. Avoid lifting heavy objects for several weeks. Return for fever, vomiting, or worsening abdominal pain.
+
+Followup Instructions:
+___

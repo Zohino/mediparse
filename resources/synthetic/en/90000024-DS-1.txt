@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and dizziness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with intermittent palpitations for several days, seen at ___ clinic, then sent to ___ emergency department after lightheadedness while walking. No chest pain or syncope.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Possible atrial fibrillation, not confirmed, evaluated at ___
+
+Social History:
+___
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Moist mucous membranes
+PULM:
+Clear bilaterally
+CARDIAC:
+Regular rate, no murmur
+
+Pertinent Results:
+DISCHARGE LABS:
+Sodium 140, potassium 4.1, hemoglobin 13.8, troponin negative twice
+IMPRESSION:
+Chest radiograph without acute process
+
+Brief Hospital Course:
+Monitored on telemetry with occasional ectopy only. Electrolytes were repleted. Symptoms resolved by ___ and he was ambulating independently. Outpatient ambulatory monitor arranged through ___ cardiology.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Lisinopril 10 mg by mouth daily
+Atorvastatin 20 mg by mouth nightly
+Metoprolol succinate 25 mg by mouth daily, newly started
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Palpitations
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were admitted for palpitations. Take the new metoprolol each morning. Wear the monitor as directed and return for fainting, chest pain, or racing heartbeat. Call ___ with questions.
+
+Followup Instructions:
+___

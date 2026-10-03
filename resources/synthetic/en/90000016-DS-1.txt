@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Vomiting and low urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with three days of vomiting, poor oral intake and decreased urine output, sent from clinic at ___ after labs showed acute kidney injury. Referred by ___ for admission.
+REVIEW OF SYSTEMS:
+Positive for nausea and fatigue. No chest pain or fever.
+
+Past Medical History:
+Diabetes mellitus
+Hypertension
+Cholecystectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Dry mucous membranes, otherwise comfortable.
+Neck:
+Supple, flat JVP.
+Ext:
+Warm, no edema.
+SKIN:
+Intact, decreased turgor.
+
+Pertinent Results:
+ADMISSION LABS:
+Creatinine 2.4, BUN 48, glucose 232, potassium 5.1, bicarbonate 19.
+FINDINGS:
+Renal ultrasound without hydronephrosis. ECG sinus rhythm. Urinalysis reviewed at ___.
+
+Brief Hospital Course:
+She received intravenous fluids and nephrotoxic medications were held. Creatinine improved steadily to near baseline over four days. Glucose was covered with sliding scale insulin. Nephrology at ___ agreed with the plan. She walked independently by ___.
+
+Medications on Admission:
+Metformin, glipizide, lisinopril, atorvastatin.
+
+Discharge Medications:
+Glipizide twice daily with meals. Atorvastatin nightly. Hold metformin and lisinopril until kidney function is rechecked by her primary doctor.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute kidney injury
+Diabetes mellitus
+
+Discharge Condition:
+Mental Status:
+Alert and fully oriented.
+Level of Consciousness:
+Awake and attentive.
+Activity Status:
+Walks without assistance.
+
+Discharge Instructions:
+You were admitted with dehydration that hurt your kidneys. Drink plenty of fluids, avoid anti-inflammatory pain medicines, and call ___ if vomiting returns or urine output drops.
+
+Followup Instructions:
+___

@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Decreased urine output and leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with known heart failure presented with three days of decreased urine output, leg swelling and fatigue after running out of his diuretic. Seen at ___ clinic on ___ where labs showed acute kidney injury, and he was sent to the emergency department.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+No history of atrial fibrillation
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+Gen: Tired but comfortable, no distress
+HEENT: Dry mucous membranes
+Neck: Jugular venous distension present
+Ext: Mild bilateral pitting edema
+
+Pertinent Results:
+ADMISSION LABS:
+Creatinine 2.4, urea nitrogen 48, potassium 5.2, sodium 136.
+DISCHARGE LABS:
+Creatinine 1.3, urea nitrogen 24, potassium 4.4, sodium 139. Renal ultrasound showed no hydronephrosis.
+
+Brief Hospital Course:
+Diuretics were held and gentle fluids given while kidney function was monitored. Creatinine improved steadily over several days. Urinary obstruction was excluded with imaging at ___. Home cardiac medications were resumed gradually once volume status stabilized. He was evaluated by ___ and cleared for discharge on ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 40 mg nightly
+
+Discharge Medications:
+Atorvastatin 40 mg nightly. Furosemide 20 mg every morning. Lisinopril is on hold until your kidney doctor reviews your blood tests at followup.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Acute kidney injury
+
+Discharge Condition:
+Mental Status: Alert and fully oriented
+Level of Consciousness: Awake and attentive
+
+Discharge Instructions:
+Weigh yourself every morning. Avoid anti-inflammatory pain medicines. Drink fluids as directed. Return for swelling, shortness of breath or low urine output. Call ___ with questions.
+
+Followup Instructions:
+___

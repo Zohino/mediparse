@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy with intraoperative cholangiogram
+
+History of Present Illness:
+Mr. ___ is a ___ year old man with two days of worsening right upper quadrant pain, nausea and vomiting after a fatty meal. He was first seen at ___, where ultrasound showed gallstones with gallbladder wall thickening. He received intravenous fluids and antibiotics and was transferred here on ___ for surgical evaluation. He reported low-grade fevers but no jaundice or pale stools. The pain was constant and radiated to his right shoulder blade. Surgery was consulted by Dr. ___ and he went to the operating room on ___.
+
+Past Medical History:
+Diabetes mellitus type 2
+Hypertension
+Hyperlipidemia
+Obesity
+
+Past Surgical History:
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones. Father with hypertension.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Afebrile, vital signs stable. Uncomfortable but nontoxic.
+HEENT: Anicteric sclerae, moist mucous membranes.
+PULM: Clear bilaterally.
+CARDIAC: Regular rate and rhythm, no murmurs.
+ABD: Soft, tender in the right upper quadrant with positive Murphy sign, no rebound.
+EXTREMITIES: Warm, no edema.
+
+Pertinent Results:
+Admission labs: WBC 14.2, hemoglobin 14.1, platelets 262. ALT 48, AST 41, alkaline phosphatase 96, total bilirubin 1.1, lipase 30, creatinine 0.9, lactate 1.3.
+Ultrasound at ___: cholelithiasis, gallbladder wall thickening of 5 mm, small amount of pericholecystic fluid, positive sonographic Murphy sign, common bile duct 4 mm.
+Intraoperative cholangiogram: normal filling of the biliary tree, no filling defects, free flow into the duodenum.
+Pathology pending at discharge, to be reviewed at ___.
+Discharge labs: WBC 8.3, creatinine 0.8.
+
+Medications on Admission:
+Metformin 1000 mg twice daily
+Lisinopril 20 mg daily
+Atorvastatin 40 mg nightly
+Aspirin 81 mg daily
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed for pain.
+Oxycodone 5 mg every four hours as needed for severe pain, supply of ___ tablets.
+Docusate 100 mg twice daily while taking oxycodone.
+Ondansetron 4 mg every eight hours as needed for nausea.
+Resume metformin, lisinopril, atorvastatin and aspirin as before admission.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory and independent.
+
+Discharge Instructions:
+You were admitted with an inflamed gallbladder and had it removed laparoscopically. You may shower and let soapy water run over the incisions, but do not soak them. Do not lift more than ten pounds for ___ weeks. Call the ___ office or return to the emergency room for fever above 101, worsening abdominal pain, persistent vomiting, yellow skin, or drainage from the incisions. Follow up with Dr. ___ at the ___ clinic in two weeks.

@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Foot wound, fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man sent by ___ clinic with a slowly healing foot ulcer and several days of weakness. He was admitted for wound care and monitoring.
+
+Past Medical History:
+Diabetes mellitus type 2
+Chronic kidney disease stage 3
+Hypertension
+
+Social History:
+___
+
+Family History:
+Family history of atrial fibrillation in his father. Mother had hypertension.
+
+Physical Exam:
+Vitals: stable
+Gen: comfortable
+HEENT: normal
+ABD: soft
+Ext: left foot ulcer
+SKIN: warm, dry
+
+Pertinent Results:
+Glucose elevated on arrival. Creatinine at baseline. White count mildly raised.
+IMAGING:
+Foot film without bone involvement.
+
+Medications on Admission:
+Metformin, lisinopril, amlodipine
+
+Discharge Medications:
+Continue home lisinopril and amlodipine. Insulin glargine nightly. Cephalexin for seven days. Stop metformin.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Diabetic foot ulcer
+Diabetes mellitus
+Chronic kidney disease
+
+Discharge Condition:
+Mental Status: clear and coherent
+Level of Consciousness: alert
+Activity Status: walks independently with offloading shoe
+
+Discharge Instructions:
+Keep the dressing clean and dry. Check blood sugar twice daily. Return for fever, spreading redness or drainage. Keep your appointment with ___ soon.
+
+Followup Instructions:
+___

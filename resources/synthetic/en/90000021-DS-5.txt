@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with several days of racing heartbeat and mild fatigue, referred from ___ clinic for rate control.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+Vitals: HR 98, BP 128/76, afebrile
+General: comfortable, no distress
+Lungs: clear bilaterally
+CARDIAC: irregular rhythm, no murmur
+Abdomen: soft, nontender
+Ext: no edema
+Neuro: nonfocal
+
+Pertinent Results:
+Thyroid function normal. Electrolytes unremarkable. ECG showed irregular narrow complex rhythm.
+IMAGING:
+Chest film without acute findings.
+
+Brief Hospital Course:
+Rate controlled with oral metoprolol and anticoagulation started after risk review at ___. Symptoms resolved, and she was discharged in stable condition.
+
+Medications on Admission:
+Levothyroxine, lisinopril
+
+Discharge Medications:
+Metoprolol twice daily, apixaban twice daily, continue levothyroxine and lisinopril as before.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+Take medications as prescribed. Return for fainting, chest pain, bleeding, or worsening palpitations. Keep your appointment with ___.
+
+Followup Instructions:
+___

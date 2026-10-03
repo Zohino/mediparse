@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman presented to ___ with days of palpitations and fatigue, worse on exertion. She was seen at ___ and admitted for rate control.
+REVIEW OF SYSTEMS:
+Positive palpitations. No chest pain.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+Comfortable, irregular rhythm, no distress.
+DISCHARGE PHYSICAL EXAM:
+Gen: Well appearing
+HEENT: Moist mucous membranes
+Lungs: Clear bilaterally
+ABD: Soft, nontender
+Ext: No edema
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Admission ECG showed rapid irregular rhythm. Troponin negative twice. TSH normal. Echo at ___ showed preserved ejection fraction.
+DISCHARGE LABS:
+Potassium 4.1, creatinine 0.8.
+
+Brief Hospital Course:
+Rate was controlled with metoprolol and heart rate settled. Apixaban was started for stroke prevention after discussion with ___. Symptoms resolved, she walked unassisted, and cardiology follow-up was arranged at ___.
+
+Medications on Admission:
+Levothyroxine, lisinopril
+
+Discharge Medications:
+Metoprolol succinate daily, apixaban twice daily, levothyroxine daily, lisinopril daily.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Stable
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were admitted with a fast, irregular heartbeat. Take your new medicines as prescribed and report dizziness, bleeding or chest pain. Call ___ with questions.
+
+Followup Instructions:
+___

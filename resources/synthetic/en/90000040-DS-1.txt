@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+Man with diabetes mellitus presenting with three days of right lower quadrant pain, nausea and low-grade fever. Evaluated at ___ emergency department, where CT suggested appendicitis. Transferred to ___ for surgical care.
+REVIEW OF SYSTEMS:
+Positive for anorexia and chills. Negative for chest pain, dyspnea, dysuria.
+
+Past Medical History:
+Type 2 diabetes, hypertension. No atrial fibrillation.
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+General:
+Uncomfortable, alert, afebrile.
+Lungs:
+Clear bilaterally.
+Abdomen:
+Tender right lower quadrant, guarding.
+Ext:
+Warm, no edema.
+
+Pertinent Results:
+WBC 14.2 on arrival, normalizing by discharge. Creatinine normal. CT abdomen showed inflamed dilated appendix with fat stranding. Pathology from ___ pending.
+
+Brief Hospital Course:
+Underwent uncomplicated laparoscopic appendectomy by Dr. ___ and recovered well. Glucose was managed with insulin sliding scale. There was no evidence of chronic kidney disease, and renal function stayed normal. Diet advanced, pain controlled orally, discharged to ___ on postoperative day two.
+TRANSITIONAL ISSUES:
+Follow up pathology; clinic visit at ___.
+
+Medications on Admission:
+Metformin, lisinopril, ___ daily.
+
+Discharge Medications:
+Metformin 500 mg twice daily. Lisinopril 10 mg daily. Acetaminophen 650 mg every six hours as needed for pain. Docusate 100 mg twice daily while taking opioids.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You had your appendix removed laparoscopically. Keep incisions clean and dry, avoid lifting over ten pounds for four weeks. Call ___ for fever, worsening pain, vomiting, or wound redness. Resume your usual diet and home medications as directed by ___.
+
+Followup Instructions:
+___

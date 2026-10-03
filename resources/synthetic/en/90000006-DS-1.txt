@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old woman with two days of right upper quadrant pain, nausea and vomiting, sent from ___ clinic after ultrasound showed gallstones and wall thickening, with low-grade fever.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy ___ years ago
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+Gen: mild distress, awake
+HEENT: anicteric
+Neck: supple
+Lungs: clear bilaterally
+ABD: tender right upper quadrant, soft
+Ext: no edema
+PULSES: palpable
+
+Pertinent Results:
+FINDINGS: Ultrasound on ___ showed multiple gallstones, gallbladder wall thickening and pericholecystic fluid. White count elevated at admission, normalized after surgery. Liver enzymes mildly raised, bilirubin normal. Final pathology pending at discharge.
+
+Brief Hospital Course:
+Treated with intravenous fluids, antibiotics and bowel rest. Surgery team, led by ___, performed laparoscopic cholecystectomy without complication. Pain was controlled with oral medication, diet advanced, and she was afebrile and walking independently before discharge home on postoperative day two.
+
+Medications on Admission:
+Lisinopril 10 mg daily, multivitamin daily
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours. Oxycodone 5 mg as needed for pain. Continue lisinopril 10 mg daily.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Stable, alert and oriented
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You may shower but do not lift more than ten pounds for four weeks. Call ___ for fever or worsening pain.
+
+Followup Instructions:
+___

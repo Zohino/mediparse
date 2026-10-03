@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man referred from ___ with palpitations for ___ days. Known atrial fibrillation with rapid rates on arrival. Baseline renal function was possibly reduced, raising suspicion for chronic kidney disease.
+REVIEW OF SYSTEMS:
+Positive for fatigue, negative for chest pain or fever.
+
+Social History:
+___
+
+Family History:
+Father with stroke
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Moist mucous membranes
+Neck:
+No jugular distension
+PULM:
+Clear bilaterally
+
+Pertinent Results:
+Labs drawn at ___ showed mildly elevated creatinine and normal troponin. Electrocardiogram demonstrated irregular narrow complex rhythm without ischemic changes.
+IMPRESSION:
+No acute cardiopulmonary process on chest film.
+
+Medications on Admission:
+Aspirin 81 mg daily; metoprolol 25 mg twice daily
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily. Apixaban 5 mg twice daily. Stop aspirin. Continue other home medicines unchanged unless told otherwise.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Stable
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake and attentive
+Activity Status:
+Walks independently
+
+Discharge Instructions:
+You were hospitalized for a fast irregular heartbeat. Take your new blood thinner every day. Weigh yourself regularly. Return for fainting, chest pain, or worsening breathlessness. Call ___ with questions.
+
+Followup Instructions:
+___

@@ -1,0 +1,87 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension who presented with five days of productive cough, fever and pleuritic chest pain. He was first seen at ___ and sent to the emergency department on ___ after oxygen saturation measured low. Chest radiograph showed a right lower lobe consolidation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout
+
+Past Surgical History:
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Father with myocardial infarction at age ___
+
+Physical Exam:
+Gen:
+Tired, mildly dyspneic, no distress at rest
+HEENT:
+Moist mucous membranes
+Neck:
+Supple
+Ext:
+Warm, no edema
+SKIN:
+No rash
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Admission labs notable for white count 14.2 with neutrophil predominance and lactate 1.1. Blood cultures from ___ showed no growth. Chest radiograph dated ___ as below.
+IMPRESSION:
+Right lower lobe airspace opacity consistent with pneumonia, small parapneumonic effusion.
+
+Brief Hospital Course:
+He was treated for community acquired pneumonia with ceftriaxone and azithromycin, then changed to oral antibiotics once afebrile and off oxygen. He was transferred from ___ floor care after two days. Per Dr. ___, his blood pressure regimen was continued unchanged. He ambulated without desaturation.
+TRANSITIONAL ISSUES:
+Repeat chest imaging in six weeks to confirm resolution of the opacity.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg daily
+Allopurinol 100 mg daily
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg twice daily for five more days
+2. Lisinopril 10 mg daily
+3. Atorvastatin 20 mg daily
+4. Allopurinol 100 mg daily
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Parapneumonic effusion
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Activity Status:
+Independent, ambulatory without assistance
+
+Discharge Instructions:
+You were hospitalized with a lung infection and improved with antibiotics. Finish the full course of your pills and rest, drinking plenty of fluids. Call ___ or return if you develop worsening shortness of breath, fever or chest pain. Please keep your appointment at the clinic at ___.
+
+Followup Instructions:
+___

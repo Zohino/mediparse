@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy on ___
+
+History of Present Illness:
+___ year old woman with hypertension and hyperlipidemia who presented to ___ with three days of right lower quadrant abdominal pain, nausea and low grade fevers. Pain began after dinner on ___ and gradually worsened, localizing to the right side. She denied vomiting, diarrhea, urinary symptoms or vaginal bleeding. She was seen by Dr. ___ in the emergency department, where CT imaging showed an inflamed appendix without perforation. She was transferred from ___ for surgical evaluation and started on intravenous antibiotics and fluids. Her pain improved with analgesia and she remained hemodynamically stable.
+
+Past Medical History:
+Diabetes mellitus type 2, followed by ___
+Hypertension
+Hyperlipidemia
+Hysterectomy in ___
+
+Social History:
+___
+
+Family History:
+Significant family history of atrial fibrillation in her mother. Father with hypertension.
+
+Physical Exam:
+Vitals: T 98.4 HR 72 BP 128/76 RR 16 SpO2 98% RA
+General: Well appearing, no distress.
+Neck: Supple, no lymphadenopathy.
+Lungs: Clear bilaterally.
+CARDIAC: Regular rate and rhythm, no murmurs.
+ABD: Soft, mild tenderness at port sites, incisions clean and dry.
+EXTREMITIES: Warm, no edema.
+Neuro: Alert, oriented, moves all extremities.
+
+Pertinent Results:
+Admission labs notable for white blood cell count 14.2 with neutrophil predominance. Chemistry panel and liver enzymes were within normal limits. Lactate 1.1. Urinalysis negative for infection. Urine pregnancy test negative.
+CT abdomen and pelvis at ___: dilated appendix measuring 11 mm with periappendiceal fat stranding, no abscess, free fluid or free air. Remainder of the study unremarkable.
+Pathology from ___: acute appendicitis without perforation, no neoplasm identified.
+DISCHARGE LABS:
+WBC 7.8, hemoglobin 12.6, hematocrit 38.1, platelets 254, sodium 139, potassium 4.1, chloride 103, bicarbonate 25, BUN 12, creatinine 0.7, glucose 112.
+
+Medications on Admission:
+Metformin 500 mg twice daily, lisinopril 10 mg daily, atorvastatin 20 mg nightly, aspirin 81 mg daily. List verified with ___ pharmacy.
+
+Discharge Medications:
+1. Acetaminophen 650 mg by mouth every six hours as needed for pain, maximum 3 grams daily.
+2. Oxycodone 5 mg by mouth every six hours as needed for severe pain, short course only.
+3. Docusate 100 mg twice daily while taking opioids.
+4. Metformin 500 mg twice daily with meals.
+5. Lisinopril 10 mg once daily.
+6. Atorvastatin 20 mg at bedtime.
+7. Aspirin 81 mg once daily.
+
+Discharge Disposition:
+Home with outpatient follow up arranged through ___
+
+Discharge Diagnosis:
+Acute appendicitis, status post laparoscopic appendectomy
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Good. Tolerating a regular diet, pain controlled with oral medication.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were admitted with appendicitis and underwent laparoscopic surgery to remove your appendix. You may shower, but do not soak in a bath or pool. Avoid heavy lifting for ___ weeks. Walk daily and increase activity as tolerated. Do not drive while taking oxycodone. Call the surgery clinic at ___ or return to the emergency department for fever above 101, worsening abdominal pain, repeated vomiting, redness or drainage from incisions, or inability to eat or drink. Dr. ___ will review your wound. Please update your primary care provider at ___ about this admission.
+
+Followup Instructions:
+___

@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+___ year old man with two days of worsening periumbilical pain that migrated to the right lower quadrant, with nausea and low grade fever. He presented to ___ on ___ where CT showed an inflamed appendix, and he was transferred for surgical care.
+
+Past Medical History:
+Hypertension
+Seasonal allergies
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+General: Uncomfortable, alert, no distress at rest
+HEENT: Dry mucous membranes
+CARDIAC: Regular rate and rhythm
+ABD: Tender right lower quadrant, guarding present
+EXTREMITIES: Warm, no edema
+
+Pertinent Results:
+WBC 14.2 on admission, normalized by discharge. Creatinine 0.9. Lactate normal.
+IMPRESSION:
+Dilated, thickened appendix with surrounding fat stranding and a small amount of free fluid. No abscess or perforation identified.
+
+Brief Hospital Course:
+In the ___ he was given IV fluids and antibiotics and taken to the operating room by Dr. ___ for an uncomplicated laparoscopic appendectomy. Pain was controlled with oral medication, he tolerated a regular diet by ___, and incisions remained clean and dry.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Loratadine 10 mg as needed
+
+Discharge Medications:
+1. Acetaminophen 650 mg every six hours as needed for pain
+2. Oxycodone 5 mg every six hours as needed for severe pain, short course
+3. Lisinopril 10 mg daily
+4. Docusate 100 mg twice daily while taking oxycodone
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Mental Status: Clear and coherent, fully oriented.
+Activity Status: Ambulatory and independent.
+
+Discharge Instructions:
+You were treated at ___ for appendicitis with surgery. Keep incisions clean and dry, and shower as tolerated. Avoid lifting more than ten pounds for four weeks. Call ___ or return to the emergency department for fever, worsening pain, vomiting, or wound redness or drainage.
+
+Followup Instructions:
+___

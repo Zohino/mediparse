@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension presented after two days of worsening cough and fever, referred from ___ clinic. Chest imaging showed right lower lobe pneumonia requiring admission.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Family history notable for acute kidney injury in his mother.
+
+Physical Exam:
+General:
+Alert, comfortable.
+HEENT:
+Moist mucosa.
+PULM:
+Right basilar crackles.
+Ext:
+No edema.
+SKIN:
+Warm, dry.
+Neuro:
+Nonfocal.
+
+Pertinent Results:
+FINDINGS:
+Chest radiograph on ___ showed right lower lobe consolidation without effusion. White count mildly elevated on admission and normalized by discharge. Blood cultures showed no growth.
+
+Brief Hospital Course:
+Treated with intravenous ceftriaxone and azithromycin, then transitioned to oral antibiotics once afebrile. Oxygen was weaned to room air by day three. He ambulated independently, tolerated diet, and was cleared for discharge home on ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg twice daily for five more days.
+2. Lisinopril 10 mg daily.
+3. Atorvastatin 20 mg nightly.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+
+Discharge Instructions:
+You were treated for pneumonia. Finish all antibiotics, drink plenty of fluids, and rest. Return for fever, worsening breathing, or chest pain. Call ___ with questions.
+
+Followup Instructions:
+___

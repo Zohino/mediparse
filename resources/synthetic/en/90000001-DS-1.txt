@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever and cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with hypertension who presented with three days of fever, productive cough and shortness of breath. She was first evaluated at ___ where chest imaging suggested a right lower lobe consolidation, and she was transferred to ___ for admission on ___.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Osteoarthritis
+
+Social History:
+___
+
+Family History:
+Mother with breast cancer
+
+Physical Exam:
+Vitals: T 98.6 HR 78 BP 126/70 RR 16 SpO2 96% on room air
+Gen: Comfortable, no distress
+HEENT: Moist mucous membranes
+ABD: Soft, nontender
+Ext: Warm, no edema
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+DISCHARGE LABS:
+WBC 8.2, Hgb 12.1, Plt 240, Na 139, K 4.1, Cr 0.8
+IMPRESSION:
+Chest radiograph reviewed by ___ shows right lower lobe airspace opacity consistent with pneumonia, with no effusion. Follow-up imaging at ___ is advised in six weeks.
+
+Brief Hospital Course:
+She was treated with ceftriaxone and azithromycin and her fever resolved within two days. Oxygen was weaned to room air. Blood cultures drawn at ___ showed no growth. Physical therapy from ___ cleared her for home. She was transitioned to oral antibiotics and discharged on ___ in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 75 mcg daily
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg twice daily for five more days
+2. Lisinopril 10 mg daily
+3. Levothyroxine 75 mcg daily
+4. Acetaminophen as needed for fever
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypoxia
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were hospitalized with a lung infection and improved with antibiotics. Finish the full antibiotic course, rest, drink fluids and return for fever, worsening breathlessness or chest pain. Please see Dr. ___ within one week.
+
+Followup Instructions:
+___

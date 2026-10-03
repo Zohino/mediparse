@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and dizziness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with several days of palpitations, lightheadedness and mild fatigue, presenting for evaluation.
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+Vitals:
+Stable, afebrile
+Gen:
+Comfortable
+HEENT:
+Normal
+Neuro:
+Nonfocal
+
+Pertinent Results:
+Telemetry showed an irregular rhythm without pauses. Electrolytes and thyroid function were normal. Chest radiograph was clear.
+
+Brief Hospital Course:
+Patient was transferred from ___ with atrial fibrillation and rapid ventricular rate. Rate was controlled with metoprolol and anticoagulation was started. She remained stable and symptoms resolved.
+
+Medications on Admission:
+Multivitamin daily
+Calcium supplement
+
+Discharge Medications:
+Metoprolol tartrate twice daily. Apixaban twice daily. Continue multivitamin and calcium supplement as before.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Palpitations
+Hypertension
+
+Discharge Condition:
+Mental Status: Alert and oriented
+Level of Consciousness: Fully awake
+Activity Status: Walks independently
+
+Discharge Instructions:
+Take medications as prescribed. Return for chest pain, fainting or bleeding. Please follow up with Dr. ___ within two weeks.
+
+Followup Instructions:
+___

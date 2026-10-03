@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever for five days, sent in from ___
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented with five days of productive cough, fever and shortness of breath that began after returning from a trip to ___. He was seen at ___ by his primary physician, who started oral antibiotics, but symptoms worsened and he came to the emergency department at ___ with hypoxia and chills.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gastroesophageal reflux
+
+Social History:
+___
+
+Family History:
+Significant family history of atrial fibrillation in his father. Mother healthy.
+
+Physical Exam:
+General: Alert, mildly ill-appearing man in no acute distress.
+HEENT: Moist mucous membranes, clear oropharynx.
+PULM: Right basilar crackles, no wheeze.
+SKIN: Warm, dry, no rash.
+Neuro: Nonfocal, fully oriented.
+
+Pertinent Results:
+Admission labs showed leukocytosis with neutrophil predominance and mildly elevated lactate that normalized with fluids. Blood cultures remained negative at five days.
+FINDINGS: Chest radiograph showed a dense right lower lobe consolidation with a small parapneumonic effusion. No pneumothorax. Heart size normal. Repeat imaging at ___ showed interval improvement of the airspace opacity.
+
+Brief Hospital Course:
+He was admitted with community-acquired pneumonia and treated with intravenous ceftriaxone and azithromycin. Oxygen was weaned from four liters to room air by hospital day three. Fevers resolved and cough improved. He was transitioned to oral antibiotics and ambulated independently. Hypertension was managed with home medications. Per the team led by Dr. ___, he was cleared for discharge. Arrangements were made with ___ for outpatient follow up and a repeat chest film in six weeks at ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly, omeprazole 20 mg daily.
+
+Discharge Medications:
+Amoxicillin-clavulanate 875 mg twice daily for five more days. Continue lisinopril 10 mg daily, atorvastatin 20 mg nightly and omeprazole 20 mg daily. Acetaminophen as needed for fever. Prescriptions sent to ___ pharmacy.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community-acquired pneumonia
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for pneumonia. Take all antibiotics as directed and drink plenty of fluids. Return for worsening shortness of breath, high fever or chest pain. Call ___ if you have questions about your medications. Your clinic at ___ will contact you.
+
+Followup Instructions:
+___

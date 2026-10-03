@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Weakness and leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man sent by his primary physician from ___ clinic for weakness, leg swelling and poor oral intake over several days. Outpatient labs showed markedly elevated creatinine and glucose, prompting admission.
+
+Past Medical History:
+Hypertension
+Long-standing insulin-requiring high blood sugar
+Reduced cardiac pumping function
+Followed by ___ nephrology
+
+Social History:
+___
+
+Family History:
+Mother with high blood pressure
+
+Physical Exam:
+Vitals:
+Stable, afebrile
+HEENT:
+Dry mucous membranes
+Abdomen:
+Soft, nontender
+Ext:
+Bilateral pitting edema, warm
+
+Pertinent Results:
+Creatinine 3.1 on arrival, improving to 2.2. Glucose 410 initially. Potassium 5.4 normalized. BNP elevated. ECG showed irregularly irregular rhythm. Blood drawn at ___ matched inpatient values.
+
+Brief Hospital Course:
+Admitted with a sharp creatinine rise and volume overload. Diuretics were held, then resumed carefully with fluids guided by exam. Insulin adjusted for glucose control. Rate controlled with metoprolol. Seen by ___ team, transferred from ___ unit stable.
+
+Medications on Admission:
+Metformin, furosemide, apixaban, metoprolol, lisinopril
+
+Discharge Medications:
+Insulin glargine nightly, furosemide at a lower dose, apixaban twice daily, metoprolol succinate daily. Metformin and lisinopril stopped until kidney tests are rechecked.
+
+Discharge Disposition:
+Home with services
+Facility: ___
+
+Discharge Diagnosis:
+Chronic kidney disease
+Atrial fibrillation
+
+Discharge Condition:
+Stable
+Mental Status:
+Alert and oriented, able to follow commands
+Level of Consciousness:
+Awake and interactive
+
+Discharge Instructions:
+Weigh yourself daily and limit salt. Take medications as listed and avoid anti-inflammatory painkillers. Check blood sugar before meals. Return for fainting, chest pain, or reduced urination. Call ___ with questions.
+
+Followup Instructions:
+___

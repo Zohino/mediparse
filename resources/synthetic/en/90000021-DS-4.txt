@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Palpitations and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with known atrial fibrillation presented to ___ with three days of palpitations and dyspnea. She denies heart failure symptoms, orthopnea or leg swelling. Transferred from ___ for rate control.
+REVIEW OF SYSTEMS:
+Positive for fatigue. Otherwise negative.
+
+Past Medical History:
+Atrial arrhythmia, hypertension, hypothyroidism, appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Gen: Comfortable, thin.
+Lungs: Clear.
+CARDIAC: Irregular, rapid.
+Abdomen: Soft.
+Ext: Warm, no edema.
+Neuro: Nonfocal.
+
+Pertinent Results:
+Troponin negative twice. TSH normal. Potassium 4.1 on discharge. Labs drawn at ___ were unremarkable.
+IMAGING:
+Chest film clear, normal heart size.
+
+Brief Hospital Course:
+Admitted to telemetry, rate controlled with metoprolol and anticoagulation continued. Symptoms resolved by day two. Cardiology at ___ agreed with the plan. Electrolytes repleted. She was discharged in stable condition after review with ___.
+
+Medications on Admission:
+Metoprolol, levothyroxine, lisinopril
+
+Discharge Medications:
+Metoprolol succinate 100 mg daily, apixaban 5 mg twice daily, levothyroxine 50 mcg daily, lisinopril 10 mg daily.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Rapid ventricular rate
+Secondary:
+Hypertension, hypothyroidism
+
+Discharge Condition:
+Stable
+Mental Status:
+Alert and oriented, clear thinking.
+Level of Consciousness:
+Fully awake.
+Activity Status:
+Walks without help.
+
+Discharge Instructions:
+You were hospitalized for a fast heartbeat. Take your medicines as listed. Call ___ or return to ___ for chest pain, fainting, or worsening breathlessness. Avoid heavy exertion this week.
+
+Followup Instructions:
+___

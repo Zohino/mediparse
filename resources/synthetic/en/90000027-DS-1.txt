@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Fever and productive cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient is a man who presented to ___ with three days of fever, productive cough and pleuritic chest pain. He was seen by his primary physician at ___ and sent to the emergency department. Chest imaging showed a right lower lobe consolidation. He was started on antibiotics and admitted on ___ for observation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Prior pneumonia treated at ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease, followed at ___
+
+Physical Exam:
+General:
+Comfortable, no distress.
+PULM:
+Crackles at the right base.
+ABD:
+Soft, nontender.
+EXTREMITIES:
+No edema.
+
+Pertinent Results:
+FINDINGS:
+Chest radiograph showed right lower lobe airspace opacity without effusion. White count was mildly elevated and improved by discharge. Blood cultures showed no growth. Reviewed by the radiologist at ___.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+
+Discharge Medications:
+1. Azithromycin 250 mg by mouth daily for three more days
+2. Lisinopril daily
+3. Atorvastatin nightly
+4. Acetaminophen as needed for fever
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were treated in the hospital for a lung infection. Finish the full course of your antibiotic and drink plenty of fluids. Rest as needed and return to normal activity slowly. Call your doctor at ___ or return to the emergency department for worsening fever, trouble breathing or chest pain.
+
+Followup Instructions:
+___
