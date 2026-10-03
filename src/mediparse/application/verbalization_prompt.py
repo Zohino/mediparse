@@ -3,24 +3,13 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Protocol
+from typing import TYPE_CHECKING
 
 from mediparse.domain.verbalization import render_prompt
 
 if TYPE_CHECKING:
-    from mediparse.domain.note_plan import NotePlan
+    from mediparse.application.ports import PlanSource
     from mediparse.domain.synthetic_plan import SamplerConfig
-
-
-class PlanSource(Protocol):
-    """Plány zpráv korpusu."""
-
-    def load(self) -> tuple[NotePlan, ...]:
-        """Načte plány.
-
-        Returns:
-            Plány v pořadí zdroje.
-        """
 
 
 @dataclass(frozen=True)
