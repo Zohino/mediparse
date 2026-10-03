@@ -165,6 +165,19 @@ class StructureModel(BaseModel):
         """
         return {section.key: section.header for section in self.sections}
 
+    @property
+    def structure_labels(self) -> frozenset[str]:
+        """Štítky, které zprávě předepisuje config: pole preambule, hlavičky a podnadpisy.
+
+        Returns:
+            Jména polí preambule, hlavičky sekcí a podnadpisy bez dvojtečky.
+        """
+        return frozenset((
+            *(field.name for field in self.preamble_fields),
+            *self.headers.values(),
+            *(subheading.header for _, subheading in self.subheadings),
+        ))
+
     @model_validator(mode="after")
     def _preamble_carries_sex_once(self) -> Self:
         if sum(field.value is PreambleValue.SEX for field in self.preamble_fields) != 1:

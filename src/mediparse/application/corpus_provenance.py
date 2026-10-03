@@ -15,7 +15,7 @@ from mediparse.application.ports import AuditedCorpus
 from mediparse.domain.corpus_provenance import ProvenanceRecord
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Collection, Mapping
 
     from mediparse.domain.corpus_provenance import Generation
 
@@ -49,7 +49,10 @@ class CorpusProvenance:
     corpus: ProvenanceCorpus
 
     def run(
-        self, generation: Generation, reference_sha256: Mapping[str, str]
+        self,
+        generation: Generation,
+        reference_sha256: Mapping[str, str],
+        structure_labels: Collection[str],
     ) -> ProvenanceOutcome:
         """Ověří, že korpus odpovídá svému auditu, a zapíše provenance s otiskem záznamu auditu.
 
@@ -59,7 +62,9 @@ class CorpusProvenance:
         fingerprint = self.corpus.fingerprint()
         if fingerprint is None:
             return ProvenanceRefused("Korpus neobsahuje žádnou zprávu.")
-        violations = audit_violations(self.corpus, fingerprint, reference_sha256)
+        violations = audit_violations(
+            self.corpus, fingerprint, reference_sha256, structure_labels
+        )
         if violations:
             return ProvenanceRefused(" ".join(violations))
         self.corpus.save_provenance(

@@ -10,7 +10,10 @@ from typing import TYPE_CHECKING, Final
 from mediparse.domain.corpus_audit import NGRAM_SIZE, NORMALIZATION, AuditRecord
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.plans_file import LABELS_PATH, PLANS_PATH
-from mediparse.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
+from mediparse.infrastructure.sampler_config import (
+    SAMPLER_CONFIG_PATH,
+    load_sampler_config,
+)
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT
 from mediparse.infrastructure.verbalization_template import (
     VERBALIZATION_TEMPLATE_PATH,
@@ -27,6 +30,9 @@ REPOSITORY_LABELS: Final = REPOSITORY / LABELS_PATH
 REPOSITORY_CORPUS: Final = REPOSITORY / CORPUS_ROOT
 REPOSITORY_TABLES: Final = REPOSITORY / TABLES_PATH
 REPOSITORY_MATRIX: Final = REPOSITORY / "config" / "matrix.json"
+STRUCTURE_LABELS: Final = load_sampler_config(
+    REPOSITORY_CONFIG
+).structure.structure_labels
 
 COMMIT: Final = "c" * 40
 NOTE: Final = "en/90000001-DS-1.txt"
@@ -52,6 +58,7 @@ def audit_record(**overrides: object) -> AuditRecord:
         "corpus_files": 1,
         "ngram_size": NGRAM_SIZE,
         "normalization": NORMALIZATION,
+        "structure_labels": sorted(STRUCTURE_LABELS),
         "synthetic_ngrams": 3,
         "reference": [DISCHARGE, RADIOLOGY],
         "shared_ngrams": 0,

@@ -253,3 +253,19 @@ def test_preamble_has_exactly_one_sex_field(
     """Pohlaví z plánu nese v preambuli právě jedno pole a žádný řádek není prázdný."""
     with pytest.raises(ValidationError):
         _model(preamble)
+
+
+def test_labels_cover_preamble_headers_and_subheadings() -> None:
+    """Štítky struktury jsou pole preambule, hlavičky sekcí a podnadpisy z configu."""
+    assert _model().structure_labels == {
+        "Name",
+        "Sex",
+        "Service",
+        "Allergies",
+        "Past Surgical History",
+        "Physical Exam",
+        "Brief Hospital Course",
+        "Lungs",
+        "PULM",
+        "Vitals",
+    }

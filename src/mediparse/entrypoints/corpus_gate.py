@@ -16,6 +16,10 @@ from mediparse.application.corpus_gate import CorpusGate
 from mediparse.entrypoints.cli import refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_reference_sha256
+from mediparse.infrastructure.sampler_config import (
+    SAMPLER_CONFIG_PATH,
+    load_sampler_config,
+)
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirectory
 
 if TYPE_CHECKING:
@@ -37,11 +41,14 @@ def run(argv: Sequence[str]) -> ExitCode:
 
     Returns:
         OK, když korpus neexistuje nebo odpovídá auditu i provenance, jinak BLOCKED;
-        REFUSED pro chybějící nebo neplatný config tabulek.
+        REFUSED pro chybějící nebo neplatný config tabulek či vzorkovače.
     """
     args = _parser().parse_args(argv)
     gate = CorpusGate(CorpusDirectory(args.corpus))
-    violations = gate.run(load_reference_sha256(args.tables))
+    violations = gate.run(
+        load_reference_sha256(args.tables),
+        load_sampler_config(args.config).structure.structure_labels,
+    )
     for violation in violations:
         sys.stderr.write(f"{violation}\n")
     return ExitCode.BLOCKED if violations else ExitCode.OK
@@ -60,5 +67,11 @@ def _parser() -> argparse.ArgumentParser:
         type=Path,
         default=TABLES_PATH,
         help="config tabulek MIMIC s oficiálními otisky",
+    )
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=SAMPLER_CONFIG_PATH,
+        help="konfigurace vzorkovače se štítky struktury zprávy",
     )
     return parser
