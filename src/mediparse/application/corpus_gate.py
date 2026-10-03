@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
+from mediparse.application.ports import AuditedCorpus
 from mediparse.domain.corpus_audit import InvalidAuditRecordError, gate_violations
 from mediparse.domain.corpus_provenance import (
     InvalidProvenanceRecordError,
@@ -14,36 +15,11 @@ from mediparse.domain.corpus_provenance import (
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
-    from mediparse.domain.corpus_audit import AuditRecord
     from mediparse.domain.corpus_provenance import ProvenanceRecord
 
 
-class AuditedCorpus(Protocol):
-    """Korpus, jak ho vidí brána: otisk zpráv, záznam posledního auditu a provenance."""
-
-    def fingerprint(self) -> str | None:
-        """Otisk zpráv korpusu.
-
-        Returns:
-            SHA-256 otisk, nebo None, když korpus neobsahuje žádnou zprávu.
-        """
-
-    def audit_record(self) -> AuditRecord | None:
-        """Záznam posledního auditu.
-
-        Returns:
-            Záznam, nebo None, když chybí.
-
-        Raises:
-            InvalidAuditRecordError: Záznam neodpovídá schématu.
-        """
-
-    def audit_sha256(self) -> str:
-        """Otisk souboru se záznamem auditu; záznam musí existovat.
-
-        Returns:
-            SHA-256 otisk.
-        """
+class GatedCorpus(AuditedCorpus, Protocol):
+    """Korpus, jak ho vidí brána: korpus se záznamem auditu a provenance."""
 
     def provenance_record(self) -> ProvenanceRecord | None:
         """Záznam provenance korpusu.
@@ -60,7 +36,7 @@ class AuditedCorpus(Protocol):
 class CorpusGate:
     """Brána syntetického korpusu; s daty MIMIC nepracuje, smí proto běžet i ve veřejném CI."""
 
-    corpus: AuditedCorpus
+    corpus: GatedCorpus
 
     def run(self, reference_sha256: Mapping[str, str]) -> tuple[str, ...]:
         """Důvody, proč korpus nesmí do repozitáře; prázdný výsledek znamená, že smí.
@@ -70,12 +46,8 @@ class CorpusGate:
         Returns:
             Popisy porušení; neexistující korpus nic neporušuje.
         """
-        try:
-            record = self.corpus.audit_record()
-        except InvalidAuditRecordError:
-            return ("Záznam auditu neodpovídá schématu.",)
         fingerprint = self.corpus.fingerprint()
-        violations = gate_violations(fingerprint, record, reference_sha256)
+        violations = audit_violations(self.corpus, fingerprint, reference_sha256)
         if violations or fingerprint is None:
             return violations
         try:
@@ -83,3 +55,18 @@ class CorpusGate:
         except InvalidProvenanceRecordError:
             return ("Záznam provenance neodpovídá schématu.",)
         return provenance_violations(provenance, self.corpus.audit_sha256())
+
+
+def audit_violations(
+    corpus: AuditedCorpus, fingerprint: str | None, reference_sha256: Mapping[str, str]
+) -> tuple[str, ...]:
+    """Důvody, proč korpus s daným otiskem neodpovídá svému záznamu auditu; provenance nekontroluje.
+
+    Returns:
+        Popisy porušení auditu.
+    """
+    try:
+        record = corpus.audit_record()
+    except InvalidAuditRecordError:
+        return ("Záznam auditu neodpovídá schématu.",)
+    return gate_violations(fingerprint, record, reference_sha256)

@@ -1,7 +1,8 @@
 """Use case provenance: k auditovanému korpusu zapíše, čím a podle čeho vznikl.
 
 Provenance vzniká až po čistém auditu a váže se na něj otiskem záznamu auditu.
-Korpus, který by neprošel bránou, provenance nedostane.
+Shodu korpusu s auditem posuzuje brána; korpus, který jí neprojde, provenance
+nedostane.
 """
 
 from __future__ import annotations
@@ -9,42 +10,18 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
-from mediparse.domain.corpus_audit import InvalidAuditRecordError, gate_violations
+from mediparse.application.corpus_gate import audit_violations
+from mediparse.application.ports import AuditedCorpus
 from mediparse.domain.corpus_provenance import ProvenanceRecord
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
-    from mediparse.domain.corpus_audit import AuditRecord
     from mediparse.domain.corpus_provenance import Generation
 
 
-class ProvenanceCorpus(Protocol):
-    """Korpus, ke kterému se zapisuje provenance: otisk zpráv, záznam auditu a jeho otisk."""
-
-    def fingerprint(self) -> str | None:
-        """Otisk zpráv korpusu.
-
-        Returns:
-            SHA-256 otisk, nebo None, když korpus neobsahuje žádnou zprávu.
-        """
-
-    def audit_record(self) -> AuditRecord | None:
-        """Záznam posledního auditu.
-
-        Returns:
-            Záznam, nebo None, když chybí.
-
-        Raises:
-            InvalidAuditRecordError: Záznam neodpovídá schématu.
-        """
-
-    def audit_sha256(self) -> str:
-        """Otisk souboru se záznamem auditu; záznam musí existovat.
-
-        Returns:
-            SHA-256 otisk.
-        """
+class ProvenanceCorpus(AuditedCorpus, Protocol):
+    """Korpus se záznamem auditu, ke kterému se zapisuje provenance."""
 
     def save_provenance(self, record: ProvenanceRecord) -> None:
         """Uloží záznam provenance ke korpusu."""
@@ -82,11 +59,7 @@ class CorpusProvenance:
         fingerprint = self.corpus.fingerprint()
         if fingerprint is None:
             return ProvenanceRefused("Korpus neobsahuje žádnou zprávu.")
-        try:
-            audit = self.corpus.audit_record()
-        except InvalidAuditRecordError:
-            return ProvenanceRefused("Záznam auditu neodpovídá schématu.")
-        violations = gate_violations(fingerprint, audit, reference_sha256)
+        violations = audit_violations(self.corpus, fingerprint, reference_sha256)
         if violations:
             return ProvenanceRefused(" ".join(violations))
         self.corpus.save_provenance(
