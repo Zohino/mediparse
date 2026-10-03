@@ -81,7 +81,9 @@ def run(argv: Sequence[str]) -> ExitCode:
         specification_commit=args.specification_commit,
     )
     outcome = CorpusProvenance(CorpusDirectory(args.corpus)).run(
-        generation, load_reference_sha256(args.tables)
+        generation,
+        load_reference_sha256(args.tables),
+        config.structure.structure_labels,
     )
     match outcome:
         case ProvenanceWritten():

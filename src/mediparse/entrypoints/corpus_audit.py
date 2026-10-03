@@ -28,6 +28,10 @@ from mediparse.infrastructure.audit_workspace import LocalWorkspace
 from mediparse.infrastructure.mimic_reference import MimicReference
 from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_reference_sha256
 from mediparse.infrastructure.overlap_report import OverlapReportFile
+from mediparse.infrastructure.sampler_config import (
+    SAMPLER_CONFIG_PATH,
+    load_sampler_config,
+)
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirectory
 
 if TYPE_CHECKING:
@@ -51,7 +55,7 @@ def run(argv: Sequence[str], environ: Mapping[str, str]) -> ExitCode:
 
     Returns:
         OK bez shod, BLOCKED při shodě, REFUSED při odmítnutí auditu nebo chybějícím
-        či neplatném configu tabulek.
+        či neplatném configu tabulek nebo vzorkovače.
     """
     args = _parser().parse_args(argv)
     references = tuple(args.reference)
@@ -60,6 +64,7 @@ def run(argv: Sequence[str], environ: Mapping[str, str]) -> ExitCode:
         corpus=CorpusDirectory(args.corpus),
         references=tuple(MimicReference(path) for path in references),
         report=OverlapReportFile(args.report),
+        structure_labels=load_sampler_config(args.config).structure.structure_labels,
     )
     outcome = audit.run(
         environ, args.commit, datetime.now(tz=UTC), load_reference_sha256(args.tables)
@@ -110,6 +115,12 @@ def _parser() -> argparse.ArgumentParser:
         type=Path,
         default=TABLES_PATH,
         help="config tabulek MIMIC, z něhož se bere reference a její otisky",
+    )
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=SAMPLER_CONFIG_PATH,
+        help="konfigurace vzorkovače se štítky struktury zprávy",
     )
     parser.add_argument(
         "--report",

@@ -19,11 +19,13 @@ from pydantic import (
     PositiveInt,
 )
 
+from mediparse.domain.note_text import alternation
+
 if TYPE_CHECKING:
-    from collections.abc import Iterable, Iterator, Mapping, Sequence
+    from collections.abc import Collection, Iterable, Iterator, Mapping, Sequence
 
 NGRAM_SIZE: Final = 13
-NORMALIZATION: Final = "nfkc-lower-alnum-deid-v1"
+NORMALIZATION: Final = "nfkc-lower-alnum-deid-v2"
 
 _TOKEN: Final = re.compile(r"___|[^\W_]+")
 
@@ -77,11 +79,18 @@ class ScanResult:
 class NgramIndex:
     """N-gramy syntetického korpusu s pozicemi; v paměti drží jen menší stranu srovnání."""
 
-    def __init__(self, notes: Mapping[str, str]) -> None:
-        """Zaindexuje všechny n-gramy všech zpráv korpusu."""
+    def __init__(
+        self, notes: Mapping[str, str], structure_labels: Collection[str]
+    ) -> None:
+        """Zaindexuje n-gramy všech zpráv korpusu, které nepřekročí štítek struktury.
+
+        Štítek je jméno pole preambule, hlavička nebo podnadpis s dvojtečkou, jak je
+        zprávě předepisuje config; text mezi štítky se audituje celý.
+        """
+        pattern = _label_pattern(structure_labels)
         index: defaultdict[Ngram, list[Position]] = defaultdict(list)
         for note, text in notes.items():
-            for token, gram in enumerate(_ngrams(tokenize(text))):
+            for token, gram in _unlabelled_ngrams(text, pattern):
                 index[gram].append(Position(note, token))
         self._index = dict(index)
 
@@ -129,6 +138,7 @@ class AuditRecord(BaseModel):
     corpus_files: PositiveInt
     ngram_size: PositiveInt
     normalization: str
+    structure_labels: tuple[str, ...]
     synthetic_ngrams: NonNegativeInt
     reference: Annotated[tuple[ReferenceFile, ...], Field(min_length=1)]
     shared_ngrams: Literal[0]
@@ -147,7 +157,7 @@ def tokenize(text: str) -> list[str]:
     Returns:
         Souvislé úseky písmen a číslic; de-identifikační značka ``___`` je jeden token.
     """
-    return _TOKEN.findall(unicodedata.normalize("NFKC", text).lower())
+    return _TOKEN.findall(_normalize(text))
 
 
 def scan(
@@ -188,6 +198,7 @@ def audit_record_violations(
     corpus_sha256: str,
     record: AuditRecord | None,
     reference_sha256: Mapping[str, str],
+    structure_labels: Collection[str],
 ) -> tuple[str, ...]:
     """Důvody, proč korpus s daným otiskem neodpovídá svému záznamu auditu; prázdný výsledek znamená, že odpovídá.
 
@@ -203,6 +214,10 @@ def audit_record_violations(
         )
     if (record.ngram_size, record.normalization) != (NGRAM_SIZE, NORMALIZATION):
         violations.append("Záznam auditu vznikl jinou metodou, je nutný nový audit.")
+    if record.structure_labels != tuple(sorted(structure_labels)):
+        violations.append(
+            "Audit vyřadil jiné štítky struktury, než předepisuje config; je nutný nový audit."
+        )
     mismatch = reference_mismatch(
         ((file.name, file.sha256) for file in record.reference), reference_sha256
     )
@@ -233,4 +248,29 @@ def _ngrams(tokens: Sequence[str]) -> Iterator[Ngram]:
     return (
         tuple(tokens[start : start + NGRAM_SIZE])
         for start in range(len(tokens) - NGRAM_SIZE + 1)
+    )
+
+
+def _normalize(text: str) -> str:
+    return unicodedata.normalize("NFKC", text).lower()
+
+
+def _label_pattern(labels: Collection[str]) -> re.Pattern[str]:
+    normalized = {_normalize(label) for label in labels}
+    return re.compile(rf"(?<![^\W_])(?:{alternation(normalized)}):")
+
+
+def _unlabelled_ngrams(
+    text: str, labels: re.Pattern[str]
+) -> Iterator[tuple[int, Ngram]]:
+    normalized = _normalize(text)
+    spans = [label.span() for label in labels.finditer(normalized)]
+    tokens = list(_TOKEN.finditer(normalized))
+    in_label = [
+        any(start <= token.start() < end for start, end in spans) for token in tokens
+    ]
+    return (
+        (start, gram)
+        for start, gram in enumerate(_ngrams([token[0] for token in tokens]))
+        if not any(in_label[start : start + NGRAM_SIZE])
     )

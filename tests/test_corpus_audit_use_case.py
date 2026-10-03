@@ -25,6 +25,8 @@ if TYPE_CHECKING:
 CREATED_AT = datetime(2026, 9, 29, tzinfo=UTC)
 DISCHARGE_SHA = PINNED["discharge.csv.gz"]
 DISCHARGE_PINNED = {"discharge.csv.gz": DISCHARGE_SHA}
+STRUCTURE_LABELS = frozenset({"Name", "Unit No"})
+PREAMBLE = "Name: ___ Unit No: ___ Name: ___ Unit No: ___ Name: ___ Unit No: ___\n"
 
 
 @dataclass
@@ -124,6 +126,7 @@ def _audit(
         corpus=corpus,
         references=(reference,),
         report=report,
+        structure_labels=STRUCTURE_LABELS,
     )
 
 
@@ -277,3 +280,14 @@ def test_reference_other_than_config_is_refused_before_reading(
     assert isinstance(outcome, AuditRefused)
     assert named in outcome.reason
     assert not corpus.saved
+
+
+def test_structure_labels_reach_the_index() -> None:
+    """Štítky struktury dojdou do indexu: samotná struktura shodou není."""
+    reference = _Reference((ReferenceNote("10000032", f"{PREAMBLE}{SENTENCE}"),))
+
+    outcome = _audit(
+        _Corpus({NOTE: f"{PREAMBLE}a short body"}), reference, _Report()
+    ).run({}, COMMIT, CREATED_AT, DISCHARGE_PINNED)
+
+    assert isinstance(outcome, AuditClean)

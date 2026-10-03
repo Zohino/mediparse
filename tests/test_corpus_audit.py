@@ -21,15 +21,18 @@ from tests.support import (
     PINNED,
     RADIOLOGY,
     SENTENCE,
+    STRUCTURE_LABELS,
     audit_record,
 )
 
 ADMISSIONS = {"name": "admissions.csv.gz", "sha256": "f" * 64, "rows": 30}
 DISCHARGE_FILE, RADIOLOGY_FILE = PINNED.items()
+LABELS = frozenset({"Name", "Unit No", "History of Present Illness", "Plan"})
+PREAMBLE = "Name: ___ Unit No: ___"
 
 
 def _index(text: str = f"Summary: {SENTENCE}.") -> NgramIndex:
-    return NgramIndex({NOTE: text})
+    return NgramIndex({NOTE: text}, LABELS)
 
 
 def test_tokenize_normalizes_case_width_and_punctuation() -> None:
@@ -75,10 +78,13 @@ def test_fullwidth_variant_is_found() -> None:
 
 def test_positions_point_only_to_synthetic_notes() -> None:
     """Pozice shody míří do syntetické zprávy a na token, kde sdílený úsek začíná."""
-    index = NgramIndex({
-        NOTE: f"Three intro words. {SENTENCE}",
-        "cs/90000002-DS-1.txt": "nic společného tu není",
-    })
+    index = NgramIndex(
+        {
+            NOTE: f"Three intro words. {SENTENCE}",
+            "cs/90000002-DS-1.txt": "nic společného tu není",
+        },
+        LABELS,
+    )
 
     positions = index.positions(index.shared_with(SENTENCE))
 
@@ -91,6 +97,42 @@ def test_positions_point_only_to_synthetic_notes() -> None:
 def test_index_size_counts_distinct_ngrams() -> None:
     """Velikost indexu je počet různých n-gramů syntetické strany."""
     assert len(_index()) == len(tokenize(f"Summary: {SENTENCE}.")) - NGRAM_SIZE + 1
+
+
+def test_ngram_across_labels_is_not_audited() -> None:
+    """N-gram, který překročí štítek struktury, se nepočítá, ať jsou písmena štítku jakákoli."""
+    structure = (
+        f"{PREAMBLE} NAME: ___ unit no: ___ {PREAMBLE}\nHistory of Present Illness:"
+    )
+
+    assert not _index(structure).shared_with(structure)
+
+
+def test_body_between_labels_is_audited() -> None:
+    """Text mezi štítky se audituje celý, i když leží v pozdější sekci."""
+    text = f"{PREAMBLE}\nHistory of Present Illness: none.\nPlan: {SENTENCE}"
+
+    index = _index(text)
+    positions = index.positions(index.shared_with(SENTENCE))
+
+    assert min(position.token for position in positions) == tokenize(text).index("the")
+
+
+def test_text_before_first_label_is_audited() -> None:
+    """Text, který model napíše před první štítek, audit nevynechá."""
+    assert _index(f"{SENTENCE}\n{PREAMBLE}").shared_with(SENTENCE)
+
+
+def test_note_without_labels_is_audited_whole() -> None:
+    """Zpráva bez rozpoznaného štítku se audituje celá, chybná struktura audit neobejde."""
+    assert _index(SENTENCE).shared_with(SENTENCE)
+
+
+def test_label_needs_colon_and_word_boundary() -> None:
+    """Slovo štítku v narativu text nerozdělí: bez dvojtečky nebo uvnitř slova to štítek není."""
+    text = "the replan: was to name the unit no further ___ beyond the old harbor wall today"
+
+    assert _index(text).shared_with(text)
 
 
 def test_scan_counts_rows_matches_and_subject_collisions() -> None:
@@ -131,27 +173,33 @@ def test_record_requires_timezone() -> None:
 
 def test_gate_requires_record_for_existing_corpus() -> None:
     """Korpus bez záznamu auditu neprojde."""
-    assert audit_record_violations(CORPUS_SHA, None, PINNED)
+    assert audit_record_violations(CORPUS_SHA, None, PINNED, STRUCTURE_LABELS)
 
 
 def test_gate_rejects_corpus_changed_after_audit() -> None:
     """Změna korpusu po auditu změní otisk a brána ji zachytí."""
-    assert audit_record_violations("d" * 64, audit_record(), PINNED)
+    assert audit_record_violations("d" * 64, audit_record(), PINNED, STRUCTURE_LABELS)
 
 
 def test_gate_rejects_record_from_other_method() -> None:
     """Záznam z jiné délky n-gramu nebo normalizace už korpus neatestuje."""
     assert audit_record_violations(
-        CORPUS_SHA, audit_record(ngram_size=NGRAM_SIZE - 1), PINNED
+        CORPUS_SHA, audit_record(ngram_size=NGRAM_SIZE - 1), PINNED, STRUCTURE_LABELS
     )
     assert audit_record_violations(
-        CORPUS_SHA, audit_record(normalization="other"), PINNED
+        CORPUS_SHA, audit_record(normalization="other"), PINNED, STRUCTURE_LABELS
+    )
+    assert audit_record_violations(
+        CORPUS_SHA, audit_record(structure_labels=["Name"]), PINNED, STRUCTURE_LABELS
     )
 
 
 def test_gate_accepts_matching_record() -> None:
     """Shodný otisk, metoda i reference bránou projdou."""
-    assert audit_record_violations(CORPUS_SHA, audit_record(), PINNED) == ()
+    assert (
+        audit_record_violations(CORPUS_SHA, audit_record(), PINNED, STRUCTURE_LABELS)
+        == ()
+    )
 
 
 @pytest.mark.parametrize(
@@ -168,13 +216,13 @@ def test_gate_rejects_reference_other_than_pinned(
 ) -> None:
     """Audit, který neběžel přesně proti discharge a radiology s připnutými otisky, korpus neatestuje."""
     assert audit_record_violations(
-        CORPUS_SHA, audit_record(reference=reference), PINNED
+        CORPUS_SHA, audit_record(reference=reference), PINNED, STRUCTURE_LABELS
     )
 
 
 def test_gate_rejects_record_when_config_names_no_reference() -> None:
     """Config bez tabulek MIMIC-IV-Note nemá s čím srovnávat a korpus neatestuje."""
-    assert audit_record_violations(CORPUS_SHA, audit_record(), {})
+    assert audit_record_violations(CORPUS_SHA, audit_record(), {}, STRUCTURE_LABELS)
 
 
 @pytest.mark.parametrize(

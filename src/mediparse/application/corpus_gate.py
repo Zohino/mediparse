@@ -16,7 +16,7 @@ from mediparse.domain.corpus_provenance import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Collection, Mapping
 
     from mediparse.domain.corpus_provenance import ProvenanceRecord
 
@@ -41,7 +41,9 @@ class CorpusGate:
 
     corpus: GatedCorpus
 
-    def run(self, reference_sha256: Mapping[str, str]) -> tuple[str, ...]:
+    def run(
+        self, reference_sha256: Mapping[str, str], structure_labels: Collection[str]
+    ) -> tuple[str, ...]:
         """Důvody, proč korpus nesmí do repozitáře; prázdný výsledek znamená, že smí.
 
         Provenance se kontroluje až u korpusu, který odpovídá svému auditu.
@@ -52,7 +54,9 @@ class CorpusGate:
         fingerprint = self.corpus.fingerprint()
         if fingerprint is None:
             return ()
-        violations = audit_violations(self.corpus, fingerprint, reference_sha256)
+        violations = audit_violations(
+            self.corpus, fingerprint, reference_sha256, structure_labels
+        )
         if violations:
             return violations
         try:
@@ -63,7 +67,10 @@ class CorpusGate:
 
 
 def audit_violations(
-    corpus: AuditedCorpus, fingerprint: str, reference_sha256: Mapping[str, str]
+    corpus: AuditedCorpus,
+    fingerprint: str,
+    reference_sha256: Mapping[str, str],
+    structure_labels: Collection[str],
 ) -> tuple[str, ...]:
     """Důvody, proč korpus s daným otiskem neodpovídá svému záznamu auditu; provenance nekontroluje.
 
@@ -74,4 +81,6 @@ def audit_violations(
         record = corpus.audit_record()
     except InvalidAuditRecordError:
         return ("Záznam auditu neodpovídá schématu.",)
-    return audit_record_violations(fingerprint, record, reference_sha256)
+    return audit_record_violations(
+        fingerprint, record, reference_sha256, structure_labels
+    )
