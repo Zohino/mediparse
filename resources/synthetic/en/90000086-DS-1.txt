@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath, leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient is a man with known heart failure who presented to ___ with three days of worsening exertional dyspnea and leg swelling after missing doses at ___. He denies diabetes. No chest pain or fever. Seen by ___ in clinic on ___ and sent to the emergency department, where he was volume overloaded and admitted for diuresis.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy
+
+Social History:
+___
+
+Physical Exam:
+HEENT:
+Moist mucous membranes, JVP elevated
+Lungs:
+Bibasilar crackles
+Abdomen:
+Soft, nontender
+Ext:
+Bilateral pitting edema to knees
+SKIN:
+Warm, dry
+
+Pertinent Results:
+Labs drawn at ___ showed sodium 136, potassium 4.1, creatinine 1.0 and BNP markedly elevated. Troponin negative twice. Chest radiograph read by ___ demonstrated pulmonary vascular congestion with small bilateral effusions. ECG showed irregular rhythm with controlled ventricular rate and no acute ischemic changes.
+
+Medications on Admission:
+Metoprolol succinate, lisinopril, apixaban, atorvastatin per ___ pharmacy record.
+
+Discharge Medications:
+1. Furosemide 40 mg by mouth daily.
+2. Metoprolol succinate 50 mg by mouth daily.
+3. Lisinopril 10 mg by mouth daily.
+4. Apixaban 5 mg by mouth twice daily.
+5. Atorvastatin 40 mg by mouth nightly.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized because of fluid buildup causing breathlessness and swelling. Fluid was removed with medication. Weigh yourself every morning and call ___ if your weight rises by more than three pounds in a day. Limit salt intake. Take all medications as directed. Keep your appointment at ___ and return for chest pain or worsening breathing.
+
+Followup Instructions:
+___

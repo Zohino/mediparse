@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Palpitations and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with several days of palpitations and exertional dyspnea after a visit with her primary physician at ___. She denied chest pain, syncope or fever. Symptoms began on ___ and worsened, prompting transfer here for further evaluation.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Cholecystectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension.
+
+Physical Exam:
+General:
+Comfortable, no distress.
+Neck:
+No JVD.
+ABD:
+Soft, nontender.
+EXTREMITIES:
+Warm, no edema.
+SKIN:
+Intact.
+Neuro:
+Alert, nonfocal.
+
+Pertinent Results:
+Labs from ___ notable for normal troponin and mildly low potassium, repleted. ECG showed an irregular rhythm without discrete P waves, rate 130. Chest film without acute process. TSH normal. Echo with ejection fraction 60 percent and mild left atrial enlargement.
+
+Brief Hospital Course:
+Telemetry showed atrial fibrillation with rapid ventricular response. She was started on metoprolol for rate control and on apixaban after discussion of bleeding risk. Echocardiogram at ___ showed preserved function. Her heart rate settled below 100 and she tolerated walking. She will follow with cardiology at ___ in clinic.
+
+Medications on Admission:
+Levothyroxine 75 mcg daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+Levothyroxine 75 mcg daily
+Lisinopril 10 mg daily
+Metoprolol succinate 50 mg daily
+Apixaban 5 mg twice daily
+Potassium chloride 20 mEq once
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Hypertension
+Hypokalemia
+Hypothyroidism
+
+Discharge Condition:
+Stable, ambulatory.
+Mental Status:
+Clear and coherent.
+
+Discharge Instructions:
+You were hospitalized for a fast, irregular heartbeat. Take metoprolol and apixaban as prescribed and do not skip doses. Call ___ or return to the emergency department for fainting, chest pain, bleeding or worsening breathlessness. Avoid heavy lifting until cleared.
+
+Followup Instructions:
+___

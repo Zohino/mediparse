@@ -1,0 +1,79 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with three days of palpitations, fatigue and reduced urine output after poor oral intake. He was seen at ___ earlier in the week and sent to the emergency department, where an irregular pulse and elevated creatinine were found.
+
+Past Medical History:
+Chronic kidney disease
+Heart failure
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+General:
+Alert, comfortable
+HEENT:
+Moist mucosa
+Lungs:
+Clear
+CARDIAC:
+Irregularly irregular, no murmur
+Abdomen:
+Soft, nontender
+Ext:
+Trace edema
+SKIN:
+Warm, dry
+Neuro:
+Nonfocal
+
+Brief Hospital Course:
+Admitted for rhythm control and renal monitoring. Telemetry showed an irregular rhythm, rate controlled with metoprolol, and anticoagulation was started after discussion with ___. Intravenous fluids were given and creatinine improved toward baseline. Diuretics were held, then resumed at a lower dose. He was discharged home with follow-up arranged at ___. Weight and blood pressure remained stable.
+
+Medications on Admission:
+Furosemide 40 mg daily, lisinopril, carvedilol, atorvastatin nightly, aspirin.
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily. Apixaban 5 mg twice daily. Furosemide 20 mg daily. Atorvastatin 40 mg nightly. Lisinopril held until renal function is rechecked.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atrial fibrillation
+Acute kidney injury
+Chronic kidney disease
+
+Discharge Condition:
+Stable
+Level of Consciousness:
+Alert and oriented
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+Take your medications as prescribed and weigh yourself every morning. Avoid anti-inflammatory pain medicines. Return for palpitations, fainting, chest pain, swelling or decreased urine. Labs will be drawn at ___.
+
+Followup Instructions:
+___

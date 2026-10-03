@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with chronic kidney disease presented with three days of cough and fever after a visit to ___, with worsening shortness of breath and poor oral intake.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Remote appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+General:
+Alert, comfortable.
+HEENT:
+Moist mucous membranes.
+EXTREMITIES:
+No edema.
+SKIN:
+Warm, dry.
+
+Pertinent Results:
+Chest radiograph showed a right lower lobe opacity. White count mildly elevated on admission and normalized by discharge. Blood cultures showed no growth. Creatinine remained at baseline.
+
+Brief Hospital Course:
+Treated for community-acquired pneumonia with ceftriaxone and azithromycin, then switched to oral antibiotics. Oxygen was weaned to room air. Seen by ___ and cleared for home with ___ support.
+TRANSITIONAL ISSUES:
+Repeat chest imaging in six weeks.
+
+Medications on Admission:
+Lisinopril, atorvastatin
+
+Discharge Medications:
+1. Amoxicillin-clavulanate twice daily for five more days.
+2. Atorvastatin daily.
+3. Lisinopril daily.
+
+Discharge Disposition:
+Home with services
+Facility: ___
+
+Discharge Diagnosis:
+Community-acquired pneumonia
+Diabetes mellitus
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for pneumonia. Finish your antibiotics, drink fluids, rest, and return to the emergency department if breathing worsens. Call ___ with questions.
+
+Followup Instructions:
+___

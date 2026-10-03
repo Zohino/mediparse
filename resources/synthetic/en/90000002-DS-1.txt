@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Nausea and low urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented from ___ with three days of nausea, poor oral intake and reduced urine output. Labs showed acute kidney injury with elevated creatinine. Admitted for hydration.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Hypothyroidism
+
+Past Surgical History:
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General: Comfortable, no distress
+Lungs: Clear bilaterally
+CARDIAC: Irregularly irregular rhythm
+ABD: Soft, nontender
+
+Pertinent Results:
+Creatinine 2.4 on admission, improving to 1.1 at discharge. Potassium 4.8. Hemoglobin 11.2. Urinalysis bland. Renal ultrasound without hydronephrosis. Chest radiograph clear, no acute process seen.
+
+Brief Hospital Course:
+She was given intravenous fluids and her home lisinopril was held. Creatinine improved steadily and urine output normalized. Nephrology at ___ was consulted and agreed with the plan. She tolerated diet and was cleared for discharge by the ___ team.
+
+Discharge Medications:
+Apixaban 5 mg twice daily. Metoprolol succinate 50 mg daily. Acetaminophen as needed for pain. Hold lisinopril until follow-up labs.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute kidney injury
+Primary: Acute kidney injury
+
+Discharge Condition:
+Stable
+Mental Status: Alert and oriented, able to follow commands
+Level of Consciousness: Awake and attentive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+Drink plenty of fluids and avoid ibuprofen. Return for decreased urine output, vomiting or swelling. Have blood tests repeated at ___ within one week.
+
+Followup Instructions:
+___

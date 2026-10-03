@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man presented with three days of cough, fever and right-sided pleuritic chest pain, transferred from ___ after chest radiograph showed pneumonia. He denies palpitations, syncope or atrial fibrillation. Symptoms began on ___ and worsened despite oral antibiotics.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+No history of heart failure
+Followed by Dr. ___
+
+Past Surgical History:
+Appendectomy
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+Vitals:
+T 38.1 HR 92 BP 128/76 RR 20 SpO2 94% on room air
+General:
+Mildly ill appearing
+HEENT:
+Moist mucous membranes
+Neck:
+Supple
+Neuro:
+Alert and oriented
+
+Pertinent Results:
+WBC 13.2, hemoglobin 14.0, creatinine 0.9, lactate 1.2. Blood cultures drawn on admission showed no growth at five days.
+IMAGING:
+Chest radiograph read at ___ shows right lower lobe consolidation without effusion.
+
+Medications on Admission:
+Lisinopril 10 mg daily; atorvastatin 20 mg nightly.
+
+Discharge Medications:
+Amoxicillin-clavulanate 875 mg twice daily for five more days. Continue lisinopril 10 mg daily. Continue atorvastatin 20 mg nightly. Acetaminophen as needed for fever.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for pneumonia. Finish the full course of antibiotics, drink plenty of fluids and rest. Return for worsening shortness of breath, persistent fever or chest pain, and call ___ with questions.
+
+Followup Instructions:
+___

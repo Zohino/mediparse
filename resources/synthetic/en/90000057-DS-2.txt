@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Left leg redness and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with hypertension who presented with three days of fever, left lower leg redness and swelling after a scrape while gardening. She was seen at ___ urgent care, given one dose of antibiotics, and sent to the ___ emergency department for worsening pain and spreading erythema.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Osteoarthritis
+
+Past Surgical History:
+Cholecystectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+General:
+Mildly uncomfortable, febrile on arrival
+HEENT:
+Moist mucous membranes
+Lungs:
+Clear bilaterally
+SKIN:
+Warm, red, tender left shin without fluctuance
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Admission labs from ___ showed white count 13.2 with neutrophil predominance, normal electrolytes, and creatinine at baseline. Lactate was normal. Blood cultures drawn on arrival showed no growth at five days. Ultrasound of the left leg showed soft tissue edema without abscess or deep vein thrombosis. Chest radiograph was clear.
+
+Brief Hospital Course:
+Admitted to ___ with left leg cellulitis. Because of her penicillin allergy she received IV vancomycin, with defervescence and shrinking erythema by day two. She was seen by ___ for wound care and transitioned to oral doxycycline.
+TRANSITIONAL ISSUES:
+Complete antibiotic course. Recheck skin at primary care visit.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine ___ mcg daily
+
+Discharge Medications:
+1. Doxycycline 100 mg by mouth twice daily for seven more days
+2. Lisinopril 10 mg by mouth daily
+3. Levothyroxine ___ mcg by mouth daily
+4. Acetaminophen 650 mg by mouth every six hours as needed for pain
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Left lower extremity cellulitis
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a skin infection of your left leg. Take the antibiotic exactly as prescribed and finish every dose. Keep the leg elevated and clean. Follow up with ___ within one week. Call ___ or return if fever, spreading redness, or worsening pain develops.
+
+Followup Instructions:
+___

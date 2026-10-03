@@ -1,0 +1,60 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+Patient presented to ___ with three days of right lower quadrant pain, nausea and low-grade fever. He was referred from ___ clinic after outpatient imaging suggested appendicitis. No vomiting, diarrhea or urinary symptoms were reported.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+HEENT: Normocephalic, moist mucous membranes.
+ABD: Tender right lower quadrant, no rigidity.
+EXTREMITIES: Warm, well perfused, no edema.
+
+Pertinent Results:
+WBC 13.2 on admission, normalized to 7.8 by discharge. Creatinine and electrolytes within normal limits. CT abdomen at ___ showed a dilated inflamed appendix with surrounding fat stranding and no perforation or abscess. Urinalysis was unremarkable.
+
+Brief Hospital Course:
+He was taken to the operating room at ___ for laparoscopic appendectomy without complication. Pain was controlled with oral analgesics and diet advanced as tolerated. He received perioperative antibiotics, ambulated independently, and was discharged on postoperative day one in stable condition after review by the ___ surgical team.
+
+Medications on Admission:
+Lisinopril 10 mg daily and atorvastatin 20 mg nightly.
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed. Oxycodone 5 mg as needed, dispensed by ___. Continue lisinopril and atorvastatin.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Mental Status: Alert and oriented, clear thinking.
+Level of Consciousness: Fully awake and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+Keep incisions clean and dry, no lifting over ten pounds for two weeks. Return for fever, worsening pain or vomiting. Call the surgical clinic at ___ with questions.
+
+Followup Instructions:
+___

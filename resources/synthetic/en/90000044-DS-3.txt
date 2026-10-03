@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg pain and redness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old woman with diabetes who presented to ___ with three days of worsening right lower leg pain, redness and swelling after a minor scratch while gardening. She noted subjective fevers and chills the night before arrival. She was seen by her primary care physician on ___ and given oral antibiotics without improvement. In the emergency department she was afebrile but tender, with warmth over the shin. Labs showed an elevated white count and a glucose of 290. She was started on intravenous antibiotics and admitted to the ___ service for cellulitis management and glucose control.
+
+Past Medical History:
+Hypertension
+Chronic kidney disease stage 3, followed by Dr. ___
+Hyperlipidemia
+Osteoarthritis of the knees
+
+Social History:
+___
+
+Family History:
+Mother with hypertension.
+
+Physical Exam:
+Vitals: T 98.4, BP 132/78, HR 76, RR 16, SpO2 97% on room air
+General: Comfortable, no distress
+HEENT: Moist mucous membranes, anicteric
+Neck: Supple, no lymphadenopathy
+Lungs: Clear to auscultation bilaterally
+Ext: Right shin with improved erythema and mild warmth, trace edema, no fluctuance
+Neuro: Alert, oriented, moves all limbs
+
+Pertinent Results:
+Labs on ___: white count 13.2 on admission, down to 8.1 at discharge. Hemoglobin 11.4. Creatinine 1.6, at her baseline. Potassium 4.3. Glucose 290 on admission, improving to 150 by discharge. Lactate 1.1.
+Blood cultures drawn at ___ showed no growth after five days.
+Right lower extremity ultrasound performed at ___ showed no deep vein thrombosis and mild subcutaneous edema without drainable collection.
+Chest radiograph was unremarkable.
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth four times daily for seven more days
+2. Amlodipine 5 mg by mouth once daily
+3. Atorvastatin 20 mg by mouth nightly
+4. Metformin 500 mg by mouth twice daily with meals
+5. Acetaminophen 650 mg by mouth every six hours as needed for pain
+Prescriptions were reviewed with the pharmacist at ___.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Right lower extremity cellulitis
+Diabetes mellitus
+Chronic kidney disease
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with a skin infection of your right leg. You received intravenous antibiotics and your redness improved. Finish the full course of antibiotics even if you feel well. Keep your leg elevated when seated and check your blood sugar as you did before. Call Dr. ___ if the redness spreads, the pain worsens, or you develop fever or chills. Return to ___ for severe swelling, shortness of breath, or confusion. Questions about your prescriptions can be directed to your pharmacy at ___.
+
+Followup Instructions:
+___

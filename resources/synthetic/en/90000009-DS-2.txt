@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Vomiting and decreased urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman who presented on ___ with three days of vomiting, poor oral intake and reduced urine output. Outside labs from ___ showed AKI with creatinine well above baseline. She denied fever, chest pain or abdominal pain, and had no recent medication changes. She was transferred for hydration and monitoring.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General: Comfortable, no acute distress.
+HEENT: Dry mucous membranes, anicteric.
+Neck: Supple, no JVD.
+ABD: Soft, nontender, nondistended, normal bowel sounds.
+SKIN: Warm, no rash, decreased turgor.
+
+Pertinent Results:
+Admission creatinine 2.9, BUN 48, potassium 5.1, bicarbonate 19. Urinalysis bland without protein or blood. Urine sodium was low, consistent with prerenal physiology. Renal ultrasound at ___ showed no hydronephrosis. Chest radiograph was clear.
+DISCHARGE LABS:
+Creatinine 1.8, BUN 27, potassium 4.3, bicarbonate 23, sodium 139, hemoglobin 11.2, white count 6.8, glucose 132.
+
+Brief Hospital Course:
+She was treated for prerenal injury with intravenous fluids, and home lisinopril and furosemide were held. Creatinine improved from 2.9 to 1.8 over four days. Nephrology at ___ felt her baseline CKD stage 3 explained the incomplete recovery. Nausea resolved and she tolerated oral intake well. Blood pressure remained stable off the held agents. She was discharged on ___ with repeat labs arranged.
+
+Medications on Admission:
+Metformin 500 mg twice daily, lisinopril 10 mg daily, furosemide 20 mg daily, atorvastatin.
+
+Discharge Medications:
+Metformin 500 mg twice daily. Atorvastatin 20 mg nightly. Amlodipine 5 mg daily. Hold lisinopril and furosemide until labs are rechecked. Acetaminophen as needed for pain. Avoid NSAIDs.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Primary: Acute kidney injury on chronic kidney disease
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+Drink fluids regularly and avoid ibuprofen and similar painkillers. Weigh yourself and check blood pressure daily. Call ___ if urine output drops or vomiting returns. Return to ___ for confusion, fainting or severe weakness.
+
+Followup Instructions:
+___

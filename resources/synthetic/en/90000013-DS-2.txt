@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Worsening leg swelling and breathlessness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with two weeks of progressive ankle swelling, orthopnea and weight gain, sent in by ___ clinic after missing doses of his water pill.
+
+Past Medical History:
+Hypertension
+Prior myocardial infarction
+Hyperlipidemia
+Gout seen at ___
+
+Social History:
+___
+
+Family History:
+Father with early coronary disease
+
+Physical Exam:
+Gen:
+Tired, mildly dyspneic at rest
+Neck:
+JVP elevated
+Abdomen:
+Soft, nontender
+SKIN:
+Pitting edema to knees
+
+Pertinent Results:
+BNP markedly elevated at ___. Chest film showed pulmonary vascular congestion with small effusions.
+DISCHARGE LABS:
+Sodium 138, potassium 4.1, creatinine near baseline.
+
+Brief Hospital Course:
+Treated with intravenous furosemide and lost several liters, with resolution of congestion and oxygen need. Electrolytes were monitored daily. Transitioned to oral diuretic, and cardiology follow-up at ___ was arranged.
+
+Medications on Admission:
+Metoprolol, lisinopril, atorvastatin, aspirin
+
+Discharge Medications:
+Furosemide daily, metoprolol succinate, lisinopril, atorvastatin, aspirin. Take your water pill every morning and bring the list to clinic.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Volume overload with pulmonary congestion
+Secondary:
+Hypertension, prior myocardial infarction, hyperlipidemia
+
+Discharge Condition:
+Good, breathing comfortably on room air
+Mental Status:
+Alert and oriented, able to follow instructions
+
+Discharge Instructions:
+Weigh yourself each morning and call ___ if you gain more than three pounds in a day. Limit salt and fluids, and return for worsening breathlessness.
+
+Followup Instructions:
+___

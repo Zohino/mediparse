@@ -1,0 +1,59 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever and productive cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Gentleman with hypertension sent from ___ clinic after three days of fever, cough with yellow sputum and shortness of breath. Chest film there suggested right lower lobe consolidation. Referred by Dr. ___ for admission.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Pertinent Results:
+Admission white count elevated with neutrophil predominance. Chest radiograph showed right lower lobe opacity. Blood cultures at ___ showed no growth. Creatinine remained at baseline throughout the stay.
+
+Brief Hospital Course:
+Treated for community acquired pneumonia with intravenous ceftriaxone and azithromycin, then transitioned to oral antibiotics once afebrile. Oxygen was weaned to room air. Seen by the ___ team, who agreed with the plan. Discharged on ___ in stable condition.
+
+Medications on Admission:
+Lisinopril, atorvastatin, allopurinol daily.
+
+Discharge Medications:
+1. Amoxicillin-clavulanate twice daily for five more days.
+2. Lisinopril daily.
+3. Atorvastatin nightly.
+4. Allopurinol daily.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for a lung infection. Finish all antibiotics, rest, and drink fluids. Return for fever, worsening breathing, or chest pain. Call ___ with any questions about your medicines.
+
+Followup Instructions:
+___

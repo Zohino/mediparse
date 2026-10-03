@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain and nausea
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman sent in from ___ clinic with two days of upper abdominal pain, nausea and reduced appetite. Pain was dull, worse after meals, without fever. Labs outside showed mildly elevated glucose and lipase.
+REVIEW OF SYSTEMS:
+Positive for nausea. Negative for chest pain, dyspnea, fever.
+
+Past Medical History:
+Hypertension
+Possible diabetes mellitus, awaiting confirmatory testing
+Cholecystectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals:
+Afebrile, stable
+Gen:
+Comfortable, no distress
+HEENT:
+Moist mucosa
+PULM:
+Clear bilaterally
+EXTREMITIES:
+No edema
+SKIN:
+Warm, dry
+Neuro:
+Alert, nonfocal
+
+Brief Hospital Course:
+She was treated for mild pancreatitis with fluids, analgesia and bowel rest, then advanced to a low fat diet and tolerated it well. Pain resolved by day three. Imaging reviewed by the ___ radiology team showed no stones. Glucose was monitored at ___ and needs outpatient evaluation.
+TRANSITIONAL ISSUES:
+Repeat fasting glucose and hemoglobin A1c as outpatient.
+
+Medications on Admission:
+Lisinopril 10 mg daily from ___. Multivitamin daily.
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily.
+2. Acetaminophen 500 mg by mouth every six hours as needed for pain.
+3. Multivitamin daily.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Primary:
+Acute pancreatitis
+Secondary:
+Hypertension
+
+Discharge Condition:
+Good
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with inflammation of the pancreas. Eat small low fat meals and avoid alcohol. Take medications as prescribed. Call ___ or return to the hospital for severe pain, vomiting, fever or yellowing of the skin.
+
+Followup Instructions:
+___

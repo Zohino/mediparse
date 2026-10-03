@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right flank pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with two days of right flank pain, sent in from ___ clinic.
+REVIEW OF SYSTEMS:
+Negative except as above.
+
+Past Medical History:
+Hypertension
+Kidney stones
+
+Social History:
+___
+
+Family History:
+Father with family history of diabetes. No kidney disease.
+
+Physical Exam:
+Afebrile, comfortable, mild right flank tenderness.
+DISCHARGE PHYSICAL EXAM:
+Vitals: Stable
+General: Comfortable
+Neck: Supple
+PULM: Clear
+CARDIAC: Regular rhythm
+Neuro: Nonfocal
+
+Pertinent Results:
+Urinalysis showed blood. CT showed a small right ureteral stone with mild hydronephrosis.
+IMPRESSION:
+Obstructing right ureteral stone.
+
+Brief Hospital Course:
+Pain was controlled with oral medication and fluids. Urology, led by Dr. ___, advised outpatient stone passage with strainer. Pain resolved.
+
+Medications on Admission:
+Lisinopril daily
+
+Discharge Medications:
+Lisinopril daily. Ibuprofen as needed for pain. Tamsulosin nightly until stone passes.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Right ureteral stone
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+Drink plenty of fluids and strain urine. Return for fever, vomiting, or uncontrolled pain.
+
+Followup Instructions:
+___

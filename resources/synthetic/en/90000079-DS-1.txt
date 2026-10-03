@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right flank pain and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman referred from ___ with three days of right flank pain, fever and burning urination. Symptoms began ___ and worsened despite oral fluids. She reported chills and nausea but no vomiting. In the emergency department she was febrile and received intravenous fluids and antibiotics.
+
+Past Medical History:
+Hypertension, diagnosed in ___
+Hypothyroidism
+No diabetes
+
+Past Surgical History:
+Cholecystectomy
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals: T 38.4, HR 98, BP 128/74, RR 16, SpO2 98% room air
+Gen: Ill appearing, comfortable at rest
+HEENT: Moist mucous membranes
+PULM: Clear bilaterally
+SKIN: Warm, no rash
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+WBC 14.2 on admission, 8.1 at discharge. Creatinine normal. Urinalysis with pyuria and bacteria. Urine culture grew E. coli sensitive to ceftriaxone. Blood cultures negative.
+IMAGING:
+CT abdomen at ___ showed right pyelonephritis without obstruction or abscess.
+
+Brief Hospital Course:
+She was admitted with acute pyelonephritis and started on ceftriaxone, seen by Dr. ___ for the penicillin allergy history, which was low risk. Fever resolved by hospital day two and pain improved. On ___ she tolerated oral intake and was switched to oral antibiotics.
+TRANSITIONAL ISSUES:
+- Complete antibiotic course
+- Repeat urinalysis at primary care visit
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 75 mcg daily
+
+Discharge Medications:
+1. Ciprofloxacin 500 mg twice daily for seven days
+2. Lisinopril 10 mg daily
+3. Levothyroxine 75 mcg daily
+4. Acetaminophen 650 mg every six hours as needed for pain
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute pyelonephritis
+Escherichia coli bacteriuria
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were treated for a kidney infection. Take your antibiotic until finished and drink plenty of fluids. Return for fever, vomiting, worsening flank pain or inability to keep medications down. Call ___ with questions, or reach the clinic at ___ during business hours.
+
+Followup Instructions:
+___

@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right foot pain and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman presenting with three days of worsening right foot redness, warmth and pain after a small blister broke at home. She noted chills but no vomiting. She was seen at ___ clinic, then sent to ___ emergency department for evaluation.
+
+Past Medical History:
+Hypertension
+Obesity
+Neuropathy
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+Gen: Comfortable, no distress
+HEENT: Moist mucous membranes
+Lungs: Clear bilaterally
+ABD: Soft, nontender
+Ext: Right foot warm, swollen, erythematous
+SKIN: Small plantar ulcer
+Neuro: Alert, oriented
+
+Pertinent Results:
+Labs showed mild leukocytosis and elevated creatinine near baseline. Blood cultures from ___ were negative.
+IMAGING: Right foot radiograph
+IMPRESSION: Soft tissue swelling without gas or bony destruction. No findings of osteomyelitis.
+
+Brief Hospital Course:
+She was treated for right foot cellulitis with an ulcer, receiving IV vancomycin then oral doxycycline given her allergy. Her diabetes was managed with insulin and glucose improved. Her CKD was stable and nephrotoxins were avoided. Podiatry from ___ debrided the ulcer and arranged wound care at ___.
+
+Medications on Admission:
+Metformin, lisinopril, amlodipine, atorvastatin
+
+Discharge Disposition:
+Home with services
+Facility: ___
+
+Discharge Diagnosis:
+Right foot cellulitis
+Primary: Right foot cellulitis with plantar ulcer
+Chronic kidney disease
+
+Discharge Condition:
+Stable
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory with offloading shoe
+
+Discharge Instructions:
+You were treated for a foot infection. Take doxycycline as prescribed and keep the dressing clean and dry. Wear the offloading shoe whenever walking. Check your feet daily. Return to ___ for fever, spreading redness, drainage, or worsening pain. Call ___ with questions.
+
+Followup Instructions:
+___

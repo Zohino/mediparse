@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old man with several days of right upper quadrant pain, nausea and fever beginning ___. He presented to the emergency department, where imaging suggested acute cholecystitis, and he was admitted for surgical evaluation.
+
+Past Medical History:
+Diabetes mellitus type 2
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+General:
+Alert, comfortable, no distress.
+HEENT:
+Anicteric sclera, moist mucous membranes.
+ABD:
+Soft, tender in right upper quadrant, nondistended, no rebound.
+
+Pertinent Results:
+Labs showed elevated white blood cell count and mildly raised liver enzymes. Ultrasound demonstrated gallstones with wall thickening and pericholecystic fluid. CT at ___ confirmed gallbladder inflammation without perforation. Postoperative labs returned to normal.
+
+Brief Hospital Course:
+He received intravenous fluids and antibiotics and was evaluated by the ___ team. He was transferred from ___ to the operating room for uncomplicated laparoscopic cholecystectomy. Diet was advanced, pain was controlled with oral medication, and he tolerated discharge planning well.
+
+Medications on Admission:
+Metformin 500 mg twice daily, atorvastatin nightly.
+
+Discharge Medications:
+Acetaminophen as needed for pain, resume metformin and atorvastatin as before. Stool softener while taking opioids. Pick up prescriptions at ___ pharmacy.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for gallbladder inflammation and had your gallbladder removed. Keep incisions clean and dry. Avoid heavy lifting for several weeks. Call ___ for fever, worsening pain, vomiting or yellow skin.
+
+Followup Instructions:
+___

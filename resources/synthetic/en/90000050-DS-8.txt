@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Thirst and frequent urination
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with several days of malaise, thirst and frequent urination. Glucose was markedly elevated on arrival. He was referred from ___ clinic for evaluation and admitted for glycemic control.
+
+Past Medical History:
+Diabetes mellitus
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with high blood pressure
+
+Physical Exam:
+Vitals:
+Stable, afebrile
+General:
+Comfortable
+HEENT:
+Moist mucous membranes
+PULM:
+Clear bilaterally
+Ext:
+No edema
+Neuro:
+Nonfocal
+
+Pertinent Results:
+Admission glucose elevated with mild ketosis, since resolved. Sodium and potassium normal. Imaging obtained at ___ unremarkable.
+DISCHARGE LABS:
+Glucose improved, electrolytes and bicarbonate normal.
+
+Brief Hospital Course:
+Treated with intravenous fluids and an insulin infusion, then moved to subcutaneous insulin with improved glucose readings. An educator reviewed injection technique and home monitoring. Nutrition saw him at ___ and follow-up was arranged with ___ endocrinology.
+
+Medications on Admission:
+Metformin
+Lisinopril
+
+Discharge Medications:
+Insulin glargine nightly, insulin lispro with meals, metformin twice daily, lisinopril once daily. Glucose test strips and lancets supplied.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes mellitus
+
+Discharge Condition:
+Good
+Mental Status:
+Alert and oriented
+
+Discharge Instructions:
+Check your blood sugar before meals and at bedtime. Take insulin as directed and follow the diet reviewed with you. Call ___ or return for vomiting, confusion or very high readings.
+
+Followup Instructions:
+___

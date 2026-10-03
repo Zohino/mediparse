@@ -1,0 +1,78 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man presented to ___ with three days of productive cough, fever and shortness of breath. He was seen by his primary physician on ___ and sent to the emergency department, where chest imaging showed right lower lobe consolidation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Vitals:
+Afebrile, heart rate 82, saturation 96% on room air
+General:
+Comfortable, no distress
+Lungs:
+Right basilar crackles
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+DISCHARGE LABS:
+White count 9.1, down from 14.8. Creatinine 0.9.
+IMAGING:
+Chest radiograph performed at ___.
+IMPRESSION:
+Right lower lobe pneumonia, no effusion.
+
+Brief Hospital Course:
+Treated with intravenous ceftriaxone and azithromycin, then switched to oral antibiotics by day three. Oxygen was weaned to room air and fever resolved. Respiratory therapy reviewed his breathing exercises on ___. Dr. ___ agreed with the discharge plan.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Amoxicillin-clavulanate 875 mg by mouth twice daily for five days
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+Thank you for allowing us to care for you at ___. Finish the full antibiotic course, rest and drink fluids. Return for fever, worsening breathlessness or chest pain.
+
+Followup Instructions:
+___

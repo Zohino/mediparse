@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right flank pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with three days of worsening right flank pain and nausea, sent from ___ clinic. Pain radiated to the groin. No fever. Seen at ___ first.
+
+Past Medical History:
+Hypertension
+Kidney stones, remote ___
+
+Social History:
+___
+
+Family History:
+Father with kidney stones
+
+Physical Exam:
+General:
+Uncomfortable, afebrile
+HEENT:
+Moist mucosa
+Lungs:
+Clear bilaterally
+ABD:
+Soft, right flank tender
+Ext:
+No edema
+SKIN:
+Warm, dry
+
+Pertinent Results:
+CT showed a 6 mm obstructing right ureteral stone with mild hydronephrosis. Urinalysis with blood, no infection. Creatinine at baseline.
+
+Brief Hospital Course:
+Treated with fluids, analgesia and tamsulosin. Pain improved and he tolerated diet. Stone passage not confirmed before discharge; urology follow-up arranged through ___.
+TRANSITIONAL ISSUES:
+Strain urine, repeat imaging if pain returns.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+
+Discharge Medications:
+Lisinopril 10 mg daily. Tamsulosin 0.4 mg nightly. Ibuprofen 400 mg every eight hours with food as needed for pain.
+
+Discharge Disposition:
+Home
+
+Discharge Condition:
+Stable, pain controlled
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a kidney stone. Drink plenty of fluids and strain your urine. Return for fever, uncontrolled pain, or vomiting. Call ___ with questions.
+
+Followup Instructions:
+___

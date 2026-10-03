@@ -1,0 +1,59 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Presented to ___ with three days of productive cough, fever and pleuritic chest pain. Seen at ___ clinic earlier and given oral antibiotics without improvement. Arrived febrile and mildly hypoxic; chest radiograph showed right lower lobe consolidation, so he was admitted.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gastroesophageal reflux
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Gen: Tired but comfortable, speaking full sentences
+Lungs: Right basilar crackles, no wheeze
+EXTREMITIES: No edema
+SKIN: Warm, dry
+PULSES: Palpable and symmetric
+
+Pertinent Results:
+White count elevated on arrival, normalizing by discharge. Creatinine at baseline. Blood cultures from ___ showed no growth. Chest radiograph: right lower lobe airspace opacity, no effusion.
+
+Brief Hospital Course:
+Treated for community-acquired pneumonia with intravenous ceftriaxone and azithromycin, switched to oral doxycycline once afebrile. Oxygen was weaned to room air by day three. Seen by pulmonary team at ___ who advised repeat imaging in six weeks. Discharged home with ___ support.
+
+Discharge Medications:
+Doxycycline 100 mg twice daily for five more days. Continue home lisinopril and atorvastatin. Acetaminophen as needed; pick up from ___ pharmacy.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary: Community-acquired pneumonia
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were hospitalized for a lung infection. Finish your antibiotic, rest, drink plenty of fluids, and avoid smoking. Return for worsening shortness of breath, fever, or chest pain. Call ___ with questions.
+
+Followup Instructions:
+___

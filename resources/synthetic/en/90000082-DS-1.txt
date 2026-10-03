@@ -1,0 +1,78 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None, chest imaging performed at ___
+
+History of Present Illness:
+Woman with five days of productive cough, fever and mild shortness of breath, worsening despite rest. Seen at ___ by Dr. ___ and sent to the emergency department. Oxygen saturation was low on room air, so she was admitted for treatment.
+
+Past Medical History:
+Hypertension
+Asthma
+Hypothyroidism, followed at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals:
+Temp 38.1, HR 96, BP 128/76, SpO2 92% room air
+General:
+Tired, comfortable at rest
+HEENT:
+Moist mucosa
+CARDIAC:
+Regular rhythm
+ABD:
+Soft, nontender
+
+Pertinent Results:
+Chest film on ___ showed right lower lobe consolidation. White count elevated at 14.2. Lactate normal. Creatinine at baseline. Blood cultures without growth. Respiratory viral panel negative. Sputum culture grew normal flora.
+
+Brief Hospital Course:
+Treated for community acquired pneumonia with azithromycin and ceftriaxone after allergy review with ___. Oxygen was weaned over two days and fever resolved. Her asthma stayed quiet on inhalers. She walked the hallway without desaturation and was cleared to leave, with follow up arranged at ___.
+
+Medications on Admission:
+Lisinopril, levothyroxine, albuterol inhaler as needed
+
+Discharge Medications:
+1. Azithromycin to finish the remaining three days.
+2. Lisinopril daily as before.
+3. Levothyroxine each morning.
+4. Albuterol inhaler when wheezy.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Secondary:
+Hypertension
+Asthma
+Hypothyroidism
+
+Discharge Condition:
+Stable and improved
+Level of Consciousness:
+Alert and oriented
+Activity Status:
+Walks independently
+
+Discharge Instructions:
+You were treated for a lung infection. Finish your antibiotic, drink plenty of fluids and rest. Return for worsening breathlessness, high fever or chest pain. Call the clinic at ___ with questions.
+
+Followup Instructions:
+___

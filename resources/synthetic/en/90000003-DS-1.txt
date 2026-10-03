@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies.
+
+Chief Complaint:
+Right lower leg pain and swelling.
+
+Major Surgical or Invasive Procedure:
+None.
+
+History of Present Illness:
+Patient presented to ___ with three days of right calf pain and swelling after a long ___ flight. Duplex ultrasound showed acute deep vein thrombosis. She was started on anticoagulation and admitted.
+
+Past Medical History:
+Hypothyroidism.
+Migraine.
+
+Social History:
+___
+
+Family History:
+Mother with varicose veins.
+
+Physical Exam:
+General: Comfortable; right calf tender, swollen.
+HEENT: Normocephalic, moist mucous membranes.
+Lungs: Clear to auscultation bilaterally.
+
+Pertinent Results:
+Duplex ultrasound of ___ showed occlusive thrombus in the right popliteal vein. Hemoglobin and creatinine were normal on admission labs.
+IMPRESSION:
+Occlusive right popliteal vein thrombus; no proximal extension. Chest CT angiogram was negative for embolism.
+
+Brief Hospital Course:
+She was started on a direct oral anticoagulant and remained hemodynamically stable. Pain improved with elevation and acetaminophen. Teaching was provided by ___ regarding dosing and bleeding precautions. She was discharged home in stable condition.
+TRANSITIONAL ISSUES:
+Follow up with ___ in three weeks. Complete three months of anticoagulation.
+
+Medications on Admission:
+Levothyroxine daily. Sumatriptan as needed.
+
+Discharge Medications:
+Apixaban 10 mg twice daily for seven days, then 5 mg twice daily. Continue levothyroxine. Acetaminophen as needed for pain.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute right popliteal deep vein thrombosis.
+
+Discharge Condition:
+Mental Status: Alert and oriented.
+Level of Consciousness: Awake and attentive.
+Activity Status: Ambulatory and independent.
+
+Discharge Instructions:
+Take your anticoagulant as prescribed. Elevate the leg when seated. Return to ___ for chest pain, shortness of breath, or bleeding.
+
+Followup Instructions:
+___

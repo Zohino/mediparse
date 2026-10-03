@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Left leg redness and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with hypertension and hypothyroidism who presented with three days of left lower leg redness, warmth and swelling after a minor scrape while gardening. She developed fever and chills the evening before arrival. She was transferred from ___ after evaluation on ___ for further management of spreading cellulitis.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Osteoarthritis of the knees
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Father with stroke.
+
+Physical Exam:
+Vitals:
+T 38.1 HR 98 BP 132/78 RR 16 SpO2 97% RA
+General:
+Alert, mildly uncomfortable
+HEENT:
+Moist mucous membranes, anicteric
+PULM:
+Clear bilaterally
+Ext:
+Left shin erythema, warm, tender, no fluctuance
+
+Pertinent Results:
+Admission labs on ___ notable for white count 14.2 with neutrophil predominance and lactate 1.3. Glucose 248, hemoglobin A1c elevated. Creatinine at baseline. Blood cultures showed no growth at five days. Left leg ultrasound negative for deep vein thrombosis. Plain film of the tibia showed soft tissue swelling without gas or osteomyelitis.
+
+Brief Hospital Course:
+She was admitted with left leg cellulitis and started on intravenous vancomycin given her penicillin allergy. Erythema was marked and receded steadily over three days, and fever resolved. Newly elevated glucose and A1c confirmed previously undiagnosed diabetes; she was seen by the ___ team and diabetes education was provided. Wound care from ___ Hospital reviewed the skin. She was switched to oral doxycycline and discharged. Dr. ___ will manage her new metformin.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 75 mcg daily
+
+Discharge Medications:
+1. Doxycycline 100 mg twice daily for seven more days
+2. Metformin 500 mg twice daily with meals
+3. Lisinopril 10 mg daily
+4. Levothyroxine 75 mcg daily
+5. Acetaminophen 650 mg every six hours as needed for pain
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Cellulitis of left lower leg
+Diabetes mellitus, type 2
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a skin infection of your left leg and found to have high blood sugar. Take all antibiotics as prescribed and check your sugars as taught. Keep the leg elevated and clean. Return for fever, spreading redness, severe pain or vomiting. Call ___ with questions, or the clinic at ___ if you cannot reach us.
+
+Followup Instructions:
+___

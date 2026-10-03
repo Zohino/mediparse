@@ -1,0 +1,83 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman presented with three days of palpitations and lightheadedness that began ___. She was first evaluated at ___ and transferred for further rhythm management. She denied chest pain, syncope, fever, or recent illness, and reported poor sleep.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Hypothyroidism
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with stroke. Father with hypertension.
+
+Physical Exam:
+General:
+Comfortable, no distress.
+Neck:
+Supple.
+PULM:
+Clear bilaterally.
+ABD:
+Soft, nontender.
+Ext:
+No edema.
+SKIN:
+Warm, dry.
+Neuro:
+Alert, nonfocal.
+
+Pertinent Results:
+DISCHARGE LABS:
+Sodium 139, potassium 4.2, creatinine 0.8, hemoglobin 12.9, TSH normal. Troponin negative twice.
+IMPRESSION:
+Echocardiogram from ___ showed preserved ventricular function, mild left atrial enlargement, and no significant valve disease. Chest film showed no acute process.
+
+Brief Hospital Course:
+She was admitted to telemetry and her heart rate was controlled with oral metoprolol. Anticoagulation was started after risk assessment by the team of ___. Her symptoms resolved and she tolerated ambulation without difficulty. She was discharged home in stable condition on hospital day three, with cardiology follow up arranged at ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 75 mcg daily
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg daily
+2. Apixaban 5 mg twice daily
+3. Lisinopril 10 mg daily
+4. Levothyroxine 75 mcg daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for an irregular heartbeat. Take your new medications exactly as prescribed, including the blood thinner. Return for fainting, chest pain, bleeding, or sustained racing heartbeat. Call ___ with questions, or contact the clinic at ___ if you miss a dose.
+
+Followup Instructions:
+___

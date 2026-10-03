@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Foot wound with swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man sent from ___ clinic with a worsening left foot wound and redness.
+
+Past Medical History:
+Diabetes mellitus
+Hypertension
+
+Past Surgical History:
+Appendectomy
+
+Family History:
+Mother with high blood pressure
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Normal
+Ext:
+Left foot ulcer
+PULSES:
+Palpable bilaterally
+
+Pertinent Results:
+DISCHARGE LABS:
+Glucose and white count near normal
+IMPRESSION:
+No bone involvement on foot film ___
+
+Brief Hospital Course:
+Treated with antibiotics and wound care for the foot infection. Glucose was managed with insulin. He improved and was discharged home with ___ follow up.
+
+Medications on Admission:
+Metformin
+Lisinopril
+
+Discharge Medications:
+Amoxicillin-clavulanate twice daily, metformin, lisinopril, dressing supplies
+
+Discharge Disposition:
+Home with services
+
+Discharge Diagnosis:
+Diabetes
+Foot infection
+
+Discharge Condition:
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake and attentive
+Activity Status:
+Ambulatory with offloading shoe
+
+Discharge Instructions:
+Keep the dressing clean, take antibiotics fully, check your feet and sugars daily.
+
+Followup Instructions:
+___

@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever for three days
+
+Major Surgical or Invasive Procedure:
+None
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Gen: comfortable, no distress
+Neck: supple
+CARDIAC: regular rhythm
+ABD: soft, nontender
+Ext: no edema
+
+Pertinent Results:
+DISCHARGE LABS:
+WBC 8.2, Hgb 13.5, Plt 240, Na 139, K 4.1, Cr 0.9
+IMAGING:
+Chest x-ray showed right lower lobe consolidation, no effusion.
+
+Brief Hospital Course:
+___ year old man transferred from ___ with community acquired pneumonia. Treated with antibiotics, improved, afebrile and weaned off oxygen. Seen by Dr. ___.
+TRANSITIONAL ISSUES:
+Repeat chest x-ray in six weeks.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Allopurinol 100 mg daily
+
+Discharge Medications:
+1. Lisinopril 10 mg daily
+2. Allopurinol 100 mg daily
+3. Amoxicillin-clavulanate 875 mg twice daily for four days
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted with pneumonia. Take your antibiotics as prescribed, rest, drink fluids, and return for fever, worsening cough or trouble breathing. Call ___ clinic with questions.
+
+Followup Instructions:
+___

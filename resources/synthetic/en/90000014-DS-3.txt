@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Weakness and decreased urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man sent from ___ with three days of poor intake and low urine output. Labs showed AKI, improved with fluids.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Family history notable for mother with CKD. Father had stroke.
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Dry mucous membranes
+Neck:
+Supple
+Lungs:
+Clear bilaterally
+SKIN:
+Warm, no rash
+
+Pertinent Results:
+Creatinine peaked on admission and trended down with hydration. Potassium normal. Glucose elevated on admission labs.
+IMAGING:
+Ultrasound unremarkable
+
+Medications on Admission:
+Lisinopril, atorvastatin, aspirin daily
+
+Discharge Medications:
+Atorvastatin nightly, aspirin daily, metformin twice daily. Hold lisinopril until reviewed by primary doctor.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Diabetes mellitus, newly recognized
+Secondary:
+Dehydration
+Hypertension
+
+Discharge Condition:
+Good
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Fully awake
+Activity Status:
+Walks without assistance
+
+Discharge Instructions:
+Drink plenty of fluids and check your sugars daily. Avoid anti-inflammatory pain pills. Return for fever, vomiting, or confusion. Call ___ with questions.
+
+Followup Instructions:
+___

@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough, fever, shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient is a man who presented to ___ with three days of productive cough, fever and worsening shortness of breath. He was seen by his primary physician, Dr. ___, who sent him to the emergency department. On arrival he was febrile and hypoxic to the low nineties on room air. Chest imaging showed a right lower lobe consolidation, and he was admitted.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Type 2 diabetes mellitus
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Vitals: T 99.1, HR 82, BP 128/76, RR 16, SpO2 96% on room air
+General: comfortable, no distress
+HEENT: moist mucous membranes
+Lungs: crackles at the right base
+ABD: soft, nontender
+Ext: warm, no edema
+Neuro: alert, nonfocal
+
+Pertinent Results:
+Labs drawn on ___ showed WBC 13.2 with neutrophil predominance, creatinine 0.9, and glucose 168. Blood cultures showed no growth. Chest radiograph at ___ was obtained on admission and again before discharge.
+IMPRESSION: Right lower lobe pneumonia, improved airspace opacity compared with the prior study, no effusion.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Metformin 500 mg twice daily
+
+Discharge Medications:
+1. Levofloxacin 750 mg by mouth once daily for four more days.
+2. Lisinopril 10 mg daily.
+3. Atorvastatin 20 mg nightly.
+4. Metformin 500 mg twice daily with meals.
+5. Acetaminophen 650 mg every six hours as needed for fever.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Primary: Community-acquired pneumonia
+Secondary: Hypertension, hyperlipidemia
+
+Discharge Condition:
+Stable, afebrile, oxygen saturation normal on room air.
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were treated in the hospital for pneumonia with antibiotics and fluids. Finish the full course of levofloxacin and drink plenty of fluids. Rest as needed and increase activity gradually. Keep your appointment with Dr. ___ and call ___ with questions. Return to ___ for fever, worsening breathlessness, chest pain, or confusion.
+
+Followup Instructions:
+___

@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with three days of productive cough, fever and chills, sent from ___ clinic after low oxygen saturation was noted.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Osteoarthritis
+
+Social History:
+___
+
+Family History:
+Mother with stroke. No known lung disease.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals:
+Febrile, mildly tachycardic, saturating 92% on room air.
+General:
+Tired, comfortable at rest.
+HEENT:
+Dry mucous membranes.
+Lungs:
+Crackles at right base.
+ABD:
+Soft, nontender.
+
+Pertinent Results:
+ADMISSION LABS:
+Mildly raised white count, normal creatinine.
+IMAGING:
+Chest radiograph obtained.
+IMPRESSION:
+Right lower lobe consolidation consistent with pneumonia.
+
+Brief Hospital Course:
+Treated for community-acquired pneumonia with azithromycin and doxycycline given her allergy, plus fluids. Oxygen was weaned by day two. Seen by ___ and cleared for home. Improved steadily; remained afebrile before leaving ___.
+
+Medications on Admission:
+Lisinopril, levothyroxine
+
+Discharge Medications:
+1. Doxycycline 100 mg twice daily for five more days.
+2. Lisinopril daily.
+3. Levothyroxine daily.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community-acquired pneumonia
+Hypoxemia
+
+Discharge Condition:
+Good, alert and oriented.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for pneumonia. Finish all antibiotics, drink plenty of fluids, rest, and return for fever, worsening breathlessness or chest pain. Call ___ with questions.
+
+Followup Instructions:
+___

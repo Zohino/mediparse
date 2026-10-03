@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Nausea and poor oral intake
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with several days of nausea, poor oral intake and reduced urine output. Labs showed acute kidney injury. She was hydrated and admitted for monitoring.
+REVIEW OF SYSTEMS:
+Positive for fatigue and nausea. Negative for fever, chest pain.
+
+Past Medical History:
+Diabetes mellitus
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension; details per ___.
+
+Physical Exam:
+Alert, comfortable, afebrile, vital signs stable.
+Neck:
+Supple, no JVD.
+Ext:
+Warm, no edema.
+SKIN:
+Dry, intact, no rash.
+
+Pertinent Results:
+ADMISSION LABS:
+Creatinine elevated above baseline, urea elevated, potassium normal, glucose high, bicarbonate low. Results drawn at ___ were otherwise unremarkable.
+FINDINGS:
+Renal ultrasound at ___ showed no hydronephrosis, normal kidney size, and no stones. Urinalysis showed no infection. Chest radiograph was clear.
+
+Brief Hospital Course:
+She received intravenous fluids and her creatinine improved steadily toward baseline. Nephrotoxic medications were held. Her blood sugars were managed with insulin during the stay and her home regimen was resumed. Diet was advanced without difficulty. Care was discussed with Dr. ___ and the primary team at ___ before discharge. She ambulated independently.
+
+Medications on Admission:
+Metformin 500 mg twice daily; lisinopril 10 mg daily.
+
+Discharge Medications:
+Metformin 500 mg twice daily, resume after follow-up labs. Hold lisinopril until ___ review. Acetaminophen 500 mg as needed for pain. Drink fluids.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Acute kidney injury
+Diabetes mellitus
+
+Discharge Condition:
+Stable
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for dehydration and kidney problems. Drink fluids, avoid ibuprofen, and take medications as directed. Return for fever, vomiting, or low urine output. Call ___ with questions.
+
+Followup Instructions:
+___

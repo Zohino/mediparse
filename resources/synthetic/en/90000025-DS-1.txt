@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Cardiology
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with diabetes presenting with several days of dyspnea and palpitations, referred by ___ after an outpatient visit at ___.
+REVIEW OF SYSTEMS:
+Positive for fatigue and leg swelling.
+
+Past Medical History:
+Hypertension
+Heart failure
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+Vitals: afebrile, stable
+Gen: comfortable, alert
+EXTREMITIES: trace edema
+SKIN: warm, dry
+
+Brief Hospital Course:
+Admitted with volume overload and rapid ventricular rates. Diuresed with improved breathing, and rate was controlled with an oral agent. Anticoagulation was started after discussion with the team at ___. Weight and symptoms improved steadily before discharge.
+
+Medications on Admission:
+Metformin, lisinopril, furosemide daily.
+
+Discharge Medications:
+Furosemide 40 mg daily, metoprolol succinate 50 mg daily, apixaban 5 mg twice daily, lisinopril 10 mg daily.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary:
+Diabetes mellitus, heart failure, atrial fibrillation
+
+Discharge Condition:
+Level of Consciousness: alert and oriented
+Activity Status: walks independently
+
+Discharge Instructions:
+Weigh yourself every morning, limit salt intake, take medications as prescribed, and call ___ if breathing worsens.
+
+Followup Instructions:
+___

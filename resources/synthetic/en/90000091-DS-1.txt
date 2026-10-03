@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman presented to ___ with three days of abdominal pain, nausea and poor oral intake after a recent clinic visit at ___. She denied fever, chest pain or urinary symptoms. Pain worsened after meals.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Prior appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+Comfortable, mild right upper quadrant tenderness, no peritoneal signs, otherwise unremarkable examination.
+ADMISSION PHYSICAL EXAM:
+Vitals: T 98.9, HR 88, BP 136/80, RR 16, SpO2 98% on room air
+Neck: Supple
+Lungs: Clear bilaterally
+ABD: Soft, tender in right upper quadrant, non-distended
+EXTREMITIES: No edema
+SKIN: Warm and dry
+
+Pertinent Results:
+Admission labs notable for mildly elevated lipase and glucose of 210. CT abdomen at ___ showed gallstones with mild gallbladder wall thickening. Liver enzymes were mildly elevated and trended down. Chest film unremarkable. Urinalysis negative.
+
+Brief Hospital Course:
+Admitted for biliary colic with possible cholecystitis and treated with fluids, analgesia and antibiotics. Surgery team at ___ recommended outpatient cholecystectomy. Elevated glucose raised suspicion for possible diabetes, so hemoglobin A1c was sent. Diet advanced well; seen by ___ before discharge on ___.
+TRANSITIONAL ISSUES:
+Follow up pending A1c and schedule elective surgery.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Continue lisinopril 10 mg daily and atorvastatin 20 mg nightly. Take acetaminophen 650 mg every six hours as needed for pain. Ondansetron 4 mg as needed for nausea.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Biliary colic
+Cholelithiasis
+
+Discharge Condition:
+Stable.
+Mental Status: Alert and oriented, able to give her own history.
+Level of Consciousness: Fully awake and interactive.
+Activity Status: Walks independently.
+
+Discharge Instructions:
+You were admitted with gallbladder pain. Eat low-fat meals, take medications as prescribed, and return to ___ for fever, vomiting, yellow skin or severe worsening abdominal pain.
+
+Followup Instructions:
+___

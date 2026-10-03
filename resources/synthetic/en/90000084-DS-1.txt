@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+___ year old man transferred from ___ with one day of worsening right lower quadrant pain, nausea and low grade fever. Pain began around the umbilicus on ___ and migrated. He denies diabetes, vomiting blood or change in bowel habits. CT showed acute appendicitis.
+
+Past Medical History:
+Hypertension
+Seasonal allergic rhinitis
+
+Social History:
+___
+
+Family History:
+Father with colon polyps
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: uncomfortable, alert, lying still
+HEENT: moist mucous membranes
+Abdomen: tender right lower quadrant, guarding, no rebound
+SKIN: warm, dry
+Neuro: grossly intact, nonfocal
+
+Pertinent Results:
+CT abdomen and pelvis on ___: dilated appendix 11 mm with wall thickening and surrounding fat stranding, no abscess or free air. Admission white count 14.2, normal electrolytes and creatinine. Pathology showed acute appendicitis without perforation.
+
+Brief Hospital Course:
+Admitted to the surgical service and started on intravenous antibiotics. Taken to the operating room by Dr. ___ on ___ for an uncomplicated laparoscopic appendectomy. Diet was advanced, pain controlled with oral medication, and he passed flatus. Incisions stayed clean and dry. He was discharged home in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Lisinopril 10 mg tablet by mouth daily.
+2. Acetaminophen 650 mg every six hours as needed for pain.
+3. Docusate 100 mg twice daily while taking opioids.
+4. Oxycodone 5 mg every six hours as needed for severe pain.
+
+Discharge Disposition:
+Home, follow-up with ___ clinic
+
+Discharge Diagnosis:
+Primary: Acute appendicitis
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were treated for appendicitis with laparoscopic surgery. Keep incisions clean and dry, and avoid lifting more than ten pounds for four weeks. Take pain medication only as needed. Call ___ at ___ for fever, worsening pain, vomiting or redness at the incisions.
+
+Followup Instructions:
+___

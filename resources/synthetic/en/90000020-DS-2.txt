@@ -1,0 +1,85 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Presented to ___ with three days of productive cough, fever and dyspnea. Seen at ___ and sent to the emergency department, where imaging showed a right lower lobe consolidation. Admitted for treatment.
+REVIEW OF SYSTEMS:
+Positive for fever and cough. Negative for chest pain.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+COPD
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General:
+Mildly ill appearing
+HEENT:
+Dry mucous membranes
+PULM:
+Right basilar crackles
+ABD:
+Soft, nontender
+Ext:
+No edema
+PULSES:
+Palpable bilaterally
+DISCHARGE PHYSICAL EXAM:
+Improved, lungs clear, otherwise unchanged
+
+Pertinent Results:
+ADMISSION LABS:
+WBC elevated at 14.2, lactate 1.8, creatinine at baseline. Chest radiograph showed a right lower lobe opacity, performed at ___.
+DISCHARGE LABS:
+WBC normalized at 8.1, creatinine stable, electrolytes within normal limits. Repeat imaging reviewed by ___ showed improving opacity without effusion.
+
+Brief Hospital Course:
+Treated for community acquired pneumonia with ceftriaxone and azithromycin, then changed to oral antibiotics on hospital day three. Oxygen was weaned to room air. Hypertension was managed with home medications. Plan was discussed with ___ and ___. He improved steadily, tolerated his diet and walked independently before discharge to ___.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+Albuterol inhaler as needed
+
+Discharge Medications:
+1. Amoxicillin-clavulanate twice daily for five more days
+2. Lisinopril daily
+3. Atorvastatin nightly
+4. Albuterol inhaler every four hours as needed
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypertension
+COPD
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were treated for a lung infection. Finish all antibiotics, rest, and drink plenty of fluids. Return for worsening breathing, fever or chest pain. Please call ___ with questions and keep your appointment at ___.
+
+Followup Instructions:
+___

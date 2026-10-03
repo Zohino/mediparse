@@ -1,0 +1,62 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg redness and swelling for ___ days
+
+Major Surgical or Invasive Procedure:
+None
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity
+
+Social History:
+___
+
+Family History:
+Father with hypertension. No family history of skin disease.
+
+Physical Exam:
+Gen: Alert, comfortable, in no acute distress.
+HEENT: Normocephalic, atraumatic, moist mucous membranes, anicteric sclera.
+Neck: Supple, no lymphadenopathy.
+Lungs: Clear to auscultation bilaterally, no wheeze.
+Abdomen: Soft, nontender, nondistended, normal bowel sounds.
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 14.2, hemoglobin 13.8, platelets 245, sodium 138, potassium 4.1, creatinine 0.9, lactate 1.3, CRP 86. Blood cultures drawn at ___ showed no growth.
+DISCHARGE LABS:
+WBC 8.9, hemoglobin 13.5, platelets 260, sodium 140, potassium 4.0, creatinine 0.8, CRP 21. Right leg duplex ultrasound at ___ showed no deep vein thrombosis and no drainable fluid collection.
+
+Brief Hospital Course:
+___ year old man with hypertension and obesity who presented to ___ with three days of spreading redness, warmth and pain of the right lower leg. He was afebrile but tachycardic on arrival. Examination showed erythema with a marked border and no fluctuance. He was started on intravenous vancomycin and the area was marked. Ultrasound excluded abscess and venous thrombosis. Pain was controlled with acetaminophen and the leg was elevated. Wound care was seen by Dr. ___ who advised compression once the swelling settled. Erythema receded within 48 hours, and cultures remained negative. He was switched to oral cephalexin on ___ and tolerated it well. He walked independently and was discharged home on hospital day ___ in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Amlodipine 5 mg daily. Multivitamin daily as desired by the patient.
+
+Discharge Medications:
+Cephalexin 500 mg by mouth four times daily until ___. Acetaminophen 650 mg every six hours as needed for pain. Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Amlodipine 5 mg daily. Compression stocking on the right leg once swelling resolves, as directed by ___. Resume all other home medicines.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Right lower leg skin and soft tissue infection
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for a skin infection of the right leg with antibiotics. Take cephalexin until the course is finished, even if the redness is gone. Keep the leg raised when seated. Return to ___ for fever, spreading redness, severe pain or drainage. Follow up with Dr. ___ at the ___ clinic within one week. Call ___ with questions. Wash the skin daily with mild soap and keep it moisturized.
+
+Followup Instructions:
+___

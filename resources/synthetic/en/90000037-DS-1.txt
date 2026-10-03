@@ -1,0 +1,78 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy with intraoperative cholangiogram
+
+History of Present Illness:
+Patient presented to ___ with two days of right upper quadrant pain, nausea and vomiting after a fatty meal. He reported low-grade fevers at home. He was seen at ___ where ultrasound suggested gallstones, and he was transferred to our hospital on ___ for surgical evaluation under Dr. ___.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gastroesophageal reflux
+
+Past Surgical History:
+Right inguinal hernia repair
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+Neck:
+Supple, no lymphadenopathy.
+PULM:
+Clear to auscultation bilaterally.
+ABD:
+Soft, mildly tender in the right upper quadrant, port sites clean and dry.
+Neuro:
+Alert, oriented, nonfocal. Afebrile.
+
+Pertinent Results:
+DISCHARGE LABS:
+WBC 9.1, hemoglobin 13.8, platelets 245, creatinine 0.9, ALT 42, AST 38, total bilirubin 1.1, lipase normal on ___.
+FINDINGS:
+Ultrasound at ___ showed multiple gallstones, gallbladder wall thickening and pericholecystic fluid with a positive sonographic Murphy sign. Common bile duct measured normal caliber. Intraoperative cholangiogram showed no filling defects, with free flow into the duodenum.
+
+Brief Hospital Course:
+He was admitted to the surgical service, given intravenous fluids, antibiotics and analgesia, and kept without oral intake. He underwent laparoscopic cholecystectomy on ___ without complication. Postoperatively his pain was controlled with oral medication and he resumed a regular diet. Antibiotics were stopped after surgery. Pathology from ___ is pending at discharge. He ambulated independently, voided spontaneously and was discharged home on ___ in stable condition. He tolerated the diet without nausea.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Omeprazole 20 mg daily.
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed. Oxycodone 5 mg every six hours as needed for severe pain. Senna twice daily while on oxycodone. Resume home medications. Do not drive on oxycodone.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+
+Discharge Condition:
+Good
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a gallbladder problem and underwent laparoscopic surgery. Keep incisions clean and dry. Avoid lifting more than ten pounds for two weeks. Call ___ or return for fever, worsening abdominal pain, vomiting or wound redness.
+
+Followup Instructions:
+___

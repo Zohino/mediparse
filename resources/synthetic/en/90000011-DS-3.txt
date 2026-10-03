@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man presented to ___ with three days of productive cough, fever and shortness of breath after a recent visit to ___. Chest radiograph showed right lower lobe consolidation.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+General:
+Mildly ill appearing
+HEENT:
+Moist mucosa
+Neck:
+Supple
+Lungs:
+Right basilar crackles
+ABD:
+Soft, nontender
+Ext:
+No edema
+SKIN:
+Warm, dry
+PULSES:
+Palpable
+
+Pertinent Results:
+White count elevated on arrival. Chest radiograph with right lower lobe pneumonia. Blood cultures without growth. Creatinine and electrolytes within normal limits.
+
+Brief Hospital Course:
+Treated for community acquired pneumonia with ceftriaxone and azithromycin, then transitioned to oral antibiotics. Oxygen was weaned off by day three. Glucose was managed with insulin sliding scale. Seen by ___ and cleared by ___.
+
+Medications on Admission:
+Metformin
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+Metformin 500 mg twice daily. Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Amoxicillin-clavulanate twice daily for five more days.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary:
+Community acquired pneumonia
+Secondary: Hypertension, hyperlipidemia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity: Independent, ambulatory.
+
+Discharge Instructions:
+You were treated for pneumonia. Finish all antibiotics, rest, drink fluids, and return for fever, worsening breathlessness or chest pain. Call ___ with questions.
+
+Followup Instructions:
+___

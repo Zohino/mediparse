@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+Man with two days of worsening right lower abdominal pain, nausea and low fever, referred from ___ clinic. Imaging suggested acute appendicitis, so he was admitted to surgery.
+
+Past Medical History:
+Diabetes mellitus
+Hypertension
+
+Past Surgical History:
+Remote tonsillectomy
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+Vitals: stable, afebrile
+Gen: comfortable, no distress
+HEENT: moist mucous membranes
+Neck: supple
+ABD: soft, mildly tender at incisions
+Ext: warm, no edema
+SKIN: incisions clean and dry
+
+Pertinent Results:
+Admission labs showed mild leukocytosis. CT at ___ revealed a dilated inflamed appendix with surrounding fat stranding and no perforation or abscess.
+
+Brief Hospital Course:
+He underwent uncomplicated laparoscopic appendectomy at ___. Diet was advanced, pain was controlled with oral medication, and glucose was monitored. He was seen by ___ and cleared for discharge home.
+
+Medications on Admission:
+Metformin
+Lisinopril
+
+Discharge Medications:
+Metformin as before. Lisinopril as before. Acetaminophen for pain as needed. Short course of oxycodone for severe pain only. Docusate while taking opioids.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis
+Diabetes
+
+Discharge Condition:
+Mental Status: alert and fully oriented
+Activity Status: ambulatory, independent
+
+Discharge Instructions:
+You had your appendix removed. Keep incisions clean and dry, avoid heavy lifting, and call ___ for fever, worsening pain, vomiting or wound redness.
+
+Followup Instructions:
+___

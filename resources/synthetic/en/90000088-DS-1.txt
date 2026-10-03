@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy performed by ___
+
+History of Present Illness:
+Patient presented to ___ with three days of right lower quadrant pain, nausea and low-grade fever. Pain began around the umbilicus and migrated to the right side. He denied vomiting blood or change in stool. Symptoms worsened with movement. He was seen at ___ and sent to the emergency department, where imaging suggested appendicitis.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+Vitals:
+Afebrile, stable, room air saturation normal.
+Gen:
+Comfortable, no distress.
+HEENT:
+Moist mucous membranes.
+Lungs:
+Clear bilaterally.
+CARDIAC:
+Regular rate and rhythm.
+Abdomen:
+Soft, mild incisional tenderness, port sites clean.
+SKIN:
+Warm and dry.
+Neuro:
+Alert, nonfocal.
+
+Pertinent Results:
+Admission labs showed elevated white blood cell count with neutrophil predominance and normal creatinine. CT of the abdomen demonstrated a dilated, inflamed appendix with surrounding fat stranding and no abscess. Pathology sent to ___ was pending at discharge. Postoperative blood counts normalized and electrolytes remained within normal limits.
+
+Brief Hospital Course:
+He was admitted, given intravenous fluids and antibiotics, and taken to the operating room by ___ for an uncomplicated laparoscopic appendectomy. Postoperatively his pain was controlled with oral medication and he advanced his diet without nausea. He ambulated independently with ___ nursing staff, passed flatus and moved his bowels. Antibiotics were stopped after surgery. He was discharged in stable condition on postoperative day one.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+
+Discharge Disposition:
+Home with outpatient follow up arranged through ___
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You had your appendix removed laparoscopically. Keep incisions clean and dry, and you may shower. Avoid lifting heavy objects for several weeks. Take acetaminophen for pain. Call ___ or return to the emergency department at ___ for fever, worsening pain, vomiting, or redness or drainage at the incisions.
+
+Followup Instructions:
+___

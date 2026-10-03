@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with several hours of palpitations and lightheadedness. She reported mild fatigue over the prior week and no chest pain. She was transferred to our hospital from ___ for further monitoring and management.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Cholecystectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with stroke at ___
+
+Physical Exam:
+Gen: Comfortable, well appearing, in no acute distress.
+Lungs: Clear to auscultation bilaterally.
+ABD: Soft, nontender, nondistended.
+SKIN: Warm and dry without rash.
+
+Pertinent Results:
+Telemetry showed an irregular rhythm with rapid ventricular rate on arrival, later controlled. Troponin negative twice. TSH normal. Chest radiograph without acute process.
+DISCHARGE LABS:
+WBC 7.1, Hgb 12.8, Plt 245, Na 139, K 4.2, Cr 0.8, Mg 2.0.
+
+Brief Hospital Course:
+She was admitted to the telemetry unit and started on rate-control therapy with good response. Anticoagulation was discussed and begun after review of bleeding risk. Echocardiogram at ___ was unremarkable. Her symptoms resolved and she was discharged on hospital day three, with cardiology follow-up arranged at ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Vitamin D daily.
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily. Apixaban 5 mg twice daily. Lisinopril 10 mg daily. Vitamin D 1000 units daily.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Stable
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for a fast irregular heartbeat. Take your medications as prescribed and do not skip apixaban doses. Return for chest pain, fainting, or bleeding. Keep your appointment with ___.
+
+Followup Instructions:
+___

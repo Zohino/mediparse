@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy on ___
+
+History of Present Illness:
+Patient presented to ___ with two days of worsening right upper quadrant pain, nausea and one episode of vomiting. He reported fever at home. Symptoms began after a fatty meal. He was transferred from ___ emergency department for surgical evaluation. Ultrasound there showed gallstones with wall thickening, and he was started on antibiotics.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gastroesophageal reflux
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones. Father with ___ disease.
+
+Physical Exam:
+Vitals: T 99.1 HR 82 BP 128/76 RR 16 SpO2 97% RA
+General: Comfortable, no distress.
+HEENT: Anicteric, moist mucous membranes.
+Neck: Supple.
+ABD: Soft, mildly tender RUQ, incisions clean, dry, intact.
+Ext: Warm, no edema.
+Neuro: Alert, oriented, nonfocal.
+
+Pertinent Results:
+DISCHARGE LABS: WBC 8.4, Hgb 13.9, Plt 245, Na 139, K 4.2, Cr 0.9, ALT 42, AST 38, total bilirubin 0.8, lipase 31. Admission WBC was 14.2 on ___.
+IMAGING: Ultrasound at ___ showed gallstones, thickened gallbladder wall and pericholecystic fluid, with no biliary dilation. Chest radiograph: clear lungs.
+
+Brief Hospital Course:
+He was admitted to the surgical service and given intravenous fluids and antibiotics. On hospital day two he underwent laparoscopic cholecystectomy performed by Dr. ___ without complication. Pain was controlled with oral medications and diet advanced as tolerated. Liver tests normalized. Antibiotics were stopped after surgery. Blood pressure remained well controlled on home medications. He ambulated independently and voided spontaneously. He was discharged home in stable condition on ___ with outpatient surgical follow-up arranged.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Omeprazole 20 mg daily
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed for pain
+Oxycodone 5 mg every six hours as needed for severe pain, short supply
+Docusate 100 mg twice daily while taking oxycodone
+Continue lisinopril, atorvastatin and omeprazole unchanged
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Good
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for gallbladder inflammation and had your gallbladder removed. Keep incisions clean and dry; you may shower. Do not lift more than ten pounds for ___ weeks. Call ___ or return for fever, worsening pain, vomiting, yellow skin, or wound redness.
+
+Followup Instructions:
+___

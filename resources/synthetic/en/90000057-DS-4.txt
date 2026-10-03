@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with three days of productive cough, fever and mild shortness of breath, sent in by her clinic.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+Examined at discharge, comfortable and improved.
+DISCHARGE PHYSICAL EXAM:
+Vitals: afebrile, stable on room air
+General: alert, no distress
+HEENT: moist mucous membranes
+Lungs: mild right basal crackles
+Abdomen: soft, nontender
+
+Pertinent Results:
+ADMISSION LABS:
+Elevated white count, normal electrolytes.
+IMAGING:
+Chest film showed right lower lobe consolidation.
+
+Brief Hospital Course:
+Treated for community acquired pneumonia with oral antibiotics, fevers resolved, oxygen weaned, and she was seen by ___ before going home.
+
+Medications on Admission:
+Amlodipine, levothyroxine
+
+Discharge Medications:
+Continue amlodipine and levothyroxine. Start azithromycin for five days. Acetaminophen as needed for fever, filled at ___.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Secondary:
+Hypertension, hypothyroidism
+
+Discharge Condition:
+Good
+Mental Status: clear and coherent
+Level of Consciousness: alert and awake
+
+Discharge Instructions:
+You were treated for pneumonia. Finish all antibiotics, drink fluids, rest, and return to ___ if fever or breathlessness worsens.
+
+Followup Instructions:
+___

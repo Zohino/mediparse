@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy performed at ___
+
+History of Present Illness:
+The patient presented with two days of worsening right lower quadrant pain, nausea and low-grade fever. The pain began near the umbilicus and migrated. He was seen at ___ earlier in the week and sent home with analgesics. When symptoms persisted he returned, and CT suggested appendicitis. He was transferred to ___ under the care of Dr. ___ for surgical evaluation.
+
+Past Medical History:
+Hypertension
+Possible diabetes mellitus, never formally evaluated
+Appendiceal surgery history: none, prior hernia repair at ___
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+Gen: Uncomfortable but alert, in no acute distress
+Neck: Supple, no lymphadenopathy
+Abdomen: Tender in right lower quadrant, guarding present, mild distension
+EXTREMITIES: Warm, no edema
+
+Pertinent Results:
+Admission labs notable for mild leukocytosis with neutrophil predominance. Chemistry panel otherwise unremarkable. Glucose mildly elevated at ___ on arrival. Urinalysis negative. Repeat blood count on the day of discharge improved, drawn at ___.
+IMAGING:
+CT abdomen and pelvis showed a dilated, inflamed appendix with surrounding fat stranding and no abscess.
+
+Brief Hospital Course:
+He was admitted to the surgical service, kept NPO and started on intravenous antibiotics. He went to the operating room at ___ for an uncomplicated laparoscopic appendectomy. Postoperatively his pain was controlled with oral medication and he resumed a regular diet on the next day. Pathology from ___ was pending at discharge. He was seen by Dr. ___ before leaving, ambulating independently.
+TRANSITIONAL ISSUES:
+Follow up pending pathology. Check fasting glucose in clinic.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Acetaminophen as needed for pain
+
+Discharge Medications:
+1. Acetaminophen 650 mg by mouth every six hours as needed for pain
+2. Oxycodone 5 mg by mouth every six hours as needed for severe pain, short course
+3. Lisinopril 10 mg by mouth daily
+4. Docusate 100 mg by mouth twice daily while taking opioids
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Acute appendicitis
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with appendicitis and underwent laparoscopic surgery. You may shower and let soapy water run over the small incisions, but do not soak them. Avoid lifting more than ten pounds for four weeks. Call ___ or return to the emergency department for fever, worsening pain, vomiting, or redness and drainage at the incisions. Take medications as prescribed, and bring this summary to ___.
+
+Followup Instructions:
+___

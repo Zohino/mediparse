@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Leg swelling and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with long-standing comorbidities presented with two weeks of worsening leg swelling and exertional dyspnea. Evaluated at ___ on ___, found volume overloaded with elevated creatinine, and admitted for diuresis.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Chronic kidney disease, stage 3
+Hypertension
+Cholecystectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Gen:
+Tired, comfortable at rest
+HEENT:
+Moist mucosa
+Neck:
+JVP elevated
+ABD:
+Soft, nontender
+Ext:
+Bilateral pitting edema
+
+Pertinent Results:
+ADMISSION LABS:
+Creatinine 2.4, BUN 48, potassium 5.1, BNP markedly elevated
+DISCHARGE LABS:
+Creatinine 1.8, BUN 36, potassium 4.3
+IMPRESSION:
+Chest radiograph with pulmonary vascular congestion and small bilateral effusions
+
+Brief Hospital Course:
+Diuresed with IV furosemide, with weight falling and creatinine improving from admission. Telemetry showed atrial fibrillation with controlled rate, and anticoagulation was started. Renal dosing was adjusted per ___ nephrology advice. Discharged euvolemic on an oral diuretic.
+TRANSITIONAL ISSUES:
+Recheck creatinine and potassium in one week.
+
+Medications on Admission:
+Metformin, lisinopril, amlodipine
+
+Discharge Disposition:
+Home with services
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic kidney disease
+Atrial fibrillation
+
+Discharge Condition:
+Stable and improved
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory with a walker
+
+Discharge Instructions:
+Weigh yourself every morning and call if you gain more than three pounds. Limit salt and fluids. Take your medications as prescribed. Follow up with your clinic at ___ within one week.

@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man presented with three days of productive cough and fever, sent in by Dr. ___ after outpatient chest film showed right lower lobe opacity.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+No history of diabetes
+
+Past Surgical History:
+Appendectomy
+
+Social History:
+___
+
+Family History:
+Father with coronary disease
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: tired, comfortable
+Lungs: right basal crackles
+EXTREMITIES: no edema
+PULSES: palpable bilaterally
+
+Pertinent Results:
+ADMISSION LABS:
+WBC elevated, lactate normal, creatinine at baseline. Chest film showed right lower lobe consolidation.
+
+Brief Hospital Course:
+Treated for community acquired pneumonia with ceftriaxone and azithromycin, then switched to oral antibiotics. Fever resolved, oxygen weaned. Seen by the team at ___ before discharge to ___.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+Continue lisinopril and atorvastatin. Take amoxicillin-clavulanate twice daily for five more days. Acetaminophen as needed for fever.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community acquired pneumonia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for pneumonia. Finish all antibiotics, rest, drink fluids, and return for worsening breathing or fever. Call ___ with questions.
+
+Followup Instructions:
+___

@@ -1,0 +1,59 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Nephrology
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fatigue and reduced urine output
+
+Major Surgical or Invasive Procedure:
+None, bedside evaluation at ___
+
+History of Present Illness:
+The patient presented to ___ with three days of worsening fatigue, nausea and reduced urine output after a viral illness. He reported poor oral intake and mild leg swelling. He was referred by his nephrologist at ___ for evaluation of rising creatinine and was admitted for monitoring and supportive care.
+
+Past Medical History:
+Chronic kidney disease, hypertension, gout, anemia of chronic disease, previously followed at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Afebrile, comfortable, in no acute distress.
+Lungs: Clear bilaterally.
+CARDIAC: Regular rate and rhythm, no murmur.
+PULSES: Palpable and symmetric in all extremities, with trace ankle edema.
+
+Pertinent Results:
+ADMISSION LABS: Creatinine 3.4, BUN 58, potassium 5.3, bicarbonate 19, hemoglobin 10.2, sodium 138, drawn at ___.
+IMPRESSION: Renal ultrasound shows small echogenic kidneys without hydronephrosis. Chest radiograph shows clear lungs and a normal cardiac silhouette.
+
+Brief Hospital Course:
+He received gentle intravenous fluids, and his potassium was corrected with dietary restriction and a binder. Creatinine settled close to his baseline. He has no diabetes, and his hemoglobin A1c was normal. Nephrology at ___ reviewed him and arranged follow up on ___. He tolerated diet and walked independently before discharge.
+
+Discharge Medications:
+Amlodipine 5 mg daily, allopurinol 100 mg daily, sodium bicarbonate 650 mg twice daily, calcium acetate with meals. Hold ibuprofen and other anti-inflammatory pain medicines.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Chronic kidney disease
+
+Discharge Condition:
+Stable
+Level of Consciousness: Alert and oriented, interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted for kidney monitoring. Drink fluids as advised and avoid anti-inflammatory medicines. Weigh yourself each morning. Call ___ if urine output drops or swelling worsens, and keep your lab appointment at ___.
+
+Followup Instructions:
+___

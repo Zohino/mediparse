@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Vomiting and decreased urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with three days of poor oral intake, vomiting and reduced urine output after starting a new medication at ___. Creatinine was elevated on arrival; possible underlying CKD could not be excluded without prior baseline values. She received intravenous fluids in the emergency department and was admitted for monitoring.
+REVIEW OF SYSTEMS:
+Positive for nausea and fatigue. Otherwise negative.
+
+Past Medical History:
+Hypertension
+Osteoarthritis
+Hospitalization at ___ for pneumonia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General: Tired, comfortable at rest
+HEENT: Dry mucous membranes
+Lungs: Clear bilaterally
+CARDIAC: Regular rate and rhythm
+ABD: Soft, nontender
+Neuro: Alert, no focal deficits
+
+Pertinent Results:
+Labs drawn on ___ showed creatinine 2.4, up from an unavailable baseline, BUN 48, potassium 5.1, bicarbonate 19. Urinalysis bland. Renal ultrasound showed normal sized kidneys without hydronephrosis. Creatinine improved to 1.3 by discharge.
+
+Medications on Admission:
+Lisinopril 20 mg daily
+Ibuprofen as needed
+
+Discharge Medications:
+1. Acetaminophen 650 mg every six hours as needed for pain.
+2. Amlodipine 5 mg daily, replacing lisinopril for now.
+3. Please resume lisinopril only after review with ___.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Primary: Acute kidney injury
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized because your kidney function worsened after dehydration and anti-inflammatory medication. Drink fluids regularly and avoid ibuprofen and similar pain relievers. Your blood pressure medication was changed. Call ___ if you notice reduced urination, vomiting or swelling, and see Dr. ___ for repeat blood tests.
+
+Followup Instructions:
+___

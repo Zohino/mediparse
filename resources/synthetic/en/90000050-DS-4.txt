@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+He presented to ___ with three days of cough, fever and shortness of breath after contact with ill relatives. He was seen at ___ on ___ and sent to the emergency department. There he was febrile and mildly hypoxic, and chest imaging showed a right lower lobe pneumonia.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+General: Tired-appearing, no distress.
+HEENT: Moist mucous membranes.
+Neck: Supple.
+Lungs: Crackles at the right base.
+Abdomen: Soft, nontender.
+Neuro: Alert, oriented, nonfocal.
+
+Pertinent Results:
+IMPRESSION: Right lower lobe pneumonia without pleural effusion.
+FINDINGS: Chest radiograph on ___ shows a dense right basilar opacity. Heart size is normal. No pneumothorax is seen. Laboratory studies on ___ were notable for an elevated white blood cell count and elevated glucose, with normal electrolytes and normal liver enzymes.
+
+Brief Hospital Course:
+He was treated with ceftriaxone and azithromycin, changed to oral antibiotics once afebrile. Oxygen was weaned off by the third day. His diabetes was managed with sliding scale coverage and glucose remained acceptable. Blood cultures from ___ showed no growth. The plan was discussed with his primary physician at ___. He walked independently and was ready for discharge on ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly, aspirin 81 mg daily.
+
+Discharge Medications:
+Amoxicillin-clavulanate 875 mg twice daily for five more days. Azithromycin 250 mg daily for two more days. Continue lisinopril, atorvastatin and aspirin at previous doses. Acetaminophen as needed for fever.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Diabetes
+
+Discharge Condition:
+Stable and improved
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were treated for pneumonia. Take all antibiotics as prescribed and drink plenty of fluids. Rest and increase activity gradually. Return for fever, worsening breathlessness or chest pain. Please keep your appointment with ___.
+
+Followup Instructions:
+___

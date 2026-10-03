@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man sent from ___ with two days of racing heartbeat and mild lightheadedness. No chest pain or syncope.
+REVIEW OF SYSTEMS:
+Negative except as above.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with stroke
+
+Physical Exam:
+Irregular rhythm, comfortable, lungs clear.
+DISCHARGE PHYSICAL EXAM:
+General: Well appearing, no distress
+Abdomen: Soft, nontender
+Ext: Warm, no edema
+
+Pertinent Results:
+Admission ECG showed an irregularly irregular narrow rhythm. Troponin negative twice. Thyroid studies normal. Echo on ___ showed preserved ejection fraction.
+
+Brief Hospital Course:
+Monitored on telemetry and rate controlled with metoprolol. Cardiology ___ advised anticoagulation, started apixaban after bleeding risk review. Heart rate settled below 100 and he was discharged stable.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Apixaban 5 mg twice daily
+2. Metoprolol succinate 50 mg daily
+3. Lisinopril 10 mg daily
+4. Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were treated for an irregular heartbeat. Take the new blood thinner exactly as prescribed. Return for fainting, chest pain, or bleeding. Please see the ___ clinic.
+
+Followup Instructions:
+___

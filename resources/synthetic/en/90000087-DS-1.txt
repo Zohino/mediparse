@@ -1,0 +1,62 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with several weeks of fatigue and ankle swelling, sent by his clinic to ___ for evaluation of abnormal labs.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Denies diabetes
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+HEENT: Normal, moist mucosa
+Neck: Supple
+Lungs: Clear bilaterally
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Creatinine elevated and stable from prior. Potassium normal. Urinalysis showed protein. Renal ultrasound showed small echogenic kidneys without obstruction.
+
+Brief Hospital Course:
+He was admitted for workup of swelling. Diuretics reduced edema and blood pressure improved. Labs remained stable. Nephrology advised outpatient follow up at ___ and medication adjustment.
+
+Medications on Admission:
+Amlodipine 5 mg daily
+
+Discharge Medications:
+Amlodipine 10 mg daily. Furosemide 20 mg daily. Atorvastatin 20 mg nightly. Avoid NSAIDs.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Chronic kidney disease
+Hypertension
+
+Discharge Condition:
+Stable and improved.
+Activity Status: Independent, ambulatory
+
+Discharge Instructions:
+Weigh yourself daily and limit salt intake. Take medications as prescribed and avoid ibuprofen. Return for worsening swelling, shortness of breath, or reduced urine. Keep appointments at ___.
+
+Followup Instructions:
+___

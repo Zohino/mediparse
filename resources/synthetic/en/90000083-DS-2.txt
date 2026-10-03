@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and lightheadedness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with several days of racing heartbeat and lightheadedness, seen at ___ by his primary doctor and sent to the emergency department. He denied chest pain or fainting. Symptoms began after a trip to ___.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Seen by cardiology at ___
+
+Social History:
+___
+
+Family History:
+Father with stroke
+
+Physical Exam:
+Irregular pulse, lungs clear, no murmur heard.
+EXTREMITIES:
+No edema, warm and well perfused.
+
+Pertinent Results:
+Telemetry showed an irregular narrow-complex rhythm with rates up to 140. Troponin negative twice. Electrolytes normal. Thyroid studies unremarkable. Echocardiogram performed at ___ showed normal heart size and preserved pumping function.
+
+Brief Hospital Course:
+Rate was controlled with oral metoprolol and symptoms resolved. Anticoagulation was started after risk review and teaching. He was seen by cardiology, who arranged outpatient monitoring through ___. He walked the unit without symptoms and was cleared by ___.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg daily
+2. Apixaban 5 mg twice daily
+3. Lisinopril daily
+4. Atorvastatin nightly
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Atrial fibrillation
+Secondary:
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Stable.
+Mental Status:
+Alert and oriented, clear thinking.
+Level of Consciousness:
+Fully awake and interactive.
+Activity Status:
+Walks without help.
+
+Discharge Instructions:
+You were admitted with a fast, irregular heartbeat. Take your new medicines daily and do not skip blood thinner doses. Return for fainting, chest pain, bleeding, or weakness. Call ___ with any questions.
+
+Followup Instructions:
+___

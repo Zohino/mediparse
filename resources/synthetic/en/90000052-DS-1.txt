@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right flank pain and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with three days of right flank pain, fever and burning on urination, sent from ___ clinic. In the emergency department she was febrile and tachycardic, urinalysis was abnormal, and she received IV fluids and antibiotics before admission for pyelonephritis, symptomatic since ___.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension
+Hyperlipidemia
+Recurrent urinary tract infections
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+General: comfortable, afebrile
+HEENT: moist mucous membranes
+Lungs: clear bilaterally
+CARDIAC: regular rhythm
+ABD: soft, mild right flank tenderness
+Ext: no edema
+SKIN: warm, dry
+
+Pertinent Results:
+Urine culture grew E. coli sensitive to ceftriaxone. WBC 14.2 on admission, down to 8.1 at discharge. Creatinine stable. Blood cultures negative on ___.
+IMPRESSION:
+Renal ultrasound without hydronephrosis or stones.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Cefpodoxime 200 mg twice daily for 7 more days
+2. Metformin 500 mg twice daily
+3. Lisinopril 10 mg daily
+4. Acetaminophen as needed for pain
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute pyelonephritis
+Escherichia coli bacteremia
+
+Discharge Condition:
+Stable and improved.
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were treated for a kidney infection. Finish all of your antibiotics and drink plenty of fluids. Return for fever, vomiting or worsening back pain. Call Dr. ___ at ___ with questions, and keep your visit on ___.
+
+Followup Instructions:
+___

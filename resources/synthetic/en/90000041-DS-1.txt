@@ -1,0 +1,82 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and lightheadedness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman presented to ___ with two days of lightheadedness and intermittent palpitations, worse on exertion. She was seen by her primary physician at ___ and sent to the emergency department. Vitals were stable on arrival. She denied chest pain, syncope or dyspnea at rest. No recent illness.
+REVIEW OF SYSTEMS:
+Negative except as above.
+
+Past Medical History:
+Atrial fibrillation, diagnosed at ___
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General:
+Comfortable, no distress.
+HEENT:
+Moist mucous membranes.
+Neck:
+Supple.
+Lungs:
+Clear to auscultation bilaterally.
+ABD:
+Soft, nontender.
+Ext:
+Warm, no edema.
+SKIN:
+Warm and dry.
+Neuro:
+Alert, nonfocal.
+
+Pertinent Results:
+Labs on admission notable for normal electrolytes and thyroid function. Troponin negative x2. ECG showed an irregular rhythm without acute ischemic change. Telemetry at ___ reviewed. Hemoglobin was stable.
+IMAGING:
+Chest radiograph obtained at ___ without acute process.
+IMPRESSION:
+No pneumonia or effusion. Echocardiogram showed preserved ejection fraction and normal valves.
+
+Brief Hospital Course:
+Patient was admitted to telemetry and rate control was started with good effect. Anticoagulation was discussed with her and begun after review with ___. She remained hemodynamically stable and her symptoms resolved. Cardiology saw her and arranged outpatient rhythm monitoring through ___. She was discharged home in stable condition.
+TRANSITIONAL ISSUES:
+Confirm rate control and anticoagulation tolerance at follow-up.
+
+Medications on Admission:
+Metoprolol tartrate twice daily. Lisinopril daily. Atorvastatin nightly. Aspirin daily.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Good
+Mental Status:
+Clear and coherent.
+Activity Status:
+Ambulatory and independent.
+
+Discharge Instructions:
+You were hospitalized for a fast irregular heartbeat. Take your new medicines as prescribed and do not skip doses. Return for chest pain, fainting, or bleeding. Keep your appointment with ___. Rest as needed.
+
+Followup Instructions:
+___

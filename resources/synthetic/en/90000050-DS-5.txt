@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Foot wound and fever
+
+Major Surgical or Invasive Procedure:
+Bedside wound debridement
+
+History of Present Illness:
+___ year old man sent from ___ clinic with a spreading foot ulcer, chills and poor appetite for three days. Sugars at home ran high. Treated with antibiotics and wound care on the ward.
+
+Past Medical History:
+Diabetes mellitus, diagnosed in ___
+Hypertension
+High cholesterol
+
+Social History:
+___
+
+Family History:
+Father with high blood pressure; mother healthy, sibling treated at ___
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General:
+Tired, comfortable at rest
+Lungs:
+Clear bilaterally
+Abdomen:
+Soft, nontender
+SKIN:
+Right plantar ulcer with surrounding redness
+Neuro:
+Alert, oriented, no deficits
+
+Pertinent Results:
+On ___ white count mildly elevated, glucose 280, creatinine normal. Foot x-ray showed soft tissue swelling without bone involvement. Wound culture grew skin flora sensitive to cephalexin.
+
+Medications on Admission:
+Metformin, lisinopril, atorvastatin
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth four times daily for seven days
+2. Metformin 1000 mg by mouth twice daily
+3. Lisinopril 10 mg daily
+4. Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home with services
+Facility: ___
+
+Discharge Diagnosis:
+Diabetic foot ulcer with cellulitis
+
+Discharge Condition:
+Stable, alert, walking with offloading shoe
+
+Discharge Instructions:
+You were treated for an infected foot ulcer. Keep the dressing clean and dry, avoid walking barefoot, check your sugars daily, finish all antibiotics, and call ___ for fever or worsening redness.
+
+Followup Instructions:
+___

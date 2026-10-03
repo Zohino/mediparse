@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+Woman with three days of right lower abdominal pain, nausea and low fever, sent by ___ clinic after imaging at ___ suggested appendicitis.
+
+Past Medical History:
+Migraine
+Seasonal allergic rhinitis
+
+Social History:
+___
+
+Family History:
+Family history notable for diabetes mellitus in her mother.
+
+Physical Exam:
+HEENT: Normal
+Neck: Supple
+Lungs: Clear
+Ext: No edema
+SKIN: Warm, dry
+Neuro: Nonfocal
+
+Pertinent Results:
+White count mildly elevated on admission. CT showed dilated inflamed appendix without perforation. Pathology showed acute appendicitis. Postoperative labs were unremarkable.
+
+Brief Hospital Course:
+Taken to the operating room by Dr. ___ for uncomplicated laparoscopic appendectomy. Diet advanced, pain controlled with oral medication, and she was seen by ___ before going home ambulating.
+
+Medications on Admission:
+Sumatriptan as needed
+
+Discharge Medications:
+Acetaminophen as needed for pain. Ibuprofen with food. Docusate while taking pain medication. Resume sumatriptan.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute appendicitis
+Secondary:
+Migraine
+
+Discharge Condition:
+Stable
+Mental Status: Alert and oriented
+Level of Consciousness: Awake
+Activity Status: Walks independently
+
+Discharge Instructions:
+You had your appendix removed. Keep incisions clean and dry, avoid heavy lifting, and return for fever, worsening pain or vomiting. Call ___ with questions.
+
+Followup Instructions:
+___

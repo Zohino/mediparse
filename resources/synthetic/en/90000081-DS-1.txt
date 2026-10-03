@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Nausea and decreased urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man presenting with three days of nausea, poor oral intake and decreased urine output. Seen at ___ by his primary physician, who found him dehydrated and sent him to ___ for evaluation. No fever, chest pain or dyspnea.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Prior surgery at ___
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Vitals:
+Stable, afebrile
+General:
+Tired, dry mucous membranes
+ABD:
+Soft, nontender
+EXTREMITIES:
+No edema
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+ADMISSION LABS:
+Creatinine elevated, glucose high, potassium normal
+DISCHARGE LABS:
+Creatinine near baseline, glucose acceptable
+IMPRESSION:
+No acute abnormality on renal ultrasound, read by ___
+
+Brief Hospital Course:
+Patient was admitted with acute kidney injury attributed to volume depletion and ongoing metformin use. Metformin was held and he received intravenous fluids, with creatinine improving steadily. His diabetes was managed with an insulin sliding scale. Diet was resumed and he was discharged stable after review with ___ and ___.
+
+Medications on Admission:
+Metformin
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+Lisinopril resumed once creatinine is stable. Atorvastatin nightly. Metformin remains on hold until outpatient laboratory review. Start glipizide each morning with breakfast.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute kidney injury
+Diabetes mellitus
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized because of dehydration affecting your kidneys. Drink plenty of fluids, avoid anti-inflammatory pain medicines, and take only the medications listed. Return for vomiting, little urine, or confusion. Call ___ with questions.
+
+Followup Instructions:
+___

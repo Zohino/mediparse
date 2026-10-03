@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Foot wound and high glucose readings
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with diabetes sent from ___ clinic for a draining toe ulcer and glucose readings above 400 at home.
+
+Past Medical History:
+Hyperlipidemia
+Hypertension
+Neuropathy
+
+Past Surgical History:
+Cataract surgery
+
+Social History:
+___
+
+Family History:
+Mother with high blood sugar
+
+Physical Exam:
+Vitals:
+Afebrile, stable
+HEENT:
+Dry mucosa
+Neck:
+Supple
+CARDIAC:
+Regular rhythm
+Abdomen:
+Soft, nontender
+
+Pertinent Results:
+Creatinine 3.1, near his baseline. Glucose 412 on arrival. Potassium 5.2 at ___.
+IMPRESSION:
+No osteomyelitis on foot film.
+
+Brief Hospital Course:
+Glucose was controlled with insulin and fluids. The toe ulcer was cleaned and treated with oral antibiotics. Kidney labs stayed stable, and podiatry follow-up was arranged at ___.
+
+Medications on Admission:
+Metformin held
+Lisinopril
+Aspirin
+
+Discharge Medications:
+Insulin glargine nightly, insulin lispro with meals, cephalexin for one week, aspirin daily. Stop metformin and lisinopril until labs are rechecked.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes with hyperglycemia
+
+Discharge Condition:
+Stable
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake and attentive
+
+Discharge Instructions:
+Check glucose four times daily. Keep the foot dry and clean. Return for fever, spreading redness, or vomiting. Call ___ with questions.
+
+Followup Instructions:
+___

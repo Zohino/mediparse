@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman presenting to ___ with several hours of palpitations and lightheadedness. She was found in a rapid irregular rhythm on arrival and transferred from ___ for further evaluation and rate control. She reported mild dyspnea but no chest pain, syncope, or fever.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+No diabetes
+Cholecystectomy
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Irregularly irregular, rate 120s, comfortable.
+DISCHARGE PHYSICAL EXAM:
+Regular rate, well appearing.
+HEENT:
+Moist mucous membranes.
+Neck:
+Supple, no JVD.
+Abdomen:
+Soft, nontender.
+EXTREMITIES:
+Warm, no edema.
+
+Pertinent Results:
+ADMISSION LABS:
+Troponin negative twice, TSH normal, potassium and magnesium within range, creatinine at baseline per ___.
+IMAGING:
+Chest radiograph clear.
+IMPRESSION:
+No acute cardiopulmonary process; echocardiogram at ___ showed preserved ejection fraction.
+
+Brief Hospital Course:
+She was admitted with new atrial fibrillation with rapid ventricular response. Rate was controlled with oral metoprolol after initial diltiazem at ___. Anticoagulation was started after bleeding risk review. Telemetry showed no pauses. She remained stable and was discharged with cardiology follow-up arranged by ___.
+
+Medications on Admission:
+Lisinopril daily
+Levothyroxine daily
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg daily
+2. Apixaban 5 mg twice daily
+3. Lisinopril 10 mg daily
+4. Levothyroxine 75 mcg daily
+
+Discharge Disposition:
+Home with ___
+
+Discharge Diagnosis:
+Atrial fibrillation with rapid ventricular response
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for an irregular heart rhythm. Take metoprolol and apixaban exactly as prescribed. Return for chest pain, fainting, bleeding, or racing heartbeat. Keep your appointment at ___.
+
+Followup Instructions:
+___

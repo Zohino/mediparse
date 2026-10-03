@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Woman with two days of right upper quadrant pain, nausea and vomiting after meals. Evaluated at ___ emergency department, then transferred to ___ for surgical care.
+REVIEW OF SYSTEMS:
+Positive for fever. Otherwise negative.
+
+Past Medical History:
+Hypertension
+Gallstones
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Family history notable for diabetes in her mother. No gallbladder disease.
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Anicteric
+EXTREMITIES:
+Warm, no edema
+SKIN:
+Incisions clean, dry
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+White count mildly elevated on admission, normalized after surgery. Liver enzymes normal.
+IMPRESSION:
+Gallstones with gallbladder wall thickening, consistent with acute cholecystitis.
+
+Brief Hospital Course:
+Admitted with acute cholecystitis, started on antibiotics and fluids. Taken to the operating room by Dr. ___ for uncomplicated laparoscopic cholecystectomy. Diet advanced, pain controlled orally, and she was discharged to ___ in stable condition.
+
+Medications on Admission:
+Levothyroxine, lisinopril daily
+
+Discharge Medications:
+1. Acetaminophen as needed for pain
+2. Levothyroxine daily
+3. Lisinopril daily
+4. Docusate while taking opioids, as directed by ___
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary:
+Acute cholecystitis with cholelithiasis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity: Walking independently.
+
+Discharge Instructions:
+You were treated for gallbladder inflammation and had surgery. Keep incisions clean and dry, avoid heavy lifting, and call ___ for fever, worsening pain, vomiting or yellow skin.
+
+Followup Instructions:
+___

@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Cardiology
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man presented to ___ with two days of palpitations and lightheadedness. Heart rate was rapid and irregular on arrival. He was transferred from ___ for rate control.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father had a stroke
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Moist mucous membranes
+ABD:
+Soft, nontender
+EXTREMITIES:
+No edema
+
+Pertinent Results:
+DISCHARGE LABS:
+Potassium 4.2, creatinine 0.9, normal troponin.
+IMPRESSION:
+No acute process seen at ___.
+FINDINGS:
+Normal chest radiograph, preserved ventricular function.
+
+Brief Hospital Course:
+Rate was controlled with metoprolol and symptoms resolved. Anticoagulation was started after discussion with ___. He remained stable on telemetry and was cleared for discharge.
+
+Medications on Admission:
+Lisinopril and atorvastatin daily
+
+Discharge Medications:
+Metoprolol succinate once daily, apixaban twice daily, lisinopril daily, and atorvastatin nightly. Continue all home doses.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Stable
+Mental Status:
+Alert and oriented
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a fast irregular heartbeat. Take your new blood thinner as directed. Return for chest pain, fainting, or bleeding. Call ___ with questions.
+
+Followup Instructions:
+___

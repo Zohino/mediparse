@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right foot pain and drainage
+
+Major Surgical or Invasive Procedure:
+Bedside wound debridement
+
+History of Present Illness:
+___ year old man on long-term insulin presented with three days of right foot pain, swelling and purulent drainage from a toe ulcer, with fever at home. Seen at ___ clinic and sent to the emergency department.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Peripheral neuropathy
+Obesity
+
+Social History:
+___
+
+Family History:
+Mother with stroke. Father with coronary disease.
+
+Physical Exam:
+HEENT: Moist mucous membranes.
+Neck: Supple.
+CARDIAC: Regular rate, no murmur.
+ABD: Soft, nontender.
+Neuro: Reduced sensation in both feet; right second toe ulcer with surrounding erythema.
+
+Pertinent Results:
+Glucose 312, HbA1c 10.2 percent, WBC 15.1. Wound culture from ___ grew Staphylococcus aureus. Foot x-ray showed soft tissue swelling without gas.
+IMPRESSION: Possible early osteomyelitis of the second toe, MRI recommended.
+
+Brief Hospital Course:
+On ___ he was treated with intravenous antibiotics and wound care. Insulin was titrated to improve glucose control. Podiatry at ___ debrided the ulcer. Fever resolved, white count normalized, and he was transitioned to oral antibiotics.
+
+Medications on Admission:
+Insulin glargine, metformin, lisinopril, atorvastatin.
+
+Discharge Medications:
+Cephalexin 500 mg four times daily for two weeks. Insulin glargine 30 units nightly. Metformin 1000 mg twice daily. Lisinopril 10 mg daily. Atorvastatin 40 mg nightly.
+
+Discharge Disposition:
+Home with services
+
+Discharge Diagnosis:
+Right second toe ulcer with cellulitis
+Staphylococcus aureus wound infection
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+Keep the dressing clean and dry and change it daily. Check your feet every day and your blood sugar before meals. Keep your appointment with ___ and podiatry. Call ___ for questions. Return for fever, spreading redness or worsening pain.

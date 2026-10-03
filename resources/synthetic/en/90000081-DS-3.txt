@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cellulitis of left leg
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with three days of left leg redness and pain, referred by ___ clinic.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: Comfortable, no distress
+HEENT: Normal
+PULM: Clear bilaterally
+ABD: Soft, nontender
+Ext: Left shin warm, red, swollen
+SKIN: Erythema as above
+
+Pertinent Results:
+DISCHARGE LABS:
+WBC 8.1, Hgb 13.4, Plt 240, Cr 0.9
+IMPRESSION:
+No abscess or deep vein thrombosis on ultrasound.
+
+Brief Hospital Course:
+Treated with IV antibiotics, redness receded steadily, then transitioned to oral therapy at ___.
+TRANSITIONAL ISSUES:
+Complete antibiotic course; recheck leg.
+
+Medications on Admission:
+Metformin, lisinopril, atorvastatin
+
+Discharge Medications:
+Cephalexin four times daily for seven days; continue metformin, lisinopril, atorvastatin.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Left lower extremity cellulitis
+
+Discharge Condition:
+Stable and improved.
+Mental Status: Alert and oriented
+Level of Consciousness: Alert
+
+Discharge Instructions:
+You were treated for a leg skin infection. Take antibiotics as prescribed, elevate the leg, and call ___ if fever returns.
+
+Followup Instructions:
+___

@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient is a woman with long-standing diabetes and heart failure who was sent in by her ___ clinic after several days of worsening breathlessness and leg swelling. Symptoms began after she ran out of her medications at ___.
+
+Past Medical History:
+Diabetes mellitus
+Heart failure
+Hypertension
+
+Family History:
+Non-contributory
+
+Physical Exam:
+General: Alert, comfortable, no distress.
+Neck: Mild jugular venous distension.
+Lungs: Bibasilar crackles.
+ABD: Soft, nontender.
+PULSES: Palpable and symmetric.
+
+Pertinent Results:
+IMPRESSION: Mild pulmonary vascular congestion with small bilateral effusions, no focal consolidation. Compared with the study from ___.
+FINDINGS: Heart size is mildly enlarged. Lung volumes are low. Small pleural effusions are present on both sides, and no pneumothorax is seen.
+
+Brief Hospital Course:
+She was diuresed with intravenous furosemide and improved steadily. Telemetry showed atrial fibrillation with controlled rates, and anticoagulation was started after discussion with ___. Glucose was managed with insulin. She was seen by ___ and cleared for discharge home on hospital day ___.
+
+Medications on Admission:
+Furosemide, metformin, lisinopril and carvedilol daily.
+
+Discharge Medications:
+Furosemide 40 mg daily, metformin 500 mg twice daily, lisinopril 10 mg daily, carvedilol 6.25 mg twice daily, apixaban 5 mg twice daily.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary:
+Diabetes mellitus
+Chronic kidney disease
+Heart failure
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for fluid overload. Weigh yourself every morning and call ___ if your weight rises by more than two pounds in a day. Take your medications as prescribed and limit salt in your diet.
+
+Followup Instructions:
+___

@@ -1,0 +1,60 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman presented to ___ with three days of nausea, vomiting and poor oral intake, followed by decreased urine output and lightheadedness. She was seen by her primary physician on ___ who sent her to the emergency department. No fever, chest pain or abdominal trauma reported.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Osteoarthritis
+Cholecystectomy at ___
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+General: Alert, mildly dry mucous membranes, no distress.
+Neck: Supple, no JVD.
+Abdomen: Soft, nontender, nondistended, normal bowel sounds.
+Ext: Warm, no edema.
+
+Pertinent Results:
+Admission creatinine was elevated above baseline and improved to near baseline by discharge. Potassium and bicarbonate normal at discharge. Urinalysis bland. Glucose elevated on admission labs. Repeat labs drawn at ___ stable.
+IMAGING:
+Renal ultrasound without hydronephrosis. Chest radiograph clear, read at ___.
+
+Brief Hospital Course:
+Her AKI was attributed to volume depletion from vomiting together with home lisinopril and ibuprofen. Both were held and she received intravenous fluids with steady improvement in creatinine. Antiemetics resolved the nausea and she tolerated a regular diet. Urine output normalized. Lisinopril to be restarted by ___ after repeat labs. Seen by the ___ team, who agreed with the plan.
+
+Discharge Medications:
+Amlodipine 5 mg daily. Atorvastatin 20 mg nightly. Metformin 500 mg twice daily with meals. Acetaminophen as needed for pain. Hold lisinopril and ibuprofen until follow up.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes mellitus type 2
+Dehydration
+
+Discharge Condition:
+Stable.
+Level of Consciousness: Alert and oriented.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized because dehydration affected your kidneys. Drink plenty of fluids, avoid ibuprofen, and do not take lisinopril until told to restart. Return for fainting, persistent vomiting, or very little urine. Call ___ with questions.
+
+Followup Instructions:
+___

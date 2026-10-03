@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Foot wound and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man presenting with several days of worsening fatigue, thirst and a draining foot wound. He was seen at ___ earlier this week and sent to ___ for evaluation.
+
+Past Medical History:
+Hyperlipidemia
+Prior appendectomy
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+HEENT:
+Dry mucous membranes
+Neck:
+Supple
+Ext:
+Left foot ulcer, mild erythema, pulses present
+
+Pertinent Results:
+Glucose markedly elevated on arrival, improved by discharge. Cultures from ___ showed no growth.
+IMPRESSION:
+No bony destruction on foot film.
+
+Brief Hospital Course:
+He received intravenous fluids, insulin and antibiotics, with wound care from ___. Glucose stabilized and the wound improved.
+TRANSITIONAL ISSUES:
+Recheck wound and glucose log at follow-up.
+
+Medications on Admission:
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Atorvastatin 20 mg nightly
+Metformin 500 mg twice daily
+Cephalexin 500 mg four times daily for one week
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes mellitus
+Foot ulcer
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for a foot wound and high blood sugar. Keep the dressing clean, take your medicines as directed, and call ___ if redness spreads or fever returns.
+
+Followup Instructions:
+___

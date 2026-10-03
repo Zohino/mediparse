@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Productive cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman sent in by her primary physician at ___ after four days of productive cough, fever and worsening shortness of breath. She reported chills and poor appetite at home. Seen first at ___, where chest imaging showed a right lower lobe opacity, and she was transferred here.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Osteoarthritis, followed at ___
+
+Social History:
+___
+
+Family History:
+Mother with stroke. Father with coronary disease, treated at ___.
+
+Physical Exam:
+General:
+Tired, comfortable at rest.
+PULM:
+Right basilar crackles.
+ABD:
+Soft, nontender.
+EXTREMITIES:
+No edema.
+SKIN:
+Warm, dry.
+
+Pertinent Results:
+ADMISSION LABS:
+White count elevated at 14. Creatinine 2.1, near her baseline. Glucose 212. Lactate normal. Chest radiograph at ___ showed right lower lobe consolidation without effusion.
+
+Brief Hospital Course:
+Treated for community-acquired pneumonia with azithromycin and ceftriaxone, tolerated despite the listed allergy, then switched to oral antibiotics. Her chronic kidney disease was stable, with creatinine unchanged, so doses were adjusted. Her diabetes was managed with insulin sliding scale. Oxygen was weaned and she walked unassisted by ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Metformin 500 mg twice daily
+
+Discharge Medications:
+1. Azithromycin 250 mg daily for three more days
+2. Atorvastatin 20 mg nightly
+3. Metformin 500 mg twice daily
+4. Lisinopril held until follow-up labs are reviewed
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community-acquired pneumonia
+Diabetes
+
+Discharge Condition:
+Level of Consciousness: Alert and oriented.
+Activity Status: Independent, ambulating without aid.
+
+Discharge Instructions:
+You were treated for a lung infection. Finish all antibiotics and drink plenty of fluids. Call ___ or return to the emergency department for fever, worsening breathlessness or chest pain. Do not restart lisinopril until your doctor at ___ tells you to.
+
+Followup Instructions:
+___

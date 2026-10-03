@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath, leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension who presented to ___ after three days of worsening exertional dyspnea and leg swelling. Symptoms began after he stopped his medications while traveling to ___. He denied chest pain, fever, or syncope. In the emergency department he was mildly hypoxic on room air and received intravenous diuretic with symptomatic improvement. He was admitted for further evaluation and monitoring.
+REVIEW OF SYSTEMS:
+Positive as per HPI. Otherwise negative.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Suspected heart failure, awaiting outpatient echocardiogram at ___
+
+Social History:
+___
+
+Family History:
+Family history notable for diabetes in his father.
+
+Physical Exam:
+Vitals:
+Afebrile, stable blood pressure, room air saturation normal
+General:
+Comfortable, no distress
+EXTREMITIES:
+Trace bilateral ankle edema
+Neuro:
+Alert, oriented, nonfocal
+
+Pertinent Results:
+Admission labs notable for mildly elevated BNP and normal troponin on two draws. Creatinine was at baseline. Chest radiograph showed mild pulmonary vascular congestion without focal consolidation. ECG showed sinus rhythm without acute ischemic changes. Echocardiogram performed on ___ demonstrated preserved ejection fraction with mild left ventricular hypertrophy. Potassium and magnesium were normal before discharge. Urinalysis was unremarkable.
+
+Brief Hospital Course:
+He was diuresed with intravenous furosemide, with net negative balance and resolution of hypoxia, then transitioned to an oral dose. His blood pressure regimen was resumed and adjusted by the team led by ___. Cardiology at ___ evaluated him and recommended outpatient imaging given the suspected cardiac dysfunction. Telemetry showed no arrhythmia. He ambulated independently with stable oxygen saturation on room air. Weight at discharge was ___ lower than on admission. He was discharged home in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily, filled at ___ pharmacy. Atorvastatin 20 mg nightly.
+
+Discharge Medications:
+1. Furosemide 20 mg by mouth once daily.
+2. Lisinopril 20 mg by mouth once daily.
+3. Atorvastatin 20 mg by mouth nightly.
+4. Potassium chloride 10 mEq by mouth once daily while taking furosemide.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute pulmonary edema
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for shortness of breath and leg swelling. Take your medications daily and weigh yourself each morning. Call your doctor if your weight rises by three pounds in a day or if breathing worsens. Limit salt intake. Follow up with ___ within one week and call ___ with questions. Return to ___ for chest pain.
+
+Followup Instructions:
+___

@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman presented with three days of productive cough and fever after exposure to a sick relative at ___. Elevated glucose raised concern for possible new diabetes.
+
+Past Medical History:
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General:
+Alert, comfortable, no distress.
+PULM:
+Right basilar crackles.
+Ext:
+Warm, no edema.
+
+Pertinent Results:
+Mild leukocytosis on admission labs drawn at ___. Glucose mildly elevated. Blood cultures without growth.
+IMAGING:
+Chest radiograph showed right lower lobe consolidation without effusion.
+
+Brief Hospital Course:
+Treated for community-acquired pneumonia with intravenous ceftriaxone and azithromycin, then switched to oral antibiotics once afebrile. Oxygen weaned to room air by day three. Evaluated by ___ team and cleared for discharge.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Multivitamin.
+
+Discharge Medications:
+Amoxicillin-clavulanate twice daily for five more days. Lisinopril 10 mg daily. Multivitamin daily. Acetaminophen as needed for fever.
+
+Discharge Disposition:
+Home with services arranged through ___
+
+Discharge Diagnosis:
+Primary:
+Community-acquired pneumonia
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+Finish the full antibiotic course and drink plenty of fluids. Return for worsening shortness of breath or persistent fever. Please call ___ to arrange a primary care visit.
+
+Followup Instructions:
+___

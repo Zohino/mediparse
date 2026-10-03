@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old man with hypertension who presented with five days of productive cough, fever, and shortness of breath. He was first seen at ___ urgent care, where he was given an antibiotic without relief. His symptoms worsened, and on ___ he came to the emergency department. There he was febrile and hypoxic on room air, and a chest film showed a right lower lobe infiltrate.
+
+Past Medical History:
+Hypertension diagnosed in ___
+Hyperlipidemia
+Prior appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease, treated at ___. No family history of lung disease.
+
+Physical Exam:
+Vitals:
+T 100.9, HR 96, BP 138/80, RR 20, SpO2 93% on room air
+Gen:
+Tired appearing, speaking in full sentences
+HEENT:
+Moist mucous membranes, clear oropharynx
+Lungs:
+Crackles at the right base, no wheezing
+
+Pertinent Results:
+Admission labs notable for white count 14.2 with neutrophil predominance. Lactate 1.4. Creatinine at baseline. Blood cultures from ___ showed no growth. Sputum culture grew normal oral flora. Chest radiograph showed right lower lobe consolidation without effusion. Repeat film on ___ showed stable findings. Respiratory viral panel was negative. Urine legionella antigen was negative. Electrocardiogram showed normal sinus rhythm without acute changes.
+
+Brief Hospital Course:
+He was admitted with community acquired pneumonia and started on intravenous ceftriaxone and azithromycin. Oxygen was given by nasal cannula and weaned off by hospital day two. Fever resolved within forty-eight hours, and his cough gradually improved. He was transitioned to oral antibiotics and ambulated without desaturation. His home blood pressure medication was continued. Dr. ___ from the primary care team was updated and agreed with the plan for discharge home.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Aspirin 81 mg daily
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg-125 mg tablet twice daily for five more days
+2. Lisinopril 10 mg daily
+3. Atorvastatin 20 mg nightly
+4. Aspirin 81 mg daily
+5. Guaifenesin 600 mg twice daily as needed for cough
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypoxia
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with a lung infection and treated with antibiotics and oxygen. Finish the full course of your antibiotic at home. Drink plenty of fluids and rest. Return to ___ or call your doctor for fever, worsening cough, chest pain, or trouble breathing. Avoid smoking and ask ___ about the pneumonia vaccine at your next visit. A follow-up chest film is advised in six weeks.
+
+Followup Instructions:
+___

@@ -1,0 +1,62 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+___ year old man presented with three days of worsening right lower abdominal pain, nausea and fever. He was evaluated at ___ emergency department, where imaging suggested appendicitis, and he was transferred to ___ for surgical evaluation and admitted to the surgical service.
+
+Past Medical History:
+Hyperlipidemia
+Remote knee surgery at ___
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+Vitals: Afebrile, hemodynamically stable.
+General: Comfortable, no distress.
+Abdomen: Soft, mild incisional tenderness.
+EXTREMITIES: No edema.
+SKIN: Incisions clean, dry, intact.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+WBC 14.2 on admission, down to 8.1 at discharge. Creatinine, electrolytes and liver enzymes within normal limits. CT abdomen at ___ showed dilated inflamed appendix with surrounding fat stranding and no abscess. Pathology of the specimen showed acute appendicitis without malignancy. Blood cultures remained negative. Urinalysis was unremarkable.
+
+Medications on Admission:
+Atorvastatin 20 mg daily. Multivitamin daily. Ibuprofen as needed.
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed for pain. Oxycodone 5 mg every six hours as needed for severe pain. Atorvastatin 20 mg daily. Docusate 100 mg twice daily.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis
+Diabetes mellitus
+
+Discharge Condition:
+Good
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for appendicitis with surgery. Keep incisions clean and dry, avoid heavy lifting, and take pain medication as directed. Call ___ for fever, worsening pain or vomiting. Follow up with Dr. ___.
+
+Followup Instructions:
+___

@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Vomiting and decreased urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension and an irregular heart rhythm on anticoagulation presented with three days of poor oral intake, vomiting and reduced urine output. Creatinine was elevated above baseline, consistent with acute kidney injury. He was seen at ___ by his physician and sent to the ___ emergency department.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia diagnosed at ___
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with stroke, father with hypertension
+
+Physical Exam:
+HEENT: Dry mucous membranes, anicteric.
+Neck: Supple, no JVD.
+Abdomen: Soft, nontender, nondistended.
+SKIN: Warm, reduced turgor, no rash.
+
+Pertinent Results:
+DISCHARGE LABS: Drawn ___ with creatinine 1.4 down from peak 2.6, potassium 4.2, sodium 138, hemoglobin 13.1, INR 1.1.
+IMPRESSION: Chest radiograph at ___ without acute process. Renal ultrasound without hydronephrosis or obstruction.
+
+Brief Hospital Course:
+Treated with intravenous fluids and his home lisinopril and diuretic were held. Creatinine improved steadily and urine output normalized. Heart rate stayed controlled on metoprolol and anticoagulation was continued. Care was coordinated with the ___ team and he tolerated diet by ___.
+TRANSITIONAL ISSUES:
+Recheck creatinine and potassium in one week. Resume lisinopril only if values remain stable.
+
+Medications on Admission:
+Metoprolol, apixaban, lisinopril, hydrochlorothiazide, atorvastatin
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg daily.
+2. Apixaban 5 mg twice daily.
+3. Atorvastatin 20 mg nightly.
+Hold lisinopril and hydrochlorothiazide until labs are rechecked.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Condition:
+Mental Status: Alert and oriented, able to participate fully.
+Level of Consciousness: Fully awake and interactive.
+Activity Status: Walks independently.
+
+Discharge Instructions:
+You were hospitalized for dehydration affecting your kidneys. Drink fluids regularly and avoid anti-inflammatory pain medicines. Take your medicines as listed and keep your lab appointment at ___. Return for fainting, chest pain, or very little urine.
+
+Followup Instructions:
+___

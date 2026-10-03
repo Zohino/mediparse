@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right flank pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with sudden right flank pain, nausea, and hematuria, seen at ___ emergency department.
+
+Past Medical History:
+Hypertension
+Kidney stones
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+General:
+Comfortable, no distress
+Lungs:
+Clear bilaterally
+Ext:
+No edema
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Urinalysis showed blood. Creatinine near baseline. Stone seen at ___.
+IMPRESSION:
+Small obstructing right ureteral stone
+
+Brief Hospital Course:
+Admitted for pain control and hydration. Pain improved with ketorolac and fluids. Stone passed spontaneously on day two, and he tolerated diet and walked independently.
+
+Medications on Admission:
+Lisinopril, atorvastatin
+
+Discharge Medications:
+Tamsulosin daily, ibuprofen as needed for pain, continue lisinopril and atorvastatin.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Right ureteral stone
+Hydronephrosis, mild
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+Drink plenty of fluids and strain your urine. Return for fever, severe pain, or inability to urinate.
+
+Followup Instructions:
+___

@@ -1,0 +1,79 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with three days of productive cough, fever and mild shortness of breath, first seen at ___ and sent to the emergency department for further evaluation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gastroesophageal reflux
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Vitals:
+T 38.1, HR 92, BP 128/76, SpO2 93% on room air
+General:
+Mildly ill appearing, comfortable
+HEENT:
+Moist mucous membranes
+Neck:
+Supple
+PULM:
+Right basilar crackles
+SKIN:
+Warm, dry
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 14.2, lactate 1.3, creatinine normal, drawn at ___
+IMAGING:
+Chest radiograph showed right lower lobe opacity
+IMPRESSION:
+Findings consistent with lobar pneumonia
+
+Brief Hospital Course:
+Treated for community-acquired pneumonia with ceftriaxone and azithromycin, then switched to oral antibiotics. Fever resolved, oxygen weaned off by day two, and he was seen by ___ before leaving ___.
+
+Medications on Admission:
+Lisinopril, atorvastatin, omeprazole daily
+
+Discharge Medications:
+1. Amoxicillin-clavulanate twice daily for five more days
+2. Lisinopril daily
+3. Atorvastatin nightly
+4. Omeprazole daily
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community-acquired pneumonia
+Hypertension
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were treated for pneumonia. Finish the full antibiotic course, rest, drink fluids, and return for worsening breathing or fever. Call ___ with questions.
+
+Followup Instructions:
+___

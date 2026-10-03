@@ -1,0 +1,60 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right lower abdominal pain
+
+Major Surgical or Invasive Procedure:
+Percutaneous abscess drainage
+
+History of Present Illness:
+___ year old woman presented with three days of right lower quadrant pain, nausea and fever after being seen at ___ clinic. Imaging showed acute appendicitis with a small abscess. She was referred on ___ for admission and surgical evaluation.
+
+Past Medical History:
+Hypothyroidism
+Migraine
+
+Social History:
+___
+
+Family History:
+Mother with breast cancer
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+General: comfortable, afebrile
+HEENT: moist mucosa
+CARDIAC: regular rhythm
+Ext: warm, no edema
+
+Pertinent Results:
+Labs on admission: white blood cell count elevated at 15.2, mildly raised C-reactive protein. CT abdomen and pelvis on ___ showed inflamed appendix with adjacent fluid collection. Discharge labs: white count normalized, hemoglobin stable, creatinine within normal limits, electrolytes unremarkable, and liver enzymes normal.
+
+Brief Hospital Course:
+She received intravenous antibiotics and underwent percutaneous drainage by ___ radiology on hospital day two, with prompt improvement in pain and fever. Diet was advanced, drain output fell, and the drain was removed before discharge. Interval appendectomy will be discussed at a later visit with ___ surgery.
+
+Discharge Medications:
+Levofloxacin 500 mg daily for seven days. Acetaminophen 650 mg every six hours as needed for pain. Ondansetron 4 mg as needed for nausea. Continue levothyroxine.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis with periappendiceal abscess
+
+Discharge Condition:
+Mental Status: alert and oriented
+Level of Consciousness: awake
+Activity Status: walking independently
+
+Discharge Instructions:
+You were treated for appendicitis with a drain. Take all antibiotics as directed. Avoid heavy lifting for ___ weeks. Return for fever, worsening abdominal pain, repeated vomiting, or redness around the wound.
+
+Followup Instructions:
+___

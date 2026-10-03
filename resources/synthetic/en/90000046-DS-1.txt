@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Nausea and decreased urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man sent by ___ clinic after several days of vomiting, poor oral intake, and markedly reduced urination, with abnormal outpatient labs.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General: Dry, comfortable, no distress.
+Neck: Flat neck veins.
+Abdomen: Soft, nontender.
+EXTREMITIES: No edema.
+
+Pertinent Results:
+Admission creatinine 3.1, baseline near 1.0. Potassium 5.4, bicarbonate 17. Creatinine improved to 1.3 at discharge.
+IMPRESSION: Normal kidney ultrasound, no obstruction.
+
+Brief Hospital Course:
+Received intravenous fluids and held nephrotoxic drugs; creatinine fell steadily. His diabetes was managed with sliding scale insulin, then home therapy resumed. Evaluated by the ___ team.
+
+Medications on Admission:
+Lisinopril
+Metformin
+Atorvastatin
+
+Discharge Medications:
+Atorvastatin 20 mg nightly. Metformin restarted at reduced dose. Hold lisinopril until labs are rechecked by your doctor.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Diabetes
+
+Discharge Condition:
+Stable.
+Mental Status: Alert and oriented.
+Activity Status: Walks independently.
+
+Discharge Instructions:
+Drink fluids regularly and avoid ibuprofen. Have blood work repeated within one week. Call ___ for vomiting, dizziness, or very little urine.
+
+Followup Instructions:
+___

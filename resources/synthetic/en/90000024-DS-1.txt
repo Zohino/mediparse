@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with two days of worsening productive cough, fever and shortness of breath after a recent visit to ___. Vital signs were stable on arrival and chest imaging was obtained.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Possible atrial fibrillation noted at ___, never confirmed
+
+Social History:
+___
+
+Physical Exam:
+General: Comfortable, no acute distress.
+HEENT: Moist mucous membranes.
+PULM: Scattered rhonchi, no wheeze.
+CARDIAC: Regular rate and rhythm.
+
+Pertinent Results:
+DISCHARGE LABS: WBC 8.2, Hgb 13.1, Na 139, K 4.1, creatinine 0.9, all drawn on ___ before discharge.
+IMPRESSION: Right lower lobe consolidation consistent with pneumonia, no effusion, read by the radiologist at ___.
+
+Brief Hospital Course:
+Treated for community acquired pneumonia with intravenous antibiotics, then transitioned to oral therapy. Oxygen was weaned to room air by day three. Fever resolved and appetite improved. Follow up was arranged with ___ after discharge.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Amoxicillin-clavulanate 875 mg twice daily for five days.
+Continue lisinopril and atorvastatin as before.
+Acetaminophen as needed for fever.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypertension
+
+Discharge Condition:
+Mental Status: Alert and oriented.
+Level of Consciousness: Awake and attentive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+Take the antibiotics until finished, rest and drink plenty of fluids. Return for worsening breathing, chest pain or persistent fever. Keep all follow up visits.
+
+Followup Instructions:
+___

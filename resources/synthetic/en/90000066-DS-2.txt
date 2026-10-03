@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough, fever, shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient is a woman who presented to ___ with three days of worsening cough, fever and shortness of breath after contact with a sick relative. She was seen at ___ the day before and sent to the emergency department. Chest imaging showed a right lower lobe opacity. She was admitted for pneumonia with hypoxia.
+
+Past Medical History:
+Asthma
+Hypertension
+No heart failure
+
+Past Surgical History:
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals: T 38.1 HR 98 BP 128/76 RR 22 SpO2 92% on room air
+Gen: Ill appearing, mild distress
+PULM: Right basilar crackles
+Ext: Warm, no edema
+
+Pertinent Results:
+Admission WBC 14.2 with neutrophil predominance, lactate normal. Creatinine at baseline. Blood cultures drawn on ___ showed no growth. Chest radiograph reviewed with the radiologist.
+IMPRESSION: Right lower lobe consolidation consistent with pneumonia, no pleural effusion.
+
+Brief Hospital Course:
+She was treated for community acquired pneumonia with ceftriaxone and azithromycin, and oxygen was weaned to room air by day two. Fever resolved. Her asthma remained quiet on home inhaler. She was seen by ___ and cleared for home. Her primary care team at ___ was notified.
+TRANSITIONAL ISSUES:
+Repeat chest imaging in six weeks to confirm clearing, arranged through ___.
+
+Medications on Admission:
+Albuterol inhaler as needed
+Lisinopril 10 mg daily
+
+Discharge Medications:
+Amoxicillin-clavulanate 875 mg twice daily for five more days
+Albuterol inhaler two puffs every four hours as needed
+Lisinopril 10 mg daily
+Acetaminophen 500 mg every six hours as needed for fever
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypoxia
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with a lung infection and treated with antibiotics. Finish the full antibiotic course as prescribed. Rest, drink fluids and call ___ if fever, chest pain or worse breathing returns. Return to ___ if symptoms worsen. Keep your visit with Dr. ___ next week.
+
+Followup Instructions:
+___

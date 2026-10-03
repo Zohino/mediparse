@@ -1,0 +1,62 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath and leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient with known congestive heart failure presented to ___ with several days of worsening dyspnea, orthopnea and leg swelling after running out of medication obtained from ___. She noted weight gain and reduced walking tolerance. Oxygen saturation was low on arrival and she was admitted for diuresis.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Hypothyroidism
+Prior hospitalization at ___
+
+Family History:
+Mother with hypertension. Father's history unknown, recorded at ___.
+
+Pertinent Results:
+FINDINGS:
+Chest radiograph showed bilateral pulmonary vascular congestion with small pleural effusions. Echocardiogram reviewed at ___ showed a dilated left atrium and reduced ventricular function. Potassium and creatinine were stable throughout the stay. BNP was markedly elevated on admission.
+
+Brief Hospital Course:
+She received intravenous furosemide with steady diuresis and improved breathing, and oxygen was weaned to room air. Heart rate was controlled on her home beta blocker and anticoagulation was continued. Cardiology at ___ reviewed her case and agreed with the plan. She was discharged home with services arranged through ___.
+
+Medications on Admission:
+Furosemide, metoprolol, apixaban, levothyroxine, lisinopril
+
+Discharge Medications:
+1. Furosemide 40 mg by mouth twice daily
+2. Metoprolol succinate 50 mg daily
+3. Apixaban 5 mg twice daily
+4. Levothyroxine 75 mcg daily
+5. Lisinopril 10 mg daily
+
+Discharge Disposition:
+Home With Service
+
+Facility:
+___
+
+Discharge Diagnosis:
+Heart failure
+Atrial fibrillation
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent with a walker for longer distances.
+
+Discharge Instructions:
+You were hospitalized with fluid buildup caused by your heart condition. Weigh yourself every morning and call your doctor at ___ if you gain more than three pounds in a day. Limit salt intake, take all medicines as prescribed and return for worsening breathlessness.
+
+Followup Instructions:
+___

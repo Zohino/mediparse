@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough, fever, shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient is a ___ year old man with hypertension who presented with five days of productive cough, fevers, and worsening shortness of breath. He was first evaluated at ___ on ___ and given a course of oral antibiotics without improvement. He developed pleuritic right-sided chest pain and poor oral intake, prompting his family to bring him to ___. In the emergency department he was febrile and hypoxic, and imaging showed a right lower lobe consolidation. He denied sick contacts.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia, diagnosed in ___
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Father with coronary artery disease.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: T 101.2, HR 98, BP 128/76, RR 22, SpO2 91% on room air
+Gen: Ill appearing, speaking in short sentences
+HEENT: Dry mucous membranes
+Lungs: Crackles at right base
+Abdomen: Soft, nontender
+EXTREMITIES: Warm, no edema
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 14.2 with neutrophil predominance, Hgb 13.1, Plt 260. Na 134, K 4.0, HCO3 24, BUN 22, Cr 1.0. Lactate 1.8.
+Chest radiograph: right lower lobe airspace opacity, no effusion, reviewed by ___.
+DISCHARGE LABS:
+WBC 8.4, Hgb 12.8, Plt 310. Na 138, K 4.2, Cr 0.9.
+Microbiology: blood cultures no growth, urine Legionella antigen negative.
+
+Brief Hospital Course:
+He was admitted to the medical floor and started on intravenous ceftriaxone and azithromycin for community acquired pneumonia. Supplemental oxygen was weaned over two days to room air. Blood cultures drawn on ___ showed no growth. His cough and fever improved steadily and he was changed to oral antibiotics on hospital day three. Lisinopril was held initially for low blood pressure and resumed before discharge. Physical therapy recommended short term rehabilitation given deconditioning. His daughter ___ agreed with the plan. He was seen by ___ on the day of discharge. Repeat chest imaging at ___ is planned.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Filled at ___
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Amoxicillin-clavulanate 875 mg by mouth twice daily, to continue through ___
+4. Acetaminophen 650 mg by mouth every six hours as needed for fever or pain
+
+Discharge Disposition:
+Extended Care
+Facility: ___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypoxia
+Hypertension
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory with assistance
+
+Discharge Instructions:
+You were hospitalized with a lung infection and treated with antibiotics. Finish the full antibiotic course even if you feel well. Drink plenty of fluids and rest. Return for fever above 101, worsening breathlessness, chest pain, or confusion. Call Dr. ___ if symptoms return. Your rehabilitation team at ___ will help with strength and walking, and a repeat chest film will be arranged on or around ___.
+
+Followup Instructions:
+___

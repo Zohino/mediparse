@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old woman with hypertension who presented to ___ with two days of right upper quadrant pain, nausea and vomiting that began after a fatty meal. She also reported subjective fevers at home. Ultrasound showed gallstones with a thickened gallbladder wall. She was admitted to the surgical service, given antibiotics, and taken to the operating room on ___ for an uncomplicated cholecystectomy.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Migraine, followed at ___
+
+Past Surgical History:
+Cesarean section at ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+General: Comfortable, no distress
+Neck: Supple
+Lungs: Clear bilaterally
+ABD: Soft, mildly tender at port sites, incisions clean and dry
+SKIN: Warm, no rash
+Neuro: Alert, moves all extremities
+
+Pertinent Results:
+Labs on admission notable for white blood cell count 14.2 with normal liver enzymes and lipase. Bilirubin was within normal limits. Pathology from ___ pending at discharge.
+IMAGING:
+Right upper quadrant ultrasound: multiple gallstones, gallbladder wall thickening, small amount of pericholecystic fluid, no biliary dilation.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 75 mcg daily
+
+Discharge Medications:
+1. Acetaminophen 650 mg every six hours as needed for pain
+2. Docusate 100 mg twice daily while taking opioids
+3. Oxycodone 5 mg every six hours as needed for severe pain
+4. Lisinopril 10 mg daily
+5. Levothyroxine 75 mcg daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Stable and improved.
+Mental Status: Clear and coherent.
+
+Discharge Instructions:
+You were hospitalized with gallbladder inflammation and had your gallbladder removed laparoscopically. You may shower and let soapy water run over your incisions, but do not soak in a bath. Avoid lifting more than ten pounds for four weeks. Call ___ at ___ or return to the emergency department for fever, worsening pain, vomiting, or yellowing of the skin.
+
+Followup Instructions:
+___

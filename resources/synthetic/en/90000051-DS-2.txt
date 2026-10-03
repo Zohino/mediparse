@@ -1,0 +1,60 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+___ year old man with gastroesophageal reflux presented to ___ with three days of right lower quadrant pain, nausea and low-grade fever that began ___. Imaging suggested appendicitis, and surgery was consulted. He was admitted.
+
+Past Medical History:
+Gastroesophageal reflux
+Seasonal allergies
+
+Social History:
+___
+
+Family History:
+Family history notable for atrial fibrillation in his father. No family history of bowel disease.
+
+Physical Exam:
+Vitals: afebrile, stable.
+General: comfortable.
+ABD: soft, mild RLQ tenderness.
+EXTREMITIES: no edema.
+SKIN: incisions clean.
+
+Pertinent Results:
+WBC 13.2 on admission, normalized to 7.8 by discharge. Creatinine 0.9. CT abdomen showed a dilated inflamed appendix with periappendiceal fat stranding and no abscess. Pathology from ___ pending at discharge, to be reviewed in surgery clinic.
+
+Brief Hospital Course:
+Underwent uncomplicated laparoscopic appendectomy on ___. Pain was controlled with oral analgesics, diet advanced steadily, and he tolerated regular food. Seen by ___ for wound check, with no signs of infection. He was discharged home in stable condition on hospital day two.
+
+Medications on Admission:
+Omeprazole 20 mg by mouth once daily.
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed for pain. Continue omeprazole 20 mg daily. Docusate 100 mg twice daily while taking opioids.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Good
+Level of Consciousness: alert and interactive
+Activity Status: ambulatory, independent
+
+Discharge Instructions:
+Keep incisions clean and dry, and you may shower. Avoid lifting over ten pounds for four weeks. Return for fever, worsening abdominal pain, vomiting, or wound redness. Call ___ with questions.
+
+Followup Instructions:
+___

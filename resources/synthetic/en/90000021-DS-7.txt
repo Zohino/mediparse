@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs
+
+Chief Complaint:
+Palpitations and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with diabetes mellitus and hypertension, sent from ___ clinic after three days of racing, irregular heartbeat, fatigue and mild exertional breathlessness. Her home glucose log was stable. Symptoms began on ___ while climbing stairs. She denied syncope or chest pain. In the emergency department she was found tachycardic and was admitted for rate control.
+REVIEW OF SYSTEMS:
+Positive for palpitations and tiredness. Negative for fever, cough, leg swelling.
+
+Past Medical History:
+Diabetes mellitus
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: HR 128, BP 118/72, SpO2 97% on room air
+Gen: Comfortable, no distress
+HEENT: Moist mucous membranes
+CARDIAC: Irregularly irregular, no murmur
+Abdomen: Soft, nontender
+EXTREMITIES: No edema
+SKIN: Warm, dry
+
+Pertinent Results:
+ECG showed an irregularly irregular narrow complex tachycardia without distinct P waves. Troponin negative twice. TSH normal. Potassium 4.1, creatinine 0.8. Hemoglobin 12.9. Results were reviewed with ___ laboratory staff.
+IMAGING:
+Chest radiograph at ___ showed clear lungs and normal heart size.
+
+Brief Hospital Course:
+She was started on metoprolol with improved heart rate, reaching the 70s to 80s by day two. Because her stroke risk score was elevated, apixaban was begun after discussion with Dr. ___ and the ___ cardiology team. Echocardiogram performed on ___ showed preserved ejection fraction. Glucose was managed with her usual regimen. She walked independently and was discharged home in stable condition with follow up arranged by ___.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg daily
+2. Apixaban 5 mg twice daily
+3. Metformin 500 mg twice daily
+4. Lisinopril 10 mg daily
+5. Atorvastatin 20 mg nightly
+Prescriptions were sent to the ___ pharmacy.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary: Supraventricular tachycardia with irregular rhythm
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for a fast, irregular heartbeat. Take metoprolol and the new blood thinner exactly as prescribed, and do not skip doses. Watch for bleeding, black stools or severe headache. Call Dr. ___ or the ___ clinic at ___ if palpitations return. Return to the emergency department for fainting, chest pain or weakness on one side.
+
+Followup Instructions:
+___
