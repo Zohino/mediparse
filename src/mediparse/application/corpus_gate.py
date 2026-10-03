@@ -6,7 +6,10 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
 from mediparse.application.ports import AuditedCorpus
-from mediparse.domain.corpus_audit import InvalidAuditRecordError, gate_violations
+from mediparse.domain.corpus_audit import (
+    InvalidAuditRecordError,
+    audit_record_violations,
+)
 from mediparse.domain.corpus_provenance import (
     InvalidProvenanceRecordError,
     provenance_violations,
@@ -47,8 +50,10 @@ class CorpusGate:
             Popisy porušení; neexistující korpus nic neporušuje.
         """
         fingerprint = self.corpus.fingerprint()
+        if fingerprint is None:
+            return ()
         violations = audit_violations(self.corpus, fingerprint, reference_sha256)
-        if violations or fingerprint is None:
+        if violations:
             return violations
         try:
             provenance = self.corpus.provenance_record()
@@ -58,7 +63,7 @@ class CorpusGate:
 
 
 def audit_violations(
-    corpus: AuditedCorpus, fingerprint: str | None, reference_sha256: Mapping[str, str]
+    corpus: AuditedCorpus, fingerprint: str, reference_sha256: Mapping[str, str]
 ) -> tuple[str, ...]:
     """Důvody, proč korpus s daným otiskem neodpovídá svému záznamu auditu; provenance nekontroluje.
 
@@ -69,4 +74,4 @@ def audit_violations(
         record = corpus.audit_record()
     except InvalidAuditRecordError:
         return ("Záznam auditu neodpovídá schématu.",)
-    return gate_violations(fingerprint, record, reference_sha256)
+    return audit_record_violations(fingerprint, record, reference_sha256)

@@ -166,18 +166,16 @@ def fingerprint(files: Iterable[tuple[str, bytes]]) -> str:
     return hashlib.sha256(listing.encode()).hexdigest()
 
 
-def gate_violations(
-    corpus_sha256: str | None,
+def audit_record_violations(
+    corpus_sha256: str,
     record: AuditRecord | None,
     reference_sha256: Mapping[str, str],
 ) -> tuple[str, ...]:
-    """Důvody, proč korpus nesmí do repozitáře; prázdný výsledek znamená, že smí.
+    """Důvody, proč korpus s daným otiskem neodpovídá svému záznamu auditu; prázdný výsledek znamená, že odpovídá.
 
     Returns:
-        Popisy porušení; neexistující korpus nic neporušuje.
+        Popisy porušení auditu.
     """
-    if corpus_sha256 is None:
-        return ()
     if record is None:
         return ("Korpus nemá záznam auditu.",)
     violations: list[str] = []
