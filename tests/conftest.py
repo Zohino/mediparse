@@ -12,8 +12,8 @@ from typing import TYPE_CHECKING, Final
 import pytest
 
 from mediparse.domain.labels import Diagnosis
-from mediparse.domain.mentions import MentionStatus
-from mediparse.domain.note_plan import NotePlan, PlannedMention
+from mediparse.domain.mentions import Mention, MentionStatus
+from mediparse.domain.note_plan import NotePlan
 from mediparse.domain.note_structure import Sex
 from mediparse.entrypoints import corpus_audit, corpus_provenance
 from mediparse.entrypoints.exit_code import ExitCode
@@ -75,7 +75,7 @@ _PLAN: Final = NotePlan(
     section_words={"history_of_present_illness": 28},
     narrative_deid=1,
     mentions=(
-        PlannedMention(
+        Mention(
             diagnosis=Diagnosis.CKD,
             status=MentionStatus.AFFIRMED,
             sections=("past_medical_history", "discharge_diagnosis"),

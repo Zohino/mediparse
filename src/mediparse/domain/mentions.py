@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 from enum import StrEnum
 from typing import TYPE_CHECKING, Annotated, Final, Self
 
@@ -89,9 +88,10 @@ class MentionModel(BaseModel):
         return self
 
 
-@dataclass(frozen=True)
-class Mention:
-    """Plánovaná zmínka diagnózy: status a sekce v pořadí zprávy."""
+class Mention(BaseModel):
+    """Plánovaná zmínka diagnózy: status a klíče sekcí v pořadí zprávy."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     diagnosis: Diagnosis
     status: MentionStatus
@@ -138,7 +138,9 @@ def _mention(
         status = _negative_status(model, rng)
         chosen = _negative_sections(diagnosis, status, structure, model, rng)
     sections = tuple(s for s in structure.sections if s in chosen)
-    return Mention(diagnosis, status, sections) if sections else None
+    if not sections:
+        return None
+    return Mention(diagnosis=diagnosis, status=status, sections=sections)
 
 
 def _positive_sections(
