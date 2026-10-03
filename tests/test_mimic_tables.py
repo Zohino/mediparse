@@ -1,4 +1,4 @@
-"""Config tabulek MIMIC: otisky souborů MIMIC-IV-Note, proti kterým běží audit."""
+"""Config tabulek MIMIC: soubory ke stažení a otisky souborů MIMIC-IV-Note, proti kterým běží audit."""
 
 from __future__ import annotations
 
@@ -8,7 +8,10 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.mimic_tables import load_reference_sha256
+from mediparse.infrastructure.mimic_tables import (
+    load_mimic_tables,
+    load_reference_sha256,
+)
 from tests.support import REPOSITORY_TABLES
 
 if TYPE_CHECKING:
@@ -37,6 +40,28 @@ def test_invalid_checksum_is_rejected(tmp_path: Path) -> None:
 
     with pytest.raises(InvalidInputError, match=r"t\.json"):
         load_reference_sha256(tables)
+
+
+def test_duplicate_file_name_is_rejected(tmp_path: Path) -> None:
+    """Dvě tabulky se stejným jménem souboru by se při stažení i v referenci přepsaly."""
+    other = NOTE_URL.replace("2.2", "2.1")
+    tables = _tables(tmp_path / "t.json", (NOTE_URL, "b" * 64), (other, "c" * 64))
+
+    with pytest.raises(InvalidInputError, match=r"discharge\.csv\.gz"):
+        load_reference_sha256(tables)
+
+
+def test_tables_cover_every_table_with_url_and_checksum(tmp_path: Path) -> None:
+    """Tabulky ke stažení jsou všechny tabulky configu, i ty mimo referenci auditu."""
+    tables = _tables(tmp_path / "t.json", (NOTE_URL, "b" * 64), (HOSP_URL, "f" * 64))
+
+    assert {
+        name: (table.url, table.sha256)
+        for name, table in load_mimic_tables(tables).items()
+    } == {
+        "discharge.csv.gz": (NOTE_URL, "b" * 64),
+        "admissions.csv.gz": (HOSP_URL, "f" * 64),
+    }
 
 
 def test_repository_reference_is_discharge_and_radiology() -> None:
