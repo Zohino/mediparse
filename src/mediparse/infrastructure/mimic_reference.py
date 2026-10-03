@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import csv
 import gzip
-import hashlib
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from mediparse.domain.corpus_audit import ReferenceNote
+from mediparse.infrastructure.file_digest import file_sha256
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
@@ -42,5 +42,4 @@ class MimicReference:
         Returns:
             Hexadecimální otisk.
         """
-        with self.path.open("rb") as stream:
-            return hashlib.file_digest(stream, "sha256").hexdigest()
+        return file_sha256(self.path)
