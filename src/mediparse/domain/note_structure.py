@@ -26,8 +26,6 @@ if TYPE_CHECKING:
 
 _SHARE_TOLERANCE: Final = 1e-9
 
-DEID: Final = "___"
-
 
 class Sex(StrEnum):
     """Pohlaví pacienta, které se ve zprávě projeví polem Sex a zájmeny."""

@@ -58,8 +58,8 @@ class LabelModel(BaseModel):
     @model_validator(mode="after")
     def _conditionals_agree(self) -> Self:
         for first, second in combinations(Diagnosis, 2):
-            forward = self.prevalence[first] * self.conditional[first][second]
-            backward = self.prevalence[second] * self.conditional[second][first]
+            forward = self.co_occurrence(first, second)
+            backward = self.co_occurrence(second, first)
             if abs(forward - backward) > _SYMMETRY_TOLERANCE:
                 msg = f"P({first}, {second}) se z obou směrů matice liší: {forward} a {backward}."
                 raise ValueError(msg)

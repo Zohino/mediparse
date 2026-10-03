@@ -5,8 +5,14 @@ from __future__ import annotations
 import re
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.note_structure import DEID, PreambleValue
-from mediparse.domain.note_text import AGE_MARKER, AGE_SUFFIX, alternation, segment
+from mediparse.domain.note_structure import PreambleValue
+from mediparse.domain.note_text import (
+    AGE_MARKER,
+    AGE_SUFFIX,
+    DEID,
+    alternation,
+    segment,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping, Sequence

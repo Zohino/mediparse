@@ -8,8 +8,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from mediparse.domain.labels import label_shares, prevalence_outliers
-from mediparse.domain.note_structure import DEID
-from mediparse.domain.note_text import AGE_MARKER, line_headers, segment
+from mediparse.domain.note_text import AGE_MARKER, DEID, line_headers, segment
 
 if TYPE_CHECKING:
     import re

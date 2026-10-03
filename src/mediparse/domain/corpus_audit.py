@@ -28,7 +28,8 @@ _TOKEN: Final = re.compile(r"___|[^\W_]+")
 
 type Ngram = tuple[str, ...]
 Sha256 = Annotated[str, Field(pattern=r"^[0-9a-f]{64}$")]
-CommitSha = Annotated[str, Field(pattern=r"^[0-9a-f]{40}$")]
+COMMIT_PATTERN: Final = r"[0-9a-f]{40}"
+CommitSha = Annotated[str, Field(pattern=rf"^{COMMIT_PATTERN}$")]
 
 
 class ReferenceNote(NamedTuple):

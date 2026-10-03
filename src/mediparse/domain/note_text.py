@@ -1,4 +1,4 @@
-"""Čtení textu syntetické zprávy: sekce podle hlaviček na začátku řádku a věková značka."""
+"""Text syntetické zprávy: de-identifikační značka, sekce podle hlaviček na začátku řádku a věková značka."""
 
 from __future__ import annotations
 
@@ -8,8 +8,9 @@ from typing import TYPE_CHECKING, Final
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping
 
+DEID: Final = "___"
 AGE_SUFFIX: Final = r"[ -]?(?:years?[ -]old|y/?o)\b"
-AGE_MARKER: Final = re.compile(rf"___{AGE_SUFFIX}", re.IGNORECASE)
+AGE_MARKER: Final = re.compile(rf"{re.escape(DEID)}{AGE_SUFFIX}", re.IGNORECASE)
 
 type Sections = tuple[tuple[str, str], ...]
 
