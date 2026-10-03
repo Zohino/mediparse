@@ -15,20 +15,16 @@ from mediparse.application.corpus_audit import (
     CorpusAudit,
 )
 from mediparse.domain.corpus_audit import ReferenceNote
+from tests.support import COMMIT, CORPUS_SHA, NOTE, PINNED, SENTENCE, SHORT_NOTE
 
 if TYPE_CHECKING:
     from collections.abc import Collection, Iterator, Sequence
 
     from mediparse.domain.corpus_audit import AuditRecord, Position
 
-SENTENCE = (
-    "the old lighthouse keeper counted seven gulls before the storm "
-    "reached the northern harbor wall"
-)
-NOTE = "en/90000001-DS-1.txt"
-COMMIT = "c" * 40
 CREATED_AT = datetime(2026, 9, 29, tzinfo=UTC)
-PINNED = {"discharge.csv.gz": "b" * 64}
+DISCHARGE_SHA = PINNED["discharge.csv.gz"]
+DISCHARGE_PINNED = {"discharge.csv.gz": DISCHARGE_SHA}
 
 
 @dataclass
@@ -43,7 +39,7 @@ class _Corpus:
         return [name.split("/")[-1].removesuffix(".txt") for name in self.texts]
 
     def fingerprint(self) -> str | None:
-        return "a" * 64 if self.texts else None
+        return CORPUS_SHA if self.texts else None
 
     def save_record(self, record: AuditRecord) -> None:
         self.saved.append(record)
@@ -53,7 +49,7 @@ class _Corpus:
 class _Reference:
     rows: tuple[ReferenceNote, ...]
     name: str = "discharge.csv.gz"
-    digest: str = "b" * 64
+    digest: str = DISCHARGE_SHA
     hashed: list[str] = field(default_factory=list)
 
     def notes(self) -> Iterator[ReferenceNote]:
@@ -67,7 +63,7 @@ class _Reference:
 @dataclass(frozen=True)
 class _UnreadableReference:
     name: str = "discharge.csv.gz"
-    digest: str = "b" * 64
+    digest: str = DISCHARGE_SHA
 
     def notes(self) -> Iterator[ReferenceNote]:
         pytest.fail(
@@ -133,17 +129,19 @@ def _audit(
 
 def test_clean_corpus_saves_record() -> None:
     """Čistý korpus dostane záznam s otiskem, metodou a referencí, report nevznikne."""
-    corpus = _Corpus({NOTE: "a short synthetic note"})
+    corpus = _Corpus(dict(SHORT_NOTE))
     report = _Report()
     reference = _Reference((ReferenceNote("10000032", SENTENCE),))
 
-    outcome = _audit(corpus, reference, report).run({}, COMMIT, CREATED_AT, PINNED)
+    outcome = _audit(corpus, reference, report).run(
+        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
+    )
 
     assert outcome == AuditClean(notes=1, ngrams=0, reference_notes=1)
     (record,) = corpus.saved
-    assert record.corpus_sha256 == "a" * 64
+    assert record.corpus_sha256 == CORPUS_SHA
     assert record.reference[0].name == "discharge.csv.gz"
-    assert record.reference[0].sha256 == "b" * 64
+    assert record.reference[0].sha256 == DISCHARGE_SHA
     assert reference.hashed == ["discharge.csv.gz"]
     assert record.created_at == CREATED_AT
     assert not report.written
@@ -155,7 +153,9 @@ def test_overlap_writes_report_and_no_record() -> None:
     report = _Report()
     reference = _Reference((ReferenceNote("10000032", SENTENCE),))
 
-    outcome = _audit(corpus, reference, report).run({}, COMMIT, CREATED_AT, PINNED)
+    outcome = _audit(corpus, reference, report).run(
+        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
+    )
 
     assert outcome == AuditOverlap(shared_ngrams=3, colliding_subjects=0, notes=(NOTE,))
     assert not corpus.saved
@@ -166,11 +166,13 @@ def test_overlap_writes_report_and_no_record() -> None:
 
 def test_subject_collision_is_overlap() -> None:
     """Syntetický pacient, který existuje v referenci, audit neprojde."""
-    corpus = _Corpus({NOTE: "a short synthetic note"})
+    corpus = _Corpus(dict(SHORT_NOTE))
     report = _Report()
     reference = _Reference((ReferenceNote("90000001", "unrelated text"),))
 
-    outcome = _audit(corpus, reference, report).run({}, COMMIT, CREATED_AT, PINNED)
+    outcome = _audit(corpus, reference, report).run(
+        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
+    )
 
     assert outcome == AuditOverlap(shared_ngrams=0, colliding_subjects=1, notes=())
     assert not corpus.saved
@@ -185,7 +187,7 @@ def test_environment_refusal_never_touches_reference(environ: dict[str, str]) ->
     report = _Report()
 
     outcome = _audit(corpus, _UntouchableReference(), report).run(
-        environ, COMMIT, CREATED_AT, PINNED
+        environ, COMMIT, CREATED_AT, DISCHARGE_PINNED
     )
 
     assert isinstance(outcome, AuditRefused)
@@ -207,7 +209,7 @@ def test_workspace_refusal_never_touches_reference(workspace: _Workspace) -> Non
     corpus = _Corpus({NOTE: SENTENCE})
 
     outcome = _audit(corpus, _UntouchableReference(), _Report(), workspace).run(
-        {}, COMMIT, CREATED_AT, PINNED
+        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
     )
 
     assert isinstance(outcome, AuditRefused)
@@ -219,7 +221,7 @@ def test_invalid_note_id_is_refused_before_reference() -> None:
     corpus = _Corpus({"en/not-a-note.txt": SENTENCE})
 
     outcome = _audit(corpus, _UntouchableReference(), _Report()).run(
-        {}, COMMIT, CREATED_AT, PINNED
+        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
     )
 
     assert isinstance(outcome, AuditRefused)
@@ -229,7 +231,7 @@ def test_invalid_note_id_is_refused_before_reference() -> None:
 def test_empty_corpus_is_refused() -> None:
     """Prázdný korpus nemá co auditovat."""
     outcome = _audit(_Corpus({}), _UntouchableReference(), _Report()).run(
-        {}, COMMIT, CREATED_AT, PINNED
+        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
     )
 
     assert isinstance(outcome, AuditRefused)
@@ -237,10 +239,10 @@ def test_empty_corpus_is_refused() -> None:
 
 def test_empty_reference_is_refused_without_record() -> None:
     """Reference bez jediné zprávy by atestovala nic, záznam nevznikne."""
-    corpus = _Corpus({NOTE: "a short synthetic note"})
+    corpus = _Corpus(dict(SHORT_NOTE))
 
     outcome = _audit(corpus, _Reference(()), _Report()).run(
-        {}, COMMIT, CREATED_AT, PINNED
+        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
     )
 
     assert isinstance(outcome, AuditRefused)
@@ -252,13 +254,13 @@ def test_empty_reference_is_refused_without_record() -> None:
     [
         pytest.param(
             _UnreadableReference(digest="d" * 64),
-            PINNED,
+            DISCHARGE_PINNED,
             "discharge.csv.gz",
             id="jiny-otisk",
         ),
         pytest.param(
             _UnreadableReference(),
-            PINNED | {"radiology.csv.gz": "e" * 64},
+            DISCHARGE_PINNED | {"radiology.csv.gz": "e" * 64},
             "radiology.csv.gz",
             id="bez-radiology",
         ),
@@ -268,7 +270,7 @@ def test_reference_other_than_config_is_refused_before_reading(
     reference: _UnreadableReference, pinned: dict[str, str], named: str
 ) -> None:
     """Reference, která nesedí s configem, se odmítne podle otisku dřív, než se čtou zprávy."""
-    corpus = _Corpus({NOTE: "a short synthetic note"})
+    corpus = _Corpus(dict(SHORT_NOTE))
 
     outcome = _audit(corpus, reference, _Report()).run({}, COMMIT, CREATED_AT, pinned)
 

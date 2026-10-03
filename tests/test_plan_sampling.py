@@ -3,20 +3,16 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from pathlib import Path
 from random import Random
 from typing import TYPE_CHECKING
 
 from mediparse.application.plan_sampling import PlanSampling
-from mediparse.infrastructure.sampler_config import load_sampler_config
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.synthetic_plan import SamplerConfig
-
-REPO_CONFIG = Path(__file__).parents[1] / "config" / "synthetic_plan.json"
 
 
 @dataclass
@@ -33,36 +29,34 @@ def _run(config: SamplerConfig) -> list[NotePlan]:
     return store.plans
 
 
-def test_same_seed_gives_same_plans() -> None:
+def test_same_seed_gives_same_plans(sampler_config: SamplerConfig) -> None:
     """Stejný seed a config dávají stejné plány."""
-    config = load_sampler_config(REPO_CONFIG)
-
-    assert _run(config) == _run(config)
+    assert _run(sampler_config) == _run(sampler_config)
 
 
-def test_every_note_gets_a_plan() -> None:
+def test_every_note_gets_a_plan(sampler_config: SamplerConfig) -> None:
     """Use case uloží plán pro každou zprávu korpusu a vrátí jejich počet."""
-    config = load_sampler_config(REPO_CONFIG)
     store = _Store()
 
-    count = PlanSampling(store=store, random_source=Random).run(config)
+    count = PlanSampling(store=store, random_source=Random).run(sampler_config)
 
-    assert count == config.patients.notes == len(store.plans)
+    assert count == sampler_config.patients.notes == len(store.plans)
 
 
-def test_other_seed_gives_other_plans() -> None:
+def test_other_seed_gives_other_plans(sampler_config: SamplerConfig) -> None:
     """Jiný seed dává jiné plány."""
-    config = load_sampler_config(REPO_CONFIG)
+    assert _run(sampler_config) != _run(
+        sampler_config.model_copy(update={"seed": sampler_config.seed + 1})
+    )
 
-    assert _run(config) != _run(config.model_copy(update={"seed": config.seed + 1}))
 
-
-def test_changing_mentions_keeps_labels_and_structure() -> None:
+def test_changing_mentions_keeps_labels_and_structure(
+    sampler_config: SamplerConfig,
+) -> None:
     """Každá fáze má vlastní proud: změna modelu zmínek nepřelosuje labely ani strukturu."""
-    config = load_sampler_config(REPO_CONFIG)
-    mentions = config.mentions.model_copy(update={"narrative_probability": 0.1})
-    changed = _run(config.model_copy(update={"mentions": mentions}))
-    original = _run(config)
+    mentions = sampler_config.mentions.model_copy(update={"narrative_probability": 0.1})
+    changed = _run(sampler_config.model_copy(update={"mentions": mentions}))
+    original = _run(sampler_config)
 
     assert [p.model_dump(exclude={"mentions"}) for p in changed] == [
         p.model_dump(exclude={"mentions"}) for p in original

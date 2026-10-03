@@ -2,21 +2,19 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.entrypoints.corpus_consistency import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.plans_file import PlansFile
+from tests.support import REPOSITORY_CONFIG, REPOSITORY_CORPUS, REPOSITORY_PLANS
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
     import pytest
 
     from tests.conftest import AuditFiles, PlannedNote
-
-REPOSITORY = Path(__file__).parents[1]
-REPOSITORY_CORPUS = REPOSITORY / "resources" / "synthetic"
-REPOSITORY_CONFIG = REPOSITORY / "config" / "synthetic_plan.json"
 
 
 def _run(corpus: Path, plans: Path) -> int:
@@ -70,4 +68,4 @@ def test_violation_names_note_to_regenerate(
 
 def test_repository_corpus_matches_its_plans() -> None:
     """Zprávy v repu odpovídají plánům; dokud žádné nejsou, kontroly nemají co hlásit."""
-    assert _run(REPOSITORY_CORPUS, REPOSITORY_CORPUS / "plans.jsonl") == ExitCode.OK
+    assert _run(REPOSITORY_CORPUS, REPOSITORY_PLANS) == ExitCode.OK

@@ -4,26 +4,22 @@ from __future__ import annotations
 
 import hashlib
 import json
-from pathlib import Path
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING
 
 import pytest
 
 from mediparse.domain.corpus_provenance import prompts_sha256
 from mediparse.entrypoints.corpus_provenance import run
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.plans_file import PLANS_PATH, PlansFile
-from mediparse.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
 from mediparse.infrastructure.synthetic_corpus import PROVENANCE_NAME, RECORD_NAME
+from tests.support import COMMIT, NOTE, REPOSITORY_CONFIG, SHORT_NOTE
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
+    from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.synthetic_plan import SamplerConfig
     from tests.conftest import AuditFiles
-
-REPOSITORY: Final = Path(__file__).parents[1]
-CONFIG: Final = REPOSITORY / SAMPLER_CONFIG_PATH
-PLANS: Final = REPOSITORY / PLANS_PATH
-NOTE: Final = "en/90000001-DS-1.txt"
 
 
 def _sha256(path: Path) -> str:
@@ -31,10 +27,13 @@ def _sha256(path: Path) -> str:
 
 
 def test_provenance_records_generation_and_audit(
-    audit_files: AuditFiles, sampler_config: SamplerConfig, verbalization_template: str
+    audit_files: AuditFiles,
+    sampler_config: SamplerConfig,
+    verbalization_template: str,
+    repository_plans: tuple[NotePlan, ...],
 ) -> None:
     """Záznam nese argumenty, seed, otisky configu a zadání a otisk záznamu auditu."""
-    root = audit_files.audited_corpus({NOTE: "a short synthetic note"})
+    root = audit_files.audited_corpus(SHORT_NOTE)
 
     assert run(audit_files.provenance_argv(root)) == ExitCode.OK
 
@@ -42,14 +41,14 @@ def test_provenance_records_generation_and_audit(
     assert record == {
         "generation": {
             "seed": sampler_config.seed,
-            "sampler_config_sha256": _sha256(CONFIG),
+            "sampler_config_sha256": _sha256(REPOSITORY_CONFIG),
             "prompts_sha256": prompts_sha256(
-                verbalization_template, PlansFile(PLANS).load(), sampler_config
+                verbalization_template, repository_plans, sampler_config
             ),
             "model": "claude-opus-5-5",
             "claude_code_version": "2.1.5",
             "generated_on": "2026-10-10",
-            "specification_commit": "c" * 40,
+            "specification_commit": COMMIT,
         },
         "audit_sha256": _sha256(root / RECORD_NAME),
     }
@@ -66,7 +65,7 @@ def test_provenance_refuses_empty_corpus(audit_files: AuditFiles) -> None:
 
 def test_provenance_refuses_unaudited_corpus(audit_files: AuditFiles) -> None:
     """Provenance vzniká až po čistém auditu."""
-    root = audit_files.audited_corpus({NOTE: "a short synthetic note"})
+    root = audit_files.audited_corpus(SHORT_NOTE)
     (root / RECORD_NAME).unlink()
 
     assert run(audit_files.provenance_argv(root)) == ExitCode.REFUSED
@@ -77,7 +76,7 @@ def test_provenance_refuses_corpus_changed_after_audit(
     audit_files: AuditFiles,
 ) -> None:
     """Korpus, který by neprošel bránou, provenance nedostane."""
-    root = audit_files.audited_corpus({NOTE: "a short synthetic note"})
+    root = audit_files.audited_corpus(SHORT_NOTE)
     (root / NOTE).write_text("a regenerated synthetic note", encoding="utf-8")
 
     assert run(audit_files.provenance_argv(root)) == ExitCode.REFUSED
@@ -96,7 +95,7 @@ def test_provenance_refuses_invalid_generation(
     audit_files: AuditFiles, name: str, value: str
 ) -> None:
     """Neplatný model, verze nebo commit se do záznamu nedostane."""
-    root = audit_files.audited_corpus({NOTE: "a short synthetic note"})
+    root = audit_files.audited_corpus(SHORT_NOTE)
 
     assert run(audit_files.provenance_argv(root, **{name: value})) == ExitCode.REFUSED
     assert not (root / PROVENANCE_NAME).exists()
@@ -104,7 +103,7 @@ def test_provenance_refuses_invalid_generation(
 
 def test_provenance_rejects_invalid_date(audit_files: AuditFiles) -> None:
     """Den mimo tvar RRRR-MM-DD odmítne už argparse."""
-    root = audit_files.audited_corpus({NOTE: "a short synthetic note"})
+    root = audit_files.audited_corpus(SHORT_NOTE)
 
     with pytest.raises(SystemExit):
         run(audit_files.provenance_argv(root, date="10. 10. 2026"))

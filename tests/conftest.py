@@ -6,7 +6,6 @@ import csv
 import gzip
 import json
 from dataclasses import dataclass
-from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
 import pytest
@@ -18,25 +17,26 @@ from mediparse.domain.note_structure import Sex
 from mediparse.entrypoints import corpus_audit, corpus_provenance
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.mimic_reference import MimicReference
-from mediparse.infrastructure.plans_file import PLANS_PATH
+from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.sampler_config import load_sampler_config
 from mediparse.infrastructure.verbalization_template import (
-    VERBALIZATION_TEMPLATE_PATH,
     load_verbalization_template,
+)
+from tests.support import (
+    COMMIT,
+    REPOSITORY_CONFIG,
+    REPOSITORY_PLANS,
+    REPOSITORY_TEMPLATE,
 )
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
+    from pathlib import Path
 
     from mediparse.domain.synthetic_plan import SamplerConfig
 
 type Rows = Sequence[tuple[str, str]]
 
-REPOSITORY_CONFIG: Final = Path(__file__).parents[1] / "config" / "synthetic_plan.json"
-REPOSITORY_TEMPLATE: Final = Path(__file__).parents[1] / VERBALIZATION_TEMPLATE_PATH
-REPOSITORY_PLANS: Final = Path(__file__).parents[1] / PLANS_PATH
-
-COMMIT: Final = "c" * 40
 HEADER: Final = (
     "note_id",
     "subject_id",
@@ -298,3 +298,13 @@ def verbalization_template() -> str:
         Text šablony načtený jednou za běh testů.
     """
     return load_verbalization_template(REPOSITORY_TEMPLATE)
+
+
+@pytest.fixture(scope="session")
+def repository_plans() -> tuple[NotePlan, ...]:
+    """Plány zpráv v repu.
+
+    Returns:
+        Plány načtené jednou za běh testů.
+    """
+    return PlansFile(REPOSITORY_PLANS).load()

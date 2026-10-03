@@ -15,18 +15,12 @@ from mediparse.infrastructure.synthetic_corpus import (
     RECORD_NAME,
     CorpusDirectory,
 )
+from tests.support import NOTE, SENTENCE, SHORT_NOTE
 
 if TYPE_CHECKING:
     from pathlib import Path
 
     from tests.conftest import AuditFiles, Rows
-
-SENTENCE = (
-    "the old lighthouse keeper counted seven gulls before the storm "
-    "reached the northern harbor wall"
-)
-NOTE = "en/90000001-DS-1.txt"
-SHORT_NOTE = {NOTE: "a short synthetic note"}
 
 
 def _audit(
@@ -190,7 +184,7 @@ def test_corpus_outside_repository_is_refused(
     """Bez repozitáře nejde ověřit, že report leží mimo něj."""
     root = tmp_path / "loose"
     (root / "en").mkdir(parents=True)
-    (root / NOTE).write_text("a short synthetic note", encoding="utf-8")
+    (root / NOTE).write_text(SHORT_NOTE[NOTE], encoding="utf-8")
     references = audit_files.pinned_references([("10000032", SENTENCE)])
 
     code = run(audit_files.audit_argv(root, references, tmp_path / "r.json"), {})
