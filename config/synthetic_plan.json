@@ -396,7 +396,8 @@
       "deid_per_word": 0.0347,
       "median_tolerance": 0.1,
       "sigma_tolerance": 0.1,
-      "deid_tolerance": 0.15
+      "deid_tolerance": 0.15,
+      "note_tolerance": 0.2
     },
     "female_probability": 0.513,
     "age_marker_probability": 0.5908

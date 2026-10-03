@@ -1,4 +1,4 @@
-"""Text syntetické zprávy: de-identifikační značka, sekce podle hlaviček na začátku řádku a věková značka."""
+"""Text syntetické zprávy: de-identifikační značka, sekce podle hlaviček na začátku řádku, věková značka a narativ."""
 
 from __future__ import annotations
 
@@ -7,6 +7,9 @@ from typing import TYPE_CHECKING, Final
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping
+
+    from mediparse.domain.note_plan import NotePlan
+    from mediparse.domain.note_structure import StructureModel
 
 DEID: Final = "___"
 AGE_SUFFIX: Final = r"[ -]?(?:years?[ -]old|y/?o)\b"
@@ -47,3 +50,22 @@ def segment(text: str, headers: Mapping[str, str]) -> tuple[str, Sections]:
         for match, end in zip(matches, ends, strict=True)
     )
     return text[: matches[0].start()] if matches else text, sections
+
+
+def narrative(
+    sections: Sections, plan: NotePlan, structure: StructureModel
+) -> tuple[int, int]:
+    """Změří narativ: těla sekcí s délkou v plánu bez podnadpisů.
+
+    Returns:
+        Počet slov narativu a počet narativních značek bez věkové značky.
+    """
+    subheadings = line_headers(
+        subheading.header for _, subheading in structure.subheadings
+    )
+    bodies = [
+        subheadings.sub("", body) for key, body in sections if key in plan.section_words
+    ]
+    words = sum(len(body.split()) for body in bodies)
+    marks = sum(body.count(DEID) - len(AGE_MARKER.findall(body)) for body in bodies)
+    return words, marks

@@ -8,10 +8,9 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from mediparse.domain.labels import label_shares, prevalence_outliers
-from mediparse.domain.note_text import AGE_MARKER, DEID, line_headers, segment
+from mediparse.domain.note_text import narrative, segment
 
 if TYPE_CHECKING:
-    import re
     from collections.abc import Mapping, Sequence
 
     from mediparse.domain.labels import Diagnosis, LabelModel
@@ -60,12 +59,9 @@ def corpus_statistics(
         Medián a směrodatnou odchylku logaritmu délky narativu ve slovech, hustotu
         narativních značek bez věkové značky a podíl zpráv s každým labelem.
     """
-    subheadings = line_headers(
-        subheading.header for _, subheading in structure.subheadings
-    )
     words, marks = zip(
         *(
-            _narrative(plan, text, structure.headers, subheadings)
+            narrative(segment(text, structure.headers)[1], plan, structure)
             for plan, text in notes
         ),
         strict=True,
@@ -115,18 +111,3 @@ def statistics_violations(
         for diagnosis in prevalence_outliers(measured.prevalence, labels)
     )
     return tuple(violations)
-
-
-def _narrative(
-    plan: NotePlan,
-    text: str,
-    headers: Mapping[str, str],
-    subheadings: re.Pattern[str],
-) -> tuple[int, int]:
-    _, sections = segment(text, headers)
-    bodies = [
-        subheadings.sub("", body) for key, body in sections if key in plan.section_words
-    ]
-    words = sum(len(body.split()) for body in bodies)
-    marks = sum(body.count(DEID) - len(AGE_MARKER.findall(body)) for body in bodies)
-    return words, marks
