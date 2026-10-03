@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and low urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented after several days of worsening leg swelling, poor appetite and reduced urine output, sent by her ___ clinic. Labs showed creatinine far above her baseline. She was admitted on ___ for volume overload and close monitoring.
+
+Past Medical History:
+Chronic kidney disease, followed at ___
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals:
+BP 148/86, HR 78, afebrile, SpO2 95% on room air
+General:
+Comfortable, no distress
+HEENT:
+Moist mucous membranes
+CARDIAC:
+Regular rhythm, soft systolic murmur
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Creatinine 3.4 on arrival, down to 2.1 by discharge. Potassium 5.3, corrected with treatment. BNP elevated. Urinalysis bland. Repeat labs at ___ were stable.
+IMPRESSION:
+Mild pulmonary vascular congestion, no focal consolidation.
+
+Brief Hospital Course:
+Creatinine improved with holding of home diuretic and ACE inhibitor, then careful reintroduction of diuretic once volume status was reassessed. Known heart failure remained compensated, with weight falling steadily. Potassium normalized. Per ___, kidney function will be rechecked, and she was stable for discharge on ___.
+
+Medications on Admission:
+Lisinopril, furosemide, atorvastatin, insulin glargine
+
+Discharge Medications:
+Furosemide 40 mg daily. Atorvastatin 20 mg nightly. Insulin glargine at prior dose. Lisinopril held until kidney labs are rechecked as an outpatient.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic kidney disease
+Heart failure
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+
+Discharge Instructions:
+You were hospitalized because your kidney function worsened and fluid built up. Weigh yourself every morning and call ___ if gain exceeds three pounds. Avoid ibuprofen. Do not restart lisinopril until told to.
+
+Followup Instructions:
+___

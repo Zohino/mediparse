@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Vomiting and low urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension, sent from ___ after three days of vomiting, poor oral intake and little urine. Labs showed acute kidney injury with creatinine far above baseline. He received intravenous fluids and kidney function improved. Transferred here for monitoring from ___.
+REVIEW OF SYSTEMS:
+Positive as above, otherwise negative.
+
+Past Medical History:
+Hypertension
+Gout, last flare in ___
+No diabetes
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: afebrile, heart rate 96, blood pressure 104/62
+General: dry mouth, comfortable
+Lungs: clear
+Abdomen: soft, nontender
+EXTREMITIES: no edema
+PULSES: palpable
+
+Pertinent Results:
+Creatinine 3.1 on admission, 1.4 at discharge. Potassium 5.2, normalized after fluids. Urinalysis bland. Sodium and bicarbonate mildly low at first, then normal. Blood tests were drawn at ___ on the day before discharge and showed steady recovery.
+IMPRESSION:
+Renal ultrasound without hydronephrosis.
+
+Medications on Admission:
+Lisinopril 20 mg daily
+Allopurinol 100 mg daily
+Ibuprofen as needed
+
+Discharge Medications:
+1. Allopurinol 100 mg once daily
+2. Amlodipine 5 mg once daily
+3. Acetaminophen 500 mg as needed for pain
+Stop lisinopril and ibuprofen until reviewed by ___.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Condition:
+Good
+Level of Consciousness: alert and interactive
+Activity Status: walks independently
+
+Discharge Instructions:
+You were hospitalized for dehydration that injured your kidneys. Drink fluids regularly, avoid anti-inflammatory pain medicines, and take medicines as listed. Call ___ for fever, vomiting or low urine output. Repeat blood tests at ___ in one week.
+
+Followup Instructions:
+___

@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Palpitations and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with atrial fibrillation on anticoagulation, transferred from ___ after three days of worsening dyspnea and palpitations since ___. She denies chest pain and has no heart failure history.
+REVIEW OF SYSTEMS:
+Positive for fatigue. Negative for fever, cough, or leg swelling.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Followed by Dr. ___ for thyroid disease
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+Gen: Comfortable, no distress
+Lungs: Clear bilaterally
+CARDIAC: Irregular rhythm, no murmur
+Abdomen: Soft, nontender
+Ext: Warm, no edema
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Troponin negative twice. TSH normal. Potassium 4.1, creatinine at baseline. ECG on ___ showed a rapid irregular rhythm without ischemic changes.
+IMAGING:
+Chest radiograph showed clear lungs and normal heart size.
+
+Brief Hospital Course:
+She was admitted for rate control and given oral metoprolol with good response; heart rate settled below 100. Electrolytes were repleted. Anticoagulation was continued. Her plan was reviewed with Dr. ___ and she walked unassisted before discharge.
+
+Medications on Admission:
+Metoprolol 25 mg daily
+Apixaban 5 mg twice daily
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg by mouth daily
+2. Apixaban 5 mg by mouth twice daily
+3. Levothyroxine 75 mcg by mouth daily
+4. Lisinopril 10 mg by mouth daily
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Rapid ventricular response
+Secondary:
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Stable
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were admitted with a fast heartbeat that improved with medication. Take your medicines as prescribed and do not skip apixaban. Return for chest pain, fainting, or worsening breathlessness. Call ___ with questions.
+
+Followup Instructions:
+___

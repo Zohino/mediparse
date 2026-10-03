@@ -1,0 +1,61 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain with nausea
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with three days of worsening upper abdominal pain and vomiting, first seen at ___ and then transferred to ___ for further evaluation and imaging.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+No history of congestive heart failure
+
+Family History:
+Father with coronary disease
+
+Physical Exam:
+Gen: Comfortable, no distress.
+HEENT: Moist mucous membranes.
+Neck: Supple.
+Abdomen: Soft, mild epigastric tenderness.
+
+Pertinent Results:
+IMAGING: Abdominal ultrasound performed at ___ showed gallstones.
+FINDINGS: Thickened gallbladder wall with small stones, no biliary dilation, normal liver echotexture.
+
+Brief Hospital Course:
+He was admitted, given intravenous fluids, antiemetics and antibiotics for cholecystitis. Pain improved with bowel rest and diet was advanced. Surgery recommended elective cholecystectomy, to be arranged as an outpatient at ___.
+
+Medications on Admission:
+Lisinopril and atorvastatin daily
+
+Discharge Medications:
+Continue lisinopril and atorvastatin. Take amoxicillin-clavulanate twice daily for five days. Acetaminophen as needed for pain.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+Return for fever, worsening pain, persistent vomiting or yellow skin. Avoid fatty meals until your surgical visit at ___. Finish all antibiotics as prescribed.
+
+Followup Instructions:
+___

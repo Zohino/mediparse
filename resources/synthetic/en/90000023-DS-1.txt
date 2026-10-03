@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Vomiting and decreased urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with chronic kidney disease presented from ___ with several days of poor oral intake, vomiting and low urine output, found to have rising creatinine and potassium, noted on labs drawn at ___.
+
+Past Medical History:
+Hypertension
+Atrial fibrillation
+Hyperlipidemia
+
+Past Surgical History:
+Cholecystectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Dry mucous membranes.
+PULM: Clear.
+CARDIAC: Irregularly irregular rhythm.
+ABD: Soft, nontender.
+EXTREMITIES: No edema.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+Creatinine 3.1 on admission, baseline near 1.8, improving to 2.0 at discharge. Potassium 5.9 corrected to 4.4. Bicarbonate 18. Urinalysis bland. Renal ultrasound without hydronephrosis. Glucose elevated. ECG showed irregular rhythm.
+
+Brief Hospital Course:
+Treated with intravenous fluids and holding of nephrotoxic and diuretic medications, with creatinine returning toward baseline. Hyperkalemia resolved with medical therapy. Rate control continued and anticoagulation resumed. Glucose managed with insulin. Seen by ___ and discharged to ___ in stable condition.
+
+Medications on Admission:
+Metoprolol, apixaban, lisinopril, furosemide, metformin
+
+Discharge Medications:
+Metoprolol succinate daily, apixaban twice daily, insulin glargine at bedtime. Lisinopril, furosemide and metformin are stopped until follow-up labs are reviewed.
+
+Discharge Disposition:
+Home with services
+Facility: ___
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic kidney disease
+Atrial fibrillation
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized because of dehydration and abnormal blood tests. Drink fluids regularly, avoid anti-inflammatory pain medicines, and have blood work repeated at ___ within one week.
+
+Followup Instructions:
+___

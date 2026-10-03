@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension presented with three days of productive cough, fever and shortness of breath. He denies diabetes. He was evaluated at ___ and sent to the emergency department on ___, where chest imaging showed right lower lobe consolidation.
+
+Past Medical History:
+Hypertension, followed by Dr. ___
+Hyperlipidemia
+
+Family History:
+Non-contributory
+
+Physical Exam:
+General: Mildly ill appearing, comfortable on room air.
+Neck: Supple.
+Abdomen: Soft, nontender.
+EXTREMITIES: No edema.
+SKIN: Warm, dry.
+Neuro: Alert, nonfocal.
+PULSES: Palpable bilaterally.
+
+Pertinent Results:
+Admission labs: white count elevated at 14.2, lactate 1.8, creatinine 0.9. Chest radiograph showed right lower lobe consolidation without effusion. Blood cultures showed no growth at ___ days. Repeat chest radiograph on ___ showed early improvement of the consolidation.
+
+Brief Hospital Course:
+Treated for community acquired pneumonia with ceftriaxone and azithromycin, then changed to oral antibiotics once afebrile. Oxygen was weaned off by day two. Blood pressure remained controlled on home therapy. Discharged in stable condition after review by the team at ___ with plans to complete the ___ antibiotic course.
+TRANSITIONAL ISSUES:
+Repeat chest imaging in six weeks to confirm resolution.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg twice daily for five more days
+2. Lisinopril 10 mg daily
+3. Atorvastatin 20 mg nightly
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized with pneumonia and improved with antibiotics. Finish the full antibiotic course, rest, and drink plenty of fluids. Return for worsening shortness of breath, high fever, chest pain, or confusion. Follow up with your primary doctor at ___.
+
+Followup Instructions:
+___

@@ -1,0 +1,79 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillin rash (mild)
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman transferred from ___ after three days of worsening cough, fever and shortness of breath. She reported poor appetite and fatigue since ___. In the emergency department she was febrile and hypoxic, and chest imaging suggested pneumonia, so she was admitted for treatment.
+
+Past Medical History:
+Hypertension
+Chronic kidney disease
+Anemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals:
+T 38.1 HR 98 BP 132/74 RR 22 SpO2 91% on room air
+General:
+Tired, mildly dyspneic
+HEENT:
+Moist mucous membranes
+Lungs:
+Crackles at right base
+ABD:
+Soft, nontender
+EXTREMITIES:
+No edema
+
+Pertinent Results:
+Labs on admission: WBC 14.2, creatinine 1.8 near baseline, lactate 1.6, sodium 136, potassium 4.4, bicarbonate 22. Blood cultures showed no growth at five days.
+IMAGING:
+Chest radiograph on ___ showed right lower lobe consolidation without effusion. Repeat film showed partial improvement.
+
+Brief Hospital Course:
+She was treated for community acquired pneumonia with ceftriaxone and azithromycin, then changed to oral antibiotics once afebrile. Oxygen was weaned to room air by ___. Renal function stayed stable with careful dosing. The ___ team agreed with the plan. She went home in stable condition.
+TRANSITIONAL ISSUES:
+- Repeat chest radiograph in six weeks.
+- Recheck creatinine at the primary care visit with Dr. ___.
+
+Medications on Admission:
+Amlodipine 5 mg daily. Calcium acetate with meals. Aspirin 81 mg daily.
+
+Discharge Medications:
+Amoxicillin-clavulanate 875 mg twice daily for four more days. Amlodipine 5 mg daily. Calcium acetate with meals. Aspirin 81 mg daily. Acetaminophen as needed for fever.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypoxia
+
+Discharge Condition:
+Stable, improved.
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake and interactive
+
+Discharge Instructions:
+You were treated for pneumonia. Finish all antibiotics, drink fluids and rest. Avoid anti-inflammatory pain medicines because of your kidneys. Return for fever, worsening breathlessness or chest pain. Call ___ with any questions.
+
+Followup Instructions:
+___

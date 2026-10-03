@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old woman with three days of right upper quadrant pain and nausea, sent from ___ clinic. Ultrasound suggested gallbladder inflammation, so she was admitted for surgical evaluation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Cesarean section
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Anicteric sclerae
+Abdomen:
+Soft, mild tenderness, incisions clean
+SKIN:
+Warm, dry
+
+Pertinent Results:
+DISCHARGE LABS:
+WBC 8.1, hemoglobin 12.9, creatinine 0.7, normal liver enzymes
+IMPRESSION:
+Gallstones with thickened gallbladder wall, no bile duct dilation
+
+Brief Hospital Course:
+She underwent uncomplicated laparoscopic cholecystectomy at ___. Pain was controlled with oral medication, she tolerated a regular diet, and she was ambulating independently. Pathology was pending at discharge, to be reviewed by ___.
+
+Medications on Admission:
+Lisinopril, atorvastatin daily
+
+Discharge Medications:
+Continue lisinopril and atorvastatin. Take acetaminophen as needed for pain. Use oxycodone sparingly for severe pain only. Take docusate while on opioids.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary:
+Acute cholecystitis
+Secondary:
+Hypertension, hyperlipidemia
+
+Discharge Condition:
+Stable
+Level of Consciousness:
+Alert and awake
+Activity Status:
+Walks without help
+
+Discharge Instructions:
+You may shower, but do not soak incisions. Avoid lifting over ten pounds for four weeks. Call ___ for fever, worsening pain, vomiting, or yellow skin. Follow up with ___.

@@ -1,0 +1,81 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right flank pain and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with three days of fever and flank pain, sent in from ___ clinic.
+REVIEW OF SYSTEMS:
+Positive for chills and dysuria. Otherwise negative.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Recurrent urinary tract infections
+
+Past Surgical History:
+Appendectomy
+
+Social History:
+___
+
+Family History:
+Mother with hypertension.
+
+Physical Exam:
+Afebrile, comfortable, right costovertebral tenderness.
+HEENT:
+Moist mucous membranes
+CARDIAC:
+Regular rhythm
+Ext:
+No edema
+SKIN:
+Warm, dry
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Urinalysis with many white cells and bacteria. Urine culture grew E. coli. White count mildly elevated.
+IMAGING:
+CT showed right perinephric stranding without obstruction.
+
+Brief Hospital Course:
+She was treated for acute pyelonephritis with intravenous ceftriaxone and fluids. Fever resolved within two days and pain improved. Cultures were sensitive, so she was changed to oral antibiotics before ___ discharge.
+
+Medications on Admission:
+Lisinopril
+Levothyroxine
+
+Discharge Medications:
+Ciprofloxacin twice daily for seven days. Continue lisinopril and levothyroxine as before admission.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary:
+Acute pyelonephritis
+
+Discharge Condition:
+Good.
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+
+Discharge Instructions:
+You were treated for a kidney infection. Finish all antibiotics, drink plenty of fluids, and return for fever, vomiting, or worsening pain. Call ___ with questions.
+
+Followup Instructions:
+___

@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: General Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+___ year old man transferred from ___ with three days of right lower quadrant pain, nausea and low grade fever, starting ___. Pain was constant and worse with movement. No vomiting or change in bowel habits.
+REVIEW OF SYSTEMS:
+Positive for poor appetite. Negative for chest pain, dyspnea, dysuria.
+
+Past Medical History:
+Hypertension
+Hernia repair in ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension, followed at ___
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Tender right lower quadrant.
+Vitals: T 100.4 HR 92 BP 128/76
+HEENT: anicteric
+Neck: supple
+EXTREMITIES: no edema
+SKIN: warm, dry
+PULSES: palpable throughout
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 13.2, hemoglobin 14.1, creatinine 0.9, lactate 1.1.
+IMPRESSION:
+CT at ___ showed a dilated, inflamed appendix without perforation or abscess.
+
+Brief Hospital Course:
+Admitted with acute appendicitis, started on IV antibiotics and taken to the operating room for an uncomplicated laparoscopic appendectomy. Recovery was smooth; diet was advanced and pain controlled with oral medication. Plan was discussed with ___ before discharge. He was afebrile and tolerating food by discharge on ___.
+TRANSITIONAL ISSUES:
+Wound check at followup.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth daily
+2. Acetaminophen 650 mg every six hours as needed for pain
+3. Docusate 100 mg twice daily while taking opioids
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis
+Hypertension
+
+Discharge Condition:
+Mental Status: clear and coherent
+Level of Consciousness: alert and interactive
+Activity Status: ambulatory, independent
+
+Discharge Instructions:
+You were treated for appendicitis with surgery. Keep incisions clean and dry, and avoid lifting more than ten pounds for four weeks. Call ___ or return to the emergency department at ___ for fever, worsening pain, vomiting or wound redness.
+
+Followup Instructions:
+___

@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs
+
+Chief Complaint:
+Weakness and poor appetite
+
+Major Surgical or Invasive Procedure:
+None; peripheral IV placed at ___
+
+History of Present Illness:
+Woman sent from ___ clinic after several days of fatigue, nausea and reduced oral intake. She reported mild dizziness on standing. No chest pain, fever or cough. Labs prompted admission.
+
+Past Medical History:
+Diabetes mellitus on oral therapy
+Hypertension
+No atrial fibrillation on prior monitoring
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Father with stroke.
+
+Physical Exam:
+Tired but comfortable, vitals stable.
+HEENT: Dry mucous membranes.
+ABD: Soft, nontender.
+Neuro: Alert, no focal deficits.
+
+Pertinent Results:
+Sodium low-normal, potassium mildly elevated. Creatinine above her usual level, improving by discharge. Glucose acceptable. Chest film clear. ECG showed sinus rhythm.
+
+Brief Hospital Course:
+She received gentle IV fluids and antiemetics with steady improvement in appetite and energy. Home medications were reviewed by ___ and adjusted. Labs were rechecked daily and trended favorably. She walked independently and was cleared by ___ for discharge.
+
+Medications on Admission:
+Metformin, lisinopril, levothyroxine, amlodipine
+
+Discharge Medications:
+Levothyroxine daily, amlodipine daily, glipizide with breakfast. Hold lisinopril until follow-up labs are reviewed. Acetaminophen as needed for discomfort.
+
+Discharge Disposition:
+Home with services
+Facility: ___
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic kidney disease
+
+Discharge Condition:
+Stable and improved.
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were admitted with weakness and poor intake. Drink fluids regularly, eat small frequent meals, and take medications as listed. Return for vomiting, fainting or confusion. Call ___ with questions.
+
+Followup Instructions:
+___

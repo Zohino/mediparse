@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever and cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with asthma presented to ___ after three days of fever, productive cough and shortness of breath. Chest radiograph showed right lower lobe consolidation. He was started on antibiotics and admitted to the medicine service for oxygen and monitoring.
+
+Past Medical History:
+Asthma
+Hypertension
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+General:
+Mildly ill, comfortable at rest
+HEENT:
+Moist mucous membranes
+Neck:
+Supple
+PULM:
+Right basilar crackles
+CARDIAC:
+Regular rhythm, no murmur
+SKIN:
+Warm, dry
+PULSES:
+Palpable and symmetric
+
+Pertinent Results:
+White count 14.2 on admission, falling to 8.1 at discharge. Chest radiograph showed right lower lobe pneumonia. Blood cultures from ___ showed no growth. Creatinine and electrolytes were within normal limits throughout the stay.
+
+Brief Hospital Course:
+He was treated for community acquired pneumonia with ceftriaxone and azithromycin, then switched to oral antibiotics. Oxygen was weaned to room air by day three. His asthma remained quiet on inhalers. Fevers resolved and he walked without desaturation. He was discharged home in stable condition after review at ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Albuterol inhaler as needed
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg twice daily for five more days
+2. Lisinopril 10 mg daily
+3. Albuterol inhaler two puffs every four hours as needed
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Asthma
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Fully awake
+Activity Status:
+Walks independently
+
+Discharge Instructions:
+You were treated for pneumonia. Finish the full antibiotic course and rest while drinking plenty of fluids. Return for fever, worsening breathlessness or chest pain. Call the clinic at ___ with questions and keep your follow up visit at ___.
+
+Followup Instructions:
+___

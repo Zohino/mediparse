@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with several weeks of worsening exertional dyspnea and bilateral leg swelling, referred by his clinic at ___ after weight gain. Symptoms worsened over the past days, prompting presentation to ___ emergency department.
+REVIEW OF SYSTEMS:
+Positive for orthopnea and fatigue. No chest pain or fever.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Prior hospitalization at ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+General: Comfortable, mildly dyspneic at rest
+HEENT: Elevated jugular venous pressure
+ABD: Soft, nontender
+EXTREMITIES: Pitting edema to the knees
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Admission labs notable for elevated BNP and creatinine above baseline. Chest radiograph showed pulmonary vascular congestion with small effusions. Echocardiogram performed at ___ showed reduced ejection fraction.
+
+Brief Hospital Course:
+Treated with intravenous diuretics with good urine output and gradual resolution of edema. Creatinine stayed stable given his chronic kidney disease. Medications were adjusted in consultation with ___. Weight and symptoms improved, and he was discharged home with ___ follow-up arranged.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+Metoprolol daily
+
+Discharge Medications:
+Furosemide 40 mg by mouth daily
+Lisinopril daily, unchanged
+Atorvastatin nightly, unchanged
+Metoprolol succinate daily, dose increased
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes
+Heart failure
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for fluid buildup. Weigh yourself every morning and call your doctor at ___ if you gain more than three pounds in a day. Limit salt intake, take medications as prescribed, and keep all follow-up appointments.
+
+Followup Instructions:
+___

@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath and leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman sent from ___ with a week of worsening breathlessness, orthopnea and swollen legs after missing doses at home. Seen at ___ and transferred here.
+
+Past Medical History:
+Heart failure
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+HEENT: Moist mucous membranes
+CARDIAC: Regular rhythm, soft murmur
+ABD: Soft, nontender
+Ext: Mild bilateral edema
+SKIN: Warm, dry
+
+Pertinent Results:
+Chest film showed pulmonary vascular congestion. BNP elevated. Creatinine stable near baseline. Glucose elevated on several checks. Potassium normal. Echo reviewed.
+
+Brief Hospital Course:
+Treated with intravenous diuretic until near euvolemic, then switched to oral dosing. Breathing improved, weight fell steadily. Sugars managed with insulin sliding scale. Seen by cardiology on ___. Stable for discharge.
+
+Medications on Admission:
+Furosemide
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+Furosemide 40 mg daily
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Insulin glargine at bedtime
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute on chronic heart failure
+Diabetes mellitus
+
+Discharge Condition:
+Stable, improved
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were admitted with fluid overload. Weigh yourself each morning and call ___ if weight rises by three pounds. Limit salt and fluids, take medicines as prescribed, and keep your appointment at ___.
+
+Followup Instructions:
+___

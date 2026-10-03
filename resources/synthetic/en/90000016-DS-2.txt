@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman sent from ___ clinic with three days of productive cough, fever and fatigue, found hypoxic on arrival.
+
+Past Medical History:
+Diabetes mellitus type 2
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+Gen:
+Tired, no distress
+HEENT:
+Dry mucosa
+Lungs:
+Right basilar crackles
+ABD:
+Soft, nontender
+
+Pertinent Results:
+ADMISSION LABS:
+WBC elevated, lactate normal, glucose mildly high.
+IMPRESSION:
+Right lower lobe consolidation, no effusion ___.
+
+Brief Hospital Course:
+Treated for community acquired pneumonia with ceftriaxone and azithromycin, weaned off oxygen by day three. Home medications resumed. Seen by ___ and cleared for discharge home.
+
+Medications on Admission:
+Metformin, lisinopril, atorvastatin
+
+Discharge Medications:
+Continue metformin, lisinopril and atorvastatin. Take amoxicillin-clavulanate twice daily for four more days.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Diabetes mellitus
+Secondary:
+Hypertension
+
+Discharge Condition:
+Stable
+Level of Consciousness:
+Alert and oriented
+Activity Status:
+Walks independently
+
+Discharge Instructions:
+You were treated for pneumonia. Finish all antibiotics, drink fluids, rest, and return for worsening breathlessness, fever or chest pain. Call ___ with questions.
+
+Followup Instructions:
+___

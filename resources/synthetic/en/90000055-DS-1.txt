@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with hypertension and hypothyroidism presented to ___ with three days of productive cough, fever and mild dyspnea. She was evaluated by Dr. ___ in clinic, found hypoxic at rest, and sent to the emergency department.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals: T 38.1, HR 96, BP 128/74, SpO2 93% on room air
+General: Mildly ill, comfortable
+HEENT: Moist mucosa
+Lungs: Right basilar crackles
+Abdomen: Soft, nontender
+EXTREMITIES: No edema
+Neuro: Nonfocal
+
+Pertinent Results:
+ADMISSION LABS: WBC 13.2, creatinine at baseline, lactate 1.1, procalcitonin elevated.
+IMAGING: Chest radiograph at ___ showed right lower lobe consolidation without effusion. ECG showed sinus rhythm without acute changes.
+
+Brief Hospital Course:
+Treated for community-acquired pneumonia with ceftriaxone and azithromycin, then switched to oral antibiotics once afebrile. Oxygen was weaned to room air by hospital day three. She was seen by ___ for mobility assessment and discharged home with services arranged through ___.
+TRANSITIONAL ISSUES:
+- Repeat chest imaging in six weeks
+- Recheck chemistry panel at follow-up
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 75 mcg daily
+
+Discharge Medications:
+Levothyroxine 75 mcg daily
+Lisinopril 10 mg daily
+Amoxicillin-clavulanate 875 mg twice daily for five days
+Acetaminophen as needed for fever
+
+Discharge Disposition:
+Home with services
+
+Discharge Diagnosis:
+Chronic kidney disease
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were treated for pneumonia. Finish all of your antibiotics, drink plenty of fluids and rest. Call ___ or return to the hospital for worsening breathlessness, high fever or chest pain.
+
+Followup Instructions:
+___

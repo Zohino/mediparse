@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies.
+
+Chief Complaint:
+Abdominal pain and vomiting.
+
+Major Surgical or Invasive Procedure:
+None.
+
+History of Present Illness:
+Patient presented to ___ with two days of worsening epigastric pain, nausea and repeated vomiting. She was seen at ___ the day before by her primary physician, Dr. ___, who sent her onward after finding an elevated glucose on a point-of-care check. In the emergency department she was afebrile and mildly tachycardic. Lipase was elevated and imaging showed gallstones with gallbladder wall thickening. Possible new diabetes was raised given the glucose readings, with hemoglobin A1c pending. She received fluids, antiemetics and analgesia and was admitted to ___ for further management.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity
+
+Social History:
+___
+
+Family History:
+Mother with gallstones. Father with hypertension.
+
+Physical Exam:
+Gen: Comfortable, no acute distress, mildly uncomfortable on palpation.
+PULM: Clear to auscultation bilaterally.
+CARDIAC: Regular rate and rhythm, no murmurs.
+ABD: Soft, tender in the right upper quadrant, nondistended, no rebound.
+Neuro: Alert, oriented, nonfocal.
+
+Pertinent Results:
+Admission labs notable for elevated lipase, mild leukocytosis and mildly raised transaminases. Glucose elevated on arrival. Ultrasound of the right upper quadrant showed cholelithiasis with gallbladder wall thickening and no ductal dilation. Imaging read by Dr. ___ at ___. MRCP on ___ showed no common duct stones. Hemoglobin A1c was sent to ___ laboratory.
+DISCHARGE LABS:
+WBC 8.1, Hgb 12.4, Plt 245, Na 139, K 4.1, Cr 0.8, ALT 48, AST 39, lipase 62.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Multivitamin daily. Ibuprofen as needed for headaches, taken with food.
+
+Discharge Medications:
+1. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+2. Ondansetron 4 mg by mouth every eight hours as needed for nausea.
+3. Lisinopril 10 mg by mouth daily.
+4. Atorvastatin 20 mg by mouth nightly.
+5. Multivitamin one tablet daily.
+6. Oxycodone 5 mg every six hours as needed, supplied by ___ pharmacy.
+Stop ibuprofen until seen by ___.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute gallstone pancreatitis
+Cholelithiasis
+
+Discharge Condition:
+Good.
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized with pancreatitis caused by gallstones. Eat a low-fat diet and drink plenty of fluids. Take medications as prescribed. Call your surgeon, Dr. ___, to arrange gallbladder removal at ___. Return for fever, severe belly pain, persistent vomiting or yellow skin. Your discharge paperwork was reviewed with you by ___ before you left.
+
+Followup Instructions:
+___

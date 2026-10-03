@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Cardiology
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with known atrial fibrillation sent from ___ after three days of palpitations, fatigue and leg swelling. Heart rate was 140s on arrival. He missed his rate control pills since ___ because of a pharmacy delay.
+
+Past Medical History:
+Hypertension
+Obesity
+Hyperlipidemia
+Neuropathy
+Reduced ejection fraction
+Insulin-requiring hyperglycemia
+
+Social History:
+___
+
+Family History:
+Father with early coronary disease
+
+Physical Exam:
+Gen:
+Tired, comfortable at rest
+HEENT:
+Moist mucous membranes
+Neck:
+JVP elevated
+CARDIAC:
+Irregular, tachycardic
+ABD:
+Soft, nontender
+Ext:
+2+ pitting edema to knees
+SKIN:
+Warm, no rash
+
+Pertinent Results:
+Admission labs on ___ showed glucose 286, hemoglobin A1c 9.1, potassium 3.3, creatinine 1.6 (baseline 1.4), BNP 1,850. Chest x-ray: vascular congestion, small effusions. Echo: ejection fraction 30 percent, dilated left atrium.
+
+Brief Hospital Course:
+Treated with intravenous diuresis, net negative several liters, and weight fell steadily. Rate controlled with metoprolol and later digoxin. Potassium repleted. Insulin adjusted with input from the ___ team and nutrition. Anticoagulation continued. Seen by Dr. ___ before discharge, euvolemic with heart rate in the 80s.
+
+Medications on Admission:
+Metoprolol, metformin, lisinopril, atorvastatin, apixaban
+
+Discharge Medications:
+1. Metoprolol succinate 100 mg daily
+2. Furosemide 40 mg daily
+3. Apixaban 5 mg twice daily
+4. Insulin glargine 20 units nightly
+5. Atorvastatin 40 mg daily
+6. Lisinopril 10 mg daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Rapid ventricular rate
+Volume overload
+Hypokalemia
+Hyperglycemia
+
+Discharge Condition:
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with a fast heartbeat and fluid buildup. Weigh yourself every morning and call ___ if you gain more than three pounds. Take all medicines daily. Keep your follow up with the ___ clinic.

@@ -1,0 +1,64 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman presenting with three days of cough and fever, first seen at ___. She had no AKI on arrival labs, per team.
+REVIEW OF SYSTEMS:
+Positive for chills. Otherwise negative.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Family History:
+Mother with hypertension
+
+Pertinent Results:
+Chest film showed right lower lobe consolidation. White count mildly elevated, improving daily.
+DISCHARGE LABS:
+WBC 8.1, creatinine 0.8, sodium 139
+
+Brief Hospital Course:
+Treated for pneumonia with antibiotics and oxygen, weaned to room air by day three. Glucose monitored and controlled. Evaluated by ___ before discharge, tolerating diet.
+
+Medications on Admission:
+Lisinopril, atorvastatin, metformin
+
+Discharge Medications:
+1. Amoxicillin-clavulanate twice daily for five more days
+2. Lisinopril daily
+3. Atorvastatin nightly
+4. Metformin with meals
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Diabetes mellitus
+Secondary:
+Hypertension
+
+Discharge Condition:
+Stable
+Mental Status:
+Alert and oriented, clear thinking.
+Activity Status:
+Walks independently.
+
+Discharge Instructions:
+You were treated for pneumonia. Finish all antibiotics, rest, drink fluids, and call ___ for fever or worsening breathing.
+
+Followup Instructions:
+___

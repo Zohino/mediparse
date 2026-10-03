@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower quadrant pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with two days of worsening right-sided abdominal pain and nausea, seen at ___ and transferred from ___ for evaluation.
+
+Past Medical History:
+Hypertension
+Possible diabetes mellitus, suspected on outpatient screening
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+Gen:
+Comfortable, no distress
+HEENT:
+Moist mucosa
+ABD:
+Mild right lower tenderness
+SKIN:
+Warm, dry
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Mildly elevated white count, normal lipase and liver tests.
+IMPRESSION:
+Findings consistent with early appendicitis, no perforation or abscess seen on scan.
+
+Brief Hospital Course:
+Treated with intravenous antibiotics and fluids, pain controlled, diet advanced. Surgery team at ___ recommended outpatient follow up. Tolerated oral intake and remained afebrile.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+Lisinopril daily, atorvastatin nightly, amoxicillin-clavulanate twice daily for seven days, acetaminophen as needed for pain.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Early appendicitis
+
+Discharge Condition:
+Stable
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+Take antibiotics as prescribed. Return for fever, worsening abdominal pain or vomiting. Call ___ with questions.
+
+Followup Instructions:
+___

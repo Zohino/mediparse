@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath and leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with known heart failure presenting with two weeks of worsening dyspnea, orthopnea and bilateral leg swelling, sent in from ___ clinic after weight gain.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Coronary artery disease
+
+Social History:
+___
+
+Family History:
+Father with myocardial infarction
+
+Physical Exam:
+Gen: Tired, mild distress
+HEENT: Moist mucous membranes
+Neck: JVP elevated
+Lungs: Bibasilar crackles
+ABD: Soft, nontender
+EXTREMITIES: 2+ edema to knees
+
+Pertinent Results:
+Admission labs on ___ showed elevated BNP and creatinine above baseline. Troponin flat. Chest film with pulmonary vascular congestion and small effusions.
+IMPRESSION: Mild pulmonary edema, no pneumonia.
+
+Brief Hospital Course:
+Treated with intravenous furosemide, with good urine output and gradual weight loss. Creatinine rose during diuresis and improved after doses were reduced. Cardiology from ___ advised adjusting his regimen. Transitioned to oral diuretic and walked independently by ___.
+
+Medications on Admission:
+Lisinopril, metoprolol, atorvastatin, aspirin
+
+Discharge Medications:
+1. Furosemide 40 mg by mouth daily
+2. Metoprolol succinate 50 mg daily
+3. Atorvastatin 40 mg nightly
+4. Aspirin 81 mg daily
+5. Hold lisinopril until clinic review
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Heart failure
+Acute kidney injury
+
+Discharge Condition:
+Stable
+Mental Status: Clear and coherent
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were admitted with fluid overload and treated with diuretics. Weigh yourself every morning, limit salt, and take your medicines as listed. Call Dr. ___ if weight rises by three pounds or breathing worsens.
+
+Followup Instructions:
+___

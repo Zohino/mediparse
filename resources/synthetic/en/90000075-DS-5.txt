@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath and leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with diabetes mellitus presented after ___ days of worsening shortness of breath and leg swelling. She was seen at ___ and sent to the emergency department for evaluation and admission.
+
+Past Medical History:
+Heart failure
+Chronic kidney disease
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension; father deceased from ___.
+
+Physical Exam:
+Gen: Comfortable, no distress.
+HEENT: Normal.
+Neck: Supple.
+Abdomen: Soft, nontender.
+EXTREMITIES: Mild edema.
+SKIN: Warm, dry.
+PULSES: Palpable.
+
+Pertinent Results:
+FINDINGS: Chest radiograph showed mild pulmonary vascular congestion without focal consolidation. Creatinine was at baseline. Potassium and sodium were within normal limits. Echocardiogram performed at ___ showed preserved ejection fraction. Hemoglobin was stable throughout admission.
+
+Brief Hospital Course:
+She was treated with intravenous diuretics and improved steadily, with weight returning toward baseline. Renal function remained stable. Her home medications were continued with minor adjustments. She was evaluated by ___ and ambulated safely. She was discharged in stable condition to follow up with ___.
+
+Medications on Admission:
+Furosemide 20 mg daily; insulin glargine nightly.
+
+Discharge Medications:
+Furosemide 40 mg daily. Insulin glargine nightly, unchanged. Metoprolol succinate 25 mg daily. Aspirin 81 mg daily. Continue home vitamin supplements.
+
+Discharge Disposition:
+Home with services
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Chronic kidney disease
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+Weigh yourself every morning and call ___ if your weight rises by more than three pounds. Limit salt intake, take medications as prescribed, and return for worsening breathlessness.
+
+Followup Instructions:
+___

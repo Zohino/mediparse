@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with four days of productive cough, fevers and fatigue, sent in by ___ for evaluation.
+REVIEW OF SYSTEMS:
+Positive for chills and dyspnea. Otherwise negative.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+General: Tired, mildly ill appearing.
+HEENT: Moist mucous membranes.
+Lungs: Right basilar crackles.
+Ext: No edema.
+SKIN: Warm, dry.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+Chest radiograph showed right lower lobe consolidation. White count elevated at admission, normalizing by ___. Blood cultures without growth.
+
+Brief Hospital Course:
+Treated for community acquired pneumonia with ceftriaxone and azithromycin, then transitioned to oral antibiotics. Fever resolved and oxygen was weaned to room air before ___.
+TRANSITIONAL ISSUES:
+Repeat chest imaging in six weeks.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+1. Lisinopril daily.
+2. Atorvastatin nightly.
+3. Amoxicillin-clavulanate twice daily for three more days.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community acquired pneumonia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for a lung infection. Finish all antibiotics, rest, drink fluids, and return for worsening breathing or fever. Call ___ with questions.
+
+Followup Instructions:
+___

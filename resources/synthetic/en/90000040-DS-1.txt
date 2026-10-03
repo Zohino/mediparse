@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+Man with diabetes mellitus presented to ___ after three days of worsening right lower quadrant pain, nausea and low-grade fevers. He was seen at ___ on ___ and referred for imaging, which showed appendicitis. He was transferred for surgical evaluation.
+REVIEW OF SYSTEMS:
+Positive for nausea. Negative for chest pain.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+No history of atrial fibrillation
+Cholecystectomy at ___
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+General:
+Comfortable, no distress.
+Lungs:
+Clear bilaterally.
+Abdomen:
+Soft, mildly tender at incisions.
+Ext:
+Warm, no edema.
+
+Pertinent Results:
+WBC 14.2 on admission, 8.1 at discharge. Creatinine 0.9. Glucose 210. Lactate 1.1. CT abdomen and pelvis: dilated inflamed appendix with fat stranding, no abscess or perforation. Pathology: acute appendicitis, no malignancy.
+
+Brief Hospital Course:
+He underwent laparoscopic appendectomy on ___ without complication. Pain was controlled with oral analgesics and his diet was advanced. Creatinine stayed normal and there was no evidence of chronic kidney disease. Glucose was managed with sliding scale insulin. He was cleared by ___ for discharge home.
+TRANSITIONAL ISSUES:
+Review glucose control with ___.
+
+Medications on Admission:
+Metformin 500 mg twice daily. Lisinopril 10 mg daily. Atorvastatin 20 mg nightly.
+
+Discharge Medications:
+Metformin 500 mg twice daily. Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Acetaminophen 650 mg every six hours as needed. Oxycodone 5 mg as needed, short course.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You had your appendix removed. Keep incisions clean and dry, and avoid lifting heavy objects for several weeks. Call ___ for fever, worsening pain, vomiting or wound redness. Questions may go to ___.
+
+Followup Instructions:
+___

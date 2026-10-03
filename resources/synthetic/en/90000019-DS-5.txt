@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with long-standing diabetes presented with three days of cough, fever and intermittent palpitations. He was first evaluated at ___ and transferred for further care.
+REVIEW OF SYSTEMS:
+Positive for cough and fatigue. No chest pain.
+
+Past Medical History:
+Diabetes mellitus type 2
+Possible atrial fibrillation, not confirmed
+Hypertension
+
+Past Surgical History:
+Appendectomy
+
+Social History:
+___
+
+Family History:
+Father with coronary disease
+
+Physical Exam:
+Vitals: afebrile, stable
+General: tired, comfortable
+HEENT: moist mucosa
+Neck: supple
+Lungs: right basilar crackles
+Abdomen: soft
+Ext: no edema
+
+Pertinent Results:
+Elevated white count with mild hyponatremia on admission, improved by discharge. Troponin negative twice. Telemetry showed occasional irregular rhythm.
+IMAGING:
+Chest film showed right lower lobe consolidation.
+
+Brief Hospital Course:
+Treated for community acquired pneumonia with ceftriaxone and azithromycin, then oral antibiotics. Fever resolved and oxygen was weaned. Cardiology at ___ reviewed telemetry on ___ and advised outpatient monitoring. Glucose managed with insulin sliding scale.
+
+Medications on Admission:
+Metformin 500 mg twice daily; lisinopril daily
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg twice daily for five days
+2. Metformin 500 mg twice daily
+3. Lisinopril 10 mg daily
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Palpitations
+
+Discharge Condition:
+Mental Status: clear and coherent
+Level of Consciousness: alert and interactive
+Activity Status: ambulatory, independent
+
+Discharge Instructions:
+You were treated for pneumonia. Finish all antibiotics, rest, and drink fluids. Follow up with Dr. ___ and call ___ for fever, worsening breathlessness, or racing heartbeat.
+
+Followup Instructions:
+___

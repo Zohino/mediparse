@@ -1,0 +1,61 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Presented to ___ with two days of right upper quadrant pain, nausea and fever after fatty meals. Ultrasound at the outside hospital at ___ showed gallstones with wall thickening, prompting transfer.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+No history of heart failure
+
+Social History:
+___
+
+Family History:
+Mother had gallstones
+
+Physical Exam:
+General: comfortable, afebrile
+Neck: supple
+Abdomen: soft, mildly tender in right upper quadrant, port sites clean
+EXTREMITIES: no edema
+
+Pertinent Results:
+Labs showed mild leukocytosis and raised bilirubin that later normalized. Ultrasound demonstrated multiple gallstones with gallbladder wall thickening and pericholecystic fluid. Cholangiogram was performed at ___.
+IMPRESSION: Acute cholecystitis with cholelithiasis.
+
+Brief Hospital Course:
+He was admitted, given antibiotics and fluids, and taken to the operating room at ___ for an uncomplicated laparoscopic cholecystectomy on ___. Pain was controlled with oral medication, diet was advanced and tolerated, and antibiotics were stopped. He went home stable.
+
+Medications on Admission:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly.
+
+Discharge Medications:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Acetaminophen 650 mg every six hours as needed. Oxycodone 5 mg as needed for severe pain.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Mental Status: alert and oriented
+Level of Consciousness: awake and interactive
+Activity Status: walking independently
+
+Discharge Instructions:
+You may shower but do not soak the incisions. Avoid lifting heavy objects for several weeks. Call ___ for fever, worsening abdominal pain, repeated vomiting or yellowing of the skin.
+
+Followup Instructions:
+___

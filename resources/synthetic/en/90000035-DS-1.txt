@@ -1,0 +1,78 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man sent from ___ with two days of epigastric pain and nausea. No fever or vomiting. Pain eased with eating.
+REVIEW OF SYSTEMS:
+Negative except as above.
+
+Past Medical History:
+Diabetes mellitus type 2
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with coronary disease
+
+Physical Exam:
+Comfortable, mild epigastric tenderness, no guarding.
+DISCHARGE PHYSICAL EXAM:
+Vitals:
+Afebrile, stable
+General:
+Well appearing
+Neck:
+Supple
+Lungs:
+Clear bilaterally
+EXTREMITIES:
+No edema
+
+Pertinent Results:
+Lipase and liver enzymes normal. Helicobacter antibody positive. Studies done at ___ were unremarkable.
+IMPRESSION:
+Mild gastritis.
+
+Brief Hospital Course:
+Treated for gastritis with a proton pump inhibitor, pain resolved, diet advanced. Seen by ___ for counseling. Discharged in stable condition.
+TRANSITIONAL ISSUES:
+Complete antibiotic course.
+
+Medications on Admission:
+Metformin, lisinopril
+
+Discharge Medications:
+Pantoprazole daily, amoxicillin and clarithromycin twice daily for two weeks, continue metformin and lisinopril.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes
+
+Discharge Condition:
+Good
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+
+Discharge Instructions:
+Take all medicines as prescribed. Avoid alcohol and anti-inflammatory pills. Call ___ for worsening pain, black stools or vomiting.
+
+Followup Instructions:
+___

@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Worsening leg swelling and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman referred by ___ with two weeks of progressive ankle swelling, orthopnea and weight gain. She missed several doses of her diuretic after a recent move. Seen at ___ and sent in for evaluation of volume overload.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Afebrile, mildly tachypneic, elevated jugular venous pressure, bibasilar crackles, pitting edema to knees.
+DISCHARGE PHYSICAL EXAM:
+Comfortable on room air, lungs clearer, trace ankle edema.
+HEENT: Moist mucous membranes
+Neck: JVP lower than on admission
+PULM: Faint basilar crackles
+ABD: Soft, nontender
+Ext: Trace edema
+SKIN: Warm, dry
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+BNP markedly elevated. Creatinine mildly above baseline, improving with treatment. Potassium normal. Hemoglobin A1c elevated, reviewed with the outpatient team at ___.
+FINDINGS:
+Chest radiograph showed cardiomegaly, pulmonary vascular congestion and small bilateral pleural effusions. Echocardiogram showed reduced ejection fraction.
+
+Brief Hospital Course:
+She received intravenous furosemide with good urine output and lost several kilograms. Electrolytes were replaced and creatinine remained stable. Her home regimen was adjusted and a beta blocker was continued. Education on daily weights and sodium restriction was given by ___. Cardiology at ___ will see her, and ___ arranged home nursing.
+
+Medications on Admission:
+Furosemide, lisinopril, metformin, atorvastatin
+
+Discharge Medications:
+1. Furosemide 40 mg by mouth twice daily
+2. Metoprolol succinate 50 mg daily
+3. Lisinopril 5 mg daily
+4. Metformin 500 mg twice daily
+5. Atorvastatin 40 mg nightly
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic kidney disease
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were admitted with fluid buildup. Weigh yourself every morning and call ___ if you gain more than two pounds in a day. Limit salt and fluids as directed, take every medication daily, and return for worsening breathlessness. Questions can go to ___.
+
+Followup Instructions:
+___

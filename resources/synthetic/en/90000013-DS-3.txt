@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with known heart failure sent by ___ clinic after a week of worsening orthopnea, weight gain and swollen legs, seen at ___ before transfer.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+No history of atrial fibrillation
+
+Social History:
+___
+
+Family History:
+Father with coronary disease
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+General: comfortable, breathing easily
+HEENT: moist mucous membranes
+CARDIAC: regular, soft murmur
+Abdomen: soft, nontender
+
+Pertinent Results:
+ADMISSION LABS:
+Creatinine elevated at 2.1 from baseline 1.1, BNP markedly high.
+IMPRESSION:
+Pulmonary vascular congestion, small effusions, read at ___.
+
+Brief Hospital Course:
+Diuresed with intravenous furosemide, with improved breathing and less edema. Creatinine peaked on day two, then fell as diuretics were adjusted and nephrotoxins held. Cardiology at ___ advised medication changes; discharged near ___ weight.
+
+Medications on Admission:
+Lisinopril, atorvastatin, furosemide
+
+Discharge Medications:
+Furosemide 40 mg daily, atorvastatin nightly, metoprolol succinate daily. Lisinopril paused until kidney function is rechecked.
+
+Discharge Disposition:
+Home with services
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Acute on chronic systolic heart failure
+
+Discharge Condition:
+Level of Consciousness: alert and attentive
+Activity Status: walks independently with steady gait
+
+Discharge Instructions:
+Weigh yourself every morning and call ___ if you gain over two pounds in a day. Limit salt and fluids, take medications as directed, and keep your lab appointment.
+
+Followup Instructions:
+___

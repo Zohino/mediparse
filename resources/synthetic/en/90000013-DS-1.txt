@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Cardiology
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath and leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man presenting with three weeks of progressive dyspnea, orthopnea and bilateral leg swelling. He ran out of his medications ___ days ago. He was referred by ___ after weight gain at home and was found hypoxic in the emergency department.
+
+Past Medical History:
+Congestive heart failure
+
+Social History:
+___
+
+Family History:
+Father with heart disease in his sixties
+
+Physical Exam:
+HEENT:
+Moist mucous membranes, jugular venous distension noted.
+ABD:
+Soft, nontender, mildly distended.
+SKIN:
+Warm, with bilateral pitting edema to the knees.
+
+Brief Hospital Course:
+Admitted with volume overload and treated with intravenous furosemide, with brisk urine output and steady weight loss. Oxygen was weaned to room air. Cardiology from ___ reviewed the echocardiogram done at ___ and adjusted his regimen. He was changed to oral diuretics and walked comfortably before discharge with stable weights.
+
+Medications on Admission:
+Furosemide 40 mg daily
+Metoprolol succinate 50 mg daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+Furosemide 60 mg by mouth daily
+Metoprolol succinate 50 mg by mouth daily
+Lisinopril 10 mg by mouth daily
+Spironolactone 25 mg by mouth daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Heart failure
+
+Discharge Condition:
+Mental Status:
+Alert and oriented, able to follow commands.
+Activity Status:
+Ambulatory and independent.
+
+Discharge Instructions:
+Weigh yourself every morning and record the number. Limit salt and fluids as discussed. Take all medications daily. Call ___ if your weight rises by three pounds in a day, or if breathing worsens. Keep your appointment with ___.
+
+Followup Instructions:
+___

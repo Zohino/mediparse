@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman seen at ___ with three days of productive cough, fever and fatigue. She was sent from her clinic visit on ___ after oxygen saturation was low. Chest radiograph suggested right lower lobe pneumonia.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals: T 38.1, HR 92, BP 128/76, RR 18, SpO2 95% room air
+Gen: Tired, no distress
+HEENT: Moist mucous membranes
+Neck: Supple
+Abdomen: Soft, nontender
+EXTREMITIES: No edema
+
+Pertinent Results:
+Admission labs showed mild leukocytosis and elevated glucose. Chest radiograph reported at ___ showed a right lower lobe opacity.
+IMPRESSION:
+Right lower lobe pneumonia, no effusion.
+
+Brief Hospital Course:
+She was treated with intravenous ceftriaxone and azithromycin, then changed to oral antibiotics once afebrile. Oxygen was weaned off by day two. Glucose was monitored and managed with sliding scale insulin per ___. She improved and was cleared by ___ for discharge home.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+Metformin ___
+
+Discharge Medications:
+Amoxicillin-clavulanate twice daily for five more days
+Lisinopril daily
+Atorvastatin nightly
+Metformin twice daily with meals
+Acetaminophen as needed for fever
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Diabetes mellitus
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with pneumonia and treated with antibiotics. Finish all prescribed pills, rest, and drink fluids. Return for worsening breathing, chest pain or persistent fever. Please keep your appointment with ___ as scheduled.
+
+Followup Instructions:
+___

@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Poor oral intake and decreased urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented from ___ after several days of vomiting, diarrhea and minimal urination. She was seen at ___ and sent in for laboratory abnormalities.
+REVIEW OF SYSTEMS:
+Positive for nausea and fatigue. No chest pain.
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Appeared dry but comfortable, vital signs stable.
+HEENT:
+Dry mucous membranes
+Neck:
+Supple
+CARDIAC:
+Regular rate, no murmur
+Abdomen:
+Soft, mildly tender, nondistended
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Creatinine elevated on arrival and improved steadily with fluids. Electrolytes were normal after repletion. Urinalysis from ___ was bland.
+IMPRESSION:
+Normal kidneys on ultrasound.
+
+Brief Hospital Course:
+She received intravenous fluids and her home diuretic was held. Her AKI, attributed to volume depletion, resolved over three days. Creatinine returned near baseline per ___ records. She tolerated diet and was cleared by ___ for discharge.
+
+Medications on Admission:
+Lisinopril, hydrochlorothiazide, and a daily multivitamin.
+
+Discharge Medications:
+Resume multivitamin daily. Hold lisinopril and hydrochlorothiazide until reviewed at your follow-up visit. Ondansetron as needed for nausea.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute kidney injury
+Secondary:
+Dehydration
+
+Discharge Condition:
+Stable, alert, ambulatory independently.
+
+Discharge Instructions:
+You were hospitalized for dehydration affecting your kidneys. Drink plenty of fluids and avoid anti-inflammatory pain medicines. Return if urine output drops or vomiting returns. Call ___ with questions.
+
+Followup Instructions:
+___

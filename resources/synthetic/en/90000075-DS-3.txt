@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Abdominal pain and vomiting in a ___ year old woman
+
+Major Surgical or Invasive Procedure:
+Nasogastric tube placement
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy at ___
+Hysterectomy
+
+Social History:
+___
+
+Family History:
+Mother with colon cancer at ___
+
+Physical Exam:
+Afebrile, vitals stable on room air. Comfortable, alert, in no distress. Heart regular, lungs clear bilaterally.
+Abdomen: Soft, mildly distended, tender in the lower quadrants without rebound or guarding.
+EXTREMITIES: Warm, trace pedal edema, no calf tenderness.
+
+Brief Hospital Course:
+She was transferred from ___ with abdominal pain, distension and vomiting. Imaging suggested a partial small bowel obstruction, and the surgical team at ___ placed a nasogastric tube and kept her without oral intake. Intravenous fluids were given with careful monitoring of her electrolytes. Her bowel function returned on hospital day three, the tube was removed, and diet was advanced slowly. She was seen by Dr. ___ and cleared for discharge once she tolerated regular food and her pain was controlled with oral medication.
+
+Medications on Admission:
+Metformin, lisinopril, atorvastatin, furosemide, aspirin daily.
+
+Discharge Medications:
+1. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+2. Metformin 500 mg by mouth twice daily.
+3. Lisinopril 10 mg by mouth daily.
+4. Atorvastatin 20 mg by mouth nightly.
+5. Furosemide 20 mg by mouth daily.
+6. Docusate 100 mg by mouth twice daily.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary:
+Partial small bowel obstruction
+Chronic kidney disease
+Heart failure
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized because of a blockage in your small intestine. It improved with rest of the bowel and fluids. Eat small, frequent meals and drink plenty of liquids. Do not lift heavy objects for two weeks. Return to the emergency department for worsening belly pain, repeated vomiting, fever, or no stool or gas. Call ___ with questions, and keep your appointment with Dr. ___ at ___.
+
+Followup Instructions:
+___

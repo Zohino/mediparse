@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right flank pain and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with three days of right flank pain, fever and dysuria, referred by ___ clinic. Treated for pyelonephritis with intravenous antibiotics and improved.
+
+Past Medical History:
+Hypertension
+Recurrent urinary tract infections
+Hypothyroidism, followed at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Alert, afebrile at discharge, mild right flank tenderness.
+HEENT:
+Moist mucous membranes
+PULM:
+Clear bilaterally
+Abdomen:
+Soft, nontender
+EXTREMITIES:
+No edema
+Neuro:
+Nonfocal
+
+Pertinent Results:
+Urinalysis showed pyuria and bacteria. Urine culture grew E. coli, sensitive to ceftriaxone. CT at ___ showed no obstruction or abscess.
+
+Medications on Admission:
+Lisinopril daily
+Levothyroxine daily
+
+Discharge Medications:
+Cefpodoxime twice daily for seven days. Continue lisinopril and levothyroxine as before. Acetaminophen as needed for pain.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute pyelonephritis
+Urinary tract infection due to E. coli
+
+Discharge Condition:
+Good, tolerating oral intake.
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a kidney infection. Finish all antibiotics, drink plenty of fluids, and return for fever, vomiting or worsening pain. Call ___ with questions.
+
+Followup Instructions:
+___

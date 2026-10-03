@@ -1,0 +1,82 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with palpitations and dizziness, possible atrial fibrillation on outside ECG, referred from ___ for evaluation after an episode of lightheadedness at home.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+Vitals:
+stable
+General:
+comfortable
+HEENT:
+normal
+ABD:
+soft
+EXTREMITIES:
+no edema
+SKIN:
+warm
+Neuro:
+nonfocal
+
+Pertinent Results:
+ADMISSION LABS:
+Hemoglobin 12.1, creatinine 0.8, glucose 168, troponin negative, potassium 4.1.
+IMAGING:
+Chest radiograph without acute abnormality; echocardiogram with preserved ejection fraction.
+
+Brief Hospital Course:
+Admitted to telemetry for palpitations; monitoring showed sinus rhythm only. Seen by cardiology at ___ and discharged on ___ with an outpatient rhythm monitor. Glucose managed with insulin sliding scale and diet, tolerating oral intake.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Metoprolol 25 mg by mouth twice daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Palpitations
+Secondary:
+Diabetes mellitus, hypertension
+
+Discharge Condition:
+Mental Status:
+clear and coherent
+Level of Consciousness:
+alert and interactive
+Activity Status:
+ambulatory, independent
+
+Discharge Instructions:
+Take medications as prescribed. Wear the monitor as directed. Return for fainting, chest pain, or worsening palpitations. Call ___ with questions.
+
+Followup Instructions:
+___

@@ -1,0 +1,57 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Cardiology
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with known atrial fibrillation presented with palpitations and fatigue for three days after a visit to ___. Possible chronic kidney disease was noted on labs from ___. Seen by Dr. ___ in clinic.
+REVIEW OF SYSTEMS: Positive dyspnea. No fever.
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+General: Alert, comfortable, in no acute distress.
+HEENT: Normocephalic, moist mucous membranes.
+Neck: Supple, no JVD.
+PULM: Clear bilaterally, no wheezes.
+
+Pertinent Results:
+Troponin negative twice. Creatinine 1.4, potassium 4.1, hemoglobin 13.2. Thyroid stimulating hormone normal. Magnesium 2.0. ECG showed irregular rhythm with rate 110. Echocardiogram showed preserved ejection fraction. Chest radiograph performed at ___ without acute findings.
+IMPRESSION: Irregular rhythm, no acute cardiopulmonary process.
+
+Medications on Admission:
+Metoprolol 50 mg twice daily; apixaban 5 mg twice daily.
+
+Discharge Medications:
+Metoprolol succinate 100 mg once daily. Apixaban 5 mg twice daily. Atorvastatin 20 mg nightly. Acetaminophen 650 mg every six hours as needed for pain. Stop aspirin.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Stable
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+Take your medications as prescribed. Stop aspirin. Avoid excess caffeine and alcohol. Return for chest pain, fainting, or worsening shortness of breath. Call ___ with questions. Follow up with your cardiologist.
+
+Followup Instructions:
+___

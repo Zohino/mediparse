@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Leg swelling, vomiting, low urine output
+
+Major Surgical or Invasive Procedure:
+None; line placement at ___ was not required
+
+History of Present Illness:
+The patient is a woman with a long history of the conditions listed below who presented to ___ with three days of worsening leg swelling, poor oral intake, vomiting and reduced urine output. She was seen at ___ by her primary physician, who found her hypotensive and sent her to the emergency department. Labs showed creatinine of 3.1, well above baseline, and potassium of 5.8. She was admitted on ___ for fluid management and close monitoring.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Chronic kidney disease, stage 3
+Congestive heart failure
+Hypertension
+Followed at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension; father with coronary disease
+
+Physical Exam:
+Vitals: T 98.2, BP 104/62, HR 78, RR 16, SpO2 96% on room air, seen by ___
+HEENT: Dry mucous membranes, anicteric sclerae
+ABD: Soft, nontender, nondistended, normal bowel sounds
+SKIN: Warm, with mild pitting edema of both shins
+Neuro: Alert, oriented, moves all limbs, no focal deficit
+
+Pertinent Results:
+Admission labs at ___: creatinine 3.1, BUN 58, potassium 5.8, bicarbonate 18, glucose 212. Urinalysis showed muddy brown casts and no infection. Creatinine improved to 1.8 by discharge with potassium 4.4. BNP mildly elevated. Ultrasound of the kidneys performed at ___ showed no obstruction.
+IMPRESSION: No hydronephrosis. Echogenic kidneys of normal size. Small bilateral pleural effusions on chest film, otherwise clear lungs.
+
+Medications on Admission:
+Insulin glargine nightly, lisinopril, furosemide, carvedilol, metformin, aspirin, as filled at ___
+
+Discharge Medications:
+1. Insulin glargine 20 units at bedtime
+2. Carvedilol 12.5 mg twice daily
+3. Aspirin 81 mg daily
+4. Furosemide 20 mg daily, reduced dose
+5. Atorvastatin 40 mg nightly
+Hold lisinopril and metformin until reviewed by ___ in clinic.
+
+Discharge Disposition:
+Home with services
+Facility: ___
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic kidney disease
+Heart failure
+
+Discharge Condition:
+Mental Status: Clear and coherent, fully engaged in conversation.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized because you became dehydrated and your kidney function worsened. We gave you fluids and paused some medicines. Weigh yourself each morning and call ___ if your weight rises by three pounds in a day. Avoid ibuprofen and similar pain relievers. Drink fluids sensibly, check your sugars regularly, and return for vomiting, fainting or very little urine. Please keep your appointment at ___.
+
+Followup Instructions:
+___

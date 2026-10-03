@@ -1,0 +1,62 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: General Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+___ year old man with hypertension presented with two days of worsening right lower quadrant pain, nausea and poor appetite. The pain began near the umbilicus and migrated. He was first seen at ___ urgent care and sent to the emergency department. He denied fever, vomiting or urinary symptoms. His last meal was ___ ago.
+
+Past Medical History:
+Hypertension
+Seasonal allergies
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+Vitals: Temperature 37.8, heart rate 96, blood pressure 132/80, oxygen saturation 98 percent on room air.
+Gen: Uncomfortable but alert, no distress.
+CARDIAC: Regular rate and rhythm, no murmurs.
+Abdomen tender at right lower quadrant with guarding.
+
+Pertinent Results:
+Admission labs notable for white blood cell count 14.2 with neutrophil predominance. Electrolytes and creatinine were normal.
+IMPRESSION: CT of the abdomen and pelvis performed on ___ showed a dilated, inflamed appendix measuring 11 mm with surrounding fat stranding and no abscess or free air.
+
+Brief Hospital Course:
+He was admitted to the surgical service, kept NPO, given intravenous fluids and antibiotics. He went to the operating room with Dr. ___ for an uncomplicated laparoscopic appendectomy. Diet was advanced the next morning, pain was controlled with oral medication, and he passed flatus. Pathology from ___ was pending at discharge. He will be seen by ___ in clinic.
+
+Medications on Admission:
+Lisinopril 10 mg daily; cetirizine 10 mg as needed.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis
+Secondary:
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for appendicitis with surgery. Take acetaminophen for pain and avoid lifting more than ten pounds until your visit on ___. You may shower, but do not soak incisions. Call the ___ clinic for fever, redness at the incisions, or worsening pain, or return to ___ if symptoms are severe.
+
+Followup Instructions:
+___

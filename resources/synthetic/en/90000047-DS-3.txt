@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient is a ___ year old man sent from ___ with two weeks of worsening ankle swelling, orthopnea and fatigue. He gained several pounds and noticed breathlessness climbing stairs. Symptoms became severe on ___, prompting evaluation. He received intravenous diuretics with good urine output and improved comfort.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout
+Prior knee surgery
+
+Social History:
+___
+
+Family History:
+Father with coronary disease; mother with stroke
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: Tired, mildly dyspneic
+HEENT: Moist mucosa
+Neck: Elevated JVP
+Lungs: Bibasilar crackles
+CARDIAC: Regular, S3 present
+Abdomen: Soft, nontender
+EXTREMITIES: Pitting edema to knees
+
+Pertinent Results:
+DISCHARGE LABS:
+Sodium 138, potassium 4.1, creatinine near baseline, glucose elevated, BNP markedly high. Specimens collected ___.
+IMPRESSION:
+Chest film from ___ showed cardiomegaly, pulmonary vascular congestion and small bilateral effusions, improved on repeat imaging after diuresis.
+
+Medications on Admission:
+Lisinopril daily, atorvastatin nightly, allopurinol daily, metformin twice daily
+
+Discharge Medications:
+Furosemide 40 mg by mouth daily, carvedilol twice daily, lisinopril continued, atorvastatin nightly, allopurinol daily, insulin glargine at bedtime, metformin stopped.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic kidney disease
+Heart failure
+
+Discharge Condition:
+Mental Status: Alert and oriented, able to follow instructions
+Level of Consciousness: Awake and attentive
+Activity Status: Ambulatory with steady gait
+
+Discharge Instructions:
+You were hospitalized for fluid buildup. Weigh yourself every morning and call ___ if weight rises by three pounds in a day. Limit salt and fluids. Take medicines as listed. Please keep your appointment at ___ and return to the ER for chest pain or worsening breathlessness within ___ of leaving.
+
+Followup Instructions:
+___

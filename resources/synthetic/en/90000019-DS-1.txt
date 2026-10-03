@@ -1,0 +1,78 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with known heart failure, referred from ___ with worsening dyspnea and leg swelling.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Coronary artery disease
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+General:
+Comfortable, mildly dyspneic
+HEENT:
+Anicteric
+Neck:
+JVP elevated
+Abdomen:
+Soft, nontender
+SKIN:
+Warm, dry
+
+Pertinent Results:
+BNP elevated. Chest radiograph showed pulmonary vascular congestion. Creatinine stable at ___ throughout.
+
+Brief Hospital Course:
+Treated with intravenous diuretics, with good urine output and improved breathing. Weight fell steadily. Seen by cardiology at ___.
+TRANSITIONAL ISSUES:
+Recheck electrolytes next week.
+
+Medications on Admission:
+Lisinopril, atorvastatin, aspirin
+
+Discharge Medications:
+1. Furosemide 40 mg daily
+2. Lisinopril 10 mg daily
+3. Atorvastatin 40 mg nightly
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Volume overload
+Hypertension
+Coronary artery disease
+
+Discharge Condition:
+Stable
+Mental Status:
+Alert and oriented
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+Weigh yourself every morning and call ___ if weight rises by three pounds. Limit salt and fluids.
+
+Followup Instructions:
+___

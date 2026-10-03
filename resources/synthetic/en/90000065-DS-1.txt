@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old man who presented with three days of worsening productive cough, fever and fatigue. He was seen at ___ on ___ and sent to the emergency department after a low oxygen saturation was noted. In the emergency department he was febrile and tachycardic, and chest imaging showed a right lower lobe opacity.
+REVIEW OF SYSTEMS:
+Positive for cough, fever and chills. Negative for chest pain.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Vitals:
+T 38.1 HR 104 BP 128/76 RR 22 SpO2 91% on room air, improved to 95% on 2 L
+HEENT:
+Dry mucous membranes, no lesions
+CARDIAC:
+Tachycardic, regular rhythm, no murmur
+Ext:
+Warm, no edema
+Neuro:
+Alert, oriented, moves all extremities
+
+Pertinent Results:
+___: WBC 14.2, hemoglobin 13.1, platelets 260. Sodium 136, potassium 4.2, creatinine 0.9, glucose 214. Lactate 1.8. Troponin negative. Hemoglobin A1c 8.4 percent. Blood cultures no growth at 48 hours. Repeat labs ___: WBC 9.1, creatinine unchanged.
+IMAGING:
+Chest radiograph ___: right lower lobe consolidation without effusion or pneumothorax. Heart size normal.
+
+Brief Hospital Course:
+He was treated for community acquired pneumonia with ceftriaxone and azithromycin, then switched to an oral antibiotic once afebrile and off oxygen. Cultures remained negative. His diabetes was managed with sliding scale insulin in hospital; the A1c was elevated, so metformin was increased at discharge with follow up with ___ arranged. Blood pressure was controlled on home medications. He walked independently and saturated well on room air before leaving ___.
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg by mouth twice daily for five more days
+2. Metformin 1000 mg by mouth twice daily
+3. Lisinopril 10 mg by mouth daily
+4. Atorvastatin 20 mg by mouth nightly
+5. Acetaminophen 650 mg by mouth every six hours as needed for fever
+
+Discharge Disposition:
+Home with ___ services
+
+Discharge Diagnosis:
+Diabetes mellitus
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized at ___ with pneumonia and treated with antibiotics. Take all medications as prescribed and finish the full antibiotic course. Rest and drink plenty of fluids. Call ___ or return to the emergency department at ___ for fever, worsening shortness of breath, chest pain or confusion.
+
+Followup Instructions:
+___

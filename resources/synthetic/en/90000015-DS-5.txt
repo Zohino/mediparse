@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman presented with worsening leg swelling and shortness of breath over several days, sent in by her ___ clinic after weight gain and reduced urine output.
+
+Past Medical History:
+Chronic kidney disease
+Heart failure
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals:
+Stable
+General:
+Comfortable
+Neck:
+JVD present
+ABD:
+Soft
+SKIN:
+Warm, leg edema
+Neuro:
+Nonfocal
+
+Pertinent Results:
+Creatinine at baseline. BNP elevated. Chest radiograph showed pulmonary vascular congestion with small bilateral effusions. Labs otherwise unremarkable, potassium normal, hemoglobin stable.
+IMPRESSION:
+Mild pulmonary edema.
+
+Brief Hospital Course:
+Treated with intravenous diuretics with good urine output and weight loss. Renal function monitored daily and stayed stable. Seen by ___ cardiology, medications adjusted. Discharged home on oral diuretic after ___ days of observation.
+
+Medications on Admission:
+Furosemide, lisinopril, amlodipine
+
+Discharge Medications:
+Furosemide 40 mg daily, metoprolol succinate 25 mg daily, amlodipine 5 mg daily. Lisinopril held until renal follow-up.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Chronic kidney disease
+Heart failure
+
+Discharge Condition:
+Mental Status:
+Alert and oriented
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+Weigh yourself every morning and call ___ if gain exceeds three pounds. Limit salt and fluids. Take medicines as prescribed and return for worse breathing or swelling.
+
+Followup Instructions:
+___

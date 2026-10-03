@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old man with hypertension presented to ___ with two days of worsening right upper quadrant pain, nausea and one episode of vomiting after a fatty meal. The pain radiated to the right shoulder. He denied fever or jaundice. He was evaluated at ___ and transferred for surgical evaluation after imaging showed gallstones with gallbladder wall thickening. He was admitted to the surgical service on ___ for further management.
+REVIEW OF SYSTEMS:
+Positive for nausea. Negative for chest pain, dyspnea, dysuria or diarrhea.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy at ___ in childhood
+
+Social History:
+___
+
+Family History:
+Father with gallstones. Mother with hypertension, treated at ___.
+
+Physical Exam:
+General: Alert, comfortable, no acute distress.
+Neck: Supple, no lymphadenopathy.
+Abdomen: Soft, mildly tender in the right upper quadrant, healing laparoscopic incisions clean and dry.
+Ext: Warm, no edema.
+Neuro: Alert, oriented, moves all extremities.
+
+Pertinent Results:
+Admission labs on ___ showed mild leukocytosis with normal bilirubin, alkaline phosphatase and lipase. Liver enzymes were slightly elevated and normalized before discharge. Right upper quadrant ultrasound was obtained in the emergency department. Postoperative hemoglobin was stable and electrolytes were within normal limits. Gallbladder pathology was pending at discharge.
+IMPRESSION:
+Cholelithiasis with gallbladder wall thickening and a small amount of pericholecystic fluid, consistent with acute inflammation of the gallbladder.
+
+Brief Hospital Course:
+The patient was admitted, given intravenous fluids and antibiotics, and kept without oral intake. He was taken to the operating room on ___ by Dr. ___ and underwent an uncomplicated laparoscopic cholecystectomy. Postoperatively he went to the surgical floor, where pain was controlled with oral medication and his diet was advanced as tolerated. Antibiotics were stopped after surgery. He ambulated independently and voided without difficulty. Home blood pressure medications were resumed. Physical therapy from ___ cleared him for discharge, and he was seen by the team at ___ before leaving on ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Aspirin 81 mg daily. Multivitamin once daily.
+
+Discharge Medications:
+Lisinopril 10 mg by mouth daily. Atorvastatin 20 mg by mouth nightly. Acetaminophen 650 mg every six hours as needed for pain. Oxycodone 5 mg every six hours as needed for severe pain, short course. Docusate 100 mg twice daily while taking oxycodone. Aspirin held until follow-up.
+
+Discharge Disposition:
+Home with ___ services
+
+Discharge Diagnosis:
+Primary: Acute calculous cholecystitis
+Secondary: Hypertension, hyperlipidemia
+
+Discharge Condition:
+Good, tolerating diet, pain controlled with oral medication.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized for gallbladder inflammation and had your gallbladder removed laparoscopically. You may shower but do not soak incisions. Avoid lifting more than ten pounds for four weeks. Call ___ office for fever, worsening pain, vomiting, redness or drainage at incisions, or yellow skin. Return to the ___ emergency department for severe symptoms.
+
+Followup Instructions:
+___

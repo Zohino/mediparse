@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain and vomiting
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with two days of worsening abdominal pain, nausea and vomiting, referred from ___ clinic after poor oral intake and dizziness.
+REVIEW OF SYSTEMS:
+Positive for nausea, no fever.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Gastroesophageal reflux
+
+Past Surgical History:
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Afebrile, stable vitals, dry mucous membranes, mild abdominal tenderness.
+DISCHARGE PHYSICAL EXAM:
+General: Comfortable, no distress
+HEENT: Moist mucous membranes
+Lungs: Clear bilaterally
+Abdomen: Soft, nontender
+EXTREMITIES: No edema
+SKIN: Warm and dry
+
+Pertinent Results:
+Creatinine mildly elevated on arrival, improved with fluids. Lipase normal. White count normal. CT abdomen showed mild gastroenteritis changes without obstruction.
+
+Brief Hospital Course:
+Treated for gastroenteritis with IV fluids and antiemetics. Rising creatinine raised suspicion for possible acute kidney injury from volume depletion, improving by discharge. Diet advanced; seen by ___.
+
+Medications on Admission:
+Lisinopril, levothyroxine, omeprazole
+
+Discharge Medications:
+Levothyroxine daily, omeprazole daily, ondansetron as needed for nausea. Hold lisinopril until kidney function is rechecked by primary care.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute gastroenteritis
+Dehydration
+Hypertension
+
+Discharge Condition:
+Good
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a stomach infection and dehydration. Drink plenty of fluids, eat bland foods, and return for fever, persistent vomiting or little urine. Call ___ with questions.
+
+Followup Instructions:
+___

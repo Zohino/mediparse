@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath, leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient with known heart failure presented to ___ with progressive dyspnea and leg swelling over several days. He was seen at ___ by his provider, who noted weight gain and referred him to the emergency department at ___ for evaluation and diuresis.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Gen: Comfortable, no distress.
+HEENT: Moist mucous membranes.
+Lungs: Bibasilar crackles.
+CARDIAC: Irregularly irregular rhythm.
+Ext: Trace edema bilaterally.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+Admission labs notable for elevated creatinine and BNP. Chest radiograph showed mild pulmonary vascular congestion. Echocardiogram on ___ showed reduced ejection fraction. Creatinine improved from ___ to ___ by discharge. Potassium was normal. ECG showed a rate-controlled rhythm without acute ischemic changes.
+
+Brief Hospital Course:
+He was diuresed with intravenous furosemide with good urine output and improved breathing. Creatinine rose initially and then recovered with diuretic adjustment. Rate control continued with metoprolol and anticoagulation was maintained. He was evaluated by ___ and cleared for home. He was transitioned to oral diuretics and discharged stable.
+
+Medications on Admission:
+Furosemide 40 mg daily, metoprolol 25 mg twice daily, apixaban 5 mg twice daily.
+
+Discharge Medications:
+Furosemide 60 mg daily. Metoprolol succinate 50 mg daily. Apixaban 5 mg twice daily. Potassium chloride 20 mEq daily. Atorvastatin 40 mg nightly. Hold lisinopril until followup labs.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atrial fibrillation
+Acute kidney injury
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized for fluid overload and kidney strain. Weigh yourself daily and call ___ if your weight rises by more than three pounds. Limit salt and fluids. Take your medications as prescribed and return for worsening breathlessness.
+
+Followup Instructions:
+___

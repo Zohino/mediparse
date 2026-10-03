@@ -1,0 +1,78 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with COPD sent from ___ clinic with three days of productive cough, fever and mild shortness of breath, treated for pneumonia.
+
+Past Medical History:
+COPD
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+Vitals:
+T 38.1, HR 92, BP 128/74, SpO2 93% RA
+Gen:
+Comfortable, no distress
+HEENT:
+Moist mucosa
+Neck:
+Supple
+Lungs:
+Right basilar crackles
+ABD:
+Soft, nontender
+EXTREMITIES:
+No edema
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+WBC 13.2, creatinine 0.9. Blood cultures no growth. Sputum culture ___ with normal flora.
+IMAGING:
+Chest film: right lower lobe consolidation.
+
+Medications on Admission:
+Tiotropium daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg twice daily for five more days
+2. Tiotropium inhaled daily
+3. Lisinopril 10 mg daily
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+COPD exacerbation
+Hypertension
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a lung infection with antibiotics. Finish the full course, rest, drink fluids, and return for fever, worsening breathlessness or chest pain. Follow up with ___.
+
+Followup Instructions:
+___

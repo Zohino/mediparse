@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with several days of productive cough, fever and chills, seen at ___ after worsening shortness of breath. Chest film showed right lower lobe consolidation. He was started on antibiotics in the emergency department and admitted to ___ for pneumonia and oxygen support.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout, followed by ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+General: Tired, mildly tachypneic, no distress
+HEENT: Moist mucous membranes
+Neck: Supple
+ABD: Soft, nontender
+EXTREMITIES: No edema
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+DISCHARGE LABS:
+WBC 9.1, Hgb 13.8, Plt 245, Na 139, K 4.1, Cr 0.9, drawn at ___
+IMPRESSION:
+Right lower lobe pneumonia, improved from prior film, no effusion
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg daily
+2. Atorvastatin 20 mg nightly
+3. Amoxicillin-clavulanate 875 mg twice daily for 5 more days
+4. Acetaminophen as needed for fever
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community-acquired pneumonia
+Secondary:
+Hypertension
+Hyperlipidemia
+Gout
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were treated for pneumonia with antibiotics and oxygen. Finish the full antibiotic course, drink fluids and rest. Call ___ or return to the hospital for worsening breathing, chest pain or high fever. Your clinic at ___ will arrange a repeat chest film.
+
+Followup Instructions:
+___

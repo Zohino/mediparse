@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension who presented with three days of productive cough, fever and shortness of breath. He was first seen at ___ where chest imaging showed a right lower lobe opacity, and he was transferred to ___ for further care. He denied chest pain, vomiting or recent travel. Oxygen saturation on arrival was low.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Remote knee surgery at ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 14.2, hemoglobin 13.1, platelets 240, sodium 136, potassium 4.1, creatinine 1.0, lactate 1.8.
+
+IMPRESSION:
+Chest radiograph read by ___: right lower lobe consolidation without effusion. Follow-up film on ___ showed unchanged findings and no new process.
+
+Brief Hospital Course:
+He was admitted with community acquired pneumonia and started on intravenous ceftriaxone and azithromycin. Oxygen was needed briefly and weaned by day two. Fever resolved and cough improved. He was switched to oral antibiotics and walked without desaturation. Blood cultures from ___ showed no growth. His blood pressure was stable on home medication, and he was cleared by ___ for discharge home.
+
+TRANSITIONAL ISSUES:
+Repeat chest imaging in six weeks to confirm resolution, to be arranged by ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg twice daily for five more days
+2. Lisinopril 10 mg daily
+3. Atorvastatin 20 mg nightly
+4. Acetaminophen as needed for fever, ordered by ___
+
+Discharge Disposition:
+Home
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+
+Level of Consciousness:
+Alert and interactive.
+
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with a lung infection and treated with antibiotics. Finish the full course of your pills and drink plenty of fluids. Return for fever, worsening breathlessness, chest pain or confusion. Please keep your appointment with ___ and avoid smoking.
+
+Followup Instructions:
+___

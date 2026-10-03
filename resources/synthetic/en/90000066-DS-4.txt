@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: ORTHOPAEDICS
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right hip pain after a fall
+
+Major Surgical or Invasive Procedure:
+Right hip hemiarthroplasty
+
+History of Present Illness:
+___ year old woman who slipped on a wet floor at home and could not bear weight on the right leg. She was transferred from ___ after imaging showed a displaced femoral neck fracture. No head strike or loss of consciousness.
+
+Past Medical History:
+Hypertension
+Osteoporosis
+Hypothyroidism
+
+Past Surgical History:
+Cataract surgery at ___
+
+Social History:
+___
+
+Family History:
+Mother had osteoporosis. Non-contributory otherwise.
+
+Physical Exam:
+HEENT: Atraumatic, moist mucous membranes.
+PULM: Clear bilaterally.
+Ext: Right leg shortened and externally rotated, pulses intact.
+Neuro: Alert, sensation intact.
+
+Pertinent Results:
+ADMISSION LABS: Hemoglobin 11.8, creatinine 0.9, sodium 139, potassium 4.2, INR 1.0. Outside hospital ___ report reviewed.
+IMPRESSION: Displaced right femoral neck fracture. Postoperative films show well seated prosthesis without complication.
+
+Brief Hospital Course:
+She was admitted, optimized, and underwent right hemiarthroplasty by Dr. ___ without complication. Pain was controlled with acetaminophen and low-dose oxycodone. Physical therapy began on ___ and she progressed steadily. Enoxaparin was given for clot prevention. She was stable for discharge.
+TRANSITIONAL ISSUES: Continue bone health therapy and fall precautions.
+
+Medications on Admission:
+Levothyroxine, lisinopril, calcium, vitamin D.
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours, oxycodone 2.5 mg as needed for severe pain, enoxaparin daily for four weeks, levothyroxine, lisinopril, calcium, vitamin D, senna.
+
+Discharge Disposition:
+Extended care at ___ rehabilitation
+
+Discharge Diagnosis:
+Right femoral neck fracture
+Hypertension
+Osteoporosis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory with walker, weight bearing as tolerated.
+
+Discharge Instructions:
+Keep the incision clean and dry. Avoid bending the hip past ninety degrees. Take medications as prescribed and use the walker at all times. Call ___ for fever, wound drainage, calf swelling, or worsening pain.
+
+Followup Instructions:
+___

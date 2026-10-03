@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg swelling and redness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man presented with three days of right lower leg swelling and redness after a minor scrape at ___. He was afebrile on arrival and was seen in the emergency department of ___ before admission.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Seasonal allergies
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Gen: Comfortable, no distress
+HEENT: Unremarkable
+Lungs: Clear bilaterally
+Ext: Right calf warm, mildly swollen
+SKIN: Erythema over right shin
+PULSES: Palpable and symmetric
+
+Pertinent Results:
+White count mildly elevated on arrival, normalizing by discharge. Creatinine within normal limits. Blood cultures showed no growth.
+IMAGING:
+Venous duplex of the right leg showed no deep vein thrombosis.
+
+Brief Hospital Course:
+Treated for right leg cellulitis with intravenous antibiotics, then switched to oral therapy as redness receded. Glucose was normal and there was no evidence of diabetes. Wound care was reviewed with nursing at ___ and ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Cephalexin 500 mg four times daily for seven more days. Continue lisinopril and atorvastatin unchanged. Acetaminophen as needed for pain, per pharmacy at ___.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Right leg cellulitis
+Hypertension
+
+Discharge Condition:
+Mental Status: Alert and oriented, clear thinking.
+Level of Consciousness: Fully awake and attentive.
+Activity Status: Walks independently.
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Take your antibiotic as prescribed, keep the leg elevated, and return for fever, spreading redness, or worsening pain. Follow up with ___.

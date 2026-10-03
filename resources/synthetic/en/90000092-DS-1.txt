@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Weakness and reduced urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with chronic kidney disease sent from ___ for rising creatinine and poor oral intake.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+
+Social History:
+___
+
+Family History:
+Family history of diabetes in his mother.
+
+Physical Exam:
+General: Tired, comfortable
+HEENT: Dry mucous membranes
+Lungs: Clear
+ABD: Soft, nontender
+Ext: No edema
+
+Pertinent Results:
+ADMISSION LABS: Creatinine markedly above baseline, potassium mildly high.
+IMPRESSION: Normal kidney size, no obstruction.
+
+Brief Hospital Course:
+Fluids were given and diuretics held at ___. Creatinine fell steadily toward baseline. Rate stayed controlled; seen by nephrology.
+
+Medications on Admission:
+Metoprolol, apixaban, furosemide
+
+Discharge Medications:
+Metoprolol and apixaban continued. Furosemide resumed at lower dose once ___ advises.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Chronic kidney disease
+Atrial fibrillation
+
+Discharge Condition:
+Stable
+Mental Status: Alert and oriented
+Activity Status: Walks independently
+
+Discharge Instructions:
+Drink fluids regularly, avoid anti-inflammatory painkillers, and repeat blood tests in one week at ___.
+
+Followup Instructions:
+___

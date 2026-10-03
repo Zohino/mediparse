@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and low urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+He reports three days of worsening leg swelling, shortness of breath when lying flat, and passing little urine after running out of his water pill. He was evaluated at ___ and referred to the emergency department at ___. Labs showed a markedly elevated creatinine and potassium, so he was admitted for monitoring and careful fluid management.
+
+Past Medical History:
+Diabetes mellitus type 2
+Congestive heart failure
+Atrial fibrillation
+Hypertension, diagnosed in ___
+
+Social History:
+___
+
+Family History:
+Father with heart disease, onset in ___
+
+Physical Exam:
+Gen: Tired-appearing, in no distress
+HEENT: Dry mucous membranes
+Neck: JVP elevated
+Lungs: Bibasilar crackles
+Abdomen: Soft, nontender, mildly distended
+SKIN: Pitting edema to the knees
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Admission creatinine 3.4, potassium 5.9, BNP markedly elevated. ECG: irregularly irregular rhythm, rate controlled. Chest x-ray at ___ showed small bilateral effusions and vascular congestion. Echocardiogram showed reduced ejection fraction. Creatinine improved to 1.9 by discharge, potassium 4.4. Hemoglobin A1c 7.8 percent. Urinalysis bland.
+
+Brief Hospital Course:
+He was given intravenous diuretics with brisk urine output and lost several liters over the stay. Nephrotoxic medications and his ACE inhibitor were held, and creatinine fell steadily. Cardiology at ___ adjusted his rate control and continued anticoagulation. Blood sugars were managed with insulin. By ___ he was breathing comfortably on room air, walking independently, tolerating a low-sodium diet, and was switched to oral diuretics.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+Metoprolol 50 mg daily
+Apixaban 5 mg twice daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Furosemide 40 mg by mouth daily
+2. Metoprolol succinate 50 mg by mouth daily
+3. Apixaban 5 mg by mouth twice daily
+4. Insulin glargine 10 units at bedtime
+5. Hold metformin and lisinopril until kidney function is rechecked
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Chronic kidney disease
+Heart failure
+Atrial fibrillation
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for fluid overload and poor kidney function. Weigh yourself every morning and call ___ if you gain more than three pounds in a day. Limit salt and fluids as discussed. Take your medicines as listed and avoid anti-inflammatory pain relievers. Return to ___ for worsening breathlessness, confusion, or very little urine.
+
+Followup Instructions:
+___

@@ -1,0 +1,62 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Nausea and decreased urine output
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with poorly controlled sugars presented with three days of nausea, poor oral intake and reduced urine output, sent in by her outpatient ___ after abnormal labs. She denied fever and had taken ibuprofen.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals stable, afebrile.
+Neck: Supple, no JVD.
+Lungs: Clear bilaterally.
+ABD: Soft, nontender, nondistended.
+Neuro: Alert, oriented, nonfocal.
+
+Pertinent Results:
+Admission creatinine 2.4, baseline near 1.0, falling to 1.1 by discharge. Potassium 5.4 on arrival, normalized after treatment. Glucose 412. Hemoglobin A1c 11.2 percent, bicarbonate 18 improving. Urinalysis bland. Renal ultrasound without obstruction. Repeat labs drawn on ___ were stable.
+
+Brief Hospital Course:
+Treated with intravenous fluids, with creatinine returning toward baseline. Ibuprofen was stopped. Her diabetes was poorly controlled; insulin was started and titrated with endocrine input from ___. Potassium was managed with diet and monitoring. Nephrotoxic drugs were avoided and she received diabetes teaching. She tolerated diet and was discharged in stable condition.
+
+Medications on Admission:
+Metformin 1000 mg twice daily, ibuprofen as needed.
+
+Discharge Medications:
+Insulin glargine 20 units nightly. Insulin lispro with meals per sliding scale. Atorvastatin 20 mg daily. Acetaminophen as needed. Pharmacy ___ to supply glucometer.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Diabetes mellitus, poorly controlled
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+Avoid ibuprofen and similar painkillers. Drink fluids regularly and check your blood sugar before meals. Return for vomiting, very low urine output, or confusion. Call ___ clinic with questions.
+
+Followup Instructions:
+___

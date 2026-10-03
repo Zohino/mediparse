@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Rising creatinine, poor oral intake
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient is a man with known renal disease who was sent from ___ by his outpatient nephrologist at ___ after routine labs showed a rising creatinine. He reported three days of poor oral intake, nausea and reduced urine output. He had recently started a new medication on ___. He denied fever, chest pain or dyspnea. In the emergency department he was hemodynamically stable.
+
+Past Medical History:
+Chronic kidney disease stage 3, followed at ___
+Hypertension
+Gout
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. No family history of kidney disease.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Gen:
+Tired but comfortable, no distress
+HEENT:
+Dry mucous membranes
+CARDIAC:
+Regular rate and rhythm
+EXTREMITIES:
+No edema
+SKIN:
+Warm, no rash
+Neuro:
+Alert, oriented, nonfocal
+
+Pertinent Results:
+Admission labs notable for creatinine well above his baseline, with elevated BUN and mild hyperkalemia. Bicarbonate was low. Urinalysis showed few granular casts and no blood. Urine sodium was low. Renal ultrasound performed at ___ showed no hydronephrosis. Creatinine improved steadily with fluids. Potassium normalized by hospital day two. Repeat labs drawn at ___ were stable and close to baseline.
+
+Brief Hospital Course:
+He was admitted with AKI attributed to volume depletion with a contribution from a recently started medication at ___. The offending drug was held and he received intravenous fluids. Urine output recovered and creatinine fell toward baseline. Hyperkalemia resolved without specific treatment. Nephrology at ___ was consulted and agreed with the plan. He tolerated a renal diet and was discharged once labs were stable. Outpatient follow up was arranged with ___.
+TRANSITIONAL ISSUES:
+Recheck creatinine and potassium within one week.
+Avoid NSAIDs.
+
+Medications on Admission:
+Amlodipine 5 mg daily
+Allopurinol 100 mg daily
+New medication started at ___
+
+Discharge Medications:
+Amlodipine 5 mg by mouth once daily.
+Allopurinol 100 mg by mouth once daily.
+Acetaminophen 500 mg by mouth every six hours as needed for pain.
+Stop the medication started recently until reviewed by your kidney doctor.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Acute kidney injury
+Chronic kidney disease
+
+Discharge Condition:
+Stable, alert and independent with ambulation.
+
+Discharge Instructions:
+You were hospitalized because your kidney function worsened. This improved with fluids and by stopping a medication. Drink fluids as advised and keep a low salt diet. Do not take ibuprofen or similar pain relievers. Keep your lab appointment at ___. Return for decreased urine, vomiting, swelling or confusion, and call ___ with questions.
+
+Followup Instructions:
+___

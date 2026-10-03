@@ -1,0 +1,61 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies.
+
+Chief Complaint:
+Right lower quadrant abdominal pain.
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy.
+
+History of Present Illness:
+Patient presented to ___ with two days of worsening right lower quadrant pain, nausea and low-grade fevers. Pain began near the umbilicus and migrated. She was seen at ___ and transferred for surgical evaluation. CT demonstrated acute appendicitis without perforation.
+REVIEW OF SYSTEMS: Positive for anorexia and nausea. Negative for diarrhea, dysuria.
+
+Past Medical History:
+Hypothyroidism, migraines.
+
+Past Surgical History:
+Cesarean section at ___.
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Sister treated for thyroid disease at ___.
+
+Physical Exam:
+Gen: Comfortable, no acute distress.
+HEENT: Anicteric, moist mucous membranes.
+Abdomen: Soft, mild right lower quadrant tenderness, port sites clean.
+Ext: Warm, no edema.
+
+Pertinent Results:
+ADMISSION LABS: WBC 14.2, hemoglobin 12.8, creatinine 0.7, lactate 1.1. Urinalysis unremarkable. Results reviewed with ___ team.
+IMPRESSION: CT abdomen and pelvis: dilated appendix 11 mm with wall enhancement and periappendiceal fat stranding, no abscess or free air. Findings consistent with acute appendicitis. Small physiologic pelvic fluid. Chest radiograph clear.
+
+Brief Hospital Course:
+She was admitted to the surgical service and started on IV fluids and antibiotics. She underwent uncomplicated laparoscopic appendectomy on ___ by Dr. ___. Pathology was pending at discharge. Diet was advanced and pain controlled with oral medication. She tolerated a regular diet, voided, ambulated independently, and was discharged home on hospital day ___ with follow-up at ___.
+
+Medications on Admission:
+Levothyroxine 75 mcg daily. Sumatriptan as needed for migraine. Multivitamin daily.
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed for pain. Oxycodone 5 mg every six hours as needed for severe pain, short course. Docusate 100 mg twice daily while taking oxycodone. Continue levothyroxine 75 mcg daily.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized for appendicitis and underwent laparoscopic surgery. Keep incisions clean and dry, and avoid lifting over ten pounds for four weeks. Return for fever, worsening pain, vomiting or wound redness. Call ___ with questions.

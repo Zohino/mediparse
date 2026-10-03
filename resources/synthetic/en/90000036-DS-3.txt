@@ -1,0 +1,79 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy performed at ___
+
+History of Present Illness:
+Woman with two days of right upper quadrant pain, nausea and fever after a fatty meal. Seen by her physician at ___, then sent to the emergency department, where imaging suggested gallbladder inflammation.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Prior appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother had gallstones.
+
+Physical Exam:
+Vitals:
+Afebrile, stable
+Gen:
+Comfortable, alert
+CARDIAC:
+Regular rhythm
+ABD:
+Soft, mild incisional tenderness
+EXTREMITIES:
+No edema
+Neuro:
+Nonfocal
+PULSES:
+Palpable, symmetric
+
+Pertinent Results:
+Ultrasound showed gallstones with wall thickening and pericholecystic fluid. White count elevated on arrival, normalized by discharge. Liver tests mildly raised. Reviewed with radiology at ___.
+IMPRESSION:
+Acute calculous cholecystitis
+
+Brief Hospital Course:
+She was given intravenous antibiotics and fluids, then underwent uncomplicated laparoscopic surgery with ___ team. Pain was controlled orally and diet advanced. Her fever resolved, wounds stayed clean, and she was discharged on the ___ day.
+
+Medications on Admission:
+Lisinopril and levothyroxine daily.
+
+Discharge Medications:
+Continue lisinopril and levothyroxine. Acetaminophen as needed for pain, plus a short course of oxycodone. Docusate twice daily while taking opioids. Antibiotic course completed in hospital.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for gallbladder inflammation and had your gallbladder removed. Keep incisions clean and dry. Avoid lifting heavy objects for several weeks. Call ___ or return for fever, vomiting, or worsening pain.
+
+Followup Instructions:
+___

@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+Man presenting to ___ with three days of worsening right lower quadrant pain, nausea and low-grade fever, first evaluated at ___ and transferred for surgical assessment.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+No diabetes
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+General: Comfortable, no distress
+HEENT: Moist mucous membranes
+Lungs: Clear bilaterally
+Abdomen: Soft, mild incisional tenderness
+Ext: Warm, no edema
+
+Pertinent Results:
+CT abdomen showed a dilated, inflamed appendix with surrounding fat stranding. White count mildly elevated on arrival and normalized before discharge.
+IMPRESSION:
+Acute appendicitis without perforation.
+
+Brief Hospital Course:
+Taken to the operating room at ___ for uncomplicated laparoscopic appendectomy. Diet advanced, pain controlled with oral medication, and he was cleared by ___ for discharge home.
+
+Medications on Admission:
+Lisinopril, atorvastatin
+
+Discharge Medications:
+Acetaminophen as needed for pain, docusate while taking opioids, oxycodone for severe pain only. Continue lisinopril and atorvastatin.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You had your appendix removed. Keep incisions clean and dry, avoid heavy lifting for several weeks, and call ___ for fever, worsening pain or vomiting.
+
+Followup Instructions:
+___

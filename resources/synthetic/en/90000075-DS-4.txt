@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Leg swelling and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman sent by ___ clinic with weeks of worsening dyspnea, swollen legs and low urine output. Seen previously at ___ without improvement.
+
+Past Medical History:
+Diabetes mellitus
+Hypertension
+Hyperlipidemia
+
+Family History:
+Mother with hypertension. No kidney disease known.
+
+Physical Exam:
+General:
+Tired, mildly dyspneic
+HEENT:
+Moist mucosa
+Neck:
+JVP elevated
+CARDIAC:
+Regular, soft murmur
+ABD:
+Soft, nontender
+Ext:
+2+ pitting edema
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+ADMISSION LABS:
+Creatinine above baseline, BNP elevated, potassium mildly high.
+IMPRESSION:
+Pulmonary vascular congestion with small bilateral effusions.
+
+Brief Hospital Course:
+Treated with IV diuretics and held nephrotoxic drugs. Weight fell and creatinine improved. Seen by cardiology at ___ and renal team on ___. Stable for discharge.
+
+Discharge Medications:
+Furosemide daily, metoprolol twice daily, atorvastatin nightly, insulin as directed.
+
+Discharge Disposition:
+Home with services
+
+Discharge Diagnosis:
+Chronic kidney disease
+Heart failure
+Acute kidney injury
+
+Discharge Condition:
+Stable
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory with assistance
+
+Discharge Instructions:
+Weigh yourself each morning and limit salt and fluids. Take medications as prescribed. Call ___ or return for worsening breathlessness or swelling.
+
+Followup Instructions:
+___

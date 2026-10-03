@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Vomiting and lightheadedness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with a long cardiac and metabolic history who presented with three days of poor oral intake, vomiting, and lightheadedness. She was first seen at ___ where labs showed a creatinine well above her baseline and an elevated potassium. She was transferred to ___ for further care and admitted for fluid resuscitation and close monitoring.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Heart failure
+Atrial fibrillation
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Gen:
+Tired appearing, no acute distress.
+HEENT:
+Dry mucous membranes.
+Neck:
+Supple, no JVD.
+PULM:
+Clear bilaterally.
+Abdomen:
+Soft, nontender, nondistended.
+EXTREMITIES:
+Warm, trace ankle edema.
+SKIN:
+Dry, intact, no rash.
+
+Brief Hospital Course:
+Her creatinine peaked at ___ and improved with gentle intravenous fluids and holding of her diuretic and ACE inhibitor. Urine output recovered and potassium normalized. Metformin was held during the stay. Rate control continued with metoprolol and she remained hemodynamically stable. Cardiology at ___ agreed with resuming a reduced diuretic dose. Her diet was advanced and she was seen by physical therapy at ___ before going home with laboratory follow-up.
+
+Medications on Admission:
+Metformin ___ mg twice daily; furosemide 40 mg daily; lisinopril 10 mg daily; apixaban 5 mg twice daily.
+
+Discharge Medications:
+Apixaban 5 mg by mouth twice daily. Metoprolol succinate 50 mg once daily. Furosemide 20 mg once daily, lower than before. Hold metformin and lisinopril until labs are rechecked ___ at clinic. Continue all other home medicines unchanged.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic kidney disease
+Heart failure
+Atrial fibrillation
+
+Discharge Condition:
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized because you were dehydrated and your kidney function worsened. Drink fluids regularly and weigh yourself every morning. Do not restart metformin or lisinopril until told by your doctor at ___. Call ___ or return to the hospital for fever, repeated vomiting, fainting, or new leg swelling.
+
+Followup Instructions:
+___

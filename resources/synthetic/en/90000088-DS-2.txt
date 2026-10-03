@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right leg redness and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with a two day history of right lower leg redness, warmth and swelling after a minor scrape while gardening. He was seen at ___ urgent care and given oral antibiotics, but worsened with fever and spreading erythema since ___, prompting presentation to the emergency department.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy
+
+Social History:
+___
+
+Physical Exam:
+General: Alert, comfortable, mildly febrile on arrival.
+HEENT: Moist mucous membranes.
+Lungs: Clear bilaterally.
+Abdomen: Soft, nontender. Right shin with warm erythematous patch.
+
+Pertinent Results:
+Admission white count was elevated with neutrophil predominance, and inflammatory markers were raised. Blood cultures from ___ showed no growth. Leg ultrasound excluded deep vein thrombosis.
+DISCHARGE LABS:
+White count normalized, creatinine at baseline, electrolytes unremarkable.
+
+Brief Hospital Course:
+Treated for cellulitis of the right leg with intravenous vancomycin, with steady improvement in fever and erythema. The margin of redness was marked and receded daily. Wound care reviewed by ___ nursing. Transitioned to oral doxycycline and discharged on ___ afebrile and walking independently.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Doxycycline 100 mg twice daily for seven more days. Continue lisinopril 10 mg daily and atorvastatin 20 mg nightly. Acetaminophen 650 mg every six hours as needed for leg discomfort.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Cellulitis of the right lower leg
+Secondary:
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Take the antibiotic until finished, keep the leg elevated, and keep the area clean and dry. Call ___ or return to ___ if redness spreads, fever returns, or pain worsens.
+
+Followup Instructions:
+___

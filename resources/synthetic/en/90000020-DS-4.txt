@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: NEUROLOGY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Neck pain and left arm weakness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension presented to ___ after three days of worsening neck pain, followed by clumsiness and weakness of the left hand. No fever, trauma, or bowel and bladder change was reported.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Cervical spondylosis, followed by Dr. ___
+
+Social History:
+___
+
+Family History:
+Father with stroke in his seventies
+
+Physical Exam:
+Alert, comfortable, afebrile. Heart regular, lungs clear, abdomen soft. Mild left grip weakness noted on admission.
+DISCHARGE PHYSICAL EXAM:
+Vitals: T 98.2 BP 128/76 HR 70 RR 16 SpO2 98% room air
+Neck: Supple, mild paraspinal tenderness, full range of motion
+Neuro: Alert, fluent speech, left grip 4+/5, otherwise strength full, sensation intact, gait steady
+
+Pertinent Results:
+MRI cervical spine: moderate canal narrowing at C5-C6 without cord signal change. MRI brain: no acute infarct. Hemoglobin A1c normal. Basic metabolic panel and blood count unremarkable.
+
+Brief Hospital Course:
+Weakness was attributed to cervical radiculopathy from spondylosis. Stroke was excluded by imaging. He has no diabetes, and glucose was normal. Pain improved with scheduled analgesics and physical therapy seen on ___. Neurosurgery at ___ advised outpatient follow up.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Acetaminophen 650 mg every six hours as needed for pain
+4. Naproxen 250 mg twice daily with food for one week
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Cervical radiculopathy
+Cervical spondylosis
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted with neck pain and arm weakness caused by a pinched nerve in the neck. Take medications as prescribed. Avoid heavy lifting. Return for worsening weakness, numbness, or urinary problems. Call ___ clinic at ___ with questions.
+
+Followup Instructions:
+___

@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Patient presented to ___ with two days of right upper quadrant pain, nausea and vomiting after a fatty meal. Symptoms began on ___ and worsened despite dietary changes. Pain radiated to the right shoulder. He denied fever or jaundice. He was referred by Dr. ___ for urgent evaluation, imaging and surgical consultation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones, father with cancer at ___
+
+Physical Exam:
+CARDIAC: Regular rate and rhythm, no murmurs.
+Abdomen: Soft, tender in right upper quadrant, positive Murphy sign, nondistended.
+EXTREMITIES: Warm, no edema.
+Neuro: Alert, oriented, nonfocal.
+
+Pertinent Results:
+Laboratory studies showed mildly elevated white blood cell count with normal bilirubin and liver enzymes. Lipase was within normal limits. Ultrasound performed at ___ demonstrated gallstones, gallbladder wall thickening and pericholecystic fluid. Postoperative recovery labs were unremarkable.
+IMPRESSION:
+Findings consistent with acute calculous cholecystitis, no bile duct dilation.
+
+Brief Hospital Course:
+He was admitted to the surgical service, given intravenous fluids and antibiotics, and kept without oral intake. On ___ he underwent an uncomplicated laparoscopic cholecystectomy by Dr. ___. Postoperatively his pain was controlled with oral analgesics, diet was advanced and he tolerated regular food. Antibiotics were stopped after surgery. Incisions were clean and dry. He was discharged home on ___ in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Aspirin 81 mg daily
+
+Discharge Medications:
+1. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+2. Oxycodone 5 mg by mouth every six hours as needed for severe pain.
+3. Docusate 100 mg twice daily while taking opioids.
+4. Continue lisinopril and atorvastatin as before.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Acute calculous cholecystitis
+Secondary: Hypertension, hyperlipidemia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized with gallbladder inflammation and had your gallbladder removed laparoscopically. Keep incisions clean and dry and shower as usual. Avoid lifting over ten pounds for several weeks. Call ___ or return to the emergency department for fever, worsening pain, vomiting, yellow skin or wound redness. Follow up as arranged by ___.
+
+Followup Instructions:
+___

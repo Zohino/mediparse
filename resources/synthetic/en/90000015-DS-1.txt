@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath and leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient is a woman with chronic kidney disease and heart failure who presented to ___ with three days of worsening dyspnea, orthopnea and bilateral leg swelling after running out of her diuretic. She was first evaluated at ___ on ___ and transferred here for further management. She denied chest pain, fever or cough.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Osteoarthritis
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals: T 98.2, HR 78, BP 130/74, RR 18, SpO2 96% on room air
+General: Comfortable, no acute distress
+HEENT: Moist mucous membranes
+ABD: Soft, nontender
+Ext: Trace pedal edema
+SKIN: Warm and dry
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Admission labs showed an elevated BNP with creatinine near her baseline and normal electrolytes. Chest radiograph obtained at ___ on ___ demonstrated mild pulmonary vascular congestion and small bilateral effusions. Echocardiogram images were reviewed by the cardiology team, with formal report pending.
+IMPRESSION: Mild pulmonary congestion without focal consolidation.
+
+Brief Hospital Course:
+She was admitted with volume overload and treated with intravenous furosemide, with good urine output and steady improvement in breathing. Her weight fell and her oxygen requirement resolved. Renal function remained stable throughout. Her home regimen was adjusted, and she was seen by nutrition and by ___ for diet teaching before leaving to ___.
+TRANSITIONAL ISSUES:
+- Recheck basic metabolic panel within one week at ___
+- Daily weights; call for gain of more than three pounds
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Furosemide 20 mg daily
+
+Discharge Medications:
+1. Furosemide 40 mg by mouth daily, dose increased by ___
+2. Lisinopril 10 mg by mouth once daily
+3. Atorvastatin 20 mg by mouth every night at bedtime
+4. Acetaminophen 500 mg by mouth as needed for joint pain
+
+Discharge Disposition:
+Home with services
+Facility: ___
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent with a walker for longer distances
+
+Discharge Instructions:
+You were hospitalized because fluid built up in your body and made it hard to breathe. We removed the extra fluid with medicine. Weigh yourself every morning, limit salt intake, and take your medications as directed. Call Dr. ___ at ___ for worsening breathlessness, swelling or weight gain.
+
+Followup Instructions:
+___

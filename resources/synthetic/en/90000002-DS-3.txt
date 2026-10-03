@@ -1,0 +1,61 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Cardiology
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with atrial fibrillation presented with palpitations and lightheadedness for two days after missing doses of her anticoagulant. Evaluated at ___ and transferred for rate control and monitoring.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Possible diabetes mellitus, not yet confirmed
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Vitals: afebrile, heart rate controlled.
+HEENT: unremarkable.
+Abdomen: soft, nontender.
+SKIN: warm, dry.
+Neuro: nonfocal.
+
+Pertinent Results:
+Troponin negative twice. Potassium and creatinine within normal limits. ECG showed irregular rhythm without ischemic changes. Hemoglobin stable. Labs otherwise unremarkable.
+IMPRESSION: No acute cardiopulmonary process on chest radiograph performed at ___.
+
+Brief Hospital Course:
+She was monitored on telemetry and her heart rate settled after oral metoprolol was adjusted. Anticoagulation was resumed and adherence was reviewed with her. Cardiology at ___ recommended outpatient follow up. She remained stable and was discharged home.
+
+Medications on Admission:
+Metoprolol, apixaban, atorvastatin, and lisinopril daily
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily, apixaban 5 mg twice daily, atorvastatin 20 mg nightly, lisinopril 10 mg daily.
+
+Discharge Disposition:
+Home
+
+Discharge Condition:
+Mental Status: Alert and appropriate.
+Level of Consciousness: Awake and attentive.
+Activity Status: Walks independently.
+
+Discharge Instructions:
+Take medicines as prescribed and never skip anticoagulant doses. Return for fainting or chest pain. Call ___ with questions, or see ___ soon.
+
+Followup Instructions:
+___

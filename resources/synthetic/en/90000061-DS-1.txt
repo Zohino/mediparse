@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+___ year old man with hypertension presented with two days of worsening right lower quadrant pain, nausea and poor appetite. Pain began near the umbilicus and migrated. He was first seen at ___, where CT showed acute appendicitis, and he was transferred to our hospital on ___ for surgery.
+
+Past Medical History:
+Hypertension, followed by ___
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with breast cancer diagnosed at ___
+No family history of bowel disease
+
+Physical Exam:
+General:
+Uncomfortable, alert, afebrile
+HEENT:
+Moist mucous membranes
+ABD:
+Tender right lower quadrant, guarding, no rebound
+SKIN:
+Warm, dry
+Neuro:
+Nonfocal
+
+Pertinent Results:
+Admission labs from ___ showed white count 14.2 with neutrophil predominance, normal electrolytes and creatinine, and normal liver enzymes. CT abdomen and pelvis demonstrated a dilated, thickened appendix with surrounding fat stranding and no abscess or free perforation. Pathology of the appendix was pending at discharge.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Acetaminophen 650 mg by mouth every six hours as needed for pain
+2. Oxycodone 5 mg by mouth every six hours as needed for severe pain, short course
+3. Lisinopril 10 mg daily
+4. Atorvastatin 20 mg nightly
+5. Docusate 100 mg twice daily while taking oxycodone
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute appendicitis
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Stable and improved
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were admitted with appendicitis and underwent laparoscopic appendectomy. You may shower but do not soak incisions. Avoid lifting over ten pounds for four weeks. Return for fever, worsening belly pain, vomiting, or wound redness or drainage. Call Dr. ___ with questions.
+
+Followup Instructions:
+___

@@ -1,0 +1,89 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy on ___
+
+History of Present Illness:
+Woman who presented to ___ with two days of worsening right upper quadrant pain, nausea and vomiting after a fatty meal. Pain radiated to the back and did not settle with over-the-counter analgesics. She reported low-grade fevers at home. She was seen by her primary physician on ___ and sent to the emergency department, where imaging showed gallstones with wall thickening. She was transferred to ___ for surgical care.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Gastroesophageal reflux
+
+Past Surgical History:
+Cesarean section in ___
+Appendectomy
+
+Social History:
+___
+
+Family History:
+Mother with gallstones, treated at ___. No family history of malignancy.
+
+Physical Exam:
+Vitals:
+T 37.8, HR 92, BP 134/78, RR 16, SpO2 98% on room air
+General:
+Uncomfortable, nontoxic
+HEENT:
+Mild scleral icterus absent, moist mucosa
+Neck:
+Supple
+Abdomen:
+Tender in right upper quadrant, positive Murphy sign, no rebound
+SKIN:
+Warm, dry
+Neuro:
+Alert, nonfocal
+PULSES:
+Palpable and symmetric
+
+Pertinent Results:
+Admission labs notable for white count 14.2 with neutrophil predominance, normal bilirubin and mildly elevated lipase. Ultrasound at ___ showed multiple gallstones, gallbladder wall thickening and pericholecystic fluid. Common bile duct measured 4 mm. Pathology from the gallbladder, reviewed by ___, showed acute inflammation with no dysplasia.
+
+Brief Hospital Course:
+She was admitted, kept NPO, given intravenous fluids and antibiotics, and taken to the operating room by Dr. ___ for laparoscopic cholecystectomy, which was uncomplicated. Her diet was advanced on postoperative day one and pain was controlled with oral medication. Fever resolved and white count normalized. Port sites remained clean. She was discharged home on ___ with arrangements through ___ for a follow-up visit.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 75 mcg daily
+Omeprazole 20 mg daily
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily.
+2. Levothyroxine 75 mcg by mouth once daily.
+3. Omeprazole 20 mg by mouth once daily.
+4. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+5. Oxycodone 5 mg every six hours as needed for severe pain.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with an inflamed gallbladder and had it removed laparoscopically. You may shower and let soapy water run over the incisions; do not soak them. Avoid lifting more than ten pounds for four weeks. Take pain medication only as needed and do not drive while taking it. Call the clinic at ___ or return to ___ for fever, worsening pain, vomiting or yellow skin.
+
+Followup Instructions:
+___

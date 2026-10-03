@@ -1,0 +1,61 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies.
+
+Chief Complaint:
+Right lower quadrant abdominal pain.
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy.
+
+History of Present Illness:
+Patient presented to ___ with two days of worsening right lower quadrant pain, nausea and low-grade fever. Symptoms began after a meal and progressed steadily. She denied vomiting blood or urinary complaints. Imaging performed at ___ showed an inflamed appendix, and she was referred to the surgical service for evaluation on ___.
+
+Past Medical History:
+Hypertension, migraine.
+
+Past Surgical History:
+Cesarean section in ___.
+
+Social History:
+___
+
+Family History:
+Mother with breast cancer.
+
+Physical Exam:
+HEENT: Moist mucous membranes, anicteric.
+Abdomen: Soft, mildly tender at right lower quadrant, healing port incisions clean.
+Ext: Warm, no edema.
+SKIN: No rash.
+
+Pertinent Results:
+ADMISSION LABS: WBC 14.2, hemoglobin 12.8, platelets 260, sodium 138, potassium 4.1, creatinine 0.8, lactate 1.1. CT abdomen at ___ notable for dilated appendix with surrounding fat stranding, no abscess.
+DISCHARGE LABS: WBC 8.1, hemoglobin 12.2, platelets 245, sodium 139, potassium 4.0, creatinine 0.7. Pathology from ___ pending at discharge.
+
+Brief Hospital Course:
+She underwent uncomplicated laparoscopic appendectomy on hospital day one under Dr. ___. Postoperatively pain was controlled with acetaminophen and oral oxycodone as needed. Diet was advanced and tolerated without nausea. Antibiotics were stopped after surgery since no perforation was found. She ambulated independently, voided spontaneously and had return of bowel function. Vital signs remained stable and afebrile. She was discharged home in the care of ___ with outpatient surgical follow up.
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed. Oxycodone 5 mg every six hours as needed for severe pain, three days only. Docusate 100 mg twice daily while taking oxycodone. Continue home amlodipine 5 mg daily. Prescriptions sent to ___ pharmacy.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for appendicitis and had your appendix removed. Keep incisions clean and dry, with no lifting over ten pounds for four weeks. Take pain medication as prescribed. Call ___ or return for fever, worsening pain, vomiting, or wound redness.
+
+Followup Instructions:
+___

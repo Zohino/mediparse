@@ -1,0 +1,60 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Shortness of breath, leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with chronic heart failure presented after three days of worsening dyspnea, leg swelling and reduced urine output, referred from ___ clinic. Weight was up several kilograms despite her home diuretic and poor appetite.
+
+Past Medical History:
+Chronic kidney disease stage 4
+Hypertension
+Anemia of chronic disease
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Gen: Tired, no distress
+HEENT: Moist mucosa
+Neck: JVP elevated
+ABD: Soft, nontender
+EXTREMITIES: 2+ pitting edema to knees
+PULSES: Palpable distally
+
+Pertinent Results:
+Creatinine 2.9 on arrival from baseline 1.8, BUN 54, potassium 5.3, BNP markedly elevated. Chest film showed pulmonary vascular congestion. Creatinine improved to 2.1 with diuresis by ___. Echocardiogram unchanged from prior.
+
+Medications on Admission:
+Furosemide 40 mg daily, lisinopril 10 mg daily, aspirin.
+
+Discharge Medications:
+Furosemide 60 mg daily, carvedilol 6.25 mg twice daily, aspirin 81 mg daily, sevelamer with meals. Hold lisinopril until kidney function is rechecked.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory with a walker.
+
+Discharge Instructions:
+Weigh yourself every morning and limit salt and fluids. Call ___ if weight rises by two pounds in a day, or if breathing or swelling worsens. Keep your lab appointment.
+
+Followup Instructions:
+___

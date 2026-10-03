@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man presented to ___ with three days of productive cough, fever and shortness of breath after a recent trip. He was febrile and hypoxic in the emergency department and admitted for further management.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Moist mucous membranes
+Neck:
+Supple
+Lungs:
+Mild right basilar crackles
+Ext:
+No edema
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Chest radiograph showed a right lower lobe opacity. White blood cell count was elevated on admission and normalized by discharge. Creatinine remained at baseline.
+IMAGING:
+Right lower lobe consolidation, no effusion
+
+Brief Hospital Course:
+Treated for community acquired pneumonia with intravenous antibiotics then oral therapy, with oxygen weaned to room air by ___. Fever resolved and appetite returned. Seen by physical therapy and cleared for home. Follow up with primary care physician Dr. ___ arranged.
+
+Discharge Medications:
+Amoxicillin-clavulanate twice daily for five more days. Continue home lisinopril and atorvastatin. Acetaminophen as needed for fever or aches.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community acquired pneumonia
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Independent, ambulates without assistance
+
+Discharge Instructions:
+Take all antibiotics as prescribed. Rest, drink fluids and return to ___ for fever, worsening breathlessness or chest pain. Do not smoke.
+
+Followup Instructions:
+___
