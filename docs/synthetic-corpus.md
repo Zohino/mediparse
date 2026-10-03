@@ -180,7 +180,8 @@ korpusem v repu.
   4. Čistý audit zapíše `audit.json`: otisk korpusu, reference se jmény, otisky
      a počty řádků, metodu, commit nástroje a datum.
 - **Brána.** Hook při commitu a test v CI porovnají otisk korpusu, metodu
-  a referenci s `audit.json`. Neauditovaný nebo změněný korpus neprojde.
+  a referenci s `audit.json` a otisk `audit.json` s `provenance.json`.
+  Neauditovaný nebo změněný korpus ani korpus bez platné provenance neprojde.
 
 ## Uložení
 
@@ -204,7 +205,16 @@ Vstup smoketestu ze souborů korpusu sestavuje S12a.
 - model (`claude-opus-5-5`) a verzi Claude Code v době generování;
 - datum generování a otisk šablony instrukcí;
 - commit této specifikace;
-- odkaz na `audit.json`.
+- otisk `audit.json`.
+
+Otisky jsou SHA-256 souborů tak, jak leží v repozitáři. Provenance vzniká po čistém
+auditu příkazem `mediparse-corpus-provenance` (`just provenance-corpus <model>`):
+model, verzi Claude Code, datum a commit specifikace dostane jako argumenty.
+Recept ověří, že commit specifikace leží v `main`: rebase merge mění SHA, takže
+změna specifikace se merguje dřív než korpus, který se na ni odvolává.
+Ke korpusu, který neodpovídá svému auditu, provenance nevznikne. Brána odmítne
+auditovaný korpus bez provenance i s provenance, která nenese otisk aktuálního
+`audit.json`; korpus, `audit.json` a `provenance.json` se proto commitují spolu.
 
 Stejný seed dává identické plány. Verbalizace je nedeterministická: nový běh dává
 jiný text se stejnou strukturou, labely a zmínkami a s délkami v tolerancích.
