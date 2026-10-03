@@ -18,6 +18,7 @@ from mediparse.domain.note_structure import Sex
 from mediparse.entrypoints import corpus_audit, corpus_provenance
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.mimic_reference import MimicReference
+from mediparse.infrastructure.plans_file import PLANS_PATH
 from mediparse.infrastructure.sampler_config import load_sampler_config
 from mediparse.infrastructure.verbalization_template import (
     VERBALIZATION_TEMPLATE_PATH,
@@ -33,6 +34,7 @@ type Rows = Sequence[tuple[str, str]]
 
 REPOSITORY_CONFIG: Final = Path(__file__).parents[1] / "config" / "synthetic_plan.json"
 REPOSITORY_TEMPLATE: Final = Path(__file__).parents[1] / VERBALIZATION_TEMPLATE_PATH
+REPOSITORY_PLANS: Final = Path(__file__).parents[1] / PLANS_PATH
 
 COMMIT: Final = "c" * 40
 HEADER: Final = (
@@ -218,7 +220,7 @@ class AuditFiles:
         return root
 
     def provenance_argv(self, corpus: Path, **overrides: str) -> list[str]:
-        """Argumenty provenance korpusu s configem a šablonou z repa.
+        """Argumenty provenance korpusu s configem, šablonou a plány z repa.
 
         Returns:
             Argumenty vstupního bodu provenance; ``overrides`` nahradí údaje o generování.
@@ -234,6 +236,7 @@ class AuditFiles:
             f"--corpus={corpus}",
             f"--config={REPOSITORY_CONFIG}",
             f"--template={REPOSITORY_TEMPLATE}",
+            f"--plans={REPOSITORY_PLANS}",
             f"--tables={self.tables}",
         ]
 

@@ -2,7 +2,7 @@
 
 Konzolový skript ``mediparse-corpus-provenance`` dostane model, verzi Claude Code,
 den generování a commit specifikace jako argumenty; git ani Claude Code nevolá.
-Seed a otisky configu vzorkovače a šablony instrukcí bere ze souborů v repu.
+Seed, otisk configu vzorkovače a otisk zadání všech zpráv bere ze souborů v repu.
 """
 
 from __future__ import annotations
@@ -18,10 +18,11 @@ from mediparse.application.corpus_provenance import (
     ProvenanceRefused,
     ProvenanceWritten,
 )
-from mediparse.domain.corpus_provenance import Generation
+from mediparse.domain.corpus_provenance import Generation, prompts_sha256
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_reference_sha256
+from mediparse.infrastructure.plans_file import PLANS_PATH, PlansFile
 from mediparse.infrastructure.sampler_config import (
     SAMPLER_CONFIG_PATH,
     load_sampler_config,
@@ -33,6 +34,7 @@ from mediparse.infrastructure.synthetic_corpus import (
 )
 from mediparse.infrastructure.verbalization_template import (
     VERBALIZATION_TEMPLATE_PATH,
+    load_verbalization_template,
 )
 
 if TYPE_CHECKING:
@@ -55,12 +57,17 @@ def run(argv: Sequence[str]) -> ExitCode:
         OK po zapsání provenance, REFUSED při neplatných údajích nebo korpusu bez čistého auditu.
     """
     args = _parser().parse_args(argv)
-    seed = load_sampler_config(args.config).seed
+    config = load_sampler_config(args.config)
+    prompts = prompts_sha256(
+        load_verbalization_template(args.template),
+        PlansFile(args.plans).load(),
+        config,
+    )
     try:
         generation = Generation(
-            seed=seed,
+            seed=config.seed,
             sampler_config_sha256=file_sha256(args.config),
-            verbalization_template_sha256=file_sha256(args.template),
+            prompts_sha256=prompts,
             model=args.model,
             claude_code_version=args.claude_code_version,
             generated_on=args.date,
@@ -119,6 +126,9 @@ def _parser() -> argparse.ArgumentParser:
         type=Path,
         default=SAMPLER_CONFIG_PATH,
         help="konfigurace vzorkovače",
+    )
+    parser.add_argument(
+        "--plans", type=Path, default=PLANS_PATH, help="soubor plánů JSON Lines"
     )
     parser.add_argument(
         "--template",
