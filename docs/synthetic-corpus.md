@@ -166,9 +166,14 @@ korpusem v repu.
 ## Audit a brána
 
 - **Kritérium.** Nulový překryv 13-gramů slov po normalizaci
-  `nfkc-lower-alnum-deid-v1` (NFKC, malá písmena, tokeny jsou souvislé úseky písmen
+  `nfkc-lower-alnum-deid-v2` (NFKC, malá písmena, tokeny jsou souvislé úseky písmen
   a číslic, `___` je jeden token) a žádný syntetický `subject_id` mezi pacienty
-  reference.
+  reference. Na straně korpusu se nepočítá 13-gram, který obsahuje štítek struktury:
+  jméno pole preambule, hlavičku sekce nebo podnadpis z configu s dvojtečkou, bez
+  ohledu na velikost písmen a bez písmene či číslice těsně před ním. Strukturu
+  předepisuje config podle MIMIC, takže samotná preambule s `___` tvoří 13-gramy
+  skoro každé propouštěcí zprávy. Text mezi štítky se audituje celý, i před prvním
+  štítkem a ve zprávě bez rozpoznané struktury. Strana reference se neomezuje.
 - **Reference.** Tabulky projektu `mimic-iv-note` v `config/mimic_tables.json`
   (discharge a radiology, MIMIC-IV-Note 2.2) s oficiálními otisky SHA-256. Audit
   odmítne soubory, které s nimi nesedí, dřív, než je začne číst.
@@ -181,9 +186,10 @@ korpusem v repu.
   3. Zpráva se shodou se napíše znovu ze svého plánu. Generátor se dozví jen
      `note_id`, ne proč ani kde byla shoda.
   4. Čistý audit zapíše `audit.json`: otisk korpusu, reference se jmény, otisky
-     a počty řádků, metodu, commit nástroje a datum.
-- **Brána.** Hook při commitu a test v CI porovnají otisk korpusu, metodu
-  a referenci s `audit.json` a otisk `audit.json` s `provenance.json`.
+     a počty řádků, metodu, štítky struktury, commit nástroje a datum.
+- **Brána.** Hook při commitu a test v CI porovnají otisk korpusu, metodu,
+  štítky struktury z configu a referenci s `audit.json` a otisk `audit.json`
+  s `provenance.json`.
   Neauditovaný nebo změněný korpus ani korpus bez platné provenance neprojde.
 
 ## Uložení
