@@ -105,7 +105,7 @@ def _parser() -> argparse.ArgumentParser:
         "--model",
         type=argument(model_id),
         required=True,
-        help="model, který zprávy napsal, např. claude-opus-5-5",
+        help="model, který zprávy napsal, např. claude-sonnet-5-5",
     )
     parser.add_argument(
         "--claude-code-version",

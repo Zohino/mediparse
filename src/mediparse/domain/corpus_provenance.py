@@ -31,7 +31,7 @@ def model_id(value: str) -> str:
         ValueError: Hodnota není identifikátor modelu Claude.
     """
     if _MODEL_ID.fullmatch(value) is None:
-        msg = "Model musí být identifikátor modelu Claude, například claude-opus-5-5."
+        msg = "Model musí být identifikátor modelu Claude, například claude-sonnet-5-5."
         raise ValueError(msg)
     return value
 
