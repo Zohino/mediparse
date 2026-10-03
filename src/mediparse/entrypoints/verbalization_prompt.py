@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.application.verbalization_prompt import VerbalizationPrompt
+from mediparse.entrypoints.cli import refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.plans_file import PLANS_PATH, PlansFile
 from mediparse.infrastructure.sampler_config import (
@@ -36,11 +37,13 @@ def main() -> ExitCode:
     return run(sys.argv[1:])
 
 
+@refusing_invalid_input
 def run(argv: Sequence[str]) -> ExitCode:
     """Složí zadání pro note_id z plánů, configu a šablony a vypíše ho.
 
     Returns:
-        OK po vypsání zadání, REFUSED pro neznámé note_id.
+        OK po vypsání zadání, REFUSED pro neznámé note_id nebo chybějící či neplatný
+        vstupní soubor.
     """
     args = _parser().parse_args(argv)
     prompt = VerbalizationPrompt(PlansFile(args.plans)).run(

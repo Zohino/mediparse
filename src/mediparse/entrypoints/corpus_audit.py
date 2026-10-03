@@ -23,6 +23,7 @@ from mediparse.application.corpus_audit import (
     CorpusAudit,
 )
 from mediparse.domain.corpus_audit import COMMIT_PATTERN, NGRAM_SIZE
+from mediparse.entrypoints.cli import refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.audit_workspace import LocalWorkspace
 from mediparse.infrastructure.mimic_reference import MimicReference
@@ -47,11 +48,13 @@ def main() -> ExitCode:
     return run(sys.argv[1:], os.environ)
 
 
+@refusing_invalid_input
 def run(argv: Sequence[str], environ: Mapping[str, str]) -> ExitCode:
     """Složí audit z adaptérů podle argumentů a přeloží jeho výsledek na návratový kód.
 
     Returns:
-        OK bez shod, BLOCKED při shodě, REFUSED při odmítnutí.
+        OK bez shod, BLOCKED při shodě, REFUSED při odmítnutí auditu nebo chybějícím
+        či neplatném configu tabulek.
     """
     args = _parser().parse_args(argv)
     references = tuple(args.reference)

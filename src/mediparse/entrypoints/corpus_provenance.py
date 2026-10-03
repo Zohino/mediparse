@@ -19,6 +19,7 @@ from mediparse.application.corpus_provenance import (
     ProvenanceWritten,
 )
 from mediparse.domain.corpus_provenance import Generation, prompts_sha256
+from mediparse.entrypoints.cli import refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_reference_sha256
@@ -50,11 +51,13 @@ def main() -> ExitCode:
     return run(sys.argv[1:])
 
 
+@refusing_invalid_input
 def run(argv: Sequence[str]) -> ExitCode:
     """Složí provenance z argumentů a souborů v repu a zapíše ji ke korpusu.
 
     Returns:
-        OK po zapsání provenance, REFUSED při neplatných údajích nebo korpusu bez čistého auditu.
+        OK po zapsání provenance, REFUSED při neplatných údajích, neplatném vstupním
+        souboru nebo korpusu bez čistého auditu.
     """
     args = _parser().parse_args(argv)
     config = load_sampler_config(args.config)

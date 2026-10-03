@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.application.corpus_gate import CorpusGate
+from mediparse.entrypoints.cli import refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_reference_sha256
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirectory
@@ -30,11 +31,13 @@ def main() -> ExitCode:
     return run(sys.argv[1:])
 
 
+@refusing_invalid_input
 def run(argv: Sequence[str]) -> ExitCode:
     """Složí bránu nad korpusem z argumentů a přeloží porušení na návratový kód.
 
     Returns:
-        OK, když korpus neexistuje nebo odpovídá auditu i provenance, jinak BLOCKED.
+        OK, když korpus neexistuje nebo odpovídá auditu i provenance, jinak BLOCKED;
+        REFUSED pro chybějící nebo neplatný config tabulek.
     """
     args = _parser().parse_args(argv)
     gate = CorpusGate(CorpusDirectory(args.corpus))

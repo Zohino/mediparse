@@ -113,6 +113,7 @@ ignore_imports = [
     "mediparse.domain.** -> unicodedata",
     "mediparse.entrypoints.** -> argparse",
     "mediparse.entrypoints.** -> datetime",
+    "mediparse.entrypoints.** -> functools",
     "mediparse.entrypoints.** -> os",
     "mediparse.entrypoints.** -> pathlib",
     "mediparse.entrypoints.** -> random",
