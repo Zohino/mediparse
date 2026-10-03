@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.application.corpus_consistency import CorpusConsistency
+from mediparse.entrypoints.cli import refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.plans_file import PLANS_PATH, PlansFile
 from mediparse.infrastructure.sampler_config import (
@@ -34,11 +35,13 @@ def main() -> ExitCode:
     return run(sys.argv[1:])
 
 
+@refusing_invalid_input
 def run(argv: Sequence[str]) -> ExitCode:
     """Složí kontroly z plánů, korpusu a configu a vypíše zprávy k přegenerování.
 
     Returns:
-        OK, když zprávy odpovídají plánům a neprázdný korpus modelu, jinak BLOCKED.
+        OK, když zprávy odpovídají plánům a neprázdný korpus modelu, jinak BLOCKED;
+        REFUSED pro chybějící nebo neplatný vstupní soubor.
     """
     args = _parser().parse_args(argv)
     check = CorpusConsistency(

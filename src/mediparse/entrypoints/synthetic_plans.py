@@ -14,6 +14,7 @@ from random import Random
 from typing import TYPE_CHECKING
 
 from mediparse.application.plan_sampling import PlanSampling
+from mediparse.entrypoints.cli import refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.plans_file import (
     LABELS_PATH,
@@ -38,11 +39,12 @@ def main() -> ExitCode:
     return run(sys.argv[1:])
 
 
+@refusing_invalid_input
 def run(argv: Sequence[str]) -> ExitCode:
     """Složí vzorkovač z configu a souboru plánů a spustí ho.
 
     Returns:
-        OK po zapsání plánů.
+        OK po zapsání plánů, REFUSED pro chybějící nebo neplatný config.
     """
     args = _parser().parse_args(argv)
     store = SyntheticPlanFiles(args.output, args.labels)
