@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from types import MappingProxyType
 from typing import TYPE_CHECKING, Final, Protocol
 
-from mediparse.application.ports import NoteSource
+from mediparse.application.ports import FingerprintedCorpus, NoteSource
 from mediparse.domain.corpus_audit import (
     NGRAM_SIZE,
     NORMALIZATION,
@@ -36,7 +36,7 @@ _BLOCKING_VARIABLES: Final = MappingProxyType({
 })
 
 
-class SyntheticCorpus(NoteSource, Protocol):
+class SyntheticCorpus(NoteSource, FingerprintedCorpus, Protocol):
     """Auditovaný korpus: zprávy, jejich otisk a místo pro záznam auditu."""
 
     def note_ids(self) -> Iterable[str]:
@@ -44,13 +44,6 @@ class SyntheticCorpus(NoteSource, Protocol):
 
         Returns:
             Note_id ve skladbě MIMIC-IV-Note.
-        """
-
-    def fingerprint(self) -> str | None:
-        """Otisk zpráv korpusu.
-
-        Returns:
-            SHA-256 otisk, nebo None, když korpus neobsahuje žádnou zprávu.
         """
 
     def save_record(self, record: AuditRecord) -> None:

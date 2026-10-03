@@ -11,8 +11,8 @@ from mediparse.domain.corpus_audit import (
     AuditRecord,
     NgramIndex,
     ReferenceNote,
+    audit_record_violations,
     fingerprint,
-    gate_violations,
     reference_mismatch,
     scan,
     tokenize,
@@ -149,30 +149,27 @@ def test_record_requires_timezone() -> None:
         _record(created_at="2026-09-28T00:00:00")
 
 
-def test_gate_passes_when_there_is_no_corpus() -> None:
-    """Dokud korpus neexistuje, brána nemá co kontrolovat."""
-    assert gate_violations(None, None, PINNED) == ()
-
-
 def test_gate_requires_record_for_existing_corpus() -> None:
     """Korpus bez záznamu auditu neprojde."""
-    assert gate_violations(CORPUS_SHA, None, PINNED)
+    assert audit_record_violations(CORPUS_SHA, None, PINNED)
 
 
 def test_gate_rejects_corpus_changed_after_audit() -> None:
     """Změna korpusu po auditu změní otisk a brána ji zachytí."""
-    assert gate_violations("d" * 64, _record(), PINNED)
+    assert audit_record_violations("d" * 64, _record(), PINNED)
 
 
 def test_gate_rejects_record_from_other_method() -> None:
     """Záznam z jiné délky n-gramu nebo normalizace už korpus neatestuje."""
-    assert gate_violations(CORPUS_SHA, _record(ngram_size=NGRAM_SIZE - 1), PINNED)
-    assert gate_violations(CORPUS_SHA, _record(normalization="other"), PINNED)
+    assert audit_record_violations(
+        CORPUS_SHA, _record(ngram_size=NGRAM_SIZE - 1), PINNED
+    )
+    assert audit_record_violations(CORPUS_SHA, _record(normalization="other"), PINNED)
 
 
 def test_gate_accepts_matching_record() -> None:
     """Shodný otisk, metoda i reference bránou projdou."""
-    assert gate_violations(CORPUS_SHA, _record(), PINNED) == ()
+    assert audit_record_violations(CORPUS_SHA, _record(), PINNED) == ()
 
 
 @pytest.mark.parametrize(
@@ -188,12 +185,12 @@ def test_gate_rejects_reference_other_than_pinned(
     reference: list[dict[str, object]],
 ) -> None:
     """Audit, který neběžel přesně proti discharge a radiology s připnutými otisky, korpus neatestuje."""
-    assert gate_violations(CORPUS_SHA, _record(reference=reference), PINNED)
+    assert audit_record_violations(CORPUS_SHA, _record(reference=reference), PINNED)
 
 
 def test_gate_rejects_record_when_config_names_no_reference() -> None:
     """Config bez tabulek MIMIC-IV-Note nemá s čím srovnávat a korpus neatestuje."""
-    assert gate_violations(CORPUS_SHA, _record(), {})
+    assert audit_record_violations(CORPUS_SHA, _record(), {})
 
 
 @pytest.mark.parametrize(

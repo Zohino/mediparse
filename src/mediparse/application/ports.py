@@ -33,8 +33,8 @@ class NoteSource(Protocol):
         """
 
 
-class AuditedCorpus(Protocol):
-    """Korpus se záznamem auditu: otisk zpráv, záznam auditu a otisk jeho souboru."""
+class FingerprintedCorpus(Protocol):
+    """Korpus s otiskem zpráv."""
 
     def fingerprint(self) -> str | None:
         """Otisk zpráv korpusu.
@@ -42,6 +42,10 @@ class AuditedCorpus(Protocol):
         Returns:
             SHA-256 otisk, nebo None, když korpus neobsahuje žádnou zprávu.
         """
+
+
+class AuditedCorpus(FingerprintedCorpus, Protocol):
+    """Korpus se záznamem auditu: otisk zpráv, záznam auditu a otisk jeho souboru."""
 
     def audit_record(self) -> AuditRecord | None:
         """Záznam posledního auditu.

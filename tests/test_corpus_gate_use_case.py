@@ -91,6 +91,11 @@ def test_audited_corpus_passes() -> None:
     assert CorpusGate(_Corpus(AUDITED, _record(AUDITED))).run(PINNED) == ()
 
 
+def test_missing_corpus_passes_whatever_the_records() -> None:
+    """Neexistující korpus nic neporušuje, ani když vedle leží neplatný záznam auditu."""
+    assert CorpusGate(_Corpus(None, invalid_record=True)).run(PINNED) == ()
+
+
 def test_changed_corpus_is_blocked() -> None:
     """Korpus změněný po auditu neprojde."""
     assert CorpusGate(_Corpus("d" * 64, _record(AUDITED))).run(PINNED)
