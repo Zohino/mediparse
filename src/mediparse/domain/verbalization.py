@@ -6,7 +6,8 @@ from string import Template
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.mentions import MentionStatus
-from mediparse.domain.note_structure import DEID, PreambleValue
+from mediparse.domain.note_structure import PreambleValue
+from mediparse.domain.note_text import DEID
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -104,7 +105,7 @@ def _section_lines(plan: NotePlan, section: SectionModel) -> list[str]:
 
 def _age(plan: NotePlan) -> str:
     if plan.age_marker:
-        return "State the patient's age exactly once as `___ year old` (or `___ y/o`)."
+        return f"State the patient's age exactly once as `{DEID} year old` (or `{DEID} y/o`)."
     return "Do not state the patient's age in any form."
 
 

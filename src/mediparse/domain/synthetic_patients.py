@@ -117,10 +117,8 @@ def _draw(
 def _note_count(patients: PatientModel, ratio: float, rng: Random) -> int:
     if rng.random() < patients.single_note_probability:
         return 1
-    counts = range(_MIN_MULTIPLE, patients.max_notes + 1)
-    return rng.choices(counts, weights=[ratio ** (k - _MIN_MULTIPLE) for k in counts])[
-        0
-    ]
+    counts, weights = _count_weights(ratio, patients.max_notes)
+    return rng.choices(counts, weights=weights)[0]
 
 
 def _patient_notes(
@@ -149,6 +147,10 @@ def _within_tolerance(notes: Sequence[SyntheticNote], labels: LabelModel) -> boo
 
 
 def _mean_count(ratio: float, max_notes: int) -> float:
-    counts = range(_MIN_MULTIPLE, max_notes + 1)
-    weights = [ratio ** (k - _MIN_MULTIPLE) for k in counts]
+    counts, weights = _count_weights(ratio, max_notes)
     return sum(k * w for k, w in zip(counts, weights, strict=True)) / sum(weights)
+
+
+def _count_weights(ratio: float, max_notes: int) -> tuple[range, list[float]]:
+    counts = range(_MIN_MULTIPLE, max_notes + 1)
+    return counts, [ratio ** (k - _MIN_MULTIPLE) for k in counts]

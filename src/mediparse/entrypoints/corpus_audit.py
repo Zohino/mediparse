@@ -22,7 +22,7 @@ from mediparse.application.corpus_audit import (
     AuditRefused,
     CorpusAudit,
 )
-from mediparse.domain.corpus_audit import NGRAM_SIZE
+from mediparse.domain.corpus_audit import COMMIT_PATTERN, NGRAM_SIZE
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.audit_workspace import LocalWorkspace
 from mediparse.infrastructure.mimic_reference import MimicReference
@@ -35,7 +35,7 @@ if TYPE_CHECKING:
 
     from mediparse.application.corpus_audit import AuditOutcome
 
-_COMMIT: Final = re.compile(r"[0-9a-f]{40}")
+_COMMIT: Final = re.compile(COMMIT_PATTERN)
 
 
 def main() -> ExitCode:
