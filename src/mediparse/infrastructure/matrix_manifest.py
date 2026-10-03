@@ -5,15 +5,16 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mediparse.domain.matrix import ExperimentMatrix
+from mediparse.infrastructure.input_file import parse_file
 
 if TYPE_CHECKING:
     from pathlib import Path
 
 
 def load_matrix(path: Path) -> ExperimentMatrix:
-    """Přečte JSON manifest a předá ho validaci; neplatný obsah vyhodí ValidationError.
+    """Přečte JSON manifest a předá ho validaci.
 
     Returns:
         Matice, která prošla schématem i invarianty.
     """
-    return ExperimentMatrix.model_validate_json(path.read_text(encoding="utf-8"))
+    return parse_file(path, ExperimentMatrix.model_validate_json)

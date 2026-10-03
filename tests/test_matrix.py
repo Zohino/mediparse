@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING
 import pytest
 from pydantic import ValidationError
 
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.matrix import ExperimentMatrix, Language, Model, Tier
 from mediparse.infrastructure.matrix_manifest import load_matrix
 from tests.support import REPOSITORY_MATRIX
@@ -139,11 +140,11 @@ def test_load_matrix_reads_json(tmp_path: Path) -> None:
 
 
 def test_load_matrix_rejects_invalid_content(tmp_path: Path) -> None:
-    """Neplatný obsah souboru spadne na validaci, ne později v pipeline."""
+    """Neplatný obsah souboru spadne na validaci jako doménová chyba vstupu se jménem souboru."""
     manifest = tmp_path / "matrix.json"
     manifest.write_text('{"rows": [{"id": "en-logreg"}]}', encoding="utf-8")
 
-    with pytest.raises(ValidationError):
+    with pytest.raises(InvalidInputError, match=r"matrix\.json"):
         load_matrix(manifest)
 
 

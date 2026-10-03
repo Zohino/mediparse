@@ -19,6 +19,10 @@ class PlanSource(Protocol):
 
         Returns:
             Plány v pořadí zdroje.
+
+        Raises:
+            InvalidInputError: Zdroj plánů chybí nebo neodpovídá schématu; use case
+                chybu propouští ke vstupnímu bodu.
         """
 
 

@@ -9,6 +9,7 @@ from urllib.parse import urlsplit
 from pydantic import BaseModel, ConfigDict
 
 from mediparse.domain.corpus_audit import Sha256
+from mediparse.infrastructure.input_file import parse_file
 
 TABLES_PATH: Final = Path("config/mimic_tables.json")
 REFERENCE_PROJECT: Final = "mimic-iv-note"
@@ -32,12 +33,12 @@ class _Tables(BaseModel):
 
 
 def load_reference_sha256(path: Path) -> dict[str, str]:
-    """Přečte otisky tabulek projektu MIMIC-IV-Note, proti kterým běží audit; neplatný obsah vyhodí ValidationError.
+    """Přečte otisky tabulek projektu MIMIC-IV-Note, proti kterým běží audit.
 
     Returns:
         Slovník jméno souboru z URL → SHA-256 ze ``SHA256SUMS.txt`` na PhysioNetu.
     """
-    tables = _Tables.model_validate_json(path.read_text(encoding="utf-8"))
+    tables = parse_file(path, _Tables.model_validate_json)
     return {
         table.path.name: table.sha256
         for table in tables.mimic_tables
