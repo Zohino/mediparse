@@ -14,8 +14,8 @@ if TYPE_CHECKING:
     from collections.abc import Set as AbstractSet
 
     from mediparse.domain.labels import Diagnosis
-    from mediparse.domain.mentions import MentionModel
-    from mediparse.domain.note_plan import NotePlan, PlannedMention
+    from mediparse.domain.mentions import Mention, MentionModel
+    from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.note_structure import (
         PreambleField,
         SectionModel,
@@ -139,7 +139,7 @@ def _mentions(
 
 
 def _mention_line(
-    mention: PlannedMention, headers: Mapping[str, str], mentions: MentionModel
+    mention: Mention, headers: Mapping[str, str], mentions: MentionModel
 ) -> str:
     instruction = _STATUS_INSTRUCTIONS[mention.status].format(
         cues=", ".join(f"`{cue}`" for cue in mentions.negation.cues),

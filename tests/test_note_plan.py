@@ -25,8 +25,16 @@ STRUCTURE = NoteStructure(
     narrative_deid=4,
 )
 MENTIONS = (
-    Mention(Diagnosis.DIABETES, MentionStatus.AFFIRMED, ("past_medical_history",)),
-    Mention(Diagnosis.AKI, MentionStatus.AFFIRMED, ("discharge_diagnosis",)),
+    Mention(
+        diagnosis=Diagnosis.DIABETES,
+        status=MentionStatus.AFFIRMED,
+        sections=("past_medical_history",),
+    ),
+    Mention(
+        diagnosis=Diagnosis.AKI,
+        status=MentionStatus.AFFIRMED,
+        sections=("discharge_diagnosis",),
+    ),
 )
 
 

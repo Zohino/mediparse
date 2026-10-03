@@ -7,25 +7,14 @@ from typing import TYPE_CHECKING
 from pydantic import BaseModel, ConfigDict, NonNegativeInt, PositiveInt
 
 from mediparse.domain.labels import Diagnosis
-from mediparse.domain.mentions import MentionStatus
+from mediparse.domain.mentions import Mention
 from mediparse.domain.note_structure import Sex
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.domain.mentions import Mention
     from mediparse.domain.note_structure import NoteStructure
     from mediparse.domain.synthetic_patients import SyntheticNote
-
-
-class PlannedMention(BaseModel):
-    """Zmínka diagnózy v plánu: status a klíče sekcí v pořadí zprávy."""
-
-    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
-
-    diagnosis: Diagnosis
-    status: MentionStatus
-    sections: tuple[str, ...]
 
 
 class NotePlan(BaseModel):
@@ -43,7 +32,7 @@ class NotePlan(BaseModel):
     narrative_words: PositiveInt
     section_words: dict[str, NonNegativeInt]
     narrative_deid: NonNegativeInt
-    mentions: tuple[PlannedMention, ...]
+    mentions: tuple[Mention, ...]
 
 
 class MismatchedPlanPartsError(ValueError):
@@ -75,12 +64,5 @@ def note_plan(
         narrative_words=structure.narrative_words,
         section_words=dict(structure.section_words),
         narrative_deid=structure.narrative_deid,
-        mentions=tuple(
-            PlannedMention(
-                diagnosis=mention.diagnosis,
-                status=mention.status,
-                sections=mention.sections,
-            )
-            for mention in mentions
-        ),
+        mentions=tuple(mentions),
     )
