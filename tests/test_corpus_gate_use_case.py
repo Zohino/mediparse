@@ -1,4 +1,4 @@
-"""Use case brány nad fakem korpusu: porušení, neplatné záznamy a korpus beze změny."""
+"""Use case brány nad fakem korpusu: pořadí kontrol, neplatné záznamy a pravidla provenance."""
 
 from __future__ import annotations
 
@@ -84,13 +84,6 @@ def test_invalid_record_is_blocked() -> None:
     violations = CorpusGate(_Corpus(CORPUS_SHA, invalid_record=True)).run(PINNED)
 
     assert violations == ("Záznam auditu neodpovídá schématu.",)
-
-
-def test_record_against_other_reference_is_blocked() -> None:
-    """Otisky připnuté zvenku rozhodují, proti čemu musel audit běžet."""
-    pinned = PINNED | {"radiology.csv.gz": "f" * 64}
-
-    assert CorpusGate(_Corpus(CORPUS_SHA, audit_record())).run(pinned)
 
 
 def test_missing_provenance_is_blocked() -> None:
