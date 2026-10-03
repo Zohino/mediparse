@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from types import MappingProxyType
 from typing import TYPE_CHECKING, Final, Protocol
 
+from mediparse.application.ports import NoteSource
 from mediparse.domain.corpus_audit import (
     NGRAM_SIZE,
     NORMALIZATION,
@@ -35,15 +36,8 @@ _BLOCKING_VARIABLES: Final = MappingProxyType({
 })
 
 
-class SyntheticCorpus(Protocol):
+class SyntheticCorpus(NoteSource, Protocol):
     """Auditovaný korpus: zprávy, jejich otisk a místo pro záznam auditu."""
-
-    def notes(self) -> Mapping[str, str]:
-        """Texty zpráv.
-
-        Returns:
-            Slovník jméno zprávy v korpusu → text zprávy.
-        """
 
     def note_ids(self) -> Iterable[str]:
         """Note_id všech zpráv korpusu.

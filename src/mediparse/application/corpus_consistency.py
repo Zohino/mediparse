@@ -3,41 +3,18 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Final, Protocol
+from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.corpus_statistics import corpus_violations
 from mediparse.domain.note_consistency import note_violations
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
-
+    from mediparse.application.ports import NoteSource, PlanSource
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.synthetic_plan import SamplerConfig
 
 LANGUAGE: Final = "en"
 _SUFFIX: Final = ".txt"
-
-
-class PlanSource(Protocol):
-    """Plány zpráv korpusu."""
-
-    def load(self) -> tuple[NotePlan, ...]:
-        """Načte plány.
-
-        Returns:
-            Plány v pořadí zdroje.
-        """
-
-
-class NoteSource(Protocol):
-    """Texty zpráv korpusu."""
-
-    def notes(self) -> Mapping[str, str]:
-        """Texty zpráv.
-
-        Returns:
-            Slovník relativní cesta ``<jazyk>/<note_id>.txt`` → text zprávy.
-        """
 
 
 @dataclass(frozen=True)
