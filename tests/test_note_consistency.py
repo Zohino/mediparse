@@ -118,3 +118,32 @@ def test_age_without_planned_marker_is_reported(
     violations = _violations(planned_note.text, plan, sampler_config)
 
     assert any("věk" in reason.lower() for reason in violations)
+
+
+def _length_reasons(
+    note: PlannedNote, config: SamplerConfig, planned_words: int
+) -> list[str]:
+    plan = note.plan.model_copy(
+        update={"section_words": {"history_of_present_illness": planned_words}}
+    )
+    return [
+        reason
+        for reason in _violations(note.text, plan, config)
+        if reason.startswith("Délka narativu")
+    ]
+
+
+@pytest.mark.parametrize("planned_words", [28, 35], ids=["presne", "hranice-0.8"])
+def test_narrative_within_tolerance_passes(
+    planned_note: PlannedNote, sampler_config: SamplerConfig, planned_words: int
+) -> None:
+    """Narativ o 28 slovech projde proti plánu, který se liší nejvýš o 20 %."""
+    assert not _length_reasons(planned_note, sampler_config, planned_words)
+
+
+@pytest.mark.parametrize("planned_words", [37, 22], ids=["kratka", "dlouha"])
+def test_narrative_outside_tolerance_is_reported(
+    planned_note: PlannedNote, sampler_config: SamplerConfig, planned_words: int
+) -> None:
+    """Narativ o 28 slovech kratší i delší než plán o víc než 20 % je porušení."""
+    assert _length_reasons(planned_note, sampler_config, planned_words)

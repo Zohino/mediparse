@@ -94,10 +94,11 @@ class SectionModel(BaseModel):
 
 
 class NarrativeModel(BaseModel):
-    """Délka narativu ve slovech, hustota narativních značek a tolerance korpusu.
+    """Délka narativu ve slovech, hustota narativních značek a tolerance korpusu i zprávy.
 
-    Délka má oříznuté log-normální rozdělení. Tolerance mediánu a hustoty jsou
-    relativní, tolerance rozptylu logaritmu délky absolutní.
+    Délka má oříznuté log-normální rozdělení. Tolerance mediánu, hustoty a délky
+    narativu zprávy proti plánu jsou relativní, tolerance rozptylu logaritmu délky
+    absolutní.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
@@ -110,6 +111,7 @@ class NarrativeModel(BaseModel):
     median_tolerance: PositiveFloat
     sigma_tolerance: PositiveFloat
     deid_tolerance: PositiveFloat
+    note_tolerance: PositiveFloat
 
     @model_validator(mode="after")
     def _median_lies_inside_bounds(self) -> Self:

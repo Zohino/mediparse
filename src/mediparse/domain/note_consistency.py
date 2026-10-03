@@ -11,6 +11,7 @@ from mediparse.domain.note_text import (
     AGE_SUFFIX,
     DEID,
     alternation,
+    narrative,
     segment,
 )
 
@@ -47,6 +48,7 @@ def note_violations(
     section = mentions.diagnosis_section
     return (
         *_section_violations(sections, plan, headers),
+        *_length_violations(sections, plan, structure),
         *_preamble_violations(preamble, plan, structure.preamble_fields),
         *_marked_place_violations(bodies, plan, structure),
         *_form_violations(text, plan),
@@ -66,6 +68,17 @@ def _section_violations(
     expected = ", ".join(headers[key] for key in plan.sections)
     actual = ", ".join(headers[key] for key in found)
     return [f"Hlavičky sekcí neodpovídají plánu: plán {expected}; text {actual}."]
+
+
+def _length_violations(
+    sections: Sections, plan: NotePlan, structure: StructureModel
+) -> list[str]:
+    words, _ = narrative(sections, plan, structure)
+    target = sum(plan.section_words.values())
+    tolerance = structure.narrative.note_tolerance
+    if abs(words / target - 1) <= tolerance:
+        return []
+    return [f"Délka narativu {words} slov je mimo plán {target} ± {tolerance:.0%}."]
 
 
 def _preamble_violations(

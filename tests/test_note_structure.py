@@ -52,6 +52,7 @@ NARRATIVE = NarrativeModel(
     median_tolerance=0.1,
     sigma_tolerance=0.1,
     deid_tolerance=0.15,
+    note_tolerance=0.2,
 )
 
 
@@ -236,6 +237,7 @@ def test_median_outside_bounds_is_rejected() -> None:
             median_tolerance=0.1,
             sigma_tolerance=0.1,
             deid_tolerance=0.15,
+            note_tolerance=0.2,
         )
 
 
