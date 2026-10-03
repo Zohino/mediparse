@@ -30,34 +30,11 @@ jobs:
         with:
           persist-credentials: false
       - uses: ./.github/actions/setup-uv-env
-      - name: ruff check
-        run: uv run --frozen ruff check --no-fix --output-format=github
-      - name: ruff format
-        run: uv run --frozen ruff format --check --diff
-      - name: hadolint
-        run: uv run --frozen hadolint Containerfile
-      - name: snakefmt
-        run: uv run --frozen snakefmt --check workflow
-      - name: shfmt
-        run: uv run --frozen shfmt --diff workflow/scripts
-      - name: ShellCheck
-        run: uv run --frozen shellcheck workflow/scripts/*.sh
-      - name: import-linter
-        run: uv run --frozen lint-imports
-
-  typecheck:
-    name: Typecheck
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: ./.github/actions/setup-uv-env
-      - name: ty check
-        run: uv run --frozen ty check --output-format github
+      - name: prek ci-job hooks
+        run: >-
+          uv run --frozen prek run --all-files --group ci-job
+          --skip gitleaks --skip synthetic-corpus-gate --skip uv-lock
+          --show-diff-on-failure
 
   test:
     name: Test
@@ -175,7 +152,7 @@ jobs:
   ci-ok:
     name: CI OK
     if: always()
-    needs: [lint, typecheck, test, hygiene, container, secrets, commits]
+    needs: [lint, test, hygiene, container, secrets, commits]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions: {}
