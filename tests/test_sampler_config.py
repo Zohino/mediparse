@@ -1,49 +1,49 @@
 """Konfigurace vzorkovače v repu: projde schématem a reprodukuje čísla z notes-synthesis."""
 
+from __future__ import annotations
+
 from math import isclose
-from pathlib import Path
 from random import Random
+from typing import TYPE_CHECKING
 
 from mediparse.domain.labels import Diagnosis, max_entropy_joint
 from mediparse.domain.mentions import sample_mentions
 from mediparse.domain.note_structure import sample_structure
 from mediparse.domain.synthetic_patients import sample_notes
-from mediparse.infrastructure.sampler_config import load_sampler_config
 
-REPO_CONFIG = Path(__file__).parents[1] / "config" / "synthetic_plan.json"
+if TYPE_CHECKING:
+    from mediparse.domain.synthetic_plan import SamplerConfig
+
 NO_DIAGNOSIS = 0.478
 NOTES_SYNTHESIS_ROUNDING = 0.001
 
 
-def test_repository_config_is_valid() -> None:
+def test_repository_config_is_valid(sampler_config: SamplerConfig) -> None:
     """Config v repu odpovídá schématu a jeho matice je v obou směrech konzistentní."""
-    config = load_sampler_config(REPO_CONFIG)
-
-    assert config.patients.notes > 0
+    assert sampler_config.patients.notes > 0
 
 
-def test_max_entropy_joint_matches_notes_synthesis() -> None:
+def test_max_entropy_joint_matches_notes_synthesis(
+    sampler_config: SamplerConfig,
+) -> None:
     """Rozdělení z EDA parametrů dává podíl zpráv bez diagnózy uvedený v notes-synthesis."""
-    joint = max_entropy_joint(load_sampler_config(REPO_CONFIG).labels)
+    joint = max_entropy_joint(sampler_config.labels)
 
     assert isclose(joint[frozenset()], NO_DIAGNOSIS, abs_tol=NOTES_SYNTHESIS_ROUNDING)
 
 
-def test_repository_config_samples_a_corpus() -> None:
+def test_repository_config_samples_a_corpus(sampler_config: SamplerConfig) -> None:
     """S parametry z repa vznikne korpus zadané velikosti v toleranci prevalencí."""
-    config = load_sampler_config(REPO_CONFIG)
+    notes = sample_notes(sampler_config.patients, sampler_config.labels, Random(1))
 
-    notes = sample_notes(config.patients, config.labels, Random(1))
-
-    assert len(notes) == config.patients.notes
+    assert len(notes) == sampler_config.patients.notes
 
 
-def test_repository_config_samples_structure() -> None:
+def test_repository_config_samples_structure(sampler_config: SamplerConfig) -> None:
     """S parametry z repa dostane každá zpráva strukturu s délkou v mezích a přesným rozdělením."""
-    config = load_sampler_config(REPO_CONFIG)
-    notes = sample_notes(config.patients, config.labels, Random(1))
+    notes = sample_notes(sampler_config.patients, sampler_config.labels, Random(1))
 
-    structures = sample_structure(notes, config.structure, Random(1))
+    structures = sample_structure(notes, sampler_config.structure, Random(1))
 
     assert len(structures) == len(notes)
     for structure in structures:
@@ -64,14 +64,15 @@ ABLATION_SLACK = 0.03
 LARGE_CORPUS = 20000
 
 
-def test_repository_config_matches_ablation_shares() -> None:
+def test_repository_config_matches_ablation_shares(
+    sampler_config: SamplerConfig,
+) -> None:
     """Podíl pozitivních bez zmínky po odstranění DD odpovídá notes-synthesis."""
-    config = load_sampler_config(REPO_CONFIG)
-    patients = config.patients.model_copy(update={"notes": LARGE_CORPUS})
-    labels = config.labels.model_copy(update={"prevalence_tolerance": 1.0})
+    patients = sampler_config.patients.model_copy(update={"notes": LARGE_CORPUS})
+    labels = sampler_config.labels.model_copy(update={"prevalence_tolerance": 1.0})
     notes = sample_notes(patients, labels, Random(1))
-    structures = sample_structure(notes, config.structure, Random(2))
-    mentions = sample_mentions(notes, structures, config.mentions, Random(3))
+    structures = sample_structure(notes, sampler_config.structure, Random(2))
+    mentions = sample_mentions(notes, structures, sampler_config.mentions, Random(3))
 
     for diagnosis, expected in NO_MENTION_AFTER_ABLATION.items():
         positives = [

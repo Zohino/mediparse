@@ -6,8 +6,8 @@ from pathlib import Path
 from typing import Any
 
 import mediparse
+from tests.support import REPOSITORY
 
-REPOSITORY = Path(__file__).parents[1]
 PACKAGE = Path(mediparse.__file__).parent
 WORKFLOW = REPOSITORY / "workflow"
 MAX_SCRIPT_LINES = 20

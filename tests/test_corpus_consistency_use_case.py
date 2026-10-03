@@ -9,19 +9,12 @@ from mediparse.application.corpus_consistency import (
     ConsistencyReport,
     CorpusConsistency,
 )
+from tests.support import PlansFake
 
 if TYPE_CHECKING:
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.synthetic_plan import SamplerConfig
     from tests.conftest import PlannedNote
-
-
-@dataclass(frozen=True)
-class _Plans:
-    plans: tuple[NotePlan, ...]
-
-    def load(self) -> tuple[NotePlan, ...]:
-        return self.plans
 
 
 @dataclass(frozen=True)
@@ -33,7 +26,7 @@ class _Corpus:
 
 
 def _check(plans: tuple[NotePlan, ...], texts: dict[str, str]) -> CorpusConsistency:
-    return CorpusConsistency(plans=_Plans(plans), corpus=_Corpus(texts))
+    return CorpusConsistency(plans=PlansFake(plans), corpus=_Corpus(texts))
 
 
 def test_matching_corpus_has_nothing_to_regenerate(

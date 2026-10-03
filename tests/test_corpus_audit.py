@@ -1,14 +1,10 @@
 """Jádro auditu syntetického korpusu: normalizace, sdílené 13-gramy, otisk a pravidla brány."""
 
-import json
-
 import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.corpus_audit import (
     NGRAM_SIZE,
-    NORMALIZATION,
-    AuditRecord,
     NgramIndex,
     ReferenceNote,
     audit_record_violations,
@@ -17,39 +13,22 @@ from mediparse.domain.corpus_audit import (
     scan,
     tokenize,
 )
-
-SENTENCE = (
-    "the old lighthouse keeper counted seven gulls before the storm "
-    "reached the northern harbor wall"
+from tests.support import (
+    CORPUS_SHA,
+    DISCHARGE,
+    NOTE,
+    PINNED,
+    RADIOLOGY,
+    SENTENCE,
+    audit_record,
 )
-NOTE = "en/90000001-DS-1.txt"
-CORPUS_SHA = "a" * 64
-DISCHARGE = {"name": "discharge.csv.gz", "sha256": "b" * 64, "rows": 10}
-RADIOLOGY = {"name": "radiology.csv.gz", "sha256": "e" * 64, "rows": 20}
+
 ADMISSIONS = {"name": "admissions.csv.gz", "sha256": "f" * 64, "rows": 30}
-PINNED = {"discharge.csv.gz": "b" * 64, "radiology.csv.gz": "e" * 64}
-DISCHARGE_FILE = ("discharge.csv.gz", "b" * 64)
-RADIOLOGY_FILE = ("radiology.csv.gz", "e" * 64)
+DISCHARGE_FILE, RADIOLOGY_FILE = PINNED.items()
 
 
 def _index(text: str = f"Summary: {SENTENCE}.") -> NgramIndex:
     return NgramIndex({NOTE: text})
-
-
-def _record(**overrides: object) -> AuditRecord:
-    fields = {
-        "corpus_sha256": CORPUS_SHA,
-        "corpus_files": 1,
-        "ngram_size": NGRAM_SIZE,
-        "normalization": NORMALIZATION,
-        "synthetic_ngrams": 3,
-        "reference": [DISCHARGE, RADIOLOGY],
-        "shared_ngrams": 0,
-        "colliding_subjects": 0,
-        "tool_commit": "c" * 40,
-        "created_at": "2026-09-28T00:00:00+00:00",
-    } | overrides
-    return AuditRecord.model_validate_json(json.dumps(fields))
 
 
 def test_tokenize_normalizes_case_width_and_punctuation() -> None:
@@ -140,13 +119,13 @@ def test_fingerprint_ignores_order_but_not_content_or_names() -> None:
 def test_record_with_findings_is_rejected() -> None:
     """Záznam auditu vzniká jen z čistého auditu, se shodami je neplatný."""
     with pytest.raises(ValidationError):
-        _record(shared_ngrams=1)
+        audit_record(shared_ngrams=1)
 
 
 def test_record_requires_timezone() -> None:
     """Čas auditu bez časové zóny by nešel jednoznačně porovnat."""
     with pytest.raises(ValidationError):
-        _record(created_at="2026-09-28T00:00:00")
+        audit_record(created_at="2026-09-28T00:00:00")
 
 
 def test_gate_requires_record_for_existing_corpus() -> None:
@@ -156,20 +135,22 @@ def test_gate_requires_record_for_existing_corpus() -> None:
 
 def test_gate_rejects_corpus_changed_after_audit() -> None:
     """Změna korpusu po auditu změní otisk a brána ji zachytí."""
-    assert audit_record_violations("d" * 64, _record(), PINNED)
+    assert audit_record_violations("d" * 64, audit_record(), PINNED)
 
 
 def test_gate_rejects_record_from_other_method() -> None:
     """Záznam z jiné délky n-gramu nebo normalizace už korpus neatestuje."""
     assert audit_record_violations(
-        CORPUS_SHA, _record(ngram_size=NGRAM_SIZE - 1), PINNED
+        CORPUS_SHA, audit_record(ngram_size=NGRAM_SIZE - 1), PINNED
     )
-    assert audit_record_violations(CORPUS_SHA, _record(normalization="other"), PINNED)
+    assert audit_record_violations(
+        CORPUS_SHA, audit_record(normalization="other"), PINNED
+    )
 
 
 def test_gate_accepts_matching_record() -> None:
     """Shodný otisk, metoda i reference bránou projdou."""
-    assert audit_record_violations(CORPUS_SHA, _record(), PINNED) == ()
+    assert audit_record_violations(CORPUS_SHA, audit_record(), PINNED) == ()
 
 
 @pytest.mark.parametrize(
@@ -185,12 +166,14 @@ def test_gate_rejects_reference_other_than_pinned(
     reference: list[dict[str, object]],
 ) -> None:
     """Audit, který neběžel přesně proti discharge a radiology s připnutými otisky, korpus neatestuje."""
-    assert audit_record_violations(CORPUS_SHA, _record(reference=reference), PINNED)
+    assert audit_record_violations(
+        CORPUS_SHA, audit_record(reference=reference), PINNED
+    )
 
 
 def test_gate_rejects_record_when_config_names_no_reference() -> None:
     """Config bez tabulek MIMIC-IV-Note nemá s čím srovnávat a korpus neatestuje."""
-    assert audit_record_violations(CORPUS_SHA, _record(), {})
+    assert audit_record_violations(CORPUS_SHA, audit_record(), {})
 
 
 @pytest.mark.parametrize(

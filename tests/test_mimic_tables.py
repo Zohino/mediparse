@@ -1,14 +1,19 @@
 """Config tabulek MIMIC: otisky souborů MIMIC-IV-Note, proti kterým běží audit."""
 
+from __future__ import annotations
+
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 from pydantic import ValidationError
 
 from mediparse.infrastructure.mimic_tables import load_reference_sha256
+from tests.support import REPOSITORY_TABLES
 
-REPO_TABLES = Path(__file__).parents[1] / "config" / "mimic_tables.json"
+if TYPE_CHECKING:
+    from pathlib import Path
+
 NOTE_URL = "https://physionet.org/files/mimic-iv-note/2.2/note/discharge.csv.gz"
 HOSP_URL = "https://physionet.org/files/mimiciv/3.1/hosp/admissions.csv.gz"
 
@@ -36,6 +41,6 @@ def test_invalid_checksum_is_rejected(tmp_path: Path) -> None:
 
 def test_repository_reference_is_discharge_and_radiology() -> None:
     """Config v repu vymezuje referenci auditu přesně na discharge a radiology."""
-    reference = load_reference_sha256(REPO_TABLES)
+    reference = load_reference_sha256(REPOSITORY_TABLES)
 
     assert reference.keys() == {"discharge.csv.gz", "radiology.csv.gz"}

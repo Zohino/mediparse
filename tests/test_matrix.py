@@ -1,15 +1,19 @@
 """Schéma experimentální matice: platný manifest projde, porušení invariantů spadne."""
 
+from __future__ import annotations
+
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.matrix import ExperimentMatrix, Language, Model, Tier
 from mediparse.infrastructure.matrix_manifest import load_matrix
+from tests.support import REPOSITORY_MATRIX
 
-REPO_MANIFEST = Path(__file__).parents[1] / "config" / "matrix.json"
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _row(**overrides: object) -> dict[str, object]:
@@ -145,4 +149,4 @@ def test_load_matrix_rejects_invalid_content(tmp_path: Path) -> None:
 
 def test_repository_manifest_is_valid() -> None:
     """Manifest v repu je platný — neplatná matice neprojde CI."""
-    assert load_matrix(REPO_MANIFEST).rows
+    assert load_matrix(REPOSITORY_MATRIX).rows
