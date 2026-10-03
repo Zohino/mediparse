@@ -9,7 +9,6 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.domain.corpus_audit import InvalidAuditRecordError
-from mediparse.entrypoints import corpus_audit
 from mediparse.entrypoints.corpus_gate import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.synthetic_corpus import RECORD_NAME, CorpusDirectory
@@ -24,11 +23,7 @@ NOTE = "en/90000001-DS-1.txt"
 
 
 def _audited_corpus(files: AuditFiles) -> Path:
-    root = files.corpus({NOTE: "a short synthetic note"})
-    references = files.pinned_references([("10000032", "a reference text")])
-    argv = files.audit_argv(root, references, files.root / "report.json")
-    assert corpus_audit.run(argv, {}) == ExitCode.OK
-    return root
+    return files.audited_corpus({NOTE: "a short synthetic note"})
 
 
 def _gate(root: Path, tables: Path) -> int:
