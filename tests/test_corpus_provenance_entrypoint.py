@@ -92,12 +92,19 @@ def test_provenance_refuses_corpus_changed_after_audit(
     ],
 )
 def test_provenance_refuses_invalid_generation(
-    audit_files: AuditFiles, name: str, value: str
+    audit_files: AuditFiles,
+    capsys: pytest.CaptureFixture[str],
+    name: str,
+    value: str,
 ) -> None:
-    """Neplatný model, verze nebo commit se do záznamu nedostane."""
+    """Neplatný model, verze nebo commit odmítne už parsování argumentů hláškou domény."""
     root = audit_files.audited_corpus(SHORT_NOTE)
 
-    assert run(audit_files.provenance_argv(root, **{name: value})) == ExitCode.REFUSED
+    with pytest.raises(SystemExit) as raised:
+        run(audit_files.provenance_argv(root, **{name: value}))
+
+    assert raised.value.code == ExitCode.REFUSED
+    assert f"--{name}" in capsys.readouterr().err
     assert not (root / PROVENANCE_NAME).exists()
 
 

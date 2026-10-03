@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Annotated, Final, Literal, NamedTuple
 
 from pydantic import (
+    AfterValidator,
     AwareDatetime,
     BaseModel,
     ConfigDict,
@@ -28,8 +29,25 @@ _TOKEN: Final = re.compile(r"___|[^\W_]+")
 
 type Ngram = tuple[str, ...]
 Sha256 = Annotated[str, Field(pattern=r"^[0-9a-f]{64}$")]
-COMMIT_PATTERN: Final = r"[0-9a-f]{40}"
-CommitSha = Annotated[str, Field(pattern=rf"^{COMMIT_PATTERN}$")]
+_COMMIT: Final = re.compile(r"[0-9a-f]{40}")
+
+
+def commit_sha(value: str) -> str:
+    """Ověří, že hodnota je celý SHA-1 hash commitu.
+
+    Returns:
+        Hodnota beze změny.
+
+    Raises:
+        ValueError: Hodnota není 40 hexadecimálních znaků, například zkrácený hash.
+    """
+    if _COMMIT.fullmatch(value) is None:
+        msg = "Commit musí být celý SHA-1 hash (40 hexadecimálních znaků), například z `git rev-parse HEAD`."
+        raise ValueError(msg)
+    return value
+
+
+CommitSha = Annotated[str, AfterValidator(commit_sha)]
 
 
 class ReferenceNote(NamedTuple):

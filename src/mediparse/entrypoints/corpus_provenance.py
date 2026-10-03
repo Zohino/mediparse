@@ -18,8 +18,14 @@ from mediparse.application.corpus_provenance import (
     ProvenanceRefused,
     ProvenanceWritten,
 )
-from mediparse.domain.corpus_provenance import Generation, prompts_sha256
-from mediparse.entrypoints.cli import refusing_invalid_input
+from mediparse.domain.corpus_audit import commit_sha
+from mediparse.domain.corpus_provenance import (
+    Generation,
+    model_id,
+    prompts_sha256,
+    version,
+)
+from mediparse.entrypoints.cli import argument, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_reference_sha256
@@ -56,8 +62,7 @@ def run(argv: Sequence[str]) -> ExitCode:
     """Složí provenance z argumentů a souborů v repu a zapíše ji ke korpusu.
 
     Returns:
-        OK po zapsání provenance, REFUSED při neplatných údajích, neplatném vstupním
-        souboru nebo korpusu bez čistého auditu.
+        OK po zapsání provenance, REFUSED při neplatném vstupním souboru nebo korpusu bez čistého auditu.
     """
     args = _parser().parse_args(argv)
     config = load_sampler_config(args.config)
@@ -66,19 +71,15 @@ def run(argv: Sequence[str]) -> ExitCode:
         PlansFile(args.plans).load(),
         config,
     )
-    try:
-        generation = Generation(
-            seed=config.seed,
-            sampler_config_sha256=file_sha256(args.config),
-            prompts_sha256=prompts,
-            model=args.model,
-            claude_code_version=args.claude_code_version,
-            generated_on=args.date,
-            specification_commit=args.specification_commit,
-        )
-    except ValueError as error:
-        sys.stderr.write(f"Neplatné údaje o generování: {error}\n")
-        return ExitCode.REFUSED
+    generation = Generation(
+        seed=config.seed,
+        sampler_config_sha256=file_sha256(args.config),
+        prompts_sha256=prompts,
+        model=args.model,
+        claude_code_version=args.claude_code_version,
+        generated_on=args.date,
+        specification_commit=args.specification_commit,
+    )
     outcome = CorpusProvenance(CorpusDirectory(args.corpus)).run(
         generation, load_reference_sha256(args.tables)
     )
@@ -102,11 +103,13 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--model",
+        type=argument(model_id),
         required=True,
         help="model, který zprávy napsal, např. claude-opus-5-5",
     )
     parser.add_argument(
         "--claude-code-version",
+        type=argument(version),
         required=True,
         help="verze Claude Code při generování, z `claude --version`",
     )
@@ -118,6 +121,7 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--specification-commit",
+        type=argument(commit_sha),
         required=True,
         help="commit docs/synthetic-corpus.md, podle kterého korpus vznikl",
     )

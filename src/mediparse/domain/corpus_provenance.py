@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
+import re
 from datetime import date
-from typing import TYPE_CHECKING, Annotated
+from typing import TYPE_CHECKING, Annotated, Final
 
-from pydantic import BaseModel, ConfigDict, Field, NonNegativeInt
+from pydantic import AfterValidator, BaseModel, ConfigDict, NonNegativeInt
 
 from mediparse.domain.corpus_audit import CommitSha, Sha256, fingerprint
 from mediparse.domain.verbalization import render_prompt
@@ -16,8 +17,42 @@ if TYPE_CHECKING:
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.synthetic_plan import SamplerConfig
 
-ModelId = Annotated[str, Field(pattern=r"^claude-[a-z0-9]+(-[a-z0-9]+)*$")]
-Version = Annotated[str, Field(pattern=r"^\d+\.\d+\.\d+$")]
+_MODEL_ID: Final = re.compile(r"claude-[a-z0-9]+(-[a-z0-9]+)*")
+_VERSION: Final = re.compile(r"\d+\.\d+\.\d+")
+
+
+def model_id(value: str) -> str:
+    """Ověří, že hodnota je identifikátor modelu Claude.
+
+    Returns:
+        Hodnota beze změny.
+
+    Raises:
+        ValueError: Hodnota není identifikátor modelu Claude.
+    """
+    if _MODEL_ID.fullmatch(value) is None:
+        msg = "Model musí být identifikátor modelu Claude, například claude-opus-5-5."
+        raise ValueError(msg)
+    return value
+
+
+def version(value: str) -> str:
+    """Ověří, že hodnota je verze ve tvaru major.minor.patch.
+
+    Returns:
+        Hodnota beze změny.
+
+    Raises:
+        ValueError: Hodnota nemá tvar major.minor.patch.
+    """
+    if _VERSION.fullmatch(value) is None:
+        msg = "Verze musí mít tvar major.minor.patch, například 2.1.5."
+        raise ValueError(msg)
+    return value
+
+
+ModelId = Annotated[str, AfterValidator(model_id)]
+Version = Annotated[str, AfterValidator(version)]
 
 
 class Generation(BaseModel):
