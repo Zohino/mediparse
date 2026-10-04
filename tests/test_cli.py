@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
 import logging
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -18,7 +19,7 @@ from mediparse.entrypoints import (
     synthetic_plans,
     verbalization_prompt,
 )
-from mediparse.entrypoints.cli import argument
+from mediparse.entrypoints.cli import argument, configure_logging
 from mediparse.entrypoints.exit_code import ExitCode
 from tests.support import (
     COMMIT,
@@ -28,7 +29,7 @@ from tests.support import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
+    from collections.abc import Callable, Iterator
 
 PROVENANCE = [
     "--model=claude-sonnet-5-5",
@@ -99,3 +100,30 @@ def test_argument_reports_domain_message() -> None:
     """Chyba doménové validace se v argparse ukáže s hláškou domény."""
     with pytest.raises(argparse.ArgumentTypeError, match="SHA-1"):
         argument(commit_sha)("abc123")
+
+
+@contextlib.contextmanager
+def _bare_root_logger() -> Iterator[None]:
+    """Kořenový logger bez handlerů pytestu; původní stav vrátí při opuštění kontextu."""
+    root = logging.getLogger()
+    package = logging.getLogger("mediparse")
+    handlers, level = root.handlers[:], package.level
+    root.handlers.clear()
+    try:
+        yield
+    finally:
+        for handler in root.handlers:
+            handler.close()
+        root.handlers[:] = handlers
+        package.setLevel(level)
+
+
+def test_configure_logging_writes_to_log_file(tmp_path: Path) -> None:
+    """Krok Snakemake zapisuje diagnostiku do souboru, který pravidlo deklaruje v log:."""
+    log = tmp_path / "step.log"
+
+    with _bare_root_logger():
+        configure_logging(log)
+        logging.getLogger("mediparse.step").info("Zapsáno 2 zpráv.")
+
+        assert "INFO Zapsáno 2 zpráv." in log.read_text(encoding="utf-8")
