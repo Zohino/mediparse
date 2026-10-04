@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING
 
+from mediparse.application.corpus_texts import LANGUAGE, texts_in_language
 from mediparse.domain.corpus_statistics import corpus_violations
 from mediparse.domain.note_consistency import note_violations
 
@@ -12,9 +13,6 @@ if TYPE_CHECKING:
     from mediparse.application.ports import NoteSource, PlanSource
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.synthetic_plan import SamplerConfig
-
-LANGUAGE: Final = "en"
-_SUFFIX: Final = ".txt"
 
 
 @dataclass(frozen=True)
@@ -48,12 +46,7 @@ class CorpusConsistency:
             zpráv nic neporušuje, částečný korpus je neúplný.
         """
         plans = {plan.note_id: plan for plan in self.plans.load()}
-        prefix = f"{LANGUAGE}/"
-        texts = {
-            path.removeprefix(prefix).removesuffix(_SUFFIX): text
-            for path, text in self.corpus.notes().items()
-            if path.startswith(prefix)
-        }
+        texts = texts_in_language(self.corpus.notes(), LANGUAGE)
         notes = tuple(
             NoteViolations(note_id, reasons)
             for note_id in sorted(texts)
