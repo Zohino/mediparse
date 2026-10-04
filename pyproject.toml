@@ -65,7 +65,7 @@ addopts = ["-ra", "--import-mode=importlib"]
 filterwarnings = ["error"]
 
 [tool.importlinter]
-root_packages = ["mediparse", "tests"]
+root_packages = ["mediparse", "tests", "workflow"]
 include_external_packages = true
 exclude_type_checking_imports = true
 
@@ -194,6 +194,11 @@ ignore = [
     "suspicious-non-cryptographic-random-usage", # seedovaná simulace, ne kryptografie
 ]
 
+"workflow/scripts/**" = [
+    "undefined-name",             # globál snakemake vkládá Snakemake před spuštěním skriptu
+    "implicit-namespace-package", # skripty spouští Snakemake po souborech, nejsou balíček
+]
+
 "src/mediparse/entrypoints/cli.py" = [
     "error-instead-of-exception", # odmítnutí neplatného vstupu je očekávaný stav: hláška bez tracebacku
 ]
@@ -214,3 +219,9 @@ max-nested-blocks = 3
 
 [tool.ruff.format]
 docstring-code-format = true
+
+[[tool.ty.overrides]]
+include = ["workflow/scripts/**"]
+
+[tool.ty.overrides.rules]
+unresolved-reference = "ignore"  # globál snakemake vkládá Snakemake před spuštěním skriptu
