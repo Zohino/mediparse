@@ -210,8 +210,9 @@ tempCodeRunnerFile.py
 .cache/
 cache/
 
-# gstack lokální stav
-.gstack/
+# superpowers: worktree a pracovní spec a plány (veřejné repo, MIMIC)
+.worktrees/
+docs/superpowers/
 
 # Local-only project instructions
 CLAUDE.md
