@@ -12,13 +12,20 @@ from mediparse.entrypoints.exit_code import ExitCode
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+    from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
 
-def configure_logging() -> None:
-    """Diagnostika jde na stderr ve formátu čas, úroveň, zpráva; knihovny až od WARNING."""
-    logging.basicConfig(format="%(asctime)s %(levelname)s %(message)s")
+def configure_logging(log: Path | None = None) -> None:
+    """Diagnostika ve formátu čas, úroveň, zpráva; knihovny až od WARNING.
+
+    Args:
+        log: Soubor logu kroku Snakemake; bez něj jde diagnostika na stderr.
+    """
+    logging.basicConfig(
+        format="%(asctime)s %(levelname)s %(message)s", filename=log, encoding="utf-8"
+    )
     logging.getLogger("mediparse").setLevel(logging.INFO)
 
 
