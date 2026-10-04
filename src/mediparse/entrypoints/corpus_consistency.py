@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.application.corpus_consistency import CorpusConsistency
-from mediparse.entrypoints.cli import refusing_invalid_input
+from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.plans_file import PLANS_PATH, PlansFile
 from mediparse.infrastructure.sampler_config import (
@@ -32,6 +32,7 @@ def main() -> ExitCode:
     Returns:
         Návratový kód kontrol.
     """
+    configure_logging()
     return run(sys.argv[1:])
 
 

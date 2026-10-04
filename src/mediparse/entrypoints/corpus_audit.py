@@ -9,6 +9,7 @@ mimo repozitář a shodný text se nevypisuje nikdy.
 from __future__ import annotations
 
 import argparse
+import logging
 import os
 import sys
 from datetime import UTC, datetime
@@ -22,7 +23,11 @@ from mediparse.application.corpus_audit import (
     CorpusAudit,
 )
 from mediparse.domain.corpus_audit import NGRAM_SIZE, commit_sha
-from mediparse.entrypoints.cli import argument, refusing_invalid_input
+from mediparse.entrypoints.cli import (
+    argument,
+    configure_logging,
+    refusing_invalid_input,
+)
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.audit_workspace import LocalWorkspace
 from mediparse.infrastructure.mimic_reference import MimicReference
@@ -39,6 +44,8 @@ if TYPE_CHECKING:
 
     from mediparse.application.corpus_audit import AuditOutcome
 
+logger = logging.getLogger(__name__)
+
 
 def main() -> ExitCode:
     """Konzolový skript ``mediparse-corpus-audit``.
@@ -46,6 +53,7 @@ def main() -> ExitCode:
     Returns:
         Návratový kód auditu.
     """
+    configure_logging()
     return run(sys.argv[1:], os.environ)
 
 
@@ -89,7 +97,7 @@ def _present(outcome: AuditOutcome, report: Path) -> ExitCode:
             _say(f"Pozice shod: {report}")
             return ExitCode.BLOCKED
         case AuditRefused(reason=reason):
-            sys.stderr.write(f"{reason}\n")
+            logger.error("%s", reason)
             return ExitCode.REFUSED
         case _:
             assert_never(outcome)

@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.application.corpus_gate import CorpusGate
-from mediparse.entrypoints.cli import refusing_invalid_input
+from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_reference_sha256
 from mediparse.infrastructure.sampler_config import (
@@ -32,6 +32,7 @@ def main() -> ExitCode:
     Returns:
         Návratový kód brány.
     """
+    configure_logging()
     return run(sys.argv[1:])
 
 
@@ -49,8 +50,7 @@ def run(argv: Sequence[str]) -> ExitCode:
         load_reference_sha256(args.tables),
         load_sampler_config(args.config).structure.structure_labels,
     )
-    for violation in violations:
-        sys.stderr.write(f"{violation}\n")
+    sys.stdout.writelines(f"{violation}\n" for violation in violations)
     return ExitCode.BLOCKED if violations else ExitCode.OK
 
 

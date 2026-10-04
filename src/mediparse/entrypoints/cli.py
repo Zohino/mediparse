@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import argparse
 import functools
-import sys
+import logging
 from typing import TYPE_CHECKING
 
 from mediparse.domain.inputs import InvalidInputError
@@ -12,6 +12,14 @@ from mediparse.entrypoints.exit_code import ExitCode
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+
+logger = logging.getLogger(__name__)
+
+
+def configure_logging() -> None:
+    """Diagnostika jde na stderr ve formátu čas, úroveň, zpráva; knihovny až od WARNING."""
+    logging.basicConfig(format="%(asctime)s %(levelname)s %(message)s")
+    logging.getLogger("mediparse").setLevel(logging.INFO)
 
 
 def refusing_invalid_input[**P](run: Callable[P, ExitCode]) -> Callable[P, ExitCode]:
@@ -26,7 +34,7 @@ def refusing_invalid_input[**P](run: Callable[P, ExitCode]) -> Callable[P, ExitC
         try:
             return run(*args, **kwargs)
         except InvalidInputError as error:
-            sys.stderr.write(f"{error}\n")
+            logger.error("%s", error)
             return ExitCode.REFUSED
 
     return guarded

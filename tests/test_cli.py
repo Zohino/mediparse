@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import logging
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -82,13 +83,16 @@ def _commands(root: Path, missing: Path) -> dict[str, Callable[[], ExitCode]]:
 
 @pytest.mark.parametrize("command", list(_commands(Path(), Path())))
 def test_missing_input_file_is_refused(
-    tmp_path: Path, capsys: pytest.CaptureFixture[str], command: str
+    tmp_path: Path, caplog: pytest.LogCaptureFixture, command: str
 ) -> None:
     """Chybějící config nebo tabulky příkaz odmítne hláškou se jménem souboru, ne tracebackem."""
     missing = tmp_path / "missing.json"
 
     assert _commands(tmp_path, missing)[command]() == ExitCode.REFUSED
-    assert str(missing) in capsys.readouterr().err
+    assert any(
+        record.levelno == logging.ERROR and str(missing) in record.getMessage()
+        for record in caplog.records
+    )
 
 
 def test_argument_reports_domain_message() -> None:

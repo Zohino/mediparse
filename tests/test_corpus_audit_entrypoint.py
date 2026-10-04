@@ -65,7 +65,9 @@ def test_clean_corpus_gets_audit_record(audit_files: AuditFiles) -> None:
 
 
 def test_overlap_blocks_record_and_never_prints_text(
-    audit_files: AuditFiles, capsys: pytest.CaptureFixture[str]
+    audit_files: AuditFiles,
+    capsys: pytest.CaptureFixture[str],
+    caplog: pytest.LogCaptureFixture,
 ) -> None:
     """Shoda zablokuje záznam; výstup nese jen počty a note_id, report jen pozice."""
     code, corpus = _audit(audit_files, {NOTE: SENTENCE}, [("10000032", SENTENCE)])
@@ -76,7 +78,7 @@ def test_overlap_blocks_record_and_never_prints_text(
     assert code == ExitCode.BLOCKED
     assert not (corpus / RECORD_NAME).exists()
     assert NOTE in output.out
-    assert "lighthouse" not in output.out + output.err + report
+    assert "lighthouse" not in output.out + output.err + caplog.text + report
     assert json.loads(report)["positions"]
 
 
@@ -99,7 +101,7 @@ def test_audit_passes_environment_to_its_guard(audit_files: AuditFiles) -> None:
 
 
 def test_missing_reference_is_refused(
-    audit_files: AuditFiles, capsys: pytest.CaptureFixture[str]
+    audit_files: AuditFiles, caplog: pytest.LogCaptureFixture
 ) -> None:
     """Chybějící referenční soubor audit odmítne jako chybějící, ne jako neshodu otisku."""
     corpus = audit_files.corpus(SHORT_NOTE)
@@ -110,11 +112,11 @@ def test_missing_reference_is_refused(
     )
 
     assert run(argv, {}) == ExitCode.REFUSED
-    assert "neexistují" in capsys.readouterr().err
+    assert "neexistují" in caplog.text
 
 
 def test_reference_changed_after_pin_is_refused(
-    audit_files: AuditFiles, capsys: pytest.CaptureFixture[str]
+    audit_files: AuditFiles, caplog: pytest.LogCaptureFixture
 ) -> None:
     """Soubor, který se liší od otisku v configu, audit odmítne dřív, než vznikne záznam či report."""
     corpus = audit_files.corpus(SHORT_NOTE)
@@ -125,7 +127,7 @@ def test_reference_changed_after_pin_is_refused(
     code = run(audit_files.audit_argv(corpus, references, report), {})
 
     assert code == ExitCode.REFUSED
-    assert "discharge.csv.gz" in capsys.readouterr().err
+    assert "discharge.csv.gz" in caplog.text
     assert not (corpus / RECORD_NAME).exists()
     assert not report.exists()
 

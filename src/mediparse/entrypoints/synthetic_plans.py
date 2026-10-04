@@ -8,13 +8,14 @@ jednou a commituje se.
 from __future__ import annotations
 
 import argparse
+import logging
 import sys
 from pathlib import Path
 from random import Random
 from typing import TYPE_CHECKING
 
 from mediparse.application.plan_sampling import PlanSampling
-from mediparse.entrypoints.cli import refusing_invalid_input
+from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.plans_file import (
     LABELS_PATH,
@@ -29,6 +30,8 @@ from mediparse.infrastructure.sampler_config import (
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
+logger = logging.getLogger(__name__)
+
 
 def main() -> ExitCode:
     """Konzolový skript ``mediparse-sample-plans``.
@@ -36,6 +39,7 @@ def main() -> ExitCode:
     Returns:
         Návratový kód vzorkovače.
     """
+    configure_logging()
     return run(sys.argv[1:])
 
 
@@ -50,8 +54,8 @@ def run(argv: Sequence[str]) -> ExitCode:
     store = SyntheticPlanFiles(args.output, args.labels)
     sampling = PlanSampling(store=store, random_source=Random)
     count = sampling.run(load_sampler_config(args.config))
-    sys.stdout.write(
-        f"Zapsáno {count} plánů do {args.output} a labelů do {args.labels}.\n"
+    logger.info(
+        "Zapsáno %d plánů do %s a labelů do %s.", count, args.output, args.labels
     )
     return ExitCode.OK
 
