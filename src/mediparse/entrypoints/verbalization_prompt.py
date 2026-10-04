@@ -7,12 +7,13 @@ a šablonou v repu; data MIMIC nečte.
 from __future__ import annotations
 
 import argparse
+import logging
 import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.application.verbalization_prompt import VerbalizationPrompt
-from mediparse.entrypoints.cli import refusing_invalid_input
+from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.plans_file import PLANS_PATH, PlansFile
 from mediparse.infrastructure.sampler_config import (
@@ -27,6 +28,8 @@ from mediparse.infrastructure.verbalization_template import (
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
+logger = logging.getLogger(__name__)
+
 
 def main() -> ExitCode:
     """Konzolový skript ``mediparse-verbalization-prompt``.
@@ -34,6 +37,7 @@ def main() -> ExitCode:
     Returns:
         Návratový kód.
     """
+    configure_logging()
     return run(sys.argv[1:])
 
 
@@ -52,7 +56,7 @@ def run(argv: Sequence[str]) -> ExitCode:
         load_sampler_config(args.config),
     )
     if prompt is None:
-        sys.stderr.write(f"Plán pro note_id {args.note_id} neexistuje.\n")
+        logger.error("Plán pro note_id %s neexistuje.", args.note_id)
         return ExitCode.REFUSED
     sys.stdout.write(prompt)
     return ExitCode.OK

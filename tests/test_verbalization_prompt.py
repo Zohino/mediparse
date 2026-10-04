@@ -58,10 +58,10 @@ def test_command_prints_prompt_for_repository_plan(
     assert f"for note\n{plan.note_id}" in capsys.readouterr().out
 
 
-def test_command_refuses_unknown_note(capsys: pytest.CaptureFixture[str]) -> None:
+def test_command_refuses_unknown_note(caplog: pytest.LogCaptureFixture) -> None:
     """Neznámé note_id příkaz odmítne srozumitelnou hláškou."""
     assert run(_argv("90000999-DS-1")) == ExitCode.REFUSED
-    assert "neexistuje" in capsys.readouterr().err
+    assert "neexistuje" in caplog.text
 
 
 def test_every_repository_plan_renders(

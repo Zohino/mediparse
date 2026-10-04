@@ -114,6 +114,7 @@ ignore_imports = [
     "mediparse.entrypoints.** -> argparse",
     "mediparse.entrypoints.** -> datetime",
     "mediparse.entrypoints.** -> functools",
+    "mediparse.entrypoints.** -> logging",
     "mediparse.entrypoints.** -> os",
     "mediparse.entrypoints.** -> pathlib",
     "mediparse.entrypoints.** -> random",
@@ -190,6 +191,10 @@ ignore = [
     "assert",                     # pytest staví na holém assert
     "implicit-namespace-package", # --import-mode=importlib nepotřebuje __init__.py
     "suspicious-non-cryptographic-random-usage", # seedovaná simulace, ne kryptografie
+]
+
+"src/mediparse/entrypoints/cli.py" = [
+    "error-instead-of-exception", # odmítnutí neplatného vstupu je očekávaný stav: hláška bez tracebacku
 ]
 
 "src/mediparse/entrypoints/synthetic_plans.py" = [

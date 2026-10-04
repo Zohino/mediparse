@@ -8,6 +8,7 @@ Seed, otisk configu vzorkovače a otisk zadání všech zpráv bere ze souborů 
 from __future__ import annotations
 
 import argparse
+import logging
 import sys
 from datetime import date
 from pathlib import Path
@@ -25,7 +26,11 @@ from mediparse.domain.corpus_provenance import (
     prompts_sha256,
     version,
 )
-from mediparse.entrypoints.cli import argument, refusing_invalid_input
+from mediparse.entrypoints.cli import (
+    argument,
+    configure_logging,
+    refusing_invalid_input,
+)
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_reference_sha256
@@ -47,6 +52,8 @@ from mediparse.infrastructure.verbalization_template import (
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
+logger = logging.getLogger(__name__)
+
 
 def main() -> ExitCode:
     """Konzolový skript ``mediparse-corpus-provenance``.
@@ -54,6 +61,7 @@ def main() -> ExitCode:
     Returns:
         Návratový kód.
     """
+    configure_logging()
     return run(sys.argv[1:])
 
 
@@ -87,12 +95,10 @@ def run(argv: Sequence[str]) -> ExitCode:
     )
     match outcome:
         case ProvenanceWritten():
-            sys.stdout.write(
-                f"Provenance zapsána do {args.corpus / PROVENANCE_NAME}.\n"
-            )
+            logger.info("Provenance zapsána do %s.", args.corpus / PROVENANCE_NAME)
             return ExitCode.OK
         case ProvenanceRefused(reason=reason):
-            sys.stderr.write(f"{reason}\n")
+            logger.error("%s", reason)
             return ExitCode.REFUSED
         case _:
             assert_never(outcome)
