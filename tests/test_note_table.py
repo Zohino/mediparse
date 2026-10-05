@@ -4,8 +4,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+import pyarrow as pa
 import pyarrow.parquet as pq
+import pytest
 
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
 from mediparse.domain.smoketest_input import InputNote
 from mediparse.infrastructure.note_table import SCHEMA, ParquetNoteTable
@@ -59,3 +62,37 @@ def test_rewrites_previous_table(tmp_path: Path) -> None:
     table.write([note])
 
     assert pq.read_table(path).num_rows == 1
+
+
+def test_read_returns_written_rows(tmp_path: Path) -> None:
+    """Zápis a čtení vrátí stejné řádky včetně labelů a textu."""
+    table = ParquetNoteTable(tmp_path / "notes.parquet")
+    notes = (
+        InputNote(
+            "90000001-DS-1",
+            90000001,
+            "en",
+            TEXT,
+            frozenset({Diagnosis.CKD, Diagnosis.AKI}),
+        ),
+        InputNote("90000002-DS-1", 90000002, "en", "b", frozenset()),
+    )
+
+    table.write(notes)
+
+    assert table.read() == notes
+
+
+def test_read_missing_file_is_invalid_input(tmp_path: Path) -> None:
+    """Chybějící soubor je InvalidInputError."""
+    with pytest.raises(InvalidInputError, match="neexistuje"):
+        ParquetNoteTable(tmp_path / "missing.parquet").read()
+
+
+def test_read_other_schema_is_invalid_input(tmp_path: Path) -> None:
+    """Soubor s jiným schématem je InvalidInputError."""
+    path = tmp_path / "other.parquet"
+    pq.write_table(pa.table({"note_id": ["a"]}), path)
+
+    with pytest.raises(InvalidInputError, match="neodpovídá schématu"):
+        ParquetNoteTable(path).read()
