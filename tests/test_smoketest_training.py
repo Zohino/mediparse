@@ -5,6 +5,7 @@ from __future__ import annotations
 import pytest
 from pydantic import ValidationError
 
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
 from mediparse.domain.smoketest_input import InputNote
 from mediparse.domain.smoketest_training import (
@@ -12,6 +13,7 @@ from mediparse.domain.smoketest_training import (
     SubjectLeakError,
     TrainingConfig,
     ensure_disjoint_subjects,
+    ensure_patients_per_class,
 )
 
 FOLDS = 2
@@ -64,3 +66,26 @@ def test_shared_subject_is_a_leak() -> None:
 
     with pytest.raises(SubjectLeakError, match="1"):
         ensure_disjoint_subjects(notes, Holdout(train=(0, 1), test=(2,)))
+
+
+def test_enough_patients_in_each_class_pass() -> None:
+    """Každá třída má aspoň tolik pacientů jako foldů."""
+    ensure_patients_per_class(
+        [True, True, False, False, False], [1, 2, 3, 4, 4], Diagnosis.CKD, FOLDS
+    )
+
+
+def test_class_without_enough_patients_is_invalid_input() -> None:
+    """Zpráva jmenuje diagnózu a počty pacientů pozitivních i negativních."""
+    with pytest.raises(InvalidInputError, match=r"ckd.*1 pozitivních.*3 negativních"):
+        ensure_patients_per_class(
+            [True, True, False, False, False], [1, 1, 2, 3, 4], Diagnosis.CKD, FOLDS
+        )
+
+
+def test_class_counts_patients_not_notes() -> None:
+    """Pacient s více zprávami se počítá jednou."""
+    with pytest.raises(InvalidInputError):
+        ensure_patients_per_class(
+            [True, True, False, False], [1, 1, 2, 3], Diagnosis.AKI, FOLDS
+        )
