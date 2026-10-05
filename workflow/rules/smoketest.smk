@@ -15,3 +15,16 @@ rule prepare_smoketest_subset:
         corpus=SYNTHETIC,
     script:
         "../scripts/prepare_smoketest.py"
+
+
+rule train_smoketest_model:
+    input:
+        notes="build/smoketest/notes.parquet",
+        config="config/smoketest_training.json",
+    output:
+        model="build/smoketest/model.skops",
+        metrics="build/smoketest/metrics.json",
+    log:
+        "logs/smoketest/train_smoketest_model.log",
+    script:
+        "../scripts/train_smoketest.py"
