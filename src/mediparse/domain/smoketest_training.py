@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, Annotated
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
 
 if TYPE_CHECKING:
@@ -75,3 +76,27 @@ def ensure_disjoint_subjects(notes: Sequence[InputNote], holdout: Holdout) -> No
     if shared:
         msg = f"Pacienti v tréninku i testu: {', '.join(map(str, sorted(shared)))}."
         raise SubjectLeakError(msg)
+
+
+def ensure_patients_per_class(
+    labels: Sequence[bool], groups: Sequence[int], diagnosis: Diagnosis, folds: int
+) -> None:
+    """Ověří, že každá třída diagnózy má aspoň tolik pacientů jako foldů.
+
+    Args:
+        labels: Label diagnózy každé zprávy.
+        groups: Pacient každé zprávy.
+        diagnosis: Diagnóza, na které se trénuje.
+        folds: Počet foldů odložení.
+
+    Raises:
+        InvalidInputError: Některá třída má méně pacientů než foldů.
+    """
+    positive = {group for label, group in zip(labels, groups, strict=True) if label}
+    negative = {group for label, group in zip(labels, groups, strict=True) if not label}
+    if min(len(positive), len(negative)) < folds:
+        msg = (
+            f"Diagnóza {diagnosis}: {len(positive)} pozitivních a {len(negative)} "
+            f"negativních pacientů, odložení potřebuje v každé třídě aspoň {folds}."
+        )
+        raise InvalidInputError(msg)
