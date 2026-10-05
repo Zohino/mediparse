@@ -8,13 +8,13 @@ from typing import TYPE_CHECKING, Final
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
+from mediparse.domain.smoketest_input import InputNote
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
     from pathlib import Path
-
-    from mediparse.domain.smoketest_input import InputNote
 
 SCHEMA: Final = pa.schema([
     pa.field("note_id", pa.string(), nullable=False),
@@ -45,3 +45,34 @@ class ParquetNoteTable:
         }
         self.path.parent.mkdir(parents=True, exist_ok=True)
         pq.write_table(pa.Table.from_pydict(columns, schema=SCHEMA), self.path)
+
+    def read(self) -> tuple[InputNote, ...]:
+        """Přečte řádky tabulky v pořadí souboru.
+
+        Returns:
+            Zprávy s labely z bool sloupců.
+
+        Raises:
+            InvalidInputError: Soubor neexistuje, není parquet nebo nemá pevné schéma.
+        """
+        try:
+            table = pq.read_table(self.path)
+        except FileNotFoundError as error:
+            msg = f"Soubor {self.path} neexistuje."
+            raise InvalidInputError(msg) from error
+        except pa.ArrowInvalid as error:
+            msg = f"Soubor {self.path} neodpovídá schématu: {error}"
+            raise InvalidInputError(msg) from error
+        if not table.schema.equals(SCHEMA):
+            msg = f"Soubor {self.path} neodpovídá schématu tabulky zpráv."
+            raise InvalidInputError(msg)
+        return tuple(
+            InputNote(
+                row["note_id"],
+                row["subject_id"],
+                row["language"],
+                row["text"],
+                frozenset(diagnosis for diagnosis in Diagnosis if row[diagnosis.value]),
+            )
+            for row in table.to_pylist()
+        )
