@@ -11,6 +11,8 @@ requires-python = ">=3.13"
 dependencies = [
     "pyarrow>=25.0.1",
     "pydantic>=2.13.5",
+    "scikit-learn>=1.9.1",
+    "skops>=0.16.0",
     "snakemake>=9.27.0",
 ]
 
