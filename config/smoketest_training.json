@@ -1,0 +1,6 @@
+{
+  "diagnosis": "diabetes",
+  "seed": 0,
+  "folds": 5,
+  "regularization": 1.0
+}

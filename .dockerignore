@@ -2,6 +2,7 @@
 !src/
 !tests/
 !config/matrix.json
+!config/smoketest_training.json
 !config/synthetic_plan.json
 !config/mimic_tables.json
 !config/verbalization_template.md
