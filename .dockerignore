@@ -8,6 +8,7 @@
 !config/verbalization_template.md
 !resources/synthetic/
 !translation/note_parts.py
+!translation/collect.py
 !pyproject.toml
 !uv.lock
 !README.md

@@ -5,21 +5,26 @@
 #     "transformers>=5.18.0",
 # ]
 #
+# [tool.ty.environment]
+# extra-paths = ["."]
+#
 # [tool.ty.analysis]
 # allowed-unresolved-imports = ["transformers"]
 # ///
-"""Sestaví požadavky na překlad syntetických zpráv a ověří, že se vejdou do okna modelu.
+"""Sestaví požadavky na překlad syntetických zpráv a rozdělí ty, které se nevejdou.
 
 Prompt skládá chat šablona modelu v pevné revizi, takže ID tokenů jsou přesně ta,
 která model čeká, a překladový skript je na GPU jen předá. Klíč požadavku je hash
-všeho, co určuje překlad, a slouží zároveň jako cache. Požadavky se zapíšou, jen
-když se do okna vejde prompt každé zprávy. Zprávy, kterým na překlad zbude méně
-místa, než je odhad jeho délky, skript vypíše jako riziko uříznutí.
+všeho, co určuje překlad, a slouží zároveň jako cache. Zpráva, které v okně zbude
+na překlad méně než SPLIT_RATIO násobek tokenů originálu, se rozdělí na části po
+blocích a každá část jde jako samostatný požadavek. Zprávy, které rozdělit nejde,
+skript vypíše a požadavky nezapíše.
 """
 
 from __future__ import annotations
 
 import argparse
+import functools
 import hashlib
 import json
 import logging
@@ -28,6 +33,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
+from note_parts import UnsplittableError, part_ids, split
 from transformers import AutoTokenizer, GenerationConfig
 
 if TYPE_CHECKING:
@@ -38,7 +44,7 @@ if TYPE_CHECKING:
 MODEL: Final = "google/translategemma-12b-it"
 REVISION: Final = "d1b225e1caa17f1ddc7e62065d8637d0923f34e2"
 WINDOW: Final = 2048
-OUTPUT_RATIO: Final = 1.5
+SPLIT_RATIO: Final = 2.2
 DTYPE: Final = "bfloat16"
 SOURCE_LANG: Final = "en"
 TARGET_LANG: Final = "cs"
@@ -50,54 +56,57 @@ logger = logging.getLogger(__name__)
 
 @dataclass(frozen=True)
 class Prompt:
-    """Prompt jedné zprávy a kolikrát se do zbytku okna vejde délka originálu."""
+    """Prompt jedné části zprávy a ID požadavku."""
 
+    request_id: str
     note_id: str
     source_sha256: str
     token_ids: list[int]
-    room: float
 
 
 def main() -> int:
-    """Zapíše požadavky na překlad, když se do okna vejdou prompty všech zpráv.
+    """Zapíše požadavky na překlad, když jde rozdělit každá zpráva, která se nevejde.
 
     Returns:
-        0 po zápisu požadavků, 1 když korpus nemá zprávy nebo se prompt některé
-        zprávy do okna nevejde.
+        0 po zápisu požadavků, 1 když korpus nemá zprávy nebo se některé zprávě
+        nevejde do okna ani jeden řádek.
     """
     logging.basicConfig(format=LOG_FORMAT)
     logger.setLevel(logging.INFO)
     args = _parser().parse_args()
     tokenizer = AutoTokenizer.from_pretrained(MODEL, revision=REVISION)
-    prompts = [_prompt(tokenizer, path) for path in sorted(args.source.glob("*.txt"))]
-    if not prompts:
+    paths = sorted(args.source.glob("*.txt"))
+    if not paths:
         logger.error("V %s nejsou žádné zprávy.", args.source)
+        return 1
+    prompts: list[Prompt] = []
+    unsplittable: list[str] = []
+    for path in paths:
+        try:
+            prompts.extend(_prompts(tokenizer, path))
+        except UnsplittableError:
+            unsplittable.append(path.stem)
+    if unsplittable:
+        logger.error("Nejde rozdělit: %s", ", ".join(unsplittable))
         return 1
     lengths = [len(prompt.token_ids) for prompt in prompts]
     logger.info(
-        "Zpráv %d, prompt má medián %s a nejvýš %d tokenů z okna %d.",
+        "Požadavků %d, prompt má medián %s a nejvýš %d tokenů z okna %d.",
         len(prompts),
         statistics.median(lengths),
         max(lengths),
         WINDOW,
     )
-    overflowing = [
-        prompt.note_id for prompt in prompts if len(prompt.token_ids) >= WINDOW
-    ]
-    if overflowing:
-        logger.error("Prompt se do okna nevejde: %s", ", ".join(overflowing))
-        return 1
-    risky = sorted(
-        (prompt for prompt in prompts if prompt.room < OUTPUT_RATIO),
-        key=lambda prompt: prompt.room,
+    divided = [prompt for prompt in prompts if prompt.request_id != prompt.note_id]
+    notes = {prompt.note_id for prompt in divided}
+    listed = ", ".join(prompt.request_id for prompt in divided)
+    logger.info(
+        "Rozděleno %d zpráv na %d částí (%s) z %d zpráv.",
+        len(notes),
+        len(divided),
+        listed,
+        len(paths),
     )
-    if risky:
-        listed = ", ".join(f"{prompt.note_id} ({prompt.room:.3f})" for prompt in risky)
-        logger.warning(
-            "Riziko uříznutí (místo na překlad / originál < %s): %s",
-            OUTPUT_RATIO,
-            listed,
-        )
     path = args.workdir / REQUESTS
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(_requests(prompts)), encoding="utf-8")
@@ -105,9 +114,30 @@ def main() -> int:
     return 0
 
 
-def _prompt(tokenizer: PreTrainedTokenizerBase, path: Path) -> Prompt:
+def _prompts(tokenizer: PreTrainedTokenizerBase, path: Path) -> list[Prompt]:
     raw = path.read_bytes()
-    text = raw.decode("utf-8")
+    fits = functools.partial(_fits, tokenizer)
+    digest = hashlib.sha256(raw).hexdigest()
+    try:
+        texts = split(raw.decode("utf-8"), fits)
+        return [
+            Prompt(request_id, path.stem, digest, _token_ids(tokenizer, text))
+            for request_id, text in zip(
+                part_ids(path.stem, len(texts)), texts, strict=True
+            )
+        ]
+    except RuntimeError as error:
+        msg = f"Prompt zprávy {path.stem} nezačíná právě jedním BOS."
+        raise RuntimeError(msg) from error
+
+
+def _fits(tokenizer: PreTrainedTokenizerBase, text: str) -> bool:
+    room = WINDOW - len(_token_ids(tokenizer, text))
+    source = len(tokenizer(text.strip(), add_special_tokens=False)["input_ids"])
+    return room >= SPLIT_RATIO * source
+
+
+def _token_ids(tokenizer: PreTrainedTokenizerBase, text: str) -> list[int]:
     content = {
         "type": "text",
         "source_lang_code": SOURCE_LANG,
@@ -121,11 +151,9 @@ def _prompt(tokenizer: PreTrainedTokenizerBase, path: Path) -> Prompt:
         return_dict=True,
     )["input_ids"]
     if token_ids[0] != tokenizer.bos_token_id or token_ids[1] == tokenizer.bos_token_id:
-        msg = f"Prompt zprávy {path.stem} nezačíná právě jedním BOS."
-        raise ValueError(msg)
-    source = len(tokenizer(text.strip(), add_special_tokens=False)["input_ids"])
-    room = (WINDOW - len(token_ids)) / source
-    return Prompt(path.stem, hashlib.sha256(raw).hexdigest(), token_ids, room)
+        msg = "Prompt nezačíná právě jedním BOS."
+        raise RuntimeError(msg)
+    return token_ids
 
 
 def _requests(prompts: Sequence[Prompt]) -> dict[str, object]:
@@ -139,7 +167,8 @@ def _requests(prompts: Sequence[Prompt]) -> dict[str, object]:
     }
     requests = [
         {
-            "id": prompt.note_id,
+            "id": prompt.request_id,
+            "note_id": prompt.note_id,
             "key": _key(header, prompt.token_ids),
             "source_sha256": prompt.source_sha256,
             "prompt_token_ids": prompt.token_ids,
