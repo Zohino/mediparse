@@ -7,6 +7,7 @@
 !config/mimic_tables.json
 !config/verbalization_template.md
 !resources/synthetic/
+!translation/note_parts.py
 !pyproject.toml
 !uv.lock
 !README.md

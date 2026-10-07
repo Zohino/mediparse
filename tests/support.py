@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import importlib.util
 import json
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
@@ -22,6 +24,10 @@ from mediparse.infrastructure.verbalization_template import (
 )
 
 if TYPE_CHECKING:
+    from types import ModuleType
+
+    import pytest
+
     from mediparse.domain.note_plan import NotePlan
 
 REPOSITORY: Final = Path(__file__).parents[1]
@@ -120,3 +126,26 @@ class PlansFake:
             Uložené plány.
         """
         return self.plans
+
+
+def load_script(path: Path, monkeypatch: pytest.MonkeyPatch) -> ModuleType:
+    """Načte skript z adresáře translation jako modul a po testu po sobě uklidí.
+
+    Args:
+        path: Cesta ke skriptu.
+        monkeypatch: Fixture, přes kterou se vrátí ``sys.path`` a ``sys.modules``.
+
+    Returns:
+        Načtený modul zaregistrovaný v ``sys.modules``.
+    """
+    monkeypatch.syspath_prepend(str(path.parent))
+    for name in (path.stem, "note_parts"):
+        monkeypatch.setitem(sys.modules, name, None)
+        monkeypatch.delitem(sys.modules, name)
+    spec = importlib.util.spec_from_file_location(path.stem, path)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    monkeypatch.setitem(sys.modules, path.stem, module)
+    spec.loader.exec_module(module)
+    return module
