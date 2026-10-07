@@ -29,6 +29,7 @@ COPY --from=builder /app/.venv /app/.venv
 COPY pyproject.toml ./
 COPY config/matrix.json config/smoketest_training.json config/synthetic_plan.json config/mimic_tables.json config/verbalization_template.md config/
 COPY resources/synthetic/ resources/synthetic/
+COPY translation/note_parts.py translation/
 COPY tests/ tests/
 
 ENV PATH="/app/.venv/bin:$PATH" \
