@@ -219,7 +219,8 @@ Vstup smoketestu ze souborů korpusu sestavuje S12a.
 - model (`claude-sonnet-5-5`) a verzi Claude Code v době generování;
 - datum generování a otisk zadání všech zpráv;
 - commit této specifikace;
-- otisk `audit.json`.
+- otisk `audit.json`;
+- u korpusu s `cs/` část `translation`, viz [Český korpus](#český-korpus).
 
 Otisky configu a `audit.json` jsou SHA-256 souborů tak, jak leží v repozitáři.
 Otisk zadání pokrývá text, který model dostal, tedy šablonu instrukcí i věty, které
@@ -238,17 +239,40 @@ Rozhodující verzí korpusu je ta uložená v repozitáři.
 
 ## Český korpus
 
-Každá anglická zpráva se překládá do češtiny (S11e). Páry sdílejí `note_id`,
-pacienta, labely i plán.
+Každá anglická zpráva se překládá do češtiny modelem `google/translategemma-12b-it`
+(bfloat16, okno 2048 tokenů, teplota 0). Páry sdílejí `note_id`, pacienta, labely
+i plán; labely jdou z plánů, ne z textu překladu. Zprávy, které se do okna nevejdou,
+se dělí po blocích oddělených prázdným řádkem a po překladu se skládají zpět.
+Sběr překladů (`translation/collect.py`) zapisuje `cs/<note_id>.txt` jen z úplných
+výstupů aktuálních originálů a text normalizuje stejně jako hooky repa.
 
-- Česká zpráva má stejný počet značek `___` jako anglický protějšek.
-- Zmínky diagnóz odpovídají plánu i v češtině; česká klíčová slova a negační
-  výrazy definuje S11e.
-- Kanonické hlavičky zůstávají anglické, překládá se obsah sekcí (NÁVRH).
-- Na český korpus se uplatní tentýž audit.
+Český korpus je validace překladu, ne kontrola obsahu: česká klíčová slova ani
+negační výrazy se nehlídají. `mediparse-corpus-check` ověřuje:
 
-Otevřená rozhodnutí S11e: překladač a platnost anglických regexů pro zkratky, které
-překlad zachová.
+- úplnost: korpus bez `cs/` je v pořádku, jakmile `cs/` něco obsahuje, musí mít
+  každá anglická zpráva překlad a každý překlad anglický originál;
+- neprázdnost překladu;
+- poměr délky znaků češtiny k angličtině v rozmezí 0,8 až 1,6;
+- shodu počtu značek `___` s originálem; značka je právě tři podtržítka, delší
+  ani kratší řady se nepočítají.
+
+Neshoda počtu značek `___` se toleruje: je to realistická chyba překladu a labely
+nezávisí na textu. Příkaz ji vypíše jako upozornění a neblokuje, `note_id` neshodných
+zpráv se zapíší do provenance překladu (`marker_mismatches`), aby je mohla vyřadit
+budoucí karanténa. Syntetický český korpus tak zastupuje surový výstup překladu.
+Na český korpus se uplatní tentýž audit proti MIMIC jako na anglický.
+
+Provenance překladu je část `translation` v `provenance.json`: model, celá revize,
+dtype, okno, dekódování, otisk `requests.json`, použité běhy překladu
+(začátek, otisky požadavků a skriptu, GPU, CUDA, verze balíčků) a seřazená
+`marker_mismatches`. Použité jsou jen běhy, z nichž pochází výstup pro klíč
+aktuálních požadavků. Zapisuje ji po auditu `mediparse-translation-provenance`
+(`just provenance-translation <pracovní adresář>`); generování z provenance ponechá
+a odmítne zapsat, když originály, množina zpráv nebo české texty neodpovídají
+pracovnímu adresáři překladu. Brána odmítne korpus s neprázdným `cs/` a provenance
+bez `translation`. Přegenerování anglické provenance část `translation` nezachová,
+takže po změně angličtiny je překlad zastaralý a brána to ohlásí. Provenance
+překladu nenese commit specifikace.
 
 ## Změny specifikace
 
