@@ -15,7 +15,13 @@ from mediparse.infrastructure.synthetic_corpus import (
     RECORD_NAME,
     CorpusDirectory,
 )
-from tests.support import NOTE, REPOSITORY_CORPUS, REPOSITORY_TABLES, SHORT_NOTE
+from tests.support import (
+    NOTE,
+    REPOSITORY_CORPUS,
+    REPOSITORY_TABLES,
+    SHORT_NOTE,
+    translation_record,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -36,6 +42,23 @@ def test_gate_passes_without_corpus(tmp_path: Path) -> None:
 def test_gate_passes_audited_corpus_with_provenance(audit_files: AuditFiles) -> None:
     """Korpus beze změny od auditu s provenance, která na audit ukazuje, projde."""
     root = audit_files.released_corpus(SHORT_NOTE)
+
+    assert _gate(root, audit_files.tables) == ExitCode.OK
+
+
+def test_gate_requires_translation_provenance_for_czech_corpus(
+    audit_files: AuditFiles,
+) -> None:
+    """Český korpus s provenance bez části translation neprojde, s ní projde."""
+    root = audit_files.released_corpus(SHORT_NOTE | {"cs/90000001-DS-1.txt": "text"})
+    assert _gate(root, audit_files.tables) == ExitCode.BLOCKED
+
+    corpus = CorpusDirectory(root)
+    record = corpus.provenance_record()
+    assert record is not None
+    corpus.save_provenance(
+        record.model_copy(update={"translation": translation_record()})
+    )
 
     assert _gate(root, audit_files.tables) == ExitCode.OK
 

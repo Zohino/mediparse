@@ -5,7 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
-from mediparse.application.ports import AuditedCorpus
+from mediparse.application.corpus_texts import TRANSLATION_LANGUAGE, texts_in_language
+from mediparse.application.ports import AuditedCorpus, NoteSource
 from mediparse.domain.corpus_audit import (
     InvalidAuditRecordError,
     audit_record_violations,
@@ -21,8 +22,8 @@ if TYPE_CHECKING:
     from mediparse.domain.corpus_provenance import ProvenanceRecord
 
 
-class GatedCorpus(AuditedCorpus, Protocol):
-    """Korpus, jak ho vidí brána: korpus se záznamem auditu a provenance."""
+class GatedCorpus(AuditedCorpus, NoteSource, Protocol):
+    """Korpus, jak ho vidí brána: korpus se záznamem auditu a provenance a s texty zpráv."""
 
     def provenance_record(self) -> ProvenanceRecord | None:
         """Záznam provenance korpusu.
@@ -63,7 +64,10 @@ class CorpusGate:
             provenance = self.corpus.provenance_record()
         except InvalidProvenanceRecordError:
             return ("Záznam provenance neodpovídá schématu.",)
-        return provenance_violations(provenance, self.corpus.audit_sha256())
+        translated = bool(texts_in_language(self.corpus.notes(), TRANSLATION_LANGUAGE))
+        return provenance_violations(
+            provenance, self.corpus.audit_sha256(), translated=translated
+        )
 
 
 def audit_violations(

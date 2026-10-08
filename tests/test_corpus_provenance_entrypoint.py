@@ -51,6 +51,7 @@ def test_provenance_records_generation_and_audit(
             "specification_commit": COMMIT,
         },
         "audit_sha256": _sha256(root / RECORD_NAME),
+        "translation": None,
     }
 
 
