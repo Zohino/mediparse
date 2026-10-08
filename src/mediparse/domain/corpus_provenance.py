@@ -3,10 +3,16 @@
 from __future__ import annotations
 
 import re
-from datetime import date
+from datetime import date, datetime
 from typing import TYPE_CHECKING, Annotated, Final
 
-from pydantic import AfterValidator, BaseModel, ConfigDict, NonNegativeInt
+from pydantic import (
+    AfterValidator,
+    BaseModel,
+    ConfigDict,
+    NonNegativeInt,
+    PositiveInt,
+)
 
 from mediparse.domain.corpus_audit import CommitSha, Sha256, fingerprint
 from mediparse.domain.verbalization import render_prompt
@@ -69,13 +75,51 @@ class Generation(BaseModel):
     specification_commit: CommitSha
 
 
+class Decoding(BaseModel):
+    """Dekódování překladu: teplota a tokeny, které generování ukončují."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+
+    temperature: float
+    stop_token_ids: tuple[int, ...]
+
+
+class TranslationRun(BaseModel):
+    """Běh překladu: začátek, otisky požadavků a skriptu, grafická karta, CUDA a verze balíčků."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+
+    started: datetime
+    requests_sha256: Sha256
+    script_sha256: Sha256
+    gpu: str
+    cuda: str
+    packages: dict[str, str]
+
+
+class Translation(BaseModel):
+    """Vstupy překladu: model, revize, dekódování, otisk požadavků, použité běhy a neshody značek ___."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+
+    model: str
+    revision: CommitSha
+    dtype: str
+    window: PositiveInt
+    decoding: Decoding
+    requests_sha256: Sha256
+    runs: tuple[TranslationRun, ...]
+    marker_mismatches: tuple[str, ...]
+
+
 class ProvenanceRecord(BaseModel):
-    """Záznam provenance korpusu: generování a otisk záznamu čistého auditu."""
+    """Záznam provenance korpusu: generování, volitelně překlad a otisk záznamu čistého auditu."""
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     generation: Generation
     audit_sha256: Sha256
+    translation: Translation | None = None
 
 
 class InvalidProvenanceRecordError(ValueError):
@@ -96,12 +140,18 @@ def prompts_sha256(
 
 
 def provenance_violations(
-    record: ProvenanceRecord | None, audit_sha256: str
+    record: ProvenanceRecord | None, audit_sha256: str, *, translated: bool
 ) -> tuple[str, ...]:
     """Důvody, proč provenance auditovaného korpusu neplatí; prázdný výsledek znamená, že platí.
 
+    Args:
+        record: Záznam provenance, nebo None, když chybí.
+        audit_sha256: Otisk souboru se záznamem auditu.
+        translated: Zda korpus obsahuje české zprávy.
+
     Returns:
-        Popis chybějícího záznamu nebo záznamu, který ukazuje na jiný audit.
+        Popis chybějícího záznamu, záznamu, který ukazuje na jiný audit, nebo českého
+        korpusu bez provenance překladu.
     """
     if record is None:
         return ("Korpus nemá záznam provenance.",)
@@ -109,4 +159,6 @@ def provenance_violations(
         return (
             "Provenance ukazuje na jiný audit, po novém auditu je nutné ji zapsat znovu.",
         )
+    if translated and record.translation is None:
+        return ("Český korpus nemá provenance překladu.",)
     return ()

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date
 
 from mediparse.application.corpus_gate import CorpusGate
@@ -15,7 +15,13 @@ from mediparse.domain.corpus_provenance import (
     InvalidProvenanceRecordError,
     ProvenanceRecord,
 )
-from tests.support import CORPUS_SHA, PINNED, STRUCTURE_LABELS, audit_record
+from tests.support import (
+    CORPUS_SHA,
+    PINNED,
+    STRUCTURE_LABELS,
+    audit_record,
+    translation_record,
+)
 
 AUDIT_FILE = "9" * 64
 
@@ -46,6 +52,10 @@ class _Corpus:
     provenance: ProvenanceRecord | None = PROVENANCE
     invalid_provenance: bool = False
     audit_file: str = AUDIT_FILE
+    texts: dict[str, str] = field(default_factory=dict)
+
+    def notes(self) -> dict[str, str]:
+        return self.texts
 
     def fingerprint(self) -> str | None:
         return self.sha256
@@ -117,3 +127,25 @@ def test_invalid_provenance_is_blocked() -> None:
     assert CorpusGate(corpus).run(PINNED, STRUCTURE_LABELS) == (
         "Záznam provenance neodpovídá schématu.",
     )
+
+
+def test_czech_corpus_needs_translation_provenance() -> None:
+    """Korpus s cs/ a provenance bez translation neprojde."""
+    corpus = _Corpus(CORPUS_SHA, audit_record(), texts={"cs/n1.txt": "text"})
+
+    assert CorpusGate(corpus).run(PINNED, STRUCTURE_LABELS) == (
+        "Český korpus nemá provenance překladu.",
+    )
+
+
+def test_czech_corpus_with_translation_provenance_passes() -> None:
+    """Korpus s cs/ a provenance s translation projde."""
+    provenance = PROVENANCE.model_copy(update={"translation": translation_record()})
+    corpus = _Corpus(
+        CORPUS_SHA,
+        audit_record(),
+        provenance=provenance,
+        texts={"cs/n1.txt": "text"},
+    )
+
+    assert CorpusGate(corpus).run(PINNED, STRUCTURE_LABELS) == ()

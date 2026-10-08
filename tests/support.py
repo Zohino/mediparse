@@ -6,10 +6,12 @@ import importlib.util
 import json
 import sys
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.corpus_audit import NGRAM_SIZE, NORMALIZATION, AuditRecord
+from mediparse.domain.corpus_provenance import Decoding, Translation, TranslationRun
 from mediparse.domain.labels import Diagnosis
 from mediparse.domain.smoketest_input import InputNote
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
@@ -111,6 +113,33 @@ def separable_notes(
             for visit in range(1 + (patient * patient * 3 + patient) % 7)
         )
     return notes
+
+
+def translation_record(**overrides: object) -> Translation:
+    """Provenance překladu s jedním během a bez neshod značek.
+
+    Returns:
+        Záznam, v němž ``overrides`` nahradí jednotlivá pole.
+    """
+    run = TranslationRun(
+        started=datetime(2026, 10, 7, 17, 21, tzinfo=UTC),
+        requests_sha256="4" * 64,
+        script_sha256="5" * 64,
+        gpu="NVIDIA A40",
+        cuda="13.0",
+        packages={"vllm": "0.30.0"},
+    )
+    fields = {
+        "model": "google/translategemma-12b-it",
+        "revision": "d" * 40,
+        "dtype": "bfloat16",
+        "window": 2048,
+        "decoding": Decoding(temperature=0.0, stop_token_ids=(1, 106)),
+        "requests_sha256": "4" * 64,
+        "runs": (run,),
+        "marker_mismatches": (),
+    } | overrides
+    return Translation.model_validate(fields)
 
 
 @dataclass(frozen=True)
