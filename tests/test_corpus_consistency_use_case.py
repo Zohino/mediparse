@@ -48,7 +48,7 @@ def test_plan_without_note_is_skipped(
     """Plán bez zprávy není porušení jedné zprávy; korpus bez zpráv nemá co splňovat."""
     report = _check((planned_note.plan,), {}).run(sampler_config)
 
-    assert report == ConsistencyReport((), ())
+    assert report == ConsistencyReport((), (), ())
 
 
 def test_note_without_plan_is_reported(
@@ -77,12 +77,65 @@ def test_violating_note_is_reported_once_with_reasons(
     assert any("Sex" in reason for reason in result.reasons)
 
 
-def test_other_languages_are_not_checked(
+def test_other_languages_are_not_checked_against_plans(
     planned_note: PlannedNote, sampler_config: SamplerConfig
 ) -> None:
-    """Český korpus má vlastní slovník (S11e), anglické kontroly se ho netýkají."""
-    texts = {f"cs/{planned_note.plan.note_id}.txt": "Jiný text"}
+    """České zprávy nejdou přes kontroly plánu, ty hlídají jen anglické."""
+    note_id = planned_note.plan.note_id
+    texts = {
+        f"en/{note_id}.txt": planned_note.text,
+        f"cs/{note_id}.txt": planned_note.text,
+    }
 
-    assert _check((planned_note.plan,), texts).run(sampler_config) == ConsistencyReport(
-        (), ()
-    )
+    report = _check((planned_note.plan,), texts).run(sampler_config)
+
+    assert report.notes == ()
+    assert report.notices == ()
+
+
+def test_corpus_without_czech_has_no_translation_findings(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Korpus bez cs/ se chová jako dřív: žádné upozornění ani důvod k cs/."""
+    plan = planned_note.plan
+    texts = {f"en/{plan.note_id}.txt": planned_note.text}
+
+    report = _check((plan,), texts).run(sampler_config)
+
+    assert report.notices == ()
+    assert not any("cs/" in reason for reason in report.corpus)
+
+
+def test_incomplete_czech_is_a_corpus_violation(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Chybějící překlad zprávy je porušení korpusu, ne zpráva k přegenerování."""
+    plan = planned_note.plan
+    texts = {
+        f"en/{plan.note_id}.txt": planned_note.text,
+        "en/90000099-DS-1.txt": planned_note.text,
+        f"cs/{plan.note_id}.txt": planned_note.text,
+    }
+
+    report = _check((plan,), texts).run(sampler_config)
+
+    assert any("cs/90000099-DS-1" in reason for reason in report.corpus)
+    assert [result.note_id for result in report.notes] == ["90000099-DS-1"]
+
+
+def test_marker_mismatch_is_only_a_notice(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Neshoda počtu ___ se eviduje jako upozornění, korpus kvůli ní neporušuje."""
+    plan = planned_note.plan
+    assert "___" in planned_note.text
+    texts = {
+        f"en/{plan.note_id}.txt": planned_note.text,
+        f"cs/{plan.note_id}.txt": planned_note.text.replace("___", "xxx", 1),
+    }
+
+    report = _check((plan,), texts).run(sampler_config)
+
+    assert len(report.notices) == 1
+    assert plan.note_id in report.notices[0]
+    assert not any("cs/" in reason for reason in report.corpus)

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import shutil
 from typing import TYPE_CHECKING
 
 from mediparse.entrypoints.corpus_consistency import run
@@ -69,3 +70,23 @@ def test_violation_names_note_to_regenerate(
 def test_repository_corpus_matches_its_plans() -> None:
     """Zprávy v repu odpovídají plánům; dokud žádné nejsou, kontroly nemají co hlásit."""
     assert _run(REPOSITORY_CORPUS, REPOSITORY_PLANS) == ExitCode.OK
+
+
+def test_notices_alone_keep_exit_ok(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Neshoda počtu ___ v překladu se vypíše jako upozornění a exit zůstane OK."""
+    corpus = tmp_path / "synthetic"
+    shutil.copytree(REPOSITORY_CORPUS / "en", corpus / "en")
+    (corpus / "cs").mkdir()
+    for path in sorted((corpus / "en").glob("*.txt")):
+        text = path.read_text(encoding="utf-8")
+        (corpus / "cs" / path.name).write_text(text, encoding="utf-8")
+    first = next(iter(sorted((corpus / "cs").glob("*.txt"))))
+    first.write_text(first.read_text(encoding="utf-8").replace("___", "x", 1))
+
+    code = _run(corpus, REPOSITORY_PLANS)
+
+    output = capsys.readouterr().out
+    assert code == ExitCode.OK
+    assert f"Upozornění: cs/{first.stem}" in output

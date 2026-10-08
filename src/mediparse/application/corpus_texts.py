@@ -8,6 +8,7 @@ if TYPE_CHECKING:
     from collections.abc import Mapping
 
 LANGUAGE: Final = "en"
+TRANSLATION_LANGUAGE: Final = "cs"
 _SUFFIX: Final = ".txt"
 
 

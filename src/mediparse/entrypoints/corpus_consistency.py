@@ -1,7 +1,8 @@
 """Vstupní bod kontrol shody syntetického korpusu s plány.
 
 Konzolový skript ``mediparse-corpus-check`` vypíše porušení pravidel jedné zprávy
-a note_id zpráv k přegenerování. Pracuje jen se syntetickým korpusem, proto smí
+a note_id zpráv k přegenerování; neshodu počtu značek ___ v překladu hlásí jako
+upozornění, které neblokuje. Pracuje jen se syntetickým korpusem, proto smí
 běžet kdekoli, i v CI.
 """
 
@@ -41,7 +42,8 @@ def run(argv: Sequence[str]) -> ExitCode:
     """Složí kontroly z plánů, korpusu a configu a vypíše zprávy k přegenerování.
 
     Returns:
-        OK, když zprávy odpovídají plánům a neprázdný korpus modelu, jinak BLOCKED;
+        OK, když zprávy odpovídají plánům, neprázdný korpus modelu a překlad originálu
+        (upozornění neblokují), jinak BLOCKED;
         REFUSED pro chybějící nebo neplatný vstupní soubor.
     """
     args = _parser().parse_args(argv)
@@ -54,6 +56,7 @@ def run(argv: Sequence[str]) -> ExitCode:
             f"{result.note_id}: {reason}\n" for reason in result.reasons
         )
     sys.stdout.writelines(f"Korpus: {reason}\n" for reason in report.corpus)
+    sys.stdout.writelines(f"Upozornění: {notice}\n" for notice in report.notices)
     if not report.notes and not report.corpus:
         sys.stdout.write("Kontroly shody: korpus odpovídá plánům i modelu.\n")
         return ExitCode.OK
