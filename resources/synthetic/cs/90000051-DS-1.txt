@@ -1,0 +1,72 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická cholecystektomie (odstranění žlučníku) dne ___
+
+Anamnéza současného onemocnění:
+Pacient se dostavil na oddělení ___ s bolestí v pravém horním kvadrantu břicha, která se zhoršovala již dva dny, s nevolností a jednou epizodou zvracení. Uváděl, že měl doma horečku. Symptomy se objevily po konzumaci tučného jídla. Byl převezen z pohotovosti ___ pro chirurgické vyšetření. Ultrazvukové vyšetření odhalilo žlučové kameny se zesílením stěny žlučníku a byla mu zahájena antibiotická léčba.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+Gastroezofageální reflux
+Apendektomie (odstranění slepého střeva) na ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny. Otec s onemocněním ___
+
+Fyzikální vyšetření:
+Životní funkce: T 99,1 °C, HR 82 tepů/min, BP 128/76 mmHg, RR 16 dechů/min, SpO2 97 % při pokojovém vzduchu
+Celkový stav: Pacient je v pohodě, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Bez žloutenky, vlhké sliznice.
+Krk: Pružný.
+Břicho: Měkké, mírně bolestivé v pravém horním kvadrantu, rány čisté, suché, neporušené.
+Extremity: Teplé, bez otoků.
+Neurologické vyšetření: Pacient je při vědomí, orientovaný, bez fokálních příznaků.
+
+Významné výsledky:
+LABORATOŘ PŘI PROPUŠTĚNÍ: WBC 8,4, Hgb 13,9, Plt 245, Na 139, K 4,2, Cr 0,9, ALT 42, AST 38, celkový bilirubin 0,8, lipáza 31. Při přijetí byla hladina WBC 14,2 dne ___.
+ZOBRAZENÍ: Ultrazvukové vyšetření na ___ prokázalo žlučové kameny, zesílenou stěnu žlučníku a tekutinu kolem žlučníku, bez dilatace žlučových cest. Rentgen hrudníku: plíce čisté.
+
+Průběh hospitalizace:
+Pacient byl přijat na chirurgické oddělení a dostával intravenózní tekutiny a antibiotika. Ve druhý den hospitalizace podstoupil laparoskopickou cholecystektomii provedenou doktorem ___, bez komplikací. Bolest byla kontrolována pomocí perorálních léků a strava byla postupně rozšiřována podle tolerance. Jaterní testy se normalizovaly. Antibiotika byla po operaci ukončena. Krevní tlak zůstal dobře kontrolován pomocí léků, které pacient užíval doma. Pacient byl schopen samostatně chodit a močit. Byl propuštěn domů ve stabilním stavu dne ___ a byla mu zajištěna ambulantní chirurgická kontrola.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Omeprazol 20 mg denně
+
+Léky při propuštění:
+Acetaminophen 650 mg každých šest hodin dle potřeby na bolest
+Oxykodon 5 mg každých šest hodin dle potřeby na silnou bolest, omezené množství
+Dokusát 100 mg dvakrát denně při užívání oxykodonu
+Pokračovat v užívání lisinoprilu, atorvastatinu a omeprazolu ve stejné dávce.
+
+Plán po propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Akutní zánět žlučníku
+Žlučové kameny
+
+Stav při propuštění:
+Dobrý
+Úroveň aktivity: Chůze, soběstačnost
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku a váš žlučník byl odstraněn. Udržujte rány čisté a suché; můžete se sprchovat. Během ___ týdnů nezvedejte nic těžšího než 4,5 kg. V případě horečky, zhoršující se bolesti, zvracení, žluté pokožky nebo zarudnutí rány volejte číslo ___ nebo se obraťte na lékaře.
+
+Pokyny pro další péči:
+___

@@ -1,0 +1,72 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Zásah:
+Žádný
+
+Anamnéza:
+Pacientka, ___ let, se dostavila na oddělení ___ s třemi dny trvající bolestí břicha, nevolností a sníženým příjmem potravy po nedávné návštěvě ambulance v ___. Popírala horečku, bolest na hrudi nebo problémy s močením. Bolest se zhoršovala po jídle.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Předchozí apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Pacientka je v pohodě, mírná bolestivost v pravém horním kvadrantu břicha, bez známek peritoneálního podráždění, jinak bez zvláštností.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Životní funkce: T 98,9, SR 88, TK 136/80, FF 16, SpO2 98 % při pokojovém vzduchu
+Krk: Pružný
+Plíce: Čisté bilaterálně
+Břicho: Měkké, bolestivé v pravém horním kvadrantu, bez distenze
+KONČETINY: Bez edémů
+KŮŽE: Teplá a suchá
+
+Významné výsledky:
+Laboratorní výsledky při přijetí ukazují mírně zvýšenou hladinu lipázy a glukózy 210. CT vyšetření břicha v ___ prokázalo žlučové kameny a mírné ztluštění stěny žlučníku. Jaterní enzymy byly mírně zvýšené a postupně klesaly. Rentgen hrudníku bez patologických nálezů. Analýza moči negativní.
+
+Průběh hospitalizace:
+Pacientka byla přijata pro žlučové koliky s možnou cholecystitidou a byla léčena infuzemi, analgetiky a antibiotiky. Chirurgický tým v ___ doporučil ambulantní cholecystektomii. Zvýšená hladina glukózy vyvolala podezření na možnou cukrovku, takže byl odeslán odběr na hemoglobin A1c. Strava byla postupně rozšiřována; pacientka byla vyšetřena lékařem ___ před propuštěním dne ___.
+PROBLÉMY PŘI PŘECHODU:
+Čeká se na výsledky A1c a naplánuje se elektivní operace.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Pokračujte v užívání lisinoprilu 10 mg denně a atorvastatinu 20 mg večer. Užívat paracetamol 650 mg každých šest hodin dle potřeby na bolest. Ondansetron 4 mg dle potřeby při nevolnosti.
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Žlučové koliky
+Cholelithiasis (žlučové kameny)
+
+Stav při propuštění:
+Stabilní.
+Psychický stav: Vědomá a orientovaná, schopná sdělit vlastní anamnézu.
+Úroveň vědomí: Plně při vědomí a komunikativní.
+Aktivity: Chůze samostatná.
+
+Pokyny při propuštění:
+Byla přijata kvůli bolesti žlučníku. Jezte nízkotučnou stravu, užívejte léky podle předpisu a v případě horečky, zvracení, žluté pokožky nebo výrazného zhoršení bolesti břicha se obraťte na ___ .
+
+Pokyny pro další sledování:
+___

@@ -1,0 +1,80 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Zarudnutí a horečka levé nohy
+
+Zásahné chirurgické zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Žena ve věku ___ let s hypertenzí, která se dostavila s třidenní horečkou, zarudnutím a otokem levé dolní končetiny po odření při zahradničení. Byla ošetřena v urgentním centru ___, dostala jednu dávku antibiotik a byla odeslána na pohotovostní oddělení ___ kvůli zhoršující se bolesti a šíření zarudnutí.
+
+Předchozí zdravotní historie:
+Hypertenze
+Hypotyreóza
+Osteoartróza
+
+Předchozí chirurgická historie:
+Chirurgické odstranění žlučníku v roce ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s mrtvicí
+
+Fyzikální vyšetření:
+Celkový stav:
+Mírně nepříjemná, při příjmu horečka
+Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Vlhké sliznice
+Plíce:
+Čisté bilaterálně
+KŮŽE:
+Teplá, zarudlá, bolestivá levá holen bez známek hnisání
+Neurologické vyšetření:
+Vědomá, bez fokálních příznaků
+
+Významné výsledky:
+Laboratorní testy při přijetí z ___ ukázaly zvýšený počet bílých krvinek (13,2) s převahou neutrofilů, normální hodnoty elektrolytů a kreatininu na základní úrovni. Laktát byl normální. Kultivace krve odebraná při příjmu nevykazovala žádný růst po pěti dnech. Ultrazvuk levé nohy ukázal otok měkkých tkání bez abscesu nebo hluboké žilní trombózy. Rentgen hrudníku byl čistý.
+
+Průběh hospitalizace:
+Přijata na oddělení ___ s celulitidou levé dolní končetiny. Vzhledem k alergii na penicilin obdržela intravenózní vancomycin, s ústupem horečky a zmenšením zarudnutí do druhého dne. Byla ošetřena lékařem ___ kvůli péči o ránu a přešla na perorální doxycyklin.
+PROBLÉMY PŘI PROPOUŠTĚNÍ:
+Dokončení celé kúry antibiotik. Kontrola stavu kůže při kontrole u praktického lékaře.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levothyroxine ___ mcg denně
+
+Léky při propuštění:
+1. Doxycyklin 100 mg perorálně dvakrát denně po dobu sedmi dnů
+2. Lisinopril 10 mg perorálně denně
+3. Levothyroxine ___ mcg perorálně denně
+4. Acetaminophen 650 mg perorálně každých šest hodin dle potřeby na bolest
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida levé dolní končetiny
+
+Stav při propuštění:
+Psychický stav:
+Orientovaná a koherentní
+Úroveň vědomí:
+Vědomá a komunikativní
+Funkční stav:
+Chůze, soběstačná
+
+Instrukce při propuštění:
+Byla Vám poskytnuta léčba kožní infekce levé nohy. Užívajte antibiotika přesně podle předpisu a dokončete každou dávku. Udržujte nohu ve zvýšené poloze a čistou. Domluvte si kontrolu u ___ do jednoho týdne. V případě horečky, šíření zarudnutí nebo zhoršení bolesti volejte ___ nebo se obraťte na lékaře.
+
+Následná péče:
+___

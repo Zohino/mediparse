@@ -1,0 +1,61 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Specializace: Lékařství
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest břicha s nevolností.
+
+Zásahné chirurgické zákroky:
+Žádné.
+
+Anamnéza současného onemocnění:
+Muž s postupně se zhoršující bolestí v horní části břicha a zvracením, poprvé vyšetřen ___ a následně převeden do ___ pro další vyšetření a zobrazovací metody.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Bez anamnézy srdečního selhání.
+
+Rodinná anamnéza:
+Otec s koronární chorobou.
+
+Fyzikální vyšetření:
+Celkový stav: Pacient je v pohodě, bez známek utrpení.
+Hlava, oči, uši, nos, hrdlo: Vlhká sliznice.
+Krk: Pružný.
+Břicho: Měkké, mírná bolestivost v oblasti žaludku.
+
+Významné výsledky:
+ZOBRAZENÍ: Ultrazvuk břicha provedený ___ ukázal žlučové kameny.
+NÁLEZY: Zesílená stěna žlučníku s malými kameny, bez rozšíření žlučových cest, normální echotextura jater.
+
+Průběh hospitalizace:
+Pacient byl přijat, podány intravenózní tekutiny, antiemetika a antibiotika pro léčbu zánětu žlučníku. Bolest se zlepšila po odpočinku trávicího traktu a dieta byla postupně rozšiřována. Doporučena elektivní cholecystektomie (odstranění žlučníku), která bude provedena ambulantně v ___.
+
+Léky při přijetí:
+Lisinopril a atorvastatin denně.
+
+Léky při propuštění:
+Pokračovat v užívání lisinoprilu a atorvastatinu. Užívat amoxicilin-klavulanát dvakrát denně po dobu pěti dnů. Paracetamol dle potřeby na bolest.
+
+Plán po propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Akutní zánět žlučníku
+Žlučové kameny.
+
+Stav při propuštění:
+Psychický stav: Jasný a soustředěný.
+Úroveň vědomí: Vnímavý a komunikativní.
+Funkční stav: Chůze, soběstačný.
+
+Pokyny při propuštění:
+V případě horečky, zhoršení bolesti, přetrvávajícího zvracení nebo žluté pokožky se obraťte na lékaře. Vyhýbejte se tučným jídlům do doby vaší chirurgické návštěvy v ___. Dokončete užívání všech antibiotik podle předpisu.
+
+Pokyny pro další sledování:
+___

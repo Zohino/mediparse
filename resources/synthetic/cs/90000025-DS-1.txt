@@ -1,0 +1,63 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: Kardiologie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka s cukrovkou, která se prezentovala s dušností a bušením srdce trvajícím několik dní. Byla odeslána od ___ po ambulantní návštěvě v ___.
+PROHLÍDKA SYSTÉMŮ:
+Pozitivní nález únavy a otoků nohou.
+
+Osobní anamnéza:
+Hypertenze
+Srdeční selhání
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných informací.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Životní funkce: bez horečky, stabilní
+Celkový stav: pohodlná, při vědomí
+EXTREMITY: minimální otok
+KŮŽE: teplá, suchá
+
+Průběh hospitalizace:
+Pacientka přijata s přetížení objemem tekutin a rychlou srdeční frekvencí. Byla podrobena diuréze, což vedlo ke zlepšení dýchání, a srdeční frekvence byla kontrolována pomocí perorálního léku. Antikoagulace byla zahájena po konzultaci s týmem v ___. Během pobytu se váha a příznaky postupně zlepšovaly.
+
+Léky při přijetí:
+Metformin, lisinopril, furosemid denně.
+
+Léky při propuštění:
+Furosemid 40 mg denně, metoprolol sukcinát 50 mg denně, apixaban 5 mg dvakrát denně, lisinopril 10 mg denně.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární:
+Diabetes mellitus, srdeční selhání, fibrilace síní
+
+Stav při propuštění:
+Úroveň vědomí: při vědomí a orientovaná
+Funkční stav: chodí samostatně
+
+Instrukce při propuštění:
+Vážete se každé ráno, omezte příjem soli, užívejte léky podle předpisu a volejte ___ v případě zhoršení dýchání.
+
+Následná péče:
+___

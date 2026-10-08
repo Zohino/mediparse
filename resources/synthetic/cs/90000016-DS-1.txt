@@ -1,0 +1,76 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Nausea a nedostatečný příjem potravy
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka byla přijata na oddělení ___ s několika dny trvajícími potížemi, jako je nevolnost, nedostatečný příjem potravy a snížený objem moči. Laboratorní výsledky ukázaly akutní poškození ledvin. Byla rehydratována a přijata k monitorování.
+PROHLÍDKA SYSTÉMŮ:
+Pozitivní nález: únava a nevolnost. Negativní nález: horečka, bolest na hrudi.
+
+Osobní anamnéza:
+Diabetes mellitus
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí; podrobnosti viz ___.
+
+Fyzikální vyšetření:
+Orientovaná, v pohodě, bez horečky, vitální funkce stabilní.
+Krk:
+Flexibilní, bez jícnové dilatace.
+Extremity:
+Teplé, bez otoků.
+KŮŽE:
+Suchá, neporušená, bez vyrážky.
+
+Relevantní výsledky:
+LABORATORNÍ VÝSLEDKY PŘI PŘIJETÍ:
+Kreatinin zvýšený nad základní hodnotu, urea zvýšená, draslík normální, glukóza zvýšená, bikarbonát snížený. Ostatní výsledky provedené ___ byly bez zvláštností.
+NÁLEZY:
+Ultrazvuk ledvin provedený ___ nevykazoval hydronefrózu, ledviny měly normální velikost a nebyly zjištěny žádné kameny. Analýza moči neprokázala infekci. Rentgen hrudníku byl čistý.
+
+Průběh hospitalizace:
+Pacientce byly podávány intravenózní tekutiny a její hladina kreatininu se postupně zlepšovala a přibližovala se základní hodnotě. Léky s potenciálně nefrotoxickým účinkem byly vysazeny. Hladina glukózy v krvi byla během hospitalizace kontrolována pomocí inzulínu a po propuštění byla obnovena domácí léčba. Strava byla postupně rozšiřována bez obtíží. Péče byla prodiskutována s Dr. ___ a hlavním týmem na oddělení ___ před propuštěním. Pacientka byla schopna samostatné chůze.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně; lisinopril 10 mg denně.
+
+Léky při propuštění:
+Metformin 500 mg dvakrát denně, pokračovat po kontrolních laboratorních výsledcích. Lisinopril vysadit do doby kontroly u Dr. ___. Acetaminophen 500 mg dle potřeby na bolest. Pít dostatek tekutin.
+
+Místo propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Akutní poškození ledvin
+Diabetes mellitus
+
+Stav při propuštění:
+Stabilní
+Psychický stav:
+Orientovaná a koherentní.
+Úroveň vědomí:
+Orientovaná a komunikativní.
+Funkční stav:
+Chůze samostatná.
+
+Pokyny při propuštění:
+Byla léčena pro dehydrataci a problémy s ledvinami. Pijte dostatek tekutin, vyhýbejte se ibuprofenu a užívejte léky podle pokynů. V případě horečky, zvracení nebo sníženého objemu moči se obraťte na lékaře. V případě dotazů volejte na číslo ___.
+
+Pokyny pro další péči:
+___

@@ -1,0 +1,64 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka přišla s tříměsíčním kašlem a horečkou, poprvé vyšetřena dne ___. Při přijetí neměla známky akutního poškození ledvin, jak uvedl tým.
+PROHLÍDKA SYSTÉMŮ:
+Přítomny zimnice. Jinak negativní.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Významné výsledky:
+Rentgen hrudníku ukázal zánět v dolní části pravého plicního laloku. Počet bílých krvinek mírně zvýšen, denně se zlepšuje.
+LABORATORNÍ VÝSLEDKY PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek 8,1, kreatinin 0,8, sodík 139
+
+Stručný průběh hospitalizace:
+Léčena na pneumonii antibiotiky a kyslíkem, postupně odstavována od kyslíku během tří dnů. Hladina glukózy monitorována a kontrolována. Před propuštěním vyšetřena lékařem ___, dobře toleruje stravu.
+
+Léky při přijetí:
+Lisinopril, atorvastatin, metformin
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů
+2. Lisinopril jednou denně
+3. Atorvastatin večer
+4. Metformin při jídle
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Diabetes mellitus
+Sekundární:
+Hypertenze
+
+Stav při propuštění:
+Stabilní
+Psychický stav:
+Vědomá a orientovaná, jasné myšlení.
+Fyzická aktivita:
+Chůze samostatná.
+
+Pokyny při propuštění:
+Byla léčena na pneumonii. Dokončete užívání všech antibiotik, odpočívejte, pijte dostatek tekutin a volejte ___, pokud se objeví horečka nebo se zhorší dýchání.
+
+Pokyny pro další péči:
+___

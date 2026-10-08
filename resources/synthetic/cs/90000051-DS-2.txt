@@ -1,0 +1,60 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Oddělení: Chirurgie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní chirurgický zákrok:
+Laparoskopická appendektomie (odstranění slepého střeva).
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let s gastroezofageálním refluxem se dostavil na oddělení ___ s bolestmi v pravém dolním kvadrantu trvajícími tři dny, nevolností a mírnou horečkou, která začala ___. Zobrazovací metody naznačovaly zánět slepého střeva a byla konzultována chirurgie. Byl přijat do nemocnice.
+
+Předchozí zdravotní problémy:
+Gastroezofageální reflux
+Sezónní alergie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodině se vyskytuje fibrilace síní u otce. V rodině se nevyskytují žádné případy onemocnění střev.
+
+Fyzikální vyšetření:
+Životní funkce: bez horečky, stabilní.
+Celkový stav: pohodlný.
+Břicho: měkké, mírná bolestivost v pravém dolním kvadrantu.
+EXTREMITIES (končetiny): bez otoků.
+KŮŽE: rány čisté.
+
+Významné výsledky:
+Počet bílých krvinek 13,2 při přijetí, normalizoval se na 7,8 při propuštění. Kreatinin 0,9. CT vyšetření břicha ukázalo rozšířený, zánětlivý apendix (slepé střevo) s infiltrací tukové tkáně v okolí apendixu a bez abscesu. Histopatologické výsledky z ___ jsou k dispozici při propuštění a budou posouzeny na chirurgické ambulanci.
+
+Průběh hospitalizace:
+Podstoupil nekomplikovanou laparoskopickou appendektomii dne ___. Bolest byla kontrolována perorálními analgetiky, strava byla postupně rozšiřována a pacient dobře snášel běžnou stravu. Byl vyšetřen lékařem ___ k zhodnocení rány, bez známek infekce. Byl propuštěn domů ve stabilním stavu druhý den hospitalizace.
+
+Léky při přijetí:
+Omeprazol 20 mg perorálně jednou denně.
+
+Léky při propuštění:
+Paracetamol 650 mg každých šest hodin dle potřeby na bolest. Pokračovat v užívání omeprazolu 20 mg denně. Docusate 100 mg dvakrát denně během užívání opioidních analgetik.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní zánět slepého střeva.
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí: bdělý a komunikativní
+Úroveň aktivity: pohyblivý, soběstačný.
+
+Pokyny při propuštění:
+Udržujte rány čisté a suché a můžete se osprchovat. Vyhněte se zvedání předmětů o hmotnosti více než 4,5 kg po dobu čtyř týdnů. V případě horečky, zhoršující se bolesti břicha, zvracení nebo zarudnutí rány se obraťte na lékaře. V případě dotazů volejte na číslo ___.
+
+Následná péče:
+___

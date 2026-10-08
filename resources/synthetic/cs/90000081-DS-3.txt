@@ -1,0 +1,71 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Celulitida levé nohy
+
+Zásah:
+Žádný
+
+Anamnéza:
+Muž ve věku ___ let, který se dostavil s třemi dny trvajícími potížemi v podobě zarudnutí a bolesti levé nohy, odeslán z ambulance ___
+
+Osobní anamnéza:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Fyzikální vyšetření při přijetí:
+Celkový stav: Pacient je v pohodě, bez známek utrpení
+ORL: Normální
+Plíce: Čisté bilaterálně
+Břicho: Měkké, bez citlivosti
+Extremity: Levá holen teplá, zarudlá, otoklá
+Kůže: Zarudnutí, jak je popsáno výše
+
+Výsledky vyšetření:
+Laboratorní výsledky při propuštění:
+WBC 8.1, Hgb 13.4, Plt 240, Cr 0.9
+Závěr:
+Ultrazvuk nevykazuje absces ani hlubokou žilní trombózu.
+
+Průběh hospitalizace:
+Pacient byl léčen intravenózními antibiotiky, zarudnutí postupně ustupovalo a následně byl převeden na perorální léčbu dne ___.
+Důležité aspekty při propuštění:
+Dokončení léčby antibiotiky; kontrola nohy.
+
+Léky při přijetí:
+Metformin, lisinopril, atorvastatin
+
+Léky při propuštění:
+Cefalexin čtyřikrát denně po dobu sedmi dnů; pokračovat v užívání metforminu, lisinoprilu a atorvastatinu.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Hlavní: Celulitida levé dolní končetiny
+
+Stav při propuštění:
+Stabilní a zlepšený.
+Psychický stav: Pacient je při vědomí a orientovaný.
+Úroveň vědomí: Pacient je při vědomí.
+
+Pokyny při propuštění:
+Byl vám poskytnut lék na infekci kůže na noze. Užívajte antibiotika podle předpisu, zvedněte nohu a volejte ___ v případě, že se objeví horečka.
+
+Pokyny pro další péči:
+___

@@ -1,0 +1,73 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíž:
+Vřed na noze s otokem
+
+Zásahné chirurgické zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž převezen z kliniky ___ s zhoršujícím se vředem na levé noze a zarudnutím.
+
+Osobní anamnéza:
+Diabetes mellitus
+Hypertenze
+
+Chirurgická anamnéza:
+Apendektomie
+
+Rodinná anamnéza:
+Matka s vysokým krevním tlakem
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacient je v pohodě, bez známek utrpení.
+Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Normální
+Extremity:
+Vřed na levé noze
+PULZY:
+Hmatné na obou stranách
+
+Relevantní výsledky:
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Hladina glukózy a počet bílých krvinek téměř normální
+ZÁVĚR:
+Na rentgenovém snímku nohy nejsou patrné známky postižení kosti ___
+
+Stručný průběh hospitalizace:
+Pacient byl léčen antibiotiky a péčí o ránu kvůli infekci nohy. Hladina glukózy byla kontrolována pomocí inzulínu. Zlepšil se a byl propuštěn domů s plánovanou kontrolou u ___ .
+
+Léky při přijetí:
+Metformin
+Lisinopril
+
+Léky při propuštění:
+Amoxicilin-klavulanát dvakrát denně, metformin, lisinopril, obvazové materiály
+
+Plán po propuštění:
+Domů s péčí
+
+Diagnóza při propuštění:
+Diabetes
+Infekce nohy
+
+Stav při propuštění:
+Psychický stav:
+Orientovaný a při vědomí
+Úroveň vědomí:
+Probudený a pozorný
+Funkční stav:
+Chůze s ortopedickou obuví, která snižuje zátěž na nohu
+
+Pokyny při propuštění:
+Udržujte obvaz čistý, užívejte antibiotika podle pokynů, kontrolujte nohy a hladinu cukru denně.
+
+Pokyny pro další péči:
+___

@@ -1,0 +1,65 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Zarudnutí a horečka pravé nohy
+
+Zásahné chirurgické zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let, který se po drobném poranění při zahradničení po dobu dvou dnů potýkal s zarudnutím, teplem a otokem v dolní části pravé nohy. Byl vyšetřen v urgentní ambulanci ___ a dostal perorální antibiotika, ale jeho stav se zhoršil, objevil se horečka a rozšiřující se zarudnutí od ___, a proto se obrátil na pohotovost.
+
+Předchozí zdravotní problémy:
+Hypertenze
+Hyperlipidemie
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Celkový stav: Vědomý, v pohodě, mírně horečnatý při příjmu.
+Hlava, oči, uši, nos, hrdlo: Vlhká sliznice.
+Plíce: Čisté bilaterálně.
+Břicho: Měkké, bez citlivosti. Pravá holen s teplou, zarudlou plochou.
+
+Významné výsledky:
+Po přijetí byl zvýšen počet bílých krvinek s převahou neutrofilů a zvýšeny zánětlivé markery. Kultivace krve z ___ nevykazovala žádný růst. Ultrazvuk nohy vyloučil hlubokou žilní trombózu.
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek normalizován, kreatinin na základní úrovni, elektrolyty bez odchylek.
+
+Stručný průběh hospitalizace:
+Léčba celulitidy pravé nohy intravenózním vancomycinem, s postupným zlepšováním horečky a zarudnutí. Okraj zarudnutí byl označen a denně ustupoval. Péče o ránu byla zajištěna ošetřovatelskou sestrou ___. Byl převeden na perorální doxycyklin a propuštěn ___ bez horečky a s možností samostatné chůze.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Doxycyklin 100 mg dvakrát denně po dobu sedmi dnů. Pokračujte v užívání lisinoprilu 10 mg denně a atorvastatinu 20 mg večer. Acetaminophen 650 mg každých šest hodin dle potřeby při bolesti nohy.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+Sekundární:
+Hypertenze
+Hyperlipidemie
+
+Stav při propuštění:
+Psychický stav: Jasný a soustředěný.
+Úroveň vědomí: Vědomý a komunikativní.
+Funkční stav: Chůze, samostatný.
+
+Instrukce při propuštění:
+Byl vám poskytnut lék na kožní infekci nohy. Užívajte antibiotikum až do konce, udržujte nohu ve zvýšené poloze a udržujte oblast čistou a suchou. Zavolejte ___ nebo se vraťte do ___ v případě, že se zarudnutí rozšíří, vrátí se horečka nebo se zhorší bolest.
+
+Následná péče:
+___

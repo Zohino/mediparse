@@ -1,0 +1,78 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let se dostavil na oddělení ___ s třidenním produktivním kašlem, horečkou a dušností. Byl vyšetřen svým praktickým lékařem dne ___ a odeslán na pohotovost, kde rentgenové vyšetření hrudníku prokázalo zánět dolního laloku pravé plíce.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Apendektomie v roce ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Životní funkce:
+Bez horečky, srdeční frekvence 82, saturace 96 % při dýchání okolním vzduchem
+Celkový stav:
+Pohodlný, bez známek úzkosti
+Plíce:
+Chropy v dolní části pravé plíce
+Neurologické vyšetření:
+Vědomý, bez fokálních příznaků
+
+Výsledky vyšetření:
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek 9,1, pokles z 14,8. Kreatinin 0,9.
+ZOBRAZENÍ:
+Rentgen hrudníku proveden dne ___.
+ZÁVĚR:
+Zánět dolního laloku pravé plíce, bez výpotku.
+
+Průběh hospitalizace:
+Léčba intravenózním ceftriaxonem a azithromycinem, poté od třetího dne přechod na perorální antibiotika. Postupně snižována podávání kyslíku, horečka ustoupila. Rehabilitační pracovník zopakoval cvičení dýchání dne ___. Lékař ___ souhlasil s plánem propuštění.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně denně
+2. Atorvastatin 20 mg perorálně večer
+3. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu pěti dnů
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Hypertenze
+
+Stav při propuštění:
+Psychický stav:
+Srozumitelný a koherentní
+Úroveň vědomí:
+Vědomý a komunikativní
+Funkční stav:
+Chůze, soběstačný
+
+Pokyny při propuštění:
+Děkujeme, že nám jste umožnili se o vás postarat na ___. Dokončete celou kúru antibiotik, odpočívejte a pijte dostatek tekutin. V případě horečky, zhoršující se dušnosti nebo bolesti na hrudi se vraťte.
+
+Pokyny pro další péči:
+___

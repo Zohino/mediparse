@@ -1,0 +1,71 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Muž ve věku ___ let s chronickým onemocněním ledvin, který se dostavil do ___ s třemi dny zhoršujícího se otoku nohou, dušnosti při námaze a sníženým množstvím moči po vyčerpání diuretika dne ___. Při příjmu neměl horečku a byl hemodynamicky stabilní, a proto byl přijat do nemocnice.
+
+Předchozí zdravotní problémy:
+Diabetes mellitus 2. typu
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+Dna, sledována v ___
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Sliznice vlhké, bez žloutenky.
+Krk: Zvýšený tlak v žilách.
+Břicho: Měkké, bez bolesti, mírně napjaté.
+Extremity: Otok s důlky až po kolena na obou nohou.
+
+Významné výsledky:
+Kreatinin při přijetí 3,1, základní hodnota blízko 1,6. Draslík 5,4, BNP výrazně zvýšen. Kreatinin se zlepšil na 2,0 do dne ___, přičemž hladina draslíku se normalizovala. Troponin v normě.
+ZOBRAZENÍ:
+Rentgen hrudníku ukázal městnání v plicních cévách a malé bilaterální výpotky.
+
+Průběh hospitalizace:
+Přijat s dekompenzovaným srdečním selháním a zhoršující se funkcí ledvin. Léčen v ___ intravenózním furosemidem, s dobrým účinkem diurézy a postupným zlepšováním kreatininu. Lisinopril byl vysazen. Dosáhl optimální váhy do dne ___ a dýchání se vrátilo k normálu.
+DŮLEŽITÉ ASPEKTY PŘI PROPUŠTĚNÍ:
+Opakované laboratorní testy do jednoho týdne; zhodnotit možnost obnovení léčby lisinoprilem.
+
+Léky při přijetí:
+Lisinopril 20 mg denně
+Metformin 500 mg dvakrát denně
+Furosemid 40 mg denně
+
+Léky při propuštění:
+Furosemid 80 mg perorálně denně
+Metformin 500 mg perorálně dvakrát denně
+Atorvastatin 40 mg večer
+Aspirin 81 mg denně
+Lisinopril vysazen do doby konzultace s lékařem.
+
+Plán po propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Diabetes mellitus 2. typu
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Psychický stav: Jasný a srozumitelný.
+Úroveň vědomí: Vnímavý a komunikativní.
+Funkční stav: Chůze, soběstačný.
+
+Pokyny při propuštění:
+Byl jste hospitalizován kvůli přetížení tekutinami. Zvažujte se každý den ráno a volejte ___ v případě, že se vaše váha během dne zvýší o více než 1,4 kg. Omezte příjem soli a tekutin, užívejte léky podle pokynů a v případě zhoršení dušnosti se vraťte.
+
+Pokyny pro další péči:
+___

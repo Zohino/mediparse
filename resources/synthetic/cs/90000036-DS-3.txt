@@ -1,0 +1,79 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Oddělení: Chirurgie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bolest v pravém horním břiše
+
+Hlavní chirurgický zákrok:
+Laparoskopická cholecystektomie provedena dne ___
+
+Anamnéza současného onemocnění:
+Žena, která pociťuje bolest v pravém horním kvadrantu břicha, nevolnost a horečku již dva dny, po konzumaci tučného jídla. Byla vyšetřena svým lékařem dne ___, poté byla odeslána na pohotovost, kde zobrazovací metody naznačily zánět žlučníku.
+
+Osobní anamnéza:
+Hypertenze
+Hypotyreóza
+Předchozí apendektomie provedena dne ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka měla žlučové kameny.
+
+Fyzikální vyšetření:
+Životní funkce:
+Bez horečky, stabilní
+Celkový stav:
+Pohodlná, při vědomí
+SRDEČNÍ:
+Pravidelný rytmus
+BŘÍCHO:
+Měkké, mírná bolestivost v místě řezu
+KONČETINY:
+Bez otoků
+NEUROLOGICKÉ:
+Bez specifických abnormalit
+PULZY:
+Hmatatelné, symetrické
+
+Významné výsledky:
+Ultrazvuk prokázal žlučové kameny se ztluštěním stěny a tekutinou kolem žlučníku. Počet bílých krvinek byl při příjmu zvýšený, při propuštění se normalizoval. Testy jater mírně zvýšené. Konzultováno s radiologií dne ___.
+IMPRESE:
+Akutní kalciová cholecystitida
+
+Průběh hospitalizace:
+Byla jí podávána intravenózní antibiotika a tekutiny, poté podstoupila nekomplikovanou laparoskopickou operaci s týmem ___ . Bolest byla kontrolována perorálními léky a dieta postupně rozšiřována. Horečka ustoupila, rány zůstaly čisté a byla propuštěna ___ den.
+
+Léky při přijetí:
+Lisinopril a levothyroxin denně.
+
+Léky při propuštění:
+Pokračovat v užívání lisinoprilu a levothyroxinu. Acetaminophen dle potřeby na bolest, plus krátká kúra oxykodonu. Docusate dvakrát denně během užívání opioidů. Antibiotická léčba byla dokončena v nemocnici.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní kalciová cholecystitida
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Psychický stav:
+Srozumitelná a koherentní
+Úroveň vědomí:
+Při vědomí a komunikativní
+Funkční stav:
+Chůze, soběstačná
+
+Instrukce při propuštění:
+Byla léčena zánětu žlučníku a byla jí odstraněna žlučník. Udržujte rány čisté a suché. Vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů. V případě horečky, zvracení nebo zhoršení bolesti volejte ___ nebo se vraťte do nemocnice.
+
+Následná péče:
+___

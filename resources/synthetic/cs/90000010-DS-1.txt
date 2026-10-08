@@ -1,0 +1,70 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka po dobu tří dnů
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Hypertenze
+Hyperlipidemie
+Dna
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav: klidný, bez známek utrpení
+Krk: ohebný
+SRDEČNÍ: pravidelný rytmus
+BŘÍCHO: měkké, bez citlivosti
+EXTREMITY: bez otoků
+
+Výsledky vyšetření:
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+WBC 8.2, Hgb 13.5, Plt 240, Na 139, K 4.1, Cr 0.9
+ZOBRAZENÍ:
+Rentgen hrudníku ukázal konsolidaci v dolním laloku pravé plíce, bez výpotku.
+
+Průběh hospitalizace:
+___letý muž byl převezen z ___ s pneumonií získanou v běžném prostředí. Byl léčen antibiotiky, zlepšil se, neměl horečku a byl postupně odvykáván od kyslíku. Vyšetřil ho Dr. ___.
+PROBLÉMY PŘI PŘECHODU:
+Opakovaný rentgen hrudníku za šest týdnů.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Allopurinol 100 mg denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg denně
+2. Allopurinol 100 mg denně
+3. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu čtyř dnů
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie získaná v běžném prostředí
+Hypertenze
+
+Stav při propuštění:
+Psychický stav: jasný a srozumitelný.
+Úroveň vědomí: bdělý a komunikativní.
+Funkční stav: pohyblivý, soběstačný.
+
+Pokyny při propuštění:
+Byl jste přijat s pneumonií. Užívajte antibiotika podle předpisu, odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršujícího se kašle nebo potíží s dýcháním se vraťte. V případě dotazů kontaktujte ordinaci ___ .
+
+Pokyny pro další péči:
+___

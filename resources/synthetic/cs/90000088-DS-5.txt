@@ -1,0 +1,82 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Zarudnutí a otok pravé nohy.
+
+Zásahy:
+Žádné.
+
+Anamnéza:
+Pacient se dostavil na oddělení ___ s třechdenním zhoršováním zarudnutí, tepla a otoku pravé dolní končetiny po drobném poranění při zahradničení. Uváděl horečku a zimnici. Byl vyšetřen na urgentním oddělení ___ dne ___ a odeslán na pohotovost pro intravenózní antibiotika a pozorování.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Sezónní alergie
+Předchozí epizoda celulitidy na místě ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí. Žádná rodinná anamnéza poruch srážlivosti krve.
+
+Fyzikální vyšetření:
+Životní funkce:
+Bez horečky, hemodynamicky stabilní při běžném dýchání.
+Celkový stav:
+Pohodlný, bez akutní tíže.
+Oblast hlavy, očí, uší, nosu a krku:
+Bez zvláštností.
+Krk:
+Pružný.
+KONČETINY:
+Pravá holen teplá a mírně oteklá, pulzy zachovány.
+KŮŽE:
+Erytem s výraznými okraji, bez abscesu.
+
+Výsledky vyšetření:
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek normalizován, hemoglobin stabilní, kreatinin na základní úrovni, elektrolyty v normě. Zánětlivé markery výrazně sníženy oproti hodnotám při přijetí. Kultivace krve odebraná ___ nevykazovala žádný růst.
+ZOBRAZENÍ:
+Ultrazvuk pravé nohy provedený ___ prokázal subkutánní edém bez abscesu nebo hluboké žilní trombózy.
+
+Průběh hospitalizace:
+Pacient byl přijat na oddělení ___ a zahájena intravenózní léčba cefazolinem, přičemž zarudnutí bylo ohraničeno pomocí barviva na kůži. Zarudnutí ustoupilo během dvou dnů a horečka odezněla. Doporučeno zvedání nohy. Převedení na perorální cefalexin proběhlo ___ poté, co pacient začal přijímat stravu a chodil bez bolesti. Léky na vysoký krevní tlak byly pokračovány v domácím prostředí.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+Loratadin dle potřeby
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu pěti dalších dnů, do ___
+2. Lisinopril denně, beze změny.
+3. Atorvastatin večer, beze změny.
+4. Paracetamol dle potřeby při nepříjemných pocitech.
+
+Plán po propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Hlavní:
+Celulitida pravé dolní končetiny.
+
+Stav při propuštění:
+Psychický stav:
+Orientovaný a plně při vědomí.
+Úroveň vědomí:
+Vědomý a pozorný.
+
+Pokyny při propuštění:
+Byl vám poskytnut lék na kožní infekci pravé nohy. Dokončete celou kúru antibiotik. Když sedíte, držte nohu zvednutou a denně kontrolujte kůži. V případě rozšíření zarudnutí, horečky, silné bolesti nebo hnisu se obraťte na ___
+Prosím, dodržte termín návštěvy u ___ a v případě dotazů volejte.
+
+Návazná péče:
+___

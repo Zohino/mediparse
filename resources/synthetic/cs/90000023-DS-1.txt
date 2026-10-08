@@ -1,0 +1,70 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Zvracení a snížený objem moči
+
+Zásadní chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka s chronickým onemocněním ledvin byla přijata dne ___ s několika dny sníženého příjmu potravy, zvracením a nízkým objemem moči. Byla zjištěna rostoucí hladina kreatininu a draslíku, což bylo potvrzeno laboratorními výsledky zjištěnými dne ___.
+
+Předchozí zdravotní historie:
+Hypertenze (vysoký krevní tlak)
+Fibrilace síní
+Hyperlipidemie (vysoká hladina cholesterolu)
+
+Předchozí chirurgická historie:
+Chirurgické odstranění žlučníku (cholecystektomie) provedeno dne ___.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí.
+
+Fyzikální vyšetření:
+Fyzikální vyšetření při přijetí:
+Suché sliznice.
+PLÍCE: Čisté.
+SRDEČNÍ: Nepravidelný srdeční rytmus.
+BŘÍCHO: Měkké, bez citlivosti.
+KONČETINY: Bez otoků.
+Neurologické vyšetření: Vědomá, bez fokálních příznaků.
+
+Relevantní výsledky:
+Kreatinin 3,1 při přijetí, základní hodnota blízko 1,8, zlepšení na 2,0 při propuštění. Draslík 5,9, korigován na 4,4. Bikarbonát 18. Analýza moči bez patologických nálezů. Ultrazvuk ledvin bez hydronefrózy (rozšíření ledvin). Zvýšená hladina glukózy. EKG ukázalo nepravidelný rytmus.
+
+Průběh hospitalizace:
+Léčba intravenózními tekutinami a vysazení nefrotoxických a diuretických léků, s návratem hladiny kreatininu k základní hodnotě. Hyperkalemie (vysoká hladina draslíku) byla vyřešena medikamentózní léčbou. Pokračování v regulaci srdeční frekvence a obnovení antikoagulace. Hladina glukózy byla kontrolována inzulinem. Pacientka byla vyšetřena lékařem ___ a propuštěna do domácího prostředí ve stabilním stavu.
+
+Léky při přijetí:
+Metoprolol, apixaban, lisinopril, furosemid, metformin.
+
+Léky při propuštění:
+Metoprolol succinate (denně), apixaban (dvakrát denně), inzulin glargin (před spaním). Lisinopril, furosemid a metformin byly vysazeny do doby, než budou zkontrolovány další laboratorní výsledky.
+
+Plán po propuštění:
+Domů s péčí.
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes mellitus (cukrovka)
+Chronické onemocnění ledvin
+Fibrilace síní
+
+Stav při propuštění:
+Psychický stav: Vědomá a koherentní.
+Fyzická aktivita: Chůze, soběstačná.
+
+Instrukce po propuštění:
+Byla jste hospitalizována kvůli dehydrataci a abnormálním výsledkům krevních testů. Pravidelně pijte tekutiny, vyhýbejte se protizánětlivým lékům a nechte si opakovaně otestovat krev u ___ během jednoho týdne.
+
+Pokyny pro další péči:
+___

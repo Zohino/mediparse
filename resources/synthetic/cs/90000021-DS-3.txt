@@ -1,0 +1,73 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka přišla s potížemi bušení srdce a závratí trvající dva dny. Byla poprvé vyšetřena na ___ a následně převezena sem. Příznaky se objevily po ___, bez bolesti na hrudi, bezvědomí nebo dušnosti.
+
+Osobní anamnéza:
+Fibrilace síní
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Pacientka je v pohodě, bez známek utrpení.
+Oblast hlavy, očí, uší, nosu a krku (ORL): Vlhká sliznice.
+Krk: Pružný.
+Kardiovaskulární systém: Nepravidelný rytmus, normální S1 a S2.
+Břicho: Měkké, bez citlivosti.
+Neurologické vyšetření: Pacientka je při vědomí, bez fokálních příznaků.
+
+Významné výsledky:
+Troponin negativní dvakrát. TSH v normě. Dostatečné hladiny draslíku a hořčíku. EKG provedené dne ___ ukázalo nepravidelný rytmus s rychlou srdeční frekvencí, bez známek ischemie.
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Hemoglobin a elektrolyty v normálních mezích.
+
+Průběh hospitalizace:
+Srdeční frekvence byla kontrolována pomocí perorálního metoprololu po počáteční intravenózní dávce ve výši ___. Antikoagulace byla obnovena po posouzení rizika krvácení lékařem ___. Telemetrie ukázala kontrolované hodnoty srdeční frekvence a pacientka zůstala bez příznaků.
+
+Léky při přijetí:
+Levothyroxin, lisinopril, apixaban
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg denně
+2. Apixaban 5 mg dvakrát denně
+3. Levothyroxin 75 mcg denně
+4. Lisinopril 10 mg denně
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Fibrilace síní s rychlou ventrikulární odpovědí
+Sekundární:
+Hypertenze, hypotyreóza
+
+Stav při propuštění:
+Stabilní
+Psychický stav: Jasný a soudržný
+Úroveň vědomí: Při vědomí a komunikativní
+Funkční stav: Chůze, soběstačná
+
+Instrukce při propuštění:
+Byla jste přijata kvůli rychlému a nepravidelnému srdečnímu tepu. Užívajte léky podle předpisu, včetně léku na ředění krve. V případě bolesti na hrudi, mdloby nebo krvácení se vraťte. V případě dotazů volejte na číslo ___.
+
+Následná péče:
+___

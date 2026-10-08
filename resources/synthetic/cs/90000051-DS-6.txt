@@ -1,0 +1,66 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém boku
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let byl přijat z ___ s třemi dny zhoršující se bolesti v pravém boku, nevolností a mírnou horečkou. Zobrazovací vyšetření naznačila obstrukční kámen v močové trubici s mírnou hydronefrózou.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Možná fibrilace síní, jednou zaznamenána u ___, nikdy potvrzena
+Kameny v ledvinách
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s kameny v ledvinách
+
+Fyzikální vyšetření:
+Bez horečky, vitální funkce stabilní.
+ORL:
+Vlhké sliznice. Citlivost v oblasti pravého kostovertebrálního úhlu, břicho měkké.
+
+Významné výsledky:
+CT provedené v ___ ukázalo 6mm kámen v proximální části pravé močové trubice s mírnou hydronefrózou. Analýza moči s přítomností krve a několika bílých krvinek. Kultivace moči bez růstu bakterií. Krevní obraz normální.
+
+Průběh hospitalizace:
+Léčba intravenózními tekutinami, analgetiky a tamsulosinem. Bolest se zlepšila a horečka ustoupila. Urologické oddělení pacienta vyšetřilo a doporučilo konzervativní léčbu s filtrováním moči. Pacient toleroval stravu, chodil samostatně a byl propuštěn.
+
+Léky při přijetí:
+Lisinopril a atorvastatin denně
+
+Léky při propuštění:
+1. Tamsulosin 0,4 mg kapsle večer.
+2. Ibuprofen 400 mg každých osm hodin dle potřeby na bolest.
+3. Ondansetron 4 mg dle potřeby při nevolnosti.
+4. Pokračovat v užívání lisinoprilu a atorvastatinu doma.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Obstrukční kámen v pravé močové trubici
+Hydronefróza
+
+Stav při propuštění:
+Stabilní, při vědomí a orientovaný.
+Funkční stav:
+Chůze bez pomoci.
+
+Instrukce při propuštění:
+Pijte dostatek tekutin a filtrujte moč, abyste zachytili případné kameny. V případě horečky, nekontrolovatelné bolesti, zvracení nebo neschopnosti močit se vraťte. V případě dotazů volejte na číslo ___.
+
+Pokyny pro další péči:
+___

@@ -1,0 +1,73 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Sulfonamidová antibiotika
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická cholecystektomie (odstranění žlučníku)
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila na oddělení ___ s bolestí v pravém horním kvadrantu břicha, nevolností a horečkou, které se objevily po konzumaci tučného jídla. Byla vyšetřena svým praktickým lékařem na oddělení ___ dne ___ a odeslána na urgentní příjem. Ultrazvukové vyšetření prokázalo žlučové kameny a ztluštění stěny žlučníku. Pacientce byly podány tekutiny a antibiotika a byla přijata na oddělení ___ pod dohledem týmu ___
+
+Anamnéza:
+Hypertenze (vysoký krevní tlak)
+Apendektomie (odstranění slepého střeva)
+Migrény
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka měla žlučové kameny.
+
+Fyzikální vyšetření:
+Životní funkce: T 38,1 °C, srdeční frekvence 96 tepů/min, krevní tlak 128/76 mmHg, dechová frekvence 16 dechů/min, saturace kyslíkem 98 % při pokojovém vzduchu.
+Celkový stav: Nepohodlná, bez známek toxicity.
+Hlava, oči, uši, nos, krk: Vlhká sliznice, bez žloutenky.
+Plíce: Čisté bilaterálně.
+Břicho: Citlivost v pravém horním kvadrantu, pozitivní Murphyho příznak.
+Extremity: Bez otoků.
+Kůže: Teplá, suchá.
+
+Významné výsledky:
+Laboratorní výsledky z ___: Počet bílých krvinek 14,2, ALT 56, AST 48, ALP 110, celkové bilirubin 1,1, amyláza normální. Ultrazvukové vyšetření pravého horního kvadrantu břicha provedené na oddělení ___ prokázalo žlučové kameny, ztluštění stěny žlučníku o 5 mm, tekutinu kolem žlučníku a žádnou dilataci žlučových cest. Rentgen hrudníku byl čistý. Hemoglobin po operaci zůstal stabilní.
+
+Průběh hospitalizace:
+Pacientka byla přijata s akutní cholecystitidou (zánět žlučníku) a zahájena jí byla intravenózní antibiotika a infuze. Chirurgický tým z ___ provedl laparoskopickou cholecystektomii dne ___ bez komplikací. Bolest byla kontrolována perorálními analgetiky, dieta byla postupně rozšiřována a pacientka samostatně chodila na toaletu a pohybovala se. Biologický materiál byl odeslán na histopatologické vyšetření do ___ a výsledky budou k dispozici při propuštění.
+DŮLEŽITÉ ASPEKTY:
+Doplnění výsledků histopatologického vyšetření. Obnovení domácí léčby hypertenze.
+
+Léky při přijetí:
+Ibuprofen 400 mg dle potřeby
+Multivitamin denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Paracetamol 650 mg každých 6 hodin dle potřeby na bolest
+2. Oxykodon 5 mg každých 6 hodin dle potřeby na silnou bolest, krátkodobě
+3. Lisinopril 10 mg denně
+4. Docusate 100 mg dvakrát denně během užívání opioidů
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida způsobená žlučovými kameny.
+
+Stav při propuštění:
+Psychický stav: Jasná a soustředěná.
+Úroveň vědomí: Vnímavá a komunikativní.
+Funkční stav: Chůze, samostatná.
+
+Pokyny pro domácí péči:
+Byl(a) vám poskytnuta léčba zánětu žlučníku a žlučník byl odstraněn laparoskopicky. Udržujte rány čisté a suché a několik týdnů se vyhýbejte zvedání předmětů vážících více než 4,5 kg. V případě horečky, zhoršující se bolesti, zvracení, žlutosti kůže nebo výtoku z rány volejte do ambulance ___ . V případě závažných příznaků navštivte urgentní oddělení v ___ .
+
+Pokyny pro kontrolní prohlídku:
+___

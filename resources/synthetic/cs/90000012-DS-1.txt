@@ -1,0 +1,75 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost, otoky nohou
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let, který se po dobu tří týdnů potýkal se zhoršující se dušností při námaze, ortopnoe (dušností vleže) a otoky nohou. Byl přijat z ambulance ___ po rychlému přibírání na váze. Příznaky se začaly objevovat kolem ___ a postupně omezovaly jeho pohyblivost.
+
+Osobní anamnéza:
+Diabetes mellitus 2. typu
+Hypertenze (vysoký krevní tlak)
+Ischemická choroba srdeční
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Celkový stav:
+Mírně dušný, v klidu v pohodě
+ORL:
+Zvýšený tlak v jugulárních žilách
+EXTREMITY (končetiny):
+Edém (otek) až po kolena
+KŮŽE:
+Teplá, suchá
+Neurologické vyšetření:
+Vědomý, bez fokálních příznaků
+
+Výsledky vyšetření:
+ZOBRAZENÍ:
+Rentgen hrudníku provedený ___ ukázal městnání v plicních cévách a malé bilaterální výpotky.
+NÁLEZY:
+Echokardiogram ukázal sníženou ejekční frakci levé komory. BNP (biochemický marker) výrazně zvýšen, glukóza 210, kreatinin blízko základní hodnoty.
+
+Průběh hospitalizace:
+Léčba intravenózním furosemidem (diuretikem) a vyloučení několika litrů tekutiny. Hladina cukru v krvi byla kontrolována pomocí dávkování inzulínu. Kardiologický tým z ___ upravil jeho medikaci. Váha a příznaky se zlepšily; před propuštěním byl pacient vyšetřen lékařem ___ a byl mu předepsán perorální diuretikum.
+PROBLÉMY PŘI PŘECHODU:
+Opakované biochemické vyšetření za týden; denní měření váhy.
+
+Léky při přijetí:
+Metformin, lisinopril, aspirin, atorvastatin
+
+Léky při propuštění:
+Furosemid 40 mg denně, metformin 500 mg dvakrát denně, lisinopril 10 mg denně, aspirin 81 mg denně, atorvastatin 40 mg večer, metoprolol succinate 25 mg denně.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes mellitus 2. typu
+Srdeční selhání
+
+Stav při propuštění:
+Stabilní
+Psychický stav:
+Orientovaný a koherentní
+Úroveň vědomí:
+Vědomý a komunikativní
+Funkční stav:
+Chůze, soběstačný
+
+Pokyny při propuštění:
+Vážete se každé ráno a omezte příjem soli. Užíváte léky podle předpisu. Zavolejte ___ v případě, že se vaše váha během jednoho dne zvýší o více než 1,4 kg, nebo pokud se zhorší dýchání nebo se otoky vrátí.
+
+Pokyny pro další péči:
+___

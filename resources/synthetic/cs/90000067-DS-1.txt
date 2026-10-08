@@ -1,0 +1,66 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická appendektomie (odstranění slepého střeva)
+
+Anamnéza současného onemocnění:
+Žena s bolestí v pravém dolním kvadrantu břicha trvající tři dny, nevolností a mírnou horečkou, odeslána z ambulance ___ po zobrazovacích vyšetřeních, která naznačovala zánět slepého střeva.
+
+Osobní anamnéza:
+Migrény
+Sezónní alergická rýma
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodině se vyskytuje diabetes mellitus u matky.
+
+Fyzikální vyšetření:
+Hlava, oči, uši, nos, krk: Normální
+Krk: Pružný
+Plíce: Čisté
+Extremity: Bez otoků
+Kůže: Teplá, suchá
+Neurologické vyšetření: Bez specifických abnormalit
+
+Významné výsledky:
+Mírně zvýšený počet bílých krvinek při přijetí. CT vyšetření prokázalo rozšířený a zánětlivě změněný slepý střevo bez perforace. Histologické vyšetření potvrdilo akutní zánět slepého střeva. Laboratorní výsledky po operaci byly v normě.
+
+Průběh hospitalizace:
+Pacientka byla odeslána do operačního sálu doktorem ___ k provedení nekomplikované laparoskopické appendektomie. Postupně byla zaváděna pevná strava, bolest byla kontrolována pomocí perorálních léků a před odchodem domů byla pacientka vyšetřena lékařem ___.
+
+Léky při přijetí:
+Sumatriptan dle potřeby
+
+Léky při propuštění:
+Paracetamol dle potřeby na bolest. Ibuprofen s jídlem. Docusate během užívání léků proti bolesti. Pokračovat v užívání sumatriptanu.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní zánět slepého střeva
+Sekundární:
+Migrény
+
+Stav při propuštění:
+Stabilní
+Psychický stav: Vědomá a orientovaná
+Úroveň vědomí: Probuděná
+Úroveň aktivity: Chůze samostatná
+
+Instrukce při propuštění:
+Byla vám odstraněna slepé střevo. Udržujte rány čisté a suché, vyhýbejte se těžké fyzické námaze a v případě horečky, zhoršující se bolesti nebo zvracení se obraťte na lékaře. V případě dotazů volejte ___.
+
+Pokyny pro další sledování:
+___

@@ -1,0 +1,78 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahové zákroky:
+Žádné, provedeno rentgenové vyšetření hrudníku dne ___.
+
+Anamnéza současného onemocnění:
+Žena s pětidenním produktivním kašlem, horečkou a mírnou dušností, která se i přes odpočinek zhoršuje. Byla vyšetřena dne ___ lékařem ___ a odeslána na pohotovost. Saturace kyslíkem byla nízká při běžném dýchání, proto byla přijata k léčbě.
+
+Osobní anamnéza:
+Hypertenze
+Astma
+Hypotyreóza, sledována v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce:
+Teplota 38,1 °C, srdeční frekvence 96 úderů/min, krevní tlak 128/76, saturace kyslíkem 92 % při běžném dýchání
+Celkový stav:
+Únavitá, v klidu v pohodě
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Srdce:
+Pravidelný rytmus
+Břicho:
+Měkké, bezbolestné
+
+Významné výsledky:
+Rentgen hrudníku provedený dne ___ ukázal konsolidaci v dolním laloku pravého plíce. Počet bílých krvinek zvýšen na 14,2. Laktát normální. Kreatinin na základní úrovni. Kultivace krve bez nálezu. Test na respirační viry negativní. Kultivace sputa ukázala běžnou flóru.
+
+Průběh hospitalizace:
+Léčena pro pneumonii získanou v komunitě pomocí azithromycinu a ceftriaxonu po konzultaci s ___ ohledně alergií. Podávání kyslíku bylo postupně snižováno po dobu dvou dnů a horečka ustoupila. Její astma bylo kontrolováno inhalátory. Chodila po chodbě bez poklesu saturace kyslíkem a byla propuštěna, přičemž byla zajištěna kontrola v ___.
+
+Léky při přijetí:
+Lisinopril, levothyroxin, inhalátor s albuterolem dle potřeby
+
+Léky při propuštění:
+1. Azithromycin k dokončení zbývajících tří dnů.
+2. Lisinopril denně, jako dříve.
+3. Levothyroxin každé ráno.
+4. Inhalátor s albuterolem při sípání.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Sekundární:
+Hypertenze
+Astma
+Hypotyreóza
+
+Stav při propuštění:
+Stabilní a zlepšený
+Úroveň vědomí:
+Orientovaná a při vědomí
+Úroveň aktivity:
+Chůze samostatná
+
+Pokyny při propuštění:
+Byla léčena pro infekci plic. Dokončete užívání antibiotik, pijte dostatek tekutin a odpočívejte. V případě zhoršení dušnosti, vysoké horečky nebo bolesti na hrudi se vraťte. V případě dotazů volejte do ambulance na číslo ___.
+
+Pokyny pro kontrolu:
+___

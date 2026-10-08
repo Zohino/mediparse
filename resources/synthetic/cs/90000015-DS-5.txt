@@ -1,0 +1,74 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka, ___ let, se dostavila s postupně se zhoršujícím otokem nohou a dušností během několika dnů. Byla odeslána z její ambulance ___ po zvýšení hmotnosti a snížení objemu moči.
+
+Osobní anamnéza:
+Chronické onemocnění ledvin
+Srdeční selhání
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce:
+Stabilní
+Celkový stav:
+Pohodlná
+Krk:
+Přítomna jícnová venózní dilatace (JVD)
+Břicho:
+Měkké
+Kůže:
+Teplá, otok nohou
+Neurologické vyšetření:
+Bez fokálních příznaků
+
+Výsledky vyšetření:
+Kreatinin v normě. BNP zvýšen. Rentgen hrudníku ukázal plicní vaskulární kongesci s drobnými bilaterálními efuzemi. Ostatní laboratorní výsledky bez zvláštností, draslík normální, hemoglobin stabilní.
+ZÁVĚR:
+Lehký plicní edém.
+
+Průběh hospitalizace:
+Léčena intravenózními diuretiky s dobrým diurézou a úbytkem hmotnosti. Funkce ledvin monitorována denně a zůstala stabilní. Konzultováno s oddělením kardiologie, úprava medikace. Propouštěna domů s perorálními diuretiky po ___ dnech pozorování.
+
+Léky při přijetí:
+Furosemid, lisinopril, amlodipin
+
+Léky při propuštění:
+Furosemid 40 mg denně, metoprolol sukcinát 25 mg denně, amlodipin 5 mg denně. Lisinopril vysazen do doby další kontroly funkce ledvin.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+Srdeční selhání
+
+Stav při propuštění:
+Psychický stav:
+Orientovaná a při vědomí
+Funkční stav:
+Chůze, soběstačná
+
+Pokyny při propuštění:
+Vážete se každé ráno a volejte ___ v případě, že se vaše váha zvýší o více než 1,4 kg. Omezte příjem soli a tekutin. Užíváte léky podle předpisu a v případě zhoršení dýchání nebo otoků se vraťte.
+
+Pokyny pro další péči:
+___

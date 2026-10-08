@@ -1,0 +1,62 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Zčervenání a otok pravé nohy trvající ___ dní.
+
+Zásahy:
+Žádné.
+
+Anamnéza:
+Hypertenze
+Hyperlipidemie
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí. Žádná rodinná anamnéza kožních onemocnění.
+
+Fyzikální vyšetření:
+Celkový stav: Pacient je při vědomí, cítí se dobře, nevykazuje známky akutního onemocnění.
+Hlava, oči, uši, nos, hrdlo: Normální tvar hlavy, bez známek traumatu, vlhké sliznice, sklera bez žlutosti.
+Krk: Pružný, bez zvětšených lymfatických uzlin.
+Plíce: Čisté při poslechu na obou stranách, bez vrzotů.
+Břicho: Měkké, bez citlivosti, bez distenze, normální peristaltika.
+
+Výsledky vyšetření:
+LABORATOŘ PŘI PŘIJETÍ:
+Počet bílých krvinek 14,2, hemoglobin 13,8, krevní destičky 245, sodík 138, draslík 4,1, kreatinin 0,9, laktát 1,3, CRP 86. Kultivace krve odebraná ___ nevykazovala žádný růst.
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek 8,9, hemoglobin 13,5, krevní destičky 260, sodík 140, draslík 4,0, kreatinin 0,8, CRP 21. Duplexní ultrazvuk pravé nohy provedený ___ neprokázal hlubokou žilní trombózu ani žádné hromadění tekutiny, které by bylo možné odsát.
+
+Průběh hospitalizace:
+___letý muž s hypertenzí a obezitou, který byl přijat na oddělení ___ s třidenními potížemi v podobě rozšiřujícího se zarudnutí, tepla a bolesti pravé dolní končetiny. Při příjmu neměl horečku, ale měl zrychlenou srdeční frekvenci. Vyšetření prokázalo erytém s výraznou hranicí a bez známek hnisavého obsahu. Byl zahájen intravenózní podávání vancomycinu a oblast byla označena. Ultrazvuk vyloučil absces a žilní trombózu. Bolest byla kontrolována pomocí paracetamolu a noha byla zvednuta. Péče o ránu byla zajištěna lékařem ___ , který doporučil kompresi po ustoupení otoku. Zarudnutí ustoupilo během 48 hodin a kultivace zůstaly negativní. Byl převeden na perorální cefalexin od ___ a dobře jej toleroval. Pacient byl schopen samostatně chodit a byl propuštěn domů v stabilním stavu ___ den hospitalizace.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Amlodipin 5 mg denně. Multivitamin denně dle potřeby pacienta.
+
+Léky při propuštění:
+Cefalexin 500 mg perorálně čtyřikrát denně až do ___. Paracetamol 650 mg každých šest hodin dle potřeby na bolest. Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Amlodipin 5 mg denně. Kompresní punčocha na pravé noze po ustoupení otoku, dle pokynů ___. Obnovit veškeré ostatní léky, které pacient užíval doma.
+
+Propouštění:
+Domů
+
+Diagnóza při propouštění:
+Infekce kůže a měkkých tkání na pravé dolní končetině.
+
+Stav při propouštění:
+Psychický stav: Jasný a soustředěný.
+Fyzická aktivita: Chůze, soběstačný.
+
+Pokyny při propouštění:
+Byl(a) vám podán(a) antibiotika k léčbě infekce kůže na pravé noze. Užívajte cefalexin až do konce léčby, i když zmizí zarudnutí. Když sedíte, držte nohu ve zvýšené poloze. V případě horečky, šíření zarudnutí, silné bolesti nebo výtoku se obraťte na ___ . Domluvte si kontrolní prohlídku u doktora ___ v ordinaci ___ do jednoho týdne. V případě dotazů volejte na číslo ___. Denně umývejte kůži jemným mýdlem a udržujte ji hydratovanou.
+
+Pokyny pro další péči:
+___

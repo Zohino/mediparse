@@ -1,0 +1,72 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a kašel
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka, 63 let, s hypertenzí, se dostavila s třechdenní horečkou, produktivním kašlem a dušností. Byla nejprve vyšetřena v ___ , kde rentgenové vyšetření hrudníku naznačovalo infiltrát v dolním laloku pravé plíce, a byla převezena do ___ k hospitalizaci dne ___.
+
+Osobní anamnéza:
+Hypertenze
+Hypotyreóza
+Osteoartróza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s rakovinou prsu
+
+Fyzikální vyšetření:
+Životní funkce: T 98,6 °C, srdeční frekvence 78 úderů/min, krevní tlak 126/70 mmHg, dechová frekvence 16 nádechů/min, saturace kyslíkem 96 % při pokojovém vzduchu
+Celkový stav: Pacientka je v pohodě, bez známek úzkosti
+Hlava, krk, uši, nos, hrdlo: Vlhké sliznice
+Břicho: Měkké, bez citlivosti
+Extremity: Teplé, bez otoků
+Neurologické vyšetření: Pacientka je při vědomí, bez neurologických deficitů
+
+Výsledky vyšetření:
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek 8,2, hemoglobin 12,1, destičky 240, sodík 139, draslík 4,1, kreatinin 0,8
+ZÁVĚR:
+Rentgen hrudníku, který zhodnotil ___ , ukazuje opacitu v dolním laloku pravé plíce, což je v souladu s pneumonií, bez přítomnosti výpotku. Doporučuje se kontrolní rentgenové vyšetření za šest týdnů v ___ .
+
+Průběh hospitalizace:
+Byla léčena ceftriaxonem a azithromycinem a horečka ustoupila během dvou dnů. Podávání kyslíku bylo postupně snižováno. Kultivace krve odebraná v ___ nevykazovala žádný růst. Fyzikální terapie od ___ jí doporučila návrat domů. Byla převedena na perorální antibiotika a propuštěna dne ___ ve stabilním stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levothyroxine 75 mcg denně
+
+Léky při propuštění:
+1. Amoxicillin-clavulanate 875 mg dvakrát denně po dobu pěti dnů
+2. Lisinopril 10 mg denně
+3. Levothyroxine 75 mcg denně
+4. Acetaminophen dle potřeby při horečce
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Komunitní pneumonie
+Hypoxie
+
+Stav při propuštění:
+Psychický stav: Jasný a soustředěný
+Úroveň vědomí: Při vědomí a komunikativní
+
+Pokyny při propuštění:
+Byla hospitalizována pro infekci plic a zlepšila se díky antibiotikům. Dokončete celý cyklus antibiotik, odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte. Prosím, navštivte Dr. ___ během jednoho týdne.
+
+Pokyny pro další péči:
+___

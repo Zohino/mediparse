@@ -1,0 +1,65 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka, ___ let, udává několik dní bušení srdce a mírnou únavu. Byla odeslána z ambulance ___ pro kontrolu srdeční frekvence.
+
+Osobní anamnéza:
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka prodělala mrtvici.
+
+Fyzikální vyšetření:
+Životní funkce: srdeční frekvence 98, krevní tlak 128/76, bez horečky
+Celkový stav: pohodlná, bez známek utrpení
+Plíce: čisté bilaterálně
+SRDEČNÍ: nepravidelný rytmus, bez šelestu
+Břicho: měkké, bez citlivosti
+Extremity: bez otoků
+Neurologické vyšetření: bez fokálních příznaků
+
+Relevantní výsledky:
+Funkce štítné žlázy normální. Elektrolyty v normě. EKG ukázalo nepravidelný rytmus s úzkými komplexami.
+ZOBRAZENÍ:
+Rentgen hrudníku bez akutních nálezů.
+
+Průběh hospitalizace:
+Srdeční frekvence byla kontrolována pomocí perorálního metoprololu a po posouzení rizik byla zahájena antikoagulace. Příznaky ustoupily a pacientka byla propuštěna ve stabilním stavu.
+
+Léky při přijetí:
+Levothyroxin, lisinopril
+
+Léky při propuštění:
+Metoprolol dvakrát denně, apixaban dvakrát denně, pokračovat v užívání levothyroxinu a lisinoprilu jako doposud.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Fibrilace síní
+
+Stav při propuštění:
+Psychický stav: jasná a koherentní.
+Úroveň vědomí: bdělá a komunikativní.
+
+Instrukce při propuštění:
+Užívejte léky podle předpisu. V případě mdloby, bolesti na hrudi, krvácení nebo zhoršení bušení srdce se obraťte na lékaře. Dodržujte schůzku s ___ .
+
+Pokyny pro další sledování:
+___

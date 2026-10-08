@@ -1,0 +1,70 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Specializace: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíž:
+Bolest v pravé straně těla.
+
+Zásahové zákroky:
+Žádné.
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let, který pociťuje bolest v pravé straně těla již dva dny, byl přijat z ambulance ___ .
+PROHLÍDKA SYSTÉMŮ:
+Negativní, s výjimkou výše uvedeného.
+
+Osobní anamnéza:
+Hypertenze
+Kamenné útvary v ledvinách
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s rodinnou anamnézou diabetu. Žádné onemocnění ledvin.
+
+Fyzikální vyšetření:
+Bez horečky, pacient je v pohodě, mírná bolestivost v pravé straně těla.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Životní funkce: Stabilní
+Celkový stav: V pohodě
+Krk: Pružný
+PLÍCE: Čisté
+SRDEČNÍ: Pravidelný rytmus
+Neurologické vyšetření: Bez lokalizace.
+
+Významné výsledky:
+Analýza moči ukázala přítomnost krve. CT vyšetření prokázalo malý kámen v pravém močovodu s mírnou hydronefrózou.
+ZÁVĚR:
+Kámen v pravém močovodu způsobující obstrukci.
+
+Průběh hospitalizace:
+Bolest byla kontrolována pomocí perorálních léků a tekutin. Oddělení urologie, vedené doktorem ___, doporučilo ambulantní odstranění kamene pomocí sítka. Bolest ustoupila.
+
+Léky při přijetí:
+Lisinopril denně.
+
+Léky při propuštění:
+Lisinopril denně. Ibuprofen dle potřeby na bolest. Tamsulosin večer, dokud se kámen nevyloučí.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Kámen v pravém močovodu
+Hypertenze
+
+Stav při propuštění:
+Psychický stav: Jasný a koherentní.
+Úroveň vědomí: Vnímavý a komunikativní.
+
+Pokyny při propuštění:
+Pijte dostatek tekutin a filtrujte moč. V případě horečky, zvracení nebo nekontrolovatelné bolesti se vraťte.
+
+Pokyny pro další sledování:
+___

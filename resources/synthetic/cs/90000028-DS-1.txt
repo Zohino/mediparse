@@ -1,0 +1,60 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Perkutánní drenáž abscesu
+
+Anamnéza současného onemocnění:
+Pacientka, ve věku ___ let, se dostavila s bolestí v pravém dolním kvadrantu břicha, nevolností a horečkou, přičemž předtím byla vyšetřena v ambulanci ___ . Vyšetření zobrazovací techniky ukázala akutní apendicitidu s malým abscesem. Byla odeslána dne ___ k hospitalizaci a chirurgickému vyšetření.
+
+Osobní anamnéza:
+Hypotyreóza
+Migrény
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s rakovinou prsu
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Celkový stav: komfortní, bez horečky
+ORL: vlhká sliznice
+Kardiální: pravidelný rytmus
+Extremity: teplé, bez otoků
+
+Relevantní výsledky:
+Laboratorní výsledky při přijetí: zvýšený počet bílých krvinek (15,2), mírně zvýšený C-reaktivní protein. CT vyšetření břicha a pánve provedené dne ___ ukázalo zánětlý appendix s přilehlou tekutinou. Laboratorní výsledky při propuštění: normalizovaný počet bílých krvinek, stabilní hemoglobin, kreatinin v normálních mezích, elektrolyty bez odchylek a normální jaterní enzymy.
+
+Průběh hospitalizace:
+Pacientka dostávala intravenózní antibiotika a podstoupila perkutánní drenáž provedenou radiologií ___ ve druhý den hospitalizace, což vedlo k rychlému zlepšení bolesti a horečky. Strava byla postupně rozšiřována, množství tekutiny z drenu se snižovalo a dren byl odstraněn před propuštěním. Intervalová apendektomie bude prodiskutována při pozdější návštěvě s chirurgickým oddělením ___ .
+
+Léky při propuštění:
+Levofloxacin 500 mg denně po dobu sedmi dnů. Acetaminophen 650 mg každých šest hodin dle potřeby na bolest. Ondansetron 4 mg dle potřeby při nevolnosti. Pokračovat v užívání levothyroxinu.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní apendicitida s periappendixálním abscesem
+
+Stav při propuštění:
+Psychický stav: bdělá a orientovaná
+Úroveň vědomí: probuzená
+Funkční stav: chodí samostatně
+
+Instrukce při propuštění:
+Byla léčena pro apendicitidu s drenem. Užívajte všechny antibiotika podle pokynů. Vyhýbejte se těžkému zvedání břemen po dobu ___ týdnů. V případě horečky, zhoršující se bolesti břicha, opakovaného zvracení nebo zarudnutí kolem rány se obraťte na lékaře.
+
+Pokyny pro další sledování:
+___

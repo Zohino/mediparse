@@ -1,0 +1,59 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a produktivní kašel
+
+Zásahy:
+Žádné významné chirurgické zákroky ani invazivní procedury
+
+Anamnéza současného onemocnění:
+Pacient s hypertenzí, odeslán z ambulance ___ po třech dnech horečky, kašle s žlutým hlenem a dušnosti. Rentgen hrudníku naznačoval konsolidaci v dolním laloku pravé plíce. Odeslán lékařem ___ k hospitalizaci.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Dna
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných informací
+
+Významné výsledky:
+Při přijetí zvýšený počet bílých krvinek s převahou neutrofilů. Rentgen hrudníku ukázal ztmavení v dolním laloku pravé plíce. Kultivace krve v ___ nevykazovala žádný růst. Kreatinin zůstal během hospitalizace na základní úrovni.
+
+Průběh hospitalizace:
+Léčba pneumonie získané v komunitě intravenózním ceftriaxonem a azithromycinem, poté přechod na perorální antibiotika, jakmile pacient neměl horečku. Podávání kyslíku bylo postupně snižováno. Pacienta vyšetřil tým ___ a souhlasil s plánem léčby. Pacient byl propuštěn ___ ve stabilním stavu.
+
+Léky při přijetí:
+Lisinopril, atorvastatin, allopurinol denně.
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů.
+2. Lisinopril denně.
+3. Atorvastatin večer.
+4. Allopurinol denně.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Hypertenze
+
+Stav při propuštění:
+Psychický stav: Jasný a soustředěný.
+Fyzická aktivita: Chůze, soběstačný.
+
+Pokyny při propuštění:
+Byl vám léčen plicní zánět. Dokončete veškerá antibiotika, odpočívejte a pijte dostatek tekutin. V případě horečky, zhoršení dýchání nebo bolesti na hrudi se vraťte. V případě jakýchkoli dotazů ohledně vašich léků volejte ___ .
+
+Pokyny pro další péči:
+___

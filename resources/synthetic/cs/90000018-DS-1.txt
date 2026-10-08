@@ -1,0 +1,57 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Kardiologie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bušení srdce.
+
+Zásahy:
+Žádné.
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let s diagnostikovanou fibrilací síní se dostavil s potížemi bušení srdce a únavy, které trvají již tři dny po návštěvě ___. Laboratorní výsledky z ___. naznačovaly možnou chronickou chorobu ledvin. Pacienta vyšetřil Dr. ___ v ambulanci.
+ANAMNÉZA: Dušnost – pozitivní. Bez horečky.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční.
+
+Fyzikální vyšetření:
+Celkový stav: Pacient je při vědomí, cítí se dobře, nemá žádné akutní potíže.
+Hlava, oči, uši, nos, krk: Normální tvar hlavy, vlhké sliznice.
+Krk: Pružný, bez jícnové dilatace.
+Plíce: Čisté při poslechování, bez vrzotů.
+
+Významné výsledky:
+Troponin negativní dvakrát. Kreatinin 1,4, draslík 4,1, hemoglobin 13,2. Hormon stimulující štítnou žlázu v normě. Hořčík 2,0. EKG ukázalo nepravidelný rytmus s frekvencí 110. Echokardiogram ukázal zachovalou ejekční frakci. Rentgen hrudníku proveden v ___ bez akutních nálezů.
+ZÁVĚR: Nepravidelný rytmus, bez akutního kardiopulmonálního procesu.
+
+Léky při přijetí:
+Metoprolol 50 mg dvakrát denně; apixaban 5 mg dvakrát denně.
+
+Léky při propuštění:
+Metoprolol sukcinát 100 mg jednou denně. Apixaban 5 mg dvakrát denně. Atorvastatin 20 mg večer. Paracetamol 650 mg každých šest hodin dle potřeby při bolesti. Přerušit užívání aspirinu.
+
+Plán po propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Fibrilace síní.
+
+Stav při propuštění:
+Stabilní.
+Psychický stav: Jasný a soudržný.
+Úroveň vědomí: Při vědomí a komunikativní.
+Funkční stav: Chůze, soběstačný.
+
+Pokyny při propuštění:
+Užívejte léky podle předpisu. Přerušte užívání aspirinu. Vyhýbejte se nadměrné konzumaci kofeinu a alkoholu. V případě bolesti na hrudi, mdloby nebo zhoršení dušnosti se obraťte na lékaře. V případě dotazů volejte na číslo ___. Navštivte svého kardiologa.
+
+Pokyny pro další sledování:
+___

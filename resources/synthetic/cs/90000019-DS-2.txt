@@ -1,0 +1,74 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let se dostavil na oddělení ___ s třechdenním produktivním kašlem, horečkou a dušností po nedávné cestě. V pohotovostní službě měl horečku a hypoxémii a byl přijat k dalšímu vyšetření a léčbě.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Apendektomie v roce ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacient je v pohodě, bez známek utrpení.
+Hlava, oči, uši, nos, krk (HEENT):
+Vlhké sliznice
+Krk:
+Pružný
+Plíce:
+Lehké chrůpky v dolní části pravého plíce
+Extremity:
+Bez otoků
+Neurologické vyšetření:
+Orientovaný, bez fokálních příznaků
+
+Výsledky vyšetření:
+Rentgen hrudníku ukázal ztmavení v dolní části pravého plicního laloku. Počet bílých krvinek byl při přijetí zvýšený a do propuštění se normalizoval. Kreatinin zůstal na základní úrovni.
+ZOBRAZENÍ:
+Konsolidace v dolní části pravého plicního laloku, bez výpotku.
+
+Průběh hospitalizace:
+Léčen pro pneumonii získanou v komunitě pomocí intravenózních antibiotik, následně perorální léčby. Podávání kyslíku bylo postupně snižováno, až byl pacient schopen dýchat přirozeně. Horečka ustoupila a chuť k jídlu se vrátila. Pacient byl vyšetřen fyzioterapeutem a byl propuštěn do domácího ošetřování. Byla domluvena kontrola u praktického lékaře, Dr. ___.
+
+Léky při propuštění:
+Amoxicilin s klavulanátem dvakrát denně po dobu pěti dnů. Pokračujte v užívání lisinoprilu a atorvastatinu doma. Paracetamol dle potřeby při horečce nebo bolestech.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Hypertenze
+
+Stav při propuštění:
+Psychický stav:
+Orientovaný a koherentní
+Úroveň vědomí:
+Orientovaný a komunikativní
+Funkční stav:
+Samostatný, pohybuje se bez pomoci
+
+Instrukce při propuštění:
+Užívejte všechny antibiotika podle předpisu. Odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršující se dušnosti nebo bolesti na hrudi se vraťte na ___ . Nekuřte.
+
+Instrukce pro kontrolu:
+___

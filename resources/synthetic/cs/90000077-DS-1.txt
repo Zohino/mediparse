@@ -1,0 +1,66 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Zvracení a snížené množství moči.
+
+Zásahy:
+Žádné.
+
+Anamnéza:
+Muž ve věku ___ let s hypertenzí a nepravidelným srdečním rytmem, který užíval antikoagulační léky, byl přijat s třemi dny potíží, včetně sníženého příjmu potravy, zvracení a sníženého množství moči. Hodnota kreatininu byla zvýšená nad základní hodnotu, což odpovídalo akutnímu poškození ledvin. Byl vyšetřen svým lékařem v ___ a odeslán na pohotovost do ___ nemocnice.
+
+Předchozí zdravotní problémy:
+Hypertenze
+Hyperlipidemie diagnostikovaná v ___
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s mrtvicí, otec s hypertenzí.
+
+Fyzikální vyšetření:
+Oblast hlavy, očí, uší, nosu a krku (HEENT): Suché sliznice, bez žloutenky.
+Krk: Pružný, bez jícnové dilatace.
+Břicho: Měkké, bez bolesti, nenabobtnalé.
+Kůže: Teplá, snížená elasticita, bez vyrážky.
+
+Významné výsledky:
+LABORATOŘ PŘI PROPUŠTĚNÍ: Krev odebrána ___ s kreatininem 1,4 (snížení z maximální hodnoty 2,6), draslíkem 4,2, sodíkem 138, hemoglobinem 13,1, INR 1,1.
+ZÁVĚR: Rentgen hrudníku provedený v ___ bez akutních změn. Ultrazvuk ledvin bez hydronefrózy nebo obstrukce.
+
+Průběh hospitalizace:
+Pacient byl léčen intravenózními tekutinami a jeho domovské léky lisinopril a diuretikum byly dočasně vysazeny. Hodnota kreatininu se postupně zlepšovala a množství moči se normalizovalo. Srdeční frekvence zůstala kontrolovaná pomocí metoprololu a antikoagulační léčba byla pokračována. Péče byla koordinována s týmem ___ a pacient toleroval stravu od ___.
+PROBLÉMY PŘI PŘECHODU:
+Zopakovat měření kreatininu a draslíku za jeden týden. Lisinopril zahájit pouze v případě, že hodnoty zůstanou stabilní.
+
+Léky při přijetí:
+Metoprolol, apixaban, lisinopril, hydrochlorothiazid, atorvastatin.
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg denně.
+2. Apixaban 5 mg dvakrát denně.
+3. Atorvastatin 20 mg večer.
+Lisinopril a hydrochlorothiazid vysazeny do opakovaného měření laboratorních hodnot.
+
+Stav při propuštění:
+Domů
+Zařízení: ___
+
+Duševní stav:
+Orientovaný, plně spolupracující.
+Úroveň vědomí: Plně při vědomí a komunikativní.
+Aktivity: Chůze samostatná.
+
+Pokyny při propuštění:
+Byl jste hospitalizován kvůli dehydrataci, která ovlivnila vaše ledviny. Pravidelně pijte tekutiny a vyhýbejte se protizánětlivým lékům proti bolesti. Užívajte léky podle předpisu a dodržujte termín kontroly v laboratoři v ___. V případě mdloby, bolesti na hrudi nebo velmi malého množství moči se vraťte.
+
+Pokyny pro další péči:
+___

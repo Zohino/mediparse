@@ -1,0 +1,77 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok a slabost nohou
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka, ___ let, s několika dny potíží, otoků a rostoucí hodnoty kreatininu, odeslána od ___.
+
+Osobní anamnéza:
+Diabetes mellitus 2. typu
+Chronické onemocnění ledvin
+Fibrilace síní
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Únavitá, v pohodě
+Plíce:
+Chropy v obou plicních bázích
+Extremity:
+Edém s jámy
+KŮŽE:
+Teplá, suchá
+PULZY:
+Hmatné, nepravidelné
+
+Významné výsledky:
+LABORATOŘ PŘI PŘIJETÍ:
+Kreatinin 3,1, základní hodnota 1,8, draslík 5,4, BNP zvýšený
+ZÁVĚR:
+Plicní vaskulární kongestce
+
+Průběh hospitalizace:
+Kreatinin se zlepšil při ___ díky úpravě hydratace a vysazení nefrotoxických látek. Jemná diuréza, kontrolovaná rychlost, regulace hladiny glukózy pomocí inzulínu.
+
+Léky při přijetí:
+Metformin, apixaban, lisinopril
+
+Léky při propuštění:
+Furosemid denně, pokračování v užívání apixabanu, inzulín glargin večer; metformin a lisinopril byly vysazeny.
+
+Plán po propuštění:
+Domů s péčí
+
+Diagnóza při propuštění:
+Diabetes
+Chronické onemocnění ledvin
+Srdeční selhání
+
+Stav při propuštění:
+Mentální stav:
+Vědomá a orientovaná
+Úroveň vědomí:
+Přítomná
+Funkční stav:
+Chůze s pomocí chodítka
+
+Pokyny při propuštění:
+Zvažujte se denně, omezte příjem soli, vyhýbejte se ibuprofenu a v případě zhoršení otoků nebo dušnosti se vraťte.
+
+Pokyny pro další péči:
+___

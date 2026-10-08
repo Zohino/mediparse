@@ -1,0 +1,77 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Sulfonamidy
+
+Hlavní potíže:
+Bušení srdce a únava
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka, žena ve věku ___ let, s cukrovkou a hypertenzí, byla přijata z ambulance ___ po třech dnech obtíží zahrnujících bušení srdce, nepravidelný srdeční rytmus, únavu a mírnou dušnost při námaze. Její domácí záznamy o hladině glukózy byly stabilní. Příznaky se začaly objevovat ___ během chůze po schodech. Pacientka popírala ztrátu vědomí nebo bolest na hrudi. V pohotovostní ambulanci byla zjištěna tachykardie a byla přijata k hospitalizaci pro kontrolu srdeční frekvence.
+PROHLÍDKA SYSTÉMŮ:
+Pozitivní nález bušení srdce a únavy. Negativní nález horečky, kašle, otoků nohou.
+
+Osobní anamnéza:
+Cukrovka
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s mrtvicí
+
+Fyzikální vyšetření:
+Fyzikální vyšetření při přijetí:
+Životní funkce: SR 128, TK 118/72, SpO2 97 % při pokojovém vzduchu
+Celkový stav: Pacientka je v pohodě, bez známek utrpení
+Hlava, krk, uši, nos, hrdlo: Vlhké sliznice
+Srdce: Nepravidelný rytmus, bez šelestu
+Břicho: Měkké, bez citlivosti
+Končetiny: Bez edémů
+Kůže: Teplá, suchá
+
+Významné výsledky:
+EKG ukázalo nepravidelnou, úzkou komplexovou tachykardii bez zřetelných P vln. Troponin byl negativní dvakrát. TSH v normě. Draslík 4,1, kreatinin 0,8. Hemoglobin 12,9. Výsledky byly projednány s personálem laboratoře ___.
+ZOBRAZENÍ:
+Rentgen hrudníku provedený ___ ukázal čisté plíce a normální velikost srdce.
+
+Průběh hospitalizace:
+Byla zahájena léčba metoprololem, což vedlo ke zlepšení srdeční frekvence, která se do druhého dne ustálila v rozmezí 70-80 úderů za minutu. Vzhledem k zvýšenému skóre rizika mrtvice byla zahájena léčba apixabanem po konzultaci s Dr. ___ a kardiologickým týmem ___. Echokardiogram provedený ___ ukázal zachovalou ejekční frakci. Hladina glukózy byla kontrolována obvyklým režimem. Pacientka chodila samostatně a byla propuštěna domů ve stabilním stavu, přičemž další péči zajistil ___.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg denně
+2. Apixaban 5 mg dvakrát denně
+3. Metformin 500 mg dvakrát denně
+4. Lisinopril 10 mg denně
+5. Atorvastatin 20 mg večer
+Recepty byly odeslány do lékárny ___.
+
+Stav při propuštění:
+Domů
+
+Diagnóza při propuštění:
+Hlavní: Supraventrikulární tachykardie s nepravidelným rytmem
+
+Stav při propuštění:
+Psychický stav: Jasný a koherentní
+Úroveň vědomí: Vnímavá a komunikativní
+Funkční stav: Chůze samostatná.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli rychlé a nepravidelné srdeční frekvenci. Užívajte metoprolol a nový lék na ředění krve přesně podle předpisu a nepřestávejte s užíváním. Sledujte případné krvácení, černé stolice nebo silné bolesti hlavy. V případě, že se vám vrátí bušení srdce, kontaktujte doktora ___ nebo kliniku ___ na telefonním čísle ___. V případě mdloby, bolesti na hrudi nebo slabosti na jedné straně těla se vraťte na pohotovost.
+
+Pokyny pro další péči:
+___

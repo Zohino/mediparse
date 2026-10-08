@@ -1,0 +1,68 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Snížený příjem potravy a snížené množství moči
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka byla přijata ___ po několika dnech zvracení, průjmu a minimálního vymočování. Byla vyšetřena v ___ a odeslána pro další vyšetření kvůli abnormalitám v laboratorních výsledcích.
+ANAMNÉZA:
+Pozitivní nález nevolnosti a únavy. Žádná bolest na hrudi.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných informací.
+
+Fyzikální vyšetření:
+Vzhled suchý, ale komfortní, vitální funkce stabilní.
+HLAVA, OČI, UŠI, NOS, Hrdlo (HEENT):
+Suché sliznice
+Krk:
+Flexibilní
+SRDEČNÍ:
+Pravidelná frekvence, žádný šelest
+Břicho:
+Měkké, mírně bolestivé, bez známek distenze
+Neurologické:
+Vědomá, bez fokálních příznaků
+
+Významné výsledky:
+Kreatinin byl při přijetí zvýšený a postupně se zlepšoval s podáváním tekutin. Elektrolyty byly po doplnění v normě. Analýza moči z ___ byla normální.
+ZÁVĚR:
+Ledviny v pořádku podle ultrazvuku.
+
+Průběh hospitalizace:
+Byla jí podávána intravenózní tekutina a domácí diuretikum bylo přerušeno. Její akutní poškození ledvin, způsobené dehydratací, se během tří dnů zlepšilo. Hodnota kreatininu se vrátila k původní hodnotě, jak uvádějí záznamy z ___ . Pacientka dobře tolerovala stravu a byla propuštěna po vyšetření lékařem ___ .
+
+Léky při přijetí:
+Lisinopril, hydrochlorothiazid a denní multivitamin.
+
+Léky při propuštění:
+Pokračujte v užívání multivitamínu denně. Lisinopril a hydrochlorothiazid užívejte až po konzultaci na kontrolní návštěvě. Ondansetron dle potřeby při nevolnosti.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní poškození ledvin
+Sekundární:
+Dehydratace
+
+Stav při propuštění:
+Stabilní, vědomá, pohyblivá samostatně.
+
+Pokyny při propuštění:
+Byla jste hospitalizována kvůli dehydrataci, která ovlivnila vaše ledviny. Pijte dostatek tekutin a vyhýbejte se protizánětlivým lékům proti bolesti. V případě snížení množství moči nebo opětovného zvracení se vraťte. V případě dotazů volejte ___ .
+
+Pokyny pro kontrolní vyšetření:
+___

@@ -1,0 +1,73 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Jedná se o muže ve věku ___ let, který se dostavil s třechdenním zhoršováním produktivního kašle, horečky a únavy. Byl vyšetřen v ___ dne ___ a poté byl poslán na pohotovost, kde byla zaznamenána nízká saturace kyslíkem. Na pohotovosti měl horečku a tachykardii, a zobrazovací vyšetření hrudníku ukázalo ztmavení v dolním laloku pravé plíce.
+PROHLÍDKA SYSTÉMŮ:
+Pozitivní: kašel, horečka a zimnice. Negativní: bolest na hrudi.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Životní funkce:
+T 38,1 °C, srdeční frekvence 104 tepů/min, krevní tlak 128/76 mmHg, dechová frekvence 22, saturace kyslíkem 91 % při dýchání okolním vzduchem, zlepšeno na 95 % při podávání 2 litrů kyslíku.
+ORL:
+Suché sliznice, žádné léze.
+SRDEČNÍ:
+Tachykardie, pravidelný rytmus, žádný šelest.
+EXTREMITY:
+Teplé, bez otoků.
+NEUROLOGICKÉ:
+Vědomý, orientovaný, pohybuje všemi končetinami.
+
+Významné výsledky:
+___: Leukocyty 14,2, hemoglobin 13,1, krevní destičky 260. Sodík 136, draslík 4,2, kreatinin 0,9, glukóza 214. Laktát 1,8. Troponin negativní. Hemoglobin A1c 8,4 %. Kultivace krve nevykazovala růst po 48 hodinách. Opakované laboratorní testy ___: Leukocyty 9,1, kreatinin nezměněn.
+ZOBRAZENÍ:
+Rentgen hrudníku ___: Konsolidace v dolním laloku pravé plíce bez výpotku nebo pneumotoraxu. Velikost srdce normální.
+
+Průběh hospitalizace:
+Byl léčen pro pneumonii získanou v komunitě pomocí ceftriaxonu a azithromycinu, poté byl přechod na perorální antibiotika, jakmile ustoupila horečka a nepotřeboval kyslík. Kultivace zůstaly negativní. Jeho diabetes byl kontrolován pomocí dávkování inzulínu v nemocnici; A1c byl zvýšený, takže při propuštění byla dávka metforminu zvýšena a byla zajištěna kontrola u ___ . Krevní tlak byl kontrolován pomocí léků, které užíval doma. Samostatně chodil a dobře dýchal okolním vzduchem před odjezdem ___.
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu pěti dalších dnů.
+2. Metformin 1000 mg perorálně dvakrát denně.
+3. Lisinopril 10 mg perorálně jednou denně.
+4. Atorvastatin 20 mg perorálně večer.
+5. Paracetamol 650 mg perorálně každých šest hodin podle potřeby při horečce.
+
+Plán po propuštění:
+Domů s péčí ___
+
+Diagnóza při propuštění:
+Diabetes mellitus.
+
+Stav při propuštění:
+Psychický stav:
+Srozumitelný a koherentní
+Úroveň vědomí:
+Vnímavý a komunikativní
+Úroveň aktivity:
+Chůze vlastní, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni v zařízení ___ s pneumonií a léčení antibiotiky. Užívajte všechny léky podle předpisu a dokončete celou kúru antibiotik. Odpočívejte a pijte dostatek tekutin. V případě horečky, zhoršující se dušnosti, bolesti na hrudi nebo zmatenosti volejte číslo ___ nebo se obraťte na pohotovostní oddělení v zařízení ___ .
+
+Pokyny pro další péči:
+___

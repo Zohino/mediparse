@@ -1,0 +1,65 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacient se dostavil na oddělení ___ s třechdenním kašlem, horečkou a dušností po kontaktu s nemocnými příbuznými. Byl vyšetřen na oddělení ___ dne ___ a odeslán na urgentní příjem. Tam měl horečku a mírnou hypoxémii, a rentgen hrudníku ukázal zápal plic v dolním laloku pravé plíce.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Apendektomie na ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav: Pacient vypadá unaveně, bez známek utrpení.
+Hlava, oči, uši, nos, krk: Vlhká sliznice.
+Krk: Pružný.
+Plíce: Praskání v dolní části pravé plíce.
+Břicho: Měkké, bez citlivosti.
+Neurologické vyšetření: Pacient je při vědomí, orientovaný, bez fokálních příznaků.
+
+Významné výsledky:
+ZÁVĚR: Zápal plic v dolním laloku pravé plíce bez výpotku v pleurální dutině.
+NÁLEZY: Rentgen hrudníku z ___ ukazuje hustou opacitu v dolní části pravé plíce. Velikost srdce je normální. Nebyl zjištěn pneumotorax. Laboratorní vyšetření z ___ prokázala zvýšený počet bílých krvinek a zvýšenou hladinu glukózy, normální hodnoty elektrolytů a normální hodnoty jaterních enzymů.
+
+Průběh hospitalizace:
+Pacient byl léčen ceftriaxonem a azithromycinem, poté byl přechod na perorální antibiotika, jakmile ustoupila horečka. Podávání kyslíku bylo postupně ukončeno třetí den. Jeho diabetes byl kontrolován pomocí dávkování v závislosti na hladině glukózy a hladina glukózy zůstala přijatelná. Kultivace krve z ___ nevykazovala žádný růst. Plán léčby byl prodiskutován s jeho ošetřujícím lékařem na ___. Pacient byl schopen samostatně chodit a byl připraven k propuštění dne ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně, atorvastatin 20 mg večer, aspirin 81 mg denně.
+
+Léky při propuštění:
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů. Azithromycin 250 mg denně po dobu dvou dnů. Pokračujte v užívání lisinoprilu, atorvastatinu a aspirinu v předepsaných dávkách. Paracetamol dle potřeby při horečce.
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Hlavní: Diabetes
+
+Stav při propuštění:
+Stabilní a zlepšený
+Úroveň vědomí: Při vědomí a komunikativní
+
+Pokyny při propuštění:
+Byl vám poskytnut léčba zápalu plic. Užívajte všechny antibiotika podle předpisu a pijte dostatek tekutin. Odpočívejte a postupně zvyšujte aktivitu. V případě horečky, zhoršující se dušnosti nebo bolesti na hrudi se vraťte. Prosím, dodržte termín vaší návštěvy u ___.
+
+Pokyny pro další péči:
+___

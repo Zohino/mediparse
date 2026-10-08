@@ -1,0 +1,73 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Otok nohou a dušnost
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka byla odeslána z ambulance ___ s obtížemi při dýchání, otoky nohou a sníženým množstvím moči, které se zhoršovaly po dobu několika týdnů. Byla již dříve vyšetřena v ___ bez zlepšení.
+
+Osobní anamnéza:
+Diabetes mellitus
+Hypertenze
+Hyperlipidemie
+
+Rodinná anamnéza:
+Matka s hypertenzí. Žádné známé problémy s ledvinami.
+
+Fyzikální vyšetření:
+Celkový stav:
+Únavná, mírně dušná
+Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Vlhké sliznice
+Krk:
+Zvýšený jugulární venózní tlak (JVP)
+Srdce:
+Pravidelný srdeční rytmus, tichý šelest
+Břicho:
+Měkké, bezbolestné
+Extremity:
+Edém 2+ (dutý otok)
+Neurologické vyšetření:
+Vědomá, bez fokálních příznaků
+
+Výsledky vyšetření:
+LABORATOŘ PŘI PŘIJETÍ:
+Kreatinin nad základní hodnotou, zvýšený BNP, mírně zvýšená hladina draslíku.
+ZÁVĚR:
+Plicní vaskulární kongestivní změny s drobnými bilaterálními efuzemi.
+
+Průběh hospitalizace:
+Léčba intravenózními diuretiky, byly vysazeny nefrotoxické léky. Hmotnost klesla a hladina kreatininu se zlepšila. Pacientka byla vyšetřena kardiologickým oddělením v ___ a nefrologickým týmem v ___. Stabilní stav pro propuštění.
+
+Léky při propuštění:
+Furosemid jednou denně, metoprolol dvakrát denně, atorvastatin večer, inzulin dle pokynů.
+
+Plán po propuštění:
+Domů s péčí.
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+Srdeční selhání
+Akutní poškození ledvin
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí:
+Vědomá a komunikativní
+Úroveň aktivity:
+Chůze s pomocí
+
+Pokyny při propuštění:
+Zvažujte se každé ráno a omezte příjem soli a tekutin. Užívajte léky podle předpisu. V případě zhoršení dušnosti nebo otoků volejte ___ nebo se vraťte.
+
+Pokyny pro další sledování:
+___

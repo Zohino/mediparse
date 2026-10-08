@@ -1,0 +1,60 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Dušnost, otoky nohou
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka, žena ve věku ___ let, s chronickým srdečním selháním, byla přijata po třech dnech zhoršující se dušnosti, otoků nohou a sníženého objemu moči, odeslána z ambulance ___ . Navzdory domácí léčbě diuretiky a snížené chuti k jídlu se její váha zvýšila o několik kilogramů.
+
+Předchozí zdravotní problémy:
+Chronické onemocnění ledvin, stadium 4
+Hypertenze (vysoký krevní tlak)
+Anémie (chudokrevnost) spojená s chronickým onemocněním
+Hyperlipidemie (zvýšená hladina tuků v krvi)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí.
+
+Fyzikální vyšetření:
+Fyzikální vyšetření při přijetí:
+Celkový stav: Únavná, bez známek akutního utrpení.
+Hlava, krk, uši, nos, hrdlo: Vlhká sliznice.
+Krk: Zvýšená jugulární venózní tlak.
+Břicho: Měkké, bez citlivosti.
+Končetiny: Edém (otek) 2+ až po kolena.
+Pulzy: Palpovatelné na periférii.
+
+Významné výsledky:
+Kreatinin 2,9 při příjmu, základní hodnota 1,8, urea 54, draslík 5,3, BNP výrazně zvýšen. Rentgen hrudníku ukázal plicní vaskulární kongesci (zácpu). Kreatinin se zlepšil na 2,1 po podání diuretika ___ . Echokardiogram nezaznamenal změny oproti předchozímu vyšetření.
+
+Léky při přijetí:
+Furosemid 40 mg denně, lisinopril 10 mg denně, aspirin.
+
+Léky při propuštění:
+Furosemid 60 mg denně, carvedilol 6,25 mg dvakrát denně, aspirin 81 mg denně, sevelamer s jídlem. Lisinopril vysaďte, dokud nebude znovu zkontrolována funkce ledvin.
+
+Plán po propuštění:
+Domů s péčí od ___
+
+Stav při propuštění:
+Psychický stav: Jasný a soustředěný.
+Úroveň vědomí: Vnímavá a komunikativní.
+Fyzická aktivita: Chůze s pomocí chodítka.
+
+Pokyny při propuštění:
+Vážete se každé ráno a omezte příjem soli a tekutin. Zavolejte ___ , pokud se vaše váha během jednoho dne zvýší o více než 0,9 kg, nebo pokud se zhorší dušnost nebo otoky. Dodržujte termín laboratorního vyšetření.
+
+Pokyny pro další sledování:
+___

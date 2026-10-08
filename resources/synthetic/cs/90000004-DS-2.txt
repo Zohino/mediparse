@@ -1,0 +1,75 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž s chronickým onemocněním ledvin se dostavil s třemi dny kašle a horečky po návštěvě ___, přičemž se zhoršila dušnost a snížil se příjem potravy.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Vzdálená appendektomie (operace slepého střeva) v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav:
+Vědomý, v pohodě.
+Hlava, oči, uši, nos, krk:
+Vlhké sliznice.
+EXTREMITY (končetiny):
+Bez otoků.
+KŮŽE:
+Teplá, suchá.
+
+Významné výsledky:
+Rentgen hrudníku ukázal ztmavení v dolní části pravého plíce. Počet bílých krvinek byl mírně zvýšen při přijetí a normalizoval se při propuštění. Kultivace krve nevykazovala žádný růst. Kreatinin zůstal na základní úrovni.
+
+Průběh hospitalizace:
+Léčba pneumonie získané v komunitě pomocí ceftriaxonu a azithromycinu, následně převedení na perorální antibiotika. Podávání kyslíku bylo postupně snižováno. Pacienta vyšetřil ___ a po konzultaci byl propuštěn domů s podporou ___.
+PROBLÉMY PŘECHODU:
+Opakované zobrazovací vyšetření hrudníku za šest týdnů.
+
+Léky při přijetí:
+Lisinopril, atorvastatin
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů.
+2. Atorvastatin denně.
+3. Lisinopril denně.
+
+Plán po propuštění:
+Domů s péčí
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Diabetes mellitus
+
+Stav při propuštění:
+Psychický stav:
+Vědomý a koherentní.
+Úroveň vědomí:
+Vědomý a komunikativní.
+Úroveň aktivity:
+Chůze, soběstačný.
+
+Pokyny při propuštění:
+Byl vám léčen zápal plic. Dokončete užívání antibiotik, pijte dostatek tekutin, odpočívejte a v případě zhoršení dýchání se obraťte na pohotovost. V případě dotazů volejte ___.
+
+Pokyny pro další péči:
+___

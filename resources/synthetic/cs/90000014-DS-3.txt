@@ -1,0 +1,76 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Slabost a snížený objem moči
+
+Zásadní chirurgické zákroky nebo invazivní procedury:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacient převezen z ___ s třemi dny potíží, včetně sníženého příjmu tekutin a nízkého objemu moči. Laboratorní výsledky ukázaly akutní poškození ledvin (AKI), které se zlepšilo po podání tekutin.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+
+Chirurgická anamnéza:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodině se vyskytuje chronické onemocnění ledvin u matky. Otec měl mrtvici.
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacient je v pohodě, bez známek utrpení.
+Hlava, oči, uši, nos a hrdlo (HEENT):
+Suché sliznice.
+Krk:
+Flexibilní.
+Plíce:
+Čisté při poslechu na obou stranách.
+Kůže:
+Teplá, bez vyrážky.
+
+Relevantní výsledky:
+Kreatinin dosáhl maxima při přijetí a následně klesal s hydratací. Draslík v normě. Glukóza byla při přijetí zvýšená.
+Zobrazovací metody:
+Ultrazvuk bez patologických nálezů.
+
+Léky při přijetí:
+Lisinopril, atorvastatin, aspirin denně.
+
+Léky při propuštění:
+Atorvastatin večer, aspirin denně, metformin dvakrát denně. Lisinopril užívat až po konzultaci s ošetřujícím lékařem.
+
+Plán po propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Diabetes mellitus, nově diagnostikovaný.
+Sekundární:
+Dehydratace
+Hypertenze
+
+Stav při propuštění:
+Dobrý
+Psychický stav:
+Orientovaný a při vědomí.
+Úroveň vědomí:
+Plně při vědomí.
+Aktivity:
+Chůze bez pomoci.
+
+Pokyny při propuštění:
+Pijte dostatek tekutin a kontrolujte hladinu cukru v krvi denně. Vyhýbejte se lékům proti bolesti s protizánětlivým účinkem. V případě horečky, zvracení nebo zmatenosti se vraťte. V případě dotazů volejte ___ .
+
+Pokyny pro další sledování:
+___

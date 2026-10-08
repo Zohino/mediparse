@@ -8,5 +8,87 @@
     "generated_on": "2026-10-04",
     "specification_commit": "d8515b84be3b897cfb4b1503fa99374e736e3fd7"
   },
-  "audit_sha256": "de6d64fc3f9903d901851de5d8aa0282b4a53ad31ce4d840e685e16d8890ae0e"
+  "audit_sha256": "611279db95557d8d06af94f32a5a96cfdddbe824d5283d45a4c50ef44b8b27f6",
+  "translation": {
+    "model": "google/translategemma-12b-it",
+    "revision": "d1b225e1caa17f1ddc7e62065d8637d0923f34e2",
+    "dtype": "bfloat16",
+    "window": 2048,
+    "decoding": {
+      "temperature": 0.0,
+      "stop_token_ids": [
+        1,
+        106
+      ]
+    },
+    "requests_sha256": "dfa6fc56733e8b3da9d079e978cc2f1d8c5291f0b804a904b29f41d4660c4ec5",
+    "runs": [
+      {
+        "started": "2026-10-06T19:21:27.202468Z",
+        "requests_sha256": "aabdab8148f9e5e0c443ff17bbd58f5bcd53dfbd31637912e63d40b04456a9ab",
+        "script_sha256": "0acaaf12680a4d0717f3facfb88568d5dd3e09d18160abb7c8e56b85bb3e6d5d",
+        "gpu": "NVIDIA A40",
+        "cuda": "13.0",
+        "packages": {
+          "vllm": "0.30.0",
+          "torch": "2.13.0",
+          "transformers": "5.18.0"
+        }
+      },
+      {
+        "started": "2026-10-07T17:21:12.787980Z",
+        "requests_sha256": "dfa6fc56733e8b3da9d079e978cc2f1d8c5291f0b804a904b29f41d4660c4ec5",
+        "script_sha256": "0acaaf12680a4d0717f3facfb88568d5dd3e09d18160abb7c8e56b85bb3e6d5d",
+        "gpu": "NVIDIA A40",
+        "cuda": "13.0",
+        "packages": {
+          "vllm": "0.30.0",
+          "torch": "2.13.0",
+          "transformers": "5.18.0"
+        }
+      }
+    ],
+    "marker_mismatches": [
+      "90000001-DS-1",
+      "90000002-DS-4",
+      "90000003-DS-1",
+      "90000007-DS-1",
+      "90000011-DS-6",
+      "90000011-DS-7",
+      "90000014-DS-2",
+      "90000015-DS-1",
+      "90000015-DS-2",
+      "90000015-DS-5",
+      "90000015-DS-7",
+      "90000019-DS-2",
+      "90000019-DS-4",
+      "90000021-DS-5",
+      "90000022-DS-2",
+      "90000023-DS-1",
+      "90000029-DS-1",
+      "90000032-DS-1",
+      "90000034-DS-1",
+      "90000038-DS-1",
+      "90000043-DS-1",
+      "90000044-DS-3",
+      "90000050-DS-1",
+      "90000050-DS-2",
+      "90000050-DS-3",
+      "90000050-DS-8",
+      "90000057-DS-1",
+      "90000057-DS-5",
+      "90000066-DS-1",
+      "90000067-DS-1",
+      "90000072-DS-1",
+      "90000075-DS-1",
+      "90000075-DS-6",
+      "90000076-DS-1",
+      "90000083-DS-1",
+      "90000083-DS-3",
+      "90000083-DS-5",
+      "90000087-DS-3",
+      "90000088-DS-1",
+      "90000090-DS-1"
+    ]
+  }
 }

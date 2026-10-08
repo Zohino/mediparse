@@ -1,0 +1,65 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok a zarudnutí pravé nohy
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let se dostavil s třidenním otokem a zarudnutím pravé dolní končetiny po drobném odření na místě ___. Při příjmu neměl horečku a byl vyšetřen na pohotovosti v ___ před přijetím do nemocnice.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Sezónní alergie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav: Pacient je v pohodě, bez známek utrpení.
+Hlava, oči, uši, nos, hrdlo: Bez zvláštností.
+Plíce: Čisté bilaterálně.
+Extremity: Pravá lýtko je teplé, mírně otoklé.
+Kůže: Zarudnutí na pravé holeně.
+Pulzy: Palpovatelné a symetrické.
+
+Významné výsledky:
+Počet bílých krvinek mírně zvýšen při příjmu, normalizoval se při propuštění. Kreatinin v normě. Kultivace krve nevykazovala žádný růst.
+Zobrazovací metody:
+Duplexní sonografie pravé nohy neprokázala hlubokou žilní trombózu.
+
+Průběh hospitalizace:
+Pacient byl léčen pro celulitidu pravé nohy intravenózními antibiotiky, poté byla léčba převedena na perorální formy, jakmile zarudnutí ustoupilo. Hladina glukózy byla normální a nebyly zjištěny žádné známky diabetu. Péče o ránu byla konzultována s ošetřovatelským personálem v ___ a ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Cephalexin 500 mg čtyřikrát denně po dobu sedmi dnů. Pokračujte v užívání lisinoprilu a atorvastatinu ve stejné dávce. Acetaminophen dle potřeby na bolest, dle pokynů lékárny v ___.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida pravé nohy
+Hypertenze
+
+Stav při propuštění:
+Mentální stav: Pacient je při vědomí, orientovaný, s jasným myšlením.
+Úroveň vědomí: Plně při vědomí a pozorný.
+Funkční stav: Chůze samostatná.
+
+Pokyny při propuštění:
+Byl vám poskytnut lék na kožní infekci nohy. Užívajte antibiotika podle předpisu, udržujte nohu ve zvýšené poloze a v případě horečky, rozšíření zarudnutí nebo zhoršení bolesti se vraťte. Následná kontrola u ___.

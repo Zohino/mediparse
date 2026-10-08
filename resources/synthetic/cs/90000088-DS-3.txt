@@ -1,0 +1,74 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let s pětidenním produktivním kašlem, horečkou a dušností, přijat z ___ kvůli hypoxii při běžném dýchání.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+
+Chirurgická anamnéza:
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Životní funkce: T 38,4 °C, srdeční frekvence 102, krevní tlak 132/78, SpO2 91 % při běžném dýchání
+Celkový stav: Pacient vypadá nemocně, mírně tachypnoe
+Hlava, krk, uši, nos, hrdlo: Suché sliznice
+Krk: Pružný
+Plíce: Krepitus v dolní části pravého plíce
+Břicho: Měkké, bez citlivosti
+Neurologické vyšetření: Pacient je při vědomí, bez fokálních příznaků
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Životní funkce: Bez horečky, SpO2 96 % při běžném dýchání
+Plíce: Zmírnění krepitusů
+
+Výsledky vyšetření:
+LABORATOŘ PŘI PŘIJETÍ:
+Počet bílých krvinek 14,2, laktát 1,4, kreatinin normální.
+ZÁVĚR:
+Konsolidace v dolní části pravého plíce, bez efúze.
+
+Léky při přijetí:
+Lisinopril, atorvastatin denně
+
+Léky při propuštění:
+Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů
+Lisinopril denně
+Atorvastatin večer
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární: Pneumonie získaná v komunitě
+Sekundární: Hypertenze, hyperlipidemie
+
+Stav při propuštění:
+Psychický stav: Jasný a koherentní
+Úroveň vědomí: Při vědomí a komunikativní
+Funkční stav: Chůze, soběstačný
+
+Pokyny při propuštění:
+Byl vám poskytnut léčba pneumonie. Dokončete užívání antibiotik, odpočívejte, pijte dostatek tekutin a v případě zhoršení dušnosti nebo horečky se vraťte. V případě dotazů volejte ___ .
+
+Pokyny pro další sledování:
+___

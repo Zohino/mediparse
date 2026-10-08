@@ -1,0 +1,72 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost a otoky nohou
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka, které jsou známy srdeční problémy, se dostavila s tříměsíční zhoršující se dušností, ortopneí (dušností vleže) a otoky nohou po vysazení diuretika. Byla vyšetřena v ___ a převezena sem k dalšímu vyšetření a léčbě.
+
+Osobní anamnéza:
+Srdeční selhání
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+Osteoartróza (degenerativní onemocnění kloubů)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec zemřel ve věku ___ z neznámých příčin.
+
+Fyzikální vyšetření:
+Životní funkce: bez horečky, krevní tlak 128/74, srdeční frekvence 82, saturace kyslíkem 94 % při dýchání okolním vzduchem
+Celkový stav: pohodlná, bez známek utrpení
+Plíce: praskání v obou dolních plicních lalocích
+Břicho: měkké, bez citlivosti
+EXTREMITIES (končetiny): minimální otok kotníků
+Neurologické vyšetření: bez fokálních příznaků
+
+Významné výsledky:
+Laboratorní výsledky: zvýšená hladina BNP a mírná hyponatrémie (nízká hladina sodíku), jinak bez zvláštností. EKG ukázalo sinusový rytmus. Echokardiografie provedená v ___ ukázala sníženou ejekční frakci (sílu stahování srdce).
+Zobrazovací metody: Rentgen hrudníku s kardiomegalií (zvětšeným srdcem) a drobnými bilaterálními výpotky.
+ZÁVĚR: Plicní vaskulární kongestice (nadušení cév v plicích) bez lokálního zánětu.
+
+Průběh hospitalizace:
+Pacientce byla podána intravenózní furosemid (diuretikum) s dobrým množstvím vylučovaného moči a zlepšením dýchání a otoků. Byla obnovena a upravena její domácí léčba. Byla monitorována a doplňována hladina elektrolytů. Pacientka absolvovala fyzioterapii a byla stabilní pro propuštění s perorálními diuretiky, přičemž byla zajištěna kontrola u ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Furosemid
+
+Léky při propuštění:
+Furosemid 40 mg jednou denně
+Lisinopril 10 mg jednou denně
+Atorvastatin 20 mg večer
+Metoprolol succinate 25 mg jednou denně
+Chlorid draselný 20 mEq denně
+
+Plán po propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Srdeční selhání
+
+Stav při propuštění:
+Úroveň vědomí: bdělá a komunikativní
+Funkční stav: pohyblivá, soběstačná
+
+Pokyny při propuštění:
+Vážete se každé ráno a volejte ___ pokud přiberete více než 1,4 kg. Omezte příjem soli a tekutin podle doporučení. Užíváte léky podle předpisu a v případě zhoršení dušnosti nebo bolesti na hrudi se vraťte.
+
+Pokyny pro kontrolu:
+___

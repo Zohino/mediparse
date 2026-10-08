@@ -1,0 +1,65 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Kardiologie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost a otoky nohou
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Muž ve věku ___ let, který se prezentoval s postupující dušností, ortopneí (dušností vleže) a oboustrannými otoky nohou po dobu tří týdnů. Před ___ dny mu došly léky. Byl odeslán od lékaře ___, po zvýšení váhy v domácím prostředí, a v pohotovostní ambulanci byl zjištěn hypoxický stav.
+
+Osobní anamnéza:
+Srdeční selhání
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce v šedesáti letech
+
+Fyzikální vyšetření:
+Hlava, oči, uši, nos, hrdlo (HEENT):
+Vlhké sliznice, pozorována dilatace jugulárních žil.
+Břicho:
+Měkké, bezbolestné, mírně napjaté.
+Kůže:
+Teplá, s oboustrannými edémy až po kolena.
+
+Průběh hospitalizace:
+Pacient byl přijat s přebytkem tekutin a léčen intravenózním furosemidem, s rychlou produkcí moči a stabilní ztrátou váhy. Podávání kyslíku bylo postupně snižováno. Kardiologové z ___ zhodnotili echokardiogram provedený u ___ a upravili jeho léčbu. Byl převeden na perorální diuretika a před propuštěním se pohodlně pohyboval a jeho váha byla stabilní.
+
+Léky při přijetí:
+Furosemid 40 mg denně
+Metoprolol sukcinát 50 mg denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+Furosemid 60 mg perorálně denně
+Metoprolol sukcinát 50 mg perorálně denně
+Lisinopril 10 mg perorálně denně
+Spironolakton 25 mg perorálně denně
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Srdeční selhání
+
+Stav při propuštění:
+Mentální stav:
+Orientovaný, schopný porozumět a reagovat na pokyny.
+Funkční stav:
+Chůze a soběstačnost.
+
+Pokyny při propuštění:
+Zvažujte se každé ráno a zaznamenávejte váhu. Omezte příjem soli a tekutin, jak bylo prodiskutováno. Užívajte všechny léky denně. Zavolejte ___, pokud se vaše váha během jednoho dne zvýší o více než 1,4 kg, nebo pokud se zhorší dýchání. Dodržujte schůzku s ___.
+
+Pokyny pro další sledování:
+___

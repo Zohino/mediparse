@@ -1,0 +1,76 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Obecná chirurgie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická appendektomie (odstranění slepého střeva)
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let byl převezen z ___ s bolestí v pravém dolním kvadrantu břicha trvající tři dny, nevolností a mírnou horečkou, která začala ___. Bolest byla konstantní a zhoršovala se při pohybu. Nevyskytovala se žádná zvracení ani změny v stolici.
+PROHLÍDKA SYSTÉMŮ:
+Snížená chuť k jídlu. Negativní nález při vyšetřování bolesti hrudníku, dušnosti a obtíží při močení.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Oprava kýly v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí, sledována v ___
+
+Fyzikální vyšetření:
+Fyzikální vyšetření při přijetí:
+Bolestivý pravý dolní kvadrant.
+Životní funkce: Teplota 38,4 °C, srdeční frekvence 92 tepů/min, krevní tlak 128/76.
+Oblast hlavy, očí, uší, nosu a krku: Bez žloutenky.
+Krk: Pružný.
+EXTREMITY (končetiny): Bez otoků.
+KŮŽE: Teplá, suchá.
+PULSY (tepny): Palpovatelné na všech končetinách.
+
+Významné výsledky:
+LABORATOŘ PŘI PŘIJETÍ:
+Počet bílých krvinek 13,2, hemoglobin 14,1, kreatinin 0,9, laktát 1,1.
+ZÁVĚR:
+CT vyšetření provedené v ___ ukázalo dilatovaný, zánětlivý appendix (slepé střevo) bez perforace nebo abscesu.
+
+Průběh hospitalizace:
+Pacient byl přijat s akutní appendicitidou (zánětem slepého střeva), zahájena intravenózní antibiotika a provedena nekomplikovaná laparoskopická appendektomie. Zotavení probíhalo hladce, dieta byla postupně rozšiřována a bolest byla kontrolována perorálními léky. Plán byl prodiskutován s ___ před propuštěním. Pacient byl při propuštění afebrilní (bez horečky) a toleroval příjem potravy.
+PROBLÉMY PŘI PŘECHODU:
+Kontrola rány při následné kontrole.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně denně
+2. Acetaminophen 650 mg každých šest hodin dle potřeby na bolest
+3. Docusate 100 mg dvakrát denně při užívání opioidních analgetik
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní appendicitida
+Hypertenze
+
+Stav při propuštění:
+Psychický stav: jasný a soustředěný
+Úroveň vědomí: bdělý a komunikativní
+Funkční stav: pohyblivý, soběstačný
+
+Pokyny při propuštění:
+Byl vám proveden chirurgický zákrok pro appendicitidu. Udržujte rány čisté a suché a vyhýbejte se zvedání předmětů o hmotnosti více než 4,5 kg po dobu čtyř týdnů. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí rány kontaktujte ___ nebo se obraťte na pohotovost v ___ .
+
+Následné kontroly:
+___

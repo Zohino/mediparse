@@ -1,0 +1,61 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha.
+
+Hlavní chirurgický zákrok:
+Laparoskopická appendektomie (odstranění slepého střeva).
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila na oddělení ___ s bolestí v pravém dolním kvadrantu břicha, která se zhoršovala již dva dny, dále trpěla nevolností a mírnou horečkou. Symptomy se objevily po jídle a postupně se zhoršovaly. Popírala zvracení krve nebo problémy s močením. Vyšetření provedená na ___ ukázala zánět slepého střeva a byla odeslána na chirurgické oddělení k dalšímu vyšetření dne ___.
+
+Osobní anamnéza:
+Hypertenze, migrény.
+
+Chirurgická anamnéza:
+Císařský řez v roce ___.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s rakovinou prsu.
+
+Fyzikální vyšetření:
+Sliznice vlhké, bez žloutenky.
+Břicho: Měkké, mírně bolestivé v pravém dolním kvadrantu, rány po operaci čisté.
+Extremity: Teplé, bez otoků.
+Kůže: Bez vyrážky.
+
+Významné výsledky:
+LABORATOŘ PŘI PŘIJETÍ: WBC (bílý krvinky) 14.2, hemoglobin 12.8, krevní destičky 260, sodík 138, draslík 4.1, kreatinin 0.8, laktát 1.1. CT vyšetření břicha provedené na ___ ukázalo rozšířený slepý střevní vak s okolním zánětem tukové tkáně, bez abscesu.
+LABORATOŘ PŘI PROPUŠTĚNÍ: WBC 8.1, hemoglobin 12.2, krevní destičky 245, sodík 139, draslík 4.0, kreatinin 0.7. Histopatologické vyšetření z ___ čeká na vyhodnocení při propuštění.
+
+Průběh hospitalizace:
+Pacientka podstoupila nekomplikovanou laparoskopickou appendektomii v prvním den hospitalizace pod vedením Dr. ___. Po operaci byla bolest kontrolována pomocí paracetamolu a perorálního oxykodonu podle potřeby. Strava byla postupně rozšiřována a dobře tolerována, bez nevolnosti. Antibiotika byla po operaci vysazena, protože nebyl zjištěn žádný perforace. Pacientka chodila samostatně, močila spontánně a obnovila se funkce střev. Důležité životní funkce zůstaly stabilní a bez horečky. Byla propuštěna domů v péči ___ s doporučením k ambulantní chirurgické kontrole.
+
+Léky při propuštění:
+Paracetamol 650 mg každých šest hodin podle potřeby. Oxykodon 5 mg každých šest hodin podle potřeby při silné bolesti, pouze na tři dny. Docusate 100 mg dvakrát denně během užívání oxykodonu. Pokračujte v užívání amlodipinu 5 mg denně doma. Recepty zaslány do lékárny ___ .
+
+Plán po propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Akutní apendicitida (zánět slepého střeva).
+
+Stav při propuštění:
+Psychický stav: Jasný a soustředěný.
+Úroveň vědomí: Vnímavá a komunikativní.
+Funkční stav: Chůze, samostatná.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zánětu slepého střeva a podstoupili jste operaci, při které byl slepý střev odstraněn. Udržujte rány čisté a suché, po dobu čtyř týdnů se vyhýbejte zvedání předmětů vážících více než 4,5 kg. Užívajte léky proti bolesti podle předpisu. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí rány volejte číslo ___ nebo se obraťte na lékaře.
+
+Pokyny pro kontrolní prohlídku:
+___

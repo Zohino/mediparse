@@ -1,0 +1,73 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Rána na noze a únava
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž, který se dostavil s několika dny zhoršující se únavy, žízně a hnisající ránou na noze. Byl vyšetřen v ___ dříve tento týden a odeslán do ___ k dalšímu vyšetření.
+
+Osobní anamnéza:
+Hyperlipidemie
+Předchozí apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s mrtvicí
+
+Fyzikální vyšetření:
+Hlava, oči, uši, nos, hrdlo:
+Suché sliznice
+Krk:
+Flexibilní
+Extremity:
+Vřed na levé noze, mírná zarudnutí, pulz je přítomen
+
+Významné výsledky:
+Hladina glukózy výrazně zvýšená při příjmu, zlepšila se do propuštění. Kultivace z ___ nevykazovaly žádný růst.
+ZÁVĚR:
+Na rentgenovém snímku nohy nebyla zjištěna žádná destrukce kostí.
+
+Průběh hospitalizace:
+Pacient dostával intravenózní tekutiny, inzulin a antibiotika, a také péči o ránu od ___. Hladina glukózy se stabilizovala a rána se zlepšila.
+PROBLÉMY PŘI PŘECHODU:
+Kontrola rány a záznamů o hladině glukózy při kontrolní prohlídce.
+
+Léky při přijetí:
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Atorvastatin 20 mg večer
+Metformin 500 mg dvakrát denně
+Cefalexin 500 mg čtyřikrát denně po dobu jednoho týdne
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Vřed na noze
+
+Stav při propuštění:
+Psychický stav:
+Orientovaný a koherentní
+Úroveň vědomí:
+Vnímavý a komunikativní
+Funkční stav:
+Chůze, soběstačný
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli ráně na noze a vysoké hladině cukru v krvi. Udržujte obvaz čistý, užívejte léky podle pokynů a volejte ___ v případě, že se zarudnutí rozšíří nebo se objeví horečka.
+
+Pokyny pro kontrolní prohlídku:
+___

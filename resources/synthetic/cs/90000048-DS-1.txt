@@ -1,0 +1,68 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Kašel a horečka.
+
+Zásahy:
+Žádné.
+
+Anamnéza současného onemocnění:
+Pacientka přišla s tříměsíčním produktivním kašlem a horečkou po kontaktu s nemocným příbuzným v ___. Zvýšená hladina glukózy vyvolala obavy z možného nového diabetu.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak).
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí.
+
+Fyzikální vyšetření:
+Celkový stav:
+Vědomá, v pohodě, bez známek utrpení.
+Plíce:
+Chropy v dolní části pravého plíce.
+Extremity:
+Teplé, bez otoků.
+
+Významné výsledky:
+Mírná leukocytóza (zvýšený počet bílých krvinek) v krevních testech provedených při přijetí v ___. Glukóza mírně zvýšená. Krevní kultury bez nálezu.
+Zobrazovací metody:
+Rentgen hrudníku ukázal konsolidaci (zánět) v dolní části pravého plíce bez výpotku.
+
+Průběh hospitalizace:
+Léčena pro pneumonii získanou v komunitě (běžnou pneumonii) intravenózní cefotriaxonem a azithromycinem, poté převedena na perorální antibiotika, jakmile horečka ustoupila. Podávání kyslíku postupně snižováno, do třetího dne již nepotřebovala. Vyšetřena týmem ___ a schválena k propuštění.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Multivitamin.
+
+Léky při propuštění:
+Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů. Lisinopril 10 mg denně. Multivitamin denně. Paracetamol dle potřeby při horečce.
+
+Plán po propuštění:
+Domů, s zajištěnou péčí prostřednictvím ___.
+
+Diagnóza při propuštění:
+Hlavní:
+Pneumonie získaná v komunitě.
+
+Stav při propuštění:
+Psychický stav:
+Vědomá a srozumitelná.
+Úroveň vědomí:
+Vědomá a komunikativní.
+Funkční stav:
+Chůze samostatná.
+
+Pokyny při propuštění:
+Dokončete celou kúru antibiotik a pijte dostatek tekutin. V případě zhoršení dušnosti nebo přetrvávající horečky se obraťte na lékaře. Prosím, volejte ___ a domluvte si návštěvu praktického lékaře.
+
+Pokyny pro další sledování:
+___

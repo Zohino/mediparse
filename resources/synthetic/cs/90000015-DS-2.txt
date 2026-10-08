@@ -1,0 +1,75 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Otok nohou, snížená chuť k jídlu
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Šestačtyřicetiletá žena s dlouhodobými problémy se srdcem a ledvinami se dostavila s třemi dny trvající sníženou chutí k jídlu, otokem nohou a sníženým množstvím moči. Byla odeslána z její ordinace ___.
+
+Předchozí zdravotní problémy:
+Srdeční selhání
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Fyzikální vyšetření při přijetí:
+Celkový stav:
+Chudá, starší žena, unavená, ale bez akutních potíží.
+Krk:
+Zvýšený tlak v žilách.
+Plíce:
+Praskání v obou plicních bázích.
+Břicho:
+Měkké, bez citlivosti.
+
+Významné výsledky:
+Kreatinin 3,1 (výchozí hodnota 2,0). BUN 58. Draslík 5,4. BNP zvýšený. Rentgen hrudníku z ___ ukázal mírnou plicní vaskulární kongesci a malé bilaterální výpotky. Ultrazvuk ledvin ukázal malé echogenní ledviny bez hydronefrózy.
+
+Průběh hospitalizace:
+Kreatinin se zvýšil nad výchozí hodnotu u chronického onemocnění ledvin, což je v souladu s akutním poškozením ledvin v důsledku nedostatečného příjmu a kongesce. Diuretika byla dočasně vysazena, poté opatrně obnovena a kreatinin se zlepšil. Pacientku vyšetřil ___ a byla propuštěna ve stabilním stavu do rehabilitačního zařízení.
+
+Léky při přijetí:
+Furosemid 40 mg denně, carvedilol, aspirin.
+
+Léky při propuštění:
+Furosemid 20 mg denně, carvedilol 6,25 mg dvakrát denně, aspirin 81 mg denně, sevelamer s jídlem, lisinopril vysadit.
+
+Plán po propuštění:
+Dlouhodobá péče
+
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+Srdeční selhání
+Akutní poškození ledvin
+
+Stav při propuštění:
+Mentální stav:
+Orientovaná a koherentní.
+Úroveň vědomí:
+Vnímavá a komunikativní.
+Funkční stav:
+Chůze s pomocí.
+
+Instrukce při propuštění:
+Vážete se každé ráno a omezte příjem soli a tekutin. Zavolejte ___, pokud se objeví otoky, dušnost nebo snížené množství moči.
+
+Pokyny pro další péči:
+___

@@ -1,0 +1,74 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacient se dostavil na oddělení ___ s třechdenním produktivním kašlem, horečkou a dušností po nedávné návštěvě ___. Rentgen hrudníku ukázal konsolidaci v dolním laloku pravé plíce.
+
+Anamnéza:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacient vypadal mírně nemocný.
+Hlava, oči, uši, nos, krk (HEENT):
+Vlhké sliznice
+Krk:
+Pružný
+Plíce:
+Chropy v dolní části pravé plíce
+Břicho:
+Měkké, bezbolestné
+Extremity:
+Bez otoků
+Kůže:
+Teplá, suchá
+Pulzy:
+Hmatné
+
+Významné výsledky:
+Po příjmu zvýšený počet bílých krvinek. Rentgen hrudníku s pneumonií v dolním laloku pravé plíce. Kultivace krve bez růstu bakterií. Kreatinin a elektrolyty v normě.
+
+Průběh hospitalizace:
+Léčba pneumonie získané v komunitě pomocí ceftriaxonu a azithromycinu, následně přechod na perorální antibiotika. Podávání kyslíku bylo postupně ukončeno třetí den. Hladina glukózy byla regulována pomocí inzulinové terapie. Pacienta vyšetřil ___ a propustil ___ .
+
+Léky při přijetí:
+Metformin
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Metformin 500 mg dvakrát denně. Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární:
+Pneumonie získaná v komunitě
+Sekundární: Hypertenze, hyperlipidemie
+
+Stav při propuštění:
+Psychický stav: Jasný a soustředěný.
+Aktivita: Samostatný, pohyblivý.
+
+Pokyny při propuštění:
+Byl vám léčen zápal plic. Dokončete veškerá antibiotika, odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršující se dušnosti nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro další sledování:
+___

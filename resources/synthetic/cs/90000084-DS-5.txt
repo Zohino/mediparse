@@ -1,0 +1,77 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel, horečka, dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacient je muž ve věku ___ let s hypertenzí, který se prezentoval s pětidenním produktivním kašlem, horečkou a zhoršující se dušností. Byl poprvé vyšetřen ___ dne ___ a dostal léčbu perorálními antibiotiky, ale bez zlepšení. Rozvinul bolest na hrudi v pravé straně, která se zhoršovala, a měl snížený příjem potravy, což vedlo jeho rodinu k tomu, že ho přivezli do ___. Na pohotovosti měl horečku a hypoxémii, a zobrazovací vyšetření ukázala konsolidaci v dolním laloku pravé plíce. Popřel kontakt s nemocnými.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie, diagnostikována v ___
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec s ischemickou chorobou srdeční.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Životní funkce: T 101.2, HR 98, BP 128/76, RR 22, SpO2 91% při pokojovém vzduchu
+Celkový stav: Pacient vypadá nemocně, mluví krátkými větami
+Hlava, oči, uši, nos, hrdlo: Suché sliznice
+Plíce: Krepitace v dolní části pravé plíce
+Břicho: Měkké, bez citlivosti
+EXTREMITY: Teplé, bez otoků
+
+Výsledky vyšetření:
+LABORATOŘ PŘI PŘIJETÍ:
+WBC 14.2 s převahou neutrofilů, Hgb 13.1, Plt 260. Na 134, K 4.0, HCO3 24, BUN 22, Cr 1.0. Laktát 1.8.
+Rentgen hrudníku: Zastínění v dolním laloku pravé plíce, bez výpotku, zhodnoceno ___
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+WBC 8.4, Hgb 12.8, Plt 310. Na 138, K 4.2, Cr 0.9.
+Mikrobiologie: Kultivace krve bez růstu, antigen Legionella v moči negativní.
+
+Průběh hospitalizace:
+Pacient byl přijat na interní oddělení a zahájena intravenózní léčba ceftriaxonem a azithromycinem pro pneumonii získanou v komunitě. Doplňková kyslíková terapie byla postupně snižována po dobu dvou dnů. Kultivace krve odebraná ___ dne nevykazovala růst. Jeho kašel a horečka se postupně zlepšovaly a třetí den hospitalizace byl převeden na perorální antibiotika. Lisinopril byl zpočátku vysazen kvůli nízkému krevnímu tlaku a obnoven před propuštěním. Fyzikální terapie doporučila krátkodobou rehabilitaci vzhledem k dekompenzaci. Jeho dcera ___ souhlasila s plánem. Pacient byl ___ dne propuštěn. Opakované zobrazovací vyšetření hrudníku je plánováno na ___ den.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Vydáno v ___
+
+Léky k užívání po propuštění:
+1. Lisinopril 10 mg, perorálně, jednou denně.
+2. Atorvastatin 20 mg, perorálně, každou noc.
+3. Amoxicilin-klavulanát 875 mg, perorálně, dvakrát denně, pokračujte až do ___.
+4. Paracetamol 650 mg, perorálně, každých šest hodin dle potřeby při horečce nebo bolesti.
+
+Plán po propuštění:
+Dlouhodobá péče
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie získaná v běžném prostředí
+Hypoxie (nedostatek kyslíku)
+Hypertenze (vysoký krevní tlak)
+
+Stav při propuštění:
+Úroveň vědomí: Přítomný a komunikativní
+Úroveň aktivity: Chůze s pomocí.
+
+Pokyny po propuštění:
+Byli jste hospitalizováni kvůli infekci plic a léčení probíhalo pomocí antibiotik. Dokončete celou kúru antibiotik, i když se cítíte dobře. Pijte dostatek tekutin a odpočívejte. V případě horečky nad 38 °C, zhoršující se dušnosti, bolesti na hrudi nebo zmatenosti se vraťte. V případě opětovného výskytu příznaků kontaktujte Dr. ___. Váš rehabilitační tým v ___ vám pomůže s posílením a chůzí a bude naplánováno opakované rentgenové vyšetření hrudníku přibližně dne ___.
+
+Pokyny pro další péči:
+___

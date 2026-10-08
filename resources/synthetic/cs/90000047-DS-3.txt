@@ -1,0 +1,70 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacient je muž ve věku ___ let, který byl přijat z ___ s potížemi, které se zhoršovaly po dobu dvou týdnů, včetně otoku kotníků, dušnosti v leže a únavy. Přibral několik kilogramů a začal pociťovat dušnost při chůzi do schodů. Symptomy se zhoršily dne ___, což vedlo k vyšetření. Pacientovi byly podány intravenózní diuretika, což vedlo ke zvýšenému vylučování moči a zlepšení stavu.
+
+Anamnéza:
+Hypertenze
+Hyperlipidemie
+Dna
+Předchozí operace kolene
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s koronární chorobou; matka s mrtvicí
+
+Fyzikální vyšetření:
+Fyzikální vyšetření při přijetí:
+Celkový stav: Únavný, mírně dušný
+Hlava, krk, uši, nos, hrdlo: Vlhká sliznice
+Krk: Zvýšený tlak v játrních žilách
+Plíce: Praskání v obou plicních bázích
+Srdce: Pravidelný srdeční rytmus, slyšitelné S3
+Břicho: Měkké, bezbolestné
+Končetiny: Edém s prohlubněmi až po kolena
+
+Výsledky vyšetření:
+Laboratorní výsledky při propuštění:
+Sodík 138, draslík 4,1, kreatinin blízko základní hodnoty, glukóza zvýšená, BNP výrazně zvýšený. Vzorky odebrány ___.
+Závěr:
+Rentgen hrudníku z ___ ukázal zvětšení srdce, plicní vaskulární kongesci a malé bilaterální výpotky, které se po podání diuretik zlepšily.
+
+Léky při přijetí:
+Lisinopril denně, atorvastatin večer, allopurinol denně, metformin dvakrát denně
+
+Léky při propuštění:
+Furosemid 40 mg perorálně denně, carvedilol dvakrát denně, pokračování v užívání lisinoprilu, atorvastatin večer, allopurinol denně, inzulin glargin před spaním, metformin vysazen.
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Chronické onemocnění ledvin
+Srdeční selhání
+
+Stav při propuštění:
+Psychický stav: Vědomý a orientovaný, schopný porozumět a plnit pokyny
+Úroveň vědomí: Probudný a pozorný
+Funkční stav: Chůze s jistým krokem
+
+Pokyny při propuštění:
+Byl jste hospitalizován kvůli zadržování tekutin. Zvažujte se každé ráno a volejte ___, pokud se vaše váha během jednoho dne zvýší o více než 1,4 kg (3 libry). Omezte příjem soli a tekutin. Užívajte léky podle předpisu. Prosím, dodržujte termín vaší návštěvy u lékaře na ___. V případě bolesti na hrudi nebo zhoršující se dušnosti se vraťte na pohotovost do ___ dnů od propuštění.
+
+Pokyny pro další péči:
+___

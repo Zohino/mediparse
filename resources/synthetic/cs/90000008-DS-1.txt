@@ -1,0 +1,66 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíž:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická cholecystektomie (odstranění žlučníku)
+
+Anamnéza současného onemocnění:
+Žena ve věku ___ let, která pociťuje bolest v pravém horním kvadrantu břicha a nevolnost již dva dny, byla přijata z ambulance ___ .
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (zvýšená hladina tuků v krvi)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav: Pacientka je nepohodlná, bez horečky.
+Hlava, oči, uši, nos, krk: Bez žloutenky.
+Krk: Pružný.
+Břicho: Citlivost v pravém horním kvadrantu.
+Extremity: Teplé.
+Kůže: Neošetřená, bez lézí.
+
+Relevantní výsledky:
+ZOBRAZENÍ: Ultrazvukové vyšetření pravého horního kvadrantu břicha provedeno.
+NÁLEZY: Žlučové kameny, ztluštělá stěna žlučníku, tekutina kolem žlučníku; bez rozšíření žlučových cest.
+
+Průběh hospitalizace:
+Pacientka přijata s akutní cholecystitidou (zánět žlučníku), léčena antibiotiky a infuzemi. Podstoupila laparoskopickou cholecystektomii na oddělení ___ bez komplikací. Dieta postupně rozšiřována, bolest kontrolována, pacientka propuštěna domů ve stabilním stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně.
+
+Léky při propuštění:
+Acetaminophen 650 mg každých šest hodin dle potřeby. Lisinopril 10 mg denně. Docusate dvakrát denně.
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelithiasis (přítomnost žlučových kamenů)
+
+Stav při propuštění:
+Psychický stav: Pacientka je při vědomí, orientovaná, srozumitelná.
+Úroveň vědomí: Probuděná a při vědomí.
+Funkční stav: Chůze, soběstačná.
+
+Pokyny při propuštění:
+Udržujte rány čisté a suché. V případě horečky, zvracení nebo zhoršení bolesti břicha volejte na číslo ___ .
+
+Pokyny pro další péči:
+___

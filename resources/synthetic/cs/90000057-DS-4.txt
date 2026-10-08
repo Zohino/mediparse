@@ -1,0 +1,69 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Žena ve věku ___ let, která byla přijata kvůli třem dnům produktivního kašle, horečky a mírné dušnosti. Byla odeslána z její ordinace.
+
+Osobní anamnéza:
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka prodělala mrtvici.
+
+Fyzikální vyšetření:
+Vyšetřena při propuštění, cítila se dobře a její stav se zlepšil.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Životní funkce: bez horečky, stabilní při dýchání pokojovým vzduchem
+Celkový stav: při vědomí, bez známek utrpení
+Hlava, krk, uši, nos, hrdlo: vlhké sliznice
+Plíce: mírné chrůpky v dolní části pravého plíce
+Břicho: měkké, bez citlivosti
+
+Relevantní výsledky:
+LABORATORNÍ VÝSLEDKY PŘI PŘIJETÍ:
+Zvýšený počet bílých krvinek, normální elektrolyty.
+ZOBRAZENÍ:
+Rentgen hrudníku ukázal konsolidaci v dolní části pravého plíce.
+
+Průběh hospitalizace:
+Léčena pro pneumonii získanou v komunitě pomocí perorálních antibiotik, horečka ustoupila, postupně snižována podávání kyslíku a byla vyšetřena lékařem ___ před odchodem domů.
+
+Léky při přijetí:
+Amlodipin, levothyroxin
+
+Léky při propuštění:
+Pokračujte v užívání amlodipinu a levothyroxinu. Začněte užívat azithromycin po dobu pěti dnů. Paracetamol dle potřeby při horečce, vydán v lékárně ___.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Sekundární:
+Hypertenze, hypotyreóza
+
+Stav při propuštění:
+Dobrá
+Psychický stav: jasný a soustředěný
+Úroveň vědomí: při vědomí a vzhůru
+
+Pokyny při propuštění:
+Byla léčena pro pneumonii. Dokončete užívání všech antibiotik, pijte dostatek tekutin, odpočívejte a v případě zhoršení horečky nebo dušnosti se obraťte na ___ .
+
+Pokyny pro další sledování:
+___

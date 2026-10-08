@@ -1,0 +1,67 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bolest břicha a zvracení u ženy ve věku ___ let.
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Zavedení nasogastrické sondy.
+
+Předchozí zdravotní anamnéza:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidemie
+
+Předchozí chirurgická anamnéza:
+Apendektomie v ___
+Hysterektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s rakovinou tlustého střeva v ___
+
+Fyzikální vyšetření:
+Bez horečky, vitální funkce stabilní při běžném dýchání. Pacientka je v pohodě, při vědomí, bez známek utrpení. Srdce pravidelné, plíce čisté na obou stranách.
+Břicho: Měkké, mírně napjaté, bolestivé v dolních kvadrantech, bez rebound tenderness (bolesti při uvolnění tlaku).
+KONČETINY: Teplé, minimální otok kotníků, bez bolesti v lýtcích.
+
+Stručný průběh hospitalizace:
+Pacientka byla přijata z ___ s bolestmi břicha, napětím a zvracením. Zobrazovací vyšetření naznačovala částečnou obstrukci tenkého střeva. Chirurgický tým v ___ zavedl nasogastrickou sondu a pacientka byla ponechána bez perorálního příjmu. Byla podávána intravenózní tekutina s pečlivým sledováním elektrolytů. Funkce střev se vrátila třetí den hospitalizace, sonda byla odstranena a dieta byla postupně rozšiřována. Pacientku vyšetřil Dr. ___ a po zhodnocení, že pacientka toleruje běžnou stravu a její bolest je kontrolována perorálními léky, byla propuštěna.
+
+Léky při přijetí:
+Metformin, lisinopril, atorvastatin, furosemid, aspirin denně.
+
+Léky při propuštění:
+1. Acetaminophen 650 mg perorálně každých šest hodin dle potřeby na bolest.
+2. Metformin 500 mg perorálně dvakrát denně.
+3. Lisinopril 10 mg perorálně denně.
+4. Atorvastatin 20 mg perorálně večer.
+5. Furosemid 20 mg perorálně denně.
+6. Docusate 100 mg perorálně dvakrát denně.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární:
+Částečná obstrukce tenkého střeva
+Chronické onemocnění ledvin
+Srdeční selhání
+
+Stav při propuštění:
+Psychický stav: Jasný a srozumitelný.
+Úroveň vědomí: Při vědomí a komunikativní.
+Funkční stav: Chůze, soběstačná.
+
+Pokyny při propuštění:
+Byla jste hospitalizována kvůli obstrukci ve vašem tenkém střevě. Stav se zlepšil díky klidu střev a podávání tekutin. Jezte malé, časté porce a pijte hodně tekutin. Dva týdny se vyhýbejte zvedání těžkých předmětů. V případě zhoršení bolesti břicha, opakovaného zvracení, horečky nebo absence stolice nebo plynatosti se obraťte na pohotovost. V případě dotazů volejte na číslo ___ a dodržujte termín návštěvy u Dr. ___ v ___.
+
+Pokyny pro další péči:
+___

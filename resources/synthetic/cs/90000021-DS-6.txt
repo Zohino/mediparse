@@ -1,0 +1,80 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila na oddělení ___ s několika hodinami bušení srdce a závratěmi. Při příjmu byla zjištěna rychlá, nepravidelná srdeční frekvence a byla převezena z ___ pro další vyšetření a kontrolu srdeční frekvence. Pacientka uvedla mírnou dušnost, ale žádnou bolest na hrudi, synkopy ani horečku.
+
+Osobní anamnéza:
+Hypertenze
+Hypotyreóza
+Bez diabetu
+Cholecystektomie (odstranění žlučníku)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Nepravidelná srdeční frekvence, 120 tepů za minutu, pacientka v pohodě.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Pravidelná srdeční frekvence, pacientka vypadá dobře.
+HLAVA, OČI, OUSI, HRUDNÍK (HEENT):
+Vlhké sliznice.
+KRK:
+Pružný, bez jícnové dilatace (JVD).
+BŘÍCHO:
+Měkké, bez citlivosti.
+KONČETINY:
+Teplé, bez otoků.
+
+Významné výsledky:
+LABORATOŘ PŘI PŘIJETÍ:
+Negativní troponin dvakrát, normální TSH, draslík a hořčík v normě, kreatinin na základní úrovni dle ___.
+ZOBRAZENÍ:
+Rentgen hrudníku bez patologických nálezů.
+ZÁVĚR:
+Žádný akutní kardiopulmonální proces; echokardiogram provedený u ___ ukázal zachovalou ejekční frakci.
+
+Průběh hospitalizace:
+Pacientka byla přijata s nově vzniklou fibrilací síní s rychlou ventrikulární odpovědí. Srdeční frekvence byla kontrolována perorálním metoprololem po počáteční léčbě diltiazemem u ___. Antikoagulace byla zahájena po posouzení rizika krvácení. Telemetrie nevykazovala žádné pauzy. Pacientka zůstala stabilní a byla propuštěna s naplánovanou kontrolou u kardiologa provedenou ___ .
+
+Léky při přijetí:
+Lisinopril denně
+Levothyroxin denně
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg denně
+2. Apixaban 5 mg dvakrát denně
+3. Lisinopril 10 mg denně
+4. Levothyroxin 75 mcg denně
+
+Plán po propuštění:
+Domů s ___
+
+Diagnóza při propuštění:
+Fibrilace síní s rychlou ventrikulární odpovědí
+
+Stav při propuštění:
+Psychický stav: Jasný a srozumitelný.
+Úroveň vědomí: Vnímavá a komunikativní.
+Funkční stav: Chůze, soběstačná.
+
+Instrukce při propuštění:
+Byla jste hospitalizována kvůli nepravidelnému srdečnímu rytmu. Užívajte metoprolol a apixaban přesně podle předpisu. V případě bolesti na hrudi, mdloby, krvácení nebo bušení srdce se obraťte na lékaře. Dodržte termín vaší kontroly u ___.
+
+Pokyny pro další péči:
+___

@@ -1,0 +1,59 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacient se dostavil na oddělení ___ s třidenním produktivním kašlem, horečkou a bolestí hrudníku. Předtím byl vyšetřen v ambulanci ___ a dostal perorální antibiotika, ale bez zlepšení. Pacient byl přijat s horečkou a mírnou hypoxií; rentgen hrudníku ukázal konsolidaci v dolním laloku pravé plíce, a proto byl hospitalizován.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Gastroezofageální reflux
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav: Únavný, ale komfortní, mluví jasně a srozumitelně.
+Plíce: Krepitus v dolní části pravé plíce, bez sípání.
+EXTREMITETY: Bez otoků.
+KŮŽE: Teplá, suchá.
+PULZY: Palpovatelné a symetrické.
+
+Významné výsledky:
+Počet bílých krvinek zvýšený při přijetí, normalizující se při propuštění. Kreatinin v normě. Kultivace krve z ___ nevykazovala žádný růst. Rentgen hrudníku: opacita v dolním laloku pravé plíce, bez výpotku.
+
+Průběh hospitalizace:
+Léčba pneumonie získané v komunitě intravenózním ceftriaxonem a azithromycinem, poté přechod na perorální doxycyklin, jakmile horečka ustoupila. Podávání kyslíku bylo postupně snižováno, do třetího dne byl pacient na pokojovém vzduchu. Pacient byl vyšetřen plicním týmem v ___ a doporučeno opakované zobrazovací vyšetření za šest týdnů. Pacient byl propuštěn domů s ___ podporou.
+
+Léky při propuštění:
+Doxycyklin 100 mg dvakrát denně po dobu pěti dnů. Pokračovat v užívání lisinoprilu a atorvastatinu doma. Paracetamol dle potřeby; vyzvednout v lékárně ___ .
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární: Pneumonie získaná v komunitě
+
+Stav při propuštění:
+Psychický stav: Jasný a koherentní.
+Úroveň vědomí: Vnímavý a komunikativní.
+
+Instrukce při propuštění:
+Byl jste hospitalizován pro infekci plic. Dokončete užívání antibiotik, odpočívejte, pijte dostatek tekutin a vyhýbejte se kouření. V případě zhoršení dušnosti, horečky nebo bolesti hrudníku se vraťte. V případě dotazů volejte ___ .
+
+Následná péče:
+___

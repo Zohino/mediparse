@@ -1,0 +1,75 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let se dostavil s třemi dny kašle, horečky a bolesti hrudníku na pravé straně, která se zhoršovala. Byl převezen z ___ poté, co rentgen hrudníku ukázal pneumonii. Popírá palpitace, synkopy nebo fibrilaci síní. Symptomy se začaly objevovat ___ a zhoršovaly se i přes podávání perorálních antibiotik.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Bez anamnézy srdečního selhání
+Lékař: Dr. ___
+
+Chirurgická anamnéza:
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce:
+T 38,1 °C, srdeční frekvence 92 tepů/min, krevní tlak 128/76 mmHg, dechová frekvence 20, saturace kyslíkem 94 % při pokojovém vzduchu
+Celkový stav:
+Mírně nemocný vzhled
+Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Vlhké sliznice
+Krk:
+Pružný
+Neurologické vyšetření:
+Vědomý a orientovaný
+
+Významné výsledky:
+Počet bílých krvinek 13,2, hemoglobin 14,0, kreatinin 0,9, laktát 1,2. Kultivace krve provedená při přijetí nevykazovala žádný růst po pěti dnech.
+ZOBRAZENÍ:
+Rentgen hrudníku provedený ___ ukazuje konsolidaci v dolním laloku pravé plíce bez výpotku.
+
+Léky při přijetí:
+Lisinopril 10 mg denně; atorvastatin 20 mg večer.
+
+Léky při propuštění:
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů. Pokračujte v užívání lisinoprilu 10 mg denně. Pokračujte v užívání atorvastatinu 20 mg večer. Paracetamol dle potřeby při horečce.
+
+Plán po propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Hypertenze
+
+Stav při propuštění:
+Mentální stav:
+Srozumitelný a koherentní
+Funkční stav:
+Chůze, soběstačný
+
+Pokyny při propuštění:
+Byl vám poskytnut léčba pneumonie. Dokončete celý cyklus antibiotik, pijte dostatek tekutin a odpočívejte. V případě zhoršení dušnosti, přetrvávající horečky nebo bolesti hrudníku se vraťte a v případě dotazů volejte ___ .
+
+Pokyny pro další sledování:
+___

@@ -1,0 +1,65 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacient se dostavil na oddělení ___ s potížemi, které se zhoršovaly již dva dny: produktivní kašel, horečka a dušnost, což se objevilo po nedávné návštěvě ___. Při příjmu byly vitální funkce stabilní a bylo provedeno zobrazovací vyšetření hrudníku.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Možná fibrilace síní zaznamenána u ___, nikdy potvrzena
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Celkový stav: Pacient je v pohodě, bez akutních potíží.
+Oblast hlavy, očí, uší, nosu a krku (ORL): Vlhká sliznice.
+Plíce: Rozptýlené chrůpky, bez sípání.
+Srdce: Pravidelná frekvence a rytmus.
+
+Výsledky vyšetření:
+LABORATOŘ PŘED PROPUŠTĚNÍM: WBC 8.2, Hgb 13.1, Na 139, K 4.1, kreatinin 0.9, vše odebráno dne ___ před propuštěním.
+ZÁVĚR: Konsolidace v dolním laloku pravé plíce, odpovídající pneumonii, bez výpotku, interpretováno radiologem dne ___.
+
+Průběh hospitalizace:
+Pacient byl léčen pro pneumonii získanou v komunitě pomocí intravenózních antibiotik, poté byla léčba převedena na perorální formy. Podávání kyslíku bylo postupně snižováno, do třetího dne byl pacient schopen dýchat přirozeně. Horečka ustoupila a chuť k jídlu se zlepšila. Po propuštění byla domluvena kontrola u ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů.
+Pokračujte v užívání lisinoprilu a atorvastatinu ve stejné dávce.
+Paracetamol dle potřeby při horečce.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Hypertenze
+
+Stav při propuštění:
+Psychický stav: Pacient je při vědomí a orientovaný.
+Úroveň vědomí: Pacient je vzhůru a pozorný.
+Funkční stav: Pacient je pohyblivý a soběstačný.
+
+Pokyny při propuštění:
+Užívejte antibiotika až do konce, odpočívejte a pijte dostatek tekutin. V případě zhoršení dýchání, bolesti na hrudi nebo přetrvávající horečky se vraťte. Dodržujte všechny kontrolní prohlídky.
+
+Pokyny pro další péči:
+___

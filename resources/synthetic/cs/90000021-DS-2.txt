@@ -1,0 +1,83 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bušení srdce
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka, ve věku ___ let, se prezentovala s třemi dny trvajícím bušením srdce a závratěmi, které začaly ___. Byla poprvé vyšetřena na ___, poté byla převezena pro další léčbu arytmie. Popřela bolesti na hrudi, synkopy, horečku nebo nedávné onemocnění a uvedla problémy se spánkem.
+
+Osobní anamnéza:
+Fibrilace síní
+Hypertenze
+Hypotyreóza
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s mrtvicí. Otec s hypertenzí.
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacientka je v pohodě, bez známek utrpení.
+Krk:
+Pružný.
+Plíce:
+Čisté bilaterálně.
+Břicho:
+Měkké, bez citlivosti.
+Extremity:
+Bez otoků.
+Kůže:
+Teplá, suchá.
+Neurologické vyšetření:
+Orientovaná, bez fokálních příznaků.
+
+Významné výsledky:
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Sodík 139, draslík 4.2, kreatinin 0.8, hemoglobin 12.9, TSH normální. Troponin negativní dvakrát.
+ZÁVĚR:
+Echokardiogram z ___ ukázal zachovalou funkci komor, mírné zvětšení levé síně a žádné významné onemocnění chlopní. Rentgen hrudníku nevykazoval akutní proces.
+
+Průběh hospitalizace:
+Byla přijata na oddělení monitoringu a její srdeční frekvence byla kontrolována pomocí perorálního metoprololu. Antikoagulace byla zahájena po posouzení rizika týmem ___. Její příznaky ustoupily a zvládala chůzi bez obtíží. Byla propuštěna domů ve stabilním stavu třetí den hospitalizace, s naplánovanou kontrolou u kardiologa na ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levothyroxine 75 mcg denně
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg denně
+2. Apixaban 5 mg dvakrát denně
+3. Lisinopril 10 mg denně
+4. Levothyroxine 75 mcg denně
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Fibrilace síní
+
+Stav při propuštění:
+Psychický stav:
+Orientovaná a koherentní.
+Úroveň vědomí:
+Orientovaná a komunikativní.
+Funkční stav:
+Chůze, soběstačná.
+
+Instrukce při propuštění:
+Byla jste hospitalizována kvůli nepravidelnému srdečnímu tepu. Užívajte nové léky přesně podle předpisu, včetně léku na ředění krve. V případě mdloby, bolesti na hrudi, krvácení nebo trvalého zrychleného srdečního tepu se obraťte na lékaře. V případě dotazů volejte ___, nebo kontaktujte ambulanci na ___, pokud zapomenete užít dávku.
+
+Pokyny pro další péči:
+___

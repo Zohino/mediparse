@@ -1,0 +1,74 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž s několika dny bušení srdce a závratí, vyšetřen u svého praktického lékaře v ___ a odeslán na pohotovost. Popíral bolesti na hrudi nebo omdlévání. Příznaky se objevily po cestě do ___.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Vyšetření kardiologem v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s mrtvicí
+
+Fyzikální vyšetření:
+Nepravidelný puls, čisté plíce, žádný šelest.
+EXTREMITETY:
+Žádný otok, teplé a dobře prokrvené.
+
+Relevantní výsledky:
+EKG ukázalo nepravidelný, úzký komplex s frekvencí až 140. Troponin negativní dvakrát. Elektrolyty normální. Výsledky testů štítné žlázy bez odchylek. Echokardiogram provedený v ___ ukázal normální velikost srdce a zachovalou funkci.
+
+Průběh hospitalizace:
+Frekvence byla kontrolována perorálním metoprololem a příznaky ustoupily. Antikoagulace byla zahájena po posouzení rizik a poučení pacienta. Pacient byl vyšetřen kardiologem, který zajistil ambulantní monitorování prostřednictvím ___. Pacient chodil po oddělení bez příznaků a byl prohlášen za způsobilého k propuštění lékařem ___.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg denně
+2. Apixaban 5 mg dvakrát denně
+3. Lisinopril denně
+4. Atorvastatin večer
+
+Místo propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Fibrilace síní
+Sekundární:
+Hypertenze
+Hyperlipidemie
+
+Stav při propuštění:
+Stabilní.
+Psychický stav:
+Vědomý a orientovaný, jasné myšlení.
+Úroveň vědomí:
+Plně při vědomí a komunikativní.
+Aktivity:
+Chůze bez pomoci.
+
+Pokyny při propuštění:
+Byl jste přijat s rychlou, nepravidelnou srdeční frekvencí. Užívajte nové léky denně a nepřerušujte dávkování antikoagulancií. V případě omdlévání, bolesti na hrudi, krvácení nebo slabosti se vraťte. V případě jakýchkoli dotazů volejte ___.
+
+Pokyny pro další péči:
+___

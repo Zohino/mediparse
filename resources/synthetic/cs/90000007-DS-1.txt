@@ -1,0 +1,74 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Otok nohy a dušnost
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka, žena ve věku ___ let, s chronickými přidruženými onemocněními, se dostavila s postupně se zhoršujícím otokem nohy a dušností při námaze. Byla vyšetřena dne ___ a zjištěna přetížení tekutinami a zvýšená hladina kreatininu, byla přijata k hospitalizaci pro diurézu.
+
+Anamnéza minulých onemocnění:
+Diabetes mellitus 2. typu
+Chronické onemocnění ledvin, stádium 3
+Hypertenze
+Chirurgické odstranění žlučníku (cholecystektomie) v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Únavná, v klidu v pohodě
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Krk:
+Zvýšený jugulární venózní tlak (JVP)
+Břicho:
+Měkké, bezbolestné
+Extremity:
+Dvoustranný edém s jámy
+
+Významné výsledky:
+LABORATOŘ PŘI PŘIJETÍ:
+Kreatinin 2,4, urea 48, draslík 5,1, BNP výrazně zvýšen
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Kreatinin 1,8, urea 36, draslík 4,3
+ZÁVĚR:
+Rentgen hrudníku s plicní vaskulární kongescí a drobnými bilaterálními efuzemi
+
+Průběh hospitalizace:
+Diuréza pomocí intravenózní furosemidu, s úbytkem hmotnosti a zlepšením hladiny kreatininu oproti přijetí. Telemetrie ukázala fibrilaci síní s kontrolovanou frekvencí, byla zahájena antikoagulace. Dávkování léků pro ledviny bylo upraveno podle doporučení nefrologického oddělení. Pacientka byla propuštěna v normálním objemu tekutin a s perorálním diuretikem.
+PROBLÉMY PŘI PŘECHODU:
+Kontrola hladiny kreatininu a draslíku za jeden týden.
+
+Léky při přijetí:
+Metformin, lisinopril, amlodipin
+
+Plán po propuštění:
+Domů s péčí
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Chronické onemocnění ledvin
+Fibrilace síní
+
+Stav při propuštění:
+Stabilní a zlepšený
+Úroveň vědomí:
+Orientovaná a komunikativní
+Úroveň aktivity:
+Chůze s pomocí chodítka
+
+Pokyny při propuštění:
+Vážete se každé ráno a volejte, pokud přiberete více než 1,4 kg. Omezte příjem soli a tekutin. Užíváte léky podle předpisu. Navštivte svou ordinaci v ___ do jednoho týdne.

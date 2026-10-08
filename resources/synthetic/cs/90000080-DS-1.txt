@@ -1,0 +1,65 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická appendektomie (odstranění slepého střeva)
+
+Anamnéza současného onemocnění:
+Pacientka, ve věku ___ let, se dostavila na oddělení ___ s bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou, doporučena lékařem po domácí léčbě, která nepřinesla zlepšení.
+
+Předchozí zdravotní problémy:
+Hypotyreóza (snížená funkce štítné žlázy), diagnostikována ___
+Hypertenze (vysoký krevní tlak)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: pohodlná, při vědomí
+Krk: pružný
+Břicho: bolestivý pravý dolní kvadrant, měkké
+KONČETINY: teplé, bez otoků
+KŮŽE: neporušená, rány čisté
+
+Významné výsledky:
+Počet bílých krvinek zvýšen při přijetí, normalizoval se při propuštění. CT vyšetření břicha ukázalo zánětlivé, rozšířené slepé střevo s otokem okolní tukové tkáně.
+ZÁVĚR:
+Nález odpovídá akutnímu zánětu slepého střeva, bez perforace.
+
+Průběh hospitalizace:
+Pacientka byla vyšetřena chirurgickým týmem ___ a dne ___ byla operována v operačním sále, kde jí byla provedena laparoskopická appendektomie bez komplikací. Byla jí postupně zaváděna pevná strava, bolest byla kontrolována perorálními léky a při propuštění byla bez horečky a chodila samostatně.
+
+Léky při přijetí:
+Levothyroxin
+Lisinopril
+
+Léky při propuštění:
+Levothyroxin denně, jako předtím. Lisinopril denně, jako předtím. Paracetamol dle potřeby na bolest. Docusate dvakrát denně při užívání silnějších léků proti bolesti.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní zánět slepého střeva
+Hypotyreóza
+Hypertenze
+
+Stav při propuštění:
+Úroveň aktivity: chodící, samostatná
+
+Pokyny při propuštění:
+Byla vám odstraněna slepé střevo. Udržujte rány čisté a suché, vyhýbejte se těžkému zvedání břemen po dobu několika týdnů a volejte ___ v případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí rány.
+
+Pokyny pro další péči:
+___

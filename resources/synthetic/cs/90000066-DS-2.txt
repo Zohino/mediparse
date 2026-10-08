@@ -1,0 +1,73 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel, horečka, dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka je žena, která se dostavila na oddělení ___ s třechdenním zhoršováním kašle, horečky a dušnosti po kontaktu s nemocným příbuzným. Byla vyšetřena na oddělení ___ den předtím a odeslána na pohotovost. Rentgenové vyšetření hrudníku ukázalo ztmavení v dolní části pravého plíce. Byla přijata pro pneumonii s hypoxií.
+
+Osobní anamnéza:
+Astma
+Hypertenze
+Žádné srdeční selhání
+
+Chirurgická anamnéza:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce: T 38,1 °C, srdeční frekvence 98 úderů/min, krevní tlak 128/76 mmHg, dechová frekvence 22 nádechů/min, saturace kyslíkem 92 % při dýchání okolním vzduchem.
+Celkový stav: Pacientka vypadá nemocně, mírně ustaraně.
+Plíce: Krepitus v dolní části pravé plíce.
+Extremity: Teplé, bez otoků.
+
+Významné výsledky:
+Při přijetí: Počet bílých krvinek 14,2 s převahou neutrofilů, laktát normální. Kreatinin na základní úrovni. Kultivace krve odebraná ___ nevykazovala žádný růst. Rentgen hrudníku byl probrán s radiologem.
+ZÁVĚR: Konsolidace v dolní části pravé plíce, odpovídající pneumonii, bez pleurálního výpotku.
+
+Průběh hospitalizace:
+Byla léčena pneumonií získanou mimo nemocnici pomocí ceftriaxonu a azithromycinu, a podávání kyslíku bylo postupně snižováno, až do dýchání okolním vzduchem druhý den. Horečka ustoupila. Její astma zůstalo kontrolované pomocí inhalačního léku, který užívá doma. Byla vyšetřena lékařem ___ a propuštěna domů. Její ošetřující lékař na oddělení ___ byl informován.
+PROBLÉMY PŘI PŘECHODU:
+Opakované rentgenové vyšetření hrudníku za šest týdnů k potvrzení zlepšení, zajištěno prostřednictvím ___.
+
+Léky při přijetí:
+Inhalační sprej s albuterolem dle potřeby
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů
+Inhalační sprej s albuterolem dvě dávky každé čtyři hodiny dle potřeby
+Lisinopril 10 mg denně
+Paracetamol 500 mg každých šest hodin dle potřeby při horečce
+
+Stav při propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pneumonie získaná mimo nemocnici
+Hypoxie
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Vnímavá a komunikativní
+Funkční stav: Chůze, soběstačná
+
+Pokyny při propuštění:
+Byla hospitalizována pro infekci plic a léčena antibiotiky. Dokončete celý předepsaný cyklus antibiotik. Odpočívejte, pijte dostatek tekutin a volejte ___ v případě, že se objeví horečka, bolest na hrudi nebo se zhorší dýchání. V případě zhoršení symptomů se obraťte na ___ . Dodržte schůzku s doktorem ___ příští týden.
+
+Následná péče:
+___

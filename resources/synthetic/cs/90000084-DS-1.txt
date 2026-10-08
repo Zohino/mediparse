@@ -1,0 +1,66 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická appendektomie (odstranění slepého střeva)
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let byl převezen z ___ s bolestí v pravém dolním kvadrantu břicha, která se zhoršovala po dobu jednoho dne, s nauzeou a mírnou horečkou. Bolest začala v okolí pupíku dne ___ a postupně se šířila. Pacient popírá cukrovku, zvracení krve nebo změny v stolici. CT vyšetření prokázalo akutní zánět slepého střeva.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Sezónní alergická rýma
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s polypy v tlustém střevě
+
+Fyzikální vyšetření:
+Fyzikální vyšetření při přijetí:
+Celkový stav: nepohodlný, při vědomí, leží v klidu
+Hlava, oči, uši, nos, krk: vlhké sliznice
+Břicho: bolestivý pravý dolní kvadrant, svalové napětí, bez odrazové bolesti
+Kůže: teplá, suchá
+Neurologické vyšetření: hrubě v pořádku, bez lokalizovaných abnormalit
+
+Důležité výsledky:
+CT vyšetření břicha a pánve provedené dne ___: rozšířený slepý střevo o průměru 11 mm se zesílenou stěnou a infiltrací okolního tuku, bez abscesu nebo volného vzduchu. Po přijetí zvýšený počet bílých krvinek (14,2), normální hladiny elektrolytů a kreatininu. Histologické vyšetření prokázalo akutní zánět slepého střeva bez perforace.
+
+Průběh hospitalizace:
+Pacient byl přijat na chirurgické oddělení a zahájena intravenózní antibiotika. Byl operován Dr. ___ dne ___ v rámci nekomplikované laparoskopické appendektomie. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a pacient měl normální stolici. Rány zůstaly čisté a suché. Byl propuštěn domů ve stabilním stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg tableta perorálně denně.
+2. Acetaminophen 650 mg každých šest hodin dle potřeby na bolest.
+3. Docusate 100 mg dvakrát denně při užívání opioidů.
+4. Oxykodon 5 mg každých šest hodin dle potřeby při silné bolesti.
+
+Plán po propuštění:
+Domů, kontrola v ambulanci ___
+
+Diagnóza při propuštění:
+Hlavní: Akutní zánět slepého střeva
+
+Stav při propuštění:
+Psychický stav: jasný a srozumitelný
+Úroveň vědomí: při vědomí a komunikativní
+Funkční stav: pohyblivý, soběstačný
+
+Pokyny při propuštění:
+Byl Vám proveden zákrok na zánět slepého střeva pomocí laparoskopické chirurgie. Udržujte rány čisté a suché a zvedejte váhu nepřesahující 4,5 kg po dobu čtyř týdnů. Užívajte léky proti bolesti pouze dle potřeby. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí v místě řezů volejte na číslo ___ na telefonním čísle ___.
+
+Pokyny pro kontrolu:
+___

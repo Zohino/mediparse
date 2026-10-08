@@ -1,0 +1,75 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha.
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická appendektomie (odstranění slepého střeva) dne ___.
+
+Anamnéza současného onemocnění:
+Žena ve věku ___ let s hypertenzí a hyperlipidémií, která se dostavila na oddělení ___ s bolestmi v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou, které trvaly tři dny. Bolest začala po večeři dne ___ a postupně se zhoršovala, lokalizujíc se na pravou stranu. Pacientka popírala zvracení, průjem, problémy s močením nebo vaginální krvácení. Byla vyšetřena lékařem ___ na pohotovosti, kde CT vyšetření ukázalo zánět slepého střeva bez perforace. Byla převezena z ___ za účelem chirurgického vyšetření a zahájena intravenózní antibiotická léčba a infuze. Bolest se zlepšila po podání analgetik a její hemodynamický stav zůstal stabilní.
+
+Osobní anamnéza:
+Diabetes mellitus 2. typu, dále ___
+Hypertenze
+Hyperlipidémie
+Hysterektomie (odstranění dělohy) v roce ___.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Významná rodinná anamnéza fibrilace síní u matky. Otec s hypertenzí.
+
+Fyzikální vyšetření:
+Životní funkce: T 98.4 °C, HR 72 tepů/min, BP 128/76 mmHg, RR 16 dechů/min, SpO2 98% při pokojovém vzduchu.
+Celkový stav: Dobrý vzhled, bez známek úzkosti.
+Krk: Pružný, bez zvětšených lymfatických uzlin.
+Plíce: Čisté bilaterálně.
+SRDEČNÍ: Pravidelná frekvence a rytmus, bez šelestů.
+BŘÍCHO: Měkké, mírná bolestivost v místě jizev, rány čisté a suché.
+KONČETINY: Teplé, bez otoků.
+Neurologické vyšetření: Při vědomí, orientovaná, pohybuje všemi končetinami.
+
+Významné výsledky:
+Laboratorní výsledky při přijetí: Počet bílých krvinek 14,2 s převahou neutrofilů. Biochemické testy a jaterní enzymy v normě. Laktát 1,1. Vyšetření moči negativní na infekci. Test na těhotenství v moči negativní.
+CT vyšetření břicha a pánve dne ___: Dilatovaný slepý střevo o velikosti 11 mm s infiltrací tukové tkáně kolem slepého střeva, bez abscesu, volné tekutiny nebo vzduchu. Zbytek vyšetření bez zvláštností.
+Histopatologické vyšetření z ___: Akutní appendicitida (zánět slepého střeva) bez perforace, bez nálezu neoplastických změn.
+LABORATORNÍ VÝSLEDKY PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek 7,8, hemoglobin 12,6, hematokrit 38,1, krevní destičky 254, sodík 139, draslík 4,1, chloridy 103, bikarbonáty 25, urea 12, kreatinin 0,7, glukóza 112.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně, lisinopril 10 mg denně, atorvastatin 20 mg večer, aspirin 81 mg denně. Seznam léků ověřen lékařem v lékárně ___.
+
+Léky k užívání po propuštění:
+1. Paracetamol 650 mg perorálně každých šest hodin dle potřeby při bolesti, maximálně 3 gramy denně.
+2. Oxykodon 5 mg perorálně každých šest hodin dle potřeby při silné bolesti, pouze krátkodobě.
+3. Docusát 100 mg dvakrát denně během užívání opioidů.
+4. Metformin 500 mg dvakrát denně s jídlem.
+5. Lisinopril 10 mg jednou denně.
+6. Atorvastatin 20 mg před spaním.
+7. Aspirin 81 mg jednou denně.
+
+Plán po propuštění:
+Domů, s naplánovanou ambulantní kontrolou u ____.
+
+Diagnóza při propuštění:
+Akutní zánět slepého střeva, po laparoskopické operaci odstranění slepého střeva.
+Hypertenze (vysoký krevní tlak).
+Hyperlipidemie (zvýšená hladina tuků v krvi).
+
+Stav při propuštění:
+Dobrý. Pacient snáší běžnou stravu, bolest je kontrolována perorálními léky.
+Úroveň vědomí: Pacient je při vědomí a komunikativní.
+
+Pokyny po propuštění:
+Byli jste přijati s zánětem slepého střeva a podstoupili jste laparoskopickou operaci k odstranění slepého střeva. Můžete se osprchovat, ale nekoupejte se v vaně ani v bazénu. Vyhýbejte se těžkému zvedání břemen po dobu ___ týdnů. Chůze je doporučena denně a zvyšujte aktivitu podle tolerance. Během užívání oxykodonu neřiďte. V případě horečky nad 38 °C, zhoršující se bolesti břicha, opakovaného zvracení, zarudnutí nebo výtoku z řezných ran, nebo neschopnosti jíst a pít, kontaktujte chirurgickou ambulanci na čísle ___ nebo se obraťte na pohotovost. Lékař ___ zkontroluje Vaši ránu. Prosím, informujte svého praktického lékaře na adrese ___ o této hospitalizaci.
+
+Pokyny pro další péči:
+___

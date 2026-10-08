@@ -1,0 +1,79 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Hyperglykémie a únava
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka, žena ve věku ___ let, udává několik dní trvající žízeň, únavu a časté močení. Byla odeslána z ___ poté, co domácí měření hladiny glukózy zůstala i přes obvyčnou léčbu velmi vysoká.
+
+Osobní anamnéza:
+Diabetes mellitus
+Hypertenze
+Hyperlipidemie
+
+Chirurgická anamnéza:
+Chirurgické odstranění žlučníku v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacientka je v pohodě, bez známek utrpení.
+Krk:
+Flexibilní.
+Plíce:
+Čisté při poslechování na obou stranách.
+Břicho:
+Měkké, bez citlivosti.
+EXTREMITY (končetiny):
+Bez otoků.
+KŮŽE:
+Teplá, suchá.
+
+Významné výsledky:
+LABORATORNÍ VÝSLEDKY PŘI PROPUŠTĚNÍ:
+Hladina glukózy se zlepšila a je téměř v normě, elektrolyty jsou v normálních hodnotách.
+ZOBRAZENÍ:
+Rentgen hrudníku bez akutních nálezů.
+
+Průběh hospitalizace:
+Pacientce byly podávány tekutiny a inzulin, což vedlo k postupnému zlepšení hladiny glukózy a symptomů. Její léčebný režim byl upraven lékařským týmem a před propuštěním byla provedena edukace o diabetu.
+
+Léky při přijetí:
+Metformin, lisinopril, atorvastatin.
+
+Léky při propuštění:
+Metformin dvakrát denně, inzulin glargin večer, lisinopril denně, atorvastatin večer. Byly poskytnuty potřebné pomůcky pro měření hladiny glukózy.
+
+Plán po propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Diabetes.
+
+Stav při propuštění:
+Mentální stav:
+Orientovaná a při vědomí.
+Úroveň vědomí:
+Plně při vědomí.
+Aktivity:
+Chůze samostatná.
+
+Instrukce při propuštění:
+Byla léčena pro velmi vysokou hladinu cukru v krvi. Měřte hladinu glukózy před jídlem, užívejte léky podle pokynů a volejte ___ v případě, že hladina glukózy zůstává vysoká nebo se symptomy vrátí, a co nejdříve navštivte ___ .
+
+Pokyny pro další péči:
+___

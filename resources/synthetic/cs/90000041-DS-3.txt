@@ -1,0 +1,65 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Oddělení: Kardiologie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Zásahy:
+Žádné.
+
+Anamnéza:
+Pacientka je žena, která se dostavila na oddělení ___ s několika dny trvajícími občasnými bušením srdce, závratěmi a mírnou dušností při námaze. Příznaky se začaly objevovat po cestě do ___ a zhoršily se ráno při přijetí. Popřela bolesti na hrudi, ztrátu vědomí nebo horečku. Na pohotovosti byl její srdeční tep nepravidelný a rychlý a byla monitorována pomocí telemetrie. Byla odeslána jejím praktickým lékařem, Dr. ___, a přijata k hospitalizaci pro regulaci srdeční frekvence a další vyšetření.
+
+Osobní anamnéza:
+Hypertenze, hyperlipidemie, hypotyreóza, po operaci žlučníku v ___.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Bratr léčen v ___ pro onemocnění štítné žlázy.
+
+Fyzikální vyšetření:
+Celkový stav: Pacientka vypadá dobře, nemá žádné akutní potíže, je při vědomí, komunikuje a orientuje se.
+Hlava, oči, uši, nos, hrdlo: Normální tvar hlavy, bez traumat, vlhké sliznice, bez žloutenky.
+Krk: Pružný, bez jícnové dilatace, bez zvětšených lymfatických uzlin.
+Plíce: Při poslechu čisté bilaterálně.
+Břicho: Měkké, bez citlivosti, bez distenze, normální peristaltika.
+
+Významné výsledky:
+Laboratorní výsledky při přijetí ukazují normální hodnoty elektrolytů a normální hladinu hormonu stimulujícího štítnou žlázu. Troponin negativní dvakrát. Hladina hemoglobinu stabilní až do propuštění. EKG při příjmu ukázalo nepravidelný rytmus s úzkým komplexem a rychlou srdeční frekvencí; opakované EKG po léčbě ukázalo regulovanou frekvenci. Rentgen hrudníku: bez akutních kardiopulmonálních změn. Echokardiogram provedený v ___ ukázal normální ejekční frakci a žádné významné onemocnění chlopní. Výsledky byly prodiskutovány s kardiologickým oddělením, Dr. ___.
+
+Průběh hospitalizace:
+Byla přijata na oddělení telemetrie a zahájena léčba metoprololem, což vedlo k dobré regulaci srdeční frekvence. Kardiologické oddělení ji vyšetřilo a doporučilo zahájení léčby antikoagulancii po výpočtu skóre rizika mrtvice. Funkce štítné žlázy a elektrolyty byly v normě a nebyl identifikován žádný reverzibilní spouštěč. Byla hemodynamicky stabilní a příznaky ustoupily do druhého dne hospitalizace. Byla poučena o opatrnosti při užívání léků zvyšujících krvácivost farmaceutem v ___. Její praktický lékař v ___ byl telefonicky informován. Byla domluvena kontrola v ambulanci v ___.
+PROBLÉMY PŘECHODU:
+- Zkontrolovat srdeční frekvenci a krevní tlak při první návštěvě; upravit dávku metoproolu.
+- Potvrdit dodržování léčby antikoagulancii a zkontrolovat funkci ledvin a krevní obraz za ___ týdnů.
+
+Léky při přijetí:
+Lisinopril 10 mg denně, atorvastatin 20 mg večer, levothyroxin 75 mcg denně, ibuprofen dle potřeby.
+
+Léky k užívání po propuštění:
+1. Metoprolol (sukcinát) 50 mg perorálně jednou denně.
+2. Apixaban 5 mg perorálně dvakrát denně.
+3. Lisinopril 10 mg perorálně jednou denně.
+4. Atorvastatin 20 mg perorálně večer.
+5. Levothyroxin 75 mcg perorálně jednou denně.
+6. Přerušte užívání ibuprofenu; vyhýbejte se nesteroidním protizánětlivým látkám (NSAID) během užívání apixabanu.
+
+Plán po propuštění:
+Domů s péčí poskytované organizací ___.
+
+Diagnóza při propuštění:
+Fibrilace síní s rychlou ventrikulární odpovědí.
+
+Stav při propuštění:
+Úroveň vědomí: Přítomný a komunikativní.
+Úroveň aktivity: Chůze, soběstačný.
+
+Pokyny po propuštění:
+Byli jste hospitalizováni kvůli rychlému a nepravidelnému srdečnímu tepu. Vaše srdeční frekvence byla regulována pomocí léků a byla zahájena léčba antikoagulancii ke snížení rizika mrtvice. Užívajte všechny léky podle předpisu a nepřestávejte je užívat. V případě bolesti na hrudi, mdloby, krvácení nebo černých stolice volejte číslo ___ nebo se obraťte na pohotovost. Prosím, dodržujte termín vaší návštěvy u doktora ___.
+
+Pokyny pro další péči:
+___

@@ -1,0 +1,75 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Produktivní kašel a horečka
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka byla odeslána jejím praktickým lékařem dne ___, po čtyřech dnech produktivního kašle, horečky a zhoršující se dušnosti. Uváděla zimnici a sníženou chuť k jídlu. Byla nejprve vyšetřena na ___, kde rentgenové vyšetření hrudníku ukázalo ztmavení v dolní části pravého plíce, a byla převezena sem.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Osteoartróza, sledována na ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka prodělala mrtvici. Otec trpěl srdečními chorobami, léčen na ___.
+
+Fyzikální vyšetření:
+Celkový stav:
+Únavná, v klidu v pohodě.
+PLÍCE:
+Praskání v dolní části pravého plíce.
+BŘÍCHO:
+Měkké, bez citlivosti.
+KONČETINY:
+Bez otoků.
+KŮŽE:
+Teplá, suchá.
+
+Významné výsledky:
+LABORATOŘ PŘI PŘIJETÍ:
+Počet bílých krvinek zvýšený (14). Kreatinin 2,1, blízko základní hodnoty. Glukóza 212. Laktát normální. Rentgen hrudníku provedený dne ___ ukázal ztuhnutí v dolní části pravého plíce bez výpotku.
+
+Průběh hospitalizace:
+Léčena pro pneumonii získanou mimo nemocnici pomocí azithromycinu a ceftriaxonu, dobře tolerováno i přes uvedenou alergii, poté převedena na perorální antibiotika. Její chronické onemocnění ledvin bylo stabilní, s nezměněným kreatininy, takže dávky byly upraveny. Diabetes byl kontrolován pomocí inzulinové terapie. Podávání kyslíku bylo postupně snižováno a pacientka chodila samostatně od ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Metformin 500 mg dvakrát denně
+
+Léky při propuštění:
+1. Azithromycin 250 mg denně po dobu tří dalších dnů
+2. Atorvastatin 20 mg večer
+3. Metformin 500 mg dvakrát denně
+4. Lisinopril vysazen do doby, než budou zkontrolovány výsledky laboratorních testů
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie získaná mimo nemocnici
+Diabetes
+
+Stav při propuštění:
+Úroveň vědomí: Přítomná a orientovaná.
+Úroveň aktivity: Samostatná, pohyblivá bez pomoci.
+
+Pokyny při propuštění:
+Byla léčena pro infekci plic. Dokončete veškerá antibiotika a pijte dostatek tekutin. V případě horečky, zhoršující se dušnosti nebo bolesti na hrudi volejte na číslo ___ nebo se obraťte na pohotovost. Nezačínejte užívat lisinopril, dokud vám to váš lékař na ___ neřekne.
+
+Pokyny pro další péči:
+___

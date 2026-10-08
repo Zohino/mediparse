@@ -1,0 +1,70 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Kašel, horečka, dušnost
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacient je muž, který se dostavil na oddělení ___ s třidenním produktivním kašlem, horečkou a zhoršující se dušností. Byl vyšetřen jeho praktickým lékařem, Dr. ___, který ho odeslal na pohotovost. Při příjezdu měl horečku a nízkou saturaci kyslíkem (kolem 90 %) při dýchání okolního vzduchu. Rentgen hrudníku ukázal zánět v dolní části pravého plicního laloku a byl přijat do nemocnice.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Diabetes mellitus 2. typu
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Životní funkce: T 99,1, HR 82, BP 128/76, RR 16, SpO2 96 % při dýchání okolního vzduchu
+Celkový stav: klidný, bez známek utrpení
+Hlava, krk, uši, nos, hrdlo: vlhké sliznice
+Plíce: chrůpky v dolní části pravého plicního laloku
+Břicho: měkké, bez citlivosti
+Extremity: teplé, bez otoků
+Neurologický stav: při vědomí, bez fokálních příznaků
+
+Výsledky vyšetření:
+Laboratorní výsledky z ___ ukázaly: leukocyty 13,2 s převahou neutrofilů, kreatinin 0,9 a glukózu 168. Kultivace krve nevykazovala žádný růst. Rentgen hrudníku byl pořízen při přijetí a znovu před propuštěním.
+ZÁVĚR: Pneumonie v dolní části pravého plicního laloku, zlepšení průsvitnosti plicního parenchymu ve srovnání s předchozím snímkem, bez výpotku.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Metformin 500 mg dvakrát denně
+
+Léky při propuštění:
+1. Levofloxacin 750 mg perorálně jednou denně po dobu čtyř dalších dnů.
+2. Lisinopril 10 mg denně.
+3. Atorvastatin 20 mg večer.
+4. Metformin 500 mg dvakrát denně při jídle.
+5. Acetaminophen 650 mg každých šest hodin dle potřeby při horečce.
+
+Plán po propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Primární: Pneumonie získaná v komunitě
+Sekundární: Hypertenze, hyperlipidemie
+
+Stav při propuštění:
+Stabilní, bez horečky, normální saturace kyslíkem při dýchání okolního vzduchu.
+Funkční stav: pohyblivý, soběstačný
+
+Pokyny při propuštění:
+Byl vám poskytnut v nemocnici lék na pneumonii a podpora tekutinami. Dokončete celou kúru levofloxacinu a pijte dostatek tekutin. Odpočívejte dle potřeby a postupně zvyšujte aktivitu. Dodržte schůzku s Dr. ___ a v případě dotazů volejte na číslo ___. V případě horečky, zhoršující se dušnosti, bolesti na hrudi nebo zmatenosti se vraťte na ___ .
+
+Pokyny pro další sledování:
+___

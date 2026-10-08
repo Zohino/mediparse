@@ -1,0 +1,68 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bolest v pravém boku a horečka
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Žena s bolestí v pravém boku, horečkou a obtížemi při močení trvajícími tři dny, odeslána z ambulance ___ . Léčena pro pyelonefritidu intravenózními antibiotiky, stav se zlepšil.
+
+Osobní anamnéza:
+Hypertenze
+Opakované infekce močových cest
+Hypotyreóza, sledována v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Orientovaná, bez horečky při propuštění, mírná bolestivost v pravém boku.
+ORL:
+Vlhké sliznice
+PLÍCE:
+Čisté bilaterálně
+BŘÍCHO:
+Měkké, bez bolestivosti
+KONČETINY:
+Bez otoků
+NEUROLOGIE:
+Bez fokálních příznaků
+
+Relevantní výsledky:
+Analýza moči ukázala přítomnost leukocytů a bakterií. Kultivace moči prokázala přítomnost E. coli, citlivou na ceftriaxon. CT vyšetření provedené v ___ neprokázalo žádnou obstrukci ani absces.
+
+Léky při přijetí:
+Lisinopril denně
+Levothyroxin denně
+
+Léky při propuštění:
+Cefpodoxim dvakrát denně po dobu sedmi dnů. Pokračujte v užívání lisinoprilu a levothyroxinu jako doposud. Acetaminophen dle potřeby na bolest.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní pyelonefritida
+Infekce močových cest způsobená E. coli
+
+Stav při propuštění:
+Dobrý, toleruje perorální příjem.
+Aktivity:
+Chůze, soběstačná
+
+Instrukce při propuštění:
+Byla vám poskytnuta léčba infekce ledvin. Dokončete užívání všech antibiotik, pijte dostatek tekutin a v případě horečky, zvracení nebo zhoršení bolesti se vraťte. V případě dotazů volejte ___ .
+
+Pokyny pro další sledování:
+___

@@ -1,0 +1,72 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost a otoky nohou
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka je žena s chronickým onemocněním ledvin a srdečním selháním, která se dostavila na oddělení ___ s třemi dny zhoršující se dušnosti, ortopnoe (dušnosti vleže) a oboustranných otoků nohou poté, co jí došel diuretikum. Byla poprvé vyšetřena na oddělení ___ dne ___ a následně převezena sem k dalšímu ošetření. Popřela bolesti na hrudi, horečku nebo kašel.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+Osteoartróza (degenerativní onemocnění kloubů)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce: T 98,2, HR 78, BP 130/74, RR 18, SpO2 96 % při pokojovém vzduchu
+Celkový stav: Komfortní, bez akutní tíže
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Břicho: Měkké, bez citlivosti
+Extremity: Lehký otok kotníků
+Kůže: Teplá a suchá
+Neurologické vyšetření: Vědomá, bez fokálních příznaků
+
+Výsledky vyšetření:
+Laboratorní výsledky při přijetí ukázaly zvýšenou hladinu BNP (biochemický marker srdečního selhání) s kreatininem blízko základní hodnoty a normální hodnoty elektrolytů. Rentgen hrudníku pořízený dne ___ ukázal mírnou kongesci plicních cév a malé oboustranné výpotky. Echokardiografické snímky byly zkontrolovány kardiologickým týmem, formální zpráva je v přípravě.
+ZÁVĚR: Mírná plicní kongestce bez fokální konsolidace (zánětu).
+
+Průběh hospitalizace:
+Byla přijata s přetížení tekutinami a léčena intravenózním furosemidem, s dobrým diurézou a postupným zlepšením dýchání. Její váha klesla a potřeba kyslíku se vyřešila. Funkce ledvin zůstala stabilní. Její domácí režim byl upraven a byla konzultována nutričním poradcem a ___ ohledně stravy před propuštěním do ___.
+PROBLÉMY PŘI PŘECHODU:
+- Kontrola základních metabolických parametrů do jednoho týdne na oddělení ___.
+- Denní měření váhy; kontaktujte nás v případě, že váha vzroste o více než 1,4 kg (3 libry).
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Furosemide 20 mg denně
+
+Léky při propuštění:
+1. Furosemide 40 mg perorálně denně, dávka zvýšena o ___
+2. Lisinopril 10 mg perorálně jednou denně
+3. Atorvastatin 20 mg perorálně každé večer před spaním
+4. Acetaminophen 500 mg perorálně dle potřeby při bolesti kloubů
+
+Propouštěcí režim:
+Domů s péčí
+Zařízení: ___
+
+Stav při propuštění:
+Psychický stav: Jasný a srozumitelný
+Úroveň vědomí: Vědomá a komunikativní
+Funkční stav: Chůze, samostatná, používá chodítko pro delší vzdálenosti.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni, protože se ve vašem těle hromadila tekutina, což ztěžovalo dýchání. Přebytečnou tekutinu jsme odstranili pomocí léků. Každé ráno se vážte, omezte příjem soli a užívejte léky podle pokynů. V případě zhoršení dušnosti, otoků nebo přibírání na váze volejte lékaři Dr. ___ na telefonní číslo ___.
+
+Pokyny pro další péči:
+___

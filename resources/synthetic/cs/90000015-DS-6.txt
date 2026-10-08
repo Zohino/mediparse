@@ -1,0 +1,63 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Žena s diagnostikovaným srdečním selháním, odeslána z ___ s obtížemi, které se zhoršovaly po dobu dvou týdnů, včetně dušnosti, ortopnoe (dušnosti vleže) a otoků nohou, způsobených vynecháváním dávek léků.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+Osteoartróza (degenerativní onemocnění kloubů)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Pacientka je v pohodě, bez známek utrpení.
+Krk: Zvýšený jugulární venózní tlak (JVP).
+Břicho: Měkké, bez citlivosti.
+EXTREMITY (končetiny): Bilaterální edém (otek) s jámy.
+KŮŽE: Teplá, suchá.
+Neurologické vyšetření: Pacientka je při vědomí, bez fokálních příznaků.
+
+Výsledky vyšetření:
+Laboratorní výsledky při přijetí ukázaly zvýšenou hladinu BNP (biochemický marker srdečního selhání) a kreatininu nad základní hodnotu. Rentgen hrudníku provedený v ___ prokázal plicní vaskulární kongesci (nádor).
+ZÁVĚR:
+Lehká bilaterální efúze (tekutina v plicích).
+
+Průběh hospitalizace:
+Pacientka byla diureticky léčena intravenózním furosemidem, což vedlo k dobré reakci a ústupu otoků. Funkce ledvin zůstala stabilní vzhledem k její chronické ledvinové chorobě. Propouštěna v hmotnosti ___ kg.
+
+Léky při přijetí:
+Lisinopril, furosemid, atorvastatin.
+
+Léky při propuštění:
+Furosemid 40 mg denně, lisinopril 5 mg denně, atorvastatin 20 mg večer. Kontaktujte ___ ohledně dávkování.
+
+Plán po propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Primární: Kongestivní srdeční selhání.
+Sekundární: Chronická ledvinová choroba.
+
+Stav při propuštění:
+Psychický stav: Jasný a koherentní.
+Úroveň vědomí: Při vědomí a komunikativní.
+
+Pokyny při propuštění:
+Vážete se každé ráno, omezte příjem soli a tekutin, užívejte léky podle předpisu a v případě zhoršení dušnosti nebo otoků se vraťte.

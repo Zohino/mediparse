@@ -1,0 +1,67 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž s chronickým onemocněním ledvin a fibrilací síní byl přijat do ___ s několika dny zhoršujícího se otoku nohou, dušnosti při námaze, přibírání na váze a ortopnoe; byl převezen z ___ pro další diurézu.
+
+Anamnéza:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav: Pacient je v pohodě, bez známek utrpení.
+Krk: Zvýšený jugulární venózní tlak.
+Plíce: Krepitace v obou plicních bázích.
+SRDEČNÍ: Nepravidelný srdeční rytmus.
+EXTREMITY: Edém 2+.
+KŮŽE: Teplá, suchá.
+
+Významné výsledky:
+LABORATOŘ PŘI PŘIJETÍ: Výrazně zvýšený BNP, kreatinin 2,1, draslík 4,5, glukóza 188.
+LABORATOŘ PŘI PROPUŠTĚNÍ: Kreatinin 1,9, draslík 4,2.
+ZÁVĚR: Plicní vaskulární kongestivní stav s kardiomegalií a drobnými bilaterálními efuzemi.
+
+Průběh hospitalizace:
+Diuréza intravenózním furosemidem k dosažení normálního objemu tekutin, konzultace s ___ ohledně kontroly srdeční frekvence a antikoagulace. Glukóza byla kontrolována inzulinem. Pacient byl převeden na perorální diuretikum a propuštěn ve stabilním stavu po ___.
+PROBLÉMY PŘI PŘECHODU: Kontrola biochemických hodnot za jeden týden.
+
+Léky při přijetí:
+Furosemid 40 mg denně, metoprolol, apixaban
+
+Léky při propuštění:
+Furosemid 80 mg denně. Metoprolol succinate 50 mg denně. Apixaban 5 mg dvakrát denně. Inzulin glargin večer. Metformin byl vysazen.
+
+Plán po propuštění:
+Domů s péčí od ___.
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Fibrilace síní
+
+Stav při propuštění:
+Psychický stav: Pacient je při vědomí a orientovaný, schopný plnit pokyny.
+Funkční stav: Chůze s pomocí chodítka.
+
+Pokyny při propuštění:
+Vážete se každé ráno a volejte, pokud se vaše váha zvýší o více než 1,4 kg. Omezte příjem soli, užívejte léky podle předpisu a v případě zhoršení dýchání nebo otoků se vraťte. Otázky: volejte ___.
+
+Pokyny pro další péči:
+___

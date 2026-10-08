@@ -1,0 +1,78 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let s CHOPN, přijat z ambulance ___ s třidenním produktivním kašlem, horečkou a mírnou dušností, léčen pro pneumonii.
+
+Osobní anamnéza:
+CHOPN
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce:
+T 38,1, tep 92, krevní tlak 128/74, SpO2 93 % při pokojové teplotě
+Celkový stav:
+Pacient je v pohodě, bez známek utrpení
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Krk:
+Měkký
+Plíce:
+Chropy v dolní části pravého plíce
+Břicho:
+Měkké, bez citlivosti
+Končetiny:
+Bez otoků
+Neurologické vyšetření:
+Orientovaný, bez fokálních příznaků
+
+Významné výsledky:
+Počet bílých krvinek 13,2, kreatinin 0,9. Kultivace krve bez růstu. Kultivace sputa ___ s normální flórou.
+Zobrazovací metody:
+Rentgen hrudníku: konsolidace v dolní části pravého plíce.
+
+Léky při přijetí:
+Tiotropium denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů
+2. Tiotropium inhalace denně
+3. Lisinopril 10 mg denně
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Exacerbace CHOPN
+Hypertenze
+
+Stav při propuštění:
+Úroveň vědomí: Orientovaný a komunikativní
+Funkční stav: Chůze, soběstačný
+
+Pokyny při propuštění:
+Byl vám léčen plicní zánět antibiotiky. Dokončete celou kúru, odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte. Následná kontrola u ___.
+
+Pokyny pro další sledování:
+___

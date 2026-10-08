@@ -1,0 +1,71 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Specializace: Lékařství
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Nadměrná žízeň a únava
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Muž ve věku ___ let s dlouhodobou obezitou a hypertenzí byl přijat do ___ poté, co po dobu tří dnů trpěl polyurií, žízní, rozmazaným zrakem a zhoršující se únavou. Měření hladiny glukózy v krvi doma ukázalo vysoké hodnoty. Byl převezen z ___ za účelem dalšího vyšetření, protože laboratorní testy prokázaly výraznou hyperglykémii a nízkou hladinu bikarbonátů. Popíral bolesti na hrudi, horečku nebo bolesti břicha.
+
+Osobní anamnéza:
+Hypertenze
+Obezita
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka a bratr s vysokou hladinou cukru v krvi, kteří užívají léky.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Životní funkce: T 98,4 °C, srdeční frekvence 104 tepů/min, krevní tlak 138/84 mmHg, dechová frekvence 18, saturace kyslíkem 98 % při pokojovém vzduchu.
+Celkový stav: Vypadá unaveně, suché sliznice, bez známek utrpení.
+Krk: Pružný, bez jícnové dilatace.
+Břicho: Měkké, obézní, bez citlivosti.
+Extremity: Teplé, bez edémů.
+
+Významné výsledky:
+LABORATORNÍ VÝSLEDKY PŘI PŘIJETÍ:
+Glukóza 642, sodík 128, draslík 5,1, bikarbonáty 14, aniontová mezera 24, kreatinin 1,3, urea 28. Zvýšená hladina beta-hydroxybutyrátu. HbA1c 13,2 %. Analýza moči s vysokou hladinou glukózy a ketonů. Počet bílých krvinek 12,4.
+Rentgen hrudníku v ___ bez akutních změn. EKG prokázalo sinusovou tachykardii bez ischemických změn.
+Glukóza při propuštění 148, bikarbonáty 25, aniontová mezera 10.
+
+Průběh hospitalizace:
+Byl přijat na jednotku intenzivní péče a léčen intravenózními tekutinami a infuzí inzulínu, přičemž elektrolyty byly často doplňovány. Aniontová mezera se zmenšila během jednoho dne a byl převeden na běžné oddělení dne ___. Endokrinologický tým zahájil podávání bazálního inzulínu a inzulínu k jídlu, a také metforminu a instruoval ho v technice injekcí. Sestra mu před ___ zopakoval správné používání glukometru. Lékař ___ upravil dávky tak, aby hladina glukózy byla mezi 110 a 180 před propuštěním.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Seznam získán z lékárenských záznamů ___ .
+
+Léky při propuštění:
+Insulin glargin 20 jednotek večer. Insulin lispro k jídlu podle dávkovací tabulky. Metformin 500 mg dvakrát denně. Lisinopril 10 mg denně. Atorvastatin 40 mg večer. Předepsány proužky na měření glukózy a jehly do pera; první zásoby vydány ___.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Hyperglykemická krize s ketoacidózou
+Hypertenze
+Hyperlipidemie
+Obezita
+
+Podmínky propuštění:
+Psychický stav: Jasný a soustředěný.
+Úroveň vědomí: Vnímavý a komunikativní.
+Stupeň aktivity: Chůze, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli nebezpečně vysoké hladině cukru v krvi. Měřte hladinu glukózy před jídlem a před spaním a veďte si záznam. Užívajte inzulin přesně podle pokynů. V případě zvracení, zmatenosti nebo hodnot vyšších než 400 se vraťte zpět. V případě dotazů volejte do ambulance na číslo ___ nebo mimo ordinační dobu na číslo ___. Jezte pravidelně.
+
+Pokyny pro následnou péči:
+___

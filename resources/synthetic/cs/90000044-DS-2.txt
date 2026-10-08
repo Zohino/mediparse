@@ -1,0 +1,65 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Sulfonamidy
+
+Hlavní potíže:
+Slabost a snížená chuť k jídlu
+
+Zásahové zákroky:
+Žádné; zavedena periferní intravenózní katétr na místě ___
+
+Anamnéza současného onemocnění:
+Pacientka byla odeslána z ambulance ___ po několika dnech únavy, nevolnosti a sníženého příjmu potravy. Uvedla mírnou závratě při vstávání. Bez bolesti na hrudi, horečky nebo kašle. Laboratorní výsledky vedly k hospitalizaci.
+
+Osobní anamnéza:
+Diabetes mellitus léčený perorálními léky
+Hypertenze
+Bez fibrilace síní při předchozím monitorování
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec s mrtvicí.
+
+Fyzikální vyšetření:
+Unavená, ale v pohodě, vitální funkce stabilní.
+ORL: Suché sliznice.
+Břicho: Měkké, bez citlivosti.
+Neurologické vyšetření: Přítomná, bez fokálních deficitů.
+
+Relevantní výsledky:
+Sodík v normálních mezích, draslík mírně zvýšený. Kreatinin nad obvyklou hodnotou, zlepšující se do propuštění. Glukóza v přijatelných hodnotách. Rentgen hrudníku bez patologických nálezů. EKG ukázalo sinusový rytmus.
+
+Průběh hospitalizace:
+Pacientka dostávala intravenózní tekutiny a antiemetika, což vedlo k postupnému zlepšení chuti k jídlu a energie. Léky, které užívala doma, byly zkontrolovány a upraveny lékařem ___. Laboratorní výsledky byly denně kontrolovány a vykazovaly příznivý vývoj. Pacientka chodila samostatně a byla propuštěna po kontrole lékařem ___.
+
+Léky při přijetí:
+Metformin, lisinopril, levothyroxin, amlodipin
+
+Léky při propuštění:
+Levothyroxin denně, amlodipin denně, glipizid k snídani. Lisinopril užívat až po kontrole laboratorních výsledků. Acetaminofen dle potřeby při nepříjemných pocitech.
+
+Plán po propuštění:
+Domů s péčí
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Stabilní a zlepšený.
+Psychický stav: Jasný a koherentní.
+Úroveň vědomí: Přítomná a komunikativní.
+
+Instrukce při propuštění:
+Byla jste přijata kvůli slabosti a sníženému příjmu potravy. Pravidelně pijte tekutiny, jezte malé, časté porce a užívejte léky podle pokynů. V případě zvracení, mdloby nebo zmatenosti se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro další péči:
+___

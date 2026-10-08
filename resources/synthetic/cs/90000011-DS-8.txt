@@ -1,0 +1,71 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Oddělení: Chirurgie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická appendektomie provedena dne ___
+
+Anamnéza současného onemocnění:
+Pacient se prezentoval s bolestí v pravém dolním kvadrantu břicha, která se zhoršovala již dva dny, dále s nevolností a mírnou horečkou. Bolest začala v blízkosti pupku a postupně se šířila. Byl vyšetřen na ___ dříve v tomto týdnu a poslán domů s analgetiky. Když se příznaky neustaly, vrátil se a CT vyšetření naznačilo zánět slepého střeva. Byl převeden na ___ pod dohledem Dr. ___, kde byl podroben chirurgickému vyšetření.
+
+Osobní anamnéza:
+Hypertenze
+Možná cukrovka, nikdy formálně neprokázána
+Chirurgická anamnéza: žádná, dříve operace kýly na ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Pacient je nepříjemně, ale je při vědomí, nevykazuje akutní potíže.
+Krk: Pružný, bez zvětšených lymfatických uzlin.
+Břicho: Citlivé v pravém dolním kvadrantu, přítomno napětí svalů, mírné zvětšení objemu.
+KONČETINY: Teplé, bez otoků.
+
+Významné výsledky:
+Laboratorní výsledky při přijetí vykazovaly mírnou leukocytózu s převahou neutrofilů. Ostatní biochemické testy byly v normě. Hladina glukózy byla mírně zvýšená na ___ při příjmu. Vyšetření moči bylo negativní. Opakované krevní testy v den propuštění se zlepšily, odebrány byly na ___.
+ZOBRAZENÍ:
+CT vyšetření břicha a pánve ukázalo rozšířený, zánětlivý apendix s okolním zánětem tukové tkáně a bez abscesu.
+
+Průběh hospitalizace:
+Pacient byl přijat na chirurgické oddělení, byl na hladové dietě a zahájena intravenózní antibiotika. Byl operován na operačním sále dne ___ v rámci nekomplikované laparoskopické appendektomie. Po operaci byla bolest kontrolována perorálními léky a pacient zahájil běžnou stravu následující den. Histopatologické výsledky z ___ byly k dispozici v den propuštění. Před odchodem byl vyšetřen Dr. ___, pacient byl schopen samostatné chůze.
+PROBLÉMY PŘECHODU:
+Následná péče v závislosti na výsledcích histologie. Kontrola hladiny glukózy nalačno v ambulanci.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Paracetamol dle potřeby na bolest
+
+Léky při propuštění:
+1. Paracetamol 650 mg perorálně každých šest hodin dle potřeby na bolest
+2. Oxykodon 5 mg perorálně každých šest hodin dle potřeby na silnou bolest, krátkodobě
+3. Lisinopril 10 mg perorálně denně
+4. Docusate 100 mg perorálně dvakrát denně během užívání opioidů
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Hlavní: Akutní zánět slepého střeva
+
+Stav při propuštění:
+Psychický stav: Jasný a srozumitelný
+Úroveň vědomí: Při vědomí a komunikativní
+Funkční stav: Schopen samostatné chůze.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zánětu slepého střeva a podstoupili jste laparoskopickou operaci. Můžete se osprchovat a nechat na malých řezných ranách stékat mýdlovou vodu, ale nerobte je příliš mokré. Během čtyř týdnů se vyhýbejte zvedání předmětů vážících více než 4,5 kg. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí a výtoku z řezných ran volejte číslo ___ nebo se obraťte na pohotovost. Užívajte léky podle předpisu a tento souhrn si vezměte s sebou k ___.
+
+Pokyny pro kontrolní prohlídku:
+___

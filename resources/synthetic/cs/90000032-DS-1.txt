@@ -1,0 +1,77 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Žena s třechdenním produktivním kašlem, horečkou a zimnicí, přijata z ambulance ___ po zjištění nízké saturace kyslíkem.
+
+Osobní anamnéza:
+Hypertenze
+Hypotyreóza
+Osteoartróza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka prodělala mrtvici. Žádné známé onemocnění plic.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Životní funkce:
+Horečka, mírná tachykardie, saturace 92 % při dýchání okolním vzduchem.
+Celkový stav:
+Únavná, v klidu v pohodě.
+Hlava, oči, uši, nos, krk:
+Suché sliznice.
+Plíce:
+Chropy v dolní části pravého plíce.
+Břicho:
+Měkké, bezbolestné.
+
+Významné výsledky:
+LABORATOŘ PŘI PŘIJETÍ:
+Mírně zvýšený počet bílých krvinek, normální kreatinin.
+ZOBRAZENÍ:
+Pořízena rentgenová snímka hrudníku.
+ZÁVĚR:
+Konsolidace v dolní části pravého plíce, odpovídající pneumonii.
+
+Průběh hospitalizace:
+Léčena pro pneumonii získanou mimo nemocnici pomocí azithromycinu a doxycyklinu (vzhledem k alergii), a také infuzí. Podávání kyslíku bylo postupně ukončeno druhý den. Vyšetřena lékařem ___ a propuštěna domů. Stav se postupně zlepšoval; před odchodem byla afebrilní.
+
+Léky při přijetí:
+Lisinopril, levothyroxine
+
+Léky při propuštění:
+1. Doxycyklin 100 mg dvakrát denně po dobu pěti dnů.
+2. Lisinopril denně.
+3. Levothyroxine denně.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pneumonie získaná mimo nemocnici
+Hypoxemie
+
+Stav při propuštění:
+Dobrá, při vědomí a orientovaná.
+Funkční stav:
+Chůze, soběstačná.
+
+Pokyny při propuštění:
+Byla léčena pro pneumonii. Dokončete veškerá antibiotika, pijte dostatek tekutin, odpočívejte a v případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro další péči:
+___

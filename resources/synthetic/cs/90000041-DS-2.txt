@@ -1,0 +1,77 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bušení srdce a dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka se dostavila na oddělení ___ s potížemi bušení srdce a dušnosti při námaze, které trvaly několik dní a začaly po návštěvě jejího praktického lékaře v ___. Popírala bolesti na hrudi, ztrátu vědomí nebo horečku. Příznaky se začaly objevovat ___ a postupně se zhoršovaly, což vedlo k jejímu převedení na naše oddělení pro další vyšetření.
+
+Osobní anamnéza:
+Hypertenze
+Hypotyreóza
+Chirurgická operace žlučníku v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí.
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacientka je v pohodě, bez známek utrpení.
+Krk:
+Žádná jícnová dilatace.
+Břicho:
+Měkké, bez citlivosti.
+Končetiny:
+Teplé, bez otoků.
+Kůže:
+Neošetřená.
+Neurologické vyšetření:
+Orientovaná, bez fokálních příznaků.
+
+Významné výsledky:
+Laboratorní výsledky z ___ ukazují normální hodnoty troponinu a mírně nízkou hladinu draslíku, která byla doplněna. EKG ukázalo nepravidelný rytmus bez výrazných P vln, frekvence 130. Rentgen hrudníku bez akutních změn. TSH v normě. Echokardiogram s ejekční frakcí 60 % a mírným zvětšením levé síně.
+
+Průběh hospitalizace:
+Monitorování EKG ukázalo fibrilaci síní s rychlou ventrikulární odpovědí. Byla zahájena léčba metoprololem pro kontrolu srdeční frekvence a apixabanem po prodiskutování rizika krvácení. Echokardiogram provedený v ___ ukázal zachovalou funkci srdce. Srdeční frekvence se ustálila pod 100 a pacientka tolerovala chůzi. Bude sledována na kardiologické ambulanci v ___
+
+Léky při přijetí:
+Levothyroxin 75 mcg denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+Levothyroxin 75 mcg denně
+Lisinopril 10 mg denně
+Metoprolol succinate 50 mg denně
+Apixaban 5 mg dvakrát denně
+Chlorid draselný 20 mEq jednou denně
+
+Plán po propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Hypertenze
+Hypokalémie
+Hypotyreóza
+
+Stav při propuštění:
+Stabilní, pohyblivá.
+Psychický stav:
+Orientovaná a koherentní.
+
+Pokyny při propuštění:
+Byla jste hospitalizována kvůli rychlému a nepravidelnému srdečnímu tepu. Užívajte metoprolol a apixaban podle předpisu a nepřestávejte s užíváním. V případě mdloby, bolesti na hrudi, krvácení nebo zhoršující se dušnosti volejte ___ nebo se obraťte na pohotovost. Vyhýbejte se těžké fyzické námaze, dokud vám to nebude povoleno.
+
+Pokyny pro další sledování:
+___

@@ -1,0 +1,68 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém boku
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž s bolestí v pravém boku a nevolností trvající tři dny, odeslán z ambulance ___. Bolest se šířila do třísel. Bez horečky. První vyšetření proběhlo v ___.
+
+Osobní anamnéza:
+Hypertenze
+Kameny v ledvinách, v minulosti ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s kameny v ledvinách
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlný, bez horečky
+Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Vlhké sliznice
+Plíce:
+Čisté bilaterálně
+Břicho:
+Měkké, bolestivost v pravém boku
+Extremity:
+Bez otoků
+Kůže:
+Teplá, suchá
+
+Významné výsledky:
+CT vyšetření prokázalo 6mm kámen v pravé močové trubici, který způsoboval mírnou hydronefrózu. Vyšetření moči s přítomností krve, bez známek infekce. Kreatinin v normě.
+
+Průběh hospitalizace:
+Léčba zahrnovala infuze, analgetika a tamsulosin. Bolest se zlepšila a pacient toleroval stravu. Před propuštěním nebylo potvrzeno uvolnění kamene; bylo zajištěno další vyšetření u urologie prostřednictvím ___.
+DŮLEŽITÉ INFORMACE PŘI PROPOUŠTĚNÍ:
+Sběr moči, opakované zobrazovací vyšetření v případě návratu bolesti.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+Lisinopril 10 mg denně. Tamsulosin 0,4 mg večer. Ibuprofen 400 mg každých osm hodin s jídlem, dle potřeby na bolest.
+
+Stav při propuštění:
+Domů
+
+Stav při propuštění:
+Stabilní, bolest pod kontrolou
+Funkční stav:
+Chůze, soběstačný
+
+Pokyny při propuštění:
+Byl vám poskytnut lék na kameny v ledvinách. Pijte hodně tekutin a sledujte moč. V případě horečky, nekontrolovatelné bolesti nebo zvracení se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro další péči:
+___

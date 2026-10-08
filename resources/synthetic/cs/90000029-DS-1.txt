@@ -1,0 +1,67 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha.
+
+Hlavní chirurgický zákrok:
+Laparoskopická cholecystektomie (odstranění žlučníku).
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let s hypertenzí se dostavil na oddělení ___ s bolestí v pravém horním kvadrantu břicha, která se zhoršovala již dva dny, s nevolností a jednou epizodou zvracení po konzumaci tučného jídla. Bolest se šířila do pravého ramene. Popíral horečku nebo žloutenku. Byl vyšetřen na oddělení ___ a převezen za účelem chirurgického vyšetření, protože zobrazovací metody ukázaly žlučové kameny a ztluštění stěny žlučníku. Byl přijat na chirurgické oddělení dne ___ za účelem dalšího ošetření.
+ANAMNÉZA:
+Pozitivní nález nevolnosti. Negativní nález bolesti hrudníku, dušnosti, obtíží při močení nebo průjmu.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Apendektomie (odstranění slepého střeva) v dětství na oddělení ___.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s žlučovými kameny. Matka s hypertenzí, léčená na oddělení ___.
+
+Fyzikální vyšetření:
+Celkový stav: Vědomý, v pohodě, bez akutních potíží.
+Krk: Pružný, bez zvětšených lymfatických uzlin.
+Břicho: Měkké, mírně bolestivé v pravém horním kvadrantu, operační rány po laparoskopickém zákroku čisté a suché.
+Extremity: Teplé, bez otoků.
+Neurologické vyšetření: Vědomý, orientovaný, pohybuje všemi končetinami.
+
+Významné výsledky:
+Laboratorní výsledky při přijetí dne ___ ukázaly mírnou leukocytózu (zvýšený počet bílých krvinek) s normálními hodnotami bilirubinu, alkalické fosfatázy a lipázy. Jaterní enzymy byly mírně zvýšené a normalizovaly se před propuštěním. Ultrazvukové vyšetření pravého horního kvadrantu bylo provedeno na pohotovosti. Pooperační hemoglobin byl stabilní a elektrolyty byly v normálních mezích. Histopatologické vyšetření žlučníku bylo k dispozici až po propuštění.
+ZÁVĚR:
+Žlučové kameny se ztluštěním stěny žlučníku a malým množstvím tekutiny kolem žlučníku, což odpovídá akutnímu zánětu žlučníku.
+
+Stručný popis hospitalizace:
+Pacient byl přijat, dostal intravenózní tekutiny a antibiotika a byl udržován bez perorálního příjmu. Byl převezen do operačního sálu dne ___ lékařem ___ a podstoupil nekomplikovanou laparoskopickou cholecystektomii. Po operaci byl převezen na chirurgické oddělení, kde byla bolest kontrolována perorálními léky a strava byla postupně rozšiřována podle tolerance. Antibiotika byla po operaci ukončena. Pacient byl schopen samostatně chodit a močit bez obtíží. Byly mu znovu předepsány léky na vysoký krevní tlak, které užíval doma. Fyzikální terapie od společnosti ___ ho prohlásila za způsobilého k propuštění a byl vyšetřen týmem na oddělení ___ před propuštěním dne ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Aspirin 81 mg denně. Multivitamin jednou denně.
+
+Léky po propuštění:
+Lisinopril 10 mg perorálně jednou denně. Atorvastatin 20 mg perorálně každ večer. Acetaminofen 650 mg každých šest hodin dle potřeby při bolesti. Oxykodon 5 mg každých šest hodin dle potřeby při silné bolesti, krátkodobě. Docusate 100 mg dvakrát denně během užívání oxykodonu. Aspirin je odložen do další kontroly.
+
+Plán po propuštění:
+Domů s péčí ____.
+
+Diagnóza při propuštění:
+Primární: Akutní žlučová cystitida s kameny.
+Sekundární: Hypertenze, hyperlipidemie.
+
+Stav při propuštění:
+Dobrý, pacient snáší stravu, bolest je kontrolována perorálními léky.
+Úroveň vědomí: Vědomý a komunikativní.
+
+Pokyny po propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku a žlučník vám byl odstraněn laparoskopicky. Můžete se osprchovat, ale neponořujte se do vany a nechte rány suché. Během čtyř týdnů se vyhýbejte zvedání předmětů o hmotnosti více než 4,5 kg. V případě horečky, zhoršující se bolesti, zvracení, zarudnutí nebo výtoku z ran, nebo žlutosti kůže, kontaktujte ordinaci ____. V případě závažných příznaků se obraťte na pohotovostní oddělení ____.
+
+Pokyny pro kontrolu:
+____

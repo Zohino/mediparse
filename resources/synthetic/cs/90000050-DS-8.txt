@@ -1,0 +1,72 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Žízeň a časté močení
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacient se dostavil na oddělení ___ s několika dny celkové slabosti, žízně a častého močení. Při příjmu byla hladina glukózy výrazně zvýšená. Byl doporučen z ambulance ___ k vyšetření a přijat za účelem regulace glykémie.
+
+Osobní anamnéza:
+Diabetes mellitus
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s vysokým krevním tlakem
+
+Fyzikální vyšetření:
+Životní funkce:
+Stabilní, bez horečky
+Celkový stav:
+Pacient je v pohodě
+ORL:
+Vlhké sliznice
+Plíce:
+Čisté bilaterálně
+Extremity:
+Bez otoků
+Neurologické vyšetření:
+Bez fokálních příznaků
+
+Významné výsledky:
+Při příjmu byla zvýšená hladina glukózy s mírnou ketózou, která se již vyřešila. Sodík a draslík v normě. Zobrazovací vyšetření provedená na ___ byla bez patologických nálezů.
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Hladina glukózy se zlepšila, elektrolyty a bikarbonáty v normě.
+
+Průběh hospitalizace:
+Léčba intravenózními tekutinami a infuzí inzulínu, následně přechod na podkožní inzulín s lepšímí hodnotami glukózy. Sestra prošla s pacientem techniku injekcí a domácí monitorování. Dietolog pacienta vyšetřil na ___ a byla zajištěna kontrola u endokrinologa.
+
+Léky při přijetí:
+Metformin
+Lisinopril
+
+Léky při propuštění:
+Insulin glargin večer, insulin lispro k jídlu, metformin dvakrát denně, lisinopril jednou denně. Dodány proužky na měření glukózy a jehličky.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes mellitus
+
+Stav při propuštění:
+Dobrý
+Psychický stav:
+Orientovaný a při vědomí
+
+Pokyny při propuštění:
+Měřte si hladinu cukru před jídlem a před spaním. Užívajte inzulin podle pokynů a dodržujte dietu, kterou jste s vámi prošli. V případě zvracení, zmatenosti nebo velmi vysokých hodnot kontaktujte ___ nebo se vraťte.
+
+Pokyny pro kontrolu:
+___
