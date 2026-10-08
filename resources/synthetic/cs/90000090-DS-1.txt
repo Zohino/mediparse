@@ -1,0 +1,77 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž s bolestí v břiše a nevolností, která se zhoršovala po dobu dvou dnů. Byl vyšetřen v ___ a převeden do naší nemocnice k dalšímu vyšetření.
+
+Osobní anamnéza:
+Hypertenze
+Možná cukrovka, podezření na základě preventivního vyšetření
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacient je v pohodě, bez známek utrpení.
+Hlava, oči, uši, nos, krk:
+Vlhké sliznice.
+Břicho:
+Mírná bolestivost v pravém dolním kvadrantu.
+Kůže:
+Teplá, suchá.
+Neurologické vyšetření:
+Pacient je při vědomí, bez neurologických deficitů.
+
+Významné výsledky:
+Mírně zvýšený počet bílých krvinek, normální hladiny lipázy a jaterních testů.
+Závěr:
+Nález odpovídá počínající apendicitidě, na snímcích nebyl zjištěn perforace ani absces.
+
+Průběh hospitalizace:
+Pacient byl léčen intravenózními antibiotiky a infuzemi, bolest byla kontrolována, dieta postupně rozšiřována. Chirurgický tým z ___ doporučil ambulantní kontrolu. Pacient dobře toleroval perorální příjem a zůstal bez horečky.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Lisinopril jednou denně, atorvastatin jednou večer, amoxicilin-klavulanát dvakrát denně po dobu sedmi dnů, paracetamol dle potřeby na bolest.
+
+Plán po propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Počínající apendicitida
+
+Stav při propuštění:
+Stabilní
+Psychický stav:
+Orientovaný a koherentní
+Úroveň vědomí:
+Přítomný a komunikativní
+Aktivity:
+Chůze, soběstačný
+
+Pokyny při propuštění:
+Užívejte antibiotika podle předpisu. V případě horečky, zhoršení bolesti břicha nebo zvracení se obraťte na lékaře. V případě dotazů volejte na číslo ___ .
+
+Pokyny pro další sledování:
+___

@@ -1,0 +1,66 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž s známým srdečním selháním, odeslán z ambulance ___ po týdnu zhoršující se dušnosti v leže, přibírání na váze a otoků nohou. Byl vyšetřen v ___ před transportem.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Bez anamnézy fibrilace síní
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s koronární chorobou
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Celkový stav: pohodlný, dýchá bez potíží
+Oblast hlavy, očí, uší, nosu a krku (ORL): vlhké sliznice
+Kardiovaskulární systém: pravidelný srdeční rytmus, tichý šelest
+Břicho: měkké, bez citlivosti
+
+Výsledky vyšetření:
+LABORATOŘ PŘI PŘIJETÍ:
+Kreatinin zvýšen na 2,1 (základní hodnota 1,1), BNP výrazně zvýšen.
+ZÁVĚR:
+Plicní vaskulární kongestivní změny, malé výpotky, kontrola u ___.
+
+Průběh hospitalizace:
+Diuréza intravenózním furosemidem, s zlepšením dýchání a snížením otoků. Kreatinin dosáhl maxima druhý den, poté klesal s úpravou diuretik a omezením nefrotoxických látek. Kardiologické oddělení v ___ doporučilo změnu medikace; propuštěn s váhou přibližně ___.
+
+Léky při přijetí:
+Lisinopril, atorvastatin, furosemid
+
+Léky při propuštění:
+Furosemid 40 mg denně, atorvastatin večer, metoprolol sukcinát denně. Lisinopril dočasně vysazen do ověření funkce ledvin.
+
+Plán po propuštění:
+Domů s péčí
+Zařízení: ___
+
+Diagnóza při propuštění:
+Hlavní: Akutní exacerbace chronického systolického srdečního selhání
+
+Stav při propuštění:
+Úroveň vědomí: bdělý a pozorný
+Funkční stav: chodí samostatně, stabilní chůze
+
+Pokyny při propuštění:
+Vážete se každé ráno a volejte ___ pokud přiberete více než 0,9 kg za den. Omezte příjem soli a tekutin, užívejte léky podle pokynů a dodržujte termín laboratorního vyšetření.
+
+Pokyny pro další péči:
+___

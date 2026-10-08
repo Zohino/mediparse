@@ -1,0 +1,65 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Snížený objem moči a otoky nohou
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let s diagnostikovaným srdečním selháním se dostavil s třemi dny trvajícími potížemi – sníženým objemem moči, otoky nohou a únavou, které se objevily po ukončení užívání diuretika. Byl vyšetřen v ambulanci ___ dne ___ a laboratorní výsledky ukázaly akutní poškození ledvin, po kterém byl převezen na urgentní oddělení.
+
+Anamnéza:
+Hypertenze
+Hyperlipidemie
+Žádná anamnéza fibrilace síní
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Únavný, ale v pohodě, bez známek utrpení
+Hlava, oči, uši, nos, hrdlo: Suché sliznice
+Krk: Rozšířené jugulární žíly
+Extremity: Mírný bilaterální edém s jámy
+
+Významné výsledky:
+LABORATORNÍ VÝSLEDKY PŘI PŘIJETÍ:
+Kreatinin 2,4, urea 48, draslík 5,2, sodík 136.
+LABORATORNÍ VÝSLEDKY PŘI PROPUŠTĚNÍ:
+Kreatinin 1,3, urea 24, draslík 4,4, sodík 139. Ultrazvuk ledvin neprokázal hydronefrózu.
+
+Průběh hospitalizace:
+Diuretika byla vysazena a podávaly se tekutiny, přičemž byla monitorována funkce ledvin. Hodnota kreatininu se postupně zlepšovala během několika dnů. Obstrukce močových cest byla vyloučena pomocí zobrazovacích metod v ___. Domácí léky na srdeční onemocnění byly postupně obnoveny, jakmile se stabilizoval objem tekutin v těle. Byl vyšetřen lékařem ___ a byl propuštěn dne ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 40 mg večer
+
+Léky při propuštění:
+Atorvastatin 40 mg večer. Furosemid 20 mg každé ráno. Lisinopril bude podáván až po kontrole výsledků krevních testů vaším nefrologem při kontrolní prohlídce.
+
+Plán po propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Akutní poškození ledvin
+
+Stav při propuštění:
+Psychický stav: Vědomý a plně orientovaný
+Úroveň vědomí: Probudený a pozorný
+
+Pokyny při propuštění:
+Vážete se každé ráno. Vyhýbejte se protizánětlivým lékům. Pijte tekutiny podle pokynů. V případě otoků, dušnosti nebo sníženého objemu moči se vraťte. V případě dotazů volejte ___ .
+
+Pokyny pro kontrolní prohlídku:
+___

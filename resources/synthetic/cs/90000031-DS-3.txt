@@ -1,0 +1,74 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohy a snížené množství moči
+
+Zásadní chirurgické zákroky nebo invazivní postupy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacient udává zhoršující se otok nohy po dobu tří dnů, dušnost v leže a malé množství moči po ukončení užívání diuretika. Byl vyšetřen v ___ a odeslán na pohotovostní oddělení v ___. Laboratorní výsledky ukázaly výrazně zvýšenou hodnotu kreatininu a draslíku, a proto byl přijat k hospitalizaci pro monitorování a pečlivou regulaci tekutin.
+
+Předchozí zdravotní problémy:
+Diabetes mellitus 2. typu
+Srdeční selhání
+Fibrilace síní
+Hypertenze, diagnostikována v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce, nástup v ___
+
+Fyzikální vyšetření:
+Celkový stav: Pacient vypadá unaveně, bez známek akutního utrpení.
+Hlava, oči, uši, nos, hrdlo: Suché sliznice.
+Krk: Zvýšený jugulární venózní tlak.
+Plíce: Krepitace v obou plicních bázích.
+Břicho: Měkké, bezbolestné, mírně napjaté.
+Kůže: Edém s prohlubněmi až po kolena.
+Neurologické vyšetření: Pacient je při vědomí, bez fokálních příznaků.
+
+Významné výsledky:
+Kreatinin při přijetí: 3,4, draslík: 5,9, BNP výrazně zvýšen. EKG: Nepravidelný rytmus, kontrolovaná frekvence. Rentgen hrudníku provedený v ___ ukázal malé bilaterální výpotky a vaskulární kongesci. Echokardiogram ukázal sníženou ejekční frakci. Kreatinin se zlepšil na 1,9 při propuštění, draslík na 4,4. Hemoglobin A1c 7,8 procent. Analýza moči bez patologických nálezů.
+
+Průběh hospitalizace:
+Pacientovi byly podávány intravenózní diuretika, což vedlo k zvýšenému vylučování moči a ztrátě několika litrů tekutin během hospitalizace. Byly pozastaveny nefrotoxické léky a jeho ACE inhibitor, a hodnota kreatininu se postupně snižovala. Kardiologické oddělení v ___ upravilo jeho frekvenci a pokračovalo v antikoagulační léčbě. Hladina cukru v krvi byla regulována pomocí inzulínu. Do ___ pacient dýchal pohodlně na běžném vzduchu, chodil samostatně, toleroval dietu s nízkým obsahem sodíku a byl převeden na perorální diuretika.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+Metoprolol 50 mg denně
+Apixaban 5 mg dvakrát denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Furosemid 40 mg perorálně denně
+2. Metoprolol succinate 50 mg perorálně denně
+3. Apixaban 5 mg perorálně dvakrát denně
+4. Insulin glargin 10 jednotek před spaním
+5. Pozastavit metformin a lisinopril, dokud nebude znovu zkontrolována funkce ledvin.
+
+Plán po propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+Srdeční selhání
+Fibrilace síní
+
+Stav při propuštění:
+Úroveň vědomí: Při vědomí a komunikativní.
+Funkční stav: Chůze, samostatná.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli přetížení tekutinami a porušené funkci ledvin. Každé ráno se vážte a volejte číslo ___ v případě, že během jednoho dne přiberete více než 1,4 kg. Dodržujte omezení příjmu soli a tekutin, jak bylo projednáno. Užívajte léky podle předpisu a vyhýbejte se lékům proti bolesti s protizánětlivým účinkem. V případě zhoršení dušnosti, zmatenosti nebo výrazně sníženého množství moči se obraťte na ___ .
+
+Pokyny pro další péči:
+___

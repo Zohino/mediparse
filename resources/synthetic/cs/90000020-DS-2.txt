@@ -1,0 +1,85 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacient se dostavil na oddělení ___ s třidenním kašlem, horečkou a dušností. Byl vyšetřen na oddělení ___ a odeslán na urgentní příjem, kde rentgenové vyšetření prokázalo infiltrát v dolním laloku pravé plíce. Byl přijat k hospitalizaci pro léčbu.
+ANAMNÉZA:
+Pozitivní nález horečky a kašle. Negativní nález bolesti na hrudi.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Chronická obstrukční plicní nemoc (CHOPN)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav:
+Pacient vypadá mírně nemocný.
+ORL:
+Suché sliznice.
+PLÍCE:
+Chropy v dolní části pravého plíce.
+BŘÍCHO:
+Měkké, bezbolestné.
+EXTREMITY:
+Bez otoků.
+PULZY:
+Hmatné bilaterálně.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Zlepšený stav, plíce čisté, jinak bez změn.
+
+Významné výsledky:
+LABORATOŘ PŘI PŘIJETÍ:
+Zvýšený počet bílých krvinek (14,2), laktát 1,8, kreatinin v normě. Rentgen hrudníku prokázal opacitu v dolním laloku pravé plíce, provedeno dne ___.
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Normalizovaný počet bílých krvinek (8,1), stabilní kreatinin, elektrolyty v normě. Opakované zobrazovací vyšetření, posouzené lékařem ___, prokázalo zlepšení opacit bez výpotku.
+
+Průběh hospitalizace:
+Léčen pro pneumonii získanou v komunitě pomocí ceftriaxonu a azithromycinu, poté byl na třetí den převeden na perorální antibiotika. Podávání kyslíku bylo postupně snižováno. Hypertenze byla kontrolována pomocí léků užívaných doma. Plán léčby byl prodiskutován s ___ a ___. Pacient se postupně zlepšoval, dobře toleroval stravu a byl schopen samostatně chodit před propuštěním do ___.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+Inhalátor s albuterolem dle potřeby
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů
+2. Lisinopril denně
+3. Atorvastatin večer
+4. Inhalátor s albuterolem každé čtyři hodiny dle potřeby
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Hypertenze
+Chronická obstrukční plicní nemoc (CHOPN)
+
+Stav při propuštění:
+Psychický stav: Jasný a srozumitelný
+Úroveň vědomí: Vnímavý a komunikativní
+
+Pokyny při propuštění:
+Byl Vám léčen plicní zánět. Dokončete užívání všech antibiotik, odpočívejte a pijte dostatek tekutin. V případě zhoršení dýchání, horečky nebo bolesti na hrudi se vraťte. V případě dotazů kontaktujte ___ a nezapomeňte na kontrolní prohlídku dne ___.
+
+Pokyny pro další péči:
+___

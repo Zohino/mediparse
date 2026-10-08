@@ -1,0 +1,78 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž s diagnostikovaným srdečním selháním, odeslán z ___ s zhoršující se dušností a otoky nohou.
+
+Předchozí zdravotní problémy:
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+Ischemická choroba srdeční
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacient je v pohodě, mírně dušný.
+Hlava, oči, uši, nos, krk (HEENT):
+Bez žloutenky.
+Krk:
+Zvýšený jugulární venózní tlak (JVP).
+Břicho:
+Měkké, bez citlivosti.
+Kůže:
+Teplá, suchá.
+
+Významné výsledky:
+Zvýšená hladina BNP. Rentgen hrudníku ukázal plicní vaskulární kongesci. Hladina kreatininu byla stabilní na hodnotě ___ po celou dobu hospitalizace.
+
+Průběh hospitalizace:
+Léčba intravenózními diuretiky, s dobrým výdelem moči a zlepšením dýchání. Hmotnost pacienta se postupně snižovala. Pacienta vyšetřilo kardiologické oddělení dne ___.
+DŮLEŽITÉ ASPEKTY:
+Kontrola hladiny elektrolytů příští týden.
+
+Léky při přijetí:
+Lisinopril, atorvastatin, aspirin
+
+Léky při propuštění:
+1. Furosemid 40 mg denně
+2. Lisinopril 10 mg denně
+3. Atorvastatin 40 mg večer
+
+Místo propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Přetížení tekutinami
+Hypertenze (vysoký krevní tlak)
+Ischemická choroba srdeční
+
+Stav při propuštění:
+Stabilní
+Psychický stav:
+Orientovaný a při vědomí.
+Fyzická aktivita:
+Chůze, soběstačný.
+
+Pokyny při propuštění:
+Vážete se každý den ráno a volejte číslo ___ v případě, že se vaše váha zvýší o více než 1,4 kg. Omezte příjem soli a tekutin.
+
+Pokyny pro další péči:
+___

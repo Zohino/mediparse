@@ -1,0 +1,72 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Oddělení: Chirurgie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha.
+
+Hlavní chirurgický zákrok:
+Laparoskopická appendektomie (odstranění slepého střeva).
+
+Anamnéza současného onemocnění:
+Muž s diabetem mellitus se dostavil na oddělení ___ po třech dnech zhoršující se bolesti v pravém dolním kvadrantu břicha, nevolnosti a mírné horečky. Byl vyšetřen na oddělení ___ dne ___ a byl doporučen k zobrazovacím vyšetřením, která prokázala zánět slepého střeva. Byl převeden na chirurgické oddělení k dalšímu vyšetření.
+ANAMNÉZA:
+Pozitivní nález nevolnosti. Negativní nález bolesti hrudníku.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+Žádná anamnéza fibrilace síní
+Chirurgické odstranění žlučníku na oddělení ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných informací.
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacient je v pohodě, bez známek utrpení.
+Plíce:
+Čisté při poslech.
+Břicho:
+Měkké, mírně bolestivé v oblasti jizev.
+Extremity (končetiny):
+Teplé, bez otoků.
+
+Významné výsledky:
+Počet bílých krvinek 14,2 při přijetí, 8,1 při propuštění. Kreatinin 0,9. Glukóza 210. Laktát 1,1. CT vyšetření břicha a pánve: dilatovaný, zánětlivě změněný slepý střevo, bez abscesu nebo perforace. Patologické vyšetření: akutní zánět slepého střeva, bez známek malignity (zločinného nádoru).
+
+Průběh hospitalizace:
+Pacient podstoupil laparoskopickou appendektomii dne ___ bez komplikací. Bolest byla kontrolována perorálními analgetiky a dieta byla postupně rozšiřována. Kreatinin zůstal v normě a nebyly zjištěny známky chronického onemocnění ledvin. Glukóza byla kontrolována pomocí dávkování inzulínu v závislosti na hladině glukózy. Byl propuštěn domů po vyšetření lékařem ___.
+PROBLÉMY PŘI PŘECHODU:
+Kontrola hladiny glukózy s pomocí ___.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně. Lisinopril 10 mg denně. Atorvastatin 20 mg večer.
+
+Léky při propuštění:
+Metformin 500 mg dvakrát denně. Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Acetaminophen 650 mg každých šest hodin dle potřeby. Oxykodon 5 mg dle potřeby, krátkodobě.
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní zánět slepého střeva.
+
+Stav při propuštění:
+Psychický stav: Jasný a soustředěný.
+Úroveň vědomí: Vnímavý a komunikativní.
+Funkční stav: Chůze, soběstačný.
+
+Pokyny při propuštění:
+Byl vám odstraněn slepý střevo. Udržujte rány čisté a suché a vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí rány kontaktujte ___. V případě dotazů kontaktujte ___.
+
+Pokyny pro další péči:
+___

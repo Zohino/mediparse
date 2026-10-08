@@ -1,0 +1,65 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest a otok v pravé dolní končetině.
+
+Zásahy:
+Žádné.
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila na oddělení ___ s bolestí a otokem pravé lýtkové svaliny, které trvaly tři dny, po dlouhém letu. Duplexní ultrazvuk prokázal akutní hlubokou žilní trombózu. Byla zahájena antikoagulační léčba a pacientka byla přijata do nemocnice.
+
+Osobní anamnéza:
+Hypotyreóza.
+Migrény.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s křečovými žilami.
+
+Fyzikální vyšetření:
+Celkový stav: Pacientka je v pohodě; pravá lýtková svalina je bolestivá a oteklá.
+Hlava, oči, uši, nos, hrdlo: Normální tvar hlavy, vlhké sliznice.
+Plíce: Při poslechu čisté bilaterálně.
+
+Významné výsledky:
+Duplexní ultrazvuk ___ prokázal okluzivní trombózu pravé podkolenní žíly. Hemoglobin a kreatinin byly při přijetí v normě.
+ZÁVĚR:
+Okluzivní trombóza pravé podkolenní žíly; bez rozšíření proximálně. CT angiografie hrudníku byla negativní na embolii.
+
+Průběh hospitalizace:
+Byla zahájena přímá perorální antikoagulace a pacientka zůstala hemodynamicky stabilní. Bolest se zlepšila po elevaci končetiny a podání paracetamolu. Personál ___ poskytl pacientce informace o dávkování a opatřeních proti krvácení. Byla propuštěna domů ve stabilním stavu.
+DŮLEŽITÉ INFORMACE PRO PACIENTKU:
+Kontrola u lékaře ___ za tři týdny. Užívejte antikoagulancia po dobu tří měsíců.
+
+Léky při přijetí:
+Levothyroxin denně. Sumatriptan dle potřeby.
+
+Léky při propuštění:
+Apixaban 10 mg dvakrát denně po dobu sedmi dnů, poté 5 mg dvakrát denně. Pokračujte v užívání levothyroxinu. Paracetamol dle potřeby na bolest.
+
+Stav při propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní hluboká žilní trombóza pravé podkolenní žíly.
+
+Stav při propuštění:
+Psychický stav: Vědomá a orientovaná.
+Úroveň vědomí: Probuděná a pozorná.
+Funkční stav: Chůze a soběstačnost.
+
+Pokyny při propuštění:
+Užívejte antikoagulancia podle předpisu. Zvedejte nohu, když sedíte. V případě bolesti na hrudi, dušnosti nebo krvácení se obraťte na ___ .
+
+Pokyny pro další péči:
+___

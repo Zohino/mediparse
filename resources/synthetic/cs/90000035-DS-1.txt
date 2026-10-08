@@ -1,0 +1,78 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let, převezen z ___ s bolestmi v oblasti horní části břicha a nevolností trvající dva dny. Bez horečky nebo zvracení. Bolest se zmírnila po jídle.
+PROHLÍDKA SYSTÉMŮ:
+Negativní, s výjimkou výše uvedeného.
+
+Osobní anamnéza:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s koronární chorobou
+
+Fyzikální vyšetření:
+Pacient je v pohodě, mírná bolestivost v oblasti horní části břicha, bez známek ochrany.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Životní funkce:
+Bez horečky, stabilní
+Celkový stav:
+V dobrém stavu
+Krk:
+Flexibilní
+Plíce:
+Čisté na obou stranách
+KONČETINY:
+Bez otoků
+
+Významné výsledky:
+Lipáza a jaterní enzymy v normě. Pozitivní protilátky proti Helicobacter. Vyšetření provedená v ___ byla bez nálezů.
+ZÁVĚR:
+Mírná gastritida.
+
+Průběh hospitalizace:
+Léčba gastritidy inhibitory protonové pumpy, bolest ustoupila, dieta postupně rozšiřována. Pacient byl konzultován s ___ ohledně dalšího postupu. Propouštěn ve stabilním stavu.
+DŮLEŽITÉ ASPEKTY PŘECHODU:
+Dokončení celé kúry antibiotik.
+
+Léky při přijetí:
+Metformin, lisinopril
+
+Léky při propuštění:
+Pantoprazol jednou denně, amoxicilin a clarithromycin dvakrát denně po dobu dvou týdnů, pokračovat s metforminem a lisinoprilem.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes
+
+Stav při propuštění:
+Dobrý
+Psychický stav:
+Orientovaný a koherentní
+Úroveň vědomí:
+Vnímavý a komunikativní
+
+Pokyny při propuštění:
+Užívejte všechny léky podle předpisu. Vyhýbejte se alkoholu a lékům proti zánětu. V případě zhoršení bolesti, černé stolice nebo zvracení volejte ___ .
+
+Pokyny pro další sledování:
+___

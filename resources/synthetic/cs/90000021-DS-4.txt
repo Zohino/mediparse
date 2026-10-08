@@ -1,0 +1,76 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bušení srdce a dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka, ___ let, s fibrilací síní, léčená antikoagulancii, převezena z ___ po třech dnech zhoršující se dušnosti a bušení srdce, které začalo ___ dne. Popírá bolesti na hrudi a nemá anamnézu srdečního selhání.
+PROHLÍDKA SYSTÉMŮ:
+Pozitivní nález únavy. Negativní nález horečky, kašle nebo otoků nohou.
+
+Osobní anamnéza:
+Hypertenze
+Hypotyreóza
+Léčena u Dr. ___ z důvodu onemocnění štítné žlázy.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s mrtvicí.
+
+Fyzikální vyšetření:
+Celkový stav: Pacientka je v pohodě, bez známek utrpení.
+Plíce: Čisté bilaterálně.
+SRDEČNÍ: Nepravidelný rytmus, bez šelestu.
+Břicho: Měkké, bez citlivosti.
+Extremity: Teplé, bez edémů.
+Neurologické vyšetření: Pacientka je při vědomí, bez fokálních příznaků.
+
+Významné výsledky:
+Troponin negativní dvakrát. TSH v normě. Draslík 4,1, kreatinin na základní úrovni. EKG provedené ___ dne ukázalo rychlý nepravidelný rytmus bez ischemických změn.
+ZOBRAZENÍ:
+Rentgen hrudníku ukázal čisté plíce a normální velikost srdce.
+
+Průběh hospitalizace:
+Pacientka byla přijata pro kontrolu srdeční frekvence a byla jí podán perorální metoprolol, což mělo dobrý účinek; srdeční frekvence se ustálila pod 100. Elektrolyty byly doplněny. Antikoagulace byla pokračována. Její plán byl probrán s Dr. ___ a pacientka před propuštěním chodila samostatně.
+
+Léky při přijetí:
+Metoprolol 25 mg denně
+Apixaban 5 mg dvakrát denně
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg perorálně denně
+2. Apixaban 5 mg perorálně dvakrát denně
+3. Levothyroxine 75 mcg perorálně denně
+4. Lisinopril 10 mg perorálně denně
+
+Plán po propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Rychlá komorová odpověď
+Sekundární:
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Stabilní
+Psychický stav: Jasný a soudržný
+Úroveň vědomí: Při vědomí a komunikativní
+Funkční stav: Chůze, samostatná.
+
+Instrukce při propuštění:
+Byla jste přijata s rychlou srdeční frekvencí, která se zlepšila díky lékům. Užívajte léky podle předpisu a nepřestávejte užívat apixaban. V případě bolesti na hrudi, mdloby nebo zhoršující se dušnosti se obraťte na lékaře. V případě dotazů volejte ___ .
+
+Pokyny pro další péči:
+___

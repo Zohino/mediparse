@@ -1,0 +1,79 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Kožní reakce na penicilin (lehká)
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka, ve věku ___ let, byla převezena z ___ po třech dnech zhoršujícího se kašle, horečky a dušnosti. Uváděla sníženou chuť k jídlu a únavu od ___. V pohotovostní ambulanci byla horečnatá a s nízkou saturací kyslíkem, zobrazovací vyšetření hrudníku naznačovala pneumonii, a proto byla přijata k léčbě.
+
+Osobní anamnéza:
+Hypertenze
+Chronické onemocnění ledvin
+Anémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce:
+T 38,1 °C, srdeční frekvence 98 tepů/min, krevní tlak 132/74 mmHg, dechová frekvence 22, saturace kyslíkem 91 % při pokojovém vzduchu
+Celkový stav:
+Únavná, mírně dušná
+Hlava, oči, uši, nos, krk:
+Vlhké sliznice
+Plíce:
+Chropy v dolní části pravého plíce
+Břicho:
+Měkké, bezbolestné
+Končetiny:
+Bez otoků
+
+Významné výsledky:
+Laboratorní výsledky při přijetí: WBC 14,2, kreatinin 1,8 (blízko základní hodnoty), laktát 1,6, sodík 136, draslík 4,4, bikarbonát 22. Kultivace krve nevykazovala žádný růst po pěti dnech.
+ZOBRAZENÍ:
+Rentgen hrudníku provedený ___ ukázal konsolidaci v dolní části pravého plicního laloku bez výpotku. Opakované snímání ukázalo částečné zlepšení.
+
+Průběh hospitalizace:
+Byla léčena pneumonií získanou v komunitě pomocí ceftriaxonu a azithromycinu, poté byla léčba převedena na perorální antibiotika, jakmile ustoupila horečka. Podávání kyslíku bylo postupně snižováno do doby, kdy pacientka dýchala pokojovým vzduchem, což se stalo ___ . Funkce ledvin zůstala stabilní díky pečlivému dávkování léků. Tým ___ souhlasil s plánem léčby. Pacientka byla propuštěna v stabilním stavu.
+PROBLÉMY PŘECHODU:
+- Opakovaný rentgen hrudníku za šest týdnů.
+- Kontrola kreatininu při návštěvě praktického lékaře, Dr. ___.
+
+Léky při přijetí:
+Amlodipin 5 mg denně. Acetat vápenatý s jídlem. Aspirin 81 mg denně.
+
+Léky při propuštění:
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu čtyř dnů. Amlodipin 5 mg denně. Acetat vápenatý s jídlem. Aspirin 81 mg denně. Paracetamol dle potřeby při horečce.
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Hypoxie
+
+Stav při propuštění:
+Stabilní, zlepšený.
+Psychický stav:
+Orientovaná a při vědomí
+Úroveň vědomí:
+Vědomá a komunikativní
+
+Pokyny při propuštění:
+Byla léčena pneumonií. Dokončete veškerá antibiotika, pijte dostatek tekutin a odpočívejte. Vyhýbejte se protizánětlivým lékům kvůli problémům s ledvinami. V případě horečky, zhoršující se dušnosti nebo bolesti na hrudi se obraťte na lékaře. V případě jakýchkoli dotazů volejte ___ .
+
+Následná péče:
+___

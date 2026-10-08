@@ -1,0 +1,60 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha.
+
+Hlavní chirurgický zákrok:
+Laparoskopická appendektomie (odstranění slepého střeva).
+
+Anamnéza současného onemocnění:
+Pacient se dostavil na oddělení ___ s bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou, která trvala tři dny. Byl odeslán z ambulance ___ poté, co zobrazovací vyšetření naznačilo zánět slepého střeva. Nebyly hlášeny žádné zvracení, průjmy ani problémy s močením.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných informací.
+
+Fyzikální vyšetření:
+HLAVA, OČI, UŠI, NOS, Hrdlo (HEENT): Normální tvar hlavy, vlhké sliznice.
+BŘÍCHO: Citlivost v pravém dolním kvadrantu, bez ztuhnutí.
+KONČETINY: Teplé, dobře prokrvené, bez otoků.
+
+Významné výsledky:
+Počet bílých krvinek 13,2 při přijetí, normalizoval se na 7,8 při propuštění. Kreatinin a elektrolyty v normálních mezích. CT vyšetření břicha provedené u ___ ukázalo rozšířený, zánětlivě změněný appendix (slepé střevo) s okolním zánětem tukové tkáně, bez perforace nebo abscesu. Analýza moči byla bez nálezů.
+
+Průběh hospitalizace:
+Pacient byl převezen na operační sál u ___ k provedení laparoskopické appendektomie, která proběhla bez komplikací. Bolest byla kontrolována perorálními analgetiky a strava byla postupně rozšiřována podle tolerance. Pacient obdržel antibiotika před a po operaci, samostatně se pohyboval a byl propuštěn první den po operaci ve stabilním stavu po konzultaci s chirurgickým týmem ___ .
+
+Léky při přijetí:
+Lisinopril 10 mg denně a atorvastatin 20 mg večer.
+
+Léky při propuštění:
+Acetaminophen 650 mg každých šest hodin dle potřeby. Oxykodon 5 mg dle potřeby, vydán ___ . Pokračovat v užívání lisinoprilu a atorvastatinu.
+
+Plán po propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Akutní appendicitida (zánět slepého střeva).
+
+Stav při propuštění:
+Psychický stav: Vědomý a orientovaný, jasné myšlení.
+Úroveň vědomí: Plně při vědomí a komunikativní.
+Funkční stav: Chůze, samostatný.
+
+Pokyny při propuštění:
+Udržujte rány čisté a suché, nezvedejte nic těžšího než 4,5 kg po dobu dvou týdnů. V případě horečky, zhoršující se bolesti nebo zvracení se obraťte na lékaře. V případě dotazů volejte chirurgickou ambulanci na číslo ___.
+
+Pokyny pro další péči:
+___

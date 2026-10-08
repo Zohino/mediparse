@@ -1,6 +1,6 @@
 {
-  "corpus_sha256": "9ba61a593348b9f587269646e4de8468a2e837324828d969c794c6311ac6cf50",
-  "corpus_files": 200,
+  "corpus_sha256": "a63db45ab5335fb2b225d7cf62e89766af03b4a4b6ab3ca8a5e2eae7ac166ccb",
+  "corpus_files": 400,
   "ngram_size": 13,
   "normalization": "nfkc-lower-alnum-deid-v2",
   "structure_labels": [
@@ -61,7 +61,7 @@
     "Unit No",
     "Vitals"
   ],
-  "synthetic_ngrams": 20745,
+  "synthetic_ngrams": 79301,
   "reference": [
     {
       "name": "discharge.csv.gz",
@@ -76,6 +76,6 @@
   ],
   "shared_ngrams": 0,
   "colliding_subjects": 0,
-  "tool_commit": "d8515b84be3b897cfb4b1503fa99374e736e3fd7",
-  "created_at": "2026-10-03T22:24:38.738235Z"
+  "tool_commit": "44ca4623ac7a615b9ba0d26a59545839403523a0",
+  "created_at": "2026-10-08T19:42:56.699671Z"
 }

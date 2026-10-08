@@ -1,0 +1,73 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická cholecystektomie (odstranění žlučníku)
+
+Anamnéza současného onemocnění:
+Žena ve věku ___ let, která byla přijata kvůli bolestem v pravém horním kvadrantu břicha a nevolnosti trvajícím tři dny. Byla odeslána z ambulance ___ . Ultrazvukové vyšetření naznačilo zánět žlučníku, proto byla přijata k chirurgickému vyšetření.
+
+Předchozí zdravotní problémy:
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+
+Předchozí chirurgické zákroky:
+Císařský řez
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacientka je v pohodě, bez známek utrpení.
+Oči, uši, nos, hrdlo:
+Sklera (bílá část oka) bez žlutosti.
+Břicho:
+Měkké, mírná bolestivost, rány čisté.
+Kůže:
+Teplá, suchá.
+
+Výsledky vyšetření:
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek 8,1, hemoglobin 12,9, kreatinin 0,7, normální hodnoty jaterních enzymů.
+ZÁVĚR:
+Žlučové kameny s zesílenou stěnou žlučníku, bez rozšíření žlučových cest.
+
+Průběh hospitalizace:
+Pacientce byla provedena nekomplikovaná laparoskopická cholecystektomie dne ___. Bolest byla kontrolována pomocí léků, dobře tolerovala běžnou stravu a byla schopna samostatné chůze. Histologické výsledky byly k dispozici při propuštění a budou posouzeny lékařem ___.
+
+Léky při přijetí:
+Lisinopril, atorvastatin (denně).
+
+Léky při propuštění:
+Pokračujte v užívání lisinoprilu a atorvastatinu. V případě bolesti užívejte paracetamol dle potřeby. V případě silné bolesti užívejte oxykodon jen výjimečně. Během užívání opioidů užívejte docusate.
+
+Plán po propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Hlavní:
+Akutní cholecystitida (zánět žlučníku).
+Vedlejší:
+Hypertenze, hyperlipidemie.
+
+Stav při propuštění:
+Stabilní.
+Úroveň vědomí:
+Přítomná a při vědomí.
+Aktivity:
+Chůze bez pomoci.
+
+Pokyny při propuštění:
+Můžete se osprchovat, ale ne namáčet rány. Během čtyř týdnů se vyhýbejte zvedání předmětů o hmotnosti více než 4,5 kg. V případě horečky, zhoršující se bolesti, zvracení nebo žlutosti kůže kontaktujte ___. Následujte doporučení lékaře ___.

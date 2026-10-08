@@ -1,0 +1,63 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka, ve věku ___ let, přišla na vyšetření kvůli bušení srdce, závratím a mírné únavě, které trvají několik dní.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka prodělala mrtvici.
+
+Fyzikální vyšetření:
+Životní funkce:
+Stabilní, bez horečky
+Celkový stav:
+Pacientka je v pohodě.
+Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Normální
+Neurologické vyšetření:
+Bez patologických nálezů
+
+Relevantní výsledky:
+EKG ukázalo nepravidelný srdeční rytmus bez pauz. Elektrolyty a funkce štítné žlázy byly normální. Rentgen hrudníku byl čistý.
+
+Průběh hospitalizace:
+Pacientka byla převezena z ___ s fibrilací síní a rychlou srdeční frekvencí. Srdeční frekvence byla kontrolována pomocí metoprololu a byla zahájena antikoagulační léčba. Pacientka zůstala stabilní a příznaky ustoupily.
+
+Léky při přijetí:
+Multivitamin denně
+Doplněk vápníku
+
+Léky při propuštění:
+Metoprolol tartrát dvakrát denně. Apixaban dvakrát denně. Pokračujte v užívání multivitamínu a doplňku vápníku, jak bylo doposud.
+
+Plán po propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Bušení srdce
+Hypertenze
+
+Stav při propuštění:
+Psychický stav: Vědomá a orientovaná
+Úroveň vědomí: Plně při vědomí
+Aktivity: Chůze samostatná
+
+Pokyny při propuštění:
+Užívejte léky podle předpisu. V případě bolesti na hrudi, mdloby nebo krvácení se vraťte. Prosím, kontaktujte Dr. ___ do dvou týdnů.
+
+Pokyny pro další péči:
+___

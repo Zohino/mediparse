@@ -1,0 +1,81 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Kardiologie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Muž ve věku ___ let s diagnostikovanou fibrilací síní se dostavil na oddělení ___ po dvou dnech silného bušení srdce a mírných závratí. Symptomy se začaly objevovat ___ během odpočinku. Nebyly hlášeny bolesti na hrudi, synkopa ani horečka.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+
+Chirurgická anamnéza:
+Apendektomie na ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec utrpěl mrtvici v sedmdesáti letech.
+
+Fyzikální vyšetření:
+Vitální funkce:
+Srdeční frekvence 118, krevní tlak 128/76, bez horečky, saturace 98 % při pokojovém vzduchu
+Celkový stav:
+Pacient je v pohodě, bez známek utrpení
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Krk:
+Pružný, bez jícnové dilatace
+Plíce:
+Čisté bilaterálně
+Břicho:
+Měkké, bez citlivosti
+Neurologické vyšetření:
+Orientovaný, bez fokálních příznaků
+
+Výsledky vyšetření:
+LABORATOŘ PŘI PŘIJETÍ:
+Troponin negativní dvakrát, draslík 4,1, hořčík 2,0, TSH normální
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Draslík 4,3, kreatinin stabilní, hemoglobin 14,2. EKG ukázalo nepravidelný, úzký komplexový rytmus bez ischemických změn.
+
+Průběh hospitalizace:
+Srdeční frekvence byla kontrolována perorálním metoprololem a symptomy ustoupily během jednoho dne. Antikoagulace byla pokračována po konzultaci s kardiologem, Dr. ___. Echokardiogram byl uspokojivý. Pacient byl stabilní, pohyblivý a byl propuštěn s plánovanou ambulantní kontrolou na ___.
+
+Léky při přijetí:
+Metoprolol, apixaban, atorvastatin, lisinopril
+
+Léky při propuštění:
+Metoprolol succinate 100 mg denně. Apixaban 5 mg dvakrát denně. Atorvastatin 40 mg večer. Lisinopril 10 mg denně. Pokračujte ve všech dávkách, které užíváte doma.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární:
+Fibrilace síní s rychlou ventrikulární odpovědí
+
+Stav při propuštění:
+Psychický stav:
+Orientovaný a koherentní
+Úroveň vědomí:
+Orientovaný a komunikativní
+Funkční stav:
+Pohyblivý, soběstačný
+
+Instrukce při propuštění:
+Byl jste hospitalizován kvůli rychlému a nepravidelnému srdečnímu tepu. Užívajte léky podle předpisu, zejména ředidlo krve. V případě bolesti na hrudi, mdloby nebo zhoršení bušení srdce se vraťte, a nezapomeňte na kontrolu u kardiologa na ___.
+
+Pokyny pro další péči:
+___

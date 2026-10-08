@@ -1,0 +1,83 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava, nadměrná žízeň
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Muž ve věku ___ let, který se několik dní potýkal s únavou a žízní. Byla zjištěna výrazně zvýšená hladina glukózy a byl převeden z ___ pro další péči.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce:
+Stabilní
+Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Suchá sliznice
+Krk:
+Flexibilní
+Plíce (PULM):
+Čisté
+Srdce (CARDIAC):
+Pravidelné
+Břicho:
+Měkké
+Extremity:
+Bez otoků
+Kůže:
+Teplá
+
+Významné výsledky:
+Hladina glukózy při přijetí výrazně zvýšená, bikarbonáty nízké, normalizovány po léčbě. Hemoglobin A1c zvýšený. Rentgen hrudníku bez akutních nálezů.
+ZÁVĚR:
+Žádný akutní kardiopulmonální proces.
+
+Průběh hospitalizace:
+Pacient byl diabetik s těžkou hyperglykémií a byl léčen infuzemi tekutin a inzulínu, poté byl převeden na podkožní inzulín. Tým ___ instruoval pacienta v monitorování hladiny glukózy a technice injekcí a jeho stav se zlepšil.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+1. Insulin glargin večer, dle pokynů
+2. Insulin lispro s jídlem, dle dávkovací tabulky
+3. Lisinopril denně
+4. Atorvastatin večer
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes mellitus s hyperglykémií
+Sekundární:
+Hypertenze, hyperlipidemie
+
+Stav při propuštění:
+Dobrý
+Psychický stav:
+Orientovaný a koherentní
+Úroveň vědomí:
+Vnímavý a komunikativní
+
+Pokyny při propuštění:
+Byl jste hospitalizován kvůli velmi vysoké hladině cukru v krvi. Měřte si hladinu cukru před jídlem a před spaním, užívejte inzulin dle předpisu a volejte ___ v případě, že hladina cukru zůstává abnormální.
+
+Pokyny pro další péči:
+___

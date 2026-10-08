@@ -1,0 +1,62 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Obecná chirurgie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická appendektomie (odstranění slepého střeva)
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let s hypertenzí se dostavil s bolestí v pravém dolním kvadrantu břicha, která se zhoršovala již dva dny, a také s nevolností a sníženou chutí k jídlu. Bolest začala v blízkosti pupku a postupně se šířila. Byl poprvé vyšetřen v urgentním centru ___ a poté byl odeslán na pohotovost. Popíral horečku, zvracení nebo problémy s močením. Jeho poslední jídlo bylo před ___ časem.
+
+Osobní anamnéza:
+Hypertenze
+Sezónní alergie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných informací
+
+Fyzikální vyšetření:
+Životní funkce: Teplota 37,8 °C, srdeční frekvence 96 úderů za minutu, krevní tlak 132/80, saturace kyslíkem 98 % při dýchání okolním vzduchem.
+Celkový stav: Nepohodlný, ale při vědomí, bez známek akutního stavu.
+SRDEČNÍ: Pravidelná frekvence a rytmus, bez šelestů.
+BŘÍCHO: Citlivost v pravém dolním kvadrantu, s napětím svalů.
+
+Významné výsledky:
+Laboratorní výsledky při přijetí: zvýšený počet bílých krvinek (14,2) s převahou neutrofilů. Elektrolyty a kreatinin byly v normě.
+ZÁVĚR: CT vyšetření břicha a pánve provedené ___ ukázalo dilatovaný, zánětlivý appendix o velikosti 11 mm, s otokem okolní tukové tkáně a bez abscesu nebo volného vzduchu.
+
+Průběh hospitalizace:
+Pacient byl přijat na chirurgické oddělení, byl ponechán na hladovce, dostával intravenózní tekutiny a antibiotika. Byl operován (laparoskopická appendektomie) lékařem ___ bez komplikací. Následující ráno mu byla nasazena dieta, bolest byla kontrolována perorálními léky a pacient měl normální vyprazdňování. Výsledky histologického vyšetření z ___ byly k dispozici při propuštění. Pacient bude vyšetřen lékařem ___ v ambulanci.
+
+Léky při přijetí:
+Lisinopril 10 mg denně; cetirizin 10 mg dle potřeby.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní appendicitida (zánět slepého střeva)
+Sekundární:
+Hypertenze
+
+Stav při propuštění:
+Psychický stav: Jasný a soustředěný.
+Úroveň vědomí: Při vědomí a komunikativní.
+Funkční stav: Chůze, soběstačný.
+
+Pokyny při propuštění:
+Byl vám proveden chirurgický zákrok pro appendicitidu. Užívajte paracetamol proti bolesti a zvedejte váhu nepřesahující 4,5 kg (10 liber) do vaší další návštěvy dne ___. Můžete se osprchovat, ale neponořujte rány do vody. V případě horečky, zarudnutí v místě řezů nebo zhoršení bolesti kontaktujte ambulanci ___ nebo se v případě závažných příznaků vraťte do ___ .
+
+Pokyny pro další péči:
+___

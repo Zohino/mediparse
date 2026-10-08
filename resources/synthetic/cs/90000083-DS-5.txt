@@ -1,0 +1,73 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let, který se dostavil na pohotovost s dušností a kašlem trvajícím tři dny. Byl nalezen v hypoxickém stavu s pískáním v plicích.
+
+Osobní anamnéza:
+Fibrilace síní
+Hypertenze
+Chronická obstrukční plicní nemoc (CHOPN)
+
+Chirurgická anamnéza:
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Mírně nepohodlný, mluví kompletními větami
+Oblast hlavy, očí, uší, nosu a krku (ORL):
+Vlhké sliznice
+Plíce:
+Difúzní pískání při výdechu
+Neurologické vyšetření:
+Vědomý, bez fokálních příznaků
+
+Významné výsledky:
+Rentgen hrudníku z ___ ukazuje hyperinflaci bez ložiskové konsolidace. Krevní obraz a elektrolyty bez odchylek.
+ZÁVĚR:
+Žádná pneumonie.
+
+Průběh hospitalizace:
+Léčba exacerbace CHOPN pomocí inhalačních léků, kortikosteroidů a krátké antibiotické terapie. Podávání kyslíku bylo postupně snižováno do úrovně pokojového vzduchu k datu ___. Frekvence zůstala kontrolovaná pomocí domácích léků. Pacient chodil samostatně před propuštěním.
+
+Léky při přijetí:
+Metoprolol, apixaban, inhalátor s albuterolem
+
+Léky při propuštění:
+Pokračujte v užívání metoprololu, apixabanu a albuterolu. Zahajte postupnou redukci prednisonu po dobu pěti dnů. Přidejte azithromycin k dokončení léčby.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Exacerbace CHOPN
+Hypertenze
+
+Stav při propuštění:
+Mentální stav:
+Orientovaný a koherentní
+Funkční stav:
+Samostatný, pohyblivý
+
+Instrukce při propuštění:
+Byl vám poskytnut lék na zhoršení dýchání. Užívajte všechny léky podle předpisu, vyhýbejte se kouření a v případě zhoršení dušnosti nebo horečky se vraťte. V případě dotazů volejte na číslo ___.
+
+Pokyny pro další péči:
+___

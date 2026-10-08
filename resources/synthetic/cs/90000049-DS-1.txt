@@ -1,0 +1,67 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Oddělení: Chirurgie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha.
+
+Hlavní chirurgický zákrok:
+Laparoskopická cholecystektomie (odstranění žlučníku).
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let, který se několik dní potýkal s bolestí v pravém horním kvadrantu břicha, nevolností a horečkou, která začala ___ dne. Byl přijat na pohotovost, kde zobrazovací metody naznačovaly akutní cholecystitidu (zánět žlučníku) a byl přijat k chirurgickému vyšetření.
+
+Osobní anamnéza:
+Diabetes mellitus 2. typu
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny.
+
+Fyzikální vyšetření:
+Celkový stav:
+Vědomý, v pohodě, bez známek utrpení.
+Oči, uši, nos, hrdlo:
+Sklera (bílá část oka) bez žlutosti, vlhké sliznice.
+Břicho:
+Měkké, citlivé v pravém horním kvadrantu, bez napětí, bez odrazové bolesti.
+
+Významné výsledky:
+Laboratorní testy ukázaly zvýšený počet bílých krvinek a mírně zvýšené hodnoty jaterních enzymů. Ultrazvukové vyšetření prokázalo žlučové kameny se zesílením stěny a tekutinou kolem žlučníku. CT vyšetření provedené ___ potvrdilo zánět žlučníku bez perforace (prasknutí). Laboratorní výsledky po operaci se vrátily do normálu.
+
+Průběh hospitalizace:
+Pacient dostával intravenózní tekutiny a antibiotika a byl vyšetřen týmem ___ . Byl převezen z oddělení ___ do operačního sálu k provedení laparoskopické cholecystektomie bez komplikací. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a pacient dobře reagoval na plán propuštění.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně, atorvastatin večer.
+
+Léky při propuštění:
+Paracetamol dle potřeby na bolest, pokračovat v užívání metforminu a atorvastatinu ve stejné dávce jako předtím. Zklidňující prostředek na stolici během užívání opioidů. Léky si vyzvedněte v lékárně ___ .
+
+Plán propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Akutní cholecystitida způsobená žlučovými kameny.
+
+Stav při propuštění:
+Psychický stav:
+Vědomý a srozumitelný.
+Fyzická aktivita:
+Chůze, soběstačný.
+
+Instrukce při propuštění:
+Byl léčen pro zánět žlučníku a byl mu odstraněn žlučník. Udržujte rány čisté a suché. Vyhýbejte se těžkému zvedání po dobu několika týdnů. V případě horečky, zhoršující se bolesti, zvracení nebo žlutosti kůže volejte na číslo ___ .
+
+Pokyny pro další péči:
+___

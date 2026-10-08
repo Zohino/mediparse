@@ -1,0 +1,80 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Kardiologie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let s diagnostikovanou fibrilací síní, přijat z ___ po třech dnech palpitací, únavy a otoků nohou. Při příjmu byla srdeční frekvence 140 úderů za minutu. Od ___ neužíval léky na regulaci srdeční frekvence kvůli zpoždění v lékárně.
+
+Předchozí zdravotní problémy:
+Hypertenze
+Obezita
+Hyperlipidemie
+Neuropatie
+Snížená ejekční frakce
+Insulinem kontrolovaná hyperglykémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s časnou koronární chorobou
+
+Fyzikální vyšetření:
+Celkový stav:
+Únavný, v klidu komfortní
+Hlava, oči, uši, nos, krk:
+Vlhké sliznice
+Krk:
+Zvýšený jugulární venózní tlak
+SRDEČNÍ:
+Nepravidelná, tachykardická
+Břicho:
+Měkké, bezbolestné
+Extremity:
+Edém 2+ až k kolenům
+Kůže:
+Teplá, bez vyrážky
+
+Významné výsledky:
+Laboratorní výsledky při přijetí (___) ukázaly: glukózu 286, hemoglobin A1c 9,1, draslík 3,3, kreatinin 1,6 (výchozí hodnota 1,4), BNP 1850. Rentgen hrudníku: vaskulární kongesce, malé výpotky. Echokardiografie: ejekční frakce 30 %, dilatované levé atrium.
+
+Průběh hospitalizace:
+Léčba intravenózními diuretiky, celková negativní bilance několika litrů, a postupný pokles hmotnosti. Regulace srdeční frekvence pomocí metoprololu a později digoxin. Doplňování draslíku. Úprava dávky inzulínu s konzultací týmu ___ a nutriční specialisty. Pokračování v antikoagulaci. Před propuštěním vyšetřen Dr. ___, pacient byl euvolemický, srdeční frekvence 80 úderů za minutu.
+
+Léky při přijetí:
+Metoprolol, metformin, lisinopril, atorvastatin, apixaban
+
+Léky při propuštění:
+1. Metoprolol succinate 100 mg denně
+2. Furosemid 40 mg denně
+3. Apixaban 5 mg dvakrát denně
+4. Insulin glargin 20 jednotek večer
+5. Atorvastatin 40 mg denně
+6. Lisinopril 10 mg denně
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Rychlá komorová frekvence
+Přetížení objemem
+Hypokalémie
+Hyperglykémie
+
+Stav při propuštění:
+Mentální stav:
+Orientovaný a při vědomí
+Úroveň vědomí:
+Probudený a komunikativní
+Funkční stav:
+Chůze, soběstačný
+
+Instrukce při propuštění:
+Byl jste hospitalizován kvůli rychlému srdečnímu tepu a hromadění tekutin. Zvažujte se každé ráno a volejte ___ v případě, že přiberete více než 1,4 kg. Užívajte všechny léky denně. Dodržujte kontrolní prohlídky v ambulanci ___ .

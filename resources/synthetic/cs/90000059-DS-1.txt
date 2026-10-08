@@ -1,0 +1,79 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a únava
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacient se dostavil na oddělení ___ s třemi dny trvajícími potížemi v podobě bušení srdce, únavy a sníženého objemu moči po nedostatečném příjmu potravy. Během týdne byl vyšetřen na oddělení ___ a byl poslán na urgentní příjem, kde byla zjištěna nepravidelná srdeční frekvence a zvýšená hladina kreatininu.
+
+Anamnéza minulých onemocnění:
+Chronické onemocnění ledvin
+Srdeční selhání
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (zvýšená hladina tuků v krvi)
+
+Anamnéza operací:
+Apendektomie (odstranění slepého střeva) na ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav:
+Vědomý, v pohodě
+Hlava, oči, uši, nos, krk:
+Vlhké sliznice
+Plíce:
+Čisté
+SRDEČNÍ:
+Nepravidelná srdeční frekvence, bez šelestu
+Břicho:
+Měkké, bez citlivosti
+Extremity (končetiny):
+Lehký otok
+Kůže:
+Teplá, suchá
+Neurologické vyšetření:
+Bez lokalizovaných abnormalit
+
+Průběh hospitalizace:
+Pacient byl přijat pro regulaci srdečního rytmu a monitorování funkce ledvin. EKG monitorování ukázalo nepravidelný rytmus, který byl regulován pomocí metoprololu. Po konzultaci s ___ byla zahájena antikoagulační léčba. Pacientovi byly podávány intravenózní tekutiny a hladina kreatininu se zlepšila a přiblížila se normálním hodnotám. Diuretika byla dočasně vysazena a poté znovu podávána v nižší dávce. Pacient byl propuštěn domů a byla mu domluvena kontrola na ___ . Hmotnost a krevní tlak zůstaly stabilní.
+
+Léky při přijetí:
+Furosemid 40 mg denně, lisinopril, carvedilol, atorvastatin večer, aspirin.
+
+Léky při propuštění:
+Metoprolol succinate 50 mg denně. Apixaban 5 mg dvakrát denně. Furosemid 20 mg denně. Atorvastatin 40 mg večer. Lisinopril byl dočasně vysazen do doby, než bude znovu zkontrolována funkce ledvin.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Fibrilace síní
+Akutní poškození ledvin
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí:
+Vědomý a orientovaný
+Funkční stav:
+Chůze, soběstačný
+
+Instrukce při propuštění:
+Užívejte léky podle předpisu a každý den se vážte. Vyhýbejte se lékům proti bolesti s protizánětlivým účinkem. V případě bušení srdce, mdloby, bolesti na hrudi, otoků nebo sníženého objemu moči se vraťte. Laboratorní testy budou provedeny na ___.
+
+Pokyny pro kontrolu:
+___

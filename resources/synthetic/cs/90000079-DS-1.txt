@@ -1,0 +1,76 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bolest v pravém boku a horečka
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka, ve věku ___ let, byla přijata z ___ s třidenní bolestí v pravém boku, horečkou a pálením při močení. Příznaky se začaly objevovat ___ a zhoršovaly se i přes užívání tekutin. Pacientka uváděla zimnici a nevolnost, ale žádné zvracení. Na pohotovosti měla horečku a byla jí podávána intravenózní tekutina a antibiotika.
+
+Osobní anamnéza:
+Hypertenze, diagnostikována v ___
+Hypotyreóza
+Žádná cukrovka
+
+Chirurgická anamnéza:
+Chirurgické odstranění žlučníku
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce: T 38,4, HR 98, BP 128/74, RR 16, SpO2 98 % při pokojovém vzduchu
+Celkový stav: Pacientka vypadá nemocně, v klidu je v pohodě.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Plíce: Čisté bilaterálně.
+Kůže: Teplá, bez vyrážky.
+Neurologické vyšetření: Pacientka je při vědomí, bez neurologických deficitů.
+
+Významné výsledky:
+Počet bílých krvinek 14,2 při přijetí, 8,1 při propuštění. Kreatinin normální. Analýza moči s přítomností leukocytů a bakterií. Kultivace moči prokázala přítomnost E. coli, která je citlivá na ceftriaxon. Kultivace krve byla negativní.
+ZOBRAZENÍ:
+CT vyšetření břicha provedené v ___ prokázalo akutní pyelonefritidu (zánět ledvin) v pravém ledvinném pánvi bez obstrukce nebo abscesu.
+
+Průběh hospitalizace:
+Pacientka byla přijata s akutní pyelonefritidou a zahájena byla léčba ceftriaxonem. Lékařka ___ se zabývala anamnézou alergie na penicilin, která byla hodnocena jako nízké riziko. Horečka ustoupila druhý den hospitalizace a bolest se zlepšila. Dne ___ pacientka dobře tolerovala příjem tekutin a byla převedena na perorální antibiotika.
+PROBLÉMY PŘI PŘECHODU:
+- Dokončení celé kúry antibiotik
+- Opakované vyšetření moči při návštěvě praktického lékaře
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levothyroxine 75 mcg denně
+
+Léky při propuštění:
+1. Ciprofloxacin 500 mg dvakrát denně po dobu sedmi dnů
+2. Lisinopril 10 mg denně
+3. Levothyroxine 75 mcg denně
+4. Acetaminophen 650 mg každých šest hodin dle potřeby na bolest
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní pyelonefritida
+Bakteriurie způsobená Escherichia coli
+
+Stav při propuštění:
+Psychický stav: Jasný a srozumitelný
+Úroveň vědomí: Při vědomí a komunikativní
+
+Pokyny při propuštění:
+Byla Vám léčena infekce ledvin. Užívajte antibiotika až do konce a pijte dostatek tekutin. V případě horečky, zvracení, zhoršení bolesti v boku nebo neschopnosti užívat léky se obraťte na lékaře. V případě dotazů volejte na číslo ___ nebo kontaktujte ordinaci na čísle ___ v pracovní době.
+
+Následná péče:
+___

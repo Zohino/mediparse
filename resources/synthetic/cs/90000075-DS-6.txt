@@ -1,0 +1,74 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohy a snížené množství moči
+
+Zásahy:
+Žádné
+
+Anamnéza:
+Pacientka byla přijata po několika dnech zhoršujícího se otoku nohy, snížené chuti k jídlu a sníženého množství moči, odeslána z její __ ambulantní ordinace. Laboratorní výsledky ukázaly výrazně zvýšenou hodnotu kreatininu oproti základní hodnotě. Byla přijata dne ___ kvůli přetížení tekutinami a k pečlivému sledování.
+
+Předchozí zdravotní problémy:
+Chronické onemocnění ledvin, sledováno v __
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Životní funkce:
+Krevní tlak 148/86, srdeční frekvence 78, bez horečky, saturace kyslíkem 95 % při dýchání okolním vzduchem
+Celkový stav:
+Pacientka je v pohodě, bez známek úzkosti
+Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Vlhké sliznice
+Srdce:
+Pravidelný rytmus, tichý systolický šelest
+Neurologické vyšetření:
+Orientovaná, bez lokalizovaných neurologických příznaků
+
+Významné výsledky:
+Kreatinin 3,4 při příjmu, snížil se na 2,1 při propuštění. Draslík 5,3, korigován léčbou. BNP zvýšen. Analýza moči bez patologických nálezů. Opakovaná laboratorní vyšetření provedená dne ___ byla stabilní.
+ZÁVĚR:
+Lehká kongestivní změny v plicích, bez lokalizovaných infiltrátů.
+
+Průběh hospitalizace:
+Hodnota kreatininu se zlepšila po vysazení domácího diuretika a ACE inhibitoru, poté byl diuretikum opatrně znovu nasazen, jakmile byl znovu zhodnocen stav hydratace. Závažné srdeční selhání zůstalo kompenzované, s postupným snižováním hmotnosti. Hladina draslíku se normalizovala. Podle __ bude funkce ledvin znovu kontrolována a pacientka byla propuštěna dne __ ve stabilním stavu.
+
+Léky při přijetí:
+Lisinopril, furosemid, atorvastatin, inzulin glargin
+
+Léky při propuštění:
+Furosemid 40 mg denně. Atorvastatin 20 mg večer. Inzulin glargin ve stejné dávce jako předtím. Lisinopril bude vysazen do doby, než budou znovu provedena laboratorní vyšetření ledvin v ambulantní péči.
+
+Plán po propuštění:
+Domů s péčí od __
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Chronické onemocnění ledvin
+Srdeční selhání
+
+Stav při propuštění:
+Psychický stav:
+Orientovaná a srozumitelná
+Úroveň vědomí:
+Orientovaná a komunikativní
+
+Pokyny při propuštění:
+Byla jste hospitalizována, protože se zhoršila funkce vašich ledvin a hromadila se tekutiny. Každé ráno se vážte a volejte __, pokud se vaše váha zvýší o více než 1,4 kg. Vyhýbejte se ibuprofenu. Nezačínejte užívat lisinopril, dokud vám to nebude lékařem doporučen.
+
+Pokyny pro další péči:
+___

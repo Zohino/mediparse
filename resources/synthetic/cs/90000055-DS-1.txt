@@ -1,0 +1,73 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Žena s hypertenzí a hypotyreózou byla přijata do ___ s třidenním produktivním kašlem, horečkou a mírnou dušností. Byla vyšetřena lékařem ___ v ambulanci, zjistila se u ní hypoxie v klidu a byla odeslána na pohotovost.
+
+Osobní anamnéza:
+Hypertenze
+Hypotyreóza
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce: T 38,1, srdeční frekvence 96, krevní tlak 128/74, SpO2 93 % při dýchání okolním vzduchem
+Celkový stav: Mírně nemocná, v pohodě
+Hlava, oči, uši, nos, hrdlo: Vlhká sliznice
+Plíce: Krepitace v dolní části pravého plíce
+Břicho: Měkké, bez citlivosti
+EXTREMITY: Bez otoků
+Neurologické vyšetření: Bez fokálních příznaků
+
+Významné výsledky:
+LABORATOŘ PŘI PŘIJETÍ: WBC 13,2, kreatinin v normě, laktát 1,1, zvýšený prokalcitonin.
+ZOBRAZENÍ: Rentgen hrudníku provedený v ___ ukázal konsolidaci v dolní části pravého plíce bez výpotku. EKG ukázalo sinusový rytmus bez akutních změn.
+
+Průběh hospitalizace:
+Léčena pro pneumonii získanou v komunitě pomocí ceftriaxonu a azithromycinu, poté převedena na perorální antibiotika, jakmile ustoupila horečka. Podávání kyslíku bylo postupně snižováno do dne třetí hospitalizace. Byla vyšetřena lékařem ___ pro posouzení mobility a propuštěna domů s zajištěnou péčí prostřednictvím ___.
+PROBLÉMY PŘI PŘECHODU:
+- Opakované zobrazovací vyšetření hrudníku za šest týdnů
+- Kontrola biochemického profilu při kontrolní prohlídce
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levothyroxine 75 mcg denně
+
+Léky při propuštění:
+Levothyroxine 75 mcg denně
+Lisinopril 10 mg denně
+Amoxicillin-clavulanate 875 mg dvakrát denně po dobu pěti dnů
+Acetaminophen dle potřeby při horečce
+
+Plán po propuštění:
+Domů s péčí
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Psychický stav: Jasný a soudržný
+Úroveň vědomí: Vnímavá a komunikativní
+Funkční stav: Chůze, soběstačná
+
+Instrukce při propuštění:
+Byla léčena pro pneumonii. Dokončete všechny antibiotika, pijte dostatek tekutin a odpočívejte. Zavolejte ___ nebo se vraťte do nemocnice, pokud se zhorší dušnost, objeví se vysoká horečka nebo bolest na hrudi.
+
+Pokyny pro kontrolu:
+___

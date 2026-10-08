@@ -1,0 +1,72 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost, otoky nohou
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacient je muž s diagnostikovaným srdečním selháním, který se dostavil do ___ s třemi dny zhoršující se dušnosti při námaze a otoky nohou, což se projevilo po vynechání dávek léku ___. Popírá cukrovku. Žádné bolesti na hrudi ani horečka. Byl vyšetřen lékařem ___ v ambulanci dne ___ a odeslán na pohotovost, kde měl přetížení tekutinami a byl přijat k léčbě diuretiky.
+
+Anamnéza:
+Fibrilace síní
+Hypertenze
+Hyperlipidemie
+
+Chirurgická anamnéza:
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Hlava, oči, uši, nos, krk:
+Vlhké sliznice, zvýšený jugulární venózní tlak
+Plíce:
+Chropy v obou dolních plicních lalocích
+Břicho:
+Měkké, bezbolestné
+Extremity:
+Edém na obou nohou až po kolena
+Kůže:
+Teplá, suchá
+
+Významné výsledky:
+Laboratorní výsledky z ___ ukázaly: sodík 136, draslík 4,1, kreatinin 1,0 a výrazně zvýšený BNP. Troponin negativní dvakrát. Rentgen hrudníku, interpretovaný lékařem ___, prokázal plicní vaskulární kongesci s malými bilaterálními efuzemi. EKG ukázalo nepravidelný rytmus s kontrolovanou ventrikulární frekvencí a bez akutních ischemických změn.
+
+Léky při přijetí:
+Metoprolol sukcinát, lisinopril, apixaban, atorvastatin, podle záznamů lékárny ___.
+
+Léky při propuštění:
+1. Furosemid 40 mg perorálně denně.
+2. Metoprolol sukcinát 50 mg perorálně denně.
+3. Lisinopril 10 mg perorálně denně.
+4. Apixaban 5 mg perorálně dvakrát denně.
+5. Atorvastatin 40 mg perorálně večer.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Fibrilace síní
+
+Stav při propuštění:
+Mentální stav:
+Orientovaný a koherentní
+Úroveň vědomí:
+Vnímavý a komunikativní
+Funkční stav:
+Chůze, soběstačný
+
+Instrukce při propuštění:
+Byli jste hospitalizováni kvůli hromadění tekutin, které způsobovaly dušnost a otoky. Tekutiny byly odstraněny pomocí léků. Zvažujte se každé ráno a volejte ___ v případě, že se vaše váha během jednoho dne zvýší o více než 1,4 kg. Omezte příjem soli. Užívajte všechny léky podle pokynů. Dodržujte termín vaší návštěvy u lékaře ___ a v případě bolesti na hrudi nebo zhoršení dýchání se vraťte.
+
+Pokyny pro další péči:
+___

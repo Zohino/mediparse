@@ -1,0 +1,73 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Oddělení: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha a zvracení
+
+Zásahné chirurgické zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Žena ve věku ___ let, která se dostavila s bolestí břicha, nevolností a zvracením trvající dva dny. Byla odeslána z ambulance ___ po zhoršení příjmu potravy a závratích.
+PROHLÍDKA SYSTÉMŮ:
+Nevolnost, bez horečky.
+
+Osobní anamnéza:
+Hypertenze
+Hypotyreóza
+Gastroezofageální reflux
+
+Chirurgická anamnéza:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Bez horečky, stabilní vitální funkce, suché sliznice, mírná bolestivost břicha.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Celkový stav: Komfortní, bez známek utrpení
+Hlava, krk, uši, nos, hrdlo: Vlhké sliznice
+Plíce: Čisté bilaterálně
+Břicho: Měkké, bez bolestivosti
+EXTREMITY: Bez otoků
+Kůže: Teplá a suchá
+
+Významné výsledky:
+Kreatinin mírně zvýšen při příjmu, zlepšení po podání tekutin. Lipáza normální. Počet bílých krvinek normální. CT břicha ukázalo mírné změny způsobené gastroenteritidou, bez známek obstrukce.
+
+Průběh hospitalizace:
+Léčba gastroenteritidy intravenózními tekutinami a antiemetiky. Zvýšení kreatininu vyvolalo podezření na možnou akutní poruchu funkce ledvin v důsledku dehydratace, což se zlepšilo do propuštění. Dieta postupně rozšiřována; vyšetřil/a ___.
+
+Léky při přijetí:
+Lisinopril, levothyroxin, omeprazol
+
+Léky při propuštění:
+Levothyroxin denně, omeprazol denně, ondansetron dle potřeby při nevolnosti. Lisinopril vysadit do opětovného vyšetření funkce ledvin praktickým lékařem.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní gastroenteritida
+Dehydratace
+Hypertenze
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí: Vědomá a komunikativní
+Funkční stav: Chůze, soběstačná
+
+Pokyny při propuštění:
+Byla/byl jste léčena/léčen pro infekci žaludku a dehydrataci. Pijte dostatek tekutin, jezte nenáročnou stravu a v případě horečky, přetrvávajícího zvracení nebo malého množství moči se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro další péči:
+___

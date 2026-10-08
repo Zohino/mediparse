@@ -1,0 +1,73 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Obor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé straně těla
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let, který se dostavil s bolestí v pravé straně těla a nevolností trvající dva dny. Byl doporučen lékařem ___ k vyšetření a úpravě bolesti.
+
+Předchozí zdravotní problémy:
+Hypertenze
+Kameny v ledvinách
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodině je zaznamenána chronická renální insuficience u otce. Jiné známé problémy s ledvinami nejsou.
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlný, bez známek akutního stavu
+Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Normální
+Krk:
+Flexibilní
+Břicho:
+Mírná bolestivost v pravé straně
+Kůže:
+Teplá, suchá
+Neurologické vyšetření:
+Vědomý, bez specifických neurologických příznaků
+
+Výsledky vyšetření:
+Analýza moči ukázala přítomnost krve, ale bez známek infekce. Kreatinin v normě. V oblasti ___ byl zobrazen kámen s mírnou hydronefrózou.
+Zobrazovací metody:
+CT: Kámen o velikosti 4 mm v pravé močové trubici.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Tamsulosin večer, ibuprofen dle potřeby na bolest, pokračovat v užívání lisinoprilu a atorvastatinu.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Kámen v pravé močové trubici
+Hypertenze
+
+Stav při propuštění:
+Stabilní, bolest pod kontrolou
+Úroveň vědomí:
+Vědomý a bdělý
+Aktivity:
+Chůze bez pomoci
+
+Pokyny při propuštění:
+Pijte dostatek tekutin a sledujte moč. V případě horečky, nekontrolovatelné bolesti nebo nemožnosti močit se obraťte na lékaře.
+
+Pokyny pro další sledování:
+___

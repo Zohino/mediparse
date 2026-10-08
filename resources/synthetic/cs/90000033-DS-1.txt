@@ -1,0 +1,79 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Žena ve věku ___ let s astmatem a hypertenzí, která se dostavila do nemocnice ___ s pětidenním produktivním kašlem, horečkou a postupující dušností. Příznaky se začaly objevovat poté, co se v domácnosti nakazila osoba dne ___. Pacientka si stěžovala na bolest na pravé straně hrudníku a snížený příjem potravy. V pohotovostní ambulanci měla horečku a saturaci kyslíkem 89 % při dýchání okolního vzduchu, a zobrazovací vyšetření ukázala konsolidaci v dolním laloku pravé plíce.
+
+Osobní anamnéza:
+Astma
+Hypertenze
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí, sledována v ___
+
+Fyzikální vyšetření:
+HLAVA, OČI, UŠI, NOS, HLTAN:
+Suché sliznice, žádné léze v orofaryngu.
+SRDEČNÍ:
+Pravidelná frekvence a rytmus, žádné šelesty.
+KONČETINY:
+Teplé, bez otoků.
+KŮŽE:
+Žádné vyrážky.
+NEUROLOGIE:
+Vědomá, orientovaná, bez fokálních příznaků.
+
+Významné výsledky:
+Laboratorní výsledky z ___: počet bílých krvinek 14,2 s převahou neutrofilů, laktát 1,4, kreatinin 0,8 (výchozí hodnota). Kultivace krve nevykazovala růst po dvou dnech. Rentgen hrudníku: ztmavení v dolním laloku pravé plíce bez výpotku. Test na respirační viry byl negativní. Test na antigen Legionella v moči byl negativní. Opakované rentgenové snímky, posouzené radiologem ___, ukázaly stabilní nálezy bez nového výpotku.
+
+Průběh hospitalizace:
+Byla léčena pneumonií získanou v komunitě intravenózním azithromycinem a ceftriaxonem, což tolerovala i přes uvedenou alergii po konzultaci s lékárnou ___. Podávání kyslíku bylo postupně snižováno do dne třetí hospitalizace. Její astma zůstalo kontrolované pomocí inhalačních léků. Krevní tlak byl kontrolován pomocí domácí léčby. Před propuštěním byla převedena na perorální antibiotika a mohla se samostatně pohybovat.
+PROBLÉMY PŘI PŘECHODU:
+Opakovaný rentgen hrudníku za šest týdnů v ___ k potvrzení zlepšení.
+
+Léky při přijetí:
+Inhalátor s albuterolem dle potřeby
+Lisinopril 10 mg denně
+Inhalátor s flutikasonem dvakrát denně
+
+Léky při propuštění:
+1. Azithromycin 250 mg denně po dobu tří dnů
+2. Cefpodoxim 200 mg dvakrát denně po dobu čtyř dnů
+3. Inhalátor s albuterolem každé čtyři hodiny dle potřeby
+4. Lisinopril 10 mg denně
+5. Inhalátor s flutikasonem dvakrát denně
+
+Plán po propuštění:
+Domů s péčí ___
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Sekundární:
+Astma
+Hypertenze
+
+Stav při propuštění:
+Psychický stav: Jasný a srozumitelný.
+Úroveň vědomí: Vědomá a komunikativní.
+Funkční stav: Samostatně pohyblivá.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli infekci plic a váš stav se zlepšil díky antibiotikům. Dokončete celou kúru obou léků doma. Odpočívejte, pijte dostatek tekutin a pokračujte v používání inhalátorů. V případě zhoršení dušnosti, vysoké horečky nebo bolesti na hrudi se vraťte zpět. V případě dotazů volejte lékaři Dr. ___ nebo do ambulance na telefonním čísle ___.
+
+Pokyny pro kontrolní prohlídku:
+___

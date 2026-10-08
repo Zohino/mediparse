@@ -1,0 +1,75 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bušení srdce
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Žena ve věku ___ let, která pociťovala bušení srdce a závratě po dobu dvou dnů. Byla odeslána k vyšetření, kde byl zjištěn nepravidelný puls kolem 130. Byla odeslána na pohotovost jejím ošetřujícím lékařem, Dr. ___.
+
+Osobní anamnéza:
+Hypertenze
+Hypotyreóza
+Osteoartróza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s mrtvicí
+
+Fyzikální vyšetření:
+Plíce:
+Čisté bilaterálně.
+SRDEČNÍ:
+Nepravidelně nepravidelný, tachykardický.
+BŘÍCHO:
+Měkké, bez citlivosti.
+NEUROLOGICKÉ:
+Přítomná, bez fokálních příznaků.
+
+Relevantní výsledky:
+LABORATOŘ PŘI PŘIJETÍ:
+Drusík 3,3, hořčík 1,6, TSH normální, troponin negativní. EKG ukázalo absenci P vln s nepravidelným, úzkým komplexem při frekvenci 128. Rentgen hrudníku bez patologických nálezů.
+
+Průběh hospitalizace:
+Frekvence byla kontrolována pomocí metoprololu a byla zahájena antikoagulační léčba apixabanem. Kardiolog, Dr. ___, zkontroloval její monitorování srdeční činnosti. Elektrolyty byly doplněny a pacientka se cítila mnohem lépe k ___, s klidovou frekvencí v rozmezí 70.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levothyroxine 75 mcg denně
+
+Léky při propuštění:
+Metoprolol succinate 50 mg denně
+Apixaban 5 mg dvakrát denně
+Lisinopril 10 mg denně
+Levothyroxine 75 mcg denně
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Bušení srdce s rychlým, nepravidelným rytmem
+Hypokalémie
+
+Stav při propuštění:
+Stabilní.
+Úroveň vědomí:
+Přítomná a komunikativní.
+Úroveň aktivity:
+Nezávislá, chodí bez pomoci.
+
+Instrukce při propuštění:
+Užívejte apixaban dvakrát denně, bez vynechávání dávek. V případě krvácení, omdlélé nebo silného bušení srdce volejte svého lékaře na číslo ___. Vyhýbejte se lékům proti bolesti s protizánětlivým účinkem.
+
+Pokyny pro další péči:
+___

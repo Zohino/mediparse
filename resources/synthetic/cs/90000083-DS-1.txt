@@ -1,0 +1,68 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let byl přijat z ___ s dvoudenními potížemi v podobě bušení srdce a mírné závratě. Bez bolesti na hrudi nebo ztráty vědomí.
+ANAMNÉZA:
+Negativní, s výjimkou výše uvedeného.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s mrtvicí
+
+Fyzikální vyšetření:
+Nepravidelný srdeční rytmus, pacient v pohodě, plíce čisté.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Celkový stav: Pacient vypadá dobře, bez známek úzkosti.
+Břicho: Měkké, bez citlivosti.
+Extremity: Teplé, bez otoků.
+
+Významné výsledky:
+EKG při přijetí ukázalo nepravidelný, úzký srdeční rytmus. Dva negativní testy na troponin. Normální výsledky testů štítné žlázy. Echokardiogram provedený dne ___ ukázal zachovalou ejekční frakci.
+
+Průběh hospitalizace:
+Pacient byl monitorován a jeho srdeční frekvence byla kontrolována pomocí metoprololu. Kardiologické oddělení doporučilo antikoagulační léčbu, po posouzení rizika krvácení byla zahájena léčba apixabanem. Srdeční frekvence se ustálila pod 100 a pacient byl propuštěn ve stabilním stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Apixaban 5 mg dvakrát denně
+2. Metoprolol succinate 50 mg denně
+3. Lisinopril 10 mg denně
+4. Atorvastatin 20 mg večer
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Fibrilace síní
+
+Stav při propuštění:
+Psychický stav: Jasný a soustředěný
+Úroveň vědomí: Vnímavý a komunikativní
+Funkční stav: Chůze, soběstačný
+
+Instrukce při propuštění:
+Byl vám poskytnut lék na nepravidelný srdeční rytmus. Užívajte nový lék na ředění krve přesně podle předpisu. V případě mdloby, bolesti na hrudi nebo krvácení se obraťte na lékaře. Navštivte prosím ambulanci ___ .
+
+Následná péče:
+___

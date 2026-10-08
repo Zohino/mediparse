@@ -1,0 +1,70 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Celulitida levé dolní končetiny
+
+Zásah:
+Žádný
+
+Anamnéza:
+Muž ve věku ___ let se dostavil na oddělení ___ s třemi dny trvajícími potížemi v podobě zarudnutí, tepla a otoku levé holeně po drobném odření v místě ___. Uváděl subjektivní horečku a postupně se zhoršující bolest od data ___, a byl odeslán k podání intravenózních antibiotik.
+
+Osobní anamnéza:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacient je v pohodě, bez známek utrpení.
+Krk:
+Flexibilní, bez zvětšených lymfatických uzlin.
+Extremita:
+Levá holen má zvýšenou teplotu, mírně otok.
+Kůže:
+Erytem s ostrými okraji, bez abscesu.
+
+Významné výsledky:
+Po přijetí mírně zvýšený počet bílých krvinek s převahou neutrofilů. Biochemické vyšetření bez odchylek. Kultivace krve provedená dne ___ nevykazovala žádný růst. Ultrazvuk levé dolní končetiny prokázal otok měkkých tkání, ale bez abscesu nebo hluboké žilní trombózy.
+
+Průběh hospitalizace:
+Byl zahájen intravenózní cefazolin a noha byla fixována ve zvýšené poloze. Zarudnutí postupně ustupovalo a horečka se během dvou dnů vyřešila. Byl vyšetřen lékařem ___ ohledně péče o ránu a pacient byl schopen samostatně chodit. Hladina glukózy zůstala kontrolovaná na jeho domácím režimu. Byl převeden na perorální cefalexin.
+
+Léky při přijetí:
+Metformin, lisinopril, atorvastatin, aspirin
+
+Léky při propuštění:
+Cefalexin 500 mg perorálně čtyřikrát denně po dobu pěti dalších dnů. Pokračujte v užívání metforminu, lisinoprilu, atorvastatinu a aspirinu, jako doposud. Acetaminophen dle potřeby na bolest.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida levé dolní končetiny
+Diabetes mellitus 2. typu
+
+Stav při propuštění:
+Mentální stav:
+Orientovaný a koherentní.
+Úroveň vědomí:
+Vnímavý a komunikativní.
+Funkční stav:
+Samostatně chodící.
+
+Instrukce při propuštění:
+Byl Vám léčen kožní infekce na noze. Dokončete užívání všech antibiotik a udržujte nohu ve zvýšené poloze při sezení. V případě rozšíření zarudnutí, horečky nebo zhoršení bolesti se vraťte nebo zavolejte na číslo ___. Dodržujte termín návštěvy v ambulanci ___.
+
+Pokyny pro další sledování:
+___

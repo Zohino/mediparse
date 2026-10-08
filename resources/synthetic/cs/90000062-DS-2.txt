@@ -1,0 +1,79 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou, slabost
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let s srdečním selháním, přiveden pro zhoršující se otoky a snížený výdej moči po vynechání dávek léků.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s koronární chorobou
+
+Fyzikální vyšetření:
+Celkový stav:
+Únavný, v pohodě
+ORL:
+Vlhké sliznice
+Plíce:
+Chropy v obou plicních bázích
+Břicho:
+Měkké, bezbolestné
+Extremity:
+Otok 2+ s jámy
+Kůže:
+Teplá, suchá
+Neurologické vyšetření:
+Vědomý, bez fokálních příznaků
+
+Výsledky vyšetření:
+LABORATOŘ PŘI PŘIJETÍ:
+Kreatinin zvýšen na ___, zlepšení do propuštění; vysoká hladina draslíku.
+ZOBRAZENÍ:
+Rentgen hrudníku s mírnou vaskulární kongescí.
+ZÁVĚR:
+Plicní kongesce, bez pneumonie.
+
+Průběh hospitalizace:
+Léčba intravenózními diuretiky, byly vysazeny nefrotoxické léky; hladina kreatininu se postupně snižovala, otoky ustoupily a pacient mohl pohodlně chodit. Léky byly upraveny před propuštěním do domácího prostředí na ___.
+
+Léky při přijetí:
+Lisinopril, metformin, atorvastatin
+
+Léky při propuštění:
+Furosemid denně, atorvastatin večer, inzulin před jídlem; lisinopril byl dočasně vysazen.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Srdeční selhání
+
+Stav při propuštění:
+Úroveň vědomí:
+Vědomý a komunikativní
+Funkční stav:
+Chůze, soběstačný
+
+Pokyny při propuštění:
+Vážete se denně, omezte příjem soli a tekutin, užívejte léky podle předpisu a v případě otoků nebo dušnosti se vraťte.
+
+Pokyny pro další sledování:
+___

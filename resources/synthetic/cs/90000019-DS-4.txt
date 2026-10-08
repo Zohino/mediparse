@@ -1,0 +1,65 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Specializace: Lékařství
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Kašel a horečka po dobu pěti dnů, pacient byl přijat z ___
+
+Zásahy:
+Žádné významné chirurgické zákroky nebo invazivní procedury.
+
+Anamnéza současného onemocnění:
+Pacient se prezentoval s pětidenním produktivním kašlem, horečkou a dušností, které se objevily po návratu z cesty do ___. Byl vyšetřen u svého praktického lékaře v ___, který zahájil léčbu perorálními antibiotiky, ale příznaky se zhoršily a pacient přišel na pohotovost v ___ s hypoxií a zimnicí.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Gastroezofageální reflux
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Významná rodinná anamnéza fibrilace síní u otce. Matka zdravá.
+
+Fyzikální vyšetření:
+Celkový stav: Vědomý, mírně nemocný muž, bez akutních potíží.
+Hlava, oči, uši, nos, krk: Vlhká sliznice, čistý orofarynx.
+Plíce: Krepitace v dolní části pravého plíce, bez sípání.
+Kůže: Teplá, suchá, bez vyrážky.
+Neurologické vyšetření: Bez lokalizace, plně orientovaný.
+
+Výsledky vyšetření:
+Laboratorní výsledky při přijetí ukázaly leukocytózu s převahou neutrofilů a mírně zvýšenou hladinu laktátu, která se normalizovala po podání tekutin. Kultivace krve zůstaly po pěti dnech negativní.
+NÁLEZY: Rentgen hrudníku ukázal hustou konsolidaci v dolní části pravého plíce s malým peripneumonickým výpotkem. Bez pneumotoraxu. Velikost srdce normální. Opakované zobrazovací vyšetření v ___ ukázalo zlepšení opacit v plicních alveolech.
+
+Průběh hospitalizace:
+Pacient byl přijat s pneumonií získanou v komunitě a léčen intravenózním ceftriaxonem a azithromycinem. Podávání kyslíku bylo postupně snižováno ze čtyř litrů na pokojový vzduch třetí den hospitalizace. Horečka ustoupila a kašel se zlepšil. Byl převeden na perorální antibiotika a mohl se samostatně pohybovat. Hypertenze byla kontrolována pomocí léků užívaných doma. Podle týmu vedeného Dr. ___, byl pacient propuštěn. Byly zajištěny podmínky pro ambulantní sledování a opakovaný rentgen hrudníku za šest týdnů v ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně, atorvastatin 20 mg večer, omeprazol 20 mg denně.
+
+Léky při propuštění:
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dalších dnů. Pokračovat v užívání lisinoprilu 10 mg denně, atorvastatinu 20 mg večer a omeprazolu 20 mg denně. Paracetamol dle potřeby při horečce. Recepty byly odeslány do lékárny ___
+
+Stav při propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Hypertenze
+
+Stav při propuštění:
+Mentální stav: Jasný a srozumitelný.
+Úroveň vědomí: Vědomý a komunikativní.
+Funkční stav: Chůze, samostatný.
+
+Pokyny po propuštění:
+Byli jste hospitalizováni kvůli pneumonii. Užívajte všechny antibiotika podle pokynů a pijte dostatek tekutin. V případě zhoršení dušnosti, vysoké horečky nebo bolesti na hrudi se vraťte k lékaři. V případě dotazů ohledně léků volejte na číslo ___. Vaše ordinace v ___ vás kontaktuje.
+
+Pokyny pro další péči:
+___

@@ -1,0 +1,63 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka je žena s dlouhodobou cukrovkou a srdečním selháním, která byla přijata z její ambulance ___ po několika dnech zhoršující se dušnosti a otoků nohou. Příznaky se začaly objevovat poté, co jí došly léky ___ .
+
+Osobní anamnéza:
+Cukrovka
+Srdeční selhání
+Hypertenze
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Vědomá, v pohodě, bez známek utrpení.
+Krk: Mírná dilatace jugulárních žil.
+Plíce: Krepitus na obou plicních bázích.
+Břicho: Měkké, bez citlivosti.
+Pulzy: Palpovatelné a symetrické.
+
+Významné výsledky:
+ZÁVĚR: Mírná plicní vaskulární kongestice s malými bilaterálními efuzemi, bez ložiskové konsolidace. Porovnání s vyšetřením z ___.
+NÁLEZY: Velikost srdce je mírně zvětšená. Plícní objemy jsou snížené. Na obou stranách jsou přítomny malé pleurální efuze a není patrný pneumotorax.
+
+Průběh hospitalizace:
+Byla podána intravenózní furosemid a její stav se postupně zlepšoval. Telemetrie ukázala fibrilaci síní s kontrolovanou frekvencí a po konzultaci s ___ byla zahájena antikoagulace. Hladina glukózy byla kontrolována pomocí inzulínu. Byla vyšetřena lékařem ___ a byla propuštěna domů v den ___ hospitalizace.
+
+Léky při přijetí:
+Furosemid, metformin, lisinopril a carvedilol denně.
+
+Léky při propuštění:
+Furosemid 40 mg denně, metformin 500 mg dvakrát denně, lisinopril 10 mg denně, carvedilol 6,25 mg dvakrát denně, apixaban 5 mg dvakrát denně.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární:
+Cukrovka
+Chronické onemocnění ledvin
+Srdeční selhání
+
+Stav při propuštění:
+Psychický stav: Vědomá a koherentní.
+Funkční stav: Chůze, soběstačná.
+
+Pokyny při propuštění:
+Byla léčena pro přetížení tekutinami. Zvažujte se každý den ráno a volejte ___ , pokud se vaše váha během jednoho dne zvýší o více než 0,9 kg. Užívajte léky podle předpisu a omezte příjem soli v potravě.
+
+Pokyny pro další sledování:
+___

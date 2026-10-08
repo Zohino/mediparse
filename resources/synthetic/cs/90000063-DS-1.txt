@@ -1,0 +1,71 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost a otoky nohou
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let s diagnostikovaným srdečním selháním, který se dostavil s potížemi zhoršujícími se v průběhu dvou týdnů, včetně dušnosti, ortopnoe (dušnosti vleže) a otoků obou nohou. Byl odeslán z ambulance ___ po zvýšení váhy.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+Ischemická choroba srdeční
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s infarktem myokardu
+
+Fyzikální vyšetření:
+Celkový stav: Únava, mírné potíže
+Hlava, krk, uši, nos, hltan: Vlhká sliznice
+Krk: Zvýšený jugulární venózní tlak
+Plíce: Praskání v obou dolních plicních lalocích
+Břicho: Měkké, bezbolestné
+Extremity: Edém (otek) 2+ do úrovně kolen
+
+Výsledky vyšetření:
+Laboratorní výsledky při přijetí ze dne ___ ukázaly zvýšenou hladinu BNP a kreatininu nad základní hodnotu. Troponin byl normální. Rentgen hrudníku s plicní vaskulární kongescí (nádor) a malými výpotky.
+ZÁVĚR: Mírný plicní edém, bez pneumonie.
+
+Průběh hospitalizace:
+Léčba intravenózním furosemidem, s dobrým diurézou (výtok moči) a postupným úbytkem váhy. Kreatinin se zvýšil během diurézy a zlepšil se po snížení dávky. Kardiologové z ___ doporučili úpravu léčby. Pacient byl převeden na perorální diuretikum a byl schopen samostatně chodit k datu ___.
+
+Léky při přijetí:
+Lisinopril, metoprolol, atorvastatin, aspirin
+
+Léky při propuštění:
+1. Furosemid 40 mg perorálně denně
+2. Metoprolol succinate 50 mg denně
+3. Atorvastatin 40 mg večer
+4. Aspirin 81 mg denně
+5. Lisinopril vysadit do doby kontroly v ambulanci
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Srdeční selhání
+Akutní poškození ledvin
+
+Stav při propuštění:
+Stabilní
+Psychický stav: Jasný a soustředěný
+Funkční stav: Chůze, samostatný
+
+Pokyny při propuštění:
+Byl jste přijat s přebytkem tekutin a léčen diuretiky. Zvažujte se každý den ráno, omezte příjem soli a užívejte léky podle předpisu. Zavolejte Dr. ___ v případě, že se vaše váha zvýší o více než 1,4 kg nebo se zhorší vaše dýchání.
+
+Pokyny pro další péči:
+___

@@ -1,0 +1,72 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bušení srdce
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila na oddělení ___ s několika dny trvajícím bušením srdce a únavou, které se zhoršovaly při námaze. Byla vyšetřena na oddělení ___ a přijata pro regulaci srdeční frekvence.
+ANAMNÉZA:
+Pozitivní bušení srdce. Žádná bolest na hrudi.
+
+Osobní anamnéza:
+Fibrilace síní
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s mrtvicí
+
+Fyzikální vyšetření:
+Pacientka je v pohodě, nepravidelný srdeční rytmus, bez známek utrpení.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Celkový stav: Dobrý vzhled
+Hlava, oči, uši, nos, krk: Vlhká sliznice
+Plíce: Čisté bilaterálně
+Břicho: Měkké, bez citlivosti
+Extremity: Bez otoků
+Neurologické vyšetření: Vědomá, bez fokálních příznaků
+
+Relevantní výsledky:
+EKG při přijetí ukázalo rychlý, nepravidelný rytmus. Troponin negativní dvakrát. TSH normální. Echokardiogram provedený na oddělení ___ ukázal zachovalou ejekční frakci.
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Drusík 4,1, kreatinin 0,8.
+
+Stručný průběh hospitalizace:
+Srdeční frekvence byla regulována pomocí metoprololu a stabilizovala se. Apixaban byl zahájen pro prevenci mrtvice po konzultaci s ___. Příznaky ustoupily, pacientka chodila samostatně a byla zajištěna kontrola u kardiologa na oddělení ___.
+
+Léky při přijetí:
+Levothyroxin, lisinopril
+
+Léky při propuštění:
+Metoprolol succinate denně, apixaban dvakrát denně, levothyroxin denně, lisinopril denně.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Fibrilace síní
+
+Stav při propuštění:
+Stabilní
+Psychický stav: Jasný a koherentní
+Úroveň vědomí: Vědomá a komunikativní
+Funkční stav: Chůze, samostatná
+
+Instrukce při propuštění:
+Byla jste přijata kvůli rychlému, nepravidelnému srdečnímu tepu. Užívajte nové léky podle předpisu a hlaste závratě, krvácení nebo bolest na hrudi. V případě dotazů volejte ___.
+
+Pokyny pro další péči:
+___

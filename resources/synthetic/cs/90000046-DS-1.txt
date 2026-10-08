@@ -1,0 +1,66 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Nausea a snížený objem moči.
+
+Zásadní chirurgický zákrok nebo invazivní procedura:
+Žádný.
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let, odeslán z ambulance ___ po několika dnech zvracení, nedostatečném příjmu potravy a výrazně sníženém vymočování, s abnormálními laboratorními výsledky.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Apendektomie v roce ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí.
+
+Fyzikální vyšetření:
+Celkový stav: Suchý, bez známek utrpení.
+Krk: Žádné viditelné rozšíření žil na krku.
+Břicho: Měkké, bez citlivosti.
+EXTREMITY: Bez otoků.
+
+Významné výsledky:
+Kreatinin při přijetí 3,1, základní hodnota blízko 1,0. Draslík 5,4, bikarbonát 17. Kreatinin se zlepšil na 1,3 při propuštění.
+ZÁVĚR: Normální ultrazvuk ledvin, bez známek obstrukce.
+
+Průběh hospitalizace:
+Pacientovi byly podávány intravenózní tekutiny a byly přerušeny léky s potenciálně poškození ledvin; hladina kreatininu se postupně snižovala. Jeho diabetes byl kontrolován pomocí dávkování inzulínu podle glykémie, poté byla obnovena domácí léčba. Pacient byl vyšetřen týmem ___ .
+
+Léky při přijetí:
+Lisinopril
+Metformin
+Atorvastatin
+
+Léky při propuštění:
+Atorvastatin 20 mg večer. Metformin byl obnoven v nižší dávce. Lisinopril užívejte až po opětovném vyšetření laboratorních hodnot vaším lékařem.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes
+
+Stav při propuštění:
+Stabilní.
+Psychický stav: Vědomý a orientovaný.
+Fyzická aktivita: Chůze samostatná.
+
+Pokyny při propuštění:
+Pravidelně pijte tekutiny a vyhýbejte se ibuprofenu. Nechte si zopakovat laboratorní vyšetření do jednoho týdne. V případě zvracení, závratí nebo velmi malého množství moči volejte ___ .
+
+Pokyny pro další sledování:
+___

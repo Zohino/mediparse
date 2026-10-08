@@ -1,0 +1,71 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a dušnost
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž s několika týdny zhoršující se dušností při námaze a otoky obou nohou, odeslán ze své ambulance v ___ po přibírání na váze. Příznaky se v posledních dnech zhoršily, což vedlo k jeho přijetí na urgentní oddělení v ___.
+PROHLÍDKA SYSTÉMŮ:
+Pozitivní nález ortopnoe (dušnosti v leže) a únavy. Bez bolesti na hrudi nebo horečky.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+Předchozí hospitalizace v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav: Pacient je v pohodě, mírně dušný v klidu.
+Hlava, krk, uši, nos, hrdlo: Zvýšený tlak žil na krku.
+Břicho: Měkké, bez citlivosti.
+Končetiny: Otoky s důlky až po kolena.
+Neurologické vyšetření: Pacient je při vědomí, bez fokálních příznaků.
+
+Významné výsledky:
+Laboratorní výsledky při přijetí ukazují zvýšenou hladinu BNP a kreatininu nad základní hodnotu. Rentgen hrudníku ukázal plicní vaskulární kongesci (zduření cév) s malými výpotky. Echokardiogram provedený v ___ ukázal sníženou ejekční frakci (sílu stahování srdce).
+
+Průběh hospitalizace:
+Léčba intravenózními diuretiky (léky na odvodnění) s dobrým výtokem moči a postupným ústupem otoků. Hladina kreatininu zůstala stabilní vzhledem k jeho chronickému onemocnění ledvin. Léky byly upraveny po konzultaci s ___. Váha a příznaky se zlepšily a pacient byl propuštěn domů s naplánovanou kontrolou u ___ .
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+Metoprolol denně
+
+Léky při propuštění:
+Furosemid 40 mg perorálně denně
+Lisinopril denně, nezměněno
+Atorvastatin večer, nezměněno
+Metoprolol succinate denně, dávka zvýšena
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes
+Srdeční selhání
+
+Stav při propuštění:
+Psychický stav: Jasný a soudržný
+Úroveň vědomí: Při vědomí a komunikativní
+Funkční stav: Chůze, soběstačný
+
+Pokyny při propuštění:
+Byl jste hospitalizován kvůli zadržování tekutin. Zvažujte se každé ráno a volejte svého lékaře na číslo ___ , pokud přiberete více než 1,4 kg za den. Omezte příjem soli, užívejte léky podle předpisu a dodržujte všechny kontrolní prohlídky.
+
+Pokyny pro další péči:
+___

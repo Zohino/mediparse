@@ -1,0 +1,73 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Kašel a horečka.
+
+Zásahy:
+Žádné.
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let s hypertenzí byl přijat po dvou dnech zhoršujícího se kašle a horečky, odeslán z ambulance ___ . Rentgen hrudníku ukázal zápal dolního laloku pravé plíce, který vyžadoval hospitalizaci.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodině se vyskytla akutní renální insuficience u matky.
+
+Fyzikální vyšetření:
+Celkový stav:
+Vědomý, v pohodě.
+ORL:
+Vlhké sliznice.
+Plíce:
+Chropy v dolní části pravého plíce.
+Extremity:
+Bez otoků.
+Kůže:
+Teplá, suchá.
+Neurologické vyšetření:
+Bez fokálních příznaků.
+
+Výsledky vyšetření:
+NÁLEZY:
+Rentgen hrudníku provedený dne ___ ukázal konsolidaci v dolním laloku pravé plíce bez výpotku. Počet bílých krvinek byl mírně zvýšen při přijetí a normalizoval se při propuštění. Kultivace krve nevykazovala žádný růst.
+
+Průběh hospitalizace:
+Léčen intravenózně ceftriaxonem a azithromycinem, poté byl přechod na perorální antibiotika, jakmile horečka ustoupila. Podávání kyslíku bylo postupně snižováno, do třetího dne byl pacient schopen dýchat přirozeně. Pacient byl schopen samostatně chodit, toleroval stravu a byl propuštěn domů dne ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů.
+2. Lisinopril 10 mg denně.
+3. Atorvastatin 20 mg večer.
+
+Plán po propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Komunitní pneumonie
+Hypertenze
+
+Stav při propuštění:
+Mentální stav:
+Vědomý a koherentní.
+
+Pokyny při propuštění:
+Byl vám léčen zápal plic. Dokončete veškerá antibiotika, pijte dostatek tekutin a odpočívejte. V případě horečky, zhoršení dýchání nebo bolesti na hrudi se vraťte. V případě dotazů volejte na číslo ___.
+
+Pokyny pro další sledování:
+___

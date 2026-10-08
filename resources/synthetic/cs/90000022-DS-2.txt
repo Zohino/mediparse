@@ -1,0 +1,72 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Obor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé straně těla
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let, který přišel na pohotovost s náhlou bolestí v pravé straně těla, nevolností a hematurií (kreví v moči).
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Kamenné útvary v ledvinách
+Hyperlipidemie (vysoká hladina cholesterolu)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacient je v pohodě, bez známek utrpení.
+Plíce:
+Čisté při poslechování na obou stranách.
+Extremity (končetiny):
+Bez otoků.
+Neurologické vyšetření:
+Pacient je při vědomí, bez specifických neurologických příznaků.
+
+Výsledky vyšetření:
+Analýza moči ukázala přítomnost krve. Kreatinin blízko základní hodnoty. Kamenný útvar byl zobrazen na ___.
+ZÁVĚR:
+Malý kamenný útvar v pravém močovodu, který způsobuje překážku.
+
+Průběh hospitalizace:
+Pacient byl přijat pro úlevu od bolesti a hydrataci. Bolest se zlepšila díky podávání ketorolaku a tekutin. Kamenný útvar byl spontánně vyloučen druhý den a pacient toleroval stravu a mohl se samostatně pohybovat.
+
+Léky při přijetí:
+Lisinopril, atorvastatin
+
+Léky při propuštění:
+Tamsulosin denně, ibuprofen dle potřeby na bolest, pokračovat v užívání lisinoprilu a atorvastatinu.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Kamenný útvar v pravém močovodu
+Hydronefróza (rozšíření ledvin), mírná
+
+Stav při propuštění:
+Psychický stav:
+Orientovaný a koherentní.
+Úroveň vědomí:
+Přítomný a komunikativní.
+Funkční stav:
+Samostatně pohyblivý.
+
+Pokyny při propuštění:
+Pijte dostatek tekutin a sledujte moč. V případě horečky, silné bolesti nebo nemožnosti močit se vraťte.
+
+Pokyny pro další sledování:
+___

@@ -1,0 +1,79 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Oddělení: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a kašel
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let s astmatem byl přijat do nemocnice ___ po třech dnech horečky, produktivního kašle a dušnosti. Rentgen hrudníku ukázal zánět dolního laloku pravé plíce. Byl zahájen antibiotická léčba a pacient byl přijat na oddělení medicíny pro podávání kyslíku a monitorování.
+
+Osobní anamnéza:
+Astma
+Hypertenze
+Apendektomie (operace odstranění slepého střeva) v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Mírně nemocný, v klidu se cítí dobře
+Oblast hlavy, očí, uší, nosu a krku (ORL):
+Vlhké sliznice
+Krk:
+Pružný
+Plíce:
+Chropy v dolní části pravé plíce
+Srdce:
+Pravidelný rytmus, žádné šelesty
+Kůže:
+Teplá, suchá
+Pulzy:
+Hmatatelné a symetrické
+Významné výsledky:
+Počet bílých krvinek 14,2 při přijetí, klesl na 8,1 při propuštění. Rentgen hrudníku ukázal zápal dolního laloku pravé plíce. Kultivace krve z ___ nevykazovala žádný růst. Kreatinin a elektrolyty byly během pobytu v nemocnici v normě.
+
+Průběh hospitalizace:
+Byl léčen pro pneumonii získanou v komunitě pomocí ceftriaxonu a azithromycinu, poté byla léčba převedena na perorální antibiotika. Podávání kyslíku bylo postupně snižováno, a do třetího dne byl pacient schopen dýchat přirozeně. Jeho astma bylo kontrolováno inhalátory. Horečka ustoupila a pacient mohl chodit bez dušnosti. Byl propuštěn domů ve stabilním stavu po kontrole u ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Inhalátor s albuterolem dle potřeby
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů
+2. Lisinopril 10 mg denně
+3. Inhalátor s albuterolem dvě dávky každé čtyři hodiny dle potřeby
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Astma
+Hypertenze
+
+Stav při propuštění:
+Psychický stav:
+Orientovaný a při vědomí
+Úroveň vědomí:
+Plně při vědomí
+Fyzická aktivita:
+Chůze samostatná
+
+Pokyny při propuštění:
+Byl léčen pro pneumonii. Dokončete celou kúru antibiotik a odpočívejte a pijte dostatek tekutin. V případě horečky, zhoršující se dušnosti nebo bolesti na hrudi se vraťte. V případě dotazů volejte do ambulance na číslo ___ a nezapomeňte na kontrolní prohlídku u ___.
+
+Pokyny pro další péči:
+___

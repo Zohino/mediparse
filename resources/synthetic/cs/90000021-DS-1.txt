@@ -1,0 +1,71 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka přišla s bušením srdce a závratěmi, které trvají již tři dny a zhoršují se při námaze. Byla poprvé vyšetřena na ___, a poté převezena na ___ pro další vyšetření. Životní funkce byly stabilní a počáteční EKG ukázalo nepravidelný srdeční rytmus.
+
+Osobní anamnéza:
+Hypertenze
+Hypotyreóza
+
+Chirurgická anamnéza:
+Chirurgické odstranění žlučníku na ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka prodělala mrtvici.
+
+Fyzikální vyšetření:
+Hlava, oči, uši, nos, krk: Vlhká sliznice, bez žloutenky.
+Plíce: Čisté bilaterálně.
+Břicho: Měkké, bez citlivosti.
+Extremity: Teplé, bez otoků.
+
+Relevantní výsledky:
+NÁLEZY:
+Rentgen hrudníku ukázal čisté plicní pole a normální srdeční siluetu. Funkce štítné žlázy byla v normě. Elektrolyty byly v normě. Troponin byl negativní ve dvou kontrolách. Echokardiogram ukázal zachovalou funkci komor a mírné zvětšení levé síně.
+
+Průběh hospitalizace:
+Monitorování srdeční činnosti ukázalo fibrilaci síní s rychlou komorovou odpovědí, která byla kontrolována pomocí metoprololu, a byla zahájena antikoagulační léčba. Kreatinin zůstal na základní úrovni, bez známek akutního poškození ledvin. Echokardiogram provedený na ___ byl uklidňující. Pacientka se postupně zlepšovala a byla propuštěna domů za účelem dalšího sledování kardiologem na ___.
+
+Léky při přijetí:
+Lisinopril
+Levothyroxine
+
+Léky při propuštění:
+1. Metoprolol succinate denně.
+2. Apixaban dvakrát denně, dle pokynů ___.
+3. Lisinopril denně.
+4. Levothyroxine každé ráno.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Bušení srdce s rychlou srdeční frekvencí
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Psychický stav: Vědomá a plně orientovaná.
+Úroveň vědomí: Probuděná a pozorná.
+Fyzická aktivita: Chůze samostatná.
+
+Pokyny při propuštění:
+Byla jste hospitalizována kvůli rychlému, nepravidelnému srdečnímu tepu. Užívajte nové léky přesně podle předpisu a nevynechávejte dávky ředidla krve. V případě bolesti na hrudi, mdloby nebo krvácení se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro další sledování:
+___

@@ -1,0 +1,77 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Rána na noze a vysoké hodnoty glukózy
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž s diabetem, odeslán z ___ ambulance kvůli hnisajícímu vředu na prstu a vysokým hodnotám glukózy (nad 400) měřeným doma.
+
+Předchozí zdravotní problémy:
+Hyperlipidemie
+Hypertenze
+Neuropatie
+
+Předchozí operace:
+Operace šedého zákalu
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s vysokou hladinou cukru v krvi
+
+Fyzikální vyšetření:
+Životní funkce:
+Bez horečky, stabilní
+Oblast hlavy, očí, uší, nosu a krku (ORL):
+Suchá sliznice
+Krk:
+Pružný
+SRDEČNÍ:
+Pravidelný rytmus
+Břicho:
+Měkké, bez citlivosti
+
+Významné výsledky:
+Kreatinin 3,1, blízko základní hodnoty. Glukóza 412 při příjmu. Draslík 5,2 v ___.
+ZÁVĚR:
+Na rentgenu nohy nebyla zjištěna osteomyelitida.
+
+Průběh hospitalizace:
+Glukóza byla kontrolována pomocí inzulínu a infuzí. Vřed na prstu byl vyčištěn a léčen orálními antibiotiky. Laboratorní výsledky ledvin zůstaly stabilní a byla zajištěna kontrola u podiatra v ___.
+
+Léky při přijetí:
+Metformin byl pozastaven
+Lisinopril
+Aspirin
+
+Léky při propuštění:
+Insulin glargin večer, insulin lispro k jídlu, cefalexin po dobu jednoho týdne, aspirin denně. Přerušit užívání metforminu a lisinoprilu, dokud nebudou laboratorní výsledky znovu zkontrolovány.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes s hyperglykémií
+
+Stav při propuštění:
+Stabilní
+Psychický stav:
+Vědomý a orientovaný
+Úroveň vědomí:
+Probudený a pozorný
+
+Pokyny při propuštění:
+Měřte glukózu čtyřikrát denně. Udržujte nohu suchou a čistou. V případě horečky, rozšiřujícího se zarudnutí nebo zvracení se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro další péči:
+___

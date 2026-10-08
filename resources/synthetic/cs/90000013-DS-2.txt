@@ -1,0 +1,71 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Zhoršující se otok nohou a dušnost
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž s postupujícím otokem kotníku trvajícím dva týdny, s dušností v leže a přibíráním na váze, odeslán z ambulance ___ po vynechání dávek diuretika.
+
+Předchozí zdravotní problémy:
+Hypertenze
+Předchozí infarkt myokardu
+Hyperlipidemie
+Dna, diagnostikována v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s časnou koronární chorobou
+
+Fyzikální vyšetření:
+Celkový stav:
+Únavný, mírně dušný v klidu
+Krk:
+Zvýšený tlak v žilách
+Břicho:
+Měkké, bezbolestné
+Kůže:
+Edém s prohlubněmi až po kolena
+
+Významné výsledky:
+BNP výrazně zvýšen na ___. Rentgen hrudníku ukázal plicní vaskulární kongesci s malými výpotky.
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Sodík 138, draslík 4,1, kreatinin blízko základní hodnoty.
+
+Průběh hospitalizace:
+Léčen intravenózním furosemidem, při kterém ztratil několik litrů tekutin, což vedlo k ústupu kongesce a eliminaci potřeby kyslíku. Elektrolyty byly monitorovány denně. Byl převeden na perorální diuretikum a byla zajištěna kontrola u kardiologa v ___
+
+Léky při přijetí:
+Metoprolol, lisinopril, atorvastatin, aspirin
+
+Léky při propuštění:
+Furosemid denně, metoprolol succinate, lisinopril, atorvastatin, aspirin. Užívejte diuretikum každé ráno a přineste tento seznam do ambulance.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Přetížení objemem tekutin s plicní kongescí
+Sekundární:
+Hypertenze, předchozí infarkt myokardu, hyperlipidemie
+
+Stav při propuštění:
+Dobrý, dýchá pohodlně bez kyslíku
+Psychický stav:
+Orientovaný, schopný porozumět a dodržovat pokyny
+
+Pokyny při propuštění:
+Zvažujte se každé ráno a volejte ___ pokud přiberete více než 1,4 kg za den. Omezte příjem soli a tekutin a v případě zhoršení dušnosti se vraťte.
+
+Pokyny pro další péči:
+___

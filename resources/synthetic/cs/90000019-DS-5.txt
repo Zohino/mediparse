@@ -1,0 +1,76 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a kašel
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let s dlouhodobou cukrovkou se dostavil s třemi dny kašle, horečky a občasného bušení srdce. Byl prvně vyšetřen na ___ a následně převeden pro další péči.
+PROHLÍDKA SYSTÉMŮ:
+Pozitivní nález kašle a únavy. Bez bolesti hrudníku.
+
+Osobní anamnéza:
+Diabetes mellitus 2. typu
+Možná fibrilace síní, nepotvrzená
+Hypertenze
+
+Chirurgická anamnéza:
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s koronární chorobou
+
+Fyzikální vyšetření:
+Životní funkce: bez horečky, stabilní
+Celkový stav: unavený, v pohodě
+Hlava, krk, uši, nos, hrdlo: vlhká sliznice
+Krk: ohebný
+Plíce: praskání v dolní části pravého plíce
+Břicho: měkké
+Extremity: bez otoků
+
+Významné výsledky:
+Zvýšený počet bílých krvinek a mírná hyponatremie při přijetí, zlepšeno při propuštění. Troponin negativní dvakrát. Telemetrie ukázala občasné nepravidelné srdeční rytmy.
+ZOBRAZENÍ:
+Rentgen hrudníku ukázal konsolidaci v dolní části pravého plíce.
+
+Průběh hospitalizace:
+Léčba pneumonie získané v komunitě pomocí ceftriaxonu a azithromycinu, následně perorální antibiotika. Horečka ustoupila a podávání kyslíku bylo postupně snižováno. Kardiologické oddělení na ___ prozkoumalo telemetrii dne ___ a doporučilo ambulantní monitorování. Glukóza byla kontrolována pomocí dávkování inzulínu.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně; lisinopril denně
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů
+2. Metformin 500 mg dvakrát denně
+3. Lisinopril 10 mg denně
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Bušení srdce
+
+Stav při propuštění:
+Psychický stav: jasný a soustředěný
+Úroveň vědomí: bdělý a komunikativní
+Funkční stav: pohyblivý, soběstačný
+
+Pokyny při propuštění:
+Byl vám léčen zápal plic. Dokončete veškerá antibiotika, odpočívejte a pijte dostatek tekutin. Navštivte lékaře ___ a volejte na číslo ___ v případě horečky, zhoršujícího se dušnosti nebo bušení srdce.
+
+Pokyny pro další péči:
+___

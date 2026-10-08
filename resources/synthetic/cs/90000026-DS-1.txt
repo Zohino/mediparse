@@ -1,0 +1,75 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická cholecystektomie (odstranění žlučníku)
+
+Anamnéza současného onemocnění:
+Žena s bolestí v pravém horním kvadrantu břicha trvající dva dny, s nevolností a zvracením po jídle. Byla vyšetřena na pohotovosti v ___ a poté převezena do ___ za účelem chirurgické péče.
+ANAMNÉZA:
+Pozitivní nález horečky. Jinak negativní.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Žlučové kameny
+Hypotyreóza (snížená funkce štítné žlázy)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodině se vyskytuje diabetes u matky. Žlučové problémy se nevyskytují.
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacientka je v pohodě, bez známek utrpení.
+HLAVA, OČI, UŠI, NOS, Hrdlo (HEENT):
+Bez žloutenky.
+KONČETINY:
+Teplé, bez otoků.
+KŮŽE:
+Řezy čisté, suché.
+Neurologické vyšetření:
+Orientovaná, bez fokálních příznaků.
+
+Významné výsledky:
+Počet bílých krvinek mírně zvýšen při přijetí, po operaci se normalizoval. Jaterní enzymy normální.
+ZÁVĚR:
+Žlučové kameny s zesílením stěny žlučníku, což odpovídá akutní cholecystitidě (zánětu žlučníku).
+
+Průběh hospitalizace:
+Pacientka byla přijata s akutní cholecystitidou, zahájena antibiotická léčba a infuze. Byla operována doktorem ___ v rámci nekomplikované laparoskopické cholecystektomie. Byla jí postupně rozšiřována strava, bolest byla kontrolována perorálními léky a byla propuštěna do ___ ve stabilním stavu.
+
+Léky při přijetí:
+Levothyroxin, lisinopril denně.
+
+Léky při propuštění:
+1. Paracetamol dle potřeby na bolest.
+2. Levothyroxin denně.
+3. Lisinopril denně.
+4. Docusate během užívání opioidů, dle pokynů ___
+
+Plán po propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Hlavní:
+Akutní cholecystitida s cholelitázou (žlučovými kameny).
+
+Stav při propuštění:
+Psychický stav: Jasný a soustředěný.
+Aktivita: Chůze samostatná.
+
+Pokyny při propuštění:
+Byla léčena zánětu žlučníku a podstoupila operaci. Udržujte řezy čisté a suché, vyhýbejte se těžkému zvedání a kontaktujte ___ v případě horečky, zhoršující se bolesti, zvracení nebo žluté pokožky.
+
+Následná péče:
+___

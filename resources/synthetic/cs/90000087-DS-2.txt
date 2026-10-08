@@ -1,0 +1,59 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Nefrologie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava a snížený objem moči
+
+Zásahové zákroky:
+Žádné, vyšetření u lůžka v ___
+
+Anamnéza současného onemocnění:
+Pacient se dostavil na oddělení ___ se zhoršující se únavou, nevolností a sníženým objemem moči, které trvaly tři dny po virové infekci. Uvedl snížený příjem potravy a mírný otok nohou. Byl doporučen nefrologem z ___ k vyšetření zvýšené hodnoty kreatininu a byl přijat k monitorování a podpůrné péči.
+
+Předchozí zdravotní problémy:
+Chronické onemocnění ledvin, hypertenze, dna, anémie spojená s chronickým onemocněním, dříve sledován v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Bez horečky, v pohodě, bez akutních potíží.
+Plíce: Čisté na obou stranách.
+SRDEČNÍ: Pravidelná frekvence a rytmus, bez šelestu.
+PULZY: Hmatatelné a symetrické na všech končetinách, s minimálním otokem kotníků.
+
+Významné výsledky:
+LABORATOŘ PŘI PŘIJETÍ: Kreatinin 3,4, urea 58, draslík 5,3, bikarbonát 19, hemoglobin 10,2, sodík 138, odebráno v ___.
+ZÁVĚR: Ultrazvuk ledvin ukazuje malé, echogenní ledviny bez hydronefrózy. Rentgen hrudníku ukazuje čisté plíce a normální srdeční stín.
+
+Průběh hospitalizace:
+Pacient dostával intravenózní tekutiny, hladina draslíku byla korigována dietou a pomocí léku. Hodnota kreatininu se stabilizovala na hodnotě blízké základní. Nemá cukrovku a jeho hemoglobin A1c byl normální. Nefrologické oddělení v ___ ho vyšetřilo a naplánovalo kontrolní vyšetření na ___. Pacient toleroval stravu a chodil samostatně před propuštěním.
+
+Léky při propuštění:
+Amlodipin 5 mg denně, allopurinol 100 mg denně, bikarbonát sodný 650 mg dvakrát denně, acetát vápenatý při jídle. Neužívejte ibuprofen a další protizánětlivé léky.
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí: Vědomý a orientovaný, komunikativní.
+Funkční stav: Chůze, samostatný.
+
+Pokyny při propuštění:
+Byl jste přijat pro monitorování ledvin. Pijte tekutiny podle doporučení a vyhýbejte se protizánětlivým lékům. Zvažujte se každý den ráno. Zavolejte na číslo ___ v případě snížení objemu moči nebo zhoršení otoku a dodržujte termín laboratorního vyšetření v ___.
+
+Pokyny pro další péči:
+___

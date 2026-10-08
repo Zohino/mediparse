@@ -1,0 +1,69 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Sulfonamidy
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická cholecystektomie (odstranění žlučníku)
+
+Anamnéza současného onemocnění:
+Pacientka, ve věku ___ let, udává několik dní trvající zhoršující se bolest v pravém horním kvadrantu břicha, nevolnost a zvracení po konzumaci tučných jídel. Byla přijata na oddělení ___ kde ultrazvukové vyšetření prokázalo žlučové kameny a ztluštění stěny žlučníku, a byla převezena k chirurgickému řešení. Od ___ má doma mírnou horečku.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+Apendektomie (odstranění slepého střeva) v roce ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav: klidná, při vědomí
+Oblast hlavy, očí, uší, nosu a krku: bez žloutenky
+Krk: pružný
+Kardiovaskulární systém: pravidelná srdeční frekvence a rytmus
+Břicho: měkké, mírně bolestivé v oblasti jizev, rány čisté
+Extremity: teplé, bez otoků
+Neurologické vyšetření: bez patologických nálezů
+
+Významné výsledky:
+Laboratorní výsledky při přijetí: zvýšený počet bílých krvinek (13,2) a mírně zvýšené hodnoty jaterních enzymů, které se do propuštění normalizovaly. Ultrazvukové vyšetření provedené ___ prokázalo žlučové kameny, ztluštění stěny žlučníku a tekutinu kolem žlučníku, bez rozšíření žlučových cest. Histopatologické vyšetření odeslané do ___ je k dispozici až po propuštění.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Acetaminophen 650 mg každých šest hodin dle potřeby na bolest
+2. Oxykodon 5 mg každé čtyři hodiny dle potřeby na silnou bolest
+3. Docusate 100 mg dvakrát denně
+4. Lisinopril 10 mg denně
+5. Atorvastatin 20 mg večer
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní kalciová cholecystitida (zánět žlučníku způsobený žlučovými kameny)
+Sekundární diagnózy:
+Hypertenze, hyperlipidemie
+
+Stav při propuštění:
+Dobrý
+Funkční stav: pohyblivá, soběstačná
+
+Pokyny při propuštění:
+Byla hospitalizována pro zánět žlučníku a podstoupila laparoskopickou operaci k jeho odstranění. Udržujte rány čisté a suché a vyhýbejte se zvedání předmětů o hmotnosti více než 4,5 kg po dobu dvou týdnů. V případě horečky, zvracení, zhoršující se bolesti nebo žluté pokožky volejte ___ nebo se vraťte na kontrolu.
+
+Pokyny pro další péči:
+___

@@ -1,0 +1,68 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Otok nohou a dušnost.
+
+Zásahy:
+Žádné.
+
+Anamnéza:
+Pacientka, které je ___ let, trpí chronickým onemocněním ledvin a chronickým srdečním selháním. Byla přijata kvůli zhoršujícímu se otoku nohou a dušnosti při námaze, který trval tři dny. Byla vyšetřena jejím praktickým lékařem dne ___ v zařízení ___ a byla odeslána k dalšímu vyšetření. Pacientka udávala sníženou chuť k jídlu, dušnost vleže a přibrala několik kilogramů. Neměla bolesti na hrudi ani horečku.
+PROHLÍDKA SYSTÉMŮ:
+Pozitivní nález: únava a dušnost.
+Negativní nález: kašel, zvracení, průjem, obtíže při močení.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec utrpěl mrtvici, byl léčen v zařízení ___.
+
+Fyzikální vyšetření:
+Starší žena, v klidu se cítí dobře, vyšetřena týmem ___.
+Krk:
+JVP (výška žilního tlaku) zvýšená až k čelisti.
+SRDEČNÍ:
+Pravidelný srdeční rytmus, tichý systolický šelest.
+Břicho:
+Měkké, bezbolestné, mírně napuchlé.
+Extremity:
+Edém (otek) s prohlubněmi až k kolenům na obou nohou.
+Neurologické vyšetření:
+Vědomá, orientovaná, bez specifických neurologických příznaků.
+
+Významné výsledky:
+Laboratorní výsledky při přijetí: zvýšená hladina kreatininu (nad základní hodnotu), mírně nízká hladina sodíku a normální hladina draslíku. Výrazně zvýšená hladina BNP. Negativní test na troponin dvakrát. Stabilní, ale mírně nízká hladina hemoglobinu. Rentgen hrudníku ukázal plicní vaskulární kongesci (zácpu) a malé bilaterální výpotky, interpretováno lékařem ___. Echokardiogram provedený dne ___ ukázal sníženou ejekční frakci (sílu srdečního svalu), což je stejné jako při předchozím vyšetření. EKG s sinusovým rytmem a bez akutních ischemických změn. Analýza moči bez patologických nálezů. Hladina kreatininu se postupně zlepšovala během hospitalizace díky diuréze (odvodnění) a před propuštěním se vrátila téměř k základní hodnotě.
+
+Léky při přijetí:
+Furosemid 40 mg denně, carvedilol 6,25 mg dvakrát denně, lisinopril 5 mg denně, aspirin 81 mg denně.
+
+Léky při propuštění:
+1. Furosemid 60 mg perorálně jednou denně.
+2. Carvedilol 6,25 mg perorálně dvakrát denně.
+3. Aspirin 81 mg perorálně jednou denně.
+4. Acetonát vápenatý 667 mg při jídle.
+5. Lisinopril byl vysazen; zahajte pouze na pokyn lékaře ___.
+
+Plán po propuštění:
+Domů s péčí od ___.
+
+Stav při propuštění:
+Psychický stav:
+Srozumitelná a koherentní.
+Úroveň vědomí:
+Vědomá a komunikativní.
+Funkční stav:
+Chůze s pomocí chodítka, samostatná.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli hromadění tekutin, které způsobovalo otoky a dušnost. Byla vám podávána léková látka intravenózně, aby se odstranila přebytečná tekutina, a vaše dýchání se zlepšilo. Každé ráno se vážte a volejte číslo ___ v případě, že přiberete více než 1,4 kg za den nebo 2,3 kg za týden. Dodržujte doporučení ohledně omezení příjmu soli a tekutin. Užívajte léky podle předpisu. V případě bolesti na hrudi, silné dušnosti nebo ztráty vědomí se vraťte na pohotovost. Dodržujte domluvenou návštěvu u ___ .
+
+Pokyny pro další péči:
+___

@@ -1,0 +1,71 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Sulfonamidy
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická cholecystektomie (odstranění žlučníku)
+
+Anamnéza současného onemocnění:
+Pacientka, žena ve věku ___ let, s hypertenzí, se dostavila na oddělení ___ s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením, které začaly po konzumaci tučného jídla. Uváděla také subjektivní horečku. Ultrazvukové vyšetření prokázalo žlučové kameny a ztluštění stěny žlučníku. Byla přijata na chirurgické oddělení, dostala antibiotika a dne ___ byla operována v rámci nekomplikované cholecystektomie.
+
+Osobní anamnéza:
+Hypertenze
+Hypotyreóza
+Migrény, sledována v ___
+
+Chirurgická anamnéza:
+Císařský řez v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav: Pacientka je v pohodě, bez známek utrpení.
+Krk: Pružný.
+Plíce: Čisté bilaterálně.
+Břicho: Měkké, mírně bolestivé v oblasti jizev, rány čisté a suché.
+Kůže: Teplá, bez vyrážky.
+Neurologické vyšetření: Pacientka je při vědomí, pohybuje všemi končetinami.
+
+Významné výsledky:
+Laboratorní výsledky při přijetí: zvýšený počet bílých krvinek (14,2) s normálními hodnotami jaterních enzymů a lipázy. Bilirubin v normě. Histopatologické vyšetření z ___ čeká na vyhodnocení při propuštění.
+Zobrazovací metody:
+Ultrazvuk pravého horního kvadrantu: více žlučových kamenů, ztluštění stěny žlučníku, malé množství tekutiny kolem žlučníku, bez dilatace žlučových cest.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levothyroxine 75 mcg denně
+
+Léky při propuštění:
+1. Acetaminophen 650 mg každých šest hodin dle potřeby na bolest.
+2. Docusate 100 mg dvakrát denně během užívání opioidů.
+3. Oxycodone 5 mg každých šest hodin dle potřeby při silné bolesti.
+4. Lisinopril 10 mg denně.
+5. Levothyroxine 75 mcg denně.
+
+Plán po propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Akutní cholecystitida (zánět žlučníku)
+Cholelithiasis (žlučové kameny)
+
+Stav při propuštění:
+Stabilní a zlepšený.
+Psychický stav: Jasný a soustředěný.
+
+Pokyny při propuštění:
+Byla hospitalizována pro zánět žlučníku a byla jí laparoskopicky odstraněna žlučník. Můžete se osprchovat a nechat mýdlovou vodu stékat přes jizvy, ale nekoupejte se v vaně. Vyhněte se zvedání předmětů o hmotnosti více než 4,5 kg po dobu čtyř týdnů. V případě horečky, zhoršující se bolesti, zvracení nebo žlutosti kůže volejte na číslo ___ nebo se obraťte na pohotovost.
+
+Následná péče:
+___

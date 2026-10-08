@@ -1,0 +1,66 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zvracení a snížený objem moči
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka byla přijata na oddělení ___ s třemi dny potíží, včetně sníženého příjmu potravy, zvracení a sníženého objemu moči, které se objevily po zahájení užívání nového léku na ___. Při přijetí byl zvýšený kreatinin; možnost základního onemocnění ledvin (CKD) nemohla být vyloučena bez předchozích hodnot. Pacientka obdržela intravenózní tekutiny na pohotovosti a byla přijata k monitorování.
+PROHLÍDKA SYSTÉMŮ:
+Pozitivní nález nevolnosti a únavy. Jinak negativní.
+
+Předchozí zdravotní problémy:
+Hypertenze
+Osteoartróza
+Hospitalizace na ___ pro pneumonii
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Únavná, v klidu v pohodě
+Hlava, oči, uši, nos, krk: Suché sliznice
+Plíce: Čisté bilaterálně
+Srdce: Pravidelná frekvence a rytmus
+Břicho: Měkké, bez citlivosti
+Neurologické vyšetření: Vědomá, bez fokálních deficitů
+
+Významné výsledky:
+Laboratorní výsledky z ___ ukázaly kreatinin 2,4 (zvýšený oproti nedostupné základní hodnotě), BUN 48, draslík 5,1, bikarbonát 19. Analýza moči bez patologických nálezů. Ultrazvuk ledvin ukázal normální velikost ledvin bez hydronefrózy. Kreatinin se do propuštění zlepšil na 1,3.
+
+Léky při přijetí:
+Lisinopril 20 mg denně
+Ibuprofen dle potřeby
+
+Léky při propuštění:
+1. Acetaminophen 650 mg každých šest hodin dle potřeby na bolest.
+2. Amlodipin 5 mg denně, dočasně nahrazující lisinopril.
+3. Lisinopril znovu užívejte až po konzultaci s ___.
+
+Plán po propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Primární: Akutní poškození ledvin
+
+Stav při propuštění:
+Psychický stav: Jasný a soustředěný
+Úroveň vědomí: Vědomá a komunikativní
+Funkční stav: Chůze, soběstačná
+
+Pokyny při propuštění:
+Byla jste hospitalizována, protože se vaše funkce ledvin zhoršila v důsledku dehydratace a užívání protizánětlivých léků. Pravidelně pijte tekutiny a vyhýbejte se ibuprofenu a podobným lékům proti bolesti. Vaše léky na vysoký krevní tlak byly změněny. Zavolejte ___ v případě sníženého vymočování, zvracení nebo otoků a navštivte Dr. ___ pro opakované krevní testy.
+
+Pokyny pro další péči:
+___

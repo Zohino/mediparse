@@ -1,0 +1,65 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Vřed na noze, únava
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let byl přijat z ambulance ___ s pomalu se hojícím vředem na noze a několika dny slabosti. Byl přijat za účelem ošetření vředu a monitorování.
+
+Osobní anamnéza:
+Diabetes mellitus 2. typu
+Chronické onemocnění ledvin 3. stupně
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodině otce se vyskytuje fibrilace síní. Matka trpěla hypertenzí.
+
+Fyzikální vyšetření:
+Životní funkce: stabilní
+Celkový stav: pohodlný
+Hlava, oči, uši, nos, hrdlo: normální
+Břicho: měkké
+Extremity: vřed na levé noze
+Kůže: teplá, suchá
+
+Významné výsledky:
+Glukóza zvýšená při příjmu. Kreatinin v normě. Počet bílých krvinek mírně zvýšený.
+ZOBRAZENÍ:
+Rentgen nohy bez nálezů kostních změn.
+
+Léky při přijetí:
+Metformin, lisinopril, amlodipin
+
+Léky při propuštění:
+Pokračujte v užívání lisinoprilu a amlodipinu doma. Insulin glargin večer. Cefalexin po dobu sedmi dnů. Přerušte užívání metforminu.
+
+Plán po propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Diabetický vřed na noze
+Diabetes mellitus
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Psychický stav: jasný a soustředěný
+Úroveň vědomí: bdělý
+Funkční stav: chodí samostatně s ortopedickou obuví
+
+Pokyny při propuštění:
+Udržujte obvaz čistý a suchý. Měřte hladinu cukru ve krvi dvakrát denně. V případě horečky, rozšiřujícího se zarudnutí nebo výtoku se vraťte. Co nejdříve se objednejte k lékaři u ___ .
+
+Pokyny pro další sledování:
+___

@@ -1,0 +1,62 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Obor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohy a únava
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let, který se po několika týdnech únavy a otoku kotníku dostavil do ambulance, odkud byl poslán do ___ k vyšetření kvůli abnormálním laboratorním výsledkům.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Popírá cukrovku
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Hlava, oči, uši, nos, hrdlo: Normální, vlhká sliznice
+Krk: Pružný
+Plíce: Čisté bilaterálně
+Neurologické vyšetření: Vědomý, bez fokálních příznaků
+
+Relevantní výsledky:
+Kreatinin zvýšený a stabilní ve srovnání s předchozími hodnotami. Draslík normální. Močová analýza ukázala přítomnost bílkovin. Ultrazvuk ledvin ukázal malé, echogenní ledviny bez známek obstrukce.
+
+Průběh hospitalizace:
+Pacient byl přijat k vyšetření otoku. Diuretika snížila otok a zlepšila se krevní tlak. Laboratorní výsledky zůstaly stabilní. Oddělení nefrologie doporučilo ambulantní sledování v ___ a úpravu medikace.
+
+Léky při přijetí:
+Amlodipin 5 mg denně
+
+Léky při propuštění:
+Amlodipin 10 mg denně. Furosemid 20 mg denně. Atorvastatin 20 mg večer. Vyhýbejte se nesteroidním protizánětlivým látkám (NSAID).
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+Hypertenze
+
+Stav při propuštění:
+Stabilní a zlepšený.
+Funkční stav: Samostatný, pohyblivý
+
+Instrukce při propuštění:
+Vážete se denně a omezte příjem soli. Užíváte léky podle předpisu a vyhýbejte se ibuprofenu. V případě zhoršení otoku, dušnosti nebo snížení množství moči se vraťte. Dodržujte termíny kontrolních prohlídek v ___.
+
+Instrukce pro další sledování:
+___

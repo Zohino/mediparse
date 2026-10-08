@@ -1,0 +1,89 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická cholecystektomie (odstranění žlučníku) dne ___
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila na oddělení ___ s bolestí v pravém horním kvadrantu břicha, která se zhoršovala již dva dny, a také s nevolností a zvracením po konzumaci tučného jídla. Bolest se šířila do zad a nezmírňovala se běžnými léky proti bolesti. Pacientka uváděla mírné horečky. Byla vyšetřena svým praktickým lékařem dne ___ a odeslána na pohotovost, kde zobrazovací vyšetření odhalilo žlučové kameny a ztluštění stěny žlučníku. Byla převezena na oddělení ___ k chirurgické péči.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Hypotyreóza (snížená funkce štítné žlázy)
+Gastroezofageální reflux (pálení žáhy)
+
+Chirurgická anamnéza:
+Císařský řez v roce ___
+Apendektomie (odstranění slepého střeva)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny, léčená v ___. V rodině nebyla zjištěna žádná malignita (rakovina).
+
+Fyzikální vyšetření:
+Vitalní funkce:
+T 37.8, HR 92, BP 134/78, RR 16, SpO2 98% (na pokojovém vzduchu)
+Celkový stav:
+Nepohodlná, bez známek toxicity
+Oči, uši, nos, hrdlo (HEENT):
+Mírná žloutenka očí chybí, sliznice vlhké
+Krk:
+Pružný
+Břicho:
+Bolestivost v pravém horním kvadrantu, pozitivní Murphyho příznak, bez odrazové bolesti
+Kůže:
+Teplá, suchá
+Neurologické vyšetření:
+Vědomá, bez fokálních příznaků
+Pulzy:
+Hmatné a symetrické
+
+Významné výsledky vyšetření:
+Laboratorní výsledky při přijetí: zvýšený počet bílých krvinek (14,2) s převahou neutrofilů, normální hladina bilirubinu a mírně zvýšená hladina lipázy. Ultrazvukové vyšetření provedené dne ___ ukázalo mnoho žlučových kamenů, ztluštění stěny žlučníku a tekutinu kolem žlučníku. Vnitřní jaterní tepna měřila 4 mm. Histologické vyšetření vzorku z žlučníku, posouzené lékařem ___, prokázalo akutní zánět bez dysplazie (abnormálních buněk).
+
+Průběh hospitalizace:
+Pacientka byla přijata, byla držena na hladovění, dostávala intravenózní tekutiny a antibiotika a byla operována lékařem ___ k provedení laparoskopické cholecystektomie, která proběhla bez komplikací. Po prvním pooperačním dni jí byla postupně obnovena strava a bolest byla kontrolována perorálními léky. Horečka ustoupila a počet bílých krvinek se normalizoval. Operační rány zůstaly čisté. Byla propuštěna domů dne ___ a byla zajištěna kontrolní návštěva prostřednictvím ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levothyroxine 75 mcg denně
+Omeprazole 20 mg denně
+
+Léky k užívání po propuštění:
+1. Lisinopril 10 mg, perorálně, jednou denně.
+2. Levothyroxin 75 mcg, perorálně, jednou denně.
+3. Omeprazol 20 mg, perorálně, jednou denně.
+4. Paracetamol 650 mg, perorálně, každých šest hodin dle potřeby při bolesti.
+5. Oxykodon 5 mg, každých šest hodin dle potřeby při silné bolesti.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní kalciová cholecystitida (zánět žlučníku)
+Žlučové kameny
+
+Stav při propuštění:
+Psychický stav:
+Vnímání je jasné a soustředěné.
+Úroveň vědomí:
+Vědomý a komunikativní.
+Fyzická aktivita:
+Chůze, soběstačný.
+
+Pokyny po propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl endoskopicky odstraněn. Můžete se sprchovat a nechat na jizvách téct mýdlovou vodu; nevystavujte je ponoření do vody. Během čtyř týdnů se vyhýbejte zvedání předmětů o hmotnosti více než 4,5 kg. Užívajte léky proti bolesti pouze dle potřeby a během užívání neřiďte. V případě horečky, zhoršující se bolesti, zvracení nebo žluté pokožky volejte do ambulance na číslo ___ nebo se obraťte na zařízení ___ .
+
+Pokyny pro další péči:
+___

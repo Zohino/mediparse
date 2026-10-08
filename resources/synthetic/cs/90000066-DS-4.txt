@@ -1,0 +1,69 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Oddělení: ORTOPEDIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíž:
+Bolest v pravém kyčli po pádu.
+
+Hlavní chirurgický zákrok:
+Hemiartroplastika pravého kyčle.
+
+Anamnéza současného onemocnění:
+Pacientka, ve věku ___ let, uklouzla na mokré podlaze doma a nemohla zatížit pravou nohu. Byla převezena z ___ poté, co zobrazovací vyšetření odhalilo zlomeninu krčku femuru. Nedošlo k úrazu hlavy ani ke ztrátě vědomí.
+
+Osobní anamnéza:
+Hypertenze
+Osteoporóza
+Hypotyreóza
+
+Chirurgická anamnéza:
+Operace šedého zákalu v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka trpěla osteoporózou. Jinak bez významných nálezů.
+
+Fyzikální vyšetření:
+HLAVA, OČI, UŠI, NOS, Hrdlo: Bez známek traumatu, vlhké sliznice.
+PLÍCE: Čisté bilaterálně.
+Extremity: Pravá noha zkrácená a vnější rotace, pulzy zachovány.
+Neurologické vyšetření: Pacientka při vědomí, citlivost zachována.
+
+Významné výsledky:
+LABORATOŘ PŘI PŘIJETÍ: Hemoglobin 11.8, kreatinin 0.9, sodík 139, draslík 4.2, INR 1.0. Zpráva z externí ambulance ___ byla prostudována.
+ZÁVĚR: Zlomenina krčku femuru vpravo. Rentgenové snímky po operaci ukazují správně usazenou protézu bez komplikací.
+
+Průběh hospitalizace:
+Pacientka byla přijata, její stav byl stabilizován a podstoupila hemiartroplastiku pravého kyčle provedenou lékařem ___ bez komplikací. Bolest byla kontrolována pomocí paracetamolu a nízké dávky oxykodonu. Fyzikální terapie byla zahájena ___ a pacientka postupovala stabilně. Pro prevenci trombózy byl podáván enoxaparin. Byla stabilní pro propuštění.
+PROBLÉMY PŘI PROPOUŠTĚNÍ: Pokračovat v terapii pro zdraví kostí a dodržovat opatření proti pádům.
+
+Léky při přijetí:
+Levothyroxin, lisinopril, vápník, vitamín D.
+
+Léky při propuštění:
+Paracetamol 650 mg každých šest hodin, oxykodon 2.5 mg dle potřeby při silné bolesti, enoxaparin denně po dobu čtyř týdnů, levothyroxin, lisinopril, vápník, vitamín D, senna.
+
+Plán po propuštění:
+Dlouhodobá péče v rehabilitačním zařízení ___
+
+Diagnóza při propuštění:
+Zlomenina krčku femuru vpravo
+Hypertenze
+Osteoporóza
+
+Stav při propuštění:
+Psychický stav: Jasný a soustředěný.
+Úroveň vědomí: Při vědomí a komunikativní.
+Funkční stav: Chůze s chodítkem, zatěžování nohy dle tolerance.
+
+Pokyny při propuštění:
+Udržujte ránu čistou a suchou. Vyhněte se ohýbání kyčle více než o devadesát stupňů. Užívajte léky podle předpisu a používejte chodítko neustále. V případě horečky, výtoku z rány, otoku lýtka nebo zhoršení bolesti volejte ___ .
+
+Následná péče:
+___

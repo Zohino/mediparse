@@ -1,0 +1,67 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Žena ve věku ___ let s chronickým onemocněním ledvin, přijata z ___ s otokem nohou, sníženým příjmem potravy a rostoucí hodnotou kreatininu, což odpovídá akutnímu poškození ledvin po několika dnech zvracení.
+
+Anamnéza:
+Hypertenze
+Hyperlipidemie
+Osteoartróza
+
+Rodinná anamnéza:
+Matka s hypertenzí, léčená v ___. Žádné známé případy onemocnění ledvin.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Celkový stav: Komfortní, bez známek utrpení
+Plíce: Čisté bilaterálně
+SRDEČNÍ: Pravidelný rytmus, bez šelestu
+Břicho: Měkké, bez citlivosti
+Extremity: Lehký otok kotníků
+Neurologické: Vědomá, bez fokálních příznaků
+
+Významné výsledky:
+Kreatinin se zlepšil od maximální hodnoty při přijetí k hodnotě blížící se základní. Draslík normální při propuštění. BNP mírně zvýšený.
+ZÁVĚR:
+Rentgen hrudníku ukázal malé výpotky a mírnou vaskulární kongesci, bez pneumonie.
+
+Průběh hospitalizace:
+Tekutiny byly podávány opatrně a diuretikum určené k užívání doma bylo zpočátku zastaveno, poté znovu zahájeno s postupným zlepšováním otoků. Laboratorní testy byly prováděny denně a stabilizovány. Pacientka dobře jedla, chodila s pomocí fyzioterapie a byla propuštěna do domácího prostředí.
+
+Léky při propuštění:
+Furosemid 20 mg perorálně denně
+Amlodipin 5 mg perorálně denně
+Atorvastatin 20 mg večer
+Paracetamol dle potřeby
+
+Plán po propuštění:
+Domů s péčí
+Zařízení: ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+Srdeční selhání
+Sekundární:
+Hypertenze
+Hyperlipidemie
+
+Stav při propuštění:
+Stabilní
+Psychický stav: Jasný a koherentní
+Úroveň vědomí: Vědomá a komunikativní
+Funkční stav: Chůze s pomocí hole
+
+Instrukce při propuštění:
+Byla jste hospitalizována kvůli dehydrataci a otokům. Užívajte léky podle předpisu, každý den se vážte, omezte příjem soli a v případě dušnosti, mdloby nebo sníženého množství moči volejte ___ nebo se vraťte k lékaři.
+
+Pokyny pro další péči:
+___

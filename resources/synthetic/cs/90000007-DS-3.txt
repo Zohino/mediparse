@@ -1,0 +1,74 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Zvracení a závratě.
+
+Zásahy:
+Žádné.
+
+Anamnéza:
+Pacientka, ___ let, s dlouhou anamnézou srdečních a metabolických onemocnění, se dostavila s třemi dny potíží, včetně sníženého příjmu potravy, zvracení a závratí. Byla poprvé vyšetřena na ___ , kde laboratorní výsledky ukázaly zvýšenou hodnotu kreatininu nad základní hodnotu a zvýšenou hladinu draslíku. Byla převezena na ___ pro další péči a přijata k hospitalizaci pro rehydrataci a pečlivé monitorování.
+
+Předchozí zdravotní problémy:
+Diabetes mellitus 2. typu
+Srdeční selhání
+Fibrilace síní
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí.
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacientka vypadá unaveně, bez akutních potíží.
+Hlava, oči, uši, nos, krk:
+Suché sliznice.
+Krk:
+Flexibilní, bez jícnové dilatace.
+Plíce:
+Čisté při poslech.
+Břicho:
+Měkké, bezbolestné, nenabrzdělé.
+Končetiny:
+Teplé, minimální otok kotníků.
+Kůže:
+Suchá, neporušená, bez vyrážky.
+
+Průběh hospitalizace:
+Hodnota kreatininu dosáhla maxima ___ a zlepšila se po podání mírných intravenózních tekutin a po vysazení diuretika a ACE inhibitoru. Množství moči se obnovilo a hladina draslíku se normalizovala. Během hospitalizace bylo vysazeno metforminum. Kontrola srdeční frekvence byla pokračována pomocí metoprololu a pacientka zůstala hemodynamicky stabilní. Kardiologické oddělení na ___ souhlasilo s obnovením snížené dávky diuretika. Byla jí postupně zaváděna běžná strava a byla vyšetřena fyzioterapeutem na ___ před propuštěním domů s doporučením k laboratornímu sledování.
+
+Léky při přijetí:
+Metforminum ___ mg dvakrát denně; furosemid 40 mg denně; lisinopril 10 mg denně; apixaban 5 mg dvakrát denně.
+
+Léky při propuštění:
+Apixaban 5 mg perorálně dvakrát denně. Metoprolol succinate 50 mg jednou denně. Furosemid 20 mg jednou denně, nižší dávka než předtím. Vysazeno metforminum a lisinopril do doby, než budou laboratorní výsledky znovu zkontrolovány ___ v ambulanci. Pokračujte ve všech ostatních lécích, které užíváte doma, beze změn.
+
+Plán po propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Chronické onemocnění ledvin
+Srdeční selhání
+Fibrilace síní
+
+Stav při propuštění:
+Úroveň vědomí:
+Orientovaná a komunikativní.
+Funkční stav:
+Chůze, soběstačná.
+
+Pokyny při propuštění:
+Byla jste hospitalizována, protože jste byla dehydratovaná a vaše funkce ledvin se zhoršila. Pravidelně pijte tekutiny a každý den se vážte. Nezačínejte znovu užívat metforminum nebo lisinopril, dokud vám to lékař neřekne na ___. V případě horečky, opakovaného zvracení, mdloby nebo nového otoku nohou volejte ___ nebo se vraťte do nemocnice.
+
+Pokyny pro další sledování:
+___

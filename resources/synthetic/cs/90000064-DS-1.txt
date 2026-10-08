@@ -1,0 +1,62 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Oddělení: Chirurgie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha.
+
+Hlavní chirurgický zákrok:
+Laparoskopická appendektomie (odstranění slepého střeva).
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let se dostavil s bolestí v pravém dolním kvadrantu břicha, která se zhoršovala již tři dny, a také s nevolností a horečkou. Byl vyšetřen na pohotovosti v ___ a zobrazovací metody naznačovaly zánět slepého střeva. Byl převezen do ___ k chirurgickému vyšetření a přijat na chirurgické oddělení.
+
+Předchozí zdravotní problémy:
+Hyperlipidemie (zvýšený obsah tuků v krvi).
+Starší operace kolene v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných informací.
+
+Fyzikální vyšetření:
+Životní funkce: Bez horečky, hemodynamicky stabilní.
+Celkový stav: Pacient je v pohodě, bez známek utrpení.
+Břicho: Měkké, mírná bolestivost v místě řezu.
+KONČETINY: Bez otoků.
+KŮŽE: Řezné rány čisté, suché, neporušené.
+Neurologické vyšetření: Pacient je při vědomí, bez specifických neurologických příznaků.
+
+Významné výsledky:
+Počet bílých krvinek 14,2 při přijetí, při propuštění 8,1. Kreatinin, elektrolyty a jaterní enzymy v normě. CT vyšetření břicha provedené v ___ ukázalo rozšířený, zánětlivě změněný slepý střevo s okolním zánětem tukové tkáně a bez abscesu. Histologické vyšetření vzorku prokázalo akutní zánět slepého střeva bez známek malignity (zhoubných nádorů). Kultivace krve zůstaly negativní. Analýza moči byla bez patologických nálezů.
+
+Léky při přijetí:
+Atorvastatin 20 mg denně. Multivitamin denně. Ibuprofen dle potřeby.
+
+Léky při propuštění:
+Acetaminophen 650 mg každých šest hodin dle potřeby na bolest. Oxykodon 5 mg každých šest hodin dle potřeby při silné bolesti. Atorvastatin 20 mg denně. Docusate 100 mg dvakrát denně.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní zánět slepého střeva.
+Diabetes mellitus (cukrovka).
+
+Stav při propuštění:
+Dobrý.
+Psychický stav: Jasný a soustředěný.
+Funkční stav: Chůze, soběstačný.
+
+Pokyny při propuštění:
+Byl vám proveden chirurgický zákrok k léčbě zánětu slepého střeva. Udržujte řezné rány čisté a suché, vyhýbejte se těžkému zvedání a užívejte léky proti bolesti podle pokynů. V případě horečky, zhoršující se bolesti nebo zvracení volejte na číslo ___. Následujte pokyny lékaře Dr. ___.
+
+Následná péče:
+___

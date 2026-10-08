@@ -1,0 +1,68 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Vřed na noze a horečka
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Ošetření vředu přímo na lůžku
+
+Anamnéza současného onemocnění:
+Muž ve věku ___ let byl převezen z ambulance ___ s rozšiřujícím se vředem na noze, zimnicemi a sníženou chutí k jídlu po dobu tří dnů. Hladina cukru v krvi byla doma zvýšená. Byl léčen antibiotiky a péčí o ránu na oddělení.
+
+Osobní anamnéza:
+Diabetes mellitus, diagnostikován v roce ___
+Hypertenze (vysoký krevní tlak)
+Vysoká hladina cholesterolu
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s vysokým krevním tlakem; matka zdravá, sourozenec léčen v ___
+
+Fyzikální vyšetření:
+Fyzikální vyšetření při přijetí:
+Celkový stav:
+Unavený, v klidu v pohodě
+Plíce:
+Čisté na obou stranách
+Břicho:
+Měkké, bez citlivosti
+KŮŽE:
+Vřed na plantární straně pravé nohy s okolní zarudlostí
+Neurologické vyšetření:
+Vědomý, orientovaný, bez neurologických deficitů
+
+Významné výsledky:
+Dne ___ byl počet bílých krvinek mírně zvýšen, hladina glukózy 280, kreatinin normální. Rentgen nohy ukázal otok měkkých tkání bez postižení kostí. Kultivace vředu prokázala přítomnost bakterií běžných pro kůži, které jsou citlivé na cefalexin.
+
+Léky při přijetí:
+Metformin, lisinopril, atorvastatin
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu sedmi dnů
+2. Metformin 1000 mg perorálně dvakrát denně
+3. Lisinopril 10 mg denně
+4. Atorvastatin 20 mg večer
+
+Plán po propuštění:
+Domů s péčí
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetický vřed na noze s celulitidou (zánětem kůže)
+
+Stav při propuštění:
+Stabilní, vědomý, pohyblivý s obuví, která snižuje zátěž na nohu
+
+Pokyny při propuštění:
+Byl vám poskytnut lék na infekční vřed na noze. Udržujte obvaz čistý a suchý, vyhýbejte se chůzi naboso, kontrolujte hladinu cukru v krvi denně, dokončete veškeré antibiotické léky a volejte číslo ___ v případě horečky nebo zhoršení zarudnutí.
+
+Pokyny pro další péči:
+___

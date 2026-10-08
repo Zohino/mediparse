@@ -1,0 +1,78 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Oddělení: Chirurgie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha.
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie s intraoperační cholangiografií.
+
+Anamnéza současného onemocnění:
+Pacient se dostavil na oddělení ___ s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po tučném jídle, které trvalo dva dny. Uváděl mírné horečky doma. Byl vyšetřen na oddělení ___, kde ultrazvukové vyšetření naznačilo přítomnost žlučových kamenů a byl převeden do naší nemocnice dne ___ k chirurgickému vyšetření pod vedením doktora ___.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Gastroezofageální reflux
+
+Chirurgická anamnéza:
+Oprava pravostranné tříselné kýly.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny.
+
+Fyzikální vyšetření:
+Krk:
+Pružný, bez lymfadenopatie.
+PLÍCE:
+Čisté při poslechu bilaterálně.
+BŘÍCHO:
+Měkké, mírně bolestivé v pravém horním kvadrantu, místa po punkcích čistá a suchá.
+Neurologické vyšetření:
+Vědomý, orientovaný, bez fokálních příznaků. Bez horečky.
+
+Relevantní výsledky:
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+WBC 9,1, hemoglobin 13,8, krevní destičky 245, kreatinin 0,9, ALT 42, AST 38, celkové bilirubin 1,1, amyláza normální dne ___.
+NÁLEZY:
+Ultrazvukové vyšetření provedené dne ___ ukázalo přítomnost více žlučových kamenů, ztluštění stěny žlučníku a tekutiny kolem žlučníku s pozitivním sonografickým Murphyovým příznakem. Vstupní žlučovod měl normální průměr. Intraoperační cholangiografie nevykazovala žádné překážky, s volným průtokem do dvanáctníku.
+
+Stručný popis hospitalizace:
+Pacient byl přijat na chirurgické oddělení, dostal intravenózní tekutiny, antibiotika a analgetika a byl ponechán bez perorálního příjmu. Byl mu proveden laparoskopický zákrok cholecystektomie dne ___ bez komplikací. Po operaci byla bolest kontrolována perorálními léky a pacient zahájil běžnou stravu. Antibiotika byla po operaci ukončena. Výsledky histologického vyšetření z ___ jsou k dispozici při propuštění. Pacient byl schopen samostatné chůze, močení probíhalo spontánně a byl propuštěn domů dne ___ ve stabilním stavu. Strava byla dobře tolerována, bez nevolnosti.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Omeprazol 20 mg denně.
+
+Léky při propuštění:
+Acetaminophen 650 mg každých šest hodin dle potřeby. Oxykodon 5 mg každých šest hodin dle potřeby při silné bolesti. Senna dvakrát denně během užívání oxykodonu. Pokračovat v užívání léků, které pacient užíval doma. Během užívání oxykodonu neřídit.
+
+Plán po propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Akutní kalciová cholecystitida.
+
+Stav při propuštění:
+Dobrý
+Psychický stav:
+Vědomý a koherentní.
+Úroveň vědomí:
+Vědomý a komunikativní.
+Funkční stav:
+Samostatně chodící.
+
+Pokyny pro propuštění:
+Byli jste léčeni kvůli problémům s žlučníkem a podstoupili jste laparoskopickou operaci. Udržujte rány čisté a suché. Během dvou týdnů se vyhýbejte zvedání předmětů vážících více než 4,5 kg. V případě horečky, zhoršující se bolesti břicha, zvracení nebo zarudnutí rány volejte číslo ___ nebo se obraťte na lékaře.
+
+Pokyny pro kontrolní prohlídku:
+___

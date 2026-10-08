@@ -1,0 +1,62 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Nausea a snížený objem moči
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka, žena ve věku ___ let, s nedostatečně kontrolovanou cukrovkou, se dostavila s třemi dny trvajícími potížemi, jako je nevolnost, snížený příjem potravy a snížený objem moči. Byla odeslána z ambulantní péče ___ po abnormálních laboratorních výsledcích. Popírala horečku a užívala ibuprofen.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce stabilní, bez horečky.
+Krk: Pružný, bez jícnové dilatace.
+Plíce: Čisté bilaterálně.
+Břicho: Měkké, bez citlivosti, bez distenze.
+Neurologické vyšetření: Vědomá, orientovaná, bez fokálních příznaků.
+
+Významné výsledky:
+Kreatinin při přijetí 2,4, základní hodnota blízko 1,0, k propuštění klesl na 1,1. Draslík 5,4 při příjmu, normalizován po léčbě. Glukóza 412. Hemoglobin A1c 11,2 %, bikarbonát 18, zlepšující se. Analýza moči bez patologických nálezů. Ultrazvuk ledvin bez známek obstrukce. Opakovaná laboratorní vyšetření provedená ___ byla stabilní.
+
+Průběh hospitalizace:
+Léčena intravenózními tekutinami, přičemž kreatinin se vrátil k základní hodnotě. Ibuprofen byl vysazen. Její cukrovka byla nedostatečně kontrolována; zahájena byla léčba inzulinem, který byl upraven s konzultací endokrinologa od ___. Draslík byl regulován dietou a monitorován. Byla se vyhýbána nefrotoxickým lékům a byla jí poskytnuta edukace o cukrovce. Dobře tolerovala stravu a byla propuštěna ve stabilním stavu.
+
+Léky při přijetí:
+Metformin 1000 mg dvakrát denně, ibuprofen dle potřeby.
+
+Léky při propuštění:
+Insulin glargin 20 jednotek večer. Insulin lispro s jídlem dle dávkovací tabulky. Atorvastatin 20 mg denně. Paracetamol dle potřeby. Lékárna ___ má zajistit glukometr.
+
+Plán po propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Diabetes mellitus, nedostatečně kontrolovaný
+
+Stav při propuštění:
+Psychický stav: Jasný a koherentní.
+Úroveň vědomí: Vědomá a komunikativní.
+Funkční stav: Chůze, soběstačná.
+
+Pokyny při propuštění:
+Vyhýbejte se ibuprofenu a podobným analgetikům. Pravidelně pijte tekutiny a kontrolujte hladinu cukru v krvi před jídlem. V případě zvracení, velmi malého množství moči nebo zmatenosti se obraťte na lékaře. V případě dotazů volejte do ambulance ___ .
+
+Následná péče:
+___

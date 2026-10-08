@@ -1,0 +1,70 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž s ___ přišel s třidenním produktivním kašlem, horečkou a dušností. Byl poprvé vyšetřen na ___ kde rentgenové vyšetření hrudníku ukázalo ztmavení v dolní části pravého plíce a byl převeden pro další péči.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Dříve kouřil, přestal ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Fyzikální vyšetření při přijetí:
+Životní funkce: T 38,4, HR 98, BP 128/76, RR 22, SpO2 92 % při dýchání okolním vzduchem
+Celkový stav: Vypadá nemocně, mírně tachypnoe
+Krk: Pružný
+PLÍCE: Krepitace v dolní části pravého plíce
+Břicho: Měkké, bez citlivosti
+KONČETINY: Bez otoků
+Neurologické vyšetření: Vědomý, bez fokálních příznaků
+
+Významné výsledky:
+Počet bílých krvinek 14,2 s převahou neutrofilů. Laktát normální. Rentgen hrudníku: konsolidace v dolní části pravého plíce. Kultivace krve z ___ nevykazovala žádný růst.
+
+Průběh hospitalizace:
+Byl léčen pro pneumonii získanou v komunitě intravenózními antibiotiky, poté byl přechod na perorální léčbu, jakmile horečka ustoupila. Podávání kyslíku bylo postupně snižováno do doby, kdy dýchal okolním vzduchem. Chodil bez pomoci a toleroval stravu, takže byl propuštěn domů dne ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně denně
+2. Atorvastatin 20 mg perorálně večer
+3. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu čtyř dalších dnů
+
+Plán po propuštění:
+Domů s ___
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+Hypoxemie, vyřešena
+
+Stav při propuštění:
+Psychický stav: Jasný a soudržný.
+Úroveň vědomí: Vědomý a komunikativní.
+Funkční stav: Chůze, soběstačný.
+
+Pokyny při propuštění:
+Byl hospitalizován kvůli infekci plic. Dokončete celý cyklus antibiotik, odpočívejte a pijte dostatek tekutin. V případě zhoršení dýchání, vysoké horečky nebo bolesti na hrudi se vraťte. Prosím, navštivte svého lékaře dne ___.
+
+Pokyny pro další péči:
+___

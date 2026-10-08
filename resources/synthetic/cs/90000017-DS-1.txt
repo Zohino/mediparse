@@ -1,0 +1,61 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha.
+
+Hlavní chirurgický zákrok:
+Laparoskopická appendektomie (odstranění slepého střeva).
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila na oddělení ___ s bolestí v pravém dolním kvadrantu břicha, která se zhoršovala již dva dny, dále trpěla nevolností a mírnou horečkou. Bolest začala v blízkosti pupku a postupně se šířila. Byla vyšetřena na oddělení ___ a převezena pro chirurgické vyšetření. CT vyšetření prokázalo akutní zánět slepého střeva bez perforace.
+PROHLÍDKA SYSTÉMŮ: Pozitivní nález nevolnosti a nechutenství. Negativní nález průjmu a obtíží při močení.
+
+Osobní anamnéza:
+Hypotyreóza, migrény.
+
+Chirurgická anamnéza:
+Císařský řez na ___.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Sestra léčená pro onemocnění štítné žlázy na ___.
+
+Fyzikální vyšetření:
+Celkový stav: Pacientka je v pohodě, bez akutních potíží.
+Hlava, oči, uši, nos, krk: Bez žloutenky, sliznice vlhké.
+Břicho: Měkké, mírná bolestivost v pravém dolním kvadrantu, místa vpichu po laparoskopii jsou čistá.
+Extremity: Teplé, bez otoků.
+
+Významné výsledky:
+LABORATOŘ PŘI PŘIJETÍ: WBC (bílý krvinky) 14.2, hemoglobin 12.8, kreatinin 0.7, laktát 1.1. Vyšetření moči bez patologických nálezů. Výsledky byly prodiskutovány s týmem ___ .
+ZÁVĚR: CT vyšetření břicha a pánve: dilatovaný slepý střevo o šířce 11 mm s posílením stěny a infiltrací tukové tkáně kolem slepého střeva, bez abscesu nebo volného vzduchu. Zjištěné nálezy jsou v souladu s akutním zánětem slepého střeva. Malé množství fyziologické tekutiny v pánvi. Rentgen hrudníku bez patologických nálezů.
+
+Průběh hospitalizace:
+Pacientka byla přijata na chirurgické oddělení a zahájena intravenózní infuze a antibiotika. Podstoupila nekomplikovanou laparoskopickou appendektomii dne ___ provedenou doktorem ___. Histologické vyšetření bylo k dispozici až po propuštění. Byla jí postupně přidávána běžná strava a bolest byla kontrolována perorálními léky. Pacientka tolerovala běžnou stravu, normálně močila, sama chodila a byla propuštěna domů dne ___ s kontrolou na ___.
+
+Léky při přijetí:
+Levothyroxin 75 mcg denně. Sumatriptan dle potřeby při migréně. Multivitamin denně.
+
+Léky při propuštění:
+Acetaminophen 650 mg každých šest hodin dle potřeby na bolest. Oxykodon 5 mg každých šest hodin dle potřeby při silné bolesti, krátkodobě. Docusate 100 mg dvakrát denně při užívání oxykodonu. Pokračovat v užívání levothyroxinu 75 mcg denně.
+
+Plán po propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Akutní zánět slepého střeva.
+
+Stav při propuštění:
+Psychický stav: Jasná a srozumitelná.
+Úroveň vědomí: Vnímavá a komunikativní.
+
+Instrukce při propuštění:
+Byla hospitalizována pro zánět slepého střeva a podstoupila laparoskopickou operaci. Udržujte rány čisté a suché a zvedejte váhu nepřesahující 4,5 kg po dobu čtyř týdnů. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí rány se obraťte na lékaře. V případě dotazů volejte na číslo ___.

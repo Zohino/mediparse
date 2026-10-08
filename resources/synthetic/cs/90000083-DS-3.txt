@@ -1,0 +1,73 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: Kardiologie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s potížemi bušení srdce a závratí trvajícími dva dny. Při příjmu byl srdeční tep rychlý a nepravidelný. Byl převezen z ___ za účelem regulace srdečního rytmu.
+
+Anamnéza:
+Fibrilace síní
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec měl mrtvici
+
+Fyzikální vyšetření:
+Celkový stav:
+Pacient je v pohodě, bez známek utrpení.
+Hlava, oči, uši, nos, krk:
+Vlhké sliznice.
+Břicho:
+Měkké, bez citlivosti.
+Končetiny:
+Bez otoků.
+
+Výsledky vyšetření:
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Drusík 4,2, kreatinin 0,9, normální troponin.
+ZÁVĚR:
+Při vyšetření nebyla zjištěna žádná akutní patologie.
+NÁLEZY:
+Normální rentgen hrudníku, zachovalá funkce komor.
+
+Průběh hospitalizace:
+Srdeční rytmus byl regulován pomocí metoprololu a příznaky ustoupily. Antikoagulace byla zahájena po konzultaci s ___. Pacient byl stabilní při monitoringu a byl propuštěn.
+
+Léky při přijetí:
+Lisinopril a atorvastatin denně.
+
+Léky při propuštění:
+Metoprolol succinate jednou denně, apixaban dvakrát denně, lisinopril denně a atorvastatin večer. Pokračujte v užívání všech dávek doma.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Fibrilace síní
+
+Stav při propuštění:
+Stabilní
+Psychický stav:
+Orientovaný a při vědomí.
+Funkční stav:
+Chůze, soběstačný.
+
+Pokyny při propuštění:
+Byl vám poskytnut lék na léčbu rychlé a nepravidelné srdeční činnosti. Užívajte nový lék na ředění krve podle pokynů. V případě bolesti na hrudi, mdloby nebo krvácení se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro další péči:
+___

@@ -1,0 +1,72 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Ž  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bolest v pravém boku a horečka
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka, ___ let, s bolestí v pravém boku, horečkou a pálením při močení trvajícím tři dny, odeslána z ambulance ___ . V pohotovostní ambulanci byla horečnatá a s tachykardií, vyšetření moči bylo abnormální a před přijetím jí byly podány intravenózní tekutiny a antibiotika z důvodu pyelonefritidy, s příznaky od ___.
+
+Osobní anamnéza:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidemie
+Opakované infekce močových cest
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Celkový stav: komfortní, bez horečky
+Oblast hlavy, očí, uší, nosu a krku: vlhké sliznice
+Plíce: čisté bilaterálně
+Srdce: pravidelný rytmus
+Břicho: měkké, mírná bolestivost v pravém boku
+Extremity: bez otoků
+Kůže: teplá, suchá
+
+Významné výsledky:
+Kultivace moči prokázala přítomnost E. coli, citlivou na ceftriaxon. Počet leukocytů 14,2 při přijetí, snížil se na 8,1 při propuštění. Kreatinin stabilní. Kultivace krve byla negativní dne ___.
+ZÁVĚR:
+Ultrazvuk ledvin bez hydronefrózy nebo kamenů.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Cefpodoxim 200 mg dvakrát denně po dobu 7 dnů
+2. Metformin 500 mg dvakrát denně
+3. Lisinopril 10 mg denně
+4. Paracetamol dle potřeby na bolest
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní pyelonefritida
+Bakteriémie způsobená Escherichia coli
+
+Stav při propuštění:
+Stabilní a zlepšený.
+Psychický stav: jasný a koherentní.
+Úroveň vědomí: bdělý a komunikativní.
+
+Pokyny při propuštění:
+Byla vám poskytnuta léčba infekce ledvin. Dokončete veškerá antibiotika a pijte dostatek tekutin. V případě horečky, zvracení nebo zhoršení bolesti zad se vraťte. V případě dotazů kontaktujte Dr. ___ na telefonním čísle ___, a nezapomeňte na kontrolní prohlídku dne ___.
+
+Pokyny pro další sledování:
+___

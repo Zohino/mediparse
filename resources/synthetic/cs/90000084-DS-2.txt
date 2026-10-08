@@ -1,0 +1,72 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Oddělení: CHIRURGIE
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha.
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie (odstranění žlučníku).
+
+Anamnéza současného onemocnění:
+Pacient se dostavil na oddělení ___ s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po tučném jídle, která trvala dva dny. Symptomy se začaly objevovat ___ a zhoršovaly se i přes změny v jídelníčku. Bolest se šířila do pravého ramene. Pacient popíral horečku nebo žloutenku. Byl doporučen lékařem ___ k urgentnímu vyšetření, zobrazovacím metodám a chirurgické konzultaci.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+
+Chirurgická anamnéza:
+Apendektomie (odstranění slepého střeva) na ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny, otec s rakovinou na ___
+
+Fyzikální vyšetření:
+SRDEČNÍ: Pravidelná frekvence a rytmus, žádné šelesty.
+Břicho: Měkké, bolestivé v pravém horním kvadrantu, pozitivní Murphyho příznak, bez známek distenze.
+KONČETINY: Teplé, bez otoků.
+Neurologické: Vědomý, orientovaný, bez fokálních příznaků.
+
+Významné výsledky:
+Laboratorní vyšetření ukázala mírně zvýšený počet bílých krvinek, normální hladinu bilirubinu a jaterní enzymy. Hladina lipázy byla v normě. Ultrazvuk provedený na ___ prokázal žlučové kameny, ztluštění stěny žlučníku a tekutinu kolem žlučníku. Laboratorní výsledky po operaci byly bez odchylek.
+ZÁVĚR:
+Nález odpovídá akutní cholecystitidě způsobené žlučovými kameny, bez dilatace žlučových cest.
+
+Průběh hospitalizace:
+Pacient byl přijat na chirurgické oddělení, dostal intravenózní tekutiny a antibiotika a byl ponechán bez perorálního příjmu. Dne ___ podstoupil nekomplikovanou laparoskopickou cholecystektomii provedenou lékařem ___. Po operaci byla bolest kontrolována perorálními analgetiky, dieta byla postupně rozšiřována a pacient toleroval běžnou stravu. Antibiotika byla po operaci ukončena. Rány byly čisté a suché. Byl propuštěn domů dne ___ ve stabilním stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Aspirin 81 mg denně
+
+Léky při propuštění:
+1. Acetaminophen 650 mg perorálně každých šest hodin dle potřeby na bolest.
+2. Oxykodon 5 mg perorálně každých šest hodin dle potřeby na silnou bolest.
+3. Docusate 100 mg dvakrát denně během užívání opioidů.
+4. Pokračovat v užívání lisinoprilu a atorvastatinu ve stejné dávce jako předtím.
+
+Plán po propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Akutní cholecystitida způsobená žlučovými kameny.
+Sekundární: Hypertenze, hyperlipidemie.
+
+Stav při propuštění:
+Psychický stav: Jasný a srozumitelný.
+Úroveň vědomí: Vědomý a komunikativní.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku a proběhla vám laparoskopická operace k odstranění žlučníku. Udržujte rány čisté a suché a sprchujte se jako obvykle. Několik týdnů se vyhýbejte zvedání předmětů vážících více než 4,5 kg. V případě horečky, zhoršující se bolesti, zvracení, žlutosti kůže nebo zarudnutí rány volejte číslo ___ nebo se obraťte na pohotovost. Následujte pokyny pro kontrolní prohlídku, které vám byly sděleny společností ___.
+
+Pokyny pro kontrolní prohlídku:
+___

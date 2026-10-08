@@ -1,0 +1,68 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Odbor: Medicína
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost a otoky nohou
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka byla přijata z ___ s týdenní progresí dušnosti, ortopnoe (dušnost vleže) a otoků nohou, což bylo způsobeno vynecháváním dávek léků doma. Byla vyšetřena v ___ a následně převezena sem.
+
+Osobní anamnéza:
+Srdeční selhání
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Oblast hlavy, očí, uší, nosu a krku (HEENT): Vlhká sliznice
+Kardiovaskulární systém: Pravidelný srdeční rytmus, tichý šelest
+Břicho: Měkké, bezbolestné
+Extremity (končetiny): Mírný bilaterální edém (otek)
+Kůže: Teplá, suchá
+
+Významné výsledky:
+Rentgen hrudníku ukázal plicní vaskulární kongesci (ucpání cév). Zvýšená hladina BNP. Kreatinin stabilní, blízko základní hodnoty. Několikrát zvýšená hladina glukózy. Hladina draslíku normální. EKG (elektrokardiogram) byl zkontrolován.
+
+Průběh hospitalizace:
+Pacientka byla léčena intravenózními diuretiky (léky na odvodnění) až do dosažení téměř normálního objemu tekutin, poté byla převedena na perorální podávání. Dušnost se zlepšila, váha postupně klesala. Hladina cukru byla kontrolována pomocí inzulinové terapie. Byla konzultována s kardiologickým oddělením dne ___. Stabilní stav pro propuštění.
+
+Léky při přijetí:
+Furosemid
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Furosemid 40 mg denně
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Insulin glargin před spaním
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní exacerbace chronického srdečního selhání
+Diabetes mellitus
+
+Stav při propuštění:
+Stabilní, zlepšený
+Úroveň vědomí: Vědomá a komunikativní
+
+Pokyny při propuštění:
+Byla přijata kvůli přetížení tekutinami. Zvažujte se každý den ráno a volejte ___ v případě, že se vaše váha zvýší o více než 1,4 kg. Omezte příjem soli a tekutin, užívejte léky podle předpisu a dodržujte termín vaší návštěvy u lékaře dne ___.
+
+Pokyny pro další sledování:
+___

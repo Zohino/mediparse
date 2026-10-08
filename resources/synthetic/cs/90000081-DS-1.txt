@@ -1,0 +1,76 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Nausea a snížený objem moči
+
+Zásahové zákroky:
+Žádné
+
+Anamnéza současného onemocnění:
+Muž přišel s třemi dny trvajícími potížemi, jako je nevolnost, snížený příjem potravy a snížený objem moči. Byl vyšetřen jeho ošetřujícím lékařem v ___ , který zjistil dehydrataci a poslal ho do ___ k dalšímu vyšetření. Neměl horečku, bolest na hrudi ani dušnost.
+
+Předchozí zdravotní problémy:
+Hypertenze
+Hyperlipidemie
+Předchozí operace v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných informací
+
+Fyzikální vyšetření:
+Životní funkce:
+Stabilní, bez horečky
+Celkový stav:
+Únavný, suché sliznice
+Břicho:
+Měkké, bez citlivosti
+Končetiny:
+Bez otoků
+Neurologické vyšetření:
+Vědomý, bez specifických příznaků
+
+Výsledky vyšetření:
+LABORATOŘ PŘI PŘIJETÍ:
+Zvýšená kreatinina, vysoká hladina glukózy, normální hladina draslíku
+LABORATOŘ PŘI PROPUŠTĚNÍ:
+Kreatinina blízko základní hodnoty, přijatelná hladina glukózy
+ZÁVĚR:
+Bez akutních abnormalit na ultrazvuku ledvin, interpretováno ___
+
+Průběh hospitalizace:
+Pacient byl přijat pro akutní poškození ledvin, které bylo způsobeno dehydratací a pokračujícím užíváním metforminu. Metformin byl vysazen a pacient dostával intravenózní tekutiny, přičemž hladina kreatininy se postupně zlepšovala. Jeho diabetes byl kontrolován pomocí dávkování inzulínu. Pacient byl znovu uveden k jídlu a byl propuštěn ve stabilizovaném stavu po konzultaci s ___ a ___.
+
+Léky při přijetí:
+Metformin
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Lisinopril – obnovit, jakmile se stabilizuje hladina kreatininy. Atorvastatin – večer. Metformin zůstává vysazen do doby, než budou výsledky laboratorních testů vyhodnoceny ambulantně. Glipizid – začít každé ráno při snídani.
+
+Místo propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní poškození ledvin
+Diabetes mellitus
+
+Stav při propuštění:
+Úroveň vědomí: Vědomý a komunikativní
+Úroveň aktivity: Chůze, soběstačný
+
+Pokyny při propuštění:
+Byl jste hospitalizován kvůli dehydrataci, která ovlivnila vaše ledviny. Pijte dostatek tekutin, vyhýbejte se protizánětlivým lékům a užívejte pouze léky uvedené v tomto dokumentu. V případě zvracení, malého množství moči nebo zmatenosti se vraťte. V případě dotazů volejte ___ .
+
+Pokyny pro další péči:
+___

@@ -1,0 +1,67 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: Žena  Oddělení: Chirurgie
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok:
+Laparoskopická cholecystektomie (odstranění žlučníku)
+
+Anamnéza současného onemocnění:
+Žena ve věku ___ let, která pociťuje bolest v pravém horním kvadrantu břicha, nevolnost a zvracení již dva dny. Byla odeslána z ambulance ___ poté, co ultrazvukové vyšetření odhalilo žlučové kameny a ztluštění stěny žlučníku, a také mírnou horečku.
+
+Osobní anamnéza:
+Hypertenze (vysoký krevní tlak)
+Hyperlipidemie (vysoká hladina cholesterolu)
+
+Chirurgická anamnéza:
+Apendektomie (odstranění slepého střeva) před ___ lety
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav: mírná úzkost, při vědomí
+Hlava, oči, uši, nos, hrdlo: bez žloutenky
+Krk: ohebný
+Plíce: čisté na obou stranách
+Břicho: bolestivý pravý horní kvadrant, měkké
+Extremity: bez otoků
+Pulzy: hmatatelné
+
+Významné výsledky:
+NÁLEZY: Ultrazvukové vyšetření provedené ___ odhalilo více žlučových kamenů, ztluštění stěny žlučníku a tekutinu kolem žlučníku. Počet bílých krvinek byl při přijetí zvýšený, po operaci se normalizoval. Jaterní enzymy mírně zvýšené, bilirubin normální. Konečné histologické vyšetření čeká při propuštění.
+
+Průběh hospitalizace:
+Pacientka byla léčena intravenózními tekutinami, antibiotiky a klidem v jídle. Chirurgický tým, vedený ___ , provedl laparoskopickou cholecystektomii bez komplikací. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a pacientka byla afebrilní (bez horečky) a chodila samostatně před propuštěním domů druhý den po operaci.
+
+Léky při přijetí:
+Lisinopril 10 mg denně, multivitamin denně
+
+Léky při propuštění:
+Acetaminophen 650 mg každých šest hodin. Oxykodon 5 mg dle potřeby na bolest. Pokračovat v užívání lisinoprilu 10 mg denně.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní cholecystitida (zánět žlučníku)
+Cholelithiasis (žlučové kameny)
+
+Stav při propuštění:
+Stabilní, při vědomí a orientovaná
+Funkční stav: Chůze, samostatná
+
+Instrukce při propuštění:
+Můžete se osprchovat, ale nezvedejte nic těžšího než 4,5 kg po dobu čtyř týdnů. V případě horečky nebo zhoršení bolesti volejte ___ .
+
+Návazná péče:
+___

@@ -1,0 +1,65 @@
+Jméno: ___  Datum narození: ___
+Pohlaví: M  Odbor: MEDICÍNA
+Datum přijetí: ___  Číslo oddělení: ___
+Datum propuštění: ___  Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Zásahy:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacient se prezentoval s třechdenním produktivním kašlem a horečkou. Byl odeslán lékařem ___ poté, co rentgenové vyšetření hrudníku odhalilo ztmavení v dolní části pravého plíce.
+
+Osobní anamnéza:
+Hypertenze
+Hyperlipidemie
+Bez anamnézy diabetu
+
+Chirurgická anamnéza:
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s koronární chorobou
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: unavený, v pohodě
+Plíce: praskání v dolní části pravé plíce
+EXTREMITY: bez otoků
+PULZY: hmatné bilaterálně
+
+Relevantní výsledky:
+LABORATOŘ PŘI PŘIJETÍ:
+Zvýšený počet bílých krvinek, normální laktát, kreatinin na základní úrovni. Rentgen hrudníku ukázal konsolidaci v dolní části pravé plíce.
+
+Průběh hospitalizace:
+Léčba pneumonie získané v komunitě pomocí ceftriaxonu a azithromycinu, následně převedeno na perorální antibiotika. Horečka ustoupila, postupně snižována podávání kyslíku. Pacient byl vyšetřen týmem v ___ před propuštěním do ___.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Pokračujte v užívání lisinoprilu a atorvastatinu. Užívat amoxicilin-clavulanát dvakrát denně po dobu pěti dalších dnů. Paracetamol dle potřeby při horečce.
+
+Plán po propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pneumonie získaná v komunitě
+
+Stav při propuštění:
+Psychický stav: jasný a koherentní.
+Úroveň vědomí: bdělý a komunikativní.
+Funkční stav: pohyblivý, soběstačný.
+
+Instrukce při propuštění:
+Byl vám léčen pneumonia. Dokončete užívání všech antibiotik, odpočívejte, pijte dostatek tekutin a v případě zhoršení dýchání nebo horečky se vraťte. V případě dotazů volejte ___.
+
+Následná péče:
+___
