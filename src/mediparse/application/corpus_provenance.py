@@ -59,17 +59,33 @@ class CorpusProvenance:
         Returns:
             Zápis záznamu, nebo odmítnutí s důvodem.
         """
-        fingerprint = self.corpus.fingerprint()
-        if fingerprint is None:
-            return ProvenanceRefused("Korpus neobsahuje žádnou zprávu.")
-        violations = audit_violations(
-            self.corpus, fingerprint, reference_sha256, structure_labels
-        )
-        if violations:
-            return ProvenanceRefused(" ".join(violations))
+        refusal = audit_refusal(self.corpus, reference_sha256, structure_labels)
+        if refusal is not None:
+            return refusal
         self.corpus.save_provenance(
             ProvenanceRecord(
                 generation=generation, audit_sha256=self.corpus.audit_sha256()
             )
         )
         return ProvenanceWritten()
+
+
+def audit_refusal(
+    corpus: AuditedCorpus,
+    reference_sha256: Mapping[str, str],
+    structure_labels: Collection[str],
+) -> ProvenanceRefused | None:
+    """Odmítnutí provenance pro korpus bez zpráv nebo bez čistého auditu.
+
+    Returns:
+        Odmítnutí s důvodem, nebo None, když korpus odpovídá svému auditu.
+    """
+    fingerprint = corpus.fingerprint()
+    if fingerprint is None:
+        return ProvenanceRefused("Korpus neobsahuje žádnou zprávu.")
+    violations = audit_violations(
+        corpus, fingerprint, reference_sha256, structure_labels
+    )
+    if violations:
+        return ProvenanceRefused(" ".join(violations))
+    return None

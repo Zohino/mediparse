@@ -80,6 +80,10 @@ provenance-corpus model:
     git merge-base --is-ancestor "$spec" origin/main || { echo "Commit specifikace $spec není v origin/main; rebase merge by ho přepsal, změnu specifikace merguj dřív." >&2; exit 1; }
     {{runner}} mediparse-corpus-provenance --model "{{model}}" --claude-code-version "$(claude --version | cut -d ' ' -f 1)" --date "$(date -I)" --specification-commit "$spec"
 
+# provenance českého překladu auditovaného korpusu; workdir je pracovní adresář překladu, ve worktree absolutní cesta hlavního checkoutu
+provenance-translation workdir="build/translation":
+    {{runner}} mediparse-translation-provenance --workdir "{{workdir}}"
+
 # build kontejnerového image přes podman, nebo docker
 build:
     {{container-engine}} build -f Containerfile -t mediparse .

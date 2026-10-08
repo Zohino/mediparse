@@ -22,6 +22,7 @@ mediparse-corpus-check = "mediparse.entrypoints.corpus_consistency:main"
 mediparse-corpus-gate = "mediparse.entrypoints.corpus_gate:main"
 mediparse-corpus-provenance = "mediparse.entrypoints.corpus_provenance:main"
 mediparse-sample-plans = "mediparse.entrypoints.synthetic_plans:main"
+mediparse-translation-provenance = "mediparse.entrypoints.translation_provenance:main"
 mediparse-verbalization-prompt = "mediparse.entrypoints.verbalization_prompt:main"
 
 [project.urls]

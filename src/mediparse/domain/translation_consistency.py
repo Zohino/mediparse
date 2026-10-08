@@ -2,14 +2,25 @@
 
 from __future__ import annotations
 
+import hashlib
 import re
+from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Iterable, Mapping, Sequence
 
 LENGTH_RATIO: Final = (0.8, 1.6)
 _MARKER: Final = re.compile(r"(?<!_)___(?!_)")
+
+
+@dataclass(frozen=True)
+class TranslatedNote:
+    """Přeložená zpráva: její note_id, otisk originálu v době přípravy a přeložené části v pořadí."""
+
+    note_id: str
+    source_sha256: str
+    parts: tuple[str, ...]
 
 
 def deid_markers(text: str) -> int:
@@ -73,3 +84,53 @@ def _reasons(note_id: str, english: str | None, czech: str | None) -> tuple[str,
         return ()
     reason = f"cs/{note_id}: poměr délky {ratio:.2f} leží mimo {low} až {high}."
     return (reason,)
+
+
+def joined_translation(parts: Sequence[str]) -> str:
+    """Složí přeložené části do zprávy tak, jak ji zapisuje sběr překladů.
+
+    Returns:
+        Části bez okrajových mezer oddělené prázdným řádkem; řádky bez koncových
+        mezer, text končí novým řádkem.
+    """
+    text = "\n\n".join(part.strip() for part in parts)
+    return "".join(f"{line.rstrip()}\n" for line in text.strip().splitlines())
+
+
+def binding_violations(
+    notes: Iterable[TranslatedNote],
+    english: Mapping[str, str],
+    czech: Mapping[str, str],
+) -> tuple[str, ...]:
+    """Důvody, proč překlad v pracovním adresáři nepatří k českému a anglickému korpusu.
+
+    Args:
+        notes: Zprávy z požadavků a výstupů překladu.
+        english: Anglické texty korpusu klíčované note_id.
+        czech: České texty korpusu klíčované note_id.
+
+    Returns:
+        Zprávy s jiným originálem, note_id mimo požadavky či korpus a české texty,
+        které nejsou složením výstupů; seřazeno podle note_id.
+    """
+    by_id = {note.note_id: note for note in notes}
+    reasons = [
+        f"cs/{note_id}: chybí v cs/." for note_id in sorted(by_id.keys() - czech.keys())
+    ]
+    reasons.extend(
+        f"cs/{note_id}: není v požadavcích překladu."
+        for note_id in sorted(czech.keys() - by_id.keys())
+    )
+    for note_id in sorted(by_id.keys() & czech.keys()):
+        note = by_id[note_id]
+        if _sha256(english.get(note_id)) != note.source_sha256:
+            reasons.append(f"en/{note_id}: originál se od požadavku změnil.")
+        if czech[note_id] != joined_translation(note.parts):
+            reasons.append(f"cs/{note_id}: text není složením výstupů překladu.")
+    return tuple(reasons)
+
+
+def _sha256(text: str | None) -> str | None:
+    if text is None:
+        return None
+    return hashlib.sha256(text.encode()).hexdigest()
