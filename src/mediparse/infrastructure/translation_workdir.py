@@ -9,7 +9,12 @@ from typing import TYPE_CHECKING, Final
 from pydantic import BaseModel, ConfigDict, PositiveInt
 
 from mediparse.domain.corpus_audit import CommitSha, Sha256
-from mediparse.domain.corpus_provenance import Decoding, Translation, TranslationRun
+from mediparse.domain.corpus_provenance import (
+    Decoding,
+    Masking,
+    Translation,
+    TranslationRun,
+)
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.translation_consistency import TranslatedNote
 from mediparse.infrastructure.file_digest import file_sha256
@@ -43,6 +48,7 @@ class _Plan(BaseModel):
     window: PositiveInt
     decoding: Decoding
     requests: tuple[_Request, ...]
+    masking: Masking | None = None
 
 
 class _RunLine(BaseModel):
@@ -96,6 +102,7 @@ class TranslationWorkdir:
             requests_sha256=file_sha256(self.root / REQUESTS_NAME),
             runs=tuple(runs[moment] for moment in started),
             marker_mismatches=(),
+            masking=plan.masking,
         )
 
     def notes(self) -> tuple[TranslatedNote, ...]:

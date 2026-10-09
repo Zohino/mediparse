@@ -152,3 +152,21 @@ def test_invalid_values_are_invalid_input(
 
     with pytest.raises(InvalidInputError, match=re.escape(name)):
         TranslationWorkdir(workdir).translation()
+
+
+def test_masking_from_header_reaches_translation(tmp_path: Path) -> None:
+    """Pole masking z hlavičky requests.json se dostane do Translation."""
+    write_workdir(
+        tmp_path,
+        [request("n1", "k1", "one")],
+        [run_line(LAST_START, REQUESTS_SHA)],
+        [output("k1", "jedna", LAST_START)],
+        masking="[[n]]",
+    )
+
+    assert TranslationWorkdir(tmp_path).translation().masking == "[[n]]"
+
+
+def test_old_requests_without_masking_give_none(tmp_path: Path) -> None:
+    """Starý requests.json bez pole masking dá None."""
+    assert TranslationWorkdir(_workdir(tmp_path)).translation().masking is None

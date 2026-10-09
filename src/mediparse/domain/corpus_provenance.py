@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 from datetime import date, datetime
-from typing import TYPE_CHECKING, Annotated, Final
+from typing import TYPE_CHECKING, Annotated, Final, Literal
 
 from pydantic import (
     AfterValidator,
@@ -22,6 +22,8 @@ if TYPE_CHECKING:
 
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.synthetic_plan import SamplerConfig
+
+type Masking = Literal["[[n]]"]
 
 _MODEL_ID: Final = re.compile(r"claude-[a-z0-9]+(-[a-z0-9]+)*")
 _VERSION: Final = re.compile(r"\d+\.\d+\.\d+")
@@ -98,7 +100,7 @@ class TranslationRun(BaseModel):
 
 
 class Translation(BaseModel):
-    """Vstupy překladu: model, revize, dekódování, otisk požadavků, použité běhy a neshody značek ___."""
+    """Vstupy překladu: model, revize, dekódování, otisk požadavků, použité běhy, neshody značek ___ a maskování."""
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
@@ -110,6 +112,7 @@ class Translation(BaseModel):
     requests_sha256: Sha256
     runs: tuple[TranslationRun, ...]
     marker_mismatches: tuple[str, ...]
+    masking: Masking | None = None
 
 
 class ProvenanceRecord(BaseModel):
