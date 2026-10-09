@@ -1,24 +1,24 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Dušnost a otoky nohou
+Dušnost a otok nohou
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka je žena s chronickým onemocněním ledvin a srdečním selháním, která se dostavila na oddělení ___ s třemi dny zhoršující se dušnosti, ortopnoe (dušnosti vleže) a oboustranných otoků nohou poté, co jí došel diuretikum. Byla poprvé vyšetřena na oddělení ___ dne ___ a následně převezena sem k dalšímu ošetření. Popřela bolesti na hrudi, horečku nebo kašel.
+Anamnéza současného onemocnění:
+Pacientka je žena s chronickým onemocněním ledvin a srdečním selháním, která se dostavila do ___ se třemi dny trvající se zhoršující se dušností, ortopnoí a oboustranným otokem nohou poté, co jí došlo diuretikum. Byla poprvé vyšetřena v ___ dne ___ a poté převezena sem za účelem další léčby. Popírala bolesti na hrudi, horečku nebo kašel.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
-Osteoartróza (degenerativní onemocnění kloubů)
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Osteoartróza
 
 Sociální anamnéza:
 ___
@@ -27,46 +27,47 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Životní funkce: T 98,2, HR 78, BP 130/74, RR 18, SpO2 96 % při pokojovém vzduchu
-Celkový stav: Komfortní, bez akutní tíže
+Vitalní funkce: T 37,0 °C, TF 78, TK 130/74, dechová frekvence 18, SpO2 96 % při dýchání okolním vzduchem
+Celkový stav: Dobrý, bez akutní tíže
 Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
-Břicho: Měkké, bez citlivosti
-Extremity: Lehký otok kotníků
+Břicho: Měkké, netendrovatelné
+Končetiny: Mírný otok chodidel
 Kůže: Teplá a suchá
-Neurologické vyšetření: Vědomá, bez fokálních příznaků
+Neurologické vyšetření: Bdělá, bez ložiskových příznaků
 
-Výsledky vyšetření:
-Laboratorní výsledky při přijetí ukázaly zvýšenou hladinu BNP (biochemický marker srdečního selhání) s kreatininem blízko základní hodnoty a normální hodnoty elektrolytů. Rentgen hrudníku pořízený dne ___ ukázal mírnou kongesci plicních cév a malé oboustranné výpotky. Echokardiografické snímky byly zkontrolovány kardiologickým týmem, formální zpráva je v přípravě.
-ZÁVĚR: Mírná plicní kongestce bez fokální konsolidace (zánětu).
+Významné výsledky:
+Při přijetí laboratorní testy ukázaly zvýšenou hladinu BNP, kreatinin byl blízko výchozí hodnoty a elektrolyty byly v normě. Rentgen hrudníku provedený v ___ dne ___ prokázal mírnou kongesci plicních cév a malé oboustranné výpotky. Echokardiografické snímky byly zkontrolovány kardiologickým týmem, formální zpráva je v přípravě.
+ZÁVĚR: Mírná kongesce plic bez ložiskové konsolidace.
 
-Průběh hospitalizace:
-Byla přijata s přetížení tekutinami a léčena intravenózním furosemidem, s dobrým diurézou a postupným zlepšením dýchání. Její váha klesla a potřeba kyslíku se vyřešila. Funkce ledvin zůstala stabilní. Její domácí režim byl upraven a byla konzultována nutričním poradcem a ___ ohledně stravy před propuštěním do ___.
+Stručný průběh hospitalizace:
+Byla přijata s objemovým přetížením a léčena intravenózním furosemidem, s dobrým diurézou a postupným zlepšením dýchání. Její hmotnost se snížila a potřeba kyslíku ustoupila. Funkce ledvin zůstala po celou dobu stabilní. Její domácí léčba byla upravena a před propuštěním do ___ byla vyšetřena nutričním terapeutem a ___ za účelem edukace o dietě.
 PROBLÉMY PŘI PŘECHODU:
-- Kontrola základních metabolických parametrů do jednoho týdne na oddělení ___.
-- Denní měření váhy; kontaktujte nás v případě, že váha vzroste o více než 1,4 kg (3 libry).
+- Opakované vyšetření základního metabolického panelu do jednoho týdne v ___
+- Denní vážení; v případě nárůstu hmotnosti o více než 1,3 kg kontaktovat lékaře
 
 Léky při přijetí:
 Lisinopril 10 mg denně
 Atorvastatin 20 mg večer
-Furosemide 20 mg denně
+Furosemid 20 mg denně
 
 Léky při propuštění:
-1. Furosemide 40 mg perorálně denně, dávka zvýšena o ___
+1. Furosemid 40 mg perorálně denně, dávka zvýšena ___
 2. Lisinopril 10 mg perorálně jednou denně
-3. Atorvastatin 20 mg perorálně každé večer před spaním
-4. Acetaminophen 500 mg perorálně dle potřeby při bolesti kloubů
+3. Atorvastatin 20 mg perorálně každou noc před spaním
+4. Paracetamol 500 mg perorálně podle potřeby při bolestech kloubů
 
-Propouštěcí režim:
-Domů s péčí
+Způsob propuštění:
+Domů s poskytovanou péčí
 Zařízení: ___
 
 Stav při propuštění:
-Psychický stav: Jasný a srozumitelný
-Úroveň vědomí: Vědomá a komunikativní
-Funkční stav: Chůze, samostatná, používá chodítko pro delší vzdálenosti.
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a komunikativní
+Fyzická aktivita: Chodí, samostatná s pomocí chodítka na delší vzdálenosti
 
 Pokyny pro propuštění:
-Byli jste hospitalizováni, protože se ve vašem těle hromadila tekutina, což ztěžovalo dýchání. Přebytečnou tekutinu jsme odstranili pomocí léků. Každé ráno se vážte, omezte příjem soli a užívejte léky podle pokynů. V případě zhoršení dušnosti, otoků nebo přibírání na váze volejte lékaři Dr. ___ na telefonní číslo ___.
 
-Pokyny pro další péči:
+Byli jste hospitalizováni, protože se ve vašem těle hromadila tekutina, což vám ztěžovalo dýchání. Přebytečnou tekutinu jsme odstranili pomocí léků. Každé ráno se zvažte, omezte příjem soli a užívejte léky podle pokynů. V případě zhoršení dušnosti, otoků nebo přírůstku hmotnosti kontaktujte doktora ___ na čísle ___.
+
+Pokyny pro kontrolní vyšetření:
 ___

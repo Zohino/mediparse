@@ -1,71 +1,71 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
-Zhoršující se otok nohou a dušnost
+Zhoršující se otok nohy a dušnost
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž s postupujícím otokem kotníku trvajícím dva týdny, s dušností v leže a přibíráním na váze, odeslán z ambulance ___ po vynechání dávek diuretika.
+Muž s postupně se zhoršujícím otokem kotníku, ortopnoí a přibýváním na váze, odeslán z kliniky ___ poté, co vynechal dávky diuretika.
 
-Předchozí zdravotní problémy:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Předchozí infarkt myokardu
-Hyperlipidemie
-Dna, diagnostikována v ___
+Hyperlipidémie
+Dna, sledována v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec s časnou koronární chorobou
+Otec s časným nástupem koronární choroby
 
 Fyzikální vyšetření:
 Celkový stav:
-Únavný, mírně dušný v klidu
+Unavený, mírná dušnost v klidu
 Krk:
-Zvýšený tlak v žilách
+Zvýšená jugulární venózní tlak
 Břicho:
-Měkké, bezbolestné
-Kůže:
-Edém s prohlubněmi až po kolena
+Měkké, netendrovatelné
+KŮŽE:
+Otok s prohlubními až po kolena
 
 Významné výsledky:
-BNP výrazně zvýšen na ___. Rentgen hrudníku ukázal plicní vaskulární kongesci s malými výpotky.
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Sodík 138, draslík 4,1, kreatinin blízko základní hodnoty.
+BNP výrazně zvýšené na hodnotě ___. Rentgen hrudníku ukázal plicní vaskulární kongesci s malými výpotky.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Sodík 138, draslík 4,1, kreatinin blízko výchozí hodnoty.
 
-Průběh hospitalizace:
-Léčen intravenózním furosemidem, při kterém ztratil několik litrů tekutin, což vedlo k ústupu kongesce a eliminaci potřeby kyslíku. Elektrolyty byly monitorovány denně. Byl převeden na perorální diuretikum a byla zajištěna kontrola u kardiologa v ___
+Stručný popis hospitalizace:
+Léčen intravenózním furosemidem, vyloučeno několik litrů tekutiny, došlo k ústupu kongesce a potřeby kyslíku. Elektrolyty sledovány denně. Přechod na perorální diuretikum, zajištěna kontrola u kardiologa v ___.
 
 Léky při přijetí:
 Metoprolol, lisinopril, atorvastatin, aspirin
 
 Léky při propuštění:
-Furosemid denně, metoprolol succinate, lisinopril, atorvastatin, aspirin. Užívejte diuretikum každé ráno a přineste tento seznam do ambulance.
+Furosemid denně, metoprolol sukcinát, lisinopril, atorvastatin, aspirin. Užívajte diuretikum každé ráno a vezměte si seznam léků s sebou na kontrolu.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Přetížení objemem tekutin s plicní kongescí
-Sekundární:
-Hypertenze, předchozí infarkt myokardu, hyperlipidemie
+Objemové přetížení s plicní kongescí
+Sekundárně:
+Hypertenze, předchozí infarkt myokardu, hyperlipidémie
 
 Stav při propuštění:
-Dobrý, dýchá pohodlně bez kyslíku
-Psychický stav:
-Orientovaný, schopný porozumět a dodržovat pokyny
+Dobrý, pohodlně dýchá na běžném vzduchu
+Duševní stav:
+Bdělý a orientovaný, schopen dodržovat pokyny
 
 Pokyny při propuštění:
-Zvažujte se každé ráno a volejte ___ pokud přiberete více než 1,4 kg za den. Omezte příjem soli a tekutin a v případě zhoršení dušnosti se vraťte.
+Vážte se každé ráno a volejte ___, pokud přiberete více než jeden a půl kilogramu za den. Omezte příjem soli a tekutin a v případě zhoršení dušnosti se vraťte na kontrolu.
 
-Pokyny pro další péči:
+Pokyny pro další postup:
 ___

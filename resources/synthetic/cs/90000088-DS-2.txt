@@ -1,65 +1,65 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Zarudnutí a horečka pravé nohy
 
-Zásahné chirurgické zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let, který se po drobném poranění při zahradničení po dobu dvou dnů potýkal s zarudnutím, teplem a otokem v dolní části pravé nohy. Byl vyšetřen v urgentní ambulanci ___ a dostal perorální antibiotika, ale jeho stav se zhoršil, objevil se horečka a rozšiřující se zarudnutí od ___, a proto se obrátil na pohotovost.
+___letý muž s dvoudenní anamnézou zarudnutí, tepla a otoku pravé dolní končetiny po drobném oděru při zahradničení. Byl vyšetřen v ___ pohotovostní službě a dostal perorální antibiotika, ale stav se zhoršil s horečkou a šířením zarudnutí od ___, což vedlo k návštěvě pohotovostní služby.
 
-Předchozí zdravotní problémy:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Apendektomie
 
 Sociální anamnéza:
 ___
 
 Fyzikální vyšetření:
-Celkový stav: Vědomý, v pohodě, mírně horečnatý při příjmu.
-Hlava, oči, uši, nos, hrdlo: Vlhká sliznice.
-Plíce: Čisté bilaterálně.
-Břicho: Měkké, bez citlivosti. Pravá holen s teplou, zarudlou plochou.
+Celkový stav: Bdělý, v pohodě, při příjezdu mírná horečka.
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice.
+Plíce: Oboustranně čisté.
+Břicho: Měkké, netendrové. Pravá holeně s teplou erytematózní oblastí.
 
 Významné výsledky:
-Po přijetí byl zvýšen počet bílých krvinek s převahou neutrofilů a zvýšeny zánětlivé markery. Kultivace krve z ___ nevykazovala žádný růst. Ultrazvuk nohy vyloučil hlubokou žilní trombózu.
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Počet bílých krvinek normalizován, kreatinin na základní úrovni, elektrolyty bez odchylek.
+Při přijetí zvýšený počet bílých krvinek s převahou neutrofilů a zvýšené zánětlivé markery. Krevní kultury z ___ nevykázaly růst. Ultrazvuk nohy vyloučil hlubokou žilní trombózu.
+LABORATORNÍ VÝSLEDKY PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek se normalizoval, kreatinin na výchozí hodnotě, elektrolyty v normě.
 
-Stručný průběh hospitalizace:
-Léčba celulitidy pravé nohy intravenózním vancomycinem, s postupným zlepšováním horečky a zarudnutí. Okraj zarudnutí byl označen a denně ustupoval. Péče o ránu byla zajištěna ošetřovatelskou sestrou ___. Byl převeden na perorální doxycyklin a propuštěn ___ bez horečky a s možností samostatné chůze.
+Stručný popis hospitalizace:
+Léčen pro celulitidu pravé nohy intravenózním vancomycinem, s postupným zlepšením horečky a erytému. Okraj zarudnutí byl ohraničen a denně se zmenšoval. Péče o ránu zajištěna ___ ošetřovatelským personálem. Přechod na perorální doxycyklin a propuštění ___ bez horečky a schopný samostatné chůze.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
 Atorvastatin 20 mg večer
 
 Léky při propuštění:
-Doxycyklin 100 mg dvakrát denně po dobu sedmi dnů. Pokračujte v užívání lisinoprilu 10 mg denně a atorvastatinu 20 mg večer. Acetaminophen 650 mg každých šest hodin dle potřeby při bolesti nohy.
+Doxycyklin 100 mg dvakrát denně po dobu dalších sedmi dnů. Pokračovat v užívání lisinoprilu 10 mg denně a atorvastatinu 20 mg večer. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest nohy.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
 Celulitida pravé dolní končetiny
 Sekundární:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Stav při propuštění:
-Psychický stav: Jasný a soustředěný.
-Úroveň vědomí: Vědomý a komunikativní.
-Funkční stav: Chůze, samostatný.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
 
-Instrukce při propuštění:
-Byl vám poskytnut lék na kožní infekci nohy. Užívajte antibiotikum až do konce, udržujte nohu ve zvýšené poloze a udržujte oblast čistou a suchou. Zavolejte ___ nebo se vraťte do ___ v případě, že se zarudnutí rozšíří, vrátí se horečka nebo se zhorší bolest.
+Pokyny pro propuštění:
+Byl jste léčen na kožní infekci nohy. Užijte antibiotika až do konce, držte nohu ve zvýšené poloze a udržujte oblast čistou a suchou. V případě šíření zarudnutí, návratu horečky nebo zhoršení bolesti volejte ___ nebo se vraťte do ___.
 
-Následná péče:
+Pokyny pro kontrolu:
 ___

@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Oddělení: Chirurgie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,66 +9,66 @@ Alergie:
 Hlavní potíže:
 Bolest v pravém dolním kvadrantu břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická appendektomie (odstranění slepého střeva)
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let s hypertenzí se dostavil s bolestí v pravém dolním kvadrantu břicha, která se zhoršovala již dva dny, s nevolností a sníženou chutí k jídlu. Bolest začala v blízkosti pupku a postupně se šířila. Byl poprvé vyšetřen na ___, kde CT vyšetření prokázalo akutní zánět slepého střeva a byl převezen do naší nemocnice dne ___ k operaci.
+___letý muž s hypertenzí se dostavil s potížemi, které trvaly dva dny a projevovaly se zhoršující se bolestí v pravém dolním kvadrantu břicha, nevolností a sníženou chutí k jídlu. Bolest začala v oblasti pupku a postupně se šířila. Poprvé byl vyšetřen v ___, kde CT vyšetření prokázalo akutní apendicitidu, a byl převezen do naší nemocnice dne ___ k operaci.
 
-Osobní anamnéza:
-Hypertenze, dále ___
-Hyperlipidemie
+Anamnéza předchozích onemocnění:
+Hypertenze, léčená ___
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s rakovinou prsu, diagnostikována v ___
-Žádná rodinná anamnéza onemocnění střev
+Matka s rakovinou prsu, diagnostikovanou v ___
+V rodině se nevyskytují onemocnění trávicího traktu
 
 Fyzikální vyšetření:
 Celkový stav:
 Nepohodlný, při vědomí, bez horečky
-Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Hlava, uši, oči, nos, hrdlo:
 Vlhké sliznice
 Břicho:
-Bolestivý pravý dolní kvadrant, svalové napětí, bez odrazové bolesti
+Bolestivost v pravém dolním kvadrantu, obranné napětí, bez příznaků podráždění pobřišnice
 Kůže:
 Teplá, suchá
 Neurologické vyšetření:
-Bez specifických abnormalit
+Bez ložiskových příznaků
 
 Významné výsledky:
-Laboratorní výsledky při přijetí z ___ ukázaly zvýšený počet bílých krvinek (14,2) s převahou neutrofilů, normální hodnoty elektrolytů a kreatininu a normální hodnoty jaterních enzymů. CT vyšetření břicha a pánve prokázalo rozšířený a ztluštělý slepý střevo s okolním zánětem tukové tkáně a bez abscesu nebo volné perforace. Histologické vyšetření slepého střeva bylo k dispozici až při propuštění.
+Laboratorní vyšetření při přijetí z ___ ukázala počet bílých krvinek 14,2 s převahou neutrofilů, normální hladinu elektrolytů a kreatininu a normální jaterní enzymy. CT vyšetření břicha a pánve prokázalo rozšířený, ztluštělý appendix s okolní tukovou infiltrací a bez známek abscesu nebo volné perforace. Histopatologické vyšetření appendixu probíhalo v době propuštění.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
 Atorvastatin 20 mg večer
 
 Léky při propuštění:
-1. Acetaminophen 650 mg perorálně každých šest hodin dle potřeby na bolest
-2. Oxykodon 5 mg perorálně každých šest hodin dle potřeby na silnou bolest, krátkodobě
+1. Paracetamol 650 mg perorálně každých šest hodin podle potřeby proti bolesti
+2. Oxykodon 5 mg perorálně každých šest hodin podle potřeby proti silné bolesti, krátkodobá léčba
 3. Lisinopril 10 mg denně
 4. Atorvastatin 20 mg večer
-5. Docusate 100 mg dvakrát denně během užívání oxykodonu
+5. Dokusát 100 mg dvakrát denně během užívání oxykodonu
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 
 Diagnóza při propuštění:
-Akutní zánět slepého střeva
+Akutní apendicitida
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Stav při propuštění:
-Stabilní a zlepšený
+Stabilizovaný, zlepšený
 Úroveň vědomí:
-Při vědomí a komunikativní
-Úroveň aktivity:
-Chůze, soběstačný
+Při vědomí, komunikativní
+Stav aktivity:
+Schopný chůze, soběstačný
 
-Pokyny při propuštění:
-Byl jste přijat s zánětem slepého střeva a podstoupil jste laparoskopickou appendektomii. Můžete se osprchovat, ale neponořujte rány do vody. Vyhněte se zvedání předmětů o hmotnosti více než 4,5 kg po dobu čtyř týdnů. V případě horečky, zhoršující se bolesti břicha, zvracení nebo zarudnutí nebo výtoku z rány se obraťte na lékaře. V případě dotazů kontaktujte Dr. ___.
+Pokyny pro propuštění:
+Byli jste přijati s apendicitidou a podstoupili jste laparoskopickou apendektomii. Můžete se sprchovat, ale nevystavujte řezné rány dlouhodobému namáčení. Po dobu čtyř týdnů se vyhýbejte zvedání těžkých předmětů (nad 10 liber). V případě horečky, zhoršující se bolesti břicha, zvracení nebo zarudnutí či sekrece z rány se vraťte k lékaři. V případě dotazů kontaktujte doktora ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolní vyšetření:
 ___

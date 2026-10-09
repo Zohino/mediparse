@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,13 +9,13 @@ Alergie:
 Hlavní potíže:
 Otok nohou a dušnost
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka, ___ let, se dostavila s postupně se zhoršujícím otokem nohou a dušností během několika dnů. Byla odeslána z její ambulance ___ po zvýšení hmotnosti a snížení objemu moči.
+Anamnéza současného onemocnění:
+___letá žena se dostavila s postupně se zhoršujícím otokem nohou a dušností, které se objevily během několika dnů. Byla odeslána z její ___ kliniky po zjištění nárůstu hmotnosti a snížení objemu moči.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Chronické onemocnění ledvin
 Srdeční selhání
 Hypertenze
@@ -30,31 +30,31 @@ Fyzikální vyšetření:
 Životní funkce:
 Stabilní
 Celkový stav:
-Pohodlná
+Pohodlný
 Krk:
-Přítomna jícnová venózní dilatace (JVD)
+Přítomná zvýšená jugulární venózní distenze (JVD)
 Břicho:
 Měkké
 Kůže:
 Teplá, otok nohou
 Neurologické vyšetření:
-Bez fokálních příznaků
+Bez ložiskových příznaků
 
-Výsledky vyšetření:
-Kreatinin v normě. BNP zvýšen. Rentgen hrudníku ukázal plicní vaskulární kongesci s drobnými bilaterálními efuzemi. Ostatní laboratorní výsledky bez zvláštností, draslík normální, hemoglobin stabilní.
+Významné výsledky:
+Kreatinin v normě. BNP zvýšené. Rentgen hrudníku ukázal plicní vaskulární kongesci s malými bilaterálními efuzemi. Ostatní laboratorní výsledky bez významných odchylek, draslík v normě, hemoglobin stabilní.
 ZÁVĚR:
-Lehký plicní edém.
+Mírný plicní edém.
 
-Průběh hospitalizace:
-Léčena intravenózními diuretiky s dobrým diurézou a úbytkem hmotnosti. Funkce ledvin monitorována denně a zůstala stabilní. Konzultováno s oddělením kardiologie, úprava medikace. Propouštěna domů s perorálními diuretiky po ___ dnech pozorování.
+Stručný popis hospitalizace:
+Léčba intravenózními diuretiky s dobrým močením a úbytkem hmotnosti. Funkce ledvin sledována denně a zůstala stabilní. Konzultace s ___ kardiologem, úprava medikace. Propuštěna domů s perorálními diuretiky po ___ dnech pozorování.
 
-Léky při přijetí:
+Medikace při přijetí:
 Furosemid, lisinopril, amlodipin
 
-Léky při propuštění:
-Furosemid 40 mg denně, metoprolol sukcinát 25 mg denně, amlodipin 5 mg denně. Lisinopril vysazen do doby další kontroly funkce ledvin.
+Medikace při propuštění:
+Furosemid 40 mg denně, metoprolol succinat 25 mg denně, amlodipin 5 mg denně. Lisinopril vysazen do doby kontroly funkce ledvin.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -62,13 +62,13 @@ Chronické onemocnění ledvin
 Srdeční selhání
 
 Stav při propuštění:
-Psychický stav:
-Orientovaná a při vědomí
-Funkční stav:
-Chůze, soběstačná
+Duševní stav:
+Bdělý a orientovaný
+Fyzická aktivita:
+Chodí, soběstačný
 
-Pokyny při propuštění:
-Vážete se každé ráno a volejte ___ v případě, že se vaše váha zvýší o více než 1,4 kg. Omezte příjem soli a tekutin. Užíváte léky podle předpisu a v případě zhoršení dýchání nebo otoků se vraťte.
+Pokyny pro propuštění:
+Každé ráno se zvažte a zavolejte na ___, pokud nárůst hmotnosti přesáhne tři libry. Omezte příjem soli a tekutin. Užívajte léky podle předpisu a v případě zhoršení dýchání nebo otoků se vraťte.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

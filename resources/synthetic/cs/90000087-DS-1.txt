@@ -1,24 +1,24 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Obor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Otok nohy a únava
+Otok nohou a únava
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let, který se po několika týdnech únavy a otoku kotníku dostavil do ambulance, odkud byl poslán do ___ k vyšetření kvůli abnormálním laboratorním výsledkům.
+___letý muž s několik týdnů trvající únavou a otokem kotníku, odeslán ze své ordinace do ___ k vyšetření abnormálních laboratorních výsledků.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
-Popírá cukrovku
+Hyperlipidémie
+Popírá diabetes
 
 Sociální anamnéza:
 ___
@@ -27,24 +27,24 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Hlava, oči, uši, nos, hrdlo: Normální, vlhká sliznice
+Hlava, uši, nos, hrdlo: Normální, vlhká sliznice
 Krk: Pružný
-Plíce: Čisté bilaterálně
-Neurologické vyšetření: Vědomý, bez fokálních příznaků
+Plíce: Čisté na obou stranách
+Neurologické: Bdělý, bez ložiskových příznaků
 
-Relevantní výsledky:
-Kreatinin zvýšený a stabilní ve srovnání s předchozími hodnotami. Draslík normální. Močová analýza ukázala přítomnost bílkovin. Ultrazvuk ledvin ukázal malé, echogenní ledviny bez známek obstrukce.
+Významné výsledky:
+Kreatinin zvýšený a stabilní oproti předchozím hodnotám. Draslík v normě. V moči zjištěn protein. Ultrazvuk ledvin ukázal malé echogenní ledviny bez obstrukce.
 
-Průběh hospitalizace:
-Pacient byl přijat k vyšetření otoku. Diuretika snížila otok a zlepšila se krevní tlak. Laboratorní výsledky zůstaly stabilní. Oddělení nefrologie doporučilo ambulantní sledování v ___ a úpravu medikace.
+Stručný popis hospitalizace:
+Pacient byl přijat k vyšetření otoku. Diuretika snížila edém a zlepšila se krevní tlak. Laboratorní výsledky zůstaly stabilní. Nefrologie doporučila ambulantní sledování v ___ a úpravu medikace.
 
 Léky při přijetí:
 Amlodipin 5 mg denně
 
 Léky při propuštění:
-Amlodipin 10 mg denně. Furosemid 20 mg denně. Atorvastatin 20 mg večer. Vyhýbejte se nesteroidním protizánětlivým látkám (NSAID).
+Amlodipin 10 mg denně. Furosemid 20 mg denně. Atorvastatin 20 mg večer. Vyhýbat se nesteroidním protizánětlivým lékům (NSAID).
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -52,11 +52,11 @@ Chronické onemocnění ledvin
 Hypertenze
 
 Stav při propuštění:
-Stabilní a zlepšený.
-Funkční stav: Samostatný, pohyblivý
+Stabilizovaný a zlepšený.
+Stav aktivity: Samostatný, pohyblivý
 
-Instrukce při propuštění:
-Vážete se denně a omezte příjem soli. Užíváte léky podle předpisu a vyhýbejte se ibuprofenu. V případě zhoršení otoku, dušnosti nebo snížení množství moči se vraťte. Dodržujte termíny kontrolních prohlídek v ___.
+Pokyny při propuštění:
+Denně se važte a omezte příjem soli. Užívajte léky podle předpisu a vyhýbejte se ibuprofenu. V případě zhoršení otoku, dušnosti nebo snížení objemu moči se vraťte. Dodržujte termíny kontrol v ___.
 
-Instrukce pro další sledování:
+Pokyny pro další sledování:
 ___

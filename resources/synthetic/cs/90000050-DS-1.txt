@@ -1,23 +1,23 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
-Bolest a výtok z pravé nohy
+Bolest a hnisavý výtok z pravé nohy
 
-Zásah:
-Ošetření rány v místě jejího výskytu
+Významný chirurgický nebo invazivní zákrok:
+Očištění rány u lůžka
 
-Anamnéza:
-Muž ve věku ___ let, léčený dlouhodobě inzulinem, se dostavil s třemi dny trvající bolestí, otokem a hnisavým výtokem z vředu na palci pravé nohy, přičemž měl doma i horečku. Byl vyšetřen v ambulanci ___ a odeslán na pohotovost.
+Anamnéza současného onemocnění:
+___letý muž, léčený dlouhodobě inzulínem, se dostavil s třídenní bolestí pravé nohy, otokem a hnisavým výtokem z vředu na prstu, doprovázeným horečkou doma. Byl vyšetřen v ___ ambulanci a odeslán na pohotovost.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Periferní neuropatie
 Obezita
 
@@ -25,39 +25,39 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka prodělala mrtvici. Otec trpěl srdečními chorobami.
+Matka s cévní mozkovou příhodou. Otec s ischemickou chorobou srdeční.
 
 Fyzikální vyšetření:
-Oblast hlavy, očí, uší, nosu a krku (HEENT): Vlhká sliznice.
-Krk: Pružný.
-Srdce: Pravidelná frekvence, bez šelestu.
-Břicho: Měkké, bez citlivosti.
-Neurologické vyšetření: Snížená citlivost v obou nohou; vřed na druhém prstě pravé nohy s okolním zarudnutím.
+HEENT: Vlhké sliznice.
+Krk: Pohyblivý.
+SRDEČNÍ: Pravidelný rytmus, bez šelestu.
+BŘICHO: Měkké, netendrovatelné.
+NEUROLOGIE: Snížená citlivost v obou chodidlech; vřed na druhém prstu pravé nohy s okolní erytémem.
 
 Významné výsledky:
-Glukóza 312, HbA1c 10,2 %, bílé krvinky 15,1. Kultivace z rány z ___ prokázala Staphylococcus aureus. Rentgen nohy ukázal otok měkkých tkání bez přítomnosti plynu.
-ZÁVĚR: Možná časná osteomyelitida druhého prstu, doporučeno MRI.
+Glukóza 312, HbA1c 10,2 %, leukocyty 15,1. Kultivace rány z ___ prokázala přítomnost Staphylococcus aureus. Rentgen nohy ukázal otok měkkých tkání bez přítomnosti plynu.
+ZÁVĚR: Možná počáteční osteomyelitida druhého prstu, doporučeno MRI vyšetření.
 
-Průběh hospitalizace:
-Dne ___ byl léčen intravenózními antibiotiky a ošetřováním rány. Dávka inzulinu byla upravena pro zlepšení kontroly hladiny glukózy. Specialisté z oboru podiatrie ošetřili vřed. Horečka ustoupila, počet bílých krvinek se normalizoval a byl převeden na perorální antibiotika.
+Stručný průběh hospitalizace:
+___ byl léčen intravenózními antibiotiky a ošetřováním rány. Dávka inzulínu byla upravena za účelem zlepšení kontroly glykémie. Podolog v ___ provedl očištění vředu. Horečka ustoupila, počet bílých krvinek se normalizoval a pacient byl převeden na perorální antibiotika.
 
 Léky při přijetí:
-Inzulin glargin, metformin, lisinopril, atorvastatin.
+Inzulín glargin, metformin, lisinopril, atorvastatin.
 
 Léky při propuštění:
-Cefalexin 500 mg čtyřikrát denně po dobu dvou týdnů. Inzulin glargin 30 jednotek večer. Metformin 1000 mg dvakrát denně. Lisinopril 10 mg denně. Atorvastatin 40 mg večer.
+Cefalexin 500 mg čtyřikrát denně po dobu dvou týdnů. Inzulín glargin 30 jednotek večer. Metformin 1000 mg dvakrát denně. Lisinopril 10 mg denně. Atorvastatin 40 mg večer.
 
-Plán po propuštění:
-Domů s péčí.
+Způsob propuštění:
+Domů s ambulantní péčí
 
 Diagnóza při propuštění:
-Vřed na druhém prstě pravé nohy s celulitidou
+Vřed na druhém prstu pravé nohy s celulitidou
 Infekce rány Staphylococcus aureus
 Hypertenze
 
 Stav při propuštění:
-Psychický stav: Jasný a soustředěný.
-Úroveň vědomí: Vnímavý a komunikativní.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
 
 Pokyny při propuštění:
-Udržujte obvaz čistý a suchý a měňte ho denně. Kontrolujte své nohy každý den a měřte si hladinu cukru v krvi před jídlem. Dodržujte schůzky s ___ a specialistou z oboru podiatrie. V případě dotazů volejte na číslo ___. V případě horečky, rozšiřujícího se zarudnutí nebo zhoršující se bolesti se vraťte.
+Udržujte obvaz čistý a suchý a měňte jej denně. Kontrolujte si nohy každý den a hladinu cukru v krvi před jídlem. Dodržujte termíny kontrol u ___ a podologa. V případě dotazů volejte ___. Vraťte se v případě horečky, šířící se zarudnutí nebo zhoršující se bolesti.

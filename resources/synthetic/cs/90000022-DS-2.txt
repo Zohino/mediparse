@@ -1,24 +1,24 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Obor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest v pravé straně těla
+Bolest v pravé oblasti boku
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let, který přišel na pohotovost s náhlou bolestí v pravé straně těla, nevolností a hematurií (kreví v moči).
+___letý muž s náhlou bolestí v pravé oblasti boku, nevolností a hematurií, vyšetřen na pohotovosti ___.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Kamenné útvary v ledvinách
-Hyperlipidemie (vysoká hladina cholesterolu)
+Anamnéza předchozích onemocnění:
+Hypertenze
+Ledvinové kameny
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
@@ -28,45 +28,45 @@ Otec s hypertenzí
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacient je v pohodě, bez známek utrpení.
+Dobře se cítí, bez známek úzkosti
 Plíce:
-Čisté při poslechování na obou stranách.
-Extremity (končetiny):
-Bez otoků.
+Čisté na obou stranách
+Končetiny:
+Bez otoků
 Neurologické vyšetření:
-Pacient je při vědomí, bez specifických neurologických příznaků.
+Bdělý, bez ložiskových příznaků
 
-Výsledky vyšetření:
-Analýza moči ukázala přítomnost krve. Kreatinin blízko základní hodnoty. Kamenný útvar byl zobrazen na ___.
+Významné výsledky:
+Vyšetření moči prokázalo krev. Kreatinin v normě. Kámen byl zjištěn na ___.
 ZÁVĚR:
-Malý kamenný útvar v pravém močovodu, který způsobuje překážku.
+Malý kámen, který částečně blokuje pravý močovod
 
-Průběh hospitalizace:
-Pacient byl přijat pro úlevu od bolesti a hydrataci. Bolest se zlepšila díky podávání ketorolaku a tekutin. Kamenný útvar byl spontánně vyloučen druhý den a pacient toleroval stravu a mohl se samostatně pohybovat.
+Stručný popis hospitalizace:
+Přijat pro úlevu od bolesti a hydrataci. Bolest se zlepšila po podání ketorolaku a tekutin. Kámen byl spontánně vyloučen druhý den a pacient toleroval stravu a chodil samostatně.
 
 Léky při přijetí:
 Lisinopril, atorvastatin
 
 Léky při propuštění:
-Tamsulosin denně, ibuprofen dle potřeby na bolest, pokračovat v užívání lisinoprilu a atorvastatinu.
+Tamsulosin denně, ibuprofen podle potřeby proti bolesti, pokračovat v užívání lisinoprilu a atorvastatinu.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Kamenný útvar v pravém močovodu
-Hydronefróza (rozšíření ledvin), mírná
+Kámen v pravém močovodu
+Hydronefróza, mírná
 
 Stav při propuštění:
-Psychický stav:
-Orientovaný a koherentní.
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Přítomný a komunikativní.
-Funkční stav:
-Samostatně pohyblivý.
+Bdělý a reagující
+Fyzická aktivita:
+Chodí, je soběstačný
 
 Pokyny při propuštění:
-Pijte dostatek tekutin a sledujte moč. V případě horečky, silné bolesti nebo nemožnosti močit se vraťte.
+Pijte dostatek tekutin a moč přeceďte. V případě horečky, silné bolesti nebo neschopnosti močit se vraťte.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

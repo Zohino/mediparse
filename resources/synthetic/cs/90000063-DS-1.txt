@@ -1,23 +1,23 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Dušnost a otoky nohou
+Dušnost a otok nohou
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let s diagnostikovaným srdečním selháním, který se dostavil s potížemi zhoršujícími se v průběhu dvou týdnů, včetně dušnosti, ortopnoe (dušnosti vleže) a otoků obou nohou. Byl odeslán z ambulance ___ po zvýšení váhy.
+___ letý muž se známou srdeční insuficiencí, který se dostavil s potížemi trvajícími dva týdny – zhoršující se dušnost, ortopnoe a oboustranný otok nohou. Byl odeslán z ambulance ___ po nárůstu hmotnosti.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
 Ischemická choroba srdeční
 
 Sociální anamnéza:
@@ -27,45 +27,45 @@ Rodinná anamnéza:
 Otec s infarktem myokardu
 
 Fyzikální vyšetření:
-Celkový stav: Únava, mírné potíže
-Hlava, krk, uši, nos, hltan: Vlhká sliznice
-Krk: Zvýšený jugulární venózní tlak
-Plíce: Praskání v obou dolních plicních lalocích
-Břicho: Měkké, bezbolestné
-Extremity: Edém (otek) 2+ do úrovně kolen
+Celkový stav: Unavený, mírně sužovaný
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Krk: Zvýšená jugulární venózní tlak
+Plíce: Bibazální chrůpky
+Břicho: Měkké, netendrovatelné
+Končetiny: Otok 2+ až ke kolenům
 
-Výsledky vyšetření:
-Laboratorní výsledky při přijetí ze dne ___ ukázaly zvýšenou hladinu BNP a kreatininu nad základní hodnotu. Troponin byl normální. Rentgen hrudníku s plicní vaskulární kongescí (nádor) a malými výpotky.
-ZÁVĚR: Mírný plicní edém, bez pneumonie.
+Významné výsledky:
+Laboratorní vyšetření při přijetí ___ ukázala zvýšené hodnoty BNP a kreatininu oproti výchozí hodnotě. Troponin v normě. Rentgen hrudníku s plicní vaskulární kongescí a malými výpotky.
+ZÁVĚR: Mírný plicní edém, bez známek pneumonie.
 
-Průběh hospitalizace:
-Léčba intravenózním furosemidem, s dobrým diurézou (výtok moči) a postupným úbytkem váhy. Kreatinin se zvýšil během diurézy a zlepšil se po snížení dávky. Kardiologové z ___ doporučili úpravu léčby. Pacient byl převeden na perorální diuretikum a byl schopen samostatně chodit k datu ___.
+Stručný popis hospitalizace:
+Léčen intravenózním furosemidem, s dobrým diurézním účinkem a postupnou ztrátou hmotnosti. Kreatinin se během diurézy zvýšil a po snížení dávky se zlepšil. Kardiolog z ___ doporučil úpravu léčby. Přechod na perorální diuretikum a pacient chodil samostatně do ___.
 
 Léky při přijetí:
 Lisinopril, metoprolol, atorvastatin, aspirin
 
 Léky při propuštění:
 1. Furosemid 40 mg perorálně denně
-2. Metoprolol succinate 50 mg denně
+2. Metoprolol succinat 50 mg denně
 3. Atorvastatin 40 mg večer
 4. Aspirin 81 mg denně
-5. Lisinopril vysadit do doby kontroly v ambulanci
+5. Do kontroly v ambulanci pokračovat v užívání lisinoprilu
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Srdeční selhání
+Srdeční insuficience
 Akutní poškození ledvin
 
 Stav při propuštění:
 Stabilní
-Psychický stav: Jasný a soustředěný
-Funkční stav: Chůze, samostatný
+Duševní stav: Jasný a srozumitelný
+Fyzická aktivita: Chodí, soběstačný
 
-Pokyny při propuštění:
-Byl jste přijat s přebytkem tekutin a léčen diuretiky. Zvažujte se každý den ráno, omezte příjem soli a užívejte léky podle předpisu. Zavolejte Dr. ___ v případě, že se vaše váha zvýší o více než 1,4 kg nebo se zhorší vaše dýchání.
+Pokyny pro propuštěného pacienta:
+Byli jste přijati s přetížením tekutinami a léčeni diuretiky. Každé ráno se važte, omezte příjem soli a užívejte léky podle seznamu. Volejte doktora ___, pokud se hmotnost zvýší o tři libry nebo se zhorší dýchání.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

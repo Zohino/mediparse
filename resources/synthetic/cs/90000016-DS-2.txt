@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,68 +9,68 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka, ve věku ___ let, byla přijata z ambulance ___ s třidenním produktivním kašlem, horečkou a únavou. Při příjmu byla zjištěna hypoxie.
+___letá žena odeslána z kliniky ___ s třídenní anamnézou produktivního kašle, horečky a únavy, při příjezdu zjištěna hypoxie.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka prodělala mrtvici.
+Matka s cévní mozkovou příhodou
 
 Fyzikální vyšetření:
 Celkový stav:
-Únavná, bez známek utrpení
-Oblast hlavy, očí, uší, nosu a krku:
-Suchá sliznice
+Unavená, bez známek tísně
+Hlava, oči, uši, nos, hrdlo:
+Suché sliznice
 Plíce:
-Chropy v dolní části pravého plíce
+V dolní části pravé plíce slyšitelné chrůpky
 Břicho:
-Měkké, bez citlivosti
+Měkké, netendrové
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PŘIJETÍ:
-Zvýšený počet bílých krvinek, normální laktát, mírně zvýšená hladina glukózy.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Zvýšený počet bílých krvinek, normální hladina laktátu, mírně zvýšená hladina glukózy.
 ZÁVĚR:
-Konsolidace v dolní části pravého plicního laloku, bez efúze ___.
+Konsolidace v dolním laloku pravé plíce, bez výpotku ___.
 
-Průběh hospitalizace:
-Léčena pro pneumonii získanou v komunitě pomocí ceftriaxonu a azithromycinu, postupně odstavována od kyslíku během tří dnů. Byly obnoveny léky, které užívala doma. Vyšetřena lékařem ___ a propuštěna domů.
+Stručný popis hospitalizace:
+Léčena pro komunitně získanou pneumonii pomocí ceftriaxonu a azithromycinu, během třetího dne odstavena od kyslíku. Obnovena domácí medikace. Vyšetřena ___ a propuštěna domů.
 
-Léky při přijetí:
+Medikace při přijetí:
 Metformin, lisinopril, atorvastatin
 
-Léky při propuštění:
-Pokračujte v užívání metforminu, lisinoprilu a atorvastatinu. Užívajte amoxicilin-clavulanát dvakrát denně po dobu čtyř dnů.
+Medikace při propuštění:
+Pokračovat v užívání metforminu, lisinoprilu a atorvastatinu. Užívat amoxicilin-klavulanát dvakrát denně po dobu dalších čtyř dnů.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení:
 ___
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Diabetes mellitus
-Sekundární:
+Sekundárně:
 Hypertenze
 
 Stav při propuštění:
 Stabilní
 Úroveň vědomí:
-Orientovaná a při vědomí
-Úroveň aktivity:
-Chůze samostatná
+Bdělá a orientovaná
+Stav aktivity:
+Chodí samostatně
 
-Pokyny při propuštění:
-Byla léčena pro pneumonii. Dokončete užívání všech antibiotik, pijte dostatek tekutin, odpočívejte a v případě zhoršení dušnosti, horečky nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___ .
+Pokyny pro propuštění:
+Byla léčena pro pneumonii. Dokončete všechny antibiotika, pijte dostatek tekutin, odpočívejte a v případě zhoršení dušnosti, horečky nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

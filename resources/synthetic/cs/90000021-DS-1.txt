@@ -1,57 +1,57 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Bušení srdce a závratě
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka přišla s bušením srdce a závratěmi, které trvají již tři dny a zhoršují se při námaze. Byla poprvé vyšetřena na ___, a poté převezena na ___ pro další vyšetření. Životní funkce byly stabilní a počáteční EKG ukázalo nepravidelný srdeční rytmus.
+Žena s potížemi – bušení srdce a závratě – trvajícími tři dny, zhoršujícími se při námaze. Poprvé byla vyšetřena v ___ a následně převezena do ___ za účelem dalšího vyšetření. Životní funkce byly stabilní a počáteční EKG vykazovalo nepravidelný rytmus.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hypotyreóza
 
-Chirurgická anamnéza:
-Chirurgické odstranění žlučníku na ___
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka prodělala mrtvici.
+Matka s cévní mozkovou příhodou
 
 Fyzikální vyšetření:
-Hlava, oči, uši, nos, krk: Vlhká sliznice, bez žloutenky.
-Plíce: Čisté bilaterálně.
-Břicho: Měkké, bez citlivosti.
-Extremity: Teplé, bez otoků.
+HEENT: Vlhké sliznice, bez ikteru.
+Plíce: Oboustranně čisté.
+Břicho: Měkké, netendrové.
+Končetiny: Teplé, bez edému.
 
-Relevantní výsledky:
+Významné výsledky:
 NÁLEZY:
-Rentgen hrudníku ukázal čisté plicní pole a normální srdeční siluetu. Funkce štítné žlázy byla v normě. Elektrolyty byly v normě. Troponin byl negativní ve dvou kontrolách. Echokardiogram ukázal zachovalou funkci komor a mírné zvětšení levé síně.
+Rentgen hrudníku ukázal čistá plicní pole a normální srdeční siluetu. Funkce štítné žlázy byla v normě. Elektrolyty byly v normě. Troponin byl dvakrát negativní. Echokardiogram ukázal zachovanou funkci komor a mírné zvětšení levé síně.
 
-Průběh hospitalizace:
-Monitorování srdeční činnosti ukázalo fibrilaci síní s rychlou komorovou odpovědí, která byla kontrolována pomocí metoprololu, a byla zahájena antikoagulační léčba. Kreatinin zůstal na základní úrovni, bez známek akutního poškození ledvin. Echokardiogram provedený na ___ byl uklidňující. Pacientka se postupně zlepšovala a byla propuštěna domů za účelem dalšího sledování kardiologem na ___.
+Stručný popis hospitalizace:
+Telemetrie prokázala fibrilaci síní s rychlou komorovou odpovědí, která byla kontrolována metoprololem, a byla zahájena antikoagulační léčba. Kreatinin zůstal na výchozí úrovni, bez známek akutního poškození ledvin. Echokardiogram provedený v ___ byl uklidňující. Její stav se postupně zlepšoval a byla propuštěna domů s doporučením sledování kardiologem v ___.
 
 Léky při přijetí:
 Lisinopril
-Levothyroxine
+Levotyroxin
 
 Léky při propuštění:
-1. Metoprolol succinate denně.
-2. Apixaban dvakrát denně, dle pokynů ___.
+1. Metoprolol sukcinát denně.
+2. Apixaban dvakrát denně, podle pokynů ___.
 3. Lisinopril denně.
-4. Levothyroxine každé ráno.
+4. Levotyroxin každé ráno.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -60,12 +60,12 @@ Hypertenze
 Hypotyreóza
 
 Stav při propuštění:
-Psychický stav: Vědomá a plně orientovaná.
-Úroveň vědomí: Probuděná a pozorná.
-Fyzická aktivita: Chůze samostatná.
+Duševní stav: Bdělá a plně orientovaná.
+Úroveň vědomí: Bdělá a pozorná.
+Stav aktivity: Chodí samostatně.
 
 Pokyny při propuštění:
-Byla jste hospitalizována kvůli rychlému, nepravidelnému srdečnímu tepu. Užívajte nové léky přesně podle předpisu a nevynechávejte dávky ředidla krve. V případě bolesti na hrudi, mdloby nebo krvácení se vraťte. V případě dotazů volejte ___.
+Byli jste hospitalizováni kvůli rychlému, nepravidelnému srdečnímu tepu. Užívajte nové léky přesně podle předpisu a nepřestávejte užívat léky na ředění krve. V případě bolesti na hrudi, mdlob nebo krvácení se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

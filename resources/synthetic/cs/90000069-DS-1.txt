@@ -1,48 +1,48 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Dušnost a otoky nohou
+Dušnost a otok nohou
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka s diagnostikovaným srdečním selháním se dostavila do ___ s několika dny zhoršující se dušnosti, ortopnoe (dušnosti v leže) a otoků nohou, což se projevilo po vyčerpání léků, které obdržela z ___. Pacientka si všimla přibírání na váze a snížené tolerance chůze. Při příjmu byla nízká saturace kyslíkem a byla přijata k léčbě diuretiky.
+Pacientka se známou chronickou srdeční insuficiencí se dostavila do ___ s několikdenní se zhoršující dušností, ortopnoí a otokem nohou poté, co jí došlo lék, který získala od ___. Upozornila na nárůst hmotnosti a sníženou toleranci chůze. Při příjezdu byla saturace kyslíkem nízká a byla přijata k diuretické terapii.
 
-Anamnéza:
+Anamnéza předchozích onemocnění:
 Fibrilace síní
-Hypertenze (vysoký krevní tlak)
-Hypotyreóza (snížená funkce štítné žlázy)
+Hypertenze
+Hypotyreóza
 Předchozí hospitalizace v ___
 
 Rodinná anamnéza:
-Matka s hypertenzí. Anamnéza otce není známa, zaznamenána v ___.
+Matka s hypertenzí. Anamnéza otce neznámá, zaznamenána v ___.
 
-Výsledky vyšetření:
+Významné výsledky:
 NÁLEZY:
-Rentgen hrudníku ukázal bilaterální (oboustrannou) kongescí plicních cév s malými pleurálními výpotky. Echokardiogram provedený v ___ ukázal dilataci (rozšíření) levé síně a sníženou funkci komor. Hladiny draslíku a kreatininu byly během hospitalizace stabilní. BNP (biochemický marker srdečního selhání) byl při přijetí výrazně zvýšen.
+Rentgen hrudníku ukázal bilaterální kongesci plicních cév s malými pleurálními výpotky. Echokardiogram provedený v ___ ukázal dilatovanou levou síň a sníženou funkci komor. Hladiny draslíku a kreatininu byly během hospitalizace stabilní. BNP byla při přijetí výrazně zvýšená.
 
-Průběh hospitalizace:
-Pacientce byla podávána intravenózně furosemid (diuretikum) s postupným odvodněním a zlepšením dýchání, a podávání kyslíku bylo postupně snižováno. Srdeční frekvence byla kontrolována pomocí domácího beta-blokátoru a pokračovala antikoagulační léčba. Kardiologické oddělení v ___ prostudovalo případ a souhlasilo s navrženým postupem. Pacientka byla propuštěna domů s zajištěnou péčí prostřednictvím ___.
+Stručný průběh hospitalizace:
+Pacientka dostávala intravenózně furosemid, což vedlo ke stabilní diuréze a zlepšení dýchání, a kyslík byl postupně snižován, dokud nebyl možné dýchat běžný vzduch. Srdeční frekvence byla kontrolována pomocí beta-blokátoru, který pacientka užívá doma, a pokračovala se v antikoagulační terapii. Kardiolog z ___ zhodnotil případ a souhlasil s plánem léčby. Pacientka byla propuštěna domů a byla zajištěna následná péče prostřednictvím ___.
 
 Léky při přijetí:
-Furosemid, metoprolol, apixaban, levothyroxin, lisinopril
+Furosemid, metoprolol, apixaban, levotyroxin, lisinopril
 
 Léky při propuštění:
 1. Furosemid 40 mg perorálně dvakrát denně
-2. Metoprolol succinate 50 mg denně
+2. Metoprolol succinat 50 mg denně
 3. Apixaban 5 mg dvakrát denně
-4. Levothyroxin 75 mcg denně
+4. Levotyroxin 75 mcg denně
 5. Lisinopril 10 mg denně
 
-Plán po propuštění:
-Domů s péčí
+Způsob propuštění:
+Domů s následnou péčí
 
 Zařízení:
 ___
@@ -52,11 +52,11 @@ Srdeční selhání
 Fibrilace síní
 
 Stav při propuštění:
-Úroveň vědomí: Vědomá a komunikativní.
-Funkční stav: Chůze, samostatná, používá chodítko pro delší vzdálenosti.
+Úroveň vědomí: Bdělá a komunikativní.
+Stav aktivity: Ambulantní, soběstačná, s pomocí chodítka při delších vzdálenostech.
 
-Pokyny při propuštění:
-Byla jste hospitalizována kvůli hromadění tekutin způsobenému vaším srdečním onemocněním. Zvažujte se každé ráno a volejte svého lékaře na číslo ___ v případě, že přiberete více než 1,4 kg za den. Omezte příjem soli, užívejte všechny léky podle předpisu a v případě zhoršení dušnosti se vraťte.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zadržování tekutin způsobenému vaším srdečním onemocněním. Každé ráno se važte a zavolejte svému lékaři na telefonní číslo ___, pokud během jednoho dne přiberete více než jeden a půl kilogramu. Omezte příjem soli, užívejte všechny léky podle předpisu a v případě zhoršení dušnosti se vraťte.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

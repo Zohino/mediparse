@@ -1,52 +1,52 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Sulfonamidy
+Léky obsahující sulfanilamid
 
 Hlavní potíže:
 Slabost a snížená chuť k jídlu
 
-Zásahové zákroky:
-Žádné; zavedena periferní intravenózní katétr na místě ___
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný; zaveden periferní intravenózní katétr na ___
 
 Anamnéza současného onemocnění:
-Pacientka byla odeslána z ambulance ___ po několika dnech únavy, nevolnosti a sníženého příjmu potravy. Uvedla mírnou závratě při vstávání. Bez bolesti na hrudi, horečky nebo kašle. Laboratorní výsledky vedly k hospitalizaci.
+Pacientka odeslána z kliniky ___ po několika dnech únavy, nevolnosti a sníženém příjmu potravy. Uvádí mírné závratě při vstávání. Bez bolesti na hrudi, horečky nebo kašle. Laboratorní výsledky vedly k hospitalizaci.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus léčený perorálními léky
 Hypertenze
-Bez fibrilace síní při předchozím monitorování
+Předchozí monitorování nevykázalo fibrilaci síní
 Hypotyreóza
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí. Otec s mrtvicí.
+Matka s hypertenzí. Otec s cévní mozkovou příhodou.
 
 Fyzikální vyšetření:
-Unavená, ale v pohodě, vitální funkce stabilní.
-ORL: Suché sliznice.
-Břicho: Měkké, bez citlivosti.
-Neurologické vyšetření: Přítomná, bez fokálních deficitů.
+Unavená, ale v pohodlí, vitální funkce stabilní.
+HLAVA, OČI, UŠI, NOS, KRK: Suché sliznice.
+BŘICHO: Měkké, bez citlivosti.
+NEUROLOGIE: Bdělá, bez ložiskových neurologických deficitů.
 
-Relevantní výsledky:
-Sodík v normálních mezích, draslík mírně zvýšený. Kreatinin nad obvyklou hodnotou, zlepšující se do propuštění. Glukóza v přijatelných hodnotách. Rentgen hrudníku bez patologických nálezů. EKG ukázalo sinusový rytmus.
+Významné výsledky:
+Sodík v dolní normě, draslík mírně zvýšený. Kreatinin nad obvyklou hodnotou, zlepšuje se do propuštění. Glukóza v přijatelném rozmezí. Rentgen hrudníku bez patologických nálezů. EKG ukazuje sinusový rytmus.
 
-Průběh hospitalizace:
-Pacientka dostávala intravenózní tekutiny a antiemetika, což vedlo k postupnému zlepšení chuti k jídlu a energie. Léky, které užívala doma, byly zkontrolovány a upraveny lékařem ___. Laboratorní výsledky byly denně kontrolovány a vykazovaly příznivý vývoj. Pacientka chodila samostatně a byla propuštěna po kontrole lékařem ___.
+Stručný popis průběhu hospitalizace:
+Pacientka dostávala intravenózní tekutiny a léky proti nevolnosti, s postupným zlepšením chuti k jídlu a energie. Domácí léčba byla zkontrolována a upravena lékařem ___. Laboratorní výsledky byly denně kontrolovány a vykazovaly příznivý trend. Pacientka chodila samostatně a byla propuštěna lékařem ___.
 
 Léky při přijetí:
-Metformin, lisinopril, levothyroxin, amlodipin
+Metformin, lisinopril, levotyroxin, amlodipin
 
 Léky při propuštění:
-Levothyroxin denně, amlodipin denně, glipizid k snídani. Lisinopril užívat až po kontrole laboratorních výsledků. Acetaminofen dle potřeby při nepříjemných pocitech.
+Levotyroxin denně, amlodipin denně, glipizid k snídani. Lisinopril vysadit do kontroly laboratorních výsledků. Paracetamol podle potřeby při nepohodlí.
 
-Plán po propuštění:
-Domů s péčí
+Způsob propuštění:
+Domů s domácí péčí
 Zařízení: ___
 
 Diagnóza při propuštění:
@@ -55,11 +55,11 @@ Chronické onemocnění ledvin
 
 Stav při propuštění:
 Stabilní a zlepšený.
-Psychický stav: Jasný a koherentní.
-Úroveň vědomí: Přítomná a komunikativní.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a reaguje.
 
-Instrukce při propuštění:
-Byla jste přijata kvůli slabosti a sníženému příjmu potravy. Pravidelně pijte tekutiny, jezte malé, časté porce a užívejte léky podle pokynů. V případě zvracení, mdloby nebo zmatenosti se vraťte. V případě dotazů volejte ___.
+Pokyny pro propuštění:
+Byla jste přijata se slabostí a sníženým příjmem potravy. Pravidelně pijte tekutiny, jezte malé a časté porce a užívejte léky podle seznamu. V případě zvracení, mdlob nebo zmatenosti se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

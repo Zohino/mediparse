@@ -1,60 +1,60 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
-Dušnost, otoky nohou
+Dušnost, otok nohou
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka, žena ve věku ___ let, s chronickým srdečním selháním, byla přijata po třech dnech zhoršující se dušnosti, otoků nohou a sníženého objemu moči, odeslána z ambulance ___ . Navzdory domácí léčbě diuretiky a snížené chuti k jídlu se její váha zvýšila o několik kilogramů.
+Anamnéza současného onemocnění:
+___letá žena s chronickým srdečním selháním přišla po třech dnech zhoršující se dušnosti, otoku nohou a sníženém objemu moči, odeslána z ___ kliniky. Navzdory užívání diuretik doma a špatné chuti k jídlu si přibrala několik kilogramů.
 
-Předchozí zdravotní problémy:
+Anamnéza předchozích onemocnění:
 Chronické onemocnění ledvin, stadium 4
-Hypertenze (vysoký krevní tlak)
-Anémie (chudokrevnost) spojená s chronickým onemocněním
-Hyperlipidemie (zvýšená hladina tuků v krvi)
+Hypertenze
+Anémie chronického onemocnění
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí.
+Matka s hypertenzí
 
 Fyzikální vyšetření:
-Fyzikální vyšetření při přijetí:
-Celkový stav: Únavná, bez známek akutního utrpení.
-Hlava, krk, uši, nos, hrdlo: Vlhká sliznice.
-Krk: Zvýšená jugulární venózní tlak.
-Břicho: Měkké, bez citlivosti.
-Končetiny: Edém (otek) 2+ až po kolena.
-Pulzy: Palpovatelné na periférii.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Unavená, bez známek úzkosti
+Hlava, uši, nos, hrdlo: Vlhké sliznice
+Krk: Zvýšená jugulární žíla
+Břicho: Měkké, netendrovatelné
+Končetiny: Otoky 2+ až po kolena
+Pulzy: Hmatatelné distálně
 
 Významné výsledky:
-Kreatinin 2,9 při příjmu, základní hodnota 1,8, urea 54, draslík 5,3, BNP výrazně zvýšen. Rentgen hrudníku ukázal plicní vaskulární kongesci (zácpu). Kreatinin se zlepšil na 2,1 po podání diuretika ___ . Echokardiogram nezaznamenal změny oproti předchozímu vyšetření.
+Kreatinin 2,9 při přijetí oproti výchozí hodnotě 1,8, urea 54, draslík 5,3, BNP výrazně zvýšené. Rentgen hrudníku ukázal plicní vaskulární kongesci. Kreatinin se zlepšil na 2,1 po diuretické terapii ___. Echokardiogram se nezměnil oproti předchozímu.
 
 Léky při přijetí:
 Furosemid 40 mg denně, lisinopril 10 mg denně, aspirin.
 
 Léky při propuštění:
-Furosemid 60 mg denně, carvedilol 6,25 mg dvakrát denně, aspirin 81 mg denně, sevelamer s jídlem. Lisinopril vysaďte, dokud nebude znovu zkontrolována funkce ledvin.
+Furosemid 60 mg denně, karvedilol 6,25 mg dvakrát denně, aspirin 81 mg denně, sevelamer během jídla. Lisinopril vysadit, dokud nebude znovu zkontrolována funkce ledvin.
 
-Plán po propuštění:
+Plán propuštění:
 Domů s péčí od ___
 
 Stav při propuštění:
-Psychický stav: Jasný a soustředěný.
-Úroveň vědomí: Vnímavá a komunikativní.
-Fyzická aktivita: Chůze s pomocí chodítka.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a reagující.
+Stav aktivity: Chodí s pomocí chodítka.
 
-Pokyny při propuštění:
-Vážete se každé ráno a omezte příjem soli a tekutin. Zavolejte ___ , pokud se vaše váha během jednoho dne zvýší o více než 0,9 kg, nebo pokud se zhorší dušnost nebo otoky. Dodržujte termín laboratorního vyšetření.
+Pokyny pro propuštění:
+Každé ráno se zvažte a omezte příjem soli a tekutin. Volejte ___, pokud se váha během jednoho dne zvýší o dva kilogramy, nebo pokud se zhorší dýchání nebo otoky. Dodržujte termín laboratorního vyšetření.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

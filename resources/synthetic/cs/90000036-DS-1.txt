@@ -1,74 +1,74 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka přišla s potížemi trvajícími čtyři dny: produktivní kašel, horečka a dušnost. Byla vyšetřena v ___ a odeslána na pohotovost. Při příjezdu měla horečku a mírnou hypoxémii. Rentgen hrudníku ukázal infiltrát v dolní části pravého plíce. Byla přijata na oddělení ___ k léčbě.
+Pacientka se dostavila se čtyřdenní anamnézou produktivního kašle, horečky a dušnosti. Byla vyšetřena v ___ a odeslána na pohotovost. Při příjezdu měla horečku a mírnou hypoxii. Zobrazovací vyšetření hrudníku ukázalo infiltrát v dolním laloku pravého plíce. Byla přijata do ___ k léčbě.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Osteoartróza, sledována v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka prodělala mrtvici. Otec trpí hypertenzí.
+Matka s cévní mozkovou příhodou. Otec s hypertenzí.
 
 Fyzikální vyšetření:
-Celkový stav: Únavná, bez známek utrpení.
-Hlava, oči, uši, nos, krk: Vlhká sliznice.
-Plíce: Praskání v dolní části pravé plíce.
-Břicho: Měkké, bez citlivosti.
-Extremity: Bez otoků.
-Neurologické vyšetření: Vědomá, bez fokálních příznaků.
+Celkový stav: Unavená, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Plíce: Chropy v dolní části pravé plíce.
+Břicho: Měkké, netendrové.
+Končetiny: Bez otoků.
+Neurologické vyšetření: Bdělá, bez ložiskových příznaků.
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PŘIJETÍ:
-Počet bílých krvinek 14,2, hemoglobin 12,1, kreatinin 0,9, laktát 1,4. Výsledky probrány s ___.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 14,2, hemoglobin 12,1, kreatinin 0,9, laktát 1,4. Výsledky projednány s ___.
 ZÁVĚR:
-Konsolidace v dolní části pravé plíce.
+Konsolidace v dolním laloku pravé plíce.
 NÁLEZY:
-Ztmavení plicního prostoru v dolní části pravé plíce s malým peripneumonickým výpotkem. Pneumotorax není přítomen. Velikost srdce normální.
+Zkalení v dolní části pravé plíce s malým parapneumonickým výpotkem. Bez pneumotoraxu. Velikost srdce normální.
 
-Průběh hospitalizace:
-Byla léčena na pneumonii, nejprve ceftriaxonem, poté, vzhledem k alergii, orálním azithromycinem a doxycyklinem. Léčba byla probrána s ___. Do třetího dne byla postupně snižována podávka kyslíku. Horečka ustoupila a kašel se zlepšil. Byla jí doporučeno pokračovat v užívání léků na vysoký krevní tlak. Byla schopna samostatné chůze a byla propuštěna domů s podporou od ___.
+Stručný průběh hospitalizace:
+Byla léčena pro pneumonii ceftriaxonem, který byl vzhledem k její anamnéze alergií nahrazen perorálním azithromycinem a doxycyklinem, projednáno s ___. Kyslík byl postupně snižován až do normální hladiny do třetího dne. Horečka ustoupila a kašel se zlepšil. Domácí léčba hypertenze byla pokračována. Pacientka se mohla samostatně pohybovat a byla propuštěna domů s podporou ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
 Atorvastatin 20 mg večer
 
 Léky při propuštění:
-1. Lisinopril 10 mg per os denně.
-2. Atorvastatin 20 mg per os večer.
-3. Doxycyklin 100 mg per os dvakrát denně po dobu pěti dalších dnů.
-4. Paracetamol dle potřeby při horečce.
+1. Lisinopril 10 mg perorálně denně.
+2. Atorvastatin 20 mg perorálně večer.
+3. Doxycyklin 100 mg perorálně dvakrát denně po dobu dalších pěti dnů.
+4. Paracetamol podle potřeby při horečce.
 
-Plán po propuštění:
-Domů s péčí od ___.
+Způsob propuštění:
+Domů s podporou od ___
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Hypoxie
 
 Stav při propuštění:
-Psychický stav: Jasný a srozumitelný.
-Úroveň vědomí: Vědomá a komunikativní.
-Funkční stav: Chůze samostatná.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a reagující.
+Fyzická aktivita: Chodící, soběstačná.
 
 Pokyny při propuštění:
-Byla hospitalizována pro infekci plic. Dokončete užívání antibiotik podle předpisu a pijte dostatek tekutin. Odpočívejte doma a v případě horečky, zhoršení dýchání nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___, a kontrolní prohlídku si naplánujte na ___.
+Byli jste hospitalizováni kvůli plicní infekci. Dokončete předepsaná antibiotika a pijte dostatek tekutin. Odpočívejte doma a v případě horečky, zhoršení dýchání nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___ a dodržujte termín návštěvy v ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

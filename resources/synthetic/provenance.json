@@ -8,10 +8,10 @@
     "generated_on": "2026-10-04",
     "specification_commit": "d8515b84be3b897cfb4b1503fa99374e736e3fd7"
   },
-  "audit_sha256": "611279db95557d8d06af94f32a5a96cfdddbe824d5283d45a4c50ef44b8b27f6",
+  "audit_sha256": "7810b55051fb2a15d33682824b7f89b93e3c3e5e8be86182206e191fa8c92fad",
   "translation": {
-    "model": "google/translategemma-12b-it",
-    "revision": "d1b225e1caa17f1ddc7e62065d8637d0923f34e2",
+    "model": "google/translategemma-27b-it",
+    "revision": "7d10f0b72f89a2d0f268cea30727d8b77c0d25c2",
     "dtype": "bfloat16",
     "window": 2048,
     "decoding": {
@@ -21,25 +21,13 @@
         106
       ]
     },
-    "requests_sha256": "dfa6fc56733e8b3da9d079e978cc2f1d8c5291f0b804a904b29f41d4660c4ec5",
+    "requests_sha256": "1aa348b53125be72727beafa44bc83ee451c7f4bd2b6159511058573837e15ef",
     "runs": [
       {
-        "started": "2026-10-06T19:21:27.202468Z",
-        "requests_sha256": "aabdab8148f9e5e0c443ff17bbd58f5bcd53dfbd31637912e63d40b04456a9ab",
-        "script_sha256": "0acaaf12680a4d0717f3facfb88568d5dd3e09d18160abb7c8e56b85bb3e6d5d",
-        "gpu": "NVIDIA A40",
-        "cuda": "13.0",
-        "packages": {
-          "vllm": "0.30.0",
-          "torch": "2.13.0",
-          "transformers": "5.18.0"
-        }
-      },
-      {
-        "started": "2026-10-07T17:21:12.787980Z",
-        "requests_sha256": "dfa6fc56733e8b3da9d079e978cc2f1d8c5291f0b804a904b29f41d4660c4ec5",
-        "script_sha256": "0acaaf12680a4d0717f3facfb88568d5dd3e09d18160abb7c8e56b85bb3e6d5d",
-        "gpu": "NVIDIA A40",
+        "started": "2026-10-09T20:39:16.143981Z",
+        "requests_sha256": "1aa348b53125be72727beafa44bc83ee451c7f4bd2b6159511058573837e15ef",
+        "script_sha256": "5c71e3353fd77b271b4b31f0c8f7d9bc2bac360300be2267e696dead01bb4975",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "cuda": "13.0",
         "packages": {
           "vllm": "0.30.0",
@@ -48,47 +36,7 @@
         }
       }
     ],
-    "marker_mismatches": [
-      "90000001-DS-1",
-      "90000002-DS-4",
-      "90000003-DS-1",
-      "90000007-DS-1",
-      "90000011-DS-6",
-      "90000011-DS-7",
-      "90000014-DS-2",
-      "90000015-DS-1",
-      "90000015-DS-2",
-      "90000015-DS-5",
-      "90000015-DS-7",
-      "90000019-DS-2",
-      "90000019-DS-4",
-      "90000021-DS-5",
-      "90000022-DS-2",
-      "90000023-DS-1",
-      "90000029-DS-1",
-      "90000032-DS-1",
-      "90000034-DS-1",
-      "90000038-DS-1",
-      "90000043-DS-1",
-      "90000044-DS-3",
-      "90000050-DS-1",
-      "90000050-DS-2",
-      "90000050-DS-3",
-      "90000050-DS-8",
-      "90000057-DS-1",
-      "90000057-DS-5",
-      "90000066-DS-1",
-      "90000067-DS-1",
-      "90000072-DS-1",
-      "90000075-DS-1",
-      "90000075-DS-6",
-      "90000076-DS-1",
-      "90000083-DS-1",
-      "90000083-DS-3",
-      "90000083-DS-5",
-      "90000087-DS-3",
-      "90000088-DS-1",
-      "90000090-DS-1"
-    ]
+    "marker_mismatches": [],
+    "masking": "[[n]]"
   }
 }

@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,36 +9,36 @@ Alergie:
 Hlavní potíže:
 Bušení srdce
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let byl přijat z ___ s dvoudenními potížemi v podobě bušení srdce a mírné závratě. Bez bolesti na hrudi nebo ztráty vědomí.
-ANAMNÉZA:
+___letý muž odeslán z ___ s potížemi trvajícími dva dny – zrychlený srdeční tep a mírná závrať. Bez bolesti na hrudi nebo synkopy.
+PŘEHLED SYSTÉMŮ:
 Negativní, s výjimkou výše uvedeného.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec s mrtvicí
+Otec s cévní mozkovou příhodou
 
 Fyzikální vyšetření:
-Nepravidelný srdeční rytmus, pacient v pohodě, plíce čisté.
-FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
-Celkový stav: Pacient vypadá dobře, bez známek úzkosti.
-Břicho: Měkké, bez citlivosti.
-Extremity: Teplé, bez otoků.
+Nepravidelný rytmus, pacient se cítí dobře, plíce čisté.
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: Dobrý vzhled, bez známek úzkosti
+Břicho: Měkké, netendrovatelné
+Končetiny: Teplé, bez otoků
 
 Významné výsledky:
-EKG při přijetí ukázalo nepravidelný, úzký srdeční rytmus. Dva negativní testy na troponin. Normální výsledky testů štítné žlázy. Echokardiogram provedený dne ___ ukázal zachovalou ejekční frakci.
+EKG při přijetí ukázalo nepravidelný, úzký rytmus. Dvakrát negativní troponin. Funkce štítné žlázy v normě. Echokardiografie provedená ___ ukázala zachovanou ejekční frakci.
 
-Průběh hospitalizace:
-Pacient byl monitorován a jeho srdeční frekvence byla kontrolována pomocí metoprololu. Kardiologické oddělení doporučilo antikoagulační léčbu, po posouzení rizika krvácení byla zahájena léčba apixabanem. Srdeční frekvence se ustálila pod 100 a pacient byl propuštěn ve stabilním stavu.
+Stručný popis hospitalizace:
+Pacient byl monitorován pomocí telemetrie a srdeční frekvence byla regulována metoprololem. Kardiolog ___ doporučil antikoagulační léčbu, po zhodnocení rizika krvácení byla zahájena léčba apixabanem. Srdeční frekvence se stabilizovala pod 100 a pacient byl propuštěn ve stabilizovaném stavu.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -46,23 +46,23 @@ Atorvastatin 20 mg večer
 
 Léky při propuštění:
 1. Apixaban 5 mg dvakrát denně
-2. Metoprolol succinate 50 mg denně
+2. Metoprolol succinat 50 mg denně
 3. Lisinopril 10 mg denně
 4. Atorvastatin 20 mg večer
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 
 Diagnóza při propuštění:
 Fibrilace síní
 
 Stav při propuštění:
-Psychický stav: Jasný a soustředěný
-Úroveň vědomí: Vnímavý a komunikativní
-Funkční stav: Chůze, soběstačný
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Ambulantní, soběstačný
 
-Instrukce při propuštění:
-Byl vám poskytnut lék na nepravidelný srdeční rytmus. Užívajte nový lék na ředění krve přesně podle předpisu. V případě mdloby, bolesti na hrudi nebo krvácení se obraťte na lékaře. Navštivte prosím ambulanci ___ .
+Pokyny pro propuštění:
+Byl jste léčen pro nepravidelný srdeční tep. Užijte si nový antikoagulant přesně podle předpisu. V případě omdlení, bolesti na hrudi nebo krvácení se vraťte. Navštivte prosím ___ kliniku.
 
-Následná péče:
+Pokyny pro kontrolu:
 ___

@@ -1,24 +1,24 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Dušnost a otoky nohou
+Dušnost a otok nohou
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka byla přijata z ___ s týdenní progresí dušnosti, ortopnoe (dušnost vleže) a otoků nohou, což bylo způsobeno vynecháváním dávek léků doma. Byla vyšetřena v ___ a následně převezena sem.
+Pacientka odeslána z ___ s týden trvající se zhoršující dušností, ortopnoí a otoky nohou po vynechání dávek léků doma. Vyšetřena v ___ a převezena sem.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Srdeční selhání
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
+Hypertenze
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
@@ -27,17 +27,17 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Oblast hlavy, očí, uší, nosu a krku (HEENT): Vlhká sliznice
-Kardiovaskulární systém: Pravidelný srdeční rytmus, tichý šelest
-Břicho: Měkké, bezbolestné
-Extremity (končetiny): Mírný bilaterální edém (otek)
-Kůže: Teplá, suchá
+HLAVA, OČI, UŠI, NOS, KRK: Vlhké sliznice
+SRDCE: Pravidelný rytmus, jemné šelesty
+BŘICHO: Měkké, netendrovatelné
+KONČETINY: Mírný bilaterální edém
+KŮŽE: Teplá, suchá
 
 Významné výsledky:
-Rentgen hrudníku ukázal plicní vaskulární kongesci (ucpání cév). Zvýšená hladina BNP. Kreatinin stabilní, blízko základní hodnoty. Několikrát zvýšená hladina glukózy. Hladina draslíku normální. EKG (elektrokardiogram) byl zkontrolován.
+Rentgen hrudníku ukázal plicní vaskulární kongesci. BNP zvýšené. Kreatinin stabilní, blízko výchozí hodnoty. Glukóza zvýšená při několika měřeních. Draslík v normě. Echokardiografie zkontrolována.
 
-Průběh hospitalizace:
-Pacientka byla léčena intravenózními diuretiky (léky na odvodnění) až do dosažení téměř normálního objemu tekutin, poté byla převedena na perorální podávání. Dušnost se zlepšila, váha postupně klesala. Hladina cukru byla kontrolována pomocí inzulinové terapie. Byla konzultována s kardiologickým oddělením dne ___. Stabilní stav pro propuštění.
+Stručný popis hospitalizace:
+Léčena intravenózním diuretikem, dokud se nedosáhlo téměř euvolemického stavu, poté převedena na perorální dávkování. Dýchání se zlepšilo, váha se postupně snižovala. Hladina cukru v krvi regulována pomocí inzulínu v závislosti na aktuální hodnotě. Konzultace s kardiologem dne ___. Stav stabilizován, pacientka připravena k propuštění.
 
 Léky při přijetí:
 Furosemid
@@ -48,9 +48,9 @@ Léky při propuštění:
 Furosemid 40 mg denně
 Lisinopril 10 mg denně
 Atorvastatin 20 mg večer
-Insulin glargin před spaním
+Inzulín glargin před spaním
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -58,11 +58,11 @@ Akutní exacerbace chronického srdečního selhání
 Diabetes mellitus
 
 Stav při propuštění:
-Stabilní, zlepšený
-Úroveň vědomí: Vědomá a komunikativní
+Stabilizovaný, zlepšený
+Úroveň vědomí: Bdělá a komunikativní
 
-Pokyny při propuštění:
-Byla přijata kvůli přetížení tekutinami. Zvažujte se každý den ráno a volejte ___ v případě, že se vaše váha zvýší o více než 1,4 kg. Omezte příjem soli a tekutin, užívejte léky podle předpisu a dodržujte termín vaší návštěvy u lékaře dne ___.
+Pokyny pro propuštěného pacienta:
+Byla jste přijata s přetížením tekutinami. Každé ráno se važte a volejte ___, pokud se váha zvýší o tři libry. Omezte příjem soli a tekutin, užívejte léky podle předpisu a dodržujte termín kontroly u ___.
 
-Pokyny pro další sledování:
+Pokyny pro další péči:
 ___

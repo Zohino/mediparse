@@ -1,61 +1,61 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Oddělení: Kardiologie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Kardiologie
+Datum přijetí: ___ Číslo pokoje: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
-Hlavní potíž:
-Bušení srdce.
+Hlavní potíže:
+Bušení srdce
 
-Zásahové zákroky:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní vyšetření:
+Žádný
 
 Anamnéza současného onemocnění:
-Žena s fibrilací síní se dostavila s bušením srdce a závratěmi, které trvaly dva dny poté, co vynechala dávky svého antikoagulačního léku. Byla vyšetřena na ___ a převezena za účelem regulace srdeční frekvence a monitorování.
+Žena s fibrilací síní se dostavila s potížemi, jako je bušení srdce a závratě, které trvaly dva dny poté, co vynechala dávky antikoagulantu. Byla vyšetřena v ___ a převezena za účelem kontroly srdeční frekvence a monitorování.
 
-Předchozí zdravotní problémy:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
-Možný diabetes mellitus, dosud nepotvrzen.
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Možná cukrovka, dosud nepotvrzená
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Bez významných informací.
+Bez významných údajů
 
 Fyzikální vyšetření:
-Životní funkce: bez horečky, srdeční frekvence kontrolovaná.
-Oblast hlavy, očí, uší, nosu a krku: bez abnormalit.
-Břicho: měkké, bez citlivosti.
+Vitalní funkce: bez horečky, srdeční frekvence kontrolovaná.
+Hlava, oči, uši, nos, hrdlo: bez významných nálezů.
+Břicho: měkké, netendrové.
 Kůže: teplá, suchá.
-Neurologické vyšetření: bez lokalizovaných příznaků.
+Neurologické vyšetření: bez ložiskových příznaků.
 
 Významné výsledky:
-Troponin negativní dvakrát. Draslík a kreatinin v normálních hodnotách. EKG ukázalo nepravidelný rytmus bez ischemických změn. Hemoglobin stabilní. Ostatní laboratorní výsledky bez abnormalit.
-ZÁVĚR: Bez akutního kardiopulmonálního procesu na rentgenovém snímku hrudníku pořízeném na ___.
+Dvakrát negativní troponin. Draslík a kreatinin v normálních mezích. EKG ukázalo nepravidelný rytmus bez ischemických změn. Hemoglobin stabilní. Ostatní laboratorní výsledky bez významných nálezů.
+ZÁVĚR: Na rentgenovém snímku hrudníku provedeném v ___ nebyly zjištěny žádné akutní kardiopulmonální problémy.
 
-Průběh hospitalizace:
-Byla monitorována pomocí telemetrie a její srdeční frekvence se stabilizovala po úpravě dávky perorálního metoprololu. Antikoagulace byla obnovena a její dodržování bylo s ní prodiskutováno. Kardiologické oddělení na ___ doporučilo ambulantní kontrolu. Byla stabilní a byla propuštěna domů.
+Stručný popis hospitalizace:
+Byla monitorována pomocí telemetrie a její srdeční frekvence se stabilizovala po úpravě dávky perorálního metoprololu. Antikoagulační léčba byla obnovena a s pacientkou byly probrány otázky týkající se dodržování léčebného režimu. Kardiolog z ___ doporučil ambulantní sledování. Pacientka zůstala stabilní a byla propuštěna domů.
 
 Léky při přijetí:
-Metoprolol, apixaban, atorvastatin a lisinopril denně.
+Metoprolol, apixaban, atorvastatin a lisinopril denně
 
 Léky při propuštění:
 Metoprolol succinate 50 mg denně, apixaban 5 mg dvakrát denně, atorvastatin 20 mg večer, lisinopril 10 mg denně.
 
-Propouštěcí režim:
-Domů.
+Způsob propuštění:
+Domů
 
 Stav při propuštění:
-Psychický stav: bdělá a orientovaná.
-Úroveň vědomí: probuzená a pozorná.
-Fyzická aktivita: chodí samostatně.
+Duševní stav: bdělá a adekvátní.
+Úroveň vědomí: bdělá a pozorná.
+Stav aktivity: chodí samostatně.
 
-Propouštěcí pokyny:
-Užívejte léky podle předpisu a nikdy nevynechávejte dávky antikoagulačního léku. V případě mdloby nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___ nebo navštivte ___ co nejdříve.
+Pokyny pro propuštění:
+Užívejte léky podle předpisu a nikdy nevynechávejte dávky antikoagulantu. V případě omdlení nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___ nebo se co nejdříve obraťte na ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

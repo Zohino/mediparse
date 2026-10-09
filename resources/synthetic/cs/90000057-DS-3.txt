@@ -1,69 +1,69 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Oddělení: CHIRURGIE
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Sulfonamidy
+Léky obsahující sulfanilamid
 
 Hlavní potíže:
 Bolest v pravém horním kvadrantu břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická cholecystektomie (odstranění žlučníku)
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
 
 Anamnéza současného onemocnění:
-Pacientka, ve věku ___ let, udává několik dní trvající zhoršující se bolest v pravém horním kvadrantu břicha, nevolnost a zvracení po konzumaci tučných jídel. Byla přijata na oddělení ___ kde ultrazvukové vyšetření prokázalo žlučové kameny a ztluštění stěny žlučníku, a byla převezena k chirurgickému řešení. Od ___ má doma mírnou horečku.
+___ letá žena s několikdenní se zhoršující bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po konzumaci tučných jídel. Dostavila se do ___, kde ultrazvuk odhalil žlučové kameny a ztluštění stěny žlučníku, a byla převezena na chirurgické oddělení. Od ___ má doma mírnou horečku.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
-Apendektomie (odstranění slepého střeva) v roce ___
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v roce ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s žlučovými kameny
+Matka má žlučové kameny
 
 Fyzikální vyšetření:
-Celkový stav: klidná, při vědomí
-Oblast hlavy, očí, uší, nosu a krku: bez žloutenky
+Celkový stav: dobrý, bdělá
+Hlava, oči, uši, nos, hrdlo: bez známek žloutenky
 Krk: pružný
-Kardiovaskulární systém: pravidelná srdeční frekvence a rytmus
-Břicho: měkké, mírně bolestivé v oblasti jizev, rány čisté
-Extremity: teplé, bez otoků
-Neurologické vyšetření: bez patologických nálezů
+SRDEČNÍ: pravidelný rytmus
+BŘICHO: měkké, mírně citlivé v místech vpichů, incize čisté
+Končetiny: teplé, bez otoků
+Neurologické: bez ložiskových příznaků
 
 Významné výsledky:
-Laboratorní výsledky při přijetí: zvýšený počet bílých krvinek (13,2) a mírně zvýšené hodnoty jaterních enzymů, které se do propuštění normalizovaly. Ultrazvukové vyšetření provedené ___ prokázalo žlučové kameny, ztluštění stěny žlučníku a tekutinu kolem žlučníku, bez rozšíření žlučových cest. Histopatologické vyšetření odeslané do ___ je k dispozici až po propuštění.
+Při přijetí zvýšený počet bílých krvinek (13,2) a mírně zvýšené jaterní enzymy, které se do propuštění normalizovaly. Ultrazvuk z ___ ukázal mnoho žlučových kamenů, ztluštění stěny žlučníku a tekutinu v okolí žlučníku, bez dilatace žlučových cest. Vzorek pro patologické vyšetření byl odeslán do ___, výsledky budou k dispozici po propuštění.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
 Atorvastatin 20 mg večer
 
 Léky při propuštění:
-1. Acetaminophen 650 mg každých šest hodin dle potřeby na bolest
-2. Oxykodon 5 mg každé čtyři hodiny dle potřeby na silnou bolest
-3. Docusate 100 mg dvakrát denně
+1. Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti
+2. Oxykodon 5 mg každé čtyři hodiny podle potřeby proti silné bolesti
+3. Dokusát 100 mg dvakrát denně
 4. Lisinopril 10 mg denně
 5. Atorvastatin 20 mg večer
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Akutní kalciová cholecystitida (zánět žlučníku způsobený žlučovými kameny)
-Sekundární diagnózy:
-Hypertenze, hyperlipidemie
+Akutní kalcifikovaná cholecystitida
+Sekundární:
+Hypertenze, hyperlipidémie
 
 Stav při propuštění:
 Dobrý
-Funkční stav: pohyblivá, soběstačná
+Úroveň aktivity: schopná chůze, soběstačná
 
-Pokyny při propuštění:
-Byla hospitalizována pro zánět žlučníku a podstoupila laparoskopickou operaci k jeho odstranění. Udržujte rány čisté a suché a vyhýbejte se zvedání předmětů o hmotnosti více než 4,5 kg po dobu dvou týdnů. V případě horečky, zvracení, zhoršující se bolesti nebo žluté pokožky volejte ___ nebo se vraťte na kontrolu.
+Pokyny pro propuštění:
+Byli jste hospitalizováni s zánětem žlučníku a podstoupili jste laparoskopické odstranění. Udržujte incize čisté a suché a po dobu dvou týdnů se vyhýbejte zvedání těžkých předmětů (nad 10 liber). V případě horečky, zvracení, zhoršující se bolesti nebo žluté kůže volejte ___ nebo se vraťte do nemocnice.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Oddělení: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,16 +9,16 @@ Alergie:
 Hlavní potíže:
 Bolest a zarudnutí pravé nohy
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Jedná se o pacientku ve věku ___ let s cukrovkou, která se dostavila na oddělení s třemi dny zhoršující se bolesti, zarudnutím a otokem pravé dolní končetiny po drobném odření při zahradničení. Před přijetím si všimla subjektivních horeček a zimnic. Byla vyšetřena svým praktickým lékařem dne ___ a dostala perorální antibiotika, ale bez zlepšení. Na pohotovosti neměla horečku, ale cítila bolest a teplo v oblasti lýtka. Laboratorní výsledky ukázaly zvýšený počet bílých krvinek a hladinu glukózy 290. Byla zahájena intravenózní antibiotická léčba a přijata na oddělení ___ k léčbě celulitidy a regulaci hladiny glukózy.
+Anamnéza současného onemocnění:
+Jedná se o ___letou ženu s diabetem, která se dostavila do ___ s třídenní anamnézou zhoršující se bolesti, zarudnutí a otoku pravé dolní končetiny po drobném odření při zahradničení. Uváděla subjektivní pocity horečky a zimnice večer před přijetím. Byla vyšetřena svým ošetřujícím lékařem dne ___ a byla jí předepsána perorální antibiotika, ale nedošlo ke zlepšení. Na pohotovosti neměla horečku, ale končetina byla citlivá na dotek, s pocitem tepla v oblasti holenně. Laboratorní výsledky ukázaly zvýšený počet bílých krvinek a hladinu glukózy 290. Byla zahájena intravenózní antibiotická léčba a pacientka byla přijata na oddělení ___ za účelem léčby celulitidy a kontroly hladiny glukózy.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Chronické onemocnění ledvin, stadium 3, sledováno lékařem ___
-Hyperlipidemie
+Chronické onemocnění ledvin ve stadiu 3, pod dohledem Dr. ___
+Hyperlipidémie
 Osteoartróza kolen
 
 Sociální anamnéza:
@@ -28,29 +28,29 @@ Rodinná anamnéza:
 Matka s hypertenzí.
 
 Fyzikální vyšetření:
-Vitalní funkce: T 98,4, TK 132/78, SR 76, FF 16, SpO2 97 % při pokojovém vzduchu
-Celkový stav: Komfortní, bez známek úzkosti
-Hlava, oči, uši, nos, hrdlo: Vlhká sliznice, bez žloutenky
-Krk: Pružný, bez zvětšených lymfatických uzlin
-Plíce: Čisté při poslechu bilaterálně
-Extremity: Pravé lýtko se zlepšujícím se zarudnutím a mírným teplem, minimální otok, bez známek hnisavého obsahu
-Neurologické vyšetření: Při vědomí, orientovaná, pohybuje všemi končetinami
+Vitalní funkce: T 36,9 °C, TK 132/78, TF 76, dechová frekvence 16, SpO2 97 % při dýchání okolním vzduchem
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice, bez známek žloutenky
+Krk: Pohyblivý, bez zvětšených lymfatických uzlin
+Plíce: Při auskultaci oboustranně čisté
+Končetiny: Pravá holeň se zlepšeným zarudnutím a mírným pocitem tepla, minimální otok, bez hmatné fluktuace
+Neurologické vyšetření: Pacientka je při vědomí, orientovaná, pohybuje všemi končetinami
 
 Významné výsledky:
-Laboratorní výsledky k ___: Počet bílých krvinek 13,2 při přijetí, snížil se na 8,1 při propuštění. Hemoglobin 11,4. Kreatinin 1,6, což je její základní hodnota. Draslík 4,3. Glukóza 290 při přijetí, zlepšila se na 150 při propuštění. Laktát 1,1.
-Krevní kultury odebrané k ___ nevykazovaly žádný růst po pěti dnech.
-Ultrazvuk pravé dolní končetiny provedený k ___ nevykazoval hlubokou žilní trombózu a mírný subkutánní otok bez hnisavého obsahu.
+Laboratorní výsledky z ___: počet bílých krvinek 13,2 při přijetí, snížil se na 8,1 při propuštění. Hemoglobin 11,4. Kreatinin 1,6, což odpovídá její výchozí hodnotě. Draslík 4,3. Glukóza 290 při přijetí, zlepšila se na 150 při propuštění. Laktát 1,1.
+Krevní kultury odebrané dne ___ nevykázaly růst po pěti dnech.
+Ultrazvuk pravé dolní končetiny provedený dne ___ neprokázal hlubokou žilní trombózu a pouze mírný podkožní otok bez hmatné kolekce.
 Rentgen hrudníku byl bez patologických nálezů.
 
 Léky při propuštění:
-1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu sedmi dnů
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších sedmi dnů
 2. Amlodipin 5 mg perorálně jednou denně
 3. Atorvastatin 20 mg perorálně večer
-4. Metformin 500 mg perorálně dvakrát denně s jídlem
-5. Paracetamol 650 mg perorálně každých šest hodin dle potřeby na bolest
-Recepty byly probrány s lékárníkem k ___.
+4. Metformin 500 mg perorálně dvakrát denně během jídla
+5. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti
+Recepty byly probrány s farmaceutem dne ___.
 
-Plán po propuštění:
+Plán propuštění:
 Domů s péčí od ___
 
 Diagnóza při propuštění:
@@ -58,13 +58,13 @@ Celulitida pravé dolní končetiny
 Diabetes mellitus
 Chronické onemocnění ledvin
 
-Podmínky propuštění:
-Duševní stav: Jasný a soustředěný.
-Úroveň vědomí: Vnímavý a komunikativní.
-Stupeň aktivity: Chůze, soběstačný.
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Úroveň aktivity: Schopný chůze, soběstačný.
 
 Pokyny pro propuštění:
-Byli jste hospitalizováni kvůli infekci kůže na pravé noze. Dostali jste intravenózní antibiotika a zarudnutí se zlepšilo. Dokončete celou kúru antibiotik, i když se cítíte dobře. Když sedíte, držte nohu ve zvýšené poloze a kontrolujte hladinu cukru v krvi, jak jste to dělali předtím. V případě, že se zarudnutí rozšíří, bolest se zhorší, nebo se objeví horečka nebo zimnice, kontaktujte doktora ___. V případě silného otoku, dušnosti nebo zmatenosti se vraťte do ___. Otázky ohledně vašich léků můžete směřovat do vaší lékárny na ___.
+Byli jste hospitalizováni kvůli kožní infekci pravé nohy. Byla vám podána antibiotika intravenózně a zarudnutí se zlepšilo. Dokončete celou kúru antibiotik, i když se cítíte dobře. Při sezení držte nohu ve zvýšené poloze a kontrolujte si hladinu cukru v krvi, jako jste to dělali dříve. V případě, že se zarudnutí rozšíří, bolest se zhorší, nebo se objeví horečka či zimnice, kontaktujte doktora ___. V případě silného otoku, dušnosti nebo zmatenosti se vraťte do ___. S dotazy ohledně vašich léků se obraťte na vaši lékárnu na čísle ___.
 
-Pokyny pro následnou péči:
+Pokyny pro kontrolu:
 ___

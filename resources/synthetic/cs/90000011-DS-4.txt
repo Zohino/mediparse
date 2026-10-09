@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,19 +9,19 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let se dostavil s třemi dny kašle, horečky a bolesti hrudníku na pravé straně, která se zhoršovala. Byl převezen z ___ poté, co rentgen hrudníku ukázal pneumonii. Popírá palpitace, synkopy nebo fibrilaci síní. Symptomy se začaly objevovat ___ a zhoršovaly se i přes podávání perorálních antibiotik.
+___letý muž se dostavil s třídenní anamnézou kašle, horečky a bolestí na pravé straně hrudníku, která se zhoršuje při dýchání. Byl převezen z ___ poté, co rentgen hrudníku ukázal pneumonii. Popírá palpitace, synkopu nebo fibrilaci síní. Příznaky se objevily ___ a zhoršovaly se i přes užívání perorálních antibiotik.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hyperlipidemie
-Bez anamnézy srdečního selhání
-Lékař: Dr. ___
+Žádná anamnéza srdečního selhání
+Pod dohledem Dr. ___
 
-Chirurgická anamnéza:
+Anamnéza předchozích chirurgických zákroků:
 Apendektomie
 
 Sociální anamnéza:
@@ -31,45 +31,45 @@ Rodinná anamnéza:
 Otec s hypertenzí
 
 Fyzikální vyšetření:
-Životní funkce:
-T 38,1 °C, srdeční frekvence 92 tepů/min, krevní tlak 128/76 mmHg, dechová frekvence 20, saturace kyslíkem 94 % při pokojovém vzduchu
+Vitalní funkce:
+T 38,1, TF 92, TK 128/76, dechová frekvence 20, SpO2 94 % při dýchání okolního vzduchu
 Celkový stav:
 Mírně nemocný vzhled
-Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Hlava, oči, uši, nos, hrdlo:
 Vlhké sliznice
 Krk:
 Pružný
 Neurologické vyšetření:
-Vědomý a orientovaný
+Orientovaný a bdělý
 
 Významné výsledky:
-Počet bílých krvinek 13,2, hemoglobin 14,0, kreatinin 0,9, laktát 1,2. Kultivace krve provedená při přijetí nevykazovala žádný růst po pěti dnech.
-ZOBRAZENÍ:
-Rentgen hrudníku provedený ___ ukazuje konsolidaci v dolním laloku pravé plíce bez výpotku.
+Leukocyty 13,2, hemoglobin 14,0, kreatinin 0,9, laktát 1,2. Krevní kultury odebrané při přijetí nevykazovaly růst po pěti dnech.
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku provedený ___ ukazuje konsolidaci v dolním laloku pravého plíce bez výpotku.
 
 Léky při přijetí:
 Lisinopril 10 mg denně; atorvastatin 20 mg večer.
 
 Léky při propuštění:
-Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů. Pokračujte v užívání lisinoprilu 10 mg denně. Pokračujte v užívání atorvastatinu 20 mg večer. Paracetamol dle potřeby při horečce.
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dalších dnů. Pokračujte v užívání lisinoprilu 10 mg denně. Pokračujte v užívání atorvastatinu 20 mg večer. Paracetamol podle potřeby při horečce.
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 Zařízení:
 ___
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Hypertenze
 
 Stav při propuštění:
-Mentální stav:
-Srozumitelný a koherentní
-Funkční stav:
-Chůze, soběstačný
+Duševní stav:
+Jasný a srozumitelný
+Stav aktivity:
+Chodí, soběstačný
 
-Pokyny při propuštění:
-Byl vám poskytnut léčba pneumonie. Dokončete celý cyklus antibiotik, pijte dostatek tekutin a odpočívejte. V případě zhoršení dušnosti, přetrvávající horečky nebo bolesti hrudníku se vraťte a v případě dotazů volejte ___ .
+Pokyny pro propuštění:
+Byl jste léčen na pneumonii. Dokončete celou kúru antibiotik, pijte dostatek tekutin a odpočívejte. V případě zhoršení dušnosti, přetrvávající horečky nebo bolesti na hrudi se vraťte a v případě dotazů volejte ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

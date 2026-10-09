@@ -1,21 +1,21 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Bušení srdce
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka, ve věku ___ let, se prezentovala s třemi dny trvajícím bušením srdce a závratěmi, které začaly ___. Byla poprvé vyšetřena na ___, poté byla převezena pro další léčbu arytmie. Popřela bolesti na hrudi, synkopy, horečku nebo nedávné onemocnění a uvedla problémy se spánkem.
+Anamnéza současného onemocnění:
+___letá žena se dostavila s potížemi, jako je bušení srdce a závratě, které začaly před ___ dny. Nejprve byla vyšetřena v ___ a poté převezena za účelem další léčby srdečního rytmu. Popírala bolesti na hrudi, synkopu, horečku nebo nedávné onemocnění a uváděla špatný spánek.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Fibrilace síní
 Hypertenze
 Hypotyreóza
@@ -25,59 +25,59 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s mrtvicí. Otec s hypertenzí.
+Matka s cévní mozkovou příhodou. Otec s hypertenzí.
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacientka je v pohodě, bez známek utrpení.
+Dobře se cítí, bez známek úzkosti.
 Krk:
 Pružný.
-Plíce:
-Čisté bilaterálně.
-Břicho:
-Měkké, bez citlivosti.
-Extremity:
+PLÍCE:
+Oboustranně čisté.
+BŘICHO:
+Měkké, netendrovatelné.
+KONČETINY:
 Bez otoků.
-Kůže:
+KŮŽE:
 Teplá, suchá.
-Neurologické vyšetření:
-Orientovaná, bez fokálních příznaků.
+NEUROLOGIE:
+Bdělost, bez ložiskových příznaků.
 
 Významné výsledky:
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Sodík 139, draslík 4.2, kreatinin 0.8, hemoglobin 12.9, TSH normální. Troponin negativní dvakrát.
+VÝSLEDKY VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Sodík 139, draslík 4,2, kreatinin 0,8, hemoglobin 12,9, TSH v normě. Troponin dvakrát negativní.
 ZÁVĚR:
-Echokardiogram z ___ ukázal zachovalou funkci komor, mírné zvětšení levé síně a žádné významné onemocnění chlopní. Rentgen hrudníku nevykazoval akutní proces.
+Echokardiogram z ___ ukázal zachovanou funkci komor, mírné zvětšení levé síně a žádné významné vady chlopní. Rentgen hrudníku neukázal žádný akutní proces.
 
-Průběh hospitalizace:
-Byla přijata na oddělení monitoringu a její srdeční frekvence byla kontrolována pomocí perorálního metoprololu. Antikoagulace byla zahájena po posouzení rizika týmem ___. Její příznaky ustoupily a zvládala chůzi bez obtíží. Byla propuštěna domů ve stabilním stavu třetí den hospitalizace, s naplánovanou kontrolou u kardiologa na ___.
+Stručný popis hospitalizace:
+Byla přijata na oddělení s monitorováním srdečního rytmu a její srdeční frekvence byla kontrolována perorálním metoprololem. Po posouzení rizik týmem ___ byla zahájena antikoagulační léčba. Její příznaky ustoupily a dobře snášela chůzi. Byla propuštěna domů ve stabilizovaném stavu třetí den hospitalizace, s naplánovanou kontrolou u kardiologa v ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
-Levothyroxine 75 mcg denně
+Levotyroxin 75 mcg denně
 
 Léky při propuštění:
-1. Metoprolol succinate 50 mg denně
+1. Metoprolol succinat 50 mg denně
 2. Apixaban 5 mg dvakrát denně
 3. Lisinopril 10 mg denně
-4. Levothyroxine 75 mcg denně
+4. Levotyroxin 75 mcg denně
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
 Fibrilace síní
 
 Stav při propuštění:
-Psychický stav:
-Orientovaná a koherentní.
+Duševní stav:
+Jasný a srozumitelný.
 Úroveň vědomí:
-Orientovaná a komunikativní.
-Funkční stav:
-Chůze, soběstačná.
+Bdělý a reagující.
+Fyzická aktivita:
+Chodí, soběstačný.
 
-Instrukce při propuštění:
-Byla jste hospitalizována kvůli nepravidelnému srdečnímu tepu. Užívajte nové léky přesně podle předpisu, včetně léku na ředění krve. V případě mdloby, bolesti na hrudi, krvácení nebo trvalého zrychleného srdečního tepu se obraťte na lékaře. V případě dotazů volejte ___, nebo kontaktujte ambulanci na ___, pokud zapomenete užít dávku.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli nepravidelnému srdečnímu rytmu. Užívajte nové léky přesně podle předpisu, včetně léku na ředění krve. V případě omdlení, bolesti na hrudi, krvácení nebo trvalého bušení srdce se vraťte. V případě dotazů volejte ___ nebo kontaktujte kliniku na čísle ___, pokud vynecháte dávku.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

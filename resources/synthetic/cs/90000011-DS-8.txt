@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Oddělení: Chirurgie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,16 +9,16 @@ Alergie:
 Hlavní potíže:
 Bolest v pravém dolním kvadrantu břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická appendektomie provedena dne ___
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie provedená v ___
 
 Anamnéza současného onemocnění:
-Pacient se prezentoval s bolestí v pravém dolním kvadrantu břicha, která se zhoršovala již dva dny, dále s nevolností a mírnou horečkou. Bolest začala v blízkosti pupku a postupně se šířila. Byl vyšetřen na ___ dříve v tomto týdnu a poslán domů s analgetiky. Když se příznaky neustaly, vrátil se a CT vyšetření naznačilo zánět slepého střeva. Byl převeden na ___ pod dohledem Dr. ___, kde byl podroben chirurgickému vyšetření.
+Pacient se dostavil s potížemi trvajícími dva dny, projevujícími se zhoršující se bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou. Bolest začala v oblasti pupečníku a postupně se šířila. Dříve v týdnu byl vyšetřen v ___ a propuštěn domů s analgetiky. Když se příznaky nezlepšily, vrátil se a CT vyšetření naznačilo apendicitidu. Byl převezen do ___ pod péči doktora ___ za účelem chirurgického vyšetření.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Možná cukrovka, nikdy formálně neprokázána
-Chirurgická anamnéza: žádná, dříve operace kýly na ___
+Možná cukrovka, nikdy formálně nehodnocena
+Anamnéza operací apendixu: žádná, předchozí operace hernie v ___
 
 Sociální anamnéza:
 ___
@@ -27,45 +27,46 @@ Rodinná anamnéza:
 Otec s hypertenzí
 
 Fyzikální vyšetření:
-Celkový stav: Pacient je nepříjemně, ale je při vědomí, nevykazuje akutní potíže.
-Krk: Pružný, bez zvětšených lymfatických uzlin.
-Břicho: Citlivé v pravém dolním kvadrantu, přítomno napětí svalů, mírné zvětšení objemu.
-KONČETINY: Teplé, bez otoků.
+Celkový stav: Nepohodlný, ale při vědomí, bez akutních potíží
+Krk: Pohyblivý, bez zvětšených lymfatických uzlin
+Břicho: Bolestivé v pravém dolním kvadrantu, přítomna obranná reakce, mírné napětí
+KONČETINY: Teplé, bez otoků
 
 Významné výsledky:
-Laboratorní výsledky při přijetí vykazovaly mírnou leukocytózu s převahou neutrofilů. Ostatní biochemické testy byly v normě. Hladina glukózy byla mírně zvýšená na ___ při příjmu. Vyšetření moči bylo negativní. Opakované krevní testy v den propuštění se zlepšily, odebrány byly na ___.
-ZOBRAZENÍ:
-CT vyšetření břicha a pánve ukázalo rozšířený, zánětlivý apendix s okolním zánětem tukové tkáně a bez abscesu.
+Při přijetí laboratorní testy odhalily mírnou leukocytózu s převahou neutrofilů. Ostatní výsledky chemického panelu byly v normě. Hladina glukózy byla při přijetí mírně zvýšená na ___. Vyšetření moči bylo negativní. Opakované vyšetření krve v den propuštění se zlepšilo, odebráno v ___.
+ZOBRAZOVACÍ METODY:
+CT vyšetření břicha a pánve ukázalo rozšířený, zánětlivý apendix s okolní tukovou infiltrací a bez abscesu.
 
-Průběh hospitalizace:
-Pacient byl přijat na chirurgické oddělení, byl na hladové dietě a zahájena intravenózní antibiotika. Byl operován na operačním sále dne ___ v rámci nekomplikované laparoskopické appendektomie. Po operaci byla bolest kontrolována perorálními léky a pacient zahájil běžnou stravu následující den. Histopatologické výsledky z ___ byly k dispozici v den propuštění. Před odchodem byl vyšetřen Dr. ___, pacient byl schopen samostatné chůze.
-PROBLÉMY PŘECHODU:
-Následná péče v závislosti na výsledcích histologie. Kontrola hladiny glukózy nalačno v ambulanci.
+Stručný průběh hospitalizace:
+Pacient byl přijat na chirurgické oddělení, byl mu nařízen přísný dietní režim a byla mu zahájena intravenózní antibiotická terapie. Byl operován v ___, kde mu byla provedena nekomplikovaná laparoskopická apendektomie. Po operaci byla jeho bolest kontrolována perorálními léky a druhý den začal opět jíst běžnou stravu. Výsledky histologického vyšetření z ___ byly v době propuštění ještě k dispozici. Před odchodem ho vyšetřil doktor ___, pacient se pohyboval samostatně.
+PŘECHODNÁ OTÁZKY:
+Čeká se na výsledky histologického vyšetření. Kontrola hladiny glukózy nalačno v ambulanci.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
-Paracetamol dle potřeby na bolest
+Paracetamol podle potřeby proti bolesti
 
 Léky při propuštění:
-1. Paracetamol 650 mg perorálně každých šest hodin dle potřeby na bolest
-2. Oxykodon 5 mg perorálně každých šest hodin dle potřeby na silnou bolest, krátkodobě
+1. Paracetamol 650 mg perorálně každých šest hodin podle potřeby proti bolesti
+2. Oxykodon 5 mg perorálně každých šest hodin podle potřeby proti silné bolesti, krátkodobá léčba
 3. Lisinopril 10 mg perorálně denně
-4. Docusate 100 mg perorálně dvakrát denně během užívání opioidů
+4. Dokusát 100 mg perorálně dvakrát denně během užívání opioidů
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Hlavní: Akutní zánět slepého střeva
+Primární: Akutní apendicitida
 
 Stav při propuštění:
-Psychický stav: Jasný a srozumitelný
-Úroveň vědomí: Při vědomí a komunikativní
-Funkční stav: Schopen samostatné chůze.
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Při vědomí a reaguje
+Fyzická aktivita: Chodí, samostatný
 
 Pokyny pro propuštění:
-Byli jste hospitalizováni kvůli zánětu slepého střeva a podstoupili jste laparoskopickou operaci. Můžete se osprchovat a nechat na malých řezných ranách stékat mýdlovou vodu, ale nerobte je příliš mokré. Během čtyř týdnů se vyhýbejte zvedání předmětů vážících více než 4,5 kg. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí a výtoku z řezných ran volejte číslo ___ nebo se obraťte na pohotovost. Užívajte léky podle předpisu a tento souhrn si vezměte s sebou k ___.
 
-Pokyny pro kontrolní prohlídku:
+Byli jste hospitalizováni kvůli zánětu slepého střeva a podstoupili jste laparoskopickou operaci. Můžete se sprchovat a nechat na malé jizvy stékat mýdlovou vodu, ale nesmíte je namáčet. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů, než je deset kilogramů. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí a výtoku z jizev volejte na číslo ___ nebo se vraťte na pohotovost. Užívajte léky podle předpisu a vezměte si s sebou tento souhrn do ___.
+
+Pokyny pro kontrolní vyšetření:
 ___

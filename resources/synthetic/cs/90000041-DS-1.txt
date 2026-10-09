@@ -1,82 +1,82 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Bušení srdce a závratě.
+Bušení srdce a závratě
 
-Zásahy:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka se dostavila na oddělení ___ s dvoudenními závratěmi a občasným bušením srdce, které se zhoršovalo při námaze. Byla vyšetřena svým praktickým lékařem na oddělení ___ a odeslána na pohotovost. Při příjmu byly vitální funkce stabilní. Pacientka popírala bolest na hrudi, synkopy (závratě s bezvědomím) nebo dušnost v klidu. Neměla žádné nedávné onemocnění.
-PROHLÍDKA SYSTÉMŮ:
+Anamnéza současného onemocnění:
+Pacientka se dostavila do ___ s dvoudenní anamnézou závratí a občasného bušení srdce, které se zhoršovalo při námaze. Byla vyšetřena svým ošetřujícím lékařem v ___ a odeslána na pohotovost. Při příjezdu byly vitální funkce stabilní. Popírala bolesti na hrudi, synkopu nebo dušnost v klidu. V poslední době neměla žádné jiné onemocnění.
+PŘEHLED SYSTÉMŮ:
 Negativní, s výjimkou výše uvedeného.
 
-Osobní anamnéza:
-Fibrilace síní, diagnostikována na oddělení ___.
-Hypertenze (vysoký krevní tlak).
-Hyperlipidemie (vysoká hladina cholesterolu).
+Anamnéza předchozích onemocnění:
+Fibrilace síní, diagnostikována v ___
+Hypertenze
+Hyperlipidemie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí.
+Matka s hypertenzí
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacientka je v pohodě, bez známek utrpení.
-Hlava, oči, uši, nos, krk (HEENT):
-Vlhké sliznice.
+Dobře se cítí, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo:
+Vlhká sliznice.
 Krk:
 Pružný.
 Plíce:
-Čisté při poslechu na obou stranách.
+Při auskultaci oboustranně čisté.
 Břicho:
-Měkké, bez citlivosti.
-Extremity (končetiny):
+Měkké, netendrové.
+Končetiny:
 Teplé, bez otoků.
 Kůže:
 Teplá a suchá.
 Neurologické vyšetření:
-Vědomá, bez fokálních příznaků.
+Bdělý, bez ložiskových příznaků.
 
 Významné výsledky:
-Laboratorní výsledky při přijetí ukazovaly normální hodnoty elektrolytů a funkce štítné žlázy. Troponin negativní (x2). EKG ukázalo nepravidelný rytmus bez akutních ischemických změn. Telemetrický záznam z oddělení ___ byl zkontrolován. Hladina hemoglobinu byla stabilní.
-ZOBRAZENÍ:
-Rentgen hrudníku pořízen na oddělení ___ bez známek akutního procesu.
+Laboratorní výsledky při přijetí ukazují normální hladinu elektrolytů a funkci štítné žlázy. Troponin negativní (dvě měření). EKG ukázalo nepravidelný rytmus bez akutních ischemických změn. Telemetrie v ___ byla zkontrolována. Hladina hemoglobinu byla stabilní.
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku provedený v ___ nevykazuje žádný akutní proces.
 ZÁVĚR:
-Žádná pneumonie (zápal plic) nebo efúze (tekutina v dutině). Echokardiogram ukázal zachovalou ejekční frakci (sílu srdečního svalu) a normální chlopně.
+Žádná pneumonie ani výpotek. Echokardiogram ukázal zachovanou ejekční frakci a normální chlopně.
 
-Průběh hospitalizace:
-Pacientka byla přijata na oddělení telemetrie a zahájena byla kontrola srdeční frekvence s dobrým účinkem. S pacientkou byla prodiskutována antikoagulace (léčba krevní sraženinami) a zahájena po konzultaci s ___. Pacientka zůstala hemodynamicky stabilní a její příznaky ustoupily. Kardiolog ji vyšetřil a zajistil ambulantní monitorování rytmu přes ___. Byla propuštěna domů ve stabilním stavu.
-PROBLÉMY PŘECHODU:
-Potvrdit kontrolu srdeční frekvence a toleranci antikoagulace při kontrolní prohlídce.
+Stručný průběh hospitalizace:
+Pacientka byla přijata na telemetrické oddělení a byla zahájena léčba ke kontrole srdeční frekvence s dobrým účinkem. Antikoagulační léčba byla s ní prodiskutována a po konzultaci s ___ byla zahájena. Zůstala hemodynamicky stabilní a její příznaky ustoupily. Kardiolog ji vyšetřil a zajistil ambulantní monitorování srdečního rytmu prostřednictvím ___. Byla propuštěna domů ve stabilním stavu.
+PŘECHODNÁ OTÁZKY:
+Při kontrolní návštěvě potvrdit toleranci léčby ke kontrole srdeční frekvence a antikoagulační léčby.
 
 Léky při přijetí:
 Metoprolol tartrát dvakrát denně. Lisinopril denně. Atorvastatin večer. Aspirin denně.
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Fibrilace síní.
+Fibrilace síní
 
 Stav při propuštění:
-Dobrý.
-Psychický stav:
-Orientovaná a srozumitelná.
-Funkční stav:
-Chůze a soběstačnost.
+Dobrý
+Duševní stav:
+Jasný a srozumitelný.
+Fyzická aktivita:
+Schopná chůze a soběstačná.
 
-Pokyny při propuštění:
-Byla jste hospitalizována kvůli rychlému a nepravidelnému srdečnímu tepu. Užívajte nové léky podle předpisu a nepřestávejte je užívat. V případě bolesti na hrudi, mdloby nebo krvácení se obraťte na lékaře. Dodržujte termín kontrolní prohlídky u ___. Odpočívejte podle potřeby.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli rychlému a nepravidelnému srdečnímu tepu. Užívajte nové léky podle předpisu a nepřestávejte je užívat. V případě bolesti na hrudi, mdlob nebo krvácení se vraťte. Dodržujte termín kontroly u ___. Odpočívejte podle potřeby.
 
-Pokyny pro další péči:
+Pokyny pro kontrolní návštěvu:
 ___

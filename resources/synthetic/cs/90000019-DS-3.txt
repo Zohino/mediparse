@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,15 +9,15 @@ Alergie:
 Hlavní potíže:
 Otok a zarudnutí pravé nohy
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let se dostavil s třidenním otokem a zarudnutím pravé dolní končetiny po drobném odření na místě ___. Při příjmu neměl horečku a byl vyšetřen na pohotovosti v ___ před přijetím do nemocnice.
+___letý muž se dostavil s třídenním otokem a zarudnutím pravé dolní končetiny po drobném oděru na ___. Při příjezdu neměl horečku a byl vyšetřen na pohotovosti v ___ před přijetím.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Sezónní alergie
 
 Sociální anamnéza:
@@ -27,29 +27,29 @@ Rodinná anamnéza:
 Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
-Celkový stav: Pacient je v pohodě, bez známek utrpení.
-Hlava, oči, uši, nos, hrdlo: Bez zvláštností.
-Plíce: Čisté bilaterálně.
-Extremity: Pravá lýtko je teplé, mírně otoklé.
-Kůže: Zarudnutí na pravé holeně.
-Pulzy: Palpovatelné a symetrické.
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Bez významných nálezů
+Plíce: Čisté na obou stranách
+Končetiny: Pravé lýtko teplé, mírně oteklé
+Kůže: Erytém na pravé holeni
+Pulz: Hmatný a symetrický
 
 Významné výsledky:
-Počet bílých krvinek mírně zvýšen při příjmu, normalizoval se při propuštění. Kreatinin v normě. Kultivace krve nevykazovala žádný růst.
-Zobrazovací metody:
-Duplexní sonografie pravé nohy neprokázala hlubokou žilní trombózu.
+Při příjezdu mírně zvýšený počet bílých krvinek, při propuštění se normalizoval. Kreatinin v normálních mezích. Kultivace krve nevykázala růst.
+ZOBRAZOVACÍ METODY:
+Venózní duplexní vyšetření pravé nohy neprokázalo hlubokou žilní trombózu.
 
-Průběh hospitalizace:
-Pacient byl léčen pro celulitidu pravé nohy intravenózními antibiotiky, poté byla léčba převedena na perorální formy, jakmile zarudnutí ustoupilo. Hladina glukózy byla normální a nebyly zjištěny žádné známky diabetu. Péče o ránu byla konzultována s ošetřovatelským personálem v ___ a ___.
+Stručný popis hospitalizace:
+Léčen pro celulitidu pravé nohy intravenózními antibiotiky, poté převeden na perorální terapii, jakmile zarudnutí ustoupilo. Hladina glukózy byla normální a nebyly zjištěny známky diabetu. Péče o ránu byla probrána s ošetřujícím personálem na ___ a ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
 Atorvastatin 20 mg večer
 
 Léky při propuštění:
-Cephalexin 500 mg čtyřikrát denně po dobu sedmi dnů. Pokračujte v užívání lisinoprilu a atorvastatinu ve stejné dávce. Acetaminophen dle potřeby na bolest, dle pokynů lékárny v ___.
+Cefalexin 500 mg čtyřikrát denně po dobu dalších sedmi dnů. Pokračujte v užívání lisinoprilu a atorvastatinu beze změn. Paracetamol podle potřeby proti bolesti, dle pokynů lékárny na ___.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -57,9 +57,9 @@ Celulitida pravé nohy
 Hypertenze
 
 Stav při propuštění:
-Mentální stav: Pacient je při vědomí, orientovaný, s jasným myšlením.
-Úroveň vědomí: Plně při vědomí a pozorný.
-Funkční stav: Chůze samostatná.
+Duševní stav: Bdělý a orientovaný, jasné myšlení.
+Úroveň vědomí: Plně bdělý a pozorný.
+Stav aktivity: Chodí samostatně.
 
 Pokyny při propuštění:
-Byl vám poskytnut lék na kožní infekci nohy. Užívajte antibiotika podle předpisu, udržujte nohu ve zvýšené poloze a v případě horečky, rozšíření zarudnutí nebo zhoršení bolesti se vraťte. Následná kontrola u ___.
+Byl jste léčen pro kožní infekci nohy. Užijte antibiotika podle předpisu, udržujte nohu ve zvýšené poloze a v případě horečky, šíření zarudnutí nebo zhoršení bolesti se vraťte. Navštivte ___.

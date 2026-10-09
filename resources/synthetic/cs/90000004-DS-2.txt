@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,16 +9,16 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž s chronickým onemocněním ledvin se dostavil s třemi dny kašle a horečky po návštěvě ___, přičemž se zhoršila dušnost a snížil se příjem potravy.
+Muž s chronickým onemocněním ledvin se dostavil s třídenní anamnézou kašle a horečky po návštěvě ___, s postupně se zhoršující dušností a špatným příjmem potravy.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
-Vzdálená appendektomie (operace slepého střeva) v ___
+Hyperlipidémie
+Starší apendektomie v ___
 
 Sociální anamnéza:
 ___
@@ -28,48 +28,48 @@ Bez významných údajů
 
 Fyzikální vyšetření:
 Celkový stav:
-Vědomý, v pohodě.
-Hlava, oči, uši, nos, krk:
+Příjemný, bdělý.
+Hlava, oči, uši, nos, hrdlo:
 Vlhké sliznice.
-EXTREMITY (končetiny):
+Končetiny:
 Bez otoků.
-KŮŽE:
+Kůže:
 Teplá, suchá.
 
 Významné výsledky:
-Rentgen hrudníku ukázal ztmavení v dolní části pravého plíce. Počet bílých krvinek byl mírně zvýšen při přijetí a normalizoval se při propuštění. Kultivace krve nevykazovala žádný růst. Kreatinin zůstal na základní úrovni.
+Rentgen hrudníku ukázal opacitu v dolním laloku pravého plíce. Počet bílých krvinek byl při přijetí mírně zvýšený a při propuštění se normalizoval. Kultivace krve nevykázala žádný růst. Hladina kreatininu zůstala na výchozí úrovni.
 
-Průběh hospitalizace:
-Léčba pneumonie získané v komunitě pomocí ceftriaxonu a azithromycinu, následně převedení na perorální antibiotika. Podávání kyslíku bylo postupně snižováno. Pacienta vyšetřil ___ a po konzultaci byl propuštěn domů s podporou ___.
-PROBLÉMY PŘECHODU:
+Stručný popis hospitalizace:
+Léčen pro komunitně získanou pneumonii pomocí ceftriaxonu a azithromycinu, poté převeden na perorální antibiotika. Podávání kyslíku bylo postupně snižováno, dokud pacient nemohl dýchat běžný vzduch. Vyšetřen ___ a propuštěn domů s doporučením ___.
+PŘECHODNÁ OTÁZKY:
 Opakované zobrazovací vyšetření hrudníku za šest týdnů.
 
 Léky při přijetí:
 Lisinopril, atorvastatin
 
 Léky při propuštění:
-1. Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů.
+1. Amoxicillin-klavulanát dvakrát denně po dobu dalších pěti dnů.
 2. Atorvastatin denně.
 3. Lisinopril denně.
 
-Plán po propuštění:
-Domů s péčí
+Způsob propuštění:
+Domů s doprovodnou péčí
 Zařízení: ___
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Diabetes mellitus
 
 Stav při propuštění:
-Psychický stav:
-Vědomý a koherentní.
+Duševní stav:
+Jasný a srozumitelný.
 Úroveň vědomí:
-Vědomý a komunikativní.
-Úroveň aktivity:
-Chůze, soběstačný.
+Bdělý a reagující.
+Stav aktivity:
+Chodící, soběstačný.
 
-Pokyny při propuštění:
-Byl vám léčen zápal plic. Dokončete užívání antibiotik, pijte dostatek tekutin, odpočívejte a v případě zhoršení dýchání se obraťte na pohotovost. V případě dotazů volejte ___.
+Pokyny pro propuštění:
+Byl jste léčen na pneumonii. Dokončete užívání antibiotik, pijte dostatek tekutin, odpočívejte a v případě zhoršení dýchání se vraťte na pohotovost. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

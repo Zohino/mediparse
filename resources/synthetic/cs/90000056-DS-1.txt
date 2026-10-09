@@ -1,48 +1,48 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
-Zásah:
+Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-Pacientka, ve věku ___ let, se dostavila na oddělení ___ s třemi dny trvajícími potížemi jako nevolnost, zvracení a snížený příjem potravy, následované sníženým množstvím moči a závratěmi. Byla vyšetřena jejím ošetřujícím lékařem dne ___ a ten ji poslal na pohotovost. Nebyla hlášena horečka, bolest na hrudi ani zranění břicha.
+___letá žena se dostavila do ___ s třídenní anamnézou nevolnosti, zvracení a špatného příjmu potravy, následovanou snížením objemu moči a závratěmi. Byla vyšetřena svým ošetřujícím lékařem dne ___, který ji odeslal na pohotovost. Nebyla hlášena horečka, bolest na hrudi ani trauma břicha.
 
-Anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Osteoartróza
-Chirurgická operace žlučníku (cholecystektomie) provedená dne ___
+Cholecystektomie v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Bez významných údajů.
+Bez významných údajů
 
 Fyzikální vyšetření:
-Celkový stav: Pacientka je při vědomí, mírně suché sliznice, bez známek utrpení.
-Krk: Pružný, bez jícnové dilatace.
-Břicho: Měkké, bez citlivosti, nenabobtnalé, normální zvuky střev.
-Extremity: Teplé, bez otoků.
+Celkový stav: Bdělá, mírně suché sliznice, bez známek úzkosti.
+Krk: Pružný, bez známek zvýšeného žilního tlaku.
+Břicho: Měkké, netendrové, neztuhlé, normální střevní zvuky.
+Končetiny: Teplé, bez otoků.
 
 Významné výsledky:
-Kreatinin při přijetí byl zvýšený nad základní hodnotu a do propuštění se zlepšil téměř na základní hodnotu. Draslík a bikarbonát byly při propuštění v normě. Analýza moči bez patologických nálezů. Glukóza byla při přijetí zvýšená. Opakovaná laboratorní vyšetření provedená dne ___ byla stabilní.
-ZOBRAZENÍ:
-Ultrazvuk ledvin bez hydronefrózy. Rentgen hrudníku bez patologických nálezů, interpretován dne ___.
+Při přijetí byl zvýšený kreatinin oproti výchozí hodnotě, ale do propuštění se zlepšil téměř na výchozí hodnotu. Draslík a bikarbonát byly při propuštění v normě. Vyšetření moči bez patologických nálezů. Glukóza zvýšená při laboratorních testech při přijetí. Opakované laboratorní testy provedeny dne ___, výsledky stabilní.
+ZOBRAZOVACÍ METODY:
+Ultrazvuk ledvin bez hydronefrózy. Rentgen hrudníku bez patologických nálezů, vyhodnoceno dne ___.
 
-Průběh hospitalizace:
-AKI (akutní poškození ledvin) byla způsobena dehydratací v důsledku zvracení, v kombinaci s užíváním lisinoprilu a ibuprofenu doma. Oba léky byly vysazeny a pacientka dostávala intravenózní tekutiny, což vedlo k postupnému zlepšení hodnot kreatininu. Antiemetika zmírnila nevolnost a pacientka tolerovala běžnou stravu. Množství moči se normalizovalo. Lisinopril bude znovu zahájen dne ___ po opakovaných laboratorních vyšetřeních. Pacientka byla konzultována týmem ___ a ti souhlasili s navrženým postupem.
+Stručný popis hospitalizace:
+Akutní poškození ledvin bylo přičítáno dehydrataci způsobené zvracením v kombinaci s užíváním lisinoprilu a ibuprofenu doma. Oba léky byly vysazeny a pacientka dostávala intravenózní tekutiny, což vedlo ke zlepšení kreatininu. Antiemetika potlačila nevolnost a pacientka dobře snášela běžnou stravu. Objem moči se normalizoval. Lisinopril má být znovu nasazen po opakovaných laboratorních testech dne ___. Pacientka byla vyšetřena týmem ___, který souhlasil s plánem.
 
 Léky při propuštění:
-Amlodipin 5 mg denně. Atorvastatin 20 mg večer. Metformin 500 mg dvakrát denně při jídle. Paracetamol dle potřeby na bolest. Lisinopril a ibuprofen vysazeny do další kontroly.
+Amlodipin 5 mg denně. Atorvastatin 20 mg večer. Metformin 500 mg dvakrát denně s jídlem. Paracetamol podle potřeby proti bolesti. Vysadit lisinopril a ibuprofen do další kontroly.
 
-Plán po propuštění:
-Domů.
+Plán propuštění:
+Domů
 
 Diagnóza při propuštění:
 Diabetes mellitus 2. typu
@@ -50,11 +50,11 @@ Dehydratace
 
 Stav při propuštění:
 Stabilní.
-Úroveň vědomí: Při vědomí a orientovaná.
-Funkční stav: Chůze, soběstačná.
+Úroveň vědomí: Bdělá a orientovaná.
+Stav aktivity: Chodí, soběstačná.
 
-Instrukce při propuštění:
-Byla jste hospitalizována, protože dehydratace ovlivnila vaše ledviny. Pijte dostatek tekutin, vyhýbejte se ibuprofenu a neužívejte lisinopril, dokud vám nebude řečeno, že jej můžete znovu užívat. V případě mdloby, trvalého zvracení nebo velmi malého množství moči se vraťte. V případě dotazů volejte na číslo ___.
+Pokyny pro propuštění:
+Byli jste hospitalizováni, protože dehydratace ovlivnila vaše ledviny. Pijte dostatek tekutin, vyhýbejte se ibuprofenu a neužívejte lisinopril, dokud vám nebude řečeno, že ho můžete znovu začít užívat. Vraťte se, pokud omdlíte, máte trvalé zvracení nebo produkujete velmi málo moči. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro další postup:
 ___

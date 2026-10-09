@@ -1,23 +1,23 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Vřed na noze a horečka
+Poranění nohy a horečka
 
-Hlavní chirurgický zákrok nebo invazivní procedura:
-Ošetření vředu přímo na lůžku
+Významný chirurgický zákrok nebo invazivní procedura:
+Ošetření rány u lůžka
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let byl převezen z ambulance ___ s rozšiřujícím se vředem na noze, zimnicemi a sníženou chutí k jídlu po dobu tří dnů. Hladina cukru v krvi byla doma zvýšená. Byl léčen antibiotiky a péčí o ránu na oddělení.
+___letý muž odeslán z ___ kliniky s šířící se vředovou lézí na noze, zimnicí a sníženou chutí k jídlu po dobu tří dnů. Hodnoty cukru v krvi doma byly vysoké. Léčen antibiotiky a ošetřováním rány na oddělení.
 
-Osobní anamnéza:
-Diabetes mellitus, diagnostikován v roce ___
-Hypertenze (vysoký krevní tlak)
+Anamnéza předchozích onemocnění:
+Diabetes mellitus, diagnostikován v ___
+Hypertenze
 Vysoká hladina cholesterolu
 
 Sociální anamnéza:
@@ -27,20 +27,20 @@ Rodinná anamnéza:
 Otec s vysokým krevním tlakem; matka zdravá, sourozenec léčen v ___
 
 Fyzikální vyšetření:
-Fyzikální vyšetření při přijetí:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
 Celkový stav:
-Unavený, v klidu v pohodě
+Unavený, v klidu se cítí dobře
 Plíce:
-Čisté na obou stranách
+Oboustranně čisté
 Břicho:
-Měkké, bez citlivosti
+Měkké, netendrovatelné
 KŮŽE:
-Vřed na plantární straně pravé nohy s okolní zarudlostí
+Vřed na pravé plosce nohy s okolní zarudlostí
 Neurologické vyšetření:
-Vědomý, orientovaný, bez neurologických deficitů
+Bdělý, orientovaný, bez neurologických deficitů
 
 Významné výsledky:
-Dne ___ byl počet bílých krvinek mírně zvýšen, hladina glukózy 280, kreatinin normální. Rentgen nohy ukázal otok měkkých tkání bez postižení kostí. Kultivace vředu prokázala přítomnost bakterií běžných pro kůži, které jsou citlivé na cefalexin.
+Dne ___ mírně zvýšený počet bílých krvinek, glukóza 280, kreatinin v normě. Rentgen nohy ukázal otok měkkých tkání bez postižení kosti. Kultivace rány prokázala přítomnost kožní flóry citlivé na cefalexin.
 
 Léky při přijetí:
 Metformin, lisinopril, atorvastatin
@@ -51,18 +51,18 @@ Léky při propuštění:
 3. Lisinopril 10 mg denně
 4. Atorvastatin 20 mg večer
 
-Plán po propuštění:
-Domů s péčí
+Plán propuštění:
+Domů s domácí péčí
 Zařízení: ___
 
 Diagnóza při propuštění:
-Diabetický vřed na noze s celulitidou (zánětem kůže)
+Diabetický vřed na noze s celulitidou
 
 Stav při propuštění:
-Stabilní, vědomý, pohyblivý s obuví, která snižuje zátěž na nohu
+Stabilní, bdělý, chodí s ortopedickou obuví
 
-Pokyny při propuštění:
-Byl vám poskytnut lék na infekční vřed na noze. Udržujte obvaz čistý a suchý, vyhýbejte se chůzi naboso, kontrolujte hladinu cukru v krvi denně, dokončete veškeré antibiotické léky a volejte číslo ___ v případě horečky nebo zhoršení zarudnutí.
+Pokyny pro propuštění:
+Byl jste léčen na infikovaný vřed na noze. Udržujte obvaz čistý a suchý, vyhýbejte se chůzi naboso, denně si kontrolujte hladinu cukru v krvi, dokončete veškerou antibiotickou léčbu a v případě horečky nebo zhoršení zarudnutí volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Oddělení: Chirurgie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky.
@@ -9,15 +9,15 @@ Alergie:
 Hlavní potíže:
 Bolest v pravém dolním kvadrantu břicha.
 
-Hlavní chirurgický zákrok:
-Laparoskopická appendektomie (odstranění slepého střeva).
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie.
 
 Anamnéza současného onemocnění:
-Pacient je muž, který se dostavil na oddělení ___ s bolestí v pravém dolním kvadrantu břicha, která se zhoršovala již dva dny, s nevolností a mírnou horečkou. Symptomy se začaly objevovat po jídle v ___. Pacient popíral zvracení krve nebo změny v stolici. Zobrazovací vyšetření ukázala zánět slepého střeva a pacient byl odeslán do operačního sálu lékařem ___.
+Pacient, muž, se dostavil do ___ s potížemi, které trvaly dva dny a projevovaly se zhoršující se bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou. Příznaky se objevily po jídle v ___. Pacient popíral zvracení krve nebo změny ve vyprazdňování. Zobrazovací vyšetření ukázala zánět slepého střeva a pacient byl převezen na operační sál doktorem ___.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak).
-Tonsilektomie (odstranění mandlí) v ___.
+Anamnéza předchozích onemocnění:
+Hypertenze.
+Tonzilektomie v ___.
 
 Sociální anamnéza:
 ___
@@ -27,41 +27,41 @@ Otec s hypertenzí.
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacient je v pohodě, při vědomí, bez akutních potíží.
-Plíce:
-Čisté při poslechu na obou stranách.
-Břicho:
-Měkké, mírně citlivé v oblasti jizev, bez známek napětí, rány čisté a suché.
-Končetiny:
+Dobře se cítí, je při vědomí, bez akutních potíží.
+PLÍCE:
+Při auskultaci oboustranně čisté.
+BŘICHO:
+Měkké, mírně citlivé v místech vpichů, neztuhlé, incize čisté a suché.
+KONČETINY:
 Teplé, bez otoků.
 
 Významné výsledky:
 NÁLEZY:
-Laboratorní vyšetření provedená dne ___ ukázala mírnou leukocytózu (zvýšený počet bílých krvinek), která se po operaci normalizovala. CT vyšetření břicha a pánve provedené dne ___ prokázalo dilatovaný (roztažený) a ztluštělý slepý střevo s okolním zánětem tukové tkáně a bez abscesu nebo volného vzduchu. Histologické vyšetření vzorku, posouzené ___ , ukázalo akutní appendicitidu (zánět slepého střeva) bez známek malignity (zhoubných nádorů). Enzymy jater, kreatinin a elektrolyty byly v normálních hodnotách.
+Laboratorní vyšetření provedená dne ___ ukázala mírnou leukocytózu, která se po operaci normalizovala. CT vyšetření břicha a pánve provedené dne ___ prokázalo rozšířené, ztluštělé slepé střevo s okolní tukovou infiltrací, bez abscesu nebo volného vzduchu. Patologické vyšetření vzorku, které provedl ___, prokázalo akutní apendicitidu bez malignity. Jaterní enzymy, kreatinin a elektrolyty byly v normálních mezích.
 
 Léky při přijetí:
-Lisinopril 10 mg perorálně jednou denně. Žádné další pravidelné léky.
+Lisinopril 10 mg perorálně denně. Žádné další pravidelně užívané léky.
 
 Léky při propuštění:
-1. Acetaminophen 650 mg perorálně každých šest hodin dle potřeby na bolest.
-2. Oxykodon 5 mg perorálně každých šest hodin dle potřeby na silnou bolest.
-3. Lisinopril 10 mg perorálně jednou denně.
-4. Docusate 100 mg dvakrát denně.
+1. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti.
+2. Oxykodon 5 mg perorálně každých šest hodin podle potřeby proti silné bolesti.
+3. Lisinopril 10 mg perorálně denně.
+4. Dokusát 100 mg dvakrát denně.
 
-Plán po propuštění:
-Domů.
+Způsob propuštění:
+Domů
 
 Diagnóza při propuštění:
-Akutní appendicitida (zánět slepého střeva).
+Akutní apendicitida
 
 Stav při propuštění:
-Psychický stav:
-Orientovaný a koherentní.
+Duševní stav:
+Jasný a srozumitelný.
 Úroveň vědomí:
-Přítomný a komunikativní.
+Při vědomí a komunikativní.
 
-Pokyny při propuštění:
-Byl vám proveden laparoskopický zákrok k odstranění zánětu slepého střeva. Udržujte rány čisté a suché a vyhýbejte se zvedání předmětů o hmotnosti více než 4,5 kg po dobu čtyř týdnů. V případě horečky, zhoršující se bolesti břicha, opakovaného zvracení nebo zarudnutí rány se obraťte na lékaře. Následujte pokyny lékaře ___.
+Pokyny pro propuštění:
+Byl jste léčen pro zánět slepého střeva laparoskopickou operací. Udržujte incize čisté a suché a vyhýbejte se zvedání těžších předmětů než 10 liber (cca 4,5 kg) po dobu čtyř týdnů. V případě horečky, zhoršující se bolesti břicha, opakovaného zvracení nebo zarudnutí rány se vraťte. Navštivte doktora ___.
 
 Pokyny pro kontrolní vyšetření:
 ___

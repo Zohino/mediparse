@@ -1,25 +1,25 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
-Hlavní potíž:
-Vřed na noze s otokem
+Hlavní potíže:
+Poranění nohy s otokem
 
-Zásahné chirurgické zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž převezen z kliniky ___ s zhoršujícím se vředem na levé noze a zarudnutím.
+Pacient odeslán z kliniky ___ s postupně se zhoršujícím poraněním levé nohy a zarudnutím.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus
 Hypertenze
 
-Chirurgická anamnéza:
+Anamnéza předchozích chirurgických zákroků:
 Apendektomie
 
 Rodinná anamnéza:
@@ -27,47 +27,47 @@ Matka s vysokým krevním tlakem
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacient je v pohodě, bez známek utrpení.
-Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Dobře se cítí, bez známek úzkosti
+Hlava, uši, oči, nos, hrdlo:
 Normální
-Extremity:
+Končetiny:
 Vřed na levé noze
-PULZY:
-Hmatné na obou stranách
+PULSY:
+Hmatatelné na obou stranách
 
-Relevantní výsledky:
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Hladina glukózy a počet bílých krvinek téměř normální
+Významné výsledky:
+VÝSLEDKY LABORATORNÍCH TESTŮ PŘED PROPUŠTĚNÍM:
+Hladina glukózy a počet bílých krvinek blízký normě
 ZÁVĚR:
-Na rentgenovém snímku nohy nejsou patrné známky postižení kosti ___
+Na rentgenovém snímku nohy nejsou patrné žádné změny na kostech ___
 
-Stručný průběh hospitalizace:
-Pacient byl léčen antibiotiky a péčí o ránu kvůli infekci nohy. Hladina glukózy byla kontrolována pomocí inzulínu. Zlepšil se a byl propuštěn domů s plánovanou kontrolou u ___ .
+Stručný popis hospitalizace:
+Léčen antibiotiky a ošetřováním rány v důsledku infekce nohy. Hladina glukózy byla regulována inzulínem. Jeho stav se zlepšil a byl propuštěn domů s doporučením další kontroly ___.
 
 Léky při přijetí:
 Metformin
 Lisinopril
 
 Léky při propuštění:
-Amoxicilin-klavulanát dvakrát denně, metformin, lisinopril, obvazové materiály
+Amoxicilin-klavulanát dvakrát denně, metformin, lisinopril, obvazový materiál
 
-Plán po propuštění:
-Domů s péčí
+Způsob propuštění:
+Domů s doporučenou péčí
 
 Diagnóza při propuštění:
 Diabetes
 Infekce nohy
 
 Stav při propuštění:
-Psychický stav:
-Orientovaný a při vědomí
+Duševní stav:
+Bdělý a orientovaný
 Úroveň vědomí:
-Probudený a pozorný
-Funkční stav:
-Chůze s ortopedickou obuví, která snižuje zátěž na nohu
+Probuzený a pozorný
+Fyzická aktivita:
+Chodí s ortopedickou obuví, která odlehčuje noze
 
-Pokyny při propuštění:
-Udržujte obvaz čistý, užívejte antibiotika podle pokynů, kontrolujte nohy a hladinu cukru denně.
+Pokyny pro propuštěného pacienta:
+Udržujte obvaz v čistotě, užívejte antibiotika podle předpisu, denně kontrolujte nohy a hladinu cukru v krvi.
 
-Pokyny pro další péči:
+Pokyny pro další kontrolu:
 ___

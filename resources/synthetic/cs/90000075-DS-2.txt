@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,15 +9,15 @@ Alergie:
 Hlavní potíže:
 Zhoršující se otok nohou a dušnost
 
-Zásahové zákroky:
+Významné chirurgické zákroky nebo invazivní procedury:
 Žádné
 
 Anamnéza současného onemocnění:
-Pacientka byla odeslá od ___ s postupujícím otokem kotníků trvajícím dva týdny, ortopneí (dušností v leže) a přibíráním na váze. Po nedávném přestěhování vynechala několik dávek svého diuretika. Byla vyšetřena v ___ a odeslána k vyšetření kvůli přetížení tekutinami.
+Pacientka odeslána od ___ s dvoutýdenní progresivní otokem kotníku, ortopnoí a přibýváním na váze. Po nedávném stěhování vynechala několik dávek diuretika. Vyšetřena v ___ a odeslána na vyšetření kvůli přetížení objemem tekutin.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
 Obezita
 
 Sociální anamnéza:
@@ -28,49 +28,49 @@ Matka s hypertenzí
 
 Fyzikální vyšetření:
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
-Bez horečky, mírně zrychlené dýchání, zvýšený tlak na jugulárních žilách, chrůpky v obou plicních bázích, edém (otek) až po kolena.
+Bez horečky, mírně zrychlené dýchání, zvýšený žilní tlak na krku, oboustranné chrůpky v plicích, otok dolních končetin až ke kolenům.
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
-Pacientka v klidu, dýchání normální, plíce čistší, minimální otok kotníků.
-ORL: Vlhké sliznice
-Krk: JVP (tlak na jugulárních žilách) nižší než při přijetí
-PLÍCE: Slabé chrůpky v plicních bázích
-BŘÍCHO: Měkké, bezbolestné
-EXTREMITY (končetiny): Minimální otok
+Dobře se cítí, dýchá bez problémů, plíce jsou čistší, mírný otok kotníku.
+HLAVA, OČI, UŠI, NOS, KRK: Vlhké sliznice
+KRK: Žilní tlak na krku nižší než při přijetí
+PLÍCE: Slabé chrůpky v dolních částech plic
+BŘICHO: Měkké, netendrovatelné
+KONČETINY: Mírný otok
 KŮŽE: Teplá, suchá
-NEUROLOGIE: Při vědomí, bez fokálních příznaků
+NEUROLOGIE: Bdělá, bez ložiskových příznaků
 
 Významné výsledky:
-BNP (biochemický marker) výrazně zvýšený. Kreatinin mírně nad základní hodnotu, zlepšující se s léčbou. Draslík normální. Hemoglobin A1c zvýšený, probráno s ambulantním týmem v ___.
+BNP výrazně zvýšené. Kreatinin mírně nad výchozí hodnotou, zlepšuje se po léčbě. Draslík v normě. Hemoglobin A1c zvýšený, probráno s ambulantním týmem v ___.
 NÁLEZY:
-Rentgen hrudníku ukázal zvětšení srdce, plicní vaskulární kongesci (ucpání cév) a malé bilaterální pleurální výpotky (tekutina v plicní dutině). Echokardiogram ukázal sníženou ejekční frakci (sílu stahování srdce).
+Rentgen hrudníku ukázal kardiomegalii, plicní vaskulární kongesci a malé oboustranné pleurální výpotky. Echokardiogram ukázal snížený ejekční objem.
 
-Průběh hospitalizace:
-Pacientce byla podávána intravenózní furosemid (diuretikum) s dobrým diurézou (výtok moči) a zhubla několik kilogramů. Elektrolyty byly doplněny a kreatinin zůstal stabilní. Její domácí léčba byla upravena a pokračovalo se v podávání beta-blokátoru. Informace o denním vážení a omezení sodíku jí poskytla ___. Kardiologové v ___ ji budou sledovat a ___ zajistili domácí ošetřovatelství.
+Stručný průběh hospitalizace:
+Pacientka dostávala intravenózně furosemid s dobrým diurézním účinkem a zhubla několik kilogramů. Elektrolyty byly doplněny a kreatinin zůstal stabilní. Její domácí režim byl upraven a pokračovala v užívání beta-blokátoru. Byla poučena o denním vážení a omezení příjmu sodíku, poučení provedl ___. Kardiolog v ___ ji vyšetří a ___ zajistí domácí ošetřovatelskou péči.
 
 Léky při přijetí:
 Furosemid, lisinopril, metformin, atorvastatin
 
 Léky při propuštění:
 1. Furosemid 40 mg perorálně dvakrát denně
-2. Metoprolol succinate 50 mg denně
+2. Metoprolol succinat 50 mg denně
 3. Lisinopril 5 mg denně
 4. Metformin 500 mg dvakrát denně
 5. Atorvastatin 40 mg večer
 
-Plán po propuštění:
+Plán propuštění:
 Domů s péčí od ___
 
 Diagnóza při propuštění:
-Diabetes mellitus (cukrovka)
+Diabetes mellitus
 Chronické onemocnění ledvin
 
 Stav při propuštění:
-Psychický stav: Jasný a srozumitelný
-Úroveň vědomí: Při vědomí a komunikativní
-Funkční stav: Chůze samostatná
+Mentální stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a reaguje
+Aktivita: Chodí, soběstačná
 
-Instrukce při propuštění:
-Byla přijata kvůli zadržování tekutin. Každé ráno se vážte a volejte ___, pokud přiberete více než 2 kilogramy za den. Omezte příjem soli a tekutin podle pokynů, užívejte všechny léky denně a v případě zhoršení dušnosti se vraťte. V případě dotazů kontaktujte ___.
+Pokyny pro propuštění:
+Byla jste přijata kvůli zadržování tekutin. Každé ráno se važte a volejte ___, pokud přiberete více než dva kilogramy za den. Omezte příjem soli a tekutin podle pokynů, užívejte všechny léky denně a vraťte se, pokud se vám zhorší dušnost. V případě dotazů se obraťte na ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

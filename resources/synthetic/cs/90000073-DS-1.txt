@@ -1,89 +1,89 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Oddělení: CHIRURGIE
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Bolest v pravém horním kvadrantu břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická cholecystektomie (odstranění žlučníku) dne ___
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie dne ___
 
 Anamnéza současného onemocnění:
-Pacientka se dostavila na oddělení ___ s bolestí v pravém horním kvadrantu břicha, která se zhoršovala již dva dny, a také s nevolností a zvracením po konzumaci tučného jídla. Bolest se šířila do zad a nezmírňovala se běžnými léky proti bolesti. Pacientka uváděla mírné horečky. Byla vyšetřena svým praktickým lékařem dne ___ a odeslána na pohotovost, kde zobrazovací vyšetření odhalilo žlučové kameny a ztluštění stěny žlučníku. Byla převezena na oddělení ___ k chirurgické péči.
+Žena, která se dostavila do ___ se stížností na zhoršující se bolest v pravém horním kvadrantu břicha, nevolnost a zvracení po konzumaci tučného jídla, trvající dva dny. Bolest vyzařovala do zad a nepolevovala ani po užívání volně prodejných analgetik. Uváděla mírné zvýšení teploty doma. Byla vyšetřena svým ošetřujícím lékařem dne ___ a odeslána na pohotovost, kde zobrazovací vyšetření prokázala žlučové kameny s zesílenou stěnou žlučníku. Byla převezena do ___ za účelem chirurgické léčby.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Hypotyreóza (snížená funkce štítné žlázy)
-Gastroezofageální reflux (pálení žáhy)
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Gastroezofageální reflux
 
-Chirurgická anamnéza:
-Císařský řez v roce ___
-Apendektomie (odstranění slepého střeva)
+Anamnéza předchozích chirurgických zákroků:
+Císařský řez v ___
+Apendektomie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s žlučovými kameny, léčená v ___. V rodině nebyla zjištěna žádná malignita (rakovina).
+Matka s žlučovými kameny, léčena v ___. V rodině se nevyskytuje malignita.
 
 Fyzikální vyšetření:
 Vitalní funkce:
-T 37.8, HR 92, BP 134/78, RR 16, SpO2 98% (na pokojovém vzduchu)
+T 37,8, TF 92, TK 134/78, dechová frekvence 16, SpO2 98 % při dýchání okolním vzduchem
 Celkový stav:
-Nepohodlná, bez známek toxicity
-Oči, uši, nos, hrdlo (HEENT):
-Mírná žloutenka očí chybí, sliznice vlhké
+Nepohodlí, bez známek intoxikace
+Hlava, oči, uši, nos, hrdlo:
+Mírný ikterus skléry, vlhké sliznice
 Krk:
 Pružný
 Břicho:
-Bolestivost v pravém horním kvadrantu, pozitivní Murphyho příznak, bez odrazové bolesti
+Bolestivé v pravém horním kvadrantu, pozitivní Murphyho příznak, bez rezistence
 Kůže:
 Teplá, suchá
 Neurologické vyšetření:
-Vědomá, bez fokálních příznaků
+Bdělost, bez ložiskových příznaků
 Pulzy:
 Hmatné a symetrické
 
-Významné výsledky vyšetření:
-Laboratorní výsledky při přijetí: zvýšený počet bílých krvinek (14,2) s převahou neutrofilů, normální hladina bilirubinu a mírně zvýšená hladina lipázy. Ultrazvukové vyšetření provedené dne ___ ukázalo mnoho žlučových kamenů, ztluštění stěny žlučníku a tekutinu kolem žlučníku. Vnitřní jaterní tepna měřila 4 mm. Histologické vyšetření vzorku z žlučníku, posouzené lékařem ___, prokázalo akutní zánět bez dysplazie (abnormálních buněk).
+Významné výsledky:
+Při přijetí laboratorní výsledky ukazovaly zvýšený počet bílých krvinek (14,2) s převahou neutrofilů, normální hladinu bilirubinu a mírně zvýšenou hladinu lipázy. Ultrazvukové vyšetření v ___ prokázalo mnohočetné žlučové kameny, zesílení stěny žlučníku a tekutinu v okolí žlučníku. Průměr žlučovodu byl 4 mm. Patologické vyšetření žlučníku, které provedl ___, prokázalo akutní zánět bez dysplazie.
 
-Průběh hospitalizace:
-Pacientka byla přijata, byla držena na hladovění, dostávala intravenózní tekutiny a antibiotika a byla operována lékařem ___ k provedení laparoskopické cholecystektomie, která proběhla bez komplikací. Po prvním pooperačním dni jí byla postupně obnovena strava a bolest byla kontrolována perorálními léky. Horečka ustoupila a počet bílých krvinek se normalizoval. Operační rány zůstaly čisté. Byla propuštěna domů dne ___ a byla zajištěna kontrolní návštěva prostřednictvím ___.
+Stručný průběh hospitalizace:
+Pacientka byla přijata, udržována v režimu NPO (nic per os), podávána intravenózní tekutiny a antibiotika a byla odeslána na operační sál, kde ji Dr. ___ provedl laparoskopickou cholecystektomii, která proběhla bez komplikací. Pooperační den byl postupně zaváděn jídelníček a bolest byla kontrolována perorálními léky. Horečka ustoupila a počet bílých krvinek se normalizoval. Místa punkcí zůstala čistá. Pacientka byla propuštěna domů dne ___ a domluvena byla kontrolní návštěva prostřednictvím ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
-Levothyroxine 75 mcg denně
-Omeprazole 20 mg denně
+Levotyroxin 75 mcg denně
+Omeprazol 20 mg denně
 
-Léky k užívání po propuštění:
-1. Lisinopril 10 mg, perorálně, jednou denně.
-2. Levothyroxin 75 mcg, perorálně, jednou denně.
-3. Omeprazol 20 mg, perorálně, jednou denně.
-4. Paracetamol 650 mg, perorálně, každých šest hodin dle potřeby při bolesti.
-5. Oxykodon 5 mg, každých šest hodin dle potřeby při silné bolesti.
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně.
+2. Levotyroxin 75 mcg perorálně jednou denně.
+3. Omeprazol 20 mg perorálně jednou denně.
+4. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti.
+5. Oxykodon 5 mg každých šest hodin podle potřeby proti silné bolesti.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Akutní kalciová cholecystitida (zánět žlučníku)
-Žlučové kameny
+Akutní kalcifikovaná cholecystitida
+Cholelitiáza
 
 Stav při propuštění:
-Psychický stav:
-Vnímání je jasné a soustředěné.
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Vědomý a komunikativní.
-Fyzická aktivita:
-Chůze, soběstačný.
+Bdělý a reagující
+Stav aktivity:
+Schopný chůze, soběstačný
 
-Pokyny po propuštění:
-Byli jste hospitalizováni kvůli zánětu žlučníku, který byl endoskopicky odstraněn. Můžete se sprchovat a nechat na jizvách téct mýdlovou vodu; nevystavujte je ponoření do vody. Během čtyř týdnů se vyhýbejte zvedání předmětů o hmotnosti více než 4,5 kg. Užívajte léky proti bolesti pouze dle potřeby a během užívání neřiďte. V případě horečky, zhoršující se bolesti, zvracení nebo žluté pokožky volejte do ambulance na číslo ___ nebo se obraťte na zařízení ___ .
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl laparoskopicky odstraněn. Můžete se sprchovat a nechat na řezné rány stékat mýdlovou vodu; nesmíte je však namáčet. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů než 10 liber (cca 4,5 kg). Léky proti bolesti užívejte pouze v případě potřeby a během užívání neřiďte. V případě horečky, zhoršení bolesti, zvracení nebo žluté kůže volejte na kliniku na číslo ___ nebo se vraťte do ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

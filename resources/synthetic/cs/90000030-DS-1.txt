@@ -1,68 +1,68 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest v pravém boku
+Bolest v pravé oblasti boku
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž s bolestí v pravém boku a nevolností trvající tři dny, odeslán z ambulance ___. Bolest se šířila do třísel. Bez horečky. První vyšetření proběhlo v ___.
+Muž s třídenní se zhoršující bolestí v pravé oblasti boku a nevolností, odeslán z kliniky ___. Bolest vyzařuje do třísel. Bez horečky. První vyšetření proběhlo v ___.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Kameny v ledvinách, v minulosti ___
+Ledvinové kameny, v minulosti ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec s kameny v ledvinách
+Otec s ledvinovými kameny
 
 Fyzikální vyšetření:
 Celkový stav:
-Nepohodlný, bez horečky
-Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Nepohodlí, bez horečky
+Hlava, oči, uši, nos, hrdlo:
 Vlhké sliznice
 Plíce:
-Čisté bilaterálně
+Čisté na obou stranách
 Břicho:
-Měkké, bolestivost v pravém boku
-Extremity:
+Měkké, bolestivé v pravé oblasti boku
+Končetiny:
 Bez otoků
 Kůže:
 Teplá, suchá
 
 Významné výsledky:
-CT vyšetření prokázalo 6mm kámen v pravé močové trubici, který způsoboval mírnou hydronefrózu. Vyšetření moči s přítomností krve, bez známek infekce. Kreatinin v normě.
+CT vyšetření prokázalo 6mm velký kámen v pravém močovodu, který způsobuje obstrukci, s mírnou hydronefrózou. Vyšetření moči prokázalo přítomnost krve, bez známek infekce. Kreatinin v normě.
 
-Průběh hospitalizace:
-Léčba zahrnovala infuze, analgetika a tamsulosin. Bolest se zlepšila a pacient toleroval stravu. Před propuštěním nebylo potvrzeno uvolnění kamene; bylo zajištěno další vyšetření u urologie prostřednictvím ___.
-DŮLEŽITÉ INFORMACE PŘI PROPOUŠTĚNÍ:
-Sběr moči, opakované zobrazovací vyšetření v případě návratu bolesti.
+Stručný popis hospitalizace:
+Léčen infuzemi, analgetiky a tamsulozinem. Bolest se zlepšila a pacient toleroval stravu. Před propuštěním nebylo potvrzeno, že kámen byl vyloučen; zajištěna následná péče u urologa prostřednictvím ___.
+PŘECHODNÁ OTÁZKY:
+Moč přecedit, v případě návratu bolesti opakovat zobrazovací vyšetření.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
 
 Léky při propuštění:
-Lisinopril 10 mg denně. Tamsulosin 0,4 mg večer. Ibuprofen 400 mg každých osm hodin s jídlem, dle potřeby na bolest.
+Lisinopril 10 mg denně. Tamsulozin 0,4 mg večer. Ibuprofen 400 mg každých osm hodin s jídlem, v případě potřeby proti bolesti.
 
-Stav při propuštění:
+Způsob propuštění:
 Domů
 
 Stav při propuštění:
 Stabilní, bolest pod kontrolou
-Funkční stav:
-Chůze, soběstačný
+Stav aktivity:
+Schopný chůze, soběstačný
 
-Pokyny při propuštění:
-Byl vám poskytnut lék na kameny v ledvinách. Pijte hodně tekutin a sledujte moč. V případě horečky, nekontrolovatelné bolesti nebo zvracení se vraťte. V případě dotazů volejte ___.
+Pokyny pro propuštění:
+Byl jste léčen pro ledvinový kámen. Pijte dostatek tekutin a přeceďte moč. V případě horečky, nekontrolované bolesti nebo zvracení se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro následnou péči:
 ___

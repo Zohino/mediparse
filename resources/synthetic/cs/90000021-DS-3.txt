@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,13 +9,13 @@ Alergie:
 Hlavní potíže:
 Bušení srdce a závratě
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka přišla s potížemi bušení srdce a závratí trvající dva dny. Byla poprvé vyšetřena na ___ a následně převezena sem. Příznaky se objevily po ___, bez bolesti na hrudi, bezvědomí nebo dušnosti.
+Pacientka se dostavila se dvěma dny trvajícím bušením srdce a závratěmi, byla poprvé vyšetřena v ___ a poté převezena sem. Příznaky se objevily po ___, bez bolesti na hrudi, synkopy nebo dušnosti.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Fibrilace síní
 Hypertenze
 Hypotyreóza
@@ -27,47 +27,47 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Celkový stav: Pacientka je v pohodě, bez známek utrpení.
-Oblast hlavy, očí, uší, nosu a krku (ORL): Vlhká sliznice.
-Krk: Pružný.
-Kardiovaskulární systém: Nepravidelný rytmus, normální S1 a S2.
-Břicho: Měkké, bez citlivosti.
-Neurologické vyšetření: Pacientka je při vědomí, bez fokálních příznaků.
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Krk: Pohyblivý
+SRDEČNÍ: Nepravidelný rytmus, normální S1 S2
+Břicho: Měkké, netendrové
+Neurologické: Bdělá, bez ložiskových příznaků
 
 Významné výsledky:
-Troponin negativní dvakrát. TSH v normě. Dostatečné hladiny draslíku a hořčíku. EKG provedené dne ___ ukázalo nepravidelný rytmus s rychlou srdeční frekvencí, bez známek ischemie.
-LABORATOŘ PŘI PROPUŠTĚNÍ:
+Dvakrát negativní troponin. Normální TSH. Dostatečné hladiny draslíku a hořčíku. EKG z ___ ukázalo nepravidelný rytmus s rychlou srdeční frekvencí, bez ischemických změn.
+VÝSLEDKY LABORATORNÍCH TESTŮ PŘED PROPUŠTĚNÍM:
 Hemoglobin a elektrolyty v normálních mezích.
 
-Průběh hospitalizace:
-Srdeční frekvence byla kontrolována pomocí perorálního metoprololu po počáteční intravenózní dávce ve výši ___. Antikoagulace byla obnovena po posouzení rizika krvácení lékařem ___. Telemetrie ukázala kontrolované hodnoty srdeční frekvence a pacientka zůstala bez příznaků.
+Stručný popis hospitalizace:
+Srdeční frekvence byla kontrolována perorálním metoprololem po počáteční intravenózní dávce v ___. Antikoagulační léčba byla obnovena po zhodnocení rizika krvácení lékařem ___. Telemetrie ukázala kontrolovanou srdeční frekvenci a pacientka zůstala bez příznaků.
 
 Léky při přijetí:
-Levothyroxin, lisinopril, apixaban
+Levotyroxin, lisinopril, apixaban
 
 Léky při propuštění:
-1. Metoprolol succinate 50 mg denně
+1. Metoprolol sukcinát 50 mg denně
 2. Apixaban 5 mg dvakrát denně
-3. Levothyroxin 75 mcg denně
+3. Levotyroxin 75 mcg denně
 4. Lisinopril 10 mg denně
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Fibrilace síní s rychlou ventrikulární odpovědí
+Fibrilace síní s rychlou srdeční odpovědí
 Sekundární:
 Hypertenze, hypotyreóza
 
 Stav při propuštění:
 Stabilní
-Psychický stav: Jasný a soudržný
-Úroveň vědomí: Při vědomí a komunikativní
-Funkční stav: Chůze, soběstačná
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a reagující
+Stav aktivity: Ambulantní, soběstačná
 
-Instrukce při propuštění:
-Byla jste přijata kvůli rychlému a nepravidelnému srdečnímu tepu. Užívajte léky podle předpisu, včetně léku na ředění krve. V případě bolesti na hrudi, mdloby nebo krvácení se vraťte. V případě dotazů volejte na číslo ___.
+Pokyny pro propuštění:
+Byli jste přijati s rychlým, nepravidelným srdečním tepem. Užívajte léky podle předpisu, včetně antikoagulantu. V případě bolesti na hrudi, mdlob nebo krvácení se vraťte. V případě dotazů volejte ___.
 
-Následná péče:
+Pokyny pro kontrolu:
 ___

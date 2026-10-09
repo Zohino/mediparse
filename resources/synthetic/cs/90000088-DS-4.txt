@@ -1,61 +1,61 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Specializace: Lékařství
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest břicha s nevolností.
+Bolest břicha s nevolností
 
-Zásahné chirurgické zákroky:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž s postupně se zhoršující bolestí v horní části břicha a zvracením, poprvé vyšetřen ___ a následně převeden do ___ pro další vyšetření a zobrazovací metody.
+Muž s třídenní se zhoršující bolestí v horní části břicha a zvracením, poprvé vyšetřen v ___ a poté převezen do ___ za účelem dalšího vyšetření a zobrazovacích metod.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hyperlipidemie
-Bez anamnézy srdečního selhání.
+Žádná anamnéza srdečního selhání
 
 Rodinná anamnéza:
-Otec s koronární chorobou.
+Otec s koronární chorobou
 
 Fyzikální vyšetření:
-Celkový stav: Pacient je v pohodě, bez známek utrpení.
-Hlava, oči, uši, nos, hrdlo: Vlhká sliznice.
-Krk: Pružný.
-Břicho: Měkké, mírná bolestivost v oblasti žaludku.
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Krk: Pohyblivý.
+Břicho: Měkké, mírná bolestivost v epigastriu.
 
 Významné výsledky:
-ZOBRAZENÍ: Ultrazvuk břicha provedený ___ ukázal žlučové kameny.
-NÁLEZY: Zesílená stěna žlučníku s malými kameny, bez rozšíření žlučových cest, normální echotextura jater.
+ZOBRAZOVACÍ METODY: Ultrazvuk břicha provedený v ___ prokázal žlučové kameny.
+NÁLEZY: Zesílená stěna žlučníku s malými kameny, žádná dilatace žlučových cest, normální echogenita jater.
 
-Průběh hospitalizace:
-Pacient byl přijat, podány intravenózní tekutiny, antiemetika a antibiotika pro léčbu zánětu žlučníku. Bolest se zlepšila po odpočinku trávicího traktu a dieta byla postupně rozšiřována. Doporučena elektivní cholecystektomie (odstranění žlučníku), která bude provedena ambulantně v ___.
+Stručný popis hospitalizace:
+Pacient byl přijat, podávány intravenózní tekutiny, antiemetika a antibiotika pro cholecystitidu. Bolest se zlepšila při klidovém režimu a postupně se upravila strava. Doporučena elektivní cholecystektomie, která bude naplánována jako ambulantní zákrok v ___.
 
 Léky při přijetí:
-Lisinopril a atorvastatin denně.
+Lisinopril a atorvastatin denně
 
 Léky při propuštění:
-Pokračovat v užívání lisinoprilu a atorvastatinu. Užívat amoxicilin-klavulanát dvakrát denně po dobu pěti dnů. Paracetamol dle potřeby na bolest.
+Pokračovat v užívání lisinoprilu a atorvastatinu. Užívat amoxicilin-klavulanát dvakrát denně po dobu pěti dnů. Paracetamol podle potřeby proti bolesti.
 
-Plán po propuštění:
-Domů.
+Způsob propuštění:
+Domů
 
 Diagnóza při propuštění:
-Akutní zánět žlučníku
-Žlučové kameny.
+Akutní cholecystitida
+Cholelitiáza
 
 Stav při propuštění:
-Psychický stav: Jasný a soustředěný.
-Úroveň vědomí: Vnímavý a komunikativní.
-Funkční stav: Chůze, soběstačný.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
 
 Pokyny při propuštění:
-V případě horečky, zhoršení bolesti, přetrvávajícího zvracení nebo žluté pokožky se obraťte na lékaře. Vyhýbejte se tučným jídlům do doby vaší chirurgické návštěvy v ___. Dokončete užívání všech antibiotik podle předpisu.
+V případě horečky, zhoršení bolesti, přetrvávajícího zvracení nebo žluté kůže se vraťte. Vyhýbejte se tučným jídlům až do chirurgické kontroly v ___. Dokončete všechny předepsané antibiotika.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

@@ -1,43 +1,43 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: NEUROLOGIE
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: NEUROLOGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest krku a slabost levé ruky
+Bolest krku a slabost levé paže
 
-Zásahy:
+Významnější chirurgické zákroky nebo invazivní procedury:
 Žádné
 
-Anamnéza:
-Muž ve věku ___ let s hypertenzí byl přijat do nemocnice ___ po třech dnech zhoršující se bolesti krku, následované neohrabaností a slabostí levé ruky. Nebyla hlášena horečka, trauma ani změny ve funkci střev a močového měchýře.
+Anamnéza současného onemocnění:
+___letý muž s hypertenzí se dostavil do ___ po třech dnech zhoršující se bolesti krku, následované nekoordinovaností a slabostí levé ruky. Nebyla hlášena horečka, trauma ani změny v činnosti střev a močového měchýře.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
-Cervikální spondylóza, sledována lékařem ___
+Hyperlipidémie
+Cervikální spondylóza, následně ošetřeno lékařem ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec utrpěl mrtvici v sedmdesáti letech.
+Otec, který v sedmdesátých letech prodělal cévní mozkovou příhodu
 
 Fyzikální vyšetření:
-Orientovaný, v pohodě, bez horečky. Srdce pravidelné, plíce čisté, břicho měkké. Při přijetí byla zaznamenána mírná slabost levé ruky.
-FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
-Životní funkce: T 98,2 °C, TK 128/76, SR 70, dechová frekvence 16, SpO2 98 % při pokojovém vzduchu
-Krk: Pružný, mírná bolest podél páteře, plný rozsah pohybu
-Neurologické vyšetření: Orientovaný, plynulá řeč, síla levé ruky 4+/5, jinak plná síla, zachovaná citlivost, stabilní chůze.
+Při vědomí, v pohodlí, bez horečky. Pravidelný srdeční tep, čisté plíce, měkké břicho. Při přijetí zaznamenána mírná slabost levé ruky.
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Vitalní funkce: T 36,8 °C, TK 128/76, TF 70, dechová frekvence 16, SpO2 98 % při dýchání okolního vzduchu
+Krk: Pohyblivý, mírná bolestivost paravertebrálních svalů, plný rozsah pohybu
+Neurologické vyšetření: Při vědomí, plynulá řeč, síla levé ruky 4+/5, jinak plná síla, zachovaná citlivost, stabilní chůze
 
 Významné výsledky:
-MRI krční páteře: Mírné zúžení kanálu v oblasti C5-C6, bez změn signálu míchy. MRI mozku: Bez akutního infarktu. Hemoglobin A1c normální. Základní metabolický profil a krevní obraz bez odchylek.
+MRI krční páteře: mírné zúžení páteřního kanálu v oblasti C5-C6 bez změn signálu míchy. MRI mozku: žádná akutní ischemie. Hemoglobin A1c v normě. Základní metabolický panel a krevní obraz bez významných odchylek.
 
-Průběh hospitalizace:
-Slabost byla přičítána radikulopatii krční páteře způsobené spondylózou. Mrtvice byla vyloučena pomocí zobrazovacích metod. Nemá cukrovku a hladina glukózy byla normální. Bolest se zlepšila díky pravidelně podávaným analgetikům a fyzioterapii, která byla provedena dne ___. Neurochirurgie na ___ doporučila ambulantní kontrolu.
+Stručný průběh hospitalizace:
+Slabost byla přičítána cervikální radikulopatii způsobené spondylózou. Cévní mozková příhoda byla vyloučena zobrazovacími metodami. Nemá diabetes, glykemie byla v normě. Bolest se zlepšila díky pravidelnému podávání analgetik a fyzioterapii, kterou absolvoval ___. Neurochirurgické oddělení v ___ doporučilo ambulantní sledování.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -46,23 +46,23 @@ Atorvastatin 20 mg večer
 Léky při propuštění:
 1. Lisinopril 10 mg perorálně denně
 2. Atorvastatin 20 mg perorálně večer
-3. Acetaminophen 650 mg každých šest hodin dle potřeby na bolest
+3. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest
 4. Naproxen 250 mg dvakrát denně s jídlem po dobu jednoho týdne
 
-Plán po propuštění:
-Domů s péčí od ___
+Plán propuštění:
+Domů s pomocí od ___
 
 Diagnóza při propuštění:
-Radikulopatie krční páteře
+Cervikální radikulopatie
 Cervikální spondylóza
 Hypertenze
 
 Stav při propuštění:
-Psychický stav: Jasný a soustředěný.
-Funkční stav: Chůze, soběstačný.
+Duševní stav: Jasný a srozumitelný.
+Stav aktivity: Chodí, soběstačný.
 
-Pokyny při propuštění:
-Byl jste přijat s bolestí krku a slabostí ruky způsobenou kompresí nervu v krku. Užívajte léky podle předpisu. Vyhýbejte se těžkému zvedání. V případě zhoršení slabosti, necitlivosti nebo problémů s močením se vraťte. V případě dotazů kontaktujte ambulanci ___ na telefonním čísle ___.
+Pokyny pro propuštění:
+Byli jste přijati s bolestí krku a slabostí paže způsobenou stlačením nervu v krku. Užívajte léky podle předpisu. Vyhýbejte se těžkému zvedání. V případě zhoršení slabosti, necitlivosti nebo problémů s močením se vraťte. V případě dotazů volejte na kliniku ___ na čísle ___.
 
-Pokyny pro další péči:
+Pokyny pro další postup:
 ___

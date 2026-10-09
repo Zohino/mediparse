@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,13 +9,13 @@ Alergie:
 Hlavní potíže:
 Žízeň a časté močení
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacient se dostavil na oddělení ___ s několika dny celkové slabosti, žízně a častého močení. Při příjmu byla hladina glukózy výrazně zvýšená. Byl doporučen z ambulance ___ k vyšetření a přijat za účelem regulace glykémie.
+Pacient se dostavil do ___ s několikdenní malátností, žízní a častým močením. Při přijetí byla zjištěna výrazně zvýšená hladina glukózy. Byl odeslán z ___ na vyšetření a přijat za účelem regulace glykemie.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus
 Hypertenze
 
@@ -29,32 +29,32 @@ Fyzikální vyšetření:
 Životní funkce:
 Stabilní, bez horečky
 Celkový stav:
-Pacient je v pohodě
-ORL:
+Komfortní
+HLAVA, OČI, UŠI, NOS, KRK:
 Vlhké sliznice
-Plíce:
-Čisté bilaterálně
-Extremity:
+PLÍCE:
+Čisté na obou stranách
+Končetiny:
 Bez otoků
 Neurologické vyšetření:
-Bez fokálních příznaků
+Bez ložiskových příznaků
 
 Významné výsledky:
-Při příjmu byla zvýšená hladina glukózy s mírnou ketózou, která se již vyřešila. Sodík a draslík v normě. Zobrazovací vyšetření provedená na ___ byla bez patologických nálezů.
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Hladina glukózy se zlepšila, elektrolyty a bikarbonáty v normě.
+Při přijetí zvýšená hladina glukózy s mírnou ketózou, která se již upravila. Hladina sodíku a draslíku v normě. Zobrazovací vyšetření provedené v ___ bez významných nálezů.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Hladina glukózy se zlepšila, elektrolyty a bikarbonát v normě.
 
-Průběh hospitalizace:
-Léčba intravenózními tekutinami a infuzí inzulínu, následně přechod na podkožní inzulín s lepšímí hodnotami glukózy. Sestra prošla s pacientem techniku injekcí a domácí monitorování. Dietolog pacienta vyšetřil na ___ a byla zajištěna kontrola u endokrinologa.
+Stručný popis hospitalizace:
+Léčen intravenózními tekutinami a infuzí inzulínu, poté převeden na subkutánní inzulin s lepším výsledkem glykemie. Edukátor zopakoval techniku injekcí a domácí monitorování. Nutriční terapeut pacienta vyšetřil v ___ a byla domluvena kontrola u ___ endokrinologa.
 
 Léky při přijetí:
 Metformin
 Lisinopril
 
 Léky při propuštění:
-Insulin glargin večer, insulin lispro k jídlu, metformin dvakrát denně, lisinopril jednou denně. Dodány proužky na měření glukózy a jehličky.
+Inzulin glargin večer, inzulin lispro k jídlu, metformin dvakrát denně, lisinopril jednou denně. Dodány testovací proužky a jehly pro měření glukózy.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -62,11 +62,11 @@ Diabetes mellitus
 
 Stav při propuštění:
 Dobrý
-Psychický stav:
-Orientovaný a při vědomí
+Duševní stav:
+Bdělý a orientovaný
 
-Pokyny při propuštění:
-Měřte si hladinu cukru před jídlem a před spaním. Užívajte inzulin podle pokynů a dodržujte dietu, kterou jste s vámi prošli. V případě zvracení, zmatenosti nebo velmi vysokých hodnot kontaktujte ___ nebo se vraťte.
+Pokyny pro propuštění:
+Měřte si hladinu cukru v krvi před jídlem a před spaním. Užijte inzulin podle pokynů a dodržujte dietu, která byla s vámi probrána. V případě zvracení, zmatenosti nebo velmi vysokých hodnot volejte ___ nebo se vraťte.
 
 Pokyny pro kontrolu:
 ___

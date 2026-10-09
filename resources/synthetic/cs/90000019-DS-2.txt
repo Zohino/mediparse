@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,15 +9,15 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let se dostavil na oddělení ___ s třechdenním produktivním kašlem, horečkou a dušností po nedávné cestě. V pohotovostní službě měl horečku a hypoxémii a byl přijat k dalšímu vyšetření a léčbě.
+___letý muž se dostavil do ___ s třídenní anamnézou produktivního kašle, horečky a dušnosti po nedávné cestě. Na pohotovosti měl horečku a byl hypoxický, proto byl přijat k dalšímu ošetření.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Apendektomie v roce ___
 
 Sociální anamnéza:
@@ -28,47 +28,47 @@ Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacient je v pohodě, bez známek utrpení.
-Hlava, oči, uši, nos, krk (HEENT):
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
 Vlhké sliznice
 Krk:
 Pružný
 Plíce:
-Lehké chrůpky v dolní části pravého plíce
-Extremity:
+Mírné bazální chrůpky na pravé straně
+Končetiny:
 Bez otoků
 Neurologické vyšetření:
-Orientovaný, bez fokálních příznaků
+Bdělý, bez ložiskových příznaků
 
-Výsledky vyšetření:
-Rentgen hrudníku ukázal ztmavení v dolní části pravého plicního laloku. Počet bílých krvinek byl při přijetí zvýšený a do propuštění se normalizoval. Kreatinin zůstal na základní úrovni.
-ZOBRAZENÍ:
-Konsolidace v dolní části pravého plicního laloku, bez výpotku.
+Významné výsledky:
+Rentgen hrudníku ukázal opacitu v dolním laloku pravé plíce. Počet bílých krvinek byl při přijetí zvýšený a při propuštění se normalizoval. Hladina kreatininu zůstala na výchozí úrovni.
+ZOBRAZOVACÍ METODY:
+Konsolidace v dolním laloku pravé plíce, bez výpotku
 
-Průběh hospitalizace:
-Léčen pro pneumonii získanou v komunitě pomocí intravenózních antibiotik, následně perorální léčby. Podávání kyslíku bylo postupně snižováno, až byl pacient schopen dýchat přirozeně. Horečka ustoupila a chuť k jídlu se vrátila. Pacient byl vyšetřen fyzioterapeutem a byl propuštěn do domácího ošetřování. Byla domluvena kontrola u praktického lékaře, Dr. ___.
+Stručný popis hospitalizace:
+Léčen pro komunitní pneumonii intravenózními antibiotiky, poté perorální terapií, s postupným snižováním podávání kyslíku do normální úrovně do ___. Horečka ustoupila a chuť k jídlu se vrátila. Konzultován fyzioterapeutem a propuštěn do domácí péče. Sjednána kontrola u ošetřujícího lékaře, Dr. ___.
 
 Léky při propuštění:
-Amoxicilin s klavulanátem dvakrát denně po dobu pěti dnů. Pokračujte v užívání lisinoprilu a atorvastatinu doma. Paracetamol dle potřeby při horečce nebo bolestech.
+Amoxicilin-klavulanát dvakrát denně po dobu dalších pěti dnů. Pokračovat v užívání lisinoprilu a atorvastatinu doma. Paracetamol podle potřeby při horečce nebo bolestech.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitní pneumonie
 Hypertenze
 
 Stav při propuštění:
-Psychický stav:
-Orientovaný a koherentní
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Orientovaný a komunikativní
-Funkční stav:
+Bdělý a reagující
+Fyzická aktivita:
 Samostatný, pohybuje se bez pomoci
 
-Instrukce při propuštění:
-Užívejte všechny antibiotika podle předpisu. Odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršující se dušnosti nebo bolesti na hrudi se vraťte na ___ . Nekuřte.
+Pokyny pro propuštění:
+Užívejte všechny antibiotika podle předpisu. Odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte do ___. Nekouřte.
 
-Instrukce pro kontrolu:
+Pokyny pro kontrolu:
 ___

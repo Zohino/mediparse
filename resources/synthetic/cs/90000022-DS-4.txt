@@ -1,48 +1,48 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Dušnost, otoky nohou.
+Dušnost, otok nohou
 
-Zásahy:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Muž ve věku ___ let s hypertenzí, který se dostavil na oddělení ___ po třech dnech zhoršující se dušnosti a otoků nohou při námaze. Příznaky se začaly objevovat poté, co přestal užívat léky během cesty do ___. Popíral bolesti na hrudi, horečku nebo ztrátu vědomí. Na pohotovosti byl mírně hypoxický bez doplňkové oxygenace a obdržel intravenózní diuretikum, což vedlo ke zlepšení symptomů. Byl přijat k dalšímu vyšetření a monitorování.
-ANAMNÉZA:
-Pozitivní podle výše uvedené anamnézy. Jinak negativní.
+Anamnéza současného onemocnění:
+___ letý muž s hypertenzí, který se dostavil do ___ po třech dnech zhoršující se dušnosti při námaze a otoku nohou. Příznaky se objevily poté, co přestal užívat léky během cesty do ___. Popíral bolest na hrudi, horečku nebo synkopu. Na pohotovosti měl mírnou hypoxii při dýchání okolního vzduchu a dostal intravenózně diuretikum, což vedlo ke zlepšení stavu. Byl přijat k dalšímu vyšetření a monitorování.
+PŘEHLED SYSTÉMŮ:
+Pozitivní, odpovídá anamnéze současného onemocnění. Jinak negativní.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
-Podezření na srdeční selhání, čeká se na echokardiografické vyšetření v ambulanci v ___
+Hyperlipidémie
+Podezření na srdeční selhání, čeká se na ambulantní echokardiografii v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-V rodině se vyskytuje diabetes u otce.
+V rodinné anamnéze je významný diabetes u otce.
 
 Fyzikální vyšetření:
-Vitální funkce:
-Bez horečky, stabilní krevní tlak, normální saturace kyslíkem při pokojové teplotě.
+Vitalní funkce:
+Bez horečky, stabilní krevní tlak, saturace kyslíkem při dýchání okolního vzduchu v normě
 Celkový stav:
-Pohodlný, bez známek úzkosti.
-EXTRÉMITY:
-Lehký bilaterální otok kotníků.
+Komfortní, bez známek úzkosti
+KONČETINY:
+Mírný bilaterální otok kotníků
 Neurologické vyšetření:
-Vědomý, orientovaný, bez fokálních příznaků.
+Orientovaný, bdělý, bez ložiskových příznaků
 
 Významné výsledky:
-Laboratorní výsledky při přijetí ukazují mírně zvýšenou hodnotu BNP a normální hodnoty troponinu (dvakrát). Kreatinin byl na základní úrovni. Rentgen hrudníku ukázal mírnou kongesci plicních cév bez ložiskové konsolidace. EKG ukázalo sinusový rytmus bez akutních ischemických změn. Echokardiografické vyšetření provedené dne ___ prokázalo zachovalou ejekční frakci a mírnou hypertrofii levé komory. Před propuštěním byly hodnoty draslíku a hořčíku normální. Vyšetření moči bylo bez nálezů.
+Při přijetí byly v laboratorních testech zjištěny mírně zvýšené hodnoty BNP a normální hodnoty troponinu ve dvou odběrech. Kreatinin byl na výchozí úrovni. Rentgen hrudníku ukázal mírné plicní vaskulární přetížení bez ložiskové konsolidace. EKG ukázalo sinusový rytmus bez akutních ischemických změn. Echokardiografie provedená ___ prokázala zachovanou ejekční frakci s mírnou hypertrofií levé komory. Hodnoty draslíku a hořčíku byly před propuštěním v normě. Vyšetření moči bylo bezvýznamné.
 
-Průběh hospitalizace:
-Byl podáván intravenózní furosemid, což vedlo k negativní bilanci tekutin a zlepšení hypoxie, poté byl převeden na perorální dávku. Byl obnoven a upraven režim léků na krevní tlak týmem vedeným ___. Kardiologické oddělení v ___ ho vyšetřilo a doporučilo ambulantní zobrazovací metody vzhledem k podezření na srdeční dysfunkci. Telemetrie nevykazovala arytmii. Pacient byl schopen samostatně chodit a měl stabilní saturaci kyslíkem při pokojové teplotě. Hmotnost při propuštění byla o ___ kg nižší než při přijetí. Byl propuštěn domů ve stabilním stavu.
+Stručný průběh hospitalizace:
+Byl diuretizován intravenózním furosemidem, což vedlo k negativní bilanci tekutin a ústupu hypoxie, poté byl převeden na perorální dávku. Jeho léčba hypertenze byla obnovena a upravena týmem vedeným ___. Kardiolog z ___ ho vyšetřil a doporučil ambulantní zobrazovací vyšetření vzhledem k podezření na srdeční dysfunkci. Telemetrie neukázala žádné arytmie. Měl možnost samostatně chodit a udržoval stabilní saturaci kyslíkem při dýchání okolního vzduchu. Hmotnost při propuštění byla o ___ nižší než při přijetí. Byl propuštěn domů ve stabilním stavu.
 
 Léky při přijetí:
 Lisinopril 10 mg denně, vydán v lékárně ___. Atorvastatin 20 mg večer.
@@ -53,7 +53,7 @@ Léky při propuštění:
 3. Atorvastatin 20 mg perorálně večer.
 4. Chlorid draselný 10 mEq perorálně jednou denně během užívání furosemidu.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
@@ -62,12 +62,13 @@ Akutní plicní edém
 Hypertenze
 
 Stav při propuštění:
-Psychický stav: Jasný a koherentní.
-Úroveň vědomí: Vědomý a komunikativní.
-Funkční stav: Chůze, samostatný.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
 
-Pokyny pro propuštění:
-Byli jste hospitalizováni kvůli dušnosti a otokům nohou. Užívajte léky denně a každý den se vážte. V případě, že se vaše váha během jednoho dne zvýší o více než 1,4 kg, nebo pokud se zhorší vaše dýchání, kontaktujte svého lékaře. Omezte příjem soli. Domluvte si kontrolu u ___ do jednoho týdne a v případě dotazů volejte ___. V případě bolesti na hrudi se vraťte k ___ .
+Pokyny pro propuštění z nemocnice:
 
-Pokyny pro kontrolní prohlídku:
+Byli jste hospitalizováni kvůli dušnosti a otokům nohou. Užívajte léky denně a každý den se ráno zvažte. Pokud se vaše váha během jednoho dne zvýší o více než jeden a půl kilogramu, nebo pokud se váš dech zhorší, kontaktujte svého lékaře. Omezte příjem soli. Do týdne se dostavte na kontrolu do ___ a v případě dotazů volejte na ___. V případě bolesti na hrudi se vraťte do ___.
+
+Pokyny pro kontrolní vyšetření:
 ___

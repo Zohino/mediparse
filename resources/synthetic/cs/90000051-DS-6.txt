@@ -1,66 +1,66 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest v pravém boku
+Bolest v pravé oblasti boku
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let byl přijat z ___ s třemi dny zhoršující se bolesti v pravém boku, nevolností a mírnou horečkou. Zobrazovací vyšetření naznačila obstrukční kámen v močové trubici s mírnou hydronefrózou.
+___letý muž odeslán z ___ s třídenní se zhoršující bolestí v pravé oblasti boku, nevolností a mírnou horečkou. Zobrazovací vyšetření naznačilo přítomnost obstrukčního močového kamene v močovodu s mírnou hydronefrózou.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
-Možná fibrilace síní, jednou zaznamenána u ___, nikdy potvrzena
-Kameny v ledvinách
+Hyperlipidémie
+Možná fibrilace síní, zaznamenána jednou lékařem ___, nikdy nepotvrzena
+Močové kameny
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec s kameny v ledvinách
+Otec s močovými kameny
 
 Fyzikální vyšetření:
 Bez horečky, vitální funkce stabilní.
-ORL:
-Vlhké sliznice. Citlivost v oblasti pravého kostovertebrálního úhlu, břicho měkké.
+HLAVA, OČI, UŠI, NOS, KRK:
+Vlhké sliznice. Bolestivost v pravé kostovertebrální oblasti, měkké břicho.
 
 Významné výsledky:
-CT provedené v ___ ukázalo 6mm kámen v proximální části pravé močové trubice s mírnou hydronefrózou. Analýza moči s přítomností krve a několika bílých krvinek. Kultivace moči bez růstu bakterií. Krevní obraz normální.
+CT vyšetření provedené v ___ ukázalo 6mm proximální močový kámen v pravém močovodu s mírnou hydronefrózou. Vyšetření moči s přítomností krve a několika bílých krvinek. Kultivace moči bez růstu. Krevní obraz v normě.
 
-Průběh hospitalizace:
-Léčba intravenózními tekutinami, analgetiky a tamsulosinem. Bolest se zlepšila a horečka ustoupila. Urologické oddělení pacienta vyšetřilo a doporučilo konzervativní léčbu s filtrováním moči. Pacient toleroval stravu, chodil samostatně a byl propuštěn.
+Stručný popis hospitalizace:
+Léčen intravenózními tekutinami, analgetiky a tamsulozinem. Bolest se zlepšila a horečka ustoupila. Urolog provedl vyšetření a doporučil konzervativní léčbu s cíleným vypuzováním močového kamene. Pacient toleroval stravu, chodil samostatně a byl propuštěn do domácí péče.
 
 Léky při přijetí:
 Lisinopril a atorvastatin denně
 
 Léky při propuštění:
-1. Tamsulosin 0,4 mg kapsle večer.
-2. Ibuprofen 400 mg každých osm hodin dle potřeby na bolest.
-3. Ondansetron 4 mg dle potřeby při nevolnosti.
+1. Tamsulozin 0,4 mg, jedna kapsle večer.
+2. Ibuprofen 400 mg každých osm hodin podle potřeby na bolest.
+3. Ondansetron 4 mg podle potřeby na nevolnost.
 4. Pokračovat v užívání lisinoprilu a atorvastatinu doma.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Obstrukční kámen v pravé močové trubici
+Obstrukční močový kámen v pravém močovodu
 Hydronefróza
 
 Stav při propuštění:
 Stabilní, při vědomí a orientovaný.
-Funkční stav:
-Chůze bez pomoci.
+Stav aktivity:
+Chodí bez pomoci.
 
-Instrukce při propuštění:
-Pijte dostatek tekutin a filtrujte moč, abyste zachytili případné kameny. V případě horečky, nekontrolovatelné bolesti, zvracení nebo neschopnosti močit se vraťte. V případě dotazů volejte na číslo ___.
+Pokyny pro propuštění:
+Pijte dostatek tekutin a snažte se vypudit močový kámen. V případě horečky, nekontrolované bolesti, zvracení nebo neschopnosti močit se vraťte do nemocnice. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

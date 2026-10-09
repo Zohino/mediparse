@@ -1,21 +1,21 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Zarudnutí a horečka levé nohy
 
-Zásahné chirurgické zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka, 3___ let, s hypertenzí a hypotyreózou, se dostavila s tříměsíčními potížemi v podobě zarudnutí, tepla a otoku levé dolní končetiny po drobném poranění při zahradničení. Večer před přijetím se u ní objevila horečka a zimnice. Byla převezena z ___ po vyšetření dne ___ za účelem dalšího řešení rozsáhlé celulitidy.
+___ letá žena s hypertenzí a hypotyreózou, která se dostavila se třemi dny trvajícím zarudnutím, hřejivostí a otokem levé dolní končetiny po drobném oděru při zahradničení. Před přijetím měla horečku a zimnici. Byla převezena z ___ po vyšetření dne ___ za účelem další léčby šířící se celulitidy.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hypotyreóza
 Osteoartróza kolen
@@ -24,52 +24,52 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí. Otec s mrtvicí.
+Matka s hypertenzí. Otec s cévní mozkovou příhodou.
 
 Fyzikální vyšetření:
-Životní funkce:
-T 38,1 °C, srdeční frekvence 98 úderů/min, krevní tlak 132/78 mmHg, dechová frekvence 16 nádechů/min, saturace kyslíkem 97 % při pokojové teplotě.
+Vitalní funkce:
+T 38,1 °C, TF 98, TK 132/78, dechová frekvence 16, SpO2 97 % při dýchání okolním vzduchem
 Celkový stav:
-Orientovaná, mírně nepříjemné pocity.
-Hlava, oči, uši, nos, krk:
-Vlhké sliznice, bez žloutenky.
+Bdělá, mírně nepohodlná
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice, bez žloutenky
 Plíce:
-Čisté bilaterálně.
-Extremity:
-Zarudnutí, teplo a bolestivost levé holeně, bez tvorby dutin.
+Čisté na obou stranách
+Končetiny:
+Zarudnutí levé holenní kosti, hřejivé, citlivé, bez fluktuace
 
 Významné výsledky:
-Laboratorní výsledky při přijetí: zvýšený počet bílých krvinek 14,2 (s převahou neutrofilů) a laktát 1,3. Glukóza 248, zvýšený hemoglobin A1c. Kreatinin v normě. Kultivace krve nevykazovala růst bakterií po pěti dnech. Ultrazvuk levé nohy vyloučil hlubokou žilní trombózu. Rentgen snímek tibie ukázal otok měkkých tkání bez přítomnosti plynu nebo osteomyelitidy.
+Laboratorní vyšetření při přijetí dne ___ ukázala počet bílých krvinek 14,2 s převahou neutrofilů a laktát 1,3. Glukóza 248, zvýšené hodnoty hemoglobinu A1c. Kreatinin v normě. Kultivace krve neprokázala růst po pěti dnech. Ultrazvuk levé nohy vyloučil hlubokou žilní trombózu. Rentgen holenní kosti ukázal otok měkkých tkání bez přítomnosti plynu nebo osteomyelitidy.
 
-Průběh hospitalizace:
-Pacientka byla přijata s celulidy levé dolní končetiny a zahájena intravenózní léčba vancomycinem vzhledem k její alergii na peniciliny. Zarudnutí bylo výrazné a postupně ustupovalo během tří dnů, a horečka se vyřešila. Nově zjištěná zvýšená hladina glukózy a A1c potvrdily dosud neléčenou cukrovku; byla konzultována s týmem ___ a poskytnuta edukace o cukrovce. Péče o ránu z nemocnice ___ zhodnotila stav kůže. Byla převedena na perorální doxycyklin a propuštěna. Lékař ___ bude sledovat její novou léčbu metforminem.
+Stručný průběh hospitalizace:
+Byla přijata s celulitidou levé nohy a zahájena intravenózní léčba vancomycinem vzhledem k její alergii na penicilin. Zarudnutí bylo výrazné a postupně ustupovalo během tří dnů, horečka odezněla. Nově zvýšené hodnoty glukózy a A1c potvrdily dříve nediagnostikovaný diabetes; byla vyšetřena týmem ___ a poskytnuta edukace o diabetu. Ošetřovatelé z ___ nemocnice zkontrolovali stav kůže. Byla převedena na perorální doxycyklin a propuštěna. Dr. ___ bude zajišťovat její novou léčbu metforminem.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
-Levothyroxine 75 mcg denně
+Levotyroxin 75 mcg denně
 
 Léky při propuštění:
-1. Doxycyklin 100 mg dvakrát denně po dobu sedmi dnů
-2. Metformin 500 mg dvakrát denně při jídle
+1. Doxycyklin 100 mg dvakrát denně po dobu dalších sedmi dnů
+2. Metformin 500 mg dvakrát denně s jídlem
 3. Lisinopril 10 mg denně
-4. Levothyroxine 75 mcg denně
-5. Acetaminophen 650 mg každých šest hodin dle potřeby na bolest
+4. Levotyroxin 75 mcg denně
+5. Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti
 
-Plán po propuštění:
-Domů s péčí od ___
+Způsob propuštění:
+Domů s pomocí služeb ___
 
 Diagnóza při propuštění:
-Celulida levé dolní končetiny
-Diabetes mellitus, 2. typu
+Celulitida levé dolní končetiny
+Diabetes mellitus, typ 2
 
 Stav při propuštění:
-Psychický stav:
-Orientovaná a koherentní
-Funkční stav:
-Chůze, soběstačná.
+Duševní stav:
+Jasný a srozumitelný
+Fyzická aktivita:
+Chodí, soběstačná
 
 Pokyny pro propuštění:
-Byli jste léčeni kvůli infekci kůže na levé noze a zjistilo se, že máte zvýšenou hladinu cukru v krvi. Užívajte všechny antibiotika podle předpisu a kontrolujte hladinu cukru v krvi, jak vám bylo ukázáno. Udržujte nohu ve zvýšené poloze a čistou. V případě horečky, rozšiřující se zarudnutí, silné bolesti nebo zvracení se vraťte. V případě dotazů volejte číslo ___, případně kliniku na čísle ___, pokud se nám nepodaří dovolat.
+Byl/a jste léčen/a na kožní infekci levé nohy a zjistilo se, že máte vysokou hladinu cukru v krvi. Užijte všechna antibiotika podle předpisu a pravidelně si měřte hladinu cukru v krvi, jak vám bylo ukázáno. Udržujte nohu ve zvýšené poloze a udržujte ji v čistotě. V případě horečky, šíření zarudnutí, silné bolesti nebo zvracení se vraťte do nemocnice. V případě dotazů volejte na číslo ___ nebo na kliniku na číslo ___, pokud se nám nemůžete dovolat.
 
-Pokyny pro kontrolní prohlídku:
+Pokyny pro kontrolní vyšetření:
 ___

@@ -1,18 +1,18 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Oddělení: Chirurgie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
-Hlavní chirurgický zákrok:
-Laparoskopická appendektomie (odstranění slepého střeva).
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let s gastroezofageálním refluxem se dostavil na oddělení ___ s bolestmi v pravém dolním kvadrantu trvajícími tři dny, nevolností a mírnou horečkou, která začala ___. Zobrazovací metody naznačovaly zánět slepého střeva a byla konzultována chirurgie. Byl přijat do nemocnice.
+___letý muž s gastroezofageálním refluxem se dostavil do ___ s třídenní bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou, která začala ___. Zobrazovací vyšetření naznačilo apendicitidu a byla konzultována chirurgická intervence. Byl přijat do nemocnice.
 
-Předchozí zdravotní problémy:
+Anamnéza předchozích onemocnění:
 Gastroezofageální reflux
 Sezónní alergie
 
@@ -20,41 +20,41 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-V rodině se vyskytuje fibrilace síní u otce. V rodině se nevyskytují žádné případy onemocnění střev.
+V rodinné anamnéze je významná fibrilace síní u otce. V rodinné anamnéze není žádné onemocnění střev.
 
 Fyzikální vyšetření:
-Životní funkce: bez horečky, stabilní.
-Celkový stav: pohodlný.
-Břicho: měkké, mírná bolestivost v pravém dolním kvadrantu.
-EXTREMITIES (končetiny): bez otoků.
-KŮŽE: rány čisté.
+Vitalní funkce: bez horečky, stabilní.
+Celkový stav: komfortní.
+Břicho: měkké, mírná citlivost v pravém dolním kvadrantu.
+Končetiny: bez otoků.
+Kůže: incize čisté.
 
 Významné výsledky:
-Počet bílých krvinek 13,2 při přijetí, normalizoval se na 7,8 při propuštění. Kreatinin 0,9. CT vyšetření břicha ukázalo rozšířený, zánětlivý apendix (slepé střevo) s infiltrací tukové tkáně v okolí apendixu a bez abscesu. Histopatologické výsledky z ___ jsou k dispozici při propuštění a budou posouzeny na chirurgické ambulanci.
+Počet leukocytů 13,2 při přijetí, normalizován na 7,8 při propuštění. Kreatinin 0,9. CT vyšetření břicha ukázalo rozšířený, zánětlivý appendix s periappendikulární tukovou infiltrací a bez abscesu. Patologické vyšetření z ___ probíhá, výsledky budou projednány na chirurgické ambulanci.
 
-Průběh hospitalizace:
-Podstoupil nekomplikovanou laparoskopickou appendektomii dne ___. Bolest byla kontrolována perorálními analgetiky, strava byla postupně rozšiřována a pacient dobře snášel běžnou stravu. Byl vyšetřen lékařem ___ k zhodnocení rány, bez známek infekce. Byl propuštěn domů ve stabilním stavu druhý den hospitalizace.
+Stručný popis hospitalizace:
+Podstoupil nekomplikovanou laparoskopickou apendektomii ___. Bolest byla kontrolována perorálními analgetiky, dieta byla postupně rozšiřována a pacient ji dobře toleroval. Vyšetřen ___ ohledně stavu rány, bez známek infekce. Byl propuštěn domů ve stabilizovaném stavu druhý den hospitalizace.
 
 Léky při přijetí:
 Omeprazol 20 mg perorálně jednou denně.
 
 Léky při propuštění:
-Paracetamol 650 mg každých šest hodin dle potřeby na bolest. Pokračovat v užívání omeprazolu 20 mg denně. Docusate 100 mg dvakrát denně během užívání opioidních analgetik.
+Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti. Pokračovat v užívání omeprazolu 20 mg denně. Dokusát 100 mg dvakrát denně během užívání opioidů.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Akutní zánět slepého střeva.
+Akutní apendicitida
 
 Stav při propuštění:
 Dobrý
 Úroveň vědomí: bdělý a komunikativní
-Úroveň aktivity: pohyblivý, soběstačný.
+Stav aktivity: pohyblivý, soběstačný
 
-Pokyny při propuštění:
-Udržujte rány čisté a suché a můžete se osprchovat. Vyhněte se zvedání předmětů o hmotnosti více než 4,5 kg po dobu čtyř týdnů. V případě horečky, zhoršující se bolesti břicha, zvracení nebo zarudnutí rány se obraťte na lékaře. V případě dotazů volejte na číslo ___.
+Pokyny pro propuštění:
+Udržujte incize čisté a suché, můžete se sprchovat. Vyhýbejte se zvedání těžkých předmětů (nad 10 liber) po dobu čtyř týdnů. V případě horečky, zhoršení bolesti břicha, zvracení nebo zarudnutí rány se vraťte. V případě dotazů volejte ___.
 
-Následná péče:
+Pokyny pro kontrolu:
 ___

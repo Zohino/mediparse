@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,17 +9,17 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let s pětidenním produktivním kašlem, horečkou a dušností, přijat z ___ kvůli hypoxii při běžném dýchání.
+___ letý muž s pětidenním kašlem s vykašláváním, horečkou a dušností, odeslán z ___ po zjištění hypoxie při dýchání okolního vzduchu.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
-Chirurgická anamnéza:
+Anamnéza předchozích chirurgických zákroků:
 Apendektomie
 
 Sociální anamnéza:
@@ -30,45 +30,45 @@ Otec s hypertenzí
 
 Fyzikální vyšetření:
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
-Životní funkce: T 38,4 °C, srdeční frekvence 102, krevní tlak 132/78, SpO2 91 % při běžném dýchání
-Celkový stav: Pacient vypadá nemocně, mírně tachypnoe
-Hlava, krk, uši, nos, hrdlo: Suché sliznice
-Krk: Pružný
-Plíce: Krepitus v dolní části pravého plíce
-Břicho: Měkké, bez citlivosti
-Neurologické vyšetření: Pacient je při vědomí, bez fokálních příznaků
+Vitalní funkce: T 38,4, TF 102, TK 132/78, SpO2 91 % při dýchání okolního vzduchu
+Celkový stav: Pacient vypadá nemocně, mírně zrychlené dýchání
+Hlava, uši, oči, nos, hrdlo: Suché sliznice
+Krk: Pohyblivý
+Plíce: V dolní části pravé plíce slyšitelné chrůpky
+Břicho: Měkké, netendrovatelné
+Neurologické vyšetření: Pacient je při vědomí, bez ložiskových příznaků
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
-Životní funkce: Bez horečky, SpO2 96 % při běžném dýchání
-Plíce: Zmírnění krepitusů
+Vitalní funkce: Bez horečky, SpO2 96 % při dýchání okolního vzduchu
+Plíce: Chrůpky se zlepšují
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PŘIJETÍ:
-Počet bílých krvinek 14,2, laktát 1,4, kreatinin normální.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 14,2, laktát 1,4, kreatinin v normě.
 ZÁVĚR:
-Konsolidace v dolní části pravého plíce, bez efúze.
+Konsolidace v dolním laloku pravé plíce, bez výpotku.
 
 Léky při přijetí:
 Lisinopril, atorvastatin denně
 
 Léky při propuštění:
-Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů
+Amoxicilin-klavulanát dvakrát denně po dobu pěti dalších dnů
 Lisinopril denně
 Atorvastatin večer
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 
 Diagnóza při propuštění:
-Primární: Pneumonie získaná v komunitě
-Sekundární: Hypertenze, hyperlipidemie
+Primární: Komunitně získaná pneumonie
+Sekundární: Hypertenze, hyperlipidémie
 
 Stav při propuštění:
-Psychický stav: Jasný a koherentní
-Úroveň vědomí: Při vědomí a komunikativní
-Funkční stav: Chůze, soběstačný
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Při vědomí a reaguje
+Fyzická aktivita: Chodí, soběstačný
 
-Pokyny při propuštění:
-Byl vám poskytnut léčba pneumonie. Dokončete užívání antibiotik, odpočívejte, pijte dostatek tekutin a v případě zhoršení dušnosti nebo horečky se vraťte. V případě dotazů volejte ___ .
+Pokyny pro propuštění:
+Byl jste léčen na pneumonii. Dokončete užívání antibiotik, odpočívejte, pijte dostatek tekutin a v případě zhoršení dušnosti nebo horečky se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

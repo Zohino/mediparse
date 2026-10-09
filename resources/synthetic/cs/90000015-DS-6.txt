@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,16 +9,16 @@ Alergie:
 Hlavní potíže:
 Otok nohou a dušnost
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Žena s diagnostikovaným srdečním selháním, odeslána z ___ s obtížemi, které se zhoršovaly po dobu dvou týdnů, včetně dušnosti, ortopnoe (dušnosti vleže) a otoků nohou, způsobených vynecháváním dávek léků.
+Žena se známou srdeční insuficiencí, odeslaná z ___ s dvoutýdenní se zhoršující dušností, ortopnoí a otoky nohou v důsledku vynechávání dávek léků.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
-Osteoartróza (degenerativní onemocnění kloubů)
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Osteoartróza
 
 Sociální anamnéza:
 ___
@@ -27,37 +27,37 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Celkový stav: Pacientka je v pohodě, bez známek utrpení.
-Krk: Zvýšený jugulární venózní tlak (JVP).
-Břicho: Měkké, bez citlivosti.
-EXTREMITY (končetiny): Bilaterální edém (otek) s jámy.
-KŮŽE: Teplá, suchá.
-Neurologické vyšetření: Pacientka je při vědomí, bez fokálních příznaků.
+Celkový stav: Dobrý, bez známek úzkosti
+Krk: Zvýšená jugulární venózní tlak
+Břicho: Měkké, netendrové
+KONČETINY: Bilaterální prohlubňový edém
+KŮŽE: Teplá, suchá
+Neurologické vyšetření: Bdělá, bez ložiskových příznaků
 
-Výsledky vyšetření:
-Laboratorní výsledky při přijetí ukázaly zvýšenou hladinu BNP (biochemický marker srdečního selhání) a kreatininu nad základní hodnotu. Rentgen hrudníku provedený v ___ prokázal plicní vaskulární kongesci (nádor).
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala zvýšené hodnoty BNP a kreatininu oproti výchozí hodnotě. Rentgen hrudníku provedený v ___ prokázal plicní vaskulární kongesci.
 ZÁVĚR:
-Lehká bilaterální efúze (tekutina v plicích).
+Mírné bilaterální efuze
 
-Průběh hospitalizace:
-Pacientka byla diureticky léčena intravenózním furosemidem, což vedlo k dobré reakci a ústupu otoků. Funkce ledvin zůstala stabilní vzhledem k její chronické ledvinové chorobě. Propouštěna v hmotnosti ___ kg.
+Stručný popis hospitalizace:
+Diuretická léčba intravenózním furosemidem, s dobrým efektem a ústupem kongesce. Funkce ledvin zůstala stabilní vzhledem k její chronickému onemocnění ledvin. Propuštěna s váhou ___.
 
 Léky při přijetí:
-Lisinopril, furosemid, atorvastatin.
+Lisinopril, furosemid, atorvastatin
 
 Léky při propuštění:
-Furosemid 40 mg denně, lisinopril 5 mg denně, atorvastatin 20 mg večer. Kontaktujte ___ ohledně dávkování.
+Furosemid 40 mg denně, lisinopril 5 mg denně, atorvastatin 20 mg večer. Kontrola dávkování u ___.
 
-Plán po propuštění:
-Domů.
+Způsob propuštění:
+Domů
 
 Diagnóza při propuštění:
-Primární: Kongestivní srdeční selhání.
-Sekundární: Chronická ledvinová choroba.
+Primární: Kongestivní srdeční selhání
+Sekundární: Chronické onemocnění ledvin
 
 Stav při propuštění:
-Psychický stav: Jasný a koherentní.
-Úroveň vědomí: Při vědomí a komunikativní.
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a reaguje
 
 Pokyny při propuštění:
-Vážete se každé ráno, omezte příjem soli a tekutin, užívejte léky podle předpisu a v případě zhoršení dušnosti nebo otoků se vraťte.
+Každé ráno se zvažte, omezte příjem soli a tekutin, užívejte léky podle předpisu a v případě zhoršení dušnosti nebo otoků se vraťte.

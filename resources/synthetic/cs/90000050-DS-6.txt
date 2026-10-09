@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Oddělení: Chirurgie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,61 +9,61 @@ Alergie:
 Hlavní potíže:
 Bolest v pravém dolním kvadrantu břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická appendektomie (odstranění slepého střeva)
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
 
 Anamnéza současného onemocnění:
-Muž s bolestí v pravém dolním kvadrantu břicha, která se zhoršovala po dobu dvou dnů, s nauzeou a mírnou horečkou. Byl přijat z ambulance ___ . Zobrazovací vyšetření naznačovala akutní zánět slepého střeva, a proto byl přijat na chirurgické oddělení.
+Muž s dvoudenní se zhoršující bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou, odeslán z ambulance ___. Zobrazovací vyšetření naznačilo akutní apendicitidu, proto byl přijat na chirurgii.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus
-Hypertenze (vysoký krevní tlak)
+Hypertenze
 
-Chirurgická anamnéza:
-Dříve podstoupil tonsilektomii (odstranění mandlí).
+Anamnéza předchozích chirurgických zákroků:
+Dávná tonsilektomie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Bez významných informací.
+Bez významných údajů
 
 Fyzikální vyšetření:
-Životní funkce: stabilní, bez horečky
-Celkový stav: pohodlný, bez známek utrpení
-Oblast hlavy, očí, uší, nosu a krku (HEENT): vlhké sliznice
+Vitalní funkce: stabilní, bez horečky
+Celkový stav: dobrý, bez známek úzkosti
+Hlava, uši, oči, nos, hrdlo: vlhké sliznice
 Krk: pružný
-Břicho: měkké, mírně bolestivé v oblasti řezů
-Extremity (končetiny): teplé, bez otoků
+Břicho: měkké, mírně citlivé v oblasti řezů
+Končetiny: teplé, bez otoků
 Kůže: řezné rány čisté a suché
 
 Významné výsledky:
-Laboratorní testy při přijetí ukázaly mírnou leukocytózu (zvýšený počet bílých krvinek). CT vyšetření provedené v ___ odhalilo rozšířený, zánětlivě změněný slepý střevní vak s okolním tukovým vazem a bez perforace nebo abscesu.
+Při přijetí laboratorní vyšetření ukázala mírnou leukocytózu. CT vyšetření provedené v ___ odhalilo rozšířený, zánětlivě změněný appendix s okolní tukovou infiltrací, bez perforace nebo abscesu.
 
-Průběh hospitalizace:
-Podstoupil nekomplikovanou laparoskopickou appendektomii v ___. Byl postupně zaváděn běžný jídelníček, bolest byla kontrolována perorálními léky a monitorována hladina glukózy. Byl vyšetřen lékařem ___ a byl propuštěn domů.
+Stručný popis hospitalizace:
+Podstoupil nekomplikovanou laparoskopickou apendektomii v ___. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a hladina glukózy byla monitorována. Byl vyšetřen lékařem ___ a propuštěn do domácí péče.
 
 Léky při přijetí:
 Metformin
 Lisinopril
 
 Léky při propuštění:
-Metformin, jako dříve. Lisinopril, jako dříve. Paracetamol na bolest dle potřeby. Krátkodobě oxykodon pouze při silné bolesti. Docusate při užívání opioidních analgetik.
+Metformin jako dříve. Lisinopril jako dříve. Paracetamol na bolest podle potřeby. Krátkodobá léčba oxykodonem pouze při silné bolesti. Dokusát při užívání opioidů.
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Akutní zánět slepého střeva
+Akutní apendicitida
 Diabetes
 
 Stav při propuštění:
-Psychický stav: bdělý a plně orientovaný
-Funkční stav: pohyblivý, soběstačný
+Duševní stav: bdělý a plně orientovaný
+Fyzická aktivita: chůze, soběstačný
 
-Pokyny při propuštění:
-Byl vám odstraněn slepý střevní vak. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze a kontaktujte ___ v případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí rány.
+Pokyny pro propuštění:
+Byl vám odstraněn appendix. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze a v případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí rány volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

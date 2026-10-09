@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,17 +9,17 @@ Alergie:
 Hlavní potíže:
 Slabost a otok nohou
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let byl odeslán svým praktickým lékařem z ambulance ___ kvůli slabosti, otoku nohou a sníženému příjmu potravy během několika dnů. Ambulantní laboratorní testy ukázaly výrazně zvýšenou hodnotu kreatininu a glukózy, což vedlo k hospitalizaci.
+___letý muž byl odeslán svým ošetřujícím lékařem z kliniky ___ pro slabost, otok nohou a špatný příjem potravy v průběhu několika dnů. Ambulantní laboratorní vyšetření ukázala výrazně zvýšenou hladinu kreatininu a glukózy, což vedlo k hospitalizaci.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Dlouhodobě vysoká hladina cukru v krvi vyžadující léčbu inzulinem
-Snížená funkce srdce
-Následná péče u nefrologického oddělení ___
+Dlouhodobě vysoká hladina cukru v krvi vyžadující inzulín
+Snížená srdeční pumpovací funkce
+Pod dohledem ___, nefrologie
 
 Sociální anamnéza:
 ___
@@ -30,42 +30,42 @@ Matka s vysokým krevním tlakem
 Fyzikální vyšetření:
 Životní funkce:
 Stabilní, bez horečky
-Oblast hlavy, očí, uší, nosu a krku (ORL):
+Hlava, oči, uši, nos, hrdlo:
 Suché sliznice
 Břicho:
-Měkké, bez citlivosti
-Extremity:
-Dvoustranný edém s jámy, teplé
+Měkké, netendrové
+Končetiny:
+Oboustranný otok s prohlubněmi, teplé
 
 Významné výsledky:
-Kreatinin 3,1 při příjmu, zlepšující se na 2,2. Glukóza 410 na začátku. Draslík 5,4 normalizován. BNP zvýšen. EKG ukázalo nepravidelný rytmus. Krev odebraná v ___ odpovídala hodnotám z hospitalizace.
+Kreatinin 3,1 při přijetí, zlepšil se na 2,2. Glukóza 410 zpočátku. Draslík 5,4 se normalizoval. BNP zvýšené. EKG ukázalo nepravidelný rytmus. Krev odebraná v ___ odpovídala hodnotám z hospitalizace.
 
-Průběh hospitalizace:
-Pacient byl přijat s prudkým nárůstem kreatininu a přetížení tekutinami. Diuretika byla dočasně vysazena a poté opatrně obnovena s ohledem na stav pacienta. Dávka inzulínu byla upravena pro kontrolu hladiny glukózy. Frekvence srdečních tepů byla regulována pomocí metoprololu. Pacienta vyšetřil tým ___ a byl přeložen ze sady ___ ve stabilním stavu.
+Stručný průběh hospitalizace:
+Přijat s prudkým nárůstem kreatininu a přetížením tekutinami. Diuretika byla vysazena, poté opatrně znovu zavedena s monitorováním tekutin na základě vyšetření. Inzulín byl upraven pro kontrolu glukózy. Rychlost srdeční kontrolována metoprololem. Vyšetřen týmem ___, přeložen ze jednotky ___ ve stabilizovaném stavu.
 
 Léky při přijetí:
 Metformin, furosemid, apixaban, metoprolol, lisinopril
 
 Léky při propuštění:
-Insulin glargin večer, furosemid v nižší dávce, apixaban dvakrát denně, metoprolol succinate denně. Metformin a lisinopril byly vysazeny, dokud nebudou znovu provedeny testy ledvin.
+Inzulín glargin večer, furosemid v nižší dávce, apixaban dvakrát denně, metoprolol succinat denně. Metformin a lisinopril vysazeny, dokud nebudou znovu provedena vyšetření ledvin.
 
-Plán po propuštění:
-Domů s péčí
+Způsob propuštění:
+Domů s poskytovanou péčí
 Zařízení: ___
 
 Diagnóza při propuštění:
 Chronické onemocnění ledvin
-Fibrilace síní
+Atriální fibrilace
 
 Stav při propuštění:
 Stabilní
-Psychický stav:
-Orientovaný, schopný porozumět a reagovat na pokyny
+Duševní stav:
+Bdělý a orientovaný, schopen plnit pokyny
 Úroveň vědomí:
-Probudený a komunikativní
+Bdělý a reagující
 
 Pokyny při propuštění:
-Vážete se denně a omezte příjem soli. Užíváte léky podle předpisu a vyhýbejte se protizánětlivým lékům. Měřte si hladinu cukru před jídlem. V případě mdloby, bolesti na hrudi nebo sníženého vymočení se vraťte. V případě dotazů volejte ___ .
+Vážte se denně a omezte příjem soli. Užívajte léky podle seznamu a vyhýbejte se protizánětlivým lékům proti bolesti. Měřte si hladinu cukru v krvi před jídlem. V případě mdlob, bolesti na hrudi nebo sníženého močení se vraťte. V případě dotazů volejte ___.
 
 Pokyny pro další péči:
 ___

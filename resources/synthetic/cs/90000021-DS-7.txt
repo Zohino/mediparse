@@ -1,50 +1,50 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Sulfonamidy
+Sulfonamidové léky
 
 Hlavní potíže:
 Bušení srdce a únava
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka, žena ve věku ___ let, s cukrovkou a hypertenzí, byla přijata z ambulance ___ po třech dnech obtíží zahrnujících bušení srdce, nepravidelný srdeční rytmus, únavu a mírnou dušnost při námaze. Její domácí záznamy o hladině glukózy byly stabilní. Příznaky se začaly objevovat ___ během chůze po schodech. Pacientka popírala ztrátu vědomí nebo bolest na hrudi. V pohotovostní ambulanci byla zjištěna tachykardie a byla přijata k hospitalizaci pro kontrolu srdeční frekvence.
-PROHLÍDKA SYSTÉMŮ:
-Pozitivní nález bušení srdce a únavy. Negativní nález horečky, kašle, otoků nohou.
+___ letá žena s diabetes mellitus a hypertenzí, odeslána z ___ kliniky po třech dnech trvajících epizodách bušení srdce, nepravidelného srdečního rytmu, únavy a mírné dušnosti při námaze. Její domácí záznamy o hladině glukózy byly stabilní. Příznaky se objevily ___ při chůzi do schodů. Popírá synkopu nebo bolest na hrudi. Na pohotovosti byla zjištěna tachykardie a byla přijata za účelem regulace srdečního rytmu.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na bušení srdce a únavu. Negativní nález na horečku, kašel, otok nohou.
 
-Osobní anamnéza:
-Cukrovka
+Anamnéza předchozích onemocnění:
+Diabetes mellitus
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s mrtvicí
+Matka s cévní mozkovou příhodou
 
 Fyzikální vyšetření:
-Fyzikální vyšetření při přijetí:
-Životní funkce: SR 128, TK 118/72, SpO2 97 % při pokojovém vzduchu
-Celkový stav: Pacientka je v pohodě, bez známek utrpení
-Hlava, krk, uši, nos, hrdlo: Vlhké sliznice
-Srdce: Nepravidelný rytmus, bez šelestu
-Břicho: Měkké, bez citlivosti
-Končetiny: Bez edémů
-Kůže: Teplá, suchá
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: TF 128, TK 118/72, SpO2 97 % při dýchání okolního vzduchu
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice
+SRDCE: Nepravidelný rytmus, bez šelestu
+Břicho: Měkké, netendrovatelné
+KONČETINY: Bez edému
+KŮŽE: Teplá, suchá
 
 Významné výsledky:
-EKG ukázalo nepravidelnou, úzkou komplexovou tachykardii bez zřetelných P vln. Troponin byl negativní dvakrát. TSH v normě. Draslík 4,1, kreatinin 0,8. Hemoglobin 12,9. Výsledky byly projednány s personálem laboratoře ___.
-ZOBRAZENÍ:
-Rentgen hrudníku provedený ___ ukázal čisté plíce a normální velikost srdce.
+EKG prokázalo nepravidelnou tachykardii s úzkým QRS komplexem bez výrazných P vln. Dvakrát negativní troponin. Normální TSH. Draslík 4,1, kreatinin 0,8. Hemoglobin 12,9. Výsledky byly projednány s ___ personálem laboratoře.
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku provedený ___ ukázal průhledná plíce a normální velikost srdce.
 
-Průběh hospitalizace:
-Byla zahájena léčba metoprololem, což vedlo ke zlepšení srdeční frekvence, která se do druhého dne ustálila v rozmezí 70-80 úderů za minutu. Vzhledem k zvýšenému skóre rizika mrtvice byla zahájena léčba apixabanem po konzultaci s Dr. ___ a kardiologickým týmem ___. Echokardiogram provedený ___ ukázal zachovalou ejekční frakci. Hladina glukózy byla kontrolována obvyklým režimem. Pacientka chodila samostatně a byla propuštěna domů ve stabilním stavu, přičemž další péči zajistil ___.
+Stručný průběh hospitalizace:
+Byla zahájena léčba metoprololem, což vedlo ke zlepšení srdečního rytmu, který se do druhého dne stabilizoval na hodnotách 70–80 tepů za minutu. Vzhledem k tomu, že její skóre rizika cévní mozkové příhody bylo zvýšené, byl po diskusi s doktorem ___ a ___ kardiologickým týmem zahájen podávání apixabanu. Echokardiografie provedená ___ prokázala zachovanou ejekční frakci. Hladina glukózy byla regulována obvyklým režimem. Chodila samostatně a byla propuštěna domů ve stabilizovaném stavu, přičemž následná péče byla zajištěna ___.
 
 Léky při přijetí:
 Metformin 500 mg dvakrát denně
@@ -57,21 +57,22 @@ Léky při propuštění:
 3. Metformin 500 mg dvakrát denně
 4. Lisinopril 10 mg denně
 5. Atorvastatin 20 mg večer
-Recepty byly odeslány do lékárny ___.
+Recepty byly zaslány do ___ lékárny.
 
-Stav při propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Hlavní: Supraventrikulární tachykardie s nepravidelným rytmem
+Primární: Supraventrikulární tachykardie s nepravidelným rytmem
 
 Stav při propuštění:
-Psychický stav: Jasný a koherentní
-Úroveň vědomí: Vnímavá a komunikativní
-Funkční stav: Chůze samostatná.
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Aktivita: Ambulantní, samostatný
 
 Pokyny pro propuštění:
-Byli jste hospitalizováni kvůli rychlé a nepravidelné srdeční frekvenci. Užívajte metoprolol a nový lék na ředění krve přesně podle předpisu a nepřestávejte s užíváním. Sledujte případné krvácení, černé stolice nebo silné bolesti hlavy. V případě, že se vám vrátí bušení srdce, kontaktujte doktora ___ nebo kliniku ___ na telefonním čísle ___. V případě mdloby, bolesti na hrudi nebo slabosti na jedné straně těla se vraťte na pohotovost.
 
-Pokyny pro další péči:
+Byli jste hospitalizováni kvůli rychlému a nepravidelnému srdečnímu tepu. Užívajte metoprolol a nový antikoagulant přesně podle předpisu a nepřestávejte s léčbou. Sledujte případné krvácení, černou stolici nebo silnou bolest hlavy. Pokud se vám vrátí bušení srdce, zavolejte lékaři ___ nebo do ambulance ___ na telefonním čísle ___. V případě omdlení, bolesti na hrudi nebo slabosti na jedné straně těla se vraťte na pohotovost.
+
+Pokyny pro kontrolní vyšetření:
 ___

@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,16 +9,16 @@ Alergie:
 Hlavní potíže:
 Bolest v pravém dolním kvadrantu břicha
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž s bolestí v břiše a nevolností, která se zhoršovala po dobu dvou dnů. Byl vyšetřen v ___ a převeden do naší nemocnice k dalšímu vyšetření.
+Muž s dvoudenní se zhoršující bolestí v pravé části břicha a nevolností, vyšetřen v ___ a převezen z ___ k dalšímu vyšetření.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Možná cukrovka, podezření na základě preventivního vyšetření
-Hyperlipidemie
+Možná cukrovka, podezření na základě ambulantního screeningu
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
@@ -28,50 +28,50 @@ Otec s hypertenzí
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacient je v pohodě, bez známek utrpení.
-Hlava, oči, uši, nos, krk:
-Vlhké sliznice.
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
 Břicho:
-Mírná bolestivost v pravém dolním kvadrantu.
+Mírná citlivost v pravém dolním kvadrantu
 Kůže:
-Teplá, suchá.
+Teplá, suchá
 Neurologické vyšetření:
-Pacient je při vědomí, bez neurologických deficitů.
+Bdělý, bez ložiskových příznaků
 
 Významné výsledky:
-Mírně zvýšený počet bílých krvinek, normální hladiny lipázy a jaterních testů.
-Závěr:
-Nález odpovídá počínající apendicitidě, na snímcích nebyl zjištěn perforace ani absces.
+Mírně zvýšený počet bílých krvinek, normální hodnoty lipázy a jaterních testů.
+ZÁVĚR:
+Nález odpovídá časné apendicitidě, při vyšetření nebyla zjištěna perforace ani absces.
 
-Průběh hospitalizace:
-Pacient byl léčen intravenózními antibiotiky a infuzemi, bolest byla kontrolována, dieta postupně rozšiřována. Chirurgický tým z ___ doporučil ambulantní kontrolu. Pacient dobře toleroval perorální příjem a zůstal bez horečky.
+Stručný popis průběhu hospitalizace:
+Léčen intravenózními antibiotiky a infuzemi, bolest pod kontrolou, postupně se zlepšoval příjem potravy. Chirurgický tým v ___ doporučil ambulantní kontrolu. Dobře snášel perorální příjem potravy a neměl horečku.
 
 Léky při přijetí:
 Lisinopril
 Atorvastatin
 
 Léky při propuštění:
-Lisinopril jednou denně, atorvastatin jednou večer, amoxicilin-klavulanát dvakrát denně po dobu sedmi dnů, paracetamol dle potřeby na bolest.
+Lisinopril denně, atorvastatin večer, amoxicilin-klavulanát dvakrát denně po dobu sedmi dnů, paracetamol podle potřeby proti bolesti.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení:
 ___
 
 Diagnóza při propuštění:
-Počínající apendicitida
+Časná apendicitida
 
 Stav při propuštění:
 Stabilní
-Psychický stav:
-Orientovaný a koherentní
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Přítomný a komunikativní
-Aktivity:
-Chůze, soběstačný
+Bdělý a reagující
+Stav aktivity:
+Chodí, soběstačný
 
-Pokyny při propuštění:
-Užívejte antibiotika podle předpisu. V případě horečky, zhoršení bolesti břicha nebo zvracení se obraťte na lékaře. V případě dotazů volejte na číslo ___ .
+Pokyny pro propuštění:
+Užívejte antibiotika podle předpisu. V případě horečky, zhoršení bolesti břicha nebo zvracení se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

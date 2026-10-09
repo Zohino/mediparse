@@ -1,61 +1,61 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Oddělení: CHIRURGIE
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Známé alergie na léky: žádné.
 
 Hlavní potíže:
 Bolest v pravém dolním kvadrantu břicha.
 
-Hlavní chirurgický zákrok:
-Laparoskopická appendektomie (odstranění slepého střeva).
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie.
 
 Anamnéza současného onemocnění:
-Pacientka se dostavila na oddělení ___ s bolestí v pravém dolním kvadrantu břicha, která se zhoršovala již dva dny, dále trpěla nevolností a mírnou horečkou. Bolest začala v blízkosti pupku a postupně se šířila. Byla vyšetřena na oddělení ___ a převezena pro chirurgické vyšetření. CT vyšetření prokázalo akutní zánět slepého střeva bez perforace.
-PROHLÍDKA SYSTÉMŮ: Pozitivní nález nevolnosti a nechutenství. Negativní nález průjmu a obtíží při močení.
+Pacientka se dostavila do ___ s dvoudenní bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou, která se zhoršovala. Bolest začala v oblasti pupečníku a postupně se šířila. Byla vyšetřena v ___ a převezena na chirurgické oddělení k dalšímu vyšetření. CT vyšetření prokázalo akutní apendicitidu bez perforace.
+PŘEHLED SYSTÉMŮ: Pozitivní nález na anorexii a nevolnost. Negativní nález na průjem a dysurii.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypotyreóza, migrény.
 
-Chirurgická anamnéza:
-Císařský řez na ___.
+Anamnéza předchozích chirurgických zákroků:
+Císařský řez v ___.
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí. Sestra léčená pro onemocnění štítné žlázy na ___.
+Matka s hypertenzí. Sestra léčena pro onemocnění štítné žlázy v ___.
 
 Fyzikální vyšetření:
-Celkový stav: Pacientka je v pohodě, bez akutních potíží.
-Hlava, oči, uši, nos, krk: Bez žloutenky, sliznice vlhké.
-Břicho: Měkké, mírná bolestivost v pravém dolním kvadrantu, místa vpichu po laparoskopii jsou čistá.
-Extremity: Teplé, bez otoků.
+Celkový stav: Dobrý, bez akutní distrese.
+Hlava, oči, uši, nos, hrdlo: Bez ikteru, vlhké sliznice.
+Břicho: Měkké, mírná citlivost v pravém dolním kvadrantu, místa po laparoskopii čistá.
+Končetiny: Teplé, bez otoků.
 
 Významné výsledky:
-LABORATOŘ PŘI PŘIJETÍ: WBC (bílý krvinky) 14.2, hemoglobin 12.8, kreatinin 0.7, laktát 1.1. Vyšetření moči bez patologických nálezů. Výsledky byly prodiskutovány s týmem ___ .
-ZÁVĚR: CT vyšetření břicha a pánve: dilatovaný slepý střevo o šířce 11 mm s posílením stěny a infiltrací tukové tkáně kolem slepého střeva, bez abscesu nebo volného vzduchu. Zjištěné nálezy jsou v souladu s akutním zánětem slepého střeva. Malé množství fyziologické tekutiny v pánvi. Rentgen hrudníku bez patologických nálezů.
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Počet bílých krvinek 14,2, hemoglobin 12,8, kreatinin 0,7, laktát 1,1. Vyšetření moči bez významných nálezů. Výsledky projednány s týmem ___.
+ZÁVĚR: CT vyšetření břicha a pánve: rozšířený apendix o velikosti 11 mm s zesílenou stěnou a zánětem okolní tukové tkáně, bez abscesu nebo volného vzduchu. Nález odpovídá akutní apendicitidě. Malé množství fyziologické tekutiny v pánvi. Rentgen hrudníku bez patologických nálezů.
 
-Průběh hospitalizace:
-Pacientka byla přijata na chirurgické oddělení a zahájena intravenózní infuze a antibiotika. Podstoupila nekomplikovanou laparoskopickou appendektomii dne ___ provedenou doktorem ___. Histologické vyšetření bylo k dispozici až po propuštění. Byla jí postupně přidávána běžná strava a bolest byla kontrolována perorálními léky. Pacientka tolerovala běžnou stravu, normálně močila, sama chodila a byla propuštěna domů dne ___ s kontrolou na ___.
+Stručný průběh hospitalizace:
+Pacientka byla přijata na chirurgické oddělení a zahájena byla intravenózní hydratace a podávání antibiotik. Dne ___ podstoupila nekomplikovanou laparoskopickou apendektomii, kterou provedl Dr. ___. Histopatologické vyšetření probíhalo v době propuštění. Strava byla postupně rozšiřována a bolest kontrolována perorálními léky. Pacientka dobře snášela běžnou stravu, močila, mohla se samostatně pohybovat a byla propuštěna domů ___. den hospitalizace s kontrolou v ___.
 
 Léky při přijetí:
-Levothyroxin 75 mcg denně. Sumatriptan dle potřeby při migréně. Multivitamin denně.
+Levotyroxin 75 mcg denně. Sumatriptan podle potřeby při migréně. Multivitamin denně.
 
 Léky při propuštění:
-Acetaminophen 650 mg každých šest hodin dle potřeby na bolest. Oxykodon 5 mg každých šest hodin dle potřeby při silné bolesti, krátkodobě. Docusate 100 mg dvakrát denně při užívání oxykodonu. Pokračovat v užívání levothyroxinu 75 mcg denně.
+Acetaminofen 650 mg každých šest hodin podle potřeby při bolesti. Oxykodon 5 mg každých šest hodin podle potřeby při silné bolesti, krátkodobá léčba. Dokusát 100 mg dvakrát denně během užívání oxykodonu. Pokračovat v užívání levotyroxinu 75 mcg denně.
 
-Plán po propuštění:
-Domů.
+Způsob propuštění:
+Domů
 
 Diagnóza při propuštění:
-Akutní zánět slepého střeva.
+Akutní apendicitida
 
 Stav při propuštění:
-Psychický stav: Jasná a srozumitelná.
-Úroveň vědomí: Vnímavá a komunikativní.
+Duševní stav: Jasný a orientovaný.
+Úroveň vědomí: Bdělý a reagující.
 
-Instrukce při propuštění:
-Byla hospitalizována pro zánět slepého střeva a podstoupila laparoskopickou operaci. Udržujte rány čisté a suché a zvedejte váhu nepřesahující 4,5 kg po dobu čtyř týdnů. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí rány se obraťte na lékaře. V případě dotazů volejte na číslo ___.
+Pokyny pro propuštění:
+Byli jste hospitalizováni pro apendicitidu a podstoupili jste laparoskopickou operaci. Udržujte řezné rány čisté a suché a vyhýbejte se zvedání těžkých předmětů (nad 10 kg) po dobu čtyř týdnů. V případě horečky, zhoršení bolesti, zvracení nebo zarudnutí rány se vraťte do nemocnice. V případě dotazů volejte ___.

@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Specializace: Lékařství
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,55 +9,55 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let s hypertenzí se dostavil s třidenním produktivním kašlem, horečkou a dušností. Popírá cukrovku. Byl vyšetřen v ___ a odeslán na pohotovost ___, kde zobrazovací vyšetření hrudníku ukázalo zánět dolního laloku pravé plíce.
+___letý muž s hypertenzí se dostavil s třídenní anamnézou produktivního kašle, horečky a dušnosti. Popírá diabetes. Byl vyšetřen v ___ a odeslán na pohotovost dne ___, kde zobrazovací vyšetření hrudníku ukázalo konsolidaci v dolním laloku pravého plíce.
 
-Osobní anamnéza:
-Hypertenze, sledována lékařem ___
-Hyperlipidemie
+Anamnéza předchozích onemocnění:
+Hypertenze, pod dohledem doktora ___
+Hyperlipidémie
 
 Rodinná anamnéza:
 Bez významných údajů
 
 Fyzikální vyšetření:
-Celkový stav: Mírně nemocný, v klidu při dýchání pokojovým vzduchem.
-Krk: Pružný.
-Břicho: Měkké, bez citlivosti.
+Celkový stav: Mírně nemocný vzhled, v klidu.
+Krk: Pohyblivý.
+Břicho: Měkké, netendrovatelné.
 KONČETINY: Bez otoků.
 KŮŽE: Teplá, suchá.
-Neurologické vyšetření: Vědomý, bez fokálních příznaků.
-PULZY: Palpovatelné na obou stranách.
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků.
+PULSY: Hmatné bilaterálně.
 
 Významné výsledky:
-Laboratorní výsledky při přijetí: Zvýšený počet bílých krvinek (14,2), laktát 1,8, kreatinin 0,9. Rentgen hrudníku ukázal zánět dolního laloku pravé plíce bez výpotku. Kultivace krve nevykazovala růst bakterií po ___ dnech. Opakovaný rentgen hrudníku provedený ___ ukázal počáteční zlepšení zánětu.
+Laboratorní výsledky při přijetí: zvýšený počet bílých krvinek na 14,2, laktát 1,8, kreatinin 0,9. Rentgen hrudníku ukázal konsolidaci v dolním laloku pravého plíce bez výpotku. Kultivace krve neprokázala růst bakterií do ___ dnů. Opakovaný rentgen hrudníku dne ___ ukázal počáteční zlepšení konsolidace.
 
-Průběh hospitalizace:
-Léčba pneumonie získané v komunitě pomocí ceftriaxonu a azithromycinu, poté převedeno na perorální antibiotika, jakmile pacient neměl horečku. Podávání kyslíku bylo postupně ukončeno druhý den. Krevní tlak zůstal kontrolován pomocí domácí terapie. Propouštěn ve stabilním stavu po posouzení týmem ___ s plánem dokončení ___ kurzu antibiotik.
-PŘECHODNÉ PROBLÉMY:
-Opakované zobrazovací vyšetření hrudníku za šest týdnů k potvrzení zlepšení.
+Stručný popis hospitalizace:
+Léčen pro komunitně získanou pneumonii pomocí ceftriaxonu a azithromycinu, poté převeden na perorální antibiotika po odeznění horečky. Podávání kyslíku bylo postupně snižováno a ukončeno druhý den. Krevní tlak zůstal kontrolovaný při domácí léčbě. Propuštěn ve stabilizovaném stavu po konzultaci s týmem v ___ s plánem dokončit ___denní kúru antibiotik.
+PŘECHODNÁ OTÁZKY:
+Opakované zobrazovací vyšetření hrudníku za šest týdnů k potvrzení ústupu.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
 Atorvastatin 20 mg večer
 
 Léky při propuštění:
-1. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dalších dnů
+1. Amoxicillin-klavulanát 875 mg dvakrát denně po dobu dalších pěti dnů
 2. Lisinopril 10 mg denně
 3. Atorvastatin 20 mg večer
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Hypertenze
 
 Stav při propuštění:
-Psychický stav: Jasný a srozumitelný.
-Úroveň vědomí: Vědomý a komunikativní.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
 
 Pokyny při propuštění:
-Byl jste hospitalizován pro pneumonii a zlepšil se díky antibiotikům. Dokončete celý kurz antibiotik, odpočívejte a pijte dostatek tekutin. V případě zhoršení dušnosti, vysoké horečky, bolesti na hrudi nebo zmatenosti se vraťte. Navštivte svého praktického lékaře v ___.
+Byli jste hospitalizováni s pneumonií a došlo ke zlepšení po léčbě antibiotiky. Dokončete celou kúru antibiotik, odpočívejte a pijte dostatek tekutin. V případě zhoršení dušnosti, vysoké horečky, bolesti na hrudi nebo zmatenosti se vraťte. Navštivte svého ošetřujícího lékaře v ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

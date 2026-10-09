@@ -1,58 +1,58 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Otok nohou a dušnost
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka byla odeslána z ambulance ___ s obtížemi při dýchání, otoky nohou a sníženým množstvím moči, které se zhoršovaly po dobu několika týdnů. Byla již dříve vyšetřena v ___ bez zlepšení.
+Pacientka odeslána z kliniky ___ s několik týdnů trvající se zhoršující dušností, otoky nohou a sníženým objemem moči. Dříve vyšetřena v ___, ale bez zlepšení.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Rodinná anamnéza:
-Matka s hypertenzí. Žádné známé problémy s ledvinami.
+Matka s hypertenzí. Není známo žádné onemocnění ledvin.
 
 Fyzikální vyšetření:
 Celkový stav:
-Únavná, mírně dušná
-Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Unavená, mírná dušnost
+Hlava, oči, uši, nos, hrdlo:
 Vlhké sliznice
 Krk:
-Zvýšený jugulární venózní tlak (JVP)
-Srdce:
-Pravidelný srdeční rytmus, tichý šelest
-Břicho:
-Měkké, bezbolestné
-Extremity:
-Edém 2+ (dutý otok)
+Zvýšená jugulární žíla
+SRDCE:
+Pravidelný, jemný šelest
+BŘICHO:
+Měkké, netendrovatelné
+Končetiny:
+Otok 2+ (hluboký, při stlačení se prohlubuje)
 Neurologické vyšetření:
-Vědomá, bez fokálních příznaků
+Bdělá, bez ložiskových příznaků
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PŘIJETÍ:
-Kreatinin nad základní hodnotou, zvýšený BNP, mírně zvýšená hladina draslíku.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Kreatinin nad výchozí hodnotou, zvýšený BNP, mírně zvýšený draslík.
 ZÁVĚR:
-Plicní vaskulární kongestivní změny s drobnými bilaterálními efuzemi.
+Plíce s kongescí cév a malými bilaterálními výpotky.
 
-Průběh hospitalizace:
-Léčba intravenózními diuretiky, byly vysazeny nefrotoxické léky. Hmotnost klesla a hladina kreatininu se zlepšila. Pacientka byla vyšetřena kardiologickým oddělením v ___ a nefrologickým týmem v ___. Stabilní stav pro propuštění.
+Stručný popis hospitalizace:
+Léčena intravenózními diuretiky a vysazeny nefrotoxické léky. Hmotnost se snížila a kreatinin se zlepšil. Konzultována kardiologie na ___ a nefrologické oddělení na ___. Stav stabilizován, připravena k propuštění.
 
 Léky při propuštění:
-Furosemid jednou denně, metoprolol dvakrát denně, atorvastatin večer, inzulin dle pokynů.
+Furosemid denně, metoprolol dvakrát denně, atorvastatin večer, inzulín dle pokynů.
 
-Plán po propuštění:
-Domů s péčí.
+Plán propuštění:
+Domů s domácí péčí
 
 Diagnóza při propuštění:
 Chronické onemocnění ledvin
@@ -62,12 +62,12 @@ Akutní poškození ledvin
 Stav při propuštění:
 Stabilní
 Úroveň vědomí:
-Vědomá a komunikativní
-Úroveň aktivity:
-Chůze s pomocí
+Bdělá a komunikativní
+Stav aktivity:
+Chodí s pomocí
 
 Pokyny při propuštění:
-Zvažujte se každé ráno a omezte příjem soli a tekutin. Užívajte léky podle předpisu. V případě zhoršení dušnosti nebo otoků volejte ___ nebo se vraťte.
+Každé ráno se zvažte a omezte příjem soli a tekutin. Užívajte léky podle předpisu. V případě zhoršení dušnosti nebo otoků volejte ___ nebo se vraťte do nemocnice.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

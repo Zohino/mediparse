@@ -1,25 +1,25 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Oddělení: CHIRURGIE
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Bolest v pravém horním kvadrantu břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická cholecystektomie (odstranění žlučníku)
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
 
 Anamnéza současného onemocnění:
-Žena ve věku ___ let, která byla přijata kvůli bolestem v pravém horním kvadrantu břicha a nevolnosti trvajícím tři dny. Byla odeslána z ambulance ___ . Ultrazvukové vyšetření naznačilo zánět žlučníku, proto byla přijata k chirurgickému vyšetření.
+___ letá žena s třídenní bolestí v pravém horním kvadrantu břicha a nevolností, odeslána z ___ kliniky. Ultrazvuk naznačil zánět žlučníku, proto byla přijata k chirurgickému vyšetření.
 
-Předchozí zdravotní problémy:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
 
-Předchozí chirurgické zákroky:
+Anamnéza předchozích chirurgických zákroků:
 Císařský řez
 
 Sociální anamnéza:
@@ -30,44 +30,44 @@ Matka s žlučovými kameny
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacientka je v pohodě, bez známek utrpení.
-Oči, uši, nos, hrdlo:
-Sklera (bílá část oka) bez žlutosti.
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Bez žloutenky
 Břicho:
-Měkké, mírná bolestivost, rány čisté.
+Měkké, mírná citlivost, jizvy čisté
 Kůže:
-Teplá, suchá.
+Teplá, suchá
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Počet bílých krvinek 8,1, hemoglobin 12,9, kreatinin 0,7, normální hodnoty jaterních enzymů.
+Významné výsledky:
+VÝSLEDKY LABORATORNÍCH TESTŮ PŘED PROPUŠTĚNÍM:
+Leukocyty 8,1, hemoglobin 12,9, kreatinin 0,7, normální jaterní enzymy
 ZÁVĚR:
-Žlučové kameny s zesílenou stěnou žlučníku, bez rozšíření žlučových cest.
+Žlučové kameny se ztluštělou stěnou žlučníku, bez dilatace žlučových cest
 
-Průběh hospitalizace:
-Pacientce byla provedena nekomplikovaná laparoskopická cholecystektomie dne ___. Bolest byla kontrolována pomocí léků, dobře tolerovala běžnou stravu a byla schopna samostatné chůze. Histologické výsledky byly k dispozici při propuštění a budou posouzeny lékařem ___.
+Stručný popis průběhu hospitalizace:
+Podstoupila nekomplikovanou laparoskopickou cholecystektomii v ___. Bolest byla kontrolována perorálními léky, dobře snášela běžnou stravu a mohla se samostatně pohybovat. Histopatologické vyšetření bylo v době propuštění ještě v řešení a mělo být zhodnoceno ___.
 
 Léky při přijetí:
-Lisinopril, atorvastatin (denně).
+Lisinopril, atorvastatin denně
 
 Léky při propuštění:
-Pokračujte v užívání lisinoprilu a atorvastatinu. V případě bolesti užívejte paracetamol dle potřeby. V případě silné bolesti užívejte oxykodon jen výjimečně. Během užívání opioidů užívejte docusate.
+Pokračovat v užívání lisinoprilu a atorvastatinu. Užívat paracetamol podle potřeby proti bolesti. Oxykodon užívat pouze v případě silné bolesti a střídmě. Při užívání opioidů užívat dokusát.
 
-Plán po propuštění:
-Domů.
+Plán propuštění:
+Domů
 
 Diagnóza při propuštění:
-Hlavní:
-Akutní cholecystitida (zánět žlučníku).
-Vedlejší:
-Hypertenze, hyperlipidemie.
+Primární:
+Akutní cholecystitida
+Sekundární:
+Hypertenze, hyperlipidémie
 
 Stav při propuštění:
-Stabilní.
+Stabilní
 Úroveň vědomí:
-Přítomná a při vědomí.
-Aktivity:
-Chůze bez pomoci.
+Bdělý a při plném vědomí
+Stav aktivity:
+Chodí bez pomoci
 
-Pokyny při propuštění:
-Můžete se osprchovat, ale ne namáčet rány. Během čtyř týdnů se vyhýbejte zvedání předmětů o hmotnosti více než 4,5 kg. V případě horečky, zhoršující se bolesti, zvracení nebo žlutosti kůže kontaktujte ___. Následujte doporučení lékaře ___.
+Pokyny pro propuštění:
+Můžete se sprchovat, ale nevystavujte jizvy dlouhodobému působení vody. Vyhýbejte se zvedání těžkých předmětů (nad 10 liber) po dobu čtyř týdnů. V případě horečky, zhoršení bolesti, zvracení nebo žloutnutí kůže volejte ___. Navštivte ___ na kontrolu.

@@ -1,21 +1,21 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Bušení srdce
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Žena ve věku ___ let, která pociťovala bušení srdce a závratě po dobu dvou dnů. Byla odeslána k vyšetření, kde byl zjištěn nepravidelný puls kolem 130. Byla odeslána na pohotovost jejím ošetřujícím lékařem, Dr. ___.
+___ letá žena s bušením srdce a závratěmi, které trvají dva dny. Při vyšetření v ___ byl zjištěn nepravidelný puls blízko 130 úderů za minutu. Byla odeslána na pohotovost svým ošetřujícím lékařem, doktorem ___.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hypotyreóza
 Osteoartróza
@@ -24,36 +24,36 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s mrtvicí
+Matka, která prodělala mrtvici
 
 Fyzikální vyšetření:
 Plíce:
-Čisté bilaterálně.
-SRDEČNÍ:
-Nepravidelně nepravidelný, tachykardický.
-BŘÍCHO:
+Čisté na obou stranách.
+SRDCE:
+Nepravidelný, zrychlený tep.
+BŘICHO:
 Měkké, bez citlivosti.
-NEUROLOGICKÉ:
-Přítomná, bez fokálních příznaků.
+NEUROLOGIE:
+Při vědomí, bez ložiskových příznaků.
 
-Relevantní výsledky:
-LABORATOŘ PŘI PŘIJETÍ:
-Drusík 3,3, hořčík 1,6, TSH normální, troponin negativní. EKG ukázalo absenci P vln s nepravidelným, úzkým komplexem při frekvenci 128. Rentgen hrudníku bez patologických nálezů.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Draslík 3,3, hořčík 1,6, TSH v normě, troponin negativní. EKG ukázalo absenci P vln s nepravidelným, úzkým komplexem při 128 úderech za minutu. Rentgen hrudníku bez významných nálezů.
 
-Průběh hospitalizace:
-Frekvence byla kontrolována pomocí metoprololu a byla zahájena antikoagulační léčba apixabanem. Kardiolog, Dr. ___, zkontroloval její monitorování srdeční činnosti. Elektrolyty byly doplněny a pacientka se cítila mnohem lépe k ___, s klidovou frekvencí v rozmezí 70.
+Stručný popis hospitalizace:
+Tepová frekvence byla regulována metoprololem a byla zahájena antikoagulační léčba apixabanem. Kardiolog, doktor ___, zkontroloval její telemetrická data. Elektrolyty byly doplněny a do ___ se cítila mnohem lépe, s klidovým pulzem kolem 70 úderů za minutu.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
-Levothyroxine 75 mcg denně
+Levotyroxin 75 mcg denně
 
 Léky při propuštění:
-Metoprolol succinate 50 mg denně
+Metoprolol succinat 50 mg denně
 Apixaban 5 mg dvakrát denně
 Lisinopril 10 mg denně
-Levothyroxine 75 mcg denně
+Levotyroxin 75 mcg denně
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
@@ -64,12 +64,12 @@ Hypokalémie
 Stav při propuštění:
 Stabilní.
 Úroveň vědomí:
-Přítomná a komunikativní.
-Úroveň aktivity:
-Nezávislá, chodí bez pomoci.
+Při vědomí a komunikativní.
+Stav aktivity:
+Samostatná, chodí bez pomoci.
 
-Instrukce při propuštění:
-Užívejte apixaban dvakrát denně, bez vynechávání dávek. V případě krvácení, omdlélé nebo silného bušení srdce volejte svého lékaře na číslo ___. Vyhýbejte se lékům proti bolesti s protizánětlivým účinkem.
+Pokyny pro propuštění:
+Užívejte apixaban dvakrát denně a nepřestávejte ho užívat. V případě krvácení, mdlob nebo zrychleného tepu kontaktujte svého lékaře na čísle ___. Vyhýbejte se protizánětlivým lékům proti bolesti.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

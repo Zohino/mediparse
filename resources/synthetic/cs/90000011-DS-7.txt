@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,16 +9,16 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž s ___ přišel s třidenním produktivním kašlem, horečkou a dušností. Byl poprvé vyšetřen na ___ kde rentgenové vyšetření hrudníku ukázalo ztmavení v dolní části pravého plíce a byl převeden pro další péči.
+Muž s ___, který se dostavil s třídenní anamnézou produktivního kašle, horečky a dušnosti. Nejprve byl vyšetřen v ___, kde zobrazovací vyšetření hrudníku ukázalo opacitu v dolním laloku pravého plíce, a poté byl převeden k další péči.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
-Dříve kouřil, přestal ___
+Hyperlipidémie
+Dřívější užívání tabáku, přestal ___
 
 Sociální anamnéza:
 ___
@@ -27,20 +27,20 @@ Rodinná anamnéza:
 Bez významných údajů
 
 Fyzikální vyšetření:
-Fyzikální vyšetření při přijetí:
-Životní funkce: T 38,4, HR 98, BP 128/76, RR 22, SpO2 92 % při dýchání okolním vzduchem
-Celkový stav: Vypadá nemocně, mírně tachypnoe
-Krk: Pružný
-PLÍCE: Krepitace v dolní části pravého plíce
-Břicho: Měkké, bez citlivosti
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: T 38,4, TF 98, TK 128/76, dechová frekvence 22, SpO2 92 % při dýchání okolním vzduchem
+Celkový stav: Vypadá nemocně, mírně zrychlené dýchání
+Krk: Pohyblivý
+PLÍCE: Chropy v pravém dolním laloku
+Břicho: Měkké, netendrovatelné
 KONČETINY: Bez otoků
-Neurologické vyšetření: Vědomý, bez fokálních příznaků
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků
 
 Významné výsledky:
-Počet bílých krvinek 14,2 s převahou neutrofilů. Laktát normální. Rentgen hrudníku: konsolidace v dolní části pravého plíce. Kultivace krve z ___ nevykazovala žádný růst.
+Leukocyty 14,2 s převahou neutrofilů. Laktát v normě. Rentgen hrudníku: konsolidace v pravém dolním laloku. Kultivace krve z ___ nevykázala růst.
 
-Průběh hospitalizace:
-Byl léčen pro pneumonii získanou v komunitě intravenózními antibiotiky, poté byl přechod na perorální léčbu, jakmile horečka ustoupila. Podávání kyslíku bylo postupně snižováno do doby, kdy dýchal okolním vzduchem. Chodil bez pomoci a toleroval stravu, takže byl propuštěn domů dne ___.
+Stručný průběh hospitalizace:
+Byl léčen na komunitní pneumonii intravenózními antibiotiky, poté byl po odeznění horečky převeden na perorální terapii. Podávání kyslíku bylo postupně snižováno až na dýchání okolním vzduchem do ___. Chodil bez pomoci a dobře snášel stravu, takže byl propuštěn domů dne ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -49,22 +49,22 @@ Atorvastatin 20 mg večer
 Léky při propuštění:
 1. Lisinopril 10 mg perorálně denně
 2. Atorvastatin 20 mg perorálně večer
-3. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu čtyř dalších dnů
+3. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu dalších čtyř dnů
 
-Plán po propuštění:
+Způsob propuštění:
 Domů s ___
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
-Hypoxemie, vyřešena
+Komunitní pneumonie
+Hypoxémie, vyřešena
 
 Stav při propuštění:
-Psychický stav: Jasný a soudržný.
-Úroveň vědomí: Vědomý a komunikativní.
-Funkční stav: Chůze, soběstačný.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Stav aktivity: Ambulantní, soběstačný.
 
-Pokyny při propuštění:
-Byl hospitalizován kvůli infekci plic. Dokončete celý cyklus antibiotik, odpočívejte a pijte dostatek tekutin. V případě zhoršení dýchání, vysoké horečky nebo bolesti na hrudi se vraťte. Prosím, navštivte svého lékaře dne ___.
+Pokyny pro propuštění:
+Byli jste hospitalizováni s plicní infekcí. Dokončete celou kúru antibiotik, odpočívejte a pijte dostatek tekutin. V případě zhoršení dýchání, vysoké horečky nebo bolesti na hrudi se vraťte. Navštivte svého lékaře na adrese ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

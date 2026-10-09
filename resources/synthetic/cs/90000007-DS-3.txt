@@ -1,74 +1,74 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Zvracení a závratě.
+Zvracení a závratě
 
-Zásahy:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka, ___ let, s dlouhou anamnézou srdečních a metabolických onemocnění, se dostavila s třemi dny potíží, včetně sníženého příjmu potravy, zvracení a závratí. Byla poprvé vyšetřena na ___ , kde laboratorní výsledky ukázaly zvýšenou hodnotu kreatininu nad základní hodnotu a zvýšenou hladinu draslíku. Byla převezena na ___ pro další péči a přijata k hospitalizaci pro rehydrataci a pečlivé monitorování.
+Anamnéza současného onemocnění:
+___ letá žena s dlouhodobou anamnézou srdečního a metabolického onemocnění, která se dostavila s třemi dny trvajícím špatným příjmem potravy, zvracením a závratěmi. Poprvé byla vyšetřena v ___, kde laboratorní výsledky ukázaly výrazně zvýšenou hladinu kreatininu a zvýšené hladiny draslíku. Byla převezena do ___ za účelem další péče a přijata k rehydrataci a pečlivému monitorování.
 
-Předchozí zdravotní problémy:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
 Srdeční selhání
-Fibrilace síní
+Atriální fibrilace
 Hypertenze
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí.
+Matka s hypertenzí
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacientka vypadá unaveně, bez akutních potíží.
-Hlava, oči, uši, nos, krk:
+Vypadá unaveně, bez akutní distrese.
+Hlava, oči, uši, nos, hrdlo:
 Suché sliznice.
 Krk:
-Flexibilní, bez jícnové dilatace.
+Pružný, bez známek zvýšeného žilního tlaku.
 Plíce:
-Čisté při poslech.
+Čisté na obou stranách.
 Břicho:
-Měkké, bezbolestné, nenabrzdělé.
+Měkké, netendrové, neztuhlé.
 Končetiny:
-Teplé, minimální otok kotníků.
+Teplé, mírný otok kotníků.
 Kůže:
 Suchá, neporušená, bez vyrážky.
 
-Průběh hospitalizace:
-Hodnota kreatininu dosáhla maxima ___ a zlepšila se po podání mírných intravenózních tekutin a po vysazení diuretika a ACE inhibitoru. Množství moči se obnovilo a hladina draslíku se normalizovala. Během hospitalizace bylo vysazeno metforminum. Kontrola srdeční frekvence byla pokračována pomocí metoprololu a pacientka zůstala hemodynamicky stabilní. Kardiologické oddělení na ___ souhlasilo s obnovením snížené dávky diuretika. Byla jí postupně zaváděna běžná strava a byla vyšetřena fyzioterapeutem na ___ před propuštěním domů s doporučením k laboratornímu sledování.
+Stručný popis průběhu hospitalizace:
+Hladina kreatininu dosáhla vrcholu ___ a zlepšila se po podání jemných intravenózních tekutin a vysazení diuretika a ACE inhibitoru. Diuréza se obnovila a hladina draslíku se normalizovala. Metformin byl během hospitalizace vysazen. Kontrola srdeční frekvence pokračovala pomocí metoprololu a pacientka zůstala hemodynamicky stabilní. Kardiolog z ___ souhlasil s obnovením snížené dávky diuretika. Strava byla postupně rozšiřována a před propuštěním domů byla pacientka vyšetřena fyzioterapeutem v ___.
 
 Léky při přijetí:
-Metforminum ___ mg dvakrát denně; furosemid 40 mg denně; lisinopril 10 mg denně; apixaban 5 mg dvakrát denně.
+Metformin ___ mg dvakrát denně; furosemid 40 mg denně; lisinopril 10 mg denně; apixaban 5 mg dvakrát denně.
 
 Léky při propuštění:
-Apixaban 5 mg perorálně dvakrát denně. Metoprolol succinate 50 mg jednou denně. Furosemid 20 mg jednou denně, nižší dávka než předtím. Vysazeno metforminum a lisinopril do doby, než budou laboratorní výsledky znovu zkontrolovány ___ v ambulanci. Pokračujte ve všech ostatních lécích, které užíváte doma, beze změn.
+Apixaban 5 mg perorálně dvakrát denně. Metoprolol succinat 50 mg jednou denně. Furosemid 20 mg jednou denně, nižší dávka než dříve. Metformin a lisinopril vysadit, dokud nebudou laboratorní výsledky znovu zkontrolovány ___ v ambulanci. Pokračovat ve všech ostatních domácích lécích beze změny.
 
-Plán po propuštění:
-Domů.
+Způsob propuštění:
+Domů
 
 Diagnóza při propuštění:
 Diabetes mellitus
 Chronické onemocnění ledvin
 Srdeční selhání
-Fibrilace síní
+Atriální fibrilace
 
 Stav při propuštění:
 Úroveň vědomí:
-Orientovaná a komunikativní.
-Funkční stav:
-Chůze, soběstačná.
+Bdělý a reagující.
+Stav aktivity:
+Chodící, soběstačný.
 
-Pokyny při propuštění:
-Byla jste hospitalizována, protože jste byla dehydratovaná a vaše funkce ledvin se zhoršila. Pravidelně pijte tekutiny a každý den se vážte. Nezačínejte znovu užívat metforminum nebo lisinopril, dokud vám to lékař neřekne na ___. V případě horečky, opakovaného zvracení, mdloby nebo nového otoku nohou volejte ___ nebo se vraťte do nemocnice.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli dehydrataci a zhoršení funkce ledvin. Pravidelně pijte tekutiny a každý den se važte. Nezačínejte znovu užívat metformin nebo lisinopril, dokud vám to neřekne váš lékař v ___. V případě horečky, opakovaného zvracení, mdlob nebo nového otoku nohou volejte ___ nebo se vraťte do nemocnice.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

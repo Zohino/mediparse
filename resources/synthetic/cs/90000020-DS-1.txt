@@ -1,28 +1,28 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Oddělení: Chirurgie
-Datum přijetí: ___  Číslo lůžka: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest v pravém horním kvadrantu břicha.
+Bolest v pravém horním kvadrantu břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická cholecystektomie (odstranění žlučníku) s intraoperační cholangiografií (rentgenové vyšetření žlučových cest).
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie s intraoperační cholangiografií
 
 Anamnéza současného onemocnění:
-Pan ___ je muž ve věku ___ let, který se po dvou dnech obtíží potýkal se zhoršující se bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po tučném jídle. Poprvé byl vyšetřen na ___, kde ultrazvukové vyšetření prokázalo žlučové kameny a ztluštění stěny žlučníku. Dostal intravenózní tekutiny a antibiotika a byl převeden sem dne ___ k chirurgickému vyšetření. Uváděl mírné horečky, ale žádnou žloutenku ani světlé stolice. Bolest byla konstantní a vyzařovala do pravého lopatky. K chirurgickému vyšetření byl přivolán Dr. ___, a pacient byl dne ___ operován.
+Pan ___ je ___letý muž, který již dva dny trpí zhoršující se bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po konzumaci tučného jídla. Poprvé byl vyšetřen v ___, kde ultrazvuk odhalil žlučové kameny a ztluštění stěny žlučníku. Byla mu podána intravenózní tekutina a antibiotika a byl převezen sem dne ___ k chirurgickému vyšetření. Uváděl mírné zvýšení teploty, ale neměl žloutenku ani bledou stolici. Bolest byla stálá a vyzařovala do pravé lopatky. Konzultaci s chirurgem provedl Dr. ___ a pacient byl dne ___ operován.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
+Hypertenze
+Hyperlipidemie
 Obezita
 
-Chirurgická anamnéza:
-Apendektomie (odstranění slepého střeva) v roce ___.
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
 
 Sociální anamnéza:
 ___
@@ -32,19 +32,19 @@ Matka s žlučovými kameny. Otec s hypertenzí.
 
 Fyzikální vyšetření:
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
-Bez horečky, vitální funkce stabilní. Pacient je nepříjemně, ale nejeví známky závažného onemocnění.
-OČI, UŠI, NOS, HLTAN: Sklera (bílá část oka) bez žloutenky, vlhké sliznice.
-PLÍCE: Čisté při poslech.
-SRDEČNÍ: Pravidelná frekvence a rytmus, žádné šelesty.
-BŘÍCHO: Měkké, bolestivé v pravém horním kvadrantu, pozitivní Murphyho příznak (bolest při palpaci žlučníku), bez odrazu bolesti.
+Bez horečky, vitální funkce stabilní. Nepohodlí, ale bez známek intoxikace.
+HLAVA, OČI, UŠI, NOS, KRK: Bez žloutenky, vlhké sliznice.
+PLÍCE: Čisté na obou stranách.
+SRDCE: Pravidelný rytmus, bez šelestů.
+BŘICHO: Měkké, citlivé v pravém horním kvadrantu, pozitivní Murphyho znamení, bez odporu.
 KONČETINY: Teplé, bez otoků.
 
 Významné výsledky:
-Laboratorní výsledky při přijetí: WBC (bílý krvinky) 14.2, hemoglobin 14.1, krevní destičky 262. ALT (alaninaminotransferáza) 48, AST (aspartaminotransferáza) 41, alkalická fosfatáza 96, celkový bilirubin 1.1, lipáza 30, kreatinin 0.9, laktát 1.3.
-Ultrazvukové vyšetření na ___: cholelitáza (žlučové kameny), ztluštění stěny žlučníku o 5 mm, malé množství tekutiny kolem žlučníku, pozitivní sonografický Murphyho příznak, společný žlučovod 4 mm.
-Intraoperační cholangiografie: normální naplnění žlučových cest, žádné překážky, volný průtok do dvanáctníku.
-Histopatologické vyšetření bude k dispozici při propuštění a bude zhodnoceno dne ___.
-Laboratorní výsledky při propuštění: WBC 8.3, kreatinin 0.8.
+Laboratorní výsledky při přijetí: WBC 14,2, hemoglobin 14,1, trombocyty 262. ALT 48, AST 41, alkalická fosfatáza 96, celkový bilirubin 1,1, lipáza 30, kreatinin 0,9, laktát 1,3.
+Ultrazvuk v ___: cholelitiáza, ztluštění stěny žlučníku 5 mm, malé množství pericholecystické tekutiny, pozitivní sonografické Murphyho znamení, žlučovod 4 mm.
+Intraoperační cholangiografie: normální vyplnění žlučových cest, bez defektů vyplnění, volný průtok do dvanáctníku.
+Patologické vyšetření probíhá, výsledky budou k dispozici dne ___.
+Laboratorní výsledky při propuštění: WBC 8,3, kreatinin 0,8.
 
 Léky při přijetí:
 Metformin 1000 mg dvakrát denně
@@ -52,22 +52,22 @@ Lisinopril 20 mg denně
 Atorvastatin 40 mg večer
 Aspirin 81 mg denně
 
-Léky k užívání po propuštění:
-Acetaminofen 650 mg každých šest hodin dle potřeby při bolesti.
-Oxykodon 5 mg každé čtyři hodiny dle potřeby při silné bolesti, množství ___ tablet.
+Léky při propuštění:
+Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti.
+Oxykodon 5 mg každé čtyři hodiny podle potřeby při silné bolesti, zásoba ___ tablet.
 Dokusát 100 mg dvakrát denně během užívání oxykodonu.
-Ondansetron 4 mg každých osm hodin dle potřeby při nevolnosti.
-Pokračujte v užívání metforminu, lisinoprilu, atorvastatinu a aspirinu, jako jste je užíval před hospitalizací.
+Ondansetron 4 mg každých osm hodin podle potřeby proti nevolnosti.
+Pokračujte v užívání metforminu, lisinoprilu, atorvastatinu a aspirinu, jako tomu bylo před hospitalizací.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Akutní kalciová cholecystitida (zánět žlučníku).
+Akutní kalcifikovaná cholecystitida
 
 Stav při propuštění:
-Úroveň vědomí: Přítomná a komunikativní.
-Úroveň aktivity: Chůze a soběstačnost.
+Úroveň vědomí: Bdělý a reagující.
+Stav aktivity: Schopný chůze a soběstačný.
 
-Pokyny po propuštění:
-Byli jste přijati s zánětem žlučníku a ten byl endoskopicky odstraněn. Můžete se osprchovat a nechat mýdlovou vodu stékat přes rány, ale neměli byste je namáčet. Během ___ týdnů nezvedejte nic těžšího než 10 liber (cca 4,5 kg). V případě horečky vyšší než 38 °C, zhoršující se bolesti břicha, trvalého zvracení, žluté pokožky nebo výtoku z ran, kontaktujte ordinaci ___ nebo se obraťte na pohotovost. Domluvte si kontrolní prohlídku u doktora ___ v ordinaci ___ za dva týdny.
+Pokyny při propuštění:
+Byli jste přijati s zánětem žlučníku, který byl laparoskopicky odstraněn. Můžete se sprchovat a nechat na řezné rány stékat mýdlovou vodu, ale nesmíte je namáčet. Po dobu ___ týdnů nezvedejte nic, co váží více než 4,5 kilogramu. V případě horečky nad 38,3 °C, zhoršující se bolesti břicha, přetrvávajících zvracení, žluté kůže nebo výtoku z řezných ran volejte do ordinace ___ nebo se vraťte na pohotovost. Navštivte doktora ___ v ___ ambulanci za dva týdny.

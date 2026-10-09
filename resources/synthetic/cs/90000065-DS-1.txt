@@ -1,22 +1,22 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Jedná se o muže ve věku ___ let, který se dostavil s třechdenním zhoršováním produktivního kašle, horečky a únavy. Byl vyšetřen v ___ dne ___ a poté byl poslán na pohotovost, kde byla zaznamenána nízká saturace kyslíkem. Na pohotovosti měl horečku a tachykardii, a zobrazovací vyšetření hrudníku ukázalo ztmavení v dolním laloku pravé plíce.
-PROHLÍDKA SYSTÉMŮ:
-Pozitivní: kašel, horečka a zimnice. Negativní: bolest na hrudi.
+Jedná se o ___letého muže, který se dostavil s třemi dny trvajícím zhoršujícím se produktivním kašlem, horečkou a únavou. Byl vyšetřen v ___ dne ___ a poté odeslán na pohotovost, protože byla zaznamenána nízká saturace kyslíkem. Na pohotovosti měl horečku a zrychlený srdeční tep a zobrazovací vyšetření hrudníku ukázalo opacitu v dolním laloku pravého plíce.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na kašel, horečku a zimnici. Negativní nález na bolest na hrudi.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Apendektomie v ___
 
 Sociální anamnéza:
@@ -26,48 +26,48 @@ Rodinná anamnéza:
 Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
-Životní funkce:
-T 38,1 °C, srdeční frekvence 104 tepů/min, krevní tlak 128/76 mmHg, dechová frekvence 22, saturace kyslíkem 91 % při dýchání okolním vzduchem, zlepšeno na 95 % při podávání 2 litrů kyslíku.
-ORL:
-Suché sliznice, žádné léze.
+Vitalní funkce:
+T 38,1 °C, TF 104, TK 128/76, dechová frekvence 22, SpO2 91 % při dýchání okolním vzduchem, zlepšilo se na 95 % při podávání 2 l kyslíku
+HEENT:
+Suché sliznice, žádné léze
 SRDEČNÍ:
-Tachykardie, pravidelný rytmus, žádný šelest.
-EXTREMITY:
-Teplé, bez otoků.
-NEUROLOGICKÉ:
-Vědomý, orientovaný, pohybuje všemi končetinami.
+Zrychlený srdeční tep, pravidelný rytmus, žádné šelesty
+Končetiny:
+Teplé, bez otoků
+Neurologické:
+Orientovaný, bdělý, pohybuje všemi končetinami
 
 Významné výsledky:
-___: Leukocyty 14,2, hemoglobin 13,1, krevní destičky 260. Sodík 136, draslík 4,2, kreatinin 0,9, glukóza 214. Laktát 1,8. Troponin negativní. Hemoglobin A1c 8,4 %. Kultivace krve nevykazovala růst po 48 hodinách. Opakované laboratorní testy ___: Leukocyty 9,1, kreatinin nezměněn.
-ZOBRAZENÍ:
-Rentgen hrudníku ___: Konsolidace v dolním laloku pravé plíce bez výpotku nebo pneumotoraxu. Velikost srdce normální.
+___: Počet leukocytů 14,2, hemoglobin 13,1, počet trombocytů 260. Sodík 136, draslík 4,2, kreatinin 0,9, glukóza 214. Laktát 1,8. Troponin negativní. Hemoglobin A1c 8,4 %. Kultivace krve bez růstu po 48 hodinách. Opakované laboratorní testy ___: Počet leukocytů 9,1, kreatinin beze změny.
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Rentgen hrudníku ___: konsolidace v dolním laloku pravé plíce bez výpotku nebo pneumotoraxu. Velikost srdce normální.
 
-Průběh hospitalizace:
-Byl léčen pro pneumonii získanou v komunitě pomocí ceftriaxonu a azithromycinu, poté byl přechod na perorální antibiotika, jakmile ustoupila horečka a nepotřeboval kyslík. Kultivace zůstaly negativní. Jeho diabetes byl kontrolován pomocí dávkování inzulínu v nemocnici; A1c byl zvýšený, takže při propuštění byla dávka metforminu zvýšena a byla zajištěna kontrola u ___ . Krevní tlak byl kontrolován pomocí léků, které užíval doma. Samostatně chodil a dobře dýchal okolním vzduchem před odjezdem ___.
+Stručný popis hospitalizace:
+Byl léčen na komunitně získanou pneumonii pomocí ceftriaxonu a azithromycinu, poté byl převeden na perorální antibiotikum, jakmile ustoupila horečka a přestal být závislý na kyslíku. Kultivace zůstaly negativní. Jeho diabetes byl během hospitalizace léčen pomocí inzulinové terapie s dávkováním podle hladiny glukózy v krvi; hodnota A1c byla zvýšená, takže byla při propuštění zvýšena dávka metforminu a byla domluvena kontrola u ___. Krevní tlak byl kontrolován pomocí domácí medikace. Před odchodem z nemocnice ___ chodil samostatně a dobře se saturace kyslíkem při dýchání okolním vzduchem.
 
-Léky při propuštění:
-1. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu pěti dalších dnů.
-2. Metformin 1000 mg perorálně dvakrát denně.
-3. Lisinopril 10 mg perorálně jednou denně.
-4. Atorvastatin 20 mg perorálně večer.
-5. Paracetamol 650 mg perorálně každých šest hodin podle potřeby při horečce.
+Medikace při propuštění:
+1. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu dalších pěti dnů
+2. Metformin 1000 mg perorálně dvakrát denně
+3. Lisinopril 10 mg perorálně denně
+4. Atorvastatin 20 mg perorálně večer
+5. Paracetamol 650 mg perorálně každých šest hodin podle potřeby při horečce
 
-Plán po propuštění:
-Domů s péčí ___
+Způsob propuštění:
+Domů s ___ službami
 
 Diagnóza při propuštění:
-Diabetes mellitus.
+Diabetes mellitus
 
 Stav při propuštění:
-Psychický stav:
-Srozumitelný a koherentní
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Vnímavý a komunikativní
-Úroveň aktivity:
-Chůze vlastní, soběstačný
+Bdělý a reagující
+Stav aktivity:
+Schopný chůze, soběstačný
 
 Pokyny pro propuštění:
-Byli jste hospitalizováni v zařízení ___ s pneumonií a léčení antibiotiky. Užívajte všechny léky podle předpisu a dokončete celou kúru antibiotik. Odpočívejte a pijte dostatek tekutin. V případě horečky, zhoršující se dušnosti, bolesti na hrudi nebo zmatenosti volejte číslo ___ nebo se obraťte na pohotovostní oddělení v zařízení ___ .
+Byli jste hospitalizováni v ___ s pneumonií a léčeni antibiotiky. Užijte všechna předepsaná léčiva a dokončete celou kúru antibiotik. Odpočívejte a pijte dostatek tekutin. V případě horečky, zhoršení dušnosti, bolesti na hrudi nebo zmatenosti volejte na číslo ___ nebo se vraťte na pohotovost do ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

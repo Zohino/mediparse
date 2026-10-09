@@ -1,67 +1,67 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Zvýšená kreatinina, nedostatečný příjem potravy
+Zvýšená hladina kreatininu, špatný příjem potravy
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacient je muž s diagnostikovaným onemocněním ledvin, který byl odeslán z ___ jeho ambulantním nefrologem z ___ poté, co rutinní laboratorní testy ukázaly zvýšenou hodnotu kreatininy. Uvedl, že má po dobu tří dnů snížený příjem potravy, nevolnost a snížený objem moči. Nedávno, dne ___, zahájil užívání nového léku. Popíral horečku, bolest na hrudi nebo dušnost. V pohotovostní ambulanci byl hemodynamicky stabilní.
+Pacient je muž se známým onemocněním ledvin, který byl odeslán z ___ svým ambulantním nefrologem z ___ poté, co rutinní laboratorní vyšetření ukázala zvýšenou hladinu kreatininu. Uváděl, že tři dny měl špatný příjem potravy, nevolnost a snížené množství moči. Nedávno začal užívat nový lék, který mu byl předepsán ___. Popíral horečku, bolest na hrudi nebo dušnost. Na pohotovosti byl hemodynamicky stabilní.
 
-Anamnéza:
-Chronické onemocnění ledvin, stadium 3, sledováno v ___
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin ve stadiu 3, sledováno v ___
 Hypertenze
-Dna
+DNA
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí. V rodině není známa žádná historie onemocnění ledvin.
+Matka s hypertenzí. V rodině se nevyskytuje onemocnění ledvin.
 
 Fyzikální vyšetření:
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
 Celkový stav:
-Unavený, ale v pohodě, bez známek utrpení
-Hlava, oči, uši, nos, krk:
+Unavený, ale v pohodě, bez známek úzkosti
+Hlava, uši, nos, hrdlo:
 Suché sliznice
 Srdce:
-Pravidelná frekvence a rytmus
+Pravidelný rytmus
 Končetiny:
-Bez otoků
+Žádný edém
 Kůže:
 Teplá, bez vyrážky
-Neurologické vyšetření:
-Vědomý, orientovaný, bez fokálních příznaků
+Neurologie:
+Bdělý, orientovaný, bez ložiskových příznaků
 
 Významné výsledky:
-Laboratorní výsledky při přijetí ukazují výrazně zvýšenou hodnotu kreatininy oproti základní hodnotě, s elevací močoviny a mírnou hyperkalémií. Bikarbonát byl nízký. Analýza moči ukázala několik zrn a žádnou krev. Koncentrace sodíku v moči byla nízká. Ultrazvuk ledvin provedený v ___ neprokázal hydronefrózu. Hodnota kreatininy se postupně zlepšovala po podání tekutin. Hladina draslíku se normalizovala do druhého dne hospitalizace. Opakovaná laboratorní vyšetření provedená v ___ byla stabilní a blízko základní hodnoty.
+Laboratorní vyšetření při přijetí ukázala výrazně zvýšenou hladinu kreatininu oproti výchozí hodnotě, zvýšenou hladinu močoviny a mírnou hyperkalémii. Hladina bikarbonátu byla nízká. Vyšetření moči ukázalo málo granulárních valů a žádnou krev. Hladina sodíku v moči byla nízká. Ultrazvuk ledvin provedený v ___ neukázal hydronefrózu. Hladina kreatininu se postupně zlepšovala po podání tekutin. Hladina draslíku se normalizovala do druhého dne hospitalizace. Opakovaná laboratorní vyšetření provedená v ___ byla stabilní a blízko výchozím hodnotám.
 
-Průběh hospitalizace:
-Pacient byl přijat pro akutní poškození ledvin (AKI), které bylo způsobeno dehydratací a přispělo k tomu i nedávno zahájený lék. Tento lék byl vysazen a pacientovi byly podávány intravenózní tekutiny. Objem moči se obnovil a hodnota kreatininy klesla k základní hodnotě. Hyperkalémie se vyřešila bez specifické léčby. Byla konzultována nefrologie v ___ a s plánem souhlasila. Pacient toleroval dietu pro pacienty s onemocněním ledvin a byl propuštěn, jakmile byly laboratorní výsledky stabilní. Byla zajištěna následná ambulantní péče u ___.
-PROBLÉMY PŘI PROPOUŠTĚNÍ:
-Zopakovat vyšetření kreatininy a draslíku do jednoho týdne.
+Stručný průběh hospitalizace:
+Byl přijat s akutním poškozením ledvin, které bylo přičítáno dehydrataci, přičemž roli sehrál i nedávno zahájený lék v ___. Tento lék byl vysazen a pacient dostával intravenózní tekutiny. Produkce moči se zlepšila a hladina kreatininu klesla k výchozí hodnotě. Hyperkalémie se vyřešila bez specifické léčby. Konzultován byl nefrolog z ___, který souhlasil s plánem. Pacient dobře snášel dietu vhodnou pro pacienty s onemocněním ledvin a byl propuštěn, jakmile se laboratorní výsledky stabilizovaly. Bylo domluveno ambulantní sledování s ___.
+PŘECHODNÁ OTÁZKY:
+Opakované vyšetření kreatininu a draslíku do jednoho týdne.
 Vyhýbat se nesteroidním protizánětlivým lékům (NSAID).
 
-Léky při propuštění:
+Léky při přijetí:
 Amlodipin 5 mg denně
 Allopurinol 100 mg denně
-Nový lék zahájen dne ___
+Nový lék zahájený v ___
 
-Léky po propuštění:
+Léky při propuštění:
 Amlodipin 5 mg perorálně jednou denně.
 Allopurinol 100 mg perorálně jednou denně.
-Paracetamol 500 mg perorálně každých šest hodin dle potřeby na bolest.
-Přerušte užívání nově zahájeného léku, dokud vás o tom neprojedná váš lékař specializující se na onemocnění ledvin.
+Paracetamol 500 mg perorálně každých šest hodin podle potřeby proti bolesti.
+Přerušit užívání nedávno zahájeného léku, dokud jej neprojednáte se svým nefrologem.
 
-Stav při propuštění:
+Způsob propuštění:
 Domů
 Zařízení:
 ___
@@ -71,10 +71,11 @@ Akutní poškození ledvin
 Chronické onemocnění ledvin
 
 Stav při propuštění:
-Stabilní, vědomý a soběstačný, pohyblivý.
+Stabilní, bdělý a soběstačný při chůzi.
 
-Pokyny pro propuštění:
-Byli jste hospitalizováni, protože se zhoršila funkce vašich ledvin. Stav se zlepšil díky podávání tekutin a vysazení určitého léku. Pijte tekutiny podle doporučení a dodržujte dietu s nízkým obsahem soli. Neužívejte ibuprofen ani podobné léky proti bolesti. Dodržte termín vaší kontroly u laboratoře, který je stanoven na ___. V případě sníženého množství moči, zvracení, otoků nebo zmatenosti se vraťte do nemocnice a v případě jakýchkoli dotazů volejte na číslo ___.
+Pokyny pro propuštění z nemocnice:
 
-Pokyny pro další péči:
+Byli jste hospitalizováni, protože se zhoršila funkce vašich ledvin. Tato funkce se zlepšila díky podávání tekutin a vysazením jednoho léku. Pijte tekutiny podle doporučení a dodržujte stravu s nízkým obsahem soli. Neužívejte ibuprofen ani jiné léky proti bolesti. Dodržte termín kontrolního vyšetření v laboratoři ___. V případě sníženého objemu moči, zvracení, otoků nebo zmatenosti se vraťte do nemocnice a v případě dotazů volejte na číslo ___.
+
+Pokyny pro kontrolní vyšetření:
 ___

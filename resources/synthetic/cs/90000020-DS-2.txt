@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,18 +9,18 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacient se dostavil na oddělení ___ s třidenním kašlem, horečkou a dušností. Byl vyšetřen na oddělení ___ a odeslán na urgentní příjem, kde rentgenové vyšetření prokázalo infiltrát v dolním laloku pravé plíce. Byl přijat k hospitalizaci pro léčbu.
-ANAMNÉZA:
-Pozitivní nález horečky a kašle. Negativní nález bolesti na hrudi.
+Pacient se dostavil do ___ s třídenní anamnézou produktivního kašle, horečky a dušnosti. Byl vyšetřen v ___ a odeslán na pohotovost, kde zobrazovací vyšetření prokázalo konsolidaci v dolním laloku pravého plíce. Byl přijat k léčbě.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na horečku a kašel. Negativní nález na bolest na hrudi.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
-Chronická obstrukční plicní nemoc (CHOPN)
+Hyperlipidémie
+CHOPN
 
 Sociální anamnéza:
 ___
@@ -31,55 +31,55 @@ Bez významných údajů
 Fyzikální vyšetření:
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
 Celkový stav:
-Pacient vypadá mírně nemocný.
-ORL:
-Suché sliznice.
+Mírně nemocný vzhled
+HLAVA, OČI, UŠI, NOS, KRK:
+Suché sliznice
 PLÍCE:
-Chropy v dolní části pravého plíce.
-BŘÍCHO:
-Měkké, bezbolestné.
-EXTREMITY:
-Bez otoků.
-PULZY:
-Hmatné bilaterálně.
+Chropy v dolní části pravé plíce
+BŘICHO:
+Měkké, netendrovatelné
+KONČETINY:
+Bez otoků
+PULSY:
+Hmatatelné bilaterálně
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
-Zlepšený stav, plíce čisté, jinak bez změn.
+Zlepšení, plíce čisté, jinak bez změn
 
 Významné výsledky:
-LABORATOŘ PŘI PŘIJETÍ:
-Zvýšený počet bílých krvinek (14,2), laktát 1,8, kreatinin v normě. Rentgen hrudníku prokázal opacitu v dolním laloku pravé plíce, provedeno dne ___.
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Normalizovaný počet bílých krvinek (8,1), stabilní kreatinin, elektrolyty v normě. Opakované zobrazovací vyšetření, posouzené lékařem ___, prokázalo zlepšení opacit bez výpotku.
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Počet leukocytů zvýšený na 14,2, laktát 1,8, kreatinin v normě. Rentgen hrudníku prokázal opacitu v dolním laloku pravé plíce, vyšetření provedeno v ___.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Počet leukocytů normalizován na 8,1, kreatinin stabilní, elektrolyty v normě. Opakované zobrazovací vyšetření, které zhodnotil ___, prokázalo zlepšení opacity bez výpotku.
 
-Průběh hospitalizace:
-Léčen pro pneumonii získanou v komunitě pomocí ceftriaxonu a azithromycinu, poté byl na třetí den převeden na perorální antibiotika. Podávání kyslíku bylo postupně snižováno. Hypertenze byla kontrolována pomocí léků užívaných doma. Plán léčby byl prodiskutován s ___ a ___. Pacient se postupně zlepšoval, dobře toleroval stravu a byl schopen samostatně chodit před propuštěním do ___.
+Stručný průběh hospitalizace:
+Léčen pro komunitně získanou pneumonii pomocí ceftriaxonu a azithromycinu, poté převeden na perorální antibiotika třetí den hospitalizace. Kyslík byl postupně snižován, dokud pacient nedýchal pouze okolní vzduch. Hypertenze byla léčena domácími léky. Plán byl prodiskutován s ___ a ___. Pacient se postupně zlepšoval, toleroval stravu a chodil samostatně před propuštěním do ___.
 
 Léky při přijetí:
 Lisinopril denně
 Atorvastatin večer
-Inhalátor s albuterolem dle potřeby
+Inhalátor s albuterolem podle potřeby
 
 Léky při propuštění:
-1. Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů
+1. Amoxicilin-klavulanát dvakrát denně po dobu pěti dalších dnů
 2. Lisinopril denně
 3. Atorvastatin večer
-4. Inhalátor s albuterolem každé čtyři hodiny dle potřeby
+4. Inhalátor s albuterolem každé čtyři hodiny podle potřeby
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Hypertenze
-Chronická obstrukční plicní nemoc (CHOPN)
+CHOPN
 
 Stav při propuštění:
-Psychický stav: Jasný a srozumitelný
-Úroveň vědomí: Vnímavý a komunikativní
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
 
-Pokyny při propuštění:
-Byl Vám léčen plicní zánět. Dokončete užívání všech antibiotik, odpočívejte a pijte dostatek tekutin. V případě zhoršení dýchání, horečky nebo bolesti na hrudi se vraťte. V případě dotazů kontaktujte ___ a nezapomeňte na kontrolní prohlídku dne ___.
+Pokyny pro propuštění:
+Byl jste léčen na plicní infekci. Dokončete všechny antibiotika, odpočívejte a pijte dostatek tekutin. V případě zhoršení dýchání, horečky nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___ a dodržujte termín kontroly u ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

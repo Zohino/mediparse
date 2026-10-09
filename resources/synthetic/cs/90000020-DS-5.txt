@@ -1,65 +1,65 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacient se prezentoval s třechdenním produktivním kašlem a horečkou. Byl odeslán lékařem ___ poté, co rentgenové vyšetření hrudníku odhalilo ztmavení v dolní části pravého plíce.
+Pacient se dostavil se třemi dny trvajícím produktivním kašlem a horečkou. Byl odeslán doktorem ___ poté, co rentgenové vyšetření hrudníku odhalilo zatajení v dolním laloku pravého plíce.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
-Bez anamnézy diabetu
+Hyperlipidémie
+Žádná anamnéza diabetu
 
-Chirurgická anamnéza:
+Anamnéza předchozích chirurgických zákroků:
 Apendektomie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec s koronární chorobou
+Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
 Celkový stav: unavený, v pohodě
-Plíce: praskání v dolní části pravé plíce
-EXTREMITY: bez otoků
-PULZY: hmatné bilaterálně
+Plíce: v dolní části pravé plíce slyšitelné chrůpky
+KONČETINY: bez otoků
+PULSY: hmatatelné na obou stranách
 
-Relevantní výsledky:
-LABORATOŘ PŘI PŘIJETÍ:
-Zvýšený počet bílých krvinek, normální laktát, kreatinin na základní úrovni. Rentgen hrudníku ukázal konsolidaci v dolní části pravé plíce.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Počet bílých krvinek zvýšený, laktát v normě, kreatinin na výchozí úrovni. Rentgen hrudníku ukázal zatajení v dolním laloku pravé plíce.
 
-Průběh hospitalizace:
-Léčba pneumonie získané v komunitě pomocí ceftriaxonu a azithromycinu, následně převedeno na perorální antibiotika. Horečka ustoupila, postupně snižována podávání kyslíku. Pacient byl vyšetřen týmem v ___ před propuštěním do ___.
+Stručný popis průběhu hospitalizace:
+Léčen na komunitní pneumonii pomocí ceftriaxonu a azithromycinu, poté převeden na perorální antibiotika. Horečka ustoupila, kyslíková terapie byla postupně snižována. Před propuštěním do ___ byl pacient vyšetřen týmem na ___.
 
 Léky při přijetí:
 Lisinopril
 Atorvastatin
 
 Léky při propuštění:
-Pokračujte v užívání lisinoprilu a atorvastatinu. Užívat amoxicilin-clavulanát dvakrát denně po dobu pěti dalších dnů. Paracetamol dle potřeby při horečce.
+Pokračujte v užívání lisinoprilu a atorvastatinu. Užívajte amoxicillin-klavulanát dvakrát denně po dobu dalších pěti dnů. Paracetamol podle potřeby na horečku.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitní pneumonie
 
 Stav při propuštění:
-Psychický stav: jasný a koherentní.
-Úroveň vědomí: bdělý a komunikativní.
-Funkční stav: pohyblivý, soběstačný.
+Duševní stav: jasný a srozumitelný.
+Úroveň vědomí: bdělý a reagující.
+Stav aktivity: pohyblivý, soběstačný.
 
-Instrukce při propuštění:
-Byl vám léčen pneumonia. Dokončete užívání všech antibiotik, odpočívejte, pijte dostatek tekutin a v případě zhoršení dýchání nebo horečky se vraťte. V případě dotazů volejte ___.
+Pokyny pro propuštění:
+Byl jste léčen na pneumonii. Dokončete všechny antibiotika, odpočívejte, pijte dostatek tekutin a v případě zhoršení dýchání nebo horečky se vraťte. V případě dotazů volejte ___.
 
-Následná péče:
+Pokyny pro kontrolu:
 ___

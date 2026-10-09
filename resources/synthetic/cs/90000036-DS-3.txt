@@ -1,24 +1,24 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Oddělení: Chirurgie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
-Bolest v pravém horním břiše
+Bolest v pravé horní části břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická cholecystektomie provedena dne ___
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie provedená v ___
 
 Anamnéza současného onemocnění:
-Žena, která pociťuje bolest v pravém horním kvadrantu břicha, nevolnost a horečku již dva dny, po konzumaci tučného jídla. Byla vyšetřena svým lékařem dne ___, poté byla odeslána na pohotovost, kde zobrazovací metody naznačily zánět žlučníku.
+Žena s bolestí v pravém horním kvadrantu břicha, nevolností a horečkou po konzumaci tučného jídla, trvající dva dny. Vyšetřena svým lékařem v ___, poté odeslána na pohotovost, kde zobrazovací metody naznačily zánět žlučníku.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hypotyreóza
-Předchozí apendektomie provedena dne ___
+Předchozí apendektomie v ___
 
 Sociální anamnéza:
 ___
@@ -27,53 +27,53 @@ Rodinná anamnéza:
 Matka měla žlučové kameny.
 
 Fyzikální vyšetření:
-Životní funkce:
+Vitalní funkce:
 Bez horečky, stabilní
 Celkový stav:
-Pohodlná, při vědomí
+Komfortní, bdělá
 SRDEČNÍ:
 Pravidelný rytmus
-BŘÍCHO:
+BŘICHO:
 Měkké, mírná bolestivost v místě řezu
 KONČETINY:
 Bez otoků
 NEUROLOGICKÉ:
-Bez specifických abnormalit
-PULZY:
+Bez ložiskových příznaků
+PULSY:
 Hmatatelné, symetrické
 
 Významné výsledky:
-Ultrazvuk prokázal žlučové kameny se ztluštěním stěny a tekutinou kolem žlučníku. Počet bílých krvinek byl při příjmu zvýšený, při propuštění se normalizoval. Testy jater mírně zvýšené. Konzultováno s radiologií dne ___.
-IMPRESE:
-Akutní kalciová cholecystitida
+Ultrazvuk prokázal žlučové kameny se ztluštěním stěny žlučníku a tekutinou v okolí žlučníku. Po přijetí zvýšený počet bílých krvinek, při propuštění normalizován. Mírně zvýšené jaterní testy. Konzultováno s radiologií v ___.
+ZÁVĚR:
+Akutní kalcifikující cholecystitida
 
-Průběh hospitalizace:
-Byla jí podávána intravenózní antibiotika a tekutiny, poté podstoupila nekomplikovanou laparoskopickou operaci s týmem ___ . Bolest byla kontrolována perorálními léky a dieta postupně rozšiřována. Horečka ustoupila, rány zůstaly čisté a byla propuštěna ___ den.
+Stručný popis hospitalizace:
+Byla jí podána intravenózní antibiotika a tekutiny, poté podstoupila nekomplikovanou laparoskopickou operaci s týmem ___. Bolest byla kontrolována perorálně a dieta byla postupně rozšiřována. Horečka ustoupila, rány zůstaly čisté a byla propuštěna ___. den.
 
 Léky při přijetí:
-Lisinopril a levothyroxin denně.
+Lisinopril a levotyroxin denně.
 
 Léky při propuštění:
-Pokračovat v užívání lisinoprilu a levothyroxinu. Acetaminophen dle potřeby na bolest, plus krátká kúra oxykodonu. Docusate dvakrát denně během užívání opioidů. Antibiotická léčba byla dokončena v nemocnici.
+Pokračovat v užívání lisinoprilu a levotyroxinu. Paracetamol podle potřeby proti bolesti, plus krátkodobá léčba oxykodonem. Dokusát dvakrát denně během užívání opioidů. Antibiotická léčba dokončena v nemocnici.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Akutní kalciová cholecystitida
+Akutní kalcifikující cholecystitida
 Hypertenze
 Hypotyreóza
 
 Stav při propuštění:
-Psychický stav:
-Srozumitelná a koherentní
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Při vědomí a komunikativní
-Funkční stav:
-Chůze, soběstačná
+Bdělá a komunikativní
+Stav aktivity:
+Chodí, soběstačná
 
-Instrukce při propuštění:
-Byla léčena zánětu žlučníku a byla jí odstraněna žlučník. Udržujte rány čisté a suché. Vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů. V případě horečky, zvracení nebo zhoršení bolesti volejte ___ nebo se vraťte do nemocnice.
+Pokyny pro propuštění:
+Byla léčena pro zánět žlučníku a byl jí odstraněn žlučník. Udržujte řezné rány čisté a suché. Vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů. V případě horečky, zvracení nebo zhoršení bolesti volejte ___ nebo se vraťte do nemocnice.
 
-Následná péče:
+Pokyny pro kontrolu:
 ___

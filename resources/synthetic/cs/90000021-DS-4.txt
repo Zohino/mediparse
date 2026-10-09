@@ -1,76 +1,76 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Bušení srdce a dušnost
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka, ___ let, s fibrilací síní, léčená antikoagulancii, převezena z ___ po třech dnech zhoršující se dušnosti a bušení srdce, které začalo ___ dne. Popírá bolesti na hrudi a nemá anamnézu srdečního selhání.
-PROHLÍDKA SYSTÉMŮ:
-Pozitivní nález únavy. Negativní nález horečky, kašle nebo otoků nohou.
+Anamnéza současného onemocnění:
+___letá žena s fibrilací síní, užívající antikoagulantní léčbu, převezena z ___ po třech dnech zhoršující se dušnosti a bušení srdce od ___. Popírá bolesti na hrudi a nemá v anamnéze srdeční selhání.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na únavu. Negativní na horečku, kašel nebo otok nohou.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hypotyreóza
-Léčena u Dr. ___ z důvodu onemocnění štítné žlázy.
+Pod dohledem doktora ___ kvůli onemocnění štítné žlázy
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s mrtvicí.
+Matka s cévní mozkovou příhodou
 
 Fyzikální vyšetření:
-Celkový stav: Pacientka je v pohodě, bez známek utrpení.
-Plíce: Čisté bilaterálně.
-SRDEČNÍ: Nepravidelný rytmus, bez šelestu.
-Břicho: Měkké, bez citlivosti.
-Extremity: Teplé, bez edémů.
-Neurologické vyšetření: Pacientka je při vědomí, bez fokálních příznaků.
+Celkový stav: Dobrý, bez známek úzkosti
+Plíce: Čisté na obou stranách
+SRDCE: Nepravidelný rytmus, bez šelestu
+Břicho: Měkké, netendrovatelné
+Končetiny: Teplé, bez edému
+Neurologické: Bdělá, bez ložiskových příznaků
 
 Významné výsledky:
-Troponin negativní dvakrát. TSH v normě. Draslík 4,1, kreatinin na základní úrovni. EKG provedené ___ dne ukázalo rychlý nepravidelný rytmus bez ischemických změn.
-ZOBRAZENÍ:
+Dvakrát negativní troponin. Normální TSH. Draslík 4,1, kreatinin v normě. EKG z ___ ukázalo rychlý, nepravidelný rytmus bez ischemických změn.
+ZOBRAZOVACÍ METODY:
 Rentgen hrudníku ukázal čisté plíce a normální velikost srdce.
 
-Průběh hospitalizace:
-Pacientka byla přijata pro kontrolu srdeční frekvence a byla jí podán perorální metoprolol, což mělo dobrý účinek; srdeční frekvence se ustálila pod 100. Elektrolyty byly doplněny. Antikoagulace byla pokračována. Její plán byl probrán s Dr. ___ a pacientka před propuštěním chodila samostatně.
+Stručný popis hospitalizace:
+Byla přijata za účelem kontroly srdeční frekvence a byla jí podán perorální metoprolol s dobrým účinkem; srdeční frekvence se stabilizovala pod 100. Elektrolyty byly doplněny. Antikoagulační léčba byla pokračována. Plán léčby byl prodiskutován s doktorem ___ a před propuštěním chodila bez pomoci.
 
 Léky při přijetí:
 Metoprolol 25 mg denně
 Apixaban 5 mg dvakrát denně
 
 Léky při propuštění:
-1. Metoprolol succinate 50 mg perorálně denně
+1. Metoprolol sukcinát 50 mg perorálně denně
 2. Apixaban 5 mg perorálně dvakrát denně
-3. Levothyroxine 75 mcg perorálně denně
+3. Levotyroxin 75 mcg perorálně denně
 4. Lisinopril 10 mg perorálně denně
 
-Plán po propuštění:
+Způsob propuštění:
 Domů s péčí od ___
 
 Diagnóza při propuštění:
-Rychlá komorová odpověď
+Rychlá ventrikulární odpověď
 Sekundární:
 Hypertenze
 Hypotyreóza
 
 Stav při propuštění:
 Stabilní
-Psychický stav: Jasný a soudržný
-Úroveň vědomí: Při vědomí a komunikativní
-Funkční stav: Chůze, samostatná.
+Duševní stav: Jasný a koherentní
+Úroveň vědomí: Bdělá a reagující
+Stav aktivity: Ambulantní, soběstačná
 
-Instrukce při propuštění:
-Byla jste přijata s rychlou srdeční frekvencí, která se zlepšila díky lékům. Užívajte léky podle předpisu a nepřestávejte užívat apixaban. V případě bolesti na hrudi, mdloby nebo zhoršující se dušnosti se obraťte na lékaře. V případě dotazů volejte ___ .
+Pokyny pro propuštění:
+Byla jste přijata s rychlým srdečním tepem, který se zlepšil po podání léků. Užívajte léky podle předpisu a nepřestávejte užívat apixaban. V případě bolesti na hrudi, mdlob nebo zhoršující se dušnosti se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

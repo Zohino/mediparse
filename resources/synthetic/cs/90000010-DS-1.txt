@@ -1,21 +1,21 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Kašel a horečka po dobu tří dnů
+Kašel a horečka trvající tři dny
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza:
 Hypertenze
-Hyperlipidemie
-Dna
+Hyperlipidémie
+DNA
 
 Sociální anamnéza:
 ___
@@ -24,21 +24,21 @@ Rodinná anamnéza:
 Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
-Celkový stav: klidný, bez známek utrpení
-Krk: ohebný
-SRDEČNÍ: pravidelný rytmus
-BŘÍCHO: měkké, bez citlivosti
-EXTREMITY: bez otoků
+Celkový stav: pacient je v pohodě, bez známek úzkosti
+Krk: pružný
+SRDCE: pravidelný rytmus
+BŘICHO: měkké, bez citlivosti
+Končetiny: bez otoků
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-WBC 8.2, Hgb 13.5, Plt 240, Na 139, K 4.1, Cr 0.9
-ZOBRAZENÍ:
-Rentgen hrudníku ukázal konsolidaci v dolním laloku pravé plíce, bez výpotku.
+Významné výsledky:
+VÝSLEDKY LABORATORNÍCH TESTŮ PŘED PROPUŠTĚNÍM:
+Leukocyty 8,2, hemoglobin 13,5, trombocyty 240, sodík 139, draslík 4,1, kreatinin 0,9
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku ukázal konsolidaci v dolním laloku pravého plíce, bez výpotku.
 
-Průběh hospitalizace:
-___letý muž byl převezen z ___ s pneumonií získanou v běžném prostředí. Byl léčen antibiotiky, zlepšil se, neměl horečku a byl postupně odvykáván od kyslíku. Vyšetřil ho Dr. ___.
-PROBLÉMY PŘI PŘECHODU:
+Stručný popis hospitalizace:
+___letý muž byl převezen z ___ s komunitně získanou pneumonií. Byl léčen antibiotiky, jeho stav se zlepšil, horečka ustoupila a byl odpojen od kyslíku. Vyšetřil ho Dr. ___.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
 Opakovaný rentgen hrudníku za šest týdnů.
 
 Léky při přijetí:
@@ -50,21 +50,21 @@ Léky při propuštění:
 2. Allopurinol 100 mg denně
 3. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu čtyř dnů
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Pneumonie získaná v běžném prostředí
+Komunitně získaná pneumonie
 Hypertenze
 
 Stav při propuštění:
-Psychický stav: jasný a srozumitelný.
-Úroveň vědomí: bdělý a komunikativní.
-Funkční stav: pohyblivý, soběstačný.
+Duševní stav: jasný a srozumitelný.
+Úroveň vědomí: bdělý a reagující.
+Fyzická aktivita: chůze možná, soběstačný.
 
-Pokyny při propuštění:
-Byl jste přijat s pneumonií. Užívajte antibiotika podle předpisu, odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršujícího se kašle nebo potíží s dýcháním se vraťte. V případě dotazů kontaktujte ordinaci ___ .
+Pokyny pro propuštění:
+Byli jste přijati s pneumonií. Užijte si antibiotika podle předpisu, odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršení kašle nebo potíží s dýcháním se vraťte. V případě dotazů volejte na kliniku ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

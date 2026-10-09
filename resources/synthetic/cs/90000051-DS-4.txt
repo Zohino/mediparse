@@ -1,66 +1,66 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
-Zásahy:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let s hypertenzí, který se prezentoval s třidenní produktivní kašlem, horečkou a dušností. Byl poprvé vyšetřen na ___ , kde zobrazovací vyšetření hrudníku ukázalo ztmavení v dolní části pravého plíce a byl převeden na ___ pro další péči. Popíral bolesti na hrudi, zvracení nebo nedávné cestování. Při příjezdu byla nízká saturace kyslíkem.
+___letý muž s hypertenzí, který se dostavil s třídenní anamnézou produktivního kašle, horečky a dušnosti. Poprvé byl vyšetřen v ___, kde zobrazovací vyšetření hrudníku odhalilo zatajení v dolním laloku pravého plíce, a byl převezen do ___ za účelem další péče. Popíral bolest na hrudi, zvracení nebo nedávné cestování. Při příjezdu byla zjištěna nízká saturace kyslíkem.
 
-Anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
-Starší operace kolene na ___
+Hyperlipidémie
+Dřívější operace kolene v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec s ischemickou chorobou srdeční.
+Otec s ischemickou chorobou srdeční
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PŘIJETÍ:
-Bílkoviny 14,2, hemoglobin 13,1, krevní destičky 240, sodík 136, draslík 4,1, kreatinin 1,0, laktát 1,8.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 14,2, hemoglobin 13,1, trombocyty 240, sodík 136, draslík 4,1, kreatinin 1,0, laktát 1,8.
 
 ZÁVĚR:
-Rentgen hrudníku interpretován ___: konsolidace v dolní části pravého plíce bez výpotku. Kontrolní snímek z ___ ukázal nezměněné nálezy a žádný nový proces.
+Rentgen hrudníku vyhodnotil ___: zatajení v dolním laloku pravého plíce bez výpotku. Kontrolní snímek z ___ ukázal nezměněné nálezy a žádný nový proces.
 
-Průběh hospitalizace:
-Byl přijat s pneumonií získanou mimo nemocnici a zahájena intravenózní léčba ceftriaxonem a azithromycinem. Krátce byla potřeba podpora kyslíkem, která byla postupně snižována do druhého dne. Horečka ustoupila a kašel se zlepšil. Byl převeden na perorální antibiotika a mohl chodit bez poklesu saturace. Kultivace krve z ___ nevykazovala žádný růst. Jeho krevní tlak byl stabilní díky domácím lékům a byl propuštěn domů po vyšetření u ___ .
+Stručný průběh hospitalizace:
+Byl přijat s komunitně získanou pneumonií a zahájena byla intravenózní léčba ceftriaxonem a azithromycinem. Krátkodobě byla nutná oxygenoterapie, která byla druhý den postupně snižována. Horečka ustoupila a kašel se zlepšil. Byl převeden na perorální antibiotika a chodil bez desaturace. Kultivace krve z ___ neprokázaly růst bakterií. Jeho krevní tlak byl stabilní při domácí medikaci a byl propuštěn domů po vyšetření ___.
 
-PROBLÉMY PŘI PŘECHODU:
-Opakované zobrazovací vyšetření hrudníku za šest týdnů k potvrzení zlepšení, které zajistí ___.
+PŘECHODNÁ OTÁZKY:
+Opakované zobrazovací vyšetření hrudníku za šest týdnů k potvrzení ústupu, zajistí ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
 Atorvastatin 20 mg večer
 
 Léky při propuštění:
-1. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dalších dnů
+1. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu dalších pěti dnů
 2. Lisinopril 10 mg denně
 3. Atorvastatin 20 mg večer
-4. Paracetamol dle potřeby při horečce, předepsán ___
+4. Paracetamol podle potřeby při horečce, předepsáno ___
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 
 Stav při propuštění:
-Psychický stav:
-Srozumitelný a koherentní.
+Duševní stav:
+Jasný a srozumitelný.
 
 Úroveň vědomí:
-Vnímavý a komunikativní.
+Bdělý a reagující.
 
-Fyzická aktivita:
-Chůze, soběstačný.
+Stav aktivity:
+Chodící, soběstačný.
 
-Pokyny při propuštění:
-Byl hospitalizován kvůli infekci plic a léčen antibiotiky. Dokončete celý cyklus užívání léků a pijte dostatek tekutin. V případě horečky, zhoršující se dušnosti, bolesti na hrudi nebo zmatenosti se vraťte. Dodržujte schůzku u ___ a vyhýbejte se kouření.
+Pokyny pro propuštění:
+Byli jste hospitalizováni s plicní infekcí a léčeni antibiotiky. Dokončete celou kúru léků a pijte dostatek tekutin. V případě horečky, zhoršení dušnosti, bolesti na hrudi nebo zmatenosti se vraťte. Prosím, dodržujte termín schůzky s ___ a vyhýbejte se kouření.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

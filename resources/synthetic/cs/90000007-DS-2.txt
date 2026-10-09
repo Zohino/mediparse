@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,14 +9,14 @@ Alergie:
 Hlavní potíže:
 Dušnost
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka je žena s dlouhodobou cukrovkou a srdečním selháním, která byla přijata z její ambulance ___ po několika dnech zhoršující se dušnosti a otoků nohou. Příznaky se začaly objevovat poté, co jí došly léky ___ .
+Pacientka je žena s dlouhodobou cukrovkou a srdečním selháním, která byla odeslána z její ___ kliniky po několika dnech zhoršující se dušnosti a otoků nohou. Příznaky se objevily poté, co jí došly léky v ___.
 
-Osobní anamnéza:
-Cukrovka
+Anamnéza předchozích onemocnění:
+Diabetes mellitus
 Srdeční selhání
 Hypertenze
 
@@ -24,18 +24,18 @@ Rodinná anamnéza:
 Bez významných údajů
 
 Fyzikální vyšetření:
-Celkový stav: Vědomá, v pohodě, bez známek utrpení.
-Krk: Mírná dilatace jugulárních žil.
-Plíce: Krepitus na obou plicních bázích.
-Břicho: Měkké, bez citlivosti.
-Pulzy: Palpovatelné a symetrické.
+Celkový stav: Bdělá, v pohodlí, bez známek úzkosti.
+Krk: Mírné rozšíření jugulárních žil.
+Plíce: Oboustranné chrůpky.
+Břicho: Měkké, netendrové.
+PULSY: Hmatné a symetrické.
 
 Významné výsledky:
-ZÁVĚR: Mírná plicní vaskulární kongestice s malými bilaterálními efuzemi, bez ložiskové konsolidace. Porovnání s vyšetřením z ___.
-NÁLEZY: Velikost srdce je mírně zvětšená. Plícní objemy jsou snížené. Na obou stranách jsou přítomny malé pleurální efuze a není patrný pneumotorax.
+ZÁVĚR: Mírná plicní vaskulární kongesce s malými oboustrannými výpotky, bez ložiskové konsolidace. Srovnání s vyšetřením z ___.
+NÁLEZY: Velikost srdce je mírně zvětšená. Objem plic je nízký. Na obou stranách jsou přítomny malé pleurální výpotky a pneumotorax nebyl zjištěn.
 
-Průběh hospitalizace:
-Byla podána intravenózní furosemid a její stav se postupně zlepšoval. Telemetrie ukázala fibrilaci síní s kontrolovanou frekvencí a po konzultaci s ___ byla zahájena antikoagulace. Hladina glukózy byla kontrolována pomocí inzulínu. Byla vyšetřena lékařem ___ a byla propuštěna domů v den ___ hospitalizace.
+Stručný průběh hospitalizace:
+Byla léčena diuretiky (furosemid intravenózně) a její stav se postupně zlepšoval. Telemetrie prokázala fibrilaci síní s kontrolovanou frekvencí a po konzultaci s ___ byla zahájena antikoagulační léčba. Hladina glukózy byla regulována inzulínem. Byla vyšetřena ___ a propuštěna domů v den ___ hospitalizace.
 
 Léky při přijetí:
 Furosemid, metformin, lisinopril a carvedilol denně.
@@ -43,21 +43,21 @@ Furosemid, metformin, lisinopril a carvedilol denně.
 Léky při propuštění:
 Furosemid 40 mg denně, metformin 500 mg dvakrát denně, lisinopril 10 mg denně, carvedilol 6,25 mg dvakrát denně, apixaban 5 mg dvakrát denně.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
 Primární:
-Cukrovka
+Diabetes mellitus
 Chronické onemocnění ledvin
 Srdeční selhání
 
 Stav při propuštění:
-Psychický stav: Vědomá a koherentní.
-Funkční stav: Chůze, soběstačná.
+Duševní stav: Jasný a srozumitelný.
+Fyzická aktivita: Chodí, soběstačná.
 
 Pokyny při propuštění:
-Byla léčena pro přetížení tekutinami. Zvažujte se každý den ráno a volejte ___ , pokud se vaše váha během jednoho dne zvýší o více než 0,9 kg. Užívajte léky podle předpisu a omezte příjem soli v potravě.
+Byla léčena kvůli zadržování tekutin. Každé ráno se važte a volejte ___, pokud se vaše váha během jednoho dne zvýší o více než jeden kilogram. Užívajte léky podle předpisu a omezte příjem soli v potravě.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

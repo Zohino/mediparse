@@ -1,46 +1,46 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Kašel a horečka.
+Kašel a horečka
 
-Zásahy:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let, který byl přijat pro vyšetření kvůli čtyřdennímu produktivnímu kašli, horečce a únavě. Odeslán doktorem ___.
-ANAMNÉZA:
-Pozitivní nález: zimnice a dušnost. Jinak negativní.
+___letý muž s čtyřdenní anamnézou produktivního kašle, horečky a únavy, odeslán ___ k vyšetření.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na zimnici a dušnost. Jinak negativní.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Bez významných informací.
+Bez významných údajů
 
 Fyzikální vyšetření:
-Celkový stav: Únavný, mírně nemocný vzhled.
-Hlava, oči, uši, nos, krk: Vlhká sliznice.
-Plíce: Krepitus v dolní části pravého plíce.
-Extremity: Bez otoků.
+Celkový stav: Unavený, mírně nemocný vzhled.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Plíce: V dolní části pravé plíce slyšitelné chrůpky.
+Končetiny: Bez otoků.
 Kůže: Teplá, suchá.
-Neurologické vyšetření: Vědomý, bez fokálních příznaků.
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků.
 
 Významné výsledky:
-Rentgen hrudníku ukázal konsolidaci v dolní části pravého plíce. Počet bílých krvinek byl při přijetí zvýšený, normalizoval se do ___. Kultivace krve bez nálezu.
+Rentgen hrudníku prokázal konsolidaci v dolním laloku pravé plíce. Počet bílých krvinek zvýšený při přijetí, normalizoval se do ___. Kultivace krve bez růstu.
 
-Průběh hospitalizace:
-Léčba pneumonie získané v komunitě pomocí ceftriaxonu a azithromycinu, následně přechod na perorální antibiotika. Horečka ustoupila a podávání kyslíku bylo postupně ukončeno před ___.
-DŮLEŽITÉ ASPEKTY:
+Stručný popis hospitalizace:
+Léčen pro komunitně získanou pneumonii pomocí ceftriaxonu a azithromycinu, poté převeden na perorální antibiotika. Horečka ustoupila a kyslíková terapie byla postupně snižována, dokud pacient nemohl dýchat bez pomoci do ___.
+PŘECHODNÁ OTÁZKY:
 Opakované zobrazovací vyšetření hrudníku za šest týdnů.
 
 Léky při přijetí:
@@ -48,23 +48,23 @@ Lisinopril
 Atorvastatin
 
 Léky při propuštění:
-1. Lisinopril jednou denně.
-2. Atorvastatin jednou denně večer.
-3. Amoxicilin-klavulanát dvakrát denně po dobu tří dalších dnů.
+1. Lisinopril denně.
+2. Atorvastatin večer.
+3. Amoxicillin-klavulanát dvakrát denně po dobu dalších tří dnů.
 
-Plán po propuštění:
-Domů.
+Způsob propuštění:
+Domů
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě.
+Komunitně získaná pneumonie
 
 Stav při propuštění:
-Psychický stav: Jasný a koherentní.
-Úroveň vědomí: Vědomý a komunikativní.
-Funkční stav: Chůze, soběstačný.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
 
-Pokyny při propuštění:
-Byl Vám léčen plicní zánět. Dokončete veškerá antibiotika, odpočívejte, pijte dostatek tekutin a v případě zhoršení dýchání nebo horečky se vraťte. V případě dotazů volejte ___.
+Pokyny pro propuštění:
+Byl jste léčen na plicní infekci. Dokončete všechny antibiotika, odpočívejte, pijte dostatek tekutin a v případě zhoršení dýchání nebo horečky se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

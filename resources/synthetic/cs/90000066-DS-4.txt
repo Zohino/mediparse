@@ -1,69 +1,69 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Oddělení: ORTOPEDIE
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: ORTOPEDIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
-Hlavní potíž:
-Bolest v pravém kyčli po pádu.
+Hlavní potíže:
+Bolest pravého kyčelního kloubu po pádu
 
-Hlavní chirurgický zákrok:
-Hemiartroplastika pravého kyčle.
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Parciální náhrada pravého kyčelního kloubu
 
 Anamnéza současného onemocnění:
-Pacientka, ve věku ___ let, uklouzla na mokré podlaze doma a nemohla zatížit pravou nohu. Byla převezena z ___ poté, co zobrazovací vyšetření odhalilo zlomeninu krčku femuru. Nedošlo k úrazu hlavy ani ke ztrátě vědomí.
+___ letá žena, která uklouzla na mokré podlaze doma a nemohla se opírat o pravou nohu. Byla převezena z ___ poté, co zobrazovací vyšetření odhalilo dislokovanou zlomeninu krčku stehenní kosti. Nebyla naražena do hlavy a neztratila vědomí.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Osteoporóza
 Hypotyreóza
 
-Chirurgická anamnéza:
+Anamnéza předchozích chirurgických zákroků:
 Operace šedého zákalu v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka trpěla osteoporózou. Jinak bez významných nálezů.
+Matka měla osteoporózu. Jinak bez významných nálezů.
 
 Fyzikální vyšetření:
-HLAVA, OČI, UŠI, NOS, Hrdlo: Bez známek traumatu, vlhké sliznice.
-PLÍCE: Čisté bilaterálně.
-Extremity: Pravá noha zkrácená a vnější rotace, pulzy zachovány.
-Neurologické vyšetření: Pacientka při vědomí, citlivost zachována.
+HEENT: Bez traumatických změn, vlhké sliznice.
+PULM: Oboustranně čisté.
+Ext: Pravá noha zkrácená a vnější rotace, pulzace zachována.
+Neuro: Bdělá, citlivost zachována.
 
 Významné výsledky:
-LABORATOŘ PŘI PŘIJETÍ: Hemoglobin 11.8, kreatinin 0.9, sodík 139, draslík 4.2, INR 1.0. Zpráva z externí ambulance ___ byla prostudována.
-ZÁVĚR: Zlomenina krčku femuru vpravo. Rentgenové snímky po operaci ukazují správně usazenou protézu bez komplikací.
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Hemoglobin 11,8, kreatinin 0,9, sodík 139, draslík 4,2, INR 1,0. Zkontrolována zpráva z nemocnice ___.
+ZÁVĚR: Dislokovaná zlomenina krčku pravé stehenní kosti. Pooperační snímky ukazují dobře umístěnou protézu bez komplikací.
 
-Průběh hospitalizace:
-Pacientka byla přijata, její stav byl stabilizován a podstoupila hemiartroplastiku pravého kyčle provedenou lékařem ___ bez komplikací. Bolest byla kontrolována pomocí paracetamolu a nízké dávky oxykodonu. Fyzikální terapie byla zahájena ___ a pacientka postupovala stabilně. Pro prevenci trombózy byl podáván enoxaparin. Byla stabilní pro propuštění.
-PROBLÉMY PŘI PROPOUŠTĚNÍ: Pokračovat v terapii pro zdraví kostí a dodržovat opatření proti pádům.
+Stručný průběh hospitalizace:
+Byla přijata, stav byl optimalizován a podstoupila parciální náhradu pravého kyčelního kloubu, kterou provedl Dr. ___, bez komplikací. Bolest byla kontrolována pomocí paracetamolu a nízké dávky oxykodonu. Fyzikální terapie byla zahájena ___ a pacientka se postupně zlepšovala. Pro prevenci trombózy byl podáván enoxaparin. Byla stabilizována a připravena k propuštění.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE: Pokračovat v terapii pro zlepšení zdraví kostí a dodržovat opatření proti pádům.
 
 Léky při přijetí:
-Levothyroxin, lisinopril, vápník, vitamín D.
+Levotyroxin, lisinopril, vápník, vitamín D.
 
 Léky při propuštění:
-Paracetamol 650 mg každých šest hodin, oxykodon 2.5 mg dle potřeby při silné bolesti, enoxaparin denně po dobu čtyř týdnů, levothyroxin, lisinopril, vápník, vitamín D, senna.
+Paracetamol 650 mg každých šest hodin, oxykodon 2,5 mg podle potřeby při silné bolesti, enoxaparin denně po dobu čtyř týdnů, levotyroxin, lisinopril, vápník, vitamín D, senna.
 
-Plán po propuštění:
-Dlouhodobá péče v rehabilitačním zařízení ___
+Způsob propuštění:
+Prodloužená péče v rehabilitačním zařízení ___
 
 Diagnóza při propuštění:
-Zlomenina krčku femuru vpravo
+Zlomenina krčku pravé stehenní kosti
 Hypertenze
 Osteoporóza
 
 Stav při propuštění:
-Psychický stav: Jasný a soustředěný.
-Úroveň vědomí: Při vědomí a komunikativní.
-Funkční stav: Chůze s chodítkem, zatěžování nohy dle tolerance.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a komunikativní.
+Fyzická aktivita: Chodí s pomocí chodítka, opírá se o nohu podle tolerance.
 
-Pokyny při propuštění:
-Udržujte ránu čistou a suchou. Vyhněte se ohýbání kyčle více než o devadesát stupňů. Užívajte léky podle předpisu a používejte chodítko neustále. V případě horečky, výtoku z rány, otoku lýtka nebo zhoršení bolesti volejte ___ .
+Pokyny pro propuštěného pacienta:
+Udržujte řez čistý a suchý. Vyhýbejte se ohýbání kyčle o více než devadesát stupňů. Užívajte léky podle předpisu a používejte chodítko neustále. V případě horečky, výtoku z rány, otoku lýtka nebo zhoršení bolesti volejte ___.
 
-Následná péče:
+Pokyny pro kontrolní vyšetření:
 ___

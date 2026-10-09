@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,42 +9,42 @@ Alergie:
 Hlavní potíže:
 Bušení srdce a závratě
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka, ve věku ___ let, přišla na vyšetření kvůli bušení srdce, závratím a mírné únavě, které trvají několik dní.
+Anamnéza současného onemocnění:
+___ letá žena s několikdenní anamnézou bušení srdce, pocitem slabosti a mírné únavy, přichází na vyšetření.
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka prodělala mrtvici.
+Matka s cévní mozkovou příhodou
 
 Fyzikální vyšetření:
-Životní funkce:
+Vitalní funkce:
 Stabilní, bez horečky
 Celkový stav:
-Pacientka je v pohodě.
-Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Pohodlný
+Hlava, oči, uši, nos, hrdlo:
 Normální
 Neurologické vyšetření:
-Bez patologických nálezů
+Bez ložiskových příznaků
 
-Relevantní výsledky:
-EKG ukázalo nepravidelný srdeční rytmus bez pauz. Elektrolyty a funkce štítné žlázy byly normální. Rentgen hrudníku byl čistý.
+Významné výsledky:
+Telemetrie prokázala nepravidelný rytmus bez pauz. Elektrolyty a funkce štítné žlázy byly v normě. Rentgen hrudníku byl v pořádku.
 
-Průběh hospitalizace:
-Pacientka byla převezena z ___ s fibrilací síní a rychlou srdeční frekvencí. Srdeční frekvence byla kontrolována pomocí metoprololu a byla zahájena antikoagulační léčba. Pacientka zůstala stabilní a příznaky ustoupily.
+Stručný popis hospitalizace:
+Pacientka byla převezena z ___ s fibrilací síní a rychlou srdeční frekvencí. Frekvence byla kontrolována pomocí metoprololu a byla zahájena antikoagulační léčba. Stav pacientky zůstal stabilní a potíže ustoupily.
 
 Léky při přijetí:
 Multivitamin denně
-Doplněk vápníku
+Doplňek vápníku
 
 Léky při propuštění:
-Metoprolol tartrát dvakrát denně. Apixaban dvakrát denně. Pokračujte v užívání multivitamínu a doplňku vápníku, jak bylo doposud.
+Metoprolol tartrát dvakrát denně. Apixaban dvakrát denně. Pokračujte v užívání multivitamínu a doplňku vápníku jako dříve.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů s péčí od ___
 
 Diagnóza při propuštění:
@@ -52,12 +52,12 @@ Bušení srdce
 Hypertenze
 
 Stav při propuštění:
-Psychický stav: Vědomá a orientovaná
+Duševní stav: Bdělá a orientovaná
 Úroveň vědomí: Plně při vědomí
-Aktivity: Chůze samostatná
+Fyzická aktivita: Chodí samostatně
 
-Pokyny při propuštění:
-Užívejte léky podle předpisu. V případě bolesti na hrudi, mdloby nebo krvácení se vraťte. Prosím, kontaktujte Dr. ___ do dvou týdnů.
+Pokyny pro propuštění:
+Užívejte léky podle předpisu. V případě bolesti na hrudi, mdlob nebo krvácení se vraťte. Prosím, navštivte doktora ___ do dvou týdnů.
 
-Pokyny pro další péči:
+Pokyny pro kontrolní vyšetření:
 ___

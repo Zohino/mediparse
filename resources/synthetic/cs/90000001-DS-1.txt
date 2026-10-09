@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,13 +9,13 @@ Alergie:
 Hlavní potíže:
 Horečka a kašel
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka, 63 let, s hypertenzí, se dostavila s třechdenní horečkou, produktivním kašlem a dušností. Byla nejprve vyšetřena v ___ , kde rentgenové vyšetření hrudníku naznačovalo infiltrát v dolním laloku pravé plíce, a byla převezena do ___ k hospitalizaci dne ___.
+Anamnéza současného onemocnění:
+___ letá žena s hypertenzí, která se dostavila s třemi dny trvající horečkou, produktivním kašlem a dušností. Byla poprvé vyšetřena v ___, kde zobrazovací vyšetření hrudníku naznačilo konsolidaci v dolním laloku pravého plíce, a byla převezena do ___ k hospitalizaci dne ___.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hypotyreóza
 Osteoartróza
@@ -27,46 +27,46 @@ Rodinná anamnéza:
 Matka s rakovinou prsu
 
 Fyzikální vyšetření:
-Životní funkce: T 98,6 °C, srdeční frekvence 78 úderů/min, krevní tlak 126/70 mmHg, dechová frekvence 16 nádechů/min, saturace kyslíkem 96 % při pokojovém vzduchu
-Celkový stav: Pacientka je v pohodě, bez známek úzkosti
-Hlava, krk, uši, nos, hrdlo: Vlhké sliznice
-Břicho: Měkké, bez citlivosti
-Extremity: Teplé, bez otoků
-Neurologické vyšetření: Pacientka je při vědomí, bez neurologických deficitů
+Vitalní funkce: T 37,0 °C, TF 78, TK 126/70, dechová frekvence 16, SpO2 96 % při dýchání okolním vzduchem
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice
+Břicho: Měkké, netendrovatelné
+Končetiny: Teplé, bez otoků
+Neurologické vyšetření: Bdělá, bez ložiskových příznaků
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Počet bílých krvinek 8,2, hemoglobin 12,1, destičky 240, sodík 139, draslík 4,1, kreatinin 0,8
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Leukocyty 8,2, hemoglobin 12,1, trombocyty 240, sodík 139, draslík 4,1, kreatinin 0,8
 ZÁVĚR:
-Rentgen hrudníku, který zhodnotil ___ , ukazuje opacitu v dolním laloku pravé plíce, což je v souladu s pneumonií, bez přítomnosti výpotku. Doporučuje se kontrolní rentgenové vyšetření za šest týdnů v ___ .
+Rentgen hrudníku vyhodnocený ___ ukazuje opacitu v dolním laloku pravého plíce, která odpovídá pneumonii, bez známek výpotku. Doporučuje se kontrolní zobrazovací vyšetření v ___ za šest týdnů.
 
-Průběh hospitalizace:
-Byla léčena ceftriaxonem a azithromycinem a horečka ustoupila během dvou dnů. Podávání kyslíku bylo postupně snižováno. Kultivace krve odebraná v ___ nevykazovala žádný růst. Fyzikální terapie od ___ jí doporučila návrat domů. Byla převedena na perorální antibiotika a propuštěna dne ___ ve stabilním stavu.
+Stručný průběh hospitalizace:
+Byla léčena ceftriaxonem a azithromycinem a horečka ustoupila během dvou dnů. Kyslíková terapie byla postupně snižována, dokud pacientka nedýchala pouze okolní vzduch. Kultivace krve provedená v ___ nevykázala žádný růst. Fyzioterapeut z ___ ji prohlásil za způsobilou k propuštění domů. Byla převedena na perorální antibiotika a propuštěna dne ___ ve stabilizovaném stavu.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
-Levothyroxine 75 mcg denně
+Levotyroxin 75 mcg denně
 
 Léky při propuštění:
-1. Amoxicillin-clavulanate 875 mg dvakrát denně po dobu pěti dnů
+1. Amoxicillin-klavulanát 875 mg dvakrát denně po dobu pěti dalších dnů
 2. Lisinopril 10 mg denně
-3. Levothyroxine 75 mcg denně
-4. Acetaminophen dle potřeby při horečce
+3. Levotyroxin 75 mcg denně
+4. Paracetamol podle potřeby při horečce
 
-Místo propuštění:
+Plán propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Komunitní pneumonie
+Komunitně získaná pneumonie
 Hypoxie
 
 Stav při propuštění:
-Psychický stav: Jasný a soustředěný
-Úroveň vědomí: Při vědomí a komunikativní
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a reagující
 
-Pokyny při propuštění:
-Byla hospitalizována pro infekci plic a zlepšila se díky antibiotikům. Dokončete celý cyklus antibiotik, odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte. Prosím, navštivte Dr. ___ během jednoho týdne.
+Pokyny pro propuštění:
+Byli jste hospitalizováni s plicní infekcí a zlepšili jste se díky antibiotikům. Dokončete celou kúru antibiotik, odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte. Navštivte prosím doktora ___ do jednoho týdne.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

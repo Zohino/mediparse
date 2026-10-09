@@ -1,55 +1,55 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Otok nohou a dušnost
+Otok nohy a dušnost
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacient je muž ve věku ___ let, který byl přijat z ___ s potížemi, které se zhoršovaly po dobu dvou týdnů, včetně otoku kotníků, dušnosti v leže a únavy. Přibral několik kilogramů a začal pociťovat dušnost při chůzi do schodů. Symptomy se zhoršily dne ___, což vedlo k vyšetření. Pacientovi byly podány intravenózní diuretika, což vedlo ke zvýšenému vylučování moči a zlepšení stavu.
+Pacient je ___ letý muž, který byl odeslán z ___ s dvoutýdenní se zhoršujícím otokem kotníku, ortopnoí a únavou. Přibral několik kilogramů a všiml si, že má dušnost při chůzi do schodů. Příznaky se zhoršily ___, což vedlo k vyšetření. Byl mu podán intravenózně diuretikum, což vedlo k dobré diuréze a zlepšení stavu.
 
-Anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
-Dna
+Hyperlipidémie
+DNA
 Předchozí operace kolene
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec s koronární chorobou; matka s mrtvicí
+Otec s ischemickou chorobou srdeční; matka s cévní mozkovou příhodou
 
 Fyzikální vyšetření:
-Fyzikální vyšetření při přijetí:
-Celkový stav: Únavný, mírně dušný
-Hlava, krk, uši, nos, hrdlo: Vlhká sliznice
-Krk: Zvýšený tlak v játrních žilách
-Plíce: Praskání v obou plicních bázích
-Srdce: Pravidelný srdeční rytmus, slyšitelné S3
-Břicho: Měkké, bezbolestné
-Končetiny: Edém s prohlubněmi až po kolena
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Unavený, mírná dušnost
+Hlava, uši, nos, hrdlo: Vlhké sliznice
+Krk: Zvýšená jugulární žíla
+Plíce: Bibazilární chrůpky
+SRDCE: Pravidelné, přítomna S3
+Břicho: Měkké, netendrové
+KONČETINY: Edém s prohlubněmi až ke kolenům
 
-Výsledky vyšetření:
-Laboratorní výsledky při propuštění:
-Sodík 138, draslík 4,1, kreatinin blízko základní hodnoty, glukóza zvýšená, BNP výrazně zvýšený. Vzorky odebrány ___.
-Závěr:
-Rentgen hrudníku z ___ ukázal zvětšení srdce, plicní vaskulární kongesci a malé bilaterální výpotky, které se po podání diuretik zlepšily.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Sodík 138, draslík 4,1, kreatinin blízko výchozí hodnoty, glukóza zvýšená, BNP výrazně vysoké. Vzorky odebrány ___.
+ZÁVĚR:
+Rentgen hrudníku z ___ ukázal kardiomegalii, plicní vaskulární kongesci a malé bilaterální efuze, které se po diuretické terapii zlepšily.
 
 Léky při přijetí:
 Lisinopril denně, atorvastatin večer, allopurinol denně, metformin dvakrát denně
 
 Léky při propuštění:
-Furosemid 40 mg perorálně denně, carvedilol dvakrát denně, pokračování v užívání lisinoprilu, atorvastatin večer, allopurinol denně, inzulin glargin před spaním, metformin vysazen.
+Furosemid 40 mg perorálně denně, carvedilol dvakrát denně, lisinopril pokračuje, atorvastatin večer, allopurinol denně, inzulin glargin před spaním, metformin vysazen.
 
-Místo propuštění:
+Plán propuštění:
 Domů
 Zařízení: ___
 
@@ -59,12 +59,12 @@ Chronické onemocnění ledvin
 Srdeční selhání
 
 Stav při propuštění:
-Psychický stav: Vědomý a orientovaný, schopný porozumět a plnit pokyny
-Úroveň vědomí: Probudný a pozorný
-Funkční stav: Chůze s jistým krokem
+Duševní stav: Bdělý a orientovaný, schopen dodržovat pokyny
+Úroveň vědomí: Bdělý a pozorný
+Stav aktivity: Chodí, stabilní chůze
 
-Pokyny při propuštění:
-Byl jste hospitalizován kvůli zadržování tekutin. Zvažujte se každé ráno a volejte ___, pokud se vaše váha během jednoho dne zvýší o více než 1,4 kg (3 libry). Omezte příjem soli a tekutin. Užívajte léky podle předpisu. Prosím, dodržujte termín vaší návštěvy u lékaře na ___. V případě bolesti na hrudi nebo zhoršující se dušnosti se vraťte na pohotovost do ___ dnů od propuštění.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zadržování tekutin. Každé ráno se važte a volejte ___, pokud se váha během jednoho dne zvýší o tři kilogramy. Omezte příjem soli a tekutin. Užívajte léky podle seznamu. Prosím, dodržte termín návštěvy u ___ a v případě bolesti na hrudi nebo zhoršení dušnosti se vraťte do pohotovosti do ___ dnů od propuštění.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

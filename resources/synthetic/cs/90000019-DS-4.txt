@@ -1,65 +1,67 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Specializace: Lékařství
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Kašel a horečka po dobu pěti dnů, pacient byl přijat z ___
+Kašel a horečka trvající pět dní, pacient odeslán z ___
 
-Zásahy:
-Žádné významné chirurgické zákroky nebo invazivní procedury.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacient se prezentoval s pětidenním produktivním kašlem, horečkou a dušností, které se objevily po návratu z cesty do ___. Byl vyšetřen u svého praktického lékaře v ___, který zahájil léčbu perorálními antibiotiky, ale příznaky se zhoršily a pacient přišel na pohotovost v ___ s hypoxií a zimnicí.
+Pacient se dostavil s pětidenním kašlem s vykašláváním hlenu, horečkou a dušností, které se objevily po návratu z cesty do ___. Byl vyšetřen u svého ošetřujícího lékaře v ___, který mu nasadil perorální antibiotika, ale příznaky se zhoršily a pacient se dostavil na pohotovost v ___ s hypoxií a zimnicí.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Gastroezofageální reflux
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Významná rodinná anamnéza fibrilace síní u otce. Matka zdravá.
+Významná rodinná anamnéza fibrilace síní u otce. Matka je zdravá.
 
 Fyzikální vyšetření:
-Celkový stav: Vědomý, mírně nemocný muž, bez akutních potíží.
-Hlava, oči, uši, nos, krk: Vlhká sliznice, čistý orofarynx.
-Plíce: Krepitace v dolní části pravého plíce, bez sípání.
+Celkový stav: Bdělý, mírně nemocně vypadající muž, bez akutní tíže.
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice, čistá ústní dutina a hltan.
+Plíce: V dolní části pravé plíce slyšitelné chrůpky, bez sípání.
 Kůže: Teplá, suchá, bez vyrážky.
-Neurologické vyšetření: Bez lokalizace, plně orientovaný.
+Neurologické: Bez ložiskových příznaků, plně orientovaný.
 
-Výsledky vyšetření:
-Laboratorní výsledky při přijetí ukázaly leukocytózu s převahou neutrofilů a mírně zvýšenou hladinu laktátu, která se normalizovala po podání tekutin. Kultivace krve zůstaly po pěti dnech negativní.
-NÁLEZY: Rentgen hrudníku ukázal hustou konsolidaci v dolní části pravého plíce s malým peripneumonickým výpotkem. Bez pneumotoraxu. Velikost srdce normální. Opakované zobrazovací vyšetření v ___ ukázalo zlepšení opacit v plicních alveolech.
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala leukocytózu s převahou neutrofilů a mírně zvýšenou hladinu laktátu, která se po podání tekutin normalizovala. Krevní kultury zůstaly po pěti dnech negativní.
+NÁLEZY: Rentgen hrudníku ukázal hustou konsolidaci v dolním laloku pravé plíce s malým parapneumonickým výpotkem. Žádný pneumotorax. Velikost srdce je normální. Opakované zobrazovací vyšetření v ___ ukázalo zlepšení opacity v plicní tkáni.
 
-Průběh hospitalizace:
-Pacient byl přijat s pneumonií získanou v komunitě a léčen intravenózním ceftriaxonem a azithromycinem. Podávání kyslíku bylo postupně snižováno ze čtyř litrů na pokojový vzduch třetí den hospitalizace. Horečka ustoupila a kašel se zlepšil. Byl převeden na perorální antibiotika a mohl se samostatně pohybovat. Hypertenze byla kontrolována pomocí léků užívaných doma. Podle týmu vedeného Dr. ___, byl pacient propuštěn. Byly zajištěny podmínky pro ambulantní sledování a opakovaný rentgen hrudníku za šest týdnů v ___.
+Stručný průběh hospitalizace:
+Pacient byl přijat s komunitně získanou pneumonií a léčen intravenózním ceftriaxonem a azithromycinem. Podávání kyslíku bylo postupně snižováno ze čtyř litrů na pokojovou teplotu do třetího dne hospitalizace. Horečka ustoupila a kašel se zlepšil. Pacient byl převeden na perorální antibiotika a mohl se samostatně pohybovat. Hypertenze byla léčena domácími léky. Podle týmu vedeného doktorem ___ byl pacient propuštěn. Byly domluveny kontroly u ___ a opakované rentgenové vyšetření hrudníku za šest týdnů v ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně, atorvastatin 20 mg večer, omeprazol 20 mg denně.
 
 Léky při propuštění:
-Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dalších dnů. Pokračovat v užívání lisinoprilu 10 mg denně, atorvastatinu 20 mg večer a omeprazolu 20 mg denně. Paracetamol dle potřeby při horečce. Recepty byly odeslány do lékárny ___
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu dalších pěti dnů. Pokračovat v užívání lisinoprilu 10 mg denně, atorvastatinu 20 mg večer a omeprazolu 20 mg denně. Paracetamol podle potřeby na horečku. Recepty zaslány do lékárny ___.
 
-Stav při propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Hypertenze
 
 Stav při propuštění:
-Mentální stav: Jasný a srozumitelný.
-Úroveň vědomí: Vědomý a komunikativní.
-Funkční stav: Chůze, samostatný.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a komunikativní.
+Fyzická aktivita: Schopný chůze, soběstačný.
 
-Pokyny po propuštění:
-Byli jste hospitalizováni kvůli pneumonii. Užívajte všechny antibiotika podle pokynů a pijte dostatek tekutin. V případě zhoršení dušnosti, vysoké horečky nebo bolesti na hrudi se vraťte k lékaři. V případě dotazů ohledně léků volejte na číslo ___. Vaše ordinace v ___ vás kontaktuje.
+Pokyny pro propuštění:
 
-Pokyny pro další péči:
+Byli jste hospitalizováni kvůli zápalu plic. Užijte všechna antibiotika podle pokynů a pijte dostatek tekutin. V případě zhoršení dušnosti, vysoké horečky nebo bolesti na hrudi se vraťte do nemocnice. Pokud máte dotazy ohledně léků, zavolejte na číslo ___. Vaše ambulance na adrese ___ vás bude kontaktovat.
+
+Pokyny pro kontrolní vyšetření:
+
 ___

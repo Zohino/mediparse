@@ -1,19 +1,19 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Oddělení: Kardiologie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Kardiologie
+Datum přijetí: ___ Číslo pokoje: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
-Zásahy:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka je žena, která se dostavila na oddělení ___ s několika dny trvajícími občasnými bušením srdce, závratěmi a mírnou dušností při námaze. Příznaky se začaly objevovat po cestě do ___ a zhoršily se ráno při přijetí. Popřela bolesti na hrudi, ztrátu vědomí nebo horečku. Na pohotovosti byl její srdeční tep nepravidelný a rychlý a byla monitorována pomocí telemetrie. Byla odeslána jejím praktickým lékařem, Dr. ___, a přijata k hospitalizaci pro regulaci srdeční frekvence a další vyšetření.
+Anamnéza současného onemocnění:
+Pacientka je žena, která se dostavila do ___ s několikdenní anamnézou občasných palpitací, závratí a mírné dušnosti při námaze. Příznaky se objevily po cestě do ___ a zhoršily se ráno, kdy se dostavila do nemocnice. Popírá bolesti na hrudi, synkopu nebo horečku. Na pohotovosti byla zjištěna nepravidelná a zrychlená srdeční frekvence a pacientka byla monitorována pomocí telemetrie. Byla odeslána svým praktickým lékařem, doktorem ___, a přijata za účelem kontroly srdeční frekvence a dalšího vyšetření.
 
-Osobní anamnéza:
-Hypertenze, hyperlipidemie, hypotyreóza, po operaci žlučníku v ___.
+Anamnéza předchozích onemocnění:
+Hypertenze, hyperlipidemie, hypotyreóza, stav po cholecystektomii v ___.
 
 Sociální anamnéza:
 ___
@@ -22,44 +22,44 @@ Rodinná anamnéza:
 Matka s hypertenzí. Bratr léčen v ___ pro onemocnění štítné žlázy.
 
 Fyzikální vyšetření:
-Celkový stav: Pacientka vypadá dobře, nemá žádné akutní potíže, je při vědomí, komunikuje a orientuje se.
-Hlava, oči, uši, nos, hrdlo: Normální tvar hlavy, bez traumat, vlhké sliznice, bez žloutenky.
-Krk: Pružný, bez jícnové dilatace, bez zvětšených lymfatických uzlin.
-Plíce: Při poslechu čisté bilaterálně.
-Břicho: Měkké, bez citlivosti, bez distenze, normální peristaltika.
+Celkový stav: Žena v dobrém celkovém stavu, bez akutních potíží, bdělá, komunikativní a orientovaná.
+Hlava, oči, uši, nos, hrdlo: Normocefalická, bez traumat, vlhké sliznice, bez ikteru.
+Krk: Pružný, bez známek zvýšeného žilního tlaku, bez lymfadenopatie.
+Plíce: Při auskultaci oboustranně čisté.
+Břicho: Měkké, netendrové, neztuhlé, normální střevní zvuky.
 
 Významné výsledky:
-Laboratorní výsledky při přijetí ukazují normální hodnoty elektrolytů a normální hladinu hormonu stimulujícího štítnou žlázu. Troponin negativní dvakrát. Hladina hemoglobinu stabilní až do propuštění. EKG při příjmu ukázalo nepravidelný rytmus s úzkým komplexem a rychlou srdeční frekvencí; opakované EKG po léčbě ukázalo regulovanou frekvenci. Rentgen hrudníku: bez akutních kardiopulmonálních změn. Echokardiogram provedený v ___ ukázal normální ejekční frakci a žádné významné onemocnění chlopní. Výsledky byly prodiskutovány s kardiologickým oddělením, Dr. ___.
+Při přijetí byly v laboratorních testech zjištěny normální hodnoty elektrolytů a hormonu stimulujícího štítnou žlázu v normálním rozmezí. Troponin negativní (dvě měření). Hladina hemoglobinu stabilní až do propuštění. EKG při přijetí ukázalo nepravidelný, široký komplex s rychlou ventrikulární frekvencí; opakované EKG po léčbě ukázalo kontrolovanou frekvenci. Rentgen hrudníku: bez známek akutního kardiopulmonálního procesu. Transtorakální echokardiografie provedená v ___ ukázala normální ejekční frakci a bez významného onemocnění chlopní. Výsledky byly projednány s kardiologem, doktorem ___.
 
-Průběh hospitalizace:
-Byla přijata na oddělení telemetrie a zahájena léčba metoprololem, což vedlo k dobré regulaci srdeční frekvence. Kardiologické oddělení ji vyšetřilo a doporučilo zahájení léčby antikoagulancii po výpočtu skóre rizika mrtvice. Funkce štítné žlázy a elektrolyty byly v normě a nebyl identifikován žádný reverzibilní spouštěč. Byla hemodynamicky stabilní a příznaky ustoupily do druhého dne hospitalizace. Byla poučena o opatrnosti při užívání léků zvyšujících krvácivost farmaceutem v ___. Její praktický lékař v ___ byl telefonicky informován. Byla domluvena kontrola v ambulanci v ___.
-PROBLÉMY PŘECHODU:
-- Zkontrolovat srdeční frekvenci a krevní tlak při první návštěvě; upravit dávku metoproolu.
-- Potvrdit dodržování léčby antikoagulancii a zkontrolovat funkci ledvin a krevní obraz za ___ týdnů.
+Stručný popis hospitalizace:
+Pacientka byla přijata na oddělení s telemetrickým monitoringem a zahájena léčba metoprololem, což vedlo k dobré kontrole srdeční frekvence. Kardiolog ji vyšetřil a doporučil zahájit léčbu antikoagulantem po výpočtu jejího skóre rizika cévní mozkové příhody. Funkce štítné žlázy a hladiny elektrolytů byly v normě a nebyl identifikován žádný reverzibilní spouštěč. Zůstala hemodynamicky stabilní a příznaky ustoupily do druhého dne hospitalizace. Farmaceut v ___ ji poučil o opatřeních proti krvácení. Její praktický lékař v ___ byl telefonicky informován. Bylo domluveno pokračování péče v ambulanci v ___.
+PŘECHODNÁ OTÁZKY:
+- Při první návštěvě znovu zkontrolovat srdeční frekvenci a krevní tlak; titrovat dávku metoprololu.
+- Potvrdit dodržování léčby antikoagulanty a zkontrolovat funkci ledvin a krevní obraz za ___ týdnů.
 
 Léky při přijetí:
-Lisinopril 10 mg denně, atorvastatin 20 mg večer, levothyroxin 75 mcg denně, ibuprofen dle potřeby.
+Lisinopril 10 mg denně, atorvastatin 20 mg večer, levotyroxin 75 mcg denně, ibuprofen podle potřeby.
 
-Léky k užívání po propuštění:
-1. Metoprolol (sukcinát) 50 mg perorálně jednou denně.
+Léky při propuštění:
+1. Metoprolol sukcinát 50 mg perorálně denně.
 2. Apixaban 5 mg perorálně dvakrát denně.
-3. Lisinopril 10 mg perorálně jednou denně.
+3. Lisinopril 10 mg perorálně denně.
 4. Atorvastatin 20 mg perorálně večer.
-5. Levothyroxin 75 mcg perorálně jednou denně.
-6. Přerušte užívání ibuprofenu; vyhýbejte se nesteroidním protizánětlivým látkám (NSAID) během užívání apixabanu.
+5. Levotyroxin 75 mcg perorálně denně.
+6. Přestaňte užívat ibuprofen; vyhýbejte se nesteroidním protizánětlivým lékům (NSAID) během užívání apixabanu.
 
-Plán po propuštění:
-Domů s péčí poskytované organizací ___.
+Plán propuštění:
+Domů s poskytováním služeb ___.
 
 Diagnóza při propuštění:
-Fibrilace síní s rychlou ventrikulární odpovědí.
+Přední síňová fibrilace s rychlou komorovou odpovědí.
 
 Stav při propuštění:
-Úroveň vědomí: Přítomný a komunikativní.
-Úroveň aktivity: Chůze, soběstačný.
+Úroveň vědomí: Bdělý a reagující.
+Stav aktivity: Schopný chůze, soběstačný.
 
-Pokyny po propuštění:
-Byli jste hospitalizováni kvůli rychlému a nepravidelnému srdečnímu tepu. Vaše srdeční frekvence byla regulována pomocí léků a byla zahájena léčba antikoagulancii ke snížení rizika mrtvice. Užívajte všechny léky podle předpisu a nepřestávejte je užívat. V případě bolesti na hrudi, mdloby, krvácení nebo černých stolice volejte číslo ___ nebo se obraťte na pohotovost. Prosím, dodržujte termín vaší návštěvy u doktora ___.
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli rychlému a nepravidelnému srdečnímu tepu. Váš srdeční tep byl kontrolován pomocí léků a byl zahájen podávání antikoagulantu ke snížení rizika mrtvice. Užívajte všechny léky podle předpisu a nepřestávejte je užívat. V případě bolesti na hrudi, mdlob, krvácení nebo černých stolic volejte ___ nebo se vraťte na pohotovost. Prosím, dodržujte termín návštěvy u doktora ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

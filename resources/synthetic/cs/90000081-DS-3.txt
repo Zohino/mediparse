@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,16 +9,16 @@ Alergie:
 Hlavní potíže:
 Celulitida levé nohy
 
-Zásah:
+Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
-Anamnéza:
-Muž ve věku ___ let, který se dostavil s třemi dny trvajícími potížemi v podobě zarudnutí a bolesti levé nohy, odeslán z ambulance ___
+Anamnéza současného onemocnění:
+___ letý muž s třídenní anamnézou zarudnutí a bolesti levé nohy, odeslán z ___ kliniky.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
@@ -27,23 +27,23 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Fyzikální vyšetření při přijetí:
-Celkový stav: Pacient je v pohodě, bez známek utrpení
-ORL: Normální
-Plíce: Čisté bilaterálně
-Břicho: Měkké, bez citlivosti
-Extremity: Levá holen teplá, zarudlá, otoklá
-Kůže: Zarudnutí, jak je popsáno výše
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, uši, nos, hrdlo: Normální
+Plíce: Čisté na obou stranách
+Břicho: Měkké, netendrovatelné
+Končetiny: Levá holeně teplá, zarudlá, oteklá
+Kůže: Zarudnutí, jak popsáno výše
 
-Výsledky vyšetření:
-Laboratorní výsledky při propuštění:
-WBC 8.1, Hgb 13.4, Plt 240, Cr 0.9
-Závěr:
-Ultrazvuk nevykazuje absces ani hlubokou žilní trombózu.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Leukocyty 8,1, hemoglobin 13,4, trombocyty 240, kreatinin 0,9
+ZÁVĚR:
+Na ultrazvuku nebyl zjištěn absces ani hluboká žilní trombóza.
 
-Průběh hospitalizace:
-Pacient byl léčen intravenózními antibiotiky, zarudnutí postupně ustupovalo a následně byl převeden na perorální léčbu dne ___.
-Důležité aspekty při propuštění:
+Stručný popis hospitalizace:
+Léčen intravenózními antibiotiky, zarudnutí postupně ustupovalo, poté převeden na perorální terapii v ___.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
 Dokončení léčby antibiotiky; kontrola nohy.
 
 Léky při přijetí:
@@ -52,20 +52,20 @@ Metformin, lisinopril, atorvastatin
 Léky při propuštění:
 Cefalexin čtyřikrát denně po dobu sedmi dnů; pokračovat v užívání metforminu, lisinoprilu a atorvastatinu.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Hlavní: Celulitida levé dolní končetiny
+Primární: Celulitida levé dolní končetiny
 
 Stav při propuštění:
-Stabilní a zlepšený.
-Psychický stav: Pacient je při vědomí a orientovaný.
-Úroveň vědomí: Pacient je při vědomí.
+Stabilizovaný a zlepšený.
+Duševní stav: Bdělý a orientovaný
+Úroveň vědomí: Bdělý
 
-Pokyny při propuštění:
-Byl vám poskytnut lék na infekci kůže na noze. Užívajte antibiotika podle předpisu, zvedněte nohu a volejte ___ v případě, že se objeví horečka.
+Pokyny pro propuštění:
+Byl jste léčen na infekci kůže nohy. Užijte antibiotika podle předpisu, zvedněte nohu a v případě návratu horečky zavolejte na ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

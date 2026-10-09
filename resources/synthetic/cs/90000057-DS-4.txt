@@ -1,21 +1,21 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Kašel a horečka
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Žena ve věku ___ let, která byla přijata kvůli třem dnům produktivního kašle, horečky a mírné dušnosti. Byla odeslána z její ordinace.
+___ letá žena s třídenní anamnézou produktivního kašle, horečky a mírné dušnosti, odeslána z jejího zdravotnického zařízení.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hypotyreóza
 
@@ -23,47 +23,47 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka prodělala mrtvici.
+Matka s cévní mozkovou příhodou
 
 Fyzikální vyšetření:
-Vyšetřena při propuštění, cítila se dobře a její stav se zlepšil.
+Vyšetřena při propuštění, stav je dobrý a došlo ke zlepšení.
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
-Životní funkce: bez horečky, stabilní při dýchání pokojovým vzduchem
-Celkový stav: při vědomí, bez známek utrpení
-Hlava, krk, uši, nos, hrdlo: vlhké sliznice
-Plíce: mírné chrůpky v dolní části pravého plíce
-Břicho: měkké, bez citlivosti
+Vitalní funkce: bez horečky, stabilní při dýchání okolního vzduchu
+Celkový stav: bdělá, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: vlhké sliznice
+Plíce: mírné chrůpky v dolní části pravé plíce
+Břicho: měkké, netendrovatelné
 
-Relevantní výsledky:
-LABORATORNÍ VÝSLEDKY PŘI PŘIJETÍ:
-Zvýšený počet bílých krvinek, normální elektrolyty.
-ZOBRAZENÍ:
-Rentgen hrudníku ukázal konsolidaci v dolní části pravého plíce.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Zvýšený počet bílých krvinek, normální hladina elektrolytů.
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku ukázal konsolidaci v dolním laloku pravé plíce.
 
-Průběh hospitalizace:
-Léčena pro pneumonii získanou v komunitě pomocí perorálních antibiotik, horečka ustoupila, postupně snižována podávání kyslíku a byla vyšetřena lékařem ___ před odchodem domů.
+Stručný popis hospitalizace:
+Léčena pro komunitně získanou pneumonii perorálními antibiotiky, horečka ustoupila, podávání kyslíku bylo postupně snižováno a před propuštěním ji vyšetřil ___.
 
 Léky při přijetí:
-Amlodipin, levothyroxin
+Amlodipin, levotyroxin
 
 Léky při propuštění:
-Pokračujte v užívání amlodipinu a levothyroxinu. Začněte užívat azithromycin po dobu pěti dnů. Paracetamol dle potřeby při horečce, vydán v lékárně ___.
+Pokračovat v užívání amlodipinu a levotyroxinu. Zahájit léčbu azithromycinem po dobu pěti dnů. Acetaminofen podle potřeby při horečce, předepsán v ___.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Sekundární:
 Hypertenze, hypotyreóza
 
 Stav při propuštění:
-Dobrá
-Psychický stav: jasný a soustředěný
-Úroveň vědomí: při vědomí a vzhůru
+Dobrý
+Duševní stav: jasný a srozumitelný
+Úroveň vědomí: bdělá a při plném vědomí
 
-Pokyny při propuštění:
-Byla léčena pro pneumonii. Dokončete užívání všech antibiotik, pijte dostatek tekutin, odpočívejte a v případě zhoršení horečky nebo dušnosti se obraťte na ___ .
+Pokyny pro propuštění:
+Byla léčena pro pneumonii. Dokončete užívání všech antibiotik, pijte dostatek tekutin, odpočívejte a v případě zhoršení horečky nebo dušnosti se vraťte do ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___
