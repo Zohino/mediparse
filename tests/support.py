@@ -168,7 +168,7 @@ def load_script(path: Path, monkeypatch: pytest.MonkeyPatch) -> ModuleType:
         Načtený modul zaregistrovaný v ``sys.modules``.
     """
     monkeypatch.syspath_prepend(str(path.parent))
-    for name in (path.stem, "note_parts"):
+    for name in (path.stem, "note_parts", "markers"):
         monkeypatch.setitem(sys.modules, name, None)
         monkeypatch.delitem(sys.modules, name)
     spec = importlib.util.spec_from_file_location(path.stem, path)
