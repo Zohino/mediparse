@@ -239,12 +239,19 @@ Rozhodující verzí korpusu je ta uložená v repozitáři.
 
 ## Český korpus
 
-Každá anglická zpráva se překládá do češtiny modelem `google/translategemma-12b-it`
-(bfloat16, okno 2048 tokenů, teplota 0). Páry sdílejí `note_id`, pacienta, labely
+Každá anglická zpráva se překládá do češtiny modelem `google/translategemma-27b-it`
+(bfloat16, okno 2048 tokenů, teplota 0, karta s 80 GB). Páry sdílejí `note_id`, pacienta, labely
 i plán; labely jdou z plánů, ne z textu překladu. Zprávy, které se do okna nevejdou,
 se dělí po blocích oddělených prázdným řádkem a po překladu se skládají zpět.
-Sběr překladů (`translation/collect.py`) zapisuje `cs/<note_id>.txt` jen z úplných
-výstupů aktuálních originálů a text normalizuje stejně jako hooky repa.
+Dělení se počítá nad originálem. Značky `___` se nahradí číslovanými `[[n]]`
+až v částech, číslují se od 1 napříč částmi jedné zprávy a hlavička `requests.json`
+nese `"masking": "[[n]]"`. Sběr překladů (`translation/collect.py`) zapisuje `cs/<note_id>.txt` jen z úplných
+výstupů aktuálních originálů a text normalizuje stejně jako hooky repa. Při
+maskování vrátí každé `[[n]]`, i s mezerou uvnitř a s číslem navíc, na `___`
+a před obnovou ohlásí po zprávách chybějící, přebývající a zdvojená čísla
+(„Chybí značky [[n]]“, „Značky [[n]] navíc“, „Zdvojené značky [[n]]“); pořadí
+čísel se nehlásí, protože český slovosled ho legitimně přehazuje. Zprávy se
+zapíšou i při takovém hlášení, jen skončí s kódem 1.
 
 Český korpus je validace překladu, ne kontrola obsahu: česká klíčová slova ani
 negační výrazy se nehlídají. `mediparse-corpus-check` ověřuje:
@@ -264,8 +271,10 @@ Na český korpus se uplatní tentýž audit proti MIMIC jako na anglický.
 
 Provenance překladu je část `translation` v `provenance.json`: model, celá revize,
 dtype, okno, dekódování, otisk `requests.json`, použité běhy překladu
-(začátek, otisky požadavků a skriptu, GPU, CUDA, verze balíčků) a seřazená
-`marker_mismatches`. Použité jsou jen běhy, z nichž pochází výstup pro klíč
+(začátek, otisky požadavků a skriptu, GPU, CUDA, verze balíčků), seřazená
+`marker_mismatches` a `masking`, když výstupy nesly číslované značky; starší
+provenance bez něj se načte. Vazba na `cs/` pak porovnává texty se složením výstupů
+po obnově značek. Použité jsou jen běhy, z nichž pochází výstup pro klíč
 aktuálních požadavků. Zapisuje ji po auditu `mediparse-translation-provenance`
 (`just provenance-translation <pracovní adresář>`); generování z provenance ponechá
 a odmítne zapsat, když originály, množina zpráv nebo české texty neodpovídají
