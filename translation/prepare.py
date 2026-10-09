@@ -17,7 +17,8 @@ Prompt skládá chat šablona modelu v pevné revizi, takže ID tokenů jsou př
 která model čeká, a překladový skript je na GPU jen předá. Klíč požadavku je hash
 všeho, co určuje překlad, a slouží zároveň jako cache. Zpráva, které v okně zbude
 na překlad méně než SPLIT_RATIO násobek tokenů originálu, se rozdělí na části po
-blocích a každá část jde jako samostatný požadavek. Zprávy, které rozdělit nejde,
+blocích a každá část jde jako samostatný požadavek. Dělení se počítá nad originálem,
+značky ___ se nahradí číslovanými [[n]] až v částech. Zprávy, které rozdělit nejde,
 skript vypíše a požadavky nezapíše.
 """
 
@@ -33,6 +34,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
+from markers import PLACEHOLDER, mask
 from note_parts import UnsplittableError, part_ids, split
 from transformers import AutoTokenizer, GenerationConfig
 
@@ -41,8 +43,8 @@ if TYPE_CHECKING:
 
     from transformers import PreTrainedTokenizerBase
 
-MODEL: Final = "google/translategemma-12b-it"
-REVISION: Final = "d1b225e1caa17f1ddc7e62065d8637d0923f34e2"
+MODEL: Final = "google/translategemma-27b-it"
+REVISION: Final = "7d10f0b72f89a2d0f268cea30727d8b77c0d25c2"
 WINDOW: Final = 2048
 SPLIT_RATIO: Final = 2.2
 DTYPE: Final = "bfloat16"
@@ -119,7 +121,7 @@ def _prompts(tokenizer: PreTrainedTokenizerBase, path: Path) -> list[Prompt]:
     fits = functools.partial(_fits, tokenizer)
     digest = hashlib.sha256(raw).hexdigest()
     try:
-        texts = split(raw.decode("utf-8"), fits)
+        texts = mask(split(raw.decode("utf-8"), fits))
         return [
             Prompt(request_id, path.stem, digest, _token_ids(tokenizer, text))
             for request_id, text in zip(
@@ -163,6 +165,7 @@ def _requests(prompts: Sequence[Prompt]) -> dict[str, object]:
         "revision": REVISION,
         "dtype": DTYPE,
         "window": WINDOW,
+        "masking": PLACEHOLDER,
         "decoding": {"temperature": 0.0, "stop_token_ids": stop},
     }
     requests = [
