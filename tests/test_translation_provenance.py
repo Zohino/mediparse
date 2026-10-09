@@ -186,3 +186,30 @@ def test_incomplete_translation_is_refused_before_binding() -> None:
     assert isinstance(outcome, ProvenanceRefused)
     assert "prázdný" in outcome.reason
     assert corpus.saved == []
+
+
+def test_masked_translation_binds_to_restored_czech() -> None:
+    """Masking z provenance překladu řídí obnovu značek při vazbě na cs/."""
+    source = _Source(
+        (
+            TranslatedNote("n1", sha256_text("one ___"), ("jedna [[1]]",)),
+            TranslatedNote("n2", sha256_text("two ___ ___"), ("dva [[1]]", "x [[2]]")),
+        ),
+        translation_record(masking="[[n]]"),
+    )
+    texts = _texts() | {"cs/n2.txt": "dva ___\n\nx ___\n"}
+    corpus = _Corpus(texts)
+
+    assert _run(corpus, source) == ProvenanceWritten()
+
+    (saved,) = corpus.saved
+    assert saved.translation is not None
+    assert saved.translation.masking == "[[n]]"
+
+
+def test_old_provenance_without_masking_loads() -> None:
+    """Dnešní provenance bez pole masking se načte s None."""
+    fields = translation_record().model_dump(mode="json")
+    del fields["masking"]
+
+    assert Translation.model_validate_json(json.dumps(fields)).masking is None

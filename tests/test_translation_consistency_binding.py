@@ -56,3 +56,26 @@ def test_czech_text_must_be_joined_outputs() -> None:
     )
 
     assert "cs/n1" in reason
+
+
+def test_masked_binding_accepts_restored_markers() -> None:
+    """Při maskování je cs/ složením výstupů po obnově značek na ___."""
+    notes = [_note("n1", "one ___", "jedna [[ 1 ]]", "dva [[2]]")]
+    czech = {"n1": "jedna ___\n\ndva ___\n"}
+
+    assert binding_violations(notes, {"n1": "one ___"}, czech, "[[n]]") == ()
+
+
+def test_unmasked_binding_rejects_restored_markers() -> None:
+    """Bez masking stejný text není složením výstupů."""
+    notes = [_note("n1", "one ___", "jedna [[1]]")]
+
+    (reason,) = binding_violations(notes, {"n1": "one ___"}, {"n1": "jedna ___\n"})
+
+    assert "cs/n1" in reason
+
+
+def test_joined_translation_restores_only_when_masked() -> None:
+    """Obnova značek se řídí parametrem masking."""
+    assert joined_translation(["a [[1]]"], "[[n]]") == "a ___\n"
+    assert joined_translation(["a [[1]]"]) == "a [[1]]\n"

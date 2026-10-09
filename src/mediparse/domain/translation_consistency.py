@@ -10,8 +10,11 @@ from typing import TYPE_CHECKING, Final
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping, Sequence
 
+    from mediparse.domain.corpus_provenance import Masking
+
 LENGTH_RATIO: Final = (0.8, 1.6)
 _MARKER: Final = re.compile(r"(?<!_)___(?!_)")
+_NUMBERED: Final = re.compile(r"\[\[\s*(\d+)\s*\]\]")
 
 
 @dataclass(frozen=True)
@@ -86,14 +89,29 @@ def _reasons(note_id: str, english: str | None, czech: str | None) -> tuple[str,
     return (reason,)
 
 
-def joined_translation(parts: Sequence[str]) -> str:
+def restored_markers(text: str) -> str:
+    """Změní každou značku [[n]], i s mezerami uvnitř a s libovolným číslem, na ___.
+
+    Returns:
+        Text se značkami ___.
+    """
+    return _NUMBERED.sub("___", text)
+
+
+def joined_translation(parts: Sequence[str], masking: Masking | None = None) -> str:
     """Složí přeložené části do zprávy tak, jak ji zapisuje sběr překladů.
+
+    Args:
+        parts: Přeložené části zprávy v pořadí požadavků.
+        masking: Maskování značek v překladu; když je nastaveno, vrátí se značky ___.
 
     Returns:
         Části bez okrajových mezer oddělené prázdným řádkem; řádky bez koncových
         mezer, text končí novým řádkem.
     """
     text = "\n\n".join(part.strip() for part in parts)
+    if masking is not None:
+        text = restored_markers(text)
     return "".join(f"{line.rstrip()}\n" for line in text.strip().splitlines())
 
 
@@ -101,6 +119,7 @@ def binding_violations(
     notes: Iterable[TranslatedNote],
     english: Mapping[str, str],
     czech: Mapping[str, str],
+    masking: Masking | None = None,
 ) -> tuple[str, ...]:
     """Důvody, proč překlad v pracovním adresáři nepatří k českému a anglickému korpusu.
 
@@ -108,6 +127,8 @@ def binding_violations(
         notes: Zprávy z požadavků a výstupů překladu.
         english: Anglické texty korpusu klíčované note_id.
         czech: České texty korpusu klíčované note_id.
+        masking: Maskování značek ve výstupech překladu; složení výstupů je pak
+            po obnově značek.
 
     Returns:
         Zprávy s jiným originálem, note_id mimo požadavky či korpus a české texty,
@@ -125,7 +146,7 @@ def binding_violations(
         note = by_id[note_id]
         if _sha256(english.get(note_id)) != note.source_sha256:
             reasons.append(f"en/{note_id}: originál se od požadavku změnil.")
-        if czech[note_id] != joined_translation(note.parts):
+        if czech[note_id] != joined_translation(note.parts, masking):
             reasons.append(f"cs/{note_id}: text není složením výstupů překladu.")
     return tuple(reasons)
 

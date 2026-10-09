@@ -81,14 +81,22 @@ def write_workdir(
     requests: Sequence[Record],
     runs: Sequence[Record],
     outputs: Sequence[Record],
+    masking: str | None = None,
 ) -> str:
     """Zapíše requests.json, runs.jsonl a outputs.jsonl.
+
+    Args:
+        root: Cílový adresář.
+        requests: Požadavky.
+        runs: Běhy.
+        outputs: Výstupy.
+        masking: Hodnota ``masking`` v hlavičce; ``None`` pole vynechá jako starý plán.
 
     Returns:
         SHA-256 zapsaného requests.json.
     """
     root.mkdir(parents=True, exist_ok=True)
-    plan = {
+    plan: dict[str, object] = {
         "model": "google/translategemma-12b-it",
         "revision": REVISION,
         "dtype": "bfloat16",
@@ -96,6 +104,8 @@ def write_workdir(
         "decoding": {"temperature": 0.0, "stop_token_ids": [1, 106]},
         "requests": list(requests),
     }
+    if masking is not None:
+        plan["masking"] = masking
     content = json.dumps(plan)
     (root / "requests.json").write_text(content, encoding="utf-8")
     for name, records in (("runs.jsonl", runs), ("outputs.jsonl", outputs)):

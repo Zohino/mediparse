@@ -95,10 +95,13 @@ class TranslationProvenance:
         incomplete = translation_violations(english, czech)
         if incomplete:
             return ProvenanceRefused(" ".join(incomplete))
-        bound = binding_violations(self.source.notes(), english, czech)
+        translation = self.source.translation()
+        bound = binding_violations(
+            self.source.notes(), english, czech, translation.masking
+        )
         if bound:
             return ProvenanceRefused(" ".join(bound))
-        translation = self.source.translation().model_copy(
+        translation = translation.model_copy(
             update={"marker_mismatches": marker_mismatches(english, czech)}
         )
         self.corpus.save_provenance(
