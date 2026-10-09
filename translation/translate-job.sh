@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -N mediparse-translate
-#PBS -l select=1:ncpus=8:mem=64gb:ngpus=1:gpu_mem=40gb:gpu_cap=compute_80:scratch_ssd=80gb
+#PBS -l select=1:ncpus=8:mem=128gb:ngpus=1:gpu_mem=80gb:gpu_cap=compute_80:scratch_ssd=200gb
 #PBS -l walltime=2:00:00
 set -euo pipefail
 
