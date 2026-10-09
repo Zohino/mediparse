@@ -40,7 +40,7 @@ REQUESTS: Final = "requests.json"
 OUTPUTS: Final = "outputs.jsonl"
 RUNS: Final = "runs.jsonl"
 BATCH: Final = 25
-MIN_MEMORY_GB: Final = 26
+MIN_MEMORY_GB: Final = 70
 LOG_FORMAT: Final = "%(asctime)s %(levelname)s %(message)s"
 
 logger = logging.getLogger(__name__)
