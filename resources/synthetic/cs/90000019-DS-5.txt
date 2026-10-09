@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,68 +9,68 @@ Alergie:
 Hlavní potíže:
 Bušení srdce a kašel
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let s dlouhodobou cukrovkou se dostavil s třemi dny kašle, horečky a občasného bušení srdce. Byl prvně vyšetřen na ___ a následně převeden pro další péči.
-PROHLÍDKA SYSTÉMŮ:
-Pozitivní nález kašle a únavy. Bez bolesti hrudníku.
+___letý muž s dlouhodobou cukrovkou se dostavil s třídenní anamnézou kašle, horečky a občasného bušení srdce. Nejprve byl vyšetřen v ___ a poté byl převeden k další péči.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na kašel a únavu. Žádná bolest na hrudi.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
-Možná fibrilace síní, nepotvrzená
+Možná fibrilace síní, nepotvrzeno
 Hypertenze
 
-Chirurgická anamnéza:
+Anamnéza předchozích chirurgických zákroků:
 Apendektomie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec s koronární chorobou
+Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
-Životní funkce: bez horečky, stabilní
+Vitalní funkce: bez horečky, stabilní
 Celkový stav: unavený, v pohodě
-Hlava, krk, uši, nos, hrdlo: vlhká sliznice
-Krk: ohebný
-Plíce: praskání v dolní části pravého plíce
+Hlava, oči, uši, nos, hrdlo: vlhké sliznice
+Krk: pružný
+Plíce: vpravo v dolní části plic slyšitelné chrůpky
 Břicho: měkké
-Extremity: bez otoků
+Končetiny: bez otoků
 
 Významné výsledky:
-Zvýšený počet bílých krvinek a mírná hyponatremie při přijetí, zlepšeno při propuštění. Troponin negativní dvakrát. Telemetrie ukázala občasné nepravidelné srdeční rytmy.
-ZOBRAZENÍ:
-Rentgen hrudníku ukázal konsolidaci v dolní části pravého plíce.
+Při přijetí zvýšený počet bílých krvinek s mírnou hyponatremií, při propuštění zlepšeno. Dvakrát negativní troponin. Telemetrie ukázala občasný nepravidelný rytmus.
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku ukázal konsolidaci v pravém dolním laloku plic.
 
-Průběh hospitalizace:
-Léčba pneumonie získané v komunitě pomocí ceftriaxonu a azithromycinu, následně perorální antibiotika. Horečka ustoupila a podávání kyslíku bylo postupně snižováno. Kardiologické oddělení na ___ prozkoumalo telemetrii dne ___ a doporučilo ambulantní monitorování. Glukóza byla kontrolována pomocí dávkování inzulínu.
+Stručný popis hospitalizace:
+Léčen pro komunitně získanou pneumonii pomocí ceftriaxonu a azithromycinu, poté perorálními antibiotiky. Horečka ustoupila a kyslíková terapie byla postupně snižována. Kardiolog z ___ zhodnotil telemetrii dne ___ a doporučil ambulantní sledování. Hladina glukózy byla regulována pomocí inzulínu v závislosti na aktuální hodnotě.
 
 Léky při přijetí:
 Metformin 500 mg dvakrát denně; lisinopril denně
 
 Léky při propuštění:
-1. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů
+1. Amoxicillin-klavulanát 875 mg dvakrát denně po dobu pěti dnů
 2. Metformin 500 mg dvakrát denně
 3. Lisinopril 10 mg denně
 
-Místo propuštění:
+Plán propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Bušení srdce
 
 Stav při propuštění:
-Psychický stav: jasný a soustředěný
-Úroveň vědomí: bdělý a komunikativní
-Funkční stav: pohyblivý, soběstačný
+Duševní stav: jasný a srozumitelný
+Úroveň vědomí: bdělý a reagující
+Fyzická aktivita: chůze, soběstačný
 
-Pokyny při propuštění:
-Byl vám léčen zápal plic. Dokončete veškerá antibiotika, odpočívejte a pijte dostatek tekutin. Navštivte lékaře ___ a volejte na číslo ___ v případě horečky, zhoršujícího se dušnosti nebo bušení srdce.
+Pokyny pro propuštění:
+Byl jste léčen na pneumonii. Dokončete všechny antibiotika, odpočívejte a pijte dostatek tekutin. Navštivte lékaře ___ a v případě horečky, zhoršení dušnosti nebo zrychleného srdečního tepu volejte na ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

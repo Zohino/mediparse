@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: Kardiologie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Kardiologie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,15 +9,15 @@ Alergie:
 Hlavní potíže:
 Dušnost
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka s cukrovkou, která se prezentovala s dušností a bušením srdce trvajícím několik dní. Byla odeslána od ___ po ambulantní návštěvě v ___.
-PROHLÍDKA SYSTÉMŮ:
-Pozitivní nález únavy a otoků nohou.
+Anamnéza současného onemocnění:
+Žena s diabetem, která se dostavila s několikdenní dušností a palpitacemi, odeslána ___ po ambulantní návštěvě v ___.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na únavu a otoky dolních končetin.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Srdeční selhání
 Hyperlipidemie
@@ -26,25 +26,25 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Bez významných informací.
+Bez významných údajů
 
 Fyzikální vyšetření:
-FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
-Životní funkce: bez horečky, stabilní
-Celkový stav: pohodlná, při vědomí
-EXTREMITY: minimální otok
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Vitalní funkce: bez horečky, stabilní
+Celkový stav: komfortní, bdělá
+KONČETINY: mírný edém
 KŮŽE: teplá, suchá
 
-Průběh hospitalizace:
-Pacientka přijata s přetížení objemem tekutin a rychlou srdeční frekvencí. Byla podrobena diuréze, což vedlo ke zlepšení dýchání, a srdeční frekvence byla kontrolována pomocí perorálního léku. Antikoagulace byla zahájena po konzultaci s týmem v ___. Během pobytu se váha a příznaky postupně zlepšovaly.
+Stručný popis průběhu hospitalizace:
+Přijata s objemovým přetížením a rychlou srdeční frekvencí. Diuretiky zlepšena dechová funkce, frekvence kontrolována perorálním lékem. Po konzultaci s týmem v ___ zahájena antikoagulační terapie. Před propuštěním došlo k postupnému zlepšení hmotnosti a symptomů.
 
 Léky při přijetí:
 Metformin, lisinopril, furosemid denně.
 
 Léky při propuštění:
-Furosemid 40 mg denně, metoprolol sukcinát 50 mg denně, apixaban 5 mg dvakrát denně, lisinopril 10 mg denně.
+Furosemid 40 mg denně, metoprolol succinat 50 mg denně, apixaban 5 mg dvakrát denně, lisinopril 10 mg denně.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
@@ -53,11 +53,11 @@ Primární:
 Diabetes mellitus, srdeční selhání, fibrilace síní
 
 Stav při propuštění:
-Úroveň vědomí: při vědomí a orientovaná
-Funkční stav: chodí samostatně
+Úroveň vědomí: bdělá a orientovaná
+Stav aktivity: chodí samostatně
 
-Instrukce při propuštění:
-Vážete se každé ráno, omezte příjem soli, užívejte léky podle předpisu a volejte ___ v případě zhoršení dýchání.
+Pokyny pro propuštění:
+Každé ráno se zvažte, omezte příjem soli, užívejte léky podle předpisu a v případě zhoršení dechu volejte ___.
 
-Následná péče:
+Pokyny pro kontrolu:
 ___

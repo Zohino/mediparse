@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Kardiologie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Kardiologie
+Datum přijetí: ___ Číslo pokoje: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,13 +9,13 @@ Alergie:
 Hlavní potíže:
 Bušení srdce
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní vyšetření:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacient se dostavil do ___ s potížemi bušení srdce a závratí trvajícími dva dny. Při příjmu byl srdeční tep rychlý a nepravidelný. Byl převezen z ___ za účelem regulace srdečního rytmu.
+Pacient se dostavil do ___ s potížemi, jako je bušení srdce a závratě, které trvaly dva dny. Při příjezdu měl zrychlený a nepravidelný srdeční tep. Byl převezen z ___ za účelem regulace srdečního tepu.
 
-Anamnéza:
+Anamnéza předchozích onemocnění:
 Fibrilace síní
 Hypertenze
 Hyperlipidemie
@@ -24,36 +24,36 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec měl mrtvici
+Otec prodělal cévní mozkovou příhodu
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacient je v pohodě, bez známek utrpení.
-Hlava, oči, uši, nos, krk:
-Vlhké sliznice.
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
 Břicho:
-Měkké, bez citlivosti.
+Měkké, netendrovatelné
 Končetiny:
-Bez otoků.
+Bez otoků
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Drusík 4,2, kreatinin 0,9, normální troponin.
+Významné výsledky:
+VÝSLEDKY VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Draslík 4,2, kreatinin 0,9, normální hladina troponinu.
 ZÁVĚR:
-Při vyšetření nebyla zjištěna žádná akutní patologie.
+Na ___ nebyl zjištěn žádný akutní proces.
 NÁLEZY:
-Normální rentgen hrudníku, zachovalá funkce komor.
+Normální snímek hrudníku, zachovaná funkce komor.
 
-Průběh hospitalizace:
-Srdeční rytmus byl regulován pomocí metoprololu a příznaky ustoupily. Antikoagulace byla zahájena po konzultaci s ___. Pacient byl stabilní při monitoringu a byl propuštěn.
+Stručný popis hospitalizace:
+Srdeční tep byl regulován pomocí metoprololu a potíže odezněly. Po konzultaci s ___ byla zahájena antikoagulační léčba. Pacient byl stabilní a mohl být propuštěn domů.
 
 Léky při přijetí:
-Lisinopril a atorvastatin denně.
+Lisinopril a atorvastatin denně
 
 Léky při propuštění:
-Metoprolol succinate jednou denně, apixaban dvakrát denně, lisinopril denně a atorvastatin večer. Pokračujte v užívání všech dávek doma.
+Metoprolol sukcinát jednou denně, apixaban dvakrát denně, lisinopril denně a atorvastatin večer. Pokračujte ve všech dávkách, které užíváte doma.
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -61,13 +61,13 @@ Fibrilace síní
 
 Stav při propuštění:
 Stabilní
-Psychický stav:
-Orientovaný a při vědomí.
-Funkční stav:
-Chůze, soběstačný.
+Duševní stav:
+Bdělý a orientovaný
+Stav aktivity:
+Schopný chůze, soběstačný
 
-Pokyny při propuštění:
-Byl vám poskytnut lék na léčbu rychlé a nepravidelné srdeční činnosti. Užívajte nový lék na ředění krve podle pokynů. V případě bolesti na hrudi, mdloby nebo krvácení se vraťte. V případě dotazů volejte ___.
+Pokyny pro propuštění:
+Byl jste léčen pro rychlý a nepravidelný srdeční tep. Užijte si nový lék na ředění krve podle pokynů. V případě bolesti na hrudi, mdlob nebo krvácení se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

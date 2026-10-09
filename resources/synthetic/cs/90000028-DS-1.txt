@@ -1,23 +1,23 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Oddělení: CHIRURGIE
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
-Bolest v pravém dolním kvadrantu břicha
+Bolest v pravé dolní části břicha
 
 Hlavní chirurgický zákrok nebo invazivní procedura:
 Perkutánní drenáž abscesu
 
 Anamnéza současného onemocnění:
-Pacientka, ve věku ___ let, se dostavila s bolestí v pravém dolním kvadrantu břicha, nevolností a horečkou, přičemž předtím byla vyšetřena v ambulanci ___ . Vyšetření zobrazovací techniky ukázala akutní apendicitidu s malým abscesem. Byla odeslána dne ___ k hospitalizaci a chirurgickému vyšetření.
+___letá žena se dostavila s třídenní bolestí v pravé dolní části břicha, nevolností a horečkou poté, co byla vyšetřena v ambulanci ___. Zobrazovací vyšetření prokázalo akutní apendicitidu s malým abscesem. Byla odeslána ___ k hospitalizaci a chirurgickému vyšetření.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypotyreóza
-Migrény
+Migréna
 
 Sociální anamnéza:
 ___
@@ -26,35 +26,35 @@ Rodinná anamnéza:
 Matka s rakovinou prsu
 
 Fyzikální vyšetření:
-FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
-Celkový stav: komfortní, bez horečky
-ORL: vlhká sliznice
-Kardiální: pravidelný rytmus
-Extremity: teplé, bez otoků
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: pacientka je v pohodlí, bez horečky
+Hlava, uši, nos, hrdlo: vlhké sliznice
+Srdce: pravidelný rytmus
+Končetiny: teplé, bez otoků
 
-Relevantní výsledky:
-Laboratorní výsledky při přijetí: zvýšený počet bílých krvinek (15,2), mírně zvýšený C-reaktivní protein. CT vyšetření břicha a pánve provedené dne ___ ukázalo zánětlý appendix s přilehlou tekutinou. Laboratorní výsledky při propuštění: normalizovaný počet bílých krvinek, stabilní hemoglobin, kreatinin v normálních mezích, elektrolyty bez odchylek a normální jaterní enzymy.
+Významné výsledky:
+Laboratorní výsledky při přijetí: zvýšený počet bílých krvinek na 15,2, mírně zvýšený C-reaktivní protein. CT vyšetření břicha a pánve provedené ___ ukázalo zánět slepého střeva s přilehlou tekutou kolekcí. Laboratorní výsledky před propuštěním: počet bílých krvinek se normalizoval, hladina hemoglobinu je stabilní, kreatinin v normálním rozmezí, elektrolyty v normě, jaterní enzymy v normě.
 
-Průběh hospitalizace:
-Pacientka dostávala intravenózní antibiotika a podstoupila perkutánní drenáž provedenou radiologií ___ ve druhý den hospitalizace, což vedlo k rychlému zlepšení bolesti a horečky. Strava byla postupně rozšiřována, množství tekutiny z drenu se snižovalo a dren byl odstraněn před propuštěním. Intervalová apendektomie bude prodiskutována při pozdější návštěvě s chirurgickým oddělením ___ .
+Stručný průběh hospitalizace:
+Pacientka dostávala intravenózní antibiotika a podstoupila perkutánní drenáž provedenou radiologií ___ druhý den hospitalizace, což vedlo k rychlému zlepšení bolesti a horečky. Strava byla postupně rozšiřována, množství tekutiny odváděné drenem se snižovalo a dren byl odstraněn před propuštěním. Intervalová apendektomie bude prodiskutována při další návštěvě u ___.
 
 Léky při propuštění:
-Levofloxacin 500 mg denně po dobu sedmi dnů. Acetaminophen 650 mg každých šest hodin dle potřeby na bolest. Ondansetron 4 mg dle potřeby při nevolnosti. Pokračovat v užívání levothyroxinu.
+Levofloxacin 500 mg denně po dobu sedmi dnů. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest. Ondansetron 4 mg podle potřeby na nevolnost. Pokračovat v užívání levotyroxinu.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Akutní apendicitida s periappendixálním abscesem
+Akutní apendicitida s periapendikulárním abscesem
 
 Stav při propuštění:
-Psychický stav: bdělá a orientovaná
-Úroveň vědomí: probuzená
-Funkční stav: chodí samostatně
+Duševní stav: bdělá a orientovaná
+Úroveň vědomí: bdělá
+Stav aktivity: chodí samostatně
 
-Instrukce při propuštění:
-Byla léčena pro apendicitidu s drenem. Užívajte všechny antibiotika podle pokynů. Vyhýbejte se těžkému zvedání břemen po dobu ___ týdnů. V případě horečky, zhoršující se bolesti břicha, opakovaného zvracení nebo zarudnutí kolem rány se obraťte na lékaře.
+Pokyny pro propuštění:
+Byla léčena pro apendicitidu s drenem. Užívejte všechny antibiotika podle pokynů. Vyhýbejte se těžké fyzické námaze po dobu ___ týdnů. Vraťte se, pokud se objeví horečka, zhoršení bolesti břicha, opakované zvracení nebo zarudnutí kolem rány.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

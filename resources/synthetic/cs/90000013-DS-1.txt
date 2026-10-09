@@ -1,39 +1,39 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Kardiologie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Kardiologie
+Datum přijetí: ___ Číslo pokoje: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Dušnost a otoky nohou
+Dušnost a otok nohou
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Muž ve věku ___ let, který se prezentoval s postupující dušností, ortopneí (dušností vleže) a oboustrannými otoky nohou po dobu tří týdnů. Před ___ dny mu došly léky. Byl odeslán od lékaře ___, po zvýšení váhy v domácím prostředí, a v pohotovostní ambulanci byl zjištěn hypoxický stav.
+Anamnéza současného onemocnění:
+___letý muž, který se dostavil s postupující dušností, ortopnoí a oboustranným otokem nohou, trvajícím tři týdny. Před ___ dny mu došly léky. Byl odeslán ___ poté, co zaznamenal nárůst hmotnosti doma, a v pohotovostní službě byl zjištěn jako hypoxický.
 
-Osobní anamnéza:
-Srdeční selhání
+Anamnéza předchozích onemocnění:
+Kongestivní srdeční selhání
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec s onemocněním srdce v šedesáti letech
+Otec s onemocněním srdce, ve věku šedesáti let
 
 Fyzikální vyšetření:
-Hlava, oči, uši, nos, hrdlo (HEENT):
-Vlhké sliznice, pozorována dilatace jugulárních žil.
-Břicho:
-Měkké, bezbolestné, mírně napjaté.
-Kůže:
-Teplá, s oboustrannými edémy až po kolena.
+HLAVA, OČI, UŠI, NOS, KRK:
+Vlhké sliznice, zjištěna dilatace jugulárních žil.
+BŘICHO:
+Měkké, netendrovatelné, mírně distendované.
+KŮŽE:
+Teplá, s oboustranným edémem, který se prohlubuje až po kolena.
 
-Průběh hospitalizace:
-Pacient byl přijat s přebytkem tekutin a léčen intravenózním furosemidem, s rychlou produkcí moči a stabilní ztrátou váhy. Podávání kyslíku bylo postupně snižováno. Kardiologové z ___ zhodnotili echokardiogram provedený u ___ a upravili jeho léčbu. Byl převeden na perorální diuretika a před propuštěním se pohodlně pohyboval a jeho váha byla stabilní.
+Stručný popis průběhu hospitalizace:
+Přijat s objemovým přetížením, léčen intravenózním furosemidem, s dobrou diurézou a postupnou ztrátou hmotnosti. Podávání kyslíku bylo postupně snižováno, až pacient dýchal běžný vzduch. Kardiolog z ___ zhodnotil echokardiogram provedený v ___ a upravil léčbu. Pacient byl převeden na perorální diuretika a před propuštěním se cítil dobře a jeho hmotnost byla stabilní.
 
 Léky při přijetí:
 Furosemid 40 mg denně
@@ -46,20 +46,20 @@ Metoprolol sukcinát 50 mg perorálně denně
 Lisinopril 10 mg perorálně denně
 Spironolakton 25 mg perorálně denně
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
 Srdeční selhání
 
 Stav při propuštění:
-Mentální stav:
-Orientovaný, schopný porozumět a reagovat na pokyny.
-Funkční stav:
-Chůze a soběstačnost.
+Duševní stav:
+Orientovaný, schopný plnit pokyny.
+Stav aktivity:
+Schopný chůze, soběstačný.
 
-Pokyny při propuštění:
-Zvažujte se každé ráno a zaznamenávejte váhu. Omezte příjem soli a tekutin, jak bylo prodiskutováno. Užívajte všechny léky denně. Zavolejte ___, pokud se vaše váha během jednoho dne zvýší o více než 1,4 kg, nebo pokud se zhorší dýchání. Dodržujte schůzku s ___.
+Pokyny pro propuštění:
+Každé ráno se zvažte a zaznamenejte si hodnotu. Omezte příjem soli a tekutin, jak bylo prodiskutováno. Užívejte všechny léky denně. Volejte ___, pokud se vám hmotnost během jednoho dne zvýší o více než jeden a půl kilogramu, nebo pokud se vám zhorší dýchání. Dodržujte termín kontroly u ___.
 
-Pokyny pro další sledování:
+Pokyny pro další postup:
 ___

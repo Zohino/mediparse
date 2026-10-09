@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,13 +9,13 @@ Alergie:
 Hlavní potíže:
 Otok a slabost nohou
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka, ___ let, s několika dny potíží, otoků a rostoucí hodnoty kreatininu, odeslána od ___.
+Anamnéza současného onemocnění:
+___ letá žena s několikdenní špatnou výživou, otokem a zvyšujícím se kreatininem, odeslána ___.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
 Chronické onemocnění ledvin
 Fibrilace síní
@@ -29,33 +29,33 @@ Matka s hypertenzí
 
 Fyzikální vyšetření:
 Celkový stav:
-Únavitá, v pohodě
+Unavená, v pohodě
 Plíce:
-Chropy v obou plicních bázích
-Extremity:
-Edém s jámy
+Bazální chrůpky
+Končetiny:
+Otok s prohlubněmi
 KŮŽE:
 Teplá, suchá
-PULZY:
-Hmatné, nepravidelné
+PULSY:
+Hmatatelné, nepravidelné
 
 Významné výsledky:
-LABORATOŘ PŘI PŘIJETÍ:
-Kreatinin 3,1, základní hodnota 1,8, draslík 5,4, BNP zvýšený
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Kreatinin 3,1, výchozí hodnota 1,8, draslík 5,4, zvýšené BNP
 ZÁVĚR:
-Plicní vaskulární kongestce
+Plíce: kongesce cév
 
-Průběh hospitalizace:
-Kreatinin se zlepšil při ___ díky úpravě hydratace a vysazení nefrotoxických látek. Jemná diuréza, kontrolovaná rychlost, regulace hladiny glukózy pomocí inzulínu.
+Stručný popis průběhu hospitalizace:
+Kreatinin se zlepšil na hodnotu ___ po úpravě hydratace a vysazení nefrotoxických látek. Jemná diuretická terapie, kontrolovaná frekvence, glykemie regulována inzulinem.
 
 Léky při přijetí:
 Metformin, apixaban, lisinopril
 
 Léky při propuštění:
-Furosemid denně, pokračování v užívání apixabanu, inzulín glargin večer; metformin a lisinopril byly vysazeny.
+Furosemid denně, apixaban pokračuje, inzulin glargin večer; metformin a lisinopril vysazeny.
 
-Plán po propuštění:
-Domů s péčí
+Způsob propuštění:
+Domů s domácí péčí
 
 Diagnóza při propuštění:
 Diabetes
@@ -63,15 +63,15 @@ Chronické onemocnění ledvin
 Srdeční selhání
 
 Stav při propuštění:
-Mentální stav:
-Vědomá a orientovaná
+Duševní stav:
+Bdělá a orientovaná
 Úroveň vědomí:
-Přítomná
-Funkční stav:
-Chůze s pomocí chodítka
+Bdělá
+Fyzická aktivita:
+Chodí s pomocí chodítka
 
 Pokyny při propuštění:
-Zvažujte se denně, omezte příjem soli, vyhýbejte se ibuprofenu a v případě zhoršení otoků nebo dušnosti se vraťte.
+Denně se važte, omezte příjem soli, vyhýbejte se ibuprofenu a v případě zhoršení otoku nebo dušnosti se vraťte.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

@@ -1,24 +1,24 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Otok nohy, zvracení, snížené množství moči
 
-Zásahné chirurgické zákroky:
-Žádné; zavedení katetru u ___ nebylo nutné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný; zavedení kanyly na ___ nebylo nutné
 
 Anamnéza současného onemocnění:
-Pacientka je žena s dlouhodobou anamnézou následujících onemocnění, která se dostavila na oddělení ___ s třemi dny zhoršujícího se otoku nohy, sníženým příjmem potravy, zvracením a sníženým množstvím moči. Byla vyšetřena u svého praktického lékaře, který zjistil hypotenzi a odeslal ji na pohotovost. Laboratorní výsledky ukázaly kreatinin 3,1 (výrazně nad základní hodnotu) a draslík 5,8. Byla přijata na oddělení ___ pro regulaci tekutin a pečlivé sledování.
+Pacientka je žena s dlouhodobou anamnézou níže uvedených onemocnění, která se dostavila do ___ se třemi dny trvajícím zhoršujícím se otokem nohy, špatným příjmem potravy, zvracením a sníženým množstvím moči. Byla vyšetřena v ___ svým ošetřujícím lékařem, který zjistil hypotenzi a odeslal ji na pohotovost. Laboratorní výsledky ukázaly kreatinin 3,1, což je výrazně nad výchozí hodnotou, a draslík 5,8. Byla přijata ___ za účelem regulace tekutin a pečlivého sledování.
 
-Předchozí zdravotní problémy:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
-Chronické onemocnění ledvin, stádium 3
-Srdeční selhání
+Chronické onemocnění ledvin, stadium 3
+Kongestivní srdeční selhání
 Hypertenze
 Léčena v ___
 
@@ -26,32 +26,32 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí; otec s koronární chorobou.
+Matka s hypertenzí; otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
-Životní funkce: T 98,2, TK 104/62, SR 78, FF 16, SpO2 96 % při pokojovém vzduchu, vyšetřeno ___
-Hlava, oči, uši, nos, hrdlo: Suché sliznice, skléra bez žlutosti.
-Břicho: Měkké, bezbolestné, nenabobtnalé, normální zvuky střev.
-Kůže: Teplá, s mírným edémem s důlky na obou lýtcích.
-Neurologické vyšetření: Vědomá, orientovaná, pohybuje všemi končetinami, bez fokálních deficitů.
+Vitalní funkce: T 36,9 °C, TK 104/62, TF 78, dechová frekvence 16, SpO2 96 % při dýchání okolním vzduchem, vyšetřeno ___
+Hlava, oči, uši, nos, hrdlo: Suché sliznice, bez ikteru skléry
+Břicho: Měkké, netendrovatelné, neztvrdlé, normální střevní zvuky
+Kůže: Teplá, s mírným otokem obou holení
+Neurologické: Bdělá, orientovaná, pohybuje všemi končetinami, bez ložiskového deficitu
 
-Relevantní výsledky:
-Laboratorní výsledky při přijetí na ___: kreatinin 3,1, urea 58, draslík 5,8, bikarbonát 18, glukóza 212. Analýza moči ukázala hnědé usazeniny a žádnou infekci. Kreatinin se zlepšil na 1,8 při propuštění, draslík na 4,4. BNP mírně zvýšen. Ultrazvuk ledvin provedený na ___ neprokázal žádnou obstrukci.
-ZÁVĚR: Bez hydronefrózy. Ledviny s normální velikostí a echogenitou. Malé bilaterální pleurální výpotky na rentgenovém snímku hrudníku, jinak čisté plíce.
+Významné výsledky:
+Laboratorní výsledky při přijetí v ___: kreatinin 3,1, BUN 58, draslík 5,8, bikarbonát 18, glukóza 212. Vyšetření moči ukázalo zakalené hnědé válce a žádnou infekci. Kreatinin se zlepšil na 1,8 při propuštění, draslík 4,4. BNP mírně zvýšené. Ultrazvuk ledvin provedený v ___ neukázal žádnou obstrukci.
+ZÁVĚR: Žádná hydronefróza. Echogenní ledviny normální velikosti. Malé bilaterální pleurální výpotky na rentgenu hrudníku, jinak plíce v pořádku.
 
 Léky při přijetí:
-Insulin glargin večer, lisinopril, furosemid, carvedilol, metformin, aspirin, předepsané v ___
+Inzulin glargin jednou denně na noc, lisinopril, furosemid, karvedilol, metformin, aspirin, dle receptu z ___
 
 Léky při propuštění:
-1. Insulin glargin 20 jednotek před spaním
-2. Carvedilol 12,5 mg dvakrát denně
+1. Inzulin glargin 20 jednotek před spaním
+2. Karvedilol 12,5 mg dvakrát denně
 3. Aspirin 81 mg denně
 4. Furosemid 20 mg denně, snížená dávka
-5. Atorvastatin 40 mg večer
-Lisinopril a metformin užívat až po konzultaci s ___ v ambulanci.
+5. Atorvastatin 40 mg denně na noc
+Přerušit podávání lisinoprilu a metforminu, dokud je nevyhodnotí ___ na ambulanci.
 
-Plán po propuštění:
-Domů s péčí
+Plán propuštění:
+Domů s poskytovanou péčí
 Zařízení: ___
 
 Diagnóza při propuštění:
@@ -59,12 +59,12 @@ Diabetes mellitus
 Chronické onemocnění ledvin
 Srdeční selhání
 
-Podmínky propuštění:
-Psychický stav: Jasný a soustředěný, plně zapojen do konverzace.
-Úroveň vědomí: Vnímavý a komunikativní.
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný, plně se účastní konverzace.
+Úroveň vědomí: Bdělý a reagující.
 
 Pokyny pro propuštění:
-Byli jste hospitalizováni, protože jste se dehydratovali a vaše funkce ledvin se zhoršila. Podali jsme vám tekutiny a dočasně přerušili některé léky. Každé ráno se vážte a volejte číslo ___ v případě, že se vaše váha během jednoho dne zvýší o více než 1,4 kg. Vyhýbejte se ibuprofenu a podobným lékům proti bolesti. Pijte tekutiny s rozumem, pravidelně kontrolujte hladinu cukru a v případě zvracení, mdloby nebo velmi malého množství moči se vraťte. Prosím, dodržte svůj termín návštěvy u ___ .
+Byli jste hospitalizováni, protože jste trpěli dehydratací a funkce vašich ledvin se zhoršila. Podali jsme vám tekutiny a dočasně jsme vysadili některé léky. Každé ráno se zvažte a zavolejte na číslo ___, pokud se vaše váha během jednoho dne zvýší o více než jeden a půl kilogramu. Vyhýbejte se ibuprofenu a podobným lékům proti bolesti. Pijte dostatek tekutin, pravidelně si kontrolujte hladinu cukru v krvi a v případě zvracení, mdlob nebo velmi malého množství moči se vraťte do nemocnice. Prosím, dodržte termín vaší kontroly u lékaře ___.
 
-Pokyny pro další péči:
+Pokyny pro další postup:
 ___

@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,32 +9,32 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacient se dostavil na oddělení ___ s potížemi, které se zhoršovaly již dva dny: produktivní kašel, horečka a dušnost, což se objevilo po nedávné návštěvě ___. Při příjmu byly vitální funkce stabilní a bylo provedeno zobrazovací vyšetření hrudníku.
+Pacient se dostavil do ___ se zhoršujícím se produktivním kašlem, horečkou a dušností, které trvaly dva dny, po nedávné návštěvě ___. Při příjezdu byly vitální funkce stabilní a byla provedena zobrazovací vyšetření hrudníku.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
-Možná fibrilace síní zaznamenána u ___, nikdy potvrzena
+Hyperlipidémie
+Možná fibrilace síní zaznamenána v ___, nikdy nepotvrzena
 
 Sociální anamnéza:
 ___
 
 Fyzikální vyšetření:
-Celkový stav: Pacient je v pohodě, bez akutních potíží.
-Oblast hlavy, očí, uší, nosu a krku (ORL): Vlhká sliznice.
+Celkový stav: Dobrý, bez akutní tíže.
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice.
 Plíce: Rozptýlené chrůpky, bez sípání.
-Srdce: Pravidelná frekvence a rytmus.
+Srdce: Pravidelný rytmus.
 
-Výsledky vyšetření:
-LABORATOŘ PŘED PROPUŠTĚNÍM: WBC 8.2, Hgb 13.1, Na 139, K 4.1, kreatinin 0.9, vše odebráno dne ___ před propuštěním.
-ZÁVĚR: Konsolidace v dolním laloku pravé plíce, odpovídající pneumonii, bez výpotku, interpretováno radiologem dne ___.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM: WBC 8,2, Hgb 13,1, Na 139, K 4,1, kreatinin 0,9, vše odebráno ___ před propuštěním.
+ZÁVĚR: Konsolidace v dolním laloku pravé plíce odpovídá pneumonii, bez výpotku, vyhodnoceno radiologem v ___.
 
-Průběh hospitalizace:
-Pacient byl léčen pro pneumonii získanou v komunitě pomocí intravenózních antibiotik, poté byla léčba převedena na perorální formy. Podávání kyslíku bylo postupně snižováno, do třetího dne byl pacient schopen dýchat přirozeně. Horečka ustoupila a chuť k jídlu se zlepšila. Po propuštění byla domluvena kontrola u ___.
+Stručný popis hospitalizace:
+Léčen pro komunitní pneumonii intravenózními antibiotiky, poté převeden na perorální terapii. Podávání kyslíku bylo postupně snižováno, do třetího dne již pacient dýchal běžný vzduch. Horečka ustoupila a zlepšila se chuť k jídlu. Po propuštění byla domluvena kontrola u ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -42,24 +42,24 @@ Atorvastatin 20 mg večer
 
 Léky při propuštění:
 Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů.
-Pokračujte v užívání lisinoprilu a atorvastatinu ve stejné dávce.
-Paracetamol dle potřeby při horečce.
+Pokračovat v užívání lisinoprilu a atorvastatinu jako dříve.
+Paracetamol podle potřeby na horečku.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitní pneumonie
 Hypertenze
 
 Stav při propuštění:
-Psychický stav: Pacient je při vědomí a orientovaný.
-Úroveň vědomí: Pacient je vzhůru a pozorný.
-Funkční stav: Pacient je pohyblivý a soběstačný.
+Duševní stav: Bdělý a orientovaný.
+Úroveň vědomí: Probuzený a pozorný.
+Fyzická aktivita: Chodí, soběstačný.
 
-Pokyny při propuštění:
-Užívejte antibiotika až do konce, odpočívejte a pijte dostatek tekutin. V případě zhoršení dýchání, bolesti na hrudi nebo přetrvávající horečky se vraťte. Dodržujte všechny kontrolní prohlídky.
+Pokyny pro propuštění:
+Užívejte antibiotika, dokud je nedokončíte, odpočívejte a pijte dostatek tekutin. V případě zhoršení dýchání, bolesti na hrudi nebo přetrvávající horečky se vraťte. Dodržujte všechny naplánované kontroly.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

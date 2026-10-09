@@ -1,25 +1,25 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
-Otok nohy a dušnost
+Otok nohou a dušnost
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka, žena ve věku ___ let, s chronickými přidruženými onemocněními, se dostavila s postupně se zhoršujícím otokem nohy a dušností při námaze. Byla vyšetřena dne ___ a zjištěna přetížení tekutinami a zvýšená hladina kreatininu, byla přijata k hospitalizaci pro diurézu.
+___ letá žena s dlouhodobými komorbiditami se dostavila s dvoutýdenní se zhoršujícím otokem nohou a dušností při námaze. Vyšetřena v ___ dne ___, zjištěn objemový přetížení s elevovaným kreatininem, přijata k diuréze.
 
-Anamnéza minulých onemocnění:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
-Chronické onemocnění ledvin, stádium 3
+Chronické onemocnění ledvin, stadium 3
 Hypertenze
-Chirurgické odstranění žlučníku (cholecystektomie) v ___
+Cholecystektomie v ___
 
 Sociální anamnéza:
 ___
@@ -29,33 +29,33 @@ Matka s hypertenzí
 
 Fyzikální vyšetření:
 Celkový stav:
-Únavná, v klidu v pohodě
-Hlava, oči, uši, nos, hrdlo:
+Unavená, v klidu se cítí dobře
+Hlava, uši, oči, nos, hrdlo:
 Vlhké sliznice
 Krk:
-Zvýšený jugulární venózní tlak (JVP)
+Zvýšená jugulární venózní tlak
 Břicho:
-Měkké, bezbolestné
-Extremity:
-Dvoustranný edém s jámy
+Měkké, netendrovatelné
+Končetiny:
+Bilateralní otok s prohlubněmi
 
 Významné výsledky:
-LABORATOŘ PŘI PŘIJETÍ:
-Kreatinin 2,4, urea 48, draslík 5,1, BNP výrazně zvýšen
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Kreatinin 1,8, urea 36, draslík 4,3
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Kreatinin 2,4, BUN 48, draslík 5,1, BNP výrazně zvýšené
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Kreatinin 1,8, BUN 36, draslík 4,3
 ZÁVĚR:
-Rentgen hrudníku s plicní vaskulární kongescí a drobnými bilaterálními efuzemi
+Rentgen hrudníku s plicní vaskulární kongescí a malými bilaterálními výpotky
 
-Průběh hospitalizace:
-Diuréza pomocí intravenózní furosemidu, s úbytkem hmotnosti a zlepšením hladiny kreatininu oproti přijetí. Telemetrie ukázala fibrilaci síní s kontrolovanou frekvencí, byla zahájena antikoagulace. Dávkování léků pro ledviny bylo upraveno podle doporučení nefrologického oddělení. Pacientka byla propuštěna v normálním objemu tekutin a s perorálním diuretikem.
-PROBLÉMY PŘI PŘECHODU:
-Kontrola hladiny kreatininu a draslíku za jeden týden.
+Stručný průběh hospitalizace:
+Diuréza pomocí intravenózního furosemidu, s úbytkem hmotnosti a zlepšením kreatininu od přijetí. Telemetrie prokázala fibrilaci síní s kontrolovanou frekvencí, byla zahájena antikoagulační léčba. Dávkování léků bylo upraveno podle doporučení nefrologa ___. Propuštěna s euvolemickým stavem a perorálním diuretikem.
+PŘECHODNÁ OTÁZKY:
+Kontrola kreatininu a draslíku za jeden týden.
 
 Léky při přijetí:
 Metformin, lisinopril, amlodipin
 
-Plán po propuštění:
+Způsob propuštění:
 Domů s péčí
 
 Diagnóza při propuštění:
@@ -64,11 +64,11 @@ Chronické onemocnění ledvin
 Fibrilace síní
 
 Stav při propuštění:
-Stabilní a zlepšený
+Stabilizovaný a zlepšený
 Úroveň vědomí:
-Orientovaná a komunikativní
-Úroveň aktivity:
-Chůze s pomocí chodítka
+Bdělá a komunikativní
+Stav aktivity:
+Chodí s pomocí chodítka
 
-Pokyny při propuštění:
-Vážete se každé ráno a volejte, pokud přiberete více než 1,4 kg. Omezte příjem soli a tekutin. Užíváte léky podle předpisu. Navštivte svou ordinaci v ___ do jednoho týdne.
+Pokyny pro propuštění:
+Každé ráno se zvažte a zavolejte, pokud přiberete více než tři libry. Omezte příjem soli a tekutin. Užívajte léky podle předpisu. Navštivte svou ambulanci v ___ do jednoho týdne.

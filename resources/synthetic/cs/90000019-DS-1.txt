@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,15 +9,15 @@ Alergie:
 Hlavní potíže:
 Dušnost
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž s diagnostikovaným srdečním selháním, odeslán z ___ s zhoršující se dušností a otoky nohou.
+Muž se známou srdeční insuficiencí, odeslán z ___ kvůli zhoršující se dušnosti a otokům nohou.
 
-Předchozí zdravotní problémy:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
 Ischemická choroba srdeční
 
 Sociální anamnéza:
@@ -28,23 +28,23 @@ Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacient je v pohodě, mírně dušný.
-Hlava, oči, uši, nos, krk (HEENT):
-Bez žloutenky.
+Dobře se cítí, mírná dušnost
+Hlava, oči, uši, nos, hrdlo:
+Bez známek žloutenky
 Krk:
-Zvýšený jugulární venózní tlak (JVP).
+Zvýšená jugulární venózní tlak
 Břicho:
-Měkké, bez citlivosti.
-Kůže:
-Teplá, suchá.
+Měkké, netendrovatelné
+KŮŽE:
+Teplá, suchá
 
 Významné výsledky:
-Zvýšená hladina BNP. Rentgen hrudníku ukázal plicní vaskulární kongesci. Hladina kreatininu byla stabilní na hodnotě ___ po celou dobu hospitalizace.
+Zvýšené hodnoty BNP. Rentgen hrudníku ukázal plicní vaskulární kongesci. Kreatinin stabilní na hodnotě ___ po celou dobu.
 
-Průběh hospitalizace:
-Léčba intravenózními diuretiky, s dobrým výdelem moči a zlepšením dýchání. Hmotnost pacienta se postupně snižovala. Pacienta vyšetřilo kardiologické oddělení dne ___.
-DŮLEŽITÉ ASPEKTY:
-Kontrola hladiny elektrolytů příští týden.
+Stručný popis hospitalizace:
+Léčen intravenózními diuretiky, s dobrým močením a zlepšeným dýcháním. Hmotnost postupně klesala. Konzultace s kardiologem na ___.
+PŘECHODNÁ OTÁZKY:
+Příští týden zkontrolovat elektrolyty.
 
 Léky při přijetí:
 Lisinopril, atorvastatin, aspirin
@@ -54,25 +54,25 @@ Léky při propuštění:
 2. Lisinopril 10 mg denně
 3. Atorvastatin 40 mg večer
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 Zařízení:
 ___
 
 Diagnóza při propuštění:
 Přetížení tekutinami
-Hypertenze (vysoký krevní tlak)
+Hypertenze
 Ischemická choroba srdeční
 
 Stav při propuštění:
 Stabilní
-Psychický stav:
-Orientovaný a při vědomí.
+Duševní stav:
+Bdělý a orientovaný
 Fyzická aktivita:
-Chůze, soběstačný.
+Chodí, soběstačný
 
 Pokyny při propuštění:
-Vážete se každý den ráno a volejte číslo ___ v případě, že se vaše váha zvýší o více než 1,4 kg. Omezte příjem soli a tekutin.
+Každé ráno se zvažte a zavolejte na ___, pokud se hmotnost zvýší o více než jeden a půl kilogramu. Omezte příjem soli a tekutin.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

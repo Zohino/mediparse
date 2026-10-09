@@ -1,46 +1,46 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Oddělení: CHIRURGIE
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest v pravém horním kvadrantu břicha.
+Bolest v pravém horním kvadrantu břicha
 
 Hlavní chirurgický zákrok nebo invazivní procedura:
-Laparoskopická cholecystektomie (odstranění žlučníku).
+Laparoskopická cholecystektomie
 
 Anamnéza současného onemocnění:
-Pacient se dostavil na oddělení ___ s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po tučném jídle, která trvala dva dny. Symptomy se začaly objevovat ___ a zhoršovaly se i přes změny v jídelníčku. Bolest se šířila do pravého ramene. Pacient popíral horečku nebo žloutenku. Byl doporučen lékařem ___ k urgentnímu vyšetření, zobrazovacím metodám a chirurgické konzultaci.
+Pacient se dostavil do ___ s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po konzumaci tučného jídla, trvajícími dva dny. Příznaky se objevily ___ a zhoršovaly se i přes změny v dietě. Bolest vyzařovala do pravého ramene. Pacient popíral horečku nebo žloutenku. Byl odeslán doktorem ___ na urgentní vyšetření, zobrazovací metody a chirurgickou konzultaci.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
 
-Chirurgická anamnéza:
-Apendektomie (odstranění slepého střeva) na ___
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s žlučovými kameny, otec s rakovinou na ___
+Matka s žlučovými kameny, otec s rakovinou v ___
 
 Fyzikální vyšetření:
-SRDEČNÍ: Pravidelná frekvence a rytmus, žádné šelesty.
-Břicho: Měkké, bolestivé v pravém horním kvadrantu, pozitivní Murphyho příznak, bez známek distenze.
+SRDEČNÍ: Pravidelný rytmus, bez šelestů.
+BŘICHO: Měkké, citlivé v pravém horním kvadrantu, pozitivní Murphyho příznak, neztuhlé.
 KONČETINY: Teplé, bez otoků.
-Neurologické: Vědomý, orientovaný, bez fokálních příznaků.
+NEUROLOGICKÉ: Bdělý, orientovaný, bez ložiskových příznaků.
 
 Významné výsledky:
-Laboratorní vyšetření ukázala mírně zvýšený počet bílých krvinek, normální hladinu bilirubinu a jaterní enzymy. Hladina lipázy byla v normě. Ultrazvuk provedený na ___ prokázal žlučové kameny, ztluštění stěny žlučníku a tekutinu kolem žlučníku. Laboratorní výsledky po operaci byly bez odchylek.
+Laboratorní vyšetření ukázala mírně zvýšený počet bílých krvinek, normální hladinu bilirubinu a jaterních enzymů. Lipáza byla v normálním rozmezí. Ultrazvukové vyšetření provedené v ___ prokázalo žlučové kameny, ztluštění stěny žlučníku a tekutinu v okolí žlučníku. Pooperační laboratorní výsledky byly bezvýznamné.
 ZÁVĚR:
-Nález odpovídá akutní cholecystitidě způsobené žlučovými kameny, bez dilatace žlučových cest.
+Nález odpovídá akutní kalcové cholecystitidě, bez dilatace žlučových cest.
 
-Průběh hospitalizace:
-Pacient byl přijat na chirurgické oddělení, dostal intravenózní tekutiny a antibiotika a byl ponechán bez perorálního příjmu. Dne ___ podstoupil nekomplikovanou laparoskopickou cholecystektomii provedenou lékařem ___. Po operaci byla bolest kontrolována perorálními analgetiky, dieta byla postupně rozšiřována a pacient toleroval běžnou stravu. Antibiotika byla po operaci ukončena. Rány byly čisté a suché. Byl propuštěn domů dne ___ ve stabilním stavu.
+Stručný popis hospitalizace:
+Pacient byl přijat na chirurgické oddělení, podávány mu byly intravenózní tekutiny a antibiotika, a byl ponechán bez možnosti orální příjmu potravy. ___ podstoupil nekomplikovanou laparoskopickou cholecystektomii, kterou provedl doktor ___. Po operaci byla jeho bolest kontrolována perorálními analgetiky, dieta byla postupně rozšiřována a pacient toleroval běžnou stravu. Po operaci byly antibiotika vysazena. Řezné rány byly čisté a suché. ___ byl pacient propuštěn domů ve stabilizovaném stavu.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -48,25 +48,26 @@ Atorvastatin 20 mg večer
 Aspirin 81 mg denně
 
 Léky při propuštění:
-1. Acetaminophen 650 mg perorálně každých šest hodin dle potřeby na bolest.
-2. Oxykodon 5 mg perorálně každých šest hodin dle potřeby na silnou bolest.
-3. Docusate 100 mg dvakrát denně během užívání opioidů.
-4. Pokračovat v užívání lisinoprilu a atorvastatinu ve stejné dávce jako předtím.
+1. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti.
+2. Oxykodon 5 mg perorálně každých šest hodin podle potřeby proti silné bolesti.
+3. Dokusát 100 mg dvakrát denně během užívání opioidů.
+4. Pokračovat v užívání lisinoprilu a atorvastatinu jako dříve.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Primární: Akutní cholecystitida způsobená žlučovými kameny.
-Sekundární: Hypertenze, hyperlipidemie.
+Primární: Akutní kalcová cholecystitida
+Sekundární: Hypertenze, hyperlipidémie
 
 Stav při propuštění:
-Psychický stav: Jasný a srozumitelný.
-Úroveň vědomí: Vědomý a komunikativní.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a komunikativní.
 
 Pokyny pro propuštění:
-Byli jste hospitalizováni kvůli zánětu žlučníku a proběhla vám laparoskopická operace k odstranění žlučníku. Udržujte rány čisté a suché a sprchujte se jako obvykle. Několik týdnů se vyhýbejte zvedání předmětů vážících více než 4,5 kg. V případě horečky, zhoršující se bolesti, zvracení, žlutosti kůže nebo zarudnutí rány volejte číslo ___ nebo se obraťte na pohotovost. Následujte pokyny pro kontrolní prohlídku, které vám byly sděleny společností ___.
 
-Pokyny pro kontrolní prohlídku:
+Byli jste hospitalizováni kvůli zánětu žlučníku a žlučník vám byl odstraněn laparoskopicky. Udržujte řezné rány čisté a suché a sprchujte se jako obvykle. Po dobu několika týdnů se vyhýbejte zvedání těžkých předmětů, jejichž váha přesahuje deset liber. V případě horečky, zhoršující se bolesti, zvracení, žloutnutí kůže nebo zarudnutí ran zavolejte na číslo ___ nebo se vraťte na pohotovost. Dodržujte pokyny pro kontrolní vyšetření, které vám sdělil ___.
+
+Pokyny pro kontrolní vyšetření:
 ___

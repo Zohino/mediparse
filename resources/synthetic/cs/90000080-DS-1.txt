@@ -1,23 +1,23 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Oddělení: CHIRURGIE
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
-Bolest v pravém dolním kvadrantu břicha
+Bolest v pravé dolní části břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická appendektomie (odstranění slepého střeva)
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
 
 Anamnéza současného onemocnění:
-Pacientka, ve věku ___ let, se dostavila na oddělení ___ s bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou, doporučena lékařem po domácí léčbě, která nepřinesla zlepšení.
+___letá žena se dostavila do ___ s třídenní bolestí v pravé dolní části břicha, nevolností a mírnou horečkou. Byla odeslána svým ošetřujícím lékařem poté, co se její potíže doma nezlepšily.
 
-Předchozí zdravotní problémy:
-Hypotyreóza (snížená funkce štítné žlázy), diagnostikována ___
-Hypertenze (vysoký krevní tlak)
+Anamnéza předchozích onemocnění:
+Hypotyreóza, diagnostikována ___
+Hypertenze
 
 Sociální anamnéza:
 ___
@@ -26,40 +26,40 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Celkový stav: pohodlná, při vědomí
-Krk: pružný
-Břicho: bolestivý pravý dolní kvadrant, měkké
-KONČETINY: teplé, bez otoků
-KŮŽE: neporušená, rány čisté
+Celkový stav: dobrý, bdělá
+Krk: pohyblivý
+Břicho: citlivé v pravé dolní části, měkké
+Končetiny: teplé, bez otoků
+Kůže: neporušená, jizvy čisté
 
 Významné výsledky:
-Počet bílých krvinek zvýšen při přijetí, normalizoval se při propuštění. CT vyšetření břicha ukázalo zánětlivé, rozšířené slepé střevo s otokem okolní tukové tkáně.
+Při přijetí zvýšený počet bílých krvinek, při propuštění se normalizoval. CT vyšetření břicha ukázalo zánětlivý, rozšířený apendix s okolní tukovou infiltrací.
 ZÁVĚR:
-Nález odpovídá akutnímu zánětu slepého střeva, bez perforace.
+Nález odpovídá akutní apendicitidě, bez perforace.
 
-Průběh hospitalizace:
-Pacientka byla vyšetřena chirurgickým týmem ___ a dne ___ byla operována v operačním sále, kde jí byla provedena laparoskopická appendektomie bez komplikací. Byla jí postupně zaváděna pevná strava, bolest byla kontrolována perorálními léky a při propuštění byla bez horečky a chodila samostatně.
+Stručný popis hospitalizace:
+Vyšetřena chirurgickým týmem ___ a podrobena laparoskopické apendektomii ___. Strava postupně rozšiřována, bolest kontrolována perorálními léky, při propuštění bez horečky a schopná samostatné chůze.
 
 Léky při přijetí:
-Levothyroxin
+Levotyroxin
 Lisinopril
 
 Léky při propuštění:
-Levothyroxin denně, jako předtím. Lisinopril denně, jako předtím. Paracetamol dle potřeby na bolest. Docusate dvakrát denně při užívání silnějších léků proti bolesti.
+Levotyroxin denně, jako dříve. Lisinopril denně, jako dříve. Paracetamol podle potřeby proti bolesti. Dokusát dvakrát denně, pokud užívá silnější léky proti bolesti.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Akutní zánět slepého střeva
+Akutní apendicitida
 Hypotyreóza
 Hypertenze
 
 Stav při propuštění:
-Úroveň aktivity: chodící, samostatná
+Stav aktivity: schopná chůze, nezávislá
 
-Pokyny při propuštění:
-Byla vám odstraněna slepé střevo. Udržujte rány čisté a suché, vyhýbejte se těžkému zvedání břemen po dobu několika týdnů a volejte ___ v případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí rány.
+Pokyny pro propuštění:
+Byl vám odstraněn apendix. Udržujte jizvy čisté a suché, vyhýbejte se těžké fyzické námaze po dobu několika týdnů a v případě horečky, zhoršení bolesti, zvracení nebo zarudnutí rány volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

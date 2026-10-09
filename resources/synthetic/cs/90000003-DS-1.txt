@@ -1,65 +1,65 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Známé alergie na léky: žádné.
 
 Hlavní potíže:
-Bolest a otok v pravé dolní končetině.
+Bolest a otok pravé dolní končetiny.
 
-Zásahy:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný.
 
 Anamnéza současného onemocnění:
-Pacientka se dostavila na oddělení ___ s bolestí a otokem pravé lýtkové svaliny, které trvaly tři dny, po dlouhém letu. Duplexní ultrazvuk prokázal akutní hlubokou žilní trombózu. Byla zahájena antikoagulační léčba a pacientka byla přijata do nemocnice.
+Pacientka se dostavila do ___ s třídenní bolestí a otokem pravého lýtka po dlouhém ___ letu. Duplexní ultrazvuk odhalil akutní hlubokou žilní trombózu. Byla zahájena antikoagulační léčba a pacientka byla přijata do nemocnice.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypotyreóza.
-Migrény.
+Migréna.
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s křečovými žilami.
+Matka s křečovými žílami.
 
 Fyzikální vyšetření:
-Celkový stav: Pacientka je v pohodě; pravá lýtková svalina je bolestivá a oteklá.
-Hlava, oči, uši, nos, hrdlo: Normální tvar hlavy, vlhké sliznice.
-Plíce: Při poslechu čisté bilaterálně.
+Celkový stav: Dobrý; pravé lýtko citlivé na dotek, oteklé.
+Hlava, oči, uši, nos, hrdlo: Normocefalická, vlhké sliznice.
+Plíce: Při auskultaci oboustranně čisté.
 
 Významné výsledky:
-Duplexní ultrazvuk ___ prokázal okluzivní trombózu pravé podkolenní žíly. Hemoglobin a kreatinin byly při přijetí v normě.
+Duplexní ultrazvuk ___ prokázal okluzivní tromb v pravé popliteální žíle. Hodnoty hemoglobinu a kreatininu byly při přijetí v normě.
 ZÁVĚR:
-Okluzivní trombóza pravé podkolenní žíly; bez rozšíření proximálně. CT angiografie hrudníku byla negativní na embolii.
+Okluzivní tromb v pravé popliteální žíle; bez proximální expanze. CT angiografie hrudníku nevykázala embolii.
 
-Průběh hospitalizace:
-Byla zahájena přímá perorální antikoagulace a pacientka zůstala hemodynamicky stabilní. Bolest se zlepšila po elevaci končetiny a podání paracetamolu. Personál ___ poskytl pacientce informace o dávkování a opatřeních proti krvácení. Byla propuštěna domů ve stabilním stavu.
-DŮLEŽITÉ INFORMACE PRO PACIENTKU:
-Kontrola u lékaře ___ za tři týdny. Užívejte antikoagulancia po dobu tří měsíců.
+Stručný popis hospitalizace:
+Byla zahájena léčba přímým perorálním antikoagulantem a pacientka si udržela hemodynamickou stabilitu. Bolest se zlepšila po zvednutí končetiny a podání paracetamolu. ___ poskytl instrukce ohledně dávkování a opatření proti krvácení. Pacientka byla propuštěna domů ve stabilizovaném stavu.
+PŘECHODNÁ OPATŘENÍ:
+Kontrola u ___ za tři týdny. Pokračovat v antikoagulační léčbě po dobu tří měsíců.
 
 Léky při přijetí:
-Levothyroxin denně. Sumatriptan dle potřeby.
+Levotyroxin denně. Sumatriptan podle potřeby.
 
 Léky při propuštění:
-Apixaban 10 mg dvakrát denně po dobu sedmi dnů, poté 5 mg dvakrát denně. Pokračujte v užívání levothyroxinu. Paracetamol dle potřeby na bolest.
+Apixaban 10 mg dvakrát denně po dobu sedmi dnů, poté 5 mg dvakrát denně. Pokračovat v užívání levotyroxinu. Paracetamol podle potřeby proti bolesti.
 
-Stav při propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Akutní hluboká žilní trombóza pravé podkolenní žíly.
+Akutní hluboká žilní trombóza pravé popliteální žíly.
 
 Stav při propuštění:
-Psychický stav: Vědomá a orientovaná.
-Úroveň vědomí: Probuděná a pozorná.
-Funkční stav: Chůze a soběstačnost.
+Duševní stav: Bdělá a orientovaná.
+Úroveň vědomí: Probuzená a pozorná.
+Fyzická aktivita: Chodí a je soběstačná.
 
-Pokyny při propuštění:
-Užívejte antikoagulancia podle předpisu. Zvedejte nohu, když sedíte. V případě bolesti na hrudi, dušnosti nebo krvácení se obraťte na ___ .
+Pokyny pro propuštění:
+Užívejte antikoagulant podle předpisu. Zvedněte nohu, když sedíte. V případě bolesti na hrudi, dušnosti nebo krvácení se vraťte do ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

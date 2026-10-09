@@ -1,23 +1,23 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Bušení srdce
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka se dostavila na oddělení ___ s několika dny trvajícím bušením srdce a únavou, které se zhoršovaly při námaze. Byla vyšetřena na oddělení ___ a přijata pro regulaci srdeční frekvence.
-ANAMNÉZA:
-Pozitivní bušení srdce. Žádná bolest na hrudi.
+Pacientka se dostavila do ___ s několikdenní anamnézou bušení srdce a únavy, které se zhoršovaly při námaze. Byla vyšetřena v ___ a přijata za účelem regulace srdečního rytmu.
+PŘEHLED SYSTÉMŮ:
+Přítomno bušení srdce. Žádná bolest na hrudi.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Fibrilace síní
 Hypertenze
 Hypotyreóza
@@ -26,33 +26,33 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s mrtvicí
+Matka s cévní mozkovou příhodou
 
 Fyzikální vyšetření:
-Pacientka je v pohodě, nepravidelný srdeční rytmus, bez známek utrpení.
-FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Dobře se cítí, nepravidelný rytmus, bez známek úzkosti.
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
 Celkový stav: Dobrý vzhled
-Hlava, oči, uši, nos, krk: Vlhká sliznice
-Plíce: Čisté bilaterálně
-Břicho: Měkké, bez citlivosti
-Extremity: Bez otoků
-Neurologické vyšetření: Vědomá, bez fokálních příznaků
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Plíce: Čisté na obou stranách
+Břicho: Měkké, netendrovatelné
+Končetiny: Bez otoků
+Neurologické: Bdělá, bez ložiskových příznaků
 
-Relevantní výsledky:
-EKG při přijetí ukázalo rychlý, nepravidelný rytmus. Troponin negativní dvakrát. TSH normální. Echokardiogram provedený na oddělení ___ ukázal zachovalou ejekční frakci.
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Drusík 4,1, kreatinin 0,8.
+Významné výsledky:
+EKG při přijetí ukázalo rychlý, nepravidelný rytmus. Dvakrát negativní troponin. Normální TSH. Echokardiografie v ___ ukázala zachovanou ejekční frakci.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Draslík 4,1, kreatinin 0,8.
 
-Stručný průběh hospitalizace:
-Srdeční frekvence byla regulována pomocí metoprololu a stabilizovala se. Apixaban byl zahájen pro prevenci mrtvice po konzultaci s ___. Příznaky ustoupily, pacientka chodila samostatně a byla zajištěna kontrola u kardiologa na oddělení ___.
+Stručný popis hospitalizace:
+Rytmus byl regulován pomocí metoprololu a srdeční frekvence se stabilizovala. Po diskusi s ___ byl zahájen apixaban jako prevence cévní mozkové příhody. Symptomy ustoupily, pacientka chodila bez pomoci a byla domluvena kontrola u kardiologa v ___.
 
 Léky při přijetí:
-Levothyroxin, lisinopril
+Levotyroxin, lisinopril
 
 Léky při propuštění:
-Metoprolol succinate denně, apixaban dvakrát denně, levothyroxin denně, lisinopril denně.
+Metoprolol sukcinát denně, apixaban dvakrát denně, levotyroxin denně, lisinopril denně.
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 Zařízení: ___
 
@@ -61,12 +61,12 @@ Fibrilace síní
 
 Stav při propuštění:
 Stabilní
-Psychický stav: Jasný a koherentní
-Úroveň vědomí: Vědomá a komunikativní
-Funkční stav: Chůze, samostatná
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a reaguje
+Stav aktivity: Ambulantní, soběstačná
 
-Instrukce při propuštění:
-Byla jste přijata kvůli rychlému, nepravidelnému srdečnímu tepu. Užívajte nové léky podle předpisu a hlaste závratě, krvácení nebo bolest na hrudi. V případě dotazů volejte ___.
+Pokyny pro propuštění:
+Byli jste přijati s rychlým, nepravidelným srdečním tepem. Užívajte nové léky podle předpisu a hlaste závratě, krvácení nebo bolest na hrudi. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Oddělení: CHIRURGIE
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,39 +9,39 @@ Alergie:
 Hlavní potíže:
 Bolest v pravém horním kvadrantu břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická cholecystektomie (odstranění žlučníku) dne ___
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie dne ___
 
 Anamnéza současného onemocnění:
-Pacient se dostavil na oddělení ___ s bolestí v pravém horním kvadrantu břicha, která se zhoršovala již dva dny, s nevolností a jednou epizodou zvracení. Uváděl, že měl doma horečku. Symptomy se objevily po konzumaci tučného jídla. Byl převezen z pohotovosti ___ pro chirurgické vyšetření. Ultrazvukové vyšetření odhalilo žlučové kameny se zesílením stěny žlučníku a byla mu zahájena antibiotická léčba.
+Pacient se dostavil do ___ s dvoudenní bolestí v pravém horním kvadrantu břicha, nevolností a jednou epizodou zvracení. Uváděl horečku doma. Příznaky se objevily po konzumaci tučného jídla. Byl převezen z pohotovosti ___ k chirurgickému vyšetření. Ultrazvuk zde prokázal žlučové kameny se ztluštěním stěny žlučníku a byla mu nasazena antibiotika.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
 Gastroezofageální reflux
-Apendektomie (odstranění slepého střeva) na ___
+Apendektomie v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s žlučovými kameny. Otec s onemocněním ___
+Matka s žlučovými kameny. Otec s onemocněním ___.
 
 Fyzikální vyšetření:
-Životní funkce: T 99,1 °C, HR 82 tepů/min, BP 128/76 mmHg, RR 16 dechů/min, SpO2 97 % při pokojovém vzduchu
-Celkový stav: Pacient je v pohodě, bez známek úzkosti.
-Hlava, oči, uši, nos, hrdlo: Bez žloutenky, vlhké sliznice.
-Krk: Pružný.
-Břicho: Měkké, mírně bolestivé v pravém horním kvadrantu, rány čisté, suché, neporušené.
-Extremity: Teplé, bez otoků.
-Neurologické vyšetření: Pacient je při vědomí, orientovaný, bez fokálních příznaků.
+Vitalní funkce: T 37,2 °C, TF 82, TK 128/76, dechová frekvence 16, SpO2 97 % při dýchání okolního vzduchu.
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Bez ikteru, vlhké sliznice.
+Krk: Pohyblivý.
+Břicho: Měkké, mírně citlivé v pravém horním kvadrantu, jizvy čisté, suché, neporušené.
+Končetiny: Teplé, bez otoků.
+Neurologické vyšetření: Bdělý, orientovaný, bez ložiskových příznaků.
 
 Významné výsledky:
-LABORATOŘ PŘI PROPUŠTĚNÍ: WBC 8,4, Hgb 13,9, Plt 245, Na 139, K 4,2, Cr 0,9, ALT 42, AST 38, celkový bilirubin 0,8, lipáza 31. Při přijetí byla hladina WBC 14,2 dne ___.
-ZOBRAZENÍ: Ultrazvukové vyšetření na ___ prokázalo žlučové kameny, zesílenou stěnu žlučníku a tekutinu kolem žlučníku, bez dilatace žlučových cest. Rentgen hrudníku: plíce čisté.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM: Leukocyty 8,4, hemoglobin 13,9, trombocyty 245, sodík 139, draslík 4,2, kreatinin 0,9, ALT 42, AST 38, celkový bilirubin 0,8, lipáza 31. Při přijetí byly leukocyty 14,2 dne ___.
+ZOBRAZOVACÍ METODY: Ultrazvuk v ___ prokázal žlučové kameny, ztluštělou stěnu žlučníku a tekutinu v okolí žlučníku, bez dilatace žlučových cest. Rentgen hrudníku: plíce bez patologických změn.
 
-Průběh hospitalizace:
-Pacient byl přijat na chirurgické oddělení a dostával intravenózní tekutiny a antibiotika. Ve druhý den hospitalizace podstoupil laparoskopickou cholecystektomii provedenou doktorem ___, bez komplikací. Bolest byla kontrolována pomocí perorálních léků a strava byla postupně rozšiřována podle tolerance. Jaterní testy se normalizovaly. Antibiotika byla po operaci ukončena. Krevní tlak zůstal dobře kontrolován pomocí léků, které pacient užíval doma. Pacient byl schopen samostatně chodit a močit. Byl propuštěn domů ve stabilním stavu dne ___ a byla mu zajištěna ambulantní chirurgická kontrola.
+Stručný průběh hospitalizace:
+Pacient byl přijat na chirurgické oddělení, kde mu byly podávány intravenózní tekutiny a antibiotika. Druhý den hospitalizace podstoupil laparoskopickou cholecystektomii, kterou provedl Dr. ___, bez komplikací. Bolest byla kontrolována perorálními léky a dieta byla postupně upravována podle tolerance. Jaterní testy se normalizovaly. Po operaci byla antibiotika vysazena. Krevní tlak byl dobře kontrolován pomocí domácí medikace. Pacient se mohl samostatně pohybovat a močil spontánně. Byl propuštěn domů ve stabilizovaném stavu dne ___ a byla mu zajištěna ambulantní chirurgická kontrola.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -49,24 +49,24 @@ Atorvastatin 20 mg večer
 Omeprazol 20 mg denně
 
 Léky při propuštění:
-Acetaminophen 650 mg každých šest hodin dle potřeby na bolest
-Oxykodon 5 mg každých šest hodin dle potřeby na silnou bolest, omezené množství
-Dokusát 100 mg dvakrát denně při užívání oxykodonu
-Pokračovat v užívání lisinoprilu, atorvastatinu a omeprazolu ve stejné dávce.
+Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti
+Oxykodon 5 mg každých šest hodin podle potřeby proti silné bolesti, omezené množství
+Dokuzát 100 mg dvakrát denně při užívání oxykodonu
+Pokračovat v užívání lisinoprilu, atorvastatinu a omeprazolu beze změn
 
-Plán po propuštění:
-Domů.
+Způsob propuštění:
+Domů
 
 Diagnóza při propuštění:
-Akutní zánět žlučníku
-Žlučové kameny
+Akutní cholecystitida
+Cholelitiáza
 
 Stav při propuštění:
 Dobrý
-Úroveň aktivity: Chůze, soběstačnost
+Úroveň aktivity: Ambulantní, soběstačný
 
-Pokyny při propuštění:
-Byli jste hospitalizováni kvůli zánětu žlučníku a váš žlučník byl odstraněn. Udržujte rány čisté a suché; můžete se sprchovat. Během ___ týdnů nezvedejte nic těžšího než 4,5 kg. V případě horečky, zhoršující se bolesti, zvracení, žluté pokožky nebo zarudnutí rány volejte číslo ___ nebo se obraťte na lékaře.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku a byl vám odstraněn žlučník. Udržujte řezné rány čisté a suché; můžete se sprchovat. Během ___ týdnů nezvedejte nic, co váží více než pět kilogramů. V případě horečky, zhoršení bolesti, zvracení, žloutnutí kůže nebo zarudnutí rány volejte na číslo ___ nebo se vraťte do nemocnice.
 
-Pokyny pro další péči:
+Pokyny pro kontrolní vyšetření:
 ___

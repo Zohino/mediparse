@@ -1,60 +1,60 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Oddělení: CHIRURGIE
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest v pravém dolním kvadrantu břicha.
+Bolest v pravém dolním kvadrantu břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická appendektomie (odstranění slepého střeva).
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
 
 Anamnéza současného onemocnění:
-Pacient se dostavil na oddělení ___ s bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou, která trvala tři dny. Byl odeslán z ambulance ___ poté, co zobrazovací vyšetření naznačilo zánět slepého střeva. Nebyly hlášeny žádné zvracení, průjmy ani problémy s močením.
+Pacient se dostavil do ___ s třídenní bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou. Byl odeslán z ___ kliniky poté, co zobrazovací vyšetření naznačilo apendicitidu. Nebylo hlášeno zvracení, průjem ani problémy s močením.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Bez významných informací.
+Bez významných údajů
 
 Fyzikální vyšetření:
-HLAVA, OČI, UŠI, NOS, Hrdlo (HEENT): Normální tvar hlavy, vlhké sliznice.
-BŘÍCHO: Citlivost v pravém dolním kvadrantu, bez ztuhnutí.
-KONČETINY: Teplé, dobře prokrvené, bez otoků.
+HEENT: Normocefalický, vlhké sliznice.
+ABD: Bolestivý pravý dolní kvadrant, bez rigidity.
+EXTREMITIES: Teplé, dobře prokrvené, bez otoků.
 
 Významné výsledky:
-Počet bílých krvinek 13,2 při přijetí, normalizoval se na 7,8 při propuštění. Kreatinin a elektrolyty v normálních mezích. CT vyšetření břicha provedené u ___ ukázalo rozšířený, zánětlivě změněný appendix (slepé střevo) s okolním zánětem tukové tkáně, bez perforace nebo abscesu. Analýza moči byla bez nálezů.
+Počet leukocytů 13,2 při přijetí, normalizován na 7,8 při propuštění. Kreatinin a elektrolyty v normálních mezích. CT vyšetření břicha v ___ ukázalo rozšířený, zánětem postižený appendix s okolní tukovou infiltrací a bez perforace nebo abscesu. Vyšetření moči bez významných nálezů.
 
-Průběh hospitalizace:
-Pacient byl převezen na operační sál u ___ k provedení laparoskopické appendektomie, která proběhla bez komplikací. Bolest byla kontrolována perorálními analgetiky a strava byla postupně rozšiřována podle tolerance. Pacient obdržel antibiotika před a po operaci, samostatně se pohyboval a byl propuštěn první den po operaci ve stabilním stavu po konzultaci s chirurgickým týmem ___ .
+Stručný popis hospitalizace:
+Byl převezen na operační sál v ___ k laparoskopické apendektomii bez komplikací. Bolest byla kontrolována perorálními analgetiky a dieta byla postupně upravována podle tolerance. Během operace dostal antibiotika, samostatně chodil a byl propuštěn prvním dnem po operaci ve stabilizovaném stavu po kontrole chirurgickým týmem ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně a atorvastatin 20 mg večer.
 
 Léky při propuštění:
-Acetaminophen 650 mg každých šest hodin dle potřeby. Oxykodon 5 mg dle potřeby, vydán ___ . Pokračovat v užívání lisinoprilu a atorvastatinu.
+Acetaminofen 650 mg každých šest hodin podle potřeby. Oxykodon 5 mg podle potřeby, vydán ___. Pokračovat v užívání lisinoprilu a atorvastatinu.
 
-Plán po propuštění:
-Domů.
+Způsob propuštění:
+Domů
 
 Diagnóza při propuštění:
-Akutní appendicitida (zánět slepého střeva).
+Akutní apendicitida
 
 Stav při propuštění:
-Psychický stav: Vědomý a orientovaný, jasné myšlení.
-Úroveň vědomí: Plně při vědomí a komunikativní.
-Funkční stav: Chůze, samostatný.
+Duševní stav: Bdělý a orientovaný, jasné myšlení.
+Úroveň vědomí: Plně bdělý a komunikativní.
+Stav aktivity: Chodí, soběstačný.
 
-Pokyny při propuštění:
-Udržujte rány čisté a suché, nezvedejte nic těžšího než 4,5 kg po dobu dvou týdnů. V případě horečky, zhoršující se bolesti nebo zvracení se obraťte na lékaře. V případě dotazů volejte chirurgickou ambulanci na číslo ___.
+Pokyny pro propuštění:
+Udržujte řezné rány čisté a suché, po dobu dvou týdnů nezvedejte nic těžšího než deset liber. V případě horečky, zhoršení bolesti nebo zvracení se vraťte. V případě dotazů volejte na chirurgickou kliniku na čísle ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

@@ -1,68 +1,68 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Kašel a horečka.
+Kašel a horečka
 
-Zásahy:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka přišla s tříměsíčním produktivním kašlem a horečkou po kontaktu s nemocným příbuzným v ___. Zvýšená hladina glukózy vyvolala obavy z možného nového diabetu.
+Pacientka se dostavila se třemi dny trvajícím produktivním kašlem a horečkou po kontaktu s nemocným příbuzným v ___. Zvýšená hladina glukózy vzbudila obavy z možné nové cukrovky.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak).
+Anamnéza předchozích onemocnění:
+Hypertenze
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí.
+Matka s hypertenzí
 
 Fyzikální vyšetření:
 Celkový stav:
-Vědomá, v pohodě, bez známek utrpení.
-Plíce:
-Chropy v dolní části pravého plíce.
-Extremity:
+Bdělá, v pohodě, bez známek úzkosti.
+PLÍCE:
+V dolní části pravé plíce slyšitelné chrůpky.
+Končetiny:
 Teplé, bez otoků.
 
 Významné výsledky:
-Mírná leukocytóza (zvýšený počet bílých krvinek) v krevních testech provedených při přijetí v ___. Glukóza mírně zvýšená. Krevní kultury bez nálezu.
-Zobrazovací metody:
-Rentgen hrudníku ukázal konsolidaci (zánět) v dolní části pravého plíce bez výpotku.
+Mírná leukocytóza při přijetí, odběry provedeny v ___. Mírně zvýšená hladina glukózy. Kultivace krve bez růstu bakterií.
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku ukázal konsolidaci v dolním laloku pravé plíce bez výpotku.
 
-Průběh hospitalizace:
-Léčena pro pneumonii získanou v komunitě (běžnou pneumonii) intravenózní cefotriaxonem a azithromycinem, poté převedena na perorální antibiotika, jakmile horečka ustoupila. Podávání kyslíku postupně snižováno, do třetího dne již nepotřebovala. Vyšetřena týmem ___ a schválena k propuštění.
+Stručný popis hospitalizace:
+Léčena pro komunitně získanou pneumonii intravenózním ceftriaxonem a azithromycinem, poté převedena na perorální antibiotika po odeznění horečky. Podávání kyslíku postupně snižováno, do třetího dne již pacientka dýchala běžný vzduch. Vyšetřena týmem ___ a propuštěna do domácí péče.
 
 Léky při přijetí:
 Lisinopril 10 mg denně. Multivitamin.
 
 Léky při propuštění:
-Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů. Lisinopril 10 mg denně. Multivitamin denně. Paracetamol dle potřeby při horečce.
+Amoxicilin-klavulanát dvakrát denně po dobu pěti dalších dnů. Lisinopril 10 mg denně. Multivitamin denně. Paracetamol podle potřeby při horečce.
 
-Plán po propuštění:
-Domů, s zajištěnou péčí prostřednictvím ___.
+Plán propuštění:
+Domů, zajištěna péče prostřednictvím ___
 
 Diagnóza při propuštění:
-Hlavní:
-Pneumonie získaná v komunitě.
+Primární:
+Komunitně získaná pneumonie
 
 Stav při propuštění:
-Psychický stav:
-Vědomá a srozumitelná.
+Duševní stav:
+Jasný a srozumitelný.
 Úroveň vědomí:
-Vědomá a komunikativní.
-Funkční stav:
-Chůze samostatná.
+Bdělá a komunikativní.
+Fyzická aktivita:
+Chodí, soběstačná.
 
-Pokyny při propuštění:
-Dokončete celou kúru antibiotik a pijte dostatek tekutin. V případě zhoršení dušnosti nebo přetrvávající horečky se obraťte na lékaře. Prosím, volejte ___ a domluvte si návštěvu praktického lékaře.
+Pokyny pro propuštění:
+Dokončete celou kúru antibiotik a pijte dostatek tekutin. V případě zhoršení dušnosti nebo přetrvávající horečky se vraťte. Zavolejte na ___, abyste si domluvili návštěvu u praktického lékaře.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

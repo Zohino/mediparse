@@ -1,78 +1,78 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Oddělení: Chirurgie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest v pravém horním kvadrantu břicha.
+Bolest v pravém horním kvadrantu břicha
 
 Hlavní chirurgický zákrok nebo invazivní procedura:
-Laparoskopická cholecystektomie s intraoperační cholangiografií.
+Laparoskopická cholecystektomie s intraoperační cholangiografií
 
 Anamnéza současného onemocnění:
-Pacient se dostavil na oddělení ___ s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po tučném jídle, které trvalo dva dny. Uváděl mírné horečky doma. Byl vyšetřen na oddělení ___, kde ultrazvukové vyšetření naznačilo přítomnost žlučových kamenů a byl převeden do naší nemocnice dne ___ k chirurgickému vyšetření pod vedením doktora ___.
+Pacient se dostavil do ___ s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po konzumaci tučného jídla, trvajícími dva dny. Uváděl mírné zvýšení teploty doma. Byl vyšetřen v ___, kde ultrazvuk naznačil přítomnost žlučových kamenů, a byl převezen do naší nemocnice dne ___ za účelem chirurgického vyšetření pod vedením doktora ___.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Gastroezofageální reflux
 
-Chirurgická anamnéza:
-Oprava pravostranné tříselné kýly.
+Anamnéza předchozích chirurgických zákroků:
+Operace pravé tříselné kýly
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s žlučovými kameny.
+Matka s žlučovými kameny
 
 Fyzikální vyšetření:
 Krk:
-Pružný, bez lymfadenopatie.
+Pružný, bez zvětšených lymfatických uzlin.
 PLÍCE:
-Čisté při poslechu bilaterálně.
-BŘÍCHO:
-Měkké, mírně bolestivé v pravém horním kvadrantu, místa po punkcích čistá a suchá.
-Neurologické vyšetření:
-Vědomý, orientovaný, bez fokálních příznaků. Bez horečky.
+Při auskultaci oboustranně čisté.
+BŘICHO:
+Měkké, mírně citlivé v pravém horním kvadrantu, místa po laparoskopii čistá a suchá.
+NEUROLOGIE:
+Orientovaný, bdělý, bez ložiskových příznaků. Bez horečky.
 
-Relevantní výsledky:
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-WBC 9,1, hemoglobin 13,8, krevní destičky 245, kreatinin 0,9, ALT 42, AST 38, celkové bilirubin 1,1, amyláza normální dne ___.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Leukocyty 9,1, hemoglobin 13,8, trombocyty 245, kreatinin 0,9, ALT 42, AST 38, celkový bilirubin 1,1, lipáza v normě dne ___.
 NÁLEZY:
-Ultrazvukové vyšetření provedené dne ___ ukázalo přítomnost více žlučových kamenů, ztluštění stěny žlučníku a tekutiny kolem žlučníku s pozitivním sonografickým Murphyovým příznakem. Vstupní žlučovod měl normální průměr. Intraoperační cholangiografie nevykazovala žádné překážky, s volným průtokem do dvanáctníku.
+Ultrazvuk v ___ prokázal přítomnost několika žlučových kamenů, ztluštění stěny žlučníku a tekutinu v okolí žlučníku s pozitivním sonografickým Murphyho příznakem. Průměr žlučovodu byl v normě. Intraoperační cholangiografie neprokázala žádné defekty v plnění, průtok do dvanáctníku byl volný.
 
-Stručný popis hospitalizace:
-Pacient byl přijat na chirurgické oddělení, dostal intravenózní tekutiny, antibiotika a analgetika a byl ponechán bez perorálního příjmu. Byl mu proveden laparoskopický zákrok cholecystektomie dne ___ bez komplikací. Po operaci byla bolest kontrolována perorálními léky a pacient zahájil běžnou stravu. Antibiotika byla po operaci ukončena. Výsledky histologického vyšetření z ___ jsou k dispozici při propuštění. Pacient byl schopen samostatné chůze, močení probíhalo spontánně a byl propuštěn domů dne ___ ve stabilním stavu. Strava byla dobře tolerována, bez nevolnosti.
+Stručný průběh hospitalizace:
+Pacient byl přijat na chirurgické oddělení, podávány mu byly intravenózní tekutiny, antibiotika a analgetika, a byl ponechán bez možnosti orální příjmu potravy. Dne ___ podstoupil laparoskopickou cholecystektomii bez komplikací. Po operaci byla jeho bolest kontrolována orálními léky a obnovil běžnou stravu. Antibiotika byla po operaci vysazena. Výsledky histologického vyšetření z ___ jsou v době propuštění ještě k dispozici. Pacient se pohyboval samostatně, močil spontánně a byl propuštěn domů dne ___ ve stabilizovaném stavu. Dobře snášel stravu bez nevolnosti.
 
 Léky při přijetí:
 Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Omeprazol 20 mg denně.
 
 Léky při propuštění:
-Acetaminophen 650 mg každých šest hodin dle potřeby. Oxykodon 5 mg každých šest hodin dle potřeby při silné bolesti. Senna dvakrát denně během užívání oxykodonu. Pokračovat v užívání léků, které pacient užíval doma. Během užívání oxykodonu neřídit.
+Paracetamol 650 mg každých šest hodin podle potřeby. Oxykodon 5 mg každých šest hodin podle potřeby při silné bolesti. Senna dvakrát denně během užívání oxykodonu. Pokračujte v užívání léků, které užíváte doma. Neřiďte vozidlo během užívání oxykodonu.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení:
 ___
 
 Diagnóza při propuštění:
-Akutní kalciová cholecystitida.
+Akutní kalcifikovaná cholecystitida
 
 Stav při propuštění:
 Dobrý
-Psychický stav:
-Vědomý a koherentní.
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Vědomý a komunikativní.
-Funkční stav:
-Samostatně chodící.
+Bdělý a komunikativní
+Stav aktivity:
+Ambulantní, soběstačný
 
 Pokyny pro propuštění:
-Byli jste léčeni kvůli problémům s žlučníkem a podstoupili jste laparoskopickou operaci. Udržujte rány čisté a suché. Během dvou týdnů se vyhýbejte zvedání předmětů vážících více než 4,5 kg. V případě horečky, zhoršující se bolesti břicha, zvracení nebo zarudnutí rány volejte číslo ___ nebo se obraťte na lékaře.
+Byli jste léčeni pro problémy se žlučníkem a podstoupili jste laparoskopickou operaci. Udržujte řezné rány čisté a suché. Po dobu dvou týdnů se vyhýbejte zvedání těžších předmětů, než je deset kilogramů. V případě horečky, zhoršující se bolesti břicha, zvracení nebo zarudnutí rány volejte na číslo ___ nebo se vraťte do nemocnice.
 
-Pokyny pro kontrolní prohlídku:
+Pokyny pro kontrolní vyšetření:
 ___

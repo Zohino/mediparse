@@ -1,54 +1,54 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Oddělení: Chirurgie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Bolest v pravém dolním kvadrantu břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická appendektomie (odstranění slepého střeva)
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
 
 Anamnéza současného onemocnění:
-Muž se dostavil na oddělení ___ s bolestí v pravém dolním kvadrantu břicha, která se zhoršovala již tři dny, dále trpěl nevolností a mírnou horečkou. Byl poprvé vyšetřen na oddělení ___ a následně byl převeden pro chirurgické vyšetření.
+Pacient se dostavil do ___ s třídenní anamnézou zhoršující se bolesti v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou. Prvotní vyšetření proběhlo v ___, poté byl pacient převeden na chirurgické oddělení k dalšímu vyšetření.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
-Bez diabetu
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Žádná cukrovka
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Bez významných informací.
+Bez významných údajů
 
 Fyzikální vyšetření:
-FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
-Celkový stav: Pacient je v pohodě, bez známek utrpení.
-Hlava, oči, uši, nos, hrdlo: Vlhká sliznice.
-Plíce: Čisté při poslechu na obou stranách.
-Břicho: Měkké, mírná bolestivost v místě řezu.
-Extremity (končetiny): Teplé, bez otoků.
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, uši, nos, hrdlo: Vlhká sliznice
+Plíce: Čisté na obou stranách
+Břicho: Měkké, mírná bolestivost v místě řezu
+Končetiny: Teplé, bez otoků
 
 Významné výsledky:
-CT vyšetření břicha prokázalo rozšířený, zánětlivý apendix (slepé střevo) s okolním zánětem tukové tkáně. Počet bílých krvinek byl mírně zvýšen při příjmu a normalizoval se před propuštěním.
+CT vyšetření břicha prokázalo rozšířený, zánětlivý appendix s okolní tukovou infiltrací. Počet bílých krvinek byl při přijetí mírně zvýšený, před propuštěním se normalizoval.
 ZÁVĚR:
-Akutní apendicitida (zánět slepého střeva) bez perforace.
+Akutní apendicitida bez perforace.
 
-Průběh hospitalizace:
-Pacient byl převezen na operační sál v ___ k provedení nekomplikované laparoskopické appendektomie. Byla mu postupně zaváděna strava, bolest byla kontrolována pomocí léků a lékař ___ ho propustil domů.
+Stručný popis hospitalizace:
+Pacient byl v ___ podroben nekomplikované laparoskopické apendektomii. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a pacient byl ___ prohlášen způsobilým k propuštění domů.
 
 Léky při přijetí:
 Lisinopril, atorvastatin
 
 Léky při propuštění:
-Paracetamol dle potřeby na bolest, docusate při užívání opioidů, oxykodon pouze při silné bolesti. Pokračujte v užívání lisinoprilu a atorvastatinu.
+Paracetamol podle potřeby proti bolesti, dokusát při užívání opioidů, oxykodon pouze při silné bolesti. Pokračovat v užívání lisinoprilu a atorvastatinu.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
@@ -56,12 +56,12 @@ Diagnóza při propuštění:
 Akutní apendicitida
 
 Stav při propuštění:
-Psychický stav: Jasný a soustředěný.
-Úroveň vědomí: Vnímavý a komunikativní.
-Funkční stav: Chůze, soběstačný.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
 
-Pokyny při propuštění:
-Byl vám odstraněn apendix (slepé střevo). Udržujte rány čisté a suché, vyhýbejte se těžké fyzické námaze po dobu několika týdnů a volejte ___ v případě horečky, zhoršující se bolesti nebo zvracení.
+Pokyny pro propuštěného pacienta:
+Byl vám odstraněn appendix. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze po dobu několika týdnů a v případě horečky, zhoršující se bolesti nebo zvracení kontaktujte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolní vyšetření:
 ___

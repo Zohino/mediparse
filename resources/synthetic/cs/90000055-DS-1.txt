@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,13 +9,13 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Žena s hypertenzí a hypotyreózou byla přijata do ___ s třidenním produktivním kašlem, horečkou a mírnou dušností. Byla vyšetřena lékařem ___ v ambulanci, zjistila se u ní hypoxie v klidu a byla odeslána na pohotovost.
+Žena s hypertenzí a hypotyreózou se dostavila do ___ s třídenní anamnézou produktivního kašle, horečky a mírné dušnosti. Byla vyšetřena doktorem ___ v ambulanci, kde se zjistilo, že má v klidu hypoxii, a byla odeslána na pohotovost.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hypotyreóza
 Apendektomie v ___
@@ -27,47 +27,47 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Životní funkce: T 38,1, srdeční frekvence 96, krevní tlak 128/74, SpO2 93 % při dýchání okolním vzduchem
-Celkový stav: Mírně nemocná, v pohodě
-Hlava, oči, uši, nos, hrdlo: Vlhká sliznice
-Plíce: Krepitace v dolní části pravého plíce
-Břicho: Měkké, bez citlivosti
-EXTREMITY: Bez otoků
-Neurologické vyšetření: Bez fokálních příznaků
+Vitalní funkce: T 38,1, TF 96, TK 128/74, SpO2 93 % při dýchání okolním vzduchem
+Celkový stav: Mírně nemocná, v pohodlí
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Plíce: V dolní části pravé plíce slyšitelné chrůpky
+Břicho: Měkké, netendrové
+Končetiny: Bez otoků
+Neurologické vyšetření: Bez ložiskových příznaků
 
 Významné výsledky:
-LABORATOŘ PŘI PŘIJETÍ: WBC 13,2, kreatinin v normě, laktát 1,1, zvýšený prokalcitonin.
-ZOBRAZENÍ: Rentgen hrudníku provedený v ___ ukázal konsolidaci v dolní části pravého plíce bez výpotku. EKG ukázalo sinusový rytmus bez akutních změn.
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Počet leukocytů 13,2, kreatinin v normě, laktát 1,1, prokalcitonin zvýšený.
+ZOBRAZOVACÍ VYŠETŘENÍ: Rentgen hrudníku provedený v ___ ukázal konsolidaci v dolním laloku pravé plíce bez výpotku. EKG ukázalo sinusový rytmus bez akutních změn.
 
-Průběh hospitalizace:
-Léčena pro pneumonii získanou v komunitě pomocí ceftriaxonu a azithromycinu, poté převedena na perorální antibiotika, jakmile ustoupila horečka. Podávání kyslíku bylo postupně snižováno do dne třetí hospitalizace. Byla vyšetřena lékařem ___ pro posouzení mobility a propuštěna domů s zajištěnou péčí prostřednictvím ___.
-PROBLÉMY PŘI PŘECHODU:
+Stručný průběh hospitalizace:
+Léčena pro komunitně získanou pneumonii pomocí ceftriaxonu a azithromycinu, poté převedena na perorální antibiotika po odeznění horečky. Podávání kyslíku bylo postupně snižováno, až pacientka dýchala pouze okolní vzduch, a to do třetího dne hospitalizace. Byla vyšetřena ___ za účelem posouzení mobility a propuštěna domů s dohodnutými službami prostřednictvím ___.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
 - Opakované zobrazovací vyšetření hrudníku za šest týdnů
-- Kontrola biochemického profilu při kontrolní prohlídce
+- Kontrolní vyšetření krevních parametrů při kontrolní návštěvě
 
 Léky při přijetí:
 Lisinopril 10 mg denně
-Levothyroxine 75 mcg denně
+Levotyroxin 75 mcg denně
 
 Léky při propuštění:
-Levothyroxine 75 mcg denně
+Levotyroxin 75 mcg denně
 Lisinopril 10 mg denně
-Amoxicillin-clavulanate 875 mg dvakrát denně po dobu pěti dnů
-Acetaminophen dle potřeby při horečce
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů
+Paracetamol podle potřeby při horečce
 
-Plán po propuštění:
-Domů s péčí
+Způsob propuštění:
+Domů s dohodnutými službami
 
 Diagnóza při propuštění:
 Chronické onemocnění ledvin
 
 Stav při propuštění:
-Psychický stav: Jasný a soudržný
-Úroveň vědomí: Vnímavá a komunikativní
-Funkční stav: Chůze, soběstačná
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a reagující
+Stav aktivity: Chodící, soběstačná
 
-Instrukce při propuštění:
-Byla léčena pro pneumonii. Dokončete všechny antibiotika, pijte dostatek tekutin a odpočívejte. Zavolejte ___ nebo se vraťte do nemocnice, pokud se zhorší dušnost, objeví se vysoká horečka nebo bolest na hrudi.
+Pokyny pro propuštěného pacienta:
+Byla jste léčena pro pneumonii. Dokončete všechny antibiotika, pijte dostatek tekutin a odpočívejte. V případě zhoršení dušnosti, vysoké horečky nebo bolesti na hrudi volejte ___ nebo se vraťte do nemocnice.
 
-Pokyny pro kontrolu:
+Pokyny pro kontrolní vyšetření:
 ___

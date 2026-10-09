@@ -1,73 +1,73 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Kašel a horečka.
+Kašel a horečka
 
-Zásahy:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let s hypertenzí byl přijat po dvou dnech zhoršujícího se kašle a horečky, odeslán z ambulance ___ . Rentgen hrudníku ukázal zápal dolního laloku pravé plíce, který vyžadoval hospitalizaci.
+___letý muž s hypertenzí se dostavil po dvou dnech zhoršujícího se kašle a horečky, odeslán z ___ kliniky. Zobrazovací vyšetření hrudníku ukázalo pneumonii v dolním laloku pravého plíce, vyžadující hospitalizaci.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-V rodině se vyskytla akutní renální insuficience u matky.
+V rodinné anamnéze je významné akutní poškození ledvin u matky.
 
 Fyzikální vyšetření:
 Celkový stav:
-Vědomý, v pohodě.
-ORL:
+Příjemný, bdělý.
+Hlava, uši, nos, hrdlo:
 Vlhké sliznice.
 Plíce:
-Chropy v dolní části pravého plíce.
-Extremity:
-Bez otoků.
+Bazální chrůpky na pravé straně.
+Končetiny:
+Žádný edém.
 Kůže:
 Teplá, suchá.
 Neurologické vyšetření:
-Bez fokálních příznaků.
+Bez ložiskových příznaků.
 
-Výsledky vyšetření:
+Významné výsledky:
 NÁLEZY:
-Rentgen hrudníku provedený dne ___ ukázal konsolidaci v dolním laloku pravé plíce bez výpotku. Počet bílých krvinek byl mírně zvýšen při přijetí a normalizoval se při propuštění. Kultivace krve nevykazovala žádný růst.
+Rentgen hrudníku z ___ ukázal konsolidaci v dolním laloku pravého plíce bez výpotku. Počet bílých krvinek byl při přijetí mírně zvýšený a při propuštění se normalizoval. Kultivace krve neprokázala růst bakterií.
 
-Průběh hospitalizace:
-Léčen intravenózně ceftriaxonem a azithromycinem, poté byl přechod na perorální antibiotika, jakmile horečka ustoupila. Podávání kyslíku bylo postupně snižováno, do třetího dne byl pacient schopen dýchat přirozeně. Pacient byl schopen samostatně chodit, toleroval stravu a byl propuštěn domů dne ___.
+Stručný popis hospitalizace:
+Léčen intravenózním ceftriaxonem a azithromycinem, poté převeden na perorální antibiotika, jakmile ustoupila horečka. Podávání kyslíku bylo postupně snižováno, a do třetího dne již pacient dýchal bez podpory. Pacient se mohl samostatně pohybovat, dobře snášel stravu a byl propuštěn domů ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
 Atorvastatin 20 mg večer
 
 Léky při propuštění:
-1. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů.
+1. Amoxicillin-klavulanát 875 mg dvakrát denně po dobu pěti dalších dnů.
 2. Lisinopril 10 mg denně.
 3. Atorvastatin 20 mg večer.
 
-Plán po propuštění:
-Domů.
+Způsob propuštění:
+Domů
 
 Diagnóza při propuštění:
-Komunitní pneumonie
+Komunitně získaná pneumonie
 Hypertenze
 
 Stav při propuštění:
-Mentální stav:
-Vědomý a koherentní.
+Duševní stav:
+Jasný a srozumitelný.
 
-Pokyny při propuštění:
-Byl vám léčen zápal plic. Dokončete veškerá antibiotika, pijte dostatek tekutin a odpočívejte. V případě horečky, zhoršení dýchání nebo bolesti na hrudi se vraťte. V případě dotazů volejte na číslo ___.
+Pokyny pro propuštění:
+Byl jste léčen na pneumonii. Dokončete všechny antibiotika, pijte dostatek tekutin a odpočívejte. V případě horečky, zhoršení dýchání nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

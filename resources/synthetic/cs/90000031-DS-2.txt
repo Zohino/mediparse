@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,16 +9,16 @@ Alergie:
 Hlavní potíže:
 Otok nohou a dušnost
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž s chronickým onemocněním ledvin a fibrilací síní byl přijat do ___ s několika dny zhoršujícího se otoku nohou, dušnosti při námaze, přibírání na váze a ortopnoe; byl převezen z ___ pro další diurézu.
+Muž s chronickým onemocněním ledvin a fibrilací síní se dostavil do ___ s několikden trvajícím zhoršováním otoku nohou, dušností při námaze, přibýváním na váze a ortopnoí; přeložen z ___ za účelem další diuretické terapie.
 
-Anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
@@ -27,41 +27,41 @@ Rodinná anamnéza:
 Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
-Celkový stav: Pacient je v pohodě, bez známek utrpení.
-Krk: Zvýšený jugulární venózní tlak.
-Plíce: Krepitace v obou plicních bázích.
-SRDEČNÍ: Nepravidelný srdeční rytmus.
-EXTREMITY: Edém 2+.
+Celkový stav: Dobrý, bez známek úzkosti.
+Krk: Zvýšená jugulární venózní tlak.
+Plíce: Bibazální chrůpky.
+SRDCE: Nepravidelný rytmus.
+KONČETINY: Otok 2+.
 KŮŽE: Teplá, suchá.
 
 Významné výsledky:
-LABORATOŘ PŘI PŘIJETÍ: Výrazně zvýšený BNP, kreatinin 2,1, draslík 4,5, glukóza 188.
-LABORATOŘ PŘI PROPUŠTĚNÍ: Kreatinin 1,9, draslík 4,2.
-ZÁVĚR: Plicní vaskulární kongestivní stav s kardiomegalií a drobnými bilaterálními efuzemi.
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Výrazně zvýšené BNP, kreatinin 2,1, draslík 4,5, glukóza 188.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ: Kreatinin 1,9, draslík 4,2.
+ZÁVĚR: Plníní plicních cév s kardiomegalií a malými bilaterálními výpotky.
 
-Průběh hospitalizace:
-Diuréza intravenózním furosemidem k dosažení normálního objemu tekutin, konzultace s ___ ohledně kontroly srdeční frekvence a antikoagulace. Glukóza byla kontrolována inzulinem. Pacient byl převeden na perorální diuretikum a propuštěn ve stabilním stavu po ___.
-PROBLÉMY PŘI PŘECHODU: Kontrola biochemických hodnot za jeden týden.
+Stručný průběh hospitalizace:
+Diuretická terapie intravenózním furosemidem do dosažení euvolemie, konzultace s ___ ohledně kontroly srdeční frekvence a antikoagulační terapie. Glukóza regulována inzulinem. Přechod na perorální diuretikum a propuštění ve stabilizovaném stavu po ___.
+PROBLÉMY PŘI PŘECHODU: Kontrola laboratorních hodnot za jeden týden.
 
 Léky při přijetí:
 Furosemid 40 mg denně, metoprolol, apixaban
 
 Léky při propuštění:
-Furosemid 80 mg denně. Metoprolol succinate 50 mg denně. Apixaban 5 mg dvakrát denně. Inzulin glargin večer. Metformin byl vysazen.
+Furosemid 80 mg denně. Metoprolol sukcinát 50 mg denně. Apixaban 5 mg dvakrát denně. Inzulin glargin večer. Metformin vysazen.
 
-Plán po propuštění:
-Domů s péčí od ___.
+Způsob propuštění:
+Domů s péčí od ___
 
 Diagnóza při propuštění:
 Diabetes mellitus
 Fibrilace síní
 
 Stav při propuštění:
-Psychický stav: Pacient je při vědomí a orientovaný, schopný plnit pokyny.
-Funkční stav: Chůze s pomocí chodítka.
+Mentální stav: Bdělý a orientovaný, schopen plnit pokyny.
+Fyzická aktivita: Chodí s pomocí chodítka.
 
 Pokyny při propuštění:
-Vážete se každé ráno a volejte, pokud se vaše váha zvýší o více než 1,4 kg. Omezte příjem soli, užívejte léky podle předpisu a v případě zhoršení dýchání nebo otoků se vraťte. Otázky: volejte ___.
+Každé ráno se zvažte a zavolejte, pokud se váha zvýší o tři libry. Omezte příjem soli, užívejte léky podle předpisu a v případě zhoršení dýchání nebo otoku se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

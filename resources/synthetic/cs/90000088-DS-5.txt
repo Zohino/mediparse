@@ -1,82 +1,81 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Zarudnutí a otok pravé nohy.
+Zčervenání a otok pravé nohy
 
-Zásahy:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacient se dostavil na oddělení ___ s třechdenním zhoršováním zarudnutí, tepla a otoku pravé dolní končetiny po drobném poranění při zahradničení. Uváděl horečku a zimnici. Byl vyšetřen na urgentním oddělení ___ dne ___ a odeslán na pohotovost pro intravenózní antibiotika a pozorování.
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ se zhoršujícím se zčervenáním, horkostí a otokem pravé dolní končetiny, které trvalo tři dny a vzniklo po drobném poranění při zahradničení. Uváděl horečku a zimnici doma. Byl vyšetřen v ___ na urgentním příjmu dne ___ a odeslán na pohotovostní oddělení, kde mu byly podána intravenózní antibiotika a zahájena pozorování.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Sezónní alergie
-Předchozí epizoda celulitidy na místě ___
+Předchozí epizoda celulitidy v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec s hypertenzí. Žádná rodinná anamnéza poruch srážlivosti krve.
+Otec s hypertenzí. V rodině se nevyskytují poruchy srážlivosti krve.
 
 Fyzikální vyšetření:
-Životní funkce:
-Bez horečky, hemodynamicky stabilní při běžném dýchání.
+Vitalní funkce:
+Bez horečky, hemodynamicky stabilní při dýchání okolního vzduchu.
 Celkový stav:
-Pohodlný, bez akutní tíže.
-Oblast hlavy, očí, uší, nosu a krku:
-Bez zvláštností.
+Komfortní, bez akutní tíže.
+Hlava, oči, uši, nos, hrdlo:
+Bez významných nálezů.
 Krk:
 Pružný.
-KONČETINY:
-Pravá holen teplá a mírně oteklá, pulzy zachovány.
-KŮŽE:
-Erytem s výraznými okraji, bez abscesu.
+Končetiny:
+Pravá holeně teplá a mírně oteklá, pulzace zachována.
+Kůže:
+Erytém s výraznými okraji, bez abscesu.
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Počet bílých krvinek normalizován, hemoglobin stabilní, kreatinin na základní úrovni, elektrolyty v normě. Zánětlivé markery výrazně sníženy oproti hodnotám při přijetí. Kultivace krve odebraná ___ nevykazovala žádný růst.
-ZOBRAZENÍ:
-Ultrazvuk pravé nohy provedený ___ prokázal subkutánní edém bez abscesu nebo hluboké žilní trombózy.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Počet bílých krvinek normalizován, hladina hemoglobinu stabilní, kreatinin na výchozí úrovni, elektrolyty v normálních mezích. Zánětlivé markery výrazně nižší než při přijetí. Krevní kultury odebrané v ___ nevykazovaly růst při finálním vyšetření.
+ZOBRAZOVACÍ METODY:
+Ultrazvuk pravé nohy provedený v ___ prokázal subkutánní edém bez abscesu nebo hluboké žilní trombózy.
 
-Průběh hospitalizace:
-Pacient byl přijat na oddělení ___ a zahájena intravenózní léčba cefazolinem, přičemž zarudnutí bylo ohraničeno pomocí barviva na kůži. Zarudnutí ustoupilo během dvou dnů a horečka odezněla. Doporučeno zvedání nohy. Převedení na perorální cefalexin proběhlo ___ poté, co pacient začal přijímat stravu a chodil bez bolesti. Léky na vysoký krevní tlak byly pokračovány v domácím prostředí.
+Stručný průběh hospitalizace:
+Pacient byl přijat do ___ a zahájena intravenózní léčba cefazolinem, přičemž erytém byl ohraničen pomocí značkovače na kůži. Zčervenání ustoupilo během dvou dnů a horečka odezněla. Doporučeno zvedání nohy. Přechod na perorální cefalexin proběhl dne ___, jakmile pacient toleroval stravu a chodil bez bolesti. Domácí léčba hypertenze pokračovala.
 
 Léky při přijetí:
 Lisinopril denně
 Atorvastatin večer
-Loratadin dle potřeby
+Loratadin podle potřeby
 
 Léky při propuštění:
-1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu pěti dalších dnů, do ___
-2. Lisinopril denně, beze změny.
-3. Atorvastatin večer, beze změny.
-4. Paracetamol dle potřeby při nepříjemných pocitech.
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších pěti dnů, předepsáno do ___.
+2. Lisinopril denně, dávka nezměněna.
+3. Atorvastatin večer, dávka nezměněna.
+4. Paracetamol podle potřeby při nepohodlí.
 
-Plán po propuštění:
-Domů.
+Způsob propuštění:
+Domů
 
 Diagnóza při propuštění:
-Hlavní:
-Celulitida pravé dolní končetiny.
+Primární:
+Celulitida pravé dolní končetiny
 
 Stav při propuštění:
-Psychický stav:
-Orientovaný a plně při vědomí.
+Duševní stav:
+Bdělý a plně orientovaný.
 Úroveň vědomí:
-Vědomý a pozorný.
+Bdělý a pozorný.
 
-Pokyny při propuštění:
-Byl vám poskytnut lék na kožní infekci pravé nohy. Dokončete celou kúru antibiotik. Když sedíte, držte nohu zvednutou a denně kontrolujte kůži. V případě rozšíření zarudnutí, horečky, silné bolesti nebo hnisu se obraťte na ___
-Prosím, dodržte termín návštěvy u ___ a v případě dotazů volejte.
+Pokyny pro propuštění:
+Byl jste léčen na kožní infekci pravé nohy. Dokončete celou kúru antibiotik. Při sezení držte nohu ve zvýšené poloze a denně kontrolujte stav kůže. V případě šíření zčervenání, horečky, silné bolesti nebo hnisu se vraťte do ___. Prosím, dodržujte termín návštěvy u ___ a v případě dotazů volejte.
 
-Návazná péče:
+Pokyny pro kontrolu:
 ___

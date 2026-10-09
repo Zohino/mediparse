@@ -1,25 +1,25 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Specializace: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
-Hlavní potíž:
-Bolest v pravé straně těla.
+Hlavní potíže:
+Bolest v pravé oblasti boku
 
-Zásahové zákroky:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let, který pociťuje bolest v pravé straně těla již dva dny, byl přijat z ambulance ___ .
-PROHLÍDKA SYSTÉMŮ:
+___letý muž s bolestí v pravé oblasti boku trvající dva dny, odeslán z kliniky ___.
+PŘEHLED SYSTÉMŮ:
 Negativní, s výjimkou výše uvedeného.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Kamenné útvary v ledvinách
+Ledvinové kameny
 
 Sociální anamnéza:
 ___
@@ -28,30 +28,30 @@ Rodinná anamnéza:
 Otec s rodinnou anamnézou diabetu. Žádné onemocnění ledvin.
 
 Fyzikální vyšetření:
-Bez horečky, pacient je v pohodě, mírná bolestivost v pravé straně těla.
-FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Bez horečky, pacient se cítí dobře, mírná citlivost v pravé oblasti boku.
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
 Životní funkce: Stabilní
-Celkový stav: V pohodě
-Krk: Pružný
+Celkový stav: Dobrý
+Krk: Pohyblivý
 PLÍCE: Čisté
-SRDEČNÍ: Pravidelný rytmus
-Neurologické vyšetření: Bez lokalizace.
+SRDCE: Pravidelný rytmus
+NEUROLOGIE: Bez ložiskových příznaků
 
 Významné výsledky:
-Analýza moči ukázala přítomnost krve. CT vyšetření prokázalo malý kámen v pravém močovodu s mírnou hydronefrózou.
+Vyšetření moči prokázalo krev. CT vyšetření ukázalo malý kámen v pravém močovodu s mírnou hydronefrózou.
 ZÁVĚR:
-Kámen v pravém močovodu způsobující obstrukci.
+Kámen v pravém močovodu, který způsobuje obstrukci.
 
-Průběh hospitalizace:
-Bolest byla kontrolována pomocí perorálních léků a tekutin. Oddělení urologie, vedené doktorem ___, doporučilo ambulantní odstranění kamene pomocí sítka. Bolest ustoupila.
+Stručný popis průběhu hospitalizace:
+Bolest byla kontrolována perorálními léky a podáváním tekutin. Urologické oddělení, pod vedením doktora ___, doporučilo ambulantní léčbu s cílem uvolnění kamene pomocí sítka. Bolest ustoupila.
 
 Léky při přijetí:
-Lisinopril denně.
+Lisinopril denně
 
 Léky při propuštění:
-Lisinopril denně. Ibuprofen dle potřeby na bolest. Tamsulosin večer, dokud se kámen nevyloučí.
+Lisinopril denně. Ibuprofen podle potřeby proti bolesti. Tamsulosin večer, dokud se kámen neuvolní.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
@@ -60,11 +60,11 @@ Kámen v pravém močovodu
 Hypertenze
 
 Stav při propuštění:
-Psychický stav: Jasný a koherentní.
-Úroveň vědomí: Vnímavý a komunikativní.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
 
-Pokyny při propuštění:
-Pijte dostatek tekutin a filtrujte moč. V případě horečky, zvracení nebo nekontrolovatelné bolesti se vraťte.
+Pokyny pro propuštěného pacienta:
+Pijte dostatek tekutin a moč filtrujte. V případě horečky, zvracení nebo nekontrolované bolesti se vraťte.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

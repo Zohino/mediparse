@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,18 +9,18 @@ Alergie:
 Hlavní potíže:
 Zvracení a snížené množství moči
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let s hypertenzí, přijat z ___ po třech dnech zvracení, nedostatečném příjmu potravy a malém množství moči. Laboratorní výsledky ukázaly akutní poškození ledvin s kreatininem výrazně nad základní hodnotou. Byl podáván intravenózně tekutiny a funkce ledvin se zlepšila. Byl přeložen sem pro monitorování od ___.
-PROHLÍDKA SYSTÉMŮ:
+___letý muž s hypertenzí, odeslán z ___ po třech dnech zvracení, špatném příjmu potravy a malém množství moči. Laboratorní výsledky ukázaly akutní poškození ledvin s kreatininem výrazně nad výchozí hodnotou. Byla mu podána intravenózní tekutina a funkce ledvin se zlepšila. Přeložen sem za účelem monitorování z ___.
+PŘEHLED SYSTÉMŮ:
 Pozitivní, jak je uvedeno výše, jinak negativní.
 
-Anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Dna, poslední záchvat v ___
-Bez diabetu
+Žádná cukrovka
 
 Sociální anamnéza:
 ___
@@ -29,41 +29,41 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Fyzikální vyšetření při přijetí:
-Životní funkce: bez horečky, srdeční frekvence 96, krevní tlak 104/62
-Celkový stav: suchá ústa, pacient je v pohodě
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: bez horečky, srdeční frekvence 96, krevní tlak 104/62
+Celkový stav: suchá ústa, pacient se cítí dobře
 Plíce: čisté
-Břicho: měkké, bez citlivosti
-EXTREMITY: bez otoků
-PULZY: hmatné
+Břicho: měkké, netendrovatelné
+KONČETINY: bez otoků
+PULSY: hmatné
 
-Relevantní výsledky:
-Kreatinin 3,1 při přijetí, 1,4 při propuštění. Draslík 5,2, normalizován po podání tekutin. Analýza moči bez patologických nálezů. Sodík a bikarbonát mírně nízké zpočátku, poté normální. Krevní testy byly odebrány ___ den před propuštěním a ukázaly stabilní zlepšení.
+Významné výsledky:
+Kreatinin 3,1 při přijetí, 1,4 při propuštění. Draslík 5,2, normalizoval se po podání tekutin. Vyšetření moči bez patologických nálezů. Sodík a bikarbonát mírně snížené zpočátku, poté normální. Krevní testy byly provedeny ___ den před propuštěním a ukázaly postupné zlepšení.
 ZÁVĚR:
 Ultrazvuk ledvin bez hydronefrózy.
 
 Léky při přijetí:
 Lisinopril 20 mg denně
 Allopurinol 100 mg denně
-Ibuprofen dle potřeby
+Ibuprofen podle potřeby
 
 Léky při propuštění:
 1. Allopurinol 100 mg jednou denně
 2. Amlodipin 5 mg jednou denně
-3. Paracetamol 500 mg dle potřeby na bolest
-Ukončete užívání lisinoprilu a ibuprofenu, dokud vás znovu nevyšetří ___.
+3. Paracetamol 500 mg podle potřeby proti bolesti
+Přerušit užívání lisinoprilu a ibuprofenu, dokud je nevyhodnotí ___.
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Stav při propuštění:
 Dobrý
-Úroveň vědomí: bdělý a komunikativní
-Úroveň aktivity: chodí samostatně
+Úroveň vědomí: bdělý a reagující
+Stav aktivity: chodí samostatně
 
-Pokyny při propuštění:
-Byli jste hospitalizováni kvůli dehydrataci, která poškodila vaše ledviny. Pravidelně pijte tekutiny, vyhýbejte se protizánětlivým lékům proti bolesti a užívejte léky podle pokynů. V případě horečky, zvracení nebo sníženého množství moči volejte ___. Opakujte krevní testy u ___ za jeden týden.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli dehydrataci, která poškodila vaše ledviny. Pravidelně pijte tekutiny, vyhýbejte se protizánětlivým lékům proti bolesti a užívejte léky podle seznamu. V případě horečky, zvracení nebo sníženého množství moči volejte ___. Opakujte krevní testy na ___ za jeden týden.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

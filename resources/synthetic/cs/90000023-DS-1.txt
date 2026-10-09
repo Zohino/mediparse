@@ -1,70 +1,70 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
-Zvracení a snížený objem moči
+Zvracení a snížené množství moči
 
-Zásadní chirurgický zákrok nebo invazivní procedura:
+Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-Pacientka s chronickým onemocněním ledvin byla přijata dne ___ s několika dny sníženého příjmu potravy, zvracením a nízkým objemem moči. Byla zjištěna rostoucí hladina kreatininu a draslíku, což bylo potvrzeno laboratorními výsledky zjištěnými dne ___.
+Žena s chronickým onemocněním ledvin přijata z ___ s několikdenní anamnézou špatného příjmu potravy, zvracením a nízkým množstvím moči. Bylo zjištěno zvýšení kreatininu a draslíku, což potvrdily laboratorní testy provedené dne ___.
 
-Předchozí zdravotní historie:
-Hypertenze (vysoký krevní tlak)
+Anamnéza předchozích onemocnění:
+Hypertenze
 Fibrilace síní
-Hyperlipidemie (vysoká hladina cholesterolu)
+Hyperlipidémie
 
-Předchozí chirurgická historie:
-Chirurgické odstranění žlučníku (cholecystektomie) provedeno dne ___.
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí.
+Matka s hypertenzí
 
 Fyzikální vyšetření:
-Fyzikální vyšetření při přijetí:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
 Suché sliznice.
 PLÍCE: Čisté.
-SRDEČNÍ: Nepravidelný srdeční rytmus.
-BŘÍCHO: Měkké, bez citlivosti.
+SRDCE: Nepravidelný rytmus.
+BŘICHO: Měkké, netendrovatelné.
 KONČETINY: Bez otoků.
-Neurologické vyšetření: Vědomá, bez fokálních příznaků.
+NEUROLOGIE: Bdělá, bez ložiskových příznaků.
 
-Relevantní výsledky:
-Kreatinin 3,1 při přijetí, základní hodnota blízko 1,8, zlepšení na 2,0 při propuštění. Draslík 5,9, korigován na 4,4. Bikarbonát 18. Analýza moči bez patologických nálezů. Ultrazvuk ledvin bez hydronefrózy (rozšíření ledvin). Zvýšená hladina glukózy. EKG ukázalo nepravidelný rytmus.
+Významné výsledky:
+Kreatinin 3,1 při přijetí, výchozí hodnota kolem 1,8, zlepšení na 2,0 při propuštění. Draslík 5,9 korigován na 4,4. Bikarbonát 18. Vyšetření moči bez patologických nálezů. Ultrazvuk ledvin bez hydronefrózy. Zvýšená hladina glukózy. EKG prokázalo nepravidelný rytmus.
 
-Průběh hospitalizace:
-Léčba intravenózními tekutinami a vysazení nefrotoxických a diuretických léků, s návratem hladiny kreatininu k základní hodnotě. Hyperkalemie (vysoká hladina draslíku) byla vyřešena medikamentózní léčbou. Pokračování v regulaci srdeční frekvence a obnovení antikoagulace. Hladina glukózy byla kontrolována inzulinem. Pacientka byla vyšetřena lékařem ___ a propuštěna do domácího prostředí ve stabilním stavu.
+Stručný průběh hospitalizace:
+Léčba intravenózními tekutinami a vysazení nefrotoxických a diuretických léků, s návratem kreatininu k výchozí hodnotě. Hyperkalémie odezněla po lékařské terapii. Pokračováno v kontrole srdeční frekvence a obnovena antikoagulační léčba. Hladina glukózy regulována inzulinem. Vyšetřena ___ a propuštěna do ___ ve stabilizovaném stavu.
 
 Léky při přijetí:
-Metoprolol, apixaban, lisinopril, furosemid, metformin.
+Metoprolol, apixaban, lisinopril, furosemid, metformin
 
 Léky při propuštění:
-Metoprolol succinate (denně), apixaban (dvakrát denně), inzulin glargin (před spaním). Lisinopril, furosemid a metformin byly vysazeny do doby, než budou zkontrolovány další laboratorní výsledky.
+Metoprolol succinat denně, apixaban dvakrát denně, inzulin glargin před spaním. Lisinopril, furosemid a metformin jsou vysazeny do doby, než budou zkontrolovány výsledky kontrolních laboratorních testů.
 
-Plán po propuštění:
-Domů s péčí.
+Způsob propuštění:
+Domů s domácí péčí
 Zařízení: ___
 
 Diagnóza při propuštění:
-Diabetes mellitus (cukrovka)
+Diabetes mellitus
 Chronické onemocnění ledvin
 Fibrilace síní
 
 Stav při propuštění:
-Psychický stav: Vědomá a koherentní.
-Fyzická aktivita: Chůze, soběstačná.
+Duševní stav: Jasný a koherentní.
+Fyzická aktivita: Chodí, soběstačná.
 
-Instrukce po propuštění:
-Byla jste hospitalizována kvůli dehydrataci a abnormálním výsledkům krevních testů. Pravidelně pijte tekutiny, vyhýbejte se protizánětlivým lékům a nechte si opakovaně otestovat krev u ___ během jednoho týdne.
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli dehydrataci a abnormálním výsledkům krevních testů. Pravidelně pijte tekutiny, vyhýbejte se protizánětlivým lékům proti bolesti a nechte si zopakovat krevní testy v ___ do jednoho týdne.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

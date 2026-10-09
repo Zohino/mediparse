@@ -1,73 +1,73 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Oddělení: CHIRURGIE
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest v pravém dolním kvadrantu břicha.
+Bolest v pravém dolním kvadrantu břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická appendektomie provedená lékařem ___
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie provedená ___
 
 Anamnéza současného onemocnění:
-Pacient se dostavil na oddělení ___ s bolestí v pravém dolním kvadrantu břicha trvající tři dny, nevolností a mírnou horečkou. Bolest začala v okolí pupíku a postupně se přesunula do pravé strany. Pacient popíral zvracení krve nebo změny ve stolici. Symptomy se zhoršovaly při pohybu. Byl vyšetřen na ___ a odeslán na urgentní příjem, kde zobrazovací vyšetření naznačovalo zánět slepého střeva.
+Pacient se dostavil do ___ s třídenní bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou. Bolest začala v oblasti pupečníku a šířila se do pravé strany. Pacient popíral zvracení krve nebo změnu stolice. Příznaky se zhoršovaly při pohybu. Byl vyšetřen v ___ a odeslán na pohotovost, kde zobrazovací metody naznačily apendicitidu.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Bez významných údajů.
+Bez významných údajů
 
 Fyzikální vyšetření:
-Životní funkce:
-Bez horečky, stabilní, saturace kyslíkem v normě.
+Vitalní funkce:
+Bez horečky, stabilní, saturace kyslíkem v normě při dýchání okolního vzduchu.
 Celkový stav:
-Pacient je v pohodě, bez známek utrpení.
-Oblast hlavy, očí, uší, nosu a krku (HEENT):
-Sliznice vlhké.
+Komfortní, bez známek úzkosti.
+Hlava, uši, oči, nos, hrdlo:
+Vlhké sliznice.
 Plíce:
-Čisté při poslech.
-Srdce:
-Pravidelná frekvence a rytmus.
+Čisté na obou stranách.
+SRDEČNÍ činnost:
+Pravidelný rytmus.
 Břicho:
-Měkké, mírná bolestivost v místě řezu, porty čisté.
-Kůže:
+Měkké, mírná bolestivost v místě řezu, místa punkcí čistá.
+KŮŽE:
 Teplá a suchá.
 Neurologické vyšetření:
-Orientovaný, bez fokálních příznaků.
+Bdělý, bez ložiskových příznaků.
 
 Významné výsledky:
-Laboratorní výsledky při přijetí ukázaly zvýšený počet bílých krvinek s převahou neutrofilů a normální hodnoty kreatininu. CT vyšetření břicha prokázalo rozšířený, zánětlivě změněný apendix s okolním zánětem tukové tkáně a bez abscesu. Histopatologické vyšetření odeslané na ___ bylo k dispozici až při propuštění. Pooperační krevní obraz se normalizoval a elektrolyty zůstaly v normálních mezích.
+Laboratorní vyšetření při přijetí ukázala zvýšený počet bílých krvinek s převahou neutrofilů a normální hladinu kreatininu. CT vyšetření břicha prokázalo rozšířený, zánětem postižený apendix s okolní tukovou infiltrací a bez abscesu. Patologický vzorek odeslaný do ___ byl v době propuštění ještě vyhodnocován. Pooperační krevní obraz se normalizoval a elektrolyty zůstaly v normálních mezích.
 
-Průběh hospitalizace:
-Pacient byl přijat, dostal intravenózní tekutiny a antibiotika a byl operován lékařem ___ v laparoskopické appendektomii. Po operaci byla bolest kontrolována perorálními léky a pacient postupně začal jíst bez nevolnosti. Samostatně se pohyboval za pomoci ošetřujícího personálu, měl plyny a stolici. Antibiotika byla po operaci ukončena. Byl propuštěn v stabilním stavu první den po operaci.
+Stručný průběh hospitalizace:
+Pacient byl přijat, podávány intravenózní tekutiny a antibiotika, a ___ ho převezl na operační sál, kde byla provedena nekomplikovaná laparoskopická apendektomie. Po operaci byla jeho bolest kontrolována perorálními léky a postupně zvyšoval příjem potravy bez nevolnosti. S pomocí ošetřovatelského personálu ___ se samostatně pohyboval, začal plynout a vyprazdňovat střeva. Antibiotika byla po operaci vysazena. Byl propuštěn ve stabilizovaném stavu prvním pooperačním dnem.
 
 Léky při přijetí:
 Lisinopril denně
 Atorvastatin večer
 
-Plán po propuštění:
-Domů s ambulantním sledováním, které bylo zajištěno prostřednictvím ___
+Plán propuštění:
+Domů s naplánovanou ambulantní kontrolou prostřednictvím ___
 Zařízení: ___
 
 Diagnóza při propuštění:
-Akutní zánět slepého střeva
+Akutní apendicitida
 Hypertenze
 
 Stav při propuštění:
-Psychický stav: Jasný a srozumitelný.
-Úroveň vědomí: Orientovaný a komunikativní.
-Funkční stav: Chůze, samostatný.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
 
-Instrukce při propuštění:
-Byl vám laparoskopicky odstraněn slepý střev. Udržujte rány čisté a suché a můžete se osprchovat. Vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů. Užívajte paracetamol proti bolesti. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí nebo výtoku v místě řezu kontaktujte ___ nebo se obraťte na urgentní příjem na adrese ___.
+Pokyny pro propuštění:
+Podstoupil jste laparoskopické odstranění slepého střeva. Udržujte řezné rány čisté a suché, můžete se sprchovat. Vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů. Užijte si paracetamol na bolest. V případě horečky, zhoršení bolesti, zvracení nebo zarudnutí či výtoku z řezných ran volejte ___ nebo se vraťte na pohotovost do ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

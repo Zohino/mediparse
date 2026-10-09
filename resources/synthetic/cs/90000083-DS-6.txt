@@ -1,26 +1,26 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Dušnost, otoky nohou
+Dušnost, otok nohou
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacient s známým srdečním selháním se dostavil do ___ s postupující dušností a otoky nohou během několika dnů. Byl vyšetřen v ___ svým lékařem, který si všiml přibírání na váze a doporučil mu návštěvu pohotovosti v ___ k vyšetření a diuréze.
+Pacient se známou srdeční insuficiencí se dostavil do ___ s postupující dušností a otokem nohou, které se rozvíjely v průběhu několika dnů. Byl vyšetřen v ___ svým ošetřujícím lékařem, který zaznamenal nárůst hmotnosti a odeslal ho do pohotovostní služby v ___ k vyšetření a diuretické léčbě.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Fibrilace síní
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
-Chirurgická anamnéza:
+Anamnéza předchozích chirurgických zákroků:
 Apendektomie
 
 Sociální anamnéza:
@@ -30,26 +30,26 @@ Rodinná anamnéza:
 Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
-Celkový stav: Pacient je v pohodě, bez známek utrpení.
-Hlava, oči, uši, nos, hrdlo: Vlhká sliznice.
-Plíce: Krepitus v obou plicních bázích.
-Srdce: Nepravidelný rytmus.
-Extremity: Lehký otok obou nohou.
-Neurologické vyšetření: Pacient je při vědomí, bez fokálních příznaků.
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Plíce: Bibazilární chrůpky.
+SRDCE: Nepravidelný rytmus.
+Končetiny: Mírný oboustranný edém.
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků.
 
 Významné výsledky:
-Laboratorní výsledky při přijetí ukazují zvýšenou hodnotu kreatininu a BNP. Rentgen hrudníku ukázal mírnou plicní vaskulární kongesci. Echokardiogram provedený dne ___ ukázal sníženou ejekční frakci. Hodnota kreatininu se zlepšila z ___ na ___ do doby propuštění. Hladina draslíku byla normální. EKG ukázalo rytmus s kontrolovanou frekvencí, bez akutních ischemických změn.
+Při přijetí zvýšené hodnoty kreatininu a BNP. Rentgen hrudníku ukázal mírnou kongesci plicních cév. Echokardiografie provedená ___ ukázala snížený ejekční objem. Hodnota kreatininu se zlepšila z ___ na ___ do doby propuštění. Hodnota draslíku byla v normě. EKG ukázalo rytmus s kontrolovanou frekvencí bez akutních ischemických změn.
 
-Průběh hospitalizace:
-Pacient byl podroben diuréze pomocí intravenózní furosemidu, s dobrým výtokem moči a zlepšením dýchání. Hodnota kreatininu se zpočátku zvýšila a poté se zotavila po úpravě dávky diuretika. Kontrola frekvence pokračovala pomocí metoprololu a byla udržována antikoagulace. Pacient byl vyšetřen ___ a byl propuštěn do domácího ošetřování. Byl převeden na perorální diuretika a propuštěn ve stabilním stavu.
+Stručný popis hospitalizace:
+Byl podán intravenózní furosemid, což vedlo k dobré diuréze a zlepšení dýchání. Hodnota kreatininu se zpočátku zvýšila a poté se zlepšila po úpravě diuretické léčby. Kontrola frekvence byla pokračována pomocí metoprololu a byla udržována antikoagulační léčba. Byl vyšetřen ___ a propuštěn do domácí péče. Byl převeden na perorální diuretika a propuštěn ve stabilizovaném stavu.
 
 Léky při přijetí:
 Furosemid 40 mg denně, metoprolol 25 mg dvakrát denně, apixaban 5 mg dvakrát denně.
 
 Léky při propuštění:
-Furosemid 60 mg denně. Metoprolol succinate 50 mg denně. Apixaban 5 mg dvakrát denně. Chlorid draselný 20 mEq denně. Atorvastatin 40 mg večer. Lisinopril užívat až po kontrolních vyšetřeních.
+Furosemid 60 mg denně. Metoprolol succinat 50 mg denně. Apixaban 5 mg dvakrát denně. Chlorid draselný 20 mEq denně. Atorvastatin 40 mg večer. Do další kontroly přerušit užívání lisinoprilu.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -57,11 +57,11 @@ Fibrilace síní
 Akutní poškození ledvin
 
 Stav při propuštění:
-Psychický stav: Jasný a koherentní.
-Úroveň vědomí: Při vědomí a komunikativní.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
 
-Pokyny při propuštění:
-Byli jste hospitalizováni kvůli přetížení tekutinami a zátěži ledvin. Zvažujte se každý den a volejte ___ v případě, že se vaše váha zvýší o více než 1,4 kg. Omezte příjem soli a tekutin. Užívajte léky podle předpisu a v případě zhoršení dušnosti se vraťte.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zadržování tekutin a přetížení ledvin. Denně se važte a volejte ___, pokud se vaše hmotnost zvýší o více než jeden a půl kilogramu. Omezte příjem soli a tekutin. Užívajte léky podle předpisu a v případě zhoršení dušnosti se vraťte.
 
-Pokyny pro další péči:
+Pokyny pro další kontrolu:
 ___

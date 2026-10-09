@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,15 +9,15 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let se dostavil na oddělení ___ s třidenním produktivním kašlem, horečkou a dušností. Byl vyšetřen svým praktickým lékařem dne ___ a odeslán na pohotovost, kde rentgenové vyšetření hrudníku prokázalo zánět dolního laloku pravé plíce.
+___letý muž se dostavil do ___ s třídenní anamnézou produktivního kašle, horečky a dušnosti. Byl vyšetřen svým ošetřujícím lékařem dne ___ a odeslán na pohotovost, kde zobrazovací vyšetření hrudníku prokázalo konsolidaci v dolním laloku pravého plíce.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Apendektomie v roce ___
 
 Sociální anamnéza:
@@ -27,25 +27,25 @@ Rodinná anamnéza:
 Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
-Životní funkce:
-Bez horečky, srdeční frekvence 82, saturace 96 % při dýchání okolním vzduchem
+Vitalní funkce:
+Bez horečky, srdeční frekvence 82, saturace 96 % při dýchání okolního vzduchu
 Celkový stav:
-Pohodlný, bez známek úzkosti
+Komfortní, bez známek úzkosti
 Plíce:
-Chropy v dolní části pravé plíce
+V dolní části pravé plíce slyšitelné chrůpky
 Neurologické vyšetření:
-Vědomý, bez fokálních příznaků
+Orientovaný, bez ložiskových příznaků
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PROPUŠTĚNÍ:
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
 Počet bílých krvinek 9,1, pokles z 14,8. Kreatinin 0,9.
-ZOBRAZENÍ:
+ZOBRAZOVACÍ VYŠETŘENÍ:
 Rentgen hrudníku proveden dne ___.
 ZÁVĚR:
-Zánět dolního laloku pravé plíce, bez výpotku.
+Pneumonie v dolním laloku pravé plíce, bez výpotku.
 
-Průběh hospitalizace:
-Léčba intravenózním ceftriaxonem a azithromycinem, poté od třetího dne přechod na perorální antibiotika. Postupně snižována podávání kyslíku, horečka ustoupila. Rehabilitační pracovník zopakoval cvičení dýchání dne ___. Lékař ___ souhlasil s plánem propuštění.
+Stručný popis hospitalizace:
+Léčen intravenózním ceftriaxonem a azithromycinem, poté převeden na perorální antibiotika třetí den. Kyslík byl postupně snižován, dokud pacient nedýchal pouze okolní vzduch, a horečka ustoupila. Respirační terapeut zkontroloval dechová cvičení dne ___. Dr. ___ souhlasil s plánem propuštění.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -54,25 +54,25 @@ Atorvastatin 20 mg večer
 Léky při propuštění:
 1. Lisinopril 10 mg perorálně denně
 2. Atorvastatin 20 mg perorálně večer
-3. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu pěti dnů
+3. Amoxicillin-klavulanát 875 mg perorálně dvakrát denně po dobu pěti dnů
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Hypertenze
 
 Stav při propuštění:
-Psychický stav:
-Srozumitelný a koherentní
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Vědomý a komunikativní
-Funkční stav:
-Chůze, soběstačný
+Orientovaný a reagující
+Fyzická aktivita:
+Schopný chůze, soběstačný
 
-Pokyny při propuštění:
-Děkujeme, že nám jste umožnili se o vás postarat na ___. Dokončete celou kúru antibiotik, odpočívejte a pijte dostatek tekutin. V případě horečky, zhoršující se dušnosti nebo bolesti na hrudi se vraťte.
+Pokyny pro propuštění:
+Děkujeme, že jste nám umožnili se o vás postarat v ___. Dokončete celou kúru antibiotik, odpočívejte a pijte dostatek tekutin. V případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

@@ -1,21 +1,21 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Kašel a horečka
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Žena s třechdenním produktivním kašlem, horečkou a zimnicí, přijata z ambulance ___ po zjištění nízké saturace kyslíkem.
+Žena s třídenní anamnézou produktivního kašle, horečky a zimnic, odeslána z kliniky ___ poté, co byla zaznamenána nízká saturace kyslíkem.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hypotyreóza
 Osteoartróza
@@ -24,54 +24,54 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka prodělala mrtvici. Žádné známé onemocnění plic.
+Matka s cévní mozkovou příhodou. Žádné známé plicní onemocnění.
 
 Fyzikální vyšetření:
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
-Životní funkce:
+Vitalní funkce:
 Horečka, mírná tachykardie, saturace 92 % při dýchání okolním vzduchem.
 Celkový stav:
-Únavná, v klidu v pohodě.
-Hlava, oči, uši, nos, krk:
+Unavená, v klidu se cítí dobře.
+Hlava, oči, uši, nos, hrdlo:
 Suché sliznice.
 Plíce:
-Chropy v dolní části pravého plíce.
+Chropy na pravé dolní části.
 Břicho:
-Měkké, bezbolestné.
+Měkké, netendrové.
 
 Významné výsledky:
-LABORATOŘ PŘI PŘIJETÍ:
-Mírně zvýšený počet bílých krvinek, normální kreatinin.
-ZOBRAZENÍ:
-Pořízena rentgenová snímka hrudníku.
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Mírně zvýšený počet bílých krvinek, normální hladina kreatininu.
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Pořízen rentgen hrudníku.
 ZÁVĚR:
-Konsolidace v dolní části pravého plíce, odpovídající pneumonii.
+Konsolidace pravého dolního laloku odpovídající pneumonii.
 
-Průběh hospitalizace:
-Léčena pro pneumonii získanou mimo nemocnici pomocí azithromycinu a doxycyklinu (vzhledem k alergii), a také infuzí. Podávání kyslíku bylo postupně ukončeno druhý den. Vyšetřena lékařem ___ a propuštěna domů. Stav se postupně zlepšoval; před odchodem byla afebrilní.
+Stručný popis hospitalizace:
+Léčena pro komunitní pneumonii azithromycinem a doxycyklinem vzhledem k alergii, navíc podávány tekutiny. Podávání kyslíku bylo postupně snižováno, druhý den již nebylo nutné. Vyšetřena lékařem ___ a propuštěna do domácí péče. Stav se postupně zlepšoval; před propuštěním ___ již neměla horečku.
 
 Léky při přijetí:
-Lisinopril, levothyroxine
+Lisinopril, levotyroxin
 
 Léky při propuštění:
-1. Doxycyklin 100 mg dvakrát denně po dobu pěti dnů.
+1. Doxycyklin 100 mg dvakrát denně po dobu dalších pěti dnů.
 2. Lisinopril denně.
-3. Levothyroxine denně.
+3. Levotyroxin denně.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Pneumonie získaná mimo nemocnici
-Hypoxemie
+Komunitní pneumonie
+Hypoxémie
 
 Stav při propuštění:
-Dobrá, při vědomí a orientovaná.
-Funkční stav:
-Chůze, soběstačná.
+Dobrý, bdělá a orientovaná.
+Stav aktivity:
+Chodí, soběstačná.
 
-Pokyny při propuštění:
-Byla léčena pro pneumonii. Dokončete veškerá antibiotika, pijte dostatek tekutin, odpočívejte a v případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
+Pokyny pro propuštění:
+Byla léčena pro pneumonii. Dokončete všechny antibiotika, pijte dostatek tekutin, odpočívejte a v případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

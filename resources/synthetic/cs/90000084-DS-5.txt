@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,15 +9,15 @@ Alergie:
 Hlavní potíže:
 Kašel, horečka, dušnost
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacient je muž ve věku ___ let s hypertenzí, který se prezentoval s pětidenním produktivním kašlem, horečkou a zhoršující se dušností. Byl poprvé vyšetřen ___ dne ___ a dostal léčbu perorálními antibiotiky, ale bez zlepšení. Rozvinul bolest na hrudi v pravé straně, která se zhoršovala, a měl snížený příjem potravy, což vedlo jeho rodinu k tomu, že ho přivezli do ___. Na pohotovosti měl horečku a hypoxémii, a zobrazovací vyšetření ukázala konsolidaci v dolním laloku pravé plíce. Popřel kontakt s nemocnými.
+Anamnéza současného onemocnění:
+Pacient je ___ letý muž s hypertenzí, který se dostavil s pěti den trvajícím produktivním kašlem, horečkami a zhoršující se dušností. Poprvé byl vyšetřen v ___ dne ___ a byl mu nasazen perorální antibiotika, ale nedošlo ke zlepšení. Rozvinul pleuritickou bolest na pravé straně hrudníku a špatně přijímal potravu, což vedlo k tomu, že ho jeho rodina přivezla do ___. Na pohotovosti měl horečku a byl hypoxický a zobrazovací vyšetření ukázalo konsolidaci v dolním laloku pravého plíce. Popíral kontakt s nemocnými.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie, diagnostikována v ___
+Hyperlipidémie, diagnostikována v ___
 Apendektomie v ___
 
 Sociální anamnéza:
@@ -28,50 +28,50 @@ Matka s hypertenzí. Otec s ischemickou chorobou srdeční.
 
 Fyzikální vyšetření:
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
-Životní funkce: T 101.2, HR 98, BP 128/76, RR 22, SpO2 91% při pokojovém vzduchu
-Celkový stav: Pacient vypadá nemocně, mluví krátkými větami
-Hlava, oči, uši, nos, hrdlo: Suché sliznice
-Plíce: Krepitace v dolní části pravé plíce
-Břicho: Měkké, bez citlivosti
-EXTREMITY: Teplé, bez otoků
+Vitalní funkce: T 101,2, TF 98, TK 128/76, dechová frekvence 22, SpO2 91 % při dýchání okolním vzduchem
+Celkový stav: Vypadá nemocně, mluví krátkými větami
+Hlava, uši, oči, nos, hrdlo: Suché sliznice
+Plíce: Chropy na pravé straně
+Břicho: Měkké, netendrovatelné
+Končetiny: Teplé, bez otoků
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PŘIJETÍ:
-WBC 14.2 s převahou neutrofilů, Hgb 13.1, Plt 260. Na 134, K 4.0, HCO3 24, BUN 22, Cr 1.0. Laktát 1.8.
-Rentgen hrudníku: Zastínění v dolním laloku pravé plíce, bez výpotku, zhodnoceno ___
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-WBC 8.4, Hgb 12.8, Plt 310. Na 138, K 4.2, Cr 0.9.
-Mikrobiologie: Kultivace krve bez růstu, antigen Legionella v moči negativní.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 14,2 s převahou neutrofilů, hemoglobin 13,1, trombocyty 260. Na 134, K 4,0, HCO3 24, BUN 22, kreatinin 1,0. Laktát 1,8.
+Rentgen hrudníku: opacita v dolním laloku pravé plíce, bez výpotku, zhodnoceno ___.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Leukocyty 8,4, hemoglobin 12,8, trombocyty 310. Na 138, K 4,2, kreatinin 0,9.
+Mikrobiologie: krevní kultury bez růstu, močový antigen Legionella negativní.
 
-Průběh hospitalizace:
-Pacient byl přijat na interní oddělení a zahájena intravenózní léčba ceftriaxonem a azithromycinem pro pneumonii získanou v komunitě. Doplňková kyslíková terapie byla postupně snižována po dobu dvou dnů. Kultivace krve odebraná ___ dne nevykazovala růst. Jeho kašel a horečka se postupně zlepšovaly a třetí den hospitalizace byl převeden na perorální antibiotika. Lisinopril byl zpočátku vysazen kvůli nízkému krevnímu tlaku a obnoven před propuštěním. Fyzikální terapie doporučila krátkodobou rehabilitaci vzhledem k dekompenzaci. Jeho dcera ___ souhlasila s plánem. Pacient byl ___ dne propuštěn. Opakované zobrazovací vyšetření hrudníku je plánováno na ___ den.
+Stručný průběh hospitalizace:
+Byl přijat na interní oddělení a zahájena intravenózní léčba ceftriaxonem a azithromycinem pro komunitně získanou pneumonii. Doplňkový kyslík byl postupně snižován během dvou dnů až na dýchání okolním vzduchem. Krevní kultury odebrané dne ___ nevykázaly růst. Jeho kašel a horečka se postupně zlepšovaly a třetí den hospitalizace byl převeden na perorální antibiotika. Lisinopril byl zpočátku vysazen kvůli nízkému krevnímu tlaku a před propuštěním byl znovu nasazen. Doporučena krátkodobá rehabilitace vzhledem k oslabení. Jeho dcera ___ s plánem souhlasila. Dne propuštění ho vyšetřil ___. Opakované zobrazovací vyšetření hrudníku je plánováno na ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
 Atorvastatin 20 mg večer
 Vydáno v ___
 
-Léky k užívání po propuštění:
-1. Lisinopril 10 mg, perorálně, jednou denně.
-2. Atorvastatin 20 mg, perorálně, každou noc.
-3. Amoxicilin-klavulanát 875 mg, perorálně, dvakrát denně, pokračujte až do ___.
-4. Paracetamol 650 mg, perorálně, každých šest hodin dle potřeby při horečce nebo bolesti.
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně denně
+2. Atorvastatin 20 mg perorálně večer
+3. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně, pokračovat až do ___
+4. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby při horečce nebo bolesti
 
-Plán po propuštění:
-Dlouhodobá péče
+Plán propuštění:
+Prodloužená péče
 Zařízení: ___
 
 Diagnóza při propuštění:
-Pneumonie získaná v běžném prostředí
-Hypoxie (nedostatek kyslíku)
-Hypertenze (vysoký krevní tlak)
+Komunitní pneumonie
+Hypoxie
+Hypertenze
 
 Stav při propuštění:
-Úroveň vědomí: Přítomný a komunikativní
-Úroveň aktivity: Chůze s pomocí.
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Chodí s pomocí
 
-Pokyny po propuštění:
-Byli jste hospitalizováni kvůli infekci plic a léčení probíhalo pomocí antibiotik. Dokončete celou kúru antibiotik, i když se cítíte dobře. Pijte dostatek tekutin a odpočívejte. V případě horečky nad 38 °C, zhoršující se dušnosti, bolesti na hrudi nebo zmatenosti se vraťte. V případě opětovného výskytu příznaků kontaktujte Dr. ___. Váš rehabilitační tým v ___ vám pomůže s posílením a chůzí a bude naplánováno opakované rentgenové vyšetření hrudníku přibližně dne ___.
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli plicní infekci a léčeni antibiotiky. Dokončete celou kúru antibiotik, i když se cítíte dobře. Pijte dostatek tekutin a odpočívejte. Vraťte se, pokud máte horečku nad 38,3 °C, zhoršující se dušnost, bolest na hrudi nebo zmatenost. Zavolejte doktoru ___, pokud se příznaky vrátí. Váš rehabilitační tým v ___ vám pomůže s posílením a chůzí a bude naplánován opakovaný rentgen hrudníku kolem ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

@@ -1,64 +1,64 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Kašel a horečka
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka přišla s tříměsíčním kašlem a horečkou, poprvé vyšetřena dne ___. Při přijetí neměla známky akutního poškození ledvin, jak uvedl tým.
-PROHLÍDKA SYSTÉMŮ:
-Přítomny zimnice. Jinak negativní.
+Pacientka se dostavila s třemi dny trvajícím kašlem a horečkou, poprvé vyšetřena na ___. Podle záznamů při přijetí neměla známky akutního poškození ledvin.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na třes. Jinak negativní.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Rodinná anamnéza:
 Matka s hypertenzí
 
 Významné výsledky:
-Rentgen hrudníku ukázal zánět v dolní části pravého plicního laloku. Počet bílých krvinek mírně zvýšen, denně se zlepšuje.
-LABORATORNÍ VÝSLEDKY PŘI PROPUŠTĚNÍ:
-Počet bílých krvinek 8,1, kreatinin 0,8, sodík 139
+Rentgen hrudníku ukázal konsolidaci v dolním laloku pravého plíce. Počet bílých krvinek mírně zvýšený, denně se zlepšuje.
+VÝSLEDKY PŘED PROPUŠTĚNÍM:
+Leukocyty 8,1, kreatinin 0,8, sodík 139
 
-Stručný průběh hospitalizace:
-Léčena na pneumonii antibiotiky a kyslíkem, postupně odstavována od kyslíku během tří dnů. Hladina glukózy monitorována a kontrolována. Před propuštěním vyšetřena lékařem ___, dobře toleruje stravu.
+Stručný popis hospitalizace:
+Léčena na pneumonii antibiotiky a kyslíkem, do třetího dne převedena na dýchání okolního vzduchu. Hladina glukózy sledována a kontrolována. Před propuštěním vyšetřena ___, dobře snáší stravu.
 
 Léky při přijetí:
 Lisinopril, atorvastatin, metformin
 
 Léky při propuštění:
-1. Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů
-2. Lisinopril jednou denně
+1. Amoxicilin-klavulanát dvakrát denně po dobu pěti dalších dnů
+2. Lisinopril denně
 3. Atorvastatin večer
-4. Metformin při jídle
+4. Metformin během jídla
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Diabetes mellitus
-Sekundární:
+Sekundárně:
 Hypertenze
 
 Stav při propuštění:
 Stabilní
-Psychický stav:
-Vědomá a orientovaná, jasné myšlení.
-Fyzická aktivita:
-Chůze samostatná.
+Duševní stav:
+Bdělá a orientovaná, jasné myšlení.
+Stav aktivity:
+Chodí samostatně.
 
-Pokyny při propuštění:
-Byla léčena na pneumonii. Dokončete užívání všech antibiotik, odpočívejte, pijte dostatek tekutin a volejte ___, pokud se objeví horečka nebo se zhorší dýchání.
+Pokyny pro propuštění:
+Byla léčena na pneumonii. Dokončete všechny antibiotika, odpočívejte, pijte dostatek tekutin a v případě horečky nebo zhoršení dýchání volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

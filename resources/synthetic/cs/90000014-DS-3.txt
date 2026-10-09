@@ -1,76 +1,76 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Slabost a snížený objem moči
+Slabost a snížené množství moči
 
-Zásadní chirurgické zákroky nebo invazivní procedury:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacient převezen z ___ s třemi dny potíží, včetně sníženého příjmu tekutin a nízkého objemu moči. Laboratorní výsledky ukázaly akutní poškození ledvin (AKI), které se zlepšilo po podání tekutin.
+Pacient převezen z ___ s třemi dny trvajícím špatným příjmem potravy a nízkým množstvím moči. Laboratorní výsledky prokázaly akutní poškození ledvin (AKI), které se zlepšilo po podání tekutin.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
-Chirurgická anamnéza:
+Anamnéza předchozích chirurgických zákroků:
 Apendektomie v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-V rodině se vyskytuje chronické onemocnění ledvin u matky. Otec měl mrtvici.
+V rodinné anamnéze je významná matka s chronickým onemocněním ledvin (CKD). Otec prodělal cévní mozkovou příhodu.
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacient je v pohodě, bez známek utrpení.
-Hlava, oči, uši, nos a hrdlo (HEENT):
-Suché sliznice.
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Suché sliznice
 Krk:
-Flexibilní.
+Pružný
 Plíce:
-Čisté při poslechu na obou stranách.
+Čisté na obou stranách
 Kůže:
-Teplá, bez vyrážky.
+Teplá, bez vyrážky
 
-Relevantní výsledky:
-Kreatinin dosáhl maxima při přijetí a následně klesal s hydratací. Draslík v normě. Glukóza byla při přijetí zvýšená.
-Zobrazovací metody:
-Ultrazvuk bez patologických nálezů.
+Významné výsledky:
+Kreatinin dosáhl nejvyšší hodnoty při přijetí a poté se s hydratací snižoval. Draslík v normě. Glukóza zvýšená při laboratorních testech při přijetí.
+ZOBRAZOVACÍ METODY:
+Ultrazvuk bez významných nálezů
 
 Léky při přijetí:
-Lisinopril, atorvastatin, aspirin denně.
+Lisinopril, atorvastatin, aspirin denně
 
 Léky při propuštění:
-Atorvastatin večer, aspirin denně, metformin dvakrát denně. Lisinopril užívat až po konzultaci s ošetřujícím lékařem.
+Atorvastatin večer, aspirin denně, metformin dvakrát denně. Lisinopril vysadit, dokud ho neposoudí ošetřující lékař.
 
-Plán po propuštění:
+Plán propuštění:
 Domů s péčí od ___
 
 Diagnóza při propuštění:
-Diabetes mellitus, nově diagnostikovaný.
+Diabetes mellitus, nově diagnostikovaný
 Sekundární:
 Dehydratace
 Hypertenze
 
 Stav při propuštění:
 Dobrý
-Psychický stav:
-Orientovaný a při vědomí.
+Duševní stav:
+Bdělý a orientovaný
 Úroveň vědomí:
-Plně při vědomí.
-Aktivity:
-Chůze bez pomoci.
+Plně bdělý
+Úroveň aktivity:
+Chodí bez pomoci
 
 Pokyny při propuštění:
-Pijte dostatek tekutin a kontrolujte hladinu cukru v krvi denně. Vyhýbejte se lékům proti bolesti s protizánětlivým účinkem. V případě horečky, zvracení nebo zmatenosti se vraťte. V případě dotazů volejte ___ .
+Pijte dostatek tekutin a denně si kontrolujte hladinu cukru v krvi. Vyhýbejte se protizánětlivým lékům proti bolesti. V případě horečky, zvracení nebo zmatenosti se vraťte do nemocnice. V případě dotazů volejte ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolní vyšetření:
 ___

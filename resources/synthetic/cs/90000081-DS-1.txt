@@ -1,53 +1,53 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Nausea a snížený objem moči
+Nevolnost a snížené množství moči
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž přišel s třemi dny trvajícími potížemi, jako je nevolnost, snížený příjem potravy a snížený objem moči. Byl vyšetřen jeho ošetřujícím lékařem v ___ , který zjistil dehydrataci a poslal ho do ___ k dalšímu vyšetření. Neměl horečku, bolest na hrudi ani dušnost.
+Muž, který se dostavil s třemi dny trvající nevolností, špatným příjmem potravy a sníženým množstvím moči. Byl vyšetřen v ___ svým ošetřujícím lékařem, který u něj zjistil dehydrataci a poslal ho do ___ na další vyšetření. Nemá horečku, bolesti na hrudi ani dušnost.
 
-Předchozí zdravotní problémy:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Předchozí operace v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Bez významných informací
+Bez významných údajů
 
 Fyzikální vyšetření:
 Životní funkce:
 Stabilní, bez horečky
 Celkový stav:
-Únavný, suché sliznice
+Unavený, suché sliznice
 Břicho:
-Měkké, bez citlivosti
+Měkké, netendrovatelné
 Končetiny:
 Bez otoků
 Neurologické vyšetření:
-Vědomý, bez specifických příznaků
+Orientovaný, bez ložiskových příznaků
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PŘIJETÍ:
-Zvýšená kreatinina, vysoká hladina glukózy, normální hladina draslíku
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Kreatinina blízko základní hodnoty, přijatelná hladina glukózy
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Zvýšená hladina kreatininu, vysoká hladina glukózy, normální hladina draslíku
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Hladina kreatininu blízko výchozí hodnoty, hladina glukózy přijatelná
 ZÁVĚR:
-Bez akutních abnormalit na ultrazvuku ledvin, interpretováno ___
+Na ultrazvuku ledvin nebyly zjištěny žádné akutní abnormality, vyhodnoceno ___.
 
-Průběh hospitalizace:
-Pacient byl přijat pro akutní poškození ledvin, které bylo způsobeno dehydratací a pokračujícím užíváním metforminu. Metformin byl vysazen a pacient dostával intravenózní tekutiny, přičemž hladina kreatininy se postupně zlepšovala. Jeho diabetes byl kontrolován pomocí dávkování inzulínu. Pacient byl znovu uveden k jídlu a byl propuštěn ve stabilizovaném stavu po konzultaci s ___ a ___.
+Stručný popis průběhu hospitalizace:
+Pacient byl přijat s akutním poškozením ledvin, které bylo přičítáno dehydrataci a pokračujícímu užívání metforminu. Metformin byl vysazen a pacient dostával intravenózní tekutiny, přičemž se hladina kreatininu postupně zlepšovala. Jeho diabetes byl léčen pomocí inzulínové stupnice. Strava byla obnovena a po konzultaci s ___ a ___ byl pacient propuštěn ve stabilizovaném stavu.
 
 Léky při přijetí:
 Metformin
@@ -55,9 +55,9 @@ Lisinopril
 Atorvastatin
 
 Léky při propuštění:
-Lisinopril – obnovit, jakmile se stabilizuje hladina kreatininy. Atorvastatin – večer. Metformin zůstává vysazen do doby, než budou výsledky laboratorních testů vyhodnoceny ambulantně. Glipizid – začít každé ráno při snídani.
+Lisinopril bude znovu nasazen, jakmile bude hladina kreatininu stabilní. Atorvastatin užívejte každý večer. Metformin zůstává vysazen do doby laboratorního vyšetření v ambulantní péči. Začněte užívat glipizid každé ráno k snídani.
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
@@ -66,11 +66,11 @@ Akutní poškození ledvin
 Diabetes mellitus
 
 Stav při propuštění:
-Úroveň vědomí: Vědomý a komunikativní
-Úroveň aktivity: Chůze, soběstačný
+Úroveň vědomí: Orientovaný a komunikativní
+Stav aktivity: Chodí, soběstačný
 
-Pokyny při propuštění:
-Byl jste hospitalizován kvůli dehydrataci, která ovlivnila vaše ledviny. Pijte dostatek tekutin, vyhýbejte se protizánětlivým lékům a užívejte pouze léky uvedené v tomto dokumentu. V případě zvracení, malého množství moči nebo zmatenosti se vraťte. V případě dotazů volejte ___ .
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli dehydrataci, která ovlivňuje vaše ledviny. Pijte dostatek tekutin, vyhýbejte se protizánětlivým lékům proti bolesti a užívejte pouze léky uvedené v seznamu. V případě zvracení, malého množství moči nebo zmatenosti se vraťte. V případě dotazů volejte ___.
 
 Pokyny pro další péči:
 ___

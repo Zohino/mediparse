@@ -1,21 +1,21 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
 Hlavní potíže:
-Dušnost a otoky nohou.
+Dušnost a otok nohou
 
-Zásahy:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka s diabetem mellitus se dostavila po ___ dnech zhoršující se dušnosti a otoků nohou. Byla vyšetřena na ___ a odeslána na pohotovost pro další vyšetření a hospitalizaci.
+Žena s diabetes mellitus se dostavila po ___ dnech zhoršující se dušnosti a otoku nohou. Byla vyšetřena na ___ a odeslána na pohotovostní oddělení k vyšetření a přijetí.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Srdeční selhání
 Chronické onemocnění ledvin
 Hypertenze
@@ -27,39 +27,39 @@ Rodinná anamnéza:
 Matka s hypertenzí; otec zemřel na ___.
 
 Fyzikální vyšetření:
-Celkový stav: Pacientka je v pohodě, bez známek utrpení.
-Hlava, oči, uši, nos, krk: Normální.
-Krk: Pružný.
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Normální.
+Krk: Pohyblivý.
 Břicho: Měkké, bez citlivosti.
-Končetiny: Mírný otok.
+Končetiny: Mírný edém.
 Kůže: Teplá, suchá.
-Pulzy: Palpovatelné.
+Pulz: Hmatný.
 
 Významné výsledky:
-NÁLEZY: Rentgen hrudníku ukázal mírnou kongesci plicních cév bez ložiskové konsolidace. Kreatinin byl na základní úrovni. Draslík a sodík byly v normálních mezích. Echokardiogram provedený na ___ ukázal zachovalou ejekční frakci. Hemoglobin byl během hospitalizace stabilní.
+NÁLEZY: Rentgen hrudníku ukázal mírnou kongesci plicních cév bez ložiskové konsolidace. Kreatinin byl na výchozí úrovni. Draslík a sodík byly v normálních mezích. Echokardiografie provedená na ___ ukázala zachovanou ejekční frakci. Hladina hemoglobinu byla během hospitalizace stabilní.
 
-Průběh hospitalizace:
-Byla léčena intravenózními diuretiky a postupně se zlepšovala, přičemž váha se vracela k základní hodnotě. Funkce ledvin zůstala stabilní. Její domácí léky byly pokračovány s drobnými úpravami. Byla vyšetřena lékařem ___ a bezpečně začala chodit. Byla propuštěna ve stabilním stavu s doporučením k další kontrole u ___.
+Stručný průběh hospitalizace:
+Byla léčena intravenózními diuretiky a její stav se postupně zlepšoval, přičemž její hmotnost se vracela k výchozí hodnotě. Funkce ledvin zůstala stabilní. Její domácí léčba byla pokračována s drobnými úpravami. Byla vyšetřena ___ a mohla bezpečně chodit. Byla propuštěna ve stabilizovaném stavu s doporučením, aby se dostavila na kontrolu k ___.
 
 Léky při přijetí:
 Furosemid 20 mg denně; inzulin glargin večer.
 
 Léky při propuštění:
-Furosemid 40 mg denně. Inzulin glargin večer, nezměněno. Metoprolol sukcinát 25 mg denně. Aspirin 81 mg denně. Pokračujte v užívání domácích vitamínových doplňků.
+Furosemid 40 mg denně. Inzulin glargin večer, dávka nezměněna. Metoprolol sukcinát 25 mg denně. Aspirin 81 mg denně. Pokračovat v užívání vitamínových doplňků.
 
-Plán po propuštění:
-Domů s péčí.
+Způsob propuštění:
+Domů s doprovodnou péčí
 Zařízení: ___
 
 Diagnóza při propuštění:
-Hlavní: Chronické onemocnění ledvin.
+Primární: Chronické onemocnění ledvin
 
 Stav při propuštění:
-Psychický stav: Jasný a soudržný.
-Úroveň vědomí: Vnímavá a komunikativní.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
 
-Instrukce při propuštění:
-Vážete se každé ráno a volejte ___ v případě, že se vaše váha zvýší o více než 1,4 kg. Omezte příjem soli, užívejte léky podle předpisu a v případě zhoršení dušnosti se vraťte.
+Pokyny při propuštění:
+Vážete se každý den ráno a volejte ___, pokud se vaše hmotnost zvýší o více než tři libry. Omezte příjem soli, užívejte léky podle předpisu a v případě zhoršení dušnosti se vraťte.
 
-Doporučení pro další péči:
+Pokyny pro kontrolu:
 ___

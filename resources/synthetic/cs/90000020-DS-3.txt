@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Specializace: Lékařství
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,38 +9,38 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Jedná se o ___letého muže s hypertenzí, který se prezentoval s pětidenním produktivním kašlem, horečkou a dušností. Poprvé byl vyšetřen v urgentním centru ___, kde mu bylo podáno antibiotikum, ale bez zlepšení. Jeho příznaky se zhoršily a ___ přišel na pohotovost. Tam měl horečku a hypoxémii při běžném dýchání, a rentgen hrudníku ukázal infiltrát v dolním laloku pravé plíce.
+Anamnéza současného onemocnění:
+Jedná se o ___letého muže s hypertenzí, který se dostavil s pěti den trvajícím produktivním kašlem, horečkou a dušností. Poprvé byl vyšetřen v ___ pohotovostní službě, kde mu byl podán antibiotikum, které však nepřineslo úlevu. Jeho příznaky se zhoršovaly a ___ se dostavil na pohotovost. Tam měl horečku a byl hypoxický při dýchání okolního vzduchu a na rentgenu hrudníku byla vidět infiltrace v dolním laloku pravého plíce.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze diagnostikována v ___
-Hyperlipidemie
+Hyperlipidémie
 Předchozí apendektomie v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec s ischemickou chorobou srdeční, léčen v ___. Žádná rodinná anamnéza plicních onemocnění.
+Otec s ischemickou chorobou srdeční, léčen v ___. V rodině není žádná anamnéza plicních onemocnění.
 
 Fyzikální vyšetření:
-Vitální funkce:
-T 100,9, HR 96, BP 138/80, RR 20, SpO2 93% při běžném dýchání
+Vitalní funkce:
+T 38,3 °C, TF 96, TK 138/80, dechová frekvence 20, SpO2 93 % při dýchání okolního vzduchu
 Celkový stav:
-Vypadá unaveně, mluví kompletními větami
-Hlava, oči, uši, nos, hrdlo:
-Vlhké sliznice, čistý orofarynx
+Vypadá unaveně, mluví v celých větách
+Hlava, uši, oči, nos, hrdlo:
+Vlhké sliznice, čistá ústní dutina
 Plíce:
-Chropy v dolní části pravé plíce, žádné sípání
+Chropy na pravé straně, bez sípání
 
 Významné výsledky:
-Laboratorní výsledky při přijetí: zvýšený počet bílých krvinek 14,2 s převahou neutrofilů. Laktát 1,4. Kreatinin v normě. Kultivace krve z ___ nevykazovala žádný růst. Kultivace sputa prokázala běžnou orální flóru. Rentgen hrudníku ukázal konsolidaci v dolním laloku pravé plíce bez efúze. Opakovaný snímek z ___ potvrdil stabilní nález. Test na respirační viry byl negativní. Test na antigen Legionella v moči byl negativní. Elektrokardiogram ukázal normální sinusový rytmus bez akutních změn.
+Při přijetí byly v laboratorních testech zvýšené hodnoty bílých krvinek (14,2) s převahou neutrofilů. Laktát 1,4. Kreatinin v normě. Krevní kultury z ___ nevykázaly žádný růst. Kultivace sputa prokázala normální orální flóru. Rentgen hrudníku ukázal konsolidaci v dolním laloku pravé plíce bez výpotku. Opakovaný rentgen z ___ ukázal stabilní nález. Vyšetření na respirační viry bylo negativní. Vyšetření moči na antigen legionelly bylo negativní. Elektrokardiogram ukázal normální sinusový rytmus bez akutních změn.
 
-Průběh hospitalizace:
-Byl přijat s pneumonií získanou v komunitě a zahájena intravenózní léčba ceftriaxonem a azithromycinem. Kyslík byl podáván pomocí nosní kanyly a byl postupně snižován druhý den hospitalizace. Horečka ustoupila během čtyřiceti osmi hodin a kašel se postupně zlepšoval. Byl převeden na perorální antibiotika a mohl se pohybovat bez deoxygenace. Pokračovalo se v podávání jeho domácích léků na vysoký krevní tlak. Lékař ___ z primárního týmu byl informován a souhlasil s plánem propuštění do domácího prostředí.
+Stručný průběh hospitalizace:
+Byl přijat s komunitně získanou pneumonií a zahájena byla intravenózní léčba ceftriaxonem a azithromycinem. Kyslík byl podáván nosní kanylou a postupně snižován do druhého dne hospitalizace. Horečka ustoupila během čtyřiceti osmi hodin a jeho kašel se postupně zlepšoval. Byl převeden na perorální antibiotika a mohl se pohybovat bez desaturace. Jeho domácí léčba na vysoký krevní tlak byla pokračována. Lékař ___ z týmu primární péče byl informován a souhlasil s plánem propuštění domů.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -48,28 +48,28 @@ Atorvastatin 20 mg večer
 Aspirin 81 mg denně
 
 Léky při propuštění:
-1. Amoxicilin-klavulanát 875 mg-125 mg tableta dvakrát denně po dobu pěti dnů
+1. Amoxicillin-klavulanát 875 mg-125 mg, jedna tableta dvakrát denně po dobu pěti dalších dnů
 2. Lisinopril 10 mg denně
 3. Atorvastatin 20 mg večer
 4. Aspirin 81 mg denně
-5. Guaifenesin 600 mg dvakrát denně dle potřeby při kašli
+5. Guaifenesin 600 mg dvakrát denně podle potřeby na kašel
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Hypoxie
 Hypertenze
 
-Podmínky propuštění:
-Psychický stav:
-Vnímání je jasné a soustředěné.
-Úroveň aktivity:
-Mobilní, soběstačný.
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Stav aktivity:
+Schopný chůze, soběstačný
 
 Pokyny pro propuštění:
-Byli jste hospitalizováni kvůli infekci plic a léčení probíhalo pomocí antibiotik a kyslíku. Dokončete celou kúru antibiotik doma. Pijte dostatek tekutin a odpočívejte. V případě horečky, zhoršujícího se kašle, bolesti na hrudi nebo potíží s dýcháním se vraťte do ___ nebo kontaktujte svého lékaře. Vyhýbejte se kouření a na příští návštěvě se poraďte s ___ ohledně vakcíny proti pneumonii. Doporučuje se kontrolní rentgenové vyšetření plic za šest týdnů.
+Byli jste hospitalizováni kvůli plicní infekci a léčeni antibiotiky a kyslíkem. Doma dokončete celou kúru antibiotik. Pijte dostatek tekutin a odpočívejte. V případě horečky, zhoršení kašle, bolesti na hrudi nebo potíží s dýcháním se vraťte do ___ nebo kontaktujte svého lékaře. Vyhýbejte se kouření a při příští návštěvě se zeptejte ___ na očkování proti pneumokokové infekci. Doporučuje se kontrolní rentgen hrudníku za šest týdnů.
 
-Pokyny pro kontrolní vyšetření:
+Pokyny pro kontrolu:
 ___

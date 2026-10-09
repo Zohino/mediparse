@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,15 +9,15 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž s třechdenním produktivním kašlem, horečkou a mírnou dušností, poprvé vyšetřen ___ a odeslán na urgentní příjem pro další vyšetření.
+Muž s třídenní anamnézou produktivního kašle, horečky a mírné dušnosti, poprvé vyšetřen v ___ a odeslán na pohotovostní oddělení k dalšímu vyšetření.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Gastroezofageální reflux
 
 Sociální anamnéza:
@@ -27,53 +27,53 @@ Rodinná anamnéza:
 Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
-Životní funkce:
-T 38,1, srdeční frekvence 92, krevní tlak 128/76, SpO2 93 % při pokojové teplotě
+Vitalní funkce:
+T 38,1, TF 92, TK 128/76, SpO2 93 % při dýchání okolním vzduchem
 Celkový stav:
-Mírně nemocný, cítí se relativně dobře
+Mírně nemocný vzhled, v pohodlí
 Hlava, oči, uši, nos, hrdlo:
 Vlhké sliznice
 Krk:
 Pružný
-Plíce:
-Chropy v dolní části pravého plíce
+Plicní:
+V dolní části pravé plíce chrůpky
 Kůže:
 Teplá, suchá
 
 Významné výsledky:
-LABORATOŘ PŘI PŘIJETÍ:
-Počet bílých krvinek 14,2, laktát 1,3, kreatinin normální, odebráno ___
-ZOBRAZENÍ:
-Rentgen hrudníku ukázal ztmavení v dolní části pravého plíce
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 14,2, laktát 1,3, kreatinin v normě, odebráno v ___
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku ukázal opacitu v dolním laloku pravé plíce
 ZÁVĚR:
 Nález odpovídá lobární pneumonii
 
-Průběh hospitalizace:
-Léčba pneumonie získané v komunitě pomocí ceftriaxonu a azithromycinu, následně převedeno na perorální antibiotika. Horečka ustoupila, podávání kyslíku bylo postupně ukončeno druhý den a pacient byl vyšetřen ___ před odjezdem ___.
+Stručný popis hospitalizace:
+Léčen pro komunitně získanou pneumonii pomocí ceftriaxonu a azithromycinu, poté převeden na perorální antibiotika. Horečka ustoupila, kyslíková terapie byla ukončena druhý den a před propuštěním z nemocnice byl vyšetřen ___ v ___.
 
 Léky při přijetí:
 Lisinopril, atorvastatin, omeprazol denně
 
 Léky při propuštění:
-1. Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů
+1. Amoxicilin-klavulanát dvakrát denně po dobu pěti dalších dnů
 2. Lisinopril denně
 3. Atorvastatin večer
 4. Omeprazol denně
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Hypertenze
 
 Stav při propuštění:
-Úroveň vědomí: Vědomý a komunikativní
-Funkční stav: Chůze, soběstačný
+Úroveň vědomí: Bdělý a komunikativní
+Stav aktivity: Ambulantní, soběstačný
 
-Pokyny při propuštění:
-Byl vám léčen zápal plic. Dokončete celou kúru antibiotik, odpočívejte, pijte dostatek tekutin a v případě zhoršení dýchání nebo horečky se vraťte. V případě dotazů volejte ___.
+Pokyny pro propuštění:
+Byl jste léčen na pneumonii. Dokončete celou kúru antibiotik, odpočívejte, pijte dostatek tekutin a v případě zhoršení dýchání nebo horečky se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

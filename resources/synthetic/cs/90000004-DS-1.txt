@@ -1,65 +1,65 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Vřed na noze, únava
+Poranění nohy, únava
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let byl přijat z ambulance ___ s pomalu se hojícím vředem na noze a několika dny slabosti. Byl přijat za účelem ošetření vředu a monitorování.
+___letý muž odeslán z kliniky ___ s pomalu se hojící vředovou lézí na noze a několikdenní slabostí. Byl přijat za účelem ošetření rány a monitorování.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
-Chronické onemocnění ledvin 3. stupně
+Chronické onemocnění ledvin, stadium 3
 Hypertenze
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-V rodině otce se vyskytuje fibrilace síní. Matka trpěla hypertenzí.
+V rodině se vyskytuje fibrilace síní u otce. Matka trpěla hypertenzí.
 
 Fyzikální vyšetření:
 Životní funkce: stabilní
-Celkový stav: pohodlný
+Celkový stav: dobrý
 Hlava, oči, uši, nos, hrdlo: normální
 Břicho: měkké
-Extremity: vřed na levé noze
+Končetiny: vřed na levé noze
 Kůže: teplá, suchá
 
 Významné výsledky:
-Glukóza zvýšená při příjmu. Kreatinin v normě. Počet bílých krvinek mírně zvýšený.
-ZOBRAZENÍ:
-Rentgen nohy bez nálezů kostních změn.
+Při přijetí zvýšená hladina glukózy. Kreatinin v normě. Mírně zvýšený počet bílých krvinek.
+ZOBRAZOVACÍ METODY:
+Rentgen nohy bez postižení kostí.
 
 Léky při přijetí:
 Metformin, lisinopril, amlodipin
 
 Léky při propuštění:
-Pokračujte v užívání lisinoprilu a amlodipinu doma. Insulin glargin večer. Cefalexin po dobu sedmi dnů. Přerušte užívání metforminu.
+Pokračovat v užívání lisinoprilu a amlodipinu doma. Inzulín glargin jednou denně večer. Cefalexin po dobu sedmi dnů. Ukončit užívání metforminu.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů s péčí od ___
 
 Diagnóza při propuštění:
-Diabetický vřed na noze
+Diabetický vřed nohy
 Diabetes mellitus
 Chronické onemocnění ledvin
 
 Stav při propuštění:
-Psychický stav: jasný a soustředěný
+Duševní stav: jasný a srozumitelný
 Úroveň vědomí: bdělý
-Funkční stav: chodí samostatně s ortopedickou obuví
+Úroveň aktivity: chodí samostatně s ortopedickou obuví
 
 Pokyny při propuštění:
-Udržujte obvaz čistý a suchý. Měřte hladinu cukru ve krvi dvakrát denně. V případě horečky, rozšiřujícího se zarudnutí nebo výtoku se vraťte. Co nejdříve se objednejte k lékaři u ___ .
+Udržujte obvaz čistý a suchý. Měřte si hladinu cukru v krvi dvakrát denně. V případě horečky, šíření zarudnutí nebo výtoku se vraťte. Co nejdříve se objednejte k lékaři ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

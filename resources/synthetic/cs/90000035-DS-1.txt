@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,56 +9,56 @@ Alergie:
 Hlavní potíže:
 Bolest břicha
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let, převezen z ___ s bolestmi v oblasti horní části břicha a nevolností trvající dva dny. Bez horečky nebo zvracení. Bolest se zmírnila po jídle.
-PROHLÍDKA SYSTÉMŮ:
+___letý muž odeslán z ___ s dvoudenní bolestí v epigastriu a nevolností. Bez horečky nebo zvracení. Bolest se zmírňuje po jídle.
+PŘEHLED SYSTÉMŮ:
 Negativní, s výjimkou výše uvedeného.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec s koronární chorobou
+Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
-Pacient je v pohodě, mírná bolestivost v oblasti horní části břicha, bez známek ochrany.
-FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
-Životní funkce:
+Pacient je v dobrém stavu, mírná citlivost v epigastriu, bez známek ochranného napětí.
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Vitalní funkce:
 Bez horečky, stabilní
 Celkový stav:
-V dobrém stavu
+Dobře vypadající
 Krk:
-Flexibilní
+Pružný
 Plíce:
 Čisté na obou stranách
 KONČETINY:
 Bez otoků
 
 Významné výsledky:
-Lipáza a jaterní enzymy v normě. Pozitivní protilátky proti Helicobacter. Vyšetření provedená v ___ byla bez nálezů.
+Lipáza a jaterní enzymy v normě. Pozitivní protilátky proti Helicobacteru. Vyšetření provedená v ___ neukázala žádné abnormality.
 ZÁVĚR:
 Mírná gastritida.
 
-Průběh hospitalizace:
-Léčba gastritidy inhibitory protonové pumpy, bolest ustoupila, dieta postupně rozšiřována. Pacient byl konzultován s ___ ohledně dalšího postupu. Propouštěn ve stabilním stavu.
-DŮLEŽITÉ ASPEKTY PŘECHODU:
-Dokončení celé kúry antibiotik.
+Stručný popis hospitalizace:
+Léčen pro gastritidu inhibitory protonové pumpy, bolest ustoupila, dieta byla postupně rozšiřována. Konzultace s ___. Propuštěn ve stabilizovaném stavu.
+PŘECHODNÁ OTÁZKY:
+Dokončit léčbu antibiotiky.
 
 Léky při přijetí:
 Metformin, lisinopril
 
 Léky při propuštění:
-Pantoprazol jednou denně, amoxicilin a clarithromycin dvakrát denně po dobu dvou týdnů, pokračovat s metforminem a lisinoprilem.
+Pantoprazol denně, amoxicilin a klaritromycin dvakrát denně po dobu dvou týdnů, pokračovat v užívání metforminu a lisinoprilu.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -66,13 +66,13 @@ Diabetes
 
 Stav při propuštění:
 Dobrý
-Psychický stav:
-Orientovaný a koherentní
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Vnímavý a komunikativní
+Bdělý a reagující
 
-Pokyny při propuštění:
-Užívejte všechny léky podle předpisu. Vyhýbejte se alkoholu a lékům proti zánětu. V případě zhoršení bolesti, černé stolice nebo zvracení volejte ___ .
+Pokyny pro propuštění:
+Užívejte všechny léky podle předpisu. Vyhýbejte se alkoholu a protizánětlivým lékům. V případě zhoršení bolesti, černých stolic nebo zvracení volejte ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

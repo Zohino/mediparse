@@ -1,73 +1,73 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Obor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest v pravé straně těla
+Bolest v pravé oblasti boku
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let, který se dostavil s bolestí v pravé straně těla a nevolností trvající dva dny. Byl doporučen lékařem ___ k vyšetření a úpravě bolesti.
+___letý muž s postupující bolestí v pravé oblasti boku a nevolností, trvajícími dva dny, odeslán ___ k vyšetření a úlevě od bolesti.
 
-Předchozí zdravotní problémy:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Kameny v ledvinách
-Hyperlipidemie
+Ledvinové kameny
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-V rodině je zaznamenána chronická renální insuficience u otce. Jiné známé problémy s ledvinami nejsou.
+V rodinné anamnéze je významná chronická nemoc ledvin u otce. Jiné známé onemocnění ledvin ne.
 
 Fyzikální vyšetření:
 Celkový stav:
-Nepohodlný, bez známek akutního stavu
-Oblast hlavy, očí, uší, nosu a krku (HEENT):
+Nepohodlí, bez známek akutní tíže
+Hlava, oči, uši, nos, hrdlo:
 Normální
 Krk:
-Flexibilní
+Pružný
 Břicho:
-Mírná bolestivost v pravé straně
+Mírná citlivost v pravé oblasti
 Kůže:
 Teplá, suchá
 Neurologické vyšetření:
-Vědomý, bez specifických neurologických příznaků
+Bdělý, bez ložiskových příznaků
 
-Výsledky vyšetření:
-Analýza moči ukázala přítomnost krve, ale bez známek infekce. Kreatinin v normě. V oblasti ___ byl zobrazen kámen s mírnou hydronefrózou.
+Významné výsledky:
+Vyšetření moči prokázalo krev bez známek infekce. Kreatinin v normě. Kámen je vidět na ___, s mírnou hydronefrózou.
 Zobrazovací metody:
-CT: Kámen o velikosti 4 mm v pravé močové trubici.
+CT: 4mm kámen v pravém močovodu
 
 Léky při přijetí:
 Lisinopril
 Atorvastatin
 
 Léky při propuštění:
-Tamsulosin večer, ibuprofen dle potřeby na bolest, pokračovat v užívání lisinoprilu a atorvastatinu.
+Tamsulosin večer, ibuprofen podle potřeby proti bolesti, pokračovat v užívání lisinoprilu a atorvastatinu.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Kámen v pravé močové trubici
+Kámen v pravém močovodu
 Hypertenze
 
 Stav při propuštění:
 Stabilní, bolest pod kontrolou
 Úroveň vědomí:
-Vědomý a bdělý
-Aktivity:
-Chůze bez pomoci
+Bdělý a při plném vědomí
+Stav aktivity:
+Chodí bez pomoci
 
 Pokyny při propuštění:
-Pijte dostatek tekutin a sledujte moč. V případě horečky, nekontrolovatelné bolesti nebo nemožnosti močit se obraťte na lékaře.
+Pijte dostatek tekutin a moč přeceďte. V případě horečky, nekontrolované bolesti nebo neschopnosti močit se vraťte.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

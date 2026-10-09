@@ -1,28 +1,28 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest v pravém boku a horečka
+Bolest v pravé oblasti boku a horečka
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Žena ve věku ___ let, s horečkou a bolestí v boku trvající tři dny, přijata z ambulance ___ .
-PROHLÍDKA SYSTÉMŮ:
-Pozitivní nález: zimnice a obtížné močení. Jinak negativní.
+___ letá žena s třídenní horečkou a bolestí v oblasti boku, odeslána z ambulance ___.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na třes a dysurii. Jinak negativní.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hypotyreóza
 Opakované infekce močových cest
 
-Chirurgická anamnéza:
+Anamnéza předchozích chirurgických zákroků:
 Apendektomie
 
 Sociální anamnéza:
@@ -32,34 +32,34 @@ Rodinná anamnéza:
 Matka s hypertenzí.
 
 Fyzikální vyšetření:
-Bez horečky, v pohodě, bolestivost v oblasti pravého bederního svalstva.
-ORL:
+Bez horečky, pacientka je v pohodlí, citlivost v pravé oblasti bederních obratlů.
+HLAVA, OČI, UŠI, NOS, KRK:
 Vlhké sliznice
 SRDEČNÍ:
 Pravidelný rytmus
-EXTREMITY:
+Končetiny:
 Bez otoků
 KŮŽE:
 Teplá, suchá
-NEUROLOGIE:
-Vědomá, bez fokálních příznaků
+Neurologické:
+Bdělost, bez ložiskových příznaků
 
 Významné výsledky:
-Vyšetření moči s vysokým obsahem bílých krvinek a bakterií. Kultivace moči prokázala přítomnost bakterie E. coli. Počet bílých krvinek mírně zvýšen.
-ZOBRAZENÍ:
-CT vyšetření prokázalo zánět v oblasti ledviny bez známek obstrukce.
+Vyšetření moči s vysokým počtem bílých krvinek a bakterií. Kultivace moči prokázala přítomnost E. coli. Počet bílých krvinek mírně zvýšený.
+ZOBRAZOVACÍ METODY:
+CT vyšetření prokázalo zánětlivé změny v pravé oblasti kolem ledviny, bez obstrukce.
 
-Průběh hospitalizace:
-Pacientka byla léčena akutní pyelonefritidou intravenózním ceftriaxonem a infuzemi. Horečka ustoupila během dvou dnů a bolest se zlepšila. Kultivace byly citlivé na antibiotika, proto byla před propuštěním převedena na perorální antibiotika.
+Stručný popis hospitalizace:
+Pacientka byla léčena pro akutní pyelonefritidu intravenózním ceftriaxonem a infuzní terapií. Horečka ustoupila během dvou dnů a bolest se zlepšila. Kultivace prokázaly citlivost na antibiotika, proto byla před propuštěním ___ převedena na perorální antibiotika.
 
 Léky při přijetí:
 Lisinopril
-Levothyroxine
+Levotyroxin
 
 Léky při propuštění:
-Ciprofloxacin dvakrát denně po dobu sedmi dnů. Pokračovat v užívání lisinoprilu a levothyroxinu, jako před přijetím.
+Ciprofloxacin dvakrát denně po dobu sedmi dnů. Pokračovat v užívání lisinoprilu a levotyroxinu, jako před přijetím.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
@@ -69,13 +69,13 @@ Akutní pyelonefritida
 
 Stav při propuštění:
 Dobrý.
-Psychický stav:
-Orientovaná a koherentní
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Vědomá a komunikativní
+Bdělý a reagující
 
-Instrukce při propuštění:
-Byla Vám léčena infekce ledvin. Dokončete užívání všech antibiotik, pijte dostatek tekutin a v případě horečky, zvracení nebo zhoršení bolesti se vraťte. V případě dotazů volejte na číslo ___ .
+Pokyny pro propuštění:
+Byla léčena infekce ledvin. Dokončete všechny antibiotika, pijte dostatek tekutin a v případě horečky, zvracení nebo zhoršení bolesti se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

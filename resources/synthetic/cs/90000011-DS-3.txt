@@ -1,21 +1,21 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacient se dostavil na oddělení ___ s třechdenním produktivním kašlem, horečkou a dušností po nedávné návštěvě ___. Rentgen hrudníku ukázal konsolidaci v dolním laloku pravé plíce.
+Pacient se dostavil do ___ se třemi dny trvajícím produktivním kašlem, horečkou a dušností po nedávné návštěvě ___. Rentgen hrudníku ukázal konsolidaci v dolním laloku pravého plíce.
 
-Anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
@@ -25,27 +25,27 @@ Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacient vypadal mírně nemocný.
-Hlava, oči, uši, nos, krk (HEENT):
+Mírně nemocný vzhled
+HLAVA, OČI, UŠI, NOS, KRK:
 Vlhké sliznice
 Krk:
 Pružný
 Plíce:
-Chropy v dolní části pravé plíce
+Krepity v dolní části pravé plíce
 Břicho:
-Měkké, bezbolestné
-Extremity:
-Bez otoků
-Kůže:
+Měkké, netendrovatelné
+Končetiny:
+Žádný edém
+KŮŽE:
 Teplá, suchá
-Pulzy:
-Hmatné
+PULSY:
+Hmatatelné
 
 Významné výsledky:
-Po příjmu zvýšený počet bílých krvinek. Rentgen hrudníku s pneumonií v dolním laloku pravé plíce. Kultivace krve bez růstu bakterií. Kreatinin a elektrolyty v normě.
+Při přijetí zvýšený počet bílých krvinek. Rentgen hrudníku s pneumonií v dolním laloku pravé plíce. Krevní kultury bez růstu. Kreatinin a elektrolyty v normálních mezích.
 
-Průběh hospitalizace:
-Léčba pneumonie získané v komunitě pomocí ceftriaxonu a azithromycinu, následně přechod na perorální antibiotika. Podávání kyslíku bylo postupně ukončeno třetí den. Hladina glukózy byla regulována pomocí inzulinové terapie. Pacienta vyšetřil ___ a propustil ___ .
+Stručný popis hospitalizace:
+Léčen pro komunitně získanou pneumonii pomocí ceftriaxonu a azithromycinu, poté převeden na perorální antibiotika. Podávání kyslíku bylo postupně snižováno a ukončeno třetí den. Hladina glukózy byla regulována pomocí inzulínu. Vyšetřen ___ a propuštěn ___.
 
 Léky při přijetí:
 Metformin
@@ -53,22 +53,22 @@ Lisinopril
 Atorvastatin
 
 Léky při propuštění:
-Metformin 500 mg dvakrát denně. Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů.
+Metformin 500 mg dvakrát denně. Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Amoxicilin-klavulanát dvakrát denně po dobu dalších pěti dnů.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
 Primární:
-Pneumonie získaná v komunitě
-Sekundární: Hypertenze, hyperlipidemie
+Komunitně získaná pneumonie
+Sekundární: Hypertenze, hyperlipidémie
 
 Stav při propuštění:
-Psychický stav: Jasný a soustředěný.
+Duševní stav: Jasný a srozumitelný.
 Aktivita: Samostatný, pohyblivý.
 
-Pokyny při propuštění:
-Byl vám léčen zápal plic. Dokončete veškerá antibiotika, odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršující se dušnosti nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
+Pokyny pro propuštění:
+Byl jste léčen na pneumonii. Dokončete všechny antibiotika, odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

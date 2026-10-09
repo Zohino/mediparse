@@ -1,65 +1,65 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Slabost a snížený objem moči
+Slabost a snížené množství moči
 
-Zásadní chirurgické zákroky nebo invazivní procedury:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž s chronickým onemocněním ledvin, odeslán z ___ kvůli zvýšené hodnotě kreatininu a nedostatečnému příjmu potravy.
+Muž s chronickým onemocněním ledvin, odeslán z ___ kvůli zvýšené hladině kreatininu a špatnému příjmu potravy.
 
-Předchozí zdravotní problémy:
-Fibrilace síní
+Anamnéza předchozích onemocnění:
+Atriální fibrilace
 Hypertenze
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-V rodině matky je diabetes.
+V rodině se vyskytuje diabetes u matky.
 
 Fyzikální vyšetření:
-Celkový stav: Únavný, v pohodě
+Celkový stav: Unavený, v pohodě
 Hlava, oči, uši, nos, hrdlo: Suché sliznice
 Plíce: Čisté
 Břicho: Měkké, bez citlivosti
-Extremity: Bez otoků
+Končetiny: Bez otoků
 
-Relevantní výsledky:
-LABORATOŘ PŘI PŘIJETÍ: Kreatinin výrazně nad základní hodnotu, draslík mírně zvýšený.
-ZÁVĚR: Normální velikost ledvin, žádná obstrukce.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Kreatinin výrazně nad výchozí hodnotou, mírně zvýšené hodnoty draslíku.
+ZÁVĚR: Normální velikost ledvin, bez obstrukce.
 
-Stručný průběh hospitalizace:
-Byly podány tekutiny a diuretika byla dočasně vysazena na ___. Hodnota kreatininu se postupně snižovala směrem k základní hodnotě. Hodnota zůstala pod kontrolou; pacient byl vyšetřen nefrologem.
+Stručný popis průběhu hospitalizace:
+Podávány tekutiny, diuretika dočasně vysazena v ___. Hladina kreatininu se postupně snižovala směrem k výchozí hodnotě. Tlak zůstal pod kontrolou; pacient vyšetřen nefrologem.
 
 Léky při přijetí:
 Metoprolol, apixaban, furosemid
 
 Léky při propuštění:
-Metoprolol a apixaban pokračují. Furosemid byl obnoven v nižší dávce, jakmile ___ doporučí.
+Metoprolol a apixaban pokračují. Furosemid se znovu nasazuje v nižší dávce, jakmile ___ doporučí.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
 Chronické onemocnění ledvin
-Fibrilace síní
+Atriální fibrilace
 
 Stav při propuštění:
 Stabilní
-Psychický stav: Vědomý a orientovaný
-Fyzická aktivita: Chůze samostatná
+Duševní stav: Bdělý a orientovaný
+Fyzická aktivita: Chodí samostatně
 
-Pokyny při propuštění:
-Pravidelně pijte tekutiny, vyhýbejte se protizánětlivým lékům a opakujte krevní testy za jeden týden u ___.
+Pokyny pro propuštěného pacienta:
+Pravidelně pijte tekutiny, vyhýbejte se protizánětlivým lékům proti bolesti a opakujte krevní testy za jeden týden v ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolní vyšetření:
 ___

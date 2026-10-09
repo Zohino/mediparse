@@ -1,23 +1,23 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Nausea a snížený objem moči
+Nevolnost a snížené množství moči
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka, žena ve věku ___ let, s nedostatečně kontrolovanou cukrovkou, se dostavila s třemi dny trvajícími potížemi, jako je nevolnost, snížený příjem potravy a snížený objem moči. Byla odeslána z ambulantní péče ___ po abnormálních laboratorních výsledcích. Popírala horečku a užívala ibuprofen.
+___letá žena s nedostatečně kontrolovanou hladinou cukru v krvi se dostavila s třemi dny trvající nevolností, špatným příjmem potravy a sníženým množstvím moči, odeslána svým ambulantním lékařem ___ po abnormálních výsledcích laboratorních testů. Popírala horečku a užívala ibuprofen.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
@@ -26,37 +26,37 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Životní funkce stabilní, bez horečky.
-Krk: Pružný, bez jícnové dilatace.
-Plíce: Čisté bilaterálně.
-Břicho: Měkké, bez citlivosti, bez distenze.
-Neurologické vyšetření: Vědomá, orientovaná, bez fokálních příznaků.
+Vitalní funkce stabilní, bez horečky.
+Krk: Pohyblivý, bez známek zvýšeného žilního tlaku.
+Plíce: Oboustranně čisté.
+Břicho: Měkké, netendrovatelné, neztuhlé.
+Neurologické vyšetření: Bdělá, orientovaná, bez ložiskových příznaků.
 
 Významné výsledky:
-Kreatinin při přijetí 2,4, základní hodnota blízko 1,0, k propuštění klesl na 1,1. Draslík 5,4 při příjmu, normalizován po léčbě. Glukóza 412. Hemoglobin A1c 11,2 %, bikarbonát 18, zlepšující se. Analýza moči bez patologických nálezů. Ultrazvuk ledvin bez známek obstrukce. Opakovaná laboratorní vyšetření provedená ___ byla stabilní.
+Kreatinin při přijetí 2,4, výchozí hodnota blízko 1,0, při propuštění klesl na 1,1. Draslík 5,4 při přijetí, po léčbě se normalizoval. Glukóza 412. Hemoglobin A1c 11,2 procenta, bikarbonát 18, zlepšení. Vyšetření moči bez patologických nálezů. Ultrazvuk ledvin bez obstrukce. Opakované laboratorní testy provedené ___ byly stabilní.
 
-Průběh hospitalizace:
-Léčena intravenózními tekutinami, přičemž kreatinin se vrátil k základní hodnotě. Ibuprofen byl vysazen. Její cukrovka byla nedostatečně kontrolována; zahájena byla léčba inzulinem, který byl upraven s konzultací endokrinologa od ___. Draslík byl regulován dietou a monitorován. Byla se vyhýbána nefrotoxickým lékům a byla jí poskytnuta edukace o cukrovce. Dobře tolerovala stravu a byla propuštěna ve stabilním stavu.
+Stručný popis hospitalizace:
+Léčena intravenózními tekutinami, kreatinin se vrátil k výchozí hodnotě. Ibuprofen byl vysazen. Její diabetes byl nedostatečně kontrolovaný; byla zahájena léčba inzulínem a dávka byla titrována ve spolupráci s endokrinologem ___. Draslík byl regulován pomocí diety a monitoringu. Byla se vyhýbána nefrotoxickým lékům a pacientka byla poučena o léčbě diabetu. Dobře snášela dietu a byla propuštěna ve stabilním stavu.
 
 Léky při přijetí:
-Metformin 1000 mg dvakrát denně, ibuprofen dle potřeby.
+Metformin 1000 mg dvakrát denně, ibuprofen podle potřeby.
 
 Léky při propuštění:
-Insulin glargin 20 jednotek večer. Insulin lispro s jídlem dle dávkovací tabulky. Atorvastatin 20 mg denně. Paracetamol dle potřeby. Lékárna ___ má zajistit glukometr.
+Inzulín glargin 20 jednotek večer. Inzulín lispro k jídlu podle klouzavé škály. Atorvastatin 20 mg denně. Paracetamol podle potřeby. Lékárna ___ zajistí glukometr.
 
-Plán po propuštění:
+Plán propuštění:
 Domů s péčí od ___
 
 Diagnóza při propuštění:
 Diabetes mellitus, nedostatečně kontrolovaný
 
 Stav při propuštění:
-Psychický stav: Jasný a koherentní.
-Úroveň vědomí: Vědomá a komunikativní.
-Funkční stav: Chůze, soběstačná.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a komunikativní.
+Fyzická aktivita: Chodí, soběstačná.
 
-Pokyny při propuštění:
-Vyhýbejte se ibuprofenu a podobným analgetikům. Pravidelně pijte tekutiny a kontrolujte hladinu cukru v krvi před jídlem. V případě zvracení, velmi malého množství moči nebo zmatenosti se obraťte na lékaře. V případě dotazů volejte do ambulance ___ .
+Pokyny pro propuštění:
+Vyhýbejte se ibuprofenu a podobným lékům proti bolesti. Pravidelně pijte tekutiny a kontrolujte si hladinu cukru v krvi před jídlem. V případě zvracení, velmi nízkého množství moči nebo zmatenosti se vraťte. V případě dotazů volejte na kliniku ___.
 
-Následná péče:
+Pokyny pro kontrolu:
 ___

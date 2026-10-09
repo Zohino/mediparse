@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,18 +9,18 @@ Alergie:
 Hlavní potíže:
 Dušnost
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let, který se dostavil na pohotovost s dušností a kašlem trvajícím tři dny. Byl nalezen v hypoxickém stavu s pískáním v plicích.
+___letý muž s dušností při námaze a kašlem trvajícím tři dny, přišel na pohotovost ___, kde bylo zjištěno, že má hypoxii a sípání.
 
-Osobní anamnéza:
-Fibrilace síní
+Anamnéza předchozích onemocnění:
+Atriální fibrilace
 Hypertenze
-Chronická obstrukční plicní nemoc (CHOPN)
+CHOPN
 
-Chirurgická anamnéza:
+Anamnéza předchozích chirurgických zákroků:
 Apendektomie
 
 Sociální anamnéza:
@@ -31,29 +31,29 @@ Otec s hypertenzí
 
 Fyzikální vyšetření:
 Celkový stav:
-Mírně nepohodlný, mluví kompletními větami
-Oblast hlavy, očí, uší, nosu a krku (ORL):
+Mírně nepohodlný, mluví v celých větách
+Hlava, oči, uši, nos, hrdlo:
 Vlhké sliznice
 Plíce:
-Difúzní pískání při výdechu
+Difúzní sípání při výdechu
 Neurologické vyšetření:
-Vědomý, bez fokálních příznaků
+Orientovaný, bez ložiskových příznaků
 
 Významné výsledky:
-Rentgen hrudníku z ___ ukazuje hyperinflaci bez ložiskové konsolidace. Krevní obraz a elektrolyty bez odchylek.
+Rentgen hrudníku z ___ ukazuje hyperinflaci bez ložiskové konsolidace. Krevní obraz a elektrolyty v normě.
 ZÁVĚR:
 Žádná pneumonie.
 
-Průběh hospitalizace:
-Léčba exacerbace CHOPN pomocí inhalačních léků, kortikosteroidů a krátké antibiotické terapie. Podávání kyslíku bylo postupně snižováno do úrovně pokojového vzduchu k datu ___. Frekvence zůstala kontrolovaná pomocí domácích léků. Pacient chodil samostatně před propuštěním.
+Stručný popis hospitalizace:
+Léčen pro exacerbaci CHOPN pomocí inhalátorů, kortikosteroidů a krátkodobé antibiotické terapie. Podávání kyslíku bylo postupně snižováno, až pacient dýchal pouze okolní vzduch do ___. Stav se udržoval pod kontrolou pomocí domácí medikace. Před propuštěním chodil samostatně.
 
-Léky při přijetí:
+Medikace při přijetí:
 Metoprolol, apixaban, inhalátor s albuterolem
 
-Léky při propuštění:
-Pokračujte v užívání metoprololu, apixabanu a albuterolu. Zahajte postupnou redukci prednisonu po dobu pěti dnů. Přidejte azithromycin k dokončení léčby.
+Medikace při propuštění:
+Pokračovat v užívání metoprololu, apixabanu a albuterolu. Zahájit snižování dávky prednisonu po dobu pěti dnů. Přidat azithromycin pro dokončení léčby.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -61,13 +61,13 @@ Exacerbace CHOPN
 Hypertenze
 
 Stav při propuštění:
-Mentální stav:
-Orientovaný a koherentní
-Funkční stav:
-Samostatný, pohyblivý
+Duševní stav:
+Jasný a srozumitelný
+Fyzická aktivita:
+Chodí, soběstačný
 
-Instrukce při propuštění:
-Byl vám poskytnut lék na zhoršení dýchání. Užívajte všechny léky podle předpisu, vyhýbejte se kouření a v případě zhoršení dušnosti nebo horečky se vraťte. V případě dotazů volejte na číslo ___.
+Pokyny pro propuštěného pacienta:
+Byl jste léčen pro zhoršení dýchacích potíží. Užívejte všechny léky podle předpisu, vyhýbejte se kouření a v případě zhoršení dušnosti nebo horečky se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

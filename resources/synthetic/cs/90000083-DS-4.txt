@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Kardiologie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Kardiologie
+Datum přijetí: ___ Číslo pokoje: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,57 +9,57 @@ Alergie:
 Hlavní potíže:
 Bušení srdce a závratě
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní vyšetření:
+Žádný
 
-Anamnéza:
-Muž ve věku ___ let s diagnostikovanou fibrilací síní se dostavil na oddělení ___ po dvou dnech silného bušení srdce a mírných závratí. Symptomy se začaly objevovat ___ během odpočinku. Nebyly hlášeny bolesti na hrudi, synkopa ani horečka.
+Anamnéza současného onemocnění:
+___letý muž s anamnézou fibrilace síní se dostavil do ___ po dvou dnech, kdy pociťoval zrychlený srdeční tep a mírné závratě. Příznaky se objevily ___ během odpočinku. Nebyly hlášeny bolesti na hrudi, synkopa ani horečka.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hyperlipidemie
 
-Chirurgická anamnéza:
-Apendektomie na ___
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec utrpěl mrtvici v sedmdesáti letech.
+Otec, který v sedmdesátých letech prodělal cévní mozkovou příhodu
 
 Fyzikální vyšetření:
-Vitální funkce:
-Srdeční frekvence 118, krevní tlak 128/76, bez horečky, saturace 98 % při pokojovém vzduchu
+Vitalní funkce:
+Srdeční frekvence 118, krevní tlak 128/76, bez horečky, saturace 98 % při dýchání okolního vzduchu
 Celkový stav:
-Pacient je v pohodě, bez známek utrpení
+Dobře se cítí, bez známek úzkosti
 Hlava, oči, uši, nos, hrdlo:
 Vlhké sliznice
 Krk:
-Pružný, bez jícnové dilatace
+Pružný, bez známek zvýšeného žilního tlaku
 Plíce:
-Čisté bilaterálně
+Oboustranně čisté
 Břicho:
-Měkké, bez citlivosti
+Měkké, netendrové
 Neurologické vyšetření:
-Orientovaný, bez fokálních příznaků
+Bdělý, bez ložiskových příznaků
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PŘIJETÍ:
-Troponin negativní dvakrát, draslík 4,1, hořčík 2,0, TSH normální
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Draslík 4,3, kreatinin stabilní, hemoglobin 14,2. EKG ukázalo nepravidelný, úzký komplexový rytmus bez ischemických změn.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Dvakrát negativní troponin, draslík 4,1, hořčík 2,0, TSH v normě
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Draslík 4,3, kreatinin stabilní, hemoglobin 14,2. EKG ukázalo nepravidelný srdeční rytmus s úzkými komplexy bez ischemických změn.
 
-Průběh hospitalizace:
-Srdeční frekvence byla kontrolována perorálním metoprololem a symptomy ustoupily během jednoho dne. Antikoagulace byla pokračována po konzultaci s kardiologem, Dr. ___. Echokardiogram byl uspokojivý. Pacient byl stabilní, pohyblivý a byl propuštěn s plánovanou ambulantní kontrolou na ___.
+Stručný popis hospitalizace:
+Frekvence byla kontrolována perorálním metoprololem a příznaky ustoupily během jednoho dne. Po konzultaci s kardiologem, Dr. ___, bylo pokračováno v antikoagulační terapii. Echokardiogram byl uklidňující. Pacient byl stabilní, mohl chodit a byl propuštěn s naplánovanou kontrolou v ambulanci na ___.
 
 Léky při přijetí:
 Metoprolol, apixaban, atorvastatin, lisinopril
 
 Léky při propuštění:
-Metoprolol succinate 100 mg denně. Apixaban 5 mg dvakrát denně. Atorvastatin 40 mg večer. Lisinopril 10 mg denně. Pokračujte ve všech dávkách, které užíváte doma.
+Metoprolol succinat 100 mg denně. Apixaban 5 mg dvakrát denně. Atorvastatin 40 mg večer. Lisinopril 10 mg denně. Pokračujte ve všech dávkách, které užíváte doma.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -67,15 +67,15 @@ Primární:
 Fibrilace síní s rychlou ventrikulární odpovědí
 
 Stav při propuštění:
-Psychický stav:
-Orientovaný a koherentní
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Orientovaný a komunikativní
-Funkční stav:
-Pohyblivý, soběstačný
+Bdělý a reagující
+Fyzická aktivita:
+Chodí, soběstačný
 
-Instrukce při propuštění:
-Byl jste hospitalizován kvůli rychlému a nepravidelnému srdečnímu tepu. Užívajte léky podle předpisu, zejména ředidlo krve. V případě bolesti na hrudi, mdloby nebo zhoršení bušení srdce se vraťte, a nezapomeňte na kontrolu u kardiologa na ___.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli rychlému a nepravidelnému srdečnímu tepu. Užívajte léky podle předpisu, zejména léky na ředění krve. V případě bolesti na hrudi, mdlob nebo zhoršení bušení srdce se vraťte a dodržujte termín kardiologické kontroly na ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

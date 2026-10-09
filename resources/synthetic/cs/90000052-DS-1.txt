@@ -1,24 +1,24 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
-Bolest v pravém boku a horečka
+Bolest v pravé oblasti boku a horečka
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka, ___ let, s bolestí v pravém boku, horečkou a pálením při močení trvajícím tři dny, odeslána z ambulance ___ . V pohotovostní ambulanci byla horečnatá a s tachykardií, vyšetření moči bylo abnormální a před přijetím jí byly podány intravenózní tekutiny a antibiotika z důvodu pyelonefritidy, s příznaky od ___.
+___ letá žena s třídenní anamnézou bolesti v pravé oblasti boku, horečkou a pálením při močení, odeslána z kliniky ___. Na pohotovosti měla horečku a zrychlený srdeční tep, vyšetření moči bylo abnormální a před přijetím pro pyelonefritidu, která se projevuje od ___, jí byly podány intravenózně tekutiny a antibiotika.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Opakované infekce močových cest
 
 Sociální anamnéza:
@@ -28,17 +28,17 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
 Celkový stav: komfortní, bez horečky
-Oblast hlavy, očí, uší, nosu a krku: vlhké sliznice
-Plíce: čisté bilaterálně
+Hlava, oči, uši, nos, hrdlo: vlhké sliznice
+Plíce: čisté na obou stranách
 Srdce: pravidelný rytmus
-Břicho: měkké, mírná bolestivost v pravém boku
-Extremity: bez otoků
+Břicho: měkké, mírná citlivost v pravé oblasti boku
+Končetiny: bez otoků
 Kůže: teplá, suchá
 
 Významné výsledky:
-Kultivace moči prokázala přítomnost E. coli, citlivou na ceftriaxon. Počet leukocytů 14,2 při přijetí, snížil se na 8,1 při propuštění. Kreatinin stabilní. Kultivace krve byla negativní dne ___.
+Kultivace moči prokázala přítomnost E. coli, citlivé na ceftriaxon. Počet bílých krvinek 14,2 při přijetí, snížil se na 8,1 při propuštění. Kreatinin stabilní. Kultivace krve negativní ___.
 ZÁVĚR:
 Ultrazvuk ledvin bez hydronefrózy nebo kamenů.
 
@@ -47,26 +47,26 @@ Metformin 500 mg dvakrát denně
 Lisinopril 10 mg denně
 
 Léky při propuštění:
-1. Cefpodoxim 200 mg dvakrát denně po dobu 7 dnů
+1. Cefpodoxim 200 mg dvakrát denně po dobu dalších 7 dnů
 2. Metformin 500 mg dvakrát denně
 3. Lisinopril 10 mg denně
-4. Paracetamol dle potřeby na bolest
+4. Paracetamol podle potřeby proti bolesti
 
-Místo propuštění:
+Plán propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
 Akutní pyelonefritida
-Bakteriémie způsobená Escherichia coli
+Escherichia coli bakterémie
 
 Stav při propuštění:
 Stabilní a zlepšený.
-Psychický stav: jasný a koherentní.
-Úroveň vědomí: bdělý a komunikativní.
+Duševní stav: jasný a srozumitelný.
+Úroveň vědomí: bdělý a reagující.
 
-Pokyny při propuštění:
-Byla vám poskytnuta léčba infekce ledvin. Dokončete veškerá antibiotika a pijte dostatek tekutin. V případě horečky, zvracení nebo zhoršení bolesti zad se vraťte. V případě dotazů kontaktujte Dr. ___ na telefonním čísle ___, a nezapomeňte na kontrolní prohlídku dne ___.
+Pokyny pro propuštění:
+Byla jste léčena pro infekci ledvin. Dokončete všechny antibiotika a pijte dostatek tekutin. V případě horečky, zvracení nebo zhoršení bolesti zad se vraťte. V případě dotazů volejte doktora ___ na číslo ___ a nezapomeňte na kontrolní návštěvu ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

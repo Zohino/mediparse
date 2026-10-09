@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,16 +9,16 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka byla přijata do nemocnice ___ s třidenním produktivním kašlem, horečkou a únavou. Byla odeslána z ambulance ___ poté, co byla naměřena nízká saturace kyslíkem. Rentgen hrudníku naznačoval zápal plic v dolní části pravého plíce.
+Pacientka vyšetřena na ___ s třídenní anamnézou produktivního kašle, horečky a únavy. Byla odeslána z ambulance dne ___ poté, co byla zjištěna nízká saturace kyslíkem. Rentgen hrudníku naznačoval pneumonii v dolním laloku pravého plíce.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
-Apendektomie v roce ___
+Hyperlipidémie
+Apendektomie v ___
 
 Sociální anamnéza:
 ___
@@ -27,20 +27,20 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Životní funkce: T 38,1, HR 92, BP 128/76, RR 18, SpO2 95 % při pokojové teplotě
-Celkový stav: Únavná, bez známek utrpení
-Hlava, oči, uši, nos, hrdlo: Vlhká sliznice
-Krk: Pružný
-Břicho: Měkké, bez citlivosti
-EXTREMITY: Bez otoků
+Vitalní funkce: T 38,1, TF 92, TK 128/76, dechová frekvence 18, SpO2 95 % při dýchání okolním vzduchem
+Celkový stav: Unavená, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Krk: Pohyblivý
+Břicho: Měkké, netendrovatelné
+Končetiny: Bez otoků
 
 Významné výsledky:
-Laboratorní výsledky při přijetí ukázaly mírnou leukocytózu a zvýšenou hladinu glukózy. Rentgen hrudníku provedený ___ ukázal ztmavení v dolní části pravého plíce.
+Laboratorní vyšetření při přijetí ukázala mírnou leukocytózu a zvýšenou hladinu glukózy. Rentgen hrudníku provedený na ___ ukázal opacitu v dolním laloku pravé plíce.
 ZÁVĚR:
-Zápal plic v dolní části pravého plíce, bez výpotku.
+Pneumonie v dolním laloku pravé plíce, bez výpotku.
 
-Průběh hospitalizace:
-Byla léčena intravenózně ceftriaxonem a azithromycinem, poté byla léčba převedena na perorální antibiotika, jakmile ustoupila horečka. Podávání kyslíku bylo postupně ukončeno druhý den. Hladina glukózy byla monitorována a regulována pomocí dávkování inzulínu podle ___. Zlepšila se a byla propuštěna domů po posouzení lékařem ___.
+Stručný popis hospitalizace:
+Byla léčena intravenózním ceftriaxonem a azithromycinem, poté byla převedena na perorální antibiotika, jakmile ustoupila horečka. Podávání kyslíku bylo postupně snižováno a ukončeno druhý den. Hladina glukózy byla monitorována a regulována pomocí inzulínu podle schématu ___. Její stav se zlepšil a byla propuštěna domů po vyšetření lékařem ___.
 
 Léky při přijetí:
 Lisinopril denně
@@ -51,24 +51,24 @@ Léky při propuštění:
 Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů
 Lisinopril denně
 Atorvastatin večer
-Metformin dvakrát denně s jídlem
-Paracetamol dle potřeby při horečce
+Metformin dvakrát denně během jídla
+Paracetamol podle potřeby při horečce
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Komunitní zápal plic
+Komunitně získaná pneumonie
 Diabetes mellitus
 
 Stav při propuštění:
-Psychický stav: Jasný a srozumitelný
-Úroveň vědomí: Vnímavá a komunikativní
-Funkční stav: Chůze, soběstačná
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a reagující
+Stav aktivity: Chodící, soběstačná
 
-Pokyny při propuštění:
-Byla hospitalizována pro zápal plic a léčena antibiotiky. Dokončete všechny předepsané léky, odpočívejte a pijte dostatek tekutin. V případě zhoršení dýchání, bolesti na hrudi nebo přetrvávající horečky se vraťte. Prosím, dodržte svůj termín návštěvy u ___ podle plánu.
+Pokyny pro propuštění:
+Byli jste hospitalizováni s pneumonií a léčeni antibiotiky. Dokončete všechny předepsané léky, odpočívejte a pijte dostatek tekutin. V případě zhoršení dýchání, bolesti na hrudi nebo přetrvávající horečky se vraťte. Prosím, dodržujte naplánovanou kontrolu u ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

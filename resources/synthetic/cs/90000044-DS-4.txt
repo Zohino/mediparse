@@ -1,21 +1,21 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Bolest a otok pravé nohy
 
-Zásahné chirurgické zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Žena přišla s tříměsíční progresi zarudnutí, tepla a bolesti pravé nohy po prasknutí malé puchýřky doma. Uvedla, že měla zimnici, ale nezvracela. Byla vyšetřena v ambulanci ___ a poté odeslána na pohotovost ___ k dalšímu vyšetření.
+Pacientka se dostavila s třemi dny trvajícím zhoršováním zarudnutí, tepla a bolesti pravé nohy po prasknutí malé puchýřky doma. Uvádí, že má zimnici, ale nepozorovala zvracení. Byla vyšetřena v ambulanci ___, poté odeslána na pohotovost ___ k dalšímu vyšetření.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Obezita
 Neuropatie
@@ -24,44 +24,44 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s mrtvicí
+Matka s cévní mozkovou příhodou
 
 Fyzikální vyšetření:
-Celkový stav: Pacientka je v pohodě, bez známek utrpení.
-Hlava, oči, uši, nos, hrdlo: Vlhká sliznice.
-Plíce: Čisté bilaterálně.
-Břicho: Měkké, bez citlivosti.
-Extremity: Pravá noha je teplá, oteklá, erytematická.
-Kůže: Malý vřed na plantě.
-Neurologické vyšetření: Pacientka je při vědomí, orientovaná.
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Plíce: Čisté na obou stranách
+Břicho: Měkké, netendrovatelné
+Končetiny: Pravá noha teplá, oteklá, zarudlá
+Kůže: Malý vřed na plosce nohy
+Neurologické vyšetření: Bdělá, orientovaná
 
 Významné výsledky:
-Laboratorní výsledky ukázaly mírnou leukocytózu a zvýšenou hodnotu kreatininu blízko základní hodnoty. Kultivace krve z ___ byly negativní.
-Zobrazovací metody: Rentgenové vyšetření pravé nohy.
-ZÁVĚR: Otok měkkých tkání bez přítomnosti plynu nebo destrukce kostí. Bez známek osteomyelitidy.
+Laboratorní testy prokázaly mírnou leukocytózu a zvýšenou hladinu kreatininu blízko výchozí hodnoty. Krevní kultury z ___ byly negativní.
+Zobrazovací metody: Rentgen pravé nohy
+Závěr: Otékání měkkých tkání bez přítomnosti plynu nebo destrukce kosti. Žádné známky osteomyelitidy.
 
-Průběh hospitalizace:
-Byla léčena pro celulitidu pravé nohy s vředem, podána intravenózně vankomycin, následně perorálně doxycyklin z důvodu alergie. Diabetes byl kontrolován inzulinem a hladina glukózy se zlepšila. Chronické onemocnění ledvin bylo stabilní a vyhýbala se se užívání nefrotoxických látek. Podiatrická ambulance ___ provedla ošetření vředu a zajistila péči o ránu v zařízení ___.
+Stručný popis hospitalizace:
+Byla léčena pro celulitidu pravé nohy s vředem, podáváno intravenózně vankomycin, poté perorálně doxycyklin, vzhledem k její alergii. Její diabetes byl kontrolován inzulinem a hladina glukózy se zlepšila. Její chronické onemocnění ledvin bylo stabilní a vyhýbala se nefrotoxickým látkám. Podiatr z ___ provedl debridement vředu a zajistil péči o ránu v ___.
 
 Léky při přijetí:
-Metformin, lisinopril, amlodipin, atorvastatin.
+Metformin, lisinopril, amlodipin, atorvastatin
 
-Plán po propuštění:
-Domů s péčí.
+Plán propuštění:
+Domů s doprovodnou péčí
 Zařízení: ___
 
 Diagnóza při propuštění:
-Celulitida pravé nohy.
-Hlavní diagnóza: Celulitida pravé nohy s vředem na plantě.
-Chronické onemocnění ledvin.
+Celulitida pravé nohy
+Primární: Celulitida pravé nohy s vředem na plosce nohy
+Chronické onemocnění ledvin
 
 Stav při propuštění:
-Stabilní.
-Úroveň vědomí: Při vědomí a komunikativní.
-Funkční stav: Chůze s ortopedickou obuví.
+Stabilní
+Úroveň vědomí: Bdělá a komunikativní
+Stav aktivity: Chodí s ortézou
 
-Pokyny při propuštění:
-Byla Vám léčena infekce nohy. Užívajte doxycyklin podle předpisu a udržujte obvaz čistý a suchý. Noste ortopedickou obuv při chůzi. Kontrolujte si nohy denně. V případě horečky, rozšíření zarudnutí, výtoku nebo zhoršení bolesti se obraťte na ___ . V případě dotazů volejte ___.
+Pokyny pro propuštění:
+Byla léčena pro infekci nohy. Užívajte doxycyklin podle předpisu a udržujte obvaz čistý a suchý. Noste ortézu při chůzi. Denně kontrolujte své nohy. V případě horečky, šíření zarudnutí, výtoku nebo zhoršení bolesti se vraťte do ___. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

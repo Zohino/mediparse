@@ -1,22 +1,22 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Nefrologie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Nefrologie
+Datum přijetí: ___ Číslo pokoje: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Únava a snížený objem moči
+Únava a snížené množství moči
 
-Zásahové zákroky:
-Žádné, vyšetření u lůžka v ___
+Významnější chirurgický zákrok nebo invazivní vyšetření:
+Žádný, vyšetření u lůžka pacienta na ___
 
 Anamnéza současného onemocnění:
-Pacient se dostavil na oddělení ___ se zhoršující se únavou, nevolností a sníženým objemem moči, které trvaly tři dny po virové infekci. Uvedl snížený příjem potravy a mírný otok nohou. Byl doporučen nefrologem z ___ k vyšetření zvýšené hodnoty kreatininu a byl přijat k monitorování a podpůrné péči.
+Pacient se dostavil do ___ s třemi dny trvající se zhoršující únavou, nevolností a sníženým množstvím moči po virovém onemocnění. Uváděl špatný příjem potravy a mírný otok nohou. Byl odeslán svým nefrologem z ___ k vyšetření zvýšené hladiny kreatininu a přijat k monitorování a podpůrné péči.
 
-Předchozí zdravotní problémy:
-Chronické onemocnění ledvin, hypertenze, dna, anémie spojená s chronickým onemocněním, dříve sledován v ___
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin, hypertenze, dna, anémie chronického onemocnění, dříve sledován v ___
 
 Sociální anamnéza:
 ___
@@ -25,22 +25,22 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Bez horečky, v pohodě, bez akutních potíží.
+Bez horečky, v pohodlí, bez akutních potíží.
 Plíce: Čisté na obou stranách.
-SRDEČNÍ: Pravidelná frekvence a rytmus, bez šelestu.
-PULZY: Hmatatelné a symetrické na všech končetinách, s minimálním otokem kotníků.
+SRDEČNÍ: Pravidelný rytmus, bez šelestu.
+PULSY: Hmatné a symetrické na všech končetinách, s mírným otokem kotníků.
 
 Významné výsledky:
-LABORATOŘ PŘI PŘIJETÍ: Kreatinin 3,4, urea 58, draslík 5,3, bikarbonát 19, hemoglobin 10,2, sodík 138, odebráno v ___.
-ZÁVĚR: Ultrazvuk ledvin ukazuje malé, echogenní ledviny bez hydronefrózy. Rentgen hrudníku ukazuje čisté plíce a normální srdeční stín.
+VÝSLEDKY PŘIJÍMACÍCH VYŠETŘENÍ: Kreatinin 3,4, BUN 58, draslík 5,3, bikarbonát 19, hemoglobin 10,2, sodík 138, odebráno na ___.
+ZÁVĚR: Ultrazvuk ledvin ukazuje malé echogenní ledviny bez hydronefrózy. Rentgen hrudníku ukazuje čisté plíce a normální srdeční stín.
 
-Průběh hospitalizace:
-Pacient dostával intravenózní tekutiny, hladina draslíku byla korigována dietou a pomocí léku. Hodnota kreatininu se stabilizovala na hodnotě blízké základní. Nemá cukrovku a jeho hemoglobin A1c byl normální. Nefrologické oddělení v ___ ho vyšetřilo a naplánovalo kontrolní vyšetření na ___. Pacient toleroval stravu a chodil samostatně před propuštěním.
+Stručný průběh hospitalizace:
+Pacient dostával jemné intravenózní tekutiny a hladina draslíku byla korigována dietními opatřeními a užíváním přípravku, který draslík váže. Hladina kreatininu se stabilizovala blízko výchozí hodnoty. Nemá diabetes a jeho hemoglobin A1c byl v normě. Nefrolog z ___ ho vyšetřil a naplánoval kontrolu na ___. Před propuštěním toleroval dietu a chodil samostatně.
 
 Léky při propuštění:
-Amlodipin 5 mg denně, allopurinol 100 mg denně, bikarbonát sodný 650 mg dvakrát denně, acetát vápenatý při jídle. Neužívejte ibuprofen a další protizánětlivé léky.
+Amlodipin 5 mg denně, allopurinol 100 mg denně, hydrogenuhličitan sodný 650 mg dvakrát denně, acetát vápenatý s jídlem. Vyvarujte se užívání ibuprofenu a dalších protizánětlivých léků proti bolesti.
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
@@ -49,11 +49,11 @@ Chronické onemocnění ledvin
 
 Stav při propuštění:
 Stabilní
-Úroveň vědomí: Vědomý a orientovaný, komunikativní.
-Funkční stav: Chůze, samostatný.
+Úroveň vědomí: Bdělý a orientovaný, komunikativní.
+Stav aktivity: Chodí, je soběstačný.
 
 Pokyny při propuštění:
-Byl jste přijat pro monitorování ledvin. Pijte tekutiny podle doporučení a vyhýbejte se protizánětlivým lékům. Zvažujte se každý den ráno. Zavolejte na číslo ___ v případě snížení objemu moči nebo zhoršení otoku a dodržujte termín laboratorního vyšetření v ___.
+Byli jste přijati k monitorování ledvin. Pijte tekutiny podle doporučení a vyhýbejte se protizánětlivým lékům. Každé ráno se zvažte. Volejte na ___, pokud se sníží množství moči nebo se zhorší otok, a dodržujte termín laboratorního vyšetření na ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

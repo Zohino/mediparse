@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,36 +9,36 @@ Alergie:
 Hlavní potíže:
 Otok nohou a dušnost
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Muž ve věku ___ let s chronickým onemocněním ledvin, který se dostavil do ___ s třemi dny zhoršujícího se otoku nohou, dušnosti při námaze a sníženým množstvím moči po vyčerpání diuretika dne ___. Při příjmu neměl horečku a byl hemodynamicky stabilní, a proto byl přijat do nemocnice.
+Anamnéza současného onemocnění:
+___letý muž s chronickým onemocněním ledvin, který se dostavil do ___ s třídenní anamnézou zhoršujícího se otoku nohou, dušnosti při námaze a sníženého objemu moči poté, co mu došly diuretika ___. Při přijetí neměl horečku a byl hemodynamicky stabilní, a proto byl hospitalizován.
 
-Předchozí zdravotní problémy:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
-Dna, sledována v ___
+Hypertenze
+Hyperlipidémie
+DNA, sledován v ___
 
 Sociální anamnéza:
 ___
 
 Fyzikální vyšetření:
-Sliznice vlhké, bez žloutenky.
-Krk: Zvýšený tlak v žilách.
-Břicho: Měkké, bez bolesti, mírně napjaté.
-Extremity: Otok s důlky až po kolena na obou nohou.
+HEENT: Vlhké sliznice, bez ikteru.
+Krk: Zvýšená jugulární venózní tlak.
+Břicho: Měkké, netendrovatelné, mírně distendované.
+Končetiny: Edém s prohlubněmi až po kolena oboustranně.
 
 Významné výsledky:
-Kreatinin při přijetí 3,1, základní hodnota blízko 1,6. Draslík 5,4, BNP výrazně zvýšen. Kreatinin se zlepšil na 2,0 do dne ___, přičemž hladina draslíku se normalizovala. Troponin v normě.
-ZOBRAZENÍ:
-Rentgen hrudníku ukázal městnání v plicních cévách a malé bilaterální výpotky.
+Kreatinin při přijetí 3,1, výchozí hodnota kolem 1,6. Draslík 5,4, BNP výrazně zvýšené. Kreatinin se zlepšil na 2,0 do ___, draslík se normalizoval. Troponin bez změn.
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku ukázal plicní vaskulární kongesci a malé oboustranné výpotky.
 
-Průběh hospitalizace:
-Přijat s dekompenzovaným srdečním selháním a zhoršující se funkcí ledvin. Léčen v ___ intravenózním furosemidem, s dobrým účinkem diurézy a postupným zlepšováním kreatininu. Lisinopril byl vysazen. Dosáhl optimální váhy do dne ___ a dýchání se vrátilo k normálu.
-DŮLEŽITÉ ASPEKTY PŘI PROPUŠTĚNÍ:
-Opakované laboratorní testy do jednoho týdne; zhodnotit možnost obnovení léčby lisinoprilem.
+Stručný průběh hospitalizace:
+Přijat s dekompenzovaným srdečním selháním a zhoršující se funkcí ledvin. Léčen v ___ intravenózním furosemidem, s dobrým diuretickým účinkem a postupným zlepšením kreatininu. Lisinopril byl vysazen. Do ___ dosáhl optimální hmotnosti a dýchání se vrátilo do normálu.
+PŘECHODNÁ OTÁZKY:
+Opakované vyšetření biochemie krve do jednoho týdne; zvážit opětovné nasazení lisinoprilu.
 
 Léky při přijetí:
 Lisinopril 20 mg denně
@@ -50,9 +50,9 @@ Furosemid 80 mg perorálně denně
 Metformin 500 mg perorálně dvakrát denně
 Atorvastatin 40 mg večer
 Aspirin 81 mg denně
-Lisinopril vysazen do doby konzultace s lékařem.
+Lisinopril vysadit do kontroly v ambulanci
 
-Plán po propuštění:
+Plán propuštění:
 Domů s péčí od ___
 
 Diagnóza při propuštění:
@@ -60,12 +60,12 @@ Diabetes mellitus 2. typu
 Chronické onemocnění ledvin
 
 Stav při propuštění:
-Psychický stav: Jasný a srozumitelný.
-Úroveň vědomí: Vnímavý a komunikativní.
-Funkční stav: Chůze, soběstačný.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
 
-Pokyny při propuštění:
-Byl jste hospitalizován kvůli přetížení tekutinami. Zvažujte se každý den ráno a volejte ___ v případě, že se vaše váha během dne zvýší o více než 1,4 kg. Omezte příjem soli a tekutin, užívejte léky podle pokynů a v případě zhoršení dušnosti se vraťte.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zadržování tekutin. Každé ráno se važte a volejte ___, pokud se vaše hmotnost během jednoho dne zvýší o více než jeden a půl kilogramu. Omezte příjem soli a tekutin, užívejte léky podle seznamu a v případě zhoršení dušnosti se vraťte.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

@@ -1,47 +1,47 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Rána na noze a únava
+Poranění nohy a únava
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž, který se dostavil s několika dny zhoršující se únavy, žízně a hnisající ránou na noze. Byl vyšetřen v ___ dříve tento týden a odeslán do ___ k dalšímu vyšetření.
+Muž, který se dostavil s několik dní trvající se zhoršující únavou, žízní a hnisající ranou na noze. Tento týden byl vyšetřen v ___ a odeslán do ___ k dalšímu vyšetření.
 
-Osobní anamnéza:
-Hyperlipidemie
+Anamnéza předchozích onemocnění:
+Hyperlipidémie
 Předchozí apendektomie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s mrtvicí
+Matka s cévní mozkovou příhodou
 
 Fyzikální vyšetření:
-Hlava, oči, uši, nos, hrdlo:
+HEENT (hlava, oči, uši, nos, hrdlo):
 Suché sliznice
 Krk:
-Flexibilní
-Extremity:
-Vřed na levé noze, mírná zarudnutí, pulz je přítomen
+Pružný
+Končetiny:
+Na levé noze vřed, mírné zarudnutí, přítomny pulzy
 
 Významné výsledky:
-Hladina glukózy výrazně zvýšená při příjmu, zlepšila se do propuštění. Kultivace z ___ nevykazovaly žádný růst.
+Při přijetí výrazně zvýšená hladina glukózy, při propuštění se zlepšila. Kultivace z ___ nevykázala žádný růst.
 ZÁVĚR:
-Na rentgenovém snímku nohy nebyla zjištěna žádná destrukce kostí.
+Na rentgenovém snímku nohy nejsou patrné žádné destrukce kostí.
 
-Průběh hospitalizace:
-Pacient dostával intravenózní tekutiny, inzulin a antibiotika, a také péči o ránu od ___. Hladina glukózy se stabilizovala a rána se zlepšila.
-PROBLÉMY PŘI PŘECHODU:
-Kontrola rány a záznamů o hladině glukózy při kontrolní prohlídce.
+Stručný popis hospitalizace:
+Pacientovi byly podávány intravenózně tekutiny, inzulin a antibiotika, a zároveň mu byla poskytována péče o ránu od ___. Hladina glukózy se stabilizovala a stav rány se zlepšil.
+PŘECHODNÁ OTÁZKY:
+Při kontrolní návštěvě znovu zkontrolovat stav rány a zaznamenávat hladinu glukózy.
 
 Léky při přijetí:
 Atorvastatin 20 mg večer
@@ -51,7 +51,7 @@ Atorvastatin 20 mg večer
 Metformin 500 mg dvakrát denně
 Cefalexin 500 mg čtyřikrát denně po dobu jednoho týdne
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -59,15 +59,15 @@ Diabetes mellitus
 Vřed na noze
 
 Stav při propuštění:
-Psychický stav:
-Orientovaný a koherentní
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Vnímavý a komunikativní
-Funkční stav:
-Chůze, soběstačný
+Bdělý a reagující
+Stav aktivity:
+Chodí, soběstačný
 
-Pokyny při propuštění:
-Byli jste hospitalizováni kvůli ráně na noze a vysoké hladině cukru v krvi. Udržujte obvaz čistý, užívejte léky podle pokynů a volejte ___ v případě, že se zarudnutí rozšíří nebo se objeví horečka.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli poranění nohy a vysoké hladině cukru v krvi. Udržujte obvaz čistý, užívejte léky podle pokynů a v případě, že se zarudnutí rozšíří nebo se vrátí horečka, volejte ___.
 
-Pokyny pro kontrolní prohlídku:
+Pokyny pro kontrolní návštěvu:
 ___

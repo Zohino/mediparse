@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,16 +9,16 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž s několika dny produktivního kašle, horečky a zimnice, byl přijat na oddělení ___ kvůli zhoršující se dušnosti. Rentgen hrudníku ukázal zánět v dolní části pravého plíce. Byl mu podán antibiotikum v pohotovostní službě a byl přijat na oddělení ___ kvůli pneumonii a podpoře kyslíkem.
+Muž s několikdenním produktivním kašlem, horečkou a zimnicí, vyšetřen v ___ po zhoršení dušnosti. Rentgen hrudníku ukázal konsolidaci v dolním laloku pravého plíce. V pohotovostní službě mu byla zahájena léčba antibiotiky a byl přijat do ___ pro léčbu pneumonie a podpory dýchání kyslíkem.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hyperlipidemie
-Dna, následovaná ___
+DNA, sledováno ___
 
 Sociální anamnéza:
 ___
@@ -27,18 +27,18 @@ Rodinná anamnéza:
 Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
-Celkový stav: Únavný, mírně tachypnoe, bez známek utrpení
-Hlava, oči, uši, nos, krk: Vlhká sliznice
-Krk: Pružný
-Břicho: Měkké, bez citlivosti
+Celkový stav: Unavený, mírně zrychlené dýchání, bez známek tísně
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Krk: Pohyblivý
+Břicho: Měkké, netendrovatelné
 Končetiny: Bez otoků
-Neurologické vyšetření: Vědomý, bez fokálních příznaků
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-WBC 9,1, Hgb 13,8, Plt 245, Na 139, K 4,1, Cr 0,9, odebráno ___
+Významné výsledky:
+VÝSLEDKY VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Leukocyty 9,1, hemoglobin 13,8, trombocyty 245, sodík 139, draslík 4,1, kreatinin 0,9, odebráno ___
 ZÁVĚR:
-Pneumonie v dolní části pravého plíce, zlepšení oproti předchozímu rentgenovému snímku, bez výpotku
+Pneumonie v dolním laloku pravé plíce, zlepšení oproti předchozímu rentgenovému snímku, bez výpotku
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -47,26 +47,26 @@ Atorvastatin 20 mg večer
 Léky při propuštění:
 1. Lisinopril 10 mg denně
 2. Atorvastatin 20 mg večer
-3. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu 5 dnů
-4. Paracetamol dle potřeby při horečce
+3. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu dalších 5 dnů
+4. Paracetamol podle potřeby při horečce
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
-Sekundární:
+Komunitně získaná pneumonie
+Sekundárně:
 Hypertenze
 Hyperlipidemie
-Dna
+DNA
 
 Stav při propuštění:
-Psychický stav: Jasný a koherentní
-Úroveň vědomí: Vědomý a komunikativní
-Funkční stav: Chůze, soběstačný
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Chodí, soběstačný
 
-Pokyny při propuštění:
-Byl vám poskytnut léčba pneumonie antibiotiky a kyslíkem. Dokončete celou kúru antibiotik, pijte dostatek tekutin a odpočívejte. V případě zhoršení dýchání, bolesti na hrudi nebo vysoké horečky volejte ___ nebo se vraťte do nemocnice. Vaše ambulance v ___ zajistí opakovaný rentgen hrudníku.
+Pokyny pro propuštění:
+Byl jste léčen na pneumonii antibiotiky a kyslíkem. Dokončete celou kúru antibiotik, pijte dostatek tekutin a odpočívejte. V případě zhoršení dýchání, bolesti na hrudi nebo vysoké horečky volejte ___ nebo se vraťte do nemocnice. Vaše ambulance v ___ zajistí opakované rentgenové vyšetření hrudníku.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

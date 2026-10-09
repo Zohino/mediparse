@@ -1,21 +1,21 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
-Bolest v pravém boku a horečka
+Bolest v pravé oblasti boku a horečka
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Žena s bolestí v pravém boku, horečkou a obtížemi při močení trvajícími tři dny, odeslána z ambulance ___ . Léčena pro pyelonefritidu intravenózními antibiotiky, stav se zlepšil.
+Žena s třídenní anamnézou bolesti v pravé oblasti boku, horečkou a dysurií, odeslána z kliniky ___. Léčena pro pyelonefritidu intravenózními antibiotiky, stav se zlepšil.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Opakované infekce močových cest
 Hypotyreóza, sledována v ___
@@ -27,29 +27,29 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Orientovaná, bez horečky při propuštění, mírná bolestivost v pravém boku.
-ORL:
+Při vědomí, bez horečky při propuštění, mírná citlivost v pravé oblasti boku.
+HLAVA, OČI, UŠI, NOS, KRK:
 Vlhké sliznice
 PLÍCE:
-Čisté bilaterálně
-BŘÍCHO:
-Měkké, bez bolestivosti
+Čisté na obou stranách
+BŘICHO:
+Měkké, bez citlivosti
 KONČETINY:
 Bez otoků
 NEUROLOGIE:
-Bez fokálních příznaků
+Bez ložiskových příznaků
 
-Relevantní výsledky:
-Analýza moči ukázala přítomnost leukocytů a bakterií. Kultivace moči prokázala přítomnost E. coli, citlivou na ceftriaxon. CT vyšetření provedené v ___ neprokázalo žádnou obstrukci ani absces.
+Významné výsledky:
+Vyšetření moči prokázalo pyurii a bakterie. Kultivace moči prokázala přítomnost E. coli, citlivé na ceftriaxon. CT vyšetření v ___ neprokázalo obstrukci ani absces.
 
 Léky při přijetí:
 Lisinopril denně
-Levothyroxin denně
+Levotyroxin denně
 
 Léky při propuštění:
-Cefpodoxim dvakrát denně po dobu sedmi dnů. Pokračujte v užívání lisinoprilu a levothyroxinu jako doposud. Acetaminophen dle potřeby na bolest.
+Cefpodoxim dvakrát denně po dobu sedmi dnů. Pokračovat v užívání lisinoprilu a levotyroxinu jako dříve. Paracetamol podle potřeby proti bolesti.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -57,12 +57,12 @@ Akutní pyelonefritida
 Infekce močových cest způsobená E. coli
 
 Stav při propuštění:
-Dobrý, toleruje perorální příjem.
-Aktivity:
-Chůze, soběstačná
+Dobrý, dobře snáší perorální příjem.
+Stav aktivity:
+Ambulantní, soběstačná
 
-Instrukce při propuštění:
-Byla vám poskytnuta léčba infekce ledvin. Dokončete užívání všech antibiotik, pijte dostatek tekutin a v případě horečky, zvracení nebo zhoršení bolesti se vraťte. V případě dotazů volejte ___ .
+Pokyny pro propuštění:
+Byla léčena pro infekci ledvin. Dokončete všechny antibiotika, pijte dostatek tekutin a v případě horečky, zvracení nebo zhoršení bolesti se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

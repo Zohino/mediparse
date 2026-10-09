@@ -1,24 +1,24 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Celulitida levé dolní končetiny
+Celulitida levé dolní nohy
 
-Zásah:
+Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
-Anamnéza:
-Muž ve věku ___ let se dostavil na oddělení ___ s třemi dny trvajícími potížemi v podobě zarudnutí, tepla a otoku levé holeně po drobném odření v místě ___. Uváděl subjektivní horečku a postupně se zhoršující bolest od data ___, a byl odeslán k podání intravenózních antibiotik.
+Anamnéza současného onemocnění:
+___letý muž se dostavil do ___ s třídenní anamnézou zarudnutí, tepla a otoku levé holenní kosti po drobném oděru na ___. Uváděl subjektivní horečky a zhoršující se bolest od ___ a byl odeslán na intravenózní antibiotika.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
@@ -28,43 +28,43 @@ Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacient je v pohodě, bez známek utrpení.
+Dobře se cítí, bez známek úzkosti
 Krk:
-Flexibilní, bez zvětšených lymfatických uzlin.
-Extremita:
-Levá holen má zvýšenou teplotu, mírně otok.
-Kůže:
-Erytem s ostrými okraji, bez abscesu.
+Pružný, bez zvětšených lymfatických uzlin
+Končetiny:
+Levá holeň teplá, mírně oteklá
+KŮŽE:
+Erytém s ostrými okraji, bez abscesu
 
 Významné výsledky:
-Po přijetí mírně zvýšený počet bílých krvinek s převahou neutrofilů. Biochemické vyšetření bez odchylek. Kultivace krve provedená dne ___ nevykazovala žádný růst. Ultrazvuk levé dolní končetiny prokázal otok měkkých tkání, ale bez abscesu nebo hluboké žilní trombózy.
+Při přijetí mírně zvýšený počet bílých krvinek s převahou neutrofilů. Biochemické vyšetření bez významných odchylek. Krevní kultury odebrané ___ nevykazovaly růst. Ultrazvuk levé nohy prokázal edém měkkých tkání bez abscesu nebo hluboké žilní trombózy.
 
-Průběh hospitalizace:
-Byl zahájen intravenózní cefazolin a noha byla fixována ve zvýšené poloze. Zarudnutí postupně ustupovalo a horečka se během dvou dnů vyřešila. Byl vyšetřen lékařem ___ ohledně péče o ránu a pacient byl schopen samostatně chodit. Hladina glukózy zůstala kontrolovaná na jeho domácím režimu. Byl převeden na perorální cefalexin.
+Stručný popis hospitalizace:
+Byla zahájena intravenózní léčba cefazolinem a noha byla označena a zvednuta. Erytém postupně ustupoval a horečka odezněla během dvou dnů. Byl vyšetřen ___ ohledně péče o ránu a chodil samostatně. Hladina glukózy byla udržována v normě pomocí domácího režimu. Byl převeden na perorální cefalexin.
 
 Léky při přijetí:
 Metformin, lisinopril, atorvastatin, aspirin
 
 Léky při propuštění:
-Cefalexin 500 mg perorálně čtyřikrát denně po dobu pěti dalších dnů. Pokračujte v užívání metforminu, lisinoprilu, atorvastatinu a aspirinu, jako doposud. Acetaminophen dle potřeby na bolest.
+Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších pěti dnů. Pokračovat v užívání metforminu, lisinoprilu, atorvastatinu a aspirinu jako dříve. Paracetamol podle potřeby na bolest.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Celulitida levé dolní končetiny
+Celulitida levé nohy
 Diabetes mellitus 2. typu
 
 Stav při propuštění:
-Mentální stav:
-Orientovaný a koherentní.
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Vnímavý a komunikativní.
-Funkční stav:
-Samostatně chodící.
+Bdělý a reagující
+Stav aktivity:
+Chodí, soběstačný
 
-Instrukce při propuštění:
-Byl Vám léčen kožní infekce na noze. Dokončete užívání všech antibiotik a udržujte nohu ve zvýšené poloze při sezení. V případě rozšíření zarudnutí, horečky nebo zhoršení bolesti se vraťte nebo zavolejte na číslo ___. Dodržujte termín návštěvy v ambulanci ___.
+Pokyny pro propuštění:
+Byl jste léčen na kožní infekci nohy. Dokončete všechny antibiotika a udržujte nohu ve zvýšené poloze při sezení. V případě šíření zarudnutí, horečky nebo zhoršování bolesti se vraťte nebo zavolejte na ___. Dodržujte termín návštěvy v ___ klinice.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,17 +9,17 @@ Alergie:
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let s třechdenním produktivním kašlem, horečkou a dušností, přijat z ambulance ___ poté, co byla nízká saturace kyslíkem.
-PROHLÍDKA SYSTÉMŮ:
-Pozitivní nález zimnice a únavy. Jinak negativní.
+___ letý muž s třídenní anamnézou produktivního kašle, horečky a dušnosti, odeslán z ___ kliniky kvůli nízké saturaci kyslíkem.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na zimnici a únavu. Jinak negativní.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
@@ -28,18 +28,18 @@ Rodinná anamnéza:
 Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
-Fyzikální vyšetření při přijetí:
-Životní funkce: T 38,4, HR 98, BP 132/78, SpO2 91 % při pokojovém vzduchu
-ORL: Suché sliznice
-PULZY: Hmatné a symetrické
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: T 38,4, TF 98, TK 132/78, SpO2 91 % při dýchání okolním vzduchem
+HLAVA, OČI, UŠI, NOS, KRK: Suché sliznice
+PULSY: Hmatatelné a symetrické
 
-Relevantní výsledky:
-Rentgen hrudníku ukazuje konsolidaci v dolním laloku pravé plíce. Počet bílých krvinek zvýšen na 14. Kultivace sputa bude k dispozici při propuštění.
+Významné výsledky:
+Rentgen hrudníku ukazuje konsolidaci v dolním laloku pravého plíce. Počet bílých krvinek zvýšený na 14. Kultivace sputa probíhá, výsledky budou k dispozici při propuštění.
 ZÁVĚR:
-Pneumonie dolního laloku pravé plíce.
+Pneumonie v dolním laloku pravé plíce.
 
-Průběh hospitalizace:
-Léčba intravenózním ceftriaxonem a azithromycinem, poté přechod na perorální antibiotika, jakmile horečka ustoupila. Postupně snižována podávání kyslíku, pacient chodil bez deoxygenace. Před odchodem vyšetřen týmem v ___
+Stručný popis hospitalizace:
+Léčen intravenózním ceftriaxonem a azithromycinem, poté převeden na perorální antibiotika po odeznění horečky. Podávání kyslíku bylo postupně snižováno ___, pacient chodil bez desaturace. Před propuštěním ho vyšetřil tým na ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -48,22 +48,22 @@ Atorvastatin 20 mg večer
 Léky při propuštění:
 1. Lisinopril 10 mg jednou denně
 2. Atorvastatin 20 mg večer
-3. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dalších dnů
+3. Amoxicillin-klavulanát 875 mg dvakrát denně po dobu dalších pěti dnů
 
-Plán po propuštění:
-Domů s péčí ___
+Plán propuštění:
+Domů s ___ službami
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Hypoxie
 
 Stav při propuštění:
-Psychický stav: Vědomý a plně orientovaný.
-Úroveň vědomí: Probudený a pozorný.
-Aktivity: Chůze samostatná.
+Duševní stav: Bdělý a plně orientovaný.
+Úroveň vědomí: Probuzený a pozorný.
+Stav aktivity: Chodí samostatně.
 
-Pokyny při propuštění:
-Byl vám léčen plicní infekce. Dokončete všechny antibiotika, pijte dostatek tekutin a odpočívejte. Zavolejte svému lékaři na číslo ___ nebo se vraťte, pokud se zhorší dýchání, bude vám bolet hrudník nebo budete mít horečku.
+Pokyny pro propuštění:
+Byl jste léčen na plicní infekci. Dokončete všechny antibiotika, pijte dostatek tekutin a odpočívejte. V případě zhoršení dýchání, bolesti na hrudi nebo horečky kontaktujte svého lékaře na čísle ___ nebo se vraťte do nemocnice.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

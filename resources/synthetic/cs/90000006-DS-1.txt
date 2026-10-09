@@ -1,26 +1,26 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Oddělení: Chirurgie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Bolest v pravém horním kvadrantu břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická cholecystektomie (odstranění žlučníku)
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
 
 Anamnéza současného onemocnění:
-Žena ve věku ___ let, která pociťuje bolest v pravém horním kvadrantu břicha, nevolnost a zvracení již dva dny. Byla odeslána z ambulance ___ poté, co ultrazvukové vyšetření odhalilo žlučové kameny a ztluštění stěny žlučníku, a také mírnou horečku.
+___ letá žena s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením, odeslána z ___ kliniky poté, co ultrazvuk odhalil žlučové kameny a ztluštění stěny žlučníku, s mírnou horečkou.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
 
-Chirurgická anamnéza:
-Apendektomie (odstranění slepého střeva) před ___ lety
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie před ___ lety
 
 Sociální anamnéza:
 ___
@@ -29,39 +29,39 @@ Rodinná anamnéza:
 Matka s žlučovými kameny
 
 Fyzikální vyšetření:
-Celkový stav: mírná úzkost, při vědomí
-Hlava, oči, uši, nos, hrdlo: bez žloutenky
-Krk: ohebný
+Celkový stav: mírný diskomfort, pacientka při vědomí
+Hlava, oči, uši, nos, hrdlo: bez známek žloutenky
+Krk: pružný
 Plíce: čisté na obou stranách
-Břicho: bolestivý pravý horní kvadrant, měkké
-Extremity: bez otoků
-Pulzy: hmatatelné
+Břicho: citlivé v pravém horním kvadrantu, měkké
+Končetiny: bez otoků
+PULSY: hmatné
 
 Významné výsledky:
-NÁLEZY: Ultrazvukové vyšetření provedené ___ odhalilo více žlučových kamenů, ztluštění stěny žlučníku a tekutinu kolem žlučníku. Počet bílých krvinek byl při přijetí zvýšený, po operaci se normalizoval. Jaterní enzymy mírně zvýšené, bilirubin normální. Konečné histologické vyšetření čeká při propuštění.
+NÁLEZY: Ultrazvuk z ___ ukázal mnoho žlučových kamenů, ztluštění stěny žlučníku a tekutinu v okolí žlučníku. Počet bílých krvinek byl při přijetí zvýšený, po operaci se normalizoval. Jaterní enzymy byly mírně zvýšené, bilirubin normální. Konečné histopatologické vyšetření probíhá, výsledky budou k dispozici po propuštění.
 
-Průběh hospitalizace:
-Pacientka byla léčena intravenózními tekutinami, antibiotiky a klidem v jídle. Chirurgický tým, vedený ___ , provedl laparoskopickou cholecystektomii bez komplikací. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a pacientka byla afebrilní (bez horečky) a chodila samostatně před propuštěním domů druhý den po operaci.
+Stručný popis hospitalizace:
+Léčba intravenózními tekutinami, antibiotiky a klidový režim pro střeva. Chirurgický tým pod vedením ___ provedl laparoskopickou cholecystektomii bez komplikací. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a před propuštěním domů, druhý den po operaci, neměla pacientka horečku a mohla se samostatně pohybovat.
 
 Léky při přijetí:
-Lisinopril 10 mg denně, multivitamin denně
+Lisinopril 10 mg denně, multivitamín denně
 
 Léky při propuštění:
-Acetaminophen 650 mg každých šest hodin. Oxykodon 5 mg dle potřeby na bolest. Pokračovat v užívání lisinoprilu 10 mg denně.
+Acetaminofen 650 mg každých šest hodin. Oxykodon 5 mg podle potřeby proti bolesti. Pokračovat v užívání lisinoprilu 10 mg denně.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Akutní cholecystitida (zánět žlučníku)
-Cholelithiasis (žlučové kameny)
+Akutní cholecystitida
+Cholelitiáza
 
 Stav při propuštění:
 Stabilní, při vědomí a orientovaná
-Funkční stav: Chůze, samostatná
+Stav aktivity: Ambulantní, soběstačná
 
-Instrukce při propuštění:
-Můžete se osprchovat, ale nezvedejte nic těžšího než 4,5 kg po dobu čtyř týdnů. V případě horečky nebo zhoršení bolesti volejte ___ .
+Pokyny pro propuštěného pacienta:
+Můžete se sprchovat, ale po dobu čtyř týdnů nezvedejte nic těžšího než deset kilogramů. V případě horečky nebo zhoršení bolesti volejte ___.
 
-Návazná péče:
+Pokyny pro kontrolní vyšetření:
 ___

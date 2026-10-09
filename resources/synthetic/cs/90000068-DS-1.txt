@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Oddělení: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,18 +9,18 @@ Alergie:
 Hlavní potíže:
 Bolest břicha a nevolnost
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka, ve věku ___ let, byla přijata z ambulance ___ s bolestmi v horní části břicha, nevolností a sníženou chutí k jídlu, které trvají již dva dny. Bolest byla tupá, zhoršovala se po jídle, bez horečky. Laboratorní výsledky mimo nemocnici ukazovaly mírně zvýšenou hladinu glukózy a lipázy.
-PROHLÍDKA SYSTÉMŮ:
-Pozitivní nález nevolnosti. Negativní nález bolesti hrudníku, dušnosti, horečky.
+___letá žena odeslána z ___ kliniky, udává bolesti v horní části břicha, nevolnost a sníženou chuť k jídlu, trvající dva dny. Bolest je tupá, zhoršuje se po jídle, bez horečky. Laboratorní výsledky mimo nemocnici ukazují mírně zvýšenou hladinu glukózy a lipázy.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na nevolnost. Negativní na bolest na hrudi, dušnost, horečku.
 
-Předchozí zdravotní problémy:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Možná cukrovka, čeká se na potvrzující testy
-Chirurgické odstranění žlučníku v ___
+Cholecystektomie v ___
 
 Sociální anamnéza:
 ___
@@ -29,35 +29,35 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Životní funkce:
+Vitalní funkce:
 Bez horečky, stabilní
 Celkový stav:
-Pacientka je v pohodě, bez známek utrpení
-Hlava, oči, uši, nos, krk:
+Komfortní, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
 Vlhké sliznice
 Plíce:
-Čisté při poslechování na obou stranách
+Čisté na obou stranách
 Končetiny:
 Bez otoků
 Kůže:
 Teplá, suchá
 Neurologické vyšetření:
-Orientovaná, bez fokálních příznaků
+Bdělost, bez ložiskových příznaků
 
-Průběh hospitalizace:
-Byla léčena pro mírnou pankreatitidu pomocí infuzí, analgetik a klidového režimu, poté byla převedena na dietu s nízkým obsahem tuku, kterou dobře tolerovala. Bolest ustoupila během třetího dne. Radiologické vyšetření provedené týmem ___ neodhalilo žádné kameny. Hladina glukózy byla monitorována v ___ a je nutné ambulantní vyšetření.
-DALŠÍ POSTUP:
-Opakované měření hladiny glukózy nalačno a hemoglobinu A1c v ambulantních podmínkách.
+Stručný popis průběhu hospitalizace:
+Byla léčena pro mírnou pankreatitidu infuzemi, analgetiky a klidovým režimem pro střeva, poté byla převedena na dietu s nízkým obsahem tuků, kterou dobře snášela. Bolest ustoupila do třetího dne. Zobrazovací vyšetření provedené týmem radiologů z ___ neukázalo žádné kameny. Hladina glukózy byla monitorována v ___ a vyžaduje ambulantní vyšetření.
+PŘECHODNÁ OTÁZKY:
+Opakované měření hladiny glukózy nalačno a hemoglobinu A1c v ambulantní péči.
 
 Léky při přijetí:
 Lisinopril 10 mg denně od ___. Multivitamin denně.
 
 Léky při propuštění:
 1. Lisinopril 10 mg perorálně jednou denně.
-2. Acetaminophen 500 mg perorálně každých šest hodin dle potřeby při bolesti.
+2. Acetaminofen 500 mg perorálně každých šest hodin podle potřeby na bolest.
 3. Multivitamin denně.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů s péčí od ___
 
 Diagnóza při propuštění:
@@ -69,12 +69,12 @@ Hypertenze
 Stav při propuštění:
 Dobrý
 Úroveň vědomí:
-Orientovaná a komunikativní
-Funkční stav:
-Chůze, soběstačná
+Bdělost a interakce
+Stav aktivity:
+Ambulantní, soběstačný
 
-Pokyny při propuštění:
-Byla hospitalizována pro zánět slinivky břišní. Jezte malé porce jídla s nízkým obsahem tuku a vyhýbejte se alkoholu. Užívajte léky podle předpisu. V případě silné bolesti, zvracení, horečky nebo žlutosti kůže volejte ___ nebo se vraťte do nemocnice.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zánětu slinivky břišní. Jezte menší jídla s nízkým obsahem tuků a vyhýbejte se alkoholu. Užívajte léky podle předpisu. V případě silné bolesti, zvracení, horečky nebo žloutnutí kůže volejte ___ nebo se vraťte do nemocnice.
 
-Následná péče:
+Pokyny pro kontrolu:
 ___

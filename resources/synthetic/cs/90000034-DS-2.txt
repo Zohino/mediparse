@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,13 +9,13 @@ Alergie:
 Hlavní potíže:
 Bušení srdce
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní vyšetření:
+Žádný
 
 Anamnéza současného onemocnění:
-Žena ve věku ___ let s bušením srdce a závratěmi, možná fibrilace síní na EKG provedeném mimo nemocnici, odeslána z ___ k vyšetření po epizodě závratí doma.
+___ letá žena s bušením srdce a závratěmi, na EKG zjištěna možná fibrilace síní, odeslána z ___ na vyšetření po epizodě pocitu slabosti doma.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hyperlipidemie
 
@@ -23,32 +23,32 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s mrtvicí
+Matka s cévní mozkovou příhodou
 
 Fyzikální vyšetření:
-Životní funkce:
+Vitalní funkce:
 stabilní
 Celkový stav:
-pohodlná
-Oblast hlavy, očí, uší, nosu a krku (HEENT):
+komfortní
+Hlava, oči, uši, nos, hrdlo:
 normální
 Břicho:
 měkké
-KONČETINY:
+Končetiny:
 bez otoků
 Kůže:
 teplá
 Neurologické vyšetření:
-bez specifických abnormalit
+bez ložiskových příznaků
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PŘIJETÍ:
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
 Hemoglobin 12,1, kreatinin 0,8, glukóza 168, troponin negativní, draslík 4,1.
-ZOBRAZENÍ:
-Rentgen hrudníku bez akutních abnormalit; echokardiogram s normální ejekční frakcí.
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Rentgen hrudníku bez akutních abnormalit; echokardiografie s zachovanou ejekční frakcí.
 
-Průběh hospitalizace:
-Pacientka přijata na jednotku intenzivní péče pro sledování bušení srdce; monitorování ukázalo pouze sinusový rytmus. Vyšetřena kardiologem dne ___ a propuštěna dne ___ s ambulantním monitorováním rytmu. Glukóza kontrolována pomocí dávkování inzulínu a diety, pacientka toleruje perorální příjem.
+Stručný popis hospitalizace:
+Přijata na oddělení s telemetrickým monitoringem kvůli bušení srdce; monitoring prokázal pouze sinusový rytmus. Vyšetřena kardiologem na ___ a propuštěna ___ s ambulantním monitorovacím zařízením pro sledování srdečního rytmu. Glukóza regulována pomocí inzulínu a diety, pacientka dobře snáší perorální příjem.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -59,7 +59,7 @@ Léky při propuštění:
 2. Atorvastatin 20 mg perorálně večer
 3. Metoprolol 25 mg perorálně dvakrát denně
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -68,15 +68,15 @@ Sekundární:
 Diabetes mellitus, hypertenze
 
 Stav při propuštění:
-Psychický stav:
-jasný a koherentní
+Duševní stav:
+jasný a srozumitelný
 Úroveň vědomí:
-vnímavá a komunikativní
-Funkční stav:
-chodící, soběstačná
+bdělá a reaguje
+Fyzická aktivita:
+chůze, soběstačná
 
-Pokyny při propuštění:
-Užívejte léky podle předpisu. Používejte monitor podle pokynů. V případě mdloby, bolesti na hrudi nebo zhoršení bušení srdce se vraťte. V případě dotazů volejte na číslo ___.
+Pokyny pro propuštění:
+Užívejte léky podle předpisu. Noste monitorovací zařízení podle pokynů. V případě mdlob, bolesti na hrudi nebo zhoršení bušení srdce se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

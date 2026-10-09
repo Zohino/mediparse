@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,38 +9,38 @@ Alergie:
 Hlavní potíže:
 Bušení srdce
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka se dostavila na oddělení ___ s několika hodinami bušení srdce a závratěmi. Uváděla mírnou únavu v průběhu posledního týdne a žádné bolesti na hrudi. Byla převezena do naší nemocnice z ___ pro další monitorování a léčbu.
+Pacientka se dostavila do ___ s několika hodinami trvajícím bušením srdce a závratí. Uvedla mírnou únavu v průběhu předchozího týdne a žádnou bolest na hrudi. Byla převezena do naší nemocnice z ___ za účelem dalšího monitorování a léčby.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
-Chirurgická anamnéza:
-Chirurgické odstranění žlučníku na ___
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka utrpěla mrtvici na ___
+Matka, u které došlo k cévní mozkové příhodě v ___
 
 Fyzikální vyšetření:
-Celkový stav: Pacientka je v pohodě, vypadá dobře, nemá žádné akutní potíže.
-Plíce: Při poslechu čisté bilaterálně.
-Břicho: Měkké, bezbolestné, nenabobtnalé.
+Celkový stav: Dobrý, pacientka vypadá dobře, není v akutním stavu.
+Plíce: Při auskultaci oboustranně čisté.
+Břicho: Měkké, netendrovatelné, neztuhlé.
 Kůže: Teplá a suchá, bez vyrážky.
 
 Významné výsledky:
-EKG ukázalo nepravidelný rytmus s rychlou srdeční frekvencí při příjmu, který se později stabilizoval. Troponin byl negativní dvakrát. TSH v normě. Rentgen hrudníku bez akutních změn.
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-WBC 7,1, Hgb 12,8, Plt 245, Na 139, K 4,2, Cr 0,8, Mg 2,0.
+EKG při přijetí ukázalo nepravidelný rytmus s rychlou srdeční frekvencí, která byla později regulována. Dvakrát negativní troponin. Normální hladina TSH. Rentgen hrudníku bez známek akutního procesu.
+LABORATORNÍ VÝSLEDKY PŘED PROPUŠTĚNÍM:
+Leukocyty 7,1, hemoglobin 12,8, trombocyty 245, sodík 139, draslík 4,2, kreatinin 0,8, hořčík 2,0.
 
-Průběh hospitalizace:
-Byla přijata na jednotku intenzivní péče a zahájena léčba ke kontrole srdeční frekvence, což mělo dobrý účinek. Byla prodiskutována a zahájena antikoagulační léčba po posouzení rizika krvácení. Echokardiogram provedený na ___ byl bez zvláštností. Její příznaky ustoupily a byla propuštěna třetí den hospitalizace, přičemž byla zajištěna kontrola u kardiologa na ___.
+Stručný popis hospitalizace:
+Pacientka byla přijata na oddělení monitorování srdečního rytmu a zahájena byla terapie ke kontrole srdeční frekvence, na kterou dobře reagovala. Bylo prodiskutováno a zahájeno podávání antikoagulant, po zhodnocení rizika krvácení. Echokardiogram v ___ byl bez významných nálezů. Její příznaky ustoupily a byla propuštěna třetí den hospitalizace, s naplánovanou kontrolou u kardiologa v ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně. Vitamin D denně.
@@ -48,19 +48,19 @@ Lisinopril 10 mg denně. Vitamin D denně.
 Léky při propuštění:
 Metoprolol succinate 50 mg denně. Apixaban 5 mg dvakrát denně. Lisinopril 10 mg denně. Vitamin D 1000 jednotek denně.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Fibrilace síní
+Atriální fibrilace
 
 Stav při propuštění:
 Stabilní
-Úroveň vědomí: Vědomá a komunikativní.
-Úroveň aktivity: Chůze, soběstačná.
+Úroveň vědomí: Bdělá a komunikativní.
+Stav aktivity: Chodí, soběstačná.
 
-Pokyny při propuštění:
-Byla léčena pro rychlou a nepravidelnou srdeční frekvenci. Užívajte léky podle předpisu a nepřestávejte užívat apixaban. V případě bolesti na hrudi, mdloby nebo krvácení se vraťte. Dodržujte termín návštěvy u ___.
+Pokyny pro propuštění:
+Byla léčena pro rychlý, nepravidelný srdeční rytmus. Užívajte léky podle předpisu a nepřestávejte užívat apixaban. V případě bolesti na hrudi, mdlob nebo krvácení se vraťte. Dodržujte termín kontroly u ___.
 
-Pokyny pro další péči:
+Pokyny pro další postup:
 ___

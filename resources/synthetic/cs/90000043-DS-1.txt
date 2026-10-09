@@ -1,69 +1,69 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Známé alergie na léky: žádné.
 
 Hlavní potíže:
 Bolest břicha a zvracení.
 
-Zásahy:
-Žádné.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný.
 
-Anamnéza:
-Pacientka se dostavila na oddělení ___ s bolestí v horní části břicha, která se zhoršovala již dva dny, s nevolností a opakovaným zvracením. Den předtím ji vyšetřil její ošetřující lékař, Dr. ___, který ji poslal na urgentní příjem poté, co zjistil zvýšenou hladinu glukózy při rychlém testu. Na urgentním příjmu neměla horečku a mírně zvýšenou srdeční frekvenci. Hladina lipázy byla zvýšená a zobrazovací metody ukázaly žlučové kameny a ztluštění stěny žlučníku. Vzhledem k naměřeným hodnotám glukózy byla zvažována možnost nově vzniklé cukrovky, přičemž výsledky testu hemoglobinu A1c ještě nebyly k dispozici. Pacientka obdržela tekutiny, léky proti zvracení a analgetika a byla přijata na oddělení ___ k dalšímu vyšetření a léčbě.
+Anamnéza současného onemocnění:
+Pacientka se dostavila do ___ s dvoudenní anamnézou zhoršující se bolesti v epigastriu, nevolnosti a opakovaného zvracení. Den předtím ji vyšetřil její ošetřující lékař, Dr. ___, v ___, který ji po zjištění zvýšené hladiny glukózy při rychlém testu odeslal na další vyšetření. Na pohotovosti neměla horečku a mírně zvýšený srdeční tep. Hladina lipázy byla zvýšená a zobrazovací vyšetření ukázala žlučové kameny a ztluštění stěny žlučníku. Vzhledem k hladině glukózy byla zvažována možnost nově vzniklé cukrovky, výsledky hemoglobinu A1c jsou dosud k dispozici. Pacientka dostala infuzi, léky proti zvracení a analgetika a byla přijata do ___ k dalšímu ošetření.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
 Obezita
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s žlučovými kameny. Otec s hypertenzí.
+Matka má žlučové kameny. Otec má hypertenzi.
 
 Fyzikální vyšetření:
-Celkový stav: Pacientka je v pohodě, bez akutních potíží, mírně nepříjemně se jí dotýkáte.
-Plíce: Čisté při poslechu na obou stranách.
-Srdce: Pravidelná frekvence a rytmus, bez šelestů.
-Břicho: Měkké, citlivé v pravém horním kvadrantu, bez napětí, bez odrazové bolesti.
-Neurologické vyšetření: Pacientka je při vědomí, orientovaná, bez neurologických abnormalit.
+Celkový stav: Dobrý, bez akutní tíže, při palpaci mírně nepříjemné.
+PLÍCE: Při auskultaci oboustranně čisté.
+SRDCE: Pravidelný rytmus, bez šelestů.
+BŘICHO: Měkké, citlivé v pravém horním kvadrantu, neztuhlé, bez obranného napětí.
+NEUROLOGIE: Bdělá, orientovaná, bez ložiskových příznaků.
 
 Významné výsledky:
-Laboratorní výsledky při přijetí ukazují zvýšenou hladinu lipázy, mírnou leukocytózu a mírně zvýšené hodnoty transamináz. Hladina glukózy byla při příjmu zvýšená. Ultrazvukové vyšetření pravého horního kvadrantu ukázalo žlučové kameny, ztluštění stěny žlučníku a absenci rozšíření žlučových cest. Zobrazovací vyšetření vyhodnotil Dr. ___ na ___. MRCP provedené dne ___ neprokázal žádné kameny v hlavních žlučových cestách. Vzorek pro test hemoglobinu A1c byl odeslán do laboratoře ___.
-LABORATORNÍ VÝSLEDKY PŘI PROPUŠTĚNÍ:
-WBC 8.1, Hgb 12.4, Plt 245, Na 139, K 4.1, Cr 0.8, ALT 48, AST 39, lipase 62.
+Při přijetí zvýšená hladina lipázy, mírná leukocytóza a mírně zvýšené transaminázy. Zvýšená hladina glukózy při přijetí. Ultrazvuk pravého horního kvadrantu ukázal cholelitiázu se ztluštěním stěny žlučníku a bez dilatace žlučových cest. Zobrazovací vyšetření vyhodnotil Dr. ___ v ___. MRCP provedené ___ neukázalo žádné kameny v žlučovodech. Vzorek krve na hemoglobin A1c byl odeslán do laboratoře ___.
+VÝSLEDKY PŘED PROPUŠTĚNÍM:
+Leukocyty 8,1, hemoglobin 12,4, trombocyty 245, sodík 139, draslík 4,1, kreatinin 0,8, ALT 48, AST 39, lipáza 62.
 
 Léky při přijetí:
-Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Multivitamin denně. Ibuprofen dle potřeby na bolesti hlavy, užívat s jídlem.
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Multivitamin denně. Ibuprofen podle potřeby při bolestech hlavy, užívat s jídlem.
 
 Léky při propuštění:
-1. Acetaminophen 650 mg perorálně každých šest hodin dle potřeby na bolest.
-2. Ondansetron 4 mg perorálně každých osm hodin dle potřeby na nevolnost.
+1. Paracetamol 650 mg perorálně každých šest hodin podle potřeby při bolesti.
+2. Ondansetron 4 mg perorálně každých osm hodin podle potřeby při nevolnosti.
 3. Lisinopril 10 mg perorálně denně.
 4. Atorvastatin 20 mg perorálně večer.
 5. Multivitamin jedna tableta denně.
-6. Oxykodon 5 mg každých šest hodin dle potřeby, vydává lékárna ___.
-Užívání ibuprofenu přerušit do další návštěvy Dr. ___.
+6. Oxykodon 5 mg každých šest hodin podle potřeby, dodává lékárna ___.
+Přestaňte užívat ibuprofen, dokud vás nevyšetří ___.
 
-Plán po propuštění:
+Plán propuštění:
 Domů.
 
 Diagnóza při propuštění:
 Akutní pankreatitida způsobená žlučovými kameny
-Přítomnost žlučových kamenů (cholelitáza)
+Cholelitiáza
 
 Stav při propuštění:
 Dobrý.
-Psychický stav: Jasný a soustředěný.
-Úroveň vědomí: Vnímavý a komunikativní.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
 
-Pokyny při propuštění:
-Byli jste hospitalizováni kvůli pankreatitidě způsobené žlučovými kameny. Dodržujte dietu s nízkým obsahem tuků a pijte dostatek tekutin. Užívajte léky podle předpisu. Kontaktujte svého chirurga, doktora ___, a domluvte si operaci k odstranění žlučníku v ___. V případě horečky, silných bolestí břicha, neustávajícího zvracení nebo žluté pokožky se obraťte na lékaře. Dokumenty týkající se vašeho propuštění byly s vámi probrány panem/paní ___ před vaším odjezdem.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli pankreatitidě způsobené žlučovými kameny. Jezte stravu s nízkým obsahem tuků a pijte dostatek tekutin. Užívajte léky podle předpisu. Kontaktujte svého chirurga, doktora ___, a domluvte si odstranění žlučníku v ___. V případě horečky, silné bolesti břicha, přetrvávajících zvracení nebo žluté kůže se vraťte do nemocnice. Před odchodem s vámi ___ probral veškeré dokumenty týkající se propuštění.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

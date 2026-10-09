@@ -1,24 +1,24 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Otok nohou, snížená chuť k jídlu
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Šestačtyřicetiletá žena s dlouhodobými problémy se srdcem a ledvinami se dostavila s třemi dny trvající sníženou chutí k jídlu, otokem nohou a sníženým množstvím moči. Byla odeslána z její ordinace ___.
+Anamnéza současného onemocnění:
+___ letá žena s anamnézou dlouhodobých srdečních a ledvinových problémů se dostavila s třemi dny trvající sníženou chutí k jídlu, otokem nohou a sníženým objemem moči, odeslána z jejího lékařského zařízení ___.
 
-Předchozí zdravotní problémy:
+Anamnéza předchozích onemocnění:
 Srdeční selhání
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
@@ -27,30 +27,30 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Fyzikální vyšetření při přijetí:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
 Celkový stav:
-Chudá, starší žena, unavená, ale bez akutních potíží.
+Křehká starší žena, unavená, ale bez akutních potíží.
 Krk:
-Zvýšený tlak v žilách.
+Zvýšená jugulární venózní tlak.
 Plíce:
-Praskání v obou plicních bázích.
+Oboustranné chrůpky.
 Břicho:
-Měkké, bez citlivosti.
+Měkké, netendrové.
 
 Významné výsledky:
-Kreatinin 3,1 (výchozí hodnota 2,0). BUN 58. Draslík 5,4. BNP zvýšený. Rentgen hrudníku z ___ ukázal mírnou plicní vaskulární kongesci a malé bilaterální výpotky. Ultrazvuk ledvin ukázal malé echogenní ledviny bez hydronefrózy.
+Kreatinin 3,1 oproti výchozí hodnotě 2,0. Urea 58. Draslík 5,4. BNP zvýšené. Rentgen hrudníku z ___ ukázal mírnou plicní vaskulární kongesci a malé oboustranné výpotky. Ultrazvuk ledvin ukázal malé echogenní ledviny bez hydronefrózy.
 
-Průběh hospitalizace:
-Kreatinin se zvýšil nad výchozí hodnotu u chronického onemocnění ledvin, což je v souladu s akutním poškozením ledvin v důsledku nedostatečného příjmu a kongesce. Diuretika byla dočasně vysazena, poté opatrně obnovena a kreatinin se zlepšil. Pacientku vyšetřil ___ a byla propuštěna ve stabilním stavu do rehabilitačního zařízení.
+Stručný průběh hospitalizace:
+Kreatinin se zvýšil nad hodnotu odpovídající chronickému onemocnění ledvin, což odpovídá akutnímu poškození ledvin v důsledku nedostatečného příjmu tekutin a kongesce. Diuretika byla vysazena, poté opatrně znovu zavedena a kreatinin se zlepšil. Byla vyšetřena ___ a propuštěna do stabilizovaném stavu do rehabilitačního zařízení.
 
 Léky při přijetí:
-Furosemid 40 mg denně, carvedilol, aspirin.
+Furosemid 40 mg denně, karvedilol, aspirin.
 
 Léky při propuštění:
-Furosemid 20 mg denně, carvedilol 6,25 mg dvakrát denně, aspirin 81 mg denně, sevelamer s jídlem, lisinopril vysadit.
+Furosemid 20 mg denně, karvedilol 6,25 mg dvakrát denně, aspirin 81 mg denně, sevelamer s jídlem, lisinopril vysadit.
 
-Plán po propuštění:
-Dlouhodobá péče
+Způsob propuštění:
+Prodloužená péče
 
 Zařízení:
 ___
@@ -61,15 +61,15 @@ Srdeční selhání
 Akutní poškození ledvin
 
 Stav při propuštění:
-Mentální stav:
-Orientovaná a koherentní.
+Duševní stav:
+Jasný a srozumitelný.
 Úroveň vědomí:
-Vnímavá a komunikativní.
-Funkční stav:
-Chůze s pomocí.
+Bdělý a reagující.
+Fyzická aktivita:
+Chodí s pomocí.
 
-Instrukce při propuštění:
-Vážete se každé ráno a omezte příjem soli a tekutin. Zavolejte ___, pokud se objeví otoky, dušnost nebo snížené množství moči.
+Pokyny při propuštění:
+Každé ráno se zvažte a omezte příjem soli a tekutin. V případě otoku, dušnosti nebo sníženého objemu moči volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

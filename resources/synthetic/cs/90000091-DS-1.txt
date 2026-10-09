@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Oddělení: CHIRURGIE
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,15 +9,15 @@ Alergie:
 Hlavní potíže:
 Bolest břicha
 
-Zásah:
+Významný chirurgický nebo invazivní zákrok:
 Žádný
 
-Anamnéza:
-Pacientka, ___ let, se dostavila na oddělení ___ s třemi dny trvající bolestí břicha, nevolností a sníženým příjmem potravy po nedávné návštěvě ambulance v ___. Popírala horečku, bolest na hrudi nebo problémy s močením. Bolest se zhoršovala po jídle.
+Anamnéza současného onemocnění:
+___letá žena se dostavila do ___ s třídenní bolestí břicha, nevolností a špatným příjmem potravy po nedávné návštěvě ambulance v ___. Popírala horečku, bolest na hrudi nebo problémy s močením. Bolest se zhoršovala po jídle.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Předchozí apendektomie v ___
 
 Sociální anamnéza:
@@ -27,46 +27,46 @@ Rodinná anamnéza:
 Matka s žlučovými kameny
 
 Fyzikální vyšetření:
-Pacientka je v pohodě, mírná bolestivost v pravém horním kvadrantu břicha, bez známek peritoneálního podráždění, jinak bez zvláštností.
+Celkově v dobrém stavu, mírná citlivost v pravém horním kvadrantu břicha, bez známek peritoneálního dráždění, jinak bezvýznamné nálezy.
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
-Životní funkce: T 98,9, SR 88, TK 136/80, FF 16, SpO2 98 % při pokojovém vzduchu
-Krk: Pružný
-Plíce: Čisté bilaterálně
-Břicho: Měkké, bolestivé v pravém horním kvadrantu, bez distenze
-KONČETINY: Bez edémů
-KŮŽE: Teplá a suchá
+Vitalní funkce: T 37,1 °C, TF 88, TK 136/80, dechová frekvence 16, SpO2 98 % při dýchání okolního vzduchu
+Krk: Pohyblivý
+Plíce: Oboustranně čisté
+Břicho: Měkké, citlivé v pravém horním kvadrantu, neztuhlé
+Končetiny: Bez otoků
+Kůže: Teplá a suchá
 
 Významné výsledky:
-Laboratorní výsledky při přijetí ukazují mírně zvýšenou hladinu lipázy a glukózy 210. CT vyšetření břicha v ___ prokázalo žlučové kameny a mírné ztluštění stěny žlučníku. Jaterní enzymy byly mírně zvýšené a postupně klesaly. Rentgen hrudníku bez patologických nálezů. Analýza moči negativní.
+Při přijetí mírně zvýšená hladina lipázy a glukózy 210. CT vyšetření břicha v ___ prokázalo žlučové kameny s mírným ztluštěním stěny žlučníku. Jaterní enzymy byly mírně zvýšené a postupně se snižovaly. Rentgen hrudníku bezvýznamný. Vyšetření moči negativní.
 
-Průběh hospitalizace:
-Pacientka byla přijata pro žlučové koliky s možnou cholecystitidou a byla léčena infuzemi, analgetiky a antibiotiky. Chirurgický tým v ___ doporučil ambulantní cholecystektomii. Zvýšená hladina glukózy vyvolala podezření na možnou cukrovku, takže byl odeslán odběr na hemoglobin A1c. Strava byla postupně rozšiřována; pacientka byla vyšetřena lékařem ___ před propuštěním dne ___.
-PROBLÉMY PŘI PŘECHODU:
-Čeká se na výsledky A1c a naplánuje se elektivní operace.
+Stručný průběh hospitalizace:
+Přijata pro žlučovou koliku s možnou cholecystitidou, léčena infuzemi, analgetiky a antibiotiky. Chirurgický tým v ___ doporučil ambulantní cholecystektomii. Zvýšená hladina glukózy vzbudila podezření na možnou cukrovku, proto bylo provedeno vyšetření hemoglobinu A1c. Strava byla dobře tolerována; před propuštěním ___ vyšetřena ___.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Čeká se na výsledky A1c a naplánování elektivního chirurgického zákroku.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
 Atorvastatin 20 mg večer
 
 Léky při propuštění:
-Pokračujte v užívání lisinoprilu 10 mg denně a atorvastatinu 20 mg večer. Užívat paracetamol 650 mg každých šest hodin dle potřeby na bolest. Ondansetron 4 mg dle potřeby při nevolnosti.
+Pokračovat v užívání lisinoprilu 10 mg denně a atorvastatinu 20 mg večer. Užívat paracetamol 650 mg každých šest hodin podle potřeby na bolest. Ondansetron 4 mg podle potřeby na nevolnost.
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Žlučové koliky
-Cholelithiasis (žlučové kameny)
+Žlučová kolika
+Cholelitiáza
 
 Stav při propuštění:
 Stabilní.
-Psychický stav: Vědomá a orientovaná, schopná sdělit vlastní anamnézu.
-Úroveň vědomí: Plně při vědomí a komunikativní.
-Aktivity: Chůze samostatná.
+Duševní stav: Bdělá a orientovaná, schopná sdělit vlastní anamnézu.
+Úroveň vědomí: Plně bdělá a komunikativní.
+Fyzická aktivita: Chodí samostatně.
 
-Pokyny při propuštění:
-Byla přijata kvůli bolesti žlučníku. Jezte nízkotučnou stravu, užívejte léky podle předpisu a v případě horečky, zvracení, žluté pokožky nebo výrazného zhoršení bolesti břicha se obraťte na ___ .
+Pokyny pro propuštěného pacienta:
+Byla jste přijata s bolestí žlučníku. Jezte jídla s nízkým obsahem tuku, užívejte léky podle předpisu a v případě horečky, zvracení, žluté kůže nebo výrazného zhoršení bolesti břicha se vraťte do ___.
 
-Pokyny pro další sledování:
+Pokyny pro další péči:
 ___

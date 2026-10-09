@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,16 +9,16 @@ Alergie:
 Hlavní potíže:
 Otok nohou a dušnost
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž s známým srdečním selháním, odeslán z ambulance ___ po týdnu zhoršující se dušnosti v leže, přibírání na váze a otoků nohou. Byl vyšetřen v ___ před transportem.
+Muž se známou srdeční insuficiencí, odeslán z kliniky ___ po týdnu zhoršující se ortopnoe, přibývání na váze a otoku nohou, před transportem vyšetřen v ___.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
-Bez anamnézy fibrilace síní
+Hyperlipidémie
+Žádná anamnéza fibrilace síní
 
 Sociální anamnéza:
 ___
@@ -27,40 +27,40 @@ Rodinná anamnéza:
 Otec s koronární chorobou
 
 Fyzikální vyšetření:
-FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
-Celkový stav: pohodlný, dýchá bez potíží
-Oblast hlavy, očí, uší, nosu a krku (ORL): vlhké sliznice
-Kardiovaskulární systém: pravidelný srdeční rytmus, tichý šelest
-Břicho: měkké, bez citlivosti
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: pacient je v pohodlí, dýchá snadno
+Hlava, uši, nos, hrdlo: vlhké sliznice
+SRDCE: pravidelný rytmus, jemné šelesty
+Břicho: měkké, netendrovatelné
 
-Výsledky vyšetření:
-LABORATOŘ PŘI PŘIJETÍ:
-Kreatinin zvýšen na 2,1 (základní hodnota 1,1), BNP výrazně zvýšen.
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Kreatinin zvýšen na 2,1 z výchozí hodnoty 1,1, BNP výrazně zvýšené.
 ZÁVĚR:
-Plicní vaskulární kongestivní změny, malé výpotky, kontrola u ___.
+Plíce: kongesce plicních cév, malé efuze, pacient znovu přijat do ___.
 
-Průběh hospitalizace:
-Diuréza intravenózním furosemidem, s zlepšením dýchání a snížením otoků. Kreatinin dosáhl maxima druhý den, poté klesal s úpravou diuretik a omezením nefrotoxických látek. Kardiologické oddělení v ___ doporučilo změnu medikace; propuštěn s váhou přibližně ___.
+Stručný popis hospitalizace:
+Diuretická léčba intravenózním furosemidem, zlepšení dýchání a snížení edému. Kreatinin dosáhl vrcholu druhý den, poté se snižoval, jak se upravovaly dávky diuretik a omezovaly nefrotoxické látky. Kardiolog z ___ doporučil změnu medikace; pacient propuštěn s váhou blízkou ___.
 
 Léky při přijetí:
 Lisinopril, atorvastatin, furosemid
 
 Léky při propuštění:
-Furosemid 40 mg denně, atorvastatin večer, metoprolol sukcinát denně. Lisinopril dočasně vysazen do ověření funkce ledvin.
+Furosemid 40 mg denně, atorvastatin večer, metoprolol succinat denně. Lisinopril dočasně vysazen, dokud se neprovede kontrola funkce ledvin.
 
-Plán po propuštění:
-Domů s péčí
+Způsob propuštění:
+Domů s poskytovanou péčí
 Zařízení: ___
 
 Diagnóza při propuštění:
-Hlavní: Akutní exacerbace chronického systolického srdečního selhání
+Primární: Akutní zhoršení chronické systolické srdeční insuficience
 
 Stav při propuštění:
 Úroveň vědomí: bdělý a pozorný
-Funkční stav: chodí samostatně, stabilní chůze
+Stav aktivity: chodí samostatně, stabilní chůze
 
-Pokyny při propuštění:
-Vážete se každé ráno a volejte ___ pokud přiberete více než 0,9 kg za den. Omezte příjem soli a tekutin, užívejte léky podle pokynů a dodržujte termín laboratorního vyšetření.
+Pokyny pro propuštění:
+Každé ráno se zvažte a zavolejte na ___, pokud přiberete více než dva kilogramy za den. Omezte příjem soli a tekutin, užívejte léky podle pokynů a dodržujte termín laboratorního vyšetření.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,19 +9,19 @@ Alergie:
 Hlavní potíže:
 Hyperglykémie a únava
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka, žena ve věku ___ let, udává několik dní trvající žízeň, únavu a časté močení. Byla odeslána z ___ poté, co domácí měření hladiny glukózy zůstala i přes obvyčnou léčbu velmi vysoká.
+___letá žena s několikdenní žízní, únavou a častým močením, odeslána z ___ poté, co se i přes obvyklou léčbu hodnoty glukózy měřené doma udržovaly na velmi vysoké úrovni.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
-Chirurgická anamnéza:
-Chirurgické odstranění žlučníku v ___
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie v ___
 
 Sociální anamnéza:
 ___
@@ -31,49 +31,49 @@ Matka s hypertenzí
 
 Fyzikální vyšetření:
 Celkový stav:
-Pacientka je v pohodě, bez známek utrpení.
+Dobře se cítí, bez známek úzkosti
 Krk:
-Flexibilní.
+Pružný
 Plíce:
-Čisté při poslechování na obou stranách.
+Čisté na obou stranách
 Břicho:
-Měkké, bez citlivosti.
-EXTREMITY (končetiny):
-Bez otoků.
+Měkké, netendrové
+KONČETINY:
+Bez otoků
 KŮŽE:
-Teplá, suchá.
+Teplá, suchá
 
 Významné výsledky:
-LABORATORNÍ VÝSLEDKY PŘI PROPUŠTĚNÍ:
-Hladina glukózy se zlepšila a je téměř v normě, elektrolyty jsou v normálních hodnotách.
-ZOBRAZENÍ:
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Glukóza se zlepšila a dosáhla téměř normálních hodnot, elektrolyty v normálním rozmezí.
+ZOBRAZOVACÍ VYŠETŘENÍ:
 Rentgen hrudníku bez akutních nálezů.
 
-Průběh hospitalizace:
-Pacientce byly podávány tekutiny a inzulin, což vedlo k postupnému zlepšení hladiny glukózy a symptomů. Její léčebný režim byl upraven lékařským týmem a před propuštěním byla provedena edukace o diabetu.
+Stručný popis průběhu hospitalizace:
+Pacientka dostávala infuze a inzulin, přičemž došlo k postupnému zlepšení hodnot glukózy a ústupu symptomů. Lékařský tým upravil její léčebný režim a před propuštěním domů jí poskytl informace o diabetu.
 
 Léky při přijetí:
-Metformin, lisinopril, atorvastatin.
+Metformin, lisinopril, atorvastatin
 
 Léky při propuštění:
-Metformin dvakrát denně, inzulin glargin večer, lisinopril denně, atorvastatin večer. Byly poskytnuty potřebné pomůcky pro měření hladiny glukózy.
+Metformin dvakrát denně, inzulin glargin jednou denně večer, lisinopril jednou denně, atorvastatin jednou denně večer. Poskytnuty pomůcky pro měření glukózy.
 
-Plán po propuštění:
-Domů.
+Způsob propuštění:
+Domů
 
 Diagnóza při propuštění:
-Diabetes.
+Diabetes
 
 Stav při propuštění:
-Mentální stav:
-Orientovaná a při vědomí.
+Duševní stav:
+Bdělá a orientovaná.
 Úroveň vědomí:
-Plně při vědomí.
-Aktivity:
-Chůze samostatná.
+Plně bdělá.
+Stav aktivity:
+Chodí samostatně.
 
-Instrukce při propuštění:
-Byla léčena pro velmi vysokou hladinu cukru v krvi. Měřte hladinu glukózy před jídlem, užívejte léky podle pokynů a volejte ___ v případě, že hladina glukózy zůstává vysoká nebo se symptomy vrátí, a co nejdříve navštivte ___ .
+Pokyny pro propuštěného pacienta:
+Byla léčena pro velmi vysokou hladinu cukru v krvi. Měřte si glukózu před jídlem, užívejte léky podle pokynů a v případě, že se hodnoty glukózy budou i nadále udržovat na vysoké úrovni nebo se vrátí symptomy, zavolejte na ___ a co nejdříve se objednejte k lékaři ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolní vyšetření:
 ___

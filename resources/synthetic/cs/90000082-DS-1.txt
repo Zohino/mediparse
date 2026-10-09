@@ -1,24 +1,24 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Kašel a horečka
 
-Zásahové zákroky:
-Žádné, provedeno rentgenové vyšetření hrudníku dne ___.
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný, provedeno vyšetření hrudníku na ___
 
 Anamnéza současného onemocnění:
-Žena s pětidenním produktivním kašlem, horečkou a mírnou dušností, která se i přes odpočinek zhoršuje. Byla vyšetřena dne ___ lékařem ___ a odeslána na pohotovost. Saturace kyslíkem byla nízká při běžném dýchání, proto byla přijata k léčbě.
+Žena s pěti dny trvajícím produktivním kašlem, horečkou a mírnou dušností, která se i přes odpočinek zhoršuje. Vyšetřena na ___ lékařem ___ a odeslána na pohotovost. Saturace kyslíkem byla nízká při dýchání okolního vzduchu, proto byla přijata k léčbě.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Astma
-Hypotyreóza, sledována v ___
+Hypotyreóza, sledována na ___
 
 Sociální anamnéza:
 ___
@@ -28,51 +28,51 @@ Matka s hypertenzí
 
 Fyzikální vyšetření:
 Životní funkce:
-Teplota 38,1 °C, srdeční frekvence 96 úderů/min, krevní tlak 128/76, saturace kyslíkem 92 % při běžném dýchání
+Teplota 38,1, puls 96, krevní tlak 128/76, SpO2 92 % při dýchání okolního vzduchu
 Celkový stav:
-Únavitá, v klidu v pohodě
-Hlava, oči, uši, nos, hrdlo:
+Unavená, v klidu se cítí dobře
+Hlava, uši, nos, hrdlo:
 Vlhké sliznice
-Srdce:
+SRDEČNÍ:
 Pravidelný rytmus
-Břicho:
-Měkké, bezbolestné
+BŘICHO:
+Měkké, netendrovatelné
 
 Významné výsledky:
-Rentgen hrudníku provedený dne ___ ukázal konsolidaci v dolním laloku pravého plíce. Počet bílých krvinek zvýšen na 14,2. Laktát normální. Kreatinin na základní úrovni. Kultivace krve bez nálezu. Test na respirační viry negativní. Kultivace sputa ukázala běžnou flóru.
+Rentgen hrudníku na ___ ukázal konsolidaci v dolním laloku pravého plíce. Počet bílých krvinek zvýšen na 14,2. Laktát v normě. Kreatinin v základní hodnotě. Krevní kultury bez růstu. Vyšetření na respirační viry negativní. Kultivace sputa prokázala normální mikroflóru.
 
-Průběh hospitalizace:
-Léčena pro pneumonii získanou v komunitě pomocí azithromycinu a ceftriaxonu po konzultaci s ___ ohledně alergií. Podávání kyslíku bylo postupně snižováno po dobu dvou dnů a horečka ustoupila. Její astma bylo kontrolováno inhalátory. Chodila po chodbě bez poklesu saturace kyslíkem a byla propuštěna, přičemž byla zajištěna kontrola v ___.
+Stručný průběh hospitalizace:
+Léčena pro komunitně získanou pneumonii azithromycinem a ceftriaxonem po kontrole alergií s ___. Kyslík byl postupně snižován během dvou dnů a horečka ustoupila. Její astma bylo dobře kontrolováno inhalátory. Procházela se po chodbě bez desaturace a byla propuštěna domů, s naplánovanou kontrolou na ___.
 
 Léky při přijetí:
-Lisinopril, levothyroxin, inhalátor s albuterolem dle potřeby
+Lisinopril, levotyroxin, albuterolový inhalátor dle potřeby
 
 Léky při propuštění:
-1. Azithromycin k dokončení zbývajících tří dnů.
+1. Azithromycin, dokončit zbývající tři dny.
 2. Lisinopril denně, jako dříve.
-3. Levothyroxin každé ráno.
-4. Inhalátor s albuterolem při sípání.
+3. Levotyroxin každé ráno.
+4. Albuterolový inhalátor při sípání.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
+Komunitně získaná pneumonie
 Sekundární:
 Hypertenze
 Astma
 Hypotyreóza
 
 Stav při propuštění:
-Stabilní a zlepšený
+Stabilizovaný a zlepšený
 Úroveň vědomí:
-Orientovaná a při vědomí
-Úroveň aktivity:
-Chůze samostatná
+Bdělý a orientovaný
+Stav aktivity:
+Chodí samostatně
 
 Pokyny při propuštění:
-Byla léčena pro infekci plic. Dokončete užívání antibiotik, pijte dostatek tekutin a odpočívejte. V případě zhoršení dušnosti, vysoké horečky nebo bolesti na hrudi se vraťte. V případě dotazů volejte do ambulance na číslo ___.
+Byla léčena pro plicní infekci. Dokončete antibiotika, pijte dostatek tekutin a odpočívejte. V případě zhoršení dušnosti, vysoké horečky nebo bolesti na hrudi se vraťte. V případě dotazů volejte na kliniku na čísle ___.
 
 Pokyny pro kontrolu:
 ___

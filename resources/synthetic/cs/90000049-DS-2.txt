@@ -1,61 +1,61 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Oddělení: Chirurgie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky.
+Žádné známé alergie na léky
 
-Hlavní chirurgický zákrok:
-Laparoskopická cholecystektomie (odstranění žlučníku).
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
 
 Anamnéza současného onemocnění:
-Pacient se dostavil na pohotovost ___ s bolestmi v pravém horním kvadrantu břicha, nevolností a horečkou, které se objevily po konzumaci tučných jídel. Ultrazvukové vyšetření provedené v jiné nemocnici ___ odhalilo žlučové kameny a ztluštění stěny žlučníku, což vedlo k jeho převezení.
+Pacient se dostavil do ___ se stížnostmi na bolest v pravém horním kvadrantu břicha, nevolnost a horečku, které se objevily dva dny po konzumaci tučných jídel. Ultrazvukové vyšetření provedené v jiné nemocnici ___ odhalilo žlučové kameny a ztluštění stěny žlučníku, což vedlo k rozhodnutí o převozu pacienta.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
-Bez anamnézy srdečního selhání.
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Žádná anamnéza srdečního selhání
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka měla žlučové kameny.
+Matka měla žlučové kameny
 
 Fyzikální vyšetření:
-Celkový stav: pacient byl v pohodě, bez horečky.
-Krk: pružný.
-Břicho: měkké, mírně bolestivé v pravém horním kvadrantu, místa vpichu po operaci čistá.
-KONČETINY: bez otoků.
+Celkový stav: pacient je v pohodlí, bez horečky
+Krk: pružný
+Břicho: měkké, mírně citlivé v pravém horním kvadrantu, místa po laparoskopii jsou čistá
+KONČETINY: bez otoků
 
 Významné výsledky:
-Laboratorní testy prokázaly mírnou leukocytózu (zvýšený počet bílých krvinek) a zvýšenou hladinu bilirubinu, která se později normalizovala. Ultrazvukové vyšetření prokázalo přítomnost více žlučových kamenů, ztluštění stěny žlučníku a tekutiny kolem žlučníku. Cholangiografie byla provedena ___ .
-ZÁVĚR: Akutní cholecystitida (zánět žlučníku) s cholelitázou (žlučovými kameny).
+Laboratorní testy prokázaly mírnou leukocytózu a zvýšenou hladinu bilirubinu, která se později normalizovala. Ultrazvukové vyšetření potvrdilo přítomnost několika žlučových kamenů, ztluštění stěny žlučníku a tekutinu v okolí žlučníku. Byla provedena cholangiografie v ___.
+ZÁVĚR: Akutní cholecystitida s cholelitiázou.
 
-Průběh hospitalizace:
-Pacient byl přijat, dostal antibiotika a tekutiny a byl operován v operačním sále ___ , kde mu byla provedena nekomplikovaná laparoskopická cholecystektomie dne ___. Bolest byla kontrolována pomocí léků, dieta byla postupně rozšiřována a dobře tolerována a antibiotika byla vysazena. Pacient byl propuštěn do domácího ošetřování ve stabilním stavu.
+Stručný popis hospitalizace:
+Pacient byl přijat, podávány mu byly antibiotika a tekutiny, a byl převezen na operační sál ___, kde mu byla provedena laparoskopická cholecystektomie ___. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a pacient ji dobře snášel, a antibiotika byla vysazena. Pacient byl propuštěn v stabilizovaném stavu.
 
 Léky při přijetí:
 Lisinopril 10 mg denně, atorvastatin 20 mg večer.
 
 Léky při propuštění:
-Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Acetaminophen 650 mg každých šest hodin dle potřeby. Oxykodon 5 mg dle potřeby při silné bolesti.
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Paracetamol 650 mg každých šest hodin podle potřeby. Oxykodon 5 mg podle potřeby při silné bolesti.
 
-Plán po propuštění:
-Domů.
+Způsob propuštění:
+Domů
 
 Diagnóza při propuštění:
-Akutní cholecystitida.
-Cholelithiasis (žlučové kameny).
+Akutní cholecystitida
+Cholelitiáza
 
 Stav při propuštění:
-Psychický stav: bdělý a orientovaný.
-Úroveň vědomí: probuzený a komunikativní.
-Aktivity: chodí samostatně.
+Duševní stav: bdělý a orientovaný
+Úroveň vědomí: bdělý a reagující
+Stav aktivity: chůze bez pomoci
 
-Pokyny při propuštění:
-Můžete se osprchovat, ale neponořujte rány do vody. Vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů. V případě horečky, zhoršující se bolesti břicha, opakovaného zvracení nebo žlutosti kůže volejte na číslo ___.
+Pokyny pro propuštěného pacienta:
+Můžete se sprchovat, ale nevystavujte řezné rány dlouhodobému namáčení. Vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů. V případě horečky, zhoršení bolesti břicha, opakovaného zvracení nebo žloutnutí kůže volejte ___.
 
-Následná péče:
+Pokyny pro kontrolní vyšetření:
 ___

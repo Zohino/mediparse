@@ -1,48 +1,48 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Dušnost, otoky nohou
+Dušnost, otok nohou
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacient je muž s diagnostikovaným srdečním selháním, který se dostavil do ___ s třemi dny zhoršující se dušnosti při námaze a otoky nohou, což se projevilo po vynechání dávek léku ___. Popírá cukrovku. Žádné bolesti na hrudi ani horečka. Byl vyšetřen lékařem ___ v ambulanci dne ___ a odeslán na pohotovost, kde měl přetížení tekutinami a byl přijat k léčbě diuretiky.
+Pacient je muž se známou srdeční insuficiencí, který se dostavil do ___ s třídenní anamnézou zhoršující se dušnosti při námaze a otoku nohou poté, co vynechal dávky léků v ___. Popírá diabetes. Bez bolesti na hrudi nebo horečky. Vyšetřen ___ v ambulanci dne ___ a odeslán na pohotovost, kde měl zvýšený objem tekutin a byl přijat k diuretické terapii.
 
-Anamnéza:
+Anamnéza předchozích onemocnění:
 Fibrilace síní
 Hypertenze
 Hyperlipidemie
 
-Chirurgická anamnéza:
+Anamnéza předchozích chirurgických zákroků:
 Apendektomie
 
 Sociální anamnéza:
 ___
 
 Fyzikální vyšetření:
-Hlava, oči, uši, nos, krk:
-Vlhké sliznice, zvýšený jugulární venózní tlak
+HLAVA, OČI, UŠI, NOS, KRK:
+Vlhké sliznice, zvýšená jugulární venózní tlak
 Plíce:
-Chropy v obou dolních plicních lalocích
+Bibazální chrůpky
 Břicho:
-Měkké, bezbolestné
-Extremity:
-Edém na obou nohou až po kolena
-Kůže:
+Měkké, netendrové
+Končetiny:
+Bilaterální otok s prohlubněmi až ke kolenům
+KŮŽE:
 Teplá, suchá
 
 Významné výsledky:
-Laboratorní výsledky z ___ ukázaly: sodík 136, draslík 4,1, kreatinin 1,0 a výrazně zvýšený BNP. Troponin negativní dvakrát. Rentgen hrudníku, interpretovaný lékařem ___, prokázal plicní vaskulární kongesci s malými bilaterálními efuzemi. EKG ukázalo nepravidelný rytmus s kontrolovanou ventrikulární frekvencí a bez akutních ischemických změn.
+Laboratorní vyšetření provedená v ___ ukázala sodík 136, draslík 4,1, kreatinin 1,0 a výrazně zvýšený BNP. Troponin dvakrát negativní. Rentgen hrudníku vyhodnotil ___ a prokázal plicní vaskulární kongesci s malými bilaterálními efuzemi. EKG ukázalo nepravidelný rytmus s kontrolovanou ventrikulární frekvencí a bez akutních ischemických změn.
 
 Léky při přijetí:
-Metoprolol sukcinát, lisinopril, apixaban, atorvastatin, podle záznamů lékárny ___.
+Metoprolol sukcinát, lisinopril, apixaban, atorvastatin podle záznamů z lékárny ___.
 
 Léky při propuštění:
 1. Furosemid 40 mg perorálně denně.
@@ -51,22 +51,22 @@ Léky při propuštění:
 4. Apixaban 5 mg perorálně dvakrát denně.
 5. Atorvastatin 40 mg perorálně večer.
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 
 Diagnóza při propuštění:
 Fibrilace síní
 
 Stav při propuštění:
-Mentální stav:
-Orientovaný a koherentní
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Vnímavý a komunikativní
-Funkční stav:
-Chůze, soběstačný
+Bdělý a reagující
+Stav aktivity:
+Chodící, soběstačný
 
-Instrukce při propuštění:
-Byli jste hospitalizováni kvůli hromadění tekutin, které způsobovaly dušnost a otoky. Tekutiny byly odstraněny pomocí léků. Zvažujte se každé ráno a volejte ___ v případě, že se vaše váha během jednoho dne zvýší o více než 1,4 kg. Omezte příjem soli. Užívajte všechny léky podle pokynů. Dodržujte termín vaší návštěvy u lékaře ___ a v případě bolesti na hrudi nebo zhoršení dýchání se vraťte.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zadržování tekutin, které způsobovalo dušnost a otoky. Tekutiny byly odstraněny pomocí léků. Každé ráno se važte a volejte ___, pokud se vaše váha během jednoho dne zvýší o více než jeden a půl kilogramu. Omezte příjem soli. Užívajte všechny léky podle pokynů. Dodržujte termín kontroly u ___ a v případě bolesti na hrudi nebo zhoršení dýchání se vraťte.
 
-Pokyny pro další péči:
+Pokyny pro další postup:
 ___

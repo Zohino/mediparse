@@ -1,24 +1,24 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Otok nohy a snížené množství moči
+Otok nohou a snížené množství moči
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka byla přijata po několika dnech zhoršujícího se otoku nohy, snížené chuti k jídlu a sníženého množství moči, odeslána z její __ ambulantní ordinace. Laboratorní výsledky ukázaly výrazně zvýšenou hodnotu kreatininu oproti základní hodnotě. Byla přijata dne ___ kvůli přetížení tekutinami a k pečlivému sledování.
+Anamnéza současného onemocnění:
+Pacientka se dostavila po několika dnech zhoršujících se otoků nohou, snížené chuti k jídlu a sníženém množství moči, odeslána z její ___ kliniky. Laboratorní výsledky ukázaly výrazně zvýšenou hladinu kreatininu oproti výchozí hodnotě. Byla přijata ___ kvůli přetížení tekutinami a k důkladnímu sledování.
 
-Předchozí zdravotní problémy:
-Chronické onemocnění ledvin, sledováno v __
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin, sledována v ___
+Hypertenze
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
@@ -28,47 +28,47 @@ Matka s hypertenzí
 
 Fyzikální vyšetření:
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
-Životní funkce:
-Krevní tlak 148/86, srdeční frekvence 78, bez horečky, saturace kyslíkem 95 % při dýchání okolním vzduchem
+Vitalní funkce:
+TK 148/86, TF 78, bez horečky, SpO2 95 % při dýchání okolního vzduchu
 Celkový stav:
-Pacientka je v pohodě, bez známek úzkosti
-Oblast hlavy, očí, uší, nosu a krku (HEENT):
-Vlhké sliznice
-Srdce:
-Pravidelný rytmus, tichý systolický šelest
-Neurologické vyšetření:
-Orientovaná, bez lokalizovaných neurologických příznaků
+Dobře se cítí, bez známek úzkosti
+Hlava, uši, oči, nos, hrdlo:
+Vlhká sliznice
+SRDEČNÍ:
+Pravidelný rytmus, jemné systolické šelesty
+Neurologické:
+Bdělá, bez ložiskových příznaků
 
 Významné výsledky:
-Kreatinin 3,4 při příjmu, snížil se na 2,1 při propuštění. Draslík 5,3, korigován léčbou. BNP zvýšen. Analýza moči bez patologických nálezů. Opakovaná laboratorní vyšetření provedená dne ___ byla stabilní.
+Kreatinin 3,4 při přijetí, snížen na 2,1 při propuštění. Draslík 5,3, korigován léčbou. BNP zvýšené. Vyšetření moči bez patologických nálezů. Opakovaná laboratorní vyšetření ___ byla stabilní.
 ZÁVĚR:
-Lehká kongestivní změny v plicích, bez lokalizovaných infiltrátů.
+Mírná kongesce plicních cév, bez ložiskové konsolidace.
 
-Průběh hospitalizace:
-Hodnota kreatininu se zlepšila po vysazení domácího diuretika a ACE inhibitoru, poté byl diuretikum opatrně znovu nasazen, jakmile byl znovu zhodnocen stav hydratace. Závažné srdeční selhání zůstalo kompenzované, s postupným snižováním hmotnosti. Hladina draslíku se normalizovala. Podle __ bude funkce ledvin znovu kontrolována a pacientka byla propuštěna dne __ ve stabilním stavu.
+Stručný průběh hospitalizace:
+Hladina kreatininu se zlepšila po vysazení diuretika a ACE inhibitoru, poté bylo diuretikum opatrně znovu zavedeno, jakmile byl znovu posouzen stav hydratace. Známá srdeční nedostatečnost zůstala kompenzována, s postupným snižováním hmotnosti. Hladina draslíku se normalizovala. Podle ___ bude funkce ledvin znovu zkontrolována a pacientka byla stabilizována pro propuštění ___.
 
 Léky při přijetí:
 Lisinopril, furosemid, atorvastatin, inzulin glargin
 
 Léky při propuštění:
-Furosemid 40 mg denně. Atorvastatin 20 mg večer. Inzulin glargin ve stejné dávce jako předtím. Lisinopril bude vysazen do doby, než budou znovu provedena laboratorní vyšetření ledvin v ambulantní péči.
+Furosemid 40 mg denně. Atorvastatin 20 mg večer. Inzulin glargin ve stejné dávce jako dříve. Lisinopril vysazen, dokud nebude znovu zkontrolována funkce ledvin jako ambulantní pacientka.
 
-Plán po propuštění:
-Domů s péčí od __
+Plán propuštění:
+Domů s pomocí od ___
 
 Diagnóza při propuštění:
 Diabetes mellitus
 Chronické onemocnění ledvin
-Srdeční selhání
+Srdeční nedostatečnost
 
 Stav při propuštění:
-Psychický stav:
-Orientovaná a srozumitelná
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Orientovaná a komunikativní
+Bdělá a komunikativní
 
-Pokyny při propuštění:
-Byla jste hospitalizována, protože se zhoršila funkce vašich ledvin a hromadila se tekutiny. Každé ráno se vážte a volejte __, pokud se vaše váha zvýší o více než 1,4 kg. Vyhýbejte se ibuprofenu. Nezačínejte užívat lisinopril, dokud vám to nebude lékařem doporučen.
+Pokyny pro propuštění:
+Byli jste hospitalizováni, protože se zhoršila funkce ledvin a došlo k hromadění tekutin. Každé ráno se važte a volejte ___, pokud nárůst hmotnosti přesáhne tři libry. Vyhýbejte se ibuprofenu. Nezačínejte znovu užívat lisinopril, dokud vám to lékař nepovolí.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,17 +9,17 @@ Alergie:
 Hlavní potíže:
 Bušení srdce
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka se dostavila na oddělení ___ s několika hodinami bušení srdce a závratěmi. Při příjmu byla zjištěna rychlá, nepravidelná srdeční frekvence a byla převezena z ___ pro další vyšetření a kontrolu srdeční frekvence. Pacientka uvedla mírnou dušnost, ale žádnou bolest na hrudi, synkopy ani horečku.
+Žena se dostavila do ___ s několika hodinami trvajícím bušením srdce a závratí. Při příjezdu byla zjištěna rychlá, nepravidelná srdeční frekvence a byla převezena z ___ k dalšímu vyšetření a regulaci srdeční frekvence. Uváděla mírnou dušnost, ale bez bolesti na hrudi, synkopy nebo horečky.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hypotyreóza
-Bez diabetu
-Cholecystektomie (odstranění žlučníku)
+Žádná cukrovka
+Cholecystektomie
 
 Sociální anamnéza:
 ___
@@ -29,52 +29,52 @@ Matka s hypertenzí
 
 Fyzikální vyšetření:
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
-Nepravidelná srdeční frekvence, 120 tepů za minutu, pacientka v pohodě.
+Nepravidelná srdeční frekvence, 120 úderů za minutu, pacientka se cítí dobře.
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
 Pravidelná srdeční frekvence, pacientka vypadá dobře.
-HLAVA, OČI, OUSI, HRUDNÍK (HEENT):
-Vlhké sliznice.
+HLAVA, OČI, UŠI, NOS, KRK:
+Vlhká sliznice.
 KRK:
-Pružný, bez jícnové dilatace (JVD).
-BŘÍCHO:
-Měkké, bez citlivosti.
+Pružný, bez známek zvýšeného žilního tlaku.
+BŘICHO:
+Měkké, netendrovatelné.
 KONČETINY:
 Teplé, bez otoků.
 
 Významné výsledky:
-LABORATOŘ PŘI PŘIJETÍ:
-Negativní troponin dvakrát, normální TSH, draslík a hořčík v normě, kreatinin na základní úrovni dle ___.
-ZOBRAZENÍ:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Dvakrát negativní troponin, normální TSH, draslík a hořčík v normálním rozmezí, kreatinin na výchozí úrovni podle ___.
+ZOBRAZOVACÍ METODY:
 Rentgen hrudníku bez patologických nálezů.
 ZÁVĚR:
-Žádný akutní kardiopulmonální proces; echokardiogram provedený u ___ ukázal zachovalou ejekční frakci.
+Žádný akutní kardiopulmonální proces; echokardiografie provedená v ___ ukázala zachovanou ejekční frakci.
 
-Průběh hospitalizace:
-Pacientka byla přijata s nově vzniklou fibrilací síní s rychlou ventrikulární odpovědí. Srdeční frekvence byla kontrolována perorálním metoprololem po počáteční léčbě diltiazemem u ___. Antikoagulace byla zahájena po posouzení rizika krvácení. Telemetrie nevykazovala žádné pauzy. Pacientka zůstala stabilní a byla propuštěna s naplánovanou kontrolou u kardiologa provedenou ___ .
+Stručný průběh hospitalizace:
+Pacientka byla přijata s nově vzniklou fibrilací síní s rychlou ventrikulární odpovědí. Srdeční frekvence byla regulována perorálním metoprololem po počáteční dávce diltiazemu v ___. Po zhodnocení rizika krvácení byla zahájena antikoagulační léčba. Telemetrie neukázala žádné pauzy. Pacientka zůstala stabilní a byla propuštěna s naplánovanou kontrolou u kardiologa, kterou zajistil ___.
 
 Léky při přijetí:
 Lisinopril denně
-Levothyroxin denně
+Levotyroxin denně
 
 Léky při propuštění:
-1. Metoprolol succinate 50 mg denně
+1. Metoprolol sukcinát 50 mg denně
 2. Apixaban 5 mg dvakrát denně
 3. Lisinopril 10 mg denně
-4. Levothyroxin 75 mcg denně
+4. Levotyroxin 75 mcg denně
 
-Plán po propuštění:
+Způsob propuštění:
 Domů s ___
 
 Diagnóza při propuštění:
 Fibrilace síní s rychlou ventrikulární odpovědí
 
 Stav při propuštění:
-Psychický stav: Jasný a srozumitelný.
-Úroveň vědomí: Vnímavá a komunikativní.
-Funkční stav: Chůze, soběstačná.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a reaguje.
+Fyzická aktivita: Chodí, soběstačná.
 
-Instrukce při propuštění:
-Byla jste hospitalizována kvůli nepravidelnému srdečnímu rytmu. Užívajte metoprolol a apixaban přesně podle předpisu. V případě bolesti na hrudi, mdloby, krvácení nebo bušení srdce se obraťte na lékaře. Dodržte termín vaší kontroly u ___.
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli nepravidelnému srdečnímu rytmu. Užívajte metoprolol a apixaban přesně podle předpisu. V případě bolesti na hrudi, mdlob, krvácení nebo rychlého bušení srdce se vraťte. Dodržujte termín kontroly v ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

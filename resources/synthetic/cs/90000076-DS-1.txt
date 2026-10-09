@@ -1,47 +1,47 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Dušnost a otoky nohou
+Dušnost a otok nohou
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka, které jsou známy srdeční problémy, se dostavila s tříměsíční zhoršující se dušností, ortopneí (dušností vleže) a otoky nohou po vysazení diuretika. Byla vyšetřena v ___ a převezena sem k dalšímu vyšetření a léčbě.
+Anamnéza současného onemocnění:
+___ letá žena s anamnézou srdečního onemocnění se dostavila s třemi dny trvající se zhoršující dušností, ortopnoí a otokem nohou poté, co jí došlo diuretikum. Byla vyšetřena v ___ a převezena sem za účelem dalšího vyšetření a léčby.
 
-Osobní anamnéza:
-Srdeční selhání
-Hypertenze (vysoký krevní tlak)
-Hyperlipidemie (vysoká hladina cholesterolu)
-Osteoartróza (degenerativní onemocnění kloubů)
+Anamnéza předchozích onemocnění:
+Kongestivní srdeční selhání
+Hypertenze
+Hyperlipidémie
+Osteoartróza
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí. Otec zemřel ve věku ___ z neznámých příčin.
+Matka s hypertenzí. Otec zemřel v ___ na neznámou příčinu.
 
 Fyzikální vyšetření:
-Životní funkce: bez horečky, krevní tlak 128/74, srdeční frekvence 82, saturace kyslíkem 94 % při dýchání okolním vzduchem
-Celkový stav: pohodlná, bez známek utrpení
-Plíce: praskání v obou dolních plicních lalocích
-Břicho: měkké, bez citlivosti
-EXTREMITIES (končetiny): minimální otok kotníků
-Neurologické vyšetření: bez fokálních příznaků
+Vitalní funkce: bez horečky, TK 128/74, TF 82, SpO2 94 % při dýchání okolním vzduchem
+Celkový stav: komfortní, bez známek úzkosti
+Plíce: bilaterální chrůpky v bazálních oblastech
+Břicho: měkké, netendrovatelné
+Končetiny: mírný edém chodidel
+Neurologické vyšetření: bez ložiskových příznaků
 
 Významné výsledky:
-Laboratorní výsledky: zvýšená hladina BNP a mírná hyponatrémie (nízká hladina sodíku), jinak bez zvláštností. EKG ukázalo sinusový rytmus. Echokardiografie provedená v ___ ukázala sníženou ejekční frakci (sílu stahování srdce).
-Zobrazovací metody: Rentgen hrudníku s kardiomegalií (zvětšeným srdcem) a drobnými bilaterálními výpotky.
-ZÁVĚR: Plicní vaskulární kongestice (nadušení cév v plicích) bez lokálního zánětu.
+Laboratorní výsledky: zvýšené hodnoty BNP a mírná hyponatrémie, jinak bezvýznamné. EKG: sinusový rytmus. Echokardiografie v ___: snížená ejekční frakce.
+Zobrazovací vyšetření: Rentgen hrudníku: kardiomegalie a malé bilaterální efuze.
+Závěr: Plíce: vaskulární kongesce bez ložiskové konsolidace.
 
-Průběh hospitalizace:
-Pacientce byla podána intravenózní furosemid (diuretikum) s dobrým množstvím vylučovaného moči a zlepšením dýchání a otoků. Byla obnovena a upravena její domácí léčba. Byla monitorována a doplňována hladina elektrolytů. Pacientka absolvovala fyzioterapii a byla stabilní pro propuštění s perorálními diuretiky, přičemž byla zajištěna kontrola u ___.
+Stručný popis hospitalizace:
+Byla léčena intravenózním furosemidem, což vedlo k dobré diuréze a zlepšení dýchání a otoků. Byla obnovena a upravena její domácí léčba. Byly sledovány a doplněny elektrolyty. Pracovala s fyzioterapeutem a byla stabilizována, takže mohla být propuštěna domů s perorálními diuretiky a byla domluvena kontrola u ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -52,21 +52,21 @@ Léky při propuštění:
 Furosemid 40 mg jednou denně
 Lisinopril 10 mg jednou denně
 Atorvastatin 20 mg večer
-Metoprolol succinate 25 mg jednou denně
+Metoprolol sukcinát 25 mg jednou denně
 Chlorid draselný 20 mEq denně
 
-Plán po propuštění:
+Plán propuštění:
 Domů s péčí od ___
 
 Diagnóza při propuštění:
-Srdeční selhání
+Kongestivní srdeční selhání
 
 Stav při propuštění:
 Úroveň vědomí: bdělá a komunikativní
-Funkční stav: pohyblivá, soběstačná
+Stav aktivity: schopná chůze, soběstačná
 
-Pokyny při propuštění:
-Vážete se každé ráno a volejte ___ pokud přiberete více než 1,4 kg. Omezte příjem soli a tekutin podle doporučení. Užíváte léky podle předpisu a v případě zhoršení dušnosti nebo bolesti na hrudi se vraťte.
+Pokyny pro propuštění:
+Každé ráno se zvažte a zavolejte na ___, pokud přiberete více než tři libry. Omezte příjem soli a tekutin podle doporučení. Užívajte léky podle předpisu a v případě zhoršení dušnosti nebo bolesti na hrudi se vraťte.
 
 Pokyny pro kontrolu:
 ___

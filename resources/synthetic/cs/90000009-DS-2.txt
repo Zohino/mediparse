@@ -1,24 +1,24 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Ž  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
-Zvracení a snížený objem moči
+Zvracení a snížené množství moči
 
-Zásahné chirurgické zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka, ___ let, byla přijata ___ s třemi dny trvajícím zvracením, sníženým příjmem potravy a sníženým objemem moči. Laboratorní výsledky z ___ ukázaly akutní poškození ledvin (AKI) s kreatininem výrazně nad základní hodnotou. Pacientka popírala horečku, bolest na hrudi nebo břišní bolest a nedošlo k žádným nedávným změnám v užívání léků. Byla převezena za účelem rehydratace a monitorování.
+___ letá žena, která se dostavila ___ s třídenní anamnézou zvracení, špatným příjmem potravy a sníženým množstvím moči. Laboratorní výsledky z ___ ukázaly akutní poškození ledvin s kreatininem výrazně nad výchozí hodnotou. Pacientka popírala horečku, bolest na hrudi nebo bolest břicha a v nedávné době nedošlo ke změnám v užívaných lécích. Byla převezena za účelem hydratace a monitorování.
 
-Anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 
 Sociální anamnéza:
 ___
@@ -27,39 +27,39 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Celkový stav: Pacientka je v pohodě, bez akutní tíže.
-Hlava, oči, uši, nos, krk: Suché sliznice, bez žloutenky.
-Krk: Pružný, bez jícnové dilatace.
-Břicho: Měkké, bez citlivosti, bez distenze, normální peristaltika.
-Kůže: Teplá, bez vyrážky, snížený turgor.
+Celkový stav: Dobrý, bez akutní distrese.
+Hlava, oči, uši, nos, hrdlo: Suché sliznice, bez ikteru.
+Krk: Pohyblivý, bez známek zvýšeného žilního tlaku.
+Břicho: Měkké, netendrové, neztuhlé, normální střevní zvuky.
+Kůže: Teplá, bez vyrážky, snížená elasticita.
 
 Významné výsledky:
-Kreatinin při přijetí 2.9, urea 48, draslík 5.1, bikarbonát 19. Vyšetření moči bez proteinu nebo krve. Koncentrace sodíku v moči byla nízká, což odpovídá pre-renální fyziologii. Ultrazvuk ledvin provedený ___ neodhalil hydronefrózu. Rentgen hrudníku byl čistý.
-LABORATOŘ PŘI PROPUŠTĚNÍ:
-Kreatinin 1.8, urea 27, draslík 4.3, bikarbonát 23, sodík 139, hemoglobin 11.2, počet bílých krvinek 6.8, glukóza 132.
+Kreatinin při přijetí 2,9, BUN 48, draslík 5,1, bikarbonát 19. Vyšetření moči bez proteinu nebo krve. Sodík v moči byl nízký, což odpovídá prerenální fyziologii. Ultrazvuk ledvin provedený ___ neukázal hydronefrózu. Rentgen hrudníku byl v normě.
+LABORATORNÍ VÝSLEDKY PŘED PROPUŠTĚNÍM:
+Kreatinin 1,8, BUN 27, draslík 4,3, bikarbonát 23, sodík 139, hemoglobin 11,2, počet bílých krvinek 6,8, glukóza 132.
 
-Stručný průběh hospitalizace:
-Byla léčena pro pre-renální poškození intravenózními tekutinami a domácí podávání lisinoprilu a furosemidu bylo přerušeno. Kreatinin se zlepšil ze 7.9 na 1.8 během čtyř dnů. Oddělení nefrologie na ___ uvedlo, že její základní stádium chronického onemocnění ledvin (CKD) 3 vysvětluje neúplné zotavení. Nausea ustoupila a pacientka dobře tolerovala příjem potravy. Krevní tlak zůstal stabilní bez podávaných léků. Byla propuštěna ___ s naplánovanými kontrolními laboratorními testy.
+Stručný popis hospitalizace:
+Byla léčena pro prerenální poškození intravenózními tekutinami a dočasně se vysadily léky lisinopril a furosemid, které užívala doma. Kreatinin se během čtyř dnů zlepšil z 2,9 na 1,8. Nefrolog z ___ usoudil, že její výchozí stadium chronického onemocnění ledvin 3. stupně vysvětluje neúplné zotavení. Nechutenství odeznělo a pacientka dobře snášela perorální příjem potravy. Krevní tlak zůstal stabilní i po vysazení léků. Byla propuštěna ___ a byly naplánovány kontrolní laboratorní testy.
 
 Léky při přijetí:
 Metformin 500 mg dvakrát denně, lisinopril 10 mg denně, furosemid 20 mg denně, atorvastatin.
 
 Léky při propuštění:
-Metformin 500 mg dvakrát denně. Atorvastatin 20 mg večer. Amlodipin 5 mg denně. Lisinopril a furosemid se podávají pouze po zopakování laboratorních testů. Acetaminofen dle potřeby na bolest. Vyhýbat se nesteroidním protizánětlivým látkám (NSAID).
+Metformin 500 mg dvakrát denně. Atorvastatin 20 mg večer. Amlodipin 5 mg denně. Do kontroly laboratorních výsledků se vysadí lisinopril a furosemid. Paracetamol podle potřeby proti bolesti. Vyhýbat se nesteroidním protizánětlivým lékům.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů s péčí od ___
 
 Diagnóza při propuštění:
-Primární: Akutní poškození ledvin na pozadí chronického onemocnění ledvin.
+Primární: Akutní poškození ledvin na podkladě chronického onemocnění ledvin
 
 Stav při propuštění:
-Psychický stav: Jasná a koherentní.
-Úroveň vědomí: Vnímavá a komunikativní.
-Funkční stav: Chůze, soběstačná.
+Duševní stav: Jasný a orientovaný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodící, soběstačný.
 
 Pokyny pro propuštění:
-Pijte pravidelně tekutiny a vyhýbejte se ibuprofenu a podobným lékům proti bolesti. Denně se vážte a měřte si krevní tlak. V případě snížení množství moči nebo opětovného zvracení volejte číslo ___. V případě zmatenosti, mdloby nebo silné slabosti se obraťte na ___.
+Pravidelně pijte tekutiny a vyhýbejte se užívání ibuprofenu a podobných léků proti bolesti. Denně se važte a měřte si krevní tlak. Volejte na číslo ___, pokud se sníží množství moči nebo se vrátí zvracení. V případě zmatenosti, mdlob nebo silné slabosti se vraťte do ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolní vyšetření:
 ___

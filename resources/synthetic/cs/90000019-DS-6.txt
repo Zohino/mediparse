@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,66 +9,68 @@ Alergie:
 Hlavní potíže:
 Bolest a zarudnutí pravé nohy
 
-Zásahné chirurgické zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let s hypertenzí a hyperlipidémií, který se dostavil s třemi dny zhoršující se bolesti, tepla a zarudnutí v dolní části pravé nohy po drobném poranění při zahradničení. Uváděl subjektivní horečku a zimnici. Byl převezen z ___ dne ___ za účelem dalšího vyšetření, kde byla podezření na celulitidu s počínající tvorbou abscesu a byla zahájena intravenózní antibiotika.
+___letý muž s hypertenzí a hyperlipidemií, který se dostavil s třídenní se zhoršující bolestí, hřejivostí a zarudnutím pravé dolní nohy po drobném oděru při zahradničení. Uváděl subjektivní horečky a zimnici. Byl převezen z ___ dne ___ k dalšímu vyšetření, kde bylo podezření na celulitidu s počínající tvorbou abscesu a byla zahájena intravenózní antibiotická léčba.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hyperlipidémie
 
-Chirurgická anamnéza:
-Apendektomie v ___ v roce ___.
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___ v roce ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec s ischemickou chorobou srdeční.
+Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
-Celkový stav: Vědomý, v pohodě, bez známek utrpení.
-Hlava, oči, uši, nos, hrdlo: Normální tvar hlavy, vlhké sliznice.
-Krk: Pružný.
-Extremity: Pravá holen teplá, erytematózní, mírně bolestivá.
-Kůže: Výrazná erytém bez výtoku.
-Neurologické vyšetření: Orientovaný, pohybuje všemi končetinami.
+Celkový stav: Bdělý, v pohodě, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Normocefalický, vlhké sliznice.
+Krk: Pohyblivý.
+Končetiny: Pravá holeně hřejivá, zarudlá, mírně citlivá na dotek.
+Kůže: Výrazné zarudnutí bez hnisavého výtoku.
+Neurologické: Orientovaný, pohybuje všemi končetinami.
 
 Významné výsledky:
-Laboratorní výsledky při přijetí ukazují zvýšený počet bílých krvinek s převahou neutrofilů a mírně zvýšený CRP. Kultivace krve odebraná dne ___ nevykazovala žádný růst po pěti dnech. Výtěr z rány obsahoval Staphylococcus aureus citlivý na meticilin. Laktát normální. Základní metabolický panel bez odchylek. Ultrazvuk nohy při přijetí neprokázal hlubokou žilní trombózu.
-ZÁVĚR: Otok měkkých tkání v dolní části pravé nohy, žádná drenážní kolekce, žádný plyn.
+Při přijetí zvýšený počet bílých krvinek s převahou neutrofilů a mírně zvýšené CRP. Krevní kultury odebrané dne ___ nevykazovaly růst po pěti dnech. Z kultivace rány byl izolován Staphylococcus aureus citlivý na meticilin. Laktát v normě. Základní metabolický panel bez významných odchylek. Ultrazvuk nohy při přijetí vyloučil hlubokou žilní trombózu.
+ZÁVĚR: Měkké otoky pravé dolní nohy, bez hnisavé kolekce, bez přítomnosti plynů.
 
-Průběh hospitalizace:
-Pacient byl přijat na oddělení medicíny a zahájena intravenózní cefazolinu. Dr. ___ z oddělení infekčních chorob zhodnotil výtěr z rány a léčba byla odpovídajícím způsobem upravena. Zarudnutí ustupovalo v průběhu následujících dnů a horečka ustoupila dne ___. Bolest byla kontrolována pomocí paracetamolu. Pacient dobře snášel stravu a chodil samostatně. Byl převeden na perorální cephalexin a byl posouzen jako vhodný k propuštění domů.
-PROBLÉMY PŘI PROPOUŠTĚNÍ:
-- Dokončit perorální léčbu antibiotiky.
-- Zkontrolovat stav kůže při kontrole u praktického lékaře.
-- Pokračovat v užívání léků na vysoký krevní tlak doma.
+Stručný průběh hospitalizace:
+Byl přijat na oddělení medicíny a zahájena intravenózní léčba cefazolinem. Dr. ___ z oddělení infekčních chorob zhodnotil kultivaci rány a léčba byla odpovídajícím způsobem upravena. Zarudnutí bylo ohraničeno a v následujících dnech ustoupilo, horečky odezněly do ___. Bolest byla kontrolována paracetamolem. Dobře snášel stravu a chodil samostatně. Byl převeden na perorální cefalexin a bylo posouzeno, že je v bezpečí pro propuštění domů.
+PROBLÉMY PŘI PŘECHODU:
+- Dokončit perorální antibiotickou léčbu.
+- Zkontrolovat kůži při návštěvě praktického lékaře.
+- Pokračovat v domácí léčbě hypertenze.
 
 Léky při přijetí:
 Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Aspirin 81 mg denně.
 
 Léky při propuštění:
-Cephalexin 500 mg perorálně čtyřikrát denně po dobu sedmi dalších dnů. Paracetamol 650 mg každých šest hodin dle potřeby na bolest. Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Aspirin 81 mg denně.
+Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších sedmi dnů. Paracetamol 650 mg každých šest hodin podle potřeby na bolest. Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Aspirin 81 mg denně.
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Celulitida dolní části pravé nohy
+Celulitida pravé dolní nohy
 Hypertenze
 Hyperlipidémie
 
 Stav při propuštění:
 Stabilní.
-Psychický stav: Jasný a koherentní.
-Funkční stav: Chůze, samostatný.
+Duševní stav: Jasný a srozumitelný.
+Fyzická aktivita: Chodí, soběstačný.
 
 Pokyny pro propuštění:
-Byli jste léčeni kvůli infekci kůže na noze. Užívajte antibiotika přesně podle předpisu, dokud se léky nespotřebují. Když sedíte, zvedněte nohu. V případě horečky, rozšiřující se zarudnutí nebo zhoršující se bolesti volejte číslo ___ nebo se obraťte na pohotovost. Dodržte schůzku s doktorem ___ v ___.
 
-Pokyny pro další péči:
+Byl/a jste léčen/a na kožní infekci nohy. Užijte antibiotika přesně podle předpisu, dokud je nevyspotřebujete. Při sezení si nohu podložte, aby byla ve zvýšené poloze. V případě horečky, šíření zarudnutí nebo zhoršování bolesti zavolejte na číslo ___ nebo se vraťte na pohotovost. Dodržte termín kontroly u doktora ___ na adrese ___.
+
+Pokyny pro další postup:
+
 ___

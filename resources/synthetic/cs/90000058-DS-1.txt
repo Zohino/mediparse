@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Oddělení: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,20 +9,20 @@ Alergie:
 Hlavní potíže:
 Bolest břicha a zvracení
 
-Zásahné chirurgické zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Žena ve věku ___ let, která se dostavila s bolestí břicha, nevolností a zvracením trvající dva dny. Byla odeslána z ambulance ___ po zhoršení příjmu potravy a závratích.
-PROHLÍDKA SYSTÉMŮ:
-Nevolnost, bez horečky.
+___ letá žena s dvoudenní se zhoršující se bolestí břicha, nevolností a zvracením, odeslána z ___ kliniky kvůli špatnému příjmu potravy a závratím.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na nevolnost, bez horečky.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hypotyreóza
 Gastroezofageální reflux
 
-Chirurgická anamnéza:
+Anamnéza předchozích chirurgických zákroků:
 Apendektomie v ___
 
 Sociální anamnéza:
@@ -32,28 +32,28 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Bez horečky, stabilní vitální funkce, suché sliznice, mírná bolestivost břicha.
-FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
-Celkový stav: Komfortní, bez známek utrpení
-Hlava, krk, uši, nos, hrdlo: Vlhké sliznice
-Plíce: Čisté bilaterálně
-Břicho: Měkké, bez bolestivosti
-EXTREMITY: Bez otoků
+Bez horečky, stabilní vitální funkce, suché sliznice, mírná citlivost břicha.
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: Komfortní, bez známek úzkosti
+Hlava, uši, nos, hrdlo: Vlhká sliznice
+Plíce: Čisté na obou stranách
+Břicho: Měkké, bez citlivosti
+Končetiny: Bez otoků
 Kůže: Teplá a suchá
 
 Významné výsledky:
-Kreatinin mírně zvýšen při příjmu, zlepšení po podání tekutin. Lipáza normální. Počet bílých krvinek normální. CT břicha ukázalo mírné změny způsobené gastroenteritidou, bez známek obstrukce.
+Mírně zvýšená hladina kreatininu při přijetí, zlepšení po podání tekutin. Lipáza v normě. Počet bílých krvinek v normě. CT vyšetření břicha ukázalo mírné změny charakteristické pro gastroenteritidu, bez obstrukce.
 
-Průběh hospitalizace:
-Léčba gastroenteritidy intravenózními tekutinami a antiemetiky. Zvýšení kreatininu vyvolalo podezření na možnou akutní poruchu funkce ledvin v důsledku dehydratace, což se zlepšilo do propuštění. Dieta postupně rozšiřována; vyšetřil/a ___.
+Stručný popis hospitalizace:
+Léčena pro gastroenteritidu intravenózními tekutinami a antiemetiky. Zvýšená hladina kreatininu vyvolala podezření na možnou akutní poruchu funkce ledvin v důsledku dehydratace, ke zlepšení došlo před propuštěním. Strava byla postupně rozšiřována; pacientka byla vyšetřena ___.
 
 Léky při přijetí:
-Lisinopril, levothyroxin, omeprazol
+Lisinopril, levotyroxin, omeprazol
 
 Léky při propuštění:
-Levothyroxin denně, omeprazol denně, ondansetron dle potřeby při nevolnosti. Lisinopril vysadit do opětovného vyšetření funkce ledvin praktickým lékařem.
+Levotyroxin denně, omeprazol denně, ondansetron podle potřeby při nevolnosti. Lisinopril vysadit, dokud nebude funkce ledvin znovu zkontrolována ošetřujícím lékařem.
 
-Plán po propuštění:
+Plán propuštění:
 Domů
 
 Diagnóza při propuštění:
@@ -63,11 +63,11 @@ Hypertenze
 
 Stav při propuštění:
 Dobrý
-Úroveň vědomí: Vědomá a komunikativní
-Funkční stav: Chůze, soběstačná
+Úroveň vědomí: Bdělá a komunikativní
+Stav aktivity: Ambulantní, soběstačná
 
-Pokyny při propuštění:
-Byla/byl jste léčena/léčen pro infekci žaludku a dehydrataci. Pijte dostatek tekutin, jezte nenáročnou stravu a v případě horečky, přetrvávajícího zvracení nebo malého množství moči se vraťte. V případě dotazů volejte ___.
+Pokyny pro propuštění:
+Byla léčena pro žaludeční infekci a dehydrataci. Pijte dostatek tekutin, jezte lehká jídla a v případě horečky, přetrvávajícího zvracení nebo malého množství moči se vraťte. V případě dotazů volejte ___.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

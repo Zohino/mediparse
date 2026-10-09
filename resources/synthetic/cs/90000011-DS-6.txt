@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Obecná chirurgie
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: Obecná chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,68 +9,68 @@ Alergie:
 Hlavní potíže:
 Bolest v pravém dolním kvadrantu břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická appendektomie (odstranění slepého střeva)
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let byl převezen z ___ s bolestí v pravém dolním kvadrantu břicha trvající tři dny, nevolností a mírnou horečkou, která začala ___. Bolest byla konstantní a zhoršovala se při pohybu. Nevyskytovala se žádná zvracení ani změny v stolici.
-PROHLÍDKA SYSTÉMŮ:
-Snížená chuť k jídlu. Negativní nález při vyšetřování bolesti hrudníku, dušnosti a obtíží při močení.
+___letý muž převezen z ___ s třídenní bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou, která začala ___. Bolest byla stálá a zhoršovala se při pohybu. Bez zvracení nebo změn ve vyprazdňování.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález: snížená chuť k jídlu. Negativní nález: bolest na hrudi, dušnost, dysurie.
 
-Osobní anamnéza:
-Hypertenze (vysoký krevní tlak)
-Oprava kýly v ___
+Anamnéza předchozích onemocnění:
+Hypertenze
+Operace hernie v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí, sledována v ___
+Matka s hypertenzí, léčena v ___
 
 Fyzikální vyšetření:
-Fyzikální vyšetření při přijetí:
-Bolestivý pravý dolní kvadrant.
-Životní funkce: Teplota 38,4 °C, srdeční frekvence 92 tepů/min, krevní tlak 128/76.
-Oblast hlavy, očí, uší, nosu a krku: Bez žloutenky.
-Krk: Pružný.
-EXTREMITY (končetiny): Bez otoků.
-KŮŽE: Teplá, suchá.
-PULSY (tepny): Palpovatelné na všech končetinách.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Citlivost v pravém dolním kvadrantu.
+Vitalní funkce: T 38,0 °C, puls 92, krevní tlak 128/76.
+Hlava, oči, uši, nos, hrdlo: bez známek žloutenky.
+Krk: pružný.
+KONČETINY: bez otoků.
+KŮŽE: teplá, suchá.
+PULSY: hmatné po celém těle.
 
 Významné výsledky:
-LABORATOŘ PŘI PŘIJETÍ:
-Počet bílých krvinek 13,2, hemoglobin 14,1, kreatinin 0,9, laktát 1,1.
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 13,2, hemoglobin 14,1, kreatinin 0,9, laktát 1,1.
 ZÁVĚR:
-CT vyšetření provedené v ___ ukázalo dilatovaný, zánětlivý appendix (slepé střevo) bez perforace nebo abscesu.
+CT vyšetření v ___ ukázalo rozšířený, zánětlivý apendix bez perforace nebo abscesu.
 
-Průběh hospitalizace:
-Pacient byl přijat s akutní appendicitidou (zánětem slepého střeva), zahájena intravenózní antibiotika a provedena nekomplikovaná laparoskopická appendektomie. Zotavení probíhalo hladce, dieta byla postupně rozšiřována a bolest byla kontrolována perorálními léky. Plán byl prodiskutován s ___ před propuštěním. Pacient byl při propuštění afebrilní (bez horečky) a toleroval příjem potravy.
-PROBLÉMY PŘI PŘECHODU:
-Kontrola rány při následné kontrole.
+Stručný průběh hospitalizace:
+Přijat s akutní apendicitidou, zahájena intravenózní antibiotická léčba a provedena laparoskopická apendektomie bez komplikací. Zotavení probíhalo hladce; dieta byla postupně rozšiřována a bolest kontrolována perorálními léky. Plán byl prodiskutován s ___ před propuštěním. Při propuštění neměl horečku a dobře snášel stravu ___.
+PŘECHODNÁ OTÁZKY:
+Kontrola rány při kontrolním vyšetření.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
 
 Léky při propuštění:
 1. Lisinopril 10 mg perorálně denně
-2. Acetaminophen 650 mg každých šest hodin dle potřeby na bolest
-3. Docusate 100 mg dvakrát denně při užívání opioidních analgetik
+2. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest
+3. Docusate 100 mg dvakrát denně během užívání opioidů
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Akutní appendicitida
+Akutní apendicitida
 Hypertenze
 
 Stav při propuštění:
-Psychický stav: jasný a soustředěný
-Úroveň vědomí: bdělý a komunikativní
-Funkční stav: pohyblivý, soběstačný
+Duševní stav: jasný a srozumitelný
+Úroveň vědomí: bdělý a reagující
+Stav aktivity: pohyblivý, soběstačný
 
-Pokyny při propuštění:
-Byl vám proveden chirurgický zákrok pro appendicitidu. Udržujte rány čisté a suché a vyhýbejte se zvedání předmětů o hmotnosti více než 4,5 kg po dobu čtyř týdnů. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí rány kontaktujte ___ nebo se obraťte na pohotovost v ___ .
+Pokyny pro propuštění:
+Byl jste léčen na apendicitidu chirurgicky. Udržujte incize čisté a suché a vyhýbejte se zvedání těžších předmětů než 10 liber (cca 4,5 kg) po dobu čtyř týdnů. V případě horečky, zhoršení bolesti, zvracení nebo zarudnutí rány volejte ___ nebo se vraťte na pohotovost v ___.
 
-Následné kontroly:
+Pokyny pro kontrolní vyšetření:
 ___

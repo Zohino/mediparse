@@ -1,27 +1,27 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
-Nausea a snížené množství moči
+Nevolnost a snížené množství moči
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacientka byla přijata dne ___ s třemi dny trvajícími potížemi, jako je nevolnost, snížený příjem potravy a snížené množství moči. Laboratorní výsledky ukázaly akutní poškození ledvin s elevovanou hodnotou kreatininu. Byla přijata za účelem rehydratace.
+Pacientka přijata z ___ s třídenní nevolností, špatným příjmem potravy a sníženým množstvím moči. Laboratorní výsledky prokázaly akutní poškození ledvin se zvýšenou hladinou kreatininu. Přijata k hydrataci.
 
-Předchozí zdravotní historie:
-Fibrilace síní
+Anamnéza předchozích onemocnění:
+Atriální fibrilace
 Hypertenze
 Hypotyreóza
 
-Předchozí chirurgické zákroky:
-Apendektomie na místě ___
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
 
 Sociální anamnéza:
 ___
@@ -30,36 +30,36 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Celkový stav: Pacientka je v pohodě, bez známek utrpení.
-Plíce: Čisté bilaterálně.
-SRDEČNÍ: Nepravidelný rytmus.
-BŘÍCHO: Měkké, bez citlivosti.
+Celkový stav: Dobrý, bez známek úzkosti
+Plíce: Čisté na obou stranách
+SRDCE: Nepravidelný rytmus
+BŘICHO: Měkké, bez citlivosti
 
 Významné výsledky:
-Kreatinin 2,4 při přijetí, zlepšující se na 1,1 při propuštění. Draslík 4,8. Hemoglobin 11,2. Analýza moči bez patologických nálezů. Ultrazvuk ledvin bez známek hydronefrózy. Rentgen hrudníku bez patologických nálezů.
+Kreatinin 2,4 při přijetí, zlepšení na 1,1 při propuštění. Draslík 4,8. Hemoglobin 11,2. Vyšetření moči bez patologických nálezů. Ultrazvuk ledvin bez hydronefrózy. Rentgen hrudníku čistý, bez známek akutního procesu.
 
-Průběh hospitalizace:
-Byla jí podávána intravenózní tekutina a bylo přerušeno podávání lisinoprilu, který užívala doma. Hodnota kreatininu se postupně zlepšovala a množství moči se normalizovalo. Oddělení nefrologie na místě ___ bylo konzultováno a souhlasilo s plánem léčby. Pacientka dobře tolerovala stravu a byla propuštěna po posouzení týmem ___ .
+Stručný popis hospitalizace:
+Byla jí podána intravenózní tekutina a dočasně se vysadilo lisinopril, který užívá doma. Hladina kreatininu se postupně zlepšovala a množství moči se normalizovalo. Konzultován byl nefrolog z ___, který souhlasil s navrženým postupem. Pacientka dobře snášela stravu a byla propuštěna domů týmem ___.
 
 Léky při propuštění:
-Apixaban 5 mg dvakrát denně. Metoprolol sukcinát 50 mg denně. Paracetamol dle potřeby na bolest. Lisinopril se podává až do dalšího laboratorního vyšetření.
+Apixaban 5 mg dvakrát denně. Metoprolol sukcinát 50 mg denně. Paracetamol podle potřeby proti bolesti. Pokračovat v užívání lisinoprilu až po kontrolních laboratorních testech.
 
-Místo propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
 Akutní poškození ledvin
-Hlavní: Akutní poškození ledvin
+Primární: Akutní poškození ledvin
 
 Stav při propuštění:
 Stabilní
-Psychický stav: Vědomá a orientovaná, schopná plnit pokyny.
-Úroveň vědomí: Probuděná a pozorná.
-Aktivity: Chůze, soběstačná.
+Duševní stav: Bdělá a orientovaná, schopná plnit pokyny
+Úroveň vědomí: Bdělá a pozorná
+Stav aktivity: Chodí, soběstačná
 
-Pokyny při propuštění:
-Pijte dostatek tekutin a vyhýbejte se ibuprofenu. V případě sníženého množství moči, zvracení nebo otoků se obraťte na lékaře. Opakujte laboratorní vyšetření na místě ___ do jednoho týdne.
+Pokyny pro propuštění:
+Pijte dostatek tekutin a vyhýbejte se ibuprofenu. V případě sníženého množství moči, zvracení nebo otoků se vraťte. Nechte si opakovat krevní testy v ___ do jednoho týdne.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

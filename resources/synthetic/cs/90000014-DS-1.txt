@@ -1,21 +1,21 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Sulfonamidy
+Sulfonamidové léky
 
 Hlavní potíže:
 Bolest a otok pravé nohy
 
-Zásah:
-Incize a drenáž v místě léze
+Významný chirurgický nebo invazivní zákrok:
+Incize a drenáž u lůžka
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let se dostavil s bolestí, otokem, horečkou a zimnicí v pravé dolní části nohy, které trvaly tři dny. Byl převezen z ___ poté, co ultrazvukové vyšetření naznačilo celulitidu s možnou malou absces. V pohotovostní ambulanci ___ mu byla podána antibiotika.
+___letý muž se dostavil s třídenní anamnézou bolesti a otoku pravé dolní končetiny, horečkou a zimnicí. Byl převezen z ___ poté, co ambulantní ultrazvukové vyšetření naznačilo celulitidu s možným malým abscesem. Na pohotovosti ___ mu byla podána antibiotika.
 
-Anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
 Hypertenze
 Obezita
@@ -26,10 +26,10 @@ ___
 Rodinná anamnéza:
 Matka s hypertenzí
 
-Výsledky vyšetření:
-Laboratorní výsledky při přijetí ukázaly zvýšený počet bílých krvinek a hladinu glukózy. Kultivace krve z ___ nevykazovala žádné patogeny po pěti dnech. Kultivace rány prokázala Staphylococcus aureus citlivý na meticilin.
+Významné výsledky:
+Při přijetí laboratorní testy ukázaly zvýšený počet bílých krvinek a glukózu. Krevní kultury odebrané v ___ po pěti dnech nevykázaly žádné mikroorganismy. Kultivace rány prokázala přítomnost methicilin-senzitivního Staphylococcus aureus.
 NÁLEZY:
-Ultrazvukové vyšetření prokázalo přítomnost tekutiny v podkožní tkáni, ale bez hluboké žilní trombózy.
+Ultrazvukové vyšetření prokázalo přítomnost tekutiny v podkožní tkáni bez hluboké žilní trombózy.
 
 Léky při přijetí:
 Metformin 500 mg dvakrát denně
@@ -39,9 +39,9 @@ Léky při propuštění:
 Cefalexin 500 mg čtyřikrát denně po dobu sedmi dnů
 Metformin 500 mg dvakrát denně
 Lisinopril 10 mg denně
-Paracetamol 650 mg každých šest hodin dle potřeby na bolest
+Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 Zařízení: ___
 
@@ -50,12 +50,12 @@ Celulitida pravé nohy s abscesem
 Hypertenze
 
 Stav při propuštění:
-Psychický stav: Vědomý a orientovaný, schopný plnit pokyny.
-Úroveň vědomí: Probudený a pozorný.
-Funkční stav: Chůze s mírnou kulháním, soběstačný.
+Duševní stav: Bdělý a orientovaný, schopen plnit pokyny.
+Úroveň vědomí: Bdělý a pozorný.
+Stav aktivity: Chodí s mírným kulháním, soběstačný.
 
-Pokyny při propuštění:
-Byl vám poskytnut lék na kožní infekci nohy. Užívajte všechny antibiotika podle předpisu a udržujte ránu čistou a zakrytou. Zvedněte nohu. V případě horečky, rozšiřujícího se zarudnutí nebo zhoršující se bolesti kontaktujte Dr. ___ nebo se vraťte do nemocnice.
+Pokyny pro propuštění:
+Byl jste léčen na kožní infekci nohy. Užívejte všechna antibiotika podle předpisu a udržujte ránu čistou a zakrytou. Zvedněte nohu. V případě horečky, šíření zarudnutí nebo zhoršení bolesti zavolejte lékaři ___ nebo se vraťte do nemocnice.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___

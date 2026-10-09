@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Peniciliny
@@ -9,15 +9,15 @@ Peniciliny
 Hlavní potíže:
 Kašel a horečka
 
-Zásahové zákroky:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Pacient se dostavil na oddělení ___ s třidenním produktivním kašlem, horečkou a bolestí hrudníku. Předtím byl vyšetřen v ambulanci ___ a dostal perorální antibiotika, ale bez zlepšení. Pacient byl přijat s horečkou a mírnou hypoxií; rentgen hrudníku ukázal konsolidaci v dolním laloku pravé plíce, a proto byl hospitalizován.
+Pacient se dostavil do ___ s třídenní anamnézou produktivního kašle, horečky a bolesti na hrudi při dýchání. Dříve byl vyšetřen v ambulanci ___ a byl mu předepsán perorální antibiotika, ale nedošlo ke zlepšení. Přijat s horečkou a mírnou hypoxií; rentgen hrudníku ukázal konsolidaci v dolním laloku pravého plíce, proto byl hospitalizován.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
+Hyperlipidémie
 Gastroezofageální reflux
 
 Sociální anamnéza:
@@ -27,33 +27,33 @@ Rodinná anamnéza:
 Otec s ischemickou chorobou srdeční
 
 Fyzikální vyšetření:
-Celkový stav: Únavný, ale komfortní, mluví jasně a srozumitelně.
-Plíce: Krepitus v dolní části pravé plíce, bez sípání.
-EXTREMITETY: Bez otoků.
-KŮŽE: Teplá, suchá.
-PULZY: Palpovatelné a symetrické.
+Celkový stav: Unavený, ale v pohodě, mluví celými větami
+Plíce: Pravostranné bazální chrůpky, bez sípání
+KONČETINY: Bez otoků
+KŮŽE: Teplá, suchá
+PULSY: Hmatné a symetrické
 
 Významné výsledky:
-Počet bílých krvinek zvýšený při přijetí, normalizující se při propuštění. Kreatinin v normě. Kultivace krve z ___ nevykazovala žádný růst. Rentgen hrudníku: opacita v dolním laloku pravé plíce, bez výpotku.
+Počet bílých krvinek zvýšený při přijetí, normalizoval se do propuštění. Kreatinin v normě. Krevní kultury z ___ nevykázaly růst. Rentgen hrudníku: opacita v dolním laloku pravé plíce, bez výpotku.
 
-Průběh hospitalizace:
-Léčba pneumonie získané v komunitě intravenózním ceftriaxonem a azithromycinem, poté přechod na perorální doxycyklin, jakmile horečka ustoupila. Podávání kyslíku bylo postupně snižováno, do třetího dne byl pacient na pokojovém vzduchu. Pacient byl vyšetřen plicním týmem v ___ a doporučeno opakované zobrazovací vyšetření za šest týdnů. Pacient byl propuštěn domů s ___ podporou.
+Stručný popis hospitalizace:
+Léčen pro komunitně získanou pneumonii intravenózním ceftriaxonem a azithromycinem, po odeznění horečky převeden na perorální doxycyklin. Kyslík byl postupně snižován, do třetího dne již pacient dýchal vzduch z okolí. Konzultace s pneumologickým týmem v ___, doporučeno opakované zobrazovací vyšetření za šest týdnů. Propuštěn domů s doporučením ___.
 
 Léky při propuštění:
-Doxycyklin 100 mg dvakrát denně po dobu pěti dnů. Pokračovat v užívání lisinoprilu a atorvastatinu doma. Paracetamol dle potřeby; vyzvednout v lékárně ___ .
+Doxycyklin 100 mg dvakrát denně po dobu dalších pěti dnů. Pokračovat v užívání lisinoprilu a atorvastatinu doma. Paracetamol podle potřeby; vyzvednout v lékárně ___.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Primární: Pneumonie získaná v komunitě
+Primární: Komunitně získaná pneumonie
 
 Stav při propuštění:
-Psychický stav: Jasný a koherentní.
-Úroveň vědomí: Vnímavý a komunikativní.
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
 
-Instrukce při propuštění:
-Byl jste hospitalizován pro infekci plic. Dokončete užívání antibiotik, odpočívejte, pijte dostatek tekutin a vyhýbejte se kouření. V případě zhoršení dušnosti, horečky nebo bolesti hrudníku se vraťte. V případě dotazů volejte ___ .
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli plicní infekci. Dokončete užívání antibiotik, odpočívejte, pijte dostatek tekutin a vyhýbejte se kouření. V případě zhoršení dušnosti, horečky nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
 
-Následná péče:
+Pokyny pro kontrolu:
 ___

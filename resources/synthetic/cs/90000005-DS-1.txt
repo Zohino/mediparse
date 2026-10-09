@@ -1,67 +1,67 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Oddělení: CHIRURGIE
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest v pravém dolním kvadrantu břicha
+Bolest v pravé dolní části břicha
 
-Hlavní chirurgický zákrok:
-Laparoskopická appendektomie (odstranění slepého střeva)
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let, který se dostavil s bolestmi v okolí pupku, které se po dvou dnech zhoršily a přesunuly se do pravého dolního kvadrantu břicha, doprovázené nevolností a mírnou horečkou. Byl přijat na oddělení ___ dne ___ a CT vyšetření prokázalo zánět slepého střeva. Byl převeden na naše oddělení k chirurgickému ošetření.
+___letý muž s dvoudenní se zhoršující bolestí v oblasti pupečníku, která se přesunula do pravé dolní části břicha, s nevolností a mírnou horečkou. Přišel do ___ dne ___, kde CT vyšetření ukázalo zánět slepého střeva a byl převezen na chirurgické oddělení.
 
-Předchozí zdravotní problémy:
-Hypertenze (vysoký krevní tlak)
+Anamnéza předchozích onemocnění:
+Hypertenze
 Sezónní alergie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Bez významných informací
+Bez významných údajů
 
 Fyzikální vyšetření:
-Celkový stav: Pacient je nepohodlný, při vědomí, v klidu nevykazuje známky tíže.
-Oblast hlavy, očí, uší, nosu a krku (HEENT): Suché sliznice.
-Kardiovaskulární systém: Pravidelná srdeční frekvence a rytmus.
-Břicho: Citlivost v pravém dolním kvadrantu, přítomna svalová obrana.
-Končetiny: Teplé, bez otoků.
+Celkový stav: Nepohodlí, bdělý, v klidu bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Suché sliznice
+SRDEČNÍ: Pravidelný rytmus
+BŘICHO: Bolestivá pravá dolní část břicha, přítomna obranná reakce
+KONČETINY: Teplé, bez otoků
 
 Významné výsledky:
-Počet bílých krvinek (WBC) 14,2 při přijetí, normalizoval se do propuštění. Kreatinin 0,9. Laktát v normě.
-Závěr:
-Rozšířený a ztluštělý slepý střevo s okolním zánětem tukové tkáně a malým množstvím volné tekutiny. Nebyl zjištěn žádný absces ani perforace.
+Počet leukocytů 14,2 při přijetí, normalizován při propuštění. Kreatinin 0,9. Laktát v normě.
+ZÁVĚR:
+Rozšířené, ztluštělé slepé střevo s okolní tukovou infiltrací a malým množstvím volné tekutiny. Nebyl zjištěn absces ani perforace.
 
-Průběh hospitalizace:
-V ___ byl pacientovi podáván intravenózní roztok a antibiotika a byl operován Dr. ___, kde mu byla provedena nekomplikovaná laparoskopická appendektomie. Bolest byla kontrolována pomocí perorálních léků, pacient toleroval běžnou stravu od ___, a rány zůstaly čisté a suché.
+Stručný popis hospitalizace:
+Během ___ mu byly podávány intravenózní tekutiny a antibiotika a byl převezen na operační sál, kde mu Dr. ___ provedl nekomplikovanou laparoskopickou apendektomii. Bolest byla kontrolována perorálními léky, do ___ toleroval běžnou stravu a rány zůstaly čisté a suché.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
-Loratadin 10 mg dle potřeby
+Loratadin 10 mg podle potřeby
 
 Léky při propuštění:
-1. Acetaminophen 650 mg každých šest hodin dle potřeby na bolest.
-2. Oxykodon 5 mg každých šest hodin dle potřeby na silnou bolest, krátkodobě.
-3. Lisinopril 10 mg denně.
-4. Docusate 100 mg dvakrát denně během užívání oxykodonu.
+1. Paracetamol 650 mg každých šest hodin podle potřeby na bolest
+2. Oxykodon 5 mg každých šest hodin podle potřeby na silnou bolest, krátkodobá léčba
+3. Lisinopril 10 mg denně
+4. Dokusát 100 mg dvakrát denně během užívání oxykodonu
 
-Plán po propuštění:
-Domů.
+Plán propuštění:
+Domů
 
 Diagnóza při propuštění:
-Akutní apendicitida (zánět slepého střeva).
+Akutní apendicitida
 
 Stav při propuštění:
-Psychický stav: Jasný a srozumitelný, plně orientovaný.
-Fyzická aktivita: Chůze a soběstačnost.
+Duševní stav: Jasný a srozumitelný, plně orientovaný.
+Fyzická aktivita: Chodí a je soběstačný.
 
-Pokyny při propuštění:
-Byl jste léčen na oddělení ___ pro apendicitidu s chirurgickým zákrokem. Udržujte rány čisté a suché a sprchujte se dle tolerance. Vyhněte se zvedání předmětů o hmotnosti více než 4,5 kg po dobu čtyř týdnů. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí nebo výtoku z rány volejte na číslo ___ nebo se obraťte na pohotovost.
+Pokyny pro propuštění:
+Byl jste léčen v ___ pro apendicitidu chirurgicky. Udržujte rány čisté a suché a sprchujte se podle potřeby. Vyhýbejte se zvedání těžších předmětů než deset kilogramů po dobu čtyř týdnů. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí či sekrece z rány volejte ___ nebo se vraťte na pohotovost.
 
-Následná péče:
+Pokyny pro kontrolu:
 ___

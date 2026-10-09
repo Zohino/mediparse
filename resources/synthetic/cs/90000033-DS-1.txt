@@ -1,21 +1,21 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: MEDICÍNA
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Peniciliny
+Penicilin
 
 Hlavní potíže:
 Kašel a horečka
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Žena ve věku ___ let s astmatem a hypertenzí, která se dostavila do nemocnice ___ s pětidenním produktivním kašlem, horečkou a postupující dušností. Příznaky se začaly objevovat poté, co se v domácnosti nakazila osoba dne ___. Pacientka si stěžovala na bolest na pravé straně hrudníku a snížený příjem potravy. V pohotovostní ambulanci měla horečku a saturaci kyslíkem 89 % při dýchání okolního vzduchu, a zobrazovací vyšetření ukázala konsolidaci v dolním laloku pravé plíce.
+___ letá žena s astmatem a hypertenzí, která se dostavila do ___ s pětidenním kašlem s vykašláváním, horečkou a postupující dušností. Příznaky se objevily poté, co v domácnosti onemocněl někdo z blízkých na ___. Uvádí bolest na pravé straně hrudníku, která se zhoršuje při dýchání, a špatný příjem potravy. Na pohotovosti měla horečku a saturace kyslíkem 89 % při dýchání okolním vzduchem. Zobrazovací vyšetření ukázala konsolidaci v dolním laloku pravého plíce.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Astma
 Hypertenze
 Apendektomie v ___
@@ -24,56 +24,58 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí, sledována v ___
+Matka s hypertenzí, léčena v ___
 
 Fyzikální vyšetření:
-HLAVA, OČI, UŠI, NOS, HLTAN:
-Suché sliznice, žádné léze v orofaryngu.
-SRDEČNÍ:
-Pravidelná frekvence a rytmus, žádné šelesty.
+HLAVA, OČI, UŠI, NOS, KRK:
+Suché sliznice, žádné léze v orofarynxu.
+SRDCE:
+Pravidelný rytmus, bez šelestů.
 KONČETINY:
 Teplé, bez otoků.
 KŮŽE:
-Žádné vyrážky.
+Bez vyrážky.
 NEUROLOGIE:
-Vědomá, orientovaná, bez fokálních příznaků.
+Bdělost, orientace, bez ložiskových příznaků.
 
 Významné výsledky:
-Laboratorní výsledky z ___: počet bílých krvinek 14,2 s převahou neutrofilů, laktát 1,4, kreatinin 0,8 (výchozí hodnota). Kultivace krve nevykazovala růst po dvou dnech. Rentgen hrudníku: ztmavení v dolním laloku pravé plíce bez výpotku. Test na respirační viry byl negativní. Test na antigen Legionella v moči byl negativní. Opakované rentgenové snímky, posouzené radiologem ___, ukázaly stabilní nálezy bez nového výpotku.
+Laboratorní vyšetření dne ___: počet bílých krvinek 14,2 s převahou neutrofilů, laktát 1,4, kreatinin 0,8 (výchozí hodnota). Kultivace krve bez růstu po dvou dnech. Rentgen hrudníku: opacita v dolním laloku pravé plíce bez výpotku. Vyšetření na respirační viry negativní. Vyšetření moči na antigen legionelly negativní. Opakovaný snímek zkontrolovaný radiologem ___ ukázal stabilní nález bez nového výpotku.
 
-Průběh hospitalizace:
-Byla léčena pneumonií získanou v komunitě intravenózním azithromycinem a ceftriaxonem, což tolerovala i přes uvedenou alergii po konzultaci s lékárnou ___. Podávání kyslíku bylo postupně snižováno do dne třetí hospitalizace. Její astma zůstalo kontrolované pomocí inhalačních léků. Krevní tlak byl kontrolován pomocí domácí léčby. Před propuštěním byla převedena na perorální antibiotika a mohla se samostatně pohybovat.
-PROBLÉMY PŘI PŘECHODU:
-Opakovaný rentgen hrudníku za šest týdnů v ___ k potvrzení zlepšení.
+Stručný průběh hospitalizace:
+Byla léčena pro komunitně získanou pneumonii intravenózním azithromycinem a ceftriaxonem, které dobře snášela i přes uvedenou alergii, po konzultaci s ___ farmaceutem. Podávání kyslíku bylo postupně snižováno, a do třetího dne hospitalizace již dýchala okolní vzduch. Její astma bylo dobře kontrolováno pomocí inhalátorů. Krevní tlak byl kontrolován pomocí domácí léčby. Byla převedena na perorální antibiotika a mohla se samostatně pohybovat před propuštěním.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Opakovaný rentgen hrudníku za šest týdnů v ___ k potvrzení ústupu.
 
 Léky při přijetí:
-Inhalátor s albuterolem dle potřeby
+Inhalátor s albuterolem podle potřeby
 Lisinopril 10 mg denně
 Inhalátor s flutikasonem dvakrát denně
 
 Léky při propuštění:
-1. Azithromycin 250 mg denně po dobu tří dnů
-2. Cefpodoxim 200 mg dvakrát denně po dobu čtyř dnů
-3. Inhalátor s albuterolem každé čtyři hodiny dle potřeby
+1. Azithromycin 250 mg denně po dobu dalších tří dnů
+2. Cefpodoxim 200 mg dvakrát denně po dobu dalších čtyř dnů
+3. Inhalátor s albuterolem každé čtyři hodiny podle potřeby
 4. Lisinopril 10 mg denně
 5. Inhalátor s flutikasonem dvakrát denně
 
-Plán po propuštění:
-Domů s péčí ___
+Způsob propuštění:
+Domů s ___ službami
 
 Diagnóza při propuštění:
-Pneumonie získaná v komunitě
-Sekundární:
+Komunitně získaná pneumonie
+Sekundárně:
 Astma
 Hypertenze
 
 Stav při propuštění:
-Psychický stav: Jasný a srozumitelný.
-Úroveň vědomí: Vědomá a komunikativní.
-Funkční stav: Samostatně pohyblivá.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
 
 Pokyny pro propuštění:
-Byli jste hospitalizováni kvůli infekci plic a váš stav se zlepšil díky antibiotikům. Dokončete celou kúru obou léků doma. Odpočívejte, pijte dostatek tekutin a pokračujte v používání inhalátorů. V případě zhoršení dušnosti, vysoké horečky nebo bolesti na hrudi se vraťte zpět. V případě dotazů volejte lékaři Dr. ___ nebo do ambulance na telefonním čísle ___.
 
-Pokyny pro kontrolní prohlídku:
+Byli jste hospitalizováni kvůli plicní infekci a po léčbě antibiotiky se váš stav zlepšil. Doma dokončete celou kúru oběma léky. Odpočívejte, pijte dostatek tekutin a pokračujte v používání inhalátoru. V případě zhoršení dušnosti, vysoké horečky nebo bolesti na hrudi se vraťte do nemocnice. V případě dotazů volejte doktora ___ nebo na kliniku na číslo ___.
+
+Pokyny pro kontrolní vyšetření:
+
 ___

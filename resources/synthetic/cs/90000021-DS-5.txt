@@ -1,7 +1,7 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: Žena  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -9,13 +9,13 @@ Alergie:
 Hlavní potíže:
 Bušení srdce
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
-Anamnéza:
-Pacientka, ___ let, udává několik dní bušení srdce a mírnou únavu. Byla odeslána z ambulance ___ pro kontrolu srdeční frekvence.
+Anamnéza současného onemocnění:
+___letá žena s několikdenní epizodou zrychleného srdečního tepu a mírné únavy, odeslána z ___ kliniky za účelem regulace srdečního tepu.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Hypertenze
 Hypotyreóza
 
@@ -23,43 +23,43 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka prodělala mrtvici.
+Matka s cévní mozkovou příhodou
 
 Fyzikální vyšetření:
-Životní funkce: srdeční frekvence 98, krevní tlak 128/76, bez horečky
-Celkový stav: pohodlná, bez známek utrpení
-Plíce: čisté bilaterálně
-SRDEČNÍ: nepravidelný rytmus, bez šelestu
-Břicho: měkké, bez citlivosti
-Extremity: bez otoků
-Neurologické vyšetření: bez fokálních příznaků
+Vitalní funkce: srdeční frekvence 98, krevní tlak 128/76, bez horečky
+Celkový stav: pacientka je v pohodlí, bez známek úzkosti
+Plíce: oboustranně čisté
+SRDCE: nepravidelný rytmus, bez šelestu
+Břicho: měkké, netendrovatelné
+Končetiny: bez otoků
+Neurologické vyšetření: bez ložiskových příznaků
 
-Relevantní výsledky:
-Funkce štítné žlázy normální. Elektrolyty v normě. EKG ukázalo nepravidelný rytmus s úzkými komplexami.
-ZOBRAZENÍ:
+Významné výsledky:
+Funkce štítné žlázy v normě. Elektrolyty v normě. EKG ukázalo nepravidelný rytmus s úzkými komplexy.
+ZOBRAZOVACÍ METODY:
 Rentgen hrudníku bez akutních nálezů.
 
-Průběh hospitalizace:
-Srdeční frekvence byla kontrolována pomocí perorálního metoprololu a po posouzení rizik byla zahájena antikoagulace. Příznaky ustoupily a pacientka byla propuštěna ve stabilním stavu.
+Stručný popis hospitalizace:
+Srdeční tep regulován perorálním metoprololem, po zhodnocení rizik na ___ zahájena antikoagulační terapie. Symptomy odezněly a pacientka byla propuštěna ve stabilizovaném stavu.
 
 Léky při přijetí:
-Levothyroxin, lisinopril
+Levotyroxin, lisinopril
 
 Léky při propuštění:
-Metoprolol dvakrát denně, apixaban dvakrát denně, pokračovat v užívání levothyroxinu a lisinoprilu jako doposud.
+Metoprolol dvakrát denně, apixaban dvakrát denně, pokračovat v užívání levotyroxinu a lisinoprilu jako dříve.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Fibrilace síní
+Atriální fibrilace
 
 Stav při propuštění:
-Psychický stav: jasná a koherentní.
-Úroveň vědomí: bdělá a komunikativní.
+Duševní stav: jasný a srozumitelný.
+Úroveň vědomí: bdělá a reaguje.
 
-Instrukce při propuštění:
-Užívejte léky podle předpisu. V případě mdloby, bolesti na hrudi, krvácení nebo zhoršení bušení srdce se obraťte na lékaře. Dodržujte schůzku s ___ .
+Pokyny při propuštění:
+Užívejte léky podle předpisu. V případě mdlob, bolesti na hrudi, krvácení nebo zhoršení bušení srdce se vraťte. Dodržujte termín kontroly u ___.
 
-Pokyny pro další sledování:
+Pokyny pro další péči:
 ___

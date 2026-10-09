@@ -1,23 +1,23 @@
-Jméno: ___  Datum narození: ___
-Pohlaví: M  Odbor: Medicína
-Datum přijetí: ___  Číslo oddělení: ___
-Datum propuštění: ___  Lékař: ___
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Dušnost, otoky nohou
+Dušnost, otok nohou
 
-Zásahy:
-Žádné
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
 
 Anamnéza současného onemocnění:
-Muž ve věku ___ let, který se po dobu tří týdnů potýkal se zhoršující se dušností při námaze, ortopnoe (dušností vleže) a otoky nohou. Byl přijat z ambulance ___ po rychlému přibírání na váze. Příznaky se začaly objevovat kolem ___ a postupně omezovaly jeho pohyblivost.
+___ letý muž s postupně se zhoršující dušností při námaze, ortopnoí a otokem nohou, který trvá tři týdny. Byl odeslán z ___ kliniky po rychlém nárůstu hmotnosti. Příznaky se objevily kolem ___ a postupně omezovaly jeho chůzi.
 
-Osobní anamnéza:
+Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
-Hypertenze (vysoký krevní tlak)
+Hypertenze
 Ischemická choroba srdeční
 
 Sociální anamnéza:
@@ -25,51 +25,51 @@ ___
 
 Fyzikální vyšetření:
 Celkový stav:
-Mírně dušný, v klidu v pohodě
-ORL:
-Zvýšený tlak v jugulárních žilách
-EXTREMITY (končetiny):
-Edém (otek) až po kolena
-KŮŽE:
+Mírná dušnost, v klidu se cítí dobře
+Hlava, oči, uši, nos, hrdlo:
+Zvýšený žilní tlak na krk
+Končetiny:
+Otoky až po kolena
+Kůže:
 Teplá, suchá
 Neurologické vyšetření:
-Vědomý, bez fokálních příznaků
+Orientovaný, bez ložiskových příznaků
 
-Výsledky vyšetření:
-ZOBRAZENÍ:
-Rentgen hrudníku provedený ___ ukázal městnání v plicních cévách a malé bilaterální výpotky.
+Významné výsledky:
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku provedený ___ ukázal plicní vaskulární kongesci a malé bilaterální výpotky.
 NÁLEZY:
-Echokardiogram ukázal sníženou ejekční frakci levé komory. BNP (biochemický marker) výrazně zvýšen, glukóza 210, kreatinin blízko základní hodnoty.
+Echokardiogram ukázal sníženou ejekční frakci levé komory. BNP výrazně zvýšené, glukóza 210, kreatinin blízko výchozí hodnoty.
 
-Průběh hospitalizace:
-Léčba intravenózním furosemidem (diuretikem) a vyloučení několika litrů tekutiny. Hladina cukru v krvi byla kontrolována pomocí dávkování inzulínu. Kardiologický tým z ___ upravil jeho medikaci. Váha a příznaky se zlepšily; před propuštěním byl pacient vyšetřen lékařem ___ a byl mu předepsán perorální diuretikum.
-PROBLÉMY PŘI PŘECHODU:
-Opakované biochemické vyšetření za týden; denní měření váhy.
+Stručný popis hospitalizace:
+Léčen intravenózním furosemidem, diuretický efekt několik litrů. Hladina cukru v krvi byla regulována pomocí stupňovitého dávkování inzulínu. Kardiologický tým z ___ upravil jeho medikaci. Hmotnost a příznaky se zlepšily; před propuštěním byl vyšetřen doktorem ___ a předepsán perorální diuretikum.
+PŘECHODNÁ OTÁZKY:
+Opakované laboratorní vyšetření za jeden týden; denní vážení.
 
 Léky při přijetí:
 Metformin, lisinopril, aspirin, atorvastatin
 
 Léky při propuštění:
-Furosemid 40 mg denně, metformin 500 mg dvakrát denně, lisinopril 10 mg denně, aspirin 81 mg denně, atorvastatin 40 mg večer, metoprolol succinate 25 mg denně.
+Furosemid 40 mg denně, metformin 500 mg dvakrát denně, lisinopril 10 mg denně, aspirin 81 mg denně, atorvastatin 40 mg večer, metoprolol succinat 25 mg denně.
 
-Plán po propuštění:
+Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
 Diabetes mellitus 2. typu
-Srdeční selhání
+Kongestivní srdeční selhání
 
 Stav při propuštění:
 Stabilní
-Psychický stav:
-Orientovaný a koherentní
+Duševní stav:
+Jasný a srozumitelný
 Úroveň vědomí:
-Vědomý a komunikativní
-Funkční stav:
-Chůze, soběstačný
+Orientovaný a reagující
+Stav aktivity:
+Chodí, soběstačný
 
-Pokyny při propuštění:
-Vážete se každé ráno a omezte příjem soli. Užíváte léky podle předpisu. Zavolejte ___ v případě, že se vaše váha během jednoho dne zvýší o více než 1,4 kg, nebo pokud se zhorší dýchání nebo se otoky vrátí.
+Pokyny pro propuštění:
+Každé ráno se zvažte a omezte příjem soli. Užívajte léky podle předpisu. Volejte ___, pokud se hmotnost během jednoho dne zvýší o tři libry, nebo pokud se zhorší dýchání nebo se vrátí otok.
 
-Pokyny pro další péči:
+Pokyny pro kontrolu:
 ___
