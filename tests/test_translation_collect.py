@@ -52,6 +52,7 @@ class Case:
     sources: dict[str, str]
     requests: list[dict[str, str]]
     outputs: list[dict[str, str]]
+    masking: str | None = None
 
 
 def _run(
@@ -66,7 +67,10 @@ def _run(
         (source / f"{note_id}.txt").write_text(text, encoding="utf-8")
     workdir = tmp_path / "work"
     workdir.mkdir()
-    (workdir / "requests.json").write_text(json.dumps({"requests": case.requests}))
+    plan: dict[str, object] = {"requests": case.requests}
+    if case.masking is not None:
+        plan["masking"] = case.masking
+    (workdir / "requests.json").write_text(json.dumps(plan))
     (workdir / "outputs.jsonl").write_text(
         "".join(f"{json.dumps(output)}\n" for output in case.outputs)
     )
@@ -220,3 +224,117 @@ def test_written_count_counts_notes(
         _run(collect, monkeypatch, tmp_path, Case(sources, requests, outputs))
 
     assert "Zapsáno 1 z 2 překladů" in caplog.text
+
+
+MASKED: Final = "[[n]]"
+
+
+def test_masked_plan_writes_restored_markers(
+    collect: ModuleType, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """Maskovaný plán zapíše značky ___ i s mezerami uvnitř [[ n ]]."""
+    source = "A ___ ___\n"
+    requests = [_request(NOTE, NOTE, source)]
+
+    code, target = _run(
+        collect,
+        monkeypatch,
+        tmp_path,
+        Case({NOTE: source}, requests, [_output(NOTE, "a [[2]] [[ 1 ]]")], MASKED),
+    )
+
+    assert code == 0
+    assert (target / f"{NOTE}.txt").read_text() == "a ___ ___\n"
+
+
+def test_masked_plan_reports_missing_extra_and_duplicated(
+    collect: ModuleType,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    """Chybějící, přebývající a zdvojená čísla se hlásí po zprávách s note_id."""
+    source = "A ___ ___ ___\n"
+    other = "B ___ ___\n"
+    requests = [_request(NOTE, NOTE, source), _request(OTHER, OTHER, other)]
+    outputs = [
+        _output(NOTE, "a [[1]] [[1]] [[4]]"),
+        _output(OTHER, "b [[1]] [[2]]"),
+    ]
+
+    with caplog.at_level(logging.INFO):
+        code, target = _run(
+            collect,
+            monkeypatch,
+            tmp_path,
+            Case({NOTE: source, OTHER: other}, requests, outputs, MASKED),
+        )
+
+    assert code == 1
+    assert (target / f"{NOTE}.txt").exists()
+    assert f"Chybí značky [[n]]: {NOTE} (2, 3)" in caplog.text
+    assert f"Značky [[n]] navíc: {NOTE} (4)" in caplog.text
+    assert f"Zdvojené značky [[n]]: {NOTE} (1)" in caplog.text
+    assert OTHER not in caplog.text
+
+
+def test_unmasked_plan_keeps_numbered_text(
+    collect: ModuleType, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """Nemaskovaný plán nechá [[1]] v textu beze změny."""
+    requests = [_request(NOTE, NOTE, "A\n")]
+
+    code, target = _run(
+        collect,
+        monkeypatch,
+        tmp_path,
+        Case({NOTE: "A\n"}, requests, [_output(NOTE, "x [[1]]")]),
+    )
+
+    assert code == 0
+    assert (target / f"{NOTE}.txt").read_text() == "x [[1]]\n"
+
+
+def test_masked_marker_count_is_compared_after_restore(
+    collect: ModuleType,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    """Počet ___ se porovnává až po obnově, takže [[1]] [[1]] sedí na dvě značky."""
+    source = "A ___ ___\n"
+    requests = [_request(NOTE, NOTE, source)]
+
+    with caplog.at_level(logging.INFO):
+        code, _ = _run(
+            collect,
+            monkeypatch,
+            tmp_path,
+            Case({NOTE: source}, requests, [_output(NOTE, "a [[1]] [[1]]")], MASKED),
+        )
+
+    assert code == 1
+    assert f"Zdvojené značky [[n]]: {NOTE} (1)" in caplog.text
+    assert "Jiný počet značek ___" not in caplog.text
+
+
+def test_unknown_masking_is_refused_before_writing(
+    collect: ModuleType,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    """Neznámá hodnota masking vrátí 1 a nic nezapíše."""
+    requests = [_request(NOTE, NOTE, "A\n")]
+
+    with caplog.at_level(logging.INFO):
+        code, target = _run(
+            collect,
+            monkeypatch,
+            tmp_path,
+            Case({NOTE: "A\n"}, requests, [_output(NOTE, "x")], "[X]"),
+        )
+
+    assert code == 1
+    assert not target.exists()
+    assert "Neznámé maskování" in caplog.text

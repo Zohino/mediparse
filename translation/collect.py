@@ -6,7 +6,9 @@
 # ///
 """Zapíše přeložené zprávy do korpusu a ohlásí, co chybí nebo nesedí s originálem.
 
-Části rozdělené zprávy se skládají podle ``note_id`` v pořadí požadavků. Výstup se
+Části rozdělené zprávy se skládají podle ``note_id`` v pořadí požadavků. Když plán
+nese maskování, hlásí se chybějící, přebývající a zdvojená čísla značek [[n]]
+a značky se vrátí na ___ dřív, než se porovná jejich počet. Výstup se
 k požadavku páruje klíčem a požadavek s originálem hashem, takže do
 korpusu se nedostane překlad jiné verze zprávy. Text se normalizuje stejně jako
 hooky repa, aby hash korpusu po commitu seděl s tím, co prošlo auditem.
@@ -19,10 +21,10 @@ import hashlib
 import itertools
 import json
 import logging
-import re
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Final
 
+from markers import MARKER, PLACEHOLDER, placeholder_problems, restore
 from note_parts import join
 
 if TYPE_CHECKING:
@@ -30,7 +32,6 @@ if TYPE_CHECKING:
 
 REQUESTS: Final = "requests.json"
 OUTPUTS: Final = "outputs.jsonl"
-MARKER: Final = re.compile(r"(?<!_)___(?!_)")
 LOG_FORMAT: Final = "%(asctime)s %(levelname)s %(message)s"
 
 logger = logging.getLogger(__name__)
@@ -49,6 +50,10 @@ def main() -> int:
     logger.setLevel(logging.INFO)
     args = _parser().parse_args()
     plan = json.loads((args.workdir / REQUESTS).read_text(encoding="utf-8"))
+    masking = plan.get("masking")
+    if masking not in {None, PLACEHOLDER}:
+        logger.error("Neznámé maskování v %s: %r", REQUESTS, masking)
+        return 1
     notes = _notes(plan["requests"])
     outputs = _outputs(args.workdir / OUTPUTS)
     problems = {
@@ -69,14 +74,20 @@ def main() -> int:
         ],
     }
     flagged = set(itertools.chain.from_iterable(problems.values()))
-    complete = {
-        note_id: _normalized(
-            join([outputs[request["key"]]["text"] for request in requests])
-        )
+    joined = {
+        note_id: join([outputs[request["key"]]["text"] for request in requests])
         for note_id, requests in notes.items()
         if note_id not in flagged
     }
-    problems["Jiný počet značek ___ než originál"] = _mismatched(complete, args.source)
+    expected = {
+        note_id: _markers((args.source / f"{note_id}.txt").read_text(encoding="utf-8"))
+        for note_id in joined
+    }
+    if masking == PLACEHOLDER:
+        problems.update(_placeholder_problems(joined, expected))
+        joined = {note_id: restore(text) for note_id, text in joined.items()}
+    complete = {note_id: _normalized(text) for note_id, text in joined.items()}
+    problems["Jiný počet značek ___ než originál"] = _mismatched(complete, expected)
     args.target.mkdir(parents=True, exist_ok=True)
     for note_id, text in complete.items():
         (args.target / f"{note_id}.txt").write_text(text, encoding="utf-8")
@@ -120,13 +131,30 @@ def _normalized(text: str) -> str:
     return "".join(f"{line.rstrip()}\n" for line in text.strip().splitlines())
 
 
-def _mismatched(complete: Mapping[str, str], source: Path) -> list[str]:
+def _mismatched(complete: Mapping[str, str], expected: Mapping[str, int]) -> list[str]:
     return [
         note_id
         for note_id, text in complete.items()
-        if _markers(text)
-        != _markers((source / f"{note_id}.txt").read_text(encoding="utf-8"))
+        if _markers(text) != expected[note_id]
     ]
+
+
+def _placeholder_problems(
+    joined: Mapping[str, str], expected: Mapping[str, int]
+) -> dict[str, list[str]]:
+    labels = {
+        "missing": "Chybí značky [[n]]",
+        "extra": "Značky [[n]] navíc",
+        "duplicated": "Zdvojené značky [[n]]",
+    }
+    found: dict[str, list[str]] = {label: [] for label in labels.values()}
+    for note_id, text in joined.items():
+        problems = placeholder_problems(text, expected[note_id])
+        for field, label in labels.items():
+            numbers = getattr(problems, field)
+            if numbers:
+                found[label].append(f"{note_id} ({', '.join(map(str, numbers))})")
+    return found
 
 
 def _markers(text: str) -> int:
