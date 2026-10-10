@@ -24,6 +24,7 @@ rule train_smoketest_model:
     output:
         model="build/smoketest/model.skops",
         predictions="build/smoketest/predictions.parquet",
+        manifest="build/smoketest/run_manifest.json",
     log:
         "logs/smoketest/train_smoketest_model.log",
     script:

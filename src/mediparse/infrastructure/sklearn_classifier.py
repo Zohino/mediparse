@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Final
 
 import skops.io as sio
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -58,6 +58,9 @@ class GroupedHoldout:
         )
         train, test = next(splitter.split(list(labels), list(labels), list(groups)))
         return Holdout(tuple(map(int, train)), tuple(map(int, test)))
+
+
+ESTIMATOR: Final = "sklearn TfidfVectorizer+LinearSVC"
 
 
 @dataclass(frozen=True)

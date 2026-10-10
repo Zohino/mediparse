@@ -222,6 +222,10 @@ ignore = [
     "start-process-with-partial-path",        # git se hledá v PATH, stejně jako v testovaném adaptéru
 ]
 
+"src/mediparse/entrypoints/smoketest_training.py" = [
+    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
+]
+
 [tool.ruff.lint.flake8-type-checking]
 runtime-evaluated-base-classes = ["pydantic.BaseModel"]  # pydantic čte anotace za běhu
 
