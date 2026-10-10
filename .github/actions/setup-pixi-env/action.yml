@@ -1,6 +1,11 @@
 name: Setup pixi environment
 description: Nainstaluje zamčenou verzi pixi a prostředí přesně podle pixi.lock.
 
+inputs:
+  environments:
+    description: Prostředí pixi k instalaci, oddělená mezerou.
+    default: default
+
 runs:
   using: composite
   steps:
@@ -10,3 +15,4 @@ runs:
         pixi-version: v0.73.0
         locked: true
         cache: true
+        environments: ${{ inputs.environments }}
