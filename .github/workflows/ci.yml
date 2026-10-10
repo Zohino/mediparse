@@ -98,7 +98,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: smoke test
-        run: docker run --rm mediparse:ci
+        run: docker run --rm mediparse:ci pytest
 
   secrets:
     name: Secrets
