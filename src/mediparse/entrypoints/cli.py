@@ -21,11 +21,17 @@ def configure_logging(log: Path | None = None) -> None:
     """Diagnostika ve formátu čas, úroveň, zpráva; knihovny až od WARNING.
 
     Args:
-        log: Soubor logu kroku Snakemake; bez něj jde diagnostika na stderr.
+        log: Soubor logu kroku Snakemake; chyby jdou navíc na stderr. Bez něj jde
+            veškerá diagnostika na stderr.
     """
     logging.basicConfig(
         format="%(asctime)s %(levelname)s %(message)s", filename=log, encoding="utf-8"
     )
+    if log is not None:
+        console = logging.StreamHandler()
+        console.setLevel(logging.ERROR)
+        console.setFormatter(logging.Formatter("%(levelname)s %(message)s"))
+        logging.getLogger().addHandler(console)
     logging.getLogger("mediparse").setLevel(logging.INFO)
 
 
