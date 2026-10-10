@@ -96,3 +96,7 @@ build:
 # smoketest v kontejneru; stejný skript, který spouští zkoušející
 smoketest:
     ./smoketest.sh
+
+# ověř, že stažené tabulky MIMIC jsou všechny na disku a sedí s otisky v configu
+verify-mimic dir="resources/mimic":
+    jq -r --arg dir "{{dir}}" '.mimic_tables[] | "\(.sha256)  \($dir)/\(.url | split("/") | last)"' config/mimic_tables.json | sha256sum --check --strict
