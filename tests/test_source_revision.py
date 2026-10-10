@@ -10,7 +10,8 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.source_revision import GitRevision
+from mediparse.domain.run_manifest import SourceRevision
+from mediparse.infrastructure.source_revision import EnvironmentRevision, GitRevision
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -103,3 +104,33 @@ def test_directory_outside_repo_is_refused(tmp_path: Path) -> None:
     """Adresář mimo repozitář (nebo chybějící git) skončí InvalidInputError."""
     with pytest.raises(InvalidInputError):
         GitRevision(tmp_path).read()
+
+
+SHA = "a" * 40
+
+
+def test_environment_revision_reads_commit_and_dirty() -> None:
+    """Commit a dirty true/false z prostředí dají revizi zdroje."""
+    clean = EnvironmentRevision({"MEDIPARSE_COMMIT": SHA, "MEDIPARSE_DIRTY": "false"})
+    dirty = EnvironmentRevision({"MEDIPARSE_COMMIT": SHA, "MEDIPARSE_DIRTY": "true"})
+
+    assert clean.read() == SourceRevision(commit=SHA, dirty=False)
+    assert dirty.read() == SourceRevision(commit=SHA, dirty=True)
+
+
+@pytest.mark.parametrize(
+    "environ",
+    [
+        {"MEDIPARSE_DIRTY": "false"},
+        {"MEDIPARSE_COMMIT": "", "MEDIPARSE_DIRTY": "false"},
+        {"MEDIPARSE_COMMIT": "xyz", "MEDIPARSE_DIRTY": "false"},
+        {"MEDIPARSE_COMMIT": SHA},
+        {"MEDIPARSE_COMMIT": SHA, "MEDIPARSE_DIRTY": ""},
+        {"MEDIPARSE_COMMIT": SHA, "MEDIPARSE_DIRTY": "True"},
+        {"MEDIPARSE_COMMIT": SHA, "MEDIPARSE_DIRTY": "1"},
+    ],
+)
+def test_environment_revision_rejects_invalid(environ: dict[str, str]) -> None:
+    """Chybějící či prázdný commit, neplatné SHA a dirty mimo true/false jsou odmítnuty."""
+    with pytest.raises(InvalidInputError, match="smoketest"):
+        EnvironmentRevision(environ).read()
