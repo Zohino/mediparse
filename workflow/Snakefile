@@ -1,6 +1,7 @@
 rule smoketest:
     input:
         metrics="build/smoketest/metrics.parquet",
+        demo="build/smoketest/demo.parquet",
     script:
         "scripts/smoketest_summary.py"
 
