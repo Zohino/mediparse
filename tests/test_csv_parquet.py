@@ -5,6 +5,7 @@ from __future__ import annotations
 import gzip
 from typing import TYPE_CHECKING
 
+import duckdb
 import pyarrow as pa
 import pyarrow.parquet as pq
 import pytest
@@ -131,3 +132,17 @@ def test_columns_come_from_written_schema(tmp_path: Path) -> None:
     parquet = pq.ParquetFile(tmp_path / "out" / "table.parquet")
     assert shape.columns == tuple(parquet.schema_arrow.names) == ("a", "b")
     assert set(parquet.schema_arrow.types) == {pa.string()}
+
+
+def test_duckdb_reads_converted_parquet(tmp_path: Path) -> None:
+    """DuckDB přečte převod přes víc skupin řádků se stejným počtem, NULL i textem."""
+    body = "".join(f'{i},,{i:04d},"řádek {i}\nzalomený ""x"""\n' for i in range(MANY))
+    _convert(tmp_path, HEADER + body, block_size=1 << 12)
+    path = tmp_path / "out" / "table.parquet"
+    query = (
+        "SELECT count(*), count(hadm_id), max(text) FILTER (icd_code = '1234') "
+        "FROM read_parquet(?)"
+    )
+    row = duckdb.connect().execute(query, [str(path)]).fetchone()
+    expected = (pq.ParquetFile(path).metadata.num_rows, 0, 'řádek 1234\nzalomený "x"')
+    assert row == expected
