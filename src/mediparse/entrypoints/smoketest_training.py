@@ -26,15 +26,11 @@ from mediparse.infrastructure.sklearn_classifier import (
     LinearSvmTrainer,
     SkopsModelFile,
 )
-from mediparse.infrastructure.source_revision import (
-    COMMIT_VARIABLE,
-    EnvironmentRevision,
-    GitRevision,
-)
+from mediparse.infrastructure.source_revision import revision_source
 from mediparse.infrastructure.training_config import load_training_config
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Mapping
+    from collections.abc import Callable
 
     from mediparse.domain.run_manifest import SourceRevision
 
@@ -50,23 +46,6 @@ PACKAGES: Final = (
     "pydantic",
     "snakemake",
 )
-
-
-def revision_source(
-    environ: Mapping[str, str], root: Path
-) -> Callable[[], SourceRevision]:
-    """Vybere zdroj revize: prostředí image, má-li MEDIPARSE_COMMIT, jinak git.
-
-    Args:
-        environ: Proměnné prostředí procesu.
-        root: Kořen repozitáře pro čtení z gitu.
-
-    Returns:
-        Funkce, která přečte revizi zdroje.
-    """
-    if COMMIT_VARIABLE in environ:
-        return EnvironmentRevision(environ).read
-    return GitRevision(root).read
 
 
 def main(
