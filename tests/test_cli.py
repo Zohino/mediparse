@@ -29,7 +29,7 @@ from tests.support import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Iterator
+    from collections.abc import Callable, Generator
 
 PROVENANCE = [
     "--model=claude-sonnet-5-5",
@@ -103,7 +103,7 @@ def test_argument_reports_domain_message() -> None:
 
 
 @contextlib.contextmanager
-def _bare_root_logger() -> Iterator[None]:
+def _bare_root_logger() -> Generator[None]:
     """Kořenový logger bez handlerů pytestu; původní stav vrátí při opuštění kontextu."""
     root = logging.getLogger()
     package = logging.getLogger("mediparse")
