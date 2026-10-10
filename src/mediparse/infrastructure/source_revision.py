@@ -13,7 +13,7 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.run_manifest import SourceRevision
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Callable, Mapping
     from pathlib import Path
 
 COMMIT_VARIABLE: Final = "MEDIPARSE_COMMIT"
@@ -77,6 +77,23 @@ class EnvironmentRevision:
         except ValidationError as error:
             reason = f"{COMMIT_VARIABLE} není commit SHA: {commit!r}"
             raise InvalidInputError(_message(reason)) from error
+
+
+def revision_source(
+    environ: Mapping[str, str], root: Path
+) -> Callable[[], SourceRevision]:
+    """Vybere zdroj revize: prostředí image, má-li MEDIPARSE_COMMIT, jinak git.
+
+    Args:
+        environ: Proměnné prostředí procesu.
+        root: Kořen repozitáře pro čtení z gitu.
+
+    Returns:
+        Funkce, která přečte revizi zdroje.
+    """
+    if COMMIT_VARIABLE in environ:
+        return EnvironmentRevision(environ).read
+    return GitRevision(root).read
 
 
 def _message(reason: str) -> str:

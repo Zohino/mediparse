@@ -11,7 +11,11 @@ import pytest
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.run_manifest import SourceRevision
-from mediparse.infrastructure.source_revision import EnvironmentRevision, GitRevision
+from mediparse.infrastructure.source_revision import (
+    EnvironmentRevision,
+    GitRevision,
+    revision_source,
+)
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -140,3 +144,47 @@ def test_environment_revision_rejects_invalid(environ: dict[str, str]) -> None:
     """Chybějící či prázdný commit, neplatné SHA a dirty mimo true/false jsou odmítnuty."""
     with pytest.raises(InvalidInputError, match="smoketest"):
         EnvironmentRevision(environ).read()
+
+
+def test_revision_source_reads_environment_when_commit_variable_exists(
+    tmp_path: Path,
+) -> None:
+    """Proměnná MEDIPARSE_COMMIT vybere revizi z prostředí, ne z gitu."""
+    environ = {"MEDIPARSE_COMMIT": "a" * 40, "MEDIPARSE_DIRTY": "true"}
+
+    source = revision_source(environ, tmp_path)
+
+    assert source() == SourceRevision(commit="a" * 40, dirty=True)
+
+
+def test_revision_source_does_not_fall_back_when_commit_variable_is_empty(
+    tmp_path: Path,
+) -> None:
+    """Prázdná MEDIPARSE_COMMIT (image bez build-argu) neskončí u gitu, ale hláškou o skriptu."""
+    environ = {"MEDIPARSE_COMMIT": "", "MEDIPARSE_DIRTY": ""}
+
+    source = revision_source(environ, tmp_path)
+
+    with pytest.raises(InvalidInputError, match=r"smoketest\.sh"):
+        source()
+
+
+@needs_git
+def test_revision_source_reads_head_of_root_without_commit_variable(
+    tmp_path: Path,
+) -> None:
+    """Bez proměnné MEDIPARSE_COMMIT vrátí zdroj HEAD zadaného kořene."""
+    root = tmp_path / "repo"
+    init_repo(root, "a\n")
+
+    source = revision_source({}, root)
+
+    assert source().commit == git_output(root, "rev-parse", "HEAD")
+
+
+def test_revision_source_reads_git_without_commit_variable(tmp_path: Path) -> None:
+    """Bez proměnné MEDIPARSE_COMMIT se revize čte z gitu v daném kořeni."""
+    source = revision_source({"MEDIPARSE_DIRTY": "false"}, tmp_path)
+
+    with pytest.raises(InvalidInputError, match="z gitu"):
+        source()
