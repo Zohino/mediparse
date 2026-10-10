@@ -56,3 +56,26 @@ rule inventory_mimic_table:
         file="|".join(map(re.escape, MIMIC_TABLES)),
     shell:
         "workflow/scripts/inventory.sh {input:q} {output:q}"
+
+
+MIMIC_TABLE_NAMES = [name.removesuffix(".csv.gz") for name in MIMIC_TABLES]
+
+
+rule parquet_mimic:
+    input:
+        expand("resources/mimic/parquet/{table}.parquet", table=MIMIC_TABLE_NAMES),
+
+
+rule parquet_mimic_table:
+    input:
+        table="resources/mimic/{table}.csv.gz",
+        inventory="resources/mimic/inventory/{table}.csv.gz.json",
+        validated="resources/mimic/validated.flag",
+    output:
+        "resources/mimic/parquet/{table}.parquet",
+    log:
+        "logs/parquet/{table}.log",
+    wildcard_constraints:
+        table="|".join(map(re.escape, MIMIC_TABLE_NAMES)),
+    script:
+        "../scripts/convert_mimic.py"
