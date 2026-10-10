@@ -1,6 +1,7 @@
 *
 !src/
 !tests/
+!workflow/
 !config/matrix.json
 !config/smoketest_training.json
 !config/synthetic_plan.json

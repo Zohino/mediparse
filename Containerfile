@@ -30,10 +30,21 @@ COPY pyproject.toml ./
 COPY config/matrix.json config/smoketest_training.json config/synthetic_plan.json config/mimic_tables.json config/verbalization_template.md config/
 COPY resources/synthetic/ resources/synthetic/
 COPY translation/note_parts.py translation/markers.py translation/collect.py translation/
+COPY workflow/ workflow/
 COPY tests/ tests/
+
+ARG MEDIPARSE_COMMIT=
+ARG MEDIPARSE_DIRTY=
+
+RUN mkdir -m 1777 .snakemake build logs
 
 ENV PATH="/app/.venv/bin:$PATH" \
     PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    HOME=/tmp \
+    USER=mediparse
 
-CMD ["pytest"]
+ENV MEDIPARSE_COMMIT=$MEDIPARSE_COMMIT \
+    MEDIPARSE_DIRTY=$MEDIPARSE_DIRTY
+
+CMD ["snakemake", "--forceall", "smoketest"]
