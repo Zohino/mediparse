@@ -1,4 +1,4 @@
-"""Vstupní bod kroku Snakemake ``train_smoketest_model``: model a held-out metriky.
+"""Vstupní bod kroku Snakemake ``train_smoketest_model``: model a predikce odložených zpráv.
 
 Cesty určuje pravidlo; skript workflow jen rozbalí objekt ``snakemake`` a zavolá
 ``main``. Pracuje jen se vstupní tabulkou smoketestu, proto smí běžet kdekoli.
@@ -13,11 +13,10 @@ from mediparse.application.smoketest_training import SmoketestTraining
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.note_table import ParquetNoteTable
-from mediparse.infrastructure.report_file import JsonReportFile
+from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.sklearn_classifier import (
     GroupedHoldout,
     LinearSvmTrainer,
-    SklearnScorer,
     SkopsModelFile,
 )
 from mediparse.infrastructure.training_config import load_training_config
@@ -29,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 
 def main(
-    *, notes: Path, config: Path, model: Path, metrics: Path, log: Path
+    *, notes: Path, config: Path, model: Path, predictions: Path, log: Path
 ) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
 
@@ -37,15 +36,15 @@ def main(
         Návratový kód kroku.
     """
     configure_logging(log)
-    return run(notes=notes, config=config, model=model, metrics=metrics)
+    return run(notes=notes, config=config, model=model, predictions=predictions)
 
 
 @refusing_invalid_input
-def run(*, notes: Path, config: Path, model: Path, metrics: Path) -> ExitCode:
+def run(*, notes: Path, config: Path, model: Path, predictions: Path) -> ExitCode:
     """Složí use case z tabulky, configu a adaptérů scikit-learn a spustí trénink.
 
     Returns:
-        OK po uložení modelu a metrik; REFUSED pro chybějící nebo neplatnou
+        OK po uložení modelu a predikcí; REFUSED pro chybějící nebo neplatnou
         tabulku a config.
     """
     training = load_training_config(config)
@@ -53,15 +52,14 @@ def run(*, notes: Path, config: Path, model: Path, metrics: Path) -> ExitCode:
         table=ParquetNoteTable(notes),
         splitter=GroupedHoldout(training.folds, training.seed),
         trainer=LinearSvmTrainer(training.regularization, training.seed),
-        scorer=SklearnScorer(),
         store=SkopsModelFile(model),
-        report=JsonReportFile(metrics),
+        predictions=ParquetPredictionTable(predictions),
     )
     report = step.run(training)
     logger.info(
-        "Model diagnózy %s: F1 %.3f na %d zprávách, uložen do %s.",
+        "Model diagnózy %s: %d trénovacích a %d testovacích zpráv, uložen do %s.",
         report.diagnosis,
-        report.metrics.f1,
+        report.train_notes,
         report.test_notes,
         model,
     )

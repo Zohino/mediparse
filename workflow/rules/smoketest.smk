@@ -23,7 +23,7 @@ rule train_smoketest_model:
         config="config/smoketest_training.json",
     output:
         model="build/smoketest/model.skops",
-        metrics="build/smoketest/metrics.json",
+        predictions="build/smoketest/predictions.parquet",
     log:
         "logs/smoketest/train_smoketest_model.log",
     script:

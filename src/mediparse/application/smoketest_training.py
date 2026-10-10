@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
+from mediparse.domain.evaluation import Prediction
 from mediparse.domain.smoketest_training import (
     TrainingReport,
     ensure_disjoint_subjects,
@@ -14,12 +15,11 @@ from mediparse.domain.smoketest_training import (
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
+    from mediparse.domain.evaluation import Classification
     from mediparse.domain.smoketest_input import InputNote
-    from mediparse.domain.smoketest_training import (
-        BinaryMetrics,
-        Holdout,
-        TrainingConfig,
-    )
+    from mediparse.domain.smoketest_training import Holdout, TrainingConfig
+
+FOLD = 0
 
 
 class InputTable(Protocol):
@@ -39,8 +39,8 @@ class HoldoutSplitter(Protocol):
 class TextClassifier(Protocol):
     """Natrénovaný binární klasifikátor textu."""
 
-    def predict(self, texts: Sequence[str]) -> tuple[bool, ...]:
-        """Predikuje přítomnost diagnózy v každém textu."""
+    def classify(self, texts: Sequence[str]) -> tuple[Classification, ...]:
+        """Určí label a rozhodovací skóre pro každý text."""
 
 
 class ClassifierTrainer(Protocol):
@@ -57,39 +57,31 @@ class ModelStore(Protocol):
         """Uloží klasifikátor."""
 
 
-class Scorer(Protocol):
-    """Výpočet metrik binární klasifikace."""
+class PredictionSink(Protocol):
+    """Výstup predikcí testovacích zpráv."""
 
-    def score(self, truth: Sequence[bool], predicted: Sequence[bool]) -> BinaryMetrics:
-        """Spočte metriky predikcí proti pravdě."""
-
-
-class ReportSink(Protocol):
-    """Výstup reportu tréninku."""
-
-    def write(self, report: TrainingReport) -> None:
-        """Zapíše report."""
+    def write(self, predictions: Sequence[Prediction]) -> None:
+        """Zapíše predikce."""
 
 
 @dataclass(frozen=True)
 class SmoketestTraining:
-    """Trénink na jedné diagnóze s held-out metrikami."""
+    """Trénink na jedné diagnóze se zápisem predikcí odložených zpráv."""
 
     table: InputTable
     splitter: HoldoutSplitter
     trainer: ClassifierTrainer
-    scorer: Scorer
     store: ModelStore
-    report: ReportSink
+    predictions: PredictionSink
 
     def run(self, config: TrainingConfig) -> TrainingReport:
-        """Natrénuje model na trénovacích pacientech, ohodnotí ho na testovacích a uloží.
+        """Natrénuje model na trénovacích pacientech, predikuje testovací a uloží.
 
         Args:
             config: Diagnóza a parametry tréninku.
 
         Returns:
-            Report zapsaný do výstupu.
+            Velikosti částí odložení.
         """
         notes = self.table.read()
         labels = [config.diagnosis in note.labels for note in notes]
@@ -102,14 +94,29 @@ class SmoketestTraining:
             [labels[index] for index in holdout.train],
         )
         truth = [labels[index] for index in holdout.test]
-        predicted = classifier.predict([notes[index].text for index in holdout.test])
-        report = TrainingReport(
+        classifications = classifier.classify([
+            notes[index].text for index in holdout.test
+        ])
+        predictions = [
+            Prediction(
+                config.row_id,
+                FOLD,
+                notes[index].note_id,
+                notes[index].subject_id,
+                config.diagnosis,
+                truth=label,
+                predicted=classification.predicted,
+                score=classification.score,
+            )
+            for index, label, classification in zip(
+                holdout.test, truth, classifications, strict=True
+            )
+        ]
+        self.store.save(classifier)
+        self.predictions.write(predictions)
+        return TrainingReport(
             diagnosis=config.diagnosis,
             train_notes=len(holdout.train),
             test_notes=len(holdout.test),
             test_positives=sum(truth),
-            metrics=self.scorer.score(truth, predicted),
         )
-        self.store.save(classifier)
-        self.report.write(report)
-        return report

@@ -1,4 +1,4 @@
-"""Use case tréninku: labely zvolené diagnózy, trénink jen na train, metriky jen na test."""
+"""Use case tréninku: labely zvolené diagnózy, trénink jen na train, predikce jen testu."""
 
 from __future__ import annotations
 
@@ -8,11 +8,11 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.application.smoketest_training import SmoketestTraining
+from mediparse.domain.evaluation import Classification, Prediction
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
 from mediparse.domain.smoketest_input import InputNote
 from mediparse.domain.smoketest_training import (
-    BinaryMetrics,
     Holdout,
     SubjectLeakError,
     TrainingConfig,
@@ -24,13 +24,20 @@ if TYPE_CHECKING:
 
     from mediparse.application.smoketest_training import TextClassifier
 
-CONFIG = TrainingConfig(diagnosis=Diagnosis.CKD, seed=0, folds=2, regularization=1.0)
-METRICS = BinaryMetrics(0.5, 0.5, 0.5, 0.5)
+CONFIG = TrainingConfig(
+    row_id="row", diagnosis=Diagnosis.CKD, seed=0, folds=2, regularization=1.0
+)
 NOTES = (
     InputNote("a", 1, "en", "text a", frozenset({Diagnosis.CKD})),
     InputNote("b", 2, "en", "text b", frozenset({Diagnosis.DIABETES})),
     InputNote("c", 3, "en", "text c", frozenset({Diagnosis.CKD})),
     InputNote("d", 4, "en", "text d", frozenset()),
+)
+
+
+ANSWER = (
+    Classification(predicted=True, score=1.5),
+    Classification(predicted=False, score=-0.5),
 )
 
 
@@ -59,11 +66,11 @@ class _FakeSplitter:
 
 @dataclass
 class _FakeClassifier:
-    answer: tuple[bool, ...]
+    answer: tuple[Classification, ...]
     recorder: _Recorder
 
-    def predict(self, texts: Sequence[str]) -> tuple[bool, ...]:
-        self.recorder.calls["predict"] = tuple(texts)
+    def classify(self, texts: Sequence[str]) -> tuple[Classification, ...]:
+        self.recorder.calls["classify"] = tuple(texts)
         return self.answer
 
 
@@ -73,16 +80,7 @@ class _FakeTrainer:
 
     def fit(self, texts: Sequence[str], labels: Sequence[bool]) -> _FakeClassifier:
         self.recorder.calls["fit"] = (tuple(texts), tuple(labels))
-        return _FakeClassifier((True, False), self.recorder)
-
-
-@dataclass
-class _FakeScorer:
-    recorder: _Recorder
-
-    def score(self, truth: Sequence[bool], predicted: Sequence[bool]) -> BinaryMetrics:
-        self.recorder.calls["score"] = (tuple(truth), tuple(predicted))
-        return METRICS
+        return _FakeClassifier(ANSWER, self.recorder)
 
 
 @dataclass
@@ -97,8 +95,8 @@ class _FakeStore:
 class _FakeSink:
     recorder: _Recorder
 
-    def write(self, report: TrainingReport) -> None:
-        self.recorder.calls["report"] = report
+    def write(self, predictions: Sequence[Prediction]) -> None:
+        self.recorder.calls["predictions"] = tuple(predictions)
 
 
 def _use_case(
@@ -108,25 +106,30 @@ def _use_case(
         table=_FakeTable(notes),
         splitter=_FakeSplitter(holdout, recorder),
         trainer=_FakeTrainer(recorder),
-        scorer=_FakeScorer(recorder),
         store=_FakeStore(recorder),
-        report=_FakeSink(recorder),
+        predictions=_FakeSink(recorder),
     )
 
 
-def test_trains_on_train_and_scores_on_test() -> None:
-    """Labely jsou zvolené diagnózy; trénink vidí jen train, skóre jen test."""
+def test_trains_on_train_and_predicts_test() -> None:
+    """Labely jsou zvolené diagnózy; trénink vidí jen train, predikce jen test."""
     recorder = _Recorder()
 
     report = _use_case(NOTES, Holdout(train=(0, 1), test=(2, 3)), recorder).run(CONFIG)
 
     assert recorder.calls["split"] == ((True, False, True, False), (1, 2, 3, 4))
     assert recorder.calls["fit"] == (("text a", "text b"), (True, False))
-    assert recorder.calls["predict"] == ("text c", "text d")
-    assert recorder.calls["score"] == ((True, False), (True, False))
+    assert recorder.calls["classify"] == ("text c", "text d")
     assert isinstance(recorder.calls["save"], _FakeClassifier)
-    assert recorder.calls["report"] == report
-    assert report == TrainingReport(Diagnosis.CKD, 2, 2, 1, METRICS)
+    assert recorder.calls["predictions"] == (
+        Prediction(
+            "row", 0, "c", 3, Diagnosis.CKD, truth=True, predicted=True, score=1.5
+        ),
+        Prediction(
+            "row", 0, "d", 4, Diagnosis.CKD, truth=False, predicted=False, score=-0.5
+        ),
+    )
+    assert report == TrainingReport(Diagnosis.CKD, 2, 2, 1)
 
 
 def test_shared_subject_stops_before_saving() -> None:
@@ -139,13 +142,13 @@ def test_shared_subject_stops_before_saving() -> None:
 
     assert "fit" not in recorder.calls
     assert "save" not in recorder.calls
-    assert "report" not in recorder.calls
+    assert "predictions" not in recorder.calls
 
 
 def test_class_with_too_few_patients_stops_before_splitting() -> None:
     """Diagnóza bez dost pacientů v každé třídě skončí InvalidInputError a nic se nevolá."""
     config = TrainingConfig(
-        diagnosis=Diagnosis.AKI, seed=0, folds=2, regularization=1.0
+        row_id="row", diagnosis=Diagnosis.AKI, seed=0, folds=2, regularization=1.0
     )
     recorder = _Recorder()
 
