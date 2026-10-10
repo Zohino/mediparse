@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import zipfile
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
@@ -10,8 +11,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
+from skops.io.exceptions import UntrustedTypesFoundException
 
 from mediparse.domain.evaluation import Classification
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.smoketest_training import Holdout
 
 if TYPE_CHECKING:
@@ -107,5 +110,17 @@ class SkopsModelFile:
 
         Returns:
             Klasifikátor s načtenou pipeline.
+
+        Raises:
+            InvalidInputError: Soubor modelu neexistuje, je poškozený nebo
+                obsahuje typ mimo důvěryhodné.
         """
-        return SklearnClassifier(sio.load(self.path, trusted=[]))
+        try:
+            pipeline = sio.load(self.path, trusted=[])
+        except FileNotFoundError as error:
+            msg = f"Soubor modelu {self.path} neexistuje."
+            raise InvalidInputError(msg) from error
+        except (zipfile.BadZipFile, UntrustedTypesFoundException) as error:
+            msg = f"Soubor modelu {self.path} nelze bezpečně načíst: {error}"
+            raise InvalidInputError(msg) from error
+        return SklearnClassifier(pipeline)
