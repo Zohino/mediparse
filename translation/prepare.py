@@ -1,16 +1,3 @@
-# /// script
-# requires-python = ">=3.13"
-# dependencies = [
-#     "jinja2>=3.1.6",
-#     "transformers>=5.18.0",
-# ]
-#
-# [tool.ty.environment]
-# extra-paths = ["."]
-#
-# [tool.ty.analysis]
-# allowed-unresolved-imports = ["transformers"]
-# ///
 """Sestaví požadavky na překlad syntetických zpráv a rozdělí ty, které se nevejdou.
 
 Prompt skládá chat šablona modelu v pevné revizi, takže ID tokenů jsou přesně ta,

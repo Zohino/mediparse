@@ -203,6 +203,10 @@ ignore = [
     "implicit-namespace-package", # skripty spouští Snakemake po souborech, nejsou balíček
 ]
 
+"translation/**" = [
+    "implicit-namespace-package", # skripty spouští pixi po souborech, nejsou balíček
+]
+
 "src/mediparse/entrypoints/cli.py" = [
     "error-instead-of-exception", # odmítnutí neplatného vstupu je očekávaný stav: hláška bez tracebacku
 ]
@@ -246,6 +250,12 @@ include = ["workflow/scripts/**"]
 [tool.ty.overrides.rules]
 unresolved-reference = "ignore"  # globál snakemake vkládá Snakemake před spuštěním skriptu
 
+[[tool.ty.overrides]]
+include = ["translation/**"]
+
+[tool.ty.overrides.analysis]
+allowed-unresolved-imports = ["torch", "transformers", "vllm", "vllm.**"]
+
 [tool.pixi.workspace]
 channels = ["conda-forge"]
 platforms = ["linux-64"]
@@ -259,6 +269,16 @@ mediparse = { path = ".", editable = true }
 [tool.pixi.environments]
 default = { features = ["dev"], solve-group = "main" }
 test = { features = ["test"], solve-group = "main" }
+translate = { features = ["translate"], no-default-feature = true, solve-group = "translate" }
+
+[tool.pixi.feature.translate.dependencies]
+python = "3.13.*"
+
+[tool.pixi.feature.translate.pypi-dependencies]
+jinja2 = ">=3.1.6"
+tokenizers = "==0.23.2"
+transformers = "==5.18.0"
+vllm = "==0.30.0"
 
 [tool.pixi.tasks]
 lint = { cmd = "ruff check", description = "Linting pomocí ruff" }
