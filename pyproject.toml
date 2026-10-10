@@ -303,6 +303,12 @@ RETICULATE_PYTHON = "$CONDA_PREFIX/bin/python"
 RETICULATE_CONDA = "$CONDA_PREFIX/bin/micromamba"
 
 [tool.pixi.feature.eda.tasks]
+eda = { cmd = "bash scripts/eda.sh \"{{ n }}\"", args = [
+    "n",
+], description = "Reálný render dokumentu EDA nad MIMIC; jen uživatel ve vlastním terminálu, s commitnutým repem" }
+eda-synthetic = { cmd = "bash scripts/eda-synthetic.sh \"{{ n }}\"", args = [
+    { arg = "n", default = "" },
+], description = "Render dokumentů EDA nad syntetickými tabulkami v /tmp a kontrola kanárka; bez čísla všechny dokumenty" }
 eda-test = { cmd = "Rscript -e 'testthat::test_dir(\"eda/tests/testthat\", stop_on_failure = TRUE)'", description = "Testy R pomocníků EDA (testthat)" }
 
 [tool.pixi.tasks]

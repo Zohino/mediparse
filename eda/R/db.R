@@ -4,11 +4,15 @@ BLOCKING_VARIABLES <- c(
   CLAUDECODE = "Relace Claude Code nesmí číst data MIMIC: výstup by odešel hostovanému modelu."
 )
 
-eda_connect <- function() {
-  parquet <- Sys.getenv(
+eda_parquet_dir <- function() {
+  Sys.getenv(
     "MEDIPARSE_PARQUET",
     file.path(Sys.getenv("PIXI_PROJECT_ROOT"), "resources", "mimic", "parquet")
   )
+}
+
+eda_connect <- function() {
+  parquet <- eda_parquet_dir()
   if (!dir.exists(parquet)) {
     stop(sprintf("Adresář s parquetem %s neexistuje.", parquet))
   }

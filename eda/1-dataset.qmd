@@ -1,0 +1,56 @@
+---
+title: "Dataset"
+---
+
+```{r}
+#| include: false
+library(reticulate)
+source("R/dua.R")
+source("R/db.R")
+eda_check_python()
+con <- eda_connect()
+tables <- sort(DBI::dbListTables(con))
+counts <- data.frame(
+  tabulka = tables,
+  n = vapply(
+    tables,
+    function(name) {
+      DBI::dbGetQuery(
+        con,
+        paste("SELECT count(*) AS n FROM", DBI::dbQuoteIdentifier(con, name))
+      )$n
+    },
+    numeric(1)
+  )
+)
+```
+
+## Přehled korpusu
+
+Korpus tvoří `r nrow(counts)` tabulek. Zpráv typu discharge je `r dua_count(counts$n[counts$tabulka == "discharge"])`.
+
+```{r}
+knitr::kable(dua_table(counts), col.names = c("Tabulka", "Záznamů"), align = "lr")
+```
+
+## Příloha: provenance
+
+```{r}
+#| include: false
+provenance_module <- reticulate::import("mediparse.entrypoints.eda_provenance")
+pathlib <- reticulate::import("pathlib")
+details <- provenance_module$provenance(
+  as.list(Sys.getenv()),
+  pathlib$Path(Sys.getenv("PIXI_PROJECT_ROOT")),
+  pathlib$Path(eda_parquet_dir())
+)
+details[["r"]] <- R.version.string
+DBI::dbDisconnect(con, shutdown = TRUE)
+```
+
+```{r}
+knitr::kable(
+  data.frame(Položka = names(details), Hodnota = unlist(details, use.names = FALSE)),
+  align = "ll"
+)
+```
