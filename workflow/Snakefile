@@ -1,2 +1,9 @@
+rule smoketest:
+    input:
+        metrics="build/smoketest/metrics.parquet",
+    script:
+        "scripts/smoketest_summary.py"
+
+
 include: "rules/download.smk"
 include: "rules/smoketest.smk"
