@@ -1,4 +1,4 @@
-"""Krok Snakemake: model a held-out metriky jedné diagnózy ze vstupní tabulky smoketestu."""
+"""Krok Snakemake: model a predikce odložených zpráv ze vstupní tabulky smoketestu."""
 
 from pathlib import Path
 
@@ -9,7 +9,7 @@ raise SystemExit(
         notes=Path(snakemake.input.notes),
         config=Path(snakemake.input.config),
         model=Path(snakemake.output.model),
-        metrics=Path(snakemake.output.metrics),
+        predictions=Path(snakemake.output.predictions),
         log=Path(snakemake.log[0]),
     )
 )

@@ -1,4 +1,5 @@
 {
+  "row_id": "smoketest-en-svm",
   "diagnosis": "diabetes",
   "seed": 0,
   "folds": 5,

@@ -1,4 +1,4 @@
-"""Adaptéry scikit-learn: odložení po pacientech, trénink, uložení modelu a metriky."""
+"""Adaptéry scikit-learn: odložení po pacientech, trénink, klasifikace a uložení modelu."""
 
 from __future__ import annotations
 
@@ -6,11 +6,11 @@ from typing import TYPE_CHECKING, Final
 
 import pytest
 
+from mediparse.domain.evaluation import Classification
 from mediparse.domain.labels import Diagnosis
 from mediparse.infrastructure.sklearn_classifier import (
     GroupedHoldout,
     LinearSvmTrainer,
-    SklearnScorer,
     SkopsModelFile,
 )
 from tests.support import separable_notes
@@ -57,17 +57,22 @@ def test_holdout_is_deterministic_for_seed() -> None:
     )
 
 
-def test_trainer_predicts_training_examples() -> None:
-    """Trénink na separovatelném korpusu predikuje trénovací příklady."""
+def test_classify_returns_label_with_signed_score() -> None:
+    """Label odpovídá predikci pipeline a skóre má znaménko podle labelu."""
     texts, labels, _ = _corpus()
 
     classifier = LinearSvmTrainer(regularization=1.0, seed=0).fit(texts, labels)
+    classifications = classifier.classify(texts)
 
-    assert classifier.predict(texts) == tuple(labels)
+    assert tuple(item.predicted for item in classifications) == tuple(labels)
+    assert tuple(item.predicted for item in classifications) == tuple(
+        bool(label) for label in classifier.pipeline.predict(texts)
+    )
+    assert all((item.score > 0) == item.predicted for item in classifications)
 
 
 def test_model_file_round_trip(tmp_path: Path) -> None:
-    """Uložený model se načte s trusted=[] a predikuje shodně."""
+    """Uložený model se načte s trusted=[] a klasifikuje shodně."""
     texts, labels, _ = _corpus()
     classifier = LinearSvmTrainer(regularization=1.0, seed=0).fit(texts, labels)
     model_file = SkopsModelFile(tmp_path / "out" / "model.skops")
@@ -75,7 +80,7 @@ def test_model_file_round_trip(tmp_path: Path) -> None:
     model_file.save(classifier)
     loaded = model_file.load()
 
-    assert loaded.predict(texts) == classifier.predict(texts)
+    assert loaded.classify(texts) == classifier.classify(texts)
 
 
 def test_model_file_rejects_foreign_classifier(tmp_path: Path) -> None:
@@ -83,29 +88,10 @@ def test_model_file_rejects_foreign_classifier(tmp_path: Path) -> None:
 
     class Foreign:
         @staticmethod
-        def predict(texts: list[str]) -> tuple[bool, ...]:
-            return tuple(bool(text) for text in texts)
+        def classify(texts: list[str]) -> tuple[Classification, ...]:
+            return tuple(
+                Classification(predicted=bool(text), score=0.0) for text in texts
+            )
 
     with pytest.raises(TypeError):
         SkopsModelFile(tmp_path / "model.skops").save(Foreign())
-
-
-def test_scorer_on_known_example() -> None:
-    """Dvě ze tří pozitivních, jeden falešný poplach."""
-    truth = [True, True, True, False, False]
-    predicted = [True, True, False, True, False]
-
-    metrics = SklearnScorer().score(truth, predicted)
-
-    assert metrics.precision == pytest.approx(2 / 3)
-    assert metrics.recall == pytest.approx(2 / 3)
-    assert metrics.f1 == pytest.approx(2 / 3)
-    assert metrics.accuracy == pytest.approx(3 / 5)
-
-
-def test_scorer_without_predicted_positives_is_zero() -> None:
-    """Bez predikovaných pozitivních je přesnost 0.0 a bez varování."""
-    metrics = SklearnScorer().score([True, False], [False, False])
-
-    assert (metrics.precision, metrics.recall, metrics.f1) == (0.0, 0.0, 0.0)
-    assert metrics.accuracy == pytest.approx(0.5)

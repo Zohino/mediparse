@@ -1,4 +1,4 @@
-"""Klasický model v scikit-learn: odložení po pacientech, TF-IDF s lineárním SVM, skops a metriky."""
+"""Klasický model v scikit-learn: odložení po pacientech, TF-IDF s lineárním SVM a skops."""
 
 from __future__ import annotations
 
@@ -7,12 +7,12 @@ from typing import TYPE_CHECKING
 
 import skops.io as sio
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
 
-from mediparse.domain.smoketest_training import BinaryMetrics, Holdout
+from mediparse.domain.evaluation import Classification
+from mediparse.domain.smoketest_training import Holdout
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -25,13 +25,19 @@ class SklearnClassifier:
 
     pipeline: Pipeline
 
-    def predict(self, texts: Sequence[str]) -> tuple[bool, ...]:
-        """Predikuje přítomnost diagnózy v textech.
+    def classify(self, texts: Sequence[str]) -> tuple[Classification, ...]:
+        """Určí label a rozhodovací skóre lineárního SVM v jednom průchodu.
 
         Returns:
-            Predikce v pořadí textů.
+            Klasifikace v pořadí textů; label je ``predict``, skóre ``decision_function``.
         """
-        return tuple(bool(label) for label in self.pipeline.predict(list(texts)))
+        listed = list(texts)
+        labels = self.pipeline.predict(listed)
+        scores = self.pipeline.decision_function(listed)
+        return tuple(
+            Classification(bool(label), float(score))
+            for label, score in zip(labels, scores, strict=True)
+        )
 
 
 @dataclass(frozen=True)
@@ -73,28 +79,6 @@ class LinearSvmTrainer:
         ])
         pipeline.fit(list(texts), list(labels))
         return SklearnClassifier(pipeline)
-
-
-@dataclass(frozen=True)
-class SklearnScorer:
-    """Metriky pozitivní třídy z knihovního výpočtu."""
-
-    @staticmethod
-    def score(truth: Sequence[bool], predicted: Sequence[bool]) -> BinaryMetrics:
-        """Spočte precision, recall, F1 a accuracy; nedefinované hodnoty jsou 0.0.
-
-        Returns:
-            Metriky pozitivní třídy.
-        """
-        precision, recall, f1, _ = precision_recall_fscore_support(
-            list(truth), list(predicted), average="binary", zero_division=0.0
-        )
-        return BinaryMetrics(
-            float(precision),
-            float(recall),
-            float(f1),
-            float(accuracy_score(list(truth), list(predicted))),
-        )
 
 
 @dataclass(frozen=True)

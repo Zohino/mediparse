@@ -1,4 +1,4 @@
-"""Trénink smoketestu: config, odložení po pacientech a held-out metriky jedné diagnózy."""
+"""Trénink smoketestu: config a odložení po pacientech pro jednu diagnózu."""
 
 from __future__ import annotations
 
@@ -17,24 +17,15 @@ if TYPE_CHECKING:
 
 
 class TrainingConfig(BaseModel):
-    """Parametry tréninku: diagnóza, seed odložení, počet foldů a síla regularizace."""
+    """Parametry tréninku: řádek matice, diagnóza, seed odložení, foldy a regularizace."""
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
+    row_id: Annotated[str, Field(min_length=1)]
     diagnosis: Diagnosis
     seed: int
     folds: Annotated[int, Field(ge=2)]
     regularization: Annotated[float, Field(gt=0.0)]
-
-
-@dataclass(frozen=True)
-class BinaryMetrics:
-    """Held-out metriky binárního klasifikátoru pro pozitivní třídu."""
-
-    precision: float
-    recall: float
-    f1: float
-    accuracy: float
 
 
 @dataclass(frozen=True)
@@ -47,13 +38,12 @@ class Holdout:
 
 @dataclass(frozen=True)
 class TrainingReport:
-    """Výsledek běhu: velikosti částí, počet pozitivních v testu a metriky."""
+    """Výsledek běhu: velikosti částí a počet pozitivních v testu."""
 
     diagnosis: Diagnosis
     train_notes: int
     test_notes: int
     test_positives: int
-    metrics: BinaryMetrics
 
 
 class SubjectLeakError(ValueError):

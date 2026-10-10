@@ -22,6 +22,7 @@ def test_repository_config_loads() -> None:
     """Config z repa projde schématem."""
     config = load_training_config(REPOSITORY / TRAINING_CONFIG_PATH)
 
+    assert config.row_id == "smoketest-en-svm"
     assert config.diagnosis is Diagnosis.DIABETES
     assert config.regularization > 0
 
