@@ -270,6 +270,7 @@ mediparse = { path = ".", editable = true }
 default = { features = ["dev"], solve-group = "main" }
 test = { features = ["test"], solve-group = "main" }
 translate = { features = ["translate"], no-default-feature = true, solve-group = "translate" }
+eda = { features = ["eda"], solve-group = "main" }
 
 [tool.pixi.feature.translate.dependencies]
 python = "3.13.*"
@@ -279,6 +280,26 @@ jinja2 = ">=3.1.6"
 tokenizers = "==0.23.2"
 transformers = "==5.18.0"
 vllm = "==0.30.0"
+
+[tool.pixi.feature.eda.dependencies]
+quarto = "*"
+r-base = "4.5.*"
+r-dbi = "*"
+r-duckdb = "*"
+r-knitr = "*"
+r-rmarkdown = "*"
+r-reticulate = "*"
+r-testthat = "*"
+r-withr = "*"
+micromamba = "*"
+poppler = "*"
+
+[tool.pixi.feature.eda.pypi-dependencies]
+numpy = "*"
+
+[tool.pixi.feature.eda.activation.env]
+RETICULATE_PYTHON = "$CONDA_PREFIX/bin/python"
+RETICULATE_CONDA = "$CONDA_PREFIX/bin/micromamba"
 
 [tool.pixi.tasks]
 lint = { cmd = "ruff check", description = "Linting pomocí ruff" }
