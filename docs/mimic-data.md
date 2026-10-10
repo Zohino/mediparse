@@ -10,7 +10,7 @@ Seznam tabulek, URL a SHA-256 drží `config/mimic_tables.json` jako jediný zdr
 
 1. **Stažení.** `snakemake download_mimic` stáhne tabulky do `resources/mimic/`
    a každý soubor ověří proti otisku z oficiálních `SHA256SUMS.txt`.
-2. **Kontrola otisků.** `just verify-mimic` otisky přepočítá i později, například
+2. **Kontrola otisků.** `pixi run verify-mimic` otisky přepočítá i později, například
    po přesunu dat nebo na jiném stroji.
 3. **Validace.** `snakemake validate_mimic` zapíše
    [`results/mimic/manifest.json`](../results/mimic/manifest.json) a flag
