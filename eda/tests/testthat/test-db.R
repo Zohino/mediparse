@@ -121,3 +121,9 @@ test_that("eda_check_python selže, když Python neleží v prostředí", {
 
   expect_error(eda_check_python(), "mimo prostředí")
 })
+
+test_that("eda_parquet_dir má výchozí adresář pod kořenem projektu", {
+  withr::local_envvar(MEDIPARSE_PARQUET = NA, PIXI_PROJECT_ROOT = "/koren")
+
+  expect_equal(eda_parquet_dir(), "/koren/resources/mimic/parquet")
+})

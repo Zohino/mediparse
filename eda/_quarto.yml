@@ -1,0 +1,15 @@
+project:
+  type: default
+  output-dir: ../results/eda
+
+engine: knitr
+lang: cs
+
+format:
+  typst: default
+
+execute:
+  freeze: auto
+  echo: false
+  message: false
+  warning: false
