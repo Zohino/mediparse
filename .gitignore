@@ -187,8 +187,11 @@ tempCodeRunnerFile.py
 # MIMIC-IV / PhysioNet data — nikdy do gitu (DUA, viz guard/audit.py, T17)
 # ============================================================
 /data/
-/resources/mimic
 /.netrc
+
+# resources/ je opt-in: zveřejňuje se jen výslovná výjimka
+/resources/*
+!/resources/synthetic/
 
 # ============================================================
 # mediparse tooling stack
