@@ -47,12 +47,12 @@ hooks = [
 repo = "local"
 
 [[repos.hooks]]
-id = "uv-lock"
+id = "pixi-lock"
 groups = ["ci-job"]
-name = "uv lock --check"
+name = "pixi lock --check"
 language = "system"
-entry = "uv lock --check"
-files = "^(pyproject\\.toml|uv\\.lock)$"
+entry = "pixi lock --check"
+files = "^(pyproject\\.toml|pixi\\.lock)$"
 pass_filenames = false
 
 [[repos.hooks]]
@@ -60,7 +60,7 @@ id = "ruff-check"
 groups = ["ci-job"]
 name = "ruff check"
 language = "system"
-entry = "uv run --frozen ruff check --force-exclude"
+entry = "pixi run --frozen ruff check --force-exclude"
 types_or = ["python", "pyi"]
 require_serial = true
 
@@ -69,7 +69,7 @@ id = "ruff-format"
 groups = ["ci-job"]
 name = "ruff format"
 language = "system"
-entry = "uv run --frozen ruff format --force-exclude"
+entry = "pixi run --frozen ruff format --force-exclude"
 types_or = ["python", "pyi"]
 require_serial = true
 
@@ -78,7 +78,7 @@ id = "ty"
 groups = ["ci-job"]
 name = "ty check"
 language = "system"
-entry = "uv run --frozen ty check"
+entry = "pixi run --frozen ty check"
 types_or = ["python", "pyi"]
 pass_filenames = false
 
@@ -87,7 +87,7 @@ id = "hadolint"
 groups = ["ci-job"]
 name = "hadolint"
 language = "system"
-entry = "uv run --frozen hadolint"
+entry = "pixi run --frozen hadolint"
 types = ["dockerfile"]
 
 [[repos.hooks]]
@@ -95,7 +95,7 @@ id = "snakefmt"
 groups = ["ci-job"]
 name = "snakefmt"
 language = "system"
-entry = "uv run --frozen snakefmt"
+entry = "pixi run --frozen snakefmt"
 files = "(^|/)Snakefile$|\\.smk$"
 
 [[repos.hooks]]
@@ -103,7 +103,7 @@ id = "shfmt"
 groups = ["ci-job"]
 name = "shfmt"
 language = "system"
-entry = "uv run --frozen shfmt --write"
+entry = "pixi run --frozen shfmt --write"
 types = ["shell"]
 
 [[repos.hooks]]
@@ -111,7 +111,7 @@ id = "shellcheck"
 groups = ["ci-job"]
 name = "ShellCheck"
 language = "system"
-entry = "uv run --frozen shellcheck"
+entry = "pixi run --frozen shellcheck"
 types = ["shell"]
 
 [[repos.hooks]]
@@ -119,7 +119,7 @@ id = "synthetic-corpus-gate"
 groups = ["ci-job"]
 name = "brána syntetického korpusu"
 language = "system"
-entry = "uv run --frozen mediparse-corpus-gate"
+entry = "pixi run --frozen mediparse-corpus-gate"
 files = "^(resources/synthetic/|config/(mimic_tables|synthetic_plan)\\.json$)"
 pass_filenames = false
 
@@ -128,7 +128,7 @@ id = "lint-imports"
 groups = ["ci-job"]
 name = "import-linter"
 language = "system"
-entry = "uv run --frozen lint-imports"
+entry = "pixi run --frozen lint-imports"
 types_or = ["python", "pyi", "toml"]
 pass_filenames = false
 
@@ -136,7 +136,7 @@ pass_filenames = false
 id = "commitizen"
 name = "cz check"
 language = "system"
-entry = "uv run --frozen cz check --commit-msg-file"
+entry = "pixi run --frozen cz check --commit-msg-file"
 stages = ["commit-msg"]
 
 [[repos.hooks]]

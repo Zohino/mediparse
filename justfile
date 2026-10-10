@@ -1,5 +1,5 @@
-# spust pres uv
-runner := "uv run"
+# spust pres pixi
+runner := "pixi run"
 container-engine := env("CONTAINER_ENGINE", `command -v podman || command -v docker || echo docker`)
 
 max-src-lines := "4000"
