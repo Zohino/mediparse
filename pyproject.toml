@@ -259,3 +259,27 @@ mediparse = { path = ".", editable = true }
 [tool.pixi.environments]
 default = { features = ["dev"], solve-group = "main" }
 test = { features = ["test"], solve-group = "main" }
+
+[tool.pixi.tasks]
+lint = { cmd = "ruff check", description = "Linting pomocí ruff" }
+format = { cmd = "ruff format", description = "Formátovat kód pomocí ruff" }
+typecheck = { cmd = "ty check", description = "Kontrola statického typování pomocí ty" }
+ruff-statistics = { cmd = "ruff check --statistics --no-fix", description = "Statistika lintingu pomocí ruff pro vyloučení omezujících pravidel" }
+commit = { cmd = "cz commit", description = "Commit pomocí commitizen" }
+smoketest = { cmd = "./smoketest.sh", description = "Smoketest v kontejneru; stejný skript, který spouští zkoušející" }
+count-lines = { cmd = "bash scripts/count-lines.sh", description = "Statistiky kódu pomocí tokei jako varování proti overengineeringu" }
+build = { cmd = "bash scripts/build.sh", description = "Build kontejnerového image přes podman, nebo docker, s revizí zdroje pro run manifest" }
+provenance-translation = { cmd = "mediparse-translation-provenance --workdir \"{{ workdir }}\"", args = [
+    { arg = "workdir", default = "build/translation" },
+], description = "Provenance českého překladu auditovaného korpusu; ve worktree absolutní cesta hlavního checkoutu" }
+audit-corpus = { cmd = "bash scripts/audit-corpus.sh \"{{ discharge }}\" \"{{ radiology }}\" \"{{ report }}\"", args = [
+    "discharge",
+    "radiology",
+    "report",
+], description = "Audit syntetického korpusu proti MIMIC-IV-Note; jen lokálně, mimo CI a Claude Code, s commitnutým repem mimo korpus" }
+provenance-corpus = { cmd = "bash scripts/provenance-corpus.sh \"{{ model }}\"", args = [
+    "model",
+], description = "Provenance auditovaného korpusu; commit specifikace z historie docs/synthetic-corpus.md" }
+verify-mimic = { cmd = "bash scripts/verify-mimic.sh \"{{ dir }}\"", args = [
+    { arg = "dir", default = "resources/mimic" },
+], description = "Ověř, že stažené tabulky MIMIC jsou všechny na disku a sedí s otisky v configu" }

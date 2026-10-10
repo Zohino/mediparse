@@ -184,7 +184,7 @@ korpusem v repu.
   odmítne soubory, které s nimi nesedí, dřív, než je začne číst.
 - **Protokol.**
   1. Audit spouští autor lokálně, mimo CI a mimo relaci Claude Code
-     (`just audit-corpus`). Recept odmítne necommitnuté změny mimo korpus, aby
+     (`pixi run audit-corpus ...`). Recept odmítne necommitnuté změny mimo korpus, aby
      commit v záznamu auditu odpovídal kódu, který běžel.
   2. Výstupem jsou jen počty a `note_id` dotčených zpráv; pozice shod jdou do
      reportu mimo repozitář, shodný text se nevypisuje nikdy.
@@ -225,7 +225,7 @@ Vstup smoketestu ze souborů korpusu sestavuje S12a.
 Otisky configu a `audit.json` jsou SHA-256 souborů tak, jak leží v repozitáři.
 Otisk zadání pokrývá text, který model dostal, tedy šablonu instrukcí i věty, které
 podle plánu skládá kód; má tvar otisku korpusu s `note_id` místo cesty. Provenance vzniká po čistém
-auditu příkazem `mediparse-corpus-provenance` (`just provenance-corpus <model>`):
+auditu příkazem `mediparse-corpus-provenance` (`pixi run provenance-corpus <model>`):
 model, verzi Claude Code, datum a commit specifikace dostane jako argumenty.
 Recept ověří, že commit specifikace leží v `main`: rebase merge mění SHA, takže
 změna specifikace se merguje dřív než korpus, který se na ni odvolává.
@@ -276,7 +276,7 @@ dtype, okno, dekódování, otisk `requests.json`, použité běhy překladu
 provenance bez něj se načte. Vazba na `cs/` pak porovnává texty se složením výstupů
 po obnově značek. Použité jsou jen běhy, z nichž pochází výstup pro klíč
 aktuálních požadavků. Zapisuje ji po auditu `mediparse-translation-provenance`
-(`just provenance-translation <pracovní adresář>`); generování z provenance ponechá
+(`pixi run provenance-translation <pracovní adresář>`); generování z provenance ponechá
 a odmítne zapsat, když originály, množina zpráv nebo české texty neodpovídají
 pracovnímu adresáři překladu. Brána odmítne korpus s neprázdným `cs/` a provenance
 bez `translation`. Přegenerování anglické provenance část `translation` nezachová,
