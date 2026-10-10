@@ -95,10 +95,18 @@ jobs:
           file: Containerfile
           tags: mediparse:ci
           load: true
+          build-args: |
+            MEDIPARSE_COMMIT=${{ github.event.pull_request.head.sha || github.sha }}
+            MEDIPARSE_DIRTY=false
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      - name: smoke test
+      - name: pytest v kontejneru
         run: docker run --rm mediparse:ci pytest
+      - name: smoketest.sh
+        env:
+          BUILDX_BUILDER: default
+          CONTAINER_ENGINE: docker
+        run: ./smoketest.sh
 
   secrets:
     name: Secrets
