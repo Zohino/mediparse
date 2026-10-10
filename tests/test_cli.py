@@ -127,3 +127,20 @@ def test_configure_logging_writes_to_log_file(tmp_path: Path) -> None:
         logging.getLogger("mediparse.step").info("Zapsáno 2 zpráv.")
 
         assert "INFO Zapsáno 2 zpráv." in log.read_text(encoding="utf-8")
+
+
+def test_configure_logging_with_log_file_also_prints_errors_to_stderr(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Chyba kroku je vidět i v terminálu, informace zůstává jen v souboru logu."""
+    log = tmp_path / "step.log"
+
+    with _bare_root_logger():
+        configure_logging(log)
+        logging.getLogger("mediparse.step").info("Zapsáno 2 zpráv.")
+        logging.getLogger("mediparse.step").error("Revize chybí.")
+
+    err = capsys.readouterr().err
+    assert "Revize chybí." in err
+    assert "Zapsáno" not in err
+    assert "Revize chybí." in log.read_text(encoding="utf-8")
