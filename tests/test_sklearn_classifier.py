@@ -5,8 +5,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Final
 
 import pytest
+import skops.io as sio
 
 from mediparse.domain.evaluation import Classification
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
 from mediparse.infrastructure.sklearn_classifier import (
     GroupedHoldout,
@@ -95,3 +97,33 @@ def test_model_file_rejects_foreign_classifier(tmp_path: Path) -> None:
 
     with pytest.raises(TypeError):
         SkopsModelFile(tmp_path / "model.skops").save(Foreign())
+
+
+def test_model_file_missing_is_invalid_input(tmp_path: Path) -> None:
+    """Chybějící soubor modelu je neplatný vstup a jmenuje cestu."""
+    path = tmp_path / "model.skops"
+
+    with pytest.raises(InvalidInputError, match=r"model\.skops"):
+        SkopsModelFile(path).load()
+
+
+class _Unsafe:
+    pass
+
+
+def test_model_file_corrupt_is_invalid_input(tmp_path: Path) -> None:
+    """Poškozený soubor modelu je neplatný vstup a jmenuje cestu."""
+    path = tmp_path / "bad.skops"
+    path.write_text("garbage", encoding="utf-8")
+
+    with pytest.raises(InvalidInputError, match=r"bad\.skops"):
+        SkopsModelFile(path).load()
+
+
+def test_model_file_untrusted_type_is_invalid_input(tmp_path: Path) -> None:
+    """Typ mimo seznam důvěryhodných je neplatný vstup a jmenuje cestu."""
+    path = tmp_path / "unsafe.skops"
+    sio.dump(_Unsafe(), path)
+
+    with pytest.raises(InvalidInputError, match=r"unsafe\.skops"):
+        SkopsModelFile(path).load()
