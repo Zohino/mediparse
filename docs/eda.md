@@ -2,6 +2,10 @@
 
 Průzkum dat žije v Quarto projektu `eda/`: jeden dokument `eda/<n>-*.qmd` na sešit. R vede dokument (statistiky, tabulky, inline `` `r …` ``), Python běží v blocích přes reticulate ze stejného prostředí pixi `eda`. Obě strany dotazují parquet přes DuckDB. Dokumenty slouží hodnotiteli a zároveň jako podklad rozhodnutí pro pipeline.
 
+## Forma dokumentů
+
+Dokumenty mají akademickou formu: abstrakt, číslované kapitoly, obsah, číslované tabulky s titulkem (`#| label: tbl-…`, odkaz `@tbl-…`), citace `[@klíč]` z `eda/references.bib` a seznam literatury. Sdílená metadata (autor, bibliografie, obsah, číslování, A4) jsou v `eda/_quarto.yml`. Citace zpracovává citeproc (styl autor–rok), protože Typst v Quartu 1.9 nadepisuje vlastní bibliografii „Bibliografie“; kapitola „Literatura“ je proto v dokumentu ručně. Počty v tabulkách jdou přes `dua_table`, rozměry tabulek z veřejného manifestu validace se vkládají jako text.
+
 ## Rendery
 
 - `pixi run eda <n>` vyrenderuje `eda/<n>-*.qmd` nad skutečnými tabulkami. Pouští ho jen uživatel ve vlastním terminálu. Skript odmítne běh pod Claude Code (`CLAUDECODE`) a při necommitnutých změnách, aby provenance neukazovala na jiný kód.

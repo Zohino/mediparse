@@ -1,5 +1,7 @@
 ---
-title: "Dataset"
+title: "Explorační analýza datové sady: přehled korpusu MIMIC-IV"
+abstract: |
+  Dokument zahajuje explorační analýzu datové sady, na které práce staví. Popisuje zdroje dat (MIMIC-IV a MIMIC-IV-Note), cestu dat od stažení po dotazování a ochranu dat podle licence. Přehled korpusu uvádí pro každou tabulku počet záznamů, počet sloupců a velikost souboru a porovnává počty záznamů v databázi s manifestem validace. Dokument tak vymezuje východiska, na kterých staví další části analýzy.
 ---
 
 ```{r}
@@ -7,6 +9,7 @@ title: "Dataset"
 library(reticulate)
 source("R/dua.R")
 source("R/db.R")
+source("R/corpus.R")
 eda_check_python()
 con <- eda_connect()
 tables <- sort(DBI::dbListTables(con))
@@ -23,22 +26,90 @@ counts <- data.frame(
     numeric(1)
   )
 )
+pathlib <- reticulate::import("pathlib")
+inventory <- reticulate::import("mediparse.infrastructure.mimic_inventory")
+manifest_path <- pathlib$Path(
+  file.path(Sys.getenv("PIXI_PROJECT_ROOT"), "results", "mimic", "manifest.json")
+)
+manifest <- manifest_text(
+  tables, inventory$read_manifest(manifest_path), inventory$read_manifest_bytes(manifest_path)
+)
+agrees <- all(counts$n == manifest$records)
+catalog <- mimic_catalog()
+overview <- cbind(
+  catalog[match(tables, catalog$tabulka), c("tabulka", "zdroj", "popis")],
+  manifest[c("sloupce", "mb")],
+  n = counts$n
+)
+n_discharge <- counts$n[counts$tabulka == "discharge"]
+n_radiology <- counts$n[counts$tabulka == "radiology"]
+largest <- counts$tabulka[which.max(counts$n)]
 ```
 
-## Přehled korpusu
+# Úvod
 
-Korpus tvoří `r nrow(counts)` tabulek. Zpráv typu discharge je `r dua_count(counts$n[counts$tabulka == "discharge"])`.
+Tento sešit je prvním z řady sešitů explorační analýzy. Jeho úlohou je charakterizovat datovou sadu, na které stojí celá práce, a zdokumentovat, odkud data pocházejí a jak se k nim dokument dostává. Sešit si klade tři cíle:
+
+- popsat zdroje dat a jejich licenční omezení,
+- popsat cestu dat od stažení po dotazování a způsob, jakým dokument chrání data pacientů,
+- uvést přehled korpusu: tabulky, jejich obsah, počty záznamů a velikost.
+
+Práce vychází z návrhu, podle kterého jsou primárním korpusem propouštěcí zprávy (tabulka `discharge`), radiologické zprávy jsou doplňkové a štítky klasifikace se odvozují z diagnóz ICD (tabulka `diagnoses_icd`). Dokument tato východiska nepotvrzuje ani nevyvrací; ověřuje jen, že potřebné tabulky existují a zda jsou úplné.
+
+Data pocházejí ze dvou projektů PhysioNetu [@goldberger2000]. Strukturovaná data hospitalizací poskytuje MIMIC-IV [@mimiciv; @johnson2023], volné texty zpráv MIMIC-IV-Note [@mimicivnote]. Oba projekty podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregované výsledky, v nichž jsou kategorie s méně než deseti záznamy potlačeny.
+
+Dokument je členěn takto. Kapitola @sec-data popisuje zdroje dat a metody. Kapitola @sec-prehled uvádí přehled korpusu. Kapitola @sec-shrnuti shrnuje výsledky a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
+
+# Data a metody {#sec-data}
+
+Práce používá dva projekty PhysioNetu. MIMIC-IV, verze 3.1 [@mimiciv], obsahuje strukturovaná data hospitalizací; dokument z něj čte moduly `hosp` (pacienti, přijetí, diagnózy, výkony, léky). MIMIC-IV-Note, verze 2.2 [@mimicivnote], obsahuje deidentifikované volné texty a dokument z něj čte propouštěcí a radiologické zprávy. Popis MIMIC-IV a jeho vzniku uvádí @johnson2023.
+
+Data podléhají DUA. Z toho plyne několik pravidel, která dokument dodržuje:
+
+- řádková data a texty zpráv se nevypisují,
+- výsledky jsou agregáty a kategorie s méně než deseti záznamy se sloučí do řádku „ostatní (n < 10)“ a jejich popisky se nezobrazí; číslo pod prahem se zobrazí jako „< 10“,
+- skutečná data zpracovává jen autor mimo automatizované nástroje; automatizovaná kontrola běží nad syntetickými tabulkami stejného tvaru a ověřuje, že jejich obsah neunikl do výstupu.
+
+Data procházejí těmito kroky: stažení souborů `csv.gz` z PhysioNetu, ověření jejich otisků SHA-256 proti oficiálním hodnotám, validace (počet záznamů a sloupců), převod na parquet a dotazování přes DuckDB. Převod do parquetu zachovává všechny sloupce jako text a počet záznamů ověřuje proti validaci. Dotazy nad parquetem provádí DuckDB s omezenou pamětí a s dočasnými soubory mimo verzovaný obsah repozitáře.
+
+Reprodukovatelnost zajišťují dva mechanismy. Výsledky výpočtů se ukládají do zmražené podoby (`freeze`), takže dokument lze znovu vyrenderovat bez přístupu k datům. Příloha A uvádí provenance renderu: revizi kódu, otisk zámku prostředí, zdroj dat a verze použitých nástrojů.
+
+# Přehled korpusu {#sec-prehled}
+
+Databáze obsahuje `r nrow(counts)` tabulek. @tbl-korpus uvádí pro každou z nich projekt a modul, popis obsahu a plánované využití v práci, počet záznamů v databázi, počet sloupců a velikost komprimovaného souboru podle manifestu validace. Využití tabulek v práci vychází z návrhu práce.
 
 ```{r}
-knitr::kable(dua_table(counts), col.names = c("Tabulka", "Záznamů"), align = "lr")
+#| label: tbl-korpus
+#| tbl-cap: "Tabulky korpusu: zdroj, obsah a využití, počet záznamů, počet sloupců a velikost souboru (MB)."
+#| tbl-colwidths: [22, 16, 30, 10, 12, 10]
+shown <- dua_table(overview)
+shown$tabulka <- code_names(shown$tabulka)
+knitr::kable(
+  shown[c("tabulka", "zdroj", "popis", "n", "sloupce", "mb")],
+  col.names = c("Tabulka", "Zdroj", "Obsah a využití", "Záznamů", "Sloupců", "MB"),
+  align = "lllrrr"
+)
 ```
 
-## Příloha: provenance
+*Zdroj:* počty záznamů dotazem v DuckDB, počty sloupců a velikosti souborů z manifestu validace, popisy podle veřejné dokumentace MIMIC-IV a MIMIC-IV-Note.
+
+Podle návrhu práce je primárním korpusem tabulka `discharge`; obsahuje `r dua_count(n_discharge)` záznamů. Radiologických zpráv je v tabulce `radiology` `r dua_count(n_radiology)`. `r if (sum(counts$n == max(counts$n)) == 1) paste0("Nejvíce záznamů má tabulka ", largest, ".")` Počty záznamů v databázi se `r if (agrees) "shodují" else "neshodují"` s počty v manifestu validace.
+
+# Shrnutí a rozhodnutí {#sec-shrnuti}
+
+Dokument popsal zdroje dat, cestu dat k dotazování a přehled `r nrow(counts)` tabulek. `r if (agrees) "Počty záznamů se u všech tabulek shodují s manifestem validace. Data jsou proto úplná a další části analýzy mohou stavět na parquetu bez další kontroly počtu záznamů." else paste0("Počty záznamů se liší od manifestu validace u tabulek: ", paste(counts$tabulka[counts$n != manifest$records], collapse = ", "), ". Data se proto nesmějí považovat za úplná a před dalším použitím je nutné rozdíl vysvětlit.")`
+
+# Omezení {#sec-omezeni}
+
+Přehled uvádí jen počty záznamů, sloupců a velikosti souborů. O obsahu zpráv, pacientech ani rozdělení dat netvrdí nic; to je předmětem dalších částí analýzy. Počty se vztahují k verzím 3.1 (MIMIC-IV) a 2.2 (MIMIC-IV-Note). Potlačení kategorií s n < 10 chrání malé skupiny, ale nezabraňuje odvození z rozdílu dvou zveřejněných součtů, proto se zveřejňují jen předem určené agregace. Automatizovaná kontrola neprohledává text uvnitř obrázků, proto grafy vyžadují zvláštní zacházení.
+
+# Příloha A: provenance renderu {.unnumbered}
+
+@tbl-provenance uvádí údaje, podle kterých lze render dohledat a zopakovat: revizi kódu, otisk zámku prostředí, zdroj dat a verze použitých nástrojů.
 
 ```{r}
 #| include: false
 provenance_module <- reticulate::import("mediparse.entrypoints.eda_provenance")
-pathlib <- reticulate::import("pathlib")
 details <- provenance_module$provenance(
   as.list(Sys.getenv()),
   pathlib$Path(Sys.getenv("PIXI_PROJECT_ROOT")),
@@ -49,8 +120,13 @@ DBI::dbDisconnect(con, shutdown = TRUE)
 ```
 
 ```{r}
-knitr::kable(
-  data.frame(Položka = names(details), Hodnota = unlist(details, use.names = FALSE)),
-  align = "ll"
-)
+#| label: tbl-provenance
+#| tbl-cap: "Provenance renderu."
+#| tbl-colwidths: [28, 72]
+knitr::kable(provenance_table(details), col.names = c("Položka", "Hodnota"), align = "ll")
 ```
+
+# Literatura {.unnumbered}
+
+::: {#refs}
+:::

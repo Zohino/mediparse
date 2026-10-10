@@ -4,9 +4,19 @@ project:
 
 engine: knitr
 lang: cs
+author: Martin Žoha
+bibliography: references.bib
+toc: true
+toc-title: Obsah
+number-sections: true
+
+crossref:
+  sec-prefix: ""
 
 format:
-  typst: default
+  typst:
+    papersize: a4
+    citeproc: true
 
 execute:
   freeze: auto
