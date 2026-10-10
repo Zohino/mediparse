@@ -210,6 +210,18 @@ ignore = [
     "suspicious-non-cryptographic-random-usage", # seedovaná simulace plánů, ne kryptografie
 ]
 
+"src/mediparse/infrastructure/source_revision.py" = [
+    "suspicious-subprocess-import",           # git je pevný příkaz bez shellu a bez vstupu od uživatele
+    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, shell se nepoužívá
+    "start-process-with-partial-path",        # git se hledá v PATH hostitele, cestu k binárce nezná nikdo předem
+]
+
+"tests/test_source_revision.py" = [
+    "suspicious-subprocess-import",           # test zakládá repo pevným příkazem git bez shellu
+    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, shell se nepoužívá
+    "start-process-with-partial-path",        # git se hledá v PATH, stejně jako v testovaném adaptéru
+]
+
 [tool.ruff.lint.flake8-type-checking]
 runtime-evaluated-base-classes = ["pydantic.BaseModel"]  # pydantic čte anotace za běhu
 
