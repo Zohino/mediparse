@@ -32,12 +32,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File smoketest.ps1
 ```
 
 Skript sestaví image, předá mu commit a příznak rozpracovaného stromu, v
-kontejneru bez sítě pustí přípravu dat, trénink a evaluaci a na konci vypíše
-tabulku metrik.
+kontejneru bez sítě pustí přípravu dat, trénink, evaluaci a načtení uloženého
+modelu a na konci vypíše tabulku metrik a ukázku predikce.
 
 ### Výstupy
 
-- `build/smoketest/`: data, model, predikce, metriky a run manifest
+- `build/smoketest/`: data, model, predikce, metriky, ukázka predikce uloženého
+  modelu (`demo.parquet`) a run manifest
 - `logs/smoketest/`: logy jednotlivých kroků
 
 ### Testy
