@@ -10,6 +10,7 @@ raise SystemExit(
         config=Path(snakemake.input.config),
         model=Path(snakemake.output.model),
         predictions=Path(snakemake.output.predictions),
+        manifest=Path(snakemake.output.manifest),
         log=Path(snakemake.log[0]),
     )
 )
