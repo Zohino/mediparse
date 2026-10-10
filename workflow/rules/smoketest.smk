@@ -40,3 +40,16 @@ rule evaluate_smoketest_model:
         "logs/smoketest/evaluate_smoketest_model.log",
     script:
         "../scripts/evaluate_smoketest.py"
+
+
+rule infer_smoketest_model:
+    input:
+        notes="build/smoketest/notes.parquet",
+        model="build/smoketest/model.skops",
+        predictions="build/smoketest/predictions.parquet",
+    output:
+        "build/smoketest/demo.parquet",
+    log:
+        "logs/smoketest/infer_smoketest_model.log",
+    script:
+        "../scripts/infer_smoketest.py"
