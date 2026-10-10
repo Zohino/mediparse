@@ -15,18 +15,10 @@ from mediparse.domain.smoketest_training import (
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.domain.evaluation import Classification
-    from mediparse.domain.smoketest_input import InputNote
+    from mediparse.application.ports import InputTable, PredictionSink, TextClassifier
     from mediparse.domain.smoketest_training import Holdout, TrainingConfig
 
 FOLD = 0
-
-
-class InputTable(Protocol):
-    """Vstupní tabulka zpráv s labely."""
-
-    def read(self) -> tuple[InputNote, ...]:
-        """Přečte řádky v pořadí tabulky."""
 
 
 class HoldoutSplitter(Protocol):
@@ -34,13 +26,6 @@ class HoldoutSplitter(Protocol):
 
     def split(self, labels: Sequence[bool], groups: Sequence[int]) -> Holdout:
         """Rozdělí zprávy podle labelů a skupin pacientů."""
-
-
-class TextClassifier(Protocol):
-    """Natrénovaný binární klasifikátor textu."""
-
-    def classify(self, texts: Sequence[str]) -> tuple[Classification, ...]:
-        """Určí label a rozhodovací skóre pro každý text."""
 
 
 class ClassifierTrainer(Protocol):
@@ -55,13 +40,6 @@ class ModelStore(Protocol):
 
     def save(self, classifier: TextClassifier) -> None:
         """Uloží klasifikátor."""
-
-
-class PredictionSink(Protocol):
-    """Výstup predikcí testovacích zpráv."""
-
-    def write(self, predictions: Sequence[Prediction]) -> None:
-        """Zapíše predikce."""
 
 
 @dataclass(frozen=True)
