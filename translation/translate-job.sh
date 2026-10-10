@@ -13,8 +13,10 @@ fi
 
 export PATH="$workdir/bin:$PATH"
 export HF_HOME="$cache/huggingface"
-export UV_CACHE_DIR="$cache/uv"
-export UV_PYTHON_INSTALL_DIR="$cache/python"
+export PIXI_HOME="$cache/pixi-home"
+export PIXI_CACHE_DIR="$cache/pixi"
+mkdir -p "$PIXI_HOME"
+printf 'detached-environments = "%s"\n' "$cache/envs" >"$PIXI_HOME/config.toml"
 HF_TOKEN=$(<"$workdir/.hf_token")
 export HF_TOKEN
 
@@ -25,5 +27,5 @@ if [[ -n ${IDS:-} ]]; then
 fi
 
 nvidia-smi
-uv --version
-time uv run --script --locked "$workdir/translate.py" "${args[@]}"
+pixi --version
+time pixi run --manifest-path "$workdir/pyproject.toml" --frozen -e translate python "$workdir/translate.py" "${args[@]}"

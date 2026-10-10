@@ -1,12 +1,3 @@
-# /// script
-# requires-python = "==3.13.*"
-# dependencies = [
-#     "vllm>=0.30.0",
-# ]
-#
-# [tool.ty.analysis]
-# allowed-unresolved-imports = ["torch", "vllm", "vllm.**"]
-# ///
 """Přeloží požadavky z prepare.py modelem ve vLLM a po přerušení naváže podle klíčů.
 
 Skript nezná zprávy ani jazyky, jen klíče a ID tokenů promptu. Výstupy každé dávky
