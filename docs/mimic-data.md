@@ -16,6 +16,8 @@ Seznam tabulek, URL a SHA-256 drží `config/mimic_tables.json` jako jediný zdr
    [`results/mimic/manifest.json`](../results/mimic/manifest.json) a flag
    `resources/mimic/validated.flag`. Kroky nad daty MIMIC mají flag na vstupu
    a bez prošlé validace nepoběží.
+4. **Převod na parquet.** `snakemake parquet_mimic` převede každou validovanou
+   tabulku na `resources/mimic/parquet/<tabulka>.parquet`.
 
 Validace selže, pokud tabulka nejde rozbalit, nemá hlavičku ani záznam nebo
 končí neuzavřeným polem v uvozovkách. Takhle vypadá useknutý gzip nebo rozbitý
@@ -23,6 +25,15 @@ CSV. Počet záznamů se nepočítá z fyzických řádků, protože text zpráv
 zalomení uvnitř polí v uvozovkách. Záznam končí tam, kde je od začátku souboru
 sudý počet uvozovek.
 Počty v manifestu se shodují s počty, které uvádí dokumentace MIMIC.
+
+Převod čte CSV po blocích, takže paměť drží jen jeden blok i u `discharge`.
+Všechny sloupce zůstávají řetězce a prázdná hodnota je NULL, takže parquet je
+bezeztrátová kopie CSV: kód `0389` si nechá úvodní nulu. Typy sloupců přiřadí
+až dotazy nad parquetem. Počet záznamů a jména sloupců z převodu se porovnají
+s inventářem validace. Pokud se liší, krok skončí chybou a výstup se smaže.
+Počty tak ověřují dvě nezávislé metody: parita uvozovek ve validaci a parser
+pyarrow v převodu. Krok nad reálnými daty se spouští ručně; testy běží nad malými
+syntetickými `.csv.gz`.
 
 ## Tabulky
 
@@ -62,4 +73,5 @@ Celkem je to 3,17 GB komprimovaně. Jména sloupců jsou v manifestu.
 
 Validace ověřuje jen soubory: úplnost, otisk, tvar CSV, počty a schéma.
 Hodnoty ve sloupcích, chybějící hodnoty ani vazby mezi tabulkami nekontroluje.
-To patří ke krokům nad parquetem.
+Převod je jen kopie a hodnoty také nekontroluje. To patří ke krokům nad
+parquetem (S20, S20a).
