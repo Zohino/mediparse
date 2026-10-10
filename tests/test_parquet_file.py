@@ -9,7 +9,7 @@ import pyarrow.parquet as pq
 import pytest
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.parquet_file import read_table
+from mediparse.infrastructure.parquet_file import read_table, write_string_table
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -50,3 +50,15 @@ def test_foreign_schema_names_expected_columns(tmp_path: Path) -> None:
         InvalidInputError, match=r"foreign\.parquet neodpovídá schématu.*note_id"
     ):
         read_table(path, SCHEMA)
+
+
+def test_written_string_table_reads_back_with_all_string_schema(tmp_path: Path) -> None:
+    """Zapsaná tabulka má samé řetězcové sloupce v pořadí a čte se zpět."""
+    path = tmp_path / "out" / "table.parquet"
+
+    write_string_table(path, ("b", "a"), [{"b": "1", "a": "2"}, {"b": "3", "a": "4"}])
+
+    table = pq.read_table(path)
+    assert table.schema.names == ["b", "a"]
+    assert {str(field.type) for field in table.schema} == {"string"}
+    assert table.to_pydict() == {"b": ["1", "3"], "a": ["2", "4"]}
