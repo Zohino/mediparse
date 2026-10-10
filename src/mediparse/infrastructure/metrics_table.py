@@ -11,6 +11,7 @@ import pyarrow.parquet as pq
 from mediparse.domain.evaluation import BinaryMetrics, DiagnosisMetrics
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
+from mediparse.infrastructure.parquet_file import read_table
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -58,21 +59,8 @@ class ParquetMetricsTable:
 
         Returns:
             Metriky s diagnózou jako výčtem.
-
-        Raises:
-            InvalidInputError: Soubor neexistuje, není parquet nebo nemá pevné schéma.
         """
-        try:
-            table = pq.read_table(self.path)
-        except FileNotFoundError as error:
-            msg = f"Soubor {self.path} neexistuje."
-            raise InvalidInputError(msg) from error
-        except pa.ArrowInvalid as error:
-            msg = f"Soubor {self.path} neodpovídá schématu: {error}"
-            raise InvalidInputError(msg) from error
-        if not table.schema.equals(SCHEMA):
-            msg = f"Soubor {self.path} neodpovídá schématu tabulky metrik."
-            raise InvalidInputError(msg)
+        table = read_table(self.path, SCHEMA)
         return tuple(self._metrics(row) for row in table.to_pylist())
 
     def _metrics(self, row: dict[str, Any]) -> DiagnosisMetrics:

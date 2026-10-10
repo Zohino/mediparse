@@ -12,6 +12,7 @@ import pyarrow.parquet as pq
 from mediparse.domain.evaluation import Prediction
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
+from mediparse.infrastructure.parquet_file import read_table
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -57,19 +58,9 @@ class ParquetPredictionTable:
             Predikce s diagnózou jako výčtem.
 
         Raises:
-            InvalidInputError: Soubor neexistuje, není parquet nebo nemá pevné schéma.
+            InvalidInputError: Skóre není konečné číslo.
         """
-        try:
-            table = pq.read_table(self.path)
-        except FileNotFoundError as error:
-            msg = f"Soubor {self.path} neexistuje."
-            raise InvalidInputError(msg) from error
-        except pa.ArrowInvalid as error:
-            msg = f"Soubor {self.path} neodpovídá schématu: {error}"
-            raise InvalidInputError(msg) from error
-        if not table.schema.equals(SCHEMA):
-            msg = f"Soubor {self.path} neodpovídá schématu tabulky predikcí."
-            raise InvalidInputError(msg)
+        table = read_table(self.path, SCHEMA)
         if not all(math.isfinite(score) for score in table.column("score").to_pylist()):
             msg = f"Soubor {self.path} má nekonečné nebo nečíselné skóre."
             raise InvalidInputError(msg)

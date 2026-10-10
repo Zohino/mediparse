@@ -8,9 +8,9 @@ from typing import TYPE_CHECKING, Final
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
 from mediparse.domain.smoketest_input import InputNote
+from mediparse.infrastructure.parquet_file import read_table
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -51,21 +51,8 @@ class ParquetNoteTable:
 
         Returns:
             Zprávy s labely z bool sloupců.
-
-        Raises:
-            InvalidInputError: Soubor neexistuje, není parquet nebo nemá pevné schéma.
         """
-        try:
-            table = pq.read_table(self.path)
-        except FileNotFoundError as error:
-            msg = f"Soubor {self.path} neexistuje."
-            raise InvalidInputError(msg) from error
-        except pa.ArrowInvalid as error:
-            msg = f"Soubor {self.path} neodpovídá schématu: {error}"
-            raise InvalidInputError(msg) from error
-        if not table.schema.equals(SCHEMA):
-            msg = f"Soubor {self.path} neodpovídá schématu tabulky zpráv."
-            raise InvalidInputError(msg)
+        table = read_table(self.path, SCHEMA)
         return tuple(
             InputNote(
                 row["note_id"],
