@@ -302,6 +302,9 @@ numpy = "*"
 RETICULATE_PYTHON = "$CONDA_PREFIX/bin/python"
 RETICULATE_CONDA = "$CONDA_PREFIX/bin/micromamba"
 
+[tool.pixi.feature.eda.tasks]
+eda-test = { cmd = "Rscript -e 'testthat::test_dir(\"eda/tests/testthat\", stop_on_failure = TRUE)'", description = "Testy R pomocníků EDA (testthat)" }
+
 [tool.pixi.tasks]
 lint = { cmd = "ruff check", description = "Linting pomocí ruff" }
 format = { cmd = "ruff format", description = "Formátovat kód pomocí ruff" }
