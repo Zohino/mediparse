@@ -22,7 +22,7 @@ from mediparse.domain.smoketest_training import (
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.application.smoketest_training import TextClassifier
+    from mediparse.application.ports import TextClassifier
 
 CONFIG = TrainingConfig(
     row_id="row", diagnosis=Diagnosis.CKD, seed=0, folds=2, regularization=1.0

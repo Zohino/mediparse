@@ -5,10 +5,12 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Protocol
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Mapping, Sequence
 
     from mediparse.domain.corpus_audit import AuditRecord
+    from mediparse.domain.evaluation import Classification, Prediction
     from mediparse.domain.note_plan import NotePlan
+    from mediparse.domain.smoketest_input import InputNote
 
 
 class PlanSource(Protocol):
@@ -67,3 +69,31 @@ class AuditedCorpus(FingerprintedCorpus, Protocol):
         Returns:
             SHA-256 otisk.
         """
+
+
+class InputTable(Protocol):
+    """Vstupní tabulka zpráv s labely."""
+
+    def read(self) -> tuple[InputNote, ...]:
+        """Přečte řádky v pořadí tabulky."""
+
+
+class TextClassifier(Protocol):
+    """Natrénovaný binární klasifikátor textu."""
+
+    def classify(self, texts: Sequence[str]) -> tuple[Classification, ...]:
+        """Určí label a rozhodovací skóre pro každý text."""
+
+
+class PredictionSource(Protocol):
+    """Zdroj predikcí testovacích zpráv."""
+
+    def read(self) -> tuple[Prediction, ...]:
+        """Přečte predikce v pořadí zdroje."""
+
+
+class PredictionSink(Protocol):
+    """Výstup predikcí testovacích zpráv."""
+
+    def write(self, predictions: Sequence[Prediction]) -> None:
+        """Zapíše predikce."""
