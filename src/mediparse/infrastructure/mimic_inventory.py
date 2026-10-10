@@ -44,6 +44,18 @@ def read_manifest(path: Path) -> dict[str, TableShape]:
     }
 
 
+def read_manifest_bytes(path: Path) -> dict[str, int]:
+    """Přečte z veřejného manifestu validace velikost každého souboru v bajtech.
+
+    Returns:
+        Jméno tabulky bez ``.csv.gz`` a velikost souboru v pořadí manifestu.
+    """
+    manifest = parse_file(path, _Manifest.model_validate_json)
+    return {
+        table.file.removesuffix(".csv.gz"): table.bytes for table in manifest.tables
+    }
+
+
 @dataclass(frozen=True)
 class InventoryFile:
     """JSON inventář jedné tabulky, který zapisuje ``inventory.sh``."""

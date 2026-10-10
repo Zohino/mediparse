@@ -8,7 +8,11 @@ import pytest
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.mimic_table import TableShape
-from mediparse.infrastructure.mimic_inventory import InventoryFile, read_manifest
+from mediparse.infrastructure.mimic_inventory import (
+    InventoryFile,
+    read_manifest,
+    read_manifest_bytes,
+)
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -71,3 +75,11 @@ def test_invalid_json_manifest_is_refused(tmp_path: Path) -> None:
 
     with pytest.raises(InvalidInputError, match="neodpovídá"):
         read_manifest(path)
+
+
+def test_manifest_bytes_by_table_name(tmp_path: Path) -> None:
+    """Velikost souboru z manifestu je pod jménem tabulky bez .csv.gz."""
+    path = tmp_path / "manifest.json"
+    path.write_text(MANIFEST)
+
+    assert read_manifest_bytes(path) == {"discharge": 1, "d_icd_diagnoses": 2}
