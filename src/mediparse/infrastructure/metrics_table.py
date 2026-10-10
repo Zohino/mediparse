@@ -3,16 +3,18 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Any, Final
 
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+from mediparse.domain.evaluation import BinaryMetrics, DiagnosisMetrics
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.labels import Diagnosis
+
 if TYPE_CHECKING:
     from collections.abc import Sequence
     from pathlib import Path
-
-    from mediparse.domain.evaluation import DiagnosisMetrics
 
 SCHEMA: Final = pa.schema([
     pa.field("row_id", pa.string(), nullable=False),
@@ -50,3 +52,46 @@ class ParquetMetricsTable:
         }
         self.path.parent.mkdir(parents=True, exist_ok=True)
         pq.write_table(pa.Table.from_pydict(columns, schema=SCHEMA), self.path)
+
+    def read(self) -> tuple[DiagnosisMetrics, ...]:
+        """Přečte řádky tabulky v pořadí souboru.
+
+        Returns:
+            Metriky s diagnózou jako výčtem.
+
+        Raises:
+            InvalidInputError: Soubor neexistuje, není parquet nebo nemá pevné schéma.
+        """
+        try:
+            table = pq.read_table(self.path)
+        except FileNotFoundError as error:
+            msg = f"Soubor {self.path} neexistuje."
+            raise InvalidInputError(msg) from error
+        except pa.ArrowInvalid as error:
+            msg = f"Soubor {self.path} neodpovídá schématu: {error}"
+            raise InvalidInputError(msg) from error
+        if not table.schema.equals(SCHEMA):
+            msg = f"Soubor {self.path} neodpovídá schématu tabulky metrik."
+            raise InvalidInputError(msg)
+        return tuple(self._metrics(row) for row in table.to_pylist())
+
+    def _metrics(self, row: dict[str, Any]) -> DiagnosisMetrics:
+        try:
+            diagnosis = Diagnosis(row["diagnosis"])
+        except ValueError as error:
+            msg = f"Soubor {self.path} obsahuje neznámou diagnózu {row['diagnosis']!r}."
+            raise InvalidInputError(msg) from error
+        return DiagnosisMetrics(
+            row["row_id"],
+            diagnosis,
+            row["test_notes"],
+            row["test_positives"],
+            BinaryMetrics(
+                row["precision"],
+                row["recall"],
+                row["f1"],
+                row["accuracy"],
+                row["roc_auc"],
+                row["pr_auc"],
+            ),
+        )
