@@ -28,3 +28,14 @@ rule train_smoketest_model:
         "logs/smoketest/train_smoketest_model.log",
     script:
         "../scripts/train_smoketest.py"
+
+
+rule evaluate_smoketest_model:
+    input:
+        predictions="build/smoketest/predictions.parquet",
+    output:
+        "build/smoketest/metrics.parquet",
+    log:
+        "logs/smoketest/evaluate_smoketest_model.log",
+    script:
+        "../scripts/evaluate_smoketest.py"
