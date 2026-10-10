@@ -12,8 +12,7 @@
 !translation/markers.py
 !translation/collect.py
 !pyproject.toml
-!uv.lock
+!pixi.lock
 !README.md
 !LICENSE
-!.python-version
 **/__pycache__/

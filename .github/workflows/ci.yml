@@ -29,11 +29,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: ./.github/actions/setup-uv-env
+      - uses: ./.github/actions/setup-pixi-env
       - name: prek ci-job hooks
         run: >-
-          uv run --frozen prek run --all-files --group ci-job
-          --skip gitleaks --skip synthetic-corpus-gate --skip uv-lock
+          pixi run --frozen prek run --all-files --group ci-job
+          --skip gitleaks --skip synthetic-corpus-gate --skip pixi-lock
           --show-diff-on-failure
 
   test:
@@ -46,11 +46,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: ./.github/actions/setup-uv-env
+      - uses: ./.github/actions/setup-pixi-env
       - name: pytest
-        run: uv run --frozen pytest
+        run: pixi run --frozen pytest
       - name: snakemake dry-run
-        run: uv run --frozen snakemake --dry-run download_mimic
+        run: pixi run --frozen snakemake --dry-run download_mimic
 
   hygiene:
     name: Repo hygiene
@@ -62,10 +62,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: ./.github/actions/setup-uv-env
+      - uses: ./.github/actions/setup-pixi-env
       - name: prek builtin hooks
         run: >-
-          uv run --frozen prek run --all-files --stage pre-commit
+          pixi run --frozen prek run --all-files --stage pre-commit
           --no-group local-only --no-group ci-job --show-diff-on-failure
       - name: no submodules
         run: |
@@ -140,7 +140,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha }}
-      - uses: ./.github/actions/setup-uv-env
+      - uses: ./.github/actions/setup-pixi-env
       - name: prek commit-msg hooks
         env:
           RANGE: ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
@@ -149,7 +149,7 @@ jobs:
           for sha in $(git rev-list --no-merges --reverse "$RANGE"); do
             echo "::group::$(git log -1 --format='%h %s' "$sha")"
             git log -1 --format=%B "$sha" > "$RUNNER_TEMP/commit-msg"
-            if ! uv run --frozen prek run --stage commit-msg --commit-msg-filename "$RUNNER_TEMP/commit-msg"; then
+            if ! pixi run --frozen prek run --stage commit-msg --commit-msg-filename "$RUNNER_TEMP/commit-msg"; then
               echo "::error::Commit $sha neprošel kontrolou commit zprávy"
               status=1
             fi

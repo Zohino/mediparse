@@ -57,7 +57,7 @@ test = [
 name = "cz_conventional_commits"
 tag_format = "v$version"
 version_scheme = "pep440"
-version_provider = "uv"
+version_provider = "pep621"
 update_changelog_on_bump = true
 major_version_zero = true
 
@@ -245,3 +245,17 @@ include = ["workflow/scripts/**"]
 
 [tool.ty.overrides.rules]
 unresolved-reference = "ignore"  # globál snakemake vkládá Snakemake před spuštěním skriptu
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tool.pixi.dependencies]
+python = "3.13.*"
+
+[tool.pixi.pypi-dependencies]
+mediparse = { path = ".", editable = true }
+
+[tool.pixi.environments]
+default = { features = ["dev"], solve-group = "main" }
+test = { features = ["test"], solve-group = "main" }
