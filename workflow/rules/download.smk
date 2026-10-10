@@ -35,3 +35,24 @@ rule download_mimic_table:
             {output:q} \
             {log:q}
         """
+
+
+rule validate_mimic:
+    input:
+        expand("resources/mimic/inventory/{file}.json", file=MIMIC_TABLES),
+    output:
+        manifest="results/mimic/manifest.json",
+        flag=touch("resources/mimic/validated.flag"),
+    shell:
+        "jq -s '{{tables: .}}' {input:q} >{output.manifest:q}"
+
+
+rule inventory_mimic_table:
+    input:
+        "resources/mimic/{file}",
+    output:
+        "resources/mimic/inventory/{file}.json",
+    wildcard_constraints:
+        file="|".join(map(re.escape, MIMIC_TABLES)),
+    shell:
+        "workflow/scripts/inventory.sh {input:q} {output:q}"
