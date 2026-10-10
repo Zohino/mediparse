@@ -10,6 +10,7 @@ import pyarrow.parquet as pq
 from mediparse.domain.inputs import InvalidInputError
 
 if TYPE_CHECKING:
+    from collections.abc import Mapping, Sequence
     from pathlib import Path
 
 
@@ -34,3 +35,20 @@ def read_table(path: Path, schema: pa.Schema) -> pa.Table:
         msg = f"Soubor {path} neodpovídá schématu: čekané sloupce {', '.join(schema.names)}."
         raise InvalidInputError(msg)
     return table
+
+
+def write_string_table(
+    path: Path, columns: Sequence[str], rows: Sequence[Mapping[str, str]]
+) -> None:
+    """Zapíše soubor parquet se samými řetězcovými sloupci a vytvoří chybějící adresáře.
+
+    Args:
+        path: Cíl zápisu.
+        columns: Sloupce v pořadí souboru.
+        rows: Řádky jako slovníky sloupec na hodnotu.
+    """
+    schema = pa.schema([pa.field(column, pa.string()) for column in columns])
+    path.parent.mkdir(parents=True, exist_ok=True)
+    pq.write_table(
+        pa.Table.from_pylist(list(rows), schema=schema), path, compression="zstd"
+    )

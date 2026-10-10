@@ -23,6 +23,27 @@ class _Inventory(BaseModel):
     columns: tuple[str, ...]
 
 
+class _Manifest(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+    tables: tuple[_Inventory, ...]
+
+
+def read_manifest(path: Path) -> dict[str, TableShape]:
+    """Přečte veřejný manifest validace: tvar každé tabulky pod jejím jménem.
+
+    Returns:
+        Jméno tabulky bez ``.csv.gz`` a její tvar v pořadí manifestu.
+    """
+    manifest = parse_file(path, _Manifest.model_validate_json)
+    return {
+        table.file.removesuffix(".csv.gz"): TableShape(
+            records=table.records, columns=table.columns
+        )
+        for table in manifest.tables
+    }
+
+
 @dataclass(frozen=True)
 class InventoryFile:
     """JSON inventář jedné tabulky, který zapisuje ``inventory.sh``."""
