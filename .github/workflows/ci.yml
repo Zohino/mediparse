@@ -52,6 +52,33 @@ jobs:
       - name: snakemake dry-run
         run: pixi run --frozen snakemake --dry-run download_mimic
 
+  eda:
+    name: EDA
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-pixi-env
+        with:
+          environments: eda
+      - name: testthat
+        run: pixi run --frozen eda-test
+      - name: render nad syntetickými tabulkami a kanárek
+        run: pixi run --frozen eda-synthetic
+      - name: render z freeze bez dat
+        run: |
+          pixi run --frozen -e eda quarto render eda
+          pdfs=$(find results/eda -maxdepth 1 -name '*.pdf' | wc -l)
+          documents=$(find eda -maxdepth 1 -name '*.qmd' | wc -l)
+          if [[ "$pdfs" -ne "$documents" ]]; then
+            echo "::error::PDF v results/eda ($pdfs) neodpovídá dokumentům eda/*.qmd ($documents)"
+            exit 1
+          fi
+
   hygiene:
     name: Repo hygiene
     runs-on: ubuntu-latest
@@ -160,7 +187,7 @@ jobs:
   ci-ok:
     name: CI OK
     if: always()
-    needs: [lint, test, hygiene, container, secrets, commits]
+    needs: [lint, test, eda, hygiene, container, secrets, commits]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions: {}
