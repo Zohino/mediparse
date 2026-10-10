@@ -84,6 +84,15 @@ provenance-corpus model:
 provenance-translation workdir="build/translation":
     {{runner}} mediparse-translation-provenance --workdir "{{workdir}}"
 
-# build kontejnerového image přes podman, nebo docker
+# build kontejnerového image přes podman, nebo docker, s revizí zdroje pro run manifest
 build:
-    {{container-engine}} build -f Containerfile -t mediparse .
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    dirty=false
+    [[ -z "$(git status --porcelain)" ]] || dirty=true
+    {{container-engine}} build -f Containerfile --build-arg "MEDIPARSE_COMMIT=$(git rev-parse HEAD)" --build-arg "MEDIPARSE_DIRTY=$dirty" -t mediparse .
+
+# smoketest v kontejneru; stejný skript, který spouští zkoušející
+smoketest:
+    ./smoketest.sh
