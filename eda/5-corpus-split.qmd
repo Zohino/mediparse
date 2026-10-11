@@ -1,0 +1,123 @@
+---
+title: "Explorační analýza datové sady: volba korpusu a rozdělení dat"
+abstract: |
+  Dokument uzavírá rozbor datové sady. Z ukazatelů předchozích sešitů srovnává propouštěcí a radiologické zprávy a volí primární korpus. Vymezuje vstupní korpus, tedy propouštěcí zprávy s diagnózou ICD, dostatečnou délkou a bez přesných duplicit, a uvádí jeho velikost po jednotlivých krocích výběru. Nakonec rozhoduje o jednotce a způsobu rozdělení dat na trénovací a testovací část, včetně volby mezi náhodným a časovým dělením podle éry ICD.
+---
+
+```{r}
+#| include: false
+library(reticulate)
+source("R/dua.R")
+source("R/db.R")
+source("R/patients.R")
+source("R/text.R")
+source("R/selection.R")
+source("R/export.R")
+eda_check_python()
+con <- eda_connect()
+tables <- c("discharge", "radiology")
+summaries <- setNames(lapply(tables, function(table) patient_summary(con, table)), tables)
+coverage <- hadm_coverage(con, tables)
+corpus_choice <- coverage_verdict(coverage)
+quality <- note_quality(con, tables)
+shown <- format_percentiles(length_percentiles(con, tables))
+comparison <- corpus_comparison(summaries, coverage, quality, shown)
+funnel <- corpus_funnel(con)
+selected <- funnel[nrow(funnel), ]
+era <- icd_era(con)
+transition <- era_transition(dua_suppress(icd_era_by_group(con), by = "era"))
+n_hospitalizations <- sum(era$n)
+era_share <- function(label) {
+  percent_label(sum(era$n[era$era == label]), n_hospitalizations)
+}
+s_icd_text <- percent_label(coverage$s_icd, coverage$zprav)
+s_icd_discharge <- s_icd_text[coverage$tabulka == "discharge"]
+s_icd_radiology <- s_icd_text[coverage$tabulka == "radiology"]
+multi_share <- percent_label(selected$vice_zprav, selected$pacientu)
+```
+
+# Úvod
+
+Tento sešit je pátým z řady sešitů explorační analýzy a uzavírá rozbor datové sady. Druhý sešit popsal pacienty, přijetí, pokrytí diagnózami ICD a éru ICD, třetí délku zpráv a deidentifikaci, čtvrtý délku zpráv v tokenech modelů. Tento sešit z jejich ukazatelů vyvozuje dvě rozhodnutí, na kterých stojí sestavení kohorty i trénink modelů. Klade si tři cíle:
+
+- srovnat propouštěcí a radiologické zprávy podle ukazatelů, které rozhodují o použitelnosti korpusu, a zvolit primární korpus,
+- vymezit vstupní korpus, tedy zprávy, které vstupují do rozdělení dat, a změřit jeho velikost,
+- rozhodnout o jednotce a způsobu rozdělení dat na trénovací a testovací část.
+
+Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty, nikdy řádková data ani texty zpráv. Všechny tabulky sešitu jsou metriky korpusu, které nevymezují skupiny pacientů kvaziidentifikátorem, a uvádějí se přesně. Rozpad hospitalizací podle období ukotvení pacienta se nezveřejňuje; sešit z něj po potlačení kategorií s méně než deseti hospitalizacemi přebírá jen závěr o přechodu mezi verzemi ICD, stejně jako druhý sešit.
+
+Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky srovnává korpusy, vymezuje vstupní korpus a popisuje éru ICD z pohledu rozdělení dat. Kapitola @sec-shrnuti shrnuje rozhodnutí a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
+
+# Data a metody {#sec-data}
+
+Sešit čte propouštěcí zprávy (`discharge`), radiologické zprávy (`radiology`), diagnózy ICD přiřazené hospitalizacím (`diagnoses_icd`) a pacienty (`patients`). Ukazatele počítají tytéž funkce jako druhý a třetí sešit (`eda/R/patients.R`, `eda/R/text.R`), takže čísla se shodují. Nové dotazy jsou v `eda/R/selection.R` a mají testy nad ručně vytvořenými tabulkami. Délky v tokenech se nepřepočítávají; srovnání korpusů v tokenech a podíl zpráv v okně modelů uvádí čtvrtý sešit.
+
+Pojmy a jednotky jsou tyto:
+
+- *pokrytí kódem ICD* je podíl zpráv, jejichž `hadm_id` má v `diagnoses_icd` aspoň jeden kód; jmenovatelem jsou všechny zprávy tabulky,
+- *vstupní korpus* vzniká z propouštěcích zpráv ve čtyřech krocích, z nichž každý navazuje na předchozí: všechny zprávy, zprávy s kódem ICD, zprávy dlouhé aspoň `r SHORT_LIMIT` znaků a zprávy bez přesných duplicit,
+- *přesná duplicita* je zpráva se shodným otiskem textu jako jiná zpráva vstupního korpusu; ze skupiny shodných zpráv zůstane ta s nejmenším `note_id`, takže výběr je deterministický,
+- *pacient s více zprávami* je hodnota `subject_id`, ke které v daném kroku patří aspoň dvě zprávy.
+
+Rozdělení dat popisuje sešit jen jako strategii; samotné rozdělení spočítá krok pipeline, který ho uloží jako sdílený artefakt. Volba mezi náhodným a časovým dělením vychází z přechodu mezi verzemi ICD podle tříletého období ukotvení pacienta (`anchor_year_group`), jak ho určil druhý sešit.
+
+# Výsledky {#sec-vysledky}
+
+## Srovnání korpusů {#sec-srovnani}
+
+@tbl-srovnani staví vedle sebe propouštěcí a radiologické zprávy. Kód ICD má `r s_icd_discharge` propouštěcích a `r s_icd_radiology` radiologických zpráv.
+
+```{r}
+#| label: tbl-srovnani
+#| tbl-cap: "Srovnání propouštěcích a radiologických zpráv; podíly ze všech zpráv tabulky."
+#| tbl-colwidths: [50, 25, 25]
+export_table(
+  comparison,
+  col.names = c("Ukazatel", "Propouštěcí", "Radiologické"),
+  align = "lrr"
+)
+```
+
+*Zdroj:* funkce druhého a třetího sešitu nad tabulkami `discharge`, `radiology` a `diagnoses_icd`.
+
+## Vstupní korpus {#sec-vstupni-korpus}
+
+@tbl-vyber uvádí velikost korpusu po jednotlivých krocích výběru. Do rozdělení dat vstupuje `r format_number(selected$zprav)` propouštěcích zpráv od `r format_number(selected$pacientu)` pacientů; více zpráv má `r multi_share` z nich.
+
+```{r}
+#| label: tbl-vyber
+#| tbl-cap: "Výběr vstupního korpusu z propouštěcích zpráv; každý krok navazuje na předchozí."
+#| tbl-colwidths: [40, 20, 20, 20]
+export_table(
+  data.frame(
+    krok = funnel$krok,
+    zprav = number_text(funnel$zprav),
+    pacientu = number_text(funnel$pacientu),
+    vice_zprav = number_text(funnel$vice_zprav)
+  ),
+  col.names = c("Krok", "Zpráv", "Pacientů", "Pacientů s více zprávami"),
+  align = "lrrr"
+)
+```
+
+*Zdroj:* dotaz v DuckDB nad tabulkami `discharge` a `diagnoses_icd`; délka a otisk textu jsou tytéž jako ve třetím sešitu.
+
+## Éra ICD a rozdělení dat {#sec-era}
+
+Z hospitalizací s propouštěcí zprávou je jen v ICD-10 kódováno `r era_share("jen ICD-10")`, jen v ICD-9 `r era_share("jen ICD-9")` a oběma verzemi `r era_share("obě éry")`. `r switch(transition$kind, separated = "Podle druhého sešitu jsou éry v čase odděleny: hospitalizace jen s ICD-9 a jen s ICD-10 se nevyskytují ve stejném období.", overlap = "Podle druhého sešitu se éry v čase překrývají: hospitalizace jen s ICD-9 a jen s ICD-10 se vyskytují ve stejném období.", none = "Rozpad podle období přechod mezi verzemi nedokládá: aspoň jedna z verzí se v žádném období s dostatečným počtem hospitalizací nevyskytuje samostatně.")`
+
+# Shrnutí a rozhodnutí {#sec-shrnuti}
+
+Dokument srovnal korpusy, vymezil vstupní korpus a popsal éru ICD z pohledu rozdělení dat. Pro další práci z toho plyne:
+
+- **Primární korpus.** `r switch(corpus_choice, discharge = paste0("Primárním korpusem jsou propouštěcí zprávy. Kód ICD má ", s_icd_discharge, " z nich proti ", s_icd_radiology, " radiologických, takže štítek lze odvodit aspoň u stejného podílu zpráv. Propouštěcí zpráva navíc shrnuje celou hospitalizaci včetně diagnóz, kdežto radiologická popisuje jedno vyšetření. Radiologické zprávy práce nepoužívá."), radiology = paste0("Radiologické zprávy mají vyšší pokrytí kódem ICD (", s_icd_radiology, ") než propouštěcí (", s_icd_discharge, "), což odporuje předpokladu, že primárním korpusem jsou propouštěcí zprávy. Volbu korpusu je třeba před sestavením kohorty přehodnotit."), nelze = "Pokrytí obou korpusů nelze porovnat, protože jedna z tabulek chybí nebo je prázdná. Volba propouštěcích zpráv se tu opírá jen o jejich povahu: shrnují celou hospitalizaci včetně diagnóz.")`
+- **Vstupní korpus.** Do rozdělení dat vstupují propouštěcí zprávy s kódem ICD, dlouhé aspoň `r SHORT_LIMIT` znaků a bez přesných duplicit, celkem `r format_number(selected$zprav)` zpráv od `r format_number(selected$pacientu)` pacientů. Výběr diagnóz i štítky se počítají nad tímto korpusem.
+- **Jednotka dělení.** Dělí se po pacientech (`subject_id`). `r if (selected$vice_zprav > 0) paste0("Více zpráv má ", multi_share, " pacientů vstupního korpusu a dělení po zprávách by stejného pacienta dalo do trénovací i testovací části.") else "Žádný pacient vstupního korpusu nemá více zpráv, takže dělení po zprávách by dalo stejný výsledek; dělení po pacientech zůstává, protože nic nestojí a chrání před únikem informací při změně korpusu."`
+- **Způsob dělení.** Data se dělí křížovou validací se skupinami a stratifikací (`StratifiedGroupKFold` z knihovny scikit-learn [@pedregosa2011]): skupinou je pacient a stratifikuje se podle štítků zvolených diagnóz. Metoda přijímá jen jednu třídu na zprávu, takže více štítků jedné zprávy se převede na jednu stratifikační proměnnou, například jejich kombinaci; převod určí krok, který rozdělení ukládá. Rozdělení se spočítá jednou a uloží jako sdílený artefakt, který čte anglická i česká větev, takže obě se testují na stejných pacientech. Počet částí a seed určí krok, který rozdělení ukládá.
+- **Náhodné, nebo časové dělení.** Dělení je náhodné po pacientech, protože cílem práce je srovnání modelů a jazyků za shodných podmínek, ne odhad časové generalizace. `r switch(transition$kind, separated = "Éry ICD jsou v čase odděleny, takže časové dělení by testovalo na jiné verzi kódování, než na které se model učil; náhodné dělení éry mezi částmi promíchá. Štítky obou verzí proto sjednotí mapování ICD-9 na ICD-10. Časové dělení zůstává rozšířením mimo rozsah práce.", overlap = "Éry ICD se v čase překrývají, takže časová hranice je čistě neodděluje a časové dělení by nemělo jasný řez. Štítky obou verzí sjednotí mapování ICD-9 na ICD-10.", none = "Rozpad podle období přechod mezi verzemi nedokládá, takže časové dělení nemá v datech oporu. Obsahuje-li korpus obě verze, štítky sjednotí mapování ICD-9 na ICD-10.")`
+
+# Omezení {#sec-omezeni}
+
+Pokrytí kódem ICD říká jen, že hospitalizace má nějakou diagnózu, ne že má některou z diagnóz, které práce klasifikuje; počet zpráv se štítkem zvolených diagnóz určí až jejich výběr. Přesné duplicity se hledají podle otisku celého textu, takže téměř shodné zprávy (například převzatý text z předchozí hospitalizace) ve vstupním korpusu zůstávají; dělení po pacientech je udrží v téže části, pokud patří témuž pacientovi. Stratifikaci nelze ověřit, dokud nejsou zvoleny diagnózy, a sešit proto rozložení štítků mezi části nepočítá. Éra ICD vychází z tříletých období ukotvení pacienta, takže poloha přechodu mezi verzemi je známa jen s touto přesností. Délky v tokenech sešit nepřepočítává a odkazuje na čtvrtý sešit.
+
+{{< include _partials/appendix.qmd >}}
