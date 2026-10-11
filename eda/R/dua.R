@@ -96,30 +96,3 @@ dua_share <- function(df) {
   out$n <- dua_count(out$n)
   out
 }
-
-dua_quantile_ok <- function(n, p) {
-  round(n * pmin(p, 1 - p), 9) >= DUA_THRESHOLD
-}
-
-complement_hidden <- function(n, total) {
-  total <- rep_len(total, length(n))
-  vapply(
-    seq_along(n),
-    function(index) dua_hidden(c(n[index], total[index] - n[index]))[1],
-    logical(1)
-  )
-}
-
-hidden_count <- function(n, hidden) {
-  ifelse(hidden, paste0("<", NBSP, DUA_THRESHOLD), dua_count(n))
-}
-
-hidden_percent <- function(n, total, hidden) {
-  ifelse(hidden, "\u2013", dua_percent(n, total))
-}
-
-age_hidden <- function(age) {
-  groups <- c("bez_masky", "jedna", "vice")
-  hidden <- dua_hidden(unlist(age[groups], use.names = FALSE))
-  setNames(hidden, groups)
-}

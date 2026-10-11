@@ -205,52 +205,6 @@ test_that("dua_percent_text přidá nezlomitelnou mezeru a znak procenta", {
   expect_equal(dua_percent_text(15, 0), "–")
 })
 
-test_that("dua_quantile_ok pustí percentil, když má každá strana aspoň deset zpráv", {
-  expect_true(dua_quantile_ok(100, 0.1))
-  expect_false(dua_quantile_ok(99, 0.1))
-  expect_true(dua_quantile_ok(1000, 0.01))
-  expect_false(dua_quantile_ok(999, 0.01))
-  expect_true(dua_quantile_ok(20, 0.5))
-  expect_false(dua_quantile_ok(19, 0.5))
-})
-
-test_that("dua_quantile_ok je souměrné v p a 1 - p", {
-  for (n in c(50, 99, 100, 101, 1000)) {
-    for (p in c(0.01, 0.05, 0.1, 0.25)) {
-      expect_equal(dua_quantile_ok(n, p), dua_quantile_ok(n, 1 - p))
-    }
-  }
-})
-
-test_that("dua_quantile_ok je vektorizované a pro n = 0 nepustí nic", {
-  expect_false(dua_quantile_ok(0, 0.5))
-  expect_equal(dua_quantile_ok(c(0, 100, 5), 0.1), c(FALSE, TRUE, FALSE))
-})
-
-test_that("complement_hidden skryje počet, jehož doplněk je pod prahem", {
-  expect_equal(complement_hidden(c(50, 5, 95, 100), c(100, 100, 100, 100)), c(FALSE, TRUE, TRUE, FALSE))
-  expect_equal(complement_hidden(c(0, 100), c(100, 100)), c(TRUE, FALSE))
-  expect_equal(complement_hidden(c(50, 95), 100), c(FALSE, TRUE))
-})
-
-test_that("hidden_count a hidden_percent ukážou skrytou buňku jako < 10 a podíl jako pomlčku", {
-  hidden <- c(FALSE, TRUE)
-
-  expect_equal(hidden_count(c(50, 95), hidden), c("50", paste0("<", NBSP, "10")))
-  expect_equal(hidden_percent(c(50, 95), c(100, 100), hidden), c("50,0", "–"))
-})
-
-test_that("age_hidden skrývá rozdělení bez, jedna, více jako celek", {
-  hidden <- age_hidden(list(zprav = 1000, bez_masky = 980, jedna = 15, vice = 5))
-
-  expect_equal(hidden, c(bez_masky = FALSE, jedna = TRUE, vice = TRUE))
-  expect_equal(
-    age_hidden(list(zprav = 300, bez_masky = 100, jedna = 100, vice = 100)),
-    c(bez_masky = FALSE, jedna = FALSE, vice = FALSE)
-  )
-})
-
-
 test_that("format_number odděluje tisíce nezlomitelnou mezerou a dua_count ho používá", {
   expect_equal(format_number(1234567), paste0("1", NBSP, "234", NBSP, "567"))
   expect_equal(dua_count(1234), format_number(1234))
