@@ -1,5 +1,6 @@
 ENCODER_WINDOW <- 512L
 ENCODER_FULL_SHARE <- 0.95
+CZECH_TOLERANCE <- 0.05
 
 encoder_models <- function() {
   data.frame(
@@ -199,11 +200,13 @@ translation_split <- function(settings, fits) {
 }
 
 token_windows <- function(encoders, translation, scale = 1) {
+  tokenizer <- c(names(encoders), names(translation))
+  scales <- if (is.null(names(scale))) rep_len(scale, length(tokenizer)) else unname(scale[tokenizer])
   data.frame(
-    tokenizer = c(names(encoders), names(translation)),
+    tokenizer = tokenizer,
     specials = c(unname(encoders), rep(0, length(translation))),
     capacity = c(ENCODER_WINDOW - unname(encoders), unname(translation)),
-    scale = scale,
+    scale = scales,
     stringsAsFactors = FALSE
   )
 }
@@ -265,4 +268,89 @@ translation_verdict <- function(divided, total) {
     return("nelze")
   }
   if (divided == 0) "nedeli" else "deli"
+}
+
+TOKENIZER_LABELS <- c(xlmr = "XLM-R", mdeberta = "mDeBERTa", translategemma = "translategemma")
+
+tokenizer_label <- function(keys) {
+  unname(TOKENIZER_LABELS[keys])
+}
+
+read_text <- function(path) {
+  text <- readChar(path, file.size(path), useBytes = TRUE)
+  Encoding(text) <- "UTF-8"
+  text
+}
+
+read_parallel <- function(english, czech) {
+  files <- list(en = sort(list.files(english, "\\.txt$")), cs = sort(list.files(czech, "\\.txt$")))
+  if (length(files$en) == 0L && length(files$cs) == 0L) {
+    stop(sprintf("V adresářích %s a %s nejsou žádné zprávy.", english, czech))
+  }
+  missing <- c(setdiff(files$en, files$cs), setdiff(files$cs, files$en))
+  if (length(missing) > 0L) {
+    stop(sprintf("Zpráva nemá protějšek: %s.", paste(sort(missing), collapse = ", ")))
+  }
+  data.frame(
+    id = tools::file_path_sans_ext(files$en),
+    en = vapply(file.path(english, files$en), read_text, character(1), USE.NAMES = FALSE),
+    cs = vapply(file.path(czech, files$cs), read_text, character(1), USE.NAMES = FALSE),
+    stringsAsFactors = FALSE
+  )
+}
+
+parallel_ratio <- function(pairs, tokenizers, windows) {
+  rows <- lapply(names(tokenizers), function(key) {
+    spec <- tokenizers[[key]]
+    strip <- isTRUE(spec$strip)
+    en <- token_lengths(spec$tok, pairs$en, FALSE, strip)
+    cs <- token_lengths(spec$tok, pairs$cs, FALSE, strip)
+    capacity <- windows$capacity[windows$tokenizer == key]
+    ratio <- cs[en > 0] / en[en > 0]
+    data.frame(
+      tokenizer = key,
+      zprav = nrow(pairs),
+      median = unname(quantile(ratio, 0.5, type = 1)),
+      p95 = unname(quantile(ratio, 0.95, type = 1)),
+      v_okne_en = sum(en <= capacity),
+      v_okne_cs = sum(cs <= capacity),
+      stringsAsFactors = FALSE
+    )
+  })
+  do.call(rbind, rows)
+}
+
+parallel_table <- function(ratio) {
+  data.frame(
+    tokenizer = tokenizer_label(ratio$tokenizer),
+    zprav = format_number(ratio$zprav),
+    median = ratio_text(ratio$median),
+    p95 = ratio_text(ratio$p95),
+    podil_en = percent_text(ratio$v_okne_en, ratio$zprav),
+    podil_cs = percent_text(ratio$v_okne_cs, ratio$zprav),
+    stringsAsFactors = FALSE
+  )
+}
+
+czech_table <- function(english, czech, tokenizers) {
+  keep <- english$tokenizer %in% tokenizers
+  english <- english[keep, ]
+  czech <- czech[keep, ]
+  data.frame(
+    tabulka = english$tabulka,
+    tokenizer = tokenizer_label(english$tokenizer),
+    zprav = format_number(english$zprav),
+    podil_en = percent_text(english$v_okne, english$zprav),
+    podil_cs = percent_text(czech$v_okne, czech$zprav),
+    casti_en = format_number(english$casti),
+    casti_cs = format_number(czech$casti),
+    stringsAsFactors = FALSE
+  )
+}
+
+czech_verdict <- function(english, czech) {
+  if (is.na(english) || is.na(czech)) {
+    return("nelze")
+  }
+  if (english - czech <= CZECH_TOLERANCE) "bez_dopadu" else "pokles"
 }

@@ -438,3 +438,132 @@ test_that("translation_verdict rozlišuje korpus bez dělení a s dělením", {
   expect_equal(translation_verdict(30, 100), "deli")
   expect_equal(translation_verdict(0, 0), "nelze")
 })
+
+parallel_dirs <- function(en, cs, env = parent.frame()) {
+  root <- withr::local_tempdir(.local_envir = env)
+  dirs <- c(file.path(root, "en"), file.path(root, "cs"))
+  lapply(dirs, dir.create)
+  for (name in names(en)) writeLines(en[[name]], file.path(dirs[1], paste0(name, ".txt")))
+  for (name in names(cs)) writeLines(cs[[name]], file.path(dirs[2], paste0(name, ".txt")))
+  dirs
+}
+
+test_that("read_parallel páruje soubory podle jména nezávisle na pořadí výpisu", {
+  dirs <- parallel_dirs(
+    list(b = "two words", a = "one"), list(a = "jedno slovo", b = "dva slova tady")
+  )
+  out <- read_parallel(dirs[1], dirs[2])
+
+  expect_equal(out$id, c("a", "b"))
+  expect_equal(trimws(out$en), c("one", "two words"))
+  expect_equal(trimws(out$cs), c("jedno slovo", "dva slova tady"))
+})
+
+test_that("read_parallel při chybějícím protějšku vyvolá chybu se jménem souboru", {
+  dirs <- parallel_dirs(list(a = "x", b = "y"), list(a = "x"))
+
+  expect_error(read_parallel(dirs[1], dirs[2]), "b")
+  expect_error(read_parallel(dirs[2], dirs[1]), "b")
+})
+
+test_that("read_parallel čte UTF-8 a prázdný adresář je chyba", {
+  dirs <- parallel_dirs(list(a = "x"), list(a = "příliš žluťoučký kůň"))
+
+  expect_equal(trimws(read_parallel(dirs[1], dirs[2])$cs), "příliš žluťoučký kůň")
+  empty <- parallel_dirs(list(), list())
+  expect_error(read_parallel(empty[1], empty[2]), "žádné")
+})
+
+parallel_pairs <- function() {
+  data.frame(
+    id = c("a", "b", "c", "d"),
+    en = c(words_of(2), words_of(4), words_of(10), words_of(20)),
+    cs = c(words_of(3), words_of(6), words_of(15), words_of(30)),
+    stringsAsFactors = FALSE
+  )
+}
+
+test_that("parallel_ratio spočítá medián a 95. percentil poměru CS/EN", {
+  spec <- list(slova = list(tok = fake_tokenizer, special = FALSE))
+  windows <- token_windows(c(slova = 0), translation = numeric())
+  windows$capacity <- 12
+  out <- parallel_ratio(parallel_pairs(), spec, windows)
+
+  expect_equal(out$tokenizer, "slova")
+  expect_equal(out$zprav, 4)
+  expect_equal(out$median, 1.5)
+  expect_equal(out$p95, 1.5)
+})
+
+test_that("parallel_ratio spočítá podíl zpráv v okně v obou jazycích", {
+  spec <- list(slova = list(tok = fake_tokenizer, special = FALSE))
+  windows <- token_windows(c(slova = 0), translation = numeric())
+  windows$capacity <- 12
+  out <- parallel_ratio(parallel_pairs(), spec, windows)
+
+  expect_equal(out$v_okne_en, 3)
+  expect_equal(out$v_okne_cs, 2)
+})
+
+test_that("parallel_ratio ignoruje zprávy bez anglických tokenů při poměru", {
+  pairs <- rbind(parallel_pairs(), data.frame(id = "e", en = "", cs = "x", stringsAsFactors = FALSE))
+  spec <- list(slova = list(tok = fake_tokenizer, special = FALSE))
+  windows <- token_windows(c(slova = 0), translation = numeric())
+  out <- parallel_ratio(pairs, spec, windows)
+
+  expect_equal(out$zprav, 5)
+  expect_equal(out$median, 1.5)
+})
+
+test_that("token_windows přijme měřítko pojmenované podle tokenizéru", {
+  out <- token_windows(
+    c(xlmr = 2, mdeberta = 2), translation = c(gemma = 600),
+    scale = c(gemma = 1.7, xlmr = 1.3, mdeberta = 1.5)
+  )
+
+  expect_equal(out$scale, c(1.3, 1.5, 1.7))
+})
+
+test_that("czech_table složí podíl v okně a části v angličtině a v odhadu pro češtinu", {
+  english <- data.frame(
+    tabulka = "discharge", tokenizer = "xlmr", zprav = 200, v_okne = 80, casti = 500,
+    stringsAsFactors = FALSE
+  )
+  czech <- transform(english, v_okne = 20, casti = 900)
+  out <- czech_table(english, czech, "xlmr")
+
+  expect_equal(out$podil_en, "40,0")
+  expect_equal(out$podil_cs, "10,0")
+  expect_equal(out$casti_en, "500")
+  expect_equal(out$casti_cs, "900")
+})
+
+test_that("czech_verdict porovná podíl v okně anglicky a česky", {
+  expect_equal(czech_verdict(0.9, 0.88), "bez_dopadu")
+  expect_equal(czech_verdict(0.9, 0.5), "pokles")
+  expect_equal(czech_verdict(NA_real_, 0.5), "nelze")
+})
+
+test_that("czech_table vynechá tokenizér, který není encoder", {
+  english <- data.frame(
+    tabulka = "discharge", tokenizer = c("xlmr", "translategemma"), zprav = 200,
+    v_okne = c(80, 90), casti = c(500, 300), stringsAsFactors = FALSE
+  )
+  out <- czech_table(english, english, c("xlmr", "mdeberta"))
+
+  expect_equal(out$tokenizer, "XLM-R")
+})
+
+test_that("parallel_table formátuje poměr a podíl v okně a tokenizér pojmenuje", {
+  ratio <- data.frame(
+    tokenizer = "xlmr", zprav = 200, median = 1.34, p95 = 1.42, v_okne_en = 74, v_okne_cs = 0,
+    stringsAsFactors = FALSE
+  )
+  out <- parallel_table(ratio)
+
+  expect_equal(out$tokenizer, "XLM-R")
+  expect_equal(out$median, "1,34")
+  expect_equal(out$p95, "1,42")
+  expect_equal(out$podil_en, "37,0")
+  expect_equal(out$podil_cs, "0,0")
+})
