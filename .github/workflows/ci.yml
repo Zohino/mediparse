@@ -65,6 +65,8 @@ jobs:
       - uses: ./.github/actions/setup-pixi-env
         with:
           environments: eda
+      - name: písmo Libertinus pro grafy
+        run: bash scripts/install-libertinus.sh
       - name: testthat
         run: pixi run --frozen eda-test
       - name: render nad syntetickými tabulkami a kanárek

@@ -1,3 +1,7 @@
+THESIS_WIDTH_CM <- 16.5
+THESIS_FONT <- "Libertinus Serif"
+THESIS_FONT_SIZE <- 10
+
 LABEL_PATTERN <- "^[a-z0-9-]+$"
 
 LATEX_SPECIALS <- c(
@@ -122,4 +126,41 @@ export_table <- function(
   dir.create(dir, recursive = TRUE, showWarnings = FALSE)
   writeLines(trimws(as.character(tex)), file.path(dir, paste0(label, ".tex")), useBytes = TRUE)
   knitr::kable(markdown_cells(df, code), col.names = col.names, align = align, row.names = FALSE)
+}
+
+theme_thesis <- function() {
+  ggplot2::theme_minimal(base_family = THESIS_FONT, base_size = THESIS_FONT_SIZE)
+}
+
+embedded_fonts <- function(path) {
+  system2("pdffonts", shQuote(path), stdout = TRUE)
+}
+
+check_embedded_font <- function(path) {
+  expected <- gsub(" ", "", THESIS_FONT, fixed = TRUE)
+  if (any(grepl(expected, embedded_fonts(path), fixed = TRUE))) {
+    return(invisible(path))
+  }
+  unlink(path)
+  stop(
+    "PDF grafu nevložilo písmo ", THESIS_FONT, ": cairo dosadilo jiné. ",
+    "Nainstaluj písmo systémovým balíkem (Fedora: libertinus-fonts, ",
+    "Debian: fonts-libertinus), jinde bash scripts/install-libertinus.sh."
+  )
+}
+
+export_figure <- function(
+    plot, height_cm,
+    label = knitr::opts_current$get("label"),
+    dir = export_dir()) {
+  check_label(label)
+  dir.create(dir, recursive = TRUE, showWarnings = FALSE)
+  path <- file.path(dir, paste0(label, ".pdf"))
+  ggplot2::ggsave(
+    path, plot,
+    device = grDevices::cairo_pdf,
+    width = THESIS_WIDTH_CM, height = height_cm, units = "cm"
+  )
+  check_embedded_font(path)
+  plot
 }

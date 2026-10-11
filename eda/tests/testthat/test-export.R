@@ -162,3 +162,50 @@ test_that("číselné sloupce jsou v .tex i v návratové kable stejné", {
     expect_match(md_text, cell, fixed = TRUE)
   }
 })
+
+sample_plot <- function(theme = theme_thesis()) {
+  ggplot2::ggplot(
+    data.frame(kategorie = c("Přijetí", "Žluťoučký"), n = c(3, 5)),
+    ggplot2::aes(kategorie, n)
+  ) +
+    ggplot2::geom_col() +
+    theme
+}
+
+test_that("theme_thesis používá písmo a velikost práce", {
+  theme <- theme_thesis()
+
+  expect_equal(theme$text$family, THESIS_FONT)
+  expect_equal(theme$text$size, THESIS_FONT_SIZE)
+})
+
+test_that("export_figure zapíše PDF o šířce sazby s vloženým písmem a vrátí graf", {
+  dir <- withr::local_tempdir()
+  plot <- sample_plot()
+  returned <- export_figure(plot, height_cm = 8, label = "fig-a", dir = dir)
+  path <- file.path(dir, "fig-a.pdf")
+  info <- system2("pdfinfo", path, stdout = TRUE)
+  box <- grep("Page size", info, value = TRUE)
+  width <- as.numeric(strsplit(trimws(sub("Page size:", "", box)), " +")[[1]][1])
+  fonts <- system2("pdffonts", path, stdout = TRUE)
+
+  expect_identical(returned, plot)
+  expect_equal(width, THESIS_WIDTH_CM / 2.54 * 72, tolerance = 1 / 467.7)
+  expect_true(any(grepl("LibertinusSerif", fonts)))
+})
+
+test_that("export_figure bez písma práce skončí chybou s názvem balíku", {
+  dir <- withr::local_tempdir()
+
+  expect_error(
+    export_figure(sample_plot(ggplot2::theme_minimal(base_family = "Neexistující písmo")), height_cm = 8, label = "fig-b", dir = dir),
+    "install-libertinus.sh"
+  )
+})
+
+test_that("export_figure odmítne neplatný label", {
+  expect_error(
+    export_figure(sample_plot(), height_cm = 8, label = "Fig_A", dir = withr::local_tempdir()),
+    "label"
+  )
+})
