@@ -18,9 +18,10 @@ export MEDIPARSE_PARQUET="$work/tables"
 eda_render "$work" "$number"
 
 mkdir "$work/pdftext"
-for pdf in "$work"/results/eda/*.pdf; do
-    pdftotext "$pdf" "$work/pdftext/$(basename "$pdf").txt"
-done
+while IFS= read -r -d '' pdf; do
+    relative=${pdf#"$work"/results/eda/}
+    pdftotext "$pdf" "$work/pdftext/${relative//\//_}.txt"
+done < <(find "$work/results/eda" -name '*.pdf' -print0)
 
 status=0
 leaked=$(grep --recursive --files-with-matches --fixed-strings "$prefix-" "$work/eda" "$work/results" "$work/pdftext") || status=$?
