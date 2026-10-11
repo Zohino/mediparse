@@ -211,10 +211,30 @@ test_that("format_number odděluje tisíce nezlomitelnou mezerou a dua_count ho 
 })
 
 test_that("number_text oddělí tisíce a místo NA vrátí pomlčku", {
-  expect_equal(number_text(c(1234567, 5, NA)), c("1 234 567", "5", "–"))
+  expect_equal(number_text(c(1234567, 5, NA)), c("1\u00a0234\u00a0567", "5", "–"))
 })
 
 test_that("percent_text zveřejní i malý čitatel a pro nulový jmenovatel vrátí pomlčku", {
   expect_equal(percent_text(c(3, 25, 15), c(1000, 200, 0)), c("0,3", "12,5", "–"))
   expect_equal(percent_text(c(0, 20), 100), c("0,0", "20,0"))
+})
+
+test_that("percent_label přidá znak procenta, pomlčku nechá", {
+  expect_equal(percent_label(c(3, 25, 15), c(1000, 200, 0)), c("0,3\u00a0%", "12,5\u00a0%", "–"))
+})
+
+test_that("share_table zveřejní všechny řádky s počtem a podílem z celku", {
+  out <- share_table(data.frame(kos = c("1", "2", "3+"), n = c(1990, 6, 4)))
+
+  expect_named(out, c("kos", "n", "podil"))
+  expect_equal(out$kos, c("1", "2", "3+"))
+  expect_equal(out$n, c("1\u00a0990", "6", "4"))
+  expect_equal(out$podil, c("99,5", "0,3", "0,2"))
+})
+
+test_that("share_table zvládne prázdnou tabulku", {
+  out <- share_table(data.frame(kos = character(), n = numeric()))
+
+  expect_equal(nrow(out), 0L)
+  expect_named(out, c("kos", "n", "podil"))
 })
