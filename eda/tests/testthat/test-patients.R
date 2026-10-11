@@ -228,22 +228,6 @@ coverage_frame <- function(discharge, radiology) {
   )
 }
 
-test_that("coverage_mask potlačí v každém řádku tři skupiny stejným jádrem", {
-  mask <- coverage_mask(coverage_frame(c(4, 500, 5000), c(30, 40, 1000)))
-
-  expect_named(mask, c("bez_hadm", "bez_icd", "s_icd"))
-  expect_equal(mask$bez_hadm, c(TRUE, FALSE))
-  expect_equal(mask$bez_icd, c(TRUE, FALSE))
-  expect_equal(mask$s_icd, c(FALSE, FALSE))
-})
-
-test_that("coverage_mask skryje dopočitatelnou skupinu i bez n pod prahem", {
-  mask <- coverage_mask(coverage_frame(c(4, 20, 5000), c(30, 40, 1000)))
-
-  expect_equal(mask$bez_hadm[1], TRUE)
-  expect_equal(mask$bez_icd[1], TRUE)
-})
-
 test_that("coverage_verdict porovnává podíl, ne absolutní počet", {
   coverage <- coverage_frame(c(100, 100, 800), c(1000, 4000, 5000))
 
@@ -256,8 +240,12 @@ test_that("coverage_verdict vybere radiologické zprávy s vyšším podílem", 
   expect_equal(coverage_verdict(coverage), "radiology")
 })
 
-test_that("coverage_verdict řekne nelze, když je skupina potlačená nebo tabulka chybí", {
-  expect_equal(coverage_verdict(coverage_frame(c(100, 400, 5), c(10, 90, 8000))), "nelze")
+test_that("coverage_verdict porovná i podíl z malých počtů", {
+  expect_equal(coverage_verdict(coverage_frame(c(100, 400, 5), c(10, 90, 8000))), "radiology")
+  expect_equal(coverage_verdict(coverage_frame(c(1, 1, 8), c(2, 3, 5))), "discharge")
+})
+
+test_that("coverage_verdict řekne nelze, když je tabulka prázdná nebo chybí", {
   expect_equal(coverage_verdict(coverage_frame(c(0, 0, 0), c(10, 90, 8000))), "nelze")
   expect_equal(
     coverage_verdict(coverage_frame(c(100, 100, 800), c(10, 10, 80))[1, ]),

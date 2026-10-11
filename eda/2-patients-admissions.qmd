@@ -20,10 +20,8 @@ coverage <- hadm_coverage(con)
 era <- icd_era(con)
 era_group <- icd_era_by_group(con)
 n_hospitalizations <- sum(era$n)
-era_public <- dua_suppress(era)
 era_share <- function(label) {
-  n <- era_public$n[era_public$era == label]
-  if (length(n) == 0) "\u2013" else dua_percent_text(n, n_hospitalizations)
+  percent_label(sum(era$n[era$era == label]), n_hospitalizations)
 }
 mean_notes <- if (summary_d$patients > 0) {
   dua_decimal(summary_d$notes / summary_d$patients)
@@ -33,10 +31,7 @@ mean_notes <- if (summary_d$patients > 0) {
 era_published <- dua_suppress(era_group, by = "era")
 transition <- era_transition(era_published)
 verdict <- coverage_verdict(coverage)
-hidden <- coverage_mask(coverage)
-s_icd_text <- ifelse(
-  hidden$s_icd, "\u2013", dua_percent_text(coverage$s_icd, coverage$zprav)
-)
+s_icd_text <- percent_label(coverage$s_icd, coverage$zprav)
 s_icd_discharge <- s_icd_text[coverage$tabulka == "discharge"]
 s_icd_radiology <- s_icd_text[coverage$tabulka == "radiology"]
 ```
@@ -51,7 +46,7 @@ Tento sešit je druhým z řady sešitů explorační analýzy. Navazuje na pře
 
 Rozdělení dat na trénovací a testovací část se provádí po pacientech, aby tentýž pacient nebyl v obou částech a nedošlo k úniku informací. Počty zpráv na pacienta proto určují, jak velký vliv má volba jednotky dělení. Štítky klasifikace vznikají z diagnóz ICD připojených přes `hadm_id`; pokrytí tohoto spojení proto rozhoduje, které zprávy mají štítek. Verze ICD ovlivňuje volbu mezi náhodným a časovým rozdělením a přípravu mapování kódů.
 
-Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty: počty pod deseti se zobrazí jako „< 10“, kategorie s méně než deseti záznamy se sloučí do řádku „ostatní (n < 10)“ a podíl se uvede, jen když jeho čitatel dosahuje deseti; jinak se zobrazí „–“.
+Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty, nikdy řádková data ani texty zpráv. Počty pacientů, přijetí a zpráv, pokrytí a rozdělení podle verze ICD jsou metriky korpusu, které nevymezují skupiny pacientů kvaziidentifikátorem, a uvádějí se přesně. Rozpad hospitalizací podle období ukotvení pacienta takové skupiny vymezuje, a proto se v něm kategorie s méně než deseti hospitalizacemi sloučí do řádku „ostatní (n < 10)“; práh je pravidlo práce, DUA malé počty neupravuje.
 
 Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky o pacientech a zprávách, pokrytí a éře ICD. Kapitola @sec-shrnuti shrnuje výsledky a rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
 
@@ -72,7 +67,7 @@ Pojmy a jednotky jsou tyto:
 
 ## Pacienti a zprávy {#sec-pacienti}
 
-Propouštěcí zprávy pocházejí od `r dua_count(summary_d$patients)` pacientů a patří k `r dua_count(summary_d$admissions)` přijetím. Na jednoho pacienta připadá v průměru `r mean_notes` zprávy. @tbl-struktura uvádí počty.
+Propouštěcí zprávy pocházejí od `r format_number(summary_d$patients)` pacientů a patří k `r format_number(summary_d$admissions)` přijetím. Na jednoho pacienta připadá v průměru `r mean_notes` zprávy. @tbl-struktura uvádí počty.
 
 ```{r}
 #| label: tbl-struktura
@@ -83,11 +78,11 @@ structure <- data.frame(
     "Pacienti", "Přijetí s propouštěcí zprávou", "Propouštěcí zprávy",
     "Pacienti s více než jednou zprávou"
   ),
-  n = dua_count(c(
+  n = number_text(c(
     summary_d$patients, summary_d$admissions, summary_d$notes,
     summary_d$multi_note_patients
   )),
-  podil = c("", "", "", dua_percent(summary_d$multi_note_patients, summary_d$patients))
+  podil = c("", "", "", percent_text(summary_d$multi_note_patients, summary_d$patients))
 )
 export_table(
   structure,
@@ -96,17 +91,16 @@ export_table(
 )
 ```
 
-*Zdroj:* dotazy v DuckDB nad tabulkou `discharge`; podíl se počítá z počtu pacientů a uvádí se, jen když čitatel dosahuje deseti.
+*Zdroj:* dotazy v DuckDB nad tabulkou `discharge`; podíl se počítá z počtu pacientů.
 
-@fig-zpravy-na-pacienta ukazuje rozdělení počtu zpráv na pacienta. Pacienti s jedinou zprávou tvoří `r dua_percent_text(sum(per_patient$n[per_patient$kos == "1"]), sum(per_patient$n))` všech pacientů.
+@fig-zpravy-na-pacienta ukazuje rozdělení počtu zpráv na pacienta. Pacienti s jedinou zprávou tvoří `r percent_label(sum(per_patient$n[per_patient$kos == "1"]), sum(per_patient$n))` všech pacientů.
 
 ```{r}
 #| label: fig-zpravy-na-pacienta
-#| fig-cap: "Počet propouštěcích zpráv na pacienta (koš 10+ sdružuje pacienty s deseti a více zprávami; kategorie s n < 10 jsou vynechány)."
+#| fig-cap: "Počet propouštěcích zpráv na pacienta (koš 10+ sdružuje pacienty s deseti a více zprávami)."
 #| fig-width: 6.5
 #| fig-height: 3
-published <- dua_suppress(per_patient)
-published <- published[published$kos != DUA_OTHER, , drop = FALSE]
+published <- per_patient
 published$kos <- factor(published$kos, levels = published$kos)
 plot <- ggplot2::ggplot(published, ggplot2::aes(kos, n)) +
   ggplot2::geom_col() +
@@ -122,7 +116,7 @@ export_figure(plot, height_cm = 7.5)
 #| tbl-cap: "Počet propouštěcích zpráv na přijetí (koš 3+ sdružuje přijetí se třemi a více zprávami)."
 #| tbl-colwidths: [50, 25, 25]
 export_table(
-  dua_share(per_admission),
+  share_table(per_admission),
   col.names = c("Zpráv na přijetí", "Přijetí", "Podíl přijetí (%)"),
   align = "lrr"
 )
@@ -136,21 +130,15 @@ export_table(
 #| label: tbl-pokryti
 #| tbl-cap: "Pokrytí zpráv identifikátorem přijetí a diagnózou ICD; podíly ze všech zpráv tabulky."
 #| tbl-colwidths: [16, 12, 14, 10, 14, 10, 14, 10]
-count_cell <- function(column) {
-  ifelse(hidden[[column]], paste0("<", NBSP, DUA_THRESHOLD), dua_count(coverage[[column]]))
-}
-share_cell <- function(column) {
-  ifelse(hidden[[column]], "\u2013", dua_percent(coverage[[column]], coverage$zprav))
-}
 coverage_table <- data.frame(
   tabulka = coverage$tabulka,
-  zprav = dua_count(coverage$zprav),
-  bez_hadm = count_cell("bez_hadm"),
-  bez_hadm_podil = share_cell("bez_hadm"),
-  bez_icd = count_cell("bez_icd"),
-  bez_icd_podil = share_cell("bez_icd"),
-  s_icd = count_cell("s_icd"),
-  s_icd_podil = share_cell("s_icd")
+  zprav = number_text(coverage$zprav),
+  bez_hadm = number_text(coverage$bez_hadm),
+  bez_hadm_podil = percent_text(coverage$bez_hadm, coverage$zprav),
+  bez_icd = number_text(coverage$bez_icd),
+  bez_icd_podil = percent_text(coverage$bez_icd, coverage$zprav),
+  s_icd = number_text(coverage$s_icd),
+  s_icd_podil = percent_text(coverage$s_icd, coverage$zprav)
 )
 export_table(
   coverage_table,
@@ -162,18 +150,18 @@ export_table(
 )
 ```
 
-*Zdroj:* dotazy v DuckDB; skryté buňky se zobrazí jako „< 10“ i tehdy, když jsou větší, aby se jejich velikost nedala dopočítat ze zbylých dvou skupin a z celku. „Bez kódu ICD“ jsou zprávy s `hadm_id`, k němuž `diagnoses_icd` nemá žádný řádek, a tři skupiny se sečtou na počet zpráv tabulky.
+*Zdroj:* dotazy v DuckDB. „Bez kódu ICD“ jsou zprávy s `hadm_id`, k němuž `diagnoses_icd` nemá žádný řádek, a tři skupiny se sečtou na počet zpráv tabulky.
 
 ## Éra ICD {#sec-era}
 
-Hospitalizace s propouštěcí zprávou je `r dua_count(n_hospitalizations)`. @tbl-era je rozděluje podle verze ICD, ve které jsou kódovány; jen ICD-10 má `r era_share("jen ICD-10")` hospitalizací, jen ICD-9 `r era_share("jen ICD-9")`, kódy obou verzí `r era_share("obě éry")` a bez kódu je `r era_share("bez kódu")`.
+Hospitalizace s propouštěcí zprávou je `r format_number(n_hospitalizations)`. @tbl-era je rozděluje podle verze ICD, ve které jsou kódovány; jen ICD-10 má `r era_share("jen ICD-10")` hospitalizací, jen ICD-9 `r era_share("jen ICD-9")`, kódy obou verzí `r era_share("obě éry")` a bez kódu je `r era_share("bez kódu")`.
 
 ```{r}
 #| label: tbl-era
 #| tbl-cap: "Hospitalizace s propouštěcí zprávou podle verze ICD (kategorie se vylučují a sčítají se do celku)."
 #| tbl-colwidths: [50, 25, 25]
 export_table(
-  dua_share(era),
+  share_table(era),
   col.names = c("Éra ICD", "Hospitalizací", "Podíl (%)"),
   align = "lrr"
 )
@@ -204,14 +192,14 @@ export_figure(plot, height_cm = 8.5)
 
 Dokument popsal rozložení zpráv mezi pacienty a hospitalizace, pokrytí diagnózami ICD a rozdělení hospitalizací mezi éry ICD. Pro další práci z toho plyne:
 
-- **Dělení po pacientech.** `r if (summary_d$multi_note_patients >= DUA_THRESHOLD) paste0("Rozdělení po pacientech je nutné: ", dua_percent_text(summary_d$multi_note_patients, summary_d$patients), " pacientů má více než jednu propouštěcí zprávu, takže dělení po zprávách by dalo stejného pacienta do trénovací i testovací části.") else "Více než jednu propouštěcí zprávu má méně než deset pacientů, takže dělení po pacientech a po zprávách se prakticky neliší; dělení po pacientech zůstává bezpečnější volbou."` Průměr je `r mean_notes` zprávy na pacienta.
-- **Štítky z diagnóz.** Štítky se odvozují z `diagnoses_icd` přes `hadm_id`; pokrytí propouštěcích zpráv je `r s_icd_discharge`, radiologických `r s_icd_radiology`. `r switch(verdict, nelze = "Pokrytí obou tabulek se pro nízké počty nedá porovnat.", discharge = "Propouštěcí zprávy mají podíl pokrytí alespoň srovnatelný s radiologickými, takže zůstávají kandidátem na primární korpus.", radiology = "Radiologické zprávy mají vyšší podíl pokrytí než propouštěcí; volba primárního korpusu to musí zohlednit.")` Zprávy bez štítku se z klasifikace vyřadí.
+- **Dělení po pacientech.** `r if (summary_d$multi_note_patients > 0) paste0("Rozdělení po pacientech je nutné: ", percent_label(summary_d$multi_note_patients, summary_d$patients), " pacientů má více než jednu propouštěcí zprávu, takže dělení po zprávách by dalo stejného pacienta do trénovací i testovací části.") else "Žádný pacient nemá více než jednu propouštěcí zprávu, takže dělení po pacientech a po zprávách dává stejný výsledek; dělení po pacientech zůstává bezpečnější volbou."` Průměr je `r mean_notes` zprávy na pacienta.
+- **Štítky z diagnóz.** Štítky se odvozují z `diagnoses_icd` přes `hadm_id`; pokrytí propouštěcích zpráv je `r s_icd_discharge`, radiologických `r s_icd_radiology`. `r switch(verdict, nelze = "Pokrytí obou tabulek se nedá porovnat, protože jedna z tabulek chybí nebo je prázdná.", discharge = "Propouštěcí zprávy mají podíl pokrytí alespoň srovnatelný s radiologickými, takže zůstávají kandidátem na primární korpus.", radiology = "Radiologické zprávy mají vyšší podíl pokrytí než propouštěcí; volba primárního korpusu to musí zohlednit.")` Zprávy bez štítku se z klasifikace vyřadí.
 - **Verze ICD.** `r switch(transition$kind, overlap = "Obě verze ICD se vyskytují ve stejném období, takže čas přechod čistě neodděluje; společné štítky vyžadují mapování ICD-9 na ICD-10.", separated = "Verze ICD jsou odděleny v čase: časové dělení by oddělilo éry a vyžaduje mapování ICD-9 na ICD-10, kdežto náhodné dělení po pacientech éry míchá.", none = "Rozpad přechod mezi verzemi nedokládá; o dělení rozhodne další analýza.")` Hospitalizace s oběma verzemi tvoří `r era_share("obě éry")` a bez kódu `r era_share("bez kódu")`.
 
 Konečná volba korpusu a způsobu rozdělení patří do navazujícího sešitu, který vychází z těchto čísel.
 
 # Omezení {#sec-omezeni}
 
-Období `anchor_year_group` je tříleté, takže poloha přechodu mezi verzemi ICD je určena jen s touto přesností. Skutečný rok přijetí se nepřepočítává z `anchor_year`, protože jeho přesnost okolo ±1,5 roku by nepřidala informaci. Kalendářní rok přijetí v datech nic neříká, protože MIMIC-IV data posouvá. Éra je určena kódy v `diagnoses_icd`; hospitalizace s kódem jiné verze než 9 a 10 se počítá jako „bez kódu“. Potlačení kategorií s n < 10 se provádí uvnitř každé tabulky (v rozpadu éry podle období uvnitř každé éry) a skryté buňky se doplňují nejmenší zachovanou buňkou, dokud jejich součet není aspoň 10, takže z rozdílu celku a zveřejněných buněk nelze odvodit žádnou buňku pod 10. Kategorie vynechané z grafů se nezveřejňují jednotlivě. Potlačení nechrání před odvozením z kombinace různých tabulek, například počtu pacientů v tabulce struktury a rozdělení zpráv na pacienta, proto se zveřejňují jen předem určené agregace. Sešit nepopisuje délku zpráv, pohlaví ani věk pacientů a nevybírá diagnózy; to je předmětem dalších sešitů.
+Období `anchor_year_group` je tříleté, takže poloha přechodu mezi verzemi ICD je určena jen s touto přesností. Skutečný rok přijetí se nepřepočítává z `anchor_year`, protože jeho přesnost okolo ±1,5 roku by nepřidala informaci. Kalendářní rok přijetí v datech nic neříká, protože MIMIC-IV data posouvá. Éra je určena kódy v `diagnoses_icd`; hospitalizace s kódem jiné verze než 9 a 10 se počítá jako „bez kódu“. Kategorie s n < 10 se potlačují jen v rozpadu podle období, a to uvnitř každé éry: skryté buňky se doplňují nejmenší zachovanou buňkou, dokud jejich součet není aspoň 10, takže z celku éry v @tbl-era a zveřejněných buněk nelze odvodit žádnou buňku pod 10. Kategorie vynechané z grafu se nezveřejňují jednotlivě. Sešit nepopisuje délku zpráv, pohlaví ani věk pacientů a nevybírá diagnózy; to je předmětem dalších sešitů.
 
 {{< include _partials/appendix.qmd >}}

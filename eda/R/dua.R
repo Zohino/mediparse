@@ -89,6 +89,18 @@ percent_text <- function(n, total) {
   out
 }
 
+percent_label <- function(n, total) {
+  share <- percent_text(n, total)
+  ifelse(share == "–", share, paste0(share, NBSP, "%"))
+}
+
+share_table <- function(df) {
+  out <- df
+  out$n <- number_text(df$n)
+  out$podil <- percent_text(df$n, sum(df$n))
+  out
+}
+
 dua_percent <- function(n, total) {
   total <- rep_len(total, length(n))
   hidden <- n < DUA_THRESHOLD | total == 0

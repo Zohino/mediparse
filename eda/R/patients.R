@@ -70,25 +70,9 @@ hadm_coverage <- function(con, tables = c("discharge", "radiology")) {
   out
 }
 
-COVERAGE_GROUPS <- c("bez_hadm", "bez_icd", "s_icd")
-
-coverage_mask <- function(coverage) {
-  rows <- lapply(seq_len(nrow(coverage)), function(row) {
-    dua_hidden(unlist(coverage[row, COVERAGE_GROUPS], use.names = FALSE))
-  })
-  mask <- matrix(
-    unlist(rows), ncol = length(COVERAGE_GROUPS), byrow = TRUE,
-    dimnames = list(NULL, COVERAGE_GROUPS)
-  )
-  as.data.frame(mask)
-}
-
 coverage_verdict <- function(coverage) {
   pair <- coverage[match(c("discharge", "radiology"), coverage$tabulka), ]
-  if (anyNA(pair$tabulka)) {
-    return("nelze")
-  }
-  if (any(pair$zprav == 0) || any(coverage_mask(pair)$s_icd)) {
+  if (anyNA(pair$tabulka) || any(pair$zprav == 0)) {
     return("nelze")
   }
   share <- pair$s_icd / pair$zprav
