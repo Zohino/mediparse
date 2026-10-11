@@ -70,6 +70,8 @@ jobs:
       - name: testthat
         run: pixi run --frozen eda-test
       - name: render nad syntetickými tabulkami a kanárek
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: pixi run --frozen eda-synthetic
       - name: render z freeze bez dat
         run: |
