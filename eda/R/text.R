@@ -205,6 +205,65 @@ residual_verdict <- function(residual) {
   if (sum(residual$vyskytu) == 0) "zadne" else "jsou"
 }
 
+mean_text <- function(x, n) {
+  ifelse(n >= DUA_THRESHOLD & !is.na(x), dua_decimal(x), "–")
+}
+
+percentile_cell <- function(shown, table, metric, column) {
+  row <- shown[shown$tabulka == table & shown$metrika == metric, , drop = FALSE]
+  if (nrow(row) == 0L) "–" else row[[column]][1]
+}
+
+PERCENTILE_LABELS <- c(
+  p01 = "1. percentil", p05 = "5. percentil", p10 = "10. percentil", p25 = "25. percentil",
+  p50 = "Medián", p75 = "75. percentil", p90 = "90. percentil", p95 = "95. percentil",
+  p99 = "99. percentil"
+)
+
+percentile_matrix <- function(shown, columns) {
+  cells <- lapply(seq_len(nrow(columns)), function(index) {
+    table <- columns$tabulka[index]
+    metric <- columns$metrika[index]
+    c(
+      percentile_cell(shown, table, metric, "n"),
+      percentile_cell(shown, table, metric, "prumer"),
+      vapply(
+        PERCENTILE_COLUMNS,
+        function(column) percentile_cell(shown, table, metric, column),
+        character(1)
+      )
+    )
+  })
+  out <- data.frame(
+    ukazatel = c("Zpráv", "Průměr", unname(PERCENTILE_LABELS[PERCENTILE_COLUMNS])),
+    stringsAsFactors = FALSE
+  )
+  for (index in seq_along(cells)) out[[paste0("v", index)]] <- cells[[index]]
+  out
+}
+
+histogram_shares <- function(hist) {
+  totals <- tapply(hist$n, hist$tabulka, sum)
+  levels <- sort(unique(hist$kos))
+  labels <- format_number(signif(10^levels, 3))
+  frame <- data.frame(
+    tabulka = hist$tabulka,
+    skupina = paste(hist$tabulka, ifelse(hist$kos < log10(SHORT_LIMIT), "pod", "nad")),
+    kos = factor(labels[match(hist$kos, levels)], levels = labels),
+    n = hist$n,
+    stringsAsFactors = FALSE
+  )
+  kept <- dua_suppress(frame, by = "skupina")
+  kept <- kept[kept$kos != DUA_OTHER, , drop = FALSE]
+  data.frame(
+    tabulka = kept$tabulka,
+    popisek = kept$kos,
+    dolni = levels[match(kept$kos, labels)],
+    podil = kept$n / as.numeric(totals[kept$tabulka]),
+    stringsAsFactors = FALSE
+  )
+}
+
 anchor_hidden <- function(age) {
   complement_hidden(age$kotva, age$zprav) | complement_hidden(age$kotva, age$jedna + age$vice)
 }
@@ -247,4 +306,12 @@ quality_table <- function(quality, tables = c("discharge", "radiology")) {
     out[[paste0("podil_", table)]] <- c("", hidden_percent(counts[-1], row$zprav, hidden[-1]))
   }
   out
+}
+
+published_reference_verdict <- function(markers, residual) {
+  means <- marker_means(markers, residual)
+  if (mean_text(means$presne, markers$zprav) == "–") {
+    return("nelze")
+  }
+  marker_reference_verdict(means$presne, means$zbytkove)
 }
