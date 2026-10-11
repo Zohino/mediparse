@@ -96,3 +96,7 @@ dua_share <- function(df) {
   out$n <- dua_count(out$n)
   out
 }
+
+dua_quantile_ok <- function(n, p) {
+  round(n * pmin(p, 1 - p), 9) >= DUA_THRESHOLD
+}

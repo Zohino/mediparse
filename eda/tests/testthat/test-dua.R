@@ -204,3 +204,25 @@ test_that("dua_percent_text přidá nezlomitelnou mezeru a znak procenta", {
   expect_equal(dua_percent_text(c(5, 20), 100), c("–", "20,0 %"))
   expect_equal(dua_percent_text(15, 0), "–")
 })
+
+test_that("dua_quantile_ok pustí percentil, když má každá strana aspoň deset zpráv", {
+  expect_true(dua_quantile_ok(100, 0.1))
+  expect_false(dua_quantile_ok(99, 0.1))
+  expect_true(dua_quantile_ok(1000, 0.01))
+  expect_false(dua_quantile_ok(999, 0.01))
+  expect_true(dua_quantile_ok(20, 0.5))
+  expect_false(dua_quantile_ok(19, 0.5))
+})
+
+test_that("dua_quantile_ok je souměrné v p a 1 - p", {
+  for (n in c(50, 99, 100, 101, 1000)) {
+    for (p in c(0.01, 0.05, 0.1, 0.25)) {
+      expect_equal(dua_quantile_ok(n, p), dua_quantile_ok(n, 1 - p))
+    }
+  }
+})
+
+test_that("dua_quantile_ok je vektorizované a pro n = 0 nepustí nic", {
+  expect_false(dua_quantile_ok(0, 0.5))
+  expect_equal(dua_quantile_ok(c(0, 100, 5), 0.1), c(FALSE, TRUE, FALSE))
+})
