@@ -10,7 +10,37 @@ dua_count <- function(n) {
   )
 }
 
-dua_table <- function(df) {
+dua_hidden <- function(n) {
+  hidden <- n < DUA_THRESHOLD
+  total <- sum(n[hidden])
+  if (total == 0 || total >= DUA_THRESHOLD) {
+    return(hidden)
+  }
+  kept <- which(!hidden)
+  for (index in kept[order(n[kept])]) {
+    hidden[index] <- TRUE
+    total <- total + n[index]
+    if (total >= DUA_THRESHOLD) break
+  }
+  hidden
+}
+
+suppress_group <- function(df, labels, by) {
+  hidden <- dua_hidden(df$n)
+  kept <- df[!hidden, , drop = FALSE]
+  out <- as.data.frame(lapply(kept[labels], as.character), stringsAsFactors = FALSE)
+  counts <- kept$n
+  if (any(hidden)) {
+    other <- setNames(as.list(rep(DUA_OTHER, length(labels))), labels)
+    if (!is.null(by)) other[[by]] <- as.character(df[[by]][1])
+    out <- rbind(out, as.data.frame(other, stringsAsFactors = FALSE, check.names = FALSE))
+    counts <- c(counts, sum(df$n[hidden]))
+  }
+  out$n <- counts
+  out
+}
+
+dua_suppress <- function(df, by = NULL) {
   if (!"n" %in% names(df)) {
     stop("Tabulka musí být agregovaná: chybí sloupec n s počtem záznamů.")
   }
@@ -21,18 +51,24 @@ dua_table <- function(df) {
   if (!all(vapply(df[labels], function(column) is.character(column) || is.factor(column), logical(1)))) {
     stop("Popisky smí být jen text nebo faktor: další číselný sloupec by nešel potlačit.")
   }
-  small <- df$n < DUA_THRESHOLD
-  kept <- df[!small, , drop = FALSE]
-  out <- as.data.frame(lapply(kept[labels], as.character), stringsAsFactors = FALSE)
-  counts <- kept$n
-  if (any(small)) {
-    other <- as.data.frame(
-      lapply(kept[labels], function(column) DUA_OTHER),
-      stringsAsFactors = FALSE
-    )
-    out <- rbind(out, other)
-    counts <- c(counts, sum(df$n[small]))
+  if (!is.null(by) && !by %in% labels) {
+    stop("Sloupec by musí být popisek tabulky.")
   }
-  out$n <- dua_count(counts)
+  if (is.null(by) || nrow(df) == 0L) {
+    out <- suppress_group(df, labels, NULL)
+  } else {
+    groups <- as.character(df[[by]])
+    parts <- lapply(unique(groups), function(group) {
+      suppress_group(df[groups == group, , drop = FALSE], labels, by)
+    })
+    out <- do.call(rbind, parts)
+  }
+  rownames(out) <- NULL
+  out
+}
+
+dua_table <- function(df) {
+  out <- dua_suppress(df)
+  out$n <- dua_count(out$n)
   out
 }
