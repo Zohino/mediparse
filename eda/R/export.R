@@ -166,3 +166,7 @@ export_figure <- function(
   check_embedded_font(path)
   plot
 }
+
+percent_axis <- function(x) {
+  paste0(format(100 * x, decimal.mark = ",", trim = TRUE), NBSP, "%")
+}
