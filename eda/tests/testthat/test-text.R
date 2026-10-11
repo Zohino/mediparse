@@ -154,7 +154,7 @@ test_that("marker_summary sečte zprávy, značky a delší úseky", {
 })
 
 test_that("na syntetickém tvaru s jedinečnými řetězci nic nespadne a percentily se maskují", {
-  texts <- paste0("eda-sentinel-discharge-text-", 1:12)
+  texts <- paste0("jedinecny-text-", 1:12)
   con <- mimic_con(discharge = text_notes(texts))
 
   expect_no_error(shown <- format_percentiles(length_percentiles(con, "discharge")))
@@ -277,7 +277,7 @@ test_that("kotva vyžaduje is a nebo is an před maskou", {
 })
 
 test_that("na syntetickém tvaru nic nespadne", {
-  texts <- paste0("eda-sentinel-discharge-text-", 1:12)
+  texts <- paste0("jedinecny-text-", 1:12)
   con <- mimic_con(discharge = text_notes(texts))
 
   expect_no_error(residual_masks(con, c("discharge", "radiology")))
@@ -363,4 +363,86 @@ test_that("age_verdict a residual_verdict se řídí nulou, ne prahem DUA", {
   expect_equal(age_verdict(list(ciselny = 3)), "ciselny")
   expect_equal(residual_verdict(data.frame(vyskytu = c(0, 0, 0))), "zadne")
   expect_equal(residual_verdict(data.frame(vyskytu = c(0, 2, 0))), "jsou")
+})
+
+test_that("mean_text zveřejní průměr jen při n >= 10 a jinak vrátí pomlčku", {
+  expect_equal(mean_text(12.34, 10), "12,3")
+  expect_equal(mean_text(12.34, 9), "–")
+  expect_equal(mean_text(NA_real_, 100), "–")
+})
+
+test_that("percentile_cell vybere buňku podle tabulky, metriky a sloupce", {
+  texts <- vapply(1:150, function(i) strrep("a", i), character(1))
+  con <- mimic_con(discharge = text_notes(texts))
+  shown <- format_percentiles(length_percentiles(con, c("discharge", "radiology")))
+
+  expect_equal(percentile_cell(shown, "discharge", "znaky", "p50"), "75")
+  expect_equal(percentile_cell(shown, "radiology", "znaky", "p50"), "–")
+  expect_equal(percentile_cell(shown, "chybi", "znaky", "p50"), "–")
+})
+
+test_that("percentile_matrix poskládá řádky percentilů a sloupce tabulka × metrika", {
+  texts <- vapply(1:150, function(i) strrep("a", i), character(1))
+  con <- mimic_con(discharge = text_notes(texts))
+  shown <- format_percentiles(length_percentiles(con, c("discharge", "radiology")))
+  columns <- data.frame(tabulka = c("discharge", "radiology"), metrika = c("znaky", "znaky"))
+  out <- percentile_matrix(shown, columns)
+
+  expect_equal(nrow(out), 2 + length(PERCENTILES))
+  expect_equal(out[[2]][out$ukazatel == "Medián"], "75")
+  expect_equal(out[[3]][out$ukazatel == "Medián"], "–")
+  expect_equal(out[[2]][out$ukazatel == "Zpráv"], "150")
+  expect_equal(out[[2]][out$ukazatel == "Průměr"], "75,5")
+})
+
+test_that("histogram_shares dá podíl zprávy tabulky a pojmenuje koše dolní mezí", {
+  hist <- data.frame(
+    tabulka = c("a", "a", "a", "b"),
+    kos = c(0, 3, 3.1, 3),
+    n = c(100, 200, 12, 50)
+  )
+  out <- histogram_shares(hist)
+
+  expect_equal(out$tabulka, c("a", "a", "a", "b"))
+  expect_equal(out$dolni, c(0, 3, 3.1, 3))
+  expect_equal(out$podil, c(100, 200, 12, 50) / c(312, 312, 312, 50))
+  expect_equal(
+    out$popisek,
+    c("1", paste0("1", NBSP, "000"), paste0("1", NBSP, "260"), paste0("1", NBSP, "000"))
+  )
+})
+
+test_that("histogram_shares potlačuje zvlášť pod a nad 100 znaků a podíl počítá z celé tabulky", {
+  hist <- data.frame(tabulka = c("a", "a", "a"), kos = c(0, 3, 3.1), n = c(100, 200, 4))
+  out <- histogram_shares(hist)
+
+  expect_equal(out$dolni, 0)
+  expect_equal(out$podil, 100 / 304)
+})
+
+test_that("histogram_shares neprozradí skrytý koš z krátké oblasti přes součet kvality", {
+  hist <- data.frame(
+    tabulka = c("a", "a", "a", "a"), kos = c(0, 1.9, 2, 3), n = c(30, 4, 100, 7)
+  )
+  out <- histogram_shares(hist)
+
+  expect_false(any(out$dolni < 2))
+  expect_false(any(out$dolni >= 2))
+})
+
+test_that("histogram_shares s prázdným vstupem vrátí prázdnou tabulku", {
+  out <- histogram_shares(data.frame(tabulka = character(), kos = numeric(), n = numeric()))
+
+  expect_equal(nrow(out), 0L)
+})
+
+test_that("published_reference_verdict vrátí nelze, když je průměr přesných značek skrytý", {
+  residual <- data.frame(tabulka = "discharge", vzor = "XXX", zprav = 0, vyskytu = 0)
+  markers <- function(zprav, znacek) {
+    data.frame(tabulka = "discharge", zprav = zprav, znacek = znacek, se_znackou = 1, delsi_useky = 0)
+  }
+
+  expect_equal(published_reference_verdict(markers(5, 303), residual), "nelze")
+  expect_equal(published_reference_verdict(markers(10, 606), residual), "presne")
+  expect_equal(published_reference_verdict(markers(10, 10), residual), "rozdil")
 })
