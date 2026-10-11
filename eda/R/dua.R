@@ -72,3 +72,20 @@ dua_table <- function(df) {
   out$n <- dua_count(out$n)
   out
 }
+
+dua_decimal <- function(x) {
+  format(round(x, 1), nsmall = 1, decimal.mark = ",", trim = TRUE)
+}
+
+dua_percent <- function(n, total) {
+  total <- rep_len(total, length(n))
+  hidden <- n < DUA_THRESHOLD | total == 0
+  out <- rep("\u2013", length(n))
+  out[!hidden] <- dua_decimal(100 * n[!hidden] / total[!hidden])
+  out
+}
+
+dua_percent_text <- function(n, total) {
+  share <- dua_percent(n, total)
+  ifelse(share == "\u2013", share, paste0(share, NBSP, "%"))
+}
