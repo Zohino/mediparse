@@ -179,8 +179,7 @@ published$obdobi <- factor(published$obdobi, levels = unique(published$obdobi))
 published$era <- factor(published$era, levels = unique(c(ICD_ERAS, published$era)))
 plot <- ggplot2::ggplot(published, ggplot2::aes(obdobi, n, fill = era)) +
   ggplot2::geom_col() +
-  ggplot2::scale_fill_grey(start = 0.25, end = 0.85, name = "Éra ICD") +
-  ggplot2::labs(x = "Období ukotvení pacienta", y = "Počet hospitalizací") +
+  ggplot2::labs(x = "Období ukotvení pacienta", y = "Počet hospitalizací", fill = "Éra ICD") +
   theme_thesis() +
   ggplot2::theme(legend.position = "bottom")
 export_figure(plot, height_cm = 8.5)

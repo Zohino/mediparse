@@ -189,7 +189,7 @@ tiles$hodnota <- ifelse(is.na(tiles$podil), "", sprintf("%.0f", 100 * tiles$podi
 plot <- ggplot2::ggplot(tiles, ggplot2::aes(sloupec, radek, fill = podil)) +
   ggplot2::geom_tile(color = "white") +
   ggplot2::geom_text(ggplot2::aes(label = hodnota), family = THESIS_FONT, size = 3) +
-  ggplot2::scale_fill_gradient(low = "white", high = "grey35", limits = c(0, 1), na.value = "white", labels = percent_axis) +
+  scale_fill_sequential(limits = c(0, 1), labels = percent_axis) +
   ggplot2::scale_x_discrete(drop = FALSE, position = "top") +
   ggplot2::scale_y_discrete(drop = FALSE) +
   ggplot2::labs(x = NULL, y = NULL, fill = "Podíl") +
