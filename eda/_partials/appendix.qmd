@@ -1,0 +1,29 @@
+# Příloha A: provenance renderu {.unnumbered}
+
+@tbl-provenance uvádí údaje, podle kterých lze render dohledat a zopakovat: revizi kódu, otisk zámku prostředí, zdroj dat a verze použitých nástrojů.
+
+```{r}
+#| include: false
+source("R/corpus.R")
+provenance_module <- reticulate::import("mediparse.entrypoints.eda_provenance")
+pathlib <- reticulate::import("pathlib")
+details <- provenance_module$provenance(
+  as.list(Sys.getenv()),
+  pathlib$Path(Sys.getenv("PIXI_PROJECT_ROOT")),
+  pathlib$Path(eda_parquet_dir())
+)
+details[["r"]] <- R.version.string
+DBI::dbDisconnect(con, shutdown = TRUE)
+```
+
+```{r}
+#| label: tbl-provenance
+#| tbl-cap: "Provenance renderu."
+#| tbl-colwidths: [28, 72]
+export_table(provenance_table(details), col.names = c("Položka", "Hodnota"), align = "ll")
+```
+
+# Literatura {.unnumbered}
+
+::: {#refs}
+:::

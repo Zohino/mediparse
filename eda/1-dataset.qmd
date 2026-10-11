@@ -103,30 +103,4 @@ Dokument popsal zdroje dat, cestu dat k dotazování a přehled `r nrow(counts)`
 
 Přehled uvádí jen počty záznamů, sloupců a velikosti souborů. O obsahu zpráv, pacientech ani rozdělení dat netvrdí nic; to je předmětem dalších částí analýzy. Počty se vztahují k verzím 3.1 (MIMIC-IV) a 2.2 (MIMIC-IV-Note). Potlačení kategorií s n < 10 chrání malé skupiny, ale nezabraňuje odvození z rozdílu dvou zveřejněných součtů, proto se zveřejňují jen předem určené agregace. Automatizovaná kontrola neprohledává text uvnitř obrázků, proto grafy vyžadují zvláštní zacházení.
 
-# Příloha A: provenance renderu {.unnumbered}
-
-@tbl-provenance uvádí údaje, podle kterých lze render dohledat a zopakovat: revizi kódu, otisk zámku prostředí, zdroj dat a verze použitých nástrojů.
-
-```{r}
-#| include: false
-provenance_module <- reticulate::import("mediparse.entrypoints.eda_provenance")
-details <- provenance_module$provenance(
-  as.list(Sys.getenv()),
-  pathlib$Path(Sys.getenv("PIXI_PROJECT_ROOT")),
-  pathlib$Path(eda_parquet_dir())
-)
-details[["r"]] <- R.version.string
-DBI::dbDisconnect(con, shutdown = TRUE)
-```
-
-```{r}
-#| label: tbl-provenance
-#| tbl-cap: "Provenance renderu."
-#| tbl-colwidths: [28, 72]
-export_table(provenance_table(details), col.names = c("Položka", "Hodnota"), align = "ll")
-```
-
-# Literatura {.unnumbered}
-
-::: {#refs}
-:::
+{{< include _partials/appendix.qmd >}}
