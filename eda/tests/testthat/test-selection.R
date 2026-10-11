@@ -123,3 +123,37 @@ test_that("corpus_comparison dá pomlčku chybějící nebo prázdné tabulce", 
 
   expect_equal(out$radiology, c("0", "–", "–", "–", "–", "–", "–", "–"))
 })
+
+test_that("input_corpus_sql vrátí přesně zprávy posledního kroku výběru", {
+  con <- mimic_con(
+    discharge = discharge_rows(
+      c("1", "1", "2", "3", "4", "5"),
+      c("a", "b", "c", NA, "d", "e"),
+      c(long_text("A"), long_text("B"), long_text("C"), long_text("D"), "krátká", long_text("A"))
+    ),
+    diagnoses_icd = coded(c("a", "a", "b", "d", "e"))
+  )
+  out <- DBI::dbGetQuery(con, input_corpus_sql(con))
+
+  expect_equal(names(out), c("note_id", "subject_id", "hadm_id"))
+  expect_equal(sort(out$note_id), c("n1", "n2"))
+  expect_equal(nrow(out), corpus_funnel(con)$zprav[4])
+})
+
+test_that("input_corpus_sql z duplicit ponechá nejmenší note_id", {
+  con <- mimic_con(
+    discharge = discharge_rows(
+      c("1", "2", "2"), c("a", "b", "c"), c(long_text("A"), long_text("A"), long_text("B"))
+    ),
+    diagnoses_icd = coded(c("a", "b", "c"))
+  )
+  out <- DBI::dbGetQuery(con, input_corpus_sql(con))
+
+  expect_equal(sort(out$note_id), c("n1", "n3"))
+})
+
+test_that("input_corpus_sql nad prázdnou tabulkou nevrátí nic", {
+  con <- mimic_con()
+
+  expect_equal(nrow(DBI::dbGetQuery(con, input_corpus_sql(con))), 0)
+})
