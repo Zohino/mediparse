@@ -40,7 +40,7 @@ catalog <- mimic_catalog()
 overview <- cbind(
   catalog[match(tables, catalog$tabulka), c("tabulka", "zdroj", "popis")],
   manifest[c("sloupce", "mb")],
-  n = counts$n
+  n = number_text(counts$n)
 )
 n_discharge <- counts$n[counts$tabulka == "discharge"]
 n_radiology <- counts$n[counts$tabulka == "radiology"]
@@ -57,7 +57,7 @@ Tento sešit je prvním z řady sešitů explorační analýzy. Jeho úlohou je 
 
 Práce vychází z návrhu, podle kterého jsou primárním korpusem propouštěcí zprávy (tabulka `discharge`), radiologické zprávy jsou doplňkové a štítky klasifikace se odvozují z diagnóz ICD (tabulka `diagnoses_icd`). Dokument tato východiska nepotvrzuje ani nevyvrací; ověřuje jen, že potřebné tabulky existují a zda jsou úplné.
 
-Data pocházejí ze dvou projektů PhysioNetu [@goldberger2000]. Strukturovaná data hospitalizací poskytuje MIMIC-IV [@mimiciv; @johnson2023], volné texty zpráv MIMIC-IV-Note [@mimicivnote]. Oba projekty podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregované výsledky, v nichž jsou kategorie s méně než deseti záznamy potlačeny.
+Data pocházejí ze dvou projektů PhysioNetu [@goldberger2000]. Strukturovaná data hospitalizací poskytuje MIMIC-IV [@mimiciv; @johnson2023], volné texty zpráv MIMIC-IV-Note [@mimicivnote]. Oba projekty podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregované výsledky, nikdy řádková data ani texty zpráv.
 
 Dokument je členěn takto. Kapitola @sec-data popisuje zdroje dat a metody. Kapitola @sec-prehled uvádí přehled korpusu. Kapitola @sec-shrnuti shrnuje výsledky a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
 
@@ -65,10 +65,11 @@ Dokument je členěn takto. Kapitola @sec-data popisuje zdroje dat a metody. Kap
 
 Práce používá dva projekty PhysioNetu. MIMIC-IV, verze 3.1 [@mimiciv], obsahuje strukturovaná data hospitalizací; dokument z něj čte moduly `hosp` (pacienti, přijetí, diagnózy, výkony, léky). MIMIC-IV-Note, verze 2.2 [@mimicivnote], obsahuje deidentifikované volné texty a dokument z něj čte propouštěcí a radiologické zprávy. Popis MIMIC-IV a jeho vzniku uvádí @johnson2023.
 
-Data podléhají DUA. Z toho plyne několik pravidel, která dokument dodržuje:
+Data podléhají DUA. Dokument dodržuje tato pravidla:
 
 - řádková data a texty zpráv se nevypisují,
-- výsledky jsou agregáty a kategorie s méně než deseti záznamy se sloučí do řádku „ostatní (n < 10)“ a jejich popisky se nezobrazí; číslo pod prahem se zobrazí jako „< 10“,
+- výsledky jsou agregáty; skupiny pacientů vymezené kvaziidentifikátorem (například věkem, pohlavím, obdobím nebo diagnózou) a kategorie, jejichž popisek je hodnota z dat, se pod deset záznamů sloučí do řádku „ostatní (n < 10)“ a jejich popisky se nezobrazí; práh je pravidlo práce, DUA malé počty neupravuje,
+- metriky korpusu a textu, například počty záznamů tabulek, nepopisují skupiny pacientů, a proto se uvádějí přesně,
 - skutečná data zpracovává jen autor mimo automatizované nástroje; automatizovaná kontrola běží nad syntetickými tabulkami stejného tvaru a ověřuje, že jejich obsah neunikl do výstupu.
 
 Data procházejí těmito kroky: stažení souborů `csv.gz` z PhysioNetu, ověření jejich otisků SHA-256 proti oficiálním hodnotám, validace (počet záznamů a sloupců), převod na parquet a dotazování přes DuckDB. Převod do parquetu zachovává všechny sloupce jako text a počet záznamů ověřuje proti validaci. Dotazy nad parquetem provádí DuckDB s omezenou pamětí a s dočasnými soubory mimo verzovaný obsah repozitáře.
@@ -84,7 +85,7 @@ Databáze obsahuje `r nrow(counts)` tabulek. @tbl-korpus uvádí pro každou z n
 #| tbl-cap: "Tabulky korpusu: zdroj, obsah a využití, počet záznamů, počet sloupců a velikost souboru (MB)."
 #| tbl-colwidths: [22, 16, 30, 10, 12, 10]
 export_table(
-  dua_table(overview)[c("tabulka", "zdroj", "popis", "n", "sloupce", "mb")],
+  overview[c("tabulka", "zdroj", "popis", "n", "sloupce", "mb")],
   col.names = c("Tabulka", "Zdroj", "Obsah a využití", "Záznamů", "Sloupců", "MB"),
   align = "lllrrr",
   code = "tabulka"
@@ -93,7 +94,7 @@ export_table(
 
 *Zdroj:* počty záznamů dotazem v DuckDB, počty sloupců a velikosti souborů z manifestu validace, popisy podle veřejné dokumentace MIMIC-IV a MIMIC-IV-Note.
 
-Podle návrhu práce je primárním korpusem tabulka `discharge`; obsahuje `r dua_count(n_discharge)` záznamů. Radiologických zpráv je v tabulce `radiology` `r dua_count(n_radiology)`. `r if (sum(counts$n == max(counts$n)) == 1) paste0("Nejvíce záznamů má tabulka ", largest, ".")` Počty záznamů v databázi se `r if (agrees) "shodují" else "neshodují"` s počty v manifestu validace.
+Podle návrhu práce je primárním korpusem tabulka `discharge`; obsahuje `r format_number(n_discharge)` záznamů. Radiologických zpráv je v tabulce `radiology` `r format_number(n_radiology)`. `r if (sum(counts$n == max(counts$n)) == 1) paste0("Nejvíce záznamů má tabulka ", largest, ".")` Počty záznamů v databázi se `r if (agrees) "shodují" else "neshodují"` s počty v manifestu validace.
 
 # Shrnutí a rozhodnutí {#sec-shrnuti}
 
@@ -101,6 +102,6 @@ Dokument popsal zdroje dat, cestu dat k dotazování a přehled `r nrow(counts)`
 
 # Omezení {#sec-omezeni}
 
-Přehled uvádí jen počty záznamů, sloupců a velikosti souborů. O obsahu zpráv, pacientech ani rozdělení dat netvrdí nic; to je předmětem dalších částí analýzy. Počty se vztahují k verzím 3.1 (MIMIC-IV) a 2.2 (MIMIC-IV-Note). Potlačení kategorií s n < 10 chrání malé skupiny, ale nezabraňuje odvození z rozdílu dvou zveřejněných součtů, proto se zveřejňují jen předem určené agregace. Automatizovaná kontrola neprohledává text uvnitř obrázků, proto grafy vyžadují zvláštní zacházení.
+Přehled uvádí jen počty záznamů, sloupců a velikosti souborů. O obsahu zpráv, pacientech ani rozdělení dat netvrdí nic; to je předmětem dalších částí analýzy. Počty se vztahují k verzím 3.1 (MIMIC-IV) a 2.2 (MIMIC-IV-Note). Automatizovaná kontrola neprohledává text uvnitř obrázků, proto grafy vyžadují zvláštní zacházení.
 
 {{< include _partials/appendix.qmd >}}
