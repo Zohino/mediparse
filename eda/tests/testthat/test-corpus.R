@@ -23,10 +23,6 @@ test_that("manifest_text odděluje tisíce MB nezlomitelnou mezerou", {
   expect_equal(manifest_text("a", shapes, sizes)$mb, "1\u00a0139")
 })
 
-test_that("code_names vysází jména tabulek jako kód a sloučený řádek nechá", {
-  expect_equal(code_names(c("admissions", DUA_OTHER)), c("`admissions`", DUA_OTHER))
-})
-
 test_that("provenance_table překládá klíče na české popisky a dirty na ano/ne", {
   details <- list(commit = "abc", dirty = "false", python = "3.13", r = "R 4.5")
   out <- provenance_table(details)

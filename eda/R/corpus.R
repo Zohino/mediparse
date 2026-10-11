@@ -47,10 +47,6 @@ manifest_text <- function(tables, shapes, sizes) {
   )
 }
 
-code_names <- function(x) {
-  ifelse(x == DUA_OTHER, x, paste0("`", x, "`"))
-}
-
 PROVENANCE_LABELS <- c(
   commit = "Revize kódu (commit)",
   dirty = "Necommitnuté změny",
