@@ -2,6 +2,8 @@
 
 Průzkum dat žije v Quarto projektu `eda/`: jeden dokument `eda/<n>-*.qmd` na sešit. R vede dokument (statistiky, tabulky, inline `` `r …` ``), Python běží v blocích přes reticulate ze stejného prostředí pixi `eda`. Obě strany dotazují parquet přes DuckDB. Dokumenty slouží hodnotiteli a zároveň jako podklad rozhodnutí pro pipeline.
 
+Příloha s provenance a seznam literatury jsou ve sdíleném `eda/_partials/appendix.qmd`, který sešity vkládají přes `{{< include _partials/appendix.qmd >}}`. Podadresář s podtržítkem nepočítá CI ani `eda_render` a `quarto render eda` ho přeskočí. Změna partialu mění všechny sešity, proto vyžaduje nový reálný render každého z nich.
+
 ## Forma dokumentů
 
 Dokumenty mají akademickou formu: abstrakt, číslované kapitoly, obsah, číslované tabulky s titulkem (`#| label: tbl-…`, odkaz `@tbl-…`), citace `[@klíč]` z `eda/references.bib` a seznam literatury. Sdílená metadata (autor, bibliografie, obsah, číslování, A4) jsou v `eda/_quarto.yml`. Citace zpracovává citeproc (styl autor–rok), protože Typst v Quartu 1.9 nadepisuje vlastní bibliografii „Bibliografie“; kapitola „Literatura“ je proto v dokumentu ručně. Počty v tabulkách jdou přes `dua_table`, rozměry tabulek z veřejného manifestu validace se vkládají jako text.
@@ -25,6 +27,8 @@ Projekt má `freeze: auto`. `quarto render eda` (celý projekt) použije zmraže
 ## Ochrana dat MIMIC
 
 - Kategorie s n < 10 se potlačují. `dua_table` v `eda/R/dua.R` vyžaduje agregovanou tabulku se sloupcem `n`, řádky pod prahem sloučí do jednoho řádku „ostatní (n < 10)“ a součet ukáže přes `dua_count`. Neagregovaná tabulka skončí chybou. Popisky smí být jen text nebo faktor; další číselný sloupec vedle `n` se odmítne, protože by nešel potlačit.
+- `dua_table` se skládá z `dua_suppress` (potlačení s číselným `n`, z něhož se kreslí grafy) a `dua_count` (formátování). `dua_percent(n, total)` vrací podíl s desetinnou čárkou jako text a „–“, když je čitatel pod prahem nebo jmenovatel nulový. `dua_share(df)` je potlačená tabulka se sloupcem podílu z celku před potlačením.
+- Dotazy sešitu 2 (pacienti, pokrytí, éra ICD) jsou v `eda/R/patients.R` a testuje je testthat nad parquetem vyrobeným v testu, protože syntetika neobsahuje NULL ani ICD-9 a ICD-10.
 - `eda_connect()` odmítne adresář bez `synthetic.json`, když je nastavená proměnná `CLAUDECODE` nebo `CI`: skutečná data se tam číst nesmí.
 - Dokument dostává připojení z `eda_connect()`: dočasné soubory DuckDB leží pod `resources/mimic/` a paměť je omezená.
 - `eda_check_python()` ověří, že reticulate použil Python z prostředí pixi. Prostředí obsahuje `micromamba` a nastavuje `RETICULATE_PYTHON` a `RETICULATE_CONDA`, jinak reticulate hledá binárku conda nebo tiše sáhne po cizím Pythonu.
