@@ -10,6 +10,7 @@ library(reticulate)
 source("R/dua.R")
 source("R/db.R")
 source("R/corpus.R")
+source("R/export.R")
 eda_check_python()
 con <- eda_connect()
 tables <- sort(DBI::dbListTables(con))
@@ -82,12 +83,11 @@ Databáze obsahuje `r nrow(counts)` tabulek. @tbl-korpus uvádí pro každou z n
 #| label: tbl-korpus
 #| tbl-cap: "Tabulky korpusu: zdroj, obsah a využití, počet záznamů, počet sloupců a velikost souboru (MB)."
 #| tbl-colwidths: [22, 16, 30, 10, 12, 10]
-shown <- dua_table(overview)
-shown$tabulka <- code_names(shown$tabulka)
-knitr::kable(
-  shown[c("tabulka", "zdroj", "popis", "n", "sloupce", "mb")],
+export_table(
+  dua_table(overview)[c("tabulka", "zdroj", "popis", "n", "sloupce", "mb")],
   col.names = c("Tabulka", "Zdroj", "Obsah a využití", "Záznamů", "Sloupců", "MB"),
-  align = "lllrrr"
+  align = "lllrrr",
+  code = "tabulka"
 )
 ```
 
@@ -123,7 +123,7 @@ DBI::dbDisconnect(con, shutdown = TRUE)
 #| label: tbl-provenance
 #| tbl-cap: "Provenance renderu."
 #| tbl-colwidths: [28, 72]
-knitr::kable(provenance_table(details), col.names = c("Položka", "Hodnota"), align = "ll")
+export_table(provenance_table(details), col.names = c("Položka", "Hodnota"), align = "ll")
 ```
 
 # Literatura {.unnumbered}
