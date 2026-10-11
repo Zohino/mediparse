@@ -1,0 +1,156 @@
+{
+  "candidates": {
+    "diabetes": {
+      "label_cs": "Diabetes mellitus",
+      "icd9_prefixes": [
+        "250"
+      ],
+      "icd10_prefixes": [
+        "E10",
+        "E11",
+        "E13",
+        "E14"
+      ],
+      "charlson": [
+        "diab",
+        "diabwc"
+      ]
+    },
+    "heart_failure": {
+      "label_cs": "Srdeční selhání",
+      "icd9_prefixes": [
+        "428"
+      ],
+      "icd10_prefixes": [
+        "I50"
+      ],
+      "charlson": [
+        "chf"
+      ]
+    },
+    "copd": {
+      "label_cs": "CHOPN",
+      "icd9_prefixes": [
+        "491",
+        "492",
+        "496"
+      ],
+      "icd10_prefixes": [
+        "J44"
+      ],
+      "charlson": [
+        "cpd"
+      ]
+    },
+    "ckd": {
+      "label_cs": "Chronické onemocnění ledvin",
+      "icd9_prefixes": [
+        "585"
+      ],
+      "icd10_prefixes": [
+        "N18"
+      ],
+      "charlson": [
+        "rend"
+      ]
+    },
+    "pneumonia": {
+      "label_cs": "Pneumonie",
+      "icd9_prefixes": [
+        "480",
+        "481",
+        "482",
+        "483",
+        "484",
+        "485",
+        "486"
+      ],
+      "icd10_prefixes": [
+        "J12",
+        "J13",
+        "J14",
+        "J15",
+        "J16",
+        "J17",
+        "J18"
+      ],
+      "charlson": []
+    },
+    "ami": {
+      "label_cs": "Akutní infarkt myokardu",
+      "icd9_prefixes": [
+        "410"
+      ],
+      "icd10_prefixes": [
+        "I21",
+        "I22"
+      ],
+      "charlson": [
+        "mi"
+      ]
+    },
+    "cerebrovascular": {
+      "label_cs": "Cerebrovaskulární onemocnění",
+      "icd9_prefixes": [
+        "430",
+        "431",
+        "432",
+        "433",
+        "434",
+        "435",
+        "436",
+        "437",
+        "438"
+      ],
+      "icd10_prefixes": [
+        "I60",
+        "I61",
+        "I62",
+        "I63",
+        "I64",
+        "I65",
+        "I66",
+        "I67",
+        "I68",
+        "I69"
+      ],
+      "charlson": [
+        "cevd"
+      ]
+    },
+    "atrial_fibrillation": {
+      "label_cs": "Fibrilace síní",
+      "icd9_prefixes": [
+        "4273"
+      ],
+      "icd10_prefixes": [
+        "I48"
+      ],
+      "charlson": []
+    },
+    "sepsis": {
+      "label_cs": "Sepse",
+      "icd9_prefixes": [
+        "038",
+        "99591",
+        "99592"
+      ],
+      "icd10_prefixes": [
+        "A40",
+        "A41",
+        "R652"
+      ],
+      "charlson": []
+    },
+    "aki": {
+      "label_cs": "Akutní selhání ledvin",
+      "icd9_prefixes": [
+        "584"
+      ],
+      "icd10_prefixes": [
+        "N17"
+      ],
+      "charlson": []
+    }
+  }
+}
