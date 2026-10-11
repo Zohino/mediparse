@@ -89,3 +89,10 @@ dua_percent_text <- function(n, total) {
   share <- dua_percent(n, total)
   ifelse(share == "\u2013", share, paste0(share, NBSP, "%"))
 }
+
+dua_share <- function(df) {
+  out <- dua_suppress(df)
+  out$podil <- dua_percent(out$n, sum(df$n))
+  out$n <- dua_count(out$n)
+  out
+}
