@@ -67,7 +67,7 @@ test_that("kód se shoduje s předponou jen ve své verzi, bez ohledu na písmen
     multi("c", "I50", "9"),
     multi("d", "4280", "10"),
     multi("e", "i500 ", "10"),
-    multi("f", "I500", "eda-sentinel-x"),
+    multi("f", "I500", "sentinel-version-1"),
     multi("g", "I500", NA_character_)
   )
   con <- diag_con(codes)
