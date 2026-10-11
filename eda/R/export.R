@@ -14,7 +14,9 @@ LATEX_SPECIALS <- c(
   "{" = "\\{",
   "}" = "\\}",
   "~" = "\\textasciitilde{}",
-  "^" = "\\textasciicircum{}"
+  "^" = "\\textasciicircum{}",
+  "<" = "\\textless{}",
+  ">" = "\\textgreater{}"
 )
 
 export_dir <- function(input = knitr::current_input()) {
