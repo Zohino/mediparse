@@ -34,3 +34,13 @@ mimic_con <- function(..., env = parent.frame()) {
   withr::defer(DBI::dbDisconnect(con, shutdown = TRUE), envir = env)
   con
 }
+
+text_notes <- function(texts, prefix = "n") {
+  data.frame(
+    note_id = paste0(prefix, seq_along(texts)),
+    subject_id = as.character(seq_along(texts)),
+    hadm_id = as.character(seq_along(texts)),
+    text = texts,
+    stringsAsFactors = FALSE
+  )
+}

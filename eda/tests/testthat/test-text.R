@@ -1,13 +1,3 @@
-text_notes <- function(texts, prefix = "n") {
-  data.frame(
-    note_id = paste0(prefix, seq_along(texts)),
-    subject_id = as.character(seq_along(texts)),
-    hadm_id = as.character(seq_along(texts)),
-    text = texts,
-    stringsAsFactors = FALSE
-  )
-}
-
 metrics_of <- function(texts, env = parent.frame()) {
   con <- mimic_con(discharge = text_notes(texts), env = env)
   name <- note_metrics(con, "discharge")
