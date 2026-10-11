@@ -24,8 +24,8 @@ age <- age_masks(con)
 markers_d <- markers[markers$tabulka == "discharge", ]
 residual_d <- residual[residual$tabulka == "discharge", ]
 means_d <- marker_means(markers_d, residual_d)
-mean_exact <- mean_text(means_d$presne, markers_d$zprav)
-reference <- published_reference_verdict(markers_d, residual_d)
+mean_exact <- mean_text(means_d$presne)
+reference <- reference_verdict(markers_d, residual_d)
 median_d <- percentile_cell(shown, "discharge", "znaky", "p50")
 p95_d <- percentile_cell(shown, "discharge", "znaky", "p95")
 reference_prefix <- paste0(
@@ -44,17 +44,10 @@ reference_text <- switch(
   ),
   nelze = "Počet zpráv nestačí na ověření dřívějšího odhadu 60,6 značky na zprávu."
 )
-residual_totals <- markers$zprav[match(residual$tabulka, markers$tabulka)]
-residual_hidden <- complement_hidden(residual$zprav, residual_totals)
-anchor_text <- ifelse(
-  anchor_hidden(age), "\u2013", dua_percent_text(age$kotva, age$zprav)
-)
+anchor_text <- paste0(percent_text(age$kotva, age$zprav), NBSP, "%")
 quality_d <- quality[quality$tabulka == "discharge", ]
-short_n <- quality_d$prazdne + quality_d$pod_100
-short_text <- hidden_count(short_n, complement_hidden(short_n, quality_d$zprav))
-duplicates_text <- hidden_count(
-  quality_d$duplicity, complement_hidden(quality_d$duplicity, quality_d$zprav)
-)
+short_text <- format_number(quality_d$prazdne + quality_d$pod_100)
+duplicates_text <- format_number(quality_d$duplicity)
 ```
 
 # Úvod
@@ -68,7 +61,7 @@ Tento sešit je třetím z řady sešitů explorační analýzy. Navazuje na př
 
 Délka zprávy určuje, kolik zpráv se musí při překladu dělit na části. Počet značek `___` je veličina, kterou kontrola překladu porovnává mezi originálem a překladem. Zprávy, které jsou prázdné, příliš krátké nebo duplicitní, se do korpusu nehodí a jejich počet se proto zjišťuje už zde. Věk pacienta se do textu zpráv v deidentifikované podobě nedostává a případné dosazení závisí na tom, co text skutečně obsahuje.
 
-Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty. Počty pod deseti se zobrazí jako „< 10“, kategorie s méně než deseti záznamy se sloučí do řádku „ostatní (n < 10)“ a podíl se uvede, jen když jeho čitatel dosahuje deseti; jinak se zobrazí „–“. Počet zveřejněný vedle celku se skryje i tehdy, když je jeho doplněk do celku pod deseti, aby se skrytá hodnota nedala dopočítat odečtením. Nejmenší a největší hodnota se nezveřejňují, protože jsou hodnotou jediné zprávy, a percentil se uvede, jen když na každé straně leží aspoň deset zpráv. Z textu zpráv se nezveřejňuje žádný řetězec ani kontext.
+Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote]. Metriky textu nepopisují skupiny pacientů, a proto se zveřejňují přesně. Z textu zpráv se nezveřejňuje žádný řetězec ani kontext, jen počty a míry.
 
 Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky o délkách, značkách, zbytkových maskách, kvalitě dat a věku. Kapitola @sec-shrnuti shrnuje výsledky a rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
 
@@ -85,7 +78,7 @@ Pojmy a jednotky jsou tyto:
 - *kvalita dat* rozlišuje prázdný nebo chybějící text, text kratší než `r SHORT_LIMIT` znaků, text o `r SHORT_LIMIT` až `r MEDIUM_LIMIT` znacích a text delší než `r format_number(LONG_LIMIT)` znaků,
 - *maska věku* je `___` následované zápisem „year old“, „yo“, „y/o“ nebo „y.o.“, *kotva* je maska věku ve větě „is a ___ year old“ a *číselný věk* je číslo před týmž zápisem. Hledá se bez ohledu na velikost písmen a jen v propouštěcích zprávách, kde je věk pacienta cílem extrakce.
 
-Délka se zobrazuje v logaritmických koších o šířce 0,1 dekády; zpráva o délce 0 nebo 1 znaku patří do prvního koše. Percentily se uvádějí pro 1., 5., 10., 25., 50., 75., 90., 95. a 99. Strukturovaný věk pacienta (`anchor_age`) sešit nepoužívá, patří do sešitu o demografii.
+Délka se zobrazuje v logaritmických koších o šířce 0,1 dekády; zpráva o délce 0 nebo 1 znaku patří do prvního koše. Uvádí se minimum, maximum a percentily 1., 5., 10., 25., 50., 75., 90., 95. a 99. Strukturovaný věk pacienta (`anchor_age`) sešit nepoužívá, patří do sešitu o demografii.
 
 # Výsledky {#sec-vysledky}
 
@@ -95,7 +88,7 @@ Délka se zobrazuje v logaritmických koších o šířce 0,1 dekády; zpráva o
 
 ```{r}
 #| label: tbl-delky
-#| tbl-cap: "Rozdělení délky zpráv ve znacích a slovech (percentily se uvádějí, jen když na každé straně leží aspoň deset zpráv)."
+#| tbl-cap: "Rozdělení délky zpráv ve znacích a slovech (včetně nejmenší a největší hodnoty)."
 #| tbl-colwidths: [28, 18, 18, 18, 18]
 length_columns <- data.frame(
   tabulka = rep(tables, each = 2), metrika = rep(c("znaky", "slova"), 2)
@@ -110,13 +103,13 @@ export_table(
 )
 ```
 
-*Zdroj:* dotazy v DuckDB nad sloupcem `text`; „–“ znamená, že percentil nebo průměr nesplňuje podmínku dostatečného počtu zpráv na obou stranách.
+*Zdroj:* dotazy v DuckDB nad sloupcem `text`; „–“ znamená, že tabulka nemá žádnou zprávu.
 
 @fig-delky ukazuje podíl zpráv v logaritmických koších délky. Každá tabulka má vlastní panel a podíl se počítá z počtu zpráv této tabulky.
 
 ```{r}
 #| label: fig-delky
-#| fig-cap: "Rozdělení délky zpráv ve znacích v logaritmických koších (šířka koše 0,1 dekády); podíl neprázdných zpráv tabulky, koše s n < 10 jsou vynechány a potlačují se zvlášť pod a nad 100 znaků."
+#| fig-cap: "Rozdělení délky zpráv ve znacích v logaritmických koších (šířka koše 0,1 dekády); podíl neprázdných zpráv tabulky, všechny koše."
 #| fig-width: 6.5
 #| fig-height: 4
 shares <- histogram_shares(hist)
@@ -144,21 +137,9 @@ Kontrola překladu porovnává počet značek `___` mezi originálem a překlade
 #| label: tbl-znacky
 #| tbl-cap: "Značky na zprávu: zprávy se značkou, součet značek, delší úseky podtržítek a rozdělení počtu značek na zprávu."
 #| tbl-colwidths: [14, 10, 12, 8, 12, 12, 10, 10, 12]
-with_marker_hidden <- complement_hidden(markers$se_znackou, markers$zprav)
-marker_table <- data.frame(
-  tabulka = markers$tabulka,
-  zprav = dua_count(markers$zprav),
-  se_znackou = hidden_count(markers$se_znackou, with_marker_hidden),
-  se_znackou_podil = hidden_percent(markers$se_znackou, markers$zprav, with_marker_hidden),
-  znacek = dua_count(markers$znacek),
-  delsi_useky = dua_count(markers$delsi_useky),
-  prumer = vapply(markers$tabulka, percentile_cell, "", shown = shown, metric = "znacky", column = "prumer"),
-  p50 = vapply(markers$tabulka, percentile_cell, "", shown = shown, metric = "znacky", column = "p50"),
-  p95 = vapply(markers$tabulka, percentile_cell, "", shown = shown, metric = "znacky", column = "p95"),
-  row.names = NULL
-)
+marker_cells <- marker_table(markers, shown)
 export_table(
-  marker_table,
+  marker_cells,
   col.names = c(
     "Tabulka", "Zpráv", "Se značkou", "%", "Značek celkem", "Delších úseků",
     "Průměr", "Medián", "95. perc."
@@ -168,9 +149,9 @@ export_table(
 )
 ```
 
-*Zdroj:* dotazy v DuckDB; počet zpráv se značkou se skryje i tehdy, když je velký, pokud je zbytek zpráv bez značky pod deseti.
+*Zdroj:* dotazy v DuckDB nad sloupcem `text`.
 
-`r reference_text` Dřívější odhad počítal podtržítka vzorcem „délka bez podtržítek děleno třemi“, takže delší úsek podtržítek zahrnul mezi značky, a započítal i zbytkové masky. Průměrně připadá na propouštěcí zprávu `r mean_exact` přesných značek, `r mean_text(means_d$delsi, markers_d$zprav)` delších úseků podtržítek a `r mean_text(means_d$zbytkove, markers_d$zprav)` zbytkových masek.
+`r reference_text` Dřívější odhad počítal podtržítka vzorcem „délka bez podtržítek děleno třemi“, takže delší úsek podtržítek zahrnul mezi značky, a započítal i zbytkové masky. Průměrně připadá na propouštěcí zprávu `r mean_exact` přesných značek, `r mean_text(means_d$delsi)` delších úseků podtržítek a `r mean_text(means_d$zbytkove)` zbytkových masek.
 
 ## Zbytkové masky {#sec-masky}
 
@@ -180,15 +161,9 @@ Kromě značek `___` může text nést masky jiného typu. @tbl-masky uvádí pr
 #| label: tbl-masky
 #| tbl-cap: "Zbytkové masky jiného typu než tři podtržítka: počet zpráv a výskytů na vzor."
 #| tbl-colwidths: [22, 22, 18, 14, 24]
-masks_table <- data.frame(
-  tabulka = residual$tabulka,
-  vzor = residual$vzor,
-  zprav = hidden_count(residual$zprav, residual_hidden),
-  podil = hidden_percent(residual$zprav, residual_totals, residual_hidden),
-  vyskytu = dua_count(residual$vyskytu)
-)
+mask_cells <- masks_table(residual, markers)
 export_table(
-  masks_table,
+  mask_cells,
   col.names = c("Tabulka", "Vzor", "Zpráv", "%", "Výskytů"),
   align = "llrrr",
   code = c("tabulka", "vzor")
@@ -234,20 +209,20 @@ export_table(
 )
 ```
 
-*Zdroj:* dotazy v DuckDB nad tabulkou `discharge`; bez masky, s jednou a s více maskami se vylučují a skrývají se společně, kotva a číselný věk se skrývají podle doplňku do počtu zpráv.
+*Zdroj:* dotazy v DuckDB nad tabulkou `discharge`; bez masky, s jednou a s více maskami se vylučují, kotva a číselný věk jsou podmnožiny celku.
 
 # Shrnutí a rozhodnutí {#sec-shrnuti}
 
 Dokument popsal délku zpráv, značky `___`, zbytkové masky, kvalitu dat a masku věku. Pro další práci z toho plyne:
 
 - **Rozpočet chunků.** Medián délky propouštěcí zprávy je `r median_d` znaků a 95. percentil `r p95_d` znaků. Tato čísla jsou vstupem pro rozpočet chunků při překladu, který se přepočte na tokeny v navazujícím sešitu.
-- **Počet značek `___` a reference.** Průměr přesných značek na propouštěcí zprávu je `r mean_exact`, průměr delších úseků podtržítek `r mean_text(means_d$delsi, markers_d$zprav)` a průměr zbytkových masek `r mean_text(means_d$zbytkove, markers_d$zprav)`. `r switch(reference, presne = "Přesné značky samy odpovídají dřívějšímu odhadu 60,6 značky na zprávu.", se_zbytkovymi = "Dřívější odhad 60,6 značky na zprávu vychází, až když se k přesným značkám přičtou zbytkové masky.", rozdil = "Dřívější odhad 60,6 značky na zprávu nevychází ani s přičtenými zbytkovými maskami; rozdíl ukazují výše uvedené průměry.", nelze = "Dřívější odhad 60,6 značky na zprávu se pro nízký počet zpráv nedá ověřit.")`
+- **Počet značek `___` a reference.** Průměr přesných značek na propouštěcí zprávu je `r mean_exact`, průměr delších úseků podtržítek `r mean_text(means_d$delsi)` a průměr zbytkových masek `r mean_text(means_d$zbytkove)`. `r switch(reference, presne = "Přesné značky samy odpovídají dřívějšímu odhadu 60,6 značky na zprávu.", se_zbytkovymi = "Dřívější odhad 60,6 značky na zprávu vychází, až když se k přesným značkám přičtou zbytkové masky.", rozdil = "Dřívější odhad 60,6 značky na zprávu nevychází ani s přičtenými zbytkovými maskami; rozdíl ukazují výše uvedené průměry.", nelze = "Dřívější odhad 60,6 značky na zprávu se pro nízký počet zpráv nedá ověřit.")`
 - **Podklad pro kontrolu počtu značek.** Kontrola shody počtu značek mezi originálem a překladem dostává tato čísla: zprávy se značkou `___` a součet značek uvádí @tbl-znacky, zprávy a výskyty zbytkových masek `[**…**]`, HTML značek a `XXX` uvádí @tbl-masky. Sešit nerozhoduje, které vzory má kontrola zahrnout; poskytuje jen počty, o rozsahu kontroly se rozhodne při její implementaci.
-- **Kvalita dat.** Zprávy kratší než `r SHORT_LIMIT` znaků a přesné duplicity se z korpusu vyřazují vždy. Mezi propouštěcími zprávami je prázdných nebo kratších zpráv `r short_text` a přesných duplicit `r duplicates_text`. Práh deseti zpráv určuje jen to, zda se počet zveřejní, nebo se ukáže jako „< 10“; o vyřazení nerozhoduje.
+- **Kvalita dat.** Zprávy kratší než `r SHORT_LIMIT` znaků a přesné duplicity se z korpusu vyřazují vždy. Mezi propouštěcími zprávami je prázdných nebo kratších zpráv `r short_text` a přesných duplicit `r duplicates_text`.
 - **Věk v textu.** `r switch(age_verdict(age), bez_ciselneho = "Číselný věk se v propouštěcích zprávách nevyskytuje, což potvrzuje, že věk z textu extrahovat nejde.", ciselny = "Číselný věk se v propouštěcích zprávách vyskytuje, takže tvrzení, že věk z textu extrahovat nejde, neplatí beze zbytku a je třeba ho ověřit na konkrétních vzorech.")` Kotvu „is a ___ year old“ nese `r anchor_text` zpráv, což je horní mez zpráv, do nichž by šel věk dosadit.
 
 # Omezení {#sec-omezeni}
 
-Délka se měří ve znacích a slovech, ne v tokenech; velikost kroku překladu proto určí až tokenizace. Počet slov se odvozuje z úseků bez mezer, takže interpunkce přilepená ke slovu se do slova počítá. Vzor HTML značky se řídí tvarem `<` s písmenem až po `>` a může zachytit i text, který značkou není, například srovnání v klinickém textu. Vzor `XXX` zachytí každý úsek tří a více písmen `X`, včetně zkratky, která se tak píše. Maska věku se hledá jen v zápisech „year old“, „yo“, „y/o“ a „y.o.“; jiný zápis, například „aged ___“, mezi ni nepatří, takže její počet je dolní odhad. Přesné duplicity se poznají podle otisku celého textu, takže zprávy lišící se jediným znakem se za duplicity nepovažují. Percentily se uvádějí jen při deseti zprávách na každé straně, a pro vzácná rozdělení tedy chybí krajní percentily. Nejmenší a největší hodnota se nezveřejňují. Potlačení nechrání před odvozením z kombinace různých tabulek, proto se zveřejňují jen předem určené agregace.
+Délka se měří ve znacích a slovech, ne v tokenech; velikost kroku překladu proto určí až tokenizace. Počet slov se odvozuje z úseků bez mezer, takže interpunkce přilepená ke slovu se do slova počítá. Vzor HTML značky se řídí tvarem `<` s písmenem až po `>` a může zachytit i text, který značkou není, například srovnání v klinickém textu. Vzor `XXX` zachytí každý úsek tří a více písmen `X`, včetně zkratky, která se tak píše. Maska věku se hledá jen v zápisech „year old“, „years old“, „yo“, „y/o“ a „y.o.“; jiný zápis, například „aged ___“, mezi ni nepatří, takže její počet je dolní odhad. Přesné duplicity se poznají podle otisku celého textu, takže zprávy lišící se jediným znakem se za duplicity nepovažují. Metriky textu nepopisují skupiny pacientů, a proto se zveřejňují přesně, bez potlačení malých počtů. Percentil je délka jedné konkrétní zprávy a stejně tak nejmenší a největší hodnota; z textu zpráv se nezveřejňuje žádný řetězec ani kontext.
 
 {{< include _partials/appendix.qmd >}}

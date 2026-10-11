@@ -68,6 +68,8 @@ test_that("length_percentiles spočítá percentily a průměr nad známým rozd
   expect_equal(chars$p25, 250)
   expect_equal(chars$p50, 500)
   expect_equal(chars$p99, 990)
+  expect_equal(chars$minimum, 1)
+  expect_equal(chars$maximum, 1000)
   expect_setequal(out$metrika, c("znaky", "slova", "znacky"))
 })
 
@@ -100,27 +102,26 @@ test_that("agregace čtou hotovou tabulku metrik a text znovu neprocházejí", {
   expect_equal(length_percentiles(con, "discharge")$n[1], 0)
 })
 
-test_that("format_percentiles skryje percentil bez deseti zpráv na každé straně", {
-  texts <- vapply(1:150, function(i) strrep("a", i), character(1))
-  con <- mimic_con(discharge = text_notes(texts))
+test_that("format_percentiles zveřejní všechny percentily, min a max i při malém n", {
+  con <- mimic_con(discharge = text_notes(c("a", "bb", "ccc")))
   shown <- format_percentiles(length_percentiles(con, "discharge"))
   chars <- shown[shown$metrika == "znaky", ]
 
-  expect_equal(chars$p01, "–")
-  expect_equal(chars$p05, "–")
-  expect_equal(chars$p10, "15")
-  expect_equal(chars$p50, "75")
-  expect_equal(chars$p95, "–")
-  expect_equal(chars$p99, "–")
-  expect_equal(chars$prumer, "75,5")
+  expect_equal(chars$n, "3")
+  expect_equal(chars$minimum, "1")
+  expect_equal(chars$p50, "2")
+  expect_equal(chars$maximum, "3")
+  expect_equal(chars$prumer, "2,0")
 })
 
-test_that("format_percentiles skryje průměr při n pod prahem", {
-  con <- mimic_con(discharge = text_notes(c("a", "bb", "ccc")))
-  shown <- format_percentiles(length_percentiles(con, "discharge"))
+test_that("format_percentiles formátuje tisíce a prázdnou tabulku ukáže pomlčkami", {
+  con <- mimic_con(discharge = text_notes(strrep("a", 12345)))
+  shown <- format_percentiles(length_percentiles(con, c("discharge", "radiology")))
 
-  expect_true(all(shown$prumer == "–"))
-  expect_true(all(shown$p50 == "–"))
+  expect_equal(shown$p50[shown$tabulka == "discharge" & shown$metrika == "znaky"], paste0("12", NBSP, "345"))
+  expect_equal(shown$n[shown$tabulka == "radiology"][1], "0")
+  expect_equal(shown$p50[shown$tabulka == "radiology"][1], "\u2013")
+  expect_equal(shown$maximum[shown$tabulka == "radiology"][1], "\u2013")
 })
 
 test_that("length_histogram dá koš 0 délce 1, prázdné a NULL texty nekreslí a sečte se do neprázdných zpráv", {
@@ -153,15 +154,14 @@ test_that("marker_summary sečte zprávy, značky a delší úseky", {
   expect_equal(out$znacek[out$tabulka == "radiology"], 0)
 })
 
-test_that("na syntetickém tvaru s jedinečnými řetězci nic nespadne a percentily se maskují", {
+test_that("na syntetickém tvaru s jedinečnými řetězci nic nespadne", {
   texts <- paste0("jedinecny-text-", 1:12)
   con <- mimic_con(discharge = text_notes(texts))
 
   expect_no_error(shown <- format_percentiles(length_percentiles(con, "discharge")))
   expect_no_error(marker_summary(con, "discharge"))
   expect_no_error(length_histogram(con, "discharge"))
-  expect_true(all(shown$p01 == "–"))
-  expect_true(all(shown$p99 == "–"))
+  expect_false(any(shown$p01 == "\u2013"))
 })
 
 residual_of <- function(texts, table = "discharge") {
@@ -286,45 +286,55 @@ test_that("na syntetickém tvaru nic nespadne", {
   expect_equal(age_masks(con)$jedna, 0)
 })
 
-test_that("anchor_hidden skryje kotvu i vůči zprávám s maskou věku", {
-  age <- list(zprav = 1000, bez_masky = 900, jedna = 60, vice = 40, kotva = 95)
-
-  expect_false(complement_hidden(age$kotva, age$zprav))
-  expect_true(anchor_hidden(age))
-  expect_false(anchor_hidden(modifyList(age, list(kotva = 50))))
-  expect_true(anchor_hidden(modifyList(age, list(kotva = 5))))
-})
-
-test_that("age_table skryje rozdělení jako celek a kotvu podle zpráv s maskou", {
-  age <- list(zprav = 1000, bez_masky = 900, jedna = 60, vice = 40, kotva = 95, ciselny = 0)
+test_that("age_table zveřejní počty a podíly bez potlačení", {
+  age <- list(zprav = 1000, bez_masky = 900, jedna = 60, vice = 40, kotva = 5, ciselny = 0)
   out <- age_table(age)
 
   expect_equal(nrow(out), 6L)
-  expect_equal(out$n[2:3], c("900", "60"))
-  expect_equal(out$n[5], paste0("<", NBSP, "10"))
-  expect_equal(out$podil[5], "\u2013")
-  expect_equal(out$n[6], paste0("<", NBSP, "10"))
-  expect_equal(out$podil[1], "")
+  expect_equal(out$n, c(format_number(1000), "900", "60", "40", "5", "0"))
+  expect_equal(out$podil, c("", "90,0", "6,0", "4,0", "0,5", "0,0"))
 })
 
-test_that("quality_table skryje kategorii podle doplňku do celku v každé tabulce", {
+test_that("quality_table zveřejní počty a podíly v každé tabulce", {
   quality <- data.frame(
     tabulka = c("discharge", "radiology"),
-    zprav = c(1000, 100),
-    prazdne = c(3, 20),
-    pod_100 = c(50, 95),
-    od_100_do_500 = c(100, 40),
+    zprav = c(1000, 0),
+    prazdne = c(3, 0),
+    pod_100 = c(50, 0),
+    od_100_do_500 = c(100, 0),
     nad_50000 = c(5, 0),
-    duplicity = c(20, 30)
+    duplicity = c(20, 0)
   )
   out <- quality_table(quality)
-  hidden <- paste0("<", NBSP, "10")
 
   expect_equal(out$ukazatel[1], "Zprávy celkem")
   expect_equal(nrow(out), 6L)
-  expect_equal(out$n_discharge, c(format_number(1000), hidden, "50", "100", hidden, "20"))
-  expect_equal(out$n_radiology, c("100", "20", hidden, "40", hidden, "30"))
-  expect_equal(out$podil_radiology[3], "\u2013")
+  expect_equal(out$n_discharge, c(format_number(1000), "3", "50", "100", "5", "20"))
+  expect_equal(out$podil_discharge, c("", "0,3", "5,0", "10,0", "0,5", "2,0"))
+  expect_equal(out$podil_radiology[2], "\u2013")
+})
+
+test_that("marker_table a masks_table poskládají počty a podíly z výstupů dotazů", {
+  markers <- data.frame(
+    tabulka = "discharge", zprav = 200, znacek = 1000, se_znackou = 50, delsi_useky = 3
+  )
+  shown <- data.frame(
+    tabulka = "discharge", metrika = "znacky", prumer = "5,0", p50 = "4", p95 = "12"
+  )
+  residual <- data.frame(
+    tabulka = "discharge", vzor = c("XXX", "<\u2026>"), zprav = c(20, 0), vyskytu = c(35, 0)
+  )
+  marker_out <- marker_table(markers, shown)
+  masks_out <- masks_table(residual, markers)
+
+  expect_equal(marker_out$se_znackou, "50")
+  expect_equal(marker_out$se_znackou_podil, "25,0")
+  expect_equal(marker_out$znacek, "1" |> paste0(NBSP, "000"))
+  expect_equal(marker_out$prumer, "5,0")
+  expect_equal(marker_out$p95, "12")
+  expect_equal(masks_out$zprav, c("20", "0"))
+  expect_equal(masks_out$podil, c("10,0", "0,0"))
+  expect_equal(masks_out$vyskytu, c("35", "0"))
 })
 
 test_that("maska věku zachytí i years old a nezachytí years ago", {
@@ -365,10 +375,10 @@ test_that("age_verdict a residual_verdict se řídí nulou, ne prahem DUA", {
   expect_equal(residual_verdict(data.frame(vyskytu = c(0, 2, 0))), "jsou")
 })
 
-test_that("mean_text zveřejní průměr jen při n >= 10 a jinak vrátí pomlčku", {
-  expect_equal(mean_text(12.34, 10), "12,3")
-  expect_equal(mean_text(12.34, 9), "–")
-  expect_equal(mean_text(NA_real_, 100), "–")
+test_that("mean_text formátuje průměr a chybějící hodnotu ukáže pomlčkou", {
+  expect_equal(mean_text(12.34), "12,3")
+  expect_equal(mean_text(0), "0,0")
+  expect_equal(mean_text(NA_real_), "\u2013")
 })
 
 test_that("percentile_cell vybere buňku podle tabulky, metriky a sloupce", {
@@ -388,7 +398,9 @@ test_that("percentile_matrix poskládá řádky percentilů a sloupce tabulka ×
   columns <- data.frame(tabulka = c("discharge", "radiology"), metrika = c("znaky", "znaky"))
   out <- percentile_matrix(shown, columns)
 
-  expect_equal(nrow(out), 2 + length(PERCENTILES))
+  expect_equal(nrow(out), 4 + length(PERCENTILES))
+  expect_equal(out[[2]][out$ukazatel == "Minimum"], "1")
+  expect_equal(out[[2]][out$ukazatel == "Maximum"], "150")
   expect_equal(out[[2]][out$ukazatel == "Medián"], "75")
   expect_equal(out[[3]][out$ukazatel == "Medián"], "–")
   expect_equal(out[[2]][out$ukazatel == "Zpráv"], "150")
@@ -412,22 +424,12 @@ test_that("histogram_shares dá podíl zprávy tabulky a pojmenuje koše dolní 
   )
 })
 
-test_that("histogram_shares potlačuje zvlášť pod a nad 100 znaků a podíl počítá z celé tabulky", {
+test_that("histogram_shares zveřejní všechny koše včetně malých a podíl počítá z celé tabulky", {
   hist <- data.frame(tabulka = c("a", "a", "a"), kos = c(0, 3, 3.1), n = c(100, 200, 4))
   out <- histogram_shares(hist)
 
-  expect_equal(out$dolni, 0)
-  expect_equal(out$podil, 100 / 304)
-})
-
-test_that("histogram_shares neprozradí skrytý koš z krátké oblasti přes součet kvality", {
-  hist <- data.frame(
-    tabulka = c("a", "a", "a", "a"), kos = c(0, 1.9, 2, 3), n = c(30, 4, 100, 7)
-  )
-  out <- histogram_shares(hist)
-
-  expect_false(any(out$dolni < 2))
-  expect_false(any(out$dolni >= 2))
+  expect_equal(out$dolni, c(0, 3, 3.1))
+  expect_equal(out$podil, c(100, 200, 4) / 304)
 })
 
 test_that("histogram_shares s prázdným vstupem vrátí prázdnou tabulku", {
@@ -436,13 +438,13 @@ test_that("histogram_shares s prázdným vstupem vrátí prázdnou tabulku", {
   expect_equal(nrow(out), 0L)
 })
 
-test_that("published_reference_verdict vrátí nelze, když je průměr přesných značek skrytý", {
+test_that("reference_verdict vyhodnotí průměr přesných značek i při malém počtu zpráv", {
   residual <- data.frame(tabulka = "discharge", vzor = "XXX", zprav = 0, vyskytu = 0)
   markers <- function(zprav, znacek) {
     data.frame(tabulka = "discharge", zprav = zprav, znacek = znacek, se_znackou = 1, delsi_useky = 0)
   }
 
-  expect_equal(published_reference_verdict(markers(5, 303), residual), "nelze")
-  expect_equal(published_reference_verdict(markers(10, 606), residual), "presne")
-  expect_equal(published_reference_verdict(markers(10, 10), residual), "rozdil")
+  expect_equal(reference_verdict(markers(5, 303), residual), "presne")
+  expect_equal(reference_verdict(markers(10, 10), residual), "rozdil")
+  expect_equal(reference_verdict(markers(0, 0), residual), "nelze")
 })

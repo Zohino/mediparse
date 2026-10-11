@@ -79,8 +79,8 @@ as_numeric_columns <- function(df, columns) {
 percentile_sql <- function(metric, column) {
   quantiles <- sprintf("quantile_disc(%s, %s) AS %s", column, PERCENTILES, PERCENTILE_COLUMNS)
   sprintf(
-    "SELECT '%s' AS metrika, count(%s) AS n, avg(%s) AS prumer, %s FROM %%s",
-    metric, column, column, paste(quantiles, collapse = ", ")
+    "SELECT '%s' AS metrika, count(%s) AS n, avg(%s) AS prumer, min(%s) AS minimum, max(%s) AS maximum, %s FROM %%s",
+    metric, column, column, column, column, paste(quantiles, collapse = ", ")
   )
 }
 
@@ -89,21 +89,28 @@ length_percentiles <- function(con, tables) {
   out <- per_table(con, tables, function(metrics) {
     paste(sprintf(selects, metrics), collapse = " UNION ALL ")
   })
-  as_numeric_columns(out, c("n", "prumer", PERCENTILE_COLUMNS))
+  as_numeric_columns(out, c("n", "prumer", "minimum", "maximum", PERCENTILE_COLUMNS))
+}
+
+number_text <- function(x) {
+  ifelse(is.na(x), "–", format_number(x))
+}
+
+percent_text <- function(n, total) {
+  total <- rep_len(total, length(n))
+  out <- rep("–", length(n))
+  known <- total > 0
+  out[known] <- dua_decimal(100 * n[known] / total[known])
+  out
 }
 
 format_percentiles <- function(percentiles) {
   out <- percentiles
-  for (index in seq_along(PERCENTILES)) {
-    column <- PERCENTILE_COLUMNS[index]
-    shown <- dua_quantile_ok(percentiles$n, PERCENTILES[index]) & !is.na(percentiles[[column]])
-    out[[column]] <- ifelse(shown, format_number(percentiles[[column]]), "–")
+  for (column in c("minimum", PERCENTILE_COLUMNS, "maximum")) {
+    out[[column]] <- number_text(percentiles[[column]])
   }
-  out$prumer <- ifelse(
-    percentiles$n >= DUA_THRESHOLD & !is.na(percentiles$prumer),
-    dua_decimal(percentiles$prumer), "–"
-  )
-  out$n <- dua_count(percentiles$n)
+  out$prumer <- ifelse(is.na(percentiles$prumer), "–", dua_decimal(percentiles$prumer))
+  out$n <- number_text(percentiles$n)
   out
 }
 
@@ -205,8 +212,8 @@ residual_verdict <- function(residual) {
   if (sum(residual$vyskytu) == 0) "zadne" else "jsou"
 }
 
-mean_text <- function(x, n) {
-  ifelse(n >= DUA_THRESHOLD & !is.na(x), dua_decimal(x), "–")
+mean_text <- function(x) {
+  ifelse(is.na(x), "–", dua_decimal(x))
 }
 
 percentile_cell <- function(shown, table, metric, column) {
@@ -227,15 +234,19 @@ percentile_matrix <- function(shown, columns) {
     c(
       percentile_cell(shown, table, metric, "n"),
       percentile_cell(shown, table, metric, "prumer"),
+      percentile_cell(shown, table, metric, "minimum"),
       vapply(
         PERCENTILE_COLUMNS,
         function(column) percentile_cell(shown, table, metric, column),
         character(1)
-      )
+      ),
+      percentile_cell(shown, table, metric, "maximum")
     )
   })
   out <- data.frame(
-    ukazatel = c("Zpráv", "Průměr", unname(PERCENTILE_LABELS[PERCENTILE_COLUMNS])),
+    ukazatel = c(
+      "Zpráv", "Průměr", "Minimum", unname(PERCENTILE_LABELS[PERCENTILE_COLUMNS]), "Maximum"
+    ),
     stringsAsFactors = FALSE
   )
   for (index in seq_along(cells)) out[[paste0("v", index)]] <- cells[[index]]
@@ -244,42 +255,24 @@ percentile_matrix <- function(shown, columns) {
 
 histogram_shares <- function(hist) {
   totals <- tapply(hist$n, hist$tabulka, sum)
-  levels <- sort(unique(hist$kos))
-  labels <- format_number(signif(10^levels, 3))
-  frame <- data.frame(
-    tabulka = hist$tabulka,
-    skupina = paste(hist$tabulka, ifelse(hist$kos < log10(SHORT_LIMIT), "pod", "nad")),
-    kos = factor(labels[match(hist$kos, levels)], levels = labels),
-    n = hist$n,
-    stringsAsFactors = FALSE
-  )
-  kept <- dua_suppress(frame, by = "skupina")
-  kept <- kept[kept$kos != DUA_OTHER, , drop = FALSE]
   data.frame(
-    tabulka = kept$tabulka,
-    popisek = kept$kos,
-    dolni = levels[match(kept$kos, labels)],
-    podil = kept$n / as.numeric(totals[kept$tabulka]),
+    tabulka = hist$tabulka,
+    popisek = format_number(signif(10^hist$kos, 3)),
+    dolni = hist$kos,
+    podil = hist$n / as.numeric(totals[hist$tabulka]),
     stringsAsFactors = FALSE
   )
-}
-
-anchor_hidden <- function(age) {
-  complement_hidden(age$kotva, age$zprav) | complement_hidden(age$kotva, age$jedna + age$vice)
 }
 
 age_table <- function(age) {
   counts <- c(age$zprav, age$bez_masky, age$jedna, age$vice, age$kotva, age$ciselny)
-  hidden <- c(
-    FALSE, age_hidden(age), anchor_hidden(age), complement_hidden(age$ciselny, age$zprav)
-  )
   data.frame(
     ukazatel = c(
       "Propouštěcí zprávy celkem", "Bez masky věku", "S jednou maskou věku",
       "S více maskami věku", "S kotvou \u201eis a ___ year old\u201c", "S číselným věkem"
     ),
-    n = hidden_count(counts, hidden),
-    podil = c("", hidden_percent(counts[-1], age$zprav, hidden[-1])),
+    n = format_number(counts),
+    podil = c("", percent_text(counts[-1], age$zprav)),
     stringsAsFactors = FALSE
   )
 }
@@ -301,17 +294,46 @@ quality_table <- function(quality, tables = c("discharge", "radiology")) {
   for (table in tables) {
     row <- quality[quality$tabulka == table, ]
     counts <- c(row$zprav, unlist(row[QUALITY_ROWS], use.names = FALSE))
-    hidden <- c(FALSE, complement_hidden(counts[-1], row$zprav))
-    out[[paste0("n_", table)]] <- hidden_count(counts, hidden)
-    out[[paste0("podil_", table)]] <- c("", hidden_percent(counts[-1], row$zprav, hidden[-1]))
+    out[[paste0("n_", table)]] <- format_number(counts)
+    out[[paste0("podil_", table)]] <- c("", percent_text(counts[-1], row$zprav))
   }
   out
 }
 
-published_reference_verdict <- function(markers, residual) {
+reference_verdict <- function(markers, residual) {
   means <- marker_means(markers, residual)
-  if (mean_text(means$presne, markers$zprav) == "–") {
-    return("nelze")
-  }
   marker_reference_verdict(means$presne, means$zbytkove)
+}
+
+marker_table <- function(markers, shown) {
+  cell <- function(column) {
+    vapply(
+      markers$tabulka,
+      function(table) percentile_cell(shown, table, "znacky", column),
+      character(1),
+      USE.NAMES = FALSE
+    )
+  }
+  data.frame(
+    tabulka = markers$tabulka,
+    zprav = format_number(markers$zprav),
+    se_znackou = format_number(markers$se_znackou),
+    se_znackou_podil = percent_text(markers$se_znackou, markers$zprav),
+    znacek = format_number(markers$znacek),
+    delsi_useky = format_number(markers$delsi_useky),
+    prumer = cell("prumer"),
+    p50 = cell("p50"),
+    p95 = cell("p95")
+  )
+}
+
+masks_table <- function(residual, markers) {
+  totals <- markers$zprav[match(residual$tabulka, markers$tabulka)]
+  data.frame(
+    tabulka = residual$tabulka,
+    vzor = residual$vzor,
+    zprav = format_number(residual$zprav),
+    podil = percent_text(residual$zprav, totals),
+    vyskytu = format_number(residual$vyskytu)
+  )
 }
