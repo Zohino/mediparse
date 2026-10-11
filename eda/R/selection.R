@@ -5,13 +5,14 @@ FUNNEL_STEPS <- c(
   "Bez přesných duplicit"
 )
 
-corpus_funnel <- function(con) {
+eligible_cte <- function(con) {
   metrics <- DBI::dbQuoteIdentifier(con, metrics_for(con, "discharge"))
-  rows <- DBI::dbGetQuery(con, sprintf("
+  sprintf("
     WITH base AS (
       SELECT
         d.note_id,
         d.subject_id,
+        d.hadm_id,
         d.hadm_id IS NOT NULL AND EXISTS (
           SELECT 1 FROM diagnoses_icd i WHERE i.hadm_id = d.hadm_id
         ) AS has_icd,
@@ -24,7 +25,19 @@ corpus_funnel <- function(con) {
       SELECT *, row_number() OVER (PARTITION BY fingerprint ORDER BY note_id) AS copy
       FROM base
       WHERE has_icd AND long_enough
-    ),
+    )
+  ", SHORT_LIMIT, metrics)
+}
+
+input_corpus_sql <- function(con) {
+  paste(
+    eligible_cte(con),
+    "SELECT note_id, subject_id, hadm_id FROM eligible WHERE copy = 1"
+  )
+}
+
+corpus_funnel <- function(con) {
+  rows <- DBI::dbGetQuery(con, paste0(eligible_cte(con), ",
     steps AS (
       SELECT 1 AS step, subject_id FROM base
       UNION ALL SELECT 2, subject_id FROM base WHERE has_icd
@@ -41,7 +54,7 @@ corpus_funnel <- function(con) {
       count(*) FILTER (WHERE notes > 1) AS vice_zprav
     FROM per_patient
     GROUP BY step
-  ", SHORT_LIMIT, metrics))
+  "))
   index <- match(seq_along(FUNNEL_STEPS), rows$step)
   counts <- function(column) {
     out <- as.numeric(rows[[column]][index])
