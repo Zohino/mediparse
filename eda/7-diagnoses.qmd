@@ -1,0 +1,247 @@
+---
+title: "Explorační analýza datové sady: krajina diagnóz"
+abstract: |
+  Dokument popisuje, jaké diagnózy nese vstupní korpus propouštěcích zpráv, a vychází jen z tabulky diagnóz ICD, bez textu zpráv. Uvádí zastoupení Charlsonových kategorií komorbidit, nejčastější tříznakové kódy zvlášť pro ICD-9 a ICD-10, prevalenci a souběh deseti kandidátních diagnóz a kódy kapitoly příznaků a symptomů. Z prevalence vybírá kandidáty v předem stanoveném pásmu, ověřuje, zda pool nevynechal častou kategorii, a jmenuje rizika pro mapování ICD-9 na ICD-10 a pro diverzitu štítků.
+---
+
+```{r}
+#| include: false
+library(reticulate)
+source("R/dua.R")
+source("R/db.R")
+source("R/patients.R")
+source("R/text.R")
+source("R/selection.R")
+source("R/diagnoses.R")
+source("R/export.R")
+eda_check_python()
+con <- eda_connect()
+candidates <- read_candidates(candidates_path())
+era <- era_summary(con)
+symptom <- symptom_share(era)
+charlson_raw <- charlson_counts(con)
+charlson <- charlson_published(charlson_raw, era$notes)
+ranking10 <- code_ranking(con, 10L)
+ranking9 <- code_ranking(con, 9L)
+symptoms10 <- code_ranking(con, 10L, SYMPTOM_PREFIXES$icd10)
+symptoms9 <- code_ranking(con, 9L, SYMPTOM_PREFIXES$icd9)
+prevalence <- suppress_prevalence(candidate_prevalence(con, candidates))
+reconciled <- reconcile_charlson(charlson, prevalence, candidates)
+charlson <- reconciled$charlson
+prevalence <- reconciled$prevalence
+cells <- cooccurrence_cells(cooccurrence(con, candidates))
+selection <- preselection(prevalence)
+audit <- uncovered_charlson(charlson, candidates, era$notes)
+redundancy <- redundant_pairs(cells)
+gaps <- era_gaps(prevalence)
+band_text <- sprintf(
+  "%.0f–%.0f %%", 100 * PREVALENCE_BAND[["low"]], 100 * PREVALENCE_BAND[["high"]]
+)
+ratio_text <- format(ERA_RATIO, decimal.mark = ",")
+label_of <- function(keys) unname(vapply(keys, function(key) candidates[[key]]$label_cs, character(1)))
+```
+
+# Úvod
+
+Tento sešit je sedmým z řady sešitů explorační analýzy. Předchozí sešity vymezily vstupní korpus a popsaly jeho pacienty. Tento sešit popisuje, jaké diagnózy korpus nese. Klade si tyto cíle:
+
+- popsat krajinu komorbidit podle Charlsonových kategorií,
+- uvést nejčastější tříznakové kódy zvlášť pro ICD-9 a ICD-10,
+- změřit prevalenci a souběh deseti kandidátních diagnóz a vybrat z nich kandidáty podle předem stanoveného pásma,
+- spočítat kódy kapitoly příznaků a symptomů jako první odhad rozsahu extrakce symptomů.
+
+Sešit pracuje jen s tabulkou diagnóz ICD. Zmínky diagnóz v textu zpráv, jejich shodu s kódy a výběr pětice diagnóz řeší následující sešit; tento sešit mu předává kandidáty a rizika.
+
+Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty. Diagnóza je kvaziidentifikátor, a proto se potlačuje každá buňka skupiny pacientů vymezené diagnózou, která má méně než deset zpráv nebo jejíž doplněk do počtu zpráv má méně než deset; doplněk by jinak šel dopočítat z přesně zveřejněného jmenovatele. Práh je pravidlo práce, DUA malé počty neupravuje. Přesně se zveřejňují jen metriky korpusu: počet zpráv a počty zpráv podle éry ICD.
+
+Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky. Kapitola @sec-shrnuti shrnuje rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
+
+# Data a metody {#sec-data}
+
+Sešit čte propouštěcí zprávy (`discharge`), diagnózy ICD (`diagnoses_icd`) a číselník diagnóz (`d_icd_diagnoses`). Všechny sloupce jsou v parquetu uloženy jako text a převádějí se přes `TRY_CAST`, takže nečíselná verze ICD nedá chybu, jen kód bez shody. Dotazy provádí DuckDB nad parquetem a jsou v `eda/R/diagnoses.R` s testy nad ručně vytvořenými tabulkami.
+
+Pojmy a jednotky jsou tyto:
+
+- *populací* je vstupní korpus z pátého sešitu: propouštěcí zprávy s kódem ICD, dlouhé aspoň `r SHORT_LIMIT` znaků a bez přesných duplicit; jednotkou je zpráva a kódy se připojují přes `hadm_id`. Výběr diagnóz se podle pátého sešitu počítá nad tímto korpusem. Prevalence proto nejsou srovnatelné s hodnotami počítanými nad všemi propouštěcími zprávami,
+- *shoda kódu s předponou*: kód se shoduje s kandidátem, když velkými písmeny a bez okrajových mezer začíná některou předponou své verze a verze ICD je 9, resp. 10. Kód téže předpony v jiné verzi se neshoduje,
+- *pool kandidátů* je deset diagnóz převzatých z konfigurace předchozího projektu (diabetes, srdeční selhání, CHOPN, chronické onemocnění ledvin, pneumonie, akutní infarkt myokardu, cerebrovaskulární onemocnění, fibrilace síní, sepse a akutní selhání ledvin). Předpony kandidátů, které odpovídají Charlsonově kategorii, odpovídají mapám Quan 2005 [@quan2005]; předpony pneumonie, fibrilace síní, sepse a akutního selhání ledvin jsou podle klasifikace ICD. Předpony jsou v `config/diagnosis_candidates.json`, aby definice, kterou sešit měří, byla táž, kterou použije výběr štítků. Obezita ani hypertenze v poolu nejsou,
+- *Charlsonovy kategorie* počítá balík R `comorbidity` [@gasparini2018] podle map Quan 2005 [@quan2005], které dávají 17 kategorií. Mapy se volají zvlášť pro ICD-9 a ICD-10 a zpráva má kategorii, když ji má kterýkoli kód jejího přijetí v kterékoli verzi. Hierarchie se neuplatňuje, protože jde o přítomnost každé kategorie, a diabetes bez komplikací a s komplikacemi se proto počítají každý zvlášť,
+- *žebříček* seskupuje kódy na první tři znaky (kódy ICD-9 začínající E na první čtyři) a řadí skupiny podle počtu zpráv, při shodě podle kódu. Jmenovatelem podílu je počet zpráv vstupního korpusu s aspoň jedním kódem dané verze; zpráva s kódy obou verzí patří do obou jmenovatelů. Název skupiny je název jejího nejčastějšího plného kódu s aspoň deseti zprávami z číselníku `d_icd_diagnoses`; nemá-li skupina takový kód, název je „neuvedeno“. Při shodě počtu rozhoduje nejmenší kód. Skupiny pod prahem potlačení se v žebříčku neukazují ani se nedoplňují řádkem „ostatní“,
+- *pásmo prevalence* `r band_text` zpráv je první kritérium výběru štítků a je stanoveno předem. Dolní mez zajišťuje dost pozitivních zpráv v každé části křížové validace, horní vyřazuje diagnózy tak časté, že klasifikace ztrácí rozlišovací smysl. Hodnoty pocházejí z pravidla stanoveného před měřením; měnit je po pohledu na data by bylo cherry-picking. Sešit pásmo jen aplikuje,
+- *souběh* je matice podílů P(sloupec | řádek), tedy podíl zpráv s kandidátem řádku, které mají i kandidáta sloupce. Dvojice se skryje v obou směrech, když má méně než deset zpráv s oběma kandidáty, méně než deset zpráv s kandidátem řádku bez kandidáta sloupce nebo méně než deset zpráv s kandidátem sloupce bez kandidáta řádku. Prevalence kandidáta v jedné éře se skryje spolu s prevalencí v druhé, protože rozdíl by prozradil počet zpráv obou verzí. Počet zpráv kandidáta a Charlsonovy kategorie, kterou kandidát pokrývá (pole `charlson`), se skryje, když absolutní rozdíl počtů kategorie a kandidáta, případně součtu kategorií a kandidáta, je pod deseti.
+
+# Výsledky {#sec-vysledky}
+
+## Souhrn vstupního korpusu {#sec-souhrn}
+
+Vstupní korpus tvoří `r format_number(era$notes)` zpráv. Jen kódy ICD-9 má `r format_number(era$only9)` zpráv, jen kódy ICD-10 `r format_number(era$only10)` a kódy obou verzí `r format_number(era$both)` zpráv. @tbl-souhrn uvádí souhrn včetně podílu zpráv s kódem kapitoly příznaků a symptomů.
+
+```{r}
+#| label: tbl-souhrn
+#| tbl-cap: "Souhrn vstupního korpusu podle éry ICD a podíl zpráv s kódem kapitoly příznaků."
+#| tbl-colwidths: [55, 25, 20]
+export_table(
+  era_table(era, symptom),
+  col.names = c("Ukazatel", "Zprávy", "Podíl (%)"),
+  align = "lrr"
+)
+```
+
+*Zdroj:* dotaz v DuckDB nad tabulkami `discharge` a `diagnoses_icd`; počty podle éry jsou metriky korpusu a uvádějí se přesně, podíl zpráv s kódem kapitoly R je potlačen podle pravidla výše.
+
+## Charlsonovy kategorie {#sec-charlson}
+
+@tbl-charlson a @fig-charlson uvádějí podíl zpráv s každou z 17 Charlsonových kategorií. Svislé čáry v grafu vymezují pásmo prevalence. Potlačené kategorie se v grafu nekreslí a v tabulce mají místo počtu text „potlačeno“.
+
+```{r}
+#| label: tbl-charlson
+#| tbl-cap: "Zprávy vstupního korpusu podle Charlsonových kategorií komorbidit."
+#| tbl-colwidths: [60, 20, 20]
+export_table(
+  charlson_table(charlson, era$notes),
+  col.names = c("Kategorie", "Zprávy", "Podíl (%)"),
+  align = "lrr"
+)
+```
+
+*Zdroj:* kódy z `diagnoses_icd`, mapy Quan 2005 v balíku `comorbidity`.
+
+```{r}
+#| label: fig-charlson
+#| fig-cap: "Podíl zpráv vstupního korpusu podle Charlsonových kategorií; svislé čáry vymezují pásmo prevalence 5–60 %, potlačené kategorie nejsou zobrazeny."
+#| fig-width: 6.5
+#| fig-height: 4.2
+drawn <- charlson[!is.na(charlson$n), , drop = FALSE]
+drawn$podil <- drawn$n / era$notes
+drawn$popisek <- factor(drawn$popisek, levels = drawn$popisek[order(drawn$podil)])
+plot <- ggplot2::ggplot(drawn, ggplot2::aes(podil, popisek)) +
+  ggplot2::geom_col() +
+  ggplot2::geom_vline(xintercept = unname(PREVALENCE_BAND), linetype = "dashed") +
+  ggplot2::scale_x_continuous(labels = percent_axis) +
+  ggplot2::labs(x = "Podíl zpráv", y = NULL) +
+  theme_thesis()
+export_figure(plot, height_cm = 10.5)
+```
+
+## Nejčastější kódy {#sec-zebricky}
+
+@tbl-icd10-top a @tbl-icd9-top uvádějí 20 nejčastějších tříznakových skupin kódů zvlášť pro ICD-10 a ICD-9, protože tříznakové kódy obou verzí nejsou srovnatelné. Zobrazují se jen skupiny, jejichž počet i doplněk do jmenovatele dosahují deseti zpráv.
+
+```{r}
+#| label: tbl-icd10-top
+#| tbl-cap: "Nejčastější tříznakové skupiny kódů ICD-10 podle počtu zpráv."
+#| tbl-colwidths: [12, 52, 18, 18]
+export_table(
+  ranking_table(ranking10),
+  col.names = c("Kód", "Název nejčastějšího kódu skupiny", "Zprávy", "Podíl (%)"),
+  align = "llrr",
+  code = "kod"
+)
+```
+
+*Zdroj:* `diagnoses_icd` a `d_icd_diagnoses`; jmenovatelem je počet zpráv s aspoň jedním kódem ICD-10.
+
+```{r}
+#| label: tbl-icd9-top
+#| tbl-cap: "Nejčastější tříznakové skupiny kódů ICD-9 podle počtu zpráv."
+#| tbl-colwidths: [12, 52, 18, 18]
+export_table(
+  ranking_table(ranking9),
+  col.names = c("Kód", "Název nejčastějšího kódu skupiny", "Zprávy", "Podíl (%)"),
+  align = "llrr",
+  code = "kod"
+)
+```
+
+*Zdroj:* `diagnoses_icd` a `d_icd_diagnoses`; jmenovatelem je počet zpráv s aspoň jedním kódem ICD-9.
+
+## Kandidátní diagnózy {#sec-kandidati}
+
+@tbl-kandidati uvádí prevalenci deseti kandidátů v celém korpusu a zvlášť mezi zprávami s kódy ICD-9 a ICD-10. Velký rozdíl mezi érami ukazuje, že předpony obou verzí nemusí znamenat totéž. Poslední sloupec zařazuje kandidáta k pásmu `r band_text`.
+
+```{r}
+#| label: tbl-kandidati
+#| tbl-cap: "Prevalence kandidátních diagnóz ve vstupním korpusu a podle éry ICD a jejich poloha vůči pásmu prevalence."
+#| tbl-colwidths: [28, 14, 14, 14, 14, 16]
+export_table(
+  candidate_table(prevalence, candidates),
+  col.names = c("Kandidát", "Zprávy", "Korpus (%)", "ICD-9 (%)", "ICD-10 (%)", "Pásmo"),
+  align = "lrrrrl"
+)
+```
+
+*Zdroj:* `diagnoses_icd`; jmenovatelem je počet zpráv korpusu, resp. zpráv s kódem dané verze.
+
+## Souběh kandidátů {#sec-soubeh}
+
+@fig-soubeh ukazuje, jaký podíl zpráv s kandidátem na řádku má i kandidáta ve sloupci. Skryté buňky jsou prázdné a diagonála se nekreslí.
+
+```{r}
+#| label: fig-soubeh
+#| fig-cap: "Souběh kandidátních diagnóz: podíl zpráv s kandidátem na řádku, které mají i kandidáta ve sloupci; skryté buňky jsou prázdné."
+#| fig-width: 6.5
+#| fig-height: 5
+levels_cs <- label_of(names(candidates))
+tiles <- cells
+tiles$radek <- factor(label_of(cells$radek), levels = rev(levels_cs))
+tiles$sloupec <- factor(label_of(cells$sloupec), levels = levels_cs)
+tiles$hodnota <- ifelse(is.na(tiles$podil), "", sprintf("%.0f", 100 * tiles$podil))
+plot <- ggplot2::ggplot(tiles, ggplot2::aes(sloupec, radek, fill = podil)) +
+  ggplot2::geom_tile(color = "white") +
+  ggplot2::geom_text(ggplot2::aes(label = hodnota), family = THESIS_FONT, size = 3) +
+  ggplot2::scale_fill_gradient(low = "white", high = "grey35", limits = c(0, 1), na.value = "white", labels = percent_axis) +
+  ggplot2::scale_x_discrete(drop = FALSE, position = "top") +
+  ggplot2::scale_y_discrete(drop = FALSE) +
+  ggplot2::labs(x = NULL, y = NULL, fill = "Podíl") +
+  theme_thesis() +
+  ggplot2::theme(axis.text.x.top = ggplot2::element_text(angle = 45, hjust = 0, vjust = 0))
+export_figure(plot, height_cm = 12)
+```
+
+## Příznaky a symptomy {#sec-priznaky}
+
+Kapitola R mezinárodní klasifikace ICD-10 a kódy 780–799 klasifikace ICD-9 označují příznaky a symptomy. @tbl-priznaky-icd10 a @tbl-priznaky-icd9 uvádějí jejich nejčastější tříznakové skupiny. Slouží jako reference symptomů pro extrakci; zmínky symptomů v textu měří následující sešit.
+
+```{r}
+#| label: tbl-priznaky-icd10
+#| tbl-cap: "Nejčastější tříznakové skupiny kódů kapitoly R (ICD-10)."
+#| tbl-colwidths: [12, 52, 18, 18]
+export_table(
+  ranking_table(symptoms10),
+  col.names = c("Kód", "Název nejčastějšího kódu skupiny", "Zprávy", "Podíl (%)"),
+  align = "llrr",
+  code = "kod"
+)
+```
+
+*Zdroj:* `diagnoses_icd` a `d_icd_diagnoses`; jmenovatelem je počet zpráv s aspoň jedním kódem ICD-10.
+
+```{r}
+#| label: tbl-priznaky-icd9
+#| tbl-cap: "Nejčastější tříznakové skupiny kódů 780–799 (ICD-9)."
+#| tbl-colwidths: [12, 52, 18, 18]
+export_table(
+  ranking_table(symptoms9),
+  col.names = c("Kód", "Název nejčastějšího kódu skupiny", "Zprávy", "Podíl (%)"),
+  align = "llrr",
+  code = "kod"
+)
+```
+
+*Zdroj:* `diagnoses_icd` a `d_icd_diagnoses`; jmenovatelem je počet zpráv s aspoň jedním kódem ICD-9.
+
+# Shrnutí a rozhodnutí {#sec-shrnuti}
+
+Dokument popsal krajinu diagnóz vstupního korpusu. Pro další práci z toho plyne:
+
+- **Předvýběr kandidátů.** `r switch(selection$kind, vyber = paste0("Do rubriky následujícího sešitu postupují kandidáti v pásmu ", band_text, " zpráv: ", join_labels(label_of(selection$in_band)), ". Pod pásmem jsou: ", join_labels(label_of(selection$below)), ". Nad pásmem jsou: ", join_labels(label_of(selection$above)), ". Pro potlačení nelze posoudit: ", join_labels(label_of(selection$unknown)), ". O pětici sešit nerozhoduje, protože mu chybí shoda s textem."), nelze = paste0("Předvýběr nelze zveřejnit: žádný kandidát nemá aspoň deset zpráv a aspoň deset zpráv bez něj, takže nelze zařadit nikoho do pásma ", band_text, "."))`
+- **Audit proti cherry-pickingu.** `r switch(audit$kind, audit = if (length(audit$categories) == 0L) paste0("Žádná Charlsonova kategorie v pásmu ", band_text, " není mimo pool: pool pokrývá krajinu komorbidit. Následující sešit je přesto posoudí podle stejné rubriky.") else paste0("Charlsonovy kategorie v pásmu ", band_text, ", které nepokrývá žádný kandidát: ", join_labels(unname(CHARLSON_LABELS[audit$categories])), ". Následující sešit je posoudí podle stejné rubriky, aby výběr nevynechal častou diagnózu."), nelze = "Audit nelze provést: žádná Charlsonova kategorie nemá aspoň deset zpráv a aspoň deset zpráv bez ní.")`
+- **Redundance kandidátů.** `r switch(redundancy$kind, dvojice = if (nrow(redundancy$pairs) == 0L) paste0("Žádná zveřejnitelná dvojice kandidátů nemá P(sloupec | řádek) aspoň 0,5; ", redundancy$hidden, " buněk souběhu je skrytých.") else paste0("Dvojice s P(sloupec | řádek) aspoň 0,5 jsou riziko pro kritérium diverzity, protože většina zpráv s prvním kandidátem má i druhého: ", join_labels(paste0(label_of(redundancy$pairs$radek), " → ", label_of(redundancy$pairs$sloupec))), ". Skrytých buněk souběhu je ", redundancy$hidden, "."), nelze = "Redundanci nelze posoudit: všechny buňky souběhu jsou skryté.")`
+- **Rozdíly mezi érami.** `r switch(gaps$kind, rozdily = if (nrow(gaps$gaps) == 0L) paste0("Žádný kandidát nemá prevalenci v jedné éře víc než ", ratio_text, "krát větší než v druhé. Neposouditelní kvůli potlačení: ", join_labels(label_of(gaps$unknown)), ".") else paste0("Prevalence v jedné éře je víc než ", ratio_text, "krát větší než v druhé u kandidátů: ", join_labels(label_of(gaps$gaps$kandidat)), ". Mapování jejich předpon mezi ICD-9 a ICD-10 ověří úloha o sjednocení štítků přes mapování GEMs. Neposouditelní kvůli potlačení: ", join_labels(label_of(gaps$unknown)), "."), nelze = "Rozdíly mezi érami nelze posoudit: žádný kandidát nemá zveřejnitelnou prevalenci v obou érách.")`
+- **Příznaky.** `r switch(symptom$kind, share = paste0("Referencí symptomů pro extrakci jsou kódy kapitoly R a 780–799, které má ", percent_label(symptom$n, symptom$total), " zpráv korpusu. Zmínky symptomů v textu měří následující sešit, který z nich odhadne rozsah úlohy."), nelze = "Podíl zpráv s kódem kapitoly příznaků nelze zveřejnit: kód má méně než deset zpráv nebo méně než deset zpráv kód nemá. Zmínky symptomů v textu měří následující sešit.")`
+
+# Omezení {#sec-omezeni}
+
+Kód ICD říká, že hospitalizace měla diagnózu, ne že ji zpráva zmiňuje; shodu s textem měří následující sešit. Prevalence se počítá nad vstupním korpusem, a proto nejsou srovnatelné s hodnotami nad všemi propouštěcími zprávami. Prevalence v různých érách ICD mohou odrážet změnu kódovací praxe i změnu populace, sešit je od sebe neodliší. Předpony kandidátů jsou ruční mapování z konfigurace předchozího projektu a nemusí odpovídat klinické představě o diagnóze. Charlsonovy kategorie vycházejí z map Quan 2005, které se omezují na komorbidity a nepokrývají všechny časté diagnózy. Skupiny pod prahem potlačení nejsou vidět, takže žebříčky ukazují jen časté kódy a ani Charlsonovy kategorie ani kandidáti s malým počtem se nedají posoudit. Název skupiny je název jejího nejčastějšího plného kódu a nemusí vystihovat celou skupinu.
+
+{{< include _partials/appendix.qmd >}}
