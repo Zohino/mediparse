@@ -102,14 +102,16 @@ format_percentiles <- function(percentiles) {
   out
 }
 
+log_bin_sql <- function(column) sprintf("floor(log10(%s) * 10) / 10", column)
+
 length_histogram <- function(con, tables) {
   out <- per_table(con, tables, function(metrics) sprintf("
-    SELECT floor(log10(chars) * 10) / 10 AS kos, count(*) AS n
+    SELECT %s AS kos, count(*) AS n
     FROM %s
     WHERE chars > 0
     GROUP BY kos
     ORDER BY kos
-  ", metrics))
+  ", log_bin_sql("chars"), metrics))
   as_numeric_columns(out, c("kos", "n"))
 }
 
