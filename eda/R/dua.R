@@ -2,12 +2,12 @@ DUA_THRESHOLD <- 10L
 NBSP <- "\u00a0"
 DUA_OTHER <- sprintf("ostatní (n < %d)", DUA_THRESHOLD)
 
+format_number <- function(x) {
+  format(x, big.mark = NBSP, scientific = FALSE, trim = TRUE)
+}
+
 dua_count <- function(n) {
-  ifelse(
-    n < DUA_THRESHOLD,
-    sprintf("<%s%d", NBSP, DUA_THRESHOLD),
-    format(n, big.mark = NBSP, scientific = FALSE, trim = TRUE)
-  )
+  ifelse(n < DUA_THRESHOLD, sprintf("<%s%d", NBSP, DUA_THRESHOLD), format_number(n))
 }
 
 dua_hidden <- function(n) {
@@ -99,4 +99,27 @@ dua_share <- function(df) {
 
 dua_quantile_ok <- function(n, p) {
   round(n * pmin(p, 1 - p), 9) >= DUA_THRESHOLD
+}
+
+complement_hidden <- function(n, total) {
+  total <- rep_len(total, length(n))
+  vapply(
+    seq_along(n),
+    function(index) dua_hidden(c(n[index], total[index] - n[index]))[1],
+    logical(1)
+  )
+}
+
+hidden_count <- function(n, hidden) {
+  ifelse(hidden, paste0("<", NBSP, DUA_THRESHOLD), dua_count(n))
+}
+
+hidden_percent <- function(n, total, hidden) {
+  ifelse(hidden, "\u2013", dua_percent(n, total))
+}
+
+age_hidden <- function(age) {
+  groups <- c("bez_masky", "jedna", "vice")
+  hidden <- dua_hidden(unlist(age[groups], use.names = FALSE))
+  setNames(hidden, groups)
 }
