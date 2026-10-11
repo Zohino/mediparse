@@ -77,6 +77,18 @@ dua_decimal <- function(x) {
   format(round(x, 1), nsmall = 1, decimal.mark = ",", trim = TRUE)
 }
 
+number_text <- function(x) {
+  ifelse(is.na(x), "–", format_number(x))
+}
+
+percent_text <- function(n, total) {
+  total <- rep_len(total, length(n))
+  out <- rep("–", length(n))
+  known <- total > 0
+  out[known] <- dua_decimal(100 * n[known] / total[known])
+  out
+}
+
 dua_percent <- function(n, total) {
   total <- rep_len(total, length(n))
   hidden <- n < DUA_THRESHOLD | total == 0
