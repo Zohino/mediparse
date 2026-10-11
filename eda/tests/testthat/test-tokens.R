@@ -263,3 +263,178 @@ test_that("funkce nad tokeny nespadnou na jedinečných řetězcích syntetické
   expect_no_error(token_histogram(con, tables, "cele"))
   expect_no_error(format_percentiles(token_percentiles(con, tables, "cele")))
 })
+
+test_that("translation_limit dává známé hodnoty a hranici zprávy, která se ještě vejde", {
+  expect_equal(translation_limit(2048, 2.2, 75), 616.5625)
+  expect_equal(translation_limit(100, 1, 0), 50)
+})
+
+test_that("spodní mez překladu na hranici limitu: 616 tokenů je jedna část, 617 dvě", {
+  windows <- data.frame(
+    tokenizer = "slova", specials = 0, capacity = translation_limit(2048, 2.2, 75), scale = 1,
+    stringsAsFactors = FALSE
+  )
+  con <- mimic_con(discharge = text_notes(c(words_of(616), words_of(617))))
+  note_tokens(con, "discharge", list(slova = list(tok = fake_tokenizer, special = FALSE)))
+  out <- window_summary(con, "discharge", windows)
+
+  expect_equal(out$v_okne, 1)
+  expect_equal(out$casti, 1 + 2)
+})
+
+test_that("token_windows složí okna encoderů a překladu a měřítko českého textu", {
+  out <- token_windows(c(xlmr = 2, mdeberta = 2), translation = c(gemma = 616.5625), scale = 1.5)
+
+  expect_equal(out$tokenizer, c("xlmr", "mdeberta", "gemma"))
+  expect_equal(out$specials, c(2, 2, 0))
+  expect_equal(out$capacity, c(510, 510, 616.5625))
+  expect_equal(out$scale, c(1.5, 1.5, 1.5))
+})
+
+fake_settings <- function(split = function(text, fits) text) {
+  list(
+    model = "m", revision = "r", window = 2048L, split_ratio = 2.2,
+    prepare = list(
+      `_token_ids` = function(tok, text) seq_len(75L + length(strsplit(text, " ")[[1]])),
+      `_fits` = function(tok, text) length(strsplit(text, " ")[[1]]) <= 3L
+    ),
+    note_parts = list(split = split)
+  )
+}
+
+test_that("translation_overhead odečte od délky promptu délku zdroje bez speciálních tokenů", {
+  tok <- function(texts, add_special_tokens = TRUE) {
+    list(input_ids = lapply(texts, function(text) seq_len(length(strsplit(text, " ")[[1]]))))
+  }
+
+  expect_equal(translation_overhead(fake_settings(), tok), 75L)
+})
+
+test_that("translation_fits volá _fits z přípravy překladu", {
+  fits <- translation_fits(fake_settings(), tok = NULL)
+
+  expect_true(fits("a b c"))
+  expect_false(fits("a b c d"))
+})
+
+unsplittable <- function(message) {
+  stop(structure(
+    class = c("note_parts.UnsplittableError", "python.builtin.ValueError", "error", "condition"),
+    list(message = message, call = NULL)
+  ))
+}
+
+test_that("translation_split vrátí NULL pro nedělitelnou zprávu a jinou chybu nechá projít", {
+  fits <- function(text) TRUE
+  nedelitelna <- translation_split(fake_settings(function(text, fits) unsplittable("řádek")), fits)
+  jina <- translation_split(fake_settings(function(text, fits) stop("jiná chyba")), fits)
+
+  expect_null(nedelitelna("a"))
+  expect_error(jina("a"), "jiná chyba")
+  expect_equal(translation_split(fake_settings(), fits)("a b"), "a b")
+})
+
+test_that("translation_settings čte konstanty ze skutečné přípravy překladu bez stahování modelu", {
+  settings <- translation_settings(Sys.getenv("PIXI_PROJECT_ROOT"))
+
+  expect_equal(settings$window, 2048)
+  expect_equal(settings$split_ratio, 2.2)
+  expect_equal(settings$model, "google/translategemma-27b-it")
+  expect_equal(nchar(settings$revision), 40)
+  expect_true(is.function(settings$prepare$`_fits`))
+  expect_true(is.function(settings$note_parts$split))
+})
+
+chunk_split <- function(size) {
+  function(text) {
+    words <- strsplit(text, " ")[[1]]
+    if (length(words) <= 4L) {
+      return(text)
+    }
+    parts <- split(words, ceiling(seq_along(words) / size))
+    vapply(parts, paste, character(1), collapse = " ", USE.NAMES = FALSE)
+  }
+}
+
+word_count <- function(text) length(strsplit(text, " ")[[1]])
+
+sample_of <- function(texts, split = chunk_split(3), limit = 4, n = 1000L) {
+  con <- mimic_con(discharge = if (length(texts) > 0L) text_notes(texts))
+  split_sample(
+    con, "discharge",
+    fits = function(text) word_count(text) <= 4L,
+    split = split, length_of = word_count, limit = limit, n = n
+  )
+}
+
+test_that("sample_notes vybírá deterministicky a menší tabulka vrátí všechno", {
+  con <- mimic_con(discharge = text_notes(vapply(1:20, words_of, character(1))))
+
+  first <- sample_notes(con, "discharge", 5L)
+  second <- sample_notes(con, "discharge", 5L)
+
+  expect_equal(first$note_id, second$note_id)
+  expect_equal(nrow(first), 5)
+  expect_equal(nrow(sample_notes(con, "discharge", 100L)), 20)
+})
+
+test_that("sample_notes vynechá prázdné a chybějící texty", {
+  con <- mimic_con(discharge = text_notes(c("", NA, "a")))
+
+  expect_equal(sample_notes(con, "discharge", 10L)$text, "a")
+})
+
+test_that("split_sample porovná přesné dělení se spodní mezí", {
+  out <- sample_of(c(words_of(3), words_of(8)))
+
+  expect_equal(out$zprav, 2)
+  expect_equal(out$deleno, 1)
+  expect_equal(out$casti_presne, 1 + 3)
+  expect_equal(out$casti_dolni, 1 + 2)
+  expect_equal(out$pomer, 4 / 3)
+  expect_equal(out$neshod, 0)
+  expect_equal(out$nedelitelnych, 0)
+})
+
+test_that("split_sample spočítá zprávy, u nichž se vzorec neshoduje s fits", {
+  out <- sample_of(c(words_of(4), words_of(3)), limit = 3.5)
+
+  expect_equal(out$neshod, 1)
+})
+
+test_that("split_sample spočítá nedělitelné zprávy zvlášť a do částí je nezahrne", {
+  split <- function(text) if (word_count(text) > 6L) NULL else chunk_split(3)(text)
+  out <- sample_of(c(words_of(8), words_of(6), words_of(2)), split = split)
+
+  expect_equal(out$nedelitelnych, 1)
+  expect_equal(out$casti_presne, 2 + 1)
+  expect_equal(out$casti_dolni, 2 + 1)
+})
+
+test_that("split_sample vezme jen n zpráv a pro prázdný zdroj vrátí nuly bez poměru", {
+  expect_equal(sample_of(vapply(1:10, words_of, character(1)), n = 3L)$zprav, 3)
+
+  out <- sample_of(character())
+  expect_equal(c(out$zprav, out$casti_presne, out$casti_dolni), c(0, 0, 0))
+  expect_true(is.na(out$pomer))
+})
+
+test_that("sample_table formátuje počty, podíl dělených zpráv a poměr", {
+  sample <- data.frame(
+    tabulka = "discharge", zprav = 1000, nedelitelnych = 0, deleno = 400,
+    casti_presne = 1500, casti_dolni = 1400, pomer = 1500 / 1400, neshod = 12,
+    stringsAsFactors = FALSE
+  )
+  out <- sample_table(sample)
+
+  expect_equal(out$tabulka, "discharge")
+  expect_equal(out$pomer, "1,07")
+  expect_equal(out$deleno_podil, "40,0")
+  expect_equal(out$neshod, "12")
+})
+
+test_that("translation_verdict rozlišuje korpus bez dělení a s dělením", {
+  expect_equal(translation_verdict(0, 100), "nedeli")
+  expect_equal(translation_verdict(30, 100), "deli")
+  expect_equal(translation_verdict(0, 0), "nelze")
+})

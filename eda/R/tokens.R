@@ -154,3 +154,115 @@ encoder_verdict <- function(share, median, window) {
   }
   if (median <= window) "vetsina" else "chunkovani"
 }
+
+OVERHEAD_SENTENCE <- "The weather is nice today."
+SAMPLE_SIZE <- 1000L
+UNSPLITTABLE_CLASS <- "note_parts.UnsplittableError"
+
+translation_settings <- function(root) {
+  path <- file.path(root, "translation")
+  prepare <- reticulate::import_from_path("prepare", path = path)
+  note_parts <- reticulate::import_from_path("note_parts", path = path)
+  list(
+    model = prepare$MODEL,
+    revision = prepare$REVISION,
+    window = prepare$WINDOW,
+    split_ratio = prepare$SPLIT_RATIO,
+    prepare = prepare,
+    note_parts = note_parts
+  )
+}
+
+translation_overhead <- function(settings, tok) {
+  prompt <- length(settings$prepare$`_token_ids`(tok, OVERHEAD_SENTENCE))
+  source <- token_lengths(tok, OVERHEAD_SENTENCE, FALSE, strip = TRUE)
+  as.integer(prompt - source)
+}
+
+translation_limit <- function(window, split_ratio, overhead) {
+  (window - overhead) / (1 + split_ratio)
+}
+
+translation_fits <- function(settings, tok) {
+  function(text) settings$prepare$`_fits`(tok, text)
+}
+
+translation_split <- function(settings, fits) {
+  function(text) {
+    tryCatch(
+      settings$note_parts$split(text, fits),
+      error = function(error) {
+        if (inherits(error, UNSPLITTABLE_CLASS)) NULL else stop(error)
+      }
+    )
+  }
+}
+
+token_windows <- function(encoders, translation, scale = 1) {
+  data.frame(
+    tokenizer = c(names(encoders), names(translation)),
+    specials = c(unname(encoders), rep(0, length(translation))),
+    capacity = c(ENCODER_WINDOW - unname(encoders), unname(translation)),
+    scale = scale,
+    stringsAsFactors = FALSE
+  )
+}
+
+sample_notes <- function(con, table, n = SAMPLE_SIZE) {
+  DBI::dbGetQuery(con, sprintf("
+    SELECT note_id, text
+    FROM %s
+    WHERE coalesce(length(text), 0) > 0
+    ORDER BY hash(note_id), note_id
+    LIMIT %d
+  ", DBI::dbQuoteIdentifier(con, table), as.integer(n)))
+}
+
+split_sample <- function(con, table, fits, split, length_of, limit, n = SAMPLE_SIZE) {
+  notes <- sample_notes(con, table, n)
+  lengths <- vapply(notes$text, length_of, numeric(1), USE.NAMES = FALSE)
+  disagree <- vapply(seq_along(lengths), function(index) {
+    (lengths[index] <= limit) != fits(notes$text[index])
+  }, logical(1))
+  parts <- lapply(notes$text, split)
+  splittable <- !vapply(parts, is.null, logical(1))
+  exact <- vapply(parts[splittable], length, numeric(1))
+  lower <- sum(ceiling(lengths[splittable] / limit))
+  data.frame(
+    tabulka = table,
+    zprav = nrow(notes),
+    nedelitelnych = sum(!splittable),
+    deleno = sum(exact > 1),
+    casti_presne = sum(exact),
+    casti_dolni = lower,
+    pomer = if (lower > 0) sum(exact) / lower else NA_real_,
+    neshod = sum(disagree),
+    stringsAsFactors = FALSE
+  )
+}
+
+ratio_text <- function(x) {
+  ifelse(is.na(x), "–", format(round(x, 2), nsmall = 2, decimal.mark = ",", trim = TRUE))
+}
+
+sample_table <- function(sample) {
+  data.frame(
+    tabulka = sample$tabulka,
+    zprav = format_number(sample$zprav),
+    deleno = format_number(sample$deleno),
+    deleno_podil = percent_text(sample$deleno, sample$zprav),
+    casti_presne = format_number(sample$casti_presne),
+    casti_dolni = format_number(sample$casti_dolni),
+    pomer = ratio_text(sample$pomer),
+    neshod = format_number(sample$neshod),
+    nedelitelnych = format_number(sample$nedelitelnych),
+    stringsAsFactors = FALSE
+  )
+}
+
+translation_verdict <- function(divided, total) {
+  if (total == 0) {
+    return("nelze")
+  }
+  if (divided == 0) "nedeli" else "deli"
+}
