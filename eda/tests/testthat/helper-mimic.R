@@ -2,7 +2,10 @@ EMPTY_TABLES <- list(
   discharge = c("note_id", "subject_id", "hadm_id", "text"),
   radiology = c("note_id", "subject_id", "hadm_id", "text"),
   diagnoses_icd = c("hadm_id", "icd_code", "icd_version"),
-  patients = c("subject_id", "anchor_year_group")
+  patients = c("subject_id", "anchor_year_group", "gender", "anchor_age", "anchor_year"),
+  admissions = c(
+    "hadm_id", "subject_id", "admittime", "insurance", "language", "marital_status", "race"
+  )
 )
 
 text_frame <- function(rows, columns) {
@@ -12,7 +15,11 @@ text_frame <- function(rows, columns) {
       stringsAsFactors = FALSE
     ))
   }
-  as.data.frame(rows, stringsAsFactors = FALSE)
+  frame <- as.data.frame(rows, stringsAsFactors = FALSE)
+  for (column in setdiff(columns, names(frame))) {
+    frame[[column]] <- rep(NA_character_, nrow(frame))
+  }
+  frame
 }
 
 mimic_con <- function(..., env = parent.frame()) {
