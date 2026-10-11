@@ -1,4 +1,3 @@
-UNKNOWN_LABEL <- "neuvedeno"
 OTHER_VALUE <- "jiné"
 OTHER_RACE <- "jiná"
 MASKED_AGE <- 91L
