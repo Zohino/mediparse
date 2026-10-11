@@ -1,4 +1,5 @@
 DUA_THRESHOLD <- 10L
+UNKNOWN_LABEL <- "neuvedeno"
 NBSP <- "\u00a0"
 DUA_OTHER <- sprintf("ostatní (n < %d)", DUA_THRESHOLD)
 
@@ -89,4 +90,10 @@ share_table <- function(df) {
   out$n <- number_text(df$n)
   out$podil <- percent_text(df$n, sum(df$n))
   out
+}
+
+dua_binary <- function(n, total) {
+  total <- rep_len(total, length(n))
+  hidden <- is.na(n) | is.na(total) | n < DUA_THRESHOLD | total - n < DUA_THRESHOLD
+  ifelse(hidden, NA_real_, as.numeric(n))
 }

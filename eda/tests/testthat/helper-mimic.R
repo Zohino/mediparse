@@ -2,6 +2,7 @@ EMPTY_TABLES <- list(
   discharge = c("note_id", "subject_id", "hadm_id", "text"),
   radiology = c("note_id", "subject_id", "hadm_id", "text"),
   diagnoses_icd = c("hadm_id", "icd_code", "icd_version"),
+  d_icd_diagnoses = c("icd_code", "icd_version", "long_title"),
   patients = c("subject_id", "anchor_year_group", "gender", "anchor_age", "anchor_year"),
   admissions = c(
     "hadm_id", "subject_id", "admittime", "insurance", "language", "marital_status", "race"
