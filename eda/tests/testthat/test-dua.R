@@ -116,6 +116,29 @@ test_that("dua_percent přijme skalární jmenovatel pro vektor čitatelů", {
   expect_equal(dua_percent(c(5, 20), 100), c("–", "20,0"))
 })
 
+test_that("dua_share přidá podíl z celku před potlačením", {
+  df <- data.frame(kategorie = c("velká", "malá", "střední"), n = c(80L, 4L, 16L))
+  out <- dua_share(df)
+
+  expect_named(out, c("kategorie", "n", "podil"))
+  expect_equal(out$kategorie, c("velká", "ostatní (n < 10)"))
+  expect_equal(out$n, c("80", "20"))
+  expect_equal(out$podil, c("80,0", "20,0"))
+})
+
+test_that("dua_share zveřejní podíl sloučeného řádku, když práh přesáhne", {
+  df <- data.frame(kategorie = c("velká", "a", "b"), n = c(90L, 6L, 5L))
+
+  expect_equal(dua_share(df)$podil, c("89,1", "10,9"))
+})
+
+test_that("dua_share zvládne prázdnou tabulku", {
+  out <- dua_share(data.frame(kategorie = character(), n = integer()))
+
+  expect_equal(nrow(out), 0L)
+  expect_named(out, c("kategorie", "n", "podil"))
+})
+
 test_that("dua_hidden skryje n pod prahem", {
   expect_equal(dua_hidden(c(100, 200, 50)), c(FALSE, FALSE, FALSE))
   expect_equal(dua_hidden(c(0, 100, 200)), c(TRUE, FALSE, FALSE))
