@@ -6,10 +6,6 @@ format_number <- function(x) {
   format(x, big.mark = NBSP, scientific = FALSE, trim = TRUE)
 }
 
-dua_count <- function(n) {
-  ifelse(n < DUA_THRESHOLD, sprintf("<%s%d", NBSP, DUA_THRESHOLD), format_number(n))
-}
-
 dua_hidden <- function(n) {
   hidden <- n < DUA_THRESHOLD
   total <- sum(n[hidden])
@@ -67,12 +63,6 @@ dua_suppress <- function(df, by = NULL) {
   out
 }
 
-dua_table <- function(df) {
-  out <- dua_suppress(df)
-  out$n <- dua_count(out$n)
-  out
-}
-
 dua_decimal <- function(x) {
   format(round(x, 1), nsmall = 1, decimal.mark = ",", trim = TRUE)
 }
@@ -98,25 +88,5 @@ share_table <- function(df) {
   out <- df
   out$n <- number_text(df$n)
   out$podil <- percent_text(df$n, sum(df$n))
-  out
-}
-
-dua_percent <- function(n, total) {
-  total <- rep_len(total, length(n))
-  hidden <- n < DUA_THRESHOLD | total == 0
-  out <- rep("\u2013", length(n))
-  out[!hidden] <- dua_decimal(100 * n[!hidden] / total[!hidden])
-  out
-}
-
-dua_percent_text <- function(n, total) {
-  share <- dua_percent(n, total)
-  ifelse(share == "\u2013", share, paste0(share, NBSP, "%"))
-}
-
-dua_share <- function(df) {
-  out <- dua_suppress(df)
-  out$podil <- dua_percent(out$n, sum(df$n))
-  out$n <- dua_count(out$n)
   out
 }
