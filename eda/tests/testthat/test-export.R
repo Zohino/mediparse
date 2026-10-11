@@ -209,3 +209,29 @@ test_that("export_figure odmítne neplatný label", {
     "label"
   )
 })
+
+test_that("latex_escape escapuje < a > a nechá * a [ ], které v textu nic neznamenají", {
+  expect_equal(latex_escape("<…>"), "\\textless{}…\\textgreater{}")
+  expect_equal(latex_escape("[**…**]"), "[**…**]")
+  expect_equal(latex_escape("___"), "\\_\\_\\_")
+})
+
+test_that("export_table s code obalí popisky vzorů a escapuje je i v hlavičce", {
+  dir <- withr::local_tempdir()
+  md <- export_table(
+    data.frame(vzor = c("___", "[**…**]", "<…>", "XXX"), n = c("1", "2", "3", "4")),
+    col.names = c("Vzor <a>", "Počet"),
+    align = "lr",
+    code = "vzor",
+    label = "tbl-vzory",
+    widths = NULL,
+    dir = dir
+  )
+  tex <- read_tex(dir, "tbl-vzory")
+
+  expect_match(tex, "\\texttt{\\_\\_\\_}", fixed = TRUE)
+  expect_match(tex, "\\texttt{[**…**]}", fixed = TRUE)
+  expect_match(tex, "\\texttt{\\textless{}…\\textgreater{}}", fixed = TRUE)
+  expect_match(tex, "Vzor \\textless{}a\\textgreater{}", fixed = TRUE)
+  expect_match(paste(as.character(md), collapse = "\n"), "`___`", fixed = TRUE)
+})
