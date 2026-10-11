@@ -240,3 +240,47 @@ test_that("percent_axis formátuje podíl s desetinnou čárkou a pevnou mezerou
   expect_equal(percent_axis(c(0, 0.5, 1)), paste0(c("0", "50", "100"), NBSP, "%"))
   expect_equal(percent_axis(0.125), paste0("12,5", NBSP, "%"))
 })
+
+lightness <- function(colour) {
+  grDevices::convertColor(t(grDevices::col2rgb(colour) / 255), "sRGB", "Lab")[, 1]
+}
+
+greyscale <- function(colour) {
+  drop(c(0.299, 0.587, 0.114) %*% (grDevices::col2rgb(colour) / 255))
+}
+
+layer_values <- function(plot, aesthetic) {
+  unique(ggplot2::ggplot_build(plot)$data[[1]][[aesthetic]])
+}
+
+test_that("kategoriální paleta je z Okabe–Ito a v šedi se barvy nesplynou", {
+  expect_gte(length(PALETTE_CATEGORICAL), max(length(ICD_ERAS) + 1L, length(GENDER_LABELS)))
+  expect_true(all(PALETTE_CATEGORICAL %in% grDevices::palette.colors(palette = "Okabe-Ito")))
+  gaps <- stats::dist(greyscale(c(PALETTE_CATEGORICAL, "white")))
+  expect_gte(min(gaps), 0.12)
+})
+
+test_that("theme_thesis barví sloupce, výplně a čáry kategoriální paletou", {
+  df <- data.frame(x = c("a", "b", "c", "d"), y = 1:4)
+
+  single <- ggplot2::ggplot(df, ggplot2::aes(x, y)) + ggplot2::geom_col() + theme_thesis()
+  filled <- ggplot2::ggplot(df, ggplot2::aes(x, y, fill = x)) + ggplot2::geom_col() + theme_thesis()
+  lined <- ggplot2::ggplot(df, ggplot2::aes(x, y, colour = x, group = x)) + ggplot2::geom_point() + theme_thesis()
+
+  expect_equal(layer_values(single, "fill"), PALETTE_CATEGORICAL[[1]])
+  expect_equal(layer_values(filled, "fill"), PALETTE_CATEGORICAL[1:4])
+  expect_equal(layer_values(lined, "colour"), PALETTE_CATEGORICAL[1:4])
+})
+
+test_that("scale_fill_sequential tmavne s hodnotou, nese černý text a NA nechá bílé", {
+  df <- data.frame(x = c("a", "b", "c"), y = "r", podil = c(0, 1, NA))
+  plot <- ggplot2::ggplot(df, ggplot2::aes(x, y, fill = podil)) +
+    ggplot2::geom_tile() +
+    scale_fill_sequential(limits = c(0, 1)) +
+    theme_thesis()
+  fills <- ggplot2::ggplot_build(plot)$data[[1]]$fill
+
+  expect_gt(lightness(fills[[1]]), lightness(fills[[2]]))
+  expect_gte(lightness(fills[[2]]), 49)
+  expect_equal(fills[[3]], "white")
+})

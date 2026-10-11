@@ -2,6 +2,9 @@ THESIS_WIDTH_CM <- 16.5
 THESIS_FONT <- "Libertinus Serif"
 THESIS_FONT_SIZE <- 10
 
+PALETTE_CATEGORICAL <- unname(grDevices::palette.colors(palette = "Okabe-Ito")[c(6, 2, 1, 5, 7)])
+SEQUENTIAL_BEGIN <- 0.45
+
 LABEL_PATTERN <- "^[a-z0-9-]+$"
 
 LATEX_SPECIALS <- c(
@@ -131,7 +134,16 @@ export_table <- function(
 }
 
 theme_thesis <- function() {
-  ggplot2::theme_minimal(base_family = THESIS_FONT, base_size = THESIS_FONT_SIZE)
+  ggplot2::theme_minimal(base_family = THESIS_FONT, base_size = THESIS_FONT_SIZE) +
+    ggplot2::theme(
+      geom = ggplot2::element_geom(fill = PALETTE_CATEGORICAL[[1]]),
+      palette.fill.discrete = PALETTE_CATEGORICAL,
+      palette.colour.discrete = PALETTE_CATEGORICAL
+    )
+}
+
+scale_fill_sequential <- function(...) {
+  ggplot2::scale_fill_viridis_c(..., begin = SEQUENTIAL_BEGIN, direction = -1, na.value = "white")
 }
 
 embedded_fonts <- function(path) {
