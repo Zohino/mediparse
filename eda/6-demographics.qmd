@@ -1,0 +1,121 @@
+---
+title: "Explorační analýza datové sady: demografie vstupního korpusu"
+abstract: |
+  Dokument popisuje demografii vstupního korpusu vymezeného v předchozím sešitu, tedy propouštěcích zpráv s diagnózou ICD, dostatečnou délkou a bez přesných duplicit. Uvádí pohlaví pacientů, věk při přijetí a pojištění, rodinný stav, rasu a jazyk, ze kterých skládá charakteristiku korpusu pro text práce. Nakonec rozhoduje, že demografie do pipeline nevstupuje s jedinou výjimkou: pohlaví slouží jako reference pro extrakci pohlaví z preambule zprávy.
+---
+
+```{r}
+#| include: false
+library(reticulate)
+source("R/dua.R")
+source("R/db.R")
+source("R/patients.R")
+source("R/text.R")
+source("R/selection.R")
+source("R/demographics.R")
+source("R/export.R")
+eda_check_python()
+con <- eda_connect()
+summary <- demographic_summary(con)
+counts <- attribute_counts(con)
+age_gender <- age_gender_counts(con)
+published <- dua_suppress(counts, by = "atribut")
+majority <- majority_gender(published)
+race <- largest_race(published, total = summary$notes)
+masked <- masked_text(summary$masked, band90_count(published))
+```
+
+# Úvod
+
+Tento sešit je šestým z řady sešitů explorační analýzy. Pátý sešit vymezil vstupní korpus, tedy zprávy, které vstupují do rozdělení dat na trénovací a testovací část. Tento sešit popisuje, koho se tyto zprávy týkají. Klade si tři cíle:
+
+- charakterizovat vstupní korpus podle pohlaví, věku při přijetí, pojištění, rodinného stavu, rasy a jazyka pacientů,
+- ukázat rozložení věku podle pohlaví,
+- rozhodnout, zda a jak demografie vstupuje do pipeline.
+
+Sešit demografii jen popisuje. Výkon modelů podle demografických podskupin práce nevykazuje, protože zadání to nevyžaduje; menšinové skupiny jsou navíc malé a intervaly spolehlivosti by byly široké.
+
+Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty, nikdy řádková data ani texty zpráv. Počty pacientů a zpráv, zprávy bez záznamu přijetí nebo pacienta, medián a kvartily věku jsou metriky korpusu a uvádějí se přesně. Pohlaví, věkové pásmo, pojištění, rodinný stav, rasa a jazyk vymezují skupiny pacientů kvaziidentifikátorem, a proto se v každém atributu kategorie s méně než deseti pacienty nebo zprávami sloučí do řádku „ostatní (n < 10)“; práh je pravidlo práce, DUA malé počty neupravuje.
+
+Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky. Kapitola @sec-shrnuti shrnuje rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
+
+# Data a metody {#sec-data}
+
+Sešit čte propouštěcí zprávy (`discharge`), diagnózy ICD (`diagnoses_icd`), pacienty (`patients`) a přijetí (`admissions`). Všechny sloupce jsou v parquetu uloženy jako text a převádějí se přes `TRY_CAST`, takže nečíselná hodnota dá neznámý věk, ne chybu. Dotazy provádí DuckDB nad parquetem. Dotazy jsou v `eda/R/demographics.R` a mají testy nad ručně vytvořenými tabulkami; výběr vstupního korpusu sdílí se sešitem 5 (`eda/R/selection.R`), takže populace je v obou sešitech táž.
+
+Pojmy a jednotky jsou tyto:
+
+- *populací* je vstupní korpus: propouštěcí zprávy s kódem ICD, dlouhé aspoň `r SHORT_LIMIT` znaků a bez přesných duplicit,
+- *zrnitost*: pohlaví je atribut pacienta a počítá se jednou na pacienta; věk při přijetí, pojištění, rodinný stav, rasa a jazyk jsou atributy přijetí a počítají se jednou na zprávu, protože zpráva je jednotkou klasifikace; podíly různých zrnitostí se proto nesrovnávají,
+- *připojení*: `patients` a `admissions` se připojují zleva. Chybějící řádek dá kategorii „neuvedeno“, takže se každá tabulka sečte do velikosti korpusu; počet zpráv bez záznamu přijetí a bez záznamu pacienta se uvádí zvlášť,
+- *popisky kategorií* pocházejí z kódu, ne z dat: pevné slovníky mapují každou známou hodnotu na její popisek, hodnotu mimo slovník na „jiné“ a chybějící hodnotu na „neuvedeno“. Rasa se slučuje podle předpony do skupin bílá, černá, hispánská a asijská; hodnoty „UNKNOWN“, „UNABLE TO OBTAIN“ a „PATIENT DECLINED TO ANSWER“ jsou „neuvedeno“, ostatní „jiná“. Jazyk má jen angličtinu a „jiný jazyk“. Surový popisek z dat se tak do výstupu nedostane,
+- *věk při přijetí* je `anchor_age` plus rozdíl roku přijetí a `anchor_year`. Pacient, který byl v roce ukotvení starší než 89 let, má `anchor_age` nastavené na 91 [@johnson2023]; jeho věk se nepočítá a zpráva patří do pásma 90+. Všechny věky od 90 let se seřezávají do jednoho pásma 90+. Pásma mají deset let (do 29, 30–39 až 80–89, 90+) a „neuvedeno“. Zveřejňují se jen medián a kvartily seřezaného věku, nikdy minimum ani maximum; maskovaní pacienti mají v seřezaném věku hodnotu 90, což vnitřní kvantily neovlivní.
+
+# Výsledky {#sec-vysledky}
+
+## Souhrn vstupního korpusu {#sec-souhrn}
+
+Vstupní korpus tvoří `r format_number(summary$notes)` zpráv od `r format_number(summary$patients)` pacientů. Medián věku při přijetí je `r mean_text(summary$p50)` let, kvartily jsou `r mean_text(summary$p25)` a `r mean_text(summary$p75)`. Bez záznamu přijetí je `r format_number(summary$no_admission)` zpráv a bez záznamu pacienta `r format_number(summary$no_patient)` zpráv. Maskovaný věk (pacient starší než 89 let v roce ukotvení) má `r masked` zpráv. @tbl-souhrn uvádí souhrn.
+
+```{r}
+#| label: tbl-souhrn
+#| tbl-cap: "Souhrn vstupního korpusu: počty a věk při přijetí."
+#| tbl-colwidths: [65, 35]
+export_table(summary_table(summary), col.names = c("Ukazatel", "Hodnota"), align = "lr")
+```
+
+*Zdroj:* dotaz v DuckDB nad tabulkami `discharge`, `diagnoses_icd`, `patients` a `admissions`; věk je seřezaný na 90 let.
+
+## Charakteristika {#sec-charakteristika}
+
+@tbl-charakteristika uvádí charakteristiku korpusu. Jmenovatelem podílu jsou u pohlaví pacienti, u ostatních atributů zprávy.
+
+```{r}
+#| label: tbl-charakteristika
+#| tbl-cap: "Charakteristika vstupního korpusu; podíl pacientů u pohlaví, podíl zpráv u ostatních atributů."
+#| tbl-colwidths: [28, 32, 20, 20]
+export_table(
+  characteristics_table(published, summary),
+  col.names = c("Atribut", "Kategorie", "Počet", "Podíl (%)"),
+  align = "llrr"
+)
+```
+
+*Zdroj:* stejné tabulky jako u souhrnu; kategorie s méně než deseti pacienty nebo zprávami jsou v rámci atributu sloučeny.
+
+## Věk podle pohlaví {#sec-vek}
+
+@fig-vek-pohlavi ukazuje počty zpráv podle věkového pásma a pohlaví pacienta.
+
+```{r}
+#| label: fig-vek-pohlavi
+#| fig-cap: "Počet zpráv vstupního korpusu podle věkového pásma při přijetí a pohlaví pacienta; nezobrazeny jsou buňky sloučené podle pohlaví nebo podle věkového pásma."
+#| fig-width: 6.5
+#| fig-height: 3.2
+drawn <- drawable_cells(age_gender)
+drawn$pasmo <- factor(drawn$pasmo, levels = AGE_BANDS)
+drawn$pohlavi <- factor(drawn$pohlavi, levels = GENDER_LABELS)
+plot <- ggplot2::ggplot(drawn, ggplot2::aes(pasmo, n, fill = pohlavi)) +
+  ggplot2::geom_col(position = ggplot2::position_dodge2(preserve = "single")) +
+  ggplot2::scale_x_discrete(drop = FALSE) +
+  ggplot2::scale_y_continuous(labels = format_number) +
+  ggplot2::labs(x = "Věkové pásmo při přijetí", y = "Počet zpráv", fill = "Pohlaví") +
+  theme_thesis()
+export_figure(plot, height_cm = 7.5)
+```
+
+# Shrnutí a rozhodnutí {#sec-shrnuti}
+
+Dokument popsal demografii vstupního korpusu. Pro další práci z toho plyne:
+
+- **Demografie není příznakem ani stratifikací.** Pohlaví, věk, pojištění, rodinný stav, rasa ani jazyk nevstupují jako příznak modelů ani jako proměnná stratifikace. Dělení dat stratifikuje jen podle štítků (pátý sešit).
+- **Pohlaví je reference pro extrakci.** `r switch(majority$kind, majority = paste0("Sloupec patients.gender je reference pro extrakci pohlaví z preambule zprávy. Většinové pohlaví (", majority$label, ") tvoří ", percent_label(majority$n, majority$total), " pacientů se známým pohlavím. To je přesnost konstantní odpovědi, kterou musí extrakce překonat."), nelze = "Přesnost konstantní odpovědi nelze zveřejnit: ve vstupním korpusu nemají ženy i muži aspoň deset pacientů se známým pohlavím.")`
+- **Věk se z textu neextrahuje.** Věk je ve zprávách maskovaný (třetí sešit), a zůstává proto jen popisem.
+- **Jazyk přijetí není jazyk zprávy.** Sloupec `admissions.language` je preferovaný jazyk pacienta. Zprávy jsou anglicky a jazyková osa práce (čeština a angličtina) s ním nesouvisí.
+- **Výkon podle podskupin se nevykazuje.** `r switch(race$kind, group = paste0("Největší rasovou skupinou je skupina „", race$label, "“ s podílem ", percent_label(race$n, race$total), " zpráv. Korpus pochází z jednoho centra, a výsledky se proto nemusí zobecnit na jiné populace."), nelze = "Největší rasovou skupinu nelze určit, protože žádná ze skupin nemá aspoň deset zpráv. Korpus pochází z jednoho centra, a výsledky se proto nemusí zobecnit na jiné populace.")`
+
+# Omezení {#sec-omezeni}
+
+Korpus pochází z jednoho centra, takže jeho demografie nemusí odpovídat jiným populacím. Podíly různých zrnitostí se nesrovnávají: pohlaví se počítá na pacienta, ostatní atributy na zprávu, a pacient s více zprávami proto v ostatních atributech váží víc. Rasa a jazyk jsou zapsány při přijetí a rasa je sloučena do hrubých skupin, takže nevystihuje původ pacienta. Věk starších pacientů je v MIMIC-IV maskovaný, proto pásmo 90+ spojuje všechny pacienty nad 89 let a medián a kvartily vycházejí ze seřezaného věku. Rok přijetí je posunutý o náhodný interval, ale věk při přijetí zůstává vůči roku ukotvení správný [@johnson2023]. Kategorie s méně než deseti pacienty nebo zprávami se v tabulce a grafu slučují, proto menšinové skupiny nejsou vidět.
+
+{{< include _partials/appendix.qmd >}}
