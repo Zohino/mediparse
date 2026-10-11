@@ -92,6 +92,30 @@ test_that("dua_suppress odmítne další číselný sloupec", {
   expect_error(dua_suppress(df), "číselný")
 })
 
+test_that("dua_percent vrátí procento s jedním desetinným místem a čárkou", {
+  expect_equal(dua_percent(25, 200), "12,5")
+  expect_equal(dua_percent(10, 30), "33,3")
+  expect_equal(dua_percent(50, 50), "100,0")
+})
+
+test_that("dua_percent potlačí čitatel pod prahem", {
+  expect_equal(dua_percent(9, 1000), "–")
+  expect_equal(dua_percent(0, 1000), "–")
+})
+
+test_that("dua_percent pro nulový jmenovatel vrátí pomlčku, ne NaN", {
+  expect_equal(dua_percent(0, 0), "–")
+  expect_equal(dua_percent(15, 0), "–")
+})
+
+test_that("dua_percent zvládne vektor", {
+  expect_equal(dua_percent(c(5, 20, 20), c(100, 0, 40)), c("–", "–", "50,0"))
+})
+
+test_that("dua_percent přijme skalární jmenovatel pro vektor čitatelů", {
+  expect_equal(dua_percent(c(5, 20), 100), c("–", "20,0"))
+})
+
 test_that("dua_hidden skryje n pod prahem", {
   expect_equal(dua_hidden(c(100, 200, 50)), c(FALSE, FALSE, FALSE))
   expect_equal(dua_hidden(c(0, 100, 200)), c(TRUE, FALSE, FALSE))
@@ -144,4 +168,16 @@ test_that("dua_suppress s by zvládne prázdnou tabulku a neznámý sloupec", {
 
   expect_equal(nrow(dua_suppress(empty, by = "skupina")), 0L)
   expect_error(dua_suppress(data.frame(k = "a", n = 50L), by = "nic"), "by")
+})
+
+test_that("dua_decimal zaokrouhlí na jedno desetinné místo s čárkou", {
+  expect_equal(dua_decimal(12.46), "12,5")
+  expect_equal(dua_decimal(100), "100,0")
+  expect_equal(dua_decimal(c(1, 2.25)), c("1,0", "2,2"))
+})
+
+test_that("dua_percent_text přidá nezlomitelnou mezeru a znak procenta", {
+  expect_equal(dua_percent_text(25, 200), "12,5 %")
+  expect_equal(dua_percent_text(c(5, 20), 100), c("–", "20,0 %"))
+  expect_equal(dua_percent_text(15, 0), "–")
 })
