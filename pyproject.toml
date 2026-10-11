@@ -298,10 +298,16 @@ poppler = "*"
 
 [tool.pixi.feature.eda.pypi-dependencies]
 numpy = "*"
+transformers = "==5.18.0"
+tokenizers = "==0.23.2"
+sentencepiece = ">=0.2.2, <0.3"
+protobuf = ">=7.36.2, <8"
+jinja2 = ">=3.1.6"
 
 [tool.pixi.feature.eda.activation.env]
 RETICULATE_PYTHON = "$CONDA_PREFIX/bin/python"
 RETICULATE_CONDA = "$CONDA_PREFIX/bin/micromamba"
+TRANSFORMERS_VERBOSITY = "error"
 
 [tool.pixi.feature.eda.tasks]
 eda = { cmd = "bash scripts/eda.sh \"{{ n }}\"", args = [
