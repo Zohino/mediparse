@@ -235,3 +235,8 @@ test_that("export_table s code obalí popisky vzorů a escapuje je i v hlavičce
   expect_match(tex, "Vzor \\textless{}a\\textgreater{}", fixed = TRUE)
   expect_match(paste(as.character(md), collapse = "\n"), "`___`", fixed = TRUE)
 })
+
+test_that("percent_axis formátuje podíl s desetinnou čárkou a pevnou mezerou před procentem", {
+  expect_equal(percent_axis(c(0, 0.5, 1)), paste0(c("0", "50", "100"), NBSP, "%"))
+  expect_equal(percent_axis(0.125), paste0("12,5", NBSP, "%"))
+})

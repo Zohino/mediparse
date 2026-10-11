@@ -243,15 +243,14 @@ percentile_matrix <- function(shown, columns) {
   out
 }
 
-histogram_shares <- function(hist) {
-  totals <- tapply(hist$n, hist$tabulka, sum)
-  data.frame(
-    tabulka = hist$tabulka,
-    popisek = format_number(signif(10^hist$kos, 3)),
-    dolni = hist$kos,
-    podil = hist$n / as.numeric(totals[hist$tabulka]),
-    stringsAsFactors = FALSE
-  )
+histogram_shares <- function(hist, groups = "tabulka") {
+  key <- do.call(paste, hist[groups])
+  totals <- tapply(hist$n, key, sum)
+  out <- hist[groups]
+  out$popisek <- format_number(signif(10^hist$kos, 3))
+  out$dolni <- hist$kos
+  out$podil <- hist$n / as.numeric(totals[key])
+  out
 }
 
 age_table <- function(age) {

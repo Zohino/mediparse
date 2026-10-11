@@ -567,3 +567,49 @@ test_that("parallel_table formátuje poměr a podíl v okně a tokenizér pojmen
   expect_equal(out$podil_en, "37,0")
   expect_equal(out$podil_cs, "0,0")
 })
+
+test_that("tokenizer_table zkrátí revizi a uvede okno, úlohu a verzi knihovny", {
+  models <- data.frame(
+    klic = "xlmr", model = "FacebookAI/xlm-roberta-base",
+    revize = "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089", okno = 512,
+    uloha = "encoder", stringsAsFactors = FALSE
+  )
+  out <- tokenizer_table(models, "5.18.0")
+
+  expect_equal(out$tokenizer, "XLM-R")
+  expect_equal(out$revize, "e73636d4f797")
+  expect_equal(out$okno, "512")
+  expect_equal(out$transformers, "5.18.0")
+})
+
+test_that("window_table spočítá podíl v okně a části na zprávu", {
+  win <- data.frame(
+    tabulka = "discharge", tokenizer = "xlmr", zprav = 1000, v_okne = 250, casti = 4000,
+    stringsAsFactors = FALSE
+  )
+  out <- window_table(win)
+
+  expect_equal(out$tokenizer, "XLM-R")
+  expect_equal(out$podil, "25,0")
+  expect_equal(out$mimo, "750")
+  expect_equal(out$casti, paste0("4", NBSP, "000"))
+})
+
+test_that("histogram_shares počítá podíl z neprázdných zpráv každé skupiny", {
+  hist <- data.frame(
+    tabulka = "discharge", tokenizer = c("xlmr", "xlmr", "mdeberta"), kos = c(1, 2, 1),
+    n = c(30, 70, 10), stringsAsFactors = FALSE
+  )
+  out <- histogram_shares(hist, c("tabulka", "tokenizer"))
+
+  expect_equal(out$podil, c(0.3, 0.7, 1))
+  expect_equal(out$dolni, c(1, 2, 1))
+  expect_equal(out$tokenizer, c("xlmr", "xlmr", "mdeberta"))
+})
+
+test_that("corpus_verdict porovná mediány délky v tokenech obou korpusů", {
+  expect_equal(corpus_verdict(2500, 150), "radiologie_kratsi")
+  expect_equal(corpus_verdict(150, 2500), "propousteci_kratsi")
+  expect_equal(corpus_verdict(100, 100), "stejne")
+  expect_equal(corpus_verdict(NA_real_, 100), "nelze")
+})

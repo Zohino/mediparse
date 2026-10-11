@@ -354,3 +354,38 @@ czech_verdict <- function(english, czech) {
   }
   if (english - czech <= CZECH_TOLERANCE) "bez_dopadu" else "pokles"
 }
+
+tokenizer_table <- function(models, version) {
+  data.frame(
+    tokenizer = tokenizer_label(models$klic),
+    model = models$model,
+    revize = substr(models$revize, 1, 12),
+    okno = format_number(models$okno),
+    uloha = models$uloha,
+    transformers = rep(version, nrow(models)),
+    stringsAsFactors = FALSE
+  )
+}
+
+window_table <- function(win) {
+  data.frame(
+    tabulka = win$tabulka,
+    tokenizer = tokenizer_label(win$tokenizer),
+    zprav = format_number(win$zprav),
+    v_okne = format_number(win$v_okne),
+    podil = percent_text(win$v_okne, win$zprav),
+    mimo = format_number(win$zprav - win$v_okne),
+    casti = format_number(win$casti),
+    stringsAsFactors = FALSE
+  )
+}
+
+corpus_verdict <- function(discharge, radiology) {
+  if (is.na(discharge) || is.na(radiology)) {
+    return("nelze")
+  }
+  if (radiology < discharge) {
+    return("radiologie_kratsi")
+  }
+  if (radiology > discharge) "propousteci_kratsi" else "stejne"
+}
