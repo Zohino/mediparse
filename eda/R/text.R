@@ -92,18 +92,6 @@ length_percentiles <- function(con, tables) {
   as_numeric_columns(out, c("n", "prumer", "minimum", "maximum", PERCENTILE_COLUMNS))
 }
 
-number_text <- function(x) {
-  ifelse(is.na(x), "–", format_number(x))
-}
-
-percent_text <- function(n, total) {
-  total <- rep_len(total, length(n))
-  out <- rep("–", length(n))
-  known <- total > 0
-  out[known] <- dua_decimal(100 * n[known] / total[known])
-  out
-}
-
 format_percentiles <- function(percentiles) {
   out <- percentiles
   for (column in c("minimum", PERCENTILE_COLUMNS, "maximum")) {

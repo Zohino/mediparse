@@ -209,3 +209,12 @@ test_that("format_number odděluje tisíce nezlomitelnou mezerou a dua_count ho 
   expect_equal(format_number(1234567), paste0("1", NBSP, "234", NBSP, "567"))
   expect_equal(dua_count(1234), format_number(1234))
 })
+
+test_that("number_text oddělí tisíce a místo NA vrátí pomlčku", {
+  expect_equal(number_text(c(1234567, 5, NA)), c("1 234 567", "5", "–"))
+})
+
+test_that("percent_text zveřejní i malý čitatel a pro nulový jmenovatel vrátí pomlčku", {
+  expect_equal(percent_text(c(3, 25, 15), c(1000, 200, 0)), c("0,3", "12,5", "–"))
+  expect_equal(percent_text(c(0, 20), 100), c("0,0", "20,0"))
+})
