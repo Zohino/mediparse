@@ -210,7 +210,6 @@ plot <- ggplot2::ggplot(shares, ggplot2::aes(dolni + 0.05, podil, linetype = tok
     breaks = 0:5, labels = function(x) format_number(10^x), limits = c(0, 5)
   ) +
   ggplot2::scale_y_continuous(labels = percent_axis) +
-  ggplot2::scale_colour_grey(start = 0, end = 0.6) +
   ggplot2::labs(
     x = "Délka zprávy v tokenech (dolní mez koše)", y = "Podíl zpráv tabulky",
     linetype = "Tokenizér", colour = "Tokenizér"
