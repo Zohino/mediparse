@@ -31,4 +31,8 @@ for document in "${documents[@]}"; do
     mkdir -p "$root/eda/_freeze" "$root/results/eda"
     cp -r "$work/eda/_freeze/$stem" "$root/eda/_freeze/$stem"
     cp "$work/results/eda/$stem.pdf" "$root/results/eda/$stem.pdf"
+    rm -rf "${root:?}/results/eda/$stem"
+    if [[ -d "$work/results/eda/$stem" ]]; then
+        cp -r "$work/results/eda/$stem" "$root/results/eda/$stem"
+    fi
 done
