@@ -1,8 +1,8 @@
 # Specifikace syntetického korpusu
 
-Syntetický korpus napájí smoketest a demo pipeline: 400 anglických propouštěcích
-zpráv a jejich české protějšky. Zprávy nejsou z MIMIC, ale strukturou odpovídají
-MIMIC-IV-Note, aby je zpracovával tentýž kód jako reálná data.
+Syntetický korpus napájí smoketest a demo pipeline: anglické propouštěcí zprávy
+v počtu `patients.notes` a jejich české protějšky. Zprávy nejsou z MIMIC, ale
+strukturou odpovídají MIMIC-IV-Note, aby je zpracovával tentýž kód jako reálná data.
 
 Tento dokument je závazná specifikace. Verzí specifikace je commit tohoto souboru
 a `provenance.json` korpusu na něj odkazuje. Číselné parametry plánu drží
@@ -56,14 +56,22 @@ a sekcemi. Parametry jsou v configu:
 | sekce, podnadpisy, délka narativu, pohlaví, věková značka | `structure` |
 | zmínky, klíčová slova, negace | `mentions` |
 
+Čísla `labels` (prevalence a společný výskyt) a `mentions.diagnoses.*.given_positive`
+a `given_negative` pocházejí z exportu sešitu 8
+(`results/eda/8-mentions/parametry-syntetiky.json`), který zapisuje vlastní vstupní
+korpus po potlačení. Do configu je převezme příkaz
+`pixi run synthetic-parameters` (`mediparse-synthetic-parameters`), který z nich
+odvodí i `patients.notes` pravidlem níže; ručně se tyto hodnoty nepřepisují.
+
 Pravidla vzorkování, která config sám nevyjadřuje:
 
 - Chronické diagnózy (`diabetes`, `copd`, `ckd`, `atrial_fibrillation`)
   platí pro všechny zprávy pacienta; akutní `pneumonia` se u dalších zpráv losuje
   podmíněně.
 - Počet zpráv (`patients.notes`) je nejmenší stovka, při níž má nejvzácnější label
-  v pětině korpusu očekávaně aspoň 5 pozitivních zpráv; jinak by metriky a prahy
-  jednotlivých labelů byly nedefinované nebo degenerované.
+  v pětině korpusu očekávaně aspoň 5 pozitivních zpráv, tedy
+  N = 100 · ⌈25 / (100 · p_min)⌉; jinak by metriky a prahy jednotlivých labelů byly
+  nedefinované nebo degenerované. Hodnotu zapisuje příkaz převzetí parametrů.
 - Výskyt každé sekce se losuje nezávisle; pořadí sekcí je pořadí v configu.
 - Z podnadpisů v jedné skupině configu (vylučující se varianty) se losuje nejvýše
   jeden.
