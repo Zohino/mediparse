@@ -572,3 +572,16 @@ test_that("kandidát skrytý rozdílem s kategorií má NA i v prevalencích pod
   expect_true(is.na(out$prevalence$n9))
   expect_true(is.na(out$prevalence$n10))
 })
+
+test_that("candidate_labels vrátí české popisky bez jmen v pořadí klíčů", {
+  pool <- list(a = list(label_cs = "Áčko"), b = list(label_cs = "Béčko"))
+
+  expect_equal(candidate_labels(c("b", "a"), pool), c("Béčko", "Áčko"))
+  expect_equal(candidate_labels(character(), pool), character())
+})
+
+test_that("config_path skládá cesty ke konfiguraci a obě cesty existují", {
+  expect_equal(basename(config_path("x.json")), "x.json")
+  expect_true(file.exists(candidates_path()))
+  expect_true(file.exists(text_mentions_path()))
+})
