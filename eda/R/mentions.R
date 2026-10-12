@@ -271,3 +271,127 @@ rubric_table <- function(rubric, selection, candidates) {
     row.names = NULL
   )
 }
+
+agreement_table <- function(agreement, candidates) {
+  data.frame(
+    kandidat = candidate_labels(agreement$kandidat, candidates),
+    icd = hidden_number(agreement$icd),
+    zminka_icd = hidden_percent(agreement$icd_zminka, agreement$icd),
+    tvrzeni_icd = hidden_percent(agreement$icd_tvrzeni, agreement$icd),
+    icd_zminka = hidden_percent(agreement$icd_zminka, agreement$zminka),
+    icd_tvrzeni = hidden_percent(agreement$icd_tvrzeni, agreement$tvrzeni),
+    stringsAsFactors = FALSE,
+    row.names = NULL
+  )
+}
+
+agreement_points <- function(agreement, candidates) {
+  shown <- agreement[!is.na(agreement$icd), , drop = FALSE]
+  labels <- candidate_labels(names(candidates), candidates)
+  metrics <- c(zminka = "P(zmínka | ICD+)", tvrzeni = "P(tvrzení | ICD+)")
+  data.frame(
+    kandidat = factor(
+      rep(candidate_labels(shown$kandidat, candidates), 2L),
+      levels = rev(labels)
+    ),
+    metrika = factor(rep(unname(metrics), each = nrow(shown)), levels = unname(metrics)),
+    podil = c(shown$icd_zminka / shown$icd, shown$icd_tvrzeni / shown$icd),
+    stringsAsFactors = FALSE
+  )
+}
+
+symptom_table <- function(symptoms) {
+  data.frame(
+    priznak = symptoms$priznak,
+    zminka = hidden_number(symptoms$zminka),
+    podil = hidden_percent(symptoms$zminka, symptoms$celkem),
+    bez_negace = hidden_percent(symptoms$tvrzeni, symptoms$celkem),
+    stringsAsFactors = FALSE
+  )
+}
+
+symptom_bars <- function(symptoms) {
+  shown <- symptoms[!is.na(symptoms$zminka), , drop = FALSE]
+  shown <- shown[order(-shown$zminka, shown$priznak), , drop = FALSE]
+  data.frame(
+    priznak = factor(shown$priznak, levels = rev(shown$priznak)),
+    podil = shown$zminka / shown$celkem,
+    bez_negace = shown$tvrzeni / shown$celkem,
+    stringsAsFactors = FALSE
+  )
+}
+
+labelled_keys <- function(keys, candidates) {
+  join_labels(sprintf("%s (`%s`)", candidate_labels(keys, candidates), keys))
+}
+
+selection_text <- function(selection, candidates) {
+  if (selection$kind == "nelze") {
+    return(paste(
+      "Výběr pětice nelze zveřejnit: u žádného kandidáta nelze rubriku posoudit,",
+      "protože některá z jeho buněk má méně než deset zpráv."
+    ))
+  }
+  if (length(selection$selected) == 0L) {
+    return("Žádný kandidát rubriku nesplnil, pětici nelze vybrat a rozhodne následující úloha.")
+  }
+  parts <- sprintf(
+    "Rubrika vybrala %s: %s.",
+    count_phrase(length(selection$selected), c("diagnózu", "diagnózy", "diagnóz")),
+    labelled_keys(selection$selected, candidates)
+  )
+  if (length(selection$filled) > 0L) {
+    parts <- c(parts, sprintf(
+      "Doplněním prázdných kapitol vznikla část výběru: %s.", labelled_keys(selection$filled, candidates)
+    ))
+  }
+  if (length(selection$selected) < SELECTION_SIZE) {
+    parts <- c(parts, "Pětice není úplná, o zbytku rozhodne následující úloha.")
+  }
+  paste(parts, collapse = " ")
+}
+
+hidden_rows_text <- function(n) {
+  if (n == 0) {
+    return("Potlačení neskrylo žádný řádek.")
+  }
+  sprintf("Potlačení skrylo %s.", count_phrase(n, c("řádek", "řádky", "řádků")))
+}
+
+mention_floor_text <- function() {
+  paste0(round(100 * MENTION_FLOOR), NBSP, "%")
+}
+
+noise_text <- function(agreement, candidates) {
+  share <- agreement$icd_zminka / agreement$zminka
+  known <- !is.na(share)
+  if (!any(known)) {
+    return("Riziko šumu v negativní třídě nelze posoudit: P(ICD+ | zmínka) všech kandidátů je skryté.")
+  }
+  low <- agreement$kandidat[known & share < MENTION_FLOOR]
+  if (length(low) == 0L) {
+    return(sprintf(
+      "Žádný zveřejnitelný kandidát nemá P(ICD+ | zmínka) pod %s, riziko šumu v negativní třídě je tedy nízké.",
+      mention_floor_text()
+    ))
+  }
+  sprintf(
+    "Riziko šumu v negativní třídě se týká %s s P(ICD+ | zmínka) pod %s: %s. %s",
+    count_phrase(length(low), c("kandidáta", "kandidátů", "kandidátů")), mention_floor_text(),
+    join_labels(candidate_labels(low, candidates)),
+    "U diagnóz s nízkou hodnotou nemusí být zpráva bez kódu, ale se zmínkou, opravdu negativní."
+  )
+}
+
+symptom_text <- function(symptoms) {
+  shown <- symptoms[!is.na(symptoms$zminka), , drop = FALSE]
+  if (nrow(shown) == 0L) {
+    return("Podíly příznaků nelze zveřejnit: každý příznak má méně než deset zpráv se zmínkou nebo bez ní.")
+  }
+  top <- shown[which.max(shown$zminka), ]
+  sprintf(
+    "Podíl lze zveřejnit u %s z %s. Nejčastější je %s, zmínku má %s zpráv korpusu.",
+    count_phrase(nrow(shown), c("příznaku", "příznaků", "příznaků")),
+    format_number(nrow(symptoms)), top$priznak, percent_label(top$zminka, top$celkem)
+  )
+}

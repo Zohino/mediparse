@@ -530,3 +530,118 @@ test_that("rubric_table označí prošlého kandidáta, který výběr nepojal",
     c("vybrán", "prošel", "vybrán", "prošel", "vybrán", "vybrán", "vybrán")
   )
 })
+
+test_that("agreement_table uvede podmíněné podíly a skrytý řádek jako pomlčky", {
+  agreement <- rbind(
+    agreement_row(kandidat = "dm"),
+    suppress_agreement(agreement_row(kandidat = "pn", icd = 5))
+  )
+
+  out <- agreement_table(agreement, CASES)
+
+  expect_equal(out$kandidat, c("Diabetes", "Pneumonie"))
+  expect_equal(out$icd, c("100", "potlačeno"))
+  expect_equal(out$zminka_icd, c("80,0", "–"))
+  expect_equal(out$tvrzeni_icd, c("60,0", "–"))
+  expect_equal(out$icd_zminka, c("57,1", "–"))
+  expect_equal(out$icd_tvrzeni, c("60,0", "–"))
+})
+
+test_that("agreement_points vrátí jen zveřejnitelné kandidáty ve dvou metrikách", {
+  agreement <- rbind(
+    agreement_row(kandidat = "dm"),
+    suppress_agreement(agreement_row(kandidat = "pn", icd = 5))
+  )
+
+  out <- agreement_points(agreement, CASES)
+
+  expect_equal(nrow(out), 2L)
+  expect_equal(as.character(out$kandidat), c("Diabetes", "Diabetes"))
+  expect_equal(sort(out$podil), c(0.6, 0.8))
+  expect_equal(nrow(agreement_points(agreement[0, ], CASES)), 0L)
+})
+
+test_that("symptom_table a symptom_bars řadí podle podílu a skrývají potlačené řádky", {
+  symptoms <- suppress_symptoms(data.frame(
+    priznak = c("fever", "cough", "nausea"), zminka = c(100, 200, 9),
+    tvrzeni = c(50, 120, 9), celkem = 400, stringsAsFactors = FALSE
+  ))
+
+  table <- symptom_table(symptoms)
+  bars <- symptom_bars(symptoms)
+
+  expect_equal(table$priznak, c("fever", "cough", "nausea"))
+  expect_equal(table$zminka, c("100", "200", "potlačeno"))
+  expect_equal(table$podil, c("25,0", "50,0", "–"))
+  expect_equal(table$bez_negace, c("12,5", "30,0", "–"))
+  expect_equal(as.character(bars$priznak), c("cough", "fever"))
+  expect_equal(bars$podil, c(0.5, 0.25))
+})
+
+test_that("selection_text popíše výběr, doplnění, neúplnost i větev nelze", {
+  pool <- list(
+    dm = list(label_cs = "Diabetes"), hf = list(label_cs = "Srdeční selhání"),
+    af = list(label_cs = "Fibrilace")
+  )
+  complete <- list(
+    kind = "vyber", selected = c("dm", "hf"), filled = "hf", passed = c("dm", "hf"),
+    failed = "af", unknown = character()
+  )
+
+  expect_match(selection_text(complete, pool), "vybrala 2 diagnózy: Diabetes (`dm`) a Srdeční selhání (`hf`)", fixed = TRUE)
+  expect_match(selection_text(complete, pool), "Pětice není úplná", fixed = TRUE)
+  expect_match(selection_text(complete, pool), "Doplněním prázdných kapitol vznikla část výběru: Srdeční selhání (`hf`)", fixed = TRUE)
+  expect_match(selection_text(modifyList(complete, list(selected = "dm", filled = character())), pool), "vybrala 1 diagnózu", fixed = TRUE)
+  expect_match(selection_text(modifyList(complete, list(selected = character(), filled = character())), pool), "Žádný kandidát", fixed = TRUE)
+  expect_match(selection_text(list(kind = "nelze"), pool), "nelze zveřejnit", fixed = TRUE)
+})
+
+test_that("hidden_rows_text skloňuje počet skrytých řádků", {
+  expect_equal(hidden_rows_text(0), "Potlačení neskrylo žádný řádek.")
+  expect_equal(hidden_rows_text(1), "Potlačení skrylo 1 řádek.")
+  expect_equal(hidden_rows_text(3), "Potlačení skrylo 3 řádky.")
+  expect_equal(hidden_rows_text(10), "Potlačení skrylo 10 řádků.")
+})
+
+test_that("noise_text skloňuje počet kandidátů s nízkým P(ICD+ | zmínka) a mlčí o skrytých", {
+  low <- function(key) {
+    agreement_row(kandidat = key, zminka = 300, icd_zminka = 80, tvrzeni = 250, icd_tvrzeni = 60)
+  }
+  one <- rbind(low("dm"), agreement_row(kandidat = "pn"))
+  two <- rbind(low("dm"), low("pn"), agreement_row(kandidat = "ami"))
+  hidden <- suppress_agreement(agreement_row(kandidat = "ami", icd = 5))
+  tail <- paste(
+    "U diagnóz s nízkou hodnotou nemusí být zpráva bez kódu, ale se zmínkou, opravdu negativní."
+  )
+
+  expect_equal(
+    noise_text(one, CASES),
+    paste("Riziko šumu v negativní třídě se týká 1\u00a0kandidáta s P(ICD+ | zmínka) pod 50\u00a0%: Diabetes.", tail)
+  )
+  expect_equal(
+    noise_text(two, CASES),
+    paste("Riziko šumu v negativní třídě se týká 2\u00a0kandidátů s P(ICD+ | zmínka) pod 50\u00a0%: Diabetes a Pneumonie.", tail)
+  )
+  expect_match(noise_text(agreement_row(kandidat = "pn"), CASES), "Žádný zveřejnitelný kandidát", fixed = TRUE)
+  expect_match(noise_text(hidden, CASES), "nelze posoudit", fixed = TRUE)
+})
+
+symptom_fixture <- function(visible, total = 20L) {
+  suppress_symptoms(data.frame(
+    priznak = paste0("s", seq_len(total)),
+    zminka = c(seq(200, by = -10, length.out = visible), rep(9, total - visible)),
+    tvrzeni = c(seq(100, by = -5, length.out = visible), rep(9, total - visible)),
+    celkem = 400, stringsAsFactors = FALSE
+  ))
+}
+
+test_that("symptom_text skloňuje počet příznaků s podílem pro 1, 2 a 5", {
+  expected <- function(count) {
+    sprintf("Podíl lze zveřejnit u %s z 20. Nejčastější je s1, zmínku má 50,0\u00a0%% zpráv korpusu.", count)
+  }
+
+  expect_equal(symptom_text(symptom_fixture(1)), expected("1\u00a0příznaku"))
+  expect_equal(symptom_text(symptom_fixture(2)), expected("2\u00a0příznaků"))
+  expect_equal(symptom_text(symptom_fixture(5)), expected("5\u00a0příznaků"))
+  expect_match(symptom_text(symptom_fixture(0)), "nelze", fixed = TRUE)
+})

@@ -1,0 +1,180 @@
+---
+title: "Explorační analýza datové sady: zmínky diagnóz a příznaků v textu"
+abstract: |
+  Dokument měří, jak často propouštěcí zprávy vstupního korpusu zmiňují kandidátní diagnózy, jak se zmínky v textu shodují s kódy ICD v obou směrech, s negací i bez ní, a jak často se v textu objevují příznaky ze seed lexikonu. Na kandidáty uplatňuje předem stanovenou rubriku (pásmo prevalence a podíl zpráv s kódem, které diagnózu zmiňují) a vybírá pětici diagnóz pro klasifikaci tak, aby každá pocházela z jiné kapitoly ICD-10. Zároveň vysvětluje Charlsonovy kategorie komorbidit, které používal předchozí sešit.
+---
+
+```{r}
+#| include: false
+library(reticulate)
+source("R/dua.R")
+source("R/czech.R")
+source("R/db.R")
+source("R/patients.R")
+source("R/text.R")
+source("R/selection.R")
+source("R/diagnoses.R")
+source("R/mentions.R")
+source("R/export.R")
+eda_check_python()
+con <- eda_connect()
+candidates <- read_candidates(candidates_path())
+mentions <- read_text_mentions(text_mentions_path())
+era <- era_summary(con)
+charlson <- charlson_published(charlson_counts(con), era$notes)
+prevalence <- suppress_prevalence(candidate_prevalence(con, candidates))
+prevalence <- reconcile_charlson(charlson, prevalence, candidates)$prevalence
+agreement <- align_agreement(suppress_agreement(mention_agreement(con, candidates, mentions)), prevalence)
+symptoms <- suppress_symptoms(symptom_mentions(con, candidates, mentions))
+ranked <- rubric(prevalence, agreement, candidates)
+selection <- select_five(ranked)
+band_text <- sprintf(
+  "%.0f–%.0f\u00a0%%", 100 * PREVALENCE_BAND[["low"]], 100 * PREVALENCE_BAND[["high"]]
+)
+floor_text <- mention_floor_text()
+candidate_count <- count_phrase(length(candidates), c("kandidát", "kandidáti", "kandidátů"))
+chapters <- unique(vapply(candidates, function(entry) entry$kapitola, character(1)))
+chapter_count <- count_phrase(length(chapters), c("kapitola", "kapitoly", "kapitol"))
+short_text <- count_phrase(SHORT_LIMIT, c("znak", "znaky", "znaků"))
+notes_text <- count_phrase(era$notes, c("zpráva", "zprávy", "zpráv"))
+window_text <- count_phrase(mentions$negation$window_chars, c("znak", "znaky", "znaků"))
+symptom_count <- count_phrase(length(mentions$symptoms$keywords_en), c("příznak", "příznaky", "příznaků"))
+cue_count <- count_phrase(length(mentions$negation$cues), c("negační výraz", "negační výrazy", "negačních výrazů"))
+hidden_rows <- sum(is.na(agreement$icd)) + sum(is.na(symptoms$zminka))
+```
+
+# Úvod
+
+Tento sešit je osmým z řady sešitů explorační analýzy. Předchozí sešit popsal diagnózy vstupního korpusu podle kódů ICD. Kód ICD ale říká jen to, že hospitalizace měla diagnózu, ne že ji zpráva zmiňuje; klasifikace a extrakce z textu potřebují diagnózy, které se v textu skutečně objevují. Sešit si klade tyto cíle:
+
+- změřit, jak se kód ICD kandidátní diagnózy shoduje se zmínkou diagnózy v textu zprávy, a to v obou směrech, s negací i bez ní,
+- změřit, jak často se v textu objevují příznaky ze seed lexikonu,
+- uplatnit na kandidáty předem stanovenou rubriku a vybrat pětici diagnóz pro klasifikaci,
+- vysvětlit Charlsonovy kategorie komorbidit, které předchozí sešit jen používal.
+
+Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty. Kandidátní diagnóza i příznak vymezují skupinu pacientů klinickým atributem, a proto se potlačuje každý řádek, jehož některá buňka má méně než deset zpráv; podrobná pravidla jsou v kapitole @sec-data. Práh je pravidlo práce, DUA malé počty neupravuje.
+
+Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky. Kapitola @sec-shrnuti shrnuje rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
+
+# Data a metody {#sec-data}
+
+Sešit čte propouštěcí zprávy (`discharge`) a diagnózy ICD (`diagnoses_icd`). Dotazy provádí DuckDB nad parquetem a jsou v `eda/R/mentions.R` s testy nad ručně vytvořenými tabulkami. Text zprávy se prochází jednou: dočasná tabulka nese pro každý termín příznak zmínky a příznak tvrzené zmínky a ostatní výpočty čtou jen ji.
+
+Pojmy a jednotky jsou tyto:
+
+- *populací* je vstupní korpus z pátého sešitu, tedy tentýž jako v sedmém sešitu: propouštěcí zprávy s kódem ICD, dlouhé aspoň `r short_text` a bez přesných duplicit. Vstupní korpus tvoří `r notes_text`. Jednotkou je zpráva,
+- *pool kandidátů* tvoří `r candidate_count` z `config/diagnosis_candidates.json`; předpony a Charlsonovy kategorie jsou stejné jako v sedmém sešitu. Konfigurace nese u každého kandidáta i klíčová slova pro hledání v textu: fráze (bez ohledu na velikost písmen) a zkratky (s rozlišením velikosti písmen). Mezera ve frázi se shoduje s libovolným bílým znakem, takže fráze zalomená řádkem je také zmínka. Zkratky jsou odděleny proto, že „mi“, „af“ nebo „hf“ malými písmeny jsou běžná slova a nadhodnocovala by zmínky. Čísla předchozího projektu jsou proto s tímto sešitem srovnatelná jen přibližně,
+- *zmínka* je shoda regulárního výrazu RE2 s frází nebo zkratkou na hranicích slov. Fráze a zkratky se před vložením do výrazu escapují. Příznaky seed lexikonu (`r symptom_count` v `config/text_mentions.json`) se hledají stejně jako fráze,
+- *tvrzená zmínka* vzniká tak, že se z textu vyříznou negované úseky a zbylý text se prohledá znovu. Negovaný úsek začíná negačním výrazem (například „no“, „denies“, „without“, „family history“; konfigurace obsahuje `r cue_count`) a sahá až `r window_text` dál, nejvýš ke konci věty, středníku nebo řádku, a končí zmínkou. Hladový rozsah pokryje výčty typu „no fever, chills or cough“. Zpráva má tvrzenou zmínku, když výraz najde zmínku i ve zbylém textu. Zpráva s jednou negovanou a jednou kladnou zmínkou tak tvrzení má. Odečtení negace je dolní odhad negace, a tvrzení je proto spíš nadhodnocené: výraz nepozná negaci za termínem, hypotézy ani rodinnou anamnézu mimo výraz „family history“. Hladové okno naopak může přes čárku vyříznout i kladnou zmínku („no distress, but pneumonia“) a tvrzení podhodnotit, směr chyby tedy není jednoznačný,
+- *shoda kódu a zmínky*: ze čtyř počtů (zprávy s kódem, zprávy se zmínkou, zprávy s kódem i zmínkou, zprávy celkem) se počítají P(zmínka | ICD+), P(tvrzení | ICD+), P(ICD+ | zmínka) a P(ICD+ | tvrzení). Počet zpráv s kódem je tentýž, který uvádí sedmý sešit,
+- *Charlsonovy kategorie*: Charlsonův index komorbidit [@charlson1987] je prognostický index roční mortality, který váží 19 komorbidit. Deyo a kol. [-@deyo1992] ho přizpůsobili kódům ICD-9-CM a sloučili do 17 kategorií. Quan a kol. [-@quan2005] převedli těchto 17 kategorií do ICD-10 a rozšířili mapu ICD-9-CM; tu používá sedmý sešit. Kategorie jsou přítomnost komorbidity, ne vážený index,
+- *rubrika* je stanovena předem, před pohledem na data, a má dvě kritéria: pásmo prevalence `r band_text` zpráv a P(zmínka | ICD+) aspoň `r floor_text` na surové zmínce. Pásmo zajišťuje dost pozitivních zpráv a vyřazuje příliš časté diagnózy, práh shody vyřazuje diagnózy, které se v textu téměř neobjevují, takže by pro extrakci z textu neměly oporu. P(ICD+ | zmínka) a varianta po odečtení negace jsou jen diagnostika a výběr neovlivní; kandidáty s P(ICD+ | zmínka) pod `r floor_text` sešit jmenuje jako riziko šumu v negativní třídě, což je popisná hranice, ne brána rubriky. Předběžná čísla z předchozího projektu byla při návrhu známa; výběrové pravidlo se proto zdůvodňuje metodou, ne čísly,
+- *výběr pětice*: z kandidátů, kteří projdou rubrikou, se z každé kapitoly ICD-10 vybere ten s nejvyšší P(zmínka | ICD+); při shodě rozhoduje pořadí v konfiguraci. Pool pokrývá `r chapter_count` (`r join_labels(chapters)`), takže pravidlo zajišťuje diverzitu orgánových systémů objektivně. Kapitolu bez prošlého kandidáta doplní nejlepší zbývající prošlý kandidát podle téže metriky. Projde-li rubrikou méně než pět kandidátů, vyberou se všichni prošlí a o doplnění rozhodne navazující úloha. Zamítnuto bylo vybrat pět nejlepších podle shody s diverzitou jen jako kontrolou, protože by mohlo vybrat tři srdeční diagnózy, a vybírat po pohledu na data, protože to je cherry-picking, před kterým rubrika chrání,
+- *potlačení*: řádek kandidáta se skryje celý (všechny počty i podíly), když kterákoli ze šesti atomických buněk rozkladu zpráv podle kódu (ICD+, ICD−) a zmínky (žádná, jen negovaná, tvrzená) má méně než deset zpráv. Každá buňka tabulek 2×2 je součtem atomických, takže šest buněk stačí a žádná nejde dopočítat ze zveřejněných podílů. Řádek příznaku se skryje, když zmínky nebo tvrzení nebo jejich doplněk do počtu zpráv nebo jejich rozdíl nedosahuje deseti. Kandidát, kterého sedmý sešit nezveřejnil, se skryje také, aby čísla obou sešitů byla táž. Skrytý kandidát rubrikou neprojde a ve výběru je mezi těmi, které nelze posoudit.
+
+# Výsledky {#sec-vysledky}
+
+## Shoda kódu ICD a zmínky v textu {#sec-shoda}
+
+@tbl-shoda a @fig-shoda uvádějí shodu kódu ICD a zmínky pro `r candidate_count`. Čtyři podíly se liší jmenovatelem: první dva říkají, kolik zpráv s kódem diagnózu v textu zmiňuje, resp. tvrdí; poslední dva říkají, jak často zpráva se zmínkou, resp. s tvrzením má i kód. `r hidden_rows_text(sum(is.na(agreement$icd)))`
+
+```{r}
+#| label: tbl-shoda
+#| tbl-cap: "Shoda kódu ICD a zmínky diagnózy v textu zprávy vstupního korpusu."
+#| tbl-colwidths: [28, 14, 14, 14, 15, 15]
+export_table(
+  agreement_table(agreement, candidates),
+  col.names = c(
+    "Kandidát", "Zprávy s ICD", "P(zmínka | ICD+) (%)", "P(tvrzení | ICD+) (%)",
+    "P(ICD+ | zmínka) (%)", "P(ICD+ | tvrzení) (%)"
+  ),
+  align = "lrrrrr"
+)
+```
+
+*Zdroj:* kódy z `diagnoses_icd` a text z `discharge`; zmínka je shoda klíčového slova kandidáta, tvrzení zmínka mimo negovaný úsek.
+
+```{r}
+#| label: fig-shoda
+#| fig-cap: "Podíl zpráv s kódem ICD kandidáta, které diagnózu v textu zmiňují, resp. tvrdí; svislá čára vyznačuje práh rubriky. Skryté řádky nejsou zobrazeny."
+#| fig-width: 6.5
+#| fig-height: 4
+points <- agreement_points(agreement, candidates)
+plot <- ggplot2::ggplot(points, ggplot2::aes(podil, kandidat, colour = metrika)) +
+  ggplot2::geom_vline(xintercept = MENTION_FLOOR, linetype = "dashed") +
+  ggplot2::geom_point(size = 2.5) +
+  ggplot2::scale_x_continuous(limits = c(0, 1), labels = percent_axis) +
+  ggplot2::scale_y_discrete(drop = FALSE) +
+  ggplot2::labs(x = "Podíl zpráv s kódem ICD", y = NULL, colour = NULL) +
+  theme_thesis() +
+  ggplot2::theme(legend.position = "bottom")
+export_figure(plot, height_cm = 10)
+```
+
+`r noise_text(agreement, candidates)`
+
+## Zmínky příznaků {#sec-priznaky}
+
+@tbl-priznaky a @fig-priznaky uvádějí, jak často se v textu zpráv objevují příznaky z seed lexikonu. Slouží k odhadu rozsahu extrakce příznaků a jako základ budoucího lexikonu. `r hidden_rows_text(sum(is.na(symptoms$zminka)))`
+
+```{r}
+#| label: tbl-priznaky
+#| tbl-cap: "Zprávy vstupního korpusu se zmínkou příznaku ze seed lexikonu a podíl po odečtení negace."
+#| tbl-colwidths: [34, 20, 23, 23]
+export_table(
+  symptom_table(symptoms),
+  col.names = c("Příznak", "Zprávy se zmínkou", "Podíl (%)", "Podíl po odečtení negace (%)"),
+  align = "lrrr",
+  code = "priznak"
+)
+```
+
+*Zdroj:* text z `discharge`; příznaky jsou klíčová slova z `config/text_mentions.json`, ne hodnoty z dat.
+
+```{r}
+#| label: fig-priznaky
+#| fig-cap: "Podíl zpráv vstupního korpusu se zmínkou příznaku; skryté příznaky nejsou zobrazeny."
+#| fig-width: 6.5
+#| fig-height: 4.5
+bars <- symptom_bars(symptoms)
+plot <- ggplot2::ggplot(bars, ggplot2::aes(podil, priznak)) +
+  ggplot2::geom_col() +
+  ggplot2::scale_x_continuous(labels = percent_axis) +
+  ggplot2::labs(x = "Podíl zpráv", y = NULL) +
+  theme_thesis()
+export_figure(plot, height_cm = 10.5)
+```
+
+`r symptom_text(symptoms)`
+
+## Rubrika a výběr pětice {#sec-rubrika}
+
+@tbl-rubrika uplatňuje rubriku na `r candidate_count` a uvádí výsledek výběru. Kandidát prošel, když leží v pásmu prevalence `r band_text` a jeho P(zmínka | ICD+) je aspoň `r floor_text`. Z prošlých se vybírá jeden na kapitolu.
+
+```{r}
+#| label: tbl-rubrika
+#| tbl-cap: "Rubrika výběru pětice: pásmo prevalence, shoda kódu a zmínky a výsledek."
+#| tbl-colwidths: [30, 10, 18, 14, 28]
+export_table(
+  rubric_table(ranked, selection, candidates),
+  col.names = c("Kandidát", "Kapitola", "Pásmo", "P(zmínka | ICD+) (%)", "Výsledek"),
+  align = "lllrl"
+)
+```
+
+*Zdroj:* prevalence ze sedmého sešitu (`candidate_prevalence`) a shoda uvedená v @tbl-shoda.
+
+# Shrnutí a rozhodnutí {#sec-shrnuti}
+
+Dokument změřil shodu kódů ICD a zmínek v textu a vybral pětici diagnóz. Pro další práci z toho plyne:
+
+- **Pětice diagnóz.** `r selection_text(selection, candidates)`
+- **Riziko pro negativní třídu.** `r noise_text(agreement, candidates)`
+- **Příznaky.** `r symptom_text(symptoms)`
+- **Potlačení.** `r hidden_rows_text(hidden_rows)`
+
+# Omezení {#sec-omezeni}
+
+Zmínky v oddílu Discharge Diagnosis nadhodnocují P(zmínka | ICD+), protože parser sekcí vznikne až později a odebrání oddílu je jen ablace. Regulární výraz nepozná synonyma mimo lexikon, překlepy, hypotézy ani časovost. Odečtení negace je dolní odhad negace, takže tvrzení je spíš nadhodnocené, ale hladové okno může kladnou zmínku vyříznout a tvrzení podhodnotit. Zkratky jsou víceznačné (AF, MI). Čísla předchozího projektu jsou kvůli oddělení zkratek a odlišné definici tvrzené zmínky srovnatelná jen přibližně. Kód ICD je od zmínky nezávislý strukturovaný protějšek, ne výstup modelu; sešit proto mluví o shodě kódu a zmínky, ne o kvalitě štítků.
+
+{{< include _partials/appendix.qmd >}}
