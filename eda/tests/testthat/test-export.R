@@ -284,3 +284,39 @@ test_that("scale_fill_sequential tmavne s hodnotou, nese černý text a NA nech�
   expect_gte(lightness(fills[[2]]), 49)
   expect_equal(fills[[3]], "white")
 })
+
+test_that("export_json zapíše <label>.json do dir a vrátí cestu", {
+  dir <- withr::local_tempdir()
+
+  path <- export_json(list(a = 1), label = "parametry", dir = file.path(dir, "novy"))
+
+  expect_equal(path, file.path(dir, "novy", "parametry.json"))
+  expect_true(file.exists(path))
+})
+
+test_that("export_json zachová jednoprvkové a prázdné pole jako pole a NA jako null", {
+  dir <- withr::local_tempdir()
+  path <- export_json(
+    list(one = I("a"), none = I(character()), empty = structure(list(), names = character()), value = 0.1234, missing = NA_real_, scalar = "x"),
+    label = "pole", dir = dir
+  )
+
+  text <- paste(readLines(path), collapse = "")
+  parsed <- jsonlite::fromJSON(path, simplifyVector = FALSE)
+
+  expect_match(text, "\"one\": \\[\\s*\"a\"\\s*\\]")
+  expect_match(text, "\"none\": \\[\\s*\\]")
+  expect_match(text, "\"empty\": \\{\\s*\\}")
+  expect_match(text, "\"missing\": null", fixed = FALSE)
+  expect_match(text, "\"scalar\": \"x\"", fixed = TRUE)
+  expect_equal(parsed$value, 0.1234)
+  expect_null(parsed$missing)
+})
+
+test_that("export_json odmítne neplatný label a nic nezapíše", {
+  dir <- withr::local_tempdir()
+
+  expect_error(export_json(list(a = 1), label = "Špatný label", dir = dir), "label")
+  expect_error(export_json(list(a = 1), label = NULL, dir = dir), "label")
+  expect_length(list.files(dir), 0L)
+})

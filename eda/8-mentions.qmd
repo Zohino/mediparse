@@ -28,6 +28,7 @@ agreement <- align_agreement(suppress_agreement(mention_agreement(con, candidate
 symptoms <- suppress_symptoms(symptom_mentions(con, candidates, mentions))
 ranked <- rubric(prevalence, agreement, candidates)
 selection <- select_five(ranked)
+cells <- cooccurrence_cells(cooccurrence(con, candidates))
 band_text <- sprintf(
   "%.0f–%.0f\u00a0%%", 100 * PREVALENCE_BAND[["low"]], 100 * PREVALENCE_BAND[["high"]]
 )
@@ -172,9 +173,16 @@ Dokument změřil shodu kódů ICD a zmínek v textu a vybral pětici diagnóz. 
 - **Riziko pro negativní třídu.** `r noise_text(agreement, candidates)`
 - **Příznaky.** `r symptom_text(symptoms)`
 - **Potlačení.** `r hidden_rows_text(hidden_rows)`
+- **Parametry syntetiky.** Sešit zapíše pro vybranou pětici po potlačení prevalenci, matici P(j | i) a míry zmínek do `results/eda/8-mentions/parametry-syntetiky.json`; příkaz `mediparse-synthetic-parameters` je převezme do plánu syntetického korpusu.
 
 # Omezení {#sec-omezeni}
 
 Zmínky v oddílu Discharge Diagnosis nadhodnocují P(zmínka | ICD+), protože parser sekcí vznikne až později a odebrání oddílu je jen ablace. Regulární výraz nepozná synonyma mimo lexikon, překlepy, hypotézy ani časovost. Odečtení negace je dolní odhad negace, takže tvrzení je spíš nadhodnocené, ale hladové okno může kladnou zmínku vyříznout a tvrzení podhodnotit. Zkratky jsou víceznačné (AF, MI). Čísla předchozího projektu jsou kvůli oddělení zkratek a odlišné definici tvrzené zmínky srovnatelná jen přibližně. Kód ICD je od zmínky nezávislý strukturovaný protějšek, ne výstup modelu; sešit proto mluví o shodě kódu a zmínky, ne o kvalitě štítků.
+
+```{r}
+#| label: parametry-syntetiky
+#| include: false
+export_json(synthetic_parameters(selection, prevalence, agreement, cells, candidates))
+```
 
 {{< include _partials/appendix.qmd >}}

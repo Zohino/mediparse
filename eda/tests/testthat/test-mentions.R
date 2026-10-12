@@ -645,3 +645,110 @@ test_that("symptom_text skloňuje počet příznaků s podílem pro 1, 2 a 5", {
   expect_equal(symptom_text(symptom_fixture(5)), expected("5\u00a0příznaků"))
   expect_match(symptom_text(symptom_fixture(0)), "nelze", fixed = TRUE)
 })
+
+PARAMETER_POOL <- list(
+  dm = list(keywords_en = c("diabetes", "diabetic"), acronyms_en = c("DM", "DM2")),
+  hf = list(keywords_en = "heart failure", acronyms_en = character()),
+  pn = list(keywords_en = "pneumonia", acronyms_en = "PNA"),
+  af = list(keywords_en = "atrial fibrillation", acronyms_en = "AF")
+)
+
+parameter_inputs <- function(selected = c("pn", "dm")) {
+  keys <- names(PARAMETER_POOL)
+  grid <- expand.grid(radek = keys, sloupec = keys, stringsAsFactors = FALSE)
+  grid <- grid[grid$radek != grid$sloupec, ]
+  grid$n_i <- c(dm = 200, hf = 100, pn = 80, af = 50)[grid$radek]
+  grid$n_j <- c(dm = 200, hf = 100, pn = 80, af = 50)[grid$sloupec]
+  grid$n_ij <- 20
+  grid$podil <- grid$n_ij / grid$n_i
+  list(
+    selection = list(kind = "vyber", selected = selected),
+    prevalence = data.frame(
+      kandidat = keys, n = c(200, 100, 80, 50), celkem = 1000, stringsAsFactors = FALSE
+    ),
+    agreement = data.frame(
+      kandidat = keys, icd = c(200, 100, 80, 50), zminka = c(300, 120, 90, 60),
+      icd_zminka = c(150, 90, 40, 45), celkem = 1000, stringsAsFactors = FALSE
+    ),
+    cells = grid
+  )
+}
+
+run_parameters <- function(inputs) {
+  synthetic_parameters(
+    inputs$selection, inputs$prevalence, inputs$agreement, inputs$cells, PARAMETER_POOL
+  )
+}
+
+test_that("synthetic_parameters řadí podle poolu, ne podle výběru, a zaokrouhluje na 4 místa", {
+  out <- run_parameters(parameter_inputs(c("pn", "dm")))
+
+  expect_equal(as.character(out$selection), c("dm", "pn"))
+  expect_equal(names(out$prevalence), c("dm", "pn"))
+  expect_equal(unlist(out$prevalence), c(dm = 0.2, pn = 0.08))
+  expect_equal(names(out$mentions), c("dm", "pn"))
+  expect_equal(names(out$conditional), c("dm", "pn"))
+})
+
+test_that("míry zmínek jsou icd_zminka / icd a (zminka - icd_zminka) / (celkem - icd)", {
+  out <- run_parameters(parameter_inputs(c("dm", "pn")))
+
+  expect_equal(out$mentions$dm$given_positive, 0.75)
+  expect_equal(out$mentions$dm$given_negative, round(150 / 800, 4))
+  expect_equal(out$mentions$pn$given_positive, 0.5)
+  expect_equal(out$mentions$pn$given_negative, round(50 / 920, 4))
+  expect_equal(out$mentions$pn$given_negative, 0.0543)
+})
+
+test_that("matice má diagonálu 1 a mimo ni n_ij / n_i zaokrouhlené na 4 místa", {
+  inputs <- parameter_inputs(c("dm", "pn"))
+  inputs$cells$n_ij[inputs$cells$radek == "pn" & inputs$cells$sloupec == "dm"] <- 7
+  inputs$cells$podil <- inputs$cells$n_ij / inputs$cells$n_i
+
+  out <- run_parameters(inputs)
+
+  expect_equal(out$conditional$dm$dm, 1)
+  expect_equal(out$conditional$pn$pn, 1)
+  expect_equal(out$conditional$dm$pn, 0.1)
+  expect_equal(out$conditional$pn$dm, 0.0875)
+  expect_equal(names(out$conditional$dm), c("dm", "pn"))
+})
+
+test_that("klíčová slova jsou fráze a pak zkratky a kandidát bez zkratek nese jen fráze", {
+  out <- run_parameters(parameter_inputs(c("dm", "hf")))
+
+  expect_equal(as.character(out$mentions$dm$keywords), c("diabetes", "diabetic", "DM", "DM2"))
+  expect_equal(as.character(out$mentions$hf$keywords), "heart failure")
+})
+
+test_that("potlačená buňka projde jako NA", {
+  inputs <- parameter_inputs(c("dm", "pn"))
+  inputs$prevalence$n[inputs$prevalence$kandidat == "pn"] <- NA_real_
+  inputs$agreement[inputs$agreement$kandidat == "pn", AGREEMENT_COLUMNS] <- NA_real_
+  inputs$cells$n_ij[inputs$cells$radek == "dm" & inputs$cells$sloupec == "pn"] <- NA_real_
+  inputs$cells$podil[inputs$cells$radek == "dm" & inputs$cells$sloupec == "pn"] <- NA_real_
+
+  out <- run_parameters(inputs)
+
+  expect_true(is.na(out$prevalence$pn))
+  expect_true(is.na(out$mentions$pn$given_positive))
+  expect_true(is.na(out$mentions$pn$given_negative))
+  expect_true(is.na(out$conditional$dm$pn))
+  expect_equal(out$conditional$pn$dm, 0.25)
+})
+
+test_that("výběr nelze a prázdný výběr dají prázdné objekty", {
+  inputs <- parameter_inputs()
+
+  for (selection in list(list(kind = "nelze"), list(kind = "vyber", selected = character()))) {
+    inputs$selection <- selection
+    out <- run_parameters(inputs)
+
+    expect_length(out$selection, 0L)
+    expect_equal(names(out), c("selection", "prevalence", "conditional", "mentions"))
+    for (name in c("prevalence", "conditional", "mentions")) {
+      expect_length(out[[name]], 0L)
+      expect_false(is.null(names(out[[name]])))
+    }
+  }
+})
