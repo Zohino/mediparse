@@ -1,6 +1,6 @@
 # Specifikace syntetického korpusu
 
-Syntetický korpus napájí smoketest a demo pipeline: 200 anglických propouštěcích
+Syntetický korpus napájí smoketest a demo pipeline: 400 anglických propouštěcích
 zpráv a jejich české protějšky. Zprávy nejsou z MIMIC, ale strukturou odpovídají
 MIMIC-IV-Note, aby je zpracovával tentýž kód jako reálná data.
 
@@ -39,7 +39,7 @@ a vlastní hodnoty uvádí jen tam, kde v configu nejsou.
 | `note_id` | řetězec | `subject_id-DS-k`, kde `k` je pořadí zprávy pacienta (skladba MIMIC-IV-Note) |
 | `subject_id` | celé číslo | syntetický pacient, od `patients.first_subject_id` (90 000 001) výše |
 | `text` | řetězec | text zprávy |
-| labely | logická hodnota | `diabetes`, `ckd`, `heart_failure`, `atrial_fibrillation`, `aki` |
+| labely | logická hodnota | `diabetes`, `copd`, `ckd`, `pneumonia`, `atrial_fibrillation` |
 
 ## Plán
 
@@ -58,8 +58,12 @@ a sekcemi. Parametry jsou v configu:
 
 Pravidla vzorkování, která config sám nevyjadřuje:
 
-- Chronické diagnózy (`diabetes`, `ckd`, `heart_failure`, `atrial_fibrillation`)
-  platí pro všechny zprávy pacienta; `aki` se u dalších zpráv losuje podmíněně.
+- Chronické diagnózy (`diabetes`, `copd`, `ckd`, `atrial_fibrillation`)
+  platí pro všechny zprávy pacienta; akutní `pneumonia` se u dalších zpráv losuje
+  podmíněně.
+- Počet zpráv (`patients.notes`) je nejmenší stovka, při níž má nejvzácnější label
+  v pětině korpusu očekávaně aspoň 5 pozitivních zpráv; jinak by metriky a prahy
+  jednotlivých labelů byly nedefinované nebo degenerované.
 - Výskyt každé sekce se losuje nezávisle; pořadí sekcí je pořadí v configu.
 - Z podnadpisů v jedné skupině configu (vylučující se varianty) se losuje nejvýše
   jeden.
@@ -114,7 +118,7 @@ preambule, hlavičky a krátké sekce mají reálnou délku.
 ohraničený hranicemi slov (definice EDA).
 
 - Diagnóza bez zmínky v plánu: v textu není žádné její klíčové slovo, ani zkratka
-  (například `AF`, `DM`, `HF`). Pozitivní label bez zmínky smí model popsat
+  (například `AF`, `DM`, `COPD`). Pozitivní label bez zmínky smí model popsat
   nepřímo, například vývojem kreatininu nebo léčbou.
 - Diagnóza se zmínkou: klíčové slovo stojí v sekcích z plánu.
 - Slovník se překrývá: například „renal insufficiency“ je klíčové slovo `ckd`,
@@ -154,7 +158,7 @@ Kontroly korpusu (tolerance NÁVRH, v configu):
 | medián délky narativu | `structure.narrative.median_words` | `structure.narrative.median_tolerance` (relativní, dnes ±10 %) |
 | σ logaritmu délky narativu | `structure.narrative.sigma` | `structure.narrative.sigma_tolerance` (absolutní, dnes ±0,1) |
 | hustota narativních značek | `structure.narrative.deid_per_word` | `structure.narrative.deid_tolerance` (relativní, dnes ±15 %) |
-| prevalence každého labelu | `labels.prevalence` | `labels.prevalence_tolerance` (absolutní, dnes ±2 p. b.) |
+| prevalence každého labelu | `labels.prevalence` | `labels.prevalence_tolerance` (relativní, dnes ±15 %) |
 
 Kontroly korpusu měří text: narativ tvoří těla sekcí, které mají v plánu délku,
 bez názvů podnadpisů; hustota značek je počet `___` v narativu bez věkové značky
