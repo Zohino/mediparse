@@ -395,3 +395,46 @@ symptom_text <- function(symptoms) {
     format_number(nrow(symptoms)), top$priznak, percent_label(top$zminka, top$celkem)
   )
 }
+
+EXPORT_DIGITS <- 4L
+
+share_or_na <- function(numerator, denominator) {
+  value <- round(numerator / denominator, EXPORT_DIGITS)
+  ifelse(is.finite(value), value, NA_real_)
+}
+
+synthetic_parameters <- function(selection, prevalence, agreement, cells, candidates) {
+  keys <- if (selection$kind == "vyber") names(candidates)[names(candidates) %in% selection$selected] else character()
+  named <- function(values) {
+    if (length(keys) == 0L) {
+      return(structure(list(), names = character()))
+    }
+    stats::setNames(as.list(values), keys)
+  }
+  at_prevalence <- match(keys, prevalence$kandidat)
+  at_agreement <- match(keys, agreement$kandidat)
+  conditional <- lapply(keys, function(row) {
+    inside <- cells[cells$radek == row, , drop = FALSE]
+    shares <- vapply(keys, function(column) {
+      if (column == row) return(1)
+      at <- inside$sloupec == column
+      if (sum(at) == 1L) share_or_na(inside$n_ij[at], inside$n_i[at]) else NA_real_
+    }, numeric(1))
+    stats::setNames(as.list(unname(shares)), keys)
+  })
+  mentions <- lapply(seq_along(keys), function(index) {
+    row <- agreement[at_agreement[[index]], ]
+    entry <- candidates[[keys[[index]]]]
+    list(
+      given_positive = share_or_na(row$icd_zminka, row$icd),
+      given_negative = share_or_na(row$zminka - row$icd_zminka, row$celkem - row$icd),
+      keywords = I(c(entry$keywords_en, entry$acronyms_en))
+    )
+  })
+  list(
+    selection = I(keys),
+    prevalence = named(share_or_na(prevalence$n[at_prevalence], prevalence$celkem[at_prevalence])),
+    conditional = named(conditional),
+    mentions = named(mentions)
+  )
+}

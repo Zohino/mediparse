@@ -182,3 +182,17 @@ export_figure <- function(
 percent_axis <- function(x) {
   paste0(format(100 * x, decimal.mark = ",", trim = TRUE), NBSP, "%")
 }
+
+export_json <- function(
+    x,
+    label = knitr::opts_current$get("label"),
+    dir = export_dir()) {
+  check_label(label)
+  dir.create(dir, recursive = TRUE, showWarnings = FALSE)
+  path <- file.path(dir, paste0(label, ".json"))
+  jsonlite::write_json(
+    x, path,
+    auto_unbox = TRUE, digits = NA, na = "null", pretty = TRUE
+  )
+  invisible(path)
+}
