@@ -10,6 +10,9 @@ toc: true
 toc-title: Obsah
 number-sections: true
 
+filters:
+  - _filters/nbsp.lua
+
 crossref:
   sec-prefix: ""
 
