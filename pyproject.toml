@@ -24,6 +24,7 @@ mediparse-corpus-gate = "mediparse.entrypoints.corpus_gate:main"
 mediparse-corpus-provenance = "mediparse.entrypoints.corpus_provenance:main"
 mediparse-eda-synthetic-tables = "mediparse.entrypoints.eda_synthetic_tables:main"
 mediparse-sample-plans = "mediparse.entrypoints.synthetic_plans:main"
+mediparse-synthetic-parameters = "mediparse.entrypoints.synthetic_parameters:main"
 mediparse-translation-provenance = "mediparse.entrypoints.translation_provenance:main"
 mediparse-verbalization-prompt = "mediparse.entrypoints.verbalization_prompt:main"
 
@@ -340,6 +341,10 @@ audit-corpus = { cmd = "bash scripts/audit-corpus.sh \"{{ discharge }}\" \"{{ ra
 provenance-corpus = { cmd = "bash scripts/provenance-corpus.sh \"{{ model }}\"", args = [
     "model",
 ], description = "Provenance auditovaného korpusu; commit specifikace z historie docs/synthetic-corpus.md" }
+synthetic-parameters = { cmd = "mediparse-synthetic-parameters --export \"{{ export }}\" --config \"{{ config }}\"", args = [
+    { arg = "export", default = "results/eda/8-mentions/parametry-syntetiky.json" },
+    { arg = "config", default = "config/synthetic_plan.json" },
+], description = "Převezmi export sešitu 8 do config/synthetic_plan.json; jen uživatel ve vlastním terminálu, mimo Claude Code" }
 verify-mimic = { cmd = "bash scripts/verify-mimic.sh \"{{ dir }}\"", args = [
     { arg = "dir", default = "resources/mimic" },
 ], description = "Ověř, že stažené tabulky MIMIC jsou všechny na disku a sedí s otisky v configu" }

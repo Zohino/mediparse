@@ -8,7 +8,7 @@ import sys
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Any, Final
 
 from mediparse.domain.corpus_audit import NGRAM_SIZE, NORMALIZATION, AuditRecord
 from mediparse.domain.corpus_provenance import Decoding, Translation, TranslationRun
@@ -178,3 +178,29 @@ def load_script(path: Path, monkeypatch: pytest.MonkeyPatch) -> ModuleType:
     monkeypatch.setitem(sys.modules, path.stem, module)
     spec.loader.exec_module(module)
     return module
+
+
+def export_payload(
+    selection: tuple[str, ...] = tuple(Diagnosis), prevalence: float = 0.2
+) -> dict[str, Any]:
+    """Export parametrů pětice s nezávislými labely a jednotnou prevalencí.
+
+    Returns:
+        Strom JSON ve tvaru exportu sešitu 8.
+    """
+    return {
+        "selection": list(selection),
+        "prevalence": dict.fromkeys(selection, prevalence),
+        "conditional": {
+            row: {column: 1.0 if row == column else prevalence for column in selection}
+            for row in selection
+        },
+        "mentions": {
+            key: {
+                "given_positive": 0.9,
+                "given_negative": 0.05,
+                "keywords": [f"{key} phrase", key.upper()],
+            }
+            for key in selection
+        },
+    }
