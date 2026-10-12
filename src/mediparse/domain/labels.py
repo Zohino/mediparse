@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from enum import StrEnum
 from itertools import combinations
 from typing import TYPE_CHECKING, Annotated, Final, Self
@@ -105,6 +106,10 @@ class IpfNotConvergedError(ValueError):
     """Iterativní proporcionální přizpůsobení nedosáhlo tolerance v povoleném počtu průchodů."""
 
 
+class InfeasibleMarginalsError(IpfNotConvergedError):
+    """Prevalence a párové výskyty si odporují: žádné společné rozdělení je nesplní."""
+
+
 def label_sets() -> tuple[LabelSet, ...]:
     """Všech 32 kombinací pozitivních diagnóz v pevném pořadí.
 
@@ -185,8 +190,17 @@ def _pair_table(model: LabelModel, first: Diagnosis, second: Diagnosis) -> _Tabl
 def _fit(joint: dict[LabelSet, float], table: _Table) -> None:
     for belongs, target in table:
         current = sum(p for cell, p in joint.items() if belongs(cell))
+        if math.isclose(current, 0.0, abs_tol=0.0):
+            _check_empty_category(target)
+            continue
         for cell in [cell for cell in joint if belongs(cell)]:
             joint[cell] *= target / current
+
+
+def _check_empty_category(target: float) -> None:
+    if target > 0.0:
+        msg = "Prevalence a podmíněné pravděpodobnosti si odporují: kategorie s nenulovým cílem zůstala prázdná."
+        raise InfeasibleMarginalsError(msg)
 
 
 def _deviation(joint: Mapping[LabelSet, float], table: _Table) -> float:
