@@ -1,0 +1,74 @@
+{
+  "selection": ["diabetes", "copd", "ckd", "pneumonia", "atrial_fibrillation"],
+  "prevalence": {
+    "diabetes": 0.2714,
+    "copd": 0.0902,
+    "ckd": 0.1766,
+    "pneumonia": 0.0637,
+    "atrial_fibrillation": 0.1671
+  },
+  "conditional": {
+    "diabetes": {
+      "diabetes": 1,
+      "copd": 0.1129,
+      "ckd": 0.342,
+      "pneumonia": 0.0676,
+      "atrial_fibrillation": 0.2112
+    },
+    "copd": {
+      "diabetes": 0.3398,
+      "copd": 1,
+      "ckd": 0.2674,
+      "pneumonia": 0.1468,
+      "atrial_fibrillation": 0.2889
+    },
+    "ckd": {
+      "diabetes": 0.5258,
+      "copd": 0.1366,
+      "ckd": 1,
+      "pneumonia": 0.0924,
+      "atrial_fibrillation": 0.3082
+    },
+    "pneumonia": {
+      "diabetes": 0.2883,
+      "copd": 0.208,
+      "ckd": 0.2563,
+      "pneumonia": 1,
+      "atrial_fibrillation": 0.2665
+    },
+    "atrial_fibrillation": {
+      "diabetes": 0.3431,
+      "copd": 0.1559,
+      "ckd": 0.3256,
+      "pneumonia": 0.1015,
+      "atrial_fibrillation": 1
+    }
+  },
+  "mentions": {
+    "diabetes": {
+      "given_positive": 0.9364,
+      "given_negative": 0.1728,
+      "keywords": ["diabetes", "diabetic", "diabetes mellitus", "DM", "DM2"]
+    },
+    "copd": {
+      "given_positive": 0.8911,
+      "given_negative": 0.0604,
+      "keywords": ["chronic obstructive pulmonary disease", "emphysema", "chronic bronchitis", "COPD"]
+    },
+    "ckd": {
+      "given_positive": 0.8708,
+      "given_negative": 0.0259,
+      "keywords": ["chronic kidney disease", "end-stage renal disease", "chronic renal", "renal insufficiency", "CKD", "ESRD"]
+    },
+    "pneumonia": {
+      "given_positive": 0.9279,
+      "given_negative": 0.1748,
+      "keywords": ["pneumonia", "pneumonitis"]
+    },
+    "atrial_fibrillation": {
+      "given_positive": 0.9452,
+      "given_negative": 0.0412,
+      "keywords": ["atrial fibrillation", "afib", "a-fib", "atrial flutter", "AF"]
+    }
+  }
+}
