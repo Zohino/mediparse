@@ -32,9 +32,15 @@ BAND_LABELS <- c(
   pod = "pod pásmem", v = "v pásmu", nad = "nad pásmem", nelze = "nelze posoudit"
 )
 
-candidates_path <- function() {
+config_path <- function(name) {
   root <- Sys.getenv("PIXI_PROJECT_ROOT", file.path("..", "..", ".."))
-  file.path(root, "config", "diagnosis_candidates.json")
+  file.path(root, "config", name)
+}
+
+candidates_path <- function() config_path("diagnosis_candidates.json")
+
+candidate_labels <- function(keys, candidates) {
+  unname(vapply(keys, function(key) candidates[[key]]$label_cs, character(1)))
 }
 
 read_candidates <- function(path) {
@@ -44,7 +50,10 @@ read_candidates <- function(path) {
       label_cs = entry$label_cs,
       icd9_prefixes = as.character(unlist(entry$icd9_prefixes)),
       icd10_prefixes = as.character(unlist(entry$icd10_prefixes)),
-      charlson = as.character(unlist(entry$charlson))
+      charlson = as.character(unlist(entry$charlson)),
+      kapitola = entry$kapitola,
+      keywords_en = as.character(unlist(entry$keywords_en)),
+      acronyms_en = as.character(unlist(entry$acronyms_en))
     )
   })
 }
@@ -436,7 +445,7 @@ ranking_table <- function(ranking) {
 candidate_table <- function(published, candidates) {
   verdict <- candidate_verdicts(published)
   data.frame(
-    kandidat = vapply(published$kandidat, function(key) candidates[[key]]$label_cs, character(1)),
+    kandidat = candidate_labels(published$kandidat, candidates),
     n = hidden_number(published$n),
     korpus = hidden_percent(published$n, published$celkem),
     icd9 = hidden_percent(published$n9, published$celkem9),

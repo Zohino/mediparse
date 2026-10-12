@@ -1,0 +1,42 @@
+{
+  "negation": {
+    "cues": [
+      "no",
+      "not",
+      "denies",
+      "denied",
+      "without",
+      "negative for",
+      "no evidence of",
+      "absence of",
+      "family history",
+      "ruled out",
+      "r/o"
+    ],
+    "window_chars": 40
+  },
+  "symptoms": {
+    "keywords_en": [
+      "chest pain",
+      "shortness of breath",
+      "dyspnea",
+      "fever",
+      "cough",
+      "nausea",
+      "vomiting",
+      "headache",
+      "edema",
+      "syncope",
+      "fatigue",
+      "dizziness",
+      "abdominal pain",
+      "weakness",
+      "confusion",
+      "palpitations",
+      "diarrhea",
+      "constipation",
+      "back pain",
+      "malaise"
+    ]
+  }
+}
