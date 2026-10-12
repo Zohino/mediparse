@@ -11,6 +11,8 @@ read_text_mentions <- function(path) {
   )
 }
 
+MENTION_FLOOR <- 0.5
+SELECTION_SIZE <- 5L
 FLAGS_TABLE <- "mention_flags_input"
 AGREEMENT_COUNTS <- c("icd", "zminka", "tvrzeni", "icd_zminka", "icd_tvrzeni")
 
@@ -175,4 +177,97 @@ suppress_symptoms <- function(df) {
     !is.na(dua_binary(df$tvrzeni, df$celkem)) &
     df$zminka - df$tvrzeni >= DUA_THRESHOLD
   hide_row(df, !shown, c("zminka", "tvrzeni"))
+}
+
+agreement_verdict <- function(share) {
+  ifelse(
+    is.na(share), "nelze",
+    ifelse(share >= MENTION_FLOOR, "splňuje", "nesplňuje")
+  )
+}
+
+rubric_result <- function(band, agreement) {
+  failed <- band %in% c("pod", "nad") | agreement == "nesplňuje"
+  unknown <- band == "nelze" | agreement == "nelze"
+  ifelse(unknown, "nelze", ifelse(failed, "neprošel", "prošel"))
+}
+
+rubric <- function(prevalence, agreement, candidates) {
+  keys <- names(candidates)
+  at_prevalence <- match(keys, prevalence$kandidat)
+  at_agreement <- match(keys, agreement$kandidat)
+  n <- as.numeric(prevalence$n[at_prevalence])
+  total <- as.numeric(prevalence$celkem[at_prevalence])
+  share <- agreement$icd_zminka[at_agreement] / agreement$icd[at_agreement]
+  share[!is.finite(share)] <- NA_real_
+  band <- band_verdict(n / total)
+  verdict <- agreement_verdict(share)
+  data.frame(
+    kandidat = keys,
+    kapitola = vapply(candidates, function(entry) entry$kapitola, character(1)),
+    podil = n / total,
+    pasmo = band,
+    shoda = share,
+    verdikt_shody = verdict,
+    vysledek = rubric_result(band, verdict),
+    stringsAsFactors = FALSE,
+    row.names = NULL
+  )
+}
+
+chapter_winners <- function(passed) {
+  chapters <- unique(passed$kapitola)
+  vapply(chapters, function(chapter) {
+    inside <- passed[passed$kapitola == chapter, , drop = FALSE]
+    inside$kandidat[which.max(inside$shoda)]
+  }, character(1), USE.NAMES = FALSE)
+}
+
+select_five <- function(rubric) {
+  keys <- function(result) rubric$kandidat[rubric$vysledek == result]
+  if (nrow(rubric) == 0L || all(rubric$vysledek == "nelze")) {
+    return(list(kind = "nelze"))
+  }
+  passed <- rubric[rubric$vysledek == "prošel", , drop = FALSE]
+  winners <- chapter_winners(passed)
+  if (length(winners) > SELECTION_SIZE) {
+    stop("Pool má víc kapitol ICD-10, než kolik míst má pětice.")
+  }
+  rest <- passed[!passed$kandidat %in% winners, , drop = FALSE]
+  rest <- rest[order(-rest$shoda, match(rest$kandidat, rubric$kandidat)), , drop = FALSE]
+  filled <- utils::head(rest$kandidat, max(0L, SELECTION_SIZE - length(winners)))
+  list(
+    kind = "vyber",
+    selected = rubric$kandidat[rubric$kandidat %in% c(winners, filled)],
+    filled = rubric$kandidat[rubric$kandidat %in% filled],
+    passed = keys("prošel"),
+    failed = keys("neprošel"),
+    unknown = keys("nelze")
+  )
+}
+
+rubric_outcome <- function(rubric, selection) {
+  outcome <- unname(c(
+    "prošel" = "prošel", "neprošel" = "neprošel", "nelze" = "nelze posoudit"
+  )[rubric$vysledek])
+  outcome[rubric$kandidat %in% selection$selected] <- "vybrán"
+  outcome[rubric$kandidat %in% selection$filled] <- "vybrán doplněním"
+  outcome
+}
+
+rubric_table <- function(rubric, selection, candidates) {
+  outcome <- if (selection$kind == "vyber") {
+    rubric_outcome(rubric, selection)
+  } else {
+    rep("nelze posoudit", nrow(rubric))
+  }
+  data.frame(
+    kandidat = candidate_labels(rubric$kandidat, candidates),
+    kapitola = rubric$kapitola,
+    pasmo = unname(BAND_LABELS[rubric$pasmo]),
+    shoda = hidden_percent(rubric$shoda, 1),
+    vysledek = outcome,
+    stringsAsFactors = FALSE,
+    row.names = NULL
+  )
 }
