@@ -33,3 +33,303 @@ test_that("read_text_mentions načte negační výrazy, okno a lexikon příznak
   expect_length(mentions$symptoms$keywords_en, 20L)
   expect_true("chest pain" %in% mentions$symptoms$keywords_en)
 })
+
+LONG <- strrep("x", SHORT_LIMIT)
+
+CASES <- list(
+  dm = list(
+    label_cs = "Diabetes", icd9_prefixes = character(), icd10_prefixes = "E11",
+    charlson = character(), kapitola = "E",
+    keywords_en = c("diabetes", "diabetic"), acronyms_en = c("DM", "DM2")
+  ),
+  pn = list(
+    label_cs = "Pneumonie", icd9_prefixes = character(), icd10_prefixes = "J18",
+    charlson = character(), kapitola = "J",
+    keywords_en = "pneumonia", acronyms_en = character()
+  ),
+  ami = list(
+    label_cs = "Infarkt", icd9_prefixes = character(), icd10_prefixes = "I21",
+    charlson = character(), kapitola = "I",
+    keywords_en = "myocardial infarction", acronyms_en = c("MI", "CHF")
+  ),
+  af = list(
+    label_cs = "Fibrilace", icd9_prefixes = character(), icd10_prefixes = "I48",
+    charlson = character(), kapitola = "I",
+    keywords_en = "atrial fibrillation", acronyms_en = c("AF", "HF")
+  )
+)
+
+MENTIONS <- list(
+  negation = list(cues = c("no", "denies", "family history", "not"), window_chars = 40L),
+  symptoms = list(keywords_en = c("fever", "chills", "cough", "chest pain"))
+)
+
+mention_con <- function(texts, codes = rep("Z99", length(texts)), env = parent.frame()) {
+  hadm <- paste0("h", seq_along(texts))
+  notes <- text_notes(paste0(texts, " ", hadm, " ", LONG))
+  notes$hadm_id <- hadm
+  rows <- data.frame(
+    hadm_id = hadm, icd_code = codes, icd_version = "10", stringsAsFactors = FALSE
+  )
+  mimic_con(discharge = notes, diagnoses_icd = rows, env = env)
+}
+
+symptom_row <- function(texts, symptom) {
+  con <- mention_con(texts)
+  out <- symptom_mentions(con, CASES, MENTIONS)
+  out[out$priznak == symptom, ]
+}
+
+test_that("re2_escape zneškodní speciální znaky a nerozbije pomlčku ani lomítko", {
+  con <- mimic_con()
+  specials <- strsplit(".+*?()[]{}|^$\\", "")[[1]]
+
+  for (special in specials) {
+    pattern <- paste0("x", re2_escape(special), "y")
+    hit <- DBI::dbGetQuery(con, sprintf(
+      "SELECT regexp_matches(%s, %s) AS a, regexp_matches('xzy', %s) AS b",
+      DBI::dbQuoteString(con, paste0("x", special, "y")),
+      DBI::dbQuoteString(con, pattern), DBI::dbQuoteString(con, pattern)
+    ))
+    expect_true(hit$a, info = special)
+    expect_false(hit$b, info = special)
+  }
+  expect_equal(re2_escape(c("a-fib", "r/o")), c("a-fib", "r/o"))
+})
+
+test_that("mention_pattern bez zkratek nemá prázdnou alternativu a nechytá nesouvisející text", {
+  con <- mimic_con()
+  pattern <- mention_pattern("pneumonia", character())
+  matched <- function(text) {
+    DBI::dbGetQuery(con, sprintf(
+      "SELECT regexp_matches(%s, %s) AS m", DBI::dbQuoteString(con, text),
+      DBI::dbQuoteString(con, pattern)
+    ))$m
+  }
+
+  expect_false(matched("nothing to see here"))
+  expect_true(matched("Left PNEUMONIA noted"))
+})
+
+test_that("zkratky se hledají s rozlišením velikosti písmen a fráze bez něj", {
+  texts <- c(
+    "History of DM2 and CHF.", "mi casa, af, hf, dm", "Looking AFTER the MIXED case",
+    "Diabetes today", "DIABETES today", "Prior MI noted", "Known AF, no HF."
+  )
+  con <- mention_con(texts, c("E11", "J18", "I21", "Z99", "Z99", "Z99", "I48"))
+
+  out <- mention_agreement(con, CASES, MENTIONS)
+
+  expect_equal(out$zminka[out$kandidat == "dm"], 3)
+  expect_equal(out$zminka[out$kandidat == "ami"], 2)
+  expect_equal(out$zminka[out$kandidat == "pn"], 0)
+  expect_equal(out$zminka[out$kandidat == "af"], 1)
+  expect_equal(out$icd_zminka[out$kandidat == "af"], 1)
+})
+
+test_that("mezera ve frázi se shoduje s libovolným bílým znakem včetně zalomení řádku", {
+  texts <- c("Prior myocardial\ninfarction.", "Old myocardial  infarction.", "Myocardial infarction.")
+  con <- mention_con(texts)
+
+  out <- mention_agreement(con, CASES, MENTIONS)
+  fever <- symptom_row(c("Has chest\npain today."), "chest pain")
+
+  expect_equal(out$zminka[out$kandidat == "ami"], 3)
+  expect_equal(fever$zminka, 1)
+})
+
+test_that("zmínka až na konci velmi dlouhé zprávy se najde", {
+  con <- mention_con(paste0(strrep("lorem ipsum ", 1000), "pneumonia"), "J18")
+
+  out <- mention_agreement(con, CASES, MENTIONS)
+
+  expect_gt(DBI::dbGetQuery(con, "SELECT max(length(text)) AS n FROM discharge")$n, 10000)
+  expect_equal(out$zminka[out$kandidat == "pn"], 1)
+  expect_equal(out$icd_zminka[out$kandidat == "pn"], 1)
+})
+
+test_that("negovaná zmínka je zmínka bez tvrzení a kladná zmínka vedle ní tvrzení dá", {
+  con <- mention_con(c(
+    "No pneumonia.", "No pneumonia on CXR; treated for pneumonia.", "Pneumonia on CXR."
+  ))
+
+  out <- mention_agreement(con, CASES, MENTIONS)
+  row <- out[out$kandidat == "pn", ]
+
+  expect_equal(row$zminka, 3)
+  expect_equal(row$tvrzeni, 2)
+})
+
+test_that("negace pokrývá výčet v okně, ale ne tečku ani víc než 40 znaků", {
+  filler <- strrep("word ", 12)
+  texts <- c(
+    "Patient denies fever, chills or cough.",
+    "Denies chills. Fever overnight.",
+    paste0("No ", filler, "fever"),
+    "Family history of diabetes."
+  )
+  con <- mention_con(texts)
+
+  symptoms <- symptom_mentions(con, CASES, MENTIONS)
+  fever <- symptoms[symptoms$priznak == "fever", ]
+  cough <- symptoms[symptoms$priznak == "cough", ]
+  diabetes <- mention_agreement(con, CASES, MENTIONS)
+  diabetes <- diabetes[diabetes$kandidat == "dm", ]
+
+  expect_equal(c(cough$zminka, cough$tvrzeni), c(1, 0))
+  expect_equal(c(fever$zminka, fever$tvrzeni), c(3, 2))
+  expect_equal(c(diabetes$zminka, diabetes$tvrzeni), c(1, 0))
+})
+
+test_that("do populace patří jen zprávy vstupního korpusu a icd se rovná prevalenci", {
+  notes <- data.frame(
+    note_id = c("n1", "n2", "n3", "n4", "n5"),
+    subject_id = c("s1", "s2", "s3", "s4", "s5"),
+    hadm_id = c("h1", "h2", "h3", "h4", "h5"),
+    text = c(
+      paste0("Pneumonia seen. ", LONG), paste0("Pneumonia elsewhere. ", LONG), "Pneumonia",
+      paste0("Pneumonia seen. ", LONG), paste0("Pneumonia, no code. ", LONG)
+    ),
+    stringsAsFactors = FALSE
+  )
+  codes <- data.frame(
+    hadm_id = c("h1", "h2", "h3", "h4"), icd_code = c("J18", "Z99", "J18", "J18"),
+    icd_version = "10", stringsAsFactors = FALSE
+  )
+  con <- mimic_con(discharge = notes, diagnoses_icd = codes)
+
+  out <- mention_agreement(con, CASES, MENTIONS)
+  row <- out[out$kandidat == "pn", ]
+  prevalence <- candidate_prevalence(con, CASES)
+
+  expect_equal(c(row$celkem, row$zminka, row$icd_zminka), c(2, 2, 1))
+  expect_equal(row$icd, prevalence$n[prevalence$kandidat == "pn"])
+  expect_equal(row$icd, 1)
+})
+
+test_that("zpráva se zmínkou bez kódu kandidáta zvedne zminka, ale ne icd_zminka", {
+  con <- mention_con(c("Diabetes noted.", "Diabetes noted twice.", "Other."), c("E11", "Z99", "E11"))
+
+  row <- mention_agreement(con, CASES, MENTIONS)
+  row <- row[row$kandidat == "dm", ]
+
+  expect_equal(c(row$icd, row$zminka, row$icd_zminka, row$celkem), c(2, 2, 1, 3))
+})
+
+test_that("počty tvrzení kandidáta se dělí na zprávy s kódem a bez něj", {
+  con <- mention_con(c("No diabetes.", "Diabetes.", "Diabetes DM2."), c("E11", "E11", "Z99"))
+
+  row <- mention_agreement(con, CASES, MENTIONS)
+  row <- row[row$kandidat == "dm", ]
+
+  expect_equal(
+    c(row$zminka, row$tvrzeni, row$icd_zminka, row$icd_tvrzeni), c(3, 2, 2, 1)
+  )
+})
+
+test_that("symptom_mentions spočítá zmínky a tvrzení lexikonu a celkem", {
+  texts <- c("Fever and cough.", "No fever.", "Denies fever, cough.", "Nothing.")
+  con <- mention_con(texts)
+
+  out <- symptom_mentions(con, CASES, MENTIONS)
+
+  expect_equal(out$priznak, MENTIONS$symptoms$keywords_en)
+  expect_equal(out$zminka[out$priznak == "fever"], 3)
+  expect_equal(out$tvrzeni[out$priznak == "fever"], 1)
+  expect_equal(out$zminka[out$priznak == "chest pain"], 0)
+  expect_equal(unique(out$celkem), 4)
+})
+
+test_that("mention_flags vytvoří dočasnou tabulku jednou a vrátí její název", {
+  con <- mention_con(c("Diabetes."))
+
+  first <- mention_flags(con, CASES, MENTIONS)
+  DBI::dbExecute(con, sprintf("DELETE FROM %s", first))
+  second <- mention_flags(con, CASES, MENTIONS)
+
+  expect_equal(first, second)
+  expect_equal(DBI::dbGetQuery(con, sprintf("SELECT count(*) AS n FROM %s", second))$n, 0)
+})
+
+test_that("prázdný korpus vrátí nuly a nespadne", {
+  con <- mimic_con()
+
+  agreement <- mention_agreement(con, CASES, MENTIONS)
+  symptoms <- symptom_mentions(con, CASES, MENTIONS)
+
+  expect_equal(nrow(agreement), 4L)
+  expect_equal(unique(c(agreement$icd, agreement$zminka, agreement$celkem)), 0)
+  expect_equal(unique(c(symptoms$zminka, symptoms$celkem)), 0)
+})
+
+agreement_row <- function(...) {
+  base <- list(
+    kandidat = "dm", icd = 100, zminka = 140, tvrzeni = 100, icd_zminka = 80,
+    icd_tvrzeni = 60, celkem = 400
+  )
+  as.data.frame(modifyList(base, list(...)), stringsAsFactors = FALSE)
+}
+
+AGREEMENT_COLUMNS <- c("icd", "zminka", "tvrzeni", "icd_zminka", "icd_tvrzeni")
+
+test_that("suppress_agreement ponechá řádek, kde nejmenší buňka má právě deset zpráv", {
+  edge <- agreement_row(
+    icd = 30, zminka = 40, tvrzeni = 20, icd_zminka = 20, icd_tvrzeni = 10, celkem = 60
+  )
+
+  expect_equal(suppress_agreement(agreement_row()), agreement_row())
+  expect_equal(suppress_agreement(edge), edge)
+  expect_equal(min(agreement_cells(edge)), 10)
+})
+
+test_that("suppress_agreement skryje řádek celý, když jediná z šesti atomických buněk má devět zpráv", {
+  cases <- list(
+    "ICD+ s tvrzením" = agreement_row(icd_tvrzeni = 9, zminka = 181),
+    "ICD+ jen negovaná zmínka" = agreement_row(icd_tvrzeni = 71),
+    "ICD+ bez zmínky" = agreement_row(icd = 89),
+    "bez ICD s tvrzením" = agreement_row(tvrzeni = 69),
+    "bez ICD jen negovaná zmínka" = agreement_row(zminka = 129),
+    "ani ICD ani zmínka" = agreement_row(celkem = 169)
+  )
+
+  for (name in names(cases)) {
+    cells <- agreement_cells(cases[[name]])
+    expect_equal(sum(cells < DUA_THRESHOLD), 1L, info = name)
+    out <- suppress_agreement(cases[[name]])
+    expect_true(all(is.na(out[AGREEMENT_COLUMNS])), info = name)
+    expect_equal(out$kandidat, "dm", info = name)
+    expect_equal(out$celkem, cases[[name]]$celkem, info = name)
+  }
+})
+
+test_that("suppress_agreement skryje kandidáta i s devíti zprávami ICD+ se zmínkou", {
+  out <- suppress_agreement(agreement_row(icd_zminka = 9, icd_tvrzeni = 0))
+
+  expect_true(all(is.na(out[AGREEMENT_COLUMNS])))
+})
+
+test_that("align_agreement skryje kandidáta, jehož prevalenci sešit 7 nezveřejnil", {
+  agreement <- rbind(agreement_row(kandidat = "dm"), agreement_row(kandidat = "pn"))
+  prevalence <- data.frame(kandidat = c("dm", "pn"), n = c(100, NA))
+
+  out <- align_agreement(agreement, prevalence)
+
+  expect_false(anyNA(out[out$kandidat == "dm", AGREEMENT_COLUMNS]))
+  expect_true(all(is.na(out[out$kandidat == "pn", AGREEMENT_COLUMNS])))
+})
+
+test_that("suppress_symptoms skryje řádek podle dua_binary a rozdílu zmínek a tvrzení", {
+  symptoms <- data.frame(
+    priznak = c("fever", "cough", "nausea", "edema", "syncope"),
+    zminka = c(100, 9, 395, 100, 100),
+    tvrzeni = c(90, 9, 395, 91, 9),
+    celkem = 400,
+    stringsAsFactors = FALSE
+  )
+
+  out <- suppress_symptoms(symptoms)
+
+  expect_equal(out$zminka, c(100, NA, NA, NA, NA))
+  expect_equal(out$tvrzeni, c(90, NA, NA, NA, NA))
+  expect_equal(out$priznak, symptoms$priznak)
+})
