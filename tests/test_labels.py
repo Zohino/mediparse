@@ -8,6 +8,7 @@ from pydantic import ValidationError
 
 from mediparse.domain.labels import (
     Diagnosis,
+    InfeasibleMarginalsError,
     IpfNotConvergedError,
     LabelModel,
     acute_given_chronic,
@@ -126,3 +127,51 @@ def test_missing_diagnosis_is_rejected() -> None:
 
     with pytest.raises(ValidationError, match="pět diagnóz"):
         LabelModel.model_validate(valid)
+
+
+def _uniform_model(identical: tuple[tuple[Diagnosis, Diagnosis], ...]) -> LabelModel:
+    share = 0.2
+    linked = {frozenset(pair) for pair in identical}
+    return LabelModel(
+        prevalence=dict.fromkeys(Diagnosis, share),
+        conditional={
+            first: {
+                second: 1.0
+                if first is second or frozenset((first, second)) in linked
+                else 0.5
+                if {first, second}
+                == {Diagnosis.HEART_FAILURE, Diagnosis.ATRIAL_FIBRILLATION}
+                else share
+                for second in Diagnosis
+            }
+            for first in Diagnosis
+        },
+        prevalence_tolerance=0.02,
+        ipf_tolerance=1e-12,
+        ipf_max_passes=500,
+    )
+
+
+def test_structural_zero_converges() -> None:
+    """Dvě totožné diagnózy mají nulové buňky; IPF je přeskočí a zkonverguje."""
+    model = _uniform_model(((Diagnosis.DIABETES, Diagnosis.CKD),))
+
+    joint = max_entropy_joint(model)
+
+    assert isclose(
+        _marginal(joint, Diagnosis.DIABETES, Diagnosis.CKD), 0.2, abs_tol=1e-9
+    )
+    assert isclose(_marginal(joint, Diagnosis.DIABETES), 0.2, abs_tol=1e-9)
+
+
+def test_contradictory_marginals_raise_domain_error() -> None:
+    """A=B, B=C a nezávislé A, C nemá společné rozdělení; chyba říká, že si marginály odporují."""
+    model = _uniform_model((
+        (Diagnosis.DIABETES, Diagnosis.CKD),
+        (Diagnosis.CKD, Diagnosis.HEART_FAILURE),
+    ))
+
+    with pytest.raises(InfeasibleMarginalsError, match="odporují") as raised:
+        max_entropy_joint(model)
+
+    assert isinstance(raised.value, IpfNotConvergedError)
