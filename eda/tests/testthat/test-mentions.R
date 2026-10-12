@@ -16,6 +16,12 @@ test_that("každý kandidát má klíčová slova a kapitolu podle první předp
   }
 })
 
+test_that("pool pokrývá právě SELECTION_SIZE kapitol", {
+  pool <- read_candidates(candidates_path())
+
+  expect_equal(length(unique(vapply(pool, function(entry) entry$kapitola, character(1)))), SELECTION_SIZE)
+})
+
 test_that("zkratky jsou velká písmena a číslice a fráze neobsahují zkratku velkými písmeny", {
   pool <- read_candidates(candidates_path())
 
@@ -332,4 +338,195 @@ test_that("suppress_symptoms skryje řádek podle dua_binary a rozdílu zmínek 
   expect_equal(out$zminka, c(100, NA, NA, NA, NA))
   expect_equal(out$tvrzeni, c(90, NA, NA, NA, NA))
   expect_equal(out$priznak, symptoms$priznak)
+})
+
+RUBRIC_POOL <- list(
+  dm = list(label_cs = "Diabetes", kapitola = "E"),
+  hf = list(label_cs = "Srdeční selhání", kapitola = "I"),
+  af = list(label_cs = "Fibrilace", kapitola = "I"),
+  copd = list(label_cs = "CHOPN", kapitola = "J"),
+  pn = list(label_cs = "Pneumonie", kapitola = "J"),
+  ckd = list(label_cs = "CKD", kapitola = "N"),
+  sepsis = list(label_cs = "Sepse", kapitola = "A")
+)
+
+rubric_inputs <- function(share = c(dm = 0.7, hf = 0.6, af = 0.9, copd = 0.55, pn = 0.8, ckd = 0.5, sepsis = 0.4),
+                          prevalence = c(dm = 0.3, hf = 0.2, af = 0.2, copd = 0.2, pn = 0.2, ckd = 0.2, sepsis = 0.1)) {
+  keys <- names(RUBRIC_POOL)
+  list(
+    prevalence = data.frame(
+      kandidat = keys, n = unname(prevalence[keys]) * 1000, celkem = 1000,
+      stringsAsFactors = FALSE
+    ),
+    agreement = data.frame(
+      kandidat = keys, icd = 200, zminka = 100, tvrzeni = 90,
+      icd_zminka = unname(share[keys]) * 200, icd_tvrzeni = 50, celkem = 1000,
+      stringsAsFactors = FALSE
+    )
+  )
+}
+
+run_rubric <- function(inputs) {
+  rubric(inputs$prevalence, inputs$agreement, RUBRIC_POOL)
+}
+
+test_that("rubrika dá výsledek podle pásma a prahu shody a drží pořadí configu", {
+  out <- run_rubric(rubric_inputs())
+
+  expect_equal(out$kandidat, names(RUBRIC_POOL))
+  expect_equal(out$kapitola, c("E", "I", "I", "J", "J", "N", "A"))
+  expect_equal(out$shoda, c(0.7, 0.6, 0.9, 0.55, 0.8, 0.5, 0.4))
+  expect_equal(out$pasmo, rep("v", 7L))
+  expect_equal(out$verdikt_shody, c(rep("splňuje", 6L), "nesplňuje"))
+  expect_equal(
+    out$vysledek,
+    c("prošel", "prošel", "prošel", "prošel", "prošel", "prošel", "neprošel")
+  )
+})
+
+test_that("práh shody 0,5 a hranice pásma projdou včetně", {
+  inputs <- rubric_inputs(
+    share = c(dm = 0.5, hf = 0.5, af = 0.5, copd = 0.5, pn = 0.5, ckd = 0.49, sepsis = 0.5),
+    prevalence = c(dm = 0.05, hf = 0.6, af = 0.049, copd = 0.601, pn = 0.2, ckd = 0.2, sepsis = 0.2)
+  )
+
+  out <- run_rubric(inputs)
+
+  expect_equal(out$pasmo[1:5], c("v", "v", "pod", "nad", "v"))
+  expect_equal(
+    out$vysledek,
+    c("prošel", "prošel", "neprošel", "neprošel", "prošel", "neprošel", "prošel")
+  )
+})
+
+test_that("potlačený kandidát je nelze posoudit", {
+  inputs <- rubric_inputs()
+  inputs$agreement[2, AGREEMENT_COLUMNS] <- NA_real_
+
+  out <- run_rubric(inputs)
+
+  expect_true(is.na(out$shoda[2]))
+  expect_equal(out$vysledek[2], "nelze")
+  expect_equal(out$verdikt_shody[2], "nelze")
+})
+
+SHARES <- function(...) {
+  base <- c(dm = 0.7, hf = 0.6, af = 0.9, copd = 0.55, pn = 0.8, ckd = 0.5, sepsis = 0.9)
+  replace(base, names(list(...)), unlist(list(...)))
+}
+
+test_that("skrytá shoda dá nelze posoudit i u kandidáta mimo pásmo", {
+  inputs <- rubric_inputs(prevalence = c(
+    dm = 0.01, hf = 0.2, af = 0.9, copd = 0.2, pn = 0.2, ckd = 0.2, sepsis = 0.1
+  ))
+  inputs$agreement[1:3, AGREEMENT_COLUMNS] <- NA_real_
+
+  out <- run_rubric(inputs)
+
+  expect_equal(out$pasmo[1:3], c("pod", "v", "nad"))
+  expect_equal(out$vysledek[1:3], rep("nelze", 3L))
+})
+
+test_that("všechny skryté shody dají kind nelze i při viditelné prevalenci mimo pásmo", {
+  inputs <- rubric_inputs(prevalence = c(
+    dm = 0.01, hf = 0.01, af = 0.01, copd = 0.9, pn = 0.9, ckd = 0.9, sepsis = 0.9
+  ))
+  inputs$agreement[AGREEMENT_COLUMNS] <- NA_real_
+
+  expect_equal(select_five(run_rubric(inputs))$kind, "nelze")
+})
+
+test_that("select_five vybere z každé kapitoly kandidáta s nejvyšší shodou", {
+  out <- select_five(run_rubric(rubric_inputs(share = SHARES())))
+
+  expect_equal(out$kind, "vyber")
+  expect_equal(out$selected, c("dm", "af", "pn", "ckd", "sepsis"))
+  expect_equal(out$filled, character())
+  expect_equal(out$passed, names(RUBRIC_POOL))
+  expect_equal(out$failed, character())
+  expect_equal(out$unknown, character())
+})
+
+test_that("při shodě rozhoduje pořadí v configu", {
+  inputs <- rubric_inputs(share = SHARES(hf = 0.8, af = 0.8, copd = 0.55, pn = 0.55, ckd = 0.6))
+
+  out <- select_five(run_rubric(inputs))
+
+  expect_equal(out$selected, c("dm", "hf", "copd", "ckd", "sepsis"))
+})
+
+test_that("prázdnou kapitolu doplní nejlepší zbývající prošlý kandidát", {
+  inputs <- rubric_inputs(share = SHARES(copd = 0.3, pn = 0.2, ckd = 0.6))
+
+  out <- select_five(run_rubric(inputs))
+
+  expect_equal(out$selected, c("dm", "hf", "af", "ckd", "sepsis"))
+  expect_equal(out$filled, "hf")
+  expect_equal(out$failed, c("copd", "pn"))
+})
+
+test_that("méně než pět prošlých znamená, že se vyberou všichni prošlí", {
+  inputs <- rubric_inputs(share = SHARES(copd = 0.3, pn = 0.2, ckd = 0.1))
+
+  out <- select_five(run_rubric(inputs))
+
+  expect_equal(out$passed, c("dm", "hf", "af", "sepsis"))
+  expect_equal(out$selected, out$passed)
+  expect_lt(length(out$selected), SELECTION_SIZE)
+})
+
+test_that("když nikdo neprojde, výběr je prázdný a typ zůstává vyber", {
+  inputs <- rubric_inputs(share = SHARES(
+    dm = 0.1, hf = 0.1, af = 0.1, copd = 0.1, pn = 0.1, ckd = 0.1, sepsis = 0.1
+  ))
+
+  out <- select_five(run_rubric(inputs))
+
+  expect_equal(out$kind, "vyber")
+  expect_equal(out$selected, character())
+  expect_equal(out$failed, names(RUBRIC_POOL))
+})
+
+test_that("všichni potlačení a prázdný korpus dají nelze", {
+  inputs <- rubric_inputs()
+  inputs$agreement[AGREEMENT_COLUMNS] <- NA_real_
+  inputs$prevalence$n <- NA_real_
+  empty <- list(prevalence = inputs$prevalence[0, ], agreement = inputs$agreement[0, ])
+
+  expect_equal(select_five(run_rubric(inputs))$kind, "nelze")
+  expect_equal(select_five(run_rubric(empty))$kind, "nelze")
+})
+
+test_that("select_five odmítne pool s víc kapitolami, než kolik má pětice míst", {
+  ranked <- data.frame(
+    kandidat = letters[1:6], kapitola = LETTERS[1:6], podil = 0.2, pasmo = "v",
+    shoda = 0.8, verdikt_shody = "splňuje", vysledek = "prošel", stringsAsFactors = FALSE
+  )
+
+  expect_error(select_five(ranked), "kapitol")
+})
+
+test_that("rubric_table označí vybrané, doplněné, neprošlé a nelze posoudit", {
+  inputs <- rubric_inputs(share = SHARES(copd = 0.3, pn = 0.2, ckd = 0.6))
+  inputs$agreement[7, AGREEMENT_COLUMNS] <- NA_real_
+  ranked <- run_rubric(inputs)
+
+  out <- rubric_table(ranked, select_five(ranked), RUBRIC_POOL)
+
+  expect_equal(out$kandidat[1:2], c("Diabetes", "Srdeční selhání"))
+  expect_equal(
+    out$vysledek,
+    c("vybrán", "vybrán doplněním", "vybrán", "neprošel", "neprošel", "vybrán", "nelze posoudit")
+  )
+})
+
+test_that("rubric_table označí prošlého kandidáta, který výběr nepojal", {
+  ranked <- run_rubric(rubric_inputs(share = SHARES()))
+
+  out <- rubric_table(ranked, select_five(ranked), RUBRIC_POOL)
+
+  expect_equal(
+    out$vysledek,
+    c("vybrán", "prošel", "vybrán", "prošel", "vybrán", "vybrán", "vybrán")
+  )
 })
