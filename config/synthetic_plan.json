@@ -45,7 +45,7 @@
         "aki": 1.0
       }
     },
-    "prevalence_tolerance": 0.02,
+    "prevalence_tolerance": 0.15,
     "ipf_tolerance": 1e-10,
     "ipf_max_passes": 1000
   },

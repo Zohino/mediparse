@@ -107,7 +107,7 @@ def statistics_violations(
         )
     violations.extend(
         f"Prevalence {diagnosis} {measured.prevalence[diagnosis]:.3f} je mimo"
-        f" {labels.prevalence[diagnosis]:.3f} ± {labels.prevalence_tolerance}."
+        f" {labels.prevalence[diagnosis]:.3f} ± {labels.prevalence_tolerance:.0%}."
         for diagnosis in prevalence_outliers(measured.prevalence, labels)
     )
     return tuple(violations)

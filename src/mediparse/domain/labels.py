@@ -90,7 +90,7 @@ def label_shares(label_sets: Sequence[Collection[Diagnosis]]) -> dict[Diagnosis,
 def prevalence_outliers(
     shares: Mapping[Diagnosis, float], model: LabelModel
 ) -> tuple[Diagnosis, ...]:
-    """Diagnózy, jejichž podíl leží dál od cílové prevalence než tolerance modelu.
+    """Diagnózy, jejichž podíl leží dál od cílové prevalence než relativní tolerance modelu.
 
     Returns:
         Diagnózy mimo toleranci v pořadí configu.
@@ -98,7 +98,7 @@ def prevalence_outliers(
     return tuple(
         diagnosis
         for diagnosis, target in model.prevalence.items()
-        if abs(shares[diagnosis] - target) > model.prevalence_tolerance
+        if abs(shares[diagnosis] - target) > model.prevalence_tolerance * target
     )
 
 

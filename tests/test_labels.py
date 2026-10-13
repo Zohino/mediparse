@@ -14,6 +14,7 @@ from mediparse.domain.labels import (
     acute_given_chronic,
     label_sets,
     max_entropy_joint,
+    prevalence_outliers,
 )
 
 PREVALENCE = {
@@ -175,3 +176,41 @@ def test_contradictory_marginals_raise_domain_error() -> None:
         max_entropy_joint(model)
 
     assert isinstance(raised.value, IpfNotConvergedError)
+
+
+def _shares(**changes: float) -> dict[Diagnosis, float]:
+    return dict(PREVALENCE) | {
+        Diagnosis(name): value for name, value in changes.items()
+    }
+
+
+def test_prevalence_within_relative_tolerance_is_no_outlier() -> None:
+    """Podíl uvnitř relativní tolerance na obě strany od cíle není odlehlý."""
+    model = _model()
+    margin = 0.95 * model.prevalence_tolerance
+    shares = _shares(
+        diabetes=PREVALENCE[Diagnosis.DIABETES] * (1 + margin),
+        aki=PREVALENCE[Diagnosis.AKI] * (1 - margin),
+    )
+
+    assert prevalence_outliers(shares, model) == ()
+
+
+def test_prevalence_tolerance_scales_with_target() -> None:
+    """Stejná absolutní odchylka je u vzácné diagnózy mimo, u časté uvnitř."""
+    model = _model()
+    rare, common = PREVALENCE[Diagnosis.AKI], PREVALENCE[Diagnosis.DIABETES]
+    deviation = model.prevalence_tolerance * (rare + common) / 2
+    shares = _shares(diabetes=common + deviation, aki=rare + deviation)
+
+    assert prevalence_outliers(shares, model) == (Diagnosis.AKI,)
+
+
+def test_zero_target_with_nonzero_share_is_outlier() -> None:
+    """Nulový cíl toleranci nemá: každý nenulový podíl je mimo, nulový uvnitř."""
+    model = _model().model_copy(
+        update={"prevalence": PREVALENCE | {Diagnosis.AKI: 0.0}}
+    )
+
+    assert prevalence_outliers(_shares(aki=0.001), model) == (Diagnosis.AKI,)
+    assert prevalence_outliers(_shares(aki=0.0), model) == ()
