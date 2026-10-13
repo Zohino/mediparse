@@ -1,0 +1,83 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with hypertension who presented after three days of worsening redness, warmth and swelling of the right lower leg following a minor scrape while gardening. She was seen at ___ urgent care on ___ and given oral antibiotics without improvement. She developed fever and chills overnight and came to the emergency department, where she was febrile and tachycardic with a spreading erythematous plaque over the shin and calf. She denied chest pain or shortness of breath.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Hypothyroidism, followed by Dr. ___
+
+Past Surgical History:
+Appendectomy in ___
+Cholecystectomy
+
+Social History:
+___
+
+Family History:
+Mother with stroke. No family history of clotting disorders.
+
+Physical Exam:
+HEENT: Moist mucous membranes, no oral lesions.
+Neck: Supple.
+Lungs: Clear bilaterally.
+CARDIAC: Regular rate and rhythm, no murmur.
+Abdomen: Soft, nontender.
+SKIN: Right calf with warm, erythematous, tender plaque, marked border.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+Admission labs notable for white blood cell count of 15.2 with neutrophil predominance and mildly elevated lactate that normalized with fluids. Blood cultures were drawn and remained negative at five days.
+Creatinine was at baseline.
+IMPRESSION:
+Venous duplex of the right leg performed at ___ showed no deep vein thrombosis. Soft tissue edema only, with no abscess or gas.
+
+Brief Hospital Course:
+She was admitted with cellulitis of the right lower extremity. Because of her penicillin allergy she was started on intravenous vancomycin, and the margin of erythema was marked. Fever resolved within a day and the redness began receding by hospital day three. Dr. ___ from infectious disease reviewed her case on ___ and recommended transition to oral doxycycline. Leg elevation was encouraged. She ambulated well at ___ with physical therapy and tolerated diet. Her blood pressure was controlled on home medications.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Levothyroxine 75 mcg daily, filled at ___ pharmacy
+
+Discharge Medications:
+1. Doxycycline 100 mg by mouth twice daily for seven more days, starting ___
+2. Lisinopril 10 mg by mouth once a day
+3. Atorvastatin 20 mg by mouth every night
+4. Levothyroxine 75 mcg by mouth every morning
+5. Acetaminophen 500 mg by mouth every six hours as needed for pain
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Cellulitis of the right lower leg
+Secondary:
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Stable.
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for a skin infection of your right leg with antibiotics. Take all of your doxycycline, even once the redness fades, and use sun protection while on it. Keep the leg raised when sitting. Please call ___ at ___ if the redness spreads past the marked line. Return to ___ for fever, severe pain, or shortness of breath. Keep your clinic visit at ___ as scheduled.
+
+Followup Instructions:
+___

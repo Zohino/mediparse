@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old woman with gallstones presented with two days of right upper quadrant pain, nausea and vomiting after fatty meals. She was transferred from ___ after ultrasound showed gallbladder wall thickening. She denied fever, jaundice or chest pain.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Cesarean section
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+General: Alert, comfortable, no distress.
+HEENT: Anicteric sclera, moist mucous membranes.
+Neck: Supple.
+Abdomen: Soft, mild right upper quadrant tenderness, nondistended.
+PULSES: Palpable and symmetric throughout.
+
+Pertinent Results:
+Ultrasound showed gallstones, wall thickening and a small amount of pericholecystic fluid. White count was 13.2 on admission and improved to 8.1. Liver enzymes, bilirubin and lipase were normal. Intraoperative cholangiogram showed no retained stones.
+
+Brief Hospital Course:
+She was admitted under the ___ service, given intravenous fluids and antibiotics, and taken to the operating room by Dr. ___ on ___. Surgery was uncomplicated. Pain was controlled with oral medication, she tolerated a regular diet, and she was discharged home in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 75 mcg daily
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily.
+2. Levothyroxine 75 mcg by mouth every morning.
+3. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute cholecystitis
+Secondary:
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Good
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for gallbladder inflammation and had your gallbladder removed. Keep incisions clean and dry. Avoid lifting heavy objects for four weeks. Call ___ for fever, worsening belly pain, yellow skin or wound redness. Visit the clinic at ___.
+
+Followup Instructions:
+___

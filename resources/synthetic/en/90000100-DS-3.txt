@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with three days of productive cough, fever and pleuritic chest pain that began after a visit to ___. He denies diabetes and reports no weight loss or excessive thirst. Vital signs on arrival showed low-grade fever.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Gen: Mildly ill appearing, comfortable at rest
+Neck: Supple, no lymphadenopathy
+Neuro: Alert, oriented, no focal deficits
+
+Pertinent Results:
+Admission labs showed mild leukocytosis with elevated inflammatory markers. Electrolytes and creatinine were normal. Blood cultures were drawn and remained negative.
+IMAGING:
+Chest radiograph at ___ showed a patchy right lower lobe opacity.
+
+Brief Hospital Course:
+He was treated for a suspected pneumonia with oral antibiotics and fluids, though the opacity could also reflect aspiration or atelectasis. Fever resolved within two days. Oxygen needs improved, and he was seen by ___ before discharge. Outpatient imaging at ___ will confirm clearing.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly, and amoxicillin-clavulanate twice daily for five more days. Acetaminophen as needed for fever. Pharmacy contact ___.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community-acquired lower respiratory infection
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with fever and cough. Take your antibiotic until the course is finished and drink plenty of fluids. Return for worsening shortness of breath, chest pain or persistent fever. Please keep your appointment with ___.
+
+Followup Instructions:
+___

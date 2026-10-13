@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever, productive cough and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman sent in by ___ after five days of fever, productive cough and pleuritic chest pain. She was hypoxic on room air at ___ and received oxygen. Chest film showed a right lower lobe consolidation. She was transferred here.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity, followed by ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension, treated at ___
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: Tired, mildly tachypneic, speaking full sentences
+HEENT: Dry mucous membranes, no thrush
+EXTREMITIES: Warm, no edema
+
+Pertinent Results:
+Admission labs: WBC 16.2 with left shift, lactate 2.1, glucose 312, HbA1c 10.4. Blood cultures from ___ no growth. Sputum culture grew normal flora. Chest film: right lower lobe airspace opacity, small effusion.
+
+Brief Hospital Course:
+She was treated with ceftriaxone and azithromycin and supplemental oxygen, weaned to room air by day three. Fever resolved and white count normalized. Glucose was controlled with insulin and a regimen was set up with ___. Antibiotics were completed orally.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Uncontrolled diabetes mellitus
+Secondary:
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with a lung infection and high blood sugars. Finish your antibiotics at home. Check your glucose before meals and take insulin as taught. Return for fever, worsening breathing or confusion. Call ___ with questions.
+
+Followup Instructions:
+___

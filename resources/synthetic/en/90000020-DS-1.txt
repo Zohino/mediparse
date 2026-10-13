@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath and wheezing
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old man with a long smoking history who presented with three days of worsening breathlessness, wheeze and productive cough. He was first evaluated at ___ and then transferred. Symptoms had been building since ___ with poor response to his home inhalers.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Former tobacco use
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Gen:
+Thin, mildly dyspneic, speaking in short sentences
+HEENT:
+Moist mucous membranes
+Lungs:
+Diffuse expiratory wheeze, prolonged expiration
+Abdomen:
+Soft, nontender
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+IMPRESSION:
+Hyperinflated lungs with flattened diaphragms. No focal consolidation or effusion.
+FINDINGS:
+Chest radiograph performed at ___ showed increased lucency of the upper zones. Blood counts and chemistry were unremarkable apart from mild leukocytosis.
+
+Brief Hospital Course:
+He was treated with nebulized bronchodilators, systemic steroids and a short antibiotic course. He was seen by Dr. ___ for respiratory therapy review. Oxygen was weaned and by ___ he walked the corridor without desaturation. Inhaler technique was reviewed and his regimen was adjusted.
+
+Medications on Admission:
+Tiotropium daily
+Albuterol inhaler as needed
+Lisinopril daily
+
+Discharge Medications:
+1. Prednisone taper over five days
+2. Tiotropium inhaled once daily
+3. Albuterol inhaler every four hours as needed
+4. Azithromycin to complete the course
+5. Lisinopril daily
+
+Discharge Diagnosis:
+Chronic obstructive pulmonary disease exacerbation
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for a flare of your lung condition. Take the steroid and antibiotic as directed and use your inhalers regularly. Call ___ if your breathing worsens, you have fever, or you need your rescue inhaler more often. Please see Dr. ___ at ___ soon after discharge.
+
+Followup Instructions:
+___

@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient is a man who presented to ___ with several days of intermittent palpitations and mild exertional dyspnea. Symptoms began after a visit with family at ___ and worsened overnight. He was seen by his primary physician, Dr. ___, who sent him to the emergency department on ___. There he was found to have an irregular rapid rhythm and was admitted for rate control.
+REVIEW OF SYSTEMS: Positive for palpitations and fatigue. Negative for chest pain, fever, syncope.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+General: Comfortable, no distress
+HEENT: Normal
+Neck: Supple, no JVD
+CARDIAC: Irregularly irregular, no murmur
+ABD: Soft, nontender
+EXTREMITIES: No edema
+SKIN: Warm and dry
+
+Pertinent Results:
+Troponin negative twice. Potassium 3.6, repleted. TSH normal. Hemoglobin and creatinine within normal limits. ECG showed an irregularly irregular narrow complex rhythm at a rate of 130, with no ischemic changes.
+IMAGING: Chest radiograph obtained at ___ without acute process.
+IMPRESSION: No acute cardiopulmonary abnormality. Mild left atrial enlargement on echocardiogram.
+
+Brief Hospital Course:
+He was admitted to the telemetry unit and started on intravenous diltiazem, then transitioned to oral metoprolol with good rate control. Anticoagulation was begun after discussion of stroke risk. Echocardiogram performed at ___ showed preserved ventricular function. Cardiology, led by Dr. ___, recommended outpatient follow up. Electrolytes were repleted and thyroid function was normal. His heart rate remained controlled and he walked without symptoms. Teaching was provided by nurse ___ regarding medications. He was discharged on ___ in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Aspirin 81 mg daily.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: atrial fibrillation
+
+Discharge Condition:
+Stable
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were hospitalized for a fast irregular heartbeat. Take your new medicines every day as prescribed. Do not miss doses of the blood thinner. Call your doctor at ___ for bleeding, fainting, chest pain or a racing heartbeat. Return to ___ if symptoms worsen. Avoid heavy alcohol use.
+
+Followup Instructions:
+___

@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with long-standing irregular rhythm presented to ___ with three days of palpitations, lightheadedness and mild exertional dyspnea. Symptoms began on ___ after missing several doses of his usual medications. He denied chest pain, syncope or fever.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+Irregularly irregular pulse, comfortable at rest. No peripheral edema.
+Lungs: Clear bilaterally.
+Abdomen: Soft, nontender.
+
+Pertinent Results:
+ADMISSION LABS:
+Creatinine elevated, potassium 4.4, hemoglobin stable, troponin negative twice, TSH normal.
+IMAGING:
+Chest radiograph performed at ___ showed no acute process. Echocardiogram showed preserved ejection fraction and a mildly dilated left atrium.
+
+Brief Hospital Course:
+Heart rate was rapid on arrival and settled with oral rate control agents. Anticoagulation was resumed. Dr. ___ from cardiology reviewed him and agreed with outpatient management. Electrolytes were replaced and kidney function remained stable. He walked comfortably before discharge to ___.
+TRANSITIONAL ISSUES:
+Recheck creatinine and potassium at clinic.
+
+Medications on Admission:
+Metoprolol, apixaban, atorvastatin, lisinopril
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg daily
+2. Apixaban 5 mg twice daily
+3. Atorvastatin 40 mg nightly
+4. Lisinopril 5 mg daily
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Atrial fibrillation with rapid ventricular response
+Chronic kidney disease
+
+Discharge Condition:
+Stable and improved.
+Mental Status: Alert and oriented, able to follow commands.
+Level of Consciousness: Fully awake and interactive.
+Activity Status: Walks independently without assistance.
+
+Discharge Instructions:
+You were admitted with a fast heartbeat. Take every medication exactly as prescribed and do not skip doses. Return for chest pain, fainting or worsening breathlessness. Call ___ with any questions.
+
+Followup Instructions:
+___

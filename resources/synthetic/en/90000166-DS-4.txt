@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with a history of palpitations presented to ___ with several days of fatigue and lightheadedness. Her rhythm was irregular on arrival. She was transferred from ___ for monitoring.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General:
+Comfortable, no distress.
+PULM:
+Clear bilaterally.
+Abdomen:
+Soft, nontender.
+EXTREMITIES:
+No edema.
+Neuro:
+Alert, nonfocal.
+
+Pertinent Results:
+Troponin and electrolytes were normal. Thyroid function was normal. Telemetry showed an irregular rhythm with rapid ventricular rates.
+FINDINGS:
+Echocardiogram showed preserved ejection fraction and mild left atrial enlargement, read by ___.
+
+Brief Hospital Course:
+She was started on a rate control agent and anticoagulation after discussion with the ___ team. Heart rate settled within a day and symptoms resolved. She ambulated independently and was discharged home in stable condition with follow up arranged with ___.
+
+Medications on Admission:
+Metoprolol tartrate 25 mg twice daily; multivitamin daily.
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily. Apixaban 5 mg twice daily. Multivitamin daily. Hold aspirin unless told otherwise.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Stable
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+
+Discharge Instructions:
+Take your medicines as prescribed, return for palpitations or fainting, and keep your appointment with ___. Avoid heavy exertion this week.
+
+Followup Instructions:
+___

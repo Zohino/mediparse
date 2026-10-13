@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with hypertension presented with cough and low fever for three days. Chest film showed no pneumonia. She was referred from ___ clinic to ___ emergency department. She was otherwise well.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Vitals: afebrile, stable
+Gen: comfortable
+Neck: supple
+CARDIAC: regular rhythm
+ABD: soft, nontender
+Ext: no edema
+SKIN: warm, dry
+Neuro: alert, oriented
+
+Pertinent Results:
+IMPRESSION:
+Mild bronchial wall thickening, otherwise clear lungs.
+FINDINGS:
+Normal heart size. No effusion. Blood counts and electrolytes were within expected limits.
+
+Brief Hospital Course:
+She was treated for acute bronchitis with fluids, rest and an inhaler after evaluation at ___. Symptoms improved steadily and oxygen levels stayed normal. She was discharged home once eating well, seen by ___ staff.
+
+Medications on Admission:
+Lisinopril
+Levothyroxine
+
+Discharge Medications:
+1. Lisinopril daily as before.
+2. Levothyroxine daily as before.
+3. Albuterol inhaler as needed for cough or wheeze.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Acute bronchitis
+Secondary: Hypertension, hypothyroidism
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+Drink plenty of fluids and rest at home. Use the inhaler when coughing. Return for worsening breathing or fever. Please see Dr. ___ at ___ within one week.
+
+Followup Instructions:
+___

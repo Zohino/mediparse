@@ -1,0 +1,86 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy performed at ___
+
+History of Present Illness:
+The patient presented to ___ with two days of worsening right upper quadrant pain, nausea and vomiting after fatty meals. He reported low grade fevers at home. Symptoms began on ___ and did not improve with rest. Ultrasound in the emergency department suggested gallbladder inflammation, and surgery was consulted.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Prior appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with gallstones
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Anicteric, moist mucosa
+ABD:
+Soft, mild tenderness, incisions clean
+Ext:
+Warm, no edema
+SKIN:
+Dry, intact
+
+Pertinent Results:
+ADMISSION LABS:
+Mildly elevated white count and liver enzymes.
+DISCHARGE LABS:
+White count normalized, enzymes improving.
+IMPRESSION:
+Thickened gallbladder wall with stones, imaged at ___.
+FINDINGS:
+No bile duct dilation or free fluid.
+
+Brief Hospital Course:
+He was admitted, given intravenous fluids and antibiotics, and taken to the operating room by the team of ___ for an uncomplicated laparoscopic cholecystectomy. Diet was advanced and pain was controlled with oral medication. He was ambulating and tolerating food by the time he left ___.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+
+Discharge Medications:
+1. Lisinopril daily as before.
+2. Atorvastatin nightly as before.
+3. Acetaminophen as needed for pain, limited daily dose.
+4. Oxycodone sparingly for severe pain only.
+5. Senna while taking opioids.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Acute cholecystitis with cholelithiasis
+Secondary:
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for gallbladder inflammation and had it removed laparoscopically. Keep incisions clean and dry, and shower as usual. Avoid lifting heavy objects for several weeks. Call your surgeon at ___ for fever, worsening pain, vomiting or yellow skin.
+
+Followup Instructions:
+___

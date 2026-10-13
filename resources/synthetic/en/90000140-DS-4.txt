@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Man with two days of colicky right upper quadrant pain and nausea after meals, seen at ___ and referred here. Ultrasound there showed gallstones. Pain worsened overnight, prompting transfer on ___.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+HEENT: Normal, anicteric
+CARDIAC: Regular rate and rhythm
+ABD: Soft, tender in right upper quadrant, no rebound
+EXTREMITIES: Warm, no edema
+SKIN: Intact, no rash
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Mildly elevated white count and liver enzymes on arrival, normalizing by discharge.
+IMAGING:
+Ultrasound showed multiple gallstones with wall thickening and pericholecystic fluid.
+
+Brief Hospital Course:
+He received fluids, antibiotics and bowel rest, then underwent uncomplicated cholecystectomy on ___. Diet advanced, pain was controlled with oral medication, and he was discharged home on ___ in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Continue lisinopril and atorvastatin as before. Take acetaminophen as needed for pain. Oxycodone briefly for severe pain only. Docusate twice daily while taking oxycodone.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were hospitalized for gallbladder inflammation and had it removed. Keep incisions clean and dry, avoid heavy lifting for several weeks, and call ___ or return to ___ for fever, vomiting or worsening pain.
+
+Followup Instructions:
+___

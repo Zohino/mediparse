@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old man sent from ___ with two days of worsening right upper quadrant pain, nausea and low fever. Pain followed fatty meals. Imaging suggested gallbladder inflammation with stones, so he was admitted for surgery.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+Tender right upper abdomen, otherwise comfortable, afebrile and stable.
+Lungs: clear bilaterally
+Abdomen: soft, mildly tender, incisions clean and dry
+Ext: warm, no edema
+Neuro: alert, nonfocal
+PULSES: palpable and symmetric
+
+Pertinent Results:
+Ultrasound on ___ showed gallstones, a thickened gallbladder wall and pericholecystic fluid. White count was mildly elevated on arrival and normalized after surgery. Liver enzymes were slightly raised, then improved. Pathology showed chronic and acute cholecystitis without malignancy.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+
+Discharge Medications:
+1. Acetaminophen as needed for pain, up to four times daily
+2. Oxycodone briefly for severe pain only
+3. Lisinopril daily
+4. Atorvastatin nightly
+5. Docusate while taking opioids
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+Hypertension
+
+Discharge Condition:
+Good
+Level of Consciousness: awake and alert
+Activity Status: ambulatory, independent
+
+Discharge Instructions:
+You were treated for an inflamed gallbladder and had it removed. Keep incisions clean and dry, and avoid heavy lifting for several weeks. Call Dr. ___ for fever, vomiting, yellow skin or worsening pain. Visit the clinic at ___ as arranged.
+
+Followup Instructions:
+___

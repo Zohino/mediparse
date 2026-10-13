@@ -1,0 +1,81 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Ms. ___ is a woman with long-standing kidney problems who was sent from ___ clinic by Dr. ___ after two weeks of worsening fatigue, poor appetite and swelling of both legs. She noted a mild cough on ___ but no fever or chills. Labs drawn at ___ showed a rising creatinine, so she was directed to the emergency department at ___. There she was hemodynamically stable and admitted for monitoring and management of volume overload.
+
+Past Medical History:
+Chronic kidney disease stage 4
+Hypertension
+Anemia
+
+Past Surgical History:
+Cholecystectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General: Comfortable, in no distress, speaking full sentences
+HEENT: Moist mucous membranes, anicteric sclerae
+Lungs: Clear bilaterally
+ABD: Soft, nontender, nondistended
+SKIN: Pitting edema of both lower legs, no rash
+Neuro: Alert, oriented, nonfocal
+
+Pertinent Results:
+Admission labs on ___ showed creatinine above her baseline, potassium 5.3 and hemoglobin 9.8.
+DISCHARGE LABS: Creatinine improved, potassium 4.4, bicarbonate 22, hemoglobin stable at 9.6.
+IMPRESSION: Chest radiograph performed at ___ shows mild vascular congestion, no focal consolidation and no pleural effusion. Renal ultrasound shows small echogenic kidneys without hydronephrosis.
+
+Brief Hospital Course:
+The patient was admitted for volume overload in the setting of advanced kidney disease. She received intravenous furosemide with good urine output, and her leg swelling and weight improved daily. Creatinine returned close to baseline and potassium normalized after dietary counseling. Her cough was evaluated with a chest radiograph and there was no evidence of pneumonia, and she remained afebrile without antibiotics. The nephrology team at ___ reviewed her case and recommended outpatient follow up with Dr. ___. Her other home medicines were continued. She was discharged in stable condition on an oral diuretic.
+
+Medications on Admission:
+Amlodipine 5 mg daily
+Lisinopril 10 mg daily
+Calcium acetate with meals
+Iron tablet daily
+
+Discharge Medications:
+1. Furosemide 40 mg by mouth once daily
+2. Amlodipine 5 mg by mouth daily
+3. Calcium acetate 667 mg by mouth three times daily with meals
+4. Ferrous sulfate 325 mg by mouth daily
+Hold lisinopril until seen in kidney clinic. Prescriptions were sent to ___ pharmacy.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Chronic kidney disease
+Secondary:
+Volume overload
+Hypertension
+Anemia
+
+Discharge Condition:
+Stable
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized because fluid built up in your body. You received medicine to remove the extra fluid. Weigh yourself every morning and call ___ if your weight rises by more than three pounds. Limit salt and fluids as instructed. Take your medicines as listed and do not use ibuprofen. Return to ___ if you have trouble breathing, chest pain or very little urine.
+
+Followup Instructions:
+___

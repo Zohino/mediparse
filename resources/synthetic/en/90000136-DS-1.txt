@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain and nausea
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with two days of worsening epigastric pain, nausea and poor oral intake. She was seen at ___ by her primary physician, who sent her to the emergency department at ___ for further evaluation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Possible COPD, never confirmed by testing
+Gastroesophageal reflux
+
+Past Surgical History:
+Cholecystectomy
+Appendectomy
+
+Family History:
+Mother with hypertension. Father with coronary artery disease.
+
+Physical Exam:
+Vitals:
+Afebrile, stable, saturating well on room air
+HEENT:
+Moist mucous membranes
+Lungs:
+Clear bilaterally
+Abdomen:
+Soft, mild epigastric tenderness, ___ distension
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Mildly elevated lipase on arrival, liver enzymes normal. White count normal. Imaging performed at ___ showed no acute findings.
+IMPRESSION:
+No acute abnormality
+
+Brief Hospital Course:
+She was admitted for observation and given intravenous fluids, antiemetics and a bowel regimen. Her pain improved steadily and she tolerated a regular diet. Gastroenterology at ___ advised outpatient follow up. By ___ she was comfortable and ready to go home.
+
+Medications on Admission:
+Lisinopril, atorvastatin, omeprazole daily
+
+Discharge Medications:
+1. Lisinopril daily as before.
+2. Atorvastatin nightly as before.
+3. Omeprazole twice daily before meals.
+4. Ondansetron as needed for nausea.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute gastritis
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized with stomach pain and nausea. Take your medicines as directed, eat small meals, and avoid alcohol and anti-inflammatory pills. Return if pain worsens, vomiting persists, or you notice black stools. Call ___ with questions.
+
+Followup Instructions:
+___

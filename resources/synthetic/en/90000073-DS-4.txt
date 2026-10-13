@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Palpitations and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old woman who presented after three days of palpitations, fatigue and lightheadedness noted at her ___ clinic visit. She reported poor appetite and mild shortness of breath on exertion. Her symptoms began on ___ and worsened despite rest, so she came to the emergency department for evaluation.
+
+Past Medical History:
+Chronic kidney disease
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Cholecystectomy
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: HR 118 irregular, BP 128/76
+General: Alert, no distress, seen by Dr. ___
+Neck: Supple
+Abdomen: Soft, nontender
+Ext: Trace edema
+SKIN: Warm, dry
+Neuro: Nonfocal
+
+Pertinent Results:
+FINDINGS:
+ECG showed an irregularly irregular rhythm without discrete P waves at a rapid rate. Chest radiograph was clear. Potassium and magnesium were within normal limits. Creatinine was at her known baseline. Troponin was negative twice.
+
+Brief Hospital Course:
+She was found to have atrial fibrillation with rapid ventricular response and was started on a diltiazem infusion, then transitioned to oral metoprolol with good rate control. Anticoagulation was begun after discussion with cardiology at ___. Her kidney function was monitored and dosing adjusted. She remained stable, and follow up was arranged with Dr. ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly, insulin per ___ clinic.
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily, apixaban 2.5 mg twice daily, atorvastatin 20 mg nightly, insulin glargine nightly as before. Hold lisinopril until your follow up visit.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic kidney disease
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for an irregular heart rhythm. Take your medications as prescribed and keep all appointments. Call ___ or return to the emergency room for chest pain, fainting, or bleeding. Avoid heavy lifting until cleared by Dr. ___.
+
+Followup Instructions:
+___

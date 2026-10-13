@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+___ year old woman with hypertension presented with three days of right lower quadrant pain, nausea and low grade fever, and was found to have acute appendicitis on imaging at ___.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+
+Past Surgical History:
+Cesarean section in ___
+
+Social History:
+___
+
+Family History:
+Mother with breast cancer
+
+Physical Exam:
+Abdomen:
+Soft, mildly tender at incision sites.
+EXTREMITIES:
+No edema.
+Neuro:
+Alert, nonfocal.
+
+Pertinent Results:
+ADMISSION LABS:
+White count elevated with neutrophil predominance. Electrolytes and creatinine normal. CT showed inflamed dilated appendix with surrounding fat stranding.
+
+Brief Hospital Course:
+Underwent laparoscopic appendectomy by Dr. ___ on ___ without complication. No evidence of pneumonia on chest film. Brief palpitations on telemetry raised possible atrial fibrillation, to be reassessed as an outpatient. Diet advanced, pain controlled with oral analgesics, and she was discharged home.
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed for pain. Continue home levothyroxine and lisinopril. Docusate twice daily while taking opioids.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for appendicitis with surgery. Keep incisions clean and dry, avoid heavy lifting, and call Dr. ___ at ___ for fever, worsening pain, or wound redness.
+
+Followup Instructions:
+___

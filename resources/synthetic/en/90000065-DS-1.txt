@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+Woman with one day of worsening right lower quadrant pain, nausea and low fever. Referred by ___ after imaging at ___ showed an inflamed appendix.
+
+Past Medical History:
+Hypothyroidism
+Migraines
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+HEENT: Normal
+Neck: Supple
+Lungs: Clear
+Ext: No edema
+SKIN: Warm, dry
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+White count mildly elevated on arrival and normal at discharge. CT showed a dilated appendix with surrounding fat stranding. Pathology from ___ pending.
+
+Brief Hospital Course:
+She went to the operating room for an uncomplicated laparoscopic appendectomy. Pain was controlled with oral medication, diet advanced, and bowel function returned. She was seen by ___ and cleared for home.
+
+Medications on Admission:
+Levothyroxine daily
+
+Discharge Medications:
+Levothyroxine daily. Acetaminophen as needed for pain. Ibuprofen with food for pain. Docusate while taking any narcotic.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute appendicitis
+Secondary:
+Hypothyroidism
+
+Discharge Condition:
+Good
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You had your appendix removed. Keep incisions clean and dry, avoid heavy lifting, and call ___ for fever, vomiting, or worsening pain. Ask us any questions.
+
+Followup Instructions:
+___

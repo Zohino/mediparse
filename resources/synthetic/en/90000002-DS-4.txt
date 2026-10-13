@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: UROLOGY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right flank pain
+
+Major Surgical or Invasive Procedure:
+Cystoscopy with right ureteral stent placement at ___
+
+History of Present Illness:
+Patient presented with three days of worsening right flank pain and nausea. Imaging at ___ showed an obstructing ureteral stone with mild hydronephrosis. He was transferred to ___ for urologic evaluation and admitted for pain control.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with kidney stones
+
+Physical Exam:
+General:
+Uncomfortable but nontoxic, lying still.
+HEENT:
+Moist mucous membranes.
+SKIN:
+Warm, dry.
+Neuro:
+Alert, nonfocal.
+
+Pertinent Results:
+Urinalysis showed moderate blood without nitrite. Creatinine was mildly elevated on admission and improved. White count normal. CT demonstrated a five millimeter proximal right ureteral stone.
+DISCHARGE LABS:
+Creatinine 1.0, potassium 4.1, white count 7.2.
+
+Brief Hospital Course:
+He was admitted, given IV fluids and analgesia, and underwent stent placement without complication. Pain resolved and he tolerated diet. Urine culture was negative. He was discharged with a stent to follow up with Dr. ___ at ___.
+TRANSITIONAL ISSUES:
+Stent removal and definitive stone treatment planned.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Tamsulosin 0.4 mg nightly. Oxycodone 5 mg every six hours as needed for pain. Senna twice daily.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Obstructing right ureteral stone
+Hydronephrosis
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with a kidney stone and had a stent placed. Drink plenty of fluids and take your medications as directed. Return for fever, uncontrolled pain, or inability to urinate. Call ___ with questions.
+
+Followup Instructions:
+___

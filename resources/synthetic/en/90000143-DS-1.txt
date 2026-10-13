@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+Peripheral line placement at ___
+
+History of Present Illness:
+Woman with five days of productive cough, fever and pleuritic chest pain after contact with a sick relative. Chest film at ___ showed right lower lobe consolidation consistent with pneumonia. Admission glucose was markedly elevated. Referred by ___.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Elevated glucose followed by ___
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+HEENT: moist mucosa
+Neck: supple
+EXTREMITIES: no edema
+SKIN: warm, dry
+Neuro: alert, nonfocal
+
+Pertinent Results:
+Glucose 312 on admission, hemoglobin A1c 10.2. White count 14.1 falling to 8.0. Creatinine normal.
+IMPRESSION: Right lower lobe opacity, improved on repeat film at ___.
+
+Brief Hospital Course:
+She was treated with intravenous antibiotics, then switched to oral therapy once afebrile. Basal and mealtime insulin were started with glucose improving steadily. Oxygen was weaned to room air. Insulin teaching was completed at ___ and she met with ___ for diet counseling.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Insulin glargine 12 units nightly. Insulin lispro with meals per sliding scale. Azithromycin to finish course.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary:
+Pneumonia
+
+Discharge Condition:
+Stable
+Mental Status: clear and coherent
+Level of Consciousness: alert
+
+Discharge Instructions:
+You were hospitalized with a lung infection and high blood sugars. Finish your antibiotics, check your glucose before meals, and take insulin as taught. Call ___ for fever, worsening cough or shortness of breath.
+
+Followup Instructions:
+___

@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+The patient presented to ___ with two days of worsening right upper abdominal pain, nausea and vomiting after a fatty meal. She was febrile at triage. Ultrasound showed gallstones with wall thickening, and she was transferred to our hospital on ___ for surgical evaluation by Dr. ___ for presumed acute cholecystitis.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones. Sibling treated at ___ for a thyroid problem.
+
+Physical Exam:
+Gen: Mildly uncomfortable, afebrile, cooperative.
+HEENT: Anicteric sclerae, moist mucous membranes.
+Neck: Supple, no lymphadenopathy.
+Ext: Warm, no edema.
+SKIN: No rash or jaundice.
+
+Pertinent Results:
+Admission labs showed an elevated white count with mild transaminase rise and a normal lipase. Right upper quadrant ultrasound at ___ demonstrated cholelithiasis, gallbladder wall thickening and pericholecystic fluid. Imaging reviewed by ___ showed no common duct dilation. Postoperative hemoglobin remained stable and liver enzymes trended toward normal before discharge.
+
+Brief Hospital Course:
+She was started on intravenous fluids, antibiotics and bowel rest. The surgical team at ___ performed a laparoscopic cholecystectomy on hospital day two without complication. Pain was controlled with oral analgesics, her diet was advanced, and she tolerated regular food. Fever resolved and the white count normalized. She was seen by ___ for mobility and cleared for home.
+TRANSITIONAL ISSUES:
+Please follow up the final pathology result from ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly, multivitamin daily.
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily.
+2. Atorvastatin 20 mg by mouth every night.
+3. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+4. Docusate 100 mg twice daily while taking opioids.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute cholecystitis
+Secondary:
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Good
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized with gallbladder inflammation and had your gallbladder removed through small incisions. You may shower, but do not soak the incisions. Avoid lifting heavy objects for two weeks. Return for fever, worsening belly pain, repeated vomiting or yellow skin.
+
+Followup Instructions:
+___

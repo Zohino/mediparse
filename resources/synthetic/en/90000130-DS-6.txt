@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Patient presented to ___ with two days of right upper quadrant pain, nausea and vomiting after fatty meals. She was referred by her physician at ___ and evaluated in the emergency department.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+Vitals:
+Afebrile, stable.
+General:
+Comfortable, no distress.
+Neck:
+Supple.
+ABD:
+Soft, tender right upper quadrant, no rebound.
+
+Pertinent Results:
+ADMISSION LABS:
+Elevated white count, mildly raised bilirubin, normal lipase.
+IMPRESSION:
+Gallstones with gallbladder wall thickening and pericholecystic fluid, read by ___ radiology.
+
+Brief Hospital Course:
+She underwent laparoscopic cholecystectomy on ___ with Dr. ___ without complication. Pain was controlled, diet advanced and tolerated. Antibiotics were completed. She was discharged home in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily; levothyroxine.
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed; oxycodone 5 mg for severe pain only; continue lisinopril and levothyroxine.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Mental Status: Alert and oriented.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You had your gallbladder removed. Keep incisions clean and dry, avoid heavy lifting for two weeks, and call ___ for fever, vomiting, or worsening abdominal pain.
+
+Followup Instructions:
+___

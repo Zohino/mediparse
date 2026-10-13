@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Chest pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension presented with two days of exertional chest pressure, referred by his clinic at ___ for evaluation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+No history of atrial fibrillation
+
+Social History:
+___
+
+Family History:
+Father with coronary disease
+
+Physical Exam:
+General: Comfortable, no distress
+Lungs: Clear bilaterally
+Ext: No edema
+Neuro: Alert, nonfocal
+
+Brief Hospital Course:
+Cardiac enzymes remained negative and telemetry showed sinus rhythm. Stress testing at ___ was unremarkable. Chest pain resolved with rest and he was discharged.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+Continue lisinopril daily. Continue atorvastatin nightly. Aspirin 81 mg daily was added for prevention.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atypical chest pain
+Secondary:
+Hypertension, hyperlipidemia
+
+Discharge Condition:
+Good
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for chest pain, and testing showed no heart attack. Take medicines as directed and return for worsening pain or breathlessness.
+
+Followup Instructions:
+___

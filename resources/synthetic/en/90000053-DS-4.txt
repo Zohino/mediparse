@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies.
+
+Chief Complaint:
+Weakness and dizziness.
+
+Major Surgical or Invasive Procedure:
+None.
+
+History of Present Illness:
+The patient is a man who presented from home after ___ days of progressive fatigue, lightheadedness and intermittent palpitations. He was seen at ___ by his primary physician, who sent him to the emergency department. Vital signs were stable on arrival and blood work was drawn and an ECG was obtained.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Noncontributory.
+
+Physical Exam:
+Examined by ___ on admission, comfortable and in no distress.
+HEENT: Normocephalic, moist mucous membranes.
+Neck: Supple, no JVD.
+Ext: Warm, no edema.
+SKIN: No rash.
+
+Pertinent Results:
+Admission labs notable for elevated glucose and normal electrolytes. Troponin negative twice. ECG showed an irregular rhythm without ischemic changes. Chest radiograph was clear. Echocardiogram performed at ___ showed preserved ejection fraction. Hemoglobin A1c was elevated at ___ percent. Thyroid function was normal. Urinalysis was unremarkable.
+
+Brief Hospital Course:
+He was admitted to the telemetry unit for rate control and monitoring. Metoprolol was titrated with improved heart rate, and anticoagulation was started after discussion of risks and benefits. Blood sugars were managed with insulin and then transitioned to oral therapy. Cardiology evaluated him on ___ and agreed with the plan. He ambulated independently and was discharged home with services arranged through ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly, metformin 500 mg twice daily.
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily. Apixaban 5 mg twice daily. Metformin 500 mg twice daily. Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Continue all medications as directed by ___.
+
+Discharge Disposition:
+Home with services.
+
+Discharge Diagnosis:
+Diabetes mellitus
+Atrial fibrillation
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for an irregular heart rhythm. Take your new medicines exactly as prescribed and check your blood sugar every day. Return to the hospital for chest pain, fainting, bleeding or worsening shortness of breath. Call ___ with any questions.
+
+Followup Instructions:
+___

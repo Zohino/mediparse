@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with several days of palpitations and fatigue. Her primary physician at ___ noted a rapid, irregular pulse and sent her to the emergency department, where she was started on rate control and admitted for monitoring.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+General: Comfortable, no distress
+HEENT: Moist mucous membranes
+ABD: Soft, nontender
+Ext: No edema
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Admission labs on ___ showed normal electrolytes and a normal thyroid stimulating hormone. Troponin was negative twice. Chest radiograph was clear. Echocardiogram showed preserved ejection fraction with mild left atrial enlargement.
+
+Brief Hospital Course:
+She was monitored on telemetry and her heart rate settled with oral metoprolol. Anticoagulation was started after discussion of risks and benefits. Her symptoms resolved by ___ and she walked without difficulty. She was cleared for discharge by ___ with outpatient cardiology review.
+
+TRANSITIONAL ISSUES:
+Recheck heart rate and blood pressure at the first clinic visit.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 75 mcg daily
+
+Discharge Medications:
+1. Apixaban 5 mg by mouth twice daily
+2. Metoprolol succinate 50 mg by mouth once daily
+3. Lisinopril 10 mg daily
+4. Levothyroxine 75 mcg daily
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted with a fast, irregular heartbeat. Take your new medications every day, including the blood thinner. Return for chest pain, fainting, bleeding or worsening shortness of breath. Keep your appointment with ___.
+
+Followup Instructions:
+___

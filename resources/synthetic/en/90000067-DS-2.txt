@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old man with known gallstones who presented with two days of right upper quadrant pain, nausea and fever. The pain began after a fatty meal at ___ and did not settle. He was first evaluated at ___ and transferred here. Ultrasound showed a thickened gallbladder wall with stones and a small amount of pericholecystic fluid.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones, treated at ___
+
+Physical Exam:
+General: Uncomfortable, febrile, otherwise in no distress.
+Neck: Supple, no masses.
+Lungs: Clear to auscultation bilaterally.
+Abdomen: Tender in the right upper quadrant with positive Murphy sign, no rebound.
+Neuro: Alert and oriented, nonfocal.
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 14.2, hemoglobin 14.1, platelets 260. Sodium 138, potassium 4.1, creatinine 0.9. ALT 58, AST 44, alkaline phosphatase 110, total bilirubin 1.1, lipase normal. Ultrasound: gallstones, wall thickening, positive sonographic Murphy sign. Common bile duct not dilated.
+
+Brief Hospital Course:
+He was admitted, given IV fluids and antibiotics, and kept without food by mouth. The team led by Dr. ___ performed an uncomplicated laparoscopic cholecystectomy on ___. Afterward pain was controlled with oral medication, he resumed a regular diet, passed flatus and walked independently. Fever resolved and the white count normalized before discharge.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily.
+2. Atorvastatin 20 mg by mouth nightly.
+3. Acetaminophen 650 mg every six hours as needed for pain.
+4. Oxycodone 5 mg every four hours as needed for severe pain, prescribed by ___.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with an inflamed gallbladder and had it removed laparoscopically. Keep the small incisions clean and dry and avoid lifting more than ten pounds for four weeks. Call the clinic at ___ or return to the emergency department for fever, vomiting, yellow skin, worsening belly pain or wound redness.
+
+Followup Instructions:
+___

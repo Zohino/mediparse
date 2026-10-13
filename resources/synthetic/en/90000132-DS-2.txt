@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man presented to ___ with five days of productive cough, fever, chills and shortness of breath after contact with a sick relative. His primary care physician, Dr. ___, started an oral antibiotic without improvement and referred him to the emergency department.
+
+Past Medical History:
+Hypertension
+Seasonal allergies
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+General:
+Tired appearing, mildly tachypneic
+HEENT:
+Moist mucous membranes
+Abdomen:
+Soft, non-tender
+Neuro:
+Alert, no deficits
+
+Pertinent Results:
+Admission labs notable for elevated white count and raised inflammatory markers. Chest radiograph on ___ demonstrated patchy right lower lobe opacity. Blood cultures showed no growth. Repeat film reviewed by radiologist ___ showed interval improvement. Oxygen saturation 97 percent on room air at discharge.
+
+Brief Hospital Course:
+Treated with intravenous antibiotics and supplemental oxygen, weaned to room air by day three. Fever resolved and cough improved. Imaging at ___ showed a right lower lobe opacity. Cultures drawn by Dr. ___ remained negative. He ambulated safely and was discharged on oral antibiotics with follow up arranged at ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Loratadine as needed
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily
+2. Amoxicillin-clavulanate 875 mg by mouth twice daily for five more days
+3. Loratadine 10 mg by mouth daily as needed
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary:
+Pneumonia
+Secondary:
+Hypertension
+
+Discharge Condition:
+Good
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with a lung infection and treated with antibiotics. Finish all prescribed pills, rest, and drink fluids. Return for worsening breathlessness, high fever or chest pain. Call ___ with any questions.
+
+Followup Instructions:
+___

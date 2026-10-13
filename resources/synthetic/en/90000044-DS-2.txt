@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient presented to ___ with five days of productive cough, fever and shortness of breath. She was seen by her primary physician at ___ and sent to the emergency department. On arrival she was febrile and hypoxic, requiring supplemental oxygen. She was started on intravenous antibiotics and admitted to the medical floor for further care.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Possible diabetes, confirmatory testing pending with ___
+
+Past Surgical History:
+Cholecystectomy at ___
+Appendectomy
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Father ___
+
+Physical Exam:
+General: Alert, mildly ill appearing, in no distress.
+HEENT: Moist mucous membranes, oropharynx clear.
+SKIN: Warm and dry, no rash.
+Neuro: Oriented, moves all extremities, no focal deficit.
+
+Pertinent Results:
+Admission labs were notable for an elevated white blood cell count with neutrophil predominance. Chest radiograph showed a right lower lobe opacity. Blood cultures drawn at ___ showed no growth. Sputum culture sent to ___ grew normal oral flora. Creatinine remained at baseline. Repeat film on ___ showed an improving opacity. Oxygen saturation normalized on room air by discharge.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Aspirin 81 mg daily
+Multivitamin daily
+
+Discharge Medications:
+Amoxicillin-clavulanate 875 mg twice daily for five more days
+Azithromycin 250 mg daily to finish the course
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Aspirin 81 mg daily
+Acetaminophen as needed for fever
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Pneumonia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+Dear Ms. ___, you were hospitalized with an infection of the lung. You improved with antibiotics and oxygen. Please finish your antibiotic course as prescribed, drink plenty of fluids and rest. Return to the hospital for worsening cough, high fever, chest pain or trouble breathing.
+
+Followup Instructions:
+___

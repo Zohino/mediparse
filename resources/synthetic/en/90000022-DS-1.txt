@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fatigue and nausea
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with long-standing diabetes mellitus and chronic kidney disease presented from ___ with three days of fatigue, poor appetite and nausea, with rising creatinine and glucose noted since ___ by his outpatient clinic.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General: Alert, comfortable, in no acute distress.
+HEENT: Moist mucous membranes.
+Neck: Supple, no masses.
+Lungs: Clear bilaterally.
+Ext: Trace ankle edema.
+Neuro: Nonfocal, moves all limbs.
+
+Pertinent Results:
+Admission labs showed elevated creatinine, mild acidosis and high glucose. Urinalysis without infection. Potassium normal. Creatinine trended down over the stay.
+IMAGING:
+Renal ultrasound without hydronephrosis.
+
+Brief Hospital Course:
+Treated with intravenous fluids and insulin adjustment. The nephrology team ___ reviewed medications and held nephrotoxic agents. Creatinine improved to baseline by ___ and nausea resolved. Tolerating diet and walking independently, he was felt safe for discharge home with close outpatient monitoring.
+
+Discharge Medications:
+Insulin glargine nightly, titrated to home glucose log. Amlodipine daily. Atorvastatin nightly. Hold ibuprofen and other anti-inflammatory pain medicines until follow up labs are reviewed.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic kidney disease
+
+Discharge Condition:
+Stable.
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted with dehydration and nausea. Drink fluids regularly, check your glucose daily, and avoid anti-inflammatory medicines. Call ___ for vomiting, confusion or reduced urine, and keep your lab visit at ___.
+
+Followup Instructions:
+___

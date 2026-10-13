@@ -1,0 +1,81 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Abdominal pain and vomiting
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with two days of worsening epigastric pain, nausea and vomiting. Seen at ___ by her physician, then sent to the emergency department of ___ for further evaluation.
+
+Past Medical History:
+Hypertension
+Gallstones
+Hypothyroidism followed by Dr. ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+General:
+Comfortable, no distress
+Neck:
+Supple
+Lungs:
+Clear bilaterally
+CARDIAC:
+Regular rhythm
+ABD:
+Tender in right upper quadrant
+EXTREMITIES:
+No edema
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Elevated lipase and mildly raised bilirubin on arrival, trending down by discharge.
+IMPRESSION:
+Gallstones with a dilated common bile duct, no obstructing stone seen.
+
+Brief Hospital Course:
+She was admitted, kept without oral intake and given intravenous fluids and pain control. Symptoms resolved over two days. Surgery team at ___ recommended outpatient gallbladder removal, to be scheduled at ___.
+
+Medications on Admission:
+Lisinopril
+Levothyroxine
+
+Discharge Medications:
+1. Lisinopril daily as before.
+2. Levothyroxine daily as before.
+3. Acetaminophen as needed for pain.
+4. Ondansetron as needed for nausea.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary:
+Gallstone pancreatitis
+Hypertension and hypothyroidism
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Activity Status:
+Independent, walking without help
+
+Discharge Instructions:
+You were hospitalized with pancreatitis caused by gallstones. Eat a low fat diet, drink plenty of fluids and take medications as directed. Return for fever, severe pain or persistent vomiting. Call ___ with questions.
+
+Followup Instructions:
+___

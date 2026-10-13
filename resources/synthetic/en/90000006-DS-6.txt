@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man sent from ___ clinic with two days of palpitations and tiredness. Heart rhythm testing showed atrial fibrillation with a fast ventricular rate. He felt lightheaded but had no chest pain.
+
+Past Medical History:
+Chronic kidney disease, stage 3
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+Vitals: Afebrile, heart rate 96, blood pressure stable
+General: Comfortable, no distress
+HEENT: Moist mucous membranes
+Lungs: Clear bilaterally
+CARDIAC: Irregular rhythm, no murmur
+Abdomen: Soft, nontender
+Ext: No edema
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+DISCHARGE LABS: Creatinine at baseline, potassium normal, hemoglobin stable, troponin negative on repeat testing.
+IMPRESSION: Chest film without acute findings. Heart size normal.
+
+Brief Hospital Course:
+He was given rate control medication and his heart rate settled within a day. Blood thinning was started after discussion with the team from ___. Kidney function stayed steady, and he was walking comfortably by ___.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg once daily
+2. Apixaban 2.5 mg twice daily
+3. Atorvastatin 40 mg nightly
+4. Lisinopril 5 mg daily
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Chronic kidney disease
+
+Discharge Condition:
+Stable and alert.
+Activity Status: Walks without assistance
+
+Discharge Instructions:
+You were hospitalized because of a fast, uneven heartbeat. Take your new medicines as directed. Return for fainting, chest pain, or bleeding. Call ___ with any questions.
+
+Followup Instructions:
+___

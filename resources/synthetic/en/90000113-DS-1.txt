@@ -1,0 +1,79 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fatigue, thirst, frequent urination
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with several days of fatigue, thirst and frequent urination. He denies cough, fever or pneumonia symptoms, and chest imaging showed no evidence of pneumonia. He was sent to the emergency department by ___ for evaluation.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Gen:
+Comfortable, no distress
+HEENT:
+Dry mucous membranes
+Abdomen:
+Soft, nontender
+EXTREMITIES:
+No edema
+SKIN:
+Warm, dry
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+ADMISSION LABS:
+Glucose markedly elevated, mild hyponatremia, creatinine near baseline.
+DISCHARGE LABS:
+Glucose improved, electrolytes normal at ___.
+IMPRESSION:
+Clear lungs on chest radiograph, no acute findings.
+
+Medications on Admission:
+Metformin, lisinopril, atorvastatin
+
+Discharge Medications:
+Metformin twice daily, new basal insulin at bedtime, continue lisinopril and atorvastatin as before. Glucose meter and test strips provided.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Diabetes mellitus with hyperglycemia
+
+Discharge Condition:
+Good
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Independent, walks without assistance
+
+Discharge Instructions:
+You were hospitalized for very high blood sugar. Check your glucose before meals, take insulin as directed, drink fluids, and call ___ or return if you feel confused, vomit, or become very weak.
+
+Followup Instructions:
+___

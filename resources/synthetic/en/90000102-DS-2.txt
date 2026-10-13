@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg swelling and redness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient presented to ___ with three days of worsening right lower leg swelling, redness and pain after a minor scrape at ___. She developed fevers at home and was seen by her doctor, who sent her to the emergency department. Examination supported cellulitis, and she was admitted for intravenous antibiotics.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Knee surgery in ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Father with stroke in ___.
+
+Physical Exam:
+Gen: Comfortable, no distress.
+HEENT: Normocephalic, moist mucous membranes.
+Neck: Supple.
+Abdomen: Soft, nontender.
+Ext: Right calf warm, red, swollen.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+Admission labs showed an elevated white blood cell count and elevated glucose, with creatinine at baseline. Blood cultures drawn at ___ showed no growth after several days. Hemoglobin A1c was elevated. Inflammatory markers improved by the time of discharge.
+IMAGING:
+Right lower extremity ultrasound negative for deep vein thrombosis. Chest film at ___ clear.
+
+Brief Hospital Course:
+She was treated with intravenous antibiotics, and the redness receded steadily. Her diabetes was managed with an insulin sliding scale while inpatient, and glucose improved with diet counseling from the ___ team. Blood cultures stayed negative. Pain was controlled with acetaminophen. By the third day she walked independently, tolerated oral antibiotics, and was cleared for discharge home after review by ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly, metformin 500 mg twice daily.
+
+Discharge Medications:
+Cephalexin 500 mg four times daily for seven days. Continue lisinopril, atorvastatin and metformin as before. Acetaminophen as needed for pain. Prescriptions were sent to the ___ pharmacy.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Cellulitis of the right leg
+Secondary:
+Diabetes
+
+Discharge Condition:
+Stable and improved.
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory and independent.
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Take all of your antibiotics as prescribed, even if the redness fades. Keep the leg elevated when sitting. Return for fever, spreading redness, or worsening pain, and call ___ with questions.
+
+Followup Instructions:
+___

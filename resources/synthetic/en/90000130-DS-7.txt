@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies.
+
+Chief Complaint:
+Left leg swelling and pain.
+
+Major Surgical or Invasive Procedure:
+None.
+
+History of Present Illness:
+___ year old woman with hypertension presented with three days of left calf swelling and pain after a long trip to ___. She denied chest pain or dyspnea. Doppler at ___ showed a clot.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Obesity
+
+Social History:
+___
+
+Family History:
+Mother with breast cancer at ___.
+
+Physical Exam:
+Neck:
+Supple, no JVD.
+Lungs:
+Clear bilaterally.
+Ext:
+Left calf swollen, tender and warm with 2+ edema, pulses intact.
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 8.1, Hgb 12.4, creatinine 0.9, D-dimer elevated.
+IMAGING:
+Duplex of the left leg showed occlusive thrombus in the femoral vein. Chest radiograph ___ without acute findings.
+
+Brief Hospital Course:
+Started on apixaban for left femoral deep vein thrombosis with good symptom control. Hypertension was managed with home lisinopril. She ambulated without hypoxia and was discharged home with ___ follow up.
+TRANSITIONAL ISSUES:
+Complete three months of anticoagulation; consider hypercoagulable evaluation by ___.
+
+Medications on Admission:
+Lisinopril, levothyroxine.
+
+Discharge Medications:
+Apixaban 10 mg twice daily for seven days, then 5 mg twice daily. Continue lisinopril and levothyroxine as before.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Left femoral deep vein thrombosis
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for a blood clot in your left leg. Take apixaban exactly as directed, walk regularly, and return for bleeding, chest pain, or worsening leg swelling.
+
+Followup Instructions:
+___

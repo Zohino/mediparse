@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough, fever, shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man sent from ___ with five days of productive cough, fever and worsening dyspnea. Chest film showed a right lower lobe consolidation.
+
+Past Medical History:
+COPD
+Hypertension
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+Vitals: afebrile, stable
+Gen: comfortable
+Neck: supple
+Lungs: scattered rhonchi
+Abdomen: soft
+Neuro: nonfocal
+
+Pertinent Results:
+WBC 16.2 on admission, down to 8.1. Sputum culture grew oral flora. Chest film with right lower lobe airspace opacity.
+DISCHARGE LABS:
+WBC 8.1, Cr 0.9
+
+Brief Hospital Course:
+Treated with ceftriaxone and azithromycin, then switched to oral antibiotics once afebrile. Irregular rhythm on telemetry was rate controlled with metoprolol. Evaluated by Dr. ___ and cleared for home.
+
+Medications on Admission:
+Tiotropium inhaler daily
+Lisinopril 10 mg
+
+Discharge Medications:
+1. Tiotropium inhaler daily
+2. Lisinopril 10 mg daily
+3. Metoprolol 25 mg twice daily
+4. Amoxicillin-clavulanate for three more days
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Chronic obstructive pulmonary disease
+Atrial fibrillation
+
+Discharge Condition:
+Mental Status: clear and coherent
+Level of Consciousness: alert
+Activity Status: ambulatory, independent
+
+Discharge Instructions:
+You were treated for a lung infection. Finish all antibiotics, use your inhalers, and keep your appointment at ___. Call ___ or return for fever or worsening breathing.
+
+Followup Instructions:
+___

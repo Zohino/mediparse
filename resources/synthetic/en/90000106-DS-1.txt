@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Left leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with a smoking history who noticed warmth, redness and pain of the left lower leg after a minor scrape. Symptoms spread over three days despite home care. He was sent from ___ clinic for fever. Seen in the emergency department on ___.
+
+Past Medical History:
+COPD
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: T 100.4, HR 92, BP 138/80, RR 18, SpO2 95% on room air
+General: Comfortable, no distress
+HEENT: Moist mucous membranes
+Neck: Supple
+PULM: Clear, no wheezing
+EXTREMITIES: Left shin erythematous, warm, tender, mild edema
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+FINDINGS:
+Mild leukocytosis on admission, normalizing by discharge. Blood cultures from ___ showed no growth. Left leg ultrasound showed no deep vein thrombosis. Chest radiograph showed hyperinflation without acute process.
+
+Brief Hospital Course:
+He received intravenous antibiotics for left leg cellulitis, and the border of redness was marked and shrank each day. Fever resolved within one day. Home inhalers were continued without any flare. Seen by Dr. ___ and cleared for discharge on ___ with oral antibiotics.
+TRANSITIONAL ISSUES:
+Recheck the leg at the follow up visit.
+
+Medications on Admission:
+Tiotropium daily
+Lisinopril daily
+Atorvastatin nightly
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth four times daily for 5 days
+2. Tiotropium inhaler daily
+3. Lisinopril 10 mg daily
+4. Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Left lower leg cellulitis
+
+Discharge Condition:
+Stable
+Level of Consciousness: Awake and attentive
+Activity Status: Walks independently
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Take all antibiotic pills as prescribed. Keep the leg raised when sitting. Return for spreading redness, fever or worse pain. Call ___ with questions or visit ___ if needed.
+
+Followup Instructions:
+___

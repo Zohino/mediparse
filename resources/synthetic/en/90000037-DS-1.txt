@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough, fever and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with several days of productive cough, fevers and increasing breathlessness, sent from ___ for evaluation. She was hypoxic on arrival and was evaluated by Dr. ___ in the emergency department before admission.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+General:
+Comfortable, no distress, breathing easily on room air
+Abdomen:
+Soft, nontender
+EXTREMITIES:
+No edema
+
+Pertinent Results:
+White count elevated on admission and normalized by discharge. Chest radiograph showed a right lower lobe opacity. Blood cultures showed no growth. Creatinine and electrolytes remained stable throughout the stay.
+
+Brief Hospital Course:
+She was treated with intravenous antibiotics and supplemental oxygen, which was weaned over three days. Her heart rate stayed controlled on her home regimen. She was followed by Dr. ___ and her cultures were reviewed at ___ before discharge on oral antibiotics.
+
+Medications on Admission:
+Metoprolol, apixaban, levothyroxine
+
+Discharge Medications:
+1. Amoxicillin-clavulanate twice daily for five more days
+2. Metoprolol succinate once daily
+3. Apixaban twice daily
+4. Levothyroxine once daily in the morning
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Pneumonia
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were admitted with a lung infection and treated with antibiotics. Finish the full course of your antibiotics. Keep taking your other medications as before. Return for fever, worsening cough or trouble breathing, and call ___ with questions.
+
+Followup Instructions:
+___

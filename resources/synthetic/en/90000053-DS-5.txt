@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and lightheadedness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man presented to ___ with two days of racing, irregular heartbeat and mild dizziness. He was seen by his physician at ___ and sent in. No chest pain, syncope or fever reported.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Elevated hemoglobin A1c on metformin
+Obesity
+
+Past Surgical History:
+Appendectomy
+
+Social History:
+___
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Moist mucous membranes
+Lungs:
+Clear bilaterally
+Abdomen:
+Soft, nontender
+Ext:
+No edema
+SKIN:
+Warm, dry
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+ECG showed irregularly irregular rhythm without P waves, rate 128. Troponin negative twice. Glucose 214, hemoglobin A1c 8.1. Creatinine normal. TSH normal. Echo at ___ showed preserved ejection fraction.
+
+Brief Hospital Course:
+Rate was controlled with metoprolol and he was started on apixaban for stroke prevention. Heart rate settled below 100. Glucose was managed with insulin sliding scale, then home metformin resumed. Cardiology at ___ arranged outpatient follow up with ___.
+
+Medications on Admission:
+Metformin 1000 mg twice daily
+Lisinopril 10 mg daily
+Atorvastatin 40 mg nightly
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily
+Apixaban 5 mg twice daily
+Metformin 1000 mg twice daily
+Lisinopril 10 mg daily
+Atorvastatin 40 mg nightly, supplied by ___
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atrial fibrillation with rapid ventricular response
+
+Discharge Condition:
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were admitted with a fast, irregular heartbeat. Take your new blood thinner and heart rate medicine every day. Check your blood sugar as before. Return for chest pain, fainting, bleeding or weakness, and call ___ with questions.
+
+Followup Instructions:
+___

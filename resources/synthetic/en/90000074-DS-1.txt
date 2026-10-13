@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with several chronic conditions presented with worsening leg swelling, referred by ___ clinic.
+
+Past Medical History:
+DM2
+CKD
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals: stable, afebrile
+General: comfortable, no distress
+CARDIAC: regular rhythm
+ABD: soft, nontender
+EXTREMITIES: mild edema
+
+Pertinent Results:
+Creatinine near baseline. Glucose mildly elevated. Chest films reviewed at ___.
+IMPRESSION: No acute findings.
+
+Brief Hospital Course:
+Edema improved with diuretic adjustment. Glucose was controlled with her usual regimen. Renal function remained steady and she was discharged home with ___ follow up.
+
+Medications on Admission:
+Metformin, lisinopril
+
+Discharge Medications:
+Metformin 500 mg twice daily
+Furosemide 20 mg daily
+Lisinopril 10 mg daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic kidney disease
+
+Discharge Condition:
+Good, alert and oriented.
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+Weigh yourself daily and limit salt intake. Take medications as prescribed and return for worsening swelling.
+
+Followup Instructions:
+___

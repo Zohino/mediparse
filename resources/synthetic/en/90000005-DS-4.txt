@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+The patient presented to ___ with three days of worsening abdominal pain, nausea and vomiting. He had been seen at ___ the previous week for similar symptoms. Pain was localized to the right upper quadrant, without fever or jaundice. He was referred for evaluation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Gen: Comfortable, lying in bed, no distress.
+HEENT: Anicteric sclera, moist mucous membranes.
+Neck: Supple, no lymphadenopathy.
+Abdomen: Soft, mildly tender in right upper quadrant, nondistended.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+Labs on ___ showed mildly elevated bilirubin, lipase and liver enzymes with a normal white count.
+IMAGING: Ultrasound demonstrated gallstones with a thickened gallbladder wall and no ductal dilation.
+IMPRESSION: Findings consistent with acute cholecystitis.
+
+Brief Hospital Course:
+He was admitted, given intravenous fluids and antibiotics, and kept without oral intake. Surgery evaluated him and he underwent laparoscopic cholecystectomy on ___ without complication. Pain was controlled with oral analgesics and diet was advanced steadily. Bilirubin normalized. He was seen by ___ and cleared for discharge home on hospital day ___ tolerating a regular diet.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Aspirin 81 mg daily.
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed for pain. Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Aspirin 81 mg daily. Docusate 100 mg twice daily while taking opioids.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for gallbladder inflammation and had your gallbladder removed. Avoid heavy lifting for six weeks. Keep incisions clean and dry. Call ___ for fever, worsening pain, vomiting or yellow skin.
+
+Followup Instructions:
+___

@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg redness and pain
+
+Major Surgical or Invasive Procedure:
+Incision and drainage of abscess
+
+History of Present Illness:
+Man with several days of worsening right calf swelling, warmth and fever, transferred from ___ after outpatient antibiotics failed to improve the redness.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+General:
+Uncomfortable, febrile
+HEENT:
+Normal
+Neck:
+Supple
+PULM:
+Clear bilaterally
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+White count elevated on arrival, normalizing by discharge. Wound culture grew staphylococcus.
+IMPRESSION:
+Ultrasound at ___ showed a calf fluid collection without clot.
+
+Brief Hospital Course:
+He was started on intravenous antibiotics and underwent drainage of the collection by the ___ team. Fever resolved, the wound was packed daily, and he tolerated oral antibiotics before leaving.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+Cephalexin
+
+Discharge Medications:
+Doxycycline twice daily for ten days
+Lisinopril daily
+Atorvastatin nightly
+Acetaminophen as needed for pain
+
+Discharge Disposition:
+Home with services
+
+Discharge Diagnosis:
+Right calf abscess
+Secondary:
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Stable
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+Change the wound dressing daily and keep the leg elevated. Return for fever, spreading redness or drainage, or call ___ with questions.
+
+Followup Instructions:
+___

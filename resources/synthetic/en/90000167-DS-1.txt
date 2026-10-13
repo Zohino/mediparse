@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+This is a ___ year old man who presented to ___ with two days of worsening right upper abdominal pain, nausea and fever. Symptoms began after a fatty meal and did not settle at home. He was seen by Dr. ___ in the emergency department, where ultrasound showed gallstones with gallbladder wall thickening. He denied jaundice or vomiting blood. He was started on intravenous antibiotics and admitted to the surgical service.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Followed by Dr. ___ for routine care
+
+Past Surgical History:
+Appendectomy at ___
+
+Social History:
+___
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: Uncomfortable but alert, mildly febrile.
+Lungs: Clear bilaterally.
+Abdomen: Tender in the right upper quadrant with a positive Murphy sign, no rebound.
+SKIN: Warm, no jaundice.
+Neuro: Alert and oriented, nonfocal.
+
+Pertinent Results:
+White count 14.2 on admission, falling to 8.1 by discharge. Liver enzymes mildly raised, bilirubin normal, lipase normal. Ultrasound on ___ showed multiple gallstones, a thickened gallbladder wall and pericholecystic fluid, with a normal common bile duct. Repeat labs on ___ showed normal liver tests. Intraoperative cholangiogram was not required. Pathology of the gallbladder consistent with acute cholecystitis.
+
+Brief Hospital Course:
+Mr. ___ was admitted with acute calculous cholecystitis and treated with fluids, analgesia and intravenous antibiotics. After discussion with Dr. ___ he underwent an uncomplicated laparoscopic cholecystectomy on ___. Pain was controlled with oral medication, diet was advanced and he passed flatus. Fever resolved and his white count normalized. Incisions were clean and dry. He was discharged home on hospital day ___ tolerating a regular diet and walking independently.
+TRANSITIONAL ISSUES:
+Review pathology and blood pressure at the visit with ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Acetaminophen 650 mg by mouth every six hours as needed for pain
+4. Oxycodone 5 mg by mouth every six hours as needed for severe pain, short course
+5. Docusate 100 mg twice daily while taking opioids
+
+Discharge Disposition:
+Home with services from ___
+Facility: ___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+Hypertension
+
+Discharge Condition:
+Stable, afebrile, pain controlled
+Level of Consciousness: Alert and interactive
+Mental Status: Clear and coherent
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were admitted with an inflamed gallbladder and had it removed laparoscopically. You may shower and let soap run over the incisions, but do not soak in a bath. Do not lift more than ten pounds for four weeks. Call ___ or return for fever, worsening belly pain, vomiting, yellow skin or redness at the incisions. Take stool softeners while using opioid pain medication and do not drive.
+
+Followup Instructions:
+___

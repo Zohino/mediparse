@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+___ year old man with one day of worsening right lower quadrant pain, nausea and low fever, sent from ___ for surgical evaluation after imaging suggested appendicitis.
+REVIEW OF SYSTEMS:
+Positive for nausea. No vomiting, chest pain or dysuria.
+
+Past Medical History:
+Hypertension
+Seasonal allergies
+
+Social History:
+___
+
+Family History:
+Family history of pneumonia in his mother. No history of bowel disease.
+
+Physical Exam:
+General:
+Uncomfortable, alert
+Lungs:
+Clear
+Abdomen:
+Tender right lower quadrant, no rigidity
+Neuro:
+Nonfocal
+PULSES:
+Palpable bilaterally
+
+Pertinent Results:
+ADMISSION LABS:
+White count elevated at 14, normal hemoglobin and chemistries.
+DISCHARGE LABS:
+White count normalized, creatinine stable. CT showed an inflamed appendix without abscess.
+
+Brief Hospital Course:
+Taken to the operating room by Dr. ___ for uncomplicated laparoscopic appendectomy. Diet advanced, pain controlled with oral medication, and he was afebrile and walking by the second day.
+TRANSITIONAL ISSUES:
+Wound check with Dr. ___ at ___ clinic in two weeks.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+
+Discharge Medications:
+Lisinopril 10 mg once daily.
+Acetaminophen 650 mg every six hours as needed for pain.
+Docusate 100 mg twice daily while taking opioids.
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Good
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You had your appendix removed. Keep incisions clean and dry, avoid lifting over ten pounds, and call ___ or return for fever, vomiting, or spreading redness.

@@ -1,0 +1,62 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old woman presented with two days of right upper quadrant pain, nausea and vomiting after meals, referred from ___ clinic. Ultrasound suggested acute cholecystitis and she was admitted for laparoscopic surgery this admission.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Followed by Dr. ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+General: Comfortable, no distress.
+HEENT: Anicteric, moist mucosa.
+Abdomen: Soft, mildly tender, healing port sites.
+EXTREMITIES: No edema.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+ADMISSION LABS: White count mildly elevated, liver enzymes normal, bilirubin normal.
+IMAGING: Ultrasound showed gallstones, wall thickening and pericholecystic fluid.
+IMPRESSION: Findings consistent with acute cholecystitis; no common bile duct dilation seen on review of the study.
+
+Medications on Admission:
+Acetaminophen as needed. Lisinopril 10 mg daily.
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed. Lisinopril 10 mg daily. Docusate 100 mg twice daily while taking opioids. Resume home dose.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Primary: Acute cholecystitis with cholelithiasis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+Keep incisions clean and dry. Avoid heavy lifting for two weeks. Return for fever, worsening abdominal pain, jaundice or persistent vomiting. Call ___ with questions.
+
+Followup Instructions:
+___

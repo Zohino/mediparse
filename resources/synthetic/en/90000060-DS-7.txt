@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right flank pain and fever
+
+Major Surgical or Invasive Procedure:
+None; imaging obtained at ___
+
+History of Present Illness:
+The patient is a woman who presented with three days of worsening right flank pain, fever and dysuria after earlier treatment at ___ for a urinary infection. She reported nausea without vomiting. Her primary physician, Dr. ___, sent her to the emergency department for evaluation and intravenous antibiotics.
+REVIEW OF SYSTEMS:
+Positive as per the history above, otherwise negative.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension
+Hyperlipidemia
+Followed by Dr. ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General:
+Alert, comfortable, no distress.
+HEENT:
+Moist mucous membranes.
+ABD:
+Soft, mild right flank tenderness.
+Ext:
+Warm, no edema.
+PULSES:
+2+ radial.
+
+Pertinent Results:
+DISCHARGE LABS:
+WBC 8.2, Hgb 12.1, Plt 245, Na 139, K 4.1, Cr 0.8, glucose 132. Urine culture grew E. coli sensitive to ceftriaxone.
+FINDINGS:
+CT of the abdomen performed at ___ showed right pyelonephritis without obstructing stone or abscess. Blood cultures showed no growth at five days.
+
+Medications on Admission:
+Metformin 500 mg twice daily, lisinopril 10 mg daily, atorvastatin 20 mg nightly.
+
+Discharge Medications:
+Cefpodoxime 200 mg by mouth twice daily for seven days. Metformin 500 mg twice daily. Ondansetron 4 mg as needed for nausea. Acetaminophen 650 mg every six hours as needed for pain. Continue home lisinopril.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute right pyelonephritis
+Hypertension
+
+Discharge Condition:
+Stable and improved.
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized for a kidney infection and treated with intravenous antibiotics. Finish all of your antibiotic pills. Drink plenty of fluids. Return for fever, vomiting, or worsening back pain. Please keep your appointment with ___ and call ___ with any questions.
+
+Followup Instructions:
+___

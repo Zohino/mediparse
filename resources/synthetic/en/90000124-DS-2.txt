@@ -1,0 +1,81 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fatigue and leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with hypertension and anemia who presented to ___ with three days of progressive fatigue, nausea, and leg swelling. She was seen by her primary physician at ___ who noted elevated blood pressure and sent her to the emergency department. Labs there showed elevated creatinine and potassium, and she was admitted for evaluation and management of volume overload. She denied chest pain or fever.
+
+Past Medical History:
+Hypertension
+Anemia
+Hyperlipidemia
+Followed by ___ clinic
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: Tired appearing woman in no acute distress, examined by Dr. ___.
+Neck: Jugular venous distension present, otherwise supple.
+EXTREMITIES: Two plus pitting edema to the knees bilaterally, warm and well perfused.
+
+Pertinent Results:
+DISCHARGE LABS:
+___ 06:10AM BLOOD WBC 6.1 Hgb 9.2 Plt 210
+BUN 58 Creat 3.4 (baseline near 3.1) Na 138 K 4.9 Cl 104 HCO3 19
+Ca 8.1 Phos 5.6 Mg 2.0
+Estimated GFR 14, PTH elevated at 312
+Urinalysis: protein 300, no blood
+Renal ultrasound ___: small echogenic kidneys bilaterally, no hydronephrosis.
+
+Brief Hospital Course:
+She was treated with intravenous furosemide with good urine output and lost four kilograms. Creatinine remained near baseline around 3.2. Potassium was controlled with a low potassium diet. Phosphorus was elevated and sevelamer was started. Anemia was thought related to reduced kidney function; iron studies were sent and erythropoietin was discussed with the ___ team. Nephrology from ___ recommended outpatient follow up. Blood pressure improved after amlodipine was increased. She was discharged home in stable condition.
+
+Medications on Admission:
+Amlodipine 5 mg daily
+Atorvastatin 20 mg nightly
+Ferrous sulfate 325 mg daily
+Aspirin 81 mg daily
+
+Discharge Medications:
+Amlodipine 10 mg daily
+Atorvastatin 20 mg nightly
+Ferrous sulfate 325 mg daily
+Furosemide 40 mg twice daily
+Sevelamer carbonate 800 mg three times daily with meals
+Aspirin 81 mg daily
+Filled at ___ pharmacy
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes mellitus
+Volume overload
+Hypertension
+Anemia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted because of fluid buildup and abnormal blood tests. Weigh yourself every morning and call ___ if you gain more than three pounds. Follow a low salt, low potassium diet and take your medications as prescribed. Keep your appointment with the kidney clinic at ___ and see your primary doctor, Dr. ___. Return for shortness of breath, chest pain, or decreased urine output.
+
+Followup Instructions:
+___

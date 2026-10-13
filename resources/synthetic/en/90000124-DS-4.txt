@@ -1,0 +1,82 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Weakness and nausea
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with a long history of poorly controlled hypertension who presented to ___ after three days of progressive weakness, nausea and reduced oral intake. She reported no chest pain or fever. Her primary physician at ___ had advised her to come to the emergency department after outpatient labs were abnormal.
+REVIEW OF SYSTEMS:
+Negative except as above.
+
+Past Medical History:
+Diabetes mellitus type 2
+Chronic kidney disease stage 4
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Tired but comfortable on arrival.
+DISCHARGE PHYSICAL EXAM:
+General: alert, no distress
+HEENT: moist mucosa
+Neck: supple
+ABD: soft, nontender
+EXTREMITIES: no edema
+Neuro: nonfocal
+
+Pertinent Results:
+ADMISSION LABS: creatinine 4.1, potassium 5.9, bicarbonate 17, glucose 212, hemoglobin 9.8.
+DISCHARGE LABS: creatinine 3.2, potassium 4.8, bicarbonate 22, glucose 148, hemoglobin 9.9.
+IMPRESSION: Chest radiograph obtained at ___ showed clear lungs and normal heart size. Renal ultrasound showed small echogenic kidneys without hydronephrosis.
+
+Brief Hospital Course:
+On ___ she was admitted with volume depletion, hyperkalemia and acute worsening of her baseline kidney function. Potassium was treated in the emergency department and normalized. Lisinopril was held and she received gentle intravenous fluids, with creatinine improving steadily. The nephrology team from ___ reviewed her case and agreed with the plan. Glucose was managed with insulin. She tolerated a regular diet and was discharged home on ___ in stable condition, with a visit planned at ___.
+
+Medications on Admission:
+Lisinopril 20 mg daily
+Metformin 500 mg twice daily
+Atorvastatin 40 mg nightly
+
+Discharge Medications:
+1. Atorvastatin 40 mg tablet nightly.
+2. Insulin glargine 10 units subcutaneously at bedtime.
+3. Amlodipine 5 mg tablet daily.
+Stop lisinopril and metformin until seen at ___.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Hyperkalemia
+Volume depletion
+Secondary:
+Diabetes mellitus type 2
+Hypertension
+
+Discharge Condition:
+Stable and improved.
+Mental Status: clear and coherent
+Level of Consciousness: alert
+Activity Status: independent with a steady gait
+
+Discharge Instructions:
+You were hospitalized because of weakness, dehydration and a high potassium level. Please drink fluids regularly and take only the medications listed above. Check your blood sugar every morning and keep a log. Return to the hospital for confusion, fainting, palpitations or very little urine. Call ___ with questions.
+
+Followup Instructions:
+___

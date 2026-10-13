@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever, productive cough, shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old man sent from ___ clinic with five days of fever, productive cough and pleuritic chest pain. Chest imaging showed right lower lobe pneumonia. He was hypoxic on arrival and referred by Dr. ___ for admission.
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+General:
+Mildly tachypneic, comfortable at rest
+HEENT:
+Moist mucosa
+Neck:
+Supple
+Lungs:
+Right basilar crackles
+CARDIAC:
+Regular, no murmur
+ABD:
+Soft, nontender
+EXTREMITIES:
+No edema
+SKIN:
+Warm, dry
+
+Pertinent Results:
+Admission labs notable for white count 14.2 with neutrophil predominance and mildly elevated lactate, normalized after fluids. Blood cultures drawn on ___ showed no growth. Chest radiograph demonstrated right lower lobe consolidation without effusion. Sodium and creatinine were normal.
+
+Brief Hospital Course:
+He was started on ceftriaxone and azithromycin, with oxygen weaned to room air by day three. Fever resolved and cough improved. He was evaluated by the ___ team on ___ and was judged stable for discharge to complete oral antibiotics at home.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg twice daily for five more days
+2. Lisinopril 10 mg daily
+3. Atorvastatin 20 mg nightly
+Resume the rest per ___ clinic.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Community acquired lower respiratory infection
+Secondary:
+Hypertension, hyperlipidemia
+
+Discharge Condition:
+Stable and improved
+Level of Consciousness:
+Alert and oriented
+Activity Status:
+Ambulatory, independent
+
+Followup Instructions:
+___

@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right flank pain and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman transferred from ___ with three days of right flank pain, fever, chills and burning urination. She noted poor appetite and nausea but no vomiting. On ___ she became lightheaded at home and was brought in by family. In the emergency department she was febrile and tachycardic and received fluids and antibiotics.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension
+Hyperlipidemia
+Osteoarthritis of the knees
+Appendectomy at ___ years ago
+
+Social History:
+___
+
+Family History:
+Mother with hypertension, followed at ___. Father with coronary artery disease.
+
+Physical Exam:
+Gen: Tired appearing woman, comfortable at rest, no distress.
+ABD: Soft, mild suprapubic tenderness, nondistended, normal bowel sounds.
+EXTREMITIES: Warm, no edema, no calf tenderness.
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 15.2 with neutrophil predominance, hemoglobin 12.1, platelets 260. Sodium 134, potassium 4.2, creatinine 1.0, glucose 238. Lactate 2.1. Urinalysis showed many white cells, positive nitrite and bacteria. Urine culture grew E. coli sensitive to ceftriaxone. Renal ultrasound showed no obstruction or stones.
+
+Brief Hospital Course:
+Admitted with a complicated urinary tract infection and early sepsis, managed by the team with Dr. ___. She improved quickly on intravenous ceftriaxone and fluids, and fevers resolved by day two. Glucose was controlled with insulin sliding scale and home regimen resumed. Antibiotics were changed to oral therapy. Follow up was arranged with ___.
+TRANSITIONAL ISSUES:
+Complete oral antibiotic course. Recheck glucose and kidney function at primary care visit.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Cefpodoxime 200 mg twice daily for seven days
+2. Metformin 500 mg twice daily
+3. Lisinopril 10 mg daily
+4. Atorvastatin 20 mg nightly
+Prescriptions sent to ___ pharmacy.
+
+Discharge Disposition:
+Home With Service
+Facility: ___
+
+Discharge Diagnosis:
+Acute pyelonephritis
+Urinary tract infection with sepsis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Walks independently.
+
+Discharge Instructions:
+You were treated for a kidney infection with antibiotics. Take all of your pills until finished and drink plenty of fluids. Return for fever, severe back pain, vomiting or confusion. Call ___ with questions, or the clinic at ___ during the day. After hours, use ___.
+
+Followup Instructions:
+___

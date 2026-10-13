@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old woman sent in from ___ with five days of productive cough, fever, chills and shortness of breath. She reported poor appetite and fatigue. Her oxygen level was low on arrival.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals: T 38.1, HR 98, BP 128/76, SpO2 93% on room air
+Gen: Tired but comfortable
+HEENT: Dry mucous membranes
+Neck: Supple
+Neuro: Alert, nonfocal
+
+Brief Hospital Course:
+She was found to have a right lower lobe pneumonia on chest imaging and began intravenous antibiotics on ___. Oxygen was weaned over two days and fevers resolved. The ___ team agreed with transition to oral antibiotics. She ate well, walked in the hallway and was stable by discharge.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 50 mcg daily
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg twice daily for five more days
+2. Lisinopril 10 mg daily
+3. Levothyroxine 50 mcg daily
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Pneumonia
+
+Discharge Condition:
+Stable
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were treated in the hospital for a lung infection. Finish all of your antibiotics, drink plenty of fluids and rest. Return for worsening breathlessness, high fever or chest pain. Call ___ with questions and see Dr. ___ soon.
+
+Followup Instructions:
+___

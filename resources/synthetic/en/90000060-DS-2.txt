@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old woman with three days of right upper quadrant pain, nausea and fever, referred from ___ clinic after ultrasound showed gallstones and a thickened gallbladder wall. She denied jaundice or vomiting blood. Pain began after a fatty meal and worsened overnight, prompting presentation to the emergency department on ___.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+Gen: Uncomfortable but nontoxic, lying still
+Neck: Supple, no masses
+Abdomen: Soft, tender in right upper quadrant, positive Murphy sign, no rebound
+Ext: Warm, no edema
+
+Pertinent Results:
+Ultrasound: multiple gallstones, gallbladder wall thickening, small amount of pericholecystic fluid, common bile duct normal caliber.
+DISCHARGE LABS:
+White count 8.1, hemoglobin 12.9, platelets 245, creatinine 0.7, bilirubin 0.6, ALT and AST normal.
+
+Brief Hospital Course:
+She was admitted, given intravenous fluids and antibiotics, and taken to the operating room by the team of ___ for an uncomplicated laparoscopic cholecystectomy. Afterward she tolerated a regular diet, pain was controlled with oral medication, and fever resolved. She walked independently and was discharged on postoperative day 2 with follow up arranged at ___.
+
+Medications on Admission:
+Levothyroxine ___ mcg daily
+Lisinopril daily
+
+Discharge Medications:
+1. Levothyroxine ___ mcg daily
+2. Lisinopril daily
+3. Acetaminophen ___ mg every six hours as needed for pain
+4. Docusate twice daily while taking opioids
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+Secondary:
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Good
+Mental Status: Alert and fully oriented
+Level of Consciousness: Awake and interactive
+Activity Status: Walking without assistance
+
+Discharge Instructions:
+You were treated for an inflamed gallbladder and had it removed laparoscopically. Keep incisions clean and dry, and avoid lifting heavy objects for several weeks. Call ___ for fever, worsening belly pain, yellow skin, or persistent vomiting, or return to ___ if symptoms are severe.
+
+Followup Instructions:
+___

@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with three days of right upper abdominal pain and nausea, sent by ___ after labs at ___ showed elevated liver enzymes.
+
+Past Medical History:
+Hypertension
+Gallstones
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Mild scleral icterus
+Neck:
+Supple
+CARDIAC:
+Regular rhythm
+ABD:
+Tender right upper quadrant, soft
+Ext:
+No edema
+SKIN:
+Warm, dry
+
+Pertinent Results:
+Liver enzymes and bilirubin elevated on arrival. Ultrasound showed gallstones with a dilated common bile duct. Values improved before discharge.
+
+Brief Hospital Course:
+Admitted with gallstone related biliary obstruction and treated with fluids, antibiotics and bowel rest. Symptoms resolved after ___ and diet advanced. Surgery clinic follow up arranged for gallbladder removal.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+
+Discharge Medications:
+Lisinopril daily
+Atorvastatin nightly
+Acetaminophen as needed for pain
+Ondansetron as needed for nausea
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary:
+Choledocholithiasis with cholangitis
+Hypertension, hyperlipidemia
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive
+Activity Status: Independent, walking without help
+
+Discharge Instructions:
+You were treated for a blocked bile duct from gallstones. Eat low fat meals, take medicines as directed, and call ___ for fever, yellow skin or worsening pain.
+
+Followup Instructions:
+___

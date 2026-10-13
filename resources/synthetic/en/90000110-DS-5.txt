@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with several days of productive cough, fever and chills, sent in by ___ after worsening shortness of breath. Chest film at ___ showed a right lower lobe opacity. Started on antibiotics.
+
+Past Medical History:
+Atrial fibrillation on anticoagulation
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Vitals:
+Afebrile, stable
+General:
+Comfortable
+HEENT:
+Moist mucosa
+Neck:
+Supple
+Lungs:
+Right basilar crackles
+EXTREMITIES:
+No edema
+SKIN:
+Warm, dry
+
+Pertinent Results:
+White count mildly elevated on arrival and normalized. Chest radiograph with right lower lobe consolidation. Blood cultures without growth. Electrolytes and creatinine within normal limits.
+
+Brief Hospital Course:
+Treated for pneumonia with intravenous antibiotics, then switched to oral therapy, with oxygen weaned off by day three. Rate remained controlled and anticoagulation continued. Seen by ___ and cleared for return home with follow up at ___.
+
+Medications on Admission:
+Apixaban, metoprolol, atorvastatin, lisinopril
+
+Discharge Medications:
+1. Amoxicillin-clavulanate twice daily for five more days
+2. Apixaban twice daily
+3. Metoprolol succinate daily
+4. Atorvastatin nightly
+5. Lisinopril daily, as directed by ___
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Pneumonia
+Atrial fibrillation
+
+Discharge Condition:
+Stable, ambulatory
+Mental Status:
+Alert and oriented
+
+Discharge Instructions:
+You were treated for a lung infection. Finish all antibiotics and keep taking your blood thinner. Call ___ or return to the emergency room for fever, worsening breathing or chest pain, and see ___ within one week.

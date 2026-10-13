@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with right leg swelling and redness for three days, worsening despite oral antibiotics started by her clinic at ___. She reported fever and chills at home. Evaluated by Dr. ___ in the emergency department, where she was febrile, received intravenous antibiotics and was admitted.
+REVIEW OF SYSTEMS:
+Positive for fever, negative for chest pain.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+No diabetes
+Venous stasis, followed at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+Gen: comfortable, in no distress
+PULM: clear bilaterally
+CARDIAC: regular rhythm, no murmur
+Ext: right calf erythema much improved, mild edema
+SKIN: marked margin faded, seen by ___
+Neuro: alert, nonfocal
+
+Pertinent Results:
+Admission white count was elevated with neutrophil predominance, creatinine normal. Blood cultures showed no growth. Ultrasound of the right leg excluded deep vein thrombosis, per report from ___.
+DISCHARGE LABS:
+White count normalized, creatinine stable, potassium within normal limits.
+
+Brief Hospital Course:
+She was treated for cellulitis of the right leg with intravenous vancomycin, chosen because of her penicillin allergy, and the redness steadily receded. The leg was elevated and the borders marked. Fever resolved by day two. Podiatry at ___ reviewed her feet. She tolerated diet, walked independently and was transitioned to oral doxycycline for discharge on ___.
+
+Medications on Admission:
+Lisinopril daily
+Levothyroxine daily
+
+Discharge Medications:
+1. Doxycycline 100 mg by mouth twice daily for seven days
+2. Lisinopril daily as before
+3. Levothyroxine daily as before
+4. Acetaminophen as needed for pain
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Cellulitis of the right lower leg
+Venous stasis
+
+Discharge Condition:
+Stable and improved.
+Mental Status: clear and coherent
+Level of Consciousness: alert and interactive
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Take the antibiotic until finished. Keep the leg raised when sitting. Return for spreading redness, fever or severe pain. Call ___ with questions, and bring this summary to ___.
+
+Followup Instructions:
+___

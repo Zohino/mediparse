@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man sent by ___ with three days of productive cough, fever and fatigue. Chest film at ___ showed a hazy right opacity, concerning for possible pneumonia. Treated empirically and observed.
+
+Past Medical History:
+Diabetes mellitus on oral therapy
+Hypertension
+Prior hospital stay at ___
+
+Social History:
+___
+
+Family History:
+Father with heart disease
+
+Physical Exam:
+Vitals: T 99.1, HR 88, BP 128/76, SpO2 96% on room air
+Abdomen: soft, nontender
+Ext: warm, no swelling
+Neuro: alert, nonfocal
+PULSES: palpable bilaterally
+
+Pertinent Results:
+Mild leukocytosis on admission. Glucose elevated. Chest radiograph with right basilar haziness, read by ___. Creatinine within usual range.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Metformin 500 mg by mouth twice daily
+2. Lisinopril 10 mg by mouth once daily
+3. Azithromycin 250 mg daily for four more days
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute bronchitis
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Fully awake and interactive.
+Activity Status: Walks independently.
+
+Discharge Instructions:
+You were hospitalized with cough and fever. Take your antibiotic as prescribed, drink fluids and rest. Call ___ or return to the emergency room if breathing worsens.
+
+Followup Instructions:
+___

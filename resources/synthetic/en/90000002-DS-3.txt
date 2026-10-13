@@ -1,0 +1,60 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+This ___ year old man presented after referral from ___ with three days of worsening right lower quadrant pain, nausea and low grade fever. He denied vomiting, diarrhea, urinary symptoms or chills.
+
+Past Medical History:
+Hypertension
+
+Past Surgical History:
+Tonsillectomy in ___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+Gen: Comfortable, alert, in no acute distress
+HEENT: Anicteric sclera, moist mucous membranes
+PULM: Clear to auscultation bilaterally
+
+Pertinent Results:
+Admission labs showed mild leukocytosis with normal electrolytes and normal liver enzymes. CT of the abdomen on ___ demonstrated an inflamed, dilated appendix with surrounding fat stranding and no abscess or free air. Repeat white count normalized before discharge.
+
+Brief Hospital Course:
+Patient was diagnosed with acute appendicitis and underwent uneventful laparoscopic appendectomy after consultation with ___. Diet advanced steadily, pain was controlled with oral medication, and fever resolved. He tolerated regular food, walked independently, and was cleared for discharge on postoperative day one.
+
+Medications on Admission:
+Lisinopril 10 mg daily, multivitamin daily
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed. Oxycodone 5 mg as needed for severe pain. Resume lisinopril 10 mg daily.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Good
+Mental Status: Alert and oriented, able to follow commands
+Activity Status: Ambulatory and independent
+
+Discharge Instructions:
+Keep incisions clean and dry and avoid heavy lifting for two weeks. Return for fever, worsening abdominal pain, or persistent vomiting. Call ___ with questions.
+
+Followup Instructions:
+___

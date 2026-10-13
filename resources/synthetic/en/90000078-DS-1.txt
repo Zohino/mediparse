@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath and productive cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with diabetes on oral therapy who presented with three days of worsening cough, fever and dyspnea. She was first evaluated at ___ and transferred on ___ for hypoxia and further care. She denied chest pain, vomiting or recent travel.
+
+Past Medical History:
+COPD
+Chronic kidney disease
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General: Mildly tachypneic, comfortable at rest
+HEENT: Moist mucous membranes
+Neck: Supple, no JVD
+ABD: Soft, nontender
+Ext: No edema
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Chest radiograph showed a right lower lobe opacity. Labs collected on ___ showed white count 14.2, creatinine at baseline, glucose 210. Sputum culture obtained at ___ grew normal flora. Oxygen saturation improved on room air.
+
+Brief Hospital Course:
+She was treated with intravenous antibiotics, nebulizers and a short steroid course, with gradual improvement in oxygenation. Glucose was managed with insulin sliding scale. Kidney function remained stable. She was evaluated by ___ and cleared for discharge on ___ with oral antibiotics.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+Lisinopril 10 mg daily
+Albuterol inhaler as needed
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg twice daily for five more days
+2. Prednisone 40 mg daily for three days
+3. Metformin 500 mg twice daily
+4. Albuterol inhaler as needed, refilled from ___ pharmacy
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Pneumonia
+COPD exacerbation
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with a lung infection. Take all antibiotics as prescribed and use your inhaler as needed. Return for fever, worsening breathing or chest pain. Call ___ with questions and keep your visit with ___ next week.
+
+Followup Instructions:
+___

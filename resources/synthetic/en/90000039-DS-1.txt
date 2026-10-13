@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Left leg redness and pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with several days of worsening left lower leg swelling, warmth and redness after a minor scrape, sent in by ___ clinic after fever at home. He was treated at ___ briefly without improvement.
+REVIEW OF SYSTEMS:
+Positive for chills. No chest pain, cough or vomiting.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+General:
+Mildly uncomfortable, afebrile
+Lungs:
+Clear
+ABD:
+Soft, nontender
+Ext:
+Left shin erythematous, warm, tender
+SKIN:
+Marked area outlined
+Neuro:
+Nonfocal
+
+Pertinent Results:
+White count mildly elevated on admission, normalizing by discharge. Creatinine stable. Blood cultures from ___ showed no growth. Ultrasound of the left leg negative for clot.
+
+Brief Hospital Course:
+Admitted with left leg cellulitis and started on intravenous antibiotics. Redness receded from the marked border and fever resolved within two days. Pain improved with acetaminophen and elevation. Transitioned to oral antibiotics, tolerated well. Seen by ___ for wound care teaching before discharge to ___.
+
+Medications on Admission:
+Amlodipine 5 mg daily
+Atorvastatin 20 mg nightly
+Allopurinol daily
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth four times daily for seven more days
+2. Acetaminophen 650 mg every six hours as needed for pain
+3. Continue amlodipine, atorvastatin and allopurinol as before, per ___
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Left lower extremity cellulitis
+Hypertension
+Gout
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Finish all antibiotics and keep the leg elevated. Return for spreading redness, fever or worsening pain. Call ___ with any questions.
+
+Followup Instructions:
+___

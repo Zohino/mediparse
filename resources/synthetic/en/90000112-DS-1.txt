@@ -1,0 +1,95 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough, fever, shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient presented to ___ with three days of productive cough, fever, and increasing shortness of breath. He was seen by Dr. ___ at ___ clinic last week and advised to rest at home. A chest radiograph raised concern for possible pneumonia, though findings were equivocal. Symptoms worsened on ___, prompting transfer to our emergency department, where he was hypoxic and febrile.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Followed by Dr. ___
+
+Past Surgical History:
+Cholecystectomy in ___
+
+Social History:
+___
+
+Family History:
+Father with coronary disease at ___
+
+Physical Exam:
+Vitals:
+Afebrile, heart rate irregular, saturation 95 percent on room air
+General:
+Comfortable, no distress
+HEENT:
+Moist mucous membranes
+Lungs:
+Scattered crackles at the right base
+ABD:
+Soft, nontender
+EXTREMITIES:
+No edema
+SKIN:
+Warm, dry
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+IMAGING:
+Chest radiograph performed at ___ showed mild right lower lobe haziness and no effusion.
+IMPRESSION:
+Patchy opacity, infection versus atelectasis. Laboratory studies showed mild leukocytosis, glucose elevated at 240, normal creatinine, and troponin negative. ECG showed an irregular rhythm without ST changes.
+
+Brief Hospital Course:
+The patient was admitted and treated with oral antibiotics and oxygen, improving within two days. Telemetry showed atrial fibrillation with controlled rate, and he was started on apixaban and metoprolol after review by the ___ team. His diabetes was managed with an insulin sliding scale, with glucose improving once infection resolved. Cardiology from ___ arranged outpatient rhythm follow-up.
+TRANSITIONAL ISSUES:
+Recheck chest imaging in six weeks. Review anticoagulation tolerance and glycemic control.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Apixaban 5 mg twice daily
+2. Metoprolol succinate 50 mg daily
+3. Metformin 500 mg twice daily
+4. Lisinopril 10 mg daily
+5. Atorvastatin 20 mg nightly
+6. Azithromycin 250 mg daily for three more days
+Fill prescriptions at ___ pharmacy.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Atrial fibrillation
+Diabetes mellitus
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with a respiratory infection and found to have an irregular heart rhythm. Take all medications as prescribed, especially the new blood thinner. Drink fluids, rest, and check your blood sugar daily. Call Dr. ___ if you have fever, worsening breathing, bleeding, or palpitations, or return to ___ for chest pain.
+
+Followup Instructions:
+___

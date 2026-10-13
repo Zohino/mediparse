@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Excessive thirst and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old man with weeks of thirst, frequent urination and weakness, sent in by ___ clinic.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Gen: Tired, comfortable, no distress
+HEENT: Dry mucous membranes
+Abdomen: Soft, nontender
+Ext: Warm, no edema
+SKIN: Intact
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+ADMISSION LABS: Glucose markedly elevated, mild electrolyte shifts, normal creatinine.
+DISCHARGE LABS: Glucose improved, electrolytes normal.
+IMPRESSION: No acute findings on chest imaging.
+
+Brief Hospital Course:
+Patient was hydrated and started on a glucose lowering regimen. Glucose steadily improved at ___ and he learned to check readings himself. Blood pressure stayed controlled. He was stable for discharge.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+1. Lisinopril daily
+2. Atorvastatin nightly
+3. Glucose lowering tablet twice daily with meals
+4. Test strips as directed
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Diabetes mellitus, newly diagnosed
+Secondary:
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Good
+Level of Consciousness: Alert and interactive
+Activity Status: Independent
+
+Discharge Instructions:
+You were admitted with high blood sugar. Take your medicines as prescribed, check glucose daily, and call ___ if you feel unwell.
+
+Followup Instructions:
+___

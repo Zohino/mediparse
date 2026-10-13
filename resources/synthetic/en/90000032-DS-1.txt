@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Weakness and poor appetite
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with chronic kidney disease sent from ___ after a week of fatigue and reduced intake. He denies cough or COPD history. Labs showed worsening creatinine and he was admitted for hydration.
+
+Past Medical History:
+Hypertension since ___
+Gout
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: tired, comfortable
+Neck: supple
+PULM: clear
+CARDIAC: regular
+Abdomen: soft
+EXTREMITIES: no edema
+
+Pertinent Results:
+Creatinine elevated on arrival and improved with fluids. Glucose markedly high at ___. Potassium normal. Chest imaging unremarkable. Urinalysis showed glucose without infection.
+
+Brief Hospital Course:
+He received intravenous fluids and his creatinine gradually fell toward baseline. Glucose was high, so insulin was started and he was taught to use it by ___. He ate well and walked independently.
+TRANSITIONAL ISSUES:
+Recheck kidney function and glucose in one week.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+Atorvastatin daily at bedtime. Insulin glargine nightly with meals as taught. Hold lisinopril until labs are rechecked.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary: Diabetes mellitus
+
+Discharge Condition:
+Mental Status: Alert and oriented, able to follow commands.
+Level of Consciousness: Awake and attentive.
+Activity Status: Walks without assistance.
+
+Discharge Instructions:
+You were admitted with dehydration and high blood sugar. Drink fluids, check your sugar daily, and take insulin as directed. Call ___ or return if you feel faint or confused.
+
+Followup Instructions:
+___

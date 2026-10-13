@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+This is a ___ year old woman who presented to ___ with two days of worsening right upper quadrant pain, nausea and vomiting. The pain began after a fatty meal and radiated to the back. She reported subjective fevers since ___ and decreased appetite. She denied jaundice, dark urine, chest pain or shortness of breath.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity
+
+Social History:
+___
+
+Physical Exam:
+General:
+Uncomfortable but in no acute distress, afebrile.
+Neck:
+Supple, no lymphadenopathy.
+Abdomen:
+Soft, tender in the right upper quadrant, positive Murphy sign, no rebound.
+Neuro:
+Alert, oriented, nonfocal.
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 14.2, hemoglobin 12.8, platelets 255. Sodium 138, potassium 4.1, creatinine 0.8, glucose 246. ALT 62, AST 48, total bilirubin 1.1, lipase normal. Ultrasound performed at ___ showed gallstones, gallbladder wall thickening and pericholecystic fluid. Report dated ___ confirmed no common bile duct dilation.
+
+Brief Hospital Course:
+She was admitted with acute calculous cholecystitis and started on intravenous antibiotics and fluids. She was seen by Dr. ___ and taken to the operating room on hospital day ___ for an uncomplicated laparoscopic cholecystectomy. Her diabetes was managed with an insulin sliding scale, with elevated glucose on admission improving after surgery. Diet was advanced, pain was controlled with oral medication, and she was discharged in stable condition to ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Metformin 500 mg twice daily
+
+Discharge Medications:
+1. Acetaminophen 650 mg every six hours as needed for pain.
+2. Oxycodone 5 mg every six hours as needed for severe pain.
+3. Docusate 100 mg twice daily while taking oxycodone.
+4. Insulin glargine ___ units nightly.
+5. Lisinopril 10 mg daily.
+6. Atorvastatin 20 mg nightly.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+Diabetes
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with an infected gallbladder and underwent its removal. Keep your incisions clean and dry and you may shower. Do not lift more than ten pounds for four weeks. Call Dr. ___ at ___ for fever, worsening pain, vomiting, redness at the incisions or yellow skin. Return to ___ for severe symptoms. Office phone ___.
+
+Followup Instructions:
+___

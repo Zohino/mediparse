@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg pain and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient presented to ___ after two days of worsening right calf pain and swelling following a long car trip. He denied chest pain or breathlessness. His primary physician at ___ sent him to the emergency department for imaging.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Knee arthroscopy at ___
+
+Social History:
+___
+
+Family History:
+Father with stroke
+
+Physical Exam:
+Gen: Comfortable, no distress
+HEENT: Moist mucous membranes
+Neck: Supple
+Lungs: Clear bilaterally
+Abdomen: Soft, nontender
+SKIN: Right calf warm and swollen
+
+Pertinent Results:
+Admission labs showed raised D-dimer with normal creatinine and troponin. Leg ultrasound was done at ___.
+IMPRESSION: Occlusive thrombus in the right popliteal vein. Follow-up chest imaging showed no clot in the lungs.
+
+Brief Hospital Course:
+He was started on a heparin infusion in the emergency department, then transitioned to an oral anticoagulant once stable. Pain improved with elevation and acetaminophen. Vascular staff at ___ reviewed the scans. He walked without oxygen need and was cleared by ___ for discharge.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+1. Apixaban, dose per starter pack, twice daily for three months
+2. Lisinopril daily
+3. Atorvastatin nightly
+4. Acetaminophen as needed for pain
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Deep vein thrombosis of the right leg
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a blood clot in your leg. Take your blood thinner exactly as directed and do not skip doses. Walk often and elevate the leg when resting. Return if you have chest pain, breathlessness, or bleeding. Call ___ with questions.
+
+Followup Instructions:
+___

@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain and vomiting
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with three days of worsening abdominal pain and vomiting after a meal. He was evaluated at ___ and transferred for further care. No fever or chest pain reported.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Alert and comfortable on room air.
+Neck: supple
+CARDIAC: regular rate and rhythm
+Abdomen: soft, tender epigastrium
+Ext: warm, no edema
+SKIN: no rash
+
+Pertinent Results:
+ADMISSION LABS:
+Lipase markedly elevated. White count mildly raised, hemoglobin normal, creatinine normal. Liver enzymes mildly increased. Triglycerides were within normal limits. Ultrasound showed gallstones without duct dilation. CT showed peripancreatic inflammation without necrosis.
+
+Brief Hospital Course:
+He was admitted with gallstone pancreatitis and managed with fluids, analgesia and bowel rest. Diet was advanced gradually and pain resolved. Surgery team at ___ recommended outpatient cholecystectomy, to be arranged by ___. He tolerated a regular diet and remained afebrile before discharge.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly.
+
+Discharge Medications:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Acetaminophen 650 mg every six hours as needed for pain.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Gallstone pancreatitis
+Cholelithiasis
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+Follow a low fat diet. Return for severe abdominal pain, fever, vomiting or yellow skin. Call ___ with questions or see ___.
+
+Followup Instructions:
+___

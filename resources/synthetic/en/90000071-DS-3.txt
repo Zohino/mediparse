@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever and cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman seen at ___ with three days of fever, productive cough and fatigue starting ___. She denies pneumonia on prior imaging, chest pain or recent travel. Admitted for observation.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Cholecystectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals:
+T 38.1 HR 96 BP 128/76 SpO2 95% RA
+General:
+Tired, comfortable
+HEENT:
+Moist mucosa
+Neck:
+Supple
+Lungs:
+Mild crackles at right base
+CARDIAC:
+Regular rhythm
+Abdomen:
+Soft, nontender
+SKIN:
+Warm, dry
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+WBC 12.4 on admission, falling to 8.1. Chest radiograph showed mild right lower lobe haziness. Blood cultures without growth. Creatinine and electrolytes within normal limits throughout the stay.
+
+Brief Hospital Course:
+She was treated with oral antibiotics, fluids and acetaminophen. Fever resolved within two days and oxygen saturation stayed above 94 percent. Dr. ___ reviewed her case on ___ and cleared her for discharge home.
+
+Medications on Admission:
+Levothyroxine 75 mcg daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Levothyroxine 75 mcg tablet once daily
+2. Lisinopril 10 mg tablet once daily
+3. Amoxicillin-clavulanate 875 mg twice daily for five days
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Condition:
+Good, afebrile, ambulatory
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were hospitalized with a respiratory infection. Finish all antibiotics, drink plenty of fluids and rest. Call ___ or return if fever, shortness of breath or chest pain develops.
+
+Followup Instructions:
+___

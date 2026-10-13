@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Painful red swelling of the left leg
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with several days of left leg redness and warmth, referred by ___ clinic for fever.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+General:
+Comfortable, afebrile
+HEENT:
+Moist mucous membranes
+PULM:
+Clear bilaterally
+Abdomen:
+Soft, nontender
+EXTREMITIES:
+Left calf erythema improved
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Mild leukocytosis on arrival, normalized. Blood cultures without growth.
+IMAGING:
+Venous ultrasound negative for clot.
+
+Brief Hospital Course:
+Treated for cellulitis with intravenous antibiotics, erythema receded, then switched to oral therapy. Followed by ___ team.
+TRANSITIONAL ISSUES:
+Complete antibiotic course; review skin.
+
+Medications on Admission:
+Lisinopril, atorvastatin
+
+Discharge Medications:
+Cephalexin four times daily for one week; continue lisinopril and atorvastatin.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Cellulitis of left lower leg
+
+Discharge Condition:
+Good
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+Take antibiotics as prescribed, elevate the leg, and return if fever or spreading redness occurs at ___.
+
+Followup Instructions:
+___

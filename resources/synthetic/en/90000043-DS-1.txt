@@ -1,0 +1,83 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs
+
+Chief Complaint:
+Right flank pain and fever
+
+Major Surgical or Invasive Procedure:
+Right ureteral stent placement
+
+History of Present Illness:
+___ year old woman with hypertension presented with three days of right flank pain and fever, found to have an obstructing ureteral stone with urinary infection, transferred from ___.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Kidney stones
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals:
+T 99.1, HR 82, BP 128/74, RR 16, SpO2 98% RA
+Gen:
+Comfortable, no distress
+PULM:
+Clear bilaterally
+ABD:
+Soft, mild right flank tenderness
+Ext:
+No edema
+PULSES:
+Palpable and symmetric
+
+Pertinent Results:
+DISCHARGE LABS:
+WBC 8.2, Hgb 12.4, Cr 0.9, K 4.1
+FINDINGS:
+CT showed a 6 mm right proximal ureteral stone with mild hydronephrosis.
+
+Brief Hospital Course:
+Treated with IV ceftriaxone for urinary infection. Urology at ___ placed a stent, and fever resolved. Urine culture grew E. coli, sensitive to the antibiotic.
+TRANSITIONAL ISSUES:
+Definitive stone removal as outpatient with Dr. ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 50 mcg daily
+
+Discharge Medications:
+1. Lisinopril 10 mg daily
+2. Levothyroxine 50 mcg daily
+3. Cefpodoxime 200 mg twice daily for five days
+4. Tamsulosin 0.4 mg nightly
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Obstructing ureteral stone
+Urinary tract infection
+
+Discharge Condition:
+Stable
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake and alert
+Activity Status:
+Walks without help
+
+Discharge Instructions:
+Drink plenty of fluids and finish the antibiotic. Return for fever, severe pain, or vomiting. Call ___ if the stent causes bleeding.

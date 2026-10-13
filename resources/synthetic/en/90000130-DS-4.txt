@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs
+
+Chief Complaint:
+Leg redness and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with three days of spreading redness, warmth and swelling of the right lower leg after a scratch from ___. She developed fever and chills and was sent in by her clinic at ___.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Obesity
+
+Past Surgical History:
+Cholecystectomy at ___
+
+Family History:
+Mother with stroke, treated at ___
+
+Physical Exam:
+Ext: right shin red, warm, tender, with pitting edema; no crepitus.
+Neuro: alert, oriented, nonfocal.
+
+Pertinent Results:
+White count mildly elevated on arrival and normal by discharge. Lactate normal. Blood cultures showed no growth. Ultrasound of the right leg showed soft tissue swelling without clot or abscess.
+
+Brief Hospital Course:
+She was treated for cellulitis with intravenous antibiotics, and the redness receded from the marked border. Fever resolved within a day. Pain was controlled with acetaminophen. She walked independently and was switched to oral antibiotics, with plans for review by ___.
+
+Medications on Admission:
+Lisinopril daily
+Levothyroxine daily
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth four times daily for seven more days
+2. Lisinopril as before
+3. Levothyroxine as before
+4. Acetaminophen as needed for pain
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Cellulitis of the right lower leg
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Stable, afebrile, walking without help.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Finish all of the antibiotic. Keep the leg raised when resting. Return for spreading redness, fever, or worsening pain, and call ___ with questions.
+
+Followup Instructions:
+___

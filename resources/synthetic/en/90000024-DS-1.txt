@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+Two days of worsening right lower quadrant pain with nausea and low fever. Evaluated at ___ and sent here for imaging showing an inflamed appendix.
+REVIEW OF SYSTEMS:
+Positive for nausea, negative for vomiting or diarrhea.
+
+Past Medical History:
+Seasonal allergies
+
+Past Surgical History:
+Knee arthroscopy at ___
+
+Social History:
+___
+
+Family History:
+Family history of diabetes in his mother.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: T 100.4 HR 92 BP 126/78 RR 16 SpO2 99% RA
+Gen: Uncomfortable but alert
+Neck: Supple
+Abdomen: Tender at right lower quadrant, guarding present
+EXTREMITIES: No edema
+Neuro: Nonfocal
+
+Pertinent Results:
+ADMISSION LABS:
+White count elevated with neutrophil predominance. Electrolytes and liver tests normal. CT showed a dilated, thickened appendix with surrounding fat stranding and no abscess.
+
+Brief Hospital Course:
+He was taken to the operating room by the team of Dr. ___ and underwent an uncomplicated laparoscopic appendectomy. Pain was controlled with oral medication, diet was advanced, and he tolerated it well. Pathology follow up will occur at ___.
+
+Medications on Admission:
+Loratadine as needed
+
+Discharge Medications:
+1. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+2. Ibuprofen 400 mg by mouth every eight hours as needed.
+3. Loratadine 10 mg daily as needed.
+
+Discharge Disposition:
+Home with services arranged by ___
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent. No heavy lifting.
+
+Discharge Instructions:
+You were admitted with appendicitis and had your appendix removed. Keep incisions clean and dry. Call ___ or return for fever, worsening pain, vomiting, or redness at the incisions.
+
+Followup Instructions:
+___

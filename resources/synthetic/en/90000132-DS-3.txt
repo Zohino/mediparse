@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies.
+
+Chief Complaint:
+Left leg swelling and redness.
+
+Major Surgical or Invasive Procedure:
+None.
+
+History of Present Illness:
+Male presented to ___ with three days of left leg redness, warmth and swelling after a minor scrape sustained while gardening. He reported subjective fevers and chills. His primary care physician at ___ sent him to the emergency department for intravenous antibiotics.
+
+Past Medical History:
+Hypertension, hyperlipidemia, gout.
+
+Social History:
+___
+
+Family History:
+Non-contributory.
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+Afebrile, vital signs stable. Left calf erythema markedly improved, mildly tender, no fluctuance.
+ABD:
+Soft, nontender, nondistended.
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 13.2, creatinine 1.0, lactate 1.1, otherwise unremarkable.
+FINDINGS:
+Venous duplex of the left leg performed at ___ showed no deep vein thrombosis. Chest radiograph was clear without effusion.
+
+Brief Hospital Course:
+He was admitted with left lower extremity cellulitis and started on intravenous cefazolin. Blood cultures remained negative. He had no cough or fever and no evidence of pneumonia on chest imaging. Erythema receded steadily, and he was transitioned to oral cephalexin. Wound care was reviewed with nursing at ___ and follow-up arranged with ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly, allopurinol.
+
+Discharge Medications:
+Cephalexin 500 mg four times daily for seven days. Continue lisinopril, atorvastatin and allopurinol as before. Acetaminophen as needed for pain, prescribed by ___.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Left leg cellulitis
+Secondary:
+Hypertension, hyperlipidemia, gout
+
+Discharge Condition:
+Good
+Mental Status:
+Alert and oriented.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for a skin infection. Take all antibiotics as prescribed, elevate your leg, and keep the area clean. Return for fever, spreading redness or worsening pain. Call ___ with questions.
+
+Followup Instructions:
+___

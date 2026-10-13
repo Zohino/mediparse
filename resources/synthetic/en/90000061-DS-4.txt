@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever and productive cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with hypertension who presented to ___ with four days of fever, productive cough, and pleuritic chest pain. She was found to be hypoxic at home. Chest imaging on ___ showed a right lower lobe pneumonia. She was evaluated by Dr. ___ in the emergency department and admitted for oxygen and antibiotics.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Osteoarthritis
+
+Social History:
+___
+
+Physical Exam:
+Vitals:
+T 100.4, HR 92, BP 128/74, RR 20, SpO2 95% on room air
+Gen:
+Tired but comfortable, no distress
+HEENT:
+Moist mucous membranes, clear oropharynx
+Abdomen:
+Soft, nontender, nondistended
+SKIN:
+Warm, no rashes
+
+Pertinent Results:
+Admission labs drawn on ___ showed white count 14.2 with neutrophil predominance, lactate 1.4, and normal creatinine. Blood cultures showed no growth at five days. Chest radiograph demonstrated right lower lobe consolidation without effusion. Repeat film before discharge showed stable findings.
+
+Brief Hospital Course:
+She was treated with ceftriaxone and azithromycin, then switched to oral antibiotics once afebrile and off oxygen. She was transferred from ___ to the medical floor and followed by Dr. ___. By family history her mother had COPD, but the patient has no known lung disease. She improved steadily and tolerated walking without desaturation.
+TRANSITIONAL ISSUES:
+Repeat chest imaging in six weeks to confirm resolution.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg twice daily for five more days
+2. Lisinopril 10 mg once a day
+3. Atorvastatin 20 mg at bedtime
+4. Acetaminophen 650 mg every six hours as needed for fever
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Community-acquired lower respiratory tract infection
+Acute hypoxemia, resolved
+Hypertension
+
+Discharge Condition:
+Stable
+Level of Consciousness:
+Alert and oriented, interactive
+Activity Status:
+Independent, walking without assistance
+
+Discharge Instructions:
+You were hospitalized for a lung infection and treated with antibiotics and oxygen. Finish all of your antibiotics, drink plenty of fluids, and rest. Call ___ at ___ if your fever returns or your cough worsens. Return to ___ for shortness of breath or chest pain.
+
+Followup Instructions:
+___

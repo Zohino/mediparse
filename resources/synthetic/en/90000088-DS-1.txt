@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient is a man transferred from ___ after several days of worsening leg swelling and fatigue. He reported reduced urine output and nausea. He was seen at ___ by his primary doctor on ___ and sent to the emergency department. Labs showed elevated creatinine and potassium, so he was admitted.
+
+Past Medical History:
+Chronic kidney disease
+Atrial fibrillation on anticoagulation
+Hypertension
+Denies diabetes
+
+Social History:
+___
+
+Physical Exam:
+Gen: Comfortable, no distress.
+HEENT: Moist mucous membranes.
+Neck: Supple, no JVD.
+CARDIAC: Irregular rhythm, normal S1 S2.
+EXTREMITIES: Mild bilateral edema.
+SKIN: Warm and dry.
+
+Pertinent Results:
+___ labs: creatinine above baseline, potassium mildly high, hemoglobin stable. Renal ultrasound at ___ showed small echogenic kidneys without hydronephrosis. Chest radiograph was clear. ECG showed irregular rhythm with controlled rate.
+IMPRESSION:
+Small kidneys consistent with long-standing parenchymal disease; no obstruction.
+
+Brief Hospital Course:
+He was admitted for acute worsening of kidney function. Intravenous fluids were stopped and diuretics were adjusted. Potassium was corrected with dietary restriction and a binder. Creatinine improved to near baseline by ___. The renal team from ___ reviewed the case and adjusted his medications. Rate control and anticoagulation were continued. He was discharged in stable condition.
+TRANSITIONAL ISSUES:
+- Repeat chemistry panel in one week at ___.
+- Renal clinic follow up with ___.
+
+Medications on Admission:
+Apixaban 2.5 mg twice daily
+Furosemide 40 mg daily
+Metoprolol 25 mg daily
+
+Discharge Medications:
+Apixaban 2.5 mg twice daily
+Furosemide 20 mg daily
+Metoprolol succinate 25 mg daily
+Sevelamer 800 mg with meals
+Hold lisinopril until seen by ___.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Chronic kidney disease
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized because your kidney function worsened. Weigh yourself daily and avoid foods high in potassium. Do not take ibuprofen or similar pain medicines. Return to the hospital for chest pain, severe weakness, or very little urine.
+
+Followup Instructions:
+___

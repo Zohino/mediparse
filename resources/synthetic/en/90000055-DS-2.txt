@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Woman with two days of worsening right upper quadrant pain, nausea and vomiting after meals. Seen at ___ where ultrasound suggested gallstones. Transferred here by ___ for surgical evaluation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Migraine
+
+Past Surgical History:
+Cesarean section at ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+Gen: Comfortable, no distress
+HEENT: Anicteric sclerae
+Abdomen: Soft, mild tenderness right upper quadrant, incisions clean and dry
+Ext: Warm, no edema
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Labs notable for mild leukocytosis and normal bilirubin. Ultrasound reviewed with ___ showing stones and wall thickening.
+IMPRESSION:
+Cholelithiasis with gallbladder wall thickening
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Acetaminophen 650 mg every 6 hours as needed for pain
+2. Lisinopril 10 mg daily
+3. Atorvastatin 20 mg nightly
+4. Docusate 100 mg twice daily
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Good, tolerating regular diet, ambulatory, alert and oriented
+
+Discharge Instructions:
+You were hospitalized for gallbladder inflammation and had it removed. Keep incisions clean, avoid lifting heavy objects, and call ___ for fever, vomiting, or worsening pain.
+
+Followup Instructions:
+___

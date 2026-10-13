@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain and vomiting
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient presented to ___ with two days of worsening epigastric pain, nausea and repeated vomiting. She could not tolerate oral intake. Her primary physician at ___ advised emergency evaluation. In the emergency department she was afebrile, and imaging was obtained after fluids and analgesia were given.
+
+Past Medical History:
+Hypertension
+Gallstones
+Hypothyroidism
+
+Social History:
+___
+
+Physical Exam:
+Vitals:
+T 98.4 HR 82 BP 128/76 RR 16 SpO2 98% on room air
+General:
+Comfortable, no distress
+HEENT:
+Moist mucous membranes
+Abdomen:
+Soft, mild epigastric tenderness, no rebound
+SKIN:
+Warm and dry
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Admission labs showed elevated lipase and mild leukocytosis, both resolving by discharge. Liver enzymes were mildly raised. Ultrasound at ___ showed gallstones without ductal dilation.
+DISCHARGE LABS:
+WBC 7.1, Hgb 12.4, Plt 245, Na 139, K 4.1, Cr 0.8, lipase 60
+IMPRESSION:
+Cholelithiasis with mild gallbladder wall thickening, no biliary dilation. Findings reviewed with radiology at ___.
+
+Brief Hospital Course:
+She was admitted with gallstone pancreatitis and kept NPO with intravenous fluids and antiemetics. Pain improved steadily over two days and her diet was advanced as tolerated. Surgery was consulted by Dr. ___ and recommended outpatient cholecystectomy at ___. Liver tests normalized. She was discharged home in stable condition with close follow up arranged through ___.
+
+Medications on Admission:
+Levothyroxine 75 mcg daily. Lisinopril 10 mg daily. Multivitamin daily.
+
+Discharge Medications:
+1. Levothyroxine 75 mcg by mouth daily
+2. Lisinopril 10 mg by mouth daily
+3. Acetaminophen 500 mg every six hours as needed for pain
+4. Ondansetron 4 mg every eight hours as needed for nausea
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Gallstone pancreatitis
+Cholelithiasis
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for inflammation of the pancreas caused by gallstones. Eat small low-fat meals and avoid alcohol. Take medications as directed. Call ___ or return to the emergency department for fever, severe pain, or yellow skin. Keep your appointment with the surgeon at ___ and your visit with Dr. ___.
+
+Followup Instructions:
+___

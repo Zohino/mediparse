@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman presented to ___ with several days of palpitations and fatigue. Symptoms began suddenly at home. She was evaluated at ___ and transferred for rhythm monitoring.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+No diabetes
+
+Past Surgical History:
+Cholecystectomy
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: comfortable
+HEENT: normal
+Lungs: clear
+Abdomen: soft
+EXTREMITIES: no edema
+Neuro: alert, nonfocal
+
+Pertinent Results:
+IMAGING:
+Chest radiograph without acute findings.
+IMPRESSION:
+Normal heart size, clear lungs, no effusion. Electrolytes and thyroid studies unremarkable.
+
+Brief Hospital Course:
+She was admitted to telemetry, started on rate control and anticoagulation, and her heart rate improved steadily. She was seen by cardiology at ___ and felt well at discharge.
+TRANSITIONAL ISSUES:
+Outpatient rhythm follow-up and anticoagulation review.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg daily
+2. Apixaban 5 mg twice daily
+3. Lisinopril 10 mg daily
+4. Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Good, alert and oriented.
+Activity Status: Independent
+
+Discharge Instructions:
+You were hospitalized for a fast irregular heartbeat. Take your new medicines as prescribed and return to ___ if you have chest pain, fainting, or bleeding.
+
+Followup Instructions:
+___

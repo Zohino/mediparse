@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Woman presenting with two days of right upper quadrant pain, nausea and vomiting after meals. She was seen at ___ and referred to ___ where ultrasound showed gallstones with wall thickening.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+
+Past Surgical History:
+Cesarean section
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+Gen: comfortable
+HEENT: anicteric
+Neck: supple
+Lungs: clear bilaterally
+Abdomen: soft, tender in right upper quadrant
+Ext: warm
+SKIN: no rash
+
+Pertinent Results:
+White count mildly elevated on arrival. Liver enzymes slightly raised. Ultrasound showed gallstones, thickened gallbladder wall and a small amount of pericholecystic fluid. Common bile duct normal caliber. Repeat labs on ___ had normalized.
+
+Brief Hospital Course:
+She was admitted, given intravenous fluids and antibiotics, and underwent uncomplicated laparoscopic cholecystectomy at ___. Diet was advanced and pain was controlled with oral medication. She was discharged home on ___ in stable condition.
+TRANSITIONAL ISSUES: Follow up pathology result.
+
+Medications on Admission:
+Lisinopril, levothyroxine
+
+Discharge Medications:
+1. Lisinopril daily as before.
+2. Levothyroxine daily as before.
+3. Acetaminophen as needed for pain, limit daily total.
+4. Docusate while taking pain medication.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute cholecystitis with cholelithiasis
+Secondary: Hypertension, hypothyroidism
+
+Discharge Condition:
+Good
+Mental Status: alert and fully oriented
+Activity Status: walking independently
+
+Discharge Instructions:
+You were hospitalized with an inflamed gallbladder and had it removed laparoscopically. Keep incisions clean and dry, avoid heavy lifting for several weeks, and call ___ for fever, worsening pain, vomiting or yellow skin.
+
+Followup Instructions:
+___

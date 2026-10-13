@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+Bedside marking of erythema margins; no operation at ___
+
+History of Present Illness:
+The patient is a man who presented to ___ with three days of worsening redness, warmth and swelling of the right lower leg after a minor scrape sustained while working in the yard. He reported chills but no chest pain or shortness of breath. He was seen at ___ urgent care, given one dose of an oral antibiotic, and sent to the emergency department on ___ because the redness kept spreading. Temperature was mildly elevated on arrival.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Osteoarthritis of the knees, followed by ___
+
+Social History:
+___
+
+Family History:
+Family history is notable for a mother with chronic kidney disease. No known skin or clotting disorders.
+
+Physical Exam:
+General:
+Comfortable, afebrile, no distress
+Neck:
+Supple, no lymphadenopathy
+Ext:
+Right shin with warm, red, tender plaque, no fluctuance; pulses intact
+Neuro:
+Alert, oriented, strength full
+
+Pertinent Results:
+Admission labs showed a mildly raised white count with neutrophil predominance and normal creatinine. Blood cultures were drawn before antibiotics and remained negative.
+IMAGING:
+Ultrasound of the right leg performed at ___ was obtained to exclude clot.
+IMPRESSION:
+Soft tissue swelling without deep vein thrombosis or drainable collection.
+
+Brief Hospital Course:
+He was admitted with cellulitis of the right lower leg and started on intravenous antibiotics. The borders of redness were marked and shrank steadily over two days. Pain was controlled with acetaminophen, and the leg was kept elevated. Wound care teaching was provided by nursing staff from ___. He was changed to oral antibiotics once afebrile for twenty-four hours, tolerated them well, and walked independently. His blood pressure remained stable on home medicines. Case management arranged a visit with ___ after discharge, and he left in good spirits on ___.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+Ibuprofen as needed from ___ pharmacy
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Cellulitis of right lower leg
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Fully awake and alert
+Activity Status:
+Walking without assistance
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Finish the full course of antibiotics, keep the leg raised when sitting, and wash the area gently each day. Return if redness spreads, fever returns, or pain worsens. Call ___ with questions, and avoid ibuprofen until your visit at ___.
+
+Followup Instructions:
+___

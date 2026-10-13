@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and lightheadedness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman sent from ___ clinic after several days of racing heartbeat, mild dizziness and fatigue. Rhythm was irregular on arrival.
+REVIEW OF SYSTEMS:
+Positive for palpitations. No chest pain, fever or syncope.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Gen: Comfortable, no distress.
+ABD: Soft, nontender.
+SKIN: Warm, dry, no rash.
+
+Pertinent Results:
+ECG showed irregularly irregular rhythm, rate controlled after treatment. Electrolytes and thyroid studies were unremarkable. Echocardiogram reviewed by ___ showed preserved ejection fraction.
+
+Brief Hospital Course:
+She was monitored on telemetry and her heart rate was controlled with oral metoprolol. Anticoagulation was started after discussion with ___. Symptoms resolved and she walked without dizziness. Cardiology follow up was arranged at ___.
+
+Medications on Admission:
+Levothyroxine
+Lisinopril
+
+Discharge Medications:
+1. Metoprolol succinate taken once daily in the morning
+2. Apixaban twice daily
+3. Levothyroxine each morning
+4. Lisinopril daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary: Atrial fibrillation with rapid ventricular response
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted with a fast irregular heartbeat. Take your new medicines as directed and do not skip doses. Return for chest pain, fainting or bleeding. Call ___ with questions.
+
+Followup Instructions:
+___

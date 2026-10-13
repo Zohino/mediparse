@@ -1,0 +1,64 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old man who presented after transfer from ___ with three days of worsening redness, warmth and swelling of the right lower leg, along with fever and chills. He denied chest pain, cough or new shortness of breath. He was started on intravenous antibiotics on arrival.
+
+Past Medical History:
+COPD
+Hypertension
+Hyperlipidemia
+Followed by Dr. ___ for primary care
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Vitals: T 100.1 HR 92 BP 128/76 RR 18 SpO2 95% RA
+Neck: Supple, no JVD
+ABD: Soft, nontender, nondistended
+Ext: Right shin erythematous, warm and tender, trace edema
+
+Pertinent Results:
+WBC 13.2 on admission, down to 8.4 at discharge. Creatinine 0.9. Lactate 1.1. Blood cultures drawn on ___ showed no growth. Right leg ultrasound negative for deep vein thrombosis. Chest film without acute process. Hemoglobin 13.8, platelets 245.
+
+Brief Hospital Course:
+He was admitted with right leg cellulitis. Because of his allergy he received vancomycin, and the erythema margin was marked. Fever resolved within one day and redness steadily receded. The ___ team reviewed his wound care and leg elevation. By ___ he was walking comfortably and tolerating oral antibiotics.
+
+Discharge Medications:
+1. Doxycycline 100 mg by mouth twice daily for seven days
+2. Lisinopril 10 mg daily
+3. Atorvastatin 20 mg nightly
+4. Tiotropium inhaler once daily
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Right lower leg cellulitis
+Secondary: Hypertension, hyperlipidemia
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Take all antibiotic pills as prescribed and keep the leg raised when sitting. Return for spreading redness, fever or worsening pain. Call ___ clinic with questions, or reach the ward at ___ any time, ideally before ___.
+
+Followup Instructions:
+___

@@ -1,0 +1,78 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman sent in from ___ with two days of worsening shortness of breath, cough and fatigue. She was wheezing and her oxygen saturation was low.
+
+Past Medical History:
+Diabetes mellitus type 2
+COPD
+Hypertension
+Irregular heart rhythm on apixaban
+Reduced kidney function
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals:
+afebrile, stable, 93% on room air
+Gen:
+tired, comfortable
+Neck:
+supple
+Abdomen:
+soft, nontender
+Neuro:
+alert, nonfocal
+
+Pertinent Results:
+ADMISSION LABS:
+creatinine 1.9, baseline 1.8
+IMAGING:
+Chest film from ___
+IMPRESSION:
+Hyperinflation, no consolidation
+FINDINGS:
+No effusion
+
+Brief Hospital Course:
+She received nebulizers, steroids and a short antibiotic course, and her breathing improved. Metoprolol kept her heart rate controlled and apixaban was continued at a renal dose. Respiratory therapy from ___ reviewed her inhaler technique.
+
+Medications on Admission:
+Apixaban, metoprolol, metformin, tiotropium
+
+Discharge Medications:
+Prednisone taper for five days, continue tiotropium and metoprolol, apixaban twice daily, glargine at bedtime, metformin held until labs are rechecked.
+
+Discharge Disposition:
+Home with services
+Facility:
+___
+
+Discharge Diagnosis:
+Diabetes mellitus type 2
+
+Discharge Condition:
+Stable
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+
+Discharge Instructions:
+You were treated for trouble breathing. Take your medicines as listed, check your sugars daily, and drink fluids. Call ___ or return if breathing worsens.
+
+Followup Instructions:
+___

@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy on ___
+
+History of Present Illness:
+Man with diabetes mellitus who presented to ___ with three days of right upper abdominal pain, nausea and vomiting. He was seen by his physician on ___ and sent to ___ for evaluation. Imaging suggested acute cholecystitis, and surgery was consulted.
+
+Past Medical History:
+Hypertension, hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+General:
+Comfortable, alert
+Neck:
+Supple
+ABD:
+Soft, mild incisional tenderness, port sites clean
+EXTREMITIES:
+No edema
+
+Pertinent Results:
+Ultrasound showed gallstones, a thickened gallbladder wall and pericholecystic fluid. Admission labs showed mildly elevated white count and normal liver enzymes. CT at ___ confirmed gallbladder inflammation without abscess. Postoperative labs were stable and unremarkable.
+
+Brief Hospital Course:
+He was admitted, given intravenous fluids and antibiotics, and taken to the operating room by Dr. ___ for an uncomplicated laparoscopic cholecystectomy. Pain was controlled with oral medication, and diet was advanced as tolerated. Glucose was managed with insulin sliding scale. He was discharged on ___ in stable condition.
+
+Medications on Admission:
+Metformin, lisinopril, atorvastatin
+
+Discharge Medications:
+1. Acetaminophen 650 mg by mouth every six hours as needed for pain
+2. Metformin 500 mg by mouth twice daily
+3. Lisinopril 10 mg by mouth daily
+4. Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home with services arranged by ___
+
+Discharge Diagnosis:
+Acute cholecystitis
+Secondary:
+Hypertension, hyperlipidemia
+
+Discharge Condition:
+Good
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with gallbladder inflammation and underwent surgery to remove it. You may shower but do not soak incisions. Avoid lifting more than ten pounds for four weeks. Call ___ or return for fever, worsening pain, vomiting or yellow skin.
+
+Followup Instructions:
+___

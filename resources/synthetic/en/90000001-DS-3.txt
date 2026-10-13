@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Woman with two days of worsening right upper quadrant pain, nausea and fever, referred by her physician at ___ and seen in the emergency department on ___.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Gallstones
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: T 100.9, HR 96, BP 138/80, RR 16, SpO2 98% RA
+Gen: uncomfortable, alert
+HEENT: anicteric
+Neck: supple
+CARDIAC: regular rhythm
+ABD: tender right upper quadrant, positive Murphy sign
+EXTREMITIES: no edema
+SKIN: warm, dry
+
+Pertinent Results:
+Elevated white count with mildly raised bilirubin and lipase normal.
+IMAGING:
+Ultrasound showed gallstones, thickened gallbladder wall and pericholecystic fluid.
+
+Brief Hospital Course:
+She was admitted, given antibiotics and fluids, and underwent uncomplicated laparoscopic cholecystectomy. Pain improved, diet advanced, and she was cleared by the team at ___ for discharge.
+
+Medications on Admission:
+Levothyroxine
+Lisinopril
+
+Discharge Medications:
+Levothyroxine 75 mcg daily, lisinopril 10 mg daily, acetaminophen as needed for pain, and a short course of oxycodone.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Stable
+Level of Consciousness: awake and alert
+Activity Status: ambulatory, independent
+
+Discharge Instructions:
+You were treated for gallbladder inflammation and had surgery. Keep incisions clean and dry, avoid heavy lifting, and call ___ for fever, vomiting, or worsening belly pain.
+
+Followup Instructions:
+___

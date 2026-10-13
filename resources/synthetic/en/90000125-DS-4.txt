@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever, cough and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with three days of productive cough, fever and worsening dyspnea, sent in by his clinic at ___ and found to have pneumonia on arrival.
+
+Past Medical History:
+Diabetes mellitus on insulin
+COPD, followed at ___
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+General:
+Mildly ill, speaking in short sentences
+HEENT:
+Dry mucous membranes
+PULM:
+Crackles at right base
+
+Pertinent Results:
+ADMISSION LABS:
+Elevated white count, glucose high
+IMAGING:
+Chest film showed right lower lobe consolidation
+
+Brief Hospital Course:
+Treated with antibiotics, nebulizers and steroids, with sugars managed on sliding scale insulin. Oxygen was weaned by day ___ and he improved steadily, then went home from ___ stable.
+
+Medications on Admission:
+Insulin glargine, tiotropium inhaler
+
+Discharge Medications:
+Continue insulin and tiotropium. Complete oral antibiotic course. Short prednisone taper. Albuterol inhaler as needed.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary:
+Pneumonia
+Diabetes mellitus
+COPD
+
+Discharge Condition:
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake and interactive
+Activity Status:
+Walks independently
+
+Discharge Instructions:
+You were treated for a lung infection. Take all medicines as prescribed, check your sugars, rest, and call ___ or return for fever or breathing trouble.
+
+Followup Instructions:
+___

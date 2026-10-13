@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy performed by Dr. ___
+
+History of Present Illness:
+The patient is a man who presented with two days of right upper abdominal pain, nausea and fever. He was first seen at ___ and sent on to our emergency department. Ultrasound showed gallstones with wall thickening. Symptoms began after a fatty meal on ___ and did not improve with antacids.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gastroesophageal reflux
+
+Social History:
+___
+
+Family History:
+Family history notable for emphysema in his father. No gallbladder disease.
+
+Physical Exam:
+Afebrile and comfortable, with mild right upper quadrant tenderness.
+Neck: Supple, no masses.
+PULM: Clear bilaterally, no wheezes.
+EXTREMITIES: Warm, no edema.
+
+Pertinent Results:
+Laboratory studies showed an elevated white count and mildly raised bilirubin. Ultrasound demonstrated multiple gallstones, a thickened gallbladder wall and pericholecystic fluid. Chest radiograph was unremarkable. Liver enzymes trended down after surgery. Final pathology from ___ was still pending at discharge.
+
+Brief Hospital Course:
+He was admitted, given intravenous fluids and antibiotics, and kept without oral intake. After consultation with Dr. ___ he went to the operating room and underwent an uncomplicated laparoscopic cholecystectomy. Pain was controlled with oral medication, he resumed a regular diet, and his fever resolved. Incisions remained clean. A follow-up visit at ___ was arranged.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Omeprazole 20 mg daily
+
+Discharge Medications:
+1. Acetaminophen 650 mg every six hours as needed for pain.
+2. Lisinopril 10 mg once daily.
+3. Atorvastatin 20 mg at bedtime.
+4. Omeprazole 20 mg daily.
+Prescriptions were sent to ___ pharmacy.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with an inflamed gallbladder and had it removed through small incisions. You may shower but do not soak the wounds. Avoid lifting anything heavy for several weeks. Call ___ or return to the emergency department for fever, worsening pain, vomiting, yellow skin or wound redness.
+
+Followup Instructions:
+___

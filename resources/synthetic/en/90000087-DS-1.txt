@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Left leg redness and pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with hypertension presented with three days of spreading redness and pain of the left lower leg, fever, and chills after a minor scrape at ___ while gardening.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+General: comfortable, afebrile
+HEENT: moist mucosa
+PULM: clear bilaterally
+EXTREMITIES: left shin erythema much improved
+SKIN: healing abrasion
+
+Pertinent Results:
+Elevated white count on arrival, normalized by discharge. Blood cultures without growth. Ultrasound performed on ___ showed no clot.
+IMPRESSION:
+No deep vein thrombosis.
+
+Brief Hospital Course:
+Treated for cellulitis of the left leg with intravenous vancomycin, then changed to oral doxycycline as redness receded. Wound care reviewed with ___. Fever resolved, and she walked comfortably before discharge.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Doxycycline 100 mg twice daily for five more days
+2. Lisinopril 10 mg daily
+3. Atorvastatin 20 mg nightly
+4. Acetaminophen as needed for pain
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Cellulitis of left lower leg
+Secondary:
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Good
+Mental Status: clear and coherent
+Level of Consciousness: alert and interactive
+
+Discharge Instructions:
+Take the antibiotic until finished. Keep the leg raised and the wound clean. Return if redness spreads, fever returns, or pain worsens. Call ___ with questions.
+
+Followup Instructions:
+___

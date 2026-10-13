@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies.
+
+Chief Complaint:
+Leg swelling and fatigue.
+
+Major Surgical or Invasive Procedure:
+None.
+
+History of Present Illness:
+___ year old woman with hypertension presented from ___ with three days of leg swelling, fatigue and poor appetite. Creatinine was 3.1, up from a baseline near 2.4, with potassium of 5.6. She was sent in by Dr. ___ for evaluation.
+
+Past Medical History:
+Type 2 diabetes mellitus, hypertension, anemia, hyperlipidemia.
+
+Past Surgical History:
+Cholecystectomy in ___.
+
+Social History:
+___
+
+Family History:
+Mother with hypertension.
+
+Physical Exam:
+General: Comfortable, alert, in no acute distress.
+HEENT: Moist mucous membranes.
+PULM: Clear bilaterally.
+CARDIAC: Regular rhythm, no murmur.
+Abdomen: Soft, nontender.
+Ext: Trace bilateral lower leg edema.
+
+Pertinent Results:
+Admission labs from ___ showed creatinine 3.1, BUN 58, potassium 5.6, bicarbonate 18 and hemoglobin 9.8. Urinalysis showed protein without infection. Glucose ranged from 140 to 210 on the ward, and phosphorus was 5.4 with low calcium.
+IMPRESSION: Bilateral small echogenic kidneys without hydronephrosis.
+
+Brief Hospital Course:
+She received gentle diuresis and a low potassium diet, and potassium normalized to 4.6. Creatinine settled at 2.7. Nephrology, Dr. ___, adjusted her medications and arranged outpatient laboratory work at ___. Her insulin was continued with stable glucose. A phosphate binder was started with meals, and anemia was monitored without transfusion, with hemoglobin stable near 9.5. She was discharged in stable condition.
+
+Medications on Admission:
+Insulin glargine nightly, amlodipine daily, atorvastatin daily, furosemide as needed.
+
+Discharge Medications:
+Insulin glargine nightly. Amlodipine daily. Atorvastatin daily. Sevelamer with meals. Furosemide 40 mg every morning. Sodium bicarbonate tablets twice daily. Resume home vitamin D supplement daily. Stop ibuprofen.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Hyperkalemia, diabetes mellitus, hypertension.
+
+Discharge Condition:
+Mental Status: Alert and oriented.
+Level of Consciousness: Awake and attentive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted with leg swelling and high potassium. Take medications as listed and avoid ibuprofen. Weigh yourself daily. Call ___ for worsening swelling, and have blood tests at ___ next week.
+
+Followup Instructions:
+___

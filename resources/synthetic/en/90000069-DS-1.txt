@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fatigue and nausea
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman who presented to ___ with three days of worsening fatigue, nausea and poor oral intake. She was seen by her physician at ___ and advised to come to the emergency department. Labs showed mild dehydration and electrolyte abnormalities. She was admitted for monitoring and fluids.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Chronic kidney disease
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Family history of pneumonia in her mother. No other known illnesses.
+
+Physical Exam:
+HEENT: Moist mucous membranes.
+Neck: Supple.
+Lungs: Clear bilaterally.
+ABD: Soft, nontender.
+Ext: No edema.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+Admission labs notable for creatinine at baseline, mildly elevated glucose, and potassium within normal limits. Chest imaging at ___ showed no acute process. Repeat labs on ___ showed improved sodium and stable creatinine. Urinalysis was bland. ECG showed sinus rhythm without acute changes. Hemoglobin was stable throughout the admission.
+
+Brief Hospital Course:
+She was treated with intravenous fluids and her symptoms resolved within two days. Home medications were held initially and then resumed. Her glucose was managed with a sliding scale and she was seen by the nutrition team at ___. Her creatinine remained near baseline. She tolerated a regular diet and was ambulating independently. Dr. ___ agreed with discharge on hospital day four. She will follow up with her primary care provider.
+
+Medications on Admission:
+Metformin 500 mg twice daily.
+Lisinopril 10 mg daily.
+Atorvastatin 20 mg nightly.
+
+Discharge Medications:
+Metformin 500 mg by mouth twice daily.
+Lisinopril 10 mg by mouth daily.
+Atorvastatin 20 mg by mouth nightly.
+Acetaminophen 500 mg every six hours as needed for pain.
+Ondansetron 4 mg as needed for nausea.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Dehydration
+Diabetes mellitus
+Chronic kidney disease
+
+Discharge Condition:
+Stable
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized for dehydration. You received fluids and improved. Please take your medications as prescribed and drink plenty of fluids. Call your doctor at ___ if you have vomiting, fever, or lightheadedness. Return to ___ if symptoms worsen. Your appointment is on ___.
+
+Followup Instructions:
+___

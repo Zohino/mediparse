@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+Patient presented to ___ with three days of right lower abdominal pain, nausea and low-grade fever. He was transferred from ___ for further evaluation and surgical consultation.
+
+Past Medical History:
+Possible diabetes mellitus, diet controlled, followed by ___
+Hypertension
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Gen: Comfortable, no distress
+HEENT: Normal
+Abdomen: Soft, mildly tender in right lower quadrant
+Ext: No edema
+SKIN: Warm and dry
+
+Pertinent Results:
+WBC 13.2 on admission, normal by discharge. Creatinine and liver enzymes were within normal limits. Glucose mildly elevated at 142.
+IMAGING:
+CT abdomen showed an inflamed, dilated appendix without perforation.
+
+Brief Hospital Course:
+He was evaluated by ___ and underwent an uncomplicated laparoscopic appendectomy. Pain was controlled with oral medication, diet was advanced, and bowel function returned. He was afebrile and stable for discharge on postoperative day one.
+
+Medications on Admission:
+Multivitamin daily. Lisinopril 10 mg daily.
+
+Discharge Medications:
+Lisinopril 10 mg daily. Acetaminophen 650 mg every six hours as needed for pain. Multivitamin daily. Colace while taking opioids.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Mental Status: Alert and oriented, able to follow commands.
+Level of Consciousness: Fully awake and interactive.
+Activity Status: Ambulatory, independent. No heavy lifting.
+
+Discharge Instructions:
+You were admitted with appendicitis and had your appendix removed. Keep incisions clean and dry. Avoid lifting heavy objects. Call ___ for fever, worsening pain, vomiting or wound redness.
+
+Followup Instructions:
+___

@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with long-standing lung disease presented with three days of worsening cough, wheeze and dyspnea after a trip to ___. He was initially evaluated at ___ and transferred here.
+
+Past Medical History:
+Chronic obstructive pulmonary disease
+Atrial fibrillation
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension; father followed at ___.
+
+Physical Exam:
+General: Alert, comfortable, speaking full sentences
+HEENT: Moist mucous membranes
+PULM: Diffuse expiratory wheezes
+ABD: Soft, nontender
+SKIN: Warm, dry
+Neuro: Nonfocal
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 9.8, hemoglobin 13.2, platelets 245, sodium 139, potassium 4.2, creatinine 0.9, BUN 18. Chest radiograph showed hyperinflation without focal consolidation. ECG showed normal sinus rhythm. Arterial blood gas showed mild respiratory acidosis with adequate oxygenation.
+
+Brief Hospital Course:
+Treated with nebulized bronchodilators, oral prednisone and azithromycin with gradual improvement in work of breathing and oxygen requirement. Rate remained controlled on home metoprolol. Seen by ___ for inhaler teaching. Weaned to room air and discharged home in stable condition. Ambulatory saturation remained above ninety percent.
+
+Medications on Admission:
+Tiotropium daily, albuterol as needed, metoprolol, apixaban
+
+Discharge Medications:
+Prednisone taper for five days, tiotropium daily, albuterol inhaler as needed, metoprolol twice daily, apixaban twice daily, azithromycin to complete course.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+COPD exacerbation
+
+Discharge Condition:
+Stable
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+Take medications as prescribed and use inhalers daily. Return for worsening breathing, fever or chest pain. Call ___ with questions. Avoid smoke exposure.
+
+Followup Instructions:
+___

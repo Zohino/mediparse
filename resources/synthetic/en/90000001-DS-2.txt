@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever and cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This ___ year old woman with hypertension presented to ___ with three days of fever, productive cough and pleuritic chest pain. Chest imaging at ___ showed a right lower lobe consolidation consistent with pneumonia. She was transferred to ___.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+No history of atrial fibrillation
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General: Alert, comfortable.
+HEENT: Moist mucous membranes.
+CARDIAC: Regular rate and rhythm.
+Abdomen: Soft, nontender.
+EXTREMITIES: No edema.
+
+Pertinent Results:
+WBC 14.2 on admission, down to 8.1 at discharge. Lactate 1.1. Creatinine 0.8. Chest radiograph showed right lower lobe airspace opacity, read by ___. Blood cultures showed no growth after two days. Sputum culture grew normal respiratory flora. Electrolytes were within normal limits.
+
+Brief Hospital Course:
+She was treated with intravenous antibiotics and supplemental oxygen, which was weaned to room air by hospital day three. Her symptoms steadily improved. Fever resolved and cough improved. She tolerated oral intake and ambulated without desaturation. Antibiotics were changed to an oral agent to complete the course. Follow up was arranged with ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Levothyroxine 50 mcg daily.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community acquired lower respiratory tract infection
+Secondary:
+Hypertension, hypothyroidism
+
+Discharge Condition:
+Good
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for a lung infection. Take your antibiotic until finished. Rest, drink fluids, and return for fever, worsening cough, or trouble breathing. Call ___ with questions.
+
+Followup Instructions:
+___

@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Woman with two days of worsening right upper quadrant pain, nausea and vomiting after meals. She was seen at ___ where ultrasound showed gallstones with a thickened gallbladder wall. She was transferred to our hospital by ___ for surgical evaluation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Cesarean section at ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+General:
+Uncomfortable but alert, afebrile.
+Neck:
+Supple, no lymphadenopathy. Abdomen tender in right upper quadrant with a positive Murphy sign, no rebound.
+
+Pertinent Results:
+Admission labs showed mild leukocytosis and normal liver enzymes. Ultrasound at ___ confirmed multiple stones.
+DISCHARGE LABS:
+White count normalized, bilirubin normal, creatinine stable.
+
+Brief Hospital Course:
+She was given intravenous fluids, antibiotics and analgesia, then underwent uncomplicated laparoscopic cholecystectomy by Dr. ___ on hospital day two. Pain improved steadily and she tolerated a regular diet. Port sites were clean and dry. She was cleared by ___ for discharge home.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg once daily
+2. Atorvastatin 20 mg every night
+3. Acetaminophen 650 mg every six hours as needed for pain
+4. Docusate 100 mg twice daily while taking opioids from ___
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with an inflamed gallbladder and had it removed. Keep incisions clean and dry, avoid lifting heavy objects for several weeks, and resume usual medications. Return for fever, worsening pain, vomiting or yellow skin. Call ___ with questions.
+
+Followup Instructions:
+___

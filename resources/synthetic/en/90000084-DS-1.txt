@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Woman with two days of right upper quadrant pain, nausea and vomiting after fatty meals. She was evaluated at ___ and sent to the emergency department, where ultrasound showed gallstones and a thickened gallbladder wall.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother had gallstones treated at ___.
+
+Physical Exam:
+Gen: Comfortable, no distress.
+Neck: Supple.
+PULM: Clear bilaterally.
+ABD: Soft, mild right upper quadrant tenderness, incisions clean.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+FINDINGS:
+Ultrasound shows multiple gallstones, gallbladder wall thickening and pericholecystic fluid. Liver enzymes mildly elevated on admission and normal at discharge. White count elevated initially, normalized after surgery.
+
+Brief Hospital Course:
+She was admitted to the surgical service, given intravenous fluids and antibiotics, and underwent uncomplicated laparoscopic cholecystectomy on ___. Pain was controlled with oral medication, her diet was advanced, and she tolerated regular food. Dr. ___ cleared her for discharge home.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly.
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed. Oxycodone 5 mg every four hours as needed for severe pain. Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Docusate twice daily while on oxycodone.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized for gallbladder inflammation and had surgery. Keep your incisions clean and dry. Avoid lifting more than ___ pounds for ___ weeks. Call ___ for fever, worsening pain, or yellow skin.
+
+Followup Instructions:
+___

@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fatigue, thirst, frequent urination
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with long-standing high blood sugars who presented with three days of fatigue, thirst and frequent urination. He was seen at ___ where his glucose was markedly elevated, and he was sent to our emergency department. Intravenous fluids and insulin were started, and he was admitted for glucose control and monitoring. He denied chest pain, fever or cough. Symptoms began on ___ after missed doses.
+
+Past Medical History:
+Diabetes mellitus
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+General: Comfortable, no distress.
+HEENT: Moist mucous membranes.
+Neck: Supple.
+EXTREMITIES: Warm, no edema.
+SKIN: Intact, no rash.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+Admission glucose markedly elevated, with mild anion gap that closed after treatment. Chest radiograph clear. Urinalysis showed glucose without infection. Hemoglobin A1c elevated, sample drawn ___.
+DISCHARGE LABS:
+Sodium 139, potassium 4.1, bicarbonate 25, creatinine 0.9, glucose 148.
+
+Medications on Admission:
+Metformin 1000 mg twice daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Metformin 1000 mg by mouth twice daily
+2. Insulin glargine 20 units at bedtime
+3. Lisinopril 10 mg by mouth daily
+4. Atorvastatin 20 mg by mouth nightly
+5. Glucose test strips, check sugar four times daily
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Diabetes with hyperglycemia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted because your blood sugar was very high. You received fluids and insulin, and your levels improved. Check your sugar before meals and at bedtime, and keep a log. Take all medicines as prescribed and follow a carbohydrate-controlled diet. Call Dr. ___ or the clinic at ___ if sugars stay high, or return to ___ for vomiting, confusion or abdominal pain.
+
+Followup Instructions:
+___

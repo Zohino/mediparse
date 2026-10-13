@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Weakness and high blood sugars
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with diabetes mellitus who presented to ___ with several days of thirst, fatigue and elevated home glucose readings, sent in by her clinic on ___.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with high blood pressure
+
+Physical Exam:
+General:
+Alert, comfortable, no distress
+HEENT:
+Dry mucous membranes
+PULM:
+Clear bilaterally
+Ext:
+Warm, no edema
+
+Pertinent Results:
+Glucose elevated on arrival, improving daily. Electrolytes normal after fluids. Urinalysis negative for infection.
+DISCHARGE LABS:
+Glucose near goal, creatinine at baseline.
+
+Brief Hospital Course:
+She was given intravenous fluids and insulin, then started on a basic regimen. Glucose education was completed with ___ nursing. Glucose improved and she tolerated meals. Her team at ___ will adjust doses at follow up.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+Metformin
+
+Discharge Medications:
+Metformin twice daily with meals.
+Insulin glargine at bedtime.
+Lisinopril once daily.
+Atorvastatin nightly.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Primary:
+Diabetes mellitus with hyperglycemia
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for high blood sugar. Check your glucose before meals and at bedtime, take medicines as listed, and call ___ if readings stay high or you feel unwell.
+
+Followup Instructions:
+___

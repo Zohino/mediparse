@@ -1,0 +1,86 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs
+
+Chief Complaint:
+Right leg redness and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with hypertension and hypothyroidism who presented with three days of worsening redness, warmth and swelling of the right lower leg after a minor scrape while gardening. She noted fever and chills at home. She was seen at ___ by her primary care physician, Dr. ___, who sent her to the emergency department for intravenous antibiotics.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Osteoarthritis of both knees
+Cholecystectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with stroke at ___. Father with hypertension.
+
+Physical Exam:
+General:
+Mildly ill appearing, comfortable at rest
+HEENT:
+Moist mucous membranes
+Neck:
+Supple
+Lungs:
+Clear bilaterally
+ABD:
+Soft, nontender
+Ext:
+Right shin erythematous, warm, tender, marked border
+Neuro:
+Alert, no deficits
+
+Pertinent Results:
+Admission labs on ___: white count 14.2, hemoglobin 12.8, platelets 245, creatinine 0.8, lactate 1.1. Blood cultures drawn at ___ showed no growth at five days. Ultrasound of the right leg showed no deep vein thrombosis.
+IMPRESSION:
+Soft tissue swelling of the right lower leg without abscess or deep venous clot.
+
+Brief Hospital Course:
+She was admitted and started on intravenous cefazolin. Fever resolved by hospital day two and the redness began to recede; the margin was marked and shrank steadily. Pain was controlled with acetaminophen. She was transitioned to oral cephalexin on ___ and walked comfortably with a stable exam. Her home medications were continued unchanged. She was discharged in stable condition to complete a course of antibiotics.
+TRANSITIONAL ISSUES:
+Complete antibiotics. Recheck the leg with Dr. ___ within one week.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 75 mcg daily
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth every six hours for seven days
+2. Lisinopril 10 mg by mouth daily
+3. Levothyroxine 75 mcg by mouth daily
+4. Acetaminophen 650 mg every six hours as needed for pain
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Cellulitis of the right lower leg
+Secondary:
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Stable
+Mental Status:
+Clear and coherent
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with a skin infection of your right leg and treated with antibiotics. Take all of your antibiotic tablets even when the redness fades. Keep the leg raised when sitting and keep the skin clean and moisturized. Call your doctor or return to ___ if you have fever, spreading redness, worsening pain or drainage. Follow up as arranged at ___.
+
+Followup Instructions:
+___

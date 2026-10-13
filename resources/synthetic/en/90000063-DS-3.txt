@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right lower abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+___ year old woman sent from ___ with one day of worsening right lower quadrant pain, nausea and low fever. Imaging suggested acute appendicitis.
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: T 100.4, HR 92, BP 124/76
+Neck: supple
+CARDIAC: regular rhythm
+ABD: tender right lower quadrant
+SKIN: warm, dry
+
+Pertinent Results:
+Elevated white count on arrival, normalizing by discharge.
+IMPRESSION:
+Dilated inflamed appendix without perforation or abscess.
+
+Brief Hospital Course:
+She underwent uncomplicated laparoscopic appendectomy, evaluated by the ___ team. Pain was controlled, diet advanced, and she passed flatus. She remained afebrile and was discharged on day two.
+TRANSITIONAL ISSUES:
+Wound check at follow up.
+
+Medications on Admission:
+None
+
+Discharge Medications:
+1. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+2. Docusate 100 mg twice daily while taking opioids.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Good
+Mental Status: Alert and oriented.
+
+Discharge Instructions:
+You had your appendix removed. Keep incisions clean and dry, avoid heavy lifting for four weeks, and return for fever, vomiting or worsening pain. Call the ___ clinic with questions.
+
+Followup Instructions:
+___

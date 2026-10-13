@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Dizziness and weakness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old woman who presented with two days of dizziness and generalized weakness. She was referred by ___ after poor oral intake.
+
+Past Medical History:
+Diabetes mellitus type 2
+Atrial fibrillation
+Hypertension
+
+Past Surgical History:
+Cholecystectomy
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+HEENT: Dry mucous membranes.
+Neck: Supple.
+Lungs: Clear bilaterally.
+Ext: No edema.
+Neuro: Nonfocal.
+
+Pertinent Results:
+Labs on admission showed mild dehydration with elevated glucose. Electrocardiogram was unchanged from ___. Chest radiograph was unremarkable.
+
+Brief Hospital Course:
+She was given intravenous fluids with improvement in dizziness. Glucose was controlled with insulin and her home regimen was resumed. Rate control was continued. She was seen by ___ and cleared for discharge home.
+
+Medications on Admission:
+Metformin
+Metoprolol
+Apixaban
+
+Discharge Medications:
+1. Metformin 500 mg twice daily
+2. Metoprolol succinate 50 mg daily
+3. Apixaban 5 mg twice daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary:
+Dehydration
+Diabetes mellitus
+Atrial fibrillation
+
+Discharge Condition:
+Stable.
+Mental Status: Clear and coherent.
+
+Discharge Instructions:
+You were admitted with dizziness from dehydration. Drink plenty of fluids, take your medicines as prescribed, and call ___ if symptoms return.
+
+Followup Instructions:
+___

@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman presenting with three days of dry cough, low fever and fatigue. She was seen at ___ earlier in the week and sent home with rest. Symptoms worsened, so her family brought her to ___ for evaluation.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Migraine
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Moist mucous membranes
+SKIN:
+Warm, dry
+Neuro:
+Alert, nonfocal
+
+Brief Hospital Course:
+Chest imaging was clear and she had no evidence of pneumonia. Her cough was attributed to a viral bronchitis picture and improved with fluids and rest. Oxygen levels stayed normal. She was seen by ___ and cleared for discharge on ___.
+
+Medications on Admission:
+Lisinopril daily
+Levothyroxine daily
+
+Discharge Medications:
+Continue lisinopril and levothyroxine as before. Take guaifenesin as needed for cough. Acetaminophen may be used for fever. Pharmacy at ___ has the prescriptions.
+
+Discharge Disposition:
+Home
+
+Discharge Condition:
+Good
+Mental Status:
+Clear and coherent
+Activity Status:
+Independent
+
+Discharge Instructions:
+You were treated for a viral illness with cough and fever. Drink plenty of fluids and rest at home. Return for shortness of breath, chest pain or persistent high fever. Call ___ with questions.
+
+Followup Instructions:
+___

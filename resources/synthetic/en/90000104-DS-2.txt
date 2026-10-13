@@ -1,0 +1,64 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This ___ year old man with a history of hypertension presented to ___ with three days of palpitations and fatigue. ECG showed atrial fibrillation with rapid ventricular response. Symptoms began on ___ after he missed doses.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with heart disease
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+General: comfortable, no distress
+HEENT: normal
+Lungs: clear bilaterally
+ABD: soft, nontender
+EXTREMITIES: no edema
+SKIN: warm, dry
+Neuro: alert, nonfocal
+
+Pertinent Results:
+Troponin negative on two checks. Potassium and magnesium within normal limits. Chest radiograph showed no acute process. Echocardiogram showed preserved ejection fraction with mild left atrial enlargement.
+
+Brief Hospital Course:
+He was admitted for rate control and started on a beta blocker with good response. Heart rate settled below 100 by the second day. Anticoagulation was begun after risk assessment. Cardiology at ___ reviewed the case and agreed with the plan for outpatient follow up.
+
+Discharge Medications:
+Metoprolol succinate daily
+Apixaban twice daily, started by Dr. ___
+Home lisinopril unchanged
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: atrial fibrillation with rapid ventricular response
+
+Discharge Condition:
+Mental Status: clear and coherent
+Activity Status: independent
+
+Discharge Instructions:
+You were treated for an irregular heart rhythm. Take your new medicines every day and do not skip doses. Call ___ for dizziness, fainting, or chest pain, and keep your visit with ___.
+
+Followup Instructions:
+___

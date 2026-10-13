@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old woman with hypertension presented with two days of right upper quadrant abdominal pain, nausea and vomiting after fatty meals. She was transferred from ___ for further evaluation. Ultrasound showed gallstones with wall thickening. She was afebrile on arrival and admitted to the surgical service with cholecystitis.
+
+Past Medical History:
+Hypertension
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Family history of COPD in mother.
+
+Physical Exam:
+Vitals: T 98.6 HR 76 BP 128/74 SpO2 98%
+HEENT: Anicteric, moist mucosa
+CARDIAC: Regular rate and rhythm
+Ext: Warm, no edema
+SKIN: Intact, dry
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Ultrasound performed on ___ showed cholelithiasis with gallbladder wall thickening and pericholecystic fluid. White blood cell count 12.1 on admission, normalizing to 7.4 at discharge. Liver enzymes mildly elevated and improved. Bilirubin normal.
+IMPRESSION:
+Acute calculous cholecystitis, treated with laparoscopic cholecystectomy without complication. Common bile duct normal in caliber.
+
+Brief Hospital Course:
+She was started on intravenous antibiotics and fluids and made nothing by mouth. Surgery was consulted by Dr. ___ and she underwent laparoscopic cholecystectomy on ___ without complication. Pain was controlled with oral analgesics and diet was advanced. Her blood pressure remained well controlled on home medication. Incisions were clean and dry. Labs normalized. She was ambulating, tolerating diet and discharged home in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Acetaminophen as needed for pain.
+
+Discharge Medications:
+1. Lisinopril 10 mg PO daily.
+2. Oxycodone 5 mg PO every 6 hours as needed for pain, 10 tablets.
+3. Acetaminophen 650 mg PO every 6 hours as needed.
+4. Docusate 100 mg PO twice daily.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Acute cholecystitis
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You had your gallbladder removed. Keep incisions clean and dry and do not lift over 10 pounds. Call ___ for fever, worsening pain or vomiting. Questions can go to your surgeon at ___.
+
+Followup Instructions:
+___

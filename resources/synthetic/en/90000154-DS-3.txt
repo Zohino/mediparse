@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs
+
+Chief Complaint:
+Right leg redness and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient is a man with hypertension who presented after two days of fever, redness and swelling of the right lower leg. He was seen at ___ by his primary doctor, Dr. ___, who sent him to the emergency department at ___ because the redness was spreading and he had chills.
+
+Past Medical History:
+Hypertension
+Gout
+Hernia repair in ___
+
+Social History:
+___
+
+Family History:
+Mother with stroke. No known skin disease.
+
+Physical Exam:
+Gen: Uncomfortable, alert, febrile
+HEENT: Moist mucous membranes
+Lungs: Clear bilaterally
+Ext: Warm, swollen, red right shin with tender border
+Neuro: Nonfocal, walks steadily
+
+Pertinent Results:
+ADMISSION LABS:
+White count elevated with neutrophil predominance. Chemistry panel unremarkable, creatinine normal. Lactate normal. CRP raised. Venous duplex of the right leg showed no clot. Blood cultures drawn on arrival remained negative at final read.
+
+Brief Hospital Course:
+He was admitted with right leg cellulitis and started on IV antibiotics. The border of redness was marked and shrank daily. Blood cultures showed no growth. Pain was controlled with acetaminophen. He was seen by ___ for wound review and by Dr. ___ for elevation advice. By ___ he was afebrile, walking independently, and tolerating oral antibiotics, so he was cleared for discharge.
+
+Medications on Admission:
+Lisinopril daily
+Allopurinol daily
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth four times daily for seven more days
+2. Acetaminophen 650 mg every six hours as needed for pain
+3. Lisinopril daily
+4. Allopurinol daily
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Cellulitis of the right lower leg
+
+Discharge Condition:
+Stable, afebrile, ambulating independently, alert and oriented.
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Finish all of your antibiotic tablets. Keep the leg raised when sitting and watch the marked border. Return if redness spreads, fever returns, or pain worsens. Call Dr. ___ at ___ with questions. Keep your skin moisturized and avoid scratching.
+
+Followup Instructions:
+___

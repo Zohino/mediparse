@@ -1,0 +1,62 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This ___ year old man with long-standing heavy tobacco use presented after three days of productive cough, fever and worsening dyspnea, transferred from ___ emergency department with hypoxemia.
+
+Past Medical History:
+Chronic hypercapnia on home oxygen
+Former smoker, 50 pack-years
+Hypertension
+
+Family History:
+Non-contributory
+
+Physical Exam:
+General: Thin, mildly dyspneic, speaking in short sentences.
+HEENT: Moist mucosa.
+Neck: Supple.
+ABD: Soft, nontender.
+Ext: No edema or cyanosis.
+
+Pertinent Results:
+FINDINGS:
+Chest radiograph shows hyperinflated lungs with flattened diaphragms and a new right lower lobe opacity. ABG showed chronic respiratory acidosis with elevated bicarbonate. White count elevated. Obstructive pattern on prior spirometry.
+
+Brief Hospital Course:
+Treated for pneumonia with ceftriaxone and azithromycin, plus nebulized bronchodilators and a short prednisone course. Oxygen was weaned to room air. Pulmonary team ___ advised inhaler adjustments. Improved by ___ and was discharged with resolving cough and stable saturations.
+
+Medications on Admission:
+Tiotropium inhaler, albuterol as needed, lisinopril
+
+Discharge Medications:
+Tiotropium inhaler daily, albuterol as needed, lisinopril daily, prednisone taper, azithromycin to complete five days, nightly oxygen.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Acute hypoxemic respiratory failure
+Hypertension
+
+Discharge Condition:
+Mental Status: Alert and coherent.
+Level of Consciousness: Awake and attentive.
+Activity Status: Ambulatory with steady gait.
+
+Discharge Instructions:
+Take all medications as prescribed, finish your antibiotics, avoid smoking, and return for worsening breathlessness or fever. Call ___ with questions.
+
+Followup Instructions:
+___

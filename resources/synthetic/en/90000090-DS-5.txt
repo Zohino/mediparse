@@ -1,0 +1,64 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with hypertension sent from ___ after several days of leg swelling and fatigue.
+
+Past Medical History:
+Hypertension
+Anemia
+Gout
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General: Tired, no distress
+HEENT: Moist mucosa
+Lungs: Clear bilaterally
+EXTREMITIES: Mild pitting edema
+
+Pertinent Results:
+Creatinine was elevated at baseline level, potassium mildly high, hemoglobin low but stable.
+IMAGING:
+Renal ultrasound showed small echogenic kidneys.
+
+Brief Hospital Course:
+She was treated for volume overload with diuretics and improved steadily. Her CKD was felt to explain the swelling, and medications were adjusted for renal function. Nephrology follow-up was arranged at ___.
+
+Medications on Admission:
+Amlodipine
+Allopurinol
+
+Discharge Medications:
+Amlodipine 5 mg daily
+Furosemide 40 mg daily
+Allopurinol dose reduced
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Chronic kidney disease
+
+Discharge Condition:
+Stable
+Mental Status: Alert and oriented
+Level of Consciousness: Awake
+
+Discharge Instructions:
+Weigh yourself daily, limit salt intake, take medicines as directed, and return if swelling or breathlessness worsens.
+
+Followup Instructions:
+___

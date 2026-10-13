@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Nausea and weakness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman presenting with three days of nausea, weakness and poor oral intake after missing meals. She was evaluated at ___ and transferred for further care.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension
+Cholecystectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+Comfortable and afebrile, regular rhythm, lungs clear, abdomen soft.
+HEENT:
+Moist mucous membranes, anicteric.
+EXTREMITIES:
+No edema or tenderness.
+
+Pertinent Results:
+FINDINGS:
+Glucose elevated on admission with mild ketosis, improving with treatment. Chest imaging showed no acute abnormality. Electrolytes normalized by discharge. Urinalysis negative for infection; renal function stable throughout the stay.
+
+Brief Hospital Course:
+Treated with intravenous fluids and insulin infusion, transitioned to subcutaneous insulin once eating. Electrolytes were repleted and symptoms resolved. Diet education was provided by nutrition. Follow-up was arranged with ___ clinic, and she was discharged in stable condition.
+
+Medications on Admission:
+Metformin 500 mg twice daily, aspirin.
+
+Discharge Medications:
+Insulin glargine 20 units nightly. Metformin 500 mg twice daily. Aspirin 81 mg daily. Lisinopril 10 mg daily.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Diabetes mellitus
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+Check blood sugar before meals and at bedtime. Take insulin as directed and keep ___ appointments. Return for vomiting, confusion or high readings.
+
+Followup Instructions:
+___

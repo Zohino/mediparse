@@ -1,0 +1,78 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Weakness and poor appetite
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with chronic kidney disease sent by ___ after several days of fatigue, nausea and reduced intake.
+REVIEW OF SYSTEMS:
+Positive for nausea. Otherwise negative.
+
+Past Medical History:
+Diabetes mellitus
+COPD
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Examined on arrival and again before discharge.
+ADMISSION PHYSICAL EXAM:
+Vitals: Afebrile, stable, room air
+Gen: Tired but comfortable
+HEENT: Dry mucous membranes
+Lungs: Scattered wheezes
+CARDIAC: Regular rhythm
+Abdomen: Soft, nontender
+EXTREMITIES: No edema
+
+Pertinent Results:
+Admission labs showed elevated creatinine and mild hyperkalemia. Chest film without acute change. Glucose elevated at presentation.
+DISCHARGE LABS:
+Creatinine improved, potassium normal.
+
+Brief Hospital Course:
+She received gentle fluids and held nephrotoxic drugs, with creatinine returning toward baseline. Glucose was managed with insulin, and wheezing resolved with inhalers. She tolerated diet and was cleared by ___.
+TRANSITIONAL ISSUES:
+Recheck chemistry in one week at ___.
+
+Medications on Admission:
+Metformin, inhaler, lisinopril
+
+Discharge Medications:
+1. Insulin glargine nightly
+2. Albuterol inhaler as needed
+3. Hold lisinopril until labs rechecked
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Diabetes
+Chronic obstructive pulmonary disease
+Chronic kidney disease
+
+Discharge Condition:
+Mental Status: Alert and oriented
+Level of Consciousness: Alert
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were admitted for weakness and dehydration. Drink fluids, avoid anti-inflammatory pain medicines, and call ___ if symptoms return.
+
+Followup Instructions:
+___

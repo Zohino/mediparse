@@ -1,0 +1,64 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Foot wound and high blood sugars
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient presented to ___ after several days of a worsening wound on his left foot, increased thirst, and frequent urination. Home glucose readings were persistently elevated. He denied fever, chest pain, or vomiting. His primary physician at ___ referred him to the emergency department for evaluation and treatment.
+
+Past Medical History:
+Diabetes mellitus type 2
+Hypertension
+Hyperlipidemia
+Prior foot ulcer treated at ___
+
+Social History:
+___
+
+Family History:
+Father with heart disease; mother with high blood pressure.
+
+Physical Exam:
+General: Comfortable, no acute distress.
+PULM: Clear to auscultation bilaterally.
+CARDIAC: Regular rate and rhythm, no murmurs.
+ABD: Soft, nontender, nondistended.
+SKIN: Small shallow ulcer on left plantar foot without purulence.
+
+Pertinent Results:
+Admission labs were notable for markedly elevated glucose and mild leukocytosis. Hemoglobin A1c was high. Electrolytes and creatinine were within normal limits. Foot x-ray showed soft tissue swelling without evidence of osteomyelitis. Blood cultures drawn at ___ showed no growth. Glucose values improved steadily on the adjusted insulin regimen before discharge.
+
+Brief Hospital Course:
+He was admitted to the medicine service and started on insulin with close glucose monitoring. The foot wound was cleaned and dressed daily, and the podiatry team from ___ evaluated it and recommended local wound care. He received a short course of oral antibiotics. A nutritionist provided diet education. His glucose stabilized and he was discharged home with ___ nursing follow up.
+
+Discharge Medications:
+1. Insulin glargine 20 units subcutaneously at bedtime
+2. Metformin 500 mg twice daily
+3. Cephalexin 500 mg four times daily for five days
+4. Lisinopril 10 mg daily
+5. Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home with services
+
+Discharge Diagnosis:
+Diabetes mellitus type 2 with foot ulcer
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent with a cane.
+
+Discharge Instructions:
+You were hospitalized for high blood sugar and a foot wound. Check your glucose before meals and at bedtime. Change the dressing daily and keep pressure off the foot. Call ___ or return to the emergency department for fever, spreading redness, or drainage. Bring your glucose log to the visit with Dr. ___ and ___.
+
+Followup Instructions:
+___

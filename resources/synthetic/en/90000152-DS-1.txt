@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Woman with two days of worsening right upper quadrant pain, nausea and fever after meals. She was seen at ___ by her physician, referred to the emergency department on ___.
+
+Social History:
+___
+
+Family History:
+Mother had gallstones, treated at ___
+
+Physical Exam:
+General:
+Comfortable, afebrile
+HEENT:
+Anicteric
+Neck:
+Supple
+Lungs:
+Clear
+CARDIAC:
+Regular rhythm
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+ADMISSION LABS:
+Mild leukocytosis, normal creatinine, slightly raised bilirubin and alkaline phosphatase. Ultrasound showed gallstones, a thickened gallbladder wall and pericholecystic fluid. Read by ___ radiology.
+
+Brief Hospital Course:
+She received intravenous fluids, antibiotics and analgesia, then underwent uncomplicated laparoscopic cholecystectomy on ___. Pain settled, diet advanced, and she passed flatus. Incisions stayed clean. She was cleared for discharge by ___.
+TRANSITIONAL ISSUES:
+Review pathology at follow-up; no pending labs.
+
+Medications on Admission:
+Multivitamin daily; occasional ibuprofen
+
+Discharge Medications:
+1. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+2. Docusate 100 mg twice daily while taking opioids.
+3. Oxycodone 5 mg every six hours as needed, short course.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+
+Discharge Condition:
+Stable, ambulatory, tolerating regular diet
+
+Discharge Instructions:
+You were treated for an inflamed gallbladder and had it removed. Keep incisions dry, avoid heavy lifting for two weeks, and call ___ for fever, vomiting, jaundice or worsening pain.
+
+Followup Instructions:
+___

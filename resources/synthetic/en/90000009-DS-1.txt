@@ -1,0 +1,83 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old woman with two days of right upper quadrant pain, nausea and vomiting after meals. She was seen at ___ and transferred here on ___ for surgical evaluation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gallstones
+
+Social History:
+___
+
+Family History:
+Mother with gallbladder disease, treated at ___
+
+Physical Exam:
+General:
+Uncomfortable, afebrile
+HEENT:
+Anicteric
+Neck:
+Supple
+Lungs:
+Clear bilaterally
+CARDIAC:
+Regular rate and rhythm
+Ext:
+No edema
+SKIN:
+Warm and dry
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 13.2, ALT and AST mildly elevated, total bilirubin 1.4. Ultrasound showed gallstones, a thickened gallbladder wall and pericholecystic fluid.
+
+Brief Hospital Course:
+She was admitted, given IV fluids and antibiotics, and taken to the operating room on ___ for an uncomplicated cholecystectomy. Pain was controlled with oral medications. She tolerated a regular diet and was discharged home in stable condition, with follow up at ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg once daily.
+2. Atorvastatin 20 mg at bedtime.
+3. Acetaminophen 650 mg every six hours as needed for pain.
+4. Docusate 100 mg twice daily while taking opioids.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with an inflamed gallbladder and had it removed. Keep the small incisions clean and dry. Do not lift anything heavy for four weeks. Call ___ for fever, worsening pain, vomiting or yellow skin.
+
+Followup Instructions:
+___

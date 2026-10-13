@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man sent from ___ after several days of racing heartbeat and tiredness. Evaluated by Dr. ___ who advised admission for rhythm control and monitoring.
+REVIEW OF SYSTEMS:
+Positive for fatigue. No fever.
+
+Past Medical History:
+Hypertension
+Atrial fibrillation
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Gen: Comfortable, no distress
+Neck: Supple
+PULM: Clear bilaterally
+ABD: Soft, nontender
+Ext: No edema
+Neuro: Nonfocal
+
+Pertinent Results:
+Labs drawn on ___ showed elevated glucose and normal electrolytes. Troponin negative twice. ECG showed irregular rhythm without ST changes. Chest film unremarkable.
+
+Brief Hospital Course:
+Transferred from ___ on ___ with a fast irregular rhythm. Rate was controlled with metoprolol and anticoagulation was started. Glucose was managed with insulin sliding scale. He improved and was stable for discharge.
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily
+Apixaban 5 mg twice daily
+Metformin 500 mg twice daily
+Atorvastatin 40 mg nightly
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atrial fibrillation with rapid ventricular response
+Diabetes mellitus
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Independent, ambulatory.
+
+Discharge Instructions:
+You were admitted for a fast irregular heartbeat. Take your medicines as directed and keep all appointments. Call ___ or return if you have chest pain, fainting, or bleeding.
+
+Followup Instructions:
+___

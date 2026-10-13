@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with chronic kidney disease and atrial fibrillation presented to ___ with several days of worsening leg swelling and fatigue. Symptoms began after she missed doses while traveling to ___.
+
+Past Medical History:
+Diabetes mellitus
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General:
+Tired but comfortable
+HEENT:
+Moist mucous membranes
+Lungs:
+Clear bilaterally
+ABD:
+Soft, nontender
+
+Pertinent Results:
+Creatinine near baseline. Potassium normal. Chest film showed mild vascular congestion without focal consolidation.
+IMPRESSION:
+Mild congestion, otherwise unremarkable.
+
+Brief Hospital Course:
+She received intravenous diuretics with good urine output and swelling improved. Heart rate was controlled on her home regimen. Records from ___ were reviewed. Glucose stayed stable, and she was cleared by ___.
+
+Medications on Admission:
+Metformin, metoprolol, apixaban
+
+Discharge Medications:
+1. Metformin 500 mg twice daily
+2. Metoprolol succinate 50 mg daily
+3. Apixaban 5 mg twice daily
+4. Furosemide 40 mg daily
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Diabetes
+Chronic kidney disease
+Atrial fibrillation
+
+Discharge Condition:
+Stable and improved.
+Mental Status:
+Alert and fully oriented.
+
+Discharge Instructions:
+You were treated for fluid overload. Weigh yourself every morning and call if your weight rises quickly. Take your medicines as prescribed and limit salt. Contact ___ with any concerns.
+
+Followup Instructions:
+___

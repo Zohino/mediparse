@@ -1,0 +1,81 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever and dysuria
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with three days of fever, burning urination and flank pain, referred by ___ clinic.
+REVIEW OF SYSTEMS:
+Positive for chills; otherwise negative.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals:
+Afebrile, stable
+General:
+Comfortable
+HEENT:
+Normal
+Lungs:
+Clear
+Abdomen:
+Mild suprapubic tenderness
+SKIN:
+Warm, dry
+
+Pertinent Results:
+ADMISSION LABS:
+Elevated white count; urinalysis with pyuria and bacteria.
+DISCHARGE LABS:
+White count normalized; urine culture from ___ grew E. coli.
+
+Brief Hospital Course:
+She received intravenous ceftriaxone with improving fever and pain. Cultures were sensitive, so she was changed to oral antibiotics and tolerated diet before leaving ___.
+
+Medications on Admission:
+Lisinopril
+Levothyroxine
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth four times daily for seven days
+2. Lisinopril
+3. Levothyroxine
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute pyelonephritis
+Urinary tract infection
+
+Discharge Condition:
+Mental Status:
+Alert and oriented.
+Level of Consciousness:
+Awake.
+Activity Status:
+Walks without help.
+
+Discharge Instructions:
+Finish all antibiotics, drink plenty of fluids, and return to ___ if fever or pain returns.
+
+Followup Instructions:
+___

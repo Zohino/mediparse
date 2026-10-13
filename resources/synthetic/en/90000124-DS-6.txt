@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs
+
+Chief Complaint:
+Weakness and poor appetite
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman sent from ___ after several days of fatigue, nausea and reduced oral intake. She reported mild cough but no fever.
+
+Past Medical History:
+Diabetes mellitus, hypertension, hypothyroidism
+Cholecystectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General: tired, comfortable at rest
+HEENT: dry mucous membranes
+Neuro: alert, nonfocal
+
+Pertinent Results:
+Chest film showed clear lungs. Creatinine stable near baseline, glucose elevated on arrival, electrolytes normal after fluids.
+IMPRESSION:
+No acute cardiopulmonary process.
+
+Brief Hospital Course:
+She received intravenous fluids and her appetite improved. Chest imaging and exam were without pneumonia. Insulin was adjusted by ___ with help from the diabetes team. Kidney function remained steady. She was cleared by ___ for home.
+
+Medications on Admission:
+Metformin, lisinopril, levothyroxine
+
+Discharge Medications:
+Metformin twice daily, levothyroxine every morning, glargine at bedtime. Lisinopril was held until follow up labs.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: dehydration, diabetes mellitus, chronic kidney disease
+
+Discharge Condition:
+Mental Status: clear and coherent
+Level of Consciousness: awake and alert
+Activity Status: walks independently
+
+Discharge Instructions:
+You were treated for dehydration. Drink plenty of fluids, check your sugars daily, take medicines as listed, and call ___ if vomiting returns or weakness worsens.
+
+Followup Instructions:
+___

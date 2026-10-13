@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Male with chronic medical problems sent from ___ clinic with three days of worsening abdominal pain and nausea. He denied fever, vomiting blood, or chest pain. He was evaluated at ___ before transfer.
+
+Past Medical History:
+Chronic kidney disease stage 3
+Atrial fibrillation
+Hypertension
+Gout
+
+Social History:
+___
+
+Family History:
+Mother with hypertension, treated at ___
+
+Physical Exam:
+Gen:
+Comfortable, no acute distress.
+Abdomen:
+Soft, mildly tender in the epigastrium, nondistended.
+Ext:
+Warm, no edema.
+
+Pertinent Results:
+Admission creatinine near baseline. CT scan at ___ showed no acute process. Lipase and liver tests normal. Stool studies negative.
+DISCHARGE LABS:
+Creatinine stable, potassium normal, hemoglobin steady.
+
+Brief Hospital Course:
+He was admitted for observation and treated with intravenous fluids, antiemetics, and a bland diet. Pain resolved within two days and he tolerated regular food. Home medications were continued, and renal dosing was reviewed with ___ pharmacy before discharge.
+
+Medications on Admission:
+Metoprolol, apixaban, amlodipine, allopurinol.
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg daily.
+2. Apixaban 5 mg twice daily.
+3. Amlodipine 5 mg daily.
+4. Allopurinol 100 mg daily.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Gastritis
+Chronic kidney disease
+
+Discharge Condition:
+Mental Status:
+Alert and oriented, able to participate in decisions.
+Level of Consciousness:
+Fully awake and interactive.
+Activity Status:
+Walks independently.
+
+Discharge Instructions:
+You were hospitalized for abdominal pain that improved with fluids and rest. Avoid spicy food and anti-inflammatory pills. Take medicines as prescribed. Call ___ or return for fever, vomiting, black stools, or worsening pain.
+
+Followup Instructions:
+___

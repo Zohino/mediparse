@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man sent from ___ with three days of productive cough, fever, chills and worsening shortness of breath, seen first at ___ clinic.
+REVIEW OF SYSTEMS:
+Positive for fatigue and poor appetite. Otherwise negative.
+
+Past Medical History:
+Diabetes mellitus type 2
+Atrial fibrillation on anticoagulation
+Hypertension
+
+Social History:
+___
+
+Family History:
+Father with coronary disease
+
+Physical Exam:
+Tired but comfortable on nasal oxygen, vital signs stable.
+General: alert, no distress
+PULM: crackles at right base
+ABD: soft, nontender
+EXTREMITIES: no edema
+Neuro: nonfocal
+
+Pertinent Results:
+Chest film dated ___ showed right lower lobe opacity, reported by ___ radiology. White count elevated, creatinine normal.
+ADMISSION LABS:
+WBC 14, glucose 210, lactate normal
+
+Brief Hospital Course:
+He was treated with intravenous antibiotics for pneumonia at ___ and improved steadily, weaning off oxygen by day three. Rate control and home anticoagulation were continued, and insulin covered his glucose.
+TRANSITIONAL ISSUES:
+Finish antibiotic course; recheck chest film in six weeks.
+
+Medications on Admission:
+Metformin, metoprolol, apixaban, lisinopril
+
+Discharge Medications:
+Amoxicillin-clavulanate twice daily for five more days, continue metformin, metoprolol, apixaban and lisinopril, albuterol inhaler as needed.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Pneumonia
+Secondary:
+Diabetes, chronic obstructive pulmonary disease, atrial fibrillation
+
+Discharge Condition:
+Good
+Mental Status: clear and coherent
+Level of Consciousness: alert and interactive
+Activity Status: ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with a lung infection and treated with antibiotics. Take all medicines as prescribed, drink fluids, rest, and return for fever, worsening breathing or chest pain. Call ___ with questions.
+
+Followup Instructions:
+___

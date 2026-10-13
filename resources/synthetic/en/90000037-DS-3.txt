@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Palpitations and lightheadedness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient presented to ___ with three days of palpitations and lightheadedness. Symptoms began at home after ___ and came with mild shortness of breath. She denied chest pain or fainting. Her primary physician at ___ advised evaluation in the emergency department, where telemetry showed an irregular rhythm with a rapid ventricular rate. She was admitted for rate control and monitoring.
+
+Past Medical History:
+Hypertension
+Atrial fibrillation, diagnosed ___
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with stroke at ___
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: HR 118, BP 134/80, SpO2 97% on room air
+General: comfortable, no distress
+HEENT: moist mucosa
+Neck: supple
+Lungs: clear bilaterally
+ABD: soft, nontender
+Neuro: alert, no focal deficits
+
+Pertinent Results:
+ECG on arrival showed an irregularly irregular narrow complex rhythm without acute ischemic change. Echocardiogram performed at ___ showed preserved ejection fraction and mild left atrial enlargement. Thyroid function was normal.
+DISCHARGE LABS:
+WBC 6.8, Hgb 12.9, Plt 241, Na 140, K 4.2, Cr 0.8
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg by mouth once daily
+2. Apixaban 5 mg by mouth twice daily
+3. Lisinopril 10 mg by mouth once daily
+4. Atorvastatin 20 mg by mouth nightly
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Atrial fibrillation with rapid ventricular response
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized because of a fast, irregular heartbeat. Your heart rate was controlled with medication and a blood thinner was started to lower stroke risk. Take all medicines as prescribed and do not skip doses. Contact Dr. ___ or the clinic at ___ if you have palpitations, fainting, bleeding, or chest pain. Refill medicines at ___.
+
+Followup Instructions:
+___

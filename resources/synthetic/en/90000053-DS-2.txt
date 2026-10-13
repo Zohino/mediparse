@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+He presented to ___ with three days of palpitations and fatigue, sent by ___ after an irregular pulse was found. He denied fever or cough. Chest film showed no pneumonia. ECG revealed a rapid irregular rhythm. Rate was controlled and he was admitted for monitoring.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+HEENT: Normocephalic, moist mucous membranes.
+PULM: Clear to auscultation bilaterally.
+Ext: Warm, no edema.
+SKIN: Intact, no rash.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+DISCHARGE LABS:
+WBC 7.2, Hgb 13.8, Plt 210, Na 139, K 4.2, Cr 0.9, glucose 148, troponin negative twice, collected at ___.
+IMPRESSION:
+Chest radiograph without focal consolidation or effusion. Echocardiogram showed preserved ejection fraction and mild left atrial enlargement.
+
+Brief Hospital Course:
+He was admitted to telemetry and started on metoprolol for rate control with good response. Anticoagulation with apixaban was begun after risk assessment. Glucose was managed with his home regimen and a sliding scale. Cardiology from ___ saw him and arranged outpatient monitoring through ___. He remained stable and was ready for discharge home.
+
+Medications on Admission:
+Per list from ___: metformin 1000 mg twice daily, lisinopril 10 mg daily, atorvastatin 20 mg nightly.
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily, apixaban 5 mg twice daily, metformin 1000 mg twice daily, lisinopril 10 mg daily, atorvastatin 20 mg nightly. Continue all as directed.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Atrial fibrillation with rapid ventricular response
+Diabetes mellitus type 2
+
+Discharge Condition:
+Stable
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized for a fast irregular heartbeat. Take your new blood thinner every day without missing doses. Check your blood sugar as before. Call ___ or return for chest pain, fainting, or bleeding.
+
+Followup Instructions:
+___

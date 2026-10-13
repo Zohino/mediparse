@@ -1,0 +1,62 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+This ___ year old woman presented with two days of worsening right upper quadrant pain, nausea and fever. She was transferred from ___ after imaging showed gallstones with wall thickening. She was taken to the operating room on hospital day one.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Cesarean section at ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+Vitals: afebrile, stable
+Gen: comfortable, no distress
+HEENT: anicteric
+PULM: clear bilaterally
+ABD: soft, mild incisional tenderness
+Ext: warm, no edema
+Neuro: alert, nonfocal
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Acetaminophen 650 mg every six hours as needed for pain
+2. Lisinopril 10 mg daily
+3. Atorvastatin 20 mg nightly
+4. Docusate 100 mg twice daily while taking opioids
+
+Discharge Disposition:
+Home, with follow-up arranged at ___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+
+Discharge Condition:
+Stable, tolerating a regular diet.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were admitted with gallbladder inflammation and had your gallbladder removed. Keep the small incisions clean and dry. Avoid lifting heavy objects for two weeks. Return for fever, vomiting, yellow skin or worsening belly pain, or call ___ with questions.
+
+Followup Instructions:
+___

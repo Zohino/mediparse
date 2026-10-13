@@ -1,0 +1,87 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain and vomiting
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with known diabetes presented to ___ with two days of epigastric pain, nausea and vomiting. He reported poor oral intake and high home glucose readings. Symptoms began after a meal on ___ and did not improve with antacids.
+
+Past Medical History:
+Elevated blood sugar on metformin
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General:
+Uncomfortable, no distress at rest
+HEENT:
+Dry mucous membranes
+Neck:
+Supple
+Lungs:
+Clear bilaterally
+Abdomen:
+Mild epigastric tenderness, soft
+Ext:
+Warm, no edema
+
+Pertinent Results:
+IMPRESSION:
+Mild gastritis without obstruction.
+FINDINGS:
+Imaging performed at ___ showed normal bowel caliber and no free fluid. Liver enzymes and lipase were within normal limits. Electrolytes improved after fluids.
+
+Brief Hospital Course:
+He was admitted for hydration and symptom control. Nausea settled with antiemetics and a proton pump inhibitor, and he tolerated a regular diet by ___. Glucose was managed with a sliding scale and home therapy resumed. Gastroenterology at ___ will see him as an outpatient after discharge from ___.
+TRANSITIONAL ISSUES:
+Review glucose log at follow up.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Metformin 500 mg by mouth twice daily
+2. Lisinopril 10 mg by mouth daily
+3. Pantoprazole 40 mg by mouth daily, new, pick up at ___
+4. Ondansetron 4 mg every eight hours as needed
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Gastritis
+Diabetes mellitus
+
+Discharge Condition:
+Stable
+Mental Status:
+Alert and oriented
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for stomach inflammation with vomiting. Take pantoprazole every morning and avoid alcohol and spicy foods. Return for black stools, blood in vomit or severe pain. Call ___ with questions and keep your appointment on ___.
+
+Followup Instructions:
+___

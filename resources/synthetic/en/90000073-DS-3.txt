@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Palpitations and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with several days of palpitations and fatigue after missing doses at home. Her clinic at ___ noted an irregular pulse and a markedly elevated creatinine, and she was sent in for evaluation.
+
+Past Medical History:
+Diabetes mellitus type 2
+Hypertension
+Anemia
+Followed by endocrinology at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General:
+Tired, comfortable at rest
+HEENT:
+Moist mucous membranes
+Abdomen:
+Soft, nontender
+Ext:
+Mild ankle edema
+Neuro:
+Alert, nonfocal
+PULSES:
+Irregular, palpable
+
+Pertinent Results:
+IMPRESSION:
+Mild cardiomegaly without acute process, per ___.
+FINDINGS:
+Creatinine 2.6 on arrival, estimated GFR 24, potassium 5.3, hemoglobin 9.8. Troponin negative twice. ECG showed an irregular rhythm without ischemic changes.
+
+Brief Hospital Course:
+She was found to be in AF with rapid ventricular response on arrival. Metoprolol controlled her rate and apixaban was started at a reduced dose given her kidney function. Creatinine settled near baseline with fluids, and ___ reviewed her glucose regimen before ___ discharge.
+
+Medications on Admission:
+Metformin 500 mg daily, lisinopril 10 mg daily, aspirin.
+
+Discharge Medications:
+Metoprolol succinate 50 mg once daily. Apixaban 2.5 mg twice daily. Insulin glargine at bedtime. Stop metformin and lisinopril until labs are rechecked.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for a fast irregular heartbeat. Take your new medicines as prescribed and avoid anti-inflammatory pain pills. Have your blood tests repeated within one week at ___. Return for fainting, chest pain, or bleeding, or call ___.
+
+Followup Instructions:
+___

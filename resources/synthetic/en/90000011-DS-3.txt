@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with cough, fever and dyspnea for three days, sent by ___ clinic.
+
+Past Medical History:
+Chronic kidney disease
+Atrial fibrillation
+Hypertension
+
+Past Surgical History:
+Appendectomy
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+General:
+Mildly ill, comfortable
+HEENT:
+Moist mucosa
+Lungs:
+Right basilar crackles
+Abdomen:
+Soft, nontender
+Ext:
+No edema
+
+Pertinent Results:
+ADMISSION LABS:
+Elevated white count, creatinine at baseline
+IMAGING:
+Chest film obtained
+IMPRESSION:
+Right lower lobe opacity
+
+Brief Hospital Course:
+Treated with antibiotics and oxygen, improved steadily. Renal function remained stable. Seen by ___ for rehabilitation planning.
+
+Medications on Admission:
+Metoprolol, apixaban
+
+Discharge Medications:
+Continue metoprolol and apixaban. Finish oral antibiotic course.
+
+Discharge Disposition:
+Home with services
+Facility: ___
+
+Discharge Diagnosis:
+Chronic kidney disease
+Pneumonia
+
+Discharge Condition:
+Stable
+Level of Consciousness:
+Alert and oriented
+Activity Status:
+Ambulatory with steady gait
+
+Discharge Instructions:
+You were treated here for a lung infection. Take medicines as directed. Return if breathing worsens, call ___.
+
+Followup Instructions:
+___

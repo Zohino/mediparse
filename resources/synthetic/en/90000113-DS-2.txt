@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Thirst and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with several days of increased thirst, frequent urination and fatigue. Glucose was markedly elevated on arrival. Admitted.
+
+Past Medical History:
+Diabetes mellitus
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General: comfortable
+HEENT: dry mucous membranes
+Neck: supple
+Lungs: clear
+Abdomen: soft
+EXTREMITIES: no edema
+SKIN: warm
+
+Pertinent Results:
+Glucose elevated on arrival. Bicarbonate low, normalized after treatment. Chest film clear. Urinalysis showed glucose and ketones. Repeat labs at ___ stable.
+
+Brief Hospital Course:
+Glucose was controlled with insulin and fluids, and electrolytes were replaced. Symptoms resolved over two days. Diet was advanced and teaching was completed with ___ before discharge.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+
+Discharge Medications:
+Insulin glargine nightly, metformin 500 mg twice daily, lisinopril 10 mg daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes mellitus with hyperglycemia
+Secondary:
+Hypertension
+
+Discharge Condition:
+Stable
+Level of Consciousness: alert and interactive
+Activity Status: independent
+
+Discharge Instructions:
+Take medications as directed, check glucose daily, and return to ___ for vomiting or confusion.
+
+Followup Instructions:
+___

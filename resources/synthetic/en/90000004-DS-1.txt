@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever and cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man sent from ___ with three days of fever, productive cough and fatigue. Chest film raised concern for possible pneumonia. Treated at ___ with fluids, then transferred here for observation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with stroke
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+Gen: comfortable, no distress
+HEENT: moist mucous membranes
+ABD: soft, nontender
+Ext: warm, no edema
+SKIN: clear
+
+Pertinent Results:
+Mild leukocytosis on admission, normalizing. Chest radiograph from ___ reviewed.
+IMPRESSION: Patchy lower lobe opacity, nonspecific. Follow-up imaging advised.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Acetaminophen as needed for fever or aches
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute bronchitis
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with fever and cough. Take your medicines as directed, drink plenty of fluids and rest. Call your doctor at ___ or return if breathing worsens or fever returns.
+
+Followup Instructions:
+___

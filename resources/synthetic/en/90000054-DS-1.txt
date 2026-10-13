@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with chronic kidney disease sent by ___ clinic for worsening edema and tiredness over one week.
+
+Past Medical History:
+Diabetes mellitus
+Atrial fibrillation
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Gen:
+Tired, comfortable
+Neck:
+Supple
+Abdomen:
+Soft, nontender
+
+Pertinent Results:
+Creatinine near baseline. Potassium normal. Labs drawn at ___ were stable.
+IMPRESSION:
+No acute cardiopulmonary process.
+
+Medications on Admission:
+Metformin, apixaban, lisinopril
+
+Discharge Medications:
+Apixaban twice daily. Furosemide each morning. Insulin as directed. Hold lisinopril until review.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary:
+Volume overload
+Diabetes
+Chronic kidney disease
+Atrial fibrillation
+
+Discharge Condition:
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake
+Activity Status:
+Walks with a cane
+
+Discharge Instructions:
+You were treated for fluid buildup. Weigh yourself daily and call ___ if swelling returns. Limit salt, take medicines as listed, and keep all visits.
+
+Followup Instructions:
+___

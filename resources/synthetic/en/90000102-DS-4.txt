@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Nausea and abdominal discomfort
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with diabetes presenting with three days of nausea and abdominal discomfort, transferred from ___ after symptoms began on ___. She denied fever, chest pain, or recent travel.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Normal, moist mucosa
+Neck:
+Supple
+Lungs:
+Clear bilaterally
+Abdomen:
+Soft, mildly tender
+
+Pertinent Results:
+Admission labs showed mild leukocytosis and elevated glucose. Liver enzymes and lipase were normal. CT of the abdomen at ___ showed no acute findings. Repeat labs on the day of discharge were improved and stable.
+
+Brief Hospital Course:
+She was given intravenous fluids, antiemetics, and bowel rest, with gradual improvement in symptoms. Surgery was consulted by ___ and found no operative indication. Her diet was advanced and tolerated well. Her blood sugars were monitored and managed with insulin. She was discharged home.
+
+Discharge Medications:
+Metformin 500 mg by mouth twice daily. Ondansetron 4 mg as needed for nausea. Acetaminophen 650 mg as needed.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes
+Gastroenteritis
+
+Discharge Condition:
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+Drink plenty of fluids and eat small meals. Take medicines as directed. Return for fever, vomiting, or worsening pain. Call ___ with questions.
+
+Followup Instructions:
+___

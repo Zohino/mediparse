@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man sent from ___ after three days of worsening cough, low grade fever and fatigue. He reports no prior pneumonia, and chest imaging at ___ showed no evidence of pneumonia. He was given oral fluids and referred for observation because of persistent weakness and poor appetite.
+REVIEW OF SYSTEMS:
+Positive for cough and malaise. Negative for chest pain, vomiting or rash.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia, followed by ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease, treated at ___
+
+Physical Exam:
+Vitals: T 99.1 HR 88 BP 128/76 RR 16 SpO2 97% on room air
+General: tired appearing, comfortable at rest
+EXTREMITIES: no edema, warm
+Neuro: alert, oriented, nonfocal
+
+Pertinent Results:
+Labs drawn at ___ showed mildly elevated white count with normal hemoglobin and platelets. Sodium, potassium and creatinine were within normal limits. Liver enzymes were normal. Respiratory viral panel was positive for influenza. Chest radiograph reviewed by ___ showed clear lungs with normal cardiac silhouette and no effusion.
+
+Brief Hospital Course:
+Patient was admitted with influenza and treated with oseltamivir, fluids and acetaminophen. His fever resolved within two days, and cough improved gradually. Oxygen saturation stayed normal on room air throughout the stay at ___. Blood pressure was controlled on his home regimen. He tolerated diet, walked independently, and was cleared by ___ for discharge home.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Aspirin 81 mg daily
+
+Discharge Medications:
+1. Oseltamivir 75 mg by mouth twice daily for three more days
+2. Lisinopril 10 mg by mouth once daily
+3. Atorvastatin 20 mg by mouth every night
+4. Acetaminophen 500 mg by mouth every six hours as needed for fever or aches
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Influenza
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with influenza. Take the antiviral medicine until finished and drink plenty of fluids. Rest at home and return to ___ if you develop trouble breathing, chest pain or a fever above 101. Call your clinic at ___ with questions. Please keep your appointment with Dr. ___ next week.
+
+Followup Instructions:
+___

@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old man with hypertension who presented with five days of productive cough, fever, chills and right sided pleuritic chest pain. He was first seen at ___ urgent care on ___ and given a short course of oral antibiotics without improvement. He became short of breath walking across his room and came to the emergency department.
+REVIEW OF SYSTEMS:
+Positive for fatigue, poor appetite and night sweats. Negative for leg swelling, vomiting or diarrhea.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Temperature 101.2, heart rate 98, oxygen saturation 91 percent on room air.
+General: Tired appearing, speaking in short sentences.
+Ext: Warm, no edema.
+Lungs with crackles at the right base.
+
+Pertinent Results:
+White blood cell count 14.8 with neutrophil predominance. Creatinine 0.9. Lactate 1.1. Blood cultures showed no growth. Chest radiograph at ___ showed a dense right lower lobe opacity without effusion. Repeat imaging before discharge showed early improvement. Sodium and potassium were normal throughout the stay.
+
+Brief Hospital Course:
+He was admitted to the medical floor, evaluated by Dr. ___ and started on intravenous ceftriaxone and azithromycin. Oxygen was required for two days and then weaned to room air. Fever resolved by hospital day three. He was switched to oral antibiotics, tolerated a regular diet and walked the hallway without desaturation. Care was transferred from the emergency team at ___ and he was ready for discharge on ___.
+TRANSITIONAL ISSUES:
+Repeat chest radiograph in six weeks to confirm clearing.
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg by mouth twice daily for five more days.
+2. Lisinopril 10 mg by mouth daily.
+3. Atorvastatin 20 mg by mouth nightly.
+4. Acetaminophen as needed for fever.
+Prescriber ___.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Pneumonia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with a lung infection and treated with antibiotics. Finish the full course of your pills and drink plenty of fluids. Rest and increase activity slowly. Call ___ or return to the emergency department for fever, worsening cough, trouble breathing or chest pain. Keep your visit at the clinic at ___ with Dr. ___, arranged by ___.
+
+Followup Instructions:
+___

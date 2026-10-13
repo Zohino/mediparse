@@ -1,0 +1,60 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies.
+
+Chief Complaint:
+Right leg redness and swelling.
+
+Major Surgical or Invasive Procedure:
+None.
+
+History of Present Illness:
+The patient is a man who presented with three days of worsening redness, warmth and swelling of the right lower leg after a scrape sustained while working at ___. He noted chills at home. He was evaluated at ___ and sent to the emergency department for further care.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity
+
+Social History:
+___
+
+Family History:
+Non-contributory.
+
+Pertinent Results:
+Admission labs showed a mildly elevated white blood cell count with normal electrolytes and creatinine. Lactate was normal. Blood cultures drawn on ___ showed no growth. Ultrasound performed at ___ showed no deep vein thrombosis.
+IMPRESSION:
+Diffuse subcutaneous edema consistent with soft tissue infection, no drainable abscess.
+
+Brief Hospital Course:
+He was admitted and treated with intravenous antibiotics, leg elevation and pain control. The border of redness was marked and receded steadily over two days. Blood cultures remained negative and he stayed afebrile. He tolerated diet throughout. Once able to walk comfortably he was changed to oral antibiotics and discharged after review by ___ and the primary team at ___ on ___.
+TRANSITIONAL ISSUES:
+Recheck the leg within one week.
+
+Medications on Admission:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly, aspirin 81 mg daily.
+
+Discharge Medications:
+Cephalexin 500 mg by mouth four times daily for seven more days. Continue lisinopril, atorvastatin and aspirin as before. Acetaminophen as needed for pain, as directed by ___.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary:
+Cellulitis of the right lower leg
+
+Discharge Condition:
+Mental Status: Alert and fully oriented.
+Activity Status: Walking independently.
+
+Discharge Instructions:
+You were treated for a skin and soft tissue infection of your leg. Take the antibiotic until finished and keep the leg raised when seated. Return for spreading redness, fever, worsening pain or any concern. Call ___ with questions.
+
+Followup Instructions:
+___

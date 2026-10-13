@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with known chronic kidney disease sent in by ___ clinic after several days of worsening leg swelling, poor appetite and tiredness. Labs drawn at ___ showed rising creatinine. He was admitted for monitoring and fluid management.
+
+Past Medical History:
+Atrial fibrillation on anticoagulation
+Hypertension
+Gout
+Remote knee surgery at ___
+
+Social History:
+___
+
+Family History:
+Father with heart disease
+
+Physical Exam:
+General:
+Tired but comfortable, no distress
+HEENT:
+Moist mucous membranes
+ABD:
+Soft, nontender, nondistended
+Neuro:
+Alert, moves all limbs
+
+Pertinent Results:
+ADMISSION LABS:
+Creatinine elevated above baseline, potassium mildly high, bicarbonate low, hemoglobin stable. Urinalysis with trace protein. Chest film without acute findings. Ultrasound showed small echogenic kidneys.
+
+Medications on Admission:
+Apixaban, amlodipine, allopurinol, metoprolol
+
+Discharge Medications:
+Continue apixaban and metoprolol. Furosemide started for swelling. Amlodipine dose reduced. Allopurinol stopped until kidney function is rechecked by outpatient team.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Chronic kidney disease with volume overload
+Secondary:
+Atrial fibrillation
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Awake and alert
+Activity Status:
+Walks independently with occasional rest
+
+Discharge Instructions:
+You were hospitalized for fluid buildup caused by poor kidney function. Weigh yourself each morning and call ___ if weight rises quickly. Limit salt and fluids, take medications as listed, and avoid anti-inflammatory pain medicines.
+
+Followup Instructions:
+___

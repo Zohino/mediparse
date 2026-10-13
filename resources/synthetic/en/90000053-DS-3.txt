@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and lightheadedness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man sent by his clinic at ___ after several days of racing, irregular heartbeat with fatigue and mild exertional breathlessness. Pulse at the visit was fast and irregularly irregular. He denied fainting or chest pain. He was referred to ___ for rate control and anticoagulation.
+REVIEW OF SYSTEMS:
+Positive for fatigue, seen at ___. Negative for fever, cough, or leg swelling.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with stroke at ___
+
+Physical Exam:
+General: Comfortable, no distress
+ABD: Soft, nontender
+EXTREMITIES: No edema
+SKIN: Warm and dry
+
+Pertinent Results:
+ECG showed an irregularly irregular narrow complex rhythm with no distinct P waves, rate 128. Troponin negative twice. TSH normal. Potassium 4.1, creatinine 0.9. Echocardiogram at ___ showed mildly dilated left atrium with preserved ejection fraction.
+
+Brief Hospital Course:
+He was started on oral metoprolol and diltiazem, and his heart rate settled to the 70s within a day. Given his stroke risk score, apixaban was begun after discussion of bleeding risk. Thyroid function and electrolytes were unremarkable. He ambulated without symptoms and was cleared by ___ for discharge.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg daily
+2. Apixaban 5 mg twice daily
+3. Metformin 500 mg twice daily
+4. Lisinopril 10 mg daily
+5. Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Supraventricular tachyarrhythmia with rapid ventricular response
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted with a fast, irregular heartbeat. Take your new heart rate medicine and blood thinner every day as directed. Report bleeding, black stools, fainting, or chest pain at once. Keep your appointment with ___ and have blood work checked at ___.
+
+Followup Instructions:
+___

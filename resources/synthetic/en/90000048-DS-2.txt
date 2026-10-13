@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Left leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old man who presented with three days of worsening redness, warmth and pain of the left lower leg. He noted fever and chills at home since ___. He was first seen at ___ and sent here for intravenous antibiotics.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Knee replacement in ___
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Vitals: T 100.1, HR 88, BP 132/78, RR 16, SpO2 97% RA
+Gen: Comfortable, no distress
+HEENT: Moist mucous membranes
+ABD: Soft, nontender, nondistended
+
+Pertinent Results:
+WBC 13.2 on admission, down to 8.9 by ___. Creatinine stable. Blood cultures showed no growth.
+IMPRESSION: Ultrasound of the left leg shows soft tissue swelling and no deep vein thrombosis.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Doxycycline 100 mg by mouth twice daily for seven more days
+2. Lisinopril 10 mg daily
+3. Atorvastatin 20 mg nightly
+4. Acetaminophen as needed for pain
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Cellulitis of the left lower leg
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a skin infection of your leg with antibiotics. Take all your medicines as prescribed. Keep the leg elevated and watch for spreading redness, fever or worsening pain. Call ___ or return to the hospital if these occur.
+
+Followup Instructions:
+___

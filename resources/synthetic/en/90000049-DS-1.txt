@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough, fever, shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+He presented to ___ with several days of productive cough, fever and dyspnea, and imaging showed pneumonia. He was also in atrial fibrillation with rapid rate. Transferred from ___ for further care.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Long smoking history
+
+Past Surgical History:
+Appendectomy ___
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+Vitals: HR 98 BP 126/74 SpO2 93% RA
+Gen: Comfortable
+Neck: Supple
+Abdomen: Soft
+Ext: No edema
+Neuro: Nonfocal
+PULSES: Palpable
+
+Pertinent Results:
+WBC 14.2, lactate 1.8. ABG: pH 7.34, pCO2 56, pO2 68, bicarbonate 30. Troponin negative x2. Films reviewed with ___.
+IMPRESSION: Right lower lobe consolidation with hyperinflated lungs and flattened diaphragms.
+
+Medications on Admission:
+Tiotropium daily. Albuterol inhaler as needed. Aspirin 81 mg.
+
+Discharge Medications:
+Metoprolol tartrate 25 mg twice daily. Apixaban 5 mg twice daily. Levofloxacin 750 mg daily for five days. Tiotropium daily. Albuterol as needed.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Pneumonia
+Atrial fibrillation
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a lung infection and an irregular heart rhythm. Take all medications as prescribed, including the antibiotic. Return to ___ for fever, worsening breathlessness or palpitations.
+
+Followup Instructions:
+___

@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Left leg redness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman sent from ___ with left leg redness, warmth and fever for three days.
+
+Past Medical History:
+Diabetes mellitus type 2
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+Gen:
+Comfortable, afebrile
+Abdomen:
+Soft, nontender
+EXTREMITIES:
+Left shin erythema, improving
+
+Pertinent Results:
+Mild leukocytosis on admission, normalized by discharge. Blood cultures showed no growth.
+DISCHARGE LABS:
+Creatinine at baseline
+
+Brief Hospital Course:
+Treated for cellulitis with IV antibiotics, then oral. Known CKD monitored; kidney function stayed stable. Wound care reviewed with ___.
+
+Medications on Admission:
+Lisinopril, metformin
+
+Discharge Medications:
+Cephalexin four times daily for five days. Continue lisinopril and metformin.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Cellulitis of left leg
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+Elevate the leg, finish antibiotics, and return for fever or spreading redness.
+
+Followup Instructions:
+___

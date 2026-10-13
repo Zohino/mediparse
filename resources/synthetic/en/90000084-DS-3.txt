@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with long-standing hypertension who presented after two weeks of worsening ankle swelling and tiredness. She was seen at ___ by her primary physician, who sent her to the emergency department. She reported no chest pain and no fever since ___.
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Father with coronary disease.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Neck: Jugular venous distension noted.
+CARDIAC: Regular rhythm, soft systolic murmur.
+Ext: Pitting edema to the knees bilaterally, warm, well perfused.
+
+Pertinent Results:
+Admission labs showed mildly elevated BNP and normal troponin. Creatinine was stable. Chest film at ___ revealed mild vascular congestion without focal opacity. Echocardiogram reported reduced ejection fraction with mild mitral regurgitation. Potassium was repleted before discharge.
+
+Medications on Admission:
+Lisinopril daily
+Amlodipine daily
+Aspirin ___
+
+Discharge Medications:
+1. Furosemide 40 mg by mouth daily
+2. Lisinopril 10 mg by mouth daily
+3. Metoprolol succinate 25 mg daily
+4. Aspirin 81 mg daily
+5. Potassium chloride ___ as directed
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute heart failure with reduced ejection fraction
+Hypertension
+Hypokalemia
+
+Discharge Condition:
+Mental Status: Alert and oriented, able to follow commands.
+Level of Consciousness: Awake and interactive.
+Activity Status: Walks independently with steady gait.
+
+Discharge Instructions:
+You were hospitalized for fluid buildup caused by a weak heart. Weigh yourself every morning and call ___ if you gain more than three pounds in a day. Limit salt intake, take medicines as prescribed, and keep your appointment at ___.
+
+Followup Instructions:
+___

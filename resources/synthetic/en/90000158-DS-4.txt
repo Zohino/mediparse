@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+She presented to ___ with three days of worsening right lower leg redness, warmth and swelling after a minor scrape sustained while gardening. She reported chills and poor appetite. Her primary physician, Dr. ___, advised urgent evaluation. She was seen at ___ and sent to the emergency department for intravenous antibiotics.
+REVIEW OF SYSTEMS:
+Positive for chills and fatigue. Negative for chest pain, cough, or dysuria.
+
+Past Medical History:
+Diabetes mellitus
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General: Alert, comfortable, mildly febrile.
+Neck: Supple.
+CARDIAC: Regular rate and rhythm, no murmur.
+ABD: Soft, nontender, nondistended.
+Neuro: Nonfocal, answers appropriately.
+
+Pertinent Results:
+Admission labs showed an elevated white count and glucose of 245. Blood cultures drawn at ___ showed no growth after two days. Ultrasound performed on ___ showed no deep vein thrombosis in the right leg. Hemoglobin A1c was elevated. Creatinine was normal.
+IMPRESSION:
+Soft tissue swelling consistent with cellulitis, no drainable abscess.
+
+Brief Hospital Course:
+She was admitted and started on intravenous cefazolin. The margin of erythema was marked and monitored daily. She was evaluated by Dr. ___ for possible abscess drainage, which was not needed. Her glucose was managed with sliding scale insulin. Blood pressure remained stable on home medications. Redness and pain improved steadily, and by ___ she was afebrile and tolerating oral cephalexin. Labs were rechecked before discharge. She walked independently and was cleared to go home.
+
+Medications on Admission:
+Metformin 500 mg twice daily. Lisinopril 10 mg daily. Aspirin 81 mg daily.
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth four times daily for seven days.
+2. Metformin 500 mg by mouth twice daily.
+3. Lisinopril 10 mg by mouth daily.
+4. Acetaminophen 650 mg every six hours as needed for pain.
+Supply dispensed by ___ pharmacy.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Cellulitis of the right lower leg
+Diabetes mellitus
+
+Discharge Condition:
+Good
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+Take cephalexin until the course is finished. Keep the leg elevated when sitting and wash the area gently each day. Return for fever, spreading redness, severe pain, or pus. Call Dr. ___ with questions, or call ___ if you have trouble arranging your appointment.
+
+Followup Instructions:
+___

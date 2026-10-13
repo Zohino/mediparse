@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fatigue and poor appetite
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with long-standing medical problems, sent from ___ clinic after several days of weakness, nausea and reduced oral intake. Labs there were abnormal, so he was referred for admission.
+
+Past Medical History:
+Chronic kidney disease
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Gen: Tired, no distress
+HEENT: Dry mucous membranes
+Lungs: Clear bilaterally
+Ext: Trace edema
+SKIN: Warm, intact
+PULSES: 2+ and symmetric
+
+Pertinent Results:
+Admission labs showed elevated glucose and creatinine above his baseline, with mild acidosis. Creatinine improved with fluids. Urinalysis was unremarkable.
+IMAGING: Chest film without acute findings.
+
+Brief Hospital Course:
+He was given intravenous fluids and insulin, and his glucose and acidosis resolved. He was evaluated by ___ and the team on ___. He tolerated meals, walked independently, and was judged stable for discharge home.
+
+Medications on Admission:
+Lisinopril, atorvastatin, amlodipine daily
+
+Discharge Medications:
+1. Insulin glargine at bedtime as directed
+2. Atorvastatin once daily
+3. Amlodipine once daily
+4. Hold lisinopril until follow-up labs are reviewed
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetic ketoacidosis
+Diabetes mellitus
+
+Discharge Condition:
+Mental Status: Alert and oriented
+Level of Consciousness: Awake
+Activity Status: Walks without assistance
+
+Discharge Instructions:
+You were admitted with weakness and high blood sugar. Check your glucose daily, take insulin as prescribed, and follow up with Dr. ___ at ___ within one week. Call ___ for vomiting or confusion.

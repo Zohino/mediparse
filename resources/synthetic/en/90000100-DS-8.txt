@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough, fever and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with several days of productive cough, fever and shortness of breath, sent in by his primary care physician at ___ after an outpatient chest film raised concern. He was seen at ___ on ___ and found hypoxic with a fever, so he was admitted for further evaluation and treatment.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+Gen: Tired, mildly dyspneic, in no distress.
+HEENT: Dry mucous membranes, no thrush.
+ABD: Soft, nontender.
+Ext: Warm, no edema.
+
+Pertinent Results:
+___: WBC 14.2, hemoglobin 13.1, creatinine 0.9. Chest radiograph showed right lower lobe consolidation. Blood cultures no growth at two days. Sputum culture grew normal oral flora. Influenza and COVID swabs negative. Lactate 1.4 on arrival.
+
+Brief Hospital Course:
+He was diagnosed with community acquired pneumonia and treated with ceftriaxone and azithromycin, then switched to oral antibiotics once afebrile. Oxygen was weaned to room air by ___. He ate well and walked with assistance. Seen by ___ for mobility.
+TRANSITIONAL ISSUES:
+Repeat chest film in six weeks at ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Amoxicillin-clavulanate 875 mg twice daily for five more days, acetaminophen as needed for fever, guaifenesin as needed for cough. Continue lisinopril and atorvastatin as before. Pharmacy ___.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Pneumonia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated here for a lung infection. Take your antibiotic until finished. Rest, drink fluids, and call ___ for fever, worsening breathing, or chest pain. Return to the emergency department if symptoms worsen.
+
+Followup Instructions:
+___

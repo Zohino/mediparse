@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Fever and cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient presented with five days of fever, productive cough and pleuritic chest pain after being treated at ___ for a presumed viral illness. She was evaluated by ___ on ___ and sent to the emergency department, where chest imaging showed a right lower lobe consolidation consistent with pneumonia. She was hypoxic and admitted.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Prior care at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+HEENT: Moist mucous membranes
+Neck: Supple, no lymphadenopathy
+ABD: Soft, nontender, nondistended
+SKIN: Warm, no rash
+Neuro: Alert, oriented, nonfocal
+
+Pertinent Results:
+FINDINGS:
+Chest radiograph showed right lower lobe airspace opacity without effusion. White count was elevated on admission and normalized by discharge. Blood cultures showed no growth. Creatinine remained at baseline and electrolytes were unremarkable. Repeat imaging reviewed with the radiologist at ___ showed early improvement of the opacity, with no new findings.
+
+Brief Hospital Course:
+She was started on intravenous antibiotics and supplemental oxygen, which was weaned to room air within three days. Fever resolved and cough improved. Because of her allergy, a non-penicillin regimen was chosen after discussion with ___. She was seen by ___ for mobility and ambulated safely, tolerated diet, and was transitioned to oral antibiotics to complete the course at home.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Levofloxacin 750 mg by mouth daily for four more days, supplied by ___
+
+Discharge Disposition:
+Home with ___
+
+Discharge Diagnosis:
+Acute hypoxic respiratory failure
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Followup Instructions:
+___

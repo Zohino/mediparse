@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension who presented to ___ with three days of worsening redness, warmth and swelling of the right lower leg after a minor abrasion sustained while gardening. He reported subjective fevers and chills. He was seen by his primary physician at ___ and sent to the emergency department, where he received intravenous antibiotics and was admitted for further management.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Father with hypertension, died in ___
+
+Physical Exam:
+General: Well appearing, in no distress.
+HEENT: Normocephalic, moist mucous membranes.
+Lungs: Clear bilaterally.
+ABD: Soft, nontender, nondistended.
+EXTREMITIES: Right shin erythema with warmth and mild edema, margins markedly improved.
+Neuro: Alert, grossly intact, nonfocal.
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 13.2, hemoglobin 14.1, platelets 245, sodium 139, potassium 4.2, creatinine 0.9, CRP 78. Blood cultures showed no growth after two days. Imaging performed at ___ with ultrasound of the right leg showed subcutaneous edema without abscess or deep vein thrombosis. Repeat labs before discharge showed WBC 8.1 and creatinine 0.8.
+
+Brief Hospital Course:
+He was admitted with cellulitis of the right lower leg and treated with intravenous cefazolin, with the borders of erythema marked and followed daily. He was evaluated by Dr. ___ and remained afebrile. On ___ the swelling and pain had clearly improved, and he tolerated oral antibiotics. His blood pressure remained stable on home medications. He will follow up with ___ after discharge.
+
+Medications on Admission:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly, filled at ___ pharmacy
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth four times daily for five more days
+2. Acetaminophen 650 mg by mouth every six hours as needed for pain
+3. Lisinopril 10 mg by mouth daily
+4. Atorvastatin 20 mg by mouth nightly
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Cellulitis of the right lower leg
+Hypertension
+
+Discharge Condition:
+Stable and improved.
+Level of Consciousness: Alert and oriented.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with a skin infection of your right leg and treated with antibiotics. Finish the full course of cephalexin. Elevate the leg when sitting and keep the skin clean and moisturized. Call ___ if the redness spreads, pain worsens or you develop fever. Return on ___ for a wound check or sooner if symptoms worsen.
+
+Followup Instructions:
+___

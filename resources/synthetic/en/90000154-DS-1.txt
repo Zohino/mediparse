@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with two days of epigastric pain and vomiting, sent by ___ clinic for evaluation.
+
+Past Medical History:
+Hypertension
+Gastroesophageal reflux
+
+Social History:
+___
+
+Physical Exam:
+Gen: Comfortable, no distress
+HEENT: Moist mucous membranes
+PULM: Clear bilaterally
+Ext: Warm, no edema
+SKIN: Intact
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Lipase elevated on arrival. Liver enzymes mildly raised.
+IMAGING:
+Ultrasound showed gallstones without duct dilation.
+
+Brief Hospital Course:
+Treated for gallstone pancreatitis with fluids and pain control. Diet advanced as tolerated. Surgery team followed at ___ and arranged outpatient surgery near ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+
+Discharge Medications:
+Lisinopril 10 mg daily. Acetaminophen as needed for pain. Omeprazole 20 mg daily.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Gallstone pancreatitis
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with pancreatitis from gallstones. Eat small low-fat meals, take medicines as directed, and call ___ for fever or worsening pain.
+
+Followup Instructions:
+___

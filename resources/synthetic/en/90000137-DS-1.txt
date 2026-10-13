@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old man with known atrial fibrillation who presented after three days of racing heartbeat, worsening breathlessness and fatigue. He was transferred from ___ for further care. He had missed several doses of his rate control medication at home.
+
+Past Medical History:
+Chronic kidney disease
+Hypertension
+
+Past Surgical History:
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+Gen: Elderly man, tired but comfortable at rest
+HEENT: Moist mucous membranes
+Abdomen: Soft, nontender
+Ext: Mild ankle swelling
+Neuro: Alert, no focal deficits
+
+Pertinent Results:
+Admission labs on ___ showed mildly elevated creatinine at baseline. Chest film showed hyperinflated lungs without focal opacity. ECG showed irregular rhythm with rapid ventricular rate. Troponin was negative twice.
+
+Brief Hospital Course:
+He was given rate control and his rhythm slowed within a day. Inhaled bronchodilators eased his breathing. Kidney function stayed stable and medications were dosed with care. He was seen by the team from ___ and walked independently. He was discharged home on ___ in stable condition.
+
+Medications on Admission:
+Metoprolol, inhaled tiotropium, aspirin
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg daily
+2. Tiotropium inhaler once daily
+3. Apixaban 2.5 mg twice daily
+4. Aspirin stopped
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Atrial fibrillation with rapid ventricular response
+Chronic obstructive pulmonary disease
+Chronic kidney disease
+Secondary:
+Hypertension
+
+Discharge Condition:
+Stable
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized because of a fast irregular heartbeat. Take your medicines every day as directed and do not skip doses. Weigh yourself each morning. Return for chest pain, fainting or worse breathing. Please call ___ with questions.
+
+Followup Instructions:
+___

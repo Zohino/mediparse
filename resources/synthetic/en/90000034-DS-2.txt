@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old woman with two days of worsening right upper quadrant pain, nausea and fever, sent from ___ after ultrasound showed gallstones. She was admitted for acute cholecystitis and surgical evaluation.
+REVIEW OF SYSTEMS:
+Positive for nausea, negative for jaundice.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+
+Social History:
+___
+
+Physical Exam:
+Gen: Comfortable, afebrile.
+Abdomen: Soft, mild right upper tenderness, incisions clean.
+SKIN: No jaundice.
+Neuro: Alert, oriented.
+PULSES: Palpable throughout.
+
+Pertinent Results:
+ADMISSION LABS: White count elevated, bilirubin mildly raised, lipase normal.
+IMPRESSION: Ultrasound at ___ showed gallstones, wall thickening and pericholecystic fluid, without ductal dilation.
+
+Brief Hospital Course:
+She received intravenous antibiotics and fluids, then underwent uncomplicated laparoscopic cholecystectomy on ___ with Dr. ___. Pain resolved, diet was advanced, and she went home in stable condition.
+TRANSITIONAL ISSUES:
+Surgery clinic visit at ___ in two weeks; review final pathology.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Levothyroxine 50 mcg daily.
+
+Discharge Medications:
+Lisinopril 10 mg daily; levothyroxine 50 mcg daily; acetaminophen 650 mg every six hours as needed for pain; docusate 100 mg twice daily while taking opioids.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary: Acute cholecystitis with cholelithiasis
+
+Discharge Condition:
+Stable
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were treated for gallbladder inflammation with surgery. Keep incisions clean and dry, avoid heavy lifting, and call ___ or return for fever, vomiting, or worsening pain.
+
+Followup Instructions:
+___

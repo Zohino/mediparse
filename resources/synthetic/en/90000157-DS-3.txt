@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+History of Present Illness:
+Man with two days of worsening right upper quadrant pain after meals, with nausea. Referred by Dr. ___ and evaluated at ___ emergency department, where imaging suggested gallbladder inflammation.
+REVIEW OF SYSTEMS:
+Positive for nausea. No fever, chest pain or dyspnea.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia, followed at ___
+
+Past Surgical History:
+Appendectomy
+
+Social History:
+___
+
+Family History:
+Family history of diabetes in his mother. No history of gallbladder disease.
+
+Physical Exam:
+Mildly uncomfortable, tender over the right upper abdomen.
+DISCHARGE PHYSICAL EXAM:
+General: comfortable, afebrile
+HEENT: anicteric
+Neck: supple
+Lungs: clear bilaterally
+ABD: soft, mild incisional tenderness, incisions clean
+PULSES: palpable and symmetric
+
+Pertinent Results:
+Ultrasound at ___ showed gallstones, wall thickening and pericholecystic fluid. White count mildly elevated on admission and normal at discharge. Liver enzymes and bilirubin within normal limits.
+
+Brief Hospital Course:
+Admitted with acute cholecystitis, started on intravenous antibiotics and fluids. Underwent laparoscopic cholecystectomy with ___ surgery team, tolerated well. Diet advanced, pain controlled with oral medication, and he was discharged home in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg once daily
+2. Atorvastatin 20 mg every night
+3. Acetaminophen 650 mg every six hours as needed for pain
+4. Docusate 100 mg twice daily while taking opioids
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+
+Discharge Condition:
+Stable, ambulatory, tolerating a regular diet.
+Mental Status: alert and oriented
+
+Discharge Instructions:
+You were treated for gallbladder inflammation with surgery. Keep incisions clean and dry, avoid heavy lifting for several weeks. Call ___ for fever, worsening pain, vomiting or yellow skin, or return to ___ emergency department.
+
+Followup Instructions:
+___

@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman sent from ___ with three days of right leg redness, warmth and swelling, plus fever and chills.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Obesity
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals: T 100.1, HR 88, BP 128/74
+General: comfortable
+HEENT: normal
+Lungs: clear
+CARDIAC: regular
+Abdomen: soft
+Ext: right calf erythematous, warm
+Neuro: intact
+
+Pertinent Results:
+On ___ white count 13.2, creatinine 0.8. Blood cultures negative. Ultrasound of right leg showed no clot.
+
+Brief Hospital Course:
+Treated for cellulitis of the right leg with IV vancomycin, then oral doxycycline. Redness improved and fever resolved. Seen by ___ and cleared by ___ for home.
+
+Medications on Admission:
+Lisinopril
+Levothyroxine
+
+Discharge Medications:
+1. Doxycycline 100 mg twice daily for seven days
+2. Lisinopril daily
+3. Levothyroxine daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Cellulitis of right leg
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for a skin infection. Take antibiotics as prescribed, elevate your leg, and return for spreading redness, fever or pain. Call ___ with questions.
+
+Followup Instructions:
+___

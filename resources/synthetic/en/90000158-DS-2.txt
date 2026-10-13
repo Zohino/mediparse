@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman who presented to ___ with three days of cough, fever and shortness of breath. Her primary doctor, Dr. ___, sent her in after a phone visit. She reported poor appetite and fatigue. Symptoms began on ___ and worsened despite rest and fluids at home.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity
+
+Past Surgical History:
+Cholecystectomy
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Gen: Tired but comfortable, no distress
+Neck: Supple, no lymphadenopathy
+ABD: Soft, nontender, nondistended
+Ext: Warm, no edema
+
+Pertinent Results:
+ADMISSION LABS:
+White count mildly elevated, glucose high, creatinine at baseline, lactate normal.
+FINDINGS:
+Chest film showed patchy opacity at the right base. Repeat imaging showed no worsening. Urinalysis was unremarkable. Blood cultures showed no growth at two days.
+
+Brief Hospital Course:
+She was admitted for fever and cough. Pneumonia was suspected given the right basilar opacity, though the picture was not definitive. She was treated with azithromycin and doxycycline because of her allergy, and oxygen was weaned to room air. Blood sugars were managed with insulin. She was seen by ___ and cleared by ___ for discharge. Follow up was arranged with ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Insulin glargine nightly
+___ eye drops
+
+Discharge Medications:
+1. Doxycycline 100 mg twice daily for five more days
+2. Lisinopril 10 mg once daily
+3. Insulin glargine 20 units at bedtime
+4. Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Diabetes mellitus with hyperglycemia
+
+Discharge Condition:
+Mental Status: Alert and oriented
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with fever and cough. Take your antibiotic until finished and check your blood sugar every day. Return for worsening breathing, high fever or chest pain. Call ___ with questions, and bring this list to ___.
+
+Followup Instructions:
+___

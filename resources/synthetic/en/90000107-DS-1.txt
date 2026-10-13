@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old woman with long-standing kidney problems who came from ___ with three days of nausea, poor appetite, leg swelling and fatigue. She missed her last clinic visit at ___ and ran out of blood pressure medication. In the emergency department she was hypertensive and mildly volume overloaded, so she was admitted for diuresis.
+
+Past Medical History:
+Chronic kidney disease, stage 4, followed by nephrology at ___
+Hypertension
+Anemia of chronic disease
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Gen: Tired but comfortable, no distress
+HEENT: Moist mucous membranes
+Lungs: Fine crackles at both bases
+EXTREMITIES: Pitting edema to the knees
+SKIN: Warm, dry, no rash
+
+Pertinent Results:
+Labs drawn on ___ showed creatinine above her baseline, potassium mildly elevated, and hemoglobin low but stable. Chest x-ray showed mild vascular congestion.
+DISCHARGE LABS:
+Creatinine back near baseline, potassium normal, bicarbonate improved.
+
+Medications on Admission:
+Amlodipine 10 mg daily
+Sevelamer with meals
+Iron tablets daily
+
+Discharge Medications:
+Furosemide 40 mg twice daily
+Amlodipine 10 mg daily
+Sevelamer 800 mg with each meal
+Ferrous sulfate 325 mg daily
+Sodium bicarbonate 650 mg twice daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Chronic kidney disease with volume overload
+
+Discharge Condition:
+Mental Status: Alert and able to follow commands.
+Level of Consciousness: Awake and attentive.
+
+Discharge Instructions:
+You were hospitalized for fluid buildup caused by your kidney disease. We gave you medicine to remove the extra fluid and your swelling improved. Weigh yourself every morning and take all medications as directed. Limit salt and fluids. Please see Dr. ___ soon. Call ___ or return to ___ if you gain weight quickly, become short of breath, or pass very little urine.
+
+Followup Instructions:
+___

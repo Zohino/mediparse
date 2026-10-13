@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough, fever, shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with a long smoking history who presented to ___ with three days of productive cough, fever and palpitations. Dyspnea worsened since ___. In the emergency department she was hypoxic and found to be in atrial fibrillation with rapid ventricular rate.
+
+Past Medical History:
+Chronic obstructive pulmonary disease
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Cholecystectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+HEENT: Dry mucous membranes, no thrush.
+PULM: Diffuse wheezing, crackles at right base.
+Ext: Warm, no edema.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 14.2, hemoglobin 12.1, creatinine 0.9, lactate 1.8.
+IMPRESSION:
+Right lower lobe consolidation with hyperinflated lungs. No effusion or pneumothorax. ECG showed irregular narrow complex rhythm without ST changes.
+
+Brief Hospital Course:
+She was treated with azithromycin, nebulizers and a steroid taper. Rate control with metoprolol was achieved and anticoagulation started. Oxygen was weaned to room air by ___. She was discharged in stable condition after review with ___.
+TRANSITIONAL ISSUES:
+Repeat chest imaging in six weeks. Monitor heart rate and bleeding on anticoagulation.
+
+Medications on Admission:
+Albuterol inhaler, lisinopril, atorvastatin
+
+Discharge Medications:
+1. Apixaban 5 mg twice daily
+2. Metoprolol succinate 50 mg daily
+3. Prednisone taper
+4. Levofloxacin 750 mg daily for five days
+5. Albuterol inhaler as needed
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Pneumonia
+Chronic obstructive pulmonary disease exacerbation
+Atrial fibrillation with rapid ventricular rate
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with a lung infection and an irregular heartbeat. Take all medications as prescribed, use your inhalers, and stop smoking. Return for fever, chest pain, bleeding or worsening breathlessness. Keep your appointment with ___.
+
+Followup Instructions:
+___
