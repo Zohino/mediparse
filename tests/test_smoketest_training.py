@@ -104,5 +104,5 @@ def test_class_counts_patients_not_notes() -> None:
     """Pacient s více zprávami se počítá jednou."""
     with pytest.raises(InvalidInputError):
         ensure_patients_per_class(
-            [True, True, False, False], [1, 1, 2, 3], Diagnosis.AKI, FOLDS
+            [True, True, False, False], [1, 1, 2, 3], Diagnosis.PNEUMONIA, FOLDS
         )

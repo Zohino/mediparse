@@ -119,11 +119,11 @@ def test_single_class_is_rejected_before_scoring() -> None:
     """Skupina s jedinou třídou pravdy skončí InvalidInputError před výpočtem."""
     items = (
         *MIXED,
-        _prediction("c", Diagnosis.AKI, "n8", truth=True, score=1.0),
+        _prediction("c", Diagnosis.PNEUMONIA, "n8", truth=True, score=1.0),
     )
     use_case, scorer, sink = _use_case(items)
 
-    with pytest.raises(InvalidInputError, match="aki"):
+    with pytest.raises(InvalidInputError, match="pneumonia"):
         use_case.run()
 
     assert not scorer.calls

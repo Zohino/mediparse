@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.domain.labels import Diagnosis, LabelModel
+from mediparse.domain.labels import ACUTE_DIAGNOSIS, Diagnosis, LabelModel
 from mediparse.domain.note import subject_of
 from mediparse.domain.synthetic_patients import (
     PatientModel,
@@ -26,9 +26,9 @@ if TYPE_CHECKING:
 PREVALENCE = {
     Diagnosis.DIABETES: 0.27,
     Diagnosis.CKD: 0.18,
-    Diagnosis.HEART_FAILURE: 0.17,
+    Diagnosis.COPD: 0.17,
     Diagnosis.ATRIAL_FIBRILLATION: 0.17,
-    Diagnosis.AKI: 0.16,
+    Diagnosis.PNEUMONIA: 0.16,
 }
 CORPUS = 200
 LARGE = 40000
@@ -120,10 +120,28 @@ def test_patient_has_at_most_max_notes() -> None:
 
 
 def test_chronic_labels_are_shared_by_patient_notes() -> None:
-    """Chronické diagnózy platí pro všechny zprávy pacienta, AKI se může lišit."""
+    """Chronické diagnózy platí pro všechny zprávy pacienta, akutní se může lišit."""
     for patient_notes in _by_subject(_sample(LARGE, 1.0)).values():
         chronic = {frozenset(d for d in n.labels if d.chronic) for n in patient_notes}
         assert len(chronic) == 1
+
+
+def test_only_the_acute_diagnosis_differs_between_patient_notes() -> None:
+    """Zprávy pacienta se liší jen akutní diagnózou, která se losuje i u dalších zpráv."""
+    patients = list(_by_subject(_sample(LARGE, 1.0)).values())
+    differences = {
+        diagnosis
+        for patient_notes in patients
+        for note in patient_notes
+        for diagnosis in note.labels ^ patient_notes[0].labels
+    }
+
+    assert differences == {ACUTE_DIAGNOSIS}
+    assert any(
+        ACUTE_DIAGNOSIS in note.labels
+        for patient_notes in patients
+        for note in patient_notes[1:]
+    )
 
 
 def test_note_counts_follow_the_model() -> None:

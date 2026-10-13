@@ -134,7 +134,7 @@ def test_diagnosis_without_positives_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
     """Diagnóza bez pozitivních pacientů krok odmítne a nic nevznikne."""
-    notes, config = _inputs(tmp_path, diagnosis="aki")
+    notes, config = _inputs(tmp_path, diagnosis="pneumonia")
     model = tmp_path / "model.skops"
     predictions = tmp_path / "predictions.parquet"
     manifest = tmp_path / "run_manifest.json"
@@ -152,7 +152,7 @@ def test_diagnosis_without_positives_is_refused(
     assert not model.exists()
     assert not predictions.exists()
     assert not manifest.exists()
-    assert "aki" in caplog.text
+    assert "pneumonia" in caplog.text
 
 
 def test_invalid_config_is_refused(tmp_path: Path) -> None:

@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Annotated, Final, Self
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
 from mediparse.domain.labels import (
-    Diagnosis,
+    ACUTE_DIAGNOSIS,
     LabelModel,
     LabelSet,
     Probability,
@@ -132,7 +132,7 @@ def _patient_notes(
     first = rng.choices(cells, weights=[joint[cell] for cell in cells])[0]
     chronic = frozenset(d for d in first if d.chronic)
     later = [
-        chronic | {Diagnosis.AKI} if rng.random() < acute[chronic] else chronic
+        chronic | {ACUTE_DIAGNOSIS} if rng.random() < acute[chronic] else chronic
         for _ in range(count - 1)
     ]
     return [

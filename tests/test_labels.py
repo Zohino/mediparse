@@ -1,4 +1,4 @@
-"""Labely diagnóz: schéma, společné rozdělení s maximální entropií a podmíněné AKI."""
+"""Labely diagnóz: schéma, společné rozdělení s maximální entropií a podmíněná akutní diagnóza."""
 
 from itertools import combinations
 from math import isclose, prod
@@ -7,6 +7,7 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.labels import (
+    ACUTE_DIAGNOSIS,
     Diagnosis,
     InfeasibleMarginalsError,
     IpfNotConvergedError,
@@ -20,18 +21,31 @@ from mediparse.domain.labels import (
 PREVALENCE = {
     Diagnosis.DIABETES: 0.30,
     Diagnosis.CKD: 0.20,
-    Diagnosis.HEART_FAILURE: 0.15,
+    Diagnosis.COPD: 0.15,
     Diagnosis.ATRIAL_FIBRILLATION: 0.10,
-    Diagnosis.AKI: 0.05,
+    Diagnosis.PNEUMONIA: 0.05,
 }
 CELLS = 2 ** len(Diagnosis)
 CHRONIC_STATES = 2 ** sum(d.chronic for d in Diagnosis)
 CORRELATED = {
     (Diagnosis.DIABETES, Diagnosis.CKD): 0.10,
-    (Diagnosis.CKD, Diagnosis.HEART_FAILURE): 0.06,
-    (Diagnosis.HEART_FAILURE, Diagnosis.ATRIAL_FIBRILLATION): 0.05,
-    (Diagnosis.CKD, Diagnosis.AKI): 0.03,
+    (Diagnosis.CKD, Diagnosis.COPD): 0.06,
+    (Diagnosis.COPD, Diagnosis.ATRIAL_FIBRILLATION): 0.05,
+    (Diagnosis.CKD, Diagnosis.PNEUMONIA): 0.03,
 }
+
+
+def test_five_follow_notebook_8_with_one_acute_diagnosis() -> None:
+    """Pětice sešitu 8 v pořadí kandidátů; jedinou akutní diagnózou je pneumonie."""
+    assert [d.value for d in Diagnosis] == [
+        "diabetes",
+        "copd",
+        "ckd",
+        "pneumonia",
+        "atrial_fibrillation",
+    ]
+    assert [d for d in Diagnosis if not d.chronic] == [ACUTE_DIAGNOSIS]
+    assert ACUTE_DIAGNOSIS is Diagnosis.PNEUMONIA
 
 
 def _model(
@@ -104,12 +118,12 @@ def test_ipf_without_enough_passes_fails() -> None:
 
 
 def test_acute_given_chronic_is_a_probability_per_chronic_state() -> None:
-    """Pro každou kombinaci chronických diagnóz vznikne pravděpodobnost AKI."""
+    """Pro každou kombinaci chronických diagnóz vznikne pravděpodobnost akutní diagnózy."""
     conditional = acute_given_chronic(max_entropy_joint(_model(CORRELATED)))
 
     assert len(conditional) == CHRONIC_STATES
     assert all(0.0 <= p <= 1.0 for p in conditional.values())
-    assert all(Diagnosis.AKI not in chronic for chronic in conditional)
+    assert all(Diagnosis.PNEUMONIA not in chronic for chronic in conditional)
 
 
 def test_inconsistent_conditionals_are_rejected() -> None:
@@ -124,7 +138,7 @@ def test_inconsistent_conditionals_are_rejected() -> None:
 def test_missing_diagnosis_is_rejected() -> None:
     """Config bez některé z pěti diagnóz neprojde."""
     valid = _model().model_dump()
-    del valid["prevalence"][Diagnosis.AKI]
+    del valid["prevalence"][Diagnosis.PNEUMONIA]
 
     with pytest.raises(ValidationError, match="pět diagnóz"):
         LabelModel.model_validate(valid)
@@ -140,8 +154,7 @@ def _uniform_model(identical: tuple[tuple[Diagnosis, Diagnosis], ...]) -> LabelM
                 second: 1.0
                 if first is second or frozenset((first, second)) in linked
                 else 0.5
-                if {first, second}
-                == {Diagnosis.HEART_FAILURE, Diagnosis.ATRIAL_FIBRILLATION}
+                if {first, second} == {Diagnosis.COPD, Diagnosis.ATRIAL_FIBRILLATION}
                 else share
                 for second in Diagnosis
             }
@@ -169,7 +182,7 @@ def test_contradictory_marginals_raise_domain_error() -> None:
     """A=B, B=C a nezávislé A, C nemá společné rozdělení; chyba říká, že si marginály odporují."""
     model = _uniform_model((
         (Diagnosis.DIABETES, Diagnosis.CKD),
-        (Diagnosis.CKD, Diagnosis.HEART_FAILURE),
+        (Diagnosis.CKD, Diagnosis.COPD),
     ))
 
     with pytest.raises(InfeasibleMarginalsError, match="odporují") as raised:
@@ -190,7 +203,7 @@ def test_prevalence_within_relative_tolerance_is_no_outlier() -> None:
     margin = 0.95 * model.prevalence_tolerance
     shares = _shares(
         diabetes=PREVALENCE[Diagnosis.DIABETES] * (1 + margin),
-        aki=PREVALENCE[Diagnosis.AKI] * (1 - margin),
+        pneumonia=PREVALENCE[Diagnosis.PNEUMONIA] * (1 - margin),
     )
 
     assert prevalence_outliers(shares, model) == ()
@@ -199,18 +212,20 @@ def test_prevalence_within_relative_tolerance_is_no_outlier() -> None:
 def test_prevalence_tolerance_scales_with_target() -> None:
     """Stejná absolutní odchylka je u vzácné diagnózy mimo, u časté uvnitř."""
     model = _model()
-    rare, common = PREVALENCE[Diagnosis.AKI], PREVALENCE[Diagnosis.DIABETES]
+    rare, common = PREVALENCE[Diagnosis.PNEUMONIA], PREVALENCE[Diagnosis.DIABETES]
     deviation = model.prevalence_tolerance * (rare + common) / 2
-    shares = _shares(diabetes=common + deviation, aki=rare + deviation)
+    shares = _shares(diabetes=common + deviation, pneumonia=rare + deviation)
 
-    assert prevalence_outliers(shares, model) == (Diagnosis.AKI,)
+    assert prevalence_outliers(shares, model) == (Diagnosis.PNEUMONIA,)
 
 
 def test_zero_target_with_nonzero_share_is_outlier() -> None:
     """Nulový cíl toleranci nemá: každý nenulový podíl je mimo, nulový uvnitř."""
     model = _model().model_copy(
-        update={"prevalence": PREVALENCE | {Diagnosis.AKI: 0.0}}
+        update={"prevalence": PREVALENCE | {Diagnosis.PNEUMONIA: 0.0}}
     )
 
-    assert prevalence_outliers(_shares(aki=0.001), model) == (Diagnosis.AKI,)
-    assert prevalence_outliers(_shares(aki=0.0), model) == ()
+    assert prevalence_outliers(_shares(pneumonia=0.001), model) == (
+        Diagnosis.PNEUMONIA,
+    )
+    assert prevalence_outliers(_shares(pneumonia=0.0), model) == ()

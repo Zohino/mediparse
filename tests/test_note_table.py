@@ -45,9 +45,9 @@ def test_writes_rows_in_fixed_schema(tmp_path: Path) -> None:
         "text": TEXT,
         "diabetes": False,
         "ckd": True,
-        "heart_failure": False,
+        "copd": False,
         "atrial_fibrillation": False,
-        "aki": False,
+        "pneumonia": False,
     }
     assert table.column("note_id").to_pylist() == ["90000001-DS-1", "90000002-DS-1"]
 
@@ -73,7 +73,7 @@ def test_read_returns_written_rows(tmp_path: Path) -> None:
             90000001,
             "en",
             TEXT,
-            frozenset({Diagnosis.CKD, Diagnosis.AKI}),
+            frozenset({Diagnosis.CKD, Diagnosis.PNEUMONIA}),
         ),
         InputNote("90000002-DS-1", 90000002, "en", "b", frozenset()),
     )

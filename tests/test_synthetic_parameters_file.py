@@ -92,8 +92,13 @@ def test_apply_replaces_three_blocks_and_notes_and_keeps_the_rest(
     config = load_sampler_config(path)
     assert config.patients.notes == NEW_NOTES
     assert config.labels.prevalence[Diagnosis.CKD] == pytest.approx(0.25)
-    assert config.mentions.diagnoses[Diagnosis.AKI].given_positive == pytest.approx(0.9)
-    assert config.mentions.diagnoses[Diagnosis.AKI].keywords == ("aki phrase", "AKI")
+    assert config.mentions.diagnoses[
+        Diagnosis.PNEUMONIA
+    ].given_positive == pytest.approx(0.9)
+    assert config.mentions.diagnoses[Diagnosis.PNEUMONIA].keywords == (
+        "pneumonia phrase",
+        "PNEUMONIA",
+    )
     assert config.seed == sampler_config.seed
     assert config.structure == sampler_config.structure
     assert config.labels.ipf_max_passes == sampler_config.labels.ipf_max_passes
@@ -121,7 +126,7 @@ def test_ipf_not_converging_is_refused_and_config_untouched(tmp_path: Path) -> N
     before = path.read_bytes()
     payload = export_payload(tuple(Diagnosis), prevalence=0.2)
     conditional = payload["conditional"]
-    for first, second in (("diabetes", "ckd"), ("ckd", "heart_failure")):
+    for first, second in (("diabetes", "ckd"), ("ckd", "copd")):
         conditional[first][second] = 1.0
         conditional[second][first] = 1.0
 

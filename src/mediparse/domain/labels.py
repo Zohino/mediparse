@@ -22,15 +22,18 @@ class Diagnosis(StrEnum):
     """Diagnóza, jejíž přítomnost nese jeden binární label."""
 
     DIABETES = "diabetes"
+    COPD = "copd"
     CKD = "ckd"
-    HEART_FAILURE = "heart_failure"
+    PNEUMONIA = "pneumonia"
     ATRIAL_FIBRILLATION = "atrial_fibrillation"
-    AKI = "aki"
 
     @property
     def chronic(self) -> bool:
         """Chronická diagnóza platí pro všechny zprávy pacienta, akutní jen pro jednu."""
-        return self is not Diagnosis.AKI
+        return self is not ACUTE_DIAGNOSIS
+
+
+ACUTE_DIAGNOSIS: Final = Diagnosis.PNEUMONIA
 
 
 class LabelModel(BaseModel):
@@ -152,17 +155,17 @@ def max_entropy_joint(model: LabelModel) -> dict[LabelSet, float]:
 
 
 def acute_given_chronic(joint: Mapping[LabelSet, float]) -> dict[LabelSet, float]:
-    """Pravděpodobnost AKI podmíněná chronickými diagnózami zprávy.
+    """Pravděpodobnost akutní diagnózy podmíněná chronickými diagnózami zprávy.
 
     Returns:
-        P(AKI | chronické diagnózy) pro každou kombinaci chronických diagnóz.
+        P(akutní | chronické diagnózy) pro každou kombinaci chronických diagnóz.
     """
     totals: dict[LabelSet, float] = {}
     acute: dict[LabelSet, float] = {}
     for cell, probability in joint.items():
         chronic = frozenset(d for d in cell if d.chronic)
         totals[chronic] = totals.get(chronic, 0.0) + probability
-        if Diagnosis.AKI in cell:
+        if ACUTE_DIAGNOSIS in cell:
             acute[chronic] = acute.get(chronic, 0.0) + probability
     return {
         chronic: acute.get(chronic, 0.0) / total for chronic, total in totals.items()
