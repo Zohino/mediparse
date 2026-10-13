@@ -32,7 +32,7 @@ PREVALENCE = {
 }
 CORPUS = 200
 LARGE = 40000
-TOLERANCE = 0.02
+TOLERANCE = 0.12
 FIRST_SUBJECT = 90000001
 SINGLE_NOTE = 0.587
 MAX_NOTES = 8
@@ -97,7 +97,7 @@ def test_corpus_size_and_prevalences_hold() -> None:
     assert len(notes) == CORPUS
     for diagnosis, prevalence in PREVALENCE.items():
         share = sum(diagnosis in note.labels for note in notes) / len(notes)
-        assert abs(share - prevalence) <= TOLERANCE
+        assert abs(share - prevalence) <= TOLERANCE * prevalence
 
 
 def test_note_ids_follow_mimic_scheme_per_patient() -> None:

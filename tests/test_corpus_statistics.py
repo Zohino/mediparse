@@ -102,6 +102,19 @@ def test_prevalence_off_target_is_reported(sampler_config: SamplerConfig) -> Non
     assert any("Prevalence ckd" in reason for reason in violations), violations
 
 
+def test_prevalence_tolerance_is_reported_in_percent(
+    sampler_config: SamplerConfig,
+) -> None:
+    """Hlášení prevalence uvádí relativní toleranci v procentech jako hustota značek."""
+    statistics = _on_target(sampler_config)
+    prevalence = dict(statistics.prevalence) | {Diagnosis.CKD: 0.99}
+    tolerance = f"± {sampler_config.labels.prevalence_tolerance:.0%}."
+
+    violations = _violations(replace(statistics, prevalence=prevalence), sampler_config)
+
+    assert any(reason.endswith(tolerance) for reason in violations), violations
+
+
 def test_corpus_without_notes_violates_nothing(
     planned_note: PlannedNote, sampler_config: SamplerConfig
 ) -> None:
