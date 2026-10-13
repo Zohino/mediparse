@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with several days of worsening fatigue, leg swelling and palpitations. He was seen at ___ by his nephrologist and referred for admission for further evaluation and management.
+
+Past Medical History:
+Chronic kidney disease
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Gen: Comfortable, no distress.
+HEENT: Unremarkable.
+CARDIAC: Irregularly irregular, no murmur.
+EXTREMITIES: Trace edema.
+Neuro: Nonfocal.
+
+Pertinent Results:
+Creatinine stable near baseline, potassium within normal limits, hemoglobin mildly low. ECG showed irregular rhythm without discernible P waves, ventricular rate controlled by discharge.
+IMPRESSION:
+Chest radiograph without acute cardiopulmonary process.
+
+Brief Hospital Course:
+Telemetry showed new atrial fibrillation with rapid rate, controlled with metoprolol. Anticoagulation was started after discussion with ___. Creatinine remained near baseline and fluids were adjusted. He was seen by cardiology at ___ and felt well enough for discharge home with outpatient follow up planned.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily; apixaban 2.5 mg twice daily; sevelamer with meals; hold lisinopril until seen by ___.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Chronic kidney disease
+Secondary:
+Hypertension
+
+Discharge Condition:
+Stable
+Mental Status: Alert and oriented.
+Level of Consciousness: Awake and interactive.
+Activity Status: Walks independently.
+
+Discharge Instructions:
+You were admitted for a fast heartbeat. Take medicines as prescribed, avoid NSAIDs, and call ___ if you notice swelling, dizziness or fainting.
+
+Followup Instructions:
+___

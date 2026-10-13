@@ -1,0 +1,59 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: UROLOGY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right flank pain and fever
+
+Major Surgical or Invasive Procedure:
+Cystoscopy with right ureteral stent placement
+
+History of Present Illness:
+___ year old woman with hypertension presented with three days of right flank pain and fever, found to have an obstructing ureteral stone with infection, referred from ___ clinic.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Physical Exam:
+General:
+Alert, comfortable, no acute distress
+PULM:
+Clear to auscultation bilaterally
+Ext:
+Warm, well perfused, no edema
+
+Pertinent Results:
+Urinalysis showed pyuria and bacteria. Urine culture grew Escherichia coli. CT of the abdomen at ___ showed a four millimeter right ureteral stone with mild hydronephrosis. Creatinine was normal throughout.
+
+Brief Hospital Course:
+She received intravenous ceftriaxone and fluids with defervescence within two days. Urology (___) placed a ureteral stent without complication. Antibiotics were changed to oral therapy per culture sensitivities. She tolerated diet well and was discharged with outpatient stone follow up.
+
+Discharge Medications:
+Ciprofloxacin 500 mg twice daily for seven days. Acetaminophen as needed for pain. Tamsulosin 0.4 mg nightly.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Obstructing right ureteral stone
+Urinary tract infection with sepsis
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+Drink plenty of fluids and finish all antibiotics. Return for fever, severe flank pain, or vomiting. Call ___ urgently with questions.
+
+Followup Instructions:
+___

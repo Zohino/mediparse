@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old woman with known gallstones who presented to ___ with two days of worsening right upper quadrant pain, nausea and vomiting. Pain radiated to the back and was not relieved by antacids. She denied fever at home but felt chills. Ultrasound at ___ showed gallstones and wall thickening, and she was transferred here for surgical evaluation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Hypothyroidism
+Cesarean section, ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones, treated at ___
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Gen: Mildly uncomfortable, alert
+HEENT: Anicteric, moist mucosa
+PULM: Clear bilaterally
+CARDIAC: Regular rate and rhythm
+ABD: Soft, tender right upper quadrant, positive Murphy sign
+Ext: Warm, no edema
+
+Pertinent Results:
+___: WBC 14.2, ALT 78, AST 64, total bilirubin 1.1, lipase 30. RUQ ultrasound: multiple gallstones, gallbladder wall thickening of 5 mm, pericholecystic fluid, no biliary dilation. CT of the abdomen confirmed these findings without abscess or perforation. ___: Pathology showed acute and chronic cholecystitis with cholelithiasis, no malignancy. Discharge labs: WBC 8.1, creatinine 0.8, hemoglobin 12.4.
+
+Brief Hospital Course:
+She was evaluated by ___ in the emergency department, then admitted to the surgical service, kept NPO, and started on intravenous fluids and piperacillin-tazobactam for acute cholecystitis. Pain was controlled with acetaminophen and low dose opioids. On hospital day 2 she underwent an uncomplicated laparoscopic cholecystectomy by Dr. ___. She tolerated a regular diet afterward and her pain improved. Antibiotics were stopped after surgery. She was discharged home on hospital day 3.
+TRANSITIONAL ISSUES:
+- Follow up pathology results at ___ clinic
+- Resume home thyroid and blood pressure medications
+
+Medications on Admission:
+Levothyroxine 75 mcg daily, lisinopril 10 mg daily, atorvastatin 20 mg nightly, multivitamin daily.
+
+Discharge Medications:
+1. Acetaminophen 650 mg every 6 hours as needed for pain
+2. Oxycodone 5 mg every 6 hours as needed for severe pain, three day supply
+3. Docusate 100 mg twice daily while taking oxycodone
+4. Levothyroxine 75 mcg daily
+5. Lisinopril 10 mg daily
+6. Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were admitted with a gallbladder infection and had your gallbladder removed laparoscopically. You may shower and remove dressings in two days. Do not lift more than ___ pounds for six weeks. Call ___ or return for fever, vomiting, yellow skin, worsening belly pain, or wound redness. Take pain medication only as needed.
+
+Followup Instructions:
+___

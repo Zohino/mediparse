@@ -1,0 +1,64 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever and cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with several days of fever, productive cough and fatigue, seen at ___ clinic and sent to the emergency department of ___ for evaluation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Gen: Tired but comfortable, speaking full sentences.
+HEENT: Moist mucous membranes, clear oropharynx.
+
+Pertinent Results:
+Mild leukocytosis with normal chemistries on admission labs.
+IMPRESSION:
+Clear lungs on chest radiograph, no focal consolidation.
+
+Brief Hospital Course:
+Fever resolved with fluids. Imaging showed no pneumonia, and viral testing from ___ was positive. Symptoms improved steadily and he was discharged after review with ___ team.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Continue lisinopril 10 mg daily. Continue atorvastatin 20 mg nightly. Acetaminophen as needed for fever or aches.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute viral bronchitis
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for a viral respiratory illness. Rest, drink plenty of fluids, and take acetaminophen as needed. Return if fever, breathlessness or chest pain develops, and call ___.
+
+Followup Instructions:
+___

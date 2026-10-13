@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Black stools and lightheadedness
+
+Major Surgical or Invasive Procedure:
+Upper endoscopy
+
+History of Present Illness:
+The patient is a man who presented with three days of black, tarry stools and progressive lightheadedness. He takes ibuprofen daily for back pain. His primary doctor, Dr. ___ at ___, sent him to the emergency department, where his hemoglobin was found to be markedly low. He denied vomiting blood.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gastroesophageal reflux
+Chronic low back pain
+
+Family History:
+Father with colon polyps. No family history of gastrointestinal malignancy.
+
+Physical Exam:
+General: Pale, comfortable, no distress
+HEENT: Pale conjunctivae, moist mucous membranes
+ABD: Soft, mild epigastric tenderness, no distension
+Ext: Warm, no edema
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+ADMISSION LABS:
+Hemoglobin 7.9, down from a baseline near 13. BUN 38, creatinine 0.9, INR 1.0, platelets 240. Lactate normal. Troponin negative. Stool guaiac positive.
+IMAGING:
+Chest radiograph clear. Electrocardiogram showed sinus rhythm without ischemic changes. Endoscopy performed at ___ showed a one centimeter clean-based duodenal ulcer; biopsies were sent to ___ for pathology.
+
+Brief Hospital Course:
+He received two units of packed red cells and intravenous pantoprazole after admission. Endoscopy showed a duodenal ulcer without active bleeding. His hemoglobin remained stable after transfusion and he had no further black stools. Ibuprofen was stopped permanently. Helicobacter pylori serology returned positive, so he was started on a fourteen day antibiotic regimen. He was discharged to follow up with Dr. ___ at ___.
+
+Medications on Admission:
+Ibuprofen 600 mg three times daily. Lisinopril 10 mg daily. Atorvastatin 20 mg nightly.
+
+Discharge Medications:
+Pantoprazole 40 mg twice daily. Amoxicillin 1 gram twice daily for fourteen days. Clarithromycin 500 mg twice daily for fourteen days. Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Acetaminophen as needed for back pain.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Bleeding duodenal ulcer
+Acute blood loss anemia
+Helicobacter pylori infection
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted with bleeding from an ulcer. Take all of your antibiotics and acid medicine as prescribed. Do not take ibuprofen or similar pain relievers. Return for black stools, vomiting blood, or fainting. Please call ___ or visit ___ with questions.

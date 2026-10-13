@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Left leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with hypertension presented with three days of left leg redness, warmth and swelling after a minor scratch. She was febrile at the referring clinic at ___ and was sent to the emergency department for intravenous antibiotics.
+
+Past Medical History:
+Hypertension
+Varicose veins
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+Gen: Comfortable, no distress.
+HEENT: Moist mucous membranes.
+PULM: Clear bilaterally.
+SKIN: Warm erythema of left calf.
+PULSES: Palpable dorsalis pedis bilaterally.
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 13.2, lactate 1.1, creatinine 0.8, CRP elevated. Blood cultures drawn on ___ showed no growth.
+FINDINGS:
+Left leg ultrasound showed soft tissue edema without abscess or deep vein thrombosis.
+
+Brief Hospital Course:
+She received intravenous cefazolin with steady improvement, and the erythema border was marked with a skin pen. Fever resolved within a day. Wound care was advised by ___. She changed to oral cephalexin on hospital day three, ate well and walked independently.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Ibuprofen as needed
+
+Discharge Medications:
+Cephalexin 500 mg four times daily for seven days. Lisinopril 10 mg daily. Acetaminophen 650 mg every six hours as needed for pain. Stop ibuprofen.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Cellulitis of left lower leg
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+Finish all of your antibiotics. Keep your leg raised and watch for spreading redness, fever or pus. Call ___ or return to the emergency department if symptoms worsen.
+
+Followup Instructions:
+___

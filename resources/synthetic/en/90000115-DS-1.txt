@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Nausea and excessive thirst
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with diabetes presenting to ___ with three days of nausea, polyuria and malaise. He was seen by his primary doctor at ___ on ___ and sent to the emergency department. Glucose was markedly elevated and ketones were present. He received fluids and insulin and was admitted for further management.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Followed by Dr. ___ at ___
+
+Social History:
+___
+
+Family History:
+Mother with high blood pressure, followed at ___
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Dry mucous membranes, mildly tachycardic.
+Neck: Supple, no masses
+Lungs: Clear bilaterally
+ABD: Soft, mildly tender, no rebound
+Ext: Warm, no edema
+
+Pertinent Results:
+Admission glucose markedly elevated with anion gap acidosis, bicarbonate low, potassium 5.1. Urine ketones positive.
+DISCHARGE LABS:
+Glucose 142, sodium 138, potassium 4.0, bicarbonate 24, anion gap 10, creatinine 0.9.
+
+Brief Hospital Course:
+He was treated with IV fluids and an insulin infusion, and the acidosis resolved within a day. He was then transitioned to subcutaneous insulin with good glucose control. The trigger was felt to be a missed dose of medication after travel to ___. Nutrition and the team from ___ taught him insulin dosing. His appetite returned and he was discharged on ___ in stable condition with close follow up.
+
+Medications on Admission:
+Metformin 1000 mg twice daily
+Lisinopril 10 mg daily
+Atorvastatin 20 mg daily
+
+Discharge Medications:
+1. Insulin glargine ___ units subcutaneously nightly
+2. Insulin lispro per sliding scale with meals
+3. Metformin 1000 mg twice daily
+4. Lisinopril 10 mg daily
+5. Atorvastatin 20 mg daily
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Diabetic ketoacidosis
+Diabetes mellitus
+
+Discharge Condition:
+Stable.
+Mental Status: Alert and oriented, able to follow commands.
+Activity Status: Walking independently.
+
+Discharge Instructions:
+You were admitted with high blood sugar and acid in your blood. You were given fluids and insulin. Check your blood sugar before meals and at bedtime and write the numbers down. Take your insulin exactly as taught. Call the clinic at ___ if sugars stay high or you cannot keep fluids down. Return to ___ for vomiting, confusion or abdominal pain.
+
+Followup Instructions:
+___

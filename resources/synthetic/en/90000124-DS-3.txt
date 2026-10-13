@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with chronic kidney disease who was sent in from ___ after three days of worsening leg swelling, fatigue and poor appetite. She noted reduced urine output and mild shortness of breath when lying flat. She denied fever, productive cough or any concern for pneumonia, and chest imaging showed no pneumonia. Her physician at ___ found a rising creatinine and referred her. She was stable on arrival.
+
+Past Medical History:
+Diabetes mellitus type 2
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Cholecystectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Father with heart disease at ___.
+
+Physical Exam:
+Afebrile and comfortable at rest.
+HEENT: Moist mucous membranes, no icterus.
+Lungs: Clear bilaterally, no crackles.
+ABD: Soft, nontender, nondistended.
+Ext: 2+ pitting edema to the knees.
+Neuro: Alert, oriented, nonfocal.
+
+Pertinent Results:
+Admission labs from ___ showed creatinine 3.1, BUN 58, potassium 5.3, glucose 212 and hemoglobin 10.4. Urinalysis had 2+ protein and no blood. Repeat creatinine on ___ was 2.6 and potassium 4.6. Renal ultrasound showed small echogenic kidneys without hydronephrosis. Chest radiograph was obtained on admission.
+IMPRESSION:
+Mild vascular congestion, no focal consolidation or effusion.
+
+Brief Hospital Course:
+She was admitted for volume overload with worsening kidney function. She received intravenous furosemide with good urine output and lost several pounds, and her leg swelling improved. Creatinine fell toward baseline and potassium normalized after dietary changes. Her glucose was managed with insulin sliding scale. Nephrology at ___ reviewed her case and agreed with outpatient follow up at ___. She was eating well and walking independently by discharge.
+
+Medications on Admission:
+Metformin, lisinopril, atorvastatin, aspirin daily
+
+Discharge Medications:
+1. Furosemide 40 mg by mouth daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Aspirin 81 mg by mouth daily
+4. Insulin glargine 10 units at bedtime as directed by ___
+Metformin and lisinopril were stopped until your kidney tests are rechecked.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Chronic kidney disease with volume overload
+Diabetes mellitus type 2
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized because fluid built up as your kidneys worked poorly. Take the water pill every morning and weigh yourself daily. Call ___ if your weight rises by three pounds in a day, or if swelling or breathing worsens. Limit salt and avoid ibuprofen. Have blood tests repeated at the clinic of ___ within one week.
+
+Followup Instructions:
+___

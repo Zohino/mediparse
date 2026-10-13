@@ -1,0 +1,78 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy on ___
+
+History of Present Illness:
+The patient is a man with hypertension and hyperlipidemia who presented to ___ with two days of worsening right upper quadrant pain, nausea and vomiting after a fatty meal. Symptoms began on ___ and did not resolve. He was first seen at ___ by Dr. ___, who sent him to the emergency department. Ultrasound showed gallstones with gallbladder wall thickening, and he was admitted to the surgical service for further care.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Reflux
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones. Father with ___.
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+Afebrile, vital signs stable. Comfortable, no distress. Heart regular. Abdomen soft, mildly tender at port sites, nondistended.
+HEENT: Anicteric, moist mucous membranes.
+Neck: Supple.
+Lungs: Clear bilaterally.
+EXTREMITIES: Warm, no edema.
+SKIN: Port sites clean and dry.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+Admission labs on ___ showed white blood cell count 13.2, ALT 85, AST 70, alkaline phosphatase 140, total bilirubin 1.4, lipase normal. Ultrasound: cholelithiasis with gallbladder wall thickening and pericholecystic fluid. Pathology from ___: chronic cholecystitis with cholelithiasis.
+DISCHARGE LABS:
+WBC 7.1, Hgb 13.8, platelets 245. Sodium 139, potassium 4.1, creatinine 0.9. ALT 32, AST 28, total bilirubin 0.7.
+
+Brief Hospital Course:
+The patient was admitted with acute cholecystitis and started on intravenous fluids, antibiotics and bowel rest. He underwent an uncomplicated laparoscopic cholecystectomy at ___ on hospital day two. Postoperatively his pain was controlled with oral medications and he advanced his diet without nausea. Liver tests normalized. Antibiotics were stopped after surgery. He ambulated independently and voided spontaneously. Blood pressure remained controlled on home medications. He was discharged home in stable condition with instructions from Dr. ___.
+TRANSITIONAL ISSUES:
+Follow up with surgery clinic at ___. Recheck blood pressure with primary care.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Omeprazole 20 mg daily
+
+Discharge Medications:
+1. Acetaminophen 650 mg by mouth every six hours as needed for pain
+2. Oxycodone 5 mg by mouth every four hours as needed for severe pain
+3. Docusate 100 mg twice daily while taking opioids
+4. Lisinopril 10 mg daily
+5. Atorvastatin 20 mg nightly
+6. Omeprazole 20 mg daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary:
+Acute cholecystitis with cholelithiasis
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were admitted to ___ with gallbladder inflammation and had your gallbladder removed laparoscopically. You may shower and let soapy water run over the incisions, but do not soak in a bath. Do not lift more than ten pounds for four weeks. Call ___ or return to the emergency department for fever, worsening belly pain, vomiting, yellow skin or wound redness. Take stool softeners while on opioids, and do not drive. Keep your appointment with ___.
+
+Followup Instructions:
+___

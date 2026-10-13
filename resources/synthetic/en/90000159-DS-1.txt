@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Foot wound and high blood sugars
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient is a ___ year old man with known diabetes mellitus, sent from ___ on ___ with a draining foot ulcer, thirst, and glucose readings above 400 at home.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+HEENT: Dry mucous membranes
+Neck: Supple
+Lungs: Clear bilaterally
+Abdomen: Soft, nontender
+Ext: Right foot ulcer, mild warmth
+SKIN: No other rashes
+
+Pertinent Results:
+ADMISSION LABS: Glucose 462, bicarbonate normal, creatinine near baseline, white count mildly elevated.
+IMPRESSION: Foot radiograph at ___ shows soft tissue swelling without bone destruction.
+
+Brief Hospital Course:
+Glucose was lowered with intravenous fluids and insulin, then transitioned to a subcutaneous regimen. The wound was cleaned and treated with antibiotics. Podiatry from ___ advised offloading. Glucose teaching was completed before ___ discharge.
+
+Medications on Admission:
+Metformin
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+1. Insulin glargine nightly
+2. Metformin twice daily
+3. Lisinopril daily
+4. Atorvastatin nightly
+5. Cephalexin for seven days
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Uncontrolled diabetes
+Foot ulcer infection
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory with offloading shoe
+
+Discharge Instructions:
+You were admitted with high blood sugar and an infected foot wound. Check your glucose before meals, take your medicines as directed, keep weight off the foot, and call ___ for fever or worsening redness.
+
+Followup Instructions:
+___

@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Shortness of breath, leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman referred by ___ with three days of worsening dyspnea and bilateral leg swelling. Her clinic at ___ noted weight gain and sent her to the emergency department for evaluation of volume overload.
+
+Past Medical History:
+Diabetes mellitus type 2
+Chronic kidney disease stage 3
+Hypertension
+Followed by Dr. ___
+
+Family History:
+Mother with hypertension. Father with stroke.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: T 98.2, HR 82, BP 148/86, RR 18, SpO2 94% on room air
+General: Comfortable, mildly dyspneic
+HEENT: Moist mucous membranes
+PULM: Bibasilar crackles
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+DISCHARGE LABS:
+Creatinine at baseline, potassium normal, sodium 138.
+IMAGING:
+Chest radiograph performed on ___.
+IMPRESSION:
+Mild pulmonary vascular congestion, small bilateral effusions, no focal consolidation.
+
+Brief Hospital Course:
+Admitted with volume overload and treated with intravenous furosemide, with good diuresis and resolution of symptoms. Telemetry showed sinus rhythm with no evidence of atrial fibrillation. Renal function stayed stable. She was seen by the ___ team and discharged home.
+TRANSITIONAL ISSUES:
+Recheck chemistry in one week.
+
+Medications on Admission:
+Metformin, lisinopril, amlodipine.
+
+Discharge Medications:
+1. Furosemide 40 mg by mouth daily.
+2. Metformin 500 mg twice daily.
+3. Amlodipine 5 mg daily.
+Hold lisinopril until labs are rechecked.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute volume overload
+Diabetes mellitus type 2
+Chronic kidney disease
+
+Discharge Condition:
+Stable.
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized for fluid buildup and treated with a water pill. Weigh yourself every morning and limit salt. Call ___ if your weight rises by three pounds. Keep your appointment with ___.
+
+Followup Instructions:
+___

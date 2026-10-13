@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Palpitations, cough, fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with known atrial fibrillation sent in by Dr. ___ after three days of fever, productive cough and racing heartbeat, found to have rapid atrial fibrillation on arrival to ___.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Osteoarthritis
+
+Social History:
+___
+
+Family History:
+Mother with stroke.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: Febrile, heart rate irregular and fast.
+General: Tired, uncomfortable.
+HEENT: Dry mucous membranes.
+Neck: Supple.
+Lungs: Crackles at right base.
+Abdomen: Soft, nontender.
+DISCHARGE PHYSICAL EXAM:
+Vitals: Afebrile, rate controlled.
+General: Comfortable.
+Lungs: Clear.
+
+Pertinent Results:
+DISCHARGE LABS:
+White count normalized, creatinine stable, potassium replete.
+IMPRESSION:
+Right lower lobe opacity on film read by ___.
+
+Brief Hospital Course:
+She was treated at ___ for right lower lobe pneumonia with antibiotics and fluids, with fever resolving by day three. Heart rate settled on metoprolol and anticoagulation continued.
+TRANSITIONAL ISSUES:
+Repeat chest film in six weeks; follow up with ___.
+
+Medications on Admission:
+Metoprolol, apixaban, levothyroxine
+
+Discharge Medications:
+Metoprolol succinate daily, apixaban twice daily, levothyroxine each morning, and oral antibiotic to finish course.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Atrial fibrillation with rapid ventricular response
+
+Discharge Condition:
+Mental Status: Alert and oriented.
+Level of Consciousness: Awake and attentive.
+Activity Status: Walks independently.
+
+Discharge Instructions:
+You were hospitalized with fever and a fast heartbeat. Take all medicines as directed, drink plenty of fluids, and return for chest pain, fainting, or worsening breathlessness. Call ___ with questions.
+
+Followup Instructions:
+___

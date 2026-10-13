@@ -1,0 +1,59 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient presented to ___ with three days of worsening redness, warmth and swelling of the right lower leg after a minor scrape sustained while gardening. He reported subjective fevers and chills. He had been seen at ___ the day before and given oral antibiotics without improvement. He denied chest pain, shortness of breath, or palpitations. He was referred to our emergency department by ___.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Hyperlipidemia
+
+Family History:
+Noncontributory
+
+Physical Exam:
+General: Comfortable, afebrile, no distress.
+HEENT: Moist mucous membranes, anicteric sclerae.
+ABD: Soft, nontender, nondistended.
+Neuro: Alert and oriented, strength intact. Right shin with warm, erythematous, tender skin.
+
+Pertinent Results:
+Admission labs: white count mildly elevated with neutrophil predominance, creatinine at baseline, lactate normal. Blood cultures drawn at ___ showed no growth at two days. Ultrasound of the right leg on ___ negative for deep vein thrombosis. Chest radiograph with no acute abnormality. ECG showed an irregularly irregular rhythm, rate controlled, unchanged from the prior tracing on file at ___.
+
+Brief Hospital Course:
+He was admitted for intravenous antibiotics and the border of erythema was marked with a pen. Over the first two days the redness receded and the fever resolved. Wound care was reviewed with ___ and the leg was kept elevated. Rate control and anticoagulation were continued without change, and his rhythm remained stable on telemetry. He was transitioned to oral antibiotics, tolerated a regular diet and walked independently. The plan was discussed with his primary physician at ___.
+
+Medications on Admission:
+Metoprolol succinate 50 mg daily. Apixaban 5 mg twice daily. Atorvastatin 20 mg nightly. ___ supplement.
+
+Discharge Medications:
+Cephalexin 500 mg by mouth four times daily for seven more days. Metoprolol succinate 50 mg daily. Apixaban 5 mg twice daily. Atorvastatin 20 mg nightly. Acetaminophen as needed for pain, filled at ___.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Cellulitis of the right lower leg
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Take all antibiotic doses even when the redness fades. Keep the leg raised when seated and wash the area gently each day. Return for spreading redness, fever, or new pain. Call ___ with questions, or contact ___ after hours.
+
+Followup Instructions:
+___

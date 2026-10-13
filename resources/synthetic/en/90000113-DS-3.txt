@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with several days of worsening abdominal pain and nausea, without fever or vomiting. Symptoms progressed despite oral analgesics, prompting evaluation in the emergency department.
+REVIEW OF SYSTEMS:
+Negative except as above.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Vitals:
+Afebrile and hemodynamically stable
+HEENT:
+Unremarkable
+Lungs:
+Clear bilaterally
+ABD:
+Soft, mildly tender, nondistended
+Ext:
+Warm, no edema
+SKIN:
+Intact
+PULSES:
+Palpable
+
+Pertinent Results:
+Laboratory studies showed mildly elevated white count and normal electrolytes. Liver enzymes and lipase were within normal limits. Blood glucose was mildly elevated on admission.
+IMAGING:
+Ultrasound showed gallstones without ductal dilation.
+
+Brief Hospital Course:
+Patient was admitted and treated with fluids and analgesia. Surgical team from ___ evaluated him and recommended elective cholecystectomy at ___. Blood sugars were monitored. Pain resolved, diet was advanced, and he tolerated regular food before discharge.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+
+Discharge Medications:
+Metformin 500 mg twice daily. Acetaminophen 650 mg every six hours as needed for pain. Continue other home medications.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Condition:
+Good
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+Return for fever, worsening pain, or persistent vomiting. Follow a low fat diet and avoid heavy lifting. Call ___ with any questions.
+
+Followup Instructions:
+___

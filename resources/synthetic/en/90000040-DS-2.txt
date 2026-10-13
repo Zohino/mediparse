@@ -1,0 +1,81 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillin
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with cough, fever and shortness of breath for four days, worsening despite rest and fluids. She presented to ___ emergency department where she was febrile and hypoxic. Chest imaging was obtained and she was admitted for further evaluation and treatment. She was referred by her primary care physician Dr. ___.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Cholecystectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals:
+T 38.1, HR 96, BP 128/74, SpO2 92% on room air
+General:
+Tired, mildly dyspneic
+HEENT:
+Moist mucosa
+Neck:
+Supple
+CARDIAC:
+Regular rhythm
+Abdomen:
+Soft, nontender
+Ext:
+Warm, no edema
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 14.2, hemoglobin 12.1, creatinine 0.9, lactate 1.8, sodium 138.
+IMPRESSION:
+Right lower lobe consolidation with small effusion on chest radiograph obtained at ___. Findings are consistent with an acute infectious process. Repeat imaging advised in six weeks.
+
+Brief Hospital Course:
+Patient was treated for community acquired pneumonia with ceftriaxone and azithromycin, and weaned from oxygen over three days. Telemetry showed an irregular rhythm on hospital day two, raising possible atrial fibrillation, unconfirmed on twelve lead tracing; cardiology at ___ recommended an outpatient monitor. She improved, tolerated diet, and was ambulating. Seen by Dr. ___ prior to discharge on ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 75 mcg daily
+
+Discharge Medications:
+1. Lisinopril 10 mg once daily.
+2. Levothyroxine 75 mcg once daily.
+3. Azithromycin 250 mg daily for three more days.
+4. Guaifenesin as needed for cough.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary:
+Community acquired lower respiratory infection with hypoxia
+Hypertension, hypothyroidism
+
+Discharge Condition:
+Mental Status: Alert and oriented, able to follow commands.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with a lung infection and treated with antibiotics. Finish all prescribed medication, drink fluids and rest. Return for fever, worsening breathlessness or palpitations. Follow up with Dr. ___ at ___ clinic.
+
+Followup Instructions:
+___

@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Woman with two days of worsening right upper quadrant pain, nausea and vomiting after fatty meals. She first went to ___ urgent care, where labs and ultrasound suggested gallstones with inflammation, and was transferred here on ___ for surgical evaluation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Prior appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+HEENT: Anicteric, moist mucous membranes.
+Abdomen: Soft, tender in right upper quadrant, positive Murphy sign.
+EXTREMITIES: No edema.
+SKIN: Warm, dry.
+
+Pertinent Results:
+Ultrasound showed multiple gallstones, thickened gallbladder wall and pericholecystic fluid. White count mildly elevated, liver enzymes slightly raised, bilirubin normal. CT on ___ confirmed findings.
+IMPRESSION:
+Acute cholecystitis with cholelithiasis, no bile duct dilation.
+
+Brief Hospital Course:
+She was given intravenous fluids and antibiotics, then taken to the operating room with Dr. ___ for an uncomplicated laparoscopic cholecystectomy. Pain was controlled with oral medication, diet was advanced, and she walked independently. She was ready for discharge on ___ in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Acetaminophen 650 mg by mouth every six hours as needed for pain
+4. Docusate 100 mg twice daily while taking opioids
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+Hypertension
+
+Discharge Condition:
+Clear and coherent, alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for an inflamed gallbladder and had it removed. Keep incisions clean and dry, and avoid lifting heavy objects for several weeks. Call ___ for fever, worsening pain, vomiting, yellow skin or wound drainage, or return to ___ if symptoms are severe.
+
+Followup Instructions:
+___

@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Worsening shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with several days of increasing breathlessness, wheeze and productive cough. Seen at ___ and sent to the emergency department for evaluation.
+
+Past Medical History:
+Chronic obstructive pulmonary disease
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+HEENT: Moist mucous membranes
+PULM: Diffuse expiratory wheezes
+Ext: No edema
+
+Pertinent Results:
+ADMISSION LABS: Basic panel unremarkable, white count mildly raised, drawn ___
+FINDINGS: Chest film shows hyperinflated lungs without focal consolidation
+
+Brief Hospital Course:
+Treated with nebulized bronchodilators, oral steroids and supplemental oxygen, weaned to room air by day three. Followed by respiratory therapy at ___ and breathing improved steadily before discharge to ___.
+
+Medications on Admission:
+Tiotropium inhaler daily
+Lisinopril
+
+Discharge Medications:
+1. Tiotropium inhaler once daily
+2. Albuterol inhaler as needed
+3. Prednisone taper for five days
+4. Lisinopril daily
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Chronic obstructive pulmonary disease
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were admitted for trouble breathing. Take your inhalers and steroid course as directed. Stop smoking and call ___ or return if breathing worsens.
+
+Followup Instructions:
+___

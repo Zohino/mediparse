@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Worsening shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old man with long-standing smoking history who presented from ___ with three days of increasing dyspnea, wheeze and productive cough, using his rescue inhaler more often since ___ without relief.
+
+Past Medical History:
+Chronic kidney disease
+Atrial fibrillation
+Hypertension
+Hyperlipidemia
+
+Physical Exam:
+Vitals: afebrile, saturation 91 percent on room air
+General: tired, speaking in short sentences
+ABD: soft, nontender
+EXTREMITIES: no edema
+Neuro: alert, nonfocal
+PULSES: irregularly irregular
+
+Pertinent Results:
+DISCHARGE LABS: creatinine at baseline, potassium normal. Admission blood gas showed mild respiratory acidosis with elevated bicarbonate.
+IMPRESSION: Hyperinflated lungs, flattened diaphragms, no focal consolidation or effusion.
+FINDINGS: Heart size normal, no pulmonary edema.
+
+Brief Hospital Course:
+He was treated with nebulized bronchodilators, systemic steroids and a short antibiotic course, with gradual improvement in work of breathing. Oxygen was weaned. Heart rate stayed controlled on home medications. Dr. ___ adjusted his doses, and he was ready for discharge on ___.
+
+Medications on Admission:
+Metoprolol, apixaban, amlodipine, tiotropium inhaler, albuterol as needed
+
+Discharge Medications:
+1. Metoprolol succinate daily
+2. Apixaban twice daily
+3. Amlodipine daily
+4. Tiotropium inhaler daily
+5. Prednisone taper for five days
+6. Albuterol inhaler as needed
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary:
+Chronic kidney disease
+Atrial fibrillation
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for trouble breathing. Take all medicines as prescribed and finish the steroid taper. Stop smoking. Return for worsening breathlessness, fever or chest pain. Call ___ with questions or contact the clinic at ___.
+
+Followup Instructions:
+___

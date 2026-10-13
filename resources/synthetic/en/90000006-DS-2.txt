@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and fatigue
+
+Major Surgical or Invasive Procedure:
+None; transthoracic echocardiogram at ___
+
+History of Present Illness:
+Man with hypertension and long-standing reduced kidney function sent by his clinic at ___ for several days of racing heartbeat, tiredness and mild leg swelling. He denied chest pain or fainting. Evaluated in the emergency department at ___.
+
+Past Medical History:
+Hypertension
+Anemia
+Gout
+
+Social History:
+___
+
+Family History:
+Noncontributory except family history of pneumonia in a brother.
+
+Physical Exam:
+Vitals: T 98.4 HR 112 irregular BP 138/80 RR 16 SpO2 97% RA
+Gen: Comfortable, no distress
+Neck: Supple, no JVD
+Lungs: Clear bilaterally
+Abdomen: Soft, nontender
+SKIN: Warm, trace ankle edema
+
+Pertinent Results:
+ECG showed irregularly irregular rhythm without P waves. Creatinine 3.1, baseline near 3.0. Potassium 4.9. Hemoglobin 10.2. Troponin negative twice. Echocardiogram showed mildly dilated left atrium with preserved ejection fraction.
+
+Brief Hospital Course:
+He was found to have atrial fibrillation with rapid ventricular response, controlled with oral metoprolol. Anticoagulation was started with a dose adjusted for his poor kidney clearance. Creatinine stayed stable. Cardiology at ___ agreed with the plan, and he was seen by pharmacy at ___.
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg daily
+2. Apixaban 2.5 mg twice daily
+3. Amlodipine 5 mg daily
+4. Allopurinol 100 mg daily
+
+Discharge Disposition:
+Home
+
+Facility: ___
+
+Discharge Diagnosis:
+Atrial fibrillation with rapid ventricular response
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were admitted with a fast irregular heartbeat. Take the new blood thinner every day and avoid anti-inflammatory pain pills. Return for chest pain, fainting, bleeding or worsening swelling. Call ___ with questions.
+
+Followup Instructions:
+___

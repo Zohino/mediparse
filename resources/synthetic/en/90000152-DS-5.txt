@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and lightheadedness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman presented to ___ with two days of intermittent palpitations and dizziness. Telemetry showed an irregular rhythm, raising concern for possible atrial fibrillation. She denied chest pain.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Osteoarthritis
+
+Social History:
+___
+
+Family History:
+Family history of diabetes mellitus in her mother. No sudden cardiac death.
+
+Physical Exam:
+Gen: Comfortable, no distress.
+Lungs: Clear bilaterally.
+Abdomen: Soft, nontender.
+EXTREMITIES: Warm, no edema.
+
+Pertinent Results:
+ADMISSION LABS:
+Sodium 139, potassium 4.1, creatinine 0.8. Troponin negative twice. TSH normal. ECG at ___ showed sinus rhythm with occasional ectopy.
+
+Brief Hospital Course:
+She was monitored on telemetry, which showed brief irregular beats but no sustained arrhythmia. Electrolytes were replete. Cardiology at ___ recommended an outpatient monitor. Symptoms resolved and she ambulated well before discharge on ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 50 mcg daily
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily.
+2. Levothyroxine 50 mcg by mouth every morning.
+3. Acetaminophen 500 mg as needed for pain.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Palpitations
+Hypertension
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted for palpitations. Wear the heart monitor as directed and keep your appointment with ___. Return if you have fainting, chest pain, or persistent racing heartbeat.
+
+Followup Instructions:
+___

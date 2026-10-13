@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Fever and cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman presented with three days of fever, cough and malaise, referred from ___ after a sick contact. Chest imaging showed no pneumonia. She received fluids and supportive care and improved. Oxygen levels stayed normal.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals:
+T 98.6 HR 80 BP 120/70 RR 16 SpO2 97% RA
+General:
+Comfortable
+HEENT:
+Moist mucosa
+Lungs:
+Clear bilaterally
+Abdomen:
+Soft
+EXTREMITIES:
+No edema
+Neuro:
+Nonfocal
+
+Pertinent Results:
+WBC 9.2, hemoglobin 12.8, creatinine 0.8, sodium 138, glucose 96. Chest radiograph at ___ showed clear lungs and normal heart size. Respiratory viral panel positive for influenza A. Urinalysis unremarkable. Blood cultures showed no growth after two days. Lactate was normal.
+
+Medications on Admission:
+Lisinopril 10 mg daily, multivitamin one tablet daily
+
+Discharge Medications:
+Oseltamivir 75 mg twice daily for five days. Acetaminophen 650 mg every six hours as needed for fever. Lisinopril 10 mg daily. Multivitamin daily.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Influenza A
+Dehydration
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Stable, ambulatory
+
+Discharge Instructions:
+Drink plenty of fluids and rest at home. Take all medications as prescribed. Return for fever, worsening cough or trouble breathing. Please call your clinic at ___ if symptoms persist.
+
+Followup Instructions:
+___

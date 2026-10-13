@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Patient is a man followed by Dr. ___ who presented to ___ with two days of worsening right upper quadrant pain after meals, associated with nausea and one episode of vomiting. Symptoms began on ___ and did not improve with rest. He denied fever or jaundice.
+REVIEW OF SYSTEMS:
+Positive for nausea and anorexia. Negative for chest pain, dyspnea, dysuria.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gastroesophageal reflux
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+Gen: Uncomfortable but in no acute distress.
+Abdomen soft, tender in the right upper quadrant, positive Murphy sign, no rebound.
+Ext: Warm, no edema.
+
+Pertinent Results:
+Laboratory studies showed mild leukocytosis with normal liver enzymes and bilirubin. Ultrasound performed at ___ demonstrated gallstones with wall thickening.
+IMPRESSION:
+Cholelithiasis with findings suggesting acute cholecystitis.
+FINDINGS:
+Pericholecystic fluid is present. The common bile duct is normal in caliber.
+
+Brief Hospital Course:
+He was admitted, kept without oral intake, and given intravenous fluids and antibiotics. The surgical team evaluated him and, after discussion with the ___ service and per Dr. ___, he underwent an uncomplicated laparoscopic cholecystectomy on ___. Pain was controlled, diet was advanced, and he tolerated regular food before discharge.
+TRANSITIONAL ISSUES:
+Follow up pathology results from the gallbladder specimen.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Omeprazole 20 mg daily
+
+Discharge Medications:
+1. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+2. Oxycodone 5 mg by mouth every six hours as needed for severe pain, short course.
+3. Docusate 100 mg twice daily while taking opioids.
+4. Continue lisinopril, atorvastatin and omeprazole as before.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with inflammation of the gallbladder and had it removed laparoscopically. Keep the small incisions clean and dry, and you may shower. Avoid lifting anything heavy for several weeks. Call ___ at ___ for fever, worsening belly pain, vomiting, yellow skin, or redness at the incisions. Return to ___ if symptoms are severe.
+
+Followup Instructions:
+___

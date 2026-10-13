@@ -1,0 +1,92 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs
+
+Chief Complaint:
+Weakness and palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman presenting with several days of weakness, poor appetite and lightheadedness. Her home glucose readings were persistently elevated and she reported palpitations. She was first seen at ___ clinic, where an irregular pulse was noted, and was sent to ___ hospital for further evaluation and monitoring.
+
+Past Medical History:
+Chronic kidney disease, stage 3
+Atrial fibrillation
+Hypertension
+Hyperlipidemia
+Seen previously at ___ for foot care
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+Vitals:
+Afebrile, stable
+Gen:
+Comfortable
+Neck:
+Supple
+Lungs:
+Clear
+Abdomen:
+Soft, nontender
+Ext:
+Trace edema
+SKIN:
+Warm, dry
+Neuro:
+Nonfocal
+
+Pertinent Results:
+Admission glucose was markedly elevated with a normal anion gap. Hemoglobin A1c was high. Creatinine was at baseline. Potassium normal. ECG showed an irregular rhythm with a rapid ventricular rate. Results were reviewed with ___ laboratory staff.
+DISCHARGE LABS:
+Glucose improved, creatinine stable.
+
+Brief Hospital Course:
+She was admitted for rate control and management of hyperglycemia. Metoprolol was titrated with good heart rate response, and anticoagulation was started after discussion with ___. Insulin was adjusted until her glucose levels were steady. Kidney function remained stable. She was cleared for discharge by ___ and walked independently.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+Metformin
+Glargine insulin
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg daily
+2. Apixaban 2.5 mg twice daily
+3. Insulin glargine 20 units nightly
+4. Atorvastatin 20 mg nightly
+5. Lisinopril held until follow up
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Chronic kidney disease
+Atrial fibrillation
+
+Discharge Condition:
+Good
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake
+Activity Status:
+Walks without help
+
+Discharge Instructions:
+You were hospitalized with a fast irregular heartbeat and high blood sugars. Take your new medicines as directed and check your sugars every day. Call ___ if you have dizziness, chest pain or bleeding. Please keep your visit with ___ next week.
+
+Followup Instructions:
+___

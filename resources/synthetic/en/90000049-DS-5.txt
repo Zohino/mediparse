@@ -1,0 +1,78 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with three days of worsening cough, wheeze and exertional dyspnea after a visit to ___. He denies fever, chills or chest pain. Chest imaging at ___ showed no pneumonia. He was referred by Dr. ___ and transferred on ___ for further evaluation and management of his breathlessness.
+
+Past Medical History:
+Atrial fibrillation on anticoagulation
+Hypertension
+Hyperlipidemia
+Followed by cardiologist ___
+
+Social History:
+___
+
+Family History:
+Father with hypertension. Mother ___.
+
+Physical Exam:
+Vitals:
+Afebrile, heart rate 78, blood pressure 128/76, oxygen saturation 94% on room air.
+Neck:
+Supple, no JVD.
+SKIN:
+Warm and dry, no rash.
+Neuro:
+Alert, oriented, nonfocal.
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 9.2, Hgb 13.8, platelets 245, sodium 139, potassium 4.2, creatinine 0.9, BNP mildly elevated. Chest radiograph at ___ showed hyperinflated lungs without focal consolidation.
+DISCHARGE LABS:
+WBC 7.8, Hgb 13.5, sodium 140, potassium 4.0, creatinine 0.9. Electrocardiogram showed an irregular rhythm with controlled rate.
+
+Brief Hospital Course:
+He was treated with nebulized bronchodilators, a short oral steroid course and supplemental oxygen, with steady improvement in wheeze and breathing. Rate control was continued and his anticoagulant was unchanged. Respiratory therapy reviewed inhaler technique. He was followed by Dr. ___ and was ready to go to ___ on hospital day four, walking without desaturation.
+
+Medications on Admission:
+Apixaban 5 mg twice daily, metoprolol 50 mg daily, albuterol inhaler as needed.
+
+Discharge Medications:
+Apixaban 5 mg twice daily.
+Metoprolol succinate 50 mg daily.
+Albuterol inhaler two puffs every four hours as needed.
+Tiotropium one capsule inhaled daily.
+Prednisone 40 mg daily for three more days.
+Atorvastatin 20 mg nightly.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Chronic obstructive pulmonary disease exacerbation
+Atrial fibrillation
+
+Discharge Condition:
+Stable
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+Take all medicines as prescribed and finish the steroid course. Use your inhaler as directed. Return for worsening breathlessness, fever, chest pain or a racing heartbeat. Stop smoking and avoid smoke exposure. Keep your appointment with ___ clinic.
+
+Followup Instructions:
+___

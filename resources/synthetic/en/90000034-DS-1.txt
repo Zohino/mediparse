@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough, fever, shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman who presented to ___ with four days of productive cough, fevers to 102, chills and worsening dyspnea. She noted right-sided pleuritic chest pain and poor appetite. Symptoms began after a visit with relatives on ___. She denied vomiting, diarrhea or sick contacts at home. In the emergency department she was febrile and mildly hypoxic.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Osteoarthritis
+Followed by Dr. ___ for primary care
+
+Social History:
+___
+
+Family History:
+Mother with stroke. No family history of lung disease.
+
+Physical Exam:
+Vitals: T 99.1, HR 78, BP 128/74, RR 16, SpO2 96% on room air
+CARDIAC: Regular rate and rhythm, normal S1 and S2, no murmur
+ABD: Soft, nontender, nondistended, normal bowel sounds
+Ext: Warm, no edema
+Neuro: Alert, oriented, moves all extremities
+
+Pertinent Results:
+DISCHARGE LABS: WBC 8.2, Hgb 12.6, Plt 244, Na 139, K 4.1, Cr 0.8.
+Blood cultures drawn on ___ showed no growth.
+IMPRESSION: Chest radiograph on ___ showed right lower lobe consolidation with a small effusion. Final read by radiology.
+
+Brief Hospital Course:
+The patient was admitted with right lower lobe pneumonia and started on ceftriaxone and azithromycin after evaluation by the ___ team. She was transferred from ___ to the floor when oxygen requirement resolved. Fever and cough improved steadily, and she was switched to oral antibiotics on ___. She ambulated without desaturation and tolerated a regular diet.
+TRANSITIONAL ISSUES: Repeat chest radiograph in six weeks to confirm resolution.
+
+Medications on Admission:
+Levothyroxine 75 mcg daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Levothyroxine 75 mcg by mouth once daily
+2. Lisinopril 10 mg by mouth once daily
+3. Amoxicillin-clavulanate 875 mg by mouth twice daily for three more days
+4. Acetaminophen 650 mg by mouth every six hours as needed for fever or pain
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Pneumonia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with a lung infection and treated with antibiotics. Finish the full course of your antibiotics and take acetaminophen for fever. Rest, drink plenty of fluids and avoid smoke. Call Dr. ___ or the office at ___ if you develop fever, worsening cough, chest pain or trouble breathing. Keep your visit at the ___ clinic.
+
+Followup Instructions:
+___

@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old man sent by Dr. ___ with two days of worsening right upper quadrant pain, nausea and one episode of vomiting after meals. Ultrasound at ___ showed gallstones with wall thickening. He was afebrile and admitted for surgical evaluation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with gallstones
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+Lungs: clear bilaterally
+Abdomen: soft, mildly tender at incisions, no distension
+Ext: warm, no edema
+
+Pertinent Results:
+Admission labs showed mild leukocytosis with normal liver enzymes and bilirubin. Right upper quadrant ultrasound: multiple gallstones, thickened gallbladder wall, small pericholecystic fluid. Pathology sent to ___ pending at discharge.
+
+Brief Hospital Course:
+He was started on antibiotics and fluids, then taken to the operating room for an uncomplicated laparoscopic cholecystectomy performed by Dr. ___. Pain was controlled with oral medication, diet was advanced, and he passed the transfer test at ___ before discharge home.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Acetaminophen 650 mg by mouth every six hours as needed for pain
+4. Docusate 100 mg twice daily while taking opioids
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were admitted for gallbladder inflammation and had your gallbladder removed. Keep incisions clean and dry, and avoid lifting over ten pounds for four weeks. Call ___ or return to the emergency department for fever, vomiting, jaundice or wound redness. Questions may be directed to ___.
+
+Followup Instructions:
+___

@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies.
+
+Chief Complaint:
+Abdominal pain.
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy.
+
+History of Present Illness:
+Patient presented to ___ with two days of right lower quadrant pain, nausea and low-grade fever. Pain began near the umbilicus and then migrated. He was seen at ___ by ___ and sent to the emergency department. He denies diabetes and reports no vomiting blood or diarrhea. Symptoms began after a trip to ___.
+
+Past Medical History:
+Hypertension. No history of atrial fibrillation. Knee arthroscopy at ___.
+
+Social History:
+___
+
+Family History:
+Mother with hypertension.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Stable vital signs, seen in ___.
+General:
+Uncomfortable, lying still.
+HEENT:
+Moist mucous membranes.
+Neck:
+Supple.
+Lungs:
+Clear bilaterally.
+Abdomen:
+Tender right lower quadrant with guarding.
+EXTREMITIES:
+No edema.
+Neuro:
+Alert, nonfocal.
+
+Pertinent Results:
+ADMISSION LABS:
+White count elevated at 14 with neutrophil predominance; creatinine, lactate and liver enzymes normal.
+IMAGING:
+CT of abdomen and pelvis performed at ___ showed a dilated appendix measuring 12 mm with surrounding fat stranding and a small appendicolith.
+IMPRESSION:
+Acute appendicitis without perforation, as read by ___.
+
+Brief Hospital Course:
+He was given IV fluids and antibiotics and kept nothing by mouth. The surgical team from ___ evaluated him and recommended laparoscopic appendectomy, performed on hospital day one without complication. Pain was controlled with acetaminophen and a short course of oxycodone. Diet was advanced, bowel function returned and he remained afebrile. Pathology was pending at discharge and will be reviewed by ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily; multivitamin once daily; ibuprofen as needed for headache.
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed for pain. Oxycodone 5 mg every six hours as needed for severe pain. Amoxicillin-clavulanate 875 mg twice daily for five days. Docusate 100 mg twice daily while taking oxycodone. Continue lisinopril. Hold ibuprofen.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized at ___ for appendicitis and underwent surgery to remove your appendix. Keep the small incisions clean and dry, and avoid lifting anything heavy for two weeks. Take your antibiotic until finished. Call ___ or return to the emergency department for fever, worsening pain, vomiting or redness at the incisions.
+
+Followup Instructions:
+___

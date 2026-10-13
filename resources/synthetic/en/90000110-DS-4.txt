@@ -1,0 +1,79 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension, sent from ___ with several days of racing heartbeat, fatigue and mild exertional breathlessness.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obstructive sleep apnea
+
+Social History:
+___
+
+Family History:
+Father with stroke
+
+Physical Exam:
+Irregularly irregular pulse, lungs clear.
+DISCHARGE PHYSICAL EXAM:
+Neck:
+No JVD
+Abdomen:
+Soft, nontender
+EXTREMITIES:
+No edema
+SKIN:
+Warm, dry
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+ECG showed irregular rhythm without P waves. Troponin negative twice. Potassium normal.
+IMAGING:
+Chest film without acute findings.
+
+Brief Hospital Course:
+Found to have new atrial fibrillation with rapid rate, controlled with metoprolol and started on anticoagulation after review by ___.
+TRANSITIONAL ISSUES:
+Repeat echocardiogram as outpatient.
+
+Medications on Admission:
+Lisinopril, atorvastatin
+
+Discharge Medications:
+1. Lisinopril daily
+2. Atorvastatin nightly
+3. Metoprolol twice daily
+4. Apixaban twice daily
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Supraventricular tachyarrhythmia, new onset
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with a fast irregular heartbeat. Take your new medicines as directed, avoid missed doses, and keep your appointment at ___.
+
+Followup Instructions:
+___

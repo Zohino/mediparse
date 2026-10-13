@@ -1,0 +1,85 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Left leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Several days of worsening redness, warmth and pain of the left lower leg after a minor scrape. Seen at ___ clinic, then sent to ___ for intravenous antibiotics. Fever at home.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Elevated hemoglobin A1c on insulin therapy
+Neuropathy of both feet ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals:
+Temp 100.4, HR 92, BP 138/80, SpO2 97% RA
+Gen:
+Comfortable, no distress
+HEENT:
+Moist mucosa
+Neck:
+Supple
+ABD:
+Soft, nontender
+Ext:
+Left shin warm, erythematous, tender
+SKIN:
+Dry, intact elsewhere
+
+Pertinent Results:
+Glucose 242 on admission. Hemoglobin A1c 9.1. White count 13.2, improved to 8.4. Creatinine at baseline.
+IMAGING:
+Left leg ultrasound without clot.
+IMPRESSION:
+Soft tissue swelling only, no abscess.
+
+Brief Hospital Course:
+He received intravenous cefazolin with steady improvement of the erythema, then oral cephalexin. Chest film showed no pneumonia and he denied cough. Insulin was adjusted for high glucose readings. Wound care reviewed by ___ and dietary teaching given by ___.
+
+Medications on Admission:
+Metformin twice daily, lisinopril daily, insulin glargine nightly
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth four times daily for five more days
+2. Insulin glargine, increased dose at bedtime
+3. Lisinopril 10 mg daily
+4. Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Left lower leg cellulitis
+Hyperglycemia
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Alert and oriented, able to follow commands.
+Level of Consciousness:
+Awake and interactive.
+Activity Status:
+Ambulatory, independent, leg elevated when seated.
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Finish all antibiotics. Check your blood sugar daily and keep a log. Return for fever, spreading redness, or severe pain. Call ___ with questions.
+
+Followup Instructions:
+___

@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Man with two days of worsening right upper quadrant pain, nausea and fever, referred by Dr. ___ from ___ after ultrasound showed gallstones.
+REVIEW OF SYSTEMS:
+Positive for nausea and chills. No chest pain or dyspnea.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+Mildly uncomfortable, tender in right upper quadrant, no peritonitis.
+HEENT:
+Anicteric sclera
+Neck:
+Supple
+Abdomen:
+Soft, tender under right costal margin
+EXTREMITIES:
+No edema
+SKIN:
+Warm and dry
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Ultrasound at ___ showed cholelithiasis with wall thickening and pericholecystic fluid. White count elevated on arrival.
+DISCHARGE LABS:
+White count normalized, liver enzymes within normal limits.
+
+Brief Hospital Course:
+He was admitted with acute cholecystitis, given intravenous antibiotics and taken to the operating room by Dr. ___ for an uncomplicated cholecystectomy. Pain was controlled, diet advanced, and he was discharged on the second day after surgery.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+
+Discharge Medications:
+Continue lisinopril and atorvastatin as before. Acetaminophen as needed for pain. Short course of oxycodone for severe pain. Docusate while taking opioids.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+Hypertension
+
+Discharge Condition:
+Stable.
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent; avoid heavy lifting for several weeks.
+
+Discharge Instructions:
+You had your gallbladder removed. Keep incisions clean and dry, and shower as directed by ___. Call the clinic or return for fever, worsening pain, vomiting, or yellow skin. Questions may go to ___.
+
+Followup Instructions:
+___

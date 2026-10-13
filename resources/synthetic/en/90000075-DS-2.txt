@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man sent by ___ clinic with right leg redness, warmth and fever for three days.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: tired, comfortable
+PULM: clear
+ABD: soft
+EXTREMITIES: right calf erythematous, warm
+
+Pertinent Results:
+Elevated white count with mild left shift on arrival, normalized by discharge.
+IMAGING:
+Venous ultrasound of the right leg showed no clot.
+
+Brief Hospital Course:
+Treated for cellulitis with IV antibiotics, redness receded markedly. Fever resolved. Transitioned to oral antibiotics, with wound care teaching from ___ and ___.
+
+Medications on Admission:
+Amlodipine
+Atorvastatin
+Allopurinol
+
+Discharge Medications:
+Cephalexin four times daily for seven days. Continue amlodipine, atorvastatin and allopurinol unchanged.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Right lower leg cellulitis
+
+Discharge Condition:
+Mental Status: alert and oriented, clear thinking.
+Activity Status: walks independently.
+
+Discharge Instructions:
+You were treated for a skin infection. Take antibiotics fully, elevate your leg, and return to ___ if redness spreads or fever returns.
+
+Followup Instructions:
+___

@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with several years of worsening ankle swelling and tiredness, referred by his clinic at ___ after labs showed abnormal values. He reported reduced appetite and less urine over one week, seen first at ___.
+REVIEW OF SYSTEMS:
+Positive for fatigue and swelling. No chest pain or fever.
+
+Past Medical History:
+Diabetes mellitus type 2
+Chronic kidney disease
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension, followed at ___
+
+Physical Exam:
+General:
+Tired but comfortable, no distress
+HEENT:
+Moist mucous membranes
+Ext:
+Mild bilateral pitting edema
+
+Pertinent Results:
+ADMISSION LABS:
+Creatinine elevated above his baseline, potassium mildly high, bicarbonate low. Hemoglobin slightly reduced. Urinalysis showed protein without infection. Renal ultrasound unremarkable apart from small echogenic kidneys.
+
+Brief Hospital Course:
+He was given gentle diuresis and his medications were adjusted. Kidney function improved toward baseline and potassium normalized after dietary counseling. Nephrology saw him at ___ and agreed with the plan. Glucose stayed controlled. Swelling decreased and he walked independently before leaving ___.
+
+Medications on Admission:
+Lisinopril, metformin, atorvastatin
+
+Discharge Medications:
+Furosemide 20 mg daily, atorvastatin nightly, insulin glargine at bedtime. Stop lisinopril and metformin until kidney review. Amlodipine 5 mg daily added.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Chronic kidney disease
+
+Discharge Condition:
+Stable
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were admitted with leg swelling. Weigh yourself each morning, limit salt and fluids, and avoid anti-inflammatory pain medicines. Call ___ if swelling or weight increases, or if you urinate much less.
+
+Followup Instructions:
+___

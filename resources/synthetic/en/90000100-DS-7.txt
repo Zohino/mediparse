@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old man sent from ___ with two days of worsening right lower abdominal pain, nausea and poor appetite. Symptoms began on ___ after a large meal. No fever or vomiting.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension
+Hyperlipidemia
+
+Family History:
+Family history of pneumonia in his mother. No known cancer.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: uncomfortable, alert
+Lungs: clear bilaterally
+Ext: warm, no edema
+Neuro: grossly intact, moves all limbs
+
+Pertinent Results:
+IMAGING:
+CT abdomen and pelvis with contrast.
+FINDINGS:
+Inflamed appendix with mild surrounding fat stranding, no abscess or free air. Small hepatic cyst, unchanged. Laboratory values showed mildly elevated white count, otherwise unremarkable.
+
+Brief Hospital Course:
+He was admitted with acute appendicitis and started on intravenous antibiotics. Surgery, led by Dr. ___, advised nonoperative management. Pain settled, diet advanced, and he tolerated oral intake. Glucose was controlled with insulin sliding scale during admission, then home regimen resumed on ___.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Amoxicillin-clavulanate 875 mg by mouth twice daily for seven days.
+2. Metformin 500 mg twice daily.
+3. Lisinopril 10 mg daily.
+Prescriptions filled at ___ pharmacy.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis
+Hypertension
+
+Discharge Condition:
+Stable, afebrile, tolerating diet.
+Level of Consciousness: alert and interactive
+
+Discharge Instructions:
+You were treated for appendicitis with antibiotics. Finish the full antibiotic course. Return for fever, worsening belly pain, or repeated vomiting. Avoid heavy lifting this week. For questions call ___.
+
+Followup Instructions:
+___

@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Mr. ___ is a man who presented with three days of palpitations, mild dyspnea and fatigue. He was seen by his physician at ___ and sent to the emergency department. Pulse was irregular and rapid on arrival. Home glucose readings had been running high. He denied chest pain, syncope or fever.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Elevated hemoglobin A1c, treated with metformin
+Cholecystectomy in ___
+
+Social History:
+___
+
+Family History:
+Father with stroke, treated at ___
+
+Physical Exam:
+General: Comfortable, no distress.
+HEENT: Moist mucous membranes.
+Abdomen: Soft, nontender.
+Ext: Warm, no edema. Pulse irregularly irregular.
+
+Pertinent Results:
+ECG at ___ showed an irregularly irregular narrow complex rhythm without P waves, rate 128. Glucose 246, hemoglobin A1c 8.4. Creatinine normal. Troponin negative twice. TSH normal. Echocardiogram at ___ showed preserved ejection fraction and mild left atrial enlargement.
+IMPRESSION: No acute pulmonary process.
+
+Brief Hospital Course:
+He was admitted to telemetry and started on diltiazem for rate control, with heart rate settling below 100. Because of his stroke risk he began apixaban after discussion with the team at ___. Troponins stayed negative and echocardiogram was reassuring. His glucose was managed with insulin sliding scale, and metformin resumed at discharge. Cardiology at ___ will arrange outpatient follow up.
+
+Medications on Admission:
+Metformin 1000 mg twice daily
+Lisinopril 20 mg daily
+Atorvastatin 40 mg nightly
+
+Discharge Medications:
+1. Apixaban 5 mg twice daily
+2. Diltiazem extended release 180 mg daily
+3. Metformin 1000 mg twice daily
+4. Lisinopril 20 mg daily
+5. Atorvastatin 40 mg nightly
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Atrial fibrillation with rapid ventricular response
+Secondary:
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with a fast, irregular heartbeat. Take the new blood thinner and heart rate medicine exactly as prescribed. Check your blood sugar each morning and bring the log to your visit at ___. Call ___ or return to the hospital for chest pain, fainting or bleeding.
+
+Followup Instructions:
+___

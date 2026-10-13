@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Weakness and poor appetite
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with long-standing hypertension sent by his clinic at ___ after labs showed worsening creatinine and glucose. He reported several days of nausea, fatigue and leg swelling. He was referred by ___ for admission.
+
+Past Medical History:
+Diabetes mellitus type 2
+Hypertension
+Anemia
+Gout
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Gen:
+Tired, comfortable at rest
+HEENT:
+Dry mucous membranes
+PULM:
+Clear bilaterally
+EXTREMITIES:
+Mild bilateral ankle edema
+Neuro:
+Alert, no deficits
+
+Pertinent Results:
+Creatinine 3.4, eGFR 18, potassium 5.6, hemoglobin 9.1, glucose 342, drawn at ___.
+IMAGING:
+Ultrasound showed small echogenic kidneys without obstruction.
+
+Brief Hospital Course:
+He received gentle fluids, insulin and a low potassium diet, and his glucose and potassium improved. The kidney team from ___ reviewed him and arranged outpatient care. Labs were stable by ___, and he tolerated meals.
+
+Medications on Admission:
+Lisinopril, metformin, allopurinol
+
+Discharge Medications:
+Insulin glargine nightly, sliding scale insulin with meals, amlodipine daily. Stop lisinopril and metformin until reviewed by your kidney doctor.
+
+Discharge Diagnosis:
+Diabetes mellitus with hyperglycemia
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were admitted with weakness and abnormal blood tests. Check your sugar before meals and avoid anti-inflammatory pills. Call ___ for vomiting, swelling or confusion, or return to ___ if worse.
+
+Followup Instructions:
+___

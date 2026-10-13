@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs
+
+Chief Complaint:
+Shortness of breath and wheezing
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old woman who presented with three days of worsening shortness of breath, wheezing and a cough productive of yellow sputum. Symptoms began about ___ days ago after a household member developed a cold. She was seen at ___ where her oxygen saturation was low, and she was sent to the emergency department of ___. She denied fever, chest pain, leg swelling or recent travel. She had been using her rescue inhaler every few hours without relief. Her primary physician, Dr. ___, had last reviewed her inhalers in the spring. In the emergency department she received nebulized bronchodilators, intravenous steroids and a dose of azithromycin, and she was admitted for further management.
+
+Past Medical History:
+Chronic obstructive pulmonary disease
+Hypertension
+Hyperlipidemia
+Gastroesophageal reflux
+
+Past Surgical History:
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Father with coronary artery disease.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Afebrile, mildly tachypneic, speaking in short sentences, no acute distress at rest.
+HEENT:
+Moist mucous membranes, clear oropharynx, no lesions.
+PULM:
+Diffuse expiratory wheezes with prolonged expiration, no crackles, fair air movement.
+CARDIAC:
+Regular rate and rhythm, normal heart sounds, no murmurs.
+ABD:
+Soft, nontender, nondistended, normal bowel sounds.
+EXTREMITIES:
+Warm and well perfused, no edema.
+
+Pertinent Results:
+Admission labs drawn on ___ showed a white count of 11.2 with mild neutrophilia, hemoglobin 13.1 and platelets 260. Sodium 138, potassium 4.1, bicarbonate 29, BUN 14 and creatinine 0.7. Troponin was negative twice. Venous blood gas showed a pH of 7.36 and a PCO2 of 52. Chest radiograph read by ___ showed hyperinflated lungs with flattened diaphragms, no focal consolidation, no effusion and a normal cardiac silhouette. Electrocardiogram demonstrated normal sinus rhythm at 92 beats per minute without ischemic changes. Sputum culture grew only normal oropharyngeal flora. Respiratory viral panel was negative. Discharge labs were notable for a white count of 9.4 and stable chemistries.
+
+Medications on Admission:
+Tiotropium 18 mcg inhaled daily
+Albuterol inhaler as needed
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Prednisone 40 mg by mouth daily for three more days, then stop
+2. Azithromycin 250 mg by mouth daily for four more days
+3. Tiotropium 18 mcg inhaled once daily
+4. Albuterol inhaler, two puffs every four hours as needed for wheezing
+5. Lisinopril 10 mg by mouth daily
+6. Atorvastatin 20 mg by mouth nightly
+7. Fluticasone-salmeterol inhaler, one puff twice daily
+
+Discharge Disposition:
+Home with ___ services
+
+Discharge Diagnosis:
+Chronic obstructive pulmonary disease exacerbation
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent, with oxygen saturation normal on room air.
+
+Discharge Instructions:
+You were admitted with worsening breathing difficulty and wheezing. You were treated with nebulizer treatments, steroids and an antibiotic, and your breathing improved. Please finish the prednisone and antibiotic as prescribed and use your inhalers every day, even when you feel well. Pick up your new inhaler at ___ pharmacy. Follow up with your primary physician, Dr. ___, at ___ clinic within one week, and call ___ to arrange an appointment by ___. Return to the hospital for worsening shortness of breath, fever, chest pain or confusion. Please do not smoke or stay around smoke.

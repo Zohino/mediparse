@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough, fever, shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient is a man who presented to ___ with five days of productive cough, fever and shortness of breath. Chest imaging showed a right lower lobe consolidation consistent with pneumonia. He had been seen at ___ by his primary physician on ___ and was sent to the emergency department, where antibiotics were started and he was admitted.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: Alert, mildly tachypneic, no acute distress
+ABD: Soft, nontender, nondistended
+SKIN: Warm, dry, no rash
+
+Pertinent Results:
+Admission labs notable for white count of 14.2 with neutrophil predominance and mildly elevated lactate. Chest radiograph at ___ demonstrated right lower lobe opacity. Blood cultures drawn on ___ showed no growth. Repeat white count on the day of discharge was 8.1. Electrolytes and creatinine were within normal limits throughout the stay.
+
+Brief Hospital Course:
+He was treated with intravenous ceftriaxone and azithromycin for community acquired infection of the lung and improved steadily. Oxygen was weaned to room air by hospital day three. Fever resolved and cough lessened. He was seen by the team at ___ and ambulated independently. He was transitioned to oral antibiotics and discharged in stable condition, with follow up arranged at ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily.
+2. Atorvastatin 20 mg by mouth every night.
+3. Amoxicillin-clavulanate 875 mg by mouth twice daily for five more days.
+4. Guaifenesin 600 mg by mouth twice daily as needed for cough.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Pneumonia
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with a lung infection and treated with antibiotics. Please finish the full course of your antibiotic after you leave. Drink plenty of fluids and rest. Call ___ or return to the emergency department for worsening breathing, high fever or chest pain. Keep your appointment with ___ on ___.
+
+Followup Instructions:
+___

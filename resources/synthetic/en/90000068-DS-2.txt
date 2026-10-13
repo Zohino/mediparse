@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and lightheadedness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old woman who developed palpitations and mild shortness of breath beginning ___. She felt lightheaded when standing and came to the emergency department. Heart rate was irregular and fast. She denied chest pain, fever or syncope.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Pertinent Results:
+Telemetry showed an irregular narrow complex rhythm with rates up to 140. Troponin was negative twice. Electrolytes and thyroid studies were unremarkable.
+IMAGING:
+Chest film obtained at ___.
+IMPRESSION:
+Normal heart size, clear lungs, no acute process.
+
+Brief Hospital Course:
+She was admitted for rate control. Metoprolol was increased and her heart rate settled below 100 within a day. Anticoagulation was reviewed with Dr. ___ and continued. She walked without symptoms. Her outpatient cardiology team at ___ will see her, and she was discharged home in stable condition on ___.
+
+Medications on Admission:
+Metoprolol 25 mg twice daily, levothyroxine, lisinopril.
+
+Discharge Medications:
+1. Metoprolol tartrate 50 mg by mouth twice daily.
+2. Apixaban 5 mg by mouth twice daily.
+3. Levothyroxine 75 mcg by mouth every morning.
+4. Lisinopril 10 mg by mouth daily.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Atrial fibrillation with rapid ventricular response
+
+Discharge Condition:
+Stable, afebrile, heart rate controlled.
+Level of Consciousness: Alert and interactive.
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized because of a fast, irregular heartbeat. Your metoprolol dose was raised and you should take a blood thinner every day. Return for chest pain, fainting or worsening breathlessness. Please call ___ with any questions.
+
+Followup Instructions:
+___

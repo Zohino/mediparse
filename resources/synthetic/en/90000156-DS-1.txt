@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins (reaction documented at ___)
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with several days of worsening epigastric pain and nausea, referred by Dr. ___ after an outpatient visit at ___. Vomiting once at home. Presented to the emergency department for evaluation.
+
+Past Medical History:
+Hypertension
+Suspected diabetes mellitus, awaiting confirmatory testing
+No history of CKD
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Gen: Comfortable, well appearing
+Neck: Supple
+Lungs: Clear bilaterally
+Ext: Warm, no edema
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Lipase elevated on arrival. Liver enzymes mildly raised. Ultrasound at ___ showed gallstones without ductal dilation. Creatinine and electrolytes were within normal limits throughout the stay.
+
+Brief Hospital Course:
+Admitted with gallstone pancreatitis. Treated with intravenous fluids, bowel rest and analgesia, then diet advanced as pain resolved. Surgery team at ___ recommended outpatient cholecystectomy. Discharged home once tolerating food.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+Aspirin
+
+Discharge Medications:
+1. Lisinopril daily as before.
+2. Atorvastatin nightly.
+3. Acetaminophen as needed for pain.
+4. Ondansetron as needed for nausea.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Gallstone pancreatitis
+Cholelithiasis
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with pancreatitis caused by gallstones. Eat small low-fat meals and avoid alcohol. Take medications as directed. Return for severe pain, fever, vomiting or yellow skin. Call ___ with questions.
+
+Followup Instructions:
+___

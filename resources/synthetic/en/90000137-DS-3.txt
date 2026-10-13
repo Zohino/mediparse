@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath and cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with COPD on home inhalers, referred by Dr. ___ after three days of worsening dyspnea, productive cough and wheeze. He was evaluated at ___ and found hypoxic with an irregular pulse, then admitted for further care.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Followed by ___ for kidney care
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: tired, speaking in short phrases
+HEENT: dry mucosa
+Neck: supple
+Lungs: diffuse wheeze
+EXTREMITIES: trace edema
+DISCHARGE PHYSICAL EXAM:
+Comfortable, lungs clear, no edema.
+
+Pertinent Results:
+Creatinine 2.1 at baseline, potassium normal, white count mildly elevated. Telemetry on ___ showed an irregularly irregular rhythm with a rapid rate.
+IMAGING:
+Chest radiograph.
+IMPRESSION:
+Hyperinflated lungs, no focal consolidation.
+
+Brief Hospital Course:
+He was treated with nebulizers, steroids and a short antibiotic course, and oxygen was weaned to room air. His heart rate was controlled with metoprolol and he was started on apixaban for stroke prevention. Creatinine remained stable. He was transferred from ___ and seen by the ___ team.
+
+Medications on Admission:
+Tiotropium inhaler daily
+Albuterol inhaler as needed
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Tiotropium inhaler once daily
+2. Albuterol inhaler every 4 hours as needed
+3. Metoprolol succinate 50 mg daily
+4. Apixaban 5 mg twice daily
+5. Prednisone taper over five days
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+COPD exacerbation
+Secondary:
+Chronic kidney disease
+Hypertension
+
+Discharge Condition:
+Stable
+Mental Status: clear and coherent
+Level of Consciousness: alert and interactive
+
+Discharge Instructions:
+You were cared for at ___ because of trouble breathing. Take your new medications as prescribed, use your inhalers, and avoid smoke exposure. Return for worsening breathlessness, chest pain, or bleeding. Please call ___ with any questions.
+
+Followup Instructions:
+___

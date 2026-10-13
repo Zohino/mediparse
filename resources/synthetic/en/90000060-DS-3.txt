@@ -1,0 +1,60 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with chronic kidney disease and hypertension sent by her clinic at ___ for increasing leg swelling, poor appetite and tiredness over one week.
+
+Past Medical History:
+Chronic kidney disease, stage 4
+Hypertension
+Anemia
+Gout
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Pertinent Results:
+Creatinine above baseline. Potassium mildly elevated on arrival, normal after treatment. Hemoglobin low and stable. Chest film showed mild vascular congestion. Urinalysis bland, no infection.
+
+Brief Hospital Course:
+Treated with intravenous diuretics and diet changes with good urine output and weight loss. Renal function returned near baseline. Seen by nephrology from ___.
+TRANSITIONAL ISSUES:
+Repeat chemistry in one week at ___.
+
+Medications on Admission:
+Amlodipine
+Furosemide
+Allopurinol
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Volume overload
+Hyperkalemia
+Anemia
+
+Discharge Condition:
+Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Ambulatory and independent.
+
+Discharge Instructions:
+You were hospitalized for fluid overload. Weigh yourself each morning and limit salt. Take medicines as directed, avoid anti-inflammatory pain pills, and return for swelling, breathlessness or reduced urine. Call ___ with questions.
+
+Followup Instructions:
+___

@@ -1,0 +1,79 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with three days of productive cough, fevers and shortness of breath. Chest film was read as concerning for possible pneumonia. He had been seen at ___ earlier in the week and was sent to the emergency department by his primary physician, Dr. ___.
+
+Past Medical History:
+Hypertension, followed at ___
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+General:
+Mildly ill appearing, comfortable at rest.
+HEENT:
+Moist mucous membranes, no sinus tenderness.
+EXTREMITIES:
+Warm, no edema.
+Neuro:
+Alert, oriented, nonfocal.
+
+Pertinent Results:
+ADMISSION LABS:
+White count mildly elevated, electrolytes and creatinine normal, lactate normal.
+IMPRESSION:
+Chest radiograph at ___ showed patchy right lower lobe opacity, no effusion.
+
+Brief Hospital Course:
+He was admitted for observation and treated with oral antibiotics and fluids. Fever resolved within two days and oxygen saturation remained normal on room air. Cough improved steadily. Cultures sent at ___ showed no growth. He was evaluated by physical therapy and cleared for discharge to ___ with outpatient follow up.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Azithromycin 250 mg by mouth daily for three more days
+4. Guaifenesin 600 mg by mouth twice daily as needed for cough
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community acquired lower respiratory tract infection
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with fever and cough. Finish your antibiotic course, drink plenty of fluids and rest. Return for fever, worsening breathlessness or chest pain. Call the clinic at ___ if you have questions about your medications.
+
+Followup Instructions:
+___

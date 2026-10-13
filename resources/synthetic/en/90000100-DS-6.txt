@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient is a man who presented to ___ with three days of redness, warmth and swelling of the right lower leg after a minor scrape. He noted fever and chills the evening before arrival. He was seen at ___ urgent care, given one dose of an oral antibiotic, and sent in when the redness spread past the marked border.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity
+
+Social History:
+___
+
+Physical Exam:
+General:
+Comfortable, no acute distress.
+HEENT:
+Moist mucous membranes, anicteric.
+ABD:
+Soft, nontender, nondistended.
+EXTREMITIES:
+Right shin with a well-demarcated area of erythema, warmth and mild edema; pulses intact.
+
+Pertinent Results:
+ADMISSION LABS:
+White count mildly elevated at 12.4 with neutrophil predominance. Hemoglobin 14.1, platelets normal. Sodium 138, potassium 4.1, bicarbonate 25, creatinine 0.9. Lactate 1.2. Blood cultures drawn at ___ showed no growth after two days. Ultrasound of the right leg showed soft tissue swelling and no deep vein thrombosis.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth four times daily for five more days.
+2. Lisinopril 10 mg once daily.
+3. Atorvastatin 20 mg at bedtime.
+4. Acetaminophen 650 mg every six hours as needed for pain, supplied by ___.
+
+Discharge Disposition:
+Home with visits arranged by ___
+
+Discharge Diagnosis:
+Cellulitis of the right lower leg
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for a skin infection of your right leg. Take the antibiotic until the course is finished. Keep the leg raised when sitting and watch the edge of the redness. Return to ___ or call ___ if the redness spreads, fever returns, or pain worsens. Please see your primary doctor at ___ this week.
+
+Followup Instructions:
+___

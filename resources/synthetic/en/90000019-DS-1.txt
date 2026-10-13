@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+She presented to ___ with two days of right lower abdominal pain, nausea and fever after evaluation at ___ clinic. CT showed acute appendicitis and she was taken urgently to the operating room. Surgery was consulted.
+
+Past Medical History:
+Migraine
+Seasonal allergies
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: T 38.1 HR 98 BP 122/74 RR 16 SpO2 99% RA
+Gen: uncomfortable, alert
+ABD: tender right lower quadrant, guarding
+Ext: warm, no edema
+SKIN: dry, intact
+Neuro: nonfocal
+
+Pertinent Results:
+ADMISSION LABS: WBC 15.2, Hgb 13.1, Plt 280, Na 138, K 4.0, Cr 0.8. CT abdomen: dilated inflamed appendix with surrounding fat stranding. Pathology from ___ pending. Postoperative labs were unremarkable.
+
+Brief Hospital Course:
+She underwent laparoscopic appendectomy without complication. Postoperative pain was controlled with oral analgesics, her diet was advanced, and she tolerated regular food. Antibiotics were given for two days. Pathology was sent to ___ and she was discharged home in stable condition with ___ follow up.
+
+Medications on Admission:
+Oral contraceptive pill daily. Multivitamin daily.
+
+Discharge Medications:
+1. Acetaminophen 500 mg tablet, 2 tablets by mouth every 6 hours as needed for pain.
+2. Oral contraceptive pill daily.
+3. Docusate 100 mg twice daily while taking opioids.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Good
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+Keep incisions clean and dry. Avoid lifting over ten pounds for four weeks. Call ___ or return to the emergency department for fever, vomiting, or worsening pain. Bring this summary to ___.
+
+Followup Instructions:
+___

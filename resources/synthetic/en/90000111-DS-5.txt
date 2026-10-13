@@ -1,0 +1,88 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies.
+
+Chief Complaint:
+Shortness of breath and cough.
+
+Major Surgical or Invasive Procedure:
+None.
+
+History of Present Illness:
+The patient is a woman who presented to ___ with three days of worsening shortness of breath, productive cough and wheeze. She reported low-grade fevers and increased use of her rescue inhaler. She was seen by her primary care physician ___ who advised emergency evaluation. In the emergency department she was hypoxic and received nebulizers and steroids.
+
+REVIEW OF SYSTEMS:
+Positive for cough and dyspnea. Negative for chest pain.
+
+Past Medical History:
+Chronic obstructive pulmonary disease
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Father with ___.
+
+Physical Exam:
+Vitals:
+T 99.1 HR 88 BP 128/76 RR 20 SpO2 94% on room air
+
+Gen:
+Comfortable, no acute distress.
+
+HEENT:
+Moist mucous membranes.
+
+Lungs:
+Diffuse expiratory wheezes, prolonged expiration.
+
+CARDIAC:
+Regular rate and rhythm.
+
+Brief Hospital Course:
+She was admitted for acute hypoxemic respiratory failure with wheezing from her underlying lung disease, likely triggered by a viral respiratory infection. She was treated with scheduled nebulizers, a short course of oral prednisone and supplemental oxygen, which was weaned off by hospital day three. Chest imaging performed at ___ showed no focal consolidation. Her blood pressure medications were continued. She was discharged in stable condition after review with ___.
+
+Medications on Admission:
+Albuterol inhaler as needed
+Lisinopril daily
+Atorvastatin nightly
+
+Discharge Medications:
+1. Prednisone 40 mg by mouth daily for four more days
+2. Albuterol inhaler two puffs every four hours as needed
+3. Tiotropium inhaled once daily
+4. Lisinopril daily
+5. Atorvastatin nightly, as directed by ___
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Acute hypoxemic respiratory failure
+Viral respiratory infection
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+
+Level of Consciousness:
+Alert and interactive.
+
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with trouble breathing and wheezing. Finish your prednisone and use your inhalers as prescribed. Avoid smoke and other irritants. Return to the hospital for worsening breathlessness, fever, chest pain or confusion. Please call ___ if you have questions about your medications.
+
+Followup Instructions:
+___

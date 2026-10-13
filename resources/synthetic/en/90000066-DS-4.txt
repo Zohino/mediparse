@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Weakness and increased thirst
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman sent from ___ clinic with several days of fatigue, polyuria, and poor oral intake. She reported nausea and blurred vision. Home glucose readings were persistently elevated, prompting admission for monitoring and treatment.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Gen: Tired appearing, comfortable at rest
+Ext: Warm, no edema
+Neuro: Alert, no focal deficits
+PULSES: 2+ and symmetric throughout
+
+Pertinent Results:
+Labs drawn on ___ showed marked hyperglycemia with mild elevation of creatinine that improved with fluids. Urinalysis showed glucosuria without infection. Chest film was clear.
+DISCHARGE LABS:
+Glucose 168, creatinine 0.9, sodium 139, potassium 4.1
+
+Brief Hospital Course:
+She received intravenous fluids and insulin with steady improvement in glucose and symptoms. Diet was advanced and a nutritionist reviewed meal planning. An educator from ___ taught injection and monitoring technique, and she was seen by endocrinology on ___. Home blood pressure medications were continued. She was stable for discharge.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Metformin 500 mg twice daily with meals
+2. Lisinopril 10 mg once daily
+3. Atorvastatin 20 mg at bedtime
+4. Glucose test strips as directed
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes mellitus with hyperglycemia
+Secondary:
+Hypertension, hyperlipidemia
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for very high blood sugar. Check your glucose before meals and at bedtime, and keep a log. Take medications as prescribed. Call ___ or return to the emergency department for vomiting, confusion, or sugars above 400. Keep your appointment at ___.
+
+Followup Instructions:
+___

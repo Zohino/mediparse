@@ -1,0 +1,90 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old woman with a history of irregular heart rhythm, kidney problems and elevated blood sugars who presented with five days of productive cough, fever and worsening breathlessness. She was sent in from ___ by her primary physician, Dr. ___, after oxygen saturation was low on room air.
+
+Past Medical History:
+Diabetes mellitus type 2
+Chronic kidney disease stage 3
+Atrial fibrillation on anticoagulation
+Hypertension
+
+Past Surgical History:
+Cholecystectomy
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General:
+Tired but comfortable, speaking full sentences
+HEENT:
+Moist mucous membranes
+Neck:
+Supple
+Lungs:
+Crackles at right base
+ABD:
+Soft, nontender
+EXTREMITIES:
+Trace edema
+SKIN:
+Warm and dry
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Admission labs on ___ showed white count 13.2, creatinine 1.6 (near baseline), glucose 210. Chest film revealed a right lower lobe opacity. Blood cultures showed no growth. ECG demonstrated an irregular rhythm with controlled ventricular rate. Repeat chest film before discharge was stable.
+
+Brief Hospital Course:
+She was treated for community acquired pneumonia with a course of antibiotics chosen around her allergy, plus supplemental oxygen that was weaned within three days. Her rate stayed controlled and anticoagulation continued. Insulin was adjusted for sugars. Kidney function remained stable. Dr. ___ at ___ agreed with the plan.
+TRANSITIONAL ISSUES:
+Recheck chest film in six weeks and basic labs in one week.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+Apixaban 5 mg twice daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Apixaban 5 mg by mouth twice daily
+2. Lisinopril 10 mg by mouth once daily
+3. Metformin 500 mg by mouth twice daily
+4. Azithromycin 250 mg daily for three more days
+Prescriptions sent to ___ pharmacy.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Diabetes mellitus type 2
+Atrial fibrillation
+
+Discharge Condition:
+Stable
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+
+Discharge Instructions:
+You were hospitalized with an infection of the lung and were treated with antibiotics and oxygen. Finish all prescribed pills, drink fluids and rest. Check your blood sugar daily. Return for fever, worsening breathlessness or chest pain. Call ___ with questions or use the number ___ after hours. Follow up with Dr. ___.
+
+Followup Instructions:
+___

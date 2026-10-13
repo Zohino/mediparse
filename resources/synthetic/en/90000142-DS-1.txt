@@ -1,0 +1,64 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with long-standing hypertension sent from ___ with two weeks of worsening ankle swelling and fatigue.
+
+Past Medical History:
+Chronic kidney disease stage 4
+Hypertension
+Gout
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+Gen:
+Tired, comfortable
+PULM:
+Clear
+Abdomen:
+Soft, nontender
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Creatinine near baseline at ___. Potassium mildly elevated, improved after treatment. Hemoglobin stable. Urinalysis showed protein.
+
+Medications on Admission:
+Amlodipine
+Allopurinol
+
+Discharge Medications:
+Furosemide daily for swelling
+Amlodipine as before
+Allopurinol, dose reduced
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Chronic kidney disease
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert
+Activity Status: Walks independently
+
+Discharge Instructions:
+You were treated for fluid overload. Weigh yourself each morning, limit salt, take medicines as listed, and call ___ if swelling returns.
+
+Followup Instructions:
+___

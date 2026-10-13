@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies.
+
+Chief Complaint:
+Right foot pain and swelling.
+
+Major Surgical or Invasive Procedure:
+Bedside incision and drainage of right foot abscess by the ___ team.
+
+History of Present Illness:
+The patient is a man with diabetes mellitus and hypertension who presented to ___ after three days of worsening right foot pain, swelling and low-grade fevers. He noticed a draining wound on the sole after walking barefoot at ___. His primary care physician at ___ sent him to the emergency department. There he was febrile and tachycardic and received intravenous antibiotics. Imaging showed soft tissue swelling, and he was admitted to medicine.
+
+Past Medical History:
+Hypertension, hyperlipidemia, obesity, right knee surgery at ___.
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Father with heart disease.
+
+Physical Exam:
+Vitals: T 100.1 HR 96 BP 138/82 RR 16 SpO2 98% RA
+General: Alert, comfortable, no distress.
+HEENT: Anicteric, moist mucous membranes.
+Lungs: Clear bilaterally.
+ABD: Soft, nontender.
+Ext: Right foot erythematous, warm, mildly swollen, incision healing.
+SKIN: No other lesions.
+
+Pertinent Results:
+Admission labs were notable for an elevated white count and raised inflammatory markers. Blood cultures from ___ showed no growth. Wound culture grew methicillin-sensitive Staphylococcus aureus. Foot radiograph at ___ showed soft tissue swelling without gas or bony destruction. MRI was negative for osteomyelitis. Glucose values were elevated on admission and improved with insulin adjustment.
+DISCHARGE LABS:
+WBC 8.1, Hgb 13.2, Plt 280, Na 140, K 4.2, Cr 0.9, Glucose 142.
+
+Brief Hospital Course:
+He was started on intravenous vancomycin, later narrowed to cefazolin after cultures grew a methicillin-sensitive organism. The abscess was drained at bedside by the ___ team with good return of purulent fluid. Fever resolved within two days and the erythema receded. Podiatry from ___ evaluated the foot and recommended offloading and daily dressing changes. Glucose was managed with insulin, then oral agents were resumed. Blood pressure remained stable. Wound care teaching was given by ___ nursing. He was changed to oral cephalexin and discharged stable, to follow up with ___ clinic.
+
+Medications on Admission:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly, metformin 500 mg twice daily, aspirin 81 mg daily.
+
+Discharge Medications:
+Cephalexin 500 mg four times daily until ___. Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Metformin 500 mg twice daily. Aspirin 81 mg daily. Acetaminophen 650 mg every six hours as needed for pain.
+
+Discharge Disposition:
+Home with services.
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Right foot abscess with cellulitis.
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized for an infection of your right foot. Take the antibiotic exactly as prescribed until finished. Change the dressing daily and keep the foot clean and dry. Keep weight off the foot as much as possible. Return to ___ or call your doctor if you develop fever, spreading redness, worsening pain or drainage. Visiting nurses from ___ will help with wound care.
+
+Followup Instructions:
+___

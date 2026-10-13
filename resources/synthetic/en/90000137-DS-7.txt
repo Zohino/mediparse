@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Worsening shortness of breath, referred by ___
+
+Major Surgical or Invasive Procedure:
+None
+
+Past Medical History:
+Chronic kidney disease
+Atrial fibrillation
+Hypertension
+Former tobacco use
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Vitals: T 98.2 HR 78 BP 130/74 RR 18 SpO2 92% RA
+General: Comfortable
+HEENT: Anicteric
+Neck: Supple
+Lungs: Diffuse wheezes
+ABD: Soft
+Ext: Trace edema
+Neuro: Nonfocal
+
+Pertinent Results:
+Admission labs notable for creatinine 2.4, baseline near 2.2. Venous bicarbonate 33. Hemoglobin 11.8. Troponin negative twice. ECG showed an irregularly irregular rhythm with controlled rate.
+IMAGING: Chest radiograph showed hyperinflated lungs, flattened diaphragms, and no focal consolidation, read by ___.
+
+Brief Hospital Course:
+He presented to ___ with several days of increased dyspnea and cough. He improved with nebulized bronchodilators, a short steroid course, and supplemental oxygen, which was weaned off. Creatinine remained stable. His rate stayed controlled on home metoprolol with anticoagulation continued. He was seen by ___ and cleared for home, with follow-up arranged at ___.
+
+Medications on Admission:
+Apixaban, metoprolol, tiotropium inhaler, amlodipine.
+
+Discharge Medications:
+Apixaban 2.5 mg twice daily. Metoprolol succinate 50 mg daily. Tiotropium inhaler daily. Amlodipine 5 mg daily. Prednisone taper for four more days. Albuterol inhaler as needed.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Chronic kidney disease
+Atrial fibrillation
+
+Discharge Condition:
+Stable.
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized for trouble breathing and treated with inhalers and steroids. Finish the prednisone and use your inhalers as directed. Weigh yourself daily and avoid smoke exposure. Call ___ or return to the emergency department for worsening breathlessness, fever, or chest pain. Questions may be directed to ___.
+
+Followup Instructions:
+___

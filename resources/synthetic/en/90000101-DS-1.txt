@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Fatigue, thirst, frequent urination
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient is a woman with a long history of poorly controlled blood sugars who presented to ___ with three days of fatigue, excessive thirst, and frequent urination. She had been seen by her physician at ___ on ___ and was sent to the emergency department after a very high glucose reading at home. She denied fever, chest pain, or vomiting.
+REVIEW OF SYSTEMS:
+Positive as above. Otherwise negative.
+
+Past Medical History:
+Diabetes mellitus type 2
+Hypertension
+Hyperlipidemia
+Prior ___ surgery
+
+Social History:
+___
+
+Family History:
+Mother and sister with ___ disease
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Gen: Tired, dry mucous membranes, no distress.
+CARDIAC: Regular rate and rhythm, no murmur.
+ABD: Soft, nontender, nondistended.
+Ext: Warm, no edema.
+
+Pertinent Results:
+Admission labs on ___: glucose markedly elevated, bicarbonate low, anion gap mildly raised, creatinine at baseline. Hemoglobin A1c very high. Urinalysis showed ketones and glucose without signs of infection. Chest radiograph clear. ECG sinus rhythm without acute changes. Repeat chemistry after fluids and insulin infusion showed a closed gap and normal bicarbonate. Potassium was repleted.
+
+Medications on Admission:
+Metformin 1000 mg twice daily
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Metformin 1000 mg by mouth twice daily
+2. Insulin glargine 20 units at bedtime
+3. Lisinopril 10 mg by mouth once daily
+4. Atorvastatin 20 mg by mouth nightly
+5. Glucose test strips, check sugar before meals
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Diabetes mellitus type 2 with ketoacidosis
+
+Discharge Condition:
+Stable and improved.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were admitted with very high blood sugar and acid buildup in your blood. You were treated with fluids and insulin and your labs improved. Check your sugar before meals and at bedtime and keep a log. Take insulin as directed. Return for vomiting, confusion, or sugars above ___. Call ___ with questions.
+
+Followup Instructions:
+___

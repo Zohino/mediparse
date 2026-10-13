@@ -1,0 +1,57 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with diabetes presented to ___ after two days of worsening cough and shortness of breath, seen by her physician at ___ and sent to the emergency department for evaluation.
+
+Past Medical History:
+Chronic kidney disease
+Hypertension
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Gen: Comfortable, no acute distress.
+HEENT: Moist mucous membranes.
+Neck: Supple.
+SKIN: Warm, dry, no rash.
+Neuro: Alert, oriented, nonfocal.
+
+Brief Hospital Course:
+She was treated for a COPD exacerbation with nebulizers, steroids and antibiotics, and her breathing gradually improved. Oxygen was weaned off by day four. She was evaluated by ___ and cleared to go home with follow up at ___. She remained stable.
+
+Medications on Admission:
+Metformin 500 mg twice daily. Albuterol inhaler.
+
+Discharge Medications:
+Prednisone 40 mg daily for three more days. Albuterol inhaler every four hours as needed. Metformin 500 mg twice daily.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Condition:
+Good
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for a lung flare. Take your medicines, rest, and return to ___ if breathing worsens quickly or fever develops.
+
+Followup Instructions:
+___

@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with three days of worsening leg swelling, fatigue and poor appetite. She was seen at ___ clinic, where blood work showed weak kidney function. No fever or productive cough, and chest imaging showed no pneumonia. She was sent in for further evaluation and monitoring.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Atrial fibrillation on anticoagulation
+Hypertension
+Anemia
+Followed by nephrology at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General: Tired but comfortable, in no distress.
+HEENT: Moist mucous membranes, no jaundice.
+ABD: Soft, nontender, nondistended, normal bowel sounds.
+Ext: Mild bilateral pedal edema, warm and well perfused.
+
+Pertinent Results:
+FINDINGS:
+Creatinine elevated at 3.4 with eGFR 14, near her prior baseline drawn at ___. Potassium 5.6 on arrival, repeat 4.9 after treatment. Hemoglobin 9.1. Chest radiograph clear apart from mild vascular congestion. ECG showed irregular rhythm with controlled rate.
+
+Brief Hospital Course:
+She was treated with a low potassium diet, a binder and gentle diuresis, with improvement in swelling and electrolytes. Kidney function stabilized and nephrology reviewed her at ___. Rate stayed controlled on home medications. Glucose was managed with her usual regimen.
+TRANSITIONAL ISSUES:
+Repeat chemistry panel in one week. Nephrology visit at ___.
+
+Medications on Admission:
+Metformin, apixaban, metoprolol, furosemide, amlodipine (list from ___)
+
+Discharge Medications:
+1. Apixaban 2.5 mg twice daily
+2. Metoprolol succinate 50 mg daily
+3. Furosemide 40 mg daily
+4. Amlodipine 5 mg daily
+5. Sevelamer with meals
+Metformin was stopped.
+
+Discharge Disposition:
+Home with services
+Facility: ___
+
+Discharge Diagnosis:
+Diabetes mellitus
+Volume overload
+Hyperkalemia
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory with a walker.
+
+Discharge Instructions:
+You were hospitalized for swelling and high potassium. Weigh yourself every morning and call ___ if your weight rises by three pounds. Limit salt and high potassium foods. Take your medicines as listed and attend all appointments with ___.
+
+Followup Instructions:
+___

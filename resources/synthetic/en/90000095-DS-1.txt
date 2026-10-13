@@ -1,0 +1,62 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man presenting with three days of worsening cough, wheezing and breathlessness on exertion. He was sent in from ___ after his oxygen saturation dropped.
+REVIEW OF SYSTEMS:
+Positive for sputum production. No chest pain or fever.
+
+Past Medical History:
+COPD
+Hypertension
+Former smoker
+
+Social History:
+___
+
+Family History:
+Father with heart disease
+
+Pertinent Results:
+Labs were unremarkable apart from mild leukocytosis.
+ADMISSION LABS:
+WBC 11.2, Hgb 14.1, creatinine 0.9
+IMPRESSION:
+Hyperinflated lungs, no focal consolidation.
+
+Medications on Admission:
+Tiotropium daily
+Albuterol inhaler as needed
+
+Discharge Medications:
+1. Tiotropium inhaled once daily
+2. Albuterol inhaler every four hours as needed
+3. Prednisone taper for five days
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary:
+COPD exacerbation
+
+Discharge Condition:
+Stable
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a flare of your lung condition with steroids and nebulizers. Finish the prednisone course, use your inhalers, avoid smoke, and call Dr. ___ if breathing worsens.
+
+Followup Instructions:
+___

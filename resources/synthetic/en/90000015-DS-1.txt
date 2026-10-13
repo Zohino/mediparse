@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man sent by his primary clinic at ___ after two weeks of worsening ankle swelling, tiredness and poor appetite. Laboratory tests drawn at ___ showed abnormal values, so he was admitted for evaluation and monitoring.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout, followed at ___
+
+Social History:
+___
+
+Family History:
+Father with hypertension. Sibling treated at ___ for gout.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Comfortable, afebrile, blood pressure mildly elevated.
+HEENT:
+Moist mucous membranes.
+Neck:
+Supple, no JVD.
+Abdomen:
+Soft, nontender.
+EXTREMITIES:
+Mild bilateral pitting edema.
+
+Pertinent Results:
+Admission labs notable for elevated creatinine and urea, mild anemia, and low bicarbonate. Urinalysis showed protein. Comparison made with outside values from ___.
+IMPRESSION:
+Small kidneys on ultrasound without hydronephrosis.
+
+Brief Hospital Course:
+He was treated with gentle diuresis and his swelling improved steadily. Blood pressure medication was adjusted and nephrology reviewed his case at ___. Electrolytes were corrected and he tolerated a low-salt diet. Labs remained stable, and he was cleared for discharge with close outpatient follow-up at ___.
+
+Medications on Admission:
+Amlodipine
+Atorvastatin
+Allopurinol
+
+Discharge Medications:
+1. Amlodipine 10 mg daily.
+2. Atorvastatin 20 mg nightly.
+3. Furosemide 20 mg every morning.
+4. Sodium bicarbonate tablets twice daily.
+5. Allopurinol dose reduced, take as directed.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Chronic kidney disease
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted with swelling and abnormal blood tests. Take your medicines as listed, weigh yourself each morning, and limit salt in your diet. Avoid anti-inflammatory pain relievers. Return for shortness of breath, reduced urine, or worsening swelling. Call ___ with questions.
+
+Followup Instructions:
+___

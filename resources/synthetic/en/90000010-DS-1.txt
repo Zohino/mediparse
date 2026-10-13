@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+___ year old woman with hypertension and hyperlipidemia presented with three days of right lower quadrant pain, nausea and low grade fever. She was sent from ___ clinic after outpatient imaging suggested appendiceal inflammation. She denied vomiting, diarrhea or urinary symptoms on arrival.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Denies diabetes
+Cesarean section at ___
+
+Social History:
+___
+
+Family History:
+Mother with breast cancer
+
+Physical Exam:
+Vitals: T 100.2, HR 88, BP 132/78, RR 16, SpO2 98% room air
+General: Uncomfortable but alert, no distress
+HEENT: Moist mucous membranes
+ABD: Tender right lower quadrant, guarding, no rebound
+Ext: Warm, no edema
+
+Pertinent Results:
+Admission labs showed mild leukocytosis with normal electrolytes and creatinine. CT of the abdomen at ___ demonstrated a dilated, thick walled appendix with surrounding fat stranding and no abscess or free air. Pathology was sent and is pending at discharge.
+
+Brief Hospital Course:
+She was admitted to the surgical service, given intravenous fluids and antibiotics, and taken to the operating room at ___ for an uncomplicated laparoscopic appendectomy. Pain was controlled with oral medication. She tolerated a regular diet, passed flatus, and was discharged on hospital day two after review by the team at ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Acetaminophen 650 mg by mouth every six hours as needed for pain
+4. Docusate 100 mg twice daily while taking opioids
+
+Discharge Disposition:
+Home with services arranged by ___
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for appendicitis and had your appendix removed through small incisions. Keep the incisions clean and dry. Avoid lifting more than ten pounds for four weeks. Call ___ or return for fever, worsening pain, vomiting or redness at the incisions. Your results will be reviewed at ___.
+
+Followup Instructions:
+___

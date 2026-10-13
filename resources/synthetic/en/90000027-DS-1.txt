@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever and productive cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Male presenting with three days of fever, productive cough and malaise after contact with a sick relative. He was seen at ___ and referred here by ___ for further evaluation. Oxygen saturation was borderline on arrival and he was admitted for observation and treatment.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy at ___ in childhood
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Sibling with ___
+
+Physical Exam:
+General: Alert, mildly ill-appearing, no distress.
+Neck: Supple, no lymphadenopathy.
+Abdomen: Soft, nontender, nondistended.
+Neuro: Awake, oriented, moves all extremities.
+
+Pertinent Results:
+Chest radiograph on ___ showed a patchy right lower lobe opacity. White count mildly elevated with otherwise normal chemistry panel. Electrocardiogram showed sinus rhythm. Blood cultures pending at discharge. Urinalysis unremarkable.
+IMPRESSION: Patchy basilar opacity, nonspecific, correlate clinically.
+
+Brief Hospital Course:
+He was monitored on the medical floor with supplemental oxygen, which was weaned within two days. Imaging raised concern for possible pneumonia, so he received empiric antibiotics with improvement in fever and cough. He was seen by ___ for mobility assessment and cleared for discharge by ___ once eating well and walking independently.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Aspirin 81 mg daily.
+
+Discharge Medications:
+Amoxicillin-clavulanate 875 mg twice daily for five more days. Acetaminophen 650 mg every six hours as needed for fever. Continue lisinopril, atorvastatin and aspirin as before.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Lower respiratory tract infection
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for a lung infection and treated with antibiotics. Finish the full course, rest, drink fluids, and return for fever, worsening breathlessness or chest pain. Arrange follow up with ___ within one week.
+
+Followup Instructions:
+___

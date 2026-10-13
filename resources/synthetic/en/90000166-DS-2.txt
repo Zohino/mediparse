@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None, seen by ___
+
+History of Present Illness:
+Woman with hypertension presenting with palpitations and lightheadedness for two days. Her clinic nurse at ___ noted an irregular pulse and sent her to the emergency department of ___ for evaluation.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Osteoarthritis
+
+Family History:
+Mother with stroke. No sudden cardiac death.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Gen: comfortable, no distress
+Lungs: clear bilaterally
+ABD: soft, nontender
+EXTREMITIES: no edema
+PULSES: irregularly irregular, palpable
+
+Pertinent Results:
+Troponin negative x2. TSH normal. Potassium and magnesium within normal range. Chest film obtained at ___ shows no acute process.
+IMPRESSION:
+No acute cardiopulmonary abnormality.
+
+Brief Hospital Course:
+She was found to have atrial fibrillation with rapid ventricular response on arrival. Rate was controlled with oral metoprolol and she was started on apixaban after review with the team from ___. Rhythm remained rate controlled and she was discharged in good condition, with outpatient care arranged at ___.
+TRANSITIONAL ISSUES:
+Continue anticoagulation. Recheck heart rate at the first clinic visit.
+
+Medications on Admission:
+Lisinopril daily
+Levothyroxine daily
+
+Discharge Medications:
+1. Apixaban twice daily
+2. Metoprolol succinate once daily
+3. Lisinopril daily
+4. Levothyroxine each morning
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Palpitations
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Mental Status: alert and fully oriented
+Level of Consciousness: awake and interactive
+Activity Status: walks independently
+
+Discharge Instructions:
+You were hospitalized for a fast heartbeat. Take your new medicines every day as directed. Return for chest pain, fainting, bleeding or worsening shortness of breath. Call the clinic at ___ with questions.
+
+Followup Instructions:
+___

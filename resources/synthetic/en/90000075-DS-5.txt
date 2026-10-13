@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and dyspnea
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man sent by ___ clinic with two weeks of worsening leg swelling, orthopnea and weight gain. Seen previously at ___ for similar symptoms.
+
+Past Medical History:
+Hypertension
+Heart failure
+Hyperlipidemia
+
+Social History:
+___
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: stable, afebrile
+Neck: elevated JVP
+CARDIAC: regular, systolic murmur
+Abdomen: soft, nontender
+Ext: bilateral pitting edema
+
+Pertinent Results:
+BNP elevated. Creatinine near baseline. Chest radiograph showed mild vascular congestion and small effusions. Echocardiogram unchanged from prior study.
+
+Brief Hospital Course:
+Treated with intravenous diuretics with steady weight loss and improved breathing. Medications reviewed with the team at ___. Cardiology follow up arranged at ___.
+TRANSITIONAL ISSUES:
+Recheck electrolytes within one week.
+
+Medications on Admission:
+Lisinopril
+Furosemide
+Atorvastatin
+
+Discharge Medications:
+Furosemide 40 mg daily, lisinopril 10 mg daily, atorvastatin 20 mg nightly, and potassium chloride 20 mEq daily.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute on chronic heart failure
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were admitted with fluid overload. Weigh yourself every morning and call ___ if your weight rises by three pounds. Limit salt intake.
+
+Followup Instructions:
+___

@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Dizziness and palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman seen at ___ with brief dizziness. She denies atrial fibrillation or chest pain. Symptoms resolved quickly.
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Normal
+Neck:
+Supple
+Abdomen:
+Soft, nontender
+Ext:
+No edema
+
+Pertinent Results:
+IMAGING:
+Chest film obtained at ___.
+IMPRESSION:
+Clear lungs, normal heart size, no acute findings. Labs unremarkable.
+
+Brief Hospital Course:
+Observed on telemetry with stable rhythm. Dizziness attributed to dehydration and improved with fluids. Discharged home in good condition after ___ review.
+
+Medications on Admission:
+Lisinopril daily
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily
+2. Acetaminophen as needed for pain
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Dehydration
+Orthostatic dizziness
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized for dizziness. Drink plenty of fluids, rise slowly, take medicines as directed, and return if symptoms recur.
+
+Followup Instructions:
+___

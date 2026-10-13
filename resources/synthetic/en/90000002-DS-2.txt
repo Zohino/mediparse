@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This ___ year old man presented with two days of intermittent palpitations and lightheadedness after transfer from ___ for further evaluation. He described mild shortness of breath but no chest pain or fever.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout, followed by Dr. ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+General:
+Comfortable, alert, no distress
+Abdomen:
+Soft, nontender
+Ext:
+Warm, no edema
+
+Pertinent Results:
+ADMISSION LABS:
+Sodium 139, potassium 4.1, troponin negative twice, TSH normal, hemoglobin 14.2
+IMAGING:
+Chest radiograph showed clear lungs and normal heart size
+
+Brief Hospital Course:
+He was admitted to telemetry for observation. An irregular rhythm on monitoring raised suspicion for possible atrial fibrillation, pending outpatient monitoring. Cardiology at ___ reviewed the tracings on ___. Symptoms settled with hydration and he went home.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Continue lisinopril 10 mg once daily. Continue atorvastatin 20 mg every night. Take acetaminophen 500 mg as needed for headache.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Palpitations
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+
+Discharge Instructions:
+You were hospitalized for palpitations. Take your medicines as directed and avoid excess caffeine. Return if you have fainting, chest pain or worsening breathlessness. Call the ___ clinic with questions.
+
+Followup Instructions:
+___

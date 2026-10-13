@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old man with two days of right upper quadrant pain, nausea and fever, sent from ___ clinic after ultrasound showed gallstones. He denied jaundice, vomiting blood or chest pain.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+General: Uncomfortable, afebrile.
+ABD: Tender right upper quadrant, no rebound.
+Ext: Warm, no edema.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+IMAGING: Ultrasound showed multiple gallstones, thickened gallbladder wall and pericholecystic fluid.
+IMPRESSION: Findings consistent with acute cholecystitis. Common bile duct normal in caliber.
+
+Brief Hospital Course:
+He was given antibiotics and fluids, then taken to the operating room by Dr. ___ for an uncomplicated laparoscopic cholecystectomy. Pain improved, diet was advanced, and he was discharged on ___ tolerating regular food.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg once daily.
+2. Atorvastatin 20 mg nightly.
+3. Acetaminophen 650 mg every six hours as needed for pain.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for gallbladder inflammation and had your gallbladder removed. Avoid lifting heavy objects for four weeks. Return for fever, worsening pain, vomiting or yellow skin. Call ___ with questions.
+
+Followup Instructions:
+___

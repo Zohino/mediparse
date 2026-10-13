@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy on ___
+
+History of Present Illness:
+Patient is a woman who presented to ___ with two days of right upper quadrant pain, nausea and vomiting after a fatty meal. She was seen at ___ by her primary physician on ___ and sent to the emergency department. Fever to 101 was recorded at home. No jaundice or diarrhea.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gastroesophageal reflux
+
+Social History:
+___
+
+Family History:
+Mother with diabetes mellitus. Father with hypertension.
+
+Physical Exam:
+Vitals: afebrile, hemodynamically stable
+Gen: comfortable, no distress
+PULM: clear bilaterally
+CARDIAC: regular rhythm
+ABD: soft, mild RUQ tenderness
+Ext: no edema
+SKIN: warm, dry
+Neuro: alert, nonfocal
+
+Pertinent Results:
+ADMISSION LABS: WBC 13.2, AST 48, ALT 52, total bilirubin 1.1, lipase normal.
+DISCHARGE LABS: WBC 7.8, liver enzymes normalized.
+IMAGING: Right upper quadrant ultrasound shows gallstones, a thickened gallbladder wall and pericholecystic fluid.
+IMPRESSION: Findings consistent with acute cholecystitis, as read by ___.
+
+Brief Hospital Course:
+She was admitted to the surgical service, kept NPO, given intravenous fluids and antibiotics. She was taken to the operating room by Dr. ___ and underwent an uncomplicated laparoscopic cholecystectomy. Diet was advanced, pain was controlled with oral medication, and she was discharged on ___ to follow up at ___.
+TRANSITIONAL ISSUES: Review final pathology at clinic visit.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Acetaminophen 650 mg every six hours as needed for pain
+4. Docusate 100 mg twice daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with an inflamed gallbladder and had it removed laparoscopically. Keep incisions clean and dry. Do not lift more than ten pounds for four weeks. Call ___ or return to the emergency department for fever, worsening pain, vomiting or yellow skin. Questions may be directed to ___.
+
+Followup Instructions:
+___

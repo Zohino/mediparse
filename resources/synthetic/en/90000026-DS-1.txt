@@ -1,0 +1,60 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with a history of hypertension presented with several days of palpitations, fatigue and lightheadedness. He was transferred from ___ after an electrocardiogram showed an irregular rhythm and glucose was markedly elevated.
+
+Past Medical History:
+Hypertension, hyperlipidemia, appendectomy at ___.
+
+Social History:
+___
+
+Family History:
+Per family history, his father had pneumonia in later life.
+
+Physical Exam:
+General: Alert, comfortable, no distress.
+PULM: Clear to auscultation bilaterally.
+Ext: Warm, no edema.
+SKIN: Intact, no rashes.
+
+Pertinent Results:
+Admission labs notable for glucose elevated and normal electrolytes. Troponin negative twice. Chest radiograph on ___ showed clear lungs and normal heart size. Echocardiogram showed preserved ejection fraction with mild left atrial enlargement. Renal function normal.
+
+Brief Hospital Course:
+Patient was admitted for rate control and monitoring. Diltiazem and metoprolol were titrated with improved heart rate. Anticoagulation was started after discussion with the ___ team. His diabetes was managed with insulin sliding scale and metformin was resumed. Glucose control improved. He was discharged on ___ in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly, metformin.
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily, apixaban 5 mg twice daily, metformin 500 mg twice daily, lisinopril 10 mg daily, atorvastatin 20 mg nightly.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Atrial fibrillation with rapid ventricular response, diabetes mellitus
+
+Discharge Condition:
+Stable and improved
+Activity Status: Independent and ambulatory
+
+Discharge Instructions:
+Take medications as prescribed. Check blood sugar daily and keep a log. Return for fast heartbeat, chest pain, fainting or bleeding. Call ___ with questions. Avoid heavy exertion until cleared.
+
+Followup Instructions:
+___

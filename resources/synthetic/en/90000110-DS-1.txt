@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and lightheadedness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Gentleman who noticed a racing, irregular heartbeat for two days with mild dizziness and fatigue. He was first evaluated at ___ and then transferred from ___ for monitoring. He denied chest pain, fever, or syncope.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Possible diabetes mellitus, borderline sugars, never formally diagnosed; followed by ___
+
+Social History:
+___
+
+Family History:
+Father with heart disease
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Moist mucous membranes
+Abdomen:
+Soft, nontender
+Ext:
+Warm, no edema
+
+Pertinent Results:
+IMPRESSION:
+No acute cardiopulmonary process.
+FINDINGS:
+Chest film clear. Electrolytes normal. Troponin negative twice. Thyroid studies unremarkable. Echo showed preserved ejection fraction and mild left atrial enlargement.
+
+Brief Hospital Course:
+He was found to have atrial fibrillation with rapid ventricular rate on telemetry. Rate control was achieved with metoprolol, and cardiology ___ recommended anticoagulation. He converted to a slower rhythm by ___ and remained stable, walking without symptoms.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg once daily
+2. Apixaban 5 mg twice daily
+3. Lisinopril 10 mg once daily
+4. Atorvastatin 20 mg at bedtime
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Primary:
+Rapid irregular heart rhythm, hypertension, hyperlipidemia
+
+Discharge Condition:
+Stable
+Level of Consciousness:
+Alert and interactive
+
+Discharge Instructions:
+You were admitted with a fast, irregular heartbeat. Take your new medicines exactly as prescribed and avoid missed doses. Call ___ for bleeding, fainting, or chest pain. Keep your appointment at ___ within one week.
+
+Followup Instructions:
+___

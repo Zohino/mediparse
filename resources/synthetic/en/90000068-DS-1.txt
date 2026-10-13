@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Patient is a ___ year old woman who was sent from ___ with two days of worsening right upper quadrant pain, nausea and one episode of vomiting. The pain began after a fatty meal and did not settle at home. She denied fever, chest pain or jaundice. Imaging at ___ showed gallstones with a thickened gallbladder wall, and she was transferred for surgical evaluation.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Hypothyroidism
+
+Past Surgical History:
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones, treated at ___
+
+Brief Hospital Course:
+She was admitted, given intravenous fluids and antibiotics, and taken to the operating room on hospital day two, where an uncomplicated laparoscopic cholecystectomy was done. Her heart rate stayed controlled on her home regimen and telemetry was quiet. Pain was managed with oral medication, diet was advanced, and she walked independently. The ___ team cleared her for discharge on ___.
+TRANSITIONAL ISSUES:
+Follow up pathology results. Review blood pressure at the ___ visit.
+
+Medications on Admission:
+Metoprolol 50 mg twice daily
+Apixaban 5 mg twice daily
+Levothyroxine 75 mcg daily
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg by mouth twice daily.
+2. Apixaban 5 mg by mouth twice daily, restart tomorrow morning.
+3. Levothyroxine 75 mcg by mouth every morning.
+4. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+5. Docusate 100 mg by mouth twice daily while taking pain medication.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute cholecystitis
+Atrial fibrillation
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with an inflamed gallbladder and had it removed with a laparoscopic operation. You may shower and let soapy water run over the small incisions, but do not scrub or soak them. Avoid lifting more than ten pounds for four weeks. Eat small low fat meals at first. Call the clinic at ___ or return to the emergency room for fever, worsening belly pain, repeated vomiting, yellow skin or wound redness.
+
+Followup Instructions:
+___

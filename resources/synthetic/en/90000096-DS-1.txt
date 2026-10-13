@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old man with type 2 diabetes mellitus sent from ___ after three days of worsening abdominal pain, vomiting and poor oral intake, with elevated glucose on arrival.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+Vitals:
+Afebrile, stable
+Gen:
+Comfortable
+HEENT:
+Normal
+Abdomen:
+Soft, mildly tender at incisions
+Neuro:
+Alert
+
+Pertinent Results:
+ADMISSION LABS:
+Glucose high, bicarbonate low, white count mildly elevated.
+IMAGING:
+CT of the abdomen performed at ___ showed distended gallbladder with stones and wall thickening.
+IMPRESSION:
+Acute cholecystitis.
+
+Brief Hospital Course:
+Patient was admitted, given intravenous fluids, insulin and antibiotics. Surgery by Dr. ___ was uncomplicated. Pain improved, diet was advanced, and glucose normalized. He was discharged home in stable condition at ___ follow-up plan.
+
+Medications on Admission:
+Metformin
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+1. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+2. Metformin and lisinopril as before.
+3. Atorvastatin nightly.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute cholecystitis
+Secondary:
+Hypertension, hyperlipidemia
+
+Discharge Condition:
+Good
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for gallbladder inflammation and had surgery. Keep incisions clean and dry, avoid heavy lifting, and call ___ for fever, worsening pain, vomiting or redness.
+
+Followup Instructions:
+___

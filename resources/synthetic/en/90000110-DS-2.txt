@@ -1,0 +1,60 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient is a ___ year old man with hypertension who presented after several days of palpitations, mild dyspnea on exertion and fatigue. He was first seen at ___ clinic on ___ where an irregular pulse was noted, and he was sent to our emergency department. He had been followed by Dr. ___ for blood pressure control. Symptoms began ___ and worsened with climbing stairs. He denied chest pain, syncope or fever. In the emergency department his heart rate reached 140 and an electrocardiogram showed an irregular rhythm. He was transferred from ___ for rate control and anticoagulation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia diagnosed ___
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Father with stroke at age ___
+
+Physical Exam:
+General: Comfortable, alert, no acute distress.
+Lungs: Clear to auscultation bilaterally, no wheezes or crackles.
+Abdomen: Soft, nontender, nondistended, normal bowel sounds. Heart rhythm irregularly irregular, no murmur. Extremities warm without edema. Neurologically intact, moving all limbs.
+
+Pertinent Results:
+Admission labs drawn on ___ showed normal electrolytes and creatinine. Troponin was negative twice. Thyroid stimulating hormone was within normal limits. Hemoglobin was stable at 14.2 and platelets were normal. Electrocardiogram on arrival showed an irregularly irregular narrow complex rhythm without ST changes. Transthoracic echocardiogram performed at ___ showed preserved ejection fraction, mild left atrial enlargement and no significant valvular disease. Chest radiograph showed clear lung fields and a normal cardiac silhouette. Repeat electrocardiogram prior to discharge showed improved ventricular rate.
+
+Medications on Admission:
+Lisinopril 20 mg daily
+Atorvastatin 40 mg nightly
+Aspirin 81 mg daily
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg tablet, take one tablet by mouth daily for heart rate control.
+2. Apixaban 5 mg tablet, take one tablet by mouth twice daily.
+3. Lisinopril 20 mg tablet, take one tablet by mouth daily.
+4. Atorvastatin 40 mg tablet, take one tablet by mouth nightly.
+5. Aspirin was stopped because apixaban was started. Prescriptions were sent to ___ pharmacy.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Atrial fibrillation with rapid ventricular response
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted with a fast, irregular heartbeat called an arrhythmia. We slowed your heart rate with medication and started a blood thinner to lower your risk of stroke. Take all medications exactly as prescribed and do not skip doses of apixaban. Avoid ibuprofen and similar pain medicines. Return to the hospital for chest pain, fainting, severe shortness of breath, weakness on one side, trouble speaking or any bleeding that will not stop. Please see Dr. ___ within one week, and call ___ if you have questions. Your blood pressure will be rechecked at ___.
+
+Followup Instructions:
+___

@@ -1,0 +1,64 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with diabetes presenting with three days of productive cough, fever and shortness of breath, referred from ___ clinic after outpatient treatment failed.
+
+Past Medical History:
+Hypertension
+Possible COPD, never confirmed by spirometry
+Hyperlipidemia
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+General: comfortable, afebrile
+Lungs: mild basal crackles
+CARDIAC: regular rhythm
+Abdomen: soft, nontender
+Ext: no edema
+Neuro: alert, nonfocal
+
+Pertinent Results:
+Chest radiograph showed a right lower lobe consolidation. White count was elevated on admission and normalized by discharge. Blood cultures remained negative.
+IMPRESSION:
+Right lower lobe airspace opacity.
+
+Brief Hospital Course:
+He was treated with intravenous ceftriaxone and azithromycin, then switched to oral antibiotics once afebrile. Oxygen was weaned to room air. Glucose was managed with insulin. Dr. ___ at ___ will follow him.
+
+Discharge Medications:
+Amoxicillin-clavulanate twice daily for five more days
+Metformin as before
+Lisinopril daily
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community acquired lung infection
+Secondary:
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Mental Status: clear and coherent
+Level of Consciousness: alert
+Activity Status: ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for a lung infection. Finish all antibiotics, drink fluids, and rest. Return for worsening breathlessness, fever, or chest pain. Call ___ with questions.
+
+Followup Instructions:
+___

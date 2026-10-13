@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain, vomiting
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with diabetes presenting with three days of abdominal pain and vomiting, sent from ___ after outpatient evaluation showed dehydration and elevated glucose requiring admission.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+General: Uncomfortable, dry mucous membranes
+HEENT: Normocephalic
+Neck: Supple
+PULM: Clear bilaterally
+EXTREMITIES: No edema
+DISCHARGE PHYSICAL EXAM:
+General: Comfortable, well appearing
+PULM: Clear
+
+Pertinent Results:
+DISCHARGE LABS:
+Sodium 138, potassium 4.1, glucose 142, creatinine at baseline.
+IMPRESSION:
+CT abdomen showed no acute process, mild gastric wall thickening only.
+
+Brief Hospital Course:
+He received intravenous fluids, antiemetics and insulin with prompt improvement. Glucose normalized and he tolerated a regular diet. Gastroenterology was consulted by ___ and recommended outpatient follow up on ___.
+
+Medications on Admission:
+Metformin, lisinopril, atorvastatin
+
+Discharge Medications:
+1. Metformin 500 mg twice daily
+2. Lisinopril 10 mg daily
+3. Atorvastatin 20 mg nightly
+4. Ondansetron 4 mg as needed
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Diabetes with hyperglycemia
+Gastroenteritis
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Activity Status: Independent
+
+Discharge Instructions:
+You were admitted with vomiting and dehydration. Drink plenty of fluids, check your glucose daily, take medications as prescribed, and call Dr. ___ for fever or worsening pain.
+
+Followup Instructions:
+___

@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower abdominal pain since ___
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+This is a ___ year old woman who presented from ___ with three days of worsening right lower abdominal pain, nausea and poor oral intake. Symptoms began on ___ after a meal. She denied fever or chest pain. Imaging in the emergency department showed acute appendicitis, and she was admitted to the surgical service.
+
+Past Medical History:
+Diabetes mellitus, hypertension
+
+Past Surgical History:
+Cesarean section at ___
+
+Social History:
+___
+
+Physical Exam:
+Gen: Alert, comfortable, no distress.
+Neck: Supple, no lymphadenopathy.
+ABD: Soft, mildly tender in right lower quadrant, nondistended.
+Ext: Warm, no edema.
+Neuro: Oriented, nonfocal.
+
+Brief Hospital Course:
+She was taken to the operating room on hospital day one and underwent an uncomplicated laparoscopic appendectomy. Her glucose was managed with insulin sliding scale while fasting. Diet was advanced on the first postoperative day and pain was controlled with oral medication. Dr. ___ from the surgical team saw her daily. She was transferred from the recovery unit at ___ and was discharged home once tolerating a regular diet.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Metformin 500 mg by mouth twice daily.
+2. Lisinopril 10 mg by mouth once daily.
+3. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+4. Docusate 100 mg twice daily while taking pain medication.
+
+Discharge Disposition:
+Home
+
+Facility:
+___
+
+Discharge Diagnosis:
+Acute appendicitis
+Diabetes
+
+Discharge Condition:
+Stable and afebrile, ambulatory without assistance.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were admitted with appendicitis and had your appendix removed. Keep the small incisions clean and dry. Avoid lifting more than ten pounds for four weeks. Take your medications as prescribed. Call the surgery clinic at ___ or return to ___ for fever, worsening pain or persistent vomiting.
+
+Followup Instructions:
+___

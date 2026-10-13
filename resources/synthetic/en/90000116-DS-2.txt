@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with hypertension who presented with three days of fever, productive cough and fatigue, sent in by her primary physician at ___. Symptoms began on ___ and worsened despite rest and fluids. She also noted mild exertional dyspnea and poor appetite.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Osteoarthritis
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Pertinent Results:
+White count mildly elevated, electrolytes normal. Blood cultures drawn at ___ showed no growth. Influenza swab negative.
+IMPRESSION:
+Mild peribronchial thickening, clear lung fields, normal heart size, no effusion. Reviewed with the radiologist at ___.
+
+Brief Hospital Course:
+She was observed on the medical floor. Chest radiograph showed no evidence of pneumonia, and her illness was felt to be a viral bronchitis. She received fluids, acetaminophen and inhaled bronchodilators with steady improvement. Oxygen saturation stayed normal on room air. She was seen by ___ and cleared for discharge.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 50 mcg daily
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily.
+2. Levothyroxine 50 mcg by mouth every morning.
+3. Acetaminophen 650 mg by mouth every six hours as needed for fever.
+4. Guaifenesin 600 mg twice daily as needed for cough.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute viral bronchitis
+Hypertension
+
+Discharge Condition:
+Mental Status: Alert and oriented, able to follow commands.
+Level of Consciousness: Fully awake and interactive.
+Activity Status: Walks independently.
+
+Discharge Instructions:
+You were admitted with cough and fever and improved with supportive care. Drink plenty of fluids, rest, and take your medicines as listed. Return to ___ for worsening shortness of breath, high fever or chest pain. Call your clinic at ___ with any questions.
+
+Followup Instructions:
+___

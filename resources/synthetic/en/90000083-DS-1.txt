@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs
+
+Chief Complaint:
+Abdominal pain and vomiting
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with three days of worsening right upper abdominal pain and vomiting, seen at ___ by her physician Dr. ___ and sent to the emergency department.
+REVIEW OF SYSTEMS:
+Positive for nausea, no fever.
+
+Past Medical History:
+Hypertension
+Gallstones
+Hypothyroidism
+
+Social History:
+___
+
+Family History:
+Mother with gallbladder disease treated at ___.
+
+Physical Exam:
+General: Uncomfortable, afebrile.
+HEENT: Mild scleral icterus.
+Lungs: Clear.
+EXTREMITIES: No edema.
+
+Pertinent Results:
+IMAGING:
+Ultrasound showed gallstones with a dilated common bile duct.
+FINDINGS:
+Mildly raised bilirubin and liver enzymes, normal white count.
+
+Brief Hospital Course:
+Treated for gallstone pancreatitis with fluids, pain control and bowel rest. Symptoms settled, diet advanced, and surgery clinic at ___ will arrange gallbladder removal as an outpatient.
+
+Medications on Admission:
+Lisinopril
+Levothyroxine
+
+Discharge Medications:
+Continue lisinopril and levothyroxine as before. Acetaminophen as needed for pain. Ondansetron as needed for nausea.
+
+Discharge Diagnosis:
+Primary:
+Gallstone pancreatitis
+Choledocholithiasis
+
+Discharge Condition:
+Mental Status: Alert and oriented.
+Level of Consciousness: Awake.
+Activity Status: Walks without help.
+
+Discharge Instructions:
+You were admitted with gallstone pain. Eat low fat meals, take medicines as directed, and return for fever, yellow skin or severe pain. Call ___ with questions.
+
+Followup Instructions:
+___

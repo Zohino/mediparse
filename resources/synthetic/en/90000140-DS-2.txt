@@ -1,0 +1,61 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Mr. ___ is a man with hypertension and a long smoking history who presented with three days of worsening cough, wheeze and exertional shortness of breath. He was transferred from ___ after initial evaluation showed hypoxia requiring supplemental oxygen and elevated inflammatory markers.
+
+Past Medical History:
+Hypertension
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with heart disease treated at ___
+
+Physical Exam:
+General: tired but comfortable. Lungs: scattered expiratory wheezes. Heart: regular rhythm. Neuro: alert and oriented.
+Abdomen:
+Soft, nontender.
+EXTREMITIES:
+No edema.
+
+Brief Hospital Course:
+He was treated with nebulized bronchodilators, a short steroid course and antibiotics, and his oxygen requirement resolved. Given his smoking history and wheeze, possible COPD was suspected, and outpatient spirometry was arranged through the ___ clinic. Dr. ___ reviewed the plan before discharge. He ambulated without desaturation and tolerated a diet. Blood pressure remained controlled on his home medication.
+
+Medications on Admission:
+Lisinopril 10 mg daily; aspirin 81 mg daily; atorvastatin nightly.
+
+Discharge Medications:
+Prednisone taper over five days. Albuterol inhaler every four hours as needed for wheeze. Continue lisinopril, aspirin and atorvastatin as before. Complete the antibiotic course fully.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute bronchitis with hypoxia
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+Please take your medications as prescribed and use your inhaler when short of breath. Stop smoking. Return right away for fever, worsening breathlessness or chest pain. Call ___ with any questions.
+
+Followup Instructions:
+___

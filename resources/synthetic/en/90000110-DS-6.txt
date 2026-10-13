@@ -1,0 +1,82 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented with palpitations and lightheadedness that began ___ days before arrival. He was seen at ___ and referred for evaluation of an irregular rapid heartbeat with mild shortness of breath.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Normal
+Neck:
+Supple
+PULM:
+Clear
+Abdomen:
+Soft
+EXTREMITIES:
+No edema
+Neuro:
+Nonfocal
+PULSES:
+Palpable
+
+Pertinent Results:
+Troponin negative twice. Electrolytes normal. Thyroid function normal. Chest film without acute findings.
+DISCHARGE LABS:
+Hemoglobin and creatinine within normal limits.
+
+Brief Hospital Course:
+Rate was controlled with metoprolol and monitored on telemetry. Anticoagulation was started after risk assessment. Symptoms resolved and heart rate settled. Cardiology at ___ reviewed the case and advised outpatient follow up with Dr. ___.
+
+Medications on Admission:
+Metoprolol tartrate 25 mg twice daily
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily
+Apixaban 5 mg twice daily
+Lisinopril 10 mg daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Stable
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake
+Activity Status:
+Walks independently
+
+Discharge Instructions:
+Take medications as prescribed. Return for chest pain, fainting or racing heartbeat. Call ___ with questions. You were cared for at ___.
+
+Followup Instructions:
+___

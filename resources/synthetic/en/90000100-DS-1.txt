@@ -1,0 +1,83 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Left leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old man who presented with three days of increasing redness, warmth and pain of the left lower leg after a minor scrape. He had fever at home and was sent from ___ urgent care. Symptoms began ___ and worsened despite oral antibiotics.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Vitals:
+T 100.8, HR 96, BP 134/80, RR 16, SpO2 98% RA
+Gen:
+Comfortable, no distress
+Neck:
+Supple
+Lungs:
+Clear bilaterally
+ABD:
+Soft, nontender
+Ext:
+Left shin warm, swollen, tender
+SKIN:
+Erythema with sharp margin, no abscess
+
+Pertinent Results:
+Admission labs notable for white count 13.2 with neutrophil predominance and mildly elevated CRP. Blood cultures drawn on ___ showed no growth. Ultrasound of the left leg showed soft tissue edema without deep vein thrombosis.
+IMPRESSION:
+Subcutaneous edema, no abscess or clot.
+
+Brief Hospital Course:
+He was admitted with left leg cellulitis and started on IV vancomycin because of his penicillin allergy. The erythema was marked and monitored daily. He was seen by Dr. ___ for wound review. Fever resolved by hospital day two and pain improved. He was transitioned on ___ to oral doxycycline and tolerated it well before going to ___ with outpatient follow up.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Doxycycline 100 mg twice daily for seven more days.
+2. Lisinopril 10 mg daily.
+3. Atorvastatin 20 mg nightly.
+4. Acetaminophen 650 mg every six hours as needed for pain.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Cellulitis of the left lower leg
+Hypertension
+
+Discharge Condition:
+Stable and improved.
+Mental Status:
+Alert and oriented, able to follow instructions.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were treated for a skin infection of your leg with antibiotics. Take all doses of doxycycline as prescribed and keep the leg elevated when resting. Return if redness spreads, fever returns, or pain worsens. Call ___ with questions or visit the clinic at ___ for a recheck.
+
+Followup Instructions:
+___

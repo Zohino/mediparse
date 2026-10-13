@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+Bedside incision and drainage
+
+History of Present Illness:
+Patient is a ___ year old man who presented with three days of a painful, swollen, reddened right lower leg after a minor scrape while gardening. He developed fever and chills the evening before arrival. He was first evaluated at ___ and sent here on ___ for intravenous antibiotics.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Seasonal allergies
+
+Social History:
+___
+
+Family History:
+Father with family history of diabetes mellitus. Mother with hypertension.
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+Gen: comfortable, no distress
+Neck: supple
+Lungs: clear bilaterally
+Abdomen: soft, nontender
+Ext: right shin erythema much reduced, wound clean, mild edema
+
+Pertinent Results:
+Admission labs notable for white count elevation, normal creatinine. Wound culture grew skin flora sensitive to cephalexin, reported by ___. Ultrasound showed no deep vein thrombosis.
+DISCHARGE LABS:
+White count normalized, electrolytes normal.
+
+Brief Hospital Course:
+He was started on intravenous cefazolin and the abscess was drained at bedside by Dr. ___. Fever resolved within one day. Erythema was marked with a pen and receded steadily. On ___ he was switched to oral cephalexin and tolerated it well. Wound care teaching was completed with nursing and follow up arranged with ___.
+
+Discharge Medications:
+Cephalexin 500 mg by mouth four times daily for seven days
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Acetaminophen as needed for pain
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Right leg cellulitis with abscess
+
+Discharge Condition:
+Mental Status: alert and fully oriented
+Level of Consciousness: awake and interactive
+Activity Status: walking independently
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Finish all antibiotics. Change the dressing daily and keep the leg raised. Call ___ if you have fever, spreading redness, or worsening pain. Wound clinic at ___ will see you; questions can go to ___.
+
+Followup Instructions:
+___

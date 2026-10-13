@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy on ___
+
+History of Present Illness:
+___ year old woman presented with two days of right upper quadrant abdominal pain, nausea and vomiting after a fatty meal. She was seen at ___ and referred in for evaluation. Pain was constant and radiated to the back. No prior similar episodes. Ultrasound showed gallstones with wall thickening.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother had gallbladder surgery at ___.
+
+Physical Exam:
+Vitals: T 98.4 HR 78 BP 126/74 RR 16 SpO2 98% RA
+Gen: comfortable, no distress
+HEENT: anicteric
+ABD: soft, mild RUQ tenderness
+Ext: warm, no edema
+Neuro: alert, nonfocal
+
+Pertinent Results:
+DISCHARGE LABS:
+___: WBC 7.2, Hgb 12.8, Plt 240, ALT 28, AST 24, Tbili 0.8, lipase 30.
+IMPRESSION:
+Cholelithiasis with gallbladder wall thickening and a small amount of pericholecystic fluid. No biliary ductal dilation. Common bile duct is of normal caliber.
+
+Brief Hospital Course:
+She was admitted with acute cholecystitis and started on intravenous fluids and antibiotics. Surgical team led by Dr. ___ performed laparoscopic cholecystectomy at ___ without complication. Pain was controlled with oral analgesics, diet was advanced, and she tolerated a regular diet. Liver tests stayed normal. She was discharged home on postoperative day one in stable condition. Incisions were clean, dry and intact without drainage or redness.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Multivitamin daily.
+
+Discharge Medications:
+Acetaminophen 650 mg every six hours as needed for pain. Oxycodone 5 mg every six hours as needed for severe pain. Docusate 100 mg twice daily. Resume lisinopril and atorvastatin.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Stable
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+
+Discharge Instructions:
+You were treated for gallbladder inflammation and had your gallbladder removed. Keep incisions clean and dry and avoid lifting over ten pounds for four weeks. Call ___ or return for fever, worsening pain, vomiting, or yellow skin.
+
+Followup Instructions:
+___

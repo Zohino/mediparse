@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies.
+
+Chief Complaint:
+Shortness of breath and leg swelling.
+
+Major Surgical or Invasive Procedure:
+None.
+
+History of Present Illness:
+The patient is a woman with long-standing hypertension who presented to ___ with three days of worsening exertional dyspnea, leg swelling, and a dry cough. She was seen by her primary care physician, Dr. ___, who noted weight gain and sent her to the emergency department at ___. On arrival she was afebrile, hypertensive, and mildly hypoxic on room air. Chest imaging showed pulmonary vascular congestion. She was started on intravenous diuretics and admitted to ___ for management of heart failure.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Hypothyroidism
+Osteoarthritis
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Father with coronary artery disease.
+
+Physical Exam:
+General: Alert, comfortable, speaking full sentences.
+Neck: Jugular venous pressure elevated to ___ cm.
+CARDIAC: Regular rate and rhythm, S3 present, soft systolic murmur.
+Ext: Pitting edema to the knees bilaterally.
+SKIN: Warm and dry, no rashes.
+
+Pertinent Results:
+Admission labs showed an elevated BNP, negative troponin, and creatinine at baseline. Sodium and potassium were normal, and hemoglobin was stable. ECG showed sinus rhythm with left ventricular hypertrophy and no acute ST changes. Echocardiogram performed at ___ on ___ showed an ejection fraction of 35 percent, moderate mitral regurgitation, and mild left atrial enlargement. Labs on the day of discharge showed stable renal function and normal electrolytes.
+IMPRESSION:
+Pulmonary vascular congestion with small bilateral pleural effusions and mild cardiomegaly.
+
+Brief Hospital Course:
+She was diagnosed with acute systolic heart failure and diuresed with intravenous furosemide, with net negative balance each day and steady weight loss. Her oxygen requirement resolved. Chest imaging showed no evidence of pneumonia, and she remained afebrile, so antibiotics were not started. Her echocardiogram at ___ showed reduced ejection fraction. Lisinopril was changed to ___ and metoprolol succinate was added. Her blood pressure improved on the new regimen. Levothyroxine was continued. Cardiology, Dr. ___, reviewed the study and arranged follow up at ___. She was discharged on ___ in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Amlodipine 5 mg daily
+Atorvastatin 20 mg nightly
+Levothyroxine 50 mcg daily
+
+Discharge Medications:
+1. Furosemide 40 mg by mouth daily
+2. Metoprolol succinate 25 mg by mouth daily
+3. Atorvastatin 20 mg by mouth nightly
+4. Levothyroxine 50 mcg by mouth daily
+5. Sacubitril-valsartan as prescribed by ___
+6. Stop amlodipine
+
+Discharge Disposition:
+Home with services arranged by ___
+
+Discharge Diagnosis:
+Acute systolic heart failure
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted with fluid buildup caused by heart failure and treated with medicines to remove the extra fluid. Weigh yourself every morning and call ___ if your weight rises by more than three pounds in a day. Limit salt in your diet and avoid ibuprofen. Take all medicines as directed. Return for worsening breathing, chest pain, or fainting. Keep your appointment with ___.
+
+Followup Instructions:
+___

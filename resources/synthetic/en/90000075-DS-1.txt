@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg swelling and redness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with three days of right lower leg swelling, redness and warmth after a minor scratch. Seen at ___ and sent by his clinic ___ for intravenous antibiotics.
+REVIEW OF SYSTEMS:
+Positive for chills. No chest pain or cough.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+Vitals: Afebrile, stable
+Gen: Comfortable, no distress
+HEENT: Moist mucosa
+PULM: Clear bilaterally
+CARDIAC: Regular rhythm
+Abdomen: Soft, nontender
+
+Pertinent Results:
+White count mildly elevated on arrival, normalizing by discharge. Ultrasound of the right leg showed no clot. Blood cultures drawn at ___ had no growth.
+
+Brief Hospital Course:
+Treated for right leg cellulitis with intravenous antibiotics, with marked improvement in redness and swelling. Marked borders were stable. Transitioned to oral therapy, reviewed by ___ and cleared for discharge home with ___ follow up.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+
+Discharge Medications:
+Continue lisinopril and atorvastatin as before. Take cephalexin by mouth four times daily for seven more days. Acetaminophen as needed for pain.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Cellulitis of right lower leg
+Secondary:
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Good
+Mental Status: Alert and oriented
+Level of Consciousness: Awake
+Activity Status: Walks independently
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Elevate the leg when resting and finish all antibiotics. Return for fever, spreading redness, or worsening pain. Call ___ with questions.
+
+Followup Instructions:
+___

@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Foot wound and weakness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient is a ___ year old man sent from ___ with several days of fatigue, thirst and a draining sore on his left foot. He denied fever or chest pain.
+
+Past Medical History:
+Diabetes mellitus type 2
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals:
+Afebrile, stable
+HEENT:
+Dry mucous membranes
+Neck:
+Supple
+Abdomen:
+Soft, nontender
+EXTREMITIES:
+Shallow left plantar ulcer
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Glucose was markedly elevated on arrival, with mild elevation of white count. Electrolytes were otherwise unremarkable.
+IMPRESSION:
+Foot radiograph without evidence of bone involvement.
+
+Brief Hospital Course:
+He received intravenous fluids and insulin with gradual improvement in his sugars. The wound was cleaned and dressed, and he was seen by the ___ team. Antibiotics were given orally. He was followed closely by ___ and walked comfortably before discharge.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+Metformin
+
+Discharge Medications:
+1. Lisinopril daily by mouth.
+2. Atorvastatin nightly.
+3. Metformin twice daily with meals.
+4. Cephalexin four times daily for one week.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes mellitus type 2 with foot ulcer
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Fully awake and alert.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for high blood sugar and a foot wound. Check your feet daily, take your medicines as prescribed, and keep the dressing clean. Call ___ for redness, pus or fever, and see your clinic at ___ soon.
+
+Followup Instructions:
+___

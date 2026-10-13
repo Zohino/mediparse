@@ -1,0 +1,79 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man sent by ___ clinic with weeks of swelling and tiredness. Labs drawn at ___ prompted admission for monitoring and medication adjustment.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+Gen:
+Comfortable, no distress
+HEENT:
+Moist mucosa
+PULM:
+Clear bilaterally
+CARDIAC:
+Regular rhythm
+ABD:
+Soft, nontender
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Creatinine elevated at admission and improved by discharge. Potassium normal. Hemoglobin mildly low. Chest film without acute findings.
+
+Brief Hospital Course:
+Patient was given gentle diuresis and blood pressure medications were adjusted. Swelling improved, labs stabilized, and he was cleared by ___ for discharge home with outpatient follow up.
+
+Medications on Admission:
+Amlodipine
+Atorvastatin
+Allopurinol
+
+Discharge Medications:
+Amlodipine 10 mg daily
+Atorvastatin 20 mg nightly
+Furosemide 20 mg daily
+Allopurinol dose reduced
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Chronic kidney disease
+Volume overload
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were admitted with swelling. Weigh yourself daily, limit salt, take medications as directed, and call ___ if swelling or breathlessness returns. Avoid anti-inflammatory pain pills.
+
+Followup Instructions:
+___

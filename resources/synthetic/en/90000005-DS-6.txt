@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+ERCP with stone extraction; laparoscopic cholecystectomy
+
+History of Present Illness:
+He presented to ___ with several days of worsening abdominal pain, nausea and poor oral intake. He was evaluated at ___ and transferred for further management after imaging suggested an obstructive biliary process.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+Gen:
+Comfortable, no distress.
+HEENT:
+Anicteric sclera.
+Neck:
+Supple.
+ABD:
+Soft, mildly tender right upper quadrant.
+SKIN:
+Warm, dry, no rash.
+
+Pertinent Results:
+ADMISSION LABS:
+Mildly elevated bilirubin and alkaline phosphatase, normal lactate, slightly increased white count.
+IMPRESSION:
+Gallstones with dilated common bile duct.
+FINDINGS:
+Ultrasound shows multiple gallstones, a thickened gallbladder wall and a dilated common bile duct, with no free fluid.
+
+Brief Hospital Course:
+He was admitted, given intravenous fluids and antibiotics, and underwent endoscopic retrograde cholangiopancreatography at ___ with stone removal. Pain resolved and diet was advanced. Laparoscopic cholecystectomy was performed by Dr. ___ without complication. Labs and vitals remained stable. He tolerated regular food and was discharged home.
+
+Discharge Medications:
+Acetaminophen as needed for pain. Ondansetron as needed for nausea. Hold ibuprofen until follow-up. Resume home lisinopril daily. Take oxycodone only briefly for severe pain.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Choledocholithiasis
+Cholangitis
+Cholelithiasis
+
+Discharge Condition:
+Good
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+
+Discharge Instructions:
+Call Dr. ___ if fever, vomiting, yellow skin or worsening belly pain develops. Return to ___ emergency department for severe symptoms. Avoid heavy lifting.
+
+Followup Instructions:
+___

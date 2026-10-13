@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension who presented to ___ with two days of cough, fever and mild shortness of breath. He was evaluated by Dr. ___ and found to be hypoxic on room air. Symptoms began after a trip to ___.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Possible diabetes mellitus, workup pending
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+Neck:
+Supple, no lymphadenopathy
+CARDIAC:
+Regular rate and rhythm, normal heart sounds
+Ext:
+Warm, no edema
+
+Pertinent Results:
+ADMISSION LABS:
+White count mildly elevated, creatinine normal, lactate normal. Chest film showed a right lower lobe opacity consistent with bacterial infection. Blood cultures were drawn and remained negative.
+
+Brief Hospital Course:
+He was treated with intravenous antibiotics and oxygen, which was weaned over three days. Fever resolved and appetite returned. He was seen by the team of Dr. ___ and ambulated safely. Glucose was mildly elevated and outpatient testing was arranged at ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Amoxicillin-clavulanate 875 mg by mouth twice daily for five more days
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Community acquired lower respiratory infection
+Secondary:
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Stable
+Mental Status:
+Alert and oriented, able to follow commands
+Activity Status:
+Independent, walking without assistance
+
+Discharge Instructions:
+You were hospitalized with a lung infection and treated with antibiotics. Finish your full antibiotic course, rest, and drink fluids. Call your doctor at ___ for worsening cough, fever or breathlessness. Keep the appointment at ___.
+
+Followup Instructions:
+___

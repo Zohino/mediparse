@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with hypertension presented with palpitations and dizziness for two days. ECG showed atrial fibrillation with rapid ventricular response. She was referred from ___ for evaluation.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: HR 128, BP 138/82
+Gen: comfortable
+HEENT: normal
+Lungs: clear
+ABD: soft
+Ext: no edema
+Neuro: nonfocal
+
+Pertinent Results:
+FINDINGS:
+Troponin negative twice. Potassium and magnesium normal. Chest radiograph without acute abnormality. Echocardiogram showed preserved ejection fraction and mild left atrial enlargement.
+
+Brief Hospital Course:
+Rate was controlled with metoprolol and she was started on apixaban. Echocardiogram showed normal function. Symptoms resolved by hospital day two. She was seen by ___ cardiology and tolerated ambulation well. Thyroid studies were normal. Discharged home in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 50 mcg daily
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily
+Apixaban 5 mg twice daily
+Lisinopril 10 mg daily
+Levothyroxine 50 mcg daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Palpitations
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Independent
+
+Discharge Instructions:
+You were hospitalized for a fast irregular heartbeat. Take your new medications as prescribed. Return for chest pain, fainting or bleeding. Please call ___ with questions.
+
+Followup Instructions:
+___

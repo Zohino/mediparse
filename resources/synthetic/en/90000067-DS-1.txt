@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Urology
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right flank pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ after three days of worsening right flank pain with nausea and low-grade fevers. He was seen at an outside clinic on ___ and referred to the emergency department. Imaging showed an obstructing ureteral stone with mild hydronephrosis. He was admitted for pain control and urology evaluation.
+
+Past Medical History:
+Hypertension
+Possible diabetes mellitus, not yet confirmed, workup pending with ___
+
+Social History:
+___
+
+Family History:
+Father with kidney stones
+
+Physical Exam:
+Vitals: afebrile, hemodynamically stable
+General: comfortable, no distress
+HEENT: normal
+Neck: supple
+Lungs: clear bilaterally
+Abdomen: mild right flank tenderness
+Ext: no edema
+SKIN: warm and dry
+
+Pertinent Results:
+Creatinine 1.1. White count mildly elevated, normal by discharge. Urinalysis showed blood without infection. CT abdomen and pelvis without contrast on ___: 5 mm distal right ureteral stone with mild hydronephrosis. Repeat imaging by ___ showed the stone had passed into the bladder.
+
+Brief Hospital Course:
+He was admitted for pain control and hydration. Urology followed closely and recommended conservative management. Pain improved with oral analgesics and he tolerated a regular diet. Fever resolved without antibiotics. The stone passed on ___ and strained urine was sent to ___ for analysis. He was discharged home in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Ibuprofen as needed. Multivitamin daily.
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily.
+2. Tamsulosin 0.4 mg nightly for one week.
+3. Acetaminophen 650 mg every six hours as needed for pain.
+4. Ondansetron 4 mg as needed for nausea, prescribed by ___.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Right ureteral stone with hydronephrosis
+Hypertension
+
+Discharge Condition:
+Mental Status: alert and fully oriented
+Activity Status: ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with a kidney stone that has now passed. Drink plenty of fluids and strain your urine if asked. Return for fever, severe pain, or inability to urinate. Follow up with urology at ___ in two weeks.

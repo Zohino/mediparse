@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Painful swollen right leg
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient noticed redness and warmth of the right shin after a scrape, worsening over three days. Sent from ___ clinic by Dr. ___ for fever and spreading erythema.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity
+
+Social History:
+___
+
+Physical Exam:
+Vitals:
+Afebrile, stable on room air
+PULM:
+Clear bilaterally
+CARDIAC:
+Regular rate and rhythm
+Abdomen:
+Soft, nontender
+EXTREMITIES:
+Right shin erythematous, warm, edematous
+
+Pertinent Results:
+White count mildly elevated, normalized by discharge. Blood cultures showed no growth. Ultrasound of the right leg negative for clot, read by ___.
+
+Brief Hospital Course:
+Treated for cellulitis with intravenous antibiotics, with the margin marked and steadily receding. Pain controlled with acetaminophen. Seen by the wound team at ___ and cleared to go home on oral antibiotics with ___ follow up.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+Cephalexin four times daily for seven days. Continue lisinopril and atorvastatin. Acetaminophen as needed for pain.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Cellulitis of the right lower leg
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Take antibiotics as prescribed, keep the leg elevated, and return for fever, spreading redness, or worsening pain. Call ___ with questions.
+
+Followup Instructions:
+___

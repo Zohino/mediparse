@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old man with hypertension who presented with three days of worsening redness, warmth and swelling of the right lower leg after a minor scrape. He noted fever and chills. He was seen at ___ and sent to the emergency department by Dr. ___.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Vitals:
+T 100.8 HR 96 BP 138/82 RR 16 SpO2 97% RA
+HEENT:
+Moist mucous membranes
+Neck:
+Supple
+SKIN:
+Erythema, warmth and tender swelling of right shin, no fluctuance
+
+Pertinent Results:
+Admission labs showed white blood cell count 14.2 with neutrophil predominance and mildly elevated CRP. Creatinine was normal. Blood cultures drawn on arrival showed no growth at 48 hours. Leg ultrasound performed at ___ showed no deep vein thrombosis.
+IMPRESSION:
+Subcutaneous edema of the right lower leg without abscess or clot.
+
+Brief Hospital Course:
+He was admitted and started on intravenous cefazolin for cellulitis of the right leg. The border of erythema was marked and receded over two days. Fever resolved by hospital day two and he was transitioned to oral cephalexin. Wound care was reviewed with nursing. He was discharged home with follow up arranged with Dr. ___ at ___ clinic on ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Aspirin 81 mg daily. Multivitamin daily.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+Take cephalexin as prescribed until finished. Elevate the leg when sitting and keep the skin clean and dry. Return for spreading redness, fever, severe pain or pus. Call ___ with questions, and pick up your prescription at ___.
+
+Followup Instructions:
+___

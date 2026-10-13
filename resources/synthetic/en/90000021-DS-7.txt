@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented to ___ with three days of worsening abdominal pain, nausea and vomiting. Symptoms began after a meal and did not improve with rest. He was transferred from ___ for further evaluation by the surgical team and admitted for observation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Possible diabetes mellitus, workup pending with ___
+Remote appendectomy
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+HEENT: moist mucous membranes
+Neck: supple
+Lungs: clear bilaterally
+ABD: soft, mildly tender, nondistended
+Ext: warm, no edema
+Neuro: alert, nonfocal
+
+Pertinent Results:
+Laboratory studies showed mild leukocytosis with normal electrolytes. CT of the abdomen at ___ demonstrated a partial small bowel obstruction with a transition point and no free air. Follow-up films showed gradual improvement and resolving dilation.
+
+Brief Hospital Course:
+Admitted with a partial small bowel obstruction and managed conservatively with bowel rest, nasogastric decompression and intravenous fluids. Diet was advanced slowly as bowel function returned. Seen by the team of Dr. ___ daily. Pain resolved, and he tolerated a regular diet before leaving ___ in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily.
+2. Atorvastatin 20 mg by mouth every night.
+3. Acetaminophen 500 mg by mouth every six hours as needed for pain.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Partial small bowel obstruction
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized for a bowel obstruction that improved without surgery. Eat small meals and drink fluids. Return for vomiting, severe pain or swelling of the belly. Call the office of Dr. ___ with questions or if symptoms return before ___.
+
+Followup Instructions:
+___

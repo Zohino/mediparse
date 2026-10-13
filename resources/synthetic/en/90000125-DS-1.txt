@@ -1,0 +1,58 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs
+
+Chief Complaint:
+Shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with chronic wheeze, on inhalers and insulin, sent from ___ with three days of worsening dyspnea, productive cough and low oxygen saturation. He was treated with nebulizers, steroids, and antibiotics, and improved steadily during the stay. Symptoms resolved by discharge.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Elevated blood sugar on insulin
+Former smoker
+
+Social History:
+___
+
+Family History:
+Father has a family history of atrial fibrillation. Mother had hypertension, treated at ___.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Gen: Thin, mild respiratory distress.
+HEENT: Moist mucosa.
+Lungs: Diffuse expiratory wheezes.
+ABD: Soft, nontender.
+Ext: No edema.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+Glucose 312 on arrival, HbA1c 9.1 percent. WBC 12.4, creatinine 0.9. Chest x-ray showed hyperinflated lungs without focal opacity. Arterial blood gas showed mild respiratory acidosis. Repeat glucose values improved on insulin. Results were reviewed at ___ laboratory.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Chronic obstructive pulmonary disease exacerbation
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted with trouble breathing. Take the steroid course and inhalers as prescribed, and keep checking your blood sugar. Stop smoking. Return for worsening breathlessness, fever, or chest pain. Call ___ with questions.
+
+Followup Instructions:
+___

@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with three days of painful red swelling of the right leg, sent in by ___ for fever.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Gen: Mildly ill, afebrile now
+Lungs: Clear
+ABD: Soft, nontender
+SKIN: Warm erythema right shin
+Neuro: Nonfocal
+
+Pertinent Results:
+Elevated white count with neutrophils, normal creatinine, negative blood cultures.
+DISCHARGE LABS:
+White count normalized, electrolytes normal.
+
+Brief Hospital Course:
+Cellulitis of the right leg was treated with intravenous antibiotics, then oral therapy. Redness receded and fever resolved. He was cleared by ___ for discharge.
+TRANSITIONAL ISSUES:
+Recheck skin in one week, call ___ if worse.
+
+Medications on Admission:
+Lisinopril, atorvastatin, allopurinol
+
+Discharge Medications:
+Cephalexin four times daily for seven days. Continue lisinopril, atorvastatin and allopurinol.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Cellulitis of right lower leg
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Take the antibiotic as prescribed, elevate the leg, and return if fever or spreading redness occurs.
+
+Followup Instructions:
+___

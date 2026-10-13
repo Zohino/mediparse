@@ -1,0 +1,85 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy performed at ___
+
+History of Present Illness:
+Patient presented to ___ with two days of right upper quadrant pain, nausea and vomiting after a fatty meal. She was seen at ___ by her primary physician on ___ and referred to the emergency department. Ultrasound showed gallstones with wall thickening. She denied fever, jaundice or chest pain, and was admitted to the surgical service.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Remote appendectomy
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+Vitals:
+T 98.4 HR 78 BP 126/74 RR 16 SpO2 98% RA
+Gen:
+Comfortable, no distress
+HEENT:
+Anicteric sclerae
+PULM:
+Clear bilaterally
+Abdomen:
+Soft, mild tenderness at port sites
+SKIN:
+Incisions clean, dry, intact
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Ultrasound at ___: multiple gallstones, thickened gallbladder wall, small amount of pericholecystic fluid, common bile duct normal caliber.
+WBC 13.2 on admission, falling to 7.1 at discharge. ALT, AST and bilirubin within normal limits. Lipase normal.
+
+Brief Hospital Course:
+Ms. ___ was admitted with acute cholecystitis and started on intravenous antibiotics and fluids. She was taken to the operating room by Dr. ___ for an uncomplicated laparoscopic cholecystectomy. Pain was controlled with oral medication, diet was advanced, and she voided and walked independently. She was discharged on ___ in stable condition.
+TRANSITIONAL ISSUES:
+Follow pathology report; resume home thyroid and blood pressure medications.
+
+Medications on Admission:
+Levothyroxine 75 mcg daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Levothyroxine 75 mcg by mouth once daily
+2. Lisinopril 10 mg by mouth once daily
+3. Acetaminophen 650 mg every six hours as needed for pain
+4. Docusate 100 mg twice daily while taking opioids
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+Secondary:
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for gallbladder inflammation and had your gallbladder removed laparoscopically. You may shower but do not soak the incisions. Avoid lifting more than ten pounds for four weeks. Return or call ___ for fever, worsening pain, vomiting, yellow skin or wound drainage. Keep your visit with Dr. ___.
+
+Followup Instructions:
+___

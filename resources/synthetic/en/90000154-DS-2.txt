@@ -1,0 +1,77 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension sent by ___ clinic for three days of worsening right calf redness, warmth and pain, with chills at home. No trauma. Treated with oral antibiotics without improvement.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Obesity
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Moist mucous membranes
+Lungs:
+Clear bilaterally
+Abdomen:
+Soft, nontender
+EXTREMITIES:
+Right calf warm, red, swollen
+SKIN:
+Erythema spreading, no abscess
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+___ WBC 14.2, lactate normal. Blood cultures no growth. Right leg ultrasound negative for clot. Creatinine stable at baseline. Chest film clear. Wound swab from ___ grew skin flora.
+
+Brief Hospital Course:
+Admitted with cellulitis of the right leg and treated with IV vancomycin, with steady improvement. Redness receded past the marked border by day three. Fever resolved. Transitioned to oral antibiotics, tolerated well, and cleared by ___ for discharge home.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth four times daily for five more days
+2. Lisinopril 10 mg daily
+3. Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Cellulitis of right lower leg
+Hypertension
+
+Discharge Condition:
+Stable, afebrile, improved redness
+Mental Status:
+Clear and coherent
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Finish all antibiotics, elevate the leg, and return to ___ if redness spreads, fever returns, or pain worsens. Keep follow-up with ___.
+
+Followup Instructions:
+___

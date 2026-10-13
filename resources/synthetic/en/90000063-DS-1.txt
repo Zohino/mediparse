@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant pain, referred from ___
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy performed at ___
+
+History of Present Illness:
+The patient is a woman who presented on ___ with two days of steady right upper quadrant pain radiating to the back, with nausea and one episode of vomiting. Pain worsened after fatty meals. She was seen at ___ where ultrasound showed gallstones and a thickened gallbladder wall. She was transferred on ___ for surgical evaluation. She denied fever, jaundice, or changes in stool color.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Cesarean section at ___
+
+Social History:
+___
+
+Family History:
+Family history significant for diabetes mellitus in her mother. No known gallbladder disease.
+
+Physical Exam:
+Gen: Comfortable, no distress
+HEENT: Anicteric, moist mucous membranes
+Lungs: Clear bilaterally
+Abdomen: Soft, mildly tender in right upper quadrant, incisions clean
+EXTREMITIES: Warm, no edema
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Laboratory studies on admission showed mild leukocytosis with normal bilirubin and normal liver enzymes. Lipase was within normal limits. Ultrasound reported at ___ demonstrated multiple gallstones, gallbladder wall thickening, and pericholecystic fluid. Pathology sent to ___ confirmed chronic and acute cholecystitis without malignancy. Final report was reviewed before discharge.
+
+Brief Hospital Course:
+She was admitted, kept without oral intake, and started on intravenous fluids and antibiotics for acute cholecystitis. On ___ she underwent an uncomplicated laparoscopic cholecystectomy with Dr. ___. Diet was advanced and pain was controlled with oral medications. She passed flatus, ambulated independently, and tolerated regular food. Antibiotics were stopped after surgery. She was discharged in stable condition after review with ___.
+TRANSITIONAL ISSUES:
+Outpatient surgical follow-up; monitor incision sites.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily
+2. Atorvastatin 20 mg by mouth every night
+3. Acetaminophen 650 mg by mouth every six hours as needed for pain
+4. Docusate 100 mg by mouth twice daily while taking opioids
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with an inflamed gallbladder and had it removed laparoscopically. You may shower, but do not soak the incisions until cleared by ___. Avoid lifting more than ten pounds for four weeks. Take pain medication only as needed and do not drive while using it. Call your surgeon or return to ___ for fever, worsening pain, vomiting, yellow skin, or drainage from the wounds.
+
+Followup Instructions:
+___

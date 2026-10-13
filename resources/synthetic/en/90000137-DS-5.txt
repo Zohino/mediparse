@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This is a ___ year old man who presented with two days of palpitations, worsening dyspnea and fatigue. He was seen at ___ where an electrocardiogram showed atrial fibrillation with a rapid ventricular rate. His symptoms began on ___ after he ran out of his home medications. He denied chest pain, fever or syncope, and was transferred for rate control and monitoring.
+
+Past Medical History:
+Chronic obstructive pulmonary disease
+Chronic kidney disease, stage 3
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Neck: Supple, no jugular venous distension
+Lungs: Diffuse expiratory wheezes, no crackles
+CARDIAC: Irregularly irregular, tachycardic, no murmur
+Abdomen: Soft, nontender, nondistended
+
+Pertinent Results:
+Admission labs from ___ showed creatinine at baseline, potassium normal, and troponin negative twice. Brain natriuretic peptide was mildly elevated. Chest radiograph demonstrated hyperinflated lungs without focal consolidation or effusion. Echocardiogram performed at ___ revealed preserved ejection fraction with mild left atrial enlargement and no significant valvular disease.
+
+Brief Hospital Course:
+The patient was admitted to the telemetry unit and given intravenous diltiazem, then transitioned to oral metoprolol with good rate control. Anticoagulation was started after discussion of stroke risk and bleeding risk. His wheezing improved with nebulizers and a short steroid course arranged by ___. Renal function remained stable, and doses were adjusted accordingly. He was discharged in stable condition after review by ___ and ___.
+
+Medications on Admission:
+Albuterol inhaler as needed
+Lisinopril 10 mg daily, ___ supply lapsed
+
+Discharge Medications:
+1. Metoprolol succinate 50 mg daily
+2. Apixaban 2.5 mg twice daily
+3. Albuterol inhaler every 4 hours as needed
+4. Tiotropium inhaler daily
+5. Atorvastatin 20 mg nightly, refilled by ___
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary: Chronic obstructive pulmonary disease exacerbation
+
+Discharge Condition:
+Mental Status: Alert and oriented, able to participate fully
+Level of Consciousness: Awake and attentive
+Activity Status: Independent with ambulation
+
+Discharge Instructions:
+You were hospitalized because of a fast, irregular heartbeat and trouble breathing. Take your new medications every day and do not stop them without asking your doctor. Weigh yourself each morning and call ___ if you gain weight, feel dizzy, or notice bleeding. Return to the emergency department for chest pain, fainting or worsening breathlessness. Keep your appointment with ___.
+
+Followup Instructions:
+___

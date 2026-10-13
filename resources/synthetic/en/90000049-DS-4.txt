@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath and palpitations
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient is a ___ year old man with a long smoking history who presented from ___ with three days of worsening breathlessness, cough and a racing heartbeat.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gastroesophageal reflux
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+General:
+Mildly dyspneic, comfortable at rest
+HEENT:
+Moist mucosa
+Lungs:
+Diffuse wheeze
+Abdomen:
+Soft, nontender
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Admission labs notable for mild leukocytosis and normal troponin. Electrocardiogram obtained at ___ showed an irregularly irregular rhythm.
+IMAGING:
+Chest film showed hyperinflated lungs without focal consolidation.
+
+Brief Hospital Course:
+He was treated for a COPD exacerbation with nebulizers, steroids and oxygen, improving steadily. Telemetry showed atrial fibrillation with rapid rates, controlled with metoprolol and anticoagulation started after discussion with ___.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+Albuterol inhaler
+
+Discharge Medications:
+Metoprolol twice daily, apixaban twice daily, prednisone taper, tiotropium inhaler daily, lisinopril, atorvastatin, albuterol as needed.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Chronic obstructive pulmonary disease exacerbation
+Atrial fibrillation with rapid ventricular response
+
+Discharge Condition:
+Stable.
+Mental Status:
+Clear and coherent
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for breathing trouble and an irregular heart rhythm. Take your new medications as prescribed, stop smoking, and return for worsening symptoms. Please keep your appointment at ___.
+
+Followup Instructions:
+___

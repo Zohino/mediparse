@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy performed by Dr. ___ on ___
+
+History of Present Illness:
+Woman presenting with three days of right upper abdominal pain, fever and nausea. Pain began after a fatty meal and radiated to the back. She was first evaluated at ___ and transferred on ___ for further care. Vital signs showed a low-grade fever. Ultrasound suggested gallbladder inflammation, and she was admitted to the surgical service.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Followed by Dr. ___ for routine care
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+Gen: Uncomfortable but nontoxic.
+HEENT: Anicteric sclera, moist mucosa.
+Neck: Supple.
+Lungs: Clear bilaterally.
+Abdomen: Tender in right upper quadrant, positive Murphy sign, no rebound.
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 13.2, ALT 48, AST 41, total bilirubin 1.1, lipase normal.
+IMPRESSION:
+Ultrasound at ___ shows gallstones, a thickened gallbladder wall and pericholecystic fluid, consistent with acute inflammation. No bile duct dilation. Liver tests normalized by postoperative day two.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 75 mcg daily
+
+Discharge Medications:
+1. Acetaminophen 650 mg every six hours as needed for pain.
+2. Docusate 100 mg twice daily while taking opioids.
+3. Oxycodone 5 mg every six hours as needed for severe pain.
+4. Lisinopril 10 mg daily.
+5. Levothyroxine 75 mcg daily.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were treated for an inflamed gallbladder, which was removed laparoscopically. Keep incisions clean and dry and avoid lifting anything heavy for four weeks. Call ___ for fever, worsening pain, vomiting or yellow skin. Please arrange a clinic visit at ___ within two weeks.
+
+Followup Instructions:
+___

@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old man with two days of right upper quadrant pain, nausea and fever, sent from ___ clinic after ultrasound showed gallstones.
+REVIEW OF SYSTEMS:
+Positive for nausea. No chest pain or dyspnea.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+General:
+Comfortable, afebrile.
+ABD:
+Soft, mild tenderness at incisions.
+EXTREMITIES:
+No edema.
+Neuro:
+Alert, nonfocal.
+
+Pertinent Results:
+Ultrasound: multiple gallstones, thickened gallbladder wall, small pericholecystic fluid.
+DISCHARGE LABS:
+WBC normalized, liver enzymes within normal limits.
+
+Brief Hospital Course:
+Admitted with acute cholecystitis, started on antibiotics and underwent uncomplicated laparoscopic cholecystectomy on ___. Pain improved, diet advanced, and he was discharged home in stable condition with ___ surgical follow up.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Lisinopril 10 mg daily, atorvastatin 20 mg nightly, acetaminophen 650 mg every six hours as needed for pain, docusate while taking opioids.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+
+Discharge Condition:
+Good
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You had your gallbladder removed. Keep incisions clean and dry, avoid lifting heavy objects for several weeks, and call ___ for fever, vomiting, worsening pain or redness.
+
+Followup Instructions:
+___

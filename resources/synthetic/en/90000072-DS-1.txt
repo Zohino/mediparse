@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fatigue and poor appetite
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with diabetes and hypertension, transferred from ___ with three days of weakness, nausea and reduced urine output. Glucose was elevated on arrival.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout
+
+Social History:
+___
+
+Family History:
+Father with heart disease
+
+Physical Exam:
+General:
+Tired, comfortable
+HEENT:
+Dry mucous membranes
+Abdomen:
+Soft, nontender
+Ext:
+No edema
+SKIN:
+Warm, dry
+
+Pertinent Results:
+DISCHARGE LABS:
+Creatinine stable above baseline, potassium normal, glucose improved.
+IMPRESSION:
+Chest radiograph clear, without focal consolidation or effusion.
+
+Brief Hospital Course:
+Renal function reflected chronic kidney disease with a mild acute component, managed with fluids and review by ___ nephrology. Cough was absent and chest imaging showed no pneumonia. Glucose settled with insulin adjustment. Stable for discharge on ___.
+
+Medications on Admission:
+Lisinopril, atorvastatin, allopurinol, insulin
+
+Discharge Medications:
+Atorvastatin nightly, allopurinol daily, adjusted insulin schedule. Lisinopril held until kidney function is rechecked.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic kidney disease
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive
+Activity Status: Independent, walks without assistance
+
+Discharge Instructions:
+You were admitted with weakness and high blood sugar. Drink fluids, check your glucose daily, and take medications as listed. Call ___ clinic if symptoms return. Repeat blood tests on ___.
+
+Followup Instructions:
+___

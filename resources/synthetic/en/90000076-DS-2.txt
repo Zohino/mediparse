@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Leg swelling and fatigue
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient was referred by ___ after several days of fatigue, poor appetite and swelling of both legs. She denies pneumonia symptoms, fever or productive cough. Labs drawn at ___ showed rising creatinine, so she was sent to the emergency department for evaluation.
+REVIEW OF SYSTEMS:
+Positive for fatigue and edema. Otherwise negative.
+
+Past Medical History:
+Hypertension
+Anemia
+Gout
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Gen: Tired but comfortable, in no distress
+HEENT: Moist mucous membranes
+Lungs: Clear bilaterally
+SKIN: Pitting edema of both shins
+
+Brief Hospital Course:
+She was admitted with volume overload in the setting of chronic kidney disease. Intravenous furosemide was started by ___ and she diuresed well, with creatinine returning toward baseline. Her blood pressure regimen was adjusted. The renal team at ___ reviewed her case and arranged outpatient follow up at ___. She walked independently before discharge.
+
+Medications on Admission:
+Amlodipine 5 mg daily
+Allopurinol 100 mg daily
+
+Discharge Medications:
+1. Furosemide 40 mg by mouth every morning, new
+2. Amlodipine 5 mg by mouth daily, continued
+3. Allopurinol 100 mg by mouth daily, continued, per ___
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute volume overload
+Hypertension
+Anemia
+
+Discharge Condition:
+Mental Status: Alert and fully oriented
+Level of Consciousness: Awake and attentive
+Activity Status: Walks without assistance
+
+Discharge Instructions:
+You were hospitalized because of swelling from extra fluid. Take your new water pill every morning and weigh yourself daily. Call ___ if your weight rises quickly or breathing becomes difficult. Limit salt in your diet and keep your appointment at ___.
+
+Followup Instructions:
+___

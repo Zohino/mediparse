@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Worsening shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with several days of increasing dyspnea, wheezing and cough with clear sputum. She was first evaluated at ___ and then sent to our emergency department, where she needed nebulized treatments and oxygen.
+
+Past Medical History:
+COPD
+Hypertension
+Hyperlipidemia
+Osteoarthritis, followed at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. No lung disease in the family.
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+Vitals: Afebrile, stable blood pressure, oxygen saturation 94% on room air
+General: Comfortable, speaking full sentences
+HEENT: Moist mucous membranes
+Neck: Supple
+CARDIAC: Regular rate and rhythm
+Abdomen: Soft, nontender
+Neuro: Alert, no focal deficits
+
+Pertinent Results:
+Chest radiograph on ___ showed hyperinflation without focal consolidation. Blood counts and chemistries were unremarkable.
+DISCHARGE LABS:
+WBC 8.1, Hgb 12.9, Plt 245, Na 139, K 4.2, Cr 0.8
+
+Brief Hospital Course:
+She improved with scheduled nebulizers, a short steroid course and supplemental oxygen, which was weaned by ___. She walked comfortably on room air before discharge.
+TRANSITIONAL ISSUES:
+Finish prednisone taper. Follow up with primary care at ___.
+
+Medications on Admission:
+Tiotropium inhaler daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Tiotropium inhaler once daily
+2. Lisinopril 10 mg daily
+3. Prednisone taper over five days
+4. Albuterol inhaler every four hours as needed
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Chronic obstructive pulmonary disease exacerbation
+
+Discharge Condition:
+Stable
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were hospitalized for breathing difficulty. Take all medicines as prescribed, use your inhalers, and avoid smoke exposure. Return for worsening breathlessness or fever, and call ___ with questions.
+
+Followup Instructions:
+___

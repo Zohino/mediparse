@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right lower quadrant pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+___ year old woman with two days of worsening abdominal pain, nausea and low fever, referred from ___ clinic.
+REVIEW OF SYSTEMS:
+Positive for anorexia; otherwise negative.
+
+Past Medical History:
+Hypothyroidism
+Migraines
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+General:
+Comfortable, no distress
+Lungs:
+Clear bilaterally
+ABD:
+Soft, mildly tender at incision sites
+
+Pertinent Results:
+White count elevated on arrival, normalizing after surgery. CT scan at ___ showed an inflamed appendix without perforation. Pathology pending at discharge.
+
+Brief Hospital Course:
+Under Dr. ___ she underwent uncomplicated laparoscopic appendectomy on the day of admission. Diet was advanced, pain was controlled with oral medication, and she walked independently. Fever resolved. She was discharged home on postoperative day two.
+
+Medications on Admission:
+Levothyroxine daily
+Sumatriptan as needed
+
+Discharge Medications:
+1. Levothyroxine 75 mcg once daily
+2. Acetaminophen 650 mg every six hours as needed for pain
+3. Docusate 100 mg twice daily while taking opioids
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute appendicitis
+Secondary:
+Hypothyroidism
+
+Discharge Condition:
+Good
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for appendicitis. Keep incisions clean and dry, avoid lifting over ten pounds for four weeks, and call ___ for fever, vomiting, or spreading redness.
+
+Followup Instructions:
+___

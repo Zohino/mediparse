@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever and productive cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with three days of fever, cough and fatigue after a recent trip to ___.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Gen: Tired, comfortable at rest
+HEENT: Moist mucous membranes
+ABD: Soft, nontender
+Ext: Warm, no edema
+SKIN: Intact, no rash
+
+Pertinent Results:
+Mild leukocytosis on admission, normalizing by discharge. Chest radiograph clear.
+IMPRESSION:
+Clear lungs.
+
+Brief Hospital Course:
+Treated for acute bronchitis with fluids and inhaled therapy. Imaging showed no pneumonia. Symptoms improved and he was discharged with ___ follow up.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+Lisinopril daily, atorvastatin nightly, guaifenesin as needed for cough, and inhaler twice daily.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Primary:
+Acute bronchitis
+
+Discharge Condition:
+Mental Status: Alert and oriented
+Level of Consciousness: Awake
+Activity Status: Walks without assistance
+
+Discharge Instructions:
+Drink plenty of fluids, rest, finish all medicines, and return if fever or breathlessness worsens.
+
+Followup Instructions:
+___

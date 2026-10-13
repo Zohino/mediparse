@@ -1,0 +1,78 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Leg swelling and nausea
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with chronic kidney disease who presented from ___ with three days of worsening leg swelling, poor appetite and nausea. He missed his nephrology visit on ___ and reports reduced urine output. In the emergency department he was hypertensive, labs showed rising creatinine and potassium, and he was admitted for monitoring and medication adjustment.
+
+Past Medical History:
+Type 2 diabetes, diagnosed ___
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension; father died at ___
+
+Physical Exam:
+Vitals:
+Afebrile, BP 158/90, HR 78, SpO2 97% on room air
+General:
+Comfortable, no distress
+HEENT:
+Moist mucous membranes
+Ext:
+Mild bilateral pitting edema
+SKIN:
+Warm, dry, no rash
+
+Pertinent Results:
+Admission labs notable for creatinine 3.4, up from baseline 2.6, BUN 58, potassium 5.7, bicarbonate 19 and hemoglobin 10.2. Repeat potassium after treatment was 4.8. Urinalysis showed 2+ protein without infection. Renal ultrasound showed small echogenic kidneys without obstruction. Chest radiograph was clear. Labs were drawn at ___ and creatinine improved to 3.0 by discharge.
+
+Medications on Admission:
+Lisinopril 20 mg daily
+Metformin 500 mg twice daily
+Atorvastatin 40 mg nightly
+
+Discharge Medications:
+1. Amlodipine 10 mg daily
+2. Atorvastatin 40 mg nightly
+3. Sodium bicarbonate 650 mg twice daily
+4. Furosemide 40 mg daily
+5. Insulin glargine 10 units nightly
+Lisinopril and metformin were stopped; see ___ for details.
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Chronic kidney disease with acute worsening
+Hyperkalemia
+
+Discharge Condition:
+Mental Status:
+Alert and fully oriented
+Level of Consciousness:
+Awake and interactive
+Activity Status:
+Walks independently
+
+Discharge Instructions:
+You were admitted because your kidney function worsened and your potassium was high. Stop lisinopril and metformin. Take the new medicines as listed, weigh yourself every morning, and limit salt and high potassium foods. Call ___ if swelling or breathlessness returns, and keep your appointment at ___.
+
+Followup Instructions:
+___

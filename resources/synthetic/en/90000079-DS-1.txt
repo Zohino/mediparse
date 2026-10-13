@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies.
+
+Chief Complaint:
+Leg swelling and fatigue.
+
+Major Surgical or Invasive Procedure:
+None.
+
+History of Present Illness:
+The patient presented to ___ with several days of worsening leg swelling and exertional fatigue. He was seen at ___ by his primary doctor, who noted an elevated heart rate and sent him to the emergency department. He denied chest pain, fever, or syncope. Symptoms began roughly ___ days before arrival and slowly progressed.
+
+Past Medical History:
+Atrial fibrillation on anticoagulation, hypertension, hyperlipidemia, hypothyroidism. Followed by Dr. ___ for cardiology.
+
+Social History:
+___
+
+Family History:
+Father with hypertension.
+
+Physical Exam:
+General: Comfortable, no distress.
+HEENT: Moist mucous membranes.
+PULM: Faint bibasilar crackles.
+Abdomen: Soft, nontender, nondistended.
+Ext: Trace bilateral pitting edema.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 7.2, Hgb 13.1, Plt 210, Na 139, K 4.2, Cr 1.0, BNP markedly elevated, TSH sent by ___.
+Chest radiograph showed mild vascular congestion, read by ___.
+DISCHARGE LABS:
+WBC 6.8, Hgb 12.9, Na 138, K 4.0, Cr 1.1.
+
+Brief Hospital Course:
+He was admitted and diuresed with IV furosemide, with good urine output and steady improvement in swelling and breathing. Heart rate was controlled with his home beta blocker. An echocardiogram done at ___ showed mildly reduced systolic function. Cardiology at ___ reviewed the case and agreed with the plan. He was transitioned to oral diuretics and discharged euvolemic.
+TRANSITIONAL ISSUES:
+- Recheck basic metabolic panel at ___ within one week.
+- Follow up with cardiology for repeat echocardiogram.
+
+Discharge Medications:
+1. Furosemide 40 mg by mouth daily
+2. Metoprolol succinate 50 mg daily
+3. Apixaban 5 mg twice daily
+4. Levothyroxine 75 mcg daily
+5. Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute heart failure exacerbation
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for fluid overload from heart failure. Weigh yourself every morning and call ___ if your weight rises by more than three pounds in a day. Limit salt intake. Take all medications as directed. Return to ___ for chest pain, worsening breathlessness, or fainting.
+
+Followup Instructions:
+___

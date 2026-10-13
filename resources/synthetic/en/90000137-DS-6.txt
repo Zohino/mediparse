@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with long-standing lung and kidney problems presented with three days of worsening dyspnea and palpitations after transfer from ___. He reported poor exercise tolerance and ankle swelling.
+
+Past Medical History:
+Chronic kidney disease stage 4
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals: T 98.2 HR 96 BP 128/74 RR 18 SpO2 94% RA
+Gen: Alert, no distress
+HEENT: Normal
+Neck: Supple
+PULM: Diffuse wheezing
+Abdomen: Soft
+Ext: Mild edema
+Neuro: Nonfocal
+
+Pertinent Results:
+ADMISSION LABS: Creatinine 2.4, potassium 4.8, BNP elevated.
+DISCHARGE LABS: Creatinine 2.2, potassium 4.4.
+Chest imaging at ___ showed hyperinflated lungs without focal consolidation.
+
+Brief Hospital Course:
+He was treated with nebulizers and a short steroid course with clear improvement in breathing. Telemetry showed atrial fibrillation with rapid rate, controlled with metoprolol, and anticoagulation was started. Renal dosing was adjusted. Cardiology at ___ agreed with the plan. He was discharged on ___ in stable condition.
+
+Medications on Admission:
+Albuterol inhaler, furosemide, amlodipine, sevelamer.
+
+Discharge Medications:
+Metoprolol succinate 50 mg daily, apixaban 2.5 mg twice daily, albuterol inhaler as needed, prednisone 40 mg daily for five days, furosemide 40 mg daily.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary:
+Chronic obstructive pulmonary disease exacerbation
+Chronic kidney disease
+Atrial fibrillation with rapid ventricular response
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for breathing trouble and a fast heart rhythm. Take your medicines as prescribed. Call ___ or return if you have worsening shortness of breath, chest pain, or fainting. Bring this list to ___.
+
+Followup Instructions:
+___

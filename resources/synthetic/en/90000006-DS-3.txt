@@ -1,0 +1,79 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with atrial fibrillation who presented from ___ with several days of productive cough, fever and worsening shortness of breath. Chest imaging at ___ raised concern for possible pneumonia, though the picture was unclear. He was sent to ___ for further evaluation and monitoring.
+
+Past Medical History:
+Chronic kidney disease
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Vitals:
+Afebrile, stable, saturating well on room air
+Lungs:
+Scattered crackles at the right base
+ABD:
+Soft, nontender
+Ext:
+Trace edema
+Neuro:
+Alert, nonfocal
+
+Pertinent Results:
+Laboratory studies showed mildly elevated white count and stable creatinine near baseline. Chest radiograph obtained at ___ showed a patchy right basilar opacity without effusion.
+IMPRESSION:
+Right basilar opacity, nonspecific, correlate clinically.
+
+Brief Hospital Course:
+He was observed on oral antibiotics and remained comfortable with improving cough. Heart rate stayed controlled on his home regimen. Kidney function remained stable. He was seen by the team at ___ and cleared for discharge.
+TRANSITIONAL ISSUES:
+Repeat chest imaging at ___ in six weeks.
+
+Medications on Admission:
+Metoprolol, apixaban, atorvastatin, lisinopril
+
+Discharge Medications:
+1. Metoprolol succinate daily
+2. Apixaban twice daily
+3. Atorvastatin nightly
+4. Amoxicillin-clavulanate twice daily for five more days
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Primary:
+Chronic kidney disease
+Atrial fibrillation
+
+Discharge Condition:
+Good
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with cough and fever. Take your antibiotics until finished and continue your other medicines. Drink fluids and rest. Call Dr. ___ or return to the hospital for worsening breathing, chest pain or persistent fever.
+
+Followup Instructions:
+___

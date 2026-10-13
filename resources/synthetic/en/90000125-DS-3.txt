@@ -1,0 +1,75 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Worsening shortness of breath and cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man transferred from ___ with three days of increasing dyspnea, productive cough and wheezing. He used his home inhaler more often without relief. He was evaluated by Dr. ___ and given nebulizers before transfer.
+
+Past Medical History:
+COPD
+Diabetes mellitus type 2
+Hypertension
+Followed by ___ for lung disease
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+HEENT: Moist mucous membranes
+Lungs: Diffuse expiratory wheezes
+Ext: No edema
+SKIN: Warm, dry
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+DISCHARGE LABS:
+Sodium normal, creatinine at baseline, white count mildly elevated on arrival and improved. Glucose acceptable. Lactate normal.
+IMPRESSION:
+Hyperinflated lungs with no focal consolidation or effusion.
+
+Brief Hospital Course:
+He was treated for an exacerbation with scheduled nebulizers, oral steroids and a short antibiotic course. Oxygen was weaned to room air by day three. Pulmonary team ___ advised outpatient review. Blood sugars were managed with sliding scale insulin while on steroids. He walked in the hallway without desaturation on ___.
+
+Medications on Admission:
+Tiotropium daily
+Albuterol inhaler as needed
+Lisinopril daily
+
+Discharge Medications:
+1. Prednisone taper over five days
+2. Tiotropium inhaled once daily
+3. Albuterol inhaler every four hours as needed
+4. Lisinopril daily
+Prescriptions sent to ___ pharmacy.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Chronic obstructive pulmonary disease exacerbation
+Secondary:
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for worsening breathing. Take the steroid course until finished and use your inhalers as directed. Stop smoking if you smoke. Return for fever, worsening breathlessness or chest pain. Call ___ with questions. Keep your appointment with Dr. ___.
+
+Followup Instructions:
+___

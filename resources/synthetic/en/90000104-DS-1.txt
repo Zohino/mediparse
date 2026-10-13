@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Palpitations and lightheadedness
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with hypertension presented after two days of racing, irregular heartbeat and dizziness. Seen first at ___ by his physician, who sent him to ___ for evaluation. No chest pain or fainting.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy
+
+Social History:
+___
+
+Family History:
+Father with heart disease
+
+Physical Exam:
+Vitals: Heart rate 118, BP 134/82, SpO2 97 percent on room air
+General: Comfortable, no distress
+Neck: No JVD
+Lungs: Clear bilaterally
+Abdomen: Soft, nontender
+Ext: Warm, no edema
+
+Pertinent Results:
+Troponin negative twice. Potassium and magnesium normal. TSH normal. Echocardiogram at ___ showed preserved ejection fraction and mild left atrial enlargement.
+
+Brief Hospital Course:
+Rhythm was irregular on telemetry and rate was controlled with metoprolol. Anticoagulation was started after risk review with the team at ___. He felt well and rate settled by discharge, and he was seen by ___ before leaving.
+TRANSITIONAL ISSUES:
+Recheck heart rate and tolerance of anticoagulant at follow up.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Lisinopril 10 mg once daily
+Atorvastatin 20 mg nightly
+Metoprolol succinate 50 mg daily
+Apixaban 5 mg twice daily
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Stable
+Mental Status: Alert and oriented, able to follow instructions
+Activity Status: Walking independently
+
+Discharge Instructions:
+You were admitted with a fast, irregular heartbeat. Take your new medicines as directed and do not skip blood thinner doses. Return for fainting, chest pain, bleeding or new weakness. Call ___ with questions.
+
+Followup Instructions:
+___

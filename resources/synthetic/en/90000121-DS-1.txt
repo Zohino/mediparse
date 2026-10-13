@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Man with two days of colicky right upper abdominal pain and nausea, seen at ___ and transferred from ___ for surgical evaluation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+General:
+Comfortable, afebrile
+Neck:
+Supple
+PULM:
+Clear bilaterally
+Abdomen:
+Soft, mildly tender in right upper quadrant
+EXTREMITIES:
+No edema
+
+Pertinent Results:
+Mild leukocytosis and normal liver enzymes on arrival.
+IMAGING:
+Ultrasound showed gallstones with wall thickening.
+
+Brief Hospital Course:
+He was given antibiotics and fluids, then underwent uncomplicated laparoscopic cholecystectomy on ___. Diet advanced and pain was controlled with oral medication.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+Lisinopril daily, atorvastatin nightly, acetaminophen as needed for pain, docusate while taking opioids.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+
+Discharge Condition:
+Stable
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake and interactive
+
+Discharge Instructions:
+You may shower and resume light activity. Avoid heavy lifting for several weeks. Call the clinic at ___ for fever or worsening pain.
+
+Followup Instructions:
+___

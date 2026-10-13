@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Weakness, thirst and frequent urination
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+The patient was referred by ___ to the emergency department after several days of worsening weakness, thirst and frequent urination. He had been seen at ___ clinic earlier in the week. He reported poor appetite and nausea since ___. In the emergency department he was dehydrated with markedly elevated blood glucose. He received intravenous fluids and was admitted to the ___ service. He denied fever, chest pain or abdominal pain.
+
+Past Medical History:
+Type 2 diabetes mellitus
+Hypertension
+Hyperlipidemia
+Prior follow up with ___ for foot care
+
+Social History:
+___
+
+Family History:
+Mother with hypertension, treated at ___
+
+Physical Exam:
+PULM: Clear to auscultation bilaterally, no wheezes
+Abdomen: Soft, nontender, nondistended, normal bowel sounds
+Ext: Warm, no edema
+SKIN: Dry mucous membranes, no rash
+Neuro: Alert, oriented, no focal deficits
+PULSES: Palpable and symmetric distally
+
+Pertinent Results:
+Admission labs showed glucose markedly elevated with an anion gap and ketones in the urine. Potassium was normal after repletion. Hemoglobin A1c was high. Urinalysis was otherwise unremarkable.
+FINDINGS: Chest radiograph obtained at ___ showed clear lungs and a normal heart size. Compared with the study from ___, no interval change.
+
+Brief Hospital Course:
+He was admitted for hyperglycemia with mild ketosis and dehydration. He was given fluids and an insulin infusion, and his glucose and gap improved over a day. He was transitioned to subcutaneous insulin and then to a regimen of oral agents with a diet plan, with teaching provided by ___. Nutrition and the ___ educator saw him before discharge. He tolerated meals and walked without difficulty. Home medications were resumed, and he was discharged in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Metformin 500 mg twice daily
+
+Discharge Medications:
+1. Metformin 1000 mg twice daily with meals
+2. Glipizide 5 mg daily before breakfast
+3. Lisinopril 10 mg daily
+4. Atorvastatin 20 mg nightly
+5. Glucose meter and test strips, check blood sugar before meals, supplies from ___
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Diabetes mellitus with hyperglycemia
+
+Discharge Condition:
+Stable and improved.
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized because your blood sugar was very high and you were dehydrated. Please take your medications as prescribed and check your blood sugar before each meal, keeping a written log. Drink plenty of fluids and follow the diet taught by ___. Return for vomiting, confusion, severe thirst or abdominal pain. Call ___ with questions.
+
+Followup Instructions:
+___

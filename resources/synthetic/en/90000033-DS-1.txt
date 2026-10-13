@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fatigue and excessive thirst
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with obesity and hypertension presented with three weeks of fatigue, frequent urination and blurred vision, sent in by his clinic at ___ after a high fingerstick glucose.
+REVIEW OF SYSTEMS:
+Positive for thirst and weight loss. Negative for chest pain.
+
+Past Medical History:
+Hypertension
+Obesity
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with high blood pressure
+
+Physical Exam:
+Gen: Comfortable, no distress
+Lungs: Clear bilaterally
+ABD: Soft, nontender
+EXTREMITIES: No edema
+SKIN: Warm and dry
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Glucose elevated on arrival. Hemoglobin A1c markedly raised. Sodium and potassium normal. Creatinine at baseline. Urinalysis with glucose, no ketones. Labs drawn at ___ reviewed.
+IMPRESSION:
+Chest radiograph without acute findings.
+
+Brief Hospital Course:
+Persistent hyperglycemia raised concern for possible new diabetes, not yet confirmed pending repeat testing. He received fluids and insulin sliding scale with improving glucose. Nutrition taught diet changes. Blood pressure remained controlled. He was seen by the team at ___ and discharged stable on ___ of admission.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily
+2. Atorvastatin 20 mg by mouth every night
+3. Glucose meter with test strips, check fasting each morning
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Hyperglycemia
+Hypertension
+Obesity
+
+Discharge Condition:
+Stable and improved.
+Level of Consciousness: Alert and interactive.
+Activity Status: Walks independently.
+
+Discharge Instructions:
+You were admitted with very high blood sugars. Check your sugar every morning and write the numbers down. Follow a low sugar diet, drink water, and exercise gently. Return for vomiting, confusion, or severe thirst. Call ___ with questions.
+
+Followup Instructions:
+___

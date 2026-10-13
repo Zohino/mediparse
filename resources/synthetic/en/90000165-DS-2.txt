@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old man referred from ___ with two days of worsening right upper quadrant pain, nausea and fever. Imaging showed gallstones with a thickened gallbladder wall. He was admitted for surgical management.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy in ___
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+Gen: Uncomfortable, alert
+HEENT: Anicteric
+ABD: Soft, tender in right upper quadrant
+Ext: Warm, no edema
+PULSES: Palpable throughout
+
+Pertinent Results:
+ADMISSION LABS:
+White count elevated, liver enzymes mildly raised. Ultrasound performed at ___ showed multiple gallstones, pericholecystic fluid and wall thickening without bile duct dilation.
+
+Brief Hospital Course:
+He was started on intravenous antibiotics and fluids, then taken to the operating room by the ___ team for an uncomplicated laparoscopic cholecystectomy. Pain was controlled with oral medication. He tolerated a regular diet, ambulated independently, and was ready for discharge at ___ on the second day.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg once daily
+2. Atorvastatin 20 mg nightly
+3. Acetaminophen 650 mg every six hours as needed for pain
+4. Docusate 100 mg twice daily while taking opioids
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Stable, ambulatory, tolerating diet
+
+Discharge Instructions:
+You were hospitalized with an inflamed gallbladder and had it removed. Keep incisions clean and dry, and avoid lifting heavy objects for several weeks. Call the clinic at ___ or return for fever, vomiting, yellow skin or worsening belly pain. Ask for ___ if needed.
+
+Followup Instructions:
+___

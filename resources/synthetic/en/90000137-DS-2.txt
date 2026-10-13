@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with chronic kidney disease presenting with cough, fever and dyspnea for three days, found to have pneumonia on imaging. Seen in the ___ emergency department.
+REVIEW OF SYSTEMS:
+Positive for cough and fever.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+General: Tired, mildly dyspneic
+HEENT: Moist mucosa
+PULM: Crackles at right base
+Abdomen: Soft, nontender
+Ext: No edema
+SKIN: Warm, dry
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+ADMISSION LABS: White count elevated, creatinine at baseline.
+IMPRESSION: Right lower lobe opacity, no effusion.
+
+Brief Hospital Course:
+Transferred from ___ for worsening dyspnea. Treated with antibiotics and nebulizers; his COPD remained stable. Oxygen was weaned and he improved steadily.
+
+Medications on Admission:
+Lisinopril and metoprolol daily
+
+Discharge Medications:
+1. Amoxicillin-clavulanate twice daily for five days
+2. Metoprolol daily
+3. Albuterol inhaler as needed
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Pneumonia
+COPD
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+Finish all antibiotics, rest, and drink fluids. Return for fever or worsening breathing. Please follow up with Dr. ___ within one week.
+
+Followup Instructions:
+___

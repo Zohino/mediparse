@@ -1,0 +1,71 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever, productive cough, shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Mr. ___ is a ___ year old man who presented with three days of fever, productive cough and worsening dyspnea. He was seen at ___ and sent to the emergency department, where he was hypoxic.
+
+Past Medical History:
+Chronic kidney disease stage 4
+Hypertension
+Gout
+
+Family History:
+Noncontributory
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: T 38.4, HR 98, BP 138/76, RR 22, SpO2 90% on room air
+HEENT: Dry mucous membranes
+Ext: Trace edema
+SKIN: Warm, no rash
+Neuro: Alert, nonfocal
+PULSES: Palpable bilaterally
+
+Pertinent Results:
+Admission chest film showed right lower lobe consolidation. Labs on ___ notable for leukocytosis and stable baseline creatinine.
+DISCHARGE LABS:
+WBC 8.1, Hgb 11.2, Cr 3.1
+
+Brief Hospital Course:
+He was treated for community acquired pneumonia with ceftriaxone and azithromycin, then switched to oral antibiotics. Oxygen was weaned to room air by day three. Renal function remained at baseline. He was followed by ___ and cleared for home by ___.
+TRANSITIONAL ISSUES:
+Complete antibiotic course. Repeat chest film in six weeks.
+
+Medications on Admission:
+Amlodipine 10 mg daily
+Allopurinol 100 mg daily
+
+Discharge Medications:
+1. Amlodipine 10 mg by mouth daily
+2. Allopurinol 100 mg by mouth daily
+3. Amoxicillin-clavulanate 500 mg by mouth twice daily for five days
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute hypoxic respiratory failure
+Hypertension
+Gout
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with a lung infection and received antibiotics and oxygen. Take all medications as prescribed, drink fluids, rest, and return for fever, worsening breathlessness or contact ___ with questions.
+
+Followup Instructions:
+___

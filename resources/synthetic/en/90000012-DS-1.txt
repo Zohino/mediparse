@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+___ year old man presented with three days of right lower quadrant pain, nausea and low grade fever. Imaging at ___ showed acute appendicitis. He was admitted to the surgical service and taken to the operating room.
+
+Past Medical History:
+Hypertension
+Appendiceal surgery planning discussed in ___
+Denies diabetes
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+Vitals: T 99.1 HR 84 BP 128/76 RR 16 SpO2 98% RA
+General: comfortable, alert
+HEENT: anicteric
+Neck: supple
+Lungs: clear bilaterally
+ABD: soft, mild tenderness at incisions
+Ext: warm, no edema
+Neuro: nonfocal
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 14.2, Hgb 14.6, Plt 238, creatinine 0.9. CT abdomen performed at ___ demonstrated a dilated inflamed appendix with surrounding fat stranding.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+2. Lisinopril 10 mg by mouth once daily.
+3. Docusate 100 mg twice daily while taking opioids.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute appendicitis
+Secondary:
+Hypertension
+
+Discharge Condition:
+Good
+Level of Consciousness: alert and interactive
+
+Discharge Instructions:
+You were hospitalized for appendicitis and underwent laparoscopic surgery. Keep incisions clean and dry, avoid heavy lifting for two weeks, and call ___ or return for fever, vomiting or worsening pain.
+
+Followup Instructions:
+___

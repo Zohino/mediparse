@@ -1,0 +1,82 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Woman with two days of worsening right upper quadrant pain, nausea and fever, sent in by her physician at ___ after ultrasound showed gallstones. She was seen in the emergency department at ___ and admitted for acute cholecystitis.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Gallstones
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+General:
+Comfortable, afebrile
+HEENT:
+Anicteric
+Lungs:
+Clear bilaterally
+Abdomen:
+Soft, mild incisional tenderness
+EXTREMITIES:
+No edema
+SKIN:
+Port sites clean and dry
+
+Pertinent Results:
+DISCHARGE LABS:
+WBC 8.1, Hgb 12.6, creatinine 0.8, ALT and AST normal, bilirubin 0.7 per the lab at ___.
+FINDINGS:
+Ultrasound showed multiple gallstones, a thickened gallbladder wall and pericholecystic fluid. Intraoperative cholangiogram was not performed.
+
+Brief Hospital Course:
+She received intravenous fluids, antibiotics and analgesia, then underwent uncomplicated laparoscopic cholecystectomy by Dr. ___ on hospital day two. Pain settled, diet advanced and she was discharged home in stable condition.
+TRANSITIONAL ISSUES:
+Follow up pathology result at ___.
+
+Medications on Admission:
+Levothyroxine 75 mcg daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Levothyroxine 75 mcg once daily
+2. Lisinopril 10 mg once daily
+3. Acetaminophen 650 mg every six hours as needed for pain
+4. Docusate 100 mg twice daily while taking opioids
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Good
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Awake and alert
+Activity Status:
+Walks independently
+
+Discharge Instructions:
+You were treated for gallbladder inflammation and had your gallbladder removed. Keep incisions clean, avoid lifting heavy objects for several weeks, and call ___ or return for fever, vomiting, yellow skin or worsening pain. Your surgeon at ___ will see you.
+
+Followup Instructions:
+___

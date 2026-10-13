@@ -1,0 +1,81 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: UROLOGY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right flank pain
+
+Major Surgical or Invasive Procedure:
+Cystoscopy with ureteral stent placement
+
+History of Present Illness:
+Two days of right flank pain and nausea brought him to ___. He denies fever, cough or pneumonia. CT performed at ___ showed an obstructing ureteral stone. He was admitted for pain control and urology evaluation.
+
+Past Medical History:
+Hypertension
+Kidney stones, treated at ___
+
+Social History:
+___
+
+Family History:
+Mother with kidney stones
+
+Physical Exam:
+Vitals:
+Stable, afebrile
+General:
+Comfortable
+HEENT:
+Normal
+Neck:
+Supple
+Abdomen:
+Mild right flank tenderness
+Ext:
+No edema
+SKIN:
+Warm, dry
+Neuro:
+Nonfocal
+
+Pertinent Results:
+Imaging from ___ showed a 6 mm proximal right ureteral stone with mild hydronephrosis. Urinalysis showed blood without infection.
+DISCHARGE LABS:
+WBC 8.1, Hgb 14.0, creatinine 1.0, sodium 139.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+
+Discharge Medications:
+Tamsulosin 0.4 mg nightly
+Ibuprofen 600 mg every eight hours as needed for pain
+Ondansetron 4 mg as needed for nausea
+Lisinopril 10 mg daily
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Obstructing right ureteral stone
+Hydronephrosis
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a kidney stone. Drink plenty of fluids and strain your urine. Take your medications as directed. Return for fever, uncontrolled pain, or inability to urinate. Call ___ with questions.
+
+Followup Instructions:
+___

@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper quadrant pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+___ year old woman sent from ___ with two days of right upper quadrant pain, nausea and vomiting, found to have acute cholecystitis.
+
+Past Medical History:
+Hypertension
+Gallstones
+
+Social History:
+___
+
+Family History:
+Family history notable for diabetes in her mother.
+
+Physical Exam:
+Vitals:
+Afebrile, stable.
+General:
+Comfortable.
+HEENT:
+Normal.
+EXTREMITIES:
+No edema.
+SKIN:
+Warm, dry.
+Neuro:
+Alert, nonfocal.
+
+Pertinent Results:
+White count mildly elevated on admission. Ultrasound showed gallstones, wall thickening and pericholecystic fluid. Liver enzymes normal. Pathology pending at discharge.
+
+Brief Hospital Course:
+She was given antibiotics and fluids, then taken to the operating room by Dr. ___ for uncomplicated laparoscopic cholecystectomy. Pain improved, diet advanced, and she was discharged on postoperative day one.
+
+Discharge Medications:
+Acetaminophen as needed for pain. Oxycodone briefly for severe pain. Continue home blood pressure medication.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute calculous cholecystitis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You had your gallbladder removed. Keep incisions clean and dry, avoid heavy lifting, and call ___ for fever, worsening pain, vomiting or jaundice.
+
+Followup Instructions:
+___

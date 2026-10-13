@@ -1,0 +1,78 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with several days of productive cough, fevers and fatigue, sent in by his clinic at ___ after poor oral intake and low oxygen readings at home.
+
+Past Medical History:
+Diabetes mellitus type 2
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with heart disease
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+Vitals:
+Afebrile, stable
+General:
+Comfortable, no distress
+HEENT:
+Moist mucous membranes
+Lungs:
+Mild crackles at right base
+CARDIAC:
+Regular rhythm
+ABD:
+Soft, nontender
+EXTREMITIES:
+No edema
+
+Pertinent Results:
+Chest film at ___ showed a right lower lobe opacity. White count mildly elevated on admission and improved.
+IMPRESSION:
+Right basilar opacity
+
+Brief Hospital Course:
+He was treated for possible pneumonia with antibiotics and fluids, improved steadily, and weaned off oxygen. Glucose was monitored closely. Care was coordinated with ___ and his clinic at ___.
+
+Medications on Admission:
+Metformin and lisinopril daily
+
+Discharge Medications:
+1. Metformin 500 mg twice daily
+2. Lisinopril 10 mg daily
+3. Azithromycin to finish the remaining course
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Diabetes mellitus type 2
+
+Discharge Condition:
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with a cough and fever. Finish your antibiotics, rest, drink fluids, and call ___ or return if breathing worsens.
+
+Followup Instructions:
+___

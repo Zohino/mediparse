@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right upper quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+This is a ___ year old man who presented to ___ with two days of worsening right upper quadrant pain, nausea and vomiting. Pain began after a fatty meal and has recurred since ___. He reported low grade fevers and no jaundice. Ultrasound at the outside facility showed gallstones, so he was transferred for surgical evaluation.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy in childhood
+
+Family History:
+Mother had gallstones. No family history of liver disease.
+
+Physical Exam:
+General: Uncomfortable but in no acute distress
+Lungs: Clear bilaterally
+CARDIAC: Regular rate and rhythm, no murmurs
+ABD: Soft, tender in right upper quadrant, positive Murphy sign
+EXTREMITIES: Warm, no edema
+
+Pertinent Results:
+Admission labs showed mild leukocytosis with normal liver enzymes and normal bilirubin. Lipase was within normal limits.
+Imaging performed at ___ was reviewed.
+IMPRESSION: Gallstones with gallbladder wall thickening and pericholecystic fluid, consistent with acute cholecystitis. No bile duct dilation.
+
+Brief Hospital Course:
+He was admitted to the surgical service, started on intravenous fluids and antibiotics, and kept without oral intake. The surgical team led by ___ took him to the operating room on ___ for an uncomplicated laparoscopic cholecystectomy. Pain was controlled with oral medications and he tolerated a regular diet. Fever resolved, incisions stayed clean, and he was discharged home at ___ in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily.
+2. Atorvastatin 20 mg by mouth every night.
+3. Acetaminophen 650 mg by mouth every six hours as needed for pain.
+4. Oxycodone 5 mg by mouth every four hours as needed for severe pain.
+5. Docusate 100 mg twice daily while taking opioids.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Condition:
+Mental Status: Alert and oriented, able to follow commands
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with an inflamed gallbladder and had it removed laparoscopically. You may shower but do not soak incisions. Avoid lifting over ten pounds for four weeks. Call ___ or return to the emergency department at ___ for fever, worsening pain, vomiting, yellow skin, or redness at incisions. Please arrange a visit with ___ as directed. Take pain medication only if needed and avoid driving while on opioids.
+
+Followup Instructions:
+___

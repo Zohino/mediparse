@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with three days of productive cough, fever and shortness of breath after contact with a sick relative. He was seen at ___ where chest imaging raised concern for possible pneumonia, and he was sent to our emergency department. He received fluids and oxygen on arrival and was admitted by Dr. ___ for monitoring.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Seasonal allergies, followed at ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals:
+T 38.2 HR 98 BP 134/80 SpO2 92% on room air
+General:
+Tired, mildly uncomfortable
+Lungs:
+Crackles at the right base
+CARDIAC:
+Regular rhythm
+Abdomen:
+Soft, nontender
+SKIN:
+Warm and dry
+
+Pertinent Results:
+Admission labs notable for white count 13.4 with neutrophil predominance and lactate 1.6. Chemistry panel was otherwise unremarkable. Chest radiograph showed a patchy right lower lobe opacity. Blood cultures drawn at ___ were pending at discharge. Respiratory viral panel was sent.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily
+2. Atorvastatin 20 mg by mouth nightly
+3. Azithromycin 250 mg by mouth daily for four more days
+4. Guaifenesin 600 mg by mouth twice daily as needed for cough, per Dr. ___
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Community-acquired lower respiratory tract infection
+Hypoxemia, resolved
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were hospitalized with a lung infection and treated with antibiotics and oxygen. Finish the full antibiotic course, drink plenty of fluids and rest at home. Return for worsening breathlessness, high fever or chest pain. Call ___ with questions or to reschedule any visit at ___.
+
+Followup Instructions:
+___

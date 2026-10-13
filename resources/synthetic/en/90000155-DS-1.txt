@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman presented with cough, fever and dyspnea for three days; chest film showed pneumonia. She was transferred from ___ after treatment began at ___. Started on antibiotics and oxygen. She improved steadily.
+REVIEW OF SYSTEMS:
+Positive for cough; otherwise negative.
+
+Past Medical History:
+Atrial fibrillation, followed by Dr. ___
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with stroke
+
+Physical Exam:
+General:
+Comfortable, no distress
+Neck:
+Supple
+Abdomen:
+Soft, nontender
+
+Pertinent Results:
+Chest film showed right lower lobe opacity. White count mildly elevated on admission, improved by discharge.
+DISCHARGE LABS:
+WBC 8.1, Hgb 12.4, creatinine 0.9
+
+Medications on Admission:
+Metoprolol
+Apixaban
+
+Discharge Medications:
+Metoprolol 25 mg twice daily
+Apixaban 5 mg twice daily
+Amoxicillin-clavulanate alternative course completed in hospital; azithromycin 250 mg daily for two more days
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Stable, alert and oriented
+Activity Status:
+Independent
+
+Discharge Instructions:
+You were hospitalized with a lung infection. Take all medicines as prescribed, rest, drink fluids, and return for fever, worsening breathlessness or chest pain. Call ___ with questions.
+
+Followup Instructions:
+___

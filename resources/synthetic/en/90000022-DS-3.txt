@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fatigue and leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Male patient with long-standing medical problems sent from ___ clinic after several days of worsening fatigue, poor appetite and swelling of the legs. He was seen by ___ and advised to come to the ___ emergency department. Labs on arrival showed high glucose and abnormal kidney function, prompting admission for monitoring.
+
+Past Medical History:
+Diabetes mellitus type 2 for many years
+Chronic kidney disease, followed by ___
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Father deceased, details ___.
+
+Physical Exam:
+General: Alert, comfortable, no acute distress.
+HEENT: Moist mucous membranes, anicteric.
+PULM: Clear bilaterally, no wheezes.
+SKIN: Warm, dry, mild leg edema.
+Neuro: Alert, oriented, nonfocal.
+
+Pertinent Results:
+Admission labs notable for elevated glucose and creatinine above baseline, drawn at ___. Potassium mildly elevated. Hemoglobin stable. Urinalysis with protein and glucose.
+FINDINGS: Chest radiograph performed at ___ showed clear lungs without focal consolidation and mild cardiomegaly. Renal ultrasound reported by ___ showed small echogenic kidneys without hydronephrosis.
+
+Brief Hospital Course:
+He was admitted to the ___ medicine service and treated with insulin and intravenous fluids, with gradual improvement in glucose. Creatinine returned toward baseline. He had no cough or fever, and chest imaging showed no pneumonia. Nephrology from ___ reviewed the case and adjusted dosing of his medications. Diet teaching was completed with the nurse on ___. He was stable for discharge home with services arranged by ___.
+
+Medications on Admission:
+Metformin 500 mg twice daily. Lisinopril 10 mg daily. Aspirin 81 mg daily.
+
+Discharge Medications:
+Insulin glargine 10 units at bedtime. Amlodipine 5 mg daily. Aspirin 81 mg daily. Atorvastatin 20 mg nightly. Hold metformin until kidney function is rechecked. Hold lisinopril until follow-up labs.
+
+Discharge Disposition:
+Home with services
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic kidney disease
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized because of high blood sugar and worsening kidney function. Take your medicines as listed and check your blood sugar every morning and evening. Drink fluids as advised, avoid anti-inflammatory pain medicines, and return if you have vomiting, confusion, or very little urine.
+
+Followup Instructions:
+___

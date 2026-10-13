@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg redness and pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with three days of worsening redness, warmth and swelling of the right lower leg after a minor scratch. Sent in by ___ clinic for fever and failed oral antibiotics.
+REVIEW OF SYSTEMS:
+Positive for chills. No chest pain or cough.
+
+Past Medical History:
+Diabetes mellitus type 2
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Vitals:
+Afebrile, stable
+General:
+Comfortable, no distress
+Lungs:
+Clear
+Abdomen:
+Soft, nontender
+Ext:
+Right shin erythematous, warm, mildly swollen
+
+Pertinent Results:
+Mild leukocytosis on admission, improved by discharge. Blood cultures no growth at ___ hours.
+DISCHARGE LABS:
+White count normal, creatinine stable.
+IMPRESSION:
+Skin thickening without abscess on ultrasound.
+
+Brief Hospital Course:
+Treated for cellulitis with intravenous antibiotics at ___, with steady fading of redness and resolution of fever. Glucose was managed with insulin sliding scale. Switched to oral antibiotics and cleared by ___ for discharge.
+
+Medications on Admission:
+Metformin, lisinopril, atorvastatin
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth four times daily for five more days
+2. Metformin 500 mg twice daily
+3. Lisinopril 10 mg daily
+4. Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Cellulitis of right lower leg
+
+Discharge Condition:
+Mental Status:
+Clear and coherent
+Level of Consciousness:
+Alert and interactive
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Finish all antibiotics, keep the leg raised, and check your skin daily. Return for fever, spreading redness or new pain. Call ___ with questions.
+
+Followup Instructions:
+___

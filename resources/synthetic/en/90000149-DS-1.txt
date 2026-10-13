@@ -1,0 +1,64 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Fever and cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This ___ year old man presented with fever, productive cough and shortness of breath after transfer from ___. Chest imaging raised concern for possible pneumonia, and he was started on intravenous antibiotics, oxygen and fluids.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Past Surgical History:
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+HEENT: moist mucosa
+Neck: supple
+PULM: scattered crackles at bases
+ABD: soft, nontender
+EXTREMITIES: warm, trace edema
+Neuro: alert, oriented
+
+Pertinent Results:
+IMPRESSION: Patchy opacity at the right lung base, mild.
+FINDINGS: Heart size is normal. Small right effusion is present. Left lung is clear. Bony structures are intact.
+
+Discharge Medications:
+1. Amlodipine 5 mg daily
+2. Atorvastatin 20 mg nightly
+3. Amoxicillin-free antibiotic course to complete at home
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Acute hypoxic respiratory failure
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with fever and cough and treated with antibiotics and oxygen. Take your medicines as directed, rest, drink fluids, and follow up with Dr. ___ for repeat imaging.
+
+Followup Instructions:
+___

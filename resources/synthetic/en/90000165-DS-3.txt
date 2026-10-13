@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: UROLOGY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right flank pain
+
+Major Surgical or Invasive Procedure:
+Ureteral stent placement
+
+History of Present Illness:
+Man referred from ___ with two days of severe right flank pain and vomiting. He denies cough or pneumonia. Pain was unrelieved at home, so he came in.
+REVIEW OF SYSTEMS:
+Negative for fever or hematuria.
+
+Past Medical History:
+Hypertension
+Kidney stones
+
+Past Surgical History:
+Appendectomy
+
+Social History:
+___
+
+Family History:
+Mother had gallstones
+
+Pertinent Results:
+Creatinine mildly elevated on arrival and improved before leaving.
+DISCHARGE LABS:
+Creatinine near baseline, normal electrolytes.
+IMPRESSION:
+Obstructing 6 mm stone at the right ___ junction with mild hydronephrosis.
+
+Brief Hospital Course:
+He was admitted to ___ and given fluids and analgesia. Stent placed by the team on ___. He has no history of diabetes and glucose stayed normal. Pain settled and diet resumed.
+
+Medications on Admission:
+Lisinopril daily
+Ibuprofen as needed
+
+Discharge Medications:
+Tamsulosin nightly for stone passage
+Oxycodone as needed for severe pain
+Lisinopril daily
+Hold ibuprofen until follow up
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Obstructing right ureteral stone
+Hydronephrosis
+
+Discharge Condition:
+Stable.
+Level of Consciousness: Alert and interactive.
+Activity Status: Walks without assistance.
+
+Discharge Instructions:
+You had a kidney stone blocking urine flow and a stent was placed. Drink plenty of water and strain your urine. Call ___ for fever, worsening pain or inability to urinate.
+
+Followup Instructions:
+___

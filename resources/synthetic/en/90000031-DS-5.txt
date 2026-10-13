@@ -1,0 +1,58 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and low-grade fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented after referral from ___ with five days of cough and fever. Chest imaging at ___ showed no evidence of pneumonia. He denies chest pain, vomiting or recent travel.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Pertinent Results:
+Chest radiograph: clear lungs, normal heart size. White count mildly elevated on arrival and normal at discharge. Electrolytes and creatinine within normal limits. Respiratory viral panel positive for rhinovirus.
+
+Brief Hospital Course:
+Admitted for observation and supportive care. Treated with fluids, acetaminophen and inhaled bronchodilators. Fever resolved by day two. Seen by ___ for oxygen assessment, saturations stayed normal. Discussed with ___ and cleared for discharge.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Lisinopril 10 mg by mouth once daily.
+2. Atorvastatin 20 mg by mouth nightly.
+3. Guaifenesin 200 mg by mouth every six hours as needed for cough.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Viral upper respiratory infection
+Acute bronchitis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for a viral respiratory illness. Rest, drink plenty of fluids and take your medicines as listed. Call ___ or return if fever, breathlessness or chest pain develops.
+
+Followup Instructions:
+___

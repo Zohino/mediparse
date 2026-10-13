@@ -1,0 +1,63 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+___ year old man with hypertension and hyperlipidemia who presented after two days of worsening right lower quadrant abdominal pain, nausea and low grade fevers. Pain began at ___ and migrated from the periumbilical region. He was seen by Dr. ___ at an outside clinic and sent to ___ for evaluation. He denied vomiting, diarrhea, urinary symptoms or sick contacts. Vital signs in the emergency department were notable for temperature 100.8 and mild tachycardia.
+
+Past Medical History:
+Hypertension, hyperlipidemia, remote tonsillectomy at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension; father deceased at ___
+
+Physical Exam:
+General: Alert, mildly uncomfortable, no distress.
+HEENT: Moist mucous membranes, anicteric.
+Neck: Supple.
+PULM: Clear bilaterally.
+ABD: Tender right lower quadrant, guarding, no rebound.
+Ext: Warm, no edema.
+SKIN: No rash.
+PULSES: Palpable radial and pedal pulses.
+
+Pertinent Results:
+Admission labs notable for white blood cell count 13.2 with neutrophil predominance, normal electrolytes, creatinine 0.9 and normal liver enzymes. Lactate was 1.1. Urinalysis was unremarkable. CT of the abdomen and pelvis performed on ___ showed a dilated thickened appendix measuring 11 mm with surrounding fat stranding and a small appendicolith, without abscess or free air. Postoperative labs on ___ showed white count down to 8.4 and stable hemoglobin 14.1.
+IMPRESSION: Acute uncomplicated appendicitis.
+
+Brief Hospital Course:
+Mr. ___ was admitted to the surgical service, kept NPO, given intravenous fluids and started on ceftriaxone and metronidazole. He was taken to the operating room by Dr. ___ and underwent an uncomplicated laparoscopic appendectomy. Pathology from ___ confirmed acute appendicitis without perforation. Postoperatively pain was controlled with acetaminophen and a short course of oxycodone. Diet was advanced, he voided spontaneously, ambulated independently and passed flatus. Antibiotics were stopped after surgery. Incisions remained clean and dry. He was discharged home on hospital day two in stable condition, with plans to follow up at ___.
+
+Discharge Medications:
+Acetaminophen 650 mg by mouth every six hours as needed for pain. Oxycodone 5 mg by mouth every six hours as needed for severe pain, five day supply. Docusate 100 mg twice daily while taking opioids. Lisinopril 10 mg daily, continue. Atorvastatin 20 mg nightly, continue.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute appendicitis
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized for appendicitis and had your appendix removed laparoscopically. Keep incisions clean and dry and you may shower. Do not lift more than ten pounds for four weeks. Avoid driving while taking oxycodone. Call ___ or return to the emergency department for fever above 101, worsening belly pain, persistent vomiting, redness or drainage from the incisions. Bring this paper to ___.
+
+Followup Instructions:
+___

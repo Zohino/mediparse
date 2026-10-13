@@ -1,0 +1,90 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs (rash)
+
+Chief Complaint:
+Right leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with hypertension and hypothyroidism who presented with three days of worsening redness, warmth and swelling of the right lower leg, with fever to 101 at home. She was seen at ___ by her primary physician, given a dose of oral antibiotics, and sent to ___ after the erythema spread past the marked border. She denied trauma, insect bites or recent travel. In the emergency department she was febrile and tachycardic, with a tender erythematous area from the ankle to the knee. Blood cultures were drawn and she received intravenous antibiotics before admission to the ___ service.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Osteoarthritis of the knees
+Venous insufficiency
+Cholecystectomy in ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension. Father with coronary artery disease.
+
+Pertinent Results:
+ADMISSION LABS:
+___ 06:10PM BLOOD WBC-14.2* Hgb-12.1 Plt-310 Creat-0.9 Na-137 K-4.1 CRP-88*
+DISCHARGE LABS:
+___ 05:40AM BLOOD WBC-8.1 Hgb-11.8 Plt-296 Creat-0.8 Na-139 K-4.0
+IMAGING:
+Right lower extremity venous duplex, ___: no evidence of deep vein thrombosis.
+IMPRESSION:
+No deep vein thrombosis in the right leg. Diffuse subcutaneous edema of the calf.
+FINDINGS:
+The common femoral, femoral, popliteal and calf veins are compressible with normal flow. Skin thickening and edema are present in the calf. Blood cultures from ___ showed no growth at five days.
+
+Brief Hospital Course:
+Cellulitis of the right lower leg: She was started on intravenous vancomycin on admission and the margin of erythema was marked. Fever resolved within 24 hours and the redness began to recede by hospital day two. Venous duplex showed no clot. Blood cultures remained negative, so she was changed to oral cephalexin on hospital day three and tolerated it well. Wound care nurse from ___ taught leg elevation and compression after the acute phase. Hypertension: lisinopril was held on the first day for a soft blood pressure, then resumed. Hypothyroidism: levothyroxine continued. Her primary physician Dr. ___ was updated by phone, and arrangements were made with the ___ visiting nurse agency for home checks.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 75 mcg daily
+Acetaminophen 500 mg as needed
+Cephalexin 500 mg from urgent care at ___
+
+Discharge Medications:
+Cephalexin 500 mg by mouth four times daily for seven more days
+Lisinopril 10 mg by mouth daily
+Levothyroxine 75 mcg by mouth daily
+Acetaminophen 500 mg by mouth every six hours as needed for pain
+Calcium with vitamin D one tablet daily
+Compression stockings, fitted at ___
+
+Discharge Disposition:
+Home with services
+
+Facility:
+___
+
+Discharge Diagnosis:
+Cellulitis of the right lower leg
+
+Secondary:
+Hypertension
+Hypothyroidism
+Venous insufficiency
+
+Discharge Condition:
+Stable, afebrile, improving.
+
+Mental Status:
+Alert and oriented, able to follow instructions.
+
+Level of Consciousness:
+Awake and attentive.
+
+Activity Status:
+Ambulatory with steady gait, independent.
+
+Discharge Instructions:
+You were hospitalized for a skin and soft tissue infection of your right leg. Take all of the antibiotic even if the leg looks better. Keep the leg raised when sitting and wear compression stockings once swelling improves. Return for fever, spreading redness, severe pain, or new swelling of the other leg. Call Dr. ___ with questions, or the clinic at ___. Check the skin daily and mark any new redness with a pen.
+
+Followup Instructions:
+___

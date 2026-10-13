@@ -1,0 +1,69 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever and cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension presented to ___ with three days of fever, productive cough and malaise after returning from travel on ___. He was seen by his primary physician, Dr. ___, who sent him to the emergency department for further evaluation and treatment of his symptoms.
+
+Past Medical History:
+Hypertension
+Seasonal allergies
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Vitals: T 38.1 HR 96 BP 132/78 RR 18 SpO2 96% RA
+Gen: comfortable, no distress
+HEENT: moist mucosa
+Neck: supple
+PULM: clear bilaterally
+Abdomen: soft, nontender
+Ext: warm, no edema
+
+Pertinent Results:
+Labs on admission notable for mild leukocytosis and elevated CRP. Blood cultures showed no growth. Chest radiograph obtained at ___ was reviewed by radiology.
+FINDINGS: Mild bronchial wall thickening without focal consolidation or effusion. Heart size normal. No acute osseous abnormality. Follow-up imaging was not required.
+
+Brief Hospital Course:
+He was treated for acute bronchitis with oral azithromycin and supportive care. He had no evidence of pneumonia on imaging and was afebrile within 24 hours. Oxygen saturation remained normal on room air. He was evaluated by ___ and tolerated his diet. He was discharged home in stable condition with outpatient follow up.
+TRANSITIONAL ISSUES:
+- Repeat chest film in six weeks if cough persists.
+- Blood pressure recheck with Dr. ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Multivitamin daily. Ibuprofen as needed.
+
+Discharge Medications:
+Azithromycin 250 mg tablet, take one daily for four more days. Lisinopril 10 mg daily. Guaifenesin 600 mg twice daily as needed for cough. Acetaminophen 650 mg every six hours as needed for fever.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Acute bronchitis
+Hypertension
+
+Discharge Condition:
+Stable, afebrile, tolerating diet.
+Activity Status: Independent
+
+Discharge Instructions:
+You were hospitalized at ___ for a respiratory infection. Take your antibiotic as prescribed, drink plenty of fluids, and rest. Call your doctor or return to the emergency department for fever, worsening cough, shortness of breath, or chest pain. Follow up with ___ as scheduled.
+
+Followup Instructions:
+___

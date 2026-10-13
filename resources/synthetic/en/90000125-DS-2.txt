@@ -1,0 +1,73 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath and wheezing
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient presented from ___ with three days of worsening shortness of breath, productive cough and wheeze. He had been seen at ___ earlier and given nebulizer treatments without relief. He denied fever, chest pain or leg swelling. Oxygen saturation was low on arrival.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Prior admission at ___ for similar symptoms
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+Diffuse expiratory wheezing, mild tachypnea, no distress at rest.
+HEENT: Moist mucous membranes, anicteric.
+Neck: Supple, no jugular venous distension.
+Ext: Warm, no edema.
+Neuro: Alert, nonfocal.
+
+Pertinent Results:
+Chest radiograph showed hyperinflation without focal consolidation. Labs on ___ notable for glucose 240 with normal creatinine and potassium. Troponin negative twice. ECG showed sinus rhythm without acute changes. Blood cultures showed no growth.
+
+Brief Hospital Course:
+He was started on scheduled nebulizers, oral steroids and supplemental oxygen, which was weaned to room air by day three. Glucose ran high on steroids and was covered with insulin sliding scale. Blood pressure medications were continued. He was seen by respiratory therapy at ___ and walked safely. Follow up was arranged with ___.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+Albuterol inhaler as needed
+
+Discharge Medications:
+1. Prednisone 40 mg daily for four more days.
+2. Albuterol inhaler every four hours as needed.
+3. Lisinopril daily.
+4. Atorvastatin nightly.
+5. Tiotropium inhaler daily.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Diabetes mellitus
+Chronic obstructive pulmonary disease exacerbation
+Secondary:
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Stable and improved.
+Mental Status: Clear and coherent.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted with breathing trouble and treated with inhalers, steroids and oxygen. Take all medications as prescribed and check your blood sugar daily while on steroids. Return for worsening breathlessness, fever or chest pain. Call ___ with any questions.
+
+Followup Instructions:
+___

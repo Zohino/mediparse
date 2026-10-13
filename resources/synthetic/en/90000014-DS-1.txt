@@ -1,0 +1,76 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: Surgery
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right upper abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic cholecystectomy
+
+History of Present Illness:
+Woman with two days of worsening right upper quadrant pain, nausea and vomiting after meals, sent in from ___ for evaluation of gallstones.
+REVIEW OF SYSTEMS:
+Positive for nausea and low fever. Negative for chest pain.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Prior cesarean section at ___
+
+Social History:
+___
+
+Family History:
+Mother with gallstones
+
+Physical Exam:
+General:
+Uncomfortable, alert
+Lungs:
+Clear bilaterally
+Abdomen:
+Tender right upper quadrant, soft
+Neuro:
+Nonfocal
+PULSES:
+Palpable throughout
+
+Pertinent Results:
+Ultrasound showed multiple gallstones, a thickened gallbladder wall and pericholecystic fluid. White count mildly elevated, liver enzymes normal.
+IMPRESSION:
+Findings consistent with acute cholecystitis.
+
+Brief Hospital Course:
+She was started on antibiotics and fluids, then taken to the operating room by Dr. ___ for an uncomplicated laparoscopic cholecystectomy. Pain improved, she tolerated a regular diet and was cleared for discharge on day two.
+
+Medications on Admission:
+Lisinopril
+Levothyroxine
+
+Discharge Medications:
+Lisinopril daily, levothyroxine daily, acetaminophen as needed for pain, and a short course of oxycodone for severe pain only.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute cholecystitis
+Cholelithiasis
+
+Discharge Condition:
+Stable
+Mental Status:
+Clear and coherent
+Activity Status:
+Ambulatory, independent
+
+Discharge Instructions:
+You were treated for gallbladder inflammation and had surgery. Keep incisions clean and dry, avoid heavy lifting, and call ___ for fever, worsening pain or redness near the wounds. Contact ___ with questions.
+
+Followup Instructions:
+___

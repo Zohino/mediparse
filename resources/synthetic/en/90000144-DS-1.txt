@@ -1,0 +1,74 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Patient is a ___ year old man who presented with three days of fever, productive cough and malaise after returning from a trip to ___. He was seen at ___ by his primary doctor, who started an inhaler on ___ without improvement. He reported chills and mild shortness of breath but no chest pain. In the emergency department he was febrile and hypoxic to 90% on room air and was admitted to the medicine service.
+REVIEW OF SYSTEMS:
+Positive for fever and cough. Negative for rash, headache or abdominal pain.
+
+Past Medical History:
+Hypertension, hyperlipidemia, gastroesophageal reflux. Appendectomy at ___.
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease. Mother healthy.
+
+Physical Exam:
+T 38.1, HR 98, BP 128/76, RR 20, SpO2 91% on room air. Tired but comfortable.
+Neck:
+Supple, no lymphadenopathy.
+PULM:
+Scattered wheezes bilaterally, no crackles.
+Abdomen:
+Soft, nontender, nondistended.
+
+Pertinent Results:
+ADMISSION LABS:
+WBC 14.2, Hgb 13.8, Plt 245, Na 137, K 4.1, Cr 0.9, lactate 1.8, procalcitonin 0.08.
+Chest radiograph at ___ showed mild peribronchial thickening without focal consolidation.
+DISCHARGE LABS:
+WBC 9.1, Hgb 13.5, Plt 262, Na 139, K 4.0, Cr 0.8.
+
+Brief Hospital Course:
+He was admitted with acute bronchitis and mild hypoxemia. Chest radiograph showed no evidence of pneumonia, and procalcitonin was low, so antibiotics were not given. He received nebulized albuterol, guaifenesin and supplemental oxygen, and was weaned to room air by hospital day two. Blood cultures drawn on ___ had no growth. Hypertension was managed with his home lisinopril. He walked the hallway with a saturation of 95%. Dr. ___ of the medicine team agreed with discharge on ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Omeprazole 20 mg daily before breakfast.
+
+Discharge Medications:
+Lisinopril 10 mg by mouth once daily. Atorvastatin 20 mg by mouth nightly. Omeprazole 20 mg by mouth daily. Albuterol inhaler, two puffs every four hours as needed for wheeze. Guaifenesin 600 mg twice daily as needed for cough for five days. Prescriptions were sent to ___.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Acute bronchitis
+Hypoxemia, resolved
+Hypertension
+
+Discharge Condition:
+Stable.
+Mental Status:
+Alert and oriented, able to follow instructions.
+Level of Consciousness:
+Fully awake and interactive.
+
+Discharge Instructions:
+You were admitted with a bad chest cold that lowered your oxygen level. You improved with inhalers and oxygen and no longer need oxygen. Drink plenty of fluids, rest, and take your medicines as listed. Call Dr. ___ at ___ if your fever returns or breathing worsens. Return to ___ emergency department for severe shortness of breath or chest pain. Keep your appointment at the ___ clinic.
+
+Followup Instructions:
+___

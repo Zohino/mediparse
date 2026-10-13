@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Right leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man presented to ___ with three days of worsening redness, warmth and swelling of the right lower leg after a minor abrasion. He reported chills and low grade fever. He was evaluated at ___ and sent to the emergency department for intravenous antibiotics.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+Vitals: T 100.1 HR 88 BP 132/78 RR 16 SpO2 97% RA
+Gen: Comfortable, no acute distress
+HEENT: Moist mucous membranes, anicteric
+SKIN: Erythema, warmth and tenderness of the right shin, margins marked by ___
+
+Pertinent Results:
+Laboratory data showed a white blood cell count of 13.2 with neutrophil predominance and a normal creatinine.
+FINDINGS: Ultrasound of the right leg showed diffuse soft tissue edema without deep vein thrombosis. Reviewed by ___.
+
+Brief Hospital Course:
+He was admitted and treated with intravenous cefazolin. Erythema receded from the marked borders and fever resolved within two days. Blood cultures remained negative. The ___ team reviewed the leg elevation plan. He was changed to oral cephalexin on ___ and tolerated it well before discharge.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Cephalexin 500 mg by mouth four times daily for five more days
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Acetaminophen as needed for pain, supplied by ___
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Cellulitis of the right lower leg
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Take the antibiotic until finished, keep the leg raised when sitting, and watch for spreading redness, fever or worsening pain. Call ___ or return to the emergency department if these occur.
+
+Followup Instructions:
+___

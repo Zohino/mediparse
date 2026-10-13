@@ -1,0 +1,62 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: Medicine
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man sent from ___ clinic after routine labs showed worsening creatinine and swelling of both legs for two weeks. He reported reduced appetite and fatigue. Symptoms began around ___. He was last seen by Dr. ___. He denied chest pain, fever or vomiting. He was admitted for evaluation and fluid management.
+
+Past Medical History:
+Diabetes mellitus type 2
+Chronic kidney disease stage 3
+Possible COPD, not confirmed by spirometry
+Hypertension
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals: T 98.2 BP 148/86 HR 78 RR 16 SpO2 96% RA
+Gen: Comfortable, no distress
+Neck: Supple, no JVD
+Abdomen: Soft, nontender, nondistended
+Neuro: Alert, oriented, nonfocal
+
+Pertinent Results:
+Creatinine 2.4 on admission, 2.0 at discharge. Potassium 4.8. Glucose 162. Hemoglobin stable. Urinalysis with mild protein.
+IMPRESSION: Renal ultrasound at ___ showed small echogenic kidneys without hydronephrosis. Chest film clear.
+
+Brief Hospital Course:
+He received gentle diuresis with improvement of leg swelling. Nephrology, Dr. ___, advised stopping an offending medication and adjusting doses for kidney function. Blood sugars were managed with insulin sliding scale. Creatinine settled near baseline by ___ and he was cleared for home.
+
+Medications on Admission:
+Metformin, lisinopril, amlodipine, aspirin
+
+Discharge Medications:
+Amlodipine 5 mg daily. Aspirin 81 mg daily. Furosemide 20 mg every morning. Glipizide 5 mg daily. Metformin and lisinopril were held until follow up labs.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Chronic kidney disease with volume overload
+
+Discharge Condition:
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized for leg swelling and kidney injury. Weigh yourself daily and limit salt. Take medicines as listed. Avoid ibuprofen. Return for shortness of breath, reduced urine or fever. Call the ___ clinic at ___ with questions.
+
+Followup Instructions:
+___

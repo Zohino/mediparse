@@ -1,0 +1,83 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right leg redness and swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension presented with three days of spreading redness, warmth and swelling of the right lower leg, plus fever. He was transferred from ___ after first antibiotic doses.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout
+
+Social History:
+___
+
+Family History:
+Father with heart disease, died at ___
+
+Physical Exam:
+Vitals:
+T 99.1 HR 82 BP 128/76 RR 16 SpO2 98% RA
+General:
+Comfortable
+HEENT:
+Normal
+Neck:
+Supple
+PULM:
+Clear
+Abdomen:
+Soft
+Ext:
+Right calf red, warm, tender
+Neuro:
+Intact
+
+Pertinent Results:
+Mild leukocytosis on admission, normalizing by discharge. Blood cultures showed no growth. Ultrasound on ___ of the right leg showed no deep vein thrombosis.
+IMPRESSION:
+Soft tissue edema only.
+
+Brief Hospital Course:
+He was treated with intravenous vancomycin, and the redness receded steadily. Dr. ___ from infectious disease advised switching to oral doxycycline. Pain improved with acetaminophen, and he walked independently. Follow up was arranged at ___.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Doxycycline 100 mg twice daily for seven days
+2. Lisinopril 10 mg daily
+3. Atorvastatin 20 mg nightly
+4. Acetaminophen as needed for pain
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Cellulitis of right leg
+
+Discharge Condition:
+Stable.
+Level of Consciousness:
+Alert and awake
+Activity Status:
+Walks without help
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Take the antibiotic until finished, keep the leg raised, and return if redness spreads, fever returns, or pain worsens. Call ___ with questions.
+
+Followup Instructions:
+___

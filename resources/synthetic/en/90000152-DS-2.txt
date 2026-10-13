@@ -1,0 +1,66 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman sent by ___ with three days of cough and fever; possible pneumonia was suspected on arrival.
+
+Past Medical History:
+Hypertension
+Hypothyroidism, followed by ___
+
+Social History:
+___
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Mildly ill appearing, improved by discharge.
+ADMISSION PHYSICAL EXAM:
+Gen: Tired, no distress
+PULM: Scattered crackles at the right base
+Ext: Warm, no edema
+Neuro: Alert, nonfocal
+PULSES: Palpable and symmetric
+
+Pertinent Results:
+Chest imaging showed a patchy right lower opacity. White count mildly elevated and normalized with treatment.
+FINDINGS:
+Patchy right basilar opacity, no effusion.
+
+Brief Hospital Course:
+She received oral antibiotics and fluids, seen by the ___ team. Fever resolved, oxygen needs ended, and she tolerated a regular diet.
+
+Medications on Admission:
+Lisinopril
+Levothyroxine
+
+Discharge Medications:
+1. Lisinopril daily
+2. Levothyroxine daily
+3. Amoxicillin-clavulanate twice daily for five days
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Condition:
+Stable
+Mental Status: Clear and coherent
+
+Discharge Instructions:
+You were treated for a chest infection. Take your antibiotic as directed, rest, drink fluids, and call ___ if fever returns or breathing worsens.
+
+Followup Instructions:
+___

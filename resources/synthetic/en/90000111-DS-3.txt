@@ -1,0 +1,81 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Sulfa drugs
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Ms. ___ is a woman with hypertension and hypothyroidism who presented to ___ with five days of productive cough, fever, and shortness of breath. She was first seen at ___ by her primary physician, Dr. ___, who prescribed ___ without relief. Chest imaging at ___ showed a patchy right lower lobe opacity, raising concern for possible pneumonia versus atelectasis. In the emergency department she was febrile and mildly hypoxic, with a normal lactate. She denied chest pain or vomiting. She received intravenous fluids and was admitted to the medical service under Dr. ___ for further evaluation.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+Osteoarthritis of the knees
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals: T 100.8 HR 98 BP 132/78 RR 20 SpO2 93% on room air
+General: Tired but comfortable.
+HEENT: Moist mucous membranes, clear oropharynx.
+Lungs: Crackles at the right base.
+CV: Regular rate and rhythm, no murmur.
+Abdomen: Soft, nontender, nondistended.
+Ext: Warm, no edema.
+Neuro: Alert, oriented, nonfocal.
+
+Brief Hospital Course:
+She was admitted to ___ and treated empirically with ceftriaxone and azithromycin for a presumed respiratory infection. Blood cultures from ___ remained negative. Her oxygen requirement resolved by hospital day two and the fever subsided. Sputum was sent to the laboratory at ___ and showed normal flora. A repeat chest film read by Dr. ___ demonstrated improving aeration. Her hypertension was managed with home lisinopril, and levothyroxine was continued. Electrolytes were repleted as needed. Physical therapy evaluated her and cleared her for discharge home. She was transitioned to oral antibiotics, tolerated a regular diet, and ambulated independently. Follow up was arranged with her primary physician, Dr. ___, and with the clinic. She was counseled on hydration, rest, and completing the full antibiotic course before leaving the unit.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 75 mcg daily
+Acetaminophen 500 mg as needed for knee pain
+Multivitamin daily
+Calcium with vitamin D daily
+
+Discharge Medications:
+Lisinopril 10 mg by mouth daily
+Levothyroxine 75 mcg by mouth daily
+Doxycycline 100 mg by mouth twice daily for five more days
+Acetaminophen 500 mg by mouth every six hours as needed for fever or knee pain
+Guaifenesin 600 mg by mouth twice daily as needed for cough
+Multivitamin one tablet daily
+Calcium with vitamin D one tablet daily
+Prescriptions were sent to ___ pharmacy.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute lower respiratory tract infection
+Secondary:
+Hypertension
+Hypothyroidism
+
+Discharge Condition:
+Good
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
+
+Discharge Instructions:
+You were hospitalized with cough and fever, treated with antibiotics, and improved. Take all medications as prescribed, and finish the doxycycline. Drink plenty of fluids and rest. Return to ___ or call your doctor if fever returns, breathing worsens, you develop chest pain, or you cannot keep fluids down. Avoid smoke and strenuous activity until cleared. Please call ___ with any questions about your medications or appointments.
+
+Followup Instructions:
+___

@@ -1,0 +1,67 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Woman with three days of worsening breathlessness, productive cough and wheezing after exposure to smoke at ___. She was evaluated at ___ and sent to the emergency department, where she needed supplemental oxygen.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Former tobacco use, followed by Dr. ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+HEENT: Moist mucous membranes
+Neck: Supple
+Lungs: Diffuse expiratory wheezes, prolonged expiration
+ABD: Soft, nontender
+SKIN: Warm, dry
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+Chest radiograph showed hyperinflated lungs without focal opacity. Blood counts and chemistries were unremarkable. Peak flow improved after treatment at ___ the following morning.
+
+Brief Hospital Course:
+She received nebulized bronchodilators, a short course of oral steroids and oxygen, which was weaned to room air. Wheezing resolved gradually. She was seen by the respiratory therapist at ___ and taught inhaler technique. Her symptoms improved by ___ and she was cleared for discharge.
+
+Medications on Admission:
+Lisinopril daily
+Atorvastatin nightly
+
+Discharge Medications:
+1. Lisinopril daily.
+2. Atorvastatin nightly.
+3. Prednisone taper for five days.
+4. Albuterol inhaler as needed for wheezing.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Chronic obstructive pulmonary disease exacerbation
+
+Discharge Condition:
+Stable, ambulatory, breathing comfortably on room air
+
+Discharge Instructions:
+You were hospitalized for trouble breathing. Take the steroid taper and use your inhaler as directed. Avoid smoke exposure. Return for worsening breathlessness, fever or chest pain, or call ___ with questions.
+
+Followup Instructions:
+___

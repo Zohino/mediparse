@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right leg redness and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with hypertension presented with three days of right leg redness, warmth and swelling after a minor scrape. He was seen at ___ clinic on ___ and sent to the emergency department because of fever.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gout
+
+Social History:
+___
+
+Family History:
+Father with stroke in his seventies
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+Gen: Comfortable, afebrile, no distress
+PULM: Clear bilaterally
+Ext: Right shin erythema much reduced, mild edema
+SKIN: No drainage or fluctuance
+Neuro: Alert, nonfocal
+
+Pertinent Results:
+WBC 14.2 on admission, down to 8.1 at discharge. CRP elevated. Blood cultures from ___ showed no growth. Ultrasound of the right leg showed soft tissue edema without abscess or deep vein thrombosis. Chest film clear.
+
+Brief Hospital Course:
+He was treated with IV vancomycin for cellulitis of the right lower leg, and the border was marked. Redness receded over two days and fever resolved. He was changed to oral doxycycline. Wound care was reviewed with ___ and the plan discussed with Dr. ___.
+TRANSITIONAL ISSUES:
+Complete antibiotics; recheck leg in one week.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+1. Doxycycline 100 mg twice daily for seven days
+2. Lisinopril 10 mg daily
+3. Atorvastatin 20 mg nightly
+4. Acetaminophen as needed for pain
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Cellulitis of right lower leg
+Hypertension
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were treated for a skin infection of your leg. Take all of your antibiotic and keep the leg raised when sitting. Call ___ or return to the hospital for spreading redness, fever or worsening pain. Please keep your visit at ___.
+
+Followup Instructions:
+___

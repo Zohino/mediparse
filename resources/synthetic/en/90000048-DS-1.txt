@@ -1,0 +1,68 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Fatigue, leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with possible chronic kidney disease presented from ___ with several days of fatigue, poor appetite and swelling of both legs, worsening over a week.
+
+Past Medical History:
+Hypertension
+Gout
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Gen:
+Tired appearing, comfortable at rest.
+SKIN:
+Warm, dry, pitting edema of both ankles.
+
+Pertinent Results:
+Labs on ___ showed creatinine above his usual value and mild low potassium. Chest x-ray clear. Urinalysis unremarkable. Renal ultrasound showed normal sized kidneys without hydronephrosis.
+
+Brief Hospital Course:
+He received gentle intravenous fluids and potassium replacement. Creatinine improved steadily. Blood pressure medication was adjusted after discussion with the ___ team. Swelling decreased and he tolerated a regular diet.
+
+Medications on Admission:
+Lisinopril 20 mg daily
+Allopurinol 100 mg daily
+
+Discharge Medications:
+Allopurinol 100 mg daily
+Amlodipine 5 mg daily, new
+Potassium chloride 20 mEq daily for five days
+Hold lisinopril until follow up
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Dehydration
+Hypokalemia
+Hypertension
+
+Discharge Condition:
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+
+Discharge Instructions:
+You were admitted with weakness and swelling. Drink fluids regularly, weigh yourself each morning, and avoid anti-inflammatory pain pills. Please see your doctor at ___ within one week for repeat blood tests.
+
+Followup Instructions:
+___

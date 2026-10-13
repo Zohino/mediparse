@@ -1,0 +1,65 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Painful red swelling of the left leg
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with several days of worsening left leg redness, warmth and pain after a minor scrape. Seen at ___ clinic, then sent to ___ emergency department for fever and spreading erythema.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Prior knee surgery at ___
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+General: Comfortable, no distress
+Neck: Supple
+Lungs: Clear bilaterally
+PULSES: Palpable and symmetric
+
+Pertinent Results:
+White count mildly elevated on admission, normalizing by discharge. Blood cultures without growth. Ultrasound of the left leg showed no clot, only skin thickening.
+
+Brief Hospital Course:
+Treated for cellulitis with intravenous antibiotics, with redness receding steadily. Care followed the plan from ___ and wound care teaching was given by nursing staff at ___. Switched to oral antibiotics and discharged home.
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+1. Cephalexin 500 mg by mouth four times daily for seven days
+2. Lisinopril daily
+3. Atorvastatin nightly
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Primary: Cellulitis of the left leg
+
+Discharge Condition:
+Mental Status: Alert and oriented
+Activity Status: Walks independently
+
+Discharge Instructions:
+Take all antibiotics as prescribed. Elevate the leg when resting and watch for spreading redness, fever or new pain. Call ___ or return to the emergency department if symptoms worsen.
+
+Followup Instructions:
+___

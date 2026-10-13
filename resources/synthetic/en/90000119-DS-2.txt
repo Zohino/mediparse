@@ -1,0 +1,70 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: SURGERY
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Right lower quadrant abdominal pain
+
+Major Surgical or Invasive Procedure:
+Laparoscopic appendectomy
+
+History of Present Illness:
+This is a ___ year old woman with hypertension who presented after three days of worsening right lower quadrant pain, nausea and low grade fever. She was first seen at ___ and then transferred for further evaluation by Dr. ___. Imaging showed acute appendicitis, and she was taken to the operating room without complication.
+
+Past Medical History:
+Hypertension
+Hypothyroidism
+No diabetes mellitus
+Cesarean section at ___
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Gen: Comfortable, in no acute distress.
+HEENT: Moist mucous membranes, anicteric.
+Neck: Supple, no masses.
+Lungs: Clear to auscultation bilaterally.
+Ext: Warm, no edema.
+SKIN: Port site incisions clean, dry and intact.
+Neuro: Alert, oriented, nonfocal.
+
+Pertinent Results:
+Admission labs showed white blood cell count mildly elevated with neutrophil predominance. Electrolytes, creatinine and liver tests were within normal limits. Computed tomography was performed at ___ before transfer. Pathology of the specimen showed acute inflammation of the appendix without malignancy. Postoperative labs were stable.
+IMPRESSION:
+Dilated inflamed appendix with surrounding fat stranding and no abscess.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Levothyroxine 50 mcg daily
+
+Discharge Medications:
+1. Acetaminophen 650 mg every 6 hours as needed for pain
+2. Docusate 100 mg twice daily while taking opioids
+3. Lisinopril 10 mg daily
+4. Levothyroxine 50 mcg daily
+5. Oxycodone 5 mg every 6 hours as needed for severe pain, obtained from ___
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Condition:
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
+
+Discharge Instructions:
+You were admitted with appendicitis and underwent a laparoscopic appendectomy. You may shower but do not soak the incisions. Avoid lifting more than ten pounds for four weeks. Take pain medication as prescribed. Call ___ or return to the emergency department for fever, worsening pain, vomiting or redness at the incisions. Please keep your appointment at ___.
+
+Followup Instructions:
+___

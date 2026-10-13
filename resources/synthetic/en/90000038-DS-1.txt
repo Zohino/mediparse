@@ -1,0 +1,80 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Abdominal pain
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Man with several days of worsening right lower abdominal pain and nausea, sent from ___ for evaluation. He was seen by Dr. ___ in the emergency department, where labs and imaging were obtained.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Possible diabetes, awaiting confirmation
+Denies COPD
+
+Social History:
+___
+
+Family History:
+Father with hypertension
+
+Physical Exam:
+General:
+Comfortable, no distress
+HEENT:
+Moist mucous membranes
+Abdomen:
+Soft, mild right lower tenderness
+
+Pertinent Results:
+Mild leukocytosis on admission. CT scan performed at ___ showed an inflamed appendix without perforation.
+IMPRESSION:
+Acute uncomplicated appendicitis
+
+Brief Hospital Course:
+He was admitted, kept fasting, and started on intravenous antibiotics. Surgery from ___ evaluated him and recommended laparoscopic appendectomy, which went well. Pain improved and diet was advanced.
+TRANSITIONAL ISSUES:
+Check fasting glucose with primary care
+
+Medications on Admission:
+Lisinopril
+Atorvastatin
+
+Discharge Medications:
+1. Lisinopril daily.
+2. Atorvastatin nightly.
+3. Acetaminophen as needed for pain.
+4. Amoxicillin-clavulanate twice daily for five days.
+
+Discharge Disposition:
+Home with services from ___
+
+Discharge Diagnosis:
+Acute appendicitis
+Secondary:
+Hypertension
+Hyperlipidemia
+
+Discharge Condition:
+Stable
+Mental Status:
+Alert and oriented
+Level of Consciousness:
+Fully awake
+Activity Status:
+Walks without help
+
+Discharge Instructions:
+You were treated for appendicitis. Keep the incisions clean and dry, avoid heavy lifting, and take medicines as directed. Call ___ for fever, worsening pain, or wound redness.
+
+Followup Instructions:
+___

@@ -1,0 +1,61 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fatigue and leg swelling
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with swelling, poor appetite and high glucose readings at home, sent by ___.
+
+Past Medical History:
+Atrial fibrillation
+Hypertension
+Obesity
+
+Social History:
+___
+
+Family History:
+Mother had heart disease
+
+Physical Exam:
+Gen: Tired, comfortable
+HEENT: Moist mucosa
+
+Pertinent Results:
+Creatinine elevated, glucose 280, potassium normal on repeat.
+IMPRESSION: No acute chest findings, mild cardiomegaly.
+
+Brief Hospital Course:
+Fluids were adjusted, insulin doses were increased, and rate control continued. Kidney function stabilized and swelling improved before discharge to ___.
+
+Medications on Admission:
+Metoprolol, apixaban, lisinopril
+
+Discharge Medications:
+Metoprolol, apixaban, basal insulin nightly, furosemide each morning, lisinopril stopped.
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Chronic kidney disease
+Atrial fibrillation
+
+Discharge Condition:
+Mental Status: Alert and oriented
+Activity Status: Walks with a cane
+
+Discharge Instructions:
+Weigh yourself daily, limit salt, check blood sugar twice daily, and return for worsening swelling.
+
+Followup Instructions:
+___

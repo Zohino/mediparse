@@ -1,0 +1,57 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Fever, productive cough, shortness of breath
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+Mr. ___ is a ___ year old man with several days of fever, productive cough and worsening dyspnea. He was transferred from ___ after chest imaging showed a right lower lobe consolidation and he was hypoxic.
+
+Past Medical History:
+Atrial fibrillation on anticoagulation
+Hypertension
+Appendectomy at ___
+
+Social History:
+___
+
+Family History:
+Non-contributory
+
+Physical Exam:
+Gen: Tired, mildly dyspneic
+HEENT: Moist mucosa
+Neck: Supple
+Lungs: Right basilar crackles
+Abdomen: Soft, nontender
+
+Brief Hospital Course:
+He was admitted with fever, leukocytosis and hypoxia and started on intravenous ceftriaxone and azithromycin with supplemental oxygen. Fever resolved and oxygen was weaned to room air. Rate stayed controlled on home medications. He was evaluated by ___ and transitioned to oral antibiotics.
+
+Medications on Admission:
+Apixaban, metoprolol, lisinopril daily
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Atrial fibrillation
+
+Discharge Condition:
+Mental Status: Clear and coherent
+Level of Consciousness: Alert and interactive
+Activity Status: Ambulatory, independent
+
+Discharge Instructions:
+You were hospitalized with a lung infection and treated with antibiotics. Finish the oral antibiotic course, rest, drink fluids and continue your usual medications. Call ___ or return for fever, worsening breathlessness or chest pain.
+
+Followup Instructions:
+___

@@ -1,0 +1,64 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Cough and fever
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old man with several days of progressive cough and fever, seen at ___ clinic, then sent to the emergency department where he was found hypoxic.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Family history of diabetes mellitus in his mother.
+
+Physical Exam:
+ADMISSION PHYSICAL EXAM:
+Gen: comfortable, no distress
+Neck: supple
+PULM: scattered crackles right base
+ABD: soft, nontender
+
+Pertinent Results:
+WBC 13.2 on admission, improved to 8.1. Chest imaging showed right lower lobe consolidation. Blood cultures no growth. Creatinine stable at baseline. Electrolytes normal throughout stay.
+
+Brief Hospital Course:
+Treated with intravenous antibiotics for a lower respiratory infection, then transitioned to oral therapy. Oxygen weaned to room air by day three. Followed by the ___ team and seen by ___ for nutrition. Discharged in stable condition.
+
+Medications on Admission:
+Lisinopril 10 mg daily, aspirin 81 mg.
+
+Discharge Medications:
+Amoxicillin-clavulanate 875 mg twice daily for five days. Lisinopril 10 mg daily. Aspirin 81 mg daily.
+
+Discharge Disposition:
+Home
+Facility: ___
+
+Discharge Diagnosis:
+Lower respiratory tract infection
+Hypoxia
+
+Discharge Condition:
+Mental Status: alert and oriented
+Level of Consciousness: awake and interactive
+Activity Status: ambulatory, independent
+
+Discharge Instructions:
+Take all antibiotics as prescribed. Drink fluids and rest. Return for fever, worsening shortness of breath, or chest pain. Call ___ with questions.
+
+Followup Instructions:
+___

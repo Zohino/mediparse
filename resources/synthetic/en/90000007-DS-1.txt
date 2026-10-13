@@ -1,0 +1,72 @@
+Name: ___  Date of Birth: ___
+Sex: M  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+Penicillins
+
+Chief Complaint:
+Fever and cough
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+This ___ year old man presented to ___ with fever, productive cough and shortness of breath that began ___ days ago. Chest imaging raised concern for possible pneumonia, so he was admitted for observation, hydration and further evaluation. Vital signs on arrival were stable apart from a low grade fever.
+
+Past Medical History:
+Hypertension
+Hyperlipidemia
+Gastroesophageal reflux
+
+Social History:
+___
+
+Family History:
+Father with coronary artery disease
+
+Physical Exam:
+DISCHARGE PHYSICAL EXAM:
+General: comfortable, alert
+HEENT: moist mucous membranes
+Abdomen: soft, nontender
+Ext: warm, no edema
+PULSES: palpable bilaterally
+
+Pertinent Results:
+Admission labs showed mild leukocytosis. Chest radiograph at ___ showed a patchy right lower lobe opacity. Repeat labs on ___ showed an improved white count and normal creatinine.
+FINDINGS:
+Patchy right lower lobe opacity, small effusion absent.
+
+Brief Hospital Course:
+Mr. ___ was treated with a course of oral levofloxacin and supportive care for a presumed respiratory infection. His fever resolved within two days and his oxygen saturation stayed normal on room air. He tolerated diet and walked independently. He was seen by Dr. ___ and judged ready for discharge home.
+TRANSITIONAL ISSUES:
+Repeat chest film in six weeks.
+
+Medications on Admission:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+
+Discharge Medications:
+Lisinopril 10 mg daily
+Atorvastatin 20 mg nightly
+Levofloxacin 500 mg daily for three more days
+Acetaminophen 650 mg every six hours as needed
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+Acute bronchitis
+Hypertension
+
+Discharge Condition:
+Stable and improved.
+Level of Consciousness: Alert and interactive.
+
+Discharge Instructions:
+You were admitted with fever and cough and improved with antibiotics. Finish all your pills, drink plenty of fluids and rest. Call Dr. ___ or the clinic at ___ if fever, chest pain or breathlessness returns.
+
+Followup Instructions:
+___

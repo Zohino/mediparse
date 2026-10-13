@@ -1,0 +1,78 @@
+Name: ___  Date of Birth: ___
+Sex: F  Service: MEDICINE
+Admission Date: ___  Unit No: ___
+Discharge Date: ___  Attending: ___
+
+Allergies:
+No known drug allergies
+
+Chief Complaint:
+Weakness and poor appetite
+
+Major Surgical or Invasive Procedure:
+None
+
+History of Present Illness:
+___ year old woman with several days of fatigue and poor oral intake, sent from ___ after high glucose readings at home. She denied fever, chest pain or vomiting.
+
+Past Medical History:
+Diabetes mellitus
+Hypertension
+Hyperlipidemia
+
+Social History:
+___
+
+Family History:
+Mother with hypertension
+
+Physical Exam:
+Vitals:
+Stable, afebrile
+Gen:
+Tired, comfortable
+HEENT:
+Dry mucous membranes
+Abdomen:
+Soft, nontender
+EXTREMITIES:
+No edema
+SKIN:
+Warm, dry
+PULSES:
+Palpable bilaterally
+
+Pertinent Results:
+Admission glucose markedly elevated, sodium low, bicarbonate normal. Urinalysis without infection. Chest film clear. Repeat glucose improved after fluids and insulin on ___.
+
+Brief Hospital Course:
+She received intravenous fluids and insulin with steady improvement in glucose and appetite. Endocrine team from ___ adjusted her regimen. Diet teaching was completed with nursing staff at ___ clinic.
+
+Medications on Admission:
+Metformin 500 mg twice daily
+Lisinopril 10 mg daily
+
+Discharge Medications:
+1. Metformin 1000 mg twice daily
+2. Glipizide 5 mg daily
+3. Lisinopril 10 mg daily
+4. Atorvastatin 20 mg nightly
+
+Discharge Disposition:
+Home
+Facility:
+___
+
+Discharge Diagnosis:
+Uncontrolled diabetes
+
+Discharge Condition:
+Good, ambulatory, eating well
+Level of Consciousness:
+Alert and interactive
+
+Discharge Instructions:
+You were hospitalized for high blood sugar. Take your medicines as directed, check glucose twice daily, and keep your appointments. Follow up with Dr. ___ soon.
+
+Followup Instructions:
+___
