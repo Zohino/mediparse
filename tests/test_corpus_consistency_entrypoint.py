@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import shutil
 from typing import TYPE_CHECKING
 
 from mediparse.entrypoints.corpus_consistency import run
@@ -30,12 +29,16 @@ def _run(corpus: Path, plans: Path) -> int:
 
 
 def _corpus(
-    audit_files: AuditFiles, planned_note: PlannedNote, text: str
+    audit_files: AuditFiles,
+    planned_note: PlannedNote,
+    text: str,
+    czech: str | None = None,
 ) -> tuple[Path, Path]:
     plans = audit_files.root / "plans.jsonl"
     PlansFile(plans).save((planned_note.plan,))
-    root = audit_files.corpus({f"en/{planned_note.plan.note_id}.txt": text})
-    return root, plans
+    name = f"{planned_note.plan.note_id}.txt"
+    files = {f"en/{name}": text} | ({f"cs/{name}": czech} if czech else {})
+    return audit_files.corpus(files), plans
 
 
 def test_matching_notes_leave_only_corpus_findings(
@@ -73,20 +76,20 @@ def test_repository_corpus_matches_its_plans() -> None:
 
 
 def test_notices_alone_keep_exit_ok(
-    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    audit_files: AuditFiles,
+    planned_note: PlannedNote,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Neshoda počtu ___ v překladu se vypíše jako upozornění a exit zůstane OK."""
-    corpus = tmp_path / "synthetic"
-    shutil.copytree(REPOSITORY_CORPUS / "en", corpus / "en")
-    (corpus / "cs").mkdir()
-    for path in sorted((corpus / "en").glob("*.txt")):
-        text = path.read_text(encoding="utf-8")
-        (corpus / "cs" / path.name).write_text(text, encoding="utf-8")
-    first = next(iter(sorted((corpus / "cs").glob("*.txt"))))
-    first.write_text(first.read_text(encoding="utf-8").replace("___", "x", 1))
+    monkeypatch.setattr(
+        "mediparse.application.corpus_consistency.corpus_violations",
+        lambda *_: (),
+    )
+    czech = planned_note.text.replace("___", "x", 1)
 
-    code = _run(corpus, REPOSITORY_PLANS)
+    code = _run(*_corpus(audit_files, planned_note, planned_note.text, czech))
 
     output = capsys.readouterr().out
     assert code == ExitCode.OK
-    assert f"Upozornění: cs/{first.stem}" in output
+    assert f"Upozornění: cs/{planned_note.plan.note_id}" in output
