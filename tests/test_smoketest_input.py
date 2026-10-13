@@ -25,7 +25,7 @@ def _plan(planned_note: PlannedNote, note_id: str, *labels: Diagnosis) -> NotePl
 def test_pairs_plans_with_texts_sorted_by_note_id(planned_note: PlannedNote) -> None:
     """Každá zpráva dostane subject_id a labely svého plánu; pořadí nezávisí na zdroji."""
     plans = (
-        _plan(planned_note, "90000002-DS-1", Diagnosis.AKI),
+        _plan(planned_note, "90000002-DS-1", Diagnosis.PNEUMONIA),
         _plan(planned_note, "90000001-DS-1"),
     )
     texts = {"90000002-DS-1": "druhá", "90000001-DS-1": "první"}
@@ -35,7 +35,9 @@ def test_pairs_plans_with_texts_sorted_by_note_id(planned_note: PlannedNote) -> 
     subject = planned_note.plan.subject_id
     assert notes == (
         InputNote("90000001-DS-1", subject, "en", "první", frozenset()),
-        InputNote("90000002-DS-1", subject, "en", "druhá", frozenset({Diagnosis.AKI})),
+        InputNote(
+            "90000002-DS-1", subject, "en", "druhá", frozenset({Diagnosis.PNEUMONIA})
+        ),
     )
 
 
@@ -63,7 +65,7 @@ def test_duplicate_plans_are_refused(planned_note: PlannedNote) -> None:
     """Dva plány jedné zprávy by labely určilo pořadí ve zdroji."""
     plans = (
         _plan(planned_note, "90000001-DS-1"),
-        _plan(planned_note, "90000001-DS-1", Diagnosis.AKI),
+        _plan(planned_note, "90000001-DS-1", Diagnosis.PNEUMONIA),
     )
 
     with pytest.raises(UnpairedNotesError, match="Duplicitní plány: 90000001-DS-1"):

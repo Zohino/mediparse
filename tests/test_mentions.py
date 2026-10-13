@@ -115,9 +115,9 @@ def test_negative_mentions_never_reach_diagnosis_section() -> None:
 
 def test_positive_mentions_are_affirmed_and_follow_placement() -> None:
     """Pozitivní zmínky jsou potvrzené a podíl zmínek jen v DD odpovídá umístění."""
-    labels = frozenset({Diagnosis.AKI})
+    labels = frozenset({Diagnosis.PNEUMONIA})
     mentions = [
-        m for m in _flat(_sample(LARGE, labels)) if m.diagnosis is Diagnosis.AKI
+        m for m in _flat(_sample(LARGE, labels)) if m.diagnosis is Diagnosis.PNEUMONIA
     ]
     only_diagnosis = sum(m.sections == (DD,) for m in mentions) / len(mentions)
 
@@ -135,10 +135,10 @@ def test_missing_diagnosis_section_moves_mention_to_narrative() -> None:
 
 
 def test_no_allowed_section_means_no_mention() -> None:
-    """Když struktura nemá žádnou povolenou sekci pro AKI, zmínka AKI se neplánuje."""
-    mentions = _flat(_sample(2000, frozenset({Diagnosis.AKI}), (PMH, FAMILY)))
+    """Když struktura nemá žádnou povolenou sekci pro pneumonii, její zmínka se neplánuje."""
+    mentions = _flat(_sample(2000, frozenset({Diagnosis.PNEUMONIA}), (PMH, FAMILY)))
 
-    assert all(m.diagnosis is not Diagnosis.AKI for m in mentions)
+    assert all(m.diagnosis is not Diagnosis.PNEUMONIA for m in mentions)
 
 
 def test_negative_statuses_follow_the_model() -> None:

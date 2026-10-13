@@ -12,7 +12,9 @@ from mediparse.domain.synthetic_patients import SyntheticNote
 
 NOTE_ID = "90000001-DS-1"
 NOTE = SyntheticNote(
-    NOTE_ID, 90000001, frozenset({Diagnosis.AKI, Diagnosis.DIABETES, Diagnosis.CKD})
+    NOTE_ID,
+    90000001,
+    frozenset({Diagnosis.PNEUMONIA, Diagnosis.DIABETES, Diagnosis.CKD}),
 )
 STRUCTURE = NoteStructure(
     note_id=NOTE_ID,
@@ -31,7 +33,7 @@ MENTIONS = (
         sections=("past_medical_history",),
     ),
     Mention(
-        diagnosis=Diagnosis.AKI,
+        diagnosis=Diagnosis.PNEUMONIA,
         status=MentionStatus.AFFIRMED,
         sections=("discharge_diagnosis",),
     ),
@@ -42,7 +44,7 @@ def test_labels_follow_diagnosis_order() -> None:
     """Labely z množiny se v plánu seřadí podle pořadí diagnóz, ne podle hashe."""
     plan = note_plan(NOTE, STRUCTURE, MENTIONS)
 
-    assert plan.labels == (Diagnosis.DIABETES, Diagnosis.CKD, Diagnosis.AKI)
+    assert plan.labels == (Diagnosis.DIABETES, Diagnosis.CKD, Diagnosis.PNEUMONIA)
 
 
 def test_plan_survives_json_round_trip() -> None:

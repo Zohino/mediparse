@@ -2,47 +2,47 @@
   "seed": 20260929,
   "labels": {
     "prevalence": {
-      "diabetes": 0.2713,
-      "ckd": 0.1765,
-      "heart_failure": 0.1708,
-      "atrial_fibrillation": 0.167,
-      "aki": 0.1577
+      "diabetes": 0.2714,
+      "copd": 0.0902,
+      "ckd": 0.1766,
+      "pneumonia": 0.0637,
+      "atrial_fibrillation": 0.1671
     },
     "conditional": {
       "diabetes": {
         "diabetes": 1.0,
+        "copd": 0.1129,
         "ckd": 0.342,
-        "heart_failure": 0.2984,
-        "atrial_fibrillation": 0.2112,
-        "aki": 0.2427
+        "pneumonia": 0.0676,
+        "atrial_fibrillation": 0.2112
+      },
+      "copd": {
+        "diabetes": 0.3398,
+        "copd": 1.0,
+        "ckd": 0.2674,
+        "pneumonia": 0.1468,
+        "atrial_fibrillation": 0.2889
       },
       "ckd": {
         "diabetes": 0.5258,
+        "copd": 0.1366,
         "ckd": 1.0,
-        "heart_failure": 0.447,
-        "atrial_fibrillation": 0.3082,
-        "aki": 0.3827
+        "pneumonia": 0.0924,
+        "atrial_fibrillation": 0.3082
       },
-      "heart_failure": {
-        "diabetes": 0.4738,
-        "ckd": 0.4618,
-        "heart_failure": 1.0,
-        "atrial_fibrillation": 0.4659,
-        "aki": 0.3383
+      "pneumonia": {
+        "diabetes": 0.2883,
+        "copd": 0.208,
+        "ckd": 0.2563,
+        "pneumonia": 1.0,
+        "atrial_fibrillation": 0.2665
       },
       "atrial_fibrillation": {
         "diabetes": 0.3431,
+        "copd": 0.1559,
         "ckd": 0.3256,
-        "heart_failure": 0.4766,
-        "atrial_fibrillation": 1.0,
-        "aki": 0.2658
-      },
-      "aki": {
-        "diabetes": 0.4175,
-        "ckd": 0.4283,
-        "heart_failure": 0.3665,
-        "atrial_fibrillation": 0.2815,
-        "aki": 1.0
+        "pneumonia": 0.1015,
+        "atrial_fibrillation": 1.0
       }
     },
     "prevalence_tolerance": 0.15,
@@ -50,7 +50,7 @@
     "ipf_max_passes": 1000
   },
   "patients": {
-    "notes": 200,
+    "notes": 400,
     "first_subject_id": 90000001,
     "single_note_probability": 0.587,
     "max_notes": 8,
@@ -405,8 +405,8 @@
   "mentions": {
     "diagnoses": {
       "diabetes": {
-        "given_positive": 0.937,
-        "given_negative": 0.1735,
+        "given_positive": 0.9364,
+        "given_negative": 0.1728,
         "keywords": [
           "diabetes",
           "diabetic",
@@ -415,51 +415,45 @@
           "DM2"
         ]
       },
-      "ckd": {
-        "given_positive": 0.8682,
-        "given_negative": 0.0249,
+      "copd": {
+        "given_positive": 0.8911,
+        "given_negative": 0.0604,
         "keywords": [
-          "chronic kidney disease",
-          "CKD",
-          "ESRD",
-          "end-stage renal disease",
-          "chronic renal",
-          "renal insufficiency"
+          "chronic obstructive pulmonary disease",
+          "emphysema",
+          "chronic bronchitis",
+          "COPD"
         ]
       },
-      "heart_failure": {
-        "given_positive": 0.855,
-        "given_negative": 0.0653,
+      "ckd": {
+        "given_positive": 0.8708,
+        "given_negative": 0.0259,
         "keywords": [
-          "heart failure",
-          "congestive heart failure",
-          "CHF",
-          "HF",
-          "cardiac failure",
-          "systolic heart failure",
-          "diastolic heart failure"
+          "chronic kidney disease",
+          "end-stage renal disease",
+          "chronic renal",
+          "renal insufficiency",
+          "CKD",
+          "ESRD"
+        ]
+      },
+      "pneumonia": {
+        "given_positive": 0.9279,
+        "given_negative": 0.1748,
+        "keywords": [
+          "pneumonia",
+          "pneumonitis"
         ]
       },
       "atrial_fibrillation": {
-        "given_positive": 0.9384,
-        "given_negative": 0.0361,
+        "given_positive": 0.9452,
+        "given_negative": 0.0412,
         "keywords": [
           "atrial fibrillation",
-          "AFib",
-          "AF",
+          "afib",
           "a-fib",
-          "atrial flutter"
-        ]
-      },
-      "aki": {
-        "given_positive": 0.4725,
-        "given_negative": 0.0149,
-        "keywords": [
-          "acute kidney injury",
-          "AKI",
-          "acute renal failure",
-          "ARF",
-          "acute renal injury"
+          "atrial flutter",
+          "AF"
         ]
       }
     },

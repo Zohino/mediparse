@@ -148,11 +148,11 @@ def test_shared_subject_stops_before_saving() -> None:
 def test_class_with_too_few_patients_stops_before_splitting() -> None:
     """Diagnóza bez dost pacientů v každé třídě skončí InvalidInputError a nic se nevolá."""
     config = TrainingConfig(
-        row_id="row", diagnosis=Diagnosis.AKI, seed=0, folds=2, regularization=1.0
+        row_id="row", diagnosis=Diagnosis.PNEUMONIA, seed=0, folds=2, regularization=1.0
     )
     recorder = _Recorder()
 
-    with pytest.raises(InvalidInputError, match="aki"):
+    with pytest.raises(InvalidInputError, match="pneumonia"):
         _use_case(NOTES, Holdout(train=(0, 1), test=(2, 3)), recorder).run(config)
 
     assert recorder.calls == {}
