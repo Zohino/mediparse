@@ -3,17 +3,21 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from enum import StrEnum
+from typing import TYPE_CHECKING, Final, Self
 
-from pydantic import ValidationError
+from pydantic import BaseModel, ConfigDict, ValidationError, model_validator
 
-from mediparse.domain.icd import IcdCode, IcdVersion
+from mediparse.domain.corpus_audit import Sha256
+from mediparse.domain.icd import DiagnosisCodes, IcdCode, IcdVersion
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.labels import Diagnosis
+from mediparse.domain.run_manifest import SourceRevision
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping
 
-    from mediparse.domain.icd import DiagnosisCodes
-    from mediparse.domain.labels import Diagnosis
+MIN_CELL: Final = 10
 
 type RawCode = tuple[str | None, str | None]
 
@@ -56,3 +60,85 @@ def label_codes(raw: Iterable[RawCode], codes: DiagnosisCodes) -> CodeLabels:
         if diagnosis is not None:
             diagnoses[pair] = diagnosis
     return CodeLabels(diagnoses=diagnoses, invalid=invalid)
+
+
+class FunnelStepName(StrEnum):
+    """Kroky výběru zpráv v pořadí trychtýře sešitu 5."""
+
+    ALL_NOTES = "all_notes"
+    WITH_ICD = "with_icd"
+    LONG_ENOUGH = "long_enough"
+    UNIQUE = "unique"
+
+
+class FunnelStep(BaseModel):
+    """Počet zpráv a pacientů, kteří krokem trychtýře prošli."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    step: FunnelStepName
+    notes: int
+    patients: int
+
+
+class CohortCounts(BaseModel):
+    """Agregáty kohorty: trychtýř ve čtyřech krocích a pozitivní zprávy každé diagnózy."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    funnel: tuple[FunnelStep, ...]
+    positives: dict[Diagnosis, int]
+
+    @model_validator(mode="after")
+    def _valid(self) -> Self:
+        if tuple(step.step for step in self.funnel) != tuple(FunnelStepName):
+            msg = "Kroky trychtýře musí být čtyři v pořadí sešitu 5."
+            raise ValueError(msg)
+        for before, after in zip(self.funnel, self.funnel[1:], strict=False):
+            if after.notes > before.notes or after.patients > before.patients:
+                msg = f"Kroky trychtýře nesmí růst: {after.step.value}."
+                raise ValueError(msg)
+        missing = set(Diagnosis) - set(self.positives)
+        if missing:
+            names = ", ".join(sorted(diagnosis.value for diagnosis in missing))
+            msg = f"Chybí počty pozitivních zpráv diagnóz: {names}."
+            raise ValueError(msg)
+        return self
+
+
+def ensure_publishable(counts: CohortCounts) -> None:
+    """Ověří, že kohorta není prázdná a každá diagnóza má dost obou tříd.
+
+    Args:
+        counts: Agregáty kohorty.
+
+    Raises:
+        InvalidInputError: Kohorta je prázdná nebo má diagnóza pod ``MIN_CELL``
+            pozitivních nebo negativních zpráv; hláška jmenuje diagnózu bez počtu.
+    """
+    notes = counts.funnel[-1].notes
+    if notes == 0:
+        msg = "Kohorta je prázdná."
+        raise InvalidInputError(msg)
+    for diagnosis in Diagnosis:
+        positive = counts.positives[diagnosis]
+        if min(positive, notes - positive) < MIN_CELL:
+            msg = (
+                f"Diagnóza {diagnosis.value} nemá v kohortě aspoň {MIN_CELL} "
+                "pozitivních a negativních zpráv."
+            )
+            raise InvalidInputError(msg)
+
+
+class CohortManifest(BaseModel):
+    """Provenance kohorty: otisky vstupů a výstupu, prostředí, revize a agregáty."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+
+    cohort_sha256: Sha256
+    config_sha256: Sha256
+    sources: dict[str, Sha256]
+    packages: dict[str, str]
+    source: SourceRevision
+    counts: CohortCounts
+    invalid_codes: int

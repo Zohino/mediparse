@@ -5,11 +5,24 @@ from __future__ import annotations
 from typing import Final
 
 import pytest
+from pydantic import ValidationError
 
-from mediparse.domain.cohort import RawCode, label_codes
+from mediparse.domain.cohort import (
+    MIN_CELL,
+    CohortCounts,
+    CohortManifest,
+    FunnelStep,
+    FunnelStepName,
+    RawCode,
+    ensure_publishable,
+    label_codes,
+)
 from mediparse.domain.icd import DiagnosisCodes, IcdVersion
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
+from mediparse.domain.run_manifest import SourceRevision
 
+POSITIVE: Final = 20
 CODES: Final = DiagnosisCodes(
     prefixes={
         Diagnosis.DIABETES: {IcdVersion.NINE: ("250",), IcdVersion.TEN: ("E11",)},
@@ -76,3 +89,106 @@ def test_duplicate_raw_pairs_are_counted_once() -> None:
 
     assert labels.invalid == 1
     assert len(labels.diagnoses) == 1
+
+
+def _funnel(
+    *notes: int, patients: tuple[int, ...] | None = None
+) -> tuple[FunnelStep, ...]:
+    counted = patients or tuple(max(n // 2, 1) for n in notes)
+    return tuple(
+        FunnelStep(step=step, notes=n, patients=p)
+        for step, n, p in zip(FunnelStepName, notes, counted, strict=False)
+    )
+
+
+def _counts(
+    positives: dict[Diagnosis, int] | None = None,
+    funnel: tuple[FunnelStep, ...] | None = None,
+) -> CohortCounts:
+    return CohortCounts(
+        funnel=funnel or _funnel(100, 80, 60, 50),
+        positives=positives or dict.fromkeys(Diagnosis, POSITIVE),
+    )
+
+
+def test_counts_with_ten_and_ten_pass() -> None:
+    """Deset pozitivních a deset negativních zpráv je nejmenší přípustná buňka."""
+    counts = _counts(dict.fromkeys(Diagnosis, MIN_CELL), _funnel(30, 30, 30, 20))
+
+    ensure_publishable(counts)
+
+    assert counts.positives[Diagnosis.CKD] == MIN_CELL
+
+
+@pytest.mark.parametrize("positives", [0, 9])
+def test_diagnosis_with_few_positives_is_refused_without_number(
+    positives: int,
+) -> None:
+    """Chyba jmenuje diagnózu a neprozradí počet."""
+    with pytest.raises(InvalidInputError, match="copd") as error:
+        ensure_publishable(
+            _counts({**dict.fromkeys(Diagnosis, POSITIVE), Diagnosis.COPD: positives})
+        )
+
+    assert str(positives) not in str(error.value).replace("10", "")
+
+
+def test_diagnosis_with_few_negatives_is_refused() -> None:
+    """Diagnóza, kterou má skoro každá zpráva, nemá dost negativních."""
+    with pytest.raises(InvalidInputError, match="diabetes"):
+        ensure_publishable(
+            _counts({**dict.fromkeys(Diagnosis, POSITIVE), Diagnosis.DIABETES: 41})
+        )
+
+
+def test_empty_cohort_is_refused() -> None:
+    """Kohorta bez zpráv nemá z čeho vybírat."""
+    with pytest.raises(InvalidInputError, match="prázdná"):
+        ensure_publishable(
+            _counts(funnel=_funnel(100, 80, 60, 0, patients=(50, 40, 30, 0)))
+        )
+
+
+def test_funnel_must_have_four_steps_in_order() -> None:
+    """Trychtýř má právě čtyři kroky v pořadí sešitu 5."""
+    steps = _funnel(100, 80, 60, 50)
+
+    with pytest.raises(ValidationError, match="trychtýře"):
+        _counts(funnel=steps[:3])
+    with pytest.raises(ValidationError, match="trychtýře"):
+        _counts(funnel=(steps[1], steps[0], *steps[2:]))
+
+
+def test_funnel_must_not_grow() -> None:
+    """Každý krok vybírá z předchozího, počty nerostou."""
+    with pytest.raises(ValidationError, match="trychtýře"):
+        _counts(funnel=_funnel(100, 80, 90, 50))
+
+
+def _manifest(**overrides: object) -> CohortManifest:
+    fields: dict[str, object] = {
+        "cohort_sha256": "a" * 64,
+        "config_sha256": "b" * 64,
+        "sources": {"discharge.csv.gz": "c" * 64},
+        "packages": {"python": "3.13.0"},
+        "source": SourceRevision(commit="d" * 40, dirty=False),
+        "counts": _counts(),
+        "invalid_codes": 0,
+    }
+    return CohortManifest.model_validate(fields | overrides)
+
+
+def test_manifest_serializes_counts_by_diagnosis_name() -> None:
+    """Pozitivní zprávy jsou v JSON pod jménem diagnózy."""
+    dumped = _manifest().model_dump(mode="json")
+
+    assert dumped["counts"]["positives"]["atrial_fibrillation"] == POSITIVE
+    assert dumped["counts"]["funnel"][0]["step"] == "all_notes"
+
+
+def test_manifest_rejects_unknown_field_and_bad_digest() -> None:
+    """Manifest je přísný: cizí pole a otisk, který není sha256, neprojdou."""
+    with pytest.raises(ValidationError):
+        _manifest(unknown=1)
+    with pytest.raises(ValidationError):
+        _manifest(cohort_sha256="xyz")
