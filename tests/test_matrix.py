@@ -86,6 +86,12 @@ def test_invalid_row_is_rejected(overrides: dict[str, object]) -> None:
         _validate(_row(**overrides))
 
 
+def test_diagnosis_is_not_matrix_axis() -> None:
+    """Diagnóza je metriková osa: jeden model nese všech pět výstupů, řádek ji nenese."""
+    with pytest.raises(ValidationError, match="diagnosis"):
+        _validate(_row(diagnosis="diabetes"))
+
+
 def test_missing_axis_is_rejected() -> None:
     """Každá osa je povinná, manifest nesmí spoléhat na výchozí hodnoty."""
     row = _row()
