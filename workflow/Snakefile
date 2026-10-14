@@ -6,5 +6,6 @@ rule smoketest:
         "scripts/smoketest_summary.py"
 
 
+include: "rules/cohort.smk"
 include: "rules/download.smk"
 include: "rules/smoketest.smk"
