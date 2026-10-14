@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letý muž s bolestí v pravém horním kvadrantu břicha, nevolností a horečkou, odeslán z ___ kliniky poté, co ultrazvuk odhalil žlučové kameny.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na nevolnost. Žádná bolest na hrudi ani dušnost.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Komfortní, bez horečky.
+Břicho:
+Měkké, mírná citlivost v místě řezů.
+Končetiny:
+Žádný edém.
+Neurologické vyšetření:
+Bdělý, bez ložiskových příznaků.
+
+Významné výsledky:
+Ultrazvuk: mnoho žlučových kamenů, zesílená stěna žlučníku, malé množství tekutiny v okolí žlučníku.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Počet bílých krvinek v normě, jaterní enzymy v normálních mezích.
+
+Stručný popis hospitalizace:
+Přijat s akutní cholecystitidou, zahájena léčba antibiotiky a provedena nekomplikovaná laparoskopická cholecystektomie dne ___. Bolest se zlepšila, dieta byla upravena a pacient byl propuštěn domů ve stabilizovaném stavu s plánovanou kontrolou u ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Lisinopril 10 mg denně, atorvastatin 20 mg večer, paracetamol 650 mg každých šest hodin podle potřeby na bolest, dokusát při užívání opioidů.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí:
+Bdělý a komunikativní
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byl vám odstraněn žlučník. Udržujte řezné rány čisté a suché, vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů a v případě horečky, zvracení, zhoršení bolesti nebo zarudnutí volejte ___.
+
+Pokyny pro kontrolu:
+___

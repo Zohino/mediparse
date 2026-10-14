@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Zčervenání a otok pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s třídenní anamnézou zčervenání, tepla a bolesti pravé nohy, odeslána ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Osteoartróza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce:
+Bez horečky, stabilní
+Celkový stav:
+Pohodlný
+Hlava, oči, uši, nos, hrdlo:
+Normální
+Břicho:
+Měkké
+Končetiny:
+Pravá holeně zčervenalá, teplá
+Neurologické vyšetření:
+Bez ložiskových příznaků
+
+Významné výsledky:
+Mírně zvýšený počet bílých krvinek při přijetí, při propuštění normální. Ultrazvuk neprokázal přítomnost krevní sraženiny.
+
+Stručný popis hospitalizace:
+Léčena pro celulitidu intravenózním vancomycinem, poté převedena na perorální doxycyklin, jakmile ustoupilo zčervenání a zlepšila se bolest.
+PŘECHODNÁ OTÁZKA:
+Dokončení antibiotické léčby; kontrola nohy za ___.
+
+Léky při přijetí:
+Lisinopril, levotyroxin
+
+Léky při propuštění:
+Doxycyklin dvakrát denně po dobu sedmi dnů. Pokračovat v užívání lisinoprilu a levotyroxinu beze změny.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+
+Stav při propuštění:
+Duševní stav:
+Jasné vědomí, bdělost.
+Fyzická aktivita:
+Chodí samostatně.
+
+Pokyny pro propuštění:
+Udržujte nohu ve zvýšené poloze, užívejte antibiotika podle pokynů a v případě horečky nebo šíření zčervenání se vraťte.
+
+Pokyny pro kontrolu:
+___

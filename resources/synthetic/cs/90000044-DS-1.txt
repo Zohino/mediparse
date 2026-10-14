@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí se dostavila s potížemi, jako je bušení srdce a závratě, které trvaly dva dny. EKG prokázalo fibrilaci síní s rychlou ventrikulární odpovědí. Byla odeslána z ___ k vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka, která prodělala cévní mozkovou příhodu
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: TF 128, TK 138/82
+Celkový stav: dobrý
+Hlava, oči, uši, nos, hrdlo: normální
+Plíce: čisté
+Břicho: měkké
+Končetiny: bez otoků
+Neurologické vyšetření: bez ložiskových příznaků
+
+Významné výsledky:
+NÁLEZY:
+Dvakrát negativní troponin. Normální hladina draslíku a hořčíku. Rentgen hrudníku bez akutních abnormalit. Echokardiogram prokázal zachovanou ejekční frakci a mírné zvětšení levé síně.
+
+Stručný popis průběhu hospitalizace:
+Frekvence byla kontrolována pomocí metoprololu a byla zahájena léčba apixabanem. Echokardiogram prokázal normální funkci. Příznaky ustoupily do druhého dne hospitalizace. Byla vyšetřena ___, kardiologem, a dobře snášela chůzi. Vyšetření štítné žlázy bylo normální. Propuštěna domů ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 50 mcg denně
+
+Léky při propuštění:
+Metoprolol succinat 50 mg denně
+Apixaban 5 mg dvakrát denně
+Lisinopril 10 mg denně
+Levotyroxin 50 mcg denně
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Bušení srdce
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Duševní stav: jasný a srozumitelný
+Úroveň vědomí: bdělý a reagující
+Stav aktivity: soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli rychlému nepravidelnému srdečnímu tepu. Užívajte nové léky podle předpisu. V případě bolesti na hrudi, mdlob nebo krvácení se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

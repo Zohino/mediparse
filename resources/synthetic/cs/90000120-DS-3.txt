@@ -1,0 +1,80 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Poranění a slabost nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient je ___ letý muž, který byl odeslán z ___ s několikdenní únavou, žízní a hnisavou ranou na levé noze. Popíral horečku nebo bolest na hrudi.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Bez horečky, stabilní
+HEENT (hlava, oči, uši, nos, hrdlo):
+Suché sliznice
+Krk:
+Pružný
+Břicho:
+Měkké, netendrovatelné
+KONČETINY:
+Povrchový vřed na levé plosce nohy
+Neurologické vyšetření:
+Orientovaný, bez ložiskových příznaků
+
+Významné výsledky:
+Při přijetí byl výrazně zvýšený obsah glukózy, s mírným zvýšením počtu bílých krvinek. Elektrolyty byly jinak v normě.
+ZÁVĚR:
+Rentgenové vyšetření nohy bez známek postižení kosti.
+
+Stručný popis hospitalizace:
+Byl mu podáván intravenózně roztok a inzulin, což vedlo k postupnému zlepšení glykemie. Rana byla očištěna a ošetřena a pacient byl vyšetřen týmem ___. Byla mu podána antibiotika perorálně. Byl pečlivě sledován ___ a před propuštěním chodil bez potíží.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+Metformin
+
+Léky při propuštění:
+1. Lisinopril denně perorálně.
+2. Atorvastatin večer.
+3. Metformin dvakrát denně během jídla.
+4. Cefalexin čtyřikrát denně po dobu jednoho týdne.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes mellitus 2. typu s vředem na noze
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Plně při vědomí a orientovaný.
+Stav aktivity:
+Chodí, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli vysoké hladině cukru v krvi a poranění nohy. Denně si kontrolujte nohy, užívejte léky podle předpisu a udržujte obvaz v čistotě. V případě zarudnutí, hnisu nebo horečky volejte ___ a co nejdříve se objednejte na kontrolu do ambulance ___.
+
+Pokyny pro kontrolu:
+___

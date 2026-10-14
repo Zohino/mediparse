@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Známé alergie na léky: žádné.
+
+Hlavní potíže:
+Otok nohou a únava.
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný.
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí přijata z ___ s třídenní anamnézou otoku nohou, únavy a snížené chuti k jídlu. Kreatinin 3,1, oproti výchozí hodnotě kolem 2,4, draslík 5,6. Byla odeslána doktorem ___ k vyšetření.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu, hypertenze, anémie, hyperlipidémie.
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie v ___.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí.
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bdělá, bez akutních potíží.
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice.
+Plicní: Čisté na obou stranách.
+Srdce: Pravidelný rytmus, bez šelestu.
+Břicho: Měkké, netendrové.
+Končetiny: Mírný bilaterální otok dolních končetin.
+
+Významné výsledky:
+Laboratorní výsledky při přijetí z ___ ukázaly kreatinin 3,1, BUN 58, draslík 5,6, bikarbonát 18 a hemoglobin 9,8. Vyšetření moči ukázalo přítomnost bílkovin bez známek infekce. Glukóza se pohybovala od 140 do 210 na oddělení a fosfor byl 5,4 s nízkým vápníkem.
+ZÁVĚR: Bilaterálně malé echogenní ledviny bez hydronefrózy.
+
+Stručný průběh hospitalizace:
+Pacientka dostávala mírné diuretikum a dietu s nízkým obsahem draslíku, hladina draslíku se normalizovala na 4,6. Kreatinin se stabilizoval na 2,7. Nefrolog, doktor ___, upravil její medikaci a zajistil ambulantní laboratorní vyšetření v ___. Inzulin byl pokračován a hladina glukózy byla stabilní. Byla zahájena léčba fosforem při jídle a anémie byla sledována bez transfuze, přičemž hladina hemoglobinu byla stabilní kolem 9,5. Pacientka byla propuštěna ve stabilizovaném stavu.
+
+Medikace při přijetí:
+Inzulin glargin večer, amlodipin denně, atorvastatin denně, furosemid podle potřeby.
+
+Medikace při propuštění:
+Inzulin glargin večer. Amlodipin denně. Atorvastatin denně. Sevelamer při jídle. Furosemid 40 mg každé ráno. Tablety hydrogenuhličitanu sodného dvakrát denně. Pokračujte v užívání vitamínu D doma denně. Přestaňte užívat ibuprofen.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Hyperkalemie, diabetes mellitus, hypertenze.
+
+Stav při propuštění:
+Duševní stav: Bdělá a orientovaná.
+Úroveň vědomí: Probuzená a pozorná.
+Fyzická aktivita: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Byli jste přijati s otokem nohou a vysokou hladinou draslíku. Užívajte léky podle seznamu a vyhýbejte se ibuprofenu. Denně se važte. V případě zhoršení otoku volejte ___ a příští týden si nechte udělat krevní testy v ___.
+
+Další pokyny:
+___

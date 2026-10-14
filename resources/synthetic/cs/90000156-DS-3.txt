@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letý muž s postupně se zhoršující bolestí v pravém horním kvadrantu břicha, nevolností a horečkou, odeslán z ___ poté, co ultrazvuk odhalil žlučové kameny.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlný, bez horečky
+Hlava, oči, uši, nos, hrdlo:
+Bez známek žloutenky
+Krk:
+Pružný
+Břicho:
+Bolestivé v pravém horním kvadrantu
+Končetiny:
+Bez otoků
+
+Významné výsledky:
+Ultrazvuk provedený v ___ prokázal žlučové kameny se ztluštěním stěny žlučníku. Počet bílých krvinek mírně zvýšený, jaterní enzymy v normě.
+ZÁVĚR:
+Akutní cholecystitida s cholelitiázou.
+
+Stručný popis hospitalizace:
+Pacient byl přijat, podávány antibiotika a tekutiny, podstoupil nekomplikovanou laparoskopickou cholecystektomii pod vedením doktora ___. Bolest byla kontrolována perorálně, dieta byla postupně rozšiřována a pacient byl propuštěn domů.
+PŘECHODNÁ OTÁZKY:
+Kontrola na chirurgické ambulanci za dva týdny.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Pokračovat v užívání lisinoprilu a atorvastatinu. Paracetamol podle potřeby na bolest. Dokusát při užívání jakéhokoli opioidního léku.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+Stav aktivity:
+Chodící, soběstačný
+
+Pokyny pro propuštěného pacienta:
+Byl vám odstraněn žlučník. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze a v případě horečky, zvracení, žloutenky nebo zhoršení bolesti kontaktujte kliniku ___.
+
+Pokyny pro další postup:
+___

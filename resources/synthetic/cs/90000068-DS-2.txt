@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Významnější chirurgický zákrok nebo invazivní vyšetření:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___letou ženu, u které se začaly projevovat bušení srdce a mírná dušnost přibližně ___. Při stání se cítila závratě a přišla na pohotovost. Srdeční tep byl nepravidelný a rychlý. Popírala bolesti na hrudi, horečku nebo synkopu.
+
+Anamnéza předchozích onemocnění:
+Fibrilace síní
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Významné výsledky:
+Telemetrie prokázala nepravidelný srdeční rytmus s úzkými komplexy a frekvencí až 140. Troponin byl dvakrát negativní. Elektrolyty a vyšetření štítné žlázy byly v normě.
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Rentgen hrudníku proveden dne ___.
+ZÁVĚR:
+Normální velikost srdce, průchozí plíce, žádný akutní proces.
+
+Stručný popis hospitalizace:
+Byla přijata za účelem kontroly srdeční frekvence. Dávka metoprololu byla zvýšena a srdeční frekvence se během jednoho dne stabilizovala pod 100. Antikoagulační léčba byla prodiskutována s doktorem ___ a pokračovala. Chodila bez potíží. Její kardiologický tým v ___ ji bude sledovat a byla propuštěna domů ve stabilizovaném stavu dne ___.
+
+Léky při přijetí:
+Metoprolol 25 mg dvakrát denně, levotyroxin, lisinopril.
+
+Léky při propuštění:
+1. Metoprolol tartrát 50 mg perorálně dvakrát denně.
+2. Apixaban 5 mg perorálně dvakrát denně.
+3. Levotyroxin 75 mcg perorálně každé ráno.
+4. Lisinopril 10 mg perorálně denně.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Fibrilace síní s rychlou ventrikulární odpovědí
+
+Stav při propuštění:
+Stabilní, bez horečky, srdeční frekvence kontrolovaná.
+Úroveň vědomí: Bdělá a reaguje.
+Duševní stav: Jasný a koherentní.
+Stav aktivity: Ambulantní, soběstačná.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli rychlému, nepravidelnému srdečnímu tepu. Dávka metoprololu byla zvýšena a měli byste denně užívat antikoagulant. V případě bolestí na hrudi, mdlob nebo zhoršení dušnosti se vraťte. V případě jakýchkoli dotazů volejte na číslo ___.
+
+Pokyny pro další postup:
+___

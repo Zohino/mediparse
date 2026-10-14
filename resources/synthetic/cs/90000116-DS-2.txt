@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí, která se dostavila s třemi dny trvající horečkou, produktivním kašlem a únavou. Byla odeslána svým ošetřujícím lékařem z ___. Příznaky se objevily ___ a zhoršovaly se i přes odpočinek a dostatečný příjem tekutin. Pacientka také uváděla mírnou dušnost při námaze a sníženou chuť k jídlu.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Osteoartróza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Významné výsledky:
+Mírně zvýšený počet bílých krvinek, elektrolyty v normě. Krevní kultury odebrané ___ nevykázaly žádný růst. Výtěr z nosohltanu na chřipku byl negativní.
+ZÁVĚR:
+Mírné ztluštění peribronchiální tkáně, plíce bez infiltrátů, normální velikost srdce, žádný výpotek. Konzultováno s radiologem ___.
+
+Stručný popis hospitalizace:
+Pacientka byla sledována na interním oddělení. Rentgen hrudníku neprokázal známky pneumonie a předpokládá se, že se jedná o virovou bronchitidu. Byla jí podávána tekutina, paracetamol a inhalovány bronchodilatancia, což vedlo ke zlepšení stavu. Saturace kyslíkem zůstala normální při dýchání okolního vzduchu. Byla vyšetřena ___ a propuštěna do domácí péče.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 50 mcg denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně.
+2. Levotyroxin 50 mcg perorálně každé ráno.
+3. Paracetamol 650 mg perorálně každých šest hodin podle potřeby při horečce.
+4. Guaifenesin 600 mg dvakrát denně podle potřeby při kašli.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní virová bronchitida
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Bdělá a orientovaná, schopná plnit pokyny.
+Úroveň vědomí: Plně bdělá a komunikativní.
+Fyzická aktivita: Chodí samostatně.
+
+Pokyny pro propuštěného pacienta:
+Byli jste přijati s kašlem a horečkou a váš stav se zlepšil díky podpůrné péči. Pijte dostatek tekutin, odpočívejte a užívejte léky podle seznamu. V případě zhoršení dušnosti, vysoké horečky nebo bolesti na hrudi se vraťte do ___. V případě jakýchkoli dotazů volejte na svou kliniku na čísle ___.
+
+Pokyny pro kontrolu:
+___

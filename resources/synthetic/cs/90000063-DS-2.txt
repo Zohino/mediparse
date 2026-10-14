@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin (vyrážka)
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s hypertenzí a hypotyreózou, odeslána z ___ kliniky dne ___ s třídenní anamnézou zarudnutí, tepla, otoku a horečky levé nohy po drobném poranění při zahradničení. Popírá bolest na hrudi nebo dušnost. V nedávné době necestovala a neměla kontakt s nemocnými.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na horečku a zimnici. Jinak negativní.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Osteoartróza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s cévní mozkovou příhodou, léčena v ___. Otec s hypertenzí.
+
+Fyzikální vyšetření:
+Celkový stav: Bdělá, mírně nepohodlná, levá dolní končetina zarudlá a teplá.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Krk: Pohyblivý.
+Plíce: Oboustranně čisté.
+Neurologické: Bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Leukocyty 14,2, hemoglobin 12,1, kreatinin 0,8, laktát 1,4, CRP zvýšené.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ: Leukocyty 8,6, kreatinin 0,7.
+ZÁVĚR: Ultrazvuk levé nohy provedený dne ___ prokázal otok měkkých tkání bez abscesu nebo hluboké žilní trombózy.
+
+Stručný průběh hospitalizace:
+Byla léčena intravenózním cefazolinem po dobu dvou dnů s postupným zlepšením a okraj zarudnutí se zmenšoval. Následně byla převedena na perorální cefalexin. Kultivace krve neprokázala růst bakterií. Domácí léčba lisinoprilem byla pokračována pro kontrolu krevního tlaku. Byla vyšetřena týmem ___, chodila samostatně a byla propuštěna dne ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 75 mcg denně
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu sedmi dnů
+2. Lisinopril 10 mg denně
+3. Levotyroxin 75 mcg denně
+4. Paracetamol podle potřeby proti bolesti
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida levé dolní končetiny
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Fyzická aktivita: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Byla léčena pro kožní infekci levé nohy. Užijte antibiotika až do konce a udržujte nohu ve zvýšené poloze při sezení. V případě šíření zarudnutí, horečky nebo zhoršení bolesti se vraťte na pohotovost. V případě dotazů volejte na ___ a navštivte svého lékaře na ___ podle plánu.
+
+Pokyny pro kontrolu:
+___

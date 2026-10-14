@@ -1,0 +1,53 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Tato ___letá žena se dostavila s pětidenním kašlem s vykašláváním, horečkou a dušností. Byla vyšetřena v ___, kde rentgen hrudníku ukázal konsolidaci dolního laloku pravého plíce, což odpovídá pneumonii. V pohotovostní službě měla horečku a mírnou hypoxii a byla přijata k intravenózní léčbě antibiotiky a podávání kyslíku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Hysterektomie v roce ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Významné výsledky:
+Laboratorní výsledky při přijetí: počet bílých krvinek 14,2, hemoglobin 12,1, kreatinin 0,8. Rentgen hrudníku: opacita dolního laloku pravého plíce bez výpotku. Kultivace krve nevykázala růst. Opakovaný snímek v ___ ukázal zlepšení ventilace. Kultivace sputa prokázala normální orální flóru. Hladina laktátu byla v normě. Saturace kyslíkem se zlepšila na 96 procent při dýchání okolním vzduchem do dne propuštění. Elektrokardiogram ukázal sinusový rytmus.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Levotyroxin 50 mcg denně. Multivitamin jedna tableta denně.
+
+Léky při propuštění:
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů. Azithromycin 250 mg denně po dobu dvou dnů. Guaifenesin 600 mg dvakrát denně podle potřeby na kašel. Lisinopril 10 mg denně. Levotyroxin 50 mcg denně.
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Pneumonie
+
+Stav při propuštění:
+Duševní stav: Bdělá a orientovaná, schopná plnit pokyny.
+Úroveň vědomí: Bdělá a pozorná.
+Stav aktivity: Chodí, soběstačná.
+
+Pokyny při propuštění:
+Byla jste léčena v nemocnici pro plicní infekci. Užívejte všechny předepsané antibiotika. Odpočívejte a postupně zvyšujte aktivitu. V případě horečky, zhoršení kašle, bolesti na hrudi nebo potíží s dýcháním zavolejte lékaři ___ na telefonní číslo ___ nebo se vraťte do nemocnice.
+
+Pokyny pro kontrolu:
+___

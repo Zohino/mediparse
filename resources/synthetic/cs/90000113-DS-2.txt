@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Žízeň a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s několikdenní zvýšenou žízní, častým močením a únavou. Při příjezdu bylo zjištěno výrazně zvýšené množství glukózy. Byl přijat do nemocnice.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: dobrý
+Hlava, oči, uši, nos, hrdlo: suché sliznice
+Krk: pružný
+Plíce: čisté
+Břicho: měkké
+Končetiny: bez otoků
+Kůže: teplá
+
+Významné výsledky:
+Při příjezdu zvýšená hladina glukózy. Nízká hladina bikarbonátu, po léčbě se normalizovala. Rentgen hrudníku v pořádku. Vyšetření moči prokázalo glukózu a ketony. Opakovaná laboratorní vyšetření v ___ stabilní.
+
+Stručný popis průběhu hospitalizace:
+Hladina glukózy byla kontrolována pomocí inzulínu a tekutin, doplněny byly elektrolyty. Příznaky ustoupily během dvou dnů. Strava byla postupně upravována a před propuštěním byla s pacientem provedena instruktáž ___.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+
+Léky při propuštění:
+Inzulín glargin jednou denně, metformin 500 mg dvakrát denně, lisinopril 10 mg denně
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes mellitus s hyperglykémií
+Sekundární:
+Hypertenze
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí: bdělý a reagující
+Stav aktivity: soběstačný
+
+Pokyny pro propuštěného pacienta:
+Užívejte léky podle pokynů, denně si měřte hladinu glukózy a v případě zvracení nebo zmatenosti se vraťte do ___.
+
+Pokyny pro kontrolní vyšetření:
+___

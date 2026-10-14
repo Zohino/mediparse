@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Pacientka je ___ letá žena, která byla odeslána z ___ se dvěma dny trvající se zhoršující se bolestí v pravém horním kvadrantu břicha, nevolností a jednou epizodou zvracení. Bolest začala po konzumaci tučného jídla a doma se neulevila. Popírá horečku, bolest na hrudi nebo žloutenku. Vyšetření v ___ ukázalo žlučové kameny se ztluštělou stěnou žlučníku a byla převezena na chirurgické vyšetření.
+
+Anamnéza předchozích onemocnění:
+Fibrilace síní
+Hypertenze
+Hypotyreóza
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny, léčena v ___
+
+Stručný popis hospitalizace:
+Byla přijata, podána intravenózní tekutiny a antibiotika a druhý den hospitalizace byla převezena na operační sál, kde byla provedena nekomplikovaná laparoskopická cholecystektomie. Její srdeční frekvence zůstala kontrolovaná při domácím režimu a telemetrie byla v normě. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a pacientka chodila samostatně. ___ tým ji prohlásil za způsobilou k propuštění ___.
+PŘECHODNÁ OTÁZKY:
+Sledování výsledků patologického vyšetření. Kontrola krevního tlaku při návštěvě ___.
+
+Léky při přijetí:
+Metoprolol 50 mg dvakrát denně
+Apixaban 5 mg dvakrát denně
+Levotyroxin 75 mcg denně
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg perorálně dvakrát denně.
+2. Apixaban 5 mg perorálně dvakrát denně, zahájit zítra ráno.
+3. Levotyroxin 75 mcg perorálně každé ráno.
+4. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby na bolest.
+5. Docusate 100 mg perorálně dvakrát denně během užívání léků proti bolesti.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Fibrilace síní
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodící, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni s zánětem žlučníku a ten byl odstraněn laparoskopickou operací. Můžete se sprchovat a nechat na malé incize stékat mýdlovou vodu, ale nečistěte je ani je nenechávejte namáčet. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů než deset liber. Zpočátku jezte menší jídla s nízkým obsahem tuku. V případě horečky, zhoršující se bolesti břicha, opakovaného zvracení, žluté kůže nebo zarudnutí rány volejte na kliniku na čísle ___ nebo se vraťte na pohotovost.
+
+Pokyny pro kontrolu:
+___

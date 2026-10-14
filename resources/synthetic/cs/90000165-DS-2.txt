@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letý muž, odeslán z ___, s postupující bolestí v pravém horním kvadrantu břicha, nevolností a horečkou, trvajícími dva dny. Zobrazovací vyšetření prokázala žlučové kameny a ztluštění stěny žlučníku. Byl přijat k chirurgické léčbě.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Nepohodlný, při vědomí
+Hlava, oči, uši, nos, hrdlo: Bez známek žloutenky
+Břicho: Měkké, citlivé v pravém horním kvadrantu
+Končetiny: Teplé, bez otoků
+PULSY: Hmatné po celém těle
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Zvýšený počet bílých krvinek, mírně zvýšené jaterní enzymy. Ultrazvukové vyšetření provedené v ___ prokázalo mnohočetné žlučové kameny, tekutinu v okolí žlučníku a ztluštění stěny bez dilatace žlučových cest.
+
+Stručný popis hospitalizace:
+Byla zahájena intravenózní antibiotická a infuzní terapie, poté byl pacient převezen na operační sál, kde tým ___ provedl nekomplikovanou laparoskopickou cholecystektomii. Bolest byla kontrolována perorálními léky. Pacient dobře snášel běžnou stravu, mohl se samostatně pohybovat a byl připraven k propuštění ___ druhý den.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg jednou denně
+2. Atorvastatin 20 mg večer
+3. Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti
+4. Docusate 100 mg dvakrát denně během užívání opioidů
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Stabilní, schopný chůze, snáší stravu
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni s zánětem žlučníku, který byl odstraněn. Udržujte rány čisté a suché a několik týdnů se vyhýbejte zvedání těžkých předmětů. V případě horečky, zvracení, žloutnutí kůže nebo zhoršení bolesti břicha volejte na kliniku na čísle ___ nebo se vraťte. V případě potřeby se obraťte na ___.
+
+Pokyny pro kontrolní vyšetření:
+___

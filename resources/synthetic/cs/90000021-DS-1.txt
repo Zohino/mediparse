@@ -1,0 +1,64 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s diabetem, který se dostavil s třemi dny trvajícím produktivním kašlem, horečkou a dušností. Byl odeslán z ambulance ___ poté, co ambulantní léčba selhala.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Možná CHOPN, nikdy nepotvrzeno spirometrií
+Hyperlipidémie
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: komfortní, bez horečky
+Plíce: mírné bazální chrůpky
+SRDCE: pravidelný rytmus
+Břicho: měkké, netendrové
+Končetiny: bez otoků
+Neurologický stav: bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Rentgen hrudníku ukázal konsolidaci v dolním laloku pravé plíce. Počet bílých krvinek byl při přijetí zvýšený a při propuštění se normalizoval. Krevní kultury zůstaly negativní.
+ZÁVĚR:
+Zastínění v dolním laloku pravé plíce.
+
+Stručný popis hospitalizace:
+Byl léčen intravenózním ceftriaxonem a azithromycinem, poté byl po odeznění horečky převeden na perorální antibiotika. Podávání kyslíku bylo postupně snižováno, dokud pacient nemohl dýchat běžný vzduch. Hladina glukózy byla regulována inzulínem. Dr. ___ z ___ bude pacienta dále sledovat.
+
+Léky při propuštění:
+Amoxicilin-klavulanát dvakrát denně po dobu pěti dalších dnů
+Metformin jako dříve
+Lisinopril denně
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Komunitně získaná plicní infekce
+Sekundární:
+Hypertenze
+Hyperlipidémie
+
+Stav při propuštění:
+Duševní stav: jasný a srozumitelný
+Úroveň vědomí: bdělý
+Fyzická aktivita: chůze, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli plicní infekci. Dokončete všechny antibiotika, pijte dostatek tekutin a odpočívejte. V případě zhoršení dušnosti, horečky nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro další péči:
+___

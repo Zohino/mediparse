@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+___letá žena s dvoudenní se zhoršující bolestí břicha, nevolností a mírnou horečkou, odeslána z ___ kliniky.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na anorexii; jinak negativní.
+
+Anamnéza předchozích onemocnění:
+Hypotyreóza
+Migrény
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Plíce:
+Čisté na obou stranách
+Břicho:
+Měkké, mírně citlivé v místech řezů
+
+Významné výsledky:
+Při přijetí zvýšený počet bílých krvinek, po operaci se normalizoval. CT vyšetření provedené v ___ ukázalo zánět slepého střeva bez perforace. Histopatologické vyšetření probíhá, výsledky budou k dispozici při propuštění.
+
+Stručný popis hospitalizace:
+Pod vedením doktora ___ podstoupila v den přijetí nekomplikovanou laparoskopickou apendektomii. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a pacientka se pohybovala samostatně. Horečka ustoupila. Byla propuštěna domů druhý den po operaci.
+
+Léky při přijetí:
+Levotyroxin denně
+Sumatriptan podle potřeby
+
+Léky při propuštění:
+1. Levotyroxin 75 mcg jednou denně
+2. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest
+3. Dokusát 100 mg dvakrát denně během užívání opioidů
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní apendicitida
+Sekundární:
+Hypotyreóza
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí:
+Bdělý a komunikativní
+Stav aktivity:
+Ambulantní, samostatný
+
+Pokyny pro propuštění:
+Byla léčena pro apendicitidu. Udržujte řezné rány čisté a suché, vyhýbejte se zvedání těžkých předmětů (nad 10 liber) po dobu čtyř týdnů a v případě horečky, zvracení nebo šířící se zarudnutí volejte na ___.
+
+Pokyny pro kontrolu:
+___

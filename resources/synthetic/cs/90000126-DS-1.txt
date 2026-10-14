@@ -1,0 +1,62 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Tento ___letý muž, který dlouhodobě a intenzivně kouřil, se dostavil po třech dnech kašle s vykašláváním, horečce a zhoršující se dušnosti. Byl převezen z pohotovosti ___ s hypoxémií.
+
+Anamnéza předchozích onemocnění:
+Chronická hyperkapnie při domácí oxygenoterapii
+Bývalý kuřák, 50 balíčků ročně
+Hypertenze
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Hubený, mírně dušný, mluví krátkými větami.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Krk: Pohyblivý.
+Břicho: Měkké, netendrovatelné.
+Končetiny: Bez otoků nebo cyanózy.
+
+Významné výsledky:
+NÁLEZY:
+Rentgen hrudníku ukazuje hyperinflamované plíce se zploštělými bránicemi a novou opacitou v dolním laloku pravé plíce. Analýza arteriální krve (ABG) prokázala chronickou respirační acidózu se zvýšeným bikarbonátem. Počet bílých krvinek zvýšený. Obstruktivní vzorec při předchozí spirometrii.
+
+Stručný popis hospitalizace:
+Léčen pro pneumonii ceftriaxonem a azithromycinem, navíc inhalátory bronchodilatancií a krátkodobou léčbou prednisonem. Oxygenoterapie byla postupně snižována až na pokojový vzduch. Pulmonologický tým ___ doporučil úpravu dávkování inhalátorů. Stav se zlepšil do ___ a pacient byl propuštěn s ustupujícím kašlem a stabilní saturací.
+
+Léky při přijetí:
+Inhalátor tiotropia, albuterol podle potřeby, lisinopril
+
+Léky při propuštění:
+Inhalátor tiotropia denně, albuterol podle potřeby, lisinopril denně, snižování dávky prednisonu, azithromycin na dokončení pěti dnů, noční oxygenoterapie.
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Akutní hypoxemické respirační selhání
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Bdělý a orientovaný.
+Úroveň vědomí: Probuzený a pozorný.
+Fyzická aktivita: Chodí, stabilní chůze.
+
+Pokyny pro propuštěného pacienta:
+Užívejte všechny léky podle předpisu, dokončete antibiotika, vyhýbejte se kouření a v případě zhoršení dušnosti nebo horečky se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

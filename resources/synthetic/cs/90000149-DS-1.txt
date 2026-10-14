@@ -1,0 +1,64 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Horečka a kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Tento ___letý muž byl přijat s horečkou, produktivním kašlem a dušností po převozu z ___. Zobrazovací vyšetření hrudníku vzbudilo podezření na možnou pneumonii a pacientovi byla zahájena intravenózní antibiotická léčba, podáván kyslík a tekutiny.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+HLAVA, OČI, UŠI, NOS, KRK: vlhká sliznice
+KRK: pružný
+PLÍCE: rozptýlené chrůpky v bazích
+BŘICHO: měkké, netendrovatelné
+KONČETINY: teplé, mírný edém
+NEUROLOGIE: bdělý, orientovaný
+
+Významné výsledky:
+ZÁVĚR: Skvrnitá opacita v dolní části pravé plíce, mírná.
+NÁLEZY: Velikost srdce je normální. Přítomen je malý pravostranný výpotek. Levá plíce je průhledná. Kostní struktury jsou neporušené.
+
+Léky při propuštění:
+1. Amlodipin 5 mg denně
+2. Atorvastatin 20 mg večer
+3. Antibiotická léčba bez amoxicilinu, kterou má pacient dokončit doma
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Akutní hypoxické respirační selhání
+Hypertenze
+Hyperlipidémie
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Stav aktivity: Chodí, je soběstačný.
+
+Pokyny při propuštění:
+Byli jste hospitalizováni s horečkou a kašlem a léčeni antibiotiky a kyslíkem. Užívajte léky podle pokynů, odpočívejte, pijte tekutiny a navštivte doktora ___ kvůli opakovanému zobrazovacímu vyšetření.
+
+Pokyny pro kontrolu:
+___

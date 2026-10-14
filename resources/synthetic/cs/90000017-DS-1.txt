@@ -1,0 +1,62 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza:
+Chronické onemocnění ledvin, stadium 4
+Hypertenze
+Hypotyreóza
+Cholecystektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec s cévní mozkovou příhodou.
+
+Fyzikální vyšetření:
+Krk: pružný, bez známek zvýšeného žilního tlaku
+SRDCE: nepravidelný rytmus, bez šelestu
+Břicho: měkké, bez citlivosti
+Končetiny: mírný otok oboustranně
+Neurologické vyšetření: bdělý, bez ložiskových příznaků
+
+Stručný popis hospitalizace:
+Pacientka se dostavila s několikdenní anamnézou bušení srdce a únavy. EKG prokázalo fibrilaci síní s rychlou komorovou frekvencí. Byla jí podána metoprolol a frekvence se zlepšila. Zahájila se antikoagulační léčba s dávkou upravenou podle funkce ledvin. Hladina kreatininu zůstala na výchozí úrovni. Kardiolog z ___ doporučil ambulantní sledování. Byla stabilizovaná a po kontrole s ___ propuštěna domů.
+
+Léky při přijetí:
+Amlodipin 5 mg denně
+Levotyroxin 50 mcg denně
+
+Léky při propuštění:
+1. Metoprolol sukcinát 50 mg denně
+2. Apixaban 2,5 mg dvakrát denně
+3. Amlodipin 5 mg denně
+4. Levotyroxin 50 mcg denně
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Fibrilace síní s rychlou komorovou odpovědí
+Chronické onemocnění ledvin, stadium 4
+
+Stav při propuštění:
+Duševní stav: jasný a srozumitelný
+Fyzická aktivita: schopna chůze, soběstačná
+
+Pokyny při propuštění:
+Byli jste přijati s rychlým, nepravidelným srdečním tepem. Užívajte nové léky přesně podle předpisu a vyhýbejte se protizánětlivým lékům proti bolesti. V případě bolesti na hrudi, mdlob, krvácení nebo zhoršení otoků se vraťte. V případě dotazů volejte ___ a vezměte si tento seznam s sebou na kontrolu do ___.
+
+Pokyny pro další sledování:
+___

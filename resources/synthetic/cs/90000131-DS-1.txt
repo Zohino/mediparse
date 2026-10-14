@@ -1,0 +1,61 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé dolní části břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+___letý muž s postupující bolestí v pravé dolní části břicha, nevolností a mírnou horečkou, odeslán z ___ na chirurgické vyšetření.
+
+Anamnéza předchozích onemocnění:
+Sezónní alergie
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: T 38,0 °C, TF 96, TK 128/78
+Celkový stav: nepohodlný, při vědomí
+Hlava, uši, oči, nos, hrdlo: vlhká sliznice
+Břicho: citlivé v pravé dolní části, obranné napětí
+Končetiny: teplé, bez otoků
+
+Stručný popis průběhu hospitalizace:
+Pacient byl doktorem ___ převezen na operační sál, kde podstoupil laparoskopickou apendektomii bez komplikací. Dobře snášel běžnou stravu, bolest byla kontrolována perorálními léky a byl propuštěn domů první den po operaci.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg denně
+2. Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Akutní apendicitida
+
+Stav při propuštění:
+Úroveň vědomí: Při vědomí a komunikativní
+Stav aktivity: Ambulantní, soběstačný
+
+Pokyny pro propuštěného pacienta:
+Byl jste léčen pro apendicitidu chirurgickým zákrokem. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze po dobu dvou týdnů a v případě horečky, zvracení nebo zhoršení bolesti kontaktujte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

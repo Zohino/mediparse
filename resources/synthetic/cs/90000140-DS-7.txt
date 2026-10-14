@@ -1,0 +1,82 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Otok a zarudnutí levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s hypertenzí, přeložen z ___ s třídenní anamnézou bolestivého, zarudlého, teplého levého podkolení a horečkou. Příznaky se objevily ___ po drobném oděru při zahradničení.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Životní funkce:
+T 38,0 °C, TF 88, TK 132/78, SpO2 97 % při dýchání okolního vzduchu
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Normální
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Erytém na levé holeni, teplé
+Kůže:
+Výrazný erytém
+Neurologické vyšetření:
+Intaktní
+Pulzy:
+Hmatné
+
+Významné výsledky:
+Počet leukocytů 13,2 při přijetí, pokles na 8,4 při propuštění. Kreatinin stabilní. Hemokultury bez růstu. Ultrazvuk levé nohy neprokázal hlubokou žilní trombózu, pouze subkutánní edém.
+
+Stručný popis hospitalizace:
+Léčen pro celulitidu levé nohy intravenózním vancomycinem vzhledem k alergii na penicilin. Erytém byl ohraničen perem a postupně ustupoval. Vyšetřen doktorem ___ ohledně péče o ránu v ___. Horečka ustoupila a pacient přešel na perorální doxycyklin.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Doxycyklin 100 mg dvakrát denně po dobu dalších sedmi dnů
+2. Lisinopril 10 mg jednou denně
+3. Atorvastatin 20 mg večer
+4. Paracetamol podle potřeby proti bolesti
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida levé dolní končetiny
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+Fyzická aktivita:
+Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen pro kožní infekci nohy. Užijte antibiotika podle předpisu a udržujte nohu ve zvýšené poloze. Vraťte se, pokud se zarudnutí rozšíří, horečka se vrátí nebo se bolest zhorší. V případě dotazů volejte ___ a co nejdříve se objednejte k ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé horní části břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ se stížnostmi na bolest v pravé horní části břicha, nevolnost a horečku, které trvaly dva dny a objevily se po konzumaci tučného jídla. Byl odeslán svým praktickým lékařem z ___ na urgentní vyšetření a zobrazovací metody.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka měla žlučové kameny; další podrobnosti jsou zaznamenány v ___.
+
+Fyzikální vyšetření:
+Plíce: Bez patologických nálezů na obou stranách.
+SRDEČNÍ: Pravidelný rytmus.
+BŘICHO: Měkké, citlivé v pravé horní části.
+Končetiny: Bez otoků.
+KŮŽE: Teplá a suchá.
+Neurologické: Při vědomí, bez ložiskových příznaků.
+
+Významné výsledky:
+ZOBRAZOVACÍ METODY: Ultrazvukové vyšetření v ___ prokázalo žlučové kameny, ztluštění stěny žlučníku a tekutinu v okolí žlučníku.
+ZÁVĚR: Nález odpovídá akutnímu zánětu žlučníku, bez dilatace žlučových cest. Počet bílých krvinek mírně zvýšený, jaterní enzymy a lipáza v normě, kreatinin stabilní.
+
+Stručný popis hospitalizace:
+Byla zahájena intravenózní antibiotická a infuzní terapie. Chirurgický tým provedl laparoskopickou cholecystektomii dne ___ bez komplikací. Bolest se zmírnila, pacient začal přijímat běžnou stravu a toleroval ji. Řezné rány zůstaly čisté a suché. Před propuštěním byla domluvena kontrola u doktora ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně
+2. Atorvastatin 20 mg perorálně večer
+3. Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti
+4. Docusate 100 mg dvakrát denně během užívání léků proti bolesti
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Stabilní a v pohodlí.
+Úroveň vědomí: Při vědomí a komunikativní.
+Stav aktivity: Chodí samostatně.
+
+Pokyny pro propuštění:
+Byl jste léčen pro zánět žlučníku, který byl odstraněn. Udržujte řezné rány čisté a suché a několik týdnů se vyhýbejte zvedání těžkých předmětů. V případě horečky, zhoršení bolesti, zvracení nebo žluté kůže volejte na kliniku na číslo ___.
+
+Pokyny pro kontrolu:
+___

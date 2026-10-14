@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Sulfonamidové léky
+
+Hlavní potíže:
+Zarudnutí a horečka pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient je muž s hypertenzí, který se dostavil po dvou dnech trvající horečce, zarudnutí a otoku pravé dolní končetiny. Byl vyšetřen v ___ svým ošetřujícím lékařem, doktorem ___, který ho poslal na pohotovost do ___, protože se zarudnutí šířilo a měl zimnici.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+DNA
+Operace hernie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s cévní mozkovou příhodou. Žádné známé kožní onemocnění.
+
+Fyzikální vyšetření:
+Celkový stav: Nepohodlný, při vědomí, s horečkou
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Plíce: Čisté na obou stranách
+Končetiny: Teplé, oteklé, zarudlá holeně pravé nohy s citlivým okrajem
+Neurologické: Bez ložiskových příznaků, chodí stabilně
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Počet bílých krvinek zvýšený, převaha neutrofilů. Biochemické vyšetření bez významných odchylek, kreatinin v normě. Laktát v normě. CRP zvýšené. Venózní duplexní vyšetření pravé nohy neprokázalo přítomnost krevní sraženiny. Krevní kultury odebrané při přijetí zůstaly negativní při finálním vyhodnocení.
+
+Stručný průběh hospitalizace:
+Byl přijat s celulitidou pravé nohy a zahájena intravenózní antibiotická léčba. Okraj zarudnutí byl ohraničen a denně se zmenšoval. Krevní kultury neprokázaly růst bakterií. Bolest byla kontrolována paracetamolem. Byl vyšetřen ___ ohledně stavu rány a doktorem ___ ohledně doporučení pro elevaci končetiny. Do ___ neměl horečku, chodil samostatně a dobře snášel perorální antibiotika, takže byl propuštěn domů.
+
+Léky při přijetí:
+Lisinopril denně
+Allopurinol denně
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších sedmi dnů
+2. Paracetamol 650 mg každých šest hodin podle potřeby na bolest
+3. Lisinopril denně
+4. Allopurinol denně
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+
+Stav při propuštění:
+Stabilní, bez horečky, chodí samostatně, při vědomí a orientovaný.
+
+Pokyny při propuštění:
+Byl jste léčen na kožní infekci nohy. Dokončete všechny antibiotické tablety. Při sezení držte nohu ve zvýšené poloze a sledujte ohraničený okraj. Vraťte se, pokud se zarudnutí rozšíří, horečka se vrátí nebo se bolest zhorší. V případě dotazů volejte doktora ___ na čísle ___. Udržujte pokožku hydratovanou a vyhýbejte se škrábání.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s bušením srdce a závratěmi, odeslán z ___ kliniky, zjištěna fibrilace síní s rychlou komorovou odpovědí, přijat za účelem kontroly srdeční frekvence.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin, stadium 3
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s cévní mozkovou příhodou
+
+Fyzikální vyšetření:
+Vitalní funkce: TF 110, TK 128/76, bez horečky
+Hlava, oči, uši, nos, hrdlo: Normální
+Plíce: Čisté
+SRDEČNÍ: Nepravidelný rytmus
+Břicho: Měkké, netendrové
+
+Významné výsledky:
+Kreatinin v základní hodnotě. Draslík v normě. Troponin dvakrát negativní. Echokardiografie provedená v ___ ukázala zachovanou ejekční frakci a mírné zvětšení levé síně.
+
+Stručný popis hospitalizace:
+Srdeční frekvence byla kontrolována perorálním metoprololem a ustálila se pod 100. Po konzultaci s ___ týmem byla zahájena antikoagulační léčba. Funkce ledvin zůstala stabilní a dávky byly upraveny s ohledem na renální clearance. Pacient chodil bez potíží.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Metoprolol sukcinát 50 mg jednou denně
+Apixaban 2,5 mg dvakrát denně
+Atorvastatin 20 mg večer
+Lisinopril vysazen do kontroly na klinice
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Ambulantní, soběstačný
+
+Pokyny pro propuštěného pacienta:
+Byli jste přijati s rychlým srdečním tepem. Užívajte nové léky každý den. Vraťte se, pokud se objeví mdloby, bolest na hrudi nebo krvácení. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

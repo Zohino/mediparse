@@ -1,0 +1,64 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo pokoje: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé dolní části břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+___letý muž s hypertenzí se dostavil s třídenní bolestí v pravé dolní části břicha, nevolností a mírnou horečkou. Bolest začala v oblasti ___ a zhoršovala se při pohybu. Vyšetření provedené v ___ prokázalo akutní apendicitidu.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlný, bez horečky
+Hlava, uši, oči, nos, hrdlo:
+Vlhké sliznice
+Břicho:
+Bolestivá pravá dolní část břicha, obranné napětí
+Neurologické vyšetření:
+Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Počet leukocytů 14,2 při přijetí, normalizován na 8,1. CT vyšetření břicha prokázalo rozšířený, zánětem postižený apendix bez perforace. Histopatologické vyšetření z ___ bylo v době propuštění ještě v řešení. Kreatinin 0,9.
+
+Stručný popis hospitalizace:
+Byl převezen na operační sál doktorem ___ a podstoupil laparoskopickou apendektomii bez komplikací. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a intravenózní antibiotika byla po operaci vysazena. Propuštěn domů ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Paracetamol 650 mg každých šest hodin podle potřeby na bolest. Dokusát 100 mg dvakrát denně během užívání opioidů.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní apendicitida
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+
+Pokyny pro propuštění:
+Byl jste léčen pro apendicitidu a byl vám odstraněn apendix. Vyhýbejte se zvedání těžkých předmětů po dobu čtyř týdnů. Sprchování je v pořádku, koupele ne. V případě horečky, zhoršení bolesti, zvracení nebo zarudnutí rány volejte ___.
+
+Pokyny pro kontrolu:
+___

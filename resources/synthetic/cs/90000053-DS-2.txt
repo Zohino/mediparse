@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s třemi dny trvajícím bušením srdce a únavou, odeslán z ___ poté, co byl zjištěn nepravidelný puls. Popíral horečku nebo kašel. Rentgen hrudníku neodhalil pneumonii. EKG prokázalo rychlý nepravidelný rytmus. Rychlost byla regulována a pacient byl přijat k monitorování.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+HLAVA, OČI, UŠI, NOS, KRK: Normocefalický, vlhké sliznice.
+PLÍCE: Při auskultaci oboustranně čisté.
+KONČETINY: Teplé, bez otoků.
+KŮŽE: Intaktní, bez vyrážky.
+NEUROLOGIE: Bdělý, bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Leukocyty 7,2, hemoglobin 13,8, trombocyty 210, sodík 139, draslík 4,2, kreatinin 0,9, glukóza 148, troponin dvakrát negativní, odebráno v ___.
+ZÁVĚR:
+Rentgen hrudníku bez ložiskové konsolidace nebo výpotku. Echokardiogram prokázal zachovanou ejekční frakci a mírné zvětšení levé síně.
+
+Stručný průběh hospitalizace:
+Pacient byl přijat na oddělení s telemetrickým monitorováním a zahájena léčba metoprololem pro regulaci srdeční frekvence s dobrým výsledkem. Po zhodnocení rizika byla zahájena antikoagulační léčba apixabanem. Glukóza byla regulována pomocí jeho domácího režimu a klouzavé škály. Kardiolog z ___ ho vyšetřil a zajistil ambulantní monitorování prostřednictvím ___. Pacient zůstal stabilní a byl připraven k propuštění domů.
+
+Léky při přijetí:
+Podle seznamu z ___: metformin 1000 mg dvakrát denně, lisinopril 10 mg denně, atorvastatin 20 mg večer.
+
+Léky při propuštění:
+Metoprolol succinat 50 mg denně, apixaban 5 mg dvakrát denně, metformin 1000 mg dvakrát denně, lisinopril 10 mg denně, atorvastatin 20 mg večer. Pokračujte ve všech lécích podle pokynů.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Fibrilace síní s rychlou ventrikulární odpovědí
+Diabetes mellitus 2. typu
+
+Stav při propuštění:
+Stabilní
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli rychlému nepravidelnému srdečnímu tepu. Užijte si nový lék na ředění krve každý den a nepřestávejte ho užívat. Kontrolujte si hladinu cukru v krvi jako dříve. V případě bolesti na hrudi, mdlob nebo krvácení volejte ___ nebo se vraťte.
+
+Pokyny pro další postup:
+___

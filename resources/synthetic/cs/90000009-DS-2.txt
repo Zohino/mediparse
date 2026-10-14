@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha.
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie dne ___.
+
+Anamnéza současného onemocnění:
+___ letá žena se známými žlučovými kameny, která se dostavila do ___ s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením, trvajícími dva dny. Bolest začala po jídle, byla stálá a vyzařovala do zad. Byla vyšetřena svým ošetřujícím lékařem v ___ a odeslána na pohotovost dne ___. Popírala horečku, žloutenku nebo změny ve stolici. Ultrazvukové vyšetření prokázalo ztluštělou stěnu žlučníku s kameny a byla přijata na chirurgické oddělení.
+
+Anamnéza předchozích onemocnění:
+Žlučové kameny
+Hypertenze
+Apendektomie v ___.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s rakovinou prsu ve věku ___.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Vitalní funkce: bez horečky, stabilní, dýchá vlastní dech
+Celkový stav: komfortní, bez známek úzkosti
+Hlava, uši, oči, nos, hrdlo: bez žloutenky, vlhké sliznice
+Krk: pohyblivý
+Končetiny: teplé, bez otoků
+Neurologický stav: bdělá, pohybuje všemi končetinami, stabilní chůze
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Mírná leukocytóza s normálními jaterními enzymy a bilirubinem. Lipáza v normálním rozmezí. Kreatinin normální.
+ZÁVĚR: Ultrazvukové vyšetření provedené dne ___ prokázalo mnohočetné žlučové kameny, ztluštění stěny žlučníku a malé množství tekutiny v okolí žlučníku, bez dilatace žlučových cest. Nález odpovídá akutní cholecystitidě.
+
+Stručný průběh hospitalizace:
+Byla přijata, podána intravenózní tekutiny, antibiotika a léky proti bolesti, a byla ponechána bez možnosti orální příjmu potravy. Lékař ___ ji vyšetřil a byla odeslána na operační sál dne ___ na nekomplikovanou laparoskopickou cholecystektomii. Po operaci se dobře zotavovala, obnovila běžnou stravu a bolest byla kontrolována orálními léky. Antibiotika byla po operaci vysazena. Pokračovalo se v podávání léků na krevní tlak, které užívala doma. V době propuštění byla domluvena kontrola s ___ a lékařem ___, mohla samostatně chodit a dobře snášela stravu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Multivitamin denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně.
+2. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti.
+3. Oxykodon 5 mg perorálně každých šest hodin podle potřeby proti silné bolesti, omezené množství.
+4. Docusate 100 mg perorálně dvakrát denně při užívání opioidů.
+5. Multivitamin denně.
+
+Způsob propuštění:
+Domů s péčí ___
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a komunikativní.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl laparoskopicky odstraněn. Můžete se sprchovat a nechat na řezné rány stékat mýdlovou vodu, ale nesmíte je namáčet. Po dobu několika týdnů se vyhýbejte zvedání těžších předmětů, než je deset kilogramů. V případě horečky, zhoršení bolesti břicha, zvracení, žloutnutí kůže nebo zarudnutí či výtoku z řezných ran kontaktujte ordinaci doktora ___ na čísle ___.
+
+Pokyny pro kontrolní vyšetření:
+___

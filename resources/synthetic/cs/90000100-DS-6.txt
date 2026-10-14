@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a otok pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient je muž, který se dostavil do ___ se třemi dny trvajícím zčervenáním, hřejivostí a otokem pravé dolní končetiny po drobném oděru. Uvádí, že večer před přijetím měl horečku a zimnici. Byl vyšetřen v ___ na pohotovosti, dostal jednu dávku perorálního antibiotika a byl odeslán zpět, když se zčervenání rozšířilo za vyznačenou hranici.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Obezita
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez akutních potíží.
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice, bez známek žloutenky.
+Břicho:
+Měkké, netendrovatelné, neztuhlé.
+Končetiny:
+Na pravé holeni je dobře ohraničená oblast erytému, hřejivost a mírný edém; pulzace zachována.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Počet bílých krvinek mírně zvýšený na 12,4 s převahou neutrofilů. Hemoglobin 14,1, počet krevních destiček v normě. Sodík 138, draslík 4,1, bikarbonát 25, kreatinin 0,9. Laktát 1,2. Kultivace krve odebraná v ___ po dvou dnech nevykazovala růst. Ultrazvuk pravé nohy prokázal otok měkkých tkání a žádnou hlubokou žilní trombózu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu pěti dalších dnů.
+2. Lisinopril 10 mg jednou denně.
+3. Atorvastatin 20 mg před spaním.
+4. Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti, dodal ___.
+
+Plán propuštění:
+Domů, s naplánovanými návštěvami od ___
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a reagující.
+Stav aktivity:
+Chodí, soběstačný.
+
+Pokyny pro propuštění:
+Byl jste léčen na kožní infekci pravé nohy. Užijte antibiotika, dokud nedokončíte celou kúru. Při sezení držte nohu ve zvýšené poloze a sledujte okraj zčervenání. V případě, že se zčervenání rozšíří, vrátí se horečka nebo se zhorší bolest, vraťte se do ___ nebo zavolejte na ___. Prosím, navštivte svého ošetřujícího lékaře v ___ tento týden.
+
+Pokyny pro kontrolu:
+___

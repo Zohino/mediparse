@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letá žena s postupující bolestí v pravém horním kvadrantu břicha, nevolností a horečkou, odeslána z ___ poté, co ultrazvuk odhalil žlučové kameny. Byla přijata pro akutní cholecystitidu a chirurgické vyšetření.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na nevolnost, negativní na žloutenku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez horečky.
+Břicho: Měkké, mírná citlivost v pravém horním kvadrantu, jizvy čisté.
+KŮŽE: Bez žloutenky.
+Neurologické: Bdělá, orientovaná.
+PULSY: Hmatné po celém těle.
+
+Důležité výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Zvýšený počet bílých krvinek, mírně zvýšený bilirubin, normální hladina lipázy.
+ZÁVĚR: Ultrazvuk provedený v ___ ukázal žlučové kameny, ztluštění stěny žlučníku a tekutinu v okolí žlučníku, bez dilatace žlučových cest.
+
+Stručný průběh hospitalizace:
+Byla léčena intravenózními antibiotiky a infuzemi, poté podstoupila komplikacemi nezatíženou laparoskopickou cholecystektomii dne ___ pod vedením doktora ___. Bolest ustoupila, dieta byla postupně rozšiřována a pacientka byla propuštěna do domácí péče ve stabilizovaném stavu.
+PŘECHODNÁ OTÁZKY:
+Návštěva chirurgické ambulance v ___ za dva týdny; kontrola konečné histologické zprávy.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Levothyroxin 50 mcg denně.
+
+Léky při propuštění:
+Lisinopril 10 mg denně; levothyroxin 50 mcg denně; paracetamol 650 mg každých šest hodin podle potřeby na bolest; dokusát 100 mg dvakrát denně během užívání opioidů.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární: Akutní cholecystitida s cholelitiázou
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí: Bdělá a komunikativní.
+
+Pokyny pro propuštěného pacienta:
+Byla léčena pro zánět žlučníku chirurgickým zákrokem. Udržujte jizvy čisté a suché, vyhýbejte se těžké fyzické námaze a v případě horečky, zvracení nebo zhoršení bolesti volejte ___ nebo se vraťte do nemocnice.
+
+Pokyny pro kontrolu:
+___

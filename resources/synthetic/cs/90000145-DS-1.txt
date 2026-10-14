@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Pacientka s bolestí v pravém horném kvadrantu břicha, která se zhoršuje již dva dny, s nevolností a zvracením po jídle. Byla odeslána lékařem ___ a vyšetřena v ___. Ultrazvukové vyšetření prokázalo žlučové kameny a ztluštělou stěnu žlučníku. Byla přijata k operaci.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Vitalní funkce: T 37,2 °C, TF 88, TK 132/78, dechová frekvence 16, SpO2 98 % při dýchání okolním vzduchem
+Celkový stav: Nepohodlí, bez akutní distrese
+Hlava, oči, uši, nos, hrdlo: Bez ikteru, vlhké sliznice
+
+Stručný popis průběhu hospitalizace:
+Byla zahájena intravenózní antibiotická a infuzní terapie, poté podstoupila nekomplikovanou cholecystektomii, kterou provedl tým ___. Bolest byla kontrolována perorálními léky a dieta byla postupně rozšiřována. Do ___ již mohla chodit a dobře snášela běžnou stravu.
+PŘECHODNÁ OTÁZKY:
+Výsledky patologického vyšetření čekají z laboratoře ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 50 mcg denně
+
+Léky při propuštění:
+1. Paracetamol 650 mg perorálně každých šest hodin podle potřeby na bolest
+2. Lisinopril 10 mg denně
+3. Levotyroxin 50 mcg denně
+4. Dokusát 100 mg dvakrát denně
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl odstraněn. Můžete se sprchovat, ale nevystavujte řezné rány dlouhodobému namáčení. Vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů. V případě horečky, zhoršení bolesti, zvracení nebo žluté kůže se vraťte. Dodržujte plán kontroly u ___.
+
+Pokyny pro kontrolní vyšetření:
+___

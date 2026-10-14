@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Žena s postupující bolestí v pravém horním kvadrantu břicha a nevolností po jídle, trvající dva dny. Vyšetřena v ___ a převezena z ___ kvůli ultrazvukovému vyšetření, které odhalilo žlučové kameny.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Žlučové kameny
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s onemocněním žlučníku
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Normální
+Krk: Pohyblivý
+Plíce: Čisté na obou stranách
+Břicho: Měkké, mírná citlivost, jizvy čisté
+Končetiny: Bez otoků
+Kůže: Teplá, suchá
+
+Významné výsledky:
+Ultrazvuk odhalil mnohočetné žlučové kameny a ztluštění stěny žlučníku. Počet bílých krvinek byl při přijetí mírně zvýšený, později se normalizoval. Jaterní enzymy v normě.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Počet bílých krvinek v normě, kreatinin v normě.
+
+Stručný popis hospitalizace:
+Pacientka byla přijata s akutní cholecystitidou, podána tekutiny a antibiotika, podstoupila nekomplikovanou laparoskopickou cholecystektomii pod vedením doktora ___. Bolest byla pod kontrolou, dieta byla postupně rozšiřována a pacientka byla propuštěna domů s doporučením kontroly u ___.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Lisinopril denně, jako dříve. Atorvastatin večer, jako dříve. Paracetamol podle potřeby proti bolesti. Docusate při užívání léků proti bolesti.
+
+Způsob propuštění:
+Domů s instrukcemi od ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Fyzická aktivita: Chodí samostatně
+
+Instrukce pro propuštěného pacienta:
+Byl vám odstraněn žlučník. Udržujte jizvy čisté a suché, vyhýbejte se těžké fyzické námaze po dobu několika týdnů a v případě horečky, zvracení nebo zhoršení bolesti břicha kontaktujte ___.
+
+Instrukce pro kontrolu:
+___

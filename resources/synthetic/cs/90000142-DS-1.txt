@@ -1,0 +1,64 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s dlouhodobou hypertenzí, odeslán z ___ s dvoutýdenní se zhoršujícím otokem kotníku a únavou.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin, stadium 4
+Hypertenze
+DNA
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Unavený, v pohodě
+Plicní systém:
+Čistý
+Břicho:
+Měkké, netendrovatelné
+Neurologické vyšetření:
+Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Kreatinin blízko výchozí hodnoty, ___. Draslík mírně zvýšený, po léčbě se zlepšil. Hemoglobin stabilní. V moči zjištěn protein.
+
+Léky při přijetí:
+Amlodipin
+Allopurinol
+
+Léky při propuštění:
+Furosemid denně na otok
+Amlodipin jako dříve
+Allopurinol, snížená dávka
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý
+Úroveň aktivity: Chodí samostatně
+
+Pokyny pro propuštění:
+Byl jste léčen na přebytek tekutin. Každé ráno se važte, omezte příjem soli, užívejte léky podle seznamu a v případě návratu otoku volejte ___.
+
+Pokyny pro kontrolu:
+___

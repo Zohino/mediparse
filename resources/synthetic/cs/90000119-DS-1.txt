@@ -1,0 +1,78 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___ letá žena s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po jídle, trvajícími dva dny. Vyšetřena v ___ a převezena k vyšetření žlučníku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Žlučové kameny
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Vitalní funkce:
+bez horečky, stabilní
+Celkový stav:
+nepohodlí, bdělá
+Krk:
+pružný
+Plíce:
+čisté
+Břicho:
+bolestivé v pravém horním kvadrantu
+Končetiny:
+bez otoků
+KŮŽE:
+teplá, suchá
+PULSY:
+hmatné
+
+Významné výsledky:
+Ultrazvuk prokázal žlučové kameny se ztluštěním stěny žlučníku. Počet bílých krvinek mírně zvýšený, jaterní enzymy v normě. Vzorek odeslán do ___.
+
+Stručný popis hospitalizace:
+Přijata s akutní cholecystitidou, zahájena léčba antibiotiky a infuzní terapií. Podstoupila nekomplikovanou laparoskopickou cholecystektomii dne ___. Strava postupně rozšiřována, bolest kontrolována perorálními léky, propuštěna ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril
+Levotyroxin
+
+Léky při propuštění:
+1. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti
+2. Lisinopril denně
+3. Levotyroxin denně
+4. Dokusát dvakrát denně během užívání opioidů
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav: jasný a srozumitelný
+Fyzická aktivita: schopná chůze, soběstačná
+
+Pokyny pro propuštění:
+Byla jste hospitalizována s zánětem žlučníku, který byl odstraněn. Udržujte rány čisté a suché, vyhýbejte se nadměrné fyzické námaze a v případě horečky, zhoršení bolesti nebo zvracení volejte ___.
+
+Pokyny pro kontrolu:
+___

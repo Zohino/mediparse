@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s několikdenním produktivním kašlem, horečkou a zimnicí, odeslán ___ kvůli zhoršující se dušnosti. Rentgen hrudníku provedený v ___ ukázal opacitu v dolním laloku pravého plíce. Zahájena léčba antibiotiky.
+
+Anamnéza předchozích onemocnění:
+Fibrilace síní, užívá antikoagulancia
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Bez horečky, stabilní
+Celkový stav:
+Pohodlný
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Krk:
+Pružný
+Plíce:
+Krepity v dolní části pravé plíce
+Končetiny:
+Bez otoků
+Kůže:
+Teplá, suchá
+
+Významné výsledky:
+Počet bílých krvinek mírně zvýšený při přijetí, později se normalizoval. Rentgen hrudníku s konsolidací v dolním laloku pravé plíce. Krevní kultury bez růstu bakterií. Elektrolyty a kreatinin v normálních mezích.
+
+Stručný popis hospitalizace:
+Léčen pro pneumonii intravenózními antibiotiky, poté převeden na perorální léčbu, podávání kyslíku bylo postupně snižováno a ukončeno třetí den. Stav se udržoval pod kontrolou a pokračovala léčba antikoagulancii. Vyšetřen ___, propuštěn domů s doporučením kontrolní návštěvy u ___.
+
+Léky při přijetí:
+Apixaban, metoprolol, atorvastatin, lisinopril
+
+Léky při propuštění:
+1. Amoxicillin-klavulanát dvakrát denně po dobu pěti dalších dnů
+2. Apixaban dvakrát denně
+3. Metoprolol succinate denně
+4. Atorvastatin večer
+5. Lisinopril denně, dle pokynů ___
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie
+Fibrilace síní
+
+Stav při propuštění:
+Stabilní, schopný chůze
+Duševní stav:
+Bdělý a orientovaný
+
+Pokyny pro propuštěného pacienta:
+Byl jste léčen pro plicní infekci. Dokončete všechny antibiotika a pokračujte v užívání léků na ředění krve. V případě horečky, zhoršení dýchání nebo bolesti na hrudi volejte ___ nebo se vraťte na pohotovost a navštivte ___ do jednoho týdne.

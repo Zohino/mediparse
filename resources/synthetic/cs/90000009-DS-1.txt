@@ -1,0 +1,83 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___ letá žena s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po jídle, trvajícími dva dny. Byla vyšetřena v ___ a převezena sem dne ___ k chirurgickému vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Žlučové kameny
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s onemocněním žlučníku, léčena v ___
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlí, bez horečky
+Hlava, oči, uši, nos, hrdlo:
+Bez žloutenky
+Krk:
+Pružný
+Plíce:
+Čisté na obou stranách
+SRDEČNÍ:
+Pravidelný rytmus
+Končetiny:
+Bez otoků
+KŮŽE:
+Teplá a suchá
+Neurologické:
+Bdělost, bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 13,2, mírně zvýšené hodnoty ALT a AST, celkový bilirubin 1,4. Ultrazvuk odhalil žlučové kameny, zesílenou stěnu žlučníku a tekutinu v okolí žlučníku.
+
+Stručný popis hospitalizace:
+Byla přijata, podána intravenózní tekutiny a antibiotika, a dne ___ podstoupila nekomplikovanou cholecystektomii. Bolest byla kontrolována perorálními léky. Dobře snášela běžnou stravu a byla propuštěna domů ve stabilizovaném stavu, s kontrolou v ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg jednou denně.
+2. Atorvastatin 20 mg před spaním.
+3. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest.
+4. Docusate 100 mg dvakrát denně během užívání opioidů.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a reagující.
+Fyzická aktivita:
+Chodí, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni s zánětem žlučníku, který byl odstraněn. Udržujte malé řezy čisté a suché. Po dobu čtyř týdnů nezvedejte nic těžkého. V případě horečky, zhoršení bolesti, zvracení nebo žluté kůže volejte ___.
+
+Pokyny pro kontrolu:
+___

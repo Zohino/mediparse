@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila do ___ s třemi dny trvajícím zhoršujícím se otokem nohou, únavou a špatnou chutí k jídlu. Byla vyšetřena v ___, kde krevní testy ukázaly oslabenou funkci ledvin. Neměla horečku ani produktivní kašel a rentgen hrudníku neodhalil pneumonii. Byla odeslána na další vyšetření a sledování.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Fibrilace síní s antikoagulační terapií
+Hypertenze
+Anémie
+Pod dohledem nefrologa v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Unavená, ale v pohodě, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice, bez žloutenky.
+Břicho: Měkké, netendrovatelné, neztuhlé, normální střevní zvuky.
+Končetiny: Mírný bilaterální edém chodidel, teplé a dobře prokrvené.
+
+Významné výsledky:
+NÁLEZY:
+Kreatinin zvýšený na 3,4 s eGFR 14, blízko její předchozí hodnotě zjištěné v ___. Draslík 5,6 při přijetí, opakované měření 4,9 po léčbě. Hemoglobin 9,1. Rentgen hrudníku bez patologických nálezů, kromě mírné vaskulární kongesce. EKG ukázalo nepravidelný rytmus s kontrolovanou frekvencí.
+
+Stručný průběh hospitalizace:
+Byla léčena dietou s nízkým obsahem draslíku, sorbentem a mírnou diurézou, což vedlo ke zlepšení otoku a elektrolytové rovnováhy. Funkce ledvin se stabilizovala a nefrolog ji vyšetřil v ___. Frekvence zůstala kontrolovaná při domácí medikaci. Hladina glukózy byla regulována obvyklým režimem.
+PŘECHODNÉ PROBLÉMY:
+Opakované vyšetření krevních parametrů za jeden týden. Návštěva u nefrologa v ___.
+
+Léky při přijetí:
+Metformin, apixaban, metoprolol, furosemid, amlodipin (seznam z ___)
+
+Léky při propuštění:
+1. Apixaban 2,5 mg dvakrát denně
+2. Metoprolol succinat 50 mg denně
+3. Furosemid 40 mg denně
+4. Amlodipin 5 mg denně
+5. Sevelamer s jídlem
+Metformin byl vysazen.
+
+Způsob propuštění:
+Domů s domácí péčí
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Přetížení tekutinami
+Hyperkalémie
+
+Stav při propuštění:
+Úroveň vědomí: Bdělá a komunikativní.
+Stav aktivity: Chodí s pomocí chodítka.
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli otoku a vysoké hladině draslíku. Každé ráno se važte a volejte ___, pokud se vaše váha zvýší o tři libry. Omezte příjem soli a potravin s vysokým obsahem draslíku. Užívajte léky podle seznamu a docházejte na všechny schůzky s ___.
+
+Pokyny pro další postup:
+___

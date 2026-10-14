@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Horečka a kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Tento ___letý muž se dostavil do ___ s horečkou, produktivním kašlem a dušností, které začaly před ___ dny. Zobrazovací vyšetření hrudníku vzbudilo obavy z možné pneumonie, proto byl přijat k pozorování, hydrataci a dalšímu vyšetření. Při přijetí byly životní funkce stabilní, s výjimkou mírné horečky.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Gastroezofageální reflux
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: pohodlný, bdělý
+Hlava, oči, uši, nos, hrdlo: vlhké sliznice
+Břicho: měkké, netendrovatelné
+Končetiny: teplé, bez otoků
+PULSY: hmatné bilaterálně
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala mírnou leukocytózu. Rentgen hrudníku provedený ___ ukázal skvrnitou neprůhlednost v dolním laloku pravého plíce. Opakované laboratorní vyšetření ___ ukázalo zlepšení počtu bílých krvinek a normální hladinu kreatininu.
+NÁLEZY:
+Skvrnitá neprůhlednost v dolním laloku pravého plíce, malý výpotek chybí.
+
+Stručný průběh hospitalizace:
+Pan ___ byl léčen perorálními antibiotiky (levofloxacin) a podpůrnou léčbou pro předpokládanou respirační infekci. Jeho horečka ustoupila během dvou dnů a jeho saturace kyslíkem zůstala normální při dýchání okolního vzduchu. Dobře snášel stravu a chodil samostatně. Prohlédl ho Dr. ___ a bylo zjištěno, že je připraven k propuštění domů.
+PROBLÉMY PŘI PŘECHODU:
+Opakované rentgenové vyšetření hrudníku za šest týdnů.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Levofloxacin 500 mg denně po dobu dalších tří dnů
+Acetaminofen 650 mg každých šest hodin podle potřeby
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní bronchitida
+Hypertenze
+
+Stav při propuštění:
+Stabilní a zlepšený.
+Úroveň vědomí: Bdělý a komunikativní.
+
+Pokyny pro propuštění:
+Byli jste přijati s horečkou a kašlem a po léčbě antibiotiky se váš stav zlepšil. Dokončete všechny léky, pijte dostatek tekutin a odpočívejte. Pokud se horečka, bolest na hrudi nebo dušnost vrátí, zavolejte Dr. ___ nebo na kliniku na čísle ___.
+
+Pokyny pro kontrolu:
+___

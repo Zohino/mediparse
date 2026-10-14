@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bušení srdce, kašel, horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s diagnostikovanou fibrilací síní, odeslaná doktorem ___ po třech dnech trvající horečce, produktivním kašli a zrychleném srdečním tepu. Při příjezdu do ___ byla zjištěna rychlá fibrilace síní.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Osteoartróza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka, která prodělala mrtvici.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: Horečka, nepravidelný a rychlý srdeční tep.
+Celkový stav: Unavená, necítí se dobře.
+Hlava, oči, uši, nos, hrdlo: Suché sliznice.
+Krk: Pohyblivý.
+Plíce: Chropy na pravé dolní části.
+Břicho: Měkké, netendrové.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Vitalní funkce: Bez horečky, srdeční tep v normě.
+Celkový stav: Cítí se dobře.
+Plíce: Čisté.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek v normě, kreatinin stabilní, draslík v normě.
+ZÁVĚR:
+Na rentgenovém snímku, který vyhodnotil ___, je patrná opacita v pravém dolním laloku plic.
+
+Stručný průběh hospitalizace:
+Byla léčena v ___ pro pneumonii pravého dolního laloku plic pomocí antibiotik a intravenózních tekutin, horečka ustoupila do třetího dne. Srdeční tep se stabilizoval pomocí metoprololu a pokračovala se antikoagulační léčba.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Opakovaný rentgenový snímek hrudníku za šest týdnů; kontrola u ___.
+
+Léky při přijetí:
+Metoprolol, apixaban, levotyroxin
+
+Léky při propuštění:
+Metoprolol sukcinát denně, apixaban dvakrát denně, levotyroxin každé ráno a perorální antibiotikum k dokončení léčby.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Fibrilace síní s rychlou ventrikulární odpovědí
+
+Stav při propuštění:
+Duševní stav: Bdělá a orientovaná.
+Úroveň vědomí: Probuzená a pozorná.
+Fyzická aktivita: Chodí samostatně.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni s horečkou a zrychleným srdečním tepem. Užijte všechny léky podle pokynů, pijte dostatek tekutin a v případě bolesti na hrudi, mdlob nebo zhoršení dušnosti se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

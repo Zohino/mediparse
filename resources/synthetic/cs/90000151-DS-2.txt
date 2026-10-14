@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s několik let trvajícím zhoršujícím se otokem kotníku a únavou, odeslán z jeho ordinace v ___ poté, co laboratorní výsledky ukázaly abnormální hodnoty. Uváděl sníženou chuť k jídlu a menší množství moči během jednoho týdne, poprvé vyšetřen v ___.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na únavu a otok. Žádná bolest na hrudi ani horečka.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Chronické onemocnění ledvin
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí, léčena v ___
+
+Fyzikální vyšetření:
+Celkový stav:
+Unavený, ale v pohodlí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Končetiny:
+Mírný bilaterální otok s prohlubní
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Kreatinin zvýšený nad výchozí hodnotu, draslík mírně zvýšený, bikarbonát nízký. Hemoglobin mírně snížený. Vyšetření moči ukázalo přítomnost bílkovin bez známek infekce. Ultrazvuk ledvin bez významných nálezů, kromě malých echogenních ledvin.
+
+Stručný popis průběhu hospitalizace:
+Byl mu podán mírný diuretikum a jeho léky byly upraveny. Funkce ledvin se zlepšila a draslík se normalizoval po dietologickém poradenství. Nefrolog ho vyšetřil v ___ a souhlasil s plánem léčby. Hladina glukózy zůstala pod kontrolou. Otok se zmenšil a před propuštěním z ___ chodil samostatně.
+
+Léky při přijetí:
+Lisinopril, metformin, atorvastatin
+
+Léky při propuštění:
+Furosemid 20 mg denně, atorvastatin večer, inzulin glargin před spaním. Přerušit podávání lisinoprilu a metforminu do doby, než bude provedena kontrola funkce ledvin. Přidán amlodipin 5 mg denně.
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí: Bdělý a komunikativní
+
+Pokyny pro propuštěného pacienta:
+Byli jste přijati s otokem nohou. Každé ráno se zvažte, omezte příjem soli a tekutin a vyhýbejte se protizánětlivým lékům proti bolesti. Volejte na ___, pokud se otok nebo váha zvýší, nebo pokud budete močit mnohem méně.
+
+Pokyny pro kontrolu:
+___

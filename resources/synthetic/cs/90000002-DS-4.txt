@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: UROLOGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé oblasti boku
+
+Významný chirurgický nebo invazivní zákrok:
+Cystoskopie s umístěním pravostranného ureterálního stentu v ___
+
+Anamnéza současného onemocnění:
+Pacient se dostavil s třídenní se zhoršující se bolestí v pravé oblasti boku a nevolností. Zobrazovací vyšetření v ___ ukázalo obstrukční kámen v močovodu s mírnou hydronefrózou. Byl převezen do ___ na urologické vyšetření a přijat za účelem kontroly bolesti.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ledvinovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlný, ale bez známek intoxikace, leží v klidu.
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice.
+Kůže:
+Teplá, suchá.
+Neurologické vyšetření:
+Bdělý, bez ložiskových příznaků.
+
+Významné výsledky:
+Vyšetření moči ukázalo mírné množství krve bez nitritů. Kreatinin byl při přijetí mírně zvýšený, ale poté se zlepšil. Počet bílých krvinek v normě. CT vyšetření prokázalo pět milimetrů velký proximální kámen v pravém močovodu.
+VÝSLEDKY VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Kreatinin 1,0, draslík 4,1, počet bílých krvinek 7,2.
+
+Stručný popis hospitalizace:
+Byl přijat, podávány intravenózní tekutiny a analgetika, a bez komplikací mu byl zaveden stent. Bolest ustoupila a pacient toleroval stravu. Kultivace moči byla negativní. Byl propuštěn se stentem a pokynem, aby se dostavil na kontrolu k Dr. ___ do ___.
+PŘECHODNÁ OTÁZKY:
+Plánuje se odstranění stentu a definitivní léčba kamene.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Tamsulosin 0,4 mg večer. Oxykodon 5 mg každých šest hodin podle potřeby na bolest. Senna dvakrát denně.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Obstrukční kámen v pravém močovodu
+Hydronefróza
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a komunikativní.
+Fyzická aktivita:
+Chodí, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni s ledvinovým kamenem a byl vám zaveden stent. Pijte dostatek tekutin a užívejte léky podle pokynů. V případě horečky, nekontrolované bolesti nebo neschopnosti močit se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

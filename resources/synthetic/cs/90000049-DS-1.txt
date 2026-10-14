@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel, horečka, dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s několikdenním produktivním kašlem, horečkou a dušností. Zobrazovací vyšetření prokázala pneumonii. Měl také fibrilaci síní s rychlou frekvencí. Přeložen z ___ za účelem další péče.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Dlouhodobé kouření
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Vitalní funkce: TF 98, TK 126/74, SpO2 93 % na vzduchu
+Celkový stav: Dobrý
+Krk: Pohyblivý
+Břicho: Měkké
+Končetiny: Bez otoků
+Neurologické vyšetření: Bez ložiskových příznaků
+PULSY: Hmatné
+
+Významné výsledky:
+Leukocyty 14,2, laktát 1,8. Krevní plyny: pH 7,34, pCO2 56, pO2 68, bikarbonát 30. Troponin negativní (dvě měření). Rentgenové snímky zkontrolovány s ___.
+ZÁVĚR: Konsolidace v dolním laloku pravého plíce s hyperinflací plic a sploštěním bránice.
+
+Léky při přijetí:
+Tiotropium denně. Inhalátor s albuterolem podle potřeby. Aspirin 81 mg.
+
+Léky při propuštění:
+Metoprolol tartrát 25 mg dvakrát denně. Apixaban 5 mg dvakrát denně. Levofloxacin 750 mg denně po dobu pěti dnů. Tiotropium denně. Albuterol podle potřeby.
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pneumonie
+Fibrilace síní
+
+Stav při propuštění:
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen na plicní infekci a nepravidelný srdeční rytmus. Užijte všechny léky podle předpisu, včetně antibiotik. V případě horečky, zhoršení dušnosti nebo bušení srdce se vraťte do ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letý muž odeslán z ___ s dvoudenní se zhoršující bolestí v pravém horním kvadrantu břicha, nevolností a mírnou horečkou. Bolest se objevovala po konzumaci tučných jídel. Zobrazovací vyšetření naznačovalo zánět žlučníku s kameny, proto byl pacient přijat k operaci.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v roce ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Citlivost v pravém horním kvadrantu břicha, jinak bez potíží, bez horečky a stabilní.
+Plíce: čisté na obou stranách
+Břicho: měkké, mírně citlivé, jizvy čisté a suché
+Končetiny: teplé, bez otoků
+Neurologické vyšetření: bdělý, bez ložiskových příznaků
+PULSY: hmatné a symetrické
+
+Významné výsledky:
+Ultrazvuk z ___ prokázal žlučové kameny, zesílenou stěnu žlučníku a tekutinu v okolí žlučníku. Počet bílých krvinek byl při přijetí mírně zvýšený a po operaci se normalizoval. Jaterní enzymy byly mírně zvýšené, poté se zlepšily. Patologické vyšetření prokázalo chronický a akutní cholecystitidu bez malignity.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+
+Léky při propuštění:
+1. Paracetamol podle potřeby proti bolesti, až čtyřikrát denně
+2. Oxykodon krátkodobě pouze při silné bolesti
+3. Lisinopril denně
+4. Atorvastatin večer
+5. Dokusát při užívání opioidů
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Hypertenze
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí: bdělý a orientovaný
+Stav aktivity: pohyblivý, soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen pro zánět žlučníku, který byl odstraněn. Udržujte jizvy čisté a suché a několik týdnů se vyhýbejte těžké fyzické námaze. V případě horečky, zvracení, žloutnutí kůže nebo zhoršení bolesti kontaktujte doktora ___. Navštivte ambulanci na adrese ___, jak bylo dohodnuto.
+
+Pokyny pro kontrolu:
+___

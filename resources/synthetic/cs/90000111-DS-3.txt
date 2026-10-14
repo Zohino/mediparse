@@ -1,0 +1,81 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Sulfonamidové léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Paní ___ je žena s hypertenzí a hypotyreózou, která se dostavila do ___ s pětidenním kašlem s vykašláváním hlenu, horečkou a dušností. Nejprve ji vyšetřil její ošetřující lékař, Dr. ___, v ___, který předepsal ___, ale bez zlepšení. Rentgenové vyšetření hrudníku v ___ ukázalo skvrnitou neprůhlednost v dolním laloku pravého plíce, což vyvolalo obavy z možné pneumonie nebo atelektázy. Na pohotovosti měla horečku a mírnou hypoxii, laktát byl v normě. Popírala bolesti na hrudi nebo zvracení. Byla jí podána intravenózní tekutina a byla přijata na interní oddělení pod dohledem Dr. ___ k dalšímu vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Osteoartróza kolen
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce: T 38,2 °C, TF 98, TK 132/78, dechová frekvence 20, SpO2 93 % při dýchání okolním vzduchem
+Celkový stav: Unavená, ale v pohodlí.
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice, čistá ústní dutina a hltan.
+Plíce: Chropy na pravé straně hrudníku.
+Srdce a cévy: Pravidelný rytmus, bez šelestu.
+Břicho: Měkké, netendrové, neztuhlé.
+Končetiny: Teplé, bez otoků.
+Neurologické vyšetření: Bdělá, orientovaná, bez ložiskových příznaků.
+
+Stručný popis hospitalizace:
+Byla přijata do ___ a empiricky léčena ceftriaxonem a azithromycinem pro předpokládanou respirační infekci. Krevní kultury z ___ zůstaly negativní. Její potřeba kyslíku se zlepšila do druhého dne hospitalizace a horečka ustoupila. Hlen byl odeslán do laboratoře v ___ a ukázal normální mikroflóru. Opakovaný rentgen hrudníku, který vyhodnotil Dr. ___, prokázal zlepšení ventilace. Její hypertenze byla léčena lisinoprilem doma a levotyroxin byl pokračován. Elektrolyty byly podle potřeby doplněny. Fyzikální terapeut ji vyšetřil a povolil propuštění domů. Byla převedena na perorální antibiotika, dobře snášela běžnou stravu a mohla se samostatně pohybovat. Bylo domluveno sledování u jejího ošetřujícího lékaře, Dr. ___, a v ambulanci. Byla poučena o hydrataci, odpočinku a dokončení celé kúry antibiotik před opuštěním oddělení.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 75 mcg denně
+Acetaminofen 500 mg podle potřeby na bolest kolene
+Multivitamin denně
+Vápník s vitamínem D denně
+
+Léky k užívání po propuštění:
+Lisinopril 10 mg perorálně denně
+Levotyroxin 75 mcg perorálně denně
+Doxycyklin 100 mg perorálně dvakrát denně po dobu dalších pěti dnů
+Acetaminofen 500 mg perorálně každých šest hodin podle potřeby při horečce nebo bolesti kolene
+Guaifenesin 600 mg perorálně dvakrát denně podle potřeby při kašli
+Multivitamin, jedna tableta denně
+Vápník s vitamínem D, jedna tableta denně
+Recepty byly odeslány do lékárny ___.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní infekce dolních cest dýchacích
+Sekundární:
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a reagující.
+Úroveň aktivity:
+Schopný chůze, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli kašli a horečce, léčeni antibiotiky a váš stav se zlepšil. Užívejte všechny léky podle předpisu a dokončete užívání doxycyklinu. Pijte dostatek tekutin a odpočívejte. V případě návratu horečky, zhoršení dýchání, vzniku bolesti na hrudi nebo neschopnosti udržet tekutiny se vraťte do ___ nebo kontaktujte svého lékaře. Vyhýbejte se kouři a namáhavé fyzické aktivitě, dokud se stav nezlepší. V případě jakýchkoli dotazů ohledně léků nebo termínů kontaktujte ___.
+
+Pokyny pro kontrolu:
+___

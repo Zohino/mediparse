@@ -1,0 +1,78 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Slabost a snížená chuť k jídlu
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s chronickým onemocněním ledvin, odeslaná z ___ po několika dnech únavy, nevolnosti a sníženém příjmu potravy.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na nevolnost. Jinak negativní.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus
+CHOPN
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vyšetřena při přijetí a znovu před propuštěním.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: Bez horečky, stabilní, dýchá vlastní dech
+Celkový stav: Unavená, ale v pohodě
+Hlava, uši, oči, nos, hrdlo: Suché sliznice
+Plíce: Rozptýlené chrůpky
+SRDEČNÍ: Pravidelný rytmus
+Břicho: Měkké, netendrovatelné
+KONČETINY: Bez otoků
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala zvýšenou hladinu kreatininu a mírnou hyperkalémii. Rentgen hrudníku bez akutních změn. Zvýšená hladina glukózy při přijetí.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Hladina kreatininu se zlepšila, draslík v normě.
+
+Stručný průběh hospitalizace:
+Byla jí podávána tekutina a vysazeny nefrotoxické léky, hladina kreatininu se vrátila k výchozí hodnotě. Hladina glukózy byla regulována inzulínem a chrůpky ustoupily po použití inhalátoru. Dobře snášela stravu a byla propuštěna ___.
+PŘECHODNÁ OTÁZKY:
+Kontrolní vyšetření chemie krve za jeden týden v ___.
+
+Léky při přijetí:
+Metformin, inhalátor, lisinopril
+
+Léky při propuštění:
+1. Inzulín glargin, jednou denně
+2. Inhalátor s albuterolem podle potřeby
+3. Vysadit lisinopril, dokud nebudou zopakována laboratorní vyšetření
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes
+Chronická obstrukční plicní nemoc
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Duševní stav: Bdělá a orientovaná
+Úroveň vědomí: Bdělá
+Stav aktivity: Chodí, soběstačná
+
+Pokyny pro propuštění:
+Byla jste přijata kvůli slabosti a dehydrataci. Pijte tekutiny, vyhýbejte se protizánětlivým lékům proti bolesti a volejte ___, pokud se potíže vrátí.
+
+Pokyny pro další postup:
+___

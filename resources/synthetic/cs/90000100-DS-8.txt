@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel, horečka a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s několikdenním produktivním kašlem, horečkou a dušností, odeslán svým praktickým lékařem z ___ poté, co vyšetření hrudníku vyvolalo obavy. Byl vyšetřen v ___ dne ___ a zjištěna u něj hypoxie a horečka, proto byl přijat k dalšímu vyšetření a léčbě.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Unavený, mírně dušný, bez známek akutní tíže.
+Hlava, uši, oči, nos, hrdlo: Suché sliznice, bez kandidózy.
+Břicho: Měkké, netendrovatelné.
+Končetiny: Teplé, bez otoků.
+
+Významné výsledky:
+___: Počet leukocytů 14,2, hemoglobin 13,1, kreatinin 0,9. Rentgen hrudníku ukázal konsolidaci v dolním laloku pravého plíce. Kultivace krve bez růstu po dvou dnech. Kultivace sputa prokázala normální orální flóru. Testy na chřipku a COVID negativní. Laktát 1,4 při přijetí.
+
+Stručný průběh hospitalizace:
+Byl diagnostikován s komunitně získanou pneumonií a léčen ceftriaxonem a azithromycinem, poté byl po odeznění horečky převeden na perorální antibiotika. Podávání kyslíku bylo postupně snižováno až na pokojovou teplotu do ___. Dobře jedl a chodil s pomocí. Vyšetřen ___ z hlediska mobility.
+PŘECHODNÁ OTÁZKY:
+Opakované rentgenové vyšetření hrudníku za šest týdnů v ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dalších dnů, paracetamol podle potřeby na horečku, guaifenesin podle potřeby na kašel. Pokračovat v užívání lisinoprilu a atorvastatinu jako dříve. Lékárna ___.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Stav aktivity: Ambulantní, soběstačný.
+
+Pokyny pro propuštění:
+Byl jste zde léčen na plicní infekci. Užijte antibiotika až do konce. Odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršení dýchání nebo bolesti na hrudi volejte ___. V případě zhoršení příznaků se vraťte na pohotovost.
+
+Pokyny pro kontrolu:
+___

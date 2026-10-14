@@ -1,0 +1,79 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s hypertenzí, odeslán z ___ s několikdenní anamnézou zrychleného srdečního tepu, únavy a mírné dušnosti při námaze.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Obstrukční spánková apnoe
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s cévní mozkovou příhodou
+
+Fyzikální vyšetření:
+Nepravidelný, arytmický puls, plíce čisté.
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Krk:
+Bez známek zvýšeného žilního tlaku
+Břicho:
+Měkké, netendrové
+KONČETINY:
+Bez otoků
+KŮŽE:
+Teplá, suchá
+Neurologické vyšetření:
+Orientovaný, bez ložiskových příznaků
+
+Významné výsledky:
+EKG prokázalo nepravidelný rytmus bez P vln. Dvakrát negativní troponin. Normální hladina draslíku.
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Rentgen hrudníku bez akutních nálezů.
+
+Stručný popis hospitalizace:
+Zjištěna nová fibrilace síní s rychlou frekvencí, kontrolovaná metoprololem a po konzultaci s ___ zahájena antikoagulační terapie.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Opakované echokardiografické vyšetření jako ambulantní pacient.
+
+Léky při přijetí:
+Lisinopril, atorvastatin
+
+Léky při propuštění:
+1. Lisinopril denně
+2. Atorvastatin večer
+3. Metoprolol dvakrát denně
+4. Apixaban dvakrát denně
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Supraventrikulární tachyarytmie, nově vzniklá
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Orientovaný a reagující.
+Stav aktivity: Chodící, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zrychlenému, nepravidelnému srdečnímu tepu. Užijte si nové léky podle pokynů, vyhněte se vynechávání dávek a dodržujte termín návštěvy u ___.
+
+Pokyny pro kontrolu:
+___

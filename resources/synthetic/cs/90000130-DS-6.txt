@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila do ___ se stížností na bolest v pravém horním kvadrantu břicha, nevolnost a zvracení po konzumaci tučných jídel, trvající dva dny. Byla odeslána svým lékařem z ___ a vyšetřena na pohotovosti.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Bez horečky, stabilní.
+Celkový stav:
+Komfortní, bez známek úzkosti.
+Krk:
+Pružný.
+Břicho:
+Měkké, citlivé v pravém horním kvadrantu, bez známek peritoneálního dráždění.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Zvýšený počet bílých krvinek, mírně zvýšený bilirubin, normální hladina lipázy.
+ZÁVĚR:
+Žlučové kameny s ztluštěním stěny žlučníku a pericholecystickou tekutinou, vyhodnoceno radiologem ___.
+
+Stručný popis hospitalizace:
+Pacientka podstoupila laparoskopickou cholecystektomii dne ___ pod vedením doktora ___ bez komplikací. Bolest byla pod kontrolou, dieta byla postupně rozšiřována a pacientka ji dobře snášela. Antibiotika byla podána v plné dávce. Pacientka byla propuštěna domů ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně; levotyroxin.
+
+Léky při propuštění:
+Paracetamol 650 mg každých šest hodin podle potřeby; oxykodon 5 mg pouze při silné bolesti; pokračovat v užívání lisinoprilu a levotyroxinu.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav: Bdělá a orientovaná.
+Fyzická aktivita: Chodí, soběstačná.
+
+Pokyny pro propuštěného pacienta:
+Byl vám odstraněn žlučník. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze po dobu dvou týdnů a v případě horečky, zvracení nebo zhoršení bolesti břicha kontaktujte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letá žena s žlučovými kameny se dostavila s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po konzumaci tučných jídel, trvajícími dva dny. Byla převezena z ___ poté, co ultrazvuk odhalil ztluštění stěny žlučníku. Popírala horečku, žloutenku nebo bolest na hrudi.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Císařský řez
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav: Bdělá, v pohodlí, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Bez žloutenky, vlhké sliznice.
+Krk: Pohyblivý.
+Břicho: Měkké, mírná citlivost v pravém horním kvadrantu, neztuhlé.
+PULSY: Hmatatelné a symetrické po celém těle.
+
+Významné výsledky:
+Ultrazvuk odhalil žlučové kameny, ztluštění stěny a malé množství tekutiny v okolí žlučníku. Počet bílých krvinek byl při přijetí 13,2 a zlepšil se na 8,1. Jaterní enzymy, bilirubin a lipáza byly v normě. Intraoperační cholangiografie neukázala žádné reziduální kameny.
+
+Stručný popis hospitalizace:
+Byla přijata na oddělení ___, dostávala intravenózní tekutiny a antibiotika a byla převezena na operační sál doktorem ___ dne ___. Operace proběhla bez komplikací. Bolest byla kontrolována perorálními léky, dobře snášela běžnou stravu a byla propuštěna domů ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 75 mcg denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně.
+2. Levotyroxin 75 mcg perorálně každé ráno.
+3. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby na bolest.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Sekundární:
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí: Bdělá a komunikativní.
+Stav aktivity: Ambulantní, soběstačná.
+
+Pokyny pro propuštění:
+Byla jste hospitalizována kvůli zánětu žlučníku a byl vám odstraněn žlučník. Udržujte řezné rány čisté a suché. Vyhýbejte se zvedání těžkých předmětů po dobu čtyř týdnů. V případě horečky, zhoršení bolesti břicha, žloutnutí kůže nebo zarudnutí rány volejte ___. Navštivte ambulanci na adrese ___.
+
+Pokyny pro kontrolu:
+___

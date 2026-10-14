@@ -1,0 +1,58 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a mírná horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil po odeslání z ___ s pětidenním kašlem a horečkou. Vyšetření hrudníku v ___ neprokázalo známky pneumonie. Pacient uvádí, že nemá bolesti na hrudi, nevolnost ani že v poslední době necestoval.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Důležité výsledky:
+Rentgen hrudníku: plíce bez patologických změn, normální velikost srdce. Počet bílých krvinek mírně zvýšený při přijetí, při propuštění normální. Elektrolyty a kreatinin v normálních mezích. Vyšetření na respirační viry pozitivní na rinovirus.
+
+Stručný popis hospitalizace:
+Pacient přijat k pozorování a poskytnutí podpůrné péče. Léčen infuzemi, paracetamolem a inhalovanými bronchodilatátory. Horečka ustoupila během druhého dne. Vyšetřen ___ ohledně stavu okysličení krve, saturace zůstaly v normě. Konzultováno s ___ a pacient propuštěn.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně.
+2. Atorvastatin 20 mg perorálně večer.
+3. Guaifenesin 200 mg perorálně každých šest hodin podle potřeby při kašli.
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Virová infekce horních cest dýchacích
+Akutní bronchitida
+
+Stav při propuštění:
+Duševní stav: bdělý a orientovaný.
+Fyzická aktivita: schopný chůze, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni kvůli virové infekci dýchacích cest. Odpočívejte, pijte dostatek tekutin a užívejte léky podle seznamu. V případě horečky, dušnosti nebo bolesti na hrudi volejte ___ nebo se vraťte do nemocnice.
+
+Pokyny pro kontrolu:
+___

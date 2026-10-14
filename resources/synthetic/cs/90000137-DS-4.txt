@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zhoršující se dušnost
+
+Významné chirurgické zákroky nebo invazivní procedury:
+Žádné
+
+Anamnéza současného onemocnění:
+Jedná se o ___ letého muže s dlouhodobou anamnézou kouření, který byl přijat z ___ s třídenní anamnézou postupně se zhoršující dušnosti, sípání a produktivního kašle. Od ___ častěji používal inhalátor, ale bez úlevy.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin
+Atriální fibrilace
+Hypertenze
+Hyperlipidémie
+
+Fyzikální vyšetření:
+Vitalní funkce: bez horečky, saturace 91 % při dýchání okolním vzduchem
+Celkový stav: unavený, mluví krátkými větami
+Břicho: měkké, netendrovatelné
+Končetiny: bez otoků
+Neurologický stav: bdělý, bez ložiskových příznaků
+Pulz: nepravidelný
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM: kreatinin v normě, draslík v normě. Krevní plyny při přijetí vykazovaly mírnou respirační acidózu se zvýšeným bikarbonátem.
+ZÁVĚR: Hyperinflamované plíce, zploštělé bránice, bez ložiskové konsolidace nebo výpotku.
+NÁLEZY: Velikost srdce normální, bez plicního edému.
+
+Stručný popis hospitalizace:
+Byl léčen inhalovanými bronchodilatátory, systémovými kortikosteroidy a krátkodobou antibiotickou léčbou, s postupným zlepšením dechové funkce. Byla snižována dávka kyslíku. Srdeční frekvence byla udržována pod kontrolou pomocí domácí medikace. Dr. ___ upravil dávkování a pacient byl připraven k propuštění ___.
+
+Medikace při přijetí:
+Metoprolol, apixaban, amlodipin, inhalátor tiotropia, albuterol podle potřeby
+
+Medikace při propuštění:
+1. Metoprolol succinate denně
+2. Apixaban dvakrát denně
+3. Amlodipin denně
+4. Inhalátor tiotropia denně
+5. Prednison, snižování dávky po dobu pěti dnů
+6. Inhalátor albuterolu podle potřeby
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární:
+Chronické onemocnění ledvin
+Atriální fibrilace
+
+Stav při propuštění:
+Duševní stav: jasný a srozumitelný.
+Úroveň vědomí: bdělý a reagující.
+Fyzická aktivita: schopný chůze, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli problémům s dýcháním. Užijte všechny léky podle předpisu a dokončete snižování dávky kortikosteroidů. Přestaňte kouřit. V případě zhoršení dušnosti, horečky nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___ nebo kontaktujte kliniku na čísle ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka, produktivní kašel, dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pan ___ je ___letý muž, který se dostavil s třemi dny trvající horečkou, produktivním kašlem a zhoršující se dušností. Byl vyšetřen v ___ a odeslán na pohotovost, kde se u něj projevila hypoxie.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin, stadium 4
+Hypertenze
+DNA
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: T 38,4, TF 98, TK 138/76, dechová frekvence 22, SpO2 90 % při dýchání okolním vzduchem
+HLAVA, OČI, UŠI, NOS, KRK: Suché sliznice
+Končetiny: Mírný edém
+KŮŽE: Teplá, bez vyrážky
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků
+PULSY: Hmatné bilaterálně
+
+Významné výsledky:
+Rentgen hrudníku při přijetí ukázal konsolidaci v dolním laloku pravého plíce. Laboratorní výsledky z ___ ukazují leukocytózu a stabilní výchozí hodnoty kreatininu.
+LABORATORNÍ VÝSLEDKY PŘI PROPUŠTĚNÍ:
+Leukocyty 8,1, hemoglobin 11,2, kreatinin 3,1
+
+Stručný průběh hospitalizace:
+Byl léčen na komunitou získanou pneumonii pomocí ceftriaxonu a azithromycinu, poté byl převeden na perorální antibiotika. Podávání kyslíku bylo postupně snižováno, až se na třetí den mohl dýchat okolní vzduch. Funkce ledvin zůstala na výchozí úrovni. Byl sledován ___ a propuštěn domů ___.
+PŘECHODNÁ OTÁZKY:
+Dokončit léčbu antibiotiky. Opakovat rentgen hrudníku za šest týdnů.
+
+Léky při přijetí:
+Amlodipin 10 mg denně
+Allopurinol 100 mg denně
+
+Léky při propuštění:
+1. Amlodipin 10 mg perorálně denně
+2. Allopurinol 100 mg perorálně denně
+3. Amoxicilin-klavulanát 500 mg perorálně dvakrát denně po dobu pěti dnů
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní hypoxické respirační selhání
+Hypertenze
+DNA
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Ambulantní, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni s plicní infekcí a dostali jste antibiotika a kyslík. Užijte všechny léky podle předpisu, pijte dostatek tekutin, odpočívejte a v případě horečky, zhoršující se dušnosti nebo jakýchkoli dotazů se obraťte na ___.
+
+Pokyny pro kontrolu:
+___

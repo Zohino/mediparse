@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila s třemi dny trvajícím suchým kašlem, mírnou horečkou a únavou. Dříve v týdnu byla vyšetřena v ___ a poslána domů s doporučením odpočívat. Příznaky se zhoršily, proto ji rodina přivezla do ___ na vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Migréna
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Kůže:
+Teplá, suchá
+Neurologické vyšetření:
+Bdělá, bez ložiskových příznaků
+
+Stručný popis hospitalizace:
+Rentgenové vyšetření hrudníku bylo v pořádku a nebyly zjištěny známky pneumonie. Kašel byl připisován virové bronchitidě a zlepšil se po podání tekutin a odpočinku. Hladina kyslíku v krvi zůstala v normě. Vyšetřil ji ___ a povolil propuštění dne ___.
+
+Léky při přijetí:
+Lisinopril denně
+Levotyroxin denně
+
+Léky při propuštění:
+Pokračujte v užívání lisinoprilu a levotyroxinu jako dříve. Užijte guaifenesin podle potřeby na kašel. Acetaminofen lze užít na horečku. Lékárna v ___ má recepty.
+
+Způsob propuštění:
+Domů
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Jasný a srozumitelný
+Stav aktivity:
+Samostatná
+
+Pokyny pro propuštění:
+Byla léčena pro virové onemocnění s kašlem a horečkou. Pijte dostatek tekutin a odpočívejte doma. V případě dušnosti, bolesti na hrudi nebo trvalé vysoké horečky se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

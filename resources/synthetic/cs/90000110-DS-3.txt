@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient je muž, který se dostavil do ___ s několikdenními epizodami občasného bušení srdce a mírnou dušností při námaze. Příznaky se objevily po návštěvě rodiny v ___ a přes noc se zhoršily. Byl vyšetřen svým ošetřujícím lékařem, doktorem ___, který ho odeslal na pohotovost ___. Tam bylo zjištěno, že má nepravidelný, rychlý srdeční rytmus, a byl přijat k regulaci srdeční frekvence.
+PŘEHLED SYSTÉMŮ: Pozitivní nález na bušení srdce a únavu. Negativní nález na bolest na hrudi, horečku, synkopu.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Normální
+Krk: Pohyblivý, bez známek zvýšeného žilního tlaku
+SRDCE: Nepravidelný rytmus, bez šelestu
+BŘICHO: Měkké, netendrovatelné
+KONČETINY: Bez otoků
+KŮŽE: Teplá a suchá
+
+Významné výsledky:
+Dvakrát negativní troponin. Draslík 3,6, doplněn. TSH v normě. Hemoglobin a kreatinin v normálních mezích. EKG ukázalo nepravidelný, rychlý srdeční rytmus s frekvencí 130, bez ischemických změn.
+ZOBRAZOVACÍ METODY: Rentgen hrudníku provedený v ___ bez akutního procesu.
+ZÁVĚR: Žádná akutní kardiopulmonální abnormalita. Mírné zvětšení levé síně na echokardiogramu.
+
+Stručný průběh hospitalizace:
+Byl přijat na jednotku monitoringu srdeční činnosti a zahájena intravenózní léčba diltiazemem, poté převeden na perorální metoprolol s dobrou kontrolou srdeční frekvence. Po diskusi o riziku cévní mozkové příhody byla zahájena antikoagulační léčba. Echokardiogram provedený v ___ ukázal zachovanou funkci komor. Kardiolog, doktor ___, doporučil ambulantní sledování. Elektrolyty byly doplněny a funkce štítné žlázy byla normální. Jeho srdeční frekvence zůstala kontrolovaná a chodil bez příznaků. Sestra ___ poskytla instrukce ohledně léků. Byl propuštěn ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Aspirin 81 mg denně.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: fibrilace síní
+
+Stav při propuštění:
+Stabilní
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+
+Instrukce při propuštění:
+Byli jste hospitalizováni kvůli rychlému, nepravidelnému srdečnímu rytmu. Užívajte své nové léky každý den podle předpisu. Nepřestávejte užívat léky na ředění krve. V případě krvácení, mdlob, bolesti na hrudi nebo rychlého srdečního rytmu volejte svého lékaře na čísle ___. V případě zhoršení příznaků se vraťte do ___. Vyhýbejte se nadměrné konzumaci alkoholu.
+
+Instrukce pro další postup:
+___

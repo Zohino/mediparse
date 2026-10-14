@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel, horečka, dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient je muž, který se dostavil do ___ s pětidenní kašlem s vykašláváním hlenu, horečkou a dušností. Zobrazovací vyšetření hrudníku ukázalo konsolidaci v dolním laloku pravého plíce, což odpovídá pneumonii. Byl vyšetřen svým ošetřujícím lékařem v ___ dne ___ a byl odeslán na pohotovost, kde byla zahájena léčba antibiotiky a byl přijat do nemocnice.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Bdělý, mírně zrychlené dýchání, bez akutní tíže
+Břicho: Měkké, netendrovatelné, neztuhlé
+Kůže: Teplá, suchá, bez vyrážky
+
+Významné výsledky:
+Laboratorní výsledky při přijetí: zvýšený počet bílých krvinek (14,2) s převahou neutrofilů a mírně zvýšená hladina laktátu. Rentgen hrudníku v ___ prokázal opacitu v dolním laloku pravého plíce. Krevní kultury odebrané dne ___ nevykázaly růst bakterií. Opakované vyšetření počtu bílých krvinek v den propuštění bylo 8,1. Elektrolyty a kreatinin byly po celou dobu hospitalizace v normálních mezích.
+
+Stručný průběh hospitalizace:
+Byl léčen intravenózním ceftriaxonem a azithromycinem pro komunitně získanou infekci plic a jeho stav se postupně zlepšoval. Podávání kyslíku bylo postupně snižováno, až bylo na třetí den hospitalizace možné dýchat běžný vzduch. Horečka ustoupila a kašel se zmírnil. Byl vyšetřen týmem v ___ a mohl se samostatně pohybovat. Byl převeden na perorální antibiotika a propuštěn ve stabilizovaném stavu, s naplánovanou kontrolou v ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně.
+2. Atorvastatin 20 mg perorálně každou noc.
+3. Amoxicillin-klavulanát 875 mg perorálně dvakrát denně po dobu dalších pěti dnů.
+4. Guaifenesin 600 mg perorálně dvakrát denně podle potřeby na kašel.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie
+
+Stav při propuštění:
+Úroveň vědomí: Bdělý a komunikativní
+Stav aktivity: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni s infekcí plic a léčeni antibiotiky. Po propuštění prosím dokončete celou kúru antibiotik. Pijte dostatek tekutin a odpočívejte. V případě zhoršení dýchání, vysoké horečky nebo bolesti na hrudi volejte ___ nebo se vraťte na pohotovost. Dodržujte termín kontroly u ___ dne ___.
+
+Pokyny pro kontrolu:
+___

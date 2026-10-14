@@ -1,0 +1,83 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___ letý muž s postupně se zhoršující bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po jídle, trvajícími dva dny. Byl vyšetřen v ___, kde ultrazvuk odhalil žlučové kameny s zesílenou stěnou žlučníku, a byl převezen na chirurgické vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Vitalní funkce:
+T 37,2 °C, TF 88, TK 132/78, dechová frekvence 16, SpO2 97 % při dýchání okolního vzduchu
+Celkový stav:
+Nepohodlí, bez známek akutní tíže
+Hlava, oči, uši, nos, hrdlo:
+Bez ikteru skléry
+Břicho:
+Bolestivost v pravém horním kvadrantu, pozitivní Murphyho příznak
+Končetiny:
+Teplé, bez otoků
+Neurologické vyšetření:
+Orientovaný, bez ložiskových příznaků
+
+Významné výsledky:
+Laboratorní výsledky: zvýšený počet bílých krvinek (14,2) a mírně zvýšený bilirubin.
+NÁLEZY:
+Zobrazovací vyšetření v ___ prokázalo mnohočetné žlučové kameny, rozšířený žlučník s tekutinou v okolí žlučníku a normální společný žlučovod.
+
+Stručný popis hospitalizace:
+Byla zahájena intravenózní antibiotická a infuzní terapie a druhý den hospitalizace byl pacient převezen na operační sál, kde byla bez komplikací provedena cholecystektomie. Operaci zkontroloval Dr. ___. Bolest byla kontrolována, dieta byla postupně rozšiřována a pacient byl propuštěn ___ s dobrým snášením běžné stravy.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně denně
+2. Atorvastatin 20 mg perorálně večer
+3. Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti
+4. Dokusát 100 mg dvakrát denně během užívání opioidů
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida s cholelitiázou
+Sekundární:
+Hypertenze
+Hyperlipidémie
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Orientovaný a reagující
+Fyzická aktivita:
+Chodící, soběstačný
+
+Pokyny pro propuštění:
+Byl vám laparoskopicky odstraněn žlučník. Udržujte řezné rány čisté a suché a několik týdnů se vyhýbejte zvedání těžkých předmětů. V případě horečky, zhoršení bolesti břicha, zvracení nebo žluté kůže se vraťte. V případě jakýchkoli dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

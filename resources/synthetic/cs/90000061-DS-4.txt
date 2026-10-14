@@ -1,0 +1,79 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a produktivní kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s hypertenzí, která se dostavila do ___ se čtyřdenní horečkou, produktivním kašlem a bolestí na hrudi při dýchání. Doma u ní byla zjištěna hypoxie. Vyšetření hrudníku provedené ___ ukázalo pneumonii v dolním laloku pravého plíce. Byla vyšetřena doktorem ___ na pohotovosti a přijata k léčbě kyslíkem a antibiotiky.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Osteoartróza
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Životní funkce:
+T 38,0 °C, TF 92, TK 128/74, dechová frekvence 20, SpO2 95 % při dýchání okolním vzduchem
+Celkový stav:
+Unavená, ale v pohodlí, bez známek úzkosti
+Hlava, uši, oči, nos, hrdlo:
+Vlhké sliznice, čistá ústní dutina a hrdlo
+Břicho:
+Měkké, netendrovatelné, neztvrdlé
+Kůže:
+Teplá, bez vyrážek
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí, provedená ___, ukázala počet bílých krvinek 14,2 s převahou neutrofilů, laktát 1,4 a normální hladinu kreatininu. Kultivace krve neprokázala růst bakterií po pěti dnech. Rentgen hrudníku prokázal konsolidaci v dolním laloku pravé plíce bez výpotku. Opakované vyšetření před propuštěním ukázalo stabilní nález.
+
+Stručný popis průběhu hospitalizace:
+Byla léčena ceftriaxonem a azithromycinem, poté byla převedena na perorální antibiotika, jakmile ustoupila horečka a nebyla již závislá na kyslíku. Byla převezena z ___ na interní oddělení a sledována doktorem ___. V rodinné anamnéze měla matka CHOPN, ale pacientka nemá žádné známé plicní onemocnění. Její stav se postupně zlepšoval a dobře snášela chůzi bez desaturace.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Opakované vyšetření hrudníku za šest týdnů k potvrzení ústupu onemocnění.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Amoxicillin-klavulanát 875 mg dvakrát denně po dobu dalších pěti dnů
+2. Lisinopril 10 mg jednou denně
+3. Atorvastatin 20 mg před spaním
+4. Paracetamol 650 mg každých šest hodin podle potřeby při horečce
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Komunitně získaná infekce dolních cest dýchacích
+Akutní hypoxémie, vyřešena
+Hypertenze
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí:
+Bdělá a orientovaná, komunikativní
+Stav aktivity:
+Samostatná, chodí bez pomoci
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli plicní infekci a léčeni antibiotiky a kyslíkem. Dokončete užívání všech předepsaných antibiotik, pijte dostatek tekutin a odpočívejte. Pokud se vrátí horečka nebo se zhorší kašel, zavolejte na číslo ___ na ___. V případě dušnosti nebo bolesti na hrudi se vraťte do ___.
+
+Pokyny pro kontrolní vyšetření:
+
+___

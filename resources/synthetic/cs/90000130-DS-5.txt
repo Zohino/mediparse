@@ -1,0 +1,59 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: UROLOGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé oblasti boku a horečka
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Cystoskopie s umístěním stentu do pravého močovodu
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí se dostavila s třídenní bolestí v pravé oblasti boku a horečkou. Bylo zjištěno, že má v močovodu kámen, který ho ucpává a způsobuje infekci. Byla odeslána z kliniky ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Celkový stav:
+Při vědomí, v pohodě, bez akutní tíže
+PLÍCE:
+Při auskultaci oboustranně čisté
+Končetiny:
+Teplé, dobře prokrvené, bez otoků
+
+Významné výsledky:
+Vyšetření moči ukázalo pyurii a bakterie. Kultivace moči prokázala přítomnost Escherichia coli. CT vyšetření břicha provedené dne ___ ukázalo kámen o velikosti čtyři milimetry v pravém močovodu s mírnou hydronefrózou. Hladina kreatininu byla po celou dobu v normě.
+
+Stručný popis průběhu hospitalizace:
+Pacientka dostávala intravenózně ceftriaxon a tekutiny, což vedlo ke snížení horečky během dvou dnů. Urologické oddělení (___) bez komplikací zavedlo stent do močovodu. Antibiotika byla změněna na perorální léčbu podle výsledků kultivace. Pacientka dobře snášela stravu a byla propuštěna s doporučením ambulantní kontroly kvůli kameni.
+
+Léky při propuštění:
+Ciprofloxacin 500 mg dvakrát denně po dobu sedmi dnů. Paracetamol podle potřeby proti bolesti. Tamsulosin 0,4 mg večer.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Kámen v pravém močovodu, který ho ucpává
+Infekce močových cest se sepsí
+
+Stav při propuštění:
+Duševní stav:
+Při vědomí, srozumitelná
+Fyzická aktivita:
+Chodí, soběstačná
+
+Pokyny při propuštění:
+Pijte dostatek tekutin a dokončete celou kúru antibiotik. V případě horečky, silné bolesti v boku nebo zvracení se vraťte. V případě dotazů volejte na ___.
+
+Pokyny pro kontrolu:
+___

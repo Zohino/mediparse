@@ -1,0 +1,60 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s anamnézou hypertenze se dostavil s několikdenní anamnézou bušení srdce, únavy a závratí. Byl převezen z ___ poté, co elektrokardiogram ukázal nepravidelný rytmus a hladina glukózy byla výrazně zvýšená.
+
+Anamnéza předchozích onemocnění:
+Hypertenze, hyperlipidemie, apendektomie v ___.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Podle rodinné anamnézy měl otec v pozdějším věku pneumonii.
+
+Fyzikální vyšetření:
+Celkový stav: Bdělý, v pohodě, bez známek úzkosti.
+PLÍCE: Při auskultaci oboustranně čisté.
+KONČETINY: Teplé, bez otoků.
+KŮŽE: Intaktní, bez vyrážek.
+
+Významné výsledky:
+Při přijetí zvýšená hladina glukózy a normální elektrolyty. Troponin dvakrát negativní. Rentgen hrudníku z ___ ukázal čisté plíce a normální velikost srdce. Echokardiogram ukázal zachovanou ejekční frakci s mírným zvětšením levé síně. Funkce ledvin normální.
+
+Stručný průběh hospitalizace:
+Pacient byl přijat za účelem kontroly srdeční frekvence a monitorování. Diltiazem a metoprolol byly titrovány, což vedlo ke zlepšení srdeční frekvence. Po konzultaci s týmem ___ byla zahájena antikoagulační terapie. Jeho diabetes byl léčen inzulinem podle glykemického profilu a metforminu bylo pokračováno. Kontrola glukózy se zlepšila. Byl propuštěn ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně, atorvastatin 20 mg večer, metformin.
+
+Léky při propuštění:
+Metoprolol succinate 50 mg denně, apixaban 5 mg dvakrát denně, metformin 500 mg dvakrát denně, lisinopril 10 mg denně, atorvastatin 20 mg večer.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Fibrilace síní s rychlou ventrikulární odpovědí, diabetes mellitus
+
+Stav při propuštění:
+Stabilizovaný a zlepšený
+Stav aktivity: Samostatný a pohyblivý
+
+Pokyny pro propuštění:
+Užívejte léky podle předpisu. Denně si měřte hladinu cukru v krvi a veďte si záznamy. V případě rychlého bušení srdce, bolesti na hrudi, mdlob nebo krvácení se vraťte. V případě dotazů volejte ___. Vyhýbejte se nadměrné fyzické námaze, dokud to lékař nepovolí.
+
+Pokyny pro další postup:
+___

@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena, která se dostavila do ___ s třídenní anamnézou kašle, horečky a dušnosti. Její primární lékař, Dr. ___, ji poslal poté, co s ní telefonicky hovořil. Uváděla špatný apetit a únavu. Příznaky se objevily ___ a zhoršovaly se i přes odpočinek a dostatečný příjem tekutin doma.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Obezita
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Unavená, ale v pohodě, bez známek úzkosti
+Krk: Pohyblivý, bez zvětšených lymfatických uzlin
+Břicho: Měkké, netendrové, neztuhlé
+Končetiny: Teplé, bez otoků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Mírně zvýšený počet bílých krvinek, vysoká hladina glukózy, kreatinin v normě, laktát v normě.
+NÁLEZY:
+Rentgen hrudníku ukázal skvrnité zastínění v pravém dolním laloku. Opakované zobrazovací vyšetření neukázalo zhoršení. Vyšetření moči bylo bezvýznamné. Kultivace krve neukázala růst bakterií po dvou dnech.
+
+Stručný průběh hospitalizace:
+Byla přijata pro horečku a kašel. Vzhledem k zastínění v pravém dolním laloku byla zvažována pneumonie, i když obraz nebyl jednoznačný. Byla léčena azithromycinem a doxycyklinem kvůli její alergii a kyslíková terapie byla postupně snižována, dokud nedýchala pouze okolní vzduch. Hladina cukru v krvi byla regulována inzulínem. Byla vyšetřena ___ a propuštěna ___. Následná péče byla zajištěna s ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Inzulín glargin večer
+___ oční kapky
+
+Léky při propuštění:
+1. Doxycyklin 100 mg dvakrát denně po dobu pěti dalších dnů
+2. Lisinopril 10 mg jednou denně
+3. Inzulín glargin 20 jednotek před spaním
+4. Atorvastatin 20 mg večer
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Diabetes mellitus s hyperglykémií
+
+Stav při propuštění:
+Duševní stav: Bdělá a orientovaná
+Fyzická aktivita: Chodí, soběstačná
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni pro horečku a kašel. Užijte si antibiotika, dokud je nedokončíte, a každý den si měřte hladinu cukru v krvi. V případě zhoršení dýchání, vysoké horečky nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___ a vezměte si tento seznam s sebou na ___.
+
+Pokyny pro následnou péči:
+___

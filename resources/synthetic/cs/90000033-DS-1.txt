@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava a nadměrná žízeň
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s obezitou a hypertenzí, který se dostavil s potížemi trvajícími tři týdny – únava, časté močení a rozmazané vidění. Byl odeslán z jeho ordinace v ___ poté, co mu bylo naměřeno vysoké množství glukózy v krvi.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na žízeň a úbytek hmotnosti. Negativní nález na bolest na hrudi.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Obezita
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s vysokým krevním tlakem
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Plíce: Čisté na obou stranách
+Břicho: Měkké, netendrovatelné
+Končetiny: Bez otoků
+Kůže: Teplá a suchá
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Při přijetí zvýšená hladina glukózy. Výrazně zvýšená hodnota hemoglobinu A1c. Normální hladina sodíku a draslíku. Kreatinin v základní hodnotě. Vyšetření moči s glukózou, bez ketonů. Laboratorní výsledky z ___ byly zkontrolovány.
+ZÁVĚR:
+Rentgen hrudníku bez akutních nálezů.
+
+Stručný popis průběhu hospitalizace:
+Přetrvávající hyperglykémie vyvolala obavy z možné nové cukrovky, která však zatím nebyla potvrzena a čeká se na opakované testy. Pacient dostával infuze a inzulin v závislosti na hladině glukózy, přičemž se jeho stav zlepšoval. Byl poučen o změnách v dietě. Krevní tlak zůstal pod kontrolou. Byl vyšetřen týmem v ___ a propuštěn ve stabilizovaném stavu ___. dne hospitalizace.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně
+2. Atorvastatin 20 mg perorálně každou noc
+3. Glukometr s testovacími proužky, měřit nalačno každé ráno
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Hyperglykémie
+Hypertenze
+Obezita
+
+Stav při propuštění:
+Stabilizovaný a zlepšený.
+Úroveň vědomí: Bdělý a komunikativní.
+Stav aktivity: Chodí samostatně.
+
+Pokyny pro propuštění:
+Byli jste přijati s velmi vysokou hladinou cukru v krvi. Měřte si cukr každé ráno a zapisujte si hodnoty. Dodržujte dietu s nízkým obsahem cukru, pijte vodu a cvičte mírně. V případě zvracení, zmatenosti nebo silné žízně se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

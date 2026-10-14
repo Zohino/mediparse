@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s pěti dny trvající horečkou, produktivním kašlem a dušností. Vyšetřena v ___ a odeslána na pohotovost, kde byla hypoxická a zahájena léčba antibiotiky.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na třes a únavu. Jinak negativní.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Anémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Vitalní funkce: T 38,1, TF 98, TK 128/72, dechová frekvence 22, SpO2 91 % při dýchání okolním vzduchem
+Celkový stav: unavená, bez známek tísně
+Krk: pohyblivý
+PLÍCE: chrůpky v dolní části pravé plíce
+BŘICHO: měkké, netendrovatelné
+Končetiny: bez otoků
+Neurologické vyšetření: bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Leukocyty 15,2 s převahou neutrofilů, kreatinin 2,8 v základním stavu, laktát 1,4. Kultivace sputa odebraná ___ prokázala normální mikroflóru.
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku ukázal konsolidaci v dolním laloku pravé plíce.
+
+Stručný popis hospitalizace:
+Přeložena z ___ s hypoxií a horečkou. Léčena intravenózním ceftriaxonem a azithromycinem, podávání kyslíku bylo postupně snižováno během třetího dne hospitalizace. Horečka ustoupila. ___ byla převedena na perorální antibiotika a mohla bezpečně chodit.
+
+Léky při přijetí:
+Amlodipin 5 mg denně
+Železo denně
+
+Léky při propuštění:
+1. Amlodipin 5 mg perorálně jednou denně
+2. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu dalších tří dnů
+3. Železo jako dříve, vydáno v lékárně ___
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí: bdělá a komunikativní
+Stav aktivity: schopná chůze, soběstačná
+
+Pokyny pro propuštění:
+Byla jste hospitalizována s plicní infekcí a léčena antibiotiky. Dokončete všechny předepsané léky. V případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte. V případě dotazů volejte doktora ___ nebo navštivte ambulanci na adrese ___.
+
+Pokyny pro kontrolu:
+___

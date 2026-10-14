@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Chirurgie
+Datum přijetí: ___ Číslo pokoje: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___ letá žena s třídenní anamnézou bolesti v pravém horním kvadrantu břicha, nevolností a horečkou, odeslána z ___ kliniky po ultrazvukovém vyšetření, které odhalilo žlučové kameny a ztluštělou stěnu žlučníku. Pacientka popírala žloutenku nebo zvracení krve. Bolest začala po konzumaci tučného jídla a přes noc se zhoršila, což vedlo k tomu, že se pacientka dostavila na pohotovost ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav: Nepohodlí, ale bez známek intoxikace, leží v klidu
+Krk: Pohyblivý, bez rezistencí
+Břicho: Měkké, citlivé v pravém horním kvadrantu, pozitivní Murphyho příznak, bez odporu
+Končetiny: Teplé, bez otoků
+
+Významné výsledky:
+Ultrazvuk: mnohočetné žlučové kameny, ztluštění stěny žlučníku, malé množství tekutiny v okolí žlučníku, žlučovod normální šířky.
+LABORATORNÍ VÝSLEDKY PŘED PROPUŠTĚNÍM:
+Počet bílých krvinek 8,1, hemoglobin 12,9, počet krevních destiček 245, kreatinin 0,7, bilirubin 0,6, ALT a AST v normě.
+
+Stručný popis hospitalizace:
+Pacientka byla přijata, podána intravenózní tekutiny a antibiotika, a tým ___ ji převezl na operační sál, kde byla provedena nekomplikovaná laparoskopická cholecystektomie. Poté pacientka dobře snášela běžnou stravu, bolest byla kontrolována perorálními léky a horečka ustoupila. Pacientka chodila samostatně a byla propuštěna 2. den po operaci s naplánovanou kontrolou na ___.
+
+Léky při přijetí:
+Levotyroxin ___ mcg denně
+Lisinopril denně
+
+Léky při propuštění:
+1. Levotyroxin ___ mcg denně
+2. Lisinopril denně
+3. Paracetamol ___ mg každých šest hodin podle potřeby na bolest
+4. Dokusát dvakrát denně během užívání opioidů
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Sekundární:
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Dobrý
+Duševní stav: Bdělá a plně orientovaná
+Úroveň vědomí: Bdělá a komunikativní
+Stav aktivity: Chodí bez pomoci
+
+Pokyny pro propuštěného pacienta:
+Byla jste léčena pro zánět žlučníku, který byl laparoskopicky odstraněn. Udržujte řezné rány čisté a suché a několik týdnů se vyhýbejte zvedání těžkých předmětů. V případě horečky, zhoršení bolesti břicha, žloutnutí kůže nebo přetrvávajícího zvracení volejte ___ nebo se vraťte na ___, pokud jsou příznaky závažné.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,85 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Otok nohou a únava od ___
+
+Významnější chirurgické zákroky nebo invazivní procedury:
+Žádné
+
+Anamnéza současného onemocnění:
+Pacientka, která se dostavila do ___ s třídenní anamnézou zhoršujícího se otoku nohou a únavy. Uváděla snížené množství moči a špatný apetit. Popírala horečku, kašel nebo vykašlávání hlenu a zobrazovací vyšetření hrudníku neodhalilo pneumonii. Příznaky se objevily poté, co přestala užívat léky dne ___. Její primární lékař ji odeslal na další vyšetření a hospitalizaci.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin
+Hypertenze
+Anémie
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Bez horečky, mírně zvýšený krevní tlak, dobrá saturace kyslíkem při dýchání okolního vzduchu.
+Hlava, uši, oči, nos, hrdlo:
+Vlhké sliznice.
+Plíce:
+Čisté na obou stranách.
+Srdce:
+Pravidelný rytmus, bez šelestu.
+Břicho:
+Měkké, netendrové.
+Končetiny:
+Mírný bilaterální otok s prohlubněmi.
+Neurologické vyšetření:
+Orientovaná, bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Kreatinin blízko výchozí hodnoty, draslík v normě, hemoglobin stabilní na nízké úrovni, bikarbonát mírně snížený, sodík v normě.
+ZÁVĚR:
+Rentgen hrudníku s čistými plícemi a mírnou vaskulární kongescí. Ultrazvuk ledvin ukázal malé echogenní ledviny bez obstrukce, vyhodnoceno ___.
+
+Stručný průběh hospitalizace:
+Pacientka byla přijata pro objemové přetížení. Byla léčena intravenózními diuretiky s dobrým močením a zhubla několik kilogramů, což vedlo ke zlepšení otoku. Funkce ledvin zůstala stabilní a tým pro léčbu ledvin v ___ upravil její medikaci. Krevní tlak se zlepšil po obnovení jejího léčebného režimu. Její anémie byla sledována bez nutnosti transfuze. Byla vyšetřena nutričním terapeutem a ___ a byla připravena na propuštění dne ___.
+
+Léky při přijetí:
+Amlodipin, furosemid, acetát vápenatý a denní tableta železa.
+
+Léky při propuštění:
+1. Amlodipin 10 mg perorálně denně.
+2. Furosemid 40 mg perorálně dvakrát denně.
+3. Acetát vápenatý s jídlem.
+4. Tableta železa denně.
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin s objemovým přetížením
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Orientovaná a komunikativní.
+Fyzická aktivita:
+Chodí, soběstačná.
+
+Pokyny pro propuštění z nemocnice:
+
+Byli jste hospitalizováni kvůli zadržování tekutin v těle. Každé ráno se zvažte a zavolejte na číslo ___, pokud se vaše váha během jednoho dne zvýší o více než jeden kilogram. Omezte příjem soli a tekutin, jak vám bylo doporučeno. Užívejte všechny léky přesně podle předpisu a nepřestávejte s léčbou. V případě dušnosti, bolesti na hrudi nebo výrazného snížení množství moči se prosím vraťte do nemocnice. Dodržujte termín vaší kontroly u lékaře ___.
+
+Pokyny pro další postup:
+___

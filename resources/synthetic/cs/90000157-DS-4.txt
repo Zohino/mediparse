@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s hypertenzí se dostavil s potížemi, jako je bušení srdce a závratě, které trvaly tři dny. Během vyšetření v ordinaci ___ byl zjištěn nepravidelný puls, což vyvolalo obavy z možné fibrilace síní. Byl odeslán na pohotovost ___ a přijat ___ za účelem monitorování srdeční činnosti a dalšího vyšetření jeho symptomů.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Krk: Pohyblivý, bez známek zvýšeného žilního tlaku
+Plíce: Oboustranně čisté
+Břicho: Měkké, netendrovatelné
+Končetiny: Teplé, bez otoků
+
+Významné výsledky:
+NÁLEZY:
+Rentgen hrudníku provedený ___ ukázal čisté plíce a normální velikost srdce. EKG při přijetí ukázalo nepravidelný rytmus. Troponin negativní (dvě měření). Elektrolyty v normálním rozmezí. Echokardiogram provedený ___ ukázal zachovanou ejekční frakci a mírné zvětšení levé síně.
+
+Stručný popis hospitalizace:
+Byl monitorován pomocí telemetrie, která ukázala sinusový rytmus s častými předčasnými síňovými údery. Elektrolyty byly doplněny. Kardiolog z ___ zhodnotil záznamy a doporučil ambulantní monitorování srdeční činnosti. Jeho stav zůstal stabilní a mohl se pohybovat samostatně. Pokračovalo se v podávání léků, které užíval doma, a byla domluvena návštěva u doktora ___, výsledky budou zaslány na ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně
+2. Atorvastatin 20 mg perorálně večer
+3. Metoprolol succinate 25 mg perorálně jednou denně při bušení srdce
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Bušení srdce
+Sekundární: Hypertenze, hyperlipidemie
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+
+Pokyny při propuštění:
+Byli jste přijati kvůli bušení srdce a monitorováni pomocí telemetrie. Užívajte léky podle předpisu a noste monitor srdeční činnosti podle pokynů. V případě bolesti na hrudi, mdlob nebo dušnosti se vraťte na pohotovost. V případě, že se bušení srdce vrátí, zavolejte na ___.
+
+Pokyny pro další péči:
+___

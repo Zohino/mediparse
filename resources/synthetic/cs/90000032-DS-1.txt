@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Slabost a snížená chuť k jídlu
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s chronickým onemocněním ledvin, odeslán z ___ po týdnu únavy a sníženého příjmu potravy. Popírá kašel nebo anamnézu CHOPN. Laboratorní výsledky ukázaly zhoršení hladiny kreatininu, a proto byl přijat k hydrataci.
+
+Anamnéza předchozích onemocnění:
+Hypertenze od ___
+DNA
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: unavený, v pohodě
+Krk: pružný
+PLÍCE: čisté
+SRDCE: pravidelné
+Břicho: měkké
+KONČETINY: bez otoků
+
+Významné výsledky:
+Hladina kreatininu zvýšená při přijetí, po podání tekutin se zlepšila. Hladina glukózy výrazně zvýšená na ___. Hladina draslíku v normě. Rentgen hrudníku bez patologických nálezů. Vyšetření moči ukázalo přítomnost glukózy bez známek infekce.
+
+Stručný popis průběhu hospitalizace:
+Byl mu podán intravenózní roztok a hladina kreatininu se postupně snižovala směrem k výchozí hodnotě. Hladina glukózy byla vysoká, proto byla zahájena léčba inzulínem a byl poučen, jak jej používat, a to ___. Dobře jedl a chodil samostatně.
+PŘECHODNÁ OTÁZKA:
+Za týden znovu zkontrolovat funkci ledvin a hladinu glukózy.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Atorvastatin denně před spaním. Inzulín glargin každý večer s jídlem, jak bylo poučeno. Lisinopril vysadit, dokud nebudou laboratorní výsledky znovu zkontrolovány.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární: Diabetes mellitus
+
+Stav při propuštění:
+Duševní stav: bdělý a orientovaný, schopen plnit pokyny.
+Úroveň vědomí: bdělý a pozorný.
+Stav aktivity: chodí bez pomoci.
+
+Pokyny při propuštění:
+Byli jste přijati s dehydratací a vysokou hladinou cukru v krvi. Pijte dostatek tekutin, denně si kontrolujte hladinu cukru a užívejte inzulín podle pokynů. Pokud se budete cítit slabě nebo zmateně, zavolejte na ___ nebo se vraťte.
+
+Pokyny pro kontrolu:
+___

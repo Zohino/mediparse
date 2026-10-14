@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Zčervenání a otok pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s otokem a zčervenáním nohy trvajícím tři dny, odeslán z ___ kliniky poté, co se u něj objevila horečka ___. Uváděl bolest při chůzi, zimnici a malé oděrky na holeni po práci na zahradě minulý týden.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Obezita
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: unavený, mírně nepohodlný
+Hlava, uši, nos, hrdlo: normální
+Krk: pružný
+Plíce: čisté
+Břicho: měkké, netendrovatelné
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Zlepšení erytému, pohodlný, jinak bez změn.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Počet bílých krvinek zvýšený na 14,2 s převahou neutrofilů. Kreatinin normální. Laktát normální. Krevní kultury odebrané při přijetí nevykazovaly růst. Ultrazvuk pravé nohy prokázal otok měkkých tkání bez hluboké žilní trombózy nebo abscesu.
+
+Stručný průběh hospitalizace:
+Byl přijat s celulitidou pravé nohy a zahájena intravenózní léčba vancomycinem kvůli jeho alergii. Horečka ustoupila během dvou dnů a zčervenání se zmenšilo. Byl převeden na perorální doxycyklin a propuštěn, s naplánovanou kontrolou na ___ a ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Doxycyklin 100 mg dvakrát denně po dobu dalších sedmi dnů
+2. Lisinopril 10 mg denně
+3. Atorvastatin 20 mg večer
+4. Acetaminofen 650 mg každých šest hodin podle potřeby, z lékárny ___
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida pravé nohy
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: jasný a srozumitelný.
+Úroveň vědomí: bdělý a reagující.
+Stav aktivity: pohyblivý, soběstačný.
+
+Pokyny pro propuštění:
+Byl jste léčen na kožní infekci nohy. Užijte antibiotika podle pokynů, dokud je nedokončíte. Při sezení držte nohu ve zvýšené poloze. Vraťte se, pokud se objeví horečka, rozšíří se zčervenání, zhorší se bolest nebo se objeví výtok. V případě dotazů kontaktujte ___.
+
+Pokyny pro kontrolu:
+___

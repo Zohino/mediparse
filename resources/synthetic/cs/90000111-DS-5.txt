@@ -1,0 +1,88 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Dušnost a kašel.
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný.
+
+Anamnéza současného onemocnění:
+Pacientka je žena, která se dostavila do ___ s třemi dny trvající se zhoršující se dušností, produktivním kašlem a sípavým dýcháním. Uváděla mírné horečky a zvýšené používání svého záchranného inhalátoru. Byla vyšetřena svým ošetřujícím lékařem ___, který doporučil urgentní vyšetření. Na pohotovosti byla hypoxická a dostávala inhalace a kortikosteroidy.
+
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na kašel a dušnost. Negativní nález na bolest na hrudi.
+
+Anamnéza předchozích onemocnění:
+Chronická obstrukční plicní nemoc
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec s ___.
+
+Fyzikální vyšetření:
+Vitalní funkce:
+T 99,1, TF 88, TK 128/76, dechová frekvence 20, SpO2 94 % při dýchání okolním vzduchem
+
+Celkový stav:
+Komfortní, bez akutní tíže.
+
+Hlava, uši, oči, nos, hrdlo:
+Vlhké sliznice.
+
+Plíce:
+Difúzní sípavé zvuky při výdechu, prodloužený výdech.
+
+SRDEČNÍ:
+Pravidelný rytmus a frekvence.
+
+Stručný popis průběhu hospitalizace:
+Byla přijata pro akutní hypoxické respirační selhání se sípavým dýcháním v důsledku základního plicního onemocnění, pravděpodobně vyvolané virovou respirační infekcí. Byla léčena pravidelnými inhalacemi, krátkodobou léčbou perorálním prednisonem a doplňkovým kyslíkem, jehož podávání bylo postupně snižováno a ukončeno třetí den hospitalizace. Rentgenové vyšetření hrudníku provedené v ___ neukázalo žádnou ložiskovou konsolidaci. Pokračovala se v podávání léků na krevní tlak. Byla propuštěna ve stabilizovaném stavu po konzultaci s ___.
+
+Léky při přijetí:
+Inhalátor s albuterolem podle potřeby
+Lisinopril denně
+Atorvastatin večer
+
+Léky při propuštění:
+1. Prednison 40 mg perorálně denně po dobu dalších čtyř dnů
+2. Inhalátor s albuterolem dvě vdechnutí každé čtyři hodiny podle potřeby
+3. Tiotropium inhalovaný jednou denně
+4. Lisinopril denně
+5. Atorvastatin večer, podle pokynů ___
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Akutní hypoxické respirační selhání
+Virová respirační infekce
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+
+Úroveň vědomí:
+Bdělý a reagující.
+
+Stav aktivity:
+Chodící, soběstačný.
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli potížím s dýcháním a sípavému dýchání. Dokončete užívání prednisonu a používejte inhalátory podle předpisu. Vyhýbejte se kouři a dalším dráždivým látkám. V případě zhoršení dušnosti, horečky, bolesti na hrudi nebo zmatenosti se vraťte do nemocnice. V případě dotazů ohledně léků volejte ___.
+
+Pokyny pro další postup:
+___

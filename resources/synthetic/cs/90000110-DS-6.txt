@@ -1,0 +1,82 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil s potížemi, jako je bušení srdce a závratě, které začaly ___ dní před přijetím. Byl vyšetřen v ___ a odeslán na vyšetření kvůli nepravidelnému zrychlenému srdečnímu rytmu s mírnou dušností.
+
+Anamnéza předchozích onemocnění:
+Fibrilace síní
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Normální
+Krk:
+Pružný
+Plíce:
+Čisté
+Břicho:
+Měkké
+Končetiny:
+Bez otoků
+Neurologické vyšetření:
+Bez ložiskových příznaků
+Pulz:
+Hmatný
+
+Významné výsledky:
+Dvakrát negativní troponin. Elektrolyty v normě. Funkce štítné žlázy v normě. Rentgen hrudníku bez akutních nálezů.
+VÝSLEDKY VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Hemoglobin a kreatinin v normálních mezích.
+
+Stručný popis hospitalizace:
+Srdeční frekvence byla kontrolována pomocí metoprololu a monitorována pomocí telemetrie. Po posouzení rizika byla zahájena antikoagulační léčba. Příznaky ustoupily a srdeční frekvence se stabilizovala. Kardiolog z ___ případ zhodnotil a doporučil ambulantní sledování u doktora ___.
+
+Léky při přijetí:
+Metoprolol tartrát 25 mg dvakrát denně
+
+Léky při propuštění:
+Metoprolol sukcinát 50 mg denně
+Apixaban 5 mg dvakrát denně
+Lisinopril 10 mg denně
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Fibrilace síní
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+Bdělý a orientovaný
+Úroveň vědomí:
+Probuzený
+Úroveň aktivity:
+Chodí samostatně
+
+Pokyny pro propuštění:
+Užívejte léky podle předpisu. V případě bolesti na hrudi, mdlob nebo zrychleného srdečního rytmu se vraťte. V případě dotazů volejte ___. O vás se starali v ___.
+
+Pokyny pro další sledování:
+___

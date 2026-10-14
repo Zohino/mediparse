@@ -1,0 +1,78 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie dne ___
+
+Anamnéza současného onemocnění:
+Pacient je muž s hypertenzí a hyperlipidemií, který se dostavil do ___ se dvěma dny trvající se zhoršující se bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po konzumaci tučného jídla. Příznaky se objevily dne ___ a neustoupily. Poprvé byl vyšetřen v ___ doktorem ___, který ho odeslal na pohotovost. Ultrazvukové vyšetření prokázalo žlučové kameny a ztluštění stěny žlučníku, a byl přijat na chirurgické oddělení k další péči.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Reflux
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny. Otec s ___.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Bez horečky, vitální funkce stabilní. Pacient je v pohodlí, bez známek úzkosti. Pravidelný srdeční rytmus. Břicho měkké, mírně citlivé v místech po laparoskopii, neztvrdlé.
+Hlava, oči, uši, nos, hrdlo: Bez žloutenky, vlhké sliznice.
+Krk: Pohyblivý.
+Plíce: Oboustranně čisté.
+Končetiny: Teplé, bez otoků.
+Kůže: Místa po laparoskopii čistá a suchá.
+Neurologické vyšetření: Pacient je při vědomí, bez ložiskových příznaků.
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí dne ___ ukázala počet bílých krvinek 13,2, ALT 85, AST 70, alkalická fosfatáza 140, celkový bilirubin 1,4, lipáza v normě. Ultrazvuk: cholelitiáza se ztluštěním stěny žlučníku a pericholecystickou tekutinou. Patologické vyšetření z ___: chronická cholecystitida s cholelitiázou.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Leukocyty 7,1, hemoglobin 13,8, trombocyty 245. Sodík 139, draslík 4,1, kreatinin 0,9. ALT 32, AST 28, celkový bilirubin 0,7.
+
+Stručný průběh hospitalizace:
+Pacient byl přijat s akutní cholecystitidou a zahájena byla intravenózní hydratace, antibiotika a klid střev. Byl podroben nekomplikované laparoskopické cholecystektomii v ___ ve druhý den hospitalizace. Po operaci byla jeho bolest kontrolována perorálními léky a postupně zvyšoval příjem potravy bez nevolnosti. Jaterní testy se normalizovaly. Antibiotika byla po operaci vysazena. Pacient se pohyboval samostatně a močil spontánně. Krevní tlak zůstal kontrolovaný pomocí domácí medikace. Byl propuštěn domů ve stabilizovaném stavu s instrukcemi od doktora ___.
+PŘECHODNÁ OTÁZKY:
+Kontrola na chirurgické ambulanci v ___. Opakované měření krevního tlaku u praktického lékaře.
+
+Medikace při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Omeprazol 20 mg denně
+
+Léky při propuštění:
+1. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti.
+2. Oxykodon 5 mg perorálně každé čtyři hodiny podle potřeby při silné bolesti.
+3. Dokusát 100 mg dvakrát denně během užívání opioidů.
+4. Lisinopril 10 mg denně.
+5. Atorvastatin 20 mg večer.
+6. Omeprazol 20 mg denně.
+
+Způsob propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Primární:
+Akutní cholecystitida s cholelitiázou.
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Fyzická aktivita: Schopný chůze, soběstačný.
+
+Pokyny při propuštění:
+Byli jste přijati do ___ s zánětem žlučníku a žlučník vám byl odstraněn laparoskopicky. Můžete se sprchovat a nechat na řezné rány stékat mýdlovou vodu, ale nekoupejte se ve vaně. Po dobu čtyř týdnů nezvedejte nic, co váží více než pět kilogramů. V případě horečky, zhoršení bolesti břicha, zvracení, žloutnutí kůže nebo zarudnutí rány volejte na číslo ___ nebo se vraťte na pohotovost. Během užívání opioidů užívejte léky na změkčení stolice a neřiďte. Dodržujte termín kontroly u ___.
+
+Pokyny pro další postup:
+___

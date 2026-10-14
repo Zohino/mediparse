@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Nevolnost a nepříjemné pocity v břiše
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s diabetem, která se dostavila se třemi dny trvající nevolností a nepříjemnými pocity v břiše, byla převezena z ___ poté, co se příznaky objevily ___. Popírala horečku, bolest na hrudi nebo nedávné cestování.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Normální, vlhká sliznice
+Krk:
+Pružný
+Plíce:
+Čisté na obou stranách
+Břicho:
+Měkké, mírně citlivé
+
+Významné výsledky:
+Laboratorní testy při přijetí ukázaly mírnou leukocytózu a zvýšenou hladinu glukózy. Jaterní enzymy a lipáza byly v normě. CT vyšetření břicha provedené ___ neodhalilo žádné akutní nálezy. Opakované laboratorní testy v den propuštění byly lepší a stabilní.
+
+Stručný popis průběhu hospitalizace:
+Byla jí podána intravenózní tekutina, antiemetika a doporučeno šetření trávicího traktu, přičemž došlo k postupnému zlepšení příznaků. Konzultace s chirurgem ___ neprokázala potřebu chirurgického zákroku. Její strava byla postupně rozšiřována a dobře ji snášela. Hladina glukózy v krvi byla sledována a regulována inzulínem. Byla propuštěna domů.
+
+Léky při propuštění:
+Metformin 500 mg perorálně dvakrát denně. Ondansetron 4 mg podle potřeby při nevolnosti. Acetaminofen 650 mg podle potřeby.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes
+Gastroenteritida
+
+Stav při propuštění:
+Úroveň vědomí:
+Bdělá a komunikativní
+Stav aktivity:
+Chodí, soběstačná
+
+Pokyny pro propuštění:
+Pijte dostatek tekutin a jezte menší porce. Užívajte léky podle pokynů. V případě horečky, zvracení nebo zhoršení bolesti se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

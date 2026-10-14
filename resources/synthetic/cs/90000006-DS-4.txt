@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž se známou chronickou nemocí ledvin, odeslán z kliniky ___ po několika dnech zhoršujícího se otoku nohou, špatné chuti k jídlu a únavě. Laboratorní výsledky z ___ ukázaly zvýšenou hladinu kreatininu. Byl přijat za účelem monitorování a regulace tekutin.
+
+Anamnéza předchozích onemocnění:
+Fibrilace síní, užívá antikoagulancia
+Hypertenze
+DNA
+Starší operace kolene v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce
+
+Fyzikální vyšetření:
+Celkový stav:
+Unavený, ale v pohodě, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Břicho:
+Měkké, netendrové, neztuhlé
+Neurologické vyšetření:
+Orientovaný, pohybuje všemi končetinami
+
+Významné výsledky:
+LABORATORNÍ VÝSLEDKY PŘI PŘIJETÍ:
+Zvýšená hladina kreatininu nad výchozí hodnotu, mírně zvýšená hladina draslíku, nízká hladina bikarbonátu, stabilní hladina hemoglobinu. V moči stopové množství bílkovin. Rentgen hrudníku bez akutních nálezů. Ultrazvuk ukázal malé echogenní ledviny.
+
+Léky při přijetí:
+Apixaban, amlodipin, allopurinol, metoprolol
+
+Léky při propuštění:
+Pokračovat v užívání apixabanu a metoprololu. Zahájeno podávání furosemidu na otoky. Dávka amlodipinu snížena. Allopurinol vysazen, dokud nebude funkce ledvin znovu zkontrolována ambulantním týmem.
+
+Plán propuštění:
+Domů s podporou od ___
+
+Diagnóza při propuštění:
+Chronická nemoc ledvin s přetížením tekutinami
+Sekundární:
+Fibrilace síní
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Probuzený a orientovaný
+Úroveň aktivity:
+Chodí samostatně s občasnými přestávkami
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli hromadění tekutin způsobenému špatnou funkcí ledvin. Každé ráno se zvažte a zavolejte na ___, pokud se váha rychle zvýší. Omezte příjem soli a tekutin, užívejte léky podle seznamu a vyhýbejte se protizánětlivým lékům proti bolesti.
+
+Pokyny pro kontrolu:
+___

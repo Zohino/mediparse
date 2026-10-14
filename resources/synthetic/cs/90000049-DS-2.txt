@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s chronickým plicním onemocněním se dostavil s třemi dny trvajícím zhoršujícím se kašlem, sípáním a dušností po cestě do ___. Zpočátku byl vyšetřen v ___ a poté převezen sem.
+
+Anamnéza předchozích onemocnění:
+Chronická obstrukční plicní nemoc
+Atriální fibrilace
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí; otec je sledován v ___.
+
+Fyzikální vyšetření:
+Celkový stav: Bdělý, v pohodě, mluví celými větami
+HLAVA, OČI, UŠI, NOS, KRK: Vlhké sliznice
+PLÍCE: Difúzní sípání při výdechu
+BŘICHO: Měkké, netendrovatelné
+KŮŽE: Teplá, suchá
+NEUROLOGIE: Bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 9,8, hemoglobin 13,2, trombocyty 245, sodík 139, draslík 4,2, kreatinin 0,9, močovina 18. Rentgen hrudníku ukázal hyperinflaci bez ložiskové konsolidace. EKG ukázalo normální sinusový rytmus. Analýza arteriální krve ukázala mírnou respirační acidózu s adekvátní oxygenací.
+
+Stručný průběh hospitalizace:
+Léčen inhalovanými bronchodilatátory, perorálním prednisonem a azithromycinem s postupným zlepšením dechové práce a potřeby kyslíku. Srdeční frekvence zůstala kontrolovaná na domácí léčbě metoprololem. Vyšetřen ___ ohledně správného používání inhalátoru. Postupně se snižovala potřeba kyslíku a pacient byl propuštěn domů ve stabilizovaném stavu. Saturace při chůzi zůstala nad devadesáti procenty.
+
+Léky při přijetí:
+Tiotropium denně, albuterol podle potřeby, metoprolol, apixaban
+
+Léky při propuštění:
+Postupné snižování dávky prednisonu po dobu pěti dnů, tiotropium denně, inhalátor s albuterolem podle potřeby, metoprolol dvakrát denně, apixaban dvakrát denně, azithromycin k dokončení léčby.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Exacerbace CHOPN
+
+Stav při propuštění:
+Stabilizovaný
+Úroveň vědomí: Bdělý a komunikativní
+Stav aktivity: Ambulantní, soběstačný
+
+Pokyny pro propuštění:
+Užívejte léky podle předpisu a používejte inhalátory denně. V případě zhoršení dýchání, horečky nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___. Vyhýbejte se kouření.
+
+Pokyny pro další péči:
+___

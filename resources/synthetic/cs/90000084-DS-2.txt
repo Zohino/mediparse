@@ -1,0 +1,81 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a bolestivé močení
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s třídenní horečkou, bolestivým močením a bolestí v oblasti beder, odeslána z kliniky ___.
+PŘEHLED SYSTÉMŮ:
+Přítomny zimnice; jinak negativní.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce:
+Bez horečky, stabilní
+Celkový stav:
+Pohodlný
+Hlava, oči, uši, nos, hrdlo:
+Normální
+Plíce:
+Čisté
+Břicho:
+Mírná citlivost v oblasti nadstydké kosti
+KŮŽE:
+Teplá, suchá
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Zvýšený počet bílých krvinek; vyšetření moči s přítomností pyurií a bakterií.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek se normalizoval; kultivace moči z ___ prokázala přítomnost E. coli.
+
+Stručný popis průběhu hospitalizace:
+Pacientka dostávala intravenózně ceftriaxon, což vedlo ke zlepšení horečky a bolesti. Kultivace prokázaly citlivost na antibiotika, proto byla převedena na perorální antibiotika a dobře snášela stravu před propuštěním ___.
+
+Léky při přijetí:
+Lisinopril
+Levotyroxin
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu sedmi dnů
+2. Lisinopril
+3. Levotyroxin
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní pyelonefritida
+Infekce močových cest
+
+Stav při propuštění:
+Duševní stav:
+Bdělá a orientovaná.
+Úroveň vědomí:
+Probuzená.
+Fyzická aktivita:
+Chodí bez pomoci.
+
+Pokyny pro propuštěného pacienta:
+Dokončete užívání všech antibiotik, pijte dostatek tekutin a v případě návratu horečky nebo bolesti se vraťte do ___.
+
+Pokyny pro kontrolní vyšetření:
+___

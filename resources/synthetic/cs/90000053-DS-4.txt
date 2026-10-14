@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Slabost a závratě.
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný.
+
+Anamnéza současného onemocnění:
+Pacient je muž, který přišel z domova po ___ dnech postupující únavy, pocitu slabosti a občasných palpitacích. Byl vyšetřen na ___ svým ošetřujícím lékařem, který ho odeslal na pohotovost. Při příjezdu byly vitální funkce stabilní, odebraly se vzorky krve a provedlo se EKG.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů.
+
+Fyzikální vyšetření:
+Vyšetřen ___ při přijetí, pacient je v pohodlí a bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Normocefalický, vlhké sliznice.
+Krk: Pohyblivý, bez známek zvýšeného žilního tlaku.
+Končetiny: Teplé, bez otoků.
+Kůže: Bez vyrážky.
+
+Významné výsledky:
+Při přijetí zvýšená hladina glukózy a normální elektrolyty. Dvakrát negativní troponin. EKG ukázalo nepravidelný rytmus bez ischemických změn. Rentgen hrudníku byl v pořádku. Echokardiografie provedená na ___ ukázala zachovanou ejekční frakci. Hemoglobin A1c byl zvýšen na ___ procent. Funkce štítné žlázy byla normální. Vyšetření moči bez významných nálezů.
+
+Stručný průběh hospitalizace:
+Pacient byl přijat na oddělení monitoringu srdečního rytmu za účelem kontroly a monitorování srdeční frekvence. Dávka metoprololu byla upravena, což vedlo ke zlepšení srdeční frekvence, a po prodiskutování rizik a přínosů byla zahájena antikoagulační léčba. Hladina cukru v krvi byla regulována inzulínem a poté převedena na perorální terapii. Kardiolog ho vyšetřil na ___ a souhlasil s plánem léčby. Pacient se mohl samostatně pohybovat a byl propuštěn domů s dohodnutou následnou péčí prostřednictvím ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně, atorvastatin 20 mg večer, metformin 500 mg dvakrát denně.
+
+Léky při propuštění:
+Metoprolol succinate 50 mg denně. Apixaban 5 mg dvakrát denně. Metformin 500 mg dvakrát denně. Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Pokračujte ve všech lécích podle pokynů ___.
+
+Způsob propuštění:
+Domů s dohodnutou následnou péčí.
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Atriální fibrilace
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Schopný chůze, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli nepravidelnému srdečnímu rytmu. Užívajte nové léky přesně podle předpisu a každý den si měřte hladinu cukru v krvi. V případě bolesti na hrudi, mdlob, krvácení nebo zhoršení dušnosti se vraťte do nemocnice. V případě jakýchkoli dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

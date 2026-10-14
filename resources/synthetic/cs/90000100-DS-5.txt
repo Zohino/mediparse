@@ -1,0 +1,79 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s třídenní anamnézou produktivního kašle, horečky a dušnosti. Na rentgenovém snímku hrudníku byly zjištěny nálezy, které naznačují možnou pneumonii. Dříve v týdnu byl vyšetřen v ___ a odeslán na pohotovost svým ošetřujícím lékařem, doktorem ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze, sledováno v ___
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav:
+Mírně nemocný vzhled, v klidu se cítí dobře.
+Hlava, uši, nos, hrdlo:
+Vlhké sliznice, bez citlivosti v dutinách.
+Končetiny:
+Teplé, bez otoků.
+Neurologické vyšetření:
+Bdělý, orientovaný, bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Mírně zvýšený počet bílých krvinek, elektrolyty a kreatinin v normě, laktát v normě.
+ZÁVĚR:
+Rentgenový snímek hrudníku pořízený v ___ ukázal skvrnité zastínění dolního laloku pravého plíce, bez výpotku.
+
+Stručný popis hospitalizace:
+Byl přijat k pozorování a léčen perorálními antibiotiky a infuzemi. Horečka ustoupila během dvou dnů a saturace kyslíkem zůstala normální při dýchání okolního vzduchu. Kašel se postupně zlepšoval. Kultivace odebrané v ___ nevykázala žádný růst. Byl vyšetřen fyzioterapeutem a schválen k propuštění do ___ s následnou ambulantní péčí.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně denně
+2. Atorvastatin 20 mg perorálně večer
+3. Azithromycin 250 mg perorálně denně po dobu dalších tří dnů
+4. Guaifenesin 600 mg perorálně dvakrát denně podle potřeby při kašli
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Komunitně získaná infekce dolních cest dýchacích
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a komunikativní.
+Fyzická aktivita:
+Chodí, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni s horečkou a kašlem. Dokončete léčbu antibiotiky, pijte dostatek tekutin a odpočívejte. V případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte. V případě dotazů ohledně léků volejte na kliniku na číslo ___.
+
+Pokyny pro kontrolu:
+___

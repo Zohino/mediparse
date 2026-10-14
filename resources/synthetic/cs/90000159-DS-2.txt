@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha, zvracení
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s diabetem, který se dostavil se třemi dny trvající bolestí břicha a zvracením. Byl odeslán z ___ poté, co ambulantní vyšetření odhalilo dehydrataci a zvýšenou hladinu glukózy, což vyžadovalo hospitalizaci.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Nepohodlí, suché sliznice
+Hlava, oči, uši, nos, hrdlo: Normocefalický
+Krk: Pohyblivý
+Plíce: Čisté na obou stranách
+Končetiny: Bez otoků
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Celkový stav: Pohodlný, dobrý vzhled
+Plíce: Čisté
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Sodík 138, draslík 4,1, glukóza 142, kreatinin v normě.
+ZÁVĚR:
+CT vyšetření břicha neukázalo žádný akutní proces, pouze mírné ztluštění stěny žaludku.
+
+Stručný popis průběhu hospitalizace:
+Byl mu podáván intravenózně roztok, antiemetika a inzulin, což vedlo k rychlému zlepšení. Hladina glukózy se normalizovala a dobře snášel běžnou stravu. Konzultace s gastroenterologem proběhla s ___ a doporučeno bylo ambulantní sledování dne ___.
+
+Léky při přijetí:
+Metformin, lisinopril, atorvastatin
+
+Léky při propuštění:
+1. Metformin 500 mg dvakrát denně
+2. Lisinopril 10 mg denně
+3. Atorvastatin 20 mg večer
+4. Ondansetron 4 mg podle potřeby
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Diabetes s hyperglykémií
+Gastroenteritida
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Stav aktivity: Samostatný
+
+Pokyny pro propuštění:
+Byli jste přijati s bolestmi břicha, zvracením a dehydratací. Pijte dostatek tekutin, denně si kontrolujte hladinu glukózy, užívejte léky podle předpisu a v případě horečky nebo zhoršení bolesti kontaktujte doktora ___.
+
+Pokyny pro kontrolu:
+___

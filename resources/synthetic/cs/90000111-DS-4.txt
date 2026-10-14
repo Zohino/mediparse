@@ -1,0 +1,80 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a produktivní kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s pěti dny trvající horečkou, zimnicí a produktivním žlutým sputem, odeslána z jejího zdravotnického zařízení v ___ kvůli hypoxii.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s cévní mozkovou příhodou
+
+Fyzikální vyšetření:
+Vitalní funkce:
+T 38,6, TF 98, SpO2 89 % při dýchání okolním vzduchem
+Celkový stav:
+Vypadá nemocně, je unavená
+Hlava, oči, uši, nos, hrdlo:
+Suché sliznice
+Plicní systém:
+V dolní části pravé plíce chrůpky
+Končetiny:
+Žádný edém
+Neurologické vyšetření:
+Bez ložiskových příznaků
+
+Významné výsledky:
+Leukocyty 16,2 s posunem doleva, laktát 2,1. Rentgen hrudníku ukázal hustou konsolidaci v dolním laloku pravé plíce, vyhodnotil ___.
+ZÁVĚR:
+Zkalení v dolním laloku pravé plíce
+
+Stručný popis hospitalizace:
+Byla léčena pro bakteriální infekci plic ceftriaxonem a azithromycinem, navíc kyslíkem a intravenózními tekutinami. Horečka ustoupila, podávání kyslíku bylo snižováno a ___ kultivace zůstaly negativní.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 75 mcg denně
+
+Léky při propuštění:
+Pokračovat v užívání lisinoprilu a levotyroxinu. Amoxicilin-klavulanát dvakrát denně po dobu dalších tří dnů. Paracetamol podle potřeby při horečce.
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní hypoxické respirační selhání
+Infekce dolního laloku pravé plíce
+Dehydratace
+
+Stav při propuštění:
+Duševní stav:
+Orientovaná a bdělá
+Úroveň vědomí:
+Bdělá a orientovaná
+Fyzická aktivita:
+Chodí, je soběstačná
+
+Pokyny pro propuštění:
+Byla jste hospitalizována kvůli infekci plic. Dokončete užívání antibiotik, pijte dostatek tekutin, odpočívejte a v případě horečky, dušnosti se vraťte nebo volejte ___ s dotazy.
+
+Pokyny pro kontrolu:
+___

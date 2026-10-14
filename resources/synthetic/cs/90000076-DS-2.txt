@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka byla odeslána ___ po několika dnech únavy, špatném apetitu a otoku obou nohou. Popírá příznaky pneumonie, horečku nebo produktivní kašel. Laboratorní výsledky z ___ ukázaly zvýšenou hladinu kreatininu, proto byla odeslána na pohotovostní oddělení k vyšetření.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na únavu a edém. Jinak negativní.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Anémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Unavená, ale v pohodě, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Plíce: Čisté na obou stranách
+KŮŽE: Edém s prohlubní na obou holenních kostech
+
+Stručný popis průběhu hospitalizace:
+Pacientka byla přijata s objemovým přetížením v souvislosti s chronickým onemocněním ledvin. Intravenózně jí byl podán furosemid ___, a dobře reagovala, přičemž hladina kreatininu se vrátila k výchozí hodnotě. Byla upravena její medikace na léčbu krevního tlaku. Lékařský tým z ___ posoudil její případ a zajistil ambulantní kontrolu v ___. Před propuštěním chodila samostatně.
+
+Medikace při přijetí:
+Amlodipin 5 mg denně
+Allopurinol 100 mg denně
+
+Medikace při propuštění:
+1. Furosemid 40 mg perorálně každé ráno, nová medikace
+2. Amlodipin 5 mg perorálně denně, pokračovat
+3. Allopurinol 100 mg perorálně denně, pokračovat, dle ___
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní objemové přetížení
+Hypertenze
+Anémie
+
+Stav při propuštění:
+Duševní stav: Bdělá a plně orientovaná
+Úroveň vědomí: Bdělá a pozorná
+Stav aktivity: Chodí bez pomoci
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni kvůli otokům způsobeným nadměrným množstvím tekutiny. Užijte si novou diuretickou tabletu každé ráno a denně se vážte. Zavolejte ___, pokud se vaše váha rychle zvýší nebo se vám začne hůře dýchat. Omezte příjem soli ve stravě a dodržujte termín kontroly v ___.
+
+Pokyny pro kontrolu:
+___

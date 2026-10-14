@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Slabost a snížená chuť k jídlu
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena odeslána z ___ kliniky po třech dnech únavy, nevolnosti a sníženém příjmu potravy. Popírá horečku, bolest na hrudi nebo pády. Při přijetí byly vitální funkce stabilní.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka v anamnéze měla chronické onemocnění ledvin. Otec je zdravý.
+
+Fyzikální vyšetření:
+Celkový stav:
+Unavená, v klidu se cítí dobře
+Hlava, oči, uši, nos, hrdlo:
+Suché sliznice
+Krk:
+Pružný
+Plíce:
+Oboustranně čisté
+Končetiny:
+Bez otoků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Sodík v dolní normě, kreatinin blízko výchozí hodnoty, glukóza zvýšená. Vyšetření moči bez známek infekce. Rentgen hrudníku ukázal čisté plíce a normální velikost srdce. EKG ukázalo sinusový rytmus.
+
+Stručný popis průběhu hospitalizace:
+Byla vyšetřena týmem ___ a podána intravenózní tekutiny, což vedlo ke zlepšení chuti k jídlu. Glukóza byla regulována inzulínem a následně domácím režimem. Dne ___ chodila samostatně a dobře snášela stravu.
+
+Léky při přijetí:
+Metformin, lisinopril, atorvastatin
+
+Léky při propuštění:
+Metformin 500 mg dvakrát denně. Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Metformin vysadit, pokud není schopna jíst nebo pít.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes mellitus 2. typu s dehydratací
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Bdělá a orientovaná
+Úroveň vědomí:
+Bdělá a pozorná
+Stav aktivity:
+Chodí, soběstačná
+
+Pokyny pro propuštění:
+Byla léčena pro dehydrataci. Pravidelně pijte tekutiny a užívejte léky podle seznamu. Denně si kontrolujte hladinu cukru v krvi. V případě zvracení nebo slabosti volejte ___. Prosím, co nejdříve navštivte doktora ___.
+
+Pokyny pro kontrolu:
+___

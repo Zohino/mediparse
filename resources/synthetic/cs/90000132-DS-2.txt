@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s pětidenním kašlem s vykašláváním, horečkou, zimnicí a dušností po kontaktu s nemocným příbuzným. Jeho ošetřující lékař, Dr. ___, zahájil perorální léčbu antibiotiky, ale nedošlo ke zlepšení, a proto ho odeslal na pohotovost.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Sezónní alergie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav:
+Vypadá unaveně, mírně zrychlené dýchání
+HEENT (hlava, oči, uši, nos, hrdlo):
+Vlhké sliznice
+Břicho:
+Měkké, netendrovatelné
+Neurologické vyšetření:
+Orientovaný, bez neurologických deficitů
+
+Významné výsledky:
+Při přijetí zvýšený počet bílých krvinek a zvýšené zánětlivé markery. Rentgen hrudníku provedený ___ ukázal skvrnité zastínění dolního laloku pravého plíce. Kultivace krve nevykázala žádný růst. Opakovaný snímek vyhodnotil radiolog ___, který potvrdil zlepšení. Saturace kyslíkem 97 % při dýchání okolním vzduchem při propuštění.
+
+Stručný popis hospitalizace:
+Léčen intravenózními antibiotiky a doplňkovým kyslíkem, postupně se snižovala potřeba kyslíku a do třetího dne již pacient dýchal okolní vzduch. Horečka ustoupila a kašel se zlepšil. Vyšetření provedené ___ ukázalo zastínění dolního laloku pravého plíce. Kultivace odebrané Dr. ___ zůstaly negativní. Pacient se mohl bezpečně pohybovat a byl propuštěn s perorálními antibiotiky a domluvenou kontrolou v ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Loratadin podle potřeby
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně
+2. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu dalších pěti dnů
+3. Loratadin 10 mg perorálně denně podle potřeby
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární:
+Zánět plic
+Sekundární:
+Hypertenze
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Orientovaný a reagující
+Stav aktivity:
+Chodící, soběstačný
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni kvůli plicní infekci a léčeni antibiotiky. Dokončete všechny předepsané léky, odpočívejte a pijte dostatek tekutin. V případě zhoršení dušnosti, vysoké horečky nebo bolesti na hrudi se vraťte. V případě jakýchkoli dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

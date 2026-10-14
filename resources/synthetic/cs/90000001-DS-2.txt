@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Tato ___letá žena s hypertenzí se dostavila do ___ s třídenní horečkou, produktivním kašlem a bolestí na hrudi při dýchání. Vyšetření hrudníku v ___ ukázalo konsolidaci v dolním laloku pravého plíce, což odpovídá pneumonii. Byla převezena do ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Žádná anamnéza fibrilace síní
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Bdělá, v pohodě.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+SRDEČNÍ: Pravidelný rytmus.
+Břicho: Měkké, netendrovatelné.
+KONČETINY: Žádný edém.
+
+Významné výsledky:
+Počet leukocytů 14,2 při přijetí, snížil se na 8,1 při propuštění. Laktát 1,1. Kreatinin 0,8. Rentgen hrudníku ukázal opacitu v dolním laloku pravé plíce, vyhodnotil ___. Krevní kultury po dvou dnech nevykázaly žádný růst. Kultivace sputa prokázala normální respirační flóru. Elektrolyty byly v normálních mezích.
+
+Stručný průběh hospitalizace:
+Byla léčena intravenózními antibiotiky a doplňkovým kyslíkem, který byl do třetího dne hospitalizace postupně snižován, dokud pacientka nedýchala pouze okolní vzduch. Její příznaky se postupně zlepšovaly. Horečka ustoupila a kašel se zlepšil. Dobře snášela perorální příjem a mohla se pohybovat bez dekompenzace. Antibiotika byla změněna na perorální přípravek, aby se dokončila léčba. Bylo domluveno kontrolní vyšetření u ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Levothyroxin 50 mcg denně.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Komunitně získaná infekce dolních cest dýchacích
+Sekundárně:
+Hypertenze, hypotyreóza
+
+Stav při propuštění:
+Dobrý
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a komunikativní.
+Stav aktivity: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Byla léčena pro plicní infekci. Užívajte antibiotika, dokud je nedokončíte. Odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršení kašle nebo potíží s dýcháním se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka, produktivní kašel a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka odeslána od ___ po pěti dnech trvající horečce, produktivním kašli a bolesti na hrudi při dýchání. V ___ měla nízkou saturaci kyslíkem a byla léčena kyslíkem. Rentgen hrudníku ukázal konsolidaci v dolním laloku pravého plíce. Byla převezena sem.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Obezita, sledována ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí, léčena v ___
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Unavená, mírně zrychlené dýchání, mluví v celých větách
+Hlava, oči, uši, nos, hrdlo: Suché sliznice, bez kandidózy
+Končetiny: Teplé, bez otoků
+
+Významné výsledky:
+Laboratorní výsledky při přijetí: Počet leukocytů 16,2 s posunem doleva, laktát 2,1, glukóza 312, HbA1c 10,4. Krevní kultury z ___ bez růstu. Kultivace sputa prokázala normální flóru. Rentgen hrudníku: opacita v dolním laloku pravé plíce, malý výpotek.
+
+Stručný průběh hospitalizace:
+Byla léčena ceftriaxonem a azithromycinem a doplňkovým kyslíkem, který byl do třetího dne snížen na běžný vzduch. Horečka ustoupila a počet leukocytů se normalizoval. Glukóza byla kontrolována inzulínem a byl nastaven režim s ___. Antibiotika byla dokončena perorálně.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Nekontrolovaný diabetes mellitus
+Sekundárně:
+Hypertenze
+Hyperlipidemie
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a reaguje
+Fyzická aktivita: Chodí, soběstačná
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni s plicní infekcí a vysokou hladinou cukru v krvi. Dokončete antibiotika doma. Měřte si hladinu cukru v krvi před jídlem a užívejte inzulín podle pokynů. V případě horečky, zhoršení dýchání nebo zmatenosti se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

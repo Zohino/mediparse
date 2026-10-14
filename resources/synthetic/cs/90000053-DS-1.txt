@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient odeslán z ___ po několika dnech, kdy pociťoval zrychlený srdeční tep a únavu. Vyšetřen doktorem ___, který doporučil hospitalizaci za účelem regulace srdečního rytmu a monitorování.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na únavu. Bez horečky.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Předvířová fibrilace
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Krk: Pohyblivý
+PLÍCE: Čisté na obou stranách
+BŘICHO: Měkké, bez citlivosti
+Končetiny: Bez otoků
+Neurologické vyšetření: Bez ložiskových příznaků
+
+Významné výsledky:
+Laboratorní vyšetření provedená dne ___ ukázala zvýšenou hladinu glukózy a normální elektrolyty. Dvakrát negativní troponin. EKG prokázalo nepravidelný rytmus bez změn ST segmentu. Rentgen hrudníku bez významných nálezů.
+
+Stručný popis hospitalizace:
+Přeložen z ___ dne ___ s rychlým, nepravidelným srdečním rytmem. Rychlost srdečního tepu byla regulována pomocí metoprololu a zahájena antikoagulační terapie. Hladina glukózy byla regulována pomocí inzulínu podle stupnice. Pacient se zlepšil a byl stabilizován před propuštěním.
+
+Léky při propuštění:
+Metoprolol succinat 50 mg denně
+Apixaban 5 mg dvakrát denně
+Metformin 500 mg dvakrát denně
+Atorvastatin 40 mg večer
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Předvířová fibrilace s rychlou ventrikulární odpovědí
+Diabetes mellitus
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Fyzická aktivita: Samostatný, pohyblivý.
+
+Pokyny pro propuštění:
+Byli jste přijati kvůli rychlému, nepravidelnému srdečnímu tepu. Užívajte léky podle pokynů a dodržujte všechny termíny kontrol. V případě bolesti na hrudi, mdlob nebo krvácení volejte ___ nebo se vraťte.
+
+Pokyny pro další péči:
+___

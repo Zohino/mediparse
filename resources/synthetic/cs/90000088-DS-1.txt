@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient je muž, který byl převezen z ___ po několika dnech zhoršujících se otoků nohou a únavy. Uváděl snížené množství moči a nevolnost. Byl vyšetřen svým ošetřujícím lékařem v ___ dne ___ a odeslán na pohotovost. Laboratorní výsledky ukázaly zvýšenou hladinu kreatininu a draslíku, proto byl přijat do nemocnice.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin
+Přední komorová fibrilace, užívá antikoagulancia
+Hypertenze
+Popírá diabetes
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Krk: Pohyblivý, bez známek zvýšeného žilního tlaku.
+SRDCE: Nepravidelný rytmus, normální srdeční ozvy S1 a S2.
+KONČETINY: Mírný bilaterální edém.
+KŮŽE: Teplá a suchá.
+
+Významné výsledky:
+___ laboratorní testy: kreatinin nad výchozí hodnotou, mírně zvýšená hladina draslíku, stabilní hladina hemoglobinu. Ultrazvuk ledvin provedený v ___ ukázal malé echogenní ledviny bez hydronefrózy. Rentgen hrudníku byl v normě. EKG ukázalo nepravidelný rytmus s kontrolovanou frekvencí.
+ZÁVĚR:
+Malé ledviny odpovídající dlouhodobému parenchymatóznímu onemocnění; bez obstrukce.
+
+Stručný popis hospitalizace:
+Byl přijat kvůli akutnímu zhoršení funkce ledvin. Intravenózní infuze byla ukončena a dávka diuretik byla upravena. Hladina draslíku byla korigována dietními opatřeními a podáváním léků, které draslík vážou. Hladina kreatininu se do ___ zlepšila a přiblížila se výchozí hodnotě. Lékařský tým z ___ případ zhodnotil a upravil jeho medikaci. Kontrola frekvence a antikoagulační terapie byly pokračovány. Byl propuštěn ve stabilizovaném stavu.
+PŘECHODNÁ OPATŘENÍ:
+- Opakované laboratorní testy za jeden týden v ___.
+- Kontrolní vyšetření na nefrologické klinice u ___.
+
+Léky při přijetí:
+Apixaban 2,5 mg dvakrát denně
+Furosemid 40 mg denně
+Metoprolol 25 mg denně
+
+Léky při propuštění:
+Apixaban 2,5 mg dvakrát denně
+Furosemid 20 mg denně
+Metoprolol sukcinát 25 mg denně
+Sevelamer 800 mg s jídlem
+Přerušit podávání lisinoprilu, dokud nebude vyšetřen u ___.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Úroveň vědomí: Bdělý a komunikativní.
+Stav aktivity: Chodí, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni, protože se zhoršila funkce vašich ledvin. Denně se važte a vyhýbejte se potravinám s vysokým obsahem draslíku. Neužívejte ibuprofen nebo podobné léky proti bolesti. V případě bolesti na hrudi, silné slabosti nebo velmi malého množství moči se vraťte do nemocnice.
+
+Pokyny pro další postup:
+___

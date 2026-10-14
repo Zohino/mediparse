@@ -1,0 +1,79 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Zčervenání a otok levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí se dostavila s třídenní anamnézou bolestivého, šířícího se zčervenání levého lýtka, odeslána ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s cévní mozkovou příhodou
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Bez horečky, stabilní
+Celkový stav:
+Pohodlná
+Krk:
+Pružný
+Břicho:
+Měkké, bez citlivosti
+Končetiny:
+Levé lýtko teplé, zarudlé
+
+Významné výsledky:
+VÝSLEDKY LABORATORNÍCH TESTŮ PŘED PROPUŠTĚNÍM:
+Počet bílých krvinek se normalizoval, kreatinin stabilní na hodnotě ___.
+ZÁVĚR:
+Na ultrazvuku nohy nebyla zjištěna hluboká žilní trombóza.
+
+Stručný popis hospitalizace:
+Léčena na celulitidu intravenózními antibiotiky, zčervenání ustoupilo a bolest se zmírnila. Přechod na perorální terapii, pacientka chodila bez potíží.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Kontrola kůže za jeden týden v ambulanci ___.
+
+Léky při přijetí:
+Lisinopril, levotyroxin
+
+Léky při propuštění:
+Doxycyklin dvakrát denně po dobu sedmi dnů
+Lisinopril denně
+Levotyroxin denně
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida levé nohy
+Sekundární:
+Hypertenze, hypotyreóza
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí:
+Bdělá a při plném vědomí
+Úroveň aktivity:
+Chodí samostatně
+
+Pokyny pro propuštěného pacienta:
+Byla léčena kožní infekce. Užívajte antibiotika podle pokynů, zvedejte nohu a v případě horečky nebo zhoršení zčervenání se vraťte.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Závratě a bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena vyšetřena v ___ pro krátkodobé závratě. Popírá fibrilaci síní nebo bolest na hrudi. Příznaky rychle ustoupily.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Normální
+Krk:
+Pružný
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Bez otoků
+
+Významné výsledky:
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Rentgen hrudníku proveden v ___.
+ZÁVĚR:
+Plíce čisté, normální velikost srdce, bez akutních nálezů. Laboratorní výsledky v normě.
+
+Stručný popis hospitalizace:
+Pacientka sledována pomocí telemetrie, stabilní rytmus. Závratě přisuzovány dehydrataci, zlepšení po podání tekutin. Propuštěna domů v dobrém stavu po ___ kontrole.
+
+Léky při přijetí:
+Lisinopril denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně
+2. Paracetamol podle potřeby proti bolesti
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Dehydratace
+Ortostatická závrať
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a reaguje.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni pro závratě. Pijte dostatek tekutin, vstávejte pomalu, užívejte léky podle pokynů a v případě recidivy příznaků se vraťte.
+
+Pokyny pro kontrolu:
+___

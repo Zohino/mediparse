@@ -1,0 +1,92 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Léky obsahující sulfanilamid
+
+Hlavní potíže:
+Slabost a bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila s několikdenní slabostí, sníženou chutí k jídlu a závratěmi. Hodnoty glukózy měřené doma byly trvale zvýšené a pacientka udávala bušení srdce. Poprvé byla vyšetřena v ambulanci ___, kde byla zaznamenána nepravidelná srdeční frekvence, a byla odeslána do nemocnice ___ k dalšímu vyšetření a monitorování.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin, stadium 3
+Fibrilace síní
+Hypertenze
+Hyperlipidémie
+Dříve vyšetřována v ___ kvůli péči o nohy
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Vitalní funkce:
+Bez horečky, stabilní
+Celkový stav:
+Dobrá
+Krk:
+Pružný
+Plíce:
+Čisté
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Mírný edém
+Kůže:
+Teplá, suchá
+Neurologické vyšetření:
+Bez ložiskových příznaků
+
+Významné výsledky:
+Při přijetí byla glukóza výrazně zvýšená, aniontová mezera v normě. Hodnota hemoglobinu A1c byla vysoká. Kreatinin byl na výchozí úrovni. Draslík v normě. EKG prokázalo nepravidelný rytmus s rychlou ventrikulární frekvencí. Výsledky byly projednány s personálem laboratoře ___.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Glukóza se zlepšila, kreatinin stabilní.
+
+Stručný popis hospitalizace:
+Pacientka byla přijata za účelem kontroly srdeční frekvence a léčby hyperglykémie. Dávka metoprololu byla titrována s dobrým efektem na srdeční frekvenci a po konzultaci s ___ byla zahájena antikoagulační léčba. Dávka inzulínu byla upravena, dokud se hodnoty glukózy nestabilizovaly. Funkce ledvin zůstala stabilní. Propuštění schválil ___ a pacientka mohla samostatně chodit.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+Metformin
+Inzulín glargin
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg denně
+2. Apixaban 2,5 mg dvakrát denně
+3. Inzulín glargin 20 jednotek večer
+4. Atorvastatin 20 mg večer
+5. Lisinopril – do další kontroly se vysazuje
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+Fibrilace síní
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Bdělý a orientovaný
+Úroveň vědomí:
+Bdělý
+Aktivita:
+Chodí bez pomoci
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli rychlému nepravidelnému srdečnímu tepu a vysoké hladině cukru v krvi. Užívajte nové léky podle pokynů a denně si měřte hladinu cukru. V případě závratí, bolesti na hrudi nebo krvácení volejte ___. Prosím, domluvte si návštěvu u ___ příští týden.
+
+Pokyny pro další postup:
+___

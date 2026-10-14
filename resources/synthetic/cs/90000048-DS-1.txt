@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Únava, otok nohou
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s možným chronickým onemocněním ledvin přijat z ___ s několikdenní únavou, špatnou chutí k jídlu a otokem obou nohou, který se během jednoho týdne zhoršoval.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Dna
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Vypadá unaveně, v klidu je v pohodě.
+KŮŽE:
+Teplá, suchá, otok s prohlubní na obou kotnících.
+
+Významné výsledky:
+Laboratorní testy z ___ ukázaly zvýšenou hladinu kreatininu nad jeho obvyklou hodnotu a mírný pokles draslíku. Rentgen hrudníku bez patologických nálezů. Vyšetření moči bez významných odchylek. Ultrazvuk ledvin ukázal ledviny normální velikosti bez hydronefrózy.
+
+Stručný popis průběhu hospitalizace:
+Byl mu podáván jemný intravenózní roztok a doplňován draslík. Hladina kreatininu se postupně zlepšovala. Po konzultaci s týmem ___ byla upravena medikace na snížení krevního tlaku. Otok se zmenšil a pacient toleroval běžnou stravu.
+
+Medikace při přijetí:
+Lisinopril 20 mg denně
+Allopurinol 100 mg denně
+
+Medikace při propuštění:
+Allopurinol 100 mg denně
+Amlodipin 5 mg denně, nově
+Chlorid draselný 20 mEq denně po dobu pěti dnů
+Přerušit podávání lisinoprilu do další kontroly
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Dehydratace
+Hypokalémie
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a reagující.
+
+Pokyny pro propuštění:
+Byli jste přijati kvůli slabosti a otokům. Pravidelně pijte tekutiny, každý den se važte a vyhýbejte se protizánětlivým lékům proti bolesti. Navštivte svého lékaře na ___ do jednoho týdne kvůli opakovaným krevním testům.
+
+Pokyny pro další postup:
+___

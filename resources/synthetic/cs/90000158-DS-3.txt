@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Slabost a vysoká hladina cukru v krvi
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s diabetes mellitus, která se dostavila do ___ s několikdenní žízní, únavou a zvýšenými hodnotami glukózy měřené doma, byla odeslána ze své ordinace ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s vysokým krevním tlakem
+
+Fyzikální vyšetření:
+Celkový stav:
+Bdělá, v pohodě, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Suché sliznice
+Plíce:
+Čisté na obou stranách
+Končetiny:
+Teplé, bez otoků
+
+Významné výsledky:
+Při přijetí zvýšená hladina glukózy, denně se zlepšuje. Elektrolyty v normě po podání tekutin. Vyšetření moči negativní na infekci.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Hladina glukózy blízko cílové hodnoty, kreatinin na výchozí úrovni.
+
+Stručný popis hospitalizace:
+Byla jí podána intravenózní tekutina a inzulin, poté byla zahájena základní léčba. Proběhla edukace o diabetu s ___ zdravotní sestrou. Hladina glukózy se zlepšila a pacientka dobře snášela jídlo. Její tým v ___ upraví dávky při kontrolní návštěvě.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+Metformin
+
+Léky při propuštění:
+Metformin dvakrát denně s jídlem.
+Inzulin glargin před spaním.
+Lisinopril jednou denně.
+Atorvastatin večer.
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Primární:
+Diabetes mellitus s hyperglykémií
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělá a komunikativní
+Stav aktivity:
+Chodí, soběstačná
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli vysoké hladině cukru v krvi. Měřte si hladinu glukózy před jídlem a před spaním, užívejte léky podle seznamu a volejte ___, pokud se hodnoty budou i nadále zvyšovat nebo se budete cítit špatně.
+
+Pokyny pro kontrolní vyšetření:
+___

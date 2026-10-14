@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Vnitřní lékařství
+Datum přijetí: ___ Číslo pokoje: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s diabetem, který se dostavil s třemi dny trvající horečkou, produktivním kašlem a zhoršující se dušností. Byl vyšetřen u svého ošetřujícího lékaře ___, který ho odeslal na pohotovost. Tam měl hypoxii a byl léčen kyslíkem a antibiotiky před umístěním na oddělení vnitřního lékařství.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+HLAVA, OČI, UŠI, NOS, KRK: Suché sliznice, bez zjištěných lézí v orofaryngeální oblasti.
+KRK: Pohyblivý.
+SRDCE: Pravidelný rytmus, bez šelestů.
+BŘICHO: Měkké, netendrovatelné, neztvrdlé.
+KONČETINY: Bez edému nebo cyanózy.
+KŮŽE: Teplá a suchá.
+PULSY: Hmatné distálně.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Počet leukocytů 14,2, hemoglobin 12,8, kreatinin 1,0, glukóza 286, laktát 2,1, sodík 134. Troponin dvakrát negativní. Kultivace krve probíhají, výsledky budou známy při propuštění. Hemoglobin A1c zvýšený na 9,1 procenta.
+ZÁVĚR:
+Konsolidace v dolním laloku pravého plíce, odpovídající bakteriální infekci. Bez pleurálního výpotku nebo pneumotoraxu. Velikost srdce je normální. Ve srovnání s vyšetřením z ___ je tento nález nový.
+
+Léky při přijetí:
+Metformin 1000 mg dvakrát denně. Lisinopril 10 mg denně. Aspirin 81 mg.
+
+Léky při propuštění:
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dalších dnů. Metformin 1000 mg dvakrát denně. Lisinopril 10 mg denně. Aspirin 81 mg denně. Paracetamol 650 mg každých šest hodin podle potřeby. Lékárna ___.
+
+Plán propuštění:
+Domů s ___ ošetřovatelskou péčí.
+Zařízení: ___
+
+Diagnóza při propuštění:
+Infekce dolního laloku pravé plíce
+Diabetes mellitus
+
+Stav při propuštění:
+Úroveň vědomí: Bdělý a komunikativní.
+Stav aktivity: Chodí, soběstačný.
+
+Pokyny pro propuštění:
+Byl jste léčen na plicní infekci. Užijte antibiotika až do konce a denně si kontrolujte hladinu cukru v krvi. Navštivte lékaře ___ do jednoho týdne. V případě horečky, zhoršující se dušnosti nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

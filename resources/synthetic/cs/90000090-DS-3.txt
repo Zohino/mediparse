@@ -1,0 +1,86 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena odeslána z ___ s třídenní anamnézou produktivního kašle, mírné horečky a zhoršující se únavy. Uvádí také sníženou chuť k jídlu a mírný otok nohou.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Anémie
+DNA
+Pod dohledem doktora ___ kvůli monitorování funkce ledvin
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Unavená, v klidu se cítí dobře
+Hlava, oči, uši, nos, hrdlo:
+Suché sliznice
+Krk:
+Pružný
+Končetiny:
+Mírný bilaterální edém
+Kůže:
+Teplá, bez vyrážky
+Neurologické vyšetření:
+Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Kreatinin 2,8, výchozí hodnota zvýšená, draslík 4,9, hemoglobin 9,6, počet bílých krvinek 11,2.
+ZÁVĚR:
+Na rentgenovém snímku pořízeném v ___ je patrná ložisková neprůhlednost v dolním laloku pravé plíce.
+
+Stručný popis hospitalizace:
+Léčena pro podezření na pneumonii perorálními antibiotiky a intravenózními tekutinami, s postupným zlepšením kašle a horečky. Hodnota kreatininu zůstala blízko její zvýšené výchozí hodnotě. Konzultována týmem ___, který doporučil úpravu dávkování léků s ohledem na funkci ledvin. Před propuštěním chodila samostatně.
+
+Léky při přijetí:
+Amlodipin
+Allopurinol
+Tablety železa
+
+Léky při propuštění:
+Amoxicilin-klavulanát po dobu pěti dnů, dávka upravena s ohledem na funkci ledvin.
+Pokračovat v denní dávce amlodipinu.
+Pokračovat v užívání tablet železa.
+Snížit dávku allopurinolu.
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Kašel s horečkou
+Anémie
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělá a komunikativní
+Stav aktivity:
+Chodí, je soběstačná
+
+Pokyny pro propuštění:
+Byla léčena pro infekci dýchacích cest. Dokončete užívání antibiotik, pijte dostatek tekutin, vyhýbejte se protizánětlivým lékům proti bolesti a v případě horečky, dušnosti nebo sníženého objemu moči se vraťte. V případě dotazů volejte na kliniku ___.
+
+Pokyny pro kontrolu:
+___

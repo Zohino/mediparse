@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Jedná se o ___letého muže, který se dostavil do ___ s dvoudenní bolestí v pravém horním kvadrantu břicha, nevolností a zvracením, přičemž se stav zhoršoval. Bolest začala po konzumaci tučného jídla a od ___ se opakuje. Uvádí mírné zvýšení teploty a žádnou žloutenku. Ultrazvuk provedený v jiné nemocnici prokázal žlučové kameny, proto byl pacient převezen na chirurgické vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v dětství
+
+Rodinná anamnéza:
+Matka měla žlučové kameny. V rodině se nevyskytuje onemocnění jater.
+
+Fyzikální vyšetření:
+Celkový stav: Nepohodlí, ale bez akutní tíže
+Plíce: Čisté na obou stranách
+SRDEČNÍ AKTIVITA: Pravidelný rytmus, bez šelestů
+BŘICHO: Měkké, citlivé v pravém horním kvadrantu, pozitivní Murphyho příznak
+KONČETINY: Teplé, bez otoků
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí prokázala mírnou leukocytózu s normálními hodnotami jaterních enzymů a bilirubinu. Lipáza byla v normálním rozmezí.
+Byly zkontrolovány zobrazovací metody provedené v ___.
+ZÁVĚR: Žlučové kameny s tlustší stěnou žlučníku a tekutinou v okolí žlučníku, což odpovídá akutní cholecystitidě. Žádné rozšíření žlučových cest.
+
+Stručný popis průběhu hospitalizace:
+Pacient byl přijat na chirurgické oddělení, zahájena byla intravenózní hydratace a podávání antibiotik, a byl ponechán bez možnosti orální příjmu potravy. Chirurgický tým pod vedením ___ provedl ___ laparoskopickou cholecystektomii bez komplikací. Bolest byla kontrolována perorálními léky a pacient toleroval běžnou stravu. Horečka ustoupila, rány zůstaly čisté a pacient byl propuštěn domů ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně.
+2. Atorvastatin 20 mg perorálně každou noc.
+3. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti.
+4. Oxykodon 5 mg perorálně každé čtyři hodiny podle potřeby proti silné bolesti.
+5. Dokusát 100 mg dvakrát denně během užívání opioidů.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Stav při propuštění:
+Duševní stav: Bdělý a orientovaný, schopný plnit pokyny
+Fyzická aktivita: Ambulantní, soběstačný
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl laparoskopicky odstraněn. Můžete se sprchovat, ale vyhněte se namáčení řezů. Po dobu čtyř týdnů se vyhýbejte zvedání těžkých předmětů, jejichž váha přesahuje deset liber. V případě horečky, zhoršující se bolesti, zvracení, žloutnutí kůže nebo zarudnutí v oblasti řezů volejte na číslo ___ nebo se vraťte na pohotovost na adrese ___. Domluvte si návštěvu u ___ podle pokynů. Léky proti bolesti užívejte pouze v případě potřeby a vyhýbejte se řízení vozidla, pokud užíváte opioidy.
+
+Pokyny pro kontrolní vyšetření:
+___

@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž se dostavil s potížemi, jako je bušení srdce a kašel, byl převezen z ___. Vyšetření hrudníku vzbudilo obavy z možné pneumonie. Bylo zjištěno, že má nepravidelný srdeční rytmus a tachykardii.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce v ___ letech
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Bez horečky, hemodynamicky stabilní v klidu
+Celkový stav:
+Dobře se cítí
+Hlava, oči, uši, nos, hrdlo:
+Normální
+SRDCE:
+Nepravidelný srdeční rytmus
+Břicho:
+Měkké, bez citlivosti
+KŮŽE:
+Teplá, suchá
+
+Významné výsledky:
+NÁLEZY:
+Rentgen hrudníku ukázal mírné zastření v bazálních oblastech bez jasné konsolidace. Elektrokardiogram ukázal nepravidelný srdeční rytmus s úzkými komplexy a proměnlivou frekvencí. Telemetrie ukázala přetrvávající nepravidelný srdeční rytmus během noci. Byly zkontrolovány základní laboratorní výsledky a dnes jsou stabilní.
+
+Stručný popis průběhu hospitalizace:
+Byl monitorován pomocí telemetrie, byla zahájena léčba ke zpomalení srdečního rytmu a po konzultaci s kardiologickým týmem z ___ byla podána antikoagulační léčba. Kašel se zlepšil bez antibiotik. Dobře snášel stravu, chodil samostatně a byl lékařsky připraven na bezpečné propuštění třetí den hospitalizace.
+
+Léky při přijetí:
+Amlodipin 5 mg denně, aspirin 81 mg
+
+Léky při propuštění:
+Metoprolol sukcinát 50 mg denně. Apixaban 2,5 mg dvakrát denně. Amlodipin 5 mg denně. Aspirin vysazen. Užívat podle pokynů.
+
+Plán propuštění:
+Domů s podporou od ___
+
+Diagnóza při propuštění:
+Primární:
+Atriální fibrilace
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+
+Pokyny pro propuštění:
+Užívejte léky podle předpisu a veďte si záznamy o srdečním tepu. V případě mdlob, bolesti na hrudi nebo zhoršení dušnosti se vraťte. Zavolejte Dr. ___.
+
+Pokyny pro kontrolu:
+___

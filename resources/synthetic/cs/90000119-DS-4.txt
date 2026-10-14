@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Žena s postupující bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po jídle, trvající dva dny. Byla vyšetřena v ___, kde ultrazvuk odhalil žlučové kameny a ztluštělou stěnu žlučníku. Byla převezena do naší nemocnice službou ___ za účelem chirurgického vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Císařský řez v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlí, ale bdělá, bez horečky.
+Krk:
+Pružný, bez zvětšených lymfatických uzlin. Břicho citlivé v pravém horním kvadrantu, pozitivní Murphyho příznak, bez rezistence.
+
+Významné výsledky:
+Laboratorní testy při přijetí ukázaly mírnou leukocytózu a normální jaterní enzymy. Ultrazvuk v ___ potvrdil přítomnost více kamenů.
+LABORATORNÍ TESTY PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek se normalizoval, bilirubin normální, kreatinin stabilní.
+
+Stručný popis hospitalizace:
+Byla jí podána intravenózní tekutina, antibiotika a analgetika, poté podstoupila nekomplikovanou laparoskopickou cholecystektomii provedenou doktorem ___ druhý den hospitalizace. Bolest se postupně zlepšovala a pacientka dobře snášela běžnou stravu. Místa po punkcích byla čistá a suchá. Byla propuštěna domů po vyšetření lékařem ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg jednou denně
+2. Atorvastatin 20 mg každou noc
+3. Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti
+4. Docusate 100 mg dvakrát denně během užívání opioidů od ___
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělá a komunikativní.
+Fyzická aktivita:
+Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Byla jste hospitalizována kvůli zánětu žlučníku, který byl odstraněn. Udržujte rány čisté a suché, vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů a pokračujte v užívání běžných léků. V případě horečky, zhoršení bolesti, zvracení nebo žloutnutí kůže se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

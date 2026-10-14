@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letý muž s bolestí v pravém horním kvadrantu břicha a nevolností, trvajícími dva dny, odeslán ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Hlava, oči, uši, nos, hrdlo: Normální
+Krk: Pohyblivý
+Plíce: Čisté
+Břicho: Mírně citlivé, měkké
+Končetiny: Bez otoků
+Neurologické vyšetření: Pacient je při vědomí, bez ložiskových příznaků
+
+Významné výsledky:
+Ultrazvukové vyšetření prokázalo žlučové kameny se ztluštěním stěny žlučníku. Laboratorní výsledky z ___ ukázaly mírnou leukocytózu.
+ZÁVĚR:
+Akutní cholecystitida
+
+Stručný popis průběhu hospitalizace:
+Pacient podstoupil nekomplikovanou laparoskopickou cholecystektomii, dobře toleroval stravu, bolest byla kontrolována perorálně a byl propuštěn domů prvním dnem po operaci ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril, atorvastatin
+
+Léky při propuštění:
+Lisinopril, atorvastatin, paracetamol podle potřeby, oxykodon krátkodobě při silné bolesti, dokusát při užívání opioidů.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Dobrý
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Při vědomí a reaguje
+
+Pokyny pro propuštěného pacienta:
+Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze po dobu šesti týdnů a v případě horečky nebo zhoršení bolesti kontaktujte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

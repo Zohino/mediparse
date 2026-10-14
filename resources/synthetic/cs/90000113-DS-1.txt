@@ -1,0 +1,79 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava, žízeň, časté močení
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s několikdenní únavou, žízní a častým močením. Popírá kašel, horečku nebo příznaky pneumonie, a zobrazovací vyšetření hrudníku neprokázalo známky pneumonie. Byl odeslán do pohotovostní služby ___ k vyšetření.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Komfortní, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Suché sliznice
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Bez otoků
+Kůže:
+Teplá, suchá
+Neurologické vyšetření:
+Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Výrazně zvýšená hladina glukózy, mírná hyponatrémie, kreatinin blízko výchozí hodnoty.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Hladina glukózy se zlepšila, elektrolyty v normě při ___.
+ZÁVĚR:
+Na rentgenu hrudníku jsou plíce čisté, bez akutních nálezů.
+
+Léky při přijetí:
+Metformin, lisinopril, atorvastatin
+
+Léky při propuštění:
+Metformin dvakrát denně, nový bazální inzulin před spaním, pokračovat v užívání lisinoprilu a atorvastatinu jako dříve. Poskytnut glukometr a testovací proužky.
+
+Plán propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Diabetes mellitus s hyperglykémií
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+Stav aktivity:
+Samostatný, chodí bez pomoci
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli velmi vysoké hladině cukru v krvi. Měřte si hladinu glukózy před jídlem, užívejte inzulin podle pokynů, pijte dostatek tekutin a v případě, že se budete cítit zmateně, zvracíte nebo se budete cítit velmi slabí, zavolejte na ___ nebo se vraťte.
+
+Pokyny pro kontrolu:
+___

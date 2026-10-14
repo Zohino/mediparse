@@ -1,0 +1,77 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s třídenní bolestí v pravém horním kvadrantu břicha a nevolností, odeslán z ___ poté, co laboratorní vyšetření v ___ prokázala zvýšené hladiny jaterních enzymů.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Žlučové kameny
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Mírný ikterus skléry
+Krk:
+Pružný
+SRDEČNÍ:
+Pravidelný rytmus
+BŘICHO:
+Bolestivý pravý horní kvadrant, měkké
+Končetiny:
+Bez otoků
+KŮŽE:
+Teplá, suchá
+
+Významné výsledky:
+Při přijetí zvýšené hladiny jaterních enzymů a bilirubinu. Ultrazvukové vyšetření prokázalo žlučové kameny a rozšířený společný žlučovod. Hodnoty se zlepšily před propuštěním.
+
+Stručný popis hospitalizace:
+Přijat pro obstrukci žlučových cest způsobenou žlučovými kameny, léčen infuzemi, antibiotiky a klidem střev. Příznaky ustoupily po ___ a postupně se zlepšovala strava. Naplánována kontrola v chirurgické ambulanci ohledně odstranění žlučníku.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+
+Léky při propuštění:
+Lisinopril denně
+Atorvastatin večer
+Paracetamol podle potřeby proti bolesti
+Ondansetron podle potřeby proti nevolnosti
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární:
+Choledocholitiáza s cholangitidou
+Hypertenze, hyperlipidémie
+
+Stav při propuštění:
+Úroveň vědomí: Bdělý a komunikativní
+Stav aktivity: Samostatný, chodí bez pomoci
+
+Pokyny pro propuštěného pacienta:
+Byl jste léčen pro ucpaný žlučovod způsobený žlučovými kameny. Jezte jídla s nízkým obsahem tuku, užívejte léky podle pokynů a v případě horečky, žluté kůže nebo zhoršení bolesti volejte ___.
+
+Pokyny pro kontrolu:
+___

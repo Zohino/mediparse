@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Jedná se o ___letou ženu, která se dostavila do ___ s dvoudenní se zhoršující bolestí v pravém horním kvadrantu břicha, nevolností a zvracením. Bolest začala po konzumaci tučného jídla a vyzařovala do zad. Uváděla subjektivní pocity horečky od ___ a sníženou chuť k jídlu. Popírala žloutenku, tmavou moč, bolest na hrudi nebo dušnost.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Obezita
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlí, ale bez akutní distrese, bez horečky.
+Krk:
+Pružný, bez zvětšených lymfatických uzlin.
+Břicho:
+Měkké, citlivé v pravém horním kvadrantu, pozitivní Murphyho příznak, bez odporu.
+Neurologické vyšetření:
+Bdělost, orientace, bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 14,2, hemoglobin 12,8, trombocyty 255. Sodík 138, draslík 4,1, kreatinin 0,8, glukóza 246. ALT 62, AST 48, celkový bilirubin 1,1, lipáza v normě. Ultrazvuk provedený v ___ prokázal žlučové kameny, ztluštění stěny žlučníku a tekutinu v okolí žlučníku. Zpráva datovaná ___ potvrdila, že nedochází k rozšíření společného žlučovodu.
+
+Stručný průběh hospitalizace:
+Byla přijata s akutní kalcifikovanou cholecystitidou a zahájena intravenózní antibiotika a infuze. Byla vyšetřena doktorem ___ a v nemocniční den ___ podstoupila nekomplikovanou laparoskopickou cholecystektomii. Její diabetes byl léčen pomocí posuvné škály inzulínu, přičemž zvýšená hladina glukózy při přijetí se po operaci zlepšila. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a byla propuštěna ve stabilizovaném stavu do ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Metformin 500 mg dvakrát denně
+
+Léky při propuštění:
+1. Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti.
+2. Oxykodon 5 mg každých šest hodin podle potřeby proti silné bolesti.
+3. Dokusát 100 mg dvakrát denně při užívání oxykodonu.
+4. Inzulín glargin ___ jednotek večer.
+5. Lisinopril 10 mg denně.
+6. Atorvastatin 20 mg večer.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Diabetes
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a komunikativní.
+Fyzická aktivita:
+Chodí, soběstačný.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl následně chirurgicky odstraněn. Udržujte řezné rány čisté a suché a můžete se sprchovat. Během čtyř týdnů nezvedejte nic, co váží více než 4,5 kilogramu. V případě horečky, zhoršující se bolesti, zvracení, zarudnutí v oblasti řezných ran nebo žluté barvy kůže kontaktujte doktora ___ na telefonním čísle ___. V případě závažných příznaků se vraťte do ___. Telefonní číslo ordinace: ___.
+
+Pokyny pro kontrolní vyšetření:
+___

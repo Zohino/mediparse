@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel, horečka, dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž odeslán z ___ s pětidenním produktivním kašlem, horečkou a zhoršující se dušností. Rentgen hrudníku ukázal konsolidaci v dolním laloku pravého plíce.
+
+Anamnéza předchozích onemocnění:
+CHOPN
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Vitalní funkce: bez horečky, stabilní
+Celkový stav: komfortní
+Krk: pohyblivý
+Plíce: rozptýlené chrůpky
+Břicho: měkké
+Neurologické vyšetření: bez ložiskových příznaků
+
+Významné výsledky:
+Počet leukocytů 16,2 při přijetí, pokles na 8,1. Kultivace sputa prokázala orální flóru. Rentgen hrudníku s opacitou v dolním laloku pravé plíce.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Počet leukocytů 8,1, kreatinin 0,9
+
+Stručný popis hospitalizace:
+Léčen ceftriaxonem a azithromycinem, poté převeden na perorální antibiotika po odeznění horečky. Nepravidelný rytmus zaznamenaný na monitoru byl regulován pomocí metoprololu. Vyšetřen doktorem ___ a propuštěn do domácí péče.
+
+Léky při přijetí:
+Inhalátor s tiotropiem, denně
+Lisinopril 10 mg
+
+Léky při propuštění:
+1. Inhalátor s tiotropiem, denně
+2. Lisinopril 10 mg, denně
+3. Metoprolol 25 mg, dvakrát denně
+4. Amoxicilin-klavulanát po dobu dalších tří dnů
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Chronická obstrukční plicní nemoc
+Předvířová fibrilace
+
+Stav při propuštění:
+Duševní stav: jasný a srozumitelný
+Úroveň vědomí: bdělý
+Fyzická aktivita: chůze, soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen na plicní infekci. Dokončete všechny antibiotika, používejte inhalátory a dodržujte termín kontroly u ___. V případě horečky nebo zhoršení dýchání volejte ___ nebo se vraťte.
+
+Pokyny pro kontrolu:
+___

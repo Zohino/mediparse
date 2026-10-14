@@ -1,0 +1,87 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Léky obsahující sulfanilamid
+
+Hlavní potíže:
+Zčervenání a horečka pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s hypertenzí a hypotyreózou, která se dostavila s třemi dny trvajícím zhoršujícím se zčervenáním, hřejivostí a otokem pravé dolní končetiny po drobném oděru při zahradničení. Doma si všimla horečky a zimnice. Byla vyšetřena v ___ svým ošetřujícím lékařem, doktorem ___, který ji poslal na pohotovost kvůli intravenóznímu podávání antibiotik.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Osteoartróza obou kolen
+Cholecystektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka, která v ___ utrpěla cévní mozkovou příhodu. Otec s hypertenzí.
+
+Fyzikální vyšetření:
+Celkový stav:
+Mírně nemocný vzhled, v klidu se cítí dobře
+Hlava, krk, uši, nos, hrdlo:
+Vlhké sliznice
+Krk:
+Pružný
+Plíce:
+Oboustranně čisté
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Pravá holeně zčervenalá, hřejivá, citlivá, s výrazným okrajem
+Neurologické vyšetření:
+Bdělý, bez neurologických deficitů
+
+Významné výsledky:
+Laboratorní výsledky při přijetí ___: počet bílých krvinek 14,2, hemoglobin 12,8, počet krevních destiček 245, kreatinin 0,8, laktát 1,1. Krevní kultury odebrané ___ nevykazovaly růst po pěti dnech. Ultrazvuk pravé nohy neprokázal hlubokou žilní trombózu.
+ZÁVĚR:
+Otok měkkých tkání pravé dolní končetiny bez abscesu nebo hluboké žilní trombózy.
+
+Stručný průběh hospitalizace:
+Byla přijata a zahájena intravenózní léčba cefazolinem. Horečka ustoupila do druhého dne hospitalizace a zčervenání začalo ustupovat; okraj byl dobře ohraničený a postupně se zmenšoval. Bolest byla kontrolována pomocí paracetamolu. ___ byla převedena na perorální léčbu cefalexinem a mohla pohodlně chodit, přičemž její stav byl stabilní. Její domácí léčba byla pokračována beze změn. Byla propuštěna ve stabilním stavu, aby dokončila léčbu antibiotiky.
+PŘECHODNÁ OTÁZKY:
+Dokončit léčbu antibiotiky. Pravou nohu nechat znovu vyšetřit doktorem ___ do jednoho týdne.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 75 mcg denně
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně každých šest hodin po dobu sedmi dnů
+2. Lisinopril 10 mg perorálně denně
+3. Levotyroxin 75 mcg perorálně denně
+4. Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+Sekundární:
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+Jasný a srozumitelný
+Fyzická aktivita:
+Chodí, soběstačná
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli kožní infekci pravé nohy a léčeni antibiotiky. Užívejte všechny předepsané tablety antibiotik, i když zarudnutí ustoupí. Při sezení držte nohu ve zvýšené poloze a udržujte pokožku čistou a hydratovanou. Pokud máte horečku, zarudnutí se šíří, bolest se zhoršuje nebo se objevuje výtok, kontaktujte svého lékaře nebo se vraťte do ___. Dodržujte plán kontrolních vyšetření, který byl dohodnut v ___.
+
+Pokyny pro kontrolní vyšetření:
+___

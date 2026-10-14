@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s chronickým onemocněním ledvin a fibrilací síní se dostavila do ___ s několikden trvajícím zhoršováním otoku nohou a únavou. Příznaky se objevily poté, co vynechala dávky léků během cesty do ___.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Unavená, ale v pohodě
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Plíce:
+Čisté na obou stranách
+Břicho:
+Měkké, netendrovatelné
+
+Významné výsledky:
+Kreatinin blízko výchozí hodnoty. Draslík v normě. Rentgen hrudníku ukázal mírnou vaskulární kongesci bez ložiskové konsolidace.
+ZÁVĚR:
+Mírná kongesce, jinak bezvýznamné nálezy.
+
+Stručný popis hospitalizace:
+Byla jí podána intravenózní diuretika, s dobrým močením a otok se zlepšil. Srdeční frekvence byla kontrolována pomocí její běžné domácí léčby. Byly prostudovány záznamy z ___. Hladina glukózy zůstala stabilní a byla propuštěna ___.
+
+Léky při přijetí:
+Metformin, metoprolol, apixaban
+
+Léky při propuštění:
+1. Metformin 500 mg dvakrát denně
+2. Metoprolol succinate 50 mg denně
+3. Apixaban 5 mg dvakrát denně
+4. Furosemid 40 mg denně
+
+Plán propuštění:
+Domů, s péčí od ___
+
+Diagnóza při propuštění:
+Diabetes
+Chronické onemocnění ledvin
+Fibrilace síní
+
+Stav při propuštění:
+Stabilní a zlepšený.
+Duševní stav:
+Bdělá a plně orientovaná.
+
+Pokyny pro propuštění:
+Byla léčena pro přetížení tekutinami. Každé ráno se važte a v případě rychlého nárůstu hmotnosti volejte. Užívajte léky podle předpisu a omezte příjem soli. V případě jakýchkoli obav kontaktujte ___.
+
+Pokyny pro kontrolu:
+___

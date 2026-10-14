@@ -1,0 +1,78 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Slabost a špatný apetit
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s několikdenní únavou a špatným příjmem potravy, odeslána z ___ po zjištění vysokých hodnot glukózy doma. Popírá horečku, bolest na hrudi nebo zvracení.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Stabilní, bez horečky
+Celkový stav:
+Unavená, v pohodě
+Hlava, oči, uši, nos, hrdlo:
+Suché sliznice
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Bez otoků
+Kůže:
+Teplá, suchá
+Pulzy:
+Hmatatelné bilaterálně
+
+Významné výsledky:
+Při přijetí výrazně zvýšená hladina glukózy, nízké hodnoty sodíku, normální hladina bikarbonátu. Vyšetření moči bez známek infekce. Rentgen hrudníku bez patologických nálezů. Opakované měření glukózy se zlepšilo po podání tekutin a inzulínu dne ___.
+
+Stručný popis hospitalizace:
+Pacientka dostávala intravenózně tekutiny a inzulín, přičemž došlo ke stabilnímu zlepšení hladiny glukózy a apetitu. Endokrinologický tým z ___ upravil její léčebný režim. Edukace o dietě byla dokončena s ošetřujícím personálem v ambulanci ___.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Metformin 1000 mg dvakrát denně
+2. Glipizid 5 mg denně
+3. Lisinopril 10 mg denně
+4. Atorvastatin 20 mg večer
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Nekontrolovaný diabetes
+
+Stav při propuštění:
+Dobrý, schopná chůze, dobře jí
+Úroveň vědomí:
+Bdělá a komunikativní
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli vysoké hladině cukru v krvi. Užívajte léky podle pokynů, měřte si glukózu dvakrát denně a dodržujte termíny kontrol. Co nejdříve se objednejte k Dr. ___.
+
+Pokyny pro další postup:
+___

@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha, vyzařující z ___
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie provedená v ___
+
+Anamnéza současného onemocnění:
+Pacientka je žena, která se dostavila ___ s bolestí v pravém horním kvadrantu břicha, která trvala dva dny a vyzařovala do zad, doprovázená nevolností a jednou epizodou zvracení. Bolest se zhoršovala po konzumaci tučných jídel. Byla vyšetřena v ___, kde ultrazvuk odhalil žlučové kameny a ztluštělou stěnu žlučníku. Byla převezena ___ na chirurgické vyšetření. Popírala horečku, žloutenku nebo změny barvy stolice.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Císařský řez v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodinné anamnéze je významný diabetes mellitus u matky. Žádné známé onemocnění žlučníku.
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Bez žloutenky, vlhké sliznice
+Plíce: Čisté na obou stranách
+Břicho: Měkké, mírně citlivé v pravém horním kvadrantu, jizvy čisté
+Končetiny: Teplé, bez otoků
+Neurologické vyšetření: Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala mírnou leukocytózu s normální hladinou bilirubinu a normálními jaterními enzymy. Lipáza byla v normálním rozmezí. Ultrazvukové vyšetření provedené v ___ prokázalo mnohočetné žlučové kameny, ztluštění stěny žlučníku a tekutinu v okolí žlučníku. Patologické vyšetření odeslané do ___ potvrdilo chronickou a akutní cholecystitidu bez malignity. Před propuštěním byla zkontrolována závěrečná zpráva.
+
+Stručný průběh hospitalizace:
+Byla přijata, ponechána bez orální výživy a zahájena intravenózní infuze a antibiotika pro akutní cholecystitidu. ___ podstoupila nekomplikovanou laparoskopickou cholecystektomii pod vedením Dr. ___. Strava byla postupně rozšiřována a bolest byla kontrolována perorálními léky. Začala plynout, mohla se samostatně pohybovat a dobře snášela běžnou stravu. Po operaci byly antibiotika vysazena. Byla propuštěna ve stabilizovaném stavu po konzultaci s ___.
+PŘECHODNÁ OTÁZKY:
+Ambulantní chirurgická kontrola; sledování míst řezů.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně
+2. Atorvastatin 20 mg perorálně každou noc
+3. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby na bolest
+4. Docusate 100 mg perorálně dvakrát denně během užívání opioidů
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a komunikativní
+Stav aktivity: Ambulantní, soběstačná
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl odstraněn laparoskopicky. Můžete se sprchovat, ale do doby, než vám lékař ___ povolí, se vyhýbejte tomu, aby se rány namáčely. Po dobu čtyř týdnů nezvedejte nic, co váží více než pět kilogramů. Léky proti bolesti užívejte pouze v případě potřeby a během užívání neřiďte. V případě horečky, zhoršení bolesti, zvracení, žloutnutí kůže nebo výtoku z ran kontaktujte svého chirurga nebo se vraťte do ___.
+
+Pokyny pro kontrolní vyšetření:
+___

@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha a zvracení
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ se třemi dny trvající se zhoršující se bolestí břicha a zvracením po jídle. Byl vyšetřen v ___ a převezen k další péči. Nebyla hlášena horečka ani bolest na hrudi.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Pacient je při vědomí a cítí se dobře, dýchá bez problémů.
+Krk: pružný
+SRDEČNÍ AKTIVITA: pravidelný rytmus
+Břicho: měkké, citlivé v epigastriu
+Končetiny: teplé, bez otoků
+KŮŽE: bez vyrážky
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Lipáza výrazně zvýšená. Počet bílých krvinek mírně zvýšený, hemoglobin normální, kreatinin normální. Jaterní enzymy mírně zvýšené. Triglyceridy v normálním rozmezí. Ultrazvuk ukázal žlučové kameny bez rozšíření žlučových cest. CT vyšetření ukázalo zánět v okolí pankreatu bez nekrózy.
+
+Stručný popis hospitalizace:
+Pacient byl přijat s pankreatitidou způsobenou žlučovými kameny a léčen infuzemi, analgetiky a klidem střev. Strava byla postupně rozšiřována a bolest ustoupila. Chirurgický tým v ___ doporučil ambulantní cholecystektomii, kterou zajistí ___. Pacient dobře snášel běžnou stravu a před propuštěním neměl horečku.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer.
+
+Léky při propuštění:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Paracetamol 650 mg každých šest hodin podle potřeby na bolest.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pankreatitida způsobená žlučovými kameny
+Cholelitiáza
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Při vědomí a reaguje.
+Stav aktivity: Chodí, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Dodržujte stravu s nízkým obsahem tuků. V případě silné bolesti břicha, horečky, zvracení nebo žluté kůže se vraťte. V případě dotazů volejte ___ nebo se obraťte na ___.
+
+Pokyny pro kontrolu:
+___

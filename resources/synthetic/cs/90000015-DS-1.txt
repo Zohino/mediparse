@@ -1,0 +1,77 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohy a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient odeslán ze své primární kliniky v ___ po dvou týdnech zhoršujícího se otoku kotníku, únavy a špatné chuti k jídlu. Laboratorní testy provedené v ___ ukázaly abnormální hodnoty, proto byl pacient přijat k vyšetření a monitorování.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+DNA, sledováno v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí. Sourozenec léčen v ___ pro dnu.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Pacient je v pohodlí, bez horečky, mírně zvýšený krevní tlak.
+HLAVA, OČI, UŠI, NOS, KRK:
+Vlhké sliznice.
+KRK:
+Pružný, bez známek zvýšeného žilního tlaku.
+BŘICHO:
+Měkké, netendrovatelné.
+KONČETINY:
+Mírný bilaterální otok s prohlubněmi.
+
+Významné výsledky:
+Při přijetí zvýšené hodnoty kreatininu a močoviny, mírná anémie a nízká hladina bikarbonátu. V moči zjištěn protein. Provedeno srovnání s externími hodnotami z ___.
+ZÁVĚR:
+Na ultrazvuku malé ledviny bez hydronefrózy.
+
+Stručný průběh hospitalizace:
+Pacient byl léčen mírným diuretikem a otok se postupně zlepšoval. Dávka léků na krevní tlak byla upravena a nefrolog posoudil případ v ___. Elektrolyty byly korigovány a pacient toleroval dietu s nízkým obsahem soli. Laboratorní hodnoty zůstaly stabilní a pacient byl propuštěn s doporučením pravidelného ambulantního sledování v ___.
+
+Léky při přijetí:
+Amlodipin
+Atorvastatin
+Allopurinol
+
+Léky při propuštění:
+1. Amlodipin 10 mg denně.
+2. Atorvastatin 20 mg večer.
+3. Furosemid 20 mg každé ráno.
+4. Tablety hydrogenuhličitanu sodného dvakrát denně.
+5. Dávka allopurinolu snížena, užívejte podle pokynů.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byli jste přijati s otokem a abnormálními výsledky krevních testů. Užijte si léky podle seznamu, vážte se každé ráno a omezte příjem soli v potravě. Vyhýbejte se protizánětlivým lékům proti bolesti. V případě dušnosti, sníženého objemu moči nebo zhoršení otoku se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro další sledování:
+___

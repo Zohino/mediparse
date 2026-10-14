@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s třemi dny trvající se zhoršující dušností, produktivním kašlem a sípáním po expozici kouři v ___. Byla vyšetřena v ___ a odeslána na pohotovost, kde potřebovala doplňkový kyslík.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Předchozí užívání tabáku, pod dohledem doktora ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+HEENT: Vlhké sliznice
+Krk: Pohyblivý
+Plíce: Difúzní sípání při výdechu, prodloužený výdech
+Břicho: Měkké, netendrovatelné
+Kůže: Teplá, suchá
+Neurologické: Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Rentgen hrudníku ukázal hyperinflaci plic bez ložiskové opacity. Krevní obraz a biochemické testy byly v normě. Maximální výdechový průtok se zlepšil po léčbě v ___ následujícího rána.
+
+Stručný popis hospitalizace:
+Pacientka dostávala inhalované bronchodilatancia, krátkodobou kúru perorálních steroidů a kyslík, jehož podávání bylo postupně snižováno, dokud nepotřebovala pouze vzduch z okolí. Sípání postupně ustoupilo. Byla vyšetřena respiračním terapeutem v ___ a poučena o správné technice inhalace. Její příznaky se zlepšily do ___ a byla propuštěna.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+
+Léky při propuštění:
+1. Lisinopril denně.
+2. Atorvastatin večer.
+3. Prednison, dávka postupně snižována po dobu pěti dnů.
+4. Albuterolový inhalátor podle potřeby při sípání.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní exacerbace chronické obstrukční plicní nemoci
+
+Stav při propuštění:
+Stabilní, schopná chůze, dýchá pohodlně bez doplňkového kyslíku
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli potížím s dýcháním. Užijte steroidy podle pokynů a používejte inhalátor podle potřeby. Vyhýbejte se kouři. V případě zhoršení dušnosti, horečky nebo bolesti na hrudi se vraťte do nemocnice nebo volejte ___ s dotazy.
+
+Pokyny pro kontrolu:
+___

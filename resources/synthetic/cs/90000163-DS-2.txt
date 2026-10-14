@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Zarudnutí a otok levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž odeslán z ___ kliniky, tři dny trvající šířící se zarudnutí, teplo a bolest v levé dolní končetině, s pocitem zimy. Vyšetřen doktorem ___, který zaznamenal zvýšenou teplotu a odeslal ho na další vyšetření. Bez bolesti na hrudi nebo potíží s dýcháním.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na pocit zimy a bolest nohy. Jinak negativní.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce.
+
+Fyzikální vyšetření:
+Vitalní funkce: T 38,3 °C, TF 96, TK 138/80, dechová frekvence 16, SpO2 97 % při dýchání okolního vzduchu
+Celkový stav: Nepohodlný, při vědomí.
+Břicho: Měkké, netendrové.
+KONČETINY: Levá holeně teplá, zarudlá, citlivá, mírný edém.
+Neurologické: Bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 13,2, kreatinin 0,9, laktát 1,1, CRP zvýšené.
+NÁLEZY:
+Ultrazvuk nohy provedený v ___ neukázal žádnou trombózu. Krevní kultury z ___ byly při propuštění negativní.
+
+Stručný průběh hospitalizace:
+Byl léčen na celulitidu levé nohy intravenózním vancomycinem kvůli jeho alergii. Zarudnutí bylo označeno perem a postupně ustupovalo. Infekční oddělení v ___ doporučilo perorální terapii. Do ___ neměl horečku, chodil pohodlně a byl připraven na propuštění domů.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Doxycyklin 100 mg dvakrát denně po dobu sedmi dnů
+2. Lisinopril 10 mg denně
+3. Atorvastatin 20 mg večer
+4. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest, dodal ___
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida levé nohy
+Sekundární:
+Hypertenze
+Hyperlipidemie
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Při vědomí a reaguje.
+
+Pokyny pro propuštění:
+Byl jste léčen na kožní infekci nohy. Užijte antibiotika až do konce a držte nohu ve zvýšené poloze, když sedíte. Zavolejte na ___ na číslo ___, pokud se zarudnutí rozšíří nebo se vrátí horečka, nebo se vydejte na pohotovost ___ v případě silné bolesti.
+
+Pokyny pro kontrolu:
+___

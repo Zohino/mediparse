@@ -1,0 +1,92 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Kašel a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___letou ženu s anamnézou nepravidelného srdečního rytmu, problémů s ledvinami a zvýšené hladiny cukru v krvi, která se dostavila s pětidenním kašlem s vykašláváním, horečkou a zhoršující se dušností. Byla odeslána z ___ svým ošetřujícím lékařem, doktorem ___, poté, co se zjistilo, že má nízkou saturaci kyslíkem při dýchání běžného vzduchu.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Chronické onemocnění ledvin, stadium 3
+Fibrilace síní, užívá antikoagulancia
+Hypertenze
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Unavená, ale v pohodě, mluví celými větami
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Krk:
+Pružný
+Plíce:
+Chropy na pravé dolní části
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Mírný edém
+Kůže:
+Teplá a suchá
+Neurologické vyšetření:
+Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ___ ukázala počet bílých krvinek 13,2, kreatinin 1,6 (blízko výchozí hodnoty), glukózu 210. Rentgen hrudníku odhalil opacitu v pravém dolním laloku. Kultivace krve neprokázala růst bakterií. EKG prokázalo nepravidelný rytmus s kontrolovanou frekvencí komor. Opakovaný rentgen hrudníku před propuštěním byl stabilní.
+
+Stručný popis hospitalizace:
+Byla léčena pro komunitně získanou pneumonii pomocí antibiotik, která byla vybrána s ohledem na její alergii, a navíc dostávala doplňkový kyslík, který byl během tří dnů postupně snižován. Její stav zůstal kontrolovaný a pokračovala antikoagulační léčba. Dávka inzulínu byla upravena podle hladiny cukru. Funkce ledvin zůstala stabilní. Doktor ___ z ___ souhlasil s plánem.
+PŘECHODNÁ OTÁZKY:
+Opakovat rentgen hrudníku za šest týdnů a základní laboratorní vyšetření za jeden týden.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+Apixaban 5 mg dvakrát denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Apixaban 5 mg perorálně dvakrát denně
+2. Lisinopril 10 mg perorálně jednou denně
+3. Metformin 500 mg perorálně dvakrát denně
+4. Azithromycin 250 mg denně po dobu dalších tří dnů
+Recepty zaslány do lékárny ___.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes mellitus 2. typu
+Fibrilace síní
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělá a reaguje
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli infekci plic a léčeni antibiotiky a kyslíkem. Důsledně užívejte všechny předepsané léky, pijte dostatek tekutin a odpočívejte. Pravidelně si měřte hladinu cukru v krvi. V případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte do nemocnice. V případě dotazů volejte na číslo ___ nebo mimo pracovní dobu na číslo ___. Navštivte lékaře ___ na kontrolní vyšetření.
+
+Pokyny pro kontrolní vyšetření:
+
+___

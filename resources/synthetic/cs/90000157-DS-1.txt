@@ -1,0 +1,81 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: UROLOGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé oblasti boku
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Cystoskopie s umístěním uretrálního stentu
+
+Anamnéza současného onemocnění:
+Dva dny trvající bolest v pravé oblasti boku a nevolnost ho přivedly do ___. Popírá horečku, kašel nebo pneumonii. CT vyšetření provedené v ___ ukázalo obstrukční kámen v močovodu. Byl přijat za účelem kontroly bolesti a urologického vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Kameny v ledvinách, léčen v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s kameny v ledvinách
+
+Fyzikální vyšetření:
+Životní funkce:
+Stabilní, bez horečky
+Celkový stav:
+Komfortní
+Hlava, oči, uši, nos, hrdlo:
+Normální
+Krk:
+Pružný
+Břicho:
+Mírná citlivost v pravé oblasti boku
+Končetiny:
+Bez otoků
+Kůže:
+Teplá, suchá
+Neurologické vyšetření:
+Bez ložiskových příznaků
+
+Významné výsledky:
+Zobrazovací vyšetření z ___ ukázalo 6mm proximální kámen v pravém močovodu s mírnou hydronefrózou. Vyšetření moči ukázalo krev bez známek infekce.
+LABORATORNÍ VÝSLEDKY PŘED PROPUŠTĚNÍM:
+Leukocyty 8,1, hemoglobin 14,0, kreatinin 1,0, sodík 139.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+Tamsulosin 0,4 mg večer
+Ibuprofen 600 mg každých osm hodin podle potřeby na bolest
+Ondansetron 4 mg podle potřeby na nevolnost
+Lisinopril 10 mg denně
+
+Plán propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Obstrukční kámen v pravém močovodu
+Hydronefróza
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+Stav aktivity:
+Chodící, soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen na kámen v ledvině. Pijte dostatek tekutin a moč filtrujte. Užívajte léky podle pokynů. V případě horečky, nekontrolované bolesti nebo neschopnosti močit se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

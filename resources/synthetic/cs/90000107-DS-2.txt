@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava a otok nohou
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s několikdenní slabostí, sníženou chutí k jídlu a otokem kotníků, odeslána svým lékařem z ___ na pohotovost poté, co laboratorní výsledky z ambulantní péče byly abnormální.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin
+Hypertenze
+Anémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce: stabilní
+Celkový stav: dobrý
+Krk: pohyblivý
+Plíce: čisté
+Břicho: měkké
+Neurologický stav: bdělá
+
+Významné výsledky:
+VÝSLEDKY LABORATORNÍCH TESTŮ PŘED PROPUŠTĚNÍM:
+Kreatinin v normě, draslík v normě, mírně snížený hemoglobin, bikarbonát se po léčbě zlepšil.
+ZÁVĚR:
+Ultrazvuk ledvin bez obstrukce, malé echogenní ledviny.
+
+Stručný popis hospitalizace:
+Pacientka byla přijata pro přetížení tekutinami a mírnou nerovnováhu elektrolytů. Dávka diuretik byla upravena a otok se postupně zlepšoval. Laboratorní výsledky byly prodiskutovány s týmem z ___ a hodnoty se vrátily k výchozí úrovni. Pacientka dobře jedla a před propuštěním chodila samostatně.
+
+Léky při přijetí:
+Amlodipin denně
+Přípravek železa
+
+Léky při propuštění:
+1. Amlodipin 5 mg perorálně jednou denně
+2. Furosemid 20 mg perorálně každé ráno
+3. Přípravek železa jako dříve
+
+Plán propuštění:
+Domů, s naplánovanou kontrolou prostřednictvím ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin s přetížením tekutinami
+
+Stav při propuštění:
+Stabilní a zlepšený
+Úroveň vědomí: Bdělá a komunikativní
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni pro otok a únavu. Každé ráno se važte, omezte příjem soli a užívejte diuretikum podle pokynů. V případě recidivy otoku, dušnosti nebo sníženého objemu moči volejte ___ nebo se vraťte.
+
+Pokyny pro kontrolu:
+___

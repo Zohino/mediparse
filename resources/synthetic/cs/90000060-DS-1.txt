@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+___ letá žena s jednodenní se zhoršující bolestí v pravé části břicha, nevolností a mírnou horečkou, odeslána z ___.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na nevolnost. Jinak negativní.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s rakovinou prsu
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Stabilní, bez horečky
+Celkový stav:
+Komfortní, bez známek úzkosti
+PLÍCE:
+Čisté
+BŘICHO:
+Mírná citlivost, hojící se místa po punkci
+NEUROLOGIE:
+Bdělá, bez ložiskových příznaků
+
+Důležité výsledky:
+NÁLEZY:
+CT vyšetření ukázalo rozšířený, zánětlivý appendix s okolní tukovou infiltrací. Počet bílých krvinek byl při přijetí mírně zvýšený.
+
+Stručný popis průběhu hospitalizace:
+Byla přijata, podána antibiotika a odeslána na operační sál k nekomplikované apendektomii, kterou provedl Dr. ___. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a byla připravena k propuštění.
+
+Léky při přijetí:
+Lisinopril
+Levotyroxin
+
+Léky při propuštění:
+1. Lisinopril denně, jako dříve.
+2. Levotyroxin denně, jako dříve.
+3. Paracetamol podle potřeby na bolest.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Dobrý, dobře snáší běžnou stravu.
+Stav aktivity:
+Ambulantní, soběstačná
+
+Pokyny pro propuštění:
+Byl vám odstraněn appendix. Vyhýbejte se těžké fyzické námaze po dobu několika týdnů. V případě horečky, zvracení nebo sekrece z rány volejte ___ nebo se vraťte do nemocnice.
+
+Pokyny pro kontrolu:
+___

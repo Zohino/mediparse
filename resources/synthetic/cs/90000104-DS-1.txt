@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s hypertenzí se dostavil po dvou dnech závodění, nepravidelném srdečním rytmu a závratích. Nejprve ho vyšetřil jeho lékař v ___ a poté ho odeslal do ___ na další vyšetření. Neměl bolesti na hrudi ani omdlévání.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce
+
+Fyzikální vyšetření:
+Vitalní funkce: srdeční frekvence 118, krevní tlak 134/82, SpO2 97 % při dýchání okolním vzduchem
+Celkový stav: Dobrý, bez známek potíží
+Krk: Bez známek zvýšeného žilního tlaku
+Plíce: Čisté na obou stranách
+Břicho: Měkké, netendrové
+Končetiny: Teplé, bez otoků
+
+Významné výsledky:
+Dvakrát negativní troponin. Normální hladiny draslíku a hořčíku. Normální TSH. Echokardiogram provedený v ___ ukázal zachovanou ejekční frakci a mírné zvětšení levé síně.
+
+Stručný popis průběhu hospitalizace:
+Na monitoru byl zaznamenán nepravidelný rytmus a frekvence byla kontrolována pomocí metoprololu. Po zhodnocení rizik s týmem v ___ byla zahájena antikoagulační léčba. Pacient se cítil dobře a frekvence se před propuštěním stabilizovala. Před odchodem ho vyšetřil ___.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Při kontrolním vyšetření zkontrolovat srdeční frekvenci a toleranci antikoagulační léčby.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Lisinopril 10 mg jednou denně
+Atorvastatin 20 mg večer
+Metoprolol sukcinát 50 mg denně
+Apixaban 5 mg dvakrát denně
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Fibrilace síní
+
+Stav při propuštění:
+Stabilní
+Duševní stav: Bdělý a orientovaný, schopen dodržovat pokyny
+Stav aktivity: Chodí samostatně
+
+Pokyny pro propuštění:
+Byli jste přijati s rychlým, nepravidelným srdečním rytmem. Užívajte nové léky podle pokynů a nepřestávejte užívat léky na ředění krve. V případě omdlévání, bolesti na hrudi, krvácení nebo nové slabosti se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila do ___ s potížemi, které trvaly tři dny – bušení srdce a závratě. Příznaky se objevily doma po ___ a doprovázela je mírná dušnost. Pacientka popírala bolest na hrudi nebo mdloby. Její primární lékař v ___ doporučil vyšetření na pohotovosti, kde telemetrie ukázala nepravidelný rytmus s rychlou komorovou frekvencí. Pacientka byla přijata za účelem regulace srdeční frekvence a monitorování.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Fibrilace síní, diagnostikována ___
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka, u které došlo k cévní mozkové příhodě v ___
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: TF 118, TK 134/80, SpO2 97 % při dýchání okolního vzduchu
+Celkový stav: pacientka je v pohodlí, bez známek úzkosti
+Hlava, uši, nos, hrdlo: vlhké sliznice
+Krk: pružný
+Plíce: oboustranně čisté
+Břicho: měkké, netendrovatelné
+Neurologické vyšetření: pacientka je při vědomí, bez ložiskových deficitů
+
+Významné výsledky:
+EKG při příjezdu ukázalo nepravidelný, široký komplexní rytmus bez akutních ischemických změn. Echokardiografie provedená v ___ ukázala zachovanou ejekční frakci a mírné zvětšení levé síně. Funkce štítné žlázy byla normální.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Leukocyty 6,8, hemoglobin 12,9, trombocyty 241, sodík 140, draslík 4,2, kreatinin 0,8
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg perorálně jednou denně
+2. Apixaban 5 mg perorálně dvakrát denně
+3. Lisinopril 10 mg perorálně jednou denně
+4. Atorvastatin 20 mg perorálně večer
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Fibrilace síní s rychlou komorovou odpovědí
+
+Stav při propuštění:
+Úroveň vědomí: při vědomí a komunikativní
+Stav aktivity: schopna chůze, soběstačná
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli rychlému, nepravidelnému srdečnímu tepu. Vaše srdeční frekvence byla regulována léky a byl zahájen podávání antikoagulantu ke snížení rizika cévní mozkové příhody. Užívajte všechny léky podle předpisu a nepřestávejte je užívat. V případě bušení srdce, mdlob, krvácení nebo bolesti na hrudi kontaktujte doktora ___ nebo kliniku na čísle ___. Léky si nechte předepsat v ___.
+
+Pokyny pro kontrolu:
+___

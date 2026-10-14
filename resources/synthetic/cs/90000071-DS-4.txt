@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí, která se dostavila se dvěma dny trvající bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po konzumaci tučných jídel. Byla převezena z ___ za účelem dalšího vyšetření. Ultrazvuk odhalil žlučové kameny s zesílením stěny žlučníku. Při přijetí neměla horečku a byla přijata na chirurgické oddělení s cholecystitidou.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Rodinná anamnéza CHOPN u matky.
+
+Fyzikální vyšetření:
+Vitalní funkce: T 37,0 °C, TF 76, TK 128/74, SpO2 98 %
+HLAVA, OČI, UŠI, NOS, KRK: Bez ikteru, vlhké sliznice
+SRDCE: Pravidelný rytmus
+Končetiny: Teplé, bez otoků
+KŮŽE: Intaktní, suchá
+Neurologické: Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Ultrazvuk provedený ___ ukázal cholelitiázu se zesílením stěny žlučníku a pericholecystickou tekutinou. Počet bílých krvinek 12,1 při přijetí, normalizoval se na 7,4 při propuštění. Jaterní enzymy mírně zvýšené, poté se zlepšily. Bilirubin v normě.
+ZÁVĚR:
+Akutní kalcifikovaná cholecystitida, léčená laparoskopickou cholecystektomií bez komplikací. Společný žlučovod normální.
+
+Stručný průběh hospitalizace:
+Byla zahájena intravenózní antibiotika a infuze, pacientka nic nekonzumovala per os. Konzultace s chirurgem Dr. ___, laparoskopická cholecystektomie provedena ___ bez komplikací. Bolest kontrolována perorálními analgetiky, dieta postupně rozšiřována. Krevní tlak dobře kontrolovaný pomocí domácí medikace. Řezné rány čisté a suché. Laboratorní výsledky se normalizovaly. Pacientka chodila, tolerovala dietu a byla propuštěna domů ve stabilním stavu.
+
+Medikace při přijetí:
+Lisinopril 10 mg denně. Paracetamol podle potřeby proti bolesti.
+
+Medikace při propuštění:
+1. Lisinopril 10 mg per os denně.
+2. Oxykodon 5 mg per os každých 6 hodin podle potřeby proti bolesti, 10 tablet.
+3. Paracetamol 650 mg per os každých 6 hodin podle potřeby.
+4. Dokusát 100 mg per os dvakrát denně.
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Fyzická aktivita: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Byl vám odstraněn žlučník. Udržujte řezné rány čisté a suché a nezvedejte nic těžšího než 10 liber (cca 4,5 kg). V případě horečky, zhoršení bolesti nebo zvracení volejte ___. V případě dotazů se obraťte na svého chirurga na ___.
+
+Pokyny pro kontrolu:
+___

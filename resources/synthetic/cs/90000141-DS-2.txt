@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé horní části břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie provedená doktorem ___
+
+Anamnéza současného onemocnění:
+Pacient je muž, který se dostavil s bolestí v pravé horní části břicha, nevolností a horečkou, trvajícími dva dny. Poprvé byl vyšetřen v ___ a poté odeslán na naše pohotovostní oddělení. Ultrazvukové vyšetření prokázalo žlučové kameny a ztluštění stěny žlučníku. Příznaky se objevily po konzumaci tučného jídla dne ___ a nezlepšily se po užívání antacid.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Gastroezofageální reflux
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodinné anamnéze se vyskytuje emfyzém u otce. Žádné onemocnění žlučníku.
+
+Fyzikální vyšetření:
+Bez horečky, pacient je v dobrém stavu, s mírnou citlivostí v pravém horním kvadrantu břicha.
+Krk: Pohyblivý, bez zvětšených uzlin.
+PLÍCE: Oboustranně čisté, bez chrůpků.
+KONČETINY: Teplé, bez otoků.
+
+Významné výsledky:
+Laboratorní vyšetření prokázala zvýšený počet bílých krvinek a mírně zvýšenou hladinu bilirubinu. Ultrazvukové vyšetření prokázalo více žlučových kamenů, ztluštění stěny žlučníku a tekutinu v okolí žlučníku. Rentgen hrudníku byl bez patologických nálezů. Hodnoty jaterních enzymů se po operaci snižovaly. Konečné histologické vyšetření z ___ bylo v době propuštění stále v řešení.
+
+Stručný popis hospitalizace:
+Pacient byl přijat, podávány mu byly intravenózní tekutiny a antibiotika, a byl ponechán bez možnosti orální příjmu potravy. Po konzultaci s doktorem ___ byl převezen na operační sál a podstoupil nekomplikovanou laparoskopickou cholecystektomii. Bolest byla kontrolována perorálními léky, pacient začal s běžnou stravou a horečka ustoupila. Řezné rány zůstaly čisté. Byla domluvena kontrolní návštěva v ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Omeprazol 20 mg denně
+
+Léky při propuštění:
+1. Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti.
+2. Lisinopril 10 mg jednou denně.
+3. Atorvastatin 20 mg před spaním.
+4. Omeprazol 20 mg denně.
+Recepty byly odeslány do lékárny ___.
+
+Způsob propuštění:
+Domů, s péčí od ___
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodící, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni s zánětem žlučníku, který byl odstraněn malými řezy. Můžete se sprchovat, ale nevystavujte rány nadměrnému namáčení. Vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů. V případě horečky, zhoršení bolesti, zvracení, žloutnutí kůže nebo zarudnutí ran volejte ___ nebo se vraťte na pohotovost.
+
+Pokyny pro kontrolu:
+___

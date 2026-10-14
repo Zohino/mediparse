@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie provedená v ___
+
+Anamnéza současného onemocnění:
+___ letý muž s několikdenní se zhoršující bolestí v pravém horním kvadrantu břicha, nevolností a horečkou. Bolest začala po konzumaci tučného jídla a doma se neulevila. Pacient se dostavil na pohotovost ___, kde zobrazovací vyšetření naznačilo zánět žlučníku a byl přijat.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Žlučové kameny
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav: Nepohodlí, bez horečky
+Plíce: Čisté na obou stranách
+Břicho: Bolestivé v pravém horním kvadrantu, měkké
+Končetiny: Teplé, bez otoků
+Kůže: Bez žloutenky
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Krev odebraná v ___ ukázala počet bílých krvinek 13,2, normální hladinu hemoglobinu, mírně zvýšenou hladinu bilirubinu a lipázy v normálních mezích. Ultrazvukové vyšetření prokázalo žlučové kameny, ztluštělou stěnu žlučníku a tekutinu v okolí žlučníku.
+
+Stručný průběh hospitalizace:
+Pacientovi byly podávány intravenózní tekutiny, antibiotika a léky proti bolesti, poté podstoupil nekomplikovanou laparoskopickou cholecystektomii. Po převozu z ___ ho vyšetřil Dr. ___. Strava byla postupně zvyšována, bolest se zlepšila a před propuštěním pacient chodil a dobře snášel běžnou stravu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg denně
+2. Atorvastatin 20 mg večer
+3. Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti
+4. Docusate 100 mg dvakrát denně během užívání opioidů
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Sekundární: Hypertenze, hyperlipidémie
+
+Stav při propuštění:
+Stabilní
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+
+Pokyny pro propuštění:
+Byl jste léčen pro zánět žlučníku a byl vám odstraněn žlučník. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze a v případě horečky, zvracení, žluté kůže nebo zhoršení bolesti volejte ___. Dodržujte termín kontrolního vyšetření v ___.
+
+Pokyny pro kontrolní vyšetření:
+___

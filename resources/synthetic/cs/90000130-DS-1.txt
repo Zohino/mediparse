@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Chirurgie
+Datum přijetí: ___ Číslo pokoje: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie dne ___
+
+Anamnéza současného onemocnění:
+Pacientka je žena, která se dostavila do ___ s dvoudenní se zhoršující bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po jídle. Bolest vyzařovala do zad. Uváděla mírné zvýšení teploty doma. Den předtím byla vyšetřena v ___ a propuštěna domů s léky proti nevolnosti, poté se vrátila, protože se příznaky nezlepšily. Poslední jídlo měla večer ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hysterektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav: Nepohodlí, ale bez známek intoxikace, leží v klidu.
+Hlava, oči, uši, nos, hrdlo: Bez žloutenky, vlhké sliznice.
+Srdce: Pravidelný rytmus, bez šelestů.
+Břicho: Měkké, citlivé v pravém horním kvadrantu, pozitivní Murphyho příznak, bez odporu.
+Končetiny: Teplé, bez otoků.
+
+Významné výsledky:
+Laboratorní výsledky při přijetí: Počet bílých krvinek 14,2, ALT 88, AST 71, alkalická fosfatáza 140, celkový bilirubin 1,4, lipáza v normě. Hemoglobin stabilní na 12,8. Ultrazvuk: rozšířená žlučník se ztluštělou stěnou, tekutina kolem žlučníku a mnohočetné kameny, žlučovod 5 mm. Vyhodnoceno radiologem ___. Pooperační laboratorní výsledky dne ___ ukázaly počet bílých krvinek 9,1 a normalizované jaterní enzymy. Patologie: akutní cholecystitida s cholelitiázou, bez malignity.
+
+Stručný průběh hospitalizace:
+Pacientka byla přijata na chirurgické oddělení, byla jí nařízeno nic nekonzumovat a byla zahájena intravenózní infuze a podávání piperacilinu-tazobaktamu. Byla konzultována chirurgická péče a pacientka podstoupila laparoskopickou cholecystektomii dne ___ bez komplikací. Její bolest se zlepšila a dieta byla postupně rozšiřována a dobře ji snášela. Po operaci byly antibiotika vysazena. Jaterní enzymy se normalizovaly a pacientka zůstala bez horečky. Byla vyšetřena lékařem ___ kvůli kontrole bolesti a mohla se samostatně pohybovat. Její rány zůstaly čisté a byla propuštěna domů dne ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Multivitamin denně. Ibuprofen podle potřeby na bolest hlavy. Paracetamol příležitostně.
+
+Léky při propuštění:
+1. Paracetamol 650 mg perorálně každých šest hodin podle potřeby na bolest.
+2. Oxykodon 5 mg perorálně každých šest hodin podle potřeby na silnou bolest, omezené množství z ___.
+3. Dokusát 100 mg dvakrát denně při užívání oxykodonu.
+4. Lisinopril 10 mg denně.
+5. Pokračovat v užívání multivitamínu.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární: Akutní kalcifikovaná cholecystitida.
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl odstraněn malými řezy. Můžete se sprchovat a nechat na řezy stékat mýdlo, ale nekoupejte se ve vaně. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů než deset liber (cca 4,5 kg). V případě horečky, zhoršující se bolesti, zvracení, žloutnutí kůže nebo zarudnutí rány kontaktujte chirurgickou ambulanci na čísle ___.
+
+Pokyny pro kontrolní vyšetření:
+___

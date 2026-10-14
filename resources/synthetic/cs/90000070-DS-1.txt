@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž přivezen z ___ s třídenní anamnézou produktivního kašle, horečky a únavy. Rentgen hrudníku provedený v ___ ukázal nejasnou opacitu v pravé části plic, což naznačuje možnou pneumonii. Pacient byl léčen empiricky a sledován.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus léčen perorálními léky
+Hypertenze
+Předchozí hospitalizace v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce
+
+Fyzikální vyšetření:
+Vitalní funkce: T 37,3 °C, TF 88, TK 128/76, SpO2 96 % při dýchání okolním vzduchem
+Břicho: měkké, netendrovatelné
+Končetiny: teplé, bez otoků
+Neurologické vyšetření: bdělý, bez ložiskových příznaků
+PULSY: hmatné bilaterálně
+
+Významné výsledky:
+Mírná leukocytóza při přijetí. Zvýšená hladina glukózy. Rentgen hrudníku s nejasnou opacitou v dolní části pravé plíce, vyhodnoceno ___. Kreatinin v obvyklém rozmezí.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Metformin 500 mg perorálně dvakrát denně
+2. Lisinopril 10 mg perorálně jednou denně
+3. Azithromycin 250 mg denně po dobu dalších čtyř dnů
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní bronchitida
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Plně bdělý a reaguje.
+Stav aktivity: Chodí samostatně.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni s kašlem a horečkou. Užijte si antibiotika podle předpisu, pijte dostatek tekutin a odpočívejte. Pokud se vám zhorší dýchání, zavolejte na ___ nebo se vraťte na pohotovost.
+
+Pokyny pro kontrolu:
+___

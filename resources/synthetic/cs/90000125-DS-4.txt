@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka, kašel a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s třídenní anamnézou produktivního kašle, horečky a zhoršující se dušnosti, odeslán z ambulance ___ a při přijetí zjištěna pneumonie.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus léčený inzulínem
+CHOPN, sledován v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav:
+Mírně nemocný, mluví krátkými větami
+HLAVA, OČI, UŠI, NOS, KRK:
+Suché sliznice
+PLÍCE:
+Chropy na pravé dolní části plic
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Zvýšený počet bílých krvinek, vysoká hladina glukózy
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku ukázal konsolidaci v pravém dolním laloku plic
+
+Stručný popis hospitalizace:
+Léčen antibiotiky, inhalátory a kortikosteroidy, hladina cukru v krvi regulována pomocí inzulínu v závislosti na aktuální hodnotě. Podávání kyslíku bylo postupně snižováno od [[10]. dne] a jeho stav se postupně zlepšoval, poté byl propuštěn domů z ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Inzulín glargin, inhalátor s tiotropiem
+
+Léky při propuštění:
+Pokračovat v užívání inzulínu a tiotropia. Dokončit celou kúru perorálních antibiotik. Krátkodobé snižování dávky prednisonu. Inhalátor s albuterolem podle potřeby.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární:
+Pneumonie
+Diabetes mellitus
+CHOPN
+
+Stav při propuštění:
+Duševní stav:
+Bdělý a orientovaný
+Úroveň vědomí:
+Probuzený a reagující
+Fyzická aktivita:
+Chodí samostatně
+
+Pokyny pro propuštěného pacienta:
+Byl jste léčen na plicní infekci. Užívejte všechny léky podle předpisu, kontrolujte si hladinu cukru v krvi, odpočívejte a v případě horečky nebo potíží s dýcháním volejte ___ nebo se vraťte do nemocnice.
+
+Pokyny pro kontrolní vyšetření:
+___

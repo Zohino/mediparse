@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___ letá žena s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po jídle, trvajícími dva dny. Odeslána od ___ poté, co ultrazvuk odhalil žlučové kameny.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Předchozí císařský řez
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Vitalní funkce: bez horečky, stabilní
+Hlava, uši, oči, nos, hrdlo: normální
+Břicho: měkké, mírná bolestivost v místě řezu
+Končetiny: teplé, bez otoků
+PULSY: hmatné po celém těle
+
+Významné výsledky:
+Ultrazvuk: mnoho žlučových kamenů, zesílená stěna žlučníku. Laboratorní výsledky při přijetí ukazovaly mírnou leukocytózu a normální jaterní enzymy. Patologický nález z ___ čeká na vyhodnocení při propuštění.
+
+Stručný popis hospitalizace:
+Přijata s akutní cholecystitidou, zahájena léčba antibiotiky a provedena nekomplikovaná laparoskopická cholecystektomie. Bolest byla pod kontrolou, dieta postupně rozšiřována a pacientka byla propuštěna třetí den hospitalizace ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg jednou denně
+2. Atorvastatin 20 mg večer
+3. Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti
+4. Docusate 100 mg dvakrát denně během užívání opioidů
+
+Plán propuštění:
+Domů s péčí od ___
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a reagující.
+Stav aktivity: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Byl vám odstraněn žlučník. Udržujte řezné rány čisté a suché, vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů a v případě horečky, zhoršení bolesti, zvracení nebo žluté kůže volejte ___.
+
+Pokyny pro kontrolu:
+___

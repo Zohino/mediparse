@@ -1,0 +1,64 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava a otok nohou
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž, odeslán ___, s potížemi únavy a žízní trvajícími několik týdnů; podezření na nově vzniklý diabetes.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin
+Hypertenze
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Unavený, v pohodě
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Krk: Pohyblivý
+Plíce: Čisté na obou stranách
+SRDEČNÍ: Pravidelný rytmus
+Končetiny: Mírný otok kotníků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Kreatinin v normě, mírně zvýšená hladina glukózy, draslík v normě. Rentgen hrudníku z ___ nevykázal žádné akutní abnormality.
+
+Stručný popis průběhu hospitalizace:
+Opatrně podávány tekutiny, funkce ledvin zůstala stabilní. Hladina glukózy byla sledována a naplánováno kontrolní vyšetření u ___. Pacient se cítil lépe a byl propuštěn domů.
+
+Léky při přijetí:
+Amlodipin, allopurinol
+
+Léky při propuštění:
+Pokračovat v užívání amlodipinu a allopurinolu. Užívat podle pokynů lékaře.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Stabilní
+Duševní stav: Bdělý a orientovaný
+Úroveň vědomí: Probuzený
+Stav aktivity: Chodí samostatně
+
+Pokyny při propuštění:
+Pijte tekutiny podle doporučení, denně se važte a docházejte na kontroly do ambulance. V případě zhoršení otoku nebo žízně se vraťte.

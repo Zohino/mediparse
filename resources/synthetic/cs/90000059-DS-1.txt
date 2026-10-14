@@ -1,0 +1,83 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Zčervenání a otok pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s hypertenzí, která se dostavila po třech dnech zhoršujícího se zčervenání, tepla a otoku pravé dolní končetiny po drobném oděru při zahradničení. Byla vyšetřena v urgentní péči ___ dne ___ a byla jí podána perorální antibiotika, ale nedošlo ke zlepšení. Během noci se u ní rozvinula horečka a třesavka, a proto se dostavila na pohotovost, kde měla horečku a zrychlený srdeční tep a na přední straně holeně a lýtka se šířila erytematózní skvrna. Popírala bolesti na hrudi nebo dušnost.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Hypotyreóza, pod dohledem doktora ___
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
+Cholecystektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s cévní mozkovou příhodou. V rodině se nevyskytují poruchy srážlivosti krve.
+
+Fyzikální vyšetření:
+HEENT: Vlhké sliznice, žádné orální léze.
+Krk: Pohyblivý.
+Plíce: Oboustranně čisté.
+SRDEČNÍ: Pravidelný rytmus, bez šelestu.
+Břicho: Měkké, netendrové.
+KŮŽE: Pravá lýtka s teplou, erytematózní, citlivou skvrnou, výrazný okraj.
+Neurologické: Bdělá, bez ložiskových příznaků.
+
+Významné výsledky:
+Při přijetí byly v laboratorních testech zjištěny zvýšené hodnoty bílých krvinek (15,2) s převahou neutrofilů a mírně zvýšená hladina laktátu, která se po podání tekutin normalizovala. Byly odebrány krevní kultury, které po pěti dnech zůstaly negativní.
+Hladina kreatininu byla v normě.
+ZÁVĚR:
+Venózní duplexní vyšetření pravé nohy provedené v ___ neprokázalo hlubokou žilní trombózu. Pouze edém měkkých tkání, bez abscesu nebo plynu.
+
+Stručný průběh hospitalizace:
+Byla přijata s celulitidou pravé dolní končetiny. Vzhledem k alergii na penicilin byla zahájena intravenózní léčba vancomycinem a ohraničení erytému bylo označeno. Horečka ustoupila během jednoho dne a zčervenání začalo ustupovat třetí den hospitalizace. Doktor ___ z infekčního oddělení zhodnotil její případ dne ___ a doporučil přechod na perorální doxycyklin. Bylo doporučeno zvedání nohy. Dobře se pohybovala při fyzioterapii ___ a dobře snášela stravu. Její krevní tlak byl kontrolován pomocí domácích léků.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Levotyroxin 75 mcg denně, vydán v lékárně ___
+
+Léky při propuštění:
+1. Doxycyklin 100 mg perorálně dvakrát denně po dobu dalších sedmi dnů, zahájit ___
+2. Lisinopril 10 mg perorálně jednou denně
+3. Atorvastatin 20 mg perorálně každou noc
+4. Levotyroxin 75 mcg perorálně každé ráno
+5. Paracetamol 500 mg perorálně každých šest hodin podle potřeby proti bolesti.
+
+Závěrečné doporučení při propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+Sekundární:
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Stabilní.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Úroveň aktivity: Schopný chůze, soběstačný.
+
+Pokyny při propuštění:
+Byl jste léčen na kožní infekci pravé nohy pomocí antibiotik. Užívejte veškeré předepsané doxycyklin, i když zarudnutí ustoupí, a během léčby používejte ochranu proti slunci. Při sezení držte nohu ve zvýšené poloze. V případě, že se zarudnutí rozšíří za vyznačenou linii, zavolejte na číslo ___ na ___. V případě horečky, silné bolesti nebo dušnosti se vraťte do ___. Dodržte plánovanou návštěvu v ordinaci na adrese ___.
+
+Pokyny pro kontrolní vyšetření:
+___

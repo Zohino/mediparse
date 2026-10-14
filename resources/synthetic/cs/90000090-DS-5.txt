@@ -1,0 +1,64 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí, odeslána z ___ po několika dnech otoků nohou a únavy.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Anémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Unavená, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Plíce: Čisté na obou stranách
+Končetiny: Mírný otok s prohlubní
+
+Významné výsledky:
+Kreatinin zvýšený, draslík mírně zvýšený, hemoglobin nízký, ale stabilní.
+ZOBRAZOVACÍ METODY:
+Ultrazvuk ledvin ukázal malé echogenní ledviny.
+
+Stručný popis hospitalizace:
+Byla léčena diuretiky pro přetížení tekutinami a její stav se postupně zlepšoval. Předpokládá se, že její chronické onemocnění ledvin vysvětluje otoky a léky byly upraveny s ohledem na funkci ledvin. Bylo domluveno kontrolní vyšetření u nefrologa v ___.
+
+Léky při přijetí:
+Amlodipin
+Allopurinol
+
+Léky při propuštění:
+Amlodipin 5 mg denně
+Furosemid 40 mg denně
+Dávka allopurinolu snížena
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Stabilní
+Duševní stav: Bdělá a orientovaná
+Úroveň vědomí: Bdělá
+
+Pokyny pro propuštění:
+Denně se važte, omezte příjem soli, užívejte léky podle pokynů a v případě zhoršení otoků nebo dušnosti se vraťte.
+
+Pokyny pro kontrolu:
+___

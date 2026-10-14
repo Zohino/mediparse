@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž odeslán z ___ kliniky s třídenní anamnézou produktivního kašle, horečky a zhoršující se dušnosti při námaze.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na zimnici a únavu.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Chronické onemocnění ledvin, stadium 3
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce:
+T 100,9, TF 96, TK 132/78, SpO2 91 % při dýchání okolním vzduchem
+Celkový stav:
+Unavený, mírná dušnost
+Břicho:
+Měkké, netendrovatelné
+
+Významné výsledky:
+Rentgen hrudníku ukázal skvrnité zastínění dolního laloku pravé plíce. Počet bílých krvinek mírně zvýšený, kreatinin v normě.
+ZÁVĚR:
+Možný infiltrát v dolním laloku pravé plíce.
+
+Stručný popis hospitalizace:
+Pacient byl přijat pro hypoxii a horečku, s podezřením na počínající pneumonii na základě zobrazovacích metod, ale to nebylo potvrzeno. Byl mu podán antibiotika a kyslík, jeho stav se rychle zlepšil a před propuštěním ___ ho vyšetřil ___.
+
+Léky při přijetí:
+Metformin, lisinopril, amlodipin
+
+Léky při propuštění:
+Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů, metformin jako dříve, amlodipin denně. Lisinopril se vysadí, dokud se znovu nezkontroluje funkce ledvin.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní hypoxické respirační selhání
+Sekundární:
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Bdělý a orientovaný
+Úroveň vědomí:
+Probuzený a reagující
+Úroveň aktivity:
+Chodí bez pomoci
+
+Pokyny pro propuštění:
+Byl jste léčen na horečku a nízkou hladinu kyslíku. Dokončete všechny antibiotika, pijte dostatek tekutin, odpočívejte a v případě zhoršení dýchání se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Peniciliny
+
+Hlavní potíže:
+Horečka a kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila s pětidenní horečkou, produktivním kašlem a bolestí na hrudi, která se zhoršovala při dýchání, poté, co byla léčena v zařízení ___ pro podezření na virové onemocnění. Byla vyšetřena lékařem ___ dne ___ a odeslána na pohotovost, kde zobrazovací vyšetření hrudníku ukázalo konsolidaci v dolním laloku pravého plíce, což odpovídá pneumonii. Měla hypoxii a byla přijata do nemocnice.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Předchozí léčba v zařízení ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Krk: Pohyblivý, bez zvětšených lymfatických uzlin
+Břicho: Měkké, netendrové, neztuhlé
+Kůže: Teplá, bez vyrážky
+Neurologické: Bdělá, orientovaná, bez ložiskových příznaků
+
+Významné výsledky:
+NÁLEZY:
+Rentgen hrudníku ukázal opacitu v dolním laloku pravé plíce bez výpotku. Počet bílých krvinek byl při přijetí zvýšený a při propuštění se normalizoval. Kultivace krve neprokázala růst bakterií. Kreatinin zůstal na výchozí hodnotě a elektrolyty byly v normě. Opakované zobrazovací vyšetření, které bylo zkontrolováno s radiologem v zařízení ___, ukázalo počáteční zlepšení opacity, bez nových nálezů.
+
+Stručný průběh hospitalizace:
+Byla zahájena intravenózní antibiotická léčba a podávání kyslíku, který byl během tří dnů postupně snižován, až pacientka dýchala pouze okolní vzduch. Horečka ustoupila a kašel se zlepšil. Vzhledem k její alergii byla po konzultaci s lékařem ___ zvolena léčba antibiotiky, která neobsahovala penicilin. Byla vyšetřena lékařem ___ z hlediska mobility a bezpečně se pohybovala, dobře snášela stravu a byla převedena na perorální antibiotika, aby dokončila léčbu doma.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně denně
+2. Atorvastatin 20 mg perorálně večer
+3. Levofloxacin 750 mg perorálně denně po dobu dalších čtyř dnů, dodáno zařízením ___
+
+Způsob propuštění:
+Doma s ___
+
+Diagnóza při propuštění:
+Akutní hypoxické respirační selhání
+Hypertenze
+Hyperlipidemie
+
+Stav při propuštění:
+Úroveň vědomí: Bdělá a komunikativní
+Stav aktivity: Ambulantní, soběstačná
+
+Pokyny pro další péči:
+___

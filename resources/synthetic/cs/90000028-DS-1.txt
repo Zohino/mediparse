@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+___ letý muž s hypertenzí a hyperlipidemií, který se dostavil po dvou dnech zhoršující se bolesti v pravém dolním kvadrantu břicha, nevolnosti a mírné horečce. Bolest začala v ___ a šířila se z oblasti kolem pupečníku. Byl vyšetřen doktorem ___ v externí ambulanci a odeslán do ___ k dalšímu vyšetření. Popíral zvracení, průjem, problémy s močením nebo kontakt s nemocnými. V pohotovostní službě byly zaznamenány tělesné teploty 100,8 a mírná tachykardie.
+
+Anamnéza předchozích onemocnění:
+Hypertenze, hyperlipidémie, tonsilektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí; otec zemřel v ___
+
+Fyzikální vyšetření:
+Celkový stav: Bdělý, mírně nepohodlný, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice, bez žloutenky.
+Krk: Pohyblivý.
+Plíce: Čisté na obou stranách.
+Břicho: Bolestivé v pravém dolním kvadrantu, obranné napětí, bez rebound tenderness.
+Končetiny: Teplé, bez otoků.
+Kůže: Bez vyrážky.
+Pulzy: Hmatatelné radiální a distální pulzy.
+
+Významné výsledky:
+Při přijetí byly v laboratorních testech zaznamenány zvýšené hodnoty bílých krvinek (13,2) s převahou neutrofilů, normální elektrolyty, kreatinin 0,9 a normální jaterní enzymy. Hodnota laktátu byla 1,1. Vyšetření moči bylo bezvýznamné. CT vyšetření břicha a pánve provedené dne ___ ukázalo rozšířený a ztluštělý appendix o velikosti 11 mm s okolní tukovou infiltrací a malým apendikulolitem, bez abscesu nebo volného vzduchu. Pooperační laboratorní testy dne ___ ukázaly snížení počtu bílých krvinek na 8,4 a stabilní hemoglobin 14,1.
+ZÁVĚR: Akutní, nekomplikovaná apendicitida.
+
+Stručný průběh hospitalizace:
+Pan ___ byl přijat na chirurgické oddělení, byl mu zaveden intravenózní katetr, podávány intravenózní tekutiny a zahájena léčba ceftriaxonem a metronidazolem. Byl operován doktorem ___ a podstoupil nekomplikovanou laparoskopickou apendektomii. Patologické vyšetření z ___ potvrdilo akutní apendicitidu bez perforace. Po operaci byla bolest kontrolována paracetamolem a krátkodobou léčbou oxykodonem. Strava byla postupně rozšiřována, pacient močil spontánně, chodil samostatně a vypuzoval plyny. Antibiotika byla po operaci vysazena. Řezné rány zůstaly čisté a suché. Byl propuštěn domů druhý den hospitalizace ve stabilizovaném stavu, s plánem na kontrolu u ___.
+
+Léky při propuštění:
+Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti. Oxykodon 5 mg perorálně každých šest hodin podle potřeby při silné bolesti, na pět dní. Dokusát 100 mg dvakrát denně během užívání opioidů. Lisinopril 10 mg denně, pokračujte v užívání. Atorvastatin 20 mg večer, pokračujte v užívání.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní apendicitida
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Úroveň aktivity: Schopný chůze, soběstačný.
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli apendicitidě a podstoupili jste laparoskopické odstranění slepého střeva. Udržujte řezné rány čisté a suché a můžete se sprchovat. Po dobu čtyř týdnů nezvedejte nic těžšího než deset liber (cca 4,5 kg). Vyhýbejte se řízení vozidla během užívání oxykodonu. V případě horečky nad 101 °F (cca 38,3 °C), zhoršení bolesti břicha, přetrvávajících zvracení, zarudnutí nebo výtoku z řezných ran volejte na číslo ___ nebo se vraťte na pohotovost. Vezměte si s sebou tento dokument na místo označené číslem ___.
+
+Pokyny pro kontrolu:
+___

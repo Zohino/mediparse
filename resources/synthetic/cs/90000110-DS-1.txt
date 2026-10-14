@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient si všiml zrychleného, nepravidelného srdečního tepu po dobu dvou dnů, doprovázeného mírnými závratěmi a únavou. Nejprve byl vyšetřen v ___ a poté převezen z ___ za účelem monitorování. Popíral bolesti na hrudi, horečku nebo synkopu.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Možná cukrovka, hraniční hodnoty glukózy, nikdy formálně diagnostikována; sledován ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek potíží
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Teplé, bez otoků
+
+Významné výsledky:
+ZÁVĚR:
+Žádný akutní kardiopulmonální problém.
+NÁLEZY:
+Rentgen hrudníku v pořádku. Elektrolyty v normě. Troponin dvakrát negativní. Vyšetření štítné žlázy bez významných odchylek. Echokardiografie ukázala zachovanou ejekční frakci a mírné zvětšení levé síně.
+
+Stručný popis průběhu hospitalizace:
+Během monitorování byl zjištěn fibrilační rytmus síní s rychlou komorovou frekvencí. Kontrola frekvence byla dosažena pomocí metoprololu a kardiolog ___ doporučil antikoagulační léčbu. Rytmus se zpomalil pomocí ___ a pacient zůstal stabilní, chodil bez potíží.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg jednou denně
+2. Apixaban 5 mg dvakrát denně
+3. Lisinopril 10 mg jednou denně
+4. Atorvastatin 20 mg před spaním
+
+Plán propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Primární:
+Rychlý, nepravidelný srdeční rytmus, hypertenze, hyperlipidemie
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí:
+Bdělý a komunikativní
+
+Pokyny pro propuštění:
+Byli jste přijati s rychlým, nepravidelným srdečním tepem. Užijte si nové léky přesně podle předpisu a vyhněte se vynechávání dávek. V případě krvácení, mdlob nebo bolesti na hrudi volejte ___. Dodržte termín kontroly u ___ do jednoho týdne.
+
+Pokyny pro další postup:
+___

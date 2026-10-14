@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Sulfonamidové léky
+
+Hlavní potíže:
+Zčervenání nohy a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s třídenní anamnézou šířícího se zčervenání, tepla a otoku pravé dolní končetiny po oděrce ___. Objevila se horečka a zimnice, pacientka byla odeslána z ambulance ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Obezita
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie v ___
+
+Rodinná anamnéza:
+Matka s cévní mozkovou příhodou, léčena v ___
+
+Fyzikální vyšetření:
+Extrémit: pravá holeně zčervenalá, teplá, citlivá na dotek, s prohlubňovým edémem; bez krepitace.
+Neurologické: bdělá, orientovaná, bez ložiskových příznaků.
+
+Významné výsledky:
+Počet bílých krvinek mírně zvýšený při přijetí, při propuštění v normě. Laktát v normě. Kultivace krve bez růstu. Ultrazvuk pravé nohy prokázal otok měkkých tkání bez krevní sraženiny nebo abscesu.
+
+Stručný popis hospitalizace:
+Pacientka byla léčena pro celulitidu intravenózními antibiotiky a zčervenání se ustoupilo od výrazného okraje. Horečka odezněla během jednoho dne. Bolest byla kontrolována paracetamolem. Pacientka chodila samostatně a byla převedena na perorální antibiotika, s plánem kontroly u ___.
+
+Léky při přijetí:
+Lisinopril denně
+Levotyroxin denně
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších sedmi dnů
+2. Lisinopril jako dříve
+3. Levotyroxin jako dříve
+4. Paracetamol podle potřeby proti bolesti
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Stabilní, bez horečky, chodí bez pomoci.
+Úroveň vědomí: Bdělá a komunikativní.
+
+Pokyny pro propuštění:
+Byla léčena pro kožní infekci nohy. Dokončete veškerou antibiotickou léčbu. Při odpočinku držte nohu ve zvýšené poloze. V případě šířícího se zčervenání, horečky nebo zhoršující se bolesti se vraťte a v případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

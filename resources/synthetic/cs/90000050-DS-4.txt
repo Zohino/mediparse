@@ -1,0 +1,81 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a bolest pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letý muž s třídenní anamnézou šířícího se zčervenání, tepla a otoku pravé dolní končetiny po drobném oděru. Rozvinul horečku a zimnici a byl odeslán ___ k vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce:
+Horečka, jinak stabilní
+Celkový stav:
+Nepohodlí, bdělý
+Krk:
+Pružný
+Plíce:
+Čisté
+SRDCE:
+Pravidelný rytmus
+Břicho:
+Měkké, netendrové
+Končetiny:
+Pravé lýtko teplé, oteklé, citlivé
+KŮŽE:
+Erythém označený perem na místě ___
+Neurologické vyšetření:
+Bez ložiskových příznaků
+
+Významné výsledky:
+Při přijetí zvýšený počet bílých krvinek s převahou neutrofilů. Kultivace krve bez růstu. Kreatinin v normě. Laktát v normě.
+ZÁVĚR:
+Ultrazvuk pravé nohy bez hluboké žilní trombózy; pouze edém měkkých tkání, vyhodnotil ___.
+
+Stručný průběh hospitalizace:
+Byl léčen na celulitidu pravé nohy intravenózními antibiotiky a elevací končetiny. Horečka ustoupila během jednoho dne a zčervenání se stáhlo od okraje označeného perem. Bolest se postupně zlepšovala. Byl převeden na perorální antibiotika a chodil bez potíží. Bylo domluveno kontrolní vyšetření u ___ a v jeho primární ambulanci na adrese ___.
+
+Léky při propuštění:
+Cefalexin 500 mg perorálně čtyřikrát denně po dobu sedmi dnů
+Paracetamol podle potřeby na bolest
+Pokračovat v užívání lisinoprilu a atorvastatinu doma
+
+Způsob propuštění:
+Domů s ambulantní péčí od ___
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a komunikativní
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny při propuštění:
+Byl jste léčen na kožní infekci nohy. Užijte antibiotika až do konce, udržujte nohu ve zvýšené poloze a v případě horečky, šířícího se zčervenání nebo zhoršující se bolesti se vraťte. V případě jakýchkoli dotazů volejte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

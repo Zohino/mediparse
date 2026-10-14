@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé dolní části břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+Dva dny trvající zhoršující se bolest v pravé dolní části břicha, nevolnost a mírná horečka. Vyšetřen v ___ a odeslán sem na zobrazovací vyšetření, které ukázalo zánět slepého střeva.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na nevolnost, negativní na zvracení nebo průjem.
+
+Anamnéza předchozích onemocnění:
+Sezónní alergie
+
+Anamnéza předchozích chirurgických zákroků:
+Artroskopie kolene v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Rodinná anamnéza diabetu u matky.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: T 38,0 °C, TF 92, TK 126/78, dechová frekvence 16, SpO2 99 % při dýchání okolního vzduchu.
+Celkový stav: Nepohodlný, ale při vědomí.
+Krk: Pohyblivý.
+Břicho: Bolestivé v pravé dolní části, přítomna obranná reakce.
+KONČETINY: Žádný edém.
+Neurologické vyšetření: Bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Počet bílých krvinek zvýšený, převaha neutrofilů. Elektrolyty a jaterní testy v normě. CT vyšetření ukázalo rozšířené, ztluštělé slepé střevo s okolní tukovou infiltrací a bez abscesu.
+
+Stručný průběh hospitalizace:
+Byl převezen na operační sál týmem doktora ___ a podstoupil nekomplikovanou laparoskopickou apendektomii. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a pacient ji dobře toleroval. Následné patologické vyšetření bude provedeno v ___.
+
+Léky při přijetí:
+Loratadin podle potřeby.
+
+Léky při propuštění:
+1. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby na bolest.
+2. Ibuprofen 400 mg perorálně každých osm hodin podle potřeby.
+3. Loratadin 10 mg denně podle potřeby.
+
+Způsob propuštění:
+Domů, zajištěna péče prostřednictvím ___.
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Fyzická aktivita: Ambulantní, soběstačný. Bez zvedání těžkých předmětů.
+
+Pokyny pro propuštění:
+Byli jste přijati s apendicitidou a slepé střevo vám bylo odstraněno. Udržujte rány čisté a suché. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí v místě řezů volejte ___ nebo se vraťte do nemocnice.
+
+Pokyny pro kontrolu:
+___

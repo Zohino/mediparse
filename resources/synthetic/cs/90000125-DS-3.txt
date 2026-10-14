@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zhoršující se dušnost a kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž převezen z ___ s třídenní anamnézou postupně se zhoršující dušnosti, produktivního kašle a sípání. Používal svůj domácí inhalátor častěji, ale bez úlevy. Byl vyšetřen doktorem ___ a před převozem mu byly podány inhalátory.
+
+Anamnéza předchozích onemocnění:
+CHOPN
+Diabetes mellitus 2. typu
+Hypertenze
+Pod dohledem ___ pro plicní onemocnění
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+HEENT: Vlhké sliznice
+Plíce: Difúzní expirační sípání
+Končetiny: Žádný edém
+Kůže: Teplá, suchá
+Neurologické: Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Sodík v normě, kreatinin na výchozí úrovni, počet bílých krvinek mírně zvýšený při přijetí a poté se zlepšil. Glukóza v přijatelné hodnotě. Laktát v normě.
+ZÁVĚR:
+Hyperinflamované plíce bez ložiskové konsolidace nebo výpotku.
+
+Stručný průběh hospitalizace:
+Byl léčen pro exacerbaci pomocí pravidelných inhalací, perorálních steroidů a krátkodobé antibiotické terapie. Podávání kyslíku bylo postupně snižováno a do třetího dne již pacient dýchal pouze okolní vzduch. Plicní tým ___ doporučil ambulantní kontrolu. Hladina cukru v krvi byla regulována pomocí inzulinové pumpy během užívání steroidů. Pacient chodil po chodbě bez desaturace ___.
+
+Léky při přijetí:
+Tiotropium denně
+Inhalátor s albuterolem podle potřeby
+Lisinopril denně
+
+Léky při propuštění:
+1. Prednison, dávka postupně snižována během pěti dnů
+2. Tiotropium, inhalace jednou denně
+3. Inhalátor s albuterolem, každé čtyři hodiny podle potřeby
+4. Lisinopril denně
+Recepty zaslány do lékárny ___.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Exacerbace chronické obstrukční plicní nemoci
+Sekundárně:
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Fyzická aktivita: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zhoršující se dušnosti. Užijte celý kurz steroidů a používejte inhalátory podle pokynů. Pokud kouříte, přestaňte kouřit. Vraťte se, pokud se objeví horečka, zhoršující se dušnost nebo bolest na hrudi. V případě dotazů volejte ___. Dodržujte termín kontroly u doktora ___.
+
+Pokyny pro další postup:
+___

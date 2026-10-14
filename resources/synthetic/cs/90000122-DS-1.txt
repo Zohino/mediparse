@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Žena s dvoudenní se zhoršující bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po konzumaci tučných jídel. Nejprve se obrátila na ___, kde laboratorní testy a ultrazvuk naznačily žlučové kameny s zánětem, a byla převezena sem ___ k chirurgickému vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Předchozí apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+HEENT: Bez ikteru, vlhké sliznice.
+Břicho: Měkké, citlivé v pravém horním kvadrantu, pozitivní Murphyho příznak.
+KONČETINY: Bez otoků.
+KŮŽE: Teplá, suchá.
+
+Významné výsledky:
+Ultrazvuk ukázal mnohočetné žlučové kameny, zesílenou stěnu žlučníku a tekutinu v okolí žlučníku. Počet bílých krvinek mírně zvýšený, jaterní enzymy mírně zvýšené, bilirubin normální. CT vyšetření provedené ___ potvrdilo nálezy.
+ZÁVĚR:
+Akutní cholecystitida s cholelitiázou, bez dilatace žlučových cest.
+
+Stručný popis hospitalizace:
+Byla jí podána intravenózní tekutina a antibiotika, poté byla převezena na operační sál k laparoskopické cholecystektomii, kterou provedl Dr. ___. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a pacientka chodila samostatně. Byla připravena k propuštění ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně
+2. Atorvastatin 20 mg perorálně večer
+3. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti
+4. Docusate 100 mg dvakrát denně během užívání opioidů
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Hypertenze
+
+Stav při propuštění:
+Jasné a srozumitelné, bdělé a komunikativní.
+Stav aktivity: Ambulantní, samostatná.
+
+Pokyny pro propuštění:
+Byla léčena pro zánět žlučníku, který byl odstraněn. Udržujte řezné rány čisté a suché a několik týdnů se vyhýbejte zvedání těžkých předmětů. V případě horečky, zhoršující se bolesti, zvracení, žluté kůže nebo sekrece z rány volejte ___ nebo se vraťte do ___, pokud jsou příznaky závažné.
+
+Pokyny pro kontrolu:
+___

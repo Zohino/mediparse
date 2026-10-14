@@ -1,0 +1,57 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest břicha a zvracení
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s postupující bolestí v pravém horním kvadrantu břicha, nevolností a zvracením, trvajícími dva dny. Byla poprvé vyšetřena v ___ a poté převezena k dalšímu ošetření. Nebyla hlášena horečka ani žloutenka.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Žlučové kameny
+Žádná cukrovka
+
+Sociální anamnéza:
+___
+
+Významné výsledky:
+Laboratorní vyšetření z ___ ukázala mírnou leukocytózu a zvýšenou hladinu lipázy. Jaterní enzymy byly mírně zvýšené. Ultrazvukové vyšetření prokázalo žlučové kameny s zesílením stěny žlučníku.
+ZÁVĚR:
+Žlučové kameny s nálezy naznačujícími akutní cholecystitidu, bez dilatace žlučových cest.
+
+Stručný popis hospitalizace:
+Byla přijata, udržována v dietě a podávána intravenózní tekutiny a antibiotika. Chirurgický tým pod vedením doktora ___ ji vyšetřil a doporučil ambulantní cholecystektomii. Bolest ustoupila, dieta byla postupně rozšiřována a pacientka ji dobře snášela, a poté byla propuštěna domů.
+
+Léky při propuštění:
+Amlodipin 5 mg denně
+Atorvastatin 20 mg večer
+Antibiotika bez amoxicilinu po dobu pěti dnů
+Paracetamol podle potřeby proti bolesti
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+
+Pokyny pro propuštění:
+Byla léčena pro zánět žlučníku. Jezte menší jídla s nízkým obsahem tuku a dokončete užívání antibiotik. V případě horečky, silné bolesti, žluté kůže nebo přetrvávajícího zvracení se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

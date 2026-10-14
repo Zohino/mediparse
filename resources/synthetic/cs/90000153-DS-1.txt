@@ -1,0 +1,77 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolestivé zarudnutí a otok levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s několikdenním zarudnutím a zvýšenou teplotou levé nohy, odeslán z kliniky ___ kvůli horečce.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav:
+Dobře se cítí, bez horečky
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Plíce:
+Čisté na obou stranách
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Zarudnutí levého lýtka se zlepšilo
+Neurologické vyšetření:
+Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Mírná leukocytóza při přijetí, normalizovaná. Krevní kultury bez růstu.
+ZOBRAZOVACÍ METODY:
+Ultrazvuk žil negativní na přítomnost krevní sraženiny.
+
+Stručný popis hospitalizace:
+Léčen na celulitidu intravenózními antibiotiky, zarudnutí ustoupilo, poté převeden na perorální terapii. Pod dohledem týmu ___.
+PŘECHODNÁ OTÁZKY:
+Dokončení léčby antibiotiky; kontrola kůže.
+
+Léky při přijetí:
+Lisinopril, atorvastatin
+
+Léky při propuštění:
+Cefalexin čtyřikrát denně po dobu jednoho týdne; pokračovat v užívání lisinoprilu a atorvastatinu.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida levé dolní končetiny
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí:
+Bdělý a reagující
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny pro propuštění:
+Užívejte antibiotika podle předpisu, zvedejte nohu a v případě horečky nebo šíření zarudnutí se vraťte do ___.
+
+Pokyny pro kontrolu:
+___

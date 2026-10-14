@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letá žena odeslána z ___ se dvěma dny trvající se zhoršující se bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po konzumaci tučných jídel. Příznaky se objevily ___. Uvádí mírné zvýšení tělesné teploty. Ultrazvuk naznačuje přítomnost žlučových kamenů.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlí, bez horečky, bez známek intoxikace.
+Hlava, oči, uši, nos, hrdlo:
+Mírný ikterus skléry, vlhká sliznice.
+Končetiny:
+Teplé, bez otoků.
+Neurologické vyšetření:
+Bdělost, bez ložiskových příznaků.
+
+Významné výsledky:
+Ultrazvuk provedený v ___ ukázal mnohočetné žlučové kameny se ztluštěním stěny žlučníku a přítomností tekutiny v okolí žlučníku. Při přijetí zvýšený počet bílých krvinek, mírně zvýšené jaterní enzymy, normální hladina bilirubinu.
+ZÁVĚR:
+Nález odpovídá akutní cholecystitidě, bez dilatace žlučových cest.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 75 mcg denně
+
+Léky při propuštění:
+1. Paracetamol 650 mg každých šest hodin podle potřeby na bolest
+2. Lisinopril 10 mg denně
+3. Levotyroxin 75 mcg denně
+4. Dokusát 100 mg dvakrát denně během užívání opioidů
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a komunikativní.
+Fyzická aktivita:
+Schopný chůze, soběstačný.
+
+Pokyny při propuštění:
+Byli jste přijati s zánětem žlučníku a byl vám odstraněn žlučník. Udržujte rány čisté a suché, vyhýbejte se zvedání těžkých předmětů po dobu dvou týdnů a v případě horečky, zhoršující se bolesti, zvracení nebo žluté kůže volejte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

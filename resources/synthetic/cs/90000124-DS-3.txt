@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s chronickým onemocněním ledvin, která byla odeslána z ___ po třech dnech zhoršujícího se otoku nohou, únavy a snížené chuti k jídlu. Upozornila na snížené množství moči a mírnou dušnost v poloze vleže. Popírala horečku, produktivní kašel nebo jakékoli obavy z pneumonie a zobrazovací vyšetření hrudníku neukázalo žádnou pneumonii. Její lékař v ___ zjistil zvýšenou hladinu kreatininu a odeslal ji. Při přijetí byla v stabilním stavu.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec s onemocněním srdce v ___.
+
+Fyzikální vyšetření:
+Bez horečky, v klidu se cítí dobře.
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice, bez ikteru.
+Plíce: Oboustranně čisté, bez chrůpků.
+Břicho: Měkké, netendrové, neztuhlé.
+Končetiny: 2+ otok s prohlubní až ke kolenům.
+Neurologické: Bdělá, orientovaná, bez ložiskových příznaků.
+
+Významné výsledky:
+Laboratorní výsledky při přijetí z ___ ukázaly kreatinin 3,1, BUN 58, draslík 5,3, glukózu 212 a hemoglobin 10,4. V moči bylo zjištěno 2+ bílkovin a žádná krev. Opakované měření kreatininu dne ___ ukázalo hodnotu 2,6 a draslíku 4,6. Ultrazvuk ledvin ukázal malé echogenní ledviny bez hydronefrózy. Rentgen hrudníku byl pořízen při přijetí.
+ZÁVĚR:
+Mírná vaskulární kongesce, bez ložiskové konsolidace nebo výpotku.
+
+Stručný popis průběhu hospitalizace:
+Byla přijata pro objemové přetížení s zhoršující se funkcí ledvin. Byla jí podána intravenózně furosemid, což vedlo k dobré diuréze a úbytku několika kilogramů, a otok nohou se zlepšil. Hladina kreatininu klesla k výchozí hodnotě a hladina draslíku se normalizovala po úpravě stravy. Hladina glukózy byla regulována pomocí inzulínu v dávkování podle glykemie. Nefrologie v ___ prostudovala její případ a souhlasila s ambulantní kontrolou v ___. Při propuštění dobře jedla a chodila samostatně.
+
+Léky při přijetí:
+Metformin, lisinopril, atorvastatin, aspirin denně
+
+Léky při propuštění:
+1. Furosemid 40 mg perorálně denně
+2. Atorvastatin 20 mg perorálně večer
+3. Aspirin 81 mg perorálně denně
+4. Inzulín glargin 10 jednotek před spaním podle pokynů ___
+Metformin a lisinopril byly vysazeny, dokud nebudou znovu zkontrolovány testy funkce ledvin.
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin s objemovým přetížením
+Diabetes mellitus 2. typu
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Schopný chůze, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni, protože se v těle hromadila tekutina v důsledku špatné funkce ledvin. Užívajte diuretikum každé ráno a denně se važte. Volejte na číslo ___, pokud se vaše váha během jednoho dne zvýší o více než jeden a půl kilogramu, nebo pokud se zhorší otoky či dýchání. Omezte příjem soli a vyhýbejte se užívání ibuprofenu. Nechte si v ordinaci ___ do jednoho týdne opakovat krevní testy.
+
+Pokyny pro kontrolu:
+___

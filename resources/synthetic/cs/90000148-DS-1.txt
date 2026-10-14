@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena odeslána z ___ s několikdenní anamnézou zrychleného srdečního tepu a únavy. Popírá horečku, kašel nebo příznaky pneumonie. Bez bolesti na hrudi.
+
+Anamnéza předchozích onemocnění:
+Atriální fibrilace
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Nepravidelný srdeční rytmus, plíce čisté, v klidu bez potíží.
+HLAVA, OČI, UŠI, NOS, KRK:
+Normální
+Břicho:
+Měkké, bez citlivosti
+KONČETINY:
+Bez otoků
+
+Významné výsledky:
+Elektrokardiogram ukázal rychlý, nepravidelný rytmus bez ischemických změn. Elektrolyty a vyšetření štítné žlázy byly v normě. Troponin zůstal při opakovaném testování v normě.
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku ukázal čisté plíce a normální velikost srdce.
+
+Stručný popis průběhu hospitalizace:
+Srdeční frekvence byla kontrolována pomocí metoprololu a po posouzení pacientky kardiologickým týmem v ___ byla zahájena antikoagulační léčba. Příznaky ustoupily během jednoho dne. Pacientka byla stabilizovaná a mohla samostatně chodit ___, poté byla propuštěna domů.
+
+Léky při přijetí:
+Lisinopril
+Levotyroxin
+
+Léky při propuštění:
+Metoprolol dvakrát denně, apixaban dvakrát denně, pokračovat v užívání lisinoprilu a levotyroxinu ve stejné dávce jako dříve.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární:
+Atriální fibrilace
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Bdělý a orientovaný
+Úroveň vědomí:
+Probuzený
+Úroveň aktivity:
+Chodí bez pomoci
+
+Pokyny pro propuštěného pacienta:
+Užívejte léky podle předpisu a sledujte případné krvácení. V případě mdlob, bolesti na hrudi nebo zhoršení dušnosti se vraťte do nemocnice. V případě dotazů volejte doktora ___ a dodržujte termín návštěvy v ambulanci ___.
+
+Pokyny pro kontrolní vyšetření:
+___

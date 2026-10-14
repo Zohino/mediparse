@@ -1,0 +1,78 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s třídenní anamnézou zhoršujícího se kašle, sípání a dušnosti při námaze po návštěvě ___. Popírá horečku, zimnici nebo bolest na hrudi. Rentgenové vyšetření hrudníku v ___ neodhalilo pneumonii. Byl odeslán doktorem ___ a převezen dne ___ k dalšímu vyšetření a léčbě dušnosti.
+
+Anamnéza předchozích onemocnění:
+Fibrilace síní, léčena antikoagulanty
+Hypertenze
+Hyperlipidemie
+Pod dohledem kardiologa ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí. Matka ___.
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Bez horečky, srdeční frekvence 78, krevní tlak 128/76, saturace kyslíkem 94 % při dýchání okolním vzduchem.
+Krk:
+Pružný, bez známek zvýšeného žilního tlaku.
+KŮŽE:
+Teplá a suchá, bez vyrážky.
+Neurologické vyšetření:
+Orientovaný, bdělý, bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 9,2, hemoglobin 13,8, trombocyty 245, sodík 139, draslík 4,2, kreatinin 0,9, BNP mírně zvýšené. Rentgen hrudníku v ___ ukázal hyperinflaci plic bez ložiskové konsolidace.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Leukocyty 7,8, hemoglobin 13,5, sodík 140, draslík 4,0, kreatinin 0,9. Elektrokardiogram ukázal nepravidelný rytmus s kontrolovanou frekvencí.
+
+Stručný popis hospitalizace:
+Byl léčen inhalovanými bronchodilatátory, krátkodobou perorální léčbou kortikosteroidy a doplňkovým kyslíkem, s postupným zlepšením sípání a dýchání. Kontrola frekvence byla pokračována a dávka antikoagulantu zůstala nezměněna. Respirační terapeut zkontroloval techniku inhalace. Pacient byl pod dohledem doktora ___ a byl připraven k propuštění do ___ čtvrtý den hospitalizace, chodil bez desaturace.
+
+Léky při přijetí:
+Apixaban 5 mg dvakrát denně, metoprolol 50 mg denně, inhalátor albuterolu podle potřeby.
+
+Léky při propuštění:
+Apixaban 5 mg dvakrát denně.
+Metoprolol succinat 50 mg denně.
+Inhalátor albuterolu dvě vdechnutí každé čtyři hodiny podle potřeby.
+Tiotropium jedna kapsle inhalovaná denně.
+Prednison 40 mg denně po dobu dalších tří dnů.
+Atorvastatin 20 mg večer.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Exacerbace chronické obstrukční plicní nemoci
+Fibrilace síní
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí:
+Bdělý a komunikativní
+Stav aktivity:
+Ambulantní, soběstačný
+
+Pokyny pro propuštění:
+Užívejte všechny léky podle předpisu a dokončete celou kúru steroidy. Používejte inhalátor podle pokynů. V případě zhoršení dušnosti, horečky, bolesti na hrudi nebo zrychleného srdečního tepu se vraťte do nemocnice. Přestaňte kouřit a vyhýbejte se pobytu v zakouřeném prostředí. Dodržte termín kontroly v ___ klinice.
+
+Pokyny pro další postup:
+___

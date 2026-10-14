@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s třídenní anamnézou produktivního kašle, horečky a dušnosti po kontaktu s nemocným příbuzným. Byl vyšetřen v ___, kde zobrazovací vyšetření hrudníku vzbudilo obavy z možné pneumonie, a byl odeslán na naše pohotovostní oddělení. Po příjezdu mu byly podány tekutiny a kyslík a byl přijat doktorem ___ k monitorování.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Sezónní alergie, sledováno v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce:
+T 38,2 °C, TF 98, TK 134/80, SpO2 92 % při dýchání okolního vzduchu
+Celkový stav:
+Unavený, mírně nepohodlný
+Plíce:
+Chropy v dolní části pravé plíce
+SRDCE:
+Pravidelný rytmus
+Břicho:
+Měkké, netendrovatelné
+KŮŽE:
+Teplá a suchá
+
+Významné výsledky:
+Laboratorní výsledky při přijetí: zvýšený počet bílých krvinek (13,4) s převahou neutrofilů a laktát 1,6. Ostatní biochemické parametry v normě. Rentgen hrudníku ukázal skvrnitou neprůhlednost v dolním laloku pravé plíce. Krevní kultury odebrané v ___ byly v době propuštění ještě vyhodnocovány. Byla odeslána panel pro detekci respiračních virů.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně
+2. Atorvastatin 20 mg perorálně večer
+3. Azithromycin 250 mg perorálně denně po dobu dalších čtyř dnů
+4. Guaifenesin 600 mg perorálně dvakrát denně podle potřeby na kašel, dle doporučení doktora ___
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Komunitně získaná infekce dolních cest dýchacích
+Hypoxémie, vyřešena
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+
+Pokyny při propuštění:
+Byli jste hospitalizováni s plicní infekcí a léčeni antibiotiky a kyslíkem. Dokončete celou kúru antibiotik, pijte dostatek tekutin a odpočívejte doma. V případě zhoršení dušnosti, vysoké horečky nebo bolesti na hrudi se vraťte. V případě dotazů nebo pro domluvení další návštěvy volejte ___ na ___.
+
+Pokyny pro kontrolu:
+___

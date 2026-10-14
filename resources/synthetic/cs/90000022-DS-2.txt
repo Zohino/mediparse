@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava a špatný apetit
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letý muž s dlouhodobými zdravotními problémy, odeslán z ___ kliniky po několika dnech slabosti, nevolnosti a sníženém příjmu potravy. Laboratorní výsledky zde byly abnormální, proto byl přijat do nemocnice.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Unavený, bez známek akutní tísně
+Hlava, oči, uši, nos, hrdlo: Suché sliznice
+Plíce: Čisté na obou stranách
+Končetiny: Mírný edém
+Kůže: Teplá, neporušená
+Pulz: 2+ a symetrický
+
+Významné výsledky:
+Při přijetí byly laboratorní výsledky abnormální, s vyšší hladinou glukózy a kreatininu než je běžné, a s mírnou acidózou. Hladina kreatininu se zlepšila po podání tekutin. Vyšetření moči bylo bezvýznamné.
+Zobrazovací vyšetření: Rentgen hrudníku bez akutních nálezů.
+
+Stručný popis průběhu hospitalizace:
+Byl mu podán intravenózní roztok a inzulin, a jeho hladina glukózy a acidóza se zlepšily. Byl vyšetřen ___ a týmem lékařů ___. Dobře snášel stravu, chodil samostatně a byl shledán stabilním pro propuštění domů.
+
+Léky při přijetí:
+Lisinopril, atorvastatin, amlodipin denně
+
+Léky při propuštění:
+1. Inzulin glargin před spaním, dle pokynů
+2. Atorvastatin jednou denně
+3. Amlodipin jednou denně
+4. Lisinopril vysadit do doby, než budou zkontrolovány výsledky kontrolních laboratorních testů
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetická ketoacidóza
+Diabetes mellitus
+
+Stav při propuštění:
+Duševní stav: Bdělý a orientovaný
+Úroveň vědomí: Probuzený
+Fyzická aktivita: Chodí bez pomoci
+
+Pokyny pro propuštění:
+Byli jste přijati do nemocnice kvůli slabosti a vysoké hladině cukru v krvi. Pravidelně si měřte hladinu glukózy, užívejte inzulin podle předpisu a objednejte se na kontrolu k Dr. ___ na ___ do jednoho týdne. V případě zvracení nebo zmatenosti volejte ___.

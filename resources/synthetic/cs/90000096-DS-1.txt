@@ -1,0 +1,80 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letý muž s diabetem 2. typu, odeslán z ___ po třech dnech zhoršující se bolesti břicha, zvracení a špatného příjmu potravy, při přijetí zvýšená hladina glukózy.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Vitalní funkce:
+Bez horečky, stabilní
+Celkový stav:
+Komfortní
+Hlava, uši, oči, nos, hrdlo:
+Normální
+Břicho:
+Měkké, mírně citlivé v oblasti řezů
+Neurologické:
+Bdělý
+
+Důležité výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vysoká hladina glukózy, nízká hladina bikarbonátu, mírně zvýšený počet bílých krvinek.
+ZOBRAZOVACÍ METODY:
+CT vyšetření břicha provedené v ___ ukázalo rozšířenou žlučník s kameny a ztluštěním stěny.
+ZÁVĚR:
+Akutní cholecystitida.
+
+Stručný popis průběhu hospitalizace:
+Pacient byl přijat, podávány intravenózní tekutiny, inzulin a antibiotika. Operace provedená doktorem ___ proběhla bez komplikací. Bolest se zlepšila, dieta byla postupně rozšiřována a hladina glukózy se normalizovala. Byl propuštěn domů ve stabilním stavu, plán kontroly v ___.
+
+Léky při přijetí:
+Metformin
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+1. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby na bolest.
+2. Metformin a lisinopril jako dříve.
+3. Atorvastatin večer.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Sekundární:
+Hypertenze, hyperlipidémie
+
+Stav při propuštění:
+Dobrý
+Stav aktivity:
+Ambulantní, soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen pro zánět žlučníku a podstoupil jste operaci. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze a v případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí volejte ___.
+
+Pokyny pro kontrolu:
+___

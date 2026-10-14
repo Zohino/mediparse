@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient převezen z ___ s třídenní horečkou, produktivním kašlem a únavou. Rentgen hrudníku naznačuje možnost pneumonie. Léčen v ___ infuzemi, poté přeložen sem k pozorování.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s cévní mozkovou příhodou
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, uši, nos, hrdlo: Vlhké sliznice.
+Břicho: Měkké, netendrovatelné.
+Končetiny: Teplé, bez otoků.
+Kůže: Čistá.
+
+Významné výsledky:
+Mírná leukocytóza při přijetí, normalizace. Zkontrolován rentgen hrudníku z ___.
+ZÁVĚR: Skvrnité zastínění dolního laloku plic, nespecifické. Doporučeno kontrolní zobrazovací vyšetření.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně
+2. Atorvastatin 20 mg perorálně večer
+3. Paracetamol podle potřeby při horečce nebo bolestech
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní bronchitida
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni s horečkou a kašlem. Užívajte léky podle pokynů, pijte dostatek tekutin a odpočívejte. V případě zhoršení dýchání nebo návratu horečky kontaktujte svého lékaře na čísle ___ nebo se vraťte do nemocnice.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a otok nohou
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s několikdenní se zhoršující únavou, otokem nohou a bušením srdce. Byl vyšetřen v ___ svým nefrologem a doporučen k hospitalizaci pro další vyšetření a léčbu.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Bez významných nálezů.
+SRDEČNÍ: Nepravidelný rytmus, bez šelestu.
+KONČETINY: Mírný otok.
+NEUROLOGICKÉ: Bez ložiskových příznaků.
+
+Významné výsledky:
+Kreatinin stabilní, blízko výchozí hodnoty, draslík v normálním rozmezí, hemoglobin mírně snížený. EKG prokázalo nepravidelný rytmus bez zřetelných P vln, srdeční frekvence kontrolována.
+ZÁVĚR:
+Rentgen hrudníku bez známek akutního kardiopulmonálního procesu.
+
+Stručný popis hospitalizace:
+Telemetrie prokázala novou fibrilaci síní s rychlou frekvencí, která byla kontrolována metoprololem. Po konzultaci s ___ byla zahájena antikoagulační léčba. Kreatinin zůstal blízko výchozí hodnoty a byla upravena infuzní terapie. Pacient byl vyšetřen kardiologem v ___ a cítil se dostatečně dobře na propuštění domů s plánovanou ambulantní kontrolou.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Metoprolol succinat 50 mg denně; apixaban 2,5 mg dvakrát denně; sevelamer během jídla; lisinopril vysadit do kontroly u ___.
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+Sekundární:
+Hypertenze
+
+Stav při propuštění:
+Stabilní
+Duševní stav: Bdělý a orientovaný.
+Úroveň vědomí: Probuzený a reagující.
+Fyzická aktivita: Chodí samostatně.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni kvůli zrychlenému srdečnímu tepu. Užívajte léky podle předpisu, vyhýbejte se nesteroidním protizánětlivým lékům (NSAID) a v případě otoku, závratí nebo mdlob zavolejte ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Jedná se o ___letého muže, který se dostavil do ___ s dvoudenní bolestí v pravém horním kvadrantu břicha, nevolností a horečkou. Příznaky se objevily po konzumaci tučného jídla a doma se nezlepšily. Byl vyšetřen doktorem ___ na pohotovosti, kde ultrazvuk odhalil žlučové kameny a ztluštění stěny žlučníku. Popíral žloutenku nebo zvracení krve. Byla mu nasazena intravenózní antibiotika a byl přijat na chirurgické oddělení.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Pod dohledem doktora ___ v rámci běžné péče
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Nepohodlný, ale při vědomí, mírná horečka.
+Plíce: Oboustranně čisté.
+Břicho: Bolestivé v pravém horním kvadrantu, pozitivní Murphyho příznak, bez rezistence.
+KŮŽE: Teplá, bez žloutenky.
+Neurologický stav: Při vědomí a orientovaný, bez ložiskových příznaků.
+
+Významné výsledky:
+Počet bílých krvinek 14,2 při přijetí, klesl na 8,1 při propuštění. Mírně zvýšené jaterní enzymy, normální bilirubin, normální lipáza. Ultrazvuk z ___ ukázal mnoho žlučových kamenů, ztluštělou stěnu žlučníku a tekutinu v okolí žlučníku, s normálním společným žlučovým kanálkem. Opakované laboratorní testy z ___ ukázaly normální jaterní testy. Intraoperační cholangiografie nebyla nutná. Patologický nález v žlučníku odpovídá akutní cholecystitidě.
+
+Stručný průběh hospitalizace:
+Pan ___ byl přijat s akutní kalcifikovanou cholecystitidou a léčen infuzemi, analgetiky a intravenózními antibiotiky. Po konzultaci s doktorem ___ podstoupil nekomplikovanou laparoskopickou cholecystektomii dne ___. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a pacient začal plynout. Horečka ustoupila a počet bílých krvinek se normalizoval. Řezné rány byly čisté a suché. Byl propuštěn domů v nemocniční den ___, toleroval běžnou stravu a chodil samostatně.
+PŘECHODNÁ OTÁZKY:
+Při návštěvě u ___ zkontrolovat patologický nález a krevní tlak.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně
+2. Atorvastatin 20 mg perorálně večer
+3. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti
+4. Oxykodon 5 mg perorálně každých šest hodin podle potřeby proti silné bolesti, krátkodobá léčba
+5. Docusate 100 mg dvakrát denně během užívání opioidů
+
+Způsob propuštění:
+Domů s péčí od ___
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Hypertenze
+
+Stav při propuštění:
+Stabilní, bez horečky, bolest pod kontrolou
+Úroveň vědomí: Bdělý a reagující
+Duševní stav: Jasný a srozumitelný
+Stav aktivity: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byli jste přijati s zánětem žlučníku, který byl laparoskopicky odstraněn. Můžete se sprchovat a nechat na řezné rány stékat mýdlo, ale nekoupejte se ve vaně. Po dobu čtyř týdnů nezvedejte nic těžšího než deset liber (cca 4,5 kg). V případě horečky, zhoršení bolesti břicha, zvracení, žloutnutí kůže nebo zarudnutí v místě řezů volejte na číslo ___ nebo se vraťte do nemocnice. Během užívání opioidních léků proti bolesti užívejte léky na změkčení stolice a neřiďte.
+
+Pokyny pro kontrolu:
+___

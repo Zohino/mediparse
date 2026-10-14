@@ -1,0 +1,62 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž byl odeslán z ___ kliniky poté, co rutinní laboratorní vyšetření ukázala zhoršení hladiny kreatininu a otok obou nohou po dobu dvou týdnů. Pacient uvedl sníženou chuť k jídlu a únavu. Příznaky se objevily přibližně kolem ___. Naposledy ho vyšetřil doktor ___. Popíral bolesti na hrudi, horečku nebo zvracení. Byl přijat za účelem vyšetření a úpravy hydratace.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Chronické onemocnění ledvin, stadium 3
+Možná CHOPN, nepotvrzeno spirometrií
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce: T 36,9 °C, TK 148/86, puls 78, dechová frekvence 16, SpO2 96 % při dýchání okolního vzduchu
+Celkový stav: Dobrý, bez známek úzkosti
+Krk: Pohyblivý, bez známek zvýšeného žilního tlaku
+Břicho: Měkké, netendrové, neztvrdlé
+Neurologické vyšetření: Bdělý, orientovaný, bez ložiskových příznaků
+
+Významné výsledky:
+Kreatinin 2,4 při přijetí, 2,0 při propuštění. Draslík 4,8. Glukóza 162. Hladina hemoglobinu stabilní. Vyšetření moči s mírným obsahem bílkovin.
+ZÁVĚR: Ultrazvuk ledvin provedený v ___ ukázal malé echogenní ledviny bez hydronefrózy. Rentgen hrudníku bez patologických nálezů.
+
+Stručný popis průběhu hospitalizace:
+Pacientovi byla podána mírná diuretika, což vedlo ke zlepšení otoku nohou. Nefrolog, doktor ___, doporučil vysadit lék, který mohl otok zhoršovat, a upravit dávkování s ohledem na funkci ledvin. Hladina cukru v krvi byla regulována pomocí inzulínu v závislosti na aktuální hodnotě. Hladina kreatininu se do ___ stabilizovala a pacient byl propuštěn domů.
+
+Léky při přijetí:
+Metformin, lisinopril, amlodipin, aspirin
+
+Léky při propuštění:
+Amlodipin 5 mg denně. Aspirin 81 mg denně. Furosemid 20 mg každé ráno. Glipizid 5 mg denně. Metformin a lisinopril byly do dalšího vyšetření vysazeny.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Chronické onemocnění ledvin s objemovým přetížením
+
+Stav při propuštění:
+Úroveň vědomí: Bdělý a komunikativní
+Stav aktivity: Chodí, soběstačný
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni kvůli otoku nohou a poškození ledvin. Denně se važte a omezte příjem soli. Užívajte léky podle seznamu. Vyhýbejte se ibuprofenu. V případě dušnosti, sníženého objemu moči nebo horečky se vraťte. V případě dotazů volejte na kliniku ___ na čísle ___.
+
+Pokyny pro kontrolní vyšetření:
+___

@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Muž s dvoudenní se zhoršující bolestí v pravém horním kvadrantu břicha, nevolností a horečkou, odeslán z ___ kliniky poté, co ultrazvuk odhalil žlučové kameny. Přihlásil se na pohotovost ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlný, bez horečky
+Hlava, oči, uši, nos, hrdlo:
+Bez známek žloutenky
+Krk:
+Pružný
+Břicho:
+Bolestivé v pravém horním kvadrantu, měkké
+Končetiny:
+Teplé, bez otoků
+Neurologické vyšetření:
+Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Při přijetí zvýšený počet bílých krvinek a mírně zvýšené jaterní enzymy, po operaci se hodnoty normalizovaly.
+ZÁVĚR:
+Žlučové kameny s zesílenou stěnou žlučníku, bez dilatace žlučových cest.
+
+Stručný popis průběhu hospitalizace:
+Přijat s akutní cholecystitidou, zahájena léčba antibiotiky a infuzní terapií. Provedena nekomplikovaná cholecystektomie ___. Strava postupně rozšiřována, bolest kontrolována perorálními léky, propuštěn do ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Pokračovat v užívání lisinoprilu a atorvastatinu. Paracetamol podle potřeby na bolest. Krátkodobé užívání oxykodonu pouze při silné bolesti. Proti zácpě při užívání opioidů.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a komunikativní
+Fyzická aktivita:
+Schopný chůze, soběstačný
+
+Pokyny pro propuštěného pacienta:
+Byl jste léčen pro zánět žlučníku a byl vám odstraněn žlučník. Udržujte rány čisté a suché, vyhýbejte se těžké fyzické námaze a v případě horečky, zvracení nebo zhoršení bolesti kontaktujte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Známé alergie na léky: žádné.
+
+Hlavní potíže:
+Otok a bolest levé nohy.
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný.
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí se dostavila s třemi dny trvajícím otokem a bolestí levého lýtka po dlouhé cestě do ___. Popírala bolesti na hrudi nebo dušnost. Dopplerovské vyšetření v ___ prokázalo přítomnost krevní sraženiny.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s karcinomem prsu v ___.
+
+Fyzikální vyšetření:
+Krk:
+Pružný, bez známek zvýšeného žilního tlaku.
+Plíce:
+Oboustranně čisté.
+Končetiny:
+Levé lýtko oteklé, citlivé na dotek a teplé, s otokem 2+, pulzace zachována.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 8,1, hemoglobin 12,4, kreatinin 0,9, D-dimer zvýšený.
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Duplexní vyšetření levé nohy prokázalo okluzivní tromb v femorální žíle. Rentgen hrudníku ___ bez akutních nálezů.
+
+Stručný popis hospitalizace:
+Nasazena léčba apixabanem pro hlubokou žilní trombózu levé femorální žíly s dobrou kontrolou symptomů. Hypertenze byla léčena lisinoprilem doma. Pacientka se mohla pohybovat bez hypoxie a byla propuštěna domů s plánem kontroly ___.
+PŘECHODNÁ OTÁZKY:
+Dokončit tři měsíce antikoagulační léčby; zvážit vyšetření na hyperkoagulační stavy provedené ___.
+
+Léky při přijetí:
+Lisinopril, levotyroxin.
+
+Léky při propuštění:
+Apixaban 10 mg dvakrát denně po dobu sedmi dnů, poté 5 mg dvakrát denně. Pokračovat v užívání lisinoprilu a levotyroxinu jako dříve.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Hluboká žilní trombóza levé femorální žíly
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a reagující.
+Stav aktivity:
+Chodící, soběstačný.
+
+Pokyny pro propuštění:
+Byla jste léčena pro krevní sraženinu v levé noze. Užívajte apixaban přesně podle pokynů, pravidelně se procházejte a v případě krvácení, bolesti na hrudi nebo zhoršení otoku nohy se vraťte.
+
+Pokyny pro kontrolu:
+___

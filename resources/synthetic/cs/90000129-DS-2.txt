@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Nevolnost, zvracení, bolesti břicha
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž se dostavil s třemi dny trvající nevolností, zvracením a bolestmi břicha, byl převezen z ___ za účelem dalšího vyšetření a léčby dehydratace.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce
+
+Fyzikální vyšetření:
+Celkový stav: dobrý, bez známek úzkosti
+Krk: pružný
+PLÍCE: oboustranně čisté
+Břicho: měkké, mírně citlivé
+
+Významné výsledky:
+ZÁVĚR: Na ___ nebyl zjištěn žádný akutní proces.
+NÁLEZY: Plíce čisté. Žádný volný vzduch ani obstrukce. Mírná tuková játra. Při přijetí zvýšená hladina glukózy, po opakovaných testech se zlepšila.
+
+Stručný popis hospitalizace:
+Byl mu podán intravenózní roztok a léky proti nevolnosti, což vedlo k rychlému zlepšení. Jeho diabetes byl během hospitalizace léčen inzulínem, poté se pokračovalo v domácím režimu. Před propuštěním ho vyšetřil ___.
+PŘECHODNÁ OTÁZKY:
+Při návštěvě praktického lékaře znovu zkontrolovat hladinu glukózy.
+
+Léky při přijetí:
+Metformin, lisinopril, atorvastatin
+
+Léky při propuštění:
+Metformin 500 mg dvakrát denně. Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Ondansetron podle potřeby při nevolnosti.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Gastroenteritida
+Diabetes mellitus
+
+Stav při propuštění:
+Stabilní.
+Duševní stav: jasný a srozumitelný.
+Úroveň vědomí: bdělý a reagující.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli dehydrataci způsobené žaludeční chorobou. Pijte dostatek tekutin, užívejte léky podle pokynů a v případě návratu příznaků volejte ___.
+
+Pokyny pro kontrolu:
+___

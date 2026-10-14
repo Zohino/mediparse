@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka odeslána z ___ s třídenní anamnézou kašle a horečky; při přijetí byla podezřelá na pneumonii.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza, léčena ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Mírně nemocný vzhled, zlepšení před propuštěním.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Unavená, bez známek úzkosti
+Plíce: Rozptýlené chrůpky v dolní části pravé plíce
+Končetiny: Teplé, bez otoků
+Neurologický stav: Bdělá, bez ložiskových příznaků
+PULSY: Hmatné a symetrické
+
+Významné výsledky:
+Zobrazovací vyšetření hrudníku ukázalo skvrnité zkalení v dolní části pravé plíce. Počet bílých krvinek mírně zvýšený, po léčbě se normalizoval.
+NÁLEZY:
+Skvrnité zkalení v dolní části pravé plíce, bez výpotku.
+
+Stručný popis průběhu hospitalizace:
+Pacientka dostávala perorální antibiotika a tekutiny, byla ošetřována týmem ___. Horečka ustoupila, potřeba kyslíku pominula a pacientka dobře snášela běžnou stravu.
+
+Léky při přijetí:
+Lisinopril
+Levotyroxin
+
+Léky při propuštění:
+1. Lisinopril denně
+2. Levotyroxin denně
+3. Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Stav při propuštění:
+Stabilní
+Duševní stav: Jasný a srozumitelný
+
+Pokyny pro propuštění:
+Byla léčena pro infekci hrudníku. Užívajte antibiotika podle pokynů, odpočívejte, pijte dostatek tekutin a v případě návratu horečky nebo zhoršení dýchání volejte ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letá žena odeslána z ___ s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením, trvajícími dva dny, u které byla diagnostikována akutní cholecystitida.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Žlučové kameny
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodině se vyskytuje diabetes u matky.
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Bez horečky, stabilní.
+Celkový stav:
+Dobře se cítí.
+Hlava, oči, uši, nos, hrdlo:
+Normální.
+Končetiny:
+Bez otoků.
+Kůže:
+Teplá, suchá.
+Neurologické vyšetření:
+Bdělá, bez ložiskových příznaků.
+
+Významné výsledky:
+Při přijetí mírně zvýšený počet bílých krvinek. Ultrazvukové vyšetření prokázalo žlučové kameny, ztluštění stěny žlučníku a tekutinu v okolí žlučníku. Jaterní enzymy v normě. Histopatologické vyšetření probíhá, výsledky budou k dispozici při propuštění.
+
+Stručný popis hospitalizace:
+Pacientce byly podány antibiotika a tekutiny, poté ji Dr. ___ převezl na operační sál, kde podstoupila nekomplikovanou laparoskopickou cholecystektomii. Bolest se zmírnila, pacientka tolerovala stravu a byla propuštěna první den po operaci.
+
+Léky při propuštění:
+Paracetamol podle potřeby proti bolesti. Oxykodon krátkodobě při silné bolesti. Pokračovat v užívání léků na krevní tlak doma.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Fyzická aktivita: Chodí, je soběstačná.
+
+Pokyny při propuštění:
+Byl vám odstraněn žlučník. Udržujte rány čisté a suché, vyhýbejte se těžké fyzické námaze a v případě horečky, zhoršení bolesti, zvracení nebo žloutenky volejte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

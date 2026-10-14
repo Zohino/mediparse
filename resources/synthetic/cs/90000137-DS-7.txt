@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zhoršující se dušnost, pacient odeslán ___
+
+Významné chirurgické zákroky nebo invazivní procedury:
+Žádné
+
+Anamnéza:
+Chronické onemocnění ledvin
+Atriální fibrilace
+Hypertenze
+Předchozí užívání tabáku
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Vitalní funkce: T 36,7 °C, TF 78, TK 130/74, dechová frekvence 18, SpO2 92 % při dýchání okolním vzduchem
+Celkový stav: Dobrý
+Hlava, oči, uši, nos, hrdlo: Bez známek žloutenky
+Krk: Pohyblivý
+Plíce: Difuzní sípoty
+Břicho: Měkké
+Končetiny: Mírný otok
+Neurologické vyšetření: Bez ložiskových příznaků
+
+Významné výsledky:
+Při přijetí zvýšená hladina kreatininu 2,4, výchozí hodnota kolem 2,2. Venózní bikarbonát 33. Hemoglobin 11,8. Dvakrát negativní troponin. EKG prokázalo nepravidelný rytmus s kontrolovanou frekvencí.
+Zobrazovací vyšetření: Rentgen hrudníku prokázal hyperinflaci plic, zploštění bránice a žádnou ložiskovou konsolidaci, vyhodnotil ___.
+
+Stručný popis hospitalizace:
+Pacient se dostavil do ___ s několikdenní anamnézou zhoršující se dušnosti a kašle. Jeho stav se zlepšil po podání bronchodilatancií pomocí inhalátoru, krátkodobé léčbě kortikosteroidy a doplňkovém kyslíku, který byl postupně vysazován. Hladina kreatininu zůstala stabilní. Jeho frekvence zůstala kontrolovaná při domácím užívání metoprololu a pokračující antikoagulační léčbě. Pacienta vyšetřil ___ a propustil domů s naplánovanou kontrolou v ___.
+
+Léky při přijetí:
+Apixaban, metoprolol, inhalátor s tiotropiem, amlodipin.
+
+Léky při propuštění:
+Apixaban 2,5 mg dvakrát denně. Metoprolol succinat 50 mg denně. Inhalátor s tiotropiem denně. Amlodipin 5 mg denně. Postupné snižování dávky prednisonu po dobu dalších čtyř dnů. Inhalátor s albuterolem podle potřeby.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+Atriální fibrilace
+
+Stav při propuštění:
+Stabilní.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni kvůli problémům s dýcháním a léčeni inhalátory a kortikosteroidy. Dokončete léčbu prednisonem a používejte inhalátory podle pokynů. Denně se važte a vyhýbejte se kouři. V případě zhoršení dušnosti, horečky nebo bolesti na hrudi volejte ___ nebo se vraťte na pohotovost. V případě dotazů se obraťte na ___.
+
+Pokyny pro kontrolu:
+___

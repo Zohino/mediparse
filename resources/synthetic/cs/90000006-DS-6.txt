@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž odeslán z ___ kliniky, potíže trvají dva dny – bušení srdce a únava. Vyšetření srdečního rytmu prokázalo fibrilaci síní s rychlou komorovou frekvencí. Pacient se cítil slabě, ale neměl bolesti na hrudi.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin, stadium 3
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce: Bez horečky, srdeční frekvence 96, krevní tlak stabilní
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Plíce: Čisté na obou stranách
+SRDCE: Nepravidelný rytmus, bez šelestu
+Břicho: Měkké, netendrové
+Končetiny: Bez otoků
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM: Kreatinin v normě, draslík v normě, hemoglobin stabilní, troponin negativní při opakovaném vyšetření.
+ZÁVĚR: Rentgen hrudníku bez akutních nálezů. Velikost srdce normální.
+
+Stručný popis hospitalizace:
+Byl mu podán lék ke zpomalení srdeční frekvence a ta se během jednoho dne stabilizovala. Po konzultaci s týmem z ___ byla zahájena antikoagulační léčba. Funkce ledvin zůstala stabilní a pacient mohl do ___ pohodlně chodit.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg jednou denně
+2. Apixaban 2,5 mg dvakrát denně
+3. Atorvastatin 40 mg večer
+4. Lisinopril 5 mg denně
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Stabilní a bdělý.
+Úroveň aktivity: Chodí bez pomoci
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli rychlému a nepravidelnému srdečnímu tepu. Užijte si nové léky podle pokynů. V případě mdlob, bolesti na hrudi nebo krvácení se vraťte. V případě jakýchkoli dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

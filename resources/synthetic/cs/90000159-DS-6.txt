@@ -1,0 +1,64 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Rána na noze a vysoká hladina cukru v krvi
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ po několika dnech zhoršující se rány na levé noze, zvýšené žízně a častém močení. Hladina glukózy měřená doma byla trvale zvýšená. Popíral horečku, bolest na hrudi nebo zvracení. Jeho primární lékař v ___ ho odeslal na pohotovostní oddělení k vyšetření a léčbě.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidémie
+Předchozí vřed na noze léčený v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce; matka s vysokým krevním tlakem.
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez akutní tíže.
+PLÍCE: Při auskultaci oboustranně čisté.
+SRDCE: Pravidelný rytmus, bez šelestů.
+BŘICHO: Měkké, netendrovatelné, neztuhlé.
+KŮŽE: Malý, mělčí vřed na levé plosce nohy, bez hnisu.
+
+Významné výsledky:
+Při přijetí byly laboratorní výsledky významné výrazně zvýšenou hladinou glukózy a mírnou leukocytózou. Hodnota hemoglobinu A1c byla vysoká. Elektrolyty a kreatinin byly v normálních mezích. Rentgen nohy ukázal otok měkkých tkání, bez známek osteomyelitidy. Kultivace krve odebrané v ___ nevykázala růst. Hladina glukózy se postupně zlepšovala při upraveném režimu inzulinu před propuštěním.
+
+Stručný průběh hospitalizace:
+Pacient byl přijat na interní oddělení a zahájena léčba inzulínem s pečlivým monitorováním hladiny glukózy. Rána na noze byla denně čištěna a ošetřována, tým podiatrů z ___ ji vyšetřil a doporučil lokální péči o ránu. Pacient dostal krátkodobou kúru perorálními antibiotiky. Nutriční terapeut poskytl informace o dietě. Jeho hladina glukózy se stabilizovala a byl propuštěn domů s následnou péčí sestry ___.
+
+Léky při propuštění:
+1. Inzulín glargin 20 jednotek subkutánně před spaním
+2. Metformin 500 mg dvakrát denně
+3. Cefalexin 500 mg čtyřikrát denně po dobu pěti dnů
+4. Lisinopril 10 mg denně
+5. Atorvastatin 20 mg večer
+
+Způsob propuštění:
+Domů s poskytovanou péčí
+
+Diagnóza při propuštění:
+Diabetes mellitus 2. typu s vředem na noze
+
+Stav při propuštění:
+Úroveň vědomí: Bdělý a komunikativní.
+Stav aktivity: Chodí, samostatný s oporou hůlky.
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli vysoké hladině cukru v krvi a ráně na noze. Měřte si hladinu glukózy před jídlem a před spaním. Měňte obvaz denně a omezte tlak na nohu. V případě horečky, šířící se zarudnutí nebo výtoku volejte ___ nebo se vraťte na pohotovostní oddělení. Přineste si záznam o hladině glukózy na kontrolu u doktora ___ a ___.
+
+Pokyny pro další postup:
+___

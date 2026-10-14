@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Incize a drenáž v místě lože
+
+Anamnéza současného onemocnění:
+Pacient je ___ letý muž, který se dostavil s třemi dny trvající bolestí, otokem a zarudnutím pravé dolní končetiny po drobném oděru při zahradničení. Před přijetím měl horečku a zimnici. Nejprve byl vyšetřen v ___ a poté odeslán sem dne ___ k intravenózní léčbě antibiotiky.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Sezónní alergie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s rodinnou anamnézou diabetu. Matka s hypertenzí.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: pacient je v pohodě, bez známek úzkosti
+Krk: pružný
+Plíce: oboustranně čisté
+Břicho: měkké, netendrové
+Končetiny: zarudnutí pravé holenní kosti výrazně ustoupilo, rána je čistá, mírný edém
+
+Významné výsledky:
+Při přijetí zvýšený počet leukocytů, normální hladina kreatininu. Kultivace rány prokázala přítomnost kožní flóry citlivé na cefalexin, o čem informoval ___. Ultrazvuk neprokázal hlubokou žilní trombózu.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Počet leukocytů se normalizoval, elektrolyty v normě.
+
+Stručný popis hospitalizace:
+Byla zahájena intravenózní léčba cefazolinem a absces byl ošetřen incizí a drenáží lékařem ___. Horečka ustoupila během jednoho dne. Zarudnutí bylo označeno perem a postupně ustupovalo. Dne ___ byl pacient převeden na perorální cefalexin, který dobře toleroval. Byla provedena instruktáž o péči o ránu a domluvena kontrola u ___.
+
+Léky při propuštění:
+Cefalexin 500 mg perorálně čtyřikrát denně po dobu sedmi dnů
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Paracetamol podle potřeby proti bolesti
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny s abscesem
+
+Stav při propuštění:
+Duševní stav: bdělý a plně orientovaný
+Úroveň vědomí: bdělý a reagující
+Stav aktivity: chůze samostatně
+
+Pokyny pro propuštěného pacienta:
+Byl jste léčen na kožní infekci nohy. Dokončete veškerou antibiotickou léčbu. Měňte obvaz denně a udržujte nohu ve zvýšené poloze. V případě horečky, šíření zarudnutí nebo zhoršení bolesti volejte ___. Na specializovanou ambulanci pro léčbu ran v ___ budete sledován; v případě dotazů se obraťte na ___.
+
+Pokyny pro kontrolu:
+___

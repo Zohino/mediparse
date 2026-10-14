@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Muž s dvoudenní anamnézou křečovité bolesti v pravém horním kvadrantu břicha a nevolností, vyšetřen v ___ a převezen z ___ k chirurgickému vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez horečky
+Krk:
+Pružný
+PLÍCE:
+Čisté na obou stranách
+Břicho:
+Měkké, mírně citlivé v pravém horním kvadrantu
+KONČETINY:
+Bez otoků
+
+Významné výsledky:
+Mírná leukocytóza a normální jaterní enzymy při přijetí.
+ZOBRAZOVACÍ METODY:
+Ultrazvuk prokázal žlučové kameny se ztluštěním stěny žlučníku.
+
+Stručný popis průběhu hospitalizace:
+Byl mu podán antibiotika a tekutiny, poté podstoupil nekomplikovanou laparoskopickou cholecystektomii dne ___. Strava byla postupně rozšiřována a bolest byla kontrolována perorálními léky.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Lisinopril denně, atorvastatin večer, paracetamol podle potřeby proti bolesti, dokusát při užívání opioidů.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+Bdělý a orientovaný
+Úroveň vědomí:
+Bdělý a reaguje na podněty
+
+Pokyny při propuštění:
+Můžete se sprchovat a začít s lehkou aktivitou. Vyhýbejte se těžké fyzické námaze po dobu několika týdnů. V případě horečky nebo zhoršení bolesti volejte na kliniku na číslo ___.
+
+Pokyny pro kontrolu:
+___

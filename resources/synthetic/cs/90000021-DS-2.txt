@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a otok nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s třídenní bolestivou, zarudlou a oteklou pravou nohou, odeslán ___ kvůli horečce.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Mírně nemocný, nyní bez horečky
+Plíce: Čisté
+Břicho: Měkké, netendrovatelné
+Kůže: Teplé zarudnutí na pravé holeni
+Neurologické: Bez ložiskových příznaků
+
+Významné výsledky:
+Zvýšený počet bílých krvinek s neutrofily, normální hladina kreatininu, negativní hemokultury.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Počet bílých krvinek se normalizoval, elektrolyty v normě.
+
+Stručný popis hospitalizace:
+Celulitida pravé nohy byla léčena intravenózními antibiotiky, poté perorální terapií. Zarudnutí ustoupilo a horečka odezněla. ___ ho prohlásil za způsobilého k propuštění.
+PŘECHODNÁ DOPORUČENÍ:
+Zkontrolujte stav kůže za týden, v případě zhoršení stavu kontaktujte ___.
+
+Léky při přijetí:
+Lisinopril, atorvastatin, allopurinol
+
+Léky při propuštění:
+Cefalexin čtyřikrát denně po dobu sedmi dnů. Pokračujte v užívání lisinoprilu, atorvastatinu a allopurinolu.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen na kožní infekci nohy. Užijte antibiotika podle předpisu, zvedněte nohu a v případě horečky nebo šíření zarudnutí se vraťte.
+
+Pokyny pro kontrolu:
+___

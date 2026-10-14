@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok a bolest pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s hypertenzí, který se dostavil s třemi dny trvajícím zhoršujícím se otokem a bolestí pravého lýtka po dlouhé cestě autem. Ultrazvukové vyšetření provedené v ___ odhalilo hlubokou žilní trombózu. Neměl bolesti na hrudi ani dušnost. Byl přijat k zahájení antikoagulační terapie.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Pravidelně sledován lékařem ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Vitalní funkce: T 37,0 °C, TF 78, TK 132/80, dechová frekvence 16, SpO2 98 % při dýchání okolním vzduchem
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Krk: Pohyblivý
+Plíce: Čisté na obou stranách
+Končetiny: Pravé lýtko oteklé a citlivé na dotek, pulzace zachována
+Neurologické vyšetření: Pacient je při vědomí, pohybuje všemi končetinami
+
+Významné výsledky:
+Venózní duplexní sonografie: okluzivní trombóza v pravé popliteální žíle.
+Laboratorní vyšetření provedené ___ ukázalo normální hodnoty kreatininu a počtu krevních destiček.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Leukocyty 7,1, hemoglobin 14,0, krevní destičky 240, kreatinin 0,9, INR 1,1
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Apixaban 10 mg dvakrát denně po dobu sedmi dnů, poté 5 mg dvakrát denně
+2. Lisinopril 10 mg denně
+3. Atorvastatin 20 mg večer
+Vydány v lékárně ___
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní hluboká žilní trombóza pravé nohy
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Při vědomí a reaguje
+Fyzická aktivita: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen na krevní sraženinu v pravé noze. Užívajte léky na ředění krve přesně podle předpisu a nepřestávejte je užívat. Často choďte a zvedejte nohu. V případě bolesti na hrudi, potíží s dýcháním nebo krvácení volejte ___ nebo se vraťte do nemocnice. Dodržujte termín kontroly v ambulanci ___.
+
+Pokyny pro kontrolu:
+___

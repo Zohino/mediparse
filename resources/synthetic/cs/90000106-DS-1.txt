@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a otok levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letý muž, kuřák, si všiml tepla, zčervenání a bolesti v levé dolní části nohy po drobném oděru. Příznaky se během tří dnů šířily i přes domácí péči. Byl odeslán z kliniky ___ kvůli horečce. Vyšetřen na pohotovosti dne ___.
+
+Anamnéza předchozích onemocnění:
+CHOPN
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: T 100,4, TF 92, TK 138/80, dechová frekvence 18, SpO2 95 % při dýchání okolním vzduchem
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice
+Krk: Pohyblivý
+Plíce: Čisté, bez chrůpků
+Končetiny: Levá holeně zčervenalá, teplá, citlivá, mírný edém
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+NÁLEZY:
+Mírná leukocytóza při přijetí, normalizace do propuštění. Krevní kultury z ___ nevykázaly růst. Ultrazvuk levé nohy neprokázal hlubokou žilní trombózu. Rentgen hrudníku prokázal hyperinflaci bez akutního procesu.
+
+Stručný průběh hospitalizace:
+Byl mu podáván intravenózní antibiotika na léčbu celulitidy levé nohy a okraj zčervenání se den ode dne zmenšoval. Horečka ustoupila během jednoho dne. Domácí inhalátory byly pokračovány bez zhoršení stavu. Vyšetřen doktorem ___ a propuštěn dne ___ s perorálními antibiotiky.
+PŘECHODNÁ OTÁZKA:
+Při kontrolní návštěvě znovu zkontrolujte nohu.
+
+Léky při přijetí:
+Tiotropium denně
+Lisinopril denně
+Atorvastatin večer
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu 5 dnů
+2. Tiotropium inhalátor denně
+3. Lisinopril 10 mg denně
+4. Atorvastatin 20 mg večer
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida levé dolní části nohy
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí: Bdělý a pozorný
+Stav aktivity: Chodí samostatně
+
+Pokyny pro propuštění:
+Byl jste léčen na kožní infekci nohy. Užívejte všechny antibiotické tablety podle předpisu. Při sezení držte nohu ve zvýšené poloze. V případě šíření zčervenání, horečky nebo zhoršení bolesti se vraťte. V případě dotazů volejte na ___ nebo v případě potřeby navštivte ___.
+
+Pokyny pro kontrolu:
+___

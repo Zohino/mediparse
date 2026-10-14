@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zhoršující se dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s několikdenní postupně se zhoršující dušností, sípáním a produktivním kašlem. Vyšetřen v ___ a odeslán na pohotovostní oddělení k vyšetření.
+
+Anamnéza předchozích onemocnění:
+Chronická obstrukční plicní nemoc
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+HEENT: Vlhké sliznice
+PLÍCE: Difúzní expirační sípání
+Končetiny: Bez otoků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Základní panel bez významných odchylek, mírně zvýšený počet bílých krvinek, odebráno ___
+NÁLEZY: Rentgen hrudníku ukazuje hyperinflaci plic bez ložiskové konsolidace
+
+Stručný popis hospitalizace:
+Léčen inhalovanými bronchodilatátory, perorálními kortikosteroidy a doplňkovým kyslíkem, postupně snižována dávka kyslíku do třetího dne. Následovala respirační terapie v ___ a dýchání se postupně zlepšovalo před propuštěním do ___.
+
+Léky při přijetí:
+Inhalátor s tiotropiem, denně
+Lisinopril
+
+Léky při propuštění:
+1. Inhalátor s tiotropiem, jednou denně
+2. Inhalátor s albuterolem, podle potřeby
+3. Prednison, snižující se dávka po dobu pěti dnů
+4. Lisinopril, denně
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Chronická obstrukční plicní nemoc
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Ambulantní, soběstačný
+
+Pokyny pro propuštění:
+Byli jste přijati kvůli problémům s dýcháním. Užijte si inhalátory a kortikosteroidy podle pokynů. Přestaňte kouřit a v případě zhoršení dýchání volejte ___ nebo se vraťte.
+
+Pokyny pro kontrolu:
+___

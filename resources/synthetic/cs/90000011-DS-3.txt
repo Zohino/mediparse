@@ -1,0 +1,80 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s kašlem, horečkou a dušností trvajícími tři dny, odeslán z kliniky ___.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin
+Atriální fibrilace
+Hypertenze
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav:
+Mírně nemocný, v pohodlí
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Plíce:
+V dolní části pravé plíce slyšitelné chrůpky
+Břicho:
+Měkké, netendrové
+Končetiny:
+Bez otoků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Zvýšený počet bílých krvinek, kreatinin v normě
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Pořízen rentgen hrudníku
+ZÁVĚR:
+Zastínění v dolním laloku pravé plíce
+
+Stručný popis průběhu hospitalizace:
+Léčen antibiotiky a kyslíkem, stav se postupně zlepšoval. Funkce ledvin zůstala stabilní. Konzultován ___ ohledně plánování rehabilitace.
+
+Léky při přijetí:
+Metoprolol, apixaban
+
+Léky při propuštění:
+Pokračovat v užívání metoprololu a apixabanu. Dokončit perorální kúru antibiotiky.
+
+Způsob propuštění:
+Domů s domácí péčí
+Zařízení: ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+Pneumonie
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí:
+Bdělý a orientovaný
+Stav aktivity:
+Chodí, stabilní chůze
+
+Pokyny při propuštění:
+Byl jste zde léčen pro plicní infekci. Užívajte léky podle pokynů. V případě zhoršení dýchání se vraťte, volejte ___.
+
+Pokyny pro kontrolu:
+___

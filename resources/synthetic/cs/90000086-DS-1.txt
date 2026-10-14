@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka odeslána z kliniky ___ po několika dnech, kdy pociťovala zrychlený srdeční tep, mírné závratě a únavu. Při přijetí byl srdeční rytmus nepravidelný.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na bušení srdce. Žádná bolest na hrudi, horečka ani synkopa.
+
+Anamnéza předchozích onemocnění:
+Fibrilace síní
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti.
+Břicho: Měkké, netendrovatelné.
+Kůže: Teplá, suchá, bez vyrážky.
+
+Významné výsledky:
+EKG prokázalo nepravidelný srdeční rytmus, po léčbě byl srdeční tep regulován. Elektrolyty a vyšetření štítné žlázy byly v normě. Echokardiogram, který zhodnotil ___, ukázal zachovanou ejekční frakci.
+
+Stručný popis hospitalizace:
+Pacientka byla monitorována pomocí telemetrie a její srdeční tep byl regulován perorálním metoprololem. Po konzultaci s ___ byla zahájena antikoagulační léčba. Příznaky ustoupily a pacientka mohla chodit bez závratí. Bylo domluveno kontrolní vyšetření u kardiologa v ___.
+
+Léky při přijetí:
+Levotyroxin
+Lisinopril
+
+Léky při propuštění:
+1. Metoprolol sukcinát, užívá se jednou denně ráno
+2. Apixaban, užívá se dvakrát denně
+3. Levotyroxin, užívá se každé ráno
+4. Lisinopril, užívá se denně
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární: Fibrilace síní s rychlou ventrikulární odpovědí
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a reaguje.
+Stav aktivity: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Byla jste přijata s rychlým, nepravidelným srdečním tepem. Užijte si nové léky podle pokynů a nepřestávejte je užívat. V případě bolesti na hrudi, mdlob nebo krvácení se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

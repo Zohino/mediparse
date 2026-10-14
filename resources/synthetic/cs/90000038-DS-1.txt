@@ -1,0 +1,80 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s několikdenní se zhoršující bolestí v pravé dolní části břicha a nevolností, odeslán z ___ k vyšetření. Byl vyšetřen doktorem ___ na pohotovosti, kde byly provedeny laboratorní testy a zobrazovací vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Možná cukrovka, čeká se na potvrzení
+Popírá CHOPN
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Břicho:
+Měkké, mírná citlivost v pravé dolní části
+
+Významné výsledky:
+Mírná leukocytóza při přijetí. CT vyšetření provedené v ___ ukázalo zánět slepého střeva bez perforace.
+ZÁVĚR:
+Akutní nekomplikovaná apendicitida
+
+Stručný popis průběhu hospitalizace:
+Byl přijat, ponechán nalačno a zahájena intravenózní antibiotická terapie. Chirurg z ___ ho vyšetřil a doporučil laparoskopickou apendektomii, která proběhla dobře. Bolest se zmírnila a postupně se začala zavádět běžná strava.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Zkontrolujte hladinu glukózy nalačno u praktického lékaře.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+1. Lisinopril denně.
+2. Atorvastatin večer.
+3. Paracetamol podle potřeby proti bolesti.
+4. Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů.
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Akutní apendicitida
+Sekundární:
+Hypertenze
+Hyperlipidemie
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+Bdělý a orientovaný
+Úroveň vědomí:
+Plně bdělý
+Stav aktivity:
+Chodí bez pomoci
+
+Pokyny pro propuštění:
+Byl jste léčen pro apendicitidu. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze a užívejte léky podle pokynů. V případě horečky, zhoršení bolesti nebo zarudnutí rány volejte ___.
+
+Pokyny pro kontrolu:
+___

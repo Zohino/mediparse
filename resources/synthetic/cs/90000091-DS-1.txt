@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest břicha
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s chronickým onemocněním ledvin se dostavila s třídenní anamnézou zhoršující se bolesti břicha a nevolnosti, byla léčena a její stav se zlepšil.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Atriální fibrilace
+Hypertenze
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie provedena v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: bez horečky, stabilní
+Celkový stav: komfortní
+Hlava, uši, oči, nos, hrdlo: normální
+Břicho: mírně citlivé
+Končetiny: bez otoků
+Pulz: hmatný
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Kreatinin v normě, draslík v normě, glukóza v přijatelné hodnotě, hemoglobin stabilní.
+ZÁVĚR:
+Na zobrazovacích vyšetřeních břicha nebyly zjištěny žádné akutní nálezy.
+
+Léky při přijetí:
+Metformin, apixaban, lisinopril
+
+Léky při propuštění:
+Pokračovat v užívání metforminu a apixabanu doma; lisinopril se vysadí, dokud se znovu nezkontroluje funkce ledvin.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Gastroenteritida, diabetes, atriální fibrilace
+
+Stav při propuštění:
+Duševní stav: bdělá a orientovaná
+Úroveň vědomí: bdělá
+Úroveň aktivity: chodí samostatně
+
+Pokyny pro propuštění:
+Pijte tekutiny, užívejte léky podle pokynů a v případě návratu bolesti volejte na kliniku na číslo ___.
+
+Pokyny pro kontrolu:
+___

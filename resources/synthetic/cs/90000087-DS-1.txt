@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Zarudnutí a bolest levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí se dostavila s třemi dny trvajícím zarudnutím a bolestí levé dolní končetiny, horečkou a zimnicí po drobném oděru na ___ při zahradničení.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: dobrý, bez horečky
+HLAVA, OČI, UŠI, NOS, KRK: vlhké sliznice
+PLÍCE: čisté na obou stranách
+KONČETINY: výrazné zlepšení zarudnutí levé holenně
+KŮŽE: hojící se oděrka
+
+Významné výsledky:
+Při přijetí zvýšený počet bílých krvinek, při propuštění normalizovaný. Krevní kultury bez růstu. Ultrazvuk provedený ___ neprokázal přítomnost krevní sraženiny.
+ZÁVĚR:
+Žádná hluboká žilní trombóza.
+
+Stručný popis hospitalizace:
+Léčena pro celulitidu levé nohy intravenózním vancomycinem, poté převedena na perorální doxycyklin, jakmile se zarudnutí začalo zmenšovat. Péče o ránu probrána s ___. Horečka ustoupila a před propuštěním mohla chodit bez potíží.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Doxycyklin 100 mg dvakrát denně po dobu pěti dalších dnů
+2. Lisinopril 10 mg denně
+3. Atorvastatin 20 mg večer
+4. Paracetamol podle potřeby proti bolesti
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Celulitida levé dolní končetiny
+Sekundární:
+Hypertenze
+Hyperlipidémie
+
+Stav při propuštění:
+Dobrý
+Duševní stav: jasný a srozumitelný
+Úroveň vědomí: bdělý a reagující
+
+Pokyny pro propuštění:
+Užívejte antibiotika, dokud je nedokončíte. Udržujte nohu ve zvýšené poloze a ránu čistou. Vraťte se, pokud se zarudnutí rozšíří, horečka se vrátí nebo se bolest zhorší. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

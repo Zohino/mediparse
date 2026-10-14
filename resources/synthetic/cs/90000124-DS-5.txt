@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Slabost a snížená chuť k jídlu
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka odeslána z ___ po několika dnech únavy, nevolnosti a sníženém příjmu potravy. Hodnoty glukózy měřené doma byly zvýšené. Byla vyšetřena v ambulanci ___, zjištěna dehydratace a přijata k rehydrataci, monitorování a úpravě medikace.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus
+Chronické onemocnění ledvin
+Hypertenze
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodině se vyskytla pneumonie u její sestry. Matka trpěla hypertenzí.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: unavená, v pohodě
+Končetiny: bez otoků
+KŮŽE: suchá
+Neurologický stav: bdělá, bez ložiskových příznaků
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Celkový stav: dobrý
+Končetiny: teplé
+KŮŽE: normální
+Neurologický stav: bez deficity
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala mírnou hyperglykémii a zvýšenou hladinu kreatininu, blízkou výchozí hodnotě. Hladina sodíku byla mírně snížená. Vyšetření moči bylo v normě. Rentgen hrudníku byl bez patologických nálezů. Hladina kreatininu se zlepšila po rehydrataci a hladina glukózy se stabilizovala po úpravě dávky inzulínu podle doporučení oddělení ___.
+
+Medikace při přijetí:
+Metformin, lisinopril, amlodipin, atorvastatin
+
+Medikace při propuštění:
+1. Inzulín glargin, podává se večer v upravené dávce
+2. Amlodipin, denně
+3. Atorvastatin, večer
+4. Lisinopril, denně
+5. Metformin, do další kontroly se vysazuje
+
+Plán propuštění:
+Domů, s péčí od ___
+
+Diagnóza při propuštění:
+Diabetes s hyperglykémií
+Dehydratace
+
+Stav při propuštění:
+Duševní stav: jasný a srozumitelný.
+Fyzická aktivita: schopná chůze, soběstačná.
+
+Pokyny pro propuštění:
+Byla jste přijata s dehydratací a vysokou hladinou cukru v krvi. Pijte dostatek tekutin, měřte si hladinu glukózy před jídlem a před spaním a užívejte inzulín podle pokynů. Dodržujte termín kontroly u ___. V případě zvracení, zmatenosti nebo silné slabosti se vraťte a v případě dotazů nás kontaktujte.
+
+Pokyny pro další postup:
+___

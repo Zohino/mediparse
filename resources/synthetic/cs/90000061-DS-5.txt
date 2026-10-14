@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___ letá žena s postupující bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po jídle, trvající dva dny. Byla odeslána z ___ poté, co ultrazvuk odhalil žlučové kameny. Doma neměla horečku. Vyšetřena doktorem ___ na pohotovosti.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlí, ale bdělá, v klidu bez známek úzkosti.
+Krk:
+Pružný, bez hmatných útvarů.
+Břicho:
+Měkké, citlivé v pravém horním kvadrantu, bez známek peritoneálního dráždění.
+KŮŽE:
+Teplá, suchá, bez známek žloutenky.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Mírná leukocytóza, normální hladina bilirubinu, lipáza v normálním rozmezí. Odebráno ___.
+ZÁVĚR:
+Zesílení stěny žlučníku s mnoha kameny a tekutinou v okolí žlučníku, odpovídá akutní cholecystitidě. Společný žlučovod normální šířky.
+
+Stručný popis průběhu hospitalizace:
+Byla jí podána intravenózní antibiotika a tekutiny, poté byla převezena na operační sál, kde podstoupila nekomplikovanou laparoskopickou cholecystektomii. Chirurgický tým pod vedením ___ zaznamenal zánět žlučníku. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a před propuštěním chodila samostatně.
+
+Léky při propuštění:
+1. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby na bolest.
+2. Lisinopril 10 mg perorálně jednou denně.
+3. Atorvastatin 20 mg večer.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Stabilní, dobře snáší běžnou stravu.
+Stav aktivity:
+Ambulantní, samostatná.
+
+Pokyny pro propuštěného pacienta:
+Byla léčena pro zánět žlučníku a byl jí odstraněn žlučník. Udržujte místa řezů čistá a suchá. Po dobu dvou týdnů se vyhýbejte zvedání těžších předmětů než deset kilogramů. V případě horečky, zhoršení bolesti, žluté kůže nebo přetrvávajícího zvracení volejte na číslo ___ na ___.
+
+Pokyny pro kontrolní vyšetření:
+___

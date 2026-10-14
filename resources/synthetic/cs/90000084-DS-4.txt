@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Léky obsahující sulfanilamid
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Incision a drenáž abscesu levé nohy
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí a obezitou, převezena z ___ s třídenní anamnézou bolestivé, zarudlé, oteklé levé dolní končetiny a horečkou. Příznaky se objevily po menším oděru, ke kterému došlo ___ dní předtím. Uvádí zimnici a sníženou chuť k jídlu. Vyšetření v ___ odhalilo fluktuující oblast a byla přijata k léčbě antibiotiky a drenáží.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Obezita
+Hypotyreóza
+Cholecystektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec s cévní mozkovou příhodou.
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez horečky, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Vlhká sliznice
+Plicní:
+Čisté na obou stranách
+Končetiny:
+Čistý obvaz na levé holeni, mírné zbytkové teplo, bez šíření zarudnutí
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala zvýšený počet bílých krvinek a zvýšené zánětlivé markery, které se do propuštění zlepšily. Kultivace rány prokázala přítomnost methicilin-senzitivního Staphylococcus aureus. Kultivace krve byla negativní.
+NÁLEZY:
+Ultrazvuk levé nohy ukázal subkutánní tekutou kolekci bez hluboké žilní trombózy. Výsledky byly prodiskutovány s ___.
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně každých šest hodin po dobu dalších sedmi dnů
+2. Lisinopril 10 mg perorálně denně
+3. Levothyroxin 75 mcg perorálně denně
+4. Acetaminofen 650 mg perorálně podle potřeby proti bolesti
+
+Plán propuštění:
+Domů s doprovodnou péčí
+Zařízení: ___
+
+Diagnóza při propuštění:
+Celulitida s abscesem levé dolní končetiny
+Infekce methicilin-senzitivním Staphylococcus aureus
+
+Stav při propuštění:
+Duševní stav: Bdělá a orientovaná, schopná porozumět instrukcím.
+Úroveň vědomí: Bdělá a komunikativní.
+Stav aktivity: Chodí samostatně s mírnou bolestí nohy.
+
+Instrukce pro propuštění:
+Byla léčena pro kožní infekci nohy. Dokončete všechny předepsané antibiotika. Měňte obvaz denně a udržujte nohu ve zvýšené poloze. V případě horečky, zhoršení zarudnutí, hnisání nebo silné bolesti zavolejte do kliniky ___ nebo se vraťte.
+
+Instrukce pro kontrolu:
+___

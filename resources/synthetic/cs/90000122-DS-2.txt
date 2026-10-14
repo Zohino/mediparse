@@ -1,0 +1,62 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letá žena se dostavila s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po jídle, byla odeslána z ___ kliniky. Ultrazvuk naznačil akutní cholecystitidu a byla přijata k laparoskopické operaci.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Pod dohledem Dr. ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Bez žloutenky, vlhké sliznice.
+Břicho: Měkké, mírně citlivé, místa po operaci se hojí.
+Končetiny: Bez otoků.
+Neurologické vyšetření: Bdělá, bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Mírně zvýšený počet bílých krvinek, normální jaterní enzymy, normální hladina bilirubinu.
+ZOBRAZOVACÍ METODY: Ultrazvuk ukázal žlučové kameny, ztluštění stěny žlučníku a tekutinu v okolí žlučníku.
+ZÁVĚR: Nález odpovídá akutní cholecystitidě; při přehledu výsledků nebyla zjištěna dilatace společného žlučovodu.
+
+Léky při přijetí:
+Paracetamol podle potřeby. Lisinopril 10 mg denně.
+
+Léky při propuštění:
+Paracetamol 650 mg každých šest hodin podle potřeby. Lisinopril 10 mg denně. Dokusát 100 mg dvakrát denně během užívání opioidů. Pokračovat v domácí dávce.
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Primární: Akutní cholecystitida s cholelitiázou
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a reaguje.
+Fyzická aktivita: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Udržujte řezné rány čisté a suché. Vyhýbejte se těžké fyzické námaze po dobu dvou týdnů. V případě horečky, zhoršení bolesti břicha, žloutenky nebo přetrvávajícího zvracení se vraťte do nemocnice. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

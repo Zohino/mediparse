@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž převezen z ___ s kašlem, horečkou a dušností trvajícími tři dny. Při přijetí byla zvažována možnost pneumonie.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález únavy a zimnice.
+
+Anamnéza předchozích onemocnění:
+Podezření na CHOPN, probíhá vyšetření u ___
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce: stabilní při dýchání okolního vzduchu
+Celkový stav: unavený, v pohodlí
+Hlava, oči, uši, nos, hrdlo: vlhká sliznice
+Krk: pružný
+Plicní: rozptýlené chrůpky
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 11,2, hemoglobin 13,1, sodík 138, draslík 4,2, kreatinin 0,9, laktát 1,4, bikarbonát 24, trombocyty 250, glukóza 105. Rentgen hrudníku ukázal mírné, nejasné zastínění.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Leukocyty 8,1, kreatinin 0,8
+
+Stručný popis průběhu hospitalizace:
+Léčen perorálními antibiotiky a inhalovanými bronchodilatátory, vyšetřen ___ dne ___. Příznaky se zlepšily a podávání kyslíku bylo postupně snižováno. Propuštěn domů ve stabilizovaném stavu. S pacientem a rodinou probrány pokyny pro případ zhoršení stavu.
+PŘECHODNÁ OBLASTI:
+Opakované zobrazovací vyšetření hrudníku za šest týdnů; ambulantní spirometrie.
+
+Léky při přijetí:
+Inhalátor s albuterolem podle potřeby, aspirin denně.
+
+Léky při propuštění:
+Azithromycin 250 mg denně po dobu dalších čtyř dnů. Inhalátor s albuterolem každé čtyři hodiny podle potřeby. Aspirin 81 mg denně.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní bronchitida
+Hypoxémie
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Bdělý a orientovaný
+Stav aktivity:
+Chodící, soběstačný
+
+Pokyny při propuštění:
+Užívejte antibiotika podle předpisu a odpočívejte doma. Navštivte ___ do jednoho týdne. V případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte.

@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s chronickým onemocněním ledvin, odeslaná z kliniky ___ kvůli zhoršujícímu se edému a únavě během jednoho týdne.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus
+Atriální fibrilace
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Unavená, v pohodě
+Krk:
+Pružný
+Břicho:
+Měkké, netendrovatelné
+
+Významné výsledky:
+Kreatinin blízko výchozí hodnoty. Draslík v normě. Laboratorní výsledky z ___ byly stabilní.
+ZÁVĚR:
+Žádný akutní kardiopulmonální proces.
+
+Léky při přijetí:
+Metformin, apixaban, lisinopril
+
+Léky při propuštění:
+Apixaban dvakrát denně. Furosemid každé ráno. Inzulin podle pokynů. Lisinopril vysadit do kontroly.
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární:
+Přetížení tekutinami
+Diabetes
+Chronické onemocnění ledvin
+Atriální fibrilace
+
+Stav při propuštění:
+Duševní stav:
+Bdělá a orientovaná
+Úroveň vědomí:
+Probuzená
+Úroveň aktivity:
+Chodí s oporou
+
+Pokyny pro propuštění:
+Byla léčena kvůli zadržování tekutin. Denně se važte a v případě návratu otoků volejte ___. Omezte příjem soli, užívejte léky podle seznamu a dodržujte všechny termíny kontrol.
+
+Pokyny pro další postup:
+___

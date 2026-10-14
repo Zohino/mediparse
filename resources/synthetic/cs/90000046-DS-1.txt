@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+___letý muž s postupující bolestí v pravém dolním kvadrantu břicha, nevolností a horečkou, odeslán ___ poté, co zobrazovací vyšetření v ___ ukázalo zánět slepého střeva.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Bez horečky, stabilní
+Celkový stav:
+Komfortní
+Hlava, oči, uši, nos, hrdlo:
+Normální
+Plíce:
+Čisté
+Břicho:
+Měkké, mírná bolestivost v místě řezu
+Neurologické vyšetření:
+Bdělý
+Pulzy:
+Hmatatelné
+
+Významné výsledky:
+Při přijetí zvýšený počet bílých krvinek, při propuštění normalizován. CT vyšetření prokázalo akutní apendicitidu bez perforace. Histopatologické vyšetření z ___ probíhá.
+
+Stručný popis hospitalizace:
+V den přijetí byl pacient převezen na operační sál, kde podstoupil nekomplikovanou laparoskopickou apendektomii. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a pacient chodil samostatně. Do stabilizace stavu byl sledován doktorem ___.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+
+Léky při propuštění:
+Pokračovat v užívání lisinoprilu a atorvastatinu jako dříve. Paracetamol podle potřeby proti bolesti. Krátkodobé užívání oxykodonu pouze při silné bolesti. Dokusát při užívání opioidů.
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Dobrý, dobře snáší běžnou stravu
+Stav aktivity:
+Ambulantní, samostatný, bez zvedání těžkých předmětů
+
+Pokyny pro propuštění:
+Byl vám odstraněn slepé střevo. Udržujte řezné rány čisté a suché. V případě horečky, zvracení, zhoršení bolesti břicha nebo zarudnutí v místě ran zavolejte na ___ nebo se vraťte do nemocnice.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Dušnost, otok nohou
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka odeslána od ___ s třídenní anamnézou zhoršující se dušnosti a oboustranného otoku nohou. V ambulanci ___ zaznamenali nárůst hmotnosti a poslali ji na pohotovost k vyšetření kvůli přetížení objemem tekutin.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Chronické onemocnění ledvin, stadium 3
+Hypertenze
+Pod dohledem Dr. ___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec s cévní mozkovou příhodou.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: T 36,7 °C, TF 82, TK 148/86, dechová frekvence 18, SpO2 94 % při dýchání okolním vzduchem
+Celkový stav: Dobrý, mírná dušnost
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Plíce: Oboustranné chrůpky
+Neurologické: Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Kreatinin v normě, draslík v normě, sodík 138.
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Rentgen hrudníku proveden dne ___.
+ZÁVĚR:
+Mírná kongesce plicních cév, malé oboustranné výpotky, bez ložiskové konsolidace.
+
+Stručný průběh hospitalizace:
+Přijata s přetížením objemem tekutin, léčena intravenózním furosemidem, s dobrým diuretickým účinkem a ústupem symptomů. Telemetrie prokázala sinusový rytmus bez známek fibrilace síní. Funkce ledvin zůstala stabilní. Byla vyšetřena týmem ___ a propuštěna domů.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Kontrola laboratorních hodnot za jeden týden.
+
+Léky při přijetí:
+Metformin, lisinopril, amlodipin.
+
+Léky při propuštění:
+1. Furosemid 40 mg perorálně denně.
+2. Metformin 500 mg dvakrát denně.
+3. Amlodipin 5 mg denně.
+Lisinopril vysadit, dokud nebudou laboratorní hodnoty znovu zkontrolovány.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní přetížení objemem tekutin
+Diabetes mellitus 2. typu
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Stabilní.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a reaguje.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni kvůli zadržování tekutin a léčeni diuretikem. Každé ráno se važte a omezte příjem soli. Volejte ___, pokud se vaše hmotnost zvýší o více než jeden a půl kilogramu. Dodržujte termín kontroly u ___.
+
+Pokyny pro další péči:
+___

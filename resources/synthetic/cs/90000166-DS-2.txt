@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní vyšetření:
+Žádný, vyšetřena ___
+
+Anamnéza současného onemocnění:
+Žena s hypertenzí, která se dostavila s potížemi, jako je bušení srdce a závratě, trvajícími dva dny. Sestra v ambulanci ___ zaznamenala nepravidelný puls a poslala ji na vyšetření do pohotovostní služby ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Osteoartróza
+
+Rodinná anamnéza:
+Matka, která prodělala cévní mozkovou příhodu. Žádný případ náhlé srdeční smrti.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: dobrý, bez známek úzkosti
+Plíce: čisté na obou stranách
+Břicho: měkké, bez citlivosti
+Končetiny: bez otoků
+Puls: nepravidelný, hmatný
+
+Významné výsledky:
+Troponin negativní (dvě měření). TSH v normě. Draslík a hořčík v normálním rozmezí. Rentgen hrudníku provedený v ___ nevykazuje žádné akutní změny.
+ZÁVĚR:
+Žádné akutní kardiopulmonální abnormality.
+
+Stručný popis průběhu hospitalizace:
+Při přijetí bylo zjištěno, že má pacientka fibrilaci síní s rychlou ventrikulární odpovědí. Frekvence byla kontrolována perorálním metoprololem a po konzultaci s týmem z ___ byla zahájena léčba apixabanem. Rytmus zůstal kontrolovaný a pacientka byla propuštěna v dobrém stavu, s dohodnutou ambulantní péčí v ___.
+PŘECHODNÁ OTÁZKY:
+Pokračovat v antikoagulační léčbě. Zkontrolovat srdeční frekvenci při první návštěvě v ambulanci.
+
+Léky při přijetí:
+Lisinopril denně
+Levotyroxin denně
+
+Léky při propuštění:
+1. Apixaban dvakrát denně
+2. Metoprolol sukcinát jednou denně
+3. Lisinopril denně
+4. Levotyroxin každé ráno
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Bušení srdce
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Duševní stav: bdělá a plně orientovaná
+Úroveň vědomí: bdělá a reaguje
+Fyzická aktivita: chodí samostatně
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zrychlenému srdečnímu tepu. Užívajte nové léky každý den podle pokynů. V případě bolesti na hrudi, mdlob, krvácení nebo zhoršení dušnosti se vraťte. V případě dotazů volejte do ambulance na číslo ___.
+
+Pokyny pro další péči:
+___

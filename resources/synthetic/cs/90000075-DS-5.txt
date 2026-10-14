@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž odeslán z kliniky ___ s dvoutýdenní anamnézou zhoršujícího se otoku nohou, ortopnoe a přibírání na váze. Dříve vyšetřen v ___ pro podobné příznaky.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Srdeční selhání
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: stabilní, bez horečky
+Krk: zvýšená JVP (jugulární venózní tlak)
+SRDCE: pravidelné, systolický šelest
+Břicho: měkké, netendrovatelné
+Končetiny: bilaterální prohlubňový edém
+
+Významné výsledky:
+BNP zvýšené. Kreatinin blízko výchozí hodnoty. Rentgen hrudníku ukázal mírnou vaskulární kongesci a malé výpotky. Echokardiogram se nezměnil oproti předchozímu vyšetření.
+
+Stručný průběh hospitalizace:
+Léčen intravenózními diuretiky, s postupnou ztrátou váhy a zlepšením dýchání. Léky zkontrolovány s týmem na ___. Naplánována kardiologická kontrola na ___.
+PŘECHODNÁ OTÁZKA:
+Opakované vyšetření elektrolytů do jednoho týdne.
+
+Léky při přijetí:
+Lisinopril
+Furosemid
+Atorvastatin
+
+Léky při propuštění:
+Furosemid 40 mg denně, lisinopril 10 mg denně, atorvastatin 20 mg večer a chlorid draselný 20 mEq denně.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní srdeční selhání na podkladě chronického srdečního selhání
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: jasný a srozumitelný.
+Úroveň vědomí: bdělý a reagující.
+
+Pokyny při propuštění:
+Byli jste přijati s přetížením tekutinami. Každé ráno se važte a volejte ___, pokud se vaše váha zvýší o tři libry. Omezte příjem soli.
+
+Pokyny pro kontrolu:
+___

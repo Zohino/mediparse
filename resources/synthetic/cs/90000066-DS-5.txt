@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena odeslána z ___ po několika dnech zrychleného srdečního tepu a únavy. Telemetrie prokázala fibrilaci síní s rychlou ventrikulární odpovědí. Pacientka popírala bolest na hrudi. Příznaky se objevily kolem ___ a zhoršovaly se při chůzi.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Plíce:
+Oboustranně čisté, bez chrůpků
+Břicho:
+Měkké, netendrovatelné, neztvrdlé
+Kůže:
+Teplá, suchá, bez vyrážky
+Neurologické vyšetření:
+Při vědomí, orientovaná, pohybuje všemi končetinami
+
+Významné výsledky:
+Dvakrát negativní troponin. Draslík 4,1, kreatinin v normě. TSH v normálním rozmezí. Hemoglobin A1c mírně zvýšený. Rentgen hrudníku neprokázal žádné akutní nálezy. EKG při přijetí nepravidelné, frekvence 142, bez ischemických změn.
+
+Stručný popis hospitalizace:
+Frekvence byla kontrolována perorálním metoprololem a během noci se srdeční rytmus normalizoval. Po zhodnocení rizik byla zahájena antikoagulační terapie s ___. Hladina glukózy byla regulována pomocí domácího režimu. Před propuštěním ___ mohla pacientka pohodlně chodit.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Na ambulanci zkontrolovat srdeční frekvenci a krevní tlak. Ověřit toleranci antikoagulační terapie.
+
+Léky při propuštění:
+Metoprolol tartrát 25 mg dvakrát denně
+Apixaban 5 mg dvakrát denně
+Metformin 500 mg dvakrát denně
+Levotyroxin 50 mcg denně
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Diabetes mellitus
+
+Stav při propuštění:
+Stabilní, v pohodě.
+Stav aktivity:
+Samostatná, chodí bez pomoci.
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli zrychlenému nepravidelnému srdečnímu tepu. Užívajte nové léky každý den a nepřeskakujte dávky. V případě mdlob, bolesti na hrudi, krvácení nebo silné dušnosti se vraťte. V případě dotazů volejte ___ nebo navštivte ___ pro kontrolu.
+
+Pokyny pro kontrolu:
+___

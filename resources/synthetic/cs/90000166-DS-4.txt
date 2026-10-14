@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s anamnézou bušení srdce se dostavila do ___ s několikdenní únavou a závratí. Při příjezdu měla nepravidelný srdeční rytmus. Byla převezena z ___ za účelem monitorování.
+
+Anamnéza předchozích onemocnění:
+Fibrilace síní
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti.
+PLÍCE:
+Oboustranně čisté.
+BŘICHO:
+Měkké, netendrovatelné.
+KONČETINY:
+Bez otoků.
+NEUROLOGIE:
+Bdělá, bez ložiskových příznaků.
+
+Významné výsledky:
+Hodnoty troponinu a elektrolytů byly v normě. Funkce štítné žlázy byla v normě. Telemetrie prokázala nepravidelný rytmus s rychlou frekvencí komor.
+NÁLEZY:
+Echokardiogram prokázal zachovanou ejekční frakci a mírné zvětšení levé síně, vyhodnotil ___.
+
+Stručný popis hospitalizace:
+Po konzultaci s týmem ___ byla zahájena léčba léky ke kontrole srdeční frekvence a antikoagulační léčba. Srdeční frekvence se během jednoho dne stabilizovala a příznaky ustoupily. Pacientka se mohla samostatně pohybovat a byla propuštěna domů ve stabilizovaném stavu, s naplánovanou kontrolou u ___.
+
+Léky při přijetí:
+Metoprolol tartrát 25 mg dvakrát denně; multivitamín denně.
+
+Léky při propuštění:
+Metoprolol sukcinát 50 mg denně. Apixaban 5 mg dvakrát denně. Multivitamín denně. Užívat aspirin pouze na doporučení lékaře.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Fibrilace síní
+
+Stav při propuštění:
+Stabilizovaný
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělá a reaguje.
+
+Pokyny pro propuštění:
+Užívejte léky podle předpisu, v případě bušení srdce nebo mdlob se vraťte, a dodržujte termín kontroly u ___. Vyhýbejte se v tomto týdnu nadměrné fyzické námaze.
+
+Pokyny pro kontrolu:
+___

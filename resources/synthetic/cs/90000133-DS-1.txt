@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost a sípání
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letý muž s třídenní se zhoršující dušností, produktivním kašlem a sípáním, převezen z ___ po léčbě inhalátorem, bez úplné úlevy. Bez horečky nebo bolesti na hrudi.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Předchozí užívání tabáku
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav:
+Hubený, mírně dušný, mluví v celých větách
+Krk:
+Pružný, bez známek zvýšeného žilního tlaku
+SRDCE:
+Pravidelný rytmus a frekvence
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Teplé, bez otoků
+
+Významné výsledky:
+Rentgen hrudníku provedený dne ___ ukázal hyperinflaci plic s plochými bránicemi a bez ložiskové konsolidace. Krevní obraz a elektrolyty byly v normě.
+ZÁVĚR:
+Hyperinflace, bez akutního procesu.
+
+Stručný popis hospitalizace:
+Pacient dostával pravidelně inhalace, perorální kortikosteroidy a krátkodobou antibiotickou léčbu. Podávání kyslíku bylo postupně snižováno a do třetího dne již pacient dýchal běžný vzduch. Sípání ustoupilo a pacient chodil samostatně. Následná péče v plicní ambulanci byla zajištěna ___.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+
+Léky při propuštění:
+Prednison, dávka postupně snižována po dobu pěti dnů. Tiotropium inhalátor denně. Albuterol inhalátor podle potřeby při sípání. Pokračovat v užívání lisinoprilu a atorvastatinu. Vydáno v lékárně ___.
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Exacerbace chronické obstrukční plicní nemoci
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+
+Pokyny pro propuštěného pacienta:
+Byli jste přijati pro potíže s dýcháním. Užijte si inhalátory a kortikosteroidy podle pokynů, vyhýbejte se kouři a v případě zhoršení dušnosti, horečky nebo bolesti na hrudi se vraťte. V případě dotazů volejte doktora ___.
+
+Pokyny pro kontrolu:
+___

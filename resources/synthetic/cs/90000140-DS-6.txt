@@ -1,0 +1,80 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+Muž s jednodenní anamnézou zhoršující se bolesti v pravém dolním kvadrantu břicha, nevolností a horečkou, odeslán ___ na chirurgické vyšetření a zobrazovací metody.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Žádné
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Stabilní, bez horečky
+Hlava, oči, uši, nos, hrdlo:
+Normální
+Plíce:
+Čisté
+SRDEČNÍ:
+Pravidelný rytmus
+Břicho:
+Bolestivé v pravém dolním kvadrantu
+Končetiny:
+Bez otoků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Mírná leukocytóza, normální hladina kreatininu, odběr proveden ___
+ZÁVĚR:
+Rozšířený, zánětlivý appendix s okolní tukovou infiltrací, bez abscesu, vyhodnoceno ___.
+
+Stručný popis průběhu hospitalizace:
+Přenesen ___ na operační sál k nekomplikované laparoskopické apendektomii. Strava postupně rozšiřována, bolest kontrolována perorálními léky, propuštěn prvním dnem po operaci.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Lisinopril denně
+Atorvastatin večer
+Paracetamol podle potřeby proti bolesti
+Ibuprofen s jídlem podle potřeby
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Ambulantní, soběstačný
+
+Pokyny pro propuštěného pacienta:
+Udržujte řezné rány čisté a suché. Vyhýbejte se těžké fyzické námaze po dobu dvou týdnů. V případě horečky, zvracení nebo zhoršení bolesti se vraťte do nemocnice. V případě dotazů volejte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

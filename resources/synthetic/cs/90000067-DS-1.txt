@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: urologie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé oblasti boku
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ po třech dnech zhoršující se bolesti v pravé oblasti boku, doprovázené nevolností a mírnou horečkou. Byl vyšetřen v externí ambulanci dne ___ a odeslán na pohotovost. Zobrazovací vyšetření odhalilo obstrukční kámen v močovodu s mírnou hydronefrózou. Byl přijat za účelem úlevy od bolesti a urologického vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Možná cukrovka, dosud nepotvrzená, probíhá vyšetření v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ledvinovými kameny
+
+Fyzikální vyšetření:
+Vitalní funkce: bez horečky, hemodynamicky stabilní
+Celkový stav: komfortní, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: normální
+Krk: pružný
+Plíce: oboustranně čisté
+Břicho: mírná citlivost v pravé oblasti boku
+Končetiny: bez otoků
+Kůže: teplá a suchá
+
+Významné výsledky:
+Kreatinin 1,1. Počet bílých krvinek mírně zvýšený, při propuštění normální. Vyšetření moči prokázalo krev bez známek infekce. CT vyšetření břicha a pánve bez kontrastní látky dne ___: 5 mm velký kámen v distální části pravého močovodu s mírnou hydronefrózou. Opakované zobrazovací vyšetření provedené ___ ukázalo, že se kámen dostal do močového měchýře.
+
+Stručný popis hospitalizace:
+Pacient byl přijat za účelem úlevy od bolesti a hydratace. Urologické oddělení ho pečlivě sledovalo a doporučilo konzervativní léčbu. Bolest se zmírnila po podání perorálních analgetik a pacient toleroval běžnou stravu. Horečka ustoupila bez antibiotik. Kámen se uvolnil dne ___ a moč byla odeslána do ___ na analýzu. Pacient byl propuštěn domů ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Ibuprofen podle potřeby. Multivitamin denně.
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně.
+2. Tamsulosin 0,4 mg večer po dobu jednoho týdne.
+3. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest.
+4. Ondansetron 4 mg podle potřeby na nevolnost, předepsán ___.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Kámen v pravém močovodu s hydronefrózou
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: bdělý a plně orientovaný
+Fyzická aktivita: chůze, soběstačný
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni kvůli ledvinovému kameni, který se nyní uvolnil. Pijte dostatek tekutin a moč přeceďte, pokud budete požádáni. V případě horečky, silné bolesti nebo neschopnosti močit se vraťte. Navštivte urologickou ambulanci v ___ za dva týdny.

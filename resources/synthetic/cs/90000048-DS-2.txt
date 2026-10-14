@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Zčervenání a otok levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___letého muže, který se dostavil s třemi dny trvajícím zhoršujícím se zčervenáním, horkem a bolestí levé dolní končetiny. Uvádí, že od ___ má doma horečku a zimnici. Poprvé byl vyšetřen v ___ a poté byl odeslán sem na intravenózní antibiotika.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Náhrada kolenního kloubu v roce ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Vitalní funkce: T 100,1, TF 88, TK 132/78, dechová frekvence 16, SpO2 97 % při dýchání okolního vzduchu
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice
+Břicho: Měkké, netendrovatelné, neztvrdlé
+
+Významné výsledky:
+Počet leukocytů 13,2 při přijetí, pokles na 8,9 do ___. Kreatinin stabilní. Kultivace krve nevykazovaly růst.
+ZÁVĚR: Ultrazvuk levé nohy ukazuje otok měkkých tkání a žádnou hlubokou žilní trombózu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Doxycyklin 100 mg perorálně dvakrát denně po dobu dalších sedmi dnů
+2. Lisinopril 10 mg denně
+3. Atorvastatin 20 mg večer
+4. Paracetamol podle potřeby proti bolesti
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Celulitida levé dolní končetiny
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen na kožní infekci nohy pomocí antibiotik. Užijte všechny léky podle předpisu. Udržujte nohu ve zvýšené poloze a sledujte, zda se nezhoršuje zčervenání, zda se neobjeví horečka nebo se nezhorší bolest. V případě těchto příznaků zavolejte na ___ nebo se vraťte do nemocnice.
+
+Pokyny pro kontrolu:
+___

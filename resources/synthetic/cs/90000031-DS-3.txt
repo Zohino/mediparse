@@ -1,0 +1,80 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo pokoje: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a bolest pravé nohy
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Incize a drenáž abscesu
+
+Anamnéza současného onemocnění:
+Muž s několikdenním zhoršováním otoku, zvýšenou teplotou a bolestí pravého lýtka, převezen z ___ poté, co ambulantní léčba antibiotiky nezlepšila stav.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlný, zvýšená teplota
+Hlava, oči, uši, nos, hrdlo:
+Normální
+Krk:
+Pružný
+Plíce:
+Čisté na obou stranách
+Neurologické vyšetření:
+Orientovaný, bez ložiskových příznaků
+
+Významné výsledky:
+Při přijetí zvýšený počet bílých krvinek, při propuštění normalizovaný. Kultivace rány prokázala přítomnost stafylokoka.
+ZÁVĚR:
+Ultrazvukové vyšetření v ___ prokázalo přítomnost tekutiny v lýtku bez krevní sraženiny.
+
+Stručný popis hospitalizace:
+Byla zahájena intravenózní léčba antibiotiky a provedena drenáž tekutiny týmem ___. Teplota se normalizovala, rána byla denně ošetřována a před propuštěním pacient dobře snášel perorální antibiotika.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+Cefalexin
+
+Léky při propuštění:
+Doxycyklin dvakrát denně po dobu deseti dnů
+Lisinopril denně
+Atorvastatin večer
+Paracetamol podle potřeby proti bolesti
+
+Plán propuštění:
+Domů s doprovodnou péčí
+
+Diagnóza při propuštění:
+Absces pravého lýtka
+Sekundární:
+Hypertenze
+Hyperlipidemie
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí:
+Orientovaný a komunikativní
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny pro propuštění:
+Denně měňte obvaz a udržujte nohu ve zvýšené poloze. V případě horečky, šíření zčervenání nebo výtoku se vraťte do nemocnice nebo volejte ___.
+
+Pokyny pro kontrolu:
+___

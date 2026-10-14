@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a otok levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž, který se dostavil ___ s třídenním zčervenáním, hřejivostí a otokem levé nohy po drobném oděru při zahradničení. Byl vyšetřen v ambulanci ___ lékařem ___, dostal první dávku perorálního antibiotika a byl odeslán na pohotovost kvůli horečce a šířící se erytému.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidémie
+Náhrada pravého kolene v roce ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+HEENT: Vlhké sliznice, bez lézí.
+PULM: Oboustranně čisté.
+ABD: Měkké, netendrové.
+EXTREMITIES: Erytém levého lýtka, výrazně zlepšený, mírný edém.
+Neuro: Bdělý, bez ložiskových příznaků.
+PULSES: Hmatatelné distálně.
+
+Významné výsledky:
+Při přijetí zvýšený počet leukocytů na 13,2, laktát v normě. Duplexní ultrazvuk provedený ___ neodhalil hlubokou žilní trombózu. Kultivace krve nevykázala růst.
+VÝSLEDKY PŘED PROPUŠTĚNÍM:
+Leukocyty 8,1, hemoglobin 13,4, trombocyty 245, kreatinin 0,9, glukóza 142.
+
+Stručný průběh hospitalizace:
+Byl léčen intravenózními antibiotiky pro celulitidu. Sledoval se výrazný okraj zánětu a zčervenání se postupně zmenšovalo při zvedání nohy. Horečka ustoupila druhý den a byl převeden na perorální antibiotika. Infekční lékař, Dr. ___, souhlasil s plánem. Hladina cukru v krvi byla regulována pomocí inzulinové pumpy a obnoven byl jeho domácí režim. Měl by se dostavit do ambulance ___.
+PŘECHODNÁ OTÁZKY:
+Při návštěvě ___ zkontrolovat stav nohy a kontrolu hladiny glukózy.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších pěti dnů
+2. Metformin 500 mg perorálně dvakrát denně
+3. Lisinopril 10 mg perorálně denně
+4. Atorvastatin 20 mg perorálně večer
+
+Způsob propuštění:
+Domů
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Stav aktivity: Ambulantní, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli kožní infekci levé nohy a léčeni antibiotiky. Dokončete všechny antibiotika, udržujte nohu ve zvýšené poloze při sezení a denně kontrolujte stav kůže. V případě horečky, šířícího se zčervenání nebo zhoršující se bolesti se vraťte do nemocnice nebo volejte ___.
+
+Pokyny pro kontrolu:
+___

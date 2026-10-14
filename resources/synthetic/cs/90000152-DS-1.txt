@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Žena s postupující bolestí v pravém horním kvadrantu břicha, nevolností a horečkou po jídle, trvající dva dny. Byla vyšetřena lékařem v ___ a odeslána na pohotovost ___.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka měla žlučové kameny, léčena v ___.
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez horečky
+Hlava, oči, uši, nos, hrdlo:
+Bez známek žloutenky
+Krk:
+Pružný
+Plíce:
+Čisté
+SRDEČNÍ:
+Pravidelný rytmus
+Neurologické:
+Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Mírná leukocytóza, normální hladina kreatininu, mírně zvýšená hladina bilirubinu a alkalické fosfatázy. Ultrazvukové vyšetření prokázalo žlučové kameny, zesílenou stěnu žlučníku a tekutinu v okolí žlučníku. Vyhodnotil ___, radiolog.
+
+Stručný popis průběhu hospitalizace:
+Byla léčena intravenózními tekutinami, antibiotiky a analgetiky, poté podstoupila nekomplikovanou laparoskopickou cholecystektomii ___. Bolest ustoupila, dieta byla postupně rozšiřována a pacientka začala plynout. Řezné rány zůstaly čisté. Propuštění schválil ___.
+PŘECHODNÁ OTÁZKY:
+Při kontrolním vyšetření zhodnotit patologický nález; žádné další laboratorní vyšetření nejsou plánovány.
+
+Léky při přijetí:
+Multivitamin denně; občas ibuprofen
+
+Léky při propuštění:
+1. Paracetamol 650 mg perorálně každých šest hodin podle potřeby proti bolesti.
+2. Dokusát 100 mg dvakrát denně během užívání opioidů.
+3. Oxykodon 5 mg každých šest hodin podle potřeby, krátkodobá léčba.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+
+Stav při propuštění:
+Stabilizovaný, schopný chůze, dobře snáší běžnou stravu
+
+Pokyny pro propuštění:
+Byla léčena pro zánět žlučníku, který byl odstraněn. Udržujte řezné rány v suchu, vyhýbejte se těžké fyzické námaze po dobu dvou týdnů a v případě horečky, zvracení, žloutenky nebo zhoršení bolesti kontaktujte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

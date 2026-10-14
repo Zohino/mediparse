@@ -1,0 +1,64 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Tento ___letý muž s anamnézou hypertenze se dostavil do ___ s třemi dny trvajícím bušením srdce a únavou. EKG prokázalo fibrilaci síní s rychlou ventrikulární odpovědí. Příznaky se objevily ___ poté, co vynechal dávky léků.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: pacient je v pohodlí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: normální
+Plíce: oboustranně čisté
+Břicho: měkké, netendrovatelné
+Končetiny: bez otoků
+Kůže: teplá, suchá
+Neurologické vyšetření: bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Dvakrát negativní test na troponin. Draslík a hořčík v normálních mezích. Rentgen hrudníku neprokázal akutní proces. Echokardiografie prokázala zachovanou ejekční frakci s mírným zvětšením levé síně.
+
+Stručný popis hospitalizace:
+Pacient byl přijat za účelem kontroly srdeční frekvence a byla mu nasazena léčba beta-blokátorem, na kterou dobře reagoval. Srdeční frekvence se do druhého dne stabilizovala pod 100 úderů za minutu. Po zhodnocení rizika byla zahájena antikoagulační léčba. Kardiolog z ___ případ zhodnotil a souhlasil s plánem ambulantní kontroly.
+
+Léky při propuštění:
+Metoprolol sukcinát denně
+Apixaban dvakrát denně, nasazen Dr. ___
+Lisinopril v nezměněné dávce
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: fibrilace síní s rychlou ventrikulární odpovědí
+
+Stav při propuštění:
+Duševní stav: bdělý a orientovaný
+Stav aktivity: soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen pro nepravidelný srdeční rytmus. Užívajte nové léky každý den a nepřestávejte je užívat. V případě závratí, mdlob nebo bolesti na hrudi volejte ___ a dodržujte termín kontroly u ___.
+
+Pokyny pro další postup:
+___

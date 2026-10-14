@@ -1,0 +1,85 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a otok levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Několik dní trvající zhoršující se zčervenání, teplo a bolest v levé dolní části nohy po drobném oděru. Pacient byl vyšetřen v ambulanci ___, poté odeslán do ___ na intravenózní antibiotika. Doma měl horečku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Zvýšená hladina hemoglobinu A1c při terapii inzulínem
+Neuropatie obou chodidel ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Teplota 100,4, puls 92, krevní tlak 138/80, SpO2 97 % při dýchání okolního vzduchu
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Vlhká sliznice
+Krk:
+Pružný
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Levá holeně teplá, zarudlá, citlivá
+Kůže:
+Suchá, jinde neporušená
+
+Významné výsledky:
+Glukóza 242 při přijetí. Hemoglobin A1c 9,1. Počet bílých krvinek 13,2, zlepšilo se na 8,4. Kreatinin v normě.
+ZOBRAZOVACÍ METODY:
+Ultrazvuk levé nohy bez nálezu krevní sraženiny.
+ZÁVĚR:
+Pouze otok měkkých tkání, bez abscesu.
+
+Stručný popis průběhu hospitalizace:
+Pacient dostával intravenózně cefazolin, došlo ke stabilnímu zlepšení zarudnutí, poté perorálně cefalexin. Rentgen hrudníku neukázal pneumonii a pacient popíral kašel. Dávka inzulínu byla upravena kvůli vysokým hodnotám glukózy. Péče o ránu byla zkontrolována ___ a pacient obdržel instrukce ohledně stravy od ___.
+
+Léky při přijetí:
+Metformin dvakrát denně, lisinopril denně, inzulín glargin večer
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších pěti dnů
+2. Inzulín glargin, zvýšená dávka před spaním
+3. Lisinopril 10 mg denně
+4. Atorvastatin 20 mg večer
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida levé dolní končetiny
+Hyperglykémie
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Bdělý a orientovaný, schopen plnit pokyny.
+Úroveň vědomí:
+Bdělý a komunikativní.
+Fyzická aktivita:
+Chodí, soběstačný, noha zvednutá při sezení.
+
+Instrukce pro propuštěného pacienta:
+Byl jste léčen na kožní infekci nohy. Dokončete všechny antibiotika. Denně si kontrolujte hladinu cukru v krvi a veďte si záznamy. V případě horečky, šířícího se zarudnutí nebo silné bolesti se vraťte. V případě dotazů volejte ___.
+
+Instrukce pro kontrolu:
+___

@@ -1,0 +1,80 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a bolest pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s třídenní anamnézou zhoršujícího se zčervenání, tepla a otoku pravé dolní končetiny po drobném poranění. Odeslán z kliniky ___ pro horečku a neúčinnost perorálních antibiotik.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na třes. Žádná bolest na hrudi ani kašel.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Bez horečky, stabilní
+Celkový stav:
+Komfortní, bez známek úzkosti
+Plíce:
+Čisté
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Pravá holeně zčervenalá, teplá, mírně oteklá
+
+Významné výsledky:
+Mírná leukocytóza při přijetí, zlepšení do propuštění. Krevní kultury bez růstu po ___ hodinách.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek v normě, kreatinin stabilní.
+ZÁVĚR:
+Zesílení kůže bez abscesu při ultrazvukovém vyšetření.
+
+Stručný popis hospitalizace:
+Léčen pro celulitidu intravenózními antibiotiky v ___, s postupným ústupem zčervenání a úpravou horečky. Hladina glukózy byla regulována pomocí inzulínu. Přechod na perorální antibiotika a propuštění po kontrole lékařem ___.
+
+Léky při přijetí:
+Metformin, lisinopril, atorvastatin
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších pěti dnů
+2. Metformin 500 mg dvakrát denně
+3. Lisinopril 10 mg denně
+4. Atorvastatin 20 mg večer
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+Stav aktivity:
+Chodící, soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen na kožní infekci nohy. Dokončete všechny antibiotika, udržujte nohu ve zvýšené poloze a denně kontrolujte stav kůže. V případě horečky, šíření zčervenání nebo nové bolesti se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

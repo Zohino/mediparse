@@ -1,0 +1,81 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest břicha.
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie.
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou, které trvaly dva dny. Bolest začala v oblasti pupečníku a poté se šířila. Byl vyšetřen v ___ lékařem ___ a odeslán na pohotovost. Popírá diabetes a uvádí, že nezvracel krev ani nemá průjem. Příznaky se objevily po cestě do ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze. Žádná anamnéza fibrilace síní. Artroskopie kolene v ___.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Stabilní vitální funkce, vyšetřen v ___.
+Celkový stav:
+Nepohodlný, leží v klidu.
+Hlava, uši, nos, hrdlo:
+Vlhké sliznice.
+Krk:
+Pružný.
+Plíce:
+Čisté na obou stranách.
+Břicho:
+Bolestivé v pravém dolním kvadrantu, s obranným postojem.
+Končetiny:
+Žádný edém.
+Neurologické vyšetření:
+Bdělý, bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Počet bílých krvinek zvýšený na 14, s převahou neutrofilů; kreatinin, laktát a jaterní enzymy v normě.
+ZOBRAZOVACÍ METODY:
+CT vyšetření břicha a pánve provedené v ___ ukázalo rozšířený apendix o velikosti 12 mm s okolní tukovou infiltrací a malým apendikulolitem.
+ZÁVĚR:
+Akutní apendicitida bez perforace, dle posudku ___.
+
+Stručný průběh hospitalizace:
+Byl mu podán intravenózní roztok a antibiotika, a po dobu hospitalizace nic nejedl. Chirurgický tým z ___ ho vyšetřil a doporučil laparoskopickou apendektomii, která byla provedena první den hospitalizace bez komplikací. Bolest byla kontrolována paracetamolem a krátkodobou léčbou oxykodonem. Strava byla postupně rozšiřována, funkce střev se obnovila a zůstal bez horečky. Patologické vyšetření bylo v době propuštění ještě v řešení a bude zkontrolováno ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně; multivitamín jednou denně; ibuprofen podle potřeby při bolesti hlavy.
+
+Léky při propuštění:
+Paracetamol 650 mg každých šest hodin podle potřeby při bolesti. Oxykodon 5 mg každých šest hodin podle potřeby při silné bolesti. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů. Dokusát 100 mg dvakrát denně během užívání oxykodonu. Pokračovat v užívání lisinoprilu. Přerušit užívání ibuprofenu.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a reagující.
+Fyzická aktivita:
+Schopný chůze, soběstačný.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni v zařízení ___ kvůli zánětu slepého střeva a podstoupili jste operaci, při které bylo odstraněno vaše slepé střevo. Udržujte malé řezné rány čisté a suché a po dobu dvou týdnů se vyhýbejte zvedání těžkých předmětů. Užívajte antibiotika, dokud je nedokončíte. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí v oblasti řezných ran volejte na číslo ___ nebo se vraťte na pohotovost.
+
+Pokyny pro kontrolní vyšetření:
+___

@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohy a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž byl odeslán z jeho ambulance v ___ kvůli zhoršujícímu se otoku kotníku, špatné chuti k jídlu a únavě, které trvají dva týdny.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin ve stadiu 4
+Hypertenze
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+HEENT: Vlhké sliznice
+ABD: Měkké, bez citlivosti
+EXTREMITY: Mírný otok s prohlubními na obou stranách
+
+Významné výsledky:
+Kreatinin zvýšený, blízko výchozí hodnoty, draslík mírně zvýšený při přijetí a zlepšil se po léčbě.
+LABORATORNÍ VÝSLEDKY PŘED PROPUŠTĚNÍM: Kreatinin stabilní, draslík v normě, bikarbonát mírně snížený.
+
+Stručný popis hospitalizace:
+Otok byl léčen intravenózními diuretiky a omezením příjmu tekutin, s dobrým močením. Nefrologie v ___ doporučila změny v dietě a kontrolu dne ___. Pacient se cítil lépe a chodil bez pomoci.
+
+Léky při přijetí:
+Amlodipin, allopurinol, hydrogenuhličitan sodný
+
+Léky při propuštění:
+Furosemid denně perorálně, amlodipin denně, allopurinol ve snížené dávce, hydrogenuhličitan sodný dvakrát denně. Přestaňte užívat ibuprofen.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární: Přetížení tekutinami
+Sekundární: Hyperkalemie, hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a komunikativní
+Úroveň vědomí: Bdělý
+Úroveň aktivity: Chodí samostatně
+
+Pokyny pro propuštění:
+Každé ráno se zvažte a omezte příjem soli a tekutin. Vyhýbejte se protizánětlivým lékům proti bolesti. V případě zhoršení otoku nebo dušnosti se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Léky obsahující sulfanilamid
+
+Hlavní potíže:
+Slabost a snížená chuť k jídlu
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena odeslána z ___ po několika dnech únavy, nevolnosti a sníženém příjmu potravy. Uvádí mírný kašel, ale bez horečky.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus, hypertenze, hypotyreóza
+Cholecystektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: unavená, v klidu se cítí dobře
+Hlava, uši, oči, nos, hrdlo: suché sliznice
+Neurologické vyšetření: bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Rentgen hrudníku ukázal průhledná plíce. Kreatinin stabilní, blízko výchozí hodnoty, glukóza zvýšená při přijetí, elektrolyty normální po podání tekutin.
+ZÁVĚR:
+Žádný akutní kardiopulmonální problém.
+
+Stručný popis hospitalizace:
+Byla jí podána intravenózní tekutina a její chuť k jídlu se zlepšila. Vyšetření hrudníku a fyzikální vyšetření neprokázaly pneumonii. Inzulin byl upraven lékařem ___ za pomoci týmu pro léčbu diabetu. Funkce ledvin zůstala stabilní. Byla propuštěna domů lékařem ___.
+
+Léky při přijetí:
+Metformin, lisinopril, levotyroxin
+
+Léky při propuštění:
+Metformin dvakrát denně, levotyroxin každé ráno, glargin před spaním. Lisinopril byl vysazen do doby kontrolních laboratorních testů.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: dehydratace, diabetes mellitus, chronické onemocnění ledvin
+
+Stav při propuštění:
+Duševní stav: jasný a srozumitelný
+Úroveň vědomí: bdělá a orientovaná
+Fyzická aktivita: chodí samostatně
+
+Pokyny pro propuštěného pacienta:
+Byla léčena pro dehydrataci. Pijte dostatek tekutin, denně si kontrolujte hladinu cukru v krvi, užívejte léky podle seznamu a v případě návratu zvracení nebo zhoršení slabosti volejte ___.
+
+Pokyny pro kontrolu:
+___

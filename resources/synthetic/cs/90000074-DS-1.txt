@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s několika chronickými onemocněními se dostavila s postupujícím otokem nohou, odeslána z kliniky ___.
+
+Anamnéza předchozích onemocnění:
+DM2 (diabetes mellitus 2. typu)
+CKD (chronické onemocnění ledvin)
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce: stabilní, bez horečky
+Celkový stav: komfortní, bez známek úzkosti
+SRDEČNÍ: pravidelný rytmus
+BŘICHO: měkké, bez citlivosti
+KONČETINY: mírný edém
+
+Významné výsledky:
+Kreatinin blízko výchozí hodnoty. Mírně zvýšená hladina glukózy. Rentgenové snímky hrudníku zkontrolovány na ___.
+ZÁVĚR: Žádné akutní nálezy.
+
+Stručný popis hospitalizace:
+Edém se zlepšil po úpravě dávky diuretika. Hladina glukózy byla kontrolována pomocí obvyklého režimu. Funkce ledvin zůstala stabilní a pacientka byla propuštěna domů s doporučením další kontroly u ___.
+
+Léky při přijetí:
+Metformin, lisinopril
+
+Léky při propuštění:
+Metformin 500 mg dvakrát denně
+Furosemid 20 mg denně
+Lisinopril 10 mg denně
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Dobrý, bdělá a orientovaná.
+Stav aktivity: Chodí, soběstačná
+
+Pokyny pro propuštění:
+Vážte se denně a omezte příjem soli. Užívajte léky podle předpisu a v případě zhoršení otoku se vraťte na kontrolu.
+
+Pokyny pro další postup:
+___
