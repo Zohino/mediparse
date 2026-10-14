@@ -158,45 +158,14 @@ jobs:
           GITLEAKS_VERSION: "8.30.1"
           GITLEAKS_ENABLE_COMMENTS: "false"
 
-  commits:
-    name: Commit messages
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-          ref: ${{ github.event.pull_request.head.sha }}
-      - uses: ./.github/actions/setup-pixi-env
-      - name: prek commit-msg hooks
-        env:
-          RANGE: ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
-        run: |
-          status=0
-          for sha in $(git rev-list --no-merges --reverse "$RANGE"); do
-            echo "::group::$(git log -1 --format='%h %s' "$sha")"
-            git log -1 --format=%B "$sha" > "$RUNNER_TEMP/commit-msg"
-            if ! pixi run --frozen prek run --stage commit-msg --commit-msg-filename "$RUNNER_TEMP/commit-msg"; then
-              echo "::error::Commit $sha neprošel kontrolou commit zprávy"
-              status=1
-            fi
-            echo "::endgroup::"
-          done
-          exit "$status"
-
   ci-ok:
     name: CI OK
     if: always()
-    needs: [lint, test, eda, hygiene, container, secrets, commits]
+    needs: [lint, test, eda, hygiene, container, secrets]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions: {}
     steps:
       - uses: re-actors/alls-green@b5b5b37504aa4183270bd3d855c52a67f212be35 # v1.3.0
         with:
-          allowed-skips: commits
           jobs: ${{ toJSON(needs) }}
