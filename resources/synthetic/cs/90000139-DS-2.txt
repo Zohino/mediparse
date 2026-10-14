@@ -1,0 +1,64 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___letou ženu se známou fibrilací síní, která se dostavila s jednodenní anamnézou zrychleného srdečního tepu a únavy a byla převezena z ___ za účelem kontroly srdečního rytmu a monitorování.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Plíce: Čisté na obou stranách
+Břicho: Měkké, netendrové
+Končetiny: Teplé, bez otoků
+
+Významné výsledky:
+Laboratorní testy provedené dne ___ ukázaly stabilní elektrolyty a mírně zvýšenou hladinu kreatininu v základním stavu.
+ZÁVĚR: Na rentgenovém snímku hrudníku nebyly zjištěny žádné akutní kardiopulmonální nálezy.
+
+Stručný popis hospitalizace:
+Její srdeční tep byl kontrolován perorálním metoprololem a zůstala hemodynamicky stabilní. Kardiolog, včetně doktora ___, doporučil pokračovat v antikoagulační terapii. Hladina glukózy byla regulována obvyklým režimem. Do ___ se cítila dobře a byla propuštěna domů.
+
+Léky při propuštění:
+Metoprolol sukcinát denně
+Apixaban dvakrát denně
+Metformin během jídla
+Lisinopril jednou denně
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Duševní stav: Bdělá a plně orientovaná
+Úroveň vědomí: Bdělá a pozorná
+Úroveň aktivity: Chodí samostatně
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli zrychlenému srdečnímu rytmu. Užívajte léky podle předpisu a dodržujte termíny kontrol. V případě bolesti na hrudi, mdlob nebo zhoršení dušnosti se vraťte. V případě jakýchkoli dotazů volejte ___.
+
+Pokyny pro další postup:
+___

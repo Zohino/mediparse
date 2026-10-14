@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Chirurgie
+Datum přijetí: ___ Číslo pokoje: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest břicha, zvracení
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___ letá žena s hypertenzí a třídenní bolestí v pravém horním kvadrantu břicha, doprovázenou zvracením. Přijata z ___ po ultrazvukovém vyšetření, které odhalilo žlučové kameny. Přijata s horečkou ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Bez žloutenky, vlhké sliznice
+Krk: Pohyblivý
+Břicho: Měkké, mírná bolestivost v místě řezu
+Končetiny: Teplé, bez otoků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 14,2, ALT 88, AST 74, celkový bilirubin 1,9, lipáza v normě.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Leukocyty 8,1, ALT 41, bilirubin 0,8.
+
+Stručný popis hospitalizace:
+Přijata s akutní cholecystitidou, zahájena léčba antibiotiky a infuzní terapií. Podstoupila nekomplikovanou laparoskopickou cholecystektomii ___. Strava postupně rozšiřována, bolest kontrolována perorálními léky, propuštěna domů ve stabilizovaném stavu.
+
+Léky při propuštění:
+Paracetamol 650 mg každých šest hodin podle potřeby. Lisinopril 10 mg denně. Levotyroxin 75 mcg denně. Atorvastatin 20 mg večer.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a reagující
+Fyzická aktivita: Chodí, soběstačná
+
+Pokyny pro propuštění:
+Byl vám odstraněn žlučník. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze po dobu dvou týdnů a v případě horečky, zhoršení bolesti, zvracení nebo žloutnutí kůže volejte ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Slabost a nevolnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena odeslána doktorem ___ s dvoudenní nevolností, špatným příjmem potravy a únavou.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na žízeň. Bez bolesti na hrudi.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Osteoartróza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s cévní mozkovou příhodou
+
+Fyzikální vyšetření:
+Vypadá unaveně, ale je v pohodě, jinak bezvýznamné nálezy.
+Vitalní funkce: bez horečky, stabilní
+HEENT: suché sliznice
+Krk: pružný
+Břicho: měkké, bez citlivosti
+Končetiny: bez otoků
+
+Významné výsledky:
+Při přijetí výrazně zvýšená hladina glukózy. Ketony negativní. Mírně zvýšená hladina kreatininu, zlepšení po podání tekutin. Rentgen hrudníku v pořádku.
+
+Stručný popis hospitalizace:
+Bylo zjištěno, že má nově diagnostikovaný diabetes s vysokou hladinou glukózy a dehydratací. Podáním tekutin a inzulínu se hodnoty normalizovaly a pacientka byla poučena o měření glukózy v ___ ambulanci.
+PŘECHODNÁ OTÁZKY:
+Opakované laboratorní vyšetření za jeden týden.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Metformin 500 mg dvakrát denně s jídlem
+2. Lisinopril 10 mg denně
+3. Atorvastatin 20 mg večer
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí: bdělá a orientovaná
+Stav aktivity: schopná chůze, soběstačná
+
+Pokyny pro propuštění:
+Byla jste přijata s dehydratací a vysokou hladinou cukru. Užívajte léky podle předpisu, pijte dostatek tekutin, denně si měřte hladinu glukózy a v případě zvracení nebo zmatenosti volejte ___.
+
+Pokyny pro kontrolu:
+___

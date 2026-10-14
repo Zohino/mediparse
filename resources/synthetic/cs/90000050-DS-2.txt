@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolestivé zarudnutí a otok levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s několik dní trvajícím zhoršujícím se zarudnutím, horkem a bolestí levé nohy po drobném oděru. Vyšetřen v ambulanci ___, poté odeslán na pohotovost ___ kvůli horečce a šířícímu se zarudnutí.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Předchozí operace kolene v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Krk: Pohyblivý
+Plíce: Čisté na obou stranách
+PULSY: Hmatné a symetrické
+
+Významné výsledky:
+Mírně zvýšený počet bílých krvinek při přijetí, normalizace do propuštění. Krevní kultury bez růstu bakterií. Ultrazvuk levé nohy neprokázal přítomnost krevní sraženiny, pouze ztluštění kůže.
+
+Stručný popis hospitalizace:
+Léčen na celulitidu intravenózními antibiotiky, zarudnutí se postupně zmenšovalo. Péče probíhala podle plánu z ___, ošetřovatelský personál v ___ poskytl instrukce pro péči o ránu. Převeden na perorální antibiotika a propuštěn domů.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu sedmi dnů
+2. Lisinopril denně
+3. Atorvastatin večer
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Celulitida levé nohy
+
+Stav při propuštění:
+Duševní stav: Bdělý a orientovaný
+Fyzická aktivita: Chodí samostatně
+
+Instrukce pro propuštěného pacienta:
+Užívejte všechny antibiotika podle předpisu. Při odpočinku zvedněte nohu a sledujte, zda se nezhoršuje zarudnutí, zda se neobjevuje horečka nebo nová bolest. V případě zhoršení příznaků volejte ___ nebo se vraťte na pohotovost.
+
+Instrukce pro kontrolní vyšetření:
+___

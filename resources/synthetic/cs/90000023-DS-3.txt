@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Léky obsahující sulfanilamid
+
+Hlavní potíže:
+Dušnost a sípání
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___letou ženu, která se dostavila s třemi dny trvající se zhoršující se dušností, sípáním a kašlem s produkcí žlutého hlenu. Příznaky se objevily přibližně před ___ dny poté, co se u člena domácnosti projevila nachlazení. Byla vyšetřena v ___, kde byla zjištěna nízká saturace kyslíkem a byla odeslána na pohotovost do ___. Popírala horečku, bolest na hrudi, otok nohou nebo nedávné cestování. Používala svůj inhalátor každých několik hodin, ale bez úlevy. Její primární lékař, Dr. ___, naposledy zkontroloval její inhalátory na jaře. Na pohotovosti obdržela inhalační bronchodilatancia, intravenózní kortikosteroidy a dávku azithromycinu a byla přijata k dalšímu ošetření.
+
+Anamnéza předchozích onemocnění:
+Chronická obstrukční plicní nemoc
+Hypertenze
+Hyperlipidémie
+Gastroezofageální reflux
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec s ischemickou chorobou srdeční.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Bez horečky, mírně zrychlené dýchání, mluví krátkými větami, v klidu bez akutní tíže.
+HLAVA, OČI, UŠI, NOS, KRK:
+Vlhké sliznice, čistá ústní dutina, bez lézí.
+PLÍCE:
+Difúzní expirační sípání s prodlouženým výdechem, bez chrůpků, dobrý pohyb vzduchu.
+SRDCE:
+Pravidelný rytmus, normální srdeční ozvy, bez šelestů.
+BŘICHO:
+Měkké, netendrovatelné, neztuhlé, normální střevní zvuky.
+KONČETINY:
+Teplé a dobře prokrvené, bez edému.
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí provedená dne ___ ukázala počet bílých krvinek 11,2 s mírnou neutrofilií, hemoglobin 13,1 a trombocyty 260. Sodík 138, draslík 4,1, bikarbonát 29, urea 14 a kreatinin 0,7. Troponin byl dvakrát negativní. Analýza arteriální krve ukázala pH 7,36 a PCO2 52. Rentgen hrudníku provedený ___ ukázal hyperinflamované plíce s zploštělými bránicemi, bez ložiskové konsolidace, bez výpotku a normální srdeční siluetu. Elektrokardiogram prokázal normální sinusový rytmus 92 úderů za minutu bez ischemických změn. Kultivace sputa prokázala pouze normální orofaryngeální flóru. Vyšetření na respirační viry bylo negativní. Laboratorní vyšetření při propuštění ukázala počet bílých krvinek 9,4 a stabilní hodnoty.
+
+Léky při přijetí:
+Tiotropium 18 mcg, inhalace denně
+Albuterol, inhalátor, dle potřeby
+Lisinopril 10 mg, denně
+Atorvastatin 20 mg, večer
+
+Léky při propuštění:
+1. Prednison 40 mg, perorálně, denně po dobu dalších tří dnů, poté vysadit
+2. Azithromycin 250 mg, perorálně, denně po dobu dalších čtyř dnů
+3. Tiotropium 18 mcg, inhalace jednou denně
+4. Albuterol, inhalátor, dvě vdechnutí každé čtyři hodiny, dle potřeby při sípání
+5. Lisinopril 10 mg, perorálně, denně
+6. Atorvastatin 20 mg, perorálně, večer
+7. Flutikason-salmeterol, inhalátor, jedno vdechnutí dvakrát denně
+
+Plán propuštění:
+Domů, s využitím služeb ___
+
+Diagnóza při propuštění:
+Akutní zhoršení chronické obstrukční plicní nemoci
+
+Stav při propuštění:
+Úroveň vědomí: Bdělý a reagující.
+Stav aktivity: Chodí, soběstačný, s normální saturací kyslíkem při dýchání okolním vzduchem.
+
+Pokyny při propuštění:
+Byli jste přijati kvůli zhoršení dýchacích potíží a sípání. Byli jste léčeni inhalacemi, kortikosteroidy a antibiotiky a váš dech se zlepšil. Prosím, dokončete léčbu prednisonem a antibiotiky podle předpisu a používejte inhalátory každý den, i když se cítíte dobře. Nový inhalátor si vyzvedněte v lékárně ___. Navštivte svého ošetřujícího lékaře, doktora ___, v ordinaci ___ do jednoho týdne a zavolejte na číslo ___, abyste si domluvili termín do ___. V případě zhoršení dušnosti, horečky, bolesti na hrudi nebo zmatenosti se vraťte do nemocnice. Prosím, nekuřte a vyhýbejte se kouření.

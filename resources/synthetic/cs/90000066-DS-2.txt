@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé dolní části břicha od ___
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+Jedná se o ___letou ženu, která byla přijata z ___ s třídenní anamnézou zhoršující se bolesti v pravé dolní části břicha, nevolností a špatným příjmem potravy. Příznaky se objevily ___ po jídle. Pacientka uváděla, že nemá horečku ani bolest na hrudi. Vyšetření v pohotovostní službě prokázalo akutní apendicitidu a pacientka byla přijata na chirurgické oddělení.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus, hypertenze
+
+Anamnéza předchozích chirurgických zákroků:
+Císařský řez v ___
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Celkový stav: Bdělá, v pohodě, bez známek úzkosti.
+Krk: Pohyblivý, bez zvětšených lymfatických uzlin.
+Břicho: Měkké, mírně citlivé v pravé dolní části, neztuhlé.
+Končetiny: Teplé, bez otoků.
+Neurologické vyšetření: Orientovaná, bez ložiskových příznaků.
+
+Stručný popis průběhu hospitalizace:
+Pacientka byla v den hospitalizace přivezena na operační sál a podstoupila nekomplikovanou laparoskopickou apendektomii. Během doby, kdy pacientka nemohla jíst, byl hladina glukózy regulována pomocí inzulínu. Strava byla postupně zaváděna od prvního dne po operaci a bolest byla kontrolována perorálními léky. Lékař ___ z chirurgického týmu ji denně vyšetřoval. Pacientka byla převezena z jednotky intenzivní péče v ___ a propuštěna domů, jakmile začala tolerovat běžnou stravu.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Metformin 500 mg perorálně dvakrát denně.
+2. Lisinopril 10 mg perorálně jednou denně.
+3. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby na bolest.
+4. Docusate 100 mg dvakrát denně během užívání léků proti bolesti.
+
+Způsob propuštění:
+Domů
+
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Akutní apendicitida
+Diabetes
+
+Stav při propuštění:
+Stabilní, bez horečky, schopná chůze bez pomoci.
+Úroveň vědomí: Bdělá a komunikativní.
+
+Pokyny pro propuštění:
+Byla jste přijata s apendicitidou a podstoupila jste odstranění slepého střeva. Udržujte malé řezy čisté a suché. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů než deset kilogramů. Užívajte léky podle předpisu. V případě horečky, zhoršující se bolesti nebo přetrvávajících zvracení volejte na chirurgickou ambulanci na čísle ___ nebo se vraťte do ___.
+
+Pokyny pro kontrolní vyšetření:
+___

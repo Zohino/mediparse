@@ -1,0 +1,83 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Zčervenání a otok levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___ letého muže, který se dostavil s třemi dny trvajícím zhoršujícím se zčervenáním, horkem a bolestí levé dolní končetiny po drobném oděru. Měl doma horečku a byl odeslán z urgentní péče ___. Příznaky začaly ___ a zhoršovaly se i přes perorální antibiotika.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v roce ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Vitalní funkce:
+T 100,8, HR 96, BP 134/80, RR 16, SpO2 98 % na vzduchu
+Celkový stav:
+Komfortní, bez známek úzkosti
+Krk:
+Pružný
+Plíce:
+Čisté bilaterálně
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Levá holeně teplá, oteklá, citlivá
+Kůže:
+Erytém s ostrým okrajem, bez abscesu
+
+Významné výsledky:
+Při přijetí zvýšený počet bílých krvinek (13,2) s převahou neutrofilů a mírně zvýšené CRP. Krevní kultury odebrané ___ nevykazovaly růst. Ultrazvuk levé nohy prokázal edém měkkých tkání bez hluboké žilní trombózy.
+ZÁVĚR:
+Subkutánní edém, bez abscesu nebo trombu.
+
+Stručný popis hospitalizace:
+Byl přijat s celulitidou levé nohy a zahájena intravenózní léčba vancomycinem kvůli jeho alergii na penicilin. Erytém byl výrazný a denně sledován. Byl vyšetřen doktorem ___ ohledně stavu rány. Horečka ustoupila do druhého dne hospitalizace a bolest se zlepšila. ___ byl převeden na perorální doxycyklin, který dobře toleroval, a poté byl propuštěn do domácí péče ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Doxycyklin 100 mg dvakrát denně po dobu dalších sedmi dnů.
+2. Lisinopril 10 mg denně.
+3. Atorvastatin 20 mg večer.
+4. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest.
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Celulitida levé dolní končetiny
+Hypertenze
+
+Stav při propuštění:
+Stabilizovaný a zlepšený.
+Duševní stav:
+Bdělý a orientovaný, schopen dodržovat pokyny.
+Stav aktivity:
+Chodící, soběstačný.
+
+Pokyny při propuštění:
+Byl jste léčen na kožní infekci nohy antibiotiky. Užívejte všechny dávky doxycyklinu podle předpisu a udržujte nohu ve zvýšené poloze při odpočinku. Vraťte se, pokud se zčervenání rozšíří, horečka se vrátí nebo se bolest zhorší. V případě dotazů volejte na ___ nebo navštivte ambulanci na ___ pro kontrolu.
+
+Další pokyny:
+___

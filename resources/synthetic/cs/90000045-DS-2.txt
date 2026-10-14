@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravé horní části břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie provedená doktorem ___ dne ___
+
+Anamnéza současného onemocnění:
+Žena s třídenní anamnézou bolesti v pravé horní části břicha, horečkou a nevolností. Bolest začala po konzumaci tučného jídla a vyzařovala do zad. Byla poprvé vyšetřena v ___ a následně převezena dne ___ k další péči. Vitální funkce ukazovaly mírnou horečku. Ultrazvuk naznačoval zánět žlučníku a pacientka byla přijata na chirurgické oddělení.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Pravidelně sledována doktorem ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav: Nepohodlí, ale bez známek intoxikace.
+Hlava, oči, uši, nos, hrdlo: Bez žloutenky, vlhké sliznice.
+Krk: Pohyblivý.
+Plíce: Oboustranně čisté.
+Břicho: Bolestivé v pravé horní části, pozitivní Murphyho příznak, bez odporu.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 13,2, ALT 48, AST 41, celkový bilirubin 1,1, lipáza v normě.
+ZÁVĚR:
+Ultrazvuk v ___ ukazuje žlučové kameny, zesílenou stěnu žlučníku a tekutinu v okolí žlučníku, což odpovídá akutnímu zánětu. Bez dilatace žlučových cest. Jaterní testy se normalizovaly do druhého dne po operaci.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 75 mcg denně
+
+Léky při propuštění:
+1. Paracetamol 650 mg každých šest hodin podle potřeby na bolest.
+2. Dokusát 100 mg dvakrát denně při užívání opioidů.
+3. Oxykodon 5 mg každých šest hodin podle potřeby na silnou bolest.
+4. Lisinopril 10 mg denně.
+5. Levotyroxin 75 mcg denně.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+
+Pokyny pro propuštění:
+Byla léčena pro zánět žlučníku, který byl odstraněn laparoskopicky. Udržujte řezné rány čisté a suché a vyhýbejte se zvedání těžkých předmětů po dobu čtyř týdnů. V případě horečky, zhoršení bolesti, zvracení nebo žloutnutí kůže volejte ___. Domluvte si kontrolní návštěvu v ___ do dvou týdnů.
+
+Pokyny pro kontrolu:
+___

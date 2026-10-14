@@ -1,0 +1,78 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena přijata z ___ s dvoudenní se zhoršující dušností, kašlem a únavou. Měla sípavé dýchání a nízkou saturaci kyslíkem.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+CHOPN
+Hypertenze
+Nepravidelný srdeční rytmus, užívá apixaban
+Snížená funkce ledvin
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce:
+bez horečky, stabilní, 93 % při dýchání okolním vzduchem
+Celkový stav:
+unavená, v pohodě
+Krk:
+pružný
+Břicho:
+měkké, netendrovatelné
+Neurologické vyšetření:
+bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+kreatinin 1,9, výchozí hodnota 1,8
+ZOBRAZOVACÍ VYŠETŘENÍ:
+rentgen hrudníku z ___
+ZÁVĚR:
+hyperinflace, bez konsolidace
+NÁLEZY:
+žádný výpotek
+
+Stručný popis průběhu hospitalizace:
+Pacientka dostávala inhalátory, kortikosteroidy a krátkodobou antibiotickou léčbu, a její dýchání se zlepšilo. Metoprolol udržoval její srdeční frekvenci pod kontrolou a apixaban byl pokračován v dávce upravené podle funkce ledvin. Respirační terapeut z ___ zkontroloval její techniku používání inhalátoru.
+
+Léky při přijetí:
+Apixaban, metoprolol, metformin, tiotropium
+
+Léky při propuštění:
+Prednison, dávka postupně snižována po dobu pěti dnů, pokračovat v užívání tiotropia a metoprololu, apixaban dvakrát denně, glargin před spaním, metformin se vysadí, dokud nebudou laboratorní výsledky znovu zkontrolovány.
+
+Plán propuštění:
+Domů s domácí péčí
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Diabetes mellitus 2. typu
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+jasný a srozumitelný
+Úroveň vědomí:
+bdělá a reaguje
+
+Pokyny pro propuštění:
+Byla jste léčena pro potíže s dýcháním. Užívajte léky podle seznamu, denně si kontrolujte hladinu cukru v krvi a pijte dostatek tekutin. V případě zhoršení dýchání zavolejte na ___ nebo se vraťte.
+
+Pokyny pro kontrolu:
+___

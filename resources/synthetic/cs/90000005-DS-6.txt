@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+ERCP s odstraněním kamene; laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s několikdenní se zhoršující bolestí břicha, nevolností a špatným příjmem potravy. Byl vyšetřen v ___ a poté převeden k dalšímu ošetření, protože zobrazovací metody naznačily obstrukční proces žlučových cest.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo:
+Bez ikteru skléry.
+Krk:
+Pružný.
+Břicho:
+Měkké, mírně citlivé v pravém horním kvadrantu.
+Kůže:
+Teplá, suchá, bez vyrážky.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Mírně zvýšený bilirubin a alkalická fosfatáza, normální laktát, mírně zvýšený počet bílých krvinek.
+ZÁVĚR:
+Žlučové kameny s rozšířeným společným žlučovým kanálkem.
+NÁLEZY:
+Ultrazvuk ukazuje několik žlučových kamenů, zesílenou stěnu žlučníku a rozšířený společný žlučový kanálek, bez volné tekutiny.
+
+Stručný průběh hospitalizace:
+Pacient byl přijat, podávány intravenózní tekutiny a antibiotika, a podstoupil endoskopickou retrográdní cholangiopankreatografii v ___ s odstraněním kamene. Bolest ustoupila a dieta byla postupně rozšiřována. Laparoskopická cholecystektomie byla provedena doktorem ___ bez komplikací. Laboratorní výsledky a vitální funkce zůstaly stabilní. Pacient dobře snášel běžnou stravu a byl propuštěn domů.
+
+Léky při propuštění:
+Paracetamol podle potřeby proti bolesti. Ondansetron podle potřeby proti nevolnosti. Ibuprofen užívat až po kontrole. Pokračovat v užívání lisinoprilu denně doma. Oxykodon užívat pouze krátkodobě při silné bolesti.
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Choledocholithiasis (přítomnost žlučových kamenů ve společném žlučovodu)
+Cholangitida (zánět žlučových cest)
+Cholelithiasis (přítomnost žlučových kamenů v žlučníku)
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a reagující.
+
+Pokyny při propuštění:
+V případě horečky, zvracení, žluté kůže nebo zhoršující se bolesti břicha kontaktujte doktora ___. V případě závažných příznaků se vraťte na pohotovost do ___. Vyhýbejte se těžké fyzické námaze.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí se dostavila s třídenní bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou. Zobrazovací vyšetření v ___ prokázala akutní apendicitidu.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+
+Anamnéza předchozích chirurgických zákroků:
+Císařský řez v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s rakovinou prsu
+
+Fyzikální vyšetření:
+Břicho:
+Měkké, mírně citlivé v místech řezů.
+KONČETINY:
+Bez otoků.
+Neurologické vyšetření:
+Při vědomí, bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Zvýšený počet bílých krvinek s převahou neutrofilů. Elektrolyty a kreatinin v normě. CT vyšetření prokázalo zánětem postižený, rozšířený apendix s okolní tukovou infiltrací.
+
+Stručný popis hospitalizace:
+Podstoupila laparoskopickou apendektomii provedenou doktorem ___ dne ___ bez komplikací. Na rentgenu hrudníku nebyly zjištěny známky pneumonie. Krátkodobé palpitace zaznamenané telemetrií naznačují možnou fibrilaci síní, bude provedeno další vyšetření v ambulantní péči. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními analgetiky a pacientka byla propuštěna domů.
+
+Léky při propuštění:
+Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti. Pokračovat v užívání levotyroxinu a lisinoprilu doma. Dokusát užívat dvakrát denně během užívání opioidů.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Při vědomí a komunikativní.
+Stav aktivity:
+Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Byla léčena pro apendicitidu chirurgicky. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze a v případě horečky, zhoršení bolesti nebo zarudnutí rány kontaktujte doktora ___ na čísle ___.
+
+Pokyny pro kontrolu:
+___

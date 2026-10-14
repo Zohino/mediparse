@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Otok a zarudnutí levé nohy.
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný.
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s třídenní anamnézou zarudnutí, tepla a otoku levé nohy po drobném oděru, který utrpěl při zahradničení. Uváděl subjektivní pocity horečky a zimnice. Jeho praktický lékař v ___ ho odeslal na pohotovost, kde mu byla podána antibiotika intravenózně.
+
+Anamnéza předchozích onemocnění:
+Hypertenze, hyperlipidemie, dna.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Bez horečky, vitální funkce stabilní. Zarudnutí levého lýtka se výrazně zlepšilo, mírná bolestivost, bez hmatatelné fluktuace.
+BŘICHO:
+Měkké, netendrové, neztvrdlé.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 13,2, kreatinin 1,0, laktát 1,1, jinak bez významných odchylek.
+NÁLEZY:
+Venózní duplexní vyšetření levé nohy provedené v ___ neprokázalo hlubokou žilní trombózu. Rentgen hrudníku byl v normě, bez výpotku.
+
+Stručný průběh hospitalizace:
+Pacient byl přijat s celulitidou levé dolní končetiny a byla mu zahájena intravenózní léčba cefazolinem. Kultivace krve zůstaly negativní. Neměl kašel ani horečku a na snímcích hrudníku nebyly známky pneumonie. Zarudnutí postupně ustupovalo a pacient byl převeden na perorální léčbu cefalexinem. Péče o ránu byla probrána s ošetřujícím personálem v ___ a byla domluvena kontrola u ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně, atorvastatin 20 mg večer, allopurinol.
+
+Léky při propuštění:
+Cefalexin 500 mg čtyřikrát denně po dobu sedmi dnů. Pokračovat v užívání lisinoprilu, atorvastatinu a allopurinolu jako dříve. Paracetamol podle potřeby proti bolesti, předepsán ___.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida levé nohy
+Sekundární:
+Hypertenze, hyperlipidemie, dna
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Bdělý a orientovaný.
+Fyzická aktivita:
+Chodí, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byl jste léčen na kožní infekci. Užívejte všechna antibiotika podle předpisu, zvedejte nohu a udržujte postiženou oblast čistou. V případě horečky, šíření zarudnutí nebo zhoršení bolesti se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

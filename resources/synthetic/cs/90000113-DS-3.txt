@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Významný chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s několikdenní se zhoršující bolestí břicha a nevolností, bez horečky nebo zvracení. Příznaky se zhoršovaly i přes užívání perorálních analgetik, což vedlo k vyšetření na pohotovosti.
+PŘEHLED SYSTÉMŮ:
+Negativní, s výjimkou výše uvedeného.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Bez horečky, hemodynamicky stabilní
+HEENT (hlava, oči, uši, nos, hrdlo):
+Bez významných nálezů
+Plíce:
+Čisté na obou stranách
+Břicho:
+Měkké, mírně citlivé, neztuhlé
+Končetiny:
+Teplé, bez otoků
+Kůže:
+Intaktní
+Pulzy:
+Hmatatelné
+
+Významné výsledky:
+Laboratorní vyšetření ukázala mírně zvýšený počet bílých krvinek a normální hladinu elektrolytů. Jaterní enzymy a lipáza byly v normálních mezích. Hladina glukózy v krvi byla při přijetí mírně zvýšená.
+ZOBRAZOVACÍ METODY:
+Ultrazvuk ukázal žlučové kameny bez dilatace žlučových cest.
+
+Stručný popis hospitalizace:
+Pacient byl přijat a léčen infuzemi a analgetiky. Chirurgický tým z ___ ho vyšetřil a doporučil elektivní cholecystektomii v ___. Hladina glukózy v krvi byla monitorována. Bolest ustoupila, dieta byla postupně rozšiřována a před propuštěním toleroval běžnou stravu.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+
+Léky při propuštění:
+Metformin 500 mg dvakrát denně. Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti. Pokračujte v užívání ostatních léků, které pacient užívá doma.
+
+Způsob propuštění:
+Domů, s péčí od ___
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+Stav aktivity:
+Chodící, soběstačný
+
+Pokyny pro propuštění:
+V případě horečky, zhoršující se bolesti nebo přetrvávajících zvracení se vraťte. Dodržujte dietu s nízkým obsahem tuků a vyhýbejte se těžké fyzické námaze. V případě jakýchkoli dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

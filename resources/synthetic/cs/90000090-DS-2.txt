@@ -1,0 +1,81 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Paní ___ je žena s dlouhodobými problémy s ledvinami, která byla odeslána z kliniky ___ doktorem ___ po dvou týdnech zhoršující se únavy, špatné chuti k jídlu a otoku obou nohou. Upozornila na mírný kašel ___, ale neměla horečku ani zimnici. Laboratorní vyšetření provedená v ___ ukázala zvýšenou hladinu kreatininu, proto byla odeslána na pohotovost do ___. Tam byla hemodynamicky stabilní a přijata k monitorování a léčbě přetížení tekutinami.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin, stadium 4
+Hypertenze
+Anémie
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti, mluví plynule
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice, bez žloutenky skléry
+Plíce: Čisté na obou stranách
+Břicho: Měkké, netendrovatelné, neztvrdlé
+Kůže: Otoky obou dolních končetin, bez vyrážky
+Neurologické: Bdělá, orientovaná, bez ložiskových příznaků
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ___ ukázala zvýšenou hladinu kreatininu nad výchozí hodnotu, draslík 5,3 a hemoglobin 9,8.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ: Hladina kreatininu se zlepšila, draslík 4,4, bikarbonát 22, hemoglobin stabilní na 9,6.
+ZÁVĚR: Rentgen hrudníku provedený v ___ ukazuje mírnou vaskulární kongesci, bez ložiskové konsolidace a bez pleurálního výpotku. Ultrazvuk ledvin ukazuje malé echogenní ledviny bez hydronefrózy.
+
+Stručný průběh hospitalizace:
+Pacientka byla přijata pro přetížení tekutinami v souvislosti s pokročilým onemocněním ledvin. Byla jí podána intravenózně furosemid, což vedlo k dobré diuréze, a otok nohou a hmotnost se denně zlepšovaly. Hladina kreatininu se vrátila blíže k výchozí hodnotě a draslík se normalizoval po dietologickém poradenství. Její kašel byl vyšetřen rentgenem hrudníku a nebyly zjištěny žádné známky pneumonie, zůstala bez horečky i bez antibiotik. Nefrologický tým v ___ zhodnotil její případ a doporučil ambulantní sledování u doktora ___. Její ostatní léky, které užívá doma, byly pokračovány. Byla propuštěna ve stabilním stavu s perorálním diuretikem.
+
+Léky při přijetí:
+Amlodipin 5 mg denně
+Lisinopril 10 mg denně
+Kalcium acetát s jídlem
+Železný doplněk denně
+
+Léky při propuštění:
+1. Furosemid 40 mg perorálně jednou denně
+2. Amlodipin 5 mg perorálně denně
+3. Kalcium acetát 667 mg perorálně třikrát denně s jídlem
+4. Ferrosulfát 325 mg perorálně denně
+Přerušit užívání lisinoprilu, dokud nebude vyšetřena na nefrologické klinice. Recepty byly odeslány do lékárny ___.
+
+Závěrečné doporučení při propuštění:
+Propuštění do domácí péče s poskytováním služeb od ___.
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin.
+Sekundární diagnózy:
+Přetížení tekutinami.
+Hypertenze.
+Anémie.
+
+Stav při propuštění:
+Stabilní.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Úroveň aktivity: Schopný chůze, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli hromadění tekutin v těle. Byla vám podána léčba k odstranění přebytečných tekutin. Každé ráno se važte a volejte na číslo ___, pokud se vaše váha zvýší o více než jeden a půl kilogramu. Omezte příjem soli a tekutin podle pokynů. Užívajte léky podle seznamu a nepoužívejte ibuprofen. V případě potíží s dýcháním, bolesti na hrudi nebo velmi malého množství moči se vraťte do ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___letou ženu s dlouhodobými problémy s ledvinami, která přijela z ___ a uvádí, že má již tři dny nevolnost, špatný apetit, otok nohou a je unavená. Vynechala poslední kontrolu v ___ a došly jí léky na krevní tlak. Na pohotovosti měla zvýšený krevní tlak a mírné přetížení tekutinami, proto byla přijata k diuretické léčbě.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin, stadium 4, sledované nefrologickým oddělením v ___
+Hypertenze
+Anémie chronického onemocnění
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Unavená, ale v pohodě, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Plíce: Jemné chrůpky na obou bazích
+Končetiny: Edém s prohlubněmi až po kolena
+Kůže: Teplá, suchá, bez vyrážky
+
+Významné výsledky:
+Laboratorní vyšetření provedené ___ ukázalo zvýšenou hladinu kreatininu nad výchozí hodnotu, mírně zvýšenou hladinu draslíku a nízkou, ale stabilní hladinu hemoglobinu. Rentgen hrudníku ukázal mírné cévní přetížení.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Hladina kreatininu se vrátila blíže k výchozí hodnotě, hladina draslíku je v normě, bikarbonát se zlepšil.
+
+Léky při přijetí:
+Amlodipin 10 mg denně
+Sevelamer během jídla
+Železné tablety denně
+
+Léky při propuštění:
+Furosemid 40 mg dvakrát denně
+Amlodipin 10 mg denně
+Sevelamer 800 mg s každým jídlem
+Síran železnatý 325 mg denně
+Bikarbonát sodný 650 mg dvakrát denně
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin s přetížením tekutinami
+
+Stav při propuštění:
+Duševní stav: Bdělá a schopná plnit pokyny.
+Úroveň vědomí: Bdělá a pozorná.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zadržování tekutin způsobenému onemocněním ledvin. Podali jsme vám léky na odstranění přebytečné tekutiny a vaše otoky se zlepšily. Každé ráno se važte a užívejte všechny léky podle pokynů. Omezte příjem soli a tekutin. Prosím, co nejdříve navštivte doktora ___. V případě rychlého přibírání na váze, dušnosti nebo malého množství moči volejte na číslo ___ nebo se vraťte do ___.
+
+Pokyny pro kontrolu:
+___

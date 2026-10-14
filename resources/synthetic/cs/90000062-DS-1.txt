@@ -1,0 +1,87 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena odeslána z ___ s několikdenní anamnézou zrychleného srdečního tepu, únavy a mírné závratě. Popírá bolesti na hrudi, horečku nebo synkopu. Provedeno vyšetření a přijata k monitorování.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Stabilní, bez horečky
+Celkový stav:
+Komfortní, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Normální
+Krk:
+Pružný
+SRDCE:
+Nepravidelný rytmus
+Břicho:
+Měkké, netendrovatelné
+KONČETINY:
+Bez edému
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Elektrolyty v normě. Zvýšená hladina glukózy. Hemoglobin A1c nad cílovou hodnotou. Funkce štítné žlázy v normě.
+NÁLEZY:
+EKG ukázalo nepravidelný rytmus bez ischemických změn. Echokardiogram ukázal zachovanou ejekční frakci.
+
+Stručný popis hospitalizace:
+Byla připojena k monitorovacímu systému a její srdeční frekvence byla kontrolována perorálními léky. Po prodiskutování rizika krvácení byla zahájena antikoagulační terapie. Byla monitorována a léčena hladina glukózy v krvi. Dne ___ se cítila dobře, chodila samostatně a byla propuštěna doktorem ___.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+Metformin
+
+Léky při propuštění:
+1. Metoprolol dvakrát denně
+2. Apixaban dvakrát denně
+3. Lisinopril denně
+4. Atorvastatin večer
+5. Metformin s jídlem
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární:
+Fibrilace síní s rychlou ventrikulární odpovědí
+Diabetes mellitus
+Hypertenze
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí:
+Bdělý a orientovaný
+Stav aktivity:
+Ambulantní, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli rychlému, nepravidelnému srdečnímu tepu. Užívajte nové léky přesně podle předpisu, sledujte případné neobvyklé krvácení a v případě omdlení nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

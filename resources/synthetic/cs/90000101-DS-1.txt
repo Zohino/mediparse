@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Únava, žízeň, časté močení
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka je žena s dlouhodobou anamnézou špatně kontrolované hladiny cukru v krvi, která se dostavila do ___ s třemi dny trvající únavou, nadměrnou žízní a častým močením. Byla vyšetřena svým lékařem v ___ dne ___ a poté byla odeslána na pohotovost poté, co si doma změřila velmi vysokou hladinu glukózy. Popírala horečku, bolest na hrudi nebo zvracení.
+PŘEHLED SYSTÉMŮ:
+Pozitivní, jak je uvedeno výše. Jinak negativní.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidémie
+Předchozí operace ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka a sestra s onemocněním ___
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Unavená, suché sliznice, bez známek úzkosti.
+SRDEČNÍ: Pravidelný rytmus, bez šelestů.
+BŘIŠNÍ: Měkké, netendrovatelné, neztuhlé.
+Končetiny: Teplé, bez otoků.
+
+Významné výsledky:
+Laboratorní výsledky při přijetí dne ___: výrazně zvýšená hladina glukózy, nízká hladina bikarbonátu, mírně zvýšená aniontová mezera, kreatinin na výchozí úrovni. Hemoglobin A1c velmi vysoký. Vyšetření moči prokázalo ketony a glukózu bez známek infekce. Rentgen hrudníku bez patologických nálezů. EKG sinusový rytmus bez akutních změn. Opakované laboratorní vyšetření po podání tekutin a infuzi inzulinu ukázalo sníženou aniontovou mezeru a normální hladinu bikarbonátu. Hladina draslíku byla doplněna.
+
+Léky při přijetí:
+Metformin 1000 mg dvakrát denně
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Metformin 1000 mg perorálně dvakrát denně
+2. Inzulín glargin 20 jednotek před spaním
+3. Lisinopril 10 mg perorálně jednou denně
+4. Atorvastatin 20 mg perorálně večer
+5. Testovací proužky na měření glukózy, měřit hladinu cukru před jídlem
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Diabetes mellitus 2. typu s ketoacidózou
+
+Stav při propuštění:
+Stabilizovaný a zlepšený.
+Úroveň vědomí: Bdělá a komunikativní.
+
+Pokyny pro propuštění:
+Byli jste přijati s velmi vysokou hladinou cukru v krvi a nahromaděním kyselin v krvi. Byli jste léčeni tekutinami a inzulínem a vaše laboratorní výsledky se zlepšily. Měřte si hladinu cukru před jídlem a před spaním a veďte si záznamy. Užívajte inzulín podle pokynů. V případě zvracení, zmatenosti nebo hladiny cukru nad ___ se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

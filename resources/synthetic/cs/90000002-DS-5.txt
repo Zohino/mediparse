@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok a zarudnutí nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž odeslán z ___ s dvoudenní anamnézou zarudnutí, tepla a horečky pravé nohy.
+PŘEHLED SYSTÉMŮ:
+Přítomny zimnice. Bolest na hrudi nepřítomna.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Vitalní funkce: T 38,0 °C, TF 92, TK 138/80, SpO2 97 % při dýchání okolního vzduchu
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice
+Krk: Pohyblivý
+Plíce: Čisté na obou stranách
+SRDCE: Pravidelný rytmus, normální ozvy S1 a S2
+Břicho: Měkké, netendrovatelné
+Končetiny: Pravé lýtko zarudlé, teplé
+
+Významné výsledky:
+Laboratorní vyšetření v ___ prokázala mírnou leukocytózu. Ultrazvuk pravé nohy neodhalil žádnou trombózu.
+ZÁVĚR:
+Pouze otok měkkých tkání.
+
+Stručný popis hospitalizace:
+Léčen pro celulitidu intravenózními antibiotiky, s ústupem zarudnutí a normalizací teploty. Konzultace týmu ___ ohledně péče o ránu. Přechod na perorální antibiotika a propuštění ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril, atorvastatin, allopurinol
+
+Léky při propuštění:
+Cefalexin čtyřikrát denně po dobu sedmi dnů. Pokračovat v užívání lisinoprilu, atorvastatinu a allopurinolu jako dříve.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Celulitida pravé nohy
+Sekundární:
+Hypertenze, hyperlipidemie, DNA
+
+Stav při propuštění:
+Stabilní
+Duševní stav: Bdělý a orientovaný
+Stav aktivity: Chodí samostatně
+
+Pokyny pro propuštění:
+Byl jste léčen na kožní infekci. Užívajte antibiotika podle předpisu, zvedejte nohu a v případě šíření zarudnutí nebo návratu horečky se vraťte. Navštivte co nejdříve doktora ___.
+
+Pokyny pro kontrolu:
+___

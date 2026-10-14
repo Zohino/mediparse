@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Známé alergie na léky nejsou.
+
+Hlavní potíže:
+Bolest a otok pravé nohy.
+
+Významný chirurgický nebo invazivní zákrok:
+Incize a drenáž abscesu pravé nohy provedená u lůžka týmem ___.
+
+Anamnéza současného onemocnění:
+Pacient je muž s diabetes mellitus a hypertenzí, který se dostavil do ___ po třech dnech zhoršující se bolesti a otoku pravé nohy a mírných horečkách. Všiml si hnisající rány na plosce nohy poté, co chodil naboso v ___. Jeho primární lékař v ___ ho poslal na pohotovost. Tam měl horečku a zrychlený srdeční tep a dostal intravenózní antibiotika. Zobrazovací vyšetření ukázala otok měkkých tkání a byl přijat na oddělení medicíny.
+
+Anamnéza předchozích onemocnění:
+Hypertenze, hyperlipidemie, obezita, operace pravého kolene v ___.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec se srdečním onemocněním.
+
+Fyzikální vyšetření:
+Vitalní funkce: T 37,8 °C, TF 96, TK 138/82, dechová frekvence 16, SpO2 98 % při dýchání okolního vzduchu.
+Celkový stav: Při vědomí, v pohodlí, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Bez žloutenky, vlhké sliznice.
+Plíce: Čisté na obou stranách.
+Břicho: Měkké, netendrovatelné.
+Končetiny: Pravá noha zarudlá, teplá, mírně oteklá, incize se hojí.
+Kůže: Žádné další léze.
+
+Významné výsledky:
+Při přijetí byly v laboratorních výsledcích zjištěny zvýšené hodnoty bílých krvinek a zánětlivých markerů. Krevní kultury z ___ nevykázaly žádný růst. Kultivace rány prokázala přítomnost methicilin-senzitivního Staphylococcus aureus. Rentgen pravé nohy provedený v ___ ukázal otok měkkých tkání bez přítomnosti plynu nebo destrukce kosti. MRI vyloučila osteomyelitidu. Hodnoty glukózy byly při přijetí zvýšené a po úpravě dávky inzulínu se zlepšily.
+LABORATORNÍ VÝSLEDKY PŘED PROPUŠTĚNÍM:
+Leukocyty 8,1, hemoglobin 13,2, trombocyty 280, sodík 140, draslík 4,2, kreatinin 0,9, glukóza 142.
+
+Stručný průběh hospitalizace:
+Byla zahájena intravenózní léčba vancomycinem, později byla po kultivaci, která prokázala přítomnost methicilin-senzitivního organismu, léčba upravena na cefazolin. Absces byl týmem ___ vyprázdněn u lůžka a bylo získáno značné množství hnisu. Horečka ustoupila během dvou dnů a zarudnutí se zmenšilo. Podiatr z ___ vyšetřil nohu a doporučil odlehčení a denní výměnu obvazů. Glukóza byla regulována inzulínem, poté byla znovu zavedena perorální léčba. Krevní tlak zůstal stabilní. Sestry z ___ poskytly instrukce ohledně péče o ránu. Pacient byl převeden na perorální cefalexin a propuštěn v dobrém stavu, s doporučením pokračovat v péči v ambulanci ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně, atorvastatin 20 mg večer, metformin 500 mg dvakrát denně, aspirin 81 mg denně.
+
+Léky při propuštění:
+Cefalexin 500 mg čtyřikrát denně do ___. Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Metformin 500 mg dvakrát denně. Aspirin 81 mg denně. Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti.
+
+Způsob propuštění:
+Domů s poskytovanou péčí.
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Absces na pravé noze s celulitidou.
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli infekci pravé nohy. Užijte antibiotika přesně podle předpisu, dokud je nedokončíte. Měňte obvaz denně a udržujte nohu čistou a suchou. Snažte se co nejvíce odlehčit noze. V případě horečky, šíření zarudnutí, zhoršení bolesti nebo výtoku se vraťte do ___ nebo kontaktujte svého lékaře. S ošetřováním rány vám pomohou sestry z ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a otok nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž odeslán z kliniky ___ s potížemi: zčervenání, teplo a horečka pravé nohy, trvající tři dny.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: unavený, v pohodě
+PLÍCE: čisté
+BŘICHO: měkké
+KONČETINY: pravé lýtko zarudlé, teplé
+
+Významné výsledky:
+Při přijetí zvýšený počet bílých krvinek s mírným posunem doleva, při propuštění se hodnoty normalizovaly.
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Ultrazvukové vyšetření žil pravé nohy neodhalilo žádnou krevní sraženinu.
+
+Stručný popis průběhu hospitalizace:
+Léčen na celulitidu intravenózními antibiotiky, zčervenání výrazně ustoupilo. Horečka odezněla. Přechod na perorální antibiotika, instruktáž o péči o ránu od ___ a ___.
+
+Léky při přijetí:
+Amlodipin
+Atorvastatin
+Allopurinol
+
+Léky při propuštění:
+Cefalexin, užívat čtyřikrát denně po dobu sedmi dnů. Pokračovat v užívání amlodipinu, atorvastatinu a allopurinolu beze změn.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+
+Stav při propuštění:
+Duševní stav: bdělý a orientovaný, jasné myšlení.
+Fyzická aktivita: chodí samostatně.
+
+Pokyny při propuštění:
+Byl jste léčen na kožní infekci. Užívejte antibiotika podle předpisu, zvedejte nohu a v případě, že se zčervenání rozšíří nebo se vrátí horečka, navštivte ___.
+
+Pokyny pro kontrolu:
+___

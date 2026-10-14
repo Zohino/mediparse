@@ -1,0 +1,83 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Léky obsahující sulfanilamid
+
+Hlavní potíže:
+Bolest v pravé oblasti boku a horečka
+
+Významný chirurgický nebo invazivní zákrok:
+Zavedení stentu do pravého močovodu
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí, která se dostavila se třemi dny trvající bolestí v pravé oblasti boku a horečkou. Bylo zjištěno, že má kámen v močovodu, který jej ucpává, a současně má infekci močových cest. Byla převezena z ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Kameny v ledvinách
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce:
+T 37,2 °C, TF 82, TK 128/74, dechová frekvence 16, SpO2 98 % při dýchání okolního vzduchu
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+PLÍCE:
+Čisté na obou stranách
+BŘICHO:
+Měkké, mírná citlivost v pravé oblasti boku
+Končetiny:
+Bez otoků
+PULSY:
+Hmatné a symetrické
+
+Významné výsledky:
+VÝSLEDKY VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Leukocyty 8,2, hemoglobin 12,4, kreatinin 0,9, draslík 4,1
+NÁLEZY:
+CT vyšetření prokázalo 6mm kámen v pravém proximálním močovodu s mírnou hydronefrózou.
+
+Stručný popis hospitalizace:
+Léčena intravenózním ceftriaxonem pro infekci močových cest. Urologické oddělení v ___ zavedlo stent, a horečka ustoupila. Kultivace moči prokázala přítomnost E. coli, která je citlivá na antibiotika.
+PŘECHODNÁ OTÁZKY:
+Definitivní odstranění kamene jako ambulantní pacient u doktora ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 50 mcg denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg denně
+2. Levotyroxin 50 mcg denně
+3. Cefpodoxim 200 mg dvakrát denně po dobu pěti dnů
+4. Tamsulosin 0,4 mg večer
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Kámen v močovodu způsobující obstrukci
+Infekce močových cest
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+Bdělý a orientovaný
+Úroveň vědomí:
+Bdělý a orientovaný
+Fyzická aktivita:
+Chodí bez pomoci
+
+Pokyny pro propuštěného pacienta:
+Pijte dostatek tekutin a dokončete užívání antibiotik. V případě horečky, silné bolesti nebo zvracení se vraťte. Volejte ___, pokud stent způsobuje krvácení.

@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Nadměrná žízeň a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___ letého muže, který již několik týdnů trpí žízní, častým močením a slabostí. Byl odeslán z ___ kliniky.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka trpí hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Unavený, v pohodě, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Suché sliznice
+Břicho: Měkké, netendrovatelné
+Končetiny: Teplé, bez otoků
+Kůže: Intaktní
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Výrazně zvýšená hladina glukózy, mírné změny elektrolytů, normální hladina kreatininu.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ: Hladina glukózy se zlepšila, elektrolyty v normě.
+ZÁVĚR: Na snímcích hrudníku nebyly zjištěny žádné akutní nálezy.
+
+Stručný popis hospitalizace:
+Pacient byl hydratován a zahájena byla léčba ke snížení hladiny glukózy. Hladina glukózy se postupně zlepšovala a pacient se naučil sám si ji měřit. Krevní tlak byl udržován v normě. Pacient byl stabilizován a připraven k propuštění.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+1. Lisinopril denně
+2. Atorvastatin večer
+3. Tableta ke snížení hladiny glukózy dvakrát denně během jídla
+4. Testovací proužky podle pokynů
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes mellitus, nově diagnostikovaný
+Sekundární:
+Hypertenze
+Hyperlipidemie
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí: Bdělý a komunikativní
+Stav aktivity: Samostatný
+
+Pokyny pro propuštění:
+Byli jste přijati s vysokou hladinou cukru v krvi. Užívajte léky podle předpisu, denně si měřte hladinu glukózy a v případě, že se necítíte dobře, volejte ___.
+
+Pokyny pro kontrolu:
+___

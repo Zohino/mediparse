@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé dolní části břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+___letý muž s jednodenní se zhoršující bolestí v pravé dolní části břicha, nevolností a mírnou horečkou, odeslán z ___ na chirurgické vyšetření poté, co zobrazovací metody naznačily apendicitidu.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na nevolnost. Bez zvracení, bolesti na hrudi nebo dysurie.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Sezónní alergie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodině se u matky vyskytla pneumonie. Bez anamnézy střevních onemocnění.
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlný, při vědomí
+Plíce:
+Čisté
+Břicho:
+Bolestivé v pravé dolní části, bez ztuhnutí
+Neurologické:
+Bez ložiskových příznaků
+PULSY:
+Hmatatelné bilaterálně
+
+Důležité výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Počet bílých krvinek zvýšený na 14, normální hladina hemoglobinu a biochemické hodnoty.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek normalizován, kreatinin stabilní. CT vyšetření ukázalo zánět apendixu bez abscesu.
+
+Stručný průběh hospitalizace:
+Přenesen na operační sál doktorem ___ k nekomplikované laparoskopické apendektomii. Strava postupně rozšiřována, bolest kontrolována perorálními léky, druhý den bez horečky a chodil.
+PŘECHODNÁ OTÁZKY:
+Kontrola rány u doktora ___ v ___ ambulanci za dva týdny.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+Lisinopril 10 mg jednou denně.
+Paracetamol 650 mg každých šest hodin podle potřeby na bolest.
+Docusate 100 mg dvakrát denně během užívání opioidů.
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Při vědomí a komunikativní
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byl vám odstraněn apendix. Udržujte řezné rány čisté a suché, vyhýbejte se zvedání těžších předmětů než 10 liber a v případě horečky, zvracení nebo šířící se zarudnutí volejte ___ nebo se vraťte.

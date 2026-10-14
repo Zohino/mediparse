@@ -1,0 +1,60 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s chronickým onemocněním ledvin a hypertenzí, odeslána z jejího zdravotnického zařízení v ___ kvůli zhoršujícímu se otoku nohou, špatné chuti k jídlu a únavě, které trvají již jeden týden.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin, stadium 4
+Hypertenze
+Anémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Významné výsledky:
+Kreatinin nad výchozí hodnotou. Draslík mírně zvýšený při přijetí, po léčbě normální. Hemoglobin nízký a stabilní. Rentgen hrudníku ukázal mírnou vaskulární kongesci. Vyšetření moči bez patologických nálezů, bez infekce.
+
+Stručný popis hospitalizace:
+Léčena intravenózními diuretiky a úpravou stravy, s dobrým močením a úbytkem hmotnosti. Funkce ledvin se vrátila téměř k výchozí hodnotě. Konzultována nefrologií z ___.
+PŘECHODNÁ OTÁZKY:
+Opakované laboratorní vyšetření za jeden týden v ___.
+
+Léky při přijetí:
+Amlodipin
+Furosemid
+Allopurinol
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Přetížení tekutinami
+Hyperkalémie
+Anémie
+
+Stav při propuštění:
+Jasné a srozumitelné myšlení.
+Úroveň vědomí: Bdělá a komunikativní.
+Schopná chůze a soběstačná.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli přetížení tekutinami. Každé ráno se važte a omezte příjem soli. Užívajte léky podle pokynů, vyhýbejte se protizánětlivým lékům proti bolesti a v případě otoku, dušnosti nebo sníženého močení se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

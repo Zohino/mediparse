@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient je ___ letý muž, který se dostavil s třemi dny trvající horečkou, produktivním kašlem a celkovou slabostí po návratu z cesty do ___. Byl vyšetřen u svého ošetřujícího lékaře v ___, který mu předepsal inhalátor ___, ale nedošlo ke zlepšení. Pacient uváděl zimnici a mírnou dušnost, ale neudával bolest na hrudi. Na pohotovosti měl horečku a saturace kyslíkem byla 90 % při dýchání okolním vzduchem, proto byl přijat na oddělení medicíny.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na horečku a kašel. Negativní nález na vyrážku, bolest hlavy nebo bolest břicha.
+
+Anamnéza předchozích onemocnění:
+Hypertenze, hyperlipidemie, gastroezofageální reflux. Appendektomie v ___.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční. Matka zdravá.
+
+Fyzikální vyšetření:
+T 38,1, TF 98, TK 128/76, dechová frekvence 20, SpO2 91 % při dýchání okolním vzduchem. Unavený, ale v pohodlí.
+Krk:
+Pružný, bez zvětšených lymfatických uzlin.
+PLÍCE:
+Rozptýlené sípání oboustranně, bez chrůpků.
+Břicho:
+Měkké, netendrové, neztuhlé.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 14,2, hemoglobin 13,8, trombocyty 245, sodík 137, draslík 4,1, kreatinin 0,9, laktát 1,8, prokalcitonin 0,08.
+Rentgen hrudníku provedený ___ ukázal mírné perifbronchiální ztluštění bez ložiskové konsolidace.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Leukocyty 9,1, hemoglobin 13,5, trombocyty 262, sodík 139, draslík 4,0, kreatinin 0,8.
+
+Stručný průběh hospitalizace:
+Pacient byl přijat s akutní bronchitidou a mírnou hypoxemií. Rentgen hrudníku neprokázal známky pneumonie a prokalcitonin byl nízký, proto nebyly podány antibiotika. Pacient dostával inhalace albuterolu, guaifenesinu a doplňkový kyslík a do druhého dne hospitalizace byl odpojen od doplňkového kyslíku a dýchal okolní vzduch. Krevní kultury odebrané ___ nevykázaly růst bakterií. Hypertenze byla léčena lisinoprilem, který pacient užívá doma. Pacient chodil po chodbě se saturací 95 %. Lékař ___ z oddělení medicíny souhlasil s propuštěním ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Omeprazol 20 mg denně před snídaní.
+
+Léky při propuštění:
+Lisinopril 10 mg perorálně jednou denně. Atorvastatin 20 mg perorálně každý večer. Omeprazol 20 mg perorálně denně. Inhalátor s albuterolem, dvě vdechnutí každé čtyři hodiny podle potřeby při sípání. Guaifenesin 600 mg dvakrát denně podle potřeby při kašli po dobu pěti dnů. Recepty byly odeslány do ___.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní bronchitida
+Hypoxémie, vyřešena
+Hypertenze
+
+Stav při propuštění:
+Stabilní.
+Duševní stav:
+Příjemný a orientovaný, schopný porozumět pokynům.
+Úroveň vědomí:
+Plně při vědomí a reaguje.
+
+Pokyny při propuštění:
+Byli jste přijati s těžkým nachlazením, které snížilo hladinu kyslíku ve vašem těle. Váš stav se zlepšil díky inhalátorům a kyslíku, a už nepotřebujete kyslík. Pijte dostatek tekutin, odpočívejte a užívejte léky podle seznamu. Pokud se vrátí horečka nebo se zhorší dýchání, zavolejte doktoru ___ na číslo ___. V případě silné dušnosti nebo bolesti na hrudi se vraťte na pohotovost do ___. Dodržujte termín návštěvy v ambulanci ___.
+
+Pokyny pro kontrolu:
+___

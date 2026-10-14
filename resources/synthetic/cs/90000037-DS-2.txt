@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila do ___ s několikdenní anamnézou bušení srdce a únavy. Příznaky se náhle objevily doma. Byla vyšetřena v ___ a převezena za účelem monitorování srdečního rytmu.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Žádná cukrovka
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: dobrý
+Hlava, oči, uši, nos, hrdlo: normální
+Plíce: čisté
+Břicho: měkké
+Končetiny: bez otoků
+Neurologické vyšetření: bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Rentgen hrudníku bez akutních nálezů.
+ZÁVĚR:
+Normální velikost srdce, čisté plíce, bez výpotku. Elektrolyty a vyšetření štítné žlázy v normě.
+
+Stručný průběh hospitalizace:
+Pacientka byla přijata na oddělení s telemetrickým monitoringem, byla zahájena léčba ke kontrole srdeční frekvence a antikoagulační terapie, a její srdeční frekvence se postupně zlepšovala. Byla vyšetřena kardiologem v ___ a při propuštění se cítila dobře.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Ambulantní sledování srdečního rytmu a kontrola antikoagulační terapie.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg denně
+2. Apixaban 5 mg dvakrát denně
+3. Lisinopril 10 mg denně
+4. Atorvastatin 20 mg večer
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Fibrilace síní
+
+Stav při propuštění:
+Dobrý, bdělá a orientovaná.
+Stav aktivity: Samostatná
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli rychlému, nepravidelnému srdečnímu tepu. Užívajte nové léky podle předpisu a v případě bolesti na hrudi, mdlob nebo krvácení se vraťte do ___.
+
+Pokyny pro kontrolu:
+___

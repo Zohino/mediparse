@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a produktivní kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s třídenní horečkou, kašlem a únavou po nedávné cestě do ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav: Unavený, v klidu se cítí dobře
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice
+Břicho: Měkké, netendrovatelné
+Končetiny: Teplé, bez otoků
+Kůže: Intaktní, bez vyrážky
+
+Významné výsledky:
+Při přijetí mírná leukocytóza, při propuštění se normalizovala. Rentgen hrudníku bez patologických nálezů.
+ZÁVĚR:
+Čistá plíce.
+
+Stručný popis hospitalizace:
+Léčen pro akutní bronchitidu infuzemi a inhalací. Zobrazovací metody neprokázaly pneumonii. Příznaky se zlepšily a pacient byl propuštěn s doporučením ___ kontrolní návštěvy.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Lisinopril denně, atorvastatin večer, guaifenesin podle potřeby na kašel a inhalátor dvakrát denně.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární:
+Akutní bronchitida
+
+Stav při propuštění:
+Duševní stav: Bdělý a orientovaný
+Úroveň vědomí: Probuzený
+Úroveň aktivity: Chodí bez pomoci
+
+Pokyny pro propuštěného pacienta:
+Pijte dostatek tekutin, odpočívejte, dokončete všechny léky a v případě zhoršení horečky nebo dušnosti se vraťte.
+
+Pokyny pro kontrolní vyšetření:
+___

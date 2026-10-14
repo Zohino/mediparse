@@ -1,0 +1,58 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Sulfonamidové léky
+
+Hlavní potíže:
+Dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s chronickou dušností, užívá inhalátory a inzulin, odeslán z ___ s třídenní se zhoršující dušností, produktivním kašlem a nízkou saturací kyslíkem. Byl léčen pomocí nebulizátoru, steroidů a antibiotik, a během hospitalizace se jeho stav postupně zlepšoval. Příznaky ustoupily před propuštěním.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Zvýšená hladina cukru v krvi při užívání inzulinu
+Bývalý kuřák
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec má v rodinné anamnéze fibrilaci síní. Matka trpěla hypertenzí, léčena v ___.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Hubený, mírná dechová tíseň.
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice.
+Plíce: Difúzní expirační sípoty.
+Břicho: Měkké, netendrovatelné.
+Končetiny: Bez otoků.
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků.
+
+Významné výsledky:
+Při přijetí glukóza 312, HbA1c 9,1 %. Leukocyty 12,4, kreatinin 0,9. Rentgen hrudníku ukázal hyperinflaci plic bez ložiskové opacity. Analýza arteriální krve ukázala mírnou respirační acidózu. Opakované hodnoty glukózy se zlepšily při podávání inzulinu. Výsledky byly zkontrolovány v laboratoři ___.
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Exacerbace chronické obstrukční plicní nemoci
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Stav aktivity: Chodí, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste přijati kvůli problémům s dýcháním. Užijte steroidy a inhalátory podle předpisu a pravidelně si kontrolujte hladinu cukru v krvi. Přestaňte kouřit. V případě zhoršení dušnosti, horečky nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

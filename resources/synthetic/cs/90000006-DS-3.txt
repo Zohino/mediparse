@@ -1,0 +1,79 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s fibrilací síní, který byl přijat z ___ s několikdenním produktivním kašlem, horečkou a zhoršující se dušností. Vyšetření hrudníku v ___ vyvolalo obavy z možné pneumonie, i když obraz nebyl jednoznačný. Byl odeslán do ___ k dalšímu vyšetření a monitorování.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Bez horečky, stabilní, dobrá saturace při dýchání okolním vzduchem
+Plíce:
+Rozptýlené chrůpky v dolní části pravé plíce
+Břicho:
+Měkké, netendrové
+Končetiny:
+Mírný edém
+Neurologické vyšetření:
+Orientovaný, bez ložiskových příznaků
+
+Významné výsledky:
+Laboratorní vyšetření ukázala mírně zvýšený počet bílých krvinek a stabilní hladinu kreatininu blízko výchozí hodnoty. Rentgen hrudníku provedený v ___ ukázal skvrnitou opacitu v dolní části pravé plíce bez výpotku.
+ZÁVĚR:
+Skvrnitá opacita v dolní části pravé plíce, nespecifická, je třeba klinicky zhodnotit.
+
+Stručný popis hospitalizace:
+Byl sledován při podávání perorálních antibiotik a jeho stav se zlepšoval, kašel ustupoval. Srdeční frekvence zůstala kontrolovaná při jeho běžné domácí léčbě. Funkce ledvin zůstala stabilní. Byl vyšetřen týmem v ___ a byl propuštěn.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Opakované vyšetření hrudníku v ___ za šest týdnů.
+
+Léky při přijetí:
+Metoprolol, apixaban, atorvastatin, lisinopril
+
+Léky při propuštění:
+1. Metoprolol succinate denně
+2. Apixaban dvakrát denně
+3. Atorvastatin večer
+4. Amoxicillin-klavulanát dvakrát denně po dobu dalších pěti dnů
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Primární:
+Chronické onemocnění ledvin
+Fibrilace síní
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí:
+Orientovaný a komunikativní
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni s kašlem a horečkou. Užijte si antibiotika, dokud je nedokončíte, a pokračujte v užívání ostatních léků. Pijte dostatek tekutin a odpočívejte. V případě zhoršení dýchání, bolesti na hrudi nebo přetrvávající horečky zavolejte lékaři ___ nebo se vraťte do nemocnice.
+
+Pokyny pro kontrolu:
+___

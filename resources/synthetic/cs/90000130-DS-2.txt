@@ -1,0 +1,84 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie provedená v ___
+
+Anamnéza současného onemocnění:
+Pacientka je žena, která se dostavila na pohotovost s dvoudenní se zhoršující bolestí v pravém horním kvadrantu břicha, nevolností a zvracením. Bolest začala po konzumaci tučného jídla a vyzařovala do zad. Poprvé byla vyšetřena v ___, kde laboratorní výsledky ukázaly zvýšený počet bílých krvinek a abnormální hodnoty jaterních enzymů. Ultrazvukové vyšetření prokázalo žlučové kameny a ztluštění stěny žlučníku. Pacientka uváděla, že doma neměla horečku, ale pociťovala zimnici. Byla převezena do ___ na chirurgické vyšetření dne ___ a přijata k dalšímu ošetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze, sledovaná ___
+Hyperlipidémie
+Gastroezofageální reflux
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny, léčena v ___
+
+Fyzikální vyšetření:
+Vitalní funkce:
+T 37,3 °C, TF 88, TK 128/76, dechová frekvence 16, SpO2 98 % při dýchání okolním vzduchem
+Celkový stav:
+Dobře se cítí, bez akutní tíže
+Krk:
+Pružný
+Plíce:
+Oboustranně čisté
+SRDEČNÍ AKTIVITA:
+Pravidelný rytmus
+Břicho:
+Měkké, mírná citlivost v místě řezů, neztvrdlé
+Končetiny:
+Teplé, bez otoků
+Neurologické vyšetření:
+Bdělá, orientovaná, bez ložiskových příznaků
+PULSY:
+Hmatatelné distálně
+
+Stručný průběh hospitalizace:
+Byla přijata na chirurgické oddělení, byla jí nařízeno hladovění, podávány intravenózní tekutiny a zahájena léčba antibiotiky, vybranými tak, aby se předešlo její alergii. Její bolest byla kontrolována paracetamolem a nízkými dávkami opioidů. Druhý den hospitalizace byla Dr. ___ převezena na operační sál, kde podstoupila nekomplikovanou laparoskopickou cholecystektomii a vzorek byl odeslán do ___ na patologické vyšetření. Po operaci dobře snášela běžnou stravu, její nevolnost ustoupila a hodnoty jaterních enzymů se normalizovaly. Řezy zůstaly čisté a suché. Močila spontánně a mohla se samostatně pohybovat. Byla propuštěna do domácí péče dne ___ a tým z ___ zajistil ambulantní kontrolu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Omeprazol 20 mg denně dle ___
+
+Léky při propuštění:
+1. Paracetamol 650 mg perorálně každých šest hodin podle potřeby proti bolesti
+2. Oxykodon 5 mg perorálně každých šest hodin podle potřeby proti silné bolesti, krátkodobá léčba
+3. Dokusát 100 mg perorálně dvakrát denně během užívání opioidů
+4. Lisinopril 10 mg denně
+5. Atorvastatin 20 mg večer
+6. Omeprazol 20 mg denně, dodán ___
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Sekundární problémy:
+Hypertenze
+Hyperlipidémie
+Gastroezofageální reflux
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí: Bdělý a reagující
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl laparoskopicky odstraněn. Můžete se sprchovat a nechat na řezné rány stékat mýdlo, ale nesmíte je drhnout ani namáčet. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů než 4,5 kg. Léky proti bolesti užívejte pouze v případě potřeby a neřiďte, pokud užíváte opioidy. V případě horečky, zhoršení bolesti břicha, opakovaného zvracení, žloutnutí kůže nebo výtoku z řezných ran zavolejte na chirurgickou kliniku na číslo ___ nebo se vraťte na pohotovost.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,77 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___ letá žena s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po jídle, která trvá dva dny. Byla odeslána ___ poté, co ambulantní ultrazvuk odhalil žlučové kameny. Příznaky se objevily ___ a přes noc se zhoršily.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlí, bez horečky
+Krk:
+Pružný
+Plíce:
+Oboustranně čisté
+Břicho:
+Bolestivé v pravém horním kvadrantu, měkké
+Neurologické vyšetření:
+Bdělost, bez ložiskových příznaků
+
+Významné výsledky:
+Laboratorní vyšetření prokázala mírnou leukocytózu a mírně zvýšené jaterní enzymy, přičemž hladina bilirubinu a lipázy byla v normě. Elektrolyty a kreatinin byly při přijetí i v den propuštění v normálních mezích.
+ZOBRAZOVACÍ METODY:
+Ultrazvuk provedený ___ prokázal žlučové kameny, ztluštění stěny žlučníku a tekutinu v okolí žlučníku.
+
+Stručný popis hospitalizace:
+Přijata s akutní cholecystitidou, zahájena léčba antibiotiky a infuzní terapií. Podstoupila laparoskopickou cholecystektomii bez komplikací. Bolest se zlepšila, dieta byla postupně rozšiřována a pacientka dobře snášela běžnou stravu. Před propuštěním ji vyšetřil chirurgický tým vedený ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 50 mcg denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně denně
+2. Levotyroxin 50 mcg perorálně denně
+3. Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti
+4. Dokusát 100 mg dvakrát denně
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Jasný a srozumitelný
+Fyzická aktivita:
+Chodí, soběstačná
+
+Pokyny pro propuštění:
+V případě horečky, zhoršení bolesti nebo zvracení volejte ___. Udržujte řezné rány čisté a suché, vyhýbejte se nadměrné fyzické námaze a užívejte léky podle předpisu.
+
+Pokyny pro kontrolu:
+___

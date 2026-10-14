@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___ letá žena s postupující bolestí v pravém horním kvadrantu břicha, nevolností a horečkou, která trvá dva dny. Přišla na pohotovost ___, kde zobrazovací vyšetření naznačilo zánět žlučníku, a byla přijata na chirurgii.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Císařský řez v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlí, bez horečky
+Hlava, oči, uši, nos, hrdlo:
+Bez ikteru skléry
+Břicho:
+Bolestivý pravý horní kvadrant, bez rezistence
+Končetiny:
+Teplé, bez otoků
+
+Významné výsledky:
+Ultrazvuk provedený v ___ ukázal žlučové kameny se ztluštěním stěny a tekutinou v okolí žlučníku.
+ZÁVĚR:
+Nález odpovídá akutní cholecystitidě, bez dilatace žlučových cest.
+
+Stručný popis hospitalizace:
+Pacientka dostávala intravenózní antibiotika a tekutiny, poté podstoupila nekomplikovanou laparoskopickou cholecystektomii, asistoval Dr. ___. Bolest byla pod kontrolou, dieta byla postupně rozšiřována a před propuštěním pacientka dobře snášela běžnou stravu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 75 mcg denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg denně
+2. Levotyroxin 75 mcg denně
+3. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest
+4. Dokusát 100 mg dvakrát denně během užívání opioidů
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+Stav aktivity:
+Chodící, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku a byl vám odstraněn žlučník. Udržujte rány čisté a suché. Vyhýbejte se těžké fyzické námaze po dobu několika týdnů. V případě horečky, zvracení, zhoršení bolesti nebo žloutnutí kůže se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

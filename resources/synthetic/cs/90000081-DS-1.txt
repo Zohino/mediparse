@@ -1,0 +1,62 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Tato ___letá žena se dostavila s potížemi, které trvaly dva dny a projevovaly se zhoršující se bolestí v pravém horním kvadrantu břicha, nevolností a horečkou. Byla převezena z ___ poté, co zobrazovací vyšetření odhalilo žlučové kameny a ztluštění stěny žlučníku. První den hospitalizace byla převezena na operační sál.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Císařský řez v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Vitalní funkce: bez horečky, stabilní
+Celkový stav: komfortní, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: bez známek žloutenky
+Plíce: čisté na obou stranách
+Břicho: měkké, mírná bolestivost v místě řezu
+Končetiny: teplé, bez otoků
+Neurologické vyšetření: bdělá, bez ložiskových příznaků
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti
+2. Lisinopril 10 mg denně
+3. Atorvastatin 20 mg večer
+4. Dokusát 100 mg dvakrát denně během užívání opioidů
+
+Plán propuštění:
+Domů, s naplánovanou kontrolou v ___
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+
+Stav při propuštění:
+Stabilní, dobře snáší běžnou stravu.
+Úroveň vědomí: Bdělá a komunikativní.
+
+Pokyny pro propuštění:
+Byla jste přijata s zánětem žlučníku a byl vám odstraněn žlučník. Udržujte malé řezy čisté a suché. Po dobu dvou týdnů se vyhýbejte zvedání těžkých předmětů. V případě horečky, zvracení, žloutnutí kůže nebo zhoršení bolesti břicha se vraťte do nemocnice, nebo volejte ___ s dotazy.
+
+Pokyny pro kontrolu:
+___

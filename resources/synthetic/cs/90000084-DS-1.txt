@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Žena s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po konzumaci tučných jídel, trvajícími dva dny. Byla vyšetřena v ___ a odeslána na pohotovost, kde ultrazvuk odhalil žlučové kameny a ztluštělou stěnu žlučníku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka měla žlučové kameny, které byly léčeny v ___.
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti.
+Krk: Pohyblivý.
+PLÍCE: Bez patologických nálezů na obou stranách.
+BŘICHO: Měkké, mírná citlivost v pravém horním kvadrantu, jizvy čisté.
+NEUROLOGIE: Bdělá, bez ložiskových příznaků.
+
+Důležité výsledky:
+NÁLEZY:
+Ultrazvuk ukazuje mnohočetné žlučové kameny, ztluštění stěny žlučníku a tekutinu v okolí žlučníku. Jaterní enzymy mírně zvýšené při přijetí, při propuštění normální. Počet bílých krvinek zpočátku zvýšený, po operaci se normalizoval.
+
+Stručný popis průběhu hospitalizace:
+Byla přijata na chirurgické oddělení, podána intravenózní tekutiny a antibiotika, a podstoupila nekomplikovanou laparoskopickou cholecystektomii dne ___. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a pacientka dobře tolerovala běžnou stravu. Dr. ___ ji prohlásil za způsobilou k propuštění domů.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer.
+
+Léky při propuštění:
+Acetaminofen 650 mg každých šest hodin podle potřeby. Oxykodon 5 mg každé čtyři hodiny podle potřeby při silné bolesti. Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Docusate dvakrát denně během užívání oxykodonu.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a komunikativní.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku a podstoupili jste operaci. Udržujte jizvy čisté a suché. Vyhýbejte se zvedání těžších předmětů než ___ liber po dobu ___ týdnů. V případě horečky, zhoršení bolesti nebo žluté kůže volejte ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž odeslán z ___ s třídenní anamnézou produktivního kašle, horečky, zimnic a zhoršující se dušnosti, poprvé vyšetřen v ambulanci ___.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález únavy a snížené chuti k jídlu. Jinak negativní.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Atriální fibrilace, užívá antikoagulancia
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Unavený, ale v pohodlí při podávání kyslíku nosními kanylami, vitální funkce stabilní.
+Celkový stav: bdělý, bez známek úzkosti
+PLÍCE: chrůpky v dolní části pravé plíce
+BŘICHO: měkké, netendrovatelné
+KONČETINY: bez otoků
+NEUROLOGIE: bez ložiskových příznaků
+
+Významné výsledky:
+Rentgen hrudníku z ___ ukázal opacitu v dolním laloku pravé plíce, vyhodnotil ___ radiolog. Počet bílých krvinek zvýšený, kreatinin v normě.
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 14, glukóza 210, laktát v normě
+
+Stručný průběh hospitalizace:
+Byl léčen intravenózními antibiotiky pro pneumonii v ___ a jeho stav se postupně zlepšoval, kyslík byl vysazen třetí den. Pokračovalo se v kontrole srdeční frekvence a domácí antikoagulační terapii, inzulínem byla kompenzována glykémie.
+PŘECHODNÁ OTÁZKY:
+Dokončit léčbu antibiotiky; kontrolní rentgen hrudníku za šest týdnů.
+
+Léky při přijetí:
+Metformin, metoprolol, apixaban, lisinopril
+
+Léky při propuštění:
+Amoxicilin-klavulanát dvakrát denně po dobu pěti dalších dnů, pokračovat v užívání metforminu, metoprololu, apixabanu a lisinoprilu, albuterolový inhalátor podle potřeby.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pneumonie
+Sekundární:
+Diabetes, chronická obstrukční plicní nemoc, atriální fibrilace
+
+Stav při propuštění:
+Dobrý
+Mentální stav: jasný a srozumitelný
+Úroveň vědomí: bdělý a reagující
+Stav aktivity: pohyblivý, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni s plicní infekcí a léčeni antibiotiky. Užijte všechny léky podle předpisu, pijte dostatek tekutin, odpočívejte a v případě horečky, zhoršení dýchání nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

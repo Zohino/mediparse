@@ -1,0 +1,79 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Muž s dvoudenní se zhoršující bolestí v pravém horním kvadrantu břicha a nevolností, vyšetřen v ___ a převezen z ___ pro akutní cholecystitidu.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlný, bez horečky.
+Krk:
+Pružný.
+Plíce:
+Oboustranně čisté.
+Břicho:
+Bolestivé v pravém horním kvadrantu, měkké.
+Končetiny:
+Teplé, bez otoků.
+
+Významné výsledky:
+VÝSLEDKY VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Leukocyty 8,1, hemoglobin 13,9, kreatinin 0,9, normální jaterní enzymy.
+NÁLEZY:
+Ultrazvuk prokázal žlučové kameny, ztluštění stěny žlučníku a tekutinu v okolí žlučníku.
+
+Stručný popis hospitalizace:
+Přijat, podány antibiotika a tekutiny, poté převezen na operační sál doktorem ___ k nekomplikované cholecystektomii. Strava postupně rozšiřována, bolest kontrolována perorálními léky.
+PŘECHODNÁ OTÁZKY:
+Při kontrole v ambulanci zhodnotit patologický nález.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Lisinopril denně, atorvastatin večer, paracetamol podle potřeby na bolest, oxykodon krátkodobě při silné bolesti, dokusát při užívání opioidů.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a reagující.
+Stav aktivity:
+Chodí, soběstačný.
+
+Pokyny pro propuštění:
+Byl vám odstraněn žlučník. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze a v případě horečky, zvracení, žloutenky nebo zhoršení bolesti břicha volejte ___.
+
+Pokyny pro kontrolu:
+___

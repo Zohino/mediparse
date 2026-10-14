@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravé dolní části břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+___letá žena se dostavila s třídenní bolestí v pravé dolní části břicha a nevolností, byla vyšetřena v ___ a převezena k dalšímu ošetření.
+
+Anamnéza předchozích onemocnění:
+Migréna
+Sezónní alergie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti.
+Krk: Pohyblivý.
+Břicho: Měkké, mírně citlivé.
+Končetiny: Bez otoků.
+
+Významné výsledky:
+ZÁVĚR:
+Akutní apendicitida bez perforace.
+NÁLEZY:
+Rozšířený appendix s tukovou infiltrací a malým množstvím volné tekutiny v pánevní dutině, bez abscesu. Počet bílých krvinek 14 při přijetí, při propuštění v normě.
+
+Stručný popis hospitalizace:
+Pacientka podstoupila laparoskopickou apendektomii první den hospitalizace v ___ bez komplikací. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a pacientka byla propuštěna domů ve stabilizovaném stavu druhý den.
+
+Léky při přijetí:
+Perorální antikoncepční pilulka denně.
+Multivitamin.
+
+Léky při propuštění:
+Paracetamol 650 mg každých 6 hodin podle potřeby.
+Pokračovat v užívání antikoncepční pilulky doma.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Úroveň vědomí: Bdělá a komunikativní.
+Stav aktivity: Ambulantní, soběstačná.
+
+Pokyny pro propuštění:
+Udržujte řezné rány čisté a suché. Vyhýbejte se zvedání těžkých předmětů po dobu dvou týdnů. V případě horečky nebo zhoršení bolesti volejte ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Významný chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s třídenní anamnézou zhoršující se bolesti břicha, nevolnosti a zvracení. Příznaky se objevily po jídle a neodstranily se odpočinkem. Byl převezen z ___ k dalšímu vyšetření chirurgickým týmem a přijat k pozorování.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Možná cukrovka, probíhá vyšetření u ___
+Starší apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+HEENT: vlhké sliznice
+Krk: pružný
+Plíce: čisté na obou stranách
+Břicho: měkké, mírně citlivé, neztuhlé
+Končetiny: teplé, bez otoků
+Neurologické: bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Laboratorní vyšetření prokázala mírnou leukocytózu s normálními elektrolyty. CT vyšetření břicha v ___ prokázalo parciální obstrukci tenkého střeva s přechodovým bodem a bez volného vzduchu. Kontrolní snímky ukázaly postupné zlepšení a ústup dilatace.
+
+Stručný průběh hospitalizace:
+Přijat s parciální obstrukcí tenkého střeva a léčen konzervativně odpočinkem střev, dekompresí pomocí nasogastrické sondy a intravenózními tekutinami. Strava byla postupně zvyšována s návratem funkce střev. Pacient byl denně vyšetřován týmem Dr. ___. Bolest ustoupila a toleroval běžnou stravu před propuštěním z ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně, atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně.
+2. Atorvastatin 20 mg perorálně každou noc.
+3. Acetaminofen 500 mg perorálně každých šest hodin podle potřeby na bolest.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Parciální obstrukce tenkého střeva
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+
+Pokyny při propuštění:
+Byli jste hospitalizováni pro obstrukci střev, která se zlepšila bez chirurgického zákroku. Jezte menší jídla a pijte tekutiny. Vraťte se, pokud se objeví zvracení, silná bolest nebo otok břicha. V případě dotazů nebo pokud se příznaky vrátí před ___, zavolejte do ordinace Dr. ___.
+
+Pokyny pro kontrolu:
+___

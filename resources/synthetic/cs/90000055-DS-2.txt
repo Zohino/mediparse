@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Žena s bolestí v pravém horním kvadrantu břicha, která se zhoršuje již dva dny, s nevolností a zvracením po jídle. Vyšetřena v ___, kde ultrazvuk naznačil přítomnost žlučových kamenů. Přeložena sem z ___ za účelem chirurgického vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Migréna
+
+Anamnéza předchozích chirurgických zákroků:
+Císařský řez v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Bez žloutenky
+Břicho: Měkké, mírná citlivost v pravém horním kvadrantu, jizvy čisté a suché
+Končetiny: Teplé, bez otoků
+Neurologické vyšetření: Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Laboratorní výsledky: mírná leukocytóza a normální hladina bilirubinu. Ultrazvuk zkontrolován s ___, prokázal přítomnost kamenů a ztluštění stěny žlučníku.
+ZÁVĚR:
+Cholelitiáza se ztluštěním stěny žlučníku
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Paracetamol 650 mg každých 6 hodin podle potřeby proti bolesti
+2. Lisinopril 10 mg denně
+3. Atorvastatin 20 mg večer
+4. Dokusát 100 mg dvakrát denně
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Dobrý, dobře snáší běžnou stravu, pohyblivá, bdělá a orientovaná
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl odstraněn. Udržujte jizvy čisté, vyhýbejte se zvedání těžkých předmětů a v případě horečky, zvracení nebo zhoršení bolesti volejte ___.
+
+Pokyny pro kontrolu:
+___

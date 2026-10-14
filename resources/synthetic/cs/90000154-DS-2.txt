@@ -1,0 +1,77 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a otok pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s hypertenzí, odeslán z ___ kliniky kvůli třem dnům zhoršujícího se zčervenání, tepla a bolesti pravého lýtka, s pocitem zimnice doma. Žádné trauma. Léčen perorálními antibiotiky bez zlepšení.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav:
+Komfortní, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Plíce:
+Čisté na obou stranách
+Břicho:
+Měkké, netendrové
+Končetiny:
+Pravé lýtko teplé, červené, oteklé
+Kůže:
+Šířící se erytém, žádný absces
+Neurologické vyšetření:
+Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+___ Počet leukocytů 14,2, laktát v normě. Kultivace krve bez růstu. Ultrazvuk pravé nohy negativní na přítomnost krevní sraženiny. Kreatinin stabilní na výchozí hodnotě. Rentgen hrudníku čistý. Výtěr z rány z ___ prokázal přítomnost kožní flóry.
+
+Stručný popis hospitalizace:
+Přijat s celulitidou pravé nohy, léčen intravenózním vancomycinem, s postupným zlepšením. Zčervenání se do třetího dne stáhlo za vyznačenou hranici. Horečka ustoupila. Přechod na perorální antibiotika, dobře tolerováno, propuštěn domů ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších pěti dnů
+2. Lisinopril 10 mg denně
+3. Atorvastatin 20 mg večer
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+Hypertenze
+
+Stav při propuštění:
+Stabilní, bez horečky, zlepšené zčervenání
+Duševní stav:
+Jasný a koherentní
+
+Pokyny při propuštění:
+Byl jste léčen na kožní infekci nohy. Dokončete všechny antibiotika, zvedněte nohu a v případě, že se zčervenání rozšíří, horečka se vrátí nebo se zhorší bolest, se vraťte do ___. Dodržujte doporučené kontroly u ___.
+
+Pokyny pro kontrolu:
+___

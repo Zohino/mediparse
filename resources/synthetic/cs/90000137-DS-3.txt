@@ -1,0 +1,80 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost a kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letý muž s CHOPN, který užívá inhalátory doma, odeslán doktorem ___ po třech dnech zhoršující se dušnosti, produktivního kašle a sípání. Byl vyšetřen v ___ a zjištěna hypoxie s nepravidelným pulzem, poté byl přijat k další péči.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Pod dohledem ___ kvůli péči o ledviny
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: unavený, mluví krátkými větami
+Hlava, oči, uši, nos, hrdlo: suché sliznice
+Krk: pružný
+Plíce: difúzní sípání
+Končetiny: mírný edém
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Dobře se cítí, plíce čisté, žádný edém.
+
+Významné výsledky:
+Kreatinin 2,1 v základním stavu, draslík v normě, mírně zvýšený počet bílých krvinek. Telemetrie na ___ ukázala nepravidelný rytmus s rychlou frekvencí.
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Rentgen hrudníku.
+ZÁVĚR:
+Hyperinflamované plíce, žádná ložisková konsolidace.
+
+Stručný průběh hospitalizace:
+Byl léčen inhalátory, kortikosteroidy a krátkodobou antibiotickou léčbou a kyslík byl postupně snižován, dokud nebyl pacient dýchal pouze okolní vzduch. Jeho srdeční frekvence byla kontrolována metoprololem a zahájila se léčba apixabanem pro prevenci cévní mozkové příhody. Kreatinin zůstal stabilní. Byl převeden z ___ a vyšetřen týmem ___.
+
+Léky při přijetí:
+Inhalátor tiotropia, jednou denně
+Inhalátor albuterolu, podle potřeby
+Lisinopril 10 mg, jednou denně
+
+Léky při propuštění:
+1. Inhalátor tiotropia, jednou denně
+2. Inhalátor albuterolu, každé 4 hodiny podle potřeby
+3. Metoprolol succinat 50 mg, jednou denně
+4. Apixaban 5 mg, dvakrát denně
+5. Prednison, snižování dávky během pěti dnů
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Exacerbace CHOPN
+Sekundární:
+Chronické onemocnění ledvin
+Hypertenze
+
+Stav při propuštění:
+Stabilní
+Duševní stav: jasný a srozumitelný
+Úroveň vědomí: bdělý a reagující
+
+Pokyny pro propuštění:
+Byl jste ošetřován v ___ kvůli problémům s dýcháním. Užijte si nové léky podle předpisu, používejte inhalátory a vyhýbejte se kouři. V případě zhoršení dušnosti, bolesti na hrudi nebo krvácení se vraťte. V případě jakýchkoli dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

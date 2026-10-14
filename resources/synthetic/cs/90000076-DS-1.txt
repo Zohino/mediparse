@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena odeslána z ___ s třídenní anamnézou zarudnutí, tepla a otoku pravé nohy, navíc s horečkou a zimnicí.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce: T 37,8 °C, TF 88, TK 128/74
+Celkový stav: pacientka se cítí dobře
+Hlava, oči, uši, nos, hrdlo: bez patologických nálezů
+Plíce: čisté
+Srdce: pravidelné
+Břicho: měkké
+Končetiny: pravé lýtko zarudlé, teplé
+Neurologické vyšetření: bez patologických nálezů
+
+Významné výsledky:
+___: počet bílých krvinek 13,2, kreatinin 0,8. Kultivace krve negativní. Ultrazvuk pravé nohy neodhalil žádnou trombózu.
+
+Stručný popis hospitalizace:
+Léčba celulitidy pravé nohy intravenózním vancomycinem, následně perorálním doxycyklinem. Zarudnutí se zlepšilo a horečka ustoupila. Pacientka vyšetřena ___ a propuštěna ___ do domácí péče.
+
+Léky při přijetí:
+Lisinopril
+Levotyroxin
+
+Léky při propuštění:
+1. Doxycyklin 100 mg dvakrát denně po dobu sedmi dnů
+2. Lisinopril denně
+3. Levotyroxin denně
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida pravé nohy
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: jasný a srozumitelný.
+Fyzická aktivita: schopná chůze, soběstačná.
+
+Pokyny pro propuštěného pacienta:
+Byla léčena kožní infekce. Užívajte antibiotika podle předpisu, zvedejte nohu a v případě šíření zarudnutí, horečky nebo bolesti se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

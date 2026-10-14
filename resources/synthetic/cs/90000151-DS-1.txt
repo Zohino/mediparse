@@ -1,0 +1,78 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a nevolnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letý muž s chronickým onemocněním ledvin, který se dostavil z ___ s třídenní anamnézou zhoršujícího se otoku nohou, snížené chuti k jídlu a nevolnosti. Vynechal kontrolu u nefrologa dne ___ a uvádí snížené množství moči. Na pohotovosti měl zvýšený krevní tlak, laboratorní výsledky ukázaly zvýšenou hladinu kreatininu a draslíku, a byl přijat k monitorování a úpravě medikace.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu, diagnostikován ___
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí; otec zemřel v ___
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Bez horečky, krevní tlak 158/90, srdeční frekvence 78, saturace kyslíkem 97 % při dýchání okolního vzduchu
+Celkový stav:
+Komfortní, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Končetiny:
+Mírný bilaterální otok s prohlubněmi
+Kůže:
+Teplá, suchá, bez vyrážky
+
+Významné výsledky:
+Při přijetí laboratorní výsledky ukazovaly kreatinin 3,4 (oproti výchozí hodnotě 2,6), močovinu 58, draslík 5,7, bikarbonát 19 a hemoglobin 10,2. Po léčbě byl draslík 4,8. Vyšetření moči ukázalo 2+ protein bez známek infekce. Ultrazvuk ledvin ukázal malé echogenní ledviny bez obstrukce. Rentgen hrudníku byl v normě. Laboratorní vzorky byly odebrány dne ___ a při propuštění se hladina kreatininu zlepšila na 3,0.
+
+Léky při přijetí:
+Lisinopril 20 mg denně
+Metformin 500 mg dvakrát denně
+Atorvastatin 40 mg večer
+
+Léky při propuštění:
+1. Amlodipin 10 mg denně
+2. Atorvastatin 40 mg večer
+3. Bikarbonát sodný 650 mg dvakrát denně
+4. Furosemid 40 mg denně
+5. Inzulín glargin 10 jednotek večer
+Lisinopril a metformin byly vysazeny; podrobnosti viz ___.
+
+Plán propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin s akutním zhoršením
+Hyperkalémie
+
+Stav při propuštění:
+Duševní stav:
+Bdělý a plně orientovaný
+Úroveň vědomí:
+Bdělý a reagující
+Fyzická aktivita:
+Chodí samostatně
+
+Pokyny pro propuštění:
+Byli jste přijati, protože se zhoršila funkce vašich ledvin a máte vysokou hladinu draslíku. Přestaňte užívat lisinopril a metformin. Užívejte nové léky podle seznamu, vážte se každé ráno a omezte příjem soli a potravin s vysokým obsahem draslíku. V případě návratu otoku nebo dušnosti volejte ___ a dodržujte termín kontroly u ___.
+
+Pokyny pro další postup:
+___

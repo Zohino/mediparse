@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a otok pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___letého muže s hypertenzí, který se dostavil s třemi dny trvajícím zhoršujícím se zčervenáním, horkem a otokem pravé dolní končetiny po drobném oděru. Uvádí horečku a zimnici. Byl vyšetřen v ___ a odeslán na pohotovostní oddělení lékařem ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Vitalní funkce:
+T 100,8, TF 96, TK 138/82, dechová frekvence 16, SpO2 97 % při dýchání okolního vzduchu
+HEENT:
+Vlhké sliznice
+Krk:
+Pružný
+KŮŽE:
+Erythém, horko a bolestivý otok pravé holenní kosti, bez fluktuace
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala počet bílých krvinek 14,2 s převahou neutrofilů a mírně zvýšené CRP. Kreatinin byl v normě. Krevní kultury odebrané při přijetí neukázaly růst po 48 hodinách. Ultrazvuk nohy provedený v ___ neprokázal hlubokou žilní trombózu.
+ZÁVĚR:
+Subkutánní edém pravé dolní končetiny bez abscesu nebo krevní sraženiny.
+
+Stručný popis hospitalizace:
+Byl přijat a zahájena intravenózní léčba cefazolinem pro celulitidu pravé nohy. Hranice erytému byla označena a během dvou dnů se zmenšovala. Horečka ustoupila do druhého dne hospitalizace a byl převeden na perorální léčbu cefalexinem. Péče o ránu byla probrána s ošetřujícím personálem. Byl propuštěn domů s naplánovanou kontrolou u lékaře ___ v ___ ambulanci dne ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Aspirin 81 mg denně. Multivitamin denně.
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+Stav aktivity:
+Chodící, soběstačný
+
+Pokyny pro propuštění:
+Užívejte cefalexin podle předpisu, dokud ho nevyspotřebujete. Při sezení zvedněte nohu a udržujte pokožku čistou a suchou. V případě šíření zčervenání, horečky, silné bolesti nebo hnisu se vraťte. V případě dotazů volejte na ___ a vyzvedněte si recept v ___.
+
+Pokyny pro kontrolu:
+___

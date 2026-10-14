@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní vyšetření:
+Žádný
+
+Anamnéza současného onemocnění:
+Tento ___letý muž se dostavil s potížemi, které trvaly dva dny – občasné bušení srdce a závratě – poté, co byl převezen z ___ za účelem dalšího vyšetření. Popisoval mírnou dušnost, ale neměl bolesti na hrudi ani horečku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+DNA, pod dohledem doktora ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, je při vědomí, bez známek úzkosti
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Teplé, bez otoků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Sodík 139, draslík 4,1, troponin dvakrát negativní, TSH v normě, hemoglobin 14,2
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Rentgen hrudníku ukázal průhledná plíce a normální velikost srdce
+
+Stručný popis hospitalizace:
+Byl přijat na oddělení k monitorování. Nepravidelný rytmus zaznamenaný při monitorování vzbudil podezření na možnou fibrilaci síní, dokud nebude provedeno ambulantní monitorování. Kardiolog z ___ zkontroloval záznamy z ___. Příznaky ustoupily po hydrataci a pacient byl propuštěn domů.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Pokračujte v užívání lisinoprilu 10 mg jednou denně. Pokračujte v užívání atorvastatinu 20 mg každou noc. Užijte si paracetamol 500 mg podle potřeby při bolesti hlavy.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Bušení srdce
+Hypertenze
+Hyperlipidemie
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Při vědomí a reaguje
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli bušení srdce. Užijte si léky podle pokynů a vyhýbejte se nadměrnému příjmu kofeinu. V případě omdlení, bolesti na hrudi nebo zhoršení dušnosti se vraťte. V případě dotazů kontaktujte kliniku ___.
+
+Pokyny pro kontrolu:
+___

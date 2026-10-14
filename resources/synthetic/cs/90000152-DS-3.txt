@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí se dostavila s kašlem a mírnou horečkou, která trvala tři dny. Rentgen hrudníku neukázal žádnou pneumonii. Byla odeslána z ___ kliniky do ___ pohotovostní služby. Jinak se cítila dobře.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Vitalní funkce: bez horečky, stabilní
+Celkový stav: komfortní
+Krk: pružný
+SRDEČNÍ: pravidelný rytmus
+BŘICHO: měkké, netendrovatelné
+KONČETINY: bez otoků
+KŮŽE: teplá, suchá
+NEUROLOGIE: bdělá, orientovaná
+
+Významné výsledky:
+ZÁVĚR:
+Mírné ztluštění stěn průdušek, jinak plíce v pořádku.
+NÁLEZY:
+Normální velikost srdce. Žádný výpotek. Krevní obraz a elektrolyty v normálních mezích.
+
+Stručný popis hospitalizace:
+Byla léčena pro akutní bronchitidu infuzemi, klidem a inhalátorem po vyšetření na ___. Příznaky se postupně zlepšovaly a hladina kyslíku v krvi zůstala normální. Byla propuštěna domů, když se jí zlepšil apetit, a byla ošetřena personálem ___.
+
+Léky při přijetí:
+Lisinopril
+Levotyroxin
+
+Léky při propuštění:
+1. Lisinopril denně, jako dosud.
+2. Levotyroxin denně, jako dosud.
+3. Albuterolový inhalátor podle potřeby při kašli nebo sípání.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Akutní bronchitida
+Sekundární: Hypertenze, hypotyreóza
+
+Stav při propuštění:
+Úroveň vědomí: Bdělá a komunikativní
+Stav aktivity: Ambulantní, soběstačná
+
+Pokyny pro propuštění:
+Pijte dostatek tekutin a odpočívejte doma. Používejte inhalátor při kašli. V případě zhoršení dýchání nebo horečky se vraťte. Navštivte prosím doktora ___ na ___ do jednoho týdne.
+
+Pokyny pro kontrolu:
+___

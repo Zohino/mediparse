@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a produktivní kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž, který se dostavil s třemi dny trvající horečkou, produktivním kašlem a celkovou slabostí po kontaktu s nemocným příbuzným. Byl vyšetřen v ___ a odeslán sem k dalšímu vyšetření ___. Při přijetí měl hraniční hodnoty saturace kyslíkem a byl přijat k pozorování a léčbě.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___ v dětství
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Sourozenec s ___
+
+Fyzikální vyšetření:
+Celkový stav: Bdělý, mírně nemocný vzhled, bez známek úzkosti.
+Krk: Pohyblivý, bez zvětšených lymfatických uzlin.
+Břicho: Měkké, netendrové, neztuhlé.
+Neurologické vyšetření: Bdělý, orientovaný, pohybuje všemi končetinami.
+
+Významné výsledky:
+Rentgen hrudníku z ___ ukázal skvrnité zastínění dolního laloku pravého plíce. Počet bílých krvinek mírně zvýšený, jinak normální hodnoty biochemických parametrů. Elektrokardiogram ukázal sinusový rytmus. Krevní kultury čekají na výsledek při propuštění. Vyšetření moči bezvýznamné.
+ZÁVĚR: Skvrnité zastínění bazálních částí plic, nespecifické, nutná klinická korelace.
+
+Stručný popis hospitalizace:
+Byl monitorován na interním oddělení s podáváním kyslíku, který byl během dvou dnů postupně snižován. Zobrazovací metody vyvolaly obavy z možné pneumonie, proto dostal empirickou antibiotickou léčbu, po které došlo ke zlepšení horečky a kašle. Byl vyšetřen ___ pro posouzení mobility a ___ ho propustil domů, když začal dobře jíst a samostatně chodit.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Aspirin 81 mg denně.
+
+Léky při propuštění:
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dalších dnů. Paracetamol 650 mg každých šest hodin podle potřeby na horečku. Pokračovat v užívání lisinoprilu, atorvastatinu a aspirinu jako dříve.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Infekce dolních cest dýchacích
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a komunikativní.
+Stav aktivity: Ambulantní, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli plicní infekci a léčeni antibiotiky. Dokončete celou kúru, odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte. Domluvte si kontrolu u ___ do jednoho týdne.
+
+Pokyny pro kontrolu:
+___

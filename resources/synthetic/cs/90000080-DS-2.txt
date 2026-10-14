@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé oblasti boku a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s bolestí v pravé oblasti boku a horečkou, trvajícími dva dny, odeslán z ___ kliniky.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Ledvinové kameny
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec má diabetes. Matka je zdravá.
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlný, má horečku
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Plíce:
+Čisté na obou stranách
+SRDEČNÍ:
+Pravidelný rytmus
+Břicho:
+Citlivost v pravé oblasti boku
+Neurologické:
+Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Při přijetí zvýšený počet bílých krvinek. Vyšetření moči prokázalo infekci. Zobrazovací metody ukázaly malý kámen bez obstrukce.
+
+Stručný popis hospitalizace:
+Léčen intravenózními antibiotiky a infuzemi pro léčbu infekce močových cest. Horečka ustoupila, bolest se zlepšila, pacient toleroval stravu. Urolog z ___ doporučil ambulantní sledování.
+
+Léky při přijetí:
+Lisinopril denně
+
+Léky při propuštění:
+Ciprofloxacin dvakrát denně po dobu sedmi dnů. Pokračovat v užívání lisinoprilu. Acetaminofen podle potřeby.
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Pyelonefritida
+Nefrolitiáza
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+
+Pokyny pro propuštění:
+Pijte dostatek tekutin a dokončete všechny antibiotika. V případě horečky, zvracení nebo zhoršení bolesti se vraťte.
+
+Pokyny pro další sledování:
+___

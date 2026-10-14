@@ -1,0 +1,60 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+Tento ___letý muž se dostavil po odeslání od ___ s třídenní anamnézou zhoršující se bolesti v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou. Popíral zvracení, průjem, problémy s močením nebo zimnici.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+
+Anamnéza předchozích chirurgických zákroků:
+Tonzilektomie v roce ___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bdělý, bez akutní tísně
+Hlava, oči, uši, nos, hrdlo: Bez ikteru skléry, vlhké sliznice
+Plíce: Při auskultaci oboustranně čisté
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala mírnou leukocytózu s normálními elektrolyty a normálními jaterními enzymy. CT vyšetření břicha provedené ___ prokázalo zánětlivě změněný, rozšířený apendix s okolní tukovou infiltrací a bez abscesu nebo volného vzduchu. Opakované vyšetření krevního obrazu se normalizovalo před propuštěním.
+
+Stručný popis hospitalizace:
+Pacientovi byla diagnostikována akutní apendicitida a po konzultaci s ___ podstoupil bez komplikací laparoskopickou apendektomii. Strava byla postupně zvyšována, bolest byla kontrolována perorálními léky a horečka ustoupila. Dobře snášel běžnou stravu, chodil samostatně a byl propuštěn domů prvním dnem po operaci.
+
+Léky při přijetí:
+Lisinopril 10 mg denně, multivitamín denně
+
+Léky při propuštění:
+Acetaminofen 650 mg každých šest hodin podle potřeby. Oxykodon 5 mg podle potřeby při silné bolesti. Pokračovat v užívání lisinoprilu 10 mg denně.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Dobrý
+Duševní stav: Bdělý a orientovaný, schopen plnit pokyny
+Fyzická aktivita: Chodí a je soběstačný
+
+Pokyny pro propuštění:
+Udržujte řezné rány čisté a suché a vyhýbejte se těžké fyzické námaze po dobu dvou týdnů. V případě horečky, zhoršující se bolesti břicha nebo přetrvávajícího zvracení se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

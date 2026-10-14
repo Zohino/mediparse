@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena, vyšetřena na ___, s třídenní horečkou, produktivním kašlem a únavou, která začala ___. Popírá pneumonii na základě předchozích zobrazovacích vyšetření, bolest na hrudi nebo nedávné cestování. Přijata k pozorování.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Cholecystektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce:
+T 38,1, TF 96, TK 128/76, SpO2 95 % na vzduchu
+Celkový stav:
+Unavená, v pohodlí
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Krk:
+Pružný
+Plíce:
+Mírné chrůpky v dolní části pravé plíce
+SRDCE:
+Pravidelný rytmus
+Břicho:
+Měkké, netendrové
+KŮŽE:
+Teplá, suchá
+Neurologické vyšetření:
+Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Počet leukocytů 12,4 při přijetí, klesl na 8,1. Rentgen hrudníku ukázal mírné zamlžení dolního laloku pravé plíce. Krevní kultury bez růstu. Kreatinin a elektrolyty v normálních mezích během hospitalizace.
+
+Stručný průběh hospitalizace:
+Byla léčena perorálními antibiotiky, tekutinami a paracetamolem. Horečka ustoupila během dvou dnů a saturace kyslíkem zůstala nad 94 procenty. Dr. ___ zhodnotil její případ dne ___ a povolil propuštění domů.
+
+Léky při přijetí:
+Levotyroxin 75 mcg denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Levotyroxin 75 mcg, jedna tableta denně
+2. Lisinopril 10 mg, jedna tableta denně
+3. Amoxicilin-klavulanát 875 mg, dvakrát denně po dobu pěti dnů
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Stav při propuštění:
+Dobrý, bez horečky, schopná chůze
+Úroveň vědomí: Bdělá a komunikativní
+
+Pokyny pro propuštění:
+Byla jste hospitalizována s respirační infekcí. Dokončete všechny antibiotika, pijte dostatek tekutin a odpočívejte. V případě horečky, dušnosti nebo bolesti na hrudi volejte ___ nebo se vraťte.
+
+Pokyny pro kontrolu:
+___

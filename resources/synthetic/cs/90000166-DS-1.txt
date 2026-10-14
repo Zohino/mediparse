@@ -1,0 +1,84 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s hypertenzí, odeslaná ___, s potížemi trvajícími dva dny – bušení srdce, nepravidelný srdeční rytmus a závratě. Na pohotovosti byl srdeční rytmus regulován.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s cévní mozkovou příhodou
+
+Fyzikální vyšetření:
+Vitalní funkce:
+TF 88, TK 128/76, SpO2 98 % při dýchání okolního vzduchu
+Hlava, oči, uši, nos, hrdlo:
+Normální
+Plíce:
+Čisté
+SRDCE:
+Nepravidelný rytmus
+Břicho:
+Měkké
+Končetiny:
+Bez otoků
+
+Významné výsledky:
+Draslík a hořčík v normě. TSH v normě. Troponin negativní dvakrát. EKG ukázalo nepravidelný rytmus bez ischemických změn.
+
+Stručný popis hospitalizace:
+Byla podána metoprolol, srdeční rytmus se dobře reguloval, a zahájena byla antikoagulační léčba. Echokardiogram, který byl zkontrolován s ___, ukázal zachovanou funkci. Pacientka se cítila dobře a chodila bez pomoci.
+
+PŘECHODNÁ OTÁZKY:
+Při kontrole v ambulanci zkontrolovat srdeční frekvenci.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg denně
+2. Levotyroxin 50 mcg denně
+3. Metoprolol succinat 50 mg denně
+4. Apixaban 5 mg dvakrát denně
+
+Způsob propuštění:
+Domů
+
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Atriální fibrilace
+
+Stav při propuštění:
+Stabilní.
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny při propuštění:
+Byli jste přijati s rychlým, nepravidelným srdečním rytmem. Užívajte nové léky podle předpisu. V případě bolesti na hrudi, mdlob nebo krvácení kontaktujte ___ nebo se vraťte.
+
+Pokyny pro další postup:
+___

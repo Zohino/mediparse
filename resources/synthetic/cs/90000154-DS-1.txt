@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s dvoudenní bolestí v epigastriu a zvracením, odeslán z ___ kliniky k vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Gastroezofageální reflux
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Plicní systém: Čistý na obou stranách
+Končetiny: Teplé, bez otoků
+Kůže: Intaktní
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Při přijetí zvýšená hladina lipázy. Mírně zvýšené jaterní enzymy.
+ZOBRAZOVACÍ METODY:
+Ultrazvuk prokázal žlučové kameny bez dilatace žlučových cest.
+
+Stručný popis hospitalizace:
+Léčen pro pankreatitidu způsobenou žlučovými kameny pomocí infuzí a analgetik. Strava postupně upravována podle tolerance. Chirurgický tým konzultován na ___ a naplánována ambulantní operace v blízkosti ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+Lisinopril 10 mg denně. Paracetamol podle potřeby proti bolesti. Omeprazol 20 mg denně.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pankreatitida způsobená žlučovými kameny
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni s pankreatitidou způsobenou žlučovými kameny. Jezte menší jídla s nízkým obsahem tuku, užívejte léky podle pokynů a v případě horečky nebo zhoršení bolesti volejte ___.
+
+Pokyny pro kontrolu:
+___

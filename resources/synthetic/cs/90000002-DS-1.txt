@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s hypertenzí, přeložen z ___ po třech dnech kašle, horečky a dušnosti, které začaly ___. Rentgenové vyšetření hrudníku nebylo jednoznačné, proto bylo podezření na pneumonii a pacient byl přijat k léčbě.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Vitalní funkce: T 38,3 °C, TF 92, TK 138/80, dechová frekvence 20, SpO2 94 % při dýchání okolním vzduchem
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Krk: Pohyblivý
+Plíce: Rozptýlené chrůpky v dolní části pravé plíce
+Břicho: Měkké, netendrovatelné
+Končetiny: Bez otoků
+Neurologické vyšetření: Pacient je při vědomí, bez ložiskových příznaků
+Pulzy: Hmatné na obou stranách
+
+Významné výsledky:
+Počet leukocytů 12,4, mírně zvýšený. Kreatinin 0,9. Laktát v normě. Krevní kultury bez růstu bakterií.
+ZÁVĚR: Mírné zamlžení dolního laloku pravé plíce, jinak plíce čisté, normální velikost srdce.
+
+Stručný popis hospitalizace:
+Pacient byl léčen perorálními antibiotiky a infuzní terapií, horečka ustoupila během jednoho dne. Saturace kyslíkem zůstala nad 94 procenty. Pacienta sledoval tým respirační terapie vedený ___. Před propuštěním toleroval běžnou stravu a chodil samostatně.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Pokračujte v užívání lisinoprilu 10 mg jednou denně a atorvastatinu 20 mg před spaním. Užijte azithromycin 250 mg denně po dobu dalších čtyř dnů. Acetaminofen podle potřeby na horečku.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní bronchitida
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Při vědomí a reaguje.
+Fyzická aktivita: Chodí, je soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni s kašlem a horečkou. Dokončete všechny antibiotika, odpočívejte a pijte dostatek tekutin. V případě zhoršení dušnosti, bolesti na hrudi nebo přetrvávající horečky se vraťte. V případě dotazů volejte ___ nebo v případě potřeby navštivte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

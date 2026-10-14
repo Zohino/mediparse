@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Kašel a horečka
+
+Významný chirurgický zákrok nebo invazivní procedura:
+Zavedení periferního katetru na ___
+
+Anamnéza současného onemocnění:
+Žena s pětidenním produktivním kašlem, horečkou a bolestí na hrudi, která se zhoršuje při dýchání, po kontaktu s nemocným příbuzným. Rentgen hrudníku na ___ ukázal konsolidaci v dolním laloku pravého plíce, což odpovídá pneumonii. Hladina glukózy při přijetí byla výrazně zvýšená. Pacientka byla odeslána od ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Zvýšená hladina glukózy, po níž následovalo ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s cévní mozkovou příhodou
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Hlava, oči, uši, nos, hrdlo: vlhká sliznice
+Krk: pružný
+Končetiny: bez otoků
+Kůže: teplá, suchá
+Neurologické: bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Glukóza 312 při přijetí, hemoglobin A1c 10,2. Počet bílých krvinek 14,1, klesá na 8,0. Kreatinin v normě.
+ZÁVĚR: Zastínění v dolním laloku pravé plíce, zlepšení na opakovaném rentgenu na ___.
+
+Stručný popis hospitalizace:
+Byla léčena intravenózními antibiotiky, poté byla převedena na perorální terapii, jakmile pominula horečka. Byla zahájena terapie bazálním a postprandiálním inzulínem, přičemž hladina glukózy se postupně zlepšovala. Podávání kyslíku bylo postupně snižováno, až bylo možné jej nahradit vzduchem z okolí. Edukace o inzulínu byla dokončena na ___ a pacientka se setkala s ___ za účelem poradenství ohledně stravy.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Inzulín glargin 12 jednotek večer. Inzulín lispro s jídlem podle klouzavé stupnice. Azithromycin k dokončení léčby.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární:
+Pneumonie
+
+Stav při propuštění:
+Stabilní
+Duševní stav: jasný a srozumitelný
+Úroveň vědomí: bdělá
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli plicní infekci a vysoké hladině cukru v krvi. Dokončete užívání antibiotik, kontrolujte si hladinu glukózy před jídlem a užívejte inzulín podle pokynů. V případě horečky, zhoršení kašle nebo dušnosti volejte ___.
+
+Pokyny pro kontrolu:
+___

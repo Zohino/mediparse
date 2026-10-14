@@ -1,0 +1,77 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letá žena s žlučovými kameny se dostavila s bolestí v pravém horním kvadrantu břicha, nevolností a horečkou, které trvaly dva dny. Příznaky se objevily po konzumaci tučného jídla. Byla vyšetřena v ___ a odeslána na další vyšetření. Laboratorní testy a ultrazvuk naznačily akutní cholecystitidu, a proto byla přijata do nemocnice.
+
+Anamnéza předchozích onemocnění:
+Žlučové kameny
+Hypertenze
+Hypotyreóza
+Dřívější operace ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: T 38,3 °C, puls 96, krevní tlak 138/82
+Celkový stav: nepohodlí
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Vitalní funkce: bez horečky, stabilní
+Celkový stav: pohodlí
+Hlava, krk, uši, nos, hrdlo: normální
+Krk: pružný
+Plíce: čisté
+Srdce: pravidelné
+Končetiny: bez otoků
+
+Významné výsledky:
+Počet bílých krvinek 14,2 při přijetí, normalizace při propuštění. Mírně zvýšená hladina bilirubinu. Ultrazvuk pravého horního kvadrantu břicha provedený v ___ ukázal žlučové kameny a ztluštění stěny žlučníku.
+ZÁVĚR:
+Nálezy odpovídají akutní cholecystitidě.
+
+Stručný popis průběhu hospitalizace:
+Byla přijata, podána intravenózní tekutiny a antibiotika, a následně byla v ___ provedena laparoskopická cholecystektomie bez komplikací. Bolest byla kontrolována a dieta byla postupně rozšiřována. Horečka ustoupila a byla připravena k propuštění ___ s čistými a suchými ranami.
+
+Léky při přijetí:
+Levotyroxin 75 mcg denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Paracetamol 650 mg každých šest hodin podle potřeby na bolest
+2. Levotyroxin 75 mcg jednou denně
+3. Lisinopril 10 mg jednou denně
+4. Dokusát 100 mg dvakrát denně během užívání opioidů
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Akutní cholecystitida
+Sekundární: Hypertenze, hypotyreóza
+
+Stav při propuštění:
+Stabilní a v pohodlí.
+Úroveň vědomí: Bdělá a komunikativní.
+
+Pokyny pro propuštění:
+Byla léčena pro zánět žlučníku, který byl odstraněn. Udržujte rány čisté a suché. Vyhýbejte se těžké fyzické námaze po dobu několika týdnů. V případě horečky, zhoršení bolesti, zvracení nebo žluté kůže volejte ___ nebo se vraťte do nemocnice. V případě dotazů kontaktujte ___.
+
+Pokyny pro kontrolu:
+___

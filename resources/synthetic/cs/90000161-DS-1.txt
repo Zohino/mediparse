@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena odeslána z ___ s pětidenním kašlem s vykašláváním, horečkou a dušností. Zobrazovací vyšetření hrudníku ukázalo pneumonii v dolním laloku pravého plíce a pacientka byla přijata k léčbě.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Unavená, mírně sužovaná
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Končetiny: Bez otoků
+Neurologické: Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Laboratorní výsledky ukázaly mírnou leukocytózu a mírně zvýšenou hladinu kreatininu.
+NÁLEZY: Skvrnité zastínění v dolním laloku pravého plíce, bez výpotku, normální velikost srdce.
+
+Stručný popis hospitalizace:
+Byla léčena intravenózními antibiotiky a kyslíkem, její stav se postupně zlepšoval. Hladina kreatininu byla mírně zvýšená a byla zvažována možnost chronického onemocnění ledvin, což bude upřesněno ___ v rámci ambulantní péče. Byla vyšetřena ___ a před propuštěním mohla bezpečně chodit.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 50 mcg denně
+
+Léky při propuštění:
+Amoxicilin-klavulanát dvakrát denně po dobu dalších pěti dnů. Pokračovat v užívání lisinoprilu a levotyroxinu jako dříve. Paracetamol podle potřeby při horečce.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pneumonie
+Sekundární:
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Stabilní
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá
+Fyzická aktivita: Chodí bez pomoci
+
+Pokyny pro propuštěného pacienta:
+Byla léčena kvůli plicní infekci. Dokončete všechny antibiotika, pijte dostatek tekutin a odpočívejte. V případě horečky, zhoršení kašle nebo potíží s dýcháním volejte ___ a dodržujte termín kontroly u ___.
+
+Pokyny pro další péči:
+___

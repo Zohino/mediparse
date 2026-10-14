@@ -1,0 +1,57 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka, produktivní kašel, dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pan ___ je ___letý muž, který má několik dní horečku, produktivní kašel a zhoršující se dušnost. Byl převezen z ___ poté, co zobrazovací vyšetření hrudníku ukázalo konsolidaci v dolním laloku pravého plíce a měl hypoxii.
+
+Anamnéza předchozích onemocnění:
+Fibrilace síní, užívá antikoagulancia
+Hypertenze
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Unavený, mírná dušnost
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Krk: Pohyblivý
+Plíce: Pravostranné bazální chrůpky
+Břicho: Měkké, netendrové
+
+Stručný popis hospitalizace:
+Byl přijat s horečkou, leukocytózou a hypoxií a zahájena byla intravenózní léčba ceftriaxonem a azithromycinem s podáváním kyslíku. Horečka ustoupila a podávání kyslíku bylo postupně snižováno, dokud pacient nedýchal pouze okolní vzduch. Stav se stabilizoval a pacient pokračoval v užívání léků, které užíval doma. Byl vyšetřen ___ a převeden na perorální antibiotika.
+
+Léky při přijetí:
+Apixaban, metoprolol, lisinopril, denně
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Fibrilace síní
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Fyzická aktivita: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byl jste hospitalizován s plicní infekcí a léčen antibiotiky. Dokončete užívání perorálních antibiotik, odpočívejte, pijte dostatek tekutin a pokračujte v užívání obvyklých léků. V případě horečky, zhoršující se dušnosti nebo bolesti na hrudi volejte ___ nebo se vraťte do nemocnice.
+
+Pokyny pro kontrolu:
+___

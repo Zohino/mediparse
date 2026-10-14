@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letý muž s hypertenzí, odeslán doktorem ___ z ___ s dvoudenní se zhoršující bolestí v pravém horním kvadrantu břicha, nevolností a horečkou. Ultrazvuk odhalil žlučové kameny s zesílením stěny žlučníku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Gastroezofageální reflux
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Vitalní funkce: bez horečky, stabilní
+Celkový stav: komfortní, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: bez žloutenky
+Plíce: čisté na obou stranách
+Břicho: měkké, mírná bolestivost v místě řezu
+Kůže: řez čistý a suchý
+
+Důležité výsledky:
+ZÁVĚR:
+Žlučové kameny se zesílením stěny žlučníku a tekutinou v okolí žlučníku, zobrazeno na ___.
+NÁLEZY:
+Společný žlučovod normální. Játra bez významných změn. Mírná leukocytóza se před propuštěním znormalizovala.
+
+Stručný popis průběhu hospitalizace:
+Pacient byl přijat, zahájena intravenózní antibiotická a infuzní terapie a doktorem ___ byl podroben laparoskopické cholecystektomii dne ___. Zotavení proběhlo bez komplikací. Strava byla postupně rozšiřována, bolest kontrolována perorálními léky a pacient byl propuštěn domů.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer.
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně denně.
+2. Atorvastatin 20 mg perorálně večer.
+3. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest.
+4. Docusate 100 mg dvakrát denně.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: bdělý a orientovaný.
+Fyzická aktivita: chůze, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl odstraněn. Po dobu čtyř týdnů se vyhýbejte zvedání těžkých předmětů (nad 10 liber). V případě horečky, zvracení nebo zarudnutí rány volejte ___. Dodržujte termín kontroly v ambulanci ___.
+
+Pokyny pro další péči:
+___

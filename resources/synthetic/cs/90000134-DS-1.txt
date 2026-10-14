@@ -1,0 +1,79 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž se známou chronickou nemocí ledvin, odeslán doktorem ___ kvůli dvoutýdennímu zhoršování únavy, špatné chuti k jídlu a otoku kotníků. Laboratorní výsledky v ambulanci ukázaly zvýšenou hladinu kreatininu, proto byl odeslán z ___ na vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce:
+T 37,1 °C, TK 148/84, TF 76, dechová frekvence 16, SpO2 97 % při dýchání okolního vzduchu
+Celkový stav:
+Unavený, ale v pohodě, bez známek úzkosti
+SRDEČNÍ:
+Pravidelný rytmus, bez šelestů
+Končetiny:
+Mírný bilaterální otok s prohlubněmi
+KŮŽE:
+Teplá a suchá
+
+Významné výsledky:
+Laboratorní výsledky při přijetí ___ ukazují kreatinin 3,4, draslík 5,3, bikarbonát 19. Hemoglobin 10,2. V moči stopové množství bílkovin. Ultrazvuk ledvin ukázal malé echogenní ledviny bez hydronefrózy.
+
+Stručný popis průběhu hospitalizace:
+Byl mu podán mírný diuretikum a hladina draslíku byla snížena úpravou stravy. Nefrologický tým v ___ doporučil vysadit protizánětlivý lék. Hladina kreatininu se stabilizovala a otok se zlepšil.
+PŘECHODNÁ OTÁZKY:
+Opakované laboratorní vyšetření za jeden týden.
+
+Léky při přijetí:
+Amlodipin
+Atorvastatin
+Allopurinol
+Ibuprofen
+
+Léky při propuštění:
+Amlodipin 5 mg denně. Atorvastatin 20 mg večer. Allopurinol 100 mg denně. Furosemid 20 mg každé ráno. Neužívejte ibuprofen.
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Chronická nemoc ledvin
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+Bdělý a orientovaný
+Úroveň vědomí:
+Bdělý a reagující
+Úroveň aktivity:
+Chodí bez pomoci
+
+Pokyny pro propuštění:
+Byli jste přijati kvůli otoku nohou a problémům s ledvinami. Každé ráno se zvažte a vyhýbejte se protizánětlivým lékům proti bolesti. Omezte příjem soli. Dodržujte termín návštěvy u doktora ___ a v případě zmatenosti, dušnosti nebo malého množství moči se vraťte.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí a hyperlipidemií se dostavila s třídenní bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou. Byla odeslána z ___ kliniky poté, co zobrazovací vyšetření naznačilo zánět slepého střeva. Při přijetí uváděla, že nemá zvracení, průjem ani problémy s močením.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Popírá diabetes
+Císařský řez v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s rakovinou prsu
+
+Fyzikální vyšetření:
+Vitalní funkce: T 100,2, TF 88, TK 132/78, dechová frekvence 16, SpO2 98 % při dýchání okolního vzduchu
+Celkový stav: Nepohodlí, ale bdělá, bez známek úzkosti
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice
+Břicho: Bolestivost v pravém dolním kvadrantu, obranné napětí, bez reboundu
+Končetiny: Teplé, bez otoků
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala mírnou leukocytózu s normálními hodnotami elektrolytů a kreatininu. CT vyšetření břicha v ___ prokázalo rozšířené slepé střevo se ztluštělou stěnou, okolní tukovou infiltrací a bez abscesu nebo volného vzduchu. Vzorek byl odeslán na patologické vyšetření, jehož výsledky budou k dispozici při propuštění.
+
+Stručný průběh hospitalizace:
+Byla přijata na chirurgické oddělení, podána intravenózní tekutiny a antibiotika a převezena na operační sál v ___ k nekomplikované laparoskopické apendektomii. Bolest byla kontrolována perorálními léky. Dobře snášela běžnou stravu, měla plyny a byla propuštěna druhý den po hospitalizaci po kontrole týmem v ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně denně
+2. Atorvastatin 20 mg perorálně večer
+3. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti
+4. Docusate 100 mg dvakrát denně během užívání opioidů
+
+Plán propuštění:
+Domů, s zajištěnou péčí od ___
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a komunikativní
+Stav aktivity: Ambulantní, soběstačná
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni pro apendicitidu a slepé střevo vám bylo odstraněno malými řezy. Udržujte řezy čisté a suché. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů než deset kilogramů. V případě horečky, zhoršení bolesti, zvracení nebo zarudnutí v místě řezů volejte ___ nebo se vraťte. Výsledky budou zkontrolovány v ___.
+
+Pokyny pro kontrolu:
+___

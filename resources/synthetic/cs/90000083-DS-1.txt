@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Léky obsahující sulfanilamid
+
+Hlavní potíže:
+Bolest břicha a zvracení
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s třídenní se zhoršující bolestí v pravém horním kvadrantu břicha a zvracením, vyšetřena lékařem, doktorem ___, v zařízení ___ a odeslána na pohotovost.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na nevolnost, bez horečky.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Žlučové kameny
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s onemocněním žlučníku, léčena v zařízení ___.
+
+Fyzikální vyšetření:
+Celkový stav: Nepohodlí, bez horečky.
+Hlava, oči, uši, nos, hrdlo: Mírný ikterus skléry.
+Plíce: Čisté.
+Končetiny: Bez otoků.
+
+Významné výsledky:
+ZOBRAZOVACÍ METODY:
+Ultrazvuk prokázal žlučové kameny a rozšířený společný žlučovod.
+NÁLEZY:
+Mírně zvýšený bilirubin a jaterní enzymy, normální počet bílých krvinek.
+
+Stručný popis hospitalizace:
+Léčena pro pankreatitidu způsobenou žlučovými kameny pomocí infuzí, analgetik a klidového režimu pro střeva. Příznaky se zlepšily, dieta byla postupně rozšiřována a chirurgická ambulance v zařízení ___ zajistí odstranění žlučníku v ambulantním režimu.
+
+Léky při přijetí:
+Lisinopril
+Levotyroxin
+
+Léky při propuštění:
+Pokračovat v užívání lisinoprilu a levotyroxinu jako dříve. Paracetamol podle potřeby na bolest. Ondansetron podle potřeby na nevolnost.
+
+Diagnóza při propuštění:
+Primární:
+Pankreatitida způsobená žlučovými kameny
+Choledocholitiáza
+
+Stav při propuštění:
+Duševní stav: Bdělá a orientovaná.
+Úroveň vědomí: Probuzená.
+Fyzická aktivita: Chodí bez pomoci.
+
+Pokyny při propuštění:
+Byla jste přijata s bolestí způsobenou žlučovými kameny. Jezte jídla s nízkým obsahem tuku, užívejte léky podle pokynů a v případě horečky, žluté kůže nebo silné bolesti se vraťte. V případě dotazů volejte na číslo ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s hypertenzí, který se dostavil do ___ s dvoudenní anamnézou kašle, horečky a mírné dušnosti. Byl vyšetřen doktorem ___ a zjištěno, že má nízkou hladinu kyslíku v krvi i při dýchání běžného vzduchu. Příznaky se objevily po cestě do ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Možná cukrovka, probíhá další vyšetření
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Krk:
+Pružný, bez zvětšených lymfatických uzlin
+SRDCE:
+Pravidelný rytmus, normální srdeční ozvy
+Končetiny:
+Teplé, bez otoků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Mírně zvýšený počet bílých krvinek, normální hladina kreatininu, normální hladina laktátu. Rentgen hrudníku ukázal zkalení v dolním laloku pravého plíce, což odpovídá bakteriální infekci. Byly odebrány vzorky krve na kultivaci, výsledky byly negativní.
+
+Stručný popis hospitalizace:
+Byl léčen intravenózními antibiotiky a kyslíkem, jehož dávka byla postupně snižována během tří dnů. Horečka ustoupila a chuť k jídlu se vrátila. Byl vyšetřen týmem doktora ___ a mohl bezpečně chodit. Hladina glukózy byla mírně zvýšená a bylo domluveno ambulantní vyšetření v ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně
+2. Atorvastatin 20 mg perorálně večer
+3. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu dalších pěti dnů
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Komunitně získaná infekce dolních cest dýchacích
+Sekundárně:
+Hypertenze
+Hyperlipidémie
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+Bdělý a orientovaný, schopen plnit pokyny
+Fyzická aktivita:
+Samostatný, chodí bez pomoci
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni s plicní infekcí a léčeni antibiotiky. Dokončete celou kúru antibiotik, odpočívejte a pijte dostatek tekutin. V případě zhoršení kašle, horečky nebo dušnosti kontaktujte svého lékaře na čísle ___. Dodržte termín kontroly v ___.
+
+Pokyny pro další postup:
+___

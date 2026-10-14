@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___letého muže, který byl odeslán z ___ s dvoudenní anamnézou zhoršující se bolesti v pravé dolní části břicha, nevolností a sníženou chutí k jídlu. Příznaky se objevily ___ po vydatném jídle. Bez horečky nebo zvracení.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidémie
+
+Rodinná anamnéza:
+V rodině se u matky vyskytla pneumonie. Žádná známá onkologická onemocnění.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: nepohodlný, při vědomí
+Plíce: čisté na obou stranách
+Končetiny: teplé, bez otoků
+Neurologický stav: hrubě v pořádku, pohybuje všemi končetinami
+
+Významné výsledky:
+ZOBRAZOVACÍ VYŠETŘENÍ:
+CT vyšetření břicha a pánve s kontrastní látkou.
+NÁLEZ:
+Zánět slepého střeva s mírným zánětem okolní tukové tkáně, bez abscesu nebo volného vzduchu. Malá jaterní cysta, bez změn. Laboratorní hodnoty ukázaly mírně zvýšený počet bílých krvinek, jinak bezvýznamné.
+
+Stručný průběh hospitalizace:
+Byl přijat s akutní apendicitidou a zahájena byla intravenózní antibiotická léčba. Chirurg, Dr. ___, doporučil neoperační léčbu. Bolest ustoupila, dieta byla postupně rozšiřována a pacient toleroval perorální příjem potravy. Hladina glukózy byla během hospitalizace kontrolována pomocí inzulinové dávkovací stupnice, poté byla obnovena domácí léčba ___.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu sedmi dnů.
+2. Metformin 500 mg dvakrát denně.
+3. Lisinopril 10 mg denně.
+Recepty byly vystaveny v lékárně ___.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní apendicitida
+Hypertenze
+
+Stav při propuštění:
+Stabilní, bez horečky, toleruje dietu.
+Úroveň vědomí: při vědomí a reaguje
+
+Pokyny pro propuštění:
+Byl jste léčen na apendicitidu antibiotiky. Dokončete celou kúru antibiotik. V případě horečky, zhoršení bolesti břicha nebo opakovaného zvracení se vraťte. Vyhněte se tento týden těžké fyzické námaze. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

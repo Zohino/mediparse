@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Anamnéza současného onemocnění:
+Muž s postupující bolestí v pravém horním kvadrantu břicha po jídle, trvající dva dny, doprovázenou nevolností. Odeslán lékařem ___ a vyšetřen na pohotovosti ___, kde zobrazovací metody naznačily zánět žlučníku.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na nevolnost. Bez horečky, bolesti na hrudi nebo dušnosti.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie, sledován v ___
+
+Anamnéza předchozích operací:
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodině se vyskytuje diabetes u matky. Žádná anamnéza onemocnění žlučníku.
+
+Fyzikální vyšetření:
+Mírně nepohodlný, citlivý na dotek v pravém horním kvadrantu břicha.
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: pohodlný, bez horečky
+Hlava, oči, uši, nos, hrdlo: bez známek žloutenky
+Krk: pružný
+Plíce: čisté na obou stranách
+Břicho: měkké, mírná citlivost v místě jizvy, jizvy čisté
+PULSY: hmatné a symetrické
+
+Významné výsledky:
+Ultrazvuk v ___ prokázal žlučové kameny, ztluštění stěny žlučníku a tekutinu v okolí žlučníku. Počet bílých krvinek mírně zvýšený při přijetí, při propuštění normální. Jaterní enzymy a bilirubin v normálních mezích.
+
+Stručný průběh hospitalizace:
+Přijat s akutním zánětem žlučníku, zahájena intravenózní antibiotika a infuze. Podstoupil laparoskopickou cholecystektomii s chirurgickým týmem ___, dobře toleroval. Strava postupně rozšiřována, bolest kontrolována perorálními léky, propuštěn domů ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg jednou denně
+2. Atorvastatin 20 mg každou noc
+3. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest
+4. Docusate 100 mg dvakrát denně během užívání opioidů
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní kalcifikovaný zánět žlučníku
+
+Stav při propuštění:
+Stabilizovaný, schopný chůze, toleruje běžnou stravu.
+Duševní stav: bdělý a orientovaný
+
+Pokyny pro propuštění:
+Byl jste léčen na zánět žlučníku chirurgicky. Udržujte jizvy čisté a suché, vyhýbejte se těžké fyzické námaze po dobu několika týdnů. V případě horečky, zhoršení bolesti, zvracení nebo žluté kůže volejte ___ nebo se vraťte na pohotovost ___.
+
+Pokyny pro kontrolu:
+___

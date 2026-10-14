@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Významnější chirurgický zákrok nebo invazivní vyšetření:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila do ___ s potížemi, které trvaly dva dny – občasné bušení srdce a závratě. Telemetrie ukázala nepravidelný rytmus, což vyvolalo obavy z možné fibrilace síní. Pacientka popírala bolesti na hrudi.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Osteoartróza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodině se vyskytuje diabetes mellitus u matky. Nebyl zaznamenán náhlý srdeční záchvat.
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti.
+Plíce: Čisté na obou stranách.
+Břicho: Měkké, bez citlivosti.
+KONČETINY: Teplé, bez otoků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Sodík 139, draslík 4,1, kreatinin 0,8. Troponin dvakrát negativní. TSH v normě. EKG provedené v ___ ukázalo sinusový rytmus s občasnými extrasystolami.
+
+Stručný popis hospitalizace:
+Pacientka byla monitorována pomocí telemetrie, která ukázala krátkodobé nepravidelné údery, ale žádnou trvalou arytmii. Elektrolyty byly doplněny. Kardiolog z ___ doporučil ambulantní monitorování. Příznaky ustoupily a pacientka se před propuštěním v ___ dobře pohybovala.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 50 mcg denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně.
+2. Levotyroxin 50 mcg perorálně každé ráno.
+3. Paracetamol 500 mg podle potřeby proti bolesti.
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Bušení srdce
+Hypertenze
+
+Stav při propuštění:
+Úroveň vědomí: Bdělá a komunikativní.
+Stav aktivity: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Byli jste přijati kvůli bušení srdce. Noste monitor srdečního rytmu podle pokynů a dodržujte termín schůzky s ___. Vraťte se, pokud máte závratě, bolesti na hrudi nebo trvalé zrychlené bušení srdce.
+
+Pokyny pro další postup:
+___

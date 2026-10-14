@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost a bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient je ___ letý muž s dlouhodobou anamnézou kouření, který se dostavil z ___ s třídenní anamnézou zhoršující se dušnosti, kašle a zrychleného srdečního tepu.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Gastroezofageální reflux
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav:
+Mírná dušnost, v klidu se cítí dobře
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Plíce:
+Difúzní sípot
+Břicho:
+Měkké, netendrové
+Neurologické vyšetření:
+Orientovaný, bez ložiskových příznaků
+
+Významné výsledky:
+Při přijetí laboratorní vyšetření odhalila mírnou leukocytózu a normální hodnoty troponinu. Elektrokardiogram provedený v ___ ukázal nepravidelný rytmus.
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku ukázal hyperinflaci plic bez ložiskové konsolidace.
+
+Stručný popis hospitalizace:
+Byl léčen pro exacerbaci CHOPN pomocí inhalátorů, kortikosteroidů a kyslíku, s postupným zlepšováním. Telemetrie prokázala fibrilaci síní s rychlou frekvencí, která byla kontrolována metoprololem a po konzultaci s ___ byla zahájena antikoagulační léčba.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+Inhalátor s albuterolem
+
+Léky při propuštění:
+Metoprolol dvakrát denně, apixaban dvakrát denně, snižování dávky prednisonu, inhalátor s tiotropiem denně, lisinopril, atorvastatin, albuterol podle potřeby.
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Exacerbace chronické obstrukční plicní nemoci
+Fibrilace síní s rychlou ventrikulární odpovědí
+
+Stav při propuštění:
+Stabilní.
+Duševní stav:
+Jasný a srozumitelný
+Fyzická aktivita:
+Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli problémům s dýcháním a nepravidelnému srdečnímu rytmu. Užívajte nové léky podle předpisu, přestaňte kouřit a v případě zhoršení příznaků se vraťte. Prosím, dodržujte termín vaší kontroly u ___.
+
+Pokyny pro další postup:
+___

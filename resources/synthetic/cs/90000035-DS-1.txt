@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Černá stolice a závratě
+
+Významný chirurgický nebo invazivní zákrok:
+Horní endoskopie
+
+Anamnéza současného onemocnění:
+Pacient je muž, který se dostavil s třemi dny trvající černou, dehtovitou stolicí a postupujícími závratěmi. Denně užívá ibuprofen na bolesti zad. Jeho primární lékař, Dr. ___ z ___, ho poslal na pohotovost, kde bylo zjištěno výrazně nízké množství hemoglobinu. Popíral zvracení krve.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Gastroezofageální reflux
+Chronické bolesti v dolní části zad
+
+Rodinná anamnéza:
+Otec s polypy tlustého střeva. V rodině se nevyskytuje žádné zhoubné onemocnění trávicího traktu.
+
+Fyzikální vyšetření:
+Celkový stav: Bledý, v pohodě, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Bledé spojivky, vlhké sliznice
+Břicho: Měkké, mírná bolestivost v epigastriu, bez distenze
+Končetiny: Teplé, bez otoků
+Neurologické: Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Hemoglobin 7,9, pokles z výchozí hodnoty blízko 13. Urea 38, kreatinin 0,9, INR 1,0, počet krevních destiček 240. Laktát v normě. Troponin negativní. Stolice pozitivní na okultní krev.
+ZOBRAZOVACÍ METODY:
+Rentgen hrudníku bez patologických nálezů. Elektrokardiogram ukázal sinusový rytmus bez ischemických změn. Endoskopie provedená v ___ odhalila jeden centimetr velký vřed dvanáctníku s čistým dnem; vzorky byly odeslány do ___ na patologické vyšetření.
+
+Stručný průběh hospitalizace:
+Po přijetí obdržel dvě jednotky koncentrované červené hmoty a intravenózně pantoprazol. Endoskopie prokázala vřed dvanáctníku bez aktivního krvácení. Jeho hemoglobin zůstal po transfuzi stabilní a neměl další černou stolici. Ibuprofen byl trvale vysazen. Sérologické vyšetření na Helicobacter pylori bylo pozitivní, proto byla zahájena čtrnáctidenní léčba antibiotiky. Byl propuštěn k dalšímu sledování u Dr. ___ v ___.
+
+Léky při přijetí:
+Ibuprofen 600 mg třikrát denně. Lisinopril 10 mg denně. Atorvastatin 20 mg večer.
+
+Léky při propuštění:
+Pantoprazol 40 mg dvakrát denně. Amoxicilin 1 gram dvakrát denně po dobu čtrnácti dnů. Klaritromycin 500 mg dvakrát denně po dobu čtrnácti dnů. Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Paracetamol podle potřeby na bolesti zad.
+
+Způsob propuštění:
+Domů s pomocí od ___
+
+Diagnóza při propuštění:
+Krvácení z vředu dvanáctníku
+Akutní anémie v důsledku ztráty krve
+Infekce Helicobacter pylori
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a komunikativní.
+Fyzická aktivita:
+Schopný chůze, soběstačný.
+
+Pokyny pro propuštění:
+
+Byli jste přijati do nemocnice kvůli krvácení z vředu. Užijte všechna předepsaná antibiotika a léky na snížení acidity žaludku. Neužívejte ibuprofen ani jiné léky proti bolesti. V případě černých stolic, zvracení krve nebo mdlob se vraťte do nemocnice. V případě dotazů volejte na číslo ___ nebo navštivte ___.

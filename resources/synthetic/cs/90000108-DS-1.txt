@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest břicha, zvracení
+
+Významný chirurgický nebo invazivní zákrok:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s diabetes mellitus, odeslána z kliniky ___ po třech dnech zvracení a bolesti břicha. Popírá kašel nebo horečku a na zobrazovacích vyšetřeních není zjištěna pneumonie. Vyšetřena na pohotovosti ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Žlučové kameny
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, uši, nos, hrdlo: Vlhké sliznice.
+Krk: Pohyblivý.
+Břicho: Měkké, mírně citlivé.
+Končetiny: Teplé, bez otoků.
+
+Významné výsledky:
+Lipáza mírně zvýšená. Ultrazvuk prokázal žlučové kameny bez dilatace žlučových cest. Ostatní laboratorní výsledky z ___ byly v normě.
+
+Stručný popis hospitalizace:
+Pacientka byla přijata na ___ k podávání tekutin, antiemetik a k odpočinku střev. Bolest ustoupila během dvou dnů a dieta byla postupně rozšiřována. Chirurgové prodiskutovali možnost elektivní cholecystektomie, která bude naplánována na ___ jako ambulantní zákrok.
+
+Léky při přijetí:
+Metformin
+Lisinopril
+
+Léky při propuštění:
+1. Metformin 500 mg dvakrát denně
+2. Lisinopril 10 mg denně
+3. Ondansetron 4 mg každých osm hodin podle potřeby při nevolnosti
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pancreatitida způsobená žlučovými kameny
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a reaguje.
+
+Pokyny pro propuštěného pacienta:
+Byla léčena na pancreatitidu způsobenou žlučovými kameny. Jezte malé porce jídel s nízkým obsahem tuku, užívejte léky a v případě horečky, silné bolesti nebo přetrvávajícího zvracení se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

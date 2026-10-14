@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost a sípání
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___ letého muže s dlouhodobou anamnézou kouření, který se dostavil s třemi dny trvající se zhoršující se dušností, sípáním a produktivním kašlem. Poprvé byl vyšetřen v ___ a poté byl přeložen. Příznaky se zhoršovaly od ___ a reagoval špatně na inhalátory, které užíval doma.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Předchozí užívání tabáku
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav:
+Hubený, mírně dušný, mluví krátkými větami
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Plíce:
+Difúzní expirační sípání, prodloužený výdech
+Břicho:
+Měkké, netendrové
+Neurologické vyšetření:
+Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+ZÁVĚR:
+Hyperinflamované plíce s zploštělými bránicemi. Bez ložiskové konsolidace nebo výpotku.
+NÁLEZY:
+Rentgen hrudníku provedený v ___ ukázal zvýšenou průsvitnost horních zón. Krevní obraz a biochemické vyšetření byly v normě, s výjimkou mírné leukocytózy.
+
+Stručný průběh hospitalizace:
+Byl léčen inhalovanými bronchodilatátory, systémovými kortikosteroidy a krátkodobou antibiotickou léčbou. Byl vyšetřen doktorem ___ v rámci kontroly respirační terapie. Podávání kyslíku bylo postupně snižováno a do ___ chodil po chodbě bez desaturace. Technika používání inhalátoru byla zkontrolována a jeho léčebný režim byl upraven.
+
+Léky při přijetí:
+Tiotropium denně
+Albuterol inhalátor podle potřeby
+Lisinopril denně
+
+Léky při propuštění:
+1. Prednison, dávka se postupně snižuje po dobu pěti dnů
+2. Tiotropium, inhalace jednou denně
+3. Albuterol inhalátor každé čtyři hodiny podle potřeby
+4. Azithromycin, k dokončení léčby
+5. Lisinopril denně
+
+Diagnóza při propuštění:
+Akutní exacerbace chronické obstrukční plicní nemoci
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Fyzická aktivita:
+Chodí, soběstačný
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli zhoršení vašeho plicního onemocnění. Užijte kortikosteroid a antibiotikum podle pokynů a pravidelně používejte inhalátory. Zavolejte na ___, pokud se vám zhorší dýchání, máte horečku nebo potřebujete častěji používat záchranný inhalátor. Prosím, navštivte doktora ___ v ___ co nejdříve po propuštění.
+
+Pokyny pro další léčbu:
+___

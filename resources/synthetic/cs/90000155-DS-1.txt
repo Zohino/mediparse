@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila s kašlem, horečkou a dušností, které trvaly tři dny; rentgen hrudníku prokázal pneumonii. Byla převezena z ___ poté, co byla zahájena léčba v ___. Byla zahájena léčba antibiotiky a kyslíkem. Její stav se postupně zlepšoval.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na kašel; jinak negativní.
+
+Anamnéza předchozích onemocnění:
+Fibrilace síní, sledována doktorem ___
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s cévní mozkovou příhodou
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Krk:
+Pružný
+Břicho:
+Měkké, bez citlivosti
+
+Významné výsledky:
+Rentgen hrudníku prokázal opacitu v dolním laloku pravého plíce. Počet bílých krvinek byl při přijetí mírně zvýšený, při propuštění se zlepšil.
+LABORATORNÍ VÝSLEDKY PŘI PROPUŠTĚNÍ:
+Leukocyty 8,1, hemoglobin 12,4, kreatinin 0,9
+
+Léky při přijetí:
+Metoprolol
+Apixaban
+
+Léky při propuštění:
+Metoprolol 25 mg dvakrát denně
+Apixaban 5 mg dvakrát denně
+Amoxicilin-klavulanát, dokončená náhradní léčba v nemocnici; azithromycin 250 mg denně po dobu dalších dvou dnů
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Fibrilace síní
+
+Stav při propuštění:
+Stabilní, při vědomí a orientovaná
+Úroveň aktivity:
+Samostatná
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli plicní infekci. Užijte všechny léky podle předpisu, odpočívejte, pijte dostatek tekutin a v případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

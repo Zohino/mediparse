@@ -1,0 +1,64 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s několikdenní horečkou, produktivním kašlem a únavou, vyšetřen v ambulanci ___ a odeslán na pohotovost ___ k vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Unavený, ale v pohodě, mluví celými větami.
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice, čistá ústní dutina a hltan.
+
+Významné výsledky:
+Mírná leukocytóza s normálními hodnotami biochemických parametrů při přijetí.
+ZÁVĚR:
+Na rentgenu hrudníku jsou plíce čisté, bez ložiskové konsolidace.
+
+Stručný popis průběhu hospitalizace:
+Horečka ustoupila po podání tekutin. Zobrazovací metody neprokázaly pneumonii a test na viry provedený v ___ byl pozitivní. Příznaky se postupně zlepšovaly a pacient byl propuštěn po konzultaci s týmem ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Pokračovat v užívání lisinoprilu 10 mg denně. Pokračovat v užívání atorvastatinu 20 mg večer. Paracetamol podle potřeby při horečce nebo bolestech.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní virová bronchitida
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byl jste léčen pro virové respirační onemocnění. Odpočívejte, pijte dostatek tekutin a užívejte paracetamol podle potřeby. V případě horečky, dušnosti nebo bolesti na hrudi se vraťte a zavolejte na ___.
+
+Pokyny pro kontrolu:
+___

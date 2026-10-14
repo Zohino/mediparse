@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Nevolnost a nadměrná žízeň
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s diabetem, který se dostavil do ___ s třídenní nevolností, polyurií a celkovou slabostí. Byl vyšetřen svým ošetřujícím lékařem v ___ dne ___ a odeslán na pohotovost. Hladina glukózy byla výrazně zvýšená a přítomny byly ketony. Byla mu podána infuze a inzulin a byl přijat k další léčbě.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Pod dohledem Dr. ___ v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s vysokým krevním tlakem, pod dohledem v ___
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Suché sliznice, mírně zrychlený puls.
+Krk: Pohyblivý, bez rezistencí
+Plíce: Oboustranně čisté
+Břicho: Měkké, mírně citlivé, bez známek peritoneálního dráždění
+Končetiny: Teplé, bez otoků
+
+Významné výsledky:
+Při přijetí výrazně zvýšená hladina glukózy s aniontovou acidózou, nízká hladina bikarbonátu, draslík 5,1. V moči přítomny ketony.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Glukóza 142, sodík 138, draslík 4,0, bikarbonát 24, aniontová mezera 10, kreatinin 0,9.
+
+Stručný průběh hospitalizace:
+Byl léčen intravenózní infuzí a inzulinovou infuzí a acidóza se během jednoho dne zmírnila. Následně byl převeden na subkutánní inzulin s dobrou kontrolou hladiny glukózy. Předpokládá se, že spouštěčem byla vynechaná dávka léků po cestě do ___. Tým z ___ ho poučil o dávkování inzulinu a o výživě. Jeho chuť k jídlu se vrátila a byl propuštěn dne ___ ve stabilizovaném stavu s nutností pravidelných kontrol.
+
+Léky při přijetí:
+Metformin 1000 mg dvakrát denně
+Lisinopril 10 mg denně
+Atorvastatin 20 mg denně
+
+Léky při propuštění:
+1. Inzulin glargin ___ jednotek subkutánně večer
+2. Inzulin lispro podle klouzavé škály s jídlem
+3. Metformin 1000 mg dvakrát denně
+4. Lisinopril 10 mg denně
+5. Atorvastatin 20 mg denně
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetická ketoacidóza
+Diabetes mellitus
+
+Stav při propuštění:
+Stabilní.
+Duševní stav: Bdělý a orientovaný, schopen plnit pokyny.
+Fyzická aktivita: Chodí samostatně.
+
+Pokyny pro propuštění:
+Byli jste přijati s vysokou hladinou cukru v krvi a s kyselinou v krvi. Byla vám podána infuze a inzulin. Měřte si hladinu cukru v krvi před jídlem a před spaním a zapisujte si hodnoty. Užijte si inzulin přesně podle pokynů. Pokud bude hladina cukru v krvi trvale vysoká nebo pokud nebudete schopni udržet tekutiny v těle, zavolejte na kliniku na číslo ___. V případě zvracení, zmatenosti nebo bolesti břicha se vraťte do ___.
+
+Pokyny pro další léčbu:
+___

@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Slabost a snížená chuť k jídlu
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letý muž s několikdenní únavou, žízní a sníženým příjmem potravy, přivezen rodinou.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce
+
+Fyzikální vyšetření:
+Celkový stav:
+Unavený, v pohodě
+Hlava, oči, uši, nos, hrdlo:
+Suché sliznice
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Žádný edém
+Neurologické vyšetření:
+Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+ZÁVĚR:
+Žádné akutní nálezy.
+NÁLEZY:
+Při přijetí výrazně zvýšená hladina glukózy; jinak stabilní elektrolyty.
+
+Stručný popis hospitalizace:
+Byl přijat s vysokou hladinou cukru v krvi v důsledku nově diagnostikované cukrovky a léčen infuzemi a inzulínem. Hladina cukru se zlepšila a před propuštěním ___ byl poučen o péči o sebe.
+
+Léky při přijetí:
+Lisinopril, atorvastatin
+
+Léky při propuštění:
+Metformin dvakrát denně, lisinopril denně, atorvastatin večer a testovací proužky na měření glukózy.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes mellitus, nově diagnostikovaný
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý
+Úroveň aktivity:
+Chodí samostatně
+
+Pokyny pro propuštění:
+Měřte si denně hladinu cukru, užívejte léky podle pokynů a co nejdříve navštivte doktora ___.
+
+Pokyny pro kontrolu:
+___

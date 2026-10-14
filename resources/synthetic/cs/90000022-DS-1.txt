@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava a nevolnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s dlouhodobou cukrovkou a chronickým onemocněním ledvin přišel z ___ s třemi dny trvající únavou, špatnou chutí k jídlu a nevolností, přičemž od ___ zaznamenala jeho ambulantní klinika zvýšení kreatininu a glukózy.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Bdělý, v pohodě, bez akutních potíží.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Krk: Pohyblivý, bez zvětšených uzlin.
+Plíce: Oboustranně čisté.
+Končetiny: Mírný otok kotníků.
+Neurologické: Bez ložiskových příznaků, pohybuje všemi končetinami.
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala zvýšený kreatinin, mírnou acidózu a vysokou hladinu glukózy. Vyšetření moči bez známek infekce. Hladina draslíku v normě. Během hospitalizace se hladina kreatininu postupně snižovala.
+ZOBRAZOVACÍ METODY:
+Ultrazvuk ledvin bez hydronefrózy.
+
+Stručný popis průběhu hospitalizace:
+Léčen intravenózními tekutinami a úpravou dávky inzulínu. Nefrologický tým ___ zkontroloval léky a dočasně vysadil nefrotoxické látky. Hladina kreatininu se do ___ zlepšila na výchozí hodnotu a nevolnost ustoupila. Pacient toleruje stravu a chodí samostatně, proto byl propuštěn domů s doporučením pravidelného sledování v ambulanci.
+
+Léky při propuštění:
+Inzulín glargin večer, dávka upravována podle deníku hladiny glukózy. Amlodipin denně. Atorvastatin večer. Ibuprofen a další protizánětlivé léky proti bolesti užívejte až po kontrole výsledků laboratorních vyšetření.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Cukrovka
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Stabilní.
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, je soběstačný.
+
+Pokyny při propuštění:
+Byli jste přijati s dehydratací a nevolností. Pravidelně pijte tekutiny, denně si měřte hladinu glukózy a vyhýbejte se protizánětlivým lékům. V případě zvracení, zmatenosti nebo sníženého objemu moči volejte ___ a dodržujte termín návštěvy v laboratoři ___.
+
+Pokyny pro kontrolní vyšetření:
+___

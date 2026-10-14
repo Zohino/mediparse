@@ -1,0 +1,85 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou, únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s chronickým onemocněním ledvin, která se dostavila s třemi dny trvajícím otokem nohou a dušností, byla odeslána jejím nefrologem z ___ kvůli zhoršující se únavě.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Anémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce:
+bez horečky, stabilní
+Celkový stav:
+unavená, v pohodě
+Hlava, oči, uši, nos, hrdlo:
+vlhká sliznice
+Plíce:
+čisté
+SRDEČNÍ:
+pravidelné
+KŮŽE:
+teplá, suchá
+Neurologické:
+bez ložiskových příznaků
+
+Významné výsledky:
+ZÁVĚR:
+Mírná plicní vaskulární kongesce, bez ložiskové konsolidace.
+NÁLEZY:
+Nízký hemoglobin, mírně zvýšený draslík při přijetí, zlepšení po léčbě v ___.
+
+Stručný popis hospitalizace:
+Byla přijata s objemovým přetížením a léčena intravenózními diuretiky, s dobrým močením a úbytkem hmotnosti. Draslík byl korigován, léky na krevní tlak upraveny a Dr. ___ zkontroloval její plán před propuštěním.
+
+Léky při přijetí:
+Amlodipin
+Allopurinol
+Tablety železa
+
+Léky při propuštění:
+Furosemid denně ráno
+Amlodipin pokračuje jako dříve
+Allopurinol pokračuje v nižší dávce
+Tablety železa s jídlem
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Objemové přetížení
+Hypertenze
+Anémie
+
+Stav při propuštění:
+Stabilní a zlepšený
+Úroveň vědomí:
+Bdělá a orientovaná
+Stav aktivity:
+Chodí samostatně
+
+Pokyny pro propuštění:
+Každé ráno se zvažte a zavolejte na kliniku ___, pokud se hmotnost zvýší o tři libry. Omezte příjem soli a tekutin, užívejte léky podle pokynů a v případě zhoršení dušnosti se vraťte.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Kašel, horečka, dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s dlouhodobou anamnézou kouření, která se dostavila do ___ s třídenní anamnézou produktivního kašle, horečky a palpitací. Dušnost se zhoršovala od ___. Na pohotovosti byla hypoxická a zjištěna byla fibrilace síní s rychlou komorovou frekvencí.
+
+Anamnéza předchozích onemocnění:
+Chronická obstrukční plicní nemoc
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+HEENT: Suché sliznice, bez kandidózy.
+PLÍCE: Difúzní sípání, chrůpky v dolní části pravé plíce.
+Končetiny: Teplé, bez edému.
+Neurologické: Bdělá, bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 14,2, hemoglobin 12,1, kreatinin 0,9, laktát 1,8.
+ZÁVĚR:
+Konsolidace dolního laloku pravé plíce s hyperinflací plic. Bez výpotku nebo pneumotoraxu. EKG ukázalo nepravidelný úzký komplexový rytmus bez změn ST segmentu.
+
+Stručný průběh hospitalizace:
+Byla léčena azithromycinem, inhalátory a postupným snižováním dávky steroidů. Kontrola frekvence pomocí metoprololu byla dosažena a zahájena antikoagulační léčba. Kyslík byl postupně snižován až do normální hladiny do ___. Byla propuštěna ve stabilizovaném stavu po konzultaci s ___.
+PŘECHODNÁ OTÁZKY:
+Opakované zobrazovací vyšetření hrudníku za šest týdnů. Monitorování srdeční frekvence a krvácení během antikoagulační léčby.
+
+Léky při přijetí:
+Inhalátor s albuterolem, lisinopril, atorvastatin
+
+Léky při propuštění:
+1. Apixaban 5 mg dvakrát denně
+2. Metoprolol succinate 50 mg denně
+3. Postupné snižování dávky prednisonu
+4. Levofloxacin 750 mg denně po dobu pěti dnů
+5. Inhalátor s albuterolem podle potřeby
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Pneumonie
+Exacerbace chronické obstrukční plicní nemoci
+Fibrilace síní s rychlou komorovou frekvencí
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a komunikativní.
+Stav aktivity: Ambulantní, soběstačná.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni s plicní infekcí a nepravidelným srdečním rytmem. Užijte všechny léky podle předpisu, používejte inhalátory a přestaňte kouřit. V případě horečky, bolesti na hrudi, krvácení nebo zhoršení dušnosti se vraťte. Dodržujte termín kontroly u ___.
+
+Pokyny pro další postup:
+___

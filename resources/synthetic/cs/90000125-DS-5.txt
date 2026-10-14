@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž odeslán z ___ s třídenní anamnézou zhoršujícího se kašle a dušnosti.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Kouření
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Vitalní funkce: T 36,7 °C, TK 128/74, TF 82, dechová frekvence 18, SpO2 94 % při dýchání okolním vzduchem
+SRDCE: Pravidelný rytmus, bez šelestů
+BŘICHO: Měkké, netendrovatelné
+KONČETINY: Bez edémů
+
+Významné výsledky:
+Rentgen hrudníku z ___ ukázal hyperinflaci plic bez ložiskové konsolidace.
+ZÁVĚR:
+Hyperinflace, bez akutního procesu.
+
+Stručný popis hospitalizace:
+Byl léčen pro exacerbaci CHOPN pomocí inhalátorů, kortikosteroidů a krátkodobé antibiotické terapie. Jeho diabetes byl kontrolován pomocí inzulinové terapie s dávkováním podle hladiny glukózy během užívání kortikosteroidů a byl konzultován ___. Potřeba kyslíku se vyřešila.
+PŘECHODNÁ OTÁZKY:
+Postupné snižování dávky prednisonu; kontrola hladiny glukózy při kontrolní návštěvě.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Postupné snižování dávky prednisonu, inhalátor s albuterolem, tiotropium denně, lisinopril, atorvastatin.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Exacerbace chronické obstrukční plicní nemoci
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Stav aktivity: Chodí, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste přijati s potížemi s dýcháním. Užívajte léky podle pokynů, přestaňte kouřit a v případě návratu příznaků volejte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie dne ___
+
+Anamnéza současného onemocnění:
+Pacientka je žena, která se dostavila do ___ se stížnostmi na bolest v pravém horním kvadrantu břicha, nevolnost a zvracení po konzumaci tučného jídla, trvajícími dva dny. Byla vyšetřena svým ošetřujícím lékařem v ___ dne ___ a odeslána na pohotovost. Doma jí byla naměřena teplota 38,3 °C. Žloutenka ani průjem se nevyskytly.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Gastroezofageální reflux
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka trpí diabetes mellitus. Otec trpí hypertenzí.
+
+Fyzikální vyšetření:
+Vitalní funkce: bez horečky, hemodynamicky stabilní
+Celkový stav: v pohodě, bez známek úzkosti
+PLÍCE: čisté na obou stranách
+SRDCE: pravidelný rytmus
+BŘICHO: měkké, mírná citlivost v pravém horním kvadrantu
+Končetiny: bez otoků
+KŮŽE: teplá, suchá
+Neurologické vyšetření: bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: WBC 13,2, AST 48, ALT 52, celkový bilirubin 1,1, lipáza v normě.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ: WBC 7,8, jaterní enzymy v normě.
+OBRAZOVÁ VYŠETŘENÍ: Ultrazvuk pravého horního kvadrantu břicha ukazuje žlučové kameny, zesílenou stěnu žlučníku a tekutinu v okolí žlučníku.
+ZÁVĚR: Nález odpovídá akutní cholecystitidě, jak hodnotil ___.
+
+Stručný průběh hospitalizace:
+Pacientka byla přijata na chirurgické oddělení, byla jí nařízeno hladovění, podávány intravenózní tekutiny a antibiotika. Byla převezena na operační sál doktorem ___ a podstoupila nekomplikovanou laparoskopickou cholecystektomii. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a pacientka byla propuštěna dne ___ s doporučením kontroly u ___.
+PŘECHODNÁ OTÁZKA: Zkontrolovat konečné výsledky histologického vyšetření při kontrole v ambulanci.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně denně
+2. Atorvastatin 20 mg perorálně večer
+3. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest
+4. Docusate 100 mg dvakrát denně
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a komunikativní.
+Fyzická aktivita: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl odstraněn laparoskopicky. Udržujte řezné rány čisté a suché. Po dobu čtyř týdnů nezvedejte nic, co váží více než pět kilogramů. V případě horečky, zhoršující se bolesti, zvracení nebo žluté barvy kůže volejte na číslo ___ nebo se vraťte na pohotovost. V případě dotazů se obraťte na číslo ___.
+
+Pokyny pro kontrolní vyšetření:
+
+___

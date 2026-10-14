@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila do ___ s pětidenním kašlem s vykašláváním hlenu, horečkou a dušností. Byla vyšetřena svým ošetřujícím lékařem v ___ a odeslána na pohotovost. Po příjezdu měla horečku a byla hypoxická, vyžadovala podávání kyslíku. Byla zahájena intravenózní léčba antibiotiky a pacientka byla přijata na interní oddělení k další péči.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Možná cukrovka, probíhají potvrzovací testy v ___
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie v ___
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec ___
+
+Fyzikální vyšetření:
+Celkový stav: Bdělá, mírně nemocného vzhledu, bez známek úzkosti.
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice, orofarynx čistý.
+Kůže: Teplá a suchá, bez vyrážky.
+Neurologické vyšetření: Orientovaná, pohybuje všemi končetinami, bez ložiskových neurologických deficitů.
+
+Významné výsledky:
+Při přijetí byly v laboratorních testech zjištěny zvýšené hodnoty bílých krvinek s převahou neutrofilů. Rentgen hrudníku ukázal opacitu v dolním laloku pravého plíce. Krevní kultury odebrané v ___ nevykázaly růst bakterií. Kultivace sputa odeslaná do ___ prokázala normální orální flóru. Hodnota kreatininu zůstala na výchozí úrovni. Opakovaný rentgen v ___ ukázal zlepšení opacity. Saturace kyslíkem se normalizovala při dýchání okolního vzduchu před propuštěním.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Aspirin 81 mg denně
+Multivitamin denně
+
+Léky při propuštění:
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu dalších pěti dnů
+Azithromycin 250 mg denně do dokončení léčby
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Aspirin 81 mg denně
+Paracetamol podle potřeby při horečce
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Zánět plic
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a komunikativní.
+Stav aktivity: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Vážená paní ___, byla jste hospitalizována s infekcí plic. Váš stav se zlepšil díky antibiotikům a kyslíku. Prosím, dokončete předepsanou léčbu antibiotiky, pijte dostatek tekutin a odpočívejte. V případě zhoršení kašle, vysoké horečky, bolesti na hrudi nebo potíží s dýcháním se vraťte do nemocnice.
+
+Pokyny pro kontrolu:
+___

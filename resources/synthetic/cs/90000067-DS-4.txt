@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a otok pravé nohy od ___
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s hypertenzí a dnou se dostavil s třemi dny trvajícím zhoršujícím se zčervenáním, horkem a otokem pravé dolní končetiny po drobném oděru, doprovázeným horečkou a zimnicí. Byl odeslán z ___ kliniky a při příjezdu měl horečku, zrychlený srdeční tep a citlivost na dotek v oblasti holenně.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Dna
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: komfortní, bez akutní tíže
+Hlava, uši, nos, hrdlo: vlhké sliznice
+Krk: pružný
+Břicho: měkké, netendrovatelné
+Končetiny: zčervenání pravé holenně výrazně sníženo, bez horka
+Kůže: bez sekrece
+Neurologické: bdělý, bez ložiskových příznaků, chůze stabilní
+
+Významné výsledky:
+Počet leukocytů 14,2 při přijetí, sníženo na 8,1 při propuštění. Kreatinin 0,9. Krevní kultury odebrané ___ nevykázaly růst. Ultrazvuk pravé nohy prokázal podkožní edém bez abscesu nebo hluboké žilní trombózy. Rentgen hrudníku byl v normě. CRP 86 při přijetí. Laktát byl v normě. Vyšetření moči bez významných nálezů. Draslík 4,1 a sodík 138.
+
+Stručný průběh hospitalizace:
+Léčen pro celulitidu intravenózním cefazolinem; horečka ustoupila během 48 hodin a zčervenání, ohraničené fixou, se postupně zmenšovalo. Ultrazvuk vyloučil absces a krevní sraženinu. Byl vyšetřen ___ ohledně péče o ránu a mobilizován pomocí ___. Převeden na perorální cefalexin a dobře toleroval stravu. Pokračoval v užívání léků na krevní tlak doma. Dna zůstala klidná a nedošlo k žádným exacerbacím. Před propuštěním neměl horečku déle než 24 hodin.
+
+Léky při přijetí:
+Lisinopril 10 mg denně; allopurinol 100 mg denně; amlodipin 5 mg
+
+Léky při propuštění:
+Cefalexin 500 mg perorálně čtyřikrát denně po dobu 5 dnů; lisinopril 10 mg denně; allopurinol 100 mg denně; amlodipin 5 mg denně; paracetamol 650 mg podle potřeby.
+
+Plán propuštění:
+Domů s pomocí od ___
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+Hypertenze
+Dna
+
+Stav při propuštění:
+Duševní stav: jasný a srozumitelný.
+Úroveň vědomí: bdělý a reagující.
+Fyzická aktivita: schopný chůze, soběstačný.
+
+Pokyny pro propuštění:
+
+Byl/a jste léčen/a na kožní infekci nohy. Užijte antibiotika až do konce. Při sezení si nohu podložte, aby byla ve zvýšené poloze. V případě šíření zarudnutí, horečky nebo zhoršení bolesti se vraťte na kontrolu. V případě dotazů nebo obav volejte na číslo ___.
+
+Pokyny pro kontrolní vyšetření:
+___

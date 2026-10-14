@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava a nevolnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena, která se dostavila do ___ s třídenní anamnézou zhoršující se únavy, nevolnosti a sníženého příjmu potravy. Byla vyšetřena svým lékařem v ___ a bylo jí doporučeno, aby se dostavila na pohotovost. Laboratorní výsledky ukázaly mírnou dehydrataci a abnormality elektrolytů. Byla přijata k monitorování a podávání tekutin.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Chronické onemocnění ledvin
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodině se vyskytla pneumonie u její matky. Jiné známé nemoci nejsou.
+
+Fyzikální vyšetření:
+HEENT: Vlhké sliznice.
+Krk: Pohyblivý.
+Plíce: Oboustranně čisté.
+Břicho: Měkké, netendrovatelné.
+Končetiny: Bez edému.
+Neurologické: Bdělá, bez ložiskových příznaků.
+
+Významné výsledky:
+Při přijetí byly laboratorní výsledky významné hodnotou kreatininu na výchozí úrovni, mírně zvýšenou glukózou a draslíkem v normálním rozmezí. Rentgen hrudníku provedený v ___ neukázal žádný akutní proces. Opakované laboratorní testy provedené ___ ukázaly zlepšení hodnot sodíku a stabilní hodnotu kreatininu. Vyšetření moči bylo bez patologických nálezů. EKG ukázalo sinusový rytmus bez akutních změn. Hodnota hemoglobinu byla během hospitalizace stabilní.
+
+Stručný průběh hospitalizace:
+Byla léčena intravenózními tekutinami a její příznaky se během dvou dnů zlepšily. Léky, které užívala doma, byly zpočátku vysazeny a poté znovu nasazeny. Hladina glukózy byla regulována pomocí stupňovitého dávkování a byla vyšetřena nutričním týmem v ___. Hodnota kreatininu zůstala blízko výchozí úrovni. Dobře snášela běžnou stravu a mohla se samostatně pohybovat. Dr. ___ souhlasil s propuštěním čtvrtý den hospitalizace. Bude pokračovat v péči u svého ošetřujícího lékaře.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně.
+Lisinopril 10 mg denně.
+Atorvastatin 20 mg večer.
+
+Léky při propuštění:
+Metformin 500 mg perorálně dvakrát denně.
+Lisinopril 10 mg perorálně denně.
+Atorvastatin 20 mg perorálně večer.
+Paracetamol 500 mg každých šest hodin podle potřeby proti bolesti.
+Ondansetron 4 mg podle potřeby proti nevolnosti.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Dehydratace
+Diabetes mellitus
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Stabilní
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a reagující.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli dehydrataci. Dostali jste tekutiny a váš stav se zlepšil. Užijte si léky podle předpisu a pijte dostatek tekutin. Pokud máte zvracení, horečku nebo závratě, zavolejte svého lékaře na čísle ___. Pokud se příznaky zhorší, vraťte se do ___. Vaše kontrolní vyšetření je naplánováno na ___.
+
+Pokyny pro kontrolní vyšetření:
+___

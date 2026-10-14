@@ -1,0 +1,61 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava a otok nohou
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s otokem, špatnou chutí k jídlu a vysokými hodnotami glukózy doma, odeslána ___.
+
+Anamnéza předchozích onemocnění:
+Fibrilace síní
+Hypertenze
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka měla srdeční onemocnění
+
+Fyzikální vyšetření:
+Celkový stav: Unavená, v pohodě
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+
+Důležité výsledky:
+Zvýšená hladina kreatininu, glukóza 280, opakované měření draslíku v normě.
+ZÁVĚR: Žádné akutní nálezy na hrudi, mírná kardiomegalie.
+
+Stručný popis průběhu hospitalizace:
+Byly upraveny objemy podávaných tekutin, zvýšeny dávky inzulínu a pokračovala se v kontrole srdeční frekvence. Funkce ledvin se stabilizovala a otok se zlepšil před propuštěním do ___.
+
+Léky při přijetí:
+Metoprolol, apixaban, lisinopril
+
+Léky při propuštění:
+Metoprolol, apixaban, bazální inzulín večer, furosemid každé ráno, lisinopril vysazen.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+Fibrilace síní
+
+Stav při propuštění:
+Duševní stav: Bdělá a orientovaná
+Fyzická aktivita: Chodí s oporou
+
+Pokyny pro propuštěného pacienta:
+Denně se važte, omezte příjem soli, dvakrát denně si měřte hladinu cukru v krvi a v případě zhoršení otoku se vraťte.
+
+Pokyny pro kontrolu:
+___

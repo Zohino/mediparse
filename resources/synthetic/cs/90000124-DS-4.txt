@@ -1,0 +1,84 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Slabost a nevolnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s dlouhodobou anamnézou špatně kontrolované hypertenze, která se dostavila do ___ po třech dnech postupující slabosti, nevolnosti a sníženého příjmu potravy. Uváděla, že nemá bolesti na hrudi ani horečku. Její primární lékař v ___ jí doporučil, aby se dostavila na pohotovost poté, co byly výsledky laboratorních testů mimo normu.
+PŘEHLED SYSTÉMŮ:
+Negativní, s výjimkou výše uvedeného.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Chronické onemocnění ledvin ve stadiu 4
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Při příjezdu unavená, ale v pohodě.
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: bdělá, bez známek úzkosti
+Hlava, uši, nos, hrdlo: vlhké sliznice
+Krk: pružný
+Břicho: měkké, netendrovatelné
+Končetiny: bez otoků
+Neurologické: bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: kreatinin 4,1, draslík 5,9, bikarbonát 17, glukóza 212, hemoglobin 9,8.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM: kreatinin 3,2, draslík 4,8, bikarbonát 22, glukóza 148, hemoglobin 9,9.
+ZÁVĚR: Rentgen hrudníku provedený v ___ ukázal čistá plíce a normální velikost srdce. Ultrazvuk ledvin ukázal malé echogenní ledviny bez hydronefrózy.
+
+Stručný průběh hospitalizace:
+___ byla přijata s dehydratací, hyperkalémií a akutním zhoršením základní funkce ledvin. Draslík byl léčen na pohotovosti a hodnoty se normalizovaly. Lisinopril byl vysazen a pacientka dostávala jemné intravenózní tekutiny, přičemž se hodnoty kreatininu postupně zlepšovaly. Nefrologický tým z ___ zhodnotil její případ a souhlasil s plánem. Glukóza byla regulována inzulínem. Dobře snášela běžnou stravu a byla propuštěna domů ___ ve stabilizovaném stavu, s plánovanou kontrolou v ___.
+
+Léky při přijetí:
+Lisinopril 20 mg denně
+Metformin 500 mg dvakrát denně
+Atorvastatin 40 mg večer
+
+Léky při propuštění:
+1. Atorvastatin 40 mg tableta večer.
+2. Inzulín glargin 10 jednotek subkutánně před spaním.
+3. Amlodipin 5 mg tableta denně.
+Přerušit užívání lisinoprilu a metforminu do kontroly v ___.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Hyperkalémie
+Dehydratace
+Sekundárně:
+Diabetes mellitus 2. typu
+Hypertenze
+
+Stav při propuštění:
+Stabilizovaný a zlepšený.
+Duševní stav: bdělý a orientovaný
+Úroveň vědomí: bdělý
+Aktivita: soběstačný, s plynulou chůzí.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli slabosti, dehydrataci a vysoké hladině draslíku. Pravidelně pijte tekutiny a užívejte pouze léky uvedené výše. Každé ráno si změřte hladinu cukru v krvi a zaznamenávejte výsledky. V případě zmatenosti, mdlob, bušení srdce nebo velmi malého množství moči se vraťte do nemocnice. V případě dotazů volejte na číslo ___.
+
+Pokyny pro kontrolní vyšetření:
+
+___

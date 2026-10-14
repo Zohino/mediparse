@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s chronickými zdravotními problémy, odeslán z kliniky ___ se třemi dny trvající se zhoršující se bolestí břicha a nevolností. Popíral horečku, zvracení krve nebo bolest na hrudi. Před transportem byl vyšetřen v ___.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin, stadium 3
+Fibrilace síní
+Hypertenze
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí, léčena v ___
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez akutní tíže.
+Břicho:
+Měkké, mírně citlivé v epigastriu, neztuhlé.
+Končetiny:
+Teplé, bez otoků.
+
+Významné výsledky:
+Kreatinin při přijetí blízko výchozí hodnotě. CT vyšetření v ___ neukázalo žádný akutní proces. Lipáza a jaterní testy v normě. Vyšetření stolice negativní.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Kreatinin stabilní, draslík v normě, hemoglobin stabilní.
+
+Stručný popis hospitalizace:
+Byl přijat k pozorování a léčen intravenózními tekutinami, antiemetiky a dietou s nízkým obsahem dráždivých látek. Bolest ustoupila během dvou dnů a toleroval běžnou stravu. Domácí léčba pokračovala a dávkování léků s ohledem na funkci ledvin bylo před propuštěním projednáno s lékárníkem z ___.
+
+Léky při přijetí:
+Metoprolol, apixaban, amlodipin, allopurinol.
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg denně.
+2. Apixaban 5 mg dvakrát denně.
+3. Amlodipin 5 mg denně.
+4. Allopurinol 100 mg denně.
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Gastritida
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Duševní stav:
+Bdělý a orientovaný, schopen se podílet na rozhodování.
+Úroveň vědomí:
+Plně bdělý a reaguje.
+Stav aktivity:
+Chodí samostatně.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli bolesti břicha, která se zlepšila po podání tekutin a odpočinku. Vyhýbejte se kořeněným jídlům a protizánětlivým lékům. Užívajte léky podle předpisu. V případě horečky, zvracení, černých stolic nebo zhoršení bolesti volejte ___ nebo se vraťte.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé dolní části břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s třídenní bolestí v pravé dolní části břicha, nevolností a mírnou horečkou. Byl převezen z ___ za účelem dalšího vyšetření a konzultace s chirurgem.
+
+Anamnéza předchozích onemocnění:
+Možná cukrovka, kontrolovaná dietou, pod dohledem ___
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Normální
+Břicho: Měkké, mírně citlivé v pravé dolní části
+Končetiny: Bez otoků
+Kůže: Teplá a suchá
+
+Významné výsledky:
+Počet leukocytů 13,2 při přijetí, při propuštění v normě. Kreatinin a jaterní enzymy v normálních mezích. Glukóza mírně zvýšená na 142.
+ZOBRAZOVACÍ METODY:
+CT vyšetření břicha prokázalo zánět a rozšíření slepého střeva bez perforace.
+
+Stručný popis hospitalizace:
+Pacient byl vyšetřen ___ a podstoupil nekomplikovanou laparoskopickou apendektomii. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a funkce střev se obnovila. Neměl horečku a byl stabilizován, takže byl propuštěn prvním dnem po operaci.
+
+Léky při přijetí:
+Multivitamin denně. Lisinopril 10 mg denně.
+
+Léky při propuštění:
+Lisinopril 10 mg denně. Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti. Multivitamin denně. Colace při užívání opioidů.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Duševní stav: Bdělý a orientovaný, schopen plnit pokyny.
+Úroveň vědomí: Plně bdělý a komunikativní.
+Fyzická aktivita: Chodí, soběstačný. Bez zvedání těžkých předmětů.
+
+Pokyny pro propuštění:
+Byli jste přijati s apendicitidou a slepé střevo vám bylo odstraněno. Udržujte řezné rány čisté a suché. Vyhýbejte se zvedání těžkých předmětů. V případě horečky, zhoršení bolesti, zvracení nebo zarudnutí rány volejte ___.
+
+Pokyny pro kontrolu:
+___

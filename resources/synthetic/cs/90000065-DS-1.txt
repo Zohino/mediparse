@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé dolní části břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+Žena s jednodenní anamnézou zhoršující se bolesti v pravé dolní části břicha, nevolností a mírnou horečkou. Odeslána od ___ poté, co zobrazovací vyšetření v ___ ukázalo zánět slepého střeva.
+
+Anamnéza předchozích onemocnění:
+Hypotyreóza
+Migrény
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Hlava, oči, uši, nos, hrdlo: Normální
+Krk: Pohyblivý
+Plíce: Čisté
+Končetiny: Bez otoků
+Kůže: Teplá, suchá
+Neurologické vyšetření: Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Počet bílých krvinek mírně zvýšený při přijetí, při propuštění normální. CT vyšetření ukázalo rozšířené slepé střevo s okolní tukovou infiltrací. Histopatologické vyšetření ze vzorku odeslaného do ___ probíhá.
+
+Stručný popis hospitalizace:
+Pacientka podstoupila laparoskopickou apendektomii bez komplikací. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a funkce střev se obnovila. Byla vyšetřena ___ a propuštěna do domácí péče.
+
+Léky při přijetí:
+Levotyroxin denně
+
+Léky při propuštění:
+Levotyroxin denně. Paracetamol podle potřeby proti bolesti. Ibuprofen s jídlem proti bolesti. Dokusát při užívání jakýchkoli opioidních analgetik.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní apendicitida
+Sekundární:
+Hypotyreóza
+
+Stav při propuštění:
+Dobrý
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a reagující
+Stav aktivity: Ambulantní, soběstačná
+
+Pokyny pro propuštěného pacienta:
+Byl vám odstraněn slepé střevo. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze a v případě horečky, zvracení nebo zhoršení bolesti kontaktujte ___. V případě jakýchkoli dotazů se na nás obraťte.
+
+Pokyny pro kontrolní vyšetření:
+___

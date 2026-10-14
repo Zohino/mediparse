@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___letou ženu, která byla odeslána z ___ s pětidenní kašlem s vykašláváním, horečkou, zimnicí a dušností. Uvádí sníženou chuť k jídlu a únavu. Při přijetí měla nízkou hladinu kyslíku v krvi.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce: T 38,1, TF 98, TK 128/76, SpO2 93 % při dýchání okolním vzduchem
+Celkový stav: Unavená, ale v pohodě
+Hlava, oči, uši, nos, hrdlo: Suché sliznice
+Krk: Pohyblivý
+Neurologické vyšetření: Bdělá, bez ložiskových příznaků
+
+Stručný popis hospitalizace:
+Na rentgenovém snímku hrudníku byla zjištěna pneumonie v dolním laloku pravého plíce a bylo zahájeno intravenózní podávání antibiotik dne ___. Během dvou dnů byla snižována dávka kyslíku a horečka ustoupila. ___ tým souhlasil s přechodem na perorální antibiotika. Pacientka dobře jedla, chodila po chodbě a při propuštění byla stabilizovaná.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 50 mcg denně
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu dalších pěti dnů
+2. Lisinopril 10 mg denně
+3. Levotyroxin 50 mcg denně
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie
+
+Stav při propuštění:
+Stabilizovaný
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a reaguje
+
+Pokyny pro propuštění:
+Byla jste léčena v nemocnici pro plicní infekci. Dokončete všechny antibiotika, pijte dostatek tekutin a odpočívejte. V případě zhoršení dušnosti, vysoké horečky nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___ a co nejdříve navštivte doktora ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a bolest v pravé oblasti boku
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí se dostavila s třemi dny trvající horečkou, bolestí v pravé oblasti boku a dysurií. Byla vyšetřena v ___, kde vyšetření moči odhalilo abnormality a byla odeslána na pohotovost. Teplota byla 38,9 °C a měla zrychlený srdeční tep. Zobrazovací vyšetření neukázala žádnou obstrukci.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Hysterektomie v roce ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Vypadá nemocně, mírně nepohodlně
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Plíce: Čisté na obou stranách
+Břicho: Měkké, citlivost v pravé kostovertebrální oblasti
+Neurologické: Bdělá, bez ložiskových deficitů
+
+Významné výsledky:
+Leukocyty 16,2 s převahou neutrofilů. Kreatinin 1,0. Vyšetření moči s mnoha bílými krvinkami a bakteriemi. Kultivace moči z ___ prokázala přítomnost Escherichia coli, která je citlivá na ceftriaxon. Kultivace krve negativní.
+ZÁVĚR: Žádná hydronefróza ani kámen. Mírné zánětlivé změny v pravé oblasti kolem ledviny, posouzeno ___.
+
+Stručný průběh hospitalizace:
+Byla léčena intravenózním ceftriaxonem a infuzemi pro akutní pyelonefritidu, horečka ustoupila do druhého dne hospitalizace. Kultivace krve z ___ zůstala negativní. Její antihypertenzivum bylo zpočátku vysazeno a poté znovu nasazeno, jakmile se její stav stabilizoval. Byla vyšetřena doktorem ___ a dobře snášela perorální příjem.
+PŘECHODNÁ OTÁZKY:
+- Dokončení celého cyklu perorálních antibiotik
+- Opakované vyšetření kreatininu při návštěvě ambulance ___
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 50 mcg denně
+
+Léky při propuštění:
+1. Ciprofloxacin 500 mg dvakrát denně po dobu dalších sedmi dnů
+2. Lisinopril 10 mg denně
+3. Levotyroxin 50 mcg denně
+4. Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti
+
+Způsob propuštění:
+Domů
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a komunikativní
+Stav aktivity: Chodí, soběstačná
+
+Pokyny pro propuštění:
+Byla léčena antibiotiky pro infekci ledvin. Užívejte všechny léky podle předpisu a pijte dostatek tekutin. V případě horečky, zvracení, zhoršení bolesti zad nebo potíží s močením se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

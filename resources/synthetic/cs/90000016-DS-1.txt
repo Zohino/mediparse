@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Bolest v pravé dolní části břicha.
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie.
+
+Anamnéza současného onemocnění:
+___letý muž s postupující bolestí v pravé dolní části břicha, nevolností a mírnou horečkou, trvající dva dny. Poprvé byl vyšetřen v ___ a poté odeslán na naše pohotovostní oddělení dne ___. Zobrazovací vyšetření ukázala zánět slepého střeva bez perforace. Byl přijat na chirurgické oddělení pod dohledem doktora ___ za účelem chirurgické léčby.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Žádná cukrovka
+Péče poskytována v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů.
+
+Fyzikální vyšetření:
+Vitalní funkce: T 99,1, TF 88, TK 128/76, dechová frekvence 16, SpO2 98 % při dýchání okolním vzduchem.
+Celkový stav: Dobrý, bez známek úzkosti.
+Břicho: Měkké, mírně citlivé v pravé dolní části, jizvy čisté a suché.
+Končetiny: Teplé, bez otoků.
+Kůže: Intaktní.
+Neurologický stav: Bdělý a orientovaný.
+
+Významné výsledky:
+ZOBRAZOVACÍ VYŠETŘENÍ:
+CT břicha a pánve provedeno v ___ dne ___.
+ZÁVĚR:
+Rozšířené, zesílené stěny slepého střeva s okolní tukovou infiltrací a malým množstvím volné tekutiny. Žádný absces, žádná perforace. Laboratorní výsledky při přijetí ukázaly mírně zvýšený počet bílých krvinek, který se do propuštění normalizoval. Jaterní enzymy a kreatinin byly v normě.
+
+Stručný průběh hospitalizace:
+Byl převezen na operační sál dne ___ (první den hospitalizace) a podstoupil nekomplikovanou laparoskopickou apendektomii. Bolest byla kontrolována perorálními léky a dieta byla postupně rozšiřována bez nevolnosti. Telemetrie ukázala sinusový rytmus a žádnou fibrilaci síní. Byl vyšetřen týmem ___ a schválen k propuštění prvním dnem po operaci, chodil samostatně a toleroval běžnou stravu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně.
+2. Atorvastatin 20 mg perorálně každou noc.
+3. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti.
+4. Oxykodon 5 mg perorálně každých šest hodin podle potřeby proti silné bolesti, omezené množství.
+
+Diagnóza při propuštění:
+Primární: Akutní apendicitida
+Sekundární: Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Aktivita: Chodí, soběstačný. Vyvarujte se těžké fyzické námaze.
+
+Pokyny pro propuštění:
+
+Byli jste přijati do nemocnice s akutní apendicitidou a podstoupili jste operaci, při které vám byla odstraněna slezina pomocí malých řezů. Udržujte řezné rány čisté a suché a můžete se sprchovat. Během čtyř týdnů nezvedejte nic, co váží více než 4,5 kilogramu. V případě horečky, zhoršení bolesti břicha, zvracení nebo zarudnutí v oblasti řezných ran se vraťte do nemocnice. V případě jakýchkoli dotazů volejte doktora ___ na telefonním čísle ___.
+
+Pokyny pro kontrolní vyšetření:
+___

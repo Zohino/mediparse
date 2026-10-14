@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+___letý muž s jednodenní se zhoršující bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou, odeslán ___ k chirurgickému vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice.
+Břicho: Měkké, mírně citlivé v místech řezu.
+Končetiny: Teplé, bez otoků.
+
+Významné výsledky:
+VÝSLEDKY LABORATORNÍCH TESTŮ PŘED PROPUŠTĚNÍM: Počet bílých krvinek v normě, elektrolyty v normálním rozmezí, kreatinin stabilní podle ___.
+ZÁVĚR: CT vyšetření prokázalo rozšířený, zánětem postižený appendix s okolní tukovou infiltrací, bez perforace.
+
+Stručný popis hospitalizace:
+U pacienta byla provedena nekomplikovaná laparoskopická apendektomie v ___. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a pacient ji dobře snášel.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Sledujte místa řezů, zda se neobjeví zarudnutí nebo sekrece.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+
+Léky při propuštění:
+Paracetamol podle potřeby proti bolesti. Pokračujte v užívání lisinoprilu a atorvastatinu. Krátkodobě oxykodon pouze při silné bolesti.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Duševní stav: Bdělý a orientovaný.
+Úroveň vědomí: Probuzený a komunikativní.
+Stav aktivity: Chodí, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni s apendicitidou a ta byla odstraněna. Vyhýbejte se těžké fyzické námaze po dobu několika týdnů. V případě horečky, zvracení nebo zhoršení bolesti volejte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

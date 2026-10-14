@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava, žízeň, časté močení
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letý muž s dlouhodobě vysokou hladinou cukru v krvi, který se dostavil s třemi dny trvající únavou, žízní a častým močením. Byl vyšetřen v ___, kde byla zjištěna výrazně zvýšená hladina glukózy a byl odeslán na naše pohotovostní oddělení. Byly zahájeny intravenózní infuze a podávání inzulínu a byl přijat k regulaci a monitorování hladiny glukózy. Popíral bolesti na hrudi, horečku nebo kašel. Příznaky se objevily ___ po vynechání dávek léků.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Krk: Pohyblivý.
+Končetiny: Teplé, bez otoků.
+Kůže: Intaktní, bez vyrážky.
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků.
+
+Významné výsledky:
+Při přijetí výrazně zvýšená hladina glukózy, s mírným aniontovým rozdílem, který se po léčbě snížil. Rentgen hrudníku bez patologických nálezů. Vyšetření moči prokázalo přítomnost glukózy bez známek infekce. Hemoglobin A1c zvýšený, vzorek odebrán ___.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Sodík 139, draslík 4,1, bikarbonát 25, kreatinin 0,9, glukóza 148.
+
+Léky při přijetí:
+Metformin 1000 mg dvakrát denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Metformin 1000 mg perorálně dvakrát denně
+2. Inzulín glargin 20 jednotek před spaním
+3. Lisinopril 10 mg perorálně denně
+4. Atorvastatin 20 mg perorálně večer
+5. Testovací proužky na měření glukózy, měřit hladinu cukru čtyřikrát denně
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Diabetes s hyperglykémií
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste přijati, protože byla vaše hladina cukru v krvi velmi vysoká. Dostali jste infuze a inzulín a vaše hladina se zlepšila. Měřte si hladinu cukru před jídlem a před spaním a veďte si záznamy. Užívajte všechny léky podle předpisu a dodržujte dietu s omezeným příjmem sacharidů. V případě, že hladina cukru zůstane vysoká, nebo se objeví zvracení, zmatenost nebo bolesti břicha, kontaktujte lékaře ___ nebo kliniku na čísle ___ nebo se vraťte do ___.
+
+Pokyny pro kontrolní vyšetření:
+___

@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravé dolní části břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+___letá žena odeslána z ___ s jednodenní anamnézou zhoršující se bolesti v pravé dolní části břicha, nevolností a mírnou horečkou. Zobrazovací vyšetření naznačovalo akutní apendicitidu.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: T 38,0 °C, TF 92, TK 124/76
+Krk: pružný
+SRDEČNÍ: pravidelný rytmus
+BŘICHO: citlivé v pravé dolní části
+KŮŽE: teplá, suchá
+
+Významné výsledky:
+Při přijetí zvýšený počet bílých krvinek, při propuštění se normalizoval.
+ZÁVĚR:
+Rozšířený, zánětlivý appendix bez perforace nebo abscesu.
+
+Stručný průběh hospitalizace:
+Podstoupila nekomplikovanou laparoskopickou apendektomii, vyšetřena týmem ___. Bolest byla pod kontrolou, dieta byla postupně rozšiřována a pacientka začala plynout. Zůstala bez horečky a byla propuštěna druhý den.
+PŘECHODNÁ OTÁZKY:
+Kontrola rány při kontrolní návštěvě.
+
+Léky při přijetí:
+Žádné
+
+Léky při propuštění:
+1. Paracetamol 650 mg perorálně každých šest hodin podle potřeby proti bolesti.
+2. Dokusát 100 mg dvakrát denně během užívání opioidů.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Dobrý
+Duševní stav: Bdělá a orientovaná.
+
+Pokyny pro propuštění:
+Byl vám odstraněn appendix. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze po dobu čtyř týdnů a v případě horečky, zvracení nebo zhoršení bolesti se vraťte. V případě dotazů kontaktujte kliniku ___.
+
+Pokyny pro kontrolní vyšetření:
+___

@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie dne ___
+
+Anamnéza současného onemocnění:
+Muž s diabetes mellitus, který se dostavil do ___ s třídenní anamnézou bolesti v pravém horním kvadrantu břicha, nevolností a zvracením. Byl vyšetřen svým lékařem dne ___ a odeslán do ___ k dalšímu vyšetření. Zobrazovací metody naznačily akutní cholecystitidu a byla konzultována chirurgická intervence.
+
+Anamnéza předchozích onemocnění:
+Hypertenze, hyperlipidemie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav:
+Komfortní, bdělý
+Krk:
+Pružný
+Břicho:
+Měkké, mírná bolestivost v místě řezu, místa punkcí čistá
+Končetiny:
+Bez otoků
+
+Významné výsledky:
+Ultrazvuk odhalil žlučové kameny, zesílenou stěnu žlučníku a tekutinu v okolí žlučníku. Laboratorní vyšetření při přijetí ukázala mírně zvýšený počet bílých krvinek a normální hodnoty jaterních enzymů. CT vyšetření provedené dne ___ potvrdilo zánět žlučníku bez abscesu. Pooperační laboratorní výsledky byly stabilní a bez významných odchylek.
+
+Stručný popis hospitalizace:
+Byl přijat, podávány intravenózní tekutiny a antibiotika, a poté byl Dr. ___ operován laparoskopickou cholecystektomií bez komplikací. Bolest byla kontrolována perorálními léky a strava byla postupně upravována podle tolerance. Hladina glukózy byla regulována pomocí inzulínu. Byl propuštěn dne ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Metformin, lisinopril, atorvastatin
+
+Léky při propuštění:
+1. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti
+2. Metformin 500 mg perorálně dvakrát denně
+3. Lisinopril 10 mg perorálně denně
+4. Atorvastatin 20 mg večer
+
+Plán propuštění:
+Domů, s zajištěnou péčí od ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Sekundární:
+Hypertenze, hyperlipidemie
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí:
+Bdělý a komunikativní
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni kvůli zánětu žlučníku a podstoupili jste operaci k jeho odstranění. Můžete se sprchovat, ale vyhněte se namáčení řezů. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů než deset kilogramů. V případě horečky, zhoršení bolesti, zvracení nebo žloutnutí kůže volejte ___ nebo se vraťte do nemocnice.
+
+Pokyny pro kontrolní vyšetření:
+___

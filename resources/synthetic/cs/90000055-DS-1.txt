@@ -1,0 +1,82 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Žena s dvoudenní se zhoršující bolestí v pravém horním kvadrantu břicha, nevolností a horečkou, odeslána svým lékařem z ___ poté, co ultrazvuk odhalil žlučové kameny. Byla vyšetřena na pohotovosti v ___ a přijata pro akutní cholecystitidu.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Žlučové kameny
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez horečky
+Hlava, oči, uši, nos, hrdlo:
+Bez známek žloutenky
+Plíce:
+Oboustranně čisté
+Břicho:
+Měkké, mírná bolestivost v místě řezu
+Končetiny:
+Bez otoků
+Kůže:
+Místa po vpichu čistá a suchá
+
+Významné výsledky:
+VÝSLEDKY VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Leukocyty 8,1, hemoglobin 12,6, kreatinin 0,8, ALT a AST v normě, bilirubin 0,7 podle výsledků z laboratoře ___.
+NÁLEZY:
+Ultrazvuk odhalil více žlučových kamenů, zesílenou stěnu žlučníku a tekutinu v okolí žlučníku. Během operace nebyl proveden cholangiogram.
+
+Stručný popis průběhu hospitalizace:
+Byla jí podávána intravenózní tekutina, antibiotika a analgetika, poté podstoupila nekomplikovanou laparoskopickou cholecystektomii provedenou doktorem ___ druhý den hospitalizace. Bolest ustoupila, dieta byla postupně rozšiřována a byla propuštěna domů ve stabilizovaném stavu.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Kontrolní výsledky patologického vyšetření v ___.
+
+Léky při přijetí:
+Levotyroxin 75 mcg denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Levotyroxin 75 mcg jednou denně
+2. Lisinopril 10 mg jednou denně
+3. Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti
+4. Dokusát 100 mg dvakrát denně během užívání opioidů
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Dobrý
+Duševní stav:
+Bdělý a orientovaný
+Úroveň vědomí:
+Bdělý a orientovaný
+Fyzická aktivita:
+Chodí samostatně
+
+Pokyny pro propuštěného pacienta:
+Byla léčena pro zánět žlučníku a byl jí odstraněn žlučník. Udržujte místa řezů čistá, vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů a v případě horečky, zvracení, žloutnutí kůže nebo zhoršení bolesti volejte ___ nebo se vraťte do nemocnice. Váš chirurg v ___ vás vyšetří.
+
+Pokyny pro kontrolu:
+___

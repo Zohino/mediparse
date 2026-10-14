@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Otok nohou a únava.
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný.
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s několikden trvajícím zhoršováním otoku nohou a únavou při námaze. Byl vyšetřen v ___ svým ošetřujícím lékařem, který zaznamenal zvýšenou srdeční frekvenci a poslal ho na pohotovost. Pacient popřel bolest na hrudi, horečku nebo synkopu. Příznaky se objevily přibližně ___ dní před přijetím a postupně se zhoršovaly.
+
+Anamnéza předchozích onemocnění:
+Fibrilace síní s antikoagulační terapií, hypertenze, hyperlipidemie, hypotyreóza. Pod dohledem Dr. ___ v rámci kardiologické péče.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí.
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Plíce: Slabé bazální chrůpky.
+Břicho: Měkké, netendrové, neztuhlé.
+Končetiny: Mírný bilaterální otok s prohlubněmi.
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 7,2, hemoglobin 13,1, trombocyty 210, sodík 139, draslík 4,2, kreatinin 1,0, BNP výrazně zvýšené, TSH odesláno do ___.
+Rentgen hrudníku ukázal mírnou vaskulární kongesci, vyhodnotil ___.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Leukocyty 6,8, hemoglobin 12,9, sodík 138, draslík 4,0, kreatinin 1,1.
+
+Stručný průběh hospitalizace:
+Pacient byl přijat a podán intravenózně furosemid, s dobrým diurézním účinkem a postupným zlepšením otoku a dýchání. Srdeční frekvence byla kontrolována pomocí beta-blokátoru, který pacient užívá doma. Echokardiografie provedená v ___ ukázala mírně sníženou systolickou funkci. Kardiolog v ___ případ zhodnotil a souhlasil s navrženým postupem. Pacient byl převeden na perorální diuretika a propuštěn v euvolemickém stavu.
+PŘECHODNÁ OBLASTI:
+- Kontrola základního metabolického panelu v ___ do jednoho týdne.
+- Následná kontrola u kardiologa a opakování echokardiografie.
+
+Léky při propuštění:
+1. Furosemid 40 mg perorálně denně
+2. Metoprolol succinat 50 mg denně
+3. Apixaban 5 mg dvakrát denně
+4. Levotyroxin 75 mcg denně
+5. Atorvastatin 20 mg večer
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní exacerbace srdečního selhání
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli přetížení organismu tekutinami v důsledku srdečního selhání. Každé ráno se zvažte a zavolejte na číslo ___, pokud se vaše váha během jednoho dne zvýší o více než jeden a půl kilogramu. Omezte příjem soli. Užívejte všechny léky podle pokynů. V případě bolesti na hrudi, zhoršení dušnosti nebo mdlob se vraťte do ___.
+
+Pokyny pro kontrolní vyšetření:
+
+___

@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s hypertenzí, která se dostavila po týdnu produktivního kašle, mírných horečkách a narůstající únavě. Poprvé byla vyšetřena v ___ a odeslána ___ kvůli špatnému příjmu potravy a závratím.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na kašel, zimnici a celkovou slabost. Negativní nález na bolest na hrudi.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce: T 37,3 °C, TF 92, TK 138/80, dechová frekvence 18, SpO2 95 % při dýchání okolním vzduchem
+Celkový stav: Unavená, ale v pohodě
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Plicní systém: Chropy na pravé dolní části plic
+Končetiny: Bez otoků
+Kůže: Teplá a suchá
+Neurologické vyšetření: Bdělá, bez ložiskových příznaků
+
+Stručný popis průběhu hospitalizace:
+Pacientka byla převezena z ___ s kašlem a infiltrátem na snímku hrudníku, proto byla empiricky léčena antibiotiky pro podezření na pneumonii. Její známá cukrovka byla léčena inzulinem v závislosti na hladině glukózy, a při přijetí byla hladina glukózy vysoká. Byla vyšetřena týmem ___ a její stav se postupně zlepšoval.
+PŘECHODNÁ OTÁZKY:
+Opakované snímkování hrudníku za šest týdnů. Kontrola hemoglobinu A1c.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Metformin 500 mg dvakrát denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg jednou denně
+2. Metformin 500 mg dvakrát denně
+3. Azithromycin 250 mg denně po dobu dalších tří dnů
+4. Atorvastatin 20 mg večer, opakovaný recept v ___
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární: Hyperglykemie u diabetes mellitus
+Sekundární: Hypertenze, hyperlipidemie
+
+Stav při propuštění:
+Úroveň vědomí: Bdělá a komunikativní
+Stav aktivity: Chodí, soběstačná
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni s kašlem a horečkou. Dokončete užívání antibiotik a pokračujte v užívání obvyklých léků. Denně si kontrolujte hladinu cukru v krvi a odpočívejte podle potřeby. V případě horečky, potíží s dýcháním nebo zhoršení kašle volejte ___ a dodržujte termín návštěvy v ___.
+
+Pokyny pro kontrolu:
+___

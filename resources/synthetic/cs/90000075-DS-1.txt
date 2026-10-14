@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok a zarudnutí pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s třídenním otokem, zarudnutím a zvýšenou teplotou pravé dolní končetiny po drobném poranění. Vyšetřen v ___ a odeslán ze své ambulance ___ na intravenózní antibiotickou léčbu.
+PŘEHLED SYSTÉMŮ:
+Přítomny zimnice. Žádná bolest na hrudi ani kašel.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce: Bez horečky, stabilní
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice
+Plíce: Čisté na obou stranách
+Srdce: Pravidelný rytmus
+Břicho: Měkké, netendrovatelné
+
+Významné výsledky:
+Mírně zvýšený počet bílých krvinek při přijetí, normalizace do propuštění. Ultrazvuk pravé nohy neodhalil žádnou trombózu. Krevní kultury odebrané v ___ nevykazovaly růst bakterií.
+
+Stručný popis hospitalizace:
+Léčen pro celulitidu pravé nohy intravenózními antibiotiky, s výrazným zlepšením zarudnutí a otoku. Hranice postižené oblasti byly stabilní. Přechod na perorální terapii, vyšetřen ___ a propuštěn domů s doporučením kontroly u ___.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+
+Léky při propuštění:
+Pokračovat v užívání lisinoprilu a atorvastatinu jako dříve. Užívat cefalexin perorálně čtyřikrát denně po dobu dalších sedmi dnů. Paracetamol podle potřeby na bolest.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+Sekundární:
+Hypertenze
+Hyperlipidemie
+
+Stav při propuštění:
+Dobrý
+Duševní stav: Bdělý a orientovaný
+Úroveň vědomí: Probuzený
+Stav aktivity: Chodí samostatně
+
+Pokyny pro propuštění:
+Byl jste léčen pro kožní infekci nohy. Při odpočinku nohu zvedejte a dokončete celou kúru antibiotik. V případě horečky, šíření zarudnutí nebo zhoršení bolesti se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

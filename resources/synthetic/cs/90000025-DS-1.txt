@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___letého muže s hypertenzí, který se dostavil s pětidenním kašlem s vykašláváním hlenu, horečkou, zimnicí a bolestí na pravé straně hrudníku. Poprvé byl vyšetřen v urgentní péči na ___ dne ___ a byl mu nasazen krátkodobý cyklus perorálních antibiotik, ale nedošlo ke zlepšení. Začal mít dušnost i při chůzi po pokoji a přišel na pohotovost.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na únavu, špatnou chuť k jídlu a noční pocení. Negativní nález na otoky nohou, zvracení nebo průjem.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v roce ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Teplota 101,2, srdeční frekvence 98, saturace kyslíkem 91 % při dýchání okolního vzduchu.
+Celkový stav: Vypadá unaveně, mluví krátkými větami.
+Končetiny: Teplé, bez otoků.
+Plíce: Slyšitelné chrůpky v dolní části pravé plíce.
+
+Významné výsledky:
+Počet bílých krvinek 14,8 s převahou neutrofilů. Kreatinin 0,9. Laktát 1,1. Kultivace krve nevykázala žádný růst. Rentgen hrudníku provedený na ___ ukázal hustou opacitu v dolním laloku pravé plíce bez výpotku. Opakované zobrazovací vyšetření před propuštěním ukázalo počáteční zlepšení. Hladiny sodíku a draslíku byly během hospitalizace v normě.
+
+Stručný průběh hospitalizace:
+Byl přijat na interní oddělení, vyšetřen doktorem ___ a zahájena intravenózní léčba ceftriaxonem a azithromycinem. Po dobu dvou dnů byla nutná oxygenoterapie, poté byla dávka snížena a pacient dýchal okolní vzduch. Horečka ustoupila třetí den hospitalizace. Byl převeden na perorální antibiotika, dobře snášel běžnou stravu a chodil po chodbě bez desaturace. Péče byla převedena z pohotovostního týmu na ___ a byl připraven k propuštění dne ___.
+PŘECHODNÁ OTÁZKY:
+Opakovaný rentgen hrudníku za šest týdnů k potvrzení zlepšení.
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu dalších pěti dnů.
+2. Lisinopril 10 mg perorálně denně.
+3. Atorvastatin 20 mg perorálně večer.
+4. Paracetamol podle potřeby na horečku.
+Předepisující lékař: ___.
+
+Způsob propuštění:
+Domů s pomocí od ___
+
+Diagnóza při propuštění:
+Zánět plic
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli plicní infekci a léčeni antibiotiky. Dokončete celou kúru léků a pijte dostatek tekutin. Odpočívejte a postupně zvyšujte úroveň fyzické aktivity. V případě horečky, zhoršení kašle, potíží s dýcháním nebo bolesti na hrudi zavolejte na číslo ___ nebo se vraťte na pohotovost. Nezapomeňte na kontrolní návštěvu v ordinaci ___ u doktora ___, kterou zajistil ___.
+
+Pokyny pro další postup:
+___

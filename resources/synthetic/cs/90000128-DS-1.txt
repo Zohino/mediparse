@@ -1,0 +1,60 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a otok pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s třemi dny trvajícím zhoršujícím se zčervenáním, hřejivostí a otokem pravé dolní končetiny po drobném oděru, který utrpěl při zahradničení. Uváděl subjektivní pocity horečky a zimnice. Den předtím byl vyšetřen v ___ a dostal perorální antibiotika, ale nedošlo ke zlepšení. Popíral bolesti na hrudi, dušnost nebo bušení srdce. Byl odeslán na naše pohotovostní oddělení z ___.
+
+Anamnéza předchozích onemocnění:
+Fibrilace síní
+Hypertenze
+Hyperlipidemie
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez horečky, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice, bez žloutenky.
+Břicho: Měkké, netendrovatelné, neztvrdlé.
+Neurologické: Bdělý a orientovaný, síla zachována. Pravá holeně s hřejivou, zarudlou, citlivou kůží.
+
+Významné výsledky:
+Laboratorní výsledky při přijetí: mírně zvýšený počet bílých krvinek s převahou neutrofilů, kreatinin v normě, laktát v normě. Krevní kultury odebrané v ___ nevykazovaly růst po dvou dnech. Ultrazvuk pravé nohy provedený dne ___ vyloučil hlubokou žilní trombózu. Rentgen hrudníku bez akutních abnormalit. EKG ukázalo nepravidelný rytmus, frekvence kontrolovaná, bez změny oproti předchozímu záznamu v ___.
+
+Stručný průběh hospitalizace:
+Byl přijat pro intravenózní podávání antibiotik a okraj zarudnutí byl označen perem. Během prvních dvou dnů se zčervenání ustoupilo a horečka odezněla. Péče o ránu byla probrána s ___ a noha byla udržována ve zvýšené poloze. Kontrola frekvence a antikoagulační léčba byly pokračovány bez změny a jeho rytmus zůstal stabilní na monitoru. Byl převeden na perorální antibiotika, dobře snášel běžnou stravu a chodil samostatně. Plán byl prodiskutován s jeho ošetřujícím lékařem v ___.
+
+Léky při přijetí:
+Metoprolol succinate 50 mg denně. Apixaban 5 mg dvakrát denně. Atorvastatin 20 mg večer. ___ doplněk.
+
+Léky při propuštění:
+Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších sedmi dnů. Metoprolol succinate 50 mg denně. Apixaban 5 mg dvakrát denně. Atorvastatin 20 mg večer. Paracetamol podle potřeby proti bolesti, vystaven v ___.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a komunikativní.
+
+Pokyny pro propuštění:
+
+Byl/a jste léčen/a na kožní infekci nohy. Užívejte všechny dávky antibiotik, i když zarudnutí ustoupí. Při sezení držte nohu ve zvýšené poloze a oblast jemně myjte každý den. V případě šíření zarudnutí, horečky nebo nové bolesti se vraťte na kontrolu. V případě dotazů volejte na číslo ___ nebo kontaktujte ___ mimo pracovní dobu.
+
+Pokyny pro kontrolní vyšetření:
+___

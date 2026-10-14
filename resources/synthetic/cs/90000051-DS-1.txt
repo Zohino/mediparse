@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Slabost a špatný apetit
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s dlouhodobou hypertenzí, odeslán z jeho ordinace v ___ poté, co laboratorní výsledky ukázaly zhoršení kreatininu a glukózy. Uváděl několik dní trvající nevolnost, únavu a otok nohou. Byl odeslán ___ k hospitalizaci.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Anémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Unavený, v klidu se cítí dobře
+Hlava, oči, uši, nos, hrdlo:
+Suché sliznice
+Plicní systém:
+Oboustranně čistý
+Končetiny:
+Mírný oboustranný otok kotníků
+Neurologické vyšetření:
+Bdělý, bez neurologických deficitů
+
+Významné výsledky:
+Kreatinin 3,4, eGFR 18, draslík 5,6, hemoglobin 9,1, glukóza 342, odebráno ___.
+Zobrazovací vyšetření:
+Ultrazvuk ukázal malé echogenní ledviny bez obstrukce.
+
+Stručný popis průběhu hospitalizace:
+Byl mu podáván mírný objem tekutin, inzulin a dieta s nízkým obsahem draslíku, a jeho hladina glukózy a draslíku se zlepšila. Lékařský tým specializující se na ledviny z ___ ho vyšetřil a zajistil ambulantní péči. Laboratorní výsledky se do ___ stabilizovaly a pacient toleroval stravu.
+
+Léky při přijetí:
+Lisinopril, metformin, allopurinol
+
+Léky při propuštění:
+Inzulin glargin večer, inzulin v závislosti na hladině glukózy před jídlem, amlodipin denně. Přerušit užívání lisinoprilu a metforminu, dokud je nevyhodnotí jeho nefrolog.
+
+Diagnóza při propuštění:
+Diabetes mellitus s hyperglykémií
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny při propuštění:
+Byl jste přijat kvůli slabosti a abnormálním výsledkům krevních testů. Měřte si hladinu cukru před jídlem a vyhýbejte se protizánětlivým lékům. V případě zvracení, otoku nebo zmatenosti volejte ___ nebo se v případě zhoršení stavu vraťte do ___.
+
+Pokyny pro další péči:
+___

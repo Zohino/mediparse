@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s dlouhodobými problémy s plícemi a ledvinami se dostavil s třídenní se zhoršující dušností a palpitacemi po převozu z ___. Uváděl sníženou toleranci zátěže a otoky kotníků.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin, stadium 4
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce: T 98,2, TF 96, TK 128/74, dechová frekvence 18, SpO2 94 % při dýchání okolním vzduchem
+Celkový stav: Při vědomí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Normální
+Krk: Pohyblivý
+Plíce: Difúzní sípání
+Břicho: Měkké
+Končetiny: Mírný edém
+Neurologické vyšetření: Bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Kreatinin 2,4, draslík 4,8, zvýšené hodnoty BNP.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ: Kreatinin 2,2, draslík 4,4.
+Rentgenové vyšetření hrudníku provedené v ___ ukázalo hyperinflaci plic bez ložiskové konsolidace.
+
+Stručný popis hospitalizace:
+Byl léčen inhalátory a krátkodobou kortikosteroidní terapií, což vedlo ke zjevnému zlepšení dýchání. Telemetrie prokázala fibrilaci síní s rychlou frekvencí, která byla kontrolována metoprololem, a byla zahájena antikoagulační léčba. Dávkování léků s ohledem na funkci ledvin bylo upraveno. Kardiolog z ___ souhlasil s navrženým postupem. Byl propuštěn ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Inhalátor s albuterolem, furosemid, amlodipin, sevelamer.
+
+Léky při propuštění:
+Metoprolol succinat 50 mg denně, apixaban 2,5 mg dvakrát denně, inhalátor s albuterolem podle potřeby, prednison 40 mg denně po dobu pěti dnů, furosemid 40 mg denně.
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární:
+Akutní exacerbace chronické obstrukční plicní nemoci
+Chronické onemocnění ledvin
+Fibrilace síní s rychlou ventrikulární odpovědí
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Při vědomí a reaguje
+Fyzická aktivita: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli problémům s dýcháním a rychlému srdečnímu rytmu. Užívajte léky podle předpisu. V případě zhoršení dušnosti, bolesti na hrudi nebo mdlob zavolejte na ___ nebo se vraťte. Vezměte si s sebou tento seznam do ___.
+
+Pokyny pro kontrolu:
+___

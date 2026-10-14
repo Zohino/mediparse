@@ -1,0 +1,67 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+___letý muž se dostavil s třídenní bolestí v pravém dolním kvadrantu břicha, nevolností a mírnou horečkou. Zobrazovací vyšetření provedené v ___ prokázalo akutní apendicitidu. Byl přijat na chirurgické oddělení a převezen na operační sál.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Plánovaná apendektomie, prodiskutováno v ___
+Popírá diabetes
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce: T 37,2 °C, TF 84, TK 128/76, dechová frekvence 16, SpO2 98 % při dýchání okolním vzduchem
+Celkový stav: komfortní, bdělý
+Hlava, oči, uši, nos, hrdlo: bez známek žloutenky
+Krk: pružný
+Plíce: čisté na obou stranách
+Břicho: měkké, mírná citlivost v místě řezů
+Končetiny: teplé, bez otoků
+Neurologické vyšetření: bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 14,2, hemoglobin 14,6, trombocyty 238, kreatinin 0,9. CT vyšetření břicha provedené v ___ prokázalo rozšířený, zánětem postižený apendix s okolní tukovou infiltrací.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Paracetamol 650 mg perorálně každých šest hodin podle potřeby na bolest.
+2. Lisinopril 10 mg perorálně jednou denně.
+3. Dokusát 100 mg dvakrát denně během užívání opioidů.
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní apendicitida
+Sekundární:
+Hypertenze
+
+Stav při propuštění:
+Dobrý
+Úroveň vědomí: bdělý a komunikativní
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni pro apendicitidu a podstoupili jste laparoskopickou operaci. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze po dobu dvou týdnů a v případě horečky, zvracení nebo zhoršení bolesti volejte na ___ nebo se vraťte do nemocnice.
+
+Pokyny pro kontrolu:
+___

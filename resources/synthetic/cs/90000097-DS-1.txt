@@ -1,0 +1,78 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s několikdenním produktivním kašlem, horečkami a únavou, odeslán z jeho ordinace v ___ kvůli špatnému příjmu potravy a nízkým hodnotám saturace kyslíkem v domácím prostředí.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Vitalní funkce:
+Bez horečky, stabilní
+Celkový stav:
+Komfortní, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Plíce:
+Mírné chrůpky v dolní části pravé plíce
+SRDCE:
+Pravidelný rytmus
+BŘICHO:
+Měkké, netendrovatelné
+KONČETINY:
+Bez otoků
+
+Významné výsledky:
+Rentgen hrudníku provedený v ___ ukázal opacitu v dolním laloku pravé plíce. Počet bílých krvinek byl při přijetí mírně zvýšený, ale postupně se zlepšil.
+ZÁVĚR:
+Opacita v dolní části pravé plíce
+
+Stručný popis průběhu hospitalizace:
+Byl léčen na možnou pneumonii antibiotiky a infuzemi, jeho stav se postupně zlepšoval a byl odpojen od kyslíku. Hladina glukózy byla pečlivě sledována. Péče byla koordinována s ___ a jeho ordinací v ___.
+
+Léky při přijetí:
+Metformin a lisinopril denně
+
+Léky při propuštění:
+1. Metformin 500 mg dvakrát denně
+2. Lisinopril 10 mg denně
+3. Azithromycin, dokončit zbývající kúru
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes mellitus 2. typu
+
+Stav při propuštění:
+Úroveň vědomí:
+Bdělý a komunikativní
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni s kašlem a horečkou. Dokončete antibiotika, odpočívejte, pijte dostatek tekutin a v případě zhoršení dýchání zavolejte na ___ nebo se vraťte.
+
+Pokyny pro kontrolu:
+___

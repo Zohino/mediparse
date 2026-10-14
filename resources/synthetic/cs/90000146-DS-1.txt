@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Závratě a slabost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___letou ženu, která se dostavila se dvěma dny trvajícími závratěmi a celkovou slabostí. Byla odeslána ___ po špatném příjmu potravy.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Atriální fibrilace
+Hypertenze
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+HEENT: Suché sliznice.
+Krk: Pohyblivý.
+Plíce: Čisté na obou stranách.
+Končetiny: Bez otoků.
+Neurologické vyšetření: Bez ložiskových příznaků.
+
+Významné výsledky:
+Laboratorní testy při přijetí prokázaly mírnou dehydrataci s elevovanou hladinou glukózy. Elektrokardiogram se nezměnil oproti ___. Rentgen hrudníku byl bez patologických nálezů.
+
+Stručný popis hospitalizace:
+Byla jí podána intravenózní tekutina, což vedlo ke zlepšení závratí. Hladina glukózy byla kontrolována inzulínem a byla obnovena její domácí léčba. Pokračovalo se v kontrole srdeční frekvence. Byla vyšetřena ___ a propuštěna domů.
+
+Léky při přijetí:
+Metformin
+Metoprolol
+Apixaban
+
+Léky při propuštění:
+1. Metformin 500 mg dvakrát denně
+2. Metoprolol succinate 50 mg denně
+3. Apixaban 5 mg dvakrát denně
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární:
+Dehydratace
+Diabetes mellitus
+Atriální fibrilace
+
+Stav při propuštění:
+Stabilní.
+Duševní stav: Jasný a srozumitelný.
+
+Pokyny při propuštění:
+Byla jste přijata s závratěmi způsobenými dehydratací. Pijte dostatek tekutin, užívejte léky podle předpisu a v případě návratu příznaků volejte ___.
+
+Pokyny pro kontrolu:
+___

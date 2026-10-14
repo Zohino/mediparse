@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a otok nohou
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s dlouhodobými problémy s ledvinami, odeslán z jeho kliniky v ___ kvůli několikdennímu bušení srdce, únavě a otoku obou nohou. Byl vyšetřen na pohotovosti v ___ a přijat do nemocnice.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, uši, nos, hrdlo: Vlhké sliznice
+Plíce: Čisté na obou stranách
+Břicho: Měkké, netendrovatelné
+Kůže: Teplá, mírný edém
+Neurologie: Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Kreatinin zvýšený nad výchozí hodnotu. Draslík v normě. Troponin dvakrát negativní. EKG ukázalo nepravidelný rytmus bez ischemických změn. Rentgen hrudníku bez akutních nálezů.
+
+Stručný průběh hospitalizace:
+Bylo zjištěno, že má fibrilaci síní s kontrolovanou frekvencí, byla zahájena antikoagulační terapie a léčba ke kontrole frekvence. Jeho chronické onemocnění ledvin bylo sledováno, přičemž hladina kreatininu se po diuretické terapii vrátila blíže k výchozí hodnotě. Bylo domluveno sledování u ___ a u nefrologa v ___.
+
+Léky při přijetí:
+Amlodipin 5 mg denně, allopurinol, atorvastatin
+
+Léky při propuštění:
+1. Apixaban 2,5 mg dvakrát denně
+2. Metoprolol sukcinát 50 mg denně
+3. Amlodipin 5 mg denně
+4. Atorvastatin 20 mg večer
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Fibrilace síní
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Fyzická aktivita: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli nepravidelnému srdečnímu rytmu. Užijte si nové léky na ředění krve přesně podle předpisu, vážte se každé ráno a vyhýbejte se protizánětlivým lékům proti bolesti. Volejte ___, pokud máte krvácení, závratě nebo se vám zhoršuje otok.
+
+Pokyny pro další sledování:
+___

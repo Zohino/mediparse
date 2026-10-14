@@ -4,10 +4,43 @@
     "sampler_config_sha256": "34471443bc341bada1a9e6fbe14f17c41b665cf5f806c1f8d84cb4e0eab4abd5",
     "prompts_sha256": "1c412f29d54d563e9dc82a92dbf23971fcac4173e83831ce87d1ae5cee2f0426",
     "model": "claude-sonnet-5-5",
-    "claude_code_version": "2.1.296",
-    "generated_on": "2026-10-13",
+    "claude_code_version": "2.1.299",
+    "generated_on": "2026-10-14",
     "specification_commit": "3e979e3f6a9521dae52efa814dca5d7e42229c1e"
   },
-  "audit_sha256": "626ad50b8a25e86aff10759ac92994a55597857a79340686b84cb2741d572664",
-  "translation": null
+  "audit_sha256": "048c02d9418cc53493f406058e0d52703d8eb53335f93dcf40c588eab9999991",
+  "translation": {
+    "model": "google/translategemma-27b-it",
+    "revision": "7d10f0b72f89a2d0f268cea30727d8b77c0d25c2",
+    "dtype": "bfloat16",
+    "window": 2048,
+    "decoding": {
+      "temperature": 0.0,
+      "stop_token_ids": [
+        1,
+        106
+      ]
+    },
+    "requests_sha256": "ae97b6d24888f60339ca018f4fd11e62d23dbd4a25b237ee840204208c349f86",
+    "runs": [
+      {
+        "started": "2026-10-14T04:22:11.845276Z",
+        "requests_sha256": "ae97b6d24888f60339ca018f4fd11e62d23dbd4a25b237ee840204208c349f86",
+        "script_sha256": "80adedd695e13df1f80c481ed24588cb501dce180085ea79c8038329d160cdd9",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "cuda": "13.0",
+        "packages": {
+          "vllm": "0.30.0",
+          "torch": "2.13.0",
+          "transformers": "5.18.0"
+        }
+      }
+    ],
+    "marker_mismatches": [
+      "90000005-DS-4",
+      "90000125-DS-4",
+      "90000159-DS-4"
+    ],
+    "masking": "[[n]]"
+  }
 }

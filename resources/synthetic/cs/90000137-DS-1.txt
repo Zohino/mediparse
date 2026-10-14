@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___ letého muže se známou fibrilací síní, který se dostavil po třech dnech s rychlým bušením srdce, zhoršující se dušností a únavou. Byl převezen z ___ k další péči. Doma vynechal několik dávek léků na kontrolu srdeční frekvence.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin
+Hypertenze
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s cévní mozkovou příhodou
+
+Fyzikální vyšetření:
+Celkový stav: Starší muž, unavený, ale v klidu se cítí dobře
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Břicho: Měkké, netendrové
+Končetiny: Mírný otok kotníků
+Neurologické vyšetření: Bdělý, bez ložiskových deficitů
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí dne ___ ukázala mírně zvýšenou hladinu kreatininu. Rentgen hrudníku ukázal hyperinflaci plic bez ložiskové opacity. EKG ukázalo nepravidelný rytmus s rychlou srdeční frekvencí. Troponin byl dvakrát negativní.
+
+Stručný průběh hospitalizace:
+Byla mu podána medikace na kontrolu srdeční frekvence a jeho rytmus se během jednoho dne zpomalil. Inhalované bronchodilatátory ulehčily jeho dýchání. Funkce ledvin zůstala stabilní a dávkování léků bylo pečlivě sledováno. Byl vyšetřen týmem z ___ a chodil samostatně. Byl propuštěn domů dne ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Metoprolol, inhalovaný tiotropium, aspirin
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg denně
+2. Tiotropium inhalátor jednou denně
+3. Apixaban 2,5 mg dvakrát denně
+4. Aspirin vysazen
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Fibrilace síní s rychlou ventrikulární odpovědí
+Chronická obstrukční plicní nemoc
+Chronické onemocnění ledvin
+Sekundárně:
+Hypertenze
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí: Bdělý a komunikativní
+Stav aktivity: Ambulantní, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli rychlému nepravidelnému srdečnímu rytmu. Užívajte své léky každý den podle pokynů a nepřestávejte je užívat. Každé ráno se zvažte. Vraťte se, pokud budete mít bolest na hrudi, mdloby nebo zhoršení dýchání. V případě dotazů volejte na ___.
+
+Pokyny pro kontrolu:
+___

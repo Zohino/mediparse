@@ -1,0 +1,77 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Muž s postupující bolestí v pravém horním kvadrantu břicha, nevolností a horečkou, odeslán doktorem ___ z ___ poté, co ultrazvuk odhalil žlučové kameny.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na nevolnost a zimnici. Žádná bolest na hrudi ani dušnost.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Mírně nepohodlný, citlivý v pravém horním kvadrantu, bez peritoneálních příznaků.
+HLAVA, OČI, UŠI, NOS, KRK:
+Bez ikteru skléry
+Krk:
+Pružný
+Břicho:
+Měkké, citlivé pod pravým žeberním obloukem
+KONČETINY:
+Bez edému
+KŮŽE:
+Teplá a suchá
+NEUROLOGIE:
+Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Ultrazvuk provedený v ___ prokázal cholelitiázu s zesílením stěny žlučníku a přítomností tekutiny v okolí žlučníku. Po přijetí zvýšený počet bílých krvinek.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Počet bílých krvinek se normalizoval, jaterní enzymy v normě.
+
+Stručný popis hospitalizace:
+Pacient byl přijat s akutní cholecystitidou, podán intravenózní antibiotika a doktorem ___ byl operován laparoskopickou cholecystektomií bez komplikací. Bolest byla kontrolována, dieta byla postupně rozšiřována a pacient byl propuštěn druhý den po operaci.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+
+Léky při propuštění:
+Pokračovat v užívání lisinoprilu a atorvastatinu jako dříve. Paracetamol podle potřeby na bolest. Krátkodobé užívání oxykodonu při silné bolesti. Dokusát při užívání opioidů.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Hypertenze
+
+Stav při propuštění:
+Stabilní.
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a reagující.
+Stav aktivity:
+Chodí, soběstačný; několik týdnů se vyvarovat těžké fyzické námaze.
+
+Pokyny pro propuštěného pacienta:
+Byl vám odstraněn žlučník. Udržujte řezné rány čisté a suché a sprchujte se podle pokynů ___. V případě horečky, zhoršení bolesti, zvracení nebo žluté kůže kontaktujte kliniku nebo se vraťte. V případě dotazů se obraťte na ___.
+
+Pokyny pro kontrolu:
+___

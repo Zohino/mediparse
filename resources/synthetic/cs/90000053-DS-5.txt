@@ -1,0 +1,80 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s potížemi trvajícími dva dny – rychlý, nepravidelný srdeční tep a mírné závratě. Byl vyšetřen svým lékařem v ___ a poté přijat. Nebyly hlášeny bolesti na hrudi, synkopa ani horečka.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Zvýšená hladina hemoglobinu A1c při léčbě metforminem
+Obezita
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Plíce:
+Čisté na obou stranách
+Břicho:
+Měkké, netendrové
+Končetiny:
+Bez otoků
+Kůže:
+Teplá, suchá
+Neurologické vyšetření:
+Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+EKG prokázalo nepravidelný rytmus bez P vln, frekvence 128. Dvakrát negativní troponin. Glukóza 214, hemoglobin A1c 8,1. Kreatinin v normě. TSH v normě. Echokardiografie v ___ prokázala zachovanou ejekční frakci.
+
+Stručný popis hospitalizace:
+Frekvence byla kontrolována metoprololem a pacientovi byl zahájen podávání apixabanu k prevenci cévní mozkové příhody. Srdeční frekvence se stabilizovala pod 100. Glukóza byla regulována pomocí inzulínu v závislosti na hladině glukózy, poté byla obnovena domácí léčba metforminem. Kardiolog v ___ zajistil ambulantní kontrolu u ___.
+
+Léky při přijetí:
+Metformin 1000 mg dvakrát denně
+Lisinopril 10 mg denně
+Atorvastatin 40 mg večer
+
+Léky při propuštění:
+Metoprolol succinat 50 mg denně
+Apixaban 5 mg dvakrát denně
+Metformin 1000 mg dvakrát denně
+Lisinopril 10 mg denně
+Atorvastatin 40 mg večer, dodal ___
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Fibrilace síní s rychlou ventrikulární odpovědí
+
+Stav při propuštění:
+Úroveň vědomí:
+Bdělý a komunikativní
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byli jste přijati s rychlým, nepravidelným srdečním tepem. Pravidelně užívejte nové léky na ředění krve a na kontrolu srdeční frekvence. Kontrolujte si hladinu cukru v krvi, jako jste to dělali dříve. V případě bolesti na hrudi, mdlob, krvácení nebo slabosti se vraťte a v případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

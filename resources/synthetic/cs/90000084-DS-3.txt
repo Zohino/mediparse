@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s dlouhodobou hypertenzí, která se dostavila po dvou týdnech zhoršujícího se otoku kotníků a únavy. Byla vyšetřena v ___ svým ošetřujícím lékařem, který ji odeslal na pohotovost. Uváděla, že nemá bolesti na hrudi a od ___ nemá horečku.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec s ischemickou chorobou srdeční.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Krk: Zjištěna dilatace jugulárních žil.
+SRDCE: Pravidelný rytmus, jemné systolické šelesty.
+Končetiny: Otok s prohlubněmi až po kolena na obou stranách, teplé, dobře prokrvené.
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala mírně zvýšené hodnoty BNP a normální hodnoty troponinu. Kreatinin byl stabilní. Rentgen hrudníku provedený v ___ odhalil mírnou vaskulární kongesci bez ložiskové opacity. Echokardiogram prokázal snížený ejekční objem s mírnou mitrální regurgitací. Draslík byl doplněn před propuštěním.
+
+Léky při přijetí:
+Lisinopril denně
+Amlodipin denně
+Aspirin ___
+
+Léky při propuštění:
+1. Furosemid 40 mg perorálně denně
+2. Lisinopril 10 mg perorálně denně
+3. Metoprolol succinat 25 mg denně
+4. Aspirin 81 mg denně
+5. Chlorid draselný ___ podle pokynů
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní srdeční selhání se sníženým ejekčním objemem
+Hypertenze
+Hypokalémie
+
+Stav při propuštění:
+Duševní stav: Bdělá a orientovaná, schopná plnit pokyny.
+Úroveň vědomí: Bdělá a komunikativní.
+Stav aktivity: Chodí samostatně, s jistým krokem.
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli zadržování tekutin způsobenému oslabeným srdcem. Každé ráno se važte a volejte ___, pokud během jednoho dne přiberete více než jeden a půl kilogramu. Omezte příjem soli, užívejte léky podle předpisu a dodržujte termín kontroly v ___.
+
+Pokyny pro další postup:
+___

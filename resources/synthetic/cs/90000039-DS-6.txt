@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest a otok pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ po dvou dnech zhoršující se bolesti a otoku pravého lýtka po dlouhé cestě autem. Popíral bolest na hrudi nebo dušnost. Jeho primární lékař v ___ ho poslal na pohotovost na zobrazovací vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Artroskopie kolene v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s cévní mozkovou příhodou
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Krk: Pohyblivý
+Plíce: Čisté na obou stranách
+Břicho: Měkké, netendrové
+KŮŽE: Pravé lýtko teplé a oteklé
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala zvýšenou hladinu D-dimeru, normální hladinu kreatininu a troponinu. Bylo provedeno ultrazvukové vyšetření nohy v ___.
+ZÁVĚR: Okluzivní trombus v pravé popliteální žíle. Následné zobrazovací vyšetření hrudníku neukázalo žádnou krevní sraženinu v plicích.
+
+Stručný průběh hospitalizace:
+Na pohotovosti byla zahájena infuze heparinu, poté byl pacient stabilizován a převeden na perorální antikoagulant. Bolest se zlepšila po zvednutí nohy a podání paracetamolu. Personál cévní chirurgie v ___ zkontroloval snímky. Pacient chodil bez potřeby kyslíku a byl propuštěn ___.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+1. Apixaban, dávka podle úvodní sady, dvakrát denně po dobu tří měsíců
+2. Lisinopril denně
+3. Atorvastatin večer
+4. Paracetamol podle potřeby proti bolesti
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Hluboká žilní trombóza pravé nohy
+Hypertenze
+Hyperlipidémie
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Ambulantní, soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen na krevní sraženinu v noze. Užijte si léky na ředění krve přesně podle pokynů a nepřeskakujte dávky. Často choďte a zvedejte nohu, když odpočíváte. Vraťte se, pokud máte bolest na hrudi, dušnost nebo krvácení. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

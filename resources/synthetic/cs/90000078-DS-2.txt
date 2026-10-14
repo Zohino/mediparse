@@ -1,0 +1,57 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka s diabetem se dostavila do ___ po dvou dnech zhoršujícího se kašle a dušnosti. Byla vyšetřena svým lékařem v ___ a odeslána na pohotovostní oddělení k vyšetření.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez akutní tíže.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Krk: Pohyblivý.
+Kůže: Teplá, suchá, bez vyrážky.
+Neurologické vyšetření: Bdělá, orientovaná, bez ložiskových příznaků.
+
+Stručný popis hospitalizace:
+Byla léčena pro exacerbaci CHOPN pomocí inhalátorů, kortikosteroidů a antibiotik, a její dýchání se postupně zlepšilo. Podávání kyslíku bylo postupně snižováno a ukončeno čtvrtý den. Byla vyšetřena ___ a propuštěna domů s doporučením kontroly u ___. Její stav zůstal stabilní.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně. Inhalátor s albuterolem.
+
+Léky při propuštění:
+Prednison 40 mg denně po dobu dalších tří dnů. Inhalátor s albuterolem každé čtyři hodiny podle potřeby. Metformin 500 mg dvakrát denně.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Stav při propuštění:
+Dobrý
+Duševní stav: Jasný a srozumitelný.
+Fyzická aktivita: Chodí, soběstačná.
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni kvůli zhoršení plicního onemocnění. Užívajte své léky, odpočívejte a v případě rychlého zhoršení dýchání nebo vzniku horečky se vraťte do ___.
+
+Pokyny pro kontrolu:
+___

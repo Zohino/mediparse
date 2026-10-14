@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha a nevolnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s dvoudenní se zhoršující bolestí v epigastriu, nevolností a špatným příjmem potravy. Byla vyšetřena u svého ošetřujícího lékaře ___, který ji odeslal na pohotovost do ___ k dalšímu vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Možná CHOPN, nikdy nepotvrzeno testy
+Gastroezofageální reflux
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie
+Apendektomie
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec s ischemickou chorobou srdeční.
+
+Fyzikální vyšetření:
+Vitalní funkce:
+Bez horečky, stabilní, dobrá saturace na běžném vzduchu
+Hlava, uši, nos, hrdlo:
+Vlhké sliznice
+Plíce:
+Čisté na obou stranách
+Břicho:
+Měkké, mírná bolestivost v epigastriu, ___ distenze
+Neurologické vyšetření:
+Bdělost, bez ložiskových příznaků
+
+Významné výsledky:
+Mírně zvýšená hladina lipázy při přijetí, jaterní enzymy v normě. Počet bílých krvinek v normě. Zobrazovací vyšetření provedené v ___ neodhalilo žádné akutní nálezy.
+ZÁVĚR:
+Žádná akutní abnormalita
+
+Stručný popis hospitalizace:
+Byla přijata k pozorování a podána intravenózní tekutiny, antiemetika a léky na podporu střevní motility. Její bolest se postupně zlepšovala a dobře snášela běžnou stravu. Gastroenterolog z ___ doporučil ambulantní sledování. Do ___ se cítila dobře a byla připravena jít domů.
+
+Léky při přijetí:
+Lisinopril, atorvastatin, omeprazol denně
+
+Léky při propuštění:
+1. Lisinopril denně, jako dříve.
+2. Atorvastatin večer, jako dříve.
+3. Omeprazol dvakrát denně před jídlem.
+4. Ondansetron podle potřeby při nevolnosti.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní gastritida
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli bolesti břicha a nevolnosti. Užívajte léky podle pokynů, jezte menší porce a vyhýbejte se alkoholu a protizánětlivým lékům. Vraťte se, pokud se bolest zhorší, nevolnost přetrvává nebo si všimnete černé stolice. V případě dotazů volejte ___.
+
+Pokyny pro další sledování:
+___

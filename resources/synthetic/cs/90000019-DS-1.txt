@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila do ___ se stížnostmi na bolest v pravém dolním kvadrantu břicha, nevolnost a horečku, které trvaly dva dny, po vyšetření v ambulanci ___. CT vyšetření prokázalo akutní apendicitidu a pacientka byla urgentně převezena na operační sál. Byla konzultována chirurgická intervence.
+
+Anamnéza předchozích onemocnění:
+Migréna
+Sezónní alergie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: T 38,1, TF 98, TK 122/74, dechová frekvence 16, SpO2 99 % při dýchání okolním vzduchem.
+Celkový stav: nepohodlí, bdělost.
+Břicho: citlivost v pravém dolním kvadrantu, obranné napětí.
+Končetiny: teplé, bez otoků.
+Kůže: suchá, neporušená.
+Neurologické vyšetření: bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: WBC 15,2, Hgb 13,1, Plt 280, Na 138, K 4,0, Cr 0,8. CT břicha: rozšířený, zánětlivě změněný appendix s okolní tukovou infiltrací. Histopatologické vyšetření z ___ probíhá. Pooperační laboratorní výsledky bez významných odchylek.
+
+Stručný průběh hospitalizace:
+Pacientka podstoupila laparoskopickou apendektomii bez komplikací. Pooperační bolest byla kontrolována perorálními analgetiky, dieta byla postupně rozšiřována a pacientka dobře tolerovala běžnou stravu. Byla podávána antibiotika po dobu dvou dnů. Vzorek byl odeslán do ___ a pacientka byla propuštěna domů ve stabilizovaném stavu s plánovanou kontrolou u ___.
+
+Léky při přijetí:
+Perorální antikoncepční pilulka denně. Multivitamin denně.
+
+Léky při propuštění:
+1. Acetaminofen 500 mg, 2 tablety perorálně každých 6 hodin podle potřeby na bolest.
+2. Perorální antikoncepční pilulka denně.
+3. Dokusát 100 mg dvakrát denně během užívání opioidů.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Dobrý
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a komunikativní.
+Stav aktivity: Ambulantní, soběstačný.
+
+Pokyny pro propuštění:
+Udržujte řezné rány čisté a suché. Vyhýbejte se zvedání těžkých předmětů (nad 10 liber) po dobu čtyř týdnů. V případě horečky, zvracení nebo zhoršení bolesti volejte ___ nebo se vraťte na pohotovost. Přineste si s sebou tento souhrn na kontrolu do ___.
+
+Pokyny pro kontrolu:
+___

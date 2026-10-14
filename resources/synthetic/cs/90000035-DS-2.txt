@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a otok pravé nohy
+
+Významný chirurgický zákrok nebo invazivní procedura:
+Označení okrajů zarudnutí u lůžka; žádná operace v ___
+
+Anamnéza současného onemocnění:
+Pacient je muž, který se dostavil do ___ se zhoršujícím se zčervenáním, hřejivostí a otokem pravé dolní končetiny, které trvalo tři dny a vzniklo po drobném oděru při práci na zahradě. Uváděl zimnici, ale neměl bolesti na hrudi ani dušnost. Byl vyšetřen v ___ na pohotovosti, dostal jednu dávku perorálního antibiotika a byl odeslán na pohotovost do ___, protože se zarudnutí stále šířilo. Při příjezdu byla tělesná teplota mírně zvýšená.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Osteoartróza kolen, následně léčena v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodinné anamnéze je matka s chronickým onemocněním ledvin. Nejsou známy žádné kožní problémy ani poruchy srážlivosti krve.
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez horečky, bez známek úzkosti
+Krk:
+Pružný, bez zvětšených lymfatických uzlin
+Končetiny:
+Na pravé holeni je hřejivá, zarudlá, citlivá plocha, bez fluktuace; pulzace zachována
+Neurologické vyšetření:
+Bdělý, orientovaný, síla svalů plná
+
+Významné výsledky:
+Při přijetí laboratorní testy ukázaly mírně zvýšený počet bílých krvinek s převahou neutrofilů a normální hladinu kreatininu. Před podáním antibiotik byly odebrány vzorky krve na kultivaci, které byly negativní.
+ZOBRAZOVACÍ METODY:
+Ultrazvuk pravé nohy provedený v ___ byl proveden, aby se vyloučila trombóza.
+ZÁVĚR:
+Otok měkkých tkání bez hluboké žilní trombózy nebo hnisavé kolekce.
+
+Stručný průběh hospitalizace:
+Byl přijat s celulitidou pravé dolní končetiny a zahájena byla intravenózní antibiotická léčba. Okraje zarudnutí byly označeny a během dvou dnů se postupně zmenšovaly. Bolest byla kontrolována paracetamolem a noha byla udržována ve zvýšené poloze. Ošetřovatelský personál z ___ poskytl instrukce ohledně péče o ránu. Jakmile po dvaceti čtyřech hodinách neměl horečku, byl převeden na perorální antibiotika, dobře je snášel a chodil samostatně. Jeho krevní tlak zůstal stabilní při užívání léků doma. Oddělení pro řízení případů zajistilo návštěvu u ___ po propuštění a on odešel v dobré náladě dne ___.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+Ibuprofen podle potřeby z lékárny ___
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Plně bdělý a orientovaný
+Stav aktivity:
+Chodí bez pomoci
+
+Pokyny pro propuštění:
+Byl jste léčen na kožní infekci nohy. Dokončete celou kúru antibiotik, udržujte nohu ve zvýšené poloze při sezení a denně jemně omyjte postiženou oblast. Vraťte se, pokud se zarudnutí rozšíří, vrátí se horečka nebo se zhorší bolest. V případě dotazů volejte na ___ a vyhýbejte se užívání ibuprofenu až do vaší návštěvy v ___.
+
+Pokyny pro další léčbu:
+___

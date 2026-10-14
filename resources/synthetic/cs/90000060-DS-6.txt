@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a horečka levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí se dostavila s třemi dny trvajícím zhoršujícím se zčervenáním a horkem v levé dolní končetině, horečkou a zimnicí. Byla vyšetřena v ambulanci ___ dne ___ a odeslána na pohotovost pro intravenózní podávání antibiotik.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Plicní: Bez patologických nálezů na obou stranách.
+Končetiny: Zčervenání a horko na levé holeni, zlepšující se.
+Pulzy: Hmatatelné pulzy na noze.
+
+Významné výsledky:
+VÝSLEDKY VYŠETŘENÍ PŘED PROPUŠTĚNÍM: Počet bílých krvinek 8,1, hemoglobin 12,4, počet krevních destiček 245, sodík 139, draslík 4,2, kreatinin 0,8. Laktát v normě.
+ZÁVĚR: Ultrazvuk levé nohy ukázal otok měkkých tkání bez hluboké žilní trombózy. Rentgen hrudníku bez významných nálezů. Kultivace krve po pěti dnech nevykazovala růst.
+
+Stručný popis hospitalizace:
+Léčena pro celulitidu levé nohy intravenózním cefazolinem v ___, s ohraničením zčervenání, které se postupně zmenšovalo. Horečka ustoupila během dvou dnů. Bolest byla kontrolována paracetamolem. Byla převedena na perorální cefalexin a před propuštěním z nemocnice ___ mohla chodit bez potíží.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Atorvastatin 20 mg večer.
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších pěti dnů.
+2. Paracetamol 650 mg každých šest hodin podle potřeby na bolest.
+3. Lisinopril 10 mg denně.
+4. Atorvastatin 20 mg večer.
+
+Plán propuštění:
+Domů s pomocí od ___
+
+Diagnóza při propuštění:
+Celulitida levé dolní končetiny
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byla léčena kožní infekce nohy. Dokončete veškerá antibiotika. Při sezení zvedněte nohu. V případě šíření zčervenání, zhoršení bolesti, horečky nebo zimnice se vraťte na vyšetření a v případě dotazů volejte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

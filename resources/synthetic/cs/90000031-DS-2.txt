@@ -1,0 +1,86 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie provedená v ___
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s dvoudenní bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po konzumaci tučných jídel. Uváděl mírné zvýšení teploty doma. Příznaky se objevily ___ a neodpovídaly na odpočinek. Ultrazvuk na pohotovosti naznačil zánět žlučníku a byla konzultována chirurgická intervence.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Předchozí apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Bez žloutenky, vlhké sliznice
+Břicho:
+Měkké, mírná citlivost, jizvy čisté
+Končetiny:
+Teplé, bez otoků
+Kůže:
+Suchá, neporušená
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Mírně zvýšený počet bílých krvinek a jaterních enzymů.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek se normalizoval, enzymy se zlepšují.
+ZÁVĚR:
+Zesílená stěna žlučníku s kameny, zobrazeno na ___.
+NÁLEZY:
+Žádné rozšíření žlučových cest ani volná tekutina.
+
+Stručný průběh hospitalizace:
+Pacient byl přijat, podávány intravenózní tekutiny a antibiotika, a týmem ___ byl převezen na operační sál, kde byla provedena nekomplikovaná laparoskopická cholecystektomie. Strava byla postupně rozšiřována a bolest byla kontrolována perorálními léky. Před propuštěním z ___ byl pacient schopen chodit a dobře snášel stravu.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+
+Léky při propuštění:
+1. Lisinopril denně, jako dříve.
+2. Atorvastatin večer, jako dříve.
+3. Paracetamol podle potřeby na bolest, omezená denní dávka.
+4. Oxykodon pouze v případě silné bolesti, s opatrností.
+5. Senna při užívání opioidů.
+
+Plán propuštění:
+Domů, s péčí od ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida s cholelitiázou
+Sekundární:
+Hypertenze
+Hyperlipidemie
+
+Stav při propuštění:
+Duševní stav:
+Bdělý a orientovaný
+Úroveň vědomí:
+Probuzený a komunikativní
+Fyzická aktivita:
+Schopný chůze, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl laparoskopicky odstraněn. Udržujte jizvy čisté a suché a sprchujte se jako obvykle. Vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů. V případě horečky, zhoršení bolesti, zvracení nebo žloutnutí kůže kontaktujte svého chirurga na ___.
+
+Pokyny pro kontrolu:
+___

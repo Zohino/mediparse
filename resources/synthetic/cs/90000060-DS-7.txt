@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé části boku a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný; provedeno zobrazovací vyšetření na ___
+
+Anamnéza současného onemocnění:
+Pacientka je žena, která se dostavila s třemi dny trvající se zhoršující se bolestí v pravé části boku, horečkou a dysurií po předchozí léčbě na ___ pro infekci močových cest. Uváděla nevolnost bez zvracení. Její ošetřující lékař, Dr. ___, ji odeslal na pohotovostní oddělení k vyšetření a intravenózní léčbě antibiotiky.
+PŘEHLED SYSTÉMŮ:
+Pozitivní, jak je uvedeno v anamnéze, jinak negativní.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidémie
+Pod dohledem Dr. ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Bdělá, v pohodě, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice.
+Břicho:
+Měkké, mírná citlivost v pravé části boku.
+Končetiny:
+Teplé, bez otoků.
+PULSY:
+2+ radiální.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Leukocyty 8,2, hemoglobin 12,1, trombocyty 245, sodík 139, draslík 4,1, kreatinin 0,8, glukóza 132. Kultivace moči prokázala přítomnost E. coli, citlivé na ceftriaxon.
+NÁLEZY:
+CT vyšetření břicha provedené na ___ prokázalo pravostrannou pyelonefritidu bez obstrukční konkrementu nebo abscesu. Kultivace krve neprokázala růst po pěti dnech.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně, lisinopril 10 mg denně, atorvastatin 20 mg večer.
+
+Léky při propuštění:
+Cefpodoxim 200 mg perorálně dvakrát denně po dobu sedmi dnů. Metformin 500 mg dvakrát denně. Ondansetron 4 mg podle potřeby na nevolnost. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest. Pokračujte v užívání lisinoprilu doma.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní pravostranná pyelonefritida
+Hypertenze
+
+Stav při propuštění:
+Stabilizovaný a zlepšený.
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a reagující.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni pro infekci ledvin a léčeni intravenózními antibiotiky. Dokončete všechny antibiotické tablety. Pijte dostatek tekutin. V případě horečky, zvracení nebo zhoršující se bolesti zad se vraťte. Prosím, dodržujte termín schůzky s ___ a v případě jakýchkoli dotazů volejte na ___.
+
+Pokyny pro kontrolu:
+___

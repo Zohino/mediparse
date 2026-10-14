@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel, horečka, dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka je žena, která se dostavila do ___ s pěti den trvajícím produktivním kašlem, horečkou a zhoršující se dušností. Byla vyšetřena svým ošetřujícím lékařem v ___ dne ___ a byla zahájena perorální antibiotická léčba, která však nepřinesla zlepšení. Na pohotovosti měla horečku a byla hypoxická.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Gastroezofageální reflux
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Vypadá unaveně, mluví v celých větách
+Plíce: Chropy na pravé dolní části, bez sípání
+Končetiny: Teplé, bez otoků
+Kůže: Suchá, bez vyrážky
+
+Významné výsledky:
+Rentgen hrudníku provedený dne ___ ukázal opacitu v pravém dolním laloku. Počet bílých krvinek byl při přijetí zvýšený a při propuštění se normalizoval. Kultivace krve neprokázala růst bakterií.
+ZÁVĚR: Konsolidace v pravém dolním laloku, bez výpotku.
+
+Stručný popis hospitalizace:
+Byla přijata s komunitně získanou pneumonií a léčena intravenózním ceftriaxonem a azithromycinem, poté byla léčba převedena na perorální antibiotika třetí den hospitalizace. Byla postupně odstavována od kyslíku a její kašel se zlepšil. Zůstala bez horečky. Fyzioterapeut ji prohlásil za způsobilou k propuštění domů, přičemž péče byla zajištěna prostřednictvím ___ a naplánována kontrola u ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Omeprazol 20 mg denně
+
+Léky při propuštění:
+1. Amoxicillin-klavulanát 875 mg dvakrát denně po dobu dalších čtyř dnů
+2. Lisinopril 10 mg denně
+3. Atorvastatin 20 mg večer
+4. Omeprazol 20 mg denně
+Recepty zaslány do lékárny ___.
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Primární: Pneumonie
+Sekundární: Hypertenze, hyperlipidemie
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Fyzická aktivita: Chodí, soběstačná
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni s plicní infekcí a léčeni antibiotiky. Dokončete všechny antibiotika, pijte dostatek tekutin a odpočívejte. V případě horečky, zhoršující se dušnosti nebo bolesti na hrudi volejte ___ nebo se vraťte do nemocnice. Prosím, dodržujte termín kontroly u ___.
+
+Pokyny pro kontrolu:
+___

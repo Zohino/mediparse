@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: UROLOGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé oblasti boku
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Zavedení uretrálního stentu
+
+Anamnéza současného onemocnění:
+Pacient odeslán z ___ s dvoudenní anamnézou silné bolesti v pravé oblasti boku a zvracením. Popírá kašel nebo pneumonii. Bolest se doma nedala zmírnit, proto se dostavil do nemocnice.
+PŘEHLED SYSTÉMŮ:
+Bez horečky nebo hematurie.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Ledvinové kameny
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka měla žlučové kameny
+
+Významné výsledky:
+Při přijetí mírně zvýšená hladina kreatininu, před propuštěním se zlepšila.
+LABORATORNÍ VÝSLEDKY PŘED PROPUŠTĚNÍM:
+Hladina kreatininu blízko výchozí hodnoty, normální elektrolyty.
+ZÁVĚR:
+Obstrukční 6mm kámen v pravé ___ oblasti, kde se ureter napojuje na ledvinu, s mírnou hydronefrózou.
+
+Stručný popis hospitalizace:
+Pacient byl přijat na ___, podávány tekutiny a analgetika. Tým zavedl stent dne ___. Nemá anamnézu diabetu a hladina glukózy zůstala v normě. Bolest ustoupila a pacient začal jíst.
+
+Léky při přijetí:
+Lisinopril denně
+Ibuprofen podle potřeby
+
+Léky při propuštění:
+Tamsulosin večer pro usnadnění odchodu kamene
+Oxykodon podle potřeby při silné bolesti
+Lisinopril denně
+Ibuprofen užívat až do kontrolní prohlídky
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Obstrukční kámen v pravém ureteru
+Hydronefróza
+
+Stav při propuštění:
+Stabilní.
+Úroveň vědomí: Bdělý a komunikativní.
+Stav aktivity: Chodí bez pomoci.
+
+Pokyny pro propuštěného pacienta:
+Měli jste ledvinový kámen, který blokoval odtok moči, a byl zaveden stent. Pijte hodně vody a moč filtrujte. V případě horečky, zhoršení bolesti nebo neschopnosti močit volejte ___.
+
+Pokyny pro kontrolní prohlídku:
+___

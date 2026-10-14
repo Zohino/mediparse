@@ -1,0 +1,62 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž, který se dostavil s třemi dny trvajícím zhoršujícím se kašlem, sípáním a dušností při námaze. Byl odeslán z ___ poté, co se snížila jeho saturace kyslíkem.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na produkci sputa. Žádná bolest na hrudi ani horečka.
+
+Anamnéza předchozích onemocnění:
+CHOPN
+Hypertenze
+Bývalý kuřák
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce
+
+Významné výsledky:
+Laboratorní výsledky byly v normě, s výjimkou mírné leukocytózy.
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 11,2, hemoglobin 14,1, kreatinin 0,9
+ZÁVĚR:
+Hyperinflamované plíce, bez ložiskové konsolidace.
+
+Léky při přijetí:
+Tiotropium denně
+Inhalátor s albuterolem podle potřeby
+
+Léky při propuštění:
+1. Tiotropium inhalovaný jednou denně
+2. Inhalátor s albuterolem každé čtyři hodiny podle potřeby
+3. Prednison, dávka postupně snižována po dobu pěti dnů
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární:
+Exacerbace CHOPN
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí:
+Bdělý a komunikativní
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen na zhoršení plicního onemocnění pomocí steroidů a inhalátorů. Dokončete léčbu prednisonem, používejte inhalátory, vyhýbejte se kouři a v případě zhoršení dýchání kontaktujte doktora ___.
+
+Pokyny pro kontrolu:
+___

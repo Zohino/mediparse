@@ -1,0 +1,64 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letý muž s několikdenním postupně se zhoršujícím kašlem a horečkou, vyšetřen v ___ ambulanci, poté odeslán na pohotovost, kde bylo zjištěno, že má hypoxii.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodině se vyskytuje diabetes mellitus u matky.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: pacient je v pohodě, bez známek úzkosti
+Krk: pružný
+PLÍCE: rozptýlené chrůpky v dolní části pravé plíce
+BŘICHO: měkké, netendrovatelné
+
+Významné výsledky:
+Počet leukocytů 13,2 při přijetí, zlepšilo se na 8,1. Zobrazovací vyšetření hrudníku ukázalo konsolidaci v dolním laloku pravé plíce. Kultivace krve bez růstu. Kreatinin stabilní na výchozí hodnotě. Elektrolyty v normě během hospitalizace.
+
+Stručný průběh hospitalizace:
+Léčen intravenózními antibiotiky pro infekci dolních cest dýchacích, poté převeden na perorální terapii. Podávání kyslíku sníženo do třetího dne na úroveň okolního vzduchu. Pacient sledován týmem ___ a vyšetřen ___ z hlediska výživy. Propuštěn ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně, aspirin 81 mg.
+
+Léky při propuštění:
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dnů. Lisinopril 10 mg denně. Aspirin 81 mg denně.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Infekce dolních cest dýchacích
+Hypoxie
+
+Stav při propuštění:
+Duševní stav: bdělý a orientovaný
+Úroveň vědomí: bdělý a reagující
+Stav aktivity: pohyblivý, soběstačný
+
+Pokyny pro propuštění:
+Užívejte všechny antibiotika podle předpisu. Pijte dostatek tekutin a odpočívejte. V případě horečky, zhoršení dušnosti nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

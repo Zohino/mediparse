@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost a sípání
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient přijat z ___ s třídenní anamnézou zhoršující se dušnosti, produktivního kašle a sípání. Dříve byl vyšetřen v ___ a podán mu byl inhalační lék, který však nepřinesl úlevu. Popírá horečku, bolest na hrudi nebo otok nohou. Při příjezdu byla zjištěna nízká saturace kyslíkem.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Předchozí hospitalizace v ___ pro podobné příznaky
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Difúzní expirační sípání, mírná tachypnoe, v klidu bez známek dušnosti.
+HEENT: Vlhké sliznice, bez ikteru.
+Krk: Pohyblivý, bez známek zvýšeného žilního tlaku v oblasti krční žíly.
+Končetiny: Teplé, bez edému.
+Neurologické vyšetření: Pacient je při vědomí, bez ložiskových příznaků.
+
+Významné výsledky:
+Rentgen hrudníku ukázal hyperinflaci bez ložiskové konsolidace. Laboratorní výsledky z ___ ukazují glukózu 240, normální hladinu kreatininu a draslíku. Troponin byl dvakrát negativní. EKG ukázalo sinusový rytmus bez akutních změn. Kultivace krve neprokázaly růst bakterií.
+
+Stručný popis hospitalizace:
+Byla zahájena pravidelná podávání inhalačních léků, perorálních steroidů a doplňkového kyslíku, který byl do třetího dne postupně snižován, dokud pacient nedýchal pouze okolní vzduch. Během užívání steroidů byla hladina glukózy vysoká, proto byla podávána inzulín v dávkách upravovaných podle hladiny glukózy. Léky na krevní tlak byly pokračovány. Pacient byl vyšetřen fyzioterapeutem na ___ a mohl bezpečně chodit. Bylo domluveno kontrolní vyšetření u ___.
+
+Léky při přijetí:
+Lisinopril denně
+Atorvastatin večer
+Inhalační lék Albuterol podle potřeby
+
+Léky při propuštění:
+1. Prednison 40 mg denně po dobu dalších čtyř dnů.
+2. Inhalační lék Albuterol každé čtyři hodiny podle potřeby.
+3. Lisinopril denně.
+4. Atorvastatin večer.
+5. Inhalační lék Tiotropium denně.
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Exacerbace chronické obstrukční plicní nemoci
+Sekundárně:
+Hypertenze
+Hyperlipidemie
+
+Stav při propuštění:
+Stabilizovaný a zlepšený.
+Duševní stav: Jasný a srozumitelný.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny pro propuštěného pacienta:
+Byli jste přijati s potížemi s dýcháním a léčeni inhalačními léky, steroidy a kyslíkem. Užívajte všechny léky podle předpisu a kontrolujte si hladinu cukru v krvi denně, když užíváte steroidy. V případě zhoršení dušnosti, horečky nebo bolesti na hrudi se vraťte. V případě jakýchkoli dotazů volejte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

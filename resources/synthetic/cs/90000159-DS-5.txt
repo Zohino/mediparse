@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravé horní části břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letý muž s diabetem se dostavil s třídenní bolestí v pravé horní části břicha a nevolností. Byl vyšetřen v ___ ambulanci a odeslán na pohotovost kvůli zobrazovacím vyšetřením a posouzení možného onemocnění žlučníku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Nepohodlný, bdělý
+Hlava, oči, uši, nos, hrdlo: Bez ikteru skléry
+Krk: Pohyblivý
+Břicho: Bolestivá pravá horní část, měkké
+Kůže: Teplá, suchá
+
+Významné výsledky:
+Laboratorní vyšetření prokázala mírnou leukocytózu s normálními hodnotami jaterních enzymů a bilirubinu.
+ZÁVĚR:
+Zesílení stěny žlučníku s mnoha žlučovými kameny a malým množstvím tekutiny v okolí žlučníku, což odpovídá akutní cholecystitidě.
+
+Stručný popis hospitalizace:
+Byl přijat na chirurgické oddělení v ___ a zahájena byla léčba antibiotiky. Dne ___ podstoupil nekomplikovanou laparoskopickou cholecystektomii. Bolest byla pod kontrolou, dieta byla postupně rozšiřována a byl propuštěn domů s naplánovanou kontrolou v ___.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+Pokračujte v užívání metforminu a lisinoprilu jako dříve. Paracetamol podle potřeby proti bolesti. Oxykodon pouze v případě silné bolesti a v malém množství. Dokusát při užívání opioidních léků.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní cholecystitida s cholelitiázou
+Sekundární:
+Diabetes mellitus
+Hypertenze
+
+Stav při propuštění:
+Dobrý
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Chodí, soběstačný
+
+Pokyny pro propuštěného pacienta:
+Byl jste léčen pro zánět žlučníku a byl vám odstraněn žlučník. Udržujte rány čisté a suché. Vyhýbejte se těžké fyzické námaze. V případě horečky, zhoršení bolesti, zvracení nebo žluté kůže volejte ___.
+
+Pokyny pro kontrolu:
+___

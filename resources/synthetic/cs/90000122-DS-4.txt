@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha a nevolnost
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie provedená doktorem ___
+
+Anamnéza současného onemocnění:
+___ letá žena s žlučovými kameny, která se dostavila do ___ s dvoudenní bolestí v pravém horním kvadrantu břicha, která vyzařuje do zad, doprovázenou nevolností, zvracením a subjektivními příznaky horečky. Bolest začala po konzumaci tučného jídla a neustoupila po užití antacid. Pacientka popírá žloutenku, tmavou moč nebo bledou stolici. Příznaky se objevily ___. Byla převezena na chirurgické vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Žlučové kameny
+Předchozí císařský řez
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka měla onemocnění žlučníku ve věku ___
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlí, bez horečky, v klidu bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Bez žloutenky, vlhké sliznice
+Břicho:
+Měkké, citlivé v pravém horním kvadrantu, pozitivní Murphyho příznak, bez odporu
+Kůže:
+Teplá, suchá, bez vyrážky
+Neurologické vyšetření:
+Bdělost, orientace, bez ložiskových příznaků
+
+Významné výsledky:
+Počet bílých krvinek 14,2 při přijetí, normalizace na 8,1 při propuštění. Mírně zvýšené jaterní enzymy, normální hladina bilirubinu, normální hladina lipázy. Ultrazvukové vyšetření provedené ___ ukázalo mnoho žlučových kamenů, ztluštění stěny žlučníku, tekutinu v okolí žlučníku a pozitivní Murphyho příznak při ultrazvukovém vyšetření. Průměr žlučovodu byl v normě. Patologické vyšetření prokázalo akutní cholecystitidu s cholelitiázou.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti
+2. Oxykodon 5 mg každé čtyři hodiny podle potřeby proti silné bolesti
+3. Dokusát 100 mg dvakrát denně během užívání opioidů
+4. Lisinopril 10 mg denně
+5. Atorvastatin 20 mg večer
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a komunikativní
+Fyzická aktivita:
+Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byli jste přijati s zánětem žlučníku a podstoupili jste laparoskopickou operaci k jeho odstranění. Můžete se sprchovat a nechat na incize působit mýdlo, ale nekoupejte se ve vaně. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů než deset kilogramů. V případě horečky, zhoršení bolesti břicha, žloutenky, zvracení nebo zarudnutí v místě incize volejte doktora ___ nebo se vraťte do ___.
+
+Pokyny pro kontrolu:
+___

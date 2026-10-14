@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s několikdenní se zhoršující bolestí břicha, nevolností a sníženou chutí k jídlu. Byl vyšetřen na pohotovosti a přijat k pozorování po převozu z ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Možná cukrovka, dosud neprošetřena
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: bez žloutenky, vlhké sliznice
+Břicho: měkké, mírně citlivé, neztuhlé
+Končetiny: bez otoků
+Pulz: hmatný distálně
+
+Významné výsledky:
+Laboratorní výsledky: mírná leukocytóza a zvýšená hladina lipázy. Mírně zvýšená hladina glukózy při přijetí. CT vyšetření břicha prokázalo mírný zánět slinivky břišní bez hromadění tekutiny. Jaterní enzymy a funkce ledvin byly v normě. Opakovaná laboratorní vyšetření vykazovala zlepšení.
+
+Stručný popis hospitalizace:
+Léčen pro mírnou pankreatitidu s klidovým režimem pro střeva, intravenózní tekutiny a analgetika. Strava byla postupně rozšiřována a pacient ji dobře snášel. Pacient byl sledován týmem na ___ a vyšetřen ___ ohledně výživy. Hladina glukózy byla monitorována. Bolest ustoupila a pacient byl propuštěn ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně. Aspirin 81 mg denně.
+
+Léky při propuštění:
+Lisinopril 10 mg denně. Aspirin 81 mg denně. Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti.
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Akutní pankreatitida
+Sekundární:
+Hypertenze
+
+Stav při propuštění:
+Stabilní
+Duševní stav: bdělý a orientovaný
+Úroveň vědomí: bdělý
+
+Pokyny pro propuštění:
+V případě silné bolesti, přetrvávajících zvracení nebo horečky se vraťte. Jezte malé porce jídel s nízkým obsahem tuku a vyhýbejte se alkoholu. Odpočívejte. Dodržujte pokyny a navštivte ___, jak bylo dohodnuto.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Dušnost a otok nohou.
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný.
+
+Anamnéza současného onemocnění:
+Pacientka je žena s dlouhodobou hypertenzí, která se dostavila do ___ se třemi dny trvající se zhoršující se dušností při námaze, otokem nohou a suchým kašlem. Byla vyšetřena svým ošetřujícím lékařem, doktorem ___, který zaznamenal nárůst hmotnosti a odeslal ji na pohotovost do ___. Při příjezdu neměla horečku, měla zvýšený krevní tlak a mírnou hypoxii při dýchání okolního vzduchu. Zobrazovací vyšetření hrudníku ukázalo plicní vaskulární kongesci. Byla zahájena intravenózní diuretika a přijata do ___ k léčbě srdečního selhání.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Hypotyreóza
+Osteoartróza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec s ischemickou chorobou srdeční.
+
+Fyzikální vyšetření:
+Celkový stav: Bdělá, v pohodě, mluví celými větami.
+Krk: Zvýšený žilní tlak v oblasti krčních žil na ___ cm.
+SRDCE: Pravidelný rytmus, přítomný S3, jemný systolický šelest.
+Končetiny: Otoky s prohlubněmi až po kolena oboustranně.
+KŮŽE: Teplá a suchá, bez vyrážek.
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala zvýšené hodnoty BNP, negativní troponin a bazální hodnoty kreatininu. Hodnoty sodíku a draslíku byly v normě a hemoglobin stabilní. EKG ukázalo sinusový rytmus s hypertrofií levé komory a bez akutních změn ST segmentu. Echokardiografické vyšetření provedené v ___ dne ___ ukázalo ejekční frakci 35 procent, středně závažnou mitrální regurgitaci a mírné zvětšení levé síně. Laboratorní vyšetření v den propuštění ukázala stabilní funkci ledvin a normální elektrolyty.
+ZÁVĚR:
+Plicní vaskulární kongesce s malými oboustrannými pleurálními výpotky a mírnou kardiomegalií.
+
+Stručný průběh hospitalizace:
+Byla diagnostikována akutní systolická srdeční nedostatečnost a léčena intravenózním furosemidem, s celkovou negativní bilancí tekutin každý den a postupnou ztrátou hmotnosti. Její potřeba kyslíku se zlepšila. Zobrazovací vyšetření hrudníku neukázalo známky pneumonie a zůstala bez horečky, takže antibiotika nebyla podána. Její echokardiogram v ___ ukázal sníženou ejekční frakci. Lisinopril byl nahrazen ___ a přidán metoprolol sukcinát. Její krevní tlak se zlepšil při nové léčbě. Levothyroxin byl pokračován. Kardiolog, doktor ___, zhodnotil výsledky a naplánoval kontrolu v ___. Byla propuštěna dne ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Amlodipin 5 mg denně
+Atorvastatin 20 mg večer
+Levothyroxin 50 mcg denně
+
+Léky při propuštění:
+1. Furosemid 40 mg perorálně denně
+2. Metoprolol sukcinát 25 mg perorálně denně
+3. Atorvastatin 20 mg perorálně večer
+4. Levotyroxin 50 mcg perorálně denně
+5. Sakubitril-valsartan podle pokynů lékaře ___
+6. Vysadit amlodipin
+
+Plán propuštění:
+Domů, s zajištěnou péčí od ___
+
+Diagnóza při propuštění:
+Akutní systolické srdeční selhání
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny při propuštění:
+Byli jste přijati kvůli zadržování tekutin způsobenému srdečním selháním a léčeni léky, které pomáhají odstranit přebytečnou tekutinu. Každé ráno se zvažte a zavolejte na ___, pokud se vaše váha během jednoho dne zvýší o více než jeden a půl kilogramu. Omezte příjem soli a vyhýbejte se ibuprofenu. Užívajte všechny léky podle pokynů. V případě zhoršení dýchání, bolesti na hrudi nebo mdlob se vraťte do nemocnice. Dodržujte termín kontroly u ___.
+
+Pokyny pro další péči:
+___

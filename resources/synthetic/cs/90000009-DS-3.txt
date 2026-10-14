@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___ letá žena se známými žlučovými kameny, která se dostavila do ___ s dvoudenní bolestí v pravém horním kvadrantu břicha, nevolností a zvracením, přičemž se stav zhoršoval. Bolest vyzařovala do zad a neustupovala po užívání antacid. Uváděla, že doma neměla horečku, ale cítila se, jako by jí bylo zima. Ultrazvukové vyšetření v ___ prokázalo žlučové kameny a ztluštění stěny žlučníku, a proto byla převezena sem za účelem chirurgického vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Hypotyreóza
+Císařský řez, ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny, léčena v ___
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Mírně nepohodlná, při vědomí
+Hlava, uši, nos, hrdlo: Bez žloutenky, vlhké sliznice
+Plíce: Čisté na obou stranách
+Srdce: Pravidelný rytmus
+Břicho: Měkké, citlivé v pravém horním kvadrantu, pozitivní Murphyho příznak
+Končetiny: Teplé, bez otoků
+
+Významné výsledky:
+___: Počet leukocytů 14,2, ALT 78, AST 64, celkový bilirubin 1,1, lipáza 30. Ultrazvuk pravého horního kvadrantu: mnoho žlučových kamenů, ztluštění stěny žlučníku o 5 mm, tekutina v okolí žlučníku, bez dilatace žlučových cest. CT břicha potvrdilo tyto nálezy bez abscesu nebo perforace. ___: Patologické vyšetření prokázalo akutní a chronickou cholecystitidu s cholelitiázou, bez malignity. Laboratorní výsledky při propuštění: počet leukocytů 8,1, kreatinin 0,8, hemoglobin 12,4.
+
+Stručný průběh hospitalizace:
+Byla vyšetřena ___ na pohotovosti a poté přijata na chirurgické oddělení, byla jí nařízeno držet se nalačno a zahájila se intravenózní infuze a podávání piperacilinu s tazobaktamem pro akutní cholecystitidu. Bolest byla kontrolována pomocí paracetamolu a nízkých dávek opioidů. Ve druhý den hospitalizace podstoupila nekomplikovanou laparoskopickou cholecystektomii, kterou provedl Dr. ___. Poté dobře snášela běžnou stravu a její bolest se zlepšila. Po operaci bylo vysazeno podávání antibiotik. Ve třetí den hospitalizace byla propuštěna domů.
+PŘECHODNÁ OTÁZKY:
+- Kontrola výsledků patologického vyšetření v ___
+- Obnovení užívání léků na štítnou žlázu a krevní tlak doma
+
+Léky při přijetí:
+Levotyroxin 75 mcg denně, lisinopril 10 mg denně, atorvastatin 20 mg večer, multivitamín denně.
+
+Léky při propuštění:
+1. Paracetamol 650 mg každých 6 hodin podle potřeby proti bolesti.
+2. Oxykodon 5 mg každých 6 hodin podle potřeby při silné bolesti, na tři dny.
+3. Dokusát 100 mg dvakrát denně během užívání oxykodonu.
+4. Levotyroxin 75 mcg denně.
+5. Lisinopril 10 mg denně.
+6. Atorvastatin 20 mg večer.
+
+Způsob propuštění:
+Domů.
+
+Diagnóza při propuštění:
+Akutní cholecystitida.
+Cholelitiáza.
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+
+Pokyny při propuštění:
+Byli jste přijati s infekcí žlučníku a žlučník vám byl odstraněn laparoskopicky. Můžete se sprchovat a sundávat obvazy za dva dny. Během šesti týdnů nezvedejte nic těžšího než ___ liber. V případě horečky, zvracení, žluté kůže, zhoršující se bolesti břicha nebo zarudnutí rány volejte na číslo ___ nebo se vraťte do nemocnice. Léky proti bolesti užívejte pouze v případě potřeby.
+
+Pokyny pro kontrolu:
+___

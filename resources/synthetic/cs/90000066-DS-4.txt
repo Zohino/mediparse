@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Slabost a zvýšená žízeň
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena odeslána z ___ kliniky s několikdenní únavou, polyurií a špatným příjmem potravy. Uváděla nevolnost a rozmazané vidění. Hodnoty glukózy měřené doma byly trvale zvýšené, což vedlo k hospitalizaci za účelem monitorování a léčby.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Vypadá unaveně, v klidu je v pohodlí
+Končetiny: Teplé, bez otoků
+Neurologický stav: Bdělá, bez ložiskových deficitů
+PULSY: 2+ a symetrické
+
+Významné výsledky:
+Laboratorní vyšetření provedená ___ ukázala výraznou hyperglykémii s mírným zvýšením kreatininu, které se zlepšilo po podání tekutin. Vyšetření moči ukázalo glukosurii bez infekce. Rentgen hrudníku byl v pořádku.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Glukóza 168, kreatinin 0,9, sodík 139, draslík 4,1
+
+Stručný popis průběhu hospitalizace:
+Byla léčena intravenózními tekutinami a inzulínem, přičemž došlo k postupnému zlepšení hodnot glukózy a symptomů. Strava byla upravena a nutriční terapeut zhodnotil plán stravování. Edukátor z ___ ji naučil techniku injekcí a monitorování, a byla vyšetřena endokrinologem ___. Domácí léčba hypertenze byla pokračována. Byla stabilizovaná a mohla být propuštěna.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Metformin 500 mg dvakrát denně s jídlem
+2. Lisinopril 10 mg jednou denně
+3. Atorvastatin 20 mg před spaním
+4. Testovací proužky na glukózu podle pokynů
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes mellitus s hyperglykémií
+Sekundární:
+Hypertenze, hyperlipidemie
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a komunikativní
+Fyzická aktivita: Chodí, soběstačná
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli velmi vysoké hladině cukru v krvi. Měřte si glukózu před jídlem a před spaním a veďte si záznamy. Užívajte léky podle předpisu. V případě zvracení, zmatenosti nebo hladiny cukru nad 400 volejte ___ nebo se vraťte na pohotovost. Dodržujte termín kontroly u ___.
+
+Pokyny pro další péči:
+___

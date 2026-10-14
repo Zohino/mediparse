@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient se dostavil do ___ s třídenní anamnézou produktivního kašle, horečky a pleuritické bolesti na hrudi, které se objevily po návštěvě ___. Popírá diabetes a uvádí, že nemá žádné hubnutí ani nadměrnou žízeň. Při přijetí měl mírnou horečku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Mírně nemocný vzhled, v klidu se cítí dobře
+Krk: Pohyblivý, bez zvětšených lymfatických uzlin
+Neurologické vyšetření: Bdělý, orientovaný, bez ložiskových deficitů
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala mírnou leukocytózu s elevovanými zánětlivými markery. Elektrolyty a kreatinin byly v normě. Byly odebrány krevní kultury, které byly negativní.
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Rentgen hrudníku v ___ ukázal skvrnitou neprůhlednost v dolním laloku pravého plíce.
+
+Stručný popis hospitalizace:
+Byl léčen pro podezření na pneumonii perorálními antibiotiky a infuzemi, ačkoli neprůhlednost by mohla také odrážet aspiraci nebo atelektázu. Horečka ustoupila během dvou dnů. Zlepšily se jeho potřeby kyslíku a před propuštěním ho vyšetřil ___. Ambulantní zobrazovací vyšetření v ___ potvrdí zlepšení.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Lisinopril 10 mg denně, atorvastatin 20 mg večer a amoxicilin-klavulanát dvakrát denně po dobu dalších pěti dnů. Paracetamol podle potřeby na horečku. Kontakt na lékárnu ___.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Komunitně získaná infekce dolních cest dýchacích
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Fyzická aktivita: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni s horečkou a kašlem. Užijte si antibiotika, dokud nedokončíte celou kúru, a pijte dostatek tekutin. V případě zhoršení dušnosti, bolesti na hrudi nebo přetrvávající horečky se vraťte. Prosím, dodržte termín schůzky s ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Nevolnost a slabost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s třídenní anamnézou nevolnosti, slabosti a sníženým příjmem potravy v důsledku vynechávání jídel. Byla vyšetřena v ___ a převezena k další péči.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Cholecystektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Dobře se cítí, bez horečky, pravidelný rytmus, plíce čisté, břicho měkké.
+HLAVA, OČI, UŠI, NOS, KRK:
+Vlhké sliznice, bez žloutenky.
+KONČETINY:
+Bez otoků nebo bolestivosti.
+
+Významné výsledky:
+NÁLEZY:
+Při přijetí zvýšená hladina glukózy s mírnou ketózou, zlepšení po léčbě. Rentgenové vyšetření hrudníku neodhalilo žádné akutní abnormality. Elektrolyty se normalizovaly do propuštění. Vyšetření moči negativní na infekci; funkce ledvin stabilní během hospitalizace.
+
+Stručný průběh hospitalizace:
+Léčena intravenózními tekutinami a infuzí inzulínu, po obnovení příjmu potravy převedena na subkutánní inzulin. Elektrolyty doplněny, symptomy odezněly. Poskytnuta edukace o dietě. Naplánována kontrola v ___, pacientka propuštěna ve stabilizovaném stavu.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně, aspirin.
+
+Léky při propuštění:
+Inzulin glargin 20 jednotek večer. Metformin 500 mg dvakrát denně. Aspirin 81 mg denně. Lisinopril 10 mg denně.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes mellitus
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Stav aktivity: Chodí, soběstačný.
+
+Pokyny pro propuštění:
+Měřte hladinu cukru v krvi před jídlem a před spaním. Užívajte inzulin podle pokynů a dodržujte termíny kontrol v ___. V případě zvracení, zmatenosti nebo vysokých hodnot se vraťte.
+
+Pokyny pro kontrolu:
+___

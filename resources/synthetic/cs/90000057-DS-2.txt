@@ -1,0 +1,79 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient odeslán z kliniky ___ s několik týdnů trvajícím otokem a únavou. Na základě výsledků laboratorních testů provedených v ___ byl pacient přijat k monitorování a úpravě medikace.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Komfortní, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Plíce:
+Čisté na obou stranách
+Srdce:
+Pravidelný rytmus
+Břicho:
+Měkké, bez citlivosti
+Neurologické vyšetření:
+Orientovaný, bez ložiskových příznaků
+
+Významné výsledky:
+Kreatinin zvýšený při přijetí, po propuštění se hodnoty zlepšily. Draslík v normě. Hemoglobin mírně snížený. Rentgen hrudníku bez akutních nálezů.
+
+Stručný popis hospitalizace:
+Pacientovi byla podána mírná diuretika a upravena medikace na snížení krevního tlaku. Otok se zlepšil, laboratorní hodnoty se stabilizovaly a pacient byl ___ propuštěn domů s doporučením ambulantní kontroly.
+
+Medikace při přijetí:
+Amlodipin
+Atorvastatin
+Allopurinol
+
+Medikace při propuštění:
+Amlodipin 10 mg denně
+Atorvastatin 20 mg večer
+Furosemid 20 mg denně
+Dávka allopurinolu snížena
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+Přetížení tekutinami
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Orientovaný a reagující
+Fyzická aktivita:
+Chodí, soběstačný
+
+Pokyny pro propuštěného pacienta:
+Byli jste přijati s otokem. Denně se važte, omezte příjem soli, užívejte léky podle pokynů a v případě návratu otoku nebo dušnosti volejte ___. Vyhýbejte se protizánětlivým lékům proti bolesti.
+
+Pokyny pro kontrolu:
+___

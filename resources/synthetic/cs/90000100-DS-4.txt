@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest na hrudi
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s hypertenzí se dostavil s bolestí na hrudi, která se objevila při námaze a trvala dva dny. Byl odeslán ze své ordinace v ___ na vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Žádná anamnéza fibrilace síní
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s koronární chorobou
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Plíce: Čisté na obou stranách
+Končetiny: Bez otoků
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků
+
+Stručný popis průběhu hospitalizace:
+Kardiální enzymy zůstaly v normě a telemetrie prokázala sinusový rytmus. Zátěžový test v ___ byl bezvýznamný. Bolest na hrudi ustoupila po odpočinku a pacient byl propuštěn.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Pokračovat v užívání lisinoprilu denně. Pokračovat v užívání atorvastatinu večer. Pro prevenci byl přidán aspirin 81 mg denně.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Atypická bolest na hrudi
+Sekundární:
+Hypertenze, hyperlipidemie
+
+Stav při propuštění:
+Dobrý
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Chodí, soběstačný
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni kvůli bolesti na hrudi a vyšetření neprokázala infarkt. Užívajte léky podle pokynů a v případě zhoršení bolesti nebo dušnosti se vraťte.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a závratě
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letý muž odeslán z jeho ordinace v ___ po několika dnech, kdy pociťoval zrychlený, nepravidelný srdeční tep, únavu a mírnou dušnost při námaze. Při vyšetření měl zrychlený a nepravidelný puls. Popíral omdlení nebo bolest na hrudi. Byl odeslán do ___ za účelem regulace srdečního rytmu a antikoagulační terapie.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález únavy, zaznamenáno v ___. Negativní nález horečky, kašle nebo otoku nohou.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec, který utrpěl cévní mozkovou příhodu v ___
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Břicho: Měkké, netendrovatelné
+Končetiny: Bez otoků
+Kůže: Teplá a suchá
+
+Významné výsledky:
+EKG ukázalo nepravidelný, úzký komplexní rytmus bez výrazných P vln, frekvence 128. Dvakrát negativní troponin. Normální TSH. Draslík 4,1, kreatinin 0,9. Echokardiogram provedený v ___ ukázal mírně rozšířenou levou síň s zachovanou ejekční frakcí.
+
+Stručný popis průběhu hospitalizace:
+Byl zahájen perorální metoprolol a diltiazem, a jeho srdeční frekvence se během jednoho dne stabilizovala na hodnoty kolem 70. Vzhledem k jeho riziku cévní mozkové příhody byl po diskusi o riziku krvácení zahájen apixaban. Funkce štítné žlázy a elektrolyty byly v normě. Chodil bez potíží a byl propuštěn ___.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg denně
+2. Apixaban 5 mg dvakrát denně
+3. Metformin 500 mg dvakrát denně
+4. Lisinopril 10 mg denně
+5. Atorvastatin 20 mg večer
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Supraventrikulární tachyarytmie s rychlou ventrikulární odpovědí
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Stav aktivity: Chodí, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste přijati s rychlým, nepravidelným srdečním tepem. Užívajte nové léky na regulaci srdečního tepu a antikoagulancia každý den podle pokynů. Okamžitě nahlaste krvácení, černou stolici, omdlení nebo bolest na hrudi. Dodržujte termín návštěvy u ___ a nechte si udělat krevní testy v ___.
+
+Pokyny pro kontrolu:
+___

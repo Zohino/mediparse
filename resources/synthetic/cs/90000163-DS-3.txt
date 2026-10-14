@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Pacient je muž, který je pod dohledem doktora ___ a přišel do ___ se stížností na zhoršující se bolest v pravém horním kvadrantu břicha po jídle, která trvá dva dny a je doprovázena nevolností a jednou epizodou zvracení. Příznaky se objevily ___ a neodpovídaly na odpočinek. Popírá horečku nebo žloutenku.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na nevolnost a nechutenství. Negativní na bolest na hrudi, dušnost, dysurii.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Gastroezofageální reflux
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav: Nepohodlí, ale bez akutní distrese.
+Břicho měkké, citlivé v pravém horním kvadrantu, pozitivní Murphyho příznak, bez rezistence.
+Končetiny: Teplé, bez otoků.
+
+Významné výsledky:
+Laboratorní vyšetření ukázala mírnou leukocytózu s normálními hodnotami jaterních enzymů a bilirubinu. Ultrazvuk provedený v ___ prokázal žlučové kameny se ztluštěním stěny žlučníku.
+ZÁVĚR:
+Cholelitiáza s nálezy naznačujícími akutní cholecystitidu.
+NÁLEZY:
+Přítomna je pericholecystická tekutina. Společný žlučovod má normální kalibr.
+
+Stručný průběh hospitalizace:
+Pacient byl přijat, ponechán bez orální výživy a podávány mu byly intravenózní tekutiny a antibiotika. Chirurgický tým ho vyšetřil a po diskusi s ___ a doktorem ___ podstoupil ___ nekomplikovanou laparoskopickou cholecystektomii. Bolest byla kontrolována, dieta byla postupně rozšiřována a před propuštěním toleroval běžnou stravu.
+PŘECHODNÁ OTÁZKY:
+Sledování výsledků patologického vyšetření vzorku žlučníku.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Omeprazol 20 mg denně
+
+Léky při propuštění:
+1. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby na bolest.
+2. Oxykodon 5 mg perorálně každých šest hodin podle potřeby na silnou bolest, krátkodobá léčba.
+3. Dokusát 100 mg dvakrát denně během užívání opioidů.
+4. Pokračujte v užívání lisinoprilu, atorvastatinu a omeprazolu jako dříve.
+
+Způsob propuštění:
+Domů s pomocí od ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Stav aktivity: Ambulantní, soběstačný.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl odstraněn laparoskopicky. Udržujte malé řezné rány čisté a suché a můžete se sprchovat. Po dobu několika týdnů se vyhýbejte zvedání těžkých předmětů. V případě horečky, zhoršení bolesti břicha, zvracení, žloutnutí kůže nebo zarudnutí v oblasti řezných ran volejte na číslo ___ na ___. Pokud jsou příznaky závažné, vraťte se do ___.
+
+Pokyny pro kontrolní vyšetření:
+___

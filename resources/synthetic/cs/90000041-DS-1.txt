@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pan ___ se dostavil s potížemi, které trvaly tři dny: bušení srdce, mírná dušnost a únava. Byl vyšetřen svým lékařem v ___ a odeslán na pohotovost. Při příjezdu měl nepravidelný a zrychlený puls. Hodnoty glukózy měřené doma byly zvýšené. Popíral bolesti na hrudi, synkopu nebo horečku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Zvýšená hladina hemoglobinu A1c, léčeno metforminem
+Cholecystektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s cévní mozkovou příhodou, léčen v ___
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Břicho: Měkké, netendrové.
+Končetiny: Teplé, bez otoků. Puls nepravidelný.
+
+Významné výsledky:
+EKG provedené v ___ ukázalo nepravidelný srdeční rytmus s úzkými QRS komplexy bez P vln, frekvence 128. Glukóza 246, hemoglobin A1c 8,4. Kreatinin v normě. Troponin dvakrát negativní. TSH v normě. Echokardiografie provedená v ___ ukázala zachovanou ejekční frakci a mírné zvětšení levé síně.
+ZÁVĚR: Žádný akutní plicní proces.
+
+Stručný popis hospitalizace:
+Byl přijat na oddělení s monitorováním srdeční činnosti a zahájena léčba diltiazemem ke kontrole srdeční frekvence, srdeční frekvence se stabilizovala pod 100. Vzhledem k riziku cévní mozkové příhody zahájil léčbu apixabanem po konzultaci s týmem v ___. Troponiny zůstaly negativní a echokardiografie byla uklidňující. Jeho hladina glukózy byla regulována inzulinem podle stupnice a při propuštění byla znovu zahájena léčba metforminem. Kardiologické oddělení v ___ zajistí ambulantní sledování.
+
+Léky při přijetí:
+Metformin 1000 mg dvakrát denně
+Lisinopril 20 mg denně
+Atorvastatin 40 mg večer
+
+Léky při propuštění:
+1. Apixaban 5 mg dvakrát denně
+2. Diltiazem s prodlouženým uvolňováním 180 mg denně
+3. Metformin 1000 mg dvakrát denně
+4. Lisinopril 20 mg denně
+5. Atorvastatin 40 mg večer
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Fibrilace síní s rychlou ventrikulární odpovědí
+Sekundární:
+Hypertenze
+Hyperlipidemie
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli rychlému a nepravidelnému srdečnímu tepu. Užijte nové léky na ředění krve a na regulaci srdečního tepu přesně podle předpisu. Každé ráno si změřte hladinu cukru v krvi a přineste si záznam na kontrolní vyšetření dne ___. V případě bolesti na hrudi, mdlob nebo krvácení zavolejte na číslo ___ nebo se vraťte do nemocnice.
+
+Pokyny pro další postup:
+
+___

@@ -1,0 +1,61 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pan ___ je muž s hypertenzí a dlouhodobou anamnézou kouření, který se dostavil s třemi dny trvajícím zhoršujícím se kašlem, sípáním a dušností při námaze. Byl převezen z ___ poté, co počáteční vyšetření odhalilo hypoxii vyžadující dodatečný přísun kyslíku a zvýšené zánětlivé markery.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce, léčen v ___
+
+Fyzikální vyšetření:
+Celkový stav: unavený, ale v pohodě. Plíce: rozptýlené sípání při výdechu. Srdce: pravidelný rytmus. Neurologický stav: bdělý a orientovaný.
+Břicho:
+Měkké, netendrovatelné.
+KONČETINY:
+Žádný edém.
+
+Stručný popis průběhu hospitalizace:
+Byl léčen inhalovanými bronchodilatátory, krátkodobou kortikosteroidní terapií a antibiotiky, a jeho potřeba kyslíku se zlepšila. Vzhledem k jeho anamnéze kouření a sípání byla zvažována možnost CHOPN a byla domluvena ambulantní spirometrie v ___. Dr. ___ zkontroloval plán před propuštěním. Pacient chodil bez desaturace a dobře snášel stravu. Krevní tlak zůstal kontrolovaný na domácí medikaci.
+
+Léky při přijetí:
+Lisinopril 10 mg denně; aspirin 81 mg denně; atorvastatin večer.
+
+Léky při propuštění:
+Prednison, dávka snižována po dobu pěti dnů. Inhalátor s albuterolem každé čtyři hodiny podle potřeby při sípání. Pokračovat v užívání lisinoprilu, aspirinu a atorvastatinu jako dříve. Dokončit celou kúru antibiotik.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní bronchitida s hypoxií
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Stav aktivity:
+Chodí, soběstačný.
+
+Pokyny pro propuštění:
+Užívejte léky podle předpisu a používejte inhalátor, když máte dušnost. Přestaňte kouřit. V případě horečky, zhoršující se dušnosti nebo bolesti na hrudi se okamžitě vraťte. V případě jakýchkoli dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

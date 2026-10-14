@@ -1,0 +1,81 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest břicha a zvracení
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s dvoudenní se zhoršující bolestí v epigastriu, nevolností a zvracením. Vyšetřena lékařem ___, poté odeslána na pohotovost ___ k dalšímu vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Žlučové kameny
+Hypotyreóza, léčena lékařem ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Krk:
+Pružný
+Plíce:
+Čisté na obou stranách
+SRDCE:
+Pravidelný rytmus
+BŘICHO:
+Citlivé v pravém horním kvadrantu
+KONČETINY:
+Bez otoků
+NEUROLOGIE:
+Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Při přijetí zvýšená hladina lipázy a mírně zvýšený bilirubin, při propuštění se hodnoty snižují.
+ZÁVĚR:
+Žlučové kameny s rozšířeným společným žlučovým kanálkem, bez zjištěného kamene, který by jej blokoval.
+
+Stručný popis hospitalizace:
+Pacientka byla přijata, ponechána bez možnosti příjmu potravy ústy a podávány jí byly intravenózní tekutiny a léky proti bolesti. Příznaky ustoupily během dvou dnů. Chirurgický tým z ___ doporučil ambulantní odstranění žlučníku, které má být naplánováno v ___.
+
+Léky při přijetí:
+Lisinopril
+Levotyroxin
+
+Léky při propuštění:
+1. Lisinopril denně, jako dosud.
+2. Levotyroxin denně, jako dosud.
+3. Paracetamol podle potřeby proti bolesti.
+4. Ondansetron podle potřeby proti nevolnosti.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární:
+Pankreatitida způsobená žlučovými kameny
+Hypertenze a hypotyreóza
+
+Stav při propuštění:
+Duševní stav:
+Jasné a srozumitelné myšlení
+Fyzická aktivita:
+Samostatná, chodí bez pomoci
+
+Pokyny při propuštění:
+Byli jste hospitalizováni s pankreatitidou způsobenou žlučovými kameny. Jezte stravu s nízkým obsahem tuků, pijte dostatek tekutin a užívejte léky podle pokynů. V případě horečky, silné bolesti nebo přetrvávajícího zvracení se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

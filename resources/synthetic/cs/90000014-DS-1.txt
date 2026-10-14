@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Žena s postupující bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po jídle, odeslána z ___ k vyšetření žlučových kamenů.
+PŘEHLED SYSTÉMŮ:
+Pozitivní na nevolnost a mírnou horečku. Negativní na bolest na hrudi.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Předchozí císařský řez v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlná, při vědomí
+Plíce:
+Čisté na obou stranách
+Břicho:
+Bolestivé v pravém horním kvadrantu, měkké
+Neurologické:
+Bez ložiskových příznaků
+PULSY:
+Hmatné po celém těle
+
+Významné výsledky:
+Ultrazvuk odhalil mnohočetné žlučové kameny, zesílenou stěnu žlučníku a tekutinu v okolí žlučníku. Počet bílých krvinek mírně zvýšený, jaterní enzymy v normě.
+ZÁVĚR:
+Nález odpovídá akutní cholecystitidě.
+
+Stručný popis průběhu hospitalizace:
+Byla zahájena léčba antibiotiky a infuzní terapií, poté byla pacientka odeslána do operačního sálu, kde ji operoval Dr. ___ laparoskopickou cholecystektomií bez komplikací. Bolest se zmírnila, pacientka dobře snášela běžnou stravu a druhý den byla propuštěna domů.
+
+Léky při přijetí:
+Lisinopril
+Levotyroxin
+
+Léky při propuštění:
+Lisinopril denně, levotyroxin denně, paracetamol podle potřeby na bolest a krátkodobá léčba oxykodonem pouze při silné bolesti.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+Jasný a srozumitelný
+Fyzická aktivita:
+Chodí, soběstačná
+
+Pokyny pro propuštění:
+Byla léčena pro zánět žlučníku a podstoupila operaci. Udržujte řezné rány čisté a suché, vyhýbejte se těžké fyzické námaze a v případě horečky, zhoršení bolesti nebo zarudnutí v okolí ran volejte ___. V případě dotazů kontaktujte ___.
+
+Pokyny pro kontrolu:
+___

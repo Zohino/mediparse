@@ -1,0 +1,63 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Chirurgie
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letý muž s postupující bolestí v pravém horním kvadrantu břicha, nevolností a horečkou, trvajícími dva dny. Zobrazovací vyšetření provedené v ___ ukázalo žlučové kameny a ztluštělou stěnu žlučníku. Byl převezen k chirurgickému vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Gastroezofageální reflux
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka měla žlučové kameny
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Plíce: Čisté na obou stranách
+Břicho: Měkké, mírná citlivost v pravém horním kvadrantu, jizvy čisté
+Končetiny: Teplé, bez otoků
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Počet bílých krvinek 14,2 při přijetí, normalizován při propuštění. Mírně zvýšené jaterní enzymy, bilirubin v normě. Ultrazvuk: mnoho žlučových kamenů, ztluštění stěny žlučníku, tekutina v okolí žlučníku. Histopatologické vyšetření ze vzorku odebraného v ___ probíhá, výsledky budou k dispozici při propuštění.
+
+Stručný popis hospitalizace:
+Byl mu podán antibiotika a infuze, poté podstoupil nekomplikovanou laparoskopickou cholecystektomii druhý den hospitalizace. Bolest byla kontrolována perorálními léky. Dobře snášel běžnou stravu, měl plyny a tým ho prohlásil za připraveného k propuštění domů s doporučením další kontroly u ___.
+
+Léky při přijetí:
+Lisinopril, atorvastatin, omeprazol denně
+
+Léky při propuštění:
+Pokračovat v užívání lisinoprilu, atorvastatinu a omeprazolu jako dříve. Paracetamol podle potřeby na bolest. Krátkodobé užívání oxykodonu pouze při silné bolesti. Dokusát při užívání opioidů.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární: Akutní kalculózní cholecystitida
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Fyzická aktivita: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen pro zánět žlučníku a byl vám odstraněn žlučník. Udržujte jizvy čisté a suché, vyhýbejte se těžké fyzické námaze po dobu ___ týdnů a v případě horečky, zvracení, žloutenky nebo zhoršení bolesti volejte ___ nebo se vraťte do nemocnice.
+
+Pokyny pro další kontrolu:
+___

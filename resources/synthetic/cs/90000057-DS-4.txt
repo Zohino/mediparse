@@ -1,0 +1,62 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s chronickým onemocněním ledvin, odeslán z ___ kvůli zhoršující se bolesti břicha a nevolnosti, trvající dva dny.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: pacient je v pohodě, bez známek úzkosti
+Břicho: měkké, mírně citlivé, bez známek peritoneálního dráždění
+
+Významné výsledky:
+Kreatinin v normě. Lipáza v normě. Zobrazovací vyšetření provedené v ___ ukázalo mírné ztluštění stěny střeva.
+ZÁVĚR:
+Nález odpovídá mírné kolitidě.
+
+Stručný popis hospitalizace:
+Léčen na kolitidu pomocí infuzí a antibiotik. Rentgen hrudníku byl v pořádku, bez známek pneumonie. Bolest se zlepšila a pacient toleruje běžnou stravu. Následná péče zajištěna ___ pro úpravu dávkování léků pro ledviny.
+
+Léky při přijetí:
+Amlodipin, allopurinol
+
+Léky při propuštění:
+Ciprofloxacin, dávkování upraveno dle funkce ledvin, po dobu pěti dnů. Pokračovat v užívání amlodipinu a allopurinolu.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Kolitida
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Duševní stav: bdělý a orientovaný
+Fyzická aktivita: chodí bez pomoci
+
+Pokyny pro propuštěného pacienta:
+Užívejte antibiotika podle pokynů. Pijte dostatek tekutin. V případě horečky, zvracení nebo zhoršení bolesti se vraťte do nemocnice. V případě dotazů volejte ___.
+
+Pokyny pro kontrolní vyšetření:
+___

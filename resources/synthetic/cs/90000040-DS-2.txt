@@ -1,0 +1,83 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s kašlem, horečkou a dušností trvajícími čtyři dny, s postupným zhoršováním i přes klid a dostatečný příjem tekutin. Dostavila se na pohotovost ___, kde měla horečku a byla hypoxická. Byla provedena zobrazovací vyšetření hrudníku a pacientka byla přijata k dalšímu vyšetření a léčbě. Byla odeslána svým ošetřujícím lékařem, doktorem ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Cholecystektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Vitalní funkce:
+T 38,1, TF 96, TK 128/74, SpO2 92 % při dýchání okolním vzduchem
+Celkový stav:
+Unavená, mírně dušná
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Krk:
+Pružný
+SRDEČNÍ:
+Pravidelný rytmus
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Teplé, bez otoků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 14,2, hemoglobin 12,1, kreatinin 0,9, laktát 1,8, sodík 138.
+ZÁVĚR:
+Konsolidace v dolním laloku pravého plíce s malým výpotkem na rentgenovém snímku hrudníku pořízeném v ___. Nález odpovídá akutní infekčnímu procesu. Doporučuje se opakované zobrazovací vyšetření za šest týdnů.
+
+Stručný popis hospitalizace:
+Pacientka byla léčena pro komunitně získanou pneumonii pomocí ceftriaxonu a azithromycinu a postupně se snižovala dávka kyslíku během tří dnů. Telemetrie ukázala nepravidelný rytmus druhý den hospitalizace, což naznačovalo možnou fibrilaci síní, která však nebyla potvrzena na dvanáctisvodovém EKG; kardiolog z ___ doporučil ambulantní monitorování. Pacientka se zlepšila, dobře snášela stravu a mohla chodit. Před propuštěním dne ___ ji vyšetřil doktor ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 75 mcg denně
+
+Léky při propuštění:
+1. Lisinopril 10 mg jednou denně.
+2. Levotyroxin 75 mcg jednou denně.
+3. Azithromycin 250 mg denně po dobu dalších tří dnů.
+4. Guaifenesin podle potřeby na kašel.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární:
+Komunitně získaná infekce dolních cest dýchacích s hypoxií
+Hypertenze, hypotyreóza
+
+Stav při propuštění:
+Duševní stav: Bdělá a orientovaná, schopná plnit pokyny.
+Fyzická aktivita: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli plicní infekci a léčeni antibiotiky. Dokončete užívání všech předepsaných léků, pijte dostatek tekutin a odpočívejte. V případě horečky, zhoršení dušnosti nebo bušení srdce se vraťte do nemocnice. Navštivte lékaře ___ v ordinaci ___.
+
+Pokyny pro kontrolní vyšetření:
+
+___

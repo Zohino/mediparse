@@ -1,0 +1,81 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava a otok nohou
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s hypertenzí a anémií, která se dostavila do ___ s třídenní progresivní únavou, nevolností a otokem nohou. Byla vyšetřena svým ošetřujícím lékařem v ___, který zaznamenal zvýšený krevní tlak a odeslal ji na pohotovost. Laboratorní výsledky zde ukázaly zvýšenou hladinu kreatininu a draslíku a byla přijata k vyšetření a léčbě přetížení tekutinami. Popírala bolesti na hrudi nebo horečku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Anémie
+Hyperlipidémie
+Pod dohledem kliniky ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Celkový stav: Unavená žena, bez akutních potíží, vyšetřena doktorem ___.
+Krk: Zvýrazněné jugulární žíly, jinak pružný.
+KONČETINY: Oboustranný otok dolních končetin až po kolena, teplé a dobře prokrvené.
+
+Významné výsledky:
+LABORATORNÍ VÝSLEDKY PŘI PROPUŠTĚNÍ:
+___ 06:10 Krevní obraz: leukocyty 6,1, hemoglobin 9,2, trombocyty 210
+Močovina 58, kreatinin 3,4 (výchozí hodnota kolem 3,1), sodík 138, draslík 4,9, chloridy 104, bikarbonát 19
+Vápník 8,1, fosfor 5,6, hořčík 2,0
+Odhadovaná glomerulární filtrace 14, zvýšený parathormon na 312
+Vyšetření moči: protein 300, bez krve
+Ultrazvuk ledvin ___: malé echogenní ledviny oboustranně, bez hydronefrózy.
+
+Stručný popis hospitalizace:
+Byla léčena intravenózním furosemidem s dobrým diurézním účinkem a zhubla o čtyři kilogramy. Kreatinin zůstal blízko výchozí hodnoty kolem 3,2. Hladina draslíku byla kontrolována pomocí diety s nízkým obsahem draslíku. Fosfor byl zvýšený a byl zahájen sevelamer. Anémie byla považována za související se sníženou funkcí ledvin; byly provedeny testy na železo a s týmem ___ byla prodiskutována možnost podání erytropoetinu. Nefrolog z ___ doporučil ambulantní sledování. Krevní tlak se zlepšil po zvýšení dávky amlodipinu. Byla propuštěna domů ve stabilizovaném stavu.
+
+Léky při přijetí:
+Amlodipin 5 mg denně
+Atorvastatin 20 mg večer
+Síran železnatý 325 mg denně
+Aspirin 81 mg denně
+
+Léky při propuštění:
+Amlodipin 10 mg denně
+Atorvastatin 20 mg večer
+Síran železnatý 325 mg denně
+Furosemid 40 mg dvakrát denně
+Sevelamer karbonát 800 mg třikrát denně s jídlem
+Aspirin 81 mg denně
+Vydáno v lékárně ___
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Přetížení objemem tekutin
+Hypertenze
+Anémie
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Úroveň aktivity: Schopný chůze, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste přijati kvůli zadržování tekutin a abnormálním výsledkům krevních testů. Každé ráno se važte a volejte na číslo ___, pokud přiberete více než jeden a půl kilogramu. Dodržujte stravu s nízkým obsahem soli a draslíku a užívejte léky podle předpisu. Dodržte termín návštěvy nefrologické ambulance na adrese ___ a navštivte svého ošetřujícího lékaře, doktora ___. V případě dušnosti, bolesti na hrudi nebo sníženého objemu moči se vraťte.
+
+Pokyny pro kontrolu:
+___

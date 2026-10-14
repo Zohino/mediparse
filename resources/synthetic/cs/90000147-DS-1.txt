@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Horečka a kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena se dostavila s třemi dny trvající horečkou, kašlem a celkovou slabostí, byla odeslána z ___ po kontaktu s nemocným. Zobrazovací vyšetření hrudníku neukázalo žádnou pneumonii. Byla hydratována a poskytnuta jí podpůrná péče, jejíž stav se zlepšil. Úroveň kyslíku v krvi zůstala v normě.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Životní funkce:
+T 37 °C, puls 80, krevní tlak 120/70, dechová frekvence 16, SpO2 97 % při dýchání okolním vzduchem
+Celkový stav:
+Dobře se cítí
+Hlava, oči, uši, nos, hrdlo:
+Vlhká sliznice
+Plíce:
+Oboustranně čisté
+Břicho:
+Měkké
+Končetiny:
+Bez otoků
+Neurologické vyšetření:
+Bez ložiskových příznaků
+
+Významné výsledky:
+Leukocyty 9,2, hemoglobin 12,8, kreatinin 0,8, sodík 138, glukóza 96. Rentgen hrudníku provedený ___ ukázal čisté plíce a normální velikost srdce. Vyšetření na respirační viry bylo pozitivní na chřipku A. Vyšetření moči bez významných nálezů. Kultivace krve po dvou dnech neukázala žádný růst. Laktát byl v normě.
+
+Léky při přijetí:
+Lisinopril 10 mg denně, multivitamín jedna tableta denně
+
+Léky při propuštění:
+Oseltamivir 75 mg dvakrát denně po dobu pěti dnů. Paracetamol 650 mg každých šest hodin podle potřeby na horečku. Lisinopril 10 mg denně. Multivitamín denně.
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Chřipka A
+Dehydratace
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Stabilní, schopná chůze
+
+Pokyny pro propuštění:
+Pijte dostatek tekutin a odpočívejte doma. Užívajte všechny léky podle předpisu. V případě horečky, zhoršení kašle nebo potíží s dýcháním se vraťte. V případě přetrvávajících příznaků zavolejte na svou kliniku na číslo ___.
+
+Pokyny pro kontrolu:
+___

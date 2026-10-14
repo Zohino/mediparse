@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Dušnost a produktivní kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s diabetem, léčená perorálními léky, která se dostavila s třemi dny trvajícím zhoršujícím se kašlem, horečkou a dušností. Byla poprvé vyšetřena v ___ a převezena dne ___ kvůli hypoxii a další péči. Popírala bolesti na hrudi, zvracení nebo nedávné cestování.
+
+Anamnéza předchozích onemocnění:
+CHOPN
+Chronické onemocnění ledvin
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Mírná tachypnoe, v klidu se cítí dobře
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Krk: Pohyblivý, bez známek zvýšeného žilního tlaku
+Břicho: Měkké, netendrovatelné
+Končetiny: Bez otoků
+Neurologické: Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Rentgen hrudníku ukázal opacitu v dolním laloku pravého plíce. Laboratorní výsledky z ___ ukázaly počet bílých krvinek 14,2, kreatinin v normě, glukóza 210. Kultivace sputa odebraná dne ___ prokázala normální mikroflóru. Saturace kyslíkem se zlepšila při dýchání okolního vzduchu.
+
+Stručný popis hospitalizace:
+Byla léčena intravenózními antibiotiky, inhalátory a krátkodobou kortikosteroidní terapií, s postupným zlepšením oxygenace. Glukóza byla regulována pomocí inzulínu v závislosti na hladině glukózy. Funkce ledvin zůstala stabilní. Byla vyšetřena ___ a propuštěna dne ___ s perorálními antibiotiky.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+Lisinopril 10 mg denně
+Inhalátor s albuterolem podle potřeby
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dalších dnů
+2. Prednison 40 mg denně po dobu tří dnů
+3. Metformin 500 mg dvakrát denně
+4. Inhalátor s albuterolem podle potřeby, doplněný v lékárně ___
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie
+Exacerbace CHOPN
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a reaguje
+Stav aktivity: Chodí, soběstačná
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli plicní infekci. Užívejte všechny antibiotika podle předpisu a používejte inhalátor podle potřeby. V případě horečky, zhoršení dýchání nebo bolesti na hrudi se vraťte. V případě dotazů volejte ___ a domluvte si návštěvu u ___ příští týden.
+
+Pokyny pro kontrolu:
+___

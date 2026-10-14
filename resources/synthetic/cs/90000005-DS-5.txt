@@ -1,0 +1,82 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohou a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s hypertenzí a hyperlipidemií, který se dostavil s třemi dny trvajícím zhoršováním otoku nohou, ortopnoí a dušností při námaze. Byl převezen z ___ poté, co výsledky laboratorních testů provedených v ambulanci dne ___ ukázaly zvýšenou hladinu BNP. Uvedl, že v poslední době konzumoval jídla s vysokým obsahem sodíku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Srdeční selhání se sníženým ejekčním objemem
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Vitalní funkce:
+bez horečky, TK 150/90, TF 88, SpO2 94 % při dýchání okolním vzduchem
+Celkový stav:
+komfortní, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+vlhké sliznice
+Krk:
+zvýšená JVP (jugulární venózní tlak)
+Plíce:
+oboustranné chrůpky
+Srdce:
+pravidelné, přítomna S3
+Břicho:
+měkké, netendrové
+Kůže:
+teplá
+Neurologické vyšetření:
+bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Laboratorní testy provedené dne ___ ukázaly BNP 1900, kreatinin 1,1, draslík 4,0 a normální hodnoty troponinu. Rentgen hrudníku prokázal plicní vaskulární kongesci s malými oboustrannými výpotky. Echokardiografie ukázala ejekční objem 30 procent, což je stejné jako v předchozím vyšetření.
+
+Stručný popis hospitalizace:
+Byl diuretizován intravenózním furosemidem a ztratil přibližně čtyři litry tekutin, což vedlo ke zlepšení oxygenace a ústupu chrůpků. Zobrazovací vyšetření hrudníku neprokázalo pneumonii a pacient zůstal bez horečky. Kardiolog z ___ upravil jeho léčbu a byla domluvena kontrola v ___.
+
+Léky při přijetí:
+Lisinopril 20 mg denně
+Atorvastatin 40 mg večer
+Allopurinol 100 mg denně
+
+Léky při propuštění:
+1. Furosemid 40 mg perorálně denně
+2. Lisinopril 20 mg perorálně denně
+3. Atorvastatin 40 mg perorálně večer
+4. Allopurinol 100 mg perorálně denně
+5. Metoprolol succinat 25 mg denně
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Primární: Akutní srdeční selhání na podkladě chronického systolického srdečního selhání
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zadržování tekutin způsobenému srdečním selháním. Každé ráno se važte a volejte ___, pokud během jednoho dne přiberete více než tři libry. Omezte příjem soli, užívejte léky podle předpisu a dodržujte termín kontroly v ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Žena s potížemi trvajícími dva dny, projevujícími se bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po jídle. Byla vyšetřena v ___ a odeslána do ___, kde ultrazvuk odhalil žlučové kameny a ztluštění stěny žlučníku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+
+Anamnéza předchozích chirurgických zákroků:
+Císařský řez
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Celkový stav: dobrý
+Hlava, oči, uši, nos, hrdlo: bez známek žloutenky
+Krk: pružný
+Plíce: čisté na obou stranách
+Břicho: měkké, citlivé v pravém horním kvadrantu
+Končetiny: teplé
+Kůže: bez vyrážky
+
+Významné výsledky:
+Mírně zvýšený počet bílých krvinek při přijetí. Mírně zvýšené jaterní enzymy. Ultrazvuk odhalil žlučové kameny, ztluštění stěny žlučníku a malé množství tekutiny v okolí žlučníku. Žlučovod normální šířky. Opakovaná laboratorní vyšetření provedená ___ ukázala normalizaci hodnot.
+
+Stručný popis hospitalizace:
+Pacientka byla přijata, podána intravenózní tekutiny a antibiotika, a podstoupila nekomplikovanou laparoskopickou cholecystektomii v ___. Strava byla postupně rozšiřována a bolest byla kontrolována perorálními léky. Pacientka byla propuštěna domů ___ ve stabilizovaném stavu.
+PŘECHODNÁ OTÁZKA: Sledování výsledků patologického vyšetření.
+
+Léky při přijetí:
+Lisinopril, levotyroxin
+
+Léky při propuštění:
+1. Lisinopril denně, jako dříve.
+2. Levotyroxin denně, jako dříve.
+3. Paracetamol podle potřeby proti bolesti, omezit celkovou denní dávku.
+4. Dokusát při užívání léků proti bolesti.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida s cholelitiázou
+Sekundární: Hypertenze, hypotyreóza
+
+Stav při propuštění:
+Dobrý
+Duševní stav: bdělá a plně orientovaná
+Fyzická aktivita: chodí samostatně
+
+Pokyny pro propuštěného pacienta:
+Byli jste hospitalizováni s zánětem žlučníku, který byl laparoskopicky odstraněn. Udržujte rány čisté a suché, vyhýbejte se těžké fyzické námaze po dobu několika týdnů a v případě horečky, zhoršení bolesti, zvracení nebo žloutnutí kůže kontaktujte ___.
+
+Pokyny pro kontrolu:
+___

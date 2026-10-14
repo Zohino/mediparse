@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Slabost a nadměrná žízeň
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena odeslána z kliniky ___ po několika dnech žízně, častém močení a únavě. Hodnoty glukózy měřené doma byly trvale zvýšené. Byla přijata za účelem kontroly hladiny glukózy.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus, hypertenze
+Cholecystektomie v ___ v roce ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+V rodinné anamnéze je významná sestra, která měla pneumonii. Matka trpěla hypertenzí.
+
+Fyzikální vyšetření:
+PLÍCE: Oboustranně čisté
+BŘICHO: Měkké, netendrovatelné
+KŮŽE: Teplá, suchá
+NEUROLOGIE: Bdělá, bez deficitů
+
+Významné výsledky:
+Při přijetí výrazně zvýšená hladina glukózy, denně se zlepšuje. Sodík a draslík v normě. Kreatinin na výchozí úrovni. Vyšetření moči ukázalo glukózu bez známek infekce. Hemoglobin A1c zvýšený.
+
+Stručný popis hospitalizace:
+Pacientka dostávala tekutiny a inzulin, přičemž se hladina glukózy postupně zlepšovala. Strava byla upravena a edukaci prováděl ošetřovatelský personál ___. Před propuštěním byl režim podávání inzulinu zjednodušen.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Při kontrole v ambulanci znovu zkontrolovat záznamy o hladině glukózy.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+
+Léky při propuštění:
+1. Metformin 1000 mg perorálně dvakrát denně
+2. Inzulin glargin 10 jednotek večer
+3. Lisinopril 10 mg denně
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Nekontrolovaný diabetes
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá
+Stav aktivity: Samostatná
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli vysoké hladině cukru v krvi. Užívajte léky podle pokynů a kontrolujte hladinu glukózy před jídlem. Jezte vyváženou stravu. Volejte ___, pokud bude hladina cukru v krvi trvale vysoká nebo se budete cítit špatně.
+
+Pokyny pro další postup:
+___

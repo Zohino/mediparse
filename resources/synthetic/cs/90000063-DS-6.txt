@@ -1,0 +1,77 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha a zvracení
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila do ___ s dvoudennou se zhoršující bolestí v epigastriu, nevolností a opakovaným zvracením. Nemohla přijímat potravu ústy. Její primární lékař v ___ doporučil urgentní vyšetření. Na pohotovosti neměla horečku a po podání tekutin a analgetik bylo provedeno zobrazovací vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Žlučové kameny
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Vitalní funkce:
+T 37,2 °C, TF 82, TK 128/76, dechová frekvence 16, SpO2 98 % při dýchání okolním vzduchem
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Vlhká sliznice
+Břicho:
+Měkké, mírná citlivost v epigastriu, bez známek peritoneálního dráždění
+Kůže:
+Teplá a suchá
+Neurologické vyšetření:
+Bdělost, bez ložiskových příznaků
+
+Významné výsledky:
+Při přijetí byly laboratorní výsledky zvýšené hodnoty lipázy a mírná leukocytóza, které se do propuštění normalizovaly. Jaterní enzymy byly mírně zvýšené. Ultrazvukové vyšetření v ___ prokázalo žlučové kameny bez dilatace žlučových cest.
+LABORATORNÍ VÝSLEDKY PŘI PROPUŠTĚNÍ:
+Leukocyty 7,1, hemoglobin 12,4, trombocyty 245, sodík 139, draslík 4,1, kreatinin 0,8, lipáza 60
+ZÁVĚR:
+Cholelitiáza s mírným ztluštěním stěny žlučníku, bez dilatace žlučových cest. Výsledky byly prodiskutovány s radiologií v ___.
+
+Stručný popis hospitalizace:
+Pacientka byla přijata s pankreatitidou způsobenou žlučovými kameny a byla udržována v režimu NPO (nic per os) s intravenózní hydratací a antiemetiky. Bolest se postupně zlepšovala během dvou dnů a dieta byla postupně rozšiřována podle tolerance. Konzultace s chirurgem Dr. ___ doporučila ambulantní cholecystektomii v ___. Jaterní testy se normalizovaly. Pacientka byla propuštěna domů ve stabilním stavu s dohodnutým pravidelným sledováním prostřednictvím ___.
+
+Léky při přijetí:
+Levotyroxin 75 mcg denně. Lisinopril 10 mg denně. Multivitamin denně.
+
+Léky při propuštění:
+1. Levotyroxin 75 mcg per os denně
+2. Lisinopril 10 mg per os denně
+3. Paracetamol 500 mg každých šest hodin podle potřeby na bolest
+4. Ondansetron 4 mg každých osm hodin podle potřeby na nevolnost
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pankreatitida způsobená žlučovými kameny
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav: Jasný a orientovaný
+Fyzická aktivita: Chodí, soběstačná
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli zánětu slinivky břišní, který byl způsoben žlučovými kameny. Jezte menší porce jídel s nízkým obsahem tuku a vyhýbejte se alkoholu. Užívajte léky podle pokynů. V případě horečky, silné bolesti nebo žluté barvy kůže volejte na číslo ___ nebo se vraťte na pohotovost. Dodržujte termín schůzky s chirurgem na adrese ___ a termín návštěvy u doktora ___.
+
+Pokyny pro kontrolní vyšetření:
+
+___

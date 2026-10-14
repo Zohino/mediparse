@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Muž s dvoudenní kolikovitou bolestí v pravém horním kvadrantu břicha a nevolností po jídle, vyšetřen v ___ a odeslán sem. Ultrazvuk zde odhalil žlučové kameny. Bolest se přes noc zhoršila, což vedlo k převedení do nemocnice ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+HLAVA, OČI, UŠI, NOS, KRK: Normální, bez známek žloutenky
+SRDCE: Pravidelný rytmus
+BŘICHO: Měkké, citlivé v pravém horním kvadrantu, bez známek peritoneálního dráždění
+KONČETINY: Teplé, bez otoků
+KŮŽE: Intaktní, bez vyrážky
+NEUROLOGIE: Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Mírně zvýšený počet bílých krvinek a jaterních enzymů při přijetí, normalizace do propuštění.
+ZOBRAZOVACÍ METODY:
+Ultrazvuk odhalil mnohočetné žlučové kameny se ztluštěním stěny žlučníku a tekutinou v okolí žlučníku.
+
+Stručný průběh hospitalizace:
+Byl mu podáván roztok, antibiotika a doporučena dieta s omezením potravy, poté podstoupil nekomplikovanou cholecystektomii ___. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a byl propuštěn domů ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Pokračujte v užívání lisinoprilu a atorvastatinu jako dříve. Užijte si paracetamol podle potřeby na bolest. Oxykodon pouze krátkodobě při silné bolesti. Dokusát dvakrát denně během užívání oxykodonu.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl odstraněn. Udržujte rány čisté a suché, vyhýbejte se těžké fyzické námaze po dobu několika týdnů a v případě horečky, zvracení nebo zhoršení bolesti zavolejte na ___ nebo se vraťte do ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Zčervenání levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena odeslána z ___ s potížemi: zčervenání, teplo a horečka levé nohy trvající tři dny.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s cévní mozkovou příhodou
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez horečky
+Břicho:
+Měkké, bez citlivosti
+KONČETINY:
+Zčervenání levé holenní kosti, zlepšuje se
+
+Významné výsledky:
+Mírná leukocytóza při přijetí, normalizovala se do propuštění. Kultivace krve nevykázala žádný růst.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Kreatinin v základní hodnotě
+
+Stručný popis hospitalizace:
+Léčena na celulitidu intravenózními antibiotiky, poté perorálními. Známá chronická nemoc ledvin sledována; funkce ledvin zůstala stabilní. Péče o ránu probrána s ___.
+
+Léky při přijetí:
+Lisinopril, metformin
+
+Léky při propuštění:
+Cefalexin čtyřikrát denně po dobu pěti dnů. Pokračovat v užívání lisinoprilu a metforminu.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida levé nohy
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny pro propuštění:
+Zvedněte nohu, dokončete užívání antibiotik a v případě horečky nebo šíření zčervenání se vraťte.
+
+Pokyny pro kontrolu:
+___

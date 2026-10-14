@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bušení srdce a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___letou ženu, která se dostavila po třech dnech trvajícím bušení srdce, únavě a závratích, které zaznamenala během své návštěvy v ___ ambulanci. Uváděla špatný apetit a mírnou dušnost při námaze. Její příznaky se objevily ___ a zhoršovaly se i přes odpočinek, proto se dostavila na pohotovostní oddělení k vyšetření.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Vitalní funkce: TF 118 nepravidelná, TK 128/76
+Celkový stav: Bdělá, bez známek úzkosti, vyšetřena doktorem ___
+Krk: Pohyblivý
+Břicho: Měkké, netendrovatelné
+Končetiny: Mírný edém
+KŮŽE: Teplá, suchá
+Neurologické vyšetření: Bez ložiskových příznaků
+
+Významné výsledky:
+NÁLEZY:
+EKG prokázalo nepravidelný rytmus bez jasně definovaných P vln při rychlé frekvenci. Rentgen hrudníku byl v normě. Draslík a hořčík byly v normálních mezích. Kreatinin byl na známé výchozí hodnotě. Troponin byl dvakrát negativní.
+
+Stručný průběh hospitalizace:
+Bylo zjištěno, že má fibrilaci síní s rychlou ventrikulární odpovědí, a byla zahájena infuze diltiazemu, poté byla převedena na perorální metoprolol s dobrou kontrolou frekvence. Po konzultaci s kardiologem na ___ byla zahájena antikoagulační léčba. Její funkce ledvin byla monitorována a dávkování upraveno. Zůstala stabilní a byla domluvena kontrola u doktora ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně, atorvastatin 20 mg večer, inzulin podle schématu ___ ambulance.
+
+Léky při propuštění:
+Metoprolol succinat 50 mg denně, apixaban 2,5 mg dvakrát denně, atorvastatin 20 mg večer, inzulin glargin večer, jako dříve. Lisinopril vysadit do doby kontroly.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Fyzická aktivita: Chodí, soběstačná
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli nepravidelnému srdečnímu rytmu. Užívajte léky podle předpisu a dodržujte všechny termíny kontrol. V případě bolesti na hrudi, mdlob nebo krvácení volejte ___ nebo se vraťte na pohotovost. Vyhýbejte se těžké fyzické námaze, dokud to neschválí doktor ___.
+
+Pokyny pro kontrolu:
+___

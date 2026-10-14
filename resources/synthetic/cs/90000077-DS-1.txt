@@ -1,0 +1,76 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka, produktivní kašel, dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___letého muže, který byl odeslán z ___ kliniky s pětidenní horečkou, produktivním kašlem a bolestí na hrudi při dýchání. Zobrazovací vyšetření hrudníku prokázalo pneumonii v dolním laloku pravého plíce. Při přijetí měl hypoxii a byl odeslán doktorem ___ k hospitalizaci.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav:
+Mírně zrychlené dýchání, v klidu je v pohodě
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Krk:
+Pružný
+Plíce:
+V dolní části pravé plíce slyšitelné chrůpky
+SRDEČNÍ:
+Pravidelný rytmus, bez šelestů
+BŘICHO:
+Měkké, netendrovatelné
+KONČETINY:
+Bez otoků
+KŮŽE:
+Teplá, suchá
+
+Významné výsledky:
+Při přijetí byly v laboratorních testech zjištěny zvýšené hodnoty bílých krvinek (14,2) s převahou neutrofilů a mírně zvýšená hladina laktátu, která se po podání tekutin normalizovala. Kultivace krve provedená ___ nevykázala žádný růst. Rentgen hrudníku prokázal konsolidaci v dolním laloku pravé plíce bez výpotku. Hladiny sodíku a kreatininu byly v normě.
+
+Stručný popis průběhu hospitalizace:
+Byl zahájen léčba ceftriaxonem a azithromycinem, přičemž podávání kyslíku bylo postupně snižováno až na úroveň pokojového vzduchu do třetího dne. Horečka ustoupila a kašel se zlepšil. ___ tým ho vyšetřil ___ a rozhodl, že je v stabilním stavu a může být propuštěn domů, aby dokončil perorální léčbu antibiotiky.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Amoxicillin-klavulanát 875 mg dvakrát denně po dobu dalších pěti dnů
+2. Lisinopril 10 mg denně
+3. Atorvastatin 20 mg večer
+Pokračujte v užívání ostatních léků podle pokynů ___ kliniky.
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Komunitně získaná infekce dolních cest dýchacích
+Sekundární:
+Hypertenze, hyperlipidemie
+
+Stav při propuštění:
+Stabilní a zlepšený
+Úroveň vědomí:
+Bdělý a orientovaný
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny pro další péči:
+___

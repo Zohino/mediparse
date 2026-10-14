@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a otok levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s hypertenzí se dostavila s třídenním zčervenáním, hřejivostí a otokem levé nohy po drobném odření. V odesílající ambulanci měla zvýšenou teplotu (___) a byla odeslána na pohotovost, kde jí byly podány intravenózní antibiotika.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Křečové žíly
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka, která prodělala cévní mozkovou příhodu
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
+Plíce: Čisté na obou stranách.
+Kůže: Hřejivé zčervenání levého lýtka.
+Pulzy: Hmatné pulzy na dorsální straně chodidla na obou stranách.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 13,2, laktát 1,1, kreatinin 0,8, zvýšené CRP. Krevní kultury odebrané ___ nevykázaly růst.
+NÁLEZY:
+Ultrazvuk levé nohy prokázal edém měkkých tkání bez abscesu nebo hluboké žilní trombózy.
+
+Stručný průběh hospitalizace:
+Pacientka dostávala intravenózní cefazolin, došlo ke zlepšení, a okraj zčervenání byl ohraničen pomocí speciálního pera. Horečka ustoupila během jednoho dne. Byla jí doporučena péče o ránu (___). Třetí den hospitalizace byla převedena na perorální cefalexin, dobře jedla a chodila samostatně.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Ibuprofen podle potřeby
+
+Léky při propuštění:
+Cefalexin 500 mg čtyřikrát denně po dobu sedmi dnů. Lisinopril 10 mg denně. Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti. Vysadit ibuprofen.
+
+Způsob propuštění:
+Domů, s pomocí od ___
+
+Diagnóza při propuštění:
+Celulitida levé dolní končetiny
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a reaguje.
+
+Pokyny při propuštění:
+Dokončete všechny antibiotika. Mějte nohu zvednutou a sledujte, zda se nezhoršuje zčervenání, zda se neobjevuje horečka nebo hnis. V případě zhoršení příznaků zavolejte na ___ nebo se vraťte na pohotovost.
+
+Pokyny pro kontrolu:
+___

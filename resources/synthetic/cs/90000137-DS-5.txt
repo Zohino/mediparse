@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Jedná se o ___letého muže, který se dostavil s potížemi, jako je bušení srdce, zhoršující se dušnost a únava, trvajícími dva dny. Byl vyšetřen v ___, kde elektrokardiogram prokázal fibrilaci síní s rychlou komorovou frekvencí. Jeho příznaky se objevily ___, poté, co mu došly léky, které užíval doma. Popíral bolesti na hrudi, horečku nebo synkopu a byl převezen za účelem kontroly srdeční frekvence a monitorování.
+
+Anamnéza předchozích onemocnění:
+Chronická obstrukční plicní nemoc
+Chronické onemocnění ledvin, stadium 3
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Krk: Pohyblivý, bez známek rozšíření jugulárních žil
+Plíce: Difúzní expirační sípání, bez chrůpků
+SRDCE: Nepravidelný rytmus, tachykardie, bez šelestu
+Břicho: Měkké, netendrové, neztuhlé
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí z ___ ukázala normální hodnoty kreatininu, draslíku a dvakrát negativní hodnoty troponinu. Mozkový natriuretický peptid byl mírně zvýšený. Rentgen hrudníku prokázal hyperinflaci plic bez ložiskové konsolidace nebo výpotku. Echokardiografie provedená v ___ odhalila zachovanou ejekční frakci s mírným zvětšením levé síně a bez významného onemocnění chlopní.
+
+Stručný průběh hospitalizace:
+Pacient byl přijat na jednotku intenzivní péče a byl mu podán intravenózně diltiazem, poté byl převeden na perorální metoprolol s dobrou kontrolou srdeční frekvence. Po diskusi o riziku cévní mozkové příhody a riziku krvácení byla zahájena antikoagulační léčba. Jeho sípání se zlepšilo díky inhalátorům a krátkodobé léčbě kortikosteroidy, kterou zajistil ___. Funkce ledvin zůstala stabilní a dávky byly odpovídajícím způsobem upraveny. Byl propuštěn ve stabilizovaném stavu po vyšetření ___ a ___.
+
+Léky při přijetí:
+Inhalátor albuterolu podle potřeby
+Lisinopril 10 mg denně, zásoba ___ vyčerpána
+
+Léky při propuštění:
+1. Metoprolol succinat 50 mg denně
+2. Apixaban 2,5 mg dvakrát denně
+3. Inhalátor albuterolu každé 4 hodiny podle potřeby
+4. Inhalátor tiotropia denně
+5. Atorvastatin 20 mg večer, předepsán ___
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární: Akutní exacerbace chronické obstrukční plicní nemoci
+
+Stav při propuštění:
+Duševní stav: Bdělý a orientovaný, schopen plně se zapojit
+Úroveň vědomí: Bdělý a pozorný
+Stav aktivity: Samostatný při chůzi
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli rychlému a nepravidelnému srdečnímu tepu a potížím s dýcháním. Užívajte nově předepsané léky každý den a nepřestávejte je užívat, aniž byste se nejprve poradili se svým lékařem. Každé ráno se zvažte a zavolejte na číslo ___, pokud přiberete, budete se cítit závratně nebo si všimnete krvácení. V případě bolesti na hrudi, mdlob nebo zhoršení dušnosti se vraťte na pohotovost. Dodržujte termín své kontroly u ___.
+
+Pokyny pro další postup:
+___

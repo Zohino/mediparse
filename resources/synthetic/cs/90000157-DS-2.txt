@@ -1,0 +1,77 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Horečka a produktivní kašel
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž převezen z ___ s pětidenní horečkou, produktivním kašlem a dušností. Zobrazovací vyšetření hrudníku prokázalo pneumonii v dolním laloku pravého plíce. Byla zahájena léčba antibiotiky a pacient byl přijat ___ k monitorování.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav:
+Unavený, bez známek úzkosti
+Krk:
+Pružný
+PLÍCE:
+Chropy v pravé dolní části
+BŘICHO:
+Měkké, bez citlivosti
+Končetiny:
+Bez otoků
+Neurologické vyšetření:
+Při vědomí, bez ložiskových příznaků
+
+Významné výsledky:
+Počet leukocytů 14,2 při přijetí, snížil se na 8,1 při propuštění. Laktát v normě. Kultivace krve bez růstu. Rentgen hrudníku s konsolidací v pravém dolním laloku, bez výpotku. Kreatinin stabilní během hospitalizace.
+
+Stručný průběh hospitalizace:
+Léčen ceftriaxonem a azithromycinem, poté převeden na perorální antibiotika po odeznění horečky. Kyslíková terapie postupně snižována, dokud pacient nedýchal pouze okolní vzduch. Konzultace s Dr. ___ ohledně dalšího postupu ___. Pacient toleruje stravu a pohybuje se samostatně.
+PŘECHODNÁ OTÁZKY:
+Opakované rentgenové vyšetření hrudníku za šest týdnů.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+Amoxicilin-klavulanát 875 mg dvakrát denně po dobu pěti dalších dnů. Pokračovat v užívání lisinoprilu 10 mg denně a atorvastatinu 20 mg večer. Paracetamol podle potřeby při horečce.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Komunitně získaná plicní infekce
+Hypoxémie
+
+Stav při propuštění:
+Stabilní
+Úroveň vědomí:
+Při vědomí a komunikativní
+Stav aktivity:
+Chodí, samostatný
+
+Pokyny pro propuštění:
+Byl jste léčen na plicní infekci. Dokončete všechny antibiotika, pijte dostatek tekutin a odpočívejte. V případě horečky, zhoršení dušnosti nebo bolesti na hrudi volejte ___ nebo se vraťte do nemocnice. Vaše kontrolní vyšetření je naplánováno na ___.
+
+Pokyny pro kontrolní vyšetření:
+___

@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila do ___ s několikdenní anamnézou bušení srdce a únavy. Její primární lékař v ___ zaznamenal rychlý, nepravidelný puls a odeslal ji na pohotovost, kde byla zahájena léčba ke zpomalení srdeční frekvence a byla přijata k monitorování.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice
+Břicho: Měkké, netendrovatelné
+Končetiny: Bez otoků
+Neurologický stav: Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ___ prokázala normální hladinu elektrolytů a normální hladinu tyreostimulačního hormonu. Troponin byl dvakrát negativní. Rentgen hrudníku byl v normě. Echokardiografie prokázala zachovanou ejekční frakci s mírným zvětšením levé síně.
+
+Stručný průběh hospitalizace:
+Byla monitorována pomocí telemetrie a její srdeční frekvence se stabilizovala po podání metoprololu perorálně. Po prodiskutování rizik a přínosů byla zahájena antikoagulační léčba. Její příznaky ustoupily do ___ a mohla chodit bez potíží. ___ ji prohlásil za způsobilou k propuštění a doporučil kontrolu u ambulantního kardiologa.
+
+PŘECHODNÁ OTÁZKY:
+Při první návštěvě v ambulanci zkontrolovat srdeční frekvenci a krevní tlak.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 75 mcg denně
+
+Léky při propuštění:
+1. Apixaban 5 mg perorálně dvakrát denně
+2. Metoprolol succinat 50 mg perorálně jednou denně
+3. Lisinopril 10 mg denně
+4. Levotyroxin 75 mcg denně
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Fibrilace síní
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a reagující.
+Fyzická aktivita: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Byli jste přijati s rychlým, nepravidelným srdečním tepem. Užívajte své nové léky každý den, včetně léku na ředění krve. Vraťte se, pokud se objeví bolest na hrudi, mdloby, krvácení nebo zhoršení dušnosti. Dodržujte termín kontroly u ___.
+
+Pokyny pro další postup:
+___

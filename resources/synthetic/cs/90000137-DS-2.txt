@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel a horečka
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s chronickým onemocněním ledvin, který se dostavil s kašlem, horečkou a dušností trvajícími tři dny. Zobrazovací vyšetření prokázala pneumonii. Byl vyšetřen na pohotovosti ___.
+PŘEHLED SYSTÉMŮ:
+Pozitivní nález na kašel a horečku.
+
+Anamnéza předchozích onemocnění:
+Atriální fibrilace
+Hypertenze
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů
+
+Fyzikální vyšetření:
+Celkový stav: Unavený, mírná dušnost
+HLAVA, OČI, UŠI, NOS, KRK: Vlhké sliznice
+PLÍCE: Chropy na pravé dolní části
+BŘICHO: Měkké, netendrovatelné
+KONČETINY: Bez otoků
+KŮŽE: Teplá, suchá
+NEUROLOGIE: Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Zvýšený počet bílých krvinek, kreatinin v normě.
+ZÁVĚR: Zastínění pravého dolního laloku plic, bez výpotku.
+
+Stručný popis hospitalizace:
+Přeložen z ___ kvůli zhoršující se dušnosti. Léčen antibiotiky a inhalátory; jeho CHOPN zůstala stabilní. Podávání kyslíku bylo postupně snižováno a jeho stav se zlepšoval.
+
+Léky při přijetí:
+Lisinopril a metoprolol denně
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát dvakrát denně po dobu pěti dnů
+2. Metoprolol denně
+3. Inhalátor s albuterolem podle potřeby
+
+Plán propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Pneumonie
+CHOPN
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý
+Stav aktivity: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Dokončete všechny antibiotika, odpočívejte a pijte dostatek tekutin. V případě horečky nebo zhoršení dýchání se vraťte. Prosím, kontaktujte doktora ___ do jednoho týdne.
+
+Pokyny pro kontrolu:
+___

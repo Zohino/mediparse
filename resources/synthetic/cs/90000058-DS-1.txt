@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky.
+
+Hlavní potíže:
+Horečka a produktivní kašel.
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný.
+
+Anamnéza současného onemocnění:
+Pacient je muž, který byl vyšetřen na ___ po pěti dnech zhoršujícího se produktivního kašle, horečky a dušnosti. Byl vyšetřen svým ošetřujícím lékařem na ___ a odeslán na pohotovost. Při příjezdu měl horečku a byl hypoxický při dýchání okolního vzduchu. Zobrazovací vyšetření hrudníku ukázalo opacitu v dolním laloku pravé plíce a byl přijat do nemocnice ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze, hyperlipidemie.
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů.
+
+Fyzikální vyšetření:
+Celkový stav: Mírně nemocný vzhled, v klidu se cítí dobře.
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice, bez známek žloutenky.
+Krk: Pohyblivý, bez známek zvýšeného žilního tlaku.
+Srdce: Pravidelný rytmus, bez šelestů.
+Břicho: Měkké, netendrovatelné, neztuhlé.
+Končetiny: Teplé, bez otoků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Zvýšený počet bílých krvinek s převahou neutrofilů, mírně zvýšená hladina laktátu, kreatinin a sodík v normálních mezích, jak uvádí laboratoř ___.
+ZÁVĚR: Konsolidace v dolním laloku pravé plíce bez výpotku a bez dalších akutních nálezů, vyhodnotil Dr. ___.
+
+Stručný popis hospitalizace:
+Byl léčen na infekci dolních cest dýchacích intravenózními antibiotiky, které byly zahájeny na pohotovosti ___. Během dvou dnů byla snižována dávka kyslíku a horečka ustoupila. Byl převeden na perorální antibiotika a mohl chodit bez dekompenzace. Kultivace krve neprokázala růst bakterií. Po zotavení bylo naplánováno opakované zobrazovací vyšetření hrudníku s Dr. ___ a byl propuštěn domů ___ ve stabilizovaném stavu.
+
+Léky při přijetí:
+Podle seznamu z ___: lisinopril 10 mg denně, atorvastatin 20 mg večer, aspirin 81 mg denně.
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu dalších pěti dnů.
+2. Lisinopril 10 mg denně.
+3. Atorvastatin 20 mg večer.
+4. Aspirin 81 mg denně.
+5. Acetaminofen 650 mg každých šest hodin podle potřeby na horečku. Recepty zaslány do ___.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Zánět plic
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli plicní infekci a léčeni antibiotiky. Doma dokončete celou kúru antibiotik. Pijte dostatek tekutin a odpočívejte. V případě horečky, zhoršení kašle, bolesti na hrudi nebo potíží s dýcháním se vraťte do nemocnice. Pokud máte jakékoli dotazy, zavolejte na kliniku na číslo ___ a nezapomeňte na plánovanou návštěvu u doktora ___.
+
+Pokyny pro kontrolní vyšetření:
+
+___

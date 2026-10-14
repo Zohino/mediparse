@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s dlouhodobou nepravidelnou srdeční frekvencí se dostavil do ___ s třemi dny trvajícím bušením srdce, závratí a mírnou dušností při námaze. Příznaky se objevily ___ poté, co vynechal několik dávek svých obvyklých léků. Popíral bolest na hrudi, synkopu nebo horečku.
+
+Anamnéza předchozích onemocnění:
+Fibrilace síní
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Nepravidelný puls, v klidu bez potíží. Žádný periferní edém.
+Plíce: Oboustranně čisté.
+Břicho: Měkké, bez citlivosti.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Zvýšená hladina kreatininu, draslík 4,4, stabilní hladina hemoglobinu, troponin dvakrát negativní, TSH v normě.
+ZOBRAZOVACÍ VYŠETŘENÍ:
+Rentgen hrudníku provedený ___ neukázal žádný akutní proces. Echokardiogram ukázal zachovanou ejekční frakci a mírně rozšířenou levou síň.
+
+Stručný průběh hospitalizace:
+Při přijetí byla srdeční frekvence rychlá, ale po podání léků ke zpomalení srdeční frekvence se stabilizovala. Byla obnovena antikoagulační terapie. Dr. ___ z kardiologie pacienta vyšetřil a souhlasil s ambulantní léčbou. Elektrolyty byly doplněny a funkce ledvin zůstala stabilní. Před propuštěním do ___ se pacient mohl pohodlně pohybovat.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
+Kontrola kreatininu a draslíku v ambulanci.
+
+Léky při přijetí:
+Metoprolol, apixaban, atorvastatin, lisinopril
+
+Léky při propuštění:
+1. Metoprolol succinate 50 mg denně
+2. Apixaban 5 mg dvakrát denně
+3. Atorvastatin 40 mg večer
+4. Lisinopril 5 mg denně
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Primární: Fibrilace síní s rychlou ventrikulární odpovědí
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Stabilizovaný a zlepšený.
+Duševní stav: Bdělý a orientovaný, schopen plnit pokyny.
+Úroveň vědomí: Plně bdělý a komunikativní.
+Úroveň aktivity: Chodí samostatně bez pomoci.
+
+Pokyny pro propuštění:
+Byli jste přijati s rychlým srdečním tepem. Užijte si každý lék přesně podle předpisu a nepřeskakujte dávky. V případě bolesti na hrudi, mdlob nebo zhoršení dušnosti se vraťte. V případě jakýchkoli dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

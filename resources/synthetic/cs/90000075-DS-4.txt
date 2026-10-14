@@ -1,0 +1,83 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___letý muž, odeslán svým ošetřujícím lékařem z ___, s dvoudenní se zhoršující bolestí v pravém horním kvadrantu břicha, nevolností a jednou epizodou zvracení. Bolest začala po konzumaci tučného jídla. Uvádí mírné zvýšení teploty doma a žádnou žloutenku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie v minulosti v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka měla žlučové kameny
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Bez horečky, v pohodlí, mírná citlivost při hlubokém dýchání.
+Krk:
+Pružný, bez rezistencí
+Břicho:
+Měkké, citlivé v pravém horním kvadrantu, pozitivní Murphyho příznak
+Končetiny:
+Teplé, bez otoků
+KŮŽE:
+Bez vyrážky, bez žloutenky
+Neurologické vyšetření:
+Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Mírně zvýšený počet bílých krvinek, normální jaterní enzymy. Ultrazvuk odhalil žlučové kameny, zesílenou stěnu žlučníku a tekutinu v okolí žlučníku, vyhodnotil radiolog ___.
+ZÁVĚR:
+Nálezy odpovídají akutní cholecystitidě.
+
+Stručný průběh hospitalizace:
+Byl přijat, udržován v dietě, podávány intravenózní tekutiny a antibiotika. Dne ___ provedl chirurg ___ nekomplikovanou laparoskopickou cholecystektomii. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a rány zůstaly čisté. Byl připraven k propuštění domů dne ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně.
+2. Atorvastatin 20 mg perorálně každou noc.
+3. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest.
+4. Docusate 100 mg dvakrát denně při užívání opioidů.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Hypertenze
+Hyperlipidémie
+
+Stav při propuštění:
+Dobrý.
+Duševní stav:
+Jasný a srozumitelný, plně orientovaný.
+Fyzická aktivita:
+Chodí samostatně; po dobu několika týdnů se vyhýbat těžké fyzické práci.
+
+Pokyny pro propuštění:
+Byl jste léčen pro zánět žlučníku, který byl odstraněn. Udržujte rány čisté a suché a sprchujte se jako obvykle. V případě horečky, zhoršení bolesti břicha, zvracení, žloutnutí kůže nebo zarudnutí rány se vraťte. V případě dotazů volejte na kliniku na čísle ___.
+
+Pokyny pro kontrolu:
+___

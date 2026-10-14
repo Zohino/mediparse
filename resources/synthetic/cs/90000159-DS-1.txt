@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Poranění nohy a vysoká hladina cukru v krvi
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient je ___ letý muž s diagnostikovaným diabetes mellitus, odeslán z ___ dne ___ s hnisavým vředem na noze, žízní a hodnotami glukózy nad 400 doma.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+HEENT: Suché sliznice
+Krk: Pohyblivý
+Plíce: Čisté na obou stranách
+Břicho: Měkké, netendrovatelné
+Končetiny: Vřed na pravé noze, mírné teplo
+KŮŽE: Žádné jiné vyrážky
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: Glukóza 462, bikarbonát v normě, kreatinin blízko výchozí hodnoty, mírně zvýšený počet bílých krvinek.
+ZÁVĚR: Rentgen nohy provedený dne ___ ukazuje otok měkkých tkání bez destrukce kosti.
+
+Stručný popis průběhu hospitalizace:
+Hladina glukózy byla snížena intravenózními tekutinami a inzulínem, poté se přešlo na subkutánní podávání. Rána byla očištěna a ošetřena antibiotiky. Podolog z ___ doporučil odlehčení nohy. Pacient byl poučen o kontrole glukózy před propuštěním dne ___.
+
+Léky při přijetí:
+Metformin
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+1. Inzulín glargin jednou denně
+2. Metformin dvakrát denně
+3. Lisinopril jednou denně
+4. Atorvastatin jednou denně
+5. Cefalexin po dobu sedmi dnů
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Nekontrolovaný diabetes
+Infekce vředu na noze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Chodí s odlehčující obuví
+
+Pokyny pro propuštění:
+Byli jste přijati s vysokou hladinou cukru v krvi a infikovaným vředem na noze. Měřte si glukózu před jídlem, užívejte léky podle pokynů, odlehčujte noze a v případě horečky nebo zhoršení zarudnutí volejte ___.
+
+Pokyny pro kontrolu:
+___

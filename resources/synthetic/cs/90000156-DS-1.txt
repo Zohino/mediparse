@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin (reakce zdokumentována v ___)
+
+Hlavní potíže:
+Bolest břicha
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s několikdenní se zhoršující bolestí v epigastriu a nevolností, odeslán doktorem ___ po ambulantní návštěvě v ___. Jednou zvracel doma. Přišel na pohotovost k vyšetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Podezření na diabetes mellitus, čeká se na potvrzující testy
+Bez anamnézy chronického onemocnění ledvin
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s ischemickou chorobou srdeční
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, vypadá dobře
+Krk: Pohyblivý
+Plíce: Čisté na obou stranách
+Končetiny: Teplé, bez otoků
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Při přijetí zvýšená hladina lipázy. Mírně zvýšené jaterní enzymy. Ultrazvuk v ___ prokázal žlučové kameny bez dilatace žlučových cest. Hladina kreatininu a elektrolytů byla během hospitalizace v normálních mezích.
+
+Stručný průběh hospitalizace:
+Přijat s pankreatitidou způsobenou žlučovými kameny. Léčen intravenózními tekutinami, klidem střev a analgetiky, poté postupně zařazována strava s ústupem bolesti. Chirurgický tým v ___ doporučil ambulantní cholecystektomii. Propuštěn domů, když toleroval stravu.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+Aspirin
+
+Léky při propuštění:
+1. Lisinopril denně, jako dříve.
+2. Atorvastatin večer.
+3. Paracetamol podle potřeby proti bolesti.
+4. Ondansetron podle potřeby proti nevolnosti.
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Pankreatitida způsobená žlučovými kameny
+Cholelitiáza
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Chodí, soběstačný
+
+Pokyny při propuštění:
+Byli jste hospitalizováni s pankreatitidou způsobenou žlučovými kameny. Jezte menší jídla s nízkým obsahem tuku a vyhýbejte se alkoholu. Užívajte léky podle pokynů. V případě silné bolesti, horečky, zvracení nebo žluté kůže se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

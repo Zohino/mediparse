@@ -1,0 +1,69 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Otok nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s otokem kotníku a únavou, vyšetřen v ambulanci ___.
+
+Anamnéza předchozích onemocnění:
+Chronické onemocnění ledvin
+Hypertenze
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav: Dobrý, bez známek úzkosti
+Krk: Pohyblivý
+Plíce: Čisté na obou stranách
+Břicho: Měkké, bez citlivosti
+Končetiny: Mírný otok
+Kůže: Teplá, suchá
+
+Významné výsledky:
+Kreatinin byl blízko výchozí hodnoty. Draslík v normě. Rentgen hrudníku bez významných nálezů.
+ZÁVĚR:
+Žádné akutní nálezy.
+
+Stručný popis hospitalizace:
+Mírná retence tekutin byla léčena perorálními diuretiky a otok se zlepšil. Hodnoty ledvin zůstaly stabilní. Pacient byl propuštěn domů po vyšetření lékařem ___.
+
+Léky při přijetí:
+Amlodipin, allopurinol
+
+Léky při propuštění:
+Amlodipin 5 mg denně, allopurinol 100 mg denně, furosemid 20 mg denně
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Stabilní
+Duševní stav: Bdělý a orientovaný
+Úroveň vědomí: Probuzený
+Stav aktivity: Chodí samostatně
+
+Pokyny pro propuštěného pacienta:
+Denně se važte a omezte příjem soli. V případě zhoršení otoku nebo snížení objemu moči se vraťte.
+
+Pokyny pro kontrolu:
+___

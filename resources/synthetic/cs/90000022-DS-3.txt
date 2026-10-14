@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava a otok nohou
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Mužský pacient s dlouhodobými zdravotními problémy, odeslán z kliniky ___ po několika dnech zhoršující se únavy, snížené chuti k jídlu a otoku nohou. Byl vyšetřen lékařem ___ a doporučeno mu, aby se dostavil na pohotovost ___. Při přijetí byly provedeny laboratorní testy, které ukázaly vysokou hladinu glukózy a abnormální funkci ledvin, což vedlo k hospitalizaci za účelem monitorování.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu, trvající mnoho let
+Chronické onemocnění ledvin, sledované ___
+Hypertenze
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec zemřel, podrobnosti ___.
+
+Fyzikální vyšetření:
+Celkový stav: Bdělý, v pohodě, bez akutních potíží.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice, bez žloutenky.
+Plíce: Čisté na obou stranách, bez sípotu.
+Kůže: Teplá, suchá, mírný otok nohou.
+Neurologické: Bdělý, orientovaný, bez ložiskových příznaků.
+
+Významné výsledky:
+Při přijetí laboratorní testy odhalily zvýšenou hladinu glukózy a kreatininu nad výchozí hodnotu, odběr proveden v ___. Mírně zvýšená hladina draslíku. Stabilní hladina hemoglobinu. V moči přítomnost bílkovin a glukózy.
+NÁLEZY: Rentgen hrudníku provedený v ___ ukázal čisté plíce bez ložiskové konsolidace a mírnou kardiomegalii. Ultrazvuk ledvin provedený ___ ukázal malé echogenní ledviny bez hydronefrózy.
+
+Stručný průběh hospitalizace:
+Byl přijat na oddělení medicíny ___ a léčen inzulínem a intravenózními tekutinami, s postupným zlepšením hladiny glukózy. Hladina kreatininu se vrátila k výchozí hodnotě. Neměl kašel ani horečku a zobrazovací vyšetření hrudníku neukázalo pneumonii. Nefrolog z ___ zhodnotil případ a upravil dávkování léků. Edukace o dietě byla dokončena s ošetřující sestrou ___. Jeho stav byl stabilní a byl propuštěn domů s dohodnutou následnou péčí ___.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně. Lisinopril 10 mg denně. Aspirin 81 mg denně.
+
+Léky při propuštění:
+Inzulín glargin 10 jednotek před spaním. Amlodipin 5 mg denně. Aspirin 81 mg denně. Atorvastatin 20 mg večer. Metformin vysadit, dokud nebude znovu zkontrolována funkce ledvin. Lisinopril vysadit, dokud nebudou provedeny kontrolní laboratorní testy.
+
+Způsob propuštění:
+Domů s dohodnutou následnou péčí
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli vysoké hladině cukru v krvi a zhoršující se funkci ledvin. Užívajte léky podle seznamu a měřte si hladinu cukru v krvi každé ráno a večer. Pijte tekutiny podle doporučení, vyhýbejte se protizánětlivým lékům proti bolesti a v případě zvracení, zmatenosti nebo velmi malého množství moči se vraťte.
+
+Další pokyny:
+___

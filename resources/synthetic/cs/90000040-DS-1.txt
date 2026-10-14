@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Zčervenání a otok pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena s třídenní anamnézou zčervenání, tepla a horečky pravé nohy. Přišla na pohotovost ___ a byla léčena intravenózními antibiotiky.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Teplota 38,3 °C, klidná, zčervenalá, teplá holeně pravé nohy.
+FYZIKÁLNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Bez horečky, zčervenání výrazně menší.
+Extremity:
+Mírný otok pravého lýtka, bez ztuhlostí.
+Neurologické vyšetření:
+Bdělost, bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 13,2, hemoglobin 12,4, kreatinin 0,8. Kultivace krve negativní. Ultrazvuk pravé nohy neodhalil tromb.
+
+Stručný popis hospitalizace:
+Byla léčena pro celulitidu pravé nohy intravenózním vancomycinem a zčervenání ohraničil doktor ___. Horečka ustoupila během dvou dnů a otok se zlepšil při elevaci nohy. Dne ___ byla převedena na perorální doxycyklin a mohla pohodlně chodit.
+
+Léky při přijetí:
+Levotyroxin
+Lisinopril
+
+Léky při propuštění:
+1. Doxycyklin 100 mg dvakrát denně po dobu pěti dnů
+2. Levotyroxin 75 mcg denně
+3. Lisinopril 10 mg denně
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida pravé nohy
+Hypertenze
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a komunikativní.
+Stav aktivity: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Byla léčena pro kožní infekci nohy. Dokončete všechny antibiotické tablety, udržujte nohu ve zvýšené poloze a volejte ___, pokud se zčervenání rozšíří, horečka se vrátí nebo se zhorší bolest.
+
+Pokyny pro kontrolu:
+___

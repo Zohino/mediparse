@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zčervenání a otok pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s hypertenzí, který se dostavil do ___ s třídenním zhoršováním zčervenání, tepla a otoku pravé dolní končetiny po drobném oděru, který utrpěl při zahradničení. Uváděl subjektivní pocity horečky a zimnice. Byl vyšetřen svým ošetřujícím lékařem v ___ a odeslán na pohotovost, kde mu byly podány intravenózní antibiotika a byl přijat k dalšímu ošetření.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí, zemřel v ___
+
+Fyzikální vyšetření:
+Celkový stav: Dobře vypadající, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo: Normocefalický, vlhké sliznice.
+Plíce: Čisté na obou stranách.
+Břicho: Měkké, netendrové, neztuhlé.
+Končetiny: Zčervenání pravé holeně s teplem a mírným edémem, okraje výrazně zlepšené.
+Neurologické: Bdělý, hrubě intaktní, bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 13,2, hemoglobin 14,1, trombocyty 245, sodík 139, draslík 4,2, kreatinin 0,9, CRP 78. Krevní kultury po dvou dnech nevykazovaly růst. Zobrazovací vyšetření provedené v ___ pomocí ultrazvuku pravé nohy ukázalo subkutánní edém bez abscesu nebo hluboké žilní trombózy. Opakovaná laboratorní vyšetření před propuštěním ukázala leukocyty 8,1 a kreatinin 0,8.
+
+Stručný průběh hospitalizace:
+Byl přijat s celulitidou pravé dolní končetiny a léčen intravenózním cefazolinem, přičemž okraje zčervenání byly sledovány denně. Byl vyšetřen doktorem ___ a zůstal bez horečky. Dne ___ se otok a bolest výrazně zlepšily a toleroval perorální antibiotika. Jeho krevní tlak zůstal stabilní při domácí medikaci. Po propuštění bude pokračovat v léčbě u ___.
+
+Medikace při přijetí:
+Lisinopril 10 mg denně, atorvastatin 20 mg večer, vydáno v lékárně ___
+
+Medikace při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších pěti dnů
+2. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti
+3. Lisinopril 10 mg perorálně denně
+4. Atorvastatin 20 mg perorálně večer
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+Hypertenze
+
+Stav při propuštění:
+Stabilizovaný a zlepšený.
+Úroveň vědomí: Bdělý a orientovaný.
+Stav aktivity: Ambulantní, soběstačný.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli kožní infekci pravé nohy a léčeni antibiotiky. Dokončete celou kúru cefalexinem. Při sezení nohu zvedněte a udržujte pokožku čistou a hydratovanou. V případě, že se zarudnutí rozšíří, bolest se zhorší nebo se objeví horečka, zavolejte na číslo ___. Vraťte se ___ na kontrolu rány, případně dříve, pokud se příznaky zhorší.
+
+Pokyny pro další postup:
+
+___

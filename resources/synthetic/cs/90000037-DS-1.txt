@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel, horečka a dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Žena s několikdenním produktivním kašlem, horečkami a postupně se zhoršující dušností, odeslána z ___ k vyšetření. Při příjezdu měla hypoxii a byla vyšetřena doktorem ___ na pohotovosti před přijetím.
+
+Anamnéza předchozích onemocnění:
+Atriální fibrilace
+Hypertenze
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti, dýchá snadno na běžném vzduchu
+Břicho:
+Měkké, netendrovatelné
+KONČETINY:
+Bez otoků
+
+Významné výsledky:
+Počet bílých krvinek zvýšený při přijetí a normalizovaný při propuštění. Rentgen hrudníku ukázal opacitu v dolním laloku pravého plíce. Kultivace krve nevykázaly růst. Kreatinin a elektrolyty zůstaly během hospitalizace stabilní.
+
+Stručný průběh hospitalizace:
+Byla léčena intravenózními antibiotiky a doplňkovým kyslíkem, jehož dávka byla postupně snižována během tří dnů. Její srdeční frekvence zůstala kontrolovaná při domácím režimu. Byla sledována doktorem ___ a její kultivace byly zkontrolovány na ___ před propuštěním a zahájením perorální léčby antibiotiky.
+
+Léky při přijetí:
+Metoprolol, apixaban, levotyroxin
+
+Léky při propuštění:
+1. Amoxicilin-klavulanát dvakrát denně po dobu dalších pěti dnů
+2. Metoprolol succinat jednou denně
+3. Apixaban dvakrát denně
+4. Levotyroxin jednou denně ráno
+
+Plán propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Pneumonie
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+Stav aktivity:
+Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byla jste přijata s plicní infekcí a léčena antibiotiky. Dokončete celou kúru antibiotik. Pokračujte v užívání ostatních léků jako dříve. V případě horečky, zhoršení kašle nebo potíží s dýcháním se vraťte a v případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

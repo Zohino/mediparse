@@ -1,0 +1,77 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zarudnutí a bolest levé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž s několikdenním zhoršováním otoku, tepla a zarudnutí levé dolní končetiny po drobném oděru, odeslán z ambulance ___ po objevení se horečky doma. Byl krátce léčen v ___, ale bez zlepšení.
+PŘEHLED SYSTÉMŮ:
+Přítomny zimnice. Žádná bolest na hrudi, kašel ani zvracení.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Mírně nepohodlný, bez horečky
+Plíce:
+Čisté
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Levá holeně zarudlá, teplá, citlivá
+Kůže:
+Výrazně ohraničená oblast
+Neurologické vyšetření:
+Bez ložiskových příznaků
+
+Významné výsledky:
+Mírně zvýšený počet bílých krvinek při přijetí, normalizace do propuštění. Stabilní hladina kreatininu. Krevní kultury z ___ nevykazovaly růst. Ultrazvuk levé nohy negativní na přítomnost krevní sraženiny.
+
+Stručný popis hospitalizace:
+Přijat pro celulitidu levé nohy, zahájena intravenózní antibiotická léčba. Zarudnutí ustoupilo z ohraničené oblasti a horečka odezněla během dvou dnů. Bolest se zlepšila po podání paracetamolu a elevaci nohy. Přechod na perorální antibiotika, dobře tolerováno. Vyšetřen ___ s ohledem na péči o ránu před propuštěním do ___.
+
+Léky při přijetí:
+Amlodipin 5 mg denně
+Atorvastatin 20 mg večer
+Allopurinol denně
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších sedmi dnů
+2. Paracetamol 650 mg každých šest hodin podle potřeby na bolest
+3. Pokračovat v užívání amlodipinu, atorvastatinu a allopurinolu jako dříve, dle pokynů ___
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Celulitida levé dolní končetiny
+Hypertenze
+DNA
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Stav aktivity: Chodí, soběstačný.
+
+Pokyny pro propuštění:
+Byl jste léčen pro kožní infekci nohy. Dokončete všechny antibiotika a udržujte nohu ve zvýšené poloze. V případě šíření zarudnutí, horečky nebo zhoršení bolesti se vraťte. V případě jakýchkoli dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

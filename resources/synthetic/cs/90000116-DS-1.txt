@@ -1,0 +1,86 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie provedená v ___
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila do ___ se stížností na bolest v pravém horním kvadrantu břicha, nevolnost a zvracení po konzumaci tučného jídla, trvající dva dny. Byla vyšetřena svým ošetřujícím lékařem v ___ dne ___ a odeslána na pohotovost. Ultrazvukové vyšetření prokázalo žlučové kameny a ztluštění stěny žlučníku. Pacientka popírala horečku, žloutenku nebo bolest na hrudi a byla přijata na chirurgické oddělení.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Apendektomie v minulosti
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny
+
+Fyzikální vyšetření:
+Vitalní funkce:
+T 37,2 °C, puls 78, krevní tlak 126/74, dechová frekvence 16, SpO2 98 % při dýchání okolním vzduchem
+Celkový stav:
+Dobře se cítí, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Bez známek ikteru
+Plíce:
+Čisté na obou stranách
+Břicho:
+Měkké, mírná citlivost v místech portů
+Kůže:
+Řezné rány čisté, suché, neporušené
+Neurologické vyšetření:
+Bdělost, bez ložiskových příznaků
+
+Významné výsledky:
+Ultrazvuk v ___: mnohočetné žlučové kameny, ztluštění stěny žlučníku, malé množství tekutiny v okolí žlučníku, žlučovod normální šířky.
+Počet leukocytů 13,2 při přijetí, klesl na 7,1 při propuštění. ALT, AST a bilirubin v normálních mezích. Lipáza normální.
+
+Stručný popis hospitalizace:
+Paní ___ byla přijata s akutní cholecystitidou a zahájena byla intravenózní antibiotická a infuzní terapie. Byla převezena na operační sál doktorem ___ k provedení nekomplikované laparoskopické cholecystektomie. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a pacientka mohla samostatně močit a chodit. Byla propuštěna dne ___ ve stabilizovaném stavu.
+PŘECHODNÁ OBLASTI:
+Vyhodnotit výsledky patologického vyšetření; obnovit domácí léčbu hypotyreózy a hypertenze.
+
+Léky při přijetí:
+Levotyroxin 75 mcg denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Levotyroxin 75 mcg perorálně jednou denně
+2. Lisinopril 10 mg perorálně jednou denně
+3. Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti
+4. Dokusát 100 mg dvakrát denně během užívání opioidů
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Sekundární:
+Hypertenze
+Hypotyreóza
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+Fyzická aktivita:
+Schopný chůze, soběstačný
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli zánětu žlučníku a žlučník vám byl odstraněn laparoskopicky. Můžete se sprchovat, ale nesmíte si nechat rány namočit. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů, než je deset liber (cca 4,5 kg). V případě horečky, zhoršení bolesti, zvracení, žloutnutí kůže nebo výtoku z rány se vraťte do nemocnice nebo zavolejte na číslo ___. Dodržte termín vaší kontroly u doktora ___.
+
+Pokyny pro kontrolní vyšetření:
+___

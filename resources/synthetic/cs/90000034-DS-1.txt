@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Kašel, horečka, dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena, která se dostavila do ___ s čtyřdenní anamnézou produktivního kašle, horečkou až 38,9 °C, zimnicí a zhoršující se dušností. Uváděla bolest na pravé straně hrudníku a sníženou chuť k jídlu. Příznaky se objevily po návštěvě příbuzných dne ___. Popírala zvracení, průjem nebo kontakt s nemocnými v domácím prostředí. Na pohotovosti měla horečku a mírnou hypoxii.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Osteoartróza
+Pod dohledem doktora ___ v rámci primární péče
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s cévní mozkovou příhodou. V rodině se nevyskytuje plicní onemocnění.
+
+Fyzikální vyšetření:
+Vitalní funkce: T 37,3 °C, TF 78, TK 128/74, dechová frekvence 16, SpO2 96 % při dýchání okolním vzduchem
+SRDEČNÍ: Pravidelný rytmus, normální srdeční ozvy S1 a S2, bez šelestů
+BŘIŠNÍ: Měkké, netendrovatelné, neztuhlé, normální střevní zvuky
+KONČETINY: Teplé, bez otoků
+NEUROLOGICKÉ: Bdělá, orientovaná, pohybuje všemi končetinami
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM: Počet bílých krvinek 8,2, hemoglobin 12,6, počet krevních destiček 244, sodík 139, draslík 4,1, kreatinin 0,8.
+Krevní kultury odebrané dne ___ nevykázaly růst bakterií.
+ZÁVĚR: Rentgen hrudníku z ___ ukázal konsolidaci v dolním laloku pravého plíce s malým výpotkem. Závěrečné vyhodnocení provedeno radiologií.
+
+Stručný průběh hospitalizace:
+Pacientka byla přijata s pneumonií v dolním laloku pravého plíce a po vyšetření týmem ___ byla zahájena léčba ceftriaxonem a azithromycinem. Po odeznění potřeby kyslíku byla převedena z ___ na standardní oddělení. Horečka a kašel se postupně zlepšovaly a dne ___ byla převedena na perorální antibiotika. Mohla se pohybovat bez desaturace a dobře snášela běžnou stravu.
+PŘECHODNÁ OŠETŘENÍ: Opakovaný rentgen hrudníku za šest týdnů k potvrzení ústupu.
+
+Léky při přijetí:
+Levotyroxin 75 mcg denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Levotyroxin 75 mcg perorálně jednou denně
+2. Lisinopril 10 mg perorálně jednou denně
+3. Amoxicilin-klavulanát 875 mg perorálně dvakrát denně po dobu dalších tří dnů
+4. Paracetamol 650 mg perorálně každých šest hodin podle potřeby při horečce nebo bolesti
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Pneumonie
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+Fyzická aktivita: Chodí, soběstačný.
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli plicní infekci a léčeni antibiotiky. Dokončete celou kúru antibiotik a užívejte paracetamol na snížení horečky. Odpočívejte, pijte dostatek tekutin a vyhýbejte se kouři. V případě horečky, zhoršení kašle, bolesti na hrudi nebo potíží s dýcháním kontaktujte doktora ___ nebo ordinaci na čísle ___. Dodržte termín kontroly v ambulanci ___.
+
+Pokyny pro další postup:
+___

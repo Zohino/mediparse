@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Zhoršující se dušnost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___ letá žena s několikdenní postupující dušností, sípáním a kašlem s čirým hlenem. Byla poprvé vyšetřena v ___ a poté odeslána na naše pohotovostní oddělení, kde potřebovala inhalace a kyslík.
+
+Anamnéza předchozích onemocnění:
+CHOPN
+Hypertenze
+Hyperlipidemie
+Osteoartróza, sledována v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. V rodině se nevyskytuje žádné plicní onemocnění.
+
+Fyzikální vyšetření:
+FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Vitalní funkce: Bez horečky, stabilní krevní tlak, saturace kyslíkem 94 % při dýchání okolním vzduchem
+Celkový stav: Dobrý, mluví celými větami
+Hlava, uši, oči, nos, hrdlo: Vlhké sliznice
+Krk: Pohyblivý
+SRDEČNÍ: Pravidelný rytmus
+Břicho: Měkké, netendrovatelné
+Neurologické: Bdělá, bez ložiskových deficitů
+
+Významné výsledky:
+Rentgen hrudníku z ___ ukázal hyperinflaci bez ložiskové konsolidace. Krevní obraz a biochemické testy byly v normě.
+LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
+Leukocyty 8,1, hemoglobin 12,9, trombocyty 245, sodík 139, draslík 4,2, kreatinin 0,8
+
+Stručný průběh hospitalizace:
+Stav se zlepšil díky pravidelným inhalacím, krátkodobé léčbě kortikosteroidy a doplňkovému kyslíku, jehož dávka byla postupně snižována ___. Před propuštěním mohla pohodlně chodit při dýchání okolním vzduchem.
+PŘECHODNÁ OTÁZKY:
+Dokončit snižování dávky prednisonu. Následná kontrola u praktického lékaře v ___.
+
+Léky při přijetí:
+Inhalátor tiotropia, jednou denně
+Lisinopril 10 mg, jednou denně
+
+Léky při propuštění:
+1. Inhalátor tiotropia, jednou denně
+2. Lisinopril 10 mg, jednou denně
+3. Postupné snižování dávky prednisonu během pěti dnů
+4. Inhalátor albuterolu každé čtyři hodiny podle potřeby
+
+Způsob propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní exacerbace chronické obstrukční plicní nemoci
+
+Stav při propuštění:
+Stabilní
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělá a reaguje
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli potížím s dýcháním. Užijte všechny léky podle předpisu, používejte inhalátory a vyhýbejte se kouři. V případě zhoršení dušnosti nebo horečky se vraťte a v případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

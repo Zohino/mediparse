@@ -1,0 +1,71 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+___ letý muž se známými žlučovými kameny, který se dostavil s bolestí v pravém horním kvadrantu břicha, nevolností a horečkou, trvajícími dva dny. Bolest začala po tučném jídle v ___ a neustupovala. Nejprve byl vyšetřen v ___ a poté převezen sem. Ultrazvukové vyšetření prokázalo ztluštění stěny žlučníku s kameny a malé množství tekutiny v okolí žlučníku.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny, léčena v ___
+
+Fyzikální vyšetření:
+Celkový stav: Nepohodlí, horečka, jinak bez známek akutní potíže.
+Krk: Pohyblivý, bez hmatných útvarů.
+Plíce: Při auskultaci oboustranně čisté.
+Břicho: Bolestivé v pravém horním kvadrantu, pozitivní Murphyho příznak, bez rezistence.
+Neurologické vyšetření: Pacient je při vědomí, orientovaný, bez ložiskových příznaků.
+
+Významné výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Leukocyty 14,2, hemoglobin 14,1, trombocyty 260. Sodík 138, draslík 4,1, kreatinin 0,9. ALT 58, AST 44, alkalická fosfatáza 110, celkový bilirubin 1,1, lipáza v normě. Ultrazvuk: žlučové kameny, ztluštění stěny, pozitivní sonografický Murphyho příznak. Společný žlučovod není rozšířen.
+
+Stručný průběh hospitalizace:
+Pacient byl přijat, podávány intravenózní tekutiny a antibiotika, a byl ponechán bez orální výživy. Tým pod vedením doktora ___ provedl komplikacemi nezatíženou laparoskopickou cholecystektomii ___. Poté byla bolest kontrolována perorálními léky, pacient obnovil běžnou stravu, začal plynout a chodil samostatně. Horečka ustoupila a počet bílých krvinek se normalizoval před propuštěním.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně.
+2. Atorvastatin 20 mg perorálně večer.
+3. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest.
+4. Oxykodon 5 mg každé čtyři hodiny podle potřeby na silnou bolest, předepsán ___.
+
+Způsob propuštění:
+Domů s péčí od ___
+
+Diagnóza při propuštění:
+Akutní kalcifikovaná cholecystitida
+Hypertenze
+Hyperlipidémie
+
+Stav při propuštění:
+Úroveň vědomí: Při vědomí a komunikativní.
+Stav aktivity: Ambulantní, soběstačný.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl odstraněn laparoskopicky. Udržujte malé řezné rány čisté a suché a po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů, než je deset liber (cca 4,5 kg). V případě horečky, zvracení, žloutnutí kůže, zhoršení bolesti břicha nebo zarudnutí rány kontaktujte kliniku na čísle ___ nebo se vraťte na pohotovost.
+
+Pokyny pro kontrolní vyšetření:
+
+___

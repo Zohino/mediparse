@@ -1,0 +1,70 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém dolním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická apendektomie
+
+Anamnéza současného onemocnění:
+Jedná se o ___letou ženu s hypertenzí, která se dostavila po třech dnech zhoršující se bolesti v pravém dolním kvadrantu břicha, nevolnosti a mírné horečce. Poprvé byla vyšetřena v ___ a poté byla převezena k dalšímu vyšetření k Dr. ___. Zobrazovací metody ukázaly akutní apendicitidu a byla bez komplikací převezena na operační sál.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Žádný diabetes mellitus
+Císařský řez v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez akutní tísně.
+Hlava, oči, uši, nos, hrdlo: Vlhké sliznice, bez žloutenky.
+Krk: Pohyblivý, bez zvětšených uzlin.
+Plíce: Při auskultaci oboustranně čisté.
+Končetiny: Teplé, bez otoků.
+Kůže: Místa řezů po laparoskopii čistá, suchá a neporušená.
+Neurologické vyšetření: Bdělá, orientovaná, bez ložiskových příznaků.
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala mírně zvýšený počet bílých krvinek s převahou neutrofilů. Elektrolyty, kreatinin a jaterní testy byly v normálních mezích. Před převezáním byla provedena počítačová tomografie v ___. Patologické vyšetření vzorku ukázalo akutní zánět slepého střeva bez malignity. Pooperační laboratorní vyšetření byla stabilní.
+ZÁVĚR:
+Rozšířené, zanícené slepé střevo s okolní tukovou infiltrací a bez abscesu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Levotyroxin 50 mcg denně
+
+Léky při propuštění:
+1. Paracetamol 650 mg každých 6 hodin podle potřeby na bolest
+2. Dokusát 100 mg dvakrát denně při užívání opioidů
+3. Lisinopril 10 mg denně
+4. Levotyroxin 50 mcg denně
+5. Oxykodon 5 mg každých 6 hodin podle potřeby na silnou bolest, získán z ___
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Akutní apendicitida
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a komunikativní.
+Fyzická aktivita: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Byli jste přijati s apendicitidou a podstoupili jste laparoskopickou apendektomii. Můžete se sprchovat, ale nevystavujte řezné rány dlouhodobému namáčení. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů než deset kilogramů. Užijte léky proti bolesti podle předpisu. V případě horečky, zhoršující se bolesti, zvracení nebo zarudnutí v místě řezů volejte ___ nebo se vraťte na pohotovost. Prosím, dodržte termín kontroly u ___.
+
+Pokyny pro kontrolu:
+___

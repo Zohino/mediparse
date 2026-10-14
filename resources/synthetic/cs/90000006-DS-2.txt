@@ -1,0 +1,66 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bušení srdce a únava
+
+Významnější chirurgický zákrok nebo invazivní vyšetření:
+Žádný; transtorakální echokardiografie provedena dne ___
+
+Anamnéza současného onemocnění:
+Muž s hypertenzí a dlouhodobě sníženou funkcí ledvin, odeslán z jeho ambulance ___ kvůli několikdennímu zrychlenému srdečnímu rytmu, únavě a mírnému otoku nohou. Popíral bolesti na hrudi nebo mdloby. Vyšetřen na pohotovosti ___.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Anémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Bez významných údajů, kromě rodinné anamnézy pneumonie u bratra.
+
+Fyzikální vyšetření:
+Vitalní funkce: T 36,9 °C, TF 112 nepravidelná, TK 138/80, dechová frekvence 16, SpO2 97 % při dýchání okolního vzduchu
+Celkový stav: Dobrý, bez známek úzkosti
+Krk: Pohyblivý, bez známek zvýšeného žilního tlaku
+Plíce: Čisté na obou stranách
+Břicho: Měkké, netendrovatelné
+KŮŽE: Teplá, mírný otok kotníků
+
+Významné výsledky:
+EKG prokázalo nepravidelný rytmus bez P vln. Kreatinin 3,1, výchozí hodnota kolem 3,0. Draslík 4,9. Hemoglobin 10,2. Troponin dvakrát negativní. Echokardiografie prokázala mírně rozšířenou levou síň s zachovanou ejekční frakcí.
+
+Stručný popis hospitalizace:
+Bylo zjištěno, že má fibrilaci síní s rychlou ventrikulární odpovědí, která byla kontrolována perorálním metoprololem. Zahájena byla antikoagulační léčba s dávkou upravenou podle jeho snížené funkce ledvin. Kreatinin zůstal stabilní. Kardiolog z ___ souhlasil s plánem a pacient byl vyšetřen farmaceutem na ___.
+
+Léky při propuštění:
+1. Metoprolol sukcinát 50 mg denně
+2. Apixaban 2,5 mg dvakrát denně
+3. Amlodipin 5 mg denně
+4. Allopurinol 100 mg denně
+
+Plán propuštění:
+Domů
+
+Zařízení: ___
+
+Diagnóza při propuštění:
+Fibrilace síní s rychlou ventrikulární odpovědí
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Fyzická aktivita: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byli jste přijati s rychlým, nepravidelným srdečním rytmem. Užívajte nové léky na ředění krve každý den a vyhýbejte se protizánětlivým lékům proti bolesti. Vraťte se, pokud se objeví bolest na hrudi, mdloby, krvácení nebo se zhorší otok. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

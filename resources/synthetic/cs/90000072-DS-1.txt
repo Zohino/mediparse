@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava a snížená chuť k jídlu
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s diabetem a hypertenzí, přeložen z ___ s třídenní anamnézou slabosti, nevolnosti a sníženého objemu moči. Při přijetí byla zjištěna zvýšená hladina glukózy.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+DNA
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce
+
+Fyzikální vyšetření:
+Celkový stav:
+Unavený, v pohodlí
+Hlava, oči, uši, nos, hrdlo:
+Suché sliznice
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Žádný edém
+Kůže:
+Teplá, suchá
+
+Významné výsledky:
+VÝSLEDKY LABORATORNÍCH TESTŮ PŘED PROPUŠTĚNÍM:
+Kreatinin stabilní, nad výchozí hodnotou, draslík v normě, glukóza zlepšená.
+ZÁVĚR:
+Rentgen hrudníku bez patologických nálezů, bez ložiskové konsolidace nebo výpotku.
+
+Stručný popis hospitalizace:
+Funkce ledvin odpovídá chronickému onemocnění ledvin s mírnou akutní složkou, léčeno podáváním tekutin a konzultací s ___ nefrologem. Kašel chyběl a zobrazovací vyšetření hrudníku neprokázalo pneumonii. Hladina glukózy se stabilizovala po úpravě dávky inzulínu. Stav stabilizován, propuštěn ___.
+
+Léky při přijetí:
+Lisinopril, atorvastatin, allopurinol, inzulín
+
+Léky při propuštění:
+Atorvastatin večer, allopurinol denně, upravený režim dávkování inzulínu. Lisinopril vysazen do opětovného vyšetření funkce ledvin.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes mellitus
+Chronické onemocnění ledvin
+
+Stav při propuštění:
+Úroveň vědomí: Bdělý a komunikativní
+Stav aktivity: Samostatný, chodí bez pomoci
+
+Pokyny pro propuštění:
+Byli jste přijati s únavou a vysokou hladinou cukru v krvi. Pijte dostatek tekutin, denně si měřte hladinu glukózy a užívejte léky podle seznamu. Pokud se potíže vrátí, kontaktujte kliniku ___. Opakujte krevní testy ___.
+
+Pokyny pro kontrolu:
+___

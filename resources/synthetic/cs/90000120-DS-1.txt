@@ -1,0 +1,68 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Únava a nadměrná žízeň
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letý muž s několikdenní únavou, žízní a častým močením, vyšetřen v ___ a přijat za účelem regulace hladiny glukózy a pečlivého sledování.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Obezita
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce
+
+Fyzikální vyšetření:
+Celkový stav: Dobrý, bez známek úzkosti
+Krk: Pohyblivý
+PLÍCE: Čisté na obou stranách
+Břicho: Měkké, bez citlivosti
+Končetiny: Bez otoků
+Neurologické vyšetření: Bdělý, bez ložiskových příznaků
+
+Významné výsledky:
+Hladina glukózy při přijetí výrazně zvýšená, denně se zlepšuje. Elektrolyty v normě.
+ZOBRAZOVACÍ VYŠETŘENÍ: Rentgen hrudníku proveden v ___
+ZÁVĚR: Žádné akutní nálezy
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+1. Lisinopril denně
+2. Atorvastatin večer
+3. Metformin dvakrát denně během jídla
+4. Glukometr a testovací proužky
+
+Plán propuštění:
+Domů
+
+Diagnóza při propuštění:
+Primární: Diabetes mellitus s hyperglykémií
+Sekundární: Hypertenze, hyperlipidémie
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný
+Úroveň vědomí: Bdělý a reagující
+Fyzická aktivita: Chodí, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli vysoké hladině cukru v krvi. Užívajte léky podle předpisu, denně si měřte hladinu glukózy, dodržujte vyváženou stravu a v případě návratu příznaků volejte ___.
+
+Pokyny pro kontrolu:
+___

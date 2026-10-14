@@ -1,0 +1,87 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: M Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolest břicha a zvracení
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Muž se známou cukrovkou přišel do ___ s dvoudenní bolestí v epigastriu, nevolností a zvracením. Uváděl špatný příjem potravy a vysoké hodnoty glukózy měřené doma. Příznaky se objevily po jídle ___ a nezlepšily se po užívání antacid.
+
+Anamnéza předchozích onemocnění:
+Zvýšená hladina cukru v krvi při užívání metforminu
+Hypertenze
+Hyperlipidémie
+
+Anamnéza předchozích chirurgických zákroků:
+Apendektomie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Nepohodlí, v klidu bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo:
+Suché sliznice
+Krk:
+Pružný
+Plíce:
+Oboustranně čisté
+Břicho:
+Mírná citlivost v epigastriu, měkké
+Končetiny:
+Teplé, bez otoků
+
+Významné výsledky:
+ZÁVĚR:
+Mírná gastritida bez obstrukce.
+NÁLEZY:
+Zobrazovací vyšetření provedené v ___ ukázalo normální průchodnost střev a žádnou volnou tekutinu. Jaterní enzymy a lipáza byly v normálních mezích. Elektrolyty se zlepšily po podání tekutin.
+
+Stručný průběh hospitalizace:
+Byl přijat k hydrataci a kontrole příznaků. Nevolnost ustoupila po podání antiemetik a inhibitoru protonové pumpy a toleroval běžnou stravu do ___. Hladina glukózy byla regulována pomocí posuvné škály a domácí léčba byla obnovena. Gastroenterolog z ___ ho vyšetří jako ambulantního pacienta po propuštění z ___.
+PŘECHODNÁ OTÁZKA:
+Zkontrolujte záznamy o hladině glukózy při kontrolní návštěvě.
+
+Léky při přijetí:
+Metformin 500 mg dvakrát denně
+Lisinopril 10 mg denně
+
+Léky při propuštění:
+1. Metformin 500 mg perorálně dvakrát denně
+2. Lisinopril 10 mg perorálně denně
+3. Pantoprazol 40 mg perorálně denně, nový, vyzvedněte v ___
+4. Ondansetron 4 mg každých osm hodin podle potřeby
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Gastritida
+Diabetes mellitus
+
+Stav při propuštění:
+Stabilní
+Duševní stav:
+Bdělý a orientovaný
+Stav aktivity:
+Chodící, soběstačný
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zánětu žaludku s zvracením. Užijte si pantoprazol každé ráno a vyhýbejte se alkoholu a kořeněným jídlům. Vraťte se, pokud budete mít černou stolici, krev ve zvratcích nebo silné bolesti. V případě dotazů volejte ___ a dodržujte termín kontroly ___.
+
+Pokyny pro kontrolu:
+___

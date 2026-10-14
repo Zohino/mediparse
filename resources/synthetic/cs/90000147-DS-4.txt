@@ -1,0 +1,73 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: CHIRURGIE
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bolest v pravém horním kvadrantu břicha
+
+Hlavní chirurgický zákrok nebo invazivní procedura:
+Laparoskopická cholecystektomie
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila do ___ s dvoudenní bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po konzumaci tučného jídla. Při přijetí měla zvýšenou tělesnou teplotu. Ultrazvukové vyšetření prokázalo žlučové kameny a ztluštění stěny žlučníku, a proto byla pacientka převezena do naší nemocnice dne ___ za účelem chirurgického vyšetření lékařem ___ s podezřením na akutní cholecystitidu.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Apendektomie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s žlučovými kameny. Sourozenec léčen v ___ pro problémy se štítnou žlázou.
+
+Fyzikální vyšetření:
+Celkový stav: Mírně nepohodlná, bez horečky, spolupracuje.
+Hlava, oči, uši, nos, hrdlo: Bez ikteru skléry, vlhké sliznice.
+Krk: Pohyblivý, bez zvětšených lymfatických uzlin.
+Končetiny: Teplé, bez otoků.
+Kůže: Bez vyrážky nebo ikteru.
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí prokázala zvýšený počet bílých krvinek s mírným zvýšením transamináz a normální hladinu lipázy. Ultrazvukové vyšetření pravého horního kvadrantu břicha provedené dne ___ prokázalo cholelitiázu, ztluštění stěny žlučníku a tekutinu v okolí žlučníku. Zobrazovací vyšetření zkontrolované ___ neprokázalo dilataci společného žlučovodu. Pooperační hladina hemoglobinu zůstala stabilní a jaterní enzymy se před propuštěním vrátily k normálním hodnotám.
+
+Stručný průběh hospitalizace:
+Pacientce byla zahájena intravenózní infuze, antibiotika a dieta s omezením příjmu potravy. Chirurgický tým v ___ provedl druhý den hospitalizace laparoskopickou cholecystektomii bez komplikací. Bolest byla kontrolována perorálními analgetiky, dieta byla postupně rozšiřována a pacientka dobře snášela běžnou stravu. Horečka ustoupila a počet bílých krvinek se normalizoval. Pacientka byla vyšetřena ___ z hlediska mobility a byla propuštěna do domácí péče.
+PŘECHODNÁ OTÁZKA:
+Prosím, sledujte konečný výsledek patologického vyšetření z ___.
+
+Léky při přijetí:
+Lisinopril 10 mg denně, atorvastatin 20 mg večer, multivitamín denně.
+
+Léky při propuštění:
+1. Lisinopril 10 mg perorálně jednou denně.
+2. Atorvastatin 20 mg perorálně každou noc.
+3. Acetaminofen 650 mg perorálně každých šest hodin podle potřeby proti bolesti.
+4. Dokusát 100 mg dvakrát denně během užívání opioidů.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Akutní cholecystitida
+Sekundární:
+Hypertenze
+Hyperlipidémie
+
+Stav při propuštění:
+Dobrý
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělý a reagující.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni kvůli zánětu žlučníku a žlučník vám byl odstraněn pomocí malých řezů. Můžete se sprchovat, ale vyhněte se tomu, aby se řezné rány namočily. Po dobu dvou týdnů se vyhýbejte zvedání těžkých předmětů. V případě horečky, zhoršující se bolesti břicha, opakovaného zvracení nebo žluté barvy kůže se vraťte do nemocnice.
+
+Pokyny pro kontrolní vyšetření:
+___

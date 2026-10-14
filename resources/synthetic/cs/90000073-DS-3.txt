@@ -1,0 +1,75 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bušení srdce a únava
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka se dostavila do ___ s několikdenní anamnézou bušení srdce a únavy poté, co vynechala dávky léků doma. V ambulanci ___ byla zaznamenána nepravidelná pulzace a výrazně zvýšená hladina kreatininu, a proto byla odeslána na další vyšetření.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Anémie
+Pod dohledem endokrinologie v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav:
+Unavená, v klidu se cítí dobře
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice
+Břicho:
+Měkké, netendrovatelné
+Končetiny:
+Mírný otok kotníků
+Neurologické vyšetření:
+Bdělá, bez ložiskových příznaků
+PULZACE:
+Nepravidelná, hmatná
+
+Významné výsledky:
+ZÁVĚR:
+Mírná kardiomegalie bez akutního procesu, dle ___.
+NÁLEZY:
+Při přijetí kreatinin 2,6, odhadovaná glomerulární filtrace 24, draslík 5,3, hemoglobin 9,8. Troponin dvakrát negativní. EKG ukázalo nepravidelný rytmus bez ischemických změn.
+
+Stručný popis hospitalizace:
+Při přijetí bylo zjištěno, že má pacientka fibrilaci síní s rychlou ventrikulární odpovědí. Metoprolol kontroloval její srdeční frekvenci a byl zahájen apixaban v nižší dávce vzhledem k její funkci ledvin. Hladina kreatininu se stabilizovala blízko výchozí hodnoty po podání tekutin a ___ zhodnotil její režim léčby diabetu před ___ propuštěním.
+
+Léky při přijetí:
+Metformin 500 mg denně, lisinopril 10 mg denně, aspirin.
+
+Léky při propuštění:
+Metoprolol succinat 50 mg jednou denně. Apixaban 2,5 mg dvakrát denně. Insulin glargin před spaním. Přerušit užívání metforminu a lisinoprilu, dokud nebudou výsledky laboratorních testů znovu zkontrolovány.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělá a komunikativní
+Stav aktivity:
+Chodí, soběstačná
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli rychlému, nepravidelnému srdečnímu tepu. Užívajte nové léky podle předpisu a vyhýbejte se protizánětlivým lékům proti bolesti. Nechte si opakovat krevní testy do jednoho týdne v ___. V případě mdlob, bolesti na hrudi nebo krvácení se vraťte nebo volejte ___.
+
+Pokyny pro kontrolu:
+___

@@ -1,0 +1,64 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Nevolnost a slabost
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+___letá žena se dostavila s třemi dny trvající nevolností a slabostí, byla zjištěna dehydratace a výrazně zvýšená hladina cukru v krvi.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí
+
+Fyzikální vyšetření:
+Celkový stav: Unavená, v pohodě
+Krk: Pohyblivý
+Plíce: Čisté na obou stranách
+Břicho: Měkké, netendrovatelné
+Neurologické: Bdělá, bez ložiskových příznaků
+
+Významné výsledky:
+Při přijetí výrazně zvýšená hladina glukózy, jinak normální elektrolyty. Vyšetření moči negativní na infekci.
+ZÁVĚR: Žádné akutní kardiopulmonální nálezy.
+
+Stručný popis hospitalizace:
+Byla léčena intravenózními tekutinami a inzulínem, s postupným zlepšováním hladiny glukózy. Byla obnovena její dieta, nevolnost ustoupila a byla vyšetřena ___ za účelem edukace.
+
+Léky při přijetí:
+Metformin, lisinopril
+
+Léky při propuštění:
+Metformin dvakrát denně, lisinopril denně, přidán bazální inzulín před spaním.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes
+
+Stav při propuštění:
+Stabilní, schopná chůze
+Úroveň vědomí: Bdělá a komunikativní
+
+Pokyny pro propuštění:
+Měřte si hladinu cukru každý den, užívejte léky podle pokynů a v případě potíží kontaktujte doktora ___.
+
+Pokyny pro kontrolu:
+___

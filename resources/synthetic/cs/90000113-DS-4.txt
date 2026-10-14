@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+___ letý muž s únavou a žízní
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza:
+Diabetes mellitus
+Hypertenze
+Hyperlipidémie
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Otec s onemocněním srdce
+
+Fyzikální vyšetření:
+Celkový stav: dobrý, bez známek úzkosti
+Hlava, uši, nos, hrdlo: suché sliznice
+Končetiny: bez otoků
+Kůže: teplá, suchá
+
+Důležité výsledky:
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Výrazně zvýšená hladina glukózy, nízká hladina sodíku, kreatinin blízko výchozí hodnoty. V moči přítomny ketony. Rentgen hrudníku bez patologických nálezů. EKG: sinusový rytmus.
+
+Stručný popis hospitalizace:
+Pacient byl přijat s vysokou hladinou glukózy a byl mu podáván roztok a inzulin. Hladina glukózy se postupně zlepšovala. Byl vyšetřen týmem ___, který upravil jeho léčbu. Strava byla upravena a pacient byl propuštěn ve stabilizovaném stavu.
+
+Léky při přijetí:
+Metformin
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+1. Metformin 500 mg dvakrát denně
+2. Inzulin glargin 10 jednotek večer
+3. Lisinopril 10 mg denně
+4. Atorvastatin 20 mg večer
+
+Způsob propuštění:
+Domů, s péčí od ___
+
+Diagnóza při propuštění:
+Primární:
+Nekontrolovaný diabetes
+
+Stav při propuštění:
+Duševní stav: bdělý a orientovaný
+Úroveň vědomí: bdělý a reagující
+
+Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli velmi vysoké hladině glukózy. Pravidelně si měřte hladinu glukózy a užívejte inzulin podle pokynů. V případě zvracení, zmatenosti nebo silné žízně se vraťte do nemocnice. Dodržujte termín kontroly u ___.
+
+Pokyny pro další péči:
+___

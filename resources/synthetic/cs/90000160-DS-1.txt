@@ -1,0 +1,65 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Penicilin
+
+Hlavní potíže:
+Bušení srdce
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka, u které je známa fibrilace síní, se dostavila do ___ s několikdenní anamnézou bušení srdce, závratí a únavy. Příznaky se zhoršily po vynechání dávek antikoagulantu. Byla vyšetřena v ___ a převezena za účelem kontroly srdeční frekvence.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidemie
+Hypotyreóza
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka, která prodělala cévní mozkovou příhodu
+
+Fyzikální vyšetření:
+Krk: pružný, bez známek zvýšeného žilního tlaku
+Plíce: oboustranně čisté
+Břicho: měkké, netendrové
+Neurologické vyšetření: bdělá, bez ložiskových příznaků
+
+Stručný popis hospitalizace:
+Srdeční frekvence byla kontrolována pomocí metoprololu a byla obnovena antikoagulační terapie. Její léčba diabetu byla upravena a hladina glukózy zůstala stabilní. Kardiologické oddělení v ___ doporučilo ambulantní sledování. Její stav se postupně zlepšoval a byla propuštěna domů ___ se stabilními vitálními funkcemi.
+
+Léky při přijetí:
+Metoprolol
+Apixaban
+Metformin
+
+Léky při propuštění:
+1. Metoprolol sukcinát 50 mg denně
+2. Apixaban 5 mg dvakrát denně
+3. Metformin 500 mg dvakrát denně
+4. Atorvastatin 20 mg večer
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Fibrilace síní s rychlou ventrikulární odpovědí
+Diabetes mellitus
+
+Stav při propuštění:
+Duševní stav: Jasný a srozumitelný.
+Stav aktivity: Chodí, soběstačná.
+
+Pokyny pro propuštění:
+Byla jste přijata s rychlým srdečním rytmem. Užívajte léky přesně podle předpisu, zejména antikoagulant. V případě bolesti na hrudi, mdlob nebo krvácení se vraťte na pohotovost. V případě dotazů volejte ___.
+
+Pokyny pro další postup:
+___

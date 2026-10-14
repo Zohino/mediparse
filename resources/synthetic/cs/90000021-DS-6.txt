@@ -1,0 +1,72 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Bolestivě oteklá pravá noha
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient si všiml zarudnutí a tepla na pravé holeni po odření, které se během tří dnů zhoršovalo. Byl odeslán z kliniky ___ lékařem ___ kvůli horečce a šířící se erytému.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hyperlipidémie
+Obezita
+
+Sociální anamnéza:
+___
+
+Fyzikální vyšetření:
+Životní funkce:
+Bez horečky, stabilní při dýchání okolního vzduchu
+PLÍCE:
+Čisté na obou stranách
+SRDCE:
+Pravidelný rytmus
+BŘICHO:
+Měkké, netendrové
+KONČETINY:
+Pravá holeň zarudlá, teplá, edematózní
+
+Významné výsledky:
+Mírně zvýšený počet bílých krvinek, normalizoval se před propuštěním. Krevní kultury nevykázaly žádný růst. Ultrazvuk pravé nohy neprokázal přítomnost krevní sraženiny, vyhodnotil ___.
+
+Stručný popis hospitalizace:
+Léčen na celulitidu intravenózními antibiotiky, okraj infekce byl ohraničen a postupně se zmenšoval. Bolest kontrolována pomocí paracetamolu. Konzultován týmem specializujícím se na léčbu ran na ___, propuštěn domů s doporučením užívat perorální antibiotika a s kontrolou u ___.
+
+Léky při přijetí:
+Lisinopril
+Atorvastatin
+
+Léky při propuštění:
+Cefalexin čtyřikrát denně po dobu sedmi dnů. Pokračovat v užívání lisinoprilu a atorvastatinu. Paracetamol podle potřeby na bolest.
+
+Způsob propuštění:
+Domů
+Zařízení:
+___
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný
+Úroveň vědomí:
+Bdělý a reagující
+Stav aktivity:
+Chodící, soběstačný
+
+Pokyny pro propuštění:
+Byl jste léčen na kožní infekci nohy. Užívajte antibiotika podle předpisu, držte nohu ve zvýšené poloze a v případě horečky, šířícího se zarudnutí nebo zhoršující se bolesti se vraťte. V případě dotazů volejte ___.
+
+Pokyny pro kontrolu:
+___

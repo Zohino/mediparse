@@ -1,0 +1,80 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Žena Oddělení: Medicína
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Sulfonamidové léky
+
+Hlavní potíže:
+Zčervenání a otok pravé nohy
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacientka, žena, se dostavila do ___ s třemi dny trvajícím zhoršujícím se zčervenáním, hřejivostí a otokem pravé dolní končetiny po drobném odření při zahradničení. Uváděla zimnici, ale doma neměla horečku. Její primární lékař v ___ doporučil urgentní vyšetření. Na pohotovosti měla mírně zvýšenou srdeční frekvenci, postižená oblast byla označena a před přijetím na oddělení ___ jí byla podána intravenózně antibiotika.
+
+Anamnéza předchozích onemocnění:
+Hypertenze
+Hypotyreóza
+Žilní insuficience, sledována v ___
+
+Anamnéza předchozích chirurgických zákroků:
+Cholecystektomie v ___
+Artroskopie kolene v ___
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí. Otec s ischemickou chorobou srdeční.
+
+Fyzikální vyšetření:
+Celkový stav:
+Dobře se cítí, bez známek úzkosti.
+Hlava, oči, uši, nos, hrdlo:
+Normocefalická, vlhké sliznice.
+Plíce:
+Oboustranně čisté.
+KŮŽE:
+Erythém, hřejivost a mírný edém pravé holeně, okraje označeny, bez fluktuace.
+
+Významné výsledky:
+Počet bílých krvinek byl při přijetí mírně zvýšený a při propuštění se normalizoval. C-reaktivní protein byl zvýšený. Krevní kultury po dvou dnech nevykazovaly růst. Základní metabolický panel byl v normě. Venózní duplexní vyšetření pravé nohy neprokázalo hlubokou žilní trombózu. Ultrazvuk měkkých tkání prokázal subkutánní edém bez abscesu, jak vyhodnotil ___.
+
+Stručný průběh hospitalizace:
+Byla přijata s celulitidou pravé dolní končetiny a zahájena intravenózní léčba cefazolinem. Okraj erytému byl označen a během prvních dvou dnů se postupně zmenšoval. Bolest byla kontrolována paracetamolem a noha byla udržována ve zvýšené poloze. Horečka se neobjevila. Péče o ránu byla probrána s ošetřujícím personálem v ___. Třetí den hospitalizace dobře snášela perorální cefalexin a byla propuštěna domů s doporučením dalšího sledování v ___, o což se postaral ___.
+
+Léky při přijetí:
+Lisinopril denně
+Levotyroxin denně
+Multivitamin
+
+Léky při propuštění:
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu sedmi dnů.
+2. Paracetamol 650 mg perorálně každých šest hodin podle potřeby na bolest.
+3. Lisinopril denně, dávka nezměněna.
+4. Levotyroxin denně, dávka nezměněna.
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Celulitida pravé dolní končetiny
+Hypertenze
+
+Stav při propuštění:
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a reagující.
+
+Pokyny pro propuštění:
+
+Byl/a jste léčen/a na kožní infekci nohy. Užívejte všechna antibiotika, i když zarudnutí ustoupí. Při sezení držte nohu ve zvýšené poloze a denně kontrolujte stav kůže. V případě horečky, šíření zarudnutí nebo silné bolesti se vraťte na kontrolu. V případě dotazů volejte na číslo ___ a vezměte si s sebou tento souhrn na kontrolní návštěvu do ___.
+
+Pokyny pro další postup:
+
+___

@@ -1,0 +1,74 @@
+Jméno: ___ Datum narození: ___
+Pohlaví: Muž Oddělení: MEDICÍNA
+Datum přijetí: ___ Číslo oddělení: ___
+Datum propuštění: ___ Ošetřující lékař: ___
+
+Alergie:
+Žádné známé alergie na léky
+
+Hlavní potíže:
+Slabost, žízeň a časté močení
+
+Významnější chirurgický zákrok nebo invazivní procedura:
+Žádný
+
+Anamnéza současného onemocnění:
+Pacient byl odeslán ___ na pohotovost po několika dnech zhoršující se slabosti, žízni a častého močení. Dříve v týdnu byl vyšetřen v ordinaci ___. Uváděl špatný apetit a nevolnost od ___. Na pohotovosti byl dehydratovaný a měl výrazně zvýšenou hladinu glukózy v krvi. Byla mu podána intravenózní tekutina a byl přijat na oddělení ___. Popíral horečku, bolest na hrudi nebo bolest břicha.
+
+Anamnéza předchozích onemocnění:
+Diabetes mellitus 2. typu
+Hypertenze
+Hyperlipidémie
+Předchozí péče u ___ ohledně péče o nohy
+
+Sociální anamnéza:
+___
+
+Rodinná anamnéza:
+Matka s hypertenzí, léčena v ___
+
+Fyzikální vyšetření:
+PLÍCE: Při auskultaci oboustranně čisté, bez chrůpků
+BŘICHO: Měkké, netendrovatelné, neztuhlé, normální střevní zvuky
+KONČETINY: Teplé, bez otoků
+KŮŽE: Suché sliznice, bez vyrážky
+NEUROLOGIE: Bdělý, orientovaný, bez ložiskových deficitů
+PULSY: Hmatné a symetrické distálně
+
+Významné výsledky:
+Laboratorní vyšetření při přijetí ukázala výrazně zvýšenou hladinu glukózy s aniontovou mezerou a ketony v moči. Po doplnění draslíku byla jeho hladina v normě. Hemoglobin A1c byl vysoký. Vyšetření moči bylo jinak v normě.
+NÁLEZY: Rentgen hrudníku provedený v ___ ukázal čisté plíce a normální velikost srdce. Ve srovnání s vyšetřením z ___ nedošlo k žádné změně.
+
+Stručný průběh hospitalizace:
+Byl přijat pro hyperglykémii s mírnou ketózou a dehydratací. Byla mu podána tekutina a infuze inzulínu, a jeho hladina glukózy a aniontová mezera se během dne zlepšily. Byl převeden na subkutánní inzulin a poté na režim perorálních léků s dietním plánem, přičemž edukaci poskytl ___. Před propuštěním ho navštívili odborníci na výživu a ___. Dobře snášel jídlo a chodil bez potíží. Domácí léčba byla obnovena a byl propuštěn ve stabilizovaném stavu.
+
+Léky při přijetí:
+Lisinopril 10 mg denně
+Atorvastatin 20 mg večer
+Metformin 500 mg dvakrát denně
+
+Léky při propuštění:
+1. Metformin 1000 mg dvakrát denně s jídlem
+2. Glipizid 5 mg denně před snídaní
+3. Lisinopril 10 mg denně
+4. Atorvastatin 20 mg večer
+5. Glukometr a testovací proužky, měřit hladinu cukru v krvi před jídlem, pomůcky od ___
+
+Způsob propuštění:
+Domů
+Zařízení: ___
+
+Diagnóza při propuštění:
+Diabetes mellitus s hyperglykémií
+
+Stav při propuštění:
+Stabilizovaný a zlepšený.
+Duševní stav: Jasný a koherentní.
+Úroveň vědomí: Bdělý a komunikativní.
+
+Pokyny pro propuštění:
+
+Byli jste hospitalizováni, protože jste měli velmi vysokou hladinu cukru v krvi a byli jste dehydratovaní. Užijte si léky podle předpisu a před každým jídlem si změřte hladinu cukru v krvi a zaznamenávejte výsledky. Pijte dostatek tekutin a dodržujte dietu, kterou vám vysvětlil ___. V případě zvracení, zmatenosti, silné žízně nebo bolesti břicha se vraťte do nemocnice. V případě dotazů volejte na číslo ___.
+
+Pokyny pro kontrolní vyšetření:
+___
