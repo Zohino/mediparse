@@ -39,7 +39,6 @@ build-backend = "flit_core.buildapi"
 dev = [
     { include-group = "lint" },
     { include-group = "test" },
-    "commitizen>=4.13.9",
     "prek>=0.5.3",
 ]
 lint = [
@@ -54,14 +53,6 @@ lint = [
 test = [
     "pytest>=9.1.1",
 ]
-
-[tool.commitizen]
-name = "cz_conventional_commits"
-tag_format = "v$version"
-version_scheme = "pep440"
-version_provider = "pep621"
-update_changelog_on_bump = true
-major_version_zero = true
 
 [tool.pytest]
 minversion = "9.0"
@@ -330,7 +321,6 @@ lint = { cmd = "ruff check", description = "Linting pomocí ruff" }
 format = { cmd = "ruff format", description = "Formátovat kód pomocí ruff" }
 typecheck = { cmd = "ty check", description = "Kontrola statického typování pomocí ty" }
 ruff-statistics = { cmd = "ruff check --statistics --no-fix", description = "Statistika lintingu pomocí ruff pro vyloučení omezujících pravidel" }
-commit = { cmd = "cz commit", description = "Commit pomocí commitizen" }
 smoketest = { cmd = "./smoketest.sh", description = "Smoketest v kontejneru; stejný skript, který spouští zkoušející" }
 count-lines = { cmd = "bash scripts/count-lines.sh", description = "Statistiky kódu pomocí tokei jako varování proti overengineeringu" }
 build = { cmd = "bash scripts/build.sh", description = "Build kontejnerového image přes podman, nebo docker, s revizí zdroje pro run manifest" }

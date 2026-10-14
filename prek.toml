@@ -3,7 +3,7 @@
 #:schema https://www.schemastore.org/prek.json
 
 minimum_prek_version = "0.5.3"
-default_install_hook_types = ["pre-commit", "commit-msg", "pre-push"]
+default_install_hook_types = ["pre-commit", "pre-push"]
 default_stages = ["pre-commit", "pre-push", "manual"]
 
 [[repos]]
@@ -131,17 +131,3 @@ language = "system"
 entry = "pixi run --frozen lint-imports"
 types_or = ["python", "pyi", "toml"]
 pass_filenames = false
-
-[[repos.hooks]]
-id = "commitizen"
-name = "cz check"
-language = "system"
-entry = "pixi run --frozen cz check --commit-msg-file"
-stages = ["commit-msg"]
-
-[[repos.hooks]]
-id = "task-trailer"
-name = "trailer Task: SNN"
-language = "system"
-entry = "grep -Eq '^Task: S[0-9]+$'"
-stages = ["commit-msg"]
