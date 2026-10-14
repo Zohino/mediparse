@@ -38,7 +38,7 @@ def read_table(path: Path, schema: pa.Schema) -> pa.Table:
 
 
 def write_string_table(
-    path: Path, columns: Sequence[str], rows: Sequence[Mapping[str, str]]
+    path: Path, columns: Sequence[str], rows: Sequence[Mapping[str, str | None]]
 ) -> None:
     """Zapíše soubor parquet se samými řetězcovými sloupci a vytvoří chybějící adresáře.
 

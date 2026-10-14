@@ -17,24 +17,12 @@ from mediparse.domain.cohort import (
     ensure_publishable,
     label_codes,
 )
-from mediparse.domain.icd import DiagnosisCodes, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
 from mediparse.domain.run_manifest import SourceRevision
+from tests.cohort_support import CODES
 
 POSITIVE: Final = 20
-CODES: Final = DiagnosisCodes(
-    prefixes={
-        Diagnosis.DIABETES: {IcdVersion.NINE: ("250",), IcdVersion.TEN: ("E11",)},
-        Diagnosis.COPD: {IcdVersion.NINE: ("496",), IcdVersion.TEN: ("J44",)},
-        Diagnosis.CKD: {IcdVersion.NINE: ("585",), IcdVersion.TEN: ("N18",)},
-        Diagnosis.PNEUMONIA: {IcdVersion.NINE: ("486",), IcdVersion.TEN: ("J18",)},
-        Diagnosis.ATRIAL_FIBRILLATION: {
-            IcdVersion.NINE: ("4273",),
-            IcdVersion.TEN: ("I48",),
-        },
-    }
-)
 
 
 def test_valid_codes_of_both_versions_get_diagnosis() -> None:
