@@ -9,6 +9,7 @@
 !config/diagnosis_candidates.json
 !config/verbalization_template.md
 !resources/synthetic/
+!resources/icd/
 !translation/note_parts.py
 !translation/markers.py
 !translation/collect.py

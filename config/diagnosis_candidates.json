@@ -3,13 +3,15 @@
     "diabetes": {
       "label_cs": "Diabetes mellitus",
       "icd9_prefixes": [
+        "249",
         "250"
       ],
       "icd10_prefixes": [
+        "E08",
+        "E09",
         "E10",
         "E11",
-        "E13",
-        "E14"
+        "E13"
       ],
       "charlson": [
         "diab",
@@ -55,9 +57,13 @@
       "icd9_prefixes": [
         "491",
         "492",
+        "4932",
         "496"
       ],
       "icd10_prefixes": [
+        "J41",
+        "J42",
+        "J43",
         "J44"
       ],
       "charlson": [
@@ -99,6 +105,7 @@
     "pneumonia": {
       "label_cs": "Pneumonie",
       "icd9_prefixes": [
+        "0221",
         "480",
         "481",
         "482",
@@ -114,7 +121,15 @@
         "J15",
         "J16",
         "J17",
-        "J18"
+        "J18",
+        "A221",
+        "A3701",
+        "A3711",
+        "A3781",
+        "A3791",
+        "A481",
+        "B250",
+        "B440"
       ],
       "charlson": [],
       "kapitola": "J",
