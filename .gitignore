@@ -188,6 +188,9 @@ tempCodeRunnerFile.py
 # resources/ je opt-in: zveřejňuje se jen výslovná výjimka
 /resources/*
 !/resources/synthetic/
+!/resources/icd/
+/resources/icd/*
+!/resources/icd/2018_I*gem.txt
 
 # ============================================================
 # mediparse tooling stack
