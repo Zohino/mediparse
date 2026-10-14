@@ -6,6 +6,7 @@
 !config/smoketest_training.json
 !config/synthetic_plan.json
 !config/mimic_tables.json
+!config/diagnosis_candidates.json
 !config/verbalization_template.md
 !resources/synthetic/
 !translation/note_parts.py

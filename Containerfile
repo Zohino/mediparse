@@ -23,7 +23,7 @@ COPY --from=builder /app/.pixi/envs/test /app/.pixi/envs/test
 COPY --from=builder /shell-hook /shell-hook
 COPY --from=builder /app/src/ src/
 COPY pyproject.toml ./
-COPY config/matrix.json config/smoketest_training.json config/synthetic_plan.json config/mimic_tables.json config/verbalization_template.md config/
+COPY config/matrix.json config/smoketest_training.json config/synthetic_plan.json config/mimic_tables.json config/diagnosis_candidates.json config/verbalization_template.md config/
 COPY resources/synthetic/ resources/synthetic/
 COPY translation/note_parts.py translation/markers.py translation/collect.py translation/
 COPY workflow/ workflow/
