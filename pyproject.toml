@@ -229,6 +229,10 @@ ignore = [
     "start-process-with-partial-path",        # git se hledá v PATH, stejně jako v testovaném adaptéru
 ]
 
+"src/mediparse/entrypoints/cohort.py" = [
+    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
+]
+
 "src/mediparse/entrypoints/smoketest_training.py" = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
