@@ -1,0 +1,49 @@
+{
+  "cohort_sha256": "39f8d71d8cc13af7ea7a596936463de411304257570229908505febe2d6426bb",
+  "config_sha256": "5bc219812d8a51de35fcb58e8ccc55e6ee0cb09a25c1c7bee1590c0e4a8ced13",
+  "sources": {
+    "discharge.csv.gz": "27bc552edaf81c2af322040cb7e8eb36417173b23c79405bb92fcf73bef2dbc5",
+    "diagnoses_icd.csv.gz": "47665a41b2a3ad990d6f314062d5bd6d29d467b0fd402dd94662044ec8b073d2"
+  },
+  "packages": {
+    "python": "3.13.16",
+    "duckdb": "1.5.6",
+    "pyarrow": "26.0.0"
+  },
+  "source": {
+    "commit": "74e40a03eee45ef7683abada5479351e50c9893b",
+    "dirty": false
+  },
+  "counts": {
+    "funnel": [
+      {
+        "step": "all_notes",
+        "notes": 331793,
+        "patients": 145914
+      },
+      {
+        "step": "with_icd",
+        "notes": 331604,
+        "patients": 145817
+      },
+      {
+        "step": "long_enough",
+        "notes": 331604,
+        "patients": 145817
+      },
+      {
+        "step": "unique",
+        "notes": 331604,
+        "patients": 145817
+      }
+    ],
+    "positives": {
+      "diabetes": 91149,
+      "copd": 35462,
+      "ckd": 58547,
+      "pneumonia": 21173,
+      "atrial_fibrillation": 55410
+    }
+  },
+  "invalid_codes": 0
+}
