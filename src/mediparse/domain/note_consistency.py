@@ -76,7 +76,7 @@ def _length_violations(
     words, _ = narrative(sections, plan, structure)
     target = sum(plan.section_words.values())
     tolerance = structure.narrative.note_tolerance
-    if abs(words / target - 1) <= tolerance:
+    if abs(words - target) <= tolerance * target:
         return []
     return [f"Délka narativu {words} slov je mimo plán {target} ± {tolerance:.0%}."]
 
