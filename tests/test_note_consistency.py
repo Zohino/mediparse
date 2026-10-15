@@ -147,3 +147,21 @@ def test_narrative_outside_tolerance_is_reported(
 ) -> None:
     """Narativ o 28 slovech kratší i delší než plán o víc než 20 % je porušení."""
     assert _length_reasons(planned_note, sampler_config, planned_words)
+
+
+def test_note_without_planned_narrative_passes(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Plán bez narativních sekcí neměří žádný narativ, takže délka nemá s čím nesouhlasit."""
+    plan = planned_note.plan.model_copy(update={"section_words": {}})
+
+    violations = _violations(planned_note.text, plan, sampler_config)
+
+    assert not [reason for reason in violations if reason.startswith("Délka narativu")]
+
+
+def test_narrative_against_zero_plan_is_reported(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Narativ v sekci, které plán přidělil nula slov, je porušení, ne dělení nulou."""
+    assert _length_reasons(planned_note, sampler_config, 0)

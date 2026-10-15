@@ -107,7 +107,7 @@ class NarrativeModel(BaseModel):
     sigma: PositiveFloat
     min_words: PositiveInt
     max_words: PositiveInt
-    deid_per_word: Probability
+    deid_per_word: Annotated[float, Field(gt=0.0, le=1.0)]
     median_tolerance: PositiveFloat
     sigma_tolerance: PositiveFloat
     deid_tolerance: PositiveFloat
@@ -250,7 +250,10 @@ def _structure(
         for group in section.subheadings
         if (header := _pick(group, rng)) is not None
     )
-    words = _narrative_words(model.narrative, rng)
+    # Délka se losuje i pro zprávu bez narativní sekce, aby se proud náhodnosti
+    # dalších zpráv nezměnil; narativ pak tvoří jen slova, která dostala nějaká sekce.
+    section_words = _allocate(_narrative_words(model.narrative, rng), present)
+    words = sum(count for _, count in section_words)
     return NoteStructure(
         note_id=note_id,
         sex=sex,
@@ -258,7 +261,7 @@ def _structure(
         sections=tuple(section.key for section in present),
         subheadings=subheadings,
         narrative_words=words,
-        section_words=_allocate(words, present),
+        section_words=section_words,
         narrative_deid=round(words * model.narrative.deid_per_word),
     )
 

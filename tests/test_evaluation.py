@@ -31,9 +31,9 @@ def test_mixed_truth_passes() -> None:
     ensure_both_classes(Diagnosis.CKD, [True, False, True])
 
 
-@pytest.mark.parametrize("truth", [[True, True], [False, False, False]])
+@pytest.mark.parametrize("truth", [[True, True], [False, False, False], []])
 def test_single_class_is_rejected(truth: list[bool]) -> None:
-    """Samé True i samé False skončí InvalidInputError s diagnózou."""
+    """Samé True, samé False i prázdná pravda skončí InvalidInputError s diagnózou."""
     with pytest.raises(InvalidInputError, match="ckd"):
         ensure_both_classes(Diagnosis.CKD, truth)
 

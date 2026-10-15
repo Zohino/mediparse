@@ -6,6 +6,7 @@ from math import isclose, prod
 import pytest
 from pydantic import ValidationError
 
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import (
     ACUTE_DIAGNOSIS,
     Diagnosis,
@@ -14,6 +15,7 @@ from mediparse.domain.labels import (
     LabelModel,
     acute_given_chronic,
     label_sets,
+    label_shares,
     max_entropy_joint,
     prevalence_outliers,
 )
@@ -144,6 +146,21 @@ def test_missing_diagnosis_is_rejected() -> None:
         LabelModel.model_validate(valid)
 
 
+def test_conditional_row_without_diagnosis_is_rejected() -> None:
+    """Řádek podmíněné matice bez některé z pěti diagnóz neprojde."""
+    valid = _model().model_dump()
+    del valid["conditional"][Diagnosis.DIABETES][Diagnosis.PNEUMONIA]
+
+    with pytest.raises(ValidationError, match="Každý řádek"):
+        LabelModel.model_validate(valid)
+
+
+def test_label_shares_of_no_notes_are_rejected() -> None:
+    """Podíl labelů z žádné zprávy není definovaný; prázdný vstup je chyba, ne dělení nulou."""
+    with pytest.raises(InvalidInputError, match="žádné zprávy"):
+        label_shares([])
+
+
 def _uniform_model(identical: tuple[tuple[Diagnosis, Diagnosis], ...]) -> LabelModel:
     share = 0.2
     linked = {frozenset(pair) for pair in identical}
@@ -176,6 +193,18 @@ def test_structural_zero_converges() -> None:
         _marginal(joint, Diagnosis.DIABETES, Diagnosis.CKD), 0.2, abs_tol=1e-9
     )
     assert isclose(_marginal(joint, Diagnosis.DIABETES), 0.2, abs_tol=1e-9)
+
+
+def test_structural_zero_chronic_state_has_no_acute_probability() -> None:
+    """Chronický stav s nulovou pravděpodobností nemá podmíněnou pravděpodobnost akutní diagnózy."""
+    model = _uniform_model(((Diagnosis.DIABETES, Diagnosis.CKD),))
+
+    conditional = acute_given_chronic(max_entropy_joint(model))
+
+    assert frozenset({Diagnosis.DIABETES}) not in conditional
+    assert frozenset({Diagnosis.CKD}) not in conditional
+    assert frozenset({Diagnosis.DIABETES, Diagnosis.CKD}) in conditional
+    assert all(0.0 <= p <= 1.0 for p in conditional.values())
 
 
 def test_contradictory_marginals_raise_domain_error() -> None:

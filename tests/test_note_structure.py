@@ -166,6 +166,30 @@ def test_allocation_sums_exactly_over_present_sections() -> None:
         assert {key for key, _ in structure.section_words} <= set(structure.sections)
 
 
+def test_note_without_narrative_section_has_no_narrative() -> None:
+    """Zpráva bez narativní sekce nemá narativní slova ani značky, aby plán neodporoval sám sobě."""
+    model = StructureModel(
+        preamble=PREAMBLE,
+        sections=(
+            SectionModel(key="allergies", header="Allergies", probability=1.0),
+            SectionModel(
+                key="hospital_course",
+                header="Brief Hospital Course",
+                probability=0.0,
+                narrative_share=1.0,
+            ),
+        ),
+        narrative=NARRATIVE,
+        female_probability=FEMALE,
+        age_marker_probability=AGE_MARKER,
+    )
+
+    for structure in sample_structure(_notes(30), model, Random(SEED)):
+        assert structure.section_words == ()
+        assert structure.narrative_words == 0
+        assert structure.narrative_deid == 0
+
+
 def test_allocation_follows_shares() -> None:
     """Při obou narativních sekcích dostane každá podíl zaokrouhlený nejvýš o slovo."""
     for structure in sample_structure(_notes(2000), _model(), Random(SEED)):
@@ -239,6 +263,12 @@ def test_median_outside_bounds_is_rejected() -> None:
             deid_tolerance=0.15,
             note_tolerance=0.2,
         )
+
+
+def test_zero_deid_density_is_rejected() -> None:
+    """Nulová hustota narativních značek neprojde; kontrola korpusu se k ní vztahuje relativně."""
+    with pytest.raises(ValidationError, match="deid_per_word"):
+        NARRATIVE.model_validate(NARRATIVE.model_dump() | {"deid_per_word": 0.0})
 
 
 @pytest.mark.parametrize(
