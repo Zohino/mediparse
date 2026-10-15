@@ -9,6 +9,8 @@ from typing import TYPE_CHECKING, Annotated, Final, Self
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
+from mediparse.domain.inputs import InvalidInputError
+
 if TYPE_CHECKING:
     from collections.abc import Callable, Collection, Mapping, Sequence
 
@@ -83,7 +85,13 @@ def label_shares(label_sets: Sequence[Collection[Diagnosis]]) -> dict[Diagnosis,
 
     Returns:
         Slovník diagnóza → podíl zpráv, které label nesou.
+
+    Raises:
+        InvalidInputError: Seznam neobsahuje žádné zprávy, podíl není definovaný.
     """
+    if not label_sets:
+        msg = "Podíl labelů nelze spočítat ze žádné zprávy."
+        raise InvalidInputError(msg)
     return {
         diagnosis: sum(diagnosis in labels for labels in label_sets) / len(label_sets)
         for diagnosis in Diagnosis
@@ -158,7 +166,9 @@ def acute_given_chronic(joint: Mapping[LabelSet, float]) -> dict[LabelSet, float
     """Pravděpodobnost akutní diagnózy podmíněná chronickými diagnózami zprávy.
 
     Returns:
-        P(akutní | chronické diagnózy) pro každou kombinaci chronických diagnóz.
+        P(akutní | chronické diagnózy) pro každou kombinaci chronických diagnóz
+        s nenulovou pravděpodobností; kombinace, kterou společné rozdělení
+        vylučuje, podmínkou být nemůže, a ve výsledku proto chybí.
     """
     totals: dict[LabelSet, float] = {}
     acute: dict[LabelSet, float] = {}
@@ -168,7 +178,9 @@ def acute_given_chronic(joint: Mapping[LabelSet, float]) -> dict[LabelSet, float
         if ACUTE_DIAGNOSIS in cell:
             acute[chronic] = acute.get(chronic, 0.0) + probability
     return {
-        chronic: acute.get(chronic, 0.0) / total for chronic, total in totals.items()
+        chronic: acute.get(chronic, 0.0) / total
+        for chronic, total in totals.items()
+        if total > 0.0
     }
 
 

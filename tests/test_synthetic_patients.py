@@ -169,3 +169,33 @@ def test_unreachable_tolerance_fails_loudly() -> None:
     """Nedosažitelná tolerance skončí výjimkou, ne nekonečnou smyčkou."""
     with pytest.raises(PrevalenceNotReachedError):
         sample_notes(_patients(attempts=3), _labels(0.0), Random(SEED))
+
+
+def _identical_labels() -> LabelModel:
+    prevalence = PREVALENCE | {Diagnosis.CKD: PREVALENCE[Diagnosis.DIABETES]}
+    identical = {Diagnosis.DIABETES, Diagnosis.CKD}
+    return LabelModel(
+        prevalence=prevalence,
+        conditional={
+            first: {
+                second: 1.0
+                if first is second or {first, second} == identical
+                else prevalence[second]
+                for second in Diagnosis
+            }
+            for first in Diagnosis
+        },
+        prevalence_tolerance=TOLERANCE,
+        ipf_tolerance=1e-12,
+        ipf_max_passes=500,
+    )
+
+
+def test_structural_zero_is_sampled_without_failure() -> None:
+    """Dvě totožné diagnózy se vylosují vždy spolu; nulový chronický stav nic neshodí."""
+    notes = sample_notes(_patients(), _identical_labels(), Random(SEED))
+
+    assert all(
+        (Diagnosis.DIABETES in note.labels) == (Diagnosis.CKD in note.labels)
+        for note in notes
+    )
