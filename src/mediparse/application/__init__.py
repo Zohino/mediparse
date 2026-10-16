@@ -14,6 +14,5 @@ Signalizace odmítnutí, kterou dodržuje každý use case:
   kontroly (audit, provenance), a jen pro předpoklady, které ověřuje sám;
 - porušený invariant programu je obyčejná výjimka s tracebackem;
 - ``run`` nevrací ``None``;
-- data configu jsou argumenty ``run``; v polích dataclass jsou porty a neměnné
-  nastavení složené při startu, ne data, se kterými krok běží.
+- data configu jsou argumenty ``run``, v polích dataclass jsou jen porty.
 """

@@ -73,10 +73,13 @@ def run(argv: Sequence[str], environ: Mapping[str, str]) -> ExitCode:
         corpus=CorpusDirectory(args.corpus),
         references=tuple(MimicReference(path) for path in references),
         report=OverlapReportFile(args.report),
-        structure_labels=load_sampler_config(args.config).structure.structure_labels,
     )
     outcome = audit.run(
-        environ, args.commit, datetime.now(tz=UTC), load_reference_sha256(args.tables)
+        environ,
+        args.commit,
+        datetime.now(tz=UTC),
+        load_reference_sha256(args.tables),
+        load_sampler_config(args.config).structure.structure_labels,
     )
     return _present(outcome, args.report)
 

@@ -141,7 +141,6 @@ class CorpusAudit:
     corpus: SyntheticCorpus
     references: Sequence[Reference]
     report: OverlapReport
-    structure_labels: Collection[str]
 
     def run(
         self,
@@ -149,6 +148,7 @@ class CorpusAudit:
         tool_commit: str,
         created_at: datetime,
         reference_sha256: Mapping[str, str],
+        structure_labels: Collection[str],
     ) -> AuditOutcome:
         """Porovná korpus s referencí; čistý audit uloží záznam, shoda jen report mimo repozitář.
 
@@ -177,7 +177,7 @@ class CorpusAudit:
         subjects = frozenset(
             subject_of(note_id) for texts in by_language.values() for note_id in texts
         )
-        index = NgramIndex(notes, self.structure_labels)
+        index = NgramIndex(notes, structure_labels)
         scans = tuple(
             scan(index, subjects, reference.notes()) for reference in self.references
         )
@@ -194,7 +194,7 @@ class CorpusAudit:
             corpus_files=len(notes),
             ngram_size=NGRAM_SIZE,
             normalization=NORMALIZATION,
-            structure_labels=tuple(sorted(self.structure_labels)),
+            structure_labels=tuple(sorted(structure_labels)),
             synthetic_ngrams=len(index),
             reference=tuple(
                 ReferenceFile(
