@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from types import MappingProxyType
-from typing import TYPE_CHECKING, Final, Protocol
+from typing import TYPE_CHECKING, Final, NamedTuple, Protocol
 
 from mediparse.application.ports.corpus import FingerprintedCorpus, NoteSource
 from mediparse.domain.corpus_audit import (
@@ -33,6 +33,7 @@ if TYPE_CHECKING:
         Ngram,
         Position,
         ReferenceNote,
+        ScanResult,
     )
     from mediparse.domain.identity import SubjectId
 
@@ -158,6 +159,31 @@ class CorpusAudit:
         Returns:
             Výsledek auditu; při odmítnutí se obsah reference nečte.
         """
+        corpus = self._preflight(environ, pin)
+        if isinstance(corpus, AuditRefused):
+            return corpus
+        index = NgramIndex(corpus.notes, pin.structure_labels)
+        scans = self._scan(index, corpus.subjects)
+        if isinstance(scans, AuditRefused):
+            return scans
+        shared, colliding = _shared_ngrams(scans), _colliding_subjects(scans)
+        if shared or colliding:
+            return _overlap(index, shared, colliding, self.report)
+        record = self._record(
+            corpus, index, scans, pin, _Issued(tool_commit, created_at)
+        )
+        self.corpus.save_record(record)
+        return AuditClean(
+            notes=len(corpus.notes),
+            ngrams=len(index),
+            reference_notes=sum(result.rows for result in scans),
+        )
+
+    def _preflight(
+        self, environ: Mapping[str, str], pin: AuditPin
+    ) -> _AuditedCorpus | AuditRefused:
+        # Pořadí je bezpečnostní: odmítnutí kvůli prostředí a korpusu přijdou dřív, než
+        # se sáhne na referenci, a otisk reference (čte celý soubor) dřív než její zprávy.
         problem = _environment_problem(environ) or _workspace_problem(self.workspace)
         if problem is not None:
             return AuditRefused(problem)
@@ -167,34 +193,46 @@ class CorpusAudit:
         # Všechny jazyky, protože otisk pokrývá i překlad; audit jen angličtiny by bránou
         # pustil neauditovaný český text. Jazyk v popisku rozliší stejný note_id v en a cs.
         by_language = {language: self.corpus.notes(language) for language in Language}
-        notes = {
-            f"{language}/{note_id}": text
-            for language, texts in by_language.items()
-            for note_id, text in texts.items()
-        }
         problem = _note_id_problem(by_language) or _reference_problem(
             self.references, pin
         )
         if problem is not None:
             return AuditRefused(problem)
-        subjects = frozenset(
-            subject_of(note_id) for texts in by_language.values() for note_id in texts
+        return _AuditedCorpus(
+            sha256=sha256,
+            notes={
+                f"{language}/{note_id}": text
+                for language, texts in by_language.items()
+                for note_id, text in texts.items()
+            },
+            subjects=frozenset(
+                subject_of(note_id)
+                for texts in by_language.values()
+                for note_id in texts
+            ),
         )
-        index = NgramIndex(notes, pin.structure_labels)
+
+    def _scan(
+        self, index: NgramIndex, subjects: frozenset[SubjectId]
+    ) -> tuple[ScanResult, ...] | AuditRefused:
         scans = tuple(
             scan(index, subjects, reference.notes()) for reference in self.references
         )
         if any(result.rows == 0 for result in scans):
             return AuditRefused("Referenční soubor neobsahuje žádnou zprávu.")
-        shared = {gram for result in scans for gram in result.shared}
-        colliding = {
-            subject for result in scans for subject in result.colliding_subjects
-        }
-        if shared or colliding:
-            return _overlap(index, shared, colliding, self.report)
-        record = AuditRecord(
-            corpus_sha256=sha256,
-            corpus_files=len(notes),
+        return scans
+
+    def _record(
+        self,
+        corpus: _AuditedCorpus,
+        index: NgramIndex,
+        scans: Sequence[ScanResult],
+        pin: AuditPin,
+        issued: _Issued,
+    ) -> AuditRecord:
+        return AuditRecord(
+            corpus_sha256=corpus.sha256,
+            corpus_files=len(corpus.notes),
             ngram_size=NGRAM_SIZE,
             normalization=NORMALIZATION,
             structure_labels=tuple(sorted(pin.structure_labels)),
@@ -209,15 +247,33 @@ class CorpusAudit:
             ),
             shared_ngrams=0,
             colliding_subjects=0,
-            tool_commit=tool_commit,
-            created_at=created_at,
+            tool_commit=issued.tool_commit,
+            created_at=issued.created_at,
         )
-        self.corpus.save_record(record)
-        return AuditClean(
-            notes=len(notes),
-            ngrams=len(index),
-            reference_notes=sum(result.rows for result in scans),
-        )
+
+
+@dataclass(frozen=True)
+class _AuditedCorpus:
+    """Korpus, který prošel předběžnými kontrolami: otisk, zprávy podle ``jazyk/note_id`` a jejich pacienti."""
+
+    sha256: str
+    notes: Mapping[str, str]
+    subjects: frozenset[SubjectId]
+
+
+class _Issued(NamedTuple):
+    """Kdo a kdy záznam vydal; dvojice putuje spolu, aby ``_record`` nepřekročil limit parametrů."""
+
+    tool_commit: str
+    created_at: datetime
+
+
+def _shared_ngrams(scans: Iterable[ScanResult]) -> set[Ngram]:
+    return {gram for result in scans for gram in result.shared}
+
+
+def _colliding_subjects(scans: Iterable[ScanResult]) -> set[SubjectId]:
+    return {subject for result in scans for subject in result.colliding_subjects}
 
 
 def _overlap(
