@@ -109,7 +109,7 @@ def test_note_ids_follow_mimic_scheme_per_patient() -> None:
         assert [note.note_id for note in patient_notes] == [
             f"{subject}-DS-{order}" for order in range(1, len(patient_notes) + 1)
         ]
-        assert all(subject_of(note.note_id) == str(subject) for note in patient_notes)
+        assert all(subject_of(note.note_id) == subject for note in patient_notes)
     assert min(note.subject_id for note in notes) == FIRST_SUBJECT
 
 

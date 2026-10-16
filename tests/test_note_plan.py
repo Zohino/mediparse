@@ -3,6 +3,7 @@
 from dataclasses import replace
 
 import pytest
+from pydantic import ValidationError
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.mentions import Mention, MentionStatus
@@ -60,3 +61,23 @@ def test_structure_of_other_note_is_rejected() -> None:
 
     with pytest.raises(MismatchedPlanPartsError):
         note_plan(NOTE, other, MENTIONS)
+
+
+def test_plan_of_other_patient_than_note_id_is_rejected() -> None:
+    """Subject_id, který neodpovídá note_id, plán odmítne, ať vznikl kudy chce."""
+    plan = note_plan(NOTE, STRUCTURE, MENTIONS)
+
+    with pytest.raises(ValidationError, match="nepatří pacientovi"):
+        NotePlan.model_validate_json(
+            plan.model_copy(update={"subject_id": 90000002}).model_dump_json()
+        )
+
+
+def test_plan_with_malformed_note_id_is_rejected() -> None:
+    """Jméno mimo skladbu note_id plán odmítne."""
+    plan = note_plan(NOTE, STRUCTURE, MENTIONS)
+
+    with pytest.raises(ValidationError, match="Neplatné note_id"):
+        NotePlan.model_validate_json(
+            plan.model_copy(update={"note_id": "n1"}).model_dump_json()
+        )

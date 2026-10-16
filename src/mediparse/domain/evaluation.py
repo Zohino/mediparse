@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from mediparse.domain.diagnosis import Diagnosis
+    from mediparse.domain.identity import RowId, SubjectId
 
 
 @dataclass(frozen=True)
@@ -25,10 +26,10 @@ class Classification:
 class Prediction:
     """Predikce jedné diagnózy pro jednu testovací zprávu řádku matice."""
 
-    row_id: str
+    row_id: RowId
     fold: int
     note_id: str
-    subject_id: int
+    subject_id: SubjectId
     diagnosis: Diagnosis
     truth: bool
     predicted: bool
@@ -51,7 +52,7 @@ class BinaryMetrics:
 class DiagnosisMetrics:
     """Metriky jedné diagnózy na jednom řádku matice s velikostí testu."""
 
-    row_id: str
+    row_id: RowId
     diagnosis: Diagnosis
     test_notes: int
     test_positives: int

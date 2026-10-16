@@ -22,6 +22,7 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
     from random import Random
 
+    from mediparse.domain.identity import SubjectId
     from mediparse.domain.synthetic_patients import SyntheticNote
 
 _SHARE_TOLERANCE: Final = 1e-9
@@ -226,7 +227,7 @@ def sample_structure(
     Returns:
         Struktury ve stejném pořadí jako zprávy.
     """
-    sexes: dict[int, Sex] = {}
+    sexes: dict[SubjectId, Sex] = {}
     structures: list[NoteStructure] = []
     for note in notes:
         if note.subject_id not in sexes:

@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     from mediparse.domain.corpus_audit import Position
+    from mediparse.domain.identity import SubjectId
 
 
 @dataclass(frozen=True)
@@ -20,7 +21,7 @@ class OverlapReportFile:
     path: Path
 
     def write(
-        self, positions: Sequence[Position], colliding_subjects: Collection[str]
+        self, positions: Sequence[Position], colliding_subjects: Collection[SubjectId]
     ) -> None:
         """Zapíše pozice shod a kolidující subject_id."""
         content = {

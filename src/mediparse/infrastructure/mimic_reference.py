@@ -34,7 +34,7 @@ class MimicReference:
         """
         with gzip.open(self.path, mode="rt", encoding="utf-8", newline="") as stream:
             for row in csv.DictReader(stream):
-                yield ReferenceNote(subject_id=row["subject_id"], text=row["text"])
+                yield ReferenceNote(subject_id=int(row["subject_id"]), text=row["text"])
 
     def sha256(self) -> str:
         """SHA-256 souboru, srovnatelný s ``SHA256SUMS.txt`` na PhysioNetu.

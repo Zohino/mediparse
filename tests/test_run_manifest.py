@@ -56,3 +56,10 @@ def test_extra_field_is_rejected() -> None:
     """Pole navíc je odmítnuto."""
     with pytest.raises(ValidationError):
         RunManifest.model_validate(_fields(started="now"))
+
+
+@pytest.mark.parametrize("row_id", ["", "Row 1"])
+def test_invalid_row_id_is_rejected(row_id: str) -> None:
+    """Prázdné id i id mimo skladbu řádku matice manifest odmítne."""
+    with pytest.raises(ValidationError):
+        RunManifest.model_validate(_fields(row_id=row_id))

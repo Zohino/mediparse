@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Self
 
-from pydantic import BaseModel, ConfigDict, NonNegativeInt, PositiveInt
+from pydantic import BaseModel, ConfigDict, NonNegativeInt, model_validator
 
 from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.identity import SubjectId
 from mediparse.domain.mentions import Mention
+from mediparse.domain.note import subject_of
 from mediparse.domain.note_structure import Sex
 
 if TYPE_CHECKING:
@@ -23,7 +25,7 @@ class NotePlan(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     note_id: str
-    subject_id: PositiveInt
+    subject_id: SubjectId
     labels: tuple[Diagnosis, ...]
     sex: Sex
     age_marker: bool
@@ -32,6 +34,13 @@ class NotePlan(BaseModel):
     section_words: dict[str, NonNegativeInt]
     narrative_deid: NonNegativeInt
     mentions: tuple[Mention, ...]
+
+    @model_validator(mode="after")
+    def _subject_matches_note_id(self) -> Self:
+        if subject_of(self.note_id) != self.subject_id:
+            msg = f"Zpráva {self.note_id} nepatří pacientovi subject_id {self.subject_id}."
+            raise ValueError(msg)
+        return self
 
 
 class MismatchedPlanPartsError(ValueError):

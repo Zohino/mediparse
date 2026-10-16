@@ -21,6 +21,7 @@ if TYPE_CHECKING:
     from collections.abc import Collection, Iterator, Sequence
 
     from mediparse.domain.corpus_audit import AuditRecord, Position
+    from mediparse.domain.identity import SubjectId
 
 CREATED_AT = datetime(2026, 9, 29, tzinfo=UTC)
 DISCHARGE_SHA = PINNED["discharge.csv.gz"]
@@ -105,12 +106,12 @@ class _Workspace:
 
 @dataclass
 class _Report:
-    written: list[tuple[tuple[Position, ...], frozenset[str]]] = field(
+    written: list[tuple[tuple[Position, ...], frozenset[SubjectId]]] = field(
         default_factory=list
     )
 
     def write(
-        self, positions: Sequence[Position], colliding_subjects: Collection[str]
+        self, positions: Sequence[Position], colliding_subjects: Collection[SubjectId]
     ) -> None:
         self.written.append((tuple(positions), frozenset(colliding_subjects)))
 
@@ -134,7 +135,7 @@ def test_clean_corpus_saves_record() -> None:
     """Čistý korpus dostane záznam s otiskem, metodou a referencí, report nevznikne."""
     corpus = _Corpus(dict(SHORT_NOTE))
     report = _Report()
-    reference = _Reference((ReferenceNote("10000032", SENTENCE),))
+    reference = _Reference((ReferenceNote(10000032, SENTENCE),))
 
     outcome = _audit(corpus, reference, report).run(
         {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
@@ -154,7 +155,7 @@ def test_overlap_writes_report_and_no_record() -> None:
     """Shoda zapíše jen pozice do reportu a záznam auditu nevznikne."""
     corpus = _Corpus({NOTE: SENTENCE})
     report = _Report()
-    reference = _Reference((ReferenceNote("10000032", SENTENCE),))
+    reference = _Reference((ReferenceNote(10000032, SENTENCE),))
 
     outcome = _audit(corpus, reference, report).run(
         {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
@@ -171,7 +172,7 @@ def test_subject_collision_is_overlap() -> None:
     """Syntetický pacient, který existuje v referenci, audit neprojde."""
     corpus = _Corpus(dict(SHORT_NOTE))
     report = _Report()
-    reference = _Reference((ReferenceNote("90000001", "unrelated text"),))
+    reference = _Reference((ReferenceNote(90000001, "unrelated text"),))
 
     outcome = _audit(corpus, reference, report).run(
         {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
@@ -284,7 +285,7 @@ def test_reference_other_than_config_is_refused_before_reading(
 
 def test_structure_labels_reach_the_index() -> None:
     """Štítky struktury dojdou do indexu: samotná struktura shodou není."""
-    reference = _Reference((ReferenceNote("10000032", f"{PREAMBLE}{SENTENCE}"),))
+    reference = _Reference((ReferenceNote(10000032, f"{PREAMBLE}{SENTENCE}"),))
 
     outcome = _audit(
         _Corpus({NOTE: f"{PREAMBLE}a short body"}), reference, _Report()

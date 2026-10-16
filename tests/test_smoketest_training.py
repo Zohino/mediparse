@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+
 import pytest
 from pydantic import ValidationError
 
@@ -20,10 +22,7 @@ VALID = {
 
 def test_valid_config_is_parsed() -> None:
     """Platný JSON dá config s výčtem diagnózy."""
-    config = TrainingConfig.model_validate_json(
-        '{"row_id": "smoke", "diagnosis": "diabetes", "seed": 0, "folds": 2, '
-        '"regularization": 1.0}'
-    )
+    config = TrainingConfig.model_validate_json(json.dumps(VALID))
 
     assert config.row_id == "smoke"
     assert config.diagnosis is Diagnosis.DIABETES
@@ -35,7 +34,7 @@ def test_config_without_row_id_is_rejected() -> None:
     without = {key: value for key, value in VALID.items() if key != "row_id"}
 
     with pytest.raises(ValidationError):
-        TrainingConfig.model_validate(without)
+        TrainingConfig.model_validate_json(json.dumps(without))
 
 
 @pytest.mark.parametrize(
@@ -47,9 +46,11 @@ def test_config_without_row_id_is_rejected() -> None:
         {"diagnosis": "asthma"},
         {"unexpected": 1},
         {"row_id": ""},
+        {"row_id": "Smoke"},
+        {"row_id": "smoke test"},
     ],
 )
 def test_invalid_config_is_rejected(override: dict[str, object]) -> None:
-    """Málo foldů, nekladné C, neznámá diagnóza, extra klíč i prázdný row_id config odmítnou."""
+    """Málo foldů, nekladné C, neznámá diagnóza, extra klíč i neplatný row_id config odmítnou."""
     with pytest.raises(ValidationError):
-        TrainingConfig.model_validate({**VALID, **override})
+        TrainingConfig.model_validate_json(json.dumps({**VALID, **override}))

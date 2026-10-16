@@ -8,6 +8,7 @@ from typing import Annotated
 from pydantic import BaseModel, ConfigDict, Field
 
 from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.identity import RowId
 
 
 class TrainingConfig(BaseModel):
@@ -15,7 +16,7 @@ class TrainingConfig(BaseModel):
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
-    row_id: Annotated[str, Field(min_length=1)]
+    row_id: RowId
     diagnosis: Diagnosis
     seed: int
     folds: Annotated[int, Field(ge=2)]
