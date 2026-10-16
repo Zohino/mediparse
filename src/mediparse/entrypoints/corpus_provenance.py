@@ -19,7 +19,6 @@ from mediparse.application.corpus_provenance import (
     ProvenanceRefused,
     ProvenanceWritten,
 )
-from mediparse.domain.corpus_audit import AuditPin
 from mediparse.domain.corpus_provenance import (
     Generation,
     model_id,
@@ -33,8 +32,9 @@ from mediparse.entrypoints.cli import (
     refusing_invalid_input,
 )
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.audit_pin import load_audit_pin
 from mediparse.infrastructure.file_digest import file_sha256
-from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_reference_sha256
+from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.plans_file import PLANS_PATH, PlansFile
 from mediparse.infrastructure.sampler_config import (
     SAMPLER_CONFIG_PATH,
@@ -91,7 +91,7 @@ def run(argv: Sequence[str]) -> ExitCode:
     )
     outcome = CorpusProvenance(CorpusDirectory(args.corpus)).run(
         generation,
-        AuditPin(load_reference_sha256(args.tables), config.structure.structure_labels),
+        load_audit_pin(args.tables, args.config),
     )
     match outcome:
         case ProvenanceWritten():

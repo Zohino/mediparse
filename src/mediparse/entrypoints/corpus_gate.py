@@ -13,13 +13,12 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.application.corpus_gate import CorpusGate
-from mediparse.domain.corpus_audit import AuditPin
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_reference_sha256
+from mediparse.infrastructure.audit_pin import load_audit_pin
+from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.sampler_config import (
     SAMPLER_CONFIG_PATH,
-    load_sampler_config,
 )
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirectory
 
@@ -48,10 +47,7 @@ def run(argv: Sequence[str]) -> ExitCode:
     args = _parser().parse_args(argv)
     gate = CorpusGate(CorpusDirectory(args.corpus))
     violations = gate.run(
-        AuditPin(
-            load_reference_sha256(args.tables),
-            load_sampler_config(args.config).structure.structure_labels,
-        ),
+        load_audit_pin(args.tables, args.config),
     )
     sys.stdout.writelines(f"{violation}\n" for violation in violations)
     return ExitCode.BLOCKED if violations else ExitCode.OK

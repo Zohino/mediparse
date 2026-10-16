@@ -22,7 +22,7 @@ from mediparse.application.corpus_audit import (
     AuditRefused,
     CorpusAudit,
 )
-from mediparse.domain.corpus_audit import NGRAM_SIZE, AuditPin
+from mediparse.domain.corpus_audit import NGRAM_SIZE
 from mediparse.domain.digest import commit_sha
 from mediparse.entrypoints.cli import (
     argument,
@@ -30,13 +30,13 @@ from mediparse.entrypoints.cli import (
     refusing_invalid_input,
 )
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.audit_pin import load_audit_pin
 from mediparse.infrastructure.audit_workspace import LocalWorkspace
 from mediparse.infrastructure.mimic_reference import MimicReference
-from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_reference_sha256
+from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.overlap_report import OverlapReportFile
 from mediparse.infrastructure.sampler_config import (
     SAMPLER_CONFIG_PATH,
-    load_sampler_config,
 )
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirectory
 
@@ -78,10 +78,7 @@ def run(argv: Sequence[str], environ: Mapping[str, str]) -> ExitCode:
         environ,
         args.commit,
         datetime.now(tz=UTC),
-        AuditPin(
-            load_reference_sha256(args.tables),
-            load_sampler_config(args.config).structure.structure_labels,
-        ),
+        load_audit_pin(args.tables, args.config),
     )
     return _present(outcome, args.report)
 
