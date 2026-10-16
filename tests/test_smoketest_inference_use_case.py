@@ -12,6 +12,7 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Classification, Prediction
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.language import Language
 from mediparse.domain.smoketest_inference import ModelMismatchError
 
 if TYPE_CHECKING:
@@ -34,9 +35,9 @@ def _prediction(note_id: str, *, truth: bool, score: float) -> Prediction:
 
 
 NOTES = (
-    InputNote("a", 1, "en", "text a", frozenset()),
-    InputNote("b", 2, "en", "text b", frozenset()),
-    InputNote("c", 3, "en", "text c", frozenset()),
+    InputNote("a", 1, Language.EN, "text a", frozenset()),
+    InputNote("b", 2, Language.EN, "text b", frozenset()),
+    InputNote("c", 3, Language.EN, "text c", frozenset()),
 )
 HELD_OUT = (
     _prediction("c", truth=True, score=1.5),

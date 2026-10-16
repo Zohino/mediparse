@@ -10,6 +10,8 @@ import pyarrow.parquet as pq
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.language import Language
 from mediparse.infrastructure.parquet_file import read_table
 
 if TYPE_CHECKING:
@@ -47,7 +49,7 @@ class ParquetNoteTable:
         pq.write_table(pa.Table.from_pydict(columns, schema=SCHEMA), self.path)
 
     def read(self) -> tuple[InputNote, ...]:
-        """Přečte řádky tabulky v pořadí souboru.
+        """Přečte řádky tabulky v pořadí souboru; neznámý jazyk je InvalidInputError.
 
         Returns:
             Zprávy s labely z bool sloupců.
@@ -57,9 +59,16 @@ class ParquetNoteTable:
             InputNote(
                 row["note_id"],
                 row["subject_id"],
-                row["language"],
+                self._language(row["language"]),
                 row["text"],
                 frozenset(diagnosis for diagnosis in Diagnosis if row[diagnosis.value]),
             )
             for row in table.to_pylist()
         )
+
+    def _language(self, value: str) -> Language:
+        try:
+            return Language(value)
+        except ValueError as error:
+            msg = f"Soubor {self.path} obsahuje neznámý jazyk {value!r}."
+            raise InvalidInputError(msg) from error

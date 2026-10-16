@@ -12,6 +12,7 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Classification, Prediction
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.language import Language
 from mediparse.domain.smoketest_training import TrainingConfig, TrainingReport
 from mediparse.domain.split import Holdout, SubjectLeakError
 
@@ -24,10 +25,10 @@ CONFIG = TrainingConfig(
     row_id="row", diagnosis=Diagnosis.CKD, seed=0, folds=2, regularization=1.0
 )
 NOTES = (
-    InputNote("a", 1, "en", "text a", frozenset({Diagnosis.CKD})),
-    InputNote("b", 2, "en", "text b", frozenset({Diagnosis.DIABETES})),
-    InputNote("c", 3, "en", "text c", frozenset({Diagnosis.CKD})),
-    InputNote("d", 4, "en", "text d", frozenset()),
+    InputNote("a", 1, Language.EN, "text a", frozenset({Diagnosis.CKD})),
+    InputNote("b", 2, Language.EN, "text b", frozenset({Diagnosis.DIABETES})),
+    InputNote("c", 3, Language.EN, "text c", frozenset({Diagnosis.CKD})),
+    InputNote("d", 4, Language.EN, "text d", frozenset()),
 )
 
 
@@ -130,7 +131,7 @@ def test_trains_on_train_and_predicts_test() -> None:
 
 def test_shared_subject_stops_before_saving() -> None:
     """Split sdílející pacienta vyhodí SubjectLeakError a nic se neuloží."""
-    notes = (*NOTES[:3], InputNote("e", 1, "en", "text e", frozenset()))
+    notes = (*NOTES[:3], InputNote("e", 1, Language.EN, "text e", frozenset()))
     recorder = _Recorder()
 
     with pytest.raises(SubjectLeakError):

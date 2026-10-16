@@ -14,6 +14,7 @@ from mediparse.domain.corpus_audit import NGRAM_SIZE, NORMALIZATION, AuditRecord
 from mediparse.domain.corpus_provenance import Decoding, Translation, TranslationRun
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
+from mediparse.domain.language import Language
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.plans_file import LABELS_PATH, PLANS_PATH
 from mediparse.infrastructure.sampler_config import (
@@ -106,7 +107,7 @@ def separable_notes(
             InputNote(
                 f"{patient}-DS-{visit}",
                 patient,
-                "en",
+                Language.EN,
                 f"{vocabulary[0] if positive else vocabulary[1]} visit {visit}",
                 labels,
             )

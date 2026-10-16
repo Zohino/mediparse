@@ -7,6 +7,7 @@ import pytest
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.language import Language
 from mediparse.domain.split import (
     Holdout,
     SubjectLeakError,
@@ -19,7 +20,7 @@ FOLDS = 2
 
 def _notes(*subjects: int) -> list[InputNote]:
     return [
-        InputNote(f"{subject}-DS-{index}", subject, "en", "text", frozenset())
+        InputNote(f"{subject}-DS-{index}", subject, Language.EN, "text", frozenset())
         for index, subject in enumerate(subjects)
     ]
 

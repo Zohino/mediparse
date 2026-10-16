@@ -5,7 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
-from mediparse.application.corpus_texts import LANGUAGE, texts_in_language
+from mediparse.application.corpus_texts import texts_in_language
+from mediparse.domain.language import Language
 from mediparse.domain.smoketest_input import input_notes
 
 if TYPE_CHECKING:
@@ -36,7 +37,7 @@ class SmoketestInput:
         Returns:
             Počet zapsaných zpráv.
         """
-        texts = texts_in_language(self.corpus.notes(), LANGUAGE)
-        notes = input_notes(self.plans.load(), texts, LANGUAGE)
+        texts = texts_in_language(self.corpus.notes(), Language.EN)
+        notes = input_notes(self.plans.load(), texts, Language.EN)
         self.table.write(notes)
         return len(notes)

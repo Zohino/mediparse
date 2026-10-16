@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from mediparse.domain.diagnosis import Diagnosis
     from mediparse.domain.identity import SubjectId
+    from mediparse.domain.language import Language
 
 
 @dataclass(frozen=True)
@@ -16,6 +17,6 @@ class InputNote:
 
     note_id: str
     subject_id: SubjectId
-    language: str
+    language: Language
     text: str
     labels: frozenset[Diagnosis]
