@@ -57,6 +57,10 @@ class Reference(Protocol):
 
         Returns:
             Pacient a text každé zprávy.
+
+        Raises:
+            InvalidInputError: Reference je nečitelná nebo neodpovídá schématu;
+                chyba vznikne až při iteraci.
         """
 
     def sha256(self) -> str:
@@ -129,10 +133,6 @@ class AuditRefused:
 type AuditOutcome = AuditClean | AuditOverlap | AuditRefused
 
 
-class _ReferenceMismatchError(ValueError):
-    pass
-
-
 @dataclass(frozen=True)
 class CorpusAudit:
     """Audit syntetického korpusu proti referenci MIMIC-IV-Note."""
@@ -175,9 +175,11 @@ class CorpusAudit:
                 for texts in by_language.values()
                 for note_id in texts
             )
-            _verify_reference(self.references, reference_sha256)
-        except (InvalidNoteIdError, _ReferenceMismatchError) as error:
-            return AuditRefused(str(error))
+            problem = _reference_problem(self.references, reference_sha256)
+        except InvalidNoteIdError as error:
+            problem = str(error)
+        if problem is not None:
+            return AuditRefused(problem)
         index = NgramIndex(notes, self.structure_labels)
         scans = tuple(
             scan(index, subjects, reference.notes()) for reference in self.references
@@ -233,16 +235,18 @@ def _overlap(
     )
 
 
-def _verify_reference(
+def _reference_problem(
     references: Sequence[Reference], reference_sha256: Mapping[str, str]
-) -> None:
+) -> str | None:
     mismatch = reference_mismatch(
         ((reference.name, reference.sha256()) for reference in references),
         reference_sha256,
     )
     if mismatch:
-        msg = f"Referenční soubory nesedí s referencí z configu: {', '.join(mismatch)}."
-        raise _ReferenceMismatchError(msg)
+        return (
+            f"Referenční soubory nesedí s referencí z configu: {', '.join(mismatch)}."
+        )
+    return None
 
 
 def _environment_problem(environ: Mapping[str, str]) -> str | None:

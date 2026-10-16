@@ -15,6 +15,7 @@ from mediparse.application.corpus_audit import (
     CorpusAudit,
 )
 from mediparse.domain.corpus_audit import ReferenceNote
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from tests.support import (
     COMMIT,
@@ -85,6 +86,20 @@ class _UnreadableReference:
 
 
 @dataclass(frozen=True)
+class _BrokenReference:
+    name: str = "discharge.csv.gz"
+    digest: str = DISCHARGE_SHA
+
+    def notes(self) -> Iterator[ReferenceNote]:
+        msg = f"{self.name}: chybí sloupec text"
+        raise InvalidInputError(msg)
+        yield  # pragma: no cover
+
+    def sha256(self) -> str:
+        return self.digest
+
+
+@dataclass(frozen=True)
 class _UntouchableReference:
     name: str = "discharge.csv.gz"
 
@@ -125,7 +140,10 @@ class _Report:
 
 def _audit(
     corpus: _Corpus,
-    reference: _Reference | _UntouchableReference | _UnreadableReference,
+    reference: _Reference
+    | _UntouchableReference
+    | _UnreadableReference
+    | _BrokenReference,
     report: _Report,
     workspace: _Workspace | None = None,
 ) -> CorpusAudit:
@@ -289,6 +307,18 @@ def test_reference_other_than_config_is_refused_before_reading(
 
     assert isinstance(outcome, AuditRefused)
     assert named in outcome.reason
+    assert not corpus.saved
+
+
+def test_unreadable_reference_content_propagates_without_record() -> None:
+    """Vadná reference se čte proudově; chyba čtení vyletí k vstupnímu bodu a nic se neuloží."""
+    corpus = _Corpus(dict(SHORT_NOTES))
+
+    with pytest.raises(InvalidInputError, match="chybí sloupec text"):
+        _audit(corpus, _BrokenReference(), _Report()).run(
+            {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
+        )
+
     assert not corpus.saved
 
 
