@@ -161,17 +161,19 @@ class CorpusAudit:
         sha256 = self.corpus.fingerprint()
         if sha256 is None:
             return AuditRefused("Korpus neobsahuje žádnou zprávu.")
-        # Audit čte všechny jazyky; stejný note_id v en i cs se v reportu rozliší jazykem.
+        # Všechny jazyky, protože otisk pokrývá i překlad; audit jen angličtiny by bránou
+        # pustil neauditovaný český text. Jazyk v popisku rozliší stejný note_id v en a cs.
+        by_language = {language: self.corpus.notes(language) for language in Language}
         notes = {
             f"{language}/{note_id}": text
-            for language in Language
-            for note_id, text in self.corpus.notes(language).items()
+            for language, texts in by_language.items()
+            for note_id, text in texts.items()
         }
         try:
             subjects = frozenset(
                 subject_of(note_id)
-                for language in Language
-                for note_id in self.corpus.notes(language)
+                for texts in by_language.values()
+                for note_id in texts
             )
             _verify_reference(self.references, reference_sha256)
         except (InvalidNoteIdError, _ReferenceMismatchError) as error:

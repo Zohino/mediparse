@@ -16,7 +16,14 @@ from mediparse.application.corpus_audit import (
 )
 from mediparse.domain.corpus_audit import ReferenceNote
 from mediparse.domain.language import Language
-from tests.support import COMMIT, CORPUS_SHA, PINNED, SENTENCE
+from tests.support import (
+    COMMIT,
+    CORPUS_SHA,
+    NOTE_ID,
+    PINNED,
+    SENTENCE,
+    SHORT_TEXT,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Collection, Iterator, Sequence
@@ -28,8 +35,8 @@ CREATED_AT = datetime(2026, 9, 29, tzinfo=UTC)
 DISCHARGE_SHA = PINNED["discharge.csv.gz"]
 DISCHARGE_PINNED = {"discharge.csv.gz": DISCHARGE_SHA}
 STRUCTURE_LABELS = frozenset({"Name", "Unit No"})
-NOTE_ID = "90000001-DS-1"
-SHORT_NOTES = {Language.EN: {NOTE_ID: "a short synthetic note"}}
+BOTH_LANGUAGES = 2
+SHORT_NOTES = {Language.EN: {NOTE_ID: SHORT_TEXT}}
 PREAMBLE = "Name: ___ Unit No: ___ Name: ___ Unit No: ___ Name: ___ Unit No: ___\n"
 
 
@@ -301,7 +308,7 @@ def test_structure_labels_reach_the_index() -> None:
 def test_czech_notes_are_indexed() -> None:
     """N-gram sdílený jen s českou zprávou je shoda; audit nepřestane číst češtinu."""
     corpus = _Corpus({
-        Language.EN: {NOTE_ID: "a short synthetic note"},
+        Language.EN: {NOTE_ID: SHORT_TEXT},
         Language.CS: {NOTE_ID: SENTENCE},
     })
     report = _Report()
@@ -332,12 +339,17 @@ def test_same_note_id_in_both_languages_has_two_positions() -> None:
 
     assert isinstance(outcome, AuditOverlap)
     assert outcome.notes == (f"cs/{NOTE_ID}", f"en/{NOTE_ID}")
+    ((positions, _),) = report.written
+    assert {position.note for position in positions} == {
+        f"cs/{NOTE_ID}",
+        f"en/{NOTE_ID}",
+    }
 
 
 def test_corpus_files_counts_notes_of_all_languages() -> None:
     """Záznam auditu počítá zprávy obou jazyků."""
     corpus = _Corpus({
-        Language.EN: {NOTE_ID: "a short synthetic note"},
+        Language.EN: {NOTE_ID: SHORT_TEXT},
         Language.CS: {NOTE_ID: "krátká syntetická zpráva"},
     })
 
@@ -345,15 +357,15 @@ def test_corpus_files_counts_notes_of_all_languages() -> None:
         corpus, _Reference((ReferenceNote(10000032, "x"),)), _Report()
     ).run({}, COMMIT, CREATED_AT, DISCHARGE_PINNED)
 
-    assert outcome == AuditClean(notes=2, ngrams=0, reference_notes=1)
+    assert outcome == AuditClean(notes=BOTH_LANGUAGES, ngrams=0, reference_notes=1)
     (record,) = corpus.saved
-    assert record.corpus_files == sum(len(texts) for texts in corpus.texts.values())
+    assert record.corpus_files == BOTH_LANGUAGES
 
 
 def test_subjects_come_from_every_language() -> None:
     """Pacient, který je jen v české zprávě, se s referencí také srovná."""
     corpus = _Corpus({
-        Language.EN: {NOTE_ID: "a short synthetic note"},
+        Language.EN: {NOTE_ID: SHORT_TEXT},
         Language.CS: {"90000002-DS-1": "krátká zpráva"},
     })
     reference = _Reference((ReferenceNote(90000002, "unrelated text"),))

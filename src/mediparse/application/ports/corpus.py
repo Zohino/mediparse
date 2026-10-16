@@ -39,6 +39,9 @@ class NoteSource(Protocol):
 
         Returns:
             Slovník note_id → text zprávy; jazyk bez zpráv dá prázdný slovník.
+
+        Raises:
+            InvalidInputError: Korpus obsahuje zprávy jazyka mimo Language.
         """
 
 
@@ -48,8 +51,13 @@ class FingerprintedCorpus(Protocol):
     def fingerprint(self) -> str | None:
         """Otisk zpráv korpusu.
 
+        Otisk pokrývá právě zprávy, které vrací ``NoteSource.notes`` pro všechny ``Language``.
+
         Returns:
             SHA-256 otisk, nebo None, když korpus neobsahuje žádnou zprávu.
+
+        Raises:
+            InvalidInputError: Korpus obsahuje zprávy jazyka mimo Language.
         """
 
 

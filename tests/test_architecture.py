@@ -1,4 +1,4 @@
-"""Architektura mimo dosah import-linteru: vstupy do balíčku, skripty workflow a konfigurace modelů domény."""
+"""Architektura mimo dosah import-linteru: vstupy do balíčku, skripty workflow, umístění sdílených portů a konfigurace modelů domény."""
 
 import ast
 import importlib
@@ -134,6 +134,19 @@ def _protocol_names(module: Path) -> set[str]:
     }
 
 
+def _imported_module(module: Path, application: Path, node: ast.ImportFrom) -> str:
+    """Úplné jméno importovaného modulu; relativní import se přeloží podle ``node.level``.
+
+    Returns:
+        Tečkované jméno modulu.
+    """
+    if node.level == 0:
+        return node.module or ""
+    package = ["mediparse", "application", *module.relative_to(application).parts[:-1]]
+    base = package[: len(package) - (node.level - 1)]
+    return ".".join([*base, *(node.module.split(".") if node.module else [])])
+
+
 def _foreign_protocol_imports(application: Path) -> list[str]:
     """Importy portu z modulu jiného use casu; ``ports.*`` je jediné místo sdílených portů.
 
@@ -141,15 +154,23 @@ def _foreign_protocol_imports(application: Path) -> list[str]:
         Popisy porušení; prázdný seznam znamená, že pravidlo platí.
     """
     violations: list[str] = []
-    for module in sorted(application.glob("*.py")):
+    modules = [
+        module
+        for module in sorted(application.rglob("*.py"))
+        if module.relative_to(application).parts[0] != "ports"
+    ]
+    for module in modules:
         tree = ast.parse(module.read_text(encoding="utf-8"))
         for node in ast.walk(tree):
-            if not isinstance(node, ast.ImportFrom) or node.module is None:
+            if not isinstance(node, ast.ImportFrom):
                 continue
-            if not node.module.startswith(APPLICATION_PREFIX):
+            imported = _imported_module(module, application, node)
+            if not imported.startswith(APPLICATION_PREFIX):
                 continue
-            source = node.module.removeprefix(APPLICATION_PREFIX)
-            source_file = application / f"{source}.py"
+            source = imported.removeprefix(APPLICATION_PREFIX)
+            if source == "ports" or source.startswith("ports."):
+                continue
+            source_file = application / Path(*source.split(".")).with_suffix(".py")
             if not source_file.is_file():
                 continue
             protocols = _protocol_names(source_file)
@@ -163,6 +184,7 @@ def _foreign_protocol_imports(application: Path) -> list[str]:
 
 def test_shared_port_lives_in_ports_package() -> None:
     """Port, který používá víc use casů, leží v ``application.ports``, ne v modulu use casu."""
+    assert any(APPLICATION.glob("*.py"))
     assert _foreign_protocol_imports(APPLICATION) == []
 
 

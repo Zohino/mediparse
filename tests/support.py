@@ -46,8 +46,10 @@ STRUCTURE_LABELS: Final = load_sampler_config(
 ).structure.structure_labels
 
 COMMIT: Final = "c" * 40
-NOTE: Final = "en/90000001-DS-1.txt"
-SHORT_NOTE: Final = {NOTE: "a short synthetic note"}
+NOTE_ID: Final = "90000001-DS-1"
+SHORT_TEXT: Final = "a short synthetic note"
+NOTE: Final = f"en/{NOTE_ID}.txt"
+SHORT_NOTE: Final = {NOTE: SHORT_TEXT}
 SENTENCE: Final = (
     "the old lighthouse keeper counted seven gulls before the storm "
     "reached the northern harbor wall"

@@ -118,5 +118,5 @@ def test_read_unknown_language_is_invalid_input(tmp_path: Path) -> None:
     columns = {name: [row[name] for row in rows] for name in SCHEMA.names}
     pq.write_table(pa.Table.from_pydict(columns, schema=SCHEMA), path)
 
-    with pytest.raises(InvalidInputError, match="de"):
+    with pytest.raises(InvalidInputError, match="neznámý jazyk 'de'"):
         ParquetNoteTable(path).read()

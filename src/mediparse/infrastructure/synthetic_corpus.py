@@ -35,7 +35,7 @@ class CorpusDirectory:
     root: Path
 
     def notes(self, language: Language) -> dict[str, str]:
-        """Texty zpráv jednoho jazyka.
+        """Texty zpráv jednoho jazyka; adresář jazyka mimo Language odmítne jako InvalidInputError.
 
         Returns:
             Slovník note_id → text zprávy; jazyk bez zpráv dá prázdný slovník.
@@ -47,7 +47,7 @@ class CorpusDirectory:
         }
 
     def fingerprint(self) -> str | None:
-        """Otisk zpráv tak, jak leží na disku.
+        """Otisk zpráv tak, jak leží na disku; adresář jazyka mimo Language odmítne jako InvalidInputError.
 
         Returns:
             SHA-256 otisk, nebo None, když korpus neobsahuje žádnou zprávu.
