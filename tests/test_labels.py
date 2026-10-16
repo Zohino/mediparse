@@ -6,10 +6,9 @@ from math import isclose, prod
 import pytest
 from pydantic import ValidationError
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import (
-    ACUTE_DIAGNOSIS,
-    Diagnosis,
     InfeasibleMarginalsError,
     IpfNotConvergedError,
     LabelModel,
@@ -35,19 +34,6 @@ CORRELATED = {
     (Diagnosis.COPD, Diagnosis.ATRIAL_FIBRILLATION): 0.05,
     (Diagnosis.CKD, Diagnosis.PNEUMONIA): 0.03,
 }
-
-
-def test_five_follow_notebook_8_with_one_acute_diagnosis() -> None:
-    """Pětice sešitu 8 v pořadí kandidátů; jedinou akutní diagnózou je pneumonie."""
-    assert [d.value for d in Diagnosis] == [
-        "diabetes",
-        "copd",
-        "ckd",
-        "pneumonia",
-        "atrial_fibrillation",
-    ]
-    assert [d for d in Diagnosis if not d.chronic] == [ACUTE_DIAGNOSIS]
-    assert ACUTE_DIAGNOSIS is Diagnosis.PNEUMONIA
 
 
 def _model(

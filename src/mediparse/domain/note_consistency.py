@@ -18,7 +18,7 @@ from mediparse.domain.note_text import (
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping, Sequence
 
-    from mediparse.domain.labels import Diagnosis
+    from mediparse.domain.diagnosis import Diagnosis
     from mediparse.domain.mentions import MentionModel
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.note_structure import PreambleField, StructureModel

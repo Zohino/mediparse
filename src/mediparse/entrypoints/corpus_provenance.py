@@ -19,13 +19,13 @@ from mediparse.application.corpus_provenance import (
     ProvenanceRefused,
     ProvenanceWritten,
 )
-from mediparse.domain.corpus_audit import commit_sha
 from mediparse.domain.corpus_provenance import (
     Generation,
     model_id,
     prompts_sha256,
     version,
 )
+from mediparse.domain.digest import commit_sha
 from mediparse.entrypoints.cli import (
     argument,
     configure_logging,

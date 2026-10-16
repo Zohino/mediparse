@@ -8,7 +8,8 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.application.smoketest_input import SmoketestInput
-from mediparse.domain.smoketest_input import InputNote, UnpairedNotesError
+from mediparse.domain.input_note import InputNote
+from mediparse.domain.smoketest_input import UnpairedNotesError
 from tests.support import PlansFake
 
 if TYPE_CHECKING:

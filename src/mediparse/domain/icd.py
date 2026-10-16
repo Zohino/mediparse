@@ -10,7 +10,7 @@ from typing import Final, Self
 
 from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
-from mediparse.domain.labels import Diagnosis
+from mediparse.domain.diagnosis import Diagnosis
 
 _CODE: Final = re.compile(r"^[0-9A-Z]+$")
 

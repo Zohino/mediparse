@@ -6,7 +6,7 @@ import json
 import shutil
 from typing import TYPE_CHECKING
 
-from mediparse.domain.labels import Diagnosis
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.synthetic_parameters import run
 from mediparse.infrastructure.sampler_config import load_sampler_config

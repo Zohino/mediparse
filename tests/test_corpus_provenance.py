@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING, Final
 
 import pytest
 
-from mediparse.domain.corpus_audit import fingerprint
 from mediparse.domain.corpus_provenance import (
     ProvenanceRecord,
     Translation,
@@ -16,6 +15,7 @@ from mediparse.domain.corpus_provenance import (
     provenance_violations,
     version,
 )
+from mediparse.domain.digest import fingerprint
 from mediparse.domain.verbalization import render_prompt
 
 if TYPE_CHECKING:

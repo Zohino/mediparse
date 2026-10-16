@@ -8,8 +8,8 @@ from typing import TYPE_CHECKING, Final
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-from mediparse.domain.labels import Diagnosis
-from mediparse.domain.smoketest_input import InputNote
+from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.input_note import InputNote
 from mediparse.infrastructure.parquet_file import read_table
 
 if TYPE_CHECKING:

@@ -5,8 +5,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.cohort import CohortCounts, FunnelStep, FunnelStepName
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.icd import DiagnosisCodes, IcdVersion
-from mediparse.domain.labels import Diagnosis
 from mediparse.infrastructure.parquet_file import write_string_table
 
 if TYPE_CHECKING:

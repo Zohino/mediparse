@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.domain.corpus_audit import commit_sha
+from mediparse.domain.digest import commit_sha
 from mediparse.entrypoints import (
     corpus_audit,
     corpus_consistency,

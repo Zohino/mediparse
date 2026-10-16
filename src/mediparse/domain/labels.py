@@ -1,14 +1,14 @@
-"""Labely pěti diagnóz: prevalence, společný výskyt a jejich společné rozdělení s maximální entropií."""
+"""Model labelů syntetiky: prevalence, společný výskyt a jejich společné rozdělení s maximální entropií."""
 
 from __future__ import annotations
 
 import math
-from enum import StrEnum
 from itertools import combinations
 from typing import TYPE_CHECKING, Annotated, Final, Self
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
+from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS, Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 
 if TYPE_CHECKING:
@@ -18,24 +18,6 @@ Probability = Annotated[float, Field(ge=0.0, le=1.0)]
 type LabelSet = frozenset[Diagnosis]
 
 _SYMMETRY_TOLERANCE: Final = 1e-3
-
-
-class Diagnosis(StrEnum):
-    """Diagnóza, jejíž přítomnost nese jeden binární label."""
-
-    DIABETES = "diabetes"
-    COPD = "copd"
-    CKD = "ckd"
-    PNEUMONIA = "pneumonia"
-    ATRIAL_FIBRILLATION = "atrial_fibrillation"
-
-    @property
-    def chronic(self) -> bool:
-        """Chronická diagnóza platí pro všechny zprávy pacienta, akutní jen pro jednu."""
-        return self is not ACUTE_DIAGNOSIS
-
-
-ACUTE_DIAGNOSIS: Final = Diagnosis.PNEUMONIA
 
 
 class LabelModel(BaseModel):

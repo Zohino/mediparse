@@ -8,9 +8,9 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import pytest
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import BinaryMetrics, DiagnosisMetrics
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import Diagnosis
 from mediparse.infrastructure.metrics_table import SCHEMA, ParquetMetricsTable
 
 if TYPE_CHECKING:

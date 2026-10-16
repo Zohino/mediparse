@@ -7,8 +7,8 @@ from typing import TYPE_CHECKING, Annotated, Final, Self
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
+from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS
 from mediparse.domain.labels import (
-    ACUTE_DIAGNOSIS,
     LabelModel,
     LabelSet,
     Probability,

@@ -6,8 +6,8 @@ from typing import TYPE_CHECKING
 
 import pyarrow.parquet as pq
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Prediction
-from mediparse.domain.labels import Diagnosis
 from mediparse.entrypoints import smoketest_evaluation
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable

@@ -13,7 +13,7 @@ from mediparse.domain.corpus_statistics import (
     corpus_violations,
     statistics_violations,
 )
-from mediparse.domain.labels import Diagnosis
+from mediparse.domain.diagnosis import Diagnosis
 
 if TYPE_CHECKING:
     from mediparse.domain.synthetic_plan import SamplerConfig

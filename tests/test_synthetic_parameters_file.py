@@ -8,8 +8,8 @@ from typing import TYPE_CHECKING, Any
 
 import pytest
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import Diagnosis
 from mediparse.domain.synthetic_parameters import SyntheticParameters
 from mediparse.infrastructure.sampler_config import (
     SamplerConfigFile,

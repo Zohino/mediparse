@@ -8,11 +8,11 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.application.smoketest_inference import SmoketestInference
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Classification, Prediction
+from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import Diagnosis
 from mediparse.domain.smoketest_inference import ModelMismatchError
-from mediparse.domain.smoketest_input import InputNote
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

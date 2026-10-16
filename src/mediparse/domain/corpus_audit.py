@@ -1,8 +1,7 @@
-"""Audit syntetického korpusu: normalizace textu, sdílené n-gramy s referencí, otisk korpusu a pravidla brány."""
+"""Audit syntetického korpusu: normalizace textu, sdílené n-gramy s referencí, záznam auditu a pravidla brány."""
 
 from __future__ import annotations
 
-import hashlib
 import re
 import unicodedata
 from collections import Counter, defaultdict
@@ -10,7 +9,6 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Annotated, Final, Literal, NamedTuple
 
 from pydantic import (
-    AfterValidator,
     AwareDatetime,
     BaseModel,
     ConfigDict,
@@ -19,6 +17,7 @@ from pydantic import (
     PositiveInt,
 )
 
+from mediparse.domain.digest import CommitSha, Sha256
 from mediparse.domain.note_text import alternation
 
 if TYPE_CHECKING:
@@ -30,26 +29,6 @@ NORMALIZATION: Final = "nfkc-lower-alnum-deid-v2"
 _TOKEN: Final = re.compile(r"___|[^\W_]+")
 
 type Ngram = tuple[str, ...]
-Sha256 = Annotated[str, Field(pattern=r"^[0-9a-f]{64}$")]
-_COMMIT: Final = re.compile(r"[0-9a-f]{40}")
-
-
-def commit_sha(value: str) -> str:
-    """Ověří, že hodnota je celý SHA-1 hash commitu.
-
-    Returns:
-        Hodnota beze změny.
-
-    Raises:
-        ValueError: Hodnota není 40 hexadecimálních znaků, například zkrácený hash.
-    """
-    if _COMMIT.fullmatch(value) is None:
-        msg = "Commit musí být celý SHA-1 hash (40 hexadecimálních znaků), například z `git rev-parse HEAD`."
-        raise ValueError(msg)
-    return value
-
-
-CommitSha = Annotated[str, AfterValidator(commit_sha)]
 
 
 class ReferenceNote(NamedTuple):
@@ -179,19 +158,6 @@ def scan(
     return ScanResult(
         rows=rows, shared=frozenset(shared), colliding_subjects=frozenset(colliding)
     )
-
-
-def fingerprint(files: Iterable[tuple[str, bytes]]) -> str:
-    """Otisk dvojic jméno a obsah: SHA-256 seznamu ve tvaru výstupu ``sha256sum`` seřazeného podle jména.
-
-    Returns:
-        Hexadecimální SHA-256 otisk.
-    """
-    listing = "".join(
-        f"{hashlib.sha256(content).hexdigest()}  {name}\n"
-        for name, content in sorted(files)
-    )
-    return hashlib.sha256(listing.encode()).hexdigest()
 
 
 def audit_record_violations(

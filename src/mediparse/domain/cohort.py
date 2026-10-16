@@ -8,10 +8,10 @@ from typing import TYPE_CHECKING, Final, Self
 
 from pydantic import BaseModel, ConfigDict, ValidationError, model_validator
 
-from mediparse.domain.corpus_audit import Sha256
+from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.digest import Sha256
 from mediparse.domain.icd import DiagnosisCodes, IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import Diagnosis
 from mediparse.domain.run_manifest import SourceRevision
 
 if TYPE_CHECKING:

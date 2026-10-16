@@ -8,9 +8,9 @@ from typing import TYPE_CHECKING, Any, Final
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import BinaryMetrics, DiagnosisMetrics
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import Diagnosis
 from mediparse.infrastructure.parquet_file import read_table
 
 if TYPE_CHECKING:

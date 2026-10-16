@@ -153,6 +153,58 @@ forbidden_modules = [
 ]
 broken_contract_guidance = "Produkční kód nesmí záviset na testech; co potřebují oba, patří do mediparse."
 
+[[tool.importlinter.contracts]]
+name = "Kohorta a split nestojí na smoketestu"
+type = "forbidden"
+source_modules = [
+    "mediparse.entrypoints.cohort",
+    "mediparse.application.cohort",
+    "mediparse.infrastructure.duckdb_cohort",
+    "mediparse.infrastructure.note_table",
+    "mediparse.domain.split",
+    "mediparse.domain.input_note",
+]
+forbidden_modules = [
+    "mediparse.domain.smoketest_input",
+    "mediparse.domain.smoketest_training",
+]
+broken_contract_guidance = "Řádek vstupu je v domain.input_note a pravidla splitu v domain.split; smoketest_input a smoketest_training jsou jen smoketest."
+
+[[tool.importlinter.contracts]]
+name = "Provenance nestojí na auditu korpusu"
+type = "forbidden"
+source_modules = [
+    "mediparse.domain.run_manifest",
+    "mediparse.domain.cohort",
+    "mediparse.domain.corpus_provenance",
+    "mediparse.domain.digest",
+]
+forbidden_modules = [
+    "mediparse.domain.corpus_audit",
+]
+broken_contract_guidance = "Typy otisků (Sha256, CommitSha, commit_sha, fingerprint) jsou v domain.digest; corpus_audit je audit syntetického korpusu."
+
+[[tool.importlinter.contracts]]
+name = "Kohorta a evaluace nestojí na modelu labelů syntetiky"
+type = "forbidden"
+source_modules = [
+    "mediparse.domain.diagnosis",
+    "mediparse.domain.cohort",
+    "mediparse.domain.evaluation",
+    "mediparse.domain.icd",
+    "mediparse.domain.input_note",
+    "mediparse.domain.split",
+    "mediparse.application.cohort",
+    "mediparse.application.model_evaluation",
+    "mediparse.entrypoints.cohort",
+    "mediparse.infrastructure.duckdb_cohort",
+    "mediparse.infrastructure.note_table",
+]
+forbidden_modules = [
+    "mediparse.domain.labels",
+]
+broken_contract_guidance = "Diagnóza je v domain.diagnosis; labels je model labelů syntetiky (prevalence, IPF)."
+
 [tool.ruff]
 fix = true
 preview = true

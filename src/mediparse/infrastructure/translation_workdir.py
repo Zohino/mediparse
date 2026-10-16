@@ -8,13 +8,13 @@ from typing import TYPE_CHECKING, Final
 
 from pydantic import BaseModel, ConfigDict, PositiveInt
 
-from mediparse.domain.corpus_audit import CommitSha, Sha256
 from mediparse.domain.corpus_provenance import (
     Decoding,
     Masking,
     Translation,
     TranslationRun,
 )
+from mediparse.domain.digest import CommitSha, Sha256
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.translation_consistency import TranslatedNote
 from mediparse.infrastructure.file_digest import file_sha256

@@ -16,8 +16,8 @@ from mediparse.domain.cohort import (
     FunnelStep,
     FunnelStepName,
 )
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import Diagnosis
 from mediparse.domain.language import Language
 from mediparse.infrastructure.note_table import SCHEMA
 

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pydantic import BaseModel, ConfigDict
 
-from mediparse.domain.corpus_audit import CommitSha, Sha256
+from mediparse.domain.digest import CommitSha, Sha256
 
 
 class SourceRevision(BaseModel):

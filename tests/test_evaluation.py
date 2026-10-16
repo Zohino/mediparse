@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import pytest
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import (
     Prediction,
     ensure_both_classes,
     ensure_unique_keys,
 )
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import Diagnosis
 
 
 def _prediction(note: str, fold: int) -> Prediction:

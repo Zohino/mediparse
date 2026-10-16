@@ -12,8 +12,8 @@ if TYPE_CHECKING:
     from contextlib import AbstractContextManager
 
     from mediparse.domain.cohort import CohortCounts, RawCode
+    from mediparse.domain.diagnosis import Diagnosis
     from mediparse.domain.icd import DiagnosisCodes
-    from mediparse.domain.labels import Diagnosis
 
 
 class SelectedCohort(Protocol):

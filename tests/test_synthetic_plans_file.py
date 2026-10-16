@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.application.plan_sampling import PlanSampling
-from mediparse.domain.labels import Diagnosis
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.infrastructure.plans_file import (
     PlansFile,
     SyntheticPlanFiles,

@@ -1,29 +1,17 @@
-"""Vstupní tabulka smoketestu: zprávy jednoho jazyka spárované s labely svých plánů."""
+"""Párování plánů se zprávami jednoho jazyka do vstupní tabulky smoketestu."""
 
 from __future__ import annotations
 
 from collections import Counter
-from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
+from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
-    from mediparse.domain.labels import Diagnosis
     from mediparse.domain.note_plan import NotePlan
-
-
-@dataclass(frozen=True)
-class InputNote:
-    """Řádek vstupní tabulky: text zprávy v jednom jazyce a labely z jejího plánu."""
-
-    note_id: str
-    subject_id: int
-    language: str
-    text: str
-    labels: frozenset[Diagnosis]
 
 
 class UnpairedNotesError(InvalidInputError):

@@ -6,17 +6,15 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
 from mediparse.domain.evaluation import Prediction
-from mediparse.domain.smoketest_training import (
-    TrainingReport,
-    ensure_disjoint_subjects,
-    ensure_patients_per_class,
-)
+from mediparse.domain.smoketest_training import TrainingReport
+from mediparse.domain.split import ensure_disjoint_subjects, ensure_patients_per_class
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from mediparse.application.ports import InputTable, PredictionSink, TextClassifier
-    from mediparse.domain.smoketest_training import Holdout, TrainingConfig
+    from mediparse.domain.smoketest_training import TrainingConfig
+    from mediparse.domain.split import Holdout
 
 FOLD = 0
 
