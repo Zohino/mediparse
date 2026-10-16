@@ -94,7 +94,7 @@ def test_audit_passes_environment_to_its_guard(audit_files: AuditFiles) -> None:
 def test_missing_reference_is_refused(
     audit_files: AuditFiles, caplog: pytest.LogCaptureFixture
 ) -> None:
-    """Chybějící referenční soubor audit odmítne jako chybějící, ne jako neshodu otisku."""
+    """Chybějící referenční soubor audit odmítne jako chybějící, ne jako jiný otisk."""
     corpus = audit_files.corpus(SHORT_NOTE)
     _, radiology = audit_files.pinned_references([("10000032", SENTENCE)])
     missing = audit_files.root / "missing.csv.gz"

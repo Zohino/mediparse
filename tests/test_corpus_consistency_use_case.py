@@ -1,4 +1,4 @@
-"""Use case kontrol shody nad fakes: párování zpráv s plány a zprávy k přegenerování."""
+"""Use case kontrol souladu nad fakes: párování zpráv s plány a zprávy k přegenerování."""
 
 from __future__ import annotations
 
@@ -122,7 +122,7 @@ def test_incomplete_czech_is_a_corpus_violation(
 def test_marker_mismatch_is_only_a_notice(
     planned_note: PlannedNote, sampler_config: SamplerConfig
 ) -> None:
-    """Neshoda počtu ___ se eviduje jako upozornění, korpus kvůli ní neporušuje."""
+    """Nesoulad počtu ___ se eviduje jako upozornění, korpus kvůli němu neporušuje."""
     plan = planned_note.plan
     assert "___" in planned_note.text
     english = {plan.note_id: planned_note.text}

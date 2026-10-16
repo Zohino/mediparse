@@ -1,7 +1,7 @@
 """Use case provenance: k auditovanému korpusu zapíše, čím a podle čeho vznikl.
 
 Provenance vzniká až po čistém auditu a váže se na něj otiskem záznamu auditu.
-Shodu korpusu s auditem posuzuje brána; korpus, který jí neprojde, provenance
+Soulad korpusu s auditem posuzuje brána; korpus, který jí neprojde, provenance
 nedostane.
 """
 

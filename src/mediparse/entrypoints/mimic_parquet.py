@@ -1,7 +1,7 @@
 """Vstupní bod pravidla Snakemake ``parquet_mimic_table``: validovaná tabulka MIMIC z CSV na parquet.
 
 Cesty jsou vstupy a výstupy pravidla; skript workflow jen rozbalí objekt
-``snakemake`` a zavolá ``main``. Neshoda počtu záznamů nebo sloupců s inventářem
+``snakemake`` a zavolá ``main``. Nesoulad počtu záznamů nebo sloupců s inventářem
 validace ukončí krok kódem REFUSED a Snakemake rozpracovaný výstup smaže.
 """
 

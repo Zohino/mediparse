@@ -128,7 +128,7 @@ def test_models_of_same_tier_are_distinct_experiments() -> None:
 
 
 def test_unequal_tuning_budget_is_rejected() -> None:
-    """Sedmý invariant: porovnávané řádky mají shodný rozpočet ladění."""
+    """Sedmý invariant: porovnávané řádky mají stejný rozpočet ladění."""
     transformer = _row(id="en-xlm-r", model="xlm-r-base", tuning_trials=50)
 
     with pytest.raises(ValidationError, match="rozpočet"):

@@ -14,7 +14,7 @@ a vlastní hodnoty uvádí jen tam, kde v configu nejsou.
 1. **Plán.** Deterministický vzorkovač s pevným seedem vylosuje pro každou zprávu
    plán (`resources/synthetic/plans.jsonl`).
 2. **Verbalizace.** Model převede plán do textu podle šablony instrukcí v repu.
-3. **Kontrola shody.** Automatické kontroly ověří text proti plánu. Zpráva, která
+3. **Kontrola souladu.** Automatické kontroly ověří text proti plánu. Zpráva, která
    neprojde, se napíše znovu ze stejného plánu.
 4. **Audit.** Autor lokálně ověří, že korpus nesdílí s MIMIC-IV-Note žádný úsek
    textu ani pacienta. Do repa smí jen auditovaný korpus.
@@ -29,7 +29,7 @@ a vlastní hodnoty uvádí jen tam, kde v configu nejsou.
 | R4 | Labely: každá zpráva nese labely pěti diagnóz; vztah labelu a textu má řízený šum. |
 | R5 | Skupinová struktura: část pacientů má víc zpráv, aby rozdělení dat podle pacienta mělo co oddělovat. |
 | R6 | Párovost: každá česká zpráva má anglický protějšek se stejným `note_id`, pacientem a labely. |
-| R7 | Provenance: generování je zaznamenané tak, aby šlo zopakovat se shodnými vlastnostmi korpusu, ne se shodným textem. |
+| R7 | Provenance: generování je zaznamenané tak, aby šlo zopakovat se stejnými vlastnostmi korpusu, ne se stejným textem. |
 | R8 | Doba běhu: smoketest nad korpusem proběhne nejvýše za několik hodin. |
 
 ## Záznam zprávy
@@ -139,7 +139,7 @@ ohraničený hranicemi slov (definice EDA).
 **Volné úseky.** Hodnoty šablonových polí, obsah krátkých sekcí a formát řádků
 léků formuluje model volně, aby korpus nereprodukoval šablony MIMIC (R2).
 
-## Kontroly shody
+## Kontroly souladu
 
 Kontroly jedné zprávy (výstupem jsou `note_id` zpráv k přegenerování):
 
@@ -272,12 +272,12 @@ negační výrazy se nehlídají. `mediparse-corpus-check` ověřuje:
   každá anglická zpráva překlad a každý překlad anglický originál;
 - neprázdnost překladu;
 - poměr délky znaků češtiny k angličtině v rozmezí 0,8 až 1,6;
-- shodu počtu značek `___` s originálem; značka je právě tři podtržítka, delší
+- soulad počtu značek `___` s originálem; značka je právě tři podtržítka, delší
   ani kratší řady se nepočítají.
 
-Neshoda počtu značek `___` se toleruje: je to realistická chyba překladu a labely
-nezávisí na textu. Příkaz ji vypíše jako upozornění a neblokuje, `note_id` neshodných
-zpráv se zapíší do provenance překladu (`marker_mismatches`), aby je mohla vyřadit
+Nesoulad počtu značek `___` se toleruje: je to realistická chyba překladu a labely
+nezávisí na textu. Příkaz ho vypíše jako upozornění a neblokuje, `note_id` zpráv
+s nesouladem se zapíší do provenance překladu (`marker_mismatches`), aby je mohla vyřadit
 budoucí karanténa. Syntetický český korpus tak zastupuje surový výstup překladu.
 Na český korpus se uplatní tentýž audit proti MIMIC jako na anglický.
 

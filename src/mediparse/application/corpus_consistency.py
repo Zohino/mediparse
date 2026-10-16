@@ -1,4 +1,4 @@
-"""Use case kontrol shody: každá zpráva korpusu odpovídá svému plánu a korpus jako celek modelu."""
+"""Use case kontrol souladu: každá zpráva korpusu odpovídá svému plánu a korpus jako celek modelu."""
 
 from __future__ import annotations
 
@@ -38,7 +38,7 @@ class ConsistencyReport:
 
 @dataclass(frozen=True)
 class CorpusConsistency:
-    """Kontroly shody anglických zpráv s plány, korpusu s modelem a českého překladu s originálem."""
+    """Kontroly souladu anglických zpráv s plány, korpusu s modelem a českého překladu s originálem."""
 
     plans: PlanSource
     corpus: NoteSource
@@ -48,7 +48,7 @@ class CorpusConsistency:
 
         Returns:
             Zprávy k přegenerování seřazené podle note_id, porušení korpusu a upozornění
-            na neshodu počtu značek ___ v překladu; korpus bez zpráv nic neporušuje,
+            na nesoulad počtu značek ___ v překladu; korpus bez zpráv nic neporušuje,
             částečný korpus je neúplný.
         """
         plans = {plan.note_id: plan for plan in self.plans.load()}

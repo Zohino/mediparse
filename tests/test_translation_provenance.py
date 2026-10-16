@@ -125,7 +125,7 @@ def _run(corpus: _Corpus, source: _Source) -> ProvenanceRefused | ProvenanceWrit
 
 
 def test_success_keeps_generation_and_writes_translation() -> None:
-    """Zápis ponechá generování, doplní translation s neshodami a nový audit_sha256."""
+    """Zápis ponechá generování, doplní translation s nesoulady a nový audit_sha256."""
     corpus = _Corpus(_texts())
 
     assert _run(corpus, _source()) == ProvenanceWritten()

@@ -107,6 +107,6 @@ def test_invalid_prefix_is_rejected() -> None:
 
 @pytest.mark.parametrize("prefix", ["e11", " E11", "E11 "])
 def test_unnormalized_prefix_is_rejected(prefix: str) -> None:
-    """Předpona s malými písmeny nebo mezerou by se v EDA neshodovala, proto je chyba."""
+    """Předpona s malými písmeny nebo mezerou by v EDA neodpovídala kódům, proto je chyba."""
     with pytest.raises(ValidationError, match="normaliz"):
         DiagnosisCodes(prefixes=_prefixes(ckd={NINE: ("585",), TEN: (prefix,)}))

@@ -35,7 +35,7 @@ class ModelSource(Protocol):
 
 @dataclass(frozen=True)
 class SmoketestInference:
-    """Uložený model nad odloženými zprávami: shoda s tréninkem a zápis ukázek."""
+    """Uložený model nad odloženými zprávami: soulad s tréninkem a zápis ukázek."""
 
     table: InputTable
     predictions: PredictionSource
@@ -43,7 +43,7 @@ class SmoketestInference:
     demo: PredictionSink
 
     def run(self) -> tuple[Prediction, ...]:
-        """Klasifikuje odložené zprávy uloženým modelem, ověří shodu a zapíše ukázky.
+        """Klasifikuje odložené zprávy uloženým modelem, ověří soulad a zapíše ukázky.
 
         Returns:
             Zapsané ukázky: první pozitivní a první negativní odložená zpráva.

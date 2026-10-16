@@ -1,4 +1,4 @@
-"""Příkaz kontrol shody: vypíše zprávy k přegenerování a korpus v repu hlídá v CI."""
+"""Příkaz kontrol souladu: vypíše zprávy k přegenerování a korpus v repu hlídá v CI."""
 
 from __future__ import annotations
 
@@ -46,7 +46,7 @@ def test_matching_notes_leave_only_corpus_findings(
     planned_note: PlannedNote,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
-    """Zpráva shodná s plánem se k přegenerování nehlásí; korpus z jediné zprávy model nesplní."""
+    """Zpráva v souladu s plánem se k přegenerování nehlásí; korpus z jediné zprávy model nesplní."""
     code = _run(*_corpus(audit_files, planned_note, planned_note.text))
 
     output = capsys.readouterr().out
@@ -70,9 +70,16 @@ def test_violation_names_note_to_regenerate(
     assert f"Zprávy k přegenerování: {planned_note.plan.note_id}" in output
 
 
-def test_repository_corpus_matches_its_plans() -> None:
-    """Zprávy v repu odpovídají plánům; dokud žádné nejsou, kontroly nemají co hlásit."""
-    assert _run(REPOSITORY_CORPUS, REPOSITORY_PLANS) == ExitCode.OK
+def test_repository_corpus_matches_its_plans(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """Zprávy v repu odpovídají plánům a výstup to hlásí jako soulad, ne jako shodu auditu."""
+    code = _run(REPOSITORY_CORPUS, REPOSITORY_PLANS)
+
+    assert code == ExitCode.OK
+    assert (
+        "Kontroly souladu: korpus odpovídá plánům i modelu." in capsys.readouterr().out
+    )
 
 
 def test_notices_alone_keep_exit_ok(
@@ -81,7 +88,7 @@ def test_notices_alone_keep_exit_ok(
     capsys: pytest.CaptureFixture[str],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Neshoda počtu ___ v překladu se vypíše jako upozornění a exit zůstane OK."""
+    """Nesoulad počtu ___ v překladu se vypíše jako upozornění a exit zůstane OK."""
     monkeypatch.setattr(
         "mediparse.application.corpus_consistency.corpus_violations",
         lambda *_: (),

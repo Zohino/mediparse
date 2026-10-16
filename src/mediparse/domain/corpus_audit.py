@@ -179,7 +179,7 @@ class AuditPin:
 
         Returns:
             Seřazená jména chybějících, přebývajících a zdvojených souborů i souborů s jiným
-            otiskem; prázdný výsledek znamená přesnou shodu.
+            otiskem; prázdný výsledek znamená, že reference odpovídá configu.
         """
         audited = Counter(files)
         expected = Counter(self.reference_sha256.items())

@@ -24,7 +24,7 @@ končí neuzavřeným polem v uvozovkách. Takhle vypadá useknutý gzip nebo ro
 CSV. Počet záznamů se nepočítá z fyzických řádků, protože text zpráv má
 zalomení uvnitř polí v uvozovkách. Záznam končí tam, kde je od začátku souboru
 sudý počet uvozovek.
-Počty v manifestu se shodují s počty, které uvádí dokumentace MIMIC.
+Počty v manifestu odpovídají počtům, které uvádí dokumentace MIMIC.
 
 Převod čte CSV po blocích, takže paměť drží jen jeden blok i u `discharge`.
 Všechny sloupce zůstávají řetězce a prázdná hodnota je NULL, takže parquet je

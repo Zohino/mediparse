@@ -100,7 +100,7 @@ class TranslationRun(BaseModel):
 
 
 class Translation(BaseModel):
-    """Vstupy překladu: model, revize, dekódování, otisk požadavků, použité běhy, neshody značek ___ a maskování."""
+    """Vstupy překladu: model, revize, dekódování, otisk požadavků, použité běhy, nesoulady značek ___ a maskování."""
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 

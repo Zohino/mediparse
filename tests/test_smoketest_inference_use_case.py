@@ -119,7 +119,7 @@ def test_classifies_only_held_out_notes_and_writes_examples() -> None:
 
 
 def test_mismatch_raises_and_writes_nothing() -> None:
-    """Neshoda s tréninkem vyhodí chybu a ukázky se nezapíší."""
+    """Nesoulad s tréninkem vyhodí chybu a ukázky se nezapíší."""
     wrong = (Classification(predicted=True, score=9.0), ANSWER[1])
     use_case, _, sink = _use_case(answer=wrong)
 
