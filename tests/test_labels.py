@@ -101,8 +101,10 @@ def test_independent_pairs_give_product_distribution() -> None:
 
 def test_ipf_without_enough_passes_fails() -> None:
     """Nekonvergované rozdělení se nevrací potichu."""
-    with pytest.raises(IpfNotConvergedError):
+    with pytest.raises(IpfNotConvergedError) as raised:
         max_entropy_joint(_model(CORRELATED, passes=1))
+
+    assert isinstance(raised.value, InvalidInputError)
 
 
 def test_acute_given_chronic_is_a_probability_per_chronic_state() -> None:
@@ -204,6 +206,7 @@ def test_contradictory_marginals_raise_domain_error() -> None:
         max_entropy_joint(model)
 
     assert isinstance(raised.value, IpfNotConvergedError)
+    assert isinstance(raised.value, InvalidInputError)
 
 
 def _shares(**changes: float) -> dict[Diagnosis, float]:

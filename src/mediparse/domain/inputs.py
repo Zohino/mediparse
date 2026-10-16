@@ -1,9 +1,10 @@
-"""Vstupy kroků: chyba vstupu, který chybí nebo neodpovídá schématu."""
+"""Vstupy kroků: chyba, kvůli které krok odmítá běžet."""
 
 
 class InvalidInputError(ValueError):
-    """Vstup kroku chybí nebo neodpovídá schématu; zpráva jmenuje, který.
+    """Krok odmítá běžet: vstup, config nebo data nesplňují jeho předpoklad.
 
-    Na rozdíl od neplatného záznamu auditu nebo provenance, který use case hlásí
-    jako porušení, je chybný vstup důvod, proč krok vůbec nemůže běžet.
+    Zpráva jmenuje, co předpoklad porušuje. Na rozdíl od neplatného záznamu
+    auditu nebo provenance, který use case hlásí jako porušení, je to důvod,
+    proč krok vůbec nemůže běžet.
     """
