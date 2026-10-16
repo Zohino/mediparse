@@ -55,9 +55,6 @@ def run(argv: Sequence[str]) -> ExitCode:
         load_verbalization_template(args.template),
         load_sampler_config(args.config),
     )
-    if prompt is None:
-        logger.error("Plán pro note_id %s neexistuje.", args.note_id)
-        return ExitCode.REFUSED
     sys.stdout.write(prompt)
     return ExitCode.OK
 

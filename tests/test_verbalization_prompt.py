@@ -4,7 +4,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+import pytest
+
 from mediparse.application.verbalization_prompt import VerbalizationPrompt
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.verbalization_prompt import run
 from tests.support import (
@@ -15,8 +18,6 @@ from tests.support import (
 )
 
 if TYPE_CHECKING:
-    import pytest
-
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.synthetic_plan import SamplerConfig
     from tests.conftest import PlannedNote
@@ -33,17 +34,19 @@ def test_known_note_gets_its_prompt(
 
     prompt = use_case.run(plan.note_id, verbalization_template, sampler_config)
 
-    assert prompt is not None
     assert plan.note_id in prompt
 
 
-def test_unknown_note_has_no_prompt(
+def test_unknown_note_is_invalid_input(
     planned_note: PlannedNote, sampler_config: SamplerConfig
 ) -> None:
-    """Pro note_id bez plánu zadání nevznikne."""
+    """Pro note_id bez plánu use case odmítne běžet."""
     use_case = VerbalizationPrompt(PlansFake((planned_note.plan,)))
 
-    assert use_case.run("90000999-DS-1", "", sampler_config) is None
+    with pytest.raises(
+        InvalidInputError, match="Plán pro note_id 90000999-DS-1 neexistuje"
+    ):
+        use_case.run("90000999-DS-1", "", sampler_config)
 
 
 def test_command_prints_prompt_for_repository_plan(
@@ -61,7 +64,7 @@ def test_command_prints_prompt_for_repository_plan(
 def test_command_refuses_unknown_note(caplog: pytest.LogCaptureFixture) -> None:
     """Neznámé note_id příkaz odmítne srozumitelnou hláškou."""
     assert run(_argv("90000999-DS-1")) == ExitCode.REFUSED
-    assert "neexistuje" in caplog.text
+    assert "Plán pro note_id 90000999-DS-1 neexistuje." in caplog.text
 
 
 def test_every_repository_plan_renders(
