@@ -64,12 +64,15 @@ def test_provenance_refuses_empty_corpus(audit_files: AuditFiles) -> None:
     assert not (root / PROVENANCE_NAME).exists()
 
 
-def test_provenance_refuses_unaudited_corpus(audit_files: AuditFiles) -> None:
+def test_provenance_refuses_unaudited_corpus(
+    audit_files: AuditFiles, caplog: pytest.LogCaptureFixture
+) -> None:
     """Provenance vzniká až po čistém auditu."""
     root = audit_files.audited_corpus(SHORT_NOTE)
     (root / RECORD_NAME).unlink()
 
     assert run(audit_files.provenance_argv(root)) == ExitCode.REFUSED
+    assert "Korpus nemá záznam auditu." in caplog.text
     assert not (root / PROVENANCE_NAME).exists()
 
 

@@ -14,9 +14,8 @@ from mediparse.application.corpus_gate import audit_violations
 from mediparse.domain.corpus_provenance import ProvenanceRecord
 
 if TYPE_CHECKING:
-    from collections.abc import Collection, Mapping
-
     from mediparse.application.ports.corpus import AuditedCorpus, ProvenanceCorpus
+    from mediparse.domain.corpus_audit import AuditPin
     from mediparse.domain.corpus_provenance import Generation
 
 
@@ -41,18 +40,13 @@ class CorpusProvenance:
 
     corpus: ProvenanceCorpus
 
-    def run(
-        self,
-        generation: Generation,
-        reference_sha256: Mapping[str, str],
-        structure_labels: Collection[str],
-    ) -> ProvenanceOutcome:
+    def run(self, generation: Generation, pin: AuditPin) -> ProvenanceOutcome:
         """Ověří, že korpus odpovídá svému auditu, a zapíše provenance s otiskem záznamu auditu.
 
         Returns:
             Zápis záznamu, nebo odmítnutí s důvodem.
         """
-        refusal = audit_refusal(self.corpus, reference_sha256, structure_labels)
+        refusal = audit_refusal(self.corpus, pin)
         if refusal is not None:
             return refusal
         self.corpus.save_provenance(
@@ -63,11 +57,7 @@ class CorpusProvenance:
         return ProvenanceWritten()
 
 
-def audit_refusal(
-    corpus: AuditedCorpus,
-    reference_sha256: Mapping[str, str],
-    structure_labels: Collection[str],
-) -> ProvenanceRefused | None:
+def audit_refusal(corpus: AuditedCorpus, pin: AuditPin) -> ProvenanceRefused | None:
     """Odmítnutí provenance pro korpus bez zpráv nebo bez čistého auditu.
 
     Returns:
@@ -76,9 +66,7 @@ def audit_refusal(
     fingerprint = corpus.fingerprint()
     if fingerprint is None:
         return ProvenanceRefused("Korpus neobsahuje žádnou zprávu.")
-    violations = audit_violations(
-        corpus, fingerprint, reference_sha256, structure_labels
-    )
+    violations = audit_violations(corpus, fingerprint, pin)
     if violations:
         return ProvenanceRefused(" ".join(violations))
     return None

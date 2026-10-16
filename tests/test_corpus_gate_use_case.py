@@ -18,8 +18,7 @@ from mediparse.domain.corpus_provenance import (
 from mediparse.domain.language import Language
 from tests.support import (
     CORPUS_SHA,
-    PINNED,
-    STRUCTURE_LABELS,
+    PIN,
     audit_record,
     translation_record,
 )
@@ -77,66 +76,59 @@ class _Corpus:
 
 def test_audited_corpus_passes() -> None:
     """Korpus, jehož otisk sedí se záznamem, projde bez porušení."""
-    assert (
-        CorpusGate(_Corpus(CORPUS_SHA, audit_record())).run(PINNED, STRUCTURE_LABELS)
-        == ()
-    )
+    assert CorpusGate(_Corpus(CORPUS_SHA, audit_record())).run(PIN) == ()
 
 
 def test_missing_corpus_passes_whatever_the_records() -> None:
     """Neexistující korpus nic neporušuje, ani když vedle leží neplatný záznam auditu."""
-    assert (
-        CorpusGate(_Corpus(None, invalid_record=True)).run(PINNED, STRUCTURE_LABELS)
-        == ()
-    )
+    assert CorpusGate(_Corpus(None, invalid_record=True)).run(PIN) == ()
 
 
 def test_changed_corpus_is_blocked() -> None:
     """Korpus změněný po auditu neprojde."""
-    assert CorpusGate(_Corpus("d" * 64, audit_record())).run(PINNED, STRUCTURE_LABELS)
+    assert CorpusGate(_Corpus("d" * 64, audit_record())).run(PIN)
 
 
 def test_invalid_record_is_blocked() -> None:
     """Záznam, který neodpovídá schématu, korpus neatestuje."""
-    violations = CorpusGate(_Corpus(CORPUS_SHA, invalid_record=True)).run(
-        PINNED, STRUCTURE_LABELS
-    )
+    violations = CorpusGate(_Corpus(CORPUS_SHA, invalid_record=True)).run(PIN)
 
     assert violations == ("Záznam auditu neodpovídá schématu.",)
+
+
+def test_missing_audit_record_is_blocked() -> None:
+    """Korpus bez záznamu auditu neprojde."""
+    assert CorpusGate(_Corpus(CORPUS_SHA, None)).run(PIN) == (
+        "Korpus nemá záznam auditu.",
+    )
 
 
 def test_missing_provenance_is_blocked() -> None:
     """Auditovaný korpus bez provenance neprojde."""
     corpus = _Corpus(CORPUS_SHA, audit_record(), provenance=None)
 
-    assert CorpusGate(corpus).run(PINNED, STRUCTURE_LABELS) == (
-        "Korpus nemá záznam provenance.",
-    )
+    assert CorpusGate(corpus).run(PIN) == ("Korpus nemá záznam provenance.",)
 
 
 def test_provenance_of_other_audit_is_blocked() -> None:
     """Provenance s otiskem jiného záznamu auditu neprojde."""
     corpus = _Corpus(CORPUS_SHA, audit_record(), provenance=_provenance("8" * 64))
 
-    assert CorpusGate(corpus).run(PINNED, STRUCTURE_LABELS)
+    assert CorpusGate(corpus).run(PIN)
 
 
 def test_invalid_provenance_is_blocked() -> None:
     """Záznam provenance, který neodpovídá schématu, neprojde."""
     corpus = _Corpus(CORPUS_SHA, audit_record(), invalid_provenance=True)
 
-    assert CorpusGate(corpus).run(PINNED, STRUCTURE_LABELS) == (
-        "Záznam provenance neodpovídá schématu.",
-    )
+    assert CorpusGate(corpus).run(PIN) == ("Záznam provenance neodpovídá schématu.",)
 
 
 def test_czech_corpus_needs_translation_provenance() -> None:
     """Korpus s cs/ a provenance bez translation neprojde."""
     corpus = _Corpus(CORPUS_SHA, audit_record(), czech={"n1": "text"})
 
-    assert CorpusGate(corpus).run(PINNED, STRUCTURE_LABELS) == (
-        "Český korpus nemá provenance překladu.",
-    )
+    assert CorpusGate(corpus).run(PIN) == ("Český korpus nemá provenance překladu.",)
 
 
 def test_czech_corpus_with_translation_provenance_passes() -> None:
@@ -149,4 +141,4 @@ def test_czech_corpus_with_translation_provenance_passes() -> None:
         czech={"n1": "text"},
     )
 
-    assert CorpusGate(corpus).run(PINNED, STRUCTURE_LABELS) == ()
+    assert CorpusGate(corpus).run(PIN) == ()

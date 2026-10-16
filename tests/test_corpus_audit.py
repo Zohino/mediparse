@@ -5,10 +5,9 @@ from pydantic import ValidationError
 
 from mediparse.domain.corpus_audit import (
     NGRAM_SIZE,
+    AuditPin,
     NgramIndex,
     ReferenceNote,
-    audit_record_violations,
-    reference_mismatch,
     scan,
     tokenize,
 )
@@ -16,6 +15,7 @@ from tests.support import (
     CORPUS_SHA,
     DISCHARGE,
     NOTE,
+    PIN,
     PINNED,
     RADIOLOGY,
     SENTENCE,
@@ -159,35 +159,21 @@ def test_record_requires_timezone() -> None:
         audit_record(created_at="2026-09-28T00:00:00")
 
 
-def test_gate_requires_record_for_existing_corpus() -> None:
-    """Korpus bez záznamu auditu neprojde."""
-    assert audit_record_violations(CORPUS_SHA, None, PINNED, STRUCTURE_LABELS)
-
-
 def test_gate_rejects_corpus_changed_after_audit() -> None:
     """Změna korpusu po auditu změní otisk a brána ji zachytí."""
-    assert audit_record_violations("d" * 64, audit_record(), PINNED, STRUCTURE_LABELS)
+    assert PIN.violations("d" * 64, audit_record())
 
 
 def test_gate_rejects_record_from_other_method() -> None:
     """Záznam z jiné délky n-gramu nebo normalizace už korpus neatestuje."""
-    assert audit_record_violations(
-        CORPUS_SHA, audit_record(ngram_size=NGRAM_SIZE - 1), PINNED, STRUCTURE_LABELS
-    )
-    assert audit_record_violations(
-        CORPUS_SHA, audit_record(normalization="other"), PINNED, STRUCTURE_LABELS
-    )
-    assert audit_record_violations(
-        CORPUS_SHA, audit_record(structure_labels=["Name"]), PINNED, STRUCTURE_LABELS
-    )
+    assert PIN.violations(CORPUS_SHA, audit_record(ngram_size=NGRAM_SIZE - 1))
+    assert PIN.violations(CORPUS_SHA, audit_record(normalization="other"))
+    assert PIN.violations(CORPUS_SHA, audit_record(structure_labels=["Name"]))
 
 
 def test_gate_accepts_matching_record() -> None:
-    """Shodný otisk, metoda i reference bránou projdou."""
-    assert (
-        audit_record_violations(CORPUS_SHA, audit_record(), PINNED, STRUCTURE_LABELS)
-        == ()
-    )
+    """Shodný otisk, metoda i reference bránou projdou, štítky pinu (frozenset) i se seřazenou n-ticí záznamu."""
+    assert PIN.violations(CORPUS_SHA, audit_record()) == ()
 
 
 @pytest.mark.parametrize(
@@ -203,14 +189,12 @@ def test_gate_rejects_reference_other_than_pinned(
     reference: list[dict[str, object]],
 ) -> None:
     """Audit, který neběžel přesně proti discharge a radiology s připnutými otisky, korpus neatestuje."""
-    assert audit_record_violations(
-        CORPUS_SHA, audit_record(reference=reference), PINNED, STRUCTURE_LABELS
-    )
+    assert PIN.violations(CORPUS_SHA, audit_record(reference=reference))
 
 
 def test_gate_rejects_record_when_config_names_no_reference() -> None:
     """Config bez tabulek MIMIC-IV-Note nemá s čím srovnávat a korpus neatestuje."""
-    assert audit_record_violations(CORPUS_SHA, audit_record(), {}, STRUCTURE_LABELS)
+    assert AuditPin({}, STRUCTURE_LABELS).violations(CORPUS_SHA, audit_record())
 
 
 @pytest.mark.parametrize(
@@ -239,4 +223,20 @@ def test_reference_mismatch_names_differing_files(
     files: list[tuple[str, str]], mismatch: tuple[str, ...]
 ) -> None:
     """Pravidlo shody jmenuje chybějící, přebývající, zdvojené i jinak otištěné soubory."""
-    assert reference_mismatch(files, PINNED) == mismatch
+    assert PIN.reference_mismatch(files) == mismatch
+
+
+def test_pin_is_immune_to_later_change_of_source_dict() -> None:
+    """Pin drží vlastní kopii otisků, takže ho volající nezmění přes původní dict."""
+    source = dict(PINNED)
+    pin = AuditPin(source, STRUCTURE_LABELS)
+    source["discharge.csv.gz"] = "0" * 64
+    assert dict(pin.reference_sha256) == PINNED
+    with pytest.raises(TypeError):
+        pin.reference_sha256["x"] = "y"  # ty: ignore[invalid-assignment]
+
+
+def test_pin_is_not_hashable() -> None:
+    """Otisky pinu jsou MappingProxyType, který hashovat nejde; pin se proto hashovat nesmí."""
+    with pytest.raises(TypeError):
+        hash(PIN)

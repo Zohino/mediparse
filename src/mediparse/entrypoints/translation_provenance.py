@@ -21,10 +21,10 @@ from mediparse.application.corpus_provenance import (
 from mediparse.application.translation_provenance import TranslationProvenance
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_reference_sha256
+from mediparse.infrastructure.audit_pin import load_audit_pin
+from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.sampler_config import (
     SAMPLER_CONFIG_PATH,
-    load_sampler_config,
 )
 from mediparse.infrastructure.synthetic_corpus import (
     CORPUS_ROOT,
@@ -64,8 +64,7 @@ def run(argv: Sequence[str]) -> ExitCode:
     outcome = TranslationProvenance(
         CorpusDirectory(args.corpus), TranslationWorkdir(args.workdir)
     ).run(
-        load_reference_sha256(args.tables),
-        load_sampler_config(args.config).structure.structure_labels,
+        load_audit_pin(args.tables, args.config),
     )
     match outcome:
         case ProvenanceWritten():
