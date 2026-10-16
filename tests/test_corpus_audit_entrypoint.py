@@ -86,8 +86,11 @@ def test_subject_collision_blocks_record(audit_files: AuditFiles) -> None:
     """Syntetický subject_id, který existuje v referenci, audit neprojde."""
     code, corpus = _audit(audit_files, SHORT_NOTE, [("90000001", "unrelated text")])
 
+    report = json.loads((audit_files.root / "report.json").read_text(encoding="utf-8"))
     assert code == ExitCode.BLOCKED
     assert not (corpus / RECORD_NAME).exists()
+    assert report["colliding_subjects"] == ["90000001"]
+    assert report["positions"] == []
 
 
 def test_audit_passes_environment_to_its_guard(audit_files: AuditFiles) -> None:
