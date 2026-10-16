@@ -28,8 +28,7 @@ from mediparse.domain.translation_consistency import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Collection, Mapping
-
+    from mediparse.domain.corpus_audit import AuditPin
     from mediparse.domain.corpus_provenance import Translation
     from mediparse.domain.translation_consistency import TranslatedNote
 
@@ -69,17 +68,13 @@ class TranslationProvenance:
     corpus: TranslatedCorpus
     source: TranslationSource
 
-    def run(
-        self,
-        reference_sha256: Mapping[str, str],
-        structure_labels: Collection[str],
-    ) -> ProvenanceOutcome:
+    def run(self, pin: AuditPin) -> ProvenanceOutcome:
         """Ověří audit a vazbu na pracovní adresář a zapíše provenance s překladem.
 
         Returns:
             Zápis záznamu, nebo odmítnutí s důvodem.
         """
-        existing = self._existing(reference_sha256, structure_labels)
+        existing = self._existing(pin)
         if isinstance(existing, ProvenanceRefused):
             return existing
         english = self.corpus.notes(Language.EN)
@@ -107,10 +102,8 @@ class TranslationProvenance:
         )
         return ProvenanceWritten()
 
-    def _existing(
-        self, reference_sha256: Mapping[str, str], structure_labels: Collection[str]
-    ) -> ProvenanceRecord | ProvenanceRefused:
-        refusal = audit_refusal(self.corpus, reference_sha256, structure_labels)
+    def _existing(self, pin: AuditPin) -> ProvenanceRecord | ProvenanceRefused:
+        refusal = audit_refusal(self.corpus, pin)
         if refusal is not None:
             return refusal
         try:

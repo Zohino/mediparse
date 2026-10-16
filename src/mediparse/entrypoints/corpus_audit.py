@@ -22,7 +22,7 @@ from mediparse.application.corpus_audit import (
     AuditRefused,
     CorpusAudit,
 )
-from mediparse.domain.corpus_audit import NGRAM_SIZE
+from mediparse.domain.corpus_audit import NGRAM_SIZE, AuditPin
 from mediparse.domain.digest import commit_sha
 from mediparse.entrypoints.cli import (
     argument,
@@ -78,8 +78,10 @@ def run(argv: Sequence[str], environ: Mapping[str, str]) -> ExitCode:
         environ,
         args.commit,
         datetime.now(tz=UTC),
-        load_reference_sha256(args.tables),
-        load_sampler_config(args.config).structure.structure_labels,
+        AuditPin(
+            load_reference_sha256(args.tables),
+            load_sampler_config(args.config).structure.structure_labels,
+        ),
     )
     return _present(outcome, args.report)
 

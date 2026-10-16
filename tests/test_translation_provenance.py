@@ -22,8 +22,7 @@ from mediparse.domain.language import Language
 from mediparse.domain.translation_consistency import TranslatedNote
 from tests.support import (
     CORPUS_SHA,
-    PINNED,
-    STRUCTURE_LABELS,
+    PIN,
     audit_record,
     translation_record,
 )
@@ -122,7 +121,7 @@ def _source() -> _Source:
 
 
 def _run(corpus: _Corpus, source: _Source) -> ProvenanceRefused | ProvenanceWritten:
-    return TranslationProvenance(corpus, source).run(PINNED, STRUCTURE_LABELS)
+    return TranslationProvenance(corpus, source).run(PIN)
 
 
 def test_success_keeps_generation_and_writes_translation() -> None:

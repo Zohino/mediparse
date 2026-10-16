@@ -218,33 +218,6 @@ def scan(
     )
 
 
-def audit_record_violations(
-    corpus_sha256: str,
-    record: AuditRecord,
-    reference_sha256: Mapping[str, str],
-    structure_labels: Collection[str],
-) -> tuple[str, ...]:
-    """Důvody, proč korpus s daným otiskem neodpovídá svému záznamu auditu; prázdný výsledek znamená, že odpovídá.
-
-    Returns:
-        Popisy porušení auditu.
-    """
-    pin = AuditPin(reference_sha256, frozenset(structure_labels))
-    return pin.violations(corpus_sha256, record)
-
-
-def reference_mismatch(
-    files: Iterable[tuple[str, str]], reference_sha256: Mapping[str, str]
-) -> tuple[str, ...]:
-    """Soubory, kterými se auditovaná reference liší od reference z configu.
-
-    Returns:
-        Seřazená jména chybějících, přebývajících a zdvojených souborů i souborů s jiným
-        otiskem; prázdný výsledek znamená přesnou shodu.
-    """
-    return AuditPin(reference_sha256, frozenset()).reference_mismatch(files)
-
-
 def _ngrams(tokens: Sequence[str]) -> Iterator[Ngram]:
     return (
         tuple(tokens[start : start + NGRAM_SIZE])

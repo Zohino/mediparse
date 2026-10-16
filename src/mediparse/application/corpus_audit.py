@@ -19,7 +19,6 @@ from mediparse.domain.corpus_audit import (
     AuditRecord,
     NgramIndex,
     ReferenceFile,
-    reference_mismatch,
     scan,
 )
 from mediparse.domain.language import Language
@@ -29,7 +28,12 @@ if TYPE_CHECKING:
     from collections.abc import Collection, Iterable, Mapping, Sequence
     from datetime import datetime
 
-    from mediparse.domain.corpus_audit import Ngram, Position, ReferenceNote
+    from mediparse.domain.corpus_audit import (
+        AuditPin,
+        Ngram,
+        Position,
+        ReferenceNote,
+    )
     from mediparse.domain.identity import SubjectId
 
 _BLOCKING_VARIABLES: Final = MappingProxyType({
@@ -147,8 +151,7 @@ class CorpusAudit:
         environ: Mapping[str, str],
         tool_commit: str,
         created_at: datetime,
-        reference_sha256: Mapping[str, str],
-        structure_labels: Collection[str],
+        pin: AuditPin,
     ) -> AuditOutcome:
         """Porovná korpus s referencí; čistý audit uloží záznam, shoda jen report mimo repozitář.
 
@@ -170,14 +173,14 @@ class CorpusAudit:
             for note_id, text in texts.items()
         }
         problem = _note_id_problem(by_language) or _reference_problem(
-            self.references, reference_sha256
+            self.references, pin
         )
         if problem is not None:
             return AuditRefused(problem)
         subjects = frozenset(
             subject_of(note_id) for texts in by_language.values() for note_id in texts
         )
-        index = NgramIndex(notes, structure_labels)
+        index = NgramIndex(notes, pin.structure_labels)
         scans = tuple(
             scan(index, subjects, reference.notes()) for reference in self.references
         )
@@ -194,12 +197,12 @@ class CorpusAudit:
             corpus_files=len(notes),
             ngram_size=NGRAM_SIZE,
             normalization=NORMALIZATION,
-            structure_labels=tuple(sorted(structure_labels)),
+            structure_labels=tuple(sorted(pin.structure_labels)),
             synthetic_ngrams=len(index),
             reference=tuple(
                 ReferenceFile(
                     name=reference.name,
-                    sha256=reference_sha256[reference.name],
+                    sha256=pin.reference_sha256[reference.name],
                     rows=result.rows,
                 )
                 for reference, result in zip(self.references, scans, strict=True)
@@ -242,12 +245,9 @@ def _note_id_problem(by_language: Mapping[Language, Mapping[str, str]]) -> str |
     return None
 
 
-def _reference_problem(
-    references: Sequence[Reference], reference_sha256: Mapping[str, str]
-) -> str | None:
-    mismatch = reference_mismatch(
-        ((reference.name, reference.sha256()) for reference in references),
-        reference_sha256,
+def _reference_problem(references: Sequence[Reference], pin: AuditPin) -> str | None:
+    mismatch = pin.reference_mismatch(
+        (reference.name, reference.sha256()) for reference in references
     )
     if mismatch:
         return (

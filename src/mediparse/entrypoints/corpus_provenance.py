@@ -19,6 +19,7 @@ from mediparse.application.corpus_provenance import (
     ProvenanceRefused,
     ProvenanceWritten,
 )
+from mediparse.domain.corpus_audit import AuditPin
 from mediparse.domain.corpus_provenance import (
     Generation,
     model_id,
@@ -90,8 +91,7 @@ def run(argv: Sequence[str]) -> ExitCode:
     )
     outcome = CorpusProvenance(CorpusDirectory(args.corpus)).run(
         generation,
-        load_reference_sha256(args.tables),
-        config.structure.structure_labels,
+        AuditPin(load_reference_sha256(args.tables), config.structure.structure_labels),
     )
     match outcome:
         case ProvenanceWritten():

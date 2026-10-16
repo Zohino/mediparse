@@ -14,7 +14,7 @@ from mediparse.application.corpus_audit import (
     AuditRefused,
     CorpusAudit,
 )
-from mediparse.domain.corpus_audit import ReferenceNote
+from mediparse.domain.corpus_audit import AuditPin, ReferenceNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from tests.support import (
@@ -36,6 +36,7 @@ CREATED_AT = datetime(2026, 9, 29, tzinfo=UTC)
 DISCHARGE_SHA = PINNED["discharge.csv.gz"]
 DISCHARGE_PINNED = {"discharge.csv.gz": DISCHARGE_SHA}
 STRUCTURE_LABELS = frozenset({"Name", "Unit No"})
+DISCHARGE_PIN = AuditPin(DISCHARGE_PINNED, STRUCTURE_LABELS)
 BOTH_LANGUAGES = 2
 SHORT_NOTES = {Language.EN: {NOTE_ID: SHORT_TEXT}}
 PREAMBLE = "Name: ___ Unit No: ___ Name: ___ Unit No: ___ Name: ___ Unit No: ___\n"
@@ -162,7 +163,7 @@ def test_clean_corpus_saves_record() -> None:
     reference = _Reference((ReferenceNote(10000032, SENTENCE),))
 
     outcome = _audit(corpus, reference, report).run(
-        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED, STRUCTURE_LABELS
+        {}, COMMIT, CREATED_AT, DISCHARGE_PIN
     )
 
     assert outcome == AuditClean(notes=1, ngrams=0, reference_notes=1)
@@ -182,7 +183,7 @@ def test_overlap_writes_report_and_no_record() -> None:
     reference = _Reference((ReferenceNote(10000032, SENTENCE),))
 
     outcome = _audit(corpus, reference, report).run(
-        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED, STRUCTURE_LABELS
+        {}, COMMIT, CREATED_AT, DISCHARGE_PIN
     )
 
     assert outcome == AuditOverlap(
@@ -201,7 +202,7 @@ def test_subject_collision_is_overlap() -> None:
     reference = _Reference((ReferenceNote(90000001, "unrelated text"),))
 
     outcome = _audit(corpus, reference, report).run(
-        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED, STRUCTURE_LABELS
+        {}, COMMIT, CREATED_AT, DISCHARGE_PIN
     )
 
     assert outcome == AuditOverlap(shared_ngrams=0, colliding_subjects=1, notes=())
@@ -217,7 +218,7 @@ def test_environment_refusal_never_touches_reference(environ: dict[str, str]) ->
     report = _Report()
 
     outcome = _audit(corpus, _UntouchableReference(), report).run(
-        environ, COMMIT, CREATED_AT, DISCHARGE_PINNED, STRUCTURE_LABELS
+        environ, COMMIT, CREATED_AT, DISCHARGE_PIN
     )
 
     assert isinstance(outcome, AuditRefused)
@@ -239,7 +240,7 @@ def test_workspace_refusal_never_touches_reference(workspace: _Workspace) -> Non
     corpus = _Corpus({Language.EN: {NOTE_ID: SENTENCE}})
 
     outcome = _audit(corpus, _UntouchableReference(), _Report(), workspace).run(
-        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED, STRUCTURE_LABELS
+        {}, COMMIT, CREATED_AT, DISCHARGE_PIN
     )
 
     assert isinstance(outcome, AuditRefused)
@@ -251,7 +252,7 @@ def test_invalid_note_id_is_refused_before_reference() -> None:
     corpus = _Corpus({Language.EN: {"not-a-note": SENTENCE}})
 
     outcome = _audit(corpus, _UntouchableReference(), _Report()).run(
-        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED, STRUCTURE_LABELS
+        {}, COMMIT, CREATED_AT, DISCHARGE_PIN
     )
 
     assert isinstance(outcome, AuditRefused)
@@ -261,7 +262,7 @@ def test_invalid_note_id_is_refused_before_reference() -> None:
 def test_empty_corpus_is_refused() -> None:
     """Prázdný korpus nemá co auditovat."""
     outcome = _audit(_Corpus({}), _UntouchableReference(), _Report()).run(
-        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED, STRUCTURE_LABELS
+        {}, COMMIT, CREATED_AT, DISCHARGE_PIN
     )
 
     assert isinstance(outcome, AuditRefused)
@@ -272,7 +273,7 @@ def test_empty_reference_is_refused_without_record() -> None:
     corpus = _Corpus(dict(SHORT_NOTES))
 
     outcome = _audit(corpus, _Reference(()), _Report()).run(
-        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED, STRUCTURE_LABELS
+        {}, COMMIT, CREATED_AT, DISCHARGE_PIN
     )
 
     assert isinstance(outcome, AuditRefused)
@@ -303,7 +304,7 @@ def test_reference_other_than_config_is_refused_before_reading(
     corpus = _Corpus(dict(SHORT_NOTES))
 
     outcome = _audit(corpus, reference, _Report()).run(
-        {}, COMMIT, CREATED_AT, pinned, STRUCTURE_LABELS
+        {}, COMMIT, CREATED_AT, AuditPin(pinned, STRUCTURE_LABELS)
     )
 
     assert isinstance(outcome, AuditRefused)
@@ -317,7 +318,7 @@ def test_unreadable_reference_content_propagates_without_record() -> None:
 
     with pytest.raises(InvalidInputError, match="chybí sloupec text"):
         _audit(corpus, _BrokenReference(), _Report()).run(
-            {}, COMMIT, CREATED_AT, DISCHARGE_PINNED, STRUCTURE_LABELS
+            {}, COMMIT, CREATED_AT, DISCHARGE_PIN
         )
 
     assert not corpus.saved
@@ -331,7 +332,7 @@ def test_structure_labels_reach_the_index() -> None:
         _Corpus({Language.EN: {NOTE_ID: f"{PREAMBLE}a short body"}}),
         reference,
         _Report(),
-    ).run({}, COMMIT, CREATED_AT, DISCHARGE_PINNED, STRUCTURE_LABELS)
+    ).run({}, COMMIT, CREATED_AT, DISCHARGE_PIN)
 
     assert isinstance(outcome, AuditClean)
 
@@ -346,7 +347,7 @@ def test_czech_notes_are_indexed() -> None:
     reference = _Reference((ReferenceNote(10000032, SENTENCE),))
 
     outcome = _audit(corpus, reference, report).run(
-        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED, STRUCTURE_LABELS
+        {}, COMMIT, CREATED_AT, DISCHARGE_PIN
     )
 
     assert outcome == AuditOverlap(
@@ -365,7 +366,7 @@ def test_same_note_id_in_both_languages_has_two_positions() -> None:
     reference = _Reference((ReferenceNote(10000032, SENTENCE),))
 
     outcome = _audit(corpus, reference, report).run(
-        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED, STRUCTURE_LABELS
+        {}, COMMIT, CREATED_AT, DISCHARGE_PIN
     )
 
     assert isinstance(outcome, AuditOverlap)
@@ -386,7 +387,7 @@ def test_corpus_files_counts_notes_of_all_languages() -> None:
 
     outcome = _audit(
         corpus, _Reference((ReferenceNote(10000032, "x"),)), _Report()
-    ).run({}, COMMIT, CREATED_AT, DISCHARGE_PINNED, STRUCTURE_LABELS)
+    ).run({}, COMMIT, CREATED_AT, DISCHARGE_PIN)
 
     assert outcome == AuditClean(notes=BOTH_LANGUAGES, ngrams=0, reference_notes=1)
     (record,) = corpus.saved
@@ -402,7 +403,7 @@ def test_subjects_come_from_every_language() -> None:
     reference = _Reference((ReferenceNote(90000002, "unrelated text"),))
 
     outcome = _audit(corpus, reference, _Report()).run(
-        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED, STRUCTURE_LABELS
+        {}, COMMIT, CREATED_AT, DISCHARGE_PIN
     )
 
     assert outcome == AuditOverlap(shared_ngrams=0, colliding_subjects=1, notes=())
