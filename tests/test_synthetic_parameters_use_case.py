@@ -1,13 +1,13 @@
-"""Převzetí parametrů pětice: výstup se předá configu a odmítnutí nese důvod."""
+"""Převzetí parametrů pětice: výstup se předá configu, odmítnutí vyletí jako výjimka."""
 
 from __future__ import annotations
 
 import json
 from dataclasses import dataclass, field
 
+import pytest
+
 from mediparse.application.synthetic_parameters import (
-    ParametersRefused,
-    ParametersWritten,
     ParameterTransfer,
 )
 from mediparse.domain.inputs import InvalidInputError
@@ -67,26 +67,25 @@ def test_apply_receives_parameters_and_required_notes() -> None:
     parameters = _parameters()
     store = FakeStore()
 
-    result = ParameterTransfer(FakeExport(parameters), store).run()
+    notes = ParameterTransfer(FakeExport(parameters), store).run()
 
     assert store.applied == [(parameters, EXPECTED_NOTES)]
-    assert result == ParametersWritten(notes=EXPECTED_NOTES)
+    assert notes == EXPECTED_NOTES
 
 
-def test_store_refusal_carries_its_message() -> None:
-    """Chybu configu use case vrátí jako odmítnutí s její hláškou."""
+def test_store_refusal_propagates() -> None:
+    """Chyba configu vyletí k vstupnímu bodu s vlastní hláškou."""
     store = FakeStore(error="IPF nekonverguje")
 
-    result = ParameterTransfer(FakeExport(_parameters()), store).run()
+    with pytest.raises(InvalidInputError, match="IPF nekonverguje"):
+        ParameterTransfer(FakeExport(_parameters()), store).run()
 
-    assert result == ParametersRefused(reason="IPF nekonverguje")
 
-
-def test_invalid_export_is_refused_without_touching_config() -> None:
-    """Neplatný export skončí odmítnutím a config se nevolá."""
+def test_invalid_export_propagates_without_touching_config() -> None:
+    """Neplatný export vyletí a config se nevolá."""
     store = FakeStore()
 
-    result = ParameterTransfer(FakeExport(error="export chybí"), store).run()
+    with pytest.raises(InvalidInputError, match="export chybí"):
+        ParameterTransfer(FakeExport(error="export chybí"), store).run()
 
-    assert result == ParametersRefused(reason="export chybí")
     assert store.applied == []

@@ -13,11 +13,8 @@ import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from mediparse.application.synthetic_parameters import (
-    ParametersRefused,
-    ParameterTransfer,
-)
-from mediparse.entrypoints.cli import configure_logging
+from mediparse.application.synthetic_parameters import ParameterTransfer
+from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.sampler_config import (
     SAMPLER_CONFIG_PATH,
@@ -44,22 +41,21 @@ def main() -> ExitCode:
     return run(sys.argv[1:])
 
 
+@refusing_invalid_input
 def run(argv: Sequence[str]) -> ExitCode:
     """Složí převzetí z exportu a configu a spustí ho.
 
     Returns:
-        OK po zápisu configu, REFUSED s důvodem v logu, když se config nezměnil.
+        OK po zápisu configu, REFUSED s důvodem v logu, když export nebo výsledný config nejsou platné;
+        config se pak nezměnil.
     """
     args = _parser().parse_args(argv)
     transfer = ParameterTransfer(
         export=SyntheticParametersFile(args.export),
         config=SamplerConfigFile(args.config),
     )
-    result = transfer.run()
-    if isinstance(result, ParametersRefused):
-        logger.error("Parametry se nepřevzaly: %s", result.reason)
-        return ExitCode.REFUSED
-    logger.info("Config %s přepsán, patients.notes = %d.", args.config, result.notes)
+    notes = transfer.run()
+    logger.info("Config %s přepsán, patients.notes = %d.", args.config, notes)
     return ExitCode.OK
 
 

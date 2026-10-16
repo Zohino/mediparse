@@ -5,7 +5,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
-from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.synthetic_parameters import required_notes
 
 if TYPE_CHECKING:
@@ -36,36 +35,22 @@ class SamplerConfigStore(Protocol):
 
 
 @dataclass(frozen=True)
-class ParametersWritten:
-    """Parametry jsou v configu."""
-
-    notes: int
-
-
-@dataclass(frozen=True)
-class ParametersRefused:
-    """Parametry se nepřevzaly; config zůstal beze změny."""
-
-    reason: str
-
-
-@dataclass(frozen=True)
 class ParameterTransfer:
     """Převezme export do configu a odvodí počet zpráv podle specifikace korpusu."""
 
     export: ParameterExport
     config: SamplerConfigStore
 
-    def run(self) -> ParametersWritten | ParametersRefused:
+    def run(self) -> int:
         """Načte export a zapíše ho do configu.
 
+        Odmítnutý export nebo config projde jako ``InvalidInputError`` a config
+        zůstane beze změny.
+
         Returns:
-            Zapsaný počet zpráv, nebo odmítnutí s důvodem.
+            Počet zpráv zapsaný do configu.
         """
-        try:
-            parameters = self.export.load()
-            notes = required_notes(parameters.prevalence)
-            self.config.apply(parameters, notes)
-        except InvalidInputError as error:
-            return ParametersRefused(reason=str(error))
-        return ParametersWritten(notes=notes)
+        parameters = self.export.load()
+        notes = required_notes(parameters.prevalence)
+        self.config.apply(parameters, notes)
+        return notes
