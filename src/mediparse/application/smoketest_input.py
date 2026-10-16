@@ -11,7 +11,7 @@ from mediparse.domain.smoketest_input import input_notes
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.application.ports import NoteSource, PlanSource
+    from mediparse.application.ports.corpus import NoteSource, PlanSource
     from mediparse.domain.input_note import InputNote
 
 

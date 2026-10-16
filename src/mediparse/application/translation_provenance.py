@@ -9,9 +9,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
-from mediparse.application.corpus_gate import GatedCorpus
 from mediparse.application.corpus_provenance import (
-    ProvenanceCorpus,
     ProvenanceOutcome,
     ProvenanceRefused,
     ProvenanceWritten,
@@ -22,6 +20,7 @@ from mediparse.application.corpus_texts import (
     TRANSLATION_LANGUAGE,
     texts_in_language,
 )
+from mediparse.application.ports.corpus import GatedCorpus, ProvenanceCorpus
 from mediparse.domain.corpus_provenance import (
     InvalidProvenanceRecordError,
     ProvenanceRecord,

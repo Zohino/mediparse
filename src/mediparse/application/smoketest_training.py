@@ -12,7 +12,11 @@ from mediparse.domain.split import ensure_disjoint_subjects, ensure_patients_per
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.application.ports import InputTable, PredictionSink, TextClassifier
+    from mediparse.application.ports.experiment import (
+        InputTable,
+        PredictionSink,
+        TextClassifier,
+    )
     from mediparse.domain.smoketest_training import TrainingConfig
     from mediparse.domain.split import Holdout
 

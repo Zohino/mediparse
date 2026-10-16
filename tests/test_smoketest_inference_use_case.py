@@ -17,7 +17,7 @@ from mediparse.domain.smoketest_inference import ModelMismatchError
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.application.ports import TextClassifier
+    from mediparse.application.ports.experiment import TextClassifier
 
 
 def _prediction(note_id: str, *, truth: bool, score: float) -> Prediction:

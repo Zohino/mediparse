@@ -18,7 +18,7 @@ from mediparse.domain.split import Holdout, SubjectLeakError
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.application.ports import TextClassifier
+    from mediparse.application.ports.experiment import TextClassifier
 
 CONFIG = TrainingConfig(
     row_id="row", diagnosis=Diagnosis.CKD, seed=0, folds=2, regularization=1.0

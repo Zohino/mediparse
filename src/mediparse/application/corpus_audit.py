@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from types import MappingProxyType
 from typing import TYPE_CHECKING, Final, Protocol
 
-from mediparse.application.ports import FingerprintedCorpus, NoteSource
+from mediparse.application.ports.corpus import FingerprintedCorpus, NoteSource
 from mediparse.domain.corpus_audit import (
     NGRAM_SIZE,
     NORMALIZATION,
