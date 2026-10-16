@@ -146,3 +146,12 @@ def test_duckdb_reads_converted_parquet(tmp_path: Path) -> None:
     row = duckdb.connect().execute(query, [str(path)]).fetchone()
     expected = (pq.ParquetFile(path).metadata.num_rows, 0, 'řádek 1234\nzalomený "x"')
     assert row == expected
+
+
+def test_short_row_error_does_not_echo_cell_values(tmp_path: Path) -> None:
+    """Hláška o vadném řádku nese typ chyby, ne hodnoty buněk (údaje z MIMIC)."""
+    with pytest.raises(InvalidInputError, match="nejde převést") as raised:
+        _convert(tmp_path, HEADER + "1,CANARY7\n")
+
+    assert "CANARY7" not in str(raised.value)
+    assert raised.value.__cause__ is None

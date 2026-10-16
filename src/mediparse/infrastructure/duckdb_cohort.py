@@ -152,8 +152,10 @@ class DuckDbCohort:
                     "SELECT DISTINCT icd_version, icd_code FROM diagnoses"
                 ).fetchall()
             except duckdb.Error as error:
-                msg = f"Tabulka {self.diagnoses} nejde číst: {error}"
-                raise InvalidInputError(msg) from error
+                msg = f"Tabulka {self.diagnoses} nejde číst: {type(error).__name__}."
+                # Text výjimky nese hodnoty buněk z MIMIC; nesmí do hlášky ani do logu, a proto
+                # jen její typ a ``from None``.
+                raise InvalidInputError(msg) from None
         return rows
 
     @contextmanager
@@ -171,8 +173,13 @@ class DuckDbCohort:
                 _select(con, labels)
                 counts = _counts(con)
             except duckdb.Error as error:
-                msg = f"Kohortu nelze sestavit z {self.discharge} a {self.diagnoses}: {error}"
-                raise InvalidInputError(msg) from error
+                msg = (
+                    f"Kohortu nelze sestavit z {self.discharge} a {self.diagnoses}: "
+                    f"{type(error).__name__}."
+                )
+                # Text výjimky nese hodnoty buněk z MIMIC; nesmí do hlášky ani do logu, a proto
+                # jen její typ a ``from None``.
+                raise InvalidInputError(msg) from None
             yield DuckDbSelection(con, self.out, counts)
 
 
@@ -197,16 +204,20 @@ class DuckDbSelection:
             # Rodič výstupu může být soubor; úklid nesmí zakrýt původní chybu.
             with suppress(OSError):
                 self.out.unlink(missing_ok=True)
-            msg = f"Kohortu nelze zapsat do {self.out}: {error}"
-            raise InvalidInputError(msg) from error
+            msg = f"Kohortu nelze zapsat do {self.out}: {type(error).__name__}."
+            # Text výjimky nese hodnoty buněk z MIMIC; nesmí do hlášky ani do logu, a proto
+            # jen její typ a ``from None``.
+            raise InvalidInputError(msg) from None
 
 
 def _view(con: duckdb.DuckDBPyConnection, name: str, path: Path) -> None:
     try:
         con.read_parquet(str(path)).create_view(name)
     except duckdb.Error as error:
-        msg = f"Tabulka {path} nejde číst: {error}"
-        raise InvalidInputError(msg) from error
+        msg = f"Tabulka {path} nejde číst: {type(error).__name__}."
+        # Text výjimky nese hodnoty buněk z MIMIC; nesmí do hlášky ani do logu, a proto
+        # jen její typ a ``from None``.
+        raise InvalidInputError(msg) from None
 
 
 def _select(
