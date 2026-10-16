@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from contextlib import closing, contextmanager
+from contextlib import closing, contextmanager, suppress
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
@@ -18,7 +18,7 @@ from mediparse.domain.cohort import (
 )
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
-from mediparse.domain.matrix import Language
+from mediparse.domain.language import Language
 from mediparse.infrastructure.note_table import SCHEMA
 
 if TYPE_CHECKING:
@@ -73,9 +73,8 @@ SELECT j.*, e.copy
 FROM joined j
 LEFT JOIN eligible e ON e.note_id = j.note_id
 """
-_EVERY_ROW: Final = True
 _FILTERS: Final[dict[FunnelStepName, Expression]] = {
-    FunnelStepName.ALL_NOTES: ConstantExpression(_EVERY_ROW),
+    FunnelStepName.ALL_NOTES: ConstantExpression(value=True),
     FunnelStepName.WITH_ICD: ColumnExpression("has_icd"),
     FunnelStepName.LONG_ENOUGH: ColumnExpression("copy").isnotnull(),
     FunnelStepName.UNIQUE: ColumnExpression("copy") == ConstantExpression(1),
@@ -193,7 +192,11 @@ class DuckDbSelection:
         """
         try:
             _stream(self.connection, self.out)
-        except (duckdb.Error, OSError) as error:
+        # pyarrow při přetypování na SCHEMA (NULL, jiná jména či pořadí sloupců) hází holý ValueError, ArrowInvalid ho nechytí.
+        except (duckdb.Error, OSError, ValueError) as error:
+            # Rodič výstupu může být soubor; úklid nesmí zakrýt původní chybu.
+            with suppress(OSError):
+                self.out.unlink(missing_ok=True)
             msg = f"Kohortu nelze zapsat do {self.out}: {error}"
             raise InvalidInputError(msg) from error
 
@@ -219,18 +222,19 @@ def _select(
     con.execute(_BASE, {"min_chars": MIN_CHARS})
 
 
+def _step(base: duckdb.DuckDBPyRelation, step: FunnelStepName) -> FunnelStep:
+    notes, patients = (
+        base
+        .filter(_FILTERS[step])
+        .aggregate("count(*), count(DISTINCT subject_id)")
+        .fetchall()[0]
+    )
+    return FunnelStep(step=step, notes=notes, patients=patients)
+
+
 def _counts(con: duckdb.DuckDBPyConnection) -> CohortCounts:
     base = con.table("base")
-    funnel = tuple(
-        FunnelStep(step=step, notes=notes, patients=patients)
-        for step, condition in _FILTERS.items()
-        for notes, patients in [
-            base
-            .filter(condition)
-            .aggregate("count(*), count(DISTINCT subject_id)")
-            .fetchall()[0]
-        ]
-    )
+    funnel = tuple(_step(base, step) for step in FunnelStepName)
     found = dict(con.execute(_POSITIVES).fetchall())
     positives = {diagnosis: found.get(diagnosis.value, 0) for diagnosis in Diagnosis}
     return CohortCounts(funnel=funnel, positives=positives)

@@ -58,14 +58,14 @@ class CohortMaterialization:
         """Zapíše kohortu, kterou pravidlo DUA propustí.
 
         Kohortu, kterou pravidlo odmítne, nezapíše; ``InvalidInputError``
-        z ``ensure_publishable`` projde ven.
+        z pravidla DUA i ze zdroje projde ven.
 
         Returns:
             Agregáty kohorty a počet neplatných dvojic.
         """
         labelled = label_codes(self.source.codes(), self.codes)
         with self.source.select(labelled.diagnoses) as selected:
-            ensure_publishable(selected.counts)
-            selected.write()
             counts = selected.counts
+            ensure_publishable(counts)
+            selected.write()
         return CohortResult(counts=counts, invalid_codes=labelled.invalid)

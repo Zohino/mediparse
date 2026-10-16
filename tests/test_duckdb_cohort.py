@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Final
 
+import pyarrow as pa
+import pyarrow.parquet as pq
 import pytest
 
 from mediparse.domain.cohort import CohortCounts, FunnelStepName, label_codes
@@ -158,6 +160,11 @@ def test_missing_input_is_invalid_input(tmp_path: Path) -> None:
         source.codes()
 
 
+def _select_and_write(source: DuckDbCohort) -> None:
+    with source.select(label_codes(source.codes(), CODES).diagnoses) as selected:
+        selected.write()
+
+
 def _small_source(root: Path) -> DuckDbCohort:
     discharge, diagnoses = write_tables(
         root,
@@ -191,18 +198,15 @@ def test_select_without_write_creates_no_file(tmp_path: Path) -> None:
     assert not (tmp_path / "c.parquet").exists()
 
 
-def test_unreadable_output_directory_is_invalid_input(tmp_path: Path) -> None:
-    """Chyba při zápisu proudu je InvalidInputError, ne traceback DuckDB."""
+def test_output_parent_that_is_a_file_is_invalid_input(tmp_path: Path) -> None:
+    """Chyba disku při zápisu je InvalidInputError."""
     discharge, diagnoses = write_tables(tmp_path)
     blocker = tmp_path / "blocker"
     blocker.write_text("soubor místo adresáře", encoding="utf-8")
     source = DuckDbCohort(discharge, diagnoses, blocker / "c.parquet", tmp_path / "s")
 
-    with (
-        pytest.raises(InvalidInputError),
-        source.select(label_codes(source.codes(), CODES).diagnoses) as selected,
-    ):
-        selected.write()
+    with pytest.raises(InvalidInputError, match="zapsat"):
+        _select_and_write(source)
 
 
 def test_duckdb_error_in_write_is_invalid_input(tmp_path: Path) -> None:
@@ -213,6 +217,29 @@ def test_duckdb_error_in_write_is_invalid_input(tmp_path: Path) -> None:
         selected.connection.execute("DROP TABLE base")
         with pytest.raises(InvalidInputError, match="zapsat"):
             selected.write()
+
+
+def test_null_subject_id_in_write_is_invalid_input_and_leaves_no_file(
+    tmp_path: Path,
+) -> None:
+    """Přetypování na schéma selže na NULL ve ``subject_id``; chyba je InvalidInputError a soubor nezůstane."""
+    discharge, diagnoses = write_tables(tmp_path)
+    pq.write_table(
+        pa.table({
+            "note_id": ["n01"],
+            "subject_id": pa.array([None], pa.string()),
+            "hadm_id": ["10"],
+            "text": [text("a")],
+        }),
+        discharge,
+    )
+    out = tmp_path / "c.parquet"
+    source = DuckDbCohort(discharge, diagnoses, out, tmp_path / "s")
+
+    with pytest.raises(InvalidInputError, match="zapsat"):
+        _select_and_write(source)
+
+    assert not out.exists()
 
 
 def test_positive_counts_match_label_columns_of_the_file(tmp_path: Path) -> None:
