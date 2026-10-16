@@ -24,7 +24,7 @@ from tests.cohort_support import (
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from mediparse.domain.smoketest_input import InputNote
+    from mediparse.domain.input_note import InputNote
 
 FUNNEL: Final = {
     FunnelStepName.ALL_NOTES: (62, 60),

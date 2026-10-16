@@ -8,9 +8,9 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import pytest
 
+from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
-from mediparse.domain.smoketest_input import InputNote
 from mediparse.infrastructure.note_table import SCHEMA, ParquetNoteTable
 
 if TYPE_CHECKING:

@@ -15,7 +15,7 @@ from skops.io.exceptions import UntrustedTypesFoundException
 
 from mediparse.domain.evaluation import Classification
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.smoketest_training import Holdout
+from mediparse.domain.split import Holdout
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

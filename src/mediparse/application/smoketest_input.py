@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from mediparse.application.ports import NoteSource, PlanSource
-    from mediparse.domain.smoketest_input import InputNote
+    from mediparse.domain.input_note import InputNote
 
 
 class NoteTable(Protocol):

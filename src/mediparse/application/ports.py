@@ -9,8 +9,8 @@ if TYPE_CHECKING:
 
     from mediparse.domain.corpus_audit import AuditRecord
     from mediparse.domain.evaluation import Classification, Prediction
+    from mediparse.domain.input_note import InputNote
     from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.smoketest_input import InputNote
 
 
 class PlanSource(Protocol):
