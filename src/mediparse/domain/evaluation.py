@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from mediparse.domain.diagnosis import Diagnosis
-    from mediparse.domain.identity import RowId
+    from mediparse.domain.identity import RowId, SubjectId
 
 
 @dataclass(frozen=True)
@@ -29,7 +29,7 @@ class Prediction:
     row_id: RowId
     fold: int
     note_id: str
-    subject_id: int
+    subject_id: SubjectId
     diagnosis: Diagnosis
     truth: bool
     predicted: bool

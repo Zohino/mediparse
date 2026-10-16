@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, ConfigDict, NonNegativeInt, PositiveInt
+from pydantic import BaseModel, ConfigDict, NonNegativeInt
 
 from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.identity import SubjectId
 from mediparse.domain.mentions import Mention
 from mediparse.domain.note_structure import Sex
 
@@ -23,7 +24,7 @@ class NotePlan(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     note_id: str
-    subject_id: PositiveInt
+    subject_id: SubjectId
     labels: tuple[Diagnosis, ...]
     sex: Sex
     age_marker: bool

@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from mediparse.domain.diagnosis import Diagnosis
+    from mediparse.domain.identity import SubjectId
 
 
 @dataclass(frozen=True)
@@ -14,7 +15,7 @@ class InputNote:
     """Řádek vstupní tabulky: text zprávy v jednom jazyce a labely diagnóz pětice."""
 
     note_id: str
-    subject_id: int
+    subject_id: SubjectId
     language: str
     text: str
     labels: frozenset[Diagnosis]

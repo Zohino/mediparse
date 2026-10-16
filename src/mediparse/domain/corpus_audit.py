@@ -23,6 +23,8 @@ from mediparse.domain.note_text import alternation
 if TYPE_CHECKING:
     from collections.abc import Collection, Iterable, Iterator, Mapping, Sequence
 
+    from mediparse.domain.identity import SubjectId
+
 NGRAM_SIZE: Final = 13
 NORMALIZATION: Final = "nfkc-lower-alnum-deid-v2"
 
@@ -34,7 +36,7 @@ type Ngram = tuple[str, ...]
 class ReferenceNote(NamedTuple):
     """Zpráva referenčního korpusu: pacient a text."""
 
-    subject_id: str
+    subject_id: SubjectId
     text: str
 
 
@@ -52,7 +54,7 @@ class ScanResult:
 
     rows: int
     shared: frozenset[Ngram]
-    colliding_subjects: frozenset[str]
+    colliding_subjects: frozenset[SubjectId]
 
 
 class NgramIndex:
@@ -140,7 +142,7 @@ def tokenize(text: str) -> list[str]:
 
 
 def scan(
-    index: NgramIndex, subjects: frozenset[str], notes: Iterable[ReferenceNote]
+    index: NgramIndex, subjects: frozenset[SubjectId], notes: Iterable[ReferenceNote]
 ) -> ScanResult:
     """Projde referenční zprávy a sbírá n-gramy sdílené s korpusem a kolize subject_id.
 
@@ -149,7 +151,7 @@ def scan(
     """
     rows = 0
     shared: set[Ngram] = set()
-    colliding: set[str] = set()
+    colliding: set[SubjectId] = set()
     for note in notes:
         rows += 1
         shared |= index.shared_with(note.text)

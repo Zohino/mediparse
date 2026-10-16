@@ -3,12 +3,15 @@
 from __future__ import annotations
 
 import re
-from typing import Final
+from typing import TYPE_CHECKING, Final
 
-_NOTE_ID: Final = re.compile(r"(?P<subject>\d+)-DS-\d+")
+if TYPE_CHECKING:
+    from mediparse.domain.identity import SubjectId
+
+_NOTE_ID: Final = re.compile(r"(?P<subject>[1-9]\d*)-DS-\d+")
 
 
-def note_id(subject_id: int, order: int) -> str:
+def note_id(subject_id: SubjectId, order: int) -> str:
     """Note_id propouštěcí zprávy pacienta ve skladbě MIMIC-IV-Note.
 
     Returns:
@@ -21,7 +24,7 @@ class InvalidNoteIdError(ValueError):
     """Jméno zprávy není note_id propouštěcí zprávy ve skladbě MIMIC-IV-Note."""
 
 
-def subject_of(note_id: str) -> str:
+def subject_of(note_id: str) -> SubjectId:
     """Subject_id pacienta z note_id propouštěcí zprávy ve skladbě MIMIC-IV-Note.
 
     Returns:
@@ -34,4 +37,4 @@ def subject_of(note_id: str) -> str:
     if match is None:
         msg = f"Neplatné note_id propouštěcí zprávy: {note_id!r}"
         raise InvalidNoteIdError(msg)
-    return match["subject"]
+    return int(match["subject"])

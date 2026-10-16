@@ -29,6 +29,7 @@ if TYPE_CHECKING:
     from datetime import datetime
 
     from mediparse.domain.corpus_audit import Ngram, Position, ReferenceNote
+    from mediparse.domain.identity import SubjectId
 
 _BLOCKING_VARIABLES: Final = MappingProxyType({
     "CI": "Audit čte MIMIC, a proto ve veřejném CI neběží.",
@@ -101,7 +102,7 @@ class OverlapReport(Protocol):
     """Report shod mimo repozitář: pozice a kolize subject_id, nikdy text zpráv."""
 
     def write(
-        self, positions: Sequence[Position], colliding_subjects: Collection[str]
+        self, positions: Sequence[Position], colliding_subjects: Collection[SubjectId]
     ) -> None:
         """Zapíše pozice sdílených n-gramů a kolidující subject_id."""
 
@@ -213,7 +214,10 @@ class CorpusAudit:
 
 
 def _overlap(
-    index: NgramIndex, shared: set[Ngram], colliding: set[str], report: OverlapReport
+    index: NgramIndex,
+    shared: set[Ngram],
+    colliding: set[SubjectId],
+    report: OverlapReport,
 ) -> AuditOverlap:
     positions = index.positions(shared)
     report.write(positions, colliding)

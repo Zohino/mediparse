@@ -136,14 +136,14 @@ def test_label_needs_colon_and_word_boundary() -> None:
 def test_scan_counts_rows_matches_and_subject_collisions() -> None:
     """Průchod referencí spočítá zprávy, sdílené n-gramy i kolize subject_id."""
     rows = [
-        ReferenceNote(subject_id="10000032", text="unrelated reference text"),
-        ReferenceNote(subject_id="90000001", text=SENTENCE),
+        ReferenceNote(subject_id=10000032, text="unrelated reference text"),
+        ReferenceNote(subject_id=90000001, text=SENTENCE),
     ]
 
-    result = scan(_index(), frozenset({"90000001"}), rows)
+    result = scan(_index(), frozenset({90000001}), rows)
 
     assert result.rows == len(rows)
-    assert result.colliding_subjects == {"90000001"}
+    assert result.colliding_subjects == {90000001}
     assert result.shared
 
 

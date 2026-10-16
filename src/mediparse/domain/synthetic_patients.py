@@ -23,6 +23,8 @@ if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
     from random import Random
 
+    from mediparse.domain.identity import SubjectId
+
 _MIN_MULTIPLE: Final = 2
 _BISECTION_STEPS: Final = 100
 
@@ -52,7 +54,7 @@ class SyntheticNote:
     """Zpráva syntetického pacienta s labely, které nese."""
 
     note_id: str
-    subject_id: int
+    subject_id: SubjectId
     labels: LabelSet
 
 
