@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Final
 if TYPE_CHECKING:
     from mediparse.domain.identity import SubjectId
 
+# Bez úvodní nuly a nuly: int() by "010" a "10" sloučil v jednoho pacienta.
 _NOTE_ID: Final = re.compile(r"(?P<subject>[1-9]\d*)-DS-\d+")
 
 

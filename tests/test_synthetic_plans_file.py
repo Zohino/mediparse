@@ -78,7 +78,7 @@ def test_plan_of_other_patient_than_note_id_fails_to_load(
     copy = PlansFile(tmp_path / "plans.jsonl")
     copy.save([broken])
 
-    with pytest.raises(InvalidInputError, match="subject_id"):
+    with pytest.raises(InvalidInputError, match="nepatří pacientovi"):
         copy.load()
 
 

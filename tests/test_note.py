@@ -6,14 +6,14 @@ import pytest
 
 from mediparse.domain.note import InvalidNoteIdError, note_id, subject_of
 
-MIMIC_SUBJECT: Final = 10000032
+SUBJECT: Final = 90000123
 
 
 def test_subject_is_parsed_from_note_id() -> None:
     """Subject_id je první část note_id ve skladbě MIMIC-IV-Note, jako číslo."""
-    subject = subject_of("10000032-DS-21")
+    subject = subject_of("90000123-DS-4")
 
-    assert subject == MIMIC_SUBJECT
+    assert subject == SUBJECT
     assert isinstance(subject, int)
 
 
@@ -28,6 +28,4 @@ def test_malformed_note_id_is_rejected(name: str) -> None:
 
 def test_note_id_and_subject_of_are_inverse() -> None:
     """Pacient se z vytvořeného note_id vrátí beze změny."""
-    subject = 90000123
-
-    assert subject_of(note_id(subject, 4)) == subject
+    assert subject_of(note_id(SUBJECT, 4)) == SUBJECT

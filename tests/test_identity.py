@@ -1,4 +1,4 @@
-"""Identita řádku matice: skladba, kterou vydává matice a přijímá trénink."""
+"""Identita pacienta a řádku matice: kladné číslo a skladba id, kterou vydává matice."""
 
 from __future__ import annotations
 

@@ -22,10 +22,7 @@ VALID = {
 
 def test_valid_config_is_parsed() -> None:
     """Platný JSON dá config s výčtem diagnózy."""
-    config = TrainingConfig.model_validate_json(
-        '{"row_id": "smoke", "diagnosis": "diabetes", "seed": 0, "folds": 2, '
-        '"regularization": 1.0}'
-    )
+    config = TrainingConfig.model_validate_json(json.dumps(VALID))
 
     assert config.row_id == "smoke"
     assert config.diagnosis is Diagnosis.DIABETES

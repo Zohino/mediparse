@@ -21,6 +21,7 @@ if TYPE_CHECKING:
     from collections.abc import Collection, Iterator, Sequence
 
     from mediparse.domain.corpus_audit import AuditRecord, Position
+    from mediparse.domain.identity import SubjectId
 
 CREATED_AT = datetime(2026, 9, 29, tzinfo=UTC)
 DISCHARGE_SHA = PINNED["discharge.csv.gz"]
@@ -105,12 +106,12 @@ class _Workspace:
 
 @dataclass
 class _Report:
-    written: list[tuple[tuple[Position, ...], frozenset[int]]] = field(
+    written: list[tuple[tuple[Position, ...], frozenset[SubjectId]]] = field(
         default_factory=list
     )
 
     def write(
-        self, positions: Sequence[Position], colliding_subjects: Collection[int]
+        self, positions: Sequence[Position], colliding_subjects: Collection[SubjectId]
     ) -> None:
         self.written.append((tuple(positions), frozenset(colliding_subjects)))
 

@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Annotated, Final, Self
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
 from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS
+from mediparse.domain.identity import SubjectId
 from mediparse.domain.labels import (
     LabelModel,
     LabelSet,
@@ -23,7 +24,6 @@ if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
     from random import Random
 
-    from mediparse.domain.identity import SubjectId
 
 _MIN_MULTIPLE: Final = 2
 _BISECTION_STEPS: Final = 100
@@ -35,7 +35,7 @@ class PatientModel(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     notes: PositiveInt
-    first_subject_id: PositiveInt
+    first_subject_id: SubjectId
     single_note_probability: Probability
     max_notes: Annotated[int, Field(ge=_MIN_MULTIPLE)]
     mean_notes_when_multiple: Annotated[float, Field(gt=_MIN_MULTIPLE)]
@@ -124,7 +124,7 @@ def _note_count(patients: PatientModel, ratio: float, rng: Random) -> int:
 
 
 def _patient_notes(
-    subject: int,
+    subject: SubjectId,
     count: int,
     joint: Mapping[LabelSet, float],
     acute: Mapping[LabelSet, float],
