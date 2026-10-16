@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING, Final
 import duckdb
 import pyarrow as pa
 import pyarrow.parquet as pq
+from duckdb import ColumnExpression, ConstantExpression, Expression, FunctionExpression
 
 from mediparse.domain.cohort import (
     CohortCounts,
@@ -17,6 +18,7 @@ from mediparse.domain.cohort import (
 )
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
+from mediparse.domain.matrix import Language
 from mediparse.infrastructure.note_table import SCHEMA
 
 if TYPE_CHECKING:
@@ -28,7 +30,7 @@ if TYPE_CHECKING:
 MIN_CHARS: Final = 100
 BATCH_ROWS: Final = 4096
 COMPRESSION: Final = "zstd"
-_STEPS: Final = tuple(FunnelStepName)
+LANGUAGE: Final = Language.EN
 _BASE: Final = """
 CREATE TEMPORARY TABLE base AS
 WITH admissions AS (
@@ -71,34 +73,38 @@ SELECT j.*, e.copy
 FROM joined j
 LEFT JOIN eligible e ON e.note_id = j.note_id
 """
-_FUNNEL: Final = """
-SELECT 1, count(*), count(DISTINCT subject_id) FROM base
-UNION ALL SELECT 2, count(*), count(DISTINCT subject_id) FROM base WHERE has_icd
-UNION ALL SELECT 3, count(*), count(DISTINCT subject_id) FROM base WHERE copy IS NOT NULL
-UNION ALL SELECT 4, count(*), count(DISTINCT subject_id) FROM base WHERE copy = 1
-ORDER BY 1
-"""
+_EVERY_ROW: Final = True
+_FILTERS: Final[dict[FunnelStepName, Expression]] = {
+    FunnelStepName.ALL_NOTES: ConstantExpression(_EVERY_ROW),
+    FunnelStepName.WITH_ICD: ColumnExpression("has_icd"),
+    FunnelStepName.LONG_ENOUGH: ColumnExpression("copy").isnotnull(),
+    FunnelStepName.UNIQUE: ColumnExpression("copy") == ConstantExpression(1),
+}
 _POSITIVES: Final = """
 SELECT diagnosis, count(*)
 FROM (SELECT unnest(labels) AS diagnosis FROM base WHERE copy = 1)
 GROUP BY diagnosis
 """
 _COHORT: Final = """
-SELECT
-    b.note_id,
-    b.subject_id,
-    'en' AS language,
-    d.text,
-    list_contains(b.labels, 'diabetes') AS diabetes,
-    list_contains(b.labels, 'copd') AS copd,
-    list_contains(b.labels, 'ckd') AS ckd,
-    list_contains(b.labels, 'pneumonia') AS pneumonia,
-    list_contains(b.labels, 'atrial_fibrillation') AS atrial_fibrillation
+SELECT b.*, d.text
 FROM base b
-JOIN discharge d ON d.note_id = b.note_id
+JOIN discharge d USING (note_id)
 WHERE b.copy = 1
-ORDER BY b.note_id
 """
+_COLUMNS: Final = (
+    ColumnExpression("note_id"),
+    ColumnExpression("subject_id"),
+    ConstantExpression(LANGUAGE.value).alias("language"),
+    ColumnExpression("text"),
+    *(
+        FunctionExpression(
+            "list_contains",
+            ColumnExpression("labels"),
+            ConstantExpression(diagnosis.value),
+        ).alias(diagnosis.value)
+        for diagnosis in Diagnosis
+    ),
+)
 
 
 @dataclass(frozen=True)
@@ -214,9 +220,16 @@ def _select(
 
 
 def _counts(con: duckdb.DuckDBPyConnection) -> CohortCounts:
+    base = con.table("base")
     funnel = tuple(
-        FunnelStep(step=_STEPS[index - 1], notes=notes, patients=patients)
-        for index, notes, patients in con.execute(_FUNNEL).fetchall()
+        FunnelStep(step=step, notes=notes, patients=patients)
+        for step, condition in _FILTERS.items()
+        for notes, patients in [
+            base
+            .filter(condition)
+            .aggregate("count(*), count(DISTINCT subject_id)")
+            .fetchall()[0]
+        ]
     )
     found = dict(con.execute(_POSITIVES).fetchall())
     positives = {diagnosis: found.get(diagnosis.value, 0) for diagnosis in Diagnosis}
@@ -225,7 +238,8 @@ def _counts(con: duckdb.DuckDBPyConnection) -> CohortCounts:
 
 def _stream(con: duckdb.DuckDBPyConnection, out: Path) -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
-    reader = con.sql(_COHORT).to_arrow_reader(BATCH_ROWS)
+    # Řazení je poslední operace: pořadí řádků vstupuje do cohort_sha256 v manifestu.
+    cohort = con.sql(_COHORT).select(*_COLUMNS).order("note_id")
     with pq.ParquetWriter(out, SCHEMA, compression=COMPRESSION) as writer:
-        for batch in reader:
+        for batch in cohort.to_arrow_reader(BATCH_ROWS):
             writer.write_batch(batch.cast(SCHEMA), row_group_size=BATCH_ROWS)
