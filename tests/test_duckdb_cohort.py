@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Final
 
+import pyarrow as pa
+import pyarrow.parquet as pq
 import pytest
 
 from mediparse.domain.cohort import CohortCounts, FunnelStepName, label_codes
@@ -37,7 +39,9 @@ def _build(root: Path, name: str = "cohort") -> tuple[CohortCounts, Path]:
     out = root / f"{name}.parquet"
     source = DuckDbCohort(discharge, diagnoses, out, root / f"spill-{name}")
     labels = label_codes(source.codes(), CODES).diagnoses
-    return source.write(labels), out
+    with source.select(labels) as selected:
+        selected.write()
+        return selected.counts, out
 
 
 def _notes(out: Path) -> dict[str, InputNote]:
@@ -156,21 +160,84 @@ def test_missing_input_is_invalid_input(tmp_path: Path) -> None:
         source.codes()
 
 
-def test_cell_below_threshold_is_refused_before_anything_is_written(
-    tmp_path: Path,
-) -> None:
-    """Kohorta s diagnózou pod deset zpráv neskončí v souboru."""
+def _select_and_write(source: DuckDbCohort) -> None:
+    with source.select(label_codes(source.codes(), CODES).diagnoses) as selected:
+        selected.write()
+
+
+def _small_source(root: Path) -> DuckDbCohort:
     discharge, diagnoses = write_tables(
-        tmp_path,
+        root,
         [note("n01", 1, 10, text("a"))],
         [icd(10, 1, "E119", "10")],
         padded=False,
     )
+    return DuckDbCohort(discharge, diagnoses, root / "c.parquet", root / "s")
+
+
+def test_small_cohort_is_selected_and_written_by_adapter(tmp_path: Path) -> None:
+    """Pravidlo DUA už adaptér nedrží: malou kohortu vybere i zapíše."""
+    source = _small_source(tmp_path)
+
+    with source.select(label_codes(source.codes(), CODES).diagnoses) as selected:
+        selected.write()
+
+    assert selected.counts.funnel[-1].notes == 1
+    assert [
+        item.note_id for item in ParquetNoteTable(tmp_path / "c.parquet").read()
+    ] == ["n01"]
+
+
+def test_select_without_write_creates_no_file(tmp_path: Path) -> None:
+    """Výběr sám nic nezapisuje; soubor vzniká až ve ``write``."""
+    source = _small_source(tmp_path)
+
+    with source.select(label_codes(source.codes(), CODES).diagnoses):
+        pass
+
+    assert not (tmp_path / "c.parquet").exists()
+
+
+def test_output_parent_that_is_a_file_is_invalid_input(tmp_path: Path) -> None:
+    """Chyba disku při zápisu je InvalidInputError."""
+    discharge, diagnoses = write_tables(tmp_path)
+    blocker = tmp_path / "blocker"
+    blocker.write_text("soubor místo adresáře", encoding="utf-8")
+    source = DuckDbCohort(discharge, diagnoses, blocker / "c.parquet", tmp_path / "s")
+
+    with pytest.raises(InvalidInputError, match="zapsat"):
+        _select_and_write(source)
+
+
+def test_duckdb_error_in_write_is_invalid_input(tmp_path: Path) -> None:
+    """Chyba DuckDB ve ``write`` po úspěšném výběru je InvalidInputError."""
+    source = _small_source(tmp_path)
+
+    with source.select(label_codes(source.codes(), CODES).diagnoses) as selected:
+        selected.connection.execute("DROP TABLE base")
+        with pytest.raises(InvalidInputError, match="zapsat"):
+            selected.write()
+
+
+def test_null_subject_id_in_write_is_invalid_input_and_leaves_no_file(
+    tmp_path: Path,
+) -> None:
+    """Přetypování na schéma selže na NULL ve ``subject_id``; chyba je InvalidInputError a soubor nezůstane."""
+    discharge, diagnoses = write_tables(tmp_path)
+    pq.write_table(
+        pa.table({
+            "note_id": ["n01"],
+            "subject_id": pa.array([None], pa.string()),
+            "hadm_id": ["10"],
+            "text": [text("a")],
+        }),
+        discharge,
+    )
     out = tmp_path / "c.parquet"
     source = DuckDbCohort(discharge, diagnoses, out, tmp_path / "s")
 
-    with pytest.raises(InvalidInputError, match="diabetes"):
-        source.write(label_codes(source.codes(), CODES).diagnoses)
+    with pytest.raises(InvalidInputError, match="zapsat"):
+        _select_and_write(source)
 
     assert not out.exists()
 

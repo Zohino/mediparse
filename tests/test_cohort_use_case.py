@@ -1,47 +1,87 @@
-"""Use case materializace kohorty: kódy ze zdroje, štítky z domény, zápis zdrojem."""
+"""Use case materializace kohorty: kódy ze zdroje, štítky z domény, pravidlo DUA před zápisem."""
 
 from __future__ import annotations
 
+from contextlib import contextmanager
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
+import pytest
+
 from mediparse.application.cohort import CohortMaterialization
-from mediparse.domain.cohort import CohortCounts, FunnelStep, FunnelStepName
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
-from tests.cohort_support import CODES
+from tests.cohort_support import (
+    CODES,
+    EMPTY_COHORT,
+    FEW_NEGATIVES,
+    FEW_POSITIVES,
+    make_counts,
+)
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable, Mapping
+    from collections.abc import Generator, Iterable, Mapping
 
-    from mediparse.domain.cohort import RawCode
+    from mediparse.domain.cohort import CohortCounts, RawCode
 
-COUNTS = CohortCounts(
-    funnel=tuple(
-        FunnelStep(step=step, notes=40, patients=40) for step in FunnelStepName
-    ),
-    positives=dict.fromkeys(Diagnosis, 20),
-)
+
+@dataclass
+class _Selected:
+    counts: CohortCounts
+    events: list[str]
+
+    def write(self) -> None:
+        self.events.append("write")
 
 
 @dataclass
 class _Source:
     pairs: list[RawCode]
-    written: list[Mapping[RawCode, Diagnosis]] = field(default_factory=list)
+    counts: CohortCounts = field(default_factory=make_counts)
+    selected: list[Mapping[RawCode, Diagnosis]] = field(default_factory=list)
+    events: list[str] = field(default_factory=list)
 
     def codes(self) -> Iterable[RawCode]:
         return self.pairs
 
-    def write(self, labels: Mapping[RawCode, Diagnosis]) -> CohortCounts:
-        self.written.append(labels)
-        return COUNTS
+    @contextmanager
+    def select(self, labels: Mapping[RawCode, Diagnosis]) -> Generator[_Selected]:
+        self.selected.append(labels)
+        self.events.append("open")
+        try:
+            yield _Selected(self.counts, self.events)
+        finally:
+            self.events.append("close")
 
 
-def test_labels_from_domain_go_to_source_and_result_carries_invalid_count() -> None:
-    """Zdroj dostane mapování z domény; neplatné dvojice se vrátí v počtu."""
+def test_publishable_cohort_is_written_once_and_result_carries_counts() -> None:
+    """Zdroj dostane mapování z domény, zapíše se jednou; výsledek nese agregáty i neplatné."""
     source = _Source([("10", "E119"), ("10", "E11.9"), ("10", "S72")])
 
     result = CohortMaterialization(source, CODES).run()
 
-    assert source.written == [{("10", "E119"): Diagnosis.DIABETES}]
-    assert result.counts == COUNTS
+    assert source.selected == [{("10", "E119"): Diagnosis.DIABETES}]
+    assert source.events == ["open", "write", "close"]
+    assert result.counts == source.counts
     assert result.invalid_codes == 1
+
+
+@pytest.mark.parametrize(
+    "counts",
+    [
+        FEW_POSITIVES,
+        FEW_NEGATIVES,
+        EMPTY_COHORT,
+    ],
+    ids=["few-positives", "few-negatives", "empty"],
+)
+def test_unpublishable_cohort_is_refused_before_write_and_selection_closes(
+    counts: CohortCounts,
+) -> None:
+    """Pravidlo DUA drží use case: odmítnutí zápis nezavolá a výběr se zavře."""
+    source = _Source([("10", "E119")], counts)
+
+    with pytest.raises(InvalidInputError):
+        CohortMaterialization(source, CODES).run()
+
+    assert source.events == ["open", "close"]

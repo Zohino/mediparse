@@ -6,7 +6,7 @@ from pydantic import BaseModel, ConfigDict
 class TableShape(BaseModel):
     """Počet záznamů a sloupce tabulky v pořadí souboru."""
 
-    model_config = ConfigDict(frozen=True)
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     records: int
     columns: tuple[str, ...]

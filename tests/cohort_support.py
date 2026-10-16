@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Final
 
+from mediparse.domain.cohort import CohortCounts, FunnelStep, FunnelStepName
 from mediparse.domain.icd import DiagnosisCodes, IcdVersion
 from mediparse.domain.labels import Diagnosis
 from mediparse.infrastructure.parquet_file import write_string_table
@@ -39,6 +40,39 @@ DIAGNOSES_COLUMNS: Final = (
     "icd_code",
     "icd_version",
 )
+
+UNIQUE: Final = 50
+
+
+def make_counts(
+    positives: dict[Diagnosis, int] | None = None,
+    unique: int = UNIQUE,
+    funnel: tuple[FunnelStep, ...] | None = None,
+) -> CohortCounts:
+    """Agregáty kohorty; bez argumentů jsou publikovatelné (polovina zpráv pozitivní).
+
+    Returns:
+        Agregáty s trychtýřem o stejném počtu zpráv a pacientů v každém kroku.
+    """
+    return CohortCounts(
+        funnel=funnel
+        or tuple(
+            FunnelStep(step=step, notes=unique, patients=unique)
+            for step in FunnelStepName
+        ),
+        positives=positives or dict.fromkeys(Diagnosis, unique // 2),
+    )
+
+
+FEW_POSITIVES: Final = make_counts({
+    **dict.fromkeys(Diagnosis, UNIQUE // 2),
+    Diagnosis.COPD: 7,
+})
+FEW_NEGATIVES: Final = make_counts({
+    **dict.fromkeys(Diagnosis, UNIQUE // 2),
+    Diagnosis.DIABETES: 43,
+})
+EMPTY_COHORT: Final = make_counts(dict.fromkeys(Diagnosis, 0), unique=0)
 
 type NoteRow = dict[str, str | None]
 type IcdRow = dict[str, str | None]

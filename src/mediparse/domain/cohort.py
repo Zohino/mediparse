@@ -74,7 +74,7 @@ class FunnelStepName(StrEnum):
 class FunnelStep(BaseModel):
     """Počet zpráv a pacientů, kteří krokem trychtýře prošli."""
 
-    model_config = ConfigDict(frozen=True, extra="forbid")
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     step: FunnelStepName
     notes: int
@@ -84,7 +84,7 @@ class FunnelStep(BaseModel):
 class CohortCounts(BaseModel):
     """Agregáty kohorty: trychtýř ve čtyřech krocích a pozitivní zprávy každé diagnózy."""
 
-    model_config = ConfigDict(frozen=True, extra="forbid")
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     funnel: tuple[FunnelStep, ...]
     positives: dict[Diagnosis, int]

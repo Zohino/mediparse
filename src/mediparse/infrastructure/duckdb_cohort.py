@@ -2,26 +2,27 @@
 
 from __future__ import annotations
 
-from contextlib import closing
+from contextlib import closing, contextmanager, suppress
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
 import duckdb
 import pyarrow as pa
 import pyarrow.parquet as pq
+from duckdb import ColumnExpression, ConstantExpression, Expression, FunctionExpression
 
 from mediparse.domain.cohort import (
     CohortCounts,
     FunnelStep,
     FunnelStepName,
-    ensure_publishable,
 )
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
+from mediparse.domain.language import Language
 from mediparse.infrastructure.note_table import SCHEMA
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Generator, Mapping
     from pathlib import Path
 
     from mediparse.domain.cohort import RawCode
@@ -29,7 +30,7 @@ if TYPE_CHECKING:
 MIN_CHARS: Final = 100
 BATCH_ROWS: Final = 4096
 COMPRESSION: Final = "zstd"
-_STEPS: Final = tuple(FunnelStepName)
+LANGUAGE: Final = Language.EN
 _BASE: Final = """
 CREATE TEMPORARY TABLE base AS
 WITH admissions AS (
@@ -72,34 +73,37 @@ SELECT j.*, e.copy
 FROM joined j
 LEFT JOIN eligible e ON e.note_id = j.note_id
 """
-_FUNNEL: Final = """
-SELECT 1, count(*), count(DISTINCT subject_id) FROM base
-UNION ALL SELECT 2, count(*), count(DISTINCT subject_id) FROM base WHERE has_icd
-UNION ALL SELECT 3, count(*), count(DISTINCT subject_id) FROM base WHERE copy IS NOT NULL
-UNION ALL SELECT 4, count(*), count(DISTINCT subject_id) FROM base WHERE copy = 1
-ORDER BY 1
-"""
+_FILTERS: Final[dict[FunnelStepName, Expression]] = {
+    FunnelStepName.ALL_NOTES: ConstantExpression(value=True),
+    FunnelStepName.WITH_ICD: ColumnExpression("has_icd"),
+    FunnelStepName.LONG_ENOUGH: ColumnExpression("copy").isnotnull(),
+    FunnelStepName.UNIQUE: ColumnExpression("copy") == ConstantExpression(1),
+}
 _POSITIVES: Final = """
 SELECT diagnosis, count(*)
 FROM (SELECT unnest(labels) AS diagnosis FROM base WHERE copy = 1)
 GROUP BY diagnosis
 """
 _COHORT: Final = """
-SELECT
-    b.note_id,
-    b.subject_id,
-    'en' AS language,
-    d.text,
-    list_contains(b.labels, 'diabetes') AS diabetes,
-    list_contains(b.labels, 'copd') AS copd,
-    list_contains(b.labels, 'ckd') AS ckd,
-    list_contains(b.labels, 'pneumonia') AS pneumonia,
-    list_contains(b.labels, 'atrial_fibrillation') AS atrial_fibrillation
+SELECT b.*, d.text
 FROM base b
-JOIN discharge d ON d.note_id = b.note_id
+JOIN discharge d USING (note_id)
 WHERE b.copy = 1
-ORDER BY b.note_id
 """
+_COLUMNS: Final = (
+    ColumnExpression("note_id"),
+    ColumnExpression("subject_id"),
+    ConstantExpression(LANGUAGE.value).alias("language"),
+    ColumnExpression("text"),
+    *(
+        FunctionExpression(
+            "list_contains",
+            ColumnExpression("labels"),
+            ConstantExpression(diagnosis.value),
+        ).alias(diagnosis.value)
+        for diagnosis in Diagnosis
+    ),
+)
 
 
 @dataclass(frozen=True)
@@ -152,25 +156,49 @@ class DuckDbCohort:
                 raise InvalidInputError(msg) from error
         return rows
 
-    def write(self, labels: Mapping[RawCode, Diagnosis]) -> CohortCounts:
-        """Vybere kohortu, ověří agregáty a teprve poté zapíše parquet.
+    @contextmanager
+    def select(self, labels: Mapping[RawCode, Diagnosis]) -> Generator[DuckDbSelection]:
+        """Vybere kohortu do dočasné tabulky a spočítá agregáty; spojení žije do konce kontextu.
 
-        Returns:
-            Trychtýř a počty pozitivních zpráv zapsané kohorty.
+        Yields:
+            Výběr s agregáty a zápisem téže dočasné tabulky.
 
         Raises:
-            InvalidInputError: Vstup nejde číst nebo kohorta porušuje pravidla domény.
+            InvalidInputError: Vstup nejde číst nebo ho DuckDB nezpracuje.
         """
         with closing(self.connect()) as con:
             try:
                 _select(con, labels)
                 counts = _counts(con)
-                ensure_publishable(counts)
-                _stream(con, self.out)
             except duckdb.Error as error:
                 msg = f"Kohortu nelze sestavit z {self.discharge} a {self.diagnoses}: {error}"
                 raise InvalidInputError(msg) from error
-        return counts
+            yield DuckDbSelection(con, self.out, counts)
+
+
+@dataclass(frozen=True)
+class DuckDbSelection:
+    """Vybraná kohorta v dočasné tabulce ``base`` otevřeného spojení."""
+
+    connection: duckdb.DuckDBPyConnection
+    out: Path
+    counts: CohortCounts
+
+    def write(self) -> None:
+        """Zapíše vybrané zprávy do parquetu.
+
+        Raises:
+            InvalidInputError: Zápis proudu selhal v DuckDB nebo na disku.
+        """
+        try:
+            _stream(self.connection, self.out)
+        # pyarrow při přetypování na SCHEMA (NULL, jiná jména či pořadí sloupců) hází holý ValueError, ArrowInvalid ho nechytí.
+        except (duckdb.Error, OSError, ValueError) as error:
+            # Rodič výstupu může být soubor; úklid nesmí zakrýt původní chybu.
+            with suppress(OSError):
+                self.out.unlink(missing_ok=True)
+            msg = f"Kohortu nelze zapsat do {self.out}: {error}"
+            raise InvalidInputError(msg) from error
 
 
 def _view(con: duckdb.DuckDBPyConnection, name: str, path: Path) -> None:
@@ -194,11 +222,19 @@ def _select(
     con.execute(_BASE, {"min_chars": MIN_CHARS})
 
 
-def _counts(con: duckdb.DuckDBPyConnection) -> CohortCounts:
-    funnel = tuple(
-        FunnelStep(step=_STEPS[index - 1], notes=notes, patients=patients)
-        for index, notes, patients in con.execute(_FUNNEL).fetchall()
+def _step(base: duckdb.DuckDBPyRelation, step: FunnelStepName) -> FunnelStep:
+    notes, patients = (
+        base
+        .filter(_FILTERS[step])
+        .aggregate("count(*), count(DISTINCT subject_id)")
+        .fetchall()[0]
     )
+    return FunnelStep(step=step, notes=notes, patients=patients)
+
+
+def _counts(con: duckdb.DuckDBPyConnection) -> CohortCounts:
+    base = con.table("base")
+    funnel = tuple(_step(base, step) for step in FunnelStepName)
     found = dict(con.execute(_POSITIVES).fetchall())
     positives = {diagnosis: found.get(diagnosis.value, 0) for diagnosis in Diagnosis}
     return CohortCounts(funnel=funnel, positives=positives)
@@ -206,7 +242,8 @@ def _counts(con: duckdb.DuckDBPyConnection) -> CohortCounts:
 
 def _stream(con: duckdb.DuckDBPyConnection, out: Path) -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
-    reader = con.sql(_COHORT).to_arrow_reader(BATCH_ROWS)
+    # Řazení je poslední operace: pořadí řádků vstupuje do cohort_sha256 v manifestu.
+    cohort = con.sql(_COHORT).select(*_COLUMNS).order("note_id")
     with pq.ParquetWriter(out, SCHEMA, compression=COMPRESSION) as writer:
-        for batch in reader:
+        for batch in cohort.to_arrow_reader(BATCH_ROWS):
             writer.write_batch(batch.cast(SCHEMA), row_group_size=BATCH_ROWS)

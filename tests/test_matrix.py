@@ -9,7 +9,8 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.matrix import ExperimentMatrix, Language, Model, Tier
+from mediparse.domain.language import Language
+from mediparse.domain.matrix import ExperimentMatrix, Model, Tier
 from mediparse.infrastructure.matrix_manifest import load_matrix
 from tests.support import REPOSITORY_MATRIX
 

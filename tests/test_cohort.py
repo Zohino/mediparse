@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Final
+import re
 
 import pytest
 from pydantic import ValidationError
@@ -20,9 +20,14 @@ from mediparse.domain.cohort import (
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
 from mediparse.domain.run_manifest import SourceRevision
-from tests.cohort_support import CODES
-
-POSITIVE: Final = 20
+from tests.cohort_support import (
+    CODES,
+    EMPTY_COHORT,
+    FEW_NEGATIVES,
+    FEW_POSITIVES,
+    UNIQUE,
+    make_counts,
+)
 
 
 def test_valid_codes_of_both_versions_get_diagnosis() -> None:
@@ -89,52 +94,53 @@ def _funnel(
     )
 
 
-def _counts(
-    positives: dict[Diagnosis, int] | None = None,
-    funnel: tuple[FunnelStep, ...] | None = None,
-) -> CohortCounts:
-    return CohortCounts(
-        funnel=funnel or _funnel(100, 80, 60, 50),
-        positives=positives or dict.fromkeys(Diagnosis, POSITIVE),
-    )
-
-
 def test_counts_with_ten_and_ten_pass() -> None:
     """Deset pozitivních a deset negativních zpráv je nejmenší přípustná buňka."""
-    counts = _counts(dict.fromkeys(Diagnosis, MIN_CELL), _funnel(30, 30, 30, 20))
+    counts = make_counts(
+        dict.fromkeys(Diagnosis, MIN_CELL), funnel=_funnel(30, 30, 30, 20)
+    )
 
     ensure_publishable(counts)
 
     assert counts.positives[Diagnosis.CKD] == MIN_CELL
 
 
-@pytest.mark.parametrize("positives", [0, 9])
+def _numbers(error: pytest.ExceptionInfo[InvalidInputError]) -> set[str]:
+    return set(re.findall(r"\d+", str(error.value)))
+
+
+@pytest.mark.parametrize(
+    "counts",
+    [
+        FEW_POSITIVES,
+        make_counts({**dict.fromkeys(Diagnosis, UNIQUE // 2), Diagnosis.COPD: 0}),
+    ],
+    ids=["seven", "zero"],
+)
 def test_diagnosis_with_few_positives_is_refused_without_number(
-    positives: int,
+    counts: CohortCounts,
 ) -> None:
-    """Chyba jmenuje diagnózu a neprozradí počet."""
+    """Hláška jmenuje diagnózu a z čísel nese nejvýš práh."""
     with pytest.raises(InvalidInputError, match="copd") as error:
-        ensure_publishable(
-            _counts({**dict.fromkeys(Diagnosis, POSITIVE), Diagnosis.COPD: positives})
-        )
+        ensure_publishable(counts)
 
-    assert str(positives) not in str(error.value).replace("10", "")
+    assert _numbers(error) <= {str(MIN_CELL)}
 
 
-def test_diagnosis_with_few_negatives_is_refused() -> None:
-    """Diagnóza, kterou má skoro každá zpráva, nemá dost negativních."""
-    with pytest.raises(InvalidInputError, match="diabetes"):
-        ensure_publishable(
-            _counts({**dict.fromkeys(Diagnosis, POSITIVE), Diagnosis.DIABETES: 41})
-        )
+def test_diagnosis_with_few_negatives_is_refused_without_number() -> None:
+    """Diagnóza, kterou má skoro každá zpráva, nemá dost negativních a hláška je bez počtů."""
+    with pytest.raises(InvalidInputError, match="diabetes") as error:
+        ensure_publishable(FEW_NEGATIVES)
+
+    assert _numbers(error) <= {str(MIN_CELL)}
 
 
-def test_empty_cohort_is_refused() -> None:
-    """Kohorta bez zpráv nemá z čeho vybírat."""
-    with pytest.raises(InvalidInputError, match="prázdná"):
-        ensure_publishable(
-            _counts(funnel=_funnel(100, 80, 60, 0, patients=(50, 40, 30, 0)))
-        )
+def test_empty_cohort_is_refused_without_number() -> None:
+    """Kohorta bez zpráv nemá z čeho vybírat; hláška je bez počtů."""
+    with pytest.raises(InvalidInputError, match="prázdná") as error:
+        ensure_publishable(EMPTY_COHORT)
+
+    assert _numbers(error) <= {str(MIN_CELL)}
 
 
 def test_funnel_must_have_four_steps_in_order() -> None:
@@ -142,15 +148,25 @@ def test_funnel_must_have_four_steps_in_order() -> None:
     steps = _funnel(100, 80, 60, 50)
 
     with pytest.raises(ValidationError, match="trychtýře"):
-        _counts(funnel=steps[:3])
+        make_counts(funnel=steps[:3])
     with pytest.raises(ValidationError, match="trychtýře"):
-        _counts(funnel=(steps[1], steps[0], *steps[2:]))
+        make_counts(funnel=(steps[1], steps[0], *steps[2:]))
 
 
 def test_funnel_must_not_grow() -> None:
     """Každý krok vybírá z předchozího, počty nerostou."""
     with pytest.raises(ValidationError, match="trychtýře"):
-        _counts(funnel=_funnel(100, 80, 90, 50))
+        make_counts(funnel=_funnel(100, 80, 90, 50))
+
+
+def test_funnel_step_rejects_numeric_string() -> None:
+    """Vnořený model je přísný sám: počet jako řetězec neprojde."""
+    with pytest.raises(ValidationError):
+        FunnelStep.model_validate({
+            "step": FunnelStepName.ALL_NOTES,
+            "notes": "5",
+            "patients": 5,
+        })
 
 
 def _manifest(**overrides: object) -> CohortManifest:
@@ -160,7 +176,7 @@ def _manifest(**overrides: object) -> CohortManifest:
         "sources": {"discharge.csv.gz": "c" * 64},
         "packages": {"python": "3.13.0"},
         "source": SourceRevision(commit="d" * 40, dirty=False),
-        "counts": _counts(),
+        "counts": make_counts(),
         "invalid_codes": 0,
     }
     return CohortManifest.model_validate(fields | overrides)
@@ -170,7 +186,7 @@ def test_manifest_serializes_counts_by_diagnosis_name() -> None:
     """Pozitivní zprávy jsou v JSON pod jménem diagnózy."""
     dumped = _manifest().model_dump(mode="json")
 
-    assert dumped["counts"]["positives"]["atrial_fibrillation"] == POSITIVE
+    assert dumped["counts"]["positives"]["atrial_fibrillation"] == UNIQUE // 2
     assert dumped["counts"]["funnel"][0]["step"] == "all_notes"
 
 

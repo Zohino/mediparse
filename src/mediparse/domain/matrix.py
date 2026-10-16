@@ -9,17 +9,12 @@ from typing import TYPE_CHECKING, Annotated, Self
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
+from mediparse.domain.language import Language
+
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
 RowId = Annotated[str, Field(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")]
-
-
-class Language(StrEnum):
-    """Jazyk vstupních zpráv; čeština vzniká výhradně strojovým překladem."""
-
-    EN = "en"
-    CS = "cs"
 
 
 class Tier(StrEnum):

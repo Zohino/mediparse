@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import json
+import logging
+import re
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.cohort import CohortManifest
+from mediparse.domain.cohort import MIN_CELL, CohortManifest
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
 from mediparse.domain.run_manifest import SourceRevision
@@ -105,7 +107,8 @@ def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
 def test_cell_below_threshold_is_refused_and_nothing_is_written(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
-    """Diagnóza pod deset zpráv krok odmítne; hláška ji jmenuje a manifest nevznikne."""
+    """Diagnóza pod deset zpráv krok odmítne; log ji jmenuje a nenese počty."""
+    caplog.set_level(logging.DEBUG)
     discharge, diagnoses = write_tables(
         tmp_path,
         [note("n01", 1, 10, text("a"))],
@@ -127,7 +130,9 @@ def test_cell_below_threshold_is_refused_and_nothing_is_written(
     )
 
     assert code is ExitCode.REFUSED
-    assert "diabetes" in caplog.text
+    assert any("diabetes" in message for message in caplog.messages)
+    numbers = {n for message in caplog.messages for n in re.findall(r"\d+", message)}
+    assert numbers <= {str(MIN_CELL)}
     assert not out.exists()
     assert not manifest.exists()
 
