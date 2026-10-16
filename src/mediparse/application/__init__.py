@@ -7,10 +7,13 @@ Snakemake, ne use case.
 Signalizace odmítnutí, kterou dodržuje každý use case:
 
 - chybný vstup, config nebo data jsou ``InvalidInputError`` propuštěná ke vstupnímu
-  bodu, který ji převede na REFUSED; use case ji nechytá ani nevrací jako hodnotu;
+  bodu, který ji převede na REFUSED; chyby čtení z adaptérů use case nechytá ani
+  nevrací jako hodnotu;
 - věcný výsledek kontroly je outcome typ, který vstupní bod mapuje na OK, BLOCKED
-  nebo REFUSED;
+  nebo REFUSED; outcome s odmítnutím má jen use case, jehož výsledkem je výčet stavů
+  kontroly (audit, provenance), a jen pro předpoklady, které ověřuje sám;
 - porušený invariant programu je obyčejná výjimka s tracebackem;
 - ``run`` nevrací ``None``;
-- data configu jsou argumenty ``run``, v polích dataclass jsou jen porty.
+- data configu jsou argumenty ``run``; v polích dataclass jsou porty a neměnné
+  nastavení složené při startu, ne data, se kterými krok běží.
 """

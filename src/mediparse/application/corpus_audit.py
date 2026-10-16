@@ -169,17 +169,14 @@ class CorpusAudit:
             for language, texts in by_language.items()
             for note_id, text in texts.items()
         }
-        try:
-            subjects = frozenset(
-                subject_of(note_id)
-                for texts in by_language.values()
-                for note_id in texts
-            )
-            problem = _reference_problem(self.references, reference_sha256)
-        except InvalidNoteIdError as error:
-            problem = str(error)
+        problem = _note_id_problem(by_language) or _reference_problem(
+            self.references, reference_sha256
+        )
         if problem is not None:
             return AuditRefused(problem)
+        subjects = frozenset(
+            subject_of(note_id) for texts in by_language.values() for note_id in texts
+        )
         index = NgramIndex(notes, self.structure_labels)
         scans = tuple(
             scan(index, subjects, reference.notes()) for reference in self.references
@@ -233,6 +230,16 @@ def _overlap(
         colliding_subjects=len(colliding),
         notes=tuple(sorted({position.note for position in positions})),
     )
+
+
+def _note_id_problem(by_language: Mapping[Language, Mapping[str, str]]) -> str | None:
+    try:
+        for texts in by_language.values():
+            for note_id in texts:
+                subject_of(note_id)
+    except InvalidNoteIdError as error:
+        return str(error)
+    return None
 
 
 def _reference_problem(

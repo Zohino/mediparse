@@ -7,7 +7,6 @@ a šablonou v repu; data MIMIC nečte.
 from __future__ import annotations
 
 import argparse
-import logging
 import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -27,8 +26,6 @@ from mediparse.infrastructure.verbalization_template import (
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
-
-logger = logging.getLogger(__name__)
 
 
 def main() -> ExitCode:
