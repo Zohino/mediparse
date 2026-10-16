@@ -1,4 +1,4 @@
-"""Otisky: SHA-256 souboru, SHA-1 commitu a otisk sady souborů."""
+"""Otisky: hexadecimální SHA-256, celý SHA-1 commitu a otisk sady souborů."""
 
 from __future__ import annotations
 

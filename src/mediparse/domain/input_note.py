@@ -1,4 +1,4 @@
-"""Řádek vstupní tabulky: zpráva v jednom jazyce s labely svého plánu."""
+"""Řádek vstupní tabulky: zpráva v jednom jazyce s labely pětice."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 @dataclass(frozen=True)
 class InputNote:
-    """Řádek vstupní tabulky: text zprávy v jednom jazyce a labely z jejího plánu."""
+    """Řádek vstupní tabulky: text zprávy v jednom jazyce a labely diagnóz pětice."""
 
     note_id: str
     subject_id: int
