@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 
 from pydantic import BaseModel, ConfigDict, model_validator
 
-from mediparse.domain.corpus_audit import Sha256
+from mediparse.domain.digest import Sha256
 from mediparse.infrastructure.input_file import parse_file
 
 TABLES_PATH: Final = Path("config/mimic_tables.json")

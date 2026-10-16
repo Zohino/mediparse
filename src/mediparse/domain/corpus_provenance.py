@@ -14,7 +14,7 @@ from pydantic import (
     PositiveInt,
 )
 
-from mediparse.domain.corpus_audit import CommitSha, Sha256, fingerprint
+from mediparse.domain.digest import CommitSha, Sha256, fingerprint
 from mediparse.domain.verbalization import render_prompt
 
 if TYPE_CHECKING:

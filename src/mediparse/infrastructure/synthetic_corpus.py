@@ -11,12 +11,12 @@ from pydantic import BaseModel, ValidationError
 from mediparse.domain.corpus_audit import (
     AuditRecord,
     InvalidAuditRecordError,
-    fingerprint,
 )
 from mediparse.domain.corpus_provenance import (
     InvalidProvenanceRecordError,
     ProvenanceRecord,
 )
+from mediparse.domain.digest import fingerprint
 from mediparse.infrastructure.file_digest import file_sha256
 
 CORPUS_ROOT: Final = Path("resources/synthetic")
