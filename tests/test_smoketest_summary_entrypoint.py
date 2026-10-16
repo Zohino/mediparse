@@ -5,8 +5,8 @@ from __future__ import annotations
 import io
 from typing import TYPE_CHECKING
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import BinaryMetrics, DiagnosisMetrics, Prediction
-from mediparse.domain.labels import Diagnosis
 from mediparse.entrypoints import smoketest_summary
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.metrics_table import ParquetMetricsTable

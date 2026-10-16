@@ -9,8 +9,8 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.application.cohort import CohortMaterialization
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import Diagnosis
 from tests.cohort_support import (
     CODES,
     EMPTY_COHORT,

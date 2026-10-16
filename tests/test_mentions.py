@@ -7,7 +7,7 @@ from random import Random
 import pytest
 from pydantic import ValidationError
 
-from mediparse.domain.labels import Diagnosis
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.mentions import (
     DiagnosisMentions,
     Mention,

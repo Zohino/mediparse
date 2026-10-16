@@ -9,8 +9,8 @@ import pyarrow.parquet as pq
 import pytest
 
 from mediparse.domain.cohort import CohortCounts, FunnelStepName, label_codes
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import Diagnosis
 from mediparse.infrastructure.duckdb_cohort import DuckDbCohort
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from tests.cohort_support import (

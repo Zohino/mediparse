@@ -9,7 +9,8 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.domain.labels import ACUTE_DIAGNOSIS, Diagnosis, LabelModel
+from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS, Diagnosis
+from mediparse.domain.labels import LabelModel
 from mediparse.domain.note import subject_of
 from mediparse.domain.synthetic_patients import (
     PatientModel,

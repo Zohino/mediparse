@@ -13,7 +13,8 @@ from mediparse.domain.note_text import narrative, segment
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
-    from mediparse.domain.labels import Diagnosis, LabelModel
+    from mediparse.domain.diagnosis import Diagnosis
+    from mediparse.domain.labels import LabelModel
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.note_structure import NarrativeModel, StructureModel
     from mediparse.domain.synthetic_plan import SamplerConfig

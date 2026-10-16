@@ -8,9 +8,9 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.application.model_evaluation import ModelEvaluation
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import BinaryMetrics, DiagnosisMetrics, Prediction
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import Diagnosis
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

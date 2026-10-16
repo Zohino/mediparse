@@ -6,10 +6,9 @@ from math import isclose, prod
 import pytest
 from pydantic import ValidationError
 
+from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS, Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import (
-    ACUTE_DIAGNOSIS,
-    Diagnosis,
     InfeasibleMarginalsError,
     IpfNotConvergedError,
     LabelModel,

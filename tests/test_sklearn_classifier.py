@@ -7,9 +7,9 @@ from typing import TYPE_CHECKING, Final
 import pytest
 import skops.io as sio
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Classification
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import Diagnosis
 from mediparse.infrastructure.sklearn_classifier import (
     GroupedHoldout,
     LinearSvmTrainer,

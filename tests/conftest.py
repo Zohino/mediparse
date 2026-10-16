@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, Final
 
 import pytest
 
-from mediparse.domain.labels import Diagnosis
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.mentions import Mention, MentionStatus
 from mediparse.domain.note_plan import NotePlan
 from mediparse.domain.note_structure import Sex

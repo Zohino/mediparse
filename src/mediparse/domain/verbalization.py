@@ -13,7 +13,7 @@ if TYPE_CHECKING:
     from collections.abc import Mapping
     from collections.abc import Set as AbstractSet
 
-    from mediparse.domain.labels import Diagnosis
+    from mediparse.domain.diagnosis import Diagnosis
     from mediparse.domain.mentions import Mention, MentionModel
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.note_structure import (

@@ -184,6 +184,25 @@ forbidden_modules = [
 ]
 broken_contract_guidance = "Typy otisků (Sha256, CommitSha, commit_sha, fingerprint) jsou v domain.digest; corpus_audit je audit syntetického korpusu."
 
+[[tool.importlinter.contracts]]
+name = "Kohorta a evaluace nestojí na modelu labelů syntetiky"
+type = "forbidden"
+source_modules = [
+    "mediparse.domain.diagnosis",
+    "mediparse.domain.cohort",
+    "mediparse.domain.evaluation",
+    "mediparse.domain.icd",
+    "mediparse.domain.input_note",
+    "mediparse.domain.split",
+    "mediparse.application.cohort",
+    "mediparse.infrastructure.duckdb_cohort",
+    "mediparse.infrastructure.note_table",
+]
+forbidden_modules = [
+    "mediparse.domain.labels",
+]
+broken_contract_guidance = "Diagnóza je v domain.diagnosis; labels je model labelů syntetiky (prevalence, IPF)."
+
 [tool.ruff]
 fix = true
 preview = true

@@ -6,8 +6,8 @@ from typing import TYPE_CHECKING
 
 import pytest
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
-from mediparse.domain.labels import Diagnosis
 from mediparse.domain.smoketest_input import UnpairedNotesError, input_notes
 
 if TYPE_CHECKING:

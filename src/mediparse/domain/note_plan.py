@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 
 from pydantic import BaseModel, ConfigDict, NonNegativeInt, PositiveInt
 
-from mediparse.domain.labels import Diagnosis
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.mentions import Mention
 from mediparse.domain.note_structure import Sex
 

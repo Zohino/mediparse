@@ -5,8 +5,8 @@ from __future__ import annotations
 import pytest
 from pydantic import ValidationError
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.icd import DiagnosisCodes, IcdCode, IcdVersion
-from mediparse.domain.labels import Diagnosis
 
 NINE = IcdVersion.NINE
 TEN = IcdVersion.TEN

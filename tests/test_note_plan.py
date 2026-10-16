@@ -4,7 +4,7 @@ from dataclasses import replace
 
 import pytest
 
-from mediparse.domain.labels import Diagnosis
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.mentions import Mention, MentionStatus
 from mediparse.domain.note_plan import MismatchedPlanPartsError, NotePlan, note_plan
 from mediparse.domain.note_structure import NoteStructure, Sex

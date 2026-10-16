@@ -7,9 +7,9 @@ from typing import TYPE_CHECKING, Any
 
 import pytest
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.icd import IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import Diagnosis
 from mediparse.infrastructure.diagnosis_codes_file import (
     DIAGNOSIS_CANDIDATES_PATH,
     load_diagnosis_codes,

@@ -6,7 +6,7 @@ import csv
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.labels import Diagnosis
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.note_plan import NotePlan
 from mediparse.infrastructure.input_file import parse_file
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT

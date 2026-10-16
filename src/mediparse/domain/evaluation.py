@@ -10,7 +10,7 @@ from mediparse.domain.inputs import InvalidInputError
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.domain.labels import Diagnosis
+    from mediparse.domain.diagnosis import Diagnosis
 
 
 @dataclass(frozen=True)

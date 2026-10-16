@@ -10,7 +10,7 @@ from mediparse.domain.cohort import (
     FunnelStep,
     FunnelStepName,
 )
-from mediparse.domain.labels import Diagnosis
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.run_manifest import SourceRevision
 from mediparse.infrastructure.cohort_manifest_file import JsonCohortManifestFile
 

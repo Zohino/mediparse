@@ -14,7 +14,8 @@ from pydantic import (
     model_validator,
 )
 
-from mediparse.domain.labels import Diagnosis, Probability
+from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.labels import Probability
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence

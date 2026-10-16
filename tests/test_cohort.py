@@ -17,8 +17,8 @@ from mediparse.domain.cohort import (
     ensure_publishable,
     label_codes,
 )
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import Diagnosis
 from mediparse.domain.run_manifest import SourceRevision
 from tests.cohort_support import (
     CODES,
