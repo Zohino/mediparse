@@ -1,4 +1,4 @@
-"""Architektura mimo dosah import-linteru: vstupy do balíčku a skripty workflow."""
+"""Architektura mimo dosah import-linteru: vstupy do balíčku, skripty workflow a konfigurace modelů domény."""
 
 import importlib
 import pkgutil
@@ -12,6 +12,7 @@ from pydantic import BaseModel
 
 import mediparse
 import mediparse.domain
+from mediparse.domain.cohort import CohortCounts
 from tests.support import REPOSITORY
 
 PACKAGE = Path(mediparse.__file__).parent
@@ -97,6 +98,11 @@ def _domain_models() -> list[type[BaseModel]]:
             and value.__module__ == module.__name__
         )
     return models
+
+
+def test_domain_models_are_discovered() -> None:
+    """Prázdná parametrizace by test jen přeskočila; objevení modelů hlídá zvlášť."""
+    assert CohortCounts in _domain_models()
 
 
 @pytest.mark.parametrize(

@@ -4,34 +4,25 @@ from __future__ import annotations
 
 from contextlib import contextmanager
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING
 
 import pytest
 
 from mediparse.application.cohort import CohortMaterialization
-from mediparse.domain.cohort import CohortCounts, FunnelStep, FunnelStepName
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
-from tests.cohort_support import CODES
+from tests.cohort_support import (
+    CODES,
+    EMPTY_COHORT,
+    FEW_NEGATIVES,
+    FEW_POSITIVES,
+    make_counts,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Generator, Iterable, Mapping
 
-    from mediparse.domain.cohort import RawCode
-
-UNIQUE: Final = 50
-
-
-def _counts(
-    positives: dict[Diagnosis, int] | None = None, unique: int = UNIQUE
-) -> CohortCounts:
-    return CohortCounts(
-        funnel=tuple(
-            FunnelStep(step=step, notes=unique, patients=unique)
-            for step in FunnelStepName
-        ),
-        positives=positives or dict.fromkeys(Diagnosis, UNIQUE // 2),
-    )
+    from mediparse.domain.cohort import CohortCounts, RawCode
 
 
 @dataclass
@@ -46,7 +37,7 @@ class _Selected:
 @dataclass
 class _Source:
     pairs: list[RawCode]
-    counts: CohortCounts = field(default_factory=_counts)
+    counts: CohortCounts = field(default_factory=make_counts)
     selected: list[Mapping[RawCode, Diagnosis]] = field(default_factory=list)
     events: list[str] = field(default_factory=list)
 
@@ -78,9 +69,9 @@ def test_publishable_cohort_is_written_once_and_result_carries_counts() -> None:
 @pytest.mark.parametrize(
     "counts",
     [
-        _counts({**dict.fromkeys(Diagnosis, UNIQUE // 2), Diagnosis.COPD: 7}),
-        _counts({**dict.fromkeys(Diagnosis, UNIQUE // 2), Diagnosis.COPD: 43}),
-        _counts(unique=0),
+        FEW_POSITIVES,
+        FEW_NEGATIVES,
+        EMPTY_COHORT,
     ],
     ids=["few-positives", "few-negatives", "empty"],
 )
