@@ -31,26 +31,20 @@ class LocalWorkspace:
         Returns:
             True, když nad korpusem existuje adresář s ``.git``.
         """
-        return self._repository() is not None
+        return _inside_repository(self.corpus)
 
     def report_in_repository(self) -> bool:
-        """Zda report míří dovnitř repozitáře korpusu.
+        """Zda report míří dovnitř libovolného git repozitáře.
+
+        Nestačí repozitář korpusu: z worktree by report prošel do hlavního
+        checkoutu, který leží nad ním.
 
         Returns:
-            True, když by report skončil v repozitáři korpusu.
+            True, když nad reportem existuje adresář s ``.git``.
         """
-        repository = self._repository()
-        return repository is not None and self.report.resolve().is_relative_to(
-            repository
-        )
+        return _inside_repository(self.report)
 
-    def _repository(self) -> Path | None:
-        resolved = self.corpus.resolve()
-        return next(
-            (
-                folder
-                for folder in (resolved, *resolved.parents)
-                if (folder / ".git").exists()
-            ),
-            None,
-        )
+
+def _inside_repository(path: Path) -> bool:
+    resolved = path.resolve()
+    return any((folder / ".git").exists() for folder in (resolved, *resolved.parents))

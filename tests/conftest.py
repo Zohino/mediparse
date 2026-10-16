@@ -261,13 +261,28 @@ class AuditFiles:
 
 
 @pytest.fixture
-def audit_files(tmp_path: Path) -> AuditFiles:
-    """Soubory pro audit a bránu v dočasném adresáři testu.
+def outside_repository(tmp_path: Path) -> Path:
+    """Dočasný adresář testu, nad kterým neleží žádný git repozitář.
+
+    Skip místo pádu: ``.git`` nad ``tmp_path`` (dotfiles v gitu) je vlastnost
+    stroje, ne chyba kódu, a v CI ani v kontejneru nenastane.
+
+    Returns:
+        Adresář ``tmp_path``.
+    """
+    if any((folder / ".git").exists() for folder in tmp_path.resolve().parents):
+        pytest.skip(f"nad {tmp_path} leží git repozitář")
+    return tmp_path
+
+
+@pytest.fixture
+def audit_files(outside_repository: Path) -> AuditFiles:
+    """Soubory pro audit a bránu v dočasném adresáři testu mimo repozitáře.
 
     Returns:
         Továrna na korpus, reference a config tabulek.
     """
-    return AuditFiles(tmp_path)
+    return AuditFiles(outside_repository)
 
 
 @pytest.fixture
