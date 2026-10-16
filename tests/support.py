@@ -10,7 +10,12 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Final
 
-from mediparse.domain.corpus_audit import NGRAM_SIZE, NORMALIZATION, AuditRecord
+from mediparse.domain.corpus_audit import (
+    NGRAM_SIZE,
+    NORMALIZATION,
+    AuditPin,
+    AuditRecord,
+)
 from mediparse.domain.corpus_provenance import Decoding, Translation, TranslationRun
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
@@ -58,6 +63,7 @@ CORPUS_SHA: Final = "a" * 64
 PINNED: Final = {"discharge.csv.gz": "b" * 64, "radiology.csv.gz": "e" * 64}
 DISCHARGE: Final = {"name": "discharge.csv.gz", "sha256": "b" * 64, "rows": 10}
 RADIOLOGY: Final = {"name": "radiology.csv.gz", "sha256": "e" * 64, "rows": 20}
+PIN: Final = AuditPin(PINNED, STRUCTURE_LABELS)
 
 
 def audit_record(**overrides: object) -> AuditRecord:

@@ -6,6 +6,7 @@ import re
 import unicodedata
 from collections import Counter, defaultdict
 from dataclasses import dataclass
+from types import MappingProxyType
 from typing import TYPE_CHECKING, Annotated, Final, Literal, NamedTuple
 
 from pydantic import (
@@ -128,6 +129,61 @@ class AuditRecord(BaseModel):
     created_at: AwareDatetime
 
 
+@dataclass(frozen=True)
+class AuditPin:
+    """Proti čemu záznam auditu platí: přesné referenční soubory MIMIC a štítky struktury vyřazené z n-gramů."""
+
+    reference_sha256: Mapping[str, str]
+    structure_labels: frozenset[str]
+
+    def __post_init__(self) -> None:
+        """Uloží otisky jako kopii jen pro čtení, aby pin nešel změnit přes původní dict."""
+        object.__setattr__(
+            self, "reference_sha256", MappingProxyType(dict(self.reference_sha256))
+        )
+
+    def violations(self, corpus_sha256: str, record: AuditRecord) -> tuple[str, ...]:
+        """Důvody, proč korpus s daným otiskem neodpovídá záznamu auditu; prázdný výsledek znamená, že odpovídá.
+
+        Returns:
+            Popisy porušení auditu.
+        """
+        violations: list[str] = []
+        if record.corpus_sha256 != corpus_sha256:
+            violations.append(
+                "Korpus se od auditovaného liší, po změně je nutný nový audit."
+            )
+        if (record.ngram_size, record.normalization) != (NGRAM_SIZE, NORMALIZATION):
+            violations.append(
+                "Záznam auditu vznikl jinou metodou, je nutný nový audit."
+            )
+        if record.structure_labels != tuple(sorted(self.structure_labels)):
+            violations.append(
+                "Audit vyřadil jiné štítky struktury, než předepisuje config; je nutný nový audit."
+            )
+        mismatch = self.reference_mismatch(
+            (file.name, file.sha256) for file in record.reference
+        )
+        if mismatch:
+            violations.append(
+                f"Audit neběžel přesně proti referenci z configu, liší se: {', '.join(mismatch)}; je nutný nový audit."
+            )
+        return tuple(violations)
+
+    def reference_mismatch(self, files: Iterable[tuple[str, str]]) -> tuple[str, ...]:
+        """Soubory, kterými se auditovaná reference liší od reference z configu.
+
+        Returns:
+            Seřazená jména chybějících, přebývajících a zdvojených souborů i souborů s jiným
+            otiskem; prázdný výsledek znamená přesnou shodu.
+        """
+        audited = Counter(files)
+        expected = Counter(self.reference_sha256.items())
+        return tuple(
+            sorted({name for name, _ in (audited - expected) + (expected - audited)})
+        )
+
+
 class InvalidAuditRecordError(ValueError):
     """Záznam auditu neodpovídá schématu, a korpus proto neatestuje."""
 
@@ -175,25 +231,8 @@ def audit_record_violations(
     """
     if record is None:
         return ("Korpus nemá záznam auditu.",)
-    violations: list[str] = []
-    if record.corpus_sha256 != corpus_sha256:
-        violations.append(
-            "Korpus se od auditovaného liší, po změně je nutný nový audit."
-        )
-    if (record.ngram_size, record.normalization) != (NGRAM_SIZE, NORMALIZATION):
-        violations.append("Záznam auditu vznikl jinou metodou, je nutný nový audit.")
-    if record.structure_labels != tuple(sorted(structure_labels)):
-        violations.append(
-            "Audit vyřadil jiné štítky struktury, než předepisuje config; je nutný nový audit."
-        )
-    mismatch = reference_mismatch(
-        ((file.name, file.sha256) for file in record.reference), reference_sha256
-    )
-    if mismatch:
-        violations.append(
-            f"Audit neběžel přesně proti referenci z configu, liší se: {', '.join(mismatch)}; je nutný nový audit."
-        )
-    return tuple(violations)
+    pin = AuditPin(reference_sha256, frozenset(structure_labels))
+    return pin.violations(corpus_sha256, record)
 
 
 def reference_mismatch(
@@ -205,11 +244,7 @@ def reference_mismatch(
         Seřazená jména chybějících, přebývajících a zdvojených souborů i souborů s jiným
         otiskem; prázdný výsledek znamená přesnou shodu.
     """
-    audited = Counter(files)
-    expected = Counter(reference_sha256.items())
-    return tuple(
-        sorted({name for name, _ in (audited - expected) + (expected - audited)})
-    )
+    return AuditPin(reference_sha256, frozenset()).reference_mismatch(files)
 
 
 def _ngrams(tokens: Sequence[str]) -> Iterator[Ngram]:
