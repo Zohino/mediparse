@@ -57,6 +57,10 @@ class Reference(Protocol):
 
         Returns:
             Pacient a text každé zprávy.
+
+        Raises:
+            InvalidInputError: Reference je nečitelná nebo neodpovídá schématu;
+                chyba vznikne až při iteraci.
         """
 
     def sha256(self) -> str:
@@ -129,10 +133,6 @@ class AuditRefused:
 type AuditOutcome = AuditClean | AuditOverlap | AuditRefused
 
 
-class _ReferenceMismatchError(ValueError):
-    pass
-
-
 @dataclass(frozen=True)
 class CorpusAudit:
     """Audit syntetického korpusu proti referenci MIMIC-IV-Note."""
@@ -141,7 +141,6 @@ class CorpusAudit:
     corpus: SyntheticCorpus
     references: Sequence[Reference]
     report: OverlapReport
-    structure_labels: Collection[str]
 
     def run(
         self,
@@ -149,6 +148,7 @@ class CorpusAudit:
         tool_commit: str,
         created_at: datetime,
         reference_sha256: Mapping[str, str],
+        structure_labels: Collection[str],
     ) -> AuditOutcome:
         """Porovná korpus s referencí; čistý audit uloží záznam, shoda jen report mimo repozitář.
 
@@ -169,16 +169,15 @@ class CorpusAudit:
             for language, texts in by_language.items()
             for note_id, text in texts.items()
         }
-        try:
-            subjects = frozenset(
-                subject_of(note_id)
-                for texts in by_language.values()
-                for note_id in texts
-            )
-            _verify_reference(self.references, reference_sha256)
-        except (InvalidNoteIdError, _ReferenceMismatchError) as error:
-            return AuditRefused(str(error))
-        index = NgramIndex(notes, self.structure_labels)
+        problem = _note_id_problem(by_language) or _reference_problem(
+            self.references, reference_sha256
+        )
+        if problem is not None:
+            return AuditRefused(problem)
+        subjects = frozenset(
+            subject_of(note_id) for texts in by_language.values() for note_id in texts
+        )
+        index = NgramIndex(notes, structure_labels)
         scans = tuple(
             scan(index, subjects, reference.notes()) for reference in self.references
         )
@@ -195,7 +194,7 @@ class CorpusAudit:
             corpus_files=len(notes),
             ngram_size=NGRAM_SIZE,
             normalization=NORMALIZATION,
-            structure_labels=tuple(sorted(self.structure_labels)),
+            structure_labels=tuple(sorted(structure_labels)),
             synthetic_ngrams=len(index),
             reference=tuple(
                 ReferenceFile(
@@ -233,16 +232,28 @@ def _overlap(
     )
 
 
-def _verify_reference(
+def _note_id_problem(by_language: Mapping[Language, Mapping[str, str]]) -> str | None:
+    try:
+        for texts in by_language.values():
+            for note_id in texts:
+                subject_of(note_id)
+    except InvalidNoteIdError as error:
+        return str(error)
+    return None
+
+
+def _reference_problem(
     references: Sequence[Reference], reference_sha256: Mapping[str, str]
-) -> None:
+) -> str | None:
     mismatch = reference_mismatch(
         ((reference.name, reference.sha256()) for reference in references),
         reference_sha256,
     )
     if mismatch:
-        msg = f"Referenční soubory nesedí s referencí z configu: {', '.join(mismatch)}."
-        raise _ReferenceMismatchError(msg)
+        return (
+            f"Referenční soubory nesedí s referencí z configu: {', '.join(mismatch)}."
+        )
+    return None
 
 
 def _environment_problem(environ: Mapping[str, str]) -> str | None:

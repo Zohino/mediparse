@@ -10,6 +10,7 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS, Diagnosis
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import LabelModel
 from mediparse.domain.note import subject_of
 from mediparse.domain.synthetic_patients import (
@@ -168,8 +169,10 @@ def test_ratio_gives_requested_truncated_mean() -> None:
 
 def test_unreachable_tolerance_fails_loudly() -> None:
     """Nedosažitelná tolerance skončí výjimkou, ne nekonečnou smyčkou."""
-    with pytest.raises(PrevalenceNotReachedError):
+    with pytest.raises(PrevalenceNotReachedError) as raised:
         sample_notes(_patients(attempts=3), _labels(0.0), Random(SEED))
+
+    assert isinstance(raised.value, InvalidInputError)
 
 
 def _identical_labels() -> LabelModel:

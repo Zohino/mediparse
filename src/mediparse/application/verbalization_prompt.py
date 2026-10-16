@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.verbalization import render_prompt
 
 if TYPE_CHECKING:
@@ -18,13 +19,19 @@ class VerbalizationPrompt:
 
     plans: PlanSource
 
-    def run(self, note_id: str, template: str, config: SamplerConfig) -> str | None:
+    def run(self, note_id: str, template: str, config: SamplerConfig) -> str:
         """Vyrobí zadání pro zprávu s daným note_id.
 
         Returns:
-            Text zadání, nebo None, když plán s tímto note_id neexistuje.
+            Text zadání.
+
+        Raises:
+            InvalidInputError: Plán s tímto note_id neexistuje.
         """
         plan = next(
             (plan for plan in self.plans.load() if plan.note_id == note_id), None
         )
-        return None if plan is None else render_prompt(template, plan, config)
+        if plan is None:
+            msg = f"Plán pro note_id {note_id} neexistuje."
+            raise InvalidInputError(msg)
+        return render_prompt(template, plan, config)

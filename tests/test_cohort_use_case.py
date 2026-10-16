@@ -58,7 +58,7 @@ def test_publishable_cohort_is_written_once_and_result_carries_counts() -> None:
     """Zdroj dostane mapování z domény, zapíše se jednou; výsledek nese agregáty i neplatné."""
     source = _Source([("10", "E119"), ("10", "E11.9"), ("10", "S72")])
 
-    result = CohortMaterialization(source, CODES).run()
+    result = CohortMaterialization(source).run(CODES)
 
     assert source.selected == [{("10", "E119"): Diagnosis.DIABETES}]
     assert source.events == ["open", "write", "close"]
@@ -82,6 +82,6 @@ def test_unpublishable_cohort_is_refused_before_write_and_selection_closes(
     source = _Source([("10", "E119")], counts)
 
     with pytest.raises(InvalidInputError):
-        CohortMaterialization(source, CODES).run()
+        CohortMaterialization(source).run(CODES)
 
     assert source.events == ["open", "close"]

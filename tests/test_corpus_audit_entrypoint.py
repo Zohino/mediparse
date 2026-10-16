@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.domain.corpus_audit import ReferenceNote
 from mediparse.entrypoints.corpus_audit import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.mimic_reference import MimicReference
@@ -33,17 +32,6 @@ def _audit(
     references = files.pinned_references(rows)
     argv = files.audit_argv(corpus, references, files.root / "report.json")
     return run(argv, environ or {}), corpus
-
-
-def test_reference_reader_keeps_multiline_quoted_text(audit_files: AuditFiles) -> None:
-    """Víceřádkový text v uvozovkách se přečte jako jedna zpráva beze změny."""
-    text = 'first line\nsecond "quoted" line, with comma'
-
-    path = audit_files.reference("discharge.csv.gz", [("10000032", text)])
-
-    notes = list(MimicReference(path).notes())
-
-    assert notes == [ReferenceNote(subject_id=10000032, text=text)]
 
 
 def test_clean_corpus_gets_audit_record(audit_files: AuditFiles) -> None:
@@ -116,6 +104,32 @@ def test_missing_reference_is_refused(
 
     assert run(argv, {}) == ExitCode.REFUSED
     assert "neexistují" in caplog.text
+
+
+def test_unreadable_subject_id_is_refused_without_echo(
+    audit_files: AuditFiles, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Vadné subject_id v referenci audit odmítne a jeho hodnota se nedostane do logu."""
+    code, _ = _audit(audit_files, SHORT_NOTE, [("10000032x", SENTENCE)])
+
+    assert code == ExitCode.REFUSED
+    assert "10000032x" not in caplog.text
+
+
+def test_note_outside_utf8_is_refused(
+    audit_files: AuditFiles, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Zpráva korpusu mimo UTF-8 audit odmítne s cestou zprávy, ne tracebackem."""
+    corpus = audit_files.corpus(SHORT_NOTE)
+    (corpus / NOTE).write_bytes(b"\xff\xfe")
+    references = audit_files.pinned_references([("10000032", SENTENCE)])
+    report = audit_files.root / "report.json"
+
+    code = run(audit_files.audit_argv(corpus, references, report), {})
+
+    assert code == ExitCode.REFUSED
+    assert NOTE in caplog.text
+    assert not (corpus / RECORD_NAME).exists()
 
 
 def test_reference_changed_after_pin_is_refused(

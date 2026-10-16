@@ -94,9 +94,8 @@ def run(
     sources = _source_digests(tables)
     source = revision()
     result = CohortMaterialization(
-        DuckDbCohort(discharge, diagnoses, cohort, cohort.parent / SPILL_DIRECTORY),
-        codes,
-    ).run()
+        DuckDbCohort(discharge, diagnoses, cohort, cohort.parent / SPILL_DIRECTORY)
+    ).run(codes)
     JsonCohortManifestFile(manifest).write(
         CohortManifest(
             cohort_sha256=file_sha256(cohort),

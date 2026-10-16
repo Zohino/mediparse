@@ -95,7 +95,7 @@ def prevalence_outliers(
     )
 
 
-class IpfNotConvergedError(ValueError):
+class IpfNotConvergedError(InvalidInputError):
     """Iterativní proporcionální přizpůsobení nedosáhlo tolerance v povoleném počtu průchodů."""
 
 

@@ -52,18 +52,20 @@ class CohortMaterialization:
     """Přiřadí diagnózy kódům, ověří pravidlo DUA nad výběrem a nechá zdroj zapsat kohortu."""
 
     source: CohortSource
-    codes: DiagnosisCodes
 
-    def run(self) -> CohortResult:
+    def run(self, codes: DiagnosisCodes) -> CohortResult:
         """Zapíše kohortu, kterou pravidlo DUA propustí.
 
         Kohortu, kterou pravidlo odmítne, nezapíše; ``InvalidInputError``
         z pravidla DUA i ze zdroje projde ven.
 
+        Args:
+            codes: Config diagnóz, podle něhož se kódům přiřadí štítky pětice.
+
         Returns:
             Agregáty kohorty a počet neplatných dvojic.
         """
-        labelled = label_codes(self.source.codes(), self.codes)
+        labelled = label_codes(self.source.codes(), codes)
         with self.source.select(labelled.diagnoses) as selected:
             counts = selected.counts
             ensure_publishable(counts)

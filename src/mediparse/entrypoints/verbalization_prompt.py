@@ -7,7 +7,6 @@ a šablonou v repu; data MIMIC nečte.
 from __future__ import annotations
 
 import argparse
-import logging
 import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -27,8 +26,6 @@ from mediparse.infrastructure.verbalization_template import (
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
-
-logger = logging.getLogger(__name__)
 
 
 def main() -> ExitCode:
@@ -55,9 +52,6 @@ def run(argv: Sequence[str]) -> ExitCode:
         load_verbalization_template(args.template),
         load_sampler_config(args.config),
     )
-    if prompt is None:
-        logger.error("Plán pro note_id %s neexistuje.", args.note_id)
-        return ExitCode.REFUSED
     sys.stdout.write(prompt)
     return ExitCode.OK
 

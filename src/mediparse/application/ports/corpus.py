@@ -41,7 +41,8 @@ class NoteSource(Protocol):
             Slovník note_id → text zprávy; jazyk bez zpráv dá prázdný slovník.
 
         Raises:
-            InvalidInputError: Korpus obsahuje zprávy jazyka mimo Language.
+            InvalidInputError: Korpus obsahuje zprávy jazyka mimo Language nebo
+                zpráva nejde přečíst.
         """
 
 

@@ -69,8 +69,10 @@ class CsvParquetConversion:
             msg = f"Soubor {self.source} neexistuje."
             raise InvalidInputError(msg) from error
         except (OSError, EOFError, UnicodeDecodeError, pa.ArrowException) as error:
-            msg = f"Soubor {self.source} nejde převést na parquet: {error}"
-            raise InvalidInputError(msg) from error
+            msg = f"Soubor {self.source} nejde převést na parquet: {type(error).__name__}."
+            # Text výjimky nese hodnoty buněk z MIMIC; nesmí do hlášky ani do logu, a proto
+            # jen její typ a ``from None``.
+            raise InvalidInputError(msg) from None
 
     def _write(self, columns: tuple[str, ...]) -> TableShape:
         with gzip.open(self.source, "rb") as stream:

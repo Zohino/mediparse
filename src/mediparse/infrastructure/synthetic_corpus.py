@@ -35,13 +35,16 @@ class CorpusDirectory:
     root: Path
 
     def notes(self, language: Language) -> dict[str, str]:
-        """Texty zpráv jednoho jazyka; adresář jazyka mimo Language odmítne jako InvalidInputError.
+        """Texty zpráv jednoho jazyka.
+
+        Adresář jazyka mimo Language a zprávu, která nejde přečíst nebo není v UTF-8,
+        odmítne jako InvalidInputError.
 
         Returns:
             Slovník note_id → text zprávy; jazyk bez zpráv dá prázdný slovník.
         """
         return {
-            path.stem: path.read_text(encoding="utf-8")
+            path.stem: self._read(path)
             for path in self._paths()
             if path.parent.name == language.value
         }
@@ -125,6 +128,15 @@ class CorpusDirectory:
             msg = f"Korpus {self.root} obsahuje adresář neznámého jazyka: {', '.join(unknown)}."
             raise InvalidInputError(msg)
         return paths
+
+    def _read(self, path: Path) -> str:
+        try:
+            return path.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError) as error:
+            msg = (
+                f"Zpráva {self._relative(path)} nejde přečíst: {type(error).__name__}."
+            )
+            raise InvalidInputError(msg) from error
 
     def _relative(self, path: Path) -> str:
         return path.relative_to(self.root).as_posix()

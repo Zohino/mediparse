@@ -242,6 +242,27 @@ def test_null_subject_id_in_write_is_invalid_input_and_leaves_no_file(
     assert not out.exists()
 
 
+def test_error_messages_do_not_echo_cell_values(tmp_path: Path) -> None:
+    """Hodnota mimo schéma (údaj z MIMIC) se nedostane do hlášky ani do řetězu výjimek."""
+    discharge, diagnoses = write_tables(tmp_path)
+    pq.write_table(
+        pa.table({
+            "note_id": ["n01"],
+            "subject_id": ["CANARY9x"],
+            "hadm_id": ["10"],
+            "text": [text("a")],
+        }),
+        discharge,
+    )
+    source = DuckDbCohort(discharge, diagnoses, tmp_path / "c.parquet", tmp_path / "s")
+
+    with pytest.raises(InvalidInputError) as raised:
+        _select_and_write(source)
+
+    assert "CANARY9x" not in str(raised.value)
+    assert raised.value.__cause__ is None
+
+
 def test_positive_counts_match_label_columns_of_the_file(tmp_path: Path) -> None:
     """Počet true v každém sloupci souboru se rovná počtu pozitivních v agregátech."""
     counts, out = _build(tmp_path)

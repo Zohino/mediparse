@@ -71,3 +71,25 @@ def test_refused_config_is_refused_with_reason(
     assert code == ExitCode.REFUSED
     assert "schématu" in caplog.text
     assert config.read_bytes() == before
+
+
+def test_non_converging_config_is_refused_and_untouched(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Config, jehož IPF s převzatými parametry nezkonverguje, zůstane bajtově stejný."""
+    export, config = _setup(tmp_path, tuple(Diagnosis))
+    correlated = export_payload(tuple(Diagnosis), prevalence=0.2)
+    for row, columns in correlated["conditional"].items():
+        for column in columns:
+            columns[column] = 1.0 if row == column else 0.15
+    export.write_text(json.dumps(correlated), encoding="utf-8")
+    payload = json.loads(config.read_text(encoding="utf-8"))
+    payload["labels"]["ipf_max_passes"] = 1
+    config.write_text(json.dumps(payload), encoding="utf-8")
+    before = config.read_bytes()
+
+    code = run(["--export", str(export), "--config", str(config)])
+
+    assert code == ExitCode.REFUSED
+    assert "IPF" in caplog.text
+    assert config.read_bytes() == before

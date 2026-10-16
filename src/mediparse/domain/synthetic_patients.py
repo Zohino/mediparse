@@ -9,6 +9,7 @@ from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
 from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS
 from mediparse.domain.identity import SubjectId
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import (
     LabelModel,
     LabelSet,
@@ -58,7 +59,7 @@ class SyntheticNote:
     labels: LabelSet
 
 
-class PrevalenceNotReachedError(ValueError):
+class PrevalenceNotReachedError(InvalidInputError):
     """Žádný tah v povoleném počtu pokusů nedal prevalence v toleranci."""
 
 
