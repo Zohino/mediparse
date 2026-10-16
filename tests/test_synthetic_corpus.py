@@ -66,3 +66,11 @@ def test_fingerprint_covers_relative_paths_and_bytes(tmp_path: Path) -> None:
         ("cs/90000001-DS-1.txt", b"cesky"),
         ("en/90000001-DS-1.txt", b"english"),
     ])
+
+
+def test_note_that_is_not_utf8_is_invalid_input(tmp_path: Path) -> None:
+    """Zpráva mimo UTF-8 skončí InvalidInputError s cestou zprávy v korpusu."""
+    _write(tmp_path, "en/90000001-DS-1.txt", b"\xff\xfe")
+
+    with pytest.raises(InvalidInputError, match=r"en/90000001-DS-1\.txt"):
+        CorpusDirectory(tmp_path).notes(Language.EN)
