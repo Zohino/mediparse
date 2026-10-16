@@ -33,7 +33,7 @@ def _normalized(code: str) -> str:
 class IcdCode(BaseModel):
     """Kód ICD bez teček, jak ho zapisuje MIMIC i GEMs."""
 
-    model_config = ConfigDict(frozen=True)
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     version: IcdVersion
     code: str
@@ -47,7 +47,7 @@ class IcdCode(BaseModel):
 class DiagnosisCodes(BaseModel):
     """Předpony kódů každé diagnózy podle verze; kód nepatří do dvou diagnóz."""
 
-    model_config = ConfigDict(frozen=True)
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     prefixes: Mapping[Diagnosis, Mapping[IcdVersion, tuple[str, ...]]]
 

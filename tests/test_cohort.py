@@ -153,6 +153,16 @@ def test_funnel_must_not_grow() -> None:
         _counts(funnel=_funnel(100, 80, 90, 50))
 
 
+def test_funnel_step_rejects_numeric_string() -> None:
+    """Vnořený model je přísný sám: počet jako řetězec neprojde."""
+    with pytest.raises(ValidationError):
+        FunnelStep.model_validate({
+            "step": FunnelStepName.ALL_NOTES,
+            "notes": "5",
+            "patients": 5,
+        })
+
+
 def _manifest(**overrides: object) -> CohortManifest:
     fields: dict[str, object] = {
         "cohort_sha256": "a" * 64,
