@@ -5,6 +5,7 @@ from __future__ import annotations
 from pydantic import BaseModel, ConfigDict
 
 from mediparse.domain.digest import CommitSha, Sha256
+from mediparse.domain.identity import RowId
 
 
 class SourceRevision(BaseModel):
@@ -21,7 +22,7 @@ class RunManifest(BaseModel):
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
-    row_id: str
+    row_id: RowId
     dataset_sha256: Sha256
     config_sha256: Sha256
     seed: int
