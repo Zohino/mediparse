@@ -133,17 +133,20 @@ def test_reference_changed_after_pin_is_refused(
 
 
 def test_corpus_outside_repository_is_refused(
-    audit_files: AuditFiles, tmp_path: Path
+    audit_files: AuditFiles, caplog: pytest.LogCaptureFixture
 ) -> None:
     """Bez repozitáře nejde ověřit, že report leží mimo něj."""
-    root = tmp_path / "loose"
+    root = audit_files.root / "loose"
     (root / "en").mkdir(parents=True)
     (root / NOTE).write_text(SHORT_NOTE[NOTE], encoding="utf-8")
     references = audit_files.pinned_references([("10000032", SENTENCE)])
 
-    code = run(audit_files.audit_argv(root, references, tmp_path / "r.json"), {})
+    code = run(
+        audit_files.audit_argv(root, references, audit_files.root / "r.json"), {}
+    )
 
     assert code == ExitCode.REFUSED
+    assert "neleží v git repozitáři" in caplog.text
 
 
 def test_report_inside_repository_is_refused(audit_files: AuditFiles) -> None:

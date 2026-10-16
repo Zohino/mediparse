@@ -110,10 +110,10 @@ def test_git_environment_does_not_override_root(
     assert GitRevision(repo).read().commit == git_output(repo, "rev-parse", "HEAD")
 
 
-def test_directory_outside_repo_is_refused(tmp_path: Path) -> None:
+def test_directory_outside_repo_is_refused(outside_repository: Path) -> None:
     """Adresář mimo repozitář (nebo chybějící git) skončí InvalidInputError."""
     with pytest.raises(InvalidInputError):
-        GitRevision(tmp_path).read()
+        GitRevision(outside_repository).read()
 
 
 SHA = "a" * 40
@@ -182,9 +182,11 @@ def test_revision_source_reads_head_of_root_without_commit_variable(
     assert source().commit == git_output(root, "rev-parse", "HEAD")
 
 
-def test_revision_source_reads_git_without_commit_variable(tmp_path: Path) -> None:
+def test_revision_source_reads_git_without_commit_variable(
+    outside_repository: Path,
+) -> None:
     """Bez proměnné MEDIPARSE_COMMIT se revize čte z gitu v daném kořeni."""
-    source = revision_source({"MEDIPARSE_DIRTY": "false"}, tmp_path)
+    source = revision_source({"MEDIPARSE_DIRTY": "false"}, outside_repository)
 
     with pytest.raises(InvalidInputError, match="z gitu"):
         source()

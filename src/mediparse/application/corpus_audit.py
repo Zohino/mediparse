@@ -90,10 +90,10 @@ class Workspace(Protocol):
         """
 
     def report_in_repository(self) -> bool:
-        """Zda report shod míří dovnitř repozitáře korpusu.
+        """Zda report shod míří dovnitř libovolného git repozitáře.
 
         Returns:
-            True, když by report skončil v repozitáři.
+            True, když by report skončil v některém repozitáři.
         """
 
 
@@ -250,5 +250,5 @@ def _workspace_problem(workspace: Workspace) -> str | None:
     if not workspace.corpus_in_repository():
         return "Korpus neleží v git repozitáři."
     if workspace.report_in_repository():
-        return "Report s pozicemi shod musí ležet mimo repozitář."
+        return "Report s pozicemi shod musí ležet mimo jakýkoli git repozitář."
     return None
