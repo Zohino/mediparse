@@ -37,7 +37,9 @@ def _build(root: Path, name: str = "cohort") -> tuple[CohortCounts, Path]:
     out = root / f"{name}.parquet"
     source = DuckDbCohort(discharge, diagnoses, out, root / f"spill-{name}")
     labels = label_codes(source.codes(), CODES).diagnoses
-    return source.write(labels), out
+    with source.select(labels) as selected:
+        selected.write()
+        return selected.counts, out
 
 
 def _notes(out: Path) -> dict[str, InputNote]:
@@ -156,23 +158,61 @@ def test_missing_input_is_invalid_input(tmp_path: Path) -> None:
         source.codes()
 
 
-def test_cell_below_threshold_is_refused_before_anything_is_written(
-    tmp_path: Path,
-) -> None:
-    """Kohorta s diagnózou pod deset zpráv neskončí v souboru."""
+def _small_source(root: Path) -> DuckDbCohort:
     discharge, diagnoses = write_tables(
-        tmp_path,
+        root,
         [note("n01", 1, 10, text("a"))],
         [icd(10, 1, "E119", "10")],
         padded=False,
     )
-    out = tmp_path / "c.parquet"
-    source = DuckDbCohort(discharge, diagnoses, out, tmp_path / "s")
+    return DuckDbCohort(discharge, diagnoses, root / "c.parquet", root / "s")
 
-    with pytest.raises(InvalidInputError, match="diabetes"):
-        source.write(label_codes(source.codes(), CODES).diagnoses)
 
-    assert not out.exists()
+def test_small_cohort_is_selected_and_written_by_adapter(tmp_path: Path) -> None:
+    """Pravidlo DUA už adaptér nedrží: malou kohortu vybere i zapíše."""
+    source = _small_source(tmp_path)
+
+    with source.select(label_codes(source.codes(), CODES).diagnoses) as selected:
+        selected.write()
+
+    assert selected.counts.funnel[-1].notes == 1
+    assert [
+        item.note_id for item in ParquetNoteTable(tmp_path / "c.parquet").read()
+    ] == ["n01"]
+
+
+def test_select_without_write_creates_no_file(tmp_path: Path) -> None:
+    """Výběr sám nic nezapisuje; soubor vzniká až ve ``write``."""
+    source = _small_source(tmp_path)
+
+    with source.select(label_codes(source.codes(), CODES).diagnoses):
+        pass
+
+    assert not (tmp_path / "c.parquet").exists()
+
+
+def test_unreadable_output_directory_is_invalid_input(tmp_path: Path) -> None:
+    """Chyba při zápisu proudu je InvalidInputError, ne traceback DuckDB."""
+    discharge, diagnoses = write_tables(tmp_path)
+    blocker = tmp_path / "blocker"
+    blocker.write_text("soubor místo adresáře", encoding="utf-8")
+    source = DuckDbCohort(discharge, diagnoses, blocker / "c.parquet", tmp_path / "s")
+
+    with (
+        pytest.raises(InvalidInputError),
+        source.select(label_codes(source.codes(), CODES).diagnoses) as selected,
+    ):
+        selected.write()
+
+
+def test_duckdb_error_in_write_is_invalid_input(tmp_path: Path) -> None:
+    """Chyba DuckDB ve ``write`` po úspěšném výběru je InvalidInputError."""
+    source = _small_source(tmp_path)
+
+    with source.select(label_codes(source.codes(), CODES).diagnoses) as selected:
+        selected.connection.execute("DROP TABLE base")
+        with pytest.raises(InvalidInputError, match="zapsat"):
+            selected.write()
 
 
 def test_positive_counts_match_label_columns_of_the_file(tmp_path: Path) -> None:

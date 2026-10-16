@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from contextlib import closing
+from contextlib import closing, contextmanager
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
@@ -14,14 +14,13 @@ from mediparse.domain.cohort import (
     CohortCounts,
     FunnelStep,
     FunnelStepName,
-    ensure_publishable,
 )
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import Diagnosis
 from mediparse.infrastructure.note_table import SCHEMA
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Generator, Mapping
     from pathlib import Path
 
     from mediparse.domain.cohort import RawCode
@@ -152,25 +151,45 @@ class DuckDbCohort:
                 raise InvalidInputError(msg) from error
         return rows
 
-    def write(self, labels: Mapping[RawCode, Diagnosis]) -> CohortCounts:
-        """Vybere kohortu, ověří agregáty a teprve poté zapíše parquet.
+    @contextmanager
+    def select(self, labels: Mapping[RawCode, Diagnosis]) -> Generator[DuckDbSelection]:
+        """Vybere kohortu do dočasné tabulky a spočítá agregáty; spojení žije do konce kontextu.
 
-        Returns:
-            Trychtýř a počty pozitivních zpráv zapsané kohorty.
+        Yields:
+            Výběr s agregáty a zápisem téže dočasné tabulky.
 
         Raises:
-            InvalidInputError: Vstup nejde číst nebo kohorta porušuje pravidla domény.
+            InvalidInputError: Vstup nejde číst nebo ho DuckDB nezpracuje.
         """
         with closing(self.connect()) as con:
             try:
                 _select(con, labels)
                 counts = _counts(con)
-                ensure_publishable(counts)
-                _stream(con, self.out)
             except duckdb.Error as error:
                 msg = f"Kohortu nelze sestavit z {self.discharge} a {self.diagnoses}: {error}"
                 raise InvalidInputError(msg) from error
-        return counts
+            yield DuckDbSelection(con, self.out, counts)
+
+
+@dataclass(frozen=True)
+class DuckDbSelection:
+    """Vybraná kohorta v dočasné tabulce ``base`` otevřeného spojení."""
+
+    connection: duckdb.DuckDBPyConnection
+    out: Path
+    counts: CohortCounts
+
+    def write(self) -> None:
+        """Zapíše vybrané zprávy do parquetu.
+
+        Raises:
+            InvalidInputError: Zápis proudu selhal v DuckDB nebo na disku.
+        """
+        try:
+            _stream(self.connection, self.out)
+        except (duckdb.Error, OSError) as error:
+            msg = f"Kohortu nelze zapsat do {self.out}: {error}"
+            raise InvalidInputError(msg) from error
 
 
 def _view(con: duckdb.DuckDBPyConnection, name: str, path: Path) -> None:
