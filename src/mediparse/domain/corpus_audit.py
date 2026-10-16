@@ -220,7 +220,7 @@ def scan(
 
 def audit_record_violations(
     corpus_sha256: str,
-    record: AuditRecord | None,
+    record: AuditRecord,
     reference_sha256: Mapping[str, str],
     structure_labels: Collection[str],
 ) -> tuple[str, ...]:
@@ -229,8 +229,6 @@ def audit_record_violations(
     Returns:
         Popisy porušení auditu.
     """
-    if record is None:
-        return ("Korpus nemá záznam auditu.",)
     pin = AuditPin(reference_sha256, frozenset(structure_labels))
     return pin.violations(corpus_sha256, record)
 

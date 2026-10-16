@@ -8,7 +8,6 @@ from mediparse.domain.corpus_audit import (
     AuditPin,
     NgramIndex,
     ReferenceNote,
-    audit_record_violations,
     scan,
     tokenize,
 )
@@ -158,11 +157,6 @@ def test_record_requires_timezone() -> None:
     """Čas auditu bez časové zóny by nešel jednoznačně porovnat."""
     with pytest.raises(ValidationError):
         audit_record(created_at="2026-09-28T00:00:00")
-
-
-def test_gate_requires_record_for_existing_corpus() -> None:
-    """Korpus bez záznamu auditu neprojde."""
-    assert audit_record_violations(CORPUS_SHA, None, PINNED, STRUCTURE_LABELS)
 
 
 def test_gate_rejects_corpus_changed_after_audit() -> None:

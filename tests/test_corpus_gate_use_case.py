@@ -105,6 +105,13 @@ def test_invalid_record_is_blocked() -> None:
     assert violations == ("Záznam auditu neodpovídá schématu.",)
 
 
+def test_missing_audit_record_is_blocked() -> None:
+    """Korpus bez záznamu auditu neprojde."""
+    assert CorpusGate(_Corpus(CORPUS_SHA, None)).run(PINNED, STRUCTURE_LABELS) == (
+        "Korpus nemá záznam auditu.",
+    )
+
+
 def test_missing_provenance_is_blocked() -> None:
     """Auditovaný korpus bez provenance neprojde."""
     corpus = _Corpus(CORPUS_SHA, audit_record(), provenance=None)

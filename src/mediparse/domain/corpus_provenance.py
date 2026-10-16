@@ -143,21 +143,19 @@ def prompts_sha256(
 
 
 def provenance_violations(
-    record: ProvenanceRecord | None, audit_sha256: str, *, translated: bool
+    record: ProvenanceRecord, audit_sha256: str, *, translated: bool
 ) -> tuple[str, ...]:
     """Důvody, proč provenance auditovaného korpusu neplatí; prázdný výsledek znamená, že platí.
 
     Args:
-        record: Záznam provenance, nebo None, když chybí.
+        record: Záznam provenance.
         audit_sha256: Otisk souboru se záznamem auditu.
         translated: Zda korpus obsahuje české zprávy.
 
     Returns:
-        Popis chybějícího záznamu, záznamu, který ukazuje na jiný audit, nebo českého
+        Popis záznamu, který ukazuje na jiný audit, nebo českého
         korpusu bez provenance překladu.
     """
-    if record is None:
-        return ("Korpus nemá záznam provenance.",)
     if record.audit_sha256 != audit_sha256:
         return (
             "Provenance ukazuje na jiný audit, po novém auditu je nutné ji zapsat znovu.",

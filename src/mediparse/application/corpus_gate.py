@@ -49,6 +49,8 @@ class CorpusGate:
             provenance = self.corpus.provenance_record()
         except InvalidProvenanceRecordError:
             return ("Záznam provenance neodpovídá schématu.",)
+        if provenance is None:
+            return ("Korpus nemá záznam provenance.",)
         translated = bool(self.corpus.notes(Language.CS))
         return provenance_violations(
             provenance, self.corpus.audit_sha256(), translated=translated
@@ -70,6 +72,8 @@ def audit_violations(
         record = corpus.audit_record()
     except InvalidAuditRecordError:
         return ("Záznam auditu neodpovídá schématu.",)
+    if record is None:
+        return ("Korpus nemá záznam auditu.",)
     return audit_record_violations(
         fingerprint, record, reference_sha256, structure_labels
     )
