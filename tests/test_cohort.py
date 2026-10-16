@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import Final
 
 import pytest
@@ -23,6 +24,7 @@ from mediparse.domain.run_manifest import SourceRevision
 from tests.cohort_support import CODES
 
 POSITIVE: Final = 20
+UNIQUE: Final = 50
 
 
 def test_valid_codes_of_both_versions_get_diagnosis() -> None:
@@ -108,33 +110,47 @@ def test_counts_with_ten_and_ten_pass() -> None:
     assert counts.positives[Diagnosis.CKD] == MIN_CELL
 
 
-@pytest.mark.parametrize("positives", [0, 9])
+def _numbers(error: pytest.ExceptionInfo[InvalidInputError]) -> set[str]:
+    return set(re.findall(r"\d+", str(error.value)))
+
+
+@pytest.mark.parametrize("positives", [0, 7])
 def test_diagnosis_with_few_positives_is_refused_without_number(
     positives: int,
 ) -> None:
-    """Chyba jmenuje diagnózu a neprozradí počet."""
+    """Hláška jmenuje diagnózu a z čísel nese nejvýš práh."""
     with pytest.raises(InvalidInputError, match="copd") as error:
         ensure_publishable(
-            _counts({**dict.fromkeys(Diagnosis, POSITIVE), Diagnosis.COPD: positives})
+            _counts(
+                {**dict.fromkeys(Diagnosis, UNIQUE // 2), Diagnosis.COPD: positives},
+                _funnel(100, 80, 60, UNIQUE),
+            )
         )
 
-    assert str(positives) not in str(error.value).replace("10", "")
+    assert _numbers(error) <= {str(MIN_CELL)}
 
 
-def test_diagnosis_with_few_negatives_is_refused() -> None:
-    """Diagnóza, kterou má skoro každá zpráva, nemá dost negativních."""
-    with pytest.raises(InvalidInputError, match="diabetes"):
+def test_diagnosis_with_few_negatives_is_refused_without_number() -> None:
+    """Diagnóza, kterou má skoro každá zpráva, nemá dost negativních a hláška je bez počtů."""
+    with pytest.raises(InvalidInputError, match="diabetes") as error:
         ensure_publishable(
-            _counts({**dict.fromkeys(Diagnosis, POSITIVE), Diagnosis.DIABETES: 41})
+            _counts(
+                {**dict.fromkeys(Diagnosis, UNIQUE // 2), Diagnosis.DIABETES: 43},
+                _funnel(100, 80, 60, UNIQUE),
+            )
         )
 
+    assert _numbers(error) <= {str(MIN_CELL)}
 
-def test_empty_cohort_is_refused() -> None:
-    """Kohorta bez zpráv nemá z čeho vybírat."""
-    with pytest.raises(InvalidInputError, match="prázdná"):
+
+def test_empty_cohort_is_refused_without_number() -> None:
+    """Kohorta bez zpráv nemá z čeho vybírat; hláška je bez počtů."""
+    with pytest.raises(InvalidInputError, match="prázdná") as error:
         ensure_publishable(
             _counts(funnel=_funnel(100, 80, 60, 0, patients=(50, 40, 30, 0)))
         )
+
+    assert _numbers(error) <= {str(MIN_CELL)}
 
 
 def test_funnel_must_have_four_steps_in_order() -> None:
