@@ -10,6 +10,7 @@ import pytest
 
 from mediparse.application.plan_sampling import PlanSampling
 from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.plans_file import (
     PlansFile,
     SyntheticPlanFiles,
@@ -65,6 +66,20 @@ def test_saved_plans_load_back_unchanged(
 
     assert copy.load() == repository_plans
     assert len(repository_plans) == sampler_config.patients.notes
+
+
+def test_plan_of_other_patient_than_note_id_fails_to_load(
+    repository_plans: tuple[NotePlan, ...], tmp_path: Path
+) -> None:
+    """Soubor s plánem, jehož subject_id neodpovídá note_id, se nenačte."""
+    broken = repository_plans[0].model_copy(
+        update={"subject_id": repository_plans[0].subject_id + 1}
+    )
+    copy = PlansFile(tmp_path / "plans.jsonl")
+    copy.save([broken])
+
+    with pytest.raises(InvalidInputError, match="subject_id"):
+        copy.load()
 
 
 def test_repository_labels_follow_plans(
