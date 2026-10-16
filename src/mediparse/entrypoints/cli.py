@@ -1,4 +1,4 @@
-"""Společné chování konzolových skriptů: chybný vstupní soubor a argumenty validované doménou."""
+"""Společné chování konzolových skriptů: odmítnutí kroku a argumenty validované doménou."""
 
 from __future__ import annotations
 
@@ -36,7 +36,10 @@ def configure_logging(log: Path | None = None) -> None:
 
 
 def refusing_invalid_input[**P](run: Callable[P, ExitCode]) -> Callable[P, ExitCode]:
-    """Chybějící nebo neplatný vstupní soubor ukončí příkaz hláškou a kódem REFUSED.
+    """Krok, který odmítl běžet (``InvalidInputError``), ukončí příkaz hláškou a kódem REFUSED.
+
+    Odmítnutím je chybějící nebo neplatný vstup, config či data a porušený předpoklad
+    kroku, třeba práh DUA. Jiné výjimky projdou jako traceback.
 
     Returns:
         Vstupní bod se stejnými argumenty.
