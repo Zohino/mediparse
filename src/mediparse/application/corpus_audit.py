@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from types import MappingProxyType
-from typing import TYPE_CHECKING, Final, NamedTuple, Protocol
+from typing import TYPE_CHECKING, Final, Protocol
 
 from mediparse.application.ports.corpus import FingerprintedCorpus, NoteSource
 from mediparse.domain.corpus_audit import (
@@ -181,7 +181,7 @@ class CorpusAudit:
 
     def _preflight(
         self, environ: Mapping[str, str], pin: AuditPin
-    ) -> _AuditedCorpus | AuditRefused:
+    ) -> _CheckedCorpus | AuditRefused:
         # Pořadí je bezpečnostní: odmítnutí kvůli prostředí a korpusu přijdou dřív, než
         # se sáhne na referenci, a otisk reference (čte celý soubor) dřív než její zprávy.
         problem = _environment_problem(environ) or _workspace_problem(self.workspace)
@@ -198,7 +198,7 @@ class CorpusAudit:
         )
         if problem is not None:
             return AuditRefused(problem)
-        return _AuditedCorpus(
+        return _CheckedCorpus(
             sha256=sha256,
             notes={
                 f"{language}/{note_id}": text
@@ -224,7 +224,7 @@ class CorpusAudit:
 
     def _record(
         self,
-        corpus: _AuditedCorpus,
+        corpus: _CheckedCorpus,
         index: NgramIndex,
         scans: Sequence[ScanResult],
         pin: AuditPin,
@@ -253,7 +253,7 @@ class CorpusAudit:
 
 
 @dataclass(frozen=True)
-class _AuditedCorpus:
+class _CheckedCorpus:
     """Korpus, který prošel předběžnými kontrolami: otisk, zprávy podle ``jazyk/note_id`` a jejich pacienti."""
 
     sha256: str
@@ -261,8 +261,9 @@ class _AuditedCorpus:
     subjects: frozenset[SubjectId]
 
 
-class _Issued(NamedTuple):
-    """Kdo a kdy záznam vydal; dvojice putuje spolu, aby ``_record`` nepřekročil limit parametrů."""
+@dataclass(frozen=True)
+class _Issued:
+    """Kdo a kdy záznam auditu vydal: commit nástroje a čas běhu."""
 
     tool_commit: str
     created_at: datetime

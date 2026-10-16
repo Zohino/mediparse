@@ -172,7 +172,7 @@ def test_gate_rejects_record_from_other_method() -> None:
 
 
 def test_gate_accepts_matching_record() -> None:
-    """Shodný otisk, metoda i reference bránou projdou."""
+    """Shodný otisk, metoda i reference bránou projdou, štítky pinu (frozenset) i se seřazenou n-ticí záznamu."""
     assert PIN.violations(CORPUS_SHA, audit_record()) == ()
 
 
@@ -236,9 +236,7 @@ def test_pin_is_immune_to_later_change_of_source_dict() -> None:
         pin.reference_sha256["x"] = "y"  # ty: ignore[invalid-assignment]
 
 
-def test_pin_compares_labels_regardless_of_order() -> None:
-    """Štítky pinu jsou množina, záznam je seřazená n-tice; pořadí zadání nerozhoduje."""
-    record = audit_record(structure_labels=["Name", "Unit No"])
-    for labels in (["Name", "Unit No"], ["Unit No", "Name"]):
-        pin = AuditPin(PINNED, frozenset(labels))
-        assert pin.violations(CORPUS_SHA, record) == ()
+def test_pin_is_not_hashable() -> None:
+    """Otisky pinu jsou MappingProxyType, který hashovat nejde; pin se proto hashovat nesmí."""
+    with pytest.raises(TypeError):
+        hash(PIN)

@@ -328,13 +328,15 @@ def test_structure_labels_reach_the_index() -> None:
     """Štítky struktury dojdou do indexu: samotná struktura shodou není."""
     reference = _Reference((ReferenceNote(10000032, f"{PREAMBLE}{SENTENCE}"),))
 
-    outcome = _audit(
-        _Corpus({Language.EN: {NOTE_ID: f"{PREAMBLE}a short body"}}),
-        reference,
-        _Report(),
-    ).run({}, COMMIT, CREATED_AT, DISCHARGE_PIN)
+    corpus = _Corpus({Language.EN: {NOTE_ID: f"{PREAMBLE}a short body"}})
+
+    outcome = _audit(corpus, reference, _Report()).run(
+        {}, COMMIT, CREATED_AT, DISCHARGE_PIN
+    )
 
     assert isinstance(outcome, AuditClean)
+    (record,) = corpus.saved
+    assert record.structure_labels == tuple(sorted(STRUCTURE_LABELS))
 
 
 def test_czech_notes_are_indexed() -> None:

@@ -136,6 +136,10 @@ class AuditPin:
     reference_sha256: Mapping[str, str]
     structure_labels: frozenset[str]
 
+    # MappingProxyType se hashovat nedá; dataclass by jinak vygeneroval __hash__,
+    # který by spadl až za běhu, takže hash zakážeme napřed.
+    __hash__ = None
+
     def __post_init__(self) -> None:
         """Uloží otisky jako kopii jen pro čtení, aby pin nešel změnit přes původní dict."""
         object.__setattr__(
