@@ -35,7 +35,7 @@ def test_shared_subject_is_a_leak() -> None:
     """Pacient v obou částech vyhodí SubjectLeakError se jmenovaným pacientem."""
     notes = _notes(1, 2, 1)
 
-    with pytest.raises(SubjectLeakError, match="1"):
+    with pytest.raises(SubjectLeakError, match=r"Pacienti v tréninku i testu: 1\.$"):
         ensure_disjoint_subjects(notes, Holdout(train=(0, 1), test=(2,)))
 
 
