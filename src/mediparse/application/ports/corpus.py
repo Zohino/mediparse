@@ -1,15 +1,15 @@
-"""Porty, které používá víc use casů."""
+"""Porty korpusu zpráv: plány, texty, otisk, audit a provenance."""
 
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Protocol
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Sequence
+    from collections.abc import Mapping
 
     from mediparse.domain.corpus_audit import AuditRecord
-    from mediparse.domain.evaluation import Classification, Prediction
-    from mediparse.domain.input_note import InputNote
+    from mediparse.domain.corpus_provenance import ProvenanceRecord
+    from mediparse.domain.language import Language
     from mediparse.domain.note_plan import NotePlan
 
 
@@ -31,11 +31,17 @@ class PlanSource(Protocol):
 class NoteSource(Protocol):
     """Texty zpráv korpusu."""
 
-    def notes(self) -> Mapping[str, str]:
-        """Texty zpráv.
+    def notes(self, language: Language) -> Mapping[str, str]:
+        """Texty zpráv jednoho jazyka.
+
+        Args:
+            language: Jazyk zpráv.
 
         Returns:
-            Slovník relativní cesta ``<jazyk>/<note_id>.txt`` → text zprávy.
+            Slovník note_id → text zprávy; jazyk bez zpráv dá prázdný slovník.
+
+        Raises:
+            InvalidInputError: Korpus obsahuje zprávy jazyka mimo Language.
         """
 
 
@@ -45,8 +51,13 @@ class FingerprintedCorpus(Protocol):
     def fingerprint(self) -> str | None:
         """Otisk zpráv korpusu.
 
+        Otisk pokrývá právě zprávy, které vrací ``NoteSource.notes`` pro všechny ``Language``.
+
         Returns:
             SHA-256 otisk, nebo None, když korpus neobsahuje žádnou zprávu.
+
+        Raises:
+            InvalidInputError: Korpus obsahuje zprávy jazyka mimo Language.
         """
 
 
@@ -71,29 +82,22 @@ class AuditedCorpus(FingerprintedCorpus, Protocol):
         """
 
 
-class InputTable(Protocol):
-    """Vstupní tabulka zpráv s labely."""
+class GatedCorpus(AuditedCorpus, NoteSource, Protocol):
+    """Korpus, jak ho vidí brána: korpus se záznamem auditu a provenance a s texty zpráv."""
 
-    def read(self) -> tuple[InputNote, ...]:
-        """Přečte řádky v pořadí tabulky."""
+    def provenance_record(self) -> ProvenanceRecord | None:
+        """Záznam provenance korpusu.
 
+        Returns:
+            Záznam, nebo None, když chybí.
 
-class TextClassifier(Protocol):
-    """Natrénovaný binární klasifikátor textu."""
-
-    def classify(self, texts: Sequence[str]) -> tuple[Classification, ...]:
-        """Určí label a rozhodovací skóre pro každý text."""
-
-
-class PredictionSource(Protocol):
-    """Zdroj predikcí testovacích zpráv."""
-
-    def read(self) -> tuple[Prediction, ...]:
-        """Přečte predikce v pořadí zdroje."""
+        Raises:
+            InvalidProvenanceRecordError: Záznam neodpovídá schématu.
+        """
 
 
-class PredictionSink(Protocol):
-    """Výstup predikcí testovacích zpráv."""
+class ProvenanceCorpus(AuditedCorpus, Protocol):
+    """Korpus se záznamem auditu, ke kterému se zapisuje provenance."""
 
-    def write(self, predictions: Sequence[Prediction]) -> None:
-        """Zapíše predikce."""
+    def save_provenance(self, record: ProvenanceRecord) -> None:
+        """Uloží záznam provenance ke korpusu."""

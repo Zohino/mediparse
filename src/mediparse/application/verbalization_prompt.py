@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING
 from mediparse.domain.verbalization import render_prompt
 
 if TYPE_CHECKING:
-    from mediparse.application.ports import PlanSource
+    from mediparse.application.ports.corpus import PlanSource
     from mediparse.domain.synthetic_plan import SamplerConfig
 
 

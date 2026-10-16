@@ -1,5 +1,6 @@
-"""Architektura mimo dosah import-linteru: vstupy do balíčku, skripty workflow a konfigurace modelů domény."""
+"""Architektura mimo dosah import-linteru: vstupy do balíčku, skripty workflow, umístění sdílených portů a konfigurace modelů domény."""
 
+import ast
 import importlib
 import pkgutil
 import re
@@ -20,6 +21,8 @@ WORKFLOW = REPOSITORY / "workflow"
 MAX_SCRIPT_LINES = 20
 MAIN_GUARD = re.compile(r"__name__\s*==\s*[\"']__main__[\"']")
 RUN_DIRECTIVE = re.compile(r"^\s*run\s*:", re.MULTILINE)
+APPLICATION = PACKAGE / "application"
+APPLICATION_PREFIX = "mediparse.application."
 
 
 def _pyproject() -> dict[str, Any]:
@@ -115,3 +118,90 @@ def test_domain_models_are_frozen_forbid_and_strict(model: type[BaseModel]) -> N
     assert config.get("frozen") is True
     assert config.get("extra") == "forbid"
     assert config.get("strict") is True
+
+
+def _protocol_names(module: Path) -> set[str]:
+    tree = ast.parse(module.read_text(encoding="utf-8"))
+    return {
+        node.name
+        for node in ast.walk(tree)
+        if isinstance(node, ast.ClassDef)
+        and any(
+            (isinstance(base, ast.Name) and base.id == "Protocol")
+            or (isinstance(base, ast.Attribute) and base.attr == "Protocol")
+            for base in node.bases
+        )
+    }
+
+
+def _imported_module(module: Path, application: Path, node: ast.ImportFrom) -> str:
+    """Úplné jméno importovaného modulu; relativní import se přeloží podle ``node.level``.
+
+    Returns:
+        Tečkované jméno modulu.
+    """
+    if node.level == 0:
+        return node.module or ""
+    package = ["mediparse", "application", *module.relative_to(application).parts[:-1]]
+    base = package[: len(package) - (node.level - 1)]
+    return ".".join([*base, *(node.module.split(".") if node.module else [])])
+
+
+def _foreign_protocol_imports(application: Path) -> list[str]:
+    """Importy portu z modulu jiného use casu; ``ports.*`` je jediné místo sdílených portů.
+
+    Returns:
+        Popisy porušení; prázdný seznam znamená, že pravidlo platí.
+    """
+    violations: list[str] = []
+    modules = [
+        module
+        for module in sorted(application.rglob("*.py"))
+        if module.relative_to(application).parts[0] != "ports"
+    ]
+    for module in modules:
+        tree = ast.parse(module.read_text(encoding="utf-8"))
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.ImportFrom):
+                continue
+            imported = _imported_module(module, application, node)
+            if not imported.startswith(APPLICATION_PREFIX):
+                continue
+            source = imported.removeprefix(APPLICATION_PREFIX)
+            if source == "ports" or source.startswith("ports."):
+                continue
+            source_file = application / Path(*source.split(".")).with_suffix(".py")
+            if not source_file.is_file():
+                continue
+            protocols = _protocol_names(source_file)
+            violations.extend(
+                f"{module.name} importuje port {alias.name} z {source}"
+                for alias in node.names
+                if alias.name in protocols
+            )
+    return violations
+
+
+def test_shared_port_lives_in_ports_package() -> None:
+    """Port, který používá víc use casů, leží v ``application.ports``, ne v modulu use casu."""
+    assert any(APPLICATION.glob("*.py"))
+    assert _foreign_protocol_imports(APPLICATION) == []
+
+
+def test_use_case_may_import_function_of_another_use_case(tmp_path: Path) -> None:
+    """Pravidlo se týká portů; funkci jiného use casu smí use case volat (S11s)."""
+    (tmp_path / "gate.py").write_text(
+        "from typing import Protocol\n\n"
+        "class Port(Protocol):\n    ...\n\n"
+        "def audit_violations() -> None:\n    ...\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "user.py").write_text(
+        "from mediparse.application.gate import audit_violations\n", encoding="utf-8"
+    )
+    (tmp_path / "bad.py").write_text(
+        "if True:\n    from mediparse.application.gate import Port\n",
+        encoding="utf-8",
+    )
+
+    assert _foreign_protocol_imports(tmp_path) == ["bad.py importuje port Port z gate"]

@@ -11,6 +11,7 @@ from mediparse.domain.inputs import InvalidInputError
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
+    from mediparse.domain.language import Language
     from mediparse.domain.note_plan import NotePlan
 
 
@@ -19,7 +20,7 @@ class UnpairedNotesError(InvalidInputError):
 
 
 def input_notes(
-    plans: Sequence[NotePlan], texts: Mapping[str, str], language: str
+    plans: Sequence[NotePlan], texts: Mapping[str, str], language: Language
 ) -> tuple[InputNote, ...]:
     """Spáruje plány se zprávami jednoho jazyka.
 
@@ -52,7 +53,7 @@ def input_notes(
 
 
 def _pairing_problems(
-    counts: Counter[str], texts: Mapping[str, str], language: str
+    counts: Counter[str], texts: Mapping[str, str], language: Language
 ) -> list[str]:
     if not counts and not texts:
         return [f"Korpus nemá v jazyce {language} žádnou zprávu ani plán."]

@@ -14,6 +14,7 @@ from mediparse.domain.corpus_audit import NGRAM_SIZE, NORMALIZATION, AuditRecord
 from mediparse.domain.corpus_provenance import Decoding, Translation, TranslationRun
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
+from mediparse.domain.language import Language
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.plans_file import LABELS_PATH, PLANS_PATH
 from mediparse.infrastructure.sampler_config import (
@@ -45,8 +46,10 @@ STRUCTURE_LABELS: Final = load_sampler_config(
 ).structure.structure_labels
 
 COMMIT: Final = "c" * 40
-NOTE: Final = "en/90000001-DS-1.txt"
-SHORT_NOTE: Final = {NOTE: "a short synthetic note"}
+NOTE_ID: Final = "90000001-DS-1"
+SHORT_TEXT: Final = "a short synthetic note"
+NOTE: Final = f"en/{NOTE_ID}.txt"
+SHORT_NOTE: Final = {NOTE: SHORT_TEXT}
 SENTENCE: Final = (
     "the old lighthouse keeper counted seven gulls before the storm "
     "reached the northern harbor wall"
@@ -106,7 +109,7 @@ def separable_notes(
             InputNote(
                 f"{patient}-DS-{visit}",
                 patient,
-                "en",
+                Language.EN,
                 f"{vocabulary[0] if positive else vocabulary[1]} visit {visit}",
                 labels,
             )

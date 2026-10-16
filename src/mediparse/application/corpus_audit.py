@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from types import MappingProxyType
 from typing import TYPE_CHECKING, Final, Protocol
 
-from mediparse.application.ports import FingerprintedCorpus, NoteSource
+from mediparse.application.ports.corpus import FingerprintedCorpus, NoteSource
 from mediparse.domain.corpus_audit import (
     NGRAM_SIZE,
     NORMALIZATION,
@@ -22,6 +22,7 @@ from mediparse.domain.corpus_audit import (
     reference_mismatch,
     scan,
 )
+from mediparse.domain.language import Language
 from mediparse.domain.note import InvalidNoteIdError, subject_of
 
 if TYPE_CHECKING:
@@ -39,13 +40,6 @@ _BLOCKING_VARIABLES: Final = MappingProxyType({
 
 class SyntheticCorpus(NoteSource, FingerprintedCorpus, Protocol):
     """Auditovaný korpus: zprávy, jejich otisk a místo pro záznam auditu."""
-
-    def note_ids(self) -> Iterable[str]:
-        """Note_id všech zpráv korpusu.
-
-        Returns:
-            Note_id ve skladbě MIMIC-IV-Note.
-        """
 
     def save_record(self, record: AuditRecord) -> None:
         """Uloží záznam čistého auditu ke korpusu."""
@@ -167,12 +161,23 @@ class CorpusAudit:
         sha256 = self.corpus.fingerprint()
         if sha256 is None:
             return AuditRefused("Korpus neobsahuje žádnou zprávu.")
+        # Všechny jazyky, protože otisk pokrývá i překlad; audit jen angličtiny by bránou
+        # pustil neauditovaný český text. Jazyk v popisku rozliší stejný note_id v en a cs.
+        by_language = {language: self.corpus.notes(language) for language in Language}
+        notes = {
+            f"{language}/{note_id}": text
+            for language, texts in by_language.items()
+            for note_id, text in texts.items()
+        }
         try:
-            subjects = frozenset(subject_of(note) for note in self.corpus.note_ids())
+            subjects = frozenset(
+                subject_of(note_id)
+                for texts in by_language.values()
+                for note_id in texts
+            )
             _verify_reference(self.references, reference_sha256)
         except (InvalidNoteIdError, _ReferenceMismatchError) as error:
             return AuditRefused(str(error))
-        notes = self.corpus.notes()
         index = NgramIndex(notes, self.structure_labels)
         scans = tuple(
             scan(index, subjects, reference.notes()) for reference in self.references

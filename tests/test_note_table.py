@@ -11,6 +11,7 @@ import pytest
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.language import Language
 from mediparse.infrastructure.note_table import SCHEMA, ParquetNoteTable
 
 if TYPE_CHECKING:
@@ -23,8 +24,10 @@ def test_writes_rows_in_fixed_schema(tmp_path: Path) -> None:
     """Labely jsou bool sloupce v pořadí výčtu, text projde beze změny."""
     path = tmp_path / "missing" / "notes.parquet"
     notes = [
-        InputNote("90000001-DS-1", 90000001, "en", TEXT, frozenset({Diagnosis.CKD})),
-        InputNote("90000002-DS-1", 90000002, "en", "b", frozenset()),
+        InputNote(
+            "90000001-DS-1", 90000001, Language.EN, TEXT, frozenset({Diagnosis.CKD})
+        ),
+        InputNote("90000002-DS-1", 90000002, Language.EN, "b", frozenset()),
     ]
 
     ParquetNoteTable(path).write(notes)
@@ -55,7 +58,7 @@ def test_writes_rows_in_fixed_schema(tmp_path: Path) -> None:
 def test_rewrites_previous_table(tmp_path: Path) -> None:
     """Druhý zápis nahradí obsah, nepřipojí řádky."""
     path = tmp_path / "notes.parquet"
-    note = InputNote("90000001-DS-1", 90000001, "en", "a", frozenset())
+    note = InputNote("90000001-DS-1", 90000001, Language.EN, "a", frozenset())
     table = ParquetNoteTable(path)
 
     table.write([note, note])
@@ -71,11 +74,11 @@ def test_read_returns_written_rows(tmp_path: Path) -> None:
         InputNote(
             "90000001-DS-1",
             90000001,
-            "en",
+            Language.EN,
             TEXT,
             frozenset({Diagnosis.CKD, Diagnosis.PNEUMONIA}),
         ),
-        InputNote("90000002-DS-1", 90000002, "en", "b", frozenset()),
+        InputNote("90000002-DS-1", 90000002, Language.EN, "b", frozenset()),
     )
 
     table.write(notes)
@@ -95,4 +98,25 @@ def test_read_other_schema_is_invalid_input(tmp_path: Path) -> None:
     pq.write_table(pa.table({"note_id": ["a"]}), path)
 
     with pytest.raises(InvalidInputError, match="neodpovídá schématu"):
+        ParquetNoteTable(path).read()
+
+
+def test_read_returns_language_as_enum(tmp_path: Path) -> None:
+    """Jazyk z parquetu se čte jako Language, ne jako řetězec."""
+    table = ParquetNoteTable(tmp_path / "notes.parquet")
+    table.write([InputNote("a", 1, Language.CS, "text", frozenset())])
+
+    assert table.read()[0].language is Language.CS
+
+
+def test_read_unknown_language_is_invalid_input(tmp_path: Path) -> None:
+    """Jazyk mimo výčet je InvalidInputError, ne ValueError z adaptéru."""
+    path = tmp_path / "notes.parquet"
+    ParquetNoteTable(path).write([InputNote("a", 1, Language.EN, "text", frozenset())])
+    rows = pq.read_table(path).to_pylist()
+    rows[0]["language"] = "de"
+    columns = {name: [row[name] for row in rows] for name in SCHEMA.names}
+    pq.write_table(pa.Table.from_pydict(columns, schema=SCHEMA), path)
+
+    with pytest.raises(InvalidInputError, match="neznámý jazyk 'de'"):
         ParquetNoteTable(path).read()

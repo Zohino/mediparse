@@ -16,7 +16,7 @@ from mediparse.domain.inputs import InvalidInputError
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.application.ports import PredictionSource
+    from mediparse.application.ports.experiment import PredictionSource
     from mediparse.domain.diagnosis import Diagnosis
     from mediparse.domain.evaluation import BinaryMetrics, Prediction
 

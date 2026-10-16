@@ -15,7 +15,7 @@ from mediparse.infrastructure.synthetic_corpus import (
     RECORD_NAME,
     CorpusDirectory,
 )
-from tests.support import NOTE, SENTENCE, SHORT_NOTE
+from tests.support import NOTE, NOTE_ID, SENTENCE, SHORT_NOTE
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -77,7 +77,7 @@ def test_overlap_blocks_record_and_never_prints_text(
 
     assert code == ExitCode.BLOCKED
     assert not (corpus / RECORD_NAME).exists()
-    assert NOTE in output.out
+    assert f"en/{NOTE_ID}" in output.out
     assert "lighthouse" not in output.out + output.err + caplog.text + report
     assert json.loads(report)["positions"]
 

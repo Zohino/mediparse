@@ -13,7 +13,7 @@ from mediparse.domain.smoketest_inference import (
 )
 
 if TYPE_CHECKING:
-    from mediparse.application.ports import (
+    from mediparse.application.ports.experiment import (
         InputTable,
         PredictionSink,
         PredictionSource,

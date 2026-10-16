@@ -18,6 +18,7 @@ from mediparse.domain.corpus_provenance import (
     ProvenanceRecord,
     Translation,
 )
+from mediparse.domain.language import Language
 from mediparse.domain.translation_consistency import TranslatedNote
 from tests.support import (
     CORPUS_SHA,
@@ -53,7 +54,7 @@ def _generation() -> Generation:
 
 @dataclass
 class _Corpus:
-    texts: dict[str, str]
+    texts: dict[Language, dict[str, str]]
     sha256: str = CORPUS_SHA
     record: AuditRecord = field(default_factory=audit_record)
     provenance: ProvenanceRecord | None = field(
@@ -64,8 +65,8 @@ class _Corpus:
     audit_file: str = NEW_AUDIT_FILE
     saved: list[ProvenanceRecord] = field(default_factory=list)
 
-    def notes(self) -> dict[str, str]:
-        return self.texts
+    def notes(self, language: Language) -> dict[str, str]:
+        return self.texts.get(language, {})
 
     def fingerprint(self) -> str | None:
         return self.sha256
@@ -95,12 +96,21 @@ class _Source:
         return self.notes_
 
 
-def _texts() -> dict[str, str]:
+def _texts() -> dict[Language, dict[str, str]]:
     return {
-        "en/n1.txt": "one ___",
-        "en/n2.txt": "two ___ ___",
-        "cs/n1.txt": "jedna ___\n",
-        "cs/n2.txt": "dva ___\n\nx\n",
+        Language.EN: {"n1": "one ___", "n2": "two ___ ___"},
+        Language.CS: {"n1": "jedna ___\n", "n2": "dva ___\n\nx\n"},
+    }
+
+
+def _replace(
+    texts: dict[Language, dict[str, str]], language: Language, **changes: str | None
+) -> dict[Language, dict[str, str]]:
+    changed = {**texts[language], **changes}
+    return texts | {
+        language: {
+            note_id: text for note_id, text in changed.items() if text is not None
+        }
     }
 
 
@@ -147,7 +157,7 @@ def test_corpus_not_matching_audit_is_refused() -> None:
 
 def test_corpus_without_czech_is_refused() -> None:
     """Bez cs/ není co k čemu vázat."""
-    corpus = _Corpus({"en/n1.txt": "one ___"})
+    corpus = _Corpus({Language.EN: {"n1": "one ___"}})
 
     assert isinstance(_run(corpus, _source()), ProvenanceRefused)
     assert corpus.saved == []
@@ -156,15 +166,15 @@ def test_corpus_without_czech_is_refused() -> None:
 @pytest.mark.parametrize(
     "change",
     [
-        lambda texts: texts | {"en/n1.txt": "changed ___"},
-        lambda texts: texts | {"cs/n3.txt": "tři\n"},
-        lambda texts: {k: v for k, v in texts.items() if k != "cs/n2.txt"},
-        lambda texts: texts | {"cs/n1.txt": "upraveno ___\n"},
+        lambda texts: _replace(texts, Language.EN, n1="changed ___"),
+        lambda texts: _replace(texts, Language.CS, n3="tři\n"),
+        lambda texts: _replace(texts, Language.CS, n2=None),
+        lambda texts: _replace(texts, Language.CS, n1="upraveno ___\n"),
     ],
     ids=["changed-original", "extra-note", "missing-note", "edited-czech"],
 )
 def test_corpus_not_bound_to_workdir_is_refused(
-    change: Callable[[dict[str, str]], dict[str, str]],
+    change: Callable[[dict[Language, dict[str, str]]], dict[Language, dict[str, str]]],
 ) -> None:
     """Změněný originál, jiná množina note_id i ručně upravený překlad zápis zablokují."""
     corpus = _Corpus(change(_texts()))
@@ -177,7 +187,7 @@ def test_corpus_not_bound_to_workdir_is_refused(
 
 def test_incomplete_translation_is_refused_before_binding() -> None:
     """Prázdný překlad zablokuje zápis, i když sedí s výstupy pracovního adresáře."""
-    texts = {"en/n1.txt": "one ___", "cs/n1.txt": ""}
+    texts = {Language.EN: {"n1": "one ___"}, Language.CS: {"n1": ""}}
     source = _Source((TranslatedNote("n1", sha256_text("one ___"), ("",)),))
     corpus = _Corpus(texts)
 
@@ -197,7 +207,7 @@ def test_masked_translation_binds_to_restored_czech() -> None:
         ),
         translation_record(masking="[[n]]"),
     )
-    texts = _texts() | {"cs/n2.txt": "dva ___\n\nx ___\n"}
+    texts = _replace(_texts(), Language.CS, n2="dva ___\n\nx ___\n")
     corpus = _Corpus(texts)
 
     assert _run(corpus, source) == ProvenanceWritten()

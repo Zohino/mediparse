@@ -9,6 +9,7 @@ import pytest
 
 from mediparse.application.smoketest_input import SmoketestInput
 from mediparse.domain.input_note import InputNote
+from mediparse.domain.language import Language
 from mediparse.domain.smoketest_input import UnpairedNotesError
 from tests.support import PlansFake
 
@@ -20,10 +21,10 @@ if TYPE_CHECKING:
 
 @dataclass(frozen=True)
 class _Corpus:
-    texts: dict[str, str]
+    texts: dict[Language, dict[str, str]]
 
-    def notes(self) -> dict[str, str]:
-        return self.texts
+    def notes(self, language: Language) -> dict[str, str]:
+        return self.texts.get(language, {})
 
 
 @dataclass
@@ -38,8 +39,8 @@ def test_writes_english_notes_with_plan_labels(planned_note: PlannedNote) -> Non
     """Anglické zprávy jdou do tabulky s labely plánu; české se ignorují."""
     plan = planned_note.plan
     corpus = _Corpus({
-        f"en/{plan.note_id}.txt": planned_note.text,
-        f"cs/{plan.note_id}.txt": "český překlad",
+        Language.EN: {plan.note_id: planned_note.text},
+        Language.CS: {plan.note_id: "český překlad"},
     })
     table = _Table()
 
@@ -51,7 +52,7 @@ def test_writes_english_notes_with_plan_labels(planned_note: PlannedNote) -> Non
             InputNote(
                 plan.note_id,
                 plan.subject_id,
-                "en",
+                Language.EN,
                 planned_note.text,
                 frozenset(plan.labels),
             ),

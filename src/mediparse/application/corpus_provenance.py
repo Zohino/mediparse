@@ -8,23 +8,16 @@ nedostane.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Protocol
+from typing import TYPE_CHECKING
 
 from mediparse.application.corpus_gate import audit_violations
-from mediparse.application.ports import AuditedCorpus
 from mediparse.domain.corpus_provenance import ProvenanceRecord
 
 if TYPE_CHECKING:
     from collections.abc import Collection, Mapping
 
+    from mediparse.application.ports.corpus import AuditedCorpus, ProvenanceCorpus
     from mediparse.domain.corpus_provenance import Generation
-
-
-class ProvenanceCorpus(AuditedCorpus, Protocol):
-    """Korpus se záznamem auditu, ke kterému se zapisuje provenance."""
-
-    def save_provenance(self, record: ProvenanceRecord) -> None:
-        """Uloží záznam provenance ke korpusu."""
 
 
 @dataclass(frozen=True)

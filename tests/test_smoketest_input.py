@@ -8,6 +8,7 @@ import pytest
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
+from mediparse.domain.language import Language
 from mediparse.domain.smoketest_input import UnpairedNotesError, input_notes
 
 if TYPE_CHECKING:
@@ -27,13 +28,17 @@ def test_pairs_plans_with_texts_sorted_by_note_id(planned_note: PlannedNote) -> 
     )
     texts = {"90000002-DS-1": "druhá", "90000001-DS-1": "první"}
 
-    notes = input_notes(plans, texts, "en")
+    notes = input_notes(plans, texts, Language.EN)
 
     subject = planned_note.plan.subject_id
     assert notes == (
-        InputNote("90000001-DS-1", subject, "en", "první", frozenset()),
+        InputNote("90000001-DS-1", subject, Language.EN, "první", frozenset()),
         InputNote(
-            "90000002-DS-1", subject, "en", "druhá", frozenset({Diagnosis.PNEUMONIA})
+            "90000002-DS-1",
+            subject,
+            Language.EN,
+            "druhá",
+            frozenset({Diagnosis.PNEUMONIA}),
         ),
     )
 
@@ -45,7 +50,7 @@ def test_plan_without_text_is_refused(planned_note: PlannedNote) -> None:
     with pytest.raises(
         UnpairedNotesError, match="Plány bez zprávy v jazyce en: 90000002-DS-1"
     ):
-        input_notes(plans, {"90000001-DS-1": "první"}, "en")
+        input_notes(plans, {"90000001-DS-1": "první"}, Language.EN)
 
 
 def test_text_without_plan_is_refused(planned_note: PlannedNote) -> None:
@@ -55,7 +60,7 @@ def test_text_without_plan_is_refused(planned_note: PlannedNote) -> None:
     with pytest.raises(
         UnpairedNotesError, match="Zprávy bez plánu v jazyce en: 90000009-DS-1"
     ):
-        input_notes((_plan(planned_note, "90000001-DS-1"),), texts, "en")
+        input_notes((_plan(planned_note, "90000001-DS-1"),), texts, Language.EN)
 
 
 def test_duplicate_plans_are_refused(planned_note: PlannedNote) -> None:
@@ -66,7 +71,7 @@ def test_duplicate_plans_are_refused(planned_note: PlannedNote) -> None:
     )
 
     with pytest.raises(UnpairedNotesError, match="Duplicitní plány: 90000001-DS-1"):
-        input_notes(plans, {"90000001-DS-1": "první"}, "en")
+        input_notes(plans, {"90000001-DS-1": "první"}, Language.EN)
 
 
 def test_empty_corpus_is_refused() -> None:
@@ -74,4 +79,4 @@ def test_empty_corpus_is_refused() -> None:
     with pytest.raises(
         UnpairedNotesError, match="Korpus nemá v jazyce en žádnou zprávu"
     ):
-        input_notes((), {}, "en")
+        input_notes((), {}, Language.EN)
