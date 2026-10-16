@@ -17,12 +17,15 @@ from mediparse.domain.corpus_provenance import (
     ProvenanceRecord,
 )
 from mediparse.domain.digest import fingerprint
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.language import Language
 from mediparse.infrastructure.file_digest import file_sha256
 
 CORPUS_ROOT: Final = Path("resources/synthetic")
 RECORD_NAME: Final = "audit.json"
 PROVENANCE_NAME: Final = "provenance.json"
 _NOTES: Final = "*/*.txt"
+_LANGUAGES: Final = frozenset(language.value for language in Language)
 
 
 @dataclass(frozen=True)
@@ -31,24 +34,17 @@ class CorpusDirectory:
 
     root: Path
 
-    def notes(self) -> dict[str, str]:
-        """Texty zpráv klíčované cestou relativní ke kořeni korpusu.
+    def notes(self, language: Language) -> dict[str, str]:
+        """Texty zpráv jednoho jazyka.
 
         Returns:
-            Slovník relativní cesta → text zprávy.
+            Slovník note_id → text zprávy; jazyk bez zpráv dá prázdný slovník.
         """
         return {
-            self._relative(path): path.read_text(encoding="utf-8")
+            path.stem: path.read_text(encoding="utf-8")
             for path in self._paths()
+            if path.parent.name == language.value
         }
-
-    def note_ids(self) -> list[str]:
-        """Note_id zpráv podle jmen souborů.
-
-        Returns:
-            Jména souborů bez přípony, seřazená podle cesty.
-        """
-        return [path.stem for path in self._paths()]
 
     def fingerprint(self) -> str | None:
         """Otisk zpráv tak, jak leží na disku.
@@ -119,7 +115,16 @@ class CorpusDirectory:
         )
 
     def _paths(self) -> list[Path]:
-        return sorted(self.root.glob(_NOTES))
+        # Otisk pokrývá všechny */*.txt, audit jen jazyky z Language. Neznámý adresář by tak
+        # byl otisknutý, ale neauditovaný, a proto se odmítne zde, v jediném místě pro obojí.
+        paths = sorted(self.root.glob(_NOTES))
+        unknown = sorted({
+            path.parent.name for path in paths if path.parent.name not in _LANGUAGES
+        })
+        if unknown:
+            msg = f"Korpus {self.root} obsahuje adresář neznámého jazyka: {', '.join(unknown)}."
+            raise InvalidInputError(msg)
+        return paths
 
     def _relative(self, path: Path) -> str:
         return path.relative_to(self.root).as_posix()

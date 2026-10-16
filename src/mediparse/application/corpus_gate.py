@@ -5,7 +5,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from mediparse.application.corpus_texts import TRANSLATION_LANGUAGE, texts_in_language
 from mediparse.domain.corpus_audit import (
     InvalidAuditRecordError,
     audit_record_violations,
@@ -14,6 +13,7 @@ from mediparse.domain.corpus_provenance import (
     InvalidProvenanceRecordError,
     provenance_violations,
 )
+from mediparse.domain.language import Language
 
 if TYPE_CHECKING:
     from collections.abc import Collection, Mapping
@@ -49,7 +49,7 @@ class CorpusGate:
             provenance = self.corpus.provenance_record()
         except InvalidProvenanceRecordError:
             return ("Záznam provenance neodpovídá schématu.",)
-        translated = bool(texts_in_language(self.corpus.notes(), TRANSLATION_LANGUAGE))
+        translated = bool(self.corpus.notes(Language.CS))
         return provenance_violations(
             provenance, self.corpus.audit_sha256(), translated=translated
         )

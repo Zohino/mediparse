@@ -77,7 +77,7 @@ def test_overlap_blocks_record_and_never_prints_text(
 
     assert code == ExitCode.BLOCKED
     assert not (corpus / RECORD_NAME).exists()
-    assert NOTE in output.out
+    assert NOTE.removesuffix(".txt") in output.out
     assert "lighthouse" not in output.out + output.err + caplog.text + report
     assert json.loads(report)["positions"]
 

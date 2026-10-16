@@ -9,6 +9,7 @@ if TYPE_CHECKING:
 
     from mediparse.domain.corpus_audit import AuditRecord
     from mediparse.domain.corpus_provenance import ProvenanceRecord
+    from mediparse.domain.language import Language
     from mediparse.domain.note_plan import NotePlan
 
 
@@ -30,11 +31,14 @@ class PlanSource(Protocol):
 class NoteSource(Protocol):
     """Texty zpráv korpusu."""
 
-    def notes(self) -> Mapping[str, str]:
-        """Texty zpráv.
+    def notes(self, language: Language) -> Mapping[str, str]:
+        """Texty zpráv jednoho jazyka.
+
+        Args:
+            language: Jazyk zpráv.
 
         Returns:
-            Slovník relativní cesta ``<jazyk>/<note_id>.txt`` → text zprávy.
+            Slovník note_id → text zprávy; jazyk bez zpráv dá prázdný slovník.
         """
 
 

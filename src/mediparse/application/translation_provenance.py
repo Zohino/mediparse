@@ -15,16 +15,12 @@ from mediparse.application.corpus_provenance import (
     ProvenanceWritten,
     audit_refusal,
 )
-from mediparse.application.corpus_texts import (
-    LANGUAGE,
-    TRANSLATION_LANGUAGE,
-    texts_in_language,
-)
 from mediparse.application.ports.corpus import GatedCorpus, ProvenanceCorpus
 from mediparse.domain.corpus_provenance import (
     InvalidProvenanceRecordError,
     ProvenanceRecord,
 )
+from mediparse.domain.language import Language
 from mediparse.domain.translation_consistency import (
     binding_violations,
     marker_mismatches,
@@ -86,9 +82,8 @@ class TranslationProvenance:
         existing = self._existing(reference_sha256, structure_labels)
         if isinstance(existing, ProvenanceRefused):
             return existing
-        texts = self.corpus.notes()
-        english = texts_in_language(texts, LANGUAGE)
-        czech = texts_in_language(texts, TRANSLATION_LANGUAGE)
+        english = self.corpus.notes(Language.EN)
+        czech = self.corpus.notes(Language.CS)
         if not czech:
             return ProvenanceRefused("Korpus nemá český překlad.")
         incomplete = translation_violations(english, czech)

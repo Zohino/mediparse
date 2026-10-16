@@ -5,12 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from mediparse.application.corpus_texts import (
-    LANGUAGE,
-    TRANSLATION_LANGUAGE,
-    texts_in_language,
-)
 from mediparse.domain.corpus_statistics import corpus_violations
+from mediparse.domain.language import Language
 from mediparse.domain.note_consistency import note_violations
 from mediparse.domain.translation_consistency import (
     marker_mismatches,
@@ -56,9 +52,8 @@ class CorpusConsistency:
             částečný korpus je neúplný.
         """
         plans = {plan.note_id: plan for plan in self.plans.load()}
-        all_notes = self.corpus.notes()
-        texts = texts_in_language(all_notes, LANGUAGE)
-        czech = texts_in_language(all_notes, TRANSLATION_LANGUAGE)
+        texts = self.corpus.notes(Language.EN)
+        czech = self.corpus.notes(Language.CS)
         notes = tuple(
             NoteViolations(note_id, reasons)
             for note_id in sorted(texts)

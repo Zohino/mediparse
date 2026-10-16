@@ -15,7 +15,8 @@ from mediparse.application.corpus_audit import (
     CorpusAudit,
 )
 from mediparse.domain.corpus_audit import ReferenceNote
-from tests.support import COMMIT, CORPUS_SHA, NOTE, PINNED, SENTENCE, SHORT_NOTE
+from mediparse.domain.language import Language
+from tests.support import COMMIT, CORPUS_SHA, PINNED, SENTENCE
 
 if TYPE_CHECKING:
     from collections.abc import Collection, Iterator, Sequence
@@ -27,22 +28,21 @@ CREATED_AT = datetime(2026, 9, 29, tzinfo=UTC)
 DISCHARGE_SHA = PINNED["discharge.csv.gz"]
 DISCHARGE_PINNED = {"discharge.csv.gz": DISCHARGE_SHA}
 STRUCTURE_LABELS = frozenset({"Name", "Unit No"})
+NOTE_ID = "90000001-DS-1"
+SHORT_NOTES = {Language.EN: {NOTE_ID: "a short synthetic note"}}
 PREAMBLE = "Name: ___ Unit No: ___ Name: ___ Unit No: ___ Name: ___ Unit No: ___\n"
 
 
 @dataclass
 class _Corpus:
-    texts: dict[str, str]
+    texts: dict[Language, dict[str, str]]
     saved: list[AuditRecord] = field(default_factory=list)
 
-    def notes(self) -> dict[str, str]:
-        return self.texts
-
-    def note_ids(self) -> list[str]:
-        return [name.split("/")[-1].removesuffix(".txt") for name in self.texts]
+    def notes(self, language: Language) -> dict[str, str]:
+        return self.texts.get(language, {})
 
     def fingerprint(self) -> str | None:
-        return CORPUS_SHA if self.texts else None
+        return CORPUS_SHA if any(self.texts.values()) else None
 
     def save_record(self, record: AuditRecord) -> None:
         self.saved.append(record)
@@ -133,7 +133,7 @@ def _audit(
 
 def test_clean_corpus_saves_record() -> None:
     """Čistý korpus dostane záznam s otiskem, metodou a referencí, report nevznikne."""
-    corpus = _Corpus(dict(SHORT_NOTE))
+    corpus = _Corpus(dict(SHORT_NOTES))
     report = _Report()
     reference = _Reference((ReferenceNote(10000032, SENTENCE),))
 
@@ -153,7 +153,7 @@ def test_clean_corpus_saves_record() -> None:
 
 def test_overlap_writes_report_and_no_record() -> None:
     """Shoda zapíše jen pozice do reportu a záznam auditu nevznikne."""
-    corpus = _Corpus({NOTE: SENTENCE})
+    corpus = _Corpus({Language.EN: {NOTE_ID: SENTENCE}})
     report = _Report()
     reference = _Reference((ReferenceNote(10000032, SENTENCE),))
 
@@ -161,16 +161,18 @@ def test_overlap_writes_report_and_no_record() -> None:
         {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
     )
 
-    assert outcome == AuditOverlap(shared_ngrams=3, colliding_subjects=0, notes=(NOTE,))
+    assert outcome == AuditOverlap(
+        shared_ngrams=3, colliding_subjects=0, notes=(f"en/{NOTE_ID}",)
+    )
     assert not corpus.saved
     ((positions, colliding),) = report.written
-    assert {position.note for position in positions} == {NOTE}
+    assert {position.note for position in positions} == {f"en/{NOTE_ID}"}
     assert not colliding
 
 
 def test_subject_collision_is_overlap() -> None:
     """Syntetický pacient, který existuje v referenci, audit neprojde."""
-    corpus = _Corpus(dict(SHORT_NOTE))
+    corpus = _Corpus(dict(SHORT_NOTES))
     report = _Report()
     reference = _Reference((ReferenceNote(90000001, "unrelated text"),))
 
@@ -187,7 +189,7 @@ def test_subject_collision_is_overlap() -> None:
 )
 def test_environment_refusal_never_touches_reference(environ: dict[str, str]) -> None:
     """V CI ani v relaci Claude Code audit na MIMIC nesáhne."""
-    corpus = _Corpus({NOTE: SENTENCE})
+    corpus = _Corpus({Language.EN: {NOTE_ID: SENTENCE}})
     report = _Report()
 
     outcome = _audit(corpus, _UntouchableReference(), report).run(
@@ -210,7 +212,7 @@ def test_environment_refusal_never_touches_reference(environ: dict[str, str]) ->
 )
 def test_workspace_refusal_never_touches_reference(workspace: _Workspace) -> None:
     """Chybějící reference, korpus mimo repozitář i report v repozitáři audit odmítne předem."""
-    corpus = _Corpus({NOTE: SENTENCE})
+    corpus = _Corpus({Language.EN: {NOTE_ID: SENTENCE}})
 
     outcome = _audit(corpus, _UntouchableReference(), _Report(), workspace).run(
         {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
@@ -222,7 +224,7 @@ def test_workspace_refusal_never_touches_reference(workspace: _Workspace) -> Non
 
 def test_invalid_note_id_is_refused_before_reference() -> None:
     """Soubor, jehož jméno není note_id, audit odmítne dřív, než sáhne na MIMIC."""
-    corpus = _Corpus({"en/not-a-note.txt": SENTENCE})
+    corpus = _Corpus({Language.EN: {"not-a-note": SENTENCE}})
 
     outcome = _audit(corpus, _UntouchableReference(), _Report()).run(
         {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
@@ -243,7 +245,7 @@ def test_empty_corpus_is_refused() -> None:
 
 def test_empty_reference_is_refused_without_record() -> None:
     """Reference bez jediné zprávy by atestovala nic, záznam nevznikne."""
-    corpus = _Corpus(dict(SHORT_NOTE))
+    corpus = _Corpus(dict(SHORT_NOTES))
 
     outcome = _audit(corpus, _Reference(()), _Report()).run(
         {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
@@ -274,7 +276,7 @@ def test_reference_other_than_config_is_refused_before_reading(
     reference: _UnreadableReference, pinned: dict[str, str], named: str
 ) -> None:
     """Reference, která nesedí s configem, se odmítne podle otisku dřív, než se čtou zprávy."""
-    corpus = _Corpus(dict(SHORT_NOTE))
+    corpus = _Corpus(dict(SHORT_NOTES))
 
     outcome = _audit(corpus, reference, _Report()).run({}, COMMIT, CREATED_AT, pinned)
 
@@ -288,7 +290,76 @@ def test_structure_labels_reach_the_index() -> None:
     reference = _Reference((ReferenceNote(10000032, f"{PREAMBLE}{SENTENCE}"),))
 
     outcome = _audit(
-        _Corpus({NOTE: f"{PREAMBLE}a short body"}), reference, _Report()
+        _Corpus({Language.EN: {NOTE_ID: f"{PREAMBLE}a short body"}}),
+        reference,
+        _Report(),
     ).run({}, COMMIT, CREATED_AT, DISCHARGE_PINNED)
 
     assert isinstance(outcome, AuditClean)
+
+
+def test_czech_notes_are_indexed() -> None:
+    """N-gram sdílený jen s českou zprávou je shoda; audit nepřestane číst češtinu."""
+    corpus = _Corpus({
+        Language.EN: {NOTE_ID: "a short synthetic note"},
+        Language.CS: {NOTE_ID: SENTENCE},
+    })
+    report = _Report()
+    reference = _Reference((ReferenceNote(10000032, SENTENCE),))
+
+    outcome = _audit(corpus, reference, report).run(
+        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
+    )
+
+    assert outcome == AuditOverlap(
+        shared_ngrams=3, colliding_subjects=0, notes=(f"cs/{NOTE_ID}",)
+    )
+    assert not corpus.saved
+
+
+def test_same_note_id_in_both_languages_has_two_positions() -> None:
+    """Stejné note_id v en i cs se v reportu rozliší jazykem."""
+    corpus = _Corpus({
+        Language.EN: {NOTE_ID: SENTENCE},
+        Language.CS: {NOTE_ID: SENTENCE},
+    })
+    report = _Report()
+    reference = _Reference((ReferenceNote(10000032, SENTENCE),))
+
+    outcome = _audit(corpus, reference, report).run(
+        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
+    )
+
+    assert isinstance(outcome, AuditOverlap)
+    assert outcome.notes == (f"cs/{NOTE_ID}", f"en/{NOTE_ID}")
+
+
+def test_corpus_files_counts_notes_of_all_languages() -> None:
+    """Záznam auditu počítá zprávy obou jazyků."""
+    corpus = _Corpus({
+        Language.EN: {NOTE_ID: "a short synthetic note"},
+        Language.CS: {NOTE_ID: "krátká syntetická zpráva"},
+    })
+
+    outcome = _audit(
+        corpus, _Reference((ReferenceNote(10000032, "x"),)), _Report()
+    ).run({}, COMMIT, CREATED_AT, DISCHARGE_PINNED)
+
+    assert outcome == AuditClean(notes=2, ngrams=0, reference_notes=1)
+    (record,) = corpus.saved
+    assert record.corpus_files == sum(len(texts) for texts in corpus.texts.values())
+
+
+def test_subjects_come_from_every_language() -> None:
+    """Pacient, který je jen v české zprávě, se s referencí také srovná."""
+    corpus = _Corpus({
+        Language.EN: {NOTE_ID: "a short synthetic note"},
+        Language.CS: {"90000002-DS-1": "krátká zpráva"},
+    })
+    reference = _Reference((ReferenceNote(90000002, "unrelated text"),))
+
+    outcome = _audit(corpus, reference, _Report()).run(
+        {}, COMMIT, CREATED_AT, DISCHARGE_PINNED
+    )
+
+    assert outcome == AuditOverlap(shared_ngrams=0, colliding_subjects=1, notes=())
