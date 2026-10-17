@@ -101,7 +101,7 @@ def test_cell_below_threshold_is_refused_and_nothing_is_written(
     caplog.set_level(logging.DEBUG)
     discharge, diagnoses = write_tables(
         tmp_path,
-        [note("n01", 1, 10, text("a"))],
+        [note("1-DS-1", 1, 10, text("a"))],
         [icd(10, 1, "E119", "10")],
         padded=False,
     )

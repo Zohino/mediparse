@@ -9,6 +9,7 @@ import pytest
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.language import Language
+from mediparse.domain.note import subject_of
 from mediparse.domain.smoketest_input import UnpairedNotesError, input_notes
 
 if TYPE_CHECKING:
@@ -17,7 +18,9 @@ if TYPE_CHECKING:
 
 
 def _plan(planned_note: PlannedNote, note_id: str, *labels: Diagnosis) -> NotePlan:
-    return planned_note.plan.model_copy(update={"note_id": note_id, "labels": labels})
+    return planned_note.plan.model_copy(
+        update={"note_id": note_id, "subject_id": subject_of(note_id), "labels": labels}
+    )
 
 
 def test_pairs_plans_with_texts_sorted_by_note_id(planned_note: PlannedNote) -> None:
@@ -30,12 +33,11 @@ def test_pairs_plans_with_texts_sorted_by_note_id(planned_note: PlannedNote) -> 
 
     notes = input_notes(plans, texts, Language.EN)
 
-    subject = planned_note.plan.subject_id
     assert notes == (
-        InputNote("90000001-DS-1", subject, Language.EN, "první", frozenset()),
+        InputNote("90000001-DS-1", 90000001, Language.EN, "první", frozenset()),
         InputNote(
             "90000002-DS-1",
-            subject,
+            90000002,
             Language.EN,
             "druhá",
             frozenset({Diagnosis.PNEUMONIA}),

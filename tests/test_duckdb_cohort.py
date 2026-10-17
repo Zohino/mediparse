@@ -58,16 +58,16 @@ def test_kept_notes_and_their_labels(tmp_path: Path) -> None:
 
     notes = _notes(out)
     expected = {
-        "n01": {Diagnosis.DIABETES},
-        "n02": {Diagnosis.ATRIAL_FIBRILLATION},
-        "n07": set(),
-        "n10": {Diagnosis.PNEUMONIA},
-        "n11": {Diagnosis.COPD},
-        "n12": {Diagnosis.COPD},
+        "1-DS-1": {Diagnosis.DIABETES},
+        "2-DS-1": {Diagnosis.ATRIAL_FIBRILLATION},
+        "7-DS-1": set(),
+        "9-DS-1": {Diagnosis.PNEUMONIA},
+        "10-DS-1": {Diagnosis.COPD},
+        "10-DS-2": {Diagnosis.COPD},
     }
     for note_id, labels in expected.items():
         assert notes[note_id].labels == labels
-    dropped = {"n03", "n04", "n05", "n06", "n08", "n09"}
+    dropped = {"3-DS-1", "4-DS-1", "5-DS-1", "6-DS-1", "1-DS-2", "8-DS-1"}
     assert dropped.isdisjoint(notes)
 
 
@@ -79,19 +79,19 @@ def test_positives_count_notes_per_diagnosis(tmp_path: Path) -> None:
 
 
 def test_duplicate_keeps_copy_with_smallest_note_id(tmp_path: Path) -> None:
-    """Z textu A zůstane n01 a n08 s kódem ledvin vypadne."""
+    """Z textu A zůstane 1-DS-1 a 1-DS-2 s kódem ledvin vypadne."""
     _, out = _build(tmp_path)
 
-    assert Diagnosis.CKD not in _notes(out)["n01"].labels
-    assert "n08" not in _notes(out)
+    assert Diagnosis.CKD not in _notes(out)["1-DS-1"].labels
+    assert "1-DS-2" not in _notes(out)
 
 
 def test_first_copy_without_icd_does_not_drop_later_copy(tmp_path: Path) -> None:
-    """Filtry platí před deduplikací: kopie n10 s ICD přežije kopii n09 bez ICD."""
+    """Filtry platí před deduplikací: kopie 9-DS-1 s ICD přežije kopii 8-DS-1 bez ICD."""
     _, out = _build(tmp_path)
 
-    assert "n10" in _notes(out)
-    assert "n09" not in _notes(out)
+    assert "9-DS-1" in _notes(out)
+    assert "8-DS-1" not in _notes(out)
 
 
 def test_null_code_admission_counts_as_with_icd_and_has_no_labels(
@@ -100,14 +100,14 @@ def test_null_code_admission_counts_as_with_icd_and_has_no_labels(
     """Přijetí s jediným řádkem ICD s NULL kódem je ``S ICD`` a všechny štítky jsou false."""
     _, out = _build(tmp_path)
 
-    assert _notes(out)["n07"].labels == frozenset()
+    assert _notes(out)["7-DS-1"].labels == frozenset()
 
 
 def test_notes_of_one_admission_share_labels(tmp_path: Path) -> None:
     """Dvě zprávy téhož přijetí dostanou tytéž štítky."""
     _, out = _build(tmp_path)
 
-    assert _notes(out)["n11"].labels == _notes(out)["n12"].labels
+    assert _notes(out)["10-DS-1"].labels == _notes(out)["10-DS-2"].labels
 
 
 def test_output_is_sorted_english_and_matches_schema(tmp_path: Path) -> None:
@@ -159,7 +159,7 @@ def _select_and_write(source: DuckDbCohort) -> None:
 def _small_source(root: Path) -> DuckDbCohort:
     discharge, diagnoses = write_tables(
         root,
-        [note("n01", 1, 10, text("a"))],
+        [note("1-DS-1", 1, 10, text("a"))],
         [icd(10, 1, "E119", "10")],
         padded=False,
     )
@@ -176,7 +176,7 @@ def test_small_cohort_is_selected_and_written_by_adapter(tmp_path: Path) -> None
     assert selected.counts.funnel[-1].notes == 1
     assert [
         item.note_id for item in ParquetNoteTable(tmp_path / "c.parquet").read()
-    ] == ["n01"]
+    ] == ["1-DS-1"]
 
 
 def test_select_without_write_creates_no_file(tmp_path: Path) -> None:
@@ -217,7 +217,7 @@ def test_null_subject_id_in_write_is_invalid_input_and_leaves_no_file(
     discharge, diagnoses = write_tables(tmp_path)
     pq.write_table(
         pa.table({
-            "note_id": ["n01"],
+            "note_id": ["1-DS-1"],
             "subject_id": pa.array([None], pa.string()),
             "hadm_id": ["10"],
             "text": [text("a")],
@@ -238,7 +238,7 @@ def test_error_messages_do_not_echo_cell_values(tmp_path: Path) -> None:
     discharge, diagnoses = write_tables(tmp_path)
     pq.write_table(
         pa.table({
-            "note_id": ["n01"],
+            "note_id": ["1-DS-1"],
             "subject_id": ["CANARY9x"],
             "hadm_id": ["10"],
             "text": [text("a")],
