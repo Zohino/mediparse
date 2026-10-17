@@ -1,4 +1,4 @@
-"""Architektura mimo dosah import-linteru: vstupy do balíčku, skripty workflow, umístění sdílených portů a konfigurace modelů domény."""
+"""Architektura mimo dosah import-linteru: vstupy do balíčku, skripty workflow, umístění sdílených portů a konfigurace modelů domény a explicitní kódování textového I/O."""
 
 from __future__ import annotations
 
@@ -316,19 +316,18 @@ def _is_binary_mode(node: ast.expr | None) -> bool:
     )
 
 
-def _called_name(call: ast.Call) -> tuple[str | None, str | None]:
-    """Jméno volané funkce a jméno objektu, nad kterým se volá (u ``x.y()`` dvojice ``y``, ``x``).
+def _called_name(call: ast.Call) -> str:
+    """Jméno volané funkce nebo metody bez ohledu na to, nad čím se volá.
 
     Returns:
-        Dvojice (funkce, objekt); chybí-li, ``None``.
+        ``open`` pro ``open()`` i ``gzip.open()``; prázdný řetězec u jiných volání.
     """
     func = call.func
     if isinstance(func, ast.Name):
-        return func.id, None
+        return func.id
     if isinstance(func, ast.Attribute):
-        owner = func.value.id if isinstance(func.value, ast.Name) else None
-        return func.attr, owner
-    return None, None
+        return func.attr
+    return ""
 
 
 def _keywords(call: ast.Call) -> dict[str, ast.expr]:
@@ -346,20 +345,24 @@ def _is_text_subprocess(call: ast.Call) -> bool:
     )
 
 
-def _lacks_encoding(call: ast.Call, name: str, owner: str | None) -> bool | None:
+def _lacks_encoding(call: ast.Call, name: str) -> bool | None:
     """Zda textové I/O volání chybí kódování; ``None`` pro volání, které I/O není.
+
+    Jména se berou bez vlastníka, aby je nezakrylo ``from subprocess import run``
+    ani ``import subprocess as sp``.
 
     Returns:
         ``True`` pro volání bez ``encoding``, ``False`` pro volání s ním nebo
         v binárním režimu, ``None`` pro volání mimo pravidlo.
     """
     keywords = _keywords(call)
-    if owner == "subprocess" and name in SUBPROCESS_CALLS:
+    if name in SUBPROCESS_CALLS:
         return "encoding" not in keywords if _is_text_subprocess(call) else None
     if name not in TEXT_IO_METHODS:
         return None
-    if _is_binary_mode(keywords.get("mode")) or any(
-        _is_binary_mode(arg) for arg in call.args
+    if name == "open" and (
+        _is_binary_mode(keywords.get("mode"))
+        or any(_is_binary_mode(arg) for arg in call.args)
     ):
         return False
     encoding_position = ENCODING_POSITION.get(name)
@@ -372,8 +375,8 @@ def _module_encoding_findings(module: Path, root: Path) -> tuple[list[str], int]
     inspected = 0
     tree = ast.parse(module.read_text(encoding="utf-8"))
     for call in (node for node in ast.walk(tree) if isinstance(node, ast.Call)):
-        name, owner = _called_name(call)
-        lacks = _lacks_encoding(call, name or "", owner)
+        name = _called_name(call)
+        lacks = _lacks_encoding(call, name)
         if lacks is None:
             continue
         inspected += 1
@@ -387,11 +390,11 @@ def _encoding_violations(roots: Iterable[Path]) -> tuple[list[str], int]:
     """Textové I/O bez ``encoding`` v souborech ``*.py`` pod kořeny.
 
     Hlídá ``open``, ``read_text``, ``write_text`` a ``subprocess`` s ``text=True``;
-    binární režim zadaný literálem přeskakuje. Ruff PLW1514 tato volání nad cestami
+    binární režim ``open`` zadaný literálem přeskakuje. Ruff PLW1514 tato volání nad cestami
     nehlásí, protože nezná typ objektu.
 
     Args:
-        roots: Adresáře k projití; neexistující se přeskočí.
+        roots: Existující adresáře k projití.
 
     Returns:
         Nálezy ``soubor:řádek volání`` relativně k rodiči kořene a počet prošlých
@@ -411,26 +414,32 @@ def test_text_io_names_its_encoding() -> None:
     """Textové I/O v repu uvádí ``encoding``; locale stroje by jinak rozhodla o češtině."""
     violations, inspected = _encoding_violations(ENCODING_ROOTS)
 
+    assert all(root.is_dir() for root in ENCODING_ROOTS)
     assert inspected > 0
     assert violations == []
 
 
 def test_encoding_check_finds_text_io_without_encoding(tmp_path: Path) -> None:
-    """Čtení, ``open`` a ``subprocess`` s ``text=True`` bez kódování jsou nález."""
+    """Čtení, ``open``, ``subprocess`` s ``text=True`` (i po ``from subprocess import``) a ``write_text('rb')`` bez kódování jsou nález."""
     (tmp_path / "bad.py").write_text(
         "import subprocess\n"
+        "from subprocess import run\n"
         "p.read_text()\n"
         "open(p)\n"
-        "subprocess.run(['git'], text=True)\n",
+        "subprocess.run(['git'], text=True)\n"
+        "p.write_text('rb')\n"
+        "run(['git'], text=True)\n",
         encoding="utf-8",
     )
 
     violations, inspected = _encoding_violations([tmp_path])
 
     assert violations == [
-        f"{tmp_path.name}/bad.py:2 read_text",
-        f"{tmp_path.name}/bad.py:3 open",
-        f"{tmp_path.name}/bad.py:4 run",
+        f"{tmp_path.name}/bad.py:3 read_text",
+        f"{tmp_path.name}/bad.py:4 open",
+        f"{tmp_path.name}/bad.py:5 run",
+        f"{tmp_path.name}/bad.py:6 write_text",
+        f"{tmp_path.name}/bad.py:7 run",
     ]
     assert inspected == len(violations)
 
