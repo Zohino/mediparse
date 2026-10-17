@@ -14,7 +14,7 @@ from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.smoketest_training import TrainingReport
-from mediparse.domain.split import Split, SplitConfig, strata
+from mediparse.domain.split import SharedSplit, Split
 from tests.model_support import parsed_training_config, split_config
 
 if TYPE_CHECKING:
@@ -23,6 +23,7 @@ if TYPE_CHECKING:
 CONFIG = parsed_training_config(diagnosis="ckd", row_id="row")
 SPLIT = Split((frozenset({1, 2}), frozenset({3, 4})))
 SPLIT_CONFIG = split_config(folds=2, seed=4)
+SHARED = SharedSplit(SPLIT_CONFIG, SPLIT)
 NOTES = (
     InputNote("1-DS-1", 1, Language.EN, "text a", frozenset({Diagnosis.CKD})),
     InputNote("2-DS-1", 2, Language.EN, "text b", frozenset({Diagnosis.DIABETES})),
@@ -51,15 +52,13 @@ class _FakeTable:
 
 
 @dataclass
-class _FakeSplitter:
-    split_result: Split
+class _FakeSplitSource:
+    shared: SharedSplit
     recorder: _Recorder
 
-    def split(
-        self, subjects: Sequence[int], strata: Sequence[int], config: SplitConfig
-    ) -> Split:
-        self.recorder.calls["split"] = (tuple(subjects), tuple(strata), config)
-        return self.split_result
+    def read(self) -> SharedSplit:
+        self.recorder.calls["split"] = True
+        return self.shared
 
 
 @dataclass
@@ -98,11 +97,11 @@ class _FakeSink:
 
 
 def _use_case(
-    notes: Sequence[InputNote], split: Split, recorder: _Recorder
+    notes: Sequence[InputNote], shared: SharedSplit, recorder: _Recorder
 ) -> SmoketestTraining[_FakeClassifier]:
     return SmoketestTraining(
         table=_FakeTable(notes),
-        splitter=_FakeSplitter(split, recorder),
+        split=_FakeSplitSource(shared, recorder),
         trainer=_FakeTrainer(recorder),
         store=_FakeStore(recorder),
         predictions=_FakeSink(recorder),
@@ -113,13 +112,8 @@ def test_trains_on_train_and_predicts_test() -> None:
     """Labely jsou zvolené diagnózy; trénink vidí jen train, predikce jen test."""
     recorder = _Recorder()
 
-    report = _use_case(NOTES, SPLIT, recorder).run(CONFIG, SPLIT_CONFIG)
+    report = _use_case(NOTES, SHARED, recorder).run(CONFIG)
 
-    assert recorder.calls["split"] == (
-        (1, 2, 3, 4),
-        strata(NOTES, SPLIT_CONFIG.folds),
-        SPLIT_CONFIG,
-    )
     assert recorder.calls["fit"] == (("text c", "text d"), (True, False))
     assert recorder.calls["classify"] == ("text a", "text b")
     assert isinstance(recorder.calls["save"], _FakeClassifier)
@@ -138,7 +132,14 @@ def test_trains_on_train_and_predicts_test() -> None:
             score=-0.5,
         ),
     )
-    assert report == TrainingReport(Diagnosis.CKD, 2, 2, 1, SPLIT.sha256())
+    assert report == TrainingReport(
+        Diagnosis.CKD,
+        train_notes=2,
+        test_notes=2,
+        test_positives=1,
+        split_config=SPLIT_CONFIG,
+        split_sha256=SPLIT.sha256(),
+    )
 
 
 def test_test_fold_comes_from_config() -> None:
@@ -146,7 +147,7 @@ def test_test_fold_comes_from_config() -> None:
     recorder = _Recorder()
     config = parsed_training_config(diagnosis="ckd", row_id="row", fold=1)
 
-    _use_case(NOTES, SPLIT, recorder).run(config, SPLIT_CONFIG)
+    _use_case(NOTES, SHARED, recorder).run(config)
 
     assert recorder.calls["classify"] == ("text c", "text d")
     assert recorder.calls["fit"] == (("text a", "text b"), (True, False))
@@ -165,7 +166,7 @@ def test_fold_out_of_range_stops_before_saving(fold: int) -> None:
     config = parsed_training_config(diagnosis="ckd", row_id="row", fold=fold)
 
     with pytest.raises(InvalidInputError, match=rf"Fold {fold} neexistuje"):
-        _use_case(NOTES, SPLIT, recorder).run(config, SPLIT_CONFIG)
+        _use_case(NOTES, SHARED, recorder).run(config)
 
     assert recorder.calls.keys() <= {"split"}
 
@@ -176,27 +177,31 @@ def test_subject_outside_split_stops_before_saving() -> None:
     recorder = _Recorder()
 
     with pytest.raises(InvalidInputError, match="Zprávy pacientů mimo split"):
-        _use_case(notes, SPLIT, recorder).run(CONFIG, SPLIT_CONFIG)
+        _use_case(notes, SHARED, recorder).run(CONFIG)
 
     assert recorder.calls.keys() <= {"split"}
 
 
-def test_class_with_too_few_patients_stops_before_splitting() -> None:
-    """Diagnóza bez dost pacientů v každé třídě skončí InvalidInputError a nic se nevolá."""
+def test_class_with_too_few_patients_stops_before_training() -> None:
+    """Diagnóza bez dost pacientů v každé třídě skončí InvalidInputError a trénink se nespustí."""
     config = parsed_training_config(diagnosis="pneumonia", row_id="row")
     recorder = _Recorder()
 
     with pytest.raises(InvalidInputError, match="pneumonia"):
-        _use_case(NOTES, SPLIT, recorder).run(config, SPLIT_CONFIG)
+        _use_case(NOTES, SHARED, recorder).run(config)
 
-    assert recorder.calls == {}
+    assert recorder.calls.keys() <= {"split"}
 
 
-def test_class_check_uses_folds_of_split_config() -> None:
-    """Počet pacientů ve třídě se měří proti ``folds`` z configu splitu."""
+def test_class_check_uses_folds_of_shared_split() -> None:
+    """Počet pacientů ve třídě se měří proti ``folds`` z configu sdíleného splitu."""
     recorder = _Recorder()
+    shared = SharedSplit(
+        split_config(folds=3),
+        Split((frozenset({1}), frozenset({2}), frozenset({3, 4}))),
+    )
 
     with pytest.raises(InvalidInputError, match=r"ckd.*aspoň 3\."):
-        _use_case(NOTES, SPLIT, recorder).run(CONFIG, split_config(folds=3))
+        _use_case(NOTES, shared, recorder).run(CONFIG)
 
-    assert recorder.calls == {}
+    assert recorder.calls.keys() <= {"split"}

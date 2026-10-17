@@ -168,6 +168,9 @@ source_modules = [
     "mediparse.infrastructure.note_table",
     "mediparse.infrastructure.sklearn_split",
     "mediparse.infrastructure.split_config",
+    "mediparse.infrastructure.split_table",
+    "mediparse.application.split_materialization",
+    "mediparse.entrypoints.split_materialization",
     "mediparse.domain.split",
     "mediparse.domain.input_note",
 ]

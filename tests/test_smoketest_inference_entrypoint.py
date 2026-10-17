@@ -10,7 +10,7 @@ from mediparse.entrypoints import smoketest_inference, smoketest_training
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
-from tests.model_support import separable_notes, split_config_json, training_config
+from tests.model_support import separable_notes, training_config, write_split
 from tests.support import fixed_revision
 
 if TYPE_CHECKING:
@@ -31,14 +31,15 @@ class Trained(NamedTuple):
 
 def _train(root: Path) -> Trained:
     notes = root / "notes.parquet"
-    ParquetNoteTable(notes).write(separable_notes(PATIENTS))
+    corpus = separable_notes(PATIENTS)
+    ParquetNoteTable(notes).write(corpus)
     config = root / "config.json"
     config.write_text(
         json.dumps(training_config(row_id="row", diagnosis="diabetes")),
         encoding="utf-8",
     )
-    split = root / "split.json"
-    split.write_text(json.dumps(split_config_json()), encoding="utf-8")
+    split = root / "splits.parquet"
+    write_split(split, corpus)
     trained = Trained(notes, root / "model.skops", root / "predictions.parquet")
     code = smoketest_training.run(
         notes=notes,

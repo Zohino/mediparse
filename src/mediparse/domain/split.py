@@ -120,13 +120,54 @@ class Split:
         return Holdout(fold, train, test)
 
 
+@dataclass(frozen=True)
+class SharedSplit:
+    """Split sdílený větvemi a řádky matice spolu s parametry, ze kterých vznikl.
+
+    Attributes:
+        config: Seed a počet foldů splitu.
+        split: Pacienti každého foldu; foldů je ``config.folds``.
+    """
+
+    config: SplitConfig
+    split: Split
+
+    def __post_init__(self) -> None:
+        """Ověří, že split má tolik foldů, kolik říká config.
+
+        Raises:
+            ValueError: Počet foldů splitu se liší od configu (chyba kódu).
+        """
+        if len(self.split.folds) != self.config.folds:
+            msg = f"Config má {self.config.folds} foldů, split {len(self.split.folds)}."
+            raise ValueError(msg)
+
+
+def ensure_enough_patients(subjects: Sequence[SubjectId], folds: int) -> None:
+    """Ověří, že pacientů je aspoň tolik jako foldů.
+
+    Args:
+        subjects: Pacient každé zprávy; pacient s více zprávami se počítá jednou.
+        folds: Počet foldů splitu.
+
+    Raises:
+        InvalidInputError: Pacientů je méně než foldů.
+    """
+    patients = len(set(subjects))
+    if patients < folds:
+        msg = (
+            f"Pacientů je {patients}, dělení do {folds} foldů potřebuje aspoň {folds}."
+        )
+        raise InvalidInputError(msg)
+
+
 def strata(notes: Sequence[InputNote], folds: int) -> tuple[int, ...]:
     """Určí třídu stratifikace každé zprávy z kombinace diagnóz jejího pacienta.
 
     Kombinace diagnóz pacienta (sjednocení labelů všech jeho zpráv) je bitová
     maska v pořadí ``Diagnosis``; na pořadí čísel nezáleží, jen na identitě třídy.
-    Předpokládá aspoň tolik pacientů jako foldů (use case to zajistí
-    ``ensure_patients_per_class``); jinak by zbytková třída vyvolala varování sklearn.
+    Předpokládá aspoň tolik pacientů jako foldů (krok splitu to zajistí přes
+    ``ensure_enough_patients``); jinak by zbytková třída vyvolala varování sklearn.
 
     Args:
         notes: Zprávy korpusu.
