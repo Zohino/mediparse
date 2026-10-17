@@ -52,16 +52,23 @@ def test_read_returns_written_split(tmp_path: Path) -> None:
     assert table.read() == SHARED
 
 
-def test_empty_fold_survives_round_trip(tmp_path: Path) -> None:
-    """K je z metadat, takže prázdný fold zůstane prázdným foldem."""
-    shared = SharedSplit(
-        CONFIG, Split((frozenset({1, 2}), frozenset(), frozenset({3})))
-    )
+@pytest.mark.parametrize(
+    "folds",
+    [
+        (frozenset({1, 2}), frozenset(), frozenset({3})),
+        (frozenset({1, 2}), frozenset({3}), frozenset()),
+    ],
+    ids=["prazdny-uprostred", "prazdny-posledni"],
+)
+def test_empty_fold_survives_round_trip(
+    tmp_path: Path, folds: tuple[frozenset[int], ...]
+) -> None:
+    """K je z metadat, takže prázdný fold, i poslední, zůstane prázdným foldem."""
+    shared = SharedSplit(CONFIG, Split(folds))
     table = ParquetSplitTable(tmp_path / "splits.parquet")
 
     table.write(shared)
 
-    assert len(table.read().split.folds) == CONFIG.folds
     assert table.read() == shared
 
 
