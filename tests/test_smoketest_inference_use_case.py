@@ -14,24 +14,12 @@ from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.smoketest_inference import ModelMismatchError
+from tests.model_support import prediction
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from mediparse.application.ports.experiment import TextClassifier
-
-
-def _prediction(note_id: str, *, truth: bool, score: float) -> Prediction:
-    return Prediction(
-        "row",
-        0,
-        note_id,
-        1,
-        Diagnosis.CKD,
-        truth=truth,
-        predicted=score > 0,
-        score=score,
-    )
 
 
 NOTES = (
@@ -40,8 +28,8 @@ NOTES = (
     InputNote("c", 3, Language.EN, "text c", frozenset()),
 )
 HELD_OUT = (
-    _prediction("c", truth=True, score=1.5),
-    _prediction("a", truth=False, score=-0.5),
+    prediction("c", truth=True, score=1.5, diagnosis=Diagnosis.CKD),
+    prediction("a", truth=False, score=-0.5, diagnosis=Diagnosis.CKD),
 )
 ANSWER = (
     Classification(predicted=True, score=1.5),

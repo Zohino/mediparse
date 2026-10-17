@@ -9,8 +9,6 @@ from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.cohort import MIN_CELL, CohortManifest, FunnelStepName
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.environment import SourceRevision
-from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
@@ -23,6 +21,7 @@ from tests.cohort_support import (
     text,
     write_tables,
 )
+from tests.support import REVISION, fixed_revision, missing_revision
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -30,18 +29,10 @@ if TYPE_CHECKING:
 
     import pytest
 
-REVISION: Final = SourceRevision(commit="a" * 40, dirty=False)
+    from mediparse.domain.environment import SourceRevision
+
 DISCHARGE_SHA: Final = "1" * 64
 DIAGNOSES_SHA: Final = "2" * 64
-
-
-def _revision() -> SourceRevision:
-    return REVISION
-
-
-def _no_git() -> SourceRevision:
-    msg = "git chybí"
-    raise InvalidInputError(msg)
 
 
 def _configs(root: Path) -> tuple[Path, Path]:
@@ -78,7 +69,7 @@ def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
         tables=tables,
         cohort=out,
         manifest=manifest,
-        revision=_revision,
+        revision=fixed_revision,
     )
 
     written = CohortManifest.model_validate_json(
@@ -124,7 +115,7 @@ def test_cell_below_threshold_is_refused_and_nothing_is_written(
         tables=tables,
         cohort=out,
         manifest=manifest,
-        revision=_revision,
+        revision=fixed_revision,
     )
 
     assert code is ExitCode.REFUSED
@@ -153,7 +144,7 @@ def _run(
 
 def test_missing_input_table_is_refused(tmp_path: Path) -> None:
     """Chybějící vstupní tabulka krok odmítne, kohorta ani manifest nevzniknou."""
-    code = _run(tmp_path, discharge=tmp_path / "none.parquet", revision=_revision)
+    code = _run(tmp_path, discharge=tmp_path / "none.parquet", revision=fixed_revision)
 
     assert code is ExitCode.REFUSED
     assert not (tmp_path / "cohort.parquet").exists()
@@ -162,7 +153,7 @@ def test_missing_input_table_is_refused(tmp_path: Path) -> None:
 
 def test_unreadable_revision_is_refused(tmp_path: Path) -> None:
     """Nečitelná revize repa krok odmítne, kohorta ani manifest nevzniknou."""
-    code = _run(tmp_path, discharge=None, revision=_no_git)
+    code = _run(tmp_path, discharge=None, revision=missing_revision)
 
     assert code is ExitCode.REFUSED
     assert not (tmp_path / "cohort.parquet").exists()
@@ -186,7 +177,7 @@ def test_config_without_source_table_is_refused(
         tables=tables,
         cohort=tmp_path / "cohort.parquet",
         manifest=tmp_path / "manifest.json",
-        revision=_revision,
+        revision=fixed_revision,
     )
 
     assert code is ExitCode.REFUSED

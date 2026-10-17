@@ -268,6 +268,10 @@ ignore = [
     "start-process-with-partial-path",        # git se hledá v PATH hostitele, cestu k binárce nezná nikdo předem
 ]
 
+"tests/model_support.py" = [
+    "too-many-arguments", # builder nese pole Prediction; ta, na kterých test nestojí, mají výchozí hodnotu
+]
+
 "tests/git_support.py" = [
     "suspicious-subprocess-import",           # test zakládá repo pevným příkazem git bez shellu
     "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, shell se nepoužívá

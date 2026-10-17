@@ -4,8 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.evaluation import Classification, Prediction
+from mediparse.domain.evaluation import Classification
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.smoketest_inference import (
     ModelMismatchError,
@@ -13,24 +12,12 @@ from mediparse.domain.smoketest_inference import (
     ensure_predictions_present,
     ensure_same_predictions,
 )
-
-
-def _prediction(note_id: str, *, truth: bool, score: float = 0.5) -> Prediction:
-    return Prediction(
-        "row",
-        0,
-        note_id,
-        1,
-        Diagnosis.DIABETES,
-        truth=truth,
-        predicted=score > 0,
-        score=score,
-    )
+from tests.model_support import prediction
 
 
 def test_same_predictions_within_tolerance_pass() -> None:
     """Skóre odlišné o zlomek tolerance a stejný label projdou."""
-    expected = [_prediction("n1", truth=True, score=0.5)]
+    expected = [prediction("n1", truth=True, score=0.5)]
 
     ensure_same_predictions(
         expected, [Classification(predicted=True, score=0.5 + 1e-12)]
@@ -39,7 +26,7 @@ def test_same_predictions_within_tolerance_pass() -> None:
 
 def test_different_label_names_note_id() -> None:
     """Jiný label vyhodí chybu s note_id a oběma hodnotami."""
-    expected = [_prediction("n1", truth=True, score=0.5)]
+    expected = [prediction("n1", truth=True, score=0.5)]
 
     with pytest.raises(ModelMismatchError, match="n1") as raised:
         ensure_same_predictions(expected, [Classification(predicted=False, score=0.5)])
@@ -50,8 +37,8 @@ def test_different_label_names_note_id() -> None:
 def test_score_outside_tolerance_names_note_id() -> None:
     """Skóre mimo toleranci vyhodí chybu s note_id a oběma skóre."""
     expected = [
-        _prediction("n1", truth=True, score=0.5),
-        _prediction("n2", truth=False),
+        prediction("n1", truth=True, score=0.5),
+        prediction("n2", truth=False, score=0.5),
     ]
     actual = [
         Classification(predicted=True, score=0.5),
@@ -65,16 +52,16 @@ def test_score_outside_tolerance_names_note_id() -> None:
 def test_different_length_raises() -> None:
     """Různý počet predikcí a klasifikací je nesoulad."""
     with pytest.raises(ModelMismatchError, match="počet"):
-        ensure_same_predictions([_prediction("n1", truth=True)], [])
+        ensure_same_predictions([prediction("n1", truth=True, score=0.5)], [])
 
 
 def test_demo_examples_positive_before_negative_smallest_note_id() -> None:
     """Ukázka je nejmenší pozitivní a pak nejmenší negativní note_id."""
     items = [
-        _prediction("n3", truth=False),
-        _prediction("n2", truth=True),
-        _prediction("n1", truth=False),
-        _prediction("n4", truth=True),
+        prediction("n3", truth=False, score=0.5),
+        prediction("n2", truth=True, score=0.5),
+        prediction("n1", truth=False, score=0.5),
+        prediction("n4", truth=True, score=0.5),
     ]
 
     assert [item.note_id for item in demo_examples(items)] == ["n2", "n1"]
@@ -82,7 +69,10 @@ def test_demo_examples_positive_before_negative_smallest_note_id() -> None:
 
 def test_demo_examples_missing_class_returns_one() -> None:
     """Chybí-li třída, vrátí se jen druhá."""
-    items = [_prediction("n2", truth=False), _prediction("n1", truth=False)]
+    items = [
+        prediction("n2", truth=False, score=0.5),
+        prediction("n1", truth=False, score=0.5),
+    ]
 
     assert [item.note_id for item in demo_examples(items)] == ["n1"]
 

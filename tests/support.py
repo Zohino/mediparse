@@ -18,7 +18,9 @@ from mediparse.domain.corpus_audit import (
 )
 from mediparse.domain.corpus_provenance import Decoding, Translation, TranslationRun
 from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.environment import SourceRevision
 from mediparse.domain.input_note import InputNote
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.plans_file import LABELS_PATH, PLANS_PATH
@@ -63,6 +65,26 @@ PINNED: Final = {"discharge.csv.gz": "b" * 64, "radiology.csv.gz": "e" * 64}
 DISCHARGE: Final = {"name": "discharge.csv.gz", "sha256": "b" * 64, "rows": 10}
 RADIOLOGY: Final = {"name": "radiology.csv.gz", "sha256": "e" * 64, "rows": 20}
 PIN: Final = AuditPin(PINNED, STRUCTURE_LABELS)
+REVISION: Final = SourceRevision(commit=COMMIT, dirty=False)
+
+
+def fixed_revision() -> SourceRevision:
+    """Zdroj revize, který vždy vrátí ``REVISION``.
+
+    Returns:
+        Pevná revize bez dotazu na git.
+    """
+    return REVISION
+
+
+def missing_revision() -> SourceRevision:
+    """Zdroj revize, který selže jako git mimo repozitář.
+
+    Raises:
+        InvalidInputError: Vždy.
+    """
+    msg = "git chybí"
+    raise InvalidInputError(msg)
 
 
 def audit_record(**overrides: object) -> AuditRecord:

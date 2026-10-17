@@ -12,17 +12,10 @@ from mediparse.application.model_evaluation import ModelEvaluation
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import BinaryMetrics, DiagnosisMetrics, Prediction
 from mediparse.domain.inputs import InvalidInputError
+from tests.model_support import prediction
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
-
-
-def _prediction(
-    row_id: str, diagnosis: Diagnosis, note: str, *, truth: bool, score: float
-) -> Prediction:
-    return Prediction(
-        row_id, 0, note, 1, diagnosis, truth=truth, predicted=score > 0, score=score
-    )
 
 
 @dataclass
@@ -62,13 +55,13 @@ def _use_case(
 
 
 MIXED = (
-    _prediction("b", Diagnosis.DIABETES, "n1", truth=True, score=1.0),
-    _prediction("a", Diagnosis.CKD, "n2", truth=False, score=-1.0),
-    _prediction("a", Diagnosis.DIABETES, "n3", truth=False, score=-2.0),
-    _prediction("b", Diagnosis.DIABETES, "n4", truth=False, score=0.5),
-    _prediction("a", Diagnosis.CKD, "n5", truth=True, score=3.0),
-    _prediction("a", Diagnosis.DIABETES, "n6", truth=True, score=2.0),
-    _prediction("a", Diagnosis.CKD, "n7", truth=True, score=-0.5),
+    prediction("n1", truth=True, score=1.0, diagnosis=Diagnosis.DIABETES, row_id="b"),
+    prediction("n2", truth=False, score=-1.0, diagnosis=Diagnosis.CKD, row_id="a"),
+    prediction("n3", truth=False, score=-2.0, diagnosis=Diagnosis.DIABETES, row_id="a"),
+    prediction("n4", truth=False, score=0.5, diagnosis=Diagnosis.DIABETES, row_id="b"),
+    prediction("n5", truth=True, score=3.0, diagnosis=Diagnosis.CKD, row_id="a"),
+    prediction("n6", truth=True, score=2.0, diagnosis=Diagnosis.DIABETES, row_id="a"),
+    prediction("n7", truth=True, score=-0.5, diagnosis=Diagnosis.CKD, row_id="a"),
 )
 
 
@@ -120,7 +113,9 @@ def test_single_class_is_rejected_before_scoring() -> None:
     """Skupina s jedinou třídou pravdy skončí InvalidInputError před výpočtem."""
     items = (
         *MIXED,
-        _prediction("c", Diagnosis.PNEUMONIA, "n8", truth=True, score=1.0),
+        prediction(
+            "n8", truth=True, score=1.0, diagnosis=Diagnosis.PNEUMONIA, row_id="c"
+        ),
     )
     use_case, scorer, sink = _use_case(items)
 

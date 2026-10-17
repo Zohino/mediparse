@@ -9,22 +9,17 @@ from pydantic import ValidationError
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.smoketest_training import TrainingConfig
+from tests.model_support import training_config
 
 FOLDS = 2
-VALID = {
-    "row_id": "smoke",
-    "diagnosis": "diabetes",
-    "seed": 0,
-    "folds": FOLDS,
-    "regularization": 1.0,
-}
+VALID = training_config()
 
 
 def test_valid_config_is_parsed() -> None:
     """Platný JSON dá config s výčtem diagnózy."""
     config = TrainingConfig.model_validate_json(json.dumps(VALID))
 
-    assert config.row_id == "smoke"
+    assert config.row_id == "row"
     assert config.diagnosis is Diagnosis.DIABETES
     assert config.folds == FOLDS
 

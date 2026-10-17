@@ -5,25 +5,9 @@ from __future__ import annotations
 import pytest
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.evaluation import (
-    Prediction,
-    ensure_both_classes,
-    ensure_unique_keys,
-)
+from mediparse.domain.evaluation import ensure_both_classes, ensure_unique_keys
 from mediparse.domain.inputs import InvalidInputError
-
-
-def _prediction(note: str, fold: int) -> Prediction:
-    return Prediction(
-        "row",
-        fold,
-        note,
-        1,
-        Diagnosis.CKD,
-        truth=True,
-        predicted=True,
-        score=1.0,
-    )
+from tests.model_support import prediction
 
 
 def test_mixed_truth_passes() -> None:
@@ -41,13 +25,16 @@ def test_single_class_is_rejected(truth: list[bool]) -> None:
 def test_unique_keys_pass() -> None:
     """Různé klíče projdou."""
     ensure_unique_keys([
-        _prediction("n1", 0),
-        _prediction("n1", 1),
-        _prediction("n2", 0),
+        prediction("n1", truth=True, score=1.0, fold=0),
+        prediction("n1", truth=True, score=1.0, fold=1),
+        prediction("n2", truth=True, score=1.0, fold=0),
     ])
 
 
 def test_duplicate_key_is_rejected() -> None:
     """Opakovaný (row_id, fold, note_id, diagnosis) je InvalidInputError s klíčem."""
     with pytest.raises(InvalidInputError, match="n1"):
-        ensure_unique_keys([_prediction("n1", 0), _prediction("n1", 0)])
+        ensure_unique_keys([
+            prediction("n1", truth=True, score=1.0, fold=0),
+            prediction("n1", truth=True, score=1.0, fold=0),
+        ])
