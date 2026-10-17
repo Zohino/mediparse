@@ -282,6 +282,10 @@ ignore = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
 
+"src/mediparse/entrypoints/smoketest_summary.py" = [
+    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
+]
+
 [tool.ruff.lint.flake8-type-checking]
 runtime-evaluated-base-classes = ["pydantic.BaseModel"]  # pydantic čte anotace za běhu
 

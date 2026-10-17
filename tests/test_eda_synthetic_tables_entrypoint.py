@@ -13,7 +13,7 @@ from mediparse.entrypoints.exit_code import ExitCode
 if TYPE_CHECKING:
     from pathlib import Path
 
-ROWS: Final = 12
+ROWS: Final = 3
 MANIFEST = {
     "tables": [
         {"file": "discharge.csv.gz", "bytes": 1, "records": 3, "columns": ["a", "b"]},

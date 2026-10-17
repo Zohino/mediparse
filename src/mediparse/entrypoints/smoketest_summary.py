@@ -1,8 +1,8 @@
 """Vstupní bod pravidla Snakemake ``smoketest``: souhrn metrik a ukázky predikce na výstup.
 
 Cesty k metrikám a ukázce jsou vstupy pravidla, kořen korpusu a adresáře výstupů
-a logů jeho parametry; skript workflow jen rozbalí objekt ``snakemake`` a zavolá ``main``. Výpis jde na stdout, aby ho zkoušející viděl
-na konci běhu.
+a logů jeho parametry; skript workflow jen rozbalí objekt ``snakemake`` a zavolá
+``main``. Výpis jde na stdout, aby ho zkoušející viděl na konci běhu.
 """
 
 from __future__ import annotations
@@ -53,7 +53,7 @@ def _write_table(out: TextIO, table: list[tuple[str, ...]]) -> None:
 
 
 @refusing_invalid_input
-def run(  # ruff: ignore[too-many-arguments]
+def run(
     *, metrics: Path, demo: Path, corpus: Path, outputs: Path, logs: Path, out: TextIO
 ) -> ExitCode:
     """Přečte metriky a ukázku predikce a vypíše souhrn s cestami k výstupům.

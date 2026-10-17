@@ -1,4 +1,4 @@
-"""Společné chování korpusových příkazů: volby se stejnou cestou a nápovědou."""
+"""Společné chování korpusových příkazů: sdílené volby cest a převod výsledku provenance na návratový kód."""
 
 from __future__ import annotations
 
@@ -71,19 +71,19 @@ def add_template_option(parser: argparse.ArgumentParser) -> None:
     )
 
 
-def provenance_exit_code(outcome: ProvenanceOutcome, written: str) -> ExitCode:
+def provenance_exit_code(outcome: ProvenanceOutcome, success_message: str) -> ExitCode:
     """Převede výsledek zápisu provenance na návratový kód a hlášku v logu.
 
     Args:
         outcome: Výsledek use case provenance.
-        written: Hláška pro úspěšný zápis.
+        success_message: Hláška pro úspěšný zápis.
 
     Returns:
         OK po zápisu, REFUSED s důvodem odmítnutí v logu.
     """
     match outcome:
         case ProvenanceWritten():
-            logger.info("%s", written)
+            logger.info("%s", success_message)
             return ExitCode.OK
         case ProvenanceRefused(reason=reason):
             logger.error("%s", reason)
