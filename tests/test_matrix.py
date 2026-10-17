@@ -10,7 +10,7 @@ from pydantic import ValidationError
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
-from mediparse.domain.matrix import ExperimentMatrix, Model, Tier
+from mediparse.domain.matrix import ExperimentMatrix, ModelName, Tier
 from mediparse.infrastructure.matrix_manifest import load_matrix
 from tests.support import REPOSITORY_MATRIX
 
@@ -37,27 +37,27 @@ def test_single_row_matrix_is_valid() -> None:
     (row,) = _validate(_row()).rows
 
     assert row.language is Language.EN
-    assert row.model is Model.LOGREG
+    assert row.model is ModelName.LOGREG
 
 
 @pytest.mark.parametrize(
     ("model", "tier"),
     [
-        (Model.LOGREG, Tier.CLASSICAL),
-        (Model.SVM, Tier.CLASSICAL),
-        (Model.FASTTEXT, Tier.INTERMEDIATE),
-        (Model.XLM_R_BASE, Tier.TRANSFORMER),
-        (Model.MDEBERTA_V3_BASE, Tier.TRANSFORMER),
+        (ModelName.LOGREG, Tier.CLASSICAL),
+        (ModelName.SVM, Tier.CLASSICAL),
+        (ModelName.FASTTEXT, Tier.INTERMEDIATE),
+        (ModelName.XLM_R_BASE, Tier.TRANSFORMER),
+        (ModelName.MDEBERTA_V3_BASE, Tier.TRANSFORMER),
     ],
 )
-def test_model_tier_is_derived(model: Model, tier: Tier) -> None:
+def test_model_tier_is_derived(model: ModelName, tier: Tier) -> None:
     """Stupeň se odvozuje z modelu, v manifestu se neuvádí."""
     assert model.tier is tier
 
 
 def test_every_model_has_tier() -> None:
     """Nový model bez přiřazeného stupně shodí test, ne až běh pipeline."""
-    assert all(model.tier in Tier for model in Model)
+    assert all(model.tier in Tier for model in ModelName)
 
 
 @pytest.mark.parametrize(

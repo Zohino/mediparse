@@ -19,7 +19,7 @@ from mediparse.domain.corpus_provenance import (
     Generation,
     model_id,
     prompts_sha256,
-    version,
+    semantic_version,
 )
 from mediparse.domain.digest import commit_sha
 from mediparse.entrypoints.cli import (
@@ -110,7 +110,7 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--claude-code-version",
-        type=argument(version),
+        type=argument(semantic_version),
         required=True,
         help="verze Claude Code při generování, z `claude --version`",
     )

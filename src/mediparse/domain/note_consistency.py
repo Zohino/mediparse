@@ -10,8 +10,9 @@ from mediparse.domain.note_text import (
     AGE_MARKER,
     AGE_SUFFIX,
     DEID,
+    STANDALONE_DEID,
     alternation,
-    narrative,
+    measure_narrative,
     segment,
 )
 
@@ -73,7 +74,7 @@ def _section_violations(
 def _length_violations(
     sections: Sections, plan: NotePlan, structure: StructureModel
 ) -> list[str]:
-    words, _ = narrative(sections, plan, structure)
+    words = measure_narrative(sections, plan, structure).words
     target = sum(plan.section_words.values())
     tolerance = structure.narrative.note_tolerance
     if abs(words - target) <= tolerance * target:
@@ -121,7 +122,9 @@ def _marked_place_violations(
         for key, header in _deid_subheadings(structure)
         if header in plan.subheadings
         and re.search(
-            rf"^{re.escape(header)}:\s*{DEID}", bodies.get(key, ""), re.MULTILINE
+            rf"^{re.escape(header)}:\s*{STANDALONE_DEID}",
+            bodies.get(key, ""),
+            re.MULTILINE,
         )
         is None
     ]

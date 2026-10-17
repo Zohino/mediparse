@@ -23,8 +23,7 @@ STRUCTURE = NoteStructure(
     age_marker=True,
     sections=("past_medical_history", "hospital_course", "discharge_diagnosis"),
     subheadings=("TRANSITIONAL ISSUES",),
-    narrative_words=120,
-    section_words=(("hospital_course", 120),),
+    section_words={"hospital_course": 120},
     narrative_deid=4,
 )
 MENTIONS = (

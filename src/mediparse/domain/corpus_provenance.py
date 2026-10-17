@@ -44,7 +44,7 @@ def model_id(value: str) -> str:
     return value
 
 
-def version(value: str) -> str:
+def semantic_version(value: str) -> str:
     """Ověří, že hodnota je verze ve tvaru major.minor.patch.
 
     Returns:
@@ -60,7 +60,7 @@ def version(value: str) -> str:
 
 
 ModelId = Annotated[str, AfterValidator(model_id)]
-Version = Annotated[str, AfterValidator(version)]
+Version = Annotated[str, AfterValidator(semantic_version)]
 
 
 class Generation(BaseModel):

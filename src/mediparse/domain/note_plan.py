@@ -69,6 +69,7 @@ def note_plan(
         age_marker=structure.age_marker,
         sections=structure.sections,
         subheadings=structure.subheadings,
+        # Struktura nese Mapping, striktní pydantic přijme jen dict.
         section_words=dict(structure.section_words),
         narrative_deid=structure.narrative_deid,
         mentions=tuple(mentions),

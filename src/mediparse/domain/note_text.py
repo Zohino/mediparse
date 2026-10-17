@@ -1,9 +1,9 @@
-"""Text syntetické zprávy: de-identifikační značka, sekce podle hlaviček na začátku řádku, věková značka a narativ."""
+"""Text zprávy: de-identifikační značka a její počet, sekce podle hlaviček na začátku řádku, věková značka a měření narativu."""
 
 from __future__ import annotations
 
 import re
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Final, NamedTuple
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping
@@ -12,10 +12,23 @@ if TYPE_CHECKING:
     from mediparse.domain.note_structure import StructureModel
 
 DEID: Final = "___"
+# Delší řady podtržítek nejsou značka (hlásí je kontrola cizí formy značky). Vzor
+# proto nelze zjednodušit na str.count, ten by ____ započítal jako značku.
+STANDALONE_DEID: Final = rf"(?<!_){re.escape(DEID)}(?!_)"
+_DEID_PATTERN: Final = re.compile(STANDALONE_DEID)
 AGE_SUFFIX: Final = r"[ -]?(?:years?[ -]old|y/?o)\b"
-AGE_MARKER: Final = re.compile(rf"{re.escape(DEID)}{AGE_SUFFIX}", re.IGNORECASE)
+AGE_MARKER: Final = re.compile(rf"{STANDALONE_DEID}{AGE_SUFFIX}", re.IGNORECASE)
 
 type Sections = tuple[tuple[str, str], ...]
+
+
+def deid_markers(text: str) -> int:
+    """Počet značek ___ nahrazujících vyřazené identifikátory.
+
+    Returns:
+        Počet řad právě tří podtržítek; delší ani kratší řady se nepočítají.
+    """
+    return len(_DEID_PATTERN.findall(text))
 
 
 def alternation(words: Iterable[str]) -> str:
@@ -52,9 +65,16 @@ def segment(text: str, headers: Mapping[str, str]) -> tuple[str, Sections]:
     return text[: matches[0].start()] if matches else text, sections
 
 
-def narrative(
+class NarrativeMeasure(NamedTuple):
+    """Změřený narativ zprávy: počet slov a počet narativních značek bez věkové značky."""
+
+    words: int
+    marks: int
+
+
+def measure_narrative(
     sections: Sections, plan: NotePlan, structure: StructureModel
-) -> tuple[int, int]:
+) -> NarrativeMeasure:
     """Změří narativ: těla sekcí s délkou v plánu bez podnadpisů.
 
     Returns:
@@ -67,5 +87,5 @@ def narrative(
         subheadings.sub("", body) for key, body in sections if key in plan.section_words
     ]
     words = sum(len(body.split()) for body in bodies)
-    marks = sum(body.count(DEID) - len(AGE_MARKER.findall(body)) for body in bodies)
-    return words, marks
+    marks = sum(deid_markers(body) - len(AGE_MARKER.findall(body)) for body in bodies)
+    return NarrativeMeasure(words, marks)

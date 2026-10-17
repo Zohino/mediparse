@@ -7,13 +7,14 @@ import re
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
+from mediparse.domain.note_text import DEID, deid_markers
+
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping, Sequence
 
     from mediparse.domain.corpus_provenance import Masking
 
 LENGTH_RATIO: Final = (0.8, 1.6)
-_MARKER: Final = re.compile(r"(?<!_)___(?!_)")
 _NUMBERED: Final = re.compile(r"\[\[\s*(\d+)\s*\]\]")
 
 
@@ -24,15 +25,6 @@ class TranslatedNote:
     note_id: str
     source_sha256: str
     parts: tuple[str, ...]
-
-
-def deid_markers(text: str) -> int:
-    """Počet značek ___ nahrazujících vyřazené identifikátory.
-
-    Returns:
-        Počet řad právě tří podtržítek; delší ani kratší řady se nepočítají.
-    """
-    return len(_MARKER.findall(text))
 
 
 def translation_violations(
@@ -95,7 +87,7 @@ def restored_markers(text: str) -> str:
     Returns:
         Text se značkami ___.
     """
-    return _NUMBERED.sub("___", text)
+    return _NUMBERED.sub(DEID, text)
 
 
 def joined_translation(parts: Sequence[str], masking: Masking | None = None) -> str:
