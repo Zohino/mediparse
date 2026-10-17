@@ -83,7 +83,7 @@ def test_prompts_fingerprint_changes_with_sentence_composed_by_code(
     ],
     ids=["model", "version"],
 )
-def test_generation_validators(
+def test_generation_validator_keeps_valid_and_rejects_invalid(
     validate: Callable[[str], str], valid: str, invalid: str, message: str
 ) -> None:
     """Validátor platnou hodnotu vrátí beze změny a neplatnou odmítne."""

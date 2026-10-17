@@ -87,7 +87,7 @@ def test_demo_examples_missing_class_returns_one() -> None:
     assert [item.note_id for item in demo_examples(items)] == ["n1"]
 
 
-def test_demo_examples_empty() -> None:
+def test_demo_of_empty_predictions_is_empty() -> None:
     """Prázdný vstup dá prázdnou n-tici."""
     assert demo_examples([]) == ()
 
