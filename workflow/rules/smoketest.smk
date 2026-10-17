@@ -21,7 +21,7 @@ rule make_smoketest_splits:
     log:
         SMOKETEST_LOGS / "make_smoketest_splits.log",
     script:
-        "../scripts/make_splits.py"
+        "../scripts/make_smoketest_splits.py"
 
 
 rule train_smoketest_model:
