@@ -1,4 +1,4 @@
-"""Adaptéry scikit-learn: odložení po pacientech, trénink, klasifikace a uložení modelu."""
+"""Adaptéry scikit-learn: trénink, klasifikace a uložení modelu."""
 
 from __future__ import annotations
 
@@ -10,7 +10,6 @@ import skops.io as sio
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.sklearn_classifier import (
-    GroupedHoldout,
     LinearSvmTrainer,
     SkopsModelFile,
 )
@@ -19,48 +18,20 @@ from tests.model_support import separable_notes
 if TYPE_CHECKING:
     from pathlib import Path
 
-FOLDS: Final = 2
 PATIENTS: Final = 12
 
 
-def _corpus() -> tuple[list[str], list[bool], list[int]]:
+def _corpus() -> tuple[list[str], list[bool]]:
     notes = separable_notes(PATIENTS)
     return (
         [note.text for note in notes],
         [Diagnosis.DIABETES in note.labels for note in notes],
-        [note.subject_id for note in notes],
-    )
-
-
-def test_holdout_keeps_patient_in_one_part() -> None:
-    """Žádný pacient není v tréninku i testu a části pokrývají všechny zprávy."""
-    _, labels, groups = _corpus()
-
-    holdout = GroupedHoldout(folds=FOLDS, seed=0).split(labels, groups)
-
-    train = {groups[index] for index in holdout.train}
-    test = {groups[index] for index in holdout.test}
-    assert train.isdisjoint(test)
-    assert sorted(holdout.train + holdout.test) == list(range(len(groups)))
-
-
-def test_holdout_is_deterministic_for_seed() -> None:
-    """Stejný seed dá stejný split."""
-    _, labels, groups = _corpus()
-
-    first = GroupedHoldout(folds=FOLDS, seed=3).split(labels, groups)
-    second = GroupedHoldout(folds=FOLDS, seed=3).split(labels, groups)
-
-    assert first == second
-    assert any(
-        GroupedHoldout(folds=FOLDS, seed=seed).split(labels, groups) != first
-        for seed in range(4, 12)
     )
 
 
 def test_classify_returns_label_with_signed_score() -> None:
     """Label odpovídá predikci pipeline a skóre má znaménko podle labelu."""
-    texts, labels, _ = _corpus()
+    texts, labels = _corpus()
 
     classifier = LinearSvmTrainer(regularization=1.0, seed=0).fit(texts, labels)
     classifications = classifier.classify(texts)
@@ -74,7 +45,7 @@ def test_classify_returns_label_with_signed_score() -> None:
 
 def test_model_file_round_trip(tmp_path: Path) -> None:
     """Uložený model se načte s trusted=[] a klasifikuje stejně."""
-    texts, labels, _ = _corpus()
+    texts, labels = _corpus()
     classifier = LinearSvmTrainer(regularization=1.0, seed=0).fit(texts, labels)
     model_file = SkopsModelFile(tmp_path / "out" / "model.skops")
 

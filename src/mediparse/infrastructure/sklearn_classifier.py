@@ -1,4 +1,4 @@
-"""Klasický model v scikit-learn: odložení po pacientech, TF-IDF s lineárním SVM a skops."""
+"""Klasický model v scikit-learn: TF-IDF s lineárním SVM a skops."""
 
 from __future__ import annotations
 
@@ -8,14 +8,12 @@ from typing import TYPE_CHECKING, Final
 
 import skops.io as sio
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
 from skops.io.exceptions import UntrustedTypesFoundException
 
 from mediparse.domain.evaluation import Classification
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.split import Holdout
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -41,26 +39,6 @@ class SklearnClassifier:
             Classification(bool(label), float(score))
             for label, score in zip(labels, scores, strict=True)
         )
-
-
-@dataclass(frozen=True)
-class GroupedHoldout:
-    """Odložení první části ze stratifikovaného rozdělení po pacientech."""
-
-    folds: int
-    seed: int
-
-    def split(self, labels: Sequence[bool], groups: Sequence[int]) -> Holdout:
-        """Rozdělí zprávy tak, že pacient je celý v jedné části.
-
-        Returns:
-            Indexy tréninkové části a testovací části, tedy prvního foldu.
-        """
-        splitter = StratifiedGroupKFold(
-            n_splits=self.folds, shuffle=True, random_state=self.seed
-        )
-        train, test = next(splitter.split(list(labels), list(labels), list(groups)))
-        return Holdout(tuple(map(int, train)), tuple(map(int, test)))
 
 
 ESTIMATOR: Final = "sklearn TfidfVectorizer+LinearSVC"
