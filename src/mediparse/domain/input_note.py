@@ -35,5 +35,6 @@ class InputNote:
         """
         if subject_of(self.note_id) != self.subject_id:
             # Řádek nese reálné zprávy MIMIC; hláška ani log nesmí nést identifikátory.
+            # Hláška InvalidNoteIdError ze subject_of note_id nese, chrání ji adaptér.
             msg = "note_id zprávy nepatří pacientovi uvedenému v subject_id."
             raise NoteSubjectMismatchError(msg)

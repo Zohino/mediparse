@@ -49,8 +49,8 @@ class ModelEvaluation:
         """Seskupí predikce podle řádku matice a diagnózy, spočte a zapíše metriky.
 
         Predikce všech foldů skupiny se slévají do jedné metriky přes všechny testovací
-        zprávy: fold vzácné diagnózy nemusí mít obě třídy pravdy a metrika po foldech
-        by ho odmítla.
+        zprávy: metriky mají jeden řádek na řádek matice a diagnózu a srovnání jazyků
+        je párované přes všechny pacienty kohorty, ne po foldech.
 
         Returns:
             Metriky seřazené podle řádku matice a diagnózy.
