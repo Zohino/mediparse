@@ -9,6 +9,7 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Prediction
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.language import Language
+from mediparse.domain.note import note_id
 from mediparse.domain.smoketest_training import TrainingConfig
 from mediparse.domain.split import SplitConfig
 
@@ -24,7 +25,8 @@ def separable_notes(
     """Zprávy pacientů střídavě s diabetem a bez něj, pacient má 1 až 7 zpráv nepravidelně.
 
     Args:
-        patients: Počet pacientů; sudí mají diabetes.
+        patients: Počet pacientů s ``subject_id`` od 1; diabetes má každý druhý
+            počínaje prvním.
         vocabulary: Slova zpráv pozitivních a negativních pacientů; společná
             slova z nich dělají neseparovatelný korpus.
 
@@ -37,8 +39,8 @@ def separable_notes(
         labels = frozenset({Diagnosis.DIABETES} if positive else ())
         notes.extend(
             InputNote(
-                f"{patient}-DS-{visit}",
-                patient,
+                note_id(patient + 1, visit),
+                patient + 1,
                 Language.EN,
                 f"{vocabulary[0] if positive else vocabulary[1]} visit {visit}",
                 labels,

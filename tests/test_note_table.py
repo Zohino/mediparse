@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import TYPE_CHECKING
 
 import pyarrow as pa
@@ -104,22 +105,51 @@ def test_read_other_schema_is_invalid_input(tmp_path: Path) -> None:
 def test_read_returns_language_as_enum(tmp_path: Path) -> None:
     """Jazyk z parquetu se čte jako Language, ne jako řetězec."""
     table = ParquetNoteTable(tmp_path / "notes.parquet")
-    table.write([InputNote("a", 1, Language.CS, "text", frozenset())])
+    table.write([InputNote("1-DS-1", 1, Language.CS, "text", frozenset())])
 
     assert table.read()[0].language is Language.CS
+
+
+def _write_row(path: Path, **overrides: object) -> None:
+    """Zapíše jeden řádek ve schématu tabulky mimo adaptér, s hodnotami z ``overrides``."""
+    row = {
+        "note_id": "1-DS-1",
+        "subject_id": 1,
+        "language": "en",
+        "text": "text",
+        **dict.fromkeys((diagnosis.value for diagnosis in Diagnosis), False),
+    } | overrides
+    columns = {name: [row[name]] for name in SCHEMA.names}
+    pq.write_table(pa.Table.from_pydict(columns, schema=SCHEMA), path)
 
 
 def test_read_unknown_language_is_invalid_input(tmp_path: Path) -> None:
     """Jazyk mimo výčet je InvalidInputError, ne ValueError z adaptéru."""
     path = tmp_path / "notes.parquet"
-    ParquetNoteTable(path).write([InputNote("a", 1, Language.EN, "text", frozenset())])
-    rows = pq.read_table(path).to_pylist()
-    rows[0]["language"] = "de"
-    columns = {name: [row[name] for row in rows] for name in SCHEMA.names}
-    pq.write_table(pa.Table.from_pydict(columns, schema=SCHEMA), path)
+    _write_row(path, language="de")
 
     with pytest.raises(InvalidInputError, match="neznámý jazyk 'de'"):
         ParquetNoteTable(path).read()
+
+
+@pytest.mark.parametrize(
+    ("note_id", "subject_id"),
+    [("90000001-DS-1", 90000002), ("x90000001-DS-1", 90000001)],
+    ids=["jiny-pacient", "mimo-skladbu"],
+)
+def test_read_note_id_not_of_its_subject_is_invalid_input_without_ids(
+    tmp_path: Path, note_id: str, subject_id: int
+) -> None:
+    """Note_id jiného pacienta nebo mimo skladbu je InvalidInputError bez identifikátorů."""
+    path = tmp_path / "notes.parquet"
+    _write_row(path, note_id=note_id, subject_id=subject_id)
+
+    with pytest.raises(InvalidInputError, match=re.escape(str(path))) as raised:
+        ParquetNoteTable(path).read()
+
+    assert "90000001" not in str(raised.value)
+    assert raised.value.__cause__ is None
+    assert raised.value.__suppress_context__
 
 
 def test_written_file_is_zstd_compressed(tmp_path: Path) -> None:

@@ -138,33 +138,33 @@ def base_notes() -> list[NoteRow]:
 
     Filtry (pořadí jako ``FunnelStepName``) vyřadí tyto zprávy:
 
-    - ``FunnelStepName.WITH_ICD``: n03 (bez ``hadm_id``), n04 a n09 (přijetí
+    - ``FunnelStepName.WITH_ICD``: 3-DS-1 (bez ``hadm_id``), 4-DS-1 a 8-DS-1 (přijetí
       bez řádku ICD);
-    - ``FunnelStepName.LONG_ENOUGH``: n05 (krátký text), n06 (text NULL);
-    - ``FunnelStepName.UNIQUE``: n08, kopie textu n01 s vyšším ``note_id``.
+    - ``FunnelStepName.LONG_ENOUGH``: 5-DS-1 (krátký text), 6-DS-1 (text NULL);
+    - ``FunnelStepName.UNIQUE``: 1-DS-2, kopie textu 1-DS-1 s vyšším ``note_id``.
 
-    n09 sdílí text s n10, ale duplicita se neuplatní: n09 vypadne už na
-    ``FunnelStepName.WITH_ICD`` a n10 zůstane.
+    8-DS-1 sdílí text s 9-DS-1, ale duplicita se neuplatní: 8-DS-1 vypadne už na
+    ``FunnelStepName.WITH_ICD`` a 9-DS-1 zůstane.
 
-    n07 má jediný řádek ICD s NULL kódem, takže filtr ``WITH_ICD`` projde bez
-    štítků. Pacient 1 má n01 i n08, pacient 10 dvě zprávy téhož přijetí.
+    7-DS-1 má jediný řádek ICD s NULL kódem, takže filtr ``WITH_ICD`` projde bez
+    štítků. Pacient 1 má 1-DS-1 i 1-DS-2, pacient 10 dvě zprávy téhož přijetí.
 
     Returns:
         Řádky ``discharge``.
     """
     return [
-        note("n01", 1, 10, text("a")),
-        note("n02", 2, 20, text("b")),
-        note("n03", 3, None, text("f")),
-        note("n04", 4, 40, text("g")),
-        note("n05", 5, 50, "short"),
-        note("n06", 6, 60, None),
-        note("n07", 7, 70, text("h")),
-        note("n08", 1, 80, text("a")),
-        note("n09", 8, 90, text("c")),
-        note("n10", 9, 100, text("c")),
-        note("n11", 10, 110, text("d")),
-        note("n12", 10, 110, text("e")),
+        note("1-DS-1", 1, 10, text("a")),
+        note("2-DS-1", 2, 20, text("b")),
+        note("3-DS-1", 3, None, text("f")),
+        note("4-DS-1", 4, 40, text("g")),
+        note("5-DS-1", 5, 50, "short"),
+        note("6-DS-1", 6, 60, None),
+        note("7-DS-1", 7, 70, text("h")),
+        note("1-DS-2", 1, 80, text("a")),
+        note("8-DS-1", 8, 90, text("c")),
+        note("9-DS-1", 9, 100, text("c")),
+        note("10-DS-1", 10, 110, text("d")),
+        note("10-DS-2", 10, 110, text("e")),
     ]
 
 
@@ -193,18 +193,18 @@ def base_icd() -> list[IcdRow]:
 # tolika pacientů (jeden pacient na zprávu), všechny projdou všemi filtry.
 _BASE_FUNNEL: Final = {
     FunnelStepName.ALL_NOTES: (12, 10),
-    FunnelStepName.WITH_ICD: (9, 7),  # bez n03, n04, n09
-    FunnelStepName.LONG_ENOUGH: (7, 5),  # bez n05, n06
-    FunnelStepName.UNIQUE: (6, 5),  # bez n08, kopie textu n01
+    FunnelStepName.WITH_ICD: (9, 7),  # bez 3-DS-1, 4-DS-1, 8-DS-1
+    FunnelStepName.LONG_ENOUGH: (7, 5),  # bez 5-DS-1, 6-DS-1
+    FunnelStepName.UNIQUE: (6, 5),  # bez 1-DS-2, kopie textu 1-DS-1
 }
 EXPECTED_FUNNEL: Final = {
     step: (notes + PADDING_NOTES, patients + PADDING_NOTES)
     for step, (notes, patients) in _BASE_FUNNEL.items()
 }
-# Řádek ICD s NULL kódem: jediný je u n07 v ``base_icd()``, padding žádný nemá.
+# Řádek ICD s NULL kódem: jediný je u 7-DS-1 v ``base_icd()``, padding žádný nemá.
 EXPECTED_INVALID_CODES: Final = 1
-# Pozitivní zprávy ``base_notes()`` po deduplikaci: n01 cukrovka, n02 fibrilace,
-# n10 zápal plic, n11 a n12 (jedno přijetí) CHOPN. Padding dá každé diagnóze
+# Pozitivní zprávy ``base_notes()`` po deduplikaci: 1-DS-1 cukrovka, 2-DS-1 fibrilace,
+# 9-DS-1 zápal plic, 10-DS-1 a 10-DS-2 (jedno přijetí) CHOPN. Padding dá každé diagnóze
 # ``PADDING_PER_DIAGNOSIS`` pozitivních.
 _BASE_POSITIVES: Final = {
     Diagnosis.DIABETES: 1,
@@ -231,7 +231,7 @@ def padding() -> tuple[list[NoteRow], list[IcdRow]]:
         version, code = PADDING_CODES[diagnosis]
         for k in range(PADDING_PER_DIAGNOSIS):
             hadm = 1000 + index * 100 + k
-            notes.append(note(f"p{index}-{k:02d}", hadm, hadm, text(f"p{hadm}")))
+            notes.append(note(f"{hadm}-DS-1", hadm, hadm, text(f"p{hadm}")))
             codes.append(icd(hadm, 1, code, version))
     return notes, codes
 
