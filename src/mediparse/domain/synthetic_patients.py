@@ -59,6 +59,15 @@ class SyntheticNote:
     labels: LabelSet
 
 
+@dataclass(frozen=True)
+class _PatientDistribution:
+    """Předpočítaná rozdělení jednoho tahu: společné labely, akutní diagnóza a poměr počtu zpráv."""
+
+    joint: Mapping[LabelSet, float]
+    acute: Mapping[LabelSet, float]
+    ratio: float
+
+
 class PrevalenceNotReachedError(InvalidInputError):
     """Žádný tah v povoleném počtu pokusů nedal prevalence v toleranci."""
 
@@ -91,10 +100,11 @@ def sample_notes(
         PrevalenceNotReachedError: Tolerance nebyla dosažena v povoleném počtu pokusů.
     """
     joint = max_entropy_joint(labels)
-    acute = acute_given_chronic(joint)
-    ratio = continuation_ratio(patients)
+    distribution = _PatientDistribution(
+        joint, acute_given_chronic(joint), continuation_ratio(patients)
+    )
     for _ in range(patients.max_attempts):
-        notes = _draw(patients, joint, acute, ratio, rng)
+        notes = _draw(patients, distribution, rng)
         if _within_tolerance(notes, labels):
             return notes
     msg = f"Prevalence nevyšly do tolerance ani za {patients.max_attempts} pokusů."
@@ -102,17 +112,16 @@ def sample_notes(
 
 
 def _draw(
-    patients: PatientModel,
-    joint: Mapping[LabelSet, float],
-    acute: Mapping[LabelSet, float],
-    ratio: float,
-    rng: Random,
+    patients: PatientModel, distribution: _PatientDistribution, rng: Random
 ) -> tuple[SyntheticNote, ...]:
     notes: list[SyntheticNote] = []
     subject = patients.first_subject_id
     while len(notes) < patients.notes:
-        count = min(_note_count(patients, ratio, rng), patients.notes - len(notes))
-        notes.extend(_patient_notes(subject, count, joint, acute, rng))
+        count = min(
+            _note_count(patients, distribution.ratio, rng),
+            patients.notes - len(notes),
+        )
+        notes.extend(_patient_notes(subject, count, distribution, rng))
         subject += 1
     return tuple(notes)
 
@@ -127,15 +136,16 @@ def _note_count(patients: PatientModel, ratio: float, rng: Random) -> int:
 def _patient_notes(
     subject: SubjectId,
     count: int,
-    joint: Mapping[LabelSet, float],
-    acute: Mapping[LabelSet, float],
+    distribution: _PatientDistribution,
     rng: Random,
 ) -> list[SyntheticNote]:
-    cells = list(joint)
-    first = rng.choices(cells, weights=[joint[cell] for cell in cells])[0]
+    cells = list(distribution.joint)
+    first = rng.choices(cells, weights=[distribution.joint[cell] for cell in cells])[0]
     chronic = frozenset(d for d in first if d.chronic)
     later = [
-        chronic | {ACUTE_DIAGNOSIS} if rng.random() < acute[chronic] else chronic
+        chronic | {ACUTE_DIAGNOSIS}
+        if rng.random() < distribution.acute[chronic]
+        else chronic
         for _ in range(count - 1)
     ]
     return [
