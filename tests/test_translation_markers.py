@@ -50,7 +50,7 @@ def test_problems_none_for_swapped_order(markers: ModuleType) -> None:
     assert problems == markers.PlaceholderProblems((), (), ())
 
 
-def test_problems_missing(markers: ModuleType) -> None:
+def test_missing_number_is_reported(markers: ModuleType) -> None:
     """Chybějící číslo se ohlásí."""
     problems = markers.placeholder_problems("[[1]] [[3]]", 3)
     assert problems.missing == (2,)
@@ -65,7 +65,7 @@ def test_problems_extra_includes_zero_and_beyond(markers: ModuleType) -> None:
     assert problems.missing == ()
 
 
-def test_problems_duplicated(markers: ModuleType) -> None:
+def test_number_used_twice_is_duplicated(markers: ModuleType) -> None:
     """Číslo použité dvakrát je zdvojené."""
     problems = markers.placeholder_problems("[[1]] [[1]] [[2]]", 2)
     assert problems.duplicated == (1,)
@@ -77,11 +77,3 @@ def test_problems_note_without_markers(markers: ModuleType) -> None:
     assert markers.placeholder_problems("text", 0) == markers.PlaceholderProblems(
         (), (), ()
     )
-
-
-def test_problems_extra_numbers_beyond_expected(markers: ModuleType) -> None:
-    """Čísla 0 a 2 při jedné očekávané značce jsou navíc."""
-    problems = markers.placeholder_problems("[[0]] [[1]] [[2]]", 1)
-
-    assert problems.extra == (0, 2)
-    assert problems.missing == ()

@@ -137,6 +137,7 @@ def test_no_allowed_section_means_no_mention() -> None:
     """Když struktura nemá žádnou povolenou sekci pro pneumonii, její zmínka se neplánuje."""
     mentions = _flat(_sample(2000, frozenset({Diagnosis.PNEUMONIA}), (PMH, FAMILY)))
 
+    assert mentions
     assert all(m.diagnosis is not Diagnosis.PNEUMONIA for m in mentions)
 
 
@@ -152,9 +153,11 @@ def test_negative_statuses_follow_the_model() -> None:
 
 def test_family_history_status_prefers_family_section() -> None:
     """Zmínka ve statusu rodinné anamnézy stojí v sekci Family History, když ji zpráva má."""
-    for mention in _flat(_sample(LARGE, frozenset())):
-        if mention.status is MentionStatus.FAMILY_HISTORY:
-            assert mention.sections == (FAMILY,)
+    mentions = _flat(_sample(LARGE, frozenset()))
+    cases = [m for m in mentions if m.status is MentionStatus.FAMILY_HISTORY]
+
+    assert cases
+    assert all(m.sections == (FAMILY,) for m in cases)
 
 
 def test_affirmed_status_for_negative_label_is_rejected() -> None:

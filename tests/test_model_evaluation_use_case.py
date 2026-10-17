@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections import Counter
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
@@ -96,12 +97,12 @@ def test_scorer_gets_only_its_group_in_input_order() -> None:
 
     use_case.run()
 
-    assert scorer.calls[0] == (
-        (False, True, True),
-        (False, True, False),
-        (-1.0, 3.0, -0.5),
-    )
-    assert scorer.calls[2] == ((True, False), (True, True), (1.0, 0.5))
+    expected = [
+        ((False, True, True), (False, True, False), (-1.0, 3.0, -0.5)),
+        ((False, True), (False, True), (-2.0, 2.0)),
+        ((True, False), (True, True), (1.0, 0.5)),
+    ]
+    assert Counter(scorer.calls) == Counter(expected)
 
 
 def test_empty_input_is_rejected_without_writing() -> None:

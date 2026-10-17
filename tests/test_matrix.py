@@ -110,13 +110,13 @@ def test_empty_matrix_is_rejected() -> None:
 
 def test_duplicate_ids_are_rejected() -> None:
     """Id řádku je klíč výsledků, dva řádky ho sdílet nesmí."""
-    with pytest.raises(ValidationError, match="id"):
+    with pytest.raises(ValidationError, match=r"Duplicitní id řádků: \['en-logreg'\]"):
         _validate(_row(), _row(language="cs"))
 
 
 def test_duplicate_experiments_are_rejected() -> None:
     """Dva řádky se stejnými osami jsou tentýž experiment pod dvěma jmény."""
-    with pytest.raises(ValidationError, match="osy"):
+    with pytest.raises(ValidationError, match=r"stejné osy: \[\("):
         _validate(_row(), _row(id="en-logreg-copy"))
 
 

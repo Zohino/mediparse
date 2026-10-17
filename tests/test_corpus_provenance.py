@@ -15,8 +15,6 @@ from mediparse.domain.corpus_provenance import (
     provenance_violations,
     semantic_version,
 )
-from mediparse.domain.digest import fingerprint
-from mediparse.domain.verbalization import render_prompt
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -41,18 +39,51 @@ RECORD: Final = {
 }
 
 
-def test_prompts_fingerprint_covers_rendered_prompt(
+def _with_header(config: SamplerConfig, key: str) -> SamplerConfig:
+    structure = config.structure
+    sections = tuple(
+        section.model_copy(update={"header": "Changed header"})
+        if section.key == key
+        else section
+        for section in structure.sections
+    )
+    return config.model_copy(
+        update={"structure": structure.model_copy(update={"sections": sections})}
+    )
+
+
+def test_prompts_fingerprint_ignores_header_of_section_missing_in_plan(
     planned_note: PlannedNote,
     sampler_config: SamplerConfig,
     verbalization_template: str,
 ) -> None:
-    """Otisk zadání vzniká z vyrenderovaného textu, tedy i z vět, které skládá kód."""
+    """Otisk se mění s větou, kterou skládá kód, a jen s ní: cizí hlavička ho nehne."""
     plan = planned_note.plan
-    prompt = render_prompt(verbalization_template, plan, sampler_config)
+    absent = next(
+        s.key for s in sampler_config.structure.sections if s.key not in plan.sections
+    )
+    changed = _with_header(sampler_config, absent)
 
-    assert prompts_sha256(
+    assert prompts_sha256(verbalization_template, [plan], changed) == prompts_sha256(
         verbalization_template, [plan], sampler_config
-    ) == fingerprint([(plan.note_id, prompt.encode())])
+    )
+
+
+def test_prompts_fingerprint_changes_with_header_of_section_in_plan(
+    planned_note: PlannedNote,
+    sampler_config: SamplerConfig,
+    verbalization_template: str,
+) -> None:
+    """Otisk se mění s větou, kterou skládá kód: hlavička sekce plánu je jen v configu."""
+    plan = planned_note.plan
+    present = next(
+        s.key for s in sampler_config.structure.sections if s.key in plan.sections
+    )
+    changed = _with_header(sampler_config, present)
+
+    assert prompts_sha256(verbalization_template, [plan], changed) != prompts_sha256(
+        verbalization_template, [plan], sampler_config
+    )
 
 
 @pytest.mark.parametrize(
@@ -63,7 +94,7 @@ def test_prompts_fingerprint_covers_rendered_prompt(
     ],
     ids=["model", "version"],
 )
-def test_generation_validators(
+def test_generation_validator_keeps_valid_and_rejects_invalid(
     validate: Callable[[str], str], valid: str, invalid: str, message: str
 ) -> None:
     """Validátor platnou hodnotu vrátí beze změny a neplatnou odmítne."""

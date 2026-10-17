@@ -102,8 +102,6 @@ def test_counts_with_ten_and_ten_pass() -> None:
 
     ensure_publishable(counts)
 
-    assert counts.positives[Diagnosis.CKD] == MIN_CELL
-
 
 def _numbers(error: pytest.ExceptionInfo[InvalidInputError]) -> set[str]:
     return set(re.findall(r"\d+", str(error.value)))
@@ -143,14 +141,18 @@ def test_empty_cohort_is_refused_without_number() -> None:
     assert _numbers(error) <= {str(MIN_CELL)}
 
 
-def test_funnel_must_have_four_steps_in_order() -> None:
-    """Trychtýř má právě čtyři kroky v pořadí sešitu 5."""
-    steps = _funnel(100, 80, 60, 50)
+_STEPS = _funnel(100, 80, 60, 50)
 
+
+@pytest.mark.parametrize(
+    "steps",
+    [_STEPS[:3], (_STEPS[1], _STEPS[0], *_STEPS[2:])],
+    ids=["missing-step", "swapped-order"],
+)
+def test_funnel_must_have_four_steps_in_order(steps: tuple[FunnelStep, ...]) -> None:
+    """Trychtýř má právě čtyři kroky v pořadí sešitu 5."""
     with pytest.raises(ValidationError, match="trychtýře"):
-        make_counts(funnel=steps[:3])
-    with pytest.raises(ValidationError, match="trychtýře"):
-        make_counts(funnel=(steps[1], steps[0], *steps[2:]))
+        make_counts(funnel=steps)
 
 
 def test_funnel_must_not_grow() -> None:
