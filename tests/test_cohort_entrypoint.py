@@ -7,14 +7,22 @@ import logging
 import re
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.cohort import MIN_CELL, CohortManifest
+from mediparse.domain.cohort import MIN_CELL, CohortManifest, FunnelStepName
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.environment import SourceRevision
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
-from tests.cohort_support import icd, note, text, write_tables
+from tests.cohort_support import (
+    EXPECTED_FUNNEL,
+    EXPECTED_POSITIVES,
+    candidate_prefixes,
+    icd,
+    note,
+    text,
+    write_tables,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -23,17 +31,8 @@ if TYPE_CHECKING:
     import pytest
 
 REVISION: Final = SourceRevision(commit="a" * 40, dirty=False)
-KEPT_NOTES: Final = 56
-COPD_NOTES: Final = 12
 DISCHARGE_SHA: Final = "1" * 64
 DIAGNOSES_SHA: Final = "2" * 64
-PREFIXES: Final = {
-    "diabetes": (["250"], ["E11"]),
-    "copd": (["496"], ["J44"]),
-    "ckd": (["585"], ["N18"]),
-    "pneumonia": (["486"], ["J18"]),
-    "atrial_fibrillation": (["4273"], ["I48"]),
-}
 
 
 def _revision() -> SourceRevision:
@@ -48,12 +47,7 @@ def _no_git() -> SourceRevision:
 def _configs(root: Path) -> tuple[Path, Path]:
     candidates = root / "diagnosis_candidates.json"
     candidates.write_text(
-        json.dumps({
-            "candidates": {
-                key: {"icd9_prefixes": nine, "icd10_prefixes": ten}
-                for key, (nine, ten) in PREFIXES.items()
-            }
-        }),
+        json.dumps({"candidates": candidate_prefixes()}),
         encoding="utf-8",
     )
     tables = root / "mimic_tables.json"
@@ -101,8 +95,10 @@ def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
     assert set(written.environment.packages) == set(cohort.PACKAGES)
     assert "pydantic" in written.environment.packages
     assert written.invalid_codes == 1
-    assert written.counts.funnel[-1].notes == KEPT_NOTES
-    assert written.counts.positives[Diagnosis.COPD] == COPD_NOTES
+    assert written.counts.funnel[-1].notes == EXPECTED_FUNNEL[FunnelStepName.UNIQUE][0]
+    assert (
+        written.counts.positives[Diagnosis.COPD] == EXPECTED_POSITIVES[Diagnosis.COPD]
+    )
     assert (out.parent / "duckdb-tmp").is_dir()
 
 
