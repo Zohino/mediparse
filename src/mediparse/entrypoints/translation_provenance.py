@@ -9,23 +9,18 @@ S daty MIMIC nepracuje, jen s jejich oficiálními otisky z configu.
 from __future__ import annotations
 
 import argparse
-import logging
 import sys
 from pathlib import Path
-from typing import TYPE_CHECKING, assert_never
+from typing import TYPE_CHECKING
 
-from mediparse.application.corpus_provenance import (
-    ProvenanceRefused,
-    ProvenanceWritten,
-)
 from mediparse.application.translation_provenance import TranslationProvenance
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.corpus_cli import (
     add_corpus_option,
     add_sampler_config_option,
     add_tables_option,
+    provenance_exit_code,
 )
-from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.audit_pin import load_audit_pin
 from mediparse.infrastructure.synthetic_corpus import (
     PROVENANCE_NAME,
@@ -39,7 +34,7 @@ from mediparse.infrastructure.translation_workdir import (
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-logger = logging.getLogger(__name__)
+    from mediparse.entrypoints.exit_code import ExitCode
 
 
 def main() -> ExitCode:
@@ -66,17 +61,9 @@ def run(argv: Sequence[str]) -> ExitCode:
     ).run(
         load_audit_pin(args.tables, args.config),
     )
-    match outcome:
-        case ProvenanceWritten():
-            logger.info(
-                "Provenance překladu zapsána do %s.", args.corpus / PROVENANCE_NAME
-            )
-            return ExitCode.OK
-        case ProvenanceRefused(reason=reason):
-            logger.error("%s", reason)
-            return ExitCode.REFUSED
-        case _:
-            assert_never(outcome)
+    return provenance_exit_code(
+        outcome, f"Provenance překladu zapsána do {args.corpus / PROVENANCE_NAME}."
+    )
 
 
 def _parser() -> argparse.ArgumentParser:

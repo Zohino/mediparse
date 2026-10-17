@@ -8,15 +8,12 @@ Seed, otisk configu vzorkovače a otisk zadání všech zpráv bere ze souborů 
 from __future__ import annotations
 
 import argparse
-import logging
 import sys
 from datetime import date
-from typing import TYPE_CHECKING, assert_never
+from typing import TYPE_CHECKING
 
 from mediparse.application.corpus_provenance import (
     CorpusProvenance,
-    ProvenanceRefused,
-    ProvenanceWritten,
 )
 from mediparse.domain.corpus_provenance import (
     Generation,
@@ -36,8 +33,8 @@ from mediparse.entrypoints.corpus_cli import (
     add_sampler_config_option,
     add_tables_option,
     add_template_option,
+    provenance_exit_code,
 )
-from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.audit_pin import load_audit_pin
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.plans_file import PlansFile
@@ -55,7 +52,7 @@ from mediparse.infrastructure.verbalization_template import (
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-logger = logging.getLogger(__name__)
+    from mediparse.entrypoints.exit_code import ExitCode
 
 
 def main() -> ExitCode:
@@ -95,15 +92,9 @@ def run(argv: Sequence[str]) -> ExitCode:
         generation,
         load_audit_pin(args.tables, args.config),
     )
-    match outcome:
-        case ProvenanceWritten():
-            logger.info("Provenance zapsána do %s.", args.corpus / PROVENANCE_NAME)
-            return ExitCode.OK
-        case ProvenanceRefused(reason=reason):
-            logger.error("%s", reason)
-            return ExitCode.REFUSED
-        case _:
-            assert_never(outcome)
+    return provenance_exit_code(
+        outcome, f"Provenance zapsána do {args.corpus / PROVENANCE_NAME}."
+    )
 
 
 def _parser() -> argparse.ArgumentParser:

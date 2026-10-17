@@ -2,9 +2,15 @@
 
 from __future__ import annotations
 
+import logging
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, assert_never
 
+from mediparse.application.corpus_provenance import (
+    ProvenanceRefused,
+    ProvenanceWritten,
+)
+from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.plans_file import PLANS_PATH
 from mediparse.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
@@ -15,6 +21,10 @@ from mediparse.infrastructure.verbalization_template import (
 
 if TYPE_CHECKING:
     import argparse
+
+    from mediparse.application.corpus_provenance import ProvenanceOutcome
+
+logger = logging.getLogger(__name__)
 
 
 def add_corpus_option(parser: argparse.ArgumentParser) -> None:
@@ -59,3 +69,24 @@ def add_template_option(parser: argparse.ArgumentParser) -> None:
         default=VERBALIZATION_TEMPLATE_PATH,
         help="šablona instrukcí verbalizace",
     )
+
+
+def provenance_exit_code(outcome: ProvenanceOutcome, written: str) -> ExitCode:
+    """Převede výsledek zápisu provenance na návratový kód a hlášku v logu.
+
+    Args:
+        outcome: Výsledek use case provenance.
+        written: Hláška pro úspěšný zápis.
+
+    Returns:
+        OK po zápisu, REFUSED s důvodem odmítnutí v logu.
+    """
+    match outcome:
+        case ProvenanceWritten():
+            logger.info("%s", written)
+            return ExitCode.OK
+        case ProvenanceRefused(reason=reason):
+            logger.error("%s", reason)
+            return ExitCode.REFUSED
+        case _:
+            assert_never(outcome)
