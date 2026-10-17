@@ -42,6 +42,9 @@ WITH admissions AS (
         ON i.icd_version = l.icd_version AND i.icd_code = l.icd_code
     GROUP BY i.hadm_id
 ),
+-- Otisk a délka vznikají v samostatné CTE před oknem: okno přímo nad hash(text)
+-- by materializovalo celý text. Text se připojí až v _COHORT. Celý text jako klíč
+-- deduplikace (PARTITION BY text) spadl v sondě S23 na paměť.
 metrics AS (
     SELECT
         note_id,
@@ -62,6 +65,8 @@ joined AS (
     FROM metrics m
     LEFT JOIN admissions a ON a.hadm_id = m.hadm_id
 ),
+-- Filtry platí před deduplikací, aby kopie bez ICD nebo příliš krátká nevyřadila
+-- platnou kopii; počty tak odpovídají sešitům EDA 5, 7 a 8.
 eligible AS (
     SELECT
         note_id,

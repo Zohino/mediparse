@@ -38,6 +38,8 @@ class GitRevision:
         return SourceRevision(commit=commit, dirty=dirty)
 
     def _git(self, *args: str) -> str:
+        # GIT_DIR nebo GIT_WORK_TREE (nastavuje je např. git rebase --exec nebo hook)
+        # přebijí -C a adaptér by popsal revizi cizího repa.
         try:
             done = subprocess.run(
                 ["git", "-C", str(self.root), *args],
