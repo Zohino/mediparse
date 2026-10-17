@@ -8,12 +8,18 @@ from __future__ import annotations
 
 import json
 import sys
+import typing
 from types import ModuleType
 from typing import TYPE_CHECKING, Final
 
 import pytest
 
-from mediparse.domain.translation_consistency import binding_violations
+from mediparse.domain.corpus_provenance import Masking
+from mediparse.domain.note_text import deid_markers
+from mediparse.domain.translation_consistency import (
+    binding_violations,
+    restored_markers,
+)
 from mediparse.infrastructure.translation_workdir import TranslationWorkdir
 from tests.support import REPOSITORY, load_script
 from tests.workdir_support import (
@@ -180,6 +186,92 @@ def test_domain_accepts_collected_translation(
             TranslationWorkdir(workdir).notes(),
             {"n1": "A\n"},
             {"n1": (target / "n1.txt").read_text(encoding="utf-8")},
+        )
+        == ()
+    )
+
+
+@pytest.fixture
+def markers(monkeypatch: pytest.MonkeyPatch) -> ModuleType:
+    """Načte skript markers.
+
+    Returns:
+        Načtený modul.
+    """
+    return load_script(TRANSLATION / "markers.py", monkeypatch)
+
+
+MARKER_TEXTS: Final = [
+    "___",
+    "______",
+    "____ year old",
+    "__",
+    "x___y",
+    "a ___ b ___",
+    "[[1]]",
+    "[[ 2 ]]",
+    "[[10]]",
+    "[[x]]",
+    "[[1]] a [[2]] ___",
+    "",
+]
+
+
+@pytest.mark.parametrize("text", MARKER_TEXTS)
+def test_marker_count_matches_domain(markers: ModuleType, text: str) -> None:
+    """Skript a doména poznají značku ___ ve stejných textech."""
+    assert len(markers.MARKER.findall(text)) == deid_markers(text)
+
+
+@pytest.mark.parametrize("text", MARKER_TEXTS)
+def test_restore_matches_domain(markers: ModuleType, text: str) -> None:
+    """Obnova [[n]] na ___ dopadne ve skriptu i v doméně stejně."""
+    assert markers.restore(text) == restored_markers(text)
+
+
+def test_masking_placeholder_is_the_only_domain_masking(markers: ModuleType) -> None:
+    """Hodnota, kterou skript zapisuje do plánu, je jediná, kterou provenance zná."""
+    assert typing.get_args(Masking.__value__) == (markers.PLACEHOLDER,)
+
+
+SPLIT_SOURCE: Final = "A ___\n\nB ___\n"
+
+
+@pytest.mark.parametrize("masked", [True, False], ids=["masked", "plain"])
+def test_collected_split_note_is_accepted_by_provenance(
+    collect: ModuleType,
+    markers: ModuleType,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    *,
+    masked: bool,
+) -> None:
+    """Rozdělená zpráva s výstupy mimo pořadí a mezerami se složí, jak ji čeká doména."""
+    first, second = ("první [[1]]  \nvnitřní řádek  \n", "  druhá [[2]]\n\n")
+    if not masked:
+        first, second = markers.restore(first), markers.restore(second)
+    english = tmp_path / "en"
+    english.mkdir()
+    (english / "n1.txt").write_text(SPLIT_SOURCE, encoding="utf-8")
+    workdir = tmp_path / "work"
+    write_workdir(
+        workdir,
+        [request("n1", "n1/1", SPLIT_SOURCE), request("n1", "n1/2", SPLIT_SOURCE)],
+        [run_line(LAST_START, "0" * 64)],
+        [output("n1/2", second, LAST_START), output("n1/1", first, LAST_START)],
+        markers.PLACEHOLDER if masked else None,
+    )
+
+    code, target = _collect(collect, monkeypatch, workdir, english)
+
+    adapter = TranslationWorkdir(workdir)
+    assert code == 0
+    assert (
+        binding_violations(
+            adapter.notes(),
+            {"n1": SPLIT_SOURCE},
+            {"n1": (target / "n1.txt").read_text(encoding="utf-8")},
+            adapter.translation().masking,
         )
         == ()
     )
