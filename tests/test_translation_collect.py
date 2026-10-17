@@ -12,6 +12,7 @@ from typing import TYPE_CHECKING, Final
 import pytest
 
 from tests.support import REPOSITORY, load_script
+from tests.workdir_support import collect_argv
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -75,15 +76,7 @@ def _run(
         "".join(f"{json.dumps(output)}\n" for output in case.outputs)
     )
     target = tmp_path / "cs"
-    argv = [
-        "collect",
-        "--workdir",
-        str(workdir),
-        "--source",
-        str(source),
-        "--target",
-        str(target),
-    ]
+    argv = collect_argv(workdir, source, target)
     monkeypatch.setattr(sys, "argv", argv)
     return collect.main(), target
 

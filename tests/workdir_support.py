@@ -132,3 +132,20 @@ def write_single_part_workdir(root: Path, notes: Mapping[str, tuple[str, str]]) 
         output(f"key-{note_id}", cs, LAST_START) for note_id, (_, cs) in notes.items()
     ]
     return write_workdir(root, requests, [run_line(LAST_START, "0" * 64)], outputs)
+
+
+def collect_argv(workdir: Path, source: Path, target: Path) -> list[str]:
+    """Argumenty příkazové řádky translation/collect.py.
+
+    Returns:
+        ``sys.argv`` pro ``collect.main``.
+    """
+    return [
+        "collect",
+        "--workdir",
+        str(workdir),
+        "--source",
+        str(source),
+        "--target",
+        str(target),
+    ]

@@ -118,10 +118,8 @@ def _outputs(path: Path) -> dict[str, Record]:
     # splitlines() láme i na U+0085 a U+2028, které translate.py s ensure_ascii=False
     # nechá v řetězci nezakódované; JSON Lines se dělí jen na LF.
     lines = path.read_text(encoding="utf-8").split("\n")
-    return {
-        output["key"]: output
-        for output in map(json.loads, (line for line in lines if line.strip()))
-    }
+    records = (json.loads(line) for line in lines if line.strip())
+    return {record["key"]: record for record in records}
 
 
 def _changed(request: Record, source: Path) -> bool:

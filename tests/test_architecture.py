@@ -20,7 +20,7 @@ PACKAGE = Path(mediparse.__file__).parent
 WORKFLOW = REPOSITORY / "workflow"
 MAX_SCRIPT_LINES = 20
 MAIN_GUARD = re.compile(r"__name__\s*==\s*[\"']__main__[\"']")
-RULE_IMPORT = re.compile(r"^\s*(?:from|import)\s+(mediparse\S*)", re.MULTILINE)
+RULE_IMPORT = re.compile(r"^\s*(?:from|import)\s+(mediparse[\w.]*)", re.MULTILINE)
 ENTRYPOINTS_MODULE = "mediparse.entrypoints"
 RUN_DIRECTIVE = re.compile(r"^\s*run\s*:", re.MULTILINE)
 APPLICATION = PACKAGE / "application"
@@ -36,7 +36,15 @@ def _workflow_scripts() -> list[Path]:
 
 
 def _workflow_rules() -> list[Path]:
-    return [WORKFLOW / "Snakefile", *sorted((WORKFLOW / "rules").glob("*.smk"))]
+    snakefile = WORKFLOW / "Snakefile"
+    rules = sorted((WORKFLOW / "rules").glob("*.smk"))
+    assert snakefile.is_file()
+    assert rules
+    return [snakefile, *rules]
+
+
+def _in_entrypoints(module: str) -> bool:
+    return module == ENTRYPOINTS_MODULE or module.startswith(f"{ENTRYPOINTS_MODULE}.")
 
 
 def _code_lines(path: Path) -> int:
@@ -50,7 +58,7 @@ def test_console_scripts_enter_through_entrypoints() -> None:
 
     assert targets
     assert [
-        target for target in targets if not target.startswith("mediparse.entrypoints.")
+        target for target in targets if not _in_entrypoints(target.split(":")[0])
     ] == []
 
 
@@ -71,14 +79,14 @@ def _entry_violations(root: Path) -> list[str]:
         Jména porušujících souborů; prázdný seznam znamená, že pravidlo platí.
     """
     return [
-        module.name
+        module.relative_to(root).as_posix()
         for module in sorted(root.rglob("*.py"))
         if module.name == "__main__.py"
         or MAIN_GUARD.search(module.read_text(encoding="utf-8"))
     ]
 
 
-def test_package_has_no_main_guard() -> None:
+def test_package_has_no_python_m_entry() -> None:
     """Balíček nemá vstup přes `python -m`; vstupem jsou konzolové skripty a Snakemake."""
     assert any(PACKAGE.rglob("*.py"))
     assert _entry_violations(PACKAGE) == []
@@ -109,8 +117,6 @@ def test_workflow_rules_have_no_inline_python() -> None:
     """Blok `run:` by skryl Python před import-linterem, ruffem i ty."""
     rules = _workflow_rules()
 
-    assert (WORKFLOW / "Snakefile").is_file()
-    assert len(rules) > 1
     assert [
         rule.name
         for rule in rules
@@ -131,8 +137,7 @@ def _rule_import_violations(rules: list[Path]) -> list[str]:
         f"{rule.name} importuje {module}"
         for rule in rules
         for module in RULE_IMPORT.findall(rule.read_text(encoding="utf-8"))
-        if module != ENTRYPOINTS_MODULE
-        and not module.startswith(f"{ENTRYPOINTS_MODULE}.")
+        if not _in_entrypoints(module)
     ]
 
 

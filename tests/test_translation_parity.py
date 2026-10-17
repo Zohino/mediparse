@@ -24,9 +24,11 @@ from mediparse.infrastructure.translation_workdir import TranslationWorkdir
 from tests.support import REPOSITORY, load_script
 from tests.workdir_support import (
     LAST_START,
+    collect_argv,
     output,
     request,
     run_line,
+    write_single_part_workdir,
     write_workdir,
 )
 
@@ -34,7 +36,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 TRANSLATION: Final = REPOSITORY / "translation"
-LINE_BREAKS: Final = {"U+2028": chr(0x2028), "U+0085": chr(0x85)}
+LINE_BREAKS: Final = {"U+2028": "\u2028", "U+0085": "\x85"}
 
 
 @pytest.fixture
@@ -68,14 +70,13 @@ def translate(monkeypatch: pytest.MonkeyPatch) -> ModuleType:
 
 
 def _write_notes(
-    tmp_path: Path, notes: dict[str, tuple[str, str]], masking: str | None = None
+    tmp_path: Path, notes: dict[str, tuple[str, str]]
 ) -> tuple[Path, Path]:
-    """Pracovní adresář a anglické originály, výstupy jsou psané jako ``translate._write``.
+    """Pracovní adresář s výstupy s ensure_ascii=False a prázdným řádkem mezi záznamy.
 
     Args:
         tmp_path: Kořen testu.
         notes: note_id → dvojice anglický originál a text výstupu překladu.
-        masking: Hodnota ``masking`` v plánu.
 
     Returns:
         Dvojice (pracovní adresář, adresář originálů).
@@ -85,16 +86,7 @@ def _write_notes(
     for note_id, (source, _) in notes.items():
         (english / f"{note_id}.txt").write_text(source, encoding="utf-8")
     workdir = tmp_path / "work"
-    write_workdir(
-        workdir,
-        [
-            request(note_id, f"key-{note_id}", source)
-            for note_id, (source, _) in notes.items()
-        ],
-        [run_line(LAST_START, "0" * 64)],
-        [],
-        masking,
-    )
+    write_single_part_workdir(workdir, notes)
     lines = (
         json.dumps(output(f"key-{note_id}", text, LAST_START), ensure_ascii=False)
         for note_id, (_, text) in notes.items()
@@ -115,19 +107,7 @@ def _collect(
     english: Path,
 ) -> tuple[int, Path]:
     target = workdir.parent / "cs"
-    monkeypatch.setattr(
-        sys,
-        "argv",
-        [
-            "collect",
-            "--workdir",
-            str(workdir),
-            "--source",
-            str(english),
-            "--target",
-            str(target),
-        ],
-    )
+    monkeypatch.setattr(sys, "argv", collect_argv(workdir, english, target))
     return collect.main(), target
 
 
@@ -152,6 +132,17 @@ def test_json_lines_with_unicode_line_breaks_are_read_alike(
     assert code == 0
     assert sorted(path.name for path in target.iterdir()) == ["n1.txt", "n2.txt"]
     assert [note.parts for note in domain] == [(text,) for text in texts.values()]
+    assert (
+        binding_violations(
+            domain,
+            dict.fromkeys(texts, "A\n"),
+            {
+                note_id: (target / f"{note_id}.txt").read_text(encoding="utf-8")
+                for note_id in texts
+            },
+        )
+        == ()
+    )
 
 
 def test_translate_reads_missing_outputs_as_empty(
@@ -169,26 +160,6 @@ def test_translate_read_keeps_record_order(
     path.write_text('{"key": "b"}\n\n   \n{"key": "a"}\n', encoding="utf-8")
 
     assert [record["key"] for record in _read_outputs(translate, path)] == ["b", "a"]
-
-
-def test_domain_accepts_collected_translation(
-    collect: ModuleType, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-) -> None:
-    """Provenance přijme cs/, které zapsal sběr z výstupů s U+2028."""
-    notes = {"n1": ("A\n", f"první{LINE_BREAKS['U+2028']}řádek\n")}
-    workdir, english = _write_notes(tmp_path, notes)
-
-    code, target = _collect(collect, monkeypatch, workdir, english)
-
-    assert code == 0
-    assert (
-        binding_violations(
-            TranslationWorkdir(workdir).notes(),
-            {"n1": "A\n"},
-            {"n1": (target / "n1.txt").read_text(encoding="utf-8")},
-        )
-        == ()
-    )
 
 
 @pytest.fixture
