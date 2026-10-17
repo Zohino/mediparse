@@ -115,8 +115,13 @@ def _truncated(request: Record, outputs: Mapping[str, Record]) -> bool:
 def _outputs(path: Path) -> dict[str, Record]:
     if not path.exists():
         return {}
-    lines = path.read_text(encoding="utf-8").splitlines()
-    return {output["key"]: output for output in map(json.loads, lines)}
+    # splitlines() láme i na U+0085 a U+2028, které translate.py s ensure_ascii=False
+    # nechá v řetězci nezakódované; JSON Lines se dělí jen na LF.
+    lines = path.read_text(encoding="utf-8").split("\n")
+    return {
+        output["key"]: output
+        for output in map(json.loads, (line for line in lines if line.strip()))
+    }
 
 
 def _changed(request: Record, source: Path) -> bool:

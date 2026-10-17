@@ -148,7 +148,10 @@ def _output(request: Record, result: RequestOutput, run: str) -> Record:
 def _read(path: Path) -> list[Record]:
     if not path.exists():
         return []
-    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+    # splitlines() láme i na U+0085 a U+2028, které _write s ensure_ascii=False
+    # nechá v řetězci nezakódované; JSON Lines se dělí jen na LF.
+    lines = path.read_text(encoding="utf-8").split("\n")
+    return [json.loads(line) for line in lines if line.strip()]
 
 
 def _write(path: Path, records: Iterable[Record]) -> None:
