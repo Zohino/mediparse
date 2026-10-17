@@ -8,7 +8,6 @@ from pydantic import BaseModel, ConfigDict
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.icd import DiagnosisCodes, IcdVersion
-from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.input_file import parse_file
 
 if TYPE_CHECKING:
@@ -39,13 +38,10 @@ def load_diagnosis_codes(path: Path) -> DiagnosisCodes:
 
 def _parse(text: str) -> DiagnosisCodes:
     candidates = _Candidates.model_validate_json(text).candidates
-    missing = [d.value for d in Diagnosis if d.value not in candidates]
-    if missing:
-        msg = f"V configu kandidátů chybí diagnózy: {', '.join(missing)}."
-        raise InvalidInputError(msg)
     parsed = {
         diagnosis: _Prefixes.model_validate(candidates[diagnosis.value])
         for diagnosis in Diagnosis
+        if diagnosis.value in candidates
     }
     return DiagnosisCodes(
         prefixes={

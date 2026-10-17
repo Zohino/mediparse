@@ -159,6 +159,15 @@ def test_funnel_must_not_grow() -> None:
         make_counts(funnel=_funnel(100, 80, 90, 50))
 
 
+def test_positives_without_diagnosis_are_rejected() -> None:
+    """Počty pozitivních zpráv bez některé diagnózy schéma odmítne a diagnózu jmenuje."""
+    positives = dict.fromkeys(Diagnosis, 1)
+    del positives[Diagnosis.COPD]
+
+    with pytest.raises(ValidationError, match="Chybí diagnózy: copd"):
+        make_counts(positives)
+
+
 def test_funnel_step_rejects_numeric_string() -> None:
     """Vnořený model je přísný sám: počet jako řetězec neprojde."""
     with pytest.raises(ValidationError):

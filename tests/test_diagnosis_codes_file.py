@@ -58,7 +58,7 @@ def test_loads_five_and_ignores_other_candidates(tmp_path: Path) -> None:
 
 def test_missing_diagnosis_is_invalid_input(tmp_path: Path) -> None:
     """Chybějící diagnóza pětice je chyba vstupu."""
-    with pytest.raises(InvalidInputError, match="ckd"):
+    with pytest.raises(InvalidInputError, match="Chybí diagnózy: ckd"):
         load_diagnosis_codes(_write(tmp_path, _candidates(skip="ckd")))
 
 

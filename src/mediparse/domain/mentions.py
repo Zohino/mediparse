@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from enum import StrEnum
-from typing import TYPE_CHECKING, Annotated, Final, Self
+from typing import TYPE_CHECKING, Annotated, Self
 
 from pydantic import (
     BaseModel,
@@ -14,8 +14,8 @@ from pydantic import (
     model_validator,
 )
 
-from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.labels import Probability
+from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
+from mediparse.domain.probability import Probability, sums_to_one
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -23,8 +23,6 @@ if TYPE_CHECKING:
 
     from mediparse.domain.note_structure import NoteStructure
     from mediparse.domain.synthetic_patients import SyntheticNote
-
-_WEIGHT_TOLERANCE: Final = 1e-9
 
 
 class MentionStatus(StrEnum):
@@ -61,7 +59,7 @@ class MentionModel(BaseModel):
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
-    diagnoses: dict[Diagnosis, DiagnosisMentions]
+    diagnoses: PerDiagnosis[DiagnosisMentions]
     diagnosis_section: str
     family_section: str
     diagnosis_section_probability: Probability
@@ -72,18 +70,11 @@ class MentionModel(BaseModel):
     negation: Negation
 
     @model_validator(mode="after")
-    def _covers_all_diagnoses(self) -> Self:
-        if set(self.diagnoses) != set(Diagnosis):
-            msg = "Parametry zmínek musí pokrývat všech pět diagnóz."
-            raise ValueError(msg)
-        return self
-
-    @model_validator(mode="after")
     def _negative_statuses_are_a_distribution(self) -> Self:
         if MentionStatus.AFFIRMED in self.negative_statuses:
             msg = "Zmínka u negativního labelu nemůže být potvrzená s kódem."
             raise ValueError(msg)
-        if abs(sum(self.negative_statuses.values()) - 1.0) > _WEIGHT_TOLERANCE:
+        if not sums_to_one(self.negative_statuses.values()):
             msg = "Pravděpodobnosti statusů u negativního labelu musí dávat 1."
             raise ValueError(msg)
         return self

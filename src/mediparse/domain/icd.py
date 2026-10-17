@@ -10,7 +10,7 @@ from typing import Final, Self
 
 from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
-from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
 
 _CODE: Final = re.compile(r"^[0-9A-Z]+$")
 
@@ -49,25 +49,27 @@ class DiagnosisCodes(BaseModel):
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
-    prefixes: Mapping[Diagnosis, Mapping[IcdVersion, tuple[str, ...]]]
+    prefixes: PerDiagnosis[Mapping[IcdVersion, tuple[str, ...]]]
 
     @model_validator(mode="after")
     def _valid_prefixes(self) -> Self:
-        missing = set(Diagnosis) - set(self.prefixes)
-        if missing:
-            names = ", ".join(sorted(diagnosis.value for diagnosis in missing))
-            msg = f"Chybí předpony diagnóz: {names}."
-            raise ValueError(msg)
+        self._check_nonempty()
+        self._check_normalized()
+        self._check_disjoint()
+        return self
+
+    def _check_nonempty(self) -> None:
         for diagnosis, by_version in self.prefixes.items():
             if not any(by_version.values()):
                 msg = f"Diagnóza {diagnosis.value} nemá žádnou předponu."
                 raise ValueError(msg)
+
+    def _check_normalized(self) -> None:
+        for by_version in self.prefixes.values():
             for prefix in (p for ps in by_version.values() for p in ps):
                 if _normalized(prefix) != prefix:
                     msg = f"Předpona {prefix!r} není normalizovaná (velká písmena, bez mezer)."
                     raise ValueError(msg)
-        self._check_disjoint()
-        return self
 
     def _check_disjoint(self) -> None:
         for version in IcdVersion:
