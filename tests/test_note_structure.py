@@ -197,11 +197,13 @@ def test_note_without_narrative_section_has_no_narrative() -> None:
 
 def test_allocation_follows_shares() -> None:
     """Při obou narativních sekcích dostane každá podíl zaokrouhlený nejvýš o slovo."""
-    for structure in sample_structure(_notes(2000), _model(), Random(SEED)):
-        words = structure.section_words
-        if "hospital_course" in words:
-            quota = HOSPITAL_COURSE_SHARE * _allocated_words(structure)
-            assert abs(words["hospital_course"] - quota) < 1
+    structures = sample_structure(_notes(2000), _model(), Random(SEED))
+    cases = [s for s in structures if "hospital_course" in s.section_words]
+
+    assert cases
+    for structure in cases:
+        quota = HOSPITAL_COURSE_SHARE * _allocated_words(structure)
+        assert abs(structure.section_words["hospital_course"] - quota) < 1
 
 
 def test_length_distribution_matches_notes_synthesis() -> None:
