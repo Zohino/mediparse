@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from enum import StrEnum
 from typing import TYPE_CHECKING, Final, Self
 
-from pydantic import BaseModel, ConfigDict, ValidationError, model_validator
+from pydantic import BaseModel, ConfigDict, model_validator
 
 from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
 from mediparse.domain.digest import Sha256
@@ -36,7 +36,7 @@ def _parsed(raw: RawCode) -> IcdCode | None:
         return None
     try:
         return IcdCode(version=IcdVersion(int(version)), code=code)
-    except (ValueError, ValidationError):
+    except ValueError:
         return None
 
 

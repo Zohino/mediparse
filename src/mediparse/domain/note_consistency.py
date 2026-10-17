@@ -98,7 +98,7 @@ def _preamble_violations(
 
 
 def _preamble_values(preamble: str, fields: Sequence[PreambleField]) -> dict[str, str]:
-    names = "|".join(re.escape(field.name) for field in fields)
+    names = alternation(field.name for field in fields)
     pattern = rf"\b(?P<name>{names}):[ \t]*(?P<value>.*?)[ \t]*(?=\b(?:{names}):|$)"
     return {
         match["name"]: match["value"]
