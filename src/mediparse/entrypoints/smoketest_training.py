@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
 from mediparse.application.smoketest_training import SmoketestTraining
-from mediparse.domain.run_manifest import RunManifest
+from mediparse.domain.run_manifest import Environment, RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
@@ -109,8 +109,9 @@ def run(
             model=ESTIMATOR,
             model_revision=None,
             tokenizer_revision=None,
-            packages=installed_versions(PACKAGES),
-            source=source,
+            environment=Environment(
+                packages=installed_versions(PACKAGES), source=source
+            ),
         ),
     )
     logger.info(

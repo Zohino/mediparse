@@ -125,11 +125,11 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
     assert written.config_sha256 == file_sha256(config)
     assert written.seed == 0
     assert written.row_id == "row"
-    assert written.source == REVISION
+    assert written.environment.source == REVISION
     assert written.model_revision is None
     assert written.tokenizer_revision is None
     assert written.model == ESTIMATOR
-    assert tuple(written.packages) == smoketest_training.PACKAGES
+    assert tuple(written.environment.packages) == smoketest_training.PACKAGES
 
 
 def test_missing_inputs_are_refused(

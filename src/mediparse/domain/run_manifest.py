@@ -17,8 +17,17 @@ class SourceRevision(BaseModel):
     dirty: bool
 
 
+class Environment(BaseModel):
+    """Prostředí běhu: verze knihoven a revize kódu, společné všem manifestům."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+
+    packages: dict[str, str]
+    source: SourceRevision
+
+
 class RunManifest(BaseModel):
-    """Provenance tréninku; funkce vstupů, prostředí a revize, bez času běhu."""
+    """Provenance tréninku; funkce vstupů a prostředí, bez času běhu."""
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
@@ -29,5 +38,4 @@ class RunManifest(BaseModel):
     model: str
     model_revision: str | None
     tokenizer_revision: str | None
-    packages: dict[str, str]
-    source: SourceRevision
+    environment: Environment

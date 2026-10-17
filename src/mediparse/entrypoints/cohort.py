@@ -15,6 +15,7 @@ from typing import TYPE_CHECKING, Final
 from mediparse.application.cohort import CohortMaterialization
 from mediparse.domain.cohort import CohortManifest
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.run_manifest import Environment
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_codes_file import load_diagnosis_codes
@@ -32,7 +33,7 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
-PACKAGES: Final = ("python", "duckdb", "pyarrow")
+PACKAGES: Final = ("python", "duckdb", "pyarrow", "pydantic")
 SOURCE_TABLES: Final = ("discharge.csv.gz", "diagnoses_icd.csv.gz")
 SPILL_DIRECTORY: Final = "duckdb-tmp"
 
@@ -102,8 +103,9 @@ def run(
             cohort_sha256=file_sha256(cohort),
             config_sha256=file_sha256(candidates),
             sources=sources,
-            packages=installed_versions(PACKAGES),
-            source=source,
+            environment=Environment(
+                packages=installed_versions(PACKAGES), source=source
+            ),
             counts=result.counts,
             invalid_codes=result.invalid_codes,
         ),

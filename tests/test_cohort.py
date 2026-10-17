@@ -19,7 +19,7 @@ from mediparse.domain.cohort import (
 )
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.run_manifest import SourceRevision
+from mediparse.domain.run_manifest import Environment, SourceRevision
 from tests.cohort_support import (
     CODES,
     EMPTY_COHORT,
@@ -174,8 +174,10 @@ def _manifest(**overrides: object) -> CohortManifest:
         "cohort_sha256": "a" * 64,
         "config_sha256": "b" * 64,
         "sources": {"discharge.csv.gz": "c" * 64},
-        "packages": {"python": "3.13.0"},
-        "source": SourceRevision(commit="d" * 40, dirty=False),
+        "environment": Environment(
+            packages={"python": "3.13.0"},
+            source=SourceRevision(commit="d" * 40, dirty=False),
+        ),
         "counts": make_counts(),
         "invalid_codes": 0,
     }
@@ -196,3 +198,15 @@ def test_manifest_rejects_unknown_field_and_bad_digest() -> None:
         _manifest(unknown=1)
     with pytest.raises(ValidationError):
         _manifest(cohort_sha256="xyz")
+
+
+def test_manifest_nests_environment_instead_of_flat_fields() -> None:
+    """Serializovaný manifest nese ``environment`` a nemá ``packages`` ani ``source`` nahoře."""
+    dumped = _manifest().model_dump(mode="json")
+
+    assert dumped["environment"] == {
+        "packages": {"python": "3.13.0"},
+        "source": {"commit": "d" * 40, "dirty": False},
+    }
+    assert "packages" not in dumped
+    assert "source" not in dumped

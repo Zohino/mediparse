@@ -96,8 +96,9 @@ def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
         "discharge.csv.gz": DISCHARGE_SHA,
         "diagnoses_icd.csv.gz": DIAGNOSES_SHA,
     }
-    assert written.source == REVISION
-    assert set(written.packages) == set(cohort.PACKAGES)
+    assert written.environment.source == REVISION
+    assert set(written.environment.packages) == set(cohort.PACKAGES)
+    assert "pydantic" in written.environment.packages
     assert written.invalid_codes == 1
     assert written.counts.funnel[-1].notes == KEPT_NOTES
     assert written.counts.positives[Diagnosis.COPD] == COPD_NOTES
