@@ -1,4 +1,4 @@
-"""Čtení souboru parquet s pevným schématem: chyby souboru překládá na doménovou výjimku."""
+"""Hranice souborů parquet: čtení se schématem, zápis s jednotnou kompresí a převod hodnot sloupců na doménové typy; chyby překládá na InvalidInputError."""
 
 from __future__ import annotations
 

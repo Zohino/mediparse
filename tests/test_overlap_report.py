@@ -1,4 +1,4 @@
-"""Report shod auditu: bajtově stejný formát jako dřívější ``json.dumps``."""
+"""Report shod: JSON s odsazením 2 a koncovým řádkem, pozice v pořadí vstupu, kolize seřazené."""
 
 from __future__ import annotations
 
