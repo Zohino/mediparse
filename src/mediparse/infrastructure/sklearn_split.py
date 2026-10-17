@@ -19,10 +19,8 @@ if TYPE_CHECKING:
 class StratifiedGroupFolds:
     """Stratifikované rozdělení pacientů do foldů; pacient je celý v jednom."""
 
-    # Adaptér je bez stavu, ale musí mít metodu instance, aby naplnil port
-    # PatientSplitter, který use case dostává jako objekt.
-    def split(  # ruff: ignore[no-self-use]
-        self,
+    @staticmethod
+    def split(
         subjects: Sequence[SubjectId],
         strata: Sequence[int],
         config: SplitConfig,
