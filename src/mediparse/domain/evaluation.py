@@ -80,7 +80,10 @@ def ensure_both_classes(diagnosis: Diagnosis, truth: Sequence[bool]) -> None:
 
 
 def ensure_unique_keys(predictions: Sequence[Prediction]) -> None:
-    """Ověří, že klíč (row_id, fold, note_id, diagnóza) se v predikcích neopakuje.
+    """Ověří, že klíč (row_id, note_id, diagnóza) se v predikcích neopakuje.
+
+    Fold v klíči není: evaluace foldy slévá a zpráva ve dvou foldech by se započetla
+    dvakrát.
 
     Args:
         predictions: Predikce ke zpracování.
@@ -88,13 +91,14 @@ def ensure_unique_keys(predictions: Sequence[Prediction]) -> None:
     Raises:
         InvalidInputError: Některý klíč se opakuje.
     """
-    seen: set[tuple[str, int, str, Diagnosis]] = set()
+    seen: set[tuple[str, str, Diagnosis]] = set()
     for item in predictions:
-        key = (item.row_id, item.fold, item.note_id, item.diagnosis)
+        key = (item.row_id, item.note_id, item.diagnosis)
         if key in seen:
+            # note_id nese subject_id pacienta MIMIC; hláška ani log ho nesmí nést.
             msg = (
-                f"Opakovaná predikce: řádek {item.row_id}, fold {item.fold}, "
-                f"zpráva {item.note_id}, diagnóza {item.diagnosis}."
+                f"Opakovaná predikce zprávy: řádek {item.row_id}, "
+                f"diagnóza {item.diagnosis}."
             )
             raise InvalidInputError(msg)
         seen.add(key)

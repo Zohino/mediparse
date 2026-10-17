@@ -130,7 +130,7 @@ def test_duplicate_key_is_rejected_before_scoring() -> None:
     """Opakovaný klíč predikce skončí InvalidInputError před výpočtem."""
     use_case, scorer, sink = _use_case((*MIXED, MIXED[0]))
 
-    with pytest.raises(InvalidInputError, match="n1"):
+    with pytest.raises(InvalidInputError, match="Opakovaná predikce"):
         use_case.run()
 
     assert not scorer.calls
