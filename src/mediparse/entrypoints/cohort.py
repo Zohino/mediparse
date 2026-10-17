@@ -17,10 +17,10 @@ from mediparse.domain.cohort import CohortManifest
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.cohort_manifest_file import JsonCohortManifestFile
 from mediparse.infrastructure.diagnosis_codes_file import load_diagnosis_codes
 from mediparse.infrastructure.duckdb_cohort import DuckDbCohort
 from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.mimic_tables import load_mimic_tables
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.source_revision import revision_source
@@ -96,7 +96,8 @@ def run(
     result = CohortMaterialization(
         DuckDbCohort(discharge, diagnoses, cohort, cohort.parent / SPILL_DIRECTORY)
     ).run(codes)
-    JsonCohortManifestFile(manifest).write(
+    write_model(
+        manifest,
         CohortManifest(
             cohort_sha256=file_sha256(cohort),
             config_sha256=file_sha256(candidates),
@@ -105,7 +106,7 @@ def run(
             source=source,
             counts=result.counts,
             invalid_codes=result.invalid_codes,
-        )
+        ),
     )
     logger.info(
         "Kohorta: %d zpráv a %d pacientů v %s, neplatných kódů %d.",

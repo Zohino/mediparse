@@ -16,10 +16,10 @@ from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
-from mediparse.infrastructure.run_manifest_file import JsonRunManifestFile
 from mediparse.infrastructure.sklearn_classifier import (
     ESTIMATOR,
     GroupedHoldout,
@@ -99,7 +99,8 @@ def run(
         predictions=ParquetPredictionTable(predictions),
     )
     report = step.run(training)
-    JsonRunManifestFile(manifest).write(
+    write_model(
+        manifest,
         RunManifest(
             row_id=training.row_id,
             dataset_sha256=file_sha256(notes),
@@ -110,7 +111,7 @@ def run(
             tokenizer_revision=None,
             packages=installed_versions(PACKAGES),
             source=source,
-        )
+        ),
     )
     logger.info(
         "Model diagnózy %s: %d trénovacích a %d testovacích zpráv, uložen do %s.",
