@@ -6,6 +6,8 @@ import json
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
+import pytest
+
 from mediparse.domain.environment import SourceRevision
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.run_manifest import RunManifest
@@ -20,8 +22,6 @@ from tests.support import separable_notes
 if TYPE_CHECKING:
     from collections.abc import Callable
     from pathlib import Path
-
-    import pytest
 
     from mediparse.domain.evaluation import Prediction
 
@@ -133,21 +133,30 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
     assert tuple(written.environment.packages) == smoketest_training.PACKAGES
 
 
-def test_missing_inputs_are_refused(
-    tmp_path: Path, caplog: pytest.LogCaptureFixture
+@pytest.mark.parametrize(
+    ("table_name", "config_name", "missing"),
+    [
+        ("none.parquet", "config-0.json", "none.parquet"),
+        ("notes.parquet", "none.json", "none.json"),
+    ],
+    ids=["table", "config"],
+)
+def test_missing_input_is_refused(
+    tmp_path: Path,
+    caplog: pytest.LogCaptureFixture,
+    table_name: str,
+    config_name: str,
+    missing: str,
 ) -> None:
-    """Chybějící tabulka i config krok odmítnou a nic nevznikne."""
-    notes, config = _inputs(tmp_path)
+    """Chybějící tabulka nebo config krok odmítne, nic nevznikne a log jmenuje soubor."""
+    _inputs(tmp_path)
     outputs = _Outputs.under(tmp_path / "out")
 
-    no_table = _run(tmp_path / "none.parquet", config, outputs)
-    no_config = _run(notes, tmp_path / "none.json", outputs)
+    code = _run(tmp_path / table_name, tmp_path / config_name, outputs)
 
-    assert no_table is ExitCode.REFUSED
-    assert no_config is ExitCode.REFUSED
+    assert code is ExitCode.REFUSED
     assert outputs.existing() == []
-    assert "none.parquet" in caplog.text
-    assert "none.json" in caplog.text
+    assert missing in caplog.text
 
 
 def test_diagnosis_without_positives_is_refused(

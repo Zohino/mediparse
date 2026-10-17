@@ -17,6 +17,7 @@ from mediparse.infrastructure.file_digest import file_sha256
 from tests.cohort_support import icd, note, text, write_tables
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
     from pathlib import Path
 
     import pytest
@@ -138,25 +139,37 @@ def test_cell_below_threshold_is_refused_and_nothing_is_written(
     assert not manifest.exists()
 
 
-def test_missing_input_or_revision_is_refused(tmp_path: Path) -> None:
-    """Chybějící tabulka i nečitelná revize krok odmítnou."""
-    discharge, diagnoses = write_tables(tmp_path)
+def _refused_run(
+    tmp_path: Path, *, discharge: Path | None, revision: Callable[[], SourceRevision]
+) -> ExitCode:
+    existing, diagnoses = write_tables(tmp_path)
     candidates, tables = _configs(tmp_path)
-    arguments = {
-        "diagnoses": diagnoses,
-        "candidates": candidates,
-        "tables": tables,
-        "cohort": tmp_path / "cohort.parquet",
-        "manifest": tmp_path / "manifest.json",
-    }
-
-    no_table = cohort.run(
-        discharge=tmp_path / "none.parquet", revision=_revision, **arguments
+    return cohort.run(
+        discharge=discharge or existing,
+        diagnoses=diagnoses,
+        candidates=candidates,
+        tables=tables,
+        cohort=tmp_path / "cohort.parquet",
+        manifest=tmp_path / "manifest.json",
+        revision=revision,
     )
-    no_git = cohort.run(discharge=discharge, revision=_no_git, **arguments)
 
-    assert no_table is ExitCode.REFUSED
-    assert no_git is ExitCode.REFUSED
+
+def test_missing_input_table_is_refused(tmp_path: Path) -> None:
+    """Chybějící vstupní tabulka krok odmítne a manifest nevznikne."""
+    code = _refused_run(
+        tmp_path, discharge=tmp_path / "none.parquet", revision=_revision
+    )
+
+    assert code is ExitCode.REFUSED
+    assert not (tmp_path / "manifest.json").exists()
+
+
+def test_unreadable_revision_is_refused(tmp_path: Path) -> None:
+    """Nečitelná revize repa krok odmítne a manifest nevznikne."""
+    code = _refused_run(tmp_path, discharge=None, revision=_no_git)
+
+    assert code is ExitCode.REFUSED
     assert not (tmp_path / "manifest.json").exists()
 
 

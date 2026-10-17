@@ -68,6 +68,12 @@ def test_many_blocks_keep_count_and_string_schema(tmp_path: Path) -> None:
     assert parquet.metadata.num_rows == MANY
     assert parquet.metadata.num_row_groups > 1
     assert set(parquet.schema_arrow.types) == {pa.string()}
+
+
+def test_parquet_is_compressed_with_zstd(tmp_path: Path) -> None:
+    """Výstup je komprimovaný ZSTD."""
+    _convert(tmp_path, HEADER + ROWS)
+    parquet = pq.ParquetFile(tmp_path / "out" / "table.parquet")
     assert parquet.metadata.row_group(0).column(0).compression == "ZSTD"
 
 

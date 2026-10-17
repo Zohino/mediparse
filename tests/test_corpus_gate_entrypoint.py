@@ -46,13 +46,20 @@ def test_gate_passes_audited_corpus_with_provenance(audit_files: AuditFiles) -> 
     assert _gate(root, audit_files.tables) == ExitCode.OK
 
 
-def test_gate_requires_translation_provenance_for_czech_corpus(
+def test_gate_blocks_czech_corpus_without_translation_provenance(
     audit_files: AuditFiles,
 ) -> None:
-    """Český korpus s provenance bez části translation neprojde, s ní projde."""
+    """Český korpus s provenance bez části translation neprojde."""
     root = audit_files.released_corpus(SHORT_NOTE | {"cs/90000001-DS-1.txt": "text"})
+
     assert _gate(root, audit_files.tables) == ExitCode.BLOCKED
 
+
+def test_gate_passes_czech_corpus_with_translation_provenance(
+    audit_files: AuditFiles,
+) -> None:
+    """Český korpus s provenance, která nese část translation, projde."""
+    root = audit_files.released_corpus(SHORT_NOTE | {"cs/90000001-DS-1.txt": "text"})
     corpus = CorpusDirectory(root)
     record = corpus.provenance_record()
     assert record is not None
