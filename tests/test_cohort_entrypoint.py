@@ -139,7 +139,7 @@ def test_cell_below_threshold_is_refused_and_nothing_is_written(
     assert not manifest.exists()
 
 
-def _refused_run(
+def _run(
     tmp_path: Path, *, discharge: Path | None, revision: Callable[[], SourceRevision]
 ) -> ExitCode:
     existing, diagnoses = write_tables(tmp_path)
@@ -156,20 +156,20 @@ def _refused_run(
 
 
 def test_missing_input_table_is_refused(tmp_path: Path) -> None:
-    """Chybějící vstupní tabulka krok odmítne a manifest nevznikne."""
-    code = _refused_run(
-        tmp_path, discharge=tmp_path / "none.parquet", revision=_revision
-    )
+    """Chybějící vstupní tabulka krok odmítne, kohorta ani manifest nevzniknou."""
+    code = _run(tmp_path, discharge=tmp_path / "none.parquet", revision=_revision)
 
     assert code is ExitCode.REFUSED
+    assert not (tmp_path / "cohort.parquet").exists()
     assert not (tmp_path / "manifest.json").exists()
 
 
 def test_unreadable_revision_is_refused(tmp_path: Path) -> None:
-    """Nečitelná revize repa krok odmítne a manifest nevznikne."""
-    code = _refused_run(tmp_path, discharge=None, revision=_no_git)
+    """Nečitelná revize repa krok odmítne, kohorta ani manifest nevzniknou."""
+    code = _run(tmp_path, discharge=None, revision=_no_git)
 
     assert code is ExitCode.REFUSED
+    assert not (tmp_path / "cohort.parquet").exists()
     assert not (tmp_path / "manifest.json").exists()
 
 

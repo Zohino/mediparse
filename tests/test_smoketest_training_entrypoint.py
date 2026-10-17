@@ -134,25 +134,19 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
 
 
 @pytest.mark.parametrize(
-    ("table_name", "config_name", "missing"),
-    [
-        ("none.parquet", "config-0.json", "none.parquet"),
-        ("notes.parquet", "none.json", "none.json"),
-    ],
+    ("index", "missing"),
+    [(0, "none.parquet"), (1, "none.json")],
     ids=["table", "config"],
 )
 def test_missing_input_is_refused(
-    tmp_path: Path,
-    caplog: pytest.LogCaptureFixture,
-    table_name: str,
-    config_name: str,
-    missing: str,
+    tmp_path: Path, caplog: pytest.LogCaptureFixture, index: int, missing: str
 ) -> None:
     """Chybějící tabulka nebo config krok odmítne, nic nevznikne a log jmenuje soubor."""
-    _inputs(tmp_path)
+    paths = list(_inputs(tmp_path))
+    paths[index] = tmp_path / missing
     outputs = _Outputs.under(tmp_path / "out")
 
-    code = _run(tmp_path / table_name, tmp_path / config_name, outputs)
+    code = _run(paths[0], paths[1], outputs)
 
     assert code is ExitCode.REFUSED
     assert outputs.existing() == []

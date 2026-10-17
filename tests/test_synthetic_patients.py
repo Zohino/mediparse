@@ -199,6 +199,7 @@ def test_structural_zero_is_sampled_without_failure() -> None:
     """Dvě totožné diagnózy se vylosují vždy spolu; nulový chronický stav nic neshodí."""
     notes = sample_notes(_patients(), _identical_labels(), Random(SEED))
 
+    assert any(Diagnosis.DIABETES in note.labels for note in notes)
     assert all(
         (Diagnosis.DIABETES in note.labels) == (Diagnosis.CKD in note.labels)
         for note in notes

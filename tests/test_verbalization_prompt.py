@@ -74,6 +74,8 @@ def test_every_repository_plan_renders(
 ) -> None:
     """Šablona se vyplní pro všechny plány v repu; žádný plán ji nerozbije."""
     use_case = VerbalizationPrompt(PlansFake(repository_plans))
+
+    assert repository_plans
     assert all(
         use_case.run(plan.note_id, verbalization_template, sampler_config)
         for plan in repository_plans

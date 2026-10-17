@@ -39,39 +39,50 @@ RECORD: Final = {
 }
 
 
-def test_prompts_fingerprint_is_stable_for_same_inputs(
-    planned_note: PlannedNote,
-    sampler_config: SamplerConfig,
-    verbalization_template: str,
-) -> None:
-    """Týž plán, šablona a config dají týž otisk zadání."""
-    plans = [planned_note.plan]
-
-    assert prompts_sha256(
-        verbalization_template, plans, sampler_config
-    ) == prompts_sha256(verbalization_template, plans, sampler_config)
-
-
-def test_prompts_fingerprint_changes_with_sentence_composed_by_code(
-    planned_note: PlannedNote,
-    sampler_config: SamplerConfig,
-    verbalization_template: str,
-) -> None:
-    """Hlavička sekce plánu není v plánu ani v šabloně, do zadání ji skládá kód."""
-    plans = [planned_note.plan]
-    structure = sampler_config.structure
+def _with_header(config: SamplerConfig, key: str) -> SamplerConfig:
+    structure = config.structure
     sections = tuple(
         section.model_copy(update={"header": "Changed header"})
-        if section.key == "allergies"
+        if section.key == key
         else section
         for section in structure.sections
     )
-    changed = sampler_config.model_copy(
+    return config.model_copy(
         update={"structure": structure.model_copy(update={"sections": sections})}
     )
 
-    assert prompts_sha256(verbalization_template, plans, changed) != prompts_sha256(
-        verbalization_template, plans, sampler_config
+
+def test_prompts_fingerprint_ignores_header_of_section_missing_in_plan(
+    planned_note: PlannedNote,
+    sampler_config: SamplerConfig,
+    verbalization_template: str,
+) -> None:
+    """Otisk se mění s větou, kterou skládá kód, a jen s ní: cizí hlavička ho nehne."""
+    plan = planned_note.plan
+    absent = next(
+        s.key for s in sampler_config.structure.sections if s.key not in plan.sections
+    )
+    changed = _with_header(sampler_config, absent)
+
+    assert prompts_sha256(verbalization_template, [plan], changed) == prompts_sha256(
+        verbalization_template, [plan], sampler_config
+    )
+
+
+def test_prompts_fingerprint_changes_with_header_of_section_in_plan(
+    planned_note: PlannedNote,
+    sampler_config: SamplerConfig,
+    verbalization_template: str,
+) -> None:
+    """Otisk se mění s větou, kterou skládá kód: hlavička sekce plánu je jen v configu."""
+    plan = planned_note.plan
+    present = next(
+        s.key for s in sampler_config.structure.sections if s.key in plan.sections
+    )
+    changed = _with_header(sampler_config, present)
+
+    assert prompts_sha256(verbalization_template, [plan], changed) != prompts_sha256(
+        verbalization_template, [plan], sampler_config
     )
 
 

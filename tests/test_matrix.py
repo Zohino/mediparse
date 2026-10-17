@@ -116,7 +116,7 @@ def test_duplicate_ids_are_rejected() -> None:
 
 def test_duplicate_experiments_are_rejected() -> None:
     """Dva řádky se stejnými osami jsou tentýž experiment pod dvěma jmény."""
-    with pytest.raises(ValidationError, match="osy"):
+    with pytest.raises(ValidationError, match=r"stejné osy: \[\("):
         _validate(_row(), _row(id="en-logreg-copy"))
 
 
