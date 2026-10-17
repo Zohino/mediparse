@@ -74,7 +74,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--workdir",
         type=Path,
-        default=Path(WORKDIR_PATH),
+        default=WORKDIR_PATH,
         help="pracovní adresář překladu s requests.json, runs.jsonl a outputs.jsonl",
     )
     add_corpus_option(parser)

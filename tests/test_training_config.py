@@ -8,11 +8,8 @@ import pytest
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.training_config import (
-    TRAINING_CONFIG_PATH,
-    load_training_config,
-)
-from tests.support import REPOSITORY
+from mediparse.infrastructure.training_config import load_training_config
+from tests.support import REPOSITORY_TRAINING_CONFIG
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -20,7 +17,7 @@ if TYPE_CHECKING:
 
 def test_repository_config_loads() -> None:
     """Config z repa projde schématem."""
-    config = load_training_config(REPOSITORY / TRAINING_CONFIG_PATH)
+    config = load_training_config(REPOSITORY_TRAINING_CONFIG)
 
     assert config.row_id == "smoketest-en-svm"
     assert config.diagnosis is Diagnosis.DIABETES
