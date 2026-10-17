@@ -40,6 +40,7 @@ dev = [
     { include-group = "lint" },
     { include-group = "test" },
     "prek>=0.5.3",
+    "pytest-cov>=7.1.0",
 ]
 lint = [
     "hadolint-py>=2.15.1.2",
@@ -60,6 +61,10 @@ strict = true
 testpaths = ["tests"]
 addopts = ["-ra", "--import-mode=importlib"]
 filterwarnings = ["error"]
+
+[tool.coverage.run]
+branch = true
+source = ["mediparse"]
 
 [tool.importlinter]
 root_packages = ["mediparse", "tests", "workflow"]
@@ -414,3 +419,6 @@ synthetic-parameters = { cmd = "mediparse-synthetic-parameters", description = "
 verify-mimic = { cmd = "bash scripts/verify-mimic.sh \"{{ dir }}\"", args = [
     { arg = "dir", default = "resources/mimic" },
 ], description = "Ověř, že stažené tabulky MIMIC jsou všechny na disku a sedí s otisky v configu" }
+coverage-changed = { cmd = "bash scripts/coverage-changed.sh \"{{ base }}\"", args = [
+    { arg = "base", default = "origin/main" },
+], description = "Nepokryté řádky a větve modulů src/, kterých se větev dotkla proti základu; bez prahu, podklad pro review" }
