@@ -33,6 +33,10 @@ def _workflow_scripts() -> list[Path]:
     return sorted((WORKFLOW / "scripts").glob("*.py"))
 
 
+def _workflow_rules() -> list[Path]:
+    return [WORKFLOW / "Snakefile", *sorted((WORKFLOW / "rules").glob("*.smk"))]
+
+
 def _code_lines(path: Path) -> int:
     lines = (line.strip() for line in path.read_text(encoding="utf-8").splitlines())
     return sum(1 for line in lines if line and not line.startswith("#"))
@@ -48,43 +52,75 @@ def test_console_scripts_enter_through_entrypoints() -> None:
     ] == []
 
 
+def test_console_scripts_resolve_to_callables() -> None:
+    """Překlep v cíli skriptu by jinak spadl až při spuštění nástroje."""
+    targets = _pyproject()["project"]["scripts"].values()
+
+    assert targets
+    assert [
+        target for target in targets if not callable(pkgutil.resolve_name(target))
+    ] == []
+
+
+def _entry_violations(root: Path) -> list[str]:
+    """Moduly, které dělají z balíčku vstup přes `python -m`: `__main__.py` nebo guard.
+
+    Returns:
+        Jména porušujících souborů; prázdný seznam znamená, že pravidlo platí.
+    """
+    return [
+        module.name
+        for module in sorted(root.rglob("*.py"))
+        if module.name == "__main__.py"
+        or MAIN_GUARD.search(module.read_text(encoding="utf-8"))
+    ]
+
+
 def test_package_has_no_main_guard() -> None:
     """Balíček nemá vstup přes `python -m`; vstupem jsou konzolové skripty a Snakemake."""
-    modules = sorted(PACKAGE.rglob("*.py"))
+    assert any(PACKAGE.rglob("*.py"))
+    assert _entry_violations(PACKAGE) == []
 
-    assert modules
-    assert [
-        module.name
-        for module in modules
-        if MAIN_GUARD.search(module.read_text(encoding="utf-8"))
-    ] == []
+
+def test_main_module_is_an_entry_violation(tmp_path: Path) -> None:
+    """Soubor `__main__.py` je porušení i bez guardu, guard v jiném modulu také."""
+    (tmp_path / "__main__.py").write_text("print('x')\n", encoding="utf-8")
+    (tmp_path / "guarded.py").write_text(
+        'if __name__ == "__main__":\n    pass\n', encoding="utf-8"
+    )
+    (tmp_path / "fine.py").write_text("X = 1\n", encoding="utf-8")
+
+    assert _entry_violations(tmp_path) == ["__main__.py", "guarded.py"]
 
 
 def test_workflow_scripts_stay_thin() -> None:
     """Skript Snakemake jen rozbalí vstupy pravidla a zavolá vstupní bod."""
+    scripts = _workflow_scripts()
+
+    assert scripts
     assert [
-        script.name
-        for script in _workflow_scripts()
-        if _code_lines(script) > MAX_SCRIPT_LINES
+        script.name for script in scripts if _code_lines(script) > MAX_SCRIPT_LINES
     ] == []
 
 
 def test_workflow_rules_have_no_inline_python() -> None:
     """Blok `run:` by skryl Python před import-linterem, ruffem i ty."""
-    rules = [WORKFLOW / "Snakefile", *sorted((WORKFLOW / "rules").glob("*.smk"))]
+    rules = _workflow_rules()
 
+    assert (WORKFLOW / "Snakefile").is_file()
+    assert len(rules) > 1
     assert [
         rule.name
         for rule in rules
-        if rule.is_file() and RUN_DIRECTIVE.search(rule.read_text(encoding="utf-8"))
+        if RUN_DIRECTIVE.search(rule.read_text(encoding="utf-8"))
     ] == []
 
 
 def test_import_linter_sees_workflow_scripts() -> None:
-    """Jakmile vznikne skript workflow, import-linter ho musí vidět jako root package."""
+    """Skripty workflow musí import-linter vidět jako root package."""
     root_packages = _pyproject()["tool"]["importlinter"]["root_packages"]
 
-    assert not _workflow_scripts() or "workflow" in root_packages
+    assert "workflow" in root_packages
 
 
 def _domain_models() -> list[type[BaseModel]]:
