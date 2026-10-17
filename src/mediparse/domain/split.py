@@ -88,9 +88,9 @@ def strata(notes: Sequence[InputNote], folds: int) -> tuple[int, ...]:
     """Určí třídu stratifikace každé zprávy z kombinace diagnóz jejího pacienta.
 
     Kombinace diagnóz pacienta (sjednocení labelů všech jeho zpráv) je bitová
-    maska v pořadí ``Diagnosis``; na pořadí čísel nezáleží, jen na identitě třídy. Předpokládá aspoň tolik
-    pacientů jako foldů (use case to zajistí ``ensure_patients_per_class``); jinak
-    by zbytková třída vyvolala varování sklearn.
+    maska v pořadí ``Diagnosis``; na pořadí čísel nezáleží, jen na identitě třídy.
+    Předpokládá aspoň tolik pacientů jako foldů (use case to zajistí
+    ``ensure_patients_per_class``); jinak by zbytková třída vyvolala varování sklearn.
 
     Args:
         notes: Zprávy korpusu.
@@ -149,9 +149,11 @@ def ensure_patients_per_class(
     Raises:
         InvalidInputError: Některá třída má méně pacientů než foldů.
     """
-    positive = {group for label, group in zip(labels, subjects, strict=True) if label}
+    positive = {
+        subject for label, subject in zip(labels, subjects, strict=True) if label
+    }
     negative = {
-        group for label, group in zip(labels, subjects, strict=True) if not label
+        subject for label, subject in zip(labels, subjects, strict=True) if not label
     }
     if min(len(positive), len(negative)) < folds:
         msg = (
