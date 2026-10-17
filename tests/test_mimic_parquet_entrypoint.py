@@ -25,7 +25,8 @@ def _files(root: Path, records: int) -> tuple[Path, Path]:
             "bytes": table.stat().st_size,
             "records": records,
             "columns": ["a", "b"],
-        })
+        }),
+        encoding="utf-8",
     )
     return table, inventory
 

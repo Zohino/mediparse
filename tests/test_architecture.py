@@ -1,12 +1,14 @@
 """Architektura mimo dosah import-linteru: vstupy do balíčku, skripty workflow, umístění sdílených portů a konfigurace modelů domény."""
 
+from __future__ import annotations
+
 import ast
 import importlib
 import pkgutil
 import re
 import tomllib
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import pytest
 from pydantic import BaseModel
@@ -15,6 +17,9 @@ import mediparse
 import mediparse.domain
 from mediparse.domain.cohort import CohortCounts
 from tests.support import REPOSITORY
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 PACKAGE = Path(mediparse.__file__).parent
 WORKFLOW = REPOSITORY / "workflow"
@@ -25,6 +30,13 @@ ENTRYPOINTS_MODULE = "mediparse.entrypoints"
 RUN_DIRECTIVE = re.compile(r"^\s*run\s*:", re.MULTILINE)
 APPLICATION = PACKAGE / "application"
 APPLICATION_PREFIX = "mediparse.application."
+ENCODING_ROOTS = tuple(
+    REPOSITORY / name for name in ("src", "tests", "workflow", "translation", "scripts")
+)
+TEXT_IO_METHODS = frozenset({"open", "read_text", "write_text"})
+SUBPROCESS_CALLS = frozenset({"run", "check_output", "check_call", "call", "Popen"})
+ENCODING_POSITION = {"read_text": 0, "write_text": 1}
+FILE_MODE = re.compile(r"[rwxabt+]+")
 
 
 def _pyproject() -> dict[str, Any]:
@@ -293,3 +305,153 @@ def test_use_case_may_import_function_of_another_use_case(tmp_path: Path) -> Non
     )
 
     assert _foreign_protocol_imports(tmp_path) == ["bad.py importuje port Port z gate"]
+
+
+def _is_binary_mode(node: ast.expr | None) -> bool:
+    return (
+        isinstance(node, ast.Constant)
+        and isinstance(node.value, str)
+        and FILE_MODE.fullmatch(node.value) is not None
+        and "b" in node.value
+    )
+
+
+def _called_name(call: ast.Call) -> tuple[str | None, str | None]:
+    """Jméno volané funkce a jméno objektu, nad kterým se volá (u ``x.y()`` dvojice ``y``, ``x``).
+
+    Returns:
+        Dvojice (funkce, objekt); chybí-li, ``None``.
+    """
+    func = call.func
+    if isinstance(func, ast.Name):
+        return func.id, None
+    if isinstance(func, ast.Attribute):
+        owner = func.value.id if isinstance(func.value, ast.Name) else None
+        return func.attr, owner
+    return None, None
+
+
+def _keywords(call: ast.Call) -> dict[str, ast.expr]:
+    return {item.arg: item.value for item in call.keywords if item.arg}
+
+
+def _is_true(node: ast.expr | None) -> bool:
+    return isinstance(node, ast.Constant) and node.value is True
+
+
+def _is_text_subprocess(call: ast.Call) -> bool:
+    keywords = _keywords(call)
+    return _is_true(keywords.get("text")) or _is_true(
+        keywords.get("universal_newlines")
+    )
+
+
+def _lacks_encoding(call: ast.Call, name: str, owner: str | None) -> bool | None:
+    """Zda textové I/O volání chybí kódování; ``None`` pro volání, které I/O není.
+
+    Returns:
+        ``True`` pro volání bez ``encoding``, ``False`` pro volání s ním nebo
+        v binárním režimu, ``None`` pro volání mimo pravidlo.
+    """
+    keywords = _keywords(call)
+    if owner == "subprocess" and name in SUBPROCESS_CALLS:
+        return "encoding" not in keywords if _is_text_subprocess(call) else None
+    if name not in TEXT_IO_METHODS:
+        return None
+    if _is_binary_mode(keywords.get("mode")) or any(
+        _is_binary_mode(arg) for arg in call.args
+    ):
+        return False
+    encoding_position = ENCODING_POSITION.get(name)
+    positional = encoding_position is not None and len(call.args) > encoding_position
+    return "encoding" not in keywords and not positional
+
+
+def _module_encoding_findings(module: Path, root: Path) -> tuple[list[str], int]:
+    found: list[str] = []
+    inspected = 0
+    tree = ast.parse(module.read_text(encoding="utf-8"))
+    for call in (node for node in ast.walk(tree) if isinstance(node, ast.Call)):
+        name, owner = _called_name(call)
+        lacks = _lacks_encoding(call, name or "", owner)
+        if lacks is None:
+            continue
+        inspected += 1
+        if lacks:
+            where = module.relative_to(root.parent).as_posix()
+            found.append(f"{where}:{call.lineno} {name}")
+    return found, inspected
+
+
+def _encoding_violations(roots: Iterable[Path]) -> tuple[list[str], int]:
+    """Textové I/O bez ``encoding`` v souborech ``*.py`` pod kořeny.
+
+    Hlídá ``open``, ``read_text``, ``write_text`` a ``subprocess`` s ``text=True``;
+    binární režim zadaný literálem přeskakuje. Ruff PLW1514 tato volání nad cestami
+    nehlásí, protože nezná typ objektu.
+
+    Args:
+        roots: Adresáře k projití; neexistující se přeskočí.
+
+    Returns:
+        Nálezy ``soubor:řádek volání`` relativně k rodiči kořene a počet prošlých
+        volání I/O (stráž proti pravidlu, které nic nehlídá).
+    """
+    found: list[str] = []
+    inspected = 0
+    for root in roots:
+        for module in sorted(root.rglob("*.py")):
+            module_found, module_inspected = _module_encoding_findings(module, root)
+            found.extend(module_found)
+            inspected += module_inspected
+    return found, inspected
+
+
+def test_text_io_names_its_encoding() -> None:
+    """Textové I/O v repu uvádí ``encoding``; locale stroje by jinak rozhodla o češtině."""
+    violations, inspected = _encoding_violations(ENCODING_ROOTS)
+
+    assert inspected > 0
+    assert violations == []
+
+
+def test_encoding_check_finds_text_io_without_encoding(tmp_path: Path) -> None:
+    """Čtení, ``open`` a ``subprocess`` s ``text=True`` bez kódování jsou nález."""
+    (tmp_path / "bad.py").write_text(
+        "import subprocess\n"
+        "p.read_text()\n"
+        "open(p)\n"
+        "subprocess.run(['git'], text=True)\n",
+        encoding="utf-8",
+    )
+
+    violations, inspected = _encoding_violations([tmp_path])
+
+    assert violations == [
+        f"{tmp_path.name}/bad.py:2 read_text",
+        f"{tmp_path.name}/bad.py:3 open",
+        f"{tmp_path.name}/bad.py:4 run",
+    ]
+    assert inspected == len(violations)
+
+
+def test_encoding_check_skips_binary_and_explicit_encoding(tmp_path: Path) -> None:
+    """Binární režim a ``encoding='utf-8'`` nález nedají, počítají se ale jako prošlá volání."""
+    checked_calls = 5
+    (tmp_path / "fine.py").write_text(
+        "import gzip\n"
+        "import subprocess\n"
+        "gzip.open(p, 'rb')\n"
+        "p.open(mode='wb')\n"
+        "p.read_bytes()\n"
+        "p.read_text(encoding='utf-8')\n"
+        "p.write_text('x', encoding='utf-8')\n"
+        "subprocess.run(['git'], text=True, encoding='utf-8')\n"
+        "subprocess.run(['git'])\n",
+        encoding="utf-8",
+    )
+
+    violations, inspected = _encoding_violations([tmp_path])
+
+    assert violations == []
+    assert inspected == checked_calls

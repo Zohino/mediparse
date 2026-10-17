@@ -71,9 +71,10 @@ def _run(
     plan: dict[str, object] = {"requests": case.requests}
     if case.masking is not None:
         plan["masking"] = case.masking
-    (workdir / "requests.json").write_text(json.dumps(plan))
+    (workdir / "requests.json").write_text(json.dumps(plan), encoding="utf-8")
     (workdir / "outputs.jsonl").write_text(
-        "".join(f"{json.dumps(output)}\n" for output in case.outputs)
+        "".join(f"{json.dumps(output)}\n" for output in case.outputs),
+        encoding="utf-8",
     )
     target = tmp_path / "cs"
     argv = collect_argv(workdir, source, target)
@@ -102,7 +103,7 @@ def test_parts_are_joined_in_request_order(
     )
 
     assert code == 0
-    assert (target / f"{NOTE}.txt").read_text() == "první\n\ndruhá\n"
+    assert (target / f"{NOTE}.txt").read_text(encoding="utf-8") == "první\n\ndruhá\n"
 
 
 def test_whole_note_is_written_as_before(
@@ -119,7 +120,7 @@ def test_whole_note_is_written_as_before(
     )
 
     assert code == 0
-    assert (target / f"{NOTE}.txt").read_text() == "x\n"
+    assert (target / f"{NOTE}.txt").read_text(encoding="utf-8") == "x\n"
 
 
 def test_truncated_part_flags_note_once(
@@ -237,7 +238,7 @@ def test_masked_plan_writes_restored_markers(
     )
 
     assert code == 0
-    assert (target / f"{NOTE}.txt").read_text() == "a ___ ___\n"
+    assert (target / f"{NOTE}.txt").read_text(encoding="utf-8") == "a ___ ___\n"
 
 
 def test_masked_plan_reports_missing_extra_and_duplicated(
@@ -285,7 +286,7 @@ def test_unmasked_plan_keeps_numbered_text(
     )
 
     assert code == 0
-    assert (target / f"{NOTE}.txt").read_text() == "x [[1]]\n"
+    assert (target / f"{NOTE}.txt").read_text(encoding="utf-8") == "x [[1]]\n"
 
 
 def test_masked_marker_count_is_compared_after_restore(
