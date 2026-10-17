@@ -18,6 +18,11 @@ SEPARABLE_VOCABULARY: Final = (
     "fracture cast orthopedic surgery splint",
 )
 
+OVERLAPPING: Final = (
+    "diabetes insulin glucose clinic review",
+    "fracture cast splint clinic review",
+)
+
 
 def separable_notes(
     patients: int, vocabulary: tuple[str, str] = SEPARABLE_VOCABULARY
