@@ -27,6 +27,7 @@ from tests.support import (
     REPOSITORY_CONFIG,
     REPOSITORY_PLANS,
     REPOSITORY_TEMPLATE,
+    generation_record,
 )
 
 if TYPE_CHECKING:
@@ -224,11 +225,12 @@ class AuditFiles:
         Returns:
             Argumenty vstupního bodu provenance; ``overrides`` nahradí údaje o generování.
         """
+        record = generation_record()
         generation = {
-            "model": "claude-sonnet-5-5",
-            "claude-code-version": "2.1.5",
-            "date": "2026-10-10",
-            "specification-commit": COMMIT,
+            "model": record.model,
+            "claude-code-version": record.claude_code_version,
+            "date": record.generated_on.isoformat(),
+            "specification-commit": record.specification_commit,
         } | overrides
         return [
             *(f"--{name}={value}" for name, value in generation.items()),

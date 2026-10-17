@@ -6,7 +6,7 @@ import importlib.util
 import json
 import sys
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Final
 
@@ -16,7 +16,12 @@ from mediparse.domain.corpus_audit import (
     AuditPin,
     AuditRecord,
 )
-from mediparse.domain.corpus_provenance import Decoding, Translation, TranslationRun
+from mediparse.domain.corpus_provenance import (
+    Decoding,
+    Generation,
+    Translation,
+    TranslationRun,
+)
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.environment import SourceRevision
 from mediparse.domain.input_note import InputNote
@@ -143,6 +148,24 @@ def separable_notes(
             for visit in range(1 + (patient * patient * 3 + patient) % 7)
         )
     return notes
+
+
+def generation_record(**overrides: object) -> Generation:
+    """Záznam generování korpusu s hodnotami, které předávají argumenty CLI.
+
+    Returns:
+        Záznam, v němž ``overrides`` nahradí jednotlivá pole.
+    """
+    fields = {
+        "seed": 0,
+        "sampler_config_sha256": "1" * 64,
+        "prompts_sha256": "3" * 64,
+        "model": "claude-sonnet-5-5",
+        "claude_code_version": "2.1.5",
+        "generated_on": date(2026, 10, 10),
+        "specification_commit": COMMIT,
+    } | overrides
+    return Generation.model_validate(fields)
 
 
 def translation_record(**overrides: object) -> Translation:

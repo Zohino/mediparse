@@ -22,19 +22,11 @@ if TYPE_CHECKING:
     from mediparse.domain.synthetic_plan import SamplerConfig
     from tests.conftest import PlannedNote
 
-from tests.support import translation_record
+from tests.support import generation_record, translation_record
 
 AUDIT: Final = "9" * 64
 RECORD: Final = {
-    "generation": {
-        "seed": 0,
-        "sampler_config_sha256": "1" * 64,
-        "prompts_sha256": "3" * 64,
-        "model": "claude-sonnet-5-5",
-        "claude_code_version": "2.1.5",
-        "generated_on": "2026-10-10",
-        "specification_commit": "d" * 40,
-    },
+    "generation": generation_record().model_dump(mode="json"),
     "audit_sha256": AUDIT,
 }
 

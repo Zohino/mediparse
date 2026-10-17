@@ -14,7 +14,6 @@ from mediparse.application.corpus_provenance import (
 )
 from mediparse.application.translation_provenance import TranslationProvenance
 from mediparse.domain.corpus_provenance import (
-    Generation,
     ProvenanceRecord,
     Translation,
 )
@@ -24,6 +23,7 @@ from tests.support import (
     CORPUS_SHA,
     PIN,
     audit_record,
+    generation_record,
     translation_record,
 )
 from tests.workdir_support import sha256_text
@@ -37,20 +37,6 @@ NEW_AUDIT_FILE = "8" * 64
 OLD_AUDIT_FILE = "9" * 64
 
 
-def _generation() -> Generation:
-    return Generation.model_validate_json(
-        json.dumps({
-            "seed": 0,
-            "sampler_config_sha256": "1" * 64,
-            "prompts_sha256": "3" * 64,
-            "model": "claude-sonnet-5-5",
-            "claude_code_version": "2.1.5",
-            "generated_on": "2026-10-10",
-            "specification_commit": "d" * 40,
-        })
-    )
-
-
 @dataclass
 class _Corpus:
     texts: dict[Language, dict[str, str]]
@@ -58,7 +44,7 @@ class _Corpus:
     record: AuditRecord = field(default_factory=audit_record)
     provenance: ProvenanceRecord | None = field(
         default_factory=lambda: ProvenanceRecord(
-            generation=_generation(), audit_sha256=OLD_AUDIT_FILE
+            generation=generation_record(), audit_sha256=OLD_AUDIT_FILE
         )
     )
     audit_file: str = NEW_AUDIT_FILE
@@ -131,7 +117,7 @@ def test_success_keeps_generation_and_writes_translation() -> None:
     assert _run(corpus, _source()) == ProvenanceWritten()
 
     (saved,) = corpus.saved
-    assert saved.generation == _generation()
+    assert saved.generation == generation_record()
     assert saved.audit_sha256 == NEW_AUDIT_FILE
     assert saved.translation is not None
     assert saved.translation.marker_mismatches == ("n2",)
