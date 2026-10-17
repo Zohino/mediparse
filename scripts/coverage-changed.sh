@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-base=${1:-origin/main}
+base=${1:?chybí základ, proti kterému se hledají změněné moduly}
 
 changed=$(git diff --name-only --diff-filter=AMR "$base...HEAD" -- 'src/*.py' | paste -sd, -)
 if [[ -z $changed ]]; then
