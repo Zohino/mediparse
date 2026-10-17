@@ -15,8 +15,6 @@ from mediparse.domain.corpus_provenance import (
     provenance_violations,
     semantic_version,
 )
-from mediparse.domain.digest import fingerprint
-from mediparse.domain.verbalization import render_prompt
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -41,18 +39,40 @@ RECORD: Final = {
 }
 
 
-def test_prompts_fingerprint_covers_rendered_prompt(
+def test_prompts_fingerprint_is_stable_for_same_inputs(
     planned_note: PlannedNote,
     sampler_config: SamplerConfig,
     verbalization_template: str,
 ) -> None:
-    """Otisk zadání vzniká z vyrenderovaného textu, tedy i z vět, které skládá kód."""
-    plan = planned_note.plan
-    prompt = render_prompt(verbalization_template, plan, sampler_config)
+    """Týž plán, šablona a config dají týž otisk zadání."""
+    plans = [planned_note.plan]
 
     assert prompts_sha256(
-        verbalization_template, [plan], sampler_config
-    ) == fingerprint([(plan.note_id, prompt.encode())])
+        verbalization_template, plans, sampler_config
+    ) == prompts_sha256(verbalization_template, plans, sampler_config)
+
+
+def test_prompts_fingerprint_changes_with_sentence_composed_by_code(
+    planned_note: PlannedNote,
+    sampler_config: SamplerConfig,
+    verbalization_template: str,
+) -> None:
+    """Hlavička sekce plánu není v plánu ani v šabloně, do zadání ji skládá kód."""
+    plans = [planned_note.plan]
+    structure = sampler_config.structure
+    sections = tuple(
+        section.model_copy(update={"header": "Changed header"})
+        if section.key == "allergies"
+        else section
+        for section in structure.sections
+    )
+    changed = sampler_config.model_copy(
+        update={"structure": structure.model_copy(update={"sections": sections})}
+    )
+
+    assert prompts_sha256(verbalization_template, plans, changed) != prompts_sha256(
+        verbalization_template, plans, sampler_config
+    )
 
 
 @pytest.mark.parametrize(
