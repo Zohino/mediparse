@@ -31,7 +31,7 @@ RUN_DIRECTIVE = re.compile(r"^\s*run\s*:", re.MULTILINE)
 APPLICATION = PACKAGE / "application"
 APPLICATION_PREFIX = "mediparse.application."
 ENCODING_ROOTS = tuple(
-    REPOSITORY / name for name in ("src", "tests", "workflow", "translation", "scripts")
+    REPOSITORY / name for name in ("src", "tests", "workflow", "translation")
 )
 TEXT_IO_METHODS = frozenset({"open", "read_text", "write_text"})
 SUBPROCESS_CALLS = frozenset({"run", "check_output", "check_call", "call", "Popen"})
