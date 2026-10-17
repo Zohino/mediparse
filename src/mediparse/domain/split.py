@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import hashlib
 from collections import Counter
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Annotated, Final
+
+from pydantic import BaseModel, ConfigDict, Field
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
@@ -21,6 +24,15 @@ RESIDUAL_STRATUM: Final = -1
 
 class SubjectLeakError(ValueError):
     """Jeden pacient je ve dvou foldech."""
+
+
+class SplitConfig(BaseModel):
+    """Parametry splitu sdíleného všemi řádky matice: seed a počet foldů."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+
+    seed: int
+    folds: Annotated[int, Field(ge=2)]
 
 
 @dataclass(frozen=True)
@@ -56,6 +68,26 @@ class Split:
         if shared:
             msg = f"Pacientů ve více foldech: {len(shared)}."
             raise SubjectLeakError(msg)
+
+    def sha256(self) -> str:
+        """Otisk přiřazení pacientů do foldů.
+
+        Kontrakt pro každého, kdo otisk počítá z jiného zdroje splitu: SHA-256
+        (hex) UTF-8 textu, kde každý pacient je řádek ``subject_id`` TAB ``fold``
+        LF, seřazený podle ``subject_id``.
+
+        Returns:
+            Hex SHA-256 přiřazení.
+        """
+        # Číselně, aby 10 nepředběhlo 2; textové řazení by dalo jiný otisk než
+        # otisk téhož přiřazení spočtený ze souboru.
+        assignment = sorted(
+            (subject, fold)
+            for fold, subjects in enumerate(self.folds)
+            for subject in subjects
+        )
+        lines = "".join(f"{subject}\t{fold}\n" for subject, fold in assignment)
+        return hashlib.sha256(lines.encode()).hexdigest()
 
     def holdout(self, notes: Sequence[InputNote], fold: int) -> Holdout:
         """Rozdělí zprávy na test pacientů foldu a trénink ostatních.
