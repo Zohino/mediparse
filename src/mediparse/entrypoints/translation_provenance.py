@@ -19,8 +19,8 @@ from mediparse.entrypoints.corpus_cli import (
     add_corpus_option,
     add_sampler_config_option,
     add_tables_option,
-    provenance_exit_code,
 )
+from mediparse.entrypoints.provenance_exit import provenance_exit_code
 from mediparse.infrastructure.audit_pin import load_audit_pin
 from mediparse.infrastructure.synthetic_corpus import (
     PROVENANCE_NAME,

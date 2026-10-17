@@ -3,25 +3,18 @@
 from __future__ import annotations
 
 import argparse
-import logging
 from pathlib import Path
 from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.application.corpus_provenance import (
-    ProvenanceRefused,
-    ProvenanceWritten,
-)
 from mediparse.entrypoints.corpus_cli import (
     add_corpus_option,
     add_plans_option,
     add_sampler_config_option,
     add_tables_option,
     add_template_option,
-    provenance_exit_code,
 )
-from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.plans_file import PLANS_PATH
 from mediparse.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
@@ -87,27 +80,3 @@ def test_option_can_be_overridden_and_is_a_path(
 def test_option_help_is_in_parser_help(add: AddOption, help_text: str) -> None:
     """Nápověda volby je ve výpisu nápovědy parseru."""
     assert help_text in " ".join(_parser(add).format_help().split())
-
-
-def test_written_provenance_is_logged_and_ok(caplog: pytest.LogCaptureFixture) -> None:
-    """Zapsaná provenance skončí kódem OK a hláškou na úrovni INFO."""
-    with caplog.at_level(logging.INFO):
-        code = provenance_exit_code(ProvenanceWritten(), "zapsáno")
-
-    assert code is ExitCode.OK
-    assert [(r.levelno, r.getMessage()) for r in caplog.records] == [
-        (logging.INFO, "zapsáno")
-    ]
-
-
-def test_refused_provenance_logs_reason_and_is_refused(
-    caplog: pytest.LogCaptureFixture,
-) -> None:
-    """Odmítnutá provenance skončí kódem REFUSED a důvodem na úrovni ERROR."""
-    with caplog.at_level(logging.INFO):
-        code = provenance_exit_code(ProvenanceRefused("důvod"), "zapsáno")
-
-    assert code is ExitCode.REFUSED
-    assert [(r.levelno, r.getMessage()) for r in caplog.records] == [
-        (logging.ERROR, "důvod")
-    ]
