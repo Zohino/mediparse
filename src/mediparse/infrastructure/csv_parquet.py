@@ -28,6 +28,10 @@ def _header(source: Path) -> tuple[str, ...]:
         return tuple(next(csv.reader(stream), ()))
 
 
+# pyarrow přijme neuzavřenou uvozovku na konci souboru mlčky. Uvozovka uvnitř pole se
+# v CSV zdvojuje (""), takže lichý počet bytů " v celém souboru znamená neuzavřené pole.
+# Počítá se ve stejném průchodu jako převod, protože druhý průchod by znovu rozbalil
+# celý soubor (discharge má 1,1 GB gz).
 class _QuoteCounter(io.RawIOBase):
     def __init__(self, inner: io.BufferedIOBase) -> None:
         super().__init__()

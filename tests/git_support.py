@@ -18,6 +18,9 @@ needs_git: Final = pytest.mark.skipif(shutil.which("git") is None, reason="git c
 def git_output(root: Path, *args: str) -> str:
     """Spustí git v ``root`` bez proměnných GIT_*.
 
+    Pod hookem nebo ``git rebase --exec`` by GIT_DIR přebil ``-C`` a příkaz by běžel
+    v repu, ze kterého se testy spouští, ne v ``root``.
+
     Returns:
         Oříznutý stdout.
     """
