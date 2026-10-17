@@ -14,16 +14,16 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import LabelModel
 from mediparse.domain.note import subject_of
 from mediparse.domain.synthetic_patients import (
-    PatientModel,
     PrevalenceNotReachedError,
     continuation_ratio,
     sample_notes,
 )
+from mediparse.domain.synthetic_plan import PatientModel
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.domain.synthetic_patients import SyntheticNote
+    from mediparse.domain.synthetic_note import SyntheticNote
 
 PREVALENCE = {
     Diagnosis.DIABETES: 0.27,

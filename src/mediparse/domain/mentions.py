@@ -22,7 +22,7 @@ if TYPE_CHECKING:
     from random import Random
 
     from mediparse.domain.note_structure import NoteStructure
-    from mediparse.domain.synthetic_patients import SyntheticNote
+    from mediparse.domain.synthetic_note import SyntheticNote
 
 
 class MentionStatus(StrEnum):

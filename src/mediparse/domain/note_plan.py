@@ -16,7 +16,7 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from mediparse.domain.note_structure import NoteStructure
-    from mediparse.domain.synthetic_patients import SyntheticNote
+    from mediparse.domain.synthetic_note import SyntheticNote
 
 
 class NotePlan(BaseModel):

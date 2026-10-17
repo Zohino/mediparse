@@ -17,7 +17,7 @@ from mediparse.domain.mentions import (
     sample_mentions,
 )
 from mediparse.domain.note_structure import NoteStructure, Sex
-from mediparse.domain.synthetic_patients import SyntheticNote
+from mediparse.domain.synthetic_note import SyntheticNote
 
 SEED = 20260929
 LARGE = 40000
