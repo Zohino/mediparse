@@ -19,7 +19,7 @@ from pydantic import (
 from mediparse.domain.probability import Probability, sums_to_one
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    from collections.abc import Mapping, Sequence
     from random import Random
 
     from mediparse.domain.identity import SubjectId
@@ -212,8 +212,7 @@ class NoteStructure:
     age_marker: bool
     sections: tuple[str, ...]
     subheadings: tuple[str, ...]
-    narrative_words: int
-    section_words: tuple[tuple[str, int], ...]
+    section_words: Mapping[str, int]
     narrative_deid: int
 
 
@@ -252,14 +251,13 @@ def _structure(
     # Délka se losuje i pro zprávu bez narativní sekce, aby se proud náhodnosti
     # dalších zpráv nezměnil; narativ pak tvoří jen slova, která dostala nějaká sekce.
     section_words = _allocate(_narrative_words(model.narrative, rng), present)
-    words = sum(count for _, count in section_words)
+    words = sum(section_words.values())
     return NoteStructure(
         note_id=note_id,
         sex=sex,
         age_marker=age_marker,
         sections=tuple(section.key for section in present),
         subheadings=subheadings,
-        narrative_words=words,
         section_words=section_words,
         narrative_deid=round(words * model.narrative.deid_per_word),
     )
@@ -281,9 +279,7 @@ def _narrative_words(model: NarrativeModel, rng: Random) -> int:
             return words
 
 
-def _allocate(
-    words: int, present: Sequence[SectionModel]
-) -> tuple[tuple[str, int], ...]:
+def _allocate(words: int, present: Sequence[SectionModel]) -> dict[str, int]:
     narrative = [section for section in present if section.narrative_share > 0]
     total = sum(section.narrative_share for section in narrative)
     quotas = [words * section.narrative_share / total for section in narrative]
@@ -291,6 +287,6 @@ def _allocate(
     by_remainder = sorted(range(len(narrative)), key=lambda i: counts[i] - quotas[i])
     for index in by_remainder[: words - sum(counts)]:
         counts[index] += 1
-    return tuple(
-        (section.key, count) for section, count in zip(narrative, counts, strict=True)
-    )
+    return {
+        section.key: count for section, count in zip(narrative, counts, strict=True)
+    }

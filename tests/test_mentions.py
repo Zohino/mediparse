@@ -69,8 +69,7 @@ def _structure(sections: tuple[str, ...]) -> NoteStructure:
         age_marker=False,
         sections=sections,
         subheadings=(),
-        narrative_words=100,
-        section_words=(),
+        section_words={},
         narrative_deid=3,
     )
 

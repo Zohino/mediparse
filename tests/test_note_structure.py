@@ -11,6 +11,7 @@ from pydantic import ValidationError
 
 from mediparse.domain.note_structure import (
     NarrativeModel,
+    NoteStructure,
     PreambleField,
     PreambleValue,
     SectionModel,
@@ -138,6 +139,10 @@ def test_exclusive_variants_never_appear_together() -> None:
         assert not {"Lungs", "PULM"} <= set(structure.subheadings)
 
 
+def _narrative_words(structure: NoteStructure) -> int:
+    return sum(structure.section_words.values())
+
+
 def test_frequencies_follow_the_model() -> None:
     """Na velkém vzorku sedí četnost sekce, varianty podnadpisu, pohlaví i věkové značky."""
     structures = sample_structure(_notes(LARGE, per_patient=1), _model(), Random(SEED))
@@ -153,17 +158,18 @@ def test_frequencies_follow_the_model() -> None:
 def test_narrative_length_stays_within_bounds() -> None:
     """Délka narativu leží v mezích oříznutí a počet značek odpovídá hustotě."""
     for structure in sample_structure(_notes(LARGE), _model(), Random(SEED)):
-        assert MIN_WORDS <= structure.narrative_words <= MAX_WORDS
-        expected_deid = round(structure.narrative_words * DEID_PER_WORD)
-        assert structure.narrative_deid == expected_deid
+        words = _narrative_words(structure)
+        if structure.section_words:
+            assert MIN_WORDS <= words <= MAX_WORDS
+        assert structure.narrative_deid == round(words * DEID_PER_WORD)
 
 
 def test_allocation_sums_exactly_over_present_sections() -> None:
     """Délka se rozdělí jen mezi přítomné narativní sekce a sečte se přesně."""
     for structure in sample_structure(_notes(LARGE), _model(), Random(SEED)):
-        allocated = sum(words for _, words in structure.section_words)
-        assert allocated == structure.narrative_words
-        assert {key for key, _ in structure.section_words} <= set(structure.sections)
+        if structure.section_words:
+            assert MIN_WORDS <= _narrative_words(structure) <= MAX_WORDS
+        assert structure.section_words.keys() <= set(structure.sections)
 
 
 def test_note_without_narrative_section_has_no_narrative() -> None:
@@ -185,24 +191,23 @@ def test_note_without_narrative_section_has_no_narrative() -> None:
     )
 
     for structure in sample_structure(_notes(30), model, Random(SEED)):
-        assert structure.section_words == ()
-        assert structure.narrative_words == 0
+        assert structure.section_words == {}
         assert structure.narrative_deid == 0
 
 
 def test_allocation_follows_shares() -> None:
     """Při obou narativních sekcích dostane každá podíl zaokrouhlený nejvýš o slovo."""
     for structure in sample_structure(_notes(2000), _model(), Random(SEED)):
-        words = dict(structure.section_words)
+        words = structure.section_words
         if "hospital_course" in words:
-            quota = HOSPITAL_COURSE_SHARE * structure.narrative_words
+            quota = HOSPITAL_COURSE_SHARE * _narrative_words(structure)
             assert abs(words["hospital_course"] - quota) < 1
 
 
 def test_length_distribution_matches_notes_synthesis() -> None:
     """Medián a rozptyl logaritmu délky leží v tolerancích kontrol z notes-synthesis."""
     structures = sample_structure(_notes(LARGE), _model(), Random(SEED))
-    lengths = [structure.narrative_words for structure in structures]
+    lengths = [_narrative_words(structure) for structure in structures]
 
     assert abs(median(lengths) / MEDIAN_WORDS - 1) <= NARRATIVE.median_tolerance
     assert (

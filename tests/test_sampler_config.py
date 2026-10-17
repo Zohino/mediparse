@@ -19,8 +19,9 @@ def test_repository_config_samples_structure(sampler_config: SamplerConfig) -> N
     structures = sample_structure(notes, sampler_config.structure, Random(1))
 
     assert len(structures) == len(notes)
+    narrative = sampler_config.structure.narrative
     for structure in structures:
-        assert (
-            sum(words for _, words in structure.section_words)
-            == structure.narrative_words
-        )
+        assert structure.section_words.keys() <= set(structure.sections)
+        if structure.section_words:
+            allocated = sum(structure.section_words.values())
+            assert narrative.min_words <= allocated <= narrative.max_words
