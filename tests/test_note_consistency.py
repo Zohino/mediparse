@@ -132,6 +132,17 @@ def test_long_underscore_run_is_neither_age_marker_nor_known_form(
     assert any("Věková značka chybí" in reason for reason in violations)
 
 
+def test_long_underscore_run_is_not_subheading_value(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Podnadpis s hodnotou ____ nemá hodnotu ___."""
+    text = planned_note.text.replace("Facility:\n___", "Facility:\n____", 1)
+
+    violations = _violations(text, planned_note.plan, sampler_config)
+
+    assert any("Podnadpis Facility" in reason for reason in violations)
+
+
 def _length_reasons(
     note: PlannedNote, config: SamplerConfig, planned_words: int
 ) -> list[str]:

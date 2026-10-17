@@ -25,7 +25,7 @@ class Tier(StrEnum):
 
 
 class ModelName(StrEnum):
-    """Konkrétní model; stupeň se z něj odvozuje, v manifestu se neuvádí."""
+    """Jméno modelu v matici experimentů; stupeň se z něj odvozuje, v manifestu se neuvádí."""
 
     LOGREG = "logreg"
     SVM = "svm"

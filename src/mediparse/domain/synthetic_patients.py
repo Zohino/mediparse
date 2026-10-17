@@ -61,7 +61,7 @@ class SyntheticNote:
 
 @dataclass(frozen=True)
 class _PatientDistribution:
-    """Předpočítaná rozdělení jednoho tahu: společné labely, akutní diagnóza a poměr počtu zpráv."""
+    """Rozdělení, z nichž losuje každý tah: společné labely, akutní diagnóza podle chronických a kvocient počtu zpráv."""
 
     joint: Mapping[LabelSet, float]
     acute: Mapping[LabelSet, float]

@@ -12,7 +12,6 @@ if TYPE_CHECKING:
     from tests.conftest import PlannedNote
 
 TWO: Final = 2
-SEVEN: Final = 7
 
 
 def test_marker_is_exactly_three_underscores() -> None:
@@ -59,6 +58,7 @@ def test_narrative_measure_has_named_fields(
     planned_note: PlannedNote, sampler_config: SamplerConfig
 ) -> None:
     """Výsledek nese slova a značky jako pojmenovaná pole."""
-    measure = _measure("a ___ year old woman with ___", planned_note, sampler_config)
+    body = "a ___ year old woman with ___"
+    measure = _measure(body, planned_note, sampler_config)
 
-    assert (measure.words, measure.marks) == (SEVEN, 1)
+    assert (measure.words, measure.marks) == (len(body.split()), 1)

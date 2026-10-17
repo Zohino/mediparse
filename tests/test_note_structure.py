@@ -139,7 +139,7 @@ def test_exclusive_variants_never_appear_together() -> None:
         assert not {"Lungs", "PULM"} <= set(structure.subheadings)
 
 
-def _narrative_words(structure: NoteStructure) -> int:
+def _allocated_words(structure: NoteStructure) -> int:
     return sum(structure.section_words.values())
 
 
@@ -158,18 +158,18 @@ def test_frequencies_follow_the_model() -> None:
 def test_narrative_length_stays_within_bounds() -> None:
     """Délka narativu leží v mezích oříznutí a počet značek odpovídá hustotě."""
     for structure in sample_structure(_notes(LARGE), _model(), Random(SEED)):
-        words = _narrative_words(structure)
-        if structure.section_words:
-            assert MIN_WORDS <= words <= MAX_WORDS
+        words = _allocated_words(structure)
+        assert MIN_WORDS <= words <= MAX_WORDS
         assert structure.narrative_deid == round(words * DEID_PER_WORD)
 
 
-def test_allocation_sums_exactly_over_present_sections() -> None:
-    """Délka se rozdělí jen mezi přítomné narativní sekce a sečte se přesně."""
+def test_allocation_covers_only_present_narrative_sections() -> None:
+    """Slova dostanou jen narativní sekce, které zpráva obsahuje."""
+    narrative_keys = {s.key for s in _model().sections if s.narrative_share > 0}
     for structure in sample_structure(_notes(LARGE), _model(), Random(SEED)):
-        if structure.section_words:
-            assert MIN_WORDS <= _narrative_words(structure) <= MAX_WORDS
-        assert structure.section_words.keys() <= set(structure.sections)
+        assert structure.section_words.keys() <= narrative_keys & set(
+            structure.sections
+        )
 
 
 def test_note_without_narrative_section_has_no_narrative() -> None:
@@ -200,14 +200,14 @@ def test_allocation_follows_shares() -> None:
     for structure in sample_structure(_notes(2000), _model(), Random(SEED)):
         words = structure.section_words
         if "hospital_course" in words:
-            quota = HOSPITAL_COURSE_SHARE * _narrative_words(structure)
+            quota = HOSPITAL_COURSE_SHARE * _allocated_words(structure)
             assert abs(words["hospital_course"] - quota) < 1
 
 
 def test_length_distribution_matches_notes_synthesis() -> None:
     """Medián a rozptyl logaritmu délky leží v tolerancích kontrol z notes-synthesis."""
     structures = sample_structure(_notes(LARGE), _model(), Random(SEED))
-    lengths = [_narrative_words(structure) for structure in structures]
+    lengths = [_allocated_words(structure) for structure in structures]
 
     assert abs(median(lengths) / MEDIAN_WORDS - 1) <= NARRATIVE.median_tolerance
     assert (

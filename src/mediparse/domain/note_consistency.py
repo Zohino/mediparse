@@ -10,6 +10,7 @@ from mediparse.domain.note_text import (
     AGE_MARKER,
     AGE_SUFFIX,
     DEID,
+    STANDALONE_DEID,
     alternation,
     measure_narrative,
     segment,
@@ -121,7 +122,9 @@ def _marked_place_violations(
         for key, header in _deid_subheadings(structure)
         if header in plan.subheadings
         and re.search(
-            rf"^{re.escape(header)}:\s*{DEID}", bodies.get(key, ""), re.MULTILINE
+            rf"^{re.escape(header)}:\s*{STANDALONE_DEID}",
+            bodies.get(key, ""),
+            re.MULTILINE,
         )
         is None
     ]

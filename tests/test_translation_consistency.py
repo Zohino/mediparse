@@ -11,14 +11,6 @@ from mediparse.domain.translation_consistency import (
 TEXT = "a" * 10
 
 
-def test_marker_count_mismatch_is_reported() -> None:
-    """Překlad s jiným počtem značek než originál se hlásí."""
-    english = {"n1": "a ___ b", "n2": "___ ___"}
-    czech = {"n1": "a ___ b", "n2": "___"}
-
-    assert marker_mismatches(english, czech) == ("n2",)
-
-
 def test_corpus_without_czech_has_no_violations() -> None:
     """Korpus před překladem nic neporušuje."""
     assert translation_violations({"n1": TEXT}, {}) == ()

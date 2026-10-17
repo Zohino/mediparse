@@ -1,4 +1,4 @@
-"""Text syntetické zprávy: de-identifikační značka, sekce podle hlaviček na začátku řádku, věková značka a narativ."""
+"""Text zprávy: de-identifikační značka a její počet, sekce podle hlaviček na začátku řádku, věková značka a měření narativu."""
 
 from __future__ import annotations
 
@@ -14,10 +14,10 @@ if TYPE_CHECKING:
 DEID: Final = "___"
 # Delší řady podtržítek nejsou značka (hlásí je kontrola cizí formy značky). Vzor
 # proto nelze zjednodušit na str.count, ten by ____ započítal jako značku.
-_STANDALONE_DEID: Final = rf"(?<!_){re.escape(DEID)}(?!_)"
-_DEID_PATTERN: Final = re.compile(_STANDALONE_DEID)
+STANDALONE_DEID: Final = rf"(?<!_){re.escape(DEID)}(?!_)"
+_DEID_PATTERN: Final = re.compile(STANDALONE_DEID)
 AGE_SUFFIX: Final = r"[ -]?(?:years?[ -]old|y/?o)\b"
-AGE_MARKER: Final = re.compile(rf"{_STANDALONE_DEID}{AGE_SUFFIX}", re.IGNORECASE)
+AGE_MARKER: Final = re.compile(rf"{STANDALONE_DEID}{AGE_SUFFIX}", re.IGNORECASE)
 
 type Sections = tuple[tuple[str, str], ...]
 
