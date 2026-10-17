@@ -74,14 +74,17 @@ class Split:
         """Otisk přiřazení pacientů do foldů.
 
         Kontrakt pro každého, kdo otisk počítá z jiného zdroje splitu: SHA-256
-        (hex) UTF-8 textu, kde každý pacient je řádek ``subject_id`` TAB ``fold``
-        LF, seřazený podle ``subject_id``.
+        (hex) UTF-8 textu, kde každý pacient je jeden řádek ``subject_id`` TAB
+        ``fold`` LF (i poslední řádek končí LF). Čísla jsou desítková bez
+        úvodních nul, ``fold`` je pozice foldu v ``folds`` od 0 a řádky jsou
+        seřazené vzestupně číselně podle ``subject_id``. Prázdný fold se v otisku
+        neprojeví.
 
         Returns:
             Hex SHA-256 přiřazení.
         """
-        # Číselně, aby 10 nepředběhlo 2; textové řazení by dalo jiný otisk než
-        # otisk téhož přiřazení spočtený ze souboru.
+        # Číselně, protože nezávislý čtenář souboru (DuckDB, sort -n) řadí celá
+        # čísla; textové řazení (10 před 2) by dalo jiný otisk.
         assignment = sorted(
             (subject, fold)
             for fold, subjects in enumerate(self.folds)

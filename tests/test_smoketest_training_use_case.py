@@ -186,7 +186,7 @@ def test_class_check_uses_folds_of_split_config() -> None:
     """Počet pacientů ve třídě se měří proti ``folds`` z configu splitu."""
     recorder = _Recorder()
 
-    with pytest.raises(InvalidInputError, match="ckd"):
+    with pytest.raises(InvalidInputError, match=r"ckd.*aspoň 3\."):
         _use_case(NOTES, SPLIT, recorder).run(CONFIG, split_config(folds=3))
 
     assert recorder.calls == {}

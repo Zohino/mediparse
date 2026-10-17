@@ -68,12 +68,12 @@ class SmoketestTraining[C: TextClassifier]:
     store: ModelStore[C]
     predictions: PredictionSink
 
-    def run(self, config: TrainingConfig, split: SplitConfig) -> TrainingReport:
+    def run(self, config: TrainingConfig, split_config: SplitConfig) -> TrainingReport:
         """Natrénuje model na trénovacích pacientech, predikuje testovací a uloží.
 
         Args:
             config: Diagnóza a parametry tréninku.
-            split: Seed a počet foldů splitu.
+            split_config: Seed a počet foldů splitu.
 
         Returns:
             Velikosti částí odložení a otisk splitu.
@@ -81,9 +81,13 @@ class SmoketestTraining[C: TextClassifier]:
         notes = self.table.read()
         labels = _labels(notes, config.diagnosis)
         subjects = [note.subject_id for note in notes]
-        ensure_patients_per_class(labels, subjects, config.diagnosis, split.folds)
-        patients = self.splitter.split(subjects, strata(notes, split.folds), split)
-        holdout = patients.holdout(notes, config.fold)
+        ensure_patients_per_class(
+            labels, subjects, config.diagnosis, split_config.folds
+        )
+        split = self.splitter.split(
+            subjects, strata(notes, split_config.folds), split_config
+        )
+        holdout = split.holdout(notes, config.fold)
         classifier = self.trainer.fit(
             [note.text for note in holdout.train],
             _labels(holdout.train, config.diagnosis),
@@ -112,5 +116,5 @@ class SmoketestTraining[C: TextClassifier]:
             train_notes=len(holdout.train),
             test_notes=len(holdout.test),
             test_positives=sum(truth),
-            split_sha256=patients.sha256(),
+            split_sha256=split.sha256(),
         )

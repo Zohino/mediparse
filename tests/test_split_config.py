@@ -20,7 +20,7 @@ def test_repository_config_loads() -> None:
     """Config z repa projde schématem."""
     config = load_split_config(REPOSITORY_SPLIT_CONFIG)
 
-    assert config.folds >= 2  # ruff: ignore[magic-value-comparison]
+    assert (config.seed, config.folds) == (0, 5)
 
 
 def test_missing_file_is_invalid_input(tmp_path: Path) -> None:

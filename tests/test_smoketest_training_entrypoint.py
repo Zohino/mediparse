@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import re
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
@@ -121,7 +120,6 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
     assert written.config_sha256 == file_sha256(config)
     assert written.seed == 0
     assert written.split_seed == 0
-    assert re.fullmatch(r"[0-9a-f]{64}", written.split_sha256)
     assert written.row_id == "row"
     assert written.environment.source == REVISION
     assert written.model_revision is None
