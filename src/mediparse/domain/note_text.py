@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Final, NamedTuple
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping
@@ -65,9 +65,16 @@ def segment(text: str, headers: Mapping[str, str]) -> tuple[str, Sections]:
     return text[: matches[0].start()] if matches else text, sections
 
 
-def narrative(
+class NarrativeMeasure(NamedTuple):
+    """Změřený narativ zprávy: počet slov a počet narativních značek bez věkové značky."""
+
+    words: int
+    marks: int
+
+
+def measure_narrative(
     sections: Sections, plan: NotePlan, structure: StructureModel
-) -> tuple[int, int]:
+) -> NarrativeMeasure:
     """Změří narativ: těla sekcí s délkou v plánu bez podnadpisů.
 
     Returns:
@@ -81,4 +88,4 @@ def narrative(
     ]
     words = sum(len(body.split()) for body in bodies)
     marks = sum(deid_markers(body) - len(AGE_MARKER.findall(body)) for body in bodies)
-    return words, marks
+    return NarrativeMeasure(words, marks)

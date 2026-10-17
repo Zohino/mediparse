@@ -2,11 +2,17 @@
 
 from __future__ import annotations
 
-from typing import Final
+from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.note_text import AGE_MARKER, deid_markers
+from mediparse.domain.note_text import AGE_MARKER, deid_markers, measure_narrative
+
+if TYPE_CHECKING:
+    from mediparse.domain.note_text import NarrativeMeasure
+    from mediparse.domain.synthetic_plan import SamplerConfig
+    from tests.conftest import PlannedNote
 
 TWO: Final = 2
+SEVEN: Final = 7
 
 
 def test_marker_is_exactly_three_underscores() -> None:
@@ -22,3 +28,37 @@ def test_age_marker_needs_standalone_marker() -> None:
     """Věková značka je ___ year old, ne věk za delší řadou podtržítek."""
     assert AGE_MARKER.search("a ___ year old woman") is not None
     assert AGE_MARKER.search("a ____ year old woman") is None
+
+
+def _measure(
+    body: str, planned_note: PlannedNote, config: SamplerConfig
+) -> NarrativeMeasure:
+    key = next(iter(planned_note.plan.section_words))
+    return measure_narrative(((key, body),), planned_note.plan, config.structure)
+
+
+def test_narrative_counts_only_standalone_markers(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Řada ______ není značka narativu, stejně jako v kontrole překladu."""
+    measure = _measure("a ______ b ___ c", planned_note, sampler_config)
+
+    assert measure.marks == 1
+
+
+def test_narrative_marks_are_never_negative(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Věk za ____ není věková značka, takže se od značek neodečítá."""
+    measure = _measure("a ____ year old woman", planned_note, sampler_config)
+
+    assert measure.marks == 0
+
+
+def test_narrative_measure_has_named_fields(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Výsledek nese slova a značky jako pojmenovaná pole."""
+    measure = _measure("a ___ year old woman with ___", planned_note, sampler_config)
+
+    assert (measure.words, measure.marks) == (SEVEN, 1)

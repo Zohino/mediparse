@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from mediparse.domain.labels import label_shares, prevalence_outliers
-from mediparse.domain.note_text import narrative, segment
+from mediparse.domain.note_text import measure_narrative, segment
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -62,7 +62,7 @@ def corpus_statistics(
     """
     words, marks = zip(
         *(
-            narrative(segment(text, structure.headers)[1], plan, structure)
+            measure_narrative(segment(text, structure.headers)[1], plan, structure)
             for plan, text in notes
         ),
         strict=True,

@@ -11,7 +11,7 @@ from mediparse.domain.note_text import (
     AGE_SUFFIX,
     DEID,
     alternation,
-    narrative,
+    measure_narrative,
     segment,
 )
 
@@ -73,7 +73,7 @@ def _section_violations(
 def _length_violations(
     sections: Sections, plan: NotePlan, structure: StructureModel
 ) -> list[str]:
-    words, _ = narrative(sections, plan, structure)
+    words = measure_narrative(sections, plan, structure).words
     target = sum(plan.section_words.values())
     tolerance = structure.narrative.note_tolerance
     if abs(words - target) <= tolerance * target:
