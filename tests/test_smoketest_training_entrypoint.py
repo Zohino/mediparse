@@ -120,6 +120,7 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
     assert written.config_sha256 == file_sha256(config)
     assert written.seed == 0
     assert written.split_seed == 0
+    assert written.split_folds == 2  # ruff: ignore[magic-value-comparison]
     assert written.row_id == "row"
     assert written.environment.source == REVISION
     assert written.model_revision is None

@@ -21,6 +21,7 @@ def _fields(**changes: object) -> dict[str, object]:
         "config_sha256": DIGEST,
         "seed": 0,
         "split_seed": 1,
+        "split_folds": 5,
         "split_sha256": DIGEST,
         "model": "sklearn TfidfVectorizer+LinearSVC",
         "model_revision": None,
@@ -56,6 +57,13 @@ def test_seed_outside_generator_range_is_rejected(field: str, seed: int) -> None
     """Seed mimo rozsah generátoru manifest odmítne."""
     with pytest.raises(ValidationError):
         RunManifest.model_validate(_fields(**{field: seed}))
+
+
+@pytest.mark.parametrize("folds", [0, 1])
+def test_fewer_than_two_split_folds_are_rejected(folds: int) -> None:
+    """Split má aspoň dva foldy, manifest s méně je odmítnut."""
+    with pytest.raises(ValidationError):
+        RunManifest.model_validate(_fields(split_folds=folds))
 
 
 def test_extra_field_is_rejected() -> None:
