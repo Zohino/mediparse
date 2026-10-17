@@ -24,7 +24,7 @@ class Tier(StrEnum):
     TRANSFORMER = "transformer"
 
 
-class Model(StrEnum):
+class ModelName(StrEnum):
     """Konkrétní model; stupeň se z něj odvozuje, v manifestu se neuvádí."""
 
     LOGREG = "logreg"
@@ -40,11 +40,11 @@ class Model(StrEnum):
 
 
 _MODEL_TIERS = MappingProxyType({
-    Model.LOGREG: Tier.CLASSICAL,
-    Model.SVM: Tier.CLASSICAL,
-    Model.FASTTEXT: Tier.INTERMEDIATE,
-    Model.XLM_R_BASE: Tier.TRANSFORMER,
-    Model.MDEBERTA_V3_BASE: Tier.TRANSFORMER,
+    ModelName.LOGREG: Tier.CLASSICAL,
+    ModelName.SVM: Tier.CLASSICAL,
+    ModelName.FASTTEXT: Tier.INTERMEDIATE,
+    ModelName.XLM_R_BASE: Tier.TRANSFORMER,
+    ModelName.MDEBERTA_V3_BASE: Tier.TRANSFORMER,
 })
 
 
@@ -55,12 +55,12 @@ class MatrixRow(BaseModel):
 
     id: RowId
     language: Language
-    model: Model
+    model: ModelName
     strip_diagnostic_sections: bool
     tuning_trials: PositiveInt
 
     @property
-    def axes(self) -> tuple[Language, Model, bool]:
+    def axes(self) -> tuple[Language, ModelName, bool]:
         """Osy, které experiment jednoznačně určují."""
         return self.language, self.model, self.strip_diagnostic_sections
 

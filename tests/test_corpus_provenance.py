@@ -13,7 +13,7 @@ from mediparse.domain.corpus_provenance import (
     model_id,
     prompts_sha256,
     provenance_violations,
-    version,
+    semantic_version,
 )
 from mediparse.domain.digest import fingerprint
 from mediparse.domain.verbalization import render_prompt
@@ -59,7 +59,7 @@ def test_prompts_fingerprint_covers_rendered_prompt(
     ("validate", "valid", "invalid", "message"),
     [
         (model_id, "claude-sonnet-5-5", "gpt-4o", "Model"),
-        (version, "2.1.288", "2.1", "Verze"),
+        (semantic_version, "2.1.288", "2.1", "Verze"),
     ],
     ids=["model", "version"],
 )
