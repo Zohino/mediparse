@@ -50,6 +50,14 @@ def test_digest_of_other_length_is_rejected(field: str, digest: str) -> None:
         RunManifest.model_validate(_fields(**{field: digest}))
 
 
+@pytest.mark.parametrize("field", ["seed", "split_seed"])
+@pytest.mark.parametrize("seed", [-1, 2**32])
+def test_seed_outside_generator_range_is_rejected(field: str, seed: int) -> None:
+    """Seed mimo rozsah generátoru manifest odmítne."""
+    with pytest.raises(ValidationError):
+        RunManifest.model_validate(_fields(**{field: seed}))
+
+
 def test_extra_field_is_rejected() -> None:
     """Pole navíc je odmítnuto."""
     with pytest.raises(ValidationError):

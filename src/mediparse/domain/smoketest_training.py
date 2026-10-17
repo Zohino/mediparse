@@ -9,6 +9,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.identity import RowId
+from mediparse.domain.seed import Seed
 
 
 class TrainingConfig(BaseModel):
@@ -21,7 +22,7 @@ class TrainingConfig(BaseModel):
 
     row_id: RowId
     diagnosis: Diagnosis
-    seed: int
+    seed: Seed
     fold: Annotated[int, Field(ge=0)]
     regularization: Annotated[float, Field(gt=0.0)]
 

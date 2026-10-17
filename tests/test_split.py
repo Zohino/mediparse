@@ -252,8 +252,18 @@ def test_valid_split_config_is_parsed() -> None:
         {"seed": 0, "folds": 2, "fold": 0},
         {"seed": 0, "folds": "5"},
         {"folds": 2},
+        {"seed": -1, "folds": 2},
+        {"seed": 2**32, "folds": 2},
     ],
-    ids=["one-fold", "zero-folds", "extra-field", "text-folds", "no-seed"],
+    ids=[
+        "one-fold",
+        "zero-folds",
+        "extra-field",
+        "text-folds",
+        "no-seed",
+        "negative-seed",
+        "seed-over-generator-range",
+    ],
 )
 def test_invalid_split_config_is_rejected(body: dict[str, object]) -> None:
     """Méně než dva foldy, pole navíc, text místo čísla i chybějící seed config odmítnou."""

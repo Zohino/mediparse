@@ -190,6 +190,18 @@ def test_invalid_split_config_is_refused(
     assert split.name in caplog.text
 
 
+def test_split_seed_outside_generator_range_is_refused(tmp_path: Path) -> None:
+    """Záporný seed splitu krok odmítne a nic nevznikne, ne traceback z adaptéru."""
+    notes, config, split = _inputs(tmp_path)
+    split.write_text(json.dumps(split_config_json(seed=-1)), encoding="utf-8")
+    outputs = _Outputs.under(tmp_path / "out")
+
+    code = _run(notes, config, split, outputs)
+
+    assert code is ExitCode.REFUSED
+    assert outputs.existing() == []
+
+
 def _successful_run(root: Path, seed: int, name: str, split_seed: int = 0) -> _Outputs:
     notes, config, split = _inputs(root, seed=seed, split_seed=split_seed)
     outputs = _Outputs.under(root / name)

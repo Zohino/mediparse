@@ -50,6 +50,8 @@ def test_config_without_row_id_is_rejected() -> None:
     [
         {"folds": 2},
         {"fold": -1},
+        {"seed": -1},
+        {"seed": 2**32},
         {"regularization": 0.0},
         {"regularization": -1.0},
         {"diagnosis": "asthma"},

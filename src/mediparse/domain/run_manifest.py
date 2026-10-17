@@ -7,6 +7,7 @@ from pydantic import BaseModel, ConfigDict
 from mediparse.domain.digest import Sha256
 from mediparse.domain.environment import Environment
 from mediparse.domain.identity import RowId
+from mediparse.domain.seed import Seed
 
 
 class RunManifest(BaseModel):
@@ -21,8 +22,8 @@ class RunManifest(BaseModel):
     row_id: RowId
     dataset_sha256: Sha256
     config_sha256: Sha256
-    seed: int
-    split_seed: int
+    seed: Seed
+    split_seed: Seed
     split_sha256: Sha256
     model: str
     model_revision: str | None

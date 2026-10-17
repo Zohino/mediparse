@@ -11,6 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.seed import Seed
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -31,7 +32,7 @@ class SplitConfig(BaseModel):
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
-    seed: int
+    seed: Seed
     folds: Annotated[int, Field(ge=2)]
 
 
