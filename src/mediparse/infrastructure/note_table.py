@@ -3,14 +3,15 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Any, Final
 
 import pyarrow as pa
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.input_note import InputNote
+from mediparse.domain.input_note import InputNote, NoteSubjectMismatchError
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
+from mediparse.domain.note import InvalidNoteIdError
 from mediparse.infrastructure.parquet_file import read_table, write_table
 
 if TYPE_CHECKING:
@@ -47,22 +48,35 @@ class ParquetNoteTable:
         write_table(self.path, columns, SCHEMA)
 
     def read(self) -> tuple[InputNote, ...]:
-        """Přečte řádky tabulky v pořadí souboru; neznámý jazyk je InvalidInputError.
+        """Přečte řádky tabulky v pořadí souboru.
 
         Returns:
             Zprávy s labely z bool sloupců.
+
+        Raises:
+            InvalidInputError: Jazyk je mimo výčet nebo note_id nepatří ``subject_id``.
         """
         table = read_table(self.path, SCHEMA)
-        return tuple(
-            InputNote(
+        return tuple(self._note(row) for row in table.to_pylist())
+
+    def _note(self, row: dict[str, Any]) -> InputNote:
+        language = self._language(row["language"])
+        try:
+            return InputNote(
                 row["note_id"],
                 row["subject_id"],
-                self._language(row["language"]),
+                language,
                 row["text"],
                 frozenset(diagnosis for diagnosis in Diagnosis if row[diagnosis.value]),
             )
-            for row in table.to_pylist()
-        )
+        except (InvalidNoteIdError, NoteSubjectMismatchError) as error:
+            msg = (
+                f"Soubor {self.path} obsahuje zprávu, jejíž note_id nepatří "
+                f"jejímu subject_id: {type(error).__name__}."
+            )
+            # Text výjimky nese note_id, tedy subject_id pacienta MIMIC; nesmí do hlášky
+            # ani do logu, a proto jen její typ a ``from None``.
+            raise InvalidInputError(msg) from None
 
     def _language(self, value: str) -> Language:
         try:
