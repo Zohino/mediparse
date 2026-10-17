@@ -8,12 +8,9 @@ from typing import TYPE_CHECKING, Final
 import pytest
 
 from mediparse.domain.icd import DiagnosisCodes, IcdCode, IcdVersion
-from mediparse.infrastructure.diagnosis_codes_file import (
-    DIAGNOSIS_CANDIDATES_PATH,
-    load_diagnosis_codes,
-)
+from mediparse.infrastructure.diagnosis_codes_file import load_diagnosis_codes
 from tests.gems_support import GemRow, read_gem_rows
-from tests.support import REPOSITORY
+from tests.support import REPOSITORY, REPOSITORY_DIAGNOSIS_CANDIDATES
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -56,7 +53,7 @@ def codes() -> DiagnosisCodes:
     Returns:
         Předpony pětice.
     """
-    return load_diagnosis_codes(REPOSITORY / DIAGNOSIS_CANDIDATES_PATH)
+    return load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES)
 
 
 @pytest.fixture(scope="module")

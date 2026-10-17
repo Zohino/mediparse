@@ -4,7 +4,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime
-from typing import TYPE_CHECKING, Final
+from pathlib import Path
+from typing import Final
 
 from pydantic import BaseModel, ConfigDict, PositiveInt
 
@@ -21,13 +22,10 @@ from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.input_file import parse_file
 from mediparse.infrastructure.json_file import parse_lines
 
-if TYPE_CHECKING:
-    from pathlib import Path
-
 REQUESTS_NAME: Final = "requests.json"
 RUNS_NAME: Final = "runs.jsonl"
 OUTPUTS_NAME: Final = "outputs.jsonl"
-WORKDIR_PATH: Final = "build/translation"
+WORKDIR_PATH: Final = Path("build/translation")
 _LENIENT: Final = ConfigDict(frozen=True, extra="ignore", strict=True)
 
 

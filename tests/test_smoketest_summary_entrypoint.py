@@ -45,6 +45,23 @@ def _demo(root: Path) -> Path:
     return demo
 
 
+def _run(
+    root: Path,
+    out: io.StringIO,
+    *,
+    metrics: Path | None = None,
+    demo: Path | None = None,
+) -> ExitCode:
+    return smoketest_summary.run(
+        metrics=metrics or _metrics(root),
+        demo=demo or _demo(root),
+        corpus=root / "korpus",
+        outputs=root / "vystupy",
+        logs=root / "logy",
+        out=out,
+    )
+
+
 def _metrics(root: Path) -> Path:
     metrics = root / "metrics.parquet"
     ParquetMetricsTable(metrics).write([
@@ -72,7 +89,7 @@ def test_summary_lists_each_diagnosis_and_output_paths(tmp_path: Path) -> None:
     ])
     out = io.StringIO()
 
-    code = smoketest_summary.run(metrics=metrics, demo=_demo(tmp_path), out=out)
+    code = _run(tmp_path, out, metrics=metrics)
 
     lines = out.getvalue().splitlines()
     diabetes = next(line for line in lines if "diabetes" in line).split()
@@ -80,8 +97,10 @@ def test_summary_lists_each_diagnosis_and_output_paths(tmp_path: Path) -> None:
     assert code is ExitCode.OK
     assert diabetes == ["row", "diabetes", "40", "12", "0.833", "0.917", "0.750"]
     assert ckd == ["row", "ckd", "38", "9", "0.450", "0.700", "0.600"]
-    assert "build/smoketest/" in out.getvalue()
-    assert "logs/smoketest/" in out.getvalue()
+    assert f"Data, model, predikce, metriky a manifest: {tmp_path / 'vystupy'}/\n" in (
+        out.getvalue()
+    )
+    assert f"Logy kroků: {tmp_path / 'logy'}/\n" in out.getvalue()
 
 
 def test_missing_metrics_are_refused(
@@ -90,9 +109,7 @@ def test_missing_metrics_are_refused(
     """Chybějící metriky krok odmítnou bez tracebacku a nic se nevypíše."""
     out = io.StringIO()
 
-    code = smoketest_summary.run(
-        metrics=tmp_path / "none.parquet", demo=_demo(tmp_path), out=out
-    )
+    code = _run(tmp_path, out, metrics=tmp_path / "none.parquet")
 
     assert code is ExitCode.REFUSED
     assert not out.getvalue()
@@ -106,9 +123,7 @@ def test_summary_shows_demo_with_path_truth_prediction_and_score(
     """Pod metrikami je ukázka: cesta ke zprávě, diagnóza, pravda, predikce a skóre."""
     out = io.StringIO()
 
-    code = smoketest_summary.run(
-        metrics=_metrics(tmp_path), demo=_demo(tmp_path), out=out
-    )
+    code = _run(tmp_path, out)
 
     text = out.getvalue()
     lines = text.splitlines()
@@ -117,7 +132,7 @@ def test_summary_shows_demo_with_path_truth_prediction_and_score(
     assert code is ExitCode.OK
     assert text.index("ROC-AUC") < text.index("9000-DS-1")
     assert first == [
-        "resources/synthetic/en/9000-DS-1.txt",
+        str(tmp_path / "korpus" / "en" / "9000-DS-1.txt"),
         "diabetes",
         "ano",
         "ano",
@@ -133,9 +148,7 @@ def test_missing_demo_is_refused(
     """Chybějící demo.parquet krok odmítne bez tracebacku a nic se nevypíše."""
     out = io.StringIO()
 
-    code = smoketest_summary.run(
-        metrics=_metrics(tmp_path), demo=tmp_path / "none.parquet", out=out
-    )
+    code = _run(tmp_path, out, demo=tmp_path / "none.parquet")
 
     assert code is ExitCode.REFUSED
     assert not out.getvalue()

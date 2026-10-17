@@ -10,11 +10,8 @@ import pytest
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.icd import IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.diagnosis_codes_file import (
-    DIAGNOSIS_CANDIDATES_PATH,
-    load_diagnosis_codes,
-)
-from tests.support import REPOSITORY
+from mediparse.infrastructure.diagnosis_codes_file import load_diagnosis_codes
+from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -82,6 +79,6 @@ def test_invalid_json_is_invalid_input(tmp_path: Path) -> None:
 
 def test_repository_config_loads() -> None:
     """Config kandidátů v repu se načte."""
-    codes = load_diagnosis_codes(REPOSITORY / DIAGNOSIS_CANDIDATES_PATH)
+    codes = load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES)
 
     assert set(codes.prefixes) == set(Diagnosis)

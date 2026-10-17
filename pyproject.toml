@@ -282,6 +282,10 @@ ignore = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
 
+"src/mediparse/entrypoints/smoketest_summary.py" = [
+    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
+]
+
 [tool.ruff.lint.flake8-type-checking]
 runtime-evaluated-base-classes = ["pydantic.BaseModel"]  # pydantic čte anotace za běhu
 
@@ -378,9 +382,7 @@ ruff-statistics = { cmd = "ruff check --statistics --no-fix", description = "Sta
 smoketest = { cmd = "./smoketest.sh", description = "Smoketest v kontejneru; stejný skript, který spouští zkoušející" }
 count-lines = { cmd = "bash scripts/count-lines.sh", description = "Statistiky kódu pomocí tokei jako varování proti overengineeringu" }
 build = { cmd = "bash scripts/build.sh", description = "Build kontejnerového image přes podman, nebo docker, s revizí zdroje pro run manifest" }
-provenance-translation = { cmd = "mediparse-translation-provenance --workdir \"{{ workdir }}\"", args = [
-    { arg = "workdir", default = "build/translation" },
-], description = "Provenance českého překladu auditovaného korpusu; ve worktree absolutní cesta hlavního checkoutu" }
+provenance-translation = { cmd = "mediparse-translation-provenance", description = "Provenance českého překladu auditovaného korpusu; ve worktree s --workdir <absolutní cesta hlavního checkoutu>" }
 audit-corpus = { cmd = "bash scripts/audit-corpus.sh \"{{ discharge }}\" \"{{ radiology }}\" \"{{ report }}\"", args = [
     "discharge",
     "radiology",
@@ -389,10 +391,7 @@ audit-corpus = { cmd = "bash scripts/audit-corpus.sh \"{{ discharge }}\" \"{{ ra
 provenance-corpus = { cmd = "bash scripts/provenance-corpus.sh \"{{ model }}\"", args = [
     "model",
 ], description = "Provenance auditovaného korpusu; commit specifikace z historie docs/synthetic-corpus.md" }
-synthetic-parameters = { cmd = "mediparse-synthetic-parameters --export \"{{ export }}\" --config \"{{ config }}\"", args = [
-    { arg = "export", default = "results/eda/8-mentions/parametry-syntetiky.json" },
-    { arg = "config", default = "config/synthetic_plan.json" },
-], description = "Převezmi export sešitu 8 do config/synthetic_plan.json; jen uživatel ve vlastním terminálu, mimo Claude Code" }
+synthetic-parameters = { cmd = "mediparse-synthetic-parameters", description = "Převezmi export sešitu 8 do config/synthetic_plan.json; jen uživatel ve vlastním terminálu, mimo Claude Code" }
 verify-mimic = { cmd = "bash scripts/verify-mimic.sh \"{{ dir }}\"", args = [
     { arg = "dir", default = "resources/mimic" },
 ], description = "Ověř, že stažené tabulky MIMIC jsou všechny na disku a sedí s otisky v configu" }

@@ -29,16 +29,17 @@ from mediparse.entrypoints.cli import (
     configure_logging,
     refusing_invalid_input,
 )
+from mediparse.entrypoints.corpus_cli import (
+    add_corpus_option,
+    add_sampler_config_option,
+    add_tables_option,
+)
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.audit_pin import load_audit_pin
 from mediparse.infrastructure.audit_workspace import LocalWorkspace
 from mediparse.infrastructure.mimic_reference import MimicReference
-from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.overlap_report import OverlapReportFile
-from mediparse.infrastructure.sampler_config import (
-    SAMPLER_CONFIG_PATH,
-)
-from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirectory
+from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -111,9 +112,7 @@ def _parser() -> argparse.ArgumentParser:
         prog="mediparse-corpus-audit",
         description="Audit syntetického korpusu proti volnému textu MIMIC-IV-Note.",
     )
-    parser.add_argument(
-        "--corpus", type=Path, default=CORPUS_ROOT, help="kořen syntetického korpusu"
-    )
+    add_corpus_option(parser)
     parser.add_argument(
         "--reference",
         type=Path,
@@ -121,18 +120,8 @@ def _parser() -> argparse.ArgumentParser:
         required=True,
         help="discharge.csv.gz nebo radiology.csv.gz z MIMIC-IV-Note; opakovatelný",
     )
-    parser.add_argument(
-        "--tables",
-        type=Path,
-        default=TABLES_PATH,
-        help="config tabulek MIMIC, z něhož se bere reference a její otisky",
-    )
-    parser.add_argument(
-        "--config",
-        type=Path,
-        default=SAMPLER_CONFIG_PATH,
-        help="konfigurace vzorkovače se štítky struktury zprávy",
-    )
+    add_tables_option(parser)
+    add_sampler_config_option(parser)
     parser.add_argument(
         "--report",
         type=Path,

@@ -36,32 +36,26 @@ def main() -> ExitCode:
         Návratový kód.
     """
     configure_logging()
-    return _command(sys.argv[1:])
-
-
-def _command(argv: Sequence[str]) -> ExitCode:
-    args = _parser().parse_args(argv)
-    return run(manifest=args.manifest, out=args.out, prefix=args.prefix, rows=args.rows)
+    return run(sys.argv[1:])
 
 
 @refusing_invalid_input
-def run(
-    *, manifest: Path, out: Path, prefix: str, rows: int = DEFAULT_ROWS
-) -> ExitCode:
+def run(argv: Sequence[str]) -> ExitCode:
     """Zapíše syntetický parquet pro každou tabulku manifestu a značku syntetiky.
 
     Returns:
         OK po zápisu; REFUSED pro chybějící nebo neplatný manifest.
     """
-    shapes = read_manifest(manifest)
+    args = _parser().parse_args(argv)
+    shapes = read_manifest(args.manifest)
     for table, shape in shapes.items():
         write_string_table(
-            out / f"{table}.parquet",
+            args.out / f"{table}.parquet",
             shape.columns,
-            synthetic_rows(table, shape, prefix, rows),
+            synthetic_rows(table, shape, args.prefix, args.rows),
         )
-    write_marker(out, SyntheticMarker(prefix=prefix, rows=rows))
-    logger.info("%d syntetických tabulek v %s", len(shapes), out)
+    write_marker(args.out, SyntheticMarker(prefix=args.prefix, rows=args.rows))
+    logger.info("%d syntetických tabulek v %s", len(shapes), args.out)
     return ExitCode.OK
 
 

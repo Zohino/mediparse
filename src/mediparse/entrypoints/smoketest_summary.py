@@ -1,8 +1,8 @@
 """Vstupní bod pravidla Snakemake ``smoketest``: souhrn metrik a ukázky predikce na výstup.
 
-Cesty k metrikám a ukázce jsou vstupy pravidla; skript workflow jen rozbalí objekt
-``snakemake`` a zavolá ``main``. Výpis jde na stdout, aby ho zkoušející viděl
-na konci běhu.
+Cesty k metrikám a ukázce jsou vstupy pravidla, kořen korpusu a adresáře výstupů
+a logů jeho parametry; skript workflow jen rozbalí objekt ``snakemake`` a zavolá
+``main``. Výpis jde na stdout, aby ho zkoušející viděl na konci běhu.
 """
 
 from __future__ import annotations
@@ -10,10 +10,12 @@ from __future__ import annotations
 import sys
 from typing import TYPE_CHECKING, Final, TextIO
 
+from mediparse.domain.language import Language
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.metrics_table import ParquetMetricsTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
+from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -21,19 +23,26 @@ if TYPE_CHECKING:
 HEADER: Final = ("řádek matice", "diagnóza", "zprávy v testu", "pozitivní")
 SCORES: Final = ("F1", "ROC-AUC", "PR-AUC")
 DEMO_HEADER: Final = ("zpráva", "diagnóza", "pravda", "predikce", "skóre")
-CORPUS: Final = "resources/synthetic/en"
 YES_NO: Final = {True: "ano", False: "ne"}
-OUTPUTS: Final = ("build/smoketest/", "logs/smoketest/")
 
 
-def main(*, metrics: Path, demo: Path) -> ExitCode:
+def main(
+    *, metrics: Path, demo: Path, corpus: Path, outputs: Path, logs: Path
+) -> ExitCode:
     """Krok pravidla: souhrn na stdout, diagnostika na stderr.
 
     Returns:
         Návratový kód kroku.
     """
     configure_logging()
-    return run(metrics=metrics, demo=demo, out=sys.stdout)
+    return run(
+        metrics=metrics,
+        demo=demo,
+        corpus=corpus,
+        outputs=outputs,
+        logs=logs,
+        out=sys.stdout,
+    )
 
 
 def _write_table(out: TextIO, table: list[tuple[str, ...]]) -> None:
@@ -44,7 +53,9 @@ def _write_table(out: TextIO, table: list[tuple[str, ...]]) -> None:
 
 
 @refusing_invalid_input
-def run(*, metrics: Path, demo: Path, out: TextIO) -> ExitCode:
+def run(
+    *, metrics: Path, demo: Path, corpus: Path, outputs: Path, logs: Path, out: TextIO
+) -> ExitCode:
     """Přečte metriky a ukázku predikce a vypíše souhrn s cestami k výstupům.
 
     Returns:
@@ -62,9 +73,10 @@ def run(*, metrics: Path, demo: Path, out: TextIO) -> ExitCode:
         )
         for item in ParquetMetricsTable(metrics).read()
     ]
+    notes = CorpusDirectory(corpus)
     examples = [
         (
-            f"{CORPUS}/{item.note_id}.txt",
+            str(notes.note_path(Language.EN, item.note_id)),
             item.diagnosis.value,
             YES_NO[item.truth],
             YES_NO[item.predicted],
@@ -76,6 +88,6 @@ def run(*, metrics: Path, demo: Path, out: TextIO) -> ExitCode:
     out.write("\nUkázka predikce uloženého modelu na odložených zprávách")
     out.write(" (kladné skóre znamená ano):\n")
     _write_table(out, [DEMO_HEADER, *examples])
-    out.write(f"\nData, model, predikce, metriky a manifest: {OUTPUTS[0]}\n")
-    out.write(f"Logy kroků: {OUTPUTS[1]}\n")
+    out.write(f"\nData, model, predikce, metriky a manifest: {outputs}/\n")
+    out.write(f"Logy kroků: {logs}/\n")
     return ExitCode.OK

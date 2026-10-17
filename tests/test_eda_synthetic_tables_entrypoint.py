@@ -7,13 +7,13 @@ from typing import TYPE_CHECKING, Final
 
 import pyarrow.parquet as pq
 
-from mediparse.entrypoints.eda_synthetic_tables import run
+from mediparse.entrypoints.eda_synthetic_tables import DEFAULT_ROWS, run
 from mediparse.entrypoints.exit_code import ExitCode
 
 if TYPE_CHECKING:
     from pathlib import Path
 
-ROWS: Final = 12
+ROWS: Final = 3
 MANIFEST = {
     "tables": [
         {"file": "discharge.csv.gz", "bytes": 1, "records": 3, "columns": ["a", "b"]},
@@ -28,11 +28,18 @@ def _manifest(root: Path) -> Path:
     return path
 
 
+def _arguments(manifest: Path, out: Path, *, rows: int | None) -> list[str]:
+    arguments = [f"--manifest={manifest}", f"--out={out}", "--prefix=canary"]
+    if rows is not None:
+        arguments.append(f"--rows={rows}")
+    return arguments
+
+
 def test_writes_one_all_string_parquet_per_manifest_table(tmp_path: Path) -> None:
     """Každá tabulka manifestu dostane parquet se samými řetězci a požadovaným počtem řádků."""
     out = tmp_path / "synthetic" / "tables"
 
-    code = run(manifest=_manifest(tmp_path), out=out, prefix="canary", rows=ROWS)
+    code = run(_arguments(_manifest(tmp_path), out, rows=ROWS))
 
     assert code is ExitCode.OK
     discharge = pq.read_table(out / "discharge.parquet")
@@ -46,7 +53,7 @@ def test_writes_marker_with_prefix_and_rows(tmp_path: Path) -> None:
     """Značka synthetic.json nese prefix a počet řádků."""
     out = tmp_path / "tables"
 
-    run(manifest=_manifest(tmp_path), out=out, prefix="canary", rows=ROWS)
+    run(_arguments(_manifest(tmp_path), out, rows=ROWS))
 
     marker = json.loads((out / "synthetic.json").read_text(encoding="utf-8"))
     assert marker == {"prefix": "canary", "rows": ROWS}
@@ -56,7 +63,16 @@ def test_missing_manifest_is_refused(tmp_path: Path) -> None:
     """Chybějící manifest ukončí krok kódem REFUSED a nic nezapíše."""
     out = tmp_path / "tables"
 
-    code = run(manifest=tmp_path / "none.json", out=out, prefix="canary", rows=ROWS)
+    code = run(_arguments(tmp_path / "none.json", out, rows=ROWS))
 
     assert code is ExitCode.REFUSED
     assert not out.exists()
+
+
+def test_rows_default_when_not_given(tmp_path: Path) -> None:
+    """Bez ``--rows`` se zapíše ``DEFAULT_ROWS`` řádků."""
+    out = tmp_path / "tables"
+
+    run(_arguments(_manifest(tmp_path), out, rows=None))
+
+    assert pq.read_table(out / "admissions.parquet").num_rows == DEFAULT_ROWS

@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from pathlib import Path
-from typing import Any, Final
+from typing import TYPE_CHECKING, Any
 
 from pydantic import BaseModel, ConfigDict
 
@@ -12,7 +11,8 @@ from mediparse.domain.icd import DiagnosisCodes, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.input_file import parse_file
 
-DIAGNOSIS_CANDIDATES_PATH: Final = Path("config/diagnosis_candidates.json")
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 class _Prefixes(BaseModel):

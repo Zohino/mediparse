@@ -8,16 +8,12 @@ Seed, otisk configu vzorkovače a otisk zadání všech zpráv bere ze souborů 
 from __future__ import annotations
 
 import argparse
-import logging
 import sys
 from datetime import date
-from pathlib import Path
-from typing import TYPE_CHECKING, assert_never
+from typing import TYPE_CHECKING
 
 from mediparse.application.corpus_provenance import (
     CorpusProvenance,
-    ProvenanceRefused,
-    ProvenanceWritten,
 )
 from mediparse.domain.corpus_provenance import (
     Generation,
@@ -31,29 +27,32 @@ from mediparse.entrypoints.cli import (
     configure_logging,
     refusing_invalid_input,
 )
-from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.entrypoints.corpus_cli import (
+    add_corpus_option,
+    add_plans_option,
+    add_sampler_config_option,
+    add_tables_option,
+    add_template_option,
+)
+from mediparse.entrypoints.provenance_exit import provenance_exit_code
 from mediparse.infrastructure.audit_pin import load_audit_pin
 from mediparse.infrastructure.file_digest import file_sha256
-from mediparse.infrastructure.mimic_tables import TABLES_PATH
-from mediparse.infrastructure.plans_file import PLANS_PATH, PlansFile
+from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.sampler_config import (
-    SAMPLER_CONFIG_PATH,
     load_sampler_config,
 )
 from mediparse.infrastructure.synthetic_corpus import (
-    CORPUS_ROOT,
     PROVENANCE_NAME,
     CorpusDirectory,
 )
 from mediparse.infrastructure.verbalization_template import (
-    VERBALIZATION_TEMPLATE_PATH,
     load_verbalization_template,
 )
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-logger = logging.getLogger(__name__)
+    from mediparse.entrypoints.exit_code import ExitCode
 
 
 def main() -> ExitCode:
@@ -93,15 +92,9 @@ def run(argv: Sequence[str]) -> ExitCode:
         generation,
         load_audit_pin(args.tables, args.config),
     )
-    match outcome:
-        case ProvenanceWritten():
-            logger.info("Provenance zapsána do %s.", args.corpus / PROVENANCE_NAME)
-            return ExitCode.OK
-        case ProvenanceRefused(reason=reason):
-            logger.error("%s", reason)
-            return ExitCode.REFUSED
-        case _:
-            assert_never(outcome)
+    return provenance_exit_code(
+        outcome, f"Provenance zapsána do {args.corpus / PROVENANCE_NAME}."
+    )
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -133,28 +126,9 @@ def _parser() -> argparse.ArgumentParser:
         required=True,
         help="commit docs/synthetic-corpus.md, podle kterého korpus vznikl",
     )
-    parser.add_argument(
-        "--corpus", type=Path, default=CORPUS_ROOT, help="kořen syntetického korpusu"
-    )
-    parser.add_argument(
-        "--config",
-        type=Path,
-        default=SAMPLER_CONFIG_PATH,
-        help="konfigurace vzorkovače",
-    )
-    parser.add_argument(
-        "--plans", type=Path, default=PLANS_PATH, help="soubor plánů JSON Lines"
-    )
-    parser.add_argument(
-        "--template",
-        type=Path,
-        default=VERBALIZATION_TEMPLATE_PATH,
-        help="šablona instrukcí verbalizace",
-    )
-    parser.add_argument(
-        "--tables",
-        type=Path,
-        default=TABLES_PATH,
-        help="config tabulek MIMIC s oficiálními otisky",
-    )
+    add_corpus_option(parser)
+    add_sampler_config_option(parser)
+    add_plans_option(parser)
+    add_template_option(parser)
+    add_tables_option(parser)
     return parser

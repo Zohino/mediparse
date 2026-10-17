@@ -288,7 +288,7 @@ dtype, okno, dekódování, otisk `requests.json`, použité běhy překladu
 provenance bez něj se načte. Vazba na `cs/` pak porovnává texty se složením výstupů
 po obnově značek. Použité jsou jen běhy, z nichž pochází výstup pro klíč
 aktuálních požadavků. Zapisuje ji po auditu `mediparse-translation-provenance`
-(`pixi run provenance-translation <pracovní adresář>`); generování z provenance ponechá
+(`pixi run provenance-translation --workdir <pracovní adresář>`); generování z provenance ponechá
 a odmítne zapsat, když originály, množina zpráv nebo české texty neodpovídají
 pracovnímu adresáři překladu. Brána odmítne korpus s neprázdným `cs/` a provenance
 bez `translation`. Přegenerování anglické provenance část `translation` nezachová,
