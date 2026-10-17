@@ -10,11 +10,11 @@ from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
 from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS, Diagnosis, PerDiagnosis
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.probability import Probability
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Collection, Mapping, Sequence
 
-Probability = Annotated[float, Field(ge=0.0, le=1.0)]
 type LabelSet = frozenset[Diagnosis]
 
 _SYMMETRY_TOLERANCE: Final = 1e-3

@@ -13,13 +13,13 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import (
     LabelModel,
     LabelSet,
-    Probability,
     acute_given_chronic,
     label_shares,
     max_entropy_joint,
     prevalence_outliers,
 )
 from mediparse.domain.note import note_id
+from mediparse.domain.probability import Probability
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence

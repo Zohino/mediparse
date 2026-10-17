@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import StrEnum
 from math import floor, log
-from typing import TYPE_CHECKING, Annotated, Final, Self
+from typing import TYPE_CHECKING, Annotated, Self
 
 from pydantic import (
     BaseModel,
@@ -16,7 +16,7 @@ from pydantic import (
     model_validator,
 )
 
-from mediparse.domain.labels import Probability
+from mediparse.domain.probability import Probability, sums_to_one
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -24,8 +24,6 @@ if TYPE_CHECKING:
 
     from mediparse.domain.identity import SubjectId
     from mediparse.domain.synthetic_patients import SyntheticNote
-
-_SHARE_TOLERANCE: Final = 1e-9
 
 
 class Sex(StrEnum):
@@ -198,9 +196,9 @@ class StructureModel(BaseModel):
 
     @model_validator(mode="after")
     def _narrative_shares_sum_to_one(self) -> Self:
-        total = sum(section.narrative_share for section in self.sections)
-        if abs(total - 1.0) > _SHARE_TOLERANCE:
-            msg = f"Podíly narativních sekcí musí dávat 1, dávají {total}."
+        shares = [section.narrative_share for section in self.sections]
+        if not sums_to_one(shares):
+            msg = f"Podíly narativních sekcí musí dávat 1, dávají {sum(shares)}."
             raise ValueError(msg)
         return self
 

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from enum import StrEnum
-from typing import TYPE_CHECKING, Annotated, Final, Self
+from typing import TYPE_CHECKING, Annotated, Self
 
 from pydantic import (
     BaseModel,
@@ -15,7 +15,7 @@ from pydantic import (
 )
 
 from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
-from mediparse.domain.labels import Probability
+from mediparse.domain.probability import Probability, sums_to_one
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -23,8 +23,6 @@ if TYPE_CHECKING:
 
     from mediparse.domain.note_structure import NoteStructure
     from mediparse.domain.synthetic_patients import SyntheticNote
-
-_WEIGHT_TOLERANCE: Final = 1e-9
 
 
 class MentionStatus(StrEnum):
@@ -76,7 +74,7 @@ class MentionModel(BaseModel):
         if MentionStatus.AFFIRMED in self.negative_statuses:
             msg = "Zmínka u negativního labelu nemůže být potvrzená s kódem."
             raise ValueError(msg)
-        if abs(sum(self.negative_statuses.values()) - 1.0) > _WEIGHT_TOLERANCE:
+        if not sums_to_one(self.negative_statuses.values()):
             msg = "Pravděpodobnosti statusů u negativního labelu musí dávat 1."
             raise ValueError(msg)
         return self
