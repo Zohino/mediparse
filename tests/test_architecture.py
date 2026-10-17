@@ -76,7 +76,7 @@ def _entry_violations(root: Path) -> list[str]:
     """Moduly, které dělají z balíčku vstup přes `python -m`: `__main__.py` nebo guard.
 
     Returns:
-        Jména porušujících souborů; prázdný seznam znamená, že pravidlo platí.
+        Cesty porušujících souborů relativně ke kořeni; prázdný seznam znamená, že pravidlo platí.
     """
     return [
         module.relative_to(root).as_posix()
