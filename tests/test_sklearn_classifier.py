@@ -8,7 +8,6 @@ import pytest
 import skops.io as sio
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.evaluation import Classification
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.sklearn_classifier import (
     GroupedHoldout,
@@ -83,20 +82,6 @@ def test_model_file_round_trip(tmp_path: Path) -> None:
     loaded = model_file.load()
 
     assert loaded.classify(texts) == classifier.classify(texts)
-
-
-def test_model_file_rejects_foreign_classifier(tmp_path: Path) -> None:
-    """Uložit lze jen klasifikátor z tohoto adaptéru."""
-
-    class Foreign:
-        @staticmethod
-        def classify(texts: list[str]) -> tuple[Classification, ...]:
-            return tuple(
-                Classification(predicted=bool(text), score=0.0) for text in texts
-            )
-
-    with pytest.raises(TypeError):
-        SkopsModelFile(tmp_path / "model.skops").save(Foreign())
 
 
 def test_model_file_missing_is_invalid_input(tmp_path: Path) -> None:

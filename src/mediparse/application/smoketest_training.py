@@ -30,28 +30,32 @@ class HoldoutSplitter(Protocol):
         """Rozdělí zprávy podle labelů a skupin pacientů."""
 
 
-class ClassifierTrainer(Protocol):
+class ClassifierTrainer[C: TextClassifier](Protocol):
     """Trénink klasifikátoru textu."""
 
-    def fit(self, texts: Sequence[str], labels: Sequence[bool]) -> TextClassifier:
+    def fit(self, texts: Sequence[str], labels: Sequence[bool]) -> C:
         """Natrénuje klasifikátor na textech a labelech."""
 
 
-class ModelStore(Protocol):
-    """Úložiště natrénovaného modelu."""
+class ModelStore[C: TextClassifier](Protocol):
+    """Úložiště modelu, které umí uložit klasifikátor typu ``C``."""
 
-    def save(self, classifier: TextClassifier) -> None:
+    def save(self, classifier: C) -> None:
         """Uloží klasifikátor."""
 
 
 @dataclass(frozen=True)
-class SmoketestTraining:
-    """Trénink na jedné diagnóze se zápisem predikcí odložených zpráv."""
+class SmoketestTraining[C: TextClassifier]:
+    """Trénink na jedné diagnóze se zápisem predikcí odložených zpráv.
+
+    Trenér a úložiště sdílejí typ klasifikátoru, takže typová kontrola odmítne
+    úložiště, které by model z trenéra neumělo uložit.
+    """
 
     table: InputTable
     splitter: HoldoutSplitter
-    trainer: ClassifierTrainer
-    store: ModelStore
+    trainer: ClassifierTrainer[C]
+    store: ModelStore[C]
     predictions: PredictionSink
 
     def run(self, config: TrainingConfig) -> TrainingReport:
