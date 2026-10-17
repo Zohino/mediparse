@@ -37,19 +37,33 @@ def test_empty_translation_is_reported() -> None:
     assert "cs/n1" in reason
 
 
+def _bounds() -> tuple[int, int]:
+    """Délky překladu přesně na mezích poměru.
+
+    Returns:
+        Dolní a horní mez. Necelý součin shodí test dřív, než by se mez
+        zaokrouhlením posunula vedle.
+    """
+    low, high = (len(TEXT) * ratio for ratio in LENGTH_RATIO)
+    assert low.is_integer()
+    assert high.is_integer()
+    return int(low), int(high)
+
+
 def test_length_ratio_outside_bounds_is_reported() -> None:
     """Překlad kratší nebo delší než meze poměru znaků se hlásí."""
-    low, high = LENGTH_RATIO
+    low, high = _bounds()
 
-    assert translation_violations({"n1": TEXT}, {"n1": "a" * 7})
-    assert translation_violations({"n1": TEXT}, {"n1": "a" * 17})
-    assert low < high
+    assert translation_violations({"n1": TEXT}, {"n1": "a" * (low - 1)})
+    assert translation_violations({"n1": TEXT}, {"n1": "a" * (high + 1)})
 
 
 def test_length_ratio_on_bounds_passes() -> None:
     """Poměr přesně na mezi je v pořádku."""
-    assert translation_violations({"n1": TEXT}, {"n1": "a" * 8}) == ()
-    assert translation_violations({"n1": TEXT}, {"n1": "a" * 16}) == ()
+    low, high = _bounds()
+
+    assert translation_violations({"n1": TEXT}, {"n1": "a" * low}) == ()
+    assert translation_violations({"n1": TEXT}, {"n1": "a" * high}) == ()
 
 
 def test_mismatches_are_sorted_and_only_differing() -> None:

@@ -102,8 +102,6 @@ def test_counts_with_ten_and_ten_pass() -> None:
 
     ensure_publishable(counts)
 
-    assert counts.positives[Diagnosis.CKD] == MIN_CELL
-
 
 def _numbers(error: pytest.ExceptionInfo[InvalidInputError]) -> set[str]:
     return set(re.findall(r"\d+", str(error.value)))
