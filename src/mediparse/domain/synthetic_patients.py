@@ -1,14 +1,11 @@
-"""Syntetičtí pacienti a jejich zprávy: kolik zpráv pacient má a jaké labely nesou."""
+"""Losování pacientů syntetického korpusu: kolik zpráv pacient má a jaké labely nesou."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Annotated, Final, Self
-
-from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
+from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS
-from mediparse.domain.identity import SubjectId
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import (
     LabelModel,
@@ -19,44 +16,17 @@ from mediparse.domain.labels import (
     prevalence_outliers,
 )
 from mediparse.domain.note import note_id
-from mediparse.domain.probability import Probability
+from mediparse.domain.synthetic_note import SyntheticNote
+from mediparse.domain.synthetic_plan import MIN_MULTIPLE_NOTES, PatientModel
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
     from random import Random
 
+    from mediparse.domain.identity import SubjectId
 
-_MIN_MULTIPLE: Final = 2
+
 _BISECTION_STEPS: Final = 100
-
-
-class PatientModel(BaseModel):
-    """Velikost korpusu a rozdělení počtu zpráv na pacienta."""
-
-    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
-
-    notes: PositiveInt
-    first_subject_id: SubjectId
-    single_note_probability: Probability
-    max_notes: Annotated[int, Field(ge=_MIN_MULTIPLE)]
-    mean_notes_when_multiple: Annotated[float, Field(gt=_MIN_MULTIPLE)]
-    max_attempts: PositiveInt
-
-    @model_validator(mode="after")
-    def _mean_is_reachable(self) -> Self:
-        if self.mean_notes_when_multiple >= (_MIN_MULTIPLE + self.max_notes) / 2:
-            msg = "Průměr musí ležet pod středem rozsahu, jinak ho klesající rozdělení nedosáhne."
-            raise ValueError(msg)
-        return self
-
-
-@dataclass(frozen=True)
-class SyntheticNote:
-    """Zpráva syntetického pacienta s labely, které nese."""
-
-    note_id: str
-    subject_id: SubjectId
-    labels: LabelSet
 
 
 @dataclass(frozen=True)
@@ -165,5 +135,5 @@ def _mean_count(ratio: float, max_notes: int) -> float:
 
 
 def _count_weights(ratio: float, max_notes: int) -> tuple[range, list[float]]:
-    counts = range(_MIN_MULTIPLE, max_notes + 1)
-    return counts, [ratio ** (k - _MIN_MULTIPLE) for k in counts]
+    counts = range(MIN_MULTIPLE_NOTES, max_notes + 1)
+    return counts, [ratio ** (k - MIN_MULTIPLE_NOTES) for k in counts]

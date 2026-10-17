@@ -206,6 +206,21 @@ forbidden_modules = [
 ]
 broken_contract_guidance = "Diagnóza je v domain.diagnosis; labels je model labelů syntetiky (prevalence, IPF)."
 
+[[tool.importlinter.contracts]]
+name = "Typy plánu syntetiky nestojí na losování pacientů"
+type = "forbidden"
+source_modules = [
+    "mediparse.domain.note_structure",
+    "mediparse.domain.mentions",
+    "mediparse.domain.note_plan",
+    "mediparse.domain.synthetic_plan",
+    "mediparse.domain.synthetic_note",
+]
+forbidden_modules = [
+    "mediparse.domain.synthetic_patients",
+]
+broken_contract_guidance = "SyntheticNote je v domain.synthetic_note a PatientModel v domain.synthetic_plan; synthetic_patients je jen algoritmus losování."
+
 [tool.ruff]
 fix = true
 preview = true

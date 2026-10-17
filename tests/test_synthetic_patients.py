@@ -8,22 +8,23 @@ from random import Random
 from typing import TYPE_CHECKING
 
 import pytest
+from pydantic import ValidationError
 
 from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS, Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.labels import LabelModel
 from mediparse.domain.note import subject_of
 from mediparse.domain.synthetic_patients import (
-    PatientModel,
     PrevalenceNotReachedError,
     continuation_ratio,
     sample_notes,
 )
+from mediparse.domain.synthetic_plan import MIN_MULTIPLE_NOTES, PatientModel
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.domain.synthetic_patients import SyntheticNote
+    from mediparse.domain.synthetic_note import SyntheticNote
 
 PREVALENCE = {
     Diagnosis.DIABETES: 0.27,
@@ -69,6 +70,10 @@ def _patients(notes: int = CORPUS, attempts: int = 1000) -> PatientModel:
         mean_notes_when_multiple=MEAN_MULTIPLE,
         max_attempts=attempts,
     )
+
+
+def _patients_with(**changes: float) -> PatientModel:
+    return PatientModel.model_validate({**_patients().model_dump(), **changes})
 
 
 def _sample(
@@ -204,3 +209,23 @@ def test_structural_zero_is_sampled_without_failure() -> None:
         (Diagnosis.DIABETES in note.labels) == (Diagnosis.CKD in note.labels)
         for note in notes
     )
+
+
+def test_mean_at_midpoint_of_range_is_rejected() -> None:
+    """Průměr na středu rozsahu je nedosažitelný pro klesající rozdělení."""
+    midpoint = (MIN_MULTIPLE_NOTES + MAX_NOTES) / 2
+
+    with pytest.raises(ValidationError, match="Průměr musí ležet pod středem rozsahu"):
+        _patients_with(mean_notes_when_multiple=midpoint)
+
+
+def test_max_notes_below_multiple_minimum_is_rejected() -> None:
+    """Vícezprávový pacient má aspoň MIN_MULTIPLE_NOTES zpráv, strop nesmí být nižší."""
+    with pytest.raises(ValidationError, match="max_notes"):
+        _patients_with(max_notes=MIN_MULTIPLE_NOTES - 1)
+
+
+def test_mean_not_above_multiple_minimum_is_rejected() -> None:
+    """Průměr rovný minimu by znamenal rozdělení bez jediného většího počtu."""
+    with pytest.raises(ValidationError, match="mean_notes_when_multiple"):
+        _patients_with(mean_notes_when_multiple=MIN_MULTIPLE_NOTES)

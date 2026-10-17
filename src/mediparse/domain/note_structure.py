@@ -23,7 +23,7 @@ if TYPE_CHECKING:
     from random import Random
 
     from mediparse.domain.identity import SubjectId
-    from mediparse.domain.synthetic_patients import SyntheticNote
+    from mediparse.domain.synthetic_note import SyntheticNote
 
 
 class Sex(StrEnum):

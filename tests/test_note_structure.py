@@ -20,7 +20,7 @@ from mediparse.domain.note_structure import (
     Subheading,
     sample_structure,
 )
-from mediparse.domain.synthetic_patients import SyntheticNote
+from mediparse.domain.synthetic_note import SyntheticNote
 
 SEED = 20260929
 LARGE = 40000
