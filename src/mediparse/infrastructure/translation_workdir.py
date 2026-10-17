@@ -19,9 +19,9 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.translation_consistency import TranslatedNote
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.input_file import parse_file
+from mediparse.infrastructure.json_file import parse_lines
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
     from pathlib import Path
 
 REQUESTS_NAME: Final = "requests.json"
@@ -129,13 +129,13 @@ class TranslationWorkdir:
         return parse_file(self.root / REQUESTS_NAME, _Plan.model_validate_json)
 
     def _runs(self) -> dict[datetime, TranslationRun]:
-        lines = parse_file(self.root / RUNS_NAME, _lines(_RunLine))
+        lines = parse_file(self.root / RUNS_NAME, parse_lines(_RunLine))
         return {line.started: TranslationRun(**line.model_dump()) for line in lines}
 
     def _latest(self, plan: _Plan) -> dict[str, _Output]:
         outputs = {
             output.key: output
-            for output in parse_file(self.root / OUTPUTS_NAME, _lines(_Output))
+            for output in parse_file(self.root / OUTPUTS_NAME, parse_lines(_Output))
         }
         missing = [
             request.key for request in plan.requests if request.key not in outputs
@@ -144,14 +144,3 @@ class TranslationWorkdir:
             msg = f"Chybí výstup překladu pro klíče: {', '.join(missing)}."
             raise InvalidInputError(msg)
         return {request.key: outputs[request.key] for request in plan.requests}
-
-
-def _lines[T: BaseModel](model: type[T]) -> Callable[[str], tuple[T, ...]]:
-    def parse(content: str) -> tuple[T, ...]:
-        return tuple(
-            model.model_validate_json(line)
-            for line in content.splitlines()
-            if line.strip()
-        )
-
-    return parse

@@ -99,3 +99,17 @@ def test_repository_labels_follow_plans(
     ] == [
         (plan.note_id, plan.subject_id, set(plan.labels)) for plan in repository_plans
     ]
+
+
+def test_blank_lines_between_and_after_plans_are_skipped(
+    repository_plans: tuple[NotePlan, ...], tmp_path: Path
+) -> None:
+    """Prázdný řádek uprostřed i na konci souboru nenese záznam a plány se načtou celé."""
+    path = tmp_path / "plans.jsonl"
+    first, second = repository_plans[:2]
+    path.write_text(
+        f"{first.model_dump_json()}\n\n{second.model_dump_json()}\n\n",
+        encoding="utf-8",
+    )
+
+    assert PlansFile(path).load() == (first, second)
