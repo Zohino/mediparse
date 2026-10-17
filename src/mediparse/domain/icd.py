@@ -52,16 +52,23 @@ class DiagnosisCodes(BaseModel):
 
     @model_validator(mode="after")
     def _valid_prefixes(self) -> Self:
+        self._check_nonempty()
+        self._check_normalized()
+        self._check_disjoint()
+        return self
+
+    def _check_nonempty(self) -> None:
         for diagnosis, by_version in self.prefixes.items():
             if not any(by_version.values()):
                 msg = f"Diagnóza {diagnosis.value} nemá žádnou předponu."
                 raise ValueError(msg)
+
+    def _check_normalized(self) -> None:
+        for by_version in self.prefixes.values():
             for prefix in (p for ps in by_version.values() for p in ps):
                 if _normalized(prefix) != prefix:
                     msg = f"Předpona {prefix!r} není normalizovaná (velká písmena, bez mezer)."
                     raise ValueError(msg)
-        self._check_disjoint()
-        return self
 
     def _check_disjoint(self) -> None:
         for version in IcdVersion:
