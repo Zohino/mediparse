@@ -160,7 +160,9 @@ def test_missing_input_or_revision_is_refused(tmp_path: Path) -> None:
     assert not (tmp_path / "manifest.json").exists()
 
 
-def test_config_without_source_table_is_refused(tmp_path: Path) -> None:
+def test_config_without_source_table_is_refused(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
     """Config tabulek bez zdrojové tabulky krok odmítne dřív, než zapíše kohortu či manifest."""
     discharge, diagnoses = write_tables(tmp_path)
     candidates, tables = _configs(tmp_path)
@@ -179,4 +181,6 @@ def test_config_without_source_table_is_refused(tmp_path: Path) -> None:
     )
 
     assert code is ExitCode.REFUSED
+    assert any("diagnoses_icd.csv.gz" in message for message in caplog.messages)
+    assert not (tmp_path / "cohort.parquet").exists()
     assert not (tmp_path / "manifest.json").exists()
