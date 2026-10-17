@@ -120,6 +120,18 @@ def test_age_without_planned_marker_is_reported(
     assert any("věk" in reason.lower() for reason in violations)
 
 
+def test_long_underscore_run_is_neither_age_marker_nor_known_form(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Věk za ____ není věková značka, takže se hlásí cizí forma i chybějící značka."""
+    text = planned_note.text.replace("___ year old", "____ year old", 1)
+
+    violations = _violations(text, planned_note.plan, sampler_config)
+
+    assert any("jinou formu" in reason for reason in violations)
+    assert any("Věková značka chybí" in reason for reason in violations)
+
+
 def _length_reasons(
     note: PlannedNote, config: SamplerConfig, planned_words: int
 ) -> list[str]:

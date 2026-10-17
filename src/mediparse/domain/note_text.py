@@ -12,10 +12,23 @@ if TYPE_CHECKING:
     from mediparse.domain.note_structure import StructureModel
 
 DEID: Final = "___"
+# Delší řady podtržítek nejsou značka (hlásí je kontrola cizí formy značky). Vzor
+# proto nelze zjednodušit na str.count, ten by ____ započítal jako značku.
+_STANDALONE_DEID: Final = rf"(?<!_){re.escape(DEID)}(?!_)"
+_DEID_PATTERN: Final = re.compile(_STANDALONE_DEID)
 AGE_SUFFIX: Final = r"[ -]?(?:years?[ -]old|y/?o)\b"
-AGE_MARKER: Final = re.compile(rf"{re.escape(DEID)}{AGE_SUFFIX}", re.IGNORECASE)
+AGE_MARKER: Final = re.compile(rf"{_STANDALONE_DEID}{AGE_SUFFIX}", re.IGNORECASE)
 
 type Sections = tuple[tuple[str, str], ...]
+
+
+def deid_markers(text: str) -> int:
+    """Počet značek ___ nahrazujících vyřazené identifikátory.
+
+    Returns:
+        Počet řad právě tří podtržítek; delší ani kratší řady se nepočítají.
+    """
+    return len(_DEID_PATTERN.findall(text))
 
 
 def alternation(words: Iterable[str]) -> str:
@@ -67,5 +80,5 @@ def narrative(
         subheadings.sub("", body) for key, body in sections if key in plan.section_words
     ]
     words = sum(len(body.split()) for body in bodies)
-    marks = sum(body.count(DEID) - len(AGE_MARKER.findall(body)) for body in bodies)
+    marks = sum(deid_markers(body) - len(AGE_MARKER.findall(body)) for body in bodies)
     return words, marks

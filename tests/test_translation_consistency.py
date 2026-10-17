@@ -2,25 +2,21 @@
 
 from __future__ import annotations
 
-from typing import Final
-
 from mediparse.domain.translation_consistency import (
     LENGTH_RATIO,
-    deid_markers,
     marker_mismatches,
     translation_violations,
 )
 
 TEXT = "a" * 10
-TWO: Final = 2
 
 
-def test_marker_is_exactly_three_underscores() -> None:
-    """Značka je právě ___, delší i kratší řady podtržítek se nepočítají."""
-    assert deid_markers("x ___ y") == 1
-    assert deid_markers("____") == 0
-    assert deid_markers("__") == 0
-    assert deid_markers("___ ___") == TWO
+def test_marker_count_mismatch_is_reported() -> None:
+    """Překlad s jiným počtem značek než originál se hlásí."""
+    english = {"n1": "a ___ b", "n2": "___ ___"}
+    czech = {"n1": "a ___ b", "n2": "___"}
+
+    assert marker_mismatches(english, czech) == ("n2",)
 
 
 def test_corpus_without_czech_has_no_violations() -> None:
