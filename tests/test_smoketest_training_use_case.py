@@ -22,7 +22,7 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
 CONFIG = TrainingConfig.model_validate_json(
-    json.dumps(training_config(diagnosis="ckd"))
+    json.dumps(training_config(diagnosis="ckd", row_id="row"))
 )
 NOTES = (
     InputNote("a", 1, Language.EN, "text a", frozenset({Diagnosis.CKD})),
@@ -145,7 +145,7 @@ def test_shared_subject_stops_before_saving() -> None:
 def test_class_with_too_few_patients_stops_before_splitting() -> None:
     """Diagnóza bez dost pacientů v každé třídě skončí InvalidInputError a nic se nevolá."""
     config = TrainingConfig.model_validate_json(
-        json.dumps(training_config(diagnosis="pneumonia"))
+        json.dumps(training_config(diagnosis="pneumonia", row_id="row"))
     )
     recorder = _Recorder()
 

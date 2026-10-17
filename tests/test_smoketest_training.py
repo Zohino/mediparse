@@ -12,14 +12,14 @@ from mediparse.domain.smoketest_training import TrainingConfig
 from tests.model_support import training_config
 
 FOLDS = 2
-VALID = training_config()
+VALID = training_config(row_id="smoke", diagnosis="diabetes", folds=FOLDS)
 
 
 def test_valid_config_is_parsed() -> None:
     """Platný JSON dá config s výčtem diagnózy."""
     config = TrainingConfig.model_validate_json(json.dumps(VALID))
 
-    assert config.row_id == "row"
+    assert config.row_id == "smoke"
     assert config.diagnosis is Diagnosis.DIABETES
     assert config.folds == FOLDS
 

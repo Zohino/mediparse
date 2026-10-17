@@ -34,7 +34,7 @@ def _train(root: Path) -> Trained:
     ParquetNoteTable(notes).write(separable_notes(PATIENTS))
     config = root / "config.json"
     config.write_text(
-        json.dumps(training_config()),
+        json.dumps(training_config(row_id="row", diagnosis="diabetes")),
         encoding="utf-8",
     )
     trained = Trained(notes, root / "model.skops", root / "predictions.parquet")
