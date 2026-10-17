@@ -135,3 +135,25 @@ def test_duplicate_key_is_rejected_before_scoring() -> None:
 
     assert not scorer.calls
     assert not sink.written
+
+
+def test_folds_of_one_row_and_diagnosis_are_pooled() -> None:
+    """Predikce dvou foldů dají jednu metriku přes všechny testovací zprávy.
+
+    Fold 0 má jen pozitivní a fold 1 jen negativní pravdu, takže metrika po foldech
+    by skončila na kontrole obou tříd.
+    """
+    items = (
+        prediction("1-DS-1", truth=True, score=1.0, fold=0, subject_id=1),
+        prediction("2-DS-1", truth=True, score=-1.0, fold=0, subject_id=2),
+        prediction("3-DS-1", truth=False, score=-2.0, fold=1, subject_id=3),
+        prediction("4-DS-1", truth=False, score=0.5, fold=1, subject_id=4),
+    )
+    use_case, scorer, _ = _use_case(items)
+
+    result = use_case.run()
+
+    assert [(item.test_notes, item.test_positives) for item in result] == [(4, 2)]
+    assert scorer.calls == [
+        ((True, True, False, False), (True, False, False, True), (1.0, -1.0, -2.0, 0.5))
+    ]

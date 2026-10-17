@@ -48,6 +48,10 @@ class ModelEvaluation:
     def run(self) -> tuple[DiagnosisMetrics, ...]:
         """Seskupí predikce podle řádku matice a diagnózy, spočte a zapíše metriky.
 
+        Predikce všech foldů skupiny se slévají do jedné metriky přes všechny testovací
+        zprávy: fold vzácné diagnózy nemusí mít obě třídy pravdy a metrika po foldech
+        by ho odmítla.
+
         Returns:
             Metriky seřazené podle řádku matice a diagnózy.
 
