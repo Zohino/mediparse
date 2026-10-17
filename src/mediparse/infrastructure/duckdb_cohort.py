@@ -20,6 +20,7 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.infrastructure.note_table import SCHEMA
+from mediparse.infrastructure.parquet_file import COMPRESSION
 
 if TYPE_CHECKING:
     from collections.abc import Generator, Mapping
@@ -29,7 +30,6 @@ if TYPE_CHECKING:
 
 MIN_CHARS: Final = 100
 BATCH_ROWS: Final = 4096
-COMPRESSION: Final = "zstd"
 LANGUAGE: Final = Language.EN
 _BASE: Final = """
 CREATE TEMPORARY TABLE base AS

@@ -9,8 +9,8 @@ from typing import TYPE_CHECKING, Final
 
 from pydantic import ValidationError
 
+from mediparse.domain.environment import SourceRevision
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.run_manifest import SourceRevision
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Mapping

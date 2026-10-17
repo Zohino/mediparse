@@ -14,25 +14,25 @@ from typing import TYPE_CHECKING, Final
 
 from mediparse.application.cohort import CohortMaterialization
 from mediparse.domain.cohort import CohortManifest
-from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.environment import Environment
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.cohort_manifest_file import JsonCohortManifestFile
 from mediparse.infrastructure.diagnosis_codes_file import load_diagnosis_codes
 from mediparse.infrastructure.duckdb_cohort import DuckDbCohort
 from mediparse.infrastructure.file_digest import file_sha256
-from mediparse.infrastructure.mimic_tables import load_mimic_tables
+from mediparse.infrastructure.json_file import write_model
+from mediparse.infrastructure.mimic_tables import load_source_digests
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.source_revision import revision_source
 
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from mediparse.domain.run_manifest import SourceRevision
+    from mediparse.domain.environment import SourceRevision
 
 logger = logging.getLogger(__name__)
 
-PACKAGES: Final = ("python", "duckdb", "pyarrow")
+PACKAGES: Final = ("python", "duckdb", "pyarrow", "pydantic")
 SOURCE_TABLES: Final = ("discharge.csv.gz", "diagnoses_icd.csv.gz")
 SPILL_DIRECTORY: Final = "duckdb-tmp"
 
@@ -64,15 +64,6 @@ def main(
     )
 
 
-def _source_digests(tables: Path) -> dict[str, str]:
-    pinned = load_mimic_tables(tables)
-    missing = [name for name in SOURCE_TABLES if name not in pinned]
-    if missing:
-        msg = f"V configu tabulek {tables} chybí: {', '.join(missing)}."
-        raise InvalidInputError(msg)
-    return {name: pinned[name].sha256 for name in SOURCE_TABLES}
-
-
 @refusing_invalid_input
 def run(
     *,
@@ -91,21 +82,23 @@ def run(
         nečitelnou revizi zdroje, diagnózu pod deset zpráv a prázdnou kohortu.
     """
     codes = load_diagnosis_codes(candidates)
-    sources = _source_digests(tables)
+    sources = load_source_digests(tables, SOURCE_TABLES)
     source = revision()
     result = CohortMaterialization(
         DuckDbCohort(discharge, diagnoses, cohort, cohort.parent / SPILL_DIRECTORY)
     ).run(codes)
-    JsonCohortManifestFile(manifest).write(
+    write_model(
+        manifest,
         CohortManifest(
             cohort_sha256=file_sha256(cohort),
             config_sha256=file_sha256(candidates),
             sources=sources,
-            packages=installed_versions(PACKAGES),
-            source=source,
+            environment=Environment(
+                packages=installed_versions(PACKAGES), source=source
+            ),
             counts=result.counts,
             invalid_codes=result.invalid_codes,
-        )
+        ),
     )
     logger.info(
         "Kohorta: %d zpráv a %d pacientů v %s, neplatných kódů %d.",

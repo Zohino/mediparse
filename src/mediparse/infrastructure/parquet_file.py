@@ -1,17 +1,20 @@
-"""Čtení souboru parquet s pevným schématem: chyby souboru překládá na doménovou výjimku."""
+"""Hranice souborů parquet: čtení se schématem, zápis s jednotnou kompresí a převod hodnot sloupců na doménové typy; chyby překládá na InvalidInputError."""
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Final
 
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
     from pathlib import Path
+
+COMPRESSION: Final = "zstd"
 
 
 def read_table(path: Path, schema: pa.Schema) -> pa.Table:
@@ -37,6 +40,40 @@ def read_table(path: Path, schema: pa.Schema) -> pa.Table:
     return table
 
 
+def write_table(
+    path: Path, columns: Mapping[str, Sequence[object]], schema: pa.Schema
+) -> None:
+    """Zapíše sloupce se schématem do souboru parquet a vytvoří chybějící adresáře.
+
+    Args:
+        path: Cíl zápisu.
+        columns: Hodnoty sloupců podle jména.
+        schema: Schéma souboru, podle kterého se hodnoty převedou.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+    pq.write_table(
+        pa.Table.from_pydict(dict(columns), schema=schema),
+        path,
+        compression=COMPRESSION,
+    )
+
+
+def parse_diagnosis(path: Path, value: str) -> Diagnosis:
+    """Převede text ze sloupce souboru na diagnózu.
+
+    Returns:
+        Diagnóza téhož jména.
+
+    Raises:
+        InvalidInputError: Hodnota není diagnóza.
+    """
+    try:
+        return Diagnosis(value)
+    except ValueError as error:
+        msg = f"Soubor {path} obsahuje neznámou diagnózu {value!r}."
+        raise InvalidInputError(msg) from error
+
+
 def write_string_table(
     path: Path, columns: Sequence[str], rows: Sequence[Mapping[str, str | None]]
 ) -> None:
@@ -48,7 +85,6 @@ def write_string_table(
         rows: Řádky jako slovníky sloupec na hodnotu.
     """
     schema = pa.schema([pa.field(column, pa.string()) for column in columns])
-    path.parent.mkdir(parents=True, exist_ok=True)
-    pq.write_table(
-        pa.Table.from_pylist(list(rows), schema=schema), path, compression="zstd"
+    write_table(
+        path, {column: [row.get(column) for row in rows] for column in columns}, schema
     )

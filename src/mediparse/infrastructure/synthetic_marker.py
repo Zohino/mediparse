@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, Final
 from pydantic import BaseModel, ConfigDict
 
 from mediparse.infrastructure.input_file import parse_file
+from mediparse.infrastructure.json_file import write_model
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -25,8 +26,7 @@ class SyntheticMarker(BaseModel):
 
 def write_marker(directory: Path, marker: SyntheticMarker) -> None:
     """Zapíše značku do adresáře syntetických tabulek."""
-    directory.mkdir(parents=True, exist_ok=True)
-    (directory / MARKER_NAME).write_text(marker.model_dump_json(), encoding="utf-8")
+    write_model(directory / MARKER_NAME, marker)
 
 
 def read_marker(directory: Path) -> SyntheticMarker | None:

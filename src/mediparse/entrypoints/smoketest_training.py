@@ -12,14 +12,15 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
 from mediparse.application.smoketest_training import SmoketestTraining
+from mediparse.domain.environment import Environment
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
-from mediparse.infrastructure.run_manifest_file import JsonRunManifestFile
 from mediparse.infrastructure.sklearn_classifier import (
     ESTIMATOR,
     GroupedHoldout,
@@ -32,7 +33,7 @@ from mediparse.infrastructure.training_config import load_training_config
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from mediparse.domain.run_manifest import SourceRevision
+    from mediparse.domain.environment import SourceRevision
 
 logger = logging.getLogger(__name__)
 
@@ -99,7 +100,8 @@ def run(
         predictions=ParquetPredictionTable(predictions),
     )
     report = step.run(training)
-    JsonRunManifestFile(manifest).write(
+    write_model(
+        manifest,
         RunManifest(
             row_id=training.row_id,
             dataset_sha256=file_sha256(notes),
@@ -108,9 +110,10 @@ def run(
             model=ESTIMATOR,
             model_revision=None,
             tokenizer_revision=None,
-            packages=installed_versions(PACKAGES),
-            source=source,
-        )
+            environment=Environment(
+                packages=installed_versions(PACKAGES), source=source
+            ),
+        ),
     )
     logger.info(
         "Model diagnózy %s: %d trénovacích a %d testovacích zpráv, uložen do %s.",

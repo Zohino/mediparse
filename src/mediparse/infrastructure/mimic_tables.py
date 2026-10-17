@@ -4,13 +4,17 @@ from __future__ import annotations
 
 from collections import Counter
 from pathlib import Path, PurePosixPath
-from typing import Final, Self
+from typing import TYPE_CHECKING, Final, Self
 from urllib.parse import urlsplit
 
 from pydantic import BaseModel, ConfigDict, model_validator
 
 from mediparse.domain.digest import Sha256
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.input_file import parse_file
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 TABLES_PATH: Final = Path("config/mimic_tables.json")
 REFERENCE_PROJECT: Final = "mimic-iv-note"
@@ -66,3 +70,20 @@ def load_reference_sha256(path: Path) -> dict[str, str]:
         for name, table in load_mimic_tables(path).items()
         if REFERENCE_PROJECT in table.path.parts
     }
+
+
+def load_source_digests(path: Path, names: Sequence[str]) -> dict[str, Sha256]:
+    """Přečte otisky zdrojových tabulek, ze kterých krok vychází.
+
+    Returns:
+        Slovník jméno souboru → SHA-256, v pořadí zadaných jmen.
+
+    Raises:
+        InvalidInputError: Config některou z tabulek neobsahuje.
+    """
+    pinned = load_mimic_tables(path)
+    missing = [name for name in names if name not in pinned]
+    if missing:
+        msg = f"V configu tabulek {path} chybí: {', '.join(missing)}."
+        raise InvalidInputError(msg)
+    return {name: pinned[name].sha256 for name in names}

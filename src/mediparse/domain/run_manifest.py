@@ -4,21 +4,13 @@ from __future__ import annotations
 
 from pydantic import BaseModel, ConfigDict
 
-from mediparse.domain.digest import CommitSha, Sha256
+from mediparse.domain.digest import Sha256
+from mediparse.domain.environment import Environment
 from mediparse.domain.identity import RowId
 
 
-class SourceRevision(BaseModel):
-    """Revize zdrojového kódu: commit a příznak rozpracovaného stromu."""
-
-    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
-
-    commit: CommitSha
-    dirty: bool
-
-
 class RunManifest(BaseModel):
-    """Provenance tréninku; funkce vstupů, prostředí a revize, bez času běhu."""
+    """Provenance tréninku; funkce vstupů a prostředí, bez času běhu."""
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
@@ -29,5 +21,4 @@ class RunManifest(BaseModel):
     model: str
     model_revision: str | None
     tokenizer_revision: str | None
-    packages: dict[str, str]
-    source: SourceRevision
+    environment: Environment

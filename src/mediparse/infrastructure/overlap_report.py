@@ -2,16 +2,25 @@
 
 from __future__ import annotations
 
-import json
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
+
+from pydantic import BaseModel, ConfigDict
+
+from mediparse.domain.corpus_audit import Position
+from mediparse.domain.identity import SubjectId
+from mediparse.infrastructure.json_file import write_model
 
 if TYPE_CHECKING:
     from collections.abc import Collection, Sequence
     from pathlib import Path
 
-    from mediparse.domain.corpus_audit import Position
-    from mediparse.domain.identity import SubjectId
+
+class _OverlapReport(BaseModel):
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    positions: tuple[Position, ...]
+    colliding_subjects: tuple[SubjectId, ...]
 
 
 @dataclass(frozen=True)
@@ -24,12 +33,10 @@ class OverlapReportFile:
         self, positions: Sequence[Position], colliding_subjects: Collection[SubjectId]
     ) -> None:
         """Zapíše pozice shod a kolidující subject_id."""
-        content = {
-            "positions": [
-                {"note": position.note, "token": position.token}
-                for position in positions
-            ],
-            "colliding_subjects": sorted(colliding_subjects),
-        }
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.path.write_text(f"{json.dumps(content, indent=2)}\n", encoding="utf-8")
+        write_model(
+            self.path,
+            _OverlapReport(
+                positions=tuple(positions),
+                colliding_subjects=tuple(sorted(colliding_subjects)),
+            ),
+        )

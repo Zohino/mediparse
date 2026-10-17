@@ -20,6 +20,7 @@ from mediparse.domain.digest import fingerprint
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.infrastructure.json_file import write_model
 
 CORPUS_ROOT: Final = Path("resources/synthetic")
 RECORD_NAME: Final = "audit.json"
@@ -113,9 +114,7 @@ class CorpusDirectory:
         self._write(PROVENANCE_NAME, record)
 
     def _write(self, name: str, record: BaseModel) -> None:
-        (self.root / name).write_text(
-            f"{record.model_dump_json(indent=2)}\n", encoding="utf-8"
-        )
+        write_model(self.root / name, record)
 
     def _paths(self) -> list[Path]:
         # Otisk pokrývá všechny */*.txt, audit jen jazyky z Language. Neznámý adresář by tak

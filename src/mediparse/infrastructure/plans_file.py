@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING, Final
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.note_plan import NotePlan
 from mediparse.infrastructure.input_file import parse_file
+from mediparse.infrastructure.json_file import parse_lines
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT
 
 if TYPE_CHECKING:
@@ -37,7 +38,7 @@ class PlansFile:
         Returns:
             Plány zpráv.
         """
-        return parse_file(self.path, _plans)
+        return parse_file(self.path, parse_lines(NotePlan))
 
 
 @dataclass(frozen=True)
@@ -70,7 +71,3 @@ class SyntheticPlanFiles:
 
 def _label_row(plan: NotePlan) -> tuple[str | int, ...]:
     return (plan.note_id, plan.subject_id, *(int(d in plan.labels) for d in Diagnosis))
-
-
-def _plans(content: str) -> tuple[NotePlan, ...]:
-    return tuple(NotePlan.model_validate_json(line) for line in content.splitlines())

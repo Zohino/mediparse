@@ -9,8 +9,8 @@ from typing import TYPE_CHECKING
 
 import pytest
 
+from mediparse.domain.environment import SourceRevision
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.run_manifest import SourceRevision
 from mediparse.infrastructure.source_revision import (
     EnvironmentRevision,
     GitRevision,

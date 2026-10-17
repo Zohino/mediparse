@@ -6,13 +6,12 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
 import pyarrow as pa
-import pyarrow.parquet as pq
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
-from mediparse.infrastructure.parquet_file import read_table
+from mediparse.infrastructure.parquet_file import read_table, write_table
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -45,8 +44,7 @@ class ParquetNoteTable:
                 for diagnosis in Diagnosis
             },
         }
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        pq.write_table(pa.Table.from_pydict(columns, schema=SCHEMA), self.path)
+        write_table(self.path, columns, SCHEMA)
 
     def read(self) -> tuple[InputNote, ...]:
         """Přečte řádky tabulky v pořadí souboru; neznámý jazyk je InvalidInputError.

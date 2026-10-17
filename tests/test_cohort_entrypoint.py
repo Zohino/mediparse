@@ -9,8 +9,8 @@ from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.cohort import MIN_CELL, CohortManifest
 from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.environment import SourceRevision
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.run_manifest import SourceRevision
 from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
@@ -96,8 +96,9 @@ def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
         "discharge.csv.gz": DISCHARGE_SHA,
         "diagnoses_icd.csv.gz": DIAGNOSES_SHA,
     }
-    assert written.source == REVISION
-    assert set(written.packages) == set(cohort.PACKAGES)
+    assert written.environment.source == REVISION
+    assert set(written.environment.packages) == set(cohort.PACKAGES)
+    assert "pydantic" in written.environment.packages
     assert written.invalid_codes == 1
     assert written.counts.funnel[-1].notes == KEPT_NOTES
     assert written.counts.positives[Diagnosis.COPD] == COPD_NOTES
@@ -156,4 +157,30 @@ def test_missing_input_or_revision_is_refused(tmp_path: Path) -> None:
 
     assert no_table is ExitCode.REFUSED
     assert no_git is ExitCode.REFUSED
+    assert not (tmp_path / "manifest.json").exists()
+
+
+def test_config_without_source_table_is_refused(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Config tabulek bez zdrojové tabulky krok odmítne dřív, než zapíše kohortu či manifest."""
+    discharge, diagnoses = write_tables(tmp_path)
+    candidates, tables = _configs(tmp_path)
+    kept = json.loads(tables.read_text(encoding="utf-8"))
+    kept["mimic_tables"] = kept["mimic_tables"][:1]
+    tables.write_text(json.dumps(kept), encoding="utf-8")
+
+    code = cohort.run(
+        discharge=discharge,
+        diagnoses=diagnoses,
+        candidates=candidates,
+        tables=tables,
+        cohort=tmp_path / "cohort.parquet",
+        manifest=tmp_path / "manifest.json",
+        revision=_revision,
+    )
+
+    assert code is ExitCode.REFUSED
+    assert any("diagnoses_icd.csv.gz" in message for message in caplog.messages)
+    assert not (tmp_path / "cohort.parquet").exists()
     assert not (tmp_path / "manifest.json").exists()

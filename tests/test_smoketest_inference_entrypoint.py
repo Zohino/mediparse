@@ -6,7 +6,7 @@ import json
 from dataclasses import replace
 from typing import TYPE_CHECKING, Final, NamedTuple
 
-from mediparse.domain.run_manifest import SourceRevision
+from mediparse.domain.environment import SourceRevision
 from mediparse.entrypoints import smoketest_inference, smoketest_training
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.note_table import ParquetNoteTable
