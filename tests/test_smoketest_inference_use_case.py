@@ -123,7 +123,7 @@ def test_mismatch_raises_and_writes_nothing() -> None:
     wrong = (Classification(predicted=True, score=9.0), ANSWER[1])
     use_case, _, sink = _use_case(answer=wrong)
 
-    with pytest.raises(ModelMismatchError, match="c"):
+    with pytest.raises(ModelMismatchError, match="Nesoulad u zprávy c:"):
         use_case.run()
 
     assert sink.written == []
@@ -133,7 +133,7 @@ def test_held_out_note_without_text_raises() -> None:
     """Odložená zpráva bez textu v tabulce je neplatný vstup."""
     use_case, classifier, sink = _use_case(notes=NOTES[:2])
 
-    with pytest.raises(InvalidInputError, match="c"):
+    with pytest.raises(InvalidInputError, match="Odložená zpráva c nemá"):
         use_case.run()
 
     assert classifier.texts == []
