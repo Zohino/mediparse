@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from collections.abc import Mapping
 from enum import IntEnum
 from itertools import combinations
 from typing import Final, Self
@@ -48,7 +49,7 @@ class DiagnosisCodes(BaseModel):
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
-    prefixes: PerDiagnosis[dict[IcdVersion, tuple[str, ...]]]
+    prefixes: PerDiagnosis[Mapping[IcdVersion, tuple[str, ...]]]
 
     @model_validator(mode="after")
     def _valid_prefixes(self) -> Self:

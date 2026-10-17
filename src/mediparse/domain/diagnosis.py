@@ -1,8 +1,9 @@
 """Diagnóza, jejíž přítomnost nese jeden binární label, a jediná akutní diagnóza.
 
-``PerDiagnosis`` je slovník s hodnotou každé diagnózy pětice.
+``PerDiagnosis`` je typ pro hodnotu každé diagnózy pětice; pydantic ho načte jako ``dict``.
 """
 
+from collections.abc import Mapping
 from enum import StrEnum
 from typing import Annotated, Final
 
@@ -27,7 +28,7 @@ class Diagnosis(StrEnum):
 ACUTE_DIAGNOSIS: Final = Diagnosis.PNEUMONIA
 
 
-def _covers_all_diagnoses[T](value: dict[Diagnosis, T]) -> dict[Diagnosis, T]:
+def _covers_all_diagnoses[T](value: Mapping[Diagnosis, T]) -> Mapping[Diagnosis, T]:
     missing = sorted(diagnosis.value for diagnosis in set(Diagnosis) - set(value))
     if missing:
         msg = f"Chybí diagnózy: {', '.join(missing)}."
@@ -36,5 +37,5 @@ def _covers_all_diagnoses[T](value: dict[Diagnosis, T]) -> dict[Diagnosis, T]:
 
 
 type PerDiagnosis[T] = Annotated[
-    dict[Diagnosis, T], AfterValidator(_covers_all_diagnoses)
+    Mapping[Diagnosis, T], AfterValidator(_covers_all_diagnoses)
 ]

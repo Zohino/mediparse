@@ -126,7 +126,7 @@ def test_inconsistent_conditionals_are_rejected() -> None:
 
 
 def test_missing_diagnosis_is_rejected() -> None:
-    """Config bez některé z pěti diagnóz neprojde."""
+    """Config bez některé diagnózy pětice neprojde."""
     valid = _model().model_dump()
     del valid["prevalence"][Diagnosis.PNEUMONIA]
 
@@ -135,7 +135,7 @@ def test_missing_diagnosis_is_rejected() -> None:
 
 
 def test_conditional_row_without_diagnosis_is_rejected() -> None:
-    """Řádek podmíněné matice bez některé z pěti diagnóz neprojde."""
+    """Řádek podmíněné matice bez některé diagnózy pětice neprojde."""
     valid = _model().model_dump()
     del valid["conditional"][Diagnosis.DIABETES][Diagnosis.PNEUMONIA]
 

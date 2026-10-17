@@ -35,7 +35,8 @@ def test_complete_mapping_is_accepted() -> None:
     """Slovník s hodnotou každé diagnózy projde a zůstane obyčejným slovníkem."""
     counts = _Counts(values=dict.fromkeys(Diagnosis, 1))
 
-    assert counts.values[Diagnosis.COPD] == 1
+    assert counts.values == dict.fromkeys(Diagnosis, 1)
+    assert type(counts.values) is dict
 
 
 def test_missing_diagnoses_are_listed_sorted() -> None:
