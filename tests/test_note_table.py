@@ -104,7 +104,7 @@ def test_read_other_schema_is_invalid_input(tmp_path: Path) -> None:
 def test_read_returns_language_as_enum(tmp_path: Path) -> None:
     """Jazyk z parquetu se čte jako Language, ne jako řetězec."""
     table = ParquetNoteTable(tmp_path / "notes.parquet")
-    table.write([InputNote("a", 1, Language.CS, "text", frozenset())])
+    table.write([InputNote("1-DS-1", 1, Language.CS, "text", frozenset())])
 
     assert table.read()[0].language is Language.CS
 
@@ -112,7 +112,9 @@ def test_read_returns_language_as_enum(tmp_path: Path) -> None:
 def test_read_unknown_language_is_invalid_input(tmp_path: Path) -> None:
     """Jazyk mimo výčet je InvalidInputError, ne ValueError z adaptéru."""
     path = tmp_path / "notes.parquet"
-    ParquetNoteTable(path).write([InputNote("a", 1, Language.EN, "text", frozenset())])
+    ParquetNoteTable(path).write([
+        InputNote("1-DS-1", 1, Language.EN, "text", frozenset())
+    ])
     rows = pq.read_table(path).to_pylist()
     rows[0]["language"] = "de"
     columns = {name: [row[name] for row in rows] for name in SCHEMA.names}

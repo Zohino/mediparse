@@ -24,10 +24,10 @@ CONFIG = parsed_training_config(diagnosis="ckd", row_id="row")
 SPLIT = Split((frozenset({1, 2}), frozenset({3, 4})))
 SPLIT_CONFIG = split_config(folds=2, seed=4)
 NOTES = (
-    InputNote("a", 1, Language.EN, "text a", frozenset({Diagnosis.CKD})),
-    InputNote("b", 2, Language.EN, "text b", frozenset({Diagnosis.DIABETES})),
-    InputNote("c", 3, Language.EN, "text c", frozenset({Diagnosis.CKD})),
-    InputNote("d", 4, Language.EN, "text d", frozenset()),
+    InputNote("1-DS-1", 1, Language.EN, "text a", frozenset({Diagnosis.CKD})),
+    InputNote("2-DS-1", 2, Language.EN, "text b", frozenset({Diagnosis.DIABETES})),
+    InputNote("3-DS-1", 3, Language.EN, "text c", frozenset({Diagnosis.CKD})),
+    InputNote("4-DS-1", 4, Language.EN, "text d", frozenset()),
 )
 
 
@@ -125,10 +125,17 @@ def test_trains_on_train_and_predicts_test() -> None:
     assert isinstance(recorder.calls["save"], _FakeClassifier)
     assert recorder.calls["predictions"] == (
         Prediction(
-            "row", 0, "a", 1, Diagnosis.CKD, truth=True, predicted=True, score=1.5
+            "row", 0, "1-DS-1", 1, Diagnosis.CKD, truth=True, predicted=True, score=1.5
         ),
         Prediction(
-            "row", 0, "b", 2, Diagnosis.CKD, truth=False, predicted=False, score=-0.5
+            "row",
+            0,
+            "2-DS-1",
+            2,
+            Diagnosis.CKD,
+            truth=False,
+            predicted=False,
+            score=-0.5,
         ),
     )
     assert report == TrainingReport(Diagnosis.CKD, 2, 2, 1, SPLIT.sha256())
@@ -145,7 +152,10 @@ def test_test_fold_comes_from_config() -> None:
     assert recorder.calls["fit"] == (("text a", "text b"), (True, False))
     predictions = recorder.calls["predictions"]
     assert isinstance(predictions, tuple)
-    assert {(item.fold, item.note_id) for item in predictions} == {(1, "c"), (1, "d")}
+    assert {(item.fold, item.note_id) for item in predictions} == {
+        (1, "3-DS-1"),
+        (1, "4-DS-1"),
+    }
 
 
 @pytest.mark.parametrize("fold", [2, 7])
@@ -162,7 +172,7 @@ def test_fold_out_of_range_stops_before_saving(fold: int) -> None:
 
 def test_subject_outside_split_stops_before_saving() -> None:
     """Pacient mimo split je InvalidInputError a nic se neuloží."""
-    notes = (*NOTES, InputNote("e", 5, Language.EN, "text e", frozenset()))
+    notes = (*NOTES, InputNote("5-DS-1", 5, Language.EN, "text e", frozenset()))
     recorder = _Recorder()
 
     with pytest.raises(InvalidInputError, match="Zprávy pacientů mimo split"):

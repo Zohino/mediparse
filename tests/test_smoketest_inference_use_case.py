@@ -23,13 +23,13 @@ if TYPE_CHECKING:
 
 
 NOTES = (
-    InputNote("a", 1, Language.EN, "text a", frozenset()),
-    InputNote("b", 2, Language.EN, "text b", frozenset()),
-    InputNote("c", 3, Language.EN, "text c", frozenset()),
+    InputNote("1-DS-1", 1, Language.EN, "text a", frozenset()),
+    InputNote("2-DS-1", 2, Language.EN, "text b", frozenset()),
+    InputNote("3-DS-1", 3, Language.EN, "text c", frozenset()),
 )
 HELD_OUT = (
-    prediction("c", truth=True, score=1.5, diagnosis=Diagnosis.CKD),
-    prediction("a", truth=False, score=-0.5, diagnosis=Diagnosis.CKD),
+    prediction("3-DS-1", truth=True, score=1.5, diagnosis=Diagnosis.CKD, subject_id=3),
+    prediction("1-DS-1", truth=False, score=-0.5, diagnosis=Diagnosis.CKD),
 )
 ANSWER = (
     Classification(predicted=True, score=1.5),
@@ -102,7 +102,7 @@ def test_classifies_only_held_out_notes_and_writes_examples() -> None:
     result = use_case.run()
 
     assert classifier.texts == ["text c", "text a"]
-    assert [item.note_id for item in result] == ["c", "a"]
+    assert [item.note_id for item in result] == ["3-DS-1", "1-DS-1"]
     assert sink.written == [result]
 
 
@@ -111,7 +111,7 @@ def test_mismatch_raises_and_writes_nothing() -> None:
     wrong = (Classification(predicted=True, score=9.0), ANSWER[1])
     use_case, _, sink = _use_case(answer=wrong)
 
-    with pytest.raises(ModelMismatchError, match="Nesoulad u zprávy c:"):
+    with pytest.raises(ModelMismatchError, match="Nesoulad u zprávy 3-DS-1:"):
         use_case.run()
 
     assert sink.written == []
@@ -121,7 +121,7 @@ def test_held_out_note_without_text_raises() -> None:
     """Odložená zpráva bez textu v tabulce je neplatný vstup."""
     use_case, classifier, sink = _use_case(notes=NOTES[:2])
 
-    with pytest.raises(InvalidInputError, match="Odložená zpráva c nemá"):
+    with pytest.raises(InvalidInputError, match="Odložená zpráva 3-DS-1 nemá"):
         use_case.run()
 
     assert classifier.texts == []
