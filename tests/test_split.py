@@ -14,9 +14,11 @@ from mediparse.domain.language import Language
 from mediparse.domain.split import (
     RESIDUAL_STRATUM,
     Holdout,
+    SharedSplit,
     Split,
     SplitConfig,
     SubjectLeakError,
+    ensure_enough_patients,
     ensure_patients_per_class,
     strata,
 )
@@ -304,3 +306,41 @@ def test_sha256_orders_subjects_numerically() -> None:
     split = Split((frozenset({2}), frozenset({10})))
 
     assert split.sha256() == NUMERIC_ORDER_SHA256
+
+
+def test_shared_split_keeps_config_and_assignment() -> None:
+    """K z configu shodné s počtem foldů splitu dá platný SharedSplit."""
+    split = Split((frozenset({1}), frozenset({2})))
+    config = SplitConfig(seed=3, folds=FOLDS)
+
+    shared = SharedSplit(config, split)
+
+    assert (shared.config, shared.split) == (config, split)
+
+
+def test_shared_split_with_other_folds_is_a_code_error() -> None:
+    """Split s jiným počtem foldů, než říká config, je chyba kódu (ValueError)."""
+    split = Split((frozenset({1}), frozenset({2}), frozenset({3})))
+
+    with pytest.raises(ValueError, match=r"^Config má 2 foldů, split 3\.$"):
+        SharedSplit(SplitConfig(seed=0, folds=FOLDS), split)
+
+
+def test_exactly_as_many_patients_as_folds_pass() -> None:
+    """Přesně K pacientů ke dělení stačí."""
+    ensure_enough_patients([1, 2], FOLDS)
+
+
+def test_fewer_patients_than_folds_is_invalid_input() -> None:
+    """K - 1 pacientů je neplatný vstup; hláška nese jen počty."""
+    with pytest.raises(
+        InvalidInputError,
+        match=r"^Pacientů je 1, dělení do 2 foldů potřebuje aspoň 2\.$",
+    ):
+        ensure_enough_patients([987654], FOLDS)
+
+
+def test_enough_patients_counts_patients_not_notes() -> None:
+    """Pacient s víc zprávami se počítá jednou."""
+    with pytest.raises(InvalidInputError, match="Pacientů je 1"):
+        ensure_enough_patients([5, 5, 5], FOLDS)
