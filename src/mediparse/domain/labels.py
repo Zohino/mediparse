@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Annotated, Final, Self
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
-from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS, Diagnosis
+from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS, Diagnosis, PerDiagnosis
 from mediparse.domain.inputs import InvalidInputError
 
 if TYPE_CHECKING:
@@ -25,23 +25,11 @@ class LabelModel(BaseModel):
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
-    prevalence: dict[Diagnosis, Probability]
-    conditional: dict[Diagnosis, dict[Diagnosis, Probability]]
+    prevalence: PerDiagnosis[Probability]
+    conditional: PerDiagnosis[PerDiagnosis[Probability]]
     prevalence_tolerance: Probability
     ipf_tolerance: Annotated[float, Field(gt=0.0)]
     ipf_max_passes: PositiveInt
-
-    @model_validator(mode="after")
-    def _covers_all_diagnoses(self) -> Self:
-        expected = set(Diagnosis)
-        rows = [set(row) for row in self.conditional.values()]
-        if set(self.prevalence) != expected or set(self.conditional) != expected:
-            msg = "Prevalence i podmíněná matice musí pokrývat všech pět diagnóz."
-            raise ValueError(msg)
-        if any(row != expected for row in rows):
-            msg = "Každý řádek podmíněné matice musí pokrývat všech pět diagnóz."
-            raise ValueError(msg)
-        return self
 
     @model_validator(mode="after")
     def _conditionals_agree(self) -> Self:

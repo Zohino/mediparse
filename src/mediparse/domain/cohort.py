@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Final, Self
 
 from pydantic import BaseModel, ConfigDict, ValidationError, model_validator
 
-from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
 from mediparse.domain.digest import Sha256
 from mediparse.domain.environment import Environment
 from mediparse.domain.icd import DiagnosisCodes, IcdCode, IcdVersion
@@ -87,7 +87,7 @@ class CohortCounts(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     funnel: tuple[FunnelStep, ...]
-    positives: dict[Diagnosis, int]
+    positives: PerDiagnosis[int]
 
     @model_validator(mode="after")
     def _valid(self) -> Self:
@@ -98,11 +98,6 @@ class CohortCounts(BaseModel):
             if after.notes > before.notes or after.patients > before.patients:
                 msg = f"Kroky trychtýře nesmí růst: {after.step.value}."
                 raise ValueError(msg)
-        missing = set(Diagnosis) - set(self.positives)
-        if missing:
-            names = ", ".join(sorted(diagnosis.value for diagnosis in missing))
-            msg = f"Chybí počty pozitivních zpráv diagnóz: {names}."
-            raise ValueError(msg)
         return self
 
 

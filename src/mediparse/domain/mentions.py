@@ -14,7 +14,7 @@ from pydantic import (
     model_validator,
 )
 
-from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
 from mediparse.domain.labels import Probability
 
 if TYPE_CHECKING:
@@ -61,7 +61,7 @@ class MentionModel(BaseModel):
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
-    diagnoses: dict[Diagnosis, DiagnosisMentions]
+    diagnoses: PerDiagnosis[DiagnosisMentions]
     diagnosis_section: str
     family_section: str
     diagnosis_section_probability: Probability
@@ -70,13 +70,6 @@ class MentionModel(BaseModel):
     acute_sections: dict[str, PositiveFloat]
     negative_statuses: dict[MentionStatus, Probability]
     negation: Negation
-
-    @model_validator(mode="after")
-    def _covers_all_diagnoses(self) -> Self:
-        if set(self.diagnoses) != set(Diagnosis):
-            msg = "Parametry zmínek musí pokrývat všech pět diagnóz."
-            raise ValueError(msg)
-        return self
 
     @model_validator(mode="after")
     def _negative_statuses_are_a_distribution(self) -> Self:

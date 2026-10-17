@@ -130,7 +130,7 @@ def test_missing_diagnosis_is_rejected() -> None:
     valid = _model().model_dump()
     del valid["prevalence"][Diagnosis.PNEUMONIA]
 
-    with pytest.raises(ValidationError, match="pět diagnóz"):
+    with pytest.raises(ValidationError, match="Chybí diagnózy: pneumonia"):
         LabelModel.model_validate(valid)
 
 
@@ -139,8 +139,10 @@ def test_conditional_row_without_diagnosis_is_rejected() -> None:
     valid = _model().model_dump()
     del valid["conditional"][Diagnosis.DIABETES][Diagnosis.PNEUMONIA]
 
-    with pytest.raises(ValidationError, match="Každý řádek"):
+    with pytest.raises(ValidationError, match="Chybí diagnózy: pneumonia") as raised:
         LabelModel.model_validate(valid)
+
+    assert raised.value.errors()[0]["loc"] == ("conditional", "diabetes")
 
 
 def test_label_shares_of_no_notes_are_rejected() -> None:

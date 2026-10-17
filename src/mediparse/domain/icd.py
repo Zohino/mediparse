@@ -3,14 +3,13 @@
 from __future__ import annotations
 
 import re
-from collections.abc import Mapping
 from enum import IntEnum
 from itertools import combinations
 from typing import Final, Self
 
 from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
-from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
 
 _CODE: Final = re.compile(r"^[0-9A-Z]+$")
 
@@ -49,15 +48,10 @@ class DiagnosisCodes(BaseModel):
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
-    prefixes: Mapping[Diagnosis, Mapping[IcdVersion, tuple[str, ...]]]
+    prefixes: PerDiagnosis[dict[IcdVersion, tuple[str, ...]]]
 
     @model_validator(mode="after")
     def _valid_prefixes(self) -> Self:
-        missing = set(Diagnosis) - set(self.prefixes)
-        if missing:
-            names = ", ".join(sorted(diagnosis.value for diagnosis in missing))
-            msg = f"Chybí předpony diagnóz: {names}."
-            raise ValueError(msg)
         for diagnosis, by_version in self.prefixes.items():
             if not any(by_version.values()):
                 msg = f"Diagnóza {diagnosis.value} nemá žádnou předponu."

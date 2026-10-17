@@ -168,3 +168,12 @@ def test_statuses_not_summing_to_one_are_rejected() -> None:
     """Statusy negativního labelu, které nedávají 1, schéma odmítne."""
     with pytest.raises(ValidationError, match="dávat 1"):
         _model({MentionStatus.NEGATED: 0.5})
+
+
+def test_model_without_diagnosis_is_rejected() -> None:
+    """Plán zmínek bez některé diagnózy schéma odmítne a diagnózu jmenuje."""
+    valid = _model().model_dump()
+    del valid["diagnoses"][Diagnosis.CKD]
+
+    with pytest.raises(ValidationError, match="Chybí diagnózy: ckd"):
+        MentionModel.model_validate(valid)
