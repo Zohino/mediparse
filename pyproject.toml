@@ -268,7 +268,7 @@ ignore = [
     "start-process-with-partial-path",        # git se hledá v PATH hostitele, cestu k binárce nezná nikdo předem
 ]
 
-"tests/test_source_revision.py" = [
+"tests/git_support.py" = [
     "suspicious-subprocess-import",           # test zakládá repo pevným příkazem git bez shellu
     "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, shell se nepoužívá
     "start-process-with-partial-path",        # git se hledá v PATH, stejně jako v testovaném adaptéru
