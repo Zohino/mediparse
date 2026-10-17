@@ -24,6 +24,21 @@ def test_valid_config_is_parsed() -> None:
     assert config.folds == FOLDS
 
 
+def test_fold_is_taken_from_config() -> None:
+    """Číslo testovacího foldu je pole configu."""
+    config = TrainingConfig.model_validate_json(json.dumps({**VALID, "fold": 1}))
+
+    assert config.fold == 1
+
+
+def test_config_without_fold_is_rejected() -> None:
+    """Config bez foldu neprojde."""
+    without = {key: value for key, value in VALID.items() if key != "fold"}
+
+    with pytest.raises(ValidationError):
+        TrainingConfig.model_validate_json(json.dumps(without))
+
+
 def test_config_without_row_id_is_rejected() -> None:
     """Config bez row_id neprojde."""
     without = {key: value for key, value in VALID.items() if key != "row_id"}
@@ -36,6 +51,7 @@ def test_config_without_row_id_is_rejected() -> None:
     "override",
     [
         {"folds": 1},
+        {"fold": -1},
         {"regularization": 0.0},
         {"regularization": -1.0},
         {"diagnosis": "asthma"},
