@@ -22,10 +22,7 @@ from mediparse.domain.input_note import InputNote
 from mediparse.domain.language import Language
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.plans_file import LABELS_PATH, PLANS_PATH
-from mediparse.infrastructure.sampler_config import (
-    SAMPLER_CONFIG_PATH,
-    load_sampler_config,
-)
+from mediparse.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT
 from mediparse.infrastructure.verbalization_template import (
     VERBALIZATION_TEMPLATE_PATH,
@@ -50,9 +47,7 @@ REPOSITORY_DIAGNOSIS_CANDIDATES: Final = (
     REPOSITORY / "config" / "diagnosis_candidates.json"
 )
 REPOSITORY_MATRIX: Final = REPOSITORY / "config" / "matrix.json"
-STRUCTURE_LABELS: Final = load_sampler_config(
-    REPOSITORY_CONFIG
-).structure.structure_labels
+STRUCTURE_LABELS: Final = frozenset({"Name", "Unit No"})
 
 COMMIT: Final = "c" * 40
 NOTE_ID: Final = "90000001-DS-1"
