@@ -6,11 +6,12 @@ import io
 from typing import TYPE_CHECKING
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.evaluation import BinaryMetrics, DiagnosisMetrics, Prediction
+from mediparse.domain.evaluation import BinaryMetrics, DiagnosisMetrics
 from mediparse.entrypoints import smoketest_summary
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.metrics_table import ParquetMetricsTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
+from tests.model_support import prediction
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -21,25 +22,19 @@ if TYPE_CHECKING:
 def _demo(root: Path) -> Path:
     demo = root / "demo.parquet"
     ParquetPredictionTable(demo).write([
-        Prediction(
-            "row",
-            0,
+        prediction(
             "9000-DS-1",
-            1,
-            Diagnosis.DIABETES,
             truth=True,
-            predicted=True,
             score=1.23456,
+            diagnosis=Diagnosis.DIABETES,
+            subject_id=1,
         ),
-        Prediction(
-            "row",
-            0,
+        prediction(
             "9001-DS-1",
-            2,
-            Diagnosis.DIABETES,
             truth=False,
-            predicted=True,
             score=0.1,
+            diagnosis=Diagnosis.DIABETES,
+            subject_id=2,
         ),
     ])
     return demo

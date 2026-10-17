@@ -14,6 +14,7 @@ from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
 from tests.cohort_support import (
     EXPECTED_FUNNEL,
+    EXPECTED_INVALID_CODES,
     EXPECTED_POSITIVES,
     candidate_prefixes,
     icd,
@@ -85,7 +86,7 @@ def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
     assert written.environment.source == REVISION
     assert set(written.environment.packages) == set(cohort.PACKAGES)
     assert "pydantic" in written.environment.packages
-    assert written.invalid_codes == 1
+    assert written.invalid_codes == EXPECTED_INVALID_CODES
     assert written.counts.funnel[-1].notes == EXPECTED_FUNNEL[FunnelStepName.UNIQUE][0]
     assert (
         written.counts.positives[Diagnosis.COPD] == EXPECTED_POSITIVES[Diagnosis.COPD]

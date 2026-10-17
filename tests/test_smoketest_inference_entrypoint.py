@@ -10,8 +10,8 @@ from mediparse.entrypoints import smoketest_inference, smoketest_training
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
-from tests.model_support import training_config
-from tests.support import fixed_revision, separable_notes
+from tests.model_support import separable_notes, training_config
+from tests.support import fixed_revision
 
 if TYPE_CHECKING:
     from pathlib import Path

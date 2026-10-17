@@ -15,8 +15,8 @@ from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.sklearn_classifier import ESTIMATOR, SkopsModelFile
-from tests.model_support import training_config
-from tests.support import REVISION, fixed_revision, missing_revision, separable_notes
+from tests.model_support import separable_notes, training_config
+from tests.support import REVISION, fixed_revision, missing_revision
 
 if TYPE_CHECKING:
     from collections.abc import Callable

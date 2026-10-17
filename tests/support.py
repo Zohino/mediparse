@@ -24,9 +24,7 @@ from mediparse.domain.corpus_provenance import (
 )
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.environment import SourceRevision
-from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.language import Language
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.plans_file import LABELS_PATH, PLANS_PATH
 from mediparse.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
@@ -112,42 +110,6 @@ def audit_record(**overrides: object) -> AuditRecord:
         "created_at": "2026-09-28T00:00:00+00:00",
     } | overrides
     return AuditRecord.model_validate_json(json.dumps(fields))
-
-
-SEPARABLE_VOCABULARY: Final = (
-    "diabetes insulin glucose metformin hyperglycemia",
-    "fracture cast orthopedic surgery splint",
-)
-
-
-def separable_notes(
-    patients: int, vocabulary: tuple[str, str] = SEPARABLE_VOCABULARY
-) -> list[InputNote]:
-    """Zprávy pacientů střídavě s diabetem a bez něj, pacient má 1 až 7 zpráv nepravidelně.
-
-    Args:
-        patients: Počet pacientů; sudí mají diabetes.
-        vocabulary: Slova zpráv pozitivních a negativních pacientů; společná
-            slova z nich dělají neseparovatelný korpus.
-
-    Returns:
-        Zprávy po pacientech v pořadí pacientů.
-    """
-    notes = []
-    for patient in range(patients):
-        positive = patient % 2 == 0
-        labels = frozenset({Diagnosis.DIABETES} if positive else ())
-        notes.extend(
-            InputNote(
-                f"{patient}-DS-{visit}",
-                patient,
-                Language.EN,
-                f"{vocabulary[0] if positive else vocabulary[1]} visit {visit}",
-                labels,
-            )
-            for visit in range(1 + (patient * patient * 3 + patient) % 7)
-        )
-    return notes
 
 
 GENERATION_FIELDS: Final = {

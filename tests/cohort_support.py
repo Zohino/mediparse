@@ -138,9 +138,13 @@ def base_notes() -> list[NoteRow]:
 
     Filtry (pořadí jako ``FunnelStepName``) vyřadí tyto zprávy:
 
-    - ``WITH_ICD``: n03 (bez ``hadm_id``), n04 a n09 (přijetí bez řádku ICD);
-    - ``LONG_ENOUGH``: n05 (krátký text), n06 (text NULL);
-    - ``UNIQUE``: n08, kopie textu n01 s vyšším ``note_id``.
+    - ``FunnelStepName.WITH_ICD``: n03 (bez ``hadm_id``), n04 a n09 (přijetí
+      bez řádku ICD);
+    - ``FunnelStepName.LONG_ENOUGH``: n05 (krátký text), n06 (text NULL);
+    - ``FunnelStepName.UNIQUE``: n08, kopie textu n01 s vyšším ``note_id``.
+
+    n09 sdílí text s n10, ale duplicita se neuplatní: n09 vypadne už na
+    ``FunnelStepName.WITH_ICD`` a n10 zůstane.
 
     n07 má jediný řádek ICD s NULL kódem, takže filtr ``WITH_ICD`` projde bez
     štítků. Pacient 1 má n01 i n08, pacient 10 dvě zprávy téhož přijetí.
@@ -197,6 +201,8 @@ EXPECTED_FUNNEL: Final = {
     step: (notes + PADDING_NOTES, patients + PADDING_NOTES)
     for step, (notes, patients) in _BASE_FUNNEL.items()
 }
+# Řádek ICD s NULL kódem: jediný je u n07 v ``base_icd()``, padding žádný nemá.
+EXPECTED_INVALID_CODES: Final = 1
 # Pozitivní zprávy ``base_notes()`` po deduplikaci: n01 cukrovka, n02 fibrilace,
 # n10 zápal plic, n11 a n12 (jedno přijetí) CHOPN. Padding dá každé diagnóze
 # ``PADDING_PER_DIAGNOSIS`` pozitivních.
