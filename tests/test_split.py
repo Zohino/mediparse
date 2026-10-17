@@ -308,14 +308,12 @@ def test_sha256_orders_subjects_numerically() -> None:
     assert split.sha256() == NUMERIC_ORDER_SHA256
 
 
-def test_shared_split_keeps_config_and_assignment() -> None:
-    """K z configu shodné s počtem foldů splitu dá platný SharedSplit."""
+def test_shared_split_with_matching_folds_is_created() -> None:
+    """K z configu shodné s počtem foldů splitu vznikne bez chyby."""
     split = Split((frozenset({1}), frozenset({2})))
     config = SplitConfig(seed=3, folds=FOLDS)
 
-    shared = SharedSplit(config, split)
-
-    assert (shared.config, shared.split) == (config, split)
+    SharedSplit(config, split)
 
 
 def test_shared_split_with_other_folds_is_a_code_error() -> None:

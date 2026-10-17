@@ -12,14 +12,14 @@ rule prepare_smoketest_subset:
         "../scripts/prepare_smoketest.py"
 
 
-rule make_splits:
+rule make_smoketest_splits:
     input:
         notes=SMOKETEST / "notes.parquet",
         config="config/split.json",
     output:
         SMOKETEST / "splits.parquet",
     log:
-        SMOKETEST_LOGS / "make_splits.log",
+        SMOKETEST_LOGS / "make_smoketest_splits.log",
     script:
         "../scripts/make_splits.py"
 

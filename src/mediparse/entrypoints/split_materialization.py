@@ -1,4 +1,4 @@
-"""Vstupní bod kroku Snakemake ``make_splits``: sdílený split pacientů zpráv.
+"""Vstupní bod kroku Snakemake ``make_smoketest_splits``: sdílený split pacientů zpráv.
 
 Cesty určuje pravidlo; skript workflow jen rozbalí objekt ``snakemake`` a zavolá
 ``main``. Krok nic netrénuje, proto nezapisuje run manifest: seed, počet foldů

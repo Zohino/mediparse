@@ -1,4 +1,4 @@
-"""Vstupní bod kroku make_splits: soubor splitu, odmítnutí a determinismus."""
+"""Vstupní bod kroku make_smoketest_splits: soubor splitu, odmítnutí a determinismus."""
 
 from __future__ import annotations
 

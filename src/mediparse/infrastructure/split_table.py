@@ -4,19 +4,20 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Annotated, Final
+from typing import TYPE_CHECKING, Final
 
 import pyarrow as pa
-from pydantic import BaseModel, ConfigDict, Field, ValidationError
+from pydantic import ValidationError
 
-from mediparse.domain.digest import Sha256
+from mediparse.domain.digest import Sha256  # ruff: ignore[typing-only-first-party-import] - pydantic čte anotaci za běhu
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.seed import Seed
 from mediparse.domain.split import SharedSplit, Split, SplitConfig, SubjectLeakError
 from mediparse.infrastructure.parquet_file import read_table, write_table
 
 if TYPE_CHECKING:
     from pathlib import Path
+
+    from mediparse.domain.identity import SubjectId
 
 SCHEMA: Final = pa.schema([
     pa.field("subject_id", pa.int64(), nullable=False),
@@ -25,13 +26,9 @@ SCHEMA: Final = pa.schema([
 METADATA_KEY: Final = b"mediparse.split"
 
 
-class _SplitMetadata(BaseModel):
-    """Parametry a otisk splitu uložené v metadatech schématu souboru."""
+class _SplitMetadata(SplitConfig):
+    """Parametry splitu a otisk přiřazení uložené v metadatech schématu souboru."""
 
-    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
-
-    folds: Annotated[int, Field(ge=2)]
-    seed: Seed
     sha256: Sha256
 
 
@@ -53,7 +50,8 @@ class ParquetSplitTable:
             seed=shared.config.seed,
             sha256=shared.split.sha256(),
         )
-        # Seřazené klíče, aby stejný split dal bajtově stejný soubor.
+        # Kanonický JSON nezávislý na pořadí polí modelu, aby bajty souboru
+        # nezávisely na refaktoru ``_SplitMetadata``.
         encoded = json.dumps(metadata.model_dump(), sort_keys=True).encode()
         write_table(
             self.path,
@@ -115,16 +113,15 @@ class ParquetSplitTable:
             msg = f"Soubor {self.path} má neplatná metadata splitu:\n{error}"
             raise InvalidInputError(msg) from error
 
-    def _split(self, rows: list[tuple[int, int]], folds: int) -> Split:
+    def _split(self, rows: list[tuple[SubjectId, int]], folds: int) -> Split:
         # K z metadat, ne z řádků: prázdný fold se z řádků nepozná.
-        members: list[set[int]] = [set() for _ in range(folds)]
+        members: list[set[SubjectId]] = [set() for _ in range(folds)]
         for subject, fold in rows:
             members[fold].add(subject)
         try:
             return Split(tuple(frozenset(subjects) for subjects in members))
         except SubjectLeakError as error:
-            reason = str(error)
-        # Mimo ``except`` a bez ``from``, aby InvalidInputError nenesl ``__context__``
-        # s originální výjimkou; hláška ji převezme jen jako počet.
-        msg = f"Soubor {self.path} je neplatný. {reason}"
-        raise InvalidInputError(msg)
+            msg = f"Soubor {self.path} je neplatný. {error}"
+            # Text výjimky nese jen počet, ale ``from None`` zahodí i řetěz příčin,
+            # aby se do logu nedostal traceback domény; stejný vzor jako note_table.
+            raise InvalidInputError(msg) from None

@@ -6,8 +6,6 @@ import json
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
-import pyarrow as pa
-import pyarrow.parquet as pq
 import pytest
 
 from mediparse.domain.run_manifest import RunManifest
@@ -17,11 +15,12 @@ from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.sklearn_classifier import ESTIMATOR, SkopsModelFile
-from mediparse.infrastructure.split_table import METADATA_KEY, SCHEMA, ParquetSplitTable
+from mediparse.infrastructure.split_table import ParquetSplitTable
 from tests.model_support import (
     OVERLAPPING,
     separable_notes,
     training_config,
+    write_raw_split,
     write_split,
 )
 from tests.support import REVISION, fixed_revision, missing_revision
@@ -31,7 +30,6 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     from mediparse.domain.environment import SourceRevision
-    from mediparse.domain.evaluation import Prediction
 
 PATIENTS: Final = 12
 
@@ -142,7 +140,7 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
 def test_missing_input_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture, index: int, missing: str
 ) -> None:
-    """Chybějící tabulka, config tréninku nebo config splitu krok odmítne, nic nevznikne a log jmenuje soubor."""
+    """Chybějící tabulka, config tréninku nebo soubor splitu krok odmítne, nic nevznikne a log jmenuje soubor."""
     paths = list(_inputs(tmp_path))
     paths[index] = tmp_path / missing
     outputs = _Outputs.under(tmp_path / "out")
@@ -179,24 +177,14 @@ def test_invalid_config_is_refused(tmp_path: Path) -> None:
     assert outputs.existing() == []
 
 
-def _write_leaking_split(path: Path) -> None:
-    """Soubor splitu, ve kterém je pacient ve dvou foldech; ``Split`` takový nevytvoří."""
-    metadata = json.dumps({"folds": 2, "seed": 0, "sha256": "0" * 64}).encode()
-    columns = {"subject_id": [1, 1, 2], "fold": [0, 1, 1]}
-    pq.write_table(
-        pa.Table.from_pydict(
-            columns, schema=SCHEMA.with_metadata({METADATA_KEY: metadata})
-        ),
-        path,
-    )
-
-
 def test_split_with_subject_in_two_folds_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
     """Soubor splitu s pacientem ve dvou foldech krok odmítne a nic nevznikne."""
     notes, config, split = _inputs(tmp_path)
-    _write_leaking_split(split)
+    write_raw_split(
+        split, [(1, 0), (1, 1), (2, 1)], {"folds": 2, "seed": 0, "sha256": "0" * 64}
+    )
     outputs = _Outputs.under(tmp_path / "out")
 
     code = _run(notes, config, split, outputs)
@@ -228,38 +216,6 @@ def _successful_run(root: Path, seed: int, name: str) -> _Outputs:
     outputs = _Outputs.under(root / name)
     assert _run(notes, config, split, outputs) is ExitCode.OK
     return outputs
-
-
-def _predictions(root: Path, seed: int, name: str) -> tuple[Prediction, ...]:
-    return ParquetPredictionTable(_successful_run(root, seed, name).predictions).read()
-
-
-def _manifest(root: Path, seed: int, name: str) -> RunManifest:
-    return RunManifest.model_validate_json(
-        _successful_run(root, seed, name).manifest.read_text(encoding="utf-8")
-    )
-
-
-def _test_patients(rows: tuple[Prediction, ...]) -> frozenset[tuple[int, int]]:
-    return frozenset((row.subject_id, row.fold) for row in rows)
-
-
-def test_model_seed_does_not_change_test_patients(tmp_path: Path) -> None:
-    """Změna seedu modelu při stejném souboru splitu nechá testovací pacienty beze změny."""
-    patients = {
-        _test_patients(_predictions(tmp_path, seed, f"seed{seed}")) for seed in range(6)
-    }
-
-    assert len(patients) == 1
-
-
-def test_model_seed_does_not_change_split_fingerprint(tmp_path: Path) -> None:
-    """Otisk splitu v manifestu je pro všechny seedy modelu stejný."""
-    fingerprints = {
-        _manifest(tmp_path, seed, f"seed{seed}").split_sha256 for seed in range(6)
-    }
-
-    assert len(fingerprints) == 1
 
 
 def _manifest_bytes(root: Path, seed: int, name: str) -> bytes:

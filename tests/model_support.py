@@ -1,10 +1,13 @@
-"""Sdílená data testů modelů: predikce a config tréninku ve tvaru doménových typů."""
+"""Sdílená data testů modelů: predikce, config tréninku a builder souboru splitu."""
 
 from __future__ import annotations
 
 import json
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
+
+import pyarrow as pa
+import pyarrow.parquet as pq
 
 from mediparse.application.split_materialization import SplitMaterialization
 from mediparse.domain.diagnosis import Diagnosis
@@ -15,7 +18,7 @@ from mediparse.domain.note import note_id
 from mediparse.domain.smoketest_training import TrainingConfig
 from mediparse.domain.split import SharedSplit, SplitConfig
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
-from mediparse.infrastructure.split_table import ParquetSplitTable
+from mediparse.infrastructure.split_table import METADATA_KEY, SCHEMA, ParquetSplitTable
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -144,7 +147,7 @@ class _MemoryNotes:
 def write_split(
     path: Path, notes: Sequence[InputNote], **overrides: object
 ) -> SharedSplit:
-    """Zapíše soubor splitu zpráv přes use case kroku ``make_splits``.
+    """Zapíše soubor splitu zpráv přes use case kroku ``make_smoketest_splits``.
 
     Args:
         path: Cíl ``splits.parquet``.
@@ -160,3 +163,25 @@ def write_split(
         sink=ParquetSplitTable(path),
     )
     return step.run(split_config(**overrides))
+
+
+def write_raw_split(
+    path: Path,
+    rows: Sequence[tuple[int, int]],
+    metadata: dict[str, object] | None,
+) -> None:
+    """Zapíše soubor splitu mimo adaptér, aby šlo vyrobit stav, který adaptér nezapíše.
+
+    Args:
+        path: Cíl souboru.
+        rows: Dvojice ``subject_id`` a ``fold``.
+        metadata: Obsah metadat splitu; ``None`` soubor zapíše bez nich.
+    """
+    schema = SCHEMA
+    if metadata is not None:
+        schema = SCHEMA.with_metadata({METADATA_KEY: json.dumps(metadata).encode()})
+    columns = {
+        "subject_id": [subject for subject, _ in rows],
+        "fold": [fold for _, fold in rows],
+    }
+    pq.write_table(pa.Table.from_pydict(columns, schema=schema), path)

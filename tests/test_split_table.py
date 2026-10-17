@@ -12,6 +12,7 @@ import pytest
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.split import SharedSplit, Split, SplitConfig
 from mediparse.infrastructure.split_table import METADATA_KEY, SCHEMA, ParquetSplitTable
+from tests.model_support import write_raw_split
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -25,22 +26,6 @@ SHARED: Final = SharedSplit(CONFIG, SPLIT)
 
 def _metadata(split: Split = SPLIT, **overrides: object) -> dict[str, object]:
     return {"folds": 3, "seed": 7, "sha256": split.sha256()} | overrides
-
-
-def _write_raw(
-    path: Path,
-    rows: Sequence[tuple[int, int]],
-    metadata: dict[str, object] | None,
-) -> None:
-    """Zapíše soubor mimo adaptér, aby šlo vyrobit stav, který adaptér nezapíše."""
-    schema = SCHEMA
-    if metadata is not None:
-        schema = SCHEMA.with_metadata({METADATA_KEY: json.dumps(metadata).encode()})
-    columns = {
-        "subject_id": [subject for subject, _ in rows],
-        "fold": [fold for _, fold in rows],
-    }
-    pq.write_table(pa.Table.from_pydict(columns, schema=schema), path)
 
 
 def test_read_returns_written_split(tmp_path: Path) -> None:
@@ -119,9 +104,9 @@ def test_read_missing_file_is_invalid_input(tmp_path: Path) -> None:
 @pytest.mark.parametrize(
     ("rows", "metadata", "reason"),
     [
-        ([(1, 0)], None, "metadata"),
-        ([(1, 0)], _metadata(folds=1), "metadata"),
-        ([(1, 0)], _metadata() | {"extra": 1}, "metadata"),
+        ([(1, 0)], None, "nemá metadata splitu"),
+        ([(1, 0)], _metadata(folds=1), "neplatná metadata splitu"),
+        ([(1, 0)], _metadata() | {"extra": 1}, "neplatná metadata splitu"),
         ([(1, -1)], _metadata(), "mimo"),
         ([(1, 3)], _metadata(), "mimo"),
         ([(1, 0), (2, 1), (2, 2)], _metadata(), "ve více foldech: 1"),
@@ -145,9 +130,9 @@ def test_read_invalid_file_is_invalid_input(
     metadata: dict[str, object] | None,
     reason: str,
 ) -> None:
-    """Každý nepřípustný obsah souboru je InvalidInputError s cestou a bez identifikátorů."""
+    """Každý nepřípustný obsah souboru je InvalidInputError s cestou."""
     path = tmp_path / "splits.parquet"
-    _write_raw(path, rows, metadata)
+    write_raw_split(path, rows, metadata)
 
     with pytest.raises(InvalidInputError, match=reason) as raised:
         ParquetSplitTable(path).read()
@@ -156,16 +141,16 @@ def test_read_invalid_file_is_invalid_input(
 
 
 def test_read_subject_in_two_folds_hides_identifier(tmp_path: Path) -> None:
-    """Pacient ve dvou foldech: hláška nese počet, ne subject_id, a výjimka bez příčiny."""
+    """Pacient ve dvou foldech: hláška nese počet, ne subject_id, a výjimka bez řetězu příčin."""
     path = tmp_path / "splits.parquet"
-    _write_raw(path, [(LEAKING, 0), (LEAKING, 1)], _metadata())
+    write_raw_split(path, [(LEAKING, 0), (LEAKING, 1)], _metadata())
 
     with pytest.raises(InvalidInputError, match="ve více foldech: 1") as raised:
         ParquetSplitTable(path).read()
 
     assert str(LEAKING) not in str(raised.value)
     assert raised.value.__cause__ is None
-    assert raised.value.__context__ is None
+    assert raised.value.__suppress_context__ is True
 
 
 def test_read_other_schema_is_invalid_input(tmp_path: Path) -> None:

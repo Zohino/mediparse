@@ -166,8 +166,8 @@ def strata(notes: Sequence[InputNote], folds: int) -> tuple[int, ...]:
 
     Kombinace diagnóz pacienta (sjednocení labelů všech jeho zpráv) je bitová
     maska v pořadí ``Diagnosis``; na pořadí čísel nezáleží, jen na identitě třídy.
-    Předpokládá aspoň tolik pacientů jako foldů (use case to zajistí
-    ``ensure_patients_per_class``); jinak by zbytková třída vyvolala varování sklearn.
+    Předpokládá aspoň tolik pacientů jako foldů (krok splitu to zajistí přes
+    ``ensure_enough_patients``); jinak by zbytková třída vyvolala varování sklearn.
 
     Args:
         notes: Zprávy korpusu.
