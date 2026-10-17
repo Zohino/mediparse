@@ -20,6 +20,8 @@ PACKAGE = Path(mediparse.__file__).parent
 WORKFLOW = REPOSITORY / "workflow"
 MAX_SCRIPT_LINES = 20
 MAIN_GUARD = re.compile(r"__name__\s*==\s*[\"']__main__[\"']")
+RULE_IMPORT = re.compile(r"^\s*(?:from|import)\s+(mediparse\S*)", re.MULTILINE)
+ENTRYPOINTS_MODULE = "mediparse.entrypoints"
 RUN_DIRECTIVE = re.compile(r"^\s*run\s*:", re.MULTILINE)
 APPLICATION = PACKAGE / "application"
 APPLICATION_PREFIX = "mediparse.application."
@@ -114,6 +116,51 @@ def test_workflow_rules_have_no_inline_python() -> None:
         for rule in rules
         if RUN_DIRECTIVE.search(rule.read_text(encoding="utf-8"))
     ] == []
+
+
+def _rule_import_violations(rules: list[Path]) -> list[str]:
+    """Importy `mediparse` v pravidlech Snakemake mimo `mediparse.entrypoints`.
+
+    Soubory `.smk` nejsou Python, takže import-linter je nečte; hlídá se první řádek
+    importu a odsazený import uvnitř pravidla se počítá také.
+
+    Returns:
+        Popisy porušení; prázdný seznam znamená, že pravidlo platí.
+    """
+    return [
+        f"{rule.name} importuje {module}"
+        for rule in rules
+        for module in RULE_IMPORT.findall(rule.read_text(encoding="utf-8"))
+        if module != ENTRYPOINTS_MODULE
+        and not module.startswith(f"{ENTRYPOINTS_MODULE}.")
+    ]
+
+
+def test_workflow_rules_import_only_entrypoints() -> None:
+    """Pravidla Snakemake vstupují do balíčku jen přes entrypoints, jako skripty workflow."""
+    assert _rule_import_violations(_workflow_rules()) == []
+
+
+def test_rule_import_check_finds_violations(tmp_path: Path) -> None:
+    """Kontrola najde import domény, holý import balíčku i odsazený import."""
+    rule = tmp_path / "bad.smk"
+    rule.write_text(
+        "from mediparse.domain.x import y\n"
+        "import mediparse\n"
+        "rule a:\n"
+        "    input:\n"
+        "        z\n"
+        "if True:\n"
+        "    from mediparse.application.q import w\n"
+        "from mediparse.entrypoints.ok import fine\n",
+        encoding="utf-8",
+    )
+
+    assert _rule_import_violations([rule]) == [
+        "bad.smk importuje mediparse.domain.x",
+        "bad.smk importuje mediparse",
+        "bad.smk importuje mediparse.application.q",
+    ]
 
 
 def test_import_linter_sees_workflow_scripts() -> None:
