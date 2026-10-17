@@ -10,9 +10,9 @@ from pydantic import BaseModel, ConfigDict, ValidationError, model_validator
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.digest import Sha256
+from mediparse.domain.environment import Environment
 from mediparse.domain.icd import DiagnosisCodes, IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.run_manifest import Environment
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping

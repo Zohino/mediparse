@@ -9,8 +9,8 @@ from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.cohort import MIN_CELL, CohortManifest
 from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.environment import SourceRevision
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.run_manifest import SourceRevision
 from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256

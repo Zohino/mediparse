@@ -1,4 +1,4 @@
-"""Schéma run manifestu: přísná validace revize zdroje a otisků."""
+"""Schéma run manifestu: přísná validace otisků a vnoření prostředí."""
 
 from __future__ import annotations
 
@@ -7,7 +7,8 @@ from typing import Final
 import pytest
 from pydantic import ValidationError
 
-from mediparse.domain.run_manifest import Environment, RunManifest, SourceRevision
+from mediparse.domain.environment import Environment, SourceRevision
+from mediparse.domain.run_manifest import RunManifest
 
 COMMIT: Final = "a" * 40
 DIGEST: Final = "b" * 64
@@ -39,13 +40,6 @@ def test_valid_manifest_with_null_revisions() -> None:
     assert manifest.environment.source.commit == COMMIT
 
 
-@pytest.mark.parametrize("commit", ["a" * 7, "A" * 40, "a" * 41])
-def test_invalid_commit_is_rejected(commit: str) -> None:
-    """Zkrácený, velkými písmeny psaný i příliš dlouhý commit je odmítnut."""
-    with pytest.raises(ValidationError):
-        SourceRevision(commit=commit, dirty=False)
-
-
 @pytest.mark.parametrize("field", ["dataset_sha256", "config_sha256"])
 @pytest.mark.parametrize("digest", ["b" * 63, "b" * 65])
 def test_digest_of_other_length_is_rejected(field: str, digest: str) -> None:
@@ -65,16 +59,6 @@ def test_invalid_row_id_is_rejected(row_id: str) -> None:
     """Prázdné id i id mimo skladbu řádku matice manifest odmítne."""
     with pytest.raises(ValidationError):
         RunManifest.model_validate(_fields(row_id=row_id))
-
-
-def test_environment_rejects_unknown_field_and_non_strict_types() -> None:
-    """Prostředí je přísné: cizí pole a balíček s jinou verzí než text neprojdou."""
-    source = SourceRevision(commit=COMMIT, dirty=False)
-
-    with pytest.raises(ValidationError):
-        Environment.model_validate({"packages": {}, "source": source, "extra": 1})
-    with pytest.raises(ValidationError):
-        Environment.model_validate({"packages": {"python": 3}, "source": source})
 
 
 def test_manifest_nests_environment_instead_of_flat_fields() -> None:

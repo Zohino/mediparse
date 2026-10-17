@@ -14,7 +14,7 @@ from typing import TYPE_CHECKING, Final
 
 from mediparse.application.cohort import CohortMaterialization
 from mediparse.domain.cohort import CohortManifest
-from mediparse.domain.run_manifest import Environment
+from mediparse.domain.environment import Environment
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_codes_file import load_diagnosis_codes
@@ -28,7 +28,7 @@ from mediparse.infrastructure.source_revision import revision_source
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from mediparse.domain.run_manifest import SourceRevision
+    from mediparse.domain.environment import SourceRevision
 
 logger = logging.getLogger(__name__)
 

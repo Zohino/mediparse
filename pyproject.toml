@@ -174,6 +174,7 @@ broken_contract_guidance = "Řádek vstupu je v domain.input_note a pravidla spl
 name = "Provenance nestojí na auditu korpusu"
 type = "forbidden"
 source_modules = [
+    "mediparse.domain.environment",
     "mediparse.domain.run_manifest",
     "mediparse.domain.cohort",
     "mediparse.domain.corpus_provenance",

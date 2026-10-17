@@ -6,8 +6,9 @@ import json
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
+from mediparse.domain.environment import SourceRevision
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.run_manifest import RunManifest, SourceRevision
+from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints import smoketest_training
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256

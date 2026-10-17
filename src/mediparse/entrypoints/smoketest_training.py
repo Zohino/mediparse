@@ -12,7 +12,8 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
 from mediparse.application.smoketest_training import SmoketestTraining
-from mediparse.domain.run_manifest import Environment, RunManifest
+from mediparse.domain.environment import Environment
+from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
@@ -32,7 +33,7 @@ from mediparse.infrastructure.training_config import load_training_config
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from mediparse.domain.run_manifest import SourceRevision
+    from mediparse.domain.environment import SourceRevision
 
 logger = logging.getLogger(__name__)
 

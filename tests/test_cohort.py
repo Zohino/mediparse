@@ -18,8 +18,8 @@ from mediparse.domain.cohort import (
     label_codes,
 )
 from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.environment import Environment, SourceRevision
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.run_manifest import Environment, SourceRevision
 from tests.cohort_support import (
     CODES,
     EMPTY_COHORT,
