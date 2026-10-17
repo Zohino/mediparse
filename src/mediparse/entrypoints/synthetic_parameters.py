@@ -15,9 +15,11 @@ from typing import TYPE_CHECKING
 
 from mediparse.application.synthetic_parameters import ParameterTransfer
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
+from mediparse.entrypoints.corpus_cli import (
+    add_sampler_config_option,
+)
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.sampler_config import (
-    SAMPLER_CONFIG_PATH,
     SamplerConfigFile,
 )
 from mediparse.infrastructure.synthetic_parameters_file import (
@@ -67,10 +69,5 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--export", type=Path, default=PARAMETERS_PATH, help="export sešitu 8 (JSON)"
     )
-    parser.add_argument(
-        "--config",
-        type=Path,
-        default=SAMPLER_CONFIG_PATH,
-        help="konfigurace vzorkovače",
-    )
+    add_sampler_config_option(parser)
     return parser

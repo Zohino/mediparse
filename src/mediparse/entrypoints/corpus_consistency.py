@@ -10,18 +10,21 @@ from __future__ import annotations
 
 import argparse
 import sys
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.application.corpus_consistency import CorpusConsistency
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
+from mediparse.entrypoints.corpus_cli import (
+    add_corpus_option,
+    add_plans_option,
+    add_sampler_config_option,
+)
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.plans_file import PLANS_PATH, PlansFile
+from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.sampler_config import (
-    SAMPLER_CONFIG_PATH,
     load_sampler_config,
 )
-from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirectory
+from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -71,16 +74,7 @@ def _parser() -> argparse.ArgumentParser:
         prog="mediparse-corpus-check",
         description="Kontroly souladu syntetických zpráv s jejich plány.",
     )
-    parser.add_argument(
-        "--corpus", type=Path, default=CORPUS_ROOT, help="kořen syntetického korpusu"
-    )
-    parser.add_argument(
-        "--plans", type=Path, default=PLANS_PATH, help="soubor plánů JSON Lines"
-    )
-    parser.add_argument(
-        "--config",
-        type=Path,
-        default=SAMPLER_CONFIG_PATH,
-        help="konfigurace vzorkovače s hlavičkami a klíčovými slovy",
-    )
+    add_corpus_option(parser)
+    add_plans_option(parser)
+    add_sampler_config_option(parser)
     return parser

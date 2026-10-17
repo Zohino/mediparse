@@ -20,14 +20,14 @@ from mediparse.application.corpus_provenance import (
 )
 from mediparse.application.translation_provenance import TranslationProvenance
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
+from mediparse.entrypoints.corpus_cli import (
+    add_corpus_option,
+    add_sampler_config_option,
+    add_tables_option,
+)
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.audit_pin import load_audit_pin
-from mediparse.infrastructure.mimic_tables import TABLES_PATH
-from mediparse.infrastructure.sampler_config import (
-    SAMPLER_CONFIG_PATH,
-)
 from mediparse.infrastructure.synthetic_corpus import (
-    CORPUS_ROOT,
     PROVENANCE_NAME,
     CorpusDirectory,
 )
@@ -90,19 +90,7 @@ def _parser() -> argparse.ArgumentParser:
         default=Path(WORKDIR_PATH),
         help="pracovní adresář překladu s requests.json, runs.jsonl a outputs.jsonl",
     )
-    parser.add_argument(
-        "--corpus", type=Path, default=CORPUS_ROOT, help="kořen syntetického korpusu"
-    )
-    parser.add_argument(
-        "--config",
-        type=Path,
-        default=SAMPLER_CONFIG_PATH,
-        help="konfigurace vzorkovače se štítky struktury zprávy",
-    )
-    parser.add_argument(
-        "--tables",
-        type=Path,
-        default=TABLES_PATH,
-        help="config tabulek MIMIC s oficiálními otisky",
-    )
+    add_corpus_option(parser)
+    add_sampler_config_option(parser)
+    add_tables_option(parser)
     return parser

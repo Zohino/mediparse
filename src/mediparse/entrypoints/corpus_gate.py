@@ -9,18 +9,18 @@ from __future__ import annotations
 
 import argparse
 import sys
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.application.corpus_gate import CorpusGate
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
+from mediparse.entrypoints.corpus_cli import (
+    add_corpus_option,
+    add_sampler_config_option,
+    add_tables_option,
+)
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.audit_pin import load_audit_pin
-from mediparse.infrastructure.mimic_tables import TABLES_PATH
-from mediparse.infrastructure.sampler_config import (
-    SAMPLER_CONFIG_PATH,
-)
-from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT, CorpusDirectory
+from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -58,19 +58,7 @@ def _parser() -> argparse.ArgumentParser:
         prog="mediparse-corpus-gate",
         description="Brána: korpus v repozitáři odpovídá svému auditu.",
     )
-    parser.add_argument(
-        "--corpus", type=Path, default=CORPUS_ROOT, help="kořen syntetického korpusu"
-    )
-    parser.add_argument(
-        "--tables",
-        type=Path,
-        default=TABLES_PATH,
-        help="config tabulek MIMIC s oficiálními otisky",
-    )
-    parser.add_argument(
-        "--config",
-        type=Path,
-        default=SAMPLER_CONFIG_PATH,
-        help="konfigurace vzorkovače se štítky struktury zprávy",
-    )
+    add_corpus_option(parser)
+    add_tables_option(parser)
+    add_sampler_config_option(parser)
     return parser

@@ -16,6 +16,9 @@ from typing import TYPE_CHECKING
 
 from mediparse.application.plan_sampling import PlanSampling
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
+from mediparse.entrypoints.corpus_cli import (
+    add_sampler_config_option,
+)
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.plans_file import (
     LABELS_PATH,
@@ -23,7 +26,6 @@ from mediparse.infrastructure.plans_file import (
     SyntheticPlanFiles,
 )
 from mediparse.infrastructure.sampler_config import (
-    SAMPLER_CONFIG_PATH,
     load_sampler_config,
 )
 
@@ -65,12 +67,7 @@ def _parser() -> argparse.ArgumentParser:
         prog="mediparse-sample-plans",
         description="Vzorkovač plánů syntetických propouštěcích zpráv.",
     )
-    parser.add_argument(
-        "--config",
-        type=Path,
-        default=SAMPLER_CONFIG_PATH,
-        help="konfigurace vzorkovače",
-    )
+    add_sampler_config_option(parser)
     parser.add_argument(
         "--output", type=Path, default=PLANS_PATH, help="soubor plánů JSON Lines"
     )

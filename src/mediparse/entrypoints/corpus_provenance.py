@@ -11,7 +11,6 @@ import argparse
 import logging
 import sys
 from datetime import date
-from pathlib import Path
 from typing import TYPE_CHECKING, assert_never
 
 from mediparse.application.corpus_provenance import (
@@ -31,22 +30,25 @@ from mediparse.entrypoints.cli import (
     configure_logging,
     refusing_invalid_input,
 )
+from mediparse.entrypoints.corpus_cli import (
+    add_corpus_option,
+    add_plans_option,
+    add_sampler_config_option,
+    add_tables_option,
+    add_template_option,
+)
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.audit_pin import load_audit_pin
 from mediparse.infrastructure.file_digest import file_sha256
-from mediparse.infrastructure.mimic_tables import TABLES_PATH
-from mediparse.infrastructure.plans_file import PLANS_PATH, PlansFile
+from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.sampler_config import (
-    SAMPLER_CONFIG_PATH,
     load_sampler_config,
 )
 from mediparse.infrastructure.synthetic_corpus import (
-    CORPUS_ROOT,
     PROVENANCE_NAME,
     CorpusDirectory,
 )
 from mediparse.infrastructure.verbalization_template import (
-    VERBALIZATION_TEMPLATE_PATH,
     load_verbalization_template,
 )
 
@@ -133,28 +135,9 @@ def _parser() -> argparse.ArgumentParser:
         required=True,
         help="commit docs/synthetic-corpus.md, podle kterého korpus vznikl",
     )
-    parser.add_argument(
-        "--corpus", type=Path, default=CORPUS_ROOT, help="kořen syntetického korpusu"
-    )
-    parser.add_argument(
-        "--config",
-        type=Path,
-        default=SAMPLER_CONFIG_PATH,
-        help="konfigurace vzorkovače",
-    )
-    parser.add_argument(
-        "--plans", type=Path, default=PLANS_PATH, help="soubor plánů JSON Lines"
-    )
-    parser.add_argument(
-        "--template",
-        type=Path,
-        default=VERBALIZATION_TEMPLATE_PATH,
-        help="šablona instrukcí verbalizace",
-    )
-    parser.add_argument(
-        "--tables",
-        type=Path,
-        default=TABLES_PATH,
-        help="config tabulek MIMIC s oficiálními otisky",
-    )
+    add_corpus_option(parser)
+    add_sampler_config_option(parser)
+    add_plans_option(parser)
+    add_template_option(parser)
+    add_tables_option(parser)
     return parser
