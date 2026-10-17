@@ -21,7 +21,9 @@ if TYPE_CHECKING:
 FOLDS: Final = 3
 SEEDS: Final = range(10)
 IMBALANCED_PATIENTS: Final = 30
-EXPECTED_POSITIVES: Final = 2
+POSITIVE_PATIENTS: Final = 6
+EXPECTED_POSITIVES: Final = POSITIVE_PATIENTS // FOLDS
+assert POSITIVE_PATIENTS % FOLDS == 0
 
 
 def _imbalanced_notes() -> list[InputNote]:
@@ -57,7 +59,6 @@ def test_every_patient_is_in_exactly_one_fold(notes: list[InputNote]) -> None:
 
     patients = [subject for fold in split.folds for subject in fold]
     assert len(split.folds) == FOLDS
-    assert len(patients) == len(set(patients))
     assert set(patients) == {note.subject_id for note in notes}
 
 
@@ -79,7 +80,9 @@ def test_positive_patients_are_spread_evenly_over_folds(seed: int) -> None:
 
     split = _split(notes, folds=FOLDS, seed=seed)
 
-    assert [len(fold & positive) for fold in split.folds] == [EXPECTED_POSITIVES] * 3
+    assert [len(fold & positive) for fold in split.folds] == [
+        EXPECTED_POSITIVES
+    ] * FOLDS
 
 
 def test_rare_combination_does_not_warn() -> None:

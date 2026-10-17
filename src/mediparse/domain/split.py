@@ -54,7 +54,7 @@ class Split:
             shared |= seen & fold
             seen |= fold
         if shared:
-            msg = f"Pacienti ve více foldech: {', '.join(map(str, sorted(shared)))}."
+            msg = f"Pacientů ve více foldech: {len(shared)}."
             raise SubjectLeakError(msg)
 
     def holdout(self, notes: Sequence[InputNote], fold: int) -> Holdout:
@@ -72,12 +72,12 @@ class Split:
                 mimo split.
         """
         if not 0 <= fold < len(self.folds):
-            msg = f"Fold {fold} neexistuje, split má {len(self.folds)} foldů."
+            msg = f"Fold {fold} neexistuje, počet foldů splitu: {len(self.folds)}."
             raise InvalidInputError(msg)
         covered = frozenset().union(*self.folds)
         outside = sum(note.subject_id not in covered for note in notes)
         if outside:
-            msg = f"{outside} zpráv patří pacientům mimo split."
+            msg = f"Zprávy pacientů mimo split: {outside}."
             raise InvalidInputError(msg)
         test = tuple(note for note in notes if note.subject_id in self.folds[fold])
         train = tuple(note for note in notes if note.subject_id not in self.folds[fold])
@@ -88,7 +88,9 @@ def strata(notes: Sequence[InputNote], folds: int) -> tuple[int, ...]:
     """Určí třídu stratifikace každé zprávy z kombinace diagnóz jejího pacienta.
 
     Kombinace diagnóz pacienta (sjednocení labelů všech jeho zpráv) je bitová
-    maska v pořadí ``Diagnosis``; na pořadí čísel nezáleží, jen na identitě třídy.
+    maska v pořadí ``Diagnosis``; na pořadí čísel nezáleží, jen na identitě třídy. Předpokládá aspoň tolik
+    pacientů jako foldů (use case to zajistí ``ensure_patients_per_class``); jinak
+    by zbytková třída vyvolala varování sklearn.
 
     Args:
         notes: Zprávy korpusu.
@@ -131,21 +133,26 @@ def _stratum_of(combinations: dict[SubjectId, int], folds: int) -> dict[SubjectI
 
 
 def ensure_patients_per_class(
-    labels: Sequence[bool], groups: Sequence[int], diagnosis: Diagnosis, folds: int
+    labels: Sequence[bool],
+    subjects: Sequence[SubjectId],
+    diagnosis: Diagnosis,
+    folds: int,
 ) -> None:
     """Ověří, že každá třída diagnózy má aspoň tolik pacientů jako foldů.
 
     Args:
         labels: Label diagnózy každé zprávy.
-        groups: Pacient každé zprávy.
+        subjects: Pacient každé zprávy.
         diagnosis: Diagnóza, na které se trénuje.
         folds: Počet foldů odložení.
 
     Raises:
         InvalidInputError: Některá třída má méně pacientů než foldů.
     """
-    positive = {group for label, group in zip(labels, groups, strict=True) if label}
-    negative = {group for label, group in zip(labels, groups, strict=True) if not label}
+    positive = {group for label, group in zip(labels, subjects, strict=True) if label}
+    negative = {
+        group for label, group in zip(labels, subjects, strict=True) if not label
+    }
     if min(len(positive), len(negative)) < folds:
         msg = (
             f"Diagnóza {diagnosis}: {len(positive)} pozitivních a {len(negative)} "

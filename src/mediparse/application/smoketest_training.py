@@ -17,9 +17,15 @@ if TYPE_CHECKING:
         PredictionSink,
         TextClassifier,
     )
+    from mediparse.domain.diagnosis import Diagnosis
     from mediparse.domain.identity import SubjectId
+    from mediparse.domain.input_note import InputNote
     from mediparse.domain.smoketest_training import TrainingConfig
     from mediparse.domain.split import Split
+
+
+def _labels(notes: Sequence[InputNote], diagnosis: Diagnosis) -> list[bool]:
+    return [diagnosis in note.labels for note in notes]
 
 
 class PatientSplitter(Protocol):
@@ -67,16 +73,16 @@ class SmoketestTraining[C: TextClassifier]:
             Velikosti částí odložení.
         """
         notes = self.table.read()
-        labels = [config.diagnosis in note.labels for note in notes]
+        labels = _labels(notes, config.diagnosis)
         subjects = [note.subject_id for note in notes]
         ensure_patients_per_class(labels, subjects, config.diagnosis, config.folds)
         split = self.splitter.split(subjects, strata(notes, config.folds))
         holdout = split.holdout(notes, config.fold)
         classifier = self.trainer.fit(
             [note.text for note in holdout.train],
-            [config.diagnosis in note.labels for note in holdout.train],
+            _labels(holdout.train, config.diagnosis),
         )
-        truth = [config.diagnosis in note.labels for note in holdout.test]
+        truth = _labels(holdout.test, config.diagnosis)
         classifications = classifier.classify([note.text for note in holdout.test])
         predictions = [
             Prediction(

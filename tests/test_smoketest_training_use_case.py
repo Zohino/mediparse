@@ -147,7 +147,7 @@ def test_fold_out_of_range_stops_before_saving(fold: int) -> None:
     recorder = _Recorder()
     config = parsed_training_config(diagnosis="ckd", row_id="row", fold=fold)
 
-    with pytest.raises(InvalidInputError, match="foldů"):
+    with pytest.raises(InvalidInputError, match=rf"Fold {fold} neexistuje"):
         _use_case(NOTES, SPLIT, recorder).run(config)
 
     assert recorder.calls.keys() <= {"split"}
@@ -158,7 +158,7 @@ def test_subject_outside_split_stops_before_saving() -> None:
     notes = (*NOTES, InputNote("e", 5, Language.EN, "text e", frozenset()))
     recorder = _Recorder()
 
-    with pytest.raises(InvalidInputError, match="mimo split"):
+    with pytest.raises(InvalidInputError, match="Zprávy pacientů mimo split"):
         _use_case(notes, SPLIT, recorder).run(CONFIG)
 
     assert recorder.calls.keys() <= {"split"}
