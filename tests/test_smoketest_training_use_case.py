@@ -19,8 +19,6 @@ from mediparse.domain.split import Holdout, SubjectLeakError
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.application.ports.experiment import TextClassifier
-
 CONFIG = TrainingConfig(
     row_id="row", diagnosis=Diagnosis.CKD, seed=0, folds=2, regularization=1.0
 )
@@ -84,7 +82,7 @@ class _FakeTrainer:
 class _FakeStore:
     recorder: _Recorder
 
-    def save(self, classifier: TextClassifier) -> None:
+    def save(self, classifier: _FakeClassifier) -> None:
         self.recorder.calls["save"] = classifier
 
 
@@ -98,7 +96,7 @@ class _FakeSink:
 
 def _use_case(
     notes: Sequence[InputNote], holdout: Holdout, recorder: _Recorder
-) -> SmoketestTraining:
+) -> SmoketestTraining[_FakeClassifier]:
     return SmoketestTraining(
         table=_FakeTable(notes),
         splitter=_FakeSplitter(holdout, recorder),
