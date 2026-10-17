@@ -28,6 +28,7 @@ from mediparse.infrastructure.sklearn_classifier import (
 )
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.source_revision import revision_source
+from mediparse.infrastructure.split_config import load_split_config
 from mediparse.infrastructure.training_config import load_training_config
 
 if TYPE_CHECKING:
@@ -53,6 +54,7 @@ def main(
     *,
     notes: Path,
     config: Path,
+    split: Path,
     model: Path,
     predictions: Path,
     manifest: Path,
@@ -67,6 +69,7 @@ def main(
     return run(
         notes=notes,
         config=config,
+        split=split,
         model=model,
         predictions=predictions,
         manifest=manifest,
@@ -79,6 +82,7 @@ def run(
     *,
     notes: Path,
     config: Path,
+    split: Path,
     model: Path,
     predictions: Path,
     manifest: Path,
@@ -88,18 +92,19 @@ def run(
 
     Returns:
         OK po uložení modelu, predikcí a manifestu; REFUSED pro chybějící nebo
-        neplatnou tabulku a config a pro nečitelnou revizi zdroje.
+        neplatnou tabulku a configy a pro nečitelnou revizi zdroje.
     """
     training = load_training_config(config)
+    split_config = load_split_config(split)
     source = revision()
     step = SmoketestTraining(
         table=ParquetNoteTable(notes),
-        splitter=StratifiedGroupFolds(training.folds, training.seed),
+        splitter=StratifiedGroupFolds(),
         trainer=LinearSvmTrainer(training.regularization, training.seed),
         store=SkopsModelFile(model),
         predictions=ParquetPredictionTable(predictions),
     )
-    report = step.run(training)
+    report = step.run(training, split_config)
     write_model(
         manifest,
         RunManifest(

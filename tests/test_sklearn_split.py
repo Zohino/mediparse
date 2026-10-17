@@ -11,7 +11,7 @@ from mediparse.domain.input_note import InputNote
 from mediparse.domain.language import Language
 from mediparse.domain.split import strata
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
-from tests.model_support import separable_notes
+from tests.model_support import separable_notes, split_config
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -43,8 +43,10 @@ def _imbalanced_notes() -> list[InputNote]:
 
 
 def _split(notes: Sequence[InputNote], *, folds: int, seed: int) -> Split:
-    return StratifiedGroupFolds(folds=folds, seed=seed).split(
-        [note.subject_id for note in notes], strata(notes, folds)
+    return StratifiedGroupFolds().split(
+        [note.subject_id for note in notes],
+        strata(notes, folds),
+        split_config(folds=folds, seed=seed),
     )
 
 

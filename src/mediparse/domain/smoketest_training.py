@@ -12,7 +12,7 @@ from mediparse.domain.identity import RowId
 
 
 class TrainingConfig(BaseModel):
-    """Parametry tréninku: řádek matice, diagnóza, seed odložení, foldy a regularizace.
+    """Parametry tréninku: řádek matice, diagnóza, seed modelu, testovací fold a regularizace.
 
     ``fold`` je číslo foldu, který slouží jako test; jeho horní mez zná až ``Split``.
     """
@@ -22,7 +22,6 @@ class TrainingConfig(BaseModel):
     row_id: RowId
     diagnosis: Diagnosis
     seed: int
-    folds: Annotated[int, Field(ge=2)]
     fold: Annotated[int, Field(ge=0)]
     regularization: Annotated[float, Field(gt=0.0)]
 
@@ -35,3 +34,4 @@ class TrainingReport:
     train_notes: int
     test_notes: int
     test_positives: int
+    split_sha256: str

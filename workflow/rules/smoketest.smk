@@ -16,6 +16,7 @@ rule train_smoketest_model:
     input:
         notes=SMOKETEST / "notes.parquet",
         config="config/smoketest_training.json",
+        split="config/split.json",
     output:
         model=SMOKETEST / "model.skops",
         predictions=SMOKETEST / "predictions.parquet",

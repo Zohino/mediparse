@@ -15,7 +15,7 @@ from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.sklearn_classifier import ESTIMATOR, SkopsModelFile
-from tests.model_support import separable_notes, training_config
+from tests.model_support import separable_notes, split_config_json, training_config
 from tests.support import REVISION, fixed_revision, missing_revision
 
 if TYPE_CHECKING:
@@ -38,7 +38,8 @@ def _inputs(
     diagnosis: str = "diabetes",
     seed: int = 0,
     row_id: str | None = "row",
-) -> tuple[Path, Path]:
+    split_seed: int = 0,
+) -> tuple[Path, Path, Path]:
     notes = root / "notes.parquet"
     ParquetNoteTable(notes).write(separable_notes(PATIENTS, OVERLAPPING))
     config_body = training_config(diagnosis=diagnosis, seed=seed)
@@ -51,7 +52,9 @@ def _inputs(
         json.dumps(config_body),
         encoding="utf-8",
     )
-    return notes, config
+    split = root / f"split-{split_seed}.json"
+    split.write_text(json.dumps(split_config_json(seed=split_seed)), encoding="utf-8")
+    return notes, config, split
 
 
 @dataclass(frozen=True)
@@ -81,12 +84,14 @@ class _Outputs:
 def _run(
     notes: Path,
     config: Path,
+    split: Path,
     outputs: _Outputs,
     revision: Callable[[], SourceRevision] = fixed_revision,
 ) -> ExitCode:
     return smoketest_training.run(
         notes=notes,
         config=config,
+        split=split,
         model=outputs.model,
         predictions=outputs.predictions,
         manifest=outputs.manifest,
@@ -96,10 +101,10 @@ def _run(
 
 def test_writes_model_and_predictions(tmp_path: Path) -> None:
     """Běh uloží načitatelný model a predikce testovacích zpráv s row_id a foldem 0."""
-    notes, config = _inputs(tmp_path)
+    notes, config, split = _inputs(tmp_path)
     outputs = _Outputs.under(tmp_path / "build")
 
-    code = _run(notes, config, outputs)
+    code = _run(notes, config, split, outputs)
 
     rows = ParquetPredictionTable(outputs.predictions).read()
     assert code is ExitCode.OK
@@ -124,18 +129,18 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
 
 @pytest.mark.parametrize(
     ("index", "missing"),
-    [(0, "none.parquet"), (1, "none.json")],
-    ids=["table", "config"],
+    [(0, "none.parquet"), (1, "none.json"), (2, "none-split.json")],
+    ids=["table", "config", "split"],
 )
 def test_missing_input_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture, index: int, missing: str
 ) -> None:
-    """Chybějící tabulka nebo config krok odmítne, nic nevznikne a log jmenuje soubor."""
+    """Chybějící tabulka, config tréninku nebo config splitu krok odmítne, nic nevznikne a log jmenuje soubor."""
     paths = list(_inputs(tmp_path))
     paths[index] = tmp_path / missing
     outputs = _Outputs.under(tmp_path / "out")
 
-    code = _run(paths[0], paths[1], outputs)
+    code = _run(paths[0], paths[1], paths[2], outputs)
 
     assert code is ExitCode.REFUSED
     assert outputs.existing() == []
@@ -146,10 +151,10 @@ def test_diagnosis_without_positives_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
     """Diagnóza bez pozitivních pacientů krok odmítne a nic nevznikne."""
-    notes, config = _inputs(tmp_path, diagnosis="pneumonia")
+    notes, config, split = _inputs(tmp_path, diagnosis="pneumonia")
     outputs = _Outputs.under(tmp_path / "out")
 
-    code = _run(notes, config, outputs)
+    code = _run(notes, config, split, outputs)
 
     assert code is ExitCode.REFUSED
     assert outputs.existing() == []
@@ -158,38 +163,70 @@ def test_diagnosis_without_positives_is_refused(
 
 def test_invalid_config_is_refused(tmp_path: Path) -> None:
     """Config bez row_id krok odmítne a nic nevznikne."""
-    notes, config = _inputs(tmp_path, row_id=None)
+    notes, config, split = _inputs(tmp_path, row_id=None)
     outputs = _Outputs.under(tmp_path / "out")
 
-    code = _run(notes, config, outputs)
+    code = _run(notes, config, split, outputs)
 
     assert code is ExitCode.REFUSED
     assert outputs.existing() == []
 
 
-def _successful_run(root: Path, seed: int, name: str) -> _Outputs:
-    notes, config = _inputs(root, seed=seed)
+def test_invalid_split_config_is_refused(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Config splitu s jedním foldem krok odmítne, nic nevznikne a log jmenuje soubor."""
+    notes, config, split = _inputs(tmp_path)
+    split.write_text(json.dumps(split_config_json(folds=1)), encoding="utf-8")
+    outputs = _Outputs.under(tmp_path / "out")
+
+    code = _run(notes, config, split, outputs)
+
+    assert code is ExitCode.REFUSED
+    assert outputs.existing() == []
+    assert split.name in caplog.text
+
+
+def _successful_run(root: Path, seed: int, name: str, split_seed: int = 0) -> _Outputs:
+    notes, config, split = _inputs(root, seed=seed, split_seed=split_seed)
     outputs = _Outputs.under(root / name)
-    assert _run(notes, config, outputs) is ExitCode.OK
+    assert _run(notes, config, split, outputs) is ExitCode.OK
     return outputs
 
 
-def _predictions(root: Path, seed: int, name: str) -> tuple[Prediction, ...]:
-    return ParquetPredictionTable(_successful_run(root, seed, name).predictions).read()
+def _predictions(
+    root: Path, seed: int, name: str, split_seed: int = 0
+) -> tuple[Prediction, ...]:
+    return ParquetPredictionTable(
+        _successful_run(root, seed, name, split_seed).predictions
+    ).read()
 
 
-def test_seed_decides_the_split(tmp_path: Path) -> None:
-    """Stejný seed dá stejný obsah predikcí, jiný seed jiné testovací zprávy."""
-    first = _predictions(tmp_path, 0, "first")
-    repeated = _predictions(tmp_path, 0, "repeated")
-    others = [_predictions(tmp_path, seed, f"seed{seed}") for seed in range(1, 6)]
-
-    assert first == repeated
-    assert len({tuple(row.note_id for row in rows) for rows in [first, *others]}) > 1
+def _test_patients(rows: tuple[Prediction, ...]) -> frozenset[tuple[int, int]]:
+    return frozenset((row.subject_id, row.fold) for row in rows)
 
 
-def _manifest_bytes(root: Path, seed: int, name: str) -> bytes:
-    return _successful_run(root, seed, name).manifest.read_bytes()
+def test_model_seed_does_not_change_test_patients(tmp_path: Path) -> None:
+    """Změna seedu modelu při stejném configu splitu nechá testovací pacienty beze změny."""
+    patients = {
+        _test_patients(_predictions(tmp_path, seed, f"seed{seed}")) for seed in range(6)
+    }
+
+    assert len(patients) == 1
+
+
+def test_split_seed_changes_test_patients(tmp_path: Path) -> None:
+    """Pozitivní kontrola: seed splitu při stejném configu tréninku mění testovací pacienty."""
+    patients = {
+        _test_patients(_predictions(tmp_path, 0, f"split{seed}", split_seed=seed))
+        for seed in range(6)
+    }
+
+    assert len(patients) > 1
+
+
+def _manifest_bytes(root: Path, seed: int, name: str, split_seed: int = 0) -> bytes:
+    return _successful_run(root, seed, name, split_seed).manifest.read_bytes()
 
 
 def test_manifest_is_byte_identical_for_same_inputs(tmp_path: Path) -> None:
@@ -210,10 +247,10 @@ def test_seed_changes_manifest(tmp_path: Path) -> None:
 
 def test_unreadable_revision_is_refused_before_training(tmp_path: Path) -> None:
     """Revize, kterou nelze přečíst, krok odmítne a nevznikne nic."""
-    notes, config = _inputs(tmp_path)
+    notes, config, split = _inputs(tmp_path)
     outputs = _Outputs.under(tmp_path / "out")
 
-    code = _run(notes, config, outputs, revision=missing_revision)
+    code = _run(notes, config, split, outputs, revision=missing_revision)
 
     assert code is ExitCode.REFUSED
     assert outputs.existing() == []

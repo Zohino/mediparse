@@ -4,6 +4,7 @@
 !workflow/
 !config/matrix.json
 !config/smoketest_training.json
+!config/split.json
 !config/synthetic_plan.json
 !config/mimic_tables.json
 !config/diagnosis_candidates.json
