@@ -88,3 +88,11 @@ def test_invalid_line_becomes_invalid_input_via_parse_file(tmp_path: Path) -> No
 
     with pytest.raises(InvalidInputError, match="neodpovídá schématu"):
         parse_file(path, parse_lines(_Item))
+
+
+def test_parse_lines_splits_only_on_line_feed() -> None:
+    """Oddělovač řádku Unicode a NEL uvnitř řetězce nejsou konec řádku."""
+    name = "a\u2028b\x85c"
+    content = _Item(name=name, count=1).model_dump_json() + "\n"
+
+    assert parse_lines(_Item)(content) == (_Item(name=name, count=1),)

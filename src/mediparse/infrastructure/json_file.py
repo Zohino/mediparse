@@ -30,9 +30,10 @@ def parse_lines[T: BaseModel](model: type[T]) -> Callable[[str], tuple[T, ...]]:
     """
 
     def parse(content: str) -> tuple[T, ...]:
+        # splitlines() láme i na U+0085 a U+2028, které JSON v řetězci připouští.
         return tuple(
             model.model_validate_json(line)
-            for line in content.splitlines()
+            for line in content.split("\n")
             if line.strip()
         )
 
