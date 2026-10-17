@@ -11,29 +11,17 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.icd import IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.diagnosis_codes_file import load_diagnosis_codes
+from tests.cohort_support import candidate_prefixes
 from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 
 if TYPE_CHECKING:
     from pathlib import Path
 
-_FIVE: dict[str, tuple[list[str], list[str]]] = {
-    "diabetes": (["250"], ["E11"]),
-    "copd": (["496"], ["J44"]),
-    "ckd": (["585"], ["N18"]),
-    "pneumonia": (["486"], ["J18"]),
-    "atrial_fibrillation": (["4273"], ["I48"]),
-}
-
 
 def _candidates(skip: str | None = None) -> dict[str, Any]:
     candidates: dict[str, Any] = {
-        key: {
-            "label_cs": key,
-            "icd9_prefixes": nine,
-            "icd10_prefixes": ten,
-            "charlson": ["x"],
-        }
-        for key, (nine, ten) in _FIVE.items()
+        key: {"label_cs": key, "charlson": ["x"], **prefixes}
+        for key, prefixes in candidate_prefixes().items()
         if key != skip
     }
     candidates["sepsis"] = {"icd9_prefixes": ["038"], "icd10_prefixes": ["A41"]}

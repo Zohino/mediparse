@@ -7,10 +7,10 @@ from typing import TYPE_CHECKING
 import pyarrow.parquet as pq
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.evaluation import Prediction
 from mediparse.entrypoints import smoketest_evaluation
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
+from tests.model_support import prediction
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -18,28 +18,39 @@ if TYPE_CHECKING:
     import pytest
 
 
-def _prediction(note: str, *, truth: bool, score: float) -> Prediction:
-    return Prediction(
-        "row",
-        0,
-        note,
-        1,
-        Diagnosis.DIABETES,
-        truth=truth,
-        predicted=score > 0,
-        score=score,
-    )
-
-
 def test_writes_metrics_row(tmp_path: Path) -> None:
     """Predikce dají metrics.parquet s jedním řádkem diagnózy a hodnotami v [0, 1]."""
     predictions = tmp_path / "predictions.parquet"
     metrics = tmp_path / "build" / "metrics.parquet"
     ParquetPredictionTable(predictions).write([
-        _prediction("a", truth=True, score=2.0),
-        _prediction("b", truth=True, score=-0.5),
-        _prediction("c", truth=False, score=-1.0),
-        _prediction("d", truth=False, score=0.5),
+        prediction(
+            "a",
+            truth=True,
+            score=2.0,
+            diagnosis=Diagnosis.DIABETES,
+            row_id="row",
+        ),
+        prediction(
+            "b",
+            truth=True,
+            score=-0.5,
+            diagnosis=Diagnosis.DIABETES,
+            row_id="row",
+        ),
+        prediction(
+            "c",
+            truth=False,
+            score=-1.0,
+            diagnosis=Diagnosis.DIABETES,
+            row_id="row",
+        ),
+        prediction(
+            "d",
+            truth=False,
+            score=0.5,
+            diagnosis=Diagnosis.DIABETES,
+            row_id="row",
+        ),
     ])
 
     code = smoketest_evaluation.run(predictions=predictions, metrics=metrics)
@@ -75,8 +86,20 @@ def test_single_class_is_refused(
     predictions = tmp_path / "predictions.parquet"
     metrics = tmp_path / "metrics.parquet"
     ParquetPredictionTable(predictions).write([
-        _prediction("a", truth=True, score=1.0),
-        _prediction("b", truth=True, score=2.0),
+        prediction(
+            "a",
+            truth=True,
+            score=1.0,
+            diagnosis=Diagnosis.DIABETES,
+            row_id="row",
+        ),
+        prediction(
+            "b",
+            truth=True,
+            score=2.0,
+            diagnosis=Diagnosis.DIABETES,
+            row_id="row",
+        ),
     ])
 
     code = smoketest_evaluation.run(predictions=predictions, metrics=metrics)

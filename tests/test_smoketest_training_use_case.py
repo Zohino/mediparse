@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
@@ -15,12 +16,13 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.smoketest_training import TrainingConfig, TrainingReport
 from mediparse.domain.split import Holdout, SubjectLeakError
+from tests.model_support import training_config
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-CONFIG = TrainingConfig(
-    row_id="row", diagnosis=Diagnosis.CKD, seed=0, folds=2, regularization=1.0
+CONFIG = TrainingConfig.model_validate_json(
+    json.dumps(training_config(diagnosis="ckd", row_id="row"))
 )
 NOTES = (
     InputNote("a", 1, Language.EN, "text a", frozenset({Diagnosis.CKD})),
@@ -142,8 +144,8 @@ def test_shared_subject_stops_before_saving() -> None:
 
 def test_class_with_too_few_patients_stops_before_splitting() -> None:
     """Diagnóza bez dost pacientů v každé třídě skončí InvalidInputError a nic se nevolá."""
-    config = TrainingConfig(
-        row_id="row", diagnosis=Diagnosis.PNEUMONIA, seed=0, folds=2, regularization=1.0
+    config = TrainingConfig.model_validate_json(
+        json.dumps(training_config(diagnosis="pneumonia", row_id="row"))
     )
     recorder = _Recorder()
 

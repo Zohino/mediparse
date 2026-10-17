@@ -37,7 +37,9 @@ def test_report_from_worktree_into_main_checkout_is_inside(
     worktree = main / ".worktrees" / "s99-vetev"
     corpus = worktree / "resources" / "synthetic"
     corpus.mkdir(parents=True)
-    (worktree / ".git").write_text("gitdir: ../../.git/worktrees/s99\n")
+    (worktree / ".git").write_text(
+        "gitdir: ../../.git/worktrees/s99\n", encoding="utf-8"
+    )
 
     workspace = LocalWorkspace(corpus, (), main / "r.json")
 

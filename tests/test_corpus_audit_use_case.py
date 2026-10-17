@@ -35,8 +35,8 @@ if TYPE_CHECKING:
 CREATED_AT = datetime(2026, 9, 29, tzinfo=UTC)
 DISCHARGE_SHA = PINNED["discharge.csv.gz"]
 DISCHARGE_PINNED = {"discharge.csv.gz": DISCHARGE_SHA}
-STRUCTURE_LABELS = frozenset({"Name", "Unit No"})
-DISCHARGE_PIN = AuditPin(DISCHARGE_PINNED, STRUCTURE_LABELS)
+PREAMBLE_LABELS = frozenset({"Name", "Unit No"})
+DISCHARGE_PIN = AuditPin(DISCHARGE_PINNED, PREAMBLE_LABELS)
 BOTH_LANGUAGES = 2
 SHORT_NOTES = {Language.EN: {NOTE_ID: SHORT_TEXT}}
 PREAMBLE = "Name: ___ Unit No: ___ Name: ___ Unit No: ___ Name: ___ Unit No: ___\n"
@@ -304,7 +304,7 @@ def test_reference_other_than_config_is_refused_before_reading(
     corpus = _Corpus(dict(SHORT_NOTES))
 
     outcome = _audit(corpus, reference, _Report()).run(
-        {}, COMMIT, CREATED_AT, AuditPin(pinned, STRUCTURE_LABELS)
+        {}, COMMIT, CREATED_AT, AuditPin(pinned, PREAMBLE_LABELS)
     )
 
     assert isinstance(outcome, AuditRefused)
@@ -336,7 +336,7 @@ def test_structure_labels_reach_the_index() -> None:
 
     assert isinstance(outcome, AuditClean)
     (record,) = corpus.saved
-    assert record.structure_labels == tuple(sorted(STRUCTURE_LABELS))
+    assert record.structure_labels == tuple(sorted(PREAMBLE_LABELS))
 
 
 def test_czech_notes_are_indexed() -> None:

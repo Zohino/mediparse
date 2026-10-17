@@ -6,12 +6,12 @@ import json
 from dataclasses import replace
 from typing import TYPE_CHECKING, Final, NamedTuple
 
-from mediparse.domain.environment import SourceRevision
 from mediparse.entrypoints import smoketest_inference, smoketest_training
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
-from tests.support import separable_notes
+from tests.model_support import separable_notes, training_config
+from tests.support import fixed_revision
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -29,22 +29,12 @@ class Trained(NamedTuple):
     predictions: Path
 
 
-def _revision() -> SourceRevision:
-    return SourceRevision(commit="a" * 40, dirty=False)
-
-
 def _train(root: Path) -> Trained:
     notes = root / "notes.parquet"
     ParquetNoteTable(notes).write(separable_notes(PATIENTS))
     config = root / "config.json"
     config.write_text(
-        json.dumps({
-            "row_id": "row",
-            "diagnosis": "diabetes",
-            "seed": 0,
-            "folds": 2,
-            "regularization": 1.0,
-        }),
+        json.dumps(training_config(row_id="row", diagnosis="diabetes")),
         encoding="utf-8",
     )
     trained = Trained(notes, root / "model.skops", root / "predictions.parquet")
@@ -54,7 +44,7 @@ def _train(root: Path) -> Trained:
         model=trained.model,
         predictions=trained.predictions,
         manifest=root / "run_manifest.json",
-        revision=_revision,
+        revision=fixed_revision,
     )
     assert code is ExitCode.OK
     return trained

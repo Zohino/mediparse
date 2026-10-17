@@ -16,16 +16,18 @@ from mediparse.domain.corpus_audit import (
     AuditPin,
     AuditRecord,
 )
-from mediparse.domain.corpus_provenance import Decoding, Translation, TranslationRun
+from mediparse.domain.corpus_provenance import (
+    Decoding,
+    Generation,
+    Translation,
+    TranslationRun,
+)
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.input_note import InputNote
-from mediparse.domain.language import Language
+from mediparse.domain.environment import SourceRevision
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.plans_file import LABELS_PATH, PLANS_PATH
-from mediparse.infrastructure.sampler_config import (
-    SAMPLER_CONFIG_PATH,
-    load_sampler_config,
-)
+from mediparse.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT
 from mediparse.infrastructure.verbalization_template import (
     VERBALIZATION_TEMPLATE_PATH,
@@ -50,9 +52,7 @@ REPOSITORY_DIAGNOSIS_CANDIDATES: Final = (
     REPOSITORY / "config" / "diagnosis_candidates.json"
 )
 REPOSITORY_MATRIX: Final = REPOSITORY / "config" / "matrix.json"
-STRUCTURE_LABELS: Final = load_sampler_config(
-    REPOSITORY_CONFIG
-).structure.structure_labels
+STRUCTURE_LABELS: Final = frozenset({"Name", "Unit No"})
 
 COMMIT: Final = "c" * 40
 NOTE_ID: Final = "90000001-DS-1"
@@ -68,6 +68,26 @@ PINNED: Final = {"discharge.csv.gz": "b" * 64, "radiology.csv.gz": "e" * 64}
 DISCHARGE: Final = {"name": "discharge.csv.gz", "sha256": "b" * 64, "rows": 10}
 RADIOLOGY: Final = {"name": "radiology.csv.gz", "sha256": "e" * 64, "rows": 20}
 PIN: Final = AuditPin(PINNED, STRUCTURE_LABELS)
+REVISION: Final = SourceRevision(commit=COMMIT, dirty=False)
+
+
+def fixed_revision() -> SourceRevision:
+    """Zdroj revize, který vždy vrátí ``REVISION``.
+
+    Returns:
+        Pevná revize bez dotazu na git.
+    """
+    return REVISION
+
+
+def missing_revision() -> SourceRevision:
+    """Zdroj revize, který selže jako git mimo repozitář.
+
+    Raises:
+        InvalidInputError: Vždy.
+    """
+    msg = "git chybí"
+    raise InvalidInputError(msg)
 
 
 def audit_record(**overrides: object) -> AuditRecord:
@@ -92,40 +112,30 @@ def audit_record(**overrides: object) -> AuditRecord:
     return AuditRecord.model_validate_json(json.dumps(fields))
 
 
-SEPARABLE_VOCABULARY: Final = (
-    "diabetes insulin glucose metformin hyperglycemia",
-    "fracture cast orthopedic surgery splint",
-)
+GENERATION_FIELDS: Final = {
+    "seed": 0,
+    "sampler_config_sha256": "1" * 64,
+    "prompts_sha256": "3" * 64,
+    "model": "claude-sonnet-5-5",
+    "claude_code_version": "2.1.5",
+    "generated_on": "2026-10-10",
+    "specification_commit": COMMIT,
+}
+GENERATION_ARGS: Final = {
+    "model": GENERATION_FIELDS["model"],
+    "claude-code-version": GENERATION_FIELDS["claude_code_version"],
+    "date": GENERATION_FIELDS["generated_on"],
+    "specification-commit": GENERATION_FIELDS["specification_commit"],
+}
 
 
-def separable_notes(
-    patients: int, vocabulary: tuple[str, str] = SEPARABLE_VOCABULARY
-) -> list[InputNote]:
-    """Zprávy pacientů střídavě s diabetem a bez něj, pacient má 1 až 7 zpráv nepravidelně.
-
-    Args:
-        patients: Počet pacientů; sudí mají diabetes.
-        vocabulary: Slova zpráv pozitivních a negativních pacientů; společná
-            slova z nich dělají neseparovatelný korpus.
+def generation_record(**overrides: object) -> Generation:
+    """Záznam generování korpusu ve tvaru ``GENERATION_FIELDS`` na disku.
 
     Returns:
-        Zprávy po pacientech v pořadí pacientů.
+        Záznam, v němž ``overrides`` (hodnoty ve tvaru JSON) nahradí jednotlivá pole.
     """
-    notes = []
-    for patient in range(patients):
-        positive = patient % 2 == 0
-        labels = frozenset({Diagnosis.DIABETES} if positive else ())
-        notes.extend(
-            InputNote(
-                f"{patient}-DS-{visit}",
-                patient,
-                Language.EN,
-                f"{vocabulary[0] if positive else vocabulary[1]} visit {visit}",
-                labels,
-            )
-            for visit in range(1 + (patient * patient * 3 + patient) % 7)
-        )
-    return notes
+    return Generation.model_validate_json(json.dumps(GENERATION_FIELDS | overrides))
 
 
 def translation_record(**overrides: object) -> Translation:

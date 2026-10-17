@@ -12,18 +12,34 @@ from mediparse.infrastructure.parquet_file import write_string_table
 if TYPE_CHECKING:
     from pathlib import Path
 
-CODES: Final = DiagnosisCodes(
-    prefixes={
-        Diagnosis.DIABETES: {IcdVersion.NINE: ("250",), IcdVersion.TEN: ("E11",)},
-        Diagnosis.COPD: {IcdVersion.NINE: ("496",), IcdVersion.TEN: ("J44",)},
-        Diagnosis.CKD: {IcdVersion.NINE: ("585",), IcdVersion.TEN: ("N18",)},
-        Diagnosis.PNEUMONIA: {IcdVersion.NINE: ("486",), IcdVersion.TEN: ("J18",)},
-        Diagnosis.ATRIAL_FIBRILLATION: {
-            IcdVersion.NINE: ("4273",),
-            IcdVersion.TEN: ("I48",),
-        },
+PREFIXES: Final[dict[Diagnosis, dict[IcdVersion, tuple[str, ...]]]] = {
+    Diagnosis.DIABETES: {IcdVersion.NINE: ("250",), IcdVersion.TEN: ("E11",)},
+    Diagnosis.COPD: {IcdVersion.NINE: ("496",), IcdVersion.TEN: ("J44",)},
+    Diagnosis.CKD: {IcdVersion.NINE: ("585",), IcdVersion.TEN: ("N18",)},
+    Diagnosis.PNEUMONIA: {IcdVersion.NINE: ("486",), IcdVersion.TEN: ("J18",)},
+    Diagnosis.ATRIAL_FIBRILLATION: {
+        IcdVersion.NINE: ("4273",),
+        IcdVersion.TEN: ("I48",),
+    },
+}
+CODES: Final = DiagnosisCodes(prefixes=PREFIXES)
+
+
+def candidate_prefixes() -> dict[str, dict[str, list[str]]]:
+    """Předpony pětice ve tvaru kandidátů v ``diagnosis_candidates.json``.
+
+    Returns:
+        Pro každou diagnózu seznamy předpon ``icd9_prefixes`` a ``icd10_prefixes``.
+    """
+    return {
+        diagnosis.value: {
+            "icd9_prefixes": list(by_version[IcdVersion.NINE]),
+            "icd10_prefixes": list(by_version[IcdVersion.TEN]),
+        }
+        for diagnosis, by_version in PREFIXES.items()
     }
-)
+
+
 PADDING_CODES: Final = {
     Diagnosis.DIABETES: ("10", "E119"),
     Diagnosis.COPD: ("10", "J449"),
@@ -32,6 +48,7 @@ PADDING_CODES: Final = {
     Diagnosis.ATRIAL_FIBRILLATION: ("10", "I4891"),
 }
 PADDING_PER_DIAGNOSIS: Final = 10
+PADDING_NOTES: Final = len(Diagnosis) * PADDING_PER_DIAGNOSIS
 DISCHARGE_COLUMNS: Final = ("note_id", "subject_id", "hadm_id", "text")
 DIAGNOSES_COLUMNS: Final = (
     "subject_id",
@@ -119,6 +136,19 @@ def icd(hadm: int, seq: int, code: str | None, version: str | None) -> IcdRow:
 def base_notes() -> list[NoteRow]:
     """Dvanáct zpráv, které procvičí každý filtr trychtýře.
 
+    Filtry (pořadí jako ``FunnelStepName``) vyřadí tyto zprávy:
+
+    - ``FunnelStepName.WITH_ICD``: n03 (bez ``hadm_id``), n04 a n09 (přijetí
+      bez řádku ICD);
+    - ``FunnelStepName.LONG_ENOUGH``: n05 (krátký text), n06 (text NULL);
+    - ``FunnelStepName.UNIQUE``: n08, kopie textu n01 s vyšším ``note_id``.
+
+    n09 sdílí text s n10, ale duplicita se neuplatní: n09 vypadne už na
+    ``FunnelStepName.WITH_ICD`` a n10 zůstane.
+
+    n07 má jediný řádek ICD s NULL kódem, takže filtr ``WITH_ICD`` projde bez
+    štítků. Pacient 1 má n01 i n08, pacient 10 dvě zprávy téhož přijetí.
+
     Returns:
         Řádky ``discharge``.
     """
@@ -155,6 +185,38 @@ def base_icd() -> list[IcdRow]:
         icd(100, 1, "J189", "10"),
         icd(110, 1, "J449", "10"),
     ]
+
+
+# Příspěvek zpráv ``base_notes()`` k trychtýři (zprávy, pacienti), odvozený z
+# ``base_icd()``. Každý krok odečte zprávy, které vypadly filtrem; viz docstring
+# ``base_notes()``. Padding přidá do každého kroku ``PADDING_NOTES`` zpráv od
+# tolika pacientů (jeden pacient na zprávu), všechny projdou všemi filtry.
+_BASE_FUNNEL: Final = {
+    FunnelStepName.ALL_NOTES: (12, 10),
+    FunnelStepName.WITH_ICD: (9, 7),  # bez n03, n04, n09
+    FunnelStepName.LONG_ENOUGH: (7, 5),  # bez n05, n06
+    FunnelStepName.UNIQUE: (6, 5),  # bez n08, kopie textu n01
+}
+EXPECTED_FUNNEL: Final = {
+    step: (notes + PADDING_NOTES, patients + PADDING_NOTES)
+    for step, (notes, patients) in _BASE_FUNNEL.items()
+}
+# Řádek ICD s NULL kódem: jediný je u n07 v ``base_icd()``, padding žádný nemá.
+EXPECTED_INVALID_CODES: Final = 1
+# Pozitivní zprávy ``base_notes()`` po deduplikaci: n01 cukrovka, n02 fibrilace,
+# n10 zápal plic, n11 a n12 (jedno přijetí) CHOPN. Padding dá každé diagnóze
+# ``PADDING_PER_DIAGNOSIS`` pozitivních.
+_BASE_POSITIVES: Final = {
+    Diagnosis.DIABETES: 1,
+    Diagnosis.COPD: 2,
+    Diagnosis.CKD: 0,
+    Diagnosis.PNEUMONIA: 1,
+    Diagnosis.ATRIAL_FIBRILLATION: 1,
+}
+EXPECTED_POSITIVES: Final = {
+    diagnosis: base + PADDING_PER_DIAGNOSIS
+    for diagnosis, base in _BASE_POSITIVES.items()
+}
 
 
 def padding() -> tuple[list[NoteRow], list[IcdRow]]:

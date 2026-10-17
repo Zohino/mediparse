@@ -44,6 +44,7 @@ class GitRevision:
                 check=True,
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
                 env={k: v for k, v in os.environ.items() if not k.startswith("GIT_")},
             )
         except (OSError, subprocess.CalledProcessError) as error:

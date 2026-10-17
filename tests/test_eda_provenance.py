@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, Final
 
 from mediparse.entrypoints.eda_provenance import provenance
 from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
-from tests.test_source_revision import git_output, init_repo, needs_git
+from tests.git_support import git_output, init_repo, needs_git
 
 if TYPE_CHECKING:
     from pathlib import Path

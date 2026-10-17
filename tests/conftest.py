@@ -24,6 +24,7 @@ from mediparse.infrastructure.verbalization_template import (
 )
 from tests.support import (
     COMMIT,
+    GENERATION_ARGS,
     REPOSITORY_CONFIG,
     REPOSITORY_PLANS,
     REPOSITORY_TEMPLATE,
@@ -224,12 +225,7 @@ class AuditFiles:
         Returns:
             Argumenty vstupního bodu provenance; ``overrides`` nahradí údaje o generování.
         """
-        generation = {
-            "model": "claude-sonnet-5-5",
-            "claude-code-version": "2.1.5",
-            "date": "2026-10-10",
-            "specification-commit": COMMIT,
-        } | overrides
+        generation = GENERATION_ARGS | overrides
         return [
             *(f"--{name}={value}" for name, value in generation.items()),
             f"--corpus={corpus}",

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING
 
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -15,6 +15,8 @@ from mediparse.infrastructure.duckdb_cohort import DuckDbCohort
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from tests.cohort_support import (
     CODES,
+    EXPECTED_FUNNEL,
+    EXPECTED_POSITIVES,
     icd,
     note,
     text,
@@ -25,13 +27,6 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     from mediparse.domain.input_note import InputNote
-
-FUNNEL: Final = {
-    FunnelStepName.ALL_NOTES: (62, 60),
-    FunnelStepName.WITH_ICD: (59, 57),
-    FunnelStepName.LONG_ENOUGH: (57, 55),
-    FunnelStepName.UNIQUE: (56, 55),
-}
 
 
 def _build(root: Path, name: str = "cohort") -> tuple[CohortCounts, Path]:
@@ -52,7 +47,9 @@ def test_funnel_counts_notes_and_patients_of_every_filter(tmp_path: Path) -> Non
     """Zprávy bez hadm_id, bez ICD, krátké, prázdné a duplicitní trychtýř vyřadí po krocích."""
     counts, _ = _build(tmp_path)
 
-    assert {step.step: (step.notes, step.patients) for step in counts.funnel} == FUNNEL
+    assert {
+        step.step: (step.notes, step.patients) for step in counts.funnel
+    } == EXPECTED_FUNNEL
 
 
 def test_kept_notes_and_their_labels(tmp_path: Path) -> None:
@@ -78,13 +75,7 @@ def test_positives_count_notes_per_diagnosis(tmp_path: Path) -> None:
     """Pozitivní zprávy diagnózy: padding po deseti plus zprávy ze základu."""
     counts, _ = _build(tmp_path)
 
-    assert counts.positives == {
-        Diagnosis.DIABETES: 11,
-        Diagnosis.COPD: 12,
-        Diagnosis.CKD: 10,
-        Diagnosis.PNEUMONIA: 11,
-        Diagnosis.ATRIAL_FIBRILLATION: 11,
-    }
+    assert counts.positives == EXPECTED_POSITIVES
 
 
 def test_duplicate_keeps_copy_with_smallest_note_id(tmp_path: Path) -> None:
@@ -127,7 +118,7 @@ def test_output_is_sorted_english_and_matches_schema(tmp_path: Path) -> None:
 
     assert [item.note_id for item in items] == sorted(item.note_id for item in items)
     assert {item.language for item in items} == {"en"}
-    assert len(items) == FUNNEL[FunnelStepName.UNIQUE][0]
+    assert len(items) == EXPECTED_FUNNEL[FunnelStepName.UNIQUE][0]
 
 
 def test_two_writes_are_byte_identical(tmp_path: Path) -> None:

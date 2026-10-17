@@ -7,6 +7,7 @@ from pydantic import ValidationError
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.icd import DiagnosisCodes, IcdCode, IcdVersion
+from tests.cohort_support import PREFIXES
 
 NINE = IcdVersion.NINE
 TEN = IcdVersion.TEN
@@ -15,13 +16,7 @@ TEN = IcdVersion.TEN
 def _prefixes(
     **overrides: dict[IcdVersion, tuple[str, ...]],
 ) -> dict[Diagnosis, dict[IcdVersion, tuple[str, ...]]]:
-    base: dict[Diagnosis, dict[IcdVersion, tuple[str, ...]]] = {
-        Diagnosis.DIABETES: {NINE: ("250",), TEN: ("E11",)},
-        Diagnosis.COPD: {NINE: ("496",), TEN: ("J44",)},
-        Diagnosis.CKD: {NINE: ("585",), TEN: ("N18",)},
-        Diagnosis.PNEUMONIA: {NINE: ("486",), TEN: ("J18",)},
-        Diagnosis.ATRIAL_FIBRILLATION: {NINE: ("4273",), TEN: ("I48",)},
-    }
+    base = {diagnosis: dict(by_version) for diagnosis, by_version in PREFIXES.items()}
     base.update({Diagnosis(key): value for key, value in overrides.items()})
     return base
 

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import date
 
 from mediparse.application.corpus_gate import CorpusGate
 from mediparse.domain.corpus_audit import (
@@ -11,7 +10,6 @@ from mediparse.domain.corpus_audit import (
     InvalidAuditRecordError,
 )
 from mediparse.domain.corpus_provenance import (
-    Generation,
     InvalidProvenanceRecordError,
     ProvenanceRecord,
 )
@@ -20,6 +18,7 @@ from tests.support import (
     CORPUS_SHA,
     PIN,
     audit_record,
+    generation_record,
     translation_record,
 )
 
@@ -28,15 +27,7 @@ AUDIT_FILE = "9" * 64
 
 def _provenance(audit_sha256: str) -> ProvenanceRecord:
     return ProvenanceRecord(
-        generation=Generation(
-            seed=0,
-            sampler_config_sha256="1" * 64,
-            prompts_sha256="3" * 64,
-            model="claude-sonnet-5-5",
-            claude_code_version="2.1.5",
-            generated_on=date(2026, 10, 10),
-            specification_commit="d" * 40,
-        ),
+        generation=generation_record(),
         audit_sha256=audit_sha256,
     )
 

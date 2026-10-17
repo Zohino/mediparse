@@ -8,8 +8,6 @@ from typing import TYPE_CHECKING, Final
 
 import pytest
 
-from mediparse.domain.environment import SourceRevision
-from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints import smoketest_training
 from mediparse.entrypoints.exit_code import ExitCode
@@ -17,29 +15,21 @@ from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.sklearn_classifier import ESTIMATOR, SkopsModelFile
-from tests.support import separable_notes
+from tests.model_support import separable_notes, training_config
+from tests.support import REVISION, fixed_revision, missing_revision
 
 if TYPE_CHECKING:
     from collections.abc import Callable
     from pathlib import Path
 
+    from mediparse.domain.environment import SourceRevision
     from mediparse.domain.evaluation import Prediction
 
 PATIENTS: Final = 12
-REVISION: Final = SourceRevision(commit="a" * 40, dirty=False)
 OVERLAPPING: Final = (
     "diabetes insulin glucose clinic review",
     "fracture cast splint clinic review",
 )
-
-
-def _revision() -> SourceRevision:
-    return REVISION
-
-
-def _no_git() -> SourceRevision:
-    msg = "git chybí"
-    raise InvalidInputError(msg)
 
 
 def _inputs(
@@ -51,15 +41,14 @@ def _inputs(
 ) -> tuple[Path, Path]:
     notes = root / "notes.parquet"
     ParquetNoteTable(notes).write(separable_notes(PATIENTS, OVERLAPPING))
+    config_body = training_config(diagnosis=diagnosis, seed=seed)
+    if row_id is None:
+        del config_body["row_id"]
+    else:
+        config_body["row_id"] = row_id
     config = root / f"config-{seed}.json"
     config.write_text(
-        json.dumps({
-            **({} if row_id is None else {"row_id": row_id}),
-            "diagnosis": diagnosis,
-            "seed": seed,
-            "folds": 2,
-            "regularization": 1.0,
-        }),
+        json.dumps(config_body),
         encoding="utf-8",
     )
     return notes, config
@@ -93,7 +82,7 @@ def _run(
     notes: Path,
     config: Path,
     outputs: _Outputs,
-    revision: Callable[[], SourceRevision] = _revision,
+    revision: Callable[[], SourceRevision] = fixed_revision,
 ) -> ExitCode:
     return smoketest_training.run(
         notes=notes,
@@ -224,7 +213,7 @@ def test_unreadable_revision_is_refused_before_training(tmp_path: Path) -> None:
     notes, config = _inputs(tmp_path)
     outputs = _Outputs.under(tmp_path / "out")
 
-    code = _run(notes, config, outputs, revision=_no_git)
+    code = _run(notes, config, outputs, revision=missing_revision)
 
     assert code is ExitCode.REFUSED
     assert outputs.existing() == []

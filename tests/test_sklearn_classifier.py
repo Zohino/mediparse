@@ -14,7 +14,7 @@ from mediparse.infrastructure.sklearn_classifier import (
     LinearSvmTrainer,
     SkopsModelFile,
 )
-from tests.support import separable_notes
+from tests.model_support import separable_notes
 
 if TYPE_CHECKING:
     from pathlib import Path

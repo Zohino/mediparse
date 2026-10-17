@@ -12,7 +12,12 @@ from mediparse.domain.corpus_provenance import prompts_sha256
 from mediparse.entrypoints.corpus_provenance import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.synthetic_corpus import PROVENANCE_NAME, RECORD_NAME
-from tests.support import COMMIT, NOTE, REPOSITORY_CONFIG, SHORT_NOTE
+from tests.support import (
+    GENERATION_FIELDS,
+    NOTE,
+    REPOSITORY_CONFIG,
+    SHORT_NOTE,
+)
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -39,16 +44,13 @@ def test_provenance_records_generation_and_audit(
 
     record = json.loads((root / PROVENANCE_NAME).read_text(encoding="utf-8"))
     assert record == {
-        "generation": {
+        "generation": GENERATION_FIELDS
+        | {
             "seed": sampler_config.seed,
             "sampler_config_sha256": _sha256(REPOSITORY_CONFIG),
             "prompts_sha256": prompts_sha256(
                 verbalization_template, repository_plans, sampler_config
             ),
-            "model": "claude-sonnet-5-5",
-            "claude_code_version": "2.1.5",
-            "generated_on": "2026-10-10",
-            "specification_commit": COMMIT,
         },
         "audit_sha256": _sha256(root / RECORD_NAME),
         "translation": None,

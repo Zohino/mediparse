@@ -10,17 +10,24 @@ from mediparse.domain.corpus_audit import AuditPin
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.audit_pin import load_audit_pin
 from mediparse.infrastructure.mimic_tables import load_reference_sha256
-from tests.support import REPOSITORY_CONFIG, REPOSITORY_TABLES, STRUCTURE_LABELS
+from tests.support import REPOSITORY_CONFIG, REPOSITORY_TABLES
 
 if TYPE_CHECKING:
     from pathlib import Path
 
+    from mediparse.infrastructure.sampler_config import SamplerConfig
 
-def test_repository_pin_holds_note_reference_and_sampler_labels() -> None:
+
+def test_repository_pin_holds_note_reference_and_sampler_labels(
+    sampler_config: SamplerConfig,
+) -> None:
     """Pin z configů v repu nese otisky jen MIMIC-IV-Note a štítky struktury vzorkovače."""
     pin = load_audit_pin(REPOSITORY_TABLES, REPOSITORY_CONFIG)
 
-    assert pin == AuditPin(load_reference_sha256(REPOSITORY_TABLES), STRUCTURE_LABELS)
+    assert pin == AuditPin(
+        load_reference_sha256(REPOSITORY_TABLES),
+        sampler_config.structure.structure_labels,
+    )
 
 
 @pytest.mark.parametrize("missing", ["tables", "config"])
