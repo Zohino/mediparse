@@ -6,7 +6,7 @@ import importlib.util
 import json
 import sys
 from dataclasses import dataclass
-from datetime import UTC, date, datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Final
 
@@ -150,22 +150,30 @@ def separable_notes(
     return notes
 
 
+GENERATION_FIELDS: Final = {
+    "seed": 0,
+    "sampler_config_sha256": "1" * 64,
+    "prompts_sha256": "3" * 64,
+    "model": "claude-sonnet-5-5",
+    "claude_code_version": "2.1.5",
+    "generated_on": "2026-10-10",
+    "specification_commit": COMMIT,
+}
+GENERATION_ARGS: Final = {
+    "model": GENERATION_FIELDS["model"],
+    "claude-code-version": GENERATION_FIELDS["claude_code_version"],
+    "date": GENERATION_FIELDS["generated_on"],
+    "specification-commit": GENERATION_FIELDS["specification_commit"],
+}
+
+
 def generation_record(**overrides: object) -> Generation:
-    """Záznam generování korpusu s hodnotami, které předávají argumenty CLI.
+    """Záznam generování korpusu ve tvaru ``GENERATION_FIELDS`` na disku.
 
     Returns:
-        Záznam, v němž ``overrides`` nahradí jednotlivá pole.
+        Záznam, v němž ``overrides`` (hodnoty ve tvaru JSON) nahradí jednotlivá pole.
     """
-    fields = {
-        "seed": 0,
-        "sampler_config_sha256": "1" * 64,
-        "prompts_sha256": "3" * 64,
-        "model": "claude-sonnet-5-5",
-        "claude_code_version": "2.1.5",
-        "generated_on": date(2026, 10, 10),
-        "specification_commit": COMMIT,
-    } | overrides
-    return Generation.model_validate(fields)
+    return Generation.model_validate_json(json.dumps(GENERATION_FIELDS | overrides))
 
 
 def translation_record(**overrides: object) -> Translation:

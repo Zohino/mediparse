@@ -13,10 +13,10 @@ from mediparse.entrypoints.corpus_provenance import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.synthetic_corpus import PROVENANCE_NAME, RECORD_NAME
 from tests.support import (
+    GENERATION_FIELDS,
     NOTE,
     REPOSITORY_CONFIG,
     SHORT_NOTE,
-    generation_record,
 )
 
 if TYPE_CHECKING:
@@ -43,15 +43,15 @@ def test_provenance_records_generation_and_audit(
     assert run(audit_files.provenance_argv(root)) == ExitCode.OK
 
     record = json.loads((root / PROVENANCE_NAME).read_text(encoding="utf-8"))
-    computed = generation_record(
-        seed=sampler_config.seed,
-        sampler_config_sha256=_sha256(REPOSITORY_CONFIG),
-        prompts_sha256=prompts_sha256(
-            verbalization_template, repository_plans, sampler_config
-        ),
-    )
     assert record == {
-        "generation": computed.model_dump(mode="json"),
+        "generation": GENERATION_FIELDS
+        | {
+            "seed": sampler_config.seed,
+            "sampler_config_sha256": _sha256(REPOSITORY_CONFIG),
+            "prompts_sha256": prompts_sha256(
+                verbalization_template, repository_plans, sampler_config
+            ),
+        },
         "audit_sha256": _sha256(root / RECORD_NAME),
         "translation": None,
     }

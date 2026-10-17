@@ -24,10 +24,10 @@ from mediparse.infrastructure.verbalization_template import (
 )
 from tests.support import (
     COMMIT,
+    GENERATION_ARGS,
     REPOSITORY_CONFIG,
     REPOSITORY_PLANS,
     REPOSITORY_TEMPLATE,
-    generation_record,
 )
 
 if TYPE_CHECKING:
@@ -225,13 +225,7 @@ class AuditFiles:
         Returns:
             Argumenty vstupního bodu provenance; ``overrides`` nahradí údaje o generování.
         """
-        record = generation_record()
-        generation = {
-            "model": record.model,
-            "claude-code-version": record.claude_code_version,
-            "date": record.generated_on.isoformat(),
-            "specification-commit": record.specification_commit,
-        } | overrides
+        generation = GENERATION_ARGS | overrides
         return [
             *(f"--{name}={value}" for name, value in generation.items()),
             f"--corpus={corpus}",

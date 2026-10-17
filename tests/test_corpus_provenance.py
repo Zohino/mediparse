@@ -22,11 +22,11 @@ if TYPE_CHECKING:
     from mediparse.domain.synthetic_plan import SamplerConfig
     from tests.conftest import PlannedNote
 
-from tests.support import generation_record, translation_record
+from tests.support import GENERATION_FIELDS, translation_record
 
 AUDIT: Final = "9" * 64
 RECORD: Final = {
-    "generation": generation_record().model_dump(mode="json"),
+    "generation": GENERATION_FIELDS,
     "audit_sha256": AUDIT,
 }
 

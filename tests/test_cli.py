@@ -23,6 +23,7 @@ from mediparse.entrypoints.cli import argument, configure_logging
 from mediparse.entrypoints.exit_code import ExitCode
 from tests.support import (
     COMMIT,
+    GENERATION_ARGS,
     REPOSITORY_PLANS,
     REPOSITORY_TABLES,
     REPOSITORY_TEMPLATE,
@@ -31,12 +32,7 @@ from tests.support import (
 if TYPE_CHECKING:
     from collections.abc import Callable, Generator
 
-PROVENANCE = [
-    "--model=claude-sonnet-5-5",
-    "--claude-code-version=2.1.5",
-    "--date=2026-10-10",
-    f"--specification-commit={COMMIT}",
-]
+PROVENANCE = [f"--{name}={value}" for name, value in GENERATION_ARGS.items()]
 
 
 def _commands(root: Path, missing: Path) -> dict[str, Callable[[], ExitCode]]:
