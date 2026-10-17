@@ -10,6 +10,7 @@ from mediparse.domain.evaluation import Prediction
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.language import Language
 from mediparse.domain.smoketest_training import TrainingConfig
+from mediparse.domain.split import SplitConfig
 
 SEPARABLE_VOCABULARY: Final = (
     "diabetes insulin glucose metformin hyperglycemia",
@@ -78,14 +79,13 @@ def training_config(**overrides: object) -> dict[str, object]:
     """Platný config tréninku ve tvaru JSON; test změní jen pole, o kterém je.
 
     Returns:
-        Slovník s klíči ``row_id``, ``diagnosis``, ``seed``, ``folds``,
-        ``fold`` a ``regularization``, přepsanými hodnotami z ``overrides``.
+        Slovník s klíči ``row_id``, ``diagnosis``, ``seed``, ``fold`` a
+        ``regularization``, přepsanými hodnotami z ``overrides``.
     """
     return {
         "row_id": "row",
         "diagnosis": "diabetes",
         "seed": 0,
-        "folds": 2,
         "fold": 0,
         "regularization": 1.0,
     } | overrides
@@ -98,3 +98,21 @@ def parsed_training_config(**overrides: object) -> TrainingConfig:
         ``TrainingConfig`` s přepsanými hodnotami z ``overrides``.
     """
     return TrainingConfig.model_validate_json(json.dumps(training_config(**overrides)))
+
+
+def split_config_json(**overrides: object) -> dict[str, object]:
+    """Platný config splitu ve tvaru JSON; test změní jen pole, o kterém je.
+
+    Returns:
+        Slovník s klíči ``seed`` a ``folds``, přepsanými hodnotami z ``overrides``.
+    """
+    return {"seed": 0, "folds": 2} | overrides
+
+
+def split_config(**overrides: object) -> SplitConfig:
+    """Config splitu z ``split_config_json`` rozparsovaný jako v produkci.
+
+    Returns:
+        ``SplitConfig`` s přepsanými hodnotami z ``overrides``.
+    """
+    return SplitConfig.model_validate_json(json.dumps(split_config_json(**overrides)))

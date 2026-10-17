@@ -21,7 +21,7 @@ if TYPE_CHECKING:
     from mediparse.domain.identity import SubjectId
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.smoketest_training import TrainingConfig
-    from mediparse.domain.split import Split
+    from mediparse.domain.split import Split, SplitConfig
 
 
 def _labels(notes: Sequence[InputNote], diagnosis: Diagnosis) -> list[bool]:
@@ -31,7 +31,12 @@ def _labels(notes: Sequence[InputNote], diagnosis: Diagnosis) -> list[bool]:
 class PatientSplitter(Protocol):
     """Rozdělení pacientů do foldů."""
 
-    def split(self, subjects: Sequence[SubjectId], strata: Sequence[int]) -> Split:
+    def split(
+        self,
+        subjects: Sequence[SubjectId],
+        strata: Sequence[int],
+        config: SplitConfig,
+    ) -> Split:
         """Rozdělí pacienty zpráv do foldů podle třídy stratifikace každé zprávy."""
 
 
@@ -63,20 +68,25 @@ class SmoketestTraining[C: TextClassifier]:
     store: ModelStore[C]
     predictions: PredictionSink
 
-    def run(self, config: TrainingConfig) -> TrainingReport:
+    def run(self, config: TrainingConfig, split_config: SplitConfig) -> TrainingReport:
         """Natrénuje model na trénovacích pacientech, predikuje testovací a uloží.
 
         Args:
             config: Diagnóza a parametry tréninku.
+            split_config: Seed a počet foldů splitu.
 
         Returns:
-            Velikosti částí odložení.
+            Velikosti částí odložení a otisk splitu.
         """
         notes = self.table.read()
         labels = _labels(notes, config.diagnosis)
         subjects = [note.subject_id for note in notes]
-        ensure_patients_per_class(labels, subjects, config.diagnosis, config.folds)
-        split = self.splitter.split(subjects, strata(notes, config.folds))
+        ensure_patients_per_class(
+            labels, subjects, config.diagnosis, split_config.folds
+        )
+        split = self.splitter.split(
+            subjects, strata(notes, split_config.folds), split_config
+        )
         holdout = split.holdout(notes, config.fold)
         classifier = self.trainer.fit(
             [note.text for note in holdout.train],
@@ -106,4 +116,5 @@ class SmoketestTraining[C: TextClassifier]:
             train_notes=len(holdout.train),
             test_notes=len(holdout.test),
             test_positives=sum(truth),
+            split_sha256=split.sha256(),
         )

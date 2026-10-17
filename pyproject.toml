@@ -167,6 +167,7 @@ source_modules = [
     "mediparse.infrastructure.duckdb_cohort",
     "mediparse.infrastructure.note_table",
     "mediparse.infrastructure.sklearn_split",
+    "mediparse.infrastructure.split_config",
     "mediparse.domain.split",
     "mediparse.domain.input_note",
 ]

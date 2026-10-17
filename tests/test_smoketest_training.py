@@ -11,8 +11,7 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.smoketest_training import TrainingConfig
 from tests.model_support import training_config
 
-FOLDS = 2
-VALID = training_config(row_id="smoke", diagnosis="diabetes", folds=FOLDS)
+VALID = training_config(row_id="smoke", diagnosis="diabetes")
 
 
 def test_valid_config_is_parsed() -> None:
@@ -21,7 +20,6 @@ def test_valid_config_is_parsed() -> None:
 
     assert config.row_id == "smoke"
     assert config.diagnosis is Diagnosis.DIABETES
-    assert config.folds == FOLDS
 
 
 def test_fold_is_taken_from_config() -> None:
@@ -50,8 +48,10 @@ def test_config_without_row_id_is_rejected() -> None:
 @pytest.mark.parametrize(
     "override",
     [
-        {"folds": 1},
+        {"folds": 2},
         {"fold": -1},
+        {"seed": -1},
+        {"seed": 2**32},
         {"regularization": 0.0},
         {"regularization": -1.0},
         {"diagnosis": "asthma"},
@@ -62,6 +62,6 @@ def test_config_without_row_id_is_rejected() -> None:
     ],
 )
 def test_invalid_config_is_rejected(override: dict[str, object]) -> None:
-    """Málo foldů, nekladné C, neznámá diagnóza, extra klíč i neplatný row_id config odmítnou."""
+    """Pole folds (patří splitu), nekladné C, neznámá diagnóza, extra klíč i neplatný row_id config odmítnou."""
     with pytest.raises(ValidationError):
         TrainingConfig.model_validate_json(json.dumps({**VALID, **override}))

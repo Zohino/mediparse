@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 
 from sklearn.model_selection import StratifiedGroupKFold
 
-from mediparse.domain.split import Split
+from mediparse.domain.split import Split, SplitConfig
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -19,21 +19,24 @@ if TYPE_CHECKING:
 class StratifiedGroupFolds:
     """Stratifikované rozdělení pacientů do foldů; pacient je celý v jednom."""
 
-    folds: int
-    seed: int
-
-    def split(self, subjects: Sequence[SubjectId], strata: Sequence[int]) -> Split:
+    @staticmethod
+    def split(
+        subjects: Sequence[SubjectId],
+        strata: Sequence[int],
+        config: SplitConfig,
+    ) -> Split:
         """Rozloží pacienty do foldů podle třídy stratifikace jejich zpráv.
 
         Args:
             subjects: Pacient každé zprávy.
             strata: Třída stratifikace každé zprávy ze stejného pořadí.
+            config: Seed a počet foldů splitu.
 
         Returns:
             Split, jehož fold k je množina pacientů testovací části k-tého dělení.
         """
         splitter = StratifiedGroupKFold(
-            n_splits=self.folds, shuffle=True, random_state=self.seed
+            n_splits=config.folds, shuffle=True, random_state=config.seed
         )
         parts = splitter.split(list(subjects), list(strata), list(subjects))
         return Split(

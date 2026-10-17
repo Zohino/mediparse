@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
+import json
+
 import pytest
+from pydantic import ValidationError
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
@@ -12,12 +15,17 @@ from mediparse.domain.split import (
     RESIDUAL_STRATUM,
     Holdout,
     Split,
+    SplitConfig,
     SubjectLeakError,
     ensure_patients_per_class,
     strata,
 )
 
 FOLDS = 2
+GOLDEN_SHA256 = "fc0a6d02e61973f417172558b5ada2551fb8e6057c08699741f4a388273cb912"
+NUMERIC_ORDER_SHA256 = (
+    "91f9e8d3b27133625651802f23ad0fbbdb182b788cbf7058427385a493b5c85d"
+)
 
 
 def _notes(*subjects: int) -> list[InputNote]:
@@ -227,3 +235,72 @@ def test_strata_do_not_depend_on_note_order() -> None:
     )
 
     assert forward == backward
+
+
+def test_valid_split_config_is_parsed() -> None:
+    """Platný JSON dá config se seedem a počtem foldů."""
+    config = SplitConfig.model_validate_json('{"seed": 7, "folds": 5}')
+
+    assert (config.seed, config.folds) == (7, 5)
+
+
+@pytest.mark.parametrize(
+    "body",
+    [
+        {"seed": 0, "folds": 1},
+        {"seed": 0, "folds": 0},
+        {"seed": 0, "folds": 2, "fold": 0},
+        {"seed": 0, "folds": "5"},
+        {"folds": 2},
+        {"seed": -1, "folds": 2},
+        {"seed": 2**32, "folds": 2},
+    ],
+    ids=[
+        "one-fold",
+        "zero-folds",
+        "extra-field",
+        "text-folds",
+        "no-seed",
+        "negative-seed",
+        "seed-over-generator-range",
+    ],
+)
+def test_invalid_split_config_is_rejected(body: dict[str, object]) -> None:
+    """Méně než dva foldy, pole navíc, text místo čísla i chybějící seed config odmítnou."""
+    with pytest.raises(ValidationError):
+        SplitConfig.model_validate_json(json.dumps(body))
+
+
+def test_sha256_matches_golden_value() -> None:
+    """Otisk ukotvuje tvar řádků ``subject_id TAB fold LF``; stejný musí vyjít v S26 ze souboru."""
+    split = Split((frozenset({1, 3}), frozenset({2})))
+
+    assert split.sha256() == GOLDEN_SHA256
+
+
+def test_sha256_changes_when_subject_moves_fold() -> None:
+    """Přesun pacienta do jiného foldu otisk změní."""
+    moved = Split((frozenset({1}), frozenset({2, 3})))
+
+    assert moved.sha256() != GOLDEN_SHA256
+
+
+def test_sha256_changes_when_folds_swap_order() -> None:
+    """Číslo foldu je součástí přiřazení, takže prohození pořadí foldů otisk změní."""
+    swapped = Split((frozenset({2}), frozenset({1, 3})))
+
+    assert swapped.sha256() != GOLDEN_SHA256
+
+
+def test_sha256_ignores_construction_order() -> None:
+    """Stejné přiřazení z jiné konstrukce frozensetů dá týž otisk."""
+    rebuilt = Split((frozenset([3, 1]), frozenset([2])))
+
+    assert rebuilt.sha256() == GOLDEN_SHA256
+
+
+def test_sha256_orders_subjects_numerically() -> None:
+    """Pacient 10 je za pacientem 2, ne před ním jako při textovém řazení."""
+    split = Split((frozenset({2}), frozenset({10})))
+
+    assert split.sha256() == NUMERIC_ORDER_SHA256

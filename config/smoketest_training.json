@@ -2,7 +2,6 @@
   "row_id": "smoketest-en-svm",
   "diagnosis": "diabetes",
   "seed": 0,
-  "folds": 5,
   "fold": 0,
   "regularization": 1.0
 }
