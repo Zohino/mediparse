@@ -13,6 +13,7 @@
 !translation/note_parts.py
 !translation/markers.py
 !translation/collect.py
+!translation/translate.py
 !pyproject.toml
 !pixi.lock
 !README.md

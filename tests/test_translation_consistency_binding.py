@@ -14,7 +14,7 @@ def _note(note_id: str, source: str, *parts: str) -> TranslatedNote:
     return TranslatedNote(note_id, sha256_text(source), parts)
 
 
-def test_joined_translation_matches_collect_normalization() -> None:
+def test_joined_translation_normalizes_parts() -> None:
     """Části se spojí prázdným řádkem, řádky ztratí koncové mezery a text končí LF."""
     assert joined_translation([" a  \nb ", "\nc\n"]) == "a\nb\n\nc\n"
 

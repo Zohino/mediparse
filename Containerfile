@@ -26,7 +26,7 @@ COPY pyproject.toml ./
 COPY config/matrix.json config/smoketest_training.json config/synthetic_plan.json config/mimic_tables.json config/diagnosis_candidates.json config/verbalization_template.md config/
 COPY resources/synthetic/ resources/synthetic/
 COPY resources/icd/ resources/icd/
-COPY translation/note_parts.py translation/markers.py translation/collect.py translation/
+COPY translation/note_parts.py translation/markers.py translation/collect.py translation/translate.py translation/
 COPY workflow/ workflow/
 COPY tests/ tests/
 
