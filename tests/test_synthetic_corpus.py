@@ -74,3 +74,28 @@ def test_note_that_is_not_utf8_is_invalid_input(tmp_path: Path) -> None:
 
     with pytest.raises(InvalidInputError, match=r"en/90000001-DS-1\.txt"):
         CorpusDirectory(tmp_path).notes(Language.EN)
+
+
+@pytest.mark.parametrize("language", list(Language))
+def test_note_path_is_language_directory_and_note_id(
+    tmp_path: Path, language: Language
+) -> None:
+    """Cesta zprávy je ``<kořen>/<jazyk>/<note_id>.txt``; disk se nečte."""
+    root = tmp_path / "neexistuje"
+
+    path = CorpusDirectory(root).note_path(language, "9000-DS-1")
+
+    assert path == root / language.value / "9000-DS-1.txt"
+
+
+@pytest.mark.parametrize("language", list(Language))
+def test_text_written_to_note_path_is_read_back_by_notes(
+    tmp_path: Path, language: Language
+) -> None:
+    """Skládání cesty a čtení zpráv stojí na stejném formátu souboru."""
+    corpus = CorpusDirectory(tmp_path)
+    path = corpus.note_path(language, "9000-DS-1")
+    path.parent.mkdir(parents=True)
+    path.write_text("text", encoding="utf-8")
+
+    assert corpus.notes(language) == {"9000-DS-1": "text"}

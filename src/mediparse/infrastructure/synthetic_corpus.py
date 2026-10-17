@@ -25,7 +25,8 @@ from mediparse.infrastructure.json_file import write_model
 CORPUS_ROOT: Final = Path("resources/synthetic")
 RECORD_NAME: Final = "audit.json"
 PROVENANCE_NAME: Final = "provenance.json"
-_NOTES: Final = "*/*.txt"
+_SUFFIX: Final = ".txt"
+_NOTES: Final = f"*/*{_SUFFIX}"
 _LANGUAGES: Final = frozenset(language.value for language in Language)
 
 
@@ -49,6 +50,14 @@ class CorpusDirectory:
             for path in self._paths()
             if path.parent.name == language.value
         }
+
+    def note_path(self, language: Language, note_id: str) -> Path:
+        """Cesta ke zprávě; disk nečte.
+
+        Returns:
+            ``<kořen>/<jazyk>/<note_id>.txt``, tedy soubor, který čte ``notes``.
+        """
+        return self.root / language.value / f"{note_id}{_SUFFIX}"
 
     def fingerprint(self) -> str | None:
         """Otisk zpráv tak, jak leží na disku; adresář jazyka mimo Language odmítne jako InvalidInputError.

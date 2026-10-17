@@ -1,7 +1,18 @@
+from pathlib import Path
+
+SYNTHETIC = Path("resources/synthetic")
+SMOKETEST = Path("build/smoketest")
+SMOKETEST_LOGS = Path("logs/smoketest")
+
+
 rule smoketest:
     input:
-        metrics="build/smoketest/metrics.parquet",
-        demo="build/smoketest/demo.parquet",
+        metrics=SMOKETEST / "metrics.parquet",
+        demo=SMOKETEST / "demo.parquet",
+    params:
+        corpus=SYNTHETIC,
+        outputs=SMOKETEST,
+        logs=SMOKETEST_LOGS,
     script:
         "scripts/smoketest_summary.py"
 

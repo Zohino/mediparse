@@ -5,5 +5,11 @@ from pathlib import Path
 from mediparse.entrypoints.smoketest_summary import main
 
 raise SystemExit(
-    main(metrics=Path(snakemake.input.metrics), demo=Path(snakemake.input.demo))
+    main(
+        metrics=Path(snakemake.input.metrics),
+        demo=Path(snakemake.input.demo),
+        corpus=Path(snakemake.params.corpus),
+        outputs=Path(snakemake.params.outputs),
+        logs=Path(snakemake.params.logs),
+    )
 )

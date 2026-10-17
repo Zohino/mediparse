@@ -1,16 +1,11 @@
-from pathlib import Path
-
-SYNTHETIC = Path("resources/synthetic")
-
-
 rule prepare_smoketest_subset:
     input:
         plans=SYNTHETIC / "plans.jsonl",
         notes=sorted((SYNTHETIC / "en").glob("*.txt")),
     output:
-        "build/smoketest/notes.parquet",
+        SMOKETEST / "notes.parquet",
     log:
-        "logs/smoketest/prepare_smoketest_subset.log",
+        SMOKETEST_LOGS / "prepare_smoketest_subset.log",
     params:
         corpus=SYNTHETIC,
     script:
@@ -19,37 +14,37 @@ rule prepare_smoketest_subset:
 
 rule train_smoketest_model:
     input:
-        notes="build/smoketest/notes.parquet",
+        notes=SMOKETEST / "notes.parquet",
         config="config/smoketest_training.json",
     output:
-        model="build/smoketest/model.skops",
-        predictions="build/smoketest/predictions.parquet",
-        manifest="build/smoketest/run_manifest.json",
+        model=SMOKETEST / "model.skops",
+        predictions=SMOKETEST / "predictions.parquet",
+        manifest=SMOKETEST / "run_manifest.json",
     log:
-        "logs/smoketest/train_smoketest_model.log",
+        SMOKETEST_LOGS / "train_smoketest_model.log",
     script:
         "../scripts/train_smoketest.py"
 
 
 rule evaluate_smoketest_model:
     input:
-        predictions="build/smoketest/predictions.parquet",
+        predictions=SMOKETEST / "predictions.parquet",
     output:
-        "build/smoketest/metrics.parquet",
+        SMOKETEST / "metrics.parquet",
     log:
-        "logs/smoketest/evaluate_smoketest_model.log",
+        SMOKETEST_LOGS / "evaluate_smoketest_model.log",
     script:
         "../scripts/evaluate_smoketest.py"
 
 
 rule infer_smoketest_model:
     input:
-        notes="build/smoketest/notes.parquet",
-        model="build/smoketest/model.skops",
-        predictions="build/smoketest/predictions.parquet",
+        notes=SMOKETEST / "notes.parquet",
+        model=SMOKETEST / "model.skops",
+        predictions=SMOKETEST / "predictions.parquet",
     output:
-        "build/smoketest/demo.parquet",
+        SMOKETEST / "demo.parquet",
     log:
-        "logs/smoketest/infer_smoketest_model.log",
+        SMOKETEST_LOGS / "infer_smoketest_model.log",
     script:
         "../scripts/infer_smoketest.py"
