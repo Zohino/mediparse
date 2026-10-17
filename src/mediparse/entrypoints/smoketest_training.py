@@ -112,6 +112,8 @@ def run(
             dataset_sha256=file_sha256(notes),
             config_sha256=file_sha256(config),
             seed=training.seed,
+            split_seed=split_config.seed,
+            split_sha256=report.split_sha256,
             model=ESTIMATOR,
             model_revision=None,
             tokenizer_revision=None,

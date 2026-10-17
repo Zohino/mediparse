@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
@@ -119,6 +120,8 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
     assert written.dataset_sha256 == file_sha256(notes)
     assert written.config_sha256 == file_sha256(config)
     assert written.seed == 0
+    assert written.split_seed == 0
+    assert re.fullmatch(r"[0-9a-f]{64}", written.split_sha256)
     assert written.row_id == "row"
     assert written.environment.source == REVISION
     assert written.model_revision is None
@@ -202,6 +205,14 @@ def _predictions(
     ).read()
 
 
+def _manifest(root: Path, seed: int, name: str, split_seed: int = 0) -> RunManifest:
+    return RunManifest.model_validate_json(
+        _successful_run(root, seed, name, split_seed).manifest.read_text(
+            encoding="utf-8"
+        )
+    )
+
+
 def _test_patients(rows: tuple[Prediction, ...]) -> frozenset[tuple[int, int]]:
     return frozenset((row.subject_id, row.fold) for row in rows)
 
@@ -215,6 +226,15 @@ def test_model_seed_does_not_change_test_patients(tmp_path: Path) -> None:
     assert len(patients) == 1
 
 
+def test_model_seed_does_not_change_split_fingerprint(tmp_path: Path) -> None:
+    """Otisk splitu v manifestu je pro všechny seedy modelu stejný."""
+    fingerprints = {
+        _manifest(tmp_path, seed, f"seed{seed}").split_sha256 for seed in range(6)
+    }
+
+    assert len(fingerprints) == 1
+
+
 def test_split_seed_changes_test_patients(tmp_path: Path) -> None:
     """Pozitivní kontrola: seed splitu při stejném configu tréninku mění testovací pacienty."""
     patients = {
@@ -223,6 +243,16 @@ def test_split_seed_changes_test_patients(tmp_path: Path) -> None:
     }
 
     assert len(patients) > 1
+
+
+def test_split_seed_changes_fingerprint_and_manifest_seed(tmp_path: Path) -> None:
+    """Jiný seed splitu dá jiný split_seed a aspoň u některého seedu jiný otisk."""
+    manifests = [
+        _manifest(tmp_path, 0, f"split{seed}", split_seed=seed) for seed in range(6)
+    ]
+
+    assert [item.split_seed for item in manifests] == list(range(6))
+    assert len({item.split_sha256 for item in manifests}) > 1
 
 
 def _manifest_bytes(root: Path, seed: int, name: str, split_seed: int = 0) -> bytes:
@@ -237,12 +267,13 @@ def test_manifest_is_byte_identical_for_same_inputs(tmp_path: Path) -> None:
 
 
 def test_seed_changes_manifest(tmp_path: Path) -> None:
-    """Jiný seed dá jiný seed i hash configu."""
+    """Jiný seed modelu dá jiný seed i hash configu, ale týž split."""
     first = RunManifest.model_validate_json(_manifest_bytes(tmp_path, 0, "a"))
     other = RunManifest.model_validate_json(_manifest_bytes(tmp_path, 1, "b"))
 
     assert (first.seed, other.seed) == (0, 1)
     assert first.config_sha256 != other.config_sha256
+    assert first.split_sha256 == other.split_sha256
 
 
 def test_unreadable_revision_is_refused_before_training(tmp_path: Path) -> None:

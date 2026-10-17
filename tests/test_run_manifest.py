@@ -20,6 +20,8 @@ def _fields(**changes: object) -> dict[str, object]:
         "dataset_sha256": DIGEST,
         "config_sha256": DIGEST,
         "seed": 0,
+        "split_seed": 1,
+        "split_sha256": DIGEST,
         "model": "sklearn TfidfVectorizer+LinearSVC",
         "model_revision": None,
         "tokenizer_revision": None,
@@ -40,7 +42,7 @@ def test_valid_manifest_with_null_revisions() -> None:
     assert manifest.environment.source.commit == COMMIT
 
 
-@pytest.mark.parametrize("field", ["dataset_sha256", "config_sha256"])
+@pytest.mark.parametrize("field", ["dataset_sha256", "config_sha256", "split_sha256"])
 @pytest.mark.parametrize("digest", ["b" * 63, "b" * 65])
 def test_digest_of_other_length_is_rejected(field: str, digest: str) -> None:
     """Hash jiné délky než 64 znaků je odmítnut."""
