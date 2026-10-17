@@ -120,3 +120,14 @@ def test_read_unknown_language_is_invalid_input(tmp_path: Path) -> None:
 
     with pytest.raises(InvalidInputError, match="neznámý jazyk 'de'"):
         ParquetNoteTable(path).read()
+
+
+def test_written_file_is_zstd_compressed(tmp_path: Path) -> None:
+    """Tabulka se zapisuje se stejnou kompresí jako ostatní parquet repa."""
+    path = tmp_path / "notes.parquet"
+
+    ParquetNoteTable(path).write([
+        InputNote("90000002-DS-1", 90000002, Language.EN, "b", frozenset())
+    ])
+
+    assert pq.ParquetFile(path).metadata.row_group(0).column(0).compression == "ZSTD"

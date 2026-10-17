@@ -14,13 +14,13 @@ import pyarrow.parquet as pq
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.mimic_table import TableShape
+from mediparse.infrastructure.parquet_file import COMPRESSION
 
 if TYPE_CHECKING:
     from collections.abc import Buffer
     from pathlib import Path
 
 BLOCK_SIZE: Final = 64 * 1024 * 1024
-COMPRESSION: Final = "zstd"
 
 
 def _header(source: Path) -> tuple[str, ...]:

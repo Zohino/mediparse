@@ -6,12 +6,13 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
 import pyarrow as pa
-import pyarrow.parquet as pq
 
-from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import BinaryMetrics, DiagnosisMetrics
-from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.parquet_file import read_table
+from mediparse.infrastructure.parquet_file import (
+    parse_diagnosis,
+    read_table,
+    write_table,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -51,8 +52,7 @@ class ParquetMetricsTable:
             "roc_auc": [item.metrics.roc_auc for item in metrics],
             "pr_auc": [item.metrics.pr_auc for item in metrics],
         }
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        pq.write_table(pa.Table.from_pydict(columns, schema=SCHEMA), self.path)
+        write_table(self.path, columns, SCHEMA)
 
     def read(self) -> tuple[DiagnosisMetrics, ...]:
         """Přečte řádky tabulky v pořadí souboru.
@@ -64,14 +64,9 @@ class ParquetMetricsTable:
         return tuple(self._metrics(row) for row in table.to_pylist())
 
     def _metrics(self, row: dict[str, Any]) -> DiagnosisMetrics:
-        try:
-            diagnosis = Diagnosis(row["diagnosis"])
-        except ValueError as error:
-            msg = f"Soubor {self.path} obsahuje neznámou diagnózu {row['diagnosis']!r}."
-            raise InvalidInputError(msg) from error
         return DiagnosisMetrics(
             row["row_id"],
-            diagnosis,
+            parse_diagnosis(self.path, row["diagnosis"]),
             row["test_notes"],
             row["test_positives"],
             BinaryMetrics(

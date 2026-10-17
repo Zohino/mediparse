@@ -80,3 +80,12 @@ def test_non_finite_score_is_invalid_input(tmp_path: Path, score: float) -> None
 
     with pytest.raises(InvalidInputError, match="skóre"):
         ParquetPredictionTable(path).read()
+
+
+def test_written_file_is_zstd_compressed(tmp_path: Path) -> None:
+    """Tabulka se zapisuje se stejnou kompresí jako ostatní parquet repa."""
+    path = tmp_path / "predictions.parquet"
+
+    ParquetPredictionTable(path).write(PREDICTIONS)
+
+    assert pq.ParquetFile(path).metadata.row_group(0).column(0).compression == "ZSTD"

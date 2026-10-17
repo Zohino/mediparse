@@ -7,12 +7,14 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
 import pyarrow as pa
-import pyarrow.parquet as pq
 
-from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Prediction
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.parquet_file import read_table
+from mediparse.infrastructure.parquet_file import (
+    parse_diagnosis,
+    read_table,
+    write_table,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -48,8 +50,7 @@ class ParquetPredictionTable:
             "predicted": [item.predicted for item in predictions],
             "score": [item.score for item in predictions],
         }
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        pq.write_table(pa.Table.from_pydict(columns, schema=SCHEMA), self.path)
+        write_table(self.path, columns, SCHEMA)
 
     def read(self) -> tuple[Prediction, ...]:
         """Přečte řádky tabulky v pořadí souboru.
@@ -67,17 +68,12 @@ class ParquetPredictionTable:
         return tuple(self._prediction(row) for row in table.to_pylist())
 
     def _prediction(self, row: dict[str, Any]) -> Prediction:
-        try:
-            diagnosis = Diagnosis(row["diagnosis"])
-        except ValueError as error:
-            msg = f"Soubor {self.path} obsahuje neznámou diagnózu {row['diagnosis']!r}."
-            raise InvalidInputError(msg) from error
         return Prediction(
             row["row_id"],
             row["fold"],
             row["note_id"],
             row["subject_id"],
-            diagnosis,
+            parse_diagnosis(self.path, row["diagnosis"]),
             truth=row["truth"],
             predicted=row["predicted"],
             score=row["score"],

@@ -95,3 +95,15 @@ def test_non_parquet_file_is_invalid_input(tmp_path: Path) -> None:
 
     with pytest.raises(InvalidInputError, match="schématu"):
         ParquetMetricsTable(path).read()
+
+
+def test_written_file_is_zstd_compressed(tmp_path: Path) -> None:
+    """Tabulka se zapisuje se stejnou kompresí jako ostatní parquet repa."""
+    path = tmp_path / "metrics.parquet"
+    metrics = DiagnosisMetrics(
+        "row", Diagnosis.CKD, 40, 12, BinaryMetrics(0.5, 0.25, 0.75, 0.875, 0.9, 0.8)
+    )
+
+    ParquetMetricsTable(path).write([metrics])
+
+    assert pq.ParquetFile(path).metadata.row_group(0).column(0).compression == "ZSTD"
