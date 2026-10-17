@@ -1,4 +1,4 @@
-"""Plány v repu: bajtově shodné s novým během vzorkovače a čisté vůči hookům repa."""
+"""Plány v repu: bajtově totožné s novým během vzorkovače a čisté vůči hookům repa."""
 
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ def test_repository_plans_match_a_fresh_run(
 ) -> None:
     """Plány v repu vznikly z configu v repu.
 
-    Soubor vygeneroval konzolový skript v jiném procesu než test, takže shoda
+    Soubor vygeneroval konzolový skript v jiném procesu než test, takže porovnání
     zachytí i pořadí závislé na solení hashů.
     """
     fresh = SyntheticPlanFiles(tmp_path / "plans.jsonl", tmp_path / "labels.csv")

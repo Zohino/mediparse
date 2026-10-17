@@ -1,4 +1,4 @@
-"""Shoda textu syntetické zprávy s plánem: každé porušení pravidel specifikace se ozve."""
+"""Soulad textu syntetické zprávy s plánem: každé porušení pravidel specifikace se ozve."""
 
 from __future__ import annotations
 

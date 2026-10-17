@@ -172,7 +172,7 @@ def test_gate_rejects_record_from_other_method() -> None:
 
 
 def test_gate_accepts_matching_record() -> None:
-    """Shodný otisk, metoda i reference bránou projdou, štítky pinu (frozenset) i se seřazenou n-ticí záznamu."""
+    """Stejný otisk, metoda i reference bránou projdou, štítky pinu (frozenset) i se seřazenou n-ticí záznamu."""
     assert PIN.violations(CORPUS_SHA, audit_record()) == ()
 
 
@@ -200,7 +200,7 @@ def test_gate_rejects_record_when_config_names_no_reference() -> None:
 @pytest.mark.parametrize(
     ("files", "mismatch"),
     [
-        pytest.param([DISCHARGE_FILE, RADIOLOGY_FILE], (), id="presna-shoda"),
+        pytest.param([DISCHARGE_FILE, RADIOLOGY_FILE], (), id="stejna-reference"),
         pytest.param([DISCHARGE_FILE], ("radiology.csv.gz",), id="bez-radiology"),
         pytest.param(
             [DISCHARGE_FILE, RADIOLOGY_FILE, ("admissions.csv.gz", "f" * 64)],
@@ -222,7 +222,7 @@ def test_gate_rejects_record_when_config_names_no_reference() -> None:
 def test_reference_mismatch_names_differing_files(
     files: list[tuple[str, str]], mismatch: tuple[str, ...]
 ) -> None:
-    """Pravidlo shody jmenuje chybějící, přebývající, zdvojené i jinak otištěné soubory."""
+    """Pravidlo reference jmenuje chybějící, přebývající, zdvojené i jinak otištěné soubory."""
     assert PIN.reference_mismatch(files) == mismatch
 
 

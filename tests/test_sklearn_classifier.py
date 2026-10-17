@@ -74,7 +74,7 @@ def test_classify_returns_label_with_signed_score() -> None:
 
 
 def test_model_file_round_trip(tmp_path: Path) -> None:
-    """Uložený model se načte s trusted=[] a klasifikuje shodně."""
+    """Uložený model se načte s trusted=[] a klasifikuje stejně."""
     texts, labels, _ = _corpus()
     classifier = LinearSvmTrainer(regularization=1.0, seed=0).fit(texts, labels)
     model_file = SkopsModelFile(tmp_path / "out" / "model.skops")

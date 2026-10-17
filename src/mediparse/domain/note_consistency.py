@@ -1,4 +1,4 @@
-"""Shoda textu syntetické zprávy s plánem: hlavičky sekcí, de-identifikační značky a zmínky diagnóz."""
+"""Soulad textu syntetické zprávy s plánem: hlavičky sekcí, de-identifikační značky a zmínky diagnóz."""
 
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ type Patterns = Mapping[Diagnosis, re.Pattern[str]]
 def note_violations(
     text: str, plan: NotePlan, structure: StructureModel, mentions: MentionModel
 ) -> tuple[str, ...]:
-    """Důvody, proč text zprávy neodpovídá plánu; prázdný výsledek znamená shodu.
+    """Důvody, proč text zprávy neodpovídá plánu; prázdný výsledek znamená soulad.
 
     Returns:
         Popisy porušení pravidel jedné zprávy ze specifikace korpusu.

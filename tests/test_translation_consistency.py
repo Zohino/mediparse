@@ -65,7 +65,7 @@ def test_length_ratio_on_bounds_passes() -> None:
 
 
 def test_mismatches_are_sorted_and_only_differing() -> None:
-    """Neshoda počtu značek se hlásí seřazeně a jen u zpráv, kde se počty liší."""
+    """Nesoulad počtu značek se hlásí seřazeně a jen u zpráv, kde se počty liší."""
     english = {"b": "___ ___", "a": "___", "c": "___"}
     czech = {"b": "___", "a": "", "c": "___", "d": "___"}
 
@@ -73,7 +73,7 @@ def test_mismatches_are_sorted_and_only_differing() -> None:
 
 
 def test_mismatches_ignore_longer_underscore_runs() -> None:
-    """Řada ____ není značka, takže neshodu nevyrobí."""
+    """Řada ____ není značka, takže nesoulad nevyrobí."""
     assert marker_mismatches({"a": "___"}, {"a": "___ ____"}) == ()
 
 

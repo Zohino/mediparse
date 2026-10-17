@@ -1,4 +1,4 @@
-"""Inference smoketestu: shoda uloženého modelu s tréninkem a výběr ukázky."""
+"""Inference smoketestu: soulad uloženého modelu s tréninkem a výběr ukázky."""
 
 from __future__ import annotations
 
@@ -51,7 +51,7 @@ def ensure_same_predictions(
             či skóre.
     """
     if len(expected) != len(actual):
-        msg = f"Neshoda: počet predikcí {len(expected)}, klasifikací {len(actual)}."
+        msg = f"Nesoulad: počet predikcí {len(expected)}, klasifikací {len(actual)}."
         raise ModelMismatchError(msg)
     for item, result in zip(expected, actual, strict=True):
         same_score = math.isclose(
@@ -60,7 +60,7 @@ def ensure_same_predictions(
         if item.predicted == result.predicted and same_score:
             continue
         msg = (
-            f"Neshoda u zprávy {item.note_id}: při tréninku label {item.predicted} "
+            f"Nesoulad u zprávy {item.note_id}: při tréninku label {item.predicted} "
             f"a skóre {item.score}, po načtení modelu label {result.predicted} "
             f"a skóre {result.score}."
         )

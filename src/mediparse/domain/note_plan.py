@@ -1,4 +1,4 @@
-"""Plán syntetické zprávy: vše, co verbalizace převádí do textu a co kontroly shody ověřují."""
+"""Plán syntetické zprávy: vše, co verbalizace převádí do textu a co kontroly souladu ověřují."""
 
 from __future__ import annotations
 

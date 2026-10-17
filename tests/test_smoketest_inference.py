@@ -1,4 +1,4 @@
-"""Doména inference smoketestu: shoda s tréninkem a výběr ukázky."""
+"""Doména inference smoketestu: soulad s tréninkem a výběr ukázky."""
 
 from __future__ import annotations
 
@@ -63,7 +63,7 @@ def test_score_outside_tolerance_names_note_id() -> None:
 
 
 def test_different_length_raises() -> None:
-    """Různý počet predikcí a klasifikací je neshoda."""
+    """Různý počet predikcí a klasifikací je nesoulad."""
     with pytest.raises(ModelMismatchError, match="počet"):
         ensure_same_predictions([_prediction("n1", truth=True)], [])
 

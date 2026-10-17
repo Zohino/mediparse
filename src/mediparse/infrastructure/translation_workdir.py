@@ -77,7 +77,7 @@ class TranslationWorkdir:
     root: Path
 
     def translation(self) -> Translation:
-        """Vstupy překladu z požadavků, běhů a výstupů; neshody značek doplňuje use case.
+        """Vstupy překladu z požadavků, běhů a výstupů; nesoulady značek doplňuje use case.
 
         Returns:
             Provenance překladu s běhy, z nichž pochází výstup pro klíč požadavku.

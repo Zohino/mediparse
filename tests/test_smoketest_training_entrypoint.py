@@ -193,7 +193,7 @@ def _predictions(root: Path, seed: int, name: str) -> tuple[Prediction, ...]:
 
 
 def test_seed_decides_the_split(tmp_path: Path) -> None:
-    """Stejný seed dá shodný obsah predikcí, jiný seed jiné testovací zprávy."""
+    """Stejný seed dá stejný obsah predikcí, jiný seed jiné testovací zprávy."""
     first = _predictions(tmp_path, 0, "first.parquet")
     repeated = _predictions(tmp_path, 0, "repeated.parquet")
     others = [
@@ -220,7 +220,7 @@ def _manifest_bytes(root: Path, seed: int, name: str) -> bytes:
 
 
 def test_manifest_is_byte_identical_for_same_inputs(tmp_path: Path) -> None:
-    """Dva běhy se stejnými vstupy dají bajtově shodný manifest."""
+    """Dva běhy se stejnými vstupy dají bajtově totožný manifest."""
     assert _manifest_bytes(tmp_path, 0, "first") == _manifest_bytes(
         tmp_path, 0, "second"
     )

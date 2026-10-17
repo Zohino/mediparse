@@ -27,7 +27,7 @@ class TableConverter(Protocol):
 
 @dataclass(frozen=True)
 class MimicParquetConversion:
-    """Převod tabulky ověřený proti inventáři: počet záznamů i sloupce se musí shodovat."""
+    """Převod tabulky ověřený proti inventáři: počet záznamů i sloupce mu musí odpovídat."""
 
     inventory: ShapeSource
     converter: TableConverter

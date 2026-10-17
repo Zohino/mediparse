@@ -82,7 +82,7 @@ def statistics_violations(
     """Vlastnosti korpusu mimo tolerance configu.
 
     Returns:
-        Popisy porušení s naměřenou hodnotou a cílem; prázdný výsledek znamená shodu.
+        Popisy porušení s naměřenou hodnotou a cílem; prázdný výsledek znamená soulad.
     """
     violations: list[str] = []
     if (

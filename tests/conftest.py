@@ -290,7 +290,7 @@ def planned_note() -> PlannedNote:
     """Malý plán s jedinou zmínkou CKD a zpráva, která mu odpovídá.
 
     Returns:
-        Plán a text pro kontroly shody.
+        Plán a text pro kontroly souladu.
     """
     return PlannedNote(_PLAN, _NOTE)
 

@@ -31,7 +31,7 @@ def _files(root: Path, records: int) -> tuple[Path, Path]:
 
 
 def test_matching_inventory_writes_parquet(tmp_path: Path) -> None:
-    """Shoda s inventářem: OK a parquet existuje."""
+    """Soulad s inventářem: OK a parquet existuje."""
     table, inventory = _files(tmp_path, RECORDS)
     parquet = tmp_path / "parquet" / "t.parquet"
     assert run(table=table, inventory=inventory, parquet=parquet) == ExitCode.OK

@@ -29,7 +29,7 @@ def _conversion(inventory: TableShape, converted: TableShape) -> MimicParquetCon
 
 
 def test_matching_shape_is_returned() -> None:
-    """Shoda s inventářem vrací tvar převedené tabulky."""
+    """Soulad s inventářem vrací tvar převedené tabulky."""
     assert _conversion(SHAPE, SHAPE).run() == SHAPE
 
 

@@ -37,7 +37,7 @@ class TranslationSource(Protocol):
     """Pracovní adresář překladu: vstupy překladu a přeložené zprávy."""
 
     def translation(self) -> Translation:
-        """Vstupy překladu bez neshod značek.
+        """Vstupy překladu bez nesouladů značek.
 
         Returns:
             Provenance překladu s prázdným ``marker_mismatches``.

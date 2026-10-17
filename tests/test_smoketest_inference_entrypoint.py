@@ -61,7 +61,7 @@ def _train(root: Path) -> Trained:
 
 
 def test_writes_positive_and_negative_demo(tmp_path: Path) -> None:
-    """Uložený model dá shodné predikce a demo.parquet má pozitivní a negativní ukázku."""
+    """Uložený model dá stejné predikce a demo.parquet má pozitivní a negativní ukázku."""
     trained = _train(tmp_path)
     demo = tmp_path / "build" / "demo.parquet"
 
@@ -124,7 +124,7 @@ def test_missing_predictions_are_refused(
 def test_tampered_predictions_are_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
-    """Predikce, které uložený model nereprodukuje, krok odmítne jako neshodu."""
+    """Predikce, které uložený model nereprodukuje, krok odmítne jako nesoulad."""
     trained = _train(tmp_path)
     table = ParquetPredictionTable(trained.predictions)
     first, *rest = table.read()
@@ -141,4 +141,4 @@ def test_tampered_predictions_are_refused(
     assert code is ExitCode.REFUSED
     assert not demo.exists()
     assert first.note_id in caplog.text
-    assert "Neshoda" in caplog.text
+    assert "Nesoulad" in caplog.text

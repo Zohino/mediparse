@@ -1,7 +1,7 @@
-"""Vstupní bod kontrol shody syntetického korpusu s plány.
+"""Vstupní bod kontrol souladu syntetického korpusu s plány.
 
 Konzolový skript ``mediparse-corpus-check`` vypíše porušení pravidel jedné zprávy
-a note_id zpráv k přegenerování; neshodu počtu značek ___ v překladu hlásí jako
+a note_id zpráv k přegenerování; nesoulad počtu značek ___ v překladu hlásí jako
 upozornění, které neblokuje. Pracuje jen se syntetickým korpusem, proto smí
 běžet kdekoli, i v CI.
 """
@@ -58,7 +58,7 @@ def run(argv: Sequence[str]) -> ExitCode:
     sys.stdout.writelines(f"Korpus: {reason}\n" for reason in report.corpus)
     sys.stdout.writelines(f"Upozornění: {notice}\n" for notice in report.notices)
     if not report.notes and not report.corpus:
-        sys.stdout.write("Kontroly shody: korpus odpovídá plánům i modelu.\n")
+        sys.stdout.write("Kontroly souladu: korpus odpovídá plánům i modelu.\n")
         return ExitCode.OK
     if report.notes:
         notes = ", ".join(result.note_id for result in report.notes)
@@ -69,7 +69,7 @@ def run(argv: Sequence[str]) -> ExitCode:
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="mediparse-corpus-check",
-        description="Kontroly shody syntetických zpráv s jejich plány.",
+        description="Kontroly souladu syntetických zpráv s jejich plány.",
     )
     parser.add_argument(
         "--corpus", type=Path, default=CORPUS_ROOT, help="kořen syntetického korpusu"

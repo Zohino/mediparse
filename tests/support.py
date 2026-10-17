@@ -125,7 +125,7 @@ def separable_notes(
 
 
 def translation_record(**overrides: object) -> Translation:
-    """Provenance překladu s jedním během a bez neshod značek.
+    """Provenance překladu s jedním během a bez nesouladů značek.
 
     Returns:
         Záznam, v němž ``overrides`` nahradí jednotlivá pole.
