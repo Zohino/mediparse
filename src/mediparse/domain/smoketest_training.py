@@ -12,7 +12,10 @@ from mediparse.domain.identity import RowId
 
 
 class TrainingConfig(BaseModel):
-    """Parametry tréninku: řádek matice, diagnóza, seed odložení, foldy a regularizace."""
+    """Parametry tréninku: řádek matice, diagnóza, seed odložení, foldy a regularizace.
+
+    ``fold`` je číslo foldu, který slouží jako test; jeho horní mez zná až ``Split``.
+    """
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
@@ -20,6 +23,7 @@ class TrainingConfig(BaseModel):
     diagnosis: Diagnosis
     seed: int
     folds: Annotated[int, Field(ge=2)]
+    fold: Annotated[int, Field(ge=0)]
     regularization: Annotated[float, Field(gt=0.0)]
 
 

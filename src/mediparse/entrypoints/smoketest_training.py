@@ -23,10 +23,10 @@ from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.sklearn_classifier import (
     ESTIMATOR,
-    GroupedHoldout,
     LinearSvmTrainer,
     SkopsModelFile,
 )
+from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.source_revision import revision_source
 from mediparse.infrastructure.training_config import load_training_config
 
@@ -94,7 +94,7 @@ def run(
     source = revision()
     step = SmoketestTraining(
         table=ParquetNoteTable(notes),
-        splitter=GroupedHoldout(training.folds, training.seed),
+        splitter=StratifiedGroupFolds(training.folds, training.seed),
         trainer=LinearSvmTrainer(training.regularization, training.seed),
         store=SkopsModelFile(model),
         predictions=ParquetPredictionTable(predictions),

@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+import json
 from typing import Final
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Prediction
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.language import Language
+from mediparse.domain.smoketest_training import TrainingConfig
 
 SEPARABLE_VOCABULARY: Final = (
     "diabetes insulin glucose metformin hyperglycemia",
@@ -76,13 +78,23 @@ def training_config(**overrides: object) -> dict[str, object]:
     """Platný config tréninku ve tvaru JSON; test změní jen pole, o kterém je.
 
     Returns:
-        Slovník s klíči ``row_id``, ``diagnosis``, ``seed``, ``folds``
-        a ``regularization``, přepsanými hodnotami z ``overrides``.
+        Slovník s klíči ``row_id``, ``diagnosis``, ``seed``, ``folds``,
+        ``fold`` a ``regularization``, přepsanými hodnotami z ``overrides``.
     """
     return {
         "row_id": "row",
         "diagnosis": "diabetes",
         "seed": 0,
         "folds": 2,
+        "fold": 0,
         "regularization": 1.0,
     } | overrides
+
+
+def parsed_training_config(**overrides: object) -> TrainingConfig:
+    """Config tréninku z ``training_config`` rozparsovaný jako v produkci.
+
+    Returns:
+        ``TrainingConfig`` s přepsanými hodnotami z ``overrides``.
+    """
+    return TrainingConfig.model_validate_json(json.dumps(training_config(**overrides)))

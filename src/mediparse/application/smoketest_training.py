@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Protocol
 
 from mediparse.domain.evaluation import Prediction
 from mediparse.domain.smoketest_training import TrainingReport
-from mediparse.domain.split import ensure_disjoint_subjects, ensure_patients_per_class
+from mediparse.domain.split import ensure_patients_per_class, strata
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -17,17 +17,22 @@ if TYPE_CHECKING:
         PredictionSink,
         TextClassifier,
     )
+    from mediparse.domain.diagnosis import Diagnosis
+    from mediparse.domain.identity import SubjectId
+    from mediparse.domain.input_note import InputNote
     from mediparse.domain.smoketest_training import TrainingConfig
-    from mediparse.domain.split import Holdout
-
-FOLD = 0
+    from mediparse.domain.split import Split
 
 
-class HoldoutSplitter(Protocol):
-    """Rozdělení zpráv na trénink a test po pacientech."""
+def _labels(notes: Sequence[InputNote], diagnosis: Diagnosis) -> list[bool]:
+    return [diagnosis in note.labels for note in notes]
 
-    def split(self, labels: Sequence[bool], groups: Sequence[int]) -> Holdout:
-        """Rozdělí zprávy podle labelů a skupin pacientů."""
+
+class PatientSplitter(Protocol):
+    """Rozdělení pacientů do foldů."""
+
+    def split(self, subjects: Sequence[SubjectId], strata: Sequence[int]) -> Split:
+        """Rozdělí pacienty zpráv do foldů podle třídy stratifikace každé zprávy."""
 
 
 class ClassifierTrainer[C: TextClassifier](Protocol):
@@ -53,7 +58,7 @@ class SmoketestTraining[C: TextClassifier]:
     """
 
     table: InputTable
-    splitter: HoldoutSplitter
+    splitter: PatientSplitter
     trainer: ClassifierTrainer[C]
     store: ModelStore[C]
     predictions: PredictionSink
@@ -68,31 +73,29 @@ class SmoketestTraining[C: TextClassifier]:
             Velikosti částí odložení.
         """
         notes = self.table.read()
-        labels = [config.diagnosis in note.labels for note in notes]
-        groups = [note.subject_id for note in notes]
-        ensure_patients_per_class(labels, groups, config.diagnosis, config.folds)
-        holdout = self.splitter.split(labels, groups)
-        ensure_disjoint_subjects(notes, holdout)
+        labels = _labels(notes, config.diagnosis)
+        subjects = [note.subject_id for note in notes]
+        ensure_patients_per_class(labels, subjects, config.diagnosis, config.folds)
+        split = self.splitter.split(subjects, strata(notes, config.folds))
+        holdout = split.holdout(notes, config.fold)
         classifier = self.trainer.fit(
-            [notes[index].text for index in holdout.train],
-            [labels[index] for index in holdout.train],
+            [note.text for note in holdout.train],
+            _labels(holdout.train, config.diagnosis),
         )
-        truth = [labels[index] for index in holdout.test]
-        classifications = classifier.classify([
-            notes[index].text for index in holdout.test
-        ])
+        truth = _labels(holdout.test, config.diagnosis)
+        classifications = classifier.classify([note.text for note in holdout.test])
         predictions = [
             Prediction(
                 config.row_id,
-                FOLD,
-                notes[index].note_id,
-                notes[index].subject_id,
+                holdout.fold,
+                note.note_id,
+                note.subject_id,
                 config.diagnosis,
                 truth=label,
                 predicted=classification.predicted,
                 score=classification.score,
             )
-            for index, label, classification in zip(
+            for note, label, classification in zip(
                 holdout.test, truth, classifications, strict=True
             )
         ]
