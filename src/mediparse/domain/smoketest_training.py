@@ -3,13 +3,16 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Annotated
+from typing import TYPE_CHECKING, Annotated
 
 from pydantic import BaseModel, ConfigDict, Field
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.identity import RowId
 from mediparse.domain.seed import Seed
+
+if TYPE_CHECKING:
+    from mediparse.domain.split import SplitConfig
 
 
 class TrainingConfig(BaseModel):
@@ -29,10 +32,11 @@ class TrainingConfig(BaseModel):
 
 @dataclass(frozen=True)
 class TrainingReport:
-    """Výsledek běhu: velikosti částí a počet pozitivních v testu."""
+    """Výsledek běhu: velikosti částí, počet pozitivních v testu a split, ze kterého běh vyšel."""
 
     diagnosis: Diagnosis
     train_notes: int
     test_notes: int
     test_positives: int
+    split_config: SplitConfig
     split_sha256: str
