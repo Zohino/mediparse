@@ -66,6 +66,7 @@ INVALID_LEXICONS: Final = {
         {"sections": {"a": _section("Allergies", label_cs="")}},
         "at least 1 character",
     ),
+    "bez sekcí": ({"sections": {}}, "at least 1 item"),
     "kolize dvou sekcí po normalizaci": (
         {"sections": {"a": _section("Allergies"), "b": _section("ALLERGIES.")}},
         "splývají hlavičky: allergies",

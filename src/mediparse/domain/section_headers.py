@@ -47,7 +47,7 @@ class SectionLexicon(BaseModel):
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
-    sections: dict[str, LexiconSection]
+    sections: Annotated[dict[str, LexiconSection], Field(min_length=1)]
     preamble: tuple[str, ...]
 
     @model_validator(mode="after")

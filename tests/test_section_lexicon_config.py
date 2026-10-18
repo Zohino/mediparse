@@ -34,7 +34,7 @@ def test_missing_file_is_invalid_input(tmp_path: Path) -> None:
 def test_wrong_schema_is_invalid_input(tmp_path: Path) -> None:
     """Lexikon se špatným schématem je InvalidInputError se jménem souboru."""
     path = tmp_path / "headers.json"
-    path.write_text(json.dumps({"sections": {}}), encoding="utf-8")
+    path.write_text(json.dumps({"preamble": []}), encoding="utf-8")
 
     with pytest.raises(InvalidInputError, match=r"headers\.json"):
         load_section_lexicon(path)
