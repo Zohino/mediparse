@@ -11,10 +11,13 @@ from pydantic import ValidationError
 from mediparse.domain.note_text import line_headers
 from mediparse.domain.section_headers import (
     HEADER_PATTERN,
+    OTHER,
+    NoteSection,
     SectionHeader,
     SectionLexicon,
     find_section_headers,
     normalized,
+    split_sections,
 )
 from mediparse.infrastructure.sampler_config import load_sampler_config
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
@@ -258,3 +261,72 @@ def test_synthetic_corpus_matches_generator_headers() -> None:
             for m in pattern.finditer(text)
         )
         assert find_section_headers(text, lexicon) == expected, note.name
+
+
+SPLIT_CASES: Final = {
+    "preambule a tři sekce": (
+        (
+            "Name: ___\nChief Complaint:\nchest pain\nPast Medical History:\nCHF\n"
+            "Discharge Diagnosis:\nCOPD"
+        ),
+        (
+            NoteSection(OTHER, "", "Name: ___\n"),
+            NoteSection("chief_complaint", "Chief Complaint:", "\nchest pain\n"),
+            NoteSection("past_medical_history", "Past Medical History:", "\nCHF\n"),
+            NoteSection("discharge_diagnosis", "Discharge Diagnosis:", "\nCOPD"),
+        ),
+    ),
+    "bez hlavičky": ("just words", (NoteSection(OTHER, "", "just words"),)),
+    "prázdný text": ("", ()),
+    "začíná hlavičkou": (
+        "Chief Complaint:\npain",
+        (NoteSection("chief_complaint", "Chief Complaint:", "\npain"),),
+    ),
+    "opakovaná hlavička a synonymum zůstanou v těle": (
+        (
+            "Discharge Diagnosis:\nCHF\nChief Complaint:\nx\n"
+            "Discharge Diagnoses:\nCOPD\nChief Complaint:\ny"
+        ),
+        (
+            NoteSection("discharge_diagnosis", "Discharge Diagnosis:", "\nCHF\n"),
+            NoteSection(
+                "chief_complaint",
+                "Chief Complaint:",
+                "\nx\nDischarge Diagnoses:\nCOPD\nChief Complaint:\ny",
+            ),
+        ),
+    ),
+    "prázdná sekce": (
+        "Chief Complaint:\nPast Medical History:\nCHF",
+        (
+            NoteSection("chief_complaint", "Chief Complaint:", "\n"),
+            NoteSection("past_medical_history", "Past Medical History:", "\nCHF"),
+        ),
+    ),
+    "odsazení, CRLF a poslední řádek bez konce": (
+        "x\r\n  Chief Complaint:\r\npain\r\nDischarge Diagnosis:",
+        (
+            NoteSection(OTHER, "", "x\r\n"),
+            NoteSection("chief_complaint", "  Chief Complaint:", "\r\npain\r\n"),
+            NoteSection("discharge_diagnosis", "Discharge Diagnosis:", ""),
+        ),
+    ),
+}
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"), SPLIT_CASES.values(), ids=SPLIT_CASES.keys()
+)
+def test_split_sections_cuts_text_into_named_units(
+    text: str, expected: tuple[NoteSection, ...]
+) -> None:
+    """Preambule je other, hlavička nese odsazení a tělo drží konec řádku."""
+    assert split_sections(text, DISCHARGE_LEXICON) == expected
+
+
+@pytest.mark.parametrize("text", [case[0] for case in SPLIT_CASES.values()])
+def test_split_sections_compose_back_to_original(text: str) -> None:
+    """Hlavičky a těla dají v pořadí přesně původní text."""
+    sections = split_sections(text, DISCHARGE_LEXICON)
+
+    assert "".join(s.header + s.body for s in sections) == text
