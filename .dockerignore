@@ -5,6 +5,7 @@
 !config/matrix.json
 !config/smoketest_training.json
 !config/split.json
+!config/section_headers.json
 !config/synthetic_plan.json
 !config/mimic_tables.json
 !config/diagnosis_candidates.json
