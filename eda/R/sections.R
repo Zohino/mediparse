@@ -55,10 +55,6 @@ note_headers <- function(con) {
   HEADERS_TABLE
 }
 
-corpus_size <- function(con) {
-  as.numeric(DBI::dbGetQuery(con, sprintf("SELECT count(*) AS n FROM (%s)", input_corpus_sql(con)))$n)
-}
-
 header_lexicon <- function(con, lexicon) {
   sections <- lexicon$sections
   preamble <- lexicon$preamble
