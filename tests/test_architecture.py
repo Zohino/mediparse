@@ -187,6 +187,13 @@ def test_import_linter_sees_workflow_scripts() -> None:
     assert "workflow" in root_packages
 
 
+def test_import_linter_sees_type_checking_imports() -> None:
+    """Typ je také závislost: import pod ``TYPE_CHECKING`` nesmí obejít vrstvy."""
+    config = _pyproject()["tool"]["importlinter"]
+
+    assert config.get("exclude_type_checking_imports", False) is False
+
+
 def _domain_models() -> list[type[BaseModel]]:
     models: list[type[BaseModel]] = []
     for info in pkgutil.walk_packages(

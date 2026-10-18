@@ -69,7 +69,7 @@ source = ["mediparse"]
 [tool.importlinter]
 root_packages = ["mediparse", "tests", "workflow"]
 include_external_packages = true
-exclude_type_checking_imports = true
+exclude_type_checking_imports = false
 
 [[tool.importlinter.contracts]]
 name = "Hexagonální vrstvy mediparse"
@@ -106,6 +106,14 @@ ignore_imports = [
     "mediparse.** -> itertools",
     "mediparse.** -> types",
     "mediparse.** -> typing",
+    # Jen typy pod TYPE_CHECKING; po modulech, ne po vrstvě, protože import-linter
+    # typový import od běhového nerozliší a ruff S311 nechytí random.shuffle ani seed.
+    "mediparse.application.cohort -> contextlib",
+    "mediparse.application.corpus_audit -> datetime",
+    "mediparse.application.plan_sampling -> random",
+    "mediparse.domain.mentions -> random",
+    "mediparse.domain.note_structure -> random",
+    "mediparse.domain.synthetic_patients -> random",
     "mediparse.domain.** -> datetime",
     "mediparse.domain.** -> hashlib",
     "mediparse.domain.** -> math",
