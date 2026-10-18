@@ -137,7 +137,7 @@ export_table(
 Dokument ověřil seed lexikon sekcí na vstupním korpusu. Pro další práci z toho plyne:
 
 - **Pokrytí.** `r coverage_text(totals)`
-- **Kandidáti na doplnění.** `r candidates_text(candidates, totals)` Autor po reálném renderu doplní sekce šablony do `config/section_headers.json` a sešit přerenderuje.
+- **Kandidáti na doplnění.** `r candidates_text(candidates, totals)` Do lexikonu patří jen samostatná sekce šablony; pole a podnadpisy uvnitř jiné sekce sekcemi nejsou a lexikon je nepřebírá, i když je má většina zpráv.
 - **Mrtvá synonyma.** `r dead_synonyms_text(synonyms, totals)`
 - **Opakování.** `r repeated_synonyms_text(synonyms, totals)`
 - **Pro parser.** Parser sekcí čte lexikon z `config/section_headers.json` a převezme pravidlo hlavičky a normalizace z kapitoly @sec-data.
