@@ -28,13 +28,3 @@ count_phrase <- function(n, forms, zero = NULL) {
   }
   out
 }
-
-join_labels <- function(labels) {
-  if (length(labels) == 0L) {
-    return("žádný")
-  }
-  if (length(labels) == 1L) {
-    return(labels)
-  }
-  paste0(paste(utils::head(labels, -1L), collapse = ", "), " a ", utils::tail(labels, 1L))
-}

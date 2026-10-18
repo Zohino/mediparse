@@ -97,3 +97,13 @@ dua_binary <- function(n, total) {
   hidden <- is.na(n) | is.na(total) | n < DUA_THRESHOLD | total - n < DUA_THRESHOLD
   ifelse(hidden, NA_real_, as.numeric(n))
 }
+
+join_labels <- function(labels) {
+  if (length(labels) == 0L) {
+    return("žádný")
+  }
+  if (length(labels) == 1L) {
+    return(labels)
+  }
+  paste0(paste(utils::head(labels, -1L), collapse = ", "), " a ", utils::tail(labels, 1L))
+}

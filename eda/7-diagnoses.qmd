@@ -8,7 +8,6 @@ abstract: |
 #| include: false
 library(reticulate)
 source("R/dua.R")
-source("R/czech.R")
 source("R/db.R")
 source("R/patients.R")
 source("R/text.R")
