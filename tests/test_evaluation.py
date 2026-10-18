@@ -1,4 +1,4 @@
-"""Doména evaluace: ověření, že pravda diagnózy obsahuje obě třídy."""
+"""Doména evaluace: invariant predikce, jedinečnost klíče, úplnost foldů a obě třídy pravdy."""
 
 from __future__ import annotations
 

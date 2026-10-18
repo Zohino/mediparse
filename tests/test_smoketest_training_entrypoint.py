@@ -181,18 +181,18 @@ def test_invalid_config_is_refused(tmp_path: Path) -> None:
 def test_split_with_subject_in_two_folds_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
-    """Pacient ve dvou foldech krok odmítne hláškou o úniku a bez subject_id v logu.
+    """Pacient ve dvou foldech krok odmítne hláškou o úniku a bez jeho id v logu.
 
-    Soubor má další vadu jen nevyhnutelnou (víc řádků než pacientů); otisk sedí podle
-    kontraktu ``Split.sha256``. Bez invariantu by adaptér hlásil počet řádků.
+    Otisk sedí podle kontraktu ``Split.sha256``. Bez invariantu by adaptér soubor
+    přijal a krok by skončil REFUSED jinou hláškou; rozhoduje aserce na hlášku úniku.
     """
     notes, config, split = _inputs(tmp_path)
-    lines = "1\t0\n1\t1\n2\t1\n"
-    fingerprint = hashlib.sha256(lines.encode()).hexdigest()
+    rows = [(90000001, 0), (90000001, 1), (90000002, 1)]
+    lines = "".join(f"{subject}\t{fold}\n" for subject, fold in rows)
     write_raw_split(
         split,
-        [(1, 0), (1, 1), (2, 1)],
-        {"folds": 2, "seed": 0, "sha256": fingerprint},
+        rows,
+        {"folds": 2, "seed": 0, "sha256": hashlib.sha256(lines.encode()).hexdigest()},
     )
     outputs = _Outputs.under(tmp_path / "out")
 
@@ -201,7 +201,8 @@ def test_split_with_subject_in_two_folds_is_refused(
     assert code is ExitCode.REFUSED
     assert outputs.existing() == []
     assert "ve více foldech: 1" in caplog.text
-    assert "subject_id" not in caplog.text
+    assert "90000001" not in caplog.text
+    assert "90000002" not in caplog.text
 
 
 def test_manifest_split_comes_from_split_file(tmp_path: Path) -> None:

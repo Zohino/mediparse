@@ -43,6 +43,13 @@ PREDICTIONS = (
 )
 
 
+def _rewrite_row(path: Path, index: int, **columns: object) -> None:
+    table = pq.read_table(path).to_pydict()
+    for name, value in columns.items():
+        table[name][index] = value
+    pq.write_table(pa.Table.from_pydict(table, schema=SCHEMA), path)
+
+
 def test_round_trip_keeps_order_and_types(tmp_path: Path) -> None:
     """Zápis a čtení vrátí stejné predikce ve stejném pořadí."""
     table = ParquetPredictionTable(tmp_path / "out" / "predictions.parquet")
@@ -75,9 +82,7 @@ def test_unknown_diagnosis_is_invalid_input(tmp_path: Path) -> None:
     """Neznámá diagnóza je InvalidInputError s cestou a hodnotou."""
     path = tmp_path / "predictions.parquet"
     ParquetPredictionTable(path).write(PREDICTIONS)
-    table = pq.read_table(path).to_pydict()
-    table["diagnosis"][0] = "asthma"
-    pq.write_table(pa.Table.from_pydict(table, schema=SCHEMA), path)
+    _rewrite_row(path, 0, diagnosis="asthma")
 
     with pytest.raises(InvalidInputError, match=r"predictions\.parquet.*asthma"):
         ParquetPredictionTable(path).read()
@@ -88,9 +93,7 @@ def test_non_finite_score_is_invalid_input(tmp_path: Path, score: float) -> None
     """NaN a nekonečné skóre je InvalidInputError."""
     path = tmp_path / "predictions.parquet"
     ParquetPredictionTable(path).write(PREDICTIONS)
-    table = pq.read_table(path).to_pydict()
-    table["score"][1] = score
-    pq.write_table(pa.Table.from_pydict(table, schema=SCHEMA), path)
+    _rewrite_row(path, 1, score=score)
 
     with pytest.raises(InvalidInputError, match="skóre"):
         ParquetPredictionTable(path).read()
@@ -105,18 +108,11 @@ def test_written_file_is_zstd_compressed(tmp_path: Path) -> None:
     assert pq.ParquetFile(path).metadata.row_group(0).column(0).compression == "ZSTD"
 
 
-def _rewrite_first_row(path: Path, **columns: object) -> None:
-    table = pq.read_table(path).to_pydict()
-    for name, value in columns.items():
-        table[name][0] = value
-    pq.write_table(pa.Table.from_pydict(table, schema=SCHEMA), path)
-
-
 @pytest.mark.parametrize(
     ("columns", "error"),
     [
         ({"subject_id": 8}, "NoteSubjectMismatchError"),
-        ({"note_id": "n2"}, "InvalidNoteIdError"),
+        ({"note_id": "x7-DS-2"}, "InvalidNoteIdError"),
     ],
     ids=["cizi-pacient", "neplatne-note-id"],
 )
@@ -126,7 +122,7 @@ def test_foreign_note_id_is_invalid_input_without_identifiers(
     """Řádek s note_id cizího pacienta nebo mimo skladbu nese cestu a typ chyby."""
     path = tmp_path / "predictions.parquet"
     ParquetPredictionTable(path).write(PREDICTIONS)
-    _rewrite_first_row(path, **columns)
+    _rewrite_row(path, 0, **columns)
 
     with pytest.raises(
         InvalidInputError, match=rf"predictions\.parquet.*{error}"
