@@ -175,3 +175,116 @@ synonym_coverage <- function(con, lexicon) {
   out <- lexicon_coverage(con, lexicon, c("sekce", "synonymum"))
   out[c("sekce", "synonymum", "n", "opakovani", "celkem")]
 }
+
+SYNONYM_FORMS <- c("synonymum", "synonyma", "synonym")
+CLASS_LEVELS <- c("sekce lexikonu", "preamble", "mimo lexikon")
+UNDECIDABLE_TEXT <- "nelze posoudit, protože vstupní korpus je prázdný."
+
+header_table <- function(ranking) {
+  data.frame(
+    hlavicka = ranking$hlavicka,
+    zarazeni = ranking$zarazeni,
+    n = number_text(ranking$n),
+    podil = percent_text(ranking$n, ranking$celkem),
+    stringsAsFactors = FALSE,
+    row.names = NULL
+  )
+}
+
+class_of <- function(zarazeni) {
+  druh <- rep(CLASS_LEVELS[[1]], length(zarazeni))
+  druh[zarazeni == PREAMBLE_CLASS] <- CLASS_LEVELS[[2]]
+  druh[zarazeni == OUTSIDE_CLASS] <- CLASS_LEVELS[[3]]
+  factor(druh, levels = CLASS_LEVELS)
+}
+
+ranking_bars <- function(ranking) {
+  data.frame(
+    hlavicka = factor(ranking$hlavicka, levels = rev(ranking$hlavicka)),
+    podil = ranking$n / ranking$celkem,
+    druh = class_of(ranking$zarazeni),
+    stringsAsFactors = FALSE
+  )
+}
+
+section_table <- function(coverage) {
+  data.frame(
+    sekce = coverage$sekce,
+    label_cs = coverage$label_cs,
+    pokryti = percent_text(coverage$n, coverage$celkem),
+    opakovani = percent_text(coverage$opakovani, coverage$celkem),
+    stringsAsFactors = FALSE
+  )
+}
+
+synonym_table <- function(coverage) {
+  data.frame(
+    sekce = coverage$sekce,
+    synonymum = coverage$synonymum,
+    pokryti = percent_text(coverage$n, coverage$celkem),
+    opakovani = percent_text(coverage$opakovani, coverage$celkem),
+    stringsAsFactors = FALSE
+  )
+}
+
+coverage_threshold_text <- function(share) paste0(round(100 * share), NBSP, "%")
+
+candidates_text <- function(ranking, totals) {
+  if (totals$celkem == 0) {
+    return(paste("Kandidáty na doplnění lexikonu", UNDECIDABLE_TEXT))
+  }
+  outside <- ranking[
+    ranking$zarazeni == OUTSIDE_CLASS & ranking$n / ranking$celkem >= CANDIDATE_COVERAGE, ,
+    drop = FALSE
+  ]
+  sprintf(
+    "Kandidáti na doplnění lexikonu (hlavičky mimo lexikon s pokrytím aspoň %s): %s.",
+    coverage_threshold_text(CANDIDATE_COVERAGE),
+    join_labels(sprintf("`%s` (%s)", outside$hlavicka, percent_label(outside$n, outside$celkem)))
+  )
+}
+
+dead_synonyms_text <- function(synonyms, totals) {
+  if (totals$celkem == 0) {
+    return(paste("Mrtvá synonyma", UNDECIDABLE_TEXT))
+  }
+  dead <- synonyms$synonymum[synonyms$n == 0]
+  if (length(dead) == 0L) {
+    return("Lexikon neobsahuje žádné mrtvé synonymum.")
+  }
+  sprintf(
+    "Bez jediné zprávy je %s: %s.",
+    count_phrase(length(dead), SYNONYM_FORMS), join_labels(sprintf("`%s`", dead))
+  )
+}
+
+repeated_synonyms_text <- function(synonyms, totals) {
+  if (totals$celkem == 0) {
+    return(paste("Opakování synonym", UNDECIDABLE_TEXT))
+  }
+  share <- synonyms$opakovani / synonyms$celkem
+  repeated <- synonyms[share >= REPEAT_SHARE, , drop = FALSE]
+  if (nrow(repeated) == 0L) {
+    return(sprintf(
+      "Žádné synonymum se neopakuje ve zprávách od %s korpusu.", coverage_threshold_text(REPEAT_SHARE)
+    ))
+  }
+  sprintf(
+    "V aspoň %s zpráv se opakuje %s: %s.",
+    coverage_threshold_text(REPEAT_SHARE),
+    count_phrase(nrow(repeated), SYNONYM_FORMS),
+    join_labels(sprintf("`%s` (%s)", repeated$synonymum, percent_label(repeated$opakovani, repeated$celkem)))
+  )
+}
+
+coverage_text <- function(totals) {
+  if (totals$celkem == 0) {
+    return(paste("Pokrytí lexikonu", UNDECIDABLE_TEXT))
+  }
+  sprintf(
+    "Aspoň jednu sekci lexikonu má %s zpráv korpusu, žádnou hlavičku %s. Korpus obsahuje %s.",
+    percent_label(totals$s_sekci, totals$celkem),
+    percent_label(totals$bez_hlavicky, totals$celkem),
+    count_phrase(totals$unikatni, c("unikátní hlavičku", "unikátní hlavičky", "unikátních hlaviček"))
+  )
+}

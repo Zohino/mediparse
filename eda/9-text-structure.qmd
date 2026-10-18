@@ -1,0 +1,146 @@
+---
+title: "Explorační analýza datové sady: hlavičky a lexikon sekcí"
+abstract: |
+  Dokument zjišťuje, které hlavičky začínají v propouštěcích zprávách vstupního korpusu oddíly, a ověřuje na nich seed lexikon sekcí šablony MIMIC. Počítá dokumentovou frekvenci všech hlaviček, pokrytí sekcí a synonym lexikonu, mrtvá synonyma a synonyma, která se ve zprávě opakují, což je signál falešné hranice sekce. Hlavičky mimo lexikon s vysokým pokrytím jmenuje jako kandidáty na doplnění, o kterých rozhodne autor.
+---
+
+```{r}
+#| include: false
+library(reticulate)
+source("R/dua.R")
+source("R/czech.R")
+source("R/db.R")
+source("R/patients.R")
+source("R/text.R")
+source("R/selection.R")
+source("R/diagnoses.R")
+source("R/sections.R")
+source("R/export.R")
+eda_check_python()
+con <- eda_connect()
+lexicon <- read_section_headers(section_headers_path())
+ranking <- header_ranking(con, lexicon)
+totals <- header_totals(con, lexicon)
+sections <- section_coverage(con, lexicon)
+synonyms <- synonym_coverage(con, lexicon)
+section_count <- count_phrase(nrow(sections), c("sekce", "sekce", "sekcí"))
+synonym_count <- count_phrase(nrow(synonyms), c("synonymum", "synonyma", "synonym"))
+preamble_count <- count_phrase(length(lexicon$preamble), c("pole", "pole", "polí"))
+short_text <- count_phrase(SHORT_LIMIT, c("znak", "znaky", "znaků"))
+notes_text <- count_phrase(totals$celkem, c("zpráva", "zprávy", "zpráv"))
+floor_text <- count_phrase(publishable_floor(totals$celkem), c("zpráva", "zprávy", "zpráv"))
+ranking_size <- count_phrase(RANKING_SIZE, c("hlavička", "hlavičky", "hlaviček"))
+```
+
+# Úvod
+
+Tento sešit je devátým z řady sešitů explorační analýzy a otevírá fázi zpracování struktury textu. Předchozí sešity popsaly korpus, diagnózy a jejich zmínky v textu. Propouštěcí zpráva MIMIC má ale vnitřní strukturu: je rozdělená na oddíly, jako jsou Chief Complaint, Hospital Course nebo Discharge Diagnosis. Parser sekcí, který vznikne později, bude oddíly rozpoznávat podle seznamu hlaviček, tedy lexikonu sekcí. Ten musí odpovídat datům, ne odhadu. Sešit si klade tyto cíle:
+
+- zjistit, které hlavičky se v textu zpráv vyskytují a v kolika zprávách,
+- změřit, jak lexikon sekcí šablony MIMIC tyto hlavičky pokrývá,
+- najít mrtvá synonyma lexikonu a synonyma, která se ve zprávě opakují a nejspíš se používají i uvnitř těl sekcí,
+- jmenovat hlavičky mimo lexikon, které má většina zpráv a které by do lexikonu mohly patřit.
+
+Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty. Řetězec hlavičky je popisek z dat, a zveřejní se proto jen hlavička, kterou má aspoň 1 % zpráv a nejméně deset zpráv; podrobná pravidla jsou v kapitole @sec-data.
+
+Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky. Kapitola @sec-shrnuti shrnuje rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
+
+# Data a metody {#sec-data}
+
+Sešit čte propouštěcí zprávy (`discharge`). Dotazy provádí DuckDB nad parquetem a jsou v `eda/R/sections.R` s testy nad ručně vytvořenými tabulkami. Hlavičky se z textu vytáhnou jednou do dočasné tabulky a všechny další výpočty čtou jen ji.
+
+Pojmy a jednotky jsou tyto:
+
+- *populací* je vstupní korpus z pátého sešitu, tedy tentýž jako v sedmém a osmém sešitu: propouštěcí zprávy s kódem ICD, dlouhé aspoň `r short_text` a bez přesných duplicit. Vstupní korpus tvoří `r notes_text`. Jednotkou je zpráva a počítá se celý korpus, ne vzorek,
+- *hlavička* je řádek, který po volitelném odsazení (mezery, tabulátory) začíná velkým písmenem a dalším písmenem, pokračuje až čtyřiceti sedmi znaky z množiny písmen, mezery, pomlčky, lomítka, ampersandu, závorek, apostrofu a tečky a končí dvojtečkou. Zachycený řetězec má aspoň tři znaky. Výraz RE2 s režimem po řádcích (`(?m)`) je v konstantě `HEADER_PATTERN`. Číslice v něm nejsou, takže čas „10:30“ hlavičkou není. Hlavičku, která stojí na řádku za jiným polem, výraz nevidí,
+- *normalizace* hlavičky je převod na malá písmena, sloučení bílých znaků do jedné mezery a odříznutí koncových mezer a teček. Je to jediná funkce (`normalized_sql`), kterou se normalizují hlavičky z textu i synonyma z lexikonu. Hlavička je v lexikonu nalezená, když se její normalizovaný tvar rovná normalizovanému synonymu; stejné pravidlo převezme parser sekcí. Zobrazuje se nejčastější původní zápis, při shodě abecedně první,
+- *lexikon* je `config/section_headers.json`: `r section_count` šablony MIMIC, každá s českým popiskem a celofrázovými synonymy (celkem `r synonym_count`), a seznam administrativních polí zprávy (`r preamble_count`), která nejsou sekcemi. Seed vychází z lexikonu předchozího projektu autora, jehož čísla byla předběžná. Oproti němu přidává sekce Major Surgical or Invasive Procedure a Discharge Disposition, zařazuje HPI pod anamnézu současného onemocnění a vypouští podsekce (vitální funkce, chirurgická anamnéza) i generická jednoslovná synonyma, která by otevírala sekci uvnitř těla jiné sekce. Zkratky se nepřebírají, protože se na začátku řádku s dvojtečkou objevují i uvnitř těl. Čísla v tomto sešitu pocházejí z dat tohoto projektu,
+- *dokumentová frekvence* hlavičky je počet zpráv, v nichž se vyskytuje aspoň jednou; podíl je vztažený k počtu zpráv korpusu. *Opakování* sekce nebo synonyma je počet zpráv, kde se hlavička objeví aspoň dvakrát. Synonymum, které se ve zprávě objeví dvakrát, se nejspíš používá i uvnitř těla, a je tedy kandidátem na falešnou hranici sekce,
+- *potlačení*: řetězec hlavičky je popisek z dat. Zveřejní se jen hlavička, kterou má aspoň 1 % zpráv korpusu a nejméně `r floor_text`. Samotný práh deseti zpráv nestačí, protože výraz zachytí i úlomky vět končící dvojtečkou. Žebříček uvádí nejvýše `r ranking_size`. Synonyma a klíče sekcí pocházejí z konfigurace, ne z dat, a zveřejňují se všechna včetně nuly. Počty zpráv jsou metrika textu a nepotlačují se; počet unikátních hlaviček je číslo bez popisku,
+- *rozhodnutí sešitu* jsou texty generované z dat: kandidáti na doplnění (hlavičky mimo lexikon s pokrytím aspoň 50 %), mrtvá synonyma a synonyma s opakováním aspoň v 5 % zpráv. Hranice 50 % je popisná, ne brána: odděluje „většina zpráv“ od podsekcí, o zařazení rozhoduje autor.
+
+# Výsledky {#sec-vysledky}
+
+## Objevení hlaviček {#sec-hlavicky}
+
+`r coverage_text(totals)`
+
+@tbl-zebricek a @fig-zebricek uvádějí hlavičky podle dokumentové frekvence a jejich zařazení: do sekce lexikonu, mezi administrativní pole, nebo mimo lexikon.
+
+```{r}
+#| label: tbl-zebricek
+#| tbl-cap: "Nejčastější hlavičky vstupního korpusu podle dokumentové frekvence a jejich zařazení."
+#| tbl-colwidths: [34, 34, 16, 16]
+export_table(
+  header_table(ranking),
+  col.names = c("Hlavička", "Zařazení", "Zprávy", "Podíl (%)"),
+  align = "llrr",
+  code = "hlavicka"
+)
+```
+
+*Zdroj:* text z `discharge`; zařazení podle `config/section_headers.json`.
+
+```{r}
+#| label: fig-zebricek
+#| fig-cap: "Pokrytí nejčastějších hlaviček obarvené podle zařazení."
+#| fig-width: 6.5
+#| fig-height: 7
+bars <- ranking_bars(ranking)
+plot <- ggplot2::ggplot(bars, ggplot2::aes(podil, hlavicka, fill = druh)) +
+  ggplot2::geom_col() +
+  ggplot2::scale_x_continuous(labels = percent_axis) +
+  ggplot2::scale_fill_manual(values = PALETTE_CATEGORICAL[1:3], drop = FALSE) +
+  ggplot2::labs(x = "Podíl zpráv", y = NULL, fill = NULL) +
+  theme_thesis() +
+  ggplot2::theme(legend.position = "bottom")
+export_figure(plot, height_cm = 16)
+```
+
+## Audit lexikonu {#sec-audit}
+
+@tbl-sekce uvádí, v kolika zprávách se vyskytuje hlavička každé sekce lexikonu a v kolika se opakuje; @tbl-synonyma totéž pro jednotlivá synonyma včetně mrtvých.
+
+```{r}
+#| label: tbl-sekce
+#| tbl-cap: "Sekce lexikonu: zprávy s hlavičkou sekce a zprávy, kde se hlavička sekce opakuje."
+#| tbl-colwidths: [30, 38, 16, 16]
+export_table(
+  section_table(sections),
+  col.names = c("Sekce", "Popisek", "Zprávy s hlavičkou (%)", "Zprávy s opakováním (%)"),
+  align = "llrr",
+  code = "sekce"
+)
+```
+
+*Zdroj:* text z `discharge`; sekce a synonyma jsou hodnoty z `config/section_headers.json`, ne z dat.
+
+```{r}
+#| label: tbl-synonyma
+#| tbl-cap: "Synonyma lexikonu: zprávy se synonymem a zprávy, kde se synonymum opakuje."
+#| tbl-colwidths: [28, 40, 16, 16]
+export_table(
+  synonym_table(synonyms),
+  col.names = c("Sekce", "Synonymum", "Zprávy se synonymem (%)", "Zprávy s opakováním (%)"),
+  align = "llrr",
+  code = c("sekce", "synonymum")
+)
+```
+
+`r dead_synonyms_text(synonyms, totals)` `r repeated_synonyms_text(synonyms, totals)`
+
+# Shrnutí a rozhodnutí {#sec-shrnuti}
+
+Dokument ověřil seed lexikon sekcí na vstupním korpusu. Pro další práci z toho plyne:
+
+- **Pokrytí.** `r coverage_text(totals)`
+- **Kandidáti na doplnění.** `r candidates_text(ranking, totals)` Autor po reálném renderu doplní sekce šablony do `config/section_headers.json` a sešit přerenderuje.
+- **Mrtvá synonyma.** `r dead_synonyms_text(synonyms, totals)`
+- **Opakování.** `r repeated_synonyms_text(synonyms, totals)`
+- **Pro parser.** Parser sekcí čte lexikon z `config/section_headers.json` a převezme pravidlo hlavičky a normalizace z kapitoly @sec-data.
+
+# Omezení {#sec-omezeni}
+
+Řádkově ukotvený výraz nevidí pole, které stojí na řádku za jiným polem, hlavičky bez dvojtečky ani hlavičky rozdělené na víc řádků. Pokrytí administrativních polí se proto neměří. Opakování je jen nepřímý signál falešné hranice: synonymum se může opakovat i ve zprávě, kde je každý výskyt skutečnou hlavičkou. Hranice 50 % pro kandidáty je popisná a nerozliší sekci šablony od pole, které má ve většině zpráv podsekce. Žebříček neukazuje hlavičky pod 1 % zpráv, takže vzácnou sekci šablony nemusí zveřejnit.
+
+{{< include _partials/appendix.qmd >}}

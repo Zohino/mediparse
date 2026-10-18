@@ -198,3 +198,105 @@ test_that("pokrytí sekcí a synonym nad prázdným korpusem má nuly a všechny
   expect_equal(synonyms$n, c(0, 0, 0))
   expect_equal(synonyms$opakovani, c(0, 0, 0))
 })
+
+ranking_fixture <- function() {
+  data.frame(
+    norm = c("chief complaint", "service", "imaging", "exam"),
+    hlavicka = c("Chief Complaint", "Service", "IMAGING", "Exam"),
+    n = c(1000, 990, 600, 200),
+    celkem = 1000,
+    zarazeni = c("Hlavní obtíže", PREAMBLE_CLASS, OUTSIDE_CLASS, OUTSIDE_CLASS),
+    stringsAsFactors = FALSE
+  )
+}
+
+totals_fixture <- function(celkem = 1000) {
+  list(celkem = celkem, unikatni = 123, s_sekci = 900, bez_hlavicky = 50)
+}
+
+test_that("header_table uvede hlavičku, zařazení, počet a podíl", {
+  out <- header_table(ranking_fixture())
+
+  expect_equal(out$hlavicka, c("Chief Complaint", "Service", "IMAGING", "Exam"))
+  expect_equal(out$zarazeni, c("Hlavní obtíže", "preamble", "mimo lexikon", "mimo lexikon"))
+  expect_equal(out$n, c("1 000", "990", "600", "200"))
+  expect_equal(out$podil, c("100,0", "99,0", "60,0", "20,0"))
+})
+
+test_that("ranking_bars obarví podle druhu zařazení a seřadí nejčastější nahoru", {
+  out <- ranking_bars(ranking_fixture())
+
+  expect_equal(as.character(out$druh), c("sekce lexikonu", "preamble", "mimo lexikon", "mimo lexikon"))
+  expect_equal(levels(out$hlavicka), rev(c("Chief Complaint", "Service", "IMAGING", "Exam")))
+  expect_equal(out$podil, c(1, 0.99, 0.6, 0.2))
+})
+
+test_that("section_table a synonym_table ukážou pokrytí a opakování v procentech", {
+  sections <- data.frame(
+    sekce = "allergies", label_cs = "Alergie", n = 995, opakovani = 100, celkem = 1000,
+    stringsAsFactors = FALSE
+  )
+  synonyms <- data.frame(
+    sekce = c("allergies", "allergies"), synonymum = c("Allergies", "Allergy"),
+    n = c(995, 0), opakovani = c(100, 0), celkem = 1000, stringsAsFactors = FALSE
+  )
+
+  expect_equal(section_table(sections)$pokryti, "99,5")
+  expect_equal(section_table(sections)$opakovani, "10,0")
+  expect_equal(synonym_table(synonyms)$pokryti, c("99,5", "0,0"))
+  expect_equal(synonym_table(synonyms)$synonymum, c("Allergies", "Allergy"))
+})
+
+test_that("tabulky nad prázdným korpusem mají pomlčky nebo nula řádků", {
+  empty_synonyms <- data.frame(
+    sekce = "allergies", synonymum = "Allergies", n = 0, opakovani = 0, celkem = 0,
+    stringsAsFactors = FALSE
+  )
+
+  expect_equal(nrow(header_table(ranking_fixture()[0, ])), 0L)
+  expect_equal(synonym_table(empty_synonyms)$pokryti, "–")
+})
+
+test_that("candidates_text vyjmenuje hlavičky mimo lexikon s pokrytím aspoň CANDIDATE_COVERAGE", {
+  text <- candidates_text(ranking_fixture(), totals_fixture())
+
+  expect_match(text, "`IMAGING`", fixed = TRUE)
+  expect_no_match(text, "Exam", fixed = TRUE)
+  expect_match(text, "60,0 %", fixed = TRUE)
+  expect_match(candidates_text(ranking_fixture()[1:2, ], totals_fixture()), "žádný", fixed = TRUE)
+  expect_match(candidates_text(ranking_fixture()[0, ], totals_fixture(0)), "nelze posoudit", fixed = TRUE)
+})
+
+synonyms_fixture <- function(celkem = 1000) {
+  data.frame(
+    sekce = c("a", "a", "b", "c"), synonymum = c("Alpha", "Beta", "Gamma", "Delta"),
+    n = c(900, 0, 500, 0), opakovani = c(49, 0, 50, 0), celkem = celkem,
+    stringsAsFactors = FALSE
+  )
+}
+
+test_that("dead_synonyms_text vyjmenuje synonyma s nulou a skloňuje jejich počet", {
+  expect_match(dead_synonyms_text(synonyms_fixture(), totals_fixture()), "2 synonyma", fixed = TRUE)
+  expect_match(dead_synonyms_text(synonyms_fixture(), totals_fixture()), "`Beta`", fixed = TRUE)
+  expect_match(dead_synonyms_text(synonyms_fixture()[c(1, 3), ], totals_fixture()), "žádné", fixed = TRUE)
+  expect_match(dead_synonyms_text(synonyms_fixture(0), totals_fixture(0)), "nelze posoudit", fixed = TRUE)
+})
+
+test_that("repeated_synonyms_text bere opakování od REPEAT_SHARE včetně hranice", {
+  text <- repeated_synonyms_text(synonyms_fixture(), totals_fixture())
+
+  expect_match(text, "`Gamma`", fixed = TRUE)
+  expect_no_match(text, "Alpha", fixed = TRUE)
+  expect_match(text, "1 synonymum", fixed = TRUE)
+  expect_match(repeated_synonyms_text(synonyms_fixture()[1, ], totals_fixture()), "Žádné", fixed = TRUE)
+  expect_match(repeated_synonyms_text(synonyms_fixture(0), totals_fixture(0)), "nelze posoudit", fixed = TRUE)
+})
+
+test_that("coverage_text uvede pokrytí sekcí, zprávy bez hlavičky a počet unikátních hlaviček", {
+  text <- coverage_text(totals_fixture())
+
+  expect_match(text, "90,0 %", fixed = TRUE)
+  expect_match(text, "5,0 %", fixed = TRUE)
+  expect_match(text, "123 unikátních hlaviček", fixed = TRUE)
+  expect_match(coverage_text(totals_fixture(0)), "nelze posoudit", fixed = TRUE)
+})
