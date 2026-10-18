@@ -42,6 +42,11 @@ def test_age_marker_needs_standalone_marker() -> None:
         pytest.param("no headers", ("no headers", ()), id="bez hlavičky"),
         pytest.param("", ("", ()), id="prázdný text"),
         pytest.param(
+            "see Allergies: none",
+            ("see Allergies: none", ()),
+            id="hlavička uprostřed řádku",
+        ),
+        pytest.param(
             "pre\nAllergies:\nnone\nChief Complaint:\nfatigue",
             ("pre\n", (("allergies", "\nnone\n"), ("complaint", "\nfatigue"))),
             id="preambule a dvě sekce",
