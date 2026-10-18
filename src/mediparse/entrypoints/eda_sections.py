@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Final
 
+from mediparse.domain.note_text import DEID
 from mediparse.domain.section_headers import OTHER as _OTHER
 from mediparse.domain.section_headers import split_sections
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
@@ -17,7 +18,7 @@ OTHER: Final = _OTHER
 
 def note_sections(
     lexicon: Path, note_ids: Sequence[str], texts: Sequence[str]
-) -> dict[str, list[str] | list[int]]:
+) -> dict[str, list[str] | list[int] | list[bool]]:
     """Rozdělí zprávy parserem sekcí a vrátí délky po sekcích jako sloupce.
 
     Text se přes most nevrací, sešit potřebuje jen pozice a délky. Lexikon se načítá při
@@ -30,8 +31,9 @@ def note_sections(
 
     Returns:
         Sloupce ``note_id``, ``position`` (pořadí v textu od 0 včetně ``other``),
-        ``section``, ``span_chars`` (hlavička i tělo) a ``body_chars`` (tělo bez
-        okrajových bílých znaků), vždy všech pět, i pro prázdný vstup.
+        ``section``, ``span_chars`` (hlavička i tělo), ``body_chars`` (tělo bez
+        okrajových bílých znaků) a ``body_masked`` (tělo je jen maska
+        de-identifikace), vždy všechny, i pro prázdný vstup.
 
     Raises:
         ValueError: ``note_ids`` a ``texts`` mají různou délku.
@@ -43,17 +45,21 @@ def note_sections(
     sections: list[str] = []
     spans: list[int] = []
     bodies: list[int] = []
+    masked: list[bool] = []
     for note_id, text in zip(note_ids, texts, strict=True):
         for position, part in enumerate(split_sections(text, parsed)):
             ids.append(note_id)
             positions.append(position)
             sections.append(part.section)
             spans.append(len(part.header) + len(part.body))
-            bodies.append(len(part.body.strip()))
+            body = part.body.strip()
+            bodies.append(len(body))
+            masked.append(body == DEID)
     return {
         "note_id": ids,
         "position": positions,
         "section": sections,
         "span_chars": spans,
         "body_chars": bodies,
+        "body_masked": masked,
     }

@@ -16,7 +16,7 @@ from tests.support import REPOSITORY_SECTION_HEADERS
 if TYPE_CHECKING:
     from pathlib import Path
 
-COLUMNS = {"note_id", "position", "section", "span_chars", "body_chars"}
+COLUMNS = {"note_id", "position", "section", "span_chars", "body_chars", "body_masked"}
 WITH_PREAMBLE = "Name: ___\n\nAllergies:\nnone\n\nChief Complaint:\npain\n"
 WITHOUT_PREAMBLE = "Allergies:\n  none  \n"
 
@@ -63,6 +63,15 @@ def test_span_sums_to_text_and_body_is_stripped(lexicon: Path) -> None:
     assert body["body_chars"] == [4]
 
 
+def test_body_that_is_only_deid_mask_is_flagged(lexicon: Path) -> None:
+    """Tělo, které je po ořezu jen maska de-identifikace, nese příznak; maska v textu ne."""
+    text = "Allergies:\n___\n\nChief Complaint:\npain since ___\n"
+    result = note_sections(lexicon, ["a"], [text])
+
+    assert result["section"] == ["allergies", "chief_complaint"]
+    assert result["body_masked"] == [True, False]
+
+
 def test_text_without_headers_is_single_other_row(lexicon: Path) -> None:
     """Zpráva bez hlaviček je jeden řádek `other` přes celou délku."""
     text = "no headers here"
@@ -80,7 +89,7 @@ def test_repeated_header_does_not_open_second_row(lexicon: Path) -> None:
 
 
 def test_empty_input_keeps_all_columns(lexicon: Path) -> None:
-    """Prázdný vstup vrátí všech pět sloupců prázdných, aby R mělo typy."""
+    """Prázdný vstup vrátí všechny sloupce prázdné, aby R mělo typy."""
     result = note_sections(lexicon, [], [])
 
     assert result == {column: [] for column in COLUMNS}
