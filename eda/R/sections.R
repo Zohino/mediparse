@@ -136,3 +136,42 @@ header_totals <- function(con, lexicon) {
     bez_hlavicky = total - as.numeric(row$s_hlavickou)
   )
 }
+
+lexicon_coverage <- function(con, lexicon, keys) {
+  headers <- note_headers(con)
+  lexicon_table <- header_lexicon(con, lexicon)
+  total <- corpus_size(con)
+  grouping <- paste(sprintf("l.%s", keys), collapse = ", ")
+  found <- DBI::dbGetQuery(con, sprintf("
+    WITH per_note AS (
+      SELECT h.note_id, %1$s, count(*) AS vyskytu
+      FROM %2$s h JOIN %3$s l ON l.druh = 'sekce' AND %4$s = h.norm
+      GROUP BY h.note_id, %1$s
+    )
+    SELECT %5$s, count(*) AS n, count(*) FILTER (WHERE vyskytu >= 2) AS opakovani
+    FROM per_note GROUP BY %5$s
+  ", grouping, headers, lexicon_table, normalized_sql("l.synonymum"), paste(keys, collapse = ", ")))
+  key_of <- function(df) do.call(paste, c(unname(as.list(df[keys])), sep = "\r"))
+  rows <- unique(lexicon$sections[c(keys, "label_cs")])
+  at <- match(key_of(rows), key_of(found))
+  count <- function(column) {
+    out <- as.numeric(found[[column]][at])
+    out[is.na(out)] <- 0
+    out
+  }
+  data.frame(
+    rows[keys], label_cs = rows$label_cs,
+    n = count("n"), opakovani = count("opakovani"), celkem = rep(total, nrow(rows)),
+    stringsAsFactors = FALSE, row.names = NULL
+  )
+}
+
+section_coverage <- function(con, lexicon) {
+  out <- lexicon_coverage(con, lexicon, "sekce")
+  out[c("sekce", "label_cs", "n", "opakovani", "celkem")]
+}
+
+synonym_coverage <- function(con, lexicon) {
+  out <- lexicon_coverage(con, lexicon, c("sekce", "synonymum"))
+  out[c("sekce", "synonymum", "n", "opakovani", "celkem")]
+}

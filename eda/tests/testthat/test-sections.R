@@ -159,3 +159,42 @@ test_that("prázdný vstupní korpus vrátí prázdné výsledky bez chyby", {
   expect_equal(nrow(header_ranking(con, LEXICON)), 0L)
   expect_equal(header_totals(con, LEXICON), list(celkem = 0, unikatni = 0, s_sekci = 0, bez_hlavicky = 0))
 })
+
+test_that("sekce s více synonymy se počítá jednou na zprávu a opakování je zpráva s aspoň dvěma výskyty", {
+  con <- header_con(c(
+    "Chief Complaint: a\nPresenting Complaint: b", "Presenting Complaint: a",
+    "Allergies: a\nAllergies: b", "Allergies: a", "nothing"
+  ))
+
+  out <- section_coverage(con, LEXICON)
+
+  expect_equal(out$sekce, c("allergies", "chief_complaint"))
+  expect_equal(out$label_cs, c("Alergie", "Hlavní obtíže"))
+  expect_equal(out$n, c(2, 2))
+  expect_equal(out$opakovani, c(1, 1))
+  expect_equal(out$celkem, c(5, 5))
+})
+
+test_that("synonym_coverage nechá mrtvé synonymum s nulou a počítá dokumentovou frekvenci", {
+  con <- header_con(c("Chief Complaint: a\nChief Complaint: b", "CHIEF COMPLAINT: a", "Allergies: x"))
+
+  out <- synonym_coverage(con, LEXICON)
+
+  expect_equal(out$synonymum, c("Allergies", "Chief Complaint", "Presenting Complaint"))
+  expect_equal(out$sekce, c("allergies", "chief_complaint", "chief_complaint"))
+  expect_equal(out$n, c(1, 2, 0))
+  expect_equal(out$opakovani, c(0, 1, 0))
+  expect_equal(out$celkem, c(3, 3, 3))
+})
+
+test_that("pokrytí sekcí a synonym nad prázdným korpusem má nuly a všechny řádky lexikonu", {
+  con <- mimic_con()
+
+  sections <- section_coverage(con, LEXICON)
+  synonyms <- synonym_coverage(con, LEXICON)
+
+  expect_equal(sections$n, c(0, 0))
+  expect_equal(sections$celkem, c(0, 0))
+  expect_equal(synonyms$n, c(0, 0, 0))
+  expect_equal(synonyms$opakovani, c(0, 0, 0))
+})
