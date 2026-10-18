@@ -474,3 +474,25 @@ test_that("tabulky délek a zpráv bez nadpisů projdou export_table s rozvržen
     expect_true(all(file.exists(file.path(dir, c("tbl-delky.tex", "tbl-bez-nadpisu.tex")))))
   }
 })
+
+test_that("body_length_text jmenuje nejdelší a nejkratší tělo v mediánu a text mimo sekce", {
+  con <- lengths_con()
+  skeleton <- section_skeleton(con, mini_lexicon(STRIP_KEYS))
+  text <- body_length_text(body_lengths(con, skeleton, "other"), "other")
+
+  expect_match(text, paste0("`b` (60", NBSP, "znaků)"), fixed = TRUE)
+  expect_match(text, paste0("`", STRIP_SECTION, "` (5", NBSP, "znaků)"), fixed = TRUE)
+  expect_match(text, paste0("medián 90", NBSP, "znaků"))
+})
+
+test_that("body_length_text skloňuje jeden znak a nad prázdnou tabulkou nelze posoudit", {
+  one <- lengths_con(data.frame(
+    note_id = "n1", section = "a", span_chars = 10, body_chars = 1, stringsAsFactors = FALSE
+  ))
+  text <- body_length_text(body_lengths(one, section_skeleton(one, mini_lexicon(STRIP_KEYS)), "other"), "other")
+  expect_match(text, paste0("1", NBSP, "znak"))
+
+  empty <- sections_con(list())
+  lengths <- body_lengths(empty, section_skeleton(empty, mini_lexicon(STRIP_KEYS)), "other")
+  expect_match(body_length_text(lengths, "other"), "nelze posoudit")
+})

@@ -412,3 +412,26 @@ headerless_text <- function(headerless) {
     length_phrase(without$p95), length_phrase(with$p95)
   )
 }
+
+body_length_text <- function(lengths, other) {
+  sections <- lengths[lengths$sekce != other & lengths$n > 0, , drop = FALSE]
+  outside <- lengths[lengths$sekce == other, , drop = FALSE]
+  if (nrow(sections) == 0L && outside$n == 0) {
+    return(paste("Délky těl sekcí", UNDECIDABLE_TEXT))
+  }
+  outside_text <- if (outside$n == 0) {
+    "Žádná zpráva nemá text mimo sekce."
+  } else {
+    sprintf("Text mimo sekce má medián %s.", count_phrase(outside$p50, CHAR_FORMS))
+  }
+  if (nrow(sections) == 0L) {
+    return(outside_text)
+  }
+  longest <- sections[which.max(sections$p50), ]
+  shortest <- sections[which.min(sections$p50), ]
+  sprintf(
+    "Nejdelší tělo má v mediánu sekce `%s` (%s), nejkratší sekce `%s` (%s). %s",
+    longest$sekce, count_phrase(longest$p50, CHAR_FORMS),
+    shortest$sekce, count_phrase(shortest$p50, CHAR_FORMS), outside_text
+  )
+}
