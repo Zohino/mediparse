@@ -330,3 +330,37 @@ def test_split_sections_compose_back_to_original(text: str) -> None:
     sections = split_sections(text, DISCHARGE_LEXICON)
 
     assert "".join(s.header + s.body for s in sections) == text
+
+
+def test_split_synthetic_corpus_composes_originals() -> None:
+    """Každá syntetická zpráva se rozpadne na sekce lexikonu a složí se zpět."""
+    lexicon = load_section_lexicon(REPOSITORY_SECTION_HEADERS)
+    notes = sorted((REPOSITORY_CORPUS / "en").glob("*.txt"))
+
+    assert notes
+    for note in notes:
+        text = note.read_text(encoding="utf-8")
+        sections = split_sections(text, lexicon)
+        found = find_section_headers(text, lexicon)
+
+        assert "".join(s.header + s.body for s in sections) == text, note.name
+        assert [s.section for s in sections] == [OTHER, *(h.section for h in found)], (
+            note.name
+        )
+
+
+def test_split_synthetic_corpus_keeps_surgical_history_in_medical_history() -> None:
+    """Past Surgical History není hlavička lexikonu a zůstává v těle předchozí sekce."""
+    lexicon = load_section_lexicon(REPOSITORY_SECTION_HEADERS)
+    surgical = "Past Surgical History:"
+    checked = 0
+
+    for note in sorted((REPOSITORY_CORPUS / "en").glob("*.txt")):
+        text = note.read_text(encoding="utf-8")
+        if surgical not in text:
+            continue
+        bodies = {s.section: s.body for s in split_sections(text, lexicon)}
+        assert surgical in bodies["past_medical_history"], note.name
+        checked += 1
+
+    assert checked
