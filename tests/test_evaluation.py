@@ -5,8 +5,13 @@ from __future__ import annotations
 import pytest
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.evaluation import ensure_both_classes, ensure_unique_keys
+from mediparse.domain.evaluation import (
+    Prediction,
+    ensure_both_classes,
+    ensure_unique_keys,
+)
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.note import NoteSubjectMismatchError
 from tests.model_support import prediction
 
 
@@ -52,3 +57,11 @@ def test_same_note_in_two_folds_is_rejected() -> None:
             prediction("1-DS-1", truth=True, score=1.0, fold=0),
             prediction("1-DS-1", truth=True, score=1.0, fold=1),
         ])
+
+
+def test_prediction_of_another_subjects_note_is_rejected() -> None:
+    """Predikci s note_id jiného pacienta než subject_id nejde vytvořit."""
+    with pytest.raises(NoteSubjectMismatchError):
+        Prediction(
+            "row", 0, "1-DS-1", 2, Diagnosis.CKD, truth=True, predicted=True, score=1.0
+        )

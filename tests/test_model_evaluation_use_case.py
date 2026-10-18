@@ -55,13 +55,21 @@ def _use_case(
 
 
 MIXED = (
-    prediction("n1", truth=True, score=1.0, diagnosis=Diagnosis.DIABETES, row_id="b"),
-    prediction("n2", truth=False, score=-1.0, diagnosis=Diagnosis.CKD, row_id="a"),
-    prediction("n3", truth=False, score=-2.0, diagnosis=Diagnosis.DIABETES, row_id="a"),
-    prediction("n4", truth=False, score=0.5, diagnosis=Diagnosis.DIABETES, row_id="b"),
-    prediction("n5", truth=True, score=3.0, diagnosis=Diagnosis.CKD, row_id="a"),
-    prediction("n6", truth=True, score=2.0, diagnosis=Diagnosis.DIABETES, row_id="a"),
-    prediction("n7", truth=True, score=-0.5, diagnosis=Diagnosis.CKD, row_id="a"),
+    prediction(
+        "1-DS-1", truth=True, score=1.0, diagnosis=Diagnosis.DIABETES, row_id="b"
+    ),
+    prediction("2-DS-1", truth=False, score=-1.0, diagnosis=Diagnosis.CKD, row_id="a"),
+    prediction(
+        "3-DS-1", truth=False, score=-2.0, diagnosis=Diagnosis.DIABETES, row_id="a"
+    ),
+    prediction(
+        "4-DS-1", truth=False, score=0.5, diagnosis=Diagnosis.DIABETES, row_id="b"
+    ),
+    prediction("5-DS-1", truth=True, score=3.0, diagnosis=Diagnosis.CKD, row_id="a"),
+    prediction(
+        "6-DS-1", truth=True, score=2.0, diagnosis=Diagnosis.DIABETES, row_id="a"
+    ),
+    prediction("7-DS-1", truth=True, score=-0.5, diagnosis=Diagnosis.CKD, row_id="a"),
 )
 
 
@@ -114,7 +122,7 @@ def test_single_class_is_rejected_before_scoring() -> None:
     items = (
         *MIXED,
         prediction(
-            "n8", truth=True, score=1.0, diagnosis=Diagnosis.PNEUMONIA, row_id="c"
+            "8-DS-1", truth=True, score=1.0, diagnosis=Diagnosis.PNEUMONIA, row_id="c"
         ),
     )
     use_case, scorer, sink = _use_case(items)
@@ -144,10 +152,10 @@ def test_folds_of_one_row_and_diagnosis_are_pooled() -> None:
     by skončilo na kontrole obou tříd.
     """
     items = (
-        prediction("1-DS-1", truth=True, score=1.0, fold=0, subject_id=1),
-        prediction("2-DS-1", truth=True, score=-1.0, fold=0, subject_id=2),
-        prediction("3-DS-1", truth=False, score=-2.0, fold=1, subject_id=3),
-        prediction("4-DS-1", truth=False, score=0.5, fold=1, subject_id=4),
+        prediction("1-DS-1", truth=True, score=1.0, fold=0),
+        prediction("2-DS-1", truth=True, score=-1.0, fold=0),
+        prediction("3-DS-1", truth=False, score=-2.0, fold=1),
+        prediction("4-DS-1", truth=False, score=0.5, fold=1),
     )
     use_case, scorer, _ = _use_case(items)
 

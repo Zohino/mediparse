@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.note import ensure_note_of_subject
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -34,6 +35,15 @@ class Prediction:
     truth: bool
     predicted: bool
     score: float
+
+    def __post_init__(self) -> None:
+        """Ověří, že note_id patří pacientovi predikce, aby párování po pacientech sedělo.
+
+        Raises:
+            InvalidNoteIdError: Note_id je mimo skladbu MIMIC-IV-Note.
+            NoteSubjectMismatchError: Note_id patří jinému pacientovi než ``subject_id``.
+        """
+        ensure_note_of_subject(self.note_id, self.subject_id)
 
 
 @dataclass(frozen=True)

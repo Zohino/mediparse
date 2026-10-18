@@ -24,28 +24,28 @@ def test_writes_metrics_row(tmp_path: Path) -> None:
     metrics = tmp_path / "build" / "metrics.parquet"
     ParquetPredictionTable(predictions).write([
         prediction(
-            "a",
+            "1-DS-1",
             truth=True,
             score=2.0,
             diagnosis=Diagnosis.DIABETES,
             row_id="row",
         ),
         prediction(
-            "b",
+            "2-DS-1",
             truth=True,
             score=-0.5,
             diagnosis=Diagnosis.DIABETES,
             row_id="row",
         ),
         prediction(
-            "c",
+            "3-DS-1",
             truth=False,
             score=-1.0,
             diagnosis=Diagnosis.DIABETES,
             row_id="row",
         ),
         prediction(
-            "d",
+            "4-DS-1",
             truth=False,
             score=0.5,
             diagnosis=Diagnosis.DIABETES,
@@ -87,14 +87,14 @@ def test_single_class_is_refused(
     metrics = tmp_path / "metrics.parquet"
     ParquetPredictionTable(predictions).write([
         prediction(
-            "a",
+            "1-DS-1",
             truth=True,
             score=1.0,
             diagnosis=Diagnosis.DIABETES,
             row_id="row",
         ),
         prediction(
-            "b",
+            "2-DS-1",
             truth=True,
             score=2.0,
             diagnosis=Diagnosis.DIABETES,
