@@ -77,6 +77,8 @@ percent_text <- function(n, total) {
   out <- rep("–", length(n))
   known <- total > 0
   out[known] <- dua_decimal(100 * n[known] / total[known])
+  # Nenulový počet zaokrouhlený na 0,0 by vedle čísla zpráv vypadal jako rozpor (22 zpráv, 0,0 %).
+  out[known & n > 0 & out == dua_decimal(0)] <- paste0("<", NBSP, dua_decimal(0.1))
   out
 }
 
