@@ -29,17 +29,8 @@ LEXICON <- list(
   preamble = "Service"
 )
 
-header_con <- function(texts, env = parent.frame()) {
-  hadm <- paste0("h", seq_along(texts))
-  padding <- paste0(strrep("x", SHORT_LIMIT), " ", hadm, "\n")
-  notes <- text_notes(paste0(padding, texts))
-  notes$hadm_id <- hadm
-  rows <- data.frame(hadm_id = hadm, icd_code = "Z99", icd_version = "10", stringsAsFactors = FALSE)
-  mimic_con(discharge = notes, diagnoses_icd = rows, env = env)
-}
-
 found_headers <- function(texts) {
-  con <- header_con(texts)
+  con <- corpus_con(texts)
   table <- DBI::dbQuoteIdentifier(con, note_headers(con))
   out <- DBI::dbGetQuery(con, sprintf("SELECT note_id, header, norm FROM %s ORDER BY note_id, header", table))
   split(out$header, factor(out$note_id, levels = paste0("n", seq_along(texts))))
@@ -65,7 +56,7 @@ test_that("note_headers nebere krátký řetězec, čas, značku ani text uprost
 })
 
 test_that("normalizace sloučí velikost písmen, mezery a koncové tečky", {
-  con <- header_con(c("Chief Complaint:", "CHIEF  COMPLAINT :", "Chief Complaint.:"))
+  con <- corpus_con(c("Chief Complaint:", "CHIEF  COMPLAINT :", "Chief Complaint.:"))
   table <- DBI::dbQuoteIdentifier(con, note_headers(con))
 
   out <- DBI::dbGetQuery(con, sprintf("SELECT DISTINCT norm FROM %s", table))
@@ -74,7 +65,7 @@ test_that("normalizace sloučí velikost písmen, mezery a koncové tečky", {
 })
 
 test_that("note_headers vrací tutéž tabulku podruhé a jeden řádek na výskyt", {
-  con <- header_con("Service: A\nService: B")
+  con <- corpus_con("Service: A\nService: B")
 
   first <- note_headers(con)
 
@@ -83,15 +74,13 @@ test_that("note_headers vrací tutéž tabulku podruhé a jeden řádek na výsk
   expect_equal(DBI::dbGetQuery(con, "SELECT count(*) AS n FROM note_headers_input")$n, 2)
 })
 
-repeated <- function(text, times) rep(text, times)
-
 test_that("publishable_floor je 1 % korpusu a nejméně DUA_THRESHOLD", {
   expect_equal(publishable_floor(c(0, 500, 100000)), c(10, 10, 1000))
 })
 
 test_that("header_ranking zobrazí hlavičku jednou za zprávu a vrátí nejčastější zápis", {
-  texts <- c(repeated("Service: A\nService: B", 4), repeated("SERVICE: A", 4), repeated("Service: A", 2))
-  con <- header_con(texts)
+  texts <- c(rep("Service: A\nService: B", 4), rep("SERVICE: A", 4), rep("Service: A", 2))
+  con <- corpus_con(texts)
 
   out <- header_ranking(con, LEXICON)
 
@@ -102,19 +91,19 @@ test_that("header_ranking zobrazí hlavičku jednou za zprávu a vrátí nejčas
 })
 
 test_that("při shodě zápisu rozhoduje abecední pořadí", {
-  con <- header_con(c(repeated("SERVICE: A", 6), repeated("Service: A", 6)))
+  con <- corpus_con(c(rep("SERVICE: A", 6), rep("Service: A", 6)))
 
   expect_equal(header_ranking(con, LEXICON)$hlavicka, "SERVICE")
 })
 
 test_that("header_ranking skryje hlavičku pod podlahou, i když má aspoň deset zpráv", {
   texts <- c(
-    repeated("Allergies: none\nPatient states that: x", 1),
-    repeated("Allergies: none", 14),
-    repeated("Allergies: none\nPatient states that: x", 11),
-    repeated("Foo: x", 1474)
+    "Allergies: none\nPatient states that: x",
+    rep("Allergies: none", 14),
+    rep("Allergies: none\nPatient states that: x", 11),
+    rep("Foo: x", 1474)
   )
-  con <- header_con(texts)
+  con <- corpus_con(texts)
 
   out <- header_ranking(con, LEXICON)
 
@@ -124,7 +113,7 @@ test_that("header_ranking skryje hlavičku pod podlahou, i když má aspoň dese
 })
 
 test_that("header_ranking zařadí hlavičky do sekce, preamble a mimo lexikon", {
-  con <- header_con(repeated("Presenting Complaint: a\nService: b\nFoo: c", 10))
+  con <- corpus_con(rep("Presenting Complaint: a\nService: b\nFoo: c", 10))
 
   out <- header_ranking(con, LEXICON)
 
@@ -134,19 +123,19 @@ test_that("header_ranking zařadí hlavičky do sekce, preamble a mimo lexikon",
 
 test_that("header_ranking vrátí nejvýš RANKING_SIZE řádků", {
   codes <- paste0(rep(LETTERS, each = 26), rep(LETTERS, 26))[seq_len(RANKING_SIZE + 5L)]
-  con <- header_con(repeated(paste(sprintf("Head %s: x", codes), collapse = "\n"), 12))
+  con <- corpus_con(rep(paste(sprintf("Head %s: x", codes), collapse = "\n"), 12))
 
   expect_equal(nrow(header_ranking(con, LEXICON)), RANKING_SIZE)
 })
 
 test_that("header_ranking řadí podle n sestupně a pak podle norm", {
-  con <- header_con(c(repeated("Beta: x\nAlpha: x", 11), repeated("Gamma: x", 12)))
+  con <- corpus_con(c(rep("Beta: x\nAlpha: x", 11), rep("Gamma: x", 12)))
 
   expect_equal(header_ranking(con, LEXICON)$norm, c("gamma", "alpha", "beta"))
 })
 
 test_that("header_totals spočítá zprávy bez hlavičky, se sekcí a unikátní hlavičky", {
-  con <- header_con(c("Allergies: none\nFoo Bar: x", "Foo Bar: y", "no header here"))
+  con <- corpus_con(c("Allergies: none\nFoo Bar: x", "Foo Bar: y", "no header here"))
 
   out <- header_totals(con, LEXICON)
 
@@ -161,7 +150,7 @@ test_that("prázdný vstupní korpus vrátí prázdné výsledky bez chyby", {
 })
 
 test_that("sekce s více synonymy se počítá jednou na zprávu a opakování je zpráva s aspoň dvěma výskyty", {
-  con <- header_con(c(
+  con <- corpus_con(c(
     "Chief Complaint: a\nPresenting Complaint: b", "Presenting Complaint: a",
     "Allergies: a\nAllergies: b", "Allergies: a", "nothing"
   ))
@@ -176,7 +165,7 @@ test_that("sekce s více synonymy se počítá jednou na zprávu a opakování j
 })
 
 test_that("synonym_coverage nechá mrtvé synonymum s nulou a počítá dokumentovou frekvenci", {
-  con <- header_con(c("Chief Complaint: a\nChief Complaint: b", "CHIEF COMPLAINT: a", "Allergies: x"))
+  con <- corpus_con(c("Chief Complaint: a\nChief Complaint: b", "CHIEF COMPLAINT: a", "Allergies: x"))
 
   out <- synonym_coverage(con, LEXICON)
 
