@@ -74,6 +74,21 @@ def parse_diagnosis(path: Path, value: str) -> Diagnosis:
         raise InvalidInputError(msg) from error
 
 
+def note_identity_error(path: Path, error: Exception) -> InvalidInputError:
+    """Chyba identity zprávy řádku souboru jako chyba vstupu bez identifikátorů.
+
+    Returns:
+        Chyba s cestou a typem původní výjimky; volající ji vyhodí ``from None``.
+    """
+    # Text výjimky nese note_id, tedy subject_id pacienta MIMIC; nesmí do hlášky
+    # ani do logu, a proto jen její typ.
+    msg = (
+        f"Soubor {path} obsahuje zprávu, jejíž note_id nepatří "
+        f"jejímu subject_id: {type(error).__name__}."
+    )
+    return InvalidInputError(msg)
+
+
 def write_string_table(
     path: Path, columns: Sequence[str], rows: Sequence[Mapping[str, str | None]]
 ) -> None:

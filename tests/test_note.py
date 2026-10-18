@@ -4,7 +4,13 @@ from typing import Final
 
 import pytest
 
-from mediparse.domain.note import InvalidNoteIdError, note_id, subject_of
+from mediparse.domain.note import (
+    InvalidNoteIdError,
+    NoteSubjectMismatchError,
+    ensure_note_of_subject,
+    note_id,
+    subject_of,
+)
 
 SUBJECT: Final = 90000123
 
@@ -29,3 +35,24 @@ def test_malformed_note_id_is_rejected(name: str) -> None:
 def test_note_id_and_subject_of_are_inverse() -> None:
     """Pacient se z vytvořeného note_id vrátí beze změny."""
     assert subject_of(note_id(SUBJECT, 4)) == SUBJECT
+
+
+def test_note_of_its_subject_passes() -> None:
+    """Note_id, které skládá subject_id pacienta, projde."""
+    ensure_note_of_subject(note_id(SUBJECT, 2), SUBJECT)
+
+
+def test_note_of_another_subject_is_rejected_without_identifiers() -> None:
+    """Note_id jiného pacienta se odmítne a hláška nenese žádné id."""
+    with pytest.raises(NoteSubjectMismatchError) as caught:
+        ensure_note_of_subject(note_id(SUBJECT, 2), SUBJECT + 1)
+
+    assert (
+        str(caught.value) == "note_id zprávy nepatří pacientovi uvedenému v subject_id."
+    )
+
+
+def test_note_id_outside_mimic_composition_is_rejected_by_invariant() -> None:
+    """Note_id mimo skladbu subject_id-DS-pořadí invariant odmítne."""
+    with pytest.raises(InvalidNoteIdError):
+        ensure_note_of_subject("a", 1)

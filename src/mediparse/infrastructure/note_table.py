@@ -8,11 +8,15 @@ from typing import TYPE_CHECKING, Any, Final
 import pyarrow as pa
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.input_note import InputNote, NoteSubjectMismatchError
+from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
-from mediparse.domain.note import InvalidNoteIdError
-from mediparse.infrastructure.parquet_file import read_table, write_table
+from mediparse.domain.note import InvalidNoteIdError, NoteSubjectMismatchError
+from mediparse.infrastructure.parquet_file import (
+    note_identity_error,
+    read_table,
+    write_table,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -70,13 +74,7 @@ class ParquetNoteTable:
                 frozenset(diagnosis for diagnosis in Diagnosis if row[diagnosis.value]),
             )
         except (InvalidNoteIdError, NoteSubjectMismatchError) as error:
-            msg = (
-                f"Soubor {self.path} obsahuje zprávu, jejíž note_id nepatří "
-                f"jejímu subject_id: {type(error).__name__}."
-            )
-            # Text výjimky nese note_id, tedy subject_id pacienta MIMIC; nesmí do hlášky
-            # ani do logu, a proto jen její typ a ``from None``.
-            raise InvalidInputError(msg) from None
+            raise note_identity_error(self.path, error) from None
 
     def _language(self, value: str) -> Language:
         try:
