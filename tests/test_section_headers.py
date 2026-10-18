@@ -8,7 +8,20 @@ from typing import Final
 import pytest
 from pydantic import ValidationError
 
-from mediparse.domain.section_headers import SectionLexicon, normalized
+from mediparse.domain.note_text import line_headers
+from mediparse.domain.section_headers import (
+    SectionHeader,
+    SectionLexicon,
+    find_section_headers,
+    normalized,
+)
+from mediparse.infrastructure.sampler_config import load_sampler_config
+from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
+from tests.support import (
+    REPOSITORY_CONFIG,
+    REPOSITORY_CORPUS,
+    REPOSITORY_SECTION_HEADERS,
+)
 
 
 def _lexicon_json(**overrides: object) -> dict[str, object]:
@@ -67,3 +80,127 @@ def test_invalid_lexicon_is_rejected(overrides: dict[str, object]) -> None:
     """Každé porušení pravidla lexikonu zastaví validaci."""
     with pytest.raises(ValidationError):
         _lexicon(**overrides)
+
+
+DISCHARGE_LEXICON = SectionLexicon.model_validate_json(
+    json.dumps({
+        "sections": {
+            "chief_complaint": _section("Chief Complaint", label_cs="Obtíže"),
+            "past_medical_history": _section("Past Medical History"),
+            "discharge_diagnosis": _section(
+                "Discharge Diagnosis", "Discharge Diagnoses"
+            ),
+        },
+        "preamble": ["Name", "Unit No"],
+    })
+)
+
+
+def _found(text: str) -> list[tuple[str, str]]:
+    return [
+        (header.section, text[header.start : header.end])
+        for header in find_section_headers(text, DISCHARGE_LEXICON)
+    ]
+
+
+def test_headers_have_exact_positions_in_text_order() -> None:
+    """Start je začátek řádku, end je pozice za dvojtečkou."""
+    text = "Name: ___\nChief Complaint:\nchest pain\nPast Medical History:\nCHF\n"
+
+    assert find_section_headers(text, DISCHARGE_LEXICON) == (
+        SectionHeader("chief_complaint", start=10, end=26),
+        SectionHeader("past_medical_history", start=38, end=59),
+    )
+
+
+def test_indented_header_starts_at_line_start() -> None:
+    """Odsazení patří hlavičce."""
+    assert _found("x\n  \tChief Complaint: pain") == [
+        ("chief_complaint", "  \tChief Complaint:")
+    ]
+
+
+def test_crlf_and_last_line_without_newline() -> None:
+    """Konec řádku CRLF a poslední řádek bez konce řádku nevadí."""
+    text = "Chief Complaint:\r\npain\r\nDischarge Diagnosis:"
+
+    assert [key for key, _ in _found(text)] == [
+        "chief_complaint",
+        "discharge_diagnosis",
+    ]
+
+
+def test_spelling_variant_maps_to_section_key() -> None:
+    """Varianta mezer, velikosti a tečky se přiřadí ke klíči sekce."""
+    assert _found("CHIEF  COMPLAINT :\nx\nPast Medical History.:\ny") == [
+        ("chief_complaint", "CHIEF  COMPLAINT :"),
+        ("past_medical_history", "Past Medical History.:"),
+    ]
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Ab:\nx",
+        "Time 10:30",
+        "# Chief Complaint:",
+        "see Chief Complaint: x",
+        "IMAGING:\nVitals: 120",
+        "Name: ___ Unit No: ___",
+        "",
+        "no headers at all",
+    ],
+)
+def test_non_headers_are_skipped(text: str) -> None:
+    """Krátké názvy, čas, předpona, uprostřed řádku, cizí podnadpisy a preamble."""
+    assert find_section_headers(text, DISCHARGE_LEXICON) == ()
+
+
+def test_inline_value_after_header_is_not_a_second_header() -> None:
+    """Hodnota za hlavičkou na témže řádku hranici neotevře."""
+    assert _found("Discharge Diagnosis: Primary: CHF") == [
+        ("discharge_diagnosis", "Discharge Diagnosis:")
+    ]
+
+
+def test_repeated_header_stays_in_body() -> None:
+    """Druhý Past Medical History: za jinou sekcí se nevrátí."""
+    text = (
+        "Past Medical History:\nCHF\nChief Complaint:\npain\nPast Medical History:\nold"
+    )
+
+    assert [key for key, _ in _found(text)] == [
+        "past_medical_history",
+        "chief_complaint",
+    ]
+
+
+def test_repeat_through_other_synonym_returns_first_only() -> None:
+    """Různá synonyma téže sekce se počítají jako jedna sekce."""
+    text = "Discharge Diagnosis:\nCHF\nDischarge Diagnoses:\nCOPD"
+
+    assert _found(text) == [("discharge_diagnosis", "Discharge Diagnosis:")]
+
+
+def test_synthetic_corpus_matches_generator_headers() -> None:
+    """Hlavičky i pozice odpovídají tomu, co do zprávy umístil generátor."""
+    lexicon = load_section_lexicon(REPOSITORY_SECTION_HEADERS)
+    headers = {
+        key: header
+        for key, header in load_sampler_config(
+            REPOSITORY_CONFIG
+        ).structure.headers.items()
+        if key in lexicon.sections
+    }
+    pattern = line_headers(headers.values())
+    by_header = {header: key for key, header in headers.items()}
+    notes = sorted((REPOSITORY_CORPUS / "en").glob("*.txt"))
+
+    assert notes
+    for note in notes:
+        text = note.read_text(encoding="utf-8")
+        expected = tuple(
+            SectionHeader(by_header[m["header"]], m.start(), m.end())
+            for m in pattern.finditer(text)
+        )
+        assert find_section_headers(text, lexicon) == expected, note.name
