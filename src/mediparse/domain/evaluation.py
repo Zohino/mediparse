@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections import defaultdict
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
@@ -13,6 +14,8 @@ if TYPE_CHECKING:
 
     from mediparse.domain.diagnosis import Diagnosis
     from mediparse.domain.identity import RowId, SubjectId
+    from mediparse.domain.input_note import InputNote
+    from mediparse.domain.split import Split
 
 
 @dataclass(frozen=True)
@@ -112,3 +115,39 @@ def ensure_unique_keys(predictions: Sequence[Prediction]) -> None:
             )
             raise InvalidInputError(msg)
         seen.add(key)
+
+
+def ensure_complete_folds(
+    predictions: Sequence[Prediction], notes: Sequence[InputNote], split: Split
+) -> None:
+    """Ověří, že predikce každého foldu pokrývají přesně testovací zprávy foldu.
+
+    Kontrolují se jen foldy přítomné v predikcích; že jsou přítomné všechny, není
+    věc této funkce. Duplicitu klíče nevidí (množina ji sloučí), proto má běžet po
+    ``ensure_unique_keys``.
+
+    Args:
+        predictions: Predikce ke zpracování.
+        notes: Zprávy korpusu, jejichž pacienti jsou všichni ve splitu.
+        split: Split, který určuje test každého foldu.
+
+    Raises:
+        InvalidInputError: Skupina (řádek, diagnóza, fold) nemá zprávu testu foldu
+            nebo má cizí; fold je mimo rozsah splitu nebo zpráva pacienta mimo split.
+    """
+    predicted: defaultdict[tuple[str, Diagnosis, int], set[str]] = defaultdict(set)
+    for item in predictions:
+        predicted[item.row_id, item.diagnosis, item.fold].add(item.note_id)
+    expected: dict[int, frozenset[str]] = {}
+    for (row_id, diagnosis, fold), names in sorted(predicted.items()):
+        if fold not in expected:
+            test = split.holdout(notes, fold).test
+            expected[fold] = frozenset(note.note_id for note in test)
+        missing, extra = len(expected[fold] - names), len(names - expected[fold])
+        if missing or extra:
+            # note_id nese subject_id pacienta MIMIC; hláška ani log ho nesmí nést.
+            msg = (
+                f"Predikce neodpovídají testu foldu: řádek {row_id}, "
+                f"diagnóza {diagnosis}, fold {fold}, chybí {missing}, navíc {extra}."
+            )
+            raise InvalidInputError(msg)
