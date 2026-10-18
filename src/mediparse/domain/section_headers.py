@@ -53,10 +53,14 @@ class SectionLexicon(BaseModel):
     preamble: tuple[str, ...]
 
     @model_validator(mode="after")
-    def _synonyms_are_recognizable_and_unique(self) -> Self:
+    def _reserved_key_is_absent(self) -> Self:
         if OTHER in self.sections:
             msg = f"Sekce lexikonu nesmí mít vyhrazený klíč: {OTHER}."
             raise ValueError(msg)
+        return self
+
+    @model_validator(mode="after")
+    def _synonyms_are_recognizable_and_unique(self) -> Self:
         synonyms = [s for section in self.sections.values() for s in section.synonyms]
         for synonym in synonyms:
             _require_recognizable(synonym)
@@ -136,15 +140,12 @@ def split_sections(text: str, lexicon: SectionLexicon) -> tuple[NoteSection, ...
         Sekce v pořadí textu, pro prázdný text prázdná n-tice.
     """
     headers = find_section_headers(text, lexicon)
-    if not headers:
-        return (NoteSection(OTHER, "", text),) if text else ()
-    sections = (
-        [NoteSection(OTHER, "", text[: headers[0].start])] if headers[0].start else []
-    )
-    body_ends = [h.start for h in headers[1:]] + [len(text)]
+    starts = [h.start for h in headers] + [len(text)]
+    preamble = text[: starts[0]]
+    sections = [NoteSection(OTHER, "", preamble)] if preamble else []
     sections.extend(
-        NoteSection(h.section, text[h.start : h.end], text[h.end : body_end])
-        for h, body_end in zip(headers, body_ends, strict=True)
+        NoteSection(h.section, text[h.start : h.end], text[h.end : end])
+        for h, end in zip(headers, starts[1:], strict=True)
     )
     return tuple(sections)
 
