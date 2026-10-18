@@ -53,16 +53,17 @@ def segment(text: str, headers: Mapping[str, str]) -> tuple[str, Sections]:
     """Rozdělí text na preambuli a sekce podle kanonických hlaviček na začátku řádku.
 
     Returns:
-        Preambuli a dvojice klíč sekce, tělo sekce v pořadí textu.
+        Preambuli a dvojice klíč sekce, tělo sekce v pořadí textu; text bez
+        hlavičky je celý preambulí a sekce nemá.
     """
     keys = {header: key for key, header in headers.items()}
     matches = list(line_headers(keys).finditer(text))
-    ends = [match.start() for match in matches[1:]] + [len(text)]
+    starts = [match.start() for match in matches] + [len(text)]
     sections = tuple(
         (keys[match["header"]], text[match.end() : end])
-        for match, end in zip(matches, ends, strict=True)
+        for match, end in zip(matches, starts[1:], strict=True)
     )
-    return text[: matches[0].start()] if matches else text, sections
+    return text[: starts[0]], sections
 
 
 class NarrativeMeasure(NamedTuple):

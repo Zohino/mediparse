@@ -67,7 +67,7 @@ def _section_violations(
     if found == plan.sections:
         return []
     expected = ", ".join(headers[key] for key in plan.sections)
-    actual = ", ".join(headers[key] for key in found)
+    actual = ", ".join(headers[key] for key in found) or "žádné"
     return [f"Hlavičky sekcí neodpovídají plánu: plán {expected}; text {actual}."]
 
 

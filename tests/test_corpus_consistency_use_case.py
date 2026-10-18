@@ -79,6 +79,18 @@ def test_violating_note_is_reported_once_with_reasons(
     assert any("Sex" in reason for reason in result.reasons)
 
 
+def test_note_without_headers_is_reported_not_raised(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Zpráva bez hlaviček projde kontrolou zprávy i korpusu a hlásí se k přegenerování."""
+    plan = planned_note.plan
+    texts = {plan.note_id: "Patient admitted with fatigue."}
+
+    (result,) = _check((plan,), texts).run(sampler_config).notes
+
+    assert any("Hlavičky sekcí" in reason for reason in result.reasons)
+
+
 def test_other_languages_are_not_checked_against_plans(
     planned_note: PlannedNote, sampler_config: SamplerConfig
 ) -> None:

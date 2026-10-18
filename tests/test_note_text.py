@@ -4,7 +4,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.note_text import AGE_MARKER, deid_markers, measure_narrative
+import pytest
+
+from mediparse.domain.note_text import (
+    AGE_MARKER,
+    deid_markers,
+    measure_narrative,
+    segment,
+)
 
 if TYPE_CHECKING:
     from mediparse.domain.note_text import NarrativeMeasure
@@ -27,6 +34,32 @@ def test_age_marker_needs_standalone_marker() -> None:
     """Věková značka je ___ year old, ne věk za delší řadou podtržítek."""
     assert AGE_MARKER.search("a ___ year old woman") is not None
     assert AGE_MARKER.search("a ____ year old woman") is None
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        pytest.param("no headers", ("no headers", ()), id="bez hlavičky"),
+        pytest.param("", ("", ()), id="prázdný text"),
+        pytest.param(
+            "see Allergies: none",
+            ("see Allergies: none", ()),
+            id="hlavička uprostřed řádku",
+        ),
+        pytest.param(
+            "pre\nAllergies:\nnone\nChief Complaint:\nfatigue",
+            ("pre\n", (("allergies", "\nnone\n"), ("complaint", "\nfatigue"))),
+            id="preambule a dvě sekce",
+        ),
+    ],
+)
+def test_segment_splits_preamble_and_sections(
+    text: str, expected: tuple[str, tuple[tuple[str, str], ...]]
+) -> None:
+    """Text bez hlavičky je celý preambulí, s hlavičkami se dělí na jejich začátcích."""
+    headers = {"allergies": "Allergies", "complaint": "Chief Complaint"}
+
+    assert segment(text, headers) == expected
 
 
 def _measure(

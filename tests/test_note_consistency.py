@@ -94,6 +94,20 @@ def test_violation_is_reported(
     assert any(rule.lower() in reason.lower() for reason in violations), violations
 
 
+def test_note_without_headers_is_reported_not_raised(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Zpráva bez jediné hlavičky je porušení plánu, ne pád kontroly."""
+    violations = _violations(
+        "Patient admitted with fatigue.", planned_note.plan, sampler_config
+    )
+
+    assert any(
+        reason.startswith("Hlavičky sekcí") and reason.endswith("text žádné.")
+        for reason in violations
+    ), violations
+
+
 def test_diagnosis_section_keyword_outside_plan_is_reported(
     planned_note: PlannedNote, sampler_config: SamplerConfig
 ) -> None:
