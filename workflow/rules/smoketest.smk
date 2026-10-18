@@ -42,6 +42,8 @@ rule train_smoketest_model:
 rule evaluate_smoketest_model:
     input:
         predictions=SMOKETEST / "predictions.parquet",
+        notes=SMOKETEST / "notes.parquet",
+        split=SMOKETEST / "splits.parquet",
     output:
         SMOKETEST / "metrics.parquet",
     log:

@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import pytest
 
-from mediparse.domain.input_note import InputNote, NoteSubjectMismatchError
+from mediparse.domain.input_note import InputNote
 from mediparse.domain.language import Language
-from mediparse.domain.note import InvalidNoteIdError
+from mediparse.domain.note import InvalidNoteIdError, NoteSubjectMismatchError
 
 SUBJECT = 90000001
 

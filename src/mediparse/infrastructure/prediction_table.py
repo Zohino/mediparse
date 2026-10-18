@@ -10,7 +10,9 @@ import pyarrow as pa
 
 from mediparse.domain.evaluation import Prediction
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.note import NoteIdentityError
 from mediparse.infrastructure.parquet_file import (
+    note_identity_error,
     parse_diagnosis,
     read_table,
     write_table,
@@ -59,7 +61,8 @@ class ParquetPredictionTable:
             Predikce s diagnózou jako výčtem.
 
         Raises:
-            InvalidInputError: Skóre není konečné číslo.
+            InvalidInputError: Skóre není konečné číslo nebo note_id nepatří
+                ``subject_id`` řádku.
         """
         table = read_table(self.path, SCHEMA)
         if not all(math.isfinite(score) for score in table.column("score").to_pylist()):
@@ -68,13 +71,17 @@ class ParquetPredictionTable:
         return tuple(self._prediction(row) for row in table.to_pylist())
 
     def _prediction(self, row: dict[str, Any]) -> Prediction:
-        return Prediction(
-            row["row_id"],
-            row["fold"],
-            row["note_id"],
-            row["subject_id"],
-            parse_diagnosis(self.path, row["diagnosis"]),
-            truth=row["truth"],
-            predicted=row["predicted"],
-            score=row["score"],
-        )
+        diagnosis = parse_diagnosis(self.path, row["diagnosis"])
+        try:
+            return Prediction(
+                row["row_id"],
+                row["fold"],
+                row["note_id"],
+                row["subject_id"],
+                diagnosis,
+                truth=row["truth"],
+                predicted=row["predicted"],
+                score=row["score"],
+            )
+        except NoteIdentityError as error:
+            raise note_identity_error(self.path, error) from None

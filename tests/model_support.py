@@ -14,7 +14,7 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Prediction
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.language import Language
-from mediparse.domain.note import note_id
+from mediparse.domain.note import note_id, subject_of
 from mediparse.domain.smoketest_training import TrainingConfig
 from mediparse.domain.split import SharedSplit, SplitConfig
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
@@ -74,18 +74,17 @@ def prediction(
     diagnosis: Diagnosis = Diagnosis.DIABETES,
     fold: int = 0,
     row_id: str = "row",
-    subject_id: int = 1,
 ) -> Prediction:
     """Predikce, jejíž příznak ``predicted`` plyne ze znaménka skóre.
 
     Returns:
-        Predikce pacienta ``subject_id``, kladná při ``score > 0``.
+        Predikce pacienta, kterého určuje ``note_id``, kladná při ``score > 0``.
     """
     return Prediction(
         row_id,
         fold,
         note_id,
-        subject_id,
+        subject_of(note_id),
         diagnosis,
         truth=truth,
         predicted=score > 0,

@@ -27,14 +27,12 @@ def _demo(root: Path) -> Path:
             truth=True,
             score=1.23456,
             diagnosis=Diagnosis.DIABETES,
-            subject_id=1,
         ),
         prediction(
             "9001-DS-1",
             truth=False,
             score=0.1,
             diagnosis=Diagnosis.DIABETES,
-            subject_id=2,
         ),
     ])
     return demo

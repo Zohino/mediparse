@@ -18,15 +18,36 @@ if TYPE_CHECKING:
 
 PREDICTIONS = (
     Prediction(
-        "row", 0, "n2", 7, Diagnosis.DIABETES, truth=True, predicted=True, score=1.25
+        "row",
+        0,
+        "7-DS-2",
+        7,
+        Diagnosis.DIABETES,
+        truth=True,
+        predicted=True,
+        score=1.25,
     ),
     Prediction(
-        "row", 0, "n1", 5, Diagnosis.DIABETES, truth=False, predicted=True, score=0.5
+        "row",
+        0,
+        "5-DS-1",
+        5,
+        Diagnosis.DIABETES,
+        truth=False,
+        predicted=True,
+        score=0.5,
     ),
     Prediction(
-        "row", 1, "n3", 5, Diagnosis.CKD, truth=False, predicted=False, score=-0.75
+        "row", 1, "5-DS-2", 5, Diagnosis.CKD, truth=False, predicted=False, score=-0.75
     ),
 )
+
+
+def _rewrite_row(path: Path, index: int, **columns: object) -> None:
+    table = pq.read_table(path).to_pydict()
+    for name, value in columns.items():
+        table[name][index] = value
+    pq.write_table(pa.Table.from_pydict(table, schema=SCHEMA), path)
 
 
 def test_round_trip_keeps_order_and_types(tmp_path: Path) -> None:
@@ -61,9 +82,7 @@ def test_unknown_diagnosis_is_invalid_input(tmp_path: Path) -> None:
     """Neznámá diagnóza je InvalidInputError s cestou a hodnotou."""
     path = tmp_path / "predictions.parquet"
     ParquetPredictionTable(path).write(PREDICTIONS)
-    table = pq.read_table(path).to_pydict()
-    table["diagnosis"][0] = "asthma"
-    pq.write_table(pa.Table.from_pydict(table, schema=SCHEMA), path)
+    _rewrite_row(path, 0, diagnosis="asthma")
 
     with pytest.raises(InvalidInputError, match=r"predictions\.parquet.*asthma"):
         ParquetPredictionTable(path).read()
@@ -74,9 +93,7 @@ def test_non_finite_score_is_invalid_input(tmp_path: Path, score: float) -> None
     """NaN a nekonečné skóre je InvalidInputError."""
     path = tmp_path / "predictions.parquet"
     ParquetPredictionTable(path).write(PREDICTIONS)
-    table = pq.read_table(path).to_pydict()
-    table["score"][1] = score
-    pq.write_table(pa.Table.from_pydict(table, schema=SCHEMA), path)
+    _rewrite_row(path, 1, score=score)
 
     with pytest.raises(InvalidInputError, match="skóre"):
         ParquetPredictionTable(path).read()
@@ -89,3 +106,29 @@ def test_written_file_is_zstd_compressed(tmp_path: Path) -> None:
     ParquetPredictionTable(path).write(PREDICTIONS)
 
     assert pq.ParquetFile(path).metadata.row_group(0).column(0).compression == "ZSTD"
+
+
+@pytest.mark.parametrize(
+    ("columns", "error"),
+    [
+        ({"subject_id": 8}, "NoteSubjectMismatchError"),
+        ({"note_id": "x7-DS-2"}, "InvalidNoteIdError"),
+    ],
+    ids=["cizi-pacient", "neplatne-note-id"],
+)
+def test_foreign_note_id_is_invalid_input_without_identifiers(
+    tmp_path: Path, columns: dict[str, object], error: str
+) -> None:
+    """Řádek s note_id cizího pacienta nebo mimo skladbu nese cestu a typ chyby."""
+    path = tmp_path / "predictions.parquet"
+    ParquetPredictionTable(path).write(PREDICTIONS)
+    _rewrite_row(path, 0, **columns)
+
+    with pytest.raises(
+        InvalidInputError, match=rf"predictions\.parquet.*{error}"
+    ) as raised:
+        ParquetPredictionTable(path).read()
+
+    assert "7-DS-2" not in str(raised.value)
+    assert raised.value.__cause__ is None
+    assert raised.value.__suppress_context__

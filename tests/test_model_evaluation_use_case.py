@@ -11,7 +11,11 @@ import pytest
 from mediparse.application.model_evaluation import ModelEvaluation
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import BinaryMetrics, DiagnosisMetrics, Prediction
+from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.language import Language
+from mediparse.domain.note import note_id
+from mediparse.domain.split import SharedSplit, Split, SplitConfig
 from tests.model_support import prediction
 
 if TYPE_CHECKING:
@@ -47,21 +51,72 @@ class _FakeSink:
         self.written.append(tuple(metrics))
 
 
+def _notes(*subjects: int) -> tuple[InputNote, ...]:
+    return tuple(
+        InputNote(note_id(subject, 1), subject, Language.EN, "text", frozenset())
+        for subject in subjects
+    )
+
+
+NOTES = _notes(1, 2, 3, 4)
+SPLIT = Split((frozenset({1, 2, 3}), frozenset({4})))
+HALVES = Split((frozenset({1, 2}), frozenset({3, 4})))
+
+
+@dataclass
+class _FakeTable:
+    notes: Sequence[InputNote]
+
+    def read(self) -> tuple[InputNote, ...]:
+        return tuple(self.notes)
+
+
+@dataclass
+class _FakeSplitSource:
+    split: Split
+
+    def read(self) -> SharedSplit:
+        return SharedSplit(SplitConfig(seed=0, folds=len(self.split.folds)), self.split)
+
+
 def _use_case(
-    items: Sequence[Prediction],
+    items: Sequence[Prediction], split: Split = SPLIT
 ) -> tuple[ModelEvaluation, _FakeScorer, _FakeSink]:
     scorer, sink = _FakeScorer(), _FakeSink()
-    return ModelEvaluation(_FakePredictions(items), scorer, sink), scorer, sink
+    use_case = ModelEvaluation(
+        _FakePredictions(items),
+        _FakeTable(NOTES),
+        _FakeSplitSource(split),
+        scorer,
+        sink,
+    )
+    return use_case, scorer, sink
+
+
+def _group(
+    row_id: str,
+    diagnosis: Diagnosis,
+    outcomes: Sequence[tuple[bool, float]],
+    fold: int = 0,
+    subjects: Sequence[int] = (1, 2, 3),
+) -> tuple[Prediction, ...]:
+    return tuple(
+        prediction(
+            note_id(subject, 1),
+            truth=truth,
+            score=score,
+            diagnosis=diagnosis,
+            row_id=row_id,
+            fold=fold,
+        )
+        for subject, (truth, score) in zip(subjects, outcomes, strict=True)
+    )
 
 
 MIXED = (
-    prediction("n1", truth=True, score=1.0, diagnosis=Diagnosis.DIABETES, row_id="b"),
-    prediction("n2", truth=False, score=-1.0, diagnosis=Diagnosis.CKD, row_id="a"),
-    prediction("n3", truth=False, score=-2.0, diagnosis=Diagnosis.DIABETES, row_id="a"),
-    prediction("n4", truth=False, score=0.5, diagnosis=Diagnosis.DIABETES, row_id="b"),
-    prediction("n5", truth=True, score=3.0, diagnosis=Diagnosis.CKD, row_id="a"),
-    prediction("n6", truth=True, score=2.0, diagnosis=Diagnosis.DIABETES, row_id="a"),
-    prediction("n7", truth=True, score=-0.5, diagnosis=Diagnosis.CKD, row_id="a"),
+    *_group("b", Diagnosis.DIABETES, ((True, 1.0), (False, 0.5), (False, -3.0))),
+    *_group("a", Diagnosis.CKD, ((False, -1.0), (True, 3.0), (True, -0.5))),
+    *_group("a", Diagnosis.DIABETES, ((False, -2.0), (True, 2.0), (True, 1.0))),
 )
 
 
@@ -78,8 +133,8 @@ def test_groups_are_sorted_with_sizes() -> None:
     ]
     assert [(item.test_notes, item.test_positives) for item in result] == [
         (3, 2),
-        (2, 1),
-        (2, 1),
+        (3, 2),
+        (3, 1),
     ]
     assert sink.written == [result]
 
@@ -92,8 +147,8 @@ def test_scorer_gets_only_its_group_in_input_order() -> None:
 
     expected = [
         ((False, True, True), (False, True, False), (-1.0, 3.0, -0.5)),
-        ((False, True), (False, True), (-2.0, 2.0)),
-        ((True, False), (True, True), (1.0, 0.5)),
+        ((False, True, True), (False, True, True), (-2.0, 2.0, 1.0)),
+        ((True, False, False), (True, True, False), (1.0, 0.5, -3.0)),
     ]
     assert Counter(scorer.calls) == Counter(expected)
 
@@ -113,9 +168,7 @@ def test_single_class_is_rejected_before_scoring() -> None:
     """Skupina s jedinou třídou pravdy skončí InvalidInputError před výpočtem."""
     items = (
         *MIXED,
-        prediction(
-            "n8", truth=True, score=1.0, diagnosis=Diagnosis.PNEUMONIA, row_id="c"
-        ),
+        *_group("c", Diagnosis.PNEUMONIA, ((True, 1.0), (True, 2.0), (True, 3.0))),
     )
     use_case, scorer, sink = _use_case(items)
 
@@ -144,12 +197,10 @@ def test_folds_of_one_row_and_diagnosis_are_pooled() -> None:
     by skončilo na kontrole obou tříd.
     """
     items = (
-        prediction("1-DS-1", truth=True, score=1.0, fold=0, subject_id=1),
-        prediction("2-DS-1", truth=True, score=-1.0, fold=0, subject_id=2),
-        prediction("3-DS-1", truth=False, score=-2.0, fold=1, subject_id=3),
-        prediction("4-DS-1", truth=False, score=0.5, fold=1, subject_id=4),
+        *_group("row", Diagnosis.DIABETES, ((True, 1.0), (True, -1.0)), 0, (1, 2)),
+        *_group("row", Diagnosis.DIABETES, ((False, -2.0), (False, 0.5)), 1, (3, 4)),
     )
-    use_case, scorer, _ = _use_case(items)
+    use_case, scorer, _ = _use_case(items, HALVES)
 
     result = use_case.run()
 
@@ -157,3 +208,29 @@ def test_folds_of_one_row_and_diagnosis_are_pooled() -> None:
     assert scorer.calls == [
         ((True, True, False, False), (True, False, False, True), (1.0, -1.0, -2.0, 0.5))
     ]
+
+
+def test_incomplete_fold_is_rejected_before_scoring() -> None:
+    """Predikce bez jedné testovací zprávy foldu skončí chybou a nic se nezapíše."""
+    use_case, scorer, sink = _use_case(MIXED[1:])
+
+    with pytest.raises(InvalidInputError, match="chybí 1, navíc 0"):
+        use_case.run()
+
+    assert not scorer.calls
+    assert not sink.written
+
+
+def test_duplicate_is_reported_as_duplicate_not_as_incompleteness() -> None:
+    """Skupina s duplicitou a chybějící zprávou se ohlásí jako duplicita.
+
+    Množina duplicitu sloučí, takže kdyby kontrola úplnosti běžela první, hlásila by
+    jen chybějící zprávu.
+    """
+    use_case, scorer, sink = _use_case(MIXED[1:] + MIXED[1:2])
+
+    with pytest.raises(InvalidInputError, match="Opakovaná predikce"):
+        use_case.run()
+
+    assert not scorer.calls
+    assert not sink.written

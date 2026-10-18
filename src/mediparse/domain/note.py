@@ -21,7 +21,11 @@ def note_id(subject_id: SubjectId, order: int) -> str:
     return f"{subject_id}-DS-{order}"
 
 
-class InvalidNoteIdError(ValueError):
+class NoteIdentityError(ValueError):
+    """Společná báze chyb identity zprávy; text jejích potomků smí nést note_id."""
+
+
+class InvalidNoteIdError(NoteIdentityError):
     """Jméno zprávy není note_id propouštěcí zprávy ve skladbě MIMIC-IV-Note."""
 
 
@@ -39,3 +43,25 @@ def subject_of(note_id: str) -> SubjectId:
         msg = f"Neplatné note_id propouštěcí zprávy: {note_id!r}"
         raise InvalidNoteIdError(msg)
     return int(match["subject"])
+
+
+class NoteSubjectMismatchError(NoteIdentityError):
+    """Note_id zprávy patří jinému pacientovi, než kterého uvádí její řádek."""
+
+
+def ensure_note_of_subject(note_id: str, subject_id: SubjectId) -> None:
+    """Ověří, že note_id zprávy patří pacientovi ``subject_id``.
+
+    Args:
+        note_id: Identifikátor zprávy.
+        subject_id: Pacient, kterého uvádí řádek zprávy.
+
+    Raises:
+        InvalidNoteIdError: Jméno neodpovídá skladbě ``subject_id-DS-pořadí``.
+        NoteSubjectMismatchError: Note_id patří jinému pacientovi.
+    """
+    if subject_of(note_id) != subject_id:
+        # Řádek nese reálné zprávy MIMIC; hláška ani log nesmí nést identifikátory.
+        # Hláška InvalidNoteIdError ze subject_of note_id nese, chrání ji adaptér.
+        msg = "note_id zprávy nepatří pacientovi uvedenému v subject_id."
+        raise NoteSubjectMismatchError(msg)

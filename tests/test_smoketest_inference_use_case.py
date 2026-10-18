@@ -28,7 +28,7 @@ NOTES = (
     InputNote("3-DS-1", 3, Language.EN, "text c", frozenset()),
 )
 HELD_OUT = (
-    prediction("3-DS-1", truth=True, score=1.5, diagnosis=Diagnosis.CKD, subject_id=3),
+    prediction("3-DS-1", truth=True, score=1.5, diagnosis=Diagnosis.CKD),
     prediction("1-DS-1", truth=False, score=-0.5, diagnosis=Diagnosis.CKD),
 )
 ANSWER = (

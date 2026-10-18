@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING, Protocol
 from mediparse.domain.evaluation import (
     DiagnosisMetrics,
     ensure_both_classes,
+    ensure_complete_folds,
     ensure_unique_keys,
 )
 from mediparse.domain.inputs import InvalidInputError
@@ -16,7 +17,11 @@ from mediparse.domain.inputs import InvalidInputError
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.application.ports.experiment import PredictionSource
+    from mediparse.application.ports.experiment import (
+        InputTable,
+        PredictionSource,
+        SplitSource,
+    )
     from mediparse.domain.diagnosis import Diagnosis
     from mediparse.domain.evaluation import BinaryMetrics, Prediction
 
@@ -42,6 +47,8 @@ class ModelEvaluation:
     """Metriky na diagnózu a řádek matice spočtené z predikcí."""
 
     predictions: PredictionSource
+    table: InputTable
+    split: SplitSource
     scorer: Scorer
     metrics: MetricsSink
 
@@ -52,18 +59,24 @@ class ModelEvaluation:
         zprávy: metriky mají jeden řádek na řádek matice a diagnózu a srovnání jazyků
         je párované přes všechny pacienty kohorty, ne po foldech.
 
+        Predikce každého foldu musí pokrývat přesně testovací zprávy foldu podle
+        splitu, jinak by metriky vznikly nad jinou množinou, než jakou split určil.
+
         Returns:
             Metriky seřazené podle řádku matice a diagnózy.
 
         Raises:
-            InvalidInputError: Predikce jsou prázdné nebo některá skupina nemá obě
-                třídy pravdy nebo se opakuje klíč predikce.
+            InvalidInputError: Predikce jsou prázdné, opakuje se klíč predikce,
+                nepokrývají přesně test foldu nebo některá skupina nemá obě třídy
+                pravdy.
         """
         items = self.predictions.read()
         if not items:
             msg = "Soubor predikcí je prázdný."
             raise InvalidInputError(msg)
+        # Před úplností: porovnání množin duplicitu sloučí a neohlásila by se.
         ensure_unique_keys(items)
+        ensure_complete_folds(items, self.table.read(), self.split.read().split)
         groups: defaultdict[tuple[str, Diagnosis], list[Prediction]] = defaultdict(list)
         for item in items:
             groups[item.row_id, item.diagnosis].append(item)

@@ -15,23 +15,16 @@ if TYPE_CHECKING:
     from mediparse.application.ports.experiment import (
         InputTable,
         PredictionSink,
+        SplitSource,
         TextClassifier,
     )
     from mediparse.domain.diagnosis import Diagnosis
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.smoketest_training import TrainingConfig
-    from mediparse.domain.split import SharedSplit
 
 
 def _labels(notes: Sequence[InputNote], diagnosis: Diagnosis) -> list[bool]:
     return [diagnosis in note.labels for note in notes]
-
-
-class SplitSource(Protocol):
-    """Zdroj hotového splitu, který spočetl krok před tréninkem."""
-
-    def read(self) -> SharedSplit:
-        """Vrátí split s jeho parametry."""
 
 
 class ClassifierTrainer[C: TextClassifier](Protocol):
