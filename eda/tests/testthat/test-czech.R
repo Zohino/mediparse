@@ -31,3 +31,9 @@ test_that("count_phrase formátuje po prvcích a pro nulu vrátí daný text", {
   expect_equal(count_phrase(c(0, 3), FORMS, zero = "žádná zmínka"), c("žádná zmínka", "3 zmínky"))
   expect_equal(count_phrase(0, FORMS), "0 zmínek")
 })
+
+test_that("join_labels spojí popisky česky a prázdný seznam pojmenuje", {
+  expect_equal(join_labels(character()), "žádný")
+  expect_equal(join_labels("a"), "a")
+  expect_equal(join_labels(c("a", "b", "c")), "a, b a c")
+})

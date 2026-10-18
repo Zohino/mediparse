@@ -430,11 +430,6 @@ test_that("tabulka kandidátů uvádí české popisky a pásmo", {
   expect_equal(out$n, c("300", "potlačeno"))
 })
 
-test_that("join_labels spojí popisky česky a prázdný seznam pojmenuje", {
-  expect_equal(join_labels(character()), "žádný")
-  expect_equal(join_labels("a"), "a")
-  expect_equal(join_labels(c("a", "b", "c")), "a, b a c")
-})
 
 test_that("kód v izolovaném prostředí nepotřebuje demographics.R", {
   env <- new.env(parent = baseenv())
