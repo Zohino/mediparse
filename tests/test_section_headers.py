@@ -89,7 +89,7 @@ def test_invalid_lexicon_is_rejected(overrides: dict[str, object]) -> None:
         ("Time 10:30", []),
         ("# CHF: yes", []),
         ("see Chief Complaint: x", []),
-        ("  Chief Complaint:\n\tAllergies: none", ["Chief Complaint"]),
+        ("  Chief Complaint:\n\tAllergies: none", ["Chief Complaint", "Allergies"]),
         (
             "Allergies:\r\nPenicillin\r\nSocial History:\r\nnone",
             ["Allergies", "Social History"],

@@ -13,7 +13,7 @@ MIN_NORMALIZED_CHARS: Final = 3
 # Pravidlo hlavičky má tři části a každá má protějšek v eda/R/sections.R:
 # HEADER_PATTERN, normalized (normalized_sql) a MIN_NORMALIZED_CHARS (MIN_HEADER_CHARS).
 # Sešit 9 měřil pokrytí lexikonu právě jím, změna se dělá v obou. Délku hlídá validace
-# lexikonu místo filtru: shoda je rovnost normalizovaných tvarů, takže kratší tvar
+# lexikonu místo filtru: stejnost je rovnost normalizovaných tvarů, takže kratší tvar
 # synonymem být nemůže a vyřazení kratších hlaviček z textu je tentýž výsledek.
 HEADER_PATTERN: Final = re.compile(
     r"^[ \t]*(?P<header>[A-Z][A-Za-z][A-Za-z \-/&()'.]{0,47}):", re.MULTILINE
