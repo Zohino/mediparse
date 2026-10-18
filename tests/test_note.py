@@ -6,6 +6,7 @@ import pytest
 
 from mediparse.domain.note import (
     InvalidNoteIdError,
+    NoteIdentityError,
     NoteSubjectMismatchError,
     ensure_note_of_subject,
     note_id,
@@ -56,3 +57,9 @@ def test_note_id_outside_mimic_composition_is_rejected_by_invariant() -> None:
     """Note_id mimo skladbu subject_id-DS-pořadí invariant odmítne."""
     with pytest.raises(InvalidNoteIdError):
         ensure_note_of_subject("a", 1)
+
+
+@pytest.mark.parametrize("error", [InvalidNoteIdError, NoteSubjectMismatchError])
+def test_identity_errors_share_a_base(error: type[ValueError]) -> None:
+    """Adaptéry chytají obě chyby identity zprávy přes jedinou společnou bázi."""
+    assert issubclass(error, NoteIdentityError)

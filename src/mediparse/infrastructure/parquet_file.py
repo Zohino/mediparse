@@ -14,6 +14,8 @@ if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
     from pathlib import Path
 
+    from mediparse.domain.note import NoteIdentityError
+
 COMPRESSION: Final = "zstd"
 
 
@@ -74,7 +76,7 @@ def parse_diagnosis(path: Path, value: str) -> Diagnosis:
         raise InvalidInputError(msg) from error
 
 
-def note_identity_error(path: Path, error: Exception) -> InvalidInputError:
+def note_identity_error(path: Path, error: NoteIdentityError) -> InvalidInputError:
     """Chyba identity zprávy řádku souboru jako chyba vstupu bez identifikátorů.
 
     Returns:

@@ -21,7 +21,11 @@ def note_id(subject_id: SubjectId, order: int) -> str:
     return f"{subject_id}-DS-{order}"
 
 
-class InvalidNoteIdError(ValueError):
+class NoteIdentityError(ValueError):
+    """Společná báze chyb identity zprávy; text jejích potomků smí nést note_id."""
+
+
+class InvalidNoteIdError(NoteIdentityError):
     """Jméno zprávy není note_id propouštěcí zprávy ve skladbě MIMIC-IV-Note."""
 
 
@@ -41,7 +45,7 @@ def subject_of(note_id: str) -> SubjectId:
     return int(match["subject"])
 
 
-class NoteSubjectMismatchError(ValueError):
+class NoteSubjectMismatchError(NoteIdentityError):
     """Note_id zprávy patří jinému pacientovi, než kterého uvádí její řádek."""
 
 

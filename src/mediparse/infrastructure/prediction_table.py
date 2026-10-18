@@ -10,7 +10,7 @@ import pyarrow as pa
 
 from mediparse.domain.evaluation import Prediction
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.note import InvalidNoteIdError, NoteSubjectMismatchError
+from mediparse.domain.note import NoteIdentityError
 from mediparse.infrastructure.parquet_file import (
     note_identity_error,
     parse_diagnosis,
@@ -83,5 +83,5 @@ class ParquetPredictionTable:
                 predicted=row["predicted"],
                 score=row["score"],
             )
-        except (InvalidNoteIdError, NoteSubjectMismatchError) as error:
+        except NoteIdentityError as error:
             raise note_identity_error(self.path, error) from None

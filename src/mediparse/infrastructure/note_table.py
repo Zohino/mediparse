@@ -11,7 +11,7 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
-from mediparse.domain.note import InvalidNoteIdError, NoteSubjectMismatchError
+from mediparse.domain.note import NoteIdentityError
 from mediparse.infrastructure.parquet_file import (
     note_identity_error,
     read_table,
@@ -73,7 +73,7 @@ class ParquetNoteTable:
                 row["text"],
                 frozenset(diagnosis for diagnosis in Diagnosis if row[diagnosis.value]),
             )
-        except (InvalidNoteIdError, NoteSubjectMismatchError) as error:
+        except NoteIdentityError as error:
             raise note_identity_error(self.path, error) from None
 
     def _language(self, value: str) -> Language:
