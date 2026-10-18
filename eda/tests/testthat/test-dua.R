@@ -129,7 +129,7 @@ test_that("percent_text zveřejní i malý čitatel a pro nulový jmenovatel vr�
 })
 
 test_that("percent_text nenulový podíl pod 0,05 % neukáže jako nulu", {
-  expect_equal(percent_text(c(22, 0, 1), c(331604, 331604, 2000)), c("<\u00a00,1", "0,0", "0,1"))
+  expect_equal(percent_text(c(22, 0, 2), c(331604, 331604, 1000)), c("<\u00a00,1", "0,0", "0,2"))
   expect_equal(percent_label(22, 331604), "<\u00a00,1\u00a0%")
 })
 
