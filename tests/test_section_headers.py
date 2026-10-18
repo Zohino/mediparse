@@ -1,4 +1,4 @@
-"""Lexikon sekcí, normalizace hlavičky a rozpoznání hlaviček v textu zprávy."""
+"""Lexikon sekcí, normalizace hlavičky, rozpoznání hlaviček a rozdělení zprávy na sekce."""
 
 from __future__ import annotations
 
@@ -8,6 +8,7 @@ from typing import Final
 import pytest
 from pydantic import ValidationError
 
+from mediparse.domain.language import Language
 from mediparse.domain.note_text import line_headers
 from mediparse.domain.section_headers import (
     HEADER_PATTERN,
@@ -21,6 +22,7 @@ from mediparse.domain.section_headers import (
 )
 from mediparse.infrastructure.sampler_config import load_sampler_config
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
+from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
 from tests.support import (
     REPOSITORY_CONFIG,
     REPOSITORY_CORPUS,
@@ -239,28 +241,33 @@ def test_repeat_through_other_synonym_returns_first_only() -> None:
     assert _found(text) == [("discharge_diagnosis", "Discharge Diagnosis:")]
 
 
+REPOSITORY_LEXICON: Final = load_section_lexicon(REPOSITORY_SECTION_HEADERS)
+
+
+def _synthetic_notes() -> dict[str, str]:
+    notes = CorpusDirectory(REPOSITORY_CORPUS).notes(Language.EN)
+    assert notes
+    return notes
+
+
 def test_synthetic_corpus_matches_generator_headers() -> None:
     """Hlavičky i pozice odpovídají tomu, co do zprávy umístil generátor."""
-    lexicon = load_section_lexicon(REPOSITORY_SECTION_HEADERS)
     headers = {
         key: header
         for key, header in load_sampler_config(
             REPOSITORY_CONFIG
         ).structure.headers.items()
-        if key in lexicon.sections
+        if key in REPOSITORY_LEXICON.sections
     }
     pattern = line_headers(headers.values())
     by_header = {header: key for key, header in headers.items()}
-    notes = sorted((REPOSITORY_CORPUS / "en").glob("*.txt"))
 
-    assert notes
-    for note in notes:
-        text = note.read_text(encoding="utf-8")
+    for note_id, text in _synthetic_notes().items():
         expected = tuple(
             SectionHeader(by_header[m["header"]], m.start(), m.end())
             for m in pattern.finditer(text)
         )
-        assert find_section_headers(text, lexicon) == expected, note.name
+        assert find_section_headers(text, REPOSITORY_LEXICON) == expected, note_id
 
 
 SPLIT_CASES: Final = {
@@ -324,7 +331,11 @@ def test_split_sections_cuts_text_into_named_units(
     assert split_sections(text, DISCHARGE_LEXICON) == expected
 
 
-@pytest.mark.parametrize("text", [case[0] for case in SPLIT_CASES.values()])
+@pytest.mark.parametrize(
+    "text",
+    [case[0] for case in SPLIT_CASES.values()],
+    ids=SPLIT_CASES.keys(),
+)
 def test_split_sections_compose_back_to_original(text: str) -> None:
     """Hlavičky a těla dají v pořadí přesně původní text."""
     sections = split_sections(text, DISCHARGE_LEXICON)
@@ -334,33 +345,26 @@ def test_split_sections_compose_back_to_original(text: str) -> None:
 
 def test_split_synthetic_corpus_composes_originals() -> None:
     """Každá syntetická zpráva se rozpadne na sekce lexikonu a složí se zpět."""
-    lexicon = load_section_lexicon(REPOSITORY_SECTION_HEADERS)
-    notes = sorted((REPOSITORY_CORPUS / "en").glob("*.txt"))
+    for note_id, text in _synthetic_notes().items():
+        sections = split_sections(text, REPOSITORY_LEXICON)
+        found = find_section_headers(text, REPOSITORY_LEXICON)
 
-    assert notes
-    for note in notes:
-        text = note.read_text(encoding="utf-8")
-        sections = split_sections(text, lexicon)
-        found = find_section_headers(text, lexicon)
-
-        assert "".join(s.header + s.body for s in sections) == text, note.name
+        assert "".join(s.header + s.body for s in sections) == text, note_id
         assert [s.section for s in sections] == [OTHER, *(h.section for h in found)], (
-            note.name
+            note_id
         )
 
 
 def test_split_synthetic_corpus_keeps_surgical_history_in_medical_history() -> None:
     """Past Surgical History není hlavička lexikonu a zůstává v těle předchozí sekce."""
-    lexicon = load_section_lexicon(REPOSITORY_SECTION_HEADERS)
     surgical = "Past Surgical History:"
     checked = 0
 
-    for note in sorted((REPOSITORY_CORPUS / "en").glob("*.txt")):
-        text = note.read_text(encoding="utf-8")
+    for note_id, text in _synthetic_notes().items():
         if surgical not in text:
             continue
-        bodies = {s.section: s.body for s in split_sections(text, lexicon)}
-        assert surgical in bodies["past_medical_history"], note.name
+        bodies = {s.section: s.body for s in split_sections(text, REPOSITORY_LEXICON)}
+        assert surgical in bodies["past_medical_history"], note_id
         checked += 1
 
     assert checked
