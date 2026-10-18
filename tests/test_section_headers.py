@@ -61,25 +61,47 @@ def _section(*synonyms: str, label_cs: str = "A") -> dict[str, object]:
 
 
 INVALID_LEXICONS: Final = {
-    "sekce bez synonym": {"sections": {"a": _section()}},
-    "prázdné label_cs": {"sections": {"a": _section("Allergies", label_cs="")}},
-    "kolize dvou sekcí po normalizaci": {
-        "sections": {"a": _section("Allergies"), "b": _section("ALLERGIES.")}
-    },
-    "kolize sekce s preamble": {"preamble": ["Name", "allergies"]},
-    "synonymum s číslicí": {"sections": {"a": _section("Type 2 Diabetes")}},
-    "malé první písmeno": {"sections": {"a": _section("allergies")}},
-    "normalizovaný tvar pod 3 znaky": {"sections": {"a": _section("Ab")}},
-    "neznámý klíč na nejvyšší úrovni": {"extra": 1},
+    "sekce bez synonym": ({"sections": {"a": _section()}}, "at least 1 item"),
+    "prázdné label_cs": (
+        {"sections": {"a": _section("Allergies", label_cs="")}},
+        "at least 1 character",
+    ),
+    "kolize dvou sekcí po normalizaci": (
+        {"sections": {"a": _section("Allergies"), "b": _section("ALLERGIES.")}},
+        "splývají hlavičky: allergies",
+    ),
+    "kolize sekce s preamble": (
+        {"preamble": ["Name", "allergies"]},
+        "splývají hlavičky: allergies",
+    ),
+    "synonymum s číslicí": (
+        {"sections": {"a": _section("Type 2 Diabetes")}},
+        "nesplňuje výraz hlavičky",
+    ),
+    "malé první písmeno": (
+        {"sections": {"a": _section("allergies")}},
+        "nesplňuje výraz hlavičky",
+    ),
+    "odsazené synonymum": (
+        {"sections": {"a": _section(" Allergies")}},
+        "nesplňuje výraz hlavičky",
+    ),
+    "normalizovaný tvar pod 3 znaky": (
+        {"sections": {"a": _section("Ab")}},
+        "kratší než",
+    ),
+    "neznámý klíč na nejvyšší úrovni": ({"extra": 1}, "Extra inputs"),
 }
 
 
 @pytest.mark.parametrize(
-    "overrides", INVALID_LEXICONS.values(), ids=INVALID_LEXICONS.keys()
+    ("overrides", "message"), INVALID_LEXICONS.values(), ids=INVALID_LEXICONS.keys()
 )
-def test_invalid_lexicon_is_rejected(overrides: dict[str, object]) -> None:
-    """Každé porušení pravidla lexikonu zastaví validaci."""
-    with pytest.raises(ValidationError):
+def test_invalid_lexicon_is_rejected(
+    overrides: dict[str, object], message: str
+) -> None:
+    """Každé porušení pravidla lexikonu zastaví validaci se správným důvodem."""
+    with pytest.raises(ValidationError, match=message):
         _lexicon(**overrides)
 
 
