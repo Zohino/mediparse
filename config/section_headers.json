@@ -38,11 +38,11 @@
     },
     "hospital_course": {
       "label_cs": "Průběh hospitalizace",
-      "synonyms": ["Brief Hospital Course", "Hospital Course"]
+      "synonyms": ["Brief Hospital Course"]
     },
     "medications_on_admission": {
       "label_cs": "Léky při přijetí",
-      "synonyms": ["Medications on Admission", "Admission Medications"]
+      "synonyms": ["Medications on Admission"]
     },
     "discharge_medications": {
       "label_cs": "Léky při propuštění",
@@ -54,7 +54,7 @@
     },
     "discharge_diagnosis": {
       "label_cs": "Diagnóza při propuštění",
-      "synonyms": ["Discharge Diagnosis", "Discharge Diagnoses", "Final Diagnosis"]
+      "synonyms": ["Discharge Diagnosis", "Discharge Diagnoses"]
     },
     "discharge_condition": {
       "label_cs": "Stav při propuštění",
