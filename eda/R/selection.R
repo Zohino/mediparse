@@ -112,3 +112,7 @@ corpus_comparison <- function(summaries, coverage, quality, shown,
   }
   out
 }
+
+corpus_size <- function(con) {
+  as.numeric(DBI::dbGetQuery(con, sprintf("SELECT count(*) AS n FROM (%s)", input_corpus_sql(con)))$n)
+}

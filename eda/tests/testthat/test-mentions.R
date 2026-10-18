@@ -70,18 +70,8 @@ MENTIONS <- list(
   symptoms = list(keywords_en = c("fever", "chills", "cough", "chest pain"))
 )
 
-mention_con <- function(texts, codes = rep("Z99", length(texts)), env = parent.frame()) {
-  hadm <- paste0("h", seq_along(texts))
-  notes <- text_notes(paste0(texts, " ", hadm, " ", LONG))
-  notes$hadm_id <- hadm
-  rows <- data.frame(
-    hadm_id = hadm, icd_code = codes, icd_version = "10", stringsAsFactors = FALSE
-  )
-  mimic_con(discharge = notes, diagnoses_icd = rows, env = env)
-}
-
 symptom_row <- function(texts, symptom) {
-  con <- mention_con(texts)
+  con <- corpus_con(texts)
   out <- symptom_mentions(con, CASES, MENTIONS)
   out[out$priznak == symptom, ]
 }
@@ -122,7 +112,7 @@ test_that("zkratky se hledají s rozlišením velikosti písmen a fráze bez ně
     "History of DM2 and CHF.", "mi casa, af, hf, dm", "Looking AFTER the MIXED case",
     "Diabetes today", "DIABETES today", "Prior MI noted", "Known AF, no HF."
   )
-  con <- mention_con(texts, c("E11", "J18", "I21", "Z99", "Z99", "Z99", "I48"))
+  con <- corpus_con(texts, c("E11", "J18", "I21", "Z99", "Z99", "Z99", "I48"))
 
   out <- mention_agreement(con, CASES, MENTIONS)
 
@@ -135,7 +125,7 @@ test_that("zkratky se hledají s rozlišením velikosti písmen a fráze bez ně
 
 test_that("mezera ve frázi se shoduje s libovolným bílým znakem včetně zalomení řádku", {
   texts <- c("Prior myocardial\ninfarction.", "Old myocardial  infarction.", "Myocardial infarction.")
-  con <- mention_con(texts)
+  con <- corpus_con(texts)
 
   out <- mention_agreement(con, CASES, MENTIONS)
   fever <- symptom_row(c("Has chest\npain today."), "chest pain")
@@ -145,7 +135,7 @@ test_that("mezera ve frázi se shoduje s libovolným bílým znakem včetně zal
 })
 
 test_that("zmínka až na konci velmi dlouhé zprávy se najde", {
-  con <- mention_con(paste0(strrep("lorem ipsum ", 1000), "pneumonia"), "J18")
+  con <- corpus_con(paste0(strrep("lorem ipsum ", 1000), "pneumonia"), "J18")
 
   out <- mention_agreement(con, CASES, MENTIONS)
 
@@ -155,7 +145,7 @@ test_that("zmínka až na konci velmi dlouhé zprávy se najde", {
 })
 
 test_that("negovaná zmínka je zmínka bez tvrzení a kladná zmínka vedle ní tvrzení dá", {
-  con <- mention_con(c(
+  con <- corpus_con(c(
     "No pneumonia.", "No pneumonia on CXR; treated for pneumonia.", "Pneumonia on CXR."
   ))
 
@@ -174,7 +164,7 @@ test_that("negace pokrývá výčet v okně, ale ne tečku ani víc než 40 znak
     paste0("No ", filler, "fever"),
     "Family history of diabetes."
   )
-  con <- mention_con(texts)
+  con <- corpus_con(texts)
 
   symptoms <- symptom_mentions(con, CASES, MENTIONS)
   fever <- symptoms[symptoms$priznak == "fever", ]
@@ -214,7 +204,7 @@ test_that("do populace patří jen zprávy vstupního korpusu a icd se rovná pr
 })
 
 test_that("zpráva se zmínkou bez kódu kandidáta zvedne zminka, ale ne icd_zminka", {
-  con <- mention_con(c("Diabetes noted.", "Diabetes noted twice.", "Other."), c("E11", "Z99", "E11"))
+  con <- corpus_con(c("Diabetes noted.", "Diabetes noted twice.", "Other."), c("E11", "Z99", "E11"))
 
   row <- mention_agreement(con, CASES, MENTIONS)
   row <- row[row$kandidat == "dm", ]
@@ -223,7 +213,7 @@ test_that("zpráva se zmínkou bez kódu kandidáta zvedne zminka, ale ne icd_zm
 })
 
 test_that("počty tvrzení kandidáta se dělí na zprávy s kódem a bez něj", {
-  con <- mention_con(c("No diabetes.", "Diabetes.", "Diabetes DM2."), c("E11", "E11", "Z99"))
+  con <- corpus_con(c("No diabetes.", "Diabetes.", "Diabetes DM2."), c("E11", "E11", "Z99"))
 
   row <- mention_agreement(con, CASES, MENTIONS)
   row <- row[row$kandidat == "dm", ]
@@ -235,7 +225,7 @@ test_that("počty tvrzení kandidáta se dělí na zprávy s kódem a bez něj",
 
 test_that("symptom_mentions spočítá zmínky a tvrzení lexikonu a celkem", {
   texts <- c("Fever and cough.", "No fever.", "Denies fever, cough.", "Nothing.")
-  con <- mention_con(texts)
+  con <- corpus_con(texts)
 
   out <- symptom_mentions(con, CASES, MENTIONS)
 
@@ -247,7 +237,7 @@ test_that("symptom_mentions spočítá zmínky a tvrzení lexikonu a celkem", {
 })
 
 test_that("mention_flags vytvoří dočasnou tabulku jednou a vrátí její název", {
-  con <- mention_con(c("Diabetes."))
+  con <- corpus_con(c("Diabetes."))
 
   first <- mention_flags(con, CASES, MENTIONS)
   DBI::dbExecute(con, sprintf("DELETE FROM %s", first))

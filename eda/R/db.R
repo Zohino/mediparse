@@ -58,3 +58,8 @@ eda_check_python <- function() {
   }
   invisible(python)
 }
+
+config_path <- function(name) {
+  root <- Sys.getenv("PIXI_PROJECT_ROOT", file.path("..", "..", ".."))
+  file.path(root, "config", name)
+}

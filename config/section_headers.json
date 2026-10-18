@@ -1,0 +1,82 @@
+{
+  "sections": {
+    "allergies": {
+      "label_cs": "Alergie",
+      "synonyms": ["Allergies"]
+    },
+    "chief_complaint": {
+      "label_cs": "Hlavní obtíže",
+      "synonyms": ["Chief Complaint"]
+    },
+    "major_procedure": {
+      "label_cs": "Významný chirurgický nebo invazivní výkon",
+      "synonyms": ["Major Surgical or Invasive Procedure"]
+    },
+    "history_of_present_illness": {
+      "label_cs": "Anamnéza současného onemocnění",
+      "synonyms": ["History of Present Illness", "History of the Present Illness"]
+    },
+    "past_medical_history": {
+      "label_cs": "Dřívější anamnéza",
+      "synonyms": ["Past Medical History"]
+    },
+    "social_history": {
+      "label_cs": "Sociální anamnéza",
+      "synonyms": ["Social History"]
+    },
+    "family_history": {
+      "label_cs": "Rodinná anamnéza",
+      "synonyms": ["Family History"]
+    },
+    "physical_exam": {
+      "label_cs": "Fyzikální vyšetření",
+      "synonyms": ["Physical Exam", "Physical Examination"]
+    },
+    "pertinent_results": {
+      "label_cs": "Významné výsledky",
+      "synonyms": ["Pertinent Results"]
+    },
+    "hospital_course": {
+      "label_cs": "Průběh hospitalizace",
+      "synonyms": ["Brief Hospital Course"]
+    },
+    "medications_on_admission": {
+      "label_cs": "Léky při přijetí",
+      "synonyms": ["Medications on Admission"]
+    },
+    "discharge_medications": {
+      "label_cs": "Léky při propuštění",
+      "synonyms": ["Discharge Medications"]
+    },
+    "discharge_disposition": {
+      "label_cs": "Místo určení po propuštění",
+      "synonyms": ["Discharge Disposition"]
+    },
+    "discharge_diagnosis": {
+      "label_cs": "Diagnóza při propuštění",
+      "synonyms": ["Discharge Diagnosis", "Discharge Diagnoses"]
+    },
+    "discharge_condition": {
+      "label_cs": "Stav při propuštění",
+      "synonyms": ["Discharge Condition"]
+    },
+    "discharge_instructions": {
+      "label_cs": "Pokyny při propuštění",
+      "synonyms": ["Discharge Instructions"]
+    },
+    "followup_instructions": {
+      "label_cs": "Pokyny k navazující péči",
+      "synonyms": ["Followup Instructions", "Follow-up Instructions", "Follow up Instructions"]
+    }
+  },
+  "preamble": [
+    "Name",
+    "Unit No",
+    "Admission Date",
+    "Discharge Date",
+    "Date of Birth",
+    "Sex",
+    "Service",
+    "Attending"
+  ]
+}

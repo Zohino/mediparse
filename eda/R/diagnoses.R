@@ -32,11 +32,6 @@ BAND_LABELS <- c(
   pod = "pod pásmem", v = "v pásmu", nad = "nad pásmem", nelze = "nelze posoudit"
 )
 
-config_path <- function(name) {
-  root <- Sys.getenv("PIXI_PROJECT_ROOT", file.path("..", "..", ".."))
-  file.path(root, "config", name)
-}
-
 candidates_path <- function() config_path("diagnosis_candidates.json")
 
 candidate_labels <- function(keys, candidates) {
@@ -454,14 +449,4 @@ candidate_table <- function(published, candidates) {
     stringsAsFactors = FALSE,
     row.names = NULL
   )
-}
-
-join_labels <- function(labels) {
-  if (length(labels) == 0L) {
-    return("žádný")
-  }
-  if (length(labels) == 1L) {
-    return(labels)
-  }
-  paste0(paste(utils::head(labels, -1L), collapse = ", "), " a ", utils::tail(labels, 1L))
 }
