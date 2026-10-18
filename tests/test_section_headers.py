@@ -91,6 +91,10 @@ INVALID_LEXICONS: Final = {
         {"sections": {"a": _section("Ab")}},
         "kratší než",
     ),
+    "vyhrazený klíč other": (
+        {"sections": {"other": _section("Allergies")}},
+        "vyhrazený klíč: other",
+    ),
     "neznámý klíč na nejvyšší úrovni": ({"extra": 1}, "Extra inputs"),
 }
 

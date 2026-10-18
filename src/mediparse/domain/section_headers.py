@@ -10,6 +10,8 @@ from typing import Annotated, Final, Self
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 MIN_NORMALIZED_CHARS: Final = 3
+# Klíč pro text mimo rozpoznané sekce; v lexikonu být nesmí, jinak by splynul se zbytkem.
+OTHER: Final = "other"
 # Pravidlo hlavičky má tři části a každá má protějšek v eda/R/sections.R:
 # HEADER_PATTERN, normalized (normalized_sql) a MIN_NORMALIZED_CHARS (MIN_HEADER_CHARS).
 # Sešit 9 měřil pokrytí lexikonu právě jím, změna se dělá v obou. Délku hlídá validace
@@ -52,6 +54,9 @@ class SectionLexicon(BaseModel):
 
     @model_validator(mode="after")
     def _synonyms_are_recognizable_and_unique(self) -> Self:
+        if OTHER in self.sections:
+            msg = f"Sekce lexikonu nesmí mít vyhrazený klíč: {OTHER}."
+            raise ValueError(msg)
         synonyms = [s for section in self.sections.values() for s in section.synonyms]
         for synonym in synonyms:
             _require_recognizable(synonym)
