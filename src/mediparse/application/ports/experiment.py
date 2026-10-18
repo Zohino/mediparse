@@ -1,4 +1,4 @@
-"""Porty experimentu ML: vstupní tabulka, klasifikátor a predikce."""
+"""Porty experimentu ML: vstupní tabulka, hotový split, klasifikátor a predikce."""
 
 from __future__ import annotations
 
@@ -9,6 +9,7 @@ if TYPE_CHECKING:
 
     from mediparse.domain.evaluation import Classification, Prediction
     from mediparse.domain.input_note import InputNote
+    from mediparse.domain.split import SharedSplit
 
 
 class InputTable(Protocol):
@@ -16,6 +17,13 @@ class InputTable(Protocol):
 
     def read(self) -> tuple[InputNote, ...]:
         """Přečte řádky v pořadí tabulky."""
+
+
+class SplitSource(Protocol):
+    """Zdroj hotového splitu, který spočetl krok před tréninkem a evaluací."""
+
+    def read(self) -> SharedSplit:
+        """Vrátí split s jeho parametry."""
 
 
 class TextClassifier(Protocol):

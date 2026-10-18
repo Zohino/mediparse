@@ -1,7 +1,8 @@
 """Vstupní bod kroku Snakemake ``evaluate_smoketest_model``: metriky z predikcí.
 
 Cesty určuje pravidlo; skript workflow jen rozbalí objekt ``snakemake`` a zavolá
-``main``. Pracuje jen s tabulkou predikcí, proto smí běžet kdekoli.
+``main``. Čte i zprávy a split, aby ověřil úplnost predikcí; u reálné kohorty proto
+běží tam, kde jsou data.
 """
 
 from __future__ import annotations
@@ -13,8 +14,10 @@ from mediparse.application.model_evaluation import ModelEvaluation
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.metrics_table import ParquetMetricsTable
+from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.sklearn_metrics import SklearnScorer
+from mediparse.infrastructure.split_table import ParquetSplitTable
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -22,25 +25,29 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-def main(*, predictions: Path, metrics: Path, log: Path) -> ExitCode:
+def main(
+    *, predictions: Path, notes: Path, split: Path, metrics: Path, log: Path
+) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
 
     Returns:
         Návratový kód kroku.
     """
     configure_logging(log)
-    return run(predictions=predictions, metrics=metrics)
+    return run(predictions=predictions, notes=notes, split=split, metrics=metrics)
 
 
 @refusing_invalid_input
-def run(*, predictions: Path, metrics: Path) -> ExitCode:
-    """Složí use case z tabulky predikcí a adaptérů scikit-learn a spočte metriky.
+def run(*, predictions: Path, notes: Path, split: Path, metrics: Path) -> ExitCode:
+    """Složí use case z tabulek predikcí, zpráv, splitu a adaptérů scikit-learn.
 
     Returns:
-        OK po zápisu metrik; REFUSED pro chybějící nebo neplatné predikce.
+        OK po zápisu metrik; REFUSED pro chybějící či neplatné vstupy a neúplné predikce.
     """
     step = ModelEvaluation(
         predictions=ParquetPredictionTable(predictions),
+        table=ParquetNoteTable(notes),
+        split=ParquetSplitTable(split),
         scorer=SklearnScorer(),
         metrics=ParquetMetricsTable(metrics),
     )
