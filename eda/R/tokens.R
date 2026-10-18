@@ -54,36 +54,16 @@ batch_counts <- function(chunk, tokenizers) {
 
 note_tokens <- function(con, table, tokenizers, batch = 2000L) {
   name <- tokens_table_name(table)
-  if (name %in% DBI::dbListTables(con)) {
-    return(name)
-  }
-  rows <- paste0(name, "_rows")
-  quote <- function(identifier) DBI::dbQuoteIdentifier(con, identifier)
-  columns <- vapply(names(tokenizers), function(column) {
-    paste(quote(column), "INTEGER")
-  }, character(1))
-  DBI::dbExecute(con, sprintf(
-    "CREATE TEMP TABLE %s (note_id VARCHAR, %s)", quote(name), paste(columns, collapse = ", ")
-  ))
-  done <- FALSE
-  on.exit({
-    DBI::dbExecute(con, sprintf("DROP TABLE IF EXISTS %s", quote(rows)))
-    if (!done) DBI::dbExecute(con, sprintf("DROP TABLE IF EXISTS %s", quote(name)))
-  })
-  DBI::dbExecute(con, sprintf("
-    CREATE TEMP TABLE %s AS
-    SELECT row_number() OVER (ORDER BY note_id) AS rn, note_id, text FROM %s
-  ", quote(rows), quote(table)))
-  total <- as.numeric(DBI::dbGetQuery(con, sprintf("SELECT count(*) AS n FROM %s", quote(rows)))$n)
-  for (index in seq_len(ceiling(total / batch))) {
-    chunk <- DBI::dbGetQuery(con, sprintf(
-      "SELECT note_id, text FROM %s WHERE rn BETWEEN %.0f AND %.0f ORDER BY rn",
-      quote(rows), (index - 1) * batch + 1, index * batch
-    ))
-    DBI::dbAppendTable(con, name, batch_counts(chunk, tokenizers))
-  }
-  done <- TRUE
-  name
+  columns <- c(
+    note_id = "VARCHAR",
+    setNames(rep("INTEGER", length(tokenizers)), names(tokenizers))
+  )
+  rows_sql <- sprintf("SELECT note_id, text FROM %s", DBI::dbQuoteIdentifier(con, table))
+  batched_table(
+    con, name, columns, rows_sql,
+    function(chunk) batch_counts(chunk, tokenizers),
+    batch = batch
+  )
 }
 
 per_tokenizer <- function(con, tables, columns, query) {
