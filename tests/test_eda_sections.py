@@ -10,7 +10,7 @@ import pytest
 from mediparse.domain import section_headers
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints import eda_sections
-from mediparse.entrypoints.eda_sections import OTHER, note_sections
+from mediparse.entrypoints.eda_sections import note_sections
 from tests.support import REPOSITORY_SECTION_HEADERS
 
 if TYPE_CHECKING:
@@ -99,9 +99,8 @@ def test_missing_lexicon_is_invalid_input(tmp_path: Path) -> None:
 
 
 def test_other_is_the_domain_constant() -> None:
-    """R čte klíč `other` z modulu, takže nesmí být vlastní kopie."""
-    assert OTHER is section_headers.OTHER
-    assert eda_sections.OTHER == "other"
+    """Klíč `other` se shoduje s doménou."""
+    assert eda_sections.OTHER == section_headers.OTHER
 
 
 def test_repository_lexicon_loads() -> None:

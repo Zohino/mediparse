@@ -40,6 +40,7 @@ skeleton <- section_skeleton(con, lexicon)
 consistency <- order_consistency(con, skeleton)
 precedence <- section_precedence(con, skeleton)
 per_note <- sections_per_note(con, lexicon)
+per_note_percentiles <- section_count_percentiles(con, lexicon)
 body_len <- body_lengths(con, skeleton, sections_py$OTHER)
 strip_d2 <- strip_share(con, lexicon)
 headerless <- headerless_notes(con, sections_py$OTHER)
@@ -49,7 +50,7 @@ skeleton_floor <- coverage_threshold_text(SKELETON_COVERAGE)
 
 # Úvod
 
-Tento sešit je devátým z řady sešitů explorační analýzy a otevírá fázi zpracování struktury textu. Předchozí sešity popsaly korpus, diagnózy a jejich zmínky v textu. Propouštěcí zpráva MIMIC má ale vnitřní strukturu: je rozdělená na oddíly, jako jsou Chief Complaint, Hospital Course nebo Discharge Diagnosis. Parser sekcí, který vznikne později, bude oddíly rozpoznávat podle seznamu hlaviček, tedy lexikonu sekcí. Ten musí odpovídat datům, ne odhadu. Sešit si klade tyto cíle:
+Tento sešit je devátým z řady sešitů explorační analýzy a otevírá fázi zpracování struktury textu. Předchozí sešity popsaly korpus, diagnózy a jejich zmínky v textu. Propouštěcí zpráva MIMIC má ale vnitřní strukturu: je rozdělená na oddíly, jako jsou Chief Complaint, Hospital Course nebo Discharge Diagnosis. Parser sekcí rozpoznává oddíly podle seznamu hlaviček, tedy lexikonu sekcí (kapitola @sec-segmentace používá parser k rozdělení zpráv). Lexikon musí odpovídat datům, ne odhadu. Sešit si klade tyto cíle:
 
 - zjistit, které hlavičky se v textu zpráv vyskytují a v kolika zprávách,
 - změřit, jak lexikon sekcí šablony MIMIC tyto hlavičky pokrývá,
@@ -72,7 +73,7 @@ Pojmy a jednotky jsou tyto:
 
 - *populací* je vstupní korpus z pátého sešitu, tedy tentýž jako v sedmém a osmém sešitu: propouštěcí zprávy s kódem ICD, dlouhé aspoň `r short_text` a bez přesných duplicit. Vstupní korpus tvoří `r notes_text`. Jednotkou je zpráva a počítá se celý korpus, ne vzorek,
 - *hlavička* je řádek, který po volitelném odsazení (mezery, tabulátory) začíná velkým písmenem a dalším písmenem, pokračuje až čtyřiceti sedmi znaky z množiny písmen, mezery, pomlčky, lomítka, ampersandu, závorek, apostrofu a tečky a končí dvojtečkou. Normalizovaný tvar zachyceného řetězce má aspoň `r MIN_HEADER_CHARS` znaky. Výraz RE2 s režimem po řádcích (`(?m)`) je v konstantě `HEADER_PATTERN`. Číslice v něm nejsou, takže čas „10:30“ hlavičkou není. Hlavičku, která stojí na řádku za jiným polem, výraz nevidí,
-- *normalizace* hlavičky je převod na malá písmena, sloučení bílých znaků do jedné mezery a odříznutí koncových mezer a teček. Je to jediná funkce (`normalized_sql`), kterou se normalizují hlavičky z textu i synonyma z lexikonu. Hlavička je v lexikonu nalezená, když se její normalizovaný tvar rovná normalizovanému synonymu; stejné pravidlo převezme parser sekcí. Zobrazuje se nejčastější původní zápis, při shodě první podle pořadí znaků (velká písmena před malými),
+- *normalizace* hlavičky je převod na malá písmena, sloučení bílých znaků do jedné mezery a odříznutí koncových mezer a teček. Je to jediná funkce (`normalized_sql`), kterou se normalizují hlavičky z textu i synonyma z lexikonu. Hlavička je v lexikonu nalezená, když se její normalizovaný tvar rovná normalizovanému synonymu; stejné pravidlo používá parser sekcí (`domain/section_headers.py`), který rozděluje zprávy v kapitole @sec-segmentace. Zobrazuje se nejčastější původní zápis, při shodě první podle pořadí znaků (velká písmena před malými),
 - *lexikon* je `config/section_headers.json`: `r section_count` šablony MIMIC, každá s českým popiskem a celofrázovými synonymy (celkem `r synonym_count`), a seznam administrativních polí zprávy (`r preamble_count`), která nejsou sekcemi. Seed vychází z lexikonu předchozího projektu autora, jehož čísla byla předběžná. Oproti němu přidává sekce Major Surgical or Invasive Procedure a Discharge Disposition, zkratka HPI ze sekce Chief Complaint vypadla a vypouští podsekce (vitální funkce, chirurgická anamnéza) i generická jednoslovná synonyma, která by otevírala sekci uvnitř těla jiné sekce. Zkratky se nepřebírají, protože se na začátku řádku s dvojtečkou objevují i uvnitř těl. Synonyma jsou pravopisné varianty názvu sekce ze šablony MIMIC (člen, číslo, přípona -ation, pomlčka, mezera); vyřazeny jsou podnadpisy uvnitř sekcí (například Primary a Secondary Diagnosis, Hospital Course by Problem), alternativní názvy a zkratky. Čísla v tomto sešitu pocházejí z dat tohoto projektu,
 - *dokumentová frekvence* hlavičky je počet zpráv, v nichž se vyskytuje aspoň jednou; podíl je vztažený k počtu zpráv korpusu. *Opakování* sekce je počet zpráv s aspoň dvěma výskyty kteréhokoli jejího synonyma; opakování synonyma je počet zpráv s aspoň dvěma výskyty téhož synonyma. Synonymum, které se ve zprávě objeví dvakrát, se nejspíš používá i uvnitř těla, a je tedy kandidátem na falešnou hranici sekce,
 - *potlačení*: řetězec hlavičky je popisek z dat. Zveřejní se jen hlavička, kterou má aspoň `r coverage_floor` zpráv korpusu a nejméně `r count_floor`. Samotný práh `r count_floor` nestačí, protože výraz zachytí i úlomky vět končící dvojtečkou. Žebříček uvádí nejvýše `r ranking_size`. Synonyma a klíče sekcí pocházejí z konfigurace, ne z dat, a zveřejňují se všechna včetně nuly. Počty zpráv jsou metrika textu a nepotlačují se; počet unikátních hlaviček je číslo bez popisku,
@@ -170,8 +171,9 @@ Zprávy vstupního korpusu rozdělil parser sekcí. Kapitola popisuje kostru ša
 #| tbl-colwidths: [24, 30, 10, 12, 12, 12]
 export_table(
   skeleton_table(skeleton),
-  col.names = c("Sekce", "Popisek", "V kostře", "Pokrytí (%)", "Medián pozice", "IQR pozice"),
-  align = "llcrrr",
+  col.names = TABLE_LAYOUTS[["tbl-kostra"]]$col.names,
+  align = TABLE_LAYOUTS[["tbl-kostra"]]$align,
+  widths = TABLE_LAYOUTS[["tbl-kostra"]]$widths,
   code = "sekce"
 )
 ```
@@ -196,7 +198,7 @@ export_figure(precedence_plot(precedence, skeleton), height_cm = 13)
 
 ## Sekce na zprávu {#sec-sekce-na-zpravu}
 
-`r sections_per_note_text(per_note)`
+`r sections_per_note_text(per_note, per_note_percentiles)`
 
 ```{r}
 #| label: fig-sekce-na-zpravu
@@ -218,8 +220,9 @@ export_figure(sections_per_note_plot(per_note), height_cm = 8)
 #| tbl-colwidths: [24, 34, 10, 10, 11, 11]
 export_table(
   body_length_table(body_len),
-  col.names = c("Sekce", "Popisek", "Zprávy se sekcí", "Medián", "p75", "p95"),
-  align = "llrrrr",
+  col.names = TABLE_LAYOUTS[["tbl-delky"]]$col.names,
+  align = TABLE_LAYOUTS[["tbl-delky"]]$align,
+  widths = TABLE_LAYOUTS[["tbl-delky"]]$widths,
   code = "sekce"
 )
 ```
@@ -236,8 +239,9 @@ export_table(
 #| tbl-colwidths: [30, 15, 15, 20, 20]
 export_table(
   headerless_table(headerless),
-  col.names = c("Skupina", "Zprávy", "Podíl (%)", "Medián délky", "p95 délky"),
-  align = "lrrrr"
+  col.names = TABLE_LAYOUTS[["tbl-bez-nadpisu"]]$col.names,
+  align = TABLE_LAYOUTS[["tbl-bez-nadpisu"]]$align,
+  widths = TABLE_LAYOUTS[["tbl-bez-nadpisu"]]$widths
 )
 ```
 
@@ -257,7 +261,7 @@ Dokument ověřil seed lexikon sekcí na vstupním korpusu. Pro další práci z
 - **Kandidáti na doplnění.** `r candidates_text(candidates, totals)` Do lexikonu patří jen samostatná sekce šablony; pole a podnadpisy uvnitř jiné sekce sekcemi nejsou a lexikon je nepřebírá, i když je má většina zpráv.
 - **Mrtvá synonyma.** `r dead_synonyms_text(synonyms, totals)`
 - **Opakování.** `r repeated_synonyms_text(synonyms, totals)`
-- **Pro parser.** Parser sekcí čte lexikon z `config/section_headers.json` a převezme pravidlo hlavičky a normalizace z kapitoly @sec-data.
+- **Pro parser.** Parser sekcí čte lexikon z `config/section_headers.json` a používá pravidlo hlavičky a normalizace z kapitoly @sec-data; rozdělení zpráv je v kapitole @sec-segmentace.
 - **Kostra.** `r skeleton_text(skeleton, consistency)`
 - **Strip D2.** `r strip_share_text(strip_d2)`
 - **Délky.** `r body_length_text(body_len, sections_py$OTHER)`

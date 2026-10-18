@@ -49,6 +49,23 @@ SECTION_FORMS <- c("sekce", "sekce", "sekcí")
 CHAR_FORMS <- c("znak", "znaky", "znaků")
 NOTE_FORMS <- c("zpráva", "zprávy", "zpráv")
 
+# Rozvržení tabulek kapitoly; sešit i test exportu je berou odsud. Šířky se opakují v
+# `tbl-colwidths` chunku (Quarto je čte z hlavičky chunku), shodu hlídá test.
+TABLE_LAYOUTS <- list(
+  `tbl-kostra` = list(
+    col.names = c("Sekce", "Popisek", "V kostře", "Pokrytí (%)", "Medián pozice", "IQR pozice"),
+    align = "llcrrr", widths = c(24, 30, 10, 12, 12, 12)
+  ),
+  `tbl-delky` = list(
+    col.names = c("Sekce", "Popisek", "Zprávy se sekcí", "Medián", "p75", "p95"),
+    align = "llrrrr", widths = c(24, 34, 10, 10, 11, 11)
+  ),
+  `tbl-bez-nadpisu` = list(
+    col.names = c("Skupina", "Zprávy", "Podíl (%)", "Medián délky", "p95 délky"),
+    align = "lrrrr", widths = c(30, 15, 15, 20, 20)
+  )
+)
+
 lexicon_keys <- function(lexicon) {
   sections <- lexicon$sections[!duplicated(lexicon$sections$sekce), , drop = FALSE]
   data.frame(
@@ -64,6 +81,10 @@ write_temp <- function(con, name, frame) {
 
 # Pozice je pořadí mezi rozpoznanými sekcemi zprávy, protože `position` z Pythonu počítá i `other`.
 # Díky pravidlu prvního výskytu má sekce ve zprávě nejvýš jednu pozici.
+# Kostra jde první, pak medián pozice, sestupné pokrytí a nakonec pořadí v lexikonu; pořadí
+# nesmí záviset na tom, v jakém pořadí vrátí řádky databáze.
+skeleton_order <- function(frame) order(!frame$v_kostre, frame$median, -frame$n, frame$poradi)
+
 section_skeleton <- function(con, lexicon) {
   keys <- write_temp(con, KEYS_TABLE, lexicon_keys(lexicon))
   out <- DBI::dbGetQuery(con, sprintf("
@@ -81,12 +102,12 @@ section_skeleton <- function(con, lexicon) {
       (SELECT count(DISTINCT note_id) FROM %1$s) AS celkem,
       st.median, st.q1, st.q3
     FROM %2$s k LEFT JOIN stats st ON st.sekce = k.sekce
+    ORDER BY k.poradi
   ", SECTIONS_TABLE, keys))
   out <- as_numeric_columns(out, c("poradi", "n", "celkem", "median", "q1", "q3"))
   out$iqr <- out$q3 - out$q1
   out$v_kostre <- out$celkem > 0 & out$n / out$celkem >= SKELETON_COVERAGE
-  placed <- order(!out$v_kostre, out$median, -out$n, out$poradi)
-  out <- out[placed, , drop = FALSE]
+  out <- out[skeleton_order(out), , drop = FALSE]
   out$kostra <- ifelse(out$v_kostre, cumsum(out$v_kostre), NA_integer_)
   rownames(out) <- NULL
   out
@@ -205,15 +226,19 @@ skeleton_text <- function(skeleton, consistency) {
   )
 }
 
+notes_section_counts_sql <- function(keys) {
+  sprintf("
+    SELECT s.note_id, count(k.sekce) AS pocet
+    FROM %s s LEFT JOIN %s k ON k.sekce = s.section
+    GROUP BY s.note_id
+  ", SECTIONS_TABLE, keys)
+}
+
 sections_per_note <- function(con, lexicon) {
   keys <- write_temp(con, KEYS_TABLE, lexicon_keys(lexicon))
-  found <- DBI::dbGetQuery(con, sprintf("
-    SELECT pocet, count(*) AS n FROM (
-      SELECT s.note_id, count(k.sekce) AS pocet
-      FROM %s s LEFT JOIN %s k ON k.sekce = s.section
-      GROUP BY s.note_id
-    ) GROUP BY pocet
-  ", SECTIONS_TABLE, keys))
+  found <- DBI::dbGetQuery(con, sprintf(
+    "SELECT pocet, count(*) AS n FROM (%s) GROUP BY pocet", notes_section_counts_sql(keys)
+  ))
   out <- data.frame(pocet = 0:nrow(lexicon_keys(lexicon)))
   out$n <- as.numeric(found$n[match(out$pocet, found$pocet)])
   out$n[is.na(out$n)] <- 0
@@ -221,14 +246,14 @@ sections_per_note <- function(con, lexicon) {
   out
 }
 
-sections_per_note_percentiles <- function(counts) {
-  total <- sum(counts$n)
-  if (total == 0) {
-    return(c(p10 = NA_real_, p50 = NA_real_, p75 = NA_real_, p95 = NA_real_, maximum = NA_real_))
-  }
-  cumulative <- cumsum(counts$n)
-  at <- function(share) as.numeric(counts$pocet[which(cumulative >= share * total - 1e-9)[[1]]])
-  c(p10 = at(0.10), p50 = at(0.50), p75 = at(0.75), p95 = at(0.95), maximum = max(counts$pocet[counts$n > 0]))
+section_count_percentiles <- function(con, lexicon) {
+  keys <- write_temp(con, KEYS_TABLE, lexicon_keys(lexicon))
+  row <- DBI::dbGetQuery(con, sprintf("
+    SELECT quantile_disc(pocet, 0.10) AS p10, quantile_disc(pocet, 0.50) AS p50,
+      quantile_disc(pocet, 0.75) AS p75, quantile_disc(pocet, 0.95) AS p95, max(pocet) AS maximum
+    FROM (%s)
+  ", notes_section_counts_sql(keys)))
+  unlist(lapply(row, as.numeric))
 }
 
 sections_per_note_plot <- function(counts) {
@@ -243,11 +268,10 @@ sections_per_note_plot <- function(counts) {
     theme_thesis()
 }
 
-sections_per_note_text <- function(counts) {
+sections_per_note_text <- function(counts, percentiles) {
   if (sum(counts$n) == 0) {
     return(paste("Počet sekcí na zprávu", UNDECIDABLE_TEXT))
   }
-  percentiles <- sections_per_note_percentiles(counts)
   without <- counts$n[counts$pocet == 0]
   sprintf(
     "Počet rozpoznaných sekcí lexikonu na zprávu: medián %s (p10 %s, p75 %s, p95 %s, maximum %s). Žádnou sekci nemá %s (%s).",
@@ -307,7 +331,6 @@ strip_share <- function(con, lexicon) {
     FROM per_note
   ", DBI::dbQuoteString(con, STRIP_SECTION), SECTIONS_TABLE))
   out <- lapply(row, as.numeric)
-  out$podil_textu <- if (out$text_celkem > 0) out$text_sekce / out$text_celkem else NA_real_
   out
 }
 
@@ -403,13 +426,13 @@ headerless_text <- function(headerless) {
   if (without$n == 0) {
     return("Každá zpráva korpusu má aspoň jednu sekci lexikonu.")
   }
-  with <- headerless[headerless$skupina == "se_sekcemi", ]
+  sectioned <- headerless[headerless$skupina == "se_sekcemi", ]
   length_phrase <- function(x) ifelse(is.na(x), "–", count_phrase(x, CHAR_FORMS))
   sprintf(
     "Bez nadpisů je %s korpusu (%s). Medián jejich délky je %s proti %s ve zprávách se sekcemi, p95 je %s proti %s.",
     count_phrase(without$n, NOTE_FORMS), percent_label(without$n, without$celkem),
-    length_phrase(without$p50), length_phrase(with$p50),
-    length_phrase(without$p95), length_phrase(with$p95)
+    length_phrase(without$p50), length_phrase(sectioned$p50),
+    length_phrase(without$p95), length_phrase(sectioned$p95)
   )
 }
 
