@@ -79,12 +79,12 @@ write_temp <- function(con, name, frame) {
   name
 }
 
-# Pozice je pořadí mezi rozpoznanými sekcemi zprávy, protože `position` z Pythonu počítá i `other`.
-# Díky pravidlu prvního výskytu má sekce ve zprávě nejvýš jednu pozici.
 # Kostra jde první, pak medián pozice, sestupné pokrytí a nakonec pořadí v lexikonu; pořadí
 # nesmí záviset na tom, v jakém pořadí vrátí řádky databáze.
 skeleton_order <- function(frame) order(!frame$v_kostre, frame$median, -frame$n, frame$poradi)
 
+# Pozice je pořadí mezi rozpoznanými sekcemi zprávy, protože `position` z Pythonu počítá i `other`.
+# Díky pravidlu prvního výskytu má sekce ve zprávě nejvýš jednu pozici.
 section_skeleton <- function(con, lexicon) {
   keys <- write_temp(con, KEYS_TABLE, lexicon_keys(lexicon))
   out <- DBI::dbGetQuery(con, sprintf("
