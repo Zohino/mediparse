@@ -282,3 +282,195 @@ test_that("skeleton_table projde export_table s rozvržením sešitu, i nad prá
     expect_true(file.exists(file.path(dir, "tbl-kostra.tex")))
   }
 })
+
+STRIP_KEYS <- c("a", "b", STRIP_SECTION)
+LENGTH_ROWS <- data.frame(
+  note_id = c("n1", "n1", "n1", "n2", "n2", "n3", "n3", "n3", "n4", "n5", "n6"),
+  section = c(
+    "other", "a", STRIP_SECTION, "a", "b", "a", STRIP_SECTION, "b", "other", "other", "b"
+  ),
+  span_chars = c(20, 30, 50, 40, 60, 10, 10, 80, 100, 300, 200),
+  body_chars = c(10, 20, 40, 30, 50, 5, 5, 60, 90, 250, 100),
+  stringsAsFactors = FALSE
+)
+
+lengths_con <- function(rows = LENGTH_ROWS, env = parent.frame()) {
+  con <- mimic_con(env = env)
+  rows$position <- as.integer(ave(seq_along(rows$note_id), rows$note_id, FUN = seq_along) - 1L)
+  rows[c("span_chars", "body_chars")] <- lapply(rows[c("span_chars", "body_chars")], as.integer)
+  DBI::dbWriteTable(con, SECTIONS_TABLE, rows, temporary = TRUE, overwrite = TRUE)
+  con
+}
+
+test_that("sections_per_note: rozdělení včetně nuly a percentily", {
+  con <- lengths_con()
+  counts <- sections_per_note(con, mini_lexicon(STRIP_KEYS))
+
+  expect_equal(counts$pocet, 0:3)
+  expect_equal(counts$n, c(2, 1, 2, 1))
+  expect_equal(unique(counts$celkem), 6)
+  expect_equal(
+    sections_per_note_percentiles(counts),
+    c(p10 = 0, p50 = 1, p75 = 2, p95 = 3, maximum = 3)
+  )
+})
+
+test_that("sections_per_note nad prázdnou tabulkou dá nuly a percentily NA", {
+  counts <- sections_per_note(sections_con(list()), mini_lexicon(STRIP_KEYS))
+
+  expect_equal(counts$pocet, 0:3)
+  expect_equal(counts$n, rep(0, 4))
+  expect_true(all(is.na(sections_per_note_percentiles(counts))))
+  expect_match(sections_per_note_text(counts), "nelze posoudit")
+})
+
+test_that("sections_per_note_text jmenuje percentily a zprávy bez sekce", {
+  counts <- sections_per_note(lengths_con(), mini_lexicon(STRIP_KEYS))
+  text <- sections_per_note_text(counts)
+
+  expect_match(text, "medián 1")
+  expect_match(text, "p95 3")
+  expect_match(text, paste0("2", NBSP, "zprávy"))
+})
+
+test_that("body_lengths: medián, p75 a p95 těl po sekcích v pořadí kostry a řádek other", {
+  con <- lengths_con()
+  lexicon <- mini_lexicon(STRIP_KEYS)
+  skeleton <- section_skeleton(con, lexicon)
+  lengths <- body_lengths(con, skeleton, "other")
+
+  expect_equal(lengths$sekce, c("a", "b", STRIP_SECTION, "other"))
+  expect_equal(lengths$n, c(3, 3, 2, 3))
+  expect_equal(lengths$p50, c(20, 60, 5, 90))
+  expect_equal(lengths$p75, c(30, 100, 40, 250))
+  expect_equal(lengths$p95, c(30, 100, 40, 250))
+})
+
+test_that("body_lengths nad prázdnou tabulkou dá řádky s nulou a NA", {
+  con <- sections_con(list())
+  lengths <- body_lengths(con, section_skeleton(con, mini_lexicon(STRIP_KEYS)), "other")
+
+  expect_equal(nrow(lengths), 4L)
+  expect_equal(lengths$n, rep(0, 4))
+  expect_true(all(is.na(lengths$p50)))
+  expect_equal(nrow(body_length_table(lengths)), 4L)
+})
+
+test_that("strip_share: počet a podíl zpráv, podíl textu ze span_chars a medián podílu", {
+  strip <- strip_share(lengths_con(), mini_lexicon(STRIP_KEYS))
+
+  expect_equal(strip$celkem, 6)
+  expect_equal(strip$se_sekci, 2)
+  expect_equal(strip$text_sekce, 60)
+  expect_equal(strip$text_celkem, 900)
+  expect_equal(strip$podil_textu, 60 / 900)
+  expect_equal(strip$median_podilu, 0.3)
+})
+
+test_that("strip_share zastaví render, když STRIP_SECTION není v lexikonu", {
+  expect_error(strip_share(lengths_con(), mini_lexicon(c("a", "b"))), STRIP_SECTION, fixed = TRUE)
+})
+
+test_that("strip_share nad prázdnou tabulkou a bez zprávy se sekcí neshodí věta", {
+  empty <- strip_share(sections_con(list()), mini_lexicon(STRIP_KEYS))
+  expect_match(strip_share_text(empty), "nelze posoudit")
+
+  none <- strip_share(sections_con(list(n1 = "a", n2 = "b")), mini_lexicon(STRIP_KEYS))
+  expect_equal(none$se_sekci, 0)
+  expect_true(is.na(none$median_podilu))
+  expect_match(strip_share_text(none), paste0("0", NBSP, "zpráv"))
+})
+
+test_that("strip_share_text jmenuje podíl zpráv a textu", {
+  text <- strip_share_text(strip_share(lengths_con(), mini_lexicon(STRIP_KEYS)))
+
+  expect_match(text, paste0("2", NBSP, "zprávy"))
+  expect_match(text, paste0("6,7", NBSP, "%"))
+  expect_match(text, paste0("30,0", NBSP, "%"))
+})
+
+test_that("headerless_notes: skupiny, počty, medián a p95 délky", {
+  out <- headerless_notes(lengths_con(), "other")
+
+  expect_equal(out$skupina, c("bez_nadpisu", "se_sekcemi"))
+  expect_equal(out$n, c(2, 4))
+  expect_equal(out$celkem, c(6, 6))
+  expect_equal(out$p50, c(100, 100))
+  expect_equal(out$p95, c(300, 200))
+})
+
+test_that("headerless_histogram: podíly se v každé skupině sečtou na 1", {
+  hist <- headerless_histogram(lengths_con(), "other")
+  shares <- histogram_shares(hist, "skupina")
+
+  expect_setequal(unique(hist$skupina), c("bez_nadpisu", "se_sekcemi"))
+  expect_equal(tapply(shares$podil, shares$skupina, sum)[["bez_nadpisu"]], 1)
+  expect_equal(tapply(shares$podil, shares$skupina, sum)[["se_sekcemi"]], 1)
+})
+
+test_that("headerless nad prázdnou tabulkou: nuly, prázdný histogram, věta nelze posoudit", {
+  con <- sections_con(list())
+  out <- headerless_notes(con, "other")
+
+  expect_equal(out$n, c(0, 0))
+  expect_true(all(is.na(out$p50)))
+  expect_equal(nrow(headerless_histogram(con, "other")), 0L)
+  expect_match(headerless_text(out), "nelze posoudit")
+  expect_equal(nrow(headerless_table(out)), 2L)
+  expect_no_error(ggplot2::ggplot_build(headerless_plot(headerless_histogram(con, "other"))))
+})
+
+test_that("headerless_text skloňuje počty a jmenuje délky skupin", {
+  text <- headerless_text(headerless_notes(lengths_con(), "other"))
+
+  expect_match(text, paste0("2", NBSP, "zprávy"))
+  expect_match(text, paste0("33,3", NBSP, "%"))
+  expect_match(text, paste0("100", NBSP, "znaků"))
+
+  all_sections <- headerless_notes(sections_con(list(n1 = "a")), "other")
+  expect_match(headerless_text(all_sections), "Každá zpráva")
+  five <- headerless_notes(sections_con(setNames(rep(list("other"), 5), paste0("n", 1:5))), "other")
+  expect_match(headerless_text(five), paste0("5", NBSP, "zpráv"))
+})
+
+test_that("grafy počtu sekcí a zpráv bez nadpisů projdou ggplot_build s daty i bez nich", {
+  con <- lengths_con()
+  counts <- sections_per_note(con, mini_lexicon(STRIP_KEYS))
+  built <- ggplot2::ggplot_build(sections_per_note_plot(counts))
+  expect_equal(built$layout$panel_scales_x[[1]]$get_limits(), as.character(0:3))
+  expect_equal(sum(built$data[[1]]$y), 1)
+
+  hist <- headerless_histogram(con, "other")
+  expect_equal(nrow(ggplot2::ggplot_build(headerless_plot(hist))$data[[1]]) > 0, TRUE)
+
+  empty <- sections_con(list())
+  empty_counts <- sections_per_note(empty, mini_lexicon(STRIP_KEYS))
+  expect_no_error(ggplot2::ggplot_build(sections_per_note_plot(empty_counts)))
+})
+
+test_that("tabulky délek a zpráv bez nadpisů projdou export_table s rozvržením sešitu", {
+  for (rows in list(LENGTH_ROWS, NULL)) {
+    con <- if (is.null(rows)) sections_con(list()) else lengths_con(rows)
+    skeleton <- section_skeleton(con, mini_lexicon(STRIP_KEYS))
+    dir <- withr::local_tempdir()
+    export_table(
+      body_length_table(body_lengths(con, skeleton, "other")),
+      col.names = c("Sekce", "Popisek", "Zprávy", "Medián", "p75", "p95"),
+      align = "llrrrr",
+      code = "sekce",
+      label = "tbl-delky",
+      widths = list(28, 32, 10, 10, 10, 10),
+      dir = dir
+    )
+    export_table(
+      headerless_table(headerless_notes(con, "other")),
+      col.names = c("Skupina", "Zprávy", "Podíl (%)", "Medián délky", "p95 délky"),
+      align = "lrrrr",
+      label = "tbl-bez-nadpisu",
+      widths = list(30, 15, 15, 20, 20),
+      dir = dir
+    )
+
+    expect_true(all(file.exists(file.path(dir, c("tbl-delky.tex", "tbl-bez-nadpisu.tex")))))
+  }
+})

@@ -41,7 +41,12 @@ segment_corpus <- function(con, module, lexicon_path) {
 SKELETON_COVERAGE <- 0.5
 KEYS_TABLE <- "section_keys_input"
 SKELETON_TABLE <- "skeleton_input"
+# Sekce, kterou vystřihne ablace D2 (strip S32); S32 má číst týž klíč.
+STRIP_SECTION <- "discharge_diagnosis"
+OTHER_LABEL <- "Text mimo sekce"
+HEADERLESS_LABELS <- c(bez_nadpisu = "Bez nadpisů", se_sekcemi = "Se sekcemi")
 SECTION_FORMS <- c("sekce", "sekce", "sekcí")
+CHAR_FORMS <- c("znak", "znaky", "znaků")
 NOTE_FORMS <- c("zpráva", "zprávy", "zpráv")
 
 lexicon_keys <- function(lexicon) {
@@ -197,5 +202,213 @@ skeleton_text <- function(skeleton, consistency) {
     "Kostru šablony tvoří %s s pokrytím aspoň %s (podle mediánu pozice): %s. %s",
     count_phrase(nrow(members), SECTION_FORMS), threshold,
     join_labels(sprintf("`%s`", members$sekce)), order_text
+  )
+}
+
+sections_per_note <- function(con, lexicon) {
+  keys <- write_temp(con, KEYS_TABLE, lexicon_keys(lexicon))
+  found <- DBI::dbGetQuery(con, sprintf("
+    SELECT pocet, count(*) AS n FROM (
+      SELECT s.note_id, count(k.sekce) AS pocet
+      FROM %s s LEFT JOIN %s k ON k.sekce = s.section
+      GROUP BY s.note_id
+    ) GROUP BY pocet
+  ", SECTIONS_TABLE, keys))
+  out <- data.frame(pocet = 0:nrow(lexicon_keys(lexicon)))
+  out$n <- as.numeric(found$n[match(out$pocet, found$pocet)])
+  out$n[is.na(out$n)] <- 0
+  out$celkem <- sum(out$n)
+  out
+}
+
+sections_per_note_percentiles <- function(counts) {
+  total <- sum(counts$n)
+  if (total == 0) {
+    return(c(p10 = NA_real_, p50 = NA_real_, p75 = NA_real_, p95 = NA_real_, maximum = NA_real_))
+  }
+  cumulative <- cumsum(counts$n)
+  at <- function(share) as.numeric(counts$pocet[which(cumulative >= share * total - 1e-9)[[1]]])
+  c(p10 = at(0.10), p50 = at(0.50), p75 = at(0.75), p95 = at(0.95), maximum = max(counts$pocet[counts$n > 0]))
+}
+
+sections_per_note_plot <- function(counts) {
+  bars <- data.frame(
+    pocet = factor(counts$pocet, levels = counts$pocet),
+    podil = ifelse(counts$celkem > 0, counts$n / counts$celkem, 0)
+  )
+  ggplot2::ggplot(bars, ggplot2::aes(pocet, podil)) +
+    ggplot2::geom_col() +
+    ggplot2::scale_y_continuous(labels = percent_axis) +
+    ggplot2::labs(x = "Počet rozpoznaných sekcí lexikonu ve zprávě", y = "Podíl zpráv") +
+    theme_thesis()
+}
+
+sections_per_note_text <- function(counts) {
+  if (sum(counts$n) == 0) {
+    return(paste("Počet sekcí na zprávu", UNDECIDABLE_TEXT))
+  }
+  percentiles <- sections_per_note_percentiles(counts)
+  without <- counts$n[counts$pocet == 0]
+  sprintf(
+    "Počet rozpoznaných sekcí lexikonu na zprávu: medián %s (p10 %s, p75 %s, p95 %s, maximum %s). Žádnou sekci nemá %s (%s).",
+    number_text(percentiles[["p50"]]), number_text(percentiles[["p10"]]),
+    number_text(percentiles[["p75"]]), number_text(percentiles[["p95"]]),
+    number_text(percentiles[["maximum"]]),
+    count_phrase(without, NOTE_FORMS), percent_label(without, sum(counts$n))
+  )
+}
+
+body_lengths <- function(con, skeleton, other) {
+  found <- DBI::dbGetQuery(con, sprintf("
+    SELECT section AS sekce, count(*) AS n,
+      quantile_disc(body_chars, 0.5) AS p50, quantile_disc(body_chars, 0.75) AS p75,
+      quantile_disc(body_chars, 0.95) AS p95
+    FROM %s GROUP BY section
+  ", SECTIONS_TABLE))
+  found <- as_numeric_columns(found, c("n", "p50", "p75", "p95"))
+  out <- data.frame(
+    sekce = c(skeleton$sekce, other),
+    label_cs = c(skeleton$label_cs, OTHER_LABEL),
+    stringsAsFactors = FALSE
+  )
+  place <- match(out$sekce, found$sekce)
+  out$n <- ifelse(is.na(place), 0, found$n[place])
+  for (column in c("p50", "p75", "p95")) out[[column]] <- found[[column]][place]
+  out
+}
+
+body_length_table <- function(lengths) {
+  data.frame(
+    sekce = lengths$sekce,
+    label_cs = lengths$label_cs,
+    n = number_text(lengths$n),
+    p50 = number_text(lengths$p50),
+    p75 = number_text(lengths$p75),
+    p95 = number_text(lengths$p95),
+    stringsAsFactors = FALSE
+  )
+}
+
+# Délka zprávy je součet span_chars, protože round-trip parseru dává součet přes zprávu rovný
+# délce textu a text se tak nečte podruhé.
+strip_share <- function(con, lexicon) {
+  if (!STRIP_SECTION %in% lexicon$sections$sekce) {
+    stop(sprintf("Sekce %s pro strip D2 není v lexikonu.", STRIP_SECTION))
+  }
+  row <- DBI::dbGetQuery(con, sprintf("
+    WITH per_note AS (
+      SELECT note_id, sum(span_chars) AS delka,
+        sum(span_chars) FILTER (WHERE section = %s) AS sekce
+      FROM %s GROUP BY note_id
+    )
+    SELECT count(*) AS celkem, count(sekce) AS se_sekci,
+      coalesce(sum(delka), 0) AS text_celkem, coalesce(sum(sekce), 0) AS text_sekce,
+      quantile_cont(sekce::DOUBLE / delka, 0.5) AS median_podilu
+    FROM per_note
+  ", DBI::dbQuoteString(con, STRIP_SECTION), SECTIONS_TABLE))
+  out <- lapply(row, as.numeric)
+  out$podil_textu <- if (out$text_celkem > 0) out$text_sekce / out$text_celkem else NA_real_
+  out
+}
+
+strip_share_text <- function(strip) {
+  if (strip$celkem == 0) {
+    return(paste("Podíl textu odstraněný stripem D2", UNDECIDABLE_TEXT))
+  }
+  if (strip$se_sekci == 0) {
+    return(sprintf(
+      "Sekci `%s` má %s korpusu, strip D2 by nic neodstranil.",
+      STRIP_SECTION, count_phrase(0, NOTE_FORMS)
+    ))
+  }
+  sprintf(
+    "Strip D2 odstraní sekci `%s` u %s korpusu (%s) a tvoří %s jeho textu; ve zprávě se sekcí tvoří v mediánu %s textu zprávy.",
+    STRIP_SECTION, count_phrase(strip$se_sekci, NOTE_FORMS),
+    percent_label(strip$se_sekci, strip$celkem),
+    percent_label(strip$text_sekce, strip$text_celkem),
+    percent_label(strip$median_podilu, 1)
+  )
+}
+
+# Zpráva bez nadpisů má jedinou část, a tou je `other`; `other` se předává z modulu Pythonu,
+# aby se klíč nerozešel s doménou.
+note_lengths_sql <- function(con, other) {
+  sprintf("
+    SELECT note_id, sum(span_chars) AS delka,
+      CASE WHEN bool_or(section <> %s) THEN 'se_sekcemi' ELSE 'bez_nadpisu' END AS skupina
+    FROM %s GROUP BY note_id
+  ", DBI::dbQuoteString(con, other), SECTIONS_TABLE)
+}
+
+headerless_notes <- function(con, other) {
+  found <- DBI::dbGetQuery(con, sprintf("
+    SELECT skupina, count(*) AS n,
+      quantile_disc(delka, 0.5) AS p50, quantile_disc(delka, 0.95) AS p95
+    FROM (%s) GROUP BY skupina
+  ", note_lengths_sql(con, other)))
+  found <- as_numeric_columns(found, c("n", "p50", "p95"))
+  out <- data.frame(skupina = names(HEADERLESS_LABELS), stringsAsFactors = FALSE)
+  place <- match(out$skupina, found$skupina)
+  out$n <- ifelse(is.na(place), 0, found$n[place])
+  out$celkem <- sum(out$n)
+  out$p50 <- found$p50[place]
+  out$p95 <- found$p95[place]
+  out
+}
+
+headerless_histogram <- function(con, other) {
+  out <- DBI::dbGetQuery(con, sprintf("
+    SELECT skupina, %s AS kos, count(*) AS n
+    FROM (%s) WHERE delka > 0
+    GROUP BY skupina, kos ORDER BY skupina, kos
+  ", log_bin_sql("delka"), note_lengths_sql(con, other)))
+  as_numeric_columns(out, c("kos", "n"))
+}
+
+headerless_table <- function(headerless) {
+  data.frame(
+    skupina = HEADERLESS_LABELS[headerless$skupina],
+    n = number_text(headerless$n),
+    podil = percent_text(headerless$n, headerless$celkem),
+    p50 = number_text(headerless$p50),
+    p95 = number_text(headerless$p95),
+    stringsAsFactors = FALSE,
+    row.names = NULL
+  )
+}
+
+headerless_plot <- function(hist) {
+  shares <- if (nrow(hist) == 0L) {
+    data.frame(skupina = character(), dolni = numeric(), podil = numeric())
+  } else {
+    histogram_shares(hist, "skupina")
+  }
+  shares$skupina <- factor(shares$skupina, levels = names(HEADERLESS_LABELS), labels = HEADERLESS_LABELS)
+  ggplot2::ggplot(shares, ggplot2::aes(dolni + 0.05, podil)) +
+    ggplot2::geom_col(width = 0.1) +
+    ggplot2::facet_wrap(ggplot2::vars(skupina), ncol = 1, drop = FALSE) +
+    ggplot2::scale_x_continuous(
+      breaks = 0:6, labels = function(x) format_number(10^x), limits = c(0, 6)
+    ) +
+    ggplot2::scale_y_continuous(labels = percent_axis) +
+    ggplot2::labs(x = "Délka zprávy ve znacích (dolní mez koše)", y = "Podíl zpráv skupiny") +
+    theme_thesis()
+}
+
+headerless_text <- function(headerless) {
+  if (headerless$celkem[[1]] == 0) {
+    return(paste("Zprávy bez nadpisů", UNDECIDABLE_TEXT))
+  }
+  without <- headerless[headerless$skupina == "bez_nadpisu", ]
+  if (without$n == 0) {
+    return("Každá zpráva korpusu má aspoň jednu sekci lexikonu.")
+  }
+  with <- headerless[headerless$skupina == "se_sekcemi", ]
+  length_phrase <- function(x) ifelse(is.na(x), "–", count_phrase(x, CHAR_FORMS))
+  sprintf(
+    "Bez nadpisů je %s korpusu (%s). Medián jejich délky je %s proti %s ve zprávách se sekcemi, p95 je %s proti %s.",
+    count_phrase(without$n, NOTE_FORMS), percent_label(without$n, without$celkem),
+    length_phrase(without$p50), length_phrase(with$p50),
+    length_phrase(without$p95), length_phrase(with$p95)
   )
 }
