@@ -1,22 +1,51 @@
-test_that("lexikon sekcí má 17 sekcí šablony MIMIC s popiskem a synonymem", {
+test_that("lexikon načte všechny sekce konfigurace, každou s popiskem a synonymem", {
+  raw <- jsonlite::fromJSON(section_headers_path(), simplifyVector = FALSE)
   lexicon <- read_section_headers(section_headers_path())
   keys <- unique(lexicon$sections$sekce)
 
-  expect_length(keys, 17L)
+  expect_equal(keys, names(raw$sections))
   expect_true(all(c("discharge_diagnosis", "discharge_condition") %in% keys))
   expect_false(anyNA(lexicon$sections$label_cs))
   expect_true(all(nzchar(lexicon$sections$label_cs)))
   expect_true(all(nzchar(lexicon$sections$synonymum)))
-  expect_length(lexicon$preamble, 8L)
+  expect_equal(lexicon$preamble, as.character(unlist(raw$preamble)))
 })
 
-test_that("normalizované synonymum patří jediné sekci a není v preamble", {
-  lexicon <- read_section_headers(section_headers_path())
-  normalize <- function(x) sub("[ .]+$", "", gsub("\\s+", " ", tolower(x)))
-  synonyms <- normalize(lexicon$sections$synonymum)
+test_that("lexikon nemá dvě sekce ani sekci a preamble se stejným normalizovaným synonymem", {
+  con <- mimic_con()
 
-  expect_false(anyDuplicated(synonyms) > 0L)
-  expect_length(intersect(synonyms, normalize(lexicon$preamble)), 0L)
+  expect_identical(header_lexicon(con, read_section_headers(section_headers_path())), LEXICON_TABLE)
+})
+
+test_that("read_section_headers odmítne sekci bez synonym nebo bez popisku", {
+  write_config <- function(sections) {
+    path <- withr::local_tempfile(fileext = ".json", .local_envir = parent.frame())
+    jsonlite::write_json(list(sections = sections, preamble = list("Name")), path, auto_unbox = TRUE)
+    path
+  }
+
+  expect_error(
+    read_section_headers(write_config(list(a = list(label_cs = "A", synonyms = list())))),
+    "a", fixed = TRUE
+  )
+  expect_error(
+    read_section_headers(write_config(list(b = list(synonyms = list("B"))))),
+    "b", fixed = TRUE
+  )
+})
+
+test_that("header_lexicon odmítne kolizi normalizovaných synonym mezi sekcemi i s preamble", {
+  con <- mimic_con()
+  sections <- data.frame(
+    sekce = c("a", "b"), label_cs = c("A", "B"), synonymum = c("Allergies", "ALLERGIES ."),
+    stringsAsFactors = FALSE
+  )
+
+  expect_error(header_lexicon(con, list(sections = sections, preamble = "Name")), "Allergies", fixed = TRUE)
+  expect_error(
+    header_lexicon(con, list(sections = sections[1, ], preamble = "allergies")),
+    "Allergies", fixed = TRUE
+  )
 })
 
 LEXICON <- list(
@@ -49,10 +78,12 @@ test_that("note_headers najde hlavičku na začátku řádku včetně vloženéh
   ))
 })
 
-test_that("note_headers nebere krátký řetězec, čas, značku ani text uprostřed řádku", {
-  found <- found_headers(c("Ab: x", "Time 10:30", "# CHF: yes", "see Chief Complaint: x"))
+test_that("note_headers nebere řetězec s normalizovaným tvarem pod MIN_HEADER_CHARS, čas, značku ani text uprostřed řádku", {
+  found <- found_headers(c(
+    "Ab: x", "Ab.: x", "Ab : x", "Time 10:30", "# CHF: yes", "see Chief Complaint: x"
+  ))
 
-  expect_equal(unname(found), list(character(), character(), character(), character()))
+  expect_equal(unname(found), rep(list(character()), 6L))
 })
 
 test_that("normalizace sloučí velikost písmen, mezery a koncové tečky", {
@@ -118,7 +149,8 @@ test_that("header_ranking zařadí hlavičky do sekce, preamble a mimo lexikon",
   out <- header_ranking(con, LEXICON)
 
   expect_equal(out$norm, c("foo", "presenting complaint", "service"))
-  expect_equal(out$zarazeni, c("mimo lexikon", "Hlavní obtíže", "preamble"))
+  expect_equal(out$zarazeni, c("mimo lexikon", "Hlavní obtíže", "administrativní pole"))
+  expect_equal(out$druh, c(KIND_OUTSIDE, KIND_SECTION, KIND_PREAMBLE))
 })
 
 test_that("header_ranking vrátí nejvýš RANKING_SIZE řádků", {
@@ -194,7 +226,8 @@ ranking_fixture <- function() {
     hlavicka = c("Chief Complaint", "Service", "IMAGING", "Exam"),
     n = c(1000, 990, 600, 200),
     celkem = 1000,
-    zarazeni = c("Hlavní obtíže", PREAMBLE_CLASS, OUTSIDE_CLASS, OUTSIDE_CLASS),
+    druh = c(KIND_SECTION, KIND_PREAMBLE, KIND_OUTSIDE, KIND_OUTSIDE),
+    zarazeni = c("Hlavní obtíže", "administrativní pole", "mimo lexikon", "mimo lexikon"),
     stringsAsFactors = FALSE
   )
 }
@@ -207,7 +240,7 @@ test_that("header_table uvede hlavičku, zařazení, počet a podíl", {
   out <- header_table(ranking_fixture())
 
   expect_equal(out$hlavicka, c("Chief Complaint", "Service", "IMAGING", "Exam"))
-  expect_equal(out$zarazeni, c("Hlavní obtíže", "preamble", "mimo lexikon", "mimo lexikon"))
+  expect_equal(out$zarazeni, c("Hlavní obtíže", "administrativní pole", "mimo lexikon", "mimo lexikon"))
   expect_equal(out$n, c("1 000", "990", "600", "200"))
   expect_equal(out$podil, c("100,0", "99,0", "60,0", "20,0"))
 })
@@ -215,7 +248,7 @@ test_that("header_table uvede hlavičku, zařazení, počet a podíl", {
 test_that("ranking_bars obarví podle druhu zařazení a seřadí nejčastější nahoru", {
   out <- ranking_bars(ranking_fixture())
 
-  expect_equal(as.character(out$druh), c("sekce lexikonu", "preamble", "mimo lexikon", "mimo lexikon"))
+  expect_equal(as.character(out$druh), c("sekce lexikonu", "administrativní pole", "mimo lexikon", "mimo lexikon"))
   expect_equal(levels(out$hlavicka), rev(c("Chief Complaint", "Service", "IMAGING", "Exam")))
   expect_equal(out$podil, c(1, 0.99, 0.6, 0.2))
 })
@@ -246,38 +279,70 @@ test_that("tabulky nad prázdným korpusem mají pomlčky nebo nula řádků", {
   expect_equal(synonym_table(empty_synonyms)$pokryti, "–")
 })
 
-test_that("candidates_text vyjmenuje hlavičky mimo lexikon s pokrytím aspoň CANDIDATE_COVERAGE", {
-  text <- candidates_text(ranking_fixture(), totals_fixture())
+test_that("header_candidates vrátí všechny hlavičky mimo lexikon nad CANDIDATE_COVERAGE i za RANKING_SIZE", {
+  codes <- paste0(rep(LETTERS, each = 26), rep(LETTERS, 26))[seq_len(RANKING_SIZE + 5L)]
+  texts <- c(
+    rep(paste(c(sprintf("Head %s: x", codes), "Allergies: x"), collapse = "\n"), 12),
+    rep("Few: x", 4)
+  )
+  con <- corpus_con(texts)
 
-  expect_match(text, "`IMAGING`", fixed = TRUE)
-  expect_no_match(text, "Exam", fixed = TRUE)
-  expect_match(text, "60,0 %", fixed = TRUE)
-  expect_match(candidates_text(ranking_fixture()[1:2, ], totals_fixture()), "žádný", fixed = TRUE)
-  expect_match(candidates_text(ranking_fixture()[0, ], totals_fixture(0)), "nelze posoudit", fixed = TRUE)
+  out <- header_candidates(con, LEXICON)
+
+  expect_equal(nrow(header_ranking(con, LEXICON)), RANKING_SIZE)
+  expect_equal(nrow(out), RANKING_SIZE + 5L)
+  expect_true(tolower(sprintf("Head %s", codes[[RANKING_SIZE + 5L]])) %in% out$norm)
+  expect_false(any(c("allergies", "few") %in% out$norm))
+  expect_true(all(out$n / out$celkem >= CANDIDATE_COVERAGE))
 })
 
-synonyms_fixture <- function(celkem = 1000) {
+test_that("header_candidates nad prázdným korpusem nevrátí nic", {
+  expect_equal(nrow(header_candidates(mimic_con(), LEXICON)), 0L)
+})
+
+test_that("candidates_text vyjmenuje kandidáty, nebo napíše žádný", {
+  candidates <- ranking_fixture()[3, ]
+
+  expect_equal(
+    candidates_text(candidates, totals_fixture()),
+    "Kandidáti na doplnění lexikonu (hlavičky mimo lexikon s pokrytím aspoň 50\u00a0%): `IMAGING` (60,0\u00a0%)."
+  )
+  expect_match(candidates_text(candidates[0, ], totals_fixture()), "žádný", fixed = TRUE)
+  expect_match(candidates_text(candidates[0, ], totals_fixture(0)), "nelze posoudit", fixed = TRUE)
+})
+
+synonyms_fixture <- function(celkem = 1000, dead = 2, repeated = 2) {
+  count <- max(dead, repeated, 1L)
   data.frame(
-    sekce = c("a", "a", "b", "c"), synonymum = c("Alpha", "Beta", "Gamma", "Delta"),
-    n = c(900, 0, 500, 0), opakovani = c(49, 0, 50, 0), celkem = celkem,
-    stringsAsFactors = FALSE
+    sekce = rep("a", count), synonymum = paste0("S", seq_len(count)),
+    n = ifelse(seq_len(count) <= dead, 0, 500),
+    opakovani = ifelse(seq_len(count) <= repeated, 50, 49),
+    celkem = celkem, stringsAsFactors = FALSE
   )
 }
 
-test_that("dead_synonyms_text vyjmenuje synonyma s nulou a skloňuje jejich počet", {
-  expect_match(dead_synonyms_text(synonyms_fixture(), totals_fixture()), "2 synonyma", fixed = TRUE)
-  expect_match(dead_synonyms_text(synonyms_fixture(), totals_fixture()), "`Beta`", fixed = TRUE)
-  expect_match(dead_synonyms_text(synonyms_fixture()[c(1, 3), ], totals_fixture()), "žádné", fixed = TRUE)
+test_that("dead_synonyms_text skloňuje sloveso i podstatné jméno pro 1, 2 a 5 synonym", {
+  sentence <- function(dead) {
+    dead_synonyms_text(synonyms_fixture(dead = dead, repeated = 0)[seq_len(max(dead, 1)), ], totals_fixture())
+  }
+
+  expect_equal(sentence(1), "Bez jediné zprávy je 1\u00a0synonymum: `S1`.")
+  expect_equal(sentence(2), "Bez jediné zprávy jsou 2\u00a0synonyma: `S1` a `S2`.")
+  expect_equal(sentence(5), "Bez jediné zprávy je 5\u00a0synonym: `S1`, `S2`, `S3`, `S4` a `S5`.")
+  expect_match(dead_synonyms_text(synonyms_fixture(dead = 0, repeated = 0), totals_fixture()), "žádné")
   expect_match(dead_synonyms_text(synonyms_fixture(0), totals_fixture(0)), "nelze posoudit", fixed = TRUE)
 })
 
-test_that("repeated_synonyms_text bere opakování od REPEAT_SHARE včetně hranice", {
-  text <- repeated_synonyms_text(synonyms_fixture(), totals_fixture())
+test_that("repeated_synonyms_text skloňuje sloveso i podstatné jméno a bere hranici včetně", {
+  sentence <- function(repeated) {
+    repeated_synonyms_text(synonyms_fixture(dead = 0, repeated = repeated), totals_fixture())
+  }
+  share <- "5,0\u00a0%"
 
-  expect_match(text, "`Gamma`", fixed = TRUE)
-  expect_no_match(text, "Alpha", fixed = TRUE)
-  expect_match(text, "1 synonymum", fixed = TRUE)
-  expect_match(repeated_synonyms_text(synonyms_fixture()[1, ], totals_fixture()), "Žádné", fixed = TRUE)
+  expect_equal(sentence(1), sprintf("V aspoň 5\u00a0%% zpráv se opakuje 1\u00a0synonymum: `S1` (%s).", share))
+  expect_match(sentence(2), "se opakují 2\u00a0synonyma: `S1` (5,0\u00a0%) a `S2`", fixed = TRUE)
+  expect_match(sentence(5), "se opakuje 5\u00a0synonym: ", fixed = TRUE)
+  expect_match(sentence(0), "Žádné", fixed = TRUE)
   expect_match(repeated_synonyms_text(synonyms_fixture(0), totals_fixture(0)), "nelze posoudit", fixed = TRUE)
 })
 

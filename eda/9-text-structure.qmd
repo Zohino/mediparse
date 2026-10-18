@@ -19,6 +19,7 @@ eda_check_python()
 con <- eda_connect()
 lexicon <- read_section_headers(section_headers_path())
 ranking <- header_ranking(con, lexicon)
+candidates <- header_candidates(con, lexicon)
 totals <- header_totals(con, lexicon)
 sections <- section_coverage(con, lexicon)
 synonyms <- synonym_coverage(con, lexicon)
@@ -27,7 +28,10 @@ synonym_count <- count_phrase(nrow(synonyms), c("synonymum", "synonyma", "synony
 preamble_count <- count_phrase(length(lexicon$preamble), c("pole", "pole", "polí"))
 short_text <- count_phrase(SHORT_LIMIT, c("znak", "znaky", "znaků"))
 notes_text <- count_phrase(totals$celkem, c("zpráva", "zprávy", "zpráv"))
-floor_text <- count_phrase(publishable_floor(totals$celkem), c("zpráva", "zprávy", "zpráv"))
+coverage_floor <- coverage_threshold_text(MIN_COVERAGE)
+count_floor <- count_phrase(DUA_THRESHOLD, c("zpráva", "zprávy", "zpráv"))
+candidate_floor <- coverage_threshold_text(CANDIDATE_COVERAGE)
+repeat_floor <- coverage_threshold_text(REPEAT_SHARE)
 ranking_size <- count_phrase(RANKING_SIZE, c("hlavička", "hlavičky", "hlaviček"))
 ```
 
@@ -40,7 +44,7 @@ Tento sešit je devátým z řady sešitů explorační analýzy a otevírá fá
 - najít mrtvá synonyma lexikonu a synonyma, která se ve zprávě opakují a nejspíš se používají i uvnitř těl sekcí,
 - jmenovat hlavičky mimo lexikon, které má většina zpráv a které by do lexikonu mohly patřit.
 
-Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty. Řetězec hlavičky je popisek z dat, a zveřejní se proto jen hlavička, kterou má aspoň 1 % zpráv a nejméně deset zpráv; podrobná pravidla jsou v kapitole @sec-data.
+Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty. Řetězec hlavičky je popisek z dat, a zveřejní se proto jen hlavička, kterou má aspoň `r coverage_floor` zpráv a nejméně `r count_floor`; podrobná pravidla jsou v kapitole @sec-data.
 
 Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky. Kapitola @sec-shrnuti shrnuje rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
 
@@ -51,12 +55,12 @@ Sešit čte propouštěcí zprávy (`discharge`). Dotazy provádí DuckDB nad pa
 Pojmy a jednotky jsou tyto:
 
 - *populací* je vstupní korpus z pátého sešitu, tedy tentýž jako v sedmém a osmém sešitu: propouštěcí zprávy s kódem ICD, dlouhé aspoň `r short_text` a bez přesných duplicit. Vstupní korpus tvoří `r notes_text`. Jednotkou je zpráva a počítá se celý korpus, ne vzorek,
-- *hlavička* je řádek, který po volitelném odsazení (mezery, tabulátory) začíná velkým písmenem a dalším písmenem, pokračuje až čtyřiceti sedmi znaky z množiny písmen, mezery, pomlčky, lomítka, ampersandu, závorek, apostrofu a tečky a končí dvojtečkou. Zachycený řetězec má aspoň tři znaky. Výraz RE2 s režimem po řádcích (`(?m)`) je v konstantě `HEADER_PATTERN`. Číslice v něm nejsou, takže čas „10:30“ hlavičkou není. Hlavičku, která stojí na řádku za jiným polem, výraz nevidí,
-- *normalizace* hlavičky je převod na malá písmena, sloučení bílých znaků do jedné mezery a odříznutí koncových mezer a teček. Je to jediná funkce (`normalized_sql`), kterou se normalizují hlavičky z textu i synonyma z lexikonu. Hlavička je v lexikonu nalezená, když se její normalizovaný tvar rovná normalizovanému synonymu; stejné pravidlo převezme parser sekcí. Zobrazuje se nejčastější původní zápis, při shodě abecedně první,
-- *lexikon* je `config/section_headers.json`: `r section_count` šablony MIMIC, každá s českým popiskem a celofrázovými synonymy (celkem `r synonym_count`), a seznam administrativních polí zprávy (`r preamble_count`), která nejsou sekcemi. Seed vychází z lexikonu předchozího projektu autora, jehož čísla byla předběžná. Oproti němu přidává sekce Major Surgical or Invasive Procedure a Discharge Disposition, zařazuje HPI pod anamnézu současného onemocnění a vypouští podsekce (vitální funkce, chirurgická anamnéza) i generická jednoslovná synonyma, která by otevírala sekci uvnitř těla jiné sekce. Zkratky se nepřebírají, protože se na začátku řádku s dvojtečkou objevují i uvnitř těl. Čísla v tomto sešitu pocházejí z dat tohoto projektu,
-- *dokumentová frekvence* hlavičky je počet zpráv, v nichž se vyskytuje aspoň jednou; podíl je vztažený k počtu zpráv korpusu. *Opakování* sekce nebo synonyma je počet zpráv, kde se hlavička objeví aspoň dvakrát. Synonymum, které se ve zprávě objeví dvakrát, se nejspíš používá i uvnitř těla, a je tedy kandidátem na falešnou hranici sekce,
-- *potlačení*: řetězec hlavičky je popisek z dat. Zveřejní se jen hlavička, kterou má aspoň 1 % zpráv korpusu a nejméně `r floor_text`. Samotný práh deseti zpráv nestačí, protože výraz zachytí i úlomky vět končící dvojtečkou. Žebříček uvádí nejvýše `r ranking_size`. Synonyma a klíče sekcí pocházejí z konfigurace, ne z dat, a zveřejňují se všechna včetně nuly. Počty zpráv jsou metrika textu a nepotlačují se; počet unikátních hlaviček je číslo bez popisku,
-- *rozhodnutí sešitu* jsou texty generované z dat: kandidáti na doplnění (hlavičky mimo lexikon s pokrytím aspoň 50 %), mrtvá synonyma a synonyma s opakováním aspoň v 5 % zpráv. Hranice 50 % je popisná, ne brána: odděluje „většina zpráv“ od podsekcí, o zařazení rozhoduje autor.
+- *hlavička* je řádek, který po volitelném odsazení (mezery, tabulátory) začíná velkým písmenem a dalším písmenem, pokračuje až čtyřiceti sedmi znaky z množiny písmen, mezery, pomlčky, lomítka, ampersandu, závorek, apostrofu a tečky a končí dvojtečkou. Normalizovaný tvar zachyceného řetězce má aspoň `r MIN_HEADER_CHARS` znaky. Výraz RE2 s režimem po řádcích (`(?m)`) je v konstantě `HEADER_PATTERN`. Číslice v něm nejsou, takže čas „10:30“ hlavičkou není. Hlavičku, která stojí na řádku za jiným polem, výraz nevidí,
+- *normalizace* hlavičky je převod na malá písmena, sloučení bílých znaků do jedné mezery a odříznutí koncových mezer a teček. Je to jediná funkce (`normalized_sql`), kterou se normalizují hlavičky z textu i synonyma z lexikonu. Hlavička je v lexikonu nalezená, když se její normalizovaný tvar rovná normalizovanému synonymu; stejné pravidlo převezme parser sekcí. Zobrazuje se nejčastější původní zápis, při shodě první podle pořadí znaků (velká písmena před malými),
+- *lexikon* je `config/section_headers.json`: `r section_count` šablony MIMIC, každá s českým popiskem a celofrázovými synonymy (celkem `r synonym_count`), a seznam administrativních polí zprávy (`r preamble_count`), která nejsou sekcemi. Seed vychází z lexikonu předchozího projektu autora, jehož čísla byla předběžná. Oproti němu přidává sekce Major Surgical or Invasive Procedure a Discharge Disposition, zkratka HPI ze sekce Chief Complaint vypadla a vypouští podsekce (vitální funkce, chirurgická anamnéza) i generická jednoslovná synonyma, která by otevírala sekci uvnitř těla jiné sekce. Zkratky se nepřebírají, protože se na začátku řádku s dvojtečkou objevují i uvnitř těl. Synonyma jsou pravopisné varianty názvu sekce ze šablony MIMIC (člen, číslo, přípona -ation, pomlčka, mezera); vyřazeny jsou podnadpisy uvnitř sekcí (například Primary a Secondary Diagnosis, Hospital Course by Problem), alternativní názvy a zkratky. Čísla v tomto sešitu pocházejí z dat tohoto projektu,
+- *dokumentová frekvence* hlavičky je počet zpráv, v nichž se vyskytuje aspoň jednou; podíl je vztažený k počtu zpráv korpusu. *Opakování* sekce je počet zpráv s aspoň dvěma výskyty kteréhokoli jejího synonyma; opakování synonyma je počet zpráv s aspoň dvěma výskyty téhož synonyma. Synonymum, které se ve zprávě objeví dvakrát, se nejspíš používá i uvnitř těla, a je tedy kandidátem na falešnou hranici sekce,
+- *potlačení*: řetězec hlavičky je popisek z dat. Zveřejní se jen hlavička, kterou má aspoň `r coverage_floor` zpráv korpusu a nejméně `r count_floor`. Samotný práh `r count_floor` nestačí, protože výraz zachytí i úlomky vět končící dvojtečkou. Žebříček uvádí nejvýše `r ranking_size`. Synonyma a klíče sekcí pocházejí z konfigurace, ne z dat, a zveřejňují se všechna včetně nuly. Počty zpráv jsou metrika textu a nepotlačují se; počet unikátních hlaviček je číslo bez popisku,
+- *rozhodnutí sešitu* jsou texty generované z dat: kandidáti na doplnění (hlavičky mimo lexikon s pokrytím aspoň `r candidate_floor`), mrtvá synonyma a synonyma s opakováním aspoň v `r repeat_floor` zpráv. Hranice `r candidate_floor` je popisná, ne brána: odděluje „většina zpráv“ od podsekcí, o zařazení rozhoduje autor.
 
 # Výsledky {#sec-vysledky}
 
@@ -133,13 +137,13 @@ export_table(
 Dokument ověřil seed lexikon sekcí na vstupním korpusu. Pro další práci z toho plyne:
 
 - **Pokrytí.** `r coverage_text(totals)`
-- **Kandidáti na doplnění.** `r candidates_text(ranking, totals)` Autor po reálném renderu doplní sekce šablony do `config/section_headers.json` a sešit přerenderuje.
+- **Kandidáti na doplnění.** `r candidates_text(candidates, totals)` Autor po reálném renderu doplní sekce šablony do `config/section_headers.json` a sešit přerenderuje.
 - **Mrtvá synonyma.** `r dead_synonyms_text(synonyms, totals)`
 - **Opakování.** `r repeated_synonyms_text(synonyms, totals)`
 - **Pro parser.** Parser sekcí čte lexikon z `config/section_headers.json` a převezme pravidlo hlavičky a normalizace z kapitoly @sec-data.
 
 # Omezení {#sec-omezeni}
 
-Řádkově ukotvený výraz nevidí pole, které stojí na řádku za jiným polem, hlavičky bez dvojtečky ani hlavičky rozdělené na víc řádků. Pokrytí administrativních polí se proto neměří. Opakování je jen nepřímý signál falešné hranice: synonymum se může opakovat i ve zprávě, kde je každý výskyt skutečnou hlavičkou. Hranice 50 % pro kandidáty je popisná a nerozliší sekci šablony od pole, které má ve většině zpráv podsekce. Žebříček neukazuje hlavičky pod 1 % zpráv, takže vzácnou sekci šablony nemusí zveřejnit.
+Řádkově ukotvený výraz nevidí pole, které stojí na řádku za jiným polem, hlavičky bez dvojtečky ani hlavičky rozdělené na víc řádků. Pokrytí administrativních polí se proto neměří. Opakování je jen nepřímý signál falešné hranice: synonymum se může opakovat i ve zprávě, kde je každý výskyt skutečnou hlavičkou. Hranice `r candidate_floor` pro kandidáty je popisná a nerozliší sekci šablony od pole, které má ve většině zpráv podsekce. Žebříček neukazuje hlavičky pod `r coverage_floor` zpráv, takže vzácnou sekci šablony nemusí zveřejnit.
 
 {{< include _partials/appendix.qmd >}}
