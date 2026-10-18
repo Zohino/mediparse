@@ -34,6 +34,15 @@ test_that("section_rows vrátí pro prázdnou dávku typovaný data.frame s pět
   expect_type(out$position, "integer")
   expect_type(out$span_chars, "integer")
   expect_type(out$body_chars, "integer")
+  expect_type(out$body_masked, "logical")
+})
+
+test_that("section_rows označí tělo, které je jen maska ___", {
+  chunk <- list(note_id = "m", text = "Allergies:\n___\n\nChief Complaint:\npain since ___\n")
+  out <- section_rows(sections_module(), LEXICON_PATH(), chunk)
+
+  expect_equal(out$section, c("allergies", "chief_complaint"))
+  expect_equal(out$body_masked, c(TRUE, FALSE))
 })
 
 test_that("segment_corpus naplní tabulku jen zprávami vstupního korpusu", {
@@ -80,6 +89,7 @@ sections_frame <- function(notes, span = 10L, body = 5L) {
       note_id = id, position = seq_along(sections) - 1L, section = sections,
       span_chars = rep_len(as.integer(span), length(sections)),
       body_chars = rep_len(as.integer(body), length(sections)),
+      body_masked = FALSE,
       stringsAsFactors = FALSE
     )
   })
@@ -296,6 +306,7 @@ lengths_con <- function(rows = LENGTH_ROWS, env = parent.frame()) {
   con <- mimic_con(env = env)
   rows$position <- as.integer(ave(seq_along(rows$note_id), rows$note_id, FUN = seq_along) - 1L)
   rows[c("span_chars", "body_chars")] <- lapply(rows[c("span_chars", "body_chars")], as.integer)
+  if (is.null(rows$body_masked)) rows$body_masked <- FALSE
   DBI::dbWriteTable(con, SECTIONS_TABLE, rows, temporary = TRUE, overwrite = TRUE)
   con
 }
@@ -500,6 +511,35 @@ test_that("body_length_text skloňuje jeden znak a nad prázdnou tabulkou nelze 
   empty <- sections_con(list())
   lengths <- body_lengths(empty, section_skeleton(empty, mini_lexicon(STRIP_KEYS)), OTHER)
   expect_match(body_length_text(lengths, OTHER), "nelze posoudit")
+})
+
+MASKED_ROWS <- data.frame(
+  note_id = c("n1", "n1", "n2", "n2", "n3", "n3"),
+  section = c("a", "b", "a", "b", "a", "b"),
+  span_chars = c(30, 20, 40, 20, 50, 20),
+  body_chars = c(20, 3, 30, 3, 40, 12),
+  body_masked = c(FALSE, TRUE, FALSE, TRUE, FALSE, FALSE),
+  stringsAsFactors = FALSE
+)
+
+test_that("body_lengths spočítá těla, která jsou jen maska, a tabulka ukáže jejich podíl", {
+  con <- lengths_con(MASKED_ROWS)
+  lengths <- body_lengths(con, section_skeleton(con, mini_lexicon(STRIP_KEYS)), OTHER)
+  row <- function(key) lengths[lengths$sekce == key, ]
+
+  expect_equal(c(row("a")$maskovano, row("b")$maskovano), c(0, 2))
+  table <- body_length_table(lengths)
+  expect_equal(table$maskovano[table$sekce == "b"], "66,7")
+  expect_equal(table$maskovano[table$sekce == "a"], "0,0")
+})
+
+test_that("body_length_text vynechá sekci, jejíž tělo je většinou maska, a jmenuje ji zvlášť", {
+  con <- lengths_con(MASKED_ROWS)
+  text <- body_length_text(body_lengths(con, section_skeleton(con, mini_lexicon(STRIP_KEYS)), OTHER), OTHER)
+
+  expect_match(text, "nejkratší sekce `a`", fixed = TRUE)
+  expect_match(text, "Tělo sekce `b` je u", fixed = TRUE)
+  expect_match(text, "jen maska `___`", fixed = TRUE)
 })
 
 test_that("body_lengths rozliší medián, p75 a p95 na dvaceti různých délkách", {

@@ -216,8 +216,8 @@ export_figure(sections_per_note_plot(per_note), height_cm = 8)
 
 ```{r}
 #| label: tbl-delky
-#| tbl-cap: "Délky těl sekcí ve znacích: zprávy se sekcí, medián, 75. a 95. percentil."
-#| tbl-colwidths: [24, 34, 10, 10, 11, 11]
+#| tbl-cap: "Délky těl sekcí ve znacích: zprávy se sekcí, medián, 75. a 95. percentil a podíl těl, která jsou jen maska `___`."
+#| tbl-colwidths: [22, 30, 10, 9, 9, 9, 11]
 export_table(
   body_length_table(body_len),
   col.names = TABLE_LAYOUTS[["tbl-delky"]]$col.names,

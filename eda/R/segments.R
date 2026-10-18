@@ -1,7 +1,7 @@
 SECTIONS_TABLE <- "note_sections_input"
 SECTION_COLUMNS <- c(
   note_id = "VARCHAR", position = "INTEGER", section = "VARCHAR",
-  span_chars = "INTEGER", body_chars = "INTEGER"
+  span_chars = "INTEGER", body_chars = "INTEGER", body_masked = "BOOLEAN"
 )
 
 sections_module <- function() reticulate::import("mediparse.entrypoints.eda_sections")
@@ -21,6 +21,7 @@ section_rows <- function(module, lexicon_path, chunk) {
     section = as.character(unlist(rows$section)),
     span_chars = as.integer(unlist(rows$span_chars)),
     body_chars = as.integer(unlist(rows$body_chars)),
+    body_masked = as.logical(unlist(rows$body_masked)),
     stringsAsFactors = FALSE
   )
 }
@@ -44,6 +45,9 @@ SKELETON_TABLE <- "skeleton_input"
 # Sekce, kterou vystřihne ablace D2 (strip S32); S32 má číst týž klíč.
 STRIP_SECTION <- "discharge_diagnosis"
 OTHER_LABEL <- "Text mimo sekce"
+# Sekce, jejíž tělo je u většiny zpráv jen maska `___`, nemá obsah, jen zbytek po de-identifikaci;
+# věta o délkách ji proto nebere jako nejkratší sekci, ale jmenuje zvlášť.
+MASKED_MAJORITY <- 0.5
 HEADERLESS_LABELS <- c(bez_nadpisu = "Bez nadpisů", se_sekcemi = "Se sekcemi")
 SECTION_FORMS <- c("sekce", "sekce", "sekcí")
 CHAR_FORMS <- c("znak", "znaky", "znaků")
@@ -57,8 +61,8 @@ TABLE_LAYOUTS <- list(
     align = "llcrrr", widths = c(24, 30, 10, 12, 12, 12)
   ),
   `tbl-delky` = list(
-    col.names = c("Sekce", "Popisek", "Zprávy se sekcí", "Medián", "p75", "p95"),
-    align = "llrrrr", widths = c(24, 34, 10, 10, 11, 11)
+    col.names = c("Sekce", "Popisek", "Zprávy se sekcí", "Medián", "p75", "p95", "Jen maska (%)"),
+    align = "llrrrrr", widths = c(22, 30, 10, 9, 9, 9, 11)
   ),
   `tbl-bez-nadpisu` = list(
     col.names = c("Skupina", "Zprávy", "Podíl (%)", "Medián délky", "p95 délky"),
@@ -285,11 +289,12 @@ sections_per_note_text <- function(counts, percentiles) {
 body_lengths <- function(con, skeleton, other) {
   found <- DBI::dbGetQuery(con, sprintf("
     SELECT section AS sekce, count(*) AS n,
+      count(*) FILTER (WHERE body_masked) AS maskovano,
       quantile_disc(body_chars, 0.5) AS p50, quantile_disc(body_chars, 0.75) AS p75,
       quantile_disc(body_chars, 0.95) AS p95
     FROM %s GROUP BY section
   ", SECTIONS_TABLE))
-  found <- as_numeric_columns(found, c("n", "p50", "p75", "p95"))
+  found <- as_numeric_columns(found, c("n", "maskovano", "p50", "p75", "p95"))
   out <- data.frame(
     sekce = c(skeleton$sekce, other),
     label_cs = c(skeleton$label_cs, OTHER_LABEL),
@@ -297,6 +302,7 @@ body_lengths <- function(con, skeleton, other) {
   )
   place <- match(out$sekce, found$sekce)
   out$n <- ifelse(is.na(place), 0, found$n[place])
+  out$maskovano <- ifelse(is.na(place), 0, found$maskovano[place])
   for (column in c("p50", "p75", "p95")) out[[column]] <- found[[column]][place]
   out
 }
@@ -309,6 +315,7 @@ body_length_table <- function(lengths) {
     p50 = number_text(lengths$p50),
     p75 = number_text(lengths$p75),
     p95 = number_text(lengths$p95),
+    maskovano = percent_text(lengths$maskovano, lengths$n),
     stringsAsFactors = FALSE
   )
 }
@@ -437,7 +444,10 @@ headerless_text <- function(headerless) {
 }
 
 body_length_text <- function(lengths, other) {
-  sections <- lengths[lengths$sekce != other & lengths$n > 0, , drop = FALSE]
+  present <- lengths[lengths$sekce != other & lengths$n > 0, , drop = FALSE]
+  mostly_masked <- present$maskovano / present$n > MASKED_MAJORITY
+  sections <- present[!mostly_masked, , drop = FALSE]
+  masked_text <- masked_sections_text(present[mostly_masked, , drop = FALSE])
   outside <- lengths[lengths$sekce == other, , drop = FALSE]
   if (nrow(sections) == 0L && outside$n == 0) {
     return(paste("Délky těl sekcí", UNDECIDABLE_TEXT))
@@ -448,13 +458,25 @@ body_length_text <- function(lengths, other) {
     sprintf("Text mimo sekce má medián %s.", count_phrase(outside$p50, CHAR_FORMS))
   }
   if (nrow(sections) == 0L) {
-    return(outside_text)
+    return(trimws(paste(outside_text, masked_text)))
   }
   longest <- sections[which.max(sections$p50), ]
   shortest <- sections[which.min(sections$p50), ]
-  sprintf(
-    "Nejdelší tělo má v mediánu sekce `%s` (%s), nejkratší sekce `%s` (%s). %s",
+  trimws(sprintf(
+    "Nejdelší tělo má v mediánu sekce `%s` (%s), nejkratší sekce `%s` (%s). %s %s",
     longest$sekce, count_phrase(longest$p50, CHAR_FORMS),
-    shortest$sekce, count_phrase(shortest$p50, CHAR_FORMS), outside_text
+    shortest$sekce, count_phrase(shortest$p50, CHAR_FORMS), outside_text, masked_text
+  ))
+}
+
+masked_sections_text <- function(masked) {
+  if (nrow(masked) == 0L) {
+    return("")
+  }
+  noun <- if (nrow(masked) == 1L) "sekce" else "sekcí"
+  sprintf(
+    "Tělo %s %s je u většiny zpráv jen maska `___` (u %s zpráv se sekcí): obsah odstranila de-identifikace, délka proto nepopisuje text.",
+    noun, join_labels(sprintf("`%s`", masked$sekce)),
+    join_labels(percent_label(masked$maskovano, masked$n))
   )
 }
