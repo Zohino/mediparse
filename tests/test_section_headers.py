@@ -10,6 +10,7 @@ from pydantic import ValidationError
 
 from mediparse.domain.note_text import line_headers
 from mediparse.domain.section_headers import (
+    HEADER_PATTERN,
     SectionHeader,
     SectionLexicon,
     find_section_headers,
@@ -82,6 +83,34 @@ def test_invalid_lexicon_is_rejected(overrides: dict[str, object]) -> None:
         _lexicon(**overrides)
 
 
+@pytest.mark.parametrize(
+    ("text", "headers"),
+    [
+        ("Time 10:30", []),
+        ("# CHF: yes", []),
+        ("see Chief Complaint: x", []),
+        ("  Chief Complaint:\n\tAllergies: none", ["Chief Complaint"]),
+        (
+            "Allergies:\r\nPenicillin\r\nSocial History:\r\nnone",
+            ["Allergies", "Social History"],
+        ),
+        ("Service: MEDICINE", ["Service"]),
+    ],
+)
+def test_header_pattern_mirrors_note_headers_cases(
+    text: str, headers: list[str]
+) -> None:
+    """Případy note_headers z eda/tests/testthat/test-sections.R dávají totéž."""
+    assert [m["header"] for m in HEADER_PATTERN.finditer(text)] == headers
+
+
+@pytest.mark.parametrize("synonym", ["Ab", "Ab.", "Ab "])
+def test_too_short_synonym_is_rejected(synonym: str) -> None:
+    """Délku, kterou R filtruje v note_headers, Python hlídá ve validaci lexikonu."""
+    with pytest.raises(ValidationError, match="kratší"):
+        _lexicon(sections={"a": _section(synonym)})
+
+
 DISCHARGE_LEXICON = SectionLexicon.model_validate_json(
     json.dumps({
         "sections": {
@@ -141,8 +170,6 @@ def test_spelling_variant_maps_to_section_key() -> None:
 @pytest.mark.parametrize(
     "text",
     [
-        "Ab:\nx",
-        "Time 10:30",
         "# Chief Complaint:",
         "see Chief Complaint: x",
         "IMAGING:\nVitals: 120",

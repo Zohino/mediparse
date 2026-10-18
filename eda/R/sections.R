@@ -36,8 +36,8 @@ KIND_LABELS <- c(
   sekce = "sekce lexikonu", preamble = "administrativní pole", mimo = "mimo lexikon"
 )
 
-# Pravidlo shody hlavičky se synonymem má protějšek v src/mediparse/domain/section_headers.py
-# (normalized, HEADER_PATTERN); změna pravidla se dělá v obou.
+# Pravidlo hlavičky má protějšek v src/mediparse/domain/section_headers.py: HEADER_PATTERN,
+# normalized_sql (normalized) a MIN_HEADER_CHARS (MIN_NORMALIZED_CHARS); změna se dělá v obou.
 normalized_sql <- function(column) {
   sprintf("rtrim(regexp_replace(lower(%s), '\\s+', ' ', 'g'), ' .')", column)
 }
