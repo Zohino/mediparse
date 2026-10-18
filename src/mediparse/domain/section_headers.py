@@ -1,4 +1,4 @@
-"""Lexikon sekcí propouštěcí zprávy a pravidlo, kterým se v textu pozná hlavička."""
+"""Lexikon sekcí propouštěcí zprávy, rozpoznání hlaviček v textu a rozdělení zprávy na sekce."""
 
 from __future__ import annotations
 
@@ -10,6 +10,8 @@ from typing import Annotated, Final, Self
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 MIN_NORMALIZED_CHARS: Final = 3
+# Klíč pro text mimo rozpoznané sekce; v lexikonu být nesmí, jinak by splynul se zbytkem.
+OTHER: Final = "other"
 # Pravidlo hlavičky má tři části a každá má protějšek v eda/R/sections.R:
 # HEADER_PATTERN, normalized (normalized_sql) a MIN_NORMALIZED_CHARS (MIN_HEADER_CHARS).
 # Sešit 9 měřil pokrytí lexikonu právě jím, změna se dělá v obou. Délku hlídá validace
@@ -49,6 +51,13 @@ class SectionLexicon(BaseModel):
 
     sections: Annotated[dict[str, LexiconSection], Field(min_length=1)]
     preamble: tuple[str, ...]
+
+    @model_validator(mode="after")
+    def _reserved_key_is_absent(self) -> Self:
+        if OTHER in self.sections:
+            msg = f"Sekce lexikonu nesmí mít vyhrazený klíč: {OTHER}."
+            raise ValueError(msg)
+        return self
 
     @model_validator(mode="after")
     def _synonyms_are_recognizable_and_unique(self) -> Self:
@@ -100,6 +109,45 @@ def find_section_headers(
         if key is not None and key not in found:
             found[key] = SectionHeader(key, match.start(), match.end())
     return tuple(found.values())
+
+
+@dataclass(frozen=True)
+class NoteSection:
+    """Jednotka rozdělené zprávy: hlavička sekce a její tělo.
+
+    Hlavička zahrnuje odsazení před názvem, protože `SectionHeader.start` je začátek
+    řádku. Konec řádku za dvojtečkou patří do těla, takže odstranění hlavičky i těla
+    nezanechá prázdný řádek navíc.
+
+    Attributes:
+        section: Klíč sekce v lexikonu, nebo `OTHER` pro text mimo sekce.
+        header: Text od začátku řádku po dvojtečku včetně; u `OTHER` prázdný.
+        body: Text do začátku další hlavičky.
+    """
+
+    section: str
+    header: str
+    body: str
+
+
+def split_sections(text: str, lexicon: SectionLexicon) -> tuple[NoteSection, ...]:
+    """Rozdělí zprávu na sekce v pořadí textu; text před první hlavičkou je `OTHER`.
+
+    Neprázdný `OTHER` stojí na začátku (zpráva bez hlavičky je jím celá). Spojení
+    `header + body` všech sekcí dává přesně původní text.
+
+    Returns:
+        Sekce v pořadí textu, pro prázdný text prázdná n-tice.
+    """
+    headers = find_section_headers(text, lexicon)
+    starts = [h.start for h in headers] + [len(text)]
+    preamble = text[: starts[0]]
+    sections = [NoteSection(OTHER, "", preamble)] if preamble else []
+    sections.extend(
+        NoteSection(h.section, text[h.start : h.end], text[h.end : end])
+        for h, end in zip(headers, starts[1:], strict=True)
+    )
+    return tuple(sections)
 
 
 def _require_recognizable(synonym: str) -> None:
