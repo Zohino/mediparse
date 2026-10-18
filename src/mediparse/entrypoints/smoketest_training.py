@@ -26,9 +26,8 @@ from mediparse.infrastructure.sklearn_classifier import (
     LinearSvmTrainer,
     SkopsModelFile,
 )
-from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.source_revision import revision_source
-from mediparse.infrastructure.split_config import load_split_config
+from mediparse.infrastructure.split_table import ParquetSplitTable
 from mediparse.infrastructure.training_config import load_training_config
 
 if TYPE_CHECKING:
@@ -88,23 +87,22 @@ def run(
     manifest: Path,
     revision: Callable[[], SourceRevision],
 ) -> ExitCode:
-    """Složí use case z tabulky, configu a adaptérů scikit-learn a spustí trénink.
+    """Složí use case z tabulky, configu, souboru splitu a adaptérů scikit-learn a spustí trénink.
 
     Returns:
         OK po uložení modelu, predikcí a manifestu; REFUSED pro chybějící nebo
-        neplatnou tabulku a configy a pro nečitelnou revizi zdroje.
+        neplatnou tabulku, config a soubor splitu a pro nečitelnou revizi zdroje.
     """
     training = load_training_config(config)
-    split_config = load_split_config(split)
     source = revision()
     step = SmoketestTraining(
         table=ParquetNoteTable(notes),
-        splitter=StratifiedGroupFolds(),
+        split=ParquetSplitTable(split),
         trainer=LinearSvmTrainer(training.regularization, training.seed),
         store=SkopsModelFile(model),
         predictions=ParquetPredictionTable(predictions),
     )
-    report = step.run(training, split_config)
+    report = step.run(training)
     write_model(
         manifest,
         RunManifest(
@@ -112,8 +110,8 @@ def run(
             dataset_sha256=file_sha256(notes),
             config_sha256=file_sha256(config),
             seed=training.seed,
-            split_seed=split_config.seed,
-            split_folds=split_config.folds,
+            split_seed=report.split_config.seed,
+            split_folds=report.split_config.folds,
             split_sha256=report.split_sha256,
             model=ESTIMATOR,
             model_revision=None,

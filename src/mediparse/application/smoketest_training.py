@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Protocol
 
 from mediparse.domain.evaluation import Prediction
 from mediparse.domain.smoketest_training import TrainingReport
-from mediparse.domain.split import ensure_patients_per_class, strata
+from mediparse.domain.split import ensure_patients_per_class
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -18,26 +18,20 @@ if TYPE_CHECKING:
         TextClassifier,
     )
     from mediparse.domain.diagnosis import Diagnosis
-    from mediparse.domain.identity import SubjectId
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.smoketest_training import TrainingConfig
-    from mediparse.domain.split import Split, SplitConfig
+    from mediparse.domain.split import SharedSplit
 
 
 def _labels(notes: Sequence[InputNote], diagnosis: Diagnosis) -> list[bool]:
     return [diagnosis in note.labels for note in notes]
 
 
-class PatientSplitter(Protocol):
-    """Rozdělení pacientů do foldů."""
+class SplitSource(Protocol):
+    """Zdroj hotového splitu, který spočetl krok před tréninkem."""
 
-    def split(
-        self,
-        subjects: Sequence[SubjectId],
-        strata: Sequence[int],
-        config: SplitConfig,
-    ) -> Split:
-        """Rozdělí pacienty zpráv do foldů podle třídy stratifikace každé zprávy."""
+    def read(self) -> SharedSplit:
+        """Vrátí split s jeho parametry."""
 
 
 class ClassifierTrainer[C: TextClassifier](Protocol):
@@ -63,31 +57,30 @@ class SmoketestTraining[C: TextClassifier]:
     """
 
     table: InputTable
-    splitter: PatientSplitter
+    split: SplitSource
     trainer: ClassifierTrainer[C]
     store: ModelStore[C]
     predictions: PredictionSink
 
-    def run(self, config: TrainingConfig, split_config: SplitConfig) -> TrainingReport:
+    def run(self, config: TrainingConfig) -> TrainingReport:
         """Natrénuje model na trénovacích pacientech, predikuje testovací a uloží.
 
         Args:
             config: Diagnóza a parametry tréninku.
-            split_config: Seed a počet foldů splitu.
 
         Returns:
-            Velikosti částí odložení a otisk splitu.
+            Velikosti částí odložení, config a otisk splitu.
         """
         notes = self.table.read()
         labels = _labels(notes, config.diagnosis)
-        subjects = [note.subject_id for note in notes]
+        shared = self.split.read()
         ensure_patients_per_class(
-            labels, subjects, config.diagnosis, split_config.folds
+            labels,
+            [note.subject_id for note in notes],
+            config.diagnosis,
+            shared.config.folds,
         )
-        split = self.splitter.split(
-            subjects, strata(notes, split_config.folds), split_config
-        )
-        holdout = split.holdout(notes, config.fold)
+        holdout = shared.split.holdout(notes, config.fold)
         classifier = self.trainer.fit(
             [note.text for note in holdout.train],
             _labels(holdout.train, config.diagnosis),
@@ -116,5 +109,6 @@ class SmoketestTraining[C: TextClassifier]:
             train_notes=len(holdout.train),
             test_notes=len(holdout.test),
             test_positives=sum(truth),
-            split_sha256=split.sha256(),
+            split_config=shared.config,
+            split_sha256=shared.split.sha256(),
         )

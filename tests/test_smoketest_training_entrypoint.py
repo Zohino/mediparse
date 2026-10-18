@@ -15,7 +15,14 @@ from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.sklearn_classifier import ESTIMATOR, SkopsModelFile
-from tests.model_support import separable_notes, split_config_json, training_config
+from mediparse.infrastructure.split_table import ParquetSplitTable
+from tests.model_support import (
+    OVERLAPPING,
+    separable_notes,
+    training_config,
+    write_raw_split,
+    write_split,
+)
 from tests.support import REVISION, fixed_revision, missing_revision
 
 if TYPE_CHECKING:
@@ -23,13 +30,8 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     from mediparse.domain.environment import SourceRevision
-    from mediparse.domain.evaluation import Prediction
 
 PATIENTS: Final = 12
-OVERLAPPING: Final = (
-    "diabetes insulin glucose clinic review",
-    "fracture cast splint clinic review",
-)
 
 
 def _inputs(
@@ -38,10 +40,10 @@ def _inputs(
     diagnosis: str = "diabetes",
     seed: int = 0,
     row_id: str | None = "row",
-    split_seed: int = 0,
 ) -> tuple[Path, Path, Path]:
+    corpus = separable_notes(PATIENTS, OVERLAPPING)
     notes = root / "notes.parquet"
-    ParquetNoteTable(notes).write(separable_notes(PATIENTS, OVERLAPPING))
+    ParquetNoteTable(notes).write(corpus)
     config_body = training_config(diagnosis=diagnosis, seed=seed)
     if row_id is None:
         del config_body["row_id"]
@@ -52,8 +54,8 @@ def _inputs(
         json.dumps(config_body),
         encoding="utf-8",
     )
-    split = root / f"split-{split_seed}.json"
-    split.write_text(json.dumps(split_config_json(seed=split_seed)), encoding="utf-8")
+    split = root / "splits.parquet"
+    write_split(split, corpus)
     return notes, config, split
 
 
@@ -121,6 +123,7 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
     assert written.seed == 0
     assert written.split_seed == 0
     assert written.split_folds == 2  # ruff: ignore[magic-value-comparison]
+    assert written.split_sha256 == ParquetSplitTable(split).read().split.sha256()
     assert written.row_id == "row"
     assert written.environment.source == REVISION
     assert written.model_revision is None
@@ -131,13 +134,13 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
 
 @pytest.mark.parametrize(
     ("index", "missing"),
-    [(0, "none.parquet"), (1, "none.json"), (2, "none-split.json")],
+    [(0, "none.parquet"), (1, "none.json"), (2, "none-splits.parquet")],
     ids=["table", "config", "split"],
 )
 def test_missing_input_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture, index: int, missing: str
 ) -> None:
-    """Chybějící tabulka, config tréninku nebo config splitu krok odmítne, nic nevznikne a log jmenuje soubor."""
+    """Chybějící tabulka, config tréninku nebo soubor splitu krok odmítne, nic nevznikne a log jmenuje soubor."""
     paths = list(_inputs(tmp_path))
     paths[index] = tmp_path / missing
     outputs = _Outputs.under(tmp_path / "out")
@@ -174,12 +177,14 @@ def test_invalid_config_is_refused(tmp_path: Path) -> None:
     assert outputs.existing() == []
 
 
-def test_invalid_split_config_is_refused(
+def test_split_with_subject_in_two_folds_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
-    """Config splitu s jedním foldem krok odmítne, nic nevznikne a log jmenuje soubor."""
+    """Soubor splitu s pacientem ve dvou foldech krok odmítne a nic nevznikne."""
     notes, config, split = _inputs(tmp_path)
-    split.write_text(json.dumps(split_config_json(folds=1)), encoding="utf-8")
+    write_raw_split(
+        split, [(1, 0), (1, 1), (2, 1)], {"folds": 2, "seed": 0, "sha256": "0" * 64}
+    )
     outputs = _Outputs.under(tmp_path / "out")
 
     code = _run(notes, config, split, outputs)
@@ -189,85 +194,32 @@ def test_invalid_split_config_is_refused(
     assert split.name in caplog.text
 
 
-def test_split_seed_outside_generator_range_is_refused(tmp_path: Path) -> None:
-    """Záporný seed splitu krok odmítne a nic nevznikne, ne traceback z adaptéru."""
+def test_manifest_split_comes_from_split_file(tmp_path: Path) -> None:
+    """Seed, počet foldů a otisk manifestu jsou ze souboru splitu, ne z configu."""
+    corpus = separable_notes(PATIENTS, OVERLAPPING)
     notes, config, split = _inputs(tmp_path)
-    split.write_text(json.dumps(split_config_json(seed=-1)), encoding="utf-8")
+    shared = write_split(split, corpus, seed=5, folds=3)
     outputs = _Outputs.under(tmp_path / "out")
 
     code = _run(notes, config, split, outputs)
 
-    assert code is ExitCode.REFUSED
-    assert outputs.existing() == []
+    written = RunManifest.model_validate_json(
+        outputs.manifest.read_text(encoding="utf-8")
+    )
+    assert code is ExitCode.OK
+    assert (written.split_seed, written.split_folds) == (5, 3)
+    assert written.split_sha256 == shared.split.sha256()
 
 
-def _successful_run(root: Path, seed: int, name: str, split_seed: int = 0) -> _Outputs:
-    notes, config, split = _inputs(root, seed=seed, split_seed=split_seed)
+def _successful_run(root: Path, seed: int, name: str) -> _Outputs:
+    notes, config, split = _inputs(root, seed=seed)
     outputs = _Outputs.under(root / name)
     assert _run(notes, config, split, outputs) is ExitCode.OK
     return outputs
 
 
-def _predictions(
-    root: Path, seed: int, name: str, split_seed: int = 0
-) -> tuple[Prediction, ...]:
-    return ParquetPredictionTable(
-        _successful_run(root, seed, name, split_seed).predictions
-    ).read()
-
-
-def _manifest(root: Path, seed: int, name: str, split_seed: int = 0) -> RunManifest:
-    return RunManifest.model_validate_json(
-        _successful_run(root, seed, name, split_seed).manifest.read_text(
-            encoding="utf-8"
-        )
-    )
-
-
-def _test_patients(rows: tuple[Prediction, ...]) -> frozenset[tuple[int, int]]:
-    return frozenset((row.subject_id, row.fold) for row in rows)
-
-
-def test_model_seed_does_not_change_test_patients(tmp_path: Path) -> None:
-    """Změna seedu modelu při stejném configu splitu nechá testovací pacienty beze změny."""
-    patients = {
-        _test_patients(_predictions(tmp_path, seed, f"seed{seed}")) for seed in range(6)
-    }
-
-    assert len(patients) == 1
-
-
-def test_model_seed_does_not_change_split_fingerprint(tmp_path: Path) -> None:
-    """Otisk splitu v manifestu je pro všechny seedy modelu stejný."""
-    fingerprints = {
-        _manifest(tmp_path, seed, f"seed{seed}").split_sha256 for seed in range(6)
-    }
-
-    assert len(fingerprints) == 1
-
-
-def test_split_seed_changes_test_patients(tmp_path: Path) -> None:
-    """Pozitivní kontrola: seed splitu při stejném configu tréninku mění testovací pacienty."""
-    patients = {
-        _test_patients(_predictions(tmp_path, 0, f"split{seed}", split_seed=seed))
-        for seed in range(6)
-    }
-
-    assert len(patients) > 1
-
-
-def test_split_seed_changes_fingerprint_and_manifest_seed(tmp_path: Path) -> None:
-    """Jiný seed splitu dá jiný split_seed a aspoň u některého seedu jiný otisk."""
-    manifests = [
-        _manifest(tmp_path, 0, f"split{seed}", split_seed=seed) for seed in range(6)
-    ]
-
-    assert [item.split_seed for item in manifests] == list(range(6))
-    assert len({item.split_sha256 for item in manifests}) > 1
-
-
-def _manifest_bytes(root: Path, seed: int, name: str, split_seed: int = 0) -> bytes:
-    return _successful_run(root, seed, name, split_seed).manifest.read_bytes()
+def _manifest_bytes(root: Path, seed: int, name: str) -> bytes:
+    return _successful_run(root, seed, name).manifest.read_bytes()
 
 
 def test_manifest_is_byte_identical_for_same_inputs(tmp_path: Path) -> None:

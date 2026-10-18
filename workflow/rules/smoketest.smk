@@ -12,11 +12,23 @@ rule prepare_smoketest_subset:
         "../scripts/prepare_smoketest.py"
 
 
+rule make_smoketest_splits:
+    input:
+        notes=SMOKETEST / "notes.parquet",
+        config="config/split.json",
+    output:
+        SMOKETEST / "splits.parquet",
+    log:
+        SMOKETEST_LOGS / "make_smoketest_splits.log",
+    script:
+        "../scripts/make_smoketest_splits.py"
+
+
 rule train_smoketest_model:
     input:
         notes=SMOKETEST / "notes.parquet",
         config="config/smoketest_training.json",
-        split="config/split.json",
+        split=SMOKETEST / "splits.parquet",
     output:
         model=SMOKETEST / "model.skops",
         predictions=SMOKETEST / "predictions.parquet",
