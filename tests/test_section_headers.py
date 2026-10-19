@@ -443,6 +443,24 @@ def test_mimic_shaped_notes_match_expectations() -> None:
     assert len(notes) >= MIN_MIMIC_SHAPED_NOTES
 
 
+def _with_first_lines(
+    text: str, sections: tuple[NoteSection, ...]
+) -> list[list[object]]:
+    """Klíč, hlavička a číslo řádku (od 1), kde část začíná.
+
+    Returns:
+        Trojice ve tvaru `expected.json`.
+    """
+    result: list[list[object]] = []
+    offset = 0
+    for section in sections:
+        # Část začíná na začátku řádku; cut uvnitř řádku ukáže jen sloupec, ne číslo řádku.
+        assert offset == 0 or text[offset - 1] == "\n"
+        result.append([section.section, section.header, text[:offset].count("\n") + 1])
+        offset += len(section.header) + len(section.body)
+    return result
+
+
 @pytest.mark.parametrize("name", MIMIC_SHAPED_EXPECTED, ids=MIMIC_SHAPED_EXPECTED)
 def test_mimic_shaped_note_splits_as_expected(name: str) -> None:
     """Celá zpráva ve tvaru šablony MIMIC se rozdělí podle očekávání a složí se zpět."""
@@ -450,7 +468,5 @@ def test_mimic_shaped_note_splits_as_expected(name: str) -> None:
 
     sections = split_sections(text, REPOSITORY_LEXICON)
 
-    assert [(s.section, s.header) for s in sections] == [
-        tuple(pair) for pair in MIMIC_SHAPED_EXPECTED[name]["sections"]
-    ]
+    assert _with_first_lines(text, sections) == MIMIC_SHAPED_EXPECTED[name]["sections"]
     assert "".join(s.header + s.body for s in sections) == text

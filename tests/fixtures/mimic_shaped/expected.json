@@ -2,157 +2,157 @@
   "full_template": {
     "covers": "Všech 17 sekcí v pořadí šablony, preambule s poli na jednom řádku a Attending za Allergies, který otevře samostatný other (oprava S29b).",
     "sections": [
-      ["other", ""],
-      ["allergies", "Allergies:"],
-      ["other", ""],
-      ["chief_complaint", "Chief Complaint:"],
-      ["major_procedure", "Major Surgical or Invasive Procedure:"],
-      ["history_of_present_illness", "History of Present Illness:"],
-      ["past_medical_history", "Past Medical History:"],
-      ["social_history", "Social History:"],
-      ["family_history", "Family History:"],
-      ["physical_exam", "Physical Exam:"],
-      ["pertinent_results", "Pertinent Results:"],
-      ["hospital_course", "Brief Hospital Course:"],
-      ["medications_on_admission", "Medications on Admission:"],
-      ["discharge_medications", "Discharge Medications:"],
-      ["discharge_disposition", "Discharge Disposition:"],
-      ["discharge_diagnosis", "Discharge Diagnosis:"],
-      ["discharge_condition", "Discharge Condition:"],
-      ["discharge_instructions", "Discharge Instructions:"],
-      ["followup_instructions", "Followup Instructions:"]
+      ["other", "", 1],
+      ["allergies", "Allergies:", 8],
+      ["other", "", 11],
+      ["chief_complaint", "Chief Complaint:", 13],
+      ["major_procedure", "Major Surgical or Invasive Procedure:", 16],
+      ["history_of_present_illness", "History of Present Illness:", 19],
+      ["past_medical_history", "Past Medical History:", 23],
+      ["social_history", "Social History:", 28],
+      ["family_history", "Family History:", 30],
+      ["physical_exam", "Physical Exam:", 33],
+      ["pertinent_results", "Pertinent Results:", 37],
+      ["hospital_course", "Brief Hospital Course:", 41],
+      ["medications_on_admission", "Medications on Admission:", 45],
+      ["discharge_medications", "Discharge Medications:", 49],
+      ["discharge_disposition", "Discharge Disposition:", 54],
+      ["discharge_diagnosis", "Discharge Diagnosis:", 57],
+      ["discharge_condition", "Discharge Condition:", 61],
+      ["discharge_instructions", "Discharge Instructions:", 64],
+      ["followup_instructions", "Followup Instructions:", 67]
     ]
   },
   "attending_before_allergies": {
     "covers": "Menšinová varianta šablony: Attending v preambuli a tělo alergií je čisté.",
     "sections": [
-      ["other", ""],
-      ["allergies", "Allergies:"],
-      ["chief_complaint", "Chief Complaint:"],
-      ["history_of_present_illness", "History of Present Illness:"],
-      ["past_medical_history", "Past Medical History:"],
-      ["physical_exam", "Physical Exam:"],
-      ["hospital_course", "Brief Hospital Course:"],
-      ["discharge_medications", "Discharge Medications:"],
-      ["discharge_diagnosis", "Discharge Diagnosis:"],
-      ["discharge_instructions", "Discharge Instructions:"],
-      ["followup_instructions", "Followup Instructions:"]
+      ["other", "", 1],
+      ["allergies", "Allergies:", 10],
+      ["chief_complaint", "Chief Complaint:", 13],
+      ["history_of_present_illness", "History of Present Illness:", 16],
+      ["past_medical_history", "Past Medical History:", 19],
+      ["physical_exam", "Physical Exam:", 22],
+      ["hospital_course", "Brief Hospital Course:", 25],
+      ["discharge_medications", "Discharge Medications:", 28],
+      ["discharge_diagnosis", "Discharge Diagnosis:", 31],
+      ["discharge_instructions", "Discharge Instructions:", 34],
+      ["followup_instructions", "Followup Instructions:", 37]
     ]
   },
   "headerless_addendum": {
     "covers": "Krátká zpráva bez hlavičky je jediná část other.",
     "sections": [
-      ["other", ""]
+      ["other", "", 1]
     ]
   },
   "synonym_variants": {
     "covers": "Synonyma hlaviček z lexikonu, velká písmena a odsazená hlavička.",
     "sections": [
-      ["other", ""],
-      ["allergies", "Allergies:"],
-      ["chief_complaint", "Chief Complaint:"],
-      ["history_of_present_illness", "History of the Present Illness:"],
-      ["past_medical_history", "Past Medical History:"],
-      ["physical_exam", "Physical Examination:"],
-      ["pertinent_results", "Pertinent Results:"],
-      ["hospital_course", "  BRIEF HOSPITAL COURSE:"],
-      ["discharge_diagnosis", "Discharge Diagnoses:"],
-      ["followup_instructions", "Follow-up Instructions:"]
+      ["other", "", 1],
+      ["allergies", "Allergies:", 3],
+      ["chief_complaint", "Chief Complaint:", 6],
+      ["history_of_present_illness", "History of the Present Illness:", 9],
+      ["past_medical_history", "Past Medical History:", 12],
+      ["physical_exam", "Physical Examination:", 15],
+      ["pertinent_results", "Pertinent Results:", 18],
+      ["hospital_course", "  BRIEF HOSPITAL COURSE:", 21],
+      ["discharge_diagnosis", "Discharge Diagnoses:", 24],
+      ["followup_instructions", "Follow-up Instructions:", 28]
     ]
   },
   "subheaders_in_bodies": {
     "covers": "Podnadpisy (ADMISSION EXAM:, VS:, IMAGING:, Past Surgical History:), časy a zkratky s dvojtečkou zůstávají v tělech.",
     "sections": [
-      ["other", ""],
-      ["chief_complaint", "Chief Complaint:"],
-      ["past_medical_history", "Past Medical History:"],
-      ["physical_exam", "Physical Exam:"],
-      ["pertinent_results", "Pertinent Results:"],
-      ["hospital_course", "Brief Hospital Course:"],
-      ["discharge_diagnosis", "Discharge Diagnosis:"]
+      ["other", "", 1],
+      ["chief_complaint", "Chief Complaint:", 3],
+      ["past_medical_history", "Past Medical History:", 6],
+      ["physical_exam", "Physical Exam:", 11],
+      ["pertinent_results", "Pertinent Results:", 18],
+      ["hospital_course", "Brief Hospital Course:", 25],
+      ["discharge_diagnosis", "Discharge Diagnosis:", 28]
     ]
   },
   "inline_values": {
     "covers": "Hodnota na řádku hlavičky nevytvoří hranici, Primary: ani Secondary: nejsou sekce.",
     "sections": [
-      ["other", ""],
-      ["allergies", "Allergies:"],
-      ["chief_complaint", "Chief Complaint:"],
-      ["hospital_course", "Brief Hospital Course:"],
-      ["discharge_disposition", "Discharge Disposition:"],
-      ["discharge_diagnosis", "Discharge Diagnosis:"],
-      ["discharge_condition", "Discharge Condition:"]
+      ["other", "", 1],
+      ["allergies", "Allergies:", 3],
+      ["chief_complaint", "Chief Complaint:", 5],
+      ["hospital_course", "Brief Hospital Course:", 7],
+      ["discharge_disposition", "Discharge Disposition:", 10],
+      ["discharge_diagnosis", "Discharge Diagnosis:", 12],
+      ["discharge_condition", "Discharge Condition:", 17]
     ]
   },
   "empty_sections": {
     "covers": "Hlavička hned za hlavičkou a sekce s tělem None.",
     "sections": [
-      ["other", ""],
-      ["allergies", "Allergies:"],
-      ["chief_complaint", "Chief Complaint:"],
-      ["major_procedure", "Major Surgical or Invasive Procedure:"],
-      ["social_history", "Social History:"],
-      ["family_history", "Family History:"],
-      ["discharge_medications", "Discharge Medications:"],
-      ["discharge_disposition", "Discharge Disposition:"],
-      ["followup_instructions", "Followup Instructions:"]
+      ["other", "", 1],
+      ["allergies", "Allergies:", 3],
+      ["chief_complaint", "Chief Complaint:", 4],
+      ["major_procedure", "Major Surgical or Invasive Procedure:", 5],
+      ["social_history", "Social History:", 8],
+      ["family_history", "Family History:", 10],
+      ["discharge_medications", "Discharge Medications:", 11],
+      ["discharge_disposition", "Discharge Disposition:", 12],
+      ["followup_instructions", "Followup Instructions:", 13]
     ]
   },
   "repeated_headers": {
     "covers": "Druhé Past Medical History: v průběhu hospitalizace, druhé Chief Complaint: a Attending: v instrukcích zůstanou v tělech.",
     "sections": [
-      ["other", ""],
-      ["chief_complaint", "Chief Complaint:"],
-      ["past_medical_history", "Past Medical History:"],
-      ["hospital_course", "Brief Hospital Course:"],
-      ["discharge_diagnosis", "Discharge Diagnosis:"],
-      ["discharge_instructions", "Discharge Instructions:"],
-      ["followup_instructions", "Followup Instructions:"]
+      ["other", "", 1],
+      ["chief_complaint", "Chief Complaint:", 5],
+      ["past_medical_history", "Past Medical History:", 8],
+      ["hospital_course", "Brief Hospital Course:", 12],
+      ["discharge_diagnosis", "Discharge Diagnosis:", 17],
+      ["discharge_instructions", "Discharge Instructions:", 20],
+      ["followup_instructions", "Followup Instructions:", 26]
     ]
   },
   "reordered_sections": {
     "covers": "Discharge Medications před Medications on Admission a Pertinent Results za průběhem: dělí pořadí v textu, ne pořadí šablony.",
     "sections": [
-      ["other", ""],
-      ["chief_complaint", "Chief Complaint:"],
-      ["discharge_medications", "Discharge Medications:"],
-      ["medications_on_admission", "Medications on Admission:"],
-      ["hospital_course", "Brief Hospital Course:"],
-      ["pertinent_results", "Pertinent Results:"],
-      ["discharge_diagnosis", "Discharge Diagnosis:"]
+      ["other", "", 1],
+      ["chief_complaint", "Chief Complaint:", 3],
+      ["discharge_medications", "Discharge Medications:", 6],
+      ["medications_on_admission", "Medications on Admission:", 9],
+      ["hospital_course", "Brief Hospital Course:", 13],
+      ["pertinent_results", "Pertinent Results:", 16],
+      ["discharge_diagnosis", "Discharge Diagnosis:", 20]
     ]
   },
   "truncated_note": {
     "covers": "Zpráva končí Discharge Condition, závěrečné sekce chybí.",
     "sections": [
-      ["other", ""],
-      ["allergies", "Allergies:"],
-      ["chief_complaint", "Chief Complaint:"],
-      ["history_of_present_illness", "History of Present Illness:"],
-      ["hospital_course", "Brief Hospital Course:"],
-      ["discharge_diagnosis", "Discharge Diagnosis:"],
-      ["discharge_condition", "Discharge Condition:"]
+      ["other", "", 1],
+      ["allergies", "Allergies:", 5],
+      ["chief_complaint", "Chief Complaint:", 8],
+      ["history_of_present_illness", "History of Present Illness:", 11],
+      ["hospital_course", "Brief Hospital Course:", 14],
+      ["discharge_diagnosis", "Discharge Diagnosis:", 17],
+      ["discharge_condition", "Discharge Condition:", 20]
     ]
   },
   "field_line_in_body": {
     "covers": "Známé omezení (přijatý kompromis S29b): pole na začátku řádku v těle sekce (Sex:) sekci uřízne, i když v preambuli stálo uprostřed řádku.",
     "sections": [
-      ["other", ""],
-      ["chief_complaint", "Chief Complaint:"],
-      ["social_history", "Social History:"],
-      ["other", ""],
-      ["family_history", "Family History:"],
-      ["hospital_course", "Brief Hospital Course:"],
-      ["discharge_diagnosis", "Discharge Diagnosis:"]
+      ["other", "", 1],
+      ["chief_complaint", "Chief Complaint:", 3],
+      ["social_history", "Social History:", 6],
+      ["other", "", 8],
+      ["family_history", "Family History:", 11],
+      ["hospital_course", "Brief Hospital Course:", 14],
+      ["discharge_diagnosis", "Discharge Diagnosis:", 17]
     ]
   },
   "lowercase_and_unknown_headers": {
     "covers": "Hlavička malými písmeny a Hospital Course Summary: mimo lexikon nejsou hranice.",
     "sections": [
-      ["other", ""],
-      ["allergies", "Allergies:"],
-      ["hospital_course", "Brief Hospital Course:"],
-      ["discharge_diagnosis", "Discharge Diagnosis:"]
+      ["other", "", 1],
+      ["allergies", "Allergies:", 3],
+      ["hospital_course", "Brief Hospital Course:", 9],
+      ["discharge_diagnosis", "Discharge Diagnosis:", 13]
     ]
   }
 }
