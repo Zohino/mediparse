@@ -21,13 +21,13 @@ from mediparse.domain.section_headers import (
     split_sections,
 )
 from mediparse.infrastructure.sampler_config import load_sampler_config
-from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
-from tests.support import (
-    REPOSITORY_CONFIG,
-    REPOSITORY_CORPUS,
-    REPOSITORY_SECTION_HEADERS,
+from tests.section_support import (
+    MIMIC_SHAPED_NOTES,
+    REPOSITORY_LEXICON,
+    mimic_shaped_notes,
 )
+from tests.support import REPOSITORY_CONFIG, REPOSITORY_CORPUS
 
 
 def _lexicon_json(**overrides: object) -> dict[str, object]:
@@ -234,10 +234,10 @@ def test_repeated_header_stays_in_body() -> None:
         "Past Medical History:\nCHF\nChief Complaint:\npain\nPast Medical History:\nold"
     )
 
-    assert [key for key, _ in _found(text)] == [
-        "past_medical_history",
-        "chief_complaint",
-    ]
+    assert find_section_headers(text, DISCHARGE_LEXICON) == (
+        SectionHeader("past_medical_history", 0, 21),
+        SectionHeader("chief_complaint", 26, 42),
+    )
 
 
 def test_repeat_through_other_synonym_returns_first_only() -> None:
@@ -245,9 +245,6 @@ def test_repeat_through_other_synonym_returns_first_only() -> None:
     text = "Discharge Diagnosis:\nCHF\nDischarge Diagnoses:\nCOPD"
 
     assert _found(text) == [("discharge_diagnosis", "Discharge Diagnosis:")]
-
-
-REPOSITORY_LEXICON: Final = load_section_lexicon(REPOSITORY_SECTION_HEADERS)
 
 
 def _synthetic_notes() -> dict[str, str]:
@@ -430,3 +427,46 @@ def test_split_synthetic_corpus_keeps_surgical_history_in_medical_history() -> N
         checked += 1
 
     assert checked
+
+
+MIMIC_SHAPED_EXPECTED: Final = json.loads(
+    (MIMIC_SHAPED_NOTES / "expected.json").read_text(encoding="utf-8")
+)
+MIN_MIMIC_SHAPED_NOTES: Final = 12
+
+
+def test_mimic_shaped_notes_match_expectations() -> None:
+    """Každá zpráva má očekávání a každé očekávání zprávu; sada má aspoň 12 zpráv."""
+    notes = mimic_shaped_notes()
+
+    assert notes.keys() == MIMIC_SHAPED_EXPECTED.keys()
+    assert len(notes) >= MIN_MIMIC_SHAPED_NOTES
+
+
+def _with_first_lines(
+    text: str, sections: tuple[NoteSection, ...]
+) -> list[list[object]]:
+    """Klíč, hlavička a číslo řádku (od 1), kde část začíná.
+
+    Returns:
+        Trojice ve tvaru `expected.json`.
+    """
+    result: list[list[object]] = []
+    offset = 0
+    for section in sections:
+        # Část začíná na začátku řádku; cut uvnitř řádku ukáže jen sloupec, ne číslo řádku.
+        assert offset == 0 or text[offset - 1] == "\n"
+        result.append([section.section, section.header, text[:offset].count("\n") + 1])
+        offset += len(section.header) + len(section.body)
+    return result
+
+
+@pytest.mark.parametrize("name", MIMIC_SHAPED_EXPECTED, ids=MIMIC_SHAPED_EXPECTED)
+def test_mimic_shaped_note_splits_as_expected(name: str) -> None:
+    """Celá zpráva ve tvaru šablony MIMIC se rozdělí podle očekávání a složí se zpět."""
+    text = mimic_shaped_notes()[name]
+
+    sections = split_sections(text, REPOSITORY_LEXICON)
+
+    assert _with_first_lines(text, sections) == MIMIC_SHAPED_EXPECTED[name]["sections"]
+    assert "".join(s.header + s.body for s in sections) == text

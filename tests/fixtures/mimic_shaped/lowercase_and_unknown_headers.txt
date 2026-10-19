@@ -1,0 +1,14 @@
+Name: ___ Unit No: ___
+
+Allergies:
+none
+
+chief complaint:
+cough, 2d
+
+Brief Hospital Course:
+Hospital Course Summary:
+Obs overnight, no events.
+
+Discharge Diagnosis:
+Cough

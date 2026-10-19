@@ -1,0 +1,21 @@
+Name: ___ Unit No: ___
+
+Chief Complaint:
+syncope
+
+Discharge Medications:
+1. metoprolol 25 mg BID
+
+Medications on Admission:
+metoprolol 50 mg BID
+ASA 81
+
+Brief Hospital Course:
+Syncope, orthostatic. Beta-blocker reduced.
+
+Pertinent Results:
+ECG: SR, no ischemia
+Echo: EF 60%
+
+Discharge Diagnosis:
+Orthostatic syncope

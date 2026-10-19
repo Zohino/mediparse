@@ -53,6 +53,7 @@ lint = [
 ]
 test = [
     "pytest>=9.1.1",
+    "hypothesis>=6.170.2",
 ]
 
 [tool.pytest]

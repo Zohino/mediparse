@@ -1,0 +1,27 @@
+Name: ___ Unit No: ___
+
+Attending: ___.
+
+Chief Complaint:
+weakness
+
+Past Medical History:
+DM2
+HTN
+
+Brief Hospital Course:
+Past Medical History:
+DM2, HTN, neuropathy (per outside record)
+Admitted for weakness, work-up neg.
+
+Discharge Diagnosis:
+Weakness NOS
+
+Discharge Instructions:
+Chief Complaint:
+weakness, f/u PCP
+Attending: ___
+Return if worse.
+
+Followup Instructions:
+___

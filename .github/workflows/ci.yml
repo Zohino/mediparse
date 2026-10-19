@@ -132,7 +132,8 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: pytest v kontejneru
-        run: docker run --rm mediparse:ci pytest
+        # Hypothesis v CI načte deterministický profil ci podle proměnné CI; do kontejneru ji předá -e.
+        run: docker run --rm -e CI mediparse:ci pytest
       - name: smoketest.sh
         env:
           BUILDX_BUILDER: default

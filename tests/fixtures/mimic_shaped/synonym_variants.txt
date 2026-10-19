@@ -1,0 +1,29 @@
+Name: ___ Unit No: ___
+
+Allergies:
+codeine
+
+Chief Complaint:
+fall
+
+History of the Present Illness:
+___ M, mechanical fall, head strike, no LOC.
+
+Past Medical History:
+AFib on warfarin
+
+Physical Examination:
+scalp hematoma, neuro intact
+
+Pertinent Results:
+CT head: neg
+
+  BRIEF HOSPITAL COURSE:
+Obs 24h, repeat CT stable.
+
+Discharge Diagnoses:
+Fall
+Scalp contusion
+
+Follow-up Instructions:
+PCP 1 wk
