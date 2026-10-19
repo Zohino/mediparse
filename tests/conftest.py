@@ -9,7 +9,6 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
 import pytest
-from hypothesis import settings
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.mentions import Mention, MentionStatus
@@ -38,10 +37,6 @@ if TYPE_CHECKING:
     from mediparse.domain.synthetic_plan import SamplerConfig
 
 type Rows = Sequence[tuple[str, str]]
-
-# Profil ci je bez náhody (derandomize), bez databáze příkladů a bez časového limitu,
-# takže běh je stejný lokálně, v CI i v kontejneru.
-settings.load_profile("ci")
 
 HEADER: Final = (
     "note_id",
