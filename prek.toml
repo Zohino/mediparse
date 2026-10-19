@@ -17,7 +17,9 @@ repo = "builtin"
 hooks = [
     { id = "no-commit-to-branch", groups = ["local-only"] },
     { id = "forbid-new-submodules" },
-    { id = "check-added-large-files", args = ["--enforce-all"], exclude = "^resources/icd/2018_I(9|10)gem\\.txt$" },
+    { id = "check-added-large-files", args = ["--enforce-all"], exclude = "^(resources/icd/2018_I(9|10)gem\\.txt|results/eda/[^/]+\\.pdf)$" },
+    # Celý sešit EDA s vektorovými grafy přeroste 500 KB; vlastní strop hlídá dál nečekaně velký render.
+    { id = "check-added-large-files", name = "check for added large files (EDA PDF)", args = ["--enforce-all", "--maxkb=2048"], files = "^results/eda/[^/]+\\.pdf$" },
     { id = "check-case-conflict" },
     { id = "check-illegal-windows-names" },
     { id = "check-symlinks" },
