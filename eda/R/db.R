@@ -63,3 +63,34 @@ config_path <- function(name) {
   root <- Sys.getenv("PIXI_PROJECT_ROOT", file.path("..", "..", ".."))
   file.path(root, "config", name)
 }
+
+# Dávky jdou po `batch` zprávách, protože texty se předávají mimo DuckDB (tokenizér,
+# parser sekcí přes reticulate) a celý korpus se do paměti R nevejde.
+batched_table <- function(con, name, columns, rows_sql, fn, batch = 2000L) {
+  if (name %in% DBI::dbListTables(con)) {
+    return(name)
+  }
+  rows <- paste0(name, "_rows")
+  quote <- function(identifier) DBI::dbQuoteIdentifier(con, identifier)
+  definition <- paste(quote(names(columns)), columns, collapse = ", ")
+  DBI::dbExecute(con, sprintf("CREATE TEMP TABLE %s (%s)", quote(name), definition))
+  done <- FALSE
+  on.exit({
+    DBI::dbExecute(con, sprintf("DROP TABLE IF EXISTS %s", quote(rows)))
+    if (!done) DBI::dbExecute(con, sprintf("DROP TABLE IF EXISTS %s", quote(name)))
+  })
+  DBI::dbExecute(con, sprintf("
+    CREATE TEMP TABLE %s AS
+    SELECT row_number() OVER (ORDER BY note_id) AS rn, note_id, text FROM (%s)
+  ", quote(rows), rows_sql))
+  total <- as.numeric(DBI::dbGetQuery(con, sprintf("SELECT count(*) AS n FROM %s", quote(rows)))$n)
+  for (index in seq_len(ceiling(total / batch))) {
+    chunk <- DBI::dbGetQuery(con, sprintf(
+      "SELECT note_id, text FROM %s WHERE rn BETWEEN %.0f AND %.0f ORDER BY rn",
+      quote(rows), (index - 1) * batch + 1, index * batch
+    ))
+    DBI::dbAppendTable(con, name, fn(chunk))
+  }
+  done <- TRUE
+  name
+}

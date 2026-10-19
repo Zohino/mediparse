@@ -127,3 +127,57 @@ test_that("eda_parquet_dir má výchozí adresář pod kořenem projektu", {
 
   expect_equal(eda_parquet_dir(), "/koren/resources/mimic/parquet")
 })
+
+length_rows <- function(chunk) {
+  data.frame(note_id = chunk$note_id, n = nchar(chunk$text), stringsAsFactors = FALSE)
+}
+
+LENGTH_COLUMNS <- c(note_id = "VARCHAR", n = "INTEGER")
+NOTES_SQL <- "SELECT note_id, text FROM discharge"
+
+test_that("batched_table zapíše výsledky přes víc dávek v pořadí note_id", {
+  notes <- text_notes(c("c", "aa", "bbb", "dddd", "e"))
+  notes$note_id <- c("n3", "n1", "n2", "n5", "n4")
+  con <- mimic_con(discharge = notes)
+  sizes <- integer()
+  fn <- function(chunk) {
+    sizes <<- c(sizes, nrow(chunk))
+    length_rows(chunk)
+  }
+  name <- batched_table(con, "lengths", LENGTH_COLUMNS, NOTES_SQL, fn, batch = 2L)
+  out <- DBI::dbGetQuery(con, sprintf("SELECT * FROM %s", name))
+
+  expect_equal(name, "lengths")
+  expect_equal(sizes, c(2L, 2L, 1L))
+  expect_equal(out$note_id, paste0("n", 1:5))
+  expect_equal(out$n, c(2, 3, 1, 1, 4))
+  expect_false("lengths_rows" %in% DBI::dbListTables(con))
+})
+
+test_that("batched_table dá pro prázdný zdroj typovanou prázdnou tabulku", {
+  con <- mimic_con()
+  name <- batched_table(con, "lengths", LENGTH_COLUMNS, NOTES_SQL, function(chunk) stop("nemá se volat"))
+  out <- DBI::dbGetQuery(con, sprintf("SELECT * FROM %s", name))
+
+  expect_equal(names(out), c("note_id", "n"))
+  expect_equal(nrow(out), 0)
+  expect_type(out$n, "integer")
+})
+
+test_that("batched_table při chybě smaže výslednou i pomocnou tabulku", {
+  con <- mimic_con(discharge = text_notes(c("a", "b", "c")))
+
+  expect_error(
+    batched_table(con, "lengths", LENGTH_COLUMNS, NOTES_SQL, function(chunk) stop("selhání"), batch = 2L),
+    "selhání"
+  )
+  expect_false(any(grepl("^lengths", DBI::dbListTables(con))))
+})
+
+test_that("batched_table vrátí existující tabulku, aniž by volal fn", {
+  con <- mimic_con(discharge = text_notes(c("a", "b")))
+  batched_table(con, "lengths", LENGTH_COLUMNS, NOTES_SQL, length_rows)
+  name <- batched_table(con, "lengths", LENGTH_COLUMNS, NOTES_SQL, function(chunk) stop("nemá se volat"))
+
+  expect_equal(name, "lengths")
+})
