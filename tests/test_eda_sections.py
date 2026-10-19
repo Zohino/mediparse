@@ -16,7 +16,16 @@ from tests.support import REPOSITORY_SECTION_HEADERS
 if TYPE_CHECKING:
     from pathlib import Path
 
-COLUMNS = {"note_id", "position", "section", "span_chars", "body_chars", "body_masked"}
+COLUMNS = {
+    "note_id",
+    "position",
+    "section",
+    "span_chars",
+    "body_chars",
+    "body_masked",
+    "body_start",
+    "body_end",
+}
 WITH_PREAMBLE = "Name: ___\n\nAllergies:\nnone\n\nChief Complaint:\npain\n"
 WITHOUT_PREAMBLE = "Allergies:\n  none  \n"
 
@@ -70,6 +79,47 @@ def test_body_that_is_only_deid_mask_is_flagged(lexicon: Path) -> None:
 
     assert result["section"] == ["allergies", "chief_complaint"]
     assert result["body_masked"] == [True, False]
+
+
+def _bodies(lexicon: Path, text: str) -> list[str]:
+    result = note_sections(lexicon, ["a"], [text])
+    return [
+        text[int(start) : int(end)]
+        for start, end in zip(result["body_start"], result["body_end"], strict=True)
+    ]
+
+
+def test_offsets_cut_out_each_body(lexicon: Path) -> None:
+    """Offsety vyříznou z textu přesně tělo každé části včetně preambule."""
+    assert _bodies(lexicon, WITH_PREAMBLE) == [
+        "Name: ___\n\n",
+        "\nnone\n\n",
+        "\npain\n",
+    ]
+
+
+def test_offsets_cover_other_started_by_field_after_section(lexicon: Path) -> None:
+    """`other` od pole za sekcí (Attending za Allergies) se vyřízne a tělo sekce ho neobsahuje."""
+    text = "Allergies:\nnone\nName: x\nChief Complaint:\npain\n"
+    result = note_sections(lexicon, ["a"], [text])
+
+    assert result["section"] == ["allergies", "other", "chief_complaint"]
+    assert _bodies(lexicon, text) == ["\nnone\n", "Name: x\n", "\npain\n"]
+
+
+def test_offsets_for_text_without_headers_and_indented_header(lexicon: Path) -> None:
+    """Zpráva bez hlaviček je jedno tělo; odsazená hlavička posune začátek těla."""
+    assert _bodies(lexicon, "no headers here") == ["no headers here"]
+    assert _bodies(lexicon, "  Allergies:\nnone\n") == ["\nnone\n"]
+
+
+def test_offsets_count_code_points_not_bytes(lexicon: Path) -> None:
+    """Znak mimo ASCII před tělem nerozjede offsety (code pointy jako `substring`)."""
+    text = "Name: Žofie 😀\nAllergies:\nžádné\n"
+    result = note_sections(lexicon, ["a"], [text])
+
+    assert result["body_start"][1] == text.index("\nžádné")
+    assert _bodies(lexicon, text)[1] == "\nžádné\n"
 
 
 def test_text_without_headers_is_single_other_row(lexicon: Path) -> None:
