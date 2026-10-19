@@ -77,7 +77,7 @@ INVALID_LEXICONS: Final = {
         "splývají hlavičky: allergies",
     ),
     "kolize sekce s preamble": (
-        {"preamble": ["Name", "allergies"]},
+        {"preamble": ["Name", "ALLERGIES."]},
         "splývají hlavičky: allergies",
     ),
     "synonymum s číslicí": (
@@ -96,6 +96,11 @@ INVALID_LEXICONS: Final = {
         {"sections": {"a": _section("Ab")}},
         "kratší než",
     ),
+    "pole preambule mimo výraz hlavičky": (
+        {"preamble": ["attending"]},
+        "Pole 'attending' nesplňuje výraz hlavičky",
+    ),
+    "pole preambule pod 3 znaky": ({"preamble": ["Id"]}, "Pole 'Id' má"),
     "vyhrazený klíč other": (
         {"sections": {"other": _section("Allergies")}},
         "vyhrazený klíč: other",
@@ -146,13 +151,14 @@ def test_too_short_synonym_is_rejected(synonym: str) -> None:
 DISCHARGE_LEXICON = SectionLexicon.model_validate_json(
     json.dumps({
         "sections": {
+            "allergies": _section("Allergies"),
             "chief_complaint": _section("Chief Complaint", label_cs="Obtíže"),
             "past_medical_history": _section("Past Medical History"),
             "discharge_diagnosis": _section(
                 "Discharge Diagnosis", "Discharge Diagnoses"
             ),
         },
-        "preamble": ["Name", "Unit No"],
+        "preamble": ["Name", "Unit No", "Service", "Attending"],
     })
 )
 
@@ -310,6 +316,49 @@ SPLIT_CASES: Final = {
             NoteSection("past_medical_history", "Past Medical History:", "\nCHF"),
         ),
     ),
+    "pole za sekcí ji ukončí jako other (šablona MIMIC)": (
+        (
+            "Service: MEDICINE\nAllergies:\nPenicillin\nAttending: ___.\n"
+            "Chief Complaint:\npain"
+        ),
+        (
+            NoteSection(OTHER, "", "Service: MEDICINE\n"),
+            NoteSection("allergies", "Allergies:", "\nPenicillin\n"),
+            NoteSection(OTHER, "", "Attending: ___.\n"),
+            NoteSection("chief_complaint", "Chief Complaint:", "\npain"),
+        ),
+    ),
+    "pole za sebou dají jednu část other": (
+        "Allergies:\nnone\n  Attending: ___\nService: MED\nChief Complaint:\nx",
+        (
+            NoteSection("allergies", "Allergies:", "\nnone\n"),
+            NoteSection(OTHER, "", "  Attending: ___\nService: MED\n"),
+            NoteSection("chief_complaint", "Chief Complaint:", "\nx"),
+        ),
+    ),
+    "pole v preambuli se spotřebuje, opakování zůstane v těle": (
+        "Attending: ___\nAllergies:\nnone\nAttending: Dr. ___\nChief Complaint:\nx",
+        (
+            NoteSection(OTHER, "", "Attending: ___\n"),
+            NoteSection("allergies", "Allergies:", "\nnone\nAttending: Dr. ___\n"),
+            NoteSection("chief_complaint", "Chief Complaint:", "\nx"),
+        ),
+    ),
+    "opakované pole za sekcí zůstane v těle": (
+        "Allergies:\nnone\nAttending: ___\nChief Complaint:\nAttending: ___\nx",
+        (
+            NoteSection("allergies", "Allergies:", "\nnone\n"),
+            NoteSection(OTHER, "", "Attending: ___\n"),
+            NoteSection("chief_complaint", "Chief Complaint:", "\nAttending: ___\nx"),
+        ),
+    ),
+    "pole uprostřed řádku ani mimo lexikon sekci neukončí": (
+        "Allergies:\nnone  Attending: ___\nUnit: 4\nChief Complaint:\nx",
+        (
+            NoteSection("allergies", "Allergies:", "\nnone  Attending: ___\nUnit: 4\n"),
+            NoteSection("chief_complaint", "Chief Complaint:", "\nx"),
+        ),
+    ),
     "odsazení, CRLF a poslední řádek bez konce": (
         "x\r\n  Chief Complaint:\r\npain\r\nDischarge Diagnosis:",
         (
@@ -353,6 +402,19 @@ def test_split_synthetic_corpus_composes_originals() -> None:
         assert [s.section for s in sections] == [OTHER, *(h.section for h in found)], (
             note_id
         )
+
+
+def test_split_sections_ends_allergies_at_repository_preamble_field() -> None:
+    """Pole Attending z lexikonu v config/ ukončí tělo alergií jako v šabloně MIMIC."""
+    text = "Allergies:\nPenicillin\nAttending: ___.\nChief Complaint:\npain"
+
+    sections = split_sections(text, REPOSITORY_LEXICON)
+
+    assert [(s.section, s.body) for s in sections] == [
+        ("allergies", "\nPenicillin\n"),
+        (OTHER, "Attending: ___.\n"),
+        ("chief_complaint", "\npain"),
+    ]
 
 
 def test_split_synthetic_corpus_keeps_surgical_history_in_medical_history() -> None:

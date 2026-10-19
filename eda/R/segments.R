@@ -286,13 +286,20 @@ sections_per_note_text <- function(counts, percentiles) {
   )
 }
 
+# Řádek `other` popisuje text mimo sekce celé zprávy: parser dává `other` i za administrativní
+# pole uprostřed zprávy (Attending za Allergies), takže se části jedné zprávy sečtou. Sekce lexikonu
+# má ve zprávě nejvýš jednu část, seskupení po zprávě ji nemění.
 body_lengths <- function(con, skeleton, other) {
   found <- DBI::dbGetQuery(con, sprintf("
+    WITH parts AS (
+      SELECT note_id, section, sum(body_chars) AS body_chars, bool_and(body_masked) AS body_masked
+      FROM %s GROUP BY note_id, section
+    )
     SELECT section AS sekce, count(*) AS n,
       count(*) FILTER (WHERE body_masked) AS maskovano,
       quantile_disc(body_chars, 0.5) AS p50, quantile_disc(body_chars, 0.75) AS p75,
       quantile_disc(body_chars, 0.95) AS p95
-    FROM %s GROUP BY section
+    FROM parts GROUP BY section
   ", SECTIONS_TABLE))
   found <- as_numeric_columns(found, c("n", "maskovano", "p50", "p75", "p95"))
   out <- data.frame(
