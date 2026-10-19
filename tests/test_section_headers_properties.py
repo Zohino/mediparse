@@ -105,12 +105,11 @@ def _preamble(draw: st.DrawFn, eol: str) -> tuple[str, list[str]]:
 
 
 @st.composite
-def _notes(draw: st.DrawFn, *, repeats: bool) -> _Note:
+def _notes(draw: st.DrawFn) -> _Note:
     """Zpráva složená z dílů a dělení, které z konstrukce vyplývá.
 
     Args:
         draw: Zdroj Hypothesis.
-        repeats: Zda se do těl vkládají opakování dřívějších hlaviček a polí.
 
     Returns:
         Text zprávy a očekávané části. Pole za sekcí otevře `OTHER` jen tehdy,
@@ -122,8 +121,8 @@ def _notes(draw: st.DrawFn, *, repeats: bool) -> _Note:
     synonyms: list[str] = []
     for key in draw(st.lists(st.sampled_from(tuple(_SECTIONS)), unique=True)):
         synonym = draw(st.sampled_from(_SECTIONS[key].synonyms))
-        synonyms.append(synonym)
-        repeatable = [*synonyms, *used] if repeats else []
+        synonyms.extend(_SECTIONS[key].synonyms)
+        repeatable = [*synonyms, *used]
         body = eol + "".join(draw(_body_lines(eol, repeatable)))
         parts.append(NoteSection(key, draw(_header_line(synonym)), body))
         fresh = [name for name in REPOSITORY_LEXICON.preamble if name not in used]
@@ -141,7 +140,11 @@ def _notes(draw: st.DrawFn, *, repeats: bool) -> _Note:
         used.extend(opened)
         parts.append(NoteSection(OTHER, "", "".join(lines)))
     if parts and draw(st.booleans()):
-        parts[-1] = replace(parts[-1], body=parts[-1].body.removesuffix(eol))
+        previous = parts.pop()
+        last = replace(previous, body=previous.body.removesuffix(eol))
+        # Prázdný other by parser nevrátil: z textu "" nevznikne žádná část.
+        if last.body or last.section != OTHER:
+            parts.append(last)
     return "".join(p.header + p.body for p in parts), tuple(parts)
 
 
@@ -183,17 +186,12 @@ def test_split_of_any_text_keeps_the_shape_invariants(text: str) -> None:
     assert starts == sorted(set(starts))
 
 
-@given(_notes(repeats=False))
-def test_note_built_from_known_sections_splits_into_exactly_them(note: _Note) -> None:
-    """Zpráva složená z hlaviček, polí a těl se rozpadne přesně na své díly."""
-    text, expected = note
+@given(_notes())
+def test_note_built_from_known_parts_splits_into_exactly_them(note: _Note) -> None:
+    """Zpráva z hlaviček, polí a těl se rozpadne přesně na své díly.
 
-    assert split_sections(text, REPOSITORY_LEXICON) == expected
-
-
-@given(_notes(repeats=True))
-def test_repeated_headers_and_fields_stay_in_bodies(note: _Note) -> None:
-    """Opakování dřívější hlavičky nebo pole je text těla, ne nová hranice."""
+    Opakování dřívějších hlaviček a polí v tělech jsou volitelná, takže jde o text těla.
+    """
     text, expected = note
 
     assert split_sections(text, REPOSITORY_LEXICON) == expected
