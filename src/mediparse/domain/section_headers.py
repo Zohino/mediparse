@@ -67,7 +67,10 @@ class SectionLexicon(BaseModel):
     def _synonyms_are_recognizable_and_unique(self) -> Self:
         synonyms = [s for section in self.sections.values() for s in section.synonyms]
         for synonym in synonyms:
-            _require_recognizable(synonym)
+            _require_recognizable(synonym, "Synonymum")
+        # Pole preambule ukončují sekci (split_sections), nerozpoznatelné by tiše nikdy nezačalo.
+        for name in self.preamble:
+            _require_recognizable(name, "Pole")
         forms = Counter(normalized(name) for name in [*synonyms, *self.preamble])
         clashes = sorted(form for form, count in forms.items() if count > 1)
         if clashes:
@@ -180,11 +183,11 @@ def _first_matches(text: str, key_of: Mapping[str, str]) -> dict[str, re.Match[s
     return found
 
 
-def _require_recognizable(synonym: str) -> None:
-    found = HEADER_PATTERN.fullmatch(f"{synonym}:")
-    if found is None or found["header"] != synonym:
-        msg = f"Synonymum {synonym!r} nesplňuje výraz hlavičky, parser by ho nenašel."
+def _require_recognizable(name: str, kind: str) -> None:
+    found = HEADER_PATTERN.fullmatch(f"{name}:")
+    if found is None or found["header"] != name:
+        msg = f"{kind} {name!r} nesplňuje výraz hlavičky, parser by ho nenašel."
         raise ValueError(msg)
-    if len(normalized(synonym)) < MIN_NORMALIZED_CHARS:
-        msg = f"Synonymum {synonym!r} má normalizovaný tvar kratší než {MIN_NORMALIZED_CHARS} znaky."
+    if len(normalized(name)) < MIN_NORMALIZED_CHARS:
+        msg = f"{kind} {name!r} má normalizovaný tvar kratší než {MIN_NORMALIZED_CHARS} znaky."
         raise ValueError(msg)

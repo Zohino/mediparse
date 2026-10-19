@@ -77,7 +77,7 @@ INVALID_LEXICONS: Final = {
         "splývají hlavičky: allergies",
     ),
     "kolize sekce s preamble": (
-        {"preamble": ["Name", "allergies"]},
+        {"preamble": ["Name", "ALLERGIES."]},
         "splývají hlavičky: allergies",
     ),
     "synonymum s číslicí": (
@@ -96,6 +96,11 @@ INVALID_LEXICONS: Final = {
         {"sections": {"a": _section("Ab")}},
         "kratší než",
     ),
+    "pole preambule mimo výraz hlavičky": (
+        {"preamble": ["attending"]},
+        "Pole 'attending' nesplňuje výraz hlavičky",
+    ),
+    "pole preambule pod 3 znaky": ({"preamble": ["Id"]}, "Pole 'Id' má"),
     "vyhrazený klíč other": (
         {"sections": {"other": _section("Allergies")}},
         "vyhrazený klíč: other",
