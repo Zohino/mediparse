@@ -29,7 +29,10 @@ empty_counts <- function() {
 
 # Text těla vyřízne z `discharge` podle offsetů z parseru (code pointy, jako `substring`), takže
 # pravidlo hranice sekce zůstává jen v parseru. Stop slova se odfiltrují před skládáním n-gramů,
-# stejně jako v `TfidfVectorizer`; `ANTI JOIN` je proti `list_filter` s literálem čtyřikrát rychlejší.
+# stejně jako v `TfidfVectorizer`. `list_filter` drží pořadí slov a běží proudově po řádcích;
+# rozbalení přes `unnest` a zpětné `list(w ORDER BY i)` drželo všechna slova korpusu v paměti
+# (seřazený agregát DuckDB neodkládá na disk) a nad MIMIC spadlo. Seznam stop slov jde do lambdy
+# jako sloupec jednořádkové tabulky; literál se 318 řetězci byl na sondě třikrát pomalejší.
 # Tabulka tokenů má jeden řádek na část zprávy a seznam slov v pořadí textu.
 ngram_tokens <- function(con, stopwords, sections) {
   write_temp(con, STOP_TABLE, data.frame(w = stopwords, stringsAsFactors = FALSE))
@@ -41,19 +44,11 @@ ngram_tokens <- function(con, stopwords, sections) {
   key <- if (is.null(sections)) "NULL::VARCHAR" else "s.section"
   DBI::dbExecute(con, sprintf("
     CREATE OR REPLACE TEMP TABLE %1$s AS
-    WITH bodies AS (
-      SELECT s.note_id, s.position, %2$s AS sekce,
-        %3$s AS words
-      FROM %4$s s JOIN discharge d ON d.note_id = s.note_id
-      %5$s
-    ),
-    words AS (
-      SELECT note_id, position, sekce, unnest(words) AS w, generate_subscripts(words, 1) AS i
-      FROM bodies
-    )
-    SELECT note_id, position, sekce, list(w ORDER BY i) AS t
-    FROM words ANTI JOIN %6$s USING (w)
-    GROUP BY note_id, position, sekce
+    WITH stop AS (SELECT coalesce(list(w), []) AS words FROM %6$s)
+    SELECT s.note_id, s.position, %2$s AS sekce,
+      list_filter(%3$s, w -> NOT list_contains(stop.words, w)) AS t
+    FROM %4$s s JOIN discharge d ON d.note_id = s.note_id CROSS JOIN stop
+    %5$s
   ", TOKENS_TABLE, key, sprintf(
     TOKEN_SQL, "substring(d.text, s.body_start + 1, s.body_end - s.body_start)"
   ), SECTIONS_TABLE, scope, STOP_TABLE))
