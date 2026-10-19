@@ -15,6 +15,14 @@ test_that("section_rows přijme dvě shodné zprávy pod různými note_id", {
   expect_equal(out$section[1:3], c(module$OTHER, "allergies", "chief_complaint"))
 })
 
+test_that("section_rows ukončí alergie polem Attending jako v šabloně MIMIC", {
+  chunk <- list(note_id = "mimic", text = "Allergies:\nnone\nAttending: ___.\nChief Complaint:\npain\n")
+  out <- section_rows(sections_module(), LEXICON_PATH(), chunk)
+
+  expect_equal(out$section, c("allergies", OTHER, "chief_complaint"))
+  expect_equal(out$body_chars[[1]], nchar("none"))
+})
+
 test_that("section_rows zvládne dávku o jedné zprávě", {
   chunk <- list(note_id = "jediny", text = "Allergies:\nnone\n")
   out <- section_rows(sections_module(), LEXICON_PATH(), chunk)
@@ -552,6 +560,22 @@ test_that("body_lengths rozliší medián, p75 a p95 na dvaceti různých délk�
   row <- lengths[lengths$sekce == "a", ]
 
   expect_equal(c(row$p50, row$p75, row$p95), c(10, 15, 19))
+})
+
+test_that("body_lengths sečte části other jedné zprávy, řádek other počítá zprávy", {
+  rows <- data.frame(
+    note_id = c("n1", "n1", "n1", "n1", "n2", "n2"),
+    section = c(OTHER, "a", OTHER, "b", OTHER, "a"),
+    span_chars = c(40, 20, 20, 20, 50, 20),
+    body_chars = c(30, 10, 15, 10, 45, 10),
+    body_masked = c(FALSE, FALSE, TRUE, FALSE, TRUE, FALSE),
+    stringsAsFactors = FALSE
+  )
+  con <- lengths_con(rows)
+  lengths <- body_lengths(con, section_skeleton(con, mini_lexicon(STRIP_KEYS)), OTHER)
+  row <- lengths[lengths$sekce == OTHER, ]
+
+  expect_equal(c(row$n, row$p50, row$p95, row$maskovano), c(2, 45, 45, 1))
 })
 
 test_that("skeleton_order rozhodne shodu mediánu i pokrytí pořadím lexikonu při obráceném vstupu", {

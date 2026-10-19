@@ -4,10 +4,14 @@ from __future__ import annotations
 
 import re
 from collections import Counter
-from dataclasses import dataclass
-from typing import Annotated, Final, Self
+from dataclasses import dataclass, replace
+from itertools import pairwise
+from typing import TYPE_CHECKING, Annotated, Final, Self
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 MIN_NORMALIZED_CHARS: Final = 3
 # Klíč pro text mimo rozpoznané sekce; v lexikonu být nesmí, jinak by splynul se zbytkem.
@@ -103,12 +107,10 @@ def find_section_headers(
         for key, section in lexicon.sections.items()
         for synonym in section.synonyms
     }
-    found: dict[str, SectionHeader] = {}
-    for match in HEADER_PATTERN.finditer(text):
-        key = section_of.get(normalized(match["header"]))
-        if key is not None and key not in found:
-            found[key] = SectionHeader(key, match.start(), match.end())
-    return tuple(found.values())
+    return tuple(
+        SectionHeader(key, match.start(), match.end())
+        for key, match in _first_matches(text, section_of).items()
+    )
 
 
 @dataclass(frozen=True)
@@ -122,7 +124,7 @@ class NoteSection:
     Attributes:
         section: Klíč sekce v lexikonu, nebo `OTHER` pro text mimo sekce.
         header: Text od začátku řádku po dvojtečku včetně; u `OTHER` prázdný.
-        body: Text do začátku další hlavičky.
+        body: Text do další hranice, tedy hlavičky sekce nebo administrativního pole.
     """
 
     section: str
@@ -131,23 +133,51 @@ class NoteSection:
 
 
 def split_sections(text: str, lexicon: SectionLexicon) -> tuple[NoteSection, ...]:
-    """Rozdělí zprávu na sekce v pořadí textu; text před první hlavičkou je `OTHER`.
+    """Rozdělí zprávu na sekce v pořadí textu; text mimo sekce je `OTHER`.
 
-    Neprázdný `OTHER` stojí na začátku (zpráva bez hlavičky je jím celá). Spojení
-    `header + body` všech sekcí dává přesně původní text.
+    `OTHER` je text před první hlavičkou a text od administrativního pole lexikonu
+    (`preamble`) do další hlavičky: šablona MIMIC má pole Attending za Allergies a bez
+    hranice by leželo v těle alergií. Hranicí je první výskyt pole na začátku řádku
+    (i v preambuli), opakování je text těla jako u sekcí. Sousední `OTHER` se slijí,
+    takže zpráva bez hlavičky je jedinou částí `OTHER`. Spojení `header + body` všech
+    částí dává přesně původní text.
 
     Returns:
-        Sekce v pořadí textu, pro prázdný text prázdná n-tice.
+        Části v pořadí textu, pro prázdný text prázdná n-tice.
     """
-    headers = find_section_headers(text, lexicon)
-    starts = [h.start for h in headers] + [len(text)]
-    preamble = text[: starts[0]]
-    sections = [NoteSection(OTHER, "", preamble)] if preamble else []
-    sections.extend(
-        NoteSection(h.section, text[h.start : h.end], text[h.end : end])
-        for h, end in zip(headers, starts[1:], strict=True)
-    )
+    headers = {h.start: h for h in find_section_headers(text, lexicon)}
+    fields = {normalized(name): name for name in lexicon.preamble}
+    cuts = [match.start() for match in _first_matches(text, fields).values()]
+    sections: list[NoteSection] = []
+    for start, end in pairwise([*sorted({0, *headers, *cuts}), len(text)]):
+        header = headers.get(start)
+        if header is not None:
+            sections.append(
+                NoteSection(
+                    header.section, text[start : header.end], text[header.end : end]
+                )
+            )
+        elif sections and sections[-1].section == OTHER:
+            sections[-1] = replace(
+                sections[-1], body=sections[-1].body + text[start:end]
+            )
+        elif start < end:
+            sections.append(NoteSection(OTHER, "", text[start:end]))
     return tuple(sections)
+
+
+def _first_matches(text: str, key_of: Mapping[str, str]) -> dict[str, re.Match[str]]:
+    """Najde první výskyt každého klíče mezi hlavičkami podle `HEADER_PATTERN`.
+
+    Returns:
+        Klíč z `key_of` (podle normalizovaného tvaru hlavičky) a jeho první nález.
+    """
+    found: dict[str, re.Match[str]] = {}
+    for match in HEADER_PATTERN.finditer(text):
+        key = key_of.get(normalized(match["header"]))
+        if key is not None and key not in found:
+            found[key] = match
+    return found
 
 
 def _require_recognizable(synonym: str) -> None:
