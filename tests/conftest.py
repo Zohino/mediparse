@@ -39,8 +39,8 @@ if TYPE_CHECKING:
 
 type Rows = Sequence[tuple[str, str]]
 
-# Vestavěný profil ci: derandomize, bez databáze příkladů a bez časového limitu, takže
-# běh je stejný lokálně i v kontejneru a nevzniká .hypothesis/.
+# Profil ci je bez náhody (derandomize), bez databáze příkladů a bez časového limitu,
+# takže běh je stejný lokálně, v CI i v kontejneru.
 settings.load_profile("ci")
 
 HEADER: Final = (

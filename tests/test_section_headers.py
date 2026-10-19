@@ -22,13 +22,12 @@ from mediparse.domain.section_headers import (
 )
 from mediparse.infrastructure.sampler_config import load_sampler_config
 from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
-from tests.support import (
+from tests.section_support import (
     MIMIC_SHAPED_NOTES,
-    REPOSITORY_CONFIG,
-    REPOSITORY_CORPUS,
     REPOSITORY_LEXICON,
     mimic_shaped_notes,
 )
+from tests.support import REPOSITORY_CONFIG, REPOSITORY_CORPUS
 
 
 def _lexicon_json(**overrides: object) -> dict[str, object]:

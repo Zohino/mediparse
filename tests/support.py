@@ -28,7 +28,6 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.plans_file import LABELS_PATH, PLANS_PATH
 from mediparse.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
-from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT
 from mediparse.infrastructure.verbalization_template import (
     VERBALIZATION_TEMPLATE_PATH,
@@ -55,8 +54,6 @@ REPOSITORY_DIAGNOSIS_CANDIDATES: Final = (
     REPOSITORY / "config" / "diagnosis_candidates.json"
 )
 REPOSITORY_MATRIX: Final = REPOSITORY / "config" / "matrix.json"
-REPOSITORY_LEXICON: Final = load_section_lexicon(REPOSITORY_SECTION_HEADERS)
-MIMIC_SHAPED_NOTES: Final = REPOSITORY / "tests" / "fixtures" / "mimic_shaped"
 STRUCTURE_LABELS: Final = frozenset({"Name", "Unit No"})
 
 COMMIT: Final = "c" * 40
@@ -74,18 +71,6 @@ DISCHARGE: Final = {"name": "discharge.csv.gz", "sha256": "b" * 64, "rows": 10}
 RADIOLOGY: Final = {"name": "radiology.csv.gz", "sha256": "e" * 64, "rows": 20}
 PIN: Final = AuditPin(PINNED, STRUCTURE_LABELS)
 REVISION: Final = SourceRevision(commit=COMMIT, dirty=False)
-
-
-def mimic_shaped_notes() -> dict[str, str]:
-    """Zprávy ve tvaru šablony MIMIC načtené beze změny konců řádků.
-
-    Returns:
-        Jméno souboru bez přípony a text, seřazené podle jména.
-    """
-    return {
-        path.stem: path.read_bytes().decode("utf-8")
-        for path in sorted(MIMIC_SHAPED_NOTES.glob("*.txt"))
-    }
 
 
 def fixed_revision() -> SourceRevision:

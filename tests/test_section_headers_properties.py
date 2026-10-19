@@ -18,7 +18,7 @@ from mediparse.domain.section_headers import (
     normalized,
     split_sections,
 )
-from tests.support import REPOSITORY_LEXICON
+from tests.section_support import REPOSITORY_LEXICON
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
