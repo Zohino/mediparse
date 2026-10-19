@@ -21,12 +21,11 @@ from mediparse.domain.section_headers import (
     split_sections,
 )
 from mediparse.infrastructure.sampler_config import load_sampler_config
-from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
 from tests.support import (
     REPOSITORY_CONFIG,
     REPOSITORY_CORPUS,
-    REPOSITORY_SECTION_HEADERS,
+    REPOSITORY_LEXICON,
 )
 
 
@@ -234,10 +233,10 @@ def test_repeated_header_stays_in_body() -> None:
         "Past Medical History:\nCHF\nChief Complaint:\npain\nPast Medical History:\nold"
     )
 
-    assert [key for key, _ in _found(text)] == [
-        "past_medical_history",
-        "chief_complaint",
-    ]
+    assert find_section_headers(text, DISCHARGE_LEXICON) == (
+        SectionHeader("past_medical_history", 0, 21),
+        SectionHeader("chief_complaint", 26, 42),
+    )
 
 
 def test_repeat_through_other_synonym_returns_first_only() -> None:
@@ -245,9 +244,6 @@ def test_repeat_through_other_synonym_returns_first_only() -> None:
     text = "Discharge Diagnosis:\nCHF\nDischarge Diagnoses:\nCOPD"
 
     assert _found(text) == [("discharge_diagnosis", "Discharge Diagnosis:")]
-
-
-REPOSITORY_LEXICON: Final = load_section_lexicon(REPOSITORY_SECTION_HEADERS)
 
 
 def _synthetic_notes() -> dict[str, str]:

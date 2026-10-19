@@ -28,6 +28,7 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.plans_file import LABELS_PATH, PLANS_PATH
 from mediparse.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
+from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT
 from mediparse.infrastructure.verbalization_template import (
     VERBALIZATION_TEMPLATE_PATH,
@@ -54,6 +55,7 @@ REPOSITORY_DIAGNOSIS_CANDIDATES: Final = (
     REPOSITORY / "config" / "diagnosis_candidates.json"
 )
 REPOSITORY_MATRIX: Final = REPOSITORY / "config" / "matrix.json"
+REPOSITORY_LEXICON: Final = load_section_lexicon(REPOSITORY_SECTION_HEADERS)
 STRUCTURE_LABELS: Final = frozenset({"Name", "Unit No"})
 
 COMMIT: Final = "c" * 40
