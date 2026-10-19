@@ -1,7 +1,8 @@
 SECTIONS_TABLE <- "note_sections_input"
 SECTION_COLUMNS <- c(
   note_id = "VARCHAR", position = "INTEGER", section = "VARCHAR",
-  span_chars = "INTEGER", body_chars = "INTEGER", body_masked = "BOOLEAN"
+  span_chars = "INTEGER", body_chars = "INTEGER", body_masked = "BOOLEAN",
+  body_start = "INTEGER", body_end = "INTEGER"
 )
 
 sections_module <- function() reticulate::import("mediparse.entrypoints.eda_sections")
@@ -22,6 +23,8 @@ section_rows <- function(module, lexicon_path, chunk) {
     span_chars = as.integer(unlist(rows$span_chars)),
     body_chars = as.integer(unlist(rows$body_chars)),
     body_masked = as.logical(unlist(rows$body_masked)),
+    body_start = as.integer(unlist(rows$body_start)),
+    body_end = as.integer(unlist(rows$body_end)),
     stringsAsFactors = FALSE
   )
 }

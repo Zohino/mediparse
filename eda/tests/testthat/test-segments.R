@@ -32,7 +32,7 @@ test_that("section_rows zvládne dávku o jedné zprávě", {
   expect_equal(out$position, 0L)
 })
 
-test_that("section_rows vrátí pro prázdnou dávku typovaný data.frame s pěti sloupci", {
+test_that("section_rows vrátí pro prázdnou dávku typovaný data.frame se všemi sloupci", {
   chunk <- list(note_id = character(), text = character())
   out <- section_rows(sections_module(), LEXICON_PATH(), chunk)
 
@@ -43,6 +43,19 @@ test_that("section_rows vrátí pro prázdnou dávku typovaný data.frame s pět
   expect_type(out$span_chars, "integer")
   expect_type(out$body_chars, "integer")
   expect_type(out$body_masked, "logical")
+  expect_type(out$body_start, "integer")
+  expect_type(out$body_end, "integer")
+})
+
+test_that("section_rows vrátí offsety těla jako integer, které z textu vyříznou tělo", {
+  chunk <- list(note_id = "o", text = TEXT_WITH_SECTIONS)
+  out <- section_rows(sections_module(), LEXICON_PATH(), chunk)
+
+  expect_type(out$body_start, "integer")
+  expect_equal(
+    substring(TEXT_WITH_SECTIONS, out$body_start + 1L, out$body_end),
+    c("Name: ___\n\n", "\nnone\n\n", "\npain\n")
+  )
 })
 
 test_that("section_rows označí tělo, které je jen maska ___", {
@@ -97,7 +110,7 @@ sections_frame <- function(notes, span = 10L, body = 5L) {
       note_id = id, position = seq_along(sections) - 1L, section = sections,
       span_chars = rep_len(as.integer(span), length(sections)),
       body_chars = rep_len(as.integer(body), length(sections)),
-      body_masked = FALSE,
+      body_masked = FALSE, body_start = 0L, body_end = 0L,
       stringsAsFactors = FALSE
     )
   })

@@ -21,8 +21,9 @@ def note_sections(
 ) -> dict[str, list[str] | list[int] | list[bool]]:
     """Rozdělí zprávy parserem sekcí a vrátí délky po sekcích jako sloupce.
 
-    Text se přes most nevrací, sešit potřebuje jen pozice a délky. Lexikon se načítá při
-    každém volání, aby funkce zůstala bezstavová (soubor má desítky řádků).
+    Text se přes most nevrací: sešit dostane délky a offsety těla a text si vyřízne sám
+    z tabulky zpráv, takže pravidlo hranice sekce zůstává jen v parseru. Lexikon se načítá
+    při každém volání, aby funkce zůstala bezstavová (soubor má desítky řádků).
 
     Args:
         lexicon: Cesta k lexikonu sekcí.
@@ -33,7 +34,9 @@ def note_sections(
         Sloupce ``note_id``, ``position`` (pořadí v textu od 0 včetně ``other``),
         ``section``, ``span_chars`` (hlavička i tělo), ``body_chars`` (tělo bez
         okrajových bílých znaků) a ``body_masked`` (tělo je jen maska
-        de-identifikace), vždy všechny, i pro prázdný vstup.
+        de-identifikace), ``body_start`` a ``body_end`` (offsety těla v textu zprávy
+        v code pointech, ``text[body_start:body_end]`` je tělo před ořezem), vždy
+        všechny, i pro prázdný vstup.
 
     Raises:
         ValueError: ``note_ids`` a ``texts`` mají různou délku.
@@ -46,8 +49,15 @@ def note_sections(
     spans: list[int] = []
     bodies: list[int] = []
     masked: list[bool] = []
+    starts: list[int] = []
+    ends: list[int] = []
     for note_id, text in zip(note_ids, texts, strict=True):
+        cursor = 0
         for position, part in enumerate(split_sections(text, parsed)):
+            body_start = cursor + len(part.header)
+            cursor = body_start + len(part.body)
+            starts.append(body_start)
+            ends.append(cursor)
             ids.append(note_id)
             positions.append(position)
             sections.append(part.section)
@@ -62,4 +72,6 @@ def note_sections(
         "span_chars": spans,
         "body_chars": bodies,
         "body_masked": masked,
+        "body_start": starts,
+        "body_end": ends,
     }
