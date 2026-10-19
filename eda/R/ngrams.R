@@ -1,5 +1,6 @@
-# Token je maximální úsek písmen a-z délky aspoň 2 po převodu na malá písmena (jako `token_pattern`
-# sklearn): maska `___`, čísla, časy a dávkování vypadnou. Pravidlo žije jen tady.
+# Token je maximální úsek písmen a-z délky aspoň 2 po převodu na malá písmena. Minimální délka je
+# jako v `token_pattern` sklearn, ale sklearn tokenizuje `\\w\\w+`, takže ponechá číslice a `_`;
+# tady maska `___`, čísla, časy a dávkování vypadnou. Pravidlo žije jen tady.
 TOKEN_SQL <- "regexp_extract_all(lower(%s), '[a-z]{2,}')"
 NGRAM_SIZES <- 1:3
 NGRAM_RANKING <- 15L
@@ -8,6 +9,7 @@ SECTION_NGRAMS <- 5L
 # změny než CANDIDATE_COVERAGE (kandidáti na lexikon) a SKELETON_COVERAGE (sestavení kostry).
 BOILERPLATE_COVERAGE <- 0.5
 STOP_TABLE <- "ngram_stop_input"
+FLOOR_TABLE <- "ngram_floor_input"
 TOKENS_TABLE <- "ngram_tokens_input"
 NGRAM_COLUMNS <- c("sekce", "n", "ngram", "zpravy", "vyskyty", "jmenovatel")
 
@@ -88,10 +90,15 @@ ngram_counts <- function(con, stopwords, sections = NULL, floor_fn = publishable
     return(empty_counts())
   }
   tokens <- ngram_tokens(con, stopwords, sections)
-  on.exit(DBI::dbExecute(con, sprintf("DROP TABLE IF EXISTS %s", tokens)), add = TRUE)
+  on.exit(
+    for (table in c(STOP_TABLE, TOKENS_TABLE, FLOOR_TABLE)) {
+      DBI::dbExecute(con, sprintf("DROP TABLE IF EXISTS %s", table))
+    },
+    add = TRUE
+  )
   denominators <- ngram_denominators(con, sections)
   denominators$prah <- as.numeric(floor_fn(denominators$jmenovatel))
-  limits <- write_temp(con, "ngram_floor_input", denominators)
+  limits <- write_temp(con, FLOOR_TABLE, denominators)
   per_size <- lapply(NGRAM_SIZES, function(size) {
     DBI::dbGetQuery(con, sprintf("
       WITH grams AS (
@@ -122,11 +129,25 @@ ngram_ranking <- function(counts, limit) {
   ordered[rank <= limit, , drop = FALSE]
 }
 
-NGRAM_LABELS <- c("Tokeny", "Bigramy", "Trigramy")
-TOKEN_FORMS <- c("token", "tokeny", "tokenů")
-BIGRAM_FORMS <- c("bigram", "bigramy", "bigramů")
-TRIGRAM_FORMS <- c("trigram", "trigramy", "trigramů")
-NGRAM_NOUNS <- list(`1` = "token", `2` = "bigram", `3` = "trigram")
+# Popisky a tvary podle délky n-gramu; klíč je n.
+NGRAM_KINDS <- list(
+  `1` = list(label = "Tokeny", noun = "token", forms = c("token", "tokeny", "tokenů")),
+  `2` = list(label = "Bigramy", noun = "bigram", forms = c("bigram", "bigramy", "bigramů")),
+  `3` = list(label = "Trigramy", noun = "trigram", forms = c("trigram", "trigramy", "trigramů"))
+)
+NGRAM_LABELS <- vapply(NGRAM_KINDS, `[[`, character(1), "label", USE.NAMES = FALSE)
+
+# Rozvržení tabulek n-gramů; šířky se opakují v `tbl-colwidths` chunků sešitu, shodu hlídá test.
+NGRAM_LAYOUTS <- list(
+  `tbl-ngramy` = list(
+    col.names = c("Délka", "N-gram", "Zprávy", "Podíl (%)", "Výskyty"),
+    align = "clrrr", widths = c(8, 44, 16, 16, 16)
+  ),
+  `tbl-ngramy-sekce` = list(
+    col.names = c("Sekce", "Délka", "Nejčastější n-gramy (podíl zpráv se sekcí)"),
+    align = "lcl", widths = c(22, 8, 70)
+  )
+)
 
 ngram_table <- function(ranked) {
   data.frame(
@@ -186,7 +207,7 @@ top_ngram_text <- function(counts, size) {
   }
   best <- ngram_ranking(rows, limit = 1L)
   sprintf(
-    "%s `%s` (%s zpráv)", NGRAM_NOUNS[[as.character(size)]], best$ngram,
+    "%s `%s` (%s zpráv)", NGRAM_KINDS[[as.character(size)]]$noun, best$ngram,
     percent_label(best$zpravy, best$jmenovatel)
   )
 }
@@ -198,10 +219,12 @@ ngram_text <- function(counts) {
   }
   tops <- Filter(Negate(is.null), lapply(NGRAM_SIZES, function(size) top_ngram_text(counts, size)))
   common <- counts$zpravy >= BOILERPLATE_COVERAGE * counts$jmenovatel
-  counted <- function(size, forms) count_phrase(sum(common & counts$n == size), forms)
+  counted <- vapply(NGRAM_SIZES, function(size) {
+    count_phrase(sum(common & counts$n == size), NGRAM_KINDS[[as.character(size)]]$forms)
+  }, character(1))
   sprintf(
-    "Nejčastější je %s. Aspoň %s zpráv má %s, %s a %s; jsou to fráze šablony, které nic nerozlišují.",
+    "Nejčastější je %s. Aspoň %s zpráv má %s; jsou to fráze šablony, které nic nerozlišují.",
     join_labels(unlist(tops)), coverage_threshold_text(BOILERPLATE_COVERAGE),
-    counted(1L, TOKEN_FORMS), counted(2L, BIGRAM_FORMS), counted(3L, TRIGRAM_FORMS)
+    join_labels(counted)
   )
 }

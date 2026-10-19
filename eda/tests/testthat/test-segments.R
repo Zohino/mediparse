@@ -496,20 +496,20 @@ test_that("tabulky kapitoly projdou export_table s rozvržením sešitu, i nad p
     export_layout(body_length_table(body_lengths(con, skeleton, OTHER)), "tbl-delky", dir, "sekce")
     export_layout(headerless_table(headerless_notes(con, OTHER)), "tbl-bez-nadpisu", dir)
 
-    segment_tables <- c("tbl-kostra", "tbl-delky", "tbl-bez-nadpisu")
-    expect_true(all(file.exists(file.path(dir, paste0(segment_tables, ".tex")))))
+    expect_true(all(file.exists(file.path(dir, paste0(names(TABLE_LAYOUTS), ".tex")))))
   }
 })
 
 test_that("šířky v TABLE_LAYOUTS odpovídají tbl-colwidths chunků sešitu", {
   notebook <- readLines("../../9-text-structure.qmd", encoding = "UTF-8")
-  for (label in names(TABLE_LAYOUTS)) {
+  layouts <- c(TABLE_LAYOUTS, NGRAM_LAYOUTS)
+  for (label in names(layouts)) {
     start <- which(notebook == paste("#| label:", label))
     expect_length(start, 1L)
     line <- notebook[start + grep("^#\\| tbl-colwidths:", notebook[start + 1:3])[[1]]]
     widths <- as.numeric(strsplit(gsub("[^0-9,]", "", line), ",")[[1]])
 
-    expect_equal(widths, TABLE_LAYOUTS[[label]]$widths)
+    expect_equal(widths, layouts[[label]]$widths)
   }
 })
 

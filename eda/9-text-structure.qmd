@@ -90,7 +90,7 @@ Pojmy a jednotky jsou tyto:
 - *strip D2* je vystřižení sekce `discharge_diagnosis` ze zprávy. Podíl odstraněného textu je součet `span_chars` této sekce lomený součtem délek zpráv. Klíč sekce je konstanta sešitu `STRIP_SECTION`, kterou ověří lexikon,
 - *zprávy bez nadpisů* jsou zprávy, jejichž jedinou částí je `other`. Délka zprávy je součet `span_chars`,
 - *tokeny a n-gramy*: text těla vyřízne DuckDB z `discharge` podle offsetů z parseru, takže pravidlo hranice sekce zůstává jen v parseru a n-gramy se přiřadí téže sekci, s jakou počítá strip D2. *Token* je maximální úsek písmen a–z délky aspoň 2 po převodu na malá písmena (konstanta `TOKEN_SQL`): maska `___`, čísla, časy, dávkování a jednopísmenné úseky vypadnou, „x-ray“ dá „ray“. Hlavičky sekcí se nepočítají a n-gram nepřechází přes hranici části zprávy. Text `other`, včetně administrativních polí, se počítá do celku. Stop slova jsou přesně `ENGLISH_STOP_WORDS` ze scikit-learn, tedy totéž, co použije TF-IDF se `stop_words="english"`; vypadnou i negace „no“, „not“ a „nor“. Odfiltrují se před skládáním n-gramů, stejně jako v `TfidfVectorizer`, takže „shortness of breath“ dá bigram „shortness breath“. N-gramy mají délku 1 až 3. Žebříček řadí podle *dokumentové frekvence* n-gramu (počet zpráv, v nichž se vyskytuje aspoň jednou), pak podle počtu výskytů a řetězce. U celku se n-gram ve dvou sekcích téže zprávy počítá jednou. Tabulka celku uvádí `r NGRAM_RANKING` nejčastějších n-gramů pro každou délku, tabulka po sekcích `r SECTION_NGRAMS` nejčastějších pro každou sekci kostry a délku. *Fráze šablony* je n-gram, který má aspoň `r coverage_threshold_text(BOILERPLATE_COVERAGE)` zpráv,
-- *potlačení u n-gramů*: n-gram je popisek z dat. Zveřejní se jen n-gram, který se vyskytuje v aspoň `r coverage_floor` zpráv (u sekce zpráv s touto sekcí) a nejméně v `r count_floor`; brána je na dokumentové frekvenci, ne na výskytech, aby se nezveřejnila vzácná fráze nebo jméno opakované v jedné zprávě. Brána je v dotazu, takže mezivýsledek pod ní do R nepřijde,
+- *potlačení u n-gramů*: n-gram je popisek z dat. Zveřejní se jen n-gram, který má aspoň `r coverage_floor` zpráv (u sekce zpráv s touto sekcí) a nejméně `r count_floor`; brána je na dokumentové frekvenci, ne na výskytech, aby se nezveřejnila vzácná fráze nebo jméno opakované v jedné zprávě. Brána je v dotazu, takže mezivýsledek pod ní do R nepřijde,
 - *potlačení u segmentace*: všechny výstupy jsou metriky textu a korpusu (počty zpráv, délky, pozice) s popisky z konfigurace, takže se nic nepotlačuje; řetězce z textu se v kapitole neukazují.
 
 
@@ -266,7 +266,7 @@ export_figure(headerless_plot(headerless_hist), height_cm = 10)
 
 `r ngram_text(ngrams_total)`
 
-@tbl-ngramy uvádí nejčastější tokeny, bigramy a trigramy těl sekcí celého korpusu a @fig-ngramy je ukazuje graficky. @tbl-ngramy-sekce uvádí pro každou sekci kostry pět nejčastějších n-gramů od každé délky s podílem zpráv, které sekci mají; bez stop slov.
+@tbl-ngramy uvádí nejčastější tokeny, bigramy a trigramy těl sekcí celého korpusu a @fig-ngramy je ukazuje graficky. @tbl-ngramy-sekce uvádí pro každou sekci kostry `r SECTION_NGRAMS` nejčastějších n-gramů od každé délky s podílem zpráv, které sekci mají; bez stop slov.
 
 ```{r}
 #| label: tbl-ngramy
@@ -274,9 +274,9 @@ export_figure(headerless_plot(headerless_hist), height_cm = 10)
 #| tbl-colwidths: [8, 44, 16, 16, 16]
 export_table(
   ngram_table(ranked_total),
-  col.names = TABLE_LAYOUTS[["tbl-ngramy"]]$col.names,
-  align = TABLE_LAYOUTS[["tbl-ngramy"]]$align,
-  widths = TABLE_LAYOUTS[["tbl-ngramy"]]$widths,
+  col.names = NGRAM_LAYOUTS[["tbl-ngramy"]]$col.names,
+  align = NGRAM_LAYOUTS[["tbl-ngramy"]]$align,
+  widths = NGRAM_LAYOUTS[["tbl-ngramy"]]$widths,
   code = "ngram"
 )
 ```
@@ -287,9 +287,9 @@ export_table(
 #| tbl-colwidths: [22, 8, 70]
 export_table(
   section_ngram_table(ranked_sections, skeleton_members(skeleton)$sekce),
-  col.names = TABLE_LAYOUTS[["tbl-ngramy-sekce"]]$col.names,
-  align = TABLE_LAYOUTS[["tbl-ngramy-sekce"]]$align,
-  widths = TABLE_LAYOUTS[["tbl-ngramy-sekce"]]$widths,
+  col.names = NGRAM_LAYOUTS[["tbl-ngramy-sekce"]]$col.names,
+  align = NGRAM_LAYOUTS[["tbl-ngramy-sekce"]]$align,
+  widths = NGRAM_LAYOUTS[["tbl-ngramy-sekce"]]$widths,
   code = "sekce"
 )
 ```
@@ -315,10 +315,10 @@ Dokument ověřil seed lexikon sekcí na vstupním korpusu. Pro další práci z
 - **Strip D2.** `r strip_share_text(strip_d2)`
 - **Délky.** `r body_length_text(body_len, sections_py$OTHER)`
 - **Zprávy bez nadpisů.** `r headerless_text(headerless)`
-- **Tokeny a n-gramy.** `r ngram_text(ngrams_total)` Pro S40 (baseline TF-IDF + LR) z toho plyne argument pro `ngram_range` a `max_df`: n-gramy, které má většina zpráv, nic nerozlišují. Počty frází šablony jsou podklad pro deduplikaci boilerplate (D26).
+- **Tokeny a n-gramy.** `r ngram_text(ngrams_total)` Pro S40 (baseline TF-IDF + LR) z toho plyne argument pro `ngram_range` a `max_df`: n-gramy, které má většina zpráv, nic nerozlišují. Tokenizace sešitu se liší od výchozí v TF-IDF: ponechává jen písmena a–z, takže čísla a masku `___` vynechává. Počty frází šablony jsou podklad pro deduplikaci boilerplate (D26).
 
 # Omezení {#sec-omezeni}
 
-Řádkově ukotvený výraz nevidí pole, které stojí na řádku za jiným polem, hlavičky bez dvojtečky ani hlavičky rozdělené na víc řádků. Pokrytí administrativních polí se proto neměří. Opakování je jen nepřímý signál falešné hranice: synonymum se může opakovat i ve zprávě, kde je každý výskyt skutečnou hlavičkou. Hranice `r candidate_floor` pro kandidáty je popisná a nerozliší sekci šablony od pole, které má ve většině zpráv podsekce. Žebříček neukazuje hlavičky pod `r coverage_floor` zpráv, takže vzácnou sekci šablony nemusí zveřejnit. Pozice počítá jen sekce lexikonu, takže pole a podnadpisy mimo lexikon pořadí nezkreslují, ale ani nepopisují. Pozice je pořadí mezi sekcemi, které zpráva má: chybí-li dřívější sekce, pozice všech pozdějších klesne o jedna, a IQR pozice proto měří i chybějící sekce, ne jen přeházené pořadí. Frekvenční analýza nelemmatizuje, takže „fever“ a „fevers“ jsou dva tokeny, a ztrácí negace, protože „no“ a „not“ jsou stop slova: „no fever“ se spočítá jako „fever“. Slova z administrativních polí leží v části `other` a počítají se jen do celku, ne do sekcí. Bigram může spojit slova, mezi nimiž stálo stop slovo. N-gramy pod branou (`r coverage_floor` zpráv a nejméně `r count_floor`) se nezobrazí, takže vzácná, ale rozlišující fráze v žebříčku chybí. Strip odhaduje jednu sekci a nehlídá, že se její synonymum neobjeví jako hlavička uvnitř těla jiné sekce; parser bere první výskyt.
+Řádkově ukotvený výraz nevidí pole, které stojí na řádku za jiným polem, hlavičky bez dvojtečky ani hlavičky rozdělené na víc řádků. Pokrytí administrativních polí se proto neměří. Opakování je jen nepřímý signál falešné hranice: synonymum se může opakovat i ve zprávě, kde je každý výskyt skutečnou hlavičkou. Hranice `r candidate_floor` pro kandidáty je popisná a nerozliší sekci šablony od pole, které má ve většině zpráv podsekce. Žebříček neukazuje hlavičky pod `r coverage_floor` zpráv, takže vzácnou sekci šablony nemusí zveřejnit. Pozice počítá jen sekce lexikonu, takže pole a podnadpisy mimo lexikon pořadí nezkreslují, ale ani nepopisují. Pozice je pořadí mezi sekcemi, které zpráva má: chybí-li dřívější sekce, pozice všech pozdějších klesne o jedna, a IQR pozice proto měří i chybějící sekce, ne jen přeházené pořadí. Frekvenční analýza nelemmatizuje, takže „fever“ a „fevers“ jsou dva tokeny, a ztrácí negace, protože „no“ a „not“ jsou stop slova: „no fever“ se spočítá jako „fever“. Výchozí tokenizace TF-IDF v S40 masku `___` a čísla jako tokeny ponechá, počty z tohoto sešitu tedy nejsou přímo počty příznaků baseline. Slova z administrativních polí leží v části `other` a počítají se jen do celku, ne do sekcí. Bigram může spojit slova, mezi nimiž stálo stop slovo. N-gramy pod branou (`r coverage_floor` zpráv a nejméně `r count_floor`) se nezobrazí, takže vzácná, ale rozlišující fráze v žebříčku chybí. Strip odhaduje jednu sekci a nehlídá, že se její synonymum neobjeví jako hlavička uvnitř těla jiné sekce; parser bere první výskyt.
 
 {{< include _partials/appendix.qmd >}}
