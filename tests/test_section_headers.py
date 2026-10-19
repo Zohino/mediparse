@@ -23,9 +23,11 @@ from mediparse.domain.section_headers import (
 from mediparse.infrastructure.sampler_config import load_sampler_config
 from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
 from tests.support import (
+    MIMIC_SHAPED_NOTES,
     REPOSITORY_CONFIG,
     REPOSITORY_CORPUS,
     REPOSITORY_LEXICON,
+    mimic_shaped_notes,
 )
 
 
@@ -426,3 +428,30 @@ def test_split_synthetic_corpus_keeps_surgical_history_in_medical_history() -> N
         checked += 1
 
     assert checked
+
+
+MIMIC_SHAPED_EXPECTED: Final = json.loads(
+    (MIMIC_SHAPED_NOTES / "expected.json").read_text(encoding="utf-8")
+)
+MIN_MIMIC_SHAPED_NOTES: Final = 12
+
+
+def test_mimic_shaped_notes_match_expectations() -> None:
+    """Každá zpráva má očekávání a každé očekávání zprávu; sada má aspoň 12 zpráv."""
+    notes = mimic_shaped_notes()
+
+    assert notes.keys() == MIMIC_SHAPED_EXPECTED.keys()
+    assert len(notes) >= MIN_MIMIC_SHAPED_NOTES
+
+
+@pytest.mark.parametrize("name", MIMIC_SHAPED_EXPECTED, ids=MIMIC_SHAPED_EXPECTED)
+def test_mimic_shaped_note_splits_as_expected(name: str) -> None:
+    """Celá zpráva ve tvaru šablony MIMIC se rozdělí podle očekávání a složí se zpět."""
+    text = mimic_shaped_notes()[name]
+
+    sections = split_sections(text, REPOSITORY_LEXICON)
+
+    assert [(s.section, s.header) for s in sections] == [
+        tuple(pair) for pair in MIMIC_SHAPED_EXPECTED[name]["sections"]
+    ]
+    assert "".join(s.header + s.body for s in sections) == text

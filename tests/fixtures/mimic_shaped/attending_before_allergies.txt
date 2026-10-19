@@ -1,0 +1,38 @@
+Name: ___ Unit No: ___
+
+Admission Date: ___ Discharge Date: ___
+Date of Birth: ___ Sex: M
+
+Service: SURGERY
+
+Attending: ___.
+
+Allergies:
+NKDA
+
+Chief Complaint:
+RLQ pain
+
+History of Present Illness:
+___ M, 1d RLQ pain, N/V. CT: appendicitis.
+
+Past Medical History:
+none
+
+Physical Exam:
+RLQ tender, guarding.
+
+Brief Hospital Course:
+Lap appy HD1, diet advanced, d/c HD2.
+
+Discharge Medications:
+1. acetaminophen PRN
+
+Discharge Diagnosis:
+Acute appendicitis
+
+Discharge Instructions:
+no lifting, wound care, call if fever
+
+Followup Instructions:
+___

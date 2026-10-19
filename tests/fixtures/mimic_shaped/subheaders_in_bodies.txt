@@ -1,0 +1,29 @@
+Name: ___ Unit No: ___
+
+Chief Complaint:
+chest pain
+
+Past Medical History:
+CAD s/p stent
+Past Surgical History:
+cholecystectomy
+
+Physical Exam:
+ADMISSION EXAM:
+VS: T 98.6 HR 88 BP 130/80
+Gen: NAD
+DISCHARGE EXAM:
+VS: T 98.2 HR 72 BP 124/76
+
+Pertinent Results:
+IMAGING:
+CXR: clear
+LABS:
+10:30 trop 0.01
+16:45 trop 0.01
+
+Brief Hospital Course:
+r/o MI, neg x2, d/c.
+
+Discharge Diagnosis:
+Chest pain, noncardiac

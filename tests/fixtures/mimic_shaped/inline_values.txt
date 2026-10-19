@@ -1,0 +1,17 @@
+Name: ___ Unit No: ___
+
+Allergies: Penicillin
+
+Chief Complaint: cough
+
+Brief Hospital Course:
+Tx CAP, improved.
+
+Discharge Disposition: Home
+
+Discharge Diagnosis: Primary: CHF
+Secondary:
+AFib
+CKD 3
+
+Discharge Condition: fair

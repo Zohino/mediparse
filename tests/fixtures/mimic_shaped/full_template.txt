@@ -1,0 +1,68 @@
+Name: ___ Unit No: ___
+
+Admission Date: ___ Discharge Date: ___
+Date of Birth: ___ Sex: F
+
+Service: MEDICINE
+
+Allergies:
+Sulfa drugs
+
+Attending: ___.
+
+Chief Complaint:
+dyspnea x3d
+
+Major Surgical or Invasive Procedure:
+none
+
+History of Present Illness:
+___ F, COPD, HTN, 3d worsening SOB, wet cough, no fever.
+ED: sat 88% RA, nebs given, admitted.
+
+Past Medical History:
+COPD
+HTN
+GERD
+
+Social History:
+___
+Family History:
+non-contributory
+
+Physical Exam:
+Adm: wheeze bilat, no edema.
+Dc: clear, ambulating.
+
+Pertinent Results:
+___ 06:10 WBC 9.1, Hgb 12.0
+CXR: hyperinflation, no consolidation
+
+Brief Hospital Course:
+Exacerbation, tx steroids + nebs. O2 weaned off HD3.
+HTN: continued home regimen.
+
+Medications on Admission:
+amlodipine 5 mg daily
+albuterol PRN
+
+Discharge Medications:
+1. amlodipine 5 mg daily
+2. prednisone taper
+3. albuterol PRN
+
+Discharge Disposition:
+Home
+
+Discharge Diagnosis:
+COPD exacerbation
+HTN
+
+Discharge Condition:
+stable, RA sat 94%
+
+Discharge Instructions:
+steroids until done, inhaler, return if SOB
+
+Followup Instructions:
+___
