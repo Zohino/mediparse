@@ -83,6 +83,13 @@ test_that("po sekcích jsou jen zadané sekce a jmenovatel je počet zpráv se s
   expect_equal(counts$jmenovatel[counts$sekce == "chief_complaint"], 1)
 })
 
+test_that("prázdný výběr sekcí (prázdná kostra) vrátí prázdný výsledek, ne chybu SQL", {
+  counts <- counts_of("Allergies:\nrash\n", sections = character())
+
+  expect_equal(nrow(counts), 0L)
+  expect_equal(names(counts), NGRAM_COLUMNS)
+})
+
 test_that("celek počítá i text other a má sekci NA", {
   counts <- counts_of("Name: rash\n\nAllergies:\nitch\n")
 
@@ -122,4 +129,69 @@ test_that("ngram_counts nad prázdnou tabulkou vrátí typovaný prázdný data.
 
   expect_equal(names(counts), c("sekce", "n", "ngram", "zpravy", "vyskyty", "jmenovatel"))
   expect_equal(nrow(counts), 0L)
+})
+
+RANKED <- data.frame(
+  sekce = c(NA, NA, NA, "a", "a", "a"),
+  n = c(1L, 2L, 3L, 1L, 1L, 2L),
+  ngram = c("pain", "chest pain", "no acute distress", "rash", "itch", "rash itch"),
+  zpravy = c(90, 60, 40, 8, 4, 2),
+  vyskyty = c(120, 70, 50, 9, 4, 2),
+  jmenovatel = c(100, 100, 100, 10, 10, 10),
+  stringsAsFactors = FALSE
+)
+
+test_that("ngram_table má počty a podíl zpráv, i když je prázdná", {
+  table <- ngram_table(RANKED[1:3, ])
+
+  expect_equal(table$ngram, c("pain", "chest pain", "no acute distress"))
+  expect_equal(table$n, c("1", "2", "3"))
+  expect_equal(table$podil, c("90,0", "60,0", "40,0"))
+  expect_equal(nrow(ngram_table(empty_counts())), 0L)
+})
+
+test_that("section_ngram_table dá řádek na sekci a n v pořadí sekcí, bez n-gramu pomlčku", {
+  table <- section_ngram_table(RANKED[4:6, ], c("a", "b"))
+
+  expect_equal(table$sekce, rep(c("a", "b"), each = 3L))
+  expect_equal(table$n, rep(c("1", "2", "3"), 2L))
+  expect_equal(table$ngramy[[1]], paste0("rash (80,0", NBSP, "%); itch (40,0", NBSP, "%)"))
+  expect_equal(table$ngramy[c(3, 4:6)], rep("–", 4L))
+  empty <- section_ngram_table(empty_counts(), character())
+  expect_equal(nrow(empty), 0L)
+  expect_equal(names(empty), c("sekce", "n", "ngramy"))
+})
+
+test_that("ngram_plot se sestaví pro tři panely i nad prázdným výsledkem", {
+  built <- ggplot2::ggplot_build(ngram_plot(RANKED[1:3, ]))
+
+  expect_equal(nrow(built$layout$layout), 3L)
+  expect_no_error(ggplot2::ggplot_build(ngram_plot(empty_counts())))
+})
+
+test_that("ngram_text jmenuje nejčastější n-gramy a počet frází šablony pro každé n", {
+  text <- ngram_text(RANKED[1:3, ])
+
+  expect_match(text, "token `pain` (90,0", fixed = TRUE)
+  expect_match(text, "bigram `chest pain`", fixed = TRUE)
+  expect_match(text, paste0("1", NBSP, "token, 1", NBSP, "bigram a 0", NBSP, "trigramů"), fixed = TRUE)
+  expect_match(ngram_text(empty_counts()), "nelze uvést")
+})
+
+test_that("tabulky n-gramů projdou export_table s rozvržením sešitu", {
+  dir <- withr::local_tempdir()
+  for (counts in list(RANKED, empty_counts())) {
+    ranked <- ngram_ranking(counts, NGRAM_RANKING)
+    for (spec in list(
+      list("tbl-ngramy", ngram_table(ranked), "ngram"),
+      list("tbl-ngramy-sekce", section_ngram_table(ranked, "a"), "sekce")
+    )) {
+      layout <- TABLE_LAYOUTS[[spec[[1]]]]
+      export_table(
+        spec[[2]], col.names = layout$col.names, align = layout$align, widths = layout$widths,
+        code = spec[[3]], label = spec[[1]], dir = dir
+      )
+      expect_true(file.exists(file.path(dir, paste0(spec[[1]], ".tex"))))
+    }
+  }
 })

@@ -496,7 +496,8 @@ test_that("tabulky kapitoly projdou export_table s rozvržením sešitu, i nad p
     export_layout(body_length_table(body_lengths(con, skeleton, OTHER)), "tbl-delky", dir, "sekce")
     export_layout(headerless_table(headerless_notes(con, OTHER)), "tbl-bez-nadpisu", dir)
 
-    expect_true(all(file.exists(file.path(dir, paste0(names(TABLE_LAYOUTS), ".tex")))))
+    segment_tables <- c("tbl-kostra", "tbl-delky", "tbl-bez-nadpisu")
+    expect_true(all(file.exists(file.path(dir, paste0(segment_tables, ".tex")))))
   }
 })
 

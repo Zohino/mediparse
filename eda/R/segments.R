@@ -70,6 +70,14 @@ TABLE_LAYOUTS <- list(
   `tbl-bez-nadpisu` = list(
     col.names = c("Skupina", "Zprávy", "Podíl (%)", "Medián délky", "p95 délky"),
     align = "lrrrr", widths = c(30, 15, 15, 20, 20)
+  ),
+  `tbl-ngramy` = list(
+    col.names = c("Délka", "N-gram", "Zprávy", "Podíl (%)", "Výskyty"),
+    align = "clrrr", widths = c(8, 44, 16, 16, 16)
+  ),
+  `tbl-ngramy-sekce` = list(
+    col.names = c("Sekce", "Délka", "Nejčastější n-gramy (podíl zpráv se sekcí)"),
+    align = "lcl", widths = c(22, 8, 70)
   )
 )
 

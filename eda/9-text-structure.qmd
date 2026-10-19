@@ -15,6 +15,7 @@ source("R/text.R")
 source("R/selection.R")
 source("R/sections.R")
 source("R/segments.R")
+source("R/ngrams.R")
 source("R/export.R")
 eda_check_python()
 con <- eda_connect()
@@ -46,6 +47,11 @@ strip_d2 <- strip_share(con, lexicon)
 headerless <- headerless_notes(con, sections_py$OTHER)
 headerless_hist <- headerless_histogram(con, sections_py$OTHER)
 skeleton_floor <- coverage_threshold_text(SKELETON_COVERAGE)
+stopwords <- stop_words()
+ngrams_total <- ngram_counts(con, stopwords)
+ngrams_sections <- ngram_counts(con, stopwords, sections = skeleton_members(skeleton)$sekce)
+ranked_total <- ngram_ranking(ngrams_total, NGRAM_RANKING)
+ranked_sections <- ngram_ranking(ngrams_sections, SECTION_NGRAMS)
 ```
 
 # Úvod
@@ -251,6 +257,44 @@ export_table(
 #| fig-width: 6.5
 #| fig-height: 4
 export_figure(headerless_plot(headerless_hist), height_cm = 10)
+```
+
+## Tokeny a n-gramy {#sec-ngramy}
+
+`r ngram_text(ngrams_total)`
+
+```{r}
+#| label: tbl-ngramy
+#| tbl-cap: "Nejčastější tokeny, bigramy a trigramy těl sekcí vstupního korpusu podle dokumentové frekvence."
+#| tbl-colwidths: [8, 44, 16, 16, 16]
+export_table(
+  ngram_table(ranked_total),
+  col.names = TABLE_LAYOUTS[["tbl-ngramy"]]$col.names,
+  align = TABLE_LAYOUTS[["tbl-ngramy"]]$align,
+  widths = TABLE_LAYOUTS[["tbl-ngramy"]]$widths,
+  code = "ngram"
+)
+```
+
+```{r}
+#| label: tbl-ngramy-sekce
+#| tbl-cap: "Nejčastější n-gramy po sekcích kostry: podíl zpráv se sekcí."
+#| tbl-colwidths: [22, 8, 70]
+export_table(
+  section_ngram_table(ranked_sections, skeleton_members(skeleton)$sekce),
+  col.names = TABLE_LAYOUTS[["tbl-ngramy-sekce"]]$col.names,
+  align = TABLE_LAYOUTS[["tbl-ngramy-sekce"]]$align,
+  widths = TABLE_LAYOUTS[["tbl-ngramy-sekce"]]$widths,
+  code = "sekce"
+)
+```
+
+```{r}
+#| label: fig-ngramy
+#| fig-cap: "Nejčastější tokeny, bigramy a trigramy těl sekcí: podíl zpráv."
+#| fig-width: 6.5
+#| fig-height: 9
+export_figure(ngram_plot(ranked_total), height_cm = 20)
 ```
 
 # Shrnutí a rozhodnutí {#sec-shrnuti}

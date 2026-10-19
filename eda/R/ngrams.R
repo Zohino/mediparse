@@ -84,6 +84,9 @@ ngram_list_sql <- function(size) {
 # Brána DUA je v SQL, takže do R jde jen to, co se smí zveřejnit. `sections = NULL` je celek
 # (dokumentová frekvence přes všechny části zprávy), jinak se počítá po zadaných sekcích.
 ngram_counts <- function(con, stopwords, sections = NULL, floor_fn = publishable_floor) {
+  if (length(sections) == 0L && !is.null(sections)) {
+    return(empty_counts())
+  }
   tokens <- ngram_tokens(con, stopwords, sections)
   on.exit(DBI::dbExecute(con, sprintf("DROP TABLE IF EXISTS %s", tokens)), add = TRUE)
   denominators <- ngram_denominators(con, sections)
@@ -113,9 +116,92 @@ ngram_counts <- function(con, stopwords, sections = NULL, floor_fn = publishable
 # bez ohledu na locale, aby pořadí nezáviselo na stroji.
 ngram_ranking <- function(counts, limit) {
   ordered <- counts[order(counts$sekce, counts$n, -counts$zpravy, -counts$vyskyty, counts$ngram, method = "radix"), ]
-  rank <- stats::ave(
-    seq_len(nrow(ordered)), ordered$sekce, ordered$n, FUN = seq_along
-  )
+  group <- paste(ifelse(is.na(ordered$sekce), "", ordered$sekce), ordered$n)
+  rank <- stats::ave(seq_len(nrow(ordered)), group, FUN = seq_along)
   rownames(ordered) <- NULL
   ordered[rank <= limit, , drop = FALSE]
+}
+
+NGRAM_LABELS <- c("Tokeny", "Bigramy", "Trigramy")
+TOKEN_FORMS <- c("token", "tokeny", "tokenů")
+BIGRAM_FORMS <- c("bigram", "bigramy", "bigramů")
+TRIGRAM_FORMS <- c("trigram", "trigramy", "trigramů")
+NGRAM_NOUNS <- list(`1` = "token", `2` = "bigram", `3` = "trigram")
+
+ngram_table <- function(ranked) {
+  data.frame(
+    n = as.character(ranked$n),
+    ngram = ranked$ngram,
+    zpravy = number_text(ranked$zpravy),
+    podil = percent_text(ranked$zpravy, ranked$jmenovatel),
+    vyskyty = number_text(ranked$vyskyty),
+    stringsAsFactors = FALSE,
+    row.names = NULL
+  )
+}
+
+# Jeden řádek na sekci kostry a n; sekce bez n-gramu nad branou má v buňce pomlčku.
+section_ngram_table <- function(ranked, sections) {
+  grid <- expand.grid(n = NGRAM_SIZES, sekce = sections, stringsAsFactors = FALSE)
+  grid <- grid[order(match(grid$sekce, sections), grid$n), , drop = FALSE]
+  cell <- function(section, size) {
+    rows <- ranked[ranked$sekce %in% section & ranked$n == size, , drop = FALSE]
+    if (nrow(rows) == 0L) {
+      return("–")
+    }
+    paste(
+      sprintf("%s (%s)", rows$ngram, percent_label(rows$zpravy, rows$jmenovatel)),
+      collapse = "; "
+    )
+  }
+  data.frame(
+    sekce = grid$sekce,
+    n = as.character(grid$n),
+    ngramy = vapply(seq_len(nrow(grid)), function(i) cell(grid$sekce[[i]], grid$n[[i]]), character(1)),
+    stringsAsFactors = FALSE
+  )
+}
+
+ngram_plot <- function(ranked) {
+  bars <- ranked
+  bars$klic <- paste(bars$n, bars$ngram, sep = "|")
+  bars$podil <- ifelse(bars$jmenovatel > 0, bars$zpravy / bars$jmenovatel, NA_real_)
+  bars$klic <- factor(bars$klic, levels = rev(unique(bars$klic)))
+  bars$druh <- factor(NGRAM_LABELS[bars$n], levels = NGRAM_LABELS)
+  # facet_grid nad prázdnou tabulkou spadne, graf bez n-gramů proto zůstane bez panelů.
+  panels <- if (nrow(bars) == 0L) NULL else ggplot2::facet_grid(druh ~ ., scales = "free_y", space = "free_y")
+  ggplot2::ggplot(bars, ggplot2::aes(podil, klic)) +
+    ggplot2::geom_col() +
+    panels +
+    ggplot2::scale_x_continuous(labels = percent_axis) +
+    ggplot2::scale_y_discrete(labels = function(x) sub("^[0-9]+\\|", "", x)) +
+    ggplot2::labs(x = "Podíl zpráv", y = NULL) +
+    theme_thesis()
+}
+
+top_ngram_text <- function(counts, size) {
+  rows <- counts[counts$n == size, , drop = FALSE]
+  if (nrow(rows) == 0L) {
+    return(NULL)
+  }
+  best <- ngram_ranking(rows, limit = 1L)
+  sprintf(
+    "%s `%s` (%s zpráv)", NGRAM_NOUNS[[as.character(size)]], best$ngram,
+    percent_label(best$zpravy, best$jmenovatel)
+  )
+}
+
+# Fráze šablony jsou n-gramy, které má aspoň polovina zpráv; podklad pro `max_df` v S40 a D26.
+ngram_text <- function(counts) {
+  if (nrow(counts) == 0L) {
+    return("Žádný n-gram nepřekročil bránu DUA, nejčastější n-gramy nelze uvést.")
+  }
+  tops <- Filter(Negate(is.null), lapply(NGRAM_SIZES, function(size) top_ngram_text(counts, size)))
+  common <- counts$zpravy >= BOILERPLATE_COVERAGE * counts$jmenovatel
+  counted <- function(size, forms) count_phrase(sum(common & counts$n == size), forms)
+  sprintf(
+    "Nejčastější je %s. Aspoň %s zpráv má %s, %s a %s; jsou to fráze šablony, které nic nerozlišují.",
+    join_labels(unlist(tops)), coverage_threshold_text(BOILERPLATE_COVERAGE),
+    counted(1L, TOKEN_FORMS), counted(2L, BIGRAM_FORMS), counted(3L, TRIGRAM_FORMS)
+  )
 }
