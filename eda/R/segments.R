@@ -349,8 +349,6 @@ strip_share <- function(con, lexicon) {
   c(lapply(row, as.numeric), list(sekce = keys))
 }
 
-
-
 strip_section_labels <- function(strip) join_labels(sprintf("`%s`", strip$sekce))
 
 strip_share_text <- function(strip) {
