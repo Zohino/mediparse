@@ -44,7 +44,11 @@ def lexicon(tmp_path: Path) -> Path:
                 "label_cs": "Hlavní obtíže",
                 "synonyms": ["Chief Complaint"],
             },
-            "allergies": {"label_cs": "Alergie", "synonyms": ["Allergies"]},
+            "allergies": {
+                "label_cs": "Alergie",
+                "synonyms": ["Allergies"],
+                "diagnostic": True,
+            },
         },
         "preamble": ["Name"],
     }

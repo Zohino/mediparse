@@ -36,12 +36,19 @@ def normalized(header: str) -> str:
 
 
 class LexiconSection(BaseModel):
-    """Sekce lexikonu: český popisek a synonyma jejího názvu."""
+    """Sekce lexikonu: český popisek, synonyma názvu a příznak diagnostické sekce.
+
+    Attributes:
+        label_cs: Český popisek sekce.
+        synonyms: Název sekce a jeho pravopisné varianty.
+        diagnostic: Sekce, ze které se kódují diagnózy a kterou ablace D2 odstraní.
+    """
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     label_cs: Annotated[str, Field(min_length=1)]
     synonyms: Annotated[tuple[str, ...], Field(min_length=1)]
+    diagnostic: bool = False
 
 
 class SectionLexicon(BaseModel):
@@ -75,6 +82,14 @@ class SectionLexicon(BaseModel):
         clashes = sorted(form for form, count in forms.items() if count > 1)
         if clashes:
             msg = f"Po normalizaci splývají hlavičky: {', '.join(clashes)}."
+            raise ValueError(msg)
+        return self
+
+    @model_validator(mode="after")
+    def _has_diagnostic_section(self) -> Self:
+        # Bez diagnostické sekce by strip tiše nic neodstranil a ablace by se rovnala hlavnímu řádku.
+        if not any(section.diagnostic for section in self.sections.values()):
+            msg = "Lexikon musí mít aspoň jednu diagnostickou sekci (diagnostic: true)."
             raise ValueError(msg)
         return self
 

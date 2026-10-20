@@ -37,7 +37,11 @@ def _lexicon_json(**overrides: object) -> dict[str, object]:
                 "label_cs": "Hlavní obtíže",
                 "synonyms": ["Chief Complaint"],
             },
-            "allergies": {"label_cs": "Alergie", "synonyms": ["Allergies"]},
+            "allergies": {
+                "label_cs": "Alergie",
+                "synonyms": ["Allergies"],
+                "diagnostic": True,
+            },
         },
         "preamble": ["Name", "Sex"],
     }
@@ -56,13 +60,38 @@ def test_normalization_merges_spelling_variants(header: str) -> None:
     assert normalized(header) == "chief complaint"
 
 
+def test_section_without_flag_is_not_diagnostic() -> None:
+    """Chybějící pole `diagnostic` znamená, že sekce diagnostická není."""
+    sections = _lexicon().sections
+
+    assert not sections["chief_complaint"].diagnostic
+    assert sections["allergies"].diagnostic
+
+
+def test_repository_lexicon_marks_only_discharge_diagnosis_as_diagnostic() -> None:
+    """Čísla sešitu 9 stojí na tom, že strip odstraňuje právě tuto sekci."""
+    diagnostic = {
+        key
+        for key, section in REPOSITORY_LEXICON.sections.items()
+        if section.diagnostic
+    }
+
+    assert diagnostic == {"discharge_diagnosis"}
+
+
 def test_minimal_lexicon_is_accepted() -> None:
     """Lexikon se sekcemi a preambulí projde schématem."""
     assert set(_lexicon().sections) == {"chief_complaint", "allergies"}
 
 
-def _section(*synonyms: str, label_cs: str = "A") -> dict[str, object]:
-    return {"label_cs": label_cs, "synonyms": list(synonyms)}
+def _section(
+    *synonyms: str, label_cs: str = "A", diagnostic: bool = False
+) -> dict[str, object]:
+    return {
+        "label_cs": label_cs,
+        "synonyms": list(synonyms),
+        "diagnostic": diagnostic,
+    }
 
 
 INVALID_LEXICONS: Final = {
@@ -106,6 +135,14 @@ INVALID_LEXICONS: Final = {
         "vyhrazený klíč: other",
     ),
     "neznámý klíč na nejvyšší úrovni": ({"extra": 1}, "Extra inputs"),
+    "žádná diagnostická sekce": (
+        {"sections": {"a": _section("Allergies")}},
+        "aspoň jednu diagnostickou sekci",
+    ),
+    "příznak diagnostic jako řetězec": (
+        {"sections": {"a": {**_section("Allergies"), "diagnostic": "true"}}},
+        "Input should be a valid boolean",
+    ),
 }
 
 
@@ -155,7 +192,7 @@ DISCHARGE_LEXICON = SectionLexicon.model_validate_json(
             "chief_complaint": _section("Chief Complaint", label_cs="Obtíže"),
             "past_medical_history": _section("Past Medical History"),
             "discharge_diagnosis": _section(
-                "Discharge Diagnosis", "Discharge Diagnoses"
+                "Discharge Diagnosis", "Discharge Diagnoses", diagnostic=True
             ),
         },
         "preamble": ["Name", "Unit No", "Service", "Attending"],
