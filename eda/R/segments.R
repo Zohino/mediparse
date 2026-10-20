@@ -349,7 +349,9 @@ strip_share <- function(con, lexicon) {
   c(lapply(row, as.numeric), list(sekce = keys))
 }
 
-strip_section_list <- function(keys) paste0("`", keys, "`", collapse = ", ")
+
+
+strip_section_labels <- function(strip) join_labels(sprintf("`%s`", strip$sekce))
 
 strip_share_text <- function(strip) {
   if (strip$celkem == 0) {
@@ -357,14 +359,15 @@ strip_share_text <- function(strip) {
   }
   if (strip$se_sekci == 0) {
     return(sprintf(
-      "Strip D2 by nic neodstranil: diagnostickou sekci (%s) má %s korpusu.",
-      strip_section_list(strip$sekce), count_phrase(0, NOTE_FORMS)
+      "Strip D2 by nic neodstranil: %s %s má %s korpusu.",
+      plural_form(length(strip$sekce), c("diagnostickou sekci", "diagnostické sekce", "diagnostické sekce")),
+      strip_section_labels(strip), count_phrase(0, NOTE_FORMS)
     ))
   }
   sprintf(
     "Strip D2 odstraní %s %s u %s korpusu (%s) a tvoří %s jeho textu; ve zprávě se sekcí tvoří v mediánu %s textu zprávy.",
     plural_form(length(strip$sekce), c("sekci", "sekce", "sekce")),
-    strip_section_list(strip$sekce), count_phrase(strip$se_sekci, NOTE_FORMS),
+    strip_section_labels(strip), count_phrase(strip$se_sekci, NOTE_FORMS),
     percent_label(strip$se_sekci, strip$celkem),
     percent_label(strip$text_sekce, strip$text_celkem),
     percent_label(strip$median_podilu, 1)

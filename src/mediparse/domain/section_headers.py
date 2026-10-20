@@ -1,4 +1,4 @@
-"""Lexikon sekcí propouštěcí zprávy, rozpoznání hlaviček v textu a rozdělení zprávy na sekce."""
+"""Lexikon sekcí propouštěcí zprávy, rozpoznání hlaviček v textu, rozdělení zprávy na sekce a strip diagnostických sekcí."""
 
 from __future__ import annotations
 
@@ -63,6 +63,17 @@ class SectionLexicon(BaseModel):
     sections: Annotated[dict[str, LexiconSection], Field(min_length=1)]
     preamble: tuple[str, ...]
 
+    @property
+    def diagnostic_sections(self) -> frozenset[str]:
+        """Klíče sekcí označených jako diagnostické.
+
+        Returns:
+            Klíče, které odstraní `strip_diagnostic_sections`.
+        """
+        return frozenset(
+            key for key, section in self.sections.items() if section.diagnostic
+        )
+
     @model_validator(mode="after")
     def _reserved_key_is_absent(self) -> Self:
         if OTHER in self.sections:
@@ -88,7 +99,7 @@ class SectionLexicon(BaseModel):
     @model_validator(mode="after")
     def _has_diagnostic_section(self) -> Self:
         # Bez diagnostické sekce by strip tiše nic neodstranil a ablace by se rovnala hlavnímu řádku.
-        if not any(section.diagnostic for section in self.sections.values()):
+        if not self.diagnostic_sections:
             msg = "Lexikon musí mít aspoň jednu diagnostickou sekci (diagnostic: true)."
             raise ValueError(msg)
         return self

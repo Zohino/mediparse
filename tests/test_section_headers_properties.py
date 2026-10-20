@@ -35,7 +35,7 @@ _SECTION_OF: Final = {
 _PLAIN_LINE: Final = st.text(
     alphabet=string.ascii_letters + string.digits + " _-/,.()", max_size=20
 )
-_DIAGNOSTIC: Final = {k for k, v in _SECTIONS.items() if v.diagnostic}
+_DIAGNOSTIC: Final = REPOSITORY_LEXICON.diagnostic_sections
 _EOL: Final = st.sampled_from(("\n", "\r\n"))
 
 

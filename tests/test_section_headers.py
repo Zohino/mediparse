@@ -1,4 +1,4 @@
-"""Lexikon sekcí, normalizace hlavičky, rozpoznání hlaviček a rozdělení zprávy na sekce."""
+"""Lexikon sekcí, normalizace hlavičky, rozpoznání hlaviček, rozdělení zprávy na sekce a strip diagnostických sekcí."""
 
 from __future__ import annotations
 
@@ -72,13 +72,14 @@ def test_section_without_flag_is_not_diagnostic() -> None:
 
 def test_repository_lexicon_marks_only_discharge_diagnosis_as_diagnostic() -> None:
     """Čísla sešitu 9 stojí na tom, že strip odstraňuje právě tuto sekci."""
-    diagnostic = {
-        key
-        for key, section in REPOSITORY_LEXICON.sections.items()
-        if section.diagnostic
-    }
+    assert REPOSITORY_LEXICON.diagnostic_sections == {"discharge_diagnosis"}
 
-    assert diagnostic == {"discharge_diagnosis"}
+
+def test_synthetic_diagnosis_section_is_removed_by_strip() -> None:
+    """Zmínka diagnózy syntetiky leží v sekci, kterou ablace odstraní."""
+    plan = load_sampler_config(REPOSITORY_CONFIG)
+
+    assert plan.mentions.diagnosis_section in REPOSITORY_LEXICON.diagnostic_sections
 
 
 def test_minimal_lexicon_is_accepted() -> None:
@@ -104,7 +105,12 @@ INVALID_LEXICONS: Final = {
     ),
     "bez sekcí": ({"sections": {}}, "at least 1 item"),
     "kolize dvou sekcí po normalizaci": (
-        {"sections": {"a": _section("Allergies"), "b": _section("ALLERGIES.")}},
+        {
+            "sections": {
+                "a": _section("Allergies", diagnostic=True),
+                "b": _section("ALLERGIES.", diagnostic=True),
+            }
+        },
         "splývají hlavičky: allergies",
     ),
     "kolize sekce s preamble": (
@@ -112,19 +118,19 @@ INVALID_LEXICONS: Final = {
         "splývají hlavičky: allergies",
     ),
     "synonymum s číslicí": (
-        {"sections": {"a": _section("Type 2 Diabetes")}},
+        {"sections": {"a": _section("Type 2 Diabetes", diagnostic=True)}},
         "nesplňuje výraz hlavičky",
     ),
     "malé první písmeno": (
-        {"sections": {"a": _section("allergies")}},
+        {"sections": {"a": _section("allergies", diagnostic=True)}},
         "nesplňuje výraz hlavičky",
     ),
     "odsazené synonymum": (
-        {"sections": {"a": _section(" Allergies")}},
+        {"sections": {"a": _section(" Allergies", diagnostic=True)}},
         "nesplňuje výraz hlavičky",
     ),
     "normalizovaný tvar pod 3 znaky": (
-        {"sections": {"a": _section("Ab")}},
+        {"sections": {"a": _section("Ab", diagnostic=True)}},
         "kratší než",
     ),
     "pole preambule mimo výraz hlavičky": (
@@ -133,7 +139,7 @@ INVALID_LEXICONS: Final = {
     ),
     "pole preambule pod 3 znaky": ({"preamble": ["Id"]}, "Pole 'Id' má"),
     "vyhrazený klíč other": (
-        {"sections": {"other": _section("Allergies")}},
+        {"sections": {"other": _section("Allergies", diagnostic=True)}},
         "vyhrazený klíč: other",
     ),
     "neznámý klíč na nejvyšší úrovni": ({"extra": 1}, "Extra inputs"),
@@ -184,7 +190,7 @@ def test_header_pattern_mirrors_note_headers_cases(
 def test_too_short_synonym_is_rejected(synonym: str) -> None:
     """Délku, kterou R filtruje v note_headers, Python hlídá ve validaci lexikonu."""
     with pytest.raises(ValidationError, match="kratší"):
-        _lexicon(sections={"a": _section(synonym)})
+        _lexicon(sections={"a": _section(synonym, diagnostic=True)})
 
 
 DISCHARGE_LEXICON = SectionLexicon.model_validate_json(
@@ -589,11 +595,7 @@ def _without_diagnostic_lines(text: str, sections: list[list[Any]]) -> str:
         Text bez těchto řádků.
     """
     lines = _lines(text)
-    diagnostic = {
-        key
-        for key, section in REPOSITORY_LEXICON.sections.items()
-        if section.diagnostic
-    }
+    diagnostic = REPOSITORY_LEXICON.diagnostic_sections
     kept = list(lines)
     for index, (key, _header, first) in enumerate(sections):
         if key not in diagnostic:

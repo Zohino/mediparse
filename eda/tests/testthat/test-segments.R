@@ -427,7 +427,25 @@ test_that("strip_share_text jmenuje sekci v jednotném a sekce ve množném čí
   two <- strip_share_text(strip_share(lengths_con(), strip_lexicon(c(DIAGNOSTIC, "b"))))
 
   expect_match(one, paste0("sekci `", DIAGNOSTIC, "`"), fixed = TRUE)
-  expect_match(two, paste0("sekce `b`, `", DIAGNOSTIC, "`"), fixed = TRUE)
+  expect_match(two, paste0("sekce `b` a `", DIAGNOSTIC, "`"), fixed = TRUE)
+})
+
+test_that("strip_share_text bez zprávy se sekcí jmenuje sekce ve správném čísle", {
+  notes <- sections_con(list(n1 = "a", n2 = "a"))
+  one <- strip_share_text(strip_share(notes, strip_lexicon()))
+  two <- strip_share_text(strip_share(notes, strip_lexicon(c(DIAGNOSTIC, "b"))))
+
+  expect_match(one, paste0("diagnostickou sekci `", DIAGNOSTIC, "`"), fixed = TRUE)
+  expect_match(two, paste0("diagnostické sekce `b` a `", DIAGNOSTIC, "`"), fixed = TRUE)
+})
+
+test_that("strip_share počítá sekci se dvěma řádky synonym jednou", {
+  lexicon <- strip_lexicon()
+  lexicon$sections <- rbind(lexicon$sections, lexicon$sections[lexicon$sections$sekce == DIAGNOSTIC, ])
+  strip <- strip_share(lengths_con(), lexicon)
+
+  expect_equal(strip$sekce, DIAGNOSTIC)
+  expect_match(strip_share_text(strip), paste0("odstraní sekci `", DIAGNOSTIC, "`"), fixed = TRUE)
 })
 
 test_that("strip_share_text jmenuje podíl zpráv a textu", {
