@@ -47,7 +47,8 @@ def test_missing_key_is_refused(tmp_path: Path) -> None:
 MANIFEST = (
     '{"tables": ['
     '{"file": "discharge.csv.gz", "bytes": 1, "records": 3, "columns": ["b", "a"]},'
-    '{"file": "d_icd_diagnoses.csv.gz", "bytes": 2, "records": 4, "columns": ["c"]}'
+    '{"file": "d_icd_diagnoses.csv.gz", "bytes": 2, "records": 4, "columns": ["c"]},'
+    '{"file": "mimic-iv-bhc.csv", "bytes": 5, "records": 6, "columns": ["d"]}'
     "]}"
 )
 
@@ -55,13 +56,14 @@ MANIFEST = (
 def test_manifest_gives_shapes_by_table_name_with_ordered_columns(
     tmp_path: Path,
 ) -> None:
-    """Manifest dá tvary tabulek pod jménem bez .csv.gz a se sloupci v pořadí souboru."""
+    """Manifest dá tvary tabulek pod jménem bez přípony CSV a se sloupci v pořadí souboru."""
     path = tmp_path / "manifest.json"
     path.write_text(MANIFEST, encoding="utf-8")
 
     assert read_manifest(path) == {
         "discharge": TableShape(records=3, columns=("b", "a")),
         "d_icd_diagnoses": TableShape(records=4, columns=("c",)),
+        "mimic-iv-bhc": TableShape(records=6, columns=("d",)),
     }
 
 
@@ -81,8 +83,12 @@ def test_invalid_json_manifest_is_refused(tmp_path: Path) -> None:
 
 
 def test_manifest_bytes_by_table_name(tmp_path: Path) -> None:
-    """Velikost souboru z manifestu je pod jménem tabulky bez .csv.gz."""
+    """Velikost souboru z manifestu je pod jménem tabulky bez přípony CSV."""
     path = tmp_path / "manifest.json"
     path.write_text(MANIFEST, encoding="utf-8")
 
-    assert read_manifest_bytes(path) == {"discharge": 1, "d_icd_diagnoses": 2}
+    assert read_manifest_bytes(path) == {
+        "discharge": 1,
+        "d_icd_diagnoses": 2,
+        "mimic-iv-bhc": 5,
+    }

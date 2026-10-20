@@ -1,8 +1,9 @@
 import re
 
-from mediparse.entrypoints.mimic_download import mimic_tables
+from mediparse.entrypoints.mimic_download import mimic_table_files, mimic_tables
 
 MIMIC_TABLES = mimic_tables()
+MIMIC_TABLE_FILES = mimic_table_files()
 
 
 rule download_mimic:
@@ -58,24 +59,23 @@ rule inventory_mimic_table:
         "workflow/scripts/inventory.sh {input:q} {output:q}"
 
 
-MIMIC_TABLE_NAMES = [name.removesuffix(".csv.gz") for name in MIMIC_TABLES]
-
-
 rule parquet_mimic:
     input:
-        expand("resources/mimic/parquet/{table}.parquet", table=MIMIC_TABLE_NAMES),
+        expand("resources/mimic/parquet/{table}.parquet", table=MIMIC_TABLE_FILES),
 
 
 rule parquet_mimic_table:
     input:
-        table="resources/mimic/{table}.csv.gz",
-        inventory="resources/mimic/inventory/{table}.csv.gz.json",
+        table=lambda wildcards: f"resources/mimic/{MIMIC_TABLE_FILES[wildcards.table]}",
+        inventory=lambda wildcards: (
+            f"resources/mimic/inventory/{MIMIC_TABLE_FILES[wildcards.table]}.json"
+        ),
         validated="resources/mimic/validated.flag",
     output:
         "resources/mimic/parquet/{table}.parquet",
     log:
         "logs/parquet/{table}.log",
     wildcard_constraints:
-        table="|".join(map(re.escape, MIMIC_TABLE_NAMES)),
+        table="|".join(map(re.escape, MIMIC_TABLE_FILES)),
     script:
         "../scripts/convert_mimic.py"

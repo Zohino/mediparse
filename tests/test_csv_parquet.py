@@ -161,3 +161,30 @@ def test_short_row_error_does_not_echo_cell_values(tmp_path: Path) -> None:
 
     assert "CANARY7" not in str(raised.value)
     assert raised.value.__cause__ is None
+
+
+def _plain_csv(root: Path, text: str) -> Path:
+    path = root / "plain.csv"
+    path.write_bytes(text.encode())
+    return path
+
+
+def test_plain_csv_converts_like_gzip(tmp_path: Path) -> None:
+    """Nekomprimované CSV dá přes víc bloků stejný parquet jako totéž CSV v gzipu."""
+    text = "﻿" + HEADER + ROWS * MANY
+    gzipped = _convert(tmp_path, text, block_size=1 << 12)
+    plain = CsvParquetConversion(
+        _plain_csv(tmp_path, text), tmp_path / "plain.parquet", 1 << 12
+    ).convert()
+
+    assert plain == gzipped
+    assert pq.read_table(tmp_path / "plain.parquet").equals(
+        pq.read_table(tmp_path / "out" / "table.parquet")
+    )
+
+
+def test_plain_csv_with_unclosed_quotes_is_refused(tmp_path: Path) -> None:
+    """Neuzavřené uvozovky hlídá převod i u nekomprimovaného CSV."""
+    source = _plain_csv(tmp_path, HEADER + '1,10,0389,"nikdy neuzavřeno\n')
+    with pytest.raises(InvalidInputError, match="uvozovkách"):
+        CsvParquetConversion(source, tmp_path / "o.parquet").convert()
