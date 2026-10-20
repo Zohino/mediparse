@@ -92,11 +92,11 @@ test_that("segment_corpus nad prázdným korpusem vytvoří prázdnou typovanou 
   expect_equal(nrow(out), 0L)
 })
 
-mini_lexicon <- function(keys = c("a", "b", "c", "d")) {
+mini_lexicon <- function(keys = c("a", "b", "c", "d"), diagnostic = character()) {
   list(
     sections = data.frame(
       sekce = keys, label_cs = toupper(keys), synonymum = paste(keys, "x"),
-      stringsAsFactors = FALSE
+      diagnostic = keys %in% diagnostic, stringsAsFactors = FALSE
     ),
     preamble = "Name"
   )
@@ -312,11 +312,13 @@ test_that("skeleton_table projde export_table s rozvržením sešitu, i nad prá
   }
 })
 
-STRIP_KEYS <- c("a", "b", STRIP_SECTION)
+DIAGNOSTIC <- "diagnosis"
+STRIP_KEYS <- c("a", "b", DIAGNOSTIC)
+strip_lexicon <- function(diagnostic = DIAGNOSTIC) mini_lexicon(STRIP_KEYS, diagnostic)
 LENGTH_ROWS <- data.frame(
   note_id = c("n1", "n1", "n1", "n2", "n2", "n3", "n3", "n3", "n4", "n5", "n6"),
   section = c(
-    OTHER, "a", STRIP_SECTION, "a", "b", "a", STRIP_SECTION, "b", OTHER, OTHER, "b"
+    OTHER, "a", DIAGNOSTIC, "a", "b", "a", DIAGNOSTIC, "b", OTHER, OTHER, "b"
   ),
   span_chars = c(20, 30, 50, 40, 60, 10, 10, 80, 100, 300, 200),
   body_chars = c(10, 20, 40, 30, 50, 5, 5, 60, 90, 250, 100),
@@ -334,31 +336,31 @@ lengths_con <- function(rows = LENGTH_ROWS, env = parent.frame()) {
 
 test_that("sections_per_note: rozdělení včetně nuly a percentily", {
   con <- lengths_con()
-  counts <- sections_per_note(con, mini_lexicon(STRIP_KEYS))
+  counts <- sections_per_note(con, strip_lexicon())
 
   expect_equal(counts$pocet, 0:3)
   expect_equal(counts$n, c(2, 1, 2, 1))
   expect_equal(unique(counts$celkem), 6)
   expect_equal(
-    section_count_percentiles(con, mini_lexicon(STRIP_KEYS)),
+    section_count_percentiles(con, strip_lexicon()),
     c(p10 = 0, p50 = 1, p75 = 2, p95 = 3, maximum = 3)
   )
 })
 
 test_that("sections_per_note nad prázdnou tabulkou dá nuly a percentily NA", {
   empty <- sections_con(list())
-  counts <- sections_per_note(empty, mini_lexicon(STRIP_KEYS))
+  counts <- sections_per_note(empty, strip_lexicon())
 
   expect_equal(counts$pocet, 0:3)
   expect_equal(counts$n, rep(0, 4))
-  expect_true(all(is.na(section_count_percentiles(empty, mini_lexicon(STRIP_KEYS)))))
+  expect_true(all(is.na(section_count_percentiles(empty, strip_lexicon()))))
   expect_match(sections_per_note_text(counts, NULL), "nelze posoudit")
 })
 
 test_that("sections_per_note_text jmenuje percentily a zprávy bez sekce", {
   con <- lengths_con()
-  counts <- sections_per_note(con, mini_lexicon(STRIP_KEYS))
-  text <- sections_per_note_text(counts, section_count_percentiles(con, mini_lexicon(STRIP_KEYS)))
+  counts <- sections_per_note(con, strip_lexicon())
+  text <- sections_per_note_text(counts, section_count_percentiles(con, strip_lexicon()))
 
   expect_match(text, "medián 1")
   expect_match(text, "p95 3")
@@ -367,11 +369,11 @@ test_that("sections_per_note_text jmenuje percentily a zprávy bez sekce", {
 
 test_that("body_lengths: medián, p75 a p95 těl po sekcích v pořadí kostry a řádek other", {
   con <- lengths_con()
-  lexicon <- mini_lexicon(STRIP_KEYS)
+  lexicon <- strip_lexicon()
   skeleton <- section_skeleton(con, lexicon)
   lengths <- body_lengths(con, skeleton, OTHER)
 
-  expect_equal(lengths$sekce, c("a", "b", STRIP_SECTION, OTHER))
+  expect_equal(lengths$sekce, c("a", "b", DIAGNOSTIC, OTHER))
   expect_equal(lengths$n, c(3, 3, 2, 3))
   expect_equal(lengths$p50, c(20, 60, 5, 90))
   expect_equal(lengths$p75, c(30, 100, 40, 250))
@@ -380,7 +382,7 @@ test_that("body_lengths: medián, p75 a p95 těl po sekcích v pořadí kostry a
 
 test_that("body_lengths nad prázdnou tabulkou dá řádky s nulou a NA", {
   con <- sections_con(list())
-  lengths <- body_lengths(con, section_skeleton(con, mini_lexicon(STRIP_KEYS)), OTHER)
+  lengths <- body_lengths(con, section_skeleton(con, strip_lexicon()), OTHER)
 
   expect_equal(nrow(lengths), 4L)
   expect_equal(lengths$n, rep(0, 4))
@@ -389,7 +391,7 @@ test_that("body_lengths nad prázdnou tabulkou dá řádky s nulou a NA", {
 })
 
 test_that("strip_share: počet a podíl zpráv, podíl textu ze span_chars a medián podílu", {
-  strip <- strip_share(lengths_con(), mini_lexicon(STRIP_KEYS))
+  strip <- strip_share(lengths_con(), strip_lexicon())
 
   expect_equal(strip$celkem, 6)
   expect_equal(strip$se_sekci, 2)
@@ -398,22 +400,38 @@ test_that("strip_share: počet a podíl zpráv, podíl textu ze span_chars a med
   expect_equal(strip$median_podilu, 0.3)
 })
 
-test_that("strip_share zastaví render, když STRIP_SECTION není v lexikonu", {
-  expect_error(strip_share(lengths_con(), mini_lexicon(c("a", "b"))), STRIP_SECTION, fixed = TRUE)
+test_that("strip_share sečte všechny sekce označené v lexikonu", {
+  strip <- strip_share(lengths_con(), strip_lexicon(c(DIAGNOSTIC, "b")))
+
+  expect_equal(strip$sekce, c("b", DIAGNOSTIC))
+  expect_equal(strip$se_sekci, 4)
+  expect_equal(strip$text_sekce, 60 + 60 + 80 + 200)
+})
+
+test_that("strip_share zastaví render, když lexikon nemá diagnostickou sekci", {
+  expect_error(strip_share(lengths_con(), strip_lexicon(character())), "diagnostickou", fixed = TRUE)
 })
 
 test_that("strip_share nad prázdnou tabulkou a bez zprávy se sekcí neshodí věta", {
-  empty <- strip_share(sections_con(list()), mini_lexicon(STRIP_KEYS))
+  empty <- strip_share(sections_con(list()), strip_lexicon())
   expect_match(strip_share_text(empty), "nelze posoudit")
 
-  none <- strip_share(sections_con(list(n1 = "a", n2 = "b")), mini_lexicon(STRIP_KEYS))
+  none <- strip_share(sections_con(list(n1 = "a", n2 = "b")), strip_lexicon())
   expect_equal(none$se_sekci, 0)
   expect_true(is.na(none$median_podilu))
   expect_match(strip_share_text(none), paste0("0", NBSP, "zpráv"))
 })
 
+test_that("strip_share_text jmenuje sekci v jednotném a sekce ve množném čísle", {
+  one <- strip_share_text(strip_share(lengths_con(), strip_lexicon()))
+  two <- strip_share_text(strip_share(lengths_con(), strip_lexicon(c(DIAGNOSTIC, "b"))))
+
+  expect_match(one, paste0("sekci `", DIAGNOSTIC, "`"), fixed = TRUE)
+  expect_match(two, paste0("sekce `b`, `", DIAGNOSTIC, "`"), fixed = TRUE)
+})
+
 test_that("strip_share_text jmenuje podíl zpráv a textu", {
-  text <- strip_share_text(strip_share(lengths_con(), mini_lexicon(STRIP_KEYS)))
+  text <- strip_share_text(strip_share(lengths_con(), strip_lexicon()))
 
   expect_match(text, paste0("2", NBSP, "zprávy"))
   expect_match(text, paste0("6,7", NBSP, "%"))
@@ -466,7 +484,7 @@ test_that("headerless_text skloňuje počty a jmenuje délky skupin", {
 
 test_that("grafy počtu sekcí a zpráv bez nadpisů projdou ggplot_build s daty i bez nich", {
   con <- lengths_con()
-  counts <- sections_per_note(con, mini_lexicon(STRIP_KEYS))
+  counts <- sections_per_note(con, strip_lexicon())
   built <- ggplot2::ggplot_build(sections_per_note_plot(counts))
   expect_equal(built$layout$panel_scales_x[[1]]$get_limits(), as.character(0:3))
   expect_equal(sum(built$data[[1]]$y), 1)
@@ -475,7 +493,7 @@ test_that("grafy počtu sekcí a zpráv bez nadpisů projdou ggplot_build s daty
   expect_gt(nrow(ggplot2::ggplot_build(headerless_plot(hist))$data[[1]]), 0L)
 
   empty <- sections_con(list())
-  empty_counts <- sections_per_note(empty, mini_lexicon(STRIP_KEYS))
+  empty_counts <- sections_per_note(empty, strip_lexicon())
   expect_no_error(ggplot2::ggplot_build(sections_per_note_plot(empty_counts)))
 })
 
@@ -490,7 +508,7 @@ export_layout <- function(table, label, dir, code = character()) {
 test_that("tabulky kapitoly projdou export_table s rozvržením sešitu, i nad prázdnou tabulkou", {
   for (rows in list(LENGTH_ROWS, NULL)) {
     con <- if (is.null(rows)) sections_con(list()) else lengths_con(rows)
-    skeleton <- section_skeleton(con, mini_lexicon(STRIP_KEYS))
+    skeleton <- section_skeleton(con, strip_lexicon())
     dir <- withr::local_tempdir()
     export_layout(skeleton_table(skeleton), "tbl-kostra", dir, "sekce")
     export_layout(body_length_table(body_lengths(con, skeleton, OTHER)), "tbl-delky", dir, "sekce")
@@ -515,11 +533,11 @@ test_that("šířky v TABLE_LAYOUTS odpovídají tbl-colwidths chunků sešitu",
 
 test_that("body_length_text jmenuje nejdelší a nejkratší tělo v mediánu a text mimo sekce", {
   con <- lengths_con()
-  skeleton <- section_skeleton(con, mini_lexicon(STRIP_KEYS))
+  skeleton <- section_skeleton(con, strip_lexicon())
   text <- body_length_text(body_lengths(con, skeleton, OTHER), OTHER)
 
   expect_match(text, paste0("`b` (60", NBSP, "znaků)"), fixed = TRUE)
-  expect_match(text, paste0("`", STRIP_SECTION, "` (5", NBSP, "znaků)"), fixed = TRUE)
+  expect_match(text, paste0("`", DIAGNOSTIC, "` (5", NBSP, "znaků)"), fixed = TRUE)
   expect_match(text, paste0("medián 90", NBSP, "znaků"))
 })
 
@@ -527,11 +545,11 @@ test_that("body_length_text skloňuje jeden znak a nad prázdnou tabulkou nelze 
   one <- lengths_con(data.frame(
     note_id = "n1", section = "a", span_chars = 10, body_chars = 1, stringsAsFactors = FALSE
   ))
-  text <- body_length_text(body_lengths(one, section_skeleton(one, mini_lexicon(STRIP_KEYS)), OTHER), OTHER)
+  text <- body_length_text(body_lengths(one, section_skeleton(one, strip_lexicon()), OTHER), OTHER)
   expect_match(text, paste0("1", NBSP, "znak"))
 
   empty <- sections_con(list())
-  lengths <- body_lengths(empty, section_skeleton(empty, mini_lexicon(STRIP_KEYS)), OTHER)
+  lengths <- body_lengths(empty, section_skeleton(empty, strip_lexicon()), OTHER)
   expect_match(body_length_text(lengths, OTHER), "nelze posoudit")
 })
 
@@ -546,7 +564,7 @@ MASKED_ROWS <- data.frame(
 
 test_that("body_lengths spočítá těla, která jsou jen maska, a tabulka ukáže jejich podíl", {
   con <- lengths_con(MASKED_ROWS)
-  lengths <- body_lengths(con, section_skeleton(con, mini_lexicon(STRIP_KEYS)), OTHER)
+  lengths <- body_lengths(con, section_skeleton(con, strip_lexicon()), OTHER)
   row <- function(key) lengths[lengths$sekce == key, ]
 
   expect_equal(c(row("a")$maskovano, row("b")$maskovano), c(0, 2))
@@ -557,7 +575,7 @@ test_that("body_lengths spočítá těla, která jsou jen maska, a tabulka uká�
 
 test_that("body_length_text vynechá sekci, jejíž tělo je většinou maska, a jmenuje ji zvlášť", {
   con <- lengths_con(MASKED_ROWS)
-  text <- body_length_text(body_lengths(con, section_skeleton(con, mini_lexicon(STRIP_KEYS)), OTHER), OTHER)
+  text <- body_length_text(body_lengths(con, section_skeleton(con, strip_lexicon()), OTHER), OTHER)
 
   expect_match(text, "nejkratší sekce `a`", fixed = TRUE)
   expect_match(text, "Tělo sekce `b` je u", fixed = TRUE)
@@ -570,7 +588,7 @@ test_that("body_lengths rozliší medián, p75 a p95 na dvaceti různých délk�
     stringsAsFactors = FALSE
   )
   con <- lengths_con(rows)
-  lengths <- body_lengths(con, section_skeleton(con, mini_lexicon(STRIP_KEYS)), OTHER)
+  lengths <- body_lengths(con, section_skeleton(con, strip_lexicon()), OTHER)
   row <- lengths[lengths$sekce == "a", ]
 
   expect_equal(c(row$p50, row$p75, row$p95), c(10, 15, 19))
@@ -586,7 +604,7 @@ test_that("body_lengths sečte části other jedné zprávy, řádek other poč�
     stringsAsFactors = FALSE
   )
   con <- lengths_con(rows)
-  lengths <- body_lengths(con, section_skeleton(con, mini_lexicon(STRIP_KEYS)), OTHER)
+  lengths <- body_lengths(con, section_skeleton(con, strip_lexicon()), OTHER)
   row <- lengths[lengths$sekce == OTHER, ]
 
   expect_equal(c(row$n, row$p50, row$p95, row$maskovano), c(2, 45, 45, 1))

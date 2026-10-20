@@ -45,8 +45,6 @@ segment_corpus <- function(con, module, lexicon_path) {
 SKELETON_COVERAGE <- 0.5
 KEYS_TABLE <- "section_keys_input"
 SKELETON_TABLE <- "skeleton_input"
-# Sekce, kterou vystřihne ablace D2 (strip S32); S32 má číst týž klíč.
-STRIP_SECTION <- "discharge_diagnosis"
 OTHER_LABEL <- "Text mimo sekce"
 # Sekce, jejíž tělo je u většiny zpráv jen maska `___`, nemá obsah, jen zbytek po de-identifikaci;
 # věta o délkách ji proto nebere jako nejkratší sekci, ale jmenuje zvlášť.
@@ -333,23 +331,25 @@ body_length_table <- function(lengths) {
 # Délka zprávy je součet span_chars, protože round-trip parseru dává součet přes zprávu rovný
 # délce textu a text se tak nečte podruhé.
 strip_share <- function(con, lexicon) {
-  if (!STRIP_SECTION %in% lexicon$sections$sekce) {
-    stop(sprintf("Sekce %s pro strip D2 není v lexikonu.", STRIP_SECTION))
+  keys <- unique(lexicon$sections$sekce[lexicon$sections$diagnostic])
+  if (length(keys) == 0L) {
+    stop("Lexikon nemá žádnou diagnostickou sekci (diagnostic: true), strip D2 by nic neodstranil.")
   }
   row <- DBI::dbGetQuery(con, sprintf("
     WITH per_note AS (
       SELECT note_id, sum(span_chars) AS delka,
-        sum(span_chars) FILTER (WHERE section = %s) AS sekce
+        sum(span_chars) FILTER (WHERE section IN (%s)) AS sekce
       FROM %s GROUP BY note_id
     )
     SELECT count(*) AS celkem, count(sekce) AS se_sekci,
       coalesce(sum(delka), 0) AS text_celkem, coalesce(sum(sekce), 0) AS text_sekce,
       quantile_cont(sekce::DOUBLE / delka, 0.5) AS median_podilu
     FROM per_note
-  ", DBI::dbQuoteString(con, STRIP_SECTION), SECTIONS_TABLE))
-  out <- lapply(row, as.numeric)
-  out
+  ", paste(DBI::dbQuoteString(con, keys), collapse = ", "), SECTIONS_TABLE))
+  c(lapply(row, as.numeric), list(sekce = keys))
 }
+
+strip_section_list <- function(keys) paste0("`", keys, "`", collapse = ", ")
 
 strip_share_text <- function(strip) {
   if (strip$celkem == 0) {
@@ -357,13 +357,14 @@ strip_share_text <- function(strip) {
   }
   if (strip$se_sekci == 0) {
     return(sprintf(
-      "Sekci `%s` má %s korpusu, strip D2 by nic neodstranil.",
-      STRIP_SECTION, count_phrase(0, NOTE_FORMS)
+      "Strip D2 by nic neodstranil: diagnostickou sekci (%s) má %s korpusu.",
+      strip_section_list(strip$sekce), count_phrase(0, NOTE_FORMS)
     ))
   }
   sprintf(
-    "Strip D2 odstraní sekci `%s` u %s korpusu (%s) a tvoří %s jeho textu; ve zprávě se sekcí tvoří v mediánu %s textu zprávy.",
-    STRIP_SECTION, count_phrase(strip$se_sekci, NOTE_FORMS),
+    "Strip D2 odstraní %s %s u %s korpusu (%s) a tvoří %s jeho textu; ve zprávě se sekcí tvoří v mediánu %s textu zprávy.",
+    plural_form(length(strip$sekce), c("sekci", "sekce", "sekce")),
+    strip_section_list(strip$sekce), count_phrase(strip$se_sekci, NOTE_FORMS),
     percent_label(strip$se_sekci, strip$celkem),
     percent_label(strip$text_sekce, strip$text_celkem),
     percent_label(strip$median_podilu, 1)
