@@ -1,4 +1,4 @@
-"""Lexikon sekcí propouštěcí zprávy, rozpoznání hlaviček v textu a rozdělení zprávy na sekce."""
+"""Lexikon sekcí propouštěcí zprávy, rozpoznání hlaviček v textu, rozdělení zprávy na sekce a strip diagnostických sekcí."""
 
 from __future__ import annotations
 
@@ -36,12 +36,19 @@ def normalized(header: str) -> str:
 
 
 class LexiconSection(BaseModel):
-    """Sekce lexikonu: český popisek a synonyma jejího názvu."""
+    """Sekce lexikonu: český popisek, synonyma názvu a příznak diagnostické sekce.
+
+    Attributes:
+        label_cs: Český popisek sekce.
+        synonyms: Název sekce a jeho pravopisné varianty.
+        diagnostic: Sekce, ze které se kódují diagnózy a kterou ablace D2 odstraní.
+    """
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     label_cs: Annotated[str, Field(min_length=1)]
     synonyms: Annotated[tuple[str, ...], Field(min_length=1)]
+    diagnostic: bool = False
 
 
 class SectionLexicon(BaseModel):
@@ -55,6 +62,17 @@ class SectionLexicon(BaseModel):
 
     sections: Annotated[dict[str, LexiconSection], Field(min_length=1)]
     preamble: tuple[str, ...]
+
+    @property
+    def diagnostic_sections(self) -> frozenset[str]:
+        """Klíče sekcí označených jako diagnostické.
+
+        Returns:
+            Klíče, které odstraní `strip_diagnostic_sections`.
+        """
+        return frozenset(
+            key for key, section in self.sections.items() if section.diagnostic
+        )
 
     @model_validator(mode="after")
     def _reserved_key_is_absent(self) -> Self:
@@ -75,6 +93,14 @@ class SectionLexicon(BaseModel):
         clashes = sorted(form for form, count in forms.items() if count > 1)
         if clashes:
             msg = f"Po normalizaci splývají hlavičky: {', '.join(clashes)}."
+            raise ValueError(msg)
+        return self
+
+    @model_validator(mode="after")
+    def _has_diagnostic_section(self) -> Self:
+        # Bez diagnostické sekce by strip tiše nic neodstranil a ablace by se rovnala hlavnímu řádku.
+        if not self.diagnostic_sections:
+            msg = "Lexikon musí mít aspoň jednu diagnostickou sekci (diagnostic: true)."
             raise ValueError(msg)
         return self
 
@@ -167,6 +193,23 @@ def split_sections(text: str, lexicon: SectionLexicon) -> tuple[NoteSection, ...
         elif start < end:
             sections.append(NoteSection(OTHER, "", text[start:end]))
     return tuple(sections)
+
+
+def strip_diagnostic_sections(text: str, lexicon: SectionLexicon) -> str:
+    """Odstraní ze zprávy sekce lexikonu označené jako diagnostické, i s hlavičkou.
+
+    Hranici sekce určuje jen `split_sections`, takže zbytek je po bajtech původní text.
+    Opakovaná hlavička v těle jiné sekce zůstává (hranicí je první výskyt), proto strip
+    není idempotentní.
+
+    Returns:
+        Text bez diagnostických sekcí.
+    """
+    return "".join(
+        part.header + part.body
+        for part in split_sections(text, lexicon)
+        if part.section not in lexicon.diagnostic_sections
+    )
 
 
 def _first_matches(text: str, key_of: Mapping[str, str]) -> dict[str, re.Match[str]]:

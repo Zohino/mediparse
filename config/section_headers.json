@@ -54,7 +54,8 @@
     },
     "discharge_diagnosis": {
       "label_cs": "Diagnóza při propuštění",
-      "synonyms": ["Discharge Diagnosis", "Discharge Diagnoses"]
+      "synonyms": ["Discharge Diagnosis", "Discharge Diagnoses"],
+      "diagnostic": true
     },
     "discharge_condition": {
       "label_cs": "Stav při propuštění",

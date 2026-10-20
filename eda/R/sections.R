@@ -13,6 +13,7 @@ read_section_headers <- function(path) {
       sekce = rep(key, length(synonyms)),
       label_cs = rep(entry$label_cs, length(synonyms)),
       synonymum = synonyms,
+      diagnostic = rep(isTRUE(entry$diagnostic), length(synonyms)),
       stringsAsFactors = FALSE
     )
   })

@@ -11,6 +11,24 @@ test_that("lexikon načte všechny sekce konfigurace, každou s popiskem a synon
   expect_equal(lexicon$preamble, as.character(unlist(raw$preamble)))
 })
 
+test_that("lexikon načte příznak diagnostické sekce, chybějící pole je FALSE", {
+  lexicon <- read_section_headers(section_headers_path())
+  flagged <- unique(lexicon$sections$sekce[lexicon$sections$diagnostic])
+
+  expect_type(lexicon$sections$diagnostic, "logical")
+  expect_equal(flagged, "discharge_diagnosis")
+
+  path <- withr::local_tempfile(fileext = ".json")
+  jsonlite::write_json(list(
+    sections = list(
+      a = list(label_cs = "A", synonyms = list("Aaa", "Bbb"), diagnostic = TRUE),
+      c = list(label_cs = "C", synonyms = list("Ccc"))
+    ),
+    preamble = list("Name")
+  ), path, auto_unbox = TRUE)
+  expect_equal(read_section_headers(path)$sections$diagnostic, c(TRUE, TRUE, FALSE))
+})
+
 test_that("lexikon nemá dvě sekce ani sekci a preamble se stejným normalizovaným synonymem", {
   con <- mimic_con()
 
