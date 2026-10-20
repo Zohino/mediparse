@@ -205,13 +205,10 @@ def strip_diagnostic_sections(text: str, lexicon: SectionLexicon) -> str:
     Returns:
         Text bez diagnostických sekcí.
     """
-    diagnostic = {
-        key for key, section in lexicon.sections.items() if section.diagnostic
-    }
     return "".join(
         part.header + part.body
         for part in split_sections(text, lexicon)
-        if part.section not in diagnostic
+        if part.section not in lexicon.diagnostic_sections
     )
 
 
