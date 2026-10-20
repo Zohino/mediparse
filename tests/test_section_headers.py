@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import json
-from typing import Final
+import re
+from typing import Any, Final
 
 import pytest
 from pydantic import ValidationError
@@ -19,6 +20,7 @@ from mediparse.domain.section_headers import (
     find_section_headers,
     normalized,
     split_sections,
+    strip_diagnostic_sections,
 )
 from mediparse.infrastructure.sampler_config import load_sampler_config
 from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
@@ -507,3 +509,120 @@ def test_mimic_shaped_note_splits_as_expected(name: str) -> None:
 
     assert _with_first_lines(text, sections) == MIMIC_SHAPED_EXPECTED[name]["sections"]
     assert "".join(s.header + s.body for s in sections) == text
+
+
+STRIP_CASES: Final = {
+    "sekce uprostřed zmizí s hlavičkou a koncovým řádkem": (
+        "Allergies:\nnone\nDischarge Diagnosis:\nCHF\nChief Complaint:\npain",
+        "Allergies:\nnone\nChief Complaint:\npain",
+    ),
+    "sekce na konci bez koncového newline": (
+        "Allergies:\nnone\nDischarge Diagnosis:\nCHF",
+        "Allergies:\nnone\n",
+    ),
+    "hodnota na řádku hlavičky": (
+        "Allergies:\nnone\nDischarge Diagnosis: CHF\nChief Complaint:\npain",
+        "Allergies:\nnone\nChief Complaint:\npain",
+    ),
+    "odsazená hlavička a varianta synonyma": (
+        "Allergies:\nnone\n  DISCHARGE DIAGNOSES.:\nCHF\nChief Complaint:\npain",
+        "Allergies:\nnone\nChief Complaint:\npain",
+    ),
+    "zpráva bez sekce zůstane beze změny": (
+        "Allergies:\nnone\nChief Complaint:\npain\n",
+        "Allergies:\nnone\nChief Complaint:\npain\n",
+    ),
+    "prázdný text": ("", ""),
+    "CRLF": (
+        "Allergies:\r\nnone\r\nDischarge Diagnosis:\r\nCHF\r\nChief Complaint:\r\nx",
+        "Allergies:\r\nnone\r\nChief Complaint:\r\nx",
+    ),
+    "pole preambule za sekcí zůstane": (
+        "Discharge Diagnosis:\nCHF\nAttending: ___\nAllergies:\nnone",
+        "Attending: ___\nAllergies:\nnone",
+    ),
+    "opakovaná hlavička v těle jiné sekce zůstane (strip není idempotentní)": (
+        (
+            "Chief Complaint:\nx\nDischarge Diagnosis:\nCHF\nPast Medical History:\n"
+            "Discharge Diagnosis:\nCOPD"
+        ),
+        "Chief Complaint:\nx\nPast Medical History:\nDischarge Diagnosis:\nCOPD",
+    ),
+}
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"), STRIP_CASES.values(), ids=STRIP_CASES.keys()
+)
+def test_strip_removes_diagnostic_section_with_its_header(
+    text: str, expected: str
+) -> None:
+    """Diagnostická sekce zmizí celá a ostatní text zůstane beze změny po bajtech."""
+    assert strip_diagnostic_sections(text, DISCHARGE_LEXICON) == expected
+
+
+def test_strip_removes_every_diagnostic_section_of_lexicon() -> None:
+    """Označených sekcí může být víc a všechny zmizí."""
+    lexicon = SectionLexicon.model_validate_json(
+        json.dumps({
+            "sections": {
+                "allergies": _section("Allergies", diagnostic=True),
+                "chief_complaint": _section("Chief Complaint"),
+                "final": _section("Final Diagnosis", diagnostic=True),
+            },
+            "preamble": [],
+        })
+    )
+    text = "Allergies:\nnone\nChief Complaint:\npain\nFinal Diagnosis:\nCHF\n"
+
+    assert strip_diagnostic_sections(text, lexicon) == "Chief Complaint:\npain\n"
+
+
+def _lines(text: str) -> list[str]:
+    return re.findall(r"[^\n]*\n|[^\n]+", text)
+
+
+def _without_diagnostic_lines(text: str, sections: list[list[Any]]) -> str:
+    """Orákulum stripu z `expected.json`: řádky od začátku diagnostické části po další část.
+
+    Returns:
+        Text bez těchto řádků.
+    """
+    lines = _lines(text)
+    diagnostic = {
+        key
+        for key, section in REPOSITORY_LEXICON.sections.items()
+        if section.diagnostic
+    }
+    kept = list(lines)
+    for index, (key, _header, first) in enumerate(sections):
+        if key not in diagnostic:
+            continue
+        end = sections[index + 1][2] if index + 1 < len(sections) else len(lines) + 1
+        for line_number in range(first, end):
+            kept[line_number - 1] = ""
+    return "".join(kept)
+
+
+@pytest.mark.parametrize("name", MIMIC_SHAPED_EXPECTED, ids=MIMIC_SHAPED_EXPECTED)
+def test_strip_mimic_shaped_note_matches_oracle_from_expectations(name: str) -> None:
+    """Strip odpovídá textu bez řádků diagnostické části podle `expected.json`, ne podle parseru."""
+    text = mimic_shaped_notes()[name]
+    sections = MIMIC_SHAPED_EXPECTED[name]["sections"]
+
+    stripped = strip_diagnostic_sections(text, REPOSITORY_LEXICON)
+
+    assert stripped == _without_diagnostic_lines(text, sections)
+
+
+def test_strip_mimic_shaped_notes_include_notes_with_and_without_section() -> None:
+    """Ochrana proti vakuu: sada má zprávy se sekcí i bez ní a strip se projeví jen u prvních."""
+    changed = {
+        name
+        for name, text in mimic_shaped_notes().items()
+        if strip_diagnostic_sections(text, REPOSITORY_LEXICON) != text
+    }
+
+    assert changed
+    assert changed != set(mimic_shaped_notes())
+    assert not changed & {"headerless_addendum", "empty_sections"}

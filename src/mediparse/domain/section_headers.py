@@ -184,6 +184,26 @@ def split_sections(text: str, lexicon: SectionLexicon) -> tuple[NoteSection, ...
     return tuple(sections)
 
 
+def strip_diagnostic_sections(text: str, lexicon: SectionLexicon) -> str:
+    """Odstraní ze zprávy sekce lexikonu označené jako diagnostické, i s hlavičkou.
+
+    Hranici sekce určuje jen `split_sections`, takže zbytek je po bajtech původní text.
+    Opakovaná hlavička v těle jiné sekce zůstává (hranicí je první výskyt), proto strip
+    není idempotentní.
+
+    Returns:
+        Text bez diagnostických sekcí.
+    """
+    diagnostic = {
+        key for key, section in lexicon.sections.items() if section.diagnostic
+    }
+    return "".join(
+        part.header + part.body
+        for part in split_sections(text, lexicon)
+        if part.section not in diagnostic
+    )
+
+
 def _first_matches(text: str, key_of: Mapping[str, str]) -> dict[str, re.Match[str]]:
     """Najde první výskyt každého klíče mezi hlavičkami podle `HEADER_PATTERN`.
 

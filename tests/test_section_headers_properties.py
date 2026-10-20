@@ -17,6 +17,7 @@ from mediparse.domain.section_headers import (
     find_section_headers,
     normalized,
     split_sections,
+    strip_diagnostic_sections,
 )
 from tests.section_support import REPOSITORY_LEXICON
 
@@ -34,6 +35,7 @@ _SECTION_OF: Final = {
 _PLAIN_LINE: Final = st.text(
     alphabet=string.ascii_letters + string.digits + " _-/,.()", max_size=20
 )
+_DIAGNOSTIC: Final = {k for k, v in _SECTIONS.items() if v.diagnostic}
 _EOL: Final = st.sampled_from(("\n", "\r\n"))
 
 
@@ -195,3 +197,14 @@ def test_note_built_from_known_parts_splits_into_exactly_them(note: _Note) -> No
     text, expected = note
 
     assert split_sections(text, REPOSITORY_LEXICON) == expected
+
+
+@given(_notes())
+def test_strip_equals_composition_of_expected_parts_without_diagnostic(
+    note: _Note,
+) -> None:
+    """Strip je složení očekávaných částí bez diagnostických."""
+    text, parts = note
+    expected = "".join(p.header + p.body for p in parts if p.section not in _DIAGNOSTIC)
+
+    assert strip_diagnostic_sections(text, REPOSITORY_LEXICON) == expected
