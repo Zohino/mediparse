@@ -23,14 +23,24 @@ if TYPE_CHECKING:
 BLOCK_SIZE: Final = 64 * 1024 * 1024
 
 
+def _open_binary(source: Path) -> gzip.GzipFile | io.BufferedReader:
+    # Komprimovanost určuje přípona, ne obsah: gzip, který nejde rozbalit, musí selhat,
+    # ne projít jako prosté CSV.
+    if source.suffix == ".gz":
+        return gzip.open(source, "rb")
+    return source.open("rb")
+
+
 def _header(source: Path) -> tuple[str, ...]:
-    with gzip.open(source, "rt", encoding="utf-8-sig", newline="") as stream:
+    with io.TextIOWrapper(
+        _open_binary(source), encoding="utf-8-sig", newline=""
+    ) as stream:
         return tuple(next(csv.reader(stream), ()))
 
 
 # pyarrow přijme neuzavřenou uvozovku na konci souboru mlčky. Uvozovka uvnitř pole se
 # v CSV zdvojuje (""), takže lichý počet bytů " v celém souboru znamená neuzavřené pole.
-# Počítá se ve stejném průchodu jako převod, protože druhý průchod by znovu rozbalil
+# Počítá se ve stejném průchodu jako převod, protože druhý průchod by znovu přečetl
 # celý soubor (discharge má 1,1 GB gz).
 class _QuoteCounter(io.RawIOBase):
     def __init__(self, inner: io.BufferedIOBase) -> None:
@@ -51,7 +61,7 @@ class _QuoteCounter(io.RawIOBase):
 
 @dataclass(frozen=True)
 class CsvParquetConversion:
-    """Bezeztrátová kopie ``.csv.gz`` do jednoho souboru parquet: všechny sloupce string, prázdná hodnota NULL."""
+    """Bezeztrátová kopie ``.csv.gz`` nebo ``.csv`` do jednoho souboru parquet: všechny sloupce string, prázdná hodnota NULL."""
 
     source: Path
     target: Path
@@ -79,7 +89,7 @@ class CsvParquetConversion:
             raise InvalidInputError(msg) from None
 
     def _write(self, columns: tuple[str, ...]) -> TableShape:
-        with gzip.open(self.source, "rb") as stream:
+        with _open_binary(self.source) as stream:
             counter = _QuoteCounter(stream)
             shape = self._write_blocks(counter, columns)
         if counter.quotes % 2:

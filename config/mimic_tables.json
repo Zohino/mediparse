@@ -47,6 +47,10 @@
     {
       "url": "https://physionet.org/files/mimiciv/3.1/hosp/services.csv.gz",
       "sha256": "31c82ebee94e0c04d6966fbfec30579ec00f9c7816b80852f9580656e6183888"
+    },
+    {
+      "url": "https://physionet.org/files/labelled-notes-hospital-course/1.2.0/mimic-iv-bhc.csv",
+      "sha256": "e45c09997b25d744abb20573623885eba052299cf2a721c18bbf5ca9a54989c1"
     }
   ]
 }

@@ -11,9 +11,17 @@ fail() {
 table=$1
 output=$2
 
-read -r header < <(zcat -- "$table") || fail "$table nemá hlavičku"
+# komprimovanost určuje přípona jako v převodu na parquet: gzip, který nejde rozbalit, nesmí projít jako prosté CSV
+read_table() {
+    case $table in
+        *.gz) zcat -- "$table" ;;
+        *) cat -- "$table" ;;
+    esac
+}
+
+read -r header < <(read_table) || fail "$table nemá hlavičku"
 # záznam končí řádkem se sudým počtem uvozovek od začátku souboru, zalomení uvnitř pole v uvozovkách ho neukončí
-counts=$(zcat -- "$table" | awk '{ quotes += gsub(/"/, "") } quotes % 2 == 0 { n++ } END { print n - 1, quotes % 2 }') || fail "$table nejde rozbalit"
+counts=$(read_table | awk '{ quotes += gsub(/"/, "") } quotes % 2 == 0 { n++ } END { print n - 1, quotes % 2 }') || fail "$table nejde přečíst ani rozbalit"
 read -r records quotes <<<"$counts"
 ((quotes == 0)) || fail "$table má neuzavřené pole v uvozovkách"
 ((records > 0)) || fail "$table nemá žádný záznam"

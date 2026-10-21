@@ -11,6 +11,7 @@ from pydantic import BaseModel, ConfigDict, model_validator
 
 from mediparse.domain.digest import Sha256
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.mimic_table import table_name
 from mediparse.infrastructure.input_file import parse_file
 
 if TYPE_CHECKING:
@@ -41,10 +42,12 @@ class _Tables(BaseModel):
 
     @model_validator(mode="after")
     def _unique_names(self) -> Self:
-        names = Counter(table.path.name for table in self.mimic_tables)
+        # Jméno tabulky pojmenuje inventář i parquet; prostý a komprimovaný soubor téže
+        # tabulky by se v nich přepsaly, i když se jména souborů liší.
+        names = Counter(table_name(table.path.name) for table in self.mimic_tables)
         duplicates = sorted(name for name, count in names.items() if count > 1)
         if duplicates:
-            msg = f"Config obsahuje duplicitní názvy souborů: {', '.join(duplicates)}."
+            msg = f"Config obsahuje duplicitní jména tabulek: {', '.join(duplicates)}."
             raise ValueError(msg)
         return self
 

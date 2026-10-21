@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 
 from pydantic import BaseModel, ConfigDict
 
-from mediparse.domain.mimic_table import TableShape
+from mediparse.domain.mimic_table import TableShape, table_name
 from mediparse.infrastructure.input_file import parse_file
 
 if TYPE_CHECKING:
@@ -33,13 +33,11 @@ def read_manifest(path: Path) -> dict[str, TableShape]:
     """Přečte veřejný manifest validace: tvar každé tabulky pod jejím jménem.
 
     Returns:
-        Jméno tabulky bez ``.csv.gz`` a její tvar v pořadí manifestu.
+        Jméno tabulky (`table_name`) a její tvar v pořadí manifestu.
     """
     manifest = parse_file(path, _Manifest.model_validate_json)
     return {
-        table.file.removesuffix(".csv.gz"): TableShape(
-            records=table.records, columns=table.columns
-        )
+        table_name(table.file): TableShape(records=table.records, columns=table.columns)
         for table in manifest.tables
     }
 
@@ -48,12 +46,10 @@ def read_manifest_bytes(path: Path) -> dict[str, int]:
     """Přečte z veřejného manifestu validace velikost každého souboru v bajtech.
 
     Returns:
-        Jméno tabulky bez ``.csv.gz`` a velikost souboru v pořadí manifestu.
+        Jméno tabulky (`table_name`) a velikost souboru v pořadí manifestu.
     """
     manifest = parse_file(path, _Manifest.model_validate_json)
-    return {
-        table.file.removesuffix(".csv.gz"): table.bytes for table in manifest.tables
-    }
+    return {table_name(table.file): table.bytes for table in manifest.tables}
 
 
 @dataclass(frozen=True)

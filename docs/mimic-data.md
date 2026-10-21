@@ -1,10 +1,14 @@
 # Data MIMIC-IV
 
-Reálná data práce pocházejí ze dvou projektů PhysioNetu: z MIMIC-IV-Note 2.2,
-který obsahuje text zpráv, a z modulu `hosp` MIMIC-IV 3.1. Z modulu `hosp`
-pocházejí diagnózy, procedury a kontext hospitalizace. Oba projekty jsou pod
-DUA. Do repa proto smí jen agregáty a veřejné schéma, nikdy hodnoty z řádků.
-Seznam tabulek, URL a SHA-256 drží `config/mimic_tables.json` jako jediný zdroj.
+Reálná data práce pocházejí ze tří projektů PhysioNetu: z MIMIC-IV-Note 2.2,
+který obsahuje text zpráv, z modulu `hosp` MIMIC-IV 3.1 a z MIMIC-IV-Ext-BHC 1.2.0.
+Z modulu `hosp` pocházejí diagnózy, procedury a kontext hospitalizace.
+MIMIC-IV-Ext-BHC obsahuje sekci Brief Hospital Course propouštěcích zpráv, kterou
+jeho autoři vytáhli vlastním regexem; práce ji používá jen jako referenci
+pro validaci parseru sekcí. Všechny tři projekty jsou pod DUA a každý má vlastní
+podpis smlouvy na PhysioNetu. Do repa proto smí jen agregáty a veřejné schéma,
+nikdy hodnoty z řádků. Seznam tabulek, URL a SHA-256 drží
+`config/mimic_tables.json` jako jediný zdroj.
 
 ## Postup
 
@@ -26,6 +30,10 @@ zalomení uvnitř polí v uvozovkách. Záznam končí tam, kde je od začátku 
 sudý počet uvozovek.
 Počty v manifestu odpovídají počtům, které uvádí dokumentace MIMIC.
 
+Tabulky MIMIC-IV a MIMIC-IV-Note jsou `.csv.gz`, MIMIC-IV-Ext-BHC je nekomprimované
+`.csv`. Validace i převod rozhodují podle přípony, takže poškozený gzip neprojde
+jako prosté CSV. Jméno tabulky je jméno souboru bez přípony.
+
 Převod čte CSV po blocích, takže paměť drží jen jeden blok i u `discharge`.
 Všechny sloupce zůstávají řetězce a prázdná hodnota je NULL, takže parquet je
 bezeztrátová kopie CSV: kód `0389` si nechá úvodní nulu. Typy sloupců přiřadí
@@ -37,7 +45,7 @@ syntetickými `.csv.gz`.
 
 ## Tabulky
 
-Stav podle manifestu. Velikost je velikost komprimovaného `.csv.gz`.
+Stav podle manifestu. Velikost je velikost staženého souboru, u `.csv.gz` komprimovaná.
 
 | Tabulka | Projekt a modul | Záznamů | MB | Sloupců |
 |---|---|---:|---:|---:|
