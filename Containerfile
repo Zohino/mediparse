@@ -13,10 +13,6 @@ RUN pixi install --locked -e test \
 
 FROM docker.io/library/debian:trixie-slim@sha256:918311b7b6c4c6f68b232ba516584925f6c78ad82b6fd534b98979df6438e483 AS runtime
 
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y wget2=2.2.0+ds-1+deb13u1 \
-    && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /app
 
 COPY --from=builder /app/.pixi/envs/test /app/.pixi/envs/test
