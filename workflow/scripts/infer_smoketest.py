@@ -7,6 +7,8 @@ from mediparse.entrypoints.smoketest_inference import main
 raise SystemExit(
     main(
         notes=Path(snakemake.input.notes),
+        config=Path(snakemake.input.config),
+        lexicon=Path(snakemake.input.lexicon),
         model=Path(snakemake.input.model),
         predictions=Path(snakemake.input.predictions),
         demo=Path(snakemake.output[0]),

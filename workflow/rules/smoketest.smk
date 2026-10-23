@@ -28,6 +28,7 @@ rule train_smoketest_model:
     input:
         notes=SMOKETEST / "notes.parquet",
         config="config/smoketest_training.json",
+        lexicon="config/section_headers.json",
         split=SMOKETEST / "splits.parquet",
     output:
         model=SMOKETEST / "model.skops",
@@ -55,6 +56,8 @@ rule evaluate_smoketest_model:
 rule infer_smoketest_model:
     input:
         notes=SMOKETEST / "notes.parquet",
+        config="config/smoketest_training.json",
+        lexicon="config/section_headers.json",
         model=SMOKETEST / "model.skops",
         predictions=SMOKETEST / "predictions.parquet",
     output:

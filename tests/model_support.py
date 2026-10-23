@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING, Final
 
 import pyarrow as pa
@@ -64,6 +64,30 @@ def separable_notes(
             for visit in range(1 + (patient * patient * 3 + patient) % 7)
         )
     return notes
+
+
+def sectioned_notes(patients: int) -> list[InputNote]:
+    """Zprávy z ``separable_notes`` se sekcemi; rozlišující slova leží jen v diagnostické sekci.
+
+    Neutrální sekce je pro všechny zprávy stejná, takže po stripu se pozitivní a
+    negativní zprávy neliší a naučené slovo mizí.
+
+    Args:
+        patients: Počet pacientů jako u ``separable_notes``.
+
+    Returns:
+        Zprávy se sekcemi ``History of Present Illness`` a ``Discharge Diagnosis``.
+    """
+    return [
+        replace(
+            note,
+            text=(
+                "History of Present Illness:\nclinic review visit\n\n"
+                f"Discharge Diagnosis:\n{note.text}\n"
+            ),
+        )
+        for note in separable_notes(patients)
+    ]
 
 
 def prediction(
