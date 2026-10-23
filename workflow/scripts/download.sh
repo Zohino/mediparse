@@ -19,6 +19,13 @@ attempts=$log.part
 timeout=${MEDIPARSE_DOWNLOAD_TIMEOUT:-60}
 max_attempts=${MEDIPARSE_DOWNLOAD_ATTEMPTS:-50}
 retry_wait=${MEDIPARSE_DOWNLOAD_RETRY_WAIT:-10}
+period=${MEDIPARSE_DOWNLOAD_PERIOD:-1200}
+tries=5
+
+# Mrtvý server musí vyčerpat pokusy všech spojení dřív, než aria2c skončí
+# plánovaně, jinak by se neúspěšný pokus nikdy nezapočítal.
+((period > tries * (timeout + retry_wait))) \
+    || fail "MEDIPARSE_DOWNLOAD_PERIOD ($period s) musí být delší než $tries × (timeout + čekání)" 2
 
 [[ -r $netrc ]] || fail "chybí $netrc s přihlašovacími údaji" 1
 [[ -z $(find -L "$netrc" -perm /077) ]] || fail "$netrc smí číst jen vlastník: chmod 600 $netrc" 1
@@ -27,12 +34,16 @@ retry_wait=${MEDIPARSE_DOWNLOAD_RETRY_WAIT:-10}
 # po kusech. Zaseknuté spojení ukončí --timeout a aria2c ho otevře znovu
 # (--max-tries). --lowest-speed-limit chybí záměrně: zaseknutá spojení ukončí
 # dřív než timeout a už je neobnoví, takže souběh klesne až na nulu (běh
-# 2026-10-23). Když vyčerpají pokusy všechna spojení, smyčka níže naváže podle
-# kontrolního souboru $partial.aria2. Průběh jde na terminál (stdout),
+# 2026-10-23). Pokusy ale aria2c počítá za celý život spojení, ne po sobě
+# jdoucí chyby, takže na mnohahodinovém stažení spojení postupně vypadávají
+# taky. Proto aria2c po $period s skončí (--stop) a smyčka níže ho spustí znovu
+# s čerstvými spojeními. Když vyčerpají pokusy všechna spojení, smyčka naváže
+# podle kontrolního souboru $partial.aria2. Průběh jde na terminál (stdout),
 # do logu jen hlášení. PhysioNet nabídne přihlášení z .netrc jen User-Agentu
 # začínajícímu „Wget/“ (ostatním vrátí 403 i s platným heslem), proto se aria2c
 # hlásí jako Wget a v závorce uvádí, kdo skutečně stahuje.
 download() {
+    started=$SECONDS
     aria2c \
         --no-conf \
         --netrc-path="$netrc" \
@@ -48,8 +59,9 @@ download() {
         --min-split-size=1M \
         --timeout="$timeout" \
         --connect-timeout="$timeout" \
-        --max-tries=5 \
+        --max-tries="$tries" \
         --retry-wait="$retry_wait" \
+        --stop="$period" \
         --show-console-readout=false \
         --summary-interval=60 \
         --console-log-level=warn \
@@ -70,11 +82,22 @@ transient() {
     esac
 }
 
+# aria2c po Ctrl+C vrátí kód 2, pokud už předtím vypadlo spojení timeoutem,
+# a smyčka by ho brala jako přechodnou chybu. Bash spustí trap až po skončení
+# aria2c, takže kontrolní soubor zůstane uložený.
+trap 'fail "stažení $url přerušeno; další běh naváže" 130' INT TERM
+
 echo "== $(date --utc +%FT%TZ) stahuji $url" >>"$attempts"
 
 attempt=1
 until download; do
     status=$?
+    # Plánované skončení po --stop vrací aria2c stejné kódy jako chyby (7, po
+    # vypadlém spojení 2), pozná se proto jen podle uplynulého času.
+    if ((SECONDS - started >= period)); then
+        echo "aria2c stahuje $period s, spouštím ho znovu s čerstvými spojeními" >&2
+        continue
+    fi
     case $status in
         24) fail "server odmítl přihlášení k $url, zkontroluj $netrc (detail v $attempts)" "$status" ;;
         3 | 22) fail "server odmítl $url, např. 403 bez přístupu nebo 404 špatná URL (detail v $attempts)" "$status" ;;
