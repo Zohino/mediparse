@@ -8,9 +8,12 @@ které po pár bajtech přestane posílat data, a odmítnutí 401, 403 a 404.
 from __future__ import annotations
 
 import base64
+import contextlib
 import os
+import signal
 import subprocess
 import threading
+import time
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -19,7 +22,7 @@ from typing import TYPE_CHECKING, Final, cast
 import pytest
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from collections.abc import Callable, Iterator
 
 SCRIPT: Final = Path(__file__).parents[1] / "workflow" / "scripts" / "download.sh"
 PAYLOAD: Final = bytes(range(256)) * 12_000
@@ -28,6 +31,10 @@ PASSWORD: Final = "secret"
 PARTIAL_BYTES: Final = 500_000
 # aria2c navazuje kousek před koncem rozpracovaného souboru (z 500 000 B od 491 520).
 RESUME_SLACK: Final = 16 * 1024
+SLOW_PIECE: Final = 10_000
+SLOW_PAUSE: Final = 0.1
+STUTTER_BYTES: Final = 100_000
+STUTTER_PAUSE: Final = 3.0
 QUICK_RETRIES: Final = {
     "MEDIPARSE_DOWNLOAD_TIMEOUT": "2",
     "MEDIPARSE_DOWNLOAD_ATTEMPTS": "2",
@@ -69,7 +76,14 @@ class _Handler(BaseHTTPRequestHandler):
         """Bez výpisu požadavků do stderr testu."""
 
     def do_GET(self) -> None:
-        """Odpoví podle cesty: ``data``, ``stall``, ``dead``, ``truncated``, ``missing``, ``forbidden``."""
+        """Odpoví podle cesty.
+
+        ``data`` celý soubor, ``stall`` jednou zaseknuté spojení, ``dead``
+        každé spojení zaseknuté, ``truncated`` zavřené před koncem těla,
+        ``half`` druhá polovina zaseknutá a první pomalu, ``stutter`` každé
+        spojení se po kusu dat na chvíli zasekne, ``missing`` 404 a
+        ``forbidden`` 403.
+        """
         if self.path == "/missing":
             self._empty(HTTPStatus.NOT_FOUND)
             return
@@ -87,16 +101,54 @@ class _Handler(BaseHTTPRequestHandler):
             )
             return
         body = self._send_headers()
-        if self.path == "/truncated":
-            self.wfile.write(body[:1000])
-            self.close_connection = True
-            return
-        if self.path == "/dead" or (self.path == "/stall" and self._take_stall()):
-            self.wfile.write(body[:1000])
-            self.wfile.flush()
+        respond = {
+            "/truncated": self._truncated,
+            "/stall": self._stall_once,
+            "/dead": self._stall,
+            "/half": self._half,
+            "/stutter": self._stutter,
+        }.get(self.path, self.wfile.write)
+        respond(body)
+
+    def _truncated(self, body: bytes) -> None:
+        self.wfile.write(body[:1000])
+        self.close_connection = True
+
+    def _stall_once(self, body: bytes) -> None:
+        if self._take_stall():
+            self._stall(body)
+        else:
+            self.wfile.write(body)
+
+    def _stall(self, body: bytes) -> None:
+        self.wfile.write(body[:1000])
+        self.wfile.flush()
+        self.physionet.release.wait(timeout=60)
+
+    def _half(self, body: bytes) -> None:
+        if self._start() >= len(PAYLOAD) // 2:
             self.physionet.release.wait(timeout=60)
             return
-        self.wfile.write(body)
+        self._slowly(body)
+
+    def _stutter(self, body: bytes) -> None:
+        self._slowly(body[:STUTTER_BYTES])
+        if len(body) > STUTTER_BYTES:
+            self.physionet.release.wait(timeout=STUTTER_PAUSE)
+
+    def _slowly(self, body: bytes) -> None:
+        # aria2c zaseknuté nebo přebytečné spojení zavře uprostřed těla.
+        with contextlib.suppress(BrokenPipeError, ConnectionResetError):
+            for offset in range(0, len(body), SLOW_PIECE):
+                if self.physionet.release.is_set():
+                    return
+                self.wfile.write(body[offset : offset + SLOW_PIECE])
+                self.wfile.flush()
+                time.sleep(SLOW_PAUSE)
+
+    def _start(self) -> int:
+        requested = self.headers.get("Range")
+        return int(requested.removeprefix("bytes=").split("-")[0]) if requested else 0
 
     def _authorized(self) -> bool:
         token = base64.b64encode(f"{LOGIN}:{PASSWORD}".encode()).decode()
@@ -171,17 +223,38 @@ def _download(
     url: str,
     output: Path,
     timeout: str = QUICK_RETRIES["MEDIPARSE_DOWNLOAD_TIMEOUT"],
+    **env: str,
 ) -> subprocess.CompletedProcess[str]:
     output.parent.mkdir(parents=True, exist_ok=True)
     return subprocess.run(
-        ["bash", str(SCRIPT), str(netrc), url, str(output), str(output) + ".log"],
+        _command(netrc, url, output),
         check=False,
         capture_output=True,
         text=True,
         encoding="utf-8",
-        env={**os.environ, **QUICK_RETRIES, "MEDIPARSE_DOWNLOAD_TIMEOUT": timeout},
+        env=_environment(timeout, env),
         timeout=120,
     )
+
+
+def _command(netrc: Path, url: str, output: Path) -> list[str]:
+    return ["bash", str(SCRIPT), str(netrc), url, str(output), str(output) + ".log"]
+
+
+def _environment(timeout: str, env: dict[str, str]) -> dict[str, str]:
+    return {
+        **os.environ,
+        **QUICK_RETRIES,
+        "MEDIPARSE_DOWNLOAD_TIMEOUT": timeout,
+        **env,
+    }
+
+
+def _wait_for(condition: Callable[[], bool], seconds: float) -> None:
+    deadline = time.monotonic() + seconds
+    while not condition():
+        assert time.monotonic() < deadline, "podmínka nenastala včas"
+        time.sleep(0.2)
 
 
 def test_downloads_file_and_keeps_attempt_log(
@@ -240,6 +313,90 @@ def test_every_connection_stalling_once_completes_in_one_attempt(
     assert done.returncode == 0, done.stderr
     assert "pokus" not in done.stderr
     assert output.read_bytes() == PAYLOAD
+
+
+def test_connections_stalling_repeatedly_keep_downloading_without_attempts(
+    physionet: FakePhysioNet, netrc: Path, tmp_path: Path
+) -> None:
+    """Spojení se za celé stažení zasekne víckrát, než dovolí ``--max-tries``.
+
+    aria2c počítá pokusy spojení za celý jeho život, ne po sobě jdoucí chyby,
+    takže na dlouhém stažení z PhysioNetu spojení jedno po druhém natrvalo
+    vypadnou. Skript proto aria2c po ``MEDIPARSE_DOWNLOAD_PERIOD`` sekundách
+    spustí znovu s čerstvými spojeními a nepočítá to jako neúspěšný pokus.
+    """
+    output = tmp_path / "table.csv"
+
+    done = _download(
+        netrc,
+        physionet.url("stutter"),
+        output,
+        timeout="1",
+        MEDIPARSE_DOWNLOAD_PERIOD="8",
+    )
+
+    assert done.returncode == 0, done.stderr
+    assert "spouštím ho znovu" in done.stderr
+    assert "pokus" not in done.stderr
+    assert output.read_bytes() == PAYLOAD
+
+
+def test_interrupt_stops_download_and_keeps_partial_state(
+    physionet: FakePhysioNet, netrc: Path, tmp_path: Path
+) -> None:
+    """Ctrl+C ukončí skript, i když aria2c po přerušení vrátí přechodný kód.
+
+    Když už některé spojení vyčerpalo pokusy timeoutem, aria2c po SIGINT
+    skončí kódem 2, ne 7. Terminál posílá SIGINT celé skupině procesů.
+    """
+    output = tmp_path / "table.csv"
+    attempts = tmp_path / "table.csv.log.part"
+    process = subprocess.Popen(
+        _command(netrc, physionet.url("half"), output),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        encoding="utf-8",
+        env=_environment(QUICK_RETRIES["MEDIPARSE_DOWNLOAD_TIMEOUT"], {}),
+        start_new_session=True,
+    )
+    try:
+        _wait_for(
+            lambda: (
+                attempts.exists()
+                and "Download aborted" in attempts.read_text(encoding="utf-8")
+            ),
+            seconds=60,
+        )
+        os.killpg(process.pid, signal.SIGINT)
+        _, stderr = process.communicate(timeout=15)
+    finally:
+        if process.poll() is None:
+            os.killpg(process.pid, signal.SIGKILL)
+            process.communicate()
+
+    assert process.returncode != 0
+    assert "pokus" not in stderr
+    assert "přerušeno" in stderr
+    assert not output.exists()
+    assert (tmp_path / "table.csv.part.aria2").exists()
+
+
+def test_restart_period_shorter_than_exhausted_tries_is_refused(
+    physionet: FakePhysioNet, netrc: Path, tmp_path: Path
+) -> None:
+    """Restart dřív, než mrtvý server vyčerpá pokusy, by ho nikdy neodhalil."""
+    done = _download(
+        netrc,
+        physionet.url("data"),
+        tmp_path / "table.csv",
+        timeout="10",
+        MEDIPARSE_DOWNLOAD_PERIOD="30",
+    )
+
+    assert done.returncode != 0
+    assert "MEDIPARSE_DOWNLOAD_PERIOD" in done.stderr
+    assert physionet.ranges == []
 
 
 def test_dead_server_leaves_no_output_but_keeps_partial_state(
