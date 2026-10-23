@@ -69,7 +69,7 @@ class _Handler(BaseHTTPRequestHandler):
         """Bez výpisu požadavků do stderr testu."""
 
     def do_GET(self) -> None:
-        """Odpoví podle cesty: ``data``, ``stall``, ``dead``, ``missing``, ``forbidden``."""
+        """Odpoví podle cesty: ``data``, ``stall``, ``dead``, ``truncated``, ``missing``, ``forbidden``."""
         if self.path == "/missing":
             self._empty(HTTPStatus.NOT_FOUND)
             return
@@ -82,6 +82,10 @@ class _Handler(BaseHTTPRequestHandler):
             )
             return
         body = self._send_headers()
+        if self.path == "/truncated":
+            self.wfile.write(body[:1000])
+            self.close_connection = True
+            return
         if self.path == "/dead" or (self.path == "/stall" and self._take_stall()):
             self.wfile.write(body[:1000])
             self.wfile.flush()
@@ -220,6 +224,19 @@ def test_dead_server_leaves_no_output_but_keeps_partial_state(
     assert not output.exists()
     assert (tmp_path / "table.csv.part").exists()
     assert "stažení" in done.stderr
+
+
+def test_connection_closed_early_is_retried_and_never_moved(
+    physionet: FakePhysioNet, netrc: Path, tmp_path: Path
+) -> None:
+    """Server, který zavře spojení před koncem těla, je přechodná chyba, ne konec."""
+    output = tmp_path / "table.csv"
+
+    done = _download(netrc, physionet.url("truncated"), output)
+
+    assert done.returncode != 0
+    assert "pokus 1/2" in done.stderr
+    assert not output.exists()
 
 
 def test_resumes_from_partial_file(

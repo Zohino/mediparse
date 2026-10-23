@@ -56,10 +56,12 @@ download() {
 }
 
 # Kódy aria2c (manuál, EXIT STATUS): 2 timeout, 5 příliš pomalé, 6 síť,
-# 19 DNS, 29 přetížený server. Ostatní chyby se opakováním nespraví.
+# 19 DNS, 29 přetížený server. Spojení zavřené před koncem těla („Got EOF
+# from the server“) hlásí aria2c jen obecným kódem 1. Ostatní chyby se
+# opakováním nespraví.
 transient() {
     case $1 in
-        2 | 5 | 6 | 19 | 29) return 0 ;;
+        1 | 2 | 5 | 6 | 19 | 29) return 0 ;;
         *) return 1 ;;
     esac
 }
