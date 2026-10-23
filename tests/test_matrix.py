@@ -159,8 +159,12 @@ def test_czech_row_with_strip_is_rejected_with_row_id() -> None:
     """Lexikon je anglický, strip české zprávy by nic neodstranil; hláška nese id řádku."""
     row = _row(id="cs-logreg-strip", language="cs", strip_diagnostic_sections=True)
 
-    with pytest.raises(ValidationError, match="cs-logreg-strip"):
+    with pytest.raises(ValidationError) as error:
         _validate(row)
+
+    assert error.value.errors()[0]["msg"].startswith(
+        "Value error, Řádek cs-logreg-strip: strip diagnostických sekcí"
+    )
 
 
 def test_czech_row_without_strip_is_valid() -> None:

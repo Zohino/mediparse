@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from typing import TYPE_CHECKING
 
 import pytest
@@ -48,11 +49,13 @@ def test_config_without_strip_switch_is_rejected() -> None:
     fields = training_config()
     del fields["strip_diagnostic_sections"]
 
-    with pytest.raises(ValidationError):
-        TrainingConfig.model_validate(fields)
+    with pytest.raises(ValidationError, match="strip_diagnostic_sections"):
+        TrainingConfig.model_validate_json(json.dumps(fields))
 
 
 def test_strip_switch_as_string_is_rejected() -> None:
     """Přepínač je striktní bool, řetězec ``"true"`` neprojde."""
-    with pytest.raises(ValidationError):
-        TrainingConfig.model_validate(training_config(strip_diagnostic_sections="true"))
+    with pytest.raises(ValidationError, match="strip_diagnostic_sections"):
+        TrainingConfig.model_validate_json(
+            json.dumps(training_config(strip_diagnostic_sections="true"))
+        )

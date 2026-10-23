@@ -11,6 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
 from mediparse.domain.identity import RowId
 from mediparse.domain.language import Language
+from mediparse.domain.section_headers import LEXICON_LANGUAGE
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
@@ -61,10 +62,10 @@ class MatrixRow(BaseModel):
 
     @model_validator(mode="after")
     def _strip_is_english_only(self) -> Self:
-        if self.strip_diagnostic_sections and self.language is not Language.EN:
+        if self.strip_diagnostic_sections and self.language is not LEXICON_LANGUAGE:
             msg = (
-                f"Řádek {self.id}: strip diagnostických sekcí zná jen angličtinu, "
-                "lexikon sekcí je anglický"
+                f"Řádek {self.id}: strip diagnostických sekcí zná jen jazyk "
+                f"lexikonu sekcí ({LEXICON_LANGUAGE})"
             )
             raise ValueError(msg)
         return self

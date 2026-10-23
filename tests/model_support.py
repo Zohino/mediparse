@@ -120,7 +120,7 @@ def training_config(**overrides: object) -> dict[str, object]:
     """Platný config tréninku ve tvaru JSON; test změní jen pole, o kterém je.
 
     Returns:
-        Slovník s klíči ``row_id``, ``diagnosis``, ``seed``, ``fold`` a
+        Slovník s klíči ``row_id``, ``diagnosis``, ``seed``, ``fold``,
         ``regularization`` a ``strip_diagnostic_sections``, přepsanými hodnotami z ``overrides``.
     """
     return {

@@ -105,14 +105,40 @@ def test_strip_without_sections_is_rejected() -> None:
         DiagnosticStrip.model_validate({"sections": (), "lexicon_sha256": DIGEST})
 
 
-def test_strip_serializes_sections_as_ordered_list() -> None:
-    """Sekce jdou do JSON jako seznam v zadaném pořadí."""
+def test_strip_serializes_sections_as_sorted_list() -> None:
+    """Sekce zadané v jiném pořadí jdou do JSON jako seřazený seznam."""
     strip = DiagnosticStrip(sections=("b_section", "a_section"), lexicon_sha256=DIGEST)
     manifest = RunManifest.model_validate(_fields(diagnostic_strip=strip))
 
     dumped = manifest.model_dump(mode="json")
 
     assert dumped["diagnostic_strip"] == {
-        "sections": ["b_section", "a_section"],
+        "sections": ["a_section", "b_section"],
         "lexicon_sha256": DIGEST,
     }
+
+
+def test_manifest_without_strip_key_is_rejected() -> None:
+    """Klíč ``diagnostic_strip`` je povinný, chybějící klíč není totéž co ``null``."""
+    fields = _fields()
+    del fields["diagnostic_strip"]
+
+    with pytest.raises(ValidationError, match="diagnostic_strip"):
+        RunManifest.model_validate(fields)
+
+
+def test_strip_with_extra_field_is_rejected() -> None:
+    """Záznam stripu s polem navíc je odmítnut."""
+    with pytest.raises(ValidationError, match="extra"):
+        DiagnosticStrip.model_validate({
+            "sections": ("a",),
+            "lexicon_sha256": DIGEST,
+            "extra": 1,
+        })
+
+
+def test_strip_duplicate_sections_are_merged() -> None:
+    """Opakovaný klíč sekce se sloučí, záznam říká, které sekce se odstranily."""
+    strip = DiagnosticStrip(sections=("b", "a", "b"), lexicon_sha256=DIGEST)
+
+    assert strip.sections == ("a", "b")

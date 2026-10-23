@@ -33,7 +33,7 @@ def training_input(
         return table, None
     sections = load_section_lexicon(lexicon)
     record = DiagnosticStrip(
-        sections=tuple(sorted(sections.diagnostic_sections)),
+        sections=tuple(sections.diagnostic_sections),
         lexicon_sha256=file_sha256(lexicon),
     )
     return DiagnosticStripTable(table, sections), record

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING, Final
 
 import pytest
@@ -375,3 +375,23 @@ def test_strip_changes_scores_on_sectioned_notes(tmp_path: Path) -> None:
         ])
 
     assert scores[0] != scores[1]
+
+
+def test_strip_removing_all_text_is_refused(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Strip, po kterém nezbyde žádný token, krok odmítne místo pádu vectorizeru."""
+    corpus = [
+        replace(note, text=f"Discharge Diagnosis:\n{note.text}\n")
+        for note in separable_notes(PATIENTS, OVERLAPPING)
+    ]
+    notes, config, split = _inputs(tmp_path, corpus, strip_diagnostic_sections=True)
+    outputs = _Outputs.under(tmp_path / "out")
+
+    code = _run(notes, config, split, outputs)
+
+    assert code is ExitCode.REFUSED
+    assert outputs.existing() == []
+    assert "Traceback" not in caplog.text
+    assert "žádný token" in caplog.text
+    assert "diabetes insulin" not in caplog.text

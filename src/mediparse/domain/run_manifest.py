@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Annotated
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from mediparse.domain.digest import Sha256
 from mediparse.domain.environment import Environment
@@ -15,13 +15,20 @@ from mediparse.domain.seed import Seed
 class DiagnosticStrip(BaseModel):
     """Záznam ablace D2: které sekce se ze zpráv odstranily a podle jakého lexikonu.
 
-    ``sections`` jsou seřazené klíče sekcí, aby byl JSON deterministický.
+    ``sections`` jsou seřazené klíče sekcí bez opakování, aby byl JSON deterministický.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     sections: Annotated[tuple[str, ...], Field(min_length=1)]
     lexicon_sha256: Sha256
+
+    @field_validator("sections", mode="before")
+    @classmethod
+    def _sorted_unique(cls, sections: object) -> object:
+        if not isinstance(sections, (tuple, list)):
+            return sections
+        return tuple(sorted(set(sections)))
 
 
 class RunManifest(BaseModel):
