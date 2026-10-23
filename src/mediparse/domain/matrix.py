@@ -59,6 +59,16 @@ class MatrixRow(BaseModel):
     strip_diagnostic_sections: bool
     tuning_trials: PositiveInt
 
+    @model_validator(mode="after")
+    def _strip_is_english_only(self) -> Self:
+        if self.strip_diagnostic_sections and self.language is not Language.EN:
+            msg = (
+                f"Řádek {self.id}: strip diagnostických sekcí zná jen angličtinu, "
+                "lexikon sekcí je anglický"
+            )
+            raise ValueError(msg)
+        return self
+
     @property
     def axes(self) -> tuple[Language, ModelName, bool]:
         """Osy, které experiment jednoznačně určují."""

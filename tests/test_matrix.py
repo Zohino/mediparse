@@ -23,7 +23,7 @@ def _row(**overrides: object) -> dict[str, object]:
         "id": "en-logreg",
         "language": "en",
         "model": "logreg",
-        "strip_diagnostic_sections": True,
+        "strip_diagnostic_sections": False,
         "tuning_trials": 20,
     } | overrides
 
@@ -153,6 +153,35 @@ def test_load_matrix_rejects_invalid_content(tmp_path: Path) -> None:
 
     with pytest.raises(InvalidInputError, match=r"matrix\.json"):
         load_matrix(manifest)
+
+
+def test_czech_row_with_strip_is_rejected_with_row_id() -> None:
+    """Lexikon je anglický, strip české zprávy by nic neodstranil; hláška nese id řádku."""
+    row = _row(id="cs-logreg-strip", language="cs", strip_diagnostic_sections=True)
+
+    with pytest.raises(ValidationError, match="cs-logreg-strip"):
+        _validate(row)
+
+
+def test_czech_row_without_strip_is_valid() -> None:
+    """Česká zpráva bez stripu je hlavní řádek, projde."""
+    (row,) = _validate(_row(id="cs-logreg", language="cs")).rows
+
+    assert row.language is Language.CS
+
+
+def test_repository_manifest_declares_main_and_ablation_rows() -> None:
+    """Hlavní řádek je bez stripu, ablační se stripem a ostatní osy jsou stejné."""
+    rows = {row.id: row for row in load_matrix(REPOSITORY_MATRIX).rows}
+
+    main, ablation = rows["en-logreg"], rows["en-logreg-strip"]
+    assert main.strip_diagnostic_sections is False
+    assert ablation.strip_diagnostic_sections is True
+    assert (main.language, main.model, main.tuning_trials) == (
+        ablation.language,
+        ablation.model,
+        ablation.tuning_trials,
+    )
 
 
 def test_repository_manifest_is_valid() -> None:
