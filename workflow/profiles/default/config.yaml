@@ -1,3 +1,5 @@
 cores: all
 resources:
-  physionet: 5
+  # Jedno stažení najednou: download.sh otevře na soubor osm spojení a víc
+  # souběžných spojení na PhysioNet riskuje blokaci adresy.
+  physionet: 1
