@@ -8,7 +8,7 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.environment import Environment, SourceRevision
-from mediparse.domain.run_manifest import RunManifest
+from mediparse.domain.run_manifest import DiagnosticStrip, RunManifest
 
 COMMIT: Final = "a" * 40
 DIGEST: Final = "b" * 64
@@ -23,6 +23,7 @@ def _fields(**changes: object) -> dict[str, object]:
         "split_seed": 1,
         "split_folds": 5,
         "split_sha256": DIGEST,
+        "diagnostic_strip": None,
         "model": "sklearn TfidfVectorizer+LinearSVC",
         "model_revision": None,
         "tokenizer_revision": None,
@@ -89,3 +90,29 @@ def test_manifest_nests_environment_instead_of_flat_fields() -> None:
     }
     assert "packages" not in dumped
     assert "source" not in dumped
+
+
+def test_manifest_without_strip_serializes_null() -> None:
+    """Bez stripu je ``diagnostic_strip`` ``null``."""
+    dumped = RunManifest.model_validate(_fields()).model_dump(mode="json")
+
+    assert dumped["diagnostic_strip"] is None
+
+
+def test_strip_without_sections_is_rejected() -> None:
+    """Záznam stripu bez sekcí nelze zapsat."""
+    with pytest.raises(ValidationError):
+        DiagnosticStrip.model_validate({"sections": (), "lexicon_sha256": DIGEST})
+
+
+def test_strip_serializes_sections_as_ordered_list() -> None:
+    """Sekce jdou do JSON jako seznam v zadaném pořadí."""
+    strip = DiagnosticStrip(sections=("b_section", "a_section"), lexicon_sha256=DIGEST)
+    manifest = RunManifest.model_validate(_fields(diagnostic_strip=strip))
+
+    dumped = manifest.model_dump(mode="json")
+
+    assert dumped["diagnostic_strip"] == {
+        "sections": ["b_section", "a_section"],
+        "lexicon_sha256": DIGEST,
+    }

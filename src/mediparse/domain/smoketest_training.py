@@ -18,6 +18,7 @@ if TYPE_CHECKING:
 class TrainingConfig(BaseModel):
     """Parametry tréninku: řádek matice, diagnóza, seed modelu, testovací fold a regularizace.
 
+    ``strip_diagnostic_sections`` zapíná ablaci D2: zprávy se čtou bez diagnostických sekcí.
     ``fold`` je číslo foldu, který slouží jako test; jeho horní mez zná až ``Split``.
     """
 
@@ -28,6 +29,7 @@ class TrainingConfig(BaseModel):
     seed: Seed
     fold: Annotated[int, Field(ge=0)]
     regularization: Annotated[float, Field(gt=0.0)]
+    strip_diagnostic_sections: bool
 
 
 @dataclass(frozen=True)

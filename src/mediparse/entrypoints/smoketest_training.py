@@ -113,6 +113,7 @@ def run(
             split_seed=report.split_config.seed,
             split_folds=report.split_config.folds,
             split_sha256=report.split_sha256,
+            diagnostic_strip=None,
             model=ESTIMATOR,
             model_revision=None,
             tokenizer_revision=None,
