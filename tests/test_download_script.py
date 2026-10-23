@@ -166,7 +166,12 @@ def _netrc(path: Path, password: str) -> Path:
     return path
 
 
-def _download(netrc: Path, url: str, output: Path) -> subprocess.CompletedProcess[str]:
+def _download(
+    netrc: Path,
+    url: str,
+    output: Path,
+    timeout: str = QUICK_RETRIES["MEDIPARSE_DOWNLOAD_TIMEOUT"],
+) -> subprocess.CompletedProcess[str]:
     output.parent.mkdir(parents=True, exist_ok=True)
     return subprocess.run(
         ["bash", str(SCRIPT), str(netrc), url, str(output), str(output) + ".log"],
@@ -174,7 +179,7 @@ def _download(netrc: Path, url: str, output: Path) -> subprocess.CompletedProces
         capture_output=True,
         text=True,
         encoding="utf-8",
-        env={**os.environ, **QUICK_RETRIES},
+        env={**os.environ, **QUICK_RETRIES, "MEDIPARSE_DOWNLOAD_TIMEOUT": timeout},
         timeout=120,
     )
 
@@ -214,6 +219,26 @@ def test_stalled_connection_is_replaced_and_file_completes(
     done = _download(netrc, physionet.url("stall"), output)
 
     assert done.returncode == 0, done.stderr
+    assert output.read_bytes() == PAYLOAD
+
+
+def test_every_connection_stalling_once_completes_in_one_attempt(
+    physionet: FakePhysioNet, netrc: Path, tmp_path: Path
+) -> None:
+    """Zaseknutá spojení se obnoví a stažení nepřijde o souběh ani o pokus.
+
+    Na PhysioNetu se zasekne časem každé spojení. Kontrola minimální rychlosti
+    aria2c (``--lowest-speed-limit``) je ukončí dřív než timeout a zrušená
+    spojení už neobnoví, takže souběh klesá až na nulu a pokus skončí. Timeout
+    delší než ta kontrola (asi 10 s) to v testu odhalí.
+    """
+    physionet.stalls_left = 9
+    output = tmp_path / "table.csv"
+
+    done = _download(netrc, physionet.url("stall"), output, timeout="15")
+
+    assert done.returncode == 0, done.stderr
+    assert "pokus" not in done.stderr
     assert output.read_bytes() == PAYLOAD
 
 
