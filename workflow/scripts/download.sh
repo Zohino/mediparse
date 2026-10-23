@@ -18,14 +18,16 @@ attempts=$log.part
 # Výchozí hodnoty míří na PhysioNet; testy je zkracují proměnnými prostředí.
 timeout=${MEDIPARSE_DOWNLOAD_TIMEOUT:-60}
 max_attempts=${MEDIPARSE_DOWNLOAD_ATTEMPTS:-50}
-retry_wait=${MEDIPARSE_DOWNLOAD_RETRY_WAIT:-60}
+retry_wait=${MEDIPARSE_DOWNLOAD_RETRY_WAIT:-10}
 
 [[ -r $netrc ]] || fail "chybí $netrc s přihlašovacími údaji" 1
 [[ -z $(find -L "$netrc" -perm /077) ]] || fail "$netrc smí číst jen vlastník: chmod 600 $netrc" 1
 
 # PhysioNet škrtí rychlost na jedno spojení, proto aria2c stahuje osmi spojeními
-# po kusech. Zaseknuté spojení ukončí --timeout, a když stojí všechna,
-# --lowest-speed-limit ukončí celé stažení kódem 5; smyčka pak naváže podle
+# po kusech. Zaseknuté spojení ukončí --timeout a aria2c ho otevře znovu
+# (--max-tries). --lowest-speed-limit chybí záměrně: zaseknutá spojení ukončí
+# dřív než timeout a už je neobnoví, takže souběh klesne až na nulu (běh
+# 2026-10-23). Když vyčerpají pokusy všechna spojení, smyčka níže naváže podle
 # kontrolního souboru $partial.aria2. Průběh jde na terminál (stdout),
 # do logu jen hlášení. PhysioNet nabídne přihlášení z .netrc jen User-Agentu
 # začínajícímu „Wget/“ (ostatním vrátí 403 i s platným heslem), proto se aria2c
@@ -46,9 +48,8 @@ download() {
         --min-split-size=1M \
         --timeout="$timeout" \
         --connect-timeout="$timeout" \
-        --lowest-speed-limit=1K \
         --max-tries=5 \
-        --retry-wait=10 \
+        --retry-wait="$retry_wait" \
         --show-console-readout=false \
         --summary-interval=60 \
         --console-log-level=warn \
@@ -58,13 +59,13 @@ download() {
         2>&1
 }
 
-# Kódy aria2c (manuál, EXIT STATUS): 2 timeout, 5 příliš pomalé, 6 síť,
+# Kódy aria2c (manuál, EXIT STATUS): 2 timeout, 6 síť,
 # 19 DNS, 29 přetížený server. Spojení zavřené před koncem těla („Got EOF
 # from the server“) hlásí aria2c jen obecným kódem 1. Ostatní chyby se
 # opakováním nespraví.
 transient() {
     case $1 in
-        1 | 2 | 5 | 6 | 19 | 29) return 0 ;;
+        1 | 2 | 6 | 19 | 29) return 0 ;;
         *) return 1 ;;
     esac
 }
