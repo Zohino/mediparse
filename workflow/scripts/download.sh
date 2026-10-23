@@ -27,11 +27,14 @@ retry_wait=${MEDIPARSE_DOWNLOAD_RETRY_WAIT:-60}
 # po kusech. Zaseknuté spojení ukončí --timeout, a když stojí všechna,
 # --lowest-speed-limit ukončí celé stažení kódem 5; smyčka pak naváže podle
 # kontrolního souboru $partial.aria2. Průběh jde na terminál (stdout),
-# do logu jen hlášení.
+# do logu jen hlášení. PhysioNet nabídne přihlášení z .netrc jen User-Agentu
+# začínajícímu „Wget/“ (ostatním vrátí 403 i s platným heslem), proto se aria2c
+# hlásí jako Wget a v závorce uvádí, kdo skutečně stahuje.
 download() {
     aria2c \
         --no-conf \
         --netrc-path="$netrc" \
+        --user-agent="Wget/1.21 (aria2)" \
         --dir="$(dirname -- "$partial")" \
         --out="$(basename -- "$partial")" \
         --continue=true \

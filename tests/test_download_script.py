@@ -1,8 +1,8 @@
 """Stažení souboru z PhysioNetu skriptem workflow/scripts/download.sh.
 
 Skript běží proti lokálnímu HTTP serveru, který napodobuje chování PhysioNetu:
-Basic auth z ``.netrc``, Range, spojení, které po pár bajtech přestane posílat
-data, a odmítnutí 401, 403 a 404.
+Basic auth z ``.netrc`` jen pro User-Agent začínající ``Wget/``, Range, spojení,
+které po pár bajtech přestane posílat data, a odmítnutí 401, 403 a 404.
 """
 
 from __future__ import annotations
@@ -74,6 +74,11 @@ class _Handler(BaseHTTPRequestHandler):
             self._empty(HTTPStatus.NOT_FOUND)
             return
         if self.path == "/forbidden":
+            self._empty(HTTPStatus.FORBIDDEN)
+            return
+        if not self.headers.get("User-Agent", "").startswith("Wget/"):
+            # PhysioNet (ověřeno 2026-10-23) jiným klientům než Wget přihlášení
+            # nenabídne a odpoví 403 i s platným heslem.
             self._empty(HTTPStatus.FORBIDDEN)
             return
         if not self._authorized():
