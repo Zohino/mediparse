@@ -2,6 +2,7 @@ EMPTY_TABLES <- list(
   discharge = c("note_id", "subject_id", "hadm_id", "text"),
   radiology = c("note_id", "subject_id", "hadm_id", "text"),
   diagnoses_icd = c("hadm_id", "icd_code", "icd_version"),
+  `mimic-iv-bhc` = c("note_id", "target"),
   d_icd_diagnoses = c("icd_code", "icd_version", "long_title"),
   patients = c("subject_id", "anchor_year_group", "gender", "anchor_age", "anchor_year"),
   admissions = c(
@@ -33,7 +34,8 @@ mimic_con <- function(..., env = parent.frame()) {
     frame <- text_frame(given[[name]], EMPTY_TABLES[[name]])
     DBI::dbWriteTable(writer, name, frame)
     DBI::dbExecute(writer, sprintf(
-      "COPY %s TO '%s' (FORMAT parquet)", name, file.path(dir, paste0(name, ".parquet"))
+      "COPY %s TO '%s' (FORMAT parquet)",
+      DBI::dbQuoteIdentifier(writer, name), file.path(dir, paste0(name, ".parquet"))
     ))
   }
   DBI::dbDisconnect(writer, shutdown = TRUE)
