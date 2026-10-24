@@ -123,17 +123,64 @@ test_that("bhc_agreement: úsek čištěný jednou je shodou s už vyčištěný
   out <- bhc_agreement(agreement_con(texts, targets))
 
   expect_equal(category_row(out, "shoda")$n, 1)
-  # Slitá fráze není pevným bodem čištění, takže ji kontrola targetu počítá; je to vzácný
-  # falešný poplach, který druhé čištění targetu nahrazovat nesmí.
-  expect_equal(out$necisty_target, 1)
+  expect_equal(out$necisty_target, 0)
 })
 
-test_that("bhc_agreement počítá targety, které nejsou pevným bodem čištění", {
-  texts <- rep("Brief Hospital Course:\nalpha beta\n", 3)
-  targets <- c(n1 = "alpha beta", n2 = "alpha\nbeta", n3 = "alpha  beta")
+test_that("bhc_agreement počítá targety s dvojitou mezerou, zalomením nebo jiným bílým znakem", {
+  texts <- rep("Brief Hospital Course:\nalpha beta\n", 5)
+  targets <- c(
+    n1 = "alpha beta", n2 = "alpha\nbeta", n3 = "alpha  beta", n4 = "alpha\u00a0beta",
+    n5 = " alpha beta "
+  )
   out <- bhc_agreement(agreement_con(setNames(texts, names(targets)), targets))
 
-  expect_equal(out$necisty_target, 2)
+  expect_equal(out$necisty_target, 3)
+})
+
+test_that("bhc_agreement počítá necisty_target jen ze spárovaných zpráv", {
+  targets <- c(n1 = "alpha beta", mimo = "a  b")
+  out <- bhc_agreement(agreement_con(c(n1 = "Brief Hospital Course:\nalpha beta\n"), targets))
+
+  expect_equal(out$necisty_target, 0)
+})
+
+test_that("bhc_agreement: shoda s targetem s okrajovými mezerami", {
+  texts <- c(n1 = "Brief Hospital Course:\nPt ok\n")
+  out <- bhc_agreement(agreement_con(texts, c(n1 = " Pt ok ")))
+
+  expect_equal(category_row(out, "shoda")$n, 1)
+})
+
+test_that("bhc_agreement uvádí jen_bhc a jen_korpus zvlášť, i když se liší", {
+  texts <- c(
+    n1 = "Brief Hospital Course:\nalpha\n", n2 = "Brief Hospital Course:\nalpha\n",
+    n3 = "Brief Hospital Course:\nalpha\n"
+  )
+  targets <- c(n1 = "alpha", mimo1 = "x", mimo2 = "y")
+  out <- bhc_agreement(agreement_con(texts, targets))
+
+  expect_equal(out$sparovano, 1)
+  expect_equal(out$jen_bhc, 2)
+  expect_equal(out$jen_korpus, 2)
+})
+
+test_that("bhc_agreement: medián sudého počtu rozdílů je nižší z prostředních hodnot", {
+  texts <- rep("Brief Hospital Course:\nalpha beta gamma delta\n", 4)
+  targets <- c(n1 = "alpha beta gamma", n2 = "alpha beta", n3 = "alpha", n4 = "alpha beta gamma delt")
+  out <- bhc_agreement(agreement_con(setNames(texts, names(targets)), targets))
+
+  # rozdíly 6, 12, 17, 1: seřazeně 1, 6, 12, 17, quantile_disc(0,5) je 6
+  expect_equal(category_row(out, "konec_pozdeji")$median_rozdilu, 6)
+})
+
+test_that("BHC_WHITESPACE odpovídá Pythonovu \\s přes všechny code pointy a čištění je sloučí", {
+  codepoints <- c(
+    9:13, 28:32, 133, 160, 5760, 8192:8202, 8232, 8233, 8239, 8287, 12288
+  )
+  expect_length(codepoints, 29L)
+  inputs <- paste0("a", intToUtf8(codepoints, multiple = TRUE), "b")
+
+  expect_equal(clean_in_sql(inputs), rep("a b", length(codepoints)))
 })
 
 test_that("bhc_agreement: falešný první výskyt s jinou hlavičkou lexikonu je jiná neshoda", {
@@ -152,6 +199,15 @@ test_that("bhc_agreement: prázdný průnik dá nuly ve všech kategoriích", {
   expect_equal(out$jen_korpus, 1)
   expect_equal(out$kategorie$n, rep(0, length(BHC_CATEGORIES)))
   expect_true(all(is.na(out$kategorie$median_rozdilu)))
+})
+
+test_that("bhc_agreement zastaví render na note_id NULL", {
+  texts <- c(n1 = "Brief Hospital Course:\nalpha\n")
+  rows <- data.frame(note_id = c("n1", NA), target = c("a", "b"), stringsAsFactors = FALSE)
+  con <- corpus_con(unname(texts), `mimic-iv-bhc` = rows)
+  segment_corpus(con, sections_module(), section_headers_path())
+
+  expect_error(bhc_agreement(con), "duplicit", fixed = TRUE)
 })
 
 test_that("bhc_agreement zastaví render na duplicitním note_id nebo NULL v targetu", {
@@ -207,6 +263,7 @@ test_that("bhc_plot: úrovně v pořadí BHC_CATEGORIES a podíl ze spárovanýc
 
   expect_equal(levels(plot$data$popisek), unname(BHC_CATEGORIES))
   expect_equal(plot$data$podil[plot$data$popisek == BHC_CATEGORIES[["shoda"]]], 0.4)
+  expect_true(all(bhc_plot(fake_agreement(n = rep(0, 7)))$data$podil == 0))
 })
 
 test_that("bhc nad prázdným průnikem: tabulka, graf i export projdou, věta nelze posoudit", {
@@ -239,31 +296,25 @@ test_that("bhc_text jmenuje podíl shody, počet spárovaných zpráv a populace
 
   expect_match(text, paste0("100", NBSP, "zpráv"))
   expect_match(text, paste0("40,0", NBSP, "%"))
-  expect_match(text, paste0("11", NBSP, "zpráv"))
-  expect_match(text, paste0("6", NBSP, "zpráv"))
+  expect_match(text, paste0("je 11", NBSP, "zpráv v BHC, ne v korpusu"), fixed = TRUE)
+  expect_match(text, paste0("a 6", NBSP, "zpráv v korpusu, ne v BHC"), fixed = TRUE)
+  expect_match(text, "Neshody: Sekce nenalezena", fixed = TRUE)
+  expect_no_match(text, "Neshody: Shoda")
 })
 
 test_that("bhc_text skloňuje počty: 1 zpráva, 2 zprávy, 5 zpráv", {
-  one <- bhc_text(fake_agreement(n = c(0, 1, 0, 0, 0, 0, 0), jen_bhc = 1, jen_korpus = 2))
-  expect_match(one, paste0("1", NBSP, "zpráva"))
-  expect_match(one, paste0("2", NBSP, "zprávy"))
-
-  five <- bhc_text(fake_agreement(n = c(0, 5, 0, 0, 0, 0, 0), jen_bhc = 5, jen_korpus = 1))
-  expect_match(five, paste0("5", NBSP, "zpráv"))
-})
-
-test_that("bhc_text uvede targety, které nejsou pevným bodem čištění", {
-  expect_match(bhc_text(fake_agreement(necisty_target = 3)), paste0("3", NBSP, "zprávy"))
-})
-
-test_that("šířky BHC_LAYOUTS odpovídají tbl-colwidths chunku sešitu", {
-  notebook <- readLines("../../9-text-structure.qmd", encoding = "UTF-8")
-  for (label in names(BHC_LAYOUTS)) {
-    start <- which(notebook == paste("#| label:", label))
-    expect_length(start, 1L)
-    line <- notebook[start + grep("^#\\| tbl-colwidths:", notebook[start + 1:3])[[1]]]
-    widths <- as.numeric(strsplit(gsub("[^0-9,]", "", line), ",")[[1]])
-
-    expect_equal(widths, BHC_LAYOUTS[[label]]$widths)
+  for (case in list(c(1, 1, 2), c(2, 2, 5), c(5, 5, 1))) {
+    text <- bhc_text(fake_agreement(
+      n = c(0, case[[1]], 0, 0, 0, 0, 0), jen_bhc = case[[2]], jen_korpus = case[[3]]
+    ))
+    expect_match(text, paste0("Spárováno je ", count_phrase(case[[1]], NOTE_FORMS)), fixed = TRUE)
+    expect_match(text, paste0("v tomto počtu: ", count_phrase(case[[1]], NOTE_FORMS)), fixed = TRUE)
+    expect_match(text, paste0("je ", count_phrase(case[[2]], NOTE_FORMS), " v BHC"), fixed = TRUE)
+    expect_match(text, paste0("a ", count_phrase(case[[3]], NOTE_FORMS), " v korpusu"), fixed = TRUE)
   }
+  expect_equal(count_phrase(c(1, 2, 5), NOTE_FORMS), paste0(c(1, 2, 5), NBSP, c("zpráva", "zprávy", "zpráv")))
+})
+
+test_that("bhc_text uvede počet targetů, které čištěním zjevně neprošly", {
+  expect_match(bhc_text(fake_agreement(necisty_target = 3)), paste0("3", NBSP, "zprávy"))
 })

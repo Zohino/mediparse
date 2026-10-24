@@ -5,6 +5,14 @@ SECTION_COLUMNS <- c(
   body_start = "INTEGER", body_end = "INTEGER"
 )
 
+# Most vrací konec těla a délku části (hlavička + tělo), ne její začátek, proto se začátek
+# odvozuje jako body_end - span_chars; dotazy, které část vyřezávají, berou výraz odsud.
+part_text_sql <- function(text = "d.text", alias = "s") {
+  sprintf(
+    "substring(%1$s, %2$s.body_end - %2$s.span_chars + 1, %2$s.span_chars)", text, alias
+  )
+}
+
 sections_module <- function() reticulate::import("mediparse.entrypoints.eda_sections")
 
 # Texty a identifikátory musí do Pythonu jako nepojmenovaný seznam: pojmenovaný vektor
@@ -328,8 +336,6 @@ body_length_table <- function(lengths) {
   )
 }
 
-# Délka zprávy je součet span_chars, protože round-trip parseru dává součet přes zprávu rovný
-# délce textu a text se tak nečte podruhé.
 diagnostic_keys <- function(lexicon) {
   keys <- unique(lexicon$sections$sekce[lexicon$sections$diagnostic])
   if (length(keys) == 0L) {
@@ -338,6 +344,8 @@ diagnostic_keys <- function(lexicon) {
   keys
 }
 
+# Délka zprávy je součet span_chars, protože round-trip parseru dává součet přes zprávu rovný
+# délce textu a text se tak nečte podruhé.
 strip_share <- function(con, lexicon) {
   keys <- diagnostic_keys(lexicon)
   row <- DBI::dbGetQuery(con, sprintf("
@@ -392,7 +400,7 @@ strip_residue <- function(con, lexicon) {
     ),
     kept AS (
       SELECT s.note_id,
-        substring(d.text, s.body_end - s.span_chars + 1, s.span_chars) AS part
+        %6$s AS part
       FROM %1$s s
       JOIN diagnostic g ON g.note_id = s.note_id
       JOIN discharge d ON d.note_id = s.note_id
@@ -405,7 +413,7 @@ strip_residue <- function(con, lexicon) {
       (SELECT count(DISTINCT note_id) FROM found WHERE %4$s IN (%5$s)) AS zbytek
   ", SECTIONS_TABLE, paste(DBI::dbQuoteString(con, keys), collapse = ", "),
     DBI::dbQuoteString(con, HEADER_PATTERN), normalized_sql("header"),
-    paste(normalized_sql(DBI::dbQuoteString(con, synonyms)), collapse = ", ")))
+    paste(normalized_sql(DBI::dbQuoteString(con, synonyms)), collapse = ", "), part_text_sql()))
   lapply(row, as.numeric)
 }
 
@@ -414,7 +422,7 @@ strip_residue_text <- function(residue) {
     return("Zbytek hlavičky diagnostické sekce po stripu nelze posoudit, protože žádná zpráva korpusu nemá diagnostickou sekci.")
   }
   sprintf(
-    "Po stripu D2 zůstane hlavička diagnostické sekce i s diagnózou pod ní v %s (%s) ze %s se sekcí. Liší se od sloupce „opakování“ v tabulce sekcí, který počítá i druhý výskyt uvnitř těla samotné diagnostické sekce; ten strip odstraní spolu s ní, takže sloupec zbytek přeceňuje.",
+    "Po stripu D2 zůstane hlavička diagnostické sekce i s diagnózou pod ní u těchto zpráv: %s (%s zpráv se sekcí, kterých je %s). Liší se od sloupce „opakování“ v tabulce sekcí, který počítá i druhý výskyt uvnitř těla samotné diagnostické sekce; ten strip odstraní spolu s ní, takže sloupec zbytek přeceňuje.",
     count_phrase(residue$zbytek, NOTE_FORMS), percent_label(residue$zbytek, residue$se_sekci),
     count_phrase(residue$se_sekci, NOTE_FORMS)
   )

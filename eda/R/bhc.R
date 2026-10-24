@@ -4,10 +4,13 @@ BHC_SECTION <- "hospital_course"
 # `\s` v RE2 (DuckDB) je jen ASCII, kdežto Pythonovo `\s` nad `str` pokrývá Unicode, a skript
 # clin-bhc-summ čistí v Pythonu. Výčet se shoduje s Pythonovým `re` přes všechny code pointy
 # (NBSP, U+2028 nebo U+000B by se se `\s` neslily a daly falešnou neshodu).
-BHC_WHITESPACE <- paste0(
-  "[\\t-\\r\\x{1c}-\\x{20}\\x{85}\\x{a0}\\x{1680}\\x{2000}-\\x{200a}",
-  "\\x{2028}\\x{2029}\\x{202f}\\x{205f}\\x{3000}]"
+# Výčet bez obyčejné mezery je v samostatné konstantě, ze které se odvozuje i kontrola targetu.
+BHC_NON_SPACE_WHITESPACE <- paste0(
+  "\\t-\\r\\x{1c}-\\x{1f}\\x{85}\\x{a0}\\x{1680}\\x{2000}-\\x{200a}",
+  "\\x{2028}\\x{2029}\\x{202f}\\x{205f}\\x{3000}"
 )
+BHC_WHITESPACE <- paste0("[", BHC_NON_SPACE_WHITESPACE, " ]")
+BHC_UNCLEANED_PATTERN <- paste0("  |[", BHC_NON_SPACE_WHITESPACE, "]")
 
 # Čtyři zápisy hlavičky, které čištění odstraňuje všude v textu, s rozlišením velikosti písmen
 # a v tomto pořadí; "Brief hospital course:" se neodstraní.
@@ -42,8 +45,6 @@ BHC_CATEGORIES <- c(
 )
 BHC_LENGTH_CATEGORIES <- c("konec_driv", "konec_pozdeji", "zacatek_driv", "zacatek_pozdeji")
 
-quoted_list <- function(con, values) paste(DBI::dbQuoteString(con, values), collapse = ", ")
-
 check_bhc_table <- function(con) {
   if (!BHC_TABLE %in% DBI::dbListTables(con)) {
     stop(sprintf(
@@ -74,16 +75,17 @@ pair_bhc_sql <- function(con) {
       WHERE s.section = %4$s
     ),
     theirs AS (
-      SELECT note_id, trim(target) AS target FROM %5$s
+      SELECT note_id, target AS raw, trim(target) AS target FROM %5$s
     ),
     pairs AS (
-      SELECT t.note_id, t.target, o.ours, o.note_id IS NULL AS missing
+      SELECT t.note_id, t.raw, t.target, o.ours, o.note_id IS NULL AS missing
       FROM theirs t
       JOIN (SELECT DISTINCT note_id FROM %3$s) c ON c.note_id = t.note_id
       LEFT JOIN ours o ON o.note_id = t.note_id
     ),
     judged AS (
       SELECT note_id, ours, target,
+        regexp_matches(raw, %6$s) AS necisty,
         CASE
           WHEN missing THEN 'nenalezena'
           WHEN ours = target THEN 'shoda'
@@ -92,24 +94,24 @@ pair_bhc_sql <- function(con) {
           WHEN contains(ours, target) THEN 'zacatek_driv'
           WHEN contains(target, ours) THEN 'zacatek_pozdeji'
           ELSE 'jina'
-        END AS kategorie,
-        trim(%6$s) <> target AS necisty
+        END AS kategorie
       FROM pairs
     )
     SELECT note_id, kategorie, necisty,
       CASE WHEN kategorie IN (%7$s) THEN abs(length(ours) - length(target)) END AS rozdil
     FROM judged
   ", BHC_PAIRS_TABLE,
-    bhc_clean_sql("substring(d.text, s.body_end - s.span_chars + 1, s.span_chars)"),
+    bhc_clean_sql(part_text_sql()),
     SECTIONS_TABLE, DBI::dbQuoteString(con, BHC_SECTION),
-    DBI::dbQuoteIdentifier(con, BHC_TABLE), bhc_clean_sql("target"),
-    quoted_list(con, BHC_LENGTH_CATEGORIES))
+    DBI::dbQuoteIdentifier(con, BHC_TABLE), DBI::dbQuoteString(con, BHC_UNCLEANED_PATTERN),
+    paste(DBI::dbQuoteString(con, BHC_LENGTH_CATEGORIES), collapse = ", "))
 }
 
-# Porovnává se úsek hlavička + tělo sekce `hospital_course` (začátek úseku je body_end - span_chars)
-# s targetem BHC. Čistí se jen náš úsek, protože target už čištěním prošel; druhé čištění by slité
-# řádky ("Brief Hospital" + "Course:") odstranilo. Že je target pevným bodem čištění, ověřuje
-# `necisty_target`.
+# Porovnává se úsek hlavička + tělo sekce `hospital_course` s targetem BHC. Čistí se jen náš úsek,
+# protože target už čištěním prošel; druhé čištění by slité řádky ("Brief Hospital" + "Course:")
+# odstranilo. `necisty_target` počítá jen mezi spárovanými zprávami targety, které mají dvě mezery
+# za sebou nebo jiný bílý znak než mezeru, tedy ty, které nemohly projít kroky 1, 3 a 4 čištění.
+# Krok 2 (odstranění hlaviček) takhle ověřit nejde.
 bhc_agreement <- function(con) {
   check_bhc_table(con)
   DBI::dbExecute(con, pair_bhc_sql(con))
@@ -192,14 +194,14 @@ bhc_text <- function(agreement) {
   )
   if (agreement$sparovano == 0) {
     return(paste(
-      "Shoda s MIMIC-IV-Ext-BHC nelze posoudit, protože žádná zpráva korpusu nemá pár v MIMIC-IV-Ext-BHC.",
+      "Shodu s MIMIC-IV-Ext-BHC nelze posoudit, protože žádná zpráva korpusu nemá pár v MIMIC-IV-Ext-BHC.",
       outside
     ))
   }
   categories <- ordered_categories(agreement)
   matched <- categories$n[categories$kategorie == "shoda"]
   sprintf(
-    "Spárováno je %s. Úsek `%s` se shoduje s targetem BHC u %s (%s) spárovaných zpráv. Neshody: %s. %s Targety, které nejsou pevným bodem čištění: %s.",
+    "Spárováno je %s. Úsek `%s` se shoduje s targetem BHC ve zprávách v tomto počtu: %s (%s). Neshody: %s. %s Mezi spárovanými zprávami mají čištěním zjevně neprošlý target (dvě mezery za sebou nebo jiný bílý znak než mezera) tolik zpráv: %s.",
     count_phrase(agreement$sparovano, NOTE_FORMS), BHC_SECTION,
     count_phrase(matched, NOTE_FORMS), percent_label(matched, agreement$sparovano),
     bhc_mismatch_phrase(categories), outside,
