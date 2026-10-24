@@ -72,9 +72,7 @@ check_bhc_table <- function(con) {
 # 270 tisíc zpráv došel paměti už v S27a3.
 # Následující část se čistí a ořezává stejně jako náš úsek, protože target prošel týmž čištěním.
 # `other` se z následující části vylučuje podle definice kategorie: mluví o sekci lexikonu a
-# administrativní pole sekcí není, i když ho reference obsahuje celé. Navíc má prázdnou hlavičku
-# a `starts_with(x, '')` je vždy pravda, takže by bez vyloučení spadla do `cela_sekce` každá
-# zpráva s polem za BHC.
+# administrativní pole sekcí není, i když ho reference obsahuje celé.
 # Chybí-li následující část (BHC je poslední), je `next_part` NULL a větev propadne.
 pair_bhc_sql <- function(con, other) {
   sprintf("
