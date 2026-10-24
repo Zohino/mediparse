@@ -75,7 +75,7 @@ Tento sešit je devátým z řady sešitů explorační analýzy a otevírá fá
 
 Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023], MIMIC-IV-Note [@mimicivnote] a MIMIC-IV-Ext-BHC [@aali2025bhc; @aali2024], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty. Řetězec hlavičky je popisek z dat, a zveřejní se proto jen hlavička, kterou má aspoň `r coverage_floor` zpráv a nejméně `r count_floor`; podrobná pravidla jsou v kapitole @sec-data.
 
-Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky hlaviček a lexikonu a kapitola @sec-segmentace výsledky rozdělení zpráv na sekce a frekvenci tokenů a n-gramů a kapitola @sec-bhc validaci parseru proti MIMIC-IV-Ext-BHC. Kapitola @sec-shrnuti shrnuje rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
+Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky hlaviček a lexikonu, kapitola @sec-segmentace výsledky rozdělení zpráv na sekce a frekvenci tokenů a n-gramů a kapitola @sec-bhc validaci parseru proti MIMIC-IV-Ext-BHC. Kapitola @sec-shrnuti shrnuje rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
 
 # Data a metody {#sec-data}
 
