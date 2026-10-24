@@ -306,7 +306,7 @@ bhc_cut_table <- function(cut) {
 
 bhc_cut_text <- function(cut) {
   if (nrow(cut) == 0) {
-    return("Kterou hlavičkou náš úsek končí dřív než BHC, nelze posoudit, protože v kategorii „náš konec dřív“ není žádná zpráva.")
+    return("Kterou hlavičkou náš úsek končí dřív než BHC, nelze posoudit, protože v kategoriích „náš konec dřív“ a „reference obsahuje celou naši následující sekci“ není žádná zpráva.")
   }
   total <- cut$celkem[[1]]
   top <- utils::head(cut, 3)
