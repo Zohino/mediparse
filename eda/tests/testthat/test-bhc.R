@@ -422,3 +422,134 @@ test_that("bhc_cut_table: sekce, popisek, zprávy a podíl z kategorie konec dř
   expect_equal(table$n, c("2", "1", "1", "1"))
   expect_equal(table$podil, c("40,0", "20,0", "20,0", "20,0"))
 })
+
+CAUSE_STORY <- "Brief Hospital Course:\nstory\n"
+CAUSE_TEXTS <- c(
+  n1 = paste0(CAUSE_STORY, "\nDischarge Medications:\nasa\n"),
+  n2 = paste0(CAUSE_STORY, "\nDischarge Medications:\nasa\n"),
+  n3 = paste0(CAUSE_STORY, "\n\tDischarge Medications:\nasa\n"),
+  n4 = paste0(CAUSE_STORY, "\n  Discharge Medications:\nasa\n"),
+  n5 = paste0(CAUSE_STORY, "\nDISCHARGE MEDICATIONS:\nasa\n"),
+  n6 = paste0(CAUSE_STORY, "Discharge medications:\nasa\n"),
+  n7 = paste0(CAUSE_STORY, "Attending: tail\n"),
+  n8 = CAUSE_STORY,
+  n9 = paste0(
+    CAUSE_STORY, "Discharge medications:\nasa\n\nMedications on Admission:\nx\n\n",
+    "Discharge Medications:\nasa\n"
+  ),
+  n10 = paste0("Medications on Admission:\nx\n\n", CAUSE_STORY, "\nDischarge Medications:\nasa\n"),
+  n11 = paste0(CAUSE_STORY, "Medications on Admission:\nasa\n"),
+  n12 = paste0(CAUSE_STORY, "Discharge Medications:\nasa\n\nMedications on Admission:\nx\n"),
+  n13 = paste0(CAUSE_STORY, "Discharge Medications:\nasa\n")
+)
+CAUSE_TARGETS <- c(
+  n1 = "story Discharge Medications: asa",
+  n2 = "story and more",
+  n3 = "story and more",
+  n4 = "story and more",
+  n5 = "story and more",
+  n6 = "story and more",
+  n7 = "story and more",
+  n8 = "story and more",
+  n9 = "story Discharge medications: asa",
+  n10 = "story and more",
+  n11 = "story and more",
+  n12 = "story and more",
+  n13 = "story"
+)
+# Pořadí řádků BHC_CAUSES; n13 je shoda, do populace konce dřív nepatří.
+CAUSE_COUNTS <- c(2, 10, 8, 1, 1, 2, 7, 1, 2, 1, 1, 1, 9, 2, 2)
+
+cause_con <- function(texts = CAUSE_TEXTS, targets = CAUSE_TARGETS, env = parent.frame()) {
+  con <- agreement_con(texts, targets, env = env)
+  bhc_agreement(con, OTHER_KEY)
+  con
+}
+
+cause_lexicon <- function() read_section_headers(section_headers_path())
+
+test_that("bhc_cut_causes rozloží konec dřív do pěti skupin vlastností v pevném pořadí", {
+  causes <- bhc_cut_causes(cause_con(), cause_lexicon())
+
+  expect_equal(names(causes), c("skupina", "vlastnost", "n", "celkem"))
+  expect_equal(causes$vlastnost, BHC_CAUSES$popisek)
+  expect_equal(causes$skupina, BHC_CAUSES$skupina_popisek)
+  expect_equal(causes$n, CAUSE_COUNTS)
+  expect_equal(causes$celkem, rep(12, nrow(causes)))
+})
+
+test_that("bhc_cut_causes: každá vyčerpávající skupina dává celkem", {
+  causes <- bhc_cut_causes(cause_con(), cause_lexicon())
+  exhaustive <- BHC_CAUSES$skupina != "odsazeni"
+  sums <- tapply(causes$n[exhaustive], BHC_CAUSES$skupina[exhaustive], sum)
+
+  expect_equal(as.numeric(sums), rep(12, 4))
+})
+
+test_that("bhc_cut_causes počítá tabulátorem odsazené synonymum jako synonymum i jako odsazené", {
+  texts <- c(n1 = CAUSE_TEXTS[["n3"]])
+  causes <- bhc_cut_causes(cause_con(texts, c(n1 = "story and more")), cause_lexicon())
+  count_of <- function(key) causes$n[BHC_CAUSES$klic == key]
+
+  expect_equal(count_of("synonymum"), 1)
+  expect_equal(count_of("jiny"), 0)
+  expect_equal(count_of("odsazena"), 1)
+})
+
+test_that("bhc_cut_causes bez zprávy s koncem dřív vrátí nuly a celkem 0", {
+  causes <- bhc_cut_causes(
+    cause_con(c(n1 = CAUSE_TEXTS[["n13"]]), c(n1 = "story")), cause_lexicon()
+  )
+
+  expect_equal(causes$n, rep(0, nrow(BHC_CAUSES)))
+  expect_equal(causes$celkem, rep(0, nrow(BHC_CAUSES)))
+})
+
+test_that("bhc_cut_causes bez tabulky párů zastaví s návodem", {
+  expect_error(bhc_cut_causes(agreement_con(), cause_lexicon()), "bhc_agreement", fixed = TRUE)
+})
+
+test_that("bhc_cause_table: podíly z celkem, skupina jen na prvním řádku skupiny", {
+  table <- bhc_cause_table(bhc_cut_causes(cause_con(), cause_lexicon()))
+
+  expect_equal(names(table), c("skupina", "vlastnost", "n", "podil"))
+  expect_equal(table$n, number_text(CAUSE_COUNTS))
+  expect_equal(table$podil, percent_text(CAUSE_COUNTS, 12))
+  first_of_group <- !duplicated(BHC_CAUSES$skupina)
+  expect_equal(table$skupina[first_of_group], unique(BHC_CAUSES$skupina_popisek))
+  expect_equal(table$skupina[!first_of_group], rep("", sum(!first_of_group)))
+})
+
+test_that("bhc_cause_text jmenuje počty a podíly a nic nerozhoduje", {
+  text <- bhc_cause_text(bhc_cut_causes(cause_con(), cause_lexicon()))
+
+  expect_match(text, paste0("Populace: 12", NBSP, "zpráv"), fixed = TRUE)
+  expect_match(
+    text, paste0("celou naši následující sekci u 16,7", NBSP, "% zpráv (2", NBSP, "zprávy)"), fixed = TRUE
+  )
+  expect_match(text, paste0("chybí u 66,7", NBSP, "% zpráv (8", NBSP, "zpráv)"), fixed = TRUE)
+  expect_match(
+    text, paste0("znovu vyskytuje za uříznutím u 8,3", NBSP, "% zpráv (1", NBSP, "zpráva)"), fixed = TRUE
+  )
+  expect_match(text, paste0("Odsazená je hlavička u 16,7", NBSP, "% zpráv (2", NBSP, "zprávy)"), fixed = TRUE)
+  expect_match(text, "nerozhoduje, zda je hranice parseru správná", fixed = TRUE)
+})
+
+test_that("bhc_cause_text u prázdné populace říká, že příčinu nelze posoudit", {
+  causes <- bhc_cut_causes(cause_con(c(n1 = CAUSE_TEXTS[["n13"]]), c(n1 = "story")), cause_lexicon())
+
+  expect_match(bhc_cause_text(causes), "nelze posoudit", fixed = TRUE)
+})
+
+test_that("tbl-bhc-pricina: export projde i u prázdné tabulky a šířky sedí na čtyři sloupce", {
+  layout <- BHC_LAYOUTS[["tbl-bhc-pricina"]]
+  empty <- bhc_cut_causes(cause_con(c(n1 = CAUSE_TEXTS[["n13"]]), c(n1 = "story")), cause_lexicon())
+  dir <- withr::local_tempdir()
+
+  expect_length(layout$widths, 4)
+  expect_no_error(export_table(
+    bhc_cause_table(empty), col.names = layout$col.names, align = layout$align,
+    widths = layout$widths, label = "tbl-bhc-pricina", dir = dir
+  ))
+  expect_true(file.exists(file.path(dir, "tbl-bhc-pricina.tex")))
+})
