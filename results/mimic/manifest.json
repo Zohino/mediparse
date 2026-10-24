@@ -196,6 +196,18 @@
         "prev_service",
         "curr_service"
       ]
+    },
+    {
+      "file": "mimic-iv-bhc.csv",
+      "bytes": 2726465013,
+      "records": 270033,
+      "columns": [
+        "note_id",
+        "input",
+        "target",
+        "input_tokens",
+        "target_tokens"
+      ]
     }
   ]
 }

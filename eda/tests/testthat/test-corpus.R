@@ -6,6 +6,15 @@ test_that("katalog tabulek má jedinečná jména a neprázdné popisy", {
   expect_true(all(nzchar(catalog$zdroj)))
 })
 
+test_that("katalog obsahuje tabulku mimic-iv-bhc jako třetí zdroj", {
+  catalog <- mimic_catalog()
+  row <- catalog[catalog$tabulka == "mimic-iv-bhc", ]
+
+  expect_equal(nrow(catalog), 13L)
+  expect_equal(row$zdroj, MIMIC_BHC)
+  expect_equal(length(unique(catalog$zdroj)), 3L)
+})
+
 test_that("manifest_text převede velikost na MB a spočte sloupce", {
   shapes <- list(a = list(columns = list("x", "y"), records = 5))
   sizes <- list(a = 2600000)

@@ -1,7 +1,7 @@
 ---
 title: "Explorační analýza datové sady: hlavičky, lexikon a kostra sekcí"
 abstract: |
-  Dokument zjišťuje, které hlavičky začínají v propouštěcích zprávách vstupního korpusu oddíly, a ověřuje na nich seed lexikon sekcí šablony MIMIC. Počítá dokumentovou frekvenci všech hlaviček, pokrytí sekcí a synonym lexikonu, mrtvá synonyma a synonyma, která se ve zprávě opakují, což je signál falešné hranice sekce. Hlavičky mimo lexikon s vysokým pokrytím jmenuje jako kandidáty na doplnění, o kterých rozhodne autor. Zprávy pak rozdělí parserem sekcí a zjistí kostru šablony (pořadí sekcí, jejich pokrytí a konzistenci pořadí), počet sekcí na zprávu, délky těl sekcí ve znacích, podíl textu, který odstraní vystřižení sekce Discharge Diagnosis, a zprávy bez nadpisů. Nakonec spočítá nejčastější tokeny, bigramy a trigramy těl sekcí v celém korpusu i po sekcích kostry, aby ukázal fráze šablony, které mají skoro všechny zprávy.
+  Dokument zjišťuje, které hlavičky začínají v propouštěcích zprávách vstupního korpusu oddíly, a ověřuje na nich seed lexikon sekcí šablony MIMIC. Počítá dokumentovou frekvenci všech hlaviček, pokrytí sekcí a synonym lexikonu, mrtvá synonyma a synonyma, která se ve zprávě opakují, což je signál falešné hranice sekce. Hlavičky mimo lexikon s vysokým pokrytím jmenuje jako kandidáty na doplnění, o kterých rozhodne autor. Zprávy pak rozdělí parserem sekcí a zjistí kostru šablony (pořadí sekcí, jejich pokrytí a konzistenci pořadí), počet sekcí na zprávu, délky těl sekcí ve znacích, podíl textu, který odstraní vystřižení sekce Discharge Diagnosis, a zprávy bez nadpisů. Nakonec spočítá nejčastější tokeny, bigramy a trigramy těl sekcí v celém korpusu i po sekcích kostry, aby ukázal fráze šablony, které mají skoro všechny zprávy. Správnost hranic parseru ověří na sekci Brief Hospital Course proti referenčnímu datasetu MIMIC-IV-Ext-BHC (podíl shody a rozpad neshod) a změří, v kolika zprávách zůstane po stripu hlavička diagnostické sekce.
 ---
 
 ```{r}
@@ -16,6 +16,7 @@ source("R/selection.R")
 source("R/sections.R")
 source("R/segments.R")
 source("R/ngrams.R")
+source("R/bhc.R")
 source("R/export.R")
 eda_check_python()
 con <- eda_connect()
@@ -46,6 +47,9 @@ body_len <- body_lengths(con, skeleton, sections_py$OTHER)
 strip_d2 <- strip_share(con, lexicon)
 headerless <- headerless_notes(con, sections_py$OTHER)
 headerless_hist <- headerless_histogram(con, sections_py$OTHER)
+residue <- strip_residue(con, lexicon)
+bhc <- bhc_agreement(con)
+bhc_cut <- bhc_cut_sections(con, lexicon)
 skeleton_floor <- coverage_threshold_text(SKELETON_COVERAGE)
 stopwords <- stop_words()
 ngrams_total <- ngram_counts(con, stopwords)
@@ -66,11 +70,13 @@ Tento sešit je devátým z řady sešitů explorační analýzy a otevírá fá
 - změřit počet sekcí na zprávu a délky těl sekcí ve znacích,
 - zjistit, kolik zpráv má sekci Discharge Diagnosis a jaký podíl textu odstraní její vystřižení (ablace D2),
 - popsat zprávy bez jediného nadpisu,
+- změřit, v kolika zprávách zůstane po stripu D2 hlavička diagnostické sekce i s diagnózou pod ní,
+- ověřit hranice sekce Brief Hospital Course proti referenčnímu datasetu MIMIC-IV-Ext-BHC,
 - spočítat nejčastější tokeny a n-gramy těl sekcí (celkem i po sekcích kostry) a najít fráze šablony, které nic nerozlišují.
 
-Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty. Řetězec hlavičky je popisek z dat, a zveřejní se proto jen hlavička, kterou má aspoň `r coverage_floor` zpráv a nejméně `r count_floor`; podrobná pravidla jsou v kapitole @sec-data.
+Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023], MIMIC-IV-Note [@mimicivnote] a MIMIC-IV-Ext-BHC [@aali2025bhc; @aali2024], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty. Řetězec hlavičky je popisek z dat, a zveřejní se proto jen hlavička, kterou má aspoň `r coverage_floor` zpráv a nejméně `r count_floor`; podrobná pravidla jsou v kapitole @sec-data.
 
-Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky hlaviček a lexikonu a kapitola @sec-segmentace výsledky rozdělení zpráv na sekce a frekvenci tokenů a n-gramů. Kapitola @sec-shrnuti shrnuje rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
+Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky hlaviček a lexikonu, kapitola @sec-segmentace výsledky rozdělení zpráv na sekce a frekvenci tokenů a n-gramů a kapitola @sec-bhc validaci parseru proti MIMIC-IV-Ext-BHC. Kapitola @sec-shrnuti shrnuje rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
 
 # Data a metody {#sec-data}
 
@@ -89,6 +95,8 @@ Pojmy a jednotky jsou tyto:
 - *kostra šablony* jsou sekce lexikonu, které má aspoň `r skeleton_floor` zpráv, seřazené podle mediánu pozice (při shodě podle pokrytí sestupně a pak podle pořadí v lexikonu). *Konzistence pořadí* je podíl zpráv s aspoň dvěma sekcemi kostry, v nichž sekce jdou v pořadí kostry. *Matice precedence* uvádí pro dvojici sekcí kostry podíl zpráv, kde řádek předchází sloupec, mezi zprávami, které mají obě sekce,
 - *strip D2* je vystřižení diagnostických sekcí ze zprávy. Odstraní sekce, které lexikon označuje příznakem `diagnostic` (dnes `discharge_diagnosis`). Podíl odstraněného textu je součet `span_chars` těchto sekcí lomený součtem délek zpráv. Příznak čte sešit z téhož lexikonu jako funkce stripu `strip_diagnostic_sections` (`domain/section_headers.py`) a sekce dělí týmž parserem, takže podíl odpovídá tomu, co strip odstraní,
 - *zprávy bez nadpisů* jsou zprávy, jejichž jedinou částí je `other`. Délka zprávy je součet `span_chars`,
+- *zbytek po stripu*: strip vystřihne jen první výskyt diagnostické sekce, takže opakovaná hlavička `Discharge Diagnosis:` v těle jiné sekce zůstane i s diagnózou pod ní. Zbytek je zpráva s diagnostickou sekcí, v jejíž ponechané části (hlavička a tělo jiné sekce, vyříznuté od začátku části) stojí řádek hlavičky, jehož normalizovaný tvar je synonymem diagnostické sekce. Jmenovatelem jsou zprávy s diagnostickou sekcí. Sloupec „opakování“ v tabulce sekcí číslo přeceňuje, protože počítá i druhý výskyt uvnitř těla samotné diagnostické sekce, který strip odstraní spolu s ní,
+- *validace proti BHC*: MIMIC-IV-Ext-BHC [@aali2025bhc; @aali2024] obsahuje pro zprávy MIMIC-IV-Note sekci Brief Hospital Course vytaženou regulárním výrazem autorů datasetu (`target`). Dataset vyřadil zprávy bez sekce Sex a s BHC kratší než 100 znaků; výraz sám zveřejněný není, a porovnává se proto s jeho výstupem. Populací je průnik vstupního korpusu a BHC přes `note_id`; zprávy jen v BHC a jen v korpusu se uvádějí zvlášť a nejsou chybou parseru. Porovnává se úsek hlavička + tělo sekce `hospital_course` (začátek úseku je `body_end - span_chars`) s `target` po čištění ze skriptu `clin-bhc-summ` (`bhc_clean_sql`): sloučit mezery, odstranit čtyři zápisy hlavičky, zalomení na mezeru, sloučit bílé znaky (výčet Unicode bílých znaků, protože `\s` v RE2 je jen ASCII). Čistí se jen náš úsek, protože `target` už čištěním prošel; druhé čištění by slité řádky odstranilo. Obě strany se oříznou o okrajové mezery, což je odchylka od jejich skriptu, kompenzující mezeru po hlavičce a neznámý konec jejich výrazu. Že `target` čištěním prošel, kapitola ověřuje jen zčásti: mezi spárovanými zprávami počítá targety, které mají dvě mezery za sebou nebo jiný bílý znak než mezeru, tedy ty, které nemohly projít kroky sloučení mezer, zalomení a sloučení bílých znaků. Odstranění hlaviček takhle přesně ověřit nejde. Kategorie jsou disjunktní v pořadí kontrol: sekce nenalezena, shoda, náš konec dřív (náš úsek je vlastní prefix), náš konec později (prefix je `target`), náš začátek dřív (`target` leží uvnitř našeho úseku), náš začátek později (náš úsek leží uvnitř `target`) a jiná neshoda. Kategorie „náš začátek dřív“ zachytí falešný první výskyt hlavičky jen tehdy, když mezi ním a skutečnou hlavičkou nestojí jiná hlavička lexikonu; jinak úsek skončí před skutečným BHC a zpráva padne do jiné neshody, takže kategorie je dolní odhad četnosti falešného prvního výskytu. Medián rozdílu délky (znaky po čištění) se uvádí u kategorií, kde má smysl,
 - *tokeny a n-gramy*: text těla vyřízne DuckDB z `discharge` podle offsetů z parseru, takže pravidlo hranice sekce zůstává jen v parseru a n-gramy se přiřadí téže sekci, s jakou počítá strip D2. *Token* je maximální úsek písmen a–z délky aspoň 2 po převodu na malá písmena (konstanta `TOKEN_SQL`): maska `___`, čísla, časy, dávkování a jednopísmenné úseky vypadnou, „x-ray“ dá „ray“. Hlavičky sekcí se nepočítají a n-gram nepřechází přes hranici části zprávy. Text `other`, včetně administrativních polí, se počítá do celku. Stop slova jsou přesně `ENGLISH_STOP_WORDS` ze scikit-learn, tedy totéž, co použije TF-IDF se `stop_words="english"`; vypadnou i negace „no“, „not“ a „nor“. Odfiltrují se před skládáním n-gramů, stejně jako v `TfidfVectorizer`, takže „shortness of breath“ dá bigram „shortness breath“. N-gramy mají délku 1 až 3. Žebříček řadí podle *dokumentové frekvence* n-gramu (počet zpráv, v nichž se vyskytuje aspoň jednou), pak podle počtu výskytů a řetězce. U celku se n-gram ve dvou sekcích téže zprávy počítá jednou. Tabulka celku uvádí `r NGRAM_RANKING` nejčastějších n-gramů pro každou délku, tabulka po sekcích `r SECTION_NGRAMS` nejčastějších pro každou sekci kostry a délku. *Fráze šablony* je n-gram, který má aspoň `r coverage_threshold_text(BOILERPLATE_COVERAGE)` zpráv,
 - *potlačení u n-gramů*: n-gram je popisek z dat. Zveřejní se jen n-gram, který má aspoň `r coverage_floor` zpráv (u sekce zpráv s touto sekcí) a nejméně `r count_floor`; brána je na dokumentové frekvenci, ne na výskytech, aby se nezveřejnila vzácná fráze nebo jméno opakované v jedné zprávě. Brána je v dotazu, takže mezivýsledek pod ní do R nepřijde,
 - *potlačení u segmentace*: všechny výstupy jsou metriky textu a korpusu (počty zpráv, délky, pozice) s popisky z konfigurace, takže se nic nepotlačuje; řetězce z textu se v kapitole neukazují.
@@ -302,6 +310,55 @@ export_table(
 export_figure(ngram_plot(ranked_total), height_cm = 20)
 ```
 
+# Validace parseru proti MIMIC-IV-Ext-BHC {#sec-bhc}
+
+`r bhc_text(bhc)`
+
+@tbl-bhc a @fig-bhc uvádějí rozpad zpráv podle shody úseku `hospital_course` s targetem BHC.
+
+```{r}
+#| label: tbl-bhc
+#| tbl-cap: "Shoda úseku `hospital_course` s targetem MIMIC-IV-Ext-BHC: zprávy, podíl spárovaných zpráv a medián rozdílu délky ve znacích."
+#| tbl-colwidths: [40, 20, 18, 22]
+export_table(
+  bhc_table(bhc),
+  col.names = BHC_LAYOUTS[["tbl-bhc"]]$col.names,
+  align = BHC_LAYOUTS[["tbl-bhc"]]$align,
+  widths = BHC_LAYOUTS[["tbl-bhc"]]$widths
+)
+```
+
+*Zdroj:* text z `discharge` rozdělený parserem sekcí; `target` z MIMIC-IV-Ext-BHC.
+
+```{r}
+#| label: fig-bhc
+#| fig-cap: "Shoda úseku `hospital_course` s targetem MIMIC-IV-Ext-BHC: podíl spárovaných zpráv."
+#| fig-width: 6.5
+#| fig-height: 3.5
+export_figure(bhc_plot(bhc), height_cm = 8)
+```
+
+`r bhc_cut_text(bhc_cut)` @tbl-bhc-konec uvádí pro zprávy v kategorii „náš konec dřív“ část zprávy, která následuje hned za sekcí `hospital_course`, tedy čí hlavička náš úsek uřízla.
+
+```{r}
+#| label: tbl-bhc-konec
+#| tbl-cap: "Zprávy v kategorii „náš konec dřív“ podle části, která následuje za sekcí `hospital_course`: zprávy a podíl z kategorie."
+#| tbl-colwidths: [28, 40, 16, 16]
+export_table(
+  bhc_cut_table(bhc_cut),
+  col.names = BHC_LAYOUTS[["tbl-bhc-konec"]]$col.names,
+  align = BHC_LAYOUTS[["tbl-bhc-konec"]]$align,
+  widths = BHC_LAYOUTS[["tbl-bhc-konec"]]$widths,
+  code = "sekce"
+)
+```
+
+*Zdroj:* text z `discharge` rozdělený parserem sekcí; sekce a popisky z `config/section_headers.json`, administrativní pole je část `other` za sekcí.
+
+## Zbytek po stripu {#sec-zbytek-stripu}
+
+`r strip_residue_text(residue)`
+
 # Shrnutí a rozhodnutí {#sec-shrnuti}
 
 Dokument ověřil seed lexikon sekcí na vstupním korpusu. Pro další práci z toho plyne:
@@ -312,13 +369,14 @@ Dokument ověřil seed lexikon sekcí na vstupním korpusu. Pro další práci z
 - **Opakování.** `r repeated_synonyms_text(synonyms, totals)`
 - **Pro parser.** Parser sekcí čte lexikon z `config/section_headers.json` a používá pravidlo hlavičky a normalizace z kapitoly @sec-data; rozdělení zpráv je v kapitole @sec-segmentace.
 - **Kostra.** `r skeleton_text(skeleton, consistency)`
-- **Strip D2.** `r strip_share_text(strip_d2)`
+- **Strip D2.** `r strip_share_text(strip_d2)` `r strip_residue_text(residue)` Strip proto zůstává u prvního výskytu diagnostické sekce: zbytek po něm je okrajový a jeho rozšíření na všechny výskyty by strip rozešlo se segmentací, kterou sešit měří. Zbytek uvádějí Omezení.
 - **Délky.** `r body_length_text(body_len, sections_py$OTHER)`
 - **Zprávy bez nadpisů.** `r headerless_text(headerless)`
+- **Validace parseru.** `r bhc_text(bhc)` Pravidlo prvního výskytu se nemění: falešný první výskyt hlavičky se projeví jen v kategoriích „náš začátek dřív“ a „jiná neshoda“, a ty mají dohromady jen jednotky zpráv. `r bhc_cut_text(bhc_cut)` Hlavní experiment běží nad celou zprávou a strip uřízne konec BHC jen výjimečně, takže posunutá hranice na ně nemá vliv a uvádějí ji Omezení. Týká se hranic sekcí: úsek Brief Hospital Course je u zpráv v kategorii „náš konec dřív“ kratší a skutečná sekce, jejíž hlavička se objevila už uvnitř něj, se kvůli pravidlu prvního výskytu stane tělem předchozí sekce. Na tom záleží n-gramům po sekcích a variantě vstupu jen z Brief Hospital Course, proto příčinu ověří a parser případně upraví samostatný úkol.
 - **Tokeny a n-gramy.** `r ngram_text(ngrams_total)` Pro S40 (baseline TF-IDF + LR) z toho plyne argument pro `ngram_range` a `max_df`: n-gramy, které má většina zpráv, nic nerozlišují. Tokenizace sešitu se liší od výchozí v TF-IDF: ponechává jen písmena a–z, takže čísla a masku `___` vynechává. Počty frází šablony jsou podklad pro deduplikaci boilerplate (D26).
 
 # Omezení {#sec-omezeni}
 
-Řádkově ukotvený výraz nevidí pole, které stojí na řádku za jiným polem, hlavičky bez dvojtečky ani hlavičky rozdělené na víc řádků. Pokrytí administrativních polí se proto neměří. Opakování je jen nepřímý signál falešné hranice: synonymum se může opakovat i ve zprávě, kde je každý výskyt skutečnou hlavičkou. Hranice `r candidate_floor` pro kandidáty je popisná a nerozliší sekci šablony od pole, které má ve většině zpráv podsekce. Žebříček neukazuje hlavičky pod `r coverage_floor` zpráv, takže vzácnou sekci šablony nemusí zveřejnit. Pozice počítá jen sekce lexikonu, takže pole a podnadpisy mimo lexikon pořadí nezkreslují, ale ani nepopisují. Pozice je pořadí mezi sekcemi, které zpráva má: chybí-li dřívější sekce, pozice všech pozdějších klesne o jedna, a IQR pozice proto měří i chybějící sekce, ne jen přeházené pořadí. Frekvenční analýza nelemmatizuje, takže „fever“ a „fevers“ jsou dva tokeny, a ztrácí negace, protože „no“ a „not“ jsou stop slova: „no fever“ se spočítá jako „fever“. Výchozí tokenizace TF-IDF v S40 masku `___` a čísla jako tokeny ponechá, počty z tohoto sešitu tedy nejsou přímo počty příznaků baseline. Slova z administrativních polí leží v části `other` a počítají se jen do celku, ne do sekcí. Bigram může spojit slova, mezi nimiž stálo stop slovo. N-gramy pod branou (`r coverage_floor` zpráv a nejméně `r count_floor`) se nezobrazí, takže vzácná, ale rozlišující fráze v žebříčku chybí. Strip odhaduje jednu sekci a nehlídá, že se její synonymum neobjeví jako hlavička uvnitř těla jiné sekce; parser bere první výskyt.
+Řádkově ukotvený výraz nevidí pole, které stojí na řádku za jiným polem, hlavičky bez dvojtečky ani hlavičky rozdělené na víc řádků. Pokrytí administrativních polí se proto neměří. Opakování je jen nepřímý signál falešné hranice: synonymum se může opakovat i ve zprávě, kde je každý výskyt skutečnou hlavičkou. Hranice `r candidate_floor` pro kandidáty je popisná a nerozliší sekci šablony od pole, které má ve většině zpráv podsekce. Žebříček neukazuje hlavičky pod `r coverage_floor` zpráv, takže vzácnou sekci šablony nemusí zveřejnit. Pozice počítá jen sekce lexikonu, takže pole a podnadpisy mimo lexikon pořadí nezkreslují, ale ani nepopisují. Pozice je pořadí mezi sekcemi, které zpráva má: chybí-li dřívější sekce, pozice všech pozdějších klesne o jedna, a IQR pozice proto měří i chybějící sekce, ne jen přeházené pořadí. Frekvenční analýza nelemmatizuje, takže „fever“ a „fevers“ jsou dva tokeny, a ztrácí negace, protože „no“ a „not“ jsou stop slova: „no fever“ se spočítá jako „fever“. Výchozí tokenizace TF-IDF v S40 masku `___` a čísla jako tokeny ponechá, počty z tohoto sešitu tedy nejsou přímo počty příznaků baseline. Slova z administrativních polí leží v části `other` a počítají se jen do celku, ne do sekcí. Bigram může spojit slova, mezi nimiž stálo stop slovo. N-gramy pod branou (`r coverage_floor` zpráv a nejméně `r count_floor`) se nezobrazí, takže vzácná, ale rozlišující fráze v žebříčku chybí. Strip vystřihne první výskyt diagnostické sekce a hlavičku uvnitř těla jiné sekce nehlídá; kolik zpráv tím zůstane se zbytkem diagnózy, měří kapitola @sec-zbytek-stripu, parser bere první výskyt. Validace proti BHC porovnává jen sekci Brief Hospital Course a jen na průniku korpusu a BHC; BHC vyřadil zprávy bez sekce Sex a s krátkým BHC, takže průnik nemusí být reprezentativní. Reference je výstup regulárního výrazu autorů, ne ruční anotace, a shoda s ním neznamená shodu s pravdou. Kategorie „náš začátek dřív“ je dolní odhad falešného prvního výskytu hlavičky. U zpráv v kategorii „náš konec dřív“ ukončí parser sekci Brief Hospital Course na hlavičce jiné sekce lexikonu, nejčastěji Discharge Medications, kterou BHC do Brief Hospital Course počítá; tyto zprávy mají posunuté hranice dvou sekcí. Rozklad uvádí jen část, která následuje bezprostředně za sekcí, a příčinu (podnadpis uvnitř těla, jiný zápis velikosti písmen) neověřuje.
 
 {{< include _partials/appendix.qmd >}}

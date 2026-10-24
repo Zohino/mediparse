@@ -1,7 +1,7 @@
 ---
 title: "Explorační analýza datové sady: přehled korpusu MIMIC-IV"
 abstract: |
-  Dokument zahajuje explorační analýzu datové sady, na které práce staví. Popisuje zdroje dat (MIMIC-IV a MIMIC-IV-Note), cestu dat od stažení po dotazování a ochranu dat podle licence. Přehled korpusu uvádí pro každou tabulku počet záznamů, počet sloupců a velikost souboru a porovnává počty záznamů v databázi s manifestem validace. Dokument tak vymezuje východiska, na kterých staví další části analýzy.
+  Dokument zahajuje explorační analýzu datové sady, na které práce staví. Popisuje zdroje dat (MIMIC-IV, MIMIC-IV-Note a MIMIC-IV-Ext-BHC), cestu dat od stažení po dotazování a ochranu dat podle licence. Přehled korpusu uvádí pro každou tabulku počet záznamů, počet sloupců a velikost souboru a porovnává počty záznamů v databázi s manifestem validace. Dokument tak vymezuje východiska, na kterých staví další části analýzy.
 ---
 
 ```{r}
@@ -57,13 +57,13 @@ Tento sešit je prvním z řady sešitů explorační analýzy. Jeho úlohou je 
 
 Práce vychází z návrhu, podle kterého jsou primárním korpusem propouštěcí zprávy (tabulka `discharge`), radiologické zprávy jsou doplňkové a štítky klasifikace se odvozují z diagnóz ICD (tabulka `diagnoses_icd`). Dokument tato východiska nepotvrzuje ani nevyvrací; ověřuje jen, že potřebné tabulky existují a zda jsou úplné.
 
-Data pocházejí ze dvou projektů PhysioNetu [@goldberger2000]. Strukturovaná data hospitalizací poskytuje MIMIC-IV [@mimiciv; @johnson2023], volné texty zpráv MIMIC-IV-Note [@mimicivnote]. Oba projekty podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregované výsledky, nikdy řádková data ani texty zpráv.
+Data pocházejí ze tří projektů PhysioNetu [@goldberger2000]. Strukturovaná data hospitalizací poskytuje MIMIC-IV [@mimiciv; @johnson2023], volné texty zpráv MIMIC-IV-Note [@mimicivnote] a referenční sekci Brief Hospital Course MIMIC-IV-Ext-BHC [@aali2025bhc; @aali2024]. Všechny projekty podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregované výsledky, nikdy řádková data ani texty zpráv.
 
 Dokument je členěn takto. Kapitola @sec-data popisuje zdroje dat a metody. Kapitola @sec-prehled uvádí přehled korpusu. Kapitola @sec-shrnuti shrnuje výsledky a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
 
 # Data a metody {#sec-data}
 
-Práce používá dva projekty PhysioNetu. MIMIC-IV, verze 3.1 [@mimiciv], obsahuje strukturovaná data hospitalizací; dokument z něj čte moduly `hosp` (pacienti, přijetí, diagnózy, výkony, léky). MIMIC-IV-Note, verze 2.2 [@mimicivnote], obsahuje deidentifikované volné texty a dokument z něj čte propouštěcí a radiologické zprávy. Popis MIMIC-IV a jeho vzniku uvádí @johnson2023.
+Práce používá tři projekty PhysioNetu. MIMIC-IV, verze 3.1 [@mimiciv], obsahuje strukturovaná data hospitalizací; dokument z něj čte moduly `hosp` (pacienti, přijetí, diagnózy, výkony, léky). MIMIC-IV-Note, verze 2.2 [@mimicivnote], obsahuje deidentifikované volné texty a dokument z něj čte propouštěcí a radiologické zprávy. MIMIC-IV-Ext-BHC, verze 1.2.0 [@aali2025bhc; @aali2024], obsahuje pro zprávy MIMIC-IV-Note sekci Brief Hospital Course vytaženou regulárním výrazem autorů datasetu; práce ji používá jen jako referenci pro validaci parseru sekcí. Popis MIMIC-IV a jeho vzniku uvádí @johnson2023.
 
 Data podléhají DUA. Dokument dodržuje tato pravidla:
 
@@ -72,13 +72,13 @@ Data podléhají DUA. Dokument dodržuje tato pravidla:
 - metriky korpusu a textu, například počty záznamů tabulek, nepopisují skupiny pacientů, a proto se uvádějí přesně,
 - skutečná data zpracovává jen autor mimo automatizované nástroje; automatizovaná kontrola běží nad syntetickými tabulkami stejného tvaru a ověřuje, že jejich obsah neunikl do výstupu.
 
-Data procházejí těmito kroky: stažení souborů `csv.gz` z PhysioNetu, ověření jejich otisků SHA-256 proti oficiálním hodnotám, validace (počet záznamů a sloupců), převod na parquet a dotazování přes DuckDB. Převod do parquetu zachovává všechny sloupce jako text a počet záznamů ověřuje proti validaci. Dotazy nad parquetem provádí DuckDB s omezenou pamětí a s dočasnými soubory mimo verzovaný obsah repozitáře.
+Data procházejí těmito kroky: stažení souborů `csv.gz` (MIMIC-IV-Ext-BHC je prosté `csv`) z PhysioNetu, ověření jejich otisků SHA-256 proti oficiálním hodnotám, validace (počet záznamů a sloupců), převod na parquet a dotazování přes DuckDB. Převod do parquetu zachovává všechny sloupce jako text a počet záznamů ověřuje proti validaci. Dotazy nad parquetem provádí DuckDB s omezenou pamětí a s dočasnými soubory mimo verzovaný obsah repozitáře.
 
 Reprodukovatelnost zajišťují dva mechanismy. Výsledky výpočtů se ukládají do zmražené podoby (`freeze`), takže dokument lze znovu vyrenderovat bez přístupu k datům. Příloha A uvádí provenance renderu: revizi kódu, otisk zámku prostředí, zdroj dat a verze použitých nástrojů.
 
 # Přehled korpusu {#sec-prehled}
 
-Databáze obsahuje `r nrow(counts)` tabulek. @tbl-korpus uvádí pro každou z nich projekt a modul, popis obsahu a plánované využití v práci, počet záznamů v databázi, počet sloupců a velikost komprimovaného souboru podle manifestu validace. Využití tabulek v práci vychází z návrhu práce.
+Databáze obsahuje `r nrow(counts)` tabulek. @tbl-korpus uvádí pro každou z nich projekt a modul, popis obsahu a plánované využití v práci, počet záznamů v databázi, počet sloupců a velikost staženého souboru podle manifestu validace (u `csv.gz` komprimovaného, u BHC nekomprimovaného). Využití tabulek v práci vychází z návrhu práce.
 
 ```{r}
 #| label: tbl-korpus
@@ -92,7 +92,7 @@ export_table(
 )
 ```
 
-*Zdroj:* počty záznamů dotazem v DuckDB, počty sloupců a velikosti souborů z manifestu validace, popisy podle veřejné dokumentace MIMIC-IV a MIMIC-IV-Note.
+*Zdroj:* počty záznamů dotazem v DuckDB, počty sloupců a velikosti souborů z manifestu validace, popisy podle veřejné dokumentace MIMIC-IV, MIMIC-IV-Note a MIMIC-IV-Ext-BHC.
 
 Podle návrhu práce je primárním korpusem tabulka `discharge`; obsahuje `r format_number(n_discharge)` záznamů. Radiologických zpráv je v tabulce `radiology` `r format_number(n_radiology)`. `r if (sum(counts$n == max(counts$n)) == 1) paste0("Nejvíce záznamů má tabulka ", largest, ".")` Počty záznamů v databázi se `r if (agrees) "shodují" else "neshodují"` s počty v manifestu validace.
 
@@ -102,6 +102,6 @@ Dokument popsal zdroje dat, cestu dat k dotazování a přehled `r nrow(counts)`
 
 # Omezení {#sec-omezeni}
 
-Přehled uvádí jen počty záznamů, sloupců a velikosti souborů. O obsahu zpráv, pacientech ani rozdělení dat netvrdí nic; to je předmětem dalších částí analýzy. Počty se vztahují k verzím 3.1 (MIMIC-IV) a 2.2 (MIMIC-IV-Note). Automatizovaná kontrola neprohledává text uvnitř obrázků, proto grafy vyžadují zvláštní zacházení.
+Přehled uvádí jen počty záznamů, sloupců a velikosti souborů. O obsahu zpráv, pacientech ani rozdělení dat netvrdí nic; to je předmětem dalších částí analýzy. Počty se vztahují k verzím 3.1 (MIMIC-IV), 2.2 (MIMIC-IV-Note) a 1.2.0 (MIMIC-IV-Ext-BHC). Automatizovaná kontrola neprohledává text uvnitř obrázků, proto grafy vyžadují zvláštní zacházení.
 
 {{< include _partials/appendix.qmd >}}

@@ -1,16 +1,17 @@
 MIMIC_IV <- "MIMIC-IV (hosp)"
 MIMIC_NOTE <- "MIMIC-IV-Note (note)"
+MIMIC_BHC <- "MIMIC-IV-Ext-BHC"
 
 mimic_catalog <- function() {
   data.frame(
     tabulka = c(
       "discharge", "radiology", "diagnoses_icd", "d_icd_diagnoses",
       "procedures_icd", "d_icd_procedures", "patients", "admissions",
-      "services", "prescriptions", "pharmacy", "omr"
+      "services", "prescriptions", "pharmacy", "omr", "mimic-iv-bhc"
     ),
     zdroj = c(
       MIMIC_NOTE, MIMIC_NOTE, MIMIC_IV, MIMIC_IV, MIMIC_IV, MIMIC_IV,
-      MIMIC_IV, MIMIC_IV, MIMIC_IV, MIMIC_IV, MIMIC_IV, MIMIC_IV
+      MIMIC_IV, MIMIC_IV, MIMIC_IV, MIMIC_IV, MIMIC_IV, MIMIC_IV, MIMIC_BHC
     ),
     popis = c(
       "Propouštěcí zprávy; primární korpus práce.",
@@ -24,7 +25,8 @@ mimic_catalog <- function() {
       "Služby, na kterých pacient během hospitalizace ležel; kontext zprávy.",
       "Předpisy léků; kontext zprávy.",
       "Lékárenské záznamy o lécích; kontext zprávy.",
-      "Ambulantní měření (například výška, hmotnost, tlak); kontext zprávy."
+      "Ambulantní měření (například výška, hmotnost, tlak); kontext zprávy.",
+      "Brief Hospital Course vytažený regexem autorů datasetu; reference validace parseru sekcí."
     ),
     stringsAsFactors = FALSE
   )
