@@ -45,12 +45,13 @@ syntetickými `.csv.gz`.
 
 ## Tabulky
 
-Stav podle manifestu. Velikost je velikost staženého souboru, u `.csv.gz` komprimovaná.
+Stav podle manifestu. Velikost je velikost staženého souboru, u `.csv.gz` komprimovaná, u BHC nekomprimovaná.
 
 | Tabulka | Projekt a modul | Záznamů | MB | Sloupců |
 |---|---|---:|---:|---:|
 | `discharge` | MIMIC-IV-Note 2.2 `note` | 331 793 | 1 139,2 | 8 |
 | `radiology` | MIMIC-IV-Note 2.2 `note` | 2 321 355 | 781,8 | 8 |
+| `mimic-iv-bhc` | MIMIC-IV-Ext-BHC 1.2.0 | 270 033 | 2 726,5 | 5 |
 | `admissions` | MIMIC-IV 3.1 `hosp` | 546 028 | 19,9 | 16 |
 | `d_icd_diagnoses` | MIMIC-IV 3.1 `hosp` | 112 107 | 0,9 | 3 |
 | `d_icd_procedures` | MIMIC-IV 3.1 `hosp` | 86 423 | 0,6 | 3 |
@@ -62,12 +63,12 @@ Stav podle manifestu. Velikost je velikost staženého souboru, u `.csv.gz` komp
 | `procedures_icd` | MIMIC-IV 3.1 `hosp` | 859 655 | 7,8 | 6 |
 | `services` | MIMIC-IV 3.1 `hosp` | 593 071 | 8,6 | 5 |
 
-Celkem je to 3,17 GB komprimovaně. Jména sloupců jsou v manifestu.
+Celkem je to 5,90 GB staženo, z toho 3,17 GB komprimovaných tabulek MIMIC-IV a MIMIC-IV-Note. Jména sloupců jsou v manifestu.
 
 ## Co z toho plyne
 
-- **Zprávy jsou drtivá většina objemu.** `discharge` a `radiology` tvoří 60 %
-  komprimovaných dat. Převod na parquet (S19) se proto vyplatí hlavně u nich.
+- **Zprávy jsou drtivá většina objemu tabulek MIMIC-IV a MIMIC-IV-Note.** `discharge` a `radiology` tvoří 60 %
+  komprimovaných tabulek MIMIC-IV a MIMIC-IV-Note. Převod na parquet (S19) se proto vyplatí hlavně u nich.
 - **Propouštěcí zpráva patří k hospitalizaci.** `discharge` má 331 793 záznamů
   a `admissions` 546 028. Kolik hospitalizací zprávu má, ukáže teprve spojení
   přes `hadm_id`, ne počty souborů.
