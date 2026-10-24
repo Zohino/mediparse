@@ -13,6 +13,15 @@ part_text_sql <- function(text = "d.text", alias = "s") {
   )
 }
 
+# Hlavička části je prefix `part_text_sql` až po začátek těla; offsety jsou tatáž znalost,
+# proto se odvozují vedle sebe. U části `other` je prázdná.
+header_text_sql <- function(text = "d.text", alias = "s") {
+  sprintf(
+    "substring(%1$s, %2$s.body_end - %2$s.span_chars + 1, %2$s.body_start - (%2$s.body_end - %2$s.span_chars))",
+    text, alias
+  )
+}
+
 sections_module <- function() reticulate::import("mediparse.entrypoints.eda_sections")
 
 # Texty a identifikátory musí do Pythonu jako nepojmenovaný seznam: pojmenovaný vektor
