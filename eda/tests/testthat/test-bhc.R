@@ -255,3 +255,15 @@ test_that("bhc_text skloňuje počty: 1 zpráva, 2 zprávy, 5 zpráv", {
 test_that("bhc_text uvede targety, které nejsou pevným bodem čištění", {
   expect_match(bhc_text(fake_agreement(necisty_target = 3)), paste0("3", NBSP, "zprávy"))
 })
+
+test_that("šířky BHC_LAYOUTS odpovídají tbl-colwidths chunku sešitu", {
+  notebook <- readLines("../../9-text-structure.qmd", encoding = "UTF-8")
+  for (label in names(BHC_LAYOUTS)) {
+    start <- which(notebook == paste("#| label:", label))
+    expect_length(start, 1L)
+    line <- notebook[start + grep("^#\\| tbl-colwidths:", notebook[start + 1:3])[[1]]]
+    widths <- as.numeric(strsplit(gsub("[^0-9,]", "", line), ",")[[1]])
+
+    expect_equal(widths, BHC_LAYOUTS[[label]]$widths)
+  }
+})
