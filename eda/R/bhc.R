@@ -136,3 +136,73 @@ bhc_agreement <- function(con) {
   ", BHC_PAIRS_TABLE, SECTIONS_TABLE, DBI::dbQuoteIdentifier(con, BHC_TABLE)))
   c(lapply(counts, as.numeric), list(kategorie = kategorie))
 }
+
+# Šířky se opakují v `tbl-colwidths` chunku sešitu (Quarto je čte z hlavičky chunku), shodu hlídá test.
+BHC_LAYOUTS <- list(
+  `tbl-bhc` = list(
+    col.names = c("Kategorie", "Zprávy", "Podíl (%)", "Medián rozdílu délky"),
+    align = "lrrr", widths = c(40, 20, 18, 22)
+  )
+)
+
+# Řazení podle BHC_CATEGORIES, ne podle pořadí z databáze; tabulka a graf mají tak stejné pořadí.
+ordered_categories <- function(agreement) {
+  categories <- agreement$kategorie
+  categories[match(names(BHC_CATEGORIES), categories$kategorie), , drop = FALSE]
+}
+
+bhc_table <- function(agreement) {
+  categories <- ordered_categories(agreement)
+  data.frame(
+    kategorie = categories$popisek,
+    n = number_text(categories$n),
+    podil = percent_text(categories$n, agreement$sparovano),
+    median = number_text(categories$median_rozdilu),
+    stringsAsFactors = FALSE,
+    row.names = NULL
+  )
+}
+
+bhc_plot <- function(agreement) {
+  categories <- ordered_categories(agreement)
+  bars <- data.frame(
+    popisek = factor(categories$popisek, levels = categories$popisek),
+    podil = if (agreement$sparovano > 0) categories$n / agreement$sparovano else rep(0, nrow(categories))
+  )
+  ggplot2::ggplot(bars, ggplot2::aes(podil, popisek)) +
+    ggplot2::geom_col() +
+    ggplot2::scale_y_discrete(limits = rev) +
+    ggplot2::scale_x_continuous(labels = percent_axis) +
+    ggplot2::labs(x = "Podíl spárovaných zpráv", y = NULL) +
+    theme_thesis()
+}
+
+bhc_mismatch_phrase <- function(categories) {
+  mismatches <- categories[categories$kategorie != "shoda", , drop = FALSE]
+  paste(
+    sprintf("%s: %s", mismatches$popisek, count_phrase(mismatches$n, NOTE_FORMS)),
+    collapse = "; "
+  )
+}
+
+bhc_text <- function(agreement) {
+  outside <- sprintf(
+    "Mimo průnik je %s v BHC, ne v korpusu, a %s v korpusu, ne v BHC; nejsou to chyby parseru, protože BHC vyřadil zprávy bez sekce Sex a s BHC kratší než 100 znaků a korpus filtruje podle ICD, délky a duplicit.",
+    count_phrase(agreement$jen_bhc, NOTE_FORMS), count_phrase(agreement$jen_korpus, NOTE_FORMS)
+  )
+  if (agreement$sparovano == 0) {
+    return(paste(
+      "Shoda s MIMIC-IV-Ext-BHC nelze posoudit, protože žádná zpráva korpusu nemá pár v MIMIC-IV-Ext-BHC.",
+      outside
+    ))
+  }
+  categories <- ordered_categories(agreement)
+  matched <- categories$n[categories$kategorie == "shoda"]
+  sprintf(
+    "Spárováno je %s. Úsek `%s` se shoduje s targetem BHC u %s (%s) spárovaných zpráv. Neshody: %s. %s Targety, které nejsou pevným bodem čištění: %s.",
+    count_phrase(agreement$sparovano, NOTE_FORMS), BHC_SECTION,
+    count_phrase(matched, NOTE_FORMS), percent_label(matched, agreement$sparovano),
+    bhc_mismatch_phrase(categories), outside,
+    count_phrase(agreement$necisty_target, NOTE_FORMS)
+  )
+}

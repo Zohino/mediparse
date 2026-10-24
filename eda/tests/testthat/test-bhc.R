@@ -173,3 +173,85 @@ test_that("bhc_agreement bez tabulky mimic-iv-bhc radí spustit snakemake parque
 
   expect_error(bhc_agreement(con), "parquet_mimic", fixed = TRUE)
 })
+
+fake_agreement <- function(
+    n = c(1, 40, 2, 5, 3, 4, 45), median = c(NA, NA, 7, 12, 30, 9, NA),
+    jen_bhc = 11, jen_korpus = 6, necisty_target = 0) {
+  list(
+    sparovano = sum(n), jen_bhc = jen_bhc, jen_korpus = jen_korpus, necisty_target = necisty_target,
+    kategorie = data.frame(
+      kategorie = names(BHC_CATEGORIES), popisek = unname(BHC_CATEGORIES),
+      n = n, median_rozdilu = median, stringsAsFactors = FALSE
+    )
+  )
+}
+
+test_that("bhc_table: řádky v pořadí BHC_CATEGORIES bez ohledu na pořadí agregátu", {
+  agreement <- fake_agreement()
+  shuffled <- agreement
+  shuffled$kategorie <- agreement$kategorie[c(7, 3, 1, 5, 2, 6, 4), ]
+  table <- bhc_table(shuffled)
+
+  expect_length(table, length(BHC_LAYOUTS[["tbl-bhc"]]$col.names))
+  expect_equal(table[[1]], unname(BHC_CATEGORIES))
+  expect_equal(table[[2]], number_text(c(1, 40, 2, 5, 3, 4, 45)))
+  expect_equal(table[[3]], percent_text(c(1, 40, 2, 5, 3, 4, 45), 100))
+  expect_equal(table[[4]], c("–", "–", "7", "12", "30", "9", "–"))
+})
+
+test_that("bhc_plot: úrovně v pořadí BHC_CATEGORIES a podíl ze spárovaných zpráv", {
+  agreement <- fake_agreement()
+  shuffled <- agreement
+  shuffled$kategorie <- agreement$kategorie[c(7, 3, 1, 5, 2, 6, 4), ]
+  plot <- bhc_plot(shuffled)
+
+  expect_equal(levels(plot$data$popisek), unname(BHC_CATEGORIES))
+  expect_equal(plot$data$podil[plot$data$popisek == BHC_CATEGORIES[["shoda"]]], 0.4)
+})
+
+test_that("bhc nad prázdným průnikem: tabulka, graf i export projdou, věta nelze posoudit", {
+  empty <- bhc_agreement(agreement_con(c(n1 = "Allergies:\nx\n"), c(jiny = "text")))
+  dir <- withr::local_tempdir()
+  layout <- BHC_LAYOUTS[["tbl-bhc"]]
+
+  expect_no_error(ggplot2::ggplot_build(bhc_plot(empty)))
+  expect_no_error(export_table(
+    bhc_table(empty), col.names = layout$col.names, align = layout$align,
+    widths = layout$widths, label = "tbl-bhc", dir = dir
+  ))
+  expect_true(file.exists(file.path(dir, "tbl-bhc.tex")))
+  expect_equal(bhc_table(empty)[[3]], rep("–", length(BHC_CATEGORIES)))
+  text <- bhc_text(empty)
+  expect_match(text, "nelze posoudit")
+  expect_match(text, "žádná zpráva korpusu nemá pár")
+  expect_no_match(text, "prázdný")
+})
+
+test_that("bhc_text nad neprázdným korpusem a BHC bez společného note_id uvede správný důvod", {
+  text <- bhc_text(bhc_agreement(agreement_con(c(n1 = "Brief Hospital Course:\nx\n"), c(jiny = "t"))))
+
+  expect_match(text, "nelze posoudit")
+  expect_match(text, "žádná zpráva korpusu nemá pár")
+})
+
+test_that("bhc_text jmenuje podíl shody, počet spárovaných zpráv a populace mimo průnik", {
+  text <- bhc_text(fake_agreement())
+
+  expect_match(text, paste0("100", NBSP, "zpráv"))
+  expect_match(text, paste0("40,0", NBSP, "%"))
+  expect_match(text, paste0("11", NBSP, "zpráv"))
+  expect_match(text, paste0("6", NBSP, "zpráv"))
+})
+
+test_that("bhc_text skloňuje počty: 1 zpráva, 2 zprávy, 5 zpráv", {
+  one <- bhc_text(fake_agreement(n = c(0, 1, 0, 0, 0, 0, 0), jen_bhc = 1, jen_korpus = 2))
+  expect_match(one, paste0("1", NBSP, "zpráva"))
+  expect_match(one, paste0("2", NBSP, "zprávy"))
+
+  five <- bhc_text(fake_agreement(n = c(0, 5, 0, 0, 0, 0, 0), jen_bhc = 5, jen_korpus = 1))
+  expect_match(five, paste0("5", NBSP, "zpráv"))
+})
+
+test_that("bhc_text uvede targety, které nejsou pevným bodem čištění", {
+  expect_match(bhc_text(fake_agreement(necisty_target = 3)), paste0("3", NBSP, "zprávy"))
+})
