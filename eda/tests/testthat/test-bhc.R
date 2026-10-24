@@ -50,6 +50,8 @@ test_that("bhc_clean_sql zachová NULL jako NULL", {
   expect_true(is.na(clean_in_sql(NA_character_)))
 })
 
+OTHER_KEY <- sections_module()$OTHER
+
 AGREEMENT_TEXTS <- c(
   n1 = "Brief Hospital Course:\nPt  was   ok\nand well.\n\nDischarge Medications:\nasa\n",
   n2 = "Brief Hospital Course:\nfirst part.\n\nPast Medical History:\nhx\n",
@@ -61,7 +63,17 @@ AGREEMENT_TEXTS <- c(
   n8 = "Brief Hospital Course:\nsomething\n",
   n9 = "Allergies:\nnone\n",
   n10 = "Brief Hospital Course:\nonly in corpus\n",
-  n11 = "Brief Hospital Course: old case\n\nPast Medical History:\nx\n\nBrief Hospital Course:\nnew case\n"
+  n11 = "Brief Hospital Course: old case\n\nPast Medical History:\nx\n\nBrief Hospital Course:\nnew case\n",
+  n12 = "Brief Hospital Course:\nfirst part.\n\nPast Medical History:\nhx\n",
+  n13 = "Brief Hospital Course:\nstory\n\nDischarge Medications:\nasa daily\n",
+  n14 = "Brief Hospital Course:\nstory\n\n  Discharge Medications:\nasa daily\n",
+  n15 = "Brief Hospital Course:\nstory\n\n\tDischarge Medications:\nasa daily\n",
+  n16 = "Brief Hospital Course:\nstory\nAttending: tail\n",
+  n17 = "Brief Hospital Course:\nstory\n",
+  n18 = paste0(
+    "Brief Hospital Course:\nstory\nDischarge medications:\nasa\n\n",
+    "Medications on Admission:\nx\n\nDischarge Medications:\nasa\n"
+  )
 )
 AGREEMENT_TARGETS <- c(
   n1 = "Pt was ok and well.",
@@ -74,6 +86,13 @@ AGREEMENT_TARGETS <- c(
   n8 = "totally different words",
   n9 = "whatever",
   n11 = "new case",
+  n12 = "first part. unrelated words",
+  n13 = "story Discharge Medications: asa",
+  n14 = "story Discharge Medications: asa daily",
+  n15 = "story Discharge Medications: asa daily",
+  n16 = "story Attending: tail",
+  n17 = "story and more",
+  n18 = "story Discharge medications: asa",
   mimo = "not in the corpus"
 )
 
@@ -89,28 +108,36 @@ category_row <- function(agreement, key) {
   agreement$kategorie[agreement$kategorie$kategorie == key, ]
 }
 
-test_that("bhc_agreement zařadí zprávy do všech sedmi kategorií se správným n", {
-  out <- bhc_agreement(agreement_con())
+test_that("bhc_agreement zařadí zprávy do všech osmi kategorií se správným n", {
+  out <- bhc_agreement(agreement_con(), OTHER_KEY)
 
   expect_equal(out$kategorie$kategorie, names(BHC_CATEGORIES))
   expect_equal(
     setNames(out$kategorie$n, out$kategorie$kategorie),
     c(
-      nenalezena = 1, shoda = 1, konec_driv = 1, konec_pozdeji = 3,
+      nenalezena = 1, shoda = 1, cela_sekce = 4, konec_driv = 4, konec_pozdeji = 3,
       zacatek_driv = 1, zacatek_pozdeji = 1, jina = 2
     )
   )
-  expect_equal(out$sparovano, 10)
+  expect_equal(out$sparovano, 17)
   expect_equal(out$jen_bhc, 1)
   expect_equal(out$jen_korpus, 1)
   expect_equal(out$necisty_target, 0)
 })
 
-test_that("bhc_agreement uvádí medián rozdílu délky jen u kategorií 3 až 6", {
-  out <- bhc_agreement(agreement_con())
+test_that("bhc_agreement uvádí medián rozdílu délky jen u kategorií 3 až 7", {
+  out <- bhc_agreement(agreement_con(), OTHER_KEY)
   median_of <- function(key) category_row(out, key)$median_rozdilu
 
-  expect_equal(median_of("konec_driv"), nchar(AGREEMENT_TARGETS[["n2"]]) - nchar("first part."))
+  # rozdíly 16, 27, 16, 9 (n12, n13, n16, n17): seřazeně 9, 16, 16, 27, quantile_disc(0,5) je 16
+  expect_equal(median_of("konec_driv"), 16)
+  cela <- c(
+    nchar(AGREEMENT_TARGETS[["n2"]]) - nchar("first part."),
+    nchar(AGREEMENT_TARGETS[["n14"]]) - nchar("story"),
+    nchar(AGREEMENT_TARGETS[["n15"]]) - nchar("story"),
+    nchar(AGREEMENT_TARGETS[["n18"]]) - nchar("story")
+  )
+  expect_equal(median_of("cela_sekce"), sort(cela)[2])
   expect_equal(median_of("konec_pozdeji"), 12)
   expect_equal(median_of("zacatek_pozdeji"), nchar("start middle part") - nchar("middle part"))
   expect_false(is.na(median_of("zacatek_driv")))
@@ -120,7 +147,7 @@ test_that("bhc_agreement uvádí medián rozdílu délky jen u kategorií 3 až 
 test_that("bhc_agreement: úsek čištěný jednou je shodou s už vyčištěným targetem", {
   texts <- c(n1 = "Brief Hospital Course:\nBrief Hospital\nCourse: stable\n")
   targets <- c(n1 = "Brief Hospital Course: stable")
-  out <- bhc_agreement(agreement_con(texts, targets))
+  out <- bhc_agreement(agreement_con(texts, targets), OTHER_KEY)
 
   expect_equal(category_row(out, "shoda")$n, 1)
   expect_equal(out$necisty_target, 0)
@@ -132,21 +159,21 @@ test_that("bhc_agreement počítá targety s dvojitou mezerou, zalomením nebo j
     n1 = "alpha beta", n2 = "alpha\nbeta", n3 = "alpha  beta", n4 = "alpha\u00a0beta",
     n5 = " alpha beta "
   )
-  out <- bhc_agreement(agreement_con(setNames(texts, names(targets)), targets))
+  out <- bhc_agreement(agreement_con(setNames(texts, names(targets)), targets), OTHER_KEY)
 
   expect_equal(out$necisty_target, 3)
 })
 
 test_that("bhc_agreement počítá necisty_target jen ze spárovaných zpráv", {
   targets <- c(n1 = "alpha beta", mimo = "a  b")
-  out <- bhc_agreement(agreement_con(c(n1 = "Brief Hospital Course:\nalpha beta\n"), targets))
+  out <- bhc_agreement(agreement_con(c(n1 = "Brief Hospital Course:\nalpha beta\n"), targets), OTHER_KEY)
 
   expect_equal(out$necisty_target, 0)
 })
 
 test_that("bhc_agreement: shoda s targetem s okrajovými mezerami", {
   texts <- c(n1 = "Brief Hospital Course:\nPt ok\n")
-  out <- bhc_agreement(agreement_con(texts, c(n1 = " Pt ok ")))
+  out <- bhc_agreement(agreement_con(texts, c(n1 = " Pt ok ")), OTHER_KEY)
 
   expect_equal(category_row(out, "shoda")$n, 1)
 })
@@ -157,7 +184,7 @@ test_that("bhc_agreement uvádí jen_bhc a jen_korpus zvlášť, i když se liš
     n3 = "Brief Hospital Course:\nalpha\n"
   )
   targets <- c(n1 = "alpha", mimo1 = "x", mimo2 = "y")
-  out <- bhc_agreement(agreement_con(texts, targets))
+  out <- bhc_agreement(agreement_con(texts, targets), OTHER_KEY)
 
   expect_equal(out$sparovano, 1)
   expect_equal(out$jen_bhc, 2)
@@ -167,7 +194,7 @@ test_that("bhc_agreement uvádí jen_bhc a jen_korpus zvlášť, i když se liš
 test_that("bhc_agreement: medián sudého počtu rozdílů je nižší z prostředních hodnot", {
   texts <- rep("Brief Hospital Course:\nalpha beta gamma delta\n", 4)
   targets <- c(n1 = "alpha beta gamma", n2 = "alpha beta", n3 = "alpha", n4 = "alpha beta gamma delt")
-  out <- bhc_agreement(agreement_con(setNames(texts, names(targets)), targets))
+  out <- bhc_agreement(agreement_con(setNames(texts, names(targets)), targets), OTHER_KEY)
 
   # rozdíly 6, 12, 17, 1: seřazeně 1, 6, 12, 17, quantile_disc(0,5) je 6
   expect_equal(category_row(out, "konec_pozdeji")$median_rozdilu, 6)
@@ -185,14 +212,14 @@ test_that("BHC_WHITESPACE odpovídá Pythonovu \\s přes všechny code pointy a 
 
 test_that("bhc_agreement: falešný první výskyt s jinou hlavičkou lexikonu je jiná neshoda", {
   texts <- c(n1 = AGREEMENT_TEXTS[["n11"]])
-  out <- bhc_agreement(agreement_con(texts, c(n1 = "new case")))
+  out <- bhc_agreement(agreement_con(texts, c(n1 = "new case")), OTHER_KEY)
 
   expect_equal(category_row(out, "jina")$n, 1)
   expect_equal(category_row(out, "zacatek_driv")$n, 0)
 })
 
 test_that("bhc_agreement: prázdný průnik dá nuly ve všech kategoriích", {
-  out <- bhc_agreement(agreement_con(c(n1 = "Allergies:\nx\n"), c(jiny = "text")))
+  out <- bhc_agreement(agreement_con(c(n1 = "Allergies:\nx\n"), c(jiny = "text")), OTHER_KEY)
 
   expect_equal(out$sparovano, 0)
   expect_equal(out$jen_bhc, 1)
@@ -207,7 +234,7 @@ test_that("bhc_agreement zastaví render na note_id NULL", {
   con <- corpus_con(unname(texts), `mimic-iv-bhc` = rows)
   segment_corpus(con, sections_module(), section_headers_path())
 
-  expect_error(bhc_agreement(con), "duplicit", fixed = TRUE)
+  expect_error(bhc_agreement(con, OTHER_KEY), "duplicit", fixed = TRUE)
 })
 
 test_that("bhc_agreement zastaví render na duplicitním note_id nebo NULL v targetu", {
@@ -215,23 +242,23 @@ test_that("bhc_agreement zastaví render na duplicitním note_id nebo NULL v tar
   duplicated <- data.frame(note_id = c("n1", "n1"), target = c("a", "b"), stringsAsFactors = FALSE)
   con <- corpus_con(unname(texts), `mimic-iv-bhc` = duplicated)
   segment_corpus(con, sections_module(), section_headers_path())
-  expect_error(bhc_agreement(con), "duplicit", fixed = TRUE)
+  expect_error(bhc_agreement(con, OTHER_KEY), "duplicit", fixed = TRUE)
 
   missing <- data.frame(note_id = "n1", target = NA_character_, stringsAsFactors = FALSE)
   con <- corpus_con(unname(texts), `mimic-iv-bhc` = missing)
   segment_corpus(con, sections_module(), section_headers_path())
-  expect_error(bhc_agreement(con), "NULL", fixed = TRUE)
+  expect_error(bhc_agreement(con, OTHER_KEY), "NULL", fixed = TRUE)
 })
 
 test_that("bhc_agreement bez tabulky mimic-iv-bhc radí spustit snakemake parquet_mimic", {
   con <- DBI::dbConnect(duckdb::duckdb())
   withr::defer(DBI::dbDisconnect(con, shutdown = TRUE))
 
-  expect_error(bhc_agreement(con), "parquet_mimic", fixed = TRUE)
+  expect_error(bhc_agreement(con, OTHER_KEY), "parquet_mimic", fixed = TRUE)
 })
 
 fake_agreement <- function(
-    n = c(1, 40, 2, 5, 3, 4, 45), median = c(NA, NA, 7, 12, 30, 9, NA),
+    n = c(1, 40, 6, 2, 5, 3, 4, 39), median = c(NA, NA, 8, 7, 12, 30, 9, NA),
     jen_bhc = 11, jen_korpus = 6, necisty_target = 0) {
   list(
     sparovano = sum(n), jen_bhc = jen_bhc, jen_korpus = jen_korpus, necisty_target = necisty_target,
@@ -245,29 +272,29 @@ fake_agreement <- function(
 test_that("bhc_table: řádky v pořadí BHC_CATEGORIES bez ohledu na pořadí agregátu", {
   agreement <- fake_agreement()
   shuffled <- agreement
-  shuffled$kategorie <- agreement$kategorie[c(7, 3, 1, 5, 2, 6, 4), ]
+  shuffled$kategorie <- agreement$kategorie[c(8, 4, 1, 6, 2, 7, 3, 5), ]
   table <- bhc_table(shuffled)
 
   expect_length(table, length(BHC_LAYOUTS[["tbl-bhc"]]$col.names))
   expect_equal(table[[1]], unname(BHC_CATEGORIES))
-  expect_equal(table[[2]], number_text(c(1, 40, 2, 5, 3, 4, 45)))
-  expect_equal(table[[3]], percent_text(c(1, 40, 2, 5, 3, 4, 45), 100))
-  expect_equal(table[[4]], c("–", "–", "7", "12", "30", "9", "–"))
+  expect_equal(table[[2]], number_text(c(1, 40, 6, 2, 5, 3, 4, 39)))
+  expect_equal(table[[3]], percent_text(c(1, 40, 6, 2, 5, 3, 4, 39), 100))
+  expect_equal(table[[4]], c("–", "–", "8", "7", "12", "30", "9", "–"))
 })
 
 test_that("bhc_plot: úrovně v pořadí BHC_CATEGORIES a podíl ze spárovaných zpráv", {
   agreement <- fake_agreement()
   shuffled <- agreement
-  shuffled$kategorie <- agreement$kategorie[c(7, 3, 1, 5, 2, 6, 4), ]
+  shuffled$kategorie <- agreement$kategorie[c(8, 4, 1, 6, 2, 7, 3, 5), ]
   plot <- bhc_plot(shuffled)
 
   expect_equal(levels(plot$data$popisek), unname(BHC_CATEGORIES))
   expect_equal(plot$data$podil[plot$data$popisek == BHC_CATEGORIES[["shoda"]]], 0.4)
-  expect_true(all(bhc_plot(fake_agreement(n = rep(0, 7)))$data$podil == 0))
+  expect_true(all(bhc_plot(fake_agreement(n = rep(0, 8)))$data$podil == 0))
 })
 
 test_that("bhc nad prázdným průnikem: tabulka, graf i export projdou, věta nelze posoudit", {
-  empty <- bhc_agreement(agreement_con(c(n1 = "Allergies:\nx\n"), c(jiny = "text")))
+  empty <- bhc_agreement(agreement_con(c(n1 = "Allergies:\nx\n"), c(jiny = "text")), OTHER_KEY)
   dir <- withr::local_tempdir()
   layout <- BHC_LAYOUTS[["tbl-bhc"]]
 
@@ -285,7 +312,7 @@ test_that("bhc nad prázdným průnikem: tabulka, graf i export projdou, věta n
 })
 
 test_that("bhc_text nad neprázdným korpusem a BHC bez společného note_id uvede správný důvod", {
-  text <- bhc_text(bhc_agreement(agreement_con(c(n1 = "Brief Hospital Course:\nx\n"), c(jiny = "t"))))
+  text <- bhc_text(bhc_agreement(agreement_con(c(n1 = "Brief Hospital Course:\nx\n"), c(jiny = "t")), OTHER_KEY))
 
   expect_match(text, "nelze posoudit")
   expect_match(text, "žádná zpráva korpusu nemá pár")
@@ -305,7 +332,7 @@ test_that("bhc_text jmenuje podíl shody, počet spárovaných zpráv a populace
 test_that("bhc_text skloňuje počty: 1 zpráva, 2 zprávy, 5 zpráv", {
   for (case in list(c(1, 1, 2), c(2, 2, 5), c(5, 5, 1))) {
     text <- bhc_text(fake_agreement(
-      n = c(0, case[[1]], 0, 0, 0, 0, 0), jen_bhc = case[[2]], jen_korpus = case[[3]]
+      n = c(0, case[[1]], 0, 0, 0, 0, 0, 0), jen_bhc = case[[2]], jen_korpus = case[[3]]
     ))
     expect_match(text, paste0("spárovaných zpráv (", count_phrase(case[[1]], NOTE_FORMS), ")"), fixed = TRUE)
     expect_match(text, paste0("jen v BHC (", count_phrase(case[[2]], NOTE_FORMS), ")"), fixed = TRUE)
@@ -323,30 +350,44 @@ CUT_TEXTS <- c(
   n2 = "Brief Hospital Course:\nstory two\nDischarge Diagnosis:\ntail two\n",
   n3 = "Brief Hospital Course:\nstory three\nPast Medical History:\ntail three\n",
   n4 = "Brief Hospital Course:\nstory four\nAttending: tail four\n",
-  n5 = "Brief Hospital Course:\nstory five\nDischarge Diagnosis:\nx\n"
+  n5 = "Brief Hospital Course:\nstory five\nDischarge Diagnosis:\nx\n",
+  n6 = "Brief Hospital Course:\nstory six\n"
 )
 CUT_TARGETS <- c(
   n1 = "story one Discharge Diagnosis: tail one",
   n2 = "story two Discharge Diagnosis: tail two",
   n3 = "story three Past Medical History: tail three",
   n4 = "story four Attending: tail four",
-  n5 = "story five"
+  n5 = "story five",
+  n6 = "story six and more"
 )
 
 cut_con <- function(texts = CUT_TEXTS, targets = CUT_TARGETS, env = parent.frame()) {
   con <- agreement_con(texts, targets, env = env)
-  bhc_agreement(con)
+  bhc_agreement(con, OTHER_KEY)
   con
 }
 
 test_that("bhc_cut_sections rozloží konec dřív podle části, která úsek uřízla", {
   cut <- bhc_cut_sections(cut_con(), read_section_headers(section_headers_path()))
 
-  expect_equal(cut$sekce, c("discharge_diagnosis", "past_medical_history", "other"))
-  expect_equal(cut$n, c(2, 1, 1))
-  expect_equal(cut$popisek[c(1, 3)], c("Diagnóza při propuštění", BHC_FIELD_LABEL))
-  expect_equal(cut$diagnosticka, c(TRUE, FALSE, FALSE))
-  expect_equal(cut$celkem, rep(4, 3))
+  expect_equal(cut$sekce, c("discharge_diagnosis", "past_medical_history", "other", "bez_nasledujici"))
+  expect_equal(cut$n, c(2, 1, 1, 1))
+  expect_equal(
+    cut$popisek[c(1, 3, 4)], c("Diagnóza při propuštění", BHC_FIELD_LABEL, "Bez následující části")
+  )
+  expect_equal(cut$diagnosticka, c(TRUE, FALSE, FALSE, FALSE))
+  expect_equal(cut$celkem, rep(5, 4))
+})
+
+test_that("bhc_cut_sections počítá obě kategorie konce dřív a BHC bez následující části", {
+  con <- cut_con()
+  pairs <- DBI::dbGetQuery(con, sprintf("SELECT kategorie, count(*) AS n FROM %s GROUP BY 1", BHC_PAIRS_TABLE))
+  cut <- bhc_cut_sections(con, read_section_headers(section_headers_path()))
+
+  expect_equal(pairs$n[pairs$kategorie == "cela_sekce"], 3)
+  expect_equal(pairs$n[pairs$kategorie == "konec_driv"], 2)
+  expect_equal(sum(cut$n), 5)
 })
 
 test_that("bhc_cut_sections bez tabulky párů zastaví s návodem", {
@@ -371,13 +412,13 @@ test_that("bhc_cut_sections bez zprávy v kategorii konec dřív vrátí prázdn
 test_that("bhc_cut_text jmenuje nejčastější část a počet uříznutí diagnostickou sekcí", {
   text <- bhc_cut_text(bhc_cut_sections(cut_con(), read_section_headers(section_headers_path())))
 
-  expect_match(text, "Diagnóza při propuštění (2 zprávy, 50,0 %)", fixed = TRUE)
-  expect_match(text, "diagnostická sekce u 50,0 % z nich (2 zprávy)", fixed = TRUE)
+  expect_match(text, "Diagnóza při propuštění (2 zprávy, 40,0 %)", fixed = TRUE)
+  expect_match(text, "diagnostická sekce u 40,0 % z nich (2 zprávy)", fixed = TRUE)
 })
 
 test_that("bhc_cut_table: sekce, popisek, zprávy a podíl z kategorie konec dřív", {
   table <- bhc_cut_table(bhc_cut_sections(cut_con(), read_section_headers(section_headers_path())))
-  expect_equal(table$sekce, c("discharge_diagnosis", "past_medical_history", "other"))
-  expect_equal(table$n, c("2", "1", "1"))
-  expect_equal(table$podil, c("50,0", "25,0", "25,0"))
+  expect_equal(table$sekce, c("discharge_diagnosis", "past_medical_history", "other", "bez_nasledujici"))
+  expect_equal(table$n, c("2", "1", "1", "1"))
+  expect_equal(table$podil, c("40,0", "20,0", "20,0", "20,0"))
 })
