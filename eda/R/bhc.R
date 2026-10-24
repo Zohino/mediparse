@@ -144,6 +144,10 @@ BHC_LAYOUTS <- list(
   `tbl-bhc` = list(
     col.names = c("Kategorie", "Zprávy", "Podíl (%)", "Medián rozdílu délky"),
     align = "lrrr", widths = c(40, 20, 18, 22)
+  ),
+  `tbl-bhc-konec` = list(
+    col.names = c("Sekce", "Popisek", "Zprávy", "Podíl (%)"),
+    align = "llrr", widths = c(28, 40, 16, 16)
   )
 )
 
@@ -207,5 +211,69 @@ bhc_text <- function(agreement) {
     bhc_mismatch_phrase(categories), outside,
     percent_label(agreement$necisty_target, agreement$sparovano),
     count_phrase(agreement$necisty_target, NOTE_FORMS)
+  )
+}
+
+# Část `other` za sekcí začíná jen na administrativním poli lexikonu (split_sections), text před
+# první hlavičkou za sekcí ležet nemůže; popisek proto jmenuje pole.
+BHC_FIELD_LABEL <- "Administrativní pole"
+
+# Která část zprávy následuje hned za `hospital_course` u zpráv, kde náš úsek končí dřív než
+# target, tedy čí hlavička úsek uřízla. Popisky jsou z lexikonu, ne z dat, takže se nic nepotlačuje.
+# Čte tabulku párů, kterou vytvoří `bhc_agreement`.
+bhc_cut_sections <- function(con, lexicon) {
+  if (!BHC_PAIRS_TABLE %in% DBI::dbListTables(con)) {
+    stop("Tabulka párů BHC chybí; rozklad konce dřív se volá až po bhc_agreement.")
+  }
+  found <- DBI::dbGetQuery(con, sprintf("
+    WITH course AS (
+      SELECT s.note_id, s.position FROM %1$s s
+      JOIN %2$s p ON p.note_id = s.note_id
+      WHERE s.section = %3$s AND p.kategorie = 'konec_driv'
+    )
+    SELECT n.section AS sekce, count(*) AS n
+    FROM course c JOIN %1$s n ON n.note_id = c.note_id AND n.position = c.position + 1
+    GROUP BY n.section
+  ", SECTIONS_TABLE, BHC_PAIRS_TABLE, DBI::dbQuoteString(con, BHC_SECTION)))
+  found$n <- as.numeric(found$n)
+  keys <- lexicon_keys(lexicon)
+  diagnostic <- unique(lexicon$sections$sekce[lexicon$sections$diagnostic])
+  place <- match(found$sekce, keys$sekce)
+  out <- data.frame(
+    sekce = found$sekce,
+    popisek = ifelse(is.na(place), BHC_FIELD_LABEL, keys$label_cs[place]),
+    n = found$n,
+    diagnosticka = found$sekce %in% diagnostic,
+    celkem = rep(sum(found$n), nrow(found)),
+    stringsAsFactors = FALSE
+  )
+  out <- out[order(-out$n, ifelse(is.na(place), Inf, keys$poradi[place])), , drop = FALSE]
+  rownames(out) <- NULL
+  out
+}
+
+bhc_cut_table <- function(cut) {
+  data.frame(
+    sekce = cut$sekce,
+    popisek = cut$popisek,
+    n = number_text(cut$n),
+    podil = percent_text(cut$n, cut$celkem),
+    stringsAsFactors = FALSE
+  )
+}
+
+bhc_cut_text <- function(cut) {
+  if (nrow(cut) == 0) {
+    return("Kterou hlavičkou náš úsek končí dřív než BHC, nelze posoudit, protože v kategorii „náš konec dřív“ není žádná zpráva.")
+  }
+  total <- cut$celkem[[1]]
+  top <- utils::head(cut, 3)
+  cut_by_diagnosis <- sum(cut$n[cut$diagnosticka])
+  sprintf(
+    "Náš úsek končí dřív než BHC nejčastěji na hlavičce těchto částí: %s. Uřízne ho diagnostická sekce u %s z nich (%s); strip D2 u těchto zpráv odstraní spolu s ní i text, který BHC počítá do Brief Hospital Course.",
+    paste(sprintf(
+      "%s (%s, %s)", top$popisek, count_phrase(top$n, NOTE_FORMS), percent_label(top$n, total)
+    ), collapse = "; "),
+    percent_label(cut_by_diagnosis, total), count_phrase(cut_by_diagnosis, NOTE_FORMS)
   )
 }

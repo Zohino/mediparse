@@ -317,3 +317,67 @@ test_that("bhc_text skloňuje počty: 1 zpráva, 2 zprávy, 5 zpráv", {
 test_that("bhc_text uvede počet targetů, které čištěním zjevně neprošly", {
   expect_match(bhc_text(fake_agreement(necisty_target = 3)), paste0("(3", NBSP, "zprávy)"), fixed = TRUE)
 })
+
+CUT_TEXTS <- c(
+  n1 = "Brief Hospital Course:\nstory one\nDischarge Diagnosis:\ntail one\n",
+  n2 = "Brief Hospital Course:\nstory two\nDischarge Diagnosis:\ntail two\n",
+  n3 = "Brief Hospital Course:\nstory three\nPast Medical History:\ntail three\n",
+  n4 = "Brief Hospital Course:\nstory four\nAttending: tail four\n",
+  n5 = "Brief Hospital Course:\nstory five\nDischarge Diagnosis:\nx\n"
+)
+CUT_TARGETS <- c(
+  n1 = "story one Discharge Diagnosis: tail one",
+  n2 = "story two Discharge Diagnosis: tail two",
+  n3 = "story three Past Medical History: tail three",
+  n4 = "story four Attending: tail four",
+  n5 = "story five"
+)
+
+cut_con <- function(texts = CUT_TEXTS, targets = CUT_TARGETS, env = parent.frame()) {
+  con <- agreement_con(texts, targets, env = env)
+  bhc_agreement(con)
+  con
+}
+
+test_that("bhc_cut_sections rozloží konec dřív podle části, která úsek uřízla", {
+  cut <- bhc_cut_sections(cut_con(), read_section_headers(section_headers_path()))
+
+  expect_equal(cut$sekce, c("discharge_diagnosis", "past_medical_history", "other"))
+  expect_equal(cut$n, c(2, 1, 1))
+  expect_equal(cut$popisek[c(1, 3)], c("Diagnóza při propuštění", BHC_FIELD_LABEL))
+  expect_equal(cut$diagnosticka, c(TRUE, FALSE, FALSE))
+  expect_equal(cut$celkem, rep(4, 3))
+})
+
+test_that("bhc_cut_sections bez tabulky párů zastaví s návodem", {
+  con <- agreement_con()
+  expect_error(bhc_cut_sections(con, read_section_headers(section_headers_path())), "bhc_agreement", fixed = TRUE)
+})
+
+test_that("bhc_cut_sections bez zprávy v kategorii konec dřív vrátí prázdnou tabulku", {
+  con <- cut_con(c(n1 = CUT_TEXTS[["n5"]]), c(n1 = CUT_TARGETS[["n5"]]))
+  cut <- bhc_cut_sections(con, read_section_headers(section_headers_path()))
+  expect_equal(nrow(cut), 0L)
+  expect_match(bhc_cut_text(cut), "nelze posoudit")
+  expect_no_error(export_table(
+    bhc_cut_table(cut),
+    col.names = BHC_LAYOUTS[["tbl-bhc-konec"]]$col.names,
+    align = BHC_LAYOUTS[["tbl-bhc-konec"]]$align,
+    widths = BHC_LAYOUTS[["tbl-bhc-konec"]]$widths,
+    dir = withr::local_tempdir(), label = "tbl-bhc-konec"
+  ))
+})
+
+test_that("bhc_cut_text jmenuje nejčastější část a počet uříznutí diagnostickou sekcí", {
+  text <- bhc_cut_text(bhc_cut_sections(cut_con(), read_section_headers(section_headers_path())))
+
+  expect_match(text, "Diagnóza při propuštění (2 zprávy, 50,0 %)", fixed = TRUE)
+  expect_match(text, "diagnostická sekce u 50,0 % z nich (2 zprávy)", fixed = TRUE)
+})
+
+test_that("bhc_cut_table: sekce, popisek, zprávy a podíl z kategorie konec dřív", {
+  table <- bhc_cut_table(bhc_cut_sections(cut_con(), read_section_headers(section_headers_path())))
+  expect_equal(table$sekce, c("discharge_diagnosis", "past_medical_history", "other"))
+  expect_equal(table$n, c("2", "1", "1"))
+  expect_equal(table$podil, c("50,0", "25,0", "25,0"))
+})

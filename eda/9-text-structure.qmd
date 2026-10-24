@@ -49,6 +49,7 @@ headerless <- headerless_notes(con, sections_py$OTHER)
 headerless_hist <- headerless_histogram(con, sections_py$OTHER)
 residue <- strip_residue(con, lexicon)
 bhc <- bhc_agreement(con)
+bhc_cut <- bhc_cut_sections(con, lexicon)
 skeleton_floor <- coverage_threshold_text(SKELETON_COVERAGE)
 stopwords <- stop_words()
 ngrams_total <- ngram_counts(con, stopwords)
@@ -337,6 +338,23 @@ export_table(
 export_figure(bhc_plot(bhc), height_cm = 8)
 ```
 
+`r bhc_cut_text(bhc_cut)` @tbl-bhc-konec uvádí pro zprávy v kategorii „náš konec dřív“ část zprávy, která následuje hned za sekcí `hospital_course`, tedy čí hlavička náš úsek uřízla.
+
+```{r}
+#| label: tbl-bhc-konec
+#| tbl-cap: "Zprávy v kategorii „náš konec dřív“ podle části, která následuje za sekcí `hospital_course`: zprávy a podíl z kategorie."
+#| tbl-colwidths: [28, 40, 16, 16]
+export_table(
+  bhc_cut_table(bhc_cut),
+  col.names = BHC_LAYOUTS[["tbl-bhc-konec"]]$col.names,
+  align = BHC_LAYOUTS[["tbl-bhc-konec"]]$align,
+  widths = BHC_LAYOUTS[["tbl-bhc-konec"]]$widths,
+  code = "sekce"
+)
+```
+
+*Zdroj:* text z `discharge` rozdělený parserem sekcí; sekce a popisky z `config/section_headers.json`, administrativní pole je část `other` za sekcí.
+
 ## Zbytek po stripu {#sec-zbytek-stripu}
 
 `r strip_residue_text(residue)`
@@ -351,10 +369,10 @@ Dokument ověřil seed lexikon sekcí na vstupním korpusu. Pro další práci z
 - **Opakování.** `r repeated_synonyms_text(synonyms, totals)`
 - **Pro parser.** Parser sekcí čte lexikon z `config/section_headers.json` a používá pravidlo hlavičky a normalizace z kapitoly @sec-data; rozdělení zpráv je v kapitole @sec-segmentace.
 - **Kostra.** `r skeleton_text(skeleton, consistency)`
-- **Strip D2.** `r strip_share_text(strip_d2)` `r strip_residue_text(residue)`
+- **Strip D2.** `r strip_share_text(strip_d2)` `r strip_residue_text(residue)` Strip proto zůstává u prvního výskytu diagnostické sekce: zbytek po něm je okrajový a jeho rozšíření na všechny výskyty by strip rozešlo se segmentací, kterou sešit měří. Zbytek uvádějí Omezení.
 - **Délky.** `r body_length_text(body_len, sections_py$OTHER)`
 - **Zprávy bez nadpisů.** `r headerless_text(headerless)`
-- **Validace parseru.** `r bhc_text(bhc)` Rozhodnutí, zda stačí Omezení, nebo rozšířit strip či pravidlo prvního výskytu, se píše nad čísly z reálného renderu.
+- **Validace parseru.** `r bhc_text(bhc)` Pravidlo prvního výskytu se nemění: falešný první výskyt hlavičky se projeví jen v kategoriích „náš začátek dřív“ a „jiná neshoda“, a ty mají dohromady jen jednotky zpráv. `r bhc_cut_text(bhc_cut)`
 - **Tokeny a n-gramy.** `r ngram_text(ngrams_total)` Pro S40 (baseline TF-IDF + LR) z toho plyne argument pro `ngram_range` a `max_df`: n-gramy, které má většina zpráv, nic nerozlišují. Tokenizace sešitu se liší od výchozí v TF-IDF: ponechává jen písmena a–z, takže čísla a masku `___` vynechává. Počty frází šablony jsou podklad pro deduplikaci boilerplate (D26).
 
 # Omezení {#sec-omezeni}
