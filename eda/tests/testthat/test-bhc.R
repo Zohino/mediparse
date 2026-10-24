@@ -325,6 +325,8 @@ test_that("bhc_text jmenuje podíl shody, počet spárovaných zpráv a populace
   expect_match(text, paste0("u 40,0", NBSP, "% spárovaných zpráv (40", NBSP, "zpráv)"), fixed = TRUE)
   expect_match(text, paste0("jen v BHC (11", NBSP, "zpráv)"), fixed = TRUE)
   expect_match(text, paste0("jen v korpusu (6", NBSP, "zpráv)"), fixed = TRUE)
+  expect_match(text, paste0("u 46,0", NBSP, "% spárovaných zpráv (46", NBSP, "zpráv)"), fixed = TRUE)
+  expect_match(text, "ne správnost hranic", fixed = TRUE)
   expect_match(text, "Neshody: Sekce nenalezena", fixed = TRUE)
   expect_no_match(text, "Neshody: Shoda")
 })

@@ -222,10 +222,12 @@ bhc_text <- function(agreement) {
   }
   categories <- ordered_categories(agreement)
   matched <- categories$n[categories$kategorie == "shoda"]
+  covered <- matched + categories$n[categories$kategorie == "cela_sekce"]
   sprintf(
-    "Počet spárovaných zpráv: %s. Úsek `%s` se shoduje s targetem BHC u %s spárovaných zpráv (%s). Neshody: %s. %s Target čištěním zjevně neprošel (dvě mezery za sebou nebo jiný bílý znak než mezera) u %s spárovaných zpráv (%s).",
+    "Počet spárovaných zpráv: %s. Úsek `%s` se shoduje s targetem BHC u %s spárovaných zpráv (%s). Shoda nebo reference delší přesně o celou naši následující sekci je u %s spárovaných zpráv (%s); to popisuje vztah k referenci, ne správnost hranic, protože tutéž podmínku splní i podnadpis uvnitř BHC. Neshody: %s. %s Target čištěním zjevně neprošel (dvě mezery za sebou nebo jiný bílý znak než mezera) u %s spárovaných zpráv (%s).",
     number_text(agreement$sparovano), BHC_SECTION,
     percent_label(matched, agreement$sparovano), count_phrase(matched, NOTE_FORMS),
+    percent_label(covered, agreement$sparovano), count_phrase(covered, NOTE_FORMS),
     bhc_mismatch_phrase(categories), outside,
     percent_label(agreement$necisty_target, agreement$sparovano),
     count_phrase(agreement$necisty_target, NOTE_FORMS)
