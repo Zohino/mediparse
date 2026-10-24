@@ -189,7 +189,7 @@ bhc_mismatch_phrase <- function(categories) {
 
 bhc_text <- function(agreement) {
   outside <- sprintf(
-    "Mimo průnik je %s v BHC, ne v korpusu, a %s v korpusu, ne v BHC; nejsou to chyby parseru, protože BHC vyřadil zprávy bez sekce Sex a s BHC kratší než 100 znaků a korpus filtruje podle ICD, délky a duplicit.",
+    "Mimo průnik zůstávají zprávy jen v BHC (%s) a jen v korpusu (%s); nejsou to chyby parseru, protože BHC vyřadil zprávy bez sekce Sex a s BHC kratší než 100 znaků a korpus filtruje podle ICD, délky a duplicit.",
     count_phrase(agreement$jen_bhc, NOTE_FORMS), count_phrase(agreement$jen_korpus, NOTE_FORMS)
   )
   if (agreement$sparovano == 0) {
@@ -201,10 +201,11 @@ bhc_text <- function(agreement) {
   categories <- ordered_categories(agreement)
   matched <- categories$n[categories$kategorie == "shoda"]
   sprintf(
-    "Spárováno je %s. Úsek `%s` se shoduje s targetem BHC ve zprávách v tomto počtu: %s (%s). Neshody: %s. %s Mezi spárovanými zprávami mají čištěním zjevně neprošlý target (dvě mezery za sebou nebo jiný bílý znak než mezera) tolik zpráv: %s.",
-    count_phrase(agreement$sparovano, NOTE_FORMS), BHC_SECTION,
-    count_phrase(matched, NOTE_FORMS), percent_label(matched, agreement$sparovano),
+    "Počet spárovaných zpráv: %s. Úsek `%s` se shoduje s targetem BHC u %s spárovaných zpráv (%s). Neshody: %s. %s Target čištěním zjevně neprošel (dvě mezery za sebou nebo jiný bílý znak než mezera) u %s spárovaných zpráv (%s).",
+    number_text(agreement$sparovano), BHC_SECTION,
+    percent_label(matched, agreement$sparovano), count_phrase(matched, NOTE_FORMS),
     bhc_mismatch_phrase(categories), outside,
+    percent_label(agreement$necisty_target, agreement$sparovano),
     count_phrase(agreement$necisty_target, NOTE_FORMS)
   )
 }

@@ -702,21 +702,19 @@ test_that("strip_residue_text jmenuje počet, podíl a rozdíl proti sloupci opa
 
   expect_match(text, paste0("2", NBSP, "zprávy"))
   expect_match(text, paste0("50,0", NBSP, "%"))
-  expect_match(text, paste0("kterých je 4", NBSP, "zprávy"), fixed = TRUE)
+  expect_match(text, paste0("(2", NBSP, "zprávy z 4)"), fixed = TRUE)
   expect_match(text, "opakování", fixed = TRUE)
 })
 
 test_that("strip_residue_text skloňuje počty: 1 zpráva, 2 zprávy, 5 zpráv", {
   one <- strip_residue_text(list(se_sekci = 1, zbytek = 1))
-  expect_match(one, paste0("zpráv: 1", NBSP, "zpráva"), fixed = TRUE)
-  expect_match(one, paste0("kterých je 1", NBSP, "zpráva"), fixed = TRUE)
+  expect_match(one, paste0("(1", NBSP, "zpráva z 1)"), fixed = TRUE)
 
   two <- strip_residue_text(list(se_sekci = 2, zbytek = 2))
-  expect_match(two, paste0("zpráv: 2", NBSP, "zprávy"), fixed = TRUE)
+  expect_match(two, paste0("(2", NBSP, "zprávy z 2)"), fixed = TRUE)
 
   five <- strip_residue_text(list(se_sekci = 5, zbytek = 5))
-  expect_match(five, paste0("zpráv: 5", NBSP, "zpráv"), fixed = TRUE)
-  expect_match(five, paste0("kterých je 5", NBSP, "zpráv"), fixed = TRUE)
+  expect_match(five, paste0("(5", NBSP, "zpráv z 5)"), fixed = TRUE)
 })
 
 test_that("strip_residue_text se zprávou s diagnostickou sekcí a bez zbytku uvede nulu", {
@@ -724,6 +722,6 @@ test_that("strip_residue_text se zprávou s diagnostickou sekcí a bez zbytku uv
   text <- strip_residue_text(residue)
 
   expect_equal(c(residue$se_sekci, residue$zbytek), c(1, 0))
-  expect_match(text, paste0("zpráv: 0", NBSP, "zpráv"), fixed = TRUE)
+  expect_match(text, paste0("(0", NBSP, "zpráv z "), fixed = TRUE)
   expect_no_match(text, "nelze posoudit")
 })

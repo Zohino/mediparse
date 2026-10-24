@@ -422,9 +422,9 @@ strip_residue_text <- function(residue) {
     return("Zbytek hlavičky diagnostické sekce po stripu nelze posoudit, protože žádná zpráva korpusu nemá diagnostickou sekci.")
   }
   sprintf(
-    "Po stripu D2 zůstane hlavička diagnostické sekce i s diagnózou pod ní u těchto zpráv: %s (%s zpráv se sekcí, kterých je %s). Liší se od sloupce „opakování“ v tabulce sekcí, který počítá i druhý výskyt uvnitř těla samotné diagnostické sekce; ten strip odstraní spolu s ní, takže sloupec zbytek přeceňuje.",
-    count_phrase(residue$zbytek, NOTE_FORMS), percent_label(residue$zbytek, residue$se_sekci),
-    count_phrase(residue$se_sekci, NOTE_FORMS)
+    "Hlavička diagnostické sekce i s diagnózou pod ní zůstane po stripu D2 u %s zpráv s diagnostickou sekcí (%s z %s). Liší se od sloupce „opakování“ v tabulce sekcí, který počítá i druhý výskyt uvnitř těla samotné diagnostické sekce; ten strip odstraní spolu s ní, takže sloupec zbytek přeceňuje.",
+    percent_label(residue$zbytek, residue$se_sekci), count_phrase(residue$zbytek, NOTE_FORMS),
+    number_text(residue$se_sekci)
   )
 }
 

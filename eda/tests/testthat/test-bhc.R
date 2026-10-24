@@ -294,10 +294,10 @@ test_that("bhc_text nad neprázdným korpusem a BHC bez společného note_id uve
 test_that("bhc_text jmenuje podíl shody, počet spárovaných zpráv a populace mimo průnik", {
   text <- bhc_text(fake_agreement())
 
-  expect_match(text, paste0("100", NBSP, "zpráv"))
-  expect_match(text, paste0("40,0", NBSP, "%"))
-  expect_match(text, paste0("je 11", NBSP, "zpráv v BHC, ne v korpusu"), fixed = TRUE)
-  expect_match(text, paste0("a 6", NBSP, "zpráv v korpusu, ne v BHC"), fixed = TRUE)
+  expect_match(text, "Počet spárovaných zpráv: 100.", fixed = TRUE)
+  expect_match(text, paste0("u 40,0", NBSP, "% spárovaných zpráv (40", NBSP, "zpráv)"), fixed = TRUE)
+  expect_match(text, paste0("jen v BHC (11", NBSP, "zpráv)"), fixed = TRUE)
+  expect_match(text, paste0("jen v korpusu (6", NBSP, "zpráv)"), fixed = TRUE)
   expect_match(text, "Neshody: Sekce nenalezena", fixed = TRUE)
   expect_no_match(text, "Neshody: Shoda")
 })
@@ -307,14 +307,13 @@ test_that("bhc_text skloňuje počty: 1 zpráva, 2 zprávy, 5 zpráv", {
     text <- bhc_text(fake_agreement(
       n = c(0, case[[1]], 0, 0, 0, 0, 0), jen_bhc = case[[2]], jen_korpus = case[[3]]
     ))
-    expect_match(text, paste0("Spárováno je ", count_phrase(case[[1]], NOTE_FORMS)), fixed = TRUE)
-    expect_match(text, paste0("v tomto počtu: ", count_phrase(case[[1]], NOTE_FORMS)), fixed = TRUE)
-    expect_match(text, paste0("je ", count_phrase(case[[2]], NOTE_FORMS), " v BHC"), fixed = TRUE)
-    expect_match(text, paste0("a ", count_phrase(case[[3]], NOTE_FORMS), " v korpusu"), fixed = TRUE)
+    expect_match(text, paste0("spárovaných zpráv (", count_phrase(case[[1]], NOTE_FORMS), ")"), fixed = TRUE)
+    expect_match(text, paste0("jen v BHC (", count_phrase(case[[2]], NOTE_FORMS), ")"), fixed = TRUE)
+    expect_match(text, paste0("jen v korpusu (", count_phrase(case[[3]], NOTE_FORMS), ")"), fixed = TRUE)
   }
   expect_equal(count_phrase(c(1, 2, 5), NOTE_FORMS), paste0(c(1, 2, 5), NBSP, c("zpráva", "zprávy", "zpráv")))
 })
 
 test_that("bhc_text uvede počet targetů, které čištěním zjevně neprošly", {
-  expect_match(bhc_text(fake_agreement(necisty_target = 3)), paste0("3", NBSP, "zprávy"))
+  expect_match(bhc_text(fake_agreement(necisty_target = 3)), paste0("(3", NBSP, "zprávy)"), fixed = TRUE)
 })
