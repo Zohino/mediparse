@@ -635,3 +635,73 @@ test_that("skeleton_order rozhodne shodu mediánu i pokrytí pořadím lexikonu 
 
   expect_equal(frame$sekce[skeleton_order(frame)], c("a", "b", "c"))
 })
+
+RESIDUE_TEXTS <- c(
+  # druhá hlavička v těle jiné sekce
+  "Allergies:\nnone\n\nDischarge Diagnosis:\nA\n\nDischarge Condition:\nOK\nDischarge Diagnoses:\nB\n",
+  # druhý výskyt uvnitř těla diagnostické sekce odstraní strip spolu s ní
+  "Discharge Diagnosis:\nA\nDischarge Diagnoses:\nB\n",
+  # bez diagnostické sekce
+  "Allergies:\nnone\n",
+  # hlavička uprostřed řádku za hlavičkou části není hlavička
+  "Allergies: Discharge Diagnosis: x\n\nDischarge Diagnosis:\nA\n",
+  # několik zbytkových hlaviček ve dvou ponechaných částech se počítá jednou
+  "Discharge Diagnosis:\nA\n\nAllergies:\nDischarge Diagnoses: x\n\nSocial History:\nDischarge Diagnosis: y\n"
+)
+
+residue_con <- function(texts, env = parent.frame()) {
+  con <- corpus_con(texts, env = env)
+  segment_corpus(con, sections_module(), LEXICON_PATH())
+  con
+}
+
+REAL_LEXICON <- function() read_section_headers(section_headers_path())
+
+test_that("strip_residue: zbytek je druhá hlavička v ponechané části, jmenovatel je se_sekci", {
+  residue <- strip_residue(residue_con(RESIDUE_TEXTS), REAL_LEXICON())
+
+  expect_equal(residue$se_sekci, 4)
+  expect_equal(residue$zbytek, 2)
+})
+
+test_that("strip_residue počítá zprávu jednou, i když má víc zbytkových hlaviček", {
+  residue <- strip_residue(residue_con(RESIDUE_TEXTS[[5]]), REAL_LEXICON())
+
+  expect_equal(residue$se_sekci, 1)
+  expect_equal(residue$zbytek, 1)
+})
+
+test_that("strip_residue: hlavička uprostřed řádku za hlavičkou části není zbytek", {
+  residue <- strip_residue(residue_con(RESIDUE_TEXTS[[4]]), REAL_LEXICON())
+
+  expect_equal(residue$se_sekci, 1)
+  expect_equal(residue$zbytek, 0)
+})
+
+test_that("strip_residue zastaví render, když lexikon nemá diagnostickou sekci", {
+  lexicon <- REAL_LEXICON()
+  lexicon$sections$diagnostic <- FALSE
+
+  expect_error(strip_residue(residue_con(RESIDUE_TEXTS), lexicon), "diagnostickou", fixed = TRUE)
+})
+
+test_that("strip_residue nad prázdnou tabulkou a bez diagnostické sekce: nuly a nelze posoudit", {
+  con <- mimic_con()
+  segment_corpus(con, sections_module(), LEXICON_PATH())
+  empty <- strip_residue(con, REAL_LEXICON())
+  none <- strip_residue(residue_con(RESIDUE_TEXTS[[3]]), REAL_LEXICON())
+
+  expect_equal(c(empty$se_sekci, empty$zbytek), c(0, 0))
+  expect_equal(c(none$se_sekci, none$zbytek), c(0, 0))
+  expect_match(strip_residue_text(empty), "nelze posoudit")
+  expect_match(strip_residue_text(none), "nelze posoudit")
+})
+
+test_that("strip_residue_text jmenuje počet, podíl a rozdíl proti sloupci opakování", {
+  text <- strip_residue_text(strip_residue(residue_con(RESIDUE_TEXTS), REAL_LEXICON()))
+
+  expect_match(text, paste0("2", NBSP, "zprávy"))
+  expect_match(text, paste0("50,0", NBSP, "%"))
+  expect_match(text, paste0("4", NBSP, "zpráv"))
+  expect_match(text, "opakování", fixed = TRUE)
+})

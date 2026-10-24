@@ -330,11 +330,16 @@ body_length_table <- function(lengths) {
 
 # Délka zprávy je součet span_chars, protože round-trip parseru dává součet přes zprávu rovný
 # délce textu a text se tak nečte podruhé.
-strip_share <- function(con, lexicon) {
+diagnostic_keys <- function(lexicon) {
   keys <- unique(lexicon$sections$sekce[lexicon$sections$diagnostic])
   if (length(keys) == 0L) {
     stop("Lexikon nemá žádnou diagnostickou sekci (diagnostic: true), strip D2 by nic neodstranil.")
   }
+  keys
+}
+
+strip_share <- function(con, lexicon) {
+  keys <- diagnostic_keys(lexicon)
   row <- DBI::dbGetQuery(con, sprintf("
     WITH per_note AS (
       SELECT note_id, sum(span_chars) AS delka,
@@ -369,6 +374,49 @@ strip_share_text <- function(strip) {
     percent_label(strip$se_sekci, strip$celkem),
     percent_label(strip$text_sekce, strip$text_celkem),
     percent_label(strip$median_podilu, 1)
+  )
+}
+
+# Zbytek je zpráva, v jejíž ponechané (nediagnostické) části stojí hlavička diagnostické sekce:
+# strip vystřihne jen první výskyt, takže pod touto hlavičkou zůstane diagnóza. Hledá se jen ve
+# zprávách s diagnostickou sekcí, protože bez ní by první výskyt synonyma byl sekcí. Řeže se celá
+# část, ne její tělo, protože `(?m)^` platí i na začátku podřetězce uprostřed řádku a hlavička
+# za hlavičkou části ("Allergies: Discharge Diagnosis:") by se jinak našla; části začínají vždy
+# na začátku řádku, takže spojení ponechaných částí nevytvoří hlavičku přes hranici.
+strip_residue <- function(con, lexicon) {
+  keys <- diagnostic_keys(lexicon)
+  synonyms <- lexicon$sections$synonymum[lexicon$sections$diagnostic]
+  row <- DBI::dbGetQuery(con, sprintf("
+    WITH diagnostic AS (
+      SELECT DISTINCT note_id FROM %1$s WHERE section IN (%2$s)
+    ),
+    kept AS (
+      SELECT s.note_id,
+        substring(d.text, s.body_end - s.span_chars + 1, s.span_chars) AS part
+      FROM %1$s s
+      JOIN diagnostic g ON g.note_id = s.note_id
+      JOIN discharge d ON d.note_id = s.note_id
+      WHERE s.section NOT IN (%2$s)
+    ),
+    found AS (
+      SELECT note_id, unnest(regexp_extract_all(part, %3$s, 1)) AS header FROM kept
+    )
+    SELECT (SELECT count(*) FROM diagnostic) AS se_sekci,
+      (SELECT count(DISTINCT note_id) FROM found WHERE %4$s IN (%5$s)) AS zbytek
+  ", SECTIONS_TABLE, paste(DBI::dbQuoteString(con, keys), collapse = ", "),
+    DBI::dbQuoteString(con, HEADER_PATTERN), normalized_sql("header"),
+    paste(normalized_sql(DBI::dbQuoteString(con, synonyms)), collapse = ", ")))
+  lapply(row, as.numeric)
+}
+
+strip_residue_text <- function(residue) {
+  if (residue$se_sekci == 0) {
+    return("Zbytek hlavičky diagnostické sekce po stripu nelze posoudit, protože žádná zpráva korpusu nemá diagnostickou sekci.")
+  }
+  sprintf(
+    "Po stripu D2 zůstane hlavička diagnostické sekce i s diagnózou pod ní v %s (%s) ze %s se sekcí. Liší se od sloupce „opakování“ v tabulce sekcí, který počítá i druhý výskyt uvnitř těla samotné diagnostické sekce; ten strip odstraní spolu s ní, takže sloupec zbytek přeceňuje.",
+    count_phrase(residue$zbytek, NOTE_FORMS), percent_label(residue$zbytek, residue$se_sekci),
+    count_phrase(residue$se_sekci, NOTE_FORMS)
   )
 }
 
