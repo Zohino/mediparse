@@ -71,8 +71,10 @@ check_bhc_table <- function(con) {
 # Do tabulky jde jen kategorie a rozdíl délky po zprávách, ne texty: agregát nad texty
 # 270 tisíc zpráv došel paměti už v S27a3.
 # Následující část se čistí a ořezává stejně jako náš úsek, protože target prošel týmž čištěním.
-# `other` se z následující části vylučuje: má prázdnou hlavičku i tělo a `starts_with(x, '')` je
-# vždy pravda, takže by do `cela_sekce` spadla každá zpráva s administrativním polem za BHC.
+# `other` se z následující části vylučuje podle definice kategorie: mluví o sekci lexikonu a
+# administrativní pole sekcí není, i když ho reference obsahuje celé. Navíc má prázdnou hlavičku
+# a `starts_with(x, '')` je vždy pravda, takže by bez vyloučení spadla do `cela_sekce` každá
+# zpráva s polem za BHC.
 # Chybí-li následující část (BHC je poslední), je `next_part` NULL a větev propadne.
 pair_bhc_sql <- function(con, other) {
   sprintf("
@@ -224,7 +226,7 @@ bhc_text <- function(agreement) {
   matched <- categories$n[categories$kategorie == "shoda"]
   covered <- matched + categories$n[categories$kategorie == "cela_sekce"]
   sprintf(
-    "Počet spárovaných zpráv: %s. Úsek `%s` se shoduje s targetem BHC u %s spárovaných zpráv (%s). Shoda nebo reference delší přesně o celou naši následující sekci je u %s spárovaných zpráv (%s); to popisuje vztah k referenci, ne správnost hranic, protože tutéž podmínku splní i podnadpis uvnitř BHC. Neshody: %s. %s Target čištěním zjevně neprošel (dvě mezery za sebou nebo jiný bílý znak než mezera) u %s spárovaných zpráv (%s).",
+    "Počet spárovaných zpráv: %s. Úsek `%s` se shoduje s targetem BHC u %s spárovaných zpráv (%s). Shoda nebo reference, která obsahuje celou naši následující sekci (a případně víc), je u %s spárovaných zpráv (%s); to popisuje vztah k referenci, ne správnost hranic, protože tutéž podmínku splní i podnadpis uvnitř BHC. Neshody: %s. %s Target čištěním zjevně neprošel (dvě mezery za sebou nebo jiný bílý znak než mezera) u %s spárovaných zpráv (%s).",
     number_text(agreement$sparovano), BHC_SECTION,
     percent_label(matched, agreement$sparovano), count_phrase(matched, NOTE_FORMS),
     percent_label(covered, agreement$sparovano), count_phrase(covered, NOTE_FORMS),
@@ -254,7 +256,7 @@ check_pairs_table <- function(con) {
 cut_course_sql <- function(con) {
   sprintf("
     SELECT s.note_id, p.kategorie, s.position AS course_position, d.text,
-      n.section AS next_section, n.position AS next_position, n.body_end AS next_end,
+      n.section AS next_section, n.position AS next_position, n.body_end - n.span_chars AS next_start,
       %5$s AS next_header
     FROM %1$s s
     JOIN %2$s p ON p.note_id = s.note_id
@@ -306,13 +308,13 @@ bhc_cut_table <- function(cut) {
 
 bhc_cut_text <- function(cut) {
   if (nrow(cut) == 0) {
-    return("Kterou hlavičkou náš úsek končí dřív než BHC, nelze posoudit, protože v kategoriích „náš konec dřív“ a „reference obsahuje celou naši následující sekci“ není žádná zpráva.")
+    return("Která část zprávy následuje za sekcí `hospital_course`, nelze posoudit, protože v kategoriích „náš konec dřív“ a „reference obsahuje celou naši následující sekci“ není žádná zpráva.")
   }
   total <- cut$celkem[[1]]
   top <- utils::head(cut, 3)
   cut_by_diagnosis <- sum(cut$n[cut$diagnosticka])
   sprintf(
-    "Náš úsek končí dřív než BHC nejčastěji na hlavičce těchto částí: %s. Uřízne ho diagnostická sekce u %s z nich (%s); strip D2 u těchto zpráv odstraní spolu s ní i text, který BHC počítá do Brief Hospital Course.",
+    "Za sekcí `hospital_course` nejčastěji následuje: %s. Z těchto zpráv následuje diagnostická sekce u %s z nich (%s); strip D2 u těchto zpráv odstraní spolu s ní i text, který BHC počítá do Brief Hospital Course.",
     paste(sprintf(
       "%s (%s, %s)", top$popisek, count_phrase(top$n, NOTE_FORMS), percent_label(top$n, total)
     ), collapse = "; "),
@@ -321,57 +323,80 @@ bhc_cut_text <- function(cut) {
 }
 
 BHC_MOA_SECTION <- "medications_on_admission"
-BHC_SYNONYMS_TABLE <- "bhc_synonyms_input"
 
-# Skupiny vlastností zpráv s koncem dřív v pevném pořadí tabulky. Skupiny kromě `odsazeni` jsou
-# vyčerpávající (každá zpráva má v každé právě jednu vlastnost), `odsazeni` je doplňková a
-# do 100 % se nesčítá.
-BHC_CAUSES <- data.frame(
-  skupina = rep(c("reference", "moa", "zapis", "opakovani", "odsazeni"), c(2, 4, 5, 3, 1)),
-  klic = c(
-    "cela_sekce", "konec_driv",
-    "chybi", "pred", "sama", "za",
-    "synonymum", "verzalky", "jiny", "pole", "posledni",
-    "opakuje", "neopakuje", "bez",
-    "odsazena"
+# Skupiny vlastností zpráv s koncem dřív v pevném pořadí tabulky: klíč skupiny, popisek skupiny
+# a pojmenovaný vektor popisků vlastností. Vlastnosti skupiny `reference` jsou kategorie
+# `BHC_CUT_CATEGORIES`. Skupiny kromě `soubeh` a `odsazeni` jsou vyčerpávající (každá zpráva
+# má v každé právě jednu vlastnost); ty dvě jsou doplňkové a do 100 % se nesčítají.
+BHC_CAUSE_GROUPS <- list(
+  reference = list(
+    label = "Reference",
+    properties = setNames(c("Obsahuje celou naši následující sekci", "Neobsahuje"), BHC_CUT_CATEGORIES)
   ),
-  skupina_popisek = rep(
-    c("Reference", "Léky při přijetí", "Hlavička, která úsek uřízla", "Opakování hlavičky", "Odsazení"),
-    c(2, 4, 5, 3, 1)
+  moa = list(
+    label = "Léky při přijetí",
+    properties = c(
+      chybi = "Sekce chybí", pred = "Stojí před Brief Hospital Course", sama = "Sama úsek uřízla",
+      za = "Stojí za hlavičkou, která úsek uřízla"
+    )
   ),
-  popisek = c(
-    "Obsahuje celou naši následující sekci", "Neobsahuje",
-    "Sekce chybí", "Stojí před Brief Hospital Course", "Sama úsek uřízla",
-    "Stojí za hlavičkou, která úsek uřízla",
-    "Zápis synonyma lexikonu", "Verzálky", "Jiný zápis", "Administrativní pole",
-    "BHC je poslední část zprávy",
-    "Opakuje se za uříznutím", "Neopakuje se", "Bez následující sekce",
-    "Odsazená hlavička"
+  zapis = list(
+    label = "Hlavička, která úsek uřízla",
+    properties = c(
+      synonymum = "Zápis synonyma lexikonu", verzalky = "Verzálky", jiny = "Jiný zápis",
+      pole = "Administrativní pole", posledni = "BHC je poslední část zprávy"
+    )
   ),
-  stringsAsFactors = FALSE
+  opakovani = list(
+    label = "Opakování hlavičky",
+    properties = c(
+      opakuje = "Opakuje se v následující části nebo za ní", neopakuje = "Neopakuje se",
+      bez = "Bez následující sekce"
+    )
+  ),
+  soubeh = list(
+    label = "Souběh",
+    properties = c(
+      jedina = "Podpis polknuté jediné sekce", podnadpis = "Podpis podnadpisu"
+    )
+  ),
+  odsazeni = list(label = "Odsazení", properties = c(odsazena = "Odsazená hlavička"))
 )
+
+BHC_CAUSES <- do.call(rbind, lapply(names(BHC_CAUSE_GROUPS), function(group) {
+  entry <- BHC_CAUSE_GROUPS[[group]]
+  data.frame(
+    skupina = group, klic = names(entry$properties), skupina_popisek = entry$label,
+    popisek = unname(entry$properties), stringsAsFactors = FALSE
+  )
+}))
 
 # Vlastnosti zprávy se klasifikují v SQL nad textem zprávy, protože parser se nemění.
 # Hlavička se bere bez úvodních mezer a tabulátorů (`trim` v DuckDB tabulátor neodstraní)
 # a bez dvojtečky, aby šla porovnat se synonymem lexikonu včetně velikosti písmen. Opakování
-# se hledá jen za koncem následující části, protože parser bere první výskyt, takže dřívější
-# výskyt téže sekce být nemůže; hlavička se normalizuje jako v parseru. Část mimo lexikon je
-# administrativní pole (`other`). Medications on Admission nemůže stát mezi BHC a uříznutím
-# (byla by tou hlavičkou), ale sama úsek uříznout může.
+# se hledá od začátku následující části, ne až za jejím koncem: falešný podnadpis před
+# skutečnou hlavičkou téže sekce nechává skutečnou hlavičku v těle téže části. První shoda
+# je hlavička samotné části (parser bere první výskyt), opakováním jsou proto aspoň dvě shody
+# s normalizovanými synonymy sekce. Část mimo lexikon je administrativní pole (`other`).
+# Medications on Admission nemůže stát mezi BHC a uříznutím (byla by tou hlavičkou), ale sama
+# úsek uříznout může. Souběh měří průnik vlastností, který marginály neukážou: polknutá
+# jediná sekce má reference s celou sekcí, chybějící Medications on Admission a hlavičku bez
+# opakování, podnadpis má hlavičku opakovanou nebo Medications on Admission za uříznutím.
 cut_causes_sql <- function(con, lexicon) {
-  keys <- DBI::dbQuoteString(con, lexicon_keys(lexicon)$sekce)
+  keys <- paste(DBI::dbQuoteString(con, lexicon_keys(lexicon)$sekce), collapse = ", ")
   stripped <- "regexp_replace(regexp_replace(c.next_header, '^[ \\t]+', ''), ':$', '')"
   sprintf("
     WITH cut AS (%1$s),
-    moa AS (SELECT note_id, position FROM %2$s WHERE section = %3$s),
+    synonyms AS (SELECT sekce, synonymum FROM %2$s WHERE druh = %3$s),
+    moa AS (SELECT note_id, position FROM %4$s WHERE section = %5$s),
     repeated AS (
-      SELECT DISTINCT h.note_id
+      SELECT h.note_id
       FROM (
-        SELECT note_id, next_section,
-          unnest(regexp_extract_all(substring(text, next_end + 1), %4$s, 1)) AS header
-        FROM cut WHERE next_section IN (%5$s)
+        SELECT note_id, next_section, unnest(%6$s) AS header
+        FROM cut WHERE next_section IN (%7$s)
       ) h
-      JOIN %6$s y ON y.sekce = h.next_section AND %7$s = %8$s
+      JOIN synonyms y ON y.sekce = h.next_section AND %8$s = %9$s
+      GROUP BY h.note_id HAVING count(*) >= 2
     ),
     classified AS (
       SELECT c.kategorie AS reference,
@@ -383,15 +408,15 @@ cut_causes_sql <- function(con, lexicon) {
         END AS moa,
         CASE
           WHEN c.next_section IS NULL THEN 'posledni'
-          WHEN c.next_section NOT IN (%5$s) THEN 'pole'
+          WHEN c.next_section NOT IN (%7$s) THEN 'pole'
           WHEN EXISTS (
-            SELECT 1 FROM %6$s y WHERE y.sekce = c.next_section AND y.synonymum = %9$s
+            SELECT 1 FROM synonyms y WHERE y.sekce = c.next_section AND y.synonymum = %10$s
           ) THEN 'synonymum'
-          WHEN upper(%9$s) = %9$s THEN 'verzalky'
+          WHEN upper(%10$s) = %10$s THEN 'verzalky'
           ELSE 'jiny'
         END AS zapis,
         CASE
-          WHEN c.next_section IS NULL OR c.next_section NOT IN (%5$s) THEN 'bez'
+          WHEN c.next_section IS NULL OR c.next_section NOT IN (%7$s) THEN 'bez'
           WHEN r.note_id IS NOT NULL THEN 'opakuje'
           ELSE 'neopakuje'
         END AS opakovani,
@@ -400,31 +425,36 @@ cut_causes_sql <- function(con, lexicon) {
       LEFT JOIN moa m ON m.note_id = c.note_id
       LEFT JOIN repeated r ON r.note_id = c.note_id
     )
-    %10$s
-  ", cut_course_sql(con), SECTIONS_TABLE, DBI::dbQuoteString(con, BHC_MOA_SECTION),
-    DBI::dbQuoteString(con, HEADER_PATTERN), paste(keys, collapse = ", "), BHC_SYNONYMS_TABLE,
-    normalized_sql("y.synonymum"), normalized_sql("h.header"), stripped,
-    paste(sprintf(
-      "SELECT '%1$s' AS skupina, %1$s AS klic, count(*) AS n FROM classified GROUP BY 2",
-      c("reference", "moa", "zapis", "opakovani")
+    %11$s
+  ", cut_course_sql(con), LEXICON_TABLE, DBI::dbQuoteString(con, KIND_SECTION), SECTIONS_TABLE,
+    DBI::dbQuoteString(con, BHC_MOA_SECTION), header_matches_sql(con, "substring(text, next_start + 1)"),
+    keys, normalized_sql("y.synonymum"), normalized_sql("h.header"), stripped,
+    paste(c(
+      sprintf(
+        "SELECT '%1$s' AS skupina, %1$s AS klic, count(*) AS n FROM classified GROUP BY 2",
+        c("reference", "moa", "zapis", "opakovani")
+      ),
+      "SELECT 'soubeh', 'jedina', count(*) FILTER (WHERE reference = 'cela_sekce' AND moa = 'chybi' AND opakovani = 'neopakuje') FROM classified",
+      "SELECT 'soubeh', 'podnadpis', count(*) FILTER (WHERE opakovani = 'opakuje' OR moa = 'za') FROM classified",
+      "SELECT 'odsazeni', 'odsazena', count(*) FILTER (WHERE odsazena) FROM classified"
     ), collapse = " UNION ALL "))
 }
 
 # Rozklad zpráv s koncem dřív podle vlastností, které odliší skutečnou sekci polknutou
-# referencí od falešného podnadpisu uvnitř BHC: opakování hlavičky a poloha Medications on
-# Admission. Kategorie `cela_sekce` je splní obě. Čte tabulku párů z `bhc_agreement`.
+# referencí od falešného podnadpisu uvnitř BHC: opakování hlavičky, poloha Medications on
+# Admission a jejich souběh. Kategorie `cela_sekce` je splní obě. Čte tabulku párů z `bhc_agreement`.
 bhc_cut_causes <- function(con, lexicon) {
   check_pairs_table(con)
-  write_temp(con, BHC_SYNONYMS_TABLE, lexicon$sections[c("sekce", "synonymum")])
-  found <- DBI::dbGetQuery(con, sprintf("%s UNION ALL
-    SELECT 'odsazeni' AS skupina, 'odsazena' AS klic, count(*) FILTER (WHERE odsazena) AS n FROM classified
-  ", cut_causes_sql(con, lexicon)))
+  # Volání jen vytvoří dočasnou tabulku lexikonu, ze které čte cut_causes_sql.
+  header_lexicon(con, lexicon)
+  found <- DBI::dbGetQuery(con, cut_causes_sql(con, lexicon))
   total <- DBI::dbGetQuery(con, sprintf("SELECT count(*) AS n FROM (%s)", cut_course_sql(con)))$n
   place <- match(
     paste(BHC_CAUSES$skupina, BHC_CAUSES$klic), paste(found$skupina, found$klic)
   )
   data.frame(
     skupina = BHC_CAUSES$skupina_popisek,
+    klic = BHC_CAUSES$klic,
     vlastnost = BHC_CAUSES$popisek,
     n = ifelse(is.na(place), 0, as.numeric(found$n[place])),
     celkem = rep(as.numeric(total), nrow(BHC_CAUSES)),
@@ -446,10 +476,10 @@ bhc_cause_table <- function(causes) {
 bhc_cause_text <- function(causes) {
   total <- causes$celkem[[1]]
   if (total == 0) {
-    return("Příčiny konce dřív nelze posoudit, protože žádná spárovaná zpráva nemá náš úsek kratší než target.")
+    return("Příčiny konce dřív nelze posoudit, protože žádná spárovaná zpráva nemá náš úsek jako vlastní prefix targetu.")
   }
   share <- function(key) {
-    n <- causes$n[BHC_CAUSES$klic == key]
+    n <- causes$n[causes$klic == key]
     sprintf("%s zpráv (%s)", percent_label(n, total), count_phrase(n, NOTE_FORMS))
   }
   sprintf(
@@ -460,14 +490,18 @@ bhc_cause_text <- function(causes) {
       "sama úsek uřízla u %s a stojí až za hlavičkou, která úsek uřízla, u %s.",
       "Hlavička, která úsek uřízla, je zapsaná jako synonymum lexikonu u %s, verzálkami u %s",
       "a jinak u %s; administrativní pole je to u %s a BHC je poslední částí zprávy u %s.",
-      "Hlavička téže sekce se ve zprávě znovu vyskytuje za uříznutím u %s, neopakuje se u %s",
-      "a bez následující sekce je %s.",
+      "Hlavička téže sekce se ve zprávě znovu vyskytuje v následující části nebo za ní u %s,",
+      "neopakuje se u %s a bez následující sekce je %s.",
+      "Souběh: polknutá jediná sekce u %s (reference obsahuje celou naši následující sekci,",
+      "Medications on Admission chybí a hlavička se neopakuje), podnadpis u %s (hlavička se opakuje",
+      "nebo Medications on Admission stojí za uříznutím).",
       "Odsazená je hlavička u %s.",
       "Rozklad popisuje, co úsek uřízlo, a sám nerozhoduje, zda je hranice parseru správná."
     ),
     count_phrase(total, NOTE_FORMS), share("cela_sekce"),
     share("chybi"), share("pred"), share("sama"), share("za"),
     share("synonymum"), share("verzalky"), share("jiny"), share("pole"), share("posledni"),
-    share("opakuje"), share("neopakuje"), share("bez"), share("odsazena")
+    share("opakuje"), share("neopakuje"), share("bez"), share("jedina"), share("podnadpis"),
+    share("odsazena")
   )
 }
