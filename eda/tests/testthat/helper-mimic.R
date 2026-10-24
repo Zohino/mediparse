@@ -55,11 +55,11 @@ text_notes <- function(texts, prefix = "n") {
   )
 }
 
-corpus_con <- function(texts, codes = rep("Z99", length(texts)), env = parent.frame()) {
+corpus_con <- function(texts, codes = rep("Z99", length(texts)), env = parent.frame(), ...) {
   hadm <- paste0("h", seq_along(texts))
   padding <- paste0(strrep("x", SHORT_LIMIT), " ", hadm, "\n")
   notes <- text_notes(paste0(padding, texts))
   notes$hadm_id <- hadm
   rows <- data.frame(hadm_id = hadm, icd_code = codes, icd_version = "10", stringsAsFactors = FALSE)
-  mimic_con(discharge = notes, diagnoses_icd = rows, env = env)
+  mimic_con(discharge = notes, diagnoses_icd = rows, ..., env = env)
 }
