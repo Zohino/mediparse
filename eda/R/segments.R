@@ -7,18 +7,17 @@ SECTION_COLUMNS <- c(
 
 # Most vrací konec těla a délku části (hlavička + tělo), ne její začátek, proto se začátek
 # odvozuje jako body_end - span_chars; dotazy, které část vyřezávají, berou výraz odsud.
+part_start_sql <- function(alias) sprintf("%1$s.body_end - %1$s.span_chars", alias)
+
 part_text_sql <- function(text = "d.text", alias = "s") {
-  sprintf(
-    "substring(%1$s, %2$s.body_end - %2$s.span_chars + 1, %2$s.span_chars)", text, alias
-  )
+  sprintf("substring(%s, %s + 1, %s.span_chars)", text, part_start_sql(alias), alias)
 }
 
 # Hlavička části je prefix `part_text_sql` až po začátek těla; offsety jsou tatáž znalost,
 # proto se odvozují vedle sebe. U části `other` je prázdná.
 header_text_sql <- function(text = "d.text", alias = "s") {
   sprintf(
-    "substring(%1$s, %2$s.body_end - %2$s.span_chars + 1, %2$s.body_start - (%2$s.body_end - %2$s.span_chars))",
-    text, alias
+    "substring(%s, %s + 1, %s.body_start - (%s))", text, part_start_sql(alias), alias, part_start_sql(alias)
   )
 }
 
@@ -416,12 +415,12 @@ strip_residue <- function(con, lexicon) {
       WHERE s.section NOT IN (%2$s)
     ),
     found AS (
-      SELECT note_id, unnest(regexp_extract_all(part, %3$s, 1)) AS header FROM kept
+      SELECT note_id, unnest(%3$s) AS header FROM kept
     )
     SELECT (SELECT count(*) FROM diagnostic) AS se_sekci,
       (SELECT count(DISTINCT note_id) FROM found WHERE %4$s IN (%5$s)) AS zbytek
   ", SECTIONS_TABLE, paste(DBI::dbQuoteString(con, keys), collapse = ", "),
-    DBI::dbQuoteString(con, HEADER_PATTERN), normalized_sql("header"),
+    header_matches_sql(con, "part"), normalized_sql("header"),
     paste(normalized_sql(DBI::dbQuoteString(con, synonyms)), collapse = ", "), part_text_sql()))
   lapply(row, as.numeric)
 }

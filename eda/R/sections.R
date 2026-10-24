@@ -23,6 +23,12 @@ read_section_headers <- function(path) {
 
 # Číslice ve výrazu nejsou, aby "10:30" nebyl hlavička; odsazení se připouští, protože hlavičky bývají odsazené.
 HEADER_PATTERN <- "(?m)^[ \\t]*([A-Z][A-Za-z][A-Za-z \\-/&()'.]{0,47}):"
+# `(?m)^` platí i na začátku podřetězce uprostřed řádku, takže text předaný výrazu musí začínat
+# na začátku řádku (části zprávy tak začínají), jinak se najde hlavička za jinou hlavičkou.
+header_matches_sql <- function(con, text_expr) {
+  sprintf("regexp_extract_all(%s, %s, 1)", text_expr, DBI::dbQuoteString(con, HEADER_PATTERN))
+}
+
 MIN_HEADER_CHARS <- 3L
 MIN_COVERAGE <- 0.01
 RANKING_SIZE <- 40L
@@ -55,12 +61,12 @@ note_headers <- function(con) {
     CREATE TEMP TABLE %s AS
     WITH corpus AS (%s),
     found AS (
-      SELECT c.note_id, unnest(regexp_extract_all(d.text, %s, 1)) AS header
+      SELECT c.note_id, unnest(%s) AS header
       FROM corpus c JOIN discharge d ON d.note_id = c.note_id
     ),
     normalized AS (SELECT note_id, header, %s AS norm FROM found)
     SELECT note_id, header, norm FROM normalized WHERE length(norm) >= %d
-  ", HEADERS_TABLE, input_corpus_sql(con), DBI::dbQuoteString(con, HEADER_PATTERN),
+  ", HEADERS_TABLE, input_corpus_sql(con), header_matches_sql(con, "d.text"),
     normalized_sql("header"), MIN_HEADER_CHARS))
   HEADERS_TABLE
 }
