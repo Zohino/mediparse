@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING, Final
 
 import pyarrow as pa
@@ -66,6 +66,30 @@ def separable_notes(
     return notes
 
 
+def sectioned_notes(patients: int) -> list[InputNote]:
+    """Zprávy z ``separable_notes`` se sekcemi; rozlišující slova leží jen v diagnostické sekci.
+
+    Neutrální sekce je pro všechny zprávy stejná, takže po stripu se pozitivní a
+    negativní zprávy neliší a naučené slovo mizí.
+
+    Args:
+        patients: Počet pacientů jako u ``separable_notes``.
+
+    Returns:
+        Zprávy se sekcemi ``History of Present Illness`` a ``Discharge Diagnosis``.
+    """
+    return [
+        replace(
+            note,
+            text=(
+                "History of Present Illness:\nclinic review visit\n\n"
+                f"Discharge Diagnosis:\n{note.text}\n"
+            ),
+        )
+        for note in separable_notes(patients)
+    ]
+
+
 def prediction(
     note_id: str,
     *,
@@ -96,8 +120,8 @@ def training_config(**overrides: object) -> dict[str, object]:
     """Platný config tréninku ve tvaru JSON; test změní jen pole, o kterém je.
 
     Returns:
-        Slovník s klíči ``row_id``, ``diagnosis``, ``seed``, ``fold`` a
-        ``regularization``, přepsanými hodnotami z ``overrides``.
+        Slovník s klíči ``row_id``, ``diagnosis``, ``seed``, ``fold``,
+        ``regularization`` a ``strip_diagnostic_sections``, přepsanými hodnotami z ``overrides``.
     """
     return {
         "row_id": "row",
@@ -105,6 +129,7 @@ def training_config(**overrides: object) -> dict[str, object]:
         "seed": 0,
         "fold": 0,
         "regularization": 1.0,
+        "strip_diagnostic_sections": False,
     } | overrides
 
 

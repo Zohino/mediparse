@@ -56,9 +56,20 @@ class LinearSvmTrainer:
 
         Returns:
             Natrénovaný klasifikátor.
+
+        Raises:
+            InvalidInputError: Z žádného textu nevznikne token, třeba po stripu
+                diagnostických sekcí ze zpráv, které z nich sestávají.
         """
+        vectorizer = TfidfVectorizer(sublinear_tf=True)
+        analyzer = vectorizer.build_analyzer()
+        if not any(analyzer(text) for text in texts):
+            msg = (
+                "Trénovací texty neobsahují žádný token, slovník TF-IDF by byl prázdný."
+            )
+            raise InvalidInputError(msg)
         pipeline = Pipeline([
-            ("tfidf", TfidfVectorizer(sublinear_tf=True)),
+            ("tfidf", vectorizer),
             ("svm", LinearSVC(C=self.regularization, random_state=self.seed)),
         ])
         pipeline.fit(list(texts), list(labels))

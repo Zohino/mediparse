@@ -4,6 +4,13 @@
       "id": "en-logreg",
       "language": "en",
       "model": "logreg",
+      "strip_diagnostic_sections": false,
+      "tuning_trials": 20
+    },
+    {
+      "id": "en-logreg-strip",
+      "language": "en",
+      "model": "logreg",
       "strip_diagnostic_sections": true,
       "tuning_trials": 20
     }

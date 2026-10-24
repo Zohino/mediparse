@@ -10,8 +10,13 @@ from mediparse.entrypoints import smoketest_inference, smoketest_training
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
-from tests.model_support import separable_notes, training_config, write_split
-from tests.support import fixed_revision
+from tests.model_support import (
+    sectioned_notes,
+    separable_notes,
+    training_config,
+    write_split,
+)
+from tests.support import REPOSITORY_SECTION_HEADERS, fixed_revision
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -25,25 +30,31 @@ class Trained(NamedTuple):
     """Cesty k výstupům tréninku."""
 
     notes: Path
+    config: Path
     model: Path
     predictions: Path
 
 
-def _train(root: Path) -> Trained:
+def _train(root: Path, *, strip: bool = False, sections: bool = False) -> Trained:
     notes = root / "notes.parquet"
-    corpus = separable_notes(PATIENTS)
+    corpus = sectioned_notes(PATIENTS) if sections else separable_notes(PATIENTS)
     ParquetNoteTable(notes).write(corpus)
     config = root / "config.json"
     config.write_text(
-        json.dumps(training_config(row_id="row", diagnosis="diabetes")),
+        json.dumps(
+            training_config(
+                row_id="row", diagnosis="diabetes", strip_diagnostic_sections=strip
+            )
+        ),
         encoding="utf-8",
     )
     split = root / "splits.parquet"
     write_split(split, corpus)
-    trained = Trained(notes, root / "model.skops", root / "predictions.parquet")
+    trained = Trained(notes, config, root / "model.skops", root / "predictions.parquet")
     code = smoketest_training.run(
         notes=notes,
         config=config,
+        lexicon=REPOSITORY_SECTION_HEADERS,
         split=split,
         model=trained.model,
         predictions=trained.predictions,
@@ -61,6 +72,8 @@ def test_writes_positive_and_negative_demo(tmp_path: Path) -> None:
 
     code = smoketest_inference.run(
         notes=trained.notes,
+        config=trained.config,
+        lexicon=REPOSITORY_SECTION_HEADERS,
         model=trained.model,
         predictions=trained.predictions,
         demo=demo,
@@ -84,6 +97,8 @@ def test_missing_model_is_refused(
 
     code = smoketest_inference.run(
         notes=trained.notes,
+        config=trained.config,
+        lexicon=REPOSITORY_SECTION_HEADERS,
         model=tmp_path / "none.skops",
         predictions=trained.predictions,
         demo=demo,
@@ -104,6 +119,8 @@ def test_missing_predictions_are_refused(
 
     code = smoketest_inference.run(
         notes=trained.notes,
+        config=trained.config,
+        lexicon=REPOSITORY_SECTION_HEADERS,
         model=trained.model,
         predictions=tmp_path / "none.parquet",
         demo=demo,
@@ -127,6 +144,8 @@ def test_tampered_predictions_are_refused(
 
     code = smoketest_inference.run(
         notes=trained.notes,
+        config=trained.config,
+        lexicon=REPOSITORY_SECTION_HEADERS,
         model=trained.model,
         predictions=trained.predictions,
         demo=demo,
@@ -135,4 +154,48 @@ def test_tampered_predictions_are_refused(
     assert code is ExitCode.REFUSED
     assert not demo.exists()
     assert first.note_id in caplog.text
+    assert "Nesoulad" in caplog.text
+
+
+def test_stripped_training_and_inference_agree(tmp_path: Path) -> None:
+    """Trénink se stripem a inference se stejným configem projdou a zapíšou demo."""
+    trained = _train(tmp_path, strip=True, sections=True)
+    demo = tmp_path / "demo.parquet"
+
+    code = smoketest_inference.run(
+        notes=trained.notes,
+        config=trained.config,
+        lexicon=REPOSITORY_SECTION_HEADERS,
+        model=trained.model,
+        predictions=trained.predictions,
+        demo=demo,
+    )
+
+    assert code is ExitCode.OK
+    assert demo.exists()
+
+
+def test_model_trained_without_strip_mismatches_stripped_inference(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Inference čte přepínač: naučené slovo leží jen v odstraněné sekci, skóre se změní."""
+    trained = _train(tmp_path, strip=False, sections=True)
+    stripping = tmp_path / "strip.json"
+    stripping.write_text(
+        json.dumps(training_config(row_id="row", strip_diagnostic_sections=True)),
+        encoding="utf-8",
+    )
+    demo = tmp_path / "demo.parquet"
+
+    code = smoketest_inference.run(
+        notes=trained.notes,
+        config=stripping,
+        lexicon=REPOSITORY_SECTION_HEADERS,
+        model=trained.model,
+        predictions=trained.predictions,
+        demo=demo,
+    )
+
+    assert code is ExitCode.REFUSED
+    assert not demo.exists()
     assert "Nesoulad" in caplog.text

@@ -1,7 +1,8 @@
 {
-  "row_id": "smoketest-en-svm",
+  "row_id": "smoketest-en-svm-strip",
   "diagnosis": "diabetes",
   "seed": 0,
   "fold": 0,
-  "regularization": 1.0
+  "regularization": 1.0,
+  "strip_diagnostic_sections": true
 }

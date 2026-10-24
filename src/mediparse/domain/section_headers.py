@@ -10,10 +10,15 @@ from typing import TYPE_CHECKING, Annotated, Final, Self
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from mediparse.domain.language import Language
+
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
 MIN_NORMALIZED_CHARS: Final = 3
+# Hlavičky a synonyma v config/section_headers.json jsou anglické (šablona MIMIC-IV-Note),
+# strip a validace matice proto smí pracovat jen se zprávami v tomto jazyce.
+LEXICON_LANGUAGE: Final = Language.EN
 # Klíč pro text mimo rozpoznané sekce; v lexikonu být nesmí, jinak by splynul se zbytkem.
 OTHER: Final = "other"
 # Pravidlo hlavičky má tři části a každá má protějšek v eda/R/sections.R:

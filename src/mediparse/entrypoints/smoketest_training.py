@@ -16,9 +16,9 @@ from mediparse.domain.environment import Environment
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.entrypoints.training_input import training_input
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
-from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.sklearn_classifier import (
@@ -53,6 +53,7 @@ def main(
     *,
     notes: Path,
     config: Path,
+    lexicon: Path,
     split: Path,
     model: Path,
     predictions: Path,
@@ -68,6 +69,7 @@ def main(
     return run(
         notes=notes,
         config=config,
+        lexicon=lexicon,
         split=split,
         model=model,
         predictions=predictions,
@@ -81,6 +83,7 @@ def run(
     *,
     notes: Path,
     config: Path,
+    lexicon: Path,
     split: Path,
     model: Path,
     predictions: Path,
@@ -91,12 +94,13 @@ def run(
 
     Returns:
         OK po uložení modelu, predikcí a manifestu; REFUSED pro chybějící nebo
-        neplatnou tabulku, config a soubor splitu a pro nečitelnou revizi zdroje.
+        neplatnou tabulku, config, lexikon a soubor splitu a pro nečitelnou revizi zdroje.
     """
     training = load_training_config(config)
     source = revision()
+    table, strip = training_input(notes, training, lexicon)
     step = SmoketestTraining(
-        table=ParquetNoteTable(notes),
+        table=table,
         split=ParquetSplitTable(split),
         trainer=LinearSvmTrainer(training.regularization, training.seed),
         store=SkopsModelFile(model),
@@ -113,6 +117,7 @@ def run(
             split_seed=report.split_config.seed,
             split_folds=report.split_config.folds,
             split_sha256=report.split_sha256,
+            diagnostic_strip=strip,
             model=ESTIMATOR,
             model_revision=None,
             tokenizer_revision=None,

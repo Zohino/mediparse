@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING, Final
 
 import pytest
@@ -19,42 +19,41 @@ from mediparse.infrastructure.sklearn_classifier import ESTIMATOR, SkopsModelFil
 from mediparse.infrastructure.split_table import ParquetSplitTable
 from tests.model_support import (
     OVERLAPPING,
+    sectioned_notes,
     separable_notes,
     training_config,
     write_raw_split,
     write_split,
 )
-from tests.support import REVISION, fixed_revision, missing_revision
+from tests.support import (
+    REPOSITORY_SECTION_HEADERS,
+    REVISION,
+    fixed_revision,
+    missing_revision,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Callable
     from pathlib import Path
 
     from mediparse.domain.environment import SourceRevision
+    from mediparse.domain.input_note import InputNote
 
 PATIENTS: Final = 12
 
 
 def _inputs(
-    root: Path,
-    *,
-    diagnosis: str = "diabetes",
-    seed: int = 0,
-    row_id: str | None = "row",
+    root: Path, corpus: list[InputNote] | None = None, **config_fields: object
 ) -> tuple[Path, Path, Path]:
-    corpus = separable_notes(PATIENTS, OVERLAPPING)
+    corpus = corpus or separable_notes(PATIENTS, OVERLAPPING)
     notes = root / "notes.parquet"
     ParquetNoteTable(notes).write(corpus)
-    config_body = training_config(diagnosis=diagnosis, seed=seed)
-    if row_id is None:
+    config_body = training_config(**config_fields)
+    if config_body["row_id"] is None:
         del config_body["row_id"]
-    else:
-        config_body["row_id"] = row_id
-    config = root / f"config-{seed}.json"
-    config.write_text(
-        json.dumps(config_body),
-        encoding="utf-8",
-    )
+    name = "-".join(f"{key}{value}" for key, value in sorted(config_fields.items()))
+    config = root / f"config-{name}.json"
+    config.write_text(json.dumps(config_body), encoding="utf-8")
     split = root / "splits.parquet"
     write_split(split, corpus)
     return notes, config, split
@@ -84,6 +83,25 @@ class _Outputs:
         ]
 
 
+def _call(
+    inputs: tuple[Path, Path, Path],
+    outputs: _Outputs,
+    lexicon: Path,
+    revision: Callable[[], SourceRevision],
+) -> ExitCode:
+    notes, config, split = inputs
+    return smoketest_training.run(
+        notes=notes,
+        config=config,
+        lexicon=lexicon,
+        split=split,
+        model=outputs.model,
+        predictions=outputs.predictions,
+        manifest=outputs.manifest,
+        revision=revision,
+    )
+
+
 def _run(
     notes: Path,
     config: Path,
@@ -91,15 +109,7 @@ def _run(
     outputs: _Outputs,
     revision: Callable[[], SourceRevision] = fixed_revision,
 ) -> ExitCode:
-    return smoketest_training.run(
-        notes=notes,
-        config=config,
-        split=split,
-        model=outputs.model,
-        predictions=outputs.predictions,
-        manifest=outputs.manifest,
-        revision=revision,
-    )
+    return _call((notes, config, split), outputs, REPOSITORY_SECTION_HEADERS, revision)
 
 
 def test_writes_model_and_predictions(tmp_path: Path) -> None:
@@ -259,3 +269,129 @@ def test_unreadable_revision_is_refused_before_training(tmp_path: Path) -> None:
 
     assert code is ExitCode.REFUSED
     assert outputs.existing() == []
+
+
+def _manifest(outputs: _Outputs) -> RunManifest:
+    return RunManifest.model_validate_json(outputs.manifest.read_text(encoding="utf-8"))
+
+
+def test_manifest_records_strip_sections_and_lexicon_digest(tmp_path: Path) -> None:
+    """Se stripem nese manifest klíče diagnostických sekcí a otisk lexikonu."""
+    notes, config, split = _inputs(tmp_path, strip_diagnostic_sections=True)
+    outputs = _Outputs.under(tmp_path / "out")
+
+    code = _run(notes, config, split, outputs)
+
+    strip = _manifest(outputs).diagnostic_strip
+    assert code is ExitCode.OK
+    assert strip is not None
+    assert strip.sections == ("discharge_diagnosis",)
+    assert strip.lexicon_sha256 == file_sha256(REPOSITORY_SECTION_HEADERS)
+
+
+def test_manifest_without_strip_has_null_record(tmp_path: Path) -> None:
+    """Bez stripu je ``diagnostic_strip`` v manifestu ``null``."""
+    notes, config, split = _inputs(tmp_path)
+    outputs = _Outputs.under(tmp_path / "out")
+
+    code = _run(notes, config, split, outputs)
+
+    assert code is ExitCode.OK
+    assert (
+        json.loads(outputs.manifest.read_text(encoding="utf-8"))["diagnostic_strip"]
+        is None
+    )
+
+
+def _lexicon(path: Path, *, extra_diagnostic: bool, synonym: str | None = None) -> Path:
+    body = json.loads(REPOSITORY_SECTION_HEADERS.read_text(encoding="utf-8"))
+    if extra_diagnostic:
+        body["sections"]["past_medical_history"]["diagnostic"] = True
+    if synonym:
+        body["sections"]["allergies"]["synonyms"].append(synonym)
+    path.write_text(json.dumps(body), encoding="utf-8")
+    return path
+
+
+def test_manifest_lists_diagnostic_sections_sorted(tmp_path: Path) -> None:
+    """Sekce jsou seřazené, i když je lexikon deklaruje v opačném pořadí."""
+    lexicon = _lexicon(tmp_path / "lexicon.json", extra_diagnostic=True)
+    notes, config, split = _inputs(tmp_path, strip_diagnostic_sections=True)
+    outputs = _Outputs.under(tmp_path / "out")
+
+    code = _call((notes, config, split), outputs, lexicon, fixed_revision)
+
+    strip = _manifest(outputs).diagnostic_strip
+    assert code is ExitCode.OK
+    assert strip is not None
+    assert strip.sections == ("discharge_diagnosis", "past_medical_history")
+
+
+def test_synonym_change_changes_lexicon_digest(tmp_path: Path) -> None:
+    """Změna synonyma při stejném datasetu a configu změní otisk lexikonu."""
+    notes, config, split = _inputs(tmp_path, strip_diagnostic_sections=True)
+    digests = []
+    for name, synonym in (("a", None), ("b", "Allergy list")):
+        lexicon = _lexicon(
+            tmp_path / f"{name}.json", extra_diagnostic=False, synonym=synonym
+        )
+        outputs = _Outputs.under(tmp_path / name)
+        assert (
+            _call((notes, config, split), outputs, lexicon, fixed_revision)
+            is ExitCode.OK
+        )
+        strip = _manifest(outputs).diagnostic_strip
+        assert strip is not None
+        digests.append(strip.lexicon_sha256)
+
+    assert digests[0] != digests[1]
+
+
+def test_missing_lexicon_is_refused(tmp_path: Path) -> None:
+    """Chybějící lexikon při zapnutém stripu krok odmítne a nic nevznikne."""
+    notes, config, split = _inputs(tmp_path, strip_diagnostic_sections=True)
+    outputs = _Outputs.under(tmp_path / "out")
+
+    code = _call(
+        (notes, config, split), outputs, tmp_path / "none.json", fixed_revision
+    )
+
+    assert code is ExitCode.REFUSED
+    assert outputs.existing() == []
+
+
+def test_strip_changes_scores_on_sectioned_notes(tmp_path: Path) -> None:
+    """Trénink se stripem čte stripnutý text, takže skóre predikcí se liší od běhu bez stripu."""
+    corpus = sectioned_notes(PATIENTS)
+    scores = []
+    for strip in (False, True):
+        root = tmp_path / str(strip)
+        root.mkdir()
+        notes, config, split = _inputs(root, corpus, strip_diagnostic_sections=strip)
+        outputs = _Outputs.under(root / "out")
+        assert _run(notes, config, split, outputs) is ExitCode.OK
+        scores.append([
+            row.score for row in ParquetPredictionTable(outputs.predictions).read()
+        ])
+
+    assert scores[0] != scores[1]
+
+
+def test_strip_removing_all_text_is_refused(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Strip, po kterém nezbyde žádný token, krok odmítne místo pádu vectorizeru."""
+    corpus = [
+        replace(note, text=f"Discharge Diagnosis:\n{note.text}\n")
+        for note in separable_notes(PATIENTS, OVERLAPPING)
+    ]
+    notes, config, split = _inputs(tmp_path, corpus, strip_diagnostic_sections=True)
+    outputs = _Outputs.under(tmp_path / "out")
+
+    code = _run(notes, config, split, outputs)
+
+    assert code is ExitCode.REFUSED
+    assert outputs.existing() == []
+    assert "Traceback" not in caplog.text
+    assert "žádný token" in caplog.text
+    assert "diabetes insulin" not in caplog.text
