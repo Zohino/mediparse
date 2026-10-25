@@ -1,4 +1,4 @@
-"""Načtení předpon kódů ICD pětice z configu kandidátů, který sdílí EDA a kohorta."""
+"""Načtení předpon kódů ICD a zkratek pětice z configu kandidátů, který sdílí EDA a kohorta."""
 
 from __future__ import annotations
 

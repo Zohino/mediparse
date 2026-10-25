@@ -17,7 +17,7 @@ from mediparse.domain.cohort import CohortManifest
 from mediparse.domain.environment import Environment
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.diagnosis_codes_file import load_diagnosis_codes
+from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
 from mediparse.infrastructure.duckdb_cohort import DuckDbCohort
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model

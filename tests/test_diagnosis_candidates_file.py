@@ -10,7 +10,7 @@ import pytest
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.icd import IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.diagnosis_codes_file import load_diagnosis_codes
+from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
 from tests.cohort_support import candidate_prefixes
 from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 
