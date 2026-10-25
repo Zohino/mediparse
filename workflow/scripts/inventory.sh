@@ -19,10 +19,11 @@ read_table() {
     esac
 }
 
-read -r header < <(read_table) || fail "$table nemá hlavičku"
 # záznam končí řádkem se sudým počtem uvozovek od začátku souboru, zalomení uvnitř pole v uvozovkách ho neukončí
 counts=$(read_table | awk '{ quotes += gsub(/"/, "") } quotes % 2 == 0 { n++ } END { print n - 1, quotes % 2 }') || fail "$table nejde přečíst ani rozbalit"
 read -r records quotes <<<"$counts"
+# hlavička až po úplném přečtení: process substitution chybu rozbalení zahodí a soubor by jen „neměl hlavičku“
+read -r header < <(read_table) || fail "$table nemá hlavičku"
 ((quotes == 0)) || fail "$table má neuzavřené pole v uvozovkách"
 ((records > 0)) || fail "$table nemá žádný záznam"
 
