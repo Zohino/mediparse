@@ -9,8 +9,10 @@ import pyarrow.parquet as pq
 
 from mediparse.entrypoints.eda_synthetic_tables import DEFAULT_ROWS, run
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.duckdb_cohort import MIN_CHARS
 
 if TYPE_CHECKING:
+    from collections.abc import Mapping
     from pathlib import Path
 
 ROWS: Final = 3
@@ -22,9 +24,9 @@ MANIFEST = {
 }
 
 
-def _manifest(root: Path) -> Path:
+def _manifest(root: Path, manifest: Mapping[str, object] = MANIFEST) -> Path:
     path = root / "manifest.json"
-    path.write_text(json.dumps(MANIFEST), encoding="utf-8")
+    path.write_text(json.dumps(manifest), encoding="utf-8")
     return path
 
 
@@ -76,3 +78,31 @@ def test_rows_default_when_not_given(tmp_path: Path) -> None:
     run(_arguments(_manifest(tmp_path), out, rows=None))
 
     assert pq.read_table(out / "admissions.parquet").num_rows == DEFAULT_ROWS
+
+
+def test_notes_join_codes_and_pass_the_length_filter(tmp_path: Path) -> None:
+    """Zprávy sdílí hadm_id s kódy ICD a mají aspoň MIN_CHARS znaků, takže vstupní korpus není prázdný."""
+    manifest = {
+        "tables": [
+            {
+                "file": "discharge.csv.gz",
+                "bytes": 1,
+                "records": 3,
+                "columns": ["hadm_id", "text"],
+            },
+            {
+                "file": "diagnoses_icd.csv.gz",
+                "bytes": 1,
+                "records": 3,
+                "columns": ["hadm_id"],
+            },
+        ]
+    }
+    out = tmp_path / "tables"
+
+    run(_arguments(_manifest(tmp_path, manifest), out, rows=ROWS))
+
+    notes = pq.read_table(out / "discharge.parquet").to_pydict()
+    codes = pq.read_table(out / "diagnoses_icd.parquet").to_pydict()
+    assert notes["hadm_id"] == codes["hadm_id"]
+    assert min(len(text) for text in notes["text"]) >= MIN_CHARS
