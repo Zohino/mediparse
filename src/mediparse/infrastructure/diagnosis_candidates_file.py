@@ -1,4 +1,4 @@
-"""Načtení předpon kódů ICD a zkratek pětice z configu kandidátů, který sdílí EDA a kohorta."""
+"""Načtení předpon kódů ICD pětice z configu kandidátů, který sdílí EDA a kohorta."""
 
 from __future__ import annotations
 
@@ -21,7 +21,9 @@ class _Prefixes(BaseModel):
     icd10_prefixes: tuple[str, ...]
 
 
-class _Candidates(BaseModel):
+class Candidates(BaseModel):
+    """Kandidáti configu podle klíče diagnózy; pole kandidátů čtou až adaptéry."""
+
     model_config = ConfigDict(frozen=True, extra="ignore")
 
     candidates: dict[str, dict[str, Any]]
@@ -37,7 +39,7 @@ def load_diagnosis_codes(path: Path) -> DiagnosisCodes:
 
 
 def _parse(text: str) -> DiagnosisCodes:
-    candidates = _Candidates.model_validate_json(text).candidates
+    candidates = Candidates.model_validate_json(text).candidates
     parsed = {
         diagnosis: _Prefixes.model_validate(candidates[diagnosis.value])
         for diagnosis in Diagnosis
