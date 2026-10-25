@@ -6,8 +6,8 @@ import math
 from string import ascii_lowercase
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.cohort import MIN_CELL
 from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.dua import MIN_CELL
 from mediparse.domain.icd import IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 

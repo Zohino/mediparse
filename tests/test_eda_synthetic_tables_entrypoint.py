@@ -9,12 +9,12 @@ import duckdb
 import pyarrow.parquet as pq
 import pytest
 
-from mediparse.domain.cohort import MIN_CELL
+from mediparse.domain.dua import MIN_CELL
 from mediparse.domain.synthetic_tables import DEFAULT_ROWS
 from mediparse.entrypoints.eda_synthetic_tables import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.duckdb_cohort import MIN_CHARS
-from tests.cohort_support import candidate_prefixes
+from tests.cohort_support import candidate_prefixes, write_candidates
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -36,21 +36,12 @@ def _manifest(root: Path, manifest: Mapping[str, object] = MANIFEST) -> Path:
     return path
 
 
-def _candidates(root: Path, prefixes: Mapping[str, object] | None = None) -> Path:
-    path = root / "candidates.json"
-    path.write_text(
-        json.dumps({"candidates": prefixes or candidate_prefixes()}),
-        encoding="utf-8",
-    )
-    return path
-
-
 def _arguments(
     manifest: Path, out: Path, *, rows: int | None, candidates: Path | None = None
 ) -> list[str]:
     arguments = [
         f"--manifest={manifest}",
-        f"--candidates={candidates or _candidates(manifest.parent)}",
+        f"--candidates={candidates or write_candidates(manifest.parent / 'candidates.json')}",
         f"--out={out}",
         "--prefix=canary",
     ]
@@ -146,7 +137,7 @@ def test_candidates_without_icd9_prefix_of_block_diagnosis_are_refused(
             _manifest(tmp_path),
             out,
             rows=ROWS,
-            candidates=_candidates(tmp_path, prefixes),
+            candidates=write_candidates(tmp_path / "candidates.json", prefixes),
         )
     )
 

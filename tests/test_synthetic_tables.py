@@ -7,8 +7,8 @@ from typing import Final
 
 import pytest
 
-from mediparse.domain.cohort import MIN_CELL
 from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.dua import MIN_CELL
 from mediparse.domain.icd import DiagnosisCodes, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.mimic_table import TableShape

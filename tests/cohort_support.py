@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.cohort import CohortCounts, FunnelStep, FunnelStepName
@@ -10,6 +11,7 @@ from mediparse.domain.icd import DiagnosisCodes, IcdVersion
 from mediparse.infrastructure.parquet_file import write_string_table
 
 if TYPE_CHECKING:
+    from collections.abc import Mapping
     from pathlib import Path
 
 PREFIXES: Final[dict[Diagnosis, dict[IcdVersion, tuple[str, ...]]]] = {
@@ -38,6 +40,19 @@ def candidate_prefixes() -> dict[str, dict[str, list[str]]]:
         }
         for diagnosis, by_version in PREFIXES.items()
     }
+
+
+def write_candidates(path: Path, prefixes: Mapping[str, object] | None = None) -> Path:
+    """Zapíše config kandidátů s předponami pětice (výchozí ``candidate_prefixes()``).
+
+    Returns:
+        Cesta k zapsanému souboru.
+    """
+    path.write_text(
+        json.dumps({"candidates": prefixes or candidate_prefixes()}),
+        encoding="utf-8",
+    )
+    return path
 
 
 PADDING_CODES: Final = {
