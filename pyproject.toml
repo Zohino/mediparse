@@ -325,6 +325,12 @@ ignore = [
     "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá Snakemake
 ]
 
+"tests/test_eda_canary_script.py" = [
+    "suspicious-subprocess-import",           # test spouští shellovou funkci kanárka, jinak ji pokrýt nejde
+    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, skript se předává bashi jako soubor
+    "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá pixi task eda-synthetic
+]
+
 "src/mediparse/entrypoints/cohort.py" = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
