@@ -18,6 +18,7 @@ from mediparse.domain.clinical_text import (
     NUMBER_PLACEHOLDER,
     TextNormalization,
     expand_diagnosis_acronyms,
+    find_diagnosis_acronyms,
     normalize_clinical_text,
 )
 from mediparse.domain.note_text import deid_markers
@@ -274,6 +275,37 @@ def test_text_without_acronym_word_stays(text: str) -> None:
         return
 
     assert expand_diagnosis_acronyms(text, _ACRONYMS) == text
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("AF, DM2 and MI", ["AF", "DM2", "MI"]),
+        ("DM2 DM", ["DM2", "DM"]),
+        ("AFib af _AF AF9 T2DM", []),
+        ("non-AF (COPD) AF.", ["AF", "COPD", "AF"]),
+        ("", []),
+    ],
+)
+def test_acronyms_are_found_in_order_with_same_boundaries(
+    text: str, expected: list[str]
+) -> None:
+    """Hledání sdílí hranice a přednost delší zkratky s rozvinutím."""
+    assert find_diagnosis_acronyms(text, _ACRONYMS) == expected
+
+
+def test_find_with_empty_dictionary_returns_nothing() -> None:
+    """Prázdná alternace by jinak našla prázdný řetězec mezi znaky."""
+    assert find_diagnosis_acronyms("AF and MI", {}) == []
+
+
+@given(_TOKENS)
+def test_find_count_equals_number_of_replacements(text: str) -> None:
+    """Počet nalezených zkratek je počet zarážek po rozvinutí na zarážku."""
+    marker = "jedinecnyznak"
+    expanded = expand_diagnosis_acronyms(text, dict.fromkeys(_ACRONYMS, marker))
+
+    assert expanded.count(marker) == len(find_diagnosis_acronyms(text, _ACRONYMS))
 
 
 def test_text_normalization_sorts_acronyms() -> None:
