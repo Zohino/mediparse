@@ -33,7 +33,6 @@ test_that("preprocessing_rows a vocabulary_rows zvládnou prázdnou dávku s typ
   expect_equal(nrow(vocabulary), 0L)
   expect_equal(names(vocabulary), names(VOCABULARY_COLUMNS))
   expect_type(vocabulary$token, "character")
-  expect_type(vocabulary$notes, "integer")
 })
 
 test_that("klíče PREPROCESSING_VARIANTS odpovídají variantám mostu", {
@@ -74,10 +73,15 @@ test_that("preprocessing_summary uvádí medián, p95 a průměr tokenů na zpr�
   note_vocabulary(con, MODULE, PATH)
   summary <- preprocessing_summary(con)
 
-  expect_equal(summary$median, PADDING_TOKENS + c(1, 2))
+  expect_equal(summary$p50, PADDING_TOKENS + c(1, 2))
+  expect_equal(summary$p95, PADDING_TOKENS + c(2, 4))
   expect_equal(summary$n, c(3, 3))
   expect_equal(summary$prumer, PADDING_TOKENS + c(4 / 3, 7 / 3))
-  expect_equal(preprocessing_table(summary)$varianta, unname(PREPROCESSING_LABELS))
+  table <- preprocessing_table(summary)
+  expect_equal(table$varianta, unname(PREPROCESSING_LABELS))
+  expect_equal(table$median, c("3", "4"))
+  expect_equal(table$p95, c("4", "6"))
+  expect_equal(table$prumer, c("3,3", "4,3"))
 })
 
 test_that("prázdný korpus dá slovník 0, percentily NA a tabulku s pomlčkami", {
@@ -88,22 +92,25 @@ test_that("prázdný korpus dá slovník 0, percentily NA a tabulku s pomlčkami
   table <- preprocessing_table(summary)
 
   expect_equal(summary$slovnik, c(0, 0))
-  expect_true(all(is.na(summary$median)))
+  expect_true(all(is.na(summary$p50)))
   expect_equal(table$slovnik, c("0", "0"))
   expect_equal(table$median, c("–", "–"))
   expect_equal(table$prumer, c("–", "–"))
   expect_match(preprocessing_text(summary), "nelze posoudit")
 })
 
-AF_GROUPS <- function(with_code = 12L, with_code_only = 10L) {
+# Zprávy čtyř skupin buněk 2×2 (zkratka AF × kód fibrilace); `repeats` je počet výskytů AF v každé
+# zprávě se zkratkou, jednotlivě nebo pro všechny, aby šly nastavit výskyty nezávisle na zprávách.
+af_groups <- function(oba = 10L, jen_zkratka = 10L, jen_kod = 10L, zadne = 10L, repeats = 60L) {
+  with_acronym <- oba + jen_zkratka
+  repeats <- rep_len(repeats, with_acronym)
   list(
     texts = c(
-      rep("Pt with AF", with_code + 10L),
-      rep("Pt stable", with_code_only + 10L)
+      vapply(repeats, function(n) paste("Pt", paste(rep("AF", n), collapse = " ")), character(1)),
+      rep("Pt stable", jen_kod + zadne)
     ),
     codes = c(
-      rep("I48", with_code), rep("Z99", 10L),
-      rep("I48", with_code_only), rep("Z99", 10L)
+      rep("I48", oba), rep("Z99", jen_zkratka), rep("I48", jen_kod), rep("Z99", zadne)
     )
   )
 }
@@ -114,11 +121,13 @@ af_summary <- function(groups) {
   acronym_summary(con, corpus_acronyms(MODULE, PATH), read_candidates(PATH))
 }
 
-test_that("acronym_summary dá podíl zpráv se zkratkou bez kódu a výskyty doslovně", {
-  summary <- af_summary(AF_GROUPS())
-  af <- summary[summary$zkratka == "AF", ]
+af_row <- function(summary) summary[summary$zkratka == "AF", ]
 
-  expect_equal(af$vyskyty, 22)
+test_that("acronym_summary dá podíl zpráv se zkratkou bez kódu a výskyty doslovně", {
+  summary <- af_summary(af_groups(oba = 12L))
+  af <- af_row(summary)
+
+  expect_equal(af$vyskyty, 22 * 60)
   expect_equal(af$podil, 10 / 22)
   expect_false(af$skryto)
   expect_equal(af$kandidat, "atrial_fibrillation")
@@ -126,26 +135,69 @@ test_that("acronym_summary dá podíl zpráv se zkratkou bez kódu a výskyty do
   expect_equal(acronym_table(summary)$bez_kodu[summary$zkratka == "AF"], "45,5")
 })
 
-test_that("buňka 2×2 pod prahem skryje podíl, výskyty zůstanou", {
-  summary <- af_summary(AF_GROUPS(with_code_only = 9L))
-  af <- summary[summary$zkratka == "AF", ]
-  table <- acronym_table(summary)
+test_that("podíl je viditelný, když jsou všechny čtyři buňky přesně 10", {
+  af <- af_row(af_summary(af_groups()))
 
-  expect_true(af$skryto)
-  expect_true(is.na(af$podil))
-  expect_equal(af$vyskyty, 22)
-  expect_equal(table$vyskyty[table$zkratka == "AF"], "22")
-  expect_equal(table$bez_kodu[table$zkratka == "AF"], "–")
+  expect_false(af$skryto)
+  expect_equal(af$podil, 0.5)
 })
 
-test_that("zkratky bez zpráv jsou skryté a tabulka nemá sloupec s počtem zpráv", {
-  summary <- af_summary(AF_GROUPS())
-  table <- acronym_table(summary)
+test_that("každá ze čtyř buněk 2×2 pod prahem skryje podíl, výskyty zůstanou", {
+  cases <- list(
+    oba = af_groups(oba = 9L), jen_zkratka = af_groups(jen_zkratka = 9L, repeats = 70L),
+    jen_kod = af_groups(jen_kod = 9L), zadne = af_groups(zadne = 9L)
+  )
+  for (name in names(cases)) {
+    summary <- af_summary(cases[[name]])
+    af <- af_row(summary)
 
+    expect_true(af$skryto, info = name)
+    expect_true(is.na(af$podil), info = name)
+    expect_gt(af$vyskyty, SHARE_MIN_OCCURRENCES - 1)
+    expect_equal(acronym_table(summary)$bez_kodu[summary$zkratka == "AF"], "–", info = name)
+  }
+})
+
+test_that("zkratka s 35 výskyty má podíl skrytý, i když všechny buňky jsou aspoň 10", {
+  summary <- af_summary(af_groups(oba = 25L, jen_zkratka = 10L, repeats = 1L))
+  af <- af_row(summary)
+
+  expect_equal(af$vyskyty, 35)
+  expect_true(af$skryto)
+  expect_true(is.na(af$podil))
+})
+
+test_that("hranice výskytů: 999 skryje podíl, 1 000 ho zobrazí", {
+  repeats <- function(last) c(rep(50L, 19L), last)
+  below <- af_row(af_summary(af_groups(repeats = repeats(49L))))
+  at <- af_row(af_summary(af_groups(repeats = repeats(50L))))
+
+  expect_equal(below$vyskyty, SHARE_MIN_OCCURRENCES - 1)
+  expect_true(below$skryto)
+  expect_equal(at$vyskyty, SHARE_MIN_OCCURRENCES)
+  expect_false(at$skryto)
+})
+
+test_that("výskyty 1–9 se v tabulce zobrazí jako < 10", {
+  summary <- data.frame(
+    zkratka = c("A", "B", "C", "D", "E"), label_cs = "x", vyskyty = c(0, 5, 9, 10, 1500),
+    podil = NA_real_, stringsAsFactors = FALSE
+  )
+
+  expect_equal(
+    acronym_table(summary)$vyskyty,
+    c("0", paste0("<", NBSP, "10"), paste0("<", NBSP, "10"), "10", paste0("1", NBSP, "500"))
+  )
+})
+
+test_that("souhrn a tabulka zkratek nemají sloupec s počtem zpráv a věta neuvádí počty buněk", {
+  summary <- af_summary(af_groups(jen_kod = 9L))
+
+  expect_equal(names(summary), c("zkratka", "kandidat", "label_cs", "vyskyty", "podil", "skryto"))
+  expect_equal(names(acronym_table(summary)), c("zkratka", "label_cs", "vyskyty", "bez_kodu"))
+  expect_equal(acronym_table(summary)$zkratka, sort(acronym_table(summary)$zkratka))
   expect_true(all(summary$skryto[summary$zkratka != "AF"]))
-  expect_equal(table$zkratka, sort(table$zkratka))
-  expect_equal(ncol(table), length(PREPROCESSING_LAYOUTS[["tbl-zkratky"]]$col.names))
-  expect_false(any(grepl("zprav|zpráv", names(summary))))
+  expect_no_match(acronym_text(summary), "\\b9\\b")
 })
 
 test_that("acronym_summary nad prázdným korpusem nespadne a věta nelze posoudit", {
@@ -167,6 +219,7 @@ test_that("acronym_text srovnává AF s mediánem ostatních zkratek a jmenuje s
   hidden <- base
   hidden$podil[1] <- NA_real_
   expect_match(acronym_text(hidden), "nelze uvést")
+  expect_no_match(acronym_text(hidden), "50")
 
   alone <- base
   alone$podil[-1] <- NA_real_
@@ -177,7 +230,7 @@ test_that("preprocessing_text skloňuje počty tokenů a uvádí změnu slovník
   summary <- function(raw_vocabulary, prepared_vocabulary, median_raw = 5, median_prepared = 2) {
     data.frame(
       varianta = c("raw", "preprocessed"), slovnik = c(raw_vocabulary, prepared_vocabulary),
-      n = 3, median = c(median_raw, median_prepared), p95 = c(9, 8), prumer = c(5, 4),
+      n = 3, p50 = c(median_raw, median_prepared), p95 = c(9, 8), prumer = c(5, 4),
       stringsAsFactors = FALSE
     )
   }

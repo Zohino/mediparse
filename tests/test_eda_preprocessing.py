@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Final
+
 import pytest
 
 from mediparse.entrypoints.eda_preprocessing import (
@@ -16,6 +18,7 @@ from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
 from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 
 ACRONYMS = ["AF", "CKD", "COPD", "DM", "DM2", "ESRD"]
+TWICE: Final = 2
 BASE_COLUMNS = {"note_id", "tokens_raw", "tokens_preprocessed"}
 
 
@@ -60,32 +63,28 @@ def test_empty_input_keeps_every_column() -> None:
 
     assert set(columns) == BASE_COLUMNS | set(ACRONYMS)
     assert all(column == [] for column in columns.values())
-    assert vocabulary == {"variant": [], "token": [], "notes": []}
+    assert vocabulary == {"variant": [], "token": []}
 
 
 def test_different_lengths_raise_value_error() -> None:
     """Zprávy a identifikátory musí být stejně dlouhé."""
-    with pytest.raises(ValueError, match=r"shorter|argument"):
+    with pytest.raises(ValueError, match="argument 2 is shorter"):
         note_preprocessing(REPOSITORY_DIAGNOSIS_CANDIDATES, ["n1", "n2"], ["text"])
 
 
-def test_vocabulary_lists_distinct_tokens_by_variant_with_note_counts() -> None:
-    """Slovník dávky: distinct tokeny po variantách s počtem zpráv, které je mají."""
+def test_vocabulary_lists_distinct_tokens_by_variant() -> None:
+    """Slovník dávky: distinct tokeny po variantách."""
     vocabulary = note_vocabulary(REPOSITORY_DIAGNOSIS_CANDIDATES, ["Pt AF pt", "Pt DM"])
 
-    rows = list(
-        zip(
-            vocabulary["variant"], vocabulary["token"], vocabulary["notes"], strict=True
-        )
-    )
+    rows = list(zip(vocabulary["variant"], vocabulary["token"], strict=True))
     assert rows == [
-        (RAW, "af", 1),
-        (RAW, "dm", 1),
-        (RAW, "pt", 2),
-        (PREPROCESSED, "atrial", 1),
-        (PREPROCESSED, "diabetes", 1),
-        (PREPROCESSED, "fibrillation", 1),
-        (PREPROCESSED, "pt", 2),
+        (RAW, "af"),
+        (RAW, "dm"),
+        (RAW, "pt"),
+        (PREPROCESSED, "atrial"),
+        (PREPROCESSED, "diabetes"),
+        (PREPROCESSED, "fibrillation"),
+        (PREPROCESSED, "pt"),
     ]
 
 
@@ -100,3 +99,16 @@ def test_every_acronym_expands_in_the_model_analyzer() -> None:
 
         assert counted[acronym] == [1]
         assert form.split()[0] in analyzer(text)
+
+
+def test_acronym_order_with_marker_matches_model_expansion() -> None:
+    """Zkratka přilepená ke značce se počítá dvakrát a model ji dvakrát rozvine."""
+    normalization = load_text_normalization(REPOSITORY_DIAGNOSIS_CANDIDATES)
+    analyzer = tfidf_vectorizer(normalization).build_analyzer()
+
+    for acronym, form in normalization.acronyms.items():
+        text = f"___{acronym} and {acronym}."
+        counted = note_preprocessing(REPOSITORY_DIAGNOSIS_CANDIDATES, ["n"], [text])
+
+        assert counted[acronym] == [TWICE]
+        assert analyzer(text).count(form.split()[0]) == TWICE

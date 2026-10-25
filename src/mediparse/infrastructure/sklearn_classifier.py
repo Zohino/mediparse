@@ -70,12 +70,14 @@ def tfidf_vectorizer(normalization: TextNormalization | None) -> TfidfVectorizer
     Returns:
         Nenatrénovaný vectorizer; bez normalizace je to ablace bez preprocessoru.
     """
-    if normalization is None:
-        return TfidfVectorizer(sublinear_tf=True)
-    # Holý dict, ne Mapping ani pydantic objekt: skops uloží dict, jiný typ
-    # by vyžadoval další důvěryhodný typ.
-    preprocessor = functools.partial(
-        tfidf_preprocessor, acronyms=dict(normalization.acronyms)
+    preprocessor = (
+        None
+        if normalization is None
+        # Holý dict, ne Mapping ani pydantic objekt: skops uloží dict, jiný typ
+        # by vyžadoval další důvěryhodný typ.
+        else functools.partial(
+            tfidf_preprocessor, acronyms=dict(normalization.acronyms)
+        )
     )
     return TfidfVectorizer(sublinear_tf=True, preprocessor=preprocessor)
 

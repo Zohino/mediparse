@@ -27,7 +27,7 @@ sections_module <- function() reticulate::import("mediparse.entrypoints.eda_sect
 # reticulate převede na slovník, duplicitní jméno (dvě shodné zprávy) se v něm sloučí
 # a zip() pak spadne na nestejných délkách; vektor délky 1 by se zase stal řetězcem.
 section_rows <- function(module, lexicon_path, chunk) {
-  path <- reticulate::import("pathlib")$Path(lexicon_path)
+  path <- python_path(lexicon_path)
   rows <- module$note_sections(
     path, as.list(unname(chunk$note_id)), as.list(unname(chunk$text))
   )

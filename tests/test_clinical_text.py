@@ -294,9 +294,10 @@ def test_acronyms_are_found_in_order_with_same_boundaries(
     assert find_diagnosis_acronyms(text, _ACRONYMS) == expected
 
 
-def test_find_with_empty_dictionary_returns_nothing() -> None:
+@pytest.mark.parametrize("text", ["AF and MI", "", " ", " . "])
+def test_find_with_empty_dictionary_returns_nothing(text: str) -> None:
     """Prázdná alternace by jinak našla prázdný řetězec mezi znaky."""
-    assert find_diagnosis_acronyms("AF and MI", {}) == []
+    assert find_diagnosis_acronyms(text, {}) == []
 
 
 @given(_TOKENS)

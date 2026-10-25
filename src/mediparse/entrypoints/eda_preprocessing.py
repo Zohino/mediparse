@@ -6,6 +6,7 @@ from collections import Counter
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.clinical_text import (
+    TextNormalization,
     find_diagnosis_acronyms,
     normalize_clinical_text,
 )
@@ -13,11 +14,20 @@ from mediparse.infrastructure.diagnosis_candidates_file import load_text_normali
 from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    from collections.abc import Callable, Sequence
     from pathlib import Path
 
 RAW: Final = "raw"
 PREPROCESSED: Final = "preprocessed"
+
+
+def _analyzers(
+    normalization: TextNormalization,
+) -> dict[str, Callable[[str], list[str]]]:
+    return {
+        RAW: tfidf_vectorizer(None).build_analyzer(),
+        PREPROCESSED: tfidf_vectorizer(normalization).build_analyzer(),
+    }
 
 
 def diagnosis_acronyms(candidates: Path) -> list[str]:
@@ -25,6 +35,9 @@ def diagnosis_acronyms(candidates: Path) -> list[str]:
 
     Returns:
         Zkratky seřazené abecedně.
+
+    Raises:
+        InvalidInputError: Config kandidátů chybí nebo neodpovídá schématu.
     """
     return sorted(load_text_normalization(candidates).acronyms)
 
@@ -50,10 +63,12 @@ def note_preprocessing(
 
     Raises:
         ValueError: ``note_ids`` a ``texts`` mají různou délku.
+        InvalidInputError: Config kandidátů chybí nebo neodpovídá schématu.
     """
     normalization = load_text_normalization(candidates)
-    raw = tfidf_vectorizer(None).build_analyzer()
-    preprocessed = tfidf_vectorizer(normalization).build_analyzer()
+    analyzers = _analyzers(normalization)
+    raw = analyzers[RAW]
+    preprocessed = analyzers[PREPROCESSED]
     ids: list[str] = []
     tokens_raw: list[int] = []
     tokens_preprocessed: list[int] = []
@@ -81,10 +96,8 @@ def note_preprocessing(
     }
 
 
-def note_vocabulary(
-    candidates: Path, texts: Sequence[str]
-) -> dict[str, list[str] | list[int]]:
-    """Vrátí distinct tokeny dávky po variantách s počtem zpráv, které je obsahují.
+def note_vocabulary(candidates: Path, texts: Sequence[str]) -> dict[str, list[str]]:
+    """Vrátí distinct tokeny dávky po variantách.
 
     Slovník korpusu vzniká sjednocením dávek v databázi: stavový akumulátor by při
     opakovaném volání z R zůstal prázdný, protože ``batched_table`` existující tabulku
@@ -95,21 +108,16 @@ def note_vocabulary(
         texts: Texty zpráv dávky.
 
     Returns:
-        Sloupce ``variant`` (``RAW`` nebo ``PREPROCESSED``), ``token`` a ``notes``
-        (počet zpráv dávky s tokenem) nejdřív ``RAW``, pak ``PREPROCESSED``, uvnitř podle tokenu, vždy všechny.
+        Sloupce ``variant`` (``RAW`` nebo ``PREPROCESSED``) a ``token``, nejdřív
+        ``RAW``, pak ``PREPROCESSED``, uvnitř podle tokenu, vždy oba.
+
+    Raises:
+        InvalidInputError: Config kandidátů chybí nebo neodpovídá schématu.
     """
-    normalization = load_text_normalization(candidates)
-    analyzers = {
-        RAW: tfidf_vectorizer(None).build_analyzer(),
-        PREPROCESSED: tfidf_vectorizer(normalization).build_analyzer(),
-    }
     variants: list[str] = []
     tokens: list[str] = []
-    notes: list[int] = []
-    for variant, analyzer in analyzers.items():
-        documents = Counter(token for text in texts for token in set(analyzer(text)))
-        for token, count in sorted(documents.items()):
-            variants.append(variant)
-            tokens.append(token)
-            notes.append(count)
-    return {"variant": variants, "token": tokens, "notes": notes}
+    for variant, analyzer in _analyzers(load_text_normalization(candidates)).items():
+        distinct = sorted({token for text in texts for token in analyzer(text)})
+        variants.extend([variant] * len(distinct))
+        tokens.extend(distinct)
+    return {"variant": variants, "token": tokens}

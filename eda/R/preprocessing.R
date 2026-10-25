@@ -1,11 +1,16 @@
 PREPROCESSING_TABLE <- "note_preprocessing_input"
 VOCABULARY_TABLE <- "preprocessing_vocabulary_input"
-VOCABULARY_COLUMNS <- c(variant = "VARCHAR", token = "VARCHAR", notes = "INTEGER")
+VOCABULARY_COLUMNS <- c(variant = "VARCHAR", token = "VARCHAR")
 # Varianty vectorizeru (klíč je hodnota `variant` z mostu) a sloupec s tokeny na zprávu; pořadí
 # určuje pořadí řádků tabulky. Shodu klíčů s konstantami mostu hlídá test.
 PREPROCESSING_VARIANTS <- c(raw = "tokens_raw", preprocessed = "tokens_preprocessed")
 PREPROCESSING_LABELS <- c(raw = "Bez předzpracování", preprocessed = "S předzpracováním")
-TOKEN_FORMS <- c("token", "tokeny", "tokenů")
+TOKEN_FORMS <- NGRAM_KINDS[["1"]]$forms
+# Výskyty zkratky shora omezují počet zpráv s ní, tedy neveřejný jmenovatel podílu: 35 výskytů a
+# 28,6 % bez kódu dají jediné řešení 10 z 35 zpráv a rozdíl proti sešitu 8 by odhalil skupinu pod 10.
+# Od 1 000 výskytů připadá na podíl stovky možných jmenovatelů a počet zpráv se zkratkou a kódem
+# z něj dopočítat nejde.
+SHARE_MIN_OCCURRENCES <- 1000L
 # Zkratka AF je víceznačná (afebrile), proto ji věta o zkratkách srovnává s ostatními.
 AMBIGUOUS_ACRONYM <- "AF"
 
@@ -21,8 +26,6 @@ PREPROCESSING_LAYOUTS <- list(
 )
 
 preprocessing_module <- function() reticulate::import("mediparse.entrypoints.eda_preprocessing")
-
-python_path <- function(path) reticulate::import("pathlib")$Path(path)
 
 # Texty a identifikátory musí do Pythonu jako nepojmenovaný seznam ze stejného důvodu jako u
 # `section_rows`; typy se skládají ručně, protože prázdný sloupec by přišel jako `list()`.
@@ -46,7 +49,6 @@ vocabulary_rows <- function(module, path, chunk) {
   data.frame(
     variant = as.character(unlist(rows$variant)),
     token = as.character(unlist(rows$token)),
-    notes = as.integer(unlist(rows$notes)),
     stringsAsFactors = FALSE
   )
 }
@@ -78,31 +80,26 @@ note_vocabulary <- function(con, module, path, batch = 2000L) {
 preprocessing_summary <- function(con) {
   selects <- mapply(percentile_sql, names(PREPROCESSING_VARIANTS), unname(PREPROCESSING_VARIANTS), USE.NAMES = FALSE)
   tokens <- DBI::dbGetQuery(con, paste(sprintf(selects, PREPROCESSING_TABLE), collapse = " UNION ALL "))
-  tokens <- as_numeric_columns(tokens, c("n", "prumer", "p50", "p95"))
+  tokens <- as_numeric_columns(tokens, c("n", "prumer", "minimum", "maximum", PERCENTILE_COLUMNS))
+  tokens <- tokens[match(names(PREPROCESSING_VARIANTS), tokens$metrika), , drop = FALSE]
   vocabulary <- DBI::dbGetQuery(con, sprintf(
     "SELECT variant, count(DISTINCT token) AS slovnik FROM %s GROUP BY variant", VOCABULARY_TABLE
   ))
-  place <- match(names(PREPROCESSING_VARIANTS), vocabulary$variant)
-  slovnik <- as.numeric(vocabulary$slovnik[place])
+  slovnik <- as.numeric(vocabulary$slovnik[match(names(PREPROCESSING_VARIANTS), vocabulary$variant)])
   slovnik[is.na(slovnik)] <- 0
-  data.frame(
-    varianta = names(PREPROCESSING_VARIANTS),
-    slovnik = slovnik,
-    n = tokens$n[match(names(PREPROCESSING_VARIANTS), tokens$metrika)],
-    median = tokens$p50[match(names(PREPROCESSING_VARIANTS), tokens$metrika)],
-    p95 = tokens$p95[match(names(PREPROCESSING_VARIANTS), tokens$metrika)],
-    prumer = tokens$prumer[match(names(PREPROCESSING_VARIANTS), tokens$metrika)],
-    stringsAsFactors = FALSE
-  )
+  out <- cbind(varianta = names(PREPROCESSING_VARIANTS), slovnik = slovnik, tokens[setdiff(names(tokens), "metrika")])
+  rownames(out) <- NULL
+  out
 }
 
 preprocessing_table <- function(summary) {
+  formatted <- format_percentiles(summary)
   data.frame(
     varianta = unname(PREPROCESSING_LABELS[summary$varianta]),
     slovnik = number_text(summary$slovnik),
-    median = number_text(summary$median),
-    p95 = number_text(summary$p95),
-    prumer = ifelse(is.na(summary$prumer), "–", dua_decimal(summary$prumer)),
+    median = formatted$p50,
+    p95 = formatted$p95,
+    prumer = formatted$prumer,
     stringsAsFactors = FALSE
   )
 }
@@ -121,8 +118,8 @@ preprocessing_text <- function(summary) {
   sprintf(
     "Slovník analyzéru před prořezáním má bez předzpracování %s, s předzpracováním %s%s. Zpráva má bez předzpracování v mediánu %s (p95 %s), s předzpracováním %s (p95 %s).",
     count_phrase(raw$slovnik, TOKEN_FORMS), count_phrase(prepared$slovnik, TOKEN_FORMS), change,
-    count_phrase(raw$median, TOKEN_FORMS), number_text(raw$p95),
-    count_phrase(prepared$median, TOKEN_FORMS), number_text(prepared$p95)
+    count_phrase(raw$p50, TOKEN_FORMS), number_text(raw$p95),
+    count_phrase(prepared$p50, TOKEN_FORMS), number_text(prepared$p95)
   )
 }
 
@@ -132,7 +129,8 @@ percent_change_text <- function(after, before) {
 }
 
 # Buňky čtyřpolní tabulky zkratka × kód diagnózy zůstávají uvnitř funkce: veřejný je jen podíl a
-# příznak skrytí, protože počet zpráv se zkratkou by s podílem prozradil rozdíl proti sešitu 8.
+# příznak skrytí: počet zpráv se zkratkou by s podílem prozradil rozdíl proti sešitu 8, výskyty ho
+# jen shora omezují, proto se podíl uvádí jen u zkratek s aspoň SHARE_MIN_OCCURRENCES výskyty.
 acronym_cells <- function(con, acronym, key) {
   cells <- DBI::dbGetQuery(con, sprintf("
     SELECT
@@ -164,16 +162,16 @@ acronym_summary <- function(con, acronyms, candidates) {
   rows <- lapply(acronyms, function(acronym) {
     key <- acronym_owner(acronym, candidates)
     cells <- acronym_cells(con, acronym, key)
-    occurrences <- DBI::dbGetQuery(con, sprintf(
+    occurrences <- as.numeric(DBI::dbGetQuery(con, sprintf(
       "SELECT coalesce(sum(%s), 0) AS n FROM %s", DBI::dbQuoteIdentifier(con, acronym), PREPROCESSING_TABLE
-    ))$n
+    ))$n)
     with_acronym <- cells[["oba"]] + cells[["jen_zkratka"]]
-    hidden <- any(cells < DUA_THRESHOLD)
+    hidden <- any(cells < DUA_THRESHOLD) || occurrences < SHARE_MIN_OCCURRENCES
     data.frame(
       zkratka = acronym,
       kandidat = key,
       label_cs = candidates[[key]]$label_cs,
-      vyskyty = as.numeric(occurrences),
+      vyskyty = occurrences,
       podil = if (hidden) NA_real_ else cells[["jen_zkratka"]] / with_acronym,
       skryto = hidden,
       stringsAsFactors = FALSE
@@ -192,13 +190,14 @@ acronym_table <- function(summary) {
   data.frame(
     zkratka = summary$zkratka,
     label_cs = summary$label_cs,
-    vyskyty = number_text(summary$vyskyty),
-    bez_kodu = ifelse(is.na(summary$podil), "–", dua_decimal(100 * summary$podil)),
+    vyskyty = ifelse(
+      summary$vyskyty > 0 & summary$vyskyty < DUA_THRESHOLD,
+      paste0("<", NBSP, DUA_THRESHOLD), number_text(summary$vyskyty)
+    ),
+    bez_kodu = ifelse(is.na(summary$podil), "–", percent_text(summary$podil, 1)),
     stringsAsFactors = FALSE
   )
 }
-
-share_label <- function(share) paste0(dua_decimal(100 * share), NBSP, "%")
 
 acronym_text <- function(summary) {
   if (nrow(summary) == 0L || sum(summary$vyskyty) == 0) {
@@ -208,18 +207,18 @@ acronym_text <- function(summary) {
   others <- summary$podil[summary$zkratka != AMBIGUOUS_ACRONYM & !is.na(summary$podil)]
   if (nrow(focus) == 0L || is.na(focus$podil)) {
     return(sprintf(
-      "Podíl zpráv se zkratkou %s bez kódu diagnózy nelze uvést, protože některá buňka křížení zkratky a kódu má méně než %d zpráv.",
-      AMBIGUOUS_ACRONYM, DUA_THRESHOLD
+      "Podíl zpráv se zkratkou %s bez kódu diagnózy nelze uvést, protože zkratka nemá aspoň %d výskytů nebo má některá buňka křížení zkratky a kódu méně než %d zpráv.",
+      AMBIGUOUS_ACRONYM, SHARE_MIN_OCCURRENCES, DUA_THRESHOLD
     ))
   }
   if (length(others) == 0L) {
     return(sprintf(
       "Zpráv se zkratkou %s je bez kódu diagnózy %s; ostatní zkratky nelze srovnat, protože jejich podíl je skrytý.",
-      AMBIGUOUS_ACRONYM, share_label(focus$podil)
+      AMBIGUOUS_ACRONYM, percent_label(focus$podil, 1)
     ))
   }
   sprintf(
     "Zpráv se zkratkou %s je bez kódu diagnózy %s, u ostatních zkratek v mediánu %s.",
-    AMBIGUOUS_ACRONYM, share_label(focus$podil), share_label(stats::median(others))
+    AMBIGUOUS_ACRONYM, percent_label(focus$podil, 1), percent_label(stats::median(others), 1)
   )
 }

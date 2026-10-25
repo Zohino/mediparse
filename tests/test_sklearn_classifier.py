@@ -340,3 +340,13 @@ def test_trainer_builds_vectorizer_through_factory(
     model = _trainer(None).fit(texts, labels)
 
     assert model.pipeline["tfidf"].build_analyzer()("ab abc 12 abcd") == ["abc", "abcd"]
+
+
+def test_vectorizer_variants_differ_only_in_preprocessor() -> None:
+    """Obě varianty z jednoho konstruktoru: liší se jen klíčem preprocessor."""
+    plain = tfidf_vectorizer(None).get_params()
+    prepared = tfidf_vectorizer(_NORMALIZATION).get_params()
+
+    assert plain.pop("preprocessor") is None
+    assert prepared.pop("preprocessor") is not None
+    assert plain == prepared
