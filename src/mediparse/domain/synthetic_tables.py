@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+from dataclasses import dataclass, field
 from string import ascii_lowercase
 from typing import TYPE_CHECKING, Final
 
@@ -18,33 +19,32 @@ if TYPE_CHECKING:
     from mediparse.domain.mimic_table import TableShape
 
 TEXT_COLUMN: Final = "text"
-RARE_ROWS: Final = 2
-BLOCKS: Final = 4
-DEFAULT_ROWS: Final = BLOCKS * MIN_CELL + RARE_ROWS
 
 # Sloupce sešitů 2 a 5-7 přetypovávají nebo porovnávají hodnoty (TRY_CAST, CASE, icd_version = '9'),
 # takže buňka s prefixem by všude vyšla jako NULL nebo "jiné" a větve výpočtu by zůstaly
 # nevyzkoušené. Typový sloupec proto nese slovník MIMIC. Řádek patří do bloku
-# (řádek // MIN_CELL) % 4: bloky 0 a 1 jsou ICD-9 s obdobím 2008 - 2010, bloky 2 a 3 ICD-10
-# s obdobím 2017 - 2019, bloky 0 a 2 nesou diagnózu A, bloky 1 a 3 diagnózu B. Každá kategorie
-# tak má n = MIN_CELL (a dvojice skupin po MIN_CELL), takže prevalence a demografie projdou
-# potlačením a výstup je k porovnání před přepisem a po něm.
-_BLOCK_DIAGNOSES: Final = (Diagnosis.DIABETES, Diagnosis.COPD)
-_BLOCK_VERSIONS: Final = (
-    IcdVersion.NINE,
-    IcdVersion.NINE,
-    IcdVersion.TEN,
-    IcdVersion.TEN,
+# (řádek // MIN_CELL) % BLOCKS a blok určuje verzi ICD a diagnózu. Každá hodnota bez prefixu
+# tak sdílí aspoň MIN_CELL řádků (pravidlo kanárka platí pro rows >= BLOCKS * MIN_CELL),
+# dvě skupiny po MIN_CELL v každé verzi projdou potlačením a prevalence diabetu je vidět.
+# CHOPN a Charlsonova kategorie cpd mají nad syntetikou stejných 20 zpráv, rozdíl je pod
+# MIN_CELL, takže je reconcile_charlson (eda/R/diagnoses.R) obě skryje; je to zamýšlená větev,
+# na které se ověřuje parita migrace EDA.
+_BLOCKS: Final = (
+    (IcdVersion.NINE, Diagnosis.DIABETES),
+    (IcdVersion.NINE, Diagnosis.COPD),
+    (IcdVersion.TEN, Diagnosis.DIABETES),
+    (IcdVersion.TEN, Diagnosis.COPD),
 )
-_BLOCK_DIAGNOSIS_INDEX: Final = (0, 1, 0, 1)
+BLOCKS: Final = len(_BLOCKS)
+RARE_ROWS: Final = 2
+DEFAULT_ROWS: Final = BLOCKS * MIN_CELL + RARE_ROWS
+_ERAS: Final = {IcdVersion.NINE: "2008 - 2010", IcdVersion.TEN: "2017 - 2019"}
 _BLOCK_VALUES: Final = {
     ("patients", "gender"): ("F", "M", "F", "M"),
-    ("patients", "anchor_year_group"): ("2008 - 2010",) * 2 + ("2017 - 2019",) * 2,
     ("admissions", "insurance"): ("Medicare", "Private", "Medicare", "Private"),
     ("admissions", "marital_status"): ("MARRIED", "SINGLE", "MARRIED", "SINGLE"),
     ("admissions", "race"): ("WHITE", "BLACK/AFRICAN AMERICAN") * 2,
     ("admissions", "language"): ("English", "Spanish", "English", "Spanish"),
-    ("diagnoses_icd", "icd_version"): ("9", "9", "10", "10"),
 }
 # Vzácné řádky (po blocích) nesou buňku s prefixem jen v těchto sloupcích: kategorie pod
 # MIN_CELL, kterou potlačení musí sloučit, a když selže, kanárek ji najde. Jinde mají hodnoty
@@ -56,12 +56,15 @@ _RARE_WITNESSES: Final = frozenset({
     ("diagnoses_icd", "icd_version"),
     ("diagnoses_icd", "icd_code"),
 })
-# Věk při přijetí je pak 20 + řádek % 40, takže se výpočet anchor_age + rok přijetí - anchor_year
-# opravdu provede a desetiletá pásma sedí na bloky.
-_ROW_VALUES: Final[dict[tuple[str, str], Callable[[int], str]]] = {
-    ("patients", "anchor_age"): lambda row: str(15 + row % (BLOCKS * MIN_CELL)),
-    ("patients", "anchor_year"): lambda _: "2150",
-    ("admissions", "admittime"): lambda _: "2155-01-01 00:00:00",
+# Věk při přijetí (anchor_age + rok přijetí - anchor_year) je 20/30/40/50 podle bloku, takže
+# se výpočet opravdu provede a desetiletá pásma sedí na bloky.
+_DERIVED: Final[dict[tuple[str, str], Callable[[int, SyntheticRun], str]]] = {
+    ("patients", "anchor_age"): lambda block, _: str(15 + 10 * block),
+    ("patients", "anchor_year"): lambda _block, _run: "2150",
+    ("admissions", "admittime"): lambda _block, _run: "2155-01-01 00:00:00",
+    ("patients", "anchor_year_group"): lambda block, _: _ERAS[_BLOCKS[block][0]],
+    ("diagnoses_icd", "icd_version"): lambda block, _: str(_BLOCKS[block][0].value),
+    ("diagnoses_icd", "icd_code"): lambda block, run: run.block_codes[block],
 }
 
 # Klíč patří tabulce, která entitu v MIMIC zakládá. Řádek r každé tabulky tak patří pacientovi
@@ -74,15 +77,59 @@ _KEY_OWNERS: Final = {"subject_id": "patients", "hadm_id": "admissions"}
 _REFERENCES: Final = {("mimic-iv-bhc", "note_id"): "discharge"}
 
 
-# Tabulka, tvar, prefix, počet řádků a kódy tvoří jedno volání; objekt by jen přesunul arity.
-def synthetic_rows(  # ruff: ignore[too-many-arguments]
-    table: str,
-    shape: TableShape,
-    prefix: str,
-    rows: int,
-    *,
-    text_chars: int,
-    codes: DiagnosisCodes,
+@dataclass(frozen=True)
+class SyntheticRun:
+    """Parametry běhu generátoru, ověřené při vytvoření.
+
+    Attributes:
+        prefix: Řetězec, kterým začíná každá buňka s prefixem.
+        rows: Počet řádků každé tabulky.
+        text_chars: Nejmenší délka textu, aby zpráva prošla filtrem délky vstupního korpusu.
+        codes: Předpony pětice; kódy bloků se berou z nich.
+        block_codes: Kód každého bloku, první předpona diagnózy bloku v jeho verzi.
+    """
+
+    prefix: str
+    rows: int
+    text_chars: int
+    codes: DiagnosisCodes
+    block_codes: tuple[str, ...] = field(init=False)
+
+    def __post_init__(self) -> None:
+        """Ověří prefix, počet řádků a předpony diagnóz bloků.
+
+        Raises:
+            InvalidInputError: Prefix je prázdný, počet řádků není kladný nebo diagnóza
+                bloku nemá předponu v jeho verzi ICD.
+        """
+        if not self.prefix:
+            msg = "Prefix syntetických buněk nesmí být prázdný."
+            raise InvalidInputError(msg)
+        if self.rows < 1:
+            msg = (
+                f"Syntetická tabulka potřebuje aspoň jeden řádek, ne {self.rows} řádků."
+            )
+            raise InvalidInputError(msg)
+        object.__setattr__(
+            self,
+            "block_codes",
+            tuple(
+                self._block_code(version, diagnosis) for version, diagnosis in _BLOCKS
+            ),
+        )
+
+    def _block_code(self, version: IcdVersion, diagnosis: Diagnosis) -> str:
+        prefixes = self.codes.prefixes[diagnosis].get(version, ())
+        if not prefixes:
+            msg = f"Diagnóza {diagnosis.value} nemá předponu ICD-{version.value}."
+            raise InvalidInputError(msg)
+        # Kód je první předpona z configu, ne skutečný kód: znalost kódů zůstává jen v configu.
+        # Charlson (comorbidity) pak označí 491 a J41 jako cpd, ale 249 a E08 jako diab ne.
+        return prefixes[0]
+
+
+def synthetic_rows(
+    table: str, shape: TableShape, run: SyntheticRun
 ) -> list[dict[str, str]]:
     """Vytvoří řádky se sloupci v pořadí tabulky a buňkami ``prefix-vlastník-sloupec-řádek``.
 
@@ -90,62 +137,35 @@ def synthetic_rows(  # ruff: ignore[too-many-arguments]
     a u ``note_id`` z MIMIC-IV-Ext-BHC tabulka ``discharge``. Mimo typové sloupce je každá
     buňka v tabulce jedinečná, takže každá kategorie má n = 1 a únik hodnoty do výstupu je
     nalezitelný hledáním prefixu. Typové sloupce nesou slovník MIMIC po blocích
-    (``_typed_value``). Sloupec ``text`` za buňkou opakuje token zprávy, dokud nemá aspoň
-    ``text_chars`` znaků (viz ``_text_token``).
+    (``_typed_value``); hodnota bez prefixu v nich sdílí aspoň ``MIN_CELL`` řádků, když je
+    řádků aspoň ``BLOCKS * MIN_CELL``. Sloupec ``text`` za buňkou opakuje token zprávy,
+    dokud nemá aspoň ``run.text_chars`` znaků (viz ``_text_token``).
 
     Args:
         table: Jméno tabulky bez přípony.
         shape: Sloupce tabulky v pořadí souboru.
-        prefix: Řetězec, kterým začíná každá buňka.
-        rows: Počet řádků.
-        text_chars: Nejmenší délka textu, aby zpráva prošla filtrem délky vstupního korpusu.
-        codes: Předpony pětice; kódy bloků se berou z nich.
+        run: Ověřené parametry běhu.
 
     Returns:
         Řádky jako slovníky sloupec na buňku.
 
     Raises:
-        InvalidInputError: Prefix je prázdný, počet řádků není kladný, tabulka nemá sloupce
-            nebo diagnóza bloku nemá předponu v některé verzi ICD.
+        InvalidInputError: Tabulka nemá sloupce.
     """
-    if not prefix:
-        msg = "Prefix syntetických buněk nesmí být prázdný."
-        raise InvalidInputError(msg)
-    if rows < 1:
-        msg = (
-            f"Syntetická tabulka {table} potřebuje aspoň jeden řádek, ne {rows} řádků."
-        )
-        raise InvalidInputError(msg)
     if not shape.columns:
         msg = f"Tabulka {table} nemá žádné sloupce."
         raise InvalidInputError(msg)
-    for block in range(BLOCKS):
-        _block_code(codes, block)
     return [
         {
-            column: _typed_value(table, column, row, codes)
-            or _cell(table, column, prefix, row, text_chars)
+            column: _typed_value(table, column, row, run)
+            or _cell(table, column, run.prefix, row, run.text_chars)
             for column in shape.columns
         }
-        for row in range(rows)
+        for row in range(run.rows)
     ]
 
 
-def _block_code(codes: DiagnosisCodes, block: int) -> str:
-    diagnosis = _BLOCK_DIAGNOSES[_BLOCK_DIAGNOSIS_INDEX[block]]
-    version = _BLOCK_VERSIONS[block]
-    prefixes = codes.prefixes[diagnosis].get(version, ())
-    if not prefixes:
-        msg = f"Diagnóza {diagnosis.value} nemá předponu ICD-{version.value}."
-        raise InvalidInputError(msg)
-    # Kód je první předpona z configu, ne skutečný kód: znalost kódů zůstává jen v configu.
-    # Charlson (comorbidity) pak označí 491 a J41 jako cpd, ale 249 a E08 jako diab ne.
-    return prefixes[0]
-
-
-def _typed_value(
-    table: str, column: str, row: int, codes: DiagnosisCodes
-) -> str | None:
+def _typed_value(table: str, column: str, row: int, run: SyntheticRun) -> str | None:
     """Vrátí typovou hodnotu buňky, nebo None, když platí buňka s prefixem.
 
     Returns:
@@ -153,26 +173,23 @@ def _typed_value(
     """
     key = (table, column)
     if table == "d_icd_diagnoses":
-        return _dictionary_value(column, row, codes)
-    if key in _ROW_VALUES:
-        return _ROW_VALUES[key](row)
+        return _dictionary_value(column, row, run)
     if row >= BLOCKS * MIN_CELL and key in _RARE_WITNESSES:
         return None
     block = (row // MIN_CELL) % BLOCKS
-    if key == ("diagnoses_icd", "icd_code"):
-        return _block_code(codes, block)
+    if key in _DERIVED:
+        return _DERIVED[key](block, run)
     values = _BLOCK_VALUES.get(key)
     return values[block] if values else None
 
 
-def _dictionary_value(column: str, row: int, codes: DiagnosisCodes) -> str | None:
-    # Číselník kódů pětice je veřejná konstanta: jeho řádky 0-3 jsou čtyři kódy bloků.
+def _dictionary_value(column: str, row: int, run: SyntheticRun) -> str | None:
+    # Číselník kódů pětice je veřejná konstanta: jeho řádky 0-3 jsou kódy bloků.
     if row >= BLOCKS:
         return None
-    version = _BLOCK_VERSIONS[row]
-    diagnosis = _BLOCK_DIAGNOSES[_BLOCK_DIAGNOSIS_INDEX[row]]
+    version, diagnosis = _BLOCKS[row]
     values = {
-        "icd_code": _block_code(codes, row),
+        "icd_code": run.block_codes[row],
         "icd_version": str(version.value),
         "long_title": f"{diagnosis.value} ICD-{version.value}",
     }

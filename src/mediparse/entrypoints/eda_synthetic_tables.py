@@ -16,7 +16,11 @@ import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from mediparse.domain.synthetic_tables import DEFAULT_ROWS, synthetic_rows
+from mediparse.domain.synthetic_tables import (
+    DEFAULT_ROWS,
+    SyntheticRun,
+    synthetic_rows,
+)
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
@@ -51,12 +55,15 @@ def run(argv: Sequence[str]) -> ExitCode:
     """
     args = _parser().parse_args(argv)
     shapes = read_manifest(args.manifest)
-    codes = load_diagnosis_codes(args.candidates)
+    synthetic = SyntheticRun(
+        prefix=args.prefix,
+        rows=args.rows,
+        text_chars=MIN_CHARS,
+        codes=load_diagnosis_codes(args.candidates),
+    )
     # Řádky vzniknou všechny před prvním zápisem, aby odmítnutí nenechalo napůl zapsaný adresář.
     tables = {
-        table: synthetic_rows(
-            table, shape, args.prefix, args.rows, text_chars=MIN_CHARS, codes=codes
-        )
+        table: synthetic_rows(table, shape, synthetic)
         for table, shape in shapes.items()
     }
     for table, rows in tables.items():

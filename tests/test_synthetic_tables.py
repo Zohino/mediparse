@@ -1,4 +1,4 @@
-"""Syntetické řádky tabulky ve tvaru MIMIC: jedinečné buňky, v nichž je vidět prefix."""
+"""Syntetické řádky tabulky ve tvaru MIMIC: buňky s prefixem, typové hodnoty po blocích a pravidlo kanárka."""
 
 from __future__ import annotations
 
@@ -13,8 +13,10 @@ from mediparse.domain.icd import DiagnosisCodes, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.mimic_table import TableShape
 from mediparse.domain.synthetic_tables import (
+    BLOCKS,
     DEFAULT_ROWS,
     RARE_ROWS,
+    SyntheticRun,
     synthetic_rows,
 )
 from tests.cohort_support import CODES, PREFIXES
@@ -65,6 +67,9 @@ EXPECTED: Final = {
     ("admissions", "language"): ("English", "Spanish", "English", "Spanish"),
     ("diagnoses_icd", "icd_version"): ("9", "9", "10", "10"),
     ("diagnoses_icd", "icd_code"): BLOCK_CODES,
+    ("patients", "anchor_age"): ("15", "25", "35", "45"),
+    ("patients", "anchor_year"): ("2150",) * 4,
+    ("admissions", "admittime"): ("2155-01-01 00:00:00",) * 4,
 }
 WITNESSES: Final = {
     ("patients", "anchor_year_group"),
@@ -74,11 +79,13 @@ WITNESSES: Final = {
 TYPED_TABLES: Final = ("patients", "admissions", "diagnoses_icd")
 
 
+def _run(prefix: str, rows: int, codes: DiagnosisCodes = CODES) -> SyntheticRun:
+    return SyntheticRun(prefix=prefix, rows=rows, text_chars=TEXT_CHARS, codes=codes)
+
+
 def _table(table: str, rows: int = DEFAULT_ROWS) -> list[dict[str, str]]:
     shape = TableShape(records=rows, columns=COLUMNS[table])
-    return synthetic_rows(
-        table, shape, PREFIX, rows, text_chars=TEXT_CHARS, codes=CODES
-    )
+    return synthetic_rows(table, shape, _run(PREFIX, rows))
 
 
 def _column(table: str, column: str, rows: int = DEFAULT_ROWS) -> list[str]:
@@ -87,9 +94,7 @@ def _column(table: str, column: str, rows: int = DEFAULT_ROWS) -> list[str]:
 
 def test_rows_have_requested_count_and_columns_in_manifest_order() -> None:
     """Každý řádek má všechny sloupce v pořadí manifestu a řádků je tolik, kolik se žádá."""
-    rows = synthetic_rows(
-        "discharge", SHAPE, "sentinel", ROWS, text_chars=TEXT_CHARS, codes=CODES
-    )
+    rows = synthetic_rows("discharge", SHAPE, _run("sentinel", ROWS))
 
     assert len(rows) == ROWS
     assert all(tuple(row) == SHAPE.columns for row in rows)
@@ -97,9 +102,7 @@ def test_rows_have_requested_count_and_columns_in_manifest_order() -> None:
 
 def test_cells_are_unique_within_table_and_carry_prefix() -> None:
     """Každá buňka tabulky je v ní jedinečná a obsahuje prefix, takže únik zachytí hledání prefixu."""
-    rows = synthetic_rows(
-        "discharge", SHAPE, "sentinel", ROWS, text_chars=TEXT_CHARS, codes=CODES
-    )
+    rows = synthetic_rows("discharge", SHAPE, _run("sentinel", ROWS))
     cells = [cell for row in rows for cell in row.values()]
 
     assert len(set(cells)) == len(cells)
@@ -108,57 +111,43 @@ def test_cells_are_unique_within_table_and_carry_prefix() -> None:
 
 def test_cells_name_table_column_and_row() -> None:
     """Buňka je ve tvaru prefix-tabulka-sloupec-řádek."""
-    rows = synthetic_rows(
-        "radiology", NOTE_SHAPE, "sentinel", 2, text_chars=TEXT_CHARS, codes=CODES
-    )
+    rows = synthetic_rows("radiology", NOTE_SHAPE, _run("sentinel", 2))
 
     assert rows[1]["note_id"] == "sentinel-radiology-note_id-1"
 
 
 def test_rows_are_deterministic() -> None:
     """Stejné vstupy dávají stejné řádky."""
-    assert synthetic_rows(
-        "t", SHAPE, "p", 3, text_chars=TEXT_CHARS, codes=CODES
-    ) == synthetic_rows("t", SHAPE, "p", 3, text_chars=TEXT_CHARS, codes=CODES)
+    assert synthetic_rows("t", SHAPE, _run("p", 3)) == synthetic_rows(
+        "t", SHAPE, _run("p", 3)
+    )
 
 
 def test_zero_rows_are_refused() -> None:
     """Nulový počet řádků je chyba."""
     with pytest.raises(InvalidInputError, match="řádků"):
-        synthetic_rows("t", SHAPE, "p", 0, text_chars=TEXT_CHARS, codes=CODES)
+        synthetic_rows("t", SHAPE, _run("p", 0))
 
 
 def test_table_without_columns_is_refused() -> None:
     """Tabulka bez sloupců je chyba a jmenuje tabulku."""
     with pytest.raises(InvalidInputError, match="empty"):
-        synthetic_rows(
-            "empty",
-            TableShape(records=0, columns=()),
-            "p",
-            3,
-            text_chars=TEXT_CHARS,
-            codes=CODES,
-        )
+        synthetic_rows("empty", TableShape(records=0, columns=()), _run("p", 3))
 
 
 def test_empty_prefix_is_refused() -> None:
     """Prázdný prefix je chyba, protože kanárek by nic nehledal."""
     with pytest.raises(InvalidInputError, match="Prefix"):
-        synthetic_rows("t", SHAPE, "", ROWS, text_chars=TEXT_CHARS, codes=CODES)
+        synthetic_rows("t", SHAPE, _run("", ROWS))
 
 
 def test_patient_and_admission_keys_are_shared_across_tables() -> None:
     """Řádek r každé tabulky patří pacientovi a hospitalizaci r, takže se tabulky spojí jako v MIMIC."""
-    notes = synthetic_rows(
-        "discharge", NOTE_SHAPE, "p", ROWS, text_chars=TEXT_CHARS, codes=CODES
-    )
+    notes = synthetic_rows("discharge", NOTE_SHAPE, _run("p", ROWS))
     codes = synthetic_rows(
         "diagnoses_icd",
         TableShape(records=5, columns=("subject_id", "hadm_id", "icd_code")),
-        "p",
-        ROWS,
-        text_chars=TEXT_CHARS,
-        codes=CODES,
+        _run("p", ROWS),
     )
 
     assert [row["hadm_id"] for row in notes] == [row["hadm_id"] for row in codes]
@@ -171,12 +160,8 @@ def test_bhc_note_id_refers_to_discharge_and_radiology_keeps_its_own() -> None:
     """BHC se páruje s propouštěcí zprávou přes note_id, radiologie má note_id vlastní jako v MIMIC."""
     shape = TableShape(records=5, columns=("note_id", "input"))
 
-    bhc = synthetic_rows(
-        "mimic-iv-bhc", shape, "p", 2, text_chars=TEXT_CHARS, codes=CODES
-    )
-    radiology = synthetic_rows(
-        "radiology", NOTE_SHAPE, "p", 2, text_chars=TEXT_CHARS, codes=CODES
-    )
+    bhc = synthetic_rows("mimic-iv-bhc", shape, _run("p", 2))
+    radiology = synthetic_rows("radiology", NOTE_SHAPE, _run("p", 2))
 
     assert bhc[1]["note_id"] == "p-discharge-note_id-1"
     assert radiology[1]["note_id"] == "p-radiology-note_id-1"
@@ -184,9 +169,7 @@ def test_bhc_note_id_refers_to_discharge_and_radiology_keeps_its_own() -> None:
 
 def test_text_starts_with_its_cell_and_reaches_minimum_length() -> None:
     """Text začíná svou buňkou a má aspoň požadovaný počet znaků, aby prošel filtrem délky."""
-    rows = synthetic_rows(
-        "discharge", NOTE_SHAPE, "p", ROWS, text_chars=TEXT_CHARS, codes=CODES
-    )
+    rows = synthetic_rows("discharge", NOTE_SHAPE, _run("p", ROWS))
 
     assert all(
         row["text"].startswith(f"p-discharge-text-{index} ")
@@ -197,19 +180,12 @@ def test_text_starts_with_its_cell_and_reaches_minimum_length() -> None:
 
 def test_text_token_is_letters_only_and_unique_per_row() -> None:
     """Token z písmen přežije tokenizaci i normalizaci čísel a v každé zprávě je jiný (DF = 1)."""
-    rows = synthetic_rows(
-        "discharge", NOTE_SHAPE, "eda-sentinel", 30, text_chars=TEXT_CHARS, codes=CODES
-    )
+    rows = synthetic_rows("discharge", NOTE_SHAPE, _run("eda-sentinel", 30))
 
     tokens = [row["text"].split()[-1] for row in rows]
 
     assert all(re.fullmatch(r"edasentinel[a-z]+", token) for token in tokens)
     assert len(set(tokens)) == len(tokens)
-
-
-def test_default_rows_are_four_blocks_and_rare_rows() -> None:
-    """Výchozí počet řádků jsou čtyři bloky po MIN_CELL a vzácné řádky."""
-    assert DEFAULT_ROWS == 4 * MIN_CELL + RARE_ROWS
 
 
 @pytest.mark.parametrize(("key", "values"), EXPECTED.items())
@@ -236,10 +212,7 @@ def test_typed_column_has_block_values_and_rare_rows_follow_rule(
 @pytest.mark.parametrize("table", TYPED_TABLES)
 def test_values_without_prefix_are_shared_by_min_cell_rows(table: str) -> None:
     """Pravidlo kanárka: kategorie bez prefixu má aspoň MIN_CELL výskytů, ostatní nesou prefix."""
-    numeric = {"anchor_age", "anchor_year", "admittime"}
     for column in COLUMNS[table]:
-        if column in numeric:
-            continue
         cells = _column(table, column)
         bare = [cell for cell in cells if PREFIX not in cell]
         assert all(bare.count(cell) >= MIN_CELL for cell in set(bare)), column
@@ -247,8 +220,8 @@ def test_values_without_prefix_are_shared_by_min_cell_rows(table: str) -> None:
             assert not bare, column
 
 
-def test_patient_age_at_admission_matches_blocks() -> None:
-    """Věk při přijetí je 20 + řádek % 40 a desetiletá pásma sedí na bloky."""
+def test_patient_age_at_admission_is_shared_within_block() -> None:
+    """Věk při přijetí je 20/30/40/50 podle bloku a vzácné řádky mají věk bloku 0."""
     patients = _table("patients")
     admissions = _table("admissions")
     ages = [
@@ -258,9 +231,14 @@ def test_patient_age_at_admission_matches_blocks() -> None:
         for patient, admission in zip(patients, admissions, strict=True)
     ]
 
-    assert ages == [20 + row % 40 for row in range(DEFAULT_ROWS)]
-    bands = [age // 10 * 10 for age in ages]
-    assert [bands.count(band) for band in (20, 30, 40, 50)] == [12, 10, 10, 10]
+    expected = [20 + 10 * ((row // MIN_CELL) % BLOCKS) for row in range(DEFAULT_ROWS)]
+    assert ages == expected
+    assert [ages.count(age) for age in (20, 30, 40, 50)] == [
+        MIN_CELL + RARE_ROWS,
+        MIN_CELL,
+        MIN_CELL,
+        MIN_CELL,
+    ]
 
 
 def test_era_follows_version_of_same_row() -> None:
@@ -305,10 +283,7 @@ def test_block_codes_are_first_prefixes_of_the_config() -> None:
     rows = synthetic_rows(
         "diagnoses_icd",
         TableShape(records=1, columns=("icd_code",)),
-        PREFIX,
-        3 * MIN_CELL,
-        text_chars=TEXT_CHARS,
-        codes=DiagnosisCodes(prefixes=other),
+        _run(PREFIX, 3 * MIN_CELL, DiagnosisCodes(prefixes=other)),
     )
 
     assert rows[2 * MIN_CELL]["icd_code"] == "Z0"
@@ -316,14 +291,12 @@ def test_block_codes_are_first_prefixes_of_the_config() -> None:
 
 def test_fewer_rows_give_partial_blocks() -> None:
     """Menší počet řádků dá bloky jen částečně a nespadne."""
-    assert _column("diagnoses_icd", "icd_version", 12) == ["9"] * 10 + ["9"] * 2
+    assert _column("patients", "gender", 12) == ["F"] * MIN_CELL + ["M"] * 2
 
 
 def test_table_without_typed_columns_is_unchanged() -> None:
     """Tabulka bez typových sloupců se nemění, buňky jsou jedinečné s prefixem."""
-    rows = synthetic_rows(
-        "discharge", SHAPE, PREFIX, DEFAULT_ROWS, text_chars=TEXT_CHARS, codes=CODES
-    )
+    rows = synthetic_rows("discharge", SHAPE, _run(PREFIX, DEFAULT_ROWS))
     cells = [cell for row in rows for cell in row.values()]
 
     assert len(set(cells)) == len(cells)
@@ -343,12 +316,7 @@ def test_block_diagnosis_without_prefix_is_refused(
         for d, by_version in PREFIXES.items()
     }
 
-    with pytest.raises(InvalidInputError, match=diagnosis.value):
-        synthetic_rows(
-            "patients",
-            TableShape(records=1, columns=("subject_id",)),
-            PREFIX,
-            1,
-            text_chars=TEXT_CHARS,
-            codes=DiagnosisCodes(prefixes=prefixes),
-        )
+    with pytest.raises(
+        InvalidInputError, match=rf"{diagnosis.value}.*ICD-{version.value}"
+    ):
+        _run(PREFIX, 1, DiagnosisCodes(prefixes=prefixes))

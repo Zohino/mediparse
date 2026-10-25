@@ -145,6 +145,22 @@ def test_candidates_without_icd9_prefix_of_block_diagnosis_are_refused(
     assert not out.exists()
 
 
+def test_table_without_columns_is_refused_before_any_output(tmp_path: Path) -> None:
+    """Druhá tabulka bez sloupců shodí běh dřív, než se zapíše první parquet."""
+    manifest = {
+        "tables": [
+            {"file": "discharge.csv.gz", "bytes": 1, "records": 3, "columns": ["a"]},
+            {"file": "admissions.csv.gz", "bytes": 1, "records": 3, "columns": []},
+        ]
+    }
+    out = tmp_path / "tables"
+
+    code = run(_arguments(_manifest(tmp_path, manifest), out, rows=ROWS))
+
+    assert code is ExitCode.REFUSED
+    assert not out.exists()
+
+
 def test_notes_join_codes_and_pass_the_length_filter(tmp_path: Path) -> None:
     """Zprávy sdílí hadm_id s kódy ICD a mají aspoň MIN_CHARS znaků, takže vstupní korpus není prázdný."""
     manifest = {
