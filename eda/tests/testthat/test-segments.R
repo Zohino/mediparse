@@ -725,3 +725,31 @@ test_that("strip_residue_text se zprávou s diagnostickou sekcí a bez zbytku uv
   expect_match(text, paste0("(0", NBSP, "zpráv z "), fixed = TRUE)
   expect_no_match(text, "nelze posoudit")
 })
+
+test_that("header_text_sql vrátí přesně hlavičku části včetně odsazení a dvojtečky", {
+  text <- "  Allergies:\nnone\n\n\tChief Complaint: pain\n"
+  con <- corpus_con(text)
+  segment_corpus(con, sections_module(), LEXICON_PATH())
+
+  out <- DBI::dbGetQuery(con, sprintf("
+    SELECT s.section, %s AS header, %s AS part
+    FROM %s s JOIN discharge d ON d.note_id = s.note_id ORDER BY s.position
+  ", header_text_sql(), part_text_sql(), SECTIONS_TABLE))
+
+  expect_equal(out$section, c(OTHER, "allergies", "chief_complaint"))
+  expect_equal(out$header, c("", "  Allergies:", "\tChief Complaint:"))
+  expect_equal(out$part[2:3], c("  Allergies:\nnone\n\n", "\tChief Complaint: pain\n"))
+})
+
+test_that("header_text_sql je prefix part_text_sql a zbytek je tělo části", {
+  text <- "Allergies:\nžluť\n\nChief Complaint:\npain\n"
+  con <- corpus_con(text)
+  segment_corpus(con, sections_module(), LEXICON_PATH())
+
+  out <- DBI::dbGetQuery(con, sprintf("
+    SELECT %s AS header, %s AS part, substring(d.text, s.body_start + 1, s.body_end - s.body_start) AS body
+    FROM %s s JOIN discharge d ON d.note_id = s.note_id ORDER BY s.position
+  ", header_text_sql(), part_text_sql(), SECTIONS_TABLE))
+
+  expect_equal(paste0(out$header, out$body), out$part)
+})
