@@ -19,6 +19,7 @@ from mediparse.infrastructure.sklearn_classifier import ESTIMATOR, SkopsModelFil
 from mediparse.infrastructure.split_table import ParquetSplitTable
 from tests.model_support import (
     OVERLAPPING,
+    SPELLING_VOCABULARY,
     sectioned_notes,
     separable_notes,
     training_config,
@@ -395,3 +396,38 @@ def test_strip_removing_all_text_is_refused(
     assert "Traceback" not in caplog.text
     assert "žádný token" in caplog.text
     assert "diabetes insulin" not in caplog.text
+
+
+def test_manifest_records_normalization_switch(tmp_path: Path) -> None:
+    """Manifest zapíše přepínač normalizace podle configu."""
+    recorded = []
+    for normalize in (False, True):
+        root = tmp_path / str(normalize)
+        root.mkdir()
+        notes, config, split = _inputs(root, normalize_clinical_text=normalize)
+        outputs = _Outputs.under(root / "out")
+        assert _run(notes, config, split, outputs) is ExitCode.OK
+        recorded.append(_manifest(outputs).normalize_clinical_text)
+
+    assert recorded == [False, True]
+
+
+def test_normalization_changes_scores_on_spelling_variants(tmp_path: Path) -> None:
+    """Zprávy se liší jen zápisem dávky a věku: bez normalizace je model rozliší, s ní ne.
+
+    Výchozí slovník testů žádné rozdíly zápisu nemá a test by prošel naprázdno.
+    """
+    corpus = separable_notes(PATIENTS, SPELLING_VOCABULARY)
+    scores = {}
+    for normalize in (False, True):
+        root = tmp_path / str(normalize)
+        root.mkdir()
+        notes, config, split = _inputs(root, corpus, normalize_clinical_text=normalize)
+        outputs = _Outputs.under(root / "out")
+        assert _run(notes, config, split, outputs) is ExitCode.OK
+        scores[normalize] = {
+            row.score for row in ParquetPredictionTable(outputs.predictions).read()
+        }
+
+    assert len(scores[False]) > 1
+    assert len(scores[True]) == 1

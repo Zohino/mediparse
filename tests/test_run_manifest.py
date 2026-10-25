@@ -24,6 +24,7 @@ def _fields(**changes: object) -> dict[str, object]:
         "split_folds": 5,
         "split_sha256": DIGEST,
         "diagnostic_strip": None,
+        "normalize_clinical_text": False,
         "model": "sklearn TfidfVectorizer+LinearSVC",
         "model_revision": None,
         "tokenizer_revision": None,
@@ -142,3 +143,27 @@ def test_strip_duplicate_sections_are_merged() -> None:
     strip = DiagnosticStrip(sections=("b", "a", "b"), lexicon_sha256=DIGEST)
 
     assert strip.sections == ("a", "b")
+
+
+def test_manifest_records_normalization() -> None:
+    """Zapnutá normalizace se v JSON manifestu objeví jako ``true``."""
+    dumped = RunManifest.model_validate(
+        _fields(normalize_clinical_text=True)
+    ).model_dump(mode="json")
+
+    assert dumped["normalize_clinical_text"] is True
+
+
+def test_manifest_without_normalization_key_is_rejected() -> None:
+    """Klíč ``normalize_clinical_text`` je povinný, bez výchozí hodnoty."""
+    fields = _fields()
+    del fields["normalize_clinical_text"]
+
+    with pytest.raises(ValidationError, match="normalize_clinical_text"):
+        RunManifest.model_validate(fields)
+
+
+def test_normalization_as_string_is_rejected() -> None:
+    """Přepínač je striktní bool, řetězec ``"true"`` neprojde."""
+    with pytest.raises(ValidationError, match="normalize_clinical_text"):
+        RunManifest.model_validate(_fields(normalize_clinical_text="true"))

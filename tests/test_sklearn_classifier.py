@@ -2,18 +2,27 @@
 
 from __future__ import annotations
 
+import re
 from typing import TYPE_CHECKING, Final
 
 import pytest
 import skops.io as sio
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.pipeline import Pipeline
+from sklearn.svm import LinearSVC
 
+from mediparse.domain.clinical_text import NUMBER_PLACEHOLDER, normalize_clinical_text
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.section_headers import strip_diagnostic_sections
 from mediparse.infrastructure.sklearn_classifier import (
+    TRUSTED_FUNCTIONS,
     LinearSvmTrainer,
     SkopsModelFile,
+    tfidf_preprocessor,
 )
-from tests.model_support import separable_notes
+from tests.model_support import SPELLING_VOCABULARY, separable_notes
+from tests.section_support import REPOSITORY_LEXICON, mimic_shaped_notes
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -33,7 +42,9 @@ def test_classify_returns_label_with_signed_score() -> None:
     """Label odpovídá predikci pipeline a skóre má znaménko podle labelu."""
     texts, labels = _corpus()
 
-    classifier = LinearSvmTrainer(regularization=1.0, seed=0).fit(texts, labels)
+    classifier = LinearSvmTrainer(regularization=1.0, seed=0, normalize=False).fit(
+        texts, labels
+    )
     classifications = classifier.classify(texts)
 
     assert tuple(item.predicted for item in classifications) == tuple(labels)
@@ -44,9 +55,11 @@ def test_classify_returns_label_with_signed_score() -> None:
 
 
 def test_model_file_round_trip(tmp_path: Path) -> None:
-    """Uložený model se načte s trusted=[] a klasifikuje stejně."""
+    """Uložený model se načte a klasifikuje stejně."""
     texts, labels = _corpus()
-    classifier = LinearSvmTrainer(regularization=1.0, seed=0).fit(texts, labels)
+    classifier = LinearSvmTrainer(regularization=1.0, seed=0, normalize=False).fit(
+        texts, labels
+    )
     model_file = SkopsModelFile(tmp_path / "out" / "model.skops")
 
     model_file.save(classifier)
@@ -83,3 +96,95 @@ def test_model_file_untrusted_type_is_invalid_input(tmp_path: Path) -> None:
 
     with pytest.raises(InvalidInputError, match=r"unsafe\.skops"):
         SkopsModelFile(path).load()
+
+
+def _trainer(*, normalize: bool) -> LinearSvmTrainer:
+    return LinearSvmTrainer(regularization=1.0, seed=0, normalize=normalize)
+
+
+def _dose_corpus() -> tuple[list[str], list[bool]]:
+    texts = [*SPELLING_VOCABULARY[:1] * 4, *SPELLING_VOCABULARY[1:] * 4]
+    return texts, [True] * 4 + [False] * 4
+
+
+def test_preprocessor_lowercases_after_normalization() -> None:
+    """Vlastní preprocessor vypíná lowercase vectorizeru, snížení písmen nese funkce."""
+    text = "CAST 500mg ___yo"
+
+    assert tfidf_preprocessor(text) == normalize_clinical_text(text).lower()
+    assert "cast" in tfidf_preprocessor(text)
+
+
+def test_trainer_with_normalization_scores_spellings_alike() -> None:
+    """Se zapnutou normalizací dostanou dva zápisy téže dávky a věku stejné skóre."""
+    texts, labels = _dose_corpus()
+
+    normalized = (
+        _trainer(normalize=True).fit(texts, labels).classify(SPELLING_VOCABULARY)
+    )
+    raw = _trainer(normalize=False).fit(texts, labels).classify(SPELLING_VOCABULARY)
+
+    assert normalized[0].score == normalized[1].score
+    assert raw[0].score != raw[1].score
+
+
+def test_model_file_round_trip_with_preprocessor(tmp_path: Path) -> None:
+    """Model s preprocessorem se načte a skóre se shodují."""
+    texts, labels = _dose_corpus()
+    classifier = _trainer(normalize=True).fit(texts, labels)
+    model_file = SkopsModelFile(tmp_path / "model.skops")
+
+    model_file.save(classifier)
+
+    assert model_file.load().classify(SPELLING_VOCABULARY) == classifier.classify(
+        SPELLING_VOCABULARY
+    )
+
+
+def _foreign_preprocessor(text: str) -> str:
+    return text.lower()
+
+
+def test_model_file_foreign_preprocessor_is_invalid_input(tmp_path: Path) -> None:
+    """Funkce mimo seznam důvěryhodných jmen se nenačte."""
+    texts, labels = _corpus()
+    pipeline = Pipeline([
+        ("tfidf", TfidfVectorizer(preprocessor=_foreign_preprocessor)),
+        ("svm", LinearSVC()),
+    ]).fit(texts, labels)
+    path = tmp_path / "foreign.skops"
+    sio.dump(pipeline, path)
+
+    with pytest.raises(
+        InvalidInputError, match=r"foreign\.skops.*_foreign_preprocessor"
+    ):
+        SkopsModelFile(path).load()
+
+
+def test_trusted_functions_are_exact_full_names() -> None:
+    """Seznam nese přesné plné jméno funkce, přejmenování spadne tady, ne při načtení."""
+    assert (
+        f"{tfidf_preprocessor.__module__}.{tfidf_preprocessor.__qualname__}",
+    ) == TRUSTED_FUNCTIONS
+
+
+@pytest.mark.parametrize("name", sorted(mimic_shaped_notes()))
+def test_analyzer_sees_normalized_stripped_fixture(name: str) -> None:
+    """Analyzátor modelu vidí text po stripu a normalizaci tokeny výchozího vzoru."""
+    text = mimic_shaped_notes()[name]
+    texts, labels = _dose_corpus()
+    analyzer = (
+        _trainer(normalize=True).fit(texts, labels).pipeline["tfidf"].build_analyzer()
+    )
+    stripped = strip_diagnostic_sections(text, REPOSITORY_LEXICON)
+
+    expected = TfidfVectorizer().build_analyzer()(
+        normalize_clinical_text(stripped).lower()
+    )
+
+    tokens = analyzer(stripped)
+    assert tokens == expected
+    assert not any("___" in token for token in tokens)
+    assert not any(token.isdigit() for token in tokens)
+    if re.search(r"(?<![A-Za-z0-9_])[0-9]", stripped):
+        assert NUMBER_PLACEHOLDER in tokens

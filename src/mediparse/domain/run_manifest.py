@@ -37,6 +37,7 @@ class RunManifest(BaseModel):
     ``config_sha256`` je hash configu tréninku, ``seed`` seed modelu. Split
     nese ``split_seed``, ``split_folds`` a ``split_sha256``, otisk přiřazení pacientů do foldů.
     ``diagnostic_strip`` je ``None``, když se zprávy nestripovaly.
+    ``normalize_clinical_text`` říká, zda vstup TF-IDF prošel normalizací.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
@@ -49,6 +50,7 @@ class RunManifest(BaseModel):
     split_folds: Annotated[int, Field(ge=2)]
     split_sha256: Sha256
     diagnostic_strip: DiagnosticStrip | None
+    normalize_clinical_text: bool
     model: str
     model_revision: str | None
     tokenizer_revision: str | None

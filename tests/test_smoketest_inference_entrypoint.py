@@ -11,6 +11,8 @@ from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from tests.model_support import (
+    SEPARABLE_VOCABULARY,
+    SPELLING_VOCABULARY,
     sectioned_notes,
     separable_notes,
     training_config,
@@ -35,15 +37,30 @@ class Trained(NamedTuple):
     predictions: Path
 
 
-def _train(root: Path, *, strip: bool = False, sections: bool = False) -> Trained:
+def _train(
+    root: Path,
+    *,
+    strip: bool = False,
+    sections: bool = False,
+    normalize: bool = False,
+) -> Trained:
     notes = root / "notes.parquet"
-    corpus = sectioned_notes(PATIENTS) if sections else separable_notes(PATIENTS)
+    corpus = (
+        sectioned_notes(PATIENTS)
+        if sections
+        else separable_notes(
+            PATIENTS, SPELLING_VOCABULARY if normalize else SEPARABLE_VOCABULARY
+        )
+    )
     ParquetNoteTable(notes).write(corpus)
     config = root / "config.json"
     config.write_text(
         json.dumps(
             training_config(
-                row_id="row", diagnosis="diabetes", strip_diagnostic_sections=strip
+                row_id="row",
+                diagnosis="diabetes",
+                strip_diagnostic_sections=strip,
+                normalize_clinical_text=normalize,
             )
         ),
         encoding="utf-8",
@@ -199,3 +216,23 @@ def test_model_trained_without_strip_mismatches_stripped_inference(
     assert code is ExitCode.REFUSED
     assert not demo.exists()
     assert "Nesoulad" in caplog.text
+
+
+def test_normalized_model_infers_from_raw_notes(tmp_path: Path) -> None:
+    """Model s normalizací se načte a klasifikuje syrové zprávy; config inference ji nečte."""
+    trained = _train(tmp_path, normalize=True)
+    plain = tmp_path / "plain.json"
+    plain.write_text(json.dumps(training_config(row_id="row")), encoding="utf-8")
+    demo = tmp_path / "demo.parquet"
+
+    code = smoketest_inference.run(
+        notes=trained.notes,
+        config=plain,
+        lexicon=REPOSITORY_SECTION_HEADERS,
+        model=trained.model,
+        predictions=trained.predictions,
+        demo=demo,
+    )
+
+    assert code is ExitCode.OK
+    assert demo.exists()

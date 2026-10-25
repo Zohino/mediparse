@@ -102,7 +102,11 @@ def run(
     step = SmoketestTraining(
         table=table,
         split=ParquetSplitTable(split),
-        trainer=LinearSvmTrainer(training.regularization, training.seed),
+        trainer=LinearSvmTrainer(
+            training.regularization,
+            training.seed,
+            normalize=training.normalize_clinical_text,
+        ),
         store=SkopsModelFile(model),
         predictions=ParquetPredictionTable(predictions),
     )
@@ -118,6 +122,7 @@ def run(
             split_folds=report.split_config.folds,
             split_sha256=report.split_sha256,
             diagnostic_strip=strip,
+            normalize_clinical_text=training.normalize_clinical_text,
             model=ESTIMATOR,
             model_revision=None,
             tokenizer_revision=None,

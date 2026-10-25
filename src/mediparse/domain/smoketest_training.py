@@ -19,6 +19,7 @@ class TrainingConfig(BaseModel):
     """Parametry tréninku: řádek matice, diagnóza, seed modelu, testovací fold a regularizace.
 
     ``strip_diagnostic_sections`` zapíná ablaci D2: zprávy se čtou bez diagnostických sekcí.
+    ``normalize_clinical_text`` zapíná normalizaci věku, značek a čísel ve vstupu TF-IDF.
     ``fold`` je číslo foldu, který slouží jako test; jeho horní mez zná až ``Split``.
     """
 
@@ -30,6 +31,7 @@ class TrainingConfig(BaseModel):
     fold: Annotated[int, Field(ge=0)]
     regularization: Annotated[float, Field(gt=0.0)]
     strip_diagnostic_sections: bool
+    normalize_clinical_text: bool
 
 
 @dataclass(frozen=True)

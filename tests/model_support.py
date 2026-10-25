@@ -29,6 +29,12 @@ SEPARABLE_VOCABULARY: Final = (
     "fracture cast orthopedic surgery splint",
 )
 
+SPELLING_VOCABULARY: Final = (
+    "metformin 500mg ___yo",
+    "metformin 500 mg ___ year old",
+)
+"""Slova zpráv, která se liší jen zápisem dávky a věku, takže je po normalizaci nerozliší nic."""
+
 OVERLAPPING: Final = (
     "diabetes insulin glucose clinic review",
     "fracture cast splint clinic review",
@@ -121,7 +127,7 @@ def training_config(**overrides: object) -> dict[str, object]:
 
     Returns:
         Slovník s klíči ``row_id``, ``diagnosis``, ``seed``, ``fold``,
-        ``regularization`` a ``strip_diagnostic_sections``, přepsanými hodnotami z ``overrides``.
+        ``regularization``, ``strip_diagnostic_sections`` a ``normalize_clinical_text``, přepsanými hodnotami z ``overrides``.
     """
     return {
         "row_id": "row",
@@ -130,6 +136,7 @@ def training_config(**overrides: object) -> dict[str, object]:
         "fold": 0,
         "regularization": 1.0,
         "strip_diagnostic_sections": False,
+        "normalize_clinical_text": False,
     } | overrides
 
 
