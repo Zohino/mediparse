@@ -16,6 +16,7 @@
 !translation/markers.py
 !translation/collect.py
 !translation/translate.py
+!scripts/eda-canary.sh
 !pyproject.toml
 !pixi.lock
 !README.md

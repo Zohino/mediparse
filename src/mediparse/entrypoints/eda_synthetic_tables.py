@@ -2,8 +2,9 @@
 
 Konzolový skript ``mediparse-eda-synthetic-tables`` čte jen veřejný manifest
 validace a zapíše pro každou jeho tabulku parquet se samými řetězci, kde je každá
-buňka jedinečná. Render dokumentů nad nimi slouží ke kontrole, že do výstupu
-neuniká obsah buněk.
+buňka v tabulce jedinečná. Klíče pacienta a hospitalizace sdílí tabulky jako v MIMIC
+a texty projdou filtrem délky kohorty, takže render dokumentů běží nad neprázdným
+vstupním korpusem a kontroluje, že do výstupu neuniká obsah buněk.
 """
 
 from __future__ import annotations
@@ -17,6 +18,7 @@ from typing import TYPE_CHECKING, Final
 from mediparse.domain.synthetic_tables import synthetic_rows
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.duckdb_cohort import MIN_CHARS
 from mediparse.infrastructure.mimic_inventory import read_manifest
 from mediparse.infrastructure.parquet_file import write_string_table
 from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
@@ -52,7 +54,7 @@ def run(argv: Sequence[str]) -> ExitCode:
         write_string_table(
             args.out / f"{table}.parquet",
             shape.columns,
-            synthetic_rows(table, shape, args.prefix, args.rows),
+            synthetic_rows(table, shape, args.prefix, args.rows, text_chars=MIN_CHARS),
         )
     write_marker(args.out, SyntheticMarker(prefix=args.prefix, rows=args.rows))
     logger.info("%d syntetických tabulek v %s", len(shapes), args.out)
