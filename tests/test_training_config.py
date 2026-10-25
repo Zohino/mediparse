@@ -59,3 +59,25 @@ def test_strip_switch_as_string_is_rejected() -> None:
         TrainingConfig.model_validate_json(
             json.dumps(training_config(strip_diagnostic_sections="true"))
         )
+
+
+def test_repository_config_normalizes() -> None:
+    """Smoketest běží s normalizací."""
+    assert load_training_config(REPOSITORY_TRAINING_CONFIG).normalize_clinical_text
+
+
+def test_config_without_normalization_switch_is_rejected() -> None:
+    """Přepínač normalizace je povinný, bez výchozí hodnoty."""
+    fields = training_config()
+    del fields["normalize_clinical_text"]
+
+    with pytest.raises(ValidationError, match="normalize_clinical_text"):
+        TrainingConfig.model_validate_json(json.dumps(fields))
+
+
+def test_normalization_switch_as_string_is_rejected() -> None:
+    """Přepínač je striktní bool, řetězec ``"true"`` neprojde."""
+    with pytest.raises(ValidationError, match="normalize_clinical_text"):
+        TrainingConfig.model_validate_json(
+            json.dumps(training_config(normalize_clinical_text="true"))
+        )

@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING, Annotated, Self
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
+from mediparse.domain.clinical_text import NORMALIZATION_LANGUAGE
 from mediparse.domain.identity import RowId
 from mediparse.domain.language import Language
 from mediparse.domain.section_headers import LEXICON_LANGUAGE
@@ -58,6 +59,7 @@ class MatrixRow(BaseModel):
     language: Language
     model: ModelName
     strip_diagnostic_sections: bool
+    normalize_clinical_text: bool
     tuning_trials: PositiveInt
 
     @model_validator(mode="after")
@@ -70,10 +72,25 @@ class MatrixRow(BaseModel):
             raise ValueError(msg)
         return self
 
+    @model_validator(mode="after")
+    def _normalization_is_english_only(self) -> Self:
+        if self.normalize_clinical_text and self.language is not NORMALIZATION_LANGUAGE:
+            msg = (
+                f"Řádek {self.id}: normalizace klinického textu zná jen jazyk "
+                f"svých pravidel ({NORMALIZATION_LANGUAGE})"
+            )
+            raise ValueError(msg)
+        return self
+
     @property
-    def axes(self) -> tuple[Language, ModelName, bool]:
+    def axes(self) -> tuple[Language, ModelName, bool, bool]:
         """Osy, které experiment jednoznačně určují."""
-        return self.language, self.model, self.strip_diagnostic_sections
+        return (
+            self.language,
+            self.model,
+            self.strip_diagnostic_sections,
+            self.normalize_clinical_text,
+        )
 
 
 class ExperimentMatrix(BaseModel):

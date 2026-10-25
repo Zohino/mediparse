@@ -5,6 +5,7 @@
       "language": "en",
       "model": "logreg",
       "strip_diagnostic_sections": false,
+      "normalize_clinical_text": true,
       "tuning_trials": 20
     },
     {
@@ -12,6 +13,15 @@
       "language": "en",
       "model": "logreg",
       "strip_diagnostic_sections": true,
+      "normalize_clinical_text": true,
+      "tuning_trials": 20
+    },
+    {
+      "id": "en-logreg-nonorm",
+      "language": "en",
+      "model": "logreg",
+      "strip_diagnostic_sections": false,
+      "normalize_clinical_text": false,
       "tuning_trials": 20
     }
   ]

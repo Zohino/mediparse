@@ -4,5 +4,6 @@
   "seed": 0,
   "fold": 0,
   "regularization": 1.0,
-  "strip_diagnostic_sections": true
+  "strip_diagnostic_sections": true,
+  "normalize_clinical_text": true
 }

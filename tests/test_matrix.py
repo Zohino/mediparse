@@ -24,6 +24,7 @@ def _row(**overrides: object) -> dict[str, object]:
         "language": "en",
         "model": "logreg",
         "strip_diagnostic_sections": False,
+        "normalize_clinical_text": False,
         "tuning_trials": 20,
     } | overrides
 
@@ -68,6 +69,7 @@ def test_every_model_has_tier() -> None:
         {"tuning_trials": 0},
         {"tuning_trials": "20"},
         {"strip_diagnostic_sections": "true"},
+        {"normalize_clinical_text": "true"},
         {"id": "EN logreg"},
         {"tier": "classical"},
     ],
@@ -77,6 +79,7 @@ def test_every_model_has_tier() -> None:
         "zero-trials",
         "string-trials",
         "string-bool",
+        "string-normalization",
         "bad-id",
         "extra-field",
     ],
@@ -102,6 +105,15 @@ def test_missing_axis_is_rejected() -> None:
         _validate(row)
 
 
+def test_missing_normalization_axis_is_rejected() -> None:
+    """Přepínač normalizace je povinný, bez výchozí hodnoty."""
+    row = _row()
+    del row["normalize_clinical_text"]
+
+    with pytest.raises(ValidationError, match="normalize_clinical_text"):
+        _validate(row)
+
+
 def test_empty_matrix_is_rejected() -> None:
     """Matice bez řádků nic nedeklaruje."""
     with pytest.raises(ValidationError):
@@ -118,6 +130,17 @@ def test_duplicate_experiments_are_rejected() -> None:
     """Dva řádky se stejnými osami jsou tentýž experiment pod dvěma jmény."""
     with pytest.raises(ValidationError, match=r"stejné osy: \[\("):
         _validate(_row(), _row(id="en-logreg-copy"))
+
+
+def test_rows_differing_only_in_normalization_are_distinct() -> None:
+    """Normalizace je osa: dva řádky lišící se jen jí projdou."""
+    matrix = _validate(
+        _row(normalize_clinical_text=True),
+        _row(id="en-logreg-nonorm"),
+    )
+
+    assert len({row.axes for row in matrix.rows}) == len(matrix.rows)
+    assert matrix.rows[0].axes[3] is True
 
 
 def test_models_of_same_tier_are_distinct_experiments() -> None:
@@ -167,6 +190,18 @@ def test_czech_row_with_strip_is_rejected_with_row_id() -> None:
     )
 
 
+def test_czech_row_with_normalization_is_rejected_with_row_id() -> None:
+    """Pravidla normalizace jsou anglická; hláška nese id řádku."""
+    row = _row(id="cs-logreg-norm", language="cs", normalize_clinical_text=True)
+
+    with pytest.raises(ValidationError) as error:
+        _validate(row)
+
+    assert error.value.errors()[0]["msg"].startswith(
+        "Value error, Řádek cs-logreg-norm: normalizace klinického textu"
+    )
+
+
 def test_czech_row_without_strip_is_valid() -> None:
     """Česká zpráva bez stripu je hlavní řádek, projde."""
     (row,) = _validate(_row(id="cs-logreg", language="cs")).rows
@@ -186,6 +221,22 @@ def test_repository_manifest_declares_main_and_ablation_rows() -> None:
         ablation.model,
         ablation.tuning_trials,
     )
+
+
+def test_repository_manifest_declares_normalization_ablation() -> None:
+    """Hlavní řádky normalizují, ablační řádek ne a ostatní osy má jako hlavní."""
+    rows = {row.id: row for row in load_matrix(REPOSITORY_MATRIX).rows}
+
+    main, stripped, ablation = (
+        rows["en-logreg"],
+        rows["en-logreg-strip"],
+        rows["en-logreg-nonorm"],
+    )
+    assert main.normalize_clinical_text is True
+    assert stripped.normalize_clinical_text is True
+    assert ablation.normalize_clinical_text is False
+    assert ablation.strip_diagnostic_sections is False
+    assert (main.language, main.model) == (ablation.language, ablation.model)
 
 
 def test_repository_manifest_is_valid() -> None:
