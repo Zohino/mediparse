@@ -227,9 +227,10 @@ def test_acronym_boundary_is_ascii_like_re2(text: str, expected: str) -> None:
     assert expand_diagnosis_acronyms(text, _ACRONYMS) == expected
 
 
-def test_empty_dictionary_keeps_text() -> None:
-    """Bez slovníku se text nemění."""
-    assert expand_diagnosis_acronyms("AF and MI", {}) == "AF and MI"
+@pytest.mark.parametrize("text", ["AF and MI", "", "a,  b"])
+def test_empty_dictionary_keeps_text(text: str) -> None:
+    """Bez slovníku se text nemění; prázdná alternace by jinak vložila rozvinutí mezi znaky."""
+    assert expand_diagnosis_acronyms(text, {}) == text
 
 
 def test_acronym_after_normalization_next_to_deid_marker() -> None:
@@ -244,7 +245,20 @@ _WORDS: Final = st.text(
 )
 
 
-@given(_WORDS)
+_TOKENS: Final = st.lists(
+    st.sampled_from([
+        *_ACRONYMS,
+        *_ACRONYMS.values(),
+        "AFib",
+        "af",
+        "_AF",
+        "AF9",
+        "x",
+    ])
+).map(" ".join)
+
+
+@given(_WORDS | _TOKENS)
 def test_expansion_is_idempotent(text: str) -> None:
     """Druhé rozvinutí už nic nezmění."""
     once = expand_diagnosis_acronyms(text, _ACRONYMS)
@@ -296,3 +310,13 @@ def test_text_normalization_is_strict_and_forbids_extra() -> None:
         TextNormalization.model_validate({"acronyms": {}, "other": 1})
     with pytest.raises(ValidationError):
         TextNormalization.model_validate({"acronyms": [("AF", "atrial")]})
+
+
+@pytest.mark.parametrize(
+    "acronyms",
+    [{"AF": b"atrial fibrillation"}, {b"AF": "atrial fibrillation"}],
+)
+def test_text_normalization_rejects_bytes(acronyms: dict[object, object]) -> None:
+    """Strict odmítne bytes v klíči i hodnotě, které lax režim převede na řetězec."""
+    with pytest.raises(ValidationError):
+        TextNormalization.model_validate({"acronyms": acronyms})

@@ -99,8 +99,6 @@ class TextNormalization(BaseModel):
     @field_validator("acronyms")
     @classmethod
     def _sorted_and_idempotent(cls, acronyms: dict[str, str]) -> dict[str, str]:
-        if not acronyms:
-            return acronyms
         pattern = _acronym_pattern(acronyms)
         for acronym, form in acronyms.items():
             if pattern.search(form):
