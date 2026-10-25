@@ -70,9 +70,10 @@ def synthetic_rows(
 def _text_token(prefix: str, row: int) -> str:
     """Vrátí token zprávy: písmena prefixu a číslo řádku zapsané písmeny.
 
-    Tokenizace zahodí pomlčky a normalizace přepíše číslice, takže buňku s pomlčkami
-    ve výstupech po tokenech (n-gramy, slovník) kanárek nenajde. Token ze samých písmen
-    oběma kroky projde beze změny a v každé zprávě je jiný (DF = 1). Výstup, ve kterém se
+    Tokenizace zahodí pomlčky a n-gramy EDA berou jen písmena (``[a-z]{2,}``), takže buňku
+    s pomlčkami a číslem řádku ve výstupech po tokenech (n-gramy, slovník) kanárek nenajde.
+    Token ze samých písmen projde beze změny a v každé zprávě je jiný (DF = 1); s číslicí by
+    se v n-gramech zkrátil na kmen, který mají všechny zprávy. Výstup, ve kterém se token
     objeví, proto pustil token jediné zprávy.
 
     Returns:
