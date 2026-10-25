@@ -64,6 +64,24 @@ def tfidf_preprocessor(text: str, acronyms: Mapping[str, str]) -> str:
     return expanded.lower()
 
 
+def tfidf_vectorizer(normalization: TextNormalization | None) -> TfidfVectorizer:
+    """Vectorizer, který používá trénink i měření v sešitu EDA.
+
+    Returns:
+        Nenatrénovaný vectorizer; bez normalizace je to ablace bez preprocessoru.
+    """
+    preprocessor = (
+        None
+        if normalization is None
+        # Holý dict, ne Mapping ani pydantic objekt: skops uloží dict, jiný typ
+        # by vyžadoval další důvěryhodný typ.
+        else functools.partial(
+            tfidf_preprocessor, acronyms=dict(normalization.acronyms)
+        )
+    )
+    return TfidfVectorizer(sublinear_tf=True, preprocessor=preprocessor)
+
+
 # Seznam platí při načtení, ne při uložení: skops model uloží vždy a při načtení
 # pustí funkci jen z tohoto seznamu. Přejmenování funkce proto rozbije načítání
 # dříve uložených modelů. Slovník zkratek nese functools.partial, který musí být
@@ -92,9 +110,7 @@ class LinearSvmTrainer:
             InvalidInputError: Z žádného textu nevznikne token, třeba po stripu
                 diagnostických sekcí ze zpráv, které z nich sestávají.
         """
-        vectorizer = TfidfVectorizer(
-            sublinear_tf=True, preprocessor=self._preprocessor()
-        )
+        vectorizer = tfidf_vectorizer(self.normalization)
         analyzer = vectorizer.build_analyzer()
         if not any(analyzer(text) for text in texts):
             msg = (
@@ -107,15 +123,6 @@ class LinearSvmTrainer:
         ])
         pipeline.fit(list(texts), list(labels))
         return SklearnClassifier(pipeline)
-
-    def _preprocessor(self) -> functools.partial[str] | None:
-        if self.normalization is None:
-            return None
-        # Holý dict, ne Mapping ani pydantic objekt: skops uloží dict, jiný typ
-        # by vyžadoval další důvěryhodný typ.
-        return functools.partial(
-            tfidf_preprocessor, acronyms=dict(self.normalization.acronyms)
-        )
 
 
 @dataclass(frozen=True)

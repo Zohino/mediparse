@@ -81,6 +81,19 @@ def expand_diagnosis_acronyms(text: str, acronyms: Mapping[str, str]) -> str:
     return _acronym_pattern(acronyms).sub(lambda match: acronyms[match[0]], text)
 
 
+def find_diagnosis_acronyms(text: str, acronyms: Mapping[str, str]) -> list[str]:
+    """Najde zkratky diagnóz týmž vzorem, jaký rozvinutí nahrazuje.
+
+    Má běžet nad ``normalize_clinical_text``, ze stejného důvodu jako rozvinutí.
+
+    Returns:
+        Zkratky v pořadí výskytu; prázdný slovník dá prázdný seznam.
+    """
+    if not acronyms:
+        return []
+    return [match[0] for match in _acronym_pattern(acronyms).finditer(text)]
+
+
 class TextNormalization(BaseModel):
     """Záznam normalizace vstupu TF-IDF: slovník zkratek diagnóz a jejich tvarů.
 

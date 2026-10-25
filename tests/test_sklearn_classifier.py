@@ -26,6 +26,7 @@ from mediparse.infrastructure.sklearn_classifier import (
     LinearSvmTrainer,
     SkopsModelFile,
     tfidf_preprocessor,
+    tfidf_vectorizer,
 )
 from tests.model_support import (
     ACRONYM_VOCABULARY,
@@ -302,3 +303,50 @@ def test_analyzer_tokens_after_strip_normalization_and_expansion() -> None:
         "__num__",
         "mg",
     ]
+
+
+def test_vectorizer_without_normalization_has_no_preprocessor_and_lowercases() -> None:
+    """Ablace nonorm nemá preprocessor, písmena snižuje sám vectorizer."""
+    vectorizer = tfidf_vectorizer(None)
+
+    assert vectorizer.preprocessor is None
+    assert vectorizer.build_analyzer()("CAST 5mg") == ["cast", "5mg"]
+
+
+def test_vectorizer_with_normalization_carries_preprocessor_with_dictionary() -> None:
+    """Preprocessor je partial se slovníkem zkratek jako holým dictem."""
+    vectorizer = tfidf_vectorizer(_NORMALIZATION)
+
+    assert isinstance(vectorizer.preprocessor, functools.partial)
+    assert vectorizer.preprocessor.func is tfidf_preprocessor
+    assert vectorizer.preprocessor.keywords == {
+        "acronyms": dict(_NORMALIZATION.acronyms)
+    }
+    assert vectorizer.sublinear_tf
+
+
+def test_trainer_builds_vectorizer_through_factory(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Trenér bere vectorizer z továrny: odlišný token_pattern se projeví v modelu."""
+    monkeypatch.setattr(
+        "mediparse.infrastructure.sklearn_classifier.tfidf_vectorizer",
+        lambda _normalization: TfidfVectorizer(
+            token_pattern=r"[a-z]{3,}"  # ruff: ignore[hardcoded-password-func-arg]
+        ),
+    )
+    texts, labels = _dose_corpus()
+
+    model = _trainer(None).fit(texts, labels)
+
+    assert model.pipeline["tfidf"].build_analyzer()("ab abc 12 abcd") == ["abc", "abcd"]
+
+
+def test_vectorizer_variants_differ_only_in_preprocessor() -> None:
+    """Obě varianty z jednoho konstruktoru: liší se jen klíčem preprocessor."""
+    plain = tfidf_vectorizer(None).get_params()
+    prepared = tfidf_vectorizer(_NORMALIZATION).get_params()
+
+    assert plain.pop("preprocessor") is None
+    assert prepared.pop("preprocessor") is not None
+    assert plain == prepared

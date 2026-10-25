@@ -36,6 +36,14 @@ input_corpus_sql <- function(con) {
   )
 }
 
+# Texty vstupního korpusu: tatáž definice pro každý průchod sešitu 9, který text posílá mimo DuckDB.
+input_texts_sql <- function(con) {
+  sprintf(
+    "SELECT c.note_id, d.text FROM (%s) c JOIN discharge d ON d.note_id = c.note_id",
+    input_corpus_sql(con)
+  )
+}
+
 corpus_funnel <- function(con) {
   rows <- DBI::dbGetQuery(con, paste0(eligible_cte(con), ",
     steps AS (

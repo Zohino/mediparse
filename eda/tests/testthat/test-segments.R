@@ -538,7 +538,7 @@ test_that("tabulky kapitoly projdou export_table s rozvržením sešitu, i nad p
 
 test_that("šířky v TABLE_LAYOUTS odpovídají tbl-colwidths chunků sešitu", {
   notebook <- readLines("../../9-text-structure.qmd", encoding = "UTF-8")
-  layouts <- c(TABLE_LAYOUTS, NGRAM_LAYOUTS, BHC_LAYOUTS)
+  layouts <- c(TABLE_LAYOUTS, NGRAM_LAYOUTS, BHC_LAYOUTS, PREPROCESSING_LAYOUTS)
   for (label in names(layouts)) {
     start <- which(notebook == paste("#| label:", label))
     expect_length(start, 1L)
