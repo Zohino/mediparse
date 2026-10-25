@@ -13,6 +13,7 @@ import pytest
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints import smoketest_training
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
@@ -428,10 +429,7 @@ def test_manifest_records_normalization_with_acronyms(tmp_path: Path) -> None:
         recorded.append(_manifest(outputs).normalize_clinical_text)
 
     assert recorded[0] is None
-    assert recorded[1] is not None
-    assert len(recorded[1].acronyms) == 6  # ruff: ignore[magic-value-comparison]
-    assert recorded[1].acronyms["DM2"] == "diabetes"
-    assert recorded[1].acronyms["AF"] == "atrial fibrillation"
+    assert recorded[1] == load_text_normalization(REPOSITORY_DIAGNOSIS_CANDIDATES)
 
 
 def test_normalization_without_candidates_file_is_refused(

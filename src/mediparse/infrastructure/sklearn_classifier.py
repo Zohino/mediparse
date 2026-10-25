@@ -64,10 +64,10 @@ def tfidf_preprocessor(text: str, acronyms: Mapping[str, str]) -> str:
     return expanded.lower()
 
 
-# skops ukládá funkci jako odkaz modul.jméno a při načtení ji pustí jen z tohoto
-# seznamu. Přejmenování funkce proto rozbije načítání dříve uložených modelů.
-# Slovník zkratek nese functools.partial, který skops uloží, jen když je
-# v seznamu; funkci uvnitř partialu přesto kontroluje samostatně.
+# Seznam platí při načtení, ne při uložení: skops model uloží vždy a při načtení
+# pustí funkci jen z tohoto seznamu. Přejmenování funkce proto rozbije načítání
+# dříve uložených modelů. Slovník zkratek nese functools.partial, který musí být
+# v seznamu také; funkci uvnitř partialu skops kontroluje zvlášť.
 TRUSTED_FUNCTIONS: Final = (
     "functools.partial",
     "mediparse.infrastructure.sklearn_classifier.tfidf_preprocessor",
