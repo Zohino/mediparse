@@ -17,7 +17,7 @@ from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.training_input import training_input
-from mediparse.infrastructure.diagnosis_acronyms_file import load_text_normalization
+from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.package_versions import installed_versions
