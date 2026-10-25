@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from dataclasses import replace
 from typing import TYPE_CHECKING, Final, NamedTuple
 
@@ -11,6 +12,7 @@ from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from tests.model_support import (
+    ACRONYM_VOCABULARY,
     SEPARABLE_VOCABULARY,
     SPELLING_VOCABULARY,
     sectioned_notes,
@@ -18,7 +20,11 @@ from tests.model_support import (
     training_config,
     write_split,
 )
-from tests.support import REPOSITORY_SECTION_HEADERS, fixed_revision
+from tests.support import (
+    REPOSITORY_DIAGNOSIS_CANDIDATES,
+    REPOSITORY_SECTION_HEADERS,
+    fixed_revision,
+)
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -43,13 +49,15 @@ def _train(
     strip: bool = False,
     sections: bool = False,
     normalize: bool = False,
+    vocabulary: tuple[str, str] | None = None,
 ) -> Trained:
     notes = root / "notes.parquet"
     corpus = (
         sectioned_notes(PATIENTS)
         if sections
         else separable_notes(
-            PATIENTS, SPELLING_VOCABULARY if normalize else SEPARABLE_VOCABULARY
+            PATIENTS,
+            vocabulary or (SPELLING_VOCABULARY if normalize else SEPARABLE_VOCABULARY),
         )
     )
     ParquetNoteTable(notes).write(corpus)
@@ -67,10 +75,13 @@ def _train(
     )
     split = root / "splits.parquet"
     write_split(split, corpus)
+    candidates = root / "candidates.json"
+    shutil.copy(REPOSITORY_DIAGNOSIS_CANDIDATES, candidates)
     trained = Trained(notes, config, root / "model.skops", root / "predictions.parquet")
     code = smoketest_training.run(
         notes=notes,
         config=config,
+        candidates=candidates,
         lexicon=REPOSITORY_SECTION_HEADERS,
         split=split,
         model=trained.model,
@@ -228,6 +239,25 @@ def test_normalized_model_infers_from_raw_notes(tmp_path: Path) -> None:
     code = smoketest_inference.run(
         notes=trained.notes,
         config=plain,
+        lexicon=REPOSITORY_SECTION_HEADERS,
+        model=trained.model,
+        predictions=trained.predictions,
+        demo=demo,
+    )
+
+    assert code is ExitCode.OK
+    assert demo.exists()
+
+
+def test_model_with_acronyms_infers_without_candidates_file(tmp_path: Path) -> None:
+    """Slovník zkratek nese model: po smazání souboru kandidátů inference predikce reprodukuje."""
+    trained = _train(tmp_path, normalize=True, vocabulary=ACRONYM_VOCABULARY)
+    (tmp_path / "candidates.json").unlink()
+    demo = tmp_path / "demo.parquet"
+
+    code = smoketest_inference.run(
+        notes=trained.notes,
+        config=trained.config,
         lexicon=REPOSITORY_SECTION_HEADERS,
         model=trained.model,
         predictions=trained.predictions,

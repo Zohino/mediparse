@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import shutil
 from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING, Final
 
@@ -12,12 +13,14 @@ import pytest
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints import smoketest_training
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.sklearn_classifier import ESTIMATOR, SkopsModelFile
 from mediparse.infrastructure.split_table import ParquetSplitTable
 from tests.model_support import (
+    ACRONYM_VOCABULARY,
     OVERLAPPING,
     SPELLING_VOCABULARY,
     sectioned_notes,
@@ -27,6 +30,7 @@ from tests.model_support import (
     write_split,
 )
 from tests.support import (
+    REPOSITORY_DIAGNOSIS_CANDIDATES,
     REPOSITORY_SECTION_HEADERS,
     REVISION,
     fixed_revision,
@@ -89,11 +93,14 @@ def _call(
     outputs: _Outputs,
     lexicon: Path,
     revision: Callable[[], SourceRevision],
+    *,
+    candidates: Path = REPOSITORY_DIAGNOSIS_CANDIDATES,
 ) -> ExitCode:
     notes, config, split = inputs
     return smoketest_training.run(
         notes=notes,
         config=config,
+        candidates=candidates,
         lexicon=lexicon,
         split=split,
         model=outputs.model,
@@ -111,6 +118,18 @@ def _run(
     revision: Callable[[], SourceRevision] = fixed_revision,
 ) -> ExitCode:
     return _call((notes, config, split), outputs, REPOSITORY_SECTION_HEADERS, revision)
+
+
+def _run_with_candidates(
+    inputs: tuple[Path, Path, Path], outputs: _Outputs, candidates: Path
+) -> ExitCode:
+    return _call(
+        inputs,
+        outputs,
+        REPOSITORY_SECTION_HEADERS,
+        fixed_revision,
+        candidates=candidates,
+    )
 
 
 def test_writes_model_and_predictions(tmp_path: Path) -> None:
@@ -398,8 +417,8 @@ def test_strip_removing_all_text_is_refused(
     assert "diabetes insulin" not in caplog.text
 
 
-def test_manifest_records_normalization_switch(tmp_path: Path) -> None:
-    """Manifest zapíše přepínač normalizace podle configu."""
+def test_manifest_records_normalization_with_acronyms(tmp_path: Path) -> None:
+    """Manifest zapíše ``None`` bez normalizace a slovník zkratek z configu s ní."""
     recorded = []
     for normalize in (False, True):
         root = tmp_path / str(normalize)
@@ -409,7 +428,59 @@ def test_manifest_records_normalization_switch(tmp_path: Path) -> None:
         assert _run(notes, config, split, outputs) is ExitCode.OK
         recorded.append(_manifest(outputs).normalize_clinical_text)
 
-    assert recorded == [False, True]
+    assert recorded[0] is None
+    assert recorded[1] == load_text_normalization(REPOSITORY_DIAGNOSIS_CANDIDATES)
+
+
+def test_normalization_without_candidates_file_is_refused(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Zapnutá normalizace bez souboru kandidátů krok odmítne a nic nezapíše."""
+    notes, config, split = _inputs(tmp_path, normalize_clinical_text=True)
+    outputs = _Outputs.under(tmp_path / "out")
+
+    code = _run_with_candidates((notes, config, split), outputs, tmp_path / "none.json")
+
+    assert code is ExitCode.REFUSED
+    assert outputs.existing() == []
+    assert "none.json" in caplog.text
+
+
+def test_candidates_file_is_not_read_without_normalization(tmp_path: Path) -> None:
+    """Při vypnuté normalizaci se soubor kandidátů nečte, neexistující cesta projde."""
+    notes, config, split = _inputs(tmp_path, normalize_clinical_text=False)
+    outputs = _Outputs.under(tmp_path / "out")
+
+    code = _run_with_candidates((notes, config, split), outputs, tmp_path / "none.json")
+
+    assert code is ExitCode.OK
+
+
+def test_normalization_merges_abbreviation_and_full_name(tmp_path: Path) -> None:
+    """Zapojení v composition rootu: zkratka a vypsaný název dají se slovníkem stejné skóre.
+
+    Bez něj by test prošel i tehdy, kdyby entrypoint slovník trenérovi nepředal.
+    """
+    corpus = separable_notes(PATIENTS, ACRONYM_VOCABULARY)
+    scores = {}
+    for normalize in (False, True):
+        root = tmp_path / str(normalize)
+        root.mkdir()
+        notes, config, split = _inputs(root, corpus, normalize_clinical_text=normalize)
+        candidates = root / "candidates.json"
+        shutil.copy(REPOSITORY_DIAGNOSIS_CANDIDATES, candidates)
+        outputs = _Outputs.under(root / "out")
+        assert (
+            _run_with_candidates((notes, config, split), outputs, candidates)
+            is ExitCode.OK
+        )
+        classifier = SkopsModelFile(outputs.model).load()
+        scores[normalize] = {
+            item.score for item in classifier.classify(list(ACRONYM_VOCABULARY))
+        }
+
+    assert len(scores[False]) > 1
+    assert len(scores[True]) == 1
 
 
 def test_normalization_changes_scores_on_spelling_variants(tmp_path: Path) -> None:

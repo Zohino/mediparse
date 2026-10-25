@@ -8,7 +8,8 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from mediparse.domain.labels import label_shares, prevalence_outliers
-from mediparse.domain.note_text import measure_narrative, segment
+from mediparse.domain.note_consistency import measure_narrative
+from mediparse.domain.note_text import segment
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence

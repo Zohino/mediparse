@@ -28,6 +28,7 @@ rule train_smoketest_model:
     input:
         notes=SMOKETEST / "notes.parquet",
         config="config/smoketest_training.json",
+        candidates="config/diagnosis_candidates.json",
         lexicon="config/section_headers.json",
         split=SMOKETEST / "splits.parquet",
     output:

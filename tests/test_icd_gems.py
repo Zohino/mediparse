@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Final
 import pytest
 
 from mediparse.domain.icd import DiagnosisCodes, IcdCode, IcdVersion
-from mediparse.infrastructure.diagnosis_codes_file import load_diagnosis_codes
+from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
 from tests.gems_support import GemRow, read_gem_rows
 from tests.support import REPOSITORY, REPOSITORY_DIAGNOSIS_CANDIDATES
 

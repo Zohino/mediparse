@@ -35,6 +35,12 @@ SPELLING_VOCABULARY: Final = (
 )
 """Slova zpráv, která se liší jen zápisem dávky a věku, takže je po normalizaci nerozliší nic."""
 
+ACRONYM_VOCABULARY: Final = (
+    "COPD exacerbation",
+    "chronic obstructive pulmonary disease exacerbation",
+)
+"""Slova zpráv, která se liší jen zkratkou a vypsaným názvem diagnózy."""
+
 OVERLAPPING: Final = (
     "diabetes insulin glucose clinic review",
     "fracture cast splint clinic review",

@@ -6,6 +6,7 @@ from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.digest import Sha256
 from mediparse.domain.environment import Environment
 from mediparse.domain.identity import RowId
@@ -37,7 +38,8 @@ class RunManifest(BaseModel):
     ``config_sha256`` je hash configu tréninku, ``seed`` seed modelu. Split
     nese ``split_seed``, ``split_folds`` a ``split_sha256``, otisk přiřazení pacientů do foldů.
     ``diagnostic_strip`` je ``None``, když se zprávy nestripovaly.
-    ``normalize_clinical_text`` říká, zda vstup TF-IDF prošel normalizací.
+    ``normalize_clinical_text`` je ``None``, když vstup TF-IDF neprošel normalizací,
+    jinak slovník zkratek diagnóz, který dostal trenér.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
@@ -50,7 +52,7 @@ class RunManifest(BaseModel):
     split_folds: Annotated[int, Field(ge=2)]
     split_sha256: Sha256
     diagnostic_strip: DiagnosticStrip | None
-    normalize_clinical_text: bool
+    normalize_clinical_text: TextNormalization | None
     model: str
     model_revision: str | None
     tokenizer_revision: str | None

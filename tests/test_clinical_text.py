@@ -9,12 +9,15 @@ from typing import Final
 import pytest
 from hypothesis import given
 from hypothesis import strategies as st
+from pydantic import ValidationError
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 from mediparse.domain.clinical_text import (
     AGE_PLACEHOLDER,
     DEID_PLACEHOLDER,
     NUMBER_PLACEHOLDER,
+    TextNormalization,
+    expand_diagnosis_acronyms,
     normalize_clinical_text,
 )
 from mediparse.domain.note_text import deid_markers
@@ -170,3 +173,150 @@ def test_ascii_digit_control_for_non_ascii_case() -> None:
 def test_age_attached_to_word_is_separated_by_space() -> None:
     """Věk přilepený k slovu se od něj oddělí mezerou."""
     assert normalize_clinical_text("Pt___yo").split() == ["Pt", AGE_PLACEHOLDER]
+
+
+_ACRONYMS: Final = {
+    "MI": "myocardial infarction",
+    "AF": "atrial fibrillation",
+    "DM": "diabetes",
+    "DM2": "diabetes",
+    "COPD": "chronic obstructive pulmonary disease",
+    "CKD": "chronic kidney disease",
+}
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("History of MI.", "History of myocardial infarction."),
+        ("mi and Mi stay", "mi and Mi stay"),
+        ("AF on ECG", "atrial fibrillation on ECG"),
+        ("AFib and af stay", "AFib and af stay"),
+        ("DM2 noted", "diabetes noted"),
+        ("DM noted", "diabetes noted"),
+        ("T2DM and HbA1c stay", "T2DM and HbA1c stay"),
+        (
+            "COPD/CKD",
+            "chronic obstructive pulmonary disease/chronic kidney disease",
+        ),
+        ("non-AF", "non-atrial fibrillation"),
+        ("AF. Next", "atrial fibrillation. Next"),
+        ("(COPD)", "(chronic obstructive pulmonary disease)"),
+        ("CHF stays", "CHF stays"),
+    ],
+)
+def test_acronyms_are_expanded_case_sensitively_on_word_boundaries(
+    text: str, expected: str
+) -> None:
+    """Zkratka se rozvine jen jako celé slovo a ve velikosti písmen slovníku."""
+    assert expand_diagnosis_acronyms(text, _ACRONYMS) == expected
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("AFé", "atrial fibrillation\u00e9"),
+        ("éAF", "\u00e9atrial fibrillation"),
+        ("_AF", "_AF"),
+        ("AF_", "AF_"),
+        ("AF9", "AF9"),
+    ],
+)
+def test_acronym_boundary_is_ascii_like_re2(text: str, expected: str) -> None:
+    """Hranice slova je ASCII jako v sešitu 8, ne Unicode hranice."""
+    assert expand_diagnosis_acronyms(text, _ACRONYMS) == expected
+
+
+@pytest.mark.parametrize("text", ["AF and MI", "", "a,  b"])
+def test_empty_dictionary_keeps_text(text: str) -> None:
+    """Bez slovníku se text nemění; prázdná alternace by jinak vložila rozvinutí mezi znaky."""
+    assert expand_diagnosis_acronyms(text, {}) == text
+
+
+def test_acronym_after_normalization_next_to_deid_marker() -> None:
+    """Rozvinutí po normalizaci najde zkratku přilepenou ke značce ``___``."""
+    expanded = expand_diagnosis_acronyms(normalize_clinical_text("___COPD"), _ACRONYMS)
+
+    assert expanded.split() == ["__deid__", *_ACRONYMS["COPD"].split()]
+
+
+_WORDS: Final = st.text(
+    alphabet=string.ascii_letters + string.digits + "_ -./()\n", max_size=40
+)
+
+
+_TOKENS: Final = st.lists(
+    st.sampled_from([
+        *_ACRONYMS,
+        *_ACRONYMS.values(),
+        "AFib",
+        "af",
+        "_AF",
+        "AF9",
+        "x",
+    ])
+).map(" ".join)
+
+
+@given(_WORDS | _TOKENS)
+def test_expansion_is_idempotent(text: str) -> None:
+    """Druhé rozvinutí už nic nezmění."""
+    once = expand_diagnosis_acronyms(text, _ACRONYMS)
+
+    assert expand_diagnosis_acronyms(once, _ACRONYMS) == once
+
+
+@given(_WORDS)
+def test_text_without_acronym_word_stays(text: str) -> None:
+    """Text, v němž zkratka nestojí jako celé slovo, se nezmění."""
+    words = re.split(r"[^A-Za-z0-9_]+", text)
+    if any(word in _ACRONYMS for word in words):
+        return
+
+    assert expand_diagnosis_acronyms(text, _ACRONYMS) == text
+
+
+def test_text_normalization_sorts_acronyms() -> None:
+    """Klíče se seřadí, aby byl JSON deterministický."""
+    normalization = TextNormalization(acronyms={"DM2": "diabetes", "AF": "atrial"})
+
+    assert list(normalization.acronyms) == ["AF", "DM2"]
+    assert list(
+        TextNormalization.model_validate_json(normalization.model_dump_json()).acronyms
+    ) == ["AF", "DM2"]
+
+
+@pytest.mark.parametrize(
+    "acronyms",
+    [
+        {"": "diabetes"},
+        {"DM": ""},
+        {"AF": "AF disease"},
+        {"AF": "atrial fibrillation (AF)"},
+        {"DM": "diabetes", "DM2": "DM2 diabetes"},
+    ],
+)
+def test_text_normalization_rejects_invalid_dictionary(
+    acronyms: dict[str, str],
+) -> None:
+    """Prázdná zkratka, prázdný tvar a tvar se zkratkou slovníku jsou chyba."""
+    with pytest.raises(ValidationError):
+        TextNormalization(acronyms=acronyms)
+
+
+def test_text_normalization_is_strict_and_forbids_extra() -> None:
+    """Pole mimo model a jiný typ než dict jsou chyba."""
+    with pytest.raises(ValidationError):
+        TextNormalization.model_validate({"acronyms": {}, "other": 1})
+    with pytest.raises(ValidationError):
+        TextNormalization.model_validate({"acronyms": [("AF", "atrial")]})
+
+
+@pytest.mark.parametrize(
+    "acronyms",
+    [{"AF": b"atrial fibrillation"}, {b"AF": "atrial fibrillation"}],
+)
+def test_text_normalization_rejects_bytes(acronyms: dict[object, object]) -> None:
+    """Strict odmítne bytes v klíči i hodnotě, které lax režim převede na řetězec."""
+    with pytest.raises(ValidationError):
+        TextNormalization.model_validate({"acronyms": acronyms})
