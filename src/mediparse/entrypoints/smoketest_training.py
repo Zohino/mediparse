@@ -105,7 +105,7 @@ def run(
         trainer=LinearSvmTrainer(
             training.regularization,
             training.seed,
-            normalize_clinical_text=training.normalize_clinical_text,
+            normalize=training.normalize_clinical_text,
         ),
         store=SkopsModelFile(model),
         predictions=ParquetPredictionTable(predictions),

@@ -202,6 +202,15 @@ def test_czech_row_with_normalization_is_rejected_with_row_id() -> None:
     )
 
 
+@pytest.mark.parametrize("model", ["fasttext", "xlm-r-base", "mdeberta-v3-base"])
+def test_non_classical_row_with_normalization_is_rejected(model: str) -> None:
+    """Normalizace je příznak klasického modelu; hláška nese id řádku."""
+    row = _row(id=f"en-{model}", model=model, normalize_clinical_text=True)
+
+    with pytest.raises(ValidationError, match=rf"Řádek en-{model}: .*klasick"):
+        _validate(row)
+
+
 def test_czech_row_without_strip_is_valid() -> None:
     """Česká zpráva bez stripu je hlavní řádek, projde."""
     (row,) = _validate(_row(id="cs-logreg", language="cs")).rows

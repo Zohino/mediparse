@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import TYPE_CHECKING, Final
 
 import pytest
@@ -10,7 +11,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
 
-from mediparse.domain.clinical_text import normalize_clinical_text
+from mediparse.domain.clinical_text import NUMBER_PLACEHOLDER, normalize_clinical_text
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.section_headers import strip_diagnostic_sections
@@ -20,7 +21,7 @@ from mediparse.infrastructure.sklearn_classifier import (
     SkopsModelFile,
     tfidf_preprocessor,
 )
-from tests.model_support import separable_notes
+from tests.model_support import SPELLING_VOCABULARY, separable_notes
 from tests.section_support import REPOSITORY_LEXICON, mimic_shaped_notes
 
 if TYPE_CHECKING:
@@ -41,9 +42,9 @@ def test_classify_returns_label_with_signed_score() -> None:
     """Label odpovídá predikci pipeline a skóre má znaménko podle labelu."""
     texts, labels = _corpus()
 
-    classifier = LinearSvmTrainer(
-        regularization=1.0, seed=0, normalize_clinical_text=False
-    ).fit(texts, labels)
+    classifier = LinearSvmTrainer(regularization=1.0, seed=0, normalize=False).fit(
+        texts, labels
+    )
     classifications = classifier.classify(texts)
 
     assert tuple(item.predicted for item in classifications) == tuple(labels)
@@ -54,11 +55,11 @@ def test_classify_returns_label_with_signed_score() -> None:
 
 
 def test_model_file_round_trip(tmp_path: Path) -> None:
-    """Uložený model se načte s trusted=[] a klasifikuje stejně."""
+    """Uložený model se načte a klasifikuje stejně."""
     texts, labels = _corpus()
-    classifier = LinearSvmTrainer(
-        regularization=1.0, seed=0, normalize_clinical_text=False
-    ).fit(texts, labels)
+    classifier = LinearSvmTrainer(regularization=1.0, seed=0, normalize=False).fit(
+        texts, labels
+    )
     model_file = SkopsModelFile(tmp_path / "out" / "model.skops")
 
     model_file.save(classifier)
@@ -97,20 +98,12 @@ def test_model_file_untrusted_type_is_invalid_input(tmp_path: Path) -> None:
         SkopsModelFile(path).load()
 
 
-_DOSE_PAIR: Final = (
-    "metformin 500mg ___yo",
-    "metformin 500 mg ___ year old",
-)
-
-
 def _trainer(*, normalize: bool) -> LinearSvmTrainer:
-    return LinearSvmTrainer(
-        regularization=1.0, seed=0, normalize_clinical_text=normalize
-    )
+    return LinearSvmTrainer(regularization=1.0, seed=0, normalize=normalize)
 
 
 def _dose_corpus() -> tuple[list[str], list[bool]]:
-    texts = [*_DOSE_PAIR[:1] * 4, *_DOSE_PAIR[1:] * 4]
+    texts = [*SPELLING_VOCABULARY[:1] * 4, *SPELLING_VOCABULARY[1:] * 4]
     return texts, [True] * 4 + [False] * 4
 
 
@@ -126,8 +119,10 @@ def test_trainer_with_normalization_scores_spellings_alike() -> None:
     """Se zapnutou normalizací dostanou dva zápisy téže dávky a věku stejné skóre."""
     texts, labels = _dose_corpus()
 
-    normalized = _trainer(normalize=True).fit(texts, labels).classify(_DOSE_PAIR)
-    raw = _trainer(normalize=False).fit(texts, labels).classify(_DOSE_PAIR)
+    normalized = (
+        _trainer(normalize=True).fit(texts, labels).classify(SPELLING_VOCABULARY)
+    )
+    raw = _trainer(normalize=False).fit(texts, labels).classify(SPELLING_VOCABULARY)
 
     assert normalized[0].score == normalized[1].score
     assert raw[0].score != raw[1].score
@@ -141,7 +136,9 @@ def test_model_file_round_trip_with_preprocessor(tmp_path: Path) -> None:
 
     model_file.save(classifier)
 
-    assert model_file.load().classify(_DOSE_PAIR) == classifier.classify(_DOSE_PAIR)
+    assert model_file.load().classify(SPELLING_VOCABULARY) == classifier.classify(
+        SPELLING_VOCABULARY
+    )
 
 
 def _foreign_preprocessor(text: str) -> str:
@@ -158,7 +155,9 @@ def test_model_file_foreign_preprocessor_is_invalid_input(tmp_path: Path) -> Non
     path = tmp_path / "foreign.skops"
     sio.dump(pipeline, path)
 
-    with pytest.raises(InvalidInputError, match=r"foreign\.skops"):
+    with pytest.raises(
+        InvalidInputError, match=r"foreign\.skops.*_foreign_preprocessor"
+    ):
         SkopsModelFile(path).load()
 
 
@@ -183,4 +182,9 @@ def test_analyzer_sees_normalized_stripped_fixture(name: str) -> None:
         normalize_clinical_text(stripped).lower()
     )
 
-    assert analyzer(stripped) == expected
+    tokens = analyzer(stripped)
+    assert tokens == expected
+    assert not any("___" in token for token in tokens)
+    assert not any(token.isdigit() for token in tokens)
+    if re.search(r"(?<![A-Za-z0-9_])[0-9]", stripped):
+        assert NUMBER_PLACEHOLDER in tokens

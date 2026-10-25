@@ -82,6 +82,17 @@ class MatrixRow(BaseModel):
             raise ValueError(msg)
         return self
 
+    @model_validator(mode="after")
+    def _normalization_is_classical_only(self) -> Self:
+        if self.normalize_clinical_text and self.model.tier is not Tier.CLASSICAL:
+            msg = (
+                f"Řádek {self.id}: normalizace klinického textu je příznak "
+                "klasického modelu (TF-IDF), ne modelu stupně "
+                f"{self.model.tier}"
+            )
+            raise ValueError(msg)
+        return self
+
     @property
     def axes(self) -> tuple[Language, ModelName, bool, bool]:
         """Osy, které experiment jednoznačně určují."""

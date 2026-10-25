@@ -14,15 +14,13 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from mediparse.domain.clinical_text import (
     AGE_PLACEHOLDER,
     DEID_PLACEHOLDER,
-    NORMALIZATION_LANGUAGE,
     NUMBER_PLACEHOLDER,
     normalize_clinical_text,
 )
-from mediparse.domain.language import Language
 from mediparse.domain.note_text import deid_markers
 
 _ANALYZER: Final = TfidfVectorizer().build_analyzer()
-_UNREPLACED_NUMBER: Final = re.compile(r"(?<![A-Za-z0-9_])[0-9]")
+_UNREPLACED_NUMBER: Final = re.compile(r"(?<![A-Za-z0-9_])(?<![0-9][.,])[0-9]")
 _TEXT: Final = st.text(
     alphabet=string.ascii_letters + string.digits + "_ -.,/%\n" + "é٣", max_size=40
 )
@@ -30,11 +28,6 @@ _TEXT: Final = st.text(
 
 def _tokens(text: str) -> list[str]:
     return _ANALYZER(normalize_clinical_text(text))
-
-
-def test_normalization_is_english_only() -> None:
-    """Pravidla jsou anglická, jazyk normalizace je angličtina."""
-    assert NORMALIZATION_LANGUAGE is Language.EN
 
 
 @pytest.mark.parametrize(
@@ -108,7 +101,9 @@ def test_percent_is_separated_from_number() -> None:
     assert normalize_clinical_text("5.4%").split() == [NUMBER_PLACEHOLDER, "%"]
 
 
-@pytest.mark.parametrize("text", ["DM2", "HbA1c", "B12", "T2DM", "q6h", "x2"])
+@pytest.mark.parametrize(
+    "text", ["DM2", "HbA1c", "B12", "T2DM", "q6h", "x2", "K3.5", "Cr1.8", "x2.5"]
+)
 def test_number_inside_word_stays(text: str) -> None:
     """Číslo uvnitř slova a zkratky s číslem se nemění, včetně velikosti písmen."""
     assert normalize_clinical_text(text) == text
@@ -142,3 +137,36 @@ def test_no_replaceable_number_remains(text: str) -> None:
 def test_text_without_underscore_and_digits_stays(text: str) -> None:
     """Text bez podtržítka a číslic se nezmění."""
     assert normalize_clinical_text(text) == text
+
+
+@pytest.mark.parametrize("text", ["1st", "2nd", "3rd", "4th", "2ND"])
+def test_ordinal_suffix_is_absorbed_in_any_case(text: str) -> None:
+    """Řadová přípona se pohltí bez ohledu na velikost písmen."""
+    assert normalize_clinical_text(text).split() == [NUMBER_PLACEHOLDER]
+
+
+def test_suffix_continuing_into_word_is_not_ordinal() -> None:
+    """Přípona, za kterou pokračují písmena, patří slovu."""
+    assert normalize_clinical_text("3stools").split() == [NUMBER_PLACEHOLDER, "stools"]
+
+
+def test_suffix_followed_by_digit_stays_idempotent() -> None:
+    """Regrese: 1st2nd se po prvním průchodu už nemění."""
+    once = normalize_clinical_text("1st2nd")
+    assert normalize_clinical_text(once) == once
+
+
+@pytest.mark.parametrize("text", ["\u0663", "\uff11\uff12", "a\u0663"])
+def test_non_ascii_digits_stay(text: str) -> None:
+    """Číslice mimo ASCII nejsou čísla, pravidlo používá jen ASCII číslice."""
+    assert normalize_clinical_text(text) == text
+
+
+def test_ascii_digit_control_for_non_ascii_case() -> None:
+    """Kontrola k předchozímu testu: ASCII číslice se nahradí."""
+    assert normalize_clinical_text("3").split() == [NUMBER_PLACEHOLDER]
+
+
+def test_age_attached_to_word_is_separated_by_space() -> None:
+    """Věk přilepený k slovu se od něj oddělí mezerou."""
+    assert normalize_clinical_text("Pt___yo").split() == ["Pt", AGE_PLACEHOLDER]

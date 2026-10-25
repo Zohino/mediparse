@@ -23,9 +23,13 @@ _AGE: Final = re.compile(
 )
 _DEID: Final = re.compile(STANDALONE_DEID)
 # [0-9] místo \d, které v Pythonu zachytí i číslice jiných písem. Číslo uvnitř
-# slova (DM2, HbA1c) se nemění, staví na něm rozvinutí zkratek diagnóz.
+# slova (DM2, HbA1c) se nemění, staví na něm rozvinutí zkratek diagnóz. Druhý
+# lookbehind chrání desetinnou část čísla přilepeného k písmenu (K3.5): bez něj by
+# se nahradila za tečkou. Řadová přípona se pohltí jen tehdy, když za ní nepokračuje
+# slovo ani číslice, jinak by 1st2nd nebylo idempotentní.
 _NUMBER: Final = re.compile(
-    r"(?<![A-Za-z0-9_])[0-9]+(?:[.,][0-9]+)*(?:(?:st|nd|rd|th)(?![A-Za-z]))?"
+    r"(?<![A-Za-z0-9_])(?<![0-9][.,])[0-9]+(?:[.,][0-9]+)*"
+    r"(?:(?i:st|nd|rd|th)(?![A-Za-z0-9_]))?"
 )
 
 

@@ -69,7 +69,7 @@ class LinearSvmTrainer:
 
     regularization: float
     seed: int
-    normalize_clinical_text: bool
+    normalize: bool
 
     def fit(self, texts: Sequence[str], labels: Sequence[bool]) -> SklearnClassifier:
         """Natrénuje pipeline na textech a labelech.
@@ -83,7 +83,7 @@ class LinearSvmTrainer:
         """
         vectorizer = TfidfVectorizer(
             sublinear_tf=True,
-            preprocessor=tfidf_preprocessor if self.normalize_clinical_text else None,
+            preprocessor=tfidf_preprocessor if self.normalize else None,
         )
         analyzer = vectorizer.build_analyzer()
         if not any(analyzer(text) for text in texts):
