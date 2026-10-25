@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Final, NamedTuple
 
 from mediparse.domain.note_structure import PreambleValue
 from mediparse.domain.note_text import (
@@ -12,7 +12,8 @@ from mediparse.domain.note_text import (
     DEID,
     STANDALONE_DEID,
     alternation,
-    measure_narrative,
+    deid_markers,
+    line_headers,
     segment,
 )
 
@@ -192,3 +193,29 @@ def _diagnosis_section_violations(
 
 def _keywords(keywords: Iterable[str]) -> re.Pattern[str]:
     return re.compile(rf"\b(?:{alternation(keywords)})\b", re.IGNORECASE)
+
+
+class NarrativeMeasure(NamedTuple):
+    """Změřený narativ zprávy: počet slov a počet narativních značek bez věkové značky."""
+
+    words: int
+    marks: int
+
+
+def measure_narrative(
+    sections: Sections, plan: NotePlan, structure: StructureModel
+) -> NarrativeMeasure:
+    """Změří narativ: těla sekcí s délkou v plánu bez podnadpisů.
+
+    Returns:
+        Počet slov narativu a počet narativních značek bez věkové značky.
+    """
+    subheadings = line_headers(
+        subheading.header for _, subheading in structure.subheadings
+    )
+    bodies = [
+        subheadings.sub("", body) for key, body in sections if key in plan.section_words
+    ]
+    words = sum(len(body.split()) for body in bodies)
+    marks = sum(deid_markers(body) - len(AGE_MARKER.findall(body)) for body in bodies)
+    return NarrativeMeasure(words, marks)

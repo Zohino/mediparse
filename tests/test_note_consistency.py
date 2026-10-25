@@ -6,9 +6,10 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.domain.note_consistency import note_violations
+from mediparse.domain.note_consistency import measure_narrative, note_violations
 
 if TYPE_CHECKING:
+    from mediparse.domain.note_consistency import NarrativeMeasure
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.synthetic_plan import SamplerConfig
     from tests.conftest import PlannedNote
@@ -202,3 +203,38 @@ def test_narrative_against_zero_plan_is_reported(
 ) -> None:
     """Narativ v sekci, které plán přidělil nula slov, je porušení, ne dělení nulou."""
     assert _length_reasons(planned_note, sampler_config, 0)
+
+
+def _measure(
+    body: str, planned_note: PlannedNote, config: SamplerConfig
+) -> NarrativeMeasure:
+    key = next(iter(planned_note.plan.section_words))
+    return measure_narrative(((key, body),), planned_note.plan, config.structure)
+
+
+def test_narrative_counts_only_standalone_markers(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Řada ______ není značka narativu, stejně jako v kontrole překladu."""
+    measure = _measure("a ______ b ___ c", planned_note, sampler_config)
+
+    assert measure.marks == 1
+
+
+def test_narrative_marks_are_never_negative(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Věk za ____ není věková značka, takže se od značek neodečítá."""
+    measure = _measure("a ____ year old woman", planned_note, sampler_config)
+
+    assert measure.marks == 0
+
+
+def test_narrative_measure_has_named_fields(
+    planned_note: PlannedNote, sampler_config: SamplerConfig
+) -> None:
+    """Výsledek nese slova a značky jako pojmenovaná pole."""
+    body = "a ___ year old woman with ___"
+    measure = _measure(body, planned_note, sampler_config)
+
+    assert (measure.words, measure.marks) == (len(body.split()), 1)

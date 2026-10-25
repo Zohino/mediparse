@@ -1,15 +1,12 @@
-"""Text zprávy: de-identifikační značka a její počet, sekce podle hlaviček na začátku řádku, věková značka a měření narativu."""
+"""Text zprávy: de-identifikační značka a její počet, sekce podle hlaviček na začátku řádku, věková značka."""
 
 from __future__ import annotations
 
 import re
-from typing import TYPE_CHECKING, Final, NamedTuple
+from typing import TYPE_CHECKING, Final
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping
-
-    from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.note_structure import StructureModel
 
 DEID: Final = "___"
 # Delší řady podtržítek nejsou značka (hlásí je kontrola cizí formy značky). Vzor
@@ -64,29 +61,3 @@ def segment(text: str, headers: Mapping[str, str]) -> tuple[str, Sections]:
         for match, end in zip(matches, starts[1:], strict=True)
     )
     return text[: starts[0]], sections
-
-
-class NarrativeMeasure(NamedTuple):
-    """Změřený narativ zprávy: počet slov a počet narativních značek bez věkové značky."""
-
-    words: int
-    marks: int
-
-
-def measure_narrative(
-    sections: Sections, plan: NotePlan, structure: StructureModel
-) -> NarrativeMeasure:
-    """Změří narativ: těla sekcí s délkou v plánu bez podnadpisů.
-
-    Returns:
-        Počet slov narativu a počet narativních značek bez věkové značky.
-    """
-    subheadings = line_headers(
-        subheading.header for _, subheading in structure.subheadings
-    )
-    bodies = [
-        subheadings.sub("", body) for key, body in sections if key in plan.section_words
-    ]
-    words = sum(len(body.split()) for body in bodies)
-    marks = sum(deid_markers(body) - len(AGE_MARKER.findall(body)) for body in bodies)
-    return NarrativeMeasure(words, marks)
