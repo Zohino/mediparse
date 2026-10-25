@@ -29,6 +29,12 @@ SEPARABLE_VOCABULARY: Final = (
     "fracture cast orthopedic surgery splint",
 )
 
+SPELLING_VOCABULARY: Final = (
+    "metformin 500mg ___yo",
+    "metformin 500 mg ___ year old",
+)
+"""Slova zpráv, která se liší jen zápisem dávky a věku, takže je po normalizaci nerozliší nic."""
+
 OVERLAPPING: Final = (
     "diabetes insulin glucose clinic review",
     "fracture cast splint clinic review",
