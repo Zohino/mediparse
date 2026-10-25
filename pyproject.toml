@@ -319,6 +319,12 @@ ignore = [
     "hardcoded-password-string",              # heslo lokálního testovacího serveru, ne přihlášení k PhysioNetu
 ]
 
+"tests/test_inventory_script.py" = [
+    "suspicious-subprocess-import",           # test spouští shellový skript pravidla, jinak ho pokrýt nejde
+    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, shell se nepoužívá
+    "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá Snakemake
+]
+
 "src/mediparse/entrypoints/cohort.py" = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
@@ -367,6 +373,7 @@ platforms = ["linux-64"]
 [tool.pixi.dependencies]
 python = "3.13.*"
 aria2 = ">=1.37.0,<2"
+jq = ">=1.8.2,<2"
 
 [tool.pixi.pypi-dependencies]
 mediparse = { path = ".", editable = true }
