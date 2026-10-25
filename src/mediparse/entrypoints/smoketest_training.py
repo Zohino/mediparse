@@ -102,7 +102,9 @@ def run(
     step = SmoketestTraining(
         table=table,
         split=ParquetSplitTable(split),
-        trainer=LinearSvmTrainer(training.regularization, training.seed),
+        trainer=LinearSvmTrainer(
+            training.regularization, training.seed, normalize_clinical_text=False
+        ),
         store=SkopsModelFile(model),
         predictions=ParquetPredictionTable(predictions),
     )

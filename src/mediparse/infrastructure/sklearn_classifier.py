@@ -12,6 +12,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
 from skops.io.exceptions import UntrustedTypesFoundException
 
+from mediparse.domain.clinical_text import normalize_clinical_text
 from mediparse.domain.evaluation import Classification
 from mediparse.domain.inputs import InvalidInputError
 
@@ -44,12 +45,31 @@ class SklearnClassifier:
 ESTIMATOR: Final = "sklearn TfidfVectorizer+LinearSVC"
 
 
+def tfidf_preprocessor(text: str) -> str:
+    """Normalizace klinického textu a snížení písmen před tokenizací TF-IDF.
+
+    Returns:
+        Normalizovaný text malými písmeny.
+    """
+    # Vlastní preprocessor vypíná lowercase vectorizeru, snížení písmen proto nese
+    # tato funkce. Bez něj by CAST a Cast byly dva příznaky.
+    return normalize_clinical_text(text).lower()
+
+
+# skops ukládá funkci jako odkaz modul.jméno a při načtení ji pustí jen z tohoto
+# seznamu. Přejmenování funkce proto rozbije načítání dříve uložených modelů.
+TRUSTED_FUNCTIONS: Final = (
+    "mediparse.infrastructure.sklearn_classifier.tfidf_preprocessor",
+)
+
+
 @dataclass(frozen=True)
 class LinearSvmTrainer:
     """Trénink TF-IDF s lineárním SVM."""
 
     regularization: float
     seed: int
+    normalize_clinical_text: bool
 
     def fit(self, texts: Sequence[str], labels: Sequence[bool]) -> SklearnClassifier:
         """Natrénuje pipeline na textech a labelech.
@@ -61,7 +81,10 @@ class LinearSvmTrainer:
             InvalidInputError: Z žádného textu nevznikne token, třeba po stripu
                 diagnostických sekcí ze zpráv, které z nich sestávají.
         """
-        vectorizer = TfidfVectorizer(sublinear_tf=True)
+        vectorizer = TfidfVectorizer(
+            sublinear_tf=True,
+            preprocessor=tfidf_preprocessor if self.normalize_clinical_text else None,
+        )
         analyzer = vectorizer.build_analyzer()
         if not any(analyzer(text) for text in texts):
             msg = (
@@ -78,7 +101,7 @@ class LinearSvmTrainer:
 
 @dataclass(frozen=True)
 class SkopsModelFile:
-    """Model uložený ve formátu skops, který se načítá bez důvěry v cizí typy."""
+    """Model uložený ve formátu skops, který se načítá bez důvěry v cizí typy a funkce."""
 
     path: Path
 
@@ -88,7 +111,7 @@ class SkopsModelFile:
         sio.dump(classifier.pipeline, self.path)
 
     def load(self) -> SklearnClassifier:
-        """Načte model s prázdným seznamem důvěryhodných typů.
+        """Načte model; z cizích typů důvěřuje jen funkcím ze ``TRUSTED_FUNCTIONS``.
 
         Returns:
             Klasifikátor s načtenou pipeline.
@@ -98,7 +121,7 @@ class SkopsModelFile:
                 obsahuje typ mimo důvěryhodné.
         """
         try:
-            pipeline = sio.load(self.path, trusted=[])
+            pipeline = sio.load(self.path, trusted=list(TRUSTED_FUNCTIONS))
         except FileNotFoundError as error:
             msg = f"Soubor modelu {self.path} neexistuje."
             raise InvalidInputError(msg) from error
