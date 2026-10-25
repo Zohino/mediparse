@@ -7,6 +7,7 @@ from typing import Final
 import pytest
 from pydantic import ValidationError
 
+from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.environment import Environment, SourceRevision
 from mediparse.domain.run_manifest import DiagnosticStrip, RunManifest
 
@@ -24,7 +25,7 @@ def _fields(**changes: object) -> dict[str, object]:
         "split_folds": 5,
         "split_sha256": DIGEST,
         "diagnostic_strip": None,
-        "normalize_clinical_text": False,
+        "normalize_clinical_text": None,
         "model": "sklearn TfidfVectorizer+LinearSVC",
         "model_revision": None,
         "tokenizer_revision": None,
@@ -145,13 +146,27 @@ def test_strip_duplicate_sections_are_merged() -> None:
     assert strip.sections == ("a", "b")
 
 
-def test_manifest_records_normalization() -> None:
-    """Zapnutá normalizace se v JSON manifestu objeví jako ``true``."""
+def test_manifest_records_normalization_as_sorted_pairs() -> None:
+    """Záznam normalizace se zapíše jako objekt se seřazenými dvojicemi zkratka a tvar."""
     dumped = RunManifest.model_validate(
-        _fields(normalize_clinical_text=True)
+        _fields(
+            normalize_clinical_text=TextNormalization(
+                acronyms={"DM2": "diabetes", "AF": "atrial fibrillation"}
+            )
+        )
     ).model_dump(mode="json")
 
-    assert dumped["normalize_clinical_text"] is True
+    assert list(dumped["normalize_clinical_text"]["acronyms"].items()) == [
+        ("AF", "atrial fibrillation"),
+        ("DM2", "diabetes"),
+    ]
+
+
+def test_manifest_without_normalization_is_none() -> None:
+    """Bez normalizace pole nese ``None`` a v JSON je ``null``."""
+    dumped = RunManifest.model_validate(_fields()).model_dump(mode="json")
+
+    assert dumped["normalize_clinical_text"] is None
 
 
 def test_manifest_without_normalization_key_is_rejected() -> None:
@@ -164,6 +179,7 @@ def test_manifest_without_normalization_key_is_rejected() -> None:
 
 
 def test_normalization_as_string_is_rejected() -> None:
-    """Přepínač je striktní bool, řetězec ``"true"`` neprojde."""
-    with pytest.raises(ValidationError, match="normalize_clinical_text"):
-        RunManifest.model_validate(_fields(normalize_clinical_text="true"))
+    """Bool ani řetězec nejsou záznam normalizace."""
+    for value in ("true", True, False):
+        with pytest.raises(ValidationError, match="normalize_clinical_text"):
+            RunManifest.model_validate(_fields(normalize_clinical_text=value))

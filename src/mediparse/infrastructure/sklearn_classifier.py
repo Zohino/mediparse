@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import functools
 import zipfile
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
@@ -12,12 +13,16 @@ from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
 from skops.io.exceptions import UntrustedTypesFoundException
 
-from mediparse.domain.clinical_text import normalize_clinical_text
+from mediparse.domain.clinical_text import (
+    TextNormalization,
+    expand_diagnosis_acronyms,
+    normalize_clinical_text,
+)
 from mediparse.domain.evaluation import Classification
 from mediparse.domain.inputs import InvalidInputError
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    from collections.abc import Mapping, Sequence
     from pathlib import Path
 
 
@@ -45,20 +50,26 @@ class SklearnClassifier:
 ESTIMATOR: Final = "sklearn TfidfVectorizer+LinearSVC"
 
 
-def tfidf_preprocessor(text: str) -> str:
-    """Normalizace klinického textu a snížení písmen před tokenizací TF-IDF.
+def tfidf_preprocessor(text: str, acronyms: Mapping[str, str]) -> str:
+    """Normalizace, rozvinutí zkratek diagnóz a snížení písmen před tokenizací TF-IDF.
 
     Returns:
-        Normalizovaný text malými písmeny.
+        Normalizovaný text malými písmeny, zkratky ze slovníku rozvinuté.
     """
+    # Rozvinutí rozlišuje velikost písmen, proto jde před .lower(); jde po
+    # normalizaci, aby ___COPD nebylo zablokované podtržítky.
+    expanded = expand_diagnosis_acronyms(normalize_clinical_text(text), acronyms)
     # Vlastní preprocessor vypíná lowercase vectorizeru, snížení písmen proto nese
     # tato funkce. Bez něj by CAST a Cast byly dva příznaky.
-    return normalize_clinical_text(text).lower()
+    return expanded.lower()
 
 
 # skops ukládá funkci jako odkaz modul.jméno a při načtení ji pustí jen z tohoto
 # seznamu. Přejmenování funkce proto rozbije načítání dříve uložených modelů.
+# Slovník zkratek nese functools.partial, který skops uloží, jen když je
+# v seznamu; funkci uvnitř partialu přesto kontroluje samostatně.
 TRUSTED_FUNCTIONS: Final = (
+    "functools.partial",
     "mediparse.infrastructure.sklearn_classifier.tfidf_preprocessor",
 )
 
@@ -69,7 +80,7 @@ class LinearSvmTrainer:
 
     regularization: float
     seed: int
-    normalize: bool
+    normalization: TextNormalization | None
 
     def fit(self, texts: Sequence[str], labels: Sequence[bool]) -> SklearnClassifier:
         """Natrénuje pipeline na textech a labelech.
@@ -82,8 +93,7 @@ class LinearSvmTrainer:
                 diagnostických sekcí ze zpráv, které z nich sestávají.
         """
         vectorizer = TfidfVectorizer(
-            sublinear_tf=True,
-            preprocessor=tfidf_preprocessor if self.normalize else None,
+            sublinear_tf=True, preprocessor=self._preprocessor()
         )
         analyzer = vectorizer.build_analyzer()
         if not any(analyzer(text) for text in texts):
@@ -97,6 +107,15 @@ class LinearSvmTrainer:
         ])
         pipeline.fit(list(texts), list(labels))
         return SklearnClassifier(pipeline)
+
+    def _preprocessor(self) -> functools.partial[str] | None:
+        if self.normalization is None:
+            return None
+        # Holý dict, ne Mapping ani pydantic objekt: skops uloží dict, jiný typ
+        # by vyžadoval další důvěryhodný typ.
+        return functools.partial(
+            tfidf_preprocessor, acronyms=dict(self.normalization.acronyms)
+        )
 
 
 @dataclass(frozen=True)

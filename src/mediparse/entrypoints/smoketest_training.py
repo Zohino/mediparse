@@ -17,6 +17,7 @@ from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.training_input import training_input
+from mediparse.infrastructure.diagnosis_acronyms_file import load_text_normalization
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.package_versions import installed_versions
@@ -53,6 +54,7 @@ def main(
     *,
     notes: Path,
     config: Path,
+    candidates: Path,
     lexicon: Path,
     split: Path,
     model: Path,
@@ -69,6 +71,7 @@ def main(
     return run(
         notes=notes,
         config=config,
+        candidates=candidates,
         lexicon=lexicon,
         split=split,
         model=model,
@@ -83,6 +86,7 @@ def run(
     *,
     notes: Path,
     config: Path,
+    candidates: Path,
     lexicon: Path,
     split: Path,
     model: Path,
@@ -94,18 +98,21 @@ def run(
 
     Returns:
         OK po uložení modelu, predikcí a manifestu; REFUSED pro chybějící nebo
-        neplatnou tabulku, config, lexikon a soubor splitu a pro nečitelnou revizi zdroje.
+        neplatnou tabulku, config, kandidáty (při zapnuté normalizaci), lexikon a soubor splitu a pro nečitelnou revizi zdroje.
     """
     training = load_training_config(config)
     source = revision()
     table, strip = training_input(notes, training, lexicon)
+    normalization = (
+        load_text_normalization(candidates)
+        if training.normalize_clinical_text
+        else None
+    )
     step = SmoketestTraining(
         table=table,
         split=ParquetSplitTable(split),
         trainer=LinearSvmTrainer(
-            training.regularization,
-            training.seed,
-            normalize=training.normalize_clinical_text,
+            training.regularization, training.seed, normalization=normalization
         ),
         store=SkopsModelFile(model),
         predictions=ParquetPredictionTable(predictions),
@@ -122,7 +129,7 @@ def run(
             split_folds=report.split_config.folds,
             split_sha256=report.split_sha256,
             diagnostic_strip=strip,
-            normalize_clinical_text=training.normalize_clinical_text,
+            normalize_clinical_text=normalization,
             model=ESTIMATOR,
             model_revision=None,
             tokenizer_revision=None,

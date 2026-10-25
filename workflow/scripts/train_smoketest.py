@@ -8,6 +8,7 @@ raise SystemExit(
     main(
         notes=Path(snakemake.input.notes),
         config=Path(snakemake.input.config),
+        candidates=Path(snakemake.input.candidates),
         lexicon=Path(snakemake.input.lexicon),
         split=Path(snakemake.input.split),
         model=Path(snakemake.output.model),
