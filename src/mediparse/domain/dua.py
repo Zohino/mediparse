@@ -6,3 +6,6 @@ from typing import Final
 # diagnóza, období...) a pro kategorie, jejichž popisek je hodnota z dat. R má vlastní kopii
 # (DUA_THRESHOLD v eda/R/dua.R).
 MIN_CELL: Final = 10
+
+# R má přechodnou kopii DUA_OTHER v eda/R/dua.R.
+OTHER_LABEL: Final[str] = f"ostatní (n < {MIN_CELL})"

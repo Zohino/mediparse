@@ -1,0 +1,143 @@
+"""Bajtová parita tabulek pro práci s R kable a validace vstupů."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import TYPE_CHECKING
+
+import pytest
+
+from mediparse.domain.dua import OTHER_LABEL
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.thesis_table import (
+    ThesisTable,
+    latex_escape,
+    latex_tabular,
+    pipe_table,
+    table_markdown,
+)
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
+
+FIXTURES = Path(__file__).parent / "fixtures" / "thesis_table"
+CASES = json.loads((FIXTURES / "cases.json").read_text(encoding="utf-8"))
+
+
+def _table(case: Mapping) -> ThesisTable:
+    return ThesisTable(
+        header=tuple(case["header"]),
+        rows=tuple(tuple(row) for row in case["rows"]),
+        align=case["align"],
+        widths=tuple(case["widths"]),
+        code=frozenset(case["code"]),
+    )
+
+
+@pytest.mark.parametrize("case", CASES, ids=[case["name"] for case in CASES])
+def test_golden_table(case: Mapping) -> None:
+    """LaTeX včetně koncového newline i markdown mají přesné bajty R exportu."""
+    table = _table(case)
+    assert (latex_tabular(table) + "\n").encode() == (
+        FIXTURES / f"{case['name']}.tex"
+    ).read_bytes()
+    assert pipe_table(table).encode() == (FIXTURES / f"{case['name']}.md").read_bytes()
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("\\", r"\textbackslash{}"),
+        ("&", r"\&"),
+        ("%", r"\%"),
+        ("$", r"\$"),
+        ("#", r"\#"),
+        ("_", r"\_"),
+        ("{", r"\{"),
+        ("}", r"\}"),
+        ("~", r"\textasciitilde{}"),
+        ("^", r"\textasciicircum{}"),
+        ("<", r"\textless{}"),
+        (">", r"\textgreater{}"),
+        ("\u00a0*[…]", "\u00a0*[…]"),
+        (r"\&", r"\textbackslash{}\&"),
+    ],
+)
+def test_latex_escape(text: str, expected: str) -> None:
+    """Escapování projde původní text jednou a zachová NBSP i ostatní znaky."""
+    assert latex_escape(text) == expected
+
+
+@pytest.mark.parametrize(
+    "overrides",
+    [
+        {"align": ""},
+        {"align": "ll"},
+        {"align": "x"},
+        {"widths": (50, 50)},
+        {"widths": (0,)},
+        {"widths": (-1,)},
+        {"widths": (float("nan"),)},
+        {"widths": (float("inf"),)},
+        {"widths": (True,)},
+        {"widths": ("auto",)},
+        {"rows": ((1,),)},
+        {"rows": ((None,),)},
+        {"rows": (("x", "y"),)},
+        {"rows": (("x\ny",),)},
+        {"rows": (("x\ry",),)},
+        {"header": ("A\nB",)},
+        {"header": ("A\rB",)},
+        {"header": (None,)},
+        {"header": (1,)},
+        {"code": frozenset({"B"})},
+    ],
+)
+def test_invalid_table(overrides: dict) -> None:
+    """Nesoulad rozvržení a netextové nebo víceřádkové buňky se odmítnou."""
+    arguments: dict = {"header": ("A",), "rows": (("x",),), "align": "l", **overrides}
+    with pytest.raises(InvalidInputError):
+        ThesisTable(**arguments)
+
+
+def test_invalid_cell_message_contains_position_without_value() -> None:
+    """Chyba ukáže souřadnice, ale neodhalí obsah buňky."""
+    with pytest.raises(InvalidInputError, match=r"řádek 1.*sloupec 1") as error:
+        ThesisTable(header=("A",), rows=(("tajná\nhodnota",),), align="l")
+    assert "tajná" not in str(error.value)
+
+
+@pytest.mark.parametrize(
+    ("widths", "attribute"),
+    [
+        ((), ""),
+        ((22, 60, 18), ' tbl-colwidths="[22,60,18]"'),
+        ((12.5, 70, 17.5), ' tbl-colwidths="[12.5,70,17.5]"'),
+    ],
+)
+def test_table_caption(widths: tuple[float, ...], attribute: str) -> None:
+    """Popisek nese jediné id tabulky a volitelné šířky."""
+    table = ThesisTable(header=("A", "B", "C"), rows=(), align="lcr", widths=widths)
+    assert table_markdown(table, label="tbl-a", caption="Popisek.") == (
+        pipe_table(table) + f"\n\n: Popisek. {{#tbl-a{attribute}}}"
+    )
+
+
+@pytest.mark.parametrize("label", ["Tbl_A", "a", "tbl-", "fig-a", "tbl-a\n"])
+def test_invalid_label(label: str) -> None:
+    """Label je bezpečné jméno souboru i id křížového odkazu."""
+    with pytest.raises(InvalidInputError, match="label"):
+        table_markdown(_table(CASES[0]), label=label, caption="Popisek.")
+
+
+@pytest.mark.parametrize("caption", ["", "\n", "Více\nřádků", "Více\rřádků"])
+def test_invalid_caption(caption: str) -> None:
+    """Popisek musí být neprázdný na jednom řádku."""
+    with pytest.raises(InvalidInputError, match="popisek"):
+        table_markdown(_table(CASES[0]), label="tbl-a", caption=caption)
+
+
+def test_other_label() -> None:
+    """Popisek sloučených kategorií odpovídá R DUA_OTHER."""
+    assert OTHER_LABEL == "ostatní (n < 10)"
