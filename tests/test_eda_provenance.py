@@ -6,8 +6,7 @@ import hashlib
 import json
 import platform
 from importlib.metadata import version
-from pathlib import Path
-from typing import Final
+from typing import TYPE_CHECKING, Final
 
 import pytest
 
@@ -18,6 +17,10 @@ from mediparse.entrypoints.eda_provenance import appendix, provenance
 from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
 from mediparse.infrastructure.thesis_table_format import latex_tabular, table_markdown
 from tests.git_support import git_output, init_repo, needs_git
+from tests.thesis_table_support import FIXTURES
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 SHA: Final = "b" * 40
 CSV_SHA: Final = "c" * 64
@@ -111,9 +114,6 @@ def test_versions_of_python_and_duckdb(tmp_path: Path) -> None:
 
     assert result["python"] == platform.python_version()
     assert result["duckdb"] == version("duckdb")
-
-
-FIXTURES = Path(__file__).parent / "fixtures" / "thesis_table"
 
 
 def test_provenance_table_matches_r_golden() -> None:

@@ -2,16 +2,18 @@
 
 from __future__ import annotations
 
-import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.thesis_export import MarkdownOutput, ThesisExport
+from tests.thesis_table_support import FIXTURES, golden_case
 
-FIXTURES = Path(__file__).parent / "fixtures" / "thesis_table"
-CASE = json.loads((FIXTURES / "cases.json").read_text(encoding="utf-8"))[0]
+if TYPE_CHECKING:
+    from pathlib import Path
+
+CASE = golden_case("kody-dua")
 
 
 def test_export_writes_golden_and_returns_markdown(tmp_path: Path) -> None:

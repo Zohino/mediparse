@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import json
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 import pytest
@@ -17,12 +15,10 @@ from mediparse.infrastructure.thesis_table_format import (
     pipe_table,
     table_markdown,
 )
+from tests.thesis_table_support import CASES, FIXTURES, golden_case
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
-
-FIXTURES = Path(__file__).parent / "fixtures" / "thesis_table"
-CASES = json.loads((FIXTURES / "cases.json").read_text(encoding="utf-8"))
 
 
 def _table(case: Mapping) -> ThesisTable:
@@ -128,14 +124,14 @@ def test_table_caption(widths: tuple[float, ...], attribute: str) -> None:
 def test_invalid_label(label: str) -> None:
     """Label je bezpečné jméno souboru i id křížového odkazu."""
     with pytest.raises(InvalidInputError, match="label"):
-        table_markdown(_table(CASES[0]), label=label, caption="Popisek.")
+        table_markdown(_table(golden_case("kody-dua")), label=label, caption="Popisek.")
 
 
 @pytest.mark.parametrize("caption", ["", " ", "\n", "Více\nřádků", "Více\rřádků"])
 def test_invalid_caption(caption: str) -> None:
     """Popisek musí být neprázdný na jednom řádku."""
     with pytest.raises(InvalidInputError, match="popisek"):
-        table_markdown(_table(CASES[0]), label="tbl-a", caption=caption)
+        table_markdown(_table(golden_case("kody-dua")), label="tbl-a", caption=caption)
 
 
 def test_other_label() -> None:
@@ -172,4 +168,4 @@ def test_label_and_caption_must_be_strings(overrides: dict) -> None:
     """Neplatný runtime typ se přeloží na doménovou chybu."""
     arguments: dict = {"label": "tbl-a", "caption": "Popisek.", **overrides}
     with pytest.raises(InvalidInputError):
-        table_markdown(_table(CASES[0]), **arguments)
+        table_markdown(_table(golden_case("kody-dua")), **arguments)
