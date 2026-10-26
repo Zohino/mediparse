@@ -13,8 +13,10 @@ eda_canary() {
     mkdir -p "$work/pdfjoined"
     for text in "$work"/pdftext/*.txt; do
         [[ -f $text ]] || continue
-        # Typst dělí dlouhá slova měkkým spojovníkem na konci řádku; token se hledá ve spojeném textu.
-        tr -d '\n' <"$text" | sed 's/\xc2\xad//g' >"$work/pdfjoined/${text##*/}"
+        # Typst dělí dlouhá slova měkkým spojovníkem na konci řádku, někdy před prázdným řádkem:
+        # spojovník s konci řádků za ním se maže. Ostatní konce řádků jsou mezera, jinak by
+        # sousední popisky (eda, sentinel) daly falešný token.
+        sed -z 's/\xc2\xad\n*//g; s/\n/ /g' "$text" >"$work/pdfjoined/${text##*/}"
     done
     cells=$(grep --recursive --files-with-matches --fixed-strings "$prefix-" "$work/eda" "$work/results" "$work/pdftext") || cell_status=$?
     tokens=$(grep --recursive --files-with-matches --fixed-strings --ignore-case "$stem" "$work/eda" "$work/results" "$work/pdfjoined") || token_status=$?

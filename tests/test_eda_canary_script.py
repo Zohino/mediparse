@@ -82,6 +82,25 @@ def test_leaked_cell_or_token_fails_and_names_file(
     assert Path(name).stem in result.stderr
 
 
+def test_neighbouring_label_lines_do_not_form_a_token(tmp_path: Path) -> None:
+    """Sousední řádky popisků ``eda`` a ``sentinel`` nejsou únik tokenu ``edasentinel``."""
+    work = _work(tmp_path, {"pdftext/9.txt": "eda\nsentinel\n"})
+
+    result = _canary(work)
+
+    assert result.returncode == CLEAN, result.stderr
+
+
+def test_token_split_by_soft_hyphen_before_blank_line_is_leak(tmp_path: Path) -> None:
+    """Měkký spojovník před prázdným řádkem slovo nerozděluje."""
+    work = _work(tmp_path, {"pdftext/9.txt": f"1 edasen{SOFT_HYPHEN}\n\ntinelb 1\n"})
+
+    result = _canary(work)
+
+    assert result.returncode == LEAKED
+    assert "9.txt" in result.stderr
+
+
 def test_cell_leak_is_not_masked_by_clean_token_search(tmp_path: Path) -> None:
     """Únik buňky shodí kanárka, i když hledání tokenu nic nenajde."""
     work = _work(tmp_path, {"results/eda/tabulka.tex": f"{PREFIX}-admissions-race-1\n"})
