@@ -1,50 +1,20 @@
 ---
 title: "Explorační analýza datové sady: přehled korpusu MIMIC-IV"
+engine: jupyter
 abstract: |
   Dokument zahajuje explorační analýzu datové sady, na které práce staví. Popisuje zdroje dat (MIMIC-IV, MIMIC-IV-Note a MIMIC-IV-Ext-BHC), cestu dat od stažení po dotazování a ochranu dat podle licence. Přehled korpusu uvádí pro každou tabulku počet záznamů, počet sloupců a velikost souboru a porovnává počty záznamů v databázi s manifestem validace. Dokument tak vymezuje východiska, na kterých staví další části analýzy.
 ---
 
-```{r}
+```{python}
 #| include: false
-library(reticulate)
-source("R/dua.R")
-source("R/db.R")
-source("R/corpus.R")
-source("R/export.R")
-eda_check_python()
-con <- eda_connect()
-tables <- sort(DBI::dbListTables(con))
-counts <- data.frame(
-  tabulka = tables,
-  n = vapply(
-    tables,
-    function(name) {
-      DBI::dbGetQuery(
-        con,
-        paste("SELECT count(*) AS n FROM", DBI::dbQuoteIdentifier(con, name))
-      )$n
-    },
-    numeric(1)
-  )
-)
-pathlib <- reticulate::import("pathlib")
-inventory <- reticulate::import("mediparse.infrastructure.mimic_inventory")
-manifest_path <- pathlib$Path(
-  file.path(Sys.getenv("PIXI_PROJECT_ROOT"), "results", "mimic", "manifest.json")
-)
-manifest <- manifest_text(
-  tables, inventory$read_manifest(manifest_path), inventory$read_manifest_bytes(manifest_path)
-)
-agrees <- all(counts$n == manifest$records)
-catalog <- mimic_catalog()
-overview <- cbind(
-  catalog[match(tables, catalog$tabulka), c("tabulka", "zdroj", "popis")],
-  manifest[c("sloupce", "mb")],
-  n = number_text(counts$n)
-)
-n_discharge <- counts$n[counts$tabulka == "discharge"]
-n_radiology <- counts$n[counts$tabulka == "radiology"]
-largest <- counts$tabulka[which.max(counts$n)]
+import os
+
+from IPython.display import Markdown
+
+from mediparse.entrypoints import eda_corpus, eda_export
+
+corpus = eda_corpus.corpus_overview(os.environ)
+export = eda_export.export(os.environ)
 ```
 
 # Úvod
@@ -78,30 +48,26 @@ Reprodukovatelnost zajišťují dva mechanismy. Výsledky výpočtů se ukládaj
 
 # Přehled korpusu {#sec-prehled}
 
-Databáze obsahuje `r nrow(counts)` tabulek. @tbl-korpus uvádí pro každou z nich projekt a modul, popis obsahu a plánované využití v práci, počet záznamů v databázi, počet sloupců a velikost staženého souboru podle manifestu validace (u `csv.gz` komprimovaného, u BHC nekomprimovaného). Využití tabulek v práci vychází z návrhu práce.
+Databáze obsahuje `{python} Markdown(corpus.tables)` tabulek. @tbl-korpus uvádí pro každou z nich projekt a modul, popis obsahu a plánované využití v práci, počet záznamů v databázi, počet sloupců a velikost staženého souboru podle manifestu validace (u `csv.gz` komprimovaného, u BHC nekomprimovaného). Využití tabulek v práci vychází z návrhu práce.
 
-```{r}
-#| label: tbl-korpus
-#| tbl-cap: "Tabulky korpusu: zdroj, obsah a využití, počet záznamů, počet sloupců a velikost souboru (MB)."
-#| tbl-colwidths: [22, 16, 30, 10, 12, 10]
-export_table(
-  overview[c("tabulka", "zdroj", "popis", "n", "sloupce", "mb")],
-  col.names = c("Tabulka", "Zdroj", "Obsah a využití", "Záznamů", "Sloupců", "MB"),
-  align = "lllrrr",
-  code = "tabulka"
+```{python}
+export.write(
+    corpus.table,
+    label="tbl-korpus",
+    caption="Tabulky korpusu: zdroj, obsah a využití, počet záznamů, počet sloupců a velikost souboru (MB).",
 )
 ```
 
 *Zdroj:* počty záznamů dotazem v DuckDB, počty sloupců a velikosti souborů z manifestu validace, popisy podle veřejné dokumentace MIMIC-IV, MIMIC-IV-Note a MIMIC-IV-Ext-BHC.
 
-Podle návrhu práce je primárním korpusem tabulka `discharge`; obsahuje `r format_number(n_discharge)` záznamů. Radiologických zpráv je v tabulce `radiology` `r format_number(n_radiology)`. `r if (sum(counts$n == max(counts$n)) == 1) paste0("Nejvíce záznamů má tabulka ", largest, ".")` Počty záznamů v databázi se `r if (agrees) "shodují" else "neshodují"` s počty v manifestu validace.
+Podle návrhu práce je primárním korpusem tabulka `discharge`; obsahuje `{python} Markdown(corpus.discharge)` záznamů. Radiologických zpráv je v tabulce `radiology` `{python} Markdown(corpus.radiology)`. `{python} Markdown(corpus.records)`
 
 # Shrnutí a rozhodnutí {#sec-shrnuti}
 
-Dokument popsal zdroje dat, cestu dat k dotazování a přehled `r nrow(counts)` tabulek. `r if (agrees) "Počty záznamů se u všech tabulek shodují s manifestem validace. Data jsou proto úplná a další části analýzy mohou stavět na parquetu bez další kontroly počtu záznamů." else paste0("Počty záznamů se liší od manifestu validace u tabulek: ", paste(counts$tabulka[counts$n != manifest$records], collapse = ", "), ". Data se proto nesmějí považovat za úplná a před dalším použitím je nutné rozdíl vysvětlit.")`
+Dokument popsal zdroje dat, cestu dat k dotazování a přehled `{python} Markdown(corpus.tables)` tabulek. `{python} Markdown(corpus.summary)`
 
 # Omezení {#sec-omezeni}
 
 Přehled uvádí jen počty záznamů, sloupců a velikosti souborů. O obsahu zpráv, pacientech ani rozdělení dat netvrdí nic; to je předmětem dalších částí analýzy. Počty se vztahují k verzím 3.1 (MIMIC-IV), 2.2 (MIMIC-IV-Note) a 1.2.0 (MIMIC-IV-Ext-BHC). Automatizovaná kontrola neprohledává text uvnitř obrázků, proto grafy vyžadují zvláštní zacházení.
 
-{{< include _partials/appendix.qmd >}}
+{{< include _partials/appendix-python.qmd >}}
