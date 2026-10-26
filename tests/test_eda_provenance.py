@@ -13,9 +13,10 @@ import pytest
 
 from mediparse.domain.eda_provenance import provenance_rows
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.thesis_table import ThesisTable, latex_tabular, table_markdown
+from mediparse.domain.thesis_table import ThesisTable
 from mediparse.entrypoints.eda_provenance import appendix, provenance
 from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
+from mediparse.infrastructure.thesis_table_format import latex_tabular, table_markdown
 from tests.git_support import git_output, init_repo, needs_git
 
 SHA: Final = "b" * 40

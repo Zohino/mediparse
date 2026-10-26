@@ -10,8 +10,8 @@ import pytest
 
 from mediparse.domain.dua import OTHER_LABEL
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.thesis_table import (
-    ThesisTable,
+from mediparse.domain.thesis_table import ThesisTable
+from mediparse.infrastructure.thesis_table_format import (
     latex_escape,
     latex_tabular,
     pipe_table,

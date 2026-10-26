@@ -6,7 +6,8 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.thesis_table import ThesisTable, latex_tabular, table_markdown
+from mediparse.domain.thesis_table import ThesisTable
+from mediparse.infrastructure.thesis_table_format import latex_tabular, table_markdown
 
 if TYPE_CHECKING:
     from collections.abc import Collection, Sequence
