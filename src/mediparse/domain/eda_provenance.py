@@ -5,6 +5,8 @@ from __future__ import annotations
 import re
 from typing import TYPE_CHECKING, Final
 
+from mediparse.domain.thesis_table import ThesisTable
+
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
@@ -44,4 +46,21 @@ def provenance_rows(details: Mapping[str, str]) -> tuple[tuple[str, str], ...]:
             _value(key, value),
         )
         for key, value in details.items()
+    )
+
+
+def provenance_table(details: Mapping[str, str]) -> ThesisTable:
+    """Sestaví tabulku provenance včetně jejího rozvržení.
+
+    Args:
+        details: Klíče a textové hodnoty provenance renderu.
+
+    Returns:
+        Validovaná tabulka s českou hlavičkou a šířkami sloupců přílohy.
+    """
+    return ThesisTable(
+        header=("Položka", "Hodnota"),
+        rows=provenance_rows(details),
+        align="ll",
+        widths=(28, 72),
     )

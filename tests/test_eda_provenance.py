@@ -11,9 +11,9 @@ from typing import Final
 
 import pytest
 
+from mediparse.domain import eda_provenance
 from mediparse.domain.eda_provenance import provenance_rows
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.thesis_table import ThesisTable
 from mediparse.entrypoints.eda_provenance import appendix, provenance
 from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
 from mediparse.infrastructure.thesis_table_format import latex_tabular, table_markdown
@@ -116,15 +116,10 @@ def test_versions_of_python_and_duckdb(tmp_path: Path) -> None:
 FIXTURES = Path(__file__).parent / "fixtures" / "thesis_table"
 
 
-def test_provenance_rows_match_r_golden() -> None:
+def test_provenance_table_matches_r_golden() -> None:
     """České popisky a rozdělení otisků dávají stejný LaTeX jako R příloha."""
     details = json.loads((FIXTURES / "provenance.json").read_text(encoding="utf-8"))
-    table = ThesisTable(
-        header=("Položka", "Hodnota"),
-        rows=provenance_rows(details),
-        align="ll",
-        widths=(28, 72),
-    )
+    table = eda_provenance.provenance_table(details)
     assert (latex_tabular(table) + "\n").encode() == (
         FIXTURES / "provenance.tex"
     ).read_bytes()
@@ -171,10 +166,7 @@ def test_python_appendix_exports_provenance(tmp_path: Path) -> None:
         "QUARTO_DOCUMENT_FILE": "1-dataset.qmd",
     }
     result = appendix(environ)
-    rows = provenance_rows(provenance(environ, root, parquet))
-    table = ThesisTable(
-        header=("Položka", "Hodnota"), rows=rows, align="ll", widths=(28, 72)
-    )
+    table = eda_provenance.provenance_table(provenance(environ, root, parquet))
     destination = root / "results" / "eda" / "1-dataset" / "tbl-provenance.tex"
     assert destination.read_bytes() == (latex_tabular(table) + "\n").encode()
     assert result.text == table_markdown(

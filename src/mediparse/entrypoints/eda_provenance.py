@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.eda_provenance import provenance_rows
+from mediparse.domain.eda_provenance import provenance_table
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.eda_database import ROOT_VARIABLE, parquet_dir
 from mediparse.entrypoints.eda_export import export
@@ -73,11 +73,13 @@ def appendix(environ: Mapping[str, str]) -> MarkdownOutput:
         msg = f"Pro přílohu provenance nastavte {ROOT_VARIABLE}."
         raise InvalidInputError(msg)
     details = provenance(environ, Path(root), Path(parquet_dir(environ)))
+    table = provenance_table(details)
     return export(environ).table(
-        provenance_rows(details),
-        header=("Položka", "Hodnota"),
-        align="ll",
+        table.rows,
+        header=table.header,
+        align=table.align,
         label="tbl-provenance",
         caption="Provenance renderu.",
-        widths=(28, 72),
+        widths=table.widths,
+        code=table.code,
     )
