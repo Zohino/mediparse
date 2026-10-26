@@ -19,7 +19,7 @@ COPY --from=builder /app/.pixi/envs/test /app/.pixi/envs/test
 COPY --from=builder /shell-hook /shell-hook
 COPY --from=builder /app/src/ src/
 COPY pyproject.toml ./
-COPY config/matrix.json config/smoketest_training.json config/split.json config/section_headers.json config/synthetic_plan.json config/mimic_tables.json config/diagnosis_candidates.json config/verbalization_template.md config/
+COPY config/matrix.json config/smoketest_training.json config/split.json config/section_headers.json config/synthetic_plan.json config/mimic_tables.json config/diagnosis_candidates.json config/text_mentions.json config/verbalization_template.md config/
 COPY resources/synthetic/ resources/synthetic/
 COPY resources/icd/ resources/icd/
 COPY results/mimic/manifest.json results/mimic/

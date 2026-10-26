@@ -54,6 +54,15 @@ class Negation(BaseModel):
     window_chars: PositiveInt
 
 
+class TextMentions(BaseModel):
+    """Zmínky v textu podle EDA: pravidlo negace a příznaky, které sešit 8 hledá."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+
+    negation: Negation
+    symptoms: Annotated[tuple[str, ...], Field(min_length=1)]
+
+
 class MentionModel(BaseModel):
     """Parametry zmínek: pravděpodobnosti podle labelu, umístění a statusy u negativního labelu."""
 
