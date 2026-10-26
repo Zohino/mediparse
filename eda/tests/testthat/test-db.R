@@ -115,7 +115,7 @@ test_that("eda_connect odmítne neplatnou značku synthetic.json pod CLAUDECODE"
   writeLines("{}", file.path(dir, "synthetic.json"))
   withr::local_envvar(MEDIPARSE_PARQUET = dir, CLAUDECODE = "1", CI = NA)
 
-  expect_error(eda_connect())
+  expect_error(eda_connect(), "synthetic.json")
 })
 
 test_that("eda_connect čte prostředí při každém volání, ne snímek ze startu", {
@@ -142,8 +142,7 @@ test_that("eda_connect založí pohledy podle nastavení z Pythonu", {
       views = list(jiny = file.path(dir, "discharge.parquet"))
     )
   })
-  testthat::local_mocked_bindings(eda_database = function() fake, .package = "base")
-  con <- eda_connect()
+  con <- eda_connect(fake)
   withr::defer(DBI::dbDisconnect(con, shutdown = TRUE))
 
   expect_equal(DBI::dbListTables(con), "jiny")

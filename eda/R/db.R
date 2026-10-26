@@ -8,8 +8,8 @@ eda_environ <- function() as.list(Sys.getenv())
 
 eda_parquet_dir <- function() eda_database()$parquet_dir(eda_environ())
 
-eda_connect <- function() {
-  rules <- eda_database()$connection_settings(eda_environ())
+eda_connect <- function(database = eda_database()) {
+  rules <- database$connection_settings(eda_environ())
   con <- DBI::dbConnect(duckdb::duckdb())
   invisible(DBI::dbExecute(
     con, paste("SET temp_directory =", DBI::dbQuoteString(con, rules$temp_directory))
