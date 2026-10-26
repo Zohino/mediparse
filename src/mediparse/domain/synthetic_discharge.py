@@ -75,10 +75,14 @@ _VARIANTS: Final = (
 
 
 def require_bhc_layout(lexicon: SectionLexicon) -> None:
-    """Ověří, že lexikon má sekci BHC a za ní aspoň dvě sekce.
+    """Ověří rozvržení lexikonu, na kterém stojí target BHC a řádky zmínek.
+
+    Sekce BHC musí existovat a mít za sebou aspoň dvě sekce. První sekce nese řádky zmínek,
+    proto nesmí být BHC (změnila by target) ani diagnostická (strip D2 by zmínky odstranil).
 
     Raises:
-        InvalidInputError: Lexikon nemá klíč ``hospital_course`` nebo za ním nejsou dvě sekce.
+        InvalidInputError: Lexikon nemá klíč ``hospital_course``, nejsou za ním dvě sekce
+            nebo je první sekce BHC či diagnostická.
     """
     keys = list(lexicon.sections)
     if BHC_SECTION not in keys:
@@ -89,6 +93,13 @@ def require_bhc_layout(lexicon: SectionLexicon) -> None:
         msg = (
             f"Za {BHC_SECTION} je sekcí: {after}, potřeba aspoň {_SECTIONS_AFTER_BHC}."
         )
+        raise InvalidInputError(msg)
+    first = keys[0]
+    if first == BHC_SECTION:
+        msg = f"První sekce lexikonu nesmí být {BHC_SECTION}, nesla by řádky zmínek."
+        raise InvalidInputError(msg)
+    if lexicon.sections[first].diagnostic:
+        msg = f"První sekce lexikonu ({first}) je diagnostická, strip D2 by odstranil řádky zmínek."
         raise InvalidInputError(msg)
 
 
@@ -104,8 +115,9 @@ def synthetic_discharge(
     Zpráva začíná hotovým prvním řádkem ``head`` (buňka s tokenem, který pro ni složí
     tabulky), pak má pole preambule se značkou ``___`` a všechny sekce lexikonu v jeho
     pořadí. Synonymum hlavičky se mění s blokem a tělo každé sekce nese token zprávy
-    (DF = 1). Řádky ``mentions`` stojí na konci těla první sekce: ta není BHC ani sekce
-    kolem něj, takže řezy targetu BHC a opakovaná hlavička varianty 2 zůstávají beze změny.
+    (DF = 1). Řádky ``mentions`` stojí na konci těla první sekce. Ta stojí před BHC
+    a není diagnostická (vynucuje to ``require_bhc_layout``), takže řezy targetu BHC a strip
+    D2 je nezasáhnou; opakovanou hlavičku varianty 2 nese poslední sekce.
 
     Args:
         head: První řádek zprávy.

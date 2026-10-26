@@ -357,3 +357,21 @@ def test_blank_negation_cue_is_refused_without_output(tmp_path: Path) -> None:
 
     assert code is ExitCode.REFUSED
     assert not out.exists()
+
+
+def test_lexicon_with_bhc_first_is_refused_without_output(tmp_path: Path) -> None:
+    """Lexikon s BHC na prvním místě skončí REFUSED bez parquetu, zmínky by změnily target BHC."""
+    lexicon = json.loads(REPOSITORY_SECTION_HEADERS.read_text(encoding="utf-8"))
+    sections = lexicon["sections"]
+    lexicon["sections"] = {
+        "hospital_course": sections["hospital_course"],
+        **{key: value for key, value in sections.items() if key != "hospital_course"},
+    }
+    path = tmp_path / "lexicon.json"
+    path.write_text(json.dumps(lexicon), encoding="utf-8")
+    out = tmp_path / "tables"
+
+    code = run(_arguments(_manifest(tmp_path), out, rows=ROWS, lexicon=path))
+
+    assert code is ExitCode.REFUSED
+    assert not out.exists()

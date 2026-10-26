@@ -258,12 +258,12 @@ def test_layout_without_bhc_is_refused_naming_the_key() -> None:
 def test_layout_with_one_section_after_bhc_is_refused() -> None:
     """Za BHC musí být aspoň dvě sekce, jedna se vynechá a řez targetu končí v další."""
     with pytest.raises(InvalidInputError, match=r"sekcí: 1,"):
-        require_bhc_layout(_lexicon_of(FIRST_DIAGNOSTIC, BHC_SECTION, SKIPPED))
+        require_bhc_layout(_lexicon_of(FIRST_KEY, BHC_SECTION, FIRST_DIAGNOSTIC))
 
 
 def test_layout_with_two_sections_after_bhc_is_accepted() -> None:
     """Dvě sekce za BHC stačí."""
-    require_bhc_layout(_lexicon_of(BHC_SECTION, SKIPPED, FIRST_DIAGNOSTIC))
+    require_bhc_layout(_lexicon_of(FIRST_KEY, BHC_SECTION, SKIPPED, FIRST_DIAGNOSTIC))
 
 
 def test_layout_of_the_repository_lexicon_is_accepted() -> None:
@@ -306,3 +306,19 @@ def test_empty_mentions_give_the_text_without_them() -> None:
 
     assert note == synthetic_discharge(_cell(0), _token(0), LEXICON, 0)
     assert not any(line in note.text.splitlines() for line in MENTIONS)
+
+
+def test_layout_with_bhc_first_is_refused() -> None:
+    """BHC jako první sekce by zmínkami změnilo target BHC, proto je rozvržení chyba."""
+    with pytest.raises(InvalidInputError, match=r"První sekce.*hospital_course"):
+        require_bhc_layout(
+            _lexicon_of(BHC_SECTION, SKIPPED, FIRST_DIAGNOSTIC, FIRST_KEY)
+        )
+
+
+def test_layout_with_diagnostic_first_section_is_refused() -> None:
+    """Diagnostická první sekce se stripem D2 odstraní i s řádky zmínek, proto je rozvržení chyba."""
+    with pytest.raises(InvalidInputError, match=r"První sekce.*diagnostická"):
+        require_bhc_layout(
+            _lexicon_of(FIRST_DIAGNOSTIC, BHC_SECTION, SKIPPED, FIRST_KEY)
+        )

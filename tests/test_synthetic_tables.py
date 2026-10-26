@@ -46,6 +46,7 @@ TEXT_CHARS: Final = 100
 SHAPE = TableShape(records=5, columns=("note_id", "subject_id", "text"))
 NOTE_SHAPE = TableShape(records=5, columns=("note_id", "subject_id", "hadm_id", "text"))
 PREFIX: Final = "eda-sentinel"
+FIRST_KEY: Final = next(iter(REPOSITORY_LEXICON.sections))
 COLUMNS: Final = {
     table: shape.columns
     for table, shape in read_manifest(REPOSITORY_MIMIC_MANIFEST).items()
@@ -262,7 +263,12 @@ def test_every_note_has_text_chars_and_first_line_is_the_cell_text(
     lexicon = SectionLexicon(
         sections={
             key: REPOSITORY_LEXICON.sections[key]
-            for key in (BHC_SECTION, "discharge_medications", "discharge_diagnosis")
+            for key in (
+                FIRST_KEY,
+                BHC_SECTION,
+                "discharge_medications",
+                "discharge_diagnosis",
+            )
         },
         preamble=(),
     )
