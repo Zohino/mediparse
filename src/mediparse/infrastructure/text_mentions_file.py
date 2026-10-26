@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict
 
-from mediparse.domain.mentions import Negation, TextMentions
+from mediparse.domain.mentions import Negation
+from mediparse.domain.text_mentions import TextMentions
 from mediparse.infrastructure.input_file import parse_file
 
 if TYPE_CHECKING:
@@ -16,7 +17,7 @@ if TYPE_CHECKING:
 class _Symptoms(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid")
 
-    keywords_en: tuple[str, ...] = Field(min_length=1)
+    keywords_en: tuple[str, ...]
 
 
 class _File(BaseModel):

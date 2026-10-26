@@ -25,9 +25,11 @@ def _write(tmp_path: Path, tree: object) -> Path:
     return path
 
 
-def _tree(symptoms: list[str], **extra: object) -> dict[str, object]:
+def _tree(
+    symptoms: list[str], cues: list[str] | None = None, **extra: object
+) -> dict[str, object]:
     return {
-        "negation": {"cues": ["no"], "window_chars": WINDOW},
+        "negation": {"cues": cues or ["no"], "window_chars": WINDOW},
         "symptoms": {"keywords_en": symptoms},
         **extra,
     }
@@ -68,3 +70,24 @@ def test_unknown_key_is_invalid_input(tmp_path: Path) -> None:
     """Neznámý klíč nejvyšší úrovně je chyba, ne tiše ignorované pole."""
     with pytest.raises(InvalidInputError):
         load_text_mentions(_write(tmp_path, _tree(["fever"], other=1)))
+
+
+def test_single_symptom_is_accepted(tmp_path: Path) -> None:
+    """Dolní mez je jeden příznak a jeho hodnota se zachová."""
+    mentions = load_text_mentions(_write(tmp_path, _tree(["fever"])))
+
+    assert mentions.symptoms == ("fever",)
+
+
+@pytest.mark.parametrize("blank", ["", "  ", "\t"])
+def test_blank_symptom_is_invalid_input(tmp_path: Path, blank: str) -> None:
+    """Prázdný nebo bílý příznak by našel každý text, proto je chyba vstupu."""
+    with pytest.raises(InvalidInputError):
+        load_text_mentions(_write(tmp_path, _tree(["fever", blank])))
+
+
+@pytest.mark.parametrize("blank", ["", "  ", "\t"])
+def test_blank_negation_cue_is_invalid_input(tmp_path: Path, blank: str) -> None:
+    """Prázdný nebo bílý negační výraz by posunul stavy zmínek, proto je chyba vstupu."""
+    with pytest.raises(InvalidInputError):
+        load_text_mentions(_write(tmp_path, _tree(["fever"], cues=["no", blank])))

@@ -343,3 +343,17 @@ def test_notes_carry_mentions_from_the_configs(tmp_path: Path) -> None:
     assert "diabetes" in texts[0].splitlines()
     assert "no diabetes" in texts[2 * MIN_CELL].splitlines()
     assert "diabetes" not in texts[BLOCKS * MIN_CELL - 1].splitlines()
+
+
+def test_blank_negation_cue_is_refused_without_output(tmp_path: Path) -> None:
+    """Config zmínek s prázdným negačním výrazem skončí REFUSED a nevznikne žádný parquet."""
+    out = tmp_path / "tables"
+    config = json.loads(REPOSITORY_TEXT_MENTIONS.read_text(encoding="utf-8"))
+    config["negation"]["cues"] = [""]
+    path = tmp_path / "mentions.json"
+    path.write_text(json.dumps(config), encoding="utf-8")
+
+    code = run(_arguments(_manifest(tmp_path), out, rows=ROWS, mentions=path))
+
+    assert code is ExitCode.REFUSED
+    assert not out.exists()
