@@ -125,3 +125,62 @@ def test_catalog() -> None:
         next(entry.source for entry in catalog if entry.table == "mimic-iv-bhc")
         == "MIMIC-IV-Ext-BHC"
     )
+
+
+@pytest.mark.parametrize(
+    ("counts", "manifest", "message"),
+    [
+        (
+            {"discharge": 1},
+            {"discharge": 1, "radiology": 1},
+            "Tabulky v manifestu validace, ale ne v databázi: radiology.",
+        ),
+        (
+            {"discharge": 1},
+            {"radiology": 1, "discharge": 1, "admissions": 1},
+            "Tabulky v manifestu validace, ale ne v databázi: admissions, radiology.",
+        ),
+        (
+            {"radiology": 1, "discharge": 1, "admissions": 1},
+            {"discharge": 1},
+            "Tabulky v databázi, ale ne v manifestu validace: admissions, radiology.",
+        ),
+        (
+            {"unknown": 1, "absent": 1},
+            {"unknown": 1, "absent": 1},
+            "Tabulky mimo katalog: absent, unknown.",
+        ),
+    ],
+)
+def test_table_sets_must_agree(
+    counts: dict[str, int], manifest: dict[str, int], message: str
+) -> None:
+    """Chybějící pohled není úplný korpus; hláška jmenuje zdroj i seřazené tabulky."""
+    with pytest.raises(InvalidInputError) as refusal:
+        overview_module.summarize_corpus(
+            counts, _shapes(manifest), dict.fromkeys(manifest, 0)
+        )
+    assert str(refusal.value) == message
+
+
+@pytest.mark.parametrize("source", ["shapes", "sizes"])
+def test_manifest_parts_must_agree(source: str) -> None:
+    """Tvary a velikosti manifestu nesmějí popisovat jinou množinu tabulek."""
+    counts = {"discharge": 1, "radiology": 1}
+    manifest = {**counts, "admissions": 1}
+    shapes = _shapes(manifest if source == "shapes" else counts)
+    sizes = dict.fromkeys(manifest if source == "sizes" else counts, 0)
+    with pytest.raises(InvalidInputError, match=r"manifestu validace.*admissions"):
+        overview_module.summarize_corpus(counts, shapes, sizes)
+
+
+@pytest.mark.parametrize("missing", ["discharge", "radiology"])
+def test_primary_corpora_are_required(missing: str) -> None:
+    """Ani vzájemně souhlasné vstupy nesmějí tiše doplnit primární korpus nulou."""
+    counts = {"discharge": 1, "radiology": 1}
+    del counts[missing]
+    with pytest.raises(InvalidInputError) as refusal:
+        overview_module.summarize_corpus(
+            counts, _shapes(counts), dict.fromkeys(counts, 0)
+        )
+    assert str(refusal.value) == f"Povinné tabulky chybí v databázi: {missing}."

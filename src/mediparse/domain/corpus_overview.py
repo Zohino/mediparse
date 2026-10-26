@@ -109,14 +109,12 @@ def summarize_corpus(
         Rozvržená tabulka a texty pro sešit.
 
     Raises:
-        InvalidInputError: Tabulka chybí v katalogu nebo manifestu.
+        InvalidInputError: Množiny tabulek si neodpovídají, tabulka je mimo katalog
+            nebo chybí discharge či radiology.
     """
+    _check_tables(set(counts), set(shapes), set(sizes))
     catalog = {entry.table: entry for entry in CATALOG}
     names = sorted(counts)
-    for name in names:
-        if name not in catalog or name not in shapes or name not in sizes:
-            msg = f"Tabulka {name} chybí v katalogu nebo manifestu validace."
-            raise InvalidInputError(msg)
     differences = [name for name in names if counts[name] != shapes[name].records]
     table = ThesisTable(
         header=("Tabulka", "Zdroj", "Obsah a využití", "Záznamů", "Sloupců", "MB"),
@@ -138,11 +136,34 @@ def summarize_corpus(
     return CorpusOverview(
         table=table,
         tables=format_number(len(counts)),
-        discharge=format_number(counts.get("discharge", 0)),
-        radiology=format_number(counts.get("radiology", 0)),
+        discharge=format_number(counts["discharge"]),
+        radiology=format_number(counts["radiology"]),
         records=_records(counts, agrees=not differences),
         summary=_summary(differences),
     )
+
+
+def _check_tables(database: set[str], shapes: set[str], sizes: set[str]) -> None:
+    catalog = {entry.table for entry in CATALOG}
+    _refuse_tables((database | shapes | sizes) - catalog, "Tabulky mimo katalog")
+    _refuse_tables(
+        (shapes | sizes) - database,
+        "Tabulky v manifestu validace, ale ne v databázi",
+    )
+    _refuse_tables(
+        database - (shapes & sizes),
+        "Tabulky v databázi, ale ne v manifestu validace",
+    )
+    _refuse_tables(
+        {"discharge", "radiology"} - database,
+        "Povinné tabulky chybí v databázi",
+    )
+
+
+def _refuse_tables(names: set[str], source: str) -> None:
+    if names:
+        msg = f"{source}: {', '.join(sorted(names))}."
+        raise InvalidInputError(msg)
 
 
 def _records(counts: Mapping[str, int], *, agrees: bool) -> str:

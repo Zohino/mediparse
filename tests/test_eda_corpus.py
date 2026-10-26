@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.domain.data_access import DataAccessError
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.eda_corpus import corpus_overview
 from mediparse.infrastructure.parquet_file import write_string_table
 from tests.eda_support import mark_synthetic
@@ -90,4 +91,12 @@ def test_corpus_overview_uses_guard(tmp_path: Path) -> None:
     (tmp_path / "parquet" / "synthetic.json").unlink()
     (tmp_path / "results" / "mimic" / "manifest.json").unlink()
     with pytest.raises(DataAccessError):
+        corpus_overview(environ)
+
+
+def test_manifest_table_without_parquet_is_refused(tmp_path: Path) -> None:
+    """Manifest nesmí potvrdit úplnost databáze, ze které chybí celá tabulka."""
+    environ = _fixture(tmp_path, agrees=True)
+    (tmp_path / "parquet" / "radiology.parquet").unlink()
+    with pytest.raises(InvalidInputError, match=r"manifestu validace.*radiology"):
         corpus_overview(environ)
