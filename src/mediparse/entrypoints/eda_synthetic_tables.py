@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from mediparse.domain.synthetic_mentions import MentionVocabulary
+from mediparse.domain.synthetic_mentions import MentionVocabulary, mention_vocabulary
 from mediparse.domain.synthetic_tables import (
     DEFAULT_ROWS,
     SyntheticRun,
@@ -85,11 +85,10 @@ def run(argv: Sequence[str]) -> ExitCode:
 
 
 def _vocabulary(candidates: Path, mentions: Path) -> MentionVocabulary:
-    text_mentions = load_text_mentions(mentions)
-    return MentionVocabulary(
-        phrases=(*load_diagnosis_keywords(candidates), *text_mentions.symptoms),
-        acronyms=tuple(load_text_normalization(candidates).acronyms),
-        cue=text_mentions.negation.cues[0],
+    return mention_vocabulary(
+        load_diagnosis_keywords(candidates),
+        load_text_mentions(mentions),
+        load_text_normalization(candidates),
     )
 
 

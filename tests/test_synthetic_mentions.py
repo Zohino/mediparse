@@ -5,11 +5,15 @@ from __future__ import annotations
 import re
 from typing import Final
 
+from mediparse.domain.clinical_text import TextNormalization
+from mediparse.domain.mentions import Negation
 from mediparse.domain.synthetic_mentions import (
     MentionState,
     MentionVocabulary,
     mention_lines,
+    mention_vocabulary,
 )
+from mediparse.domain.text_mentions import TextMentions
 
 CUE: Final = "no"
 REPEATS: Final = 4
@@ -56,3 +60,20 @@ def test_asserted_lines_never_contain_the_cue_as_a_word() -> None:
     lines = mention_lines(VOCABULARY, MentionState.ASSERTED, REPEATS)
 
     assert not [line for line in lines if re.search(rf"\b{CUE}\b", line.lower())]
+
+
+def test_vocabulary_joins_keywords_symptoms_acronyms_and_first_cue() -> None:
+    """Fráze jsou klíčová slova a příznaky v tomto pořadí, zkratky klíče slovníku a výraz první negační výraz."""
+    mentions = TextMentions(
+        negation=Negation(cues=("no", "denies"), window_chars=40),
+        symptoms=("fever", "cough"),
+    )
+    normalization = TextNormalization(acronyms={"DM": "diabetes", "DM2": "diabetes"})
+
+    vocabulary = mention_vocabulary(("diabetes", "diabetic"), mentions, normalization)
+
+    assert vocabulary == MentionVocabulary(
+        phrases=("diabetes", "diabetic", "fever", "cough"),
+        acronyms=("DM", "DM2"),
+        cue="no",
+    )

@@ -4,7 +4,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum, auto
-from typing import Final
+from typing import TYPE_CHECKING, Final
+
+if TYPE_CHECKING:
+    from mediparse.domain.clinical_text import TextNormalization
+    from mediparse.domain.text_mentions import TextMentions
 
 # Zrcadlo SHARE_MIN_OCCURRENCES z eda/R/preprocessing.R. Kapitola Předzpracování zveřejní podíl
 # zkratky jen od tohoto počtu výskytů a syntetické zprávy ho musí splnit. Změna se dělá v obou
@@ -62,4 +66,28 @@ def mention_lines(
     return (
         *vocabulary.phrases,
         *(" ".join([acronym] * acronym_repeats) for acronym in vocabulary.acronyms),
+    )
+
+
+def mention_vocabulary(
+    keywords: tuple[str, ...],
+    mentions: TextMentions,
+    normalization: TextNormalization,
+) -> MentionVocabulary:
+    """Složí slovník zmínek ze tří configů: klíčová slova, příznaky a zkratky.
+
+    Args:
+        keywords: Klíčová slova diagnóz pětice.
+        mentions: Negace a příznaky z configu zmínek.
+        normalization: Zkratky diagnóz pětice; berou se jejich klíče.
+
+    Returns:
+        Slovník, ze kterého ``mention_lines`` skládá řádky.
+    """
+    return MentionVocabulary(
+        phrases=(*keywords, *mentions.symptoms),
+        acronyms=tuple(normalization.acronyms),
+        # Každá negovaná zmínka stojí na vlastním řádku, takže stačí jediný výraz: další
+        # by řádky jen znásobily a okno negace sešitu 8 by se nezměnilo.
+        cue=mentions.negation.cues[0],
     )
