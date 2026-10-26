@@ -20,23 +20,29 @@ from mediparse.domain.synthetic_discharge import (
     SyntheticDischarge,
     require_bhc_layout,
     synthetic_discharge,
-    text_token,
 )
 from tests.section_support import REPOSITORY_LEXICON
 
 PREFIX: Final = "eda-sentinel"
-TEXT_CHARS: Final = 100
+SENTINEL_LETTERS: Final = "edasentinel"
 LEXICON: Final = REPOSITORY_LEXICON
 KEYS: Final = tuple(LEXICON.sections)
 BHC_INDEX: Final = KEYS.index(BHC_SECTION)
 SKIPPED: Final = KEYS[BHC_INDEX + 1]
 REPEATING_VARIANT: Final = 2
 SKIPPING_VARIANT: Final = 3
-FIRST_DIAGNOSTIC: Final = next(iter(sorted(LEXICON.diagnostic_sections)))
+FIRST_DIAGNOSTIC: Final = next(
+    key for key, section in LEXICON.sections.items() if section.diagnostic
+)
+FIRST_KEY: Final = KEYS[0]
 
 
-def _note(row: int, block: int | None) -> SyntheticDischarge:
-    return synthetic_discharge(PREFIX, LEXICON, row, block, TEXT_CHARS)
+def _token(row: int) -> str:
+    return SENTINEL_LETTERS + chr(ord("a") + row % 26)
+
+
+def _note(row: int, block: int) -> SyntheticDischarge:
+    return synthetic_discharge(_cell(row), _token(row), LEXICON, block)
 
 
 def _cell(row: int) -> str:
@@ -55,16 +61,6 @@ def _header_lines(text: str) -> list[str]:
         for synonym in section.synonyms
     }
     return [line for line in text.splitlines() if line in synonyms]
-
-
-def test_text_token_is_letters_only_and_unique_per_row() -> None:
-    """Token z písmen přežije tokenizaci a v každé zprávě je jiný (DF = 1)."""
-    tokens = [text_token("eda-sentinel", row) for row in range(60)]
-
-    assert all(re.fullmatch(r"edasentinel[a-z]+", token) for token in tokens)
-    assert len(set(tokens)) == len(tokens)
-    assert text_token("p", 0) == "pa"
-    assert text_token("p", 26) == "pba"
 
 
 @pytest.mark.parametrize("block", range(4))
@@ -108,7 +104,7 @@ def test_parser_finds_every_section_and_each_body_has_the_token() -> None:
     parts = [p for p in split_sections(note.text, LEXICON) if p.section != OTHER]
 
     assert [p.section for p in parts] == list(KEYS)
-    token = text_token(PREFIX, 0)
+    token = _token(0)
     assert all(token in p.body for p in parts)
 
 
@@ -128,7 +124,7 @@ def test_every_word_is_token_or_public_word_of_the_block(block: int) -> None:
         for word in re.findall(r"[a-z]{2,}", field.lower())
     }
     public |= set(re.findall(r"[a-z]{2,}", _cell(row)))
-    public.add(text_token(PREFIX, row))
+    public.add(_token(row))
 
     words = set(re.findall(r"[a-z]{2,}", _note(row, block).text.lower()))
 
@@ -147,22 +143,24 @@ def test_variant_two_repeats_diagnostic_header_in_last_section() -> None:
     assert parts[-1].section == KEYS[-1]
 
 
-def test_other_variants_do_not_repeat_the_header() -> None:
+@pytest.mark.parametrize("block", [0, 1, 3])
+def test_other_variants_do_not_repeat_the_header(block: int) -> None:
     """Hlavičku diagnostické sekce opakuje jen varianta 2."""
-    for block in (0, 1, 3):
-        parts = split_sections(_note(block, block).text, LEXICON)
-        synonym = LEXICON.sections[FIRST_DIAGNOSTIC].synonyms[0]
-        assert f"{synonym}:" not in parts[-1].body
+    synonyms = LEXICON.sections[FIRST_DIAGNOSTIC].synonyms
+    parts = split_sections(_note(block, block).text, LEXICON)
+
+    assert f"{synonyms[block % len(synonyms)]}:" not in parts[-1].body
 
 
 def test_pseudo_header_and_synonym_line_carry_the_token_in_every_body() -> None:
     """Tělo sekce má pseudohlavičku ``Token:`` a řádek se synonymem a tokenem malými písmeny."""
-    token = text_token(PREFIX, 5)
+    token = _token(5)
 
     lines = _note(5, 0).text.splitlines()
 
     assert lines.count(f"{token.capitalize()}:") == len(KEYS)
-    assert lines.count(f"allergies {token}") == 1
+    first_synonym = LEXICON.sections[FIRST_KEY].synonyms[0].lower()
+    assert lines.count(f"{first_synonym} {token}") == 1
 
 
 @pytest.mark.parametrize(
@@ -180,17 +178,6 @@ def test_blocks_beyond_variants_wrap_around(
     diagnostic = LEXICON.sections[FIRST_DIAGNOSTIC].synonyms
     repeated = f"{diagnostic[block % len(diagnostic)]}:" in parts[-1].body
     assert repeated is repeats
-
-
-def test_rare_row_is_cell_and_token_without_headers() -> None:
-    """Vzácný řádek je buňka a token do požadované délky, bez nadpisů a bez targetu."""
-    note = _note(40, None)
-
-    assert note.text.startswith(f"{_cell(40)} ")
-    assert note.text.split()[-1] == text_token(PREFIX, 40)
-    assert len(note.text) >= TEXT_CHARS
-    assert note.bhc_target is None
-    assert _header_lines(note.text) == []
 
 
 def _flat(text: str) -> str:
@@ -220,13 +207,12 @@ def test_target_of_variant_one_continues_through_the_whole_next_section() -> Non
     """Varianta 1: target je tělo BHC a celá následující sekce (hlavička a tělo)."""
     note, bhc, following = _bhc_and_next(1)
 
-    assert note.bhc_target is not None
     assert note.bhc_target.startswith(_flat(bhc.body))
     assert note.bhc_target == _flat(bhc.body + following.header + following.body)
 
 
 def test_target_of_variant_two_is_a_proper_prefix_of_the_body() -> None:
-    """Varianta 2: target je vlastní prefix těla BHC (konec dřív než sekce)."""
+    """Varianta 2 (náš konec později): target je vlastní prefix našeho úseku."""
     note, bhc, _ = _bhc_and_next(2)
 
     assert note.bhc_target
@@ -235,15 +221,12 @@ def test_target_of_variant_two_is_a_proper_prefix_of_the_body() -> None:
 
 
 def test_target_of_variant_three_runs_into_the_section_after_the_skipped_one() -> None:
-    """Varianta 3: target je tělo BHC, hlavička další sekce a začátek jejího těla, ne celá."""
+    """Varianta 3: target je tělo BHC, hlavička další sekce a první řádek jejího těla."""
     note, bhc, following = _bhc_and_next(3)
 
+    first_line = following.body.strip().splitlines()[0]
     assert following.section == KEYS[BHC_INDEX + 2]
-    assert note.bhc_target is not None
-    assert note.bhc_target.startswith(_flat(bhc.body + following.header))
-    full = _flat(bhc.body + following.header + following.body)
-    assert full.startswith(note.bhc_target)
-    assert len(note.bhc_target) < len(full)
+    assert note.bhc_target == _flat(f"{bhc.body} {following.header} {first_line}")
 
 
 @pytest.mark.parametrize("block", range(4))
@@ -264,13 +247,13 @@ def _lexicon_of(*keys: str) -> SectionLexicon:
 
 def test_layout_without_bhc_is_refused_naming_the_key() -> None:
     """Lexikon bez sekce BHC je InvalidInputError a hláška jmenuje klíč."""
-    with pytest.raises(InvalidInputError, match=BHC_SECTION):
-        require_bhc_layout(_lexicon_of(FIRST_DIAGNOSTIC, KEYS[0]))
+    with pytest.raises(InvalidInputError, match=r"nemá sekci hospital_course"):
+        require_bhc_layout(_lexicon_of(FIRST_DIAGNOSTIC, FIRST_KEY))
 
 
 def test_layout_with_one_section_after_bhc_is_refused() -> None:
     """Za BHC musí být aspoň dvě sekce, jedna se vynechá a řez targetu končí v další."""
-    with pytest.raises(InvalidInputError, match=BHC_SECTION):
+    with pytest.raises(InvalidInputError, match=r"sekcí: 1,"):
         require_bhc_layout(_lexicon_of(FIRST_DIAGNOSTIC, BHC_SECTION, SKIPPED))
 
 

@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
+from string import ascii_lowercase
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.diagnosis import Diagnosis
@@ -10,10 +12,8 @@ from mediparse.domain.dua import MIN_CELL
 from mediparse.domain.icd import IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.synthetic_discharge import (
-    padded_text,
     require_bhc_layout,
     synthetic_discharge,
-    text_token,
 )
 
 if TYPE_CHECKING:
@@ -152,7 +152,7 @@ def synthetic_rows(
     nalezitelný hledáním prefixu. Typové sloupce nesou slovník MIMIC po blocích
     (``_typed_value``); hodnota bez prefixu v nich sdílí aspoň ``MIN_CELL`` řádků, když je
     řádků aspoň ``BLOCKS * MIN_CELL``. Sloupec ``text`` za buňkou opakuje token zprávy,
-    dokud nemá aspoň ``run.text_chars`` znaků (viz ``text_token``). Text propouštěcí zprávy
+    dokud nemá aspoň ``run.text_chars`` znaků (viz ``_text_token``). Text propouštěcí zprávy
     bloku a target BHC jdou ze ``synthetic_discharge``.
 
     Args:
@@ -191,11 +191,23 @@ def _typed_value(table: str, column: str, row: int, run: SyntheticRun) -> str | 
         return _dictionary_value(column, row, run)
     if row >= BLOCKS * MIN_CELL and key in _RARE_WITNESSES:
         return None
-    block = (row // MIN_CELL) % BLOCKS
+    # Vzácný řádek mimo svědky bere hodnoty bloku 0.
+    block = _block_of(row) or 0
     if key in _DERIVED:
         return _DERIVED[key](block, run)
     values = _BLOCK_VALUES.get(key)
     return values[block] if values else None
+
+
+def _block_of(row: int) -> int | None:
+    """Vrátí blok řádku, nebo None pro vzácný řádek.
+
+    Returns:
+        Číslo bloku, u vzácných řádků None.
+    """
+    if row >= BLOCKS * MIN_CELL:
+        return None
+    return row // MIN_CELL
 
 
 def _note_value(table: str, column: str, row: int, run: SyntheticRun) -> str | None:
@@ -204,11 +216,13 @@ def _note_value(table: str, column: str, row: int, run: SyntheticRun) -> str | N
     Returns:
         Text zprávy, target BHC, nebo None pro jiný sloupec a pro vzácný řádek.
     """
-    if (table, column) not in _NOTE_COLUMNS or row >= BLOCKS * MIN_CELL:
+    block = _block_of(row)
+    if (table, column) not in _NOTE_COLUMNS or block is None:
         return None
-    note = synthetic_discharge(
-        run.prefix, run.lexicon, row, row // MIN_CELL, run.text_chars
-    )
+    # První řádek zprávy je tentýž text jako u vzácných řádků a radiologie, takže délku
+    # text_chars splňuje každá zpráva bez ohledu na lexikon.
+    head = _cell("discharge", TEXT_COLUMN, run.prefix, row, run.text_chars)
+    note = synthetic_discharge(head, _text_token(run.prefix, row), run.lexicon, block)
     return note.text if column == TEXT_COLUMN else note.bhc_target
 
 
@@ -230,4 +244,36 @@ def _cell(table: str, column: str, prefix: str, row: int, text_chars: int) -> st
     cell = f"{prefix}-{owner}-{column}-{row}"
     if column != TEXT_COLUMN:
         return cell
-    return padded_text(cell, text_token(prefix, row), text_chars)
+    token = _text_token(prefix, row)
+    copies = max(1, math.ceil((text_chars - len(cell)) / (len(token) + 1)))
+    return " ".join([cell, *[token] * copies])
+
+
+def _text_token(prefix: str, row: int) -> str:
+    """Vrátí token zprávy: písmena prefixu a číslo řádku zapsané písmeny.
+
+    Tokenizace zahodí pomlčky a n-gramy EDA berou jen písmena (``[a-z]{2,}``), takže buňku
+    s pomlčkami a číslem řádku ve výstupech po tokenech (n-gramy, slovník) kanárek nenajde.
+    Token ze samých písmen projde beze změny a v každé zprávě je jiný (DF = 1); s číslicí by
+    se v n-gramech zkrátil na kmen, který mají všechny zprávy. Výstup, ve kterém se token
+    objeví, proto pustil token jediné zprávy.
+
+    Returns:
+        Token ze samých písmen.
+    """
+    stem = "".join(character for character in prefix if character.isalpha())
+    return stem + _letters(row)
+
+
+def _letters(number: int) -> str:
+    """Zapíše nezáporné číslo písmeny jako číslice soustavy o 26 znacích.
+
+    Returns:
+        Číslo zapsané písmeny, například 0 → a, 25 → z, 26 → ba.
+    """
+    digits = ""
+    while True:
+        number, digit = divmod(number, len(ascii_lowercase))
+        digits = ascii_lowercase[digit] + digits
+        if number == 0:
+            return digits

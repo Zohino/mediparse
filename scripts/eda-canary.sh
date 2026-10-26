@@ -4,7 +4,7 @@
 # ve výstupu results/ a v textu PDF (pdftext/). Vrací 0 bez nálezu, 1 při úniku, 2 při chybě.
 #
 # Buňka nese prefix s pomlčkou; provenance uvádí prefix bez pomlčky za ním, proto se hledá
-# s ní. Token textu ze samých písmen (písmena prefixu a řádek, viz domain/synthetic_discharge.py)
+# s ní. Token textu ze samých písmen (písmena prefixu a řádek, viz domain/synthetic_tables.py)
 # přežije tokenizaci, která pomlčky zahodí, a má DF = 1, takže se objeví jen ve výstupu,
 # který pustí token jediné zprávy.
 eda_canary() {

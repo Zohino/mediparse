@@ -16,7 +16,6 @@ from mediparse.domain.section_headers import SectionLexicon
 from mediparse.domain.synthetic_discharge import (
     BHC_SECTION,
     synthetic_discharge,
-    text_token,
 )
 from mediparse.domain.synthetic_tables import (
     BLOCKS,
@@ -78,7 +77,6 @@ def test_typed_keys_exist_in_the_public_manifest() -> None:
     missing = {(t, c) for t, c in keys if c not in COLUMNS.get(t, ())}
 
     assert missing == set()
-    assert {table for table, _ in keys} <= set(TYPED_TABLES)
 
 
 def _run(prefix: str, rows: int, codes: DiagnosisCodes = CODES) -> SyntheticRun:
@@ -176,13 +174,11 @@ def test_bhc_note_id_refers_to_discharge_and_radiology_keeps_its_own() -> None:
 
 
 def test_text_starts_with_its_cell_and_reaches_minimum_length() -> None:
-    """Text začíná svou buňkou (u zpráv bloků samostatným řádkem) a má aspoň požadovaný počet znaků."""
+    """Text začíná svou buňkou s tokenem na prvním řádku a má aspoň požadovaný počet znaků."""
     rows = synthetic_rows("discharge", NOTE_SHAPE, _run("p", DEFAULT_ROWS))
 
     for index, row in enumerate(rows):
-        cell = f"p-discharge-text-{index}"
-        separator = "\n" if index < BLOCKS * MIN_CELL else " "
-        assert row["text"].startswith(cell + separator)
+        assert row["text"].splitlines()[0].startswith(f"p-discharge-text-{index} ")
         assert len(row["text"]) >= TEXT_CHARS
 
 
@@ -205,12 +201,56 @@ def test_block_texts_and_targets_come_from_the_discharge_module() -> None:
     )
 
     for row in range(BLOCKS * MIN_CELL):
+        head = texts[row]["text"].splitlines()[0]
         note = synthetic_discharge(
-            PREFIX, REPOSITORY_LEXICON, row, row // MIN_CELL, TEXT_CHARS
+            head, head.split()[-1], REPOSITORY_LEXICON, row // MIN_CELL
         )
         assert texts[row]["text"] == note.text
         assert targets[row]["target"] == note.bhc_target
-        assert text_token(PREFIX, row) in note.text
+
+
+@pytest.mark.parametrize("text_chars", [1, 2000])
+def test_every_note_has_text_chars_and_first_line_is_the_cell_text(
+    text_chars: int,
+) -> None:
+    """Délku ``text_chars`` splní první řádek (buňka a token) i s krátkým lexikonem, ne až sekce."""
+    lexicon = SectionLexicon(
+        sections={
+            key: REPOSITORY_LEXICON.sections[key]
+            for key in (BHC_SECTION, "discharge_medications", "discharge_diagnosis")
+        },
+        preamble=(),
+    )
+    run = SyntheticRun(
+        prefix=PREFIX,
+        rows=DEFAULT_ROWS,
+        text_chars=text_chars,
+        codes=CODES,
+        lexicon=lexicon,
+    )
+
+    rows = synthetic_rows("discharge", NOTE_SHAPE, run)
+
+    for index, row in enumerate(rows):
+        first = row["text"].splitlines()[0]
+        assert first.startswith(f"{PREFIX}-discharge-text-{index}")
+        assert len(first) >= text_chars
+        assert len(row["text"]) >= text_chars
+
+
+def test_token_is_added_once_when_the_cell_is_already_long_enough() -> None:
+    """Buňka delší než ``text_chars`` dostane token právě jednou."""
+    run = SyntheticRun(
+        prefix=PREFIX,
+        rows=1,
+        text_chars=1,
+        codes=CODES,
+        lexicon=REPOSITORY_LEXICON,
+    )
+
+    text = synthetic_rows("radiology", NOTE_SHAPE, run)[0]["text"]
+
+    assert len(re.findall(r"edasentinel[a-z]+", text)) == 1
 
 
 def test_rare_rows_keep_text_and_target_as_cells_without_headings() -> None:

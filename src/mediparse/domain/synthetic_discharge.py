@@ -1,4 +1,4 @@
-"""Text syntetické propouštěcí zprávy: preambule, sekce lexikonu a token zprávy.
+"""Text syntetické propouštěcí zprávy: preambule, sekce lexikonu a target BHC.
 
 Text vzniká z částí (hlavička a řádky těla), takže se z nich dá odvodit i to, co o zprávě
 tvrdí jiné tabulky.
@@ -6,10 +6,8 @@ tvrdí jiné tabulky.
 
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
 from enum import Enum, auto
-from string import ascii_lowercase
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.inputs import InvalidInputError
@@ -32,11 +30,11 @@ class SyntheticDischarge:
 
     Attributes:
         text: Text zprávy.
-        bhc_target: Target BHC, nebo None u zprávy, jejíž target zůstává buňkou.
+        bhc_target: Target BHC odvozený z téhož textu.
     """
 
     text: str
-    bhc_target: str | None
+    bhc_target: str
 
 
 class _Cut(Enum):
@@ -89,46 +87,35 @@ def require_bhc_layout(lexicon: SectionLexicon) -> None:
     after = len(keys) - keys.index(BHC_SECTION) - 1
     if after < _SECTIONS_AFTER_BHC:
         msg = (
-            f"Lexikon sekcí má za {BHC_SECTION} jen {after} sekcí, "
-            f"potřebuje aspoň {_SECTIONS_AFTER_BHC}."
+            f"Za {BHC_SECTION} je sekcí: {after}, potřeba aspoň {_SECTIONS_AFTER_BHC}."
         )
         raise InvalidInputError(msg)
 
 
 def synthetic_discharge(
-    prefix: str,
-    lexicon: SectionLexicon,
-    row: int,
-    block: int | None,
-    text_chars: int,
+    head: str, token: str, lexicon: SectionLexicon, block: int
 ) -> SyntheticDischarge:
-    """Složí text zprávy řádku ``row``.
+    """Složí text zprávy bloku a z téhož textu odvodí target BHC.
 
-    Zpráva bloku má buňku na prvním řádku, pole preambule se značkou ``___`` a všechny sekce
-    lexikonu v jeho pořadí. Synonymum hlavičky se mění s blokem a tělo každé sekce nese
-    token zprávy (DF = 1). Zpráva bez bloku (vzácný řádek) je buňka a token do ``text_chars``
-    znaků, bez nadpisů.
+    Zpráva začíná hotovým prvním řádkem ``head`` (buňka s tokenem, který pro ni složí
+    tabulky), pak má pole preambule se značkou ``___`` a všechny sekce lexikonu v jeho
+    pořadí. Synonymum hlavičky se mění s blokem a tělo každé sekce nese token zprávy
+    (DF = 1).
 
     Args:
-        prefix: Prefix buněk a tokenů.
+        head: První řádek zprávy.
+        token: Token zprávy ze samých písmen.
         lexicon: Lexikon sekcí z configu.
-        row: Řádek tabulky.
-        block: Blok řádku, nebo None pro vzácný řádek.
-        text_chars: Nejmenší délka textu vzácného řádku.
+        block: Blok řádku.
 
     Returns:
-        Text a target BHC (u vzácného řádku None).
+        Text zprávy a target BHC.
     """
-    cell = discharge_cell(prefix, row)
-    if block is None:
-        return SyntheticDischarge(
-            padded_text(cell, text_token(prefix, row), text_chars), None
-        )
     variant = _VARIANTS[block % len(_VARIANTS)]
-    parts = _parts(lexicon, block, text_token(prefix, row), variant)
+    parts = _parts(lexicon, block, token, variant)
     preamble = [f"{field}: {DEID}" for field in lexicon.preamble]
     body = [line for part in parts for line in (part.header, *part.lines, "")]
-    text = "\n".join([cell, *preamble, *body]) + "\n"
+    text = "\n".join([head, *preamble, *body]) + "\n"
     return SyntheticDischarge(text, _bhc_target(parts, variant.cut))
 
 
@@ -151,25 +138,6 @@ def _bhc_target(parts: list[_Part], cut: _Cut) -> str:
         _Cut.INTO_NEXT_SECTION: (*bhc.lines, following.header, following.lines[0]),
     }[cut]
     return " ".join(" ".join(pieces).split())
-
-
-def discharge_cell(prefix: str, row: int) -> str:
-    """Vrátí buňku textu propouštěcí zprávy.
-
-    Returns:
-        Buňka ve tvaru ``prefix-discharge-text-řádek``.
-    """
-    return f"{prefix}-discharge-text-{row}"
-
-
-def padded_text(cell: str, token: str, text_chars: int) -> str:
-    """Připojí za buňku token, dokud text nemá aspoň ``text_chars`` znaků.
-
-    Returns:
-        Buňka a opakovaný token oddělené mezerou.
-    """
-    copies = max(1, math.ceil((text_chars - len(cell)) / (len(token) + 1)))
-    return " ".join([cell, *[token] * copies])
 
 
 def _parts(
@@ -199,33 +167,3 @@ def _with_repeated_header(part: _Part, lexicon: SectionLexicon, block: int) -> _
     )
     synonym = diagnostic.synonyms[block % len(diagnostic.synonyms)]
     return _Part(part.key, part.header, (*part.lines, f"{synonym}:"))
-
-
-def text_token(prefix: str, row: int) -> str:
-    """Vrátí token zprávy: písmena prefixu a číslo řádku zapsané písmeny.
-
-    Tokenizace zahodí pomlčky a n-gramy EDA berou jen písmena (``[a-z]{2,}``), takže buňku
-    s pomlčkami a číslem řádku ve výstupech po tokenech (n-gramy, slovník) kanárek nenajde.
-    Token ze samých písmen projde beze změny a v každé zprávě je jiný (DF = 1); s číslicí by
-    se v n-gramech zkrátil na kmen, který mají všechny zprávy. Výstup, ve kterém se token
-    objeví, proto pustil token jediné zprávy.
-
-    Returns:
-        Token ze samých písmen.
-    """
-    stem = "".join(character for character in prefix if character.isalpha())
-    return stem + _letters(row)
-
-
-def _letters(number: int) -> str:
-    """Zapíše nezáporné číslo písmeny jako číslice soustavy o 26 znacích.
-
-    Returns:
-        Číslo zapsané písmeny, například 0 → a, 25 → z, 26 → ba.
-    """
-    digits = ""
-    while True:
-        number, digit = divmod(number, len(ascii_lowercase))
-        digits = ascii_lowercase[digit] + digits
-        if number == 0:
-            return digits
