@@ -17,5 +17,9 @@ from mediparse.domain.czech import NBSP, format_number
 )
 def test_format_number(value: int, expected: str) -> None:
     """Oddělovač tisíců je nezlomitelná mezera i nad rozsahem R integeru."""
-    assert NBSP == "\u00a0"
     assert format_number(value) == expected
+
+
+def test_nbsp_is_nonbreaking() -> None:
+    """Sdílená konstanta pro český zápis je nezlomitelná mezera U+00A0."""
+    assert NBSP == "\u00a0"
