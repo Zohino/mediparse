@@ -119,7 +119,7 @@ s uvozovkami a escape sekvencemi, například `\xa0` místo nedělitelné mezery
 Golden soubory v `tests/fixtures/thesis_table/` jsou společná spustitelná
 specifikace Python a R exportu včetně provenance. Vznikly původním R exportem;
 pytest i testthat ověřují stejné bajty. R implementace i její golden test zůstanou
-do S20h12. Parita zahrnuje padding markdownu, NBSP a prázdné tabulky bez `\midrule`.
+do konce migrace z R. Parita zahrnuje padding markdownu, NBSP a prázdné tabulky bez `\midrule`.
 
 Parita je omezena na vstupy používané v sešitech: ochrana `{}` před `[` v kable
 používá `\s` podle locale (TRE), první hlavičku ze samých mezer kable měří jako
@@ -132,5 +132,3 @@ v sešitech nenastává; obecnější napodobení by přidalo pravidla bez využ
 Každý dokument končí přílohou s commitem, příznakem dirty, otiskem `pixi.lock`, zdrojem dat (otisky CSV z `config/mimic_tables.json`, u syntetiky prefix) a verzemi Pythonu, DuckDB a v sešitech na knitru také R. Skládá ji `mediparse.entrypoints.eda_provenance`. Při syntetickém renderu se commit předává proměnnými `MEDIPARSE_COMMIT` a `MEDIPARSE_DIRTY`, protože kopie v dočasném adresáři není repozitář git.
 
 Přílohu na jupyteru sestaví `mediparse.entrypoints.eda_provenance.appendix(os.environ)` a exportuje ji jako `tbl-provenance` s popiskem „Provenance renderu.“ a šířkami 28/72. Klíč `r` obsahuje jen R příloha, protože v sešitu na jupyteru R neběží; mapa českých popisků jej zná kvůli paritě s R.
-
-Navazující S20h1c přidá prostředí s ipykernel a nbclient, nastaví `jupyter: python3`, poprvé vyrenderuje Python partial a otestuje importy z EDA jen přes entrypoints i pravidlo inline `Markdown(s)` nad `.qmd`. V tomto kroku žádný sešit nový partial nevkládá.

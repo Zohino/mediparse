@@ -26,7 +26,6 @@ class MarkdownOutput:
         Returns:
             Markdown určený k vykreslení v buňce.
         """
-        # Protokol Jupyteru dovoluje vracet bohatý výstup bez importu jeho knihoven.
         return self.text
 
 

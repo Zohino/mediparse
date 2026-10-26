@@ -23,11 +23,13 @@ test_that("export tabulek odpovídá sdíleným golden souborům bajt po bajtu",
     )
     expect_identical(
       golden_bytes(file.path(dir, paste0(label, ".tex"))),
-      golden_bytes(file.path(golden_dir, paste0(case$name, ".tex")))
+      golden_bytes(file.path(golden_dir, paste0(case$name, ".tex"))),
+      info = case$name
     )
     expect_identical(
       charToRaw(enc2utf8(paste(as.character(md), collapse = "\n"))),
-      golden_bytes(file.path(golden_dir, paste0(case$name, ".md")))
+      golden_bytes(file.path(golden_dir, paste0(case$name, ".md"))),
+      info = case$name
     )
   }
 })
