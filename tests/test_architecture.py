@@ -38,6 +38,16 @@ SUBPROCESS_CALLS = frozenset({"run", "check_output", "check_call", "call", "Pope
 ENCODING_POSITION = {"read_text": 0, "write_text": 1}
 FILE_MODE = re.compile(r"[rwxabt+]+")
 
+EDA = REPOSITORY / "eda"
+# Import-linter nečte Quarto ani R; stejně jako u Snakemake hlídáme text importů.
+R_IMPORT = re.compile(r"\bimport\(\s*[\"']([\w.]+)[\"']\s*\)")
+PYTHON_IMPORT = re.compile(r"^\s*(?:from|import)\s+([\w.]+)", re.MULTILINE)
+INLINE_PYTHON = re.compile(r"(?<!`)`\{python\}\s*([^`\n]*)`(?!`)")
+EDA_PRESENT = pytest.mark.skipif(
+    not EDA.is_dir(),
+    reason="eda/ není v obrazu kontejneru; hlídá job Test v CI",
+)
+
 
 def _pyproject() -> dict[str, Any]:
     return tomllib.loads((REPOSITORY / "pyproject.toml").read_text(encoding="utf-8"))
@@ -471,3 +481,97 @@ def test_encoding_check_skips_binary_and_explicit_encoding(tmp_path: Path) -> No
 
     assert violations == []
     assert inspected == checked_calls
+
+
+def _eda_files(root: Path) -> list[Path]:
+    documents = sorted(root.rglob("*.qmd"))
+    r_files = sorted(root.rglob("*.R"))
+    assert documents
+    assert r_files
+    return [*documents, *r_files]
+
+
+def _eda_imports(file: Path) -> list[str]:
+    text = file.read_text(encoding="utf-8")
+    return [*R_IMPORT.findall(text), *PYTHON_IMPORT.findall(text)]
+
+
+def _eda_import_violations(files: list[Path]) -> list[str]:
+    return [
+        f"{file.name} importuje {module}"
+        for file in files
+        for module in _eda_imports(file)
+        if (module == "mediparse" or module.startswith("mediparse."))
+        and not _in_entrypoints(module)
+    ]
+
+
+def _eda_data_import_violations(documents: list[Path]) -> list[str]:
+    return [
+        f"{document.name} importuje {module}"
+        for document in documents
+        for module in _eda_imports(document)
+        if module.split(".")[0] in {"duckdb", "pyarrow"}
+    ]
+
+
+def _eda_inline_violations(documents: list[Path]) -> list[str]:
+    return [
+        f"{document.name} inline {expression}"
+        for document in documents
+        for expression in INLINE_PYTHON.findall(document.read_text(encoding="utf-8"))
+        if re.fullmatch(r"Markdown\(.+\)\s*", expression) is None
+    ]
+
+
+@EDA_PRESENT
+def test_eda_imports_only_entrypoints() -> None:
+    """EDA vstupuje do balíčku přes stejné hranice jako pravidla workflow."""
+    assert _eda_import_violations(_eda_files(EDA)) == []
+
+
+@EDA_PRESENT
+def test_eda_documents_do_not_import_data_libraries() -> None:
+    """Přímý import datové technologie by v sešitu obešel stráž entrypointu."""
+    documents = [file for file in _eda_files(EDA) if file.suffix == ".qmd"]
+    assert _eda_data_import_violations(documents) == []
+
+
+@EDA_PRESENT
+def test_eda_inline_python_is_markdown() -> None:
+    """Samotný str Jupyter vypíše jako repr včetně uvozovek a escape sekvencí."""
+    documents = [file for file in _eda_files(EDA) if file.suffix == ".qmd"]
+    assert _eda_inline_violations(documents) == []
+
+
+def test_eda_checks_find_violations(tmp_path: Path) -> None:
+    """Kontroly zachytí R, Python, datové knihovny i inline bez Markdown."""
+    document = tmp_path / "bad.qmd"
+    document.write_text(
+        "```{python}\n"
+        "from mediparse.domain.x import y\n"
+        "import mediparse\n"
+        "import duckdb\n"
+        "from pyarrow.parquet import read_table\n"
+        "from mediparse.entrypoints.ok import fine\n"
+        "```\n"
+        "`{python} corpus.tables` a `{python} Markdown(corpus.tables)`\n",
+        encoding="utf-8",
+    )
+    r_file = tmp_path / "bad.R"
+    r_file.write_text(
+        'x <- reticulate::import("mediparse.infrastructure.x")\n'
+        'y <- import("mediparse.entrypoints.ok")\n',
+        encoding="utf-8",
+    )
+    files = _eda_files(tmp_path)
+    assert _eda_import_violations(files) == [
+        "bad.qmd importuje mediparse.domain.x",
+        "bad.qmd importuje mediparse",
+        "bad.R importuje mediparse.infrastructure.x",
+    ]
+    assert _eda_data_import_violations([document]) == [
+        "bad.qmd importuje duckdb",
+        "bad.qmd importuje pyarrow.parquet",
+    ]
+    assert _eda_inline_violations([document]) == ["bad.qmd inline corpus.tables"]
