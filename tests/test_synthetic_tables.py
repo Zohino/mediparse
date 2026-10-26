@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import math
 import re
 from collections import Counter
 from typing import Final
@@ -68,20 +67,20 @@ BLOCK_VERSIONS: Final = (
     IcdVersion.TEN,
 )
 BLOCK_CODES: Final = tuple(
-    PREFIXES[BLOCK_DIAGNOSES[block]][BLOCK_VERSIONS[block]][0] for block in range(6)
+    PREFIXES[BLOCK_DIAGNOSES[block]][BLOCK_VERSIONS[block]][0]
+    for block in range(len(BLOCK_VERSIONS))
 )
-ASSERTED, NEGATED, ABSENT = "asserted", "negated", "absent"
-MENTION_STATES: Final = {
-    ASSERTED: MentionState.ASSERTED,
-    NEGATED: MentionState.NEGATED,
-    ABSENT: MentionState.ABSENT,
-}
-ASSERTED_BLOCKS: Final = 2
 CELLS_PER_DIAGNOSIS: Final = 6
-ACRONYM_REPEATS: Final = math.ceil(
-    ACRONYM_SHARE_MIN_OCCURRENCES / (MIN_CELL * ASSERTED_BLOCKS)
+# Nezávislé orákulum: ceil(1000 / (MIN_CELL * 2 tvrzené bloky)), ne přepočet vzorce z implementace.
+ACRONYM_REPEATS: Final = 50
+BLOCK_STATES: Final = (
+    MentionState.ASSERTED,
+    MentionState.ASSERTED,
+    MentionState.NEGATED,
+    MentionState.NEGATED,
+    MentionState.ABSENT,
+    MentionState.ABSENT,
 )
-BLOCK_STATES: Final = (ASSERTED, ASSERTED, NEGATED, NEGATED, ABSENT, ABSENT)
 # sloupec -> hodnoty bloků 0-5 (slovník MIMIC)
 EXPECTED: Final = {
     ("patients", "gender"): ("F", "M") * 3,
@@ -97,7 +96,7 @@ EXPECTED: Final = {
         str(version.value) for version in BLOCK_VERSIONS
     ),
     ("diagnoses_icd", "icd_code"): BLOCK_CODES,
-    ("patients", "anchor_age"): tuple(str(15 + 10 * block) for block in range(6)),
+    ("patients", "anchor_age"): tuple(str(15 + 10 * block) for block in range(BLOCKS)),
     ("patients", "anchor_year"): ("2150",) * 6,
     ("admissions", "admittime"): ("2155-01-01 00:00:00",) * 6,
 }
@@ -245,7 +244,7 @@ def test_block_texts_and_targets_come_from_the_discharge_module() -> None:
         block = row // MIN_CELL
         lines = mention_lines(
             REPOSITORY_VOCABULARY,
-            MENTION_STATES[BLOCK_STATES[block]],
+            BLOCK_STATES[block],
             ACRONYM_REPEATS,
         )
         note = synthetic_discharge(
@@ -417,7 +416,6 @@ def test_dictionary_holds_block_codes_with_versions_and_titles() -> None:
     rows = _table("d_icd_diagnoses")
 
     assert [row["icd_code"] for row in rows[:4]] == list(dict.fromkeys(BLOCK_CODES))
-    assert len(set(BLOCK_CODES)) == len(rows[:4])
     assert [row["icd_version"] for row in rows[:4]] == ["9", "9", "10", "10"]
     assert [row["long_title"] for row in rows[:4]] == [
         "diabetes ICD-9",
@@ -485,13 +483,26 @@ def _notes() -> list[str]:
     return _column("discharge", "text")
 
 
-def _state(text: str, phrase: str) -> str:
+def _state(text: str, phrase: str) -> MentionState:
     lines = text.splitlines()
     if phrase in lines:
-        return ASSERTED
+        return MentionState.ASSERTED
     if f"{REPOSITORY_VOCABULARY.cue} {phrase}" in lines:
-        return NEGATED
-    return ABSENT
+        return MentionState.NEGATED
+    return MentionState.ABSENT
+
+
+def _mentioned_words(text: str) -> list[str]:
+    """Fráze a zkratky slovníku, které text obsahuje jako celé slovo (bez ohledu na velikost písmen).
+
+    Returns:
+        Nalezené fráze a zkratky.
+    """
+    return [
+        word
+        for word in (*REPOSITORY_VOCABULARY.phrases, *REPOSITORY_VOCABULARY.acronyms)
+        if re.search(rf"\b{re.escape(word)}\b", text, re.IGNORECASE)
+    ]
 
 
 def _has_code(code: str, diagnosis: Diagnosis) -> bool:
@@ -527,8 +538,14 @@ def test_mention_state_follows_the_block_table() -> None:
     notes = _notes()
 
     for row, text in enumerate(notes):
-        expected = BLOCK_STATES[row // MIN_CELL] if row < BLOCKS * MIN_CELL else ABSENT
+        expected = (
+            BLOCK_STATES[row // MIN_CELL]
+            if row < BLOCKS * MIN_CELL
+            else MentionState.ABSENT
+        )
         assert _state(text, "diabetes") == expected
+        if expected is MentionState.ABSENT:
+            assert not _mentioned_words(text)
 
 
 def test_acronyms_reach_the_share_threshold_with_expected_code_cells() -> None:
@@ -563,4 +580,4 @@ def test_every_symptom_has_min_cell_notes_in_each_state() -> None:
     """U příznaku jsou tvrzená, jen negovaná i bez zmínky zprávy aspoň MIN_CELL."""
     for symptom in TEXT_MENTIONS.symptoms:
         states = Counter(_state(text, symptom) for text in _notes())
-        assert min(states[ASSERTED], states[NEGATED], states[ABSENT]) >= MIN_CELL
+        assert min(states[state] for state in MentionState) >= MIN_CELL

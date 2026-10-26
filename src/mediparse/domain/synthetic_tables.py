@@ -46,7 +46,7 @@ class _Block:
 # nevyzkoušené. Typový sloupec proto nese slovník MIMIC. Řádek patří do bloku
 # (řádek // MIN_CELL) % BLOCKS a blok určuje verzi ICD, diagnózu a stav zmínek. Každá hodnota
 # bez prefixu tak sdílí aspoň MIN_CELL řádků (pravidlo kanárka platí pro rows >= BLOCKS * MIN_CELL),
-# dvě skupiny po MIN_CELL v každé verzi projdou potlačením a prevalence diabetu je vidět.
+# dvě skupiny aspoň po MIN_CELL v každé verzi projdou potlačením a prevalence diabetu je vidět.
 # Stav zmínek se kříží s diagnózou tak, že každá diagnóza má každý ze tří stavů jednou s kódem
 # a jednou bez něj: řádek souladu ICD x zmínka sešitu 8 má pak všech šest buněk aspoň MIN_CELL.
 # Diabetes má kód v blocích 0, 2 a 4, CHOPN v 1, 3 a 5. CHOPN a Charlsonova kategorie cpd mají

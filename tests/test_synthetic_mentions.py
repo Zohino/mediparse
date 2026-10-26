@@ -14,6 +14,7 @@ from mediparse.domain.synthetic_mentions import (
     mention_vocabulary,
 )
 from mediparse.domain.text_mentions import TextMentions
+from tests.mention_support import REPOSITORY_VOCABULARY, TEXT_MENTIONS
 
 CUE: Final = "no"
 REPEATS: Final = 4
@@ -55,11 +56,17 @@ def test_absent_state_has_no_lines() -> None:
     assert mention_lines(VOCABULARY, MentionState.ABSENT, REPEATS) == ()
 
 
-def test_asserted_lines_never_contain_the_cue_as_a_word() -> None:
-    """Tvrzený řádek nemá negační výraz jako celé slovo, jinak by ho sešit 8 počítal jako negovaný."""
-    lines = mention_lines(VOCABULARY, MentionState.ASSERTED, REPEATS)
+def test_asserted_lines_never_contain_a_negation_cue_as_a_word() -> None:
+    """Tvrzený řádek repozitářového slovníku nemá žádný negační výraz z configu jako celé slovo, jinak by ho sešit 8 počítal jako negovaný."""
+    lines = mention_lines(REPOSITORY_VOCABULARY, MentionState.ASSERTED, REPEATS)
 
-    assert not [line for line in lines if re.search(rf"\b{CUE}\b", line.lower())]
+    found = [
+        (cue, line)
+        for cue in TEXT_MENTIONS.negation.cues
+        for line in lines
+        if re.search(rf"\b{re.escape(cue)}\b", line, re.IGNORECASE)
+    ]
+    assert found == []
 
 
 def test_vocabulary_joins_keywords_symptoms_acronyms_and_first_cue() -> None:

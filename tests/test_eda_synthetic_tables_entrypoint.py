@@ -14,7 +14,7 @@ from mediparse.domain.synthetic_tables import BLOCKS, DEFAULT_ROWS
 from mediparse.entrypoints.eda_synthetic_tables import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.duckdb_cohort import MIN_CHARS
-from tests.cohort_support import candidate_prefixes
+from tests.cohort_support import candidate_prefixes, write_candidates
 from tests.support import (
     REPOSITORY_DIAGNOSIS_CANDIDATES,
     REPOSITORY_SECTION_HEADERS,
@@ -44,7 +44,7 @@ def _manifest(root: Path, manifest: Mapping[str, object] = MANIFEST) -> Path:
 def _write_candidates(
     path: Path, prefixes: Mapping[str, Mapping[str, object]] | None = None
 ) -> Path:
-    """Zapíše config kandidátů s předponami a s názvy a zkratkami z configu v repu.
+    """Zapíše config kandidátů: předpony pětice doplněné o názvy a zkratky z configu v repu.
 
     Returns:
         Cesta k zapsanému souboru.
@@ -52,16 +52,17 @@ def _write_candidates(
     names = json.loads(REPOSITORY_DIAGNOSIS_CANDIDATES.read_text(encoding="utf-8"))[
         "candidates"
     ]
-    merged = {
-        diagnosis: {
-            **fields,
-            "keywords_en": names[diagnosis]["keywords_en"],
-            "acronyms_en": names[diagnosis]["acronyms_en"],
-        }
-        for diagnosis, fields in (prefixes or candidate_prefixes()).items()
-    }
-    path.write_text(json.dumps({"candidates": merged}), encoding="utf-8")
-    return path
+    return write_candidates(
+        path,
+        {
+            diagnosis: {
+                **fields,
+                "keywords_en": names[diagnosis]["keywords_en"],
+                "acronyms_en": names[diagnosis]["acronyms_en"],
+            }
+            for diagnosis, fields in (prefixes or candidate_prefixes()).items()
+        },
+    )
 
 
 def _arguments(
