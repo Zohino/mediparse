@@ -110,11 +110,15 @@ def test_invalid_cell_message_contains_position_without_value() -> None:
         ((), ""),
         ((22, 60, 18), ' tbl-colwidths="[22,60,18]"'),
         ((12.5, 70, 17.5), ' tbl-colwidths="[12.5,70,17.5]"'),
+        ((70.0, 30.0), ' tbl-colwidths="[70,30]"'),
     ],
 )
 def test_table_caption(widths: tuple[float, ...], attribute: str) -> None:
     """Popisek nese jediné id tabulky a volitelné šířky."""
-    table = ThesisTable(header=("A", "B", "C"), rows=(), align="lcr", widths=widths)
+    columns = len(widths) or 3
+    table = ThesisTable(
+        header=tuple("ABC"[:columns]), rows=(), align="lcr"[:columns], widths=widths
+    )
     assert table_markdown(table, label="tbl-a", caption="Popisek.") == (
         pipe_table(table) + f"\n\n: Popisek. {{#tbl-a{attribute}}}"
     )

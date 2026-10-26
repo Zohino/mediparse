@@ -177,7 +177,14 @@ def test_python_appendix_exports_provenance(tmp_path: Path) -> None:
     assert "|R " not in result.text
 
 
-def test_python_appendix_requires_project_root() -> None:
+@pytest.mark.parametrize(
+    "environ",
+    [
+        {"MEDIPARSE_PARQUET": "parquet"},
+        {"PIXI_PROJECT_ROOT": "", "MEDIPARSE_PARQUET": "parquet"},
+    ],
+)
+def test_python_appendix_requires_project_root(environ: dict[str, str]) -> None:
     """Příloha nepokračuje bez explicitního kořene projektu ani při zadaném parquetu."""
     with pytest.raises(InvalidInputError, match="PIXI_PROJECT_ROOT"):
-        appendix({"MEDIPARSE_PARQUET": "parquet"})
+        appendix(environ)
