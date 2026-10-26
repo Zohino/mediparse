@@ -483,10 +483,15 @@ def test_encoding_check_skips_binary_and_explicit_encoding(tmp_path: Path) -> No
     assert inspected == checked_calls
 
 
-def _eda_files(root: Path) -> list[Path]:
+def _eda_documents(root: Path) -> list[Path]:
     documents = sorted(root.rglob("*.qmd"))
-    r_files = sorted(root.rglob("*.R"))
     assert documents
+    return documents
+
+
+def _eda_files(root: Path) -> list[Path]:
+    documents = _eda_documents(root)
+    r_files = sorted(root.rglob("*.R"))
     assert r_files
     return [*documents, *r_files]
 
@@ -533,14 +538,14 @@ def test_eda_imports_only_entrypoints() -> None:
 @EDA_PRESENT
 def test_eda_documents_do_not_import_data_libraries() -> None:
     """Přímý import datové technologie by v sešitu obešel stráž entrypointu."""
-    documents = [file for file in _eda_files(EDA) if file.suffix == ".qmd"]
+    documents = _eda_documents(EDA)
     assert _eda_data_import_violations(documents) == []
 
 
 @EDA_PRESENT
 def test_eda_inline_python_is_markdown() -> None:
     """Samotný str Jupyter vypíše jako repr včetně uvozovek a escape sekvencí."""
-    documents = [file for file in _eda_files(EDA) if file.suffix == ".qmd"]
+    documents = _eda_documents(EDA)
     assert _eda_inline_violations(documents) == []
 
 
@@ -575,3 +580,22 @@ def test_eda_checks_find_violations(tmp_path: Path) -> None:
         "bad.qmd importuje pyarrow.parquet",
     ]
     assert _eda_inline_violations([document]) == ["bad.qmd inline corpus.tables"]
+
+
+def test_eda_document_checks_do_not_require_r(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Kontroly QMD fungují i po odstranění posledního R pomocníka."""
+    (tmp_path / "only.qmd").write_text(
+        '`{python} Markdown("Text.")`\n', encoding="utf-8"
+    )
+    monkeypatch.setattr("tests.test_architecture.EDA", tmp_path)
+    test_eda_documents_do_not_import_data_libraries()
+    test_eda_inline_python_is_markdown()
+
+
+def test_eda_import_check_requires_r_files(tmp_path: Path) -> None:
+    """Dokud se kontrolují i R importy, jejich seznam nesmí být prázdný."""
+    (tmp_path / "only.qmd").write_text("Text.\n", encoding="utf-8")
+    with pytest.raises(AssertionError):
+        _eda_files(tmp_path)
