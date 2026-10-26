@@ -1,50 +1,26 @@
-DEFAULT_MEMORY <- "8GB"
-BLOCKING_VARIABLES <- c(
-  CI = "Veřejné CI nesmí číst data MIMIC.",
-  CLAUDECODE = "Relace Claude Code nesmí číst data MIMIC: výstup by odešel hostovanému modelu."
-)
+# Pravidla přístupu k datům (adresář, stráž, paměť, spill, pohledy) mají jedinou kopii
+# v Pythonu; R podle nich jen otevře vlastní spojení, dokud se nepřepíše poslední R sešit.
+eda_database <- function() reticulate::import("mediparse.entrypoints.eda_database")
 
-eda_parquet_dir <- function() {
-  Sys.getenv(
-    "MEDIPARSE_PARQUET",
-    file.path(Sys.getenv("PIXI_PROJECT_ROOT"), "resources", "mimic", "parquet")
-  )
-}
+# Prostředí se předává explicitně, protože `os.environ` pod reticulate je snímek ze startu
+# interpretu a pozdější `Sys.setenv` (i `withr::local_envvar`) by nezachytil.
+eda_environ <- function() as.list(Sys.getenv())
 
-eda_connect <- function() {
-  parquet <- eda_parquet_dir()
-  if (!dir.exists(parquet)) {
-    stop(sprintf("Adresář s parquetem %s neexistuje.", parquet))
-  }
-  files <- list.files(parquet, pattern = "\\.parquet$", full.names = TRUE)
-  if (length(files) == 0) {
-    stop(sprintf("V adresáři %s není žádný parquet.", parquet))
-  }
-  if (!file.exists(file.path(parquet, "synthetic.json"))) {
-    for (name in names(BLOCKING_VARIABLES)) {
-      if (nzchar(Sys.getenv(name))) {
-        stop(sprintf(
-          "Adresář %s neobsahuje synthetic.json, takže jde o skutečná data. %s",
-          parquet, BLOCKING_VARIABLES[[name]]
-        ))
-      }
-    }
-  }
-  memory <- Sys.getenv("MEDIPARSE_DUCKDB_MEMORY", DEFAULT_MEMORY)
-  if (memory == "") memory <- DEFAULT_MEMORY
-  temp <- file.path(dirname(normalizePath(parquet)), "duckdb-tmp")
+eda_parquet_dir <- function() eda_database()$parquet_dir(eda_environ())
+
+eda_connect <- function(database = eda_database()) {
+  rules <- database$connection_settings(eda_environ())
   con <- DBI::dbConnect(duckdb::duckdb())
   invisible(DBI::dbExecute(
-    con, paste("SET temp_directory =", DBI::dbQuoteString(con, temp))
+    con, paste("SET temp_directory =", DBI::dbQuoteString(con, rules$temp_directory))
   ))
   invisible(DBI::dbExecute(
-    con, paste("SET memory_limit =", DBI::dbQuoteString(con, memory))
+    con, paste("SET memory_limit =", DBI::dbQuoteString(con, rules$memory_limit))
   ))
-  for (file in files) {
-    name <- tools::file_path_sans_ext(basename(file))
+  for (name in names(rules$views)) {
     invisible(DBI::dbExecute(con, sprintf(
       "CREATE VIEW %s AS SELECT * FROM read_parquet(%s)",
-      DBI::dbQuoteIdentifier(con, name), DBI::dbQuoteString(con, file)
+      DBI::dbQuoteIdentifier(con, name), DBI::dbQuoteString(con, rules$views[[name]])
     )))
   }
   con

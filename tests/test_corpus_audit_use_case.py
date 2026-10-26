@@ -15,6 +15,7 @@ from mediparse.application.corpus_audit import (
     CorpusAudit,
 )
 from mediparse.domain.corpus_audit import AuditPin, ReferenceNote
+from mediparse.domain.data_access import BLOCKING_VARIABLES
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from tests.support import (
@@ -409,3 +410,26 @@ def test_subjects_come_from_every_language() -> None:
     )
 
     assert outcome == AuditOverlap(shared_ngrams=0, colliding_subjects=1, notes=())
+
+
+@pytest.mark.parametrize("name", ["CI", "CLAUDECODE"])
+def test_environment_refusal_carries_shared_reason(name: str) -> None:
+    """Audit a EDA hlásí tentýž důvod zákazu."""
+    outcome = _audit(
+        _Corpus({Language.EN: {NOTE_ID: SENTENCE}}), _UntouchableReference(), _Report()
+    ).run({name: "1"}, COMMIT, CREATED_AT, DISCHARGE_PIN)
+
+    assert outcome == AuditRefused(BLOCKING_VARIABLES[name])
+
+
+@pytest.mark.parametrize("name", ["CI", "CLAUDECODE"])
+def test_environment_refusal_precedes_workspace_refusal(name: str) -> None:
+    """Prostředí se posuzuje dřív než pracovní adresář, takže důvod zákazu čtení vyhrává."""
+    outcome = _audit(
+        _Corpus({Language.EN: {NOTE_ID: SENTENCE}}),
+        _UntouchableReference(),
+        _Report(),
+        _Workspace(missing=("discharge.csv.gz",)),
+    ).run({name: "1"}, COMMIT, CREATED_AT, DISCHARGE_PIN)
+
+    assert outcome == AuditRefused(BLOCKING_VARIABLES[name])

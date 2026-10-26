@@ -109,6 +109,57 @@ test_that("eda_connect bez blokujících proměnných projde i bez značky", {
   expect_true("discharge" %in% DBI::dbListTables(con))
 })
 
+test_that("eda_connect odmítne neplatnou značku synthetic.json pod CLAUDECODE", {
+  dir <- file.path(withr::local_tempdir(), "parquet")
+  write_parquet_tables(dir, marker = FALSE)
+  writeLines("{}", file.path(dir, "synthetic.json"))
+  withr::local_envvar(MEDIPARSE_PARQUET = dir, CLAUDECODE = "1", CI = NA)
+
+  expect_error(eda_connect(), "synthetic.json")
+})
+
+test_that("eda_connect čte prostředí při každém volání, ne snímek ze startu", {
+  dir <- file.path(withr::local_tempdir(), "parquet")
+  write_parquet_tables(dir)
+  withr::local_envvar(MEDIPARSE_PARQUET = dir, MEDIPARSE_DUCKDB_MEMORY = NA)
+  first <- eda_connect()
+  DBI::dbDisconnect(first, shutdown = TRUE)
+  withr::local_envvar(MEDIPARSE_DUCKDB_MEMORY = "3GiB")
+  con <- eda_connect()
+  withr::defer(DBI::dbDisconnect(con, shutdown = TRUE))
+
+  expect_equal(setting(con, "memory_limit"), "3.0 GiB")
+})
+
+test_that("eda_connect založí pohledy podle nastavení z Pythonu", {
+  dir <- file.path(withr::local_tempdir(), "parquet")
+  write_parquet_tables(dir)
+  withr::local_envvar(MEDIPARSE_PARQUET = dir)
+  fake <- list(connection_settings = function(environ) {
+    list(
+      memory_limit = "1GiB",
+      temp_directory = file.path(dirname(dir), "duckdb-tmp"),
+      views = list(jiny = file.path(dir, "discharge.parquet"))
+    )
+  })
+  con <- eda_connect(fake)
+  withr::defer(DBI::dbDisconnect(con, shutdown = TRUE))
+
+  expect_equal(DBI::dbListTables(con), "jiny")
+  expect_equal(setting(con, "memory_limit"), "1.0 GiB")
+})
+
+test_that("eda_connect založí pohled se jménem s pomlčkou", {
+  dir <- file.path(withr::local_tempdir(), "parquet")
+  write_parquet_tables(dir)
+  file.rename(file.path(dir, "discharge.parquet"), file.path(dir, "mimic-iv-bhc.parquet"))
+  withr::local_envvar(MEDIPARSE_PARQUET = dir)
+  con <- eda_connect()
+  withr::defer(DBI::dbDisconnect(con, shutdown = TRUE))
+
+  expect_equal(DBI::dbGetQuery(con, 'SELECT count(*) AS n FROM "mimic-iv-bhc"')$n, 1)
+})
+
 test_that("eda_check_python projde s Pythonem z prostředí", {
   prefix <- dirname(dirname(Sys.getenv("RETICULATE_PYTHON")))
   withr::local_envvar(CONDA_PREFIX = prefix)

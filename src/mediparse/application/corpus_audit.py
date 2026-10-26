@@ -9,8 +9,7 @@ začne číst jejich obsah.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from types import MappingProxyType
-from typing import TYPE_CHECKING, Final, Protocol
+from typing import TYPE_CHECKING, Protocol
 
 from mediparse.application.ports.corpus import FingerprintedCorpus, NoteSource
 from mediparse.domain.corpus_audit import (
@@ -21,6 +20,7 @@ from mediparse.domain.corpus_audit import (
     ReferenceFile,
     scan,
 )
+from mediparse.domain.data_access import blocked_reason
 from mediparse.domain.language import Language
 from mediparse.domain.note import InvalidNoteIdError, subject_of
 
@@ -36,11 +36,6 @@ if TYPE_CHECKING:
         ScanResult,
     )
     from mediparse.domain.identity import SubjectId
-
-_BLOCKING_VARIABLES: Final = MappingProxyType({
-    "CI": "Audit čte MIMIC, a proto ve veřejném CI neběží.",
-    "CLAUDECODE": "Audit neběží v relaci Claude Code: jeho výstup by odešel hostovanému modelu.",
-})
 
 
 class SyntheticCorpus(NoteSource, FingerprintedCorpus, Protocol):
@@ -184,7 +179,7 @@ class CorpusAudit:
     ) -> _CheckedCorpus | AuditRefused:
         # Pořadí je bezpečnostní: odmítnutí kvůli prostředí a korpusu přijdou dřív, než
         # se sáhne na referenci, a otisk reference (čte celý soubor) dřív než její zprávy.
-        problem = _environment_problem(environ) or _workspace_problem(self.workspace)
+        problem = blocked_reason(environ) or _workspace_problem(self.workspace)
         if problem is not None:
             return AuditRefused(problem)
         sha256 = self.corpus.fingerprint()
@@ -311,13 +306,6 @@ def _reference_problem(references: Sequence[Reference], pin: AuditPin) -> str | 
             f"Referenční soubory nesedí s referencí z configu: {', '.join(mismatch)}."
         )
     return None
-
-
-def _environment_problem(environ: Mapping[str, str]) -> str | None:
-    return next(
-        (reason for name, reason in _BLOCKING_VARIABLES.items() if environ.get(name)),
-        None,
-    )
 
 
 def _workspace_problem(workspace: Workspace) -> str | None:

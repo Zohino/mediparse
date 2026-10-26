@@ -19,6 +19,7 @@ from mediparse.domain.cohort import (
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
+from mediparse.infrastructure.duckdb_parquet import create_parquet_view
 from mediparse.infrastructure.note_table import SCHEMA
 from mediparse.infrastructure.parquet_file import COMPRESSION
 
@@ -136,7 +137,7 @@ class DuckDbCohort:
                 ("discharge", self.discharge),
                 ("diagnoses", self.diagnoses),
             ):
-                _view(con, name, path)
+                create_parquet_view(con, name, path)
         except InvalidInputError:
             con.close()
             raise
@@ -213,16 +214,6 @@ class DuckDbSelection:
             # Text výjimky nese hodnoty buněk z MIMIC; nesmí do hlášky ani do logu, a proto
             # jen její typ a ``from None``.
             raise InvalidInputError(msg) from None
-
-
-def _view(con: duckdb.DuckDBPyConnection, name: str, path: Path) -> None:
-    try:
-        con.read_parquet(str(path)).create_view(name)
-    except duckdb.Error as error:
-        msg = f"Tabulka {path} nejde číst: {type(error).__name__}."
-        # Text výjimky nese hodnoty buněk z MIMIC; nesmí do hlášky ani do logu, a proto
-        # jen její typ a ``from None``.
-        raise InvalidInputError(msg) from None
 
 
 def _select(
