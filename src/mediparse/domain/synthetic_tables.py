@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field
-from string import ascii_lowercase
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.dua import MIN_CELL
 from mediparse.domain.icd import IcdVersion
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.synthetic_discharge import text_token
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -139,7 +139,7 @@ def synthetic_rows(
     nalezitelný hledáním prefixu. Typové sloupce nesou slovník MIMIC po blocích
     (``_typed_value``); hodnota bez prefixu v nich sdílí aspoň ``MIN_CELL`` řádků, když je
     řádků aspoň ``BLOCKS * MIN_CELL``. Sloupec ``text`` za buňkou opakuje token zprávy,
-    dokud nemá aspoň ``run.text_chars`` znaků (viz ``_text_token``).
+    dokud nemá aspoň ``run.text_chars`` znaků (viz ``text_token``).
 
     Args:
         table: Jméno tabulky bez přípony.
@@ -196,41 +196,11 @@ def _dictionary_value(column: str, row: int, run: SyntheticRun) -> str | None:
     return values.get(column)
 
 
-def _text_token(prefix: str, row: int) -> str:
-    """Vrátí token zprávy: písmena prefixu a číslo řádku zapsané písmeny.
-
-    Tokenizace zahodí pomlčky a n-gramy EDA berou jen písmena (``[a-z]{2,}``), takže buňku
-    s pomlčkami a číslem řádku ve výstupech po tokenech (n-gramy, slovník) kanárek nenajde.
-    Token ze samých písmen projde beze změny a v každé zprávě je jiný (DF = 1); s číslicí by
-    se v n-gramech zkrátil na kmen, který mají všechny zprávy. Výstup, ve kterém se token
-    objeví, proto pustil token jediné zprávy.
-
-    Returns:
-        Token ze samých písmen.
-    """
-    stem = "".join(character for character in prefix if character.isalpha())
-    return stem + _letters(row)
-
-
 def _cell(table: str, column: str, prefix: str, row: int, text_chars: int) -> str:
     owner = _REFERENCES.get((table, column)) or _KEY_OWNERS.get(column, table)
     cell = f"{prefix}-{owner}-{column}-{row}"
     if column != TEXT_COLUMN:
         return cell
-    token = _text_token(prefix, row)
+    token = text_token(prefix, row)
     copies = max(1, math.ceil((text_chars - len(cell)) / (len(token) + 1)))
     return " ".join([cell, *[token] * copies])
-
-
-def _letters(number: int) -> str:
-    """Zapíše nezáporné číslo písmeny jako číslice soustavy o 26 znacích.
-
-    Returns:
-        Číslo zapsané písmeny, například 0 → a, 25 → z, 26 → ba.
-    """
-    digits = ""
-    while True:
-        number, digit = divmod(number, len(ascii_lowercase))
-        digits = ascii_lowercase[digit] + digits
-        if number == 0:
-            return digits
