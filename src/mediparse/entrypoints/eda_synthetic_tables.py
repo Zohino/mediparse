@@ -1,11 +1,12 @@
 """Vstupní bod syntetických tabulek pro render EDA: tabulky ve tvaru MIMIC bez dat MIMIC.
 
-Konzolový skript ``mediparse-eda-synthetic-tables`` čte veřejný manifest validace a config
-kandidátů (předpony kódů pětice) a zapíše pro každou tabulku manifestu parquet se samými
-řetězci. Mimo typové sloupce je každá buňka v tabulce jedinečná; typové sloupce nesou
-slovník MIMIC po blocích. Klíče pacienta a hospitalizace sdílí tabulky jako v MIMIC
-a texty projdou filtrem délky kohorty, takže render dokumentů běží nad neprázdným
-vstupním korpusem a kontroluje, že do výstupu neuniká obsah buněk.
+Konzolový skript ``mediparse-eda-synthetic-tables`` čte veřejný manifest validace, config
+kandidátů (předpony kódů pětice) a lexikon sekcí a zapíše pro každou tabulku manifestu
+parquet se samými řetězci. Mimo typové sloupce je každá buňka v tabulce jedinečná; typové
+sloupce nesou slovník MIMIC po blocích. Klíče pacienta a hospitalizace sdílí tabulky jako
+v MIMIC, propouštěcí zprávy mají preambuli a sekce lexikonu a projdou filtrem délky kohorty.
+Render dokumentů tak běží nad neprázdným vstupním korpusem a kontroluje, že do výstupu
+neuniká obsah buněk.
 """
 
 from __future__ import annotations
@@ -27,6 +28,7 @@ from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_co
 from mediparse.infrastructure.duckdb_cohort import MIN_CHARS
 from mediparse.infrastructure.mimic_inventory import read_manifest
 from mediparse.infrastructure.parquet_file import write_string_table
+from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
 
 if TYPE_CHECKING:
@@ -50,8 +52,8 @@ def run(argv: Sequence[str]) -> ExitCode:
     """Zapíše syntetický parquet pro každou tabulku manifestu a značku syntetiky.
 
     Returns:
-        OK po zápisu; REFUSED pro chybějící nebo neplatný manifest či config a pro diagnózu
-        bloku bez předpony.
+        OK po zápisu; REFUSED pro chybějící nebo neplatný manifest či config, pro diagnózu
+        bloku bez předpony a pro lexikon bez rozvržení kolem BHC.
     """
     args = _parser().parse_args(argv)
     shapes = read_manifest(args.manifest)
@@ -60,6 +62,7 @@ def run(argv: Sequence[str]) -> ExitCode:
         rows=args.rows,
         text_chars=MIN_CHARS,
         codes=load_diagnosis_codes(args.candidates),
+        lexicon=load_section_lexicon(args.lexicon),
     )
     # Řádky vzniknou všechny před prvním zápisem, aby odmítnutí nenechalo napůl zapsaný adresář.
     tables = {
@@ -80,6 +83,7 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--candidates", type=Path, required=True)
+    parser.add_argument("--lexicon", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--prefix", required=True)
     parser.add_argument("--rows", type=int, default=DEFAULT_ROWS)

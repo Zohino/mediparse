@@ -12,6 +12,12 @@ from mediparse.domain.dua import MIN_CELL
 from mediparse.domain.icd import DiagnosisCodes, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.mimic_table import TableShape
+from mediparse.domain.section_headers import SectionLexicon
+from mediparse.domain.synthetic_discharge import (
+    BHC_SECTION,
+    synthetic_discharge,
+    text_token,
+)
 from mediparse.domain.synthetic_tables import (
     BLOCKS,
     DEFAULT_ROWS,
@@ -20,6 +26,7 @@ from mediparse.domain.synthetic_tables import (
     synthetic_rows,
 )
 from tests.cohort_support import CODES, PREFIXES
+from tests.section_support import REPOSITORY_LEXICON
 
 ROWS: Final = 12
 TEXT_CHARS: Final = 100
@@ -80,7 +87,13 @@ TYPED_TABLES: Final = ("patients", "admissions", "diagnoses_icd")
 
 
 def _run(prefix: str, rows: int, codes: DiagnosisCodes = CODES) -> SyntheticRun:
-    return SyntheticRun(prefix=prefix, rows=rows, text_chars=TEXT_CHARS, codes=codes)
+    return SyntheticRun(
+        prefix=prefix,
+        rows=rows,
+        text_chars=TEXT_CHARS,
+        codes=codes,
+        lexicon=REPOSITORY_LEXICON,
+    )
 
 
 def _table(table: str, rows: int = DEFAULT_ROWS) -> list[dict[str, str]]:
@@ -168,24 +181,82 @@ def test_bhc_note_id_refers_to_discharge_and_radiology_keeps_its_own() -> None:
 
 
 def test_text_starts_with_its_cell_and_reaches_minimum_length() -> None:
-    """Text začíná svou buňkou a má aspoň požadovaný počet znaků, aby prošel filtrem délky."""
-    rows = synthetic_rows("discharge", NOTE_SHAPE, _run("p", ROWS))
+    """Text začíná svou buňkou (u zpráv bloků samostatným řádkem) a má aspoň požadovaný počet znaků."""
+    rows = synthetic_rows("discharge", NOTE_SHAPE, _run("p", DEFAULT_ROWS))
 
-    assert all(
-        row["text"].startswith(f"p-discharge-text-{index} ")
-        for index, row in enumerate(rows)
-    )
-    assert all(len(row["text"]) >= TEXT_CHARS for row in rows)
+    for index, row in enumerate(rows):
+        cell = f"p-discharge-text-{index}"
+        separator = "\n" if index < BLOCKS * MIN_CELL else " "
+        assert row["text"].startswith(cell + separator)
+        assert len(row["text"]) >= TEXT_CHARS
 
 
 def test_text_token_is_letters_only_and_unique_per_row() -> None:
-    """Token z písmen přežije tokenizaci i normalizaci čísel a v každé zprávě je jiný (DF = 1)."""
+    """Token z písmen přežije tokenizaci a normalizaci čísel a v každé zprávě je jiný (DF = 1)."""
     rows = synthetic_rows("discharge", NOTE_SHAPE, _run("eda-sentinel", 30))
 
-    tokens = [row["text"].split()[-1] for row in rows]
+    tokens = [set(re.findall(r"edasentinel[a-z]+", row["text"])) for row in rows]
 
-    assert all(re.fullmatch(r"edasentinel[a-z]+", token) for token in tokens)
-    assert len(set(tokens)) == len(tokens)
+    assert all(len(found) == 1 for found in tokens)
+    assert len({next(iter(found)) for found in tokens}) == len(tokens)
+
+
+def test_block_texts_and_targets_come_from_the_discharge_module() -> None:
+    """Text propouštěcí zprávy a target BHC bloků jdou ze ``synthetic_discharge``, jedna zpráva na řádek."""
+    run = _run(PREFIX, DEFAULT_ROWS)
+    texts = synthetic_rows("discharge", NOTE_SHAPE, run)
+    targets = synthetic_rows(
+        "mimic-iv-bhc", TableShape(records=5, columns=("note_id", "target")), run
+    )
+
+    for row in range(BLOCKS * MIN_CELL):
+        note = synthetic_discharge(
+            PREFIX, REPOSITORY_LEXICON, row, row // MIN_CELL, TEXT_CHARS
+        )
+        assert texts[row]["text"] == note.text
+        assert targets[row]["target"] == note.bhc_target
+        assert text_token(PREFIX, row) in note.text
+
+
+def test_rare_rows_keep_text_and_target_as_cells_without_headings() -> None:
+    """Vzácné řádky zůstávají bez nadpisů, jejich target je buňka."""
+    run = _run(PREFIX, DEFAULT_ROWS)
+    texts = synthetic_rows("discharge", NOTE_SHAPE, run)
+    targets = synthetic_rows(
+        "mimic-iv-bhc", TableShape(records=5, columns=("note_id", "target")), run
+    )
+
+    for row in range(BLOCKS * MIN_CELL, DEFAULT_ROWS):
+        assert texts[row]["text"].count("\n") == 0
+        assert targets[row]["target"] == f"{PREFIX}-mimic-iv-bhc-target-{row}"
+
+
+def test_radiology_text_is_unchanged() -> None:
+    """Radiologie a ostatní textové sloupce zůstávají buňkou a tokeny."""
+    rows = synthetic_rows("radiology", NOTE_SHAPE, _run("p", 3))
+
+    assert rows[1]["text"].startswith("p-radiology-text-1 ")
+    assert "\n" not in rows[1]["text"]
+
+
+def test_lexicon_without_bhc_section_is_refused() -> None:
+    """Lexikon bez sekce BHC je InvalidInputError s klíčem sekce."""
+    sections = {
+        key: section
+        for key, section in REPOSITORY_LEXICON.sections.items()
+        if key != BHC_SECTION
+    }
+
+    with pytest.raises(InvalidInputError, match=BHC_SECTION):
+        SyntheticRun(
+            prefix=PREFIX,
+            rows=1,
+            text_chars=TEXT_CHARS,
+            codes=CODES,
+            lexicon=SectionLexicon(
+                sections=sections, preamble=REPOSITORY_LEXICON.preamble
+            ),
+        )
 
 
 @pytest.mark.parametrize(("key", "values"), EXPECTED.items())

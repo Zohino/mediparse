@@ -15,6 +15,7 @@ from mediparse.entrypoints.eda_synthetic_tables import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.duckdb_cohort import MIN_CHARS
 from tests.cohort_support import candidate_prefixes, write_candidates
+from tests.support import REPOSITORY_SECTION_HEADERS
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -37,11 +38,17 @@ def _manifest(root: Path, manifest: Mapping[str, object] = MANIFEST) -> Path:
 
 
 def _arguments(
-    manifest: Path, out: Path, *, rows: int | None, candidates: Path | None = None
+    manifest: Path,
+    out: Path,
+    *,
+    rows: int | None,
+    candidates: Path | None = None,
+    lexicon: Path = REPOSITORY_SECTION_HEADERS,
 ) -> list[str]:
     arguments = [
         f"--manifest={manifest}",
         f"--candidates={candidates or write_candidates(manifest.parent / 'candidates.json')}",
+        f"--lexicon={lexicon}",
         f"--out={out}",
         "--prefix=canary",
     ]
@@ -200,3 +207,78 @@ def test_notes_join_codes_and_pass_the_length_filter(tmp_path: Path) -> None:
         10: 2 * MIN_CELL,
         None: DEFAULT_ROWS - 4 * MIN_CELL,
     }
+
+
+def test_missing_lexicon_argument_exits_with_usage_error(tmp_path: Path) -> None:
+    """Bez ``--lexicon`` argparse skončí kódem 2."""
+    candidates = write_candidates(tmp_path / "candidates.json")
+    with pytest.raises(SystemExit) as raised:
+        run([
+            f"--manifest={_manifest(tmp_path)}",
+            f"--candidates={candidates}",
+            f"--out={tmp_path}",
+            "--prefix=p",
+        ])
+
+    assert raised.value.code == ARGPARSE_USAGE_ERROR
+
+
+def test_invalid_lexicon_is_refused_without_output(tmp_path: Path) -> None:
+    """Neplatný lexikon skončí REFUSED a nevznikne žádný parquet."""
+    out = tmp_path / "tables"
+    broken = tmp_path / "broken.json"
+    broken.write_text("{", encoding="utf-8")
+
+    code = run(_arguments(_manifest(tmp_path), out, rows=ROWS, lexicon=broken))
+
+    assert code is ExitCode.REFUSED
+    assert not out.exists()
+
+
+def test_lexicon_without_bhc_section_is_refused_without_output(tmp_path: Path) -> None:
+    """Platný lexikon bez sekce ``hospital_course`` skončí REFUSED bez parquetu."""
+    lexicon = json.loads(REPOSITORY_SECTION_HEADERS.read_text(encoding="utf-8"))
+    del lexicon["sections"]["hospital_course"]
+    path = tmp_path / "lexicon.json"
+    path.write_text(json.dumps(lexicon), encoding="utf-8")
+    out = tmp_path / "tables"
+
+    code = run(_arguments(_manifest(tmp_path), out, rows=ROWS, lexicon=path))
+
+    assert code is ExitCode.REFUSED
+    assert not out.exists()
+
+
+def test_notes_have_bhc_headers_and_bhc_pairs_refer_to_notes(tmp_path: Path) -> None:
+    """Přes DuckDB: 40 zpráv s hlavičkou BHC a 42 párů BHC s ``note_id`` propouštěcí zprávy."""
+    manifest = {
+        "tables": [
+            {
+                "file": "discharge.csv.gz",
+                "bytes": 1,
+                "records": 3,
+                "columns": ["note_id", "text"],
+            },
+            {
+                "file": "mimic-iv-bhc.csv.gz",
+                "bytes": 1,
+                "records": 3,
+                "columns": ["note_id", "target"],
+            },
+        ]
+    }
+    out = tmp_path / "tables"
+
+    run(_arguments(_manifest(tmp_path, manifest), out, rows=None))
+
+    with duckdb.connect() as connection:
+        with_header = connection.execute(
+            "SELECT count(*) FROM read_parquet(?) WHERE text LIKE '%Brief Hospital Course:%'",
+            [str(out / "discharge.parquet")],
+        ).fetchone()
+        pairs = connection.execute(
+            "SELECT count(*) FROM read_parquet(?) b JOIN read_parquet(?) d USING (note_id)",
+            [str(out / "mimic-iv-bhc.parquet"), str(out / "discharge.parquet")],
+        ).fetchone()
+    assert with_header == (4 * MIN_CELL,)
+    assert pairs == (DEFAULT_ROWS,)

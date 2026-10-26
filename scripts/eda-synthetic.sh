@@ -12,7 +12,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/eda-render.sh"
 source "$(dirname "${BASH_SOURCE[0]}")/eda-canary.sh"
 
 eda_stage "$root" "$work"
-mediparse-eda-synthetic-tables --manifest "$root/results/mimic/manifest.json" --candidates "$root/config/diagnosis_candidates.json" --out "$work/tables" --prefix "$prefix"
+mediparse-eda-synthetic-tables --manifest "$root/results/mimic/manifest.json" --candidates "$root/config/diagnosis_candidates.json" --lexicon "$root/config/section_headers.json" --out "$work/tables" --prefix "$prefix"
 
 eda_revision "$root"
 export MEDIPARSE_PARQUET="$work/tables"
