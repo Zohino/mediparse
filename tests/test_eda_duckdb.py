@@ -193,3 +193,52 @@ def test_unreadable_parquet_is_refused_without_error_text(tmp_path: Path) -> Non
     assert "CELL_CANARY" not in str(refusal.value)
     assert refusal.value.__cause__ is None
     assert refusal.value.__suppress_context__
+
+
+def test_record_counts_are_sorted_python_ints(tmp_path: Path) -> None:
+    """Počty všech pohledů mají deterministické pořadí i jméno s pomlčkou."""
+    parquet = mark_synthetic(
+        write_tables(tmp_path / "parquet", ("zeta", "mimic-iv-bhc", "alfa"))
+    )
+    result = EdaDatabase(parquet, CLAUDE_CODE).record_counts()
+    assert result == {"alfa": 1, "mimic-iv-bhc": 1, "zeta": 1}
+    assert list(result) == ["alfa", "mimic-iv-bhc", "zeta"]
+    assert all(type(value) is int for value in result.values())
+
+
+def test_record_counts_guard_precedes_parquet_read(tmp_path: Path) -> None:
+    """I poškozený soubor bez značky nejprve odmítne stráž."""
+    (tmp_path / "broken.parquet").write_text("CELL_CANARY", encoding="utf-8")
+    with pytest.raises(DataAccessError):
+        EdaDatabase(tmp_path, CLAUDE_CODE).record_counts()
+
+
+def test_record_counts_refuses_corrupt_parquet(tmp_path: Path) -> None:
+    """Poškozený parquet nesmí dostat text chyby DuckDB do sešitu."""
+    mark_synthetic(tmp_path)
+    (tmp_path / "broken.parquet").write_text("CELL_CANARY", encoding="utf-8")
+    with pytest.raises(InvalidInputError, match="broken") as refusal:
+        EdaDatabase(tmp_path, CLAUDE_CODE).record_counts()
+    assert "CELL_CANARY" not in str(refusal.value)
+    assert refusal.value.__cause__ is None
+    assert refusal.value.__suppress_context__
+
+
+def test_record_counts_sanitizes_query_error(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Chyba samotného count po vytvoření pohledu neprozradí text výjimky."""
+    parquet = mark_synthetic(write_tables(tmp_path / "parquet", ("discharge",)))
+
+    def fail_count(*_args: object, **_kwargs: object) -> None:
+        msg = "CELL_CANARY"
+        raise duckdb.InvalidInputException(msg)
+
+    monkeypatch.setattr(duckdb.DuckDBPyRelation, "count", fail_count)
+    with pytest.raises(
+        InvalidInputError, match=r"discharge.*InvalidInputException"
+    ) as refusal:
+        EdaDatabase(parquet, CLAUDE_CODE).record_counts()
+    assert "CELL_CANARY" not in str(refusal.value)
+    assert refusal.value.__cause__ is None
+    assert refusal.value.__suppress_context__

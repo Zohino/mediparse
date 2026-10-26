@@ -76,6 +76,22 @@ class ThesisExport:
             widths=tuple(widths),
             code=frozenset(code),
         )
+        return self.write(table, label=label, caption=caption)
+
+    def write(self, table: ThesisTable, *, label: str, caption: str) -> MarkdownOutput:
+        """Zapíše hotovou doménovou tabulku pro práci a vrátí markdown pro sešit.
+
+        Args:
+            table: Textové buňky a jejich společné rozvržení.
+            label: Id Quarta a jméno souboru bez přípony, začíná tbl-.
+            caption: Neprázdný jednořádkový popisek.
+
+        Returns:
+            Zobrazitelný markdown stejné tabulky.
+
+        Raises:
+            InvalidInputError: Label nebo popisek není platný.
+        """
         markdown = table_markdown(table, label=label, caption=caption)
         latex = latex_tabular(table) + "\n"
         self.directory.mkdir(parents=True, exist_ok=True)

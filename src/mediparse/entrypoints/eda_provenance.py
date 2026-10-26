@@ -6,8 +6,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.eda_provenance import provenance_table
-from mediparse.domain.inputs import InvalidInputError
-from mediparse.entrypoints.eda_database import ROOT_VARIABLE, parquet_dir
+from mediparse.entrypoints.eda_database import parquet_dir, project_root
 from mediparse.entrypoints.eda_export import export
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_mimic_tables
@@ -68,18 +67,10 @@ def appendix(environ: Mapping[str, str]) -> MarkdownOutput:
     Raises:
         InvalidInputError: Chybí kořen projektu nebo proměnné Quarta.
     """
-    root = environ.get(ROOT_VARIABLE)
-    if not root:
-        msg = f"Pro přílohu provenance nastavte {ROOT_VARIABLE}."
-        raise InvalidInputError(msg)
-    details = provenance(environ, Path(root), Path(parquet_dir(environ)))
-    table = provenance_table(details)
-    return export(environ).table(
-        table.rows,
-        header=table.header,
-        align=table.align,
+    root = project_root(environ)
+    details = provenance(environ, root, Path(parquet_dir(environ)))
+    return export(environ).write(
+        provenance_table(details),
         label="tbl-provenance",
         caption="Provenance renderu.",
-        widths=table.widths,
-        code=table.code,
     )

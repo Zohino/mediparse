@@ -16,6 +16,25 @@ ROOT_VARIABLE: Final = "PIXI_PROJECT_ROOT"
 DEFAULT_PARQUET: Final = Path("resources") / "mimic" / "parquet"
 
 
+def project_root(environ: Mapping[str, str]) -> Path:
+    """Přečte explicitní kořen projektu z prostředí pixi.
+
+    Args:
+        environ: Proměnné prostředí renderu.
+
+    Returns:
+        Kořen projektu jako cesta.
+
+    Raises:
+        InvalidInputError: Kořen chybí nebo je prázdný.
+    """
+    root = environ.get(ROOT_VARIABLE)
+    if not root:
+        msg = f"Nastavte {ROOT_VARIABLE} spuštěním přes pixi."
+        raise InvalidInputError(msg)
+    return Path(root)
+
+
 def parquet_dir(environ: Mapping[str, str]) -> str:
     """Adresář tabulek parquet: ``MEDIPARSE_PARQUET``, jinak pod kořenem projektu.
 
