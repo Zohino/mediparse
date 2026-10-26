@@ -89,14 +89,8 @@ class EdaDatabase:
                 nebo se tabulka nedá číst.
             DataAccessError: Skutečná data v prostředí, které je nesmí číst.
         """
-        views = self.guarded_views()
-        con = _open(self.settings())
-        try:
-            for name, path in views.items():
-                create_parquet_view(con, name, path)
+        with self._connect_views() as (con, _names):
             yield con
-        finally:
-            con.close()
 
     def record_counts(self) -> dict[str, int]:
         """Spočítá řádky každého pohledu přes spojení se stráží.
@@ -108,9 +102,26 @@ class EdaDatabase:
             InvalidInputError: Tabulku nelze otevřít nebo spočítat.
             DataAccessError: Prostředí nesmí číst skutečná data.
         """
-        with self.connect() as con:
-            names = sorted(row[0] for row in con.sql("SHOW TABLES").fetchall())
+        with self._connect_views() as (con, names):
             return {name: _record_count(con, name) for name in names}
+
+    @contextmanager
+    def _connect_views(
+        self,
+    ) -> Generator[tuple[duckdb.DuckDBPyConnection, tuple[str, ...]]]:
+        """Otevře spojení a předá jména z téhož stráženého snímku adresáře.
+
+        Yields:
+            Spojení a seřazená jména spravovaných pohledů.
+        """
+        views = self.guarded_views()
+        con = _open(self.settings())
+        try:
+            for name, path in views.items():
+                create_parquet_view(con, name, path)
+            yield con, tuple(views)
+        finally:
+            con.close()
 
     def _views(self) -> dict[str, Path]:
         if not self.parquet.is_dir():
