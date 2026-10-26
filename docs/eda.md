@@ -1,18 +1,44 @@
 # EDA v Quartu
 
-Průzkum dat žije v Quarto projektu `eda/`: jeden dokument `eda/<n>-*.qmd` na sešit. R vede dokument (statistiky, tabulky, inline `` `r …` ``), Python běží v blocích přes reticulate ze stejného prostředí pixi `eda`. Obě strany dotazují parquet přes DuckDB. Dokumenty slouží hodnotiteli a zároveň jako podklad rozhodnutí pro pipeline.
+Průzkum dat žije v Quarto projektu `eda/`: jeden dokument `eda/<n>-*.qmd` na sešit. Sešit 1 běží na enginu jupyter v Pythonu, sešity 2–9 zatím na knitru (R s Pythonem přes reticulate). Všechny používají prostředí pixi `eda` a dotazují parquet přes DuckDB. Dokumenty slouží hodnotiteli a zároveň jako podklad rozhodnutí pro pipeline.
 
 Příloha s provenance a seznam literatury jsou pro sešity na knitru ve sdíleném `eda/_partials/appendix.qmd`, který sešity vkládají přes `{{< include _partials/appendix.qmd >}}`. Podadresář s podtržítkem nepočítá CI ani `eda_render` a `quarto render eda` ho přeskočí. Změna partialu mění všechny sešity, které jej vkládají, proto vyžaduje nový reálný render každého z nich. Pro sešity na jupyteru je připravený samostatný `eda/_partials/appendix-python.qmd` se stejným nadpisem a literaturou; vloží se přes `{{< include _partials/appendix-python.qmd >}}`.
 
 ## Forma dokumentů
 
-Dokumenty mají akademickou formu: abstrakt, číslované kapitoly, obsah, číslované tabulky s titulkem (v R `#| label: tbl-…`, v Pythonu argument `label` exportéru; odkaz `@tbl-…`), citace `[@klíč]` z `eda/references.bib` a seznam literatury. Sdílená metadata (autor, bibliografie, obsah, číslování, A4) jsou v `eda/_quarto.yml`. Citace zpracovává citeproc (styl autor–rok), protože Typst v Quartu 1.9 nadepisuje vlastní bibliografii „Bibliografie“; kapitola „Literatura“ je proto v dokumentu ručně. Počty a podíly v tabulkách formátují `number_text`, `percent_text` a `share_table` z `eda/R/dua.R`, rozměry tabulek z veřejného manifestu validace se vkládají jako text.
+Dokumenty mají akademickou formu: abstrakt, číslované kapitoly, obsah, číslované tabulky s titulkem (v R `#| label: tbl-…`, v Pythonu argument `label` exportéru; odkaz `@tbl-…`), citace `[@klíč]` z `eda/references.bib` a seznam literatury. Sdílená metadata (autor, bibliografie, obsah, číslování, A4) jsou v `eda/_quarto.yml`. Citace zpracovává citeproc (styl autor–rok), protože Typst v Quartu 1.9 nadepisuje vlastní bibliografii „Bibliografie“; kapitola „Literatura“ je proto v dokumentu ručně. V sešitech na knitru formátují počty a podíly v tabulkách `number_text`, `percent_text` a `share_table` z `eda/R/dua.R`, rozměry tabulek z veřejného manifestu validace se vkládají jako text.
+
+## Engine po sešitech
+
+`eda/_quarto.yml` ponechává `engine: knitr` pro nepřepsané sešity a určuje
+`jupyter: python3` pro všechny sešity na jupyteru. Přepsaný sešit nastaví ve front
+matter `engine: jupyter`, jako `eda/1-dataset.qmd`. Kernel `python3` se bere
+z prostředí pixi; bez explicitní volby by Quarto mohlo vybrat starý uživatelský
+kernel s neexistujícím interpretem. K renderu stačí balíky `ipykernel` a `nbclient`,
+celý balík `jupyter` s notebookem a labem není potřeba.
+
+Sešity a R pomocníci vstupují do `mediparse` jen přes `mediparse.entrypoints`.
+`tests/test_architecture.py` kontroluje importy v `.qmd` i `.R`, zakazuje přímý
+import `duckdb` a `pyarrow` v `.qmd` a ověřuje obalení Python inline výrazů do
+`Markdown(...)`. Import-linter tyto formáty nečte. V kontejneru se kontrola EDA
+přeskočí, protože adresář `eda/` v obrazu není; hlídá ji job Test v CI.
 
 ## Rendery
 
 - `pixi run eda <n>` vyrenderuje `eda/<n>-*.qmd` nad skutečnými tabulkami. Pouští ho jen uživatel ve vlastním terminálu. Skript odmítne běh pod Claude Code (`CLAUDECODE`) a při necommitnutých změnách, aby provenance neukazovala na jiný kód.
 - `pixi run eda-synthetic [n]` vyrenderuje jeden nebo všechny dokumenty nad syntetickými tabulkami v dočasném adresáři a zkontroluje kanárka. Na `eda/_freeze/` v repu nesahá. Na konci vypíše cestu k PDF.
 - `pixi run eda-test` pustí testy R pomocníků (testthat).
+
+V sandboxu Codexu přesměruj datový adresář Quarta jen pro konkrétní render:
+
+```bash
+XDG_DATA_HOME=/tmp/mediparse-codex-cache/xdg-data pixi run --frozen eda-synthetic 1
+```
+
+Quarto zapisuje log kernelu do `${XDG_DATA_HOME:-~/.local/share}/quarto/logs`;
+v sandboxu není výchozí umístění zapisovatelné. Proměnná proto nepatří do skriptů
+ani aktivace pixi: v CI by mohla schovat písmo Libertinus instalované do
+`~/.local/share/fonts`.
 
 Tabulky parquet se čtou z `MEDIPARSE_PARQUET` (výchozí `resources/mimic/parquet`). Dočasné soubory DuckDB jdou do `duckdb-tmp` vedle toho adresáře, limit paměti určuje `MEDIPARSE_DUCKDB_MEMORY` (výchozí `8GB`).
 
@@ -70,16 +96,31 @@ Každý graf a každá tabulka sešitu se ukládá i pro LaTeX do `results/eda/<
 
 ### Tabulky v Pythonu (engine jupyter)
 
-Sešit si jednou vytvoří exportér přes entrypoint:
+Setup buňka sešitu 1 načte přehled přes entrypoint a vytvoří exportér.
+`include: false` skryje setup i jeho výstupy ve freeze:
 
-```python
+````qmd
+```{python}
+#| include: false
 import os
 
-from mediparse.entrypoints import eda_export
+from IPython.display import Markdown
 
+from mediparse.entrypoints import eda_corpus, eda_export
+
+corpus = eda_corpus.corpus_overview(os.environ)
 export = eda_export.export(os.environ)
 ```
+````
 
+Přehled nese hotovou doménovou `ThesisTable`, takže tabulková buňka nerozkládá
+rozvržení na jednotlivé argumenty:
+
+```python
+export.write(corpus.table, label="tbl-korpus", caption="Přehled korpusu.")
+```
+
+Pro tabulku sestavenou z textových řádků přímo v sešitu zůstává `export.table`.
 Tabulková buňka vrací posledním výrazem výsledek jediného volání:
 
 ```python
@@ -113,8 +154,19 @@ Chybějící nebo prázdná proměnná vyvolá chybu. Adresář vznikne až po v
 tabulky, labelu a popisku; opakovaný export stejného labelu přepíše soubor.
 
 Inline text se v jupyteru vrací jako `` `{python} Markdown(s)` `` s importem
-`from IPython.display import Markdown` v sešitu. Samotný `str` se vypíše jako repr
-s uvozovkami a escape sekvencemi, například `\xa0` místo nedělitelné mezery.
+`from IPython.display import Markdown` v sešitu. Před otevíracím backtickem musí
+být mezera, jinak Quarto inline nerozpozná. Například:
+
+```qmd
+Databáze obsahuje `{python} Markdown(corpus.tables)` tabulek.
+```
+
+`s` musí být vždy neprázdný text. Prázdný `Markdown("")` Quarto vypíše jako
+zdrojový kód inline výrazu. Volitelná věta o největší tabulce je proto spojená
+s neprázdnou větou o manifestu v `corpus.records`. Samotný `str` se vypíše jako
+repr s uvozovkami a escape sekvencemi, například `\xa0` místo nedělitelné mezery.
+`Markdown(s)` navíc čte soubor, pokud je `s` existující cesta, a u adresáře vyvolá
+`IsADirectoryError`; předávej mu věty, nikoli cesty.
 
 Golden soubory v `tests/fixtures/thesis_table/` jsou společná spustitelná
 specifikace Python a R exportu včetně provenance. Vznikly původním R exportem;
