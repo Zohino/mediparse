@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.thesis_table import ThesisTable, latex_tabular, table_markdown
 
 if TYPE_CHECKING:
@@ -62,6 +63,12 @@ class ThesisExport:
         Raises:
             InvalidInputError: Vstup není platná tabulka, label nebo popisek.
         """
+        if isinstance(header, str) or isinstance(code, str):
+            msg = "header a code musí být kolekce, nikoli samotný text."
+            raise InvalidInputError(msg)
+        if any(isinstance(row, str) for row in rows):
+            msg = "Řádek tabulky musí být kolekce buněk, nikoli samotný text."
+            raise InvalidInputError(msg)
         table = ThesisTable(
             header=tuple(header),
             rows=tuple(tuple(row) for row in rows),

@@ -49,14 +49,19 @@ class ThesisTable:
         Raises:
             InvalidInputError: Tabulka obsahuje neplatný vstup.
         """
+        if not self.header:
+            msg = "hlavička musí obsahovat alespoň jeden sloupec."
+            raise InvalidInputError(msg)
         _check_cells(self.header, 0)
         for index, row in enumerate(self.rows, start=1):
             if len(row) != len(self.header):
                 msg = f"řádek {index}: počet buněk neodpovídá hlavičce."
                 raise InvalidInputError(msg)
             _check_cells(row, index)
-        if len(self.align) != len(self.header) or any(
-            side not in "lcr" for side in self.align
+        if (
+            not isinstance(self.align, str)
+            or not re.fullmatch(r"[lcr]+", self.align)
+            or len(self.align) != len(self.header)
         ):
             msg = "align musí mít jeden znak l, c nebo r na sloupec."
             raise InvalidInputError(msg)
@@ -218,10 +223,15 @@ def table_markdown(table: ThesisTable, *, label: str, caption: str) -> str:
     Raises:
         InvalidInputError: Label nebo popisek není platný.
     """
-    if not TABLE_LABEL.fullmatch(label):
+    if not isinstance(label, str) or not TABLE_LABEL.fullmatch(label):
         msg = "label musí odpovídat ^tbl-[a-z0-9-]+$."
         raise InvalidInputError(msg)
-    if not caption.strip() or "\n" in caption or "\r" in caption:
+    if (
+        not isinstance(caption, str)
+        or not caption.strip()
+        or "\n" in caption
+        or "\r" in caption
+    ):
         msg = "popisek musí být neprázdný text bez konce řádku."
         raise InvalidInputError(msg)
     attribute = ""

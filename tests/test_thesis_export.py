@@ -75,3 +75,24 @@ def test_repeated_label_overwrites_file(tmp_path: Path) -> None:
     tex = (tmp_path / "tbl-a.tex").read_text(encoding="utf-8")
     assert "nový" in tex
     assert "původní" not in tex
+
+
+@pytest.mark.parametrize(
+    "overrides", [{"header": "A"}, {"rows": ("x",)}, {"rows": "x"}, {"code": "A"}]
+)
+def test_export_rejects_strings_instead_of_collections(
+    tmp_path: Path, overrides: dict
+) -> None:
+    """Holý text se nesmí rozpadnout na znaky hlavičky, řádku ani code."""
+    directory = tmp_path / "export"
+    arguments: dict = {
+        "rows": (("x",),),
+        "header": ("A",),
+        "align": "l",
+        "label": "tbl-a",
+        "caption": "Popisek.",
+        **overrides,
+    }
+    with pytest.raises(InvalidInputError):
+        ThesisExport(directory).table(**arguments)
+    assert not directory.exists()

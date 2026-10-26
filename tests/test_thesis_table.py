@@ -124,14 +124,14 @@ def test_table_caption(widths: tuple[float, ...], attribute: str) -> None:
     )
 
 
-@pytest.mark.parametrize("label", ["Tbl_A", "a", "tbl-", "fig-a", "tbl-a\n"])
+@pytest.mark.parametrize("label", ["Tbl_A", "a", "tbl-", "fig-a", "tbl-a_b", "tbl-a\n"])
 def test_invalid_label(label: str) -> None:
     """Label je bezpečné jméno souboru i id křížového odkazu."""
     with pytest.raises(InvalidInputError, match="label"):
         table_markdown(_table(CASES[0]), label=label, caption="Popisek.")
 
 
-@pytest.mark.parametrize("caption", ["", "\n", "Více\nřádků", "Více\rřádků"])
+@pytest.mark.parametrize("caption", ["", " ", "\n", "Více\nřádků", "Více\rřádků"])
 def test_invalid_caption(caption: str) -> None:
     """Popisek musí být neprázdný na jednom řádku."""
     with pytest.raises(InvalidInputError, match="popisek"):
@@ -141,3 +141,35 @@ def test_invalid_caption(caption: str) -> None:
 def test_other_label() -> None:
     """Popisek sloučených kategorií odpovídá R DUA_OTHER."""
     assert OTHER_LABEL == "ostatní (n < 10)"
+
+
+@pytest.mark.parametrize(
+    ("align", "header"),
+    [
+        (("l", "r"), ("A", "B")),
+        (("",), ("A",)),
+        (("lc",), ("A",)),
+        (None, ("A",)),
+    ],
+)
+def test_alignment_must_be_a_string(align: object, header: tuple[str, ...]) -> None:
+    """Rozvržení nelze předat jako kolekci dílčích řetězců nebo None."""
+    arguments: dict = {"header": header, "rows": (), "align": align}
+    with pytest.raises(InvalidInputError, match="align"):
+        ThesisTable(**arguments)
+
+
+def test_header_must_not_be_empty() -> None:
+    """Tabulka bez sloupců nesmí vytvořit neplatný tabular."""
+    with pytest.raises(InvalidInputError, match="hlavička"):
+        ThesisTable(header=(), rows=(), align="")
+
+
+@pytest.mark.parametrize(
+    "overrides", [{"label": None}, {"label": 1}, {"caption": None}, {"caption": 1}]
+)
+def test_label_and_caption_must_be_strings(overrides: dict) -> None:
+    """Neplatný runtime typ se přeloží na doménovou chybu."""
+    arguments: dict = {"label": "tbl-a", "caption": "Popisek.", **overrides}
+    with pytest.raises(InvalidInputError):
+        table_markdown(_table(CASES[0]), **arguments)
