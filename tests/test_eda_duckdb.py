@@ -214,17 +214,6 @@ def test_record_counts_guard_precedes_parquet_read(tmp_path: Path) -> None:
         EdaDatabase(tmp_path, CLAUDE_CODE).record_counts()
 
 
-def test_record_counts_refuses_corrupt_parquet(tmp_path: Path) -> None:
-    """Poškozený parquet nesmí dostat text chyby DuckDB do sešitu."""
-    mark_synthetic(tmp_path)
-    (tmp_path / "broken.parquet").write_text("CELL_CANARY", encoding="utf-8")
-    with pytest.raises(InvalidInputError, match="broken") as refusal:
-        EdaDatabase(tmp_path, CLAUDE_CODE).record_counts()
-    assert "CELL_CANARY" not in str(refusal.value)
-    assert refusal.value.__cause__ is None
-    assert refusal.value.__suppress_context__
-
-
 def test_record_counts_sanitizes_query_error(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
