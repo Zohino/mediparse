@@ -41,8 +41,11 @@ def _token(row: int) -> str:
     return SENTINEL_LETTERS + chr(ord("a") + row % 26)
 
 
-def _note(row: int, block: int) -> SyntheticDischarge:
-    return synthetic_discharge(_cell(row), _token(row), LEXICON, block)
+MENTIONS: Final = ("diabetes", "no chest pain", "DM DM DM")
+
+
+def _note(row: int, block: int, mentions: tuple[str, ...] = ()) -> SyntheticDischarge:
+    return synthetic_discharge(_cell(row), _token(row), LEXICON, block, mentions)
 
 
 def _cell(row: int) -> str:
@@ -125,8 +128,9 @@ def test_every_word_is_token_or_public_word_of_the_block(block: int) -> None:
     }
     public |= set(re.findall(r"[a-z]{2,}", _cell(row)))
     public.add(_token(row))
+    public |= set(re.findall(r"[a-z]{2,}", " ".join(MENTIONS).lower()))
 
-    words = set(re.findall(r"[a-z]{2,}", _note(row, block).text.lower()))
+    words = set(re.findall(r"[a-z]{2,}", _note(row, block, MENTIONS).text.lower()))
 
     assert words <= public
 
@@ -254,14 +258,67 @@ def test_layout_without_bhc_is_refused_naming_the_key() -> None:
 def test_layout_with_one_section_after_bhc_is_refused() -> None:
     """Za BHC musí být aspoň dvě sekce, jedna se vynechá a řez targetu končí v další."""
     with pytest.raises(InvalidInputError, match=r"sekcí: 1,"):
-        require_bhc_layout(_lexicon_of(FIRST_DIAGNOSTIC, BHC_SECTION, SKIPPED))
+        require_bhc_layout(_lexicon_of(FIRST_KEY, BHC_SECTION, FIRST_DIAGNOSTIC))
 
 
 def test_layout_with_two_sections_after_bhc_is_accepted() -> None:
     """Dvě sekce za BHC stačí."""
-    require_bhc_layout(_lexicon_of(BHC_SECTION, SKIPPED, FIRST_DIAGNOSTIC))
+    require_bhc_layout(_lexicon_of(FIRST_KEY, BHC_SECTION, SKIPPED, FIRST_DIAGNOSTIC))
 
 
 def test_layout_of_the_repository_lexicon_is_accepted() -> None:
     """Lexikon z configu rozvržení splňuje."""
     require_bhc_layout(LEXICON)
+
+
+@pytest.mark.parametrize("block", range(4))
+def test_mention_lines_stand_in_the_first_section_only(block: int) -> None:
+    """Řádky zmínek jsou v těle první sekce lexikonu, ostatní těla je nemají."""
+    parts = [
+        p
+        for p in split_sections(_note(block, block, MENTIONS).text, LEXICON)
+        if p.section != OTHER
+    ]
+
+    for part in parts:
+        lines = part.body.splitlines()
+        assert all((line in lines) is (part.section == FIRST_KEY) for line in MENTIONS)
+
+
+@pytest.mark.parametrize("block", range(4))
+def test_mention_lines_do_not_change_the_target(block: int) -> None:
+    """Target BHC všech variant je s řádky zmínek stejný jako bez nich."""
+    assert _note(block, block, MENTIONS).bhc_target == _note(block, block).bhc_target
+
+
+@pytest.mark.parametrize("block", range(4))
+def test_mention_lines_follow_the_token_lines(block: int) -> None:
+    """Zmínky stojí za řádky s tokenem, každá na vlastním řádku."""
+    lines = _note(block, block, MENTIONS).text.splitlines()
+
+    start = lines.index(f"{_token(block).capitalize()}:")
+    assert lines[start + 2 : start + 2 + len(MENTIONS)] == list(MENTIONS)
+
+
+def test_empty_mentions_give_the_text_without_them() -> None:
+    """Prázdné ``mentions`` dají tentýž text jako výchozí hodnota."""
+    note = synthetic_discharge(_cell(0), _token(0), LEXICON, 0, ())
+
+    assert note == synthetic_discharge(_cell(0), _token(0), LEXICON, 0)
+    assert not any(line in note.text.splitlines() for line in MENTIONS)
+
+
+def test_layout_with_bhc_first_is_refused() -> None:
+    """BHC jako první sekce by zmínkami změnilo target BHC, proto je rozvržení chyba."""
+    with pytest.raises(InvalidInputError, match=r"První sekce.*hospital_course"):
+        require_bhc_layout(
+            _lexicon_of(BHC_SECTION, SKIPPED, FIRST_DIAGNOSTIC, FIRST_KEY)
+        )
+
+
+def test_layout_with_diagnostic_first_section_is_refused() -> None:
+    """Diagnostická první sekce se stripem D2 odstraní i s řádky zmínek, proto je rozvržení chyba."""
+    with pytest.raises(InvalidInputError, match=r"První sekce.*diagnostická"):
+        require_bhc_layout(
+            _lexicon_of(FIRST_DIAGNOSTIC, BHC_SECTION, SKIPPED, FIRST_KEY)
+        )

@@ -96,8 +96,7 @@ def load_text_normalization(path: Path) -> TextNormalization:
 
 
 def _parse_normalization(text: str) -> TextNormalization:
-    candidates = _Candidates.model_validate_json(text).candidates
-    vocabulary = _Vocabulary(names=_selected(candidates, _Names))
+    vocabulary = _vocabulary(text)
     return TextNormalization(
         acronyms={
             acronym: names.keywords_en[0]
@@ -105,6 +104,11 @@ def _parse_normalization(text: str) -> TextNormalization:
             for acronym in names.acronyms_en
         }
     )
+
+
+def _vocabulary(text: str) -> _Vocabulary:
+    candidates = _Candidates.model_validate_json(text).candidates
+    return _Vocabulary(names=_selected(candidates, _Names))
 
 
 def _selected[T: BaseModel](
@@ -115,3 +119,19 @@ def _selected[T: BaseModel](
         for diagnosis in Diagnosis
         if diagnosis.value in candidates
     }
+
+
+def load_diagnosis_keywords(path: Path) -> tuple[str, ...]:
+    """Přečte klíčová slova diagnóz pětice v pořadí ``Diagnosis``; ostatní kandidáty ignoruje.
+
+    Returns:
+        Všechna ``keywords_en`` pětice, diagnózu po diagnóze.
+    """
+    return parse_file(path, _parse_keywords)
+
+
+def _parse_keywords(text: str) -> tuple[str, ...]:
+    vocabulary = _vocabulary(text)
+    return tuple(
+        keyword for names in vocabulary.names.values() for keyword in names.keywords_en
+    )

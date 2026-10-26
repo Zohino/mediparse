@@ -35,6 +35,10 @@ class MentionStatus(StrEnum):
     AFFIRMED_UNCODED = "affirmed_uncoded"
 
 
+# Prázdný nebo bílý výraz by našel každý text a stavy zmínek syntetiky i sešitu 8 by se posunuly.
+type NonBlank = Annotated[str, Field(pattern=r"\S")]
+
+
 class DiagnosisMentions(BaseModel):
     """Pravděpodobnost zmínky podle labelu a klíčová slova, která zmínku tvoří."""
 
@@ -50,7 +54,7 @@ class Negation(BaseModel):
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
-    cues: Annotated[tuple[str, ...], Field(min_length=1)]
+    cues: Annotated[tuple[NonBlank, ...], Field(min_length=1)]
     window_chars: PositiveInt
 
 

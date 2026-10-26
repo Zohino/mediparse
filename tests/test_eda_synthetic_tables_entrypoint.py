@@ -10,12 +10,16 @@ import pyarrow.parquet as pq
 import pytest
 
 from mediparse.domain.dua import MIN_CELL
-from mediparse.domain.synthetic_tables import DEFAULT_ROWS
+from mediparse.domain.synthetic_tables import BLOCKS, DEFAULT_ROWS
 from mediparse.entrypoints.eda_synthetic_tables import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.duckdb_cohort import MIN_CHARS
 from tests.cohort_support import candidate_prefixes, write_candidates
-from tests.support import REPOSITORY_SECTION_HEADERS
+from tests.support import (
+    REPOSITORY_DIAGNOSIS_CANDIDATES,
+    REPOSITORY_SECTION_HEADERS,
+    REPOSITORY_TEXT_MENTIONS,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -37,24 +41,58 @@ def _manifest(root: Path, manifest: Mapping[str, object] = MANIFEST) -> Path:
     return path
 
 
+def _write_candidates(
+    path: Path, prefixes: Mapping[str, Mapping[str, object]] | None = None
+) -> Path:
+    """Zapíše config kandidátů: předpony pětice doplněné o názvy a zkratky z configu v repu.
+
+    Returns:
+        Cesta k zapsanému souboru.
+    """
+    names = json.loads(REPOSITORY_DIAGNOSIS_CANDIDATES.read_text(encoding="utf-8"))[
+        "candidates"
+    ]
+    return write_candidates(
+        path,
+        {
+            diagnosis: {
+                **fields,
+                "keywords_en": names[diagnosis]["keywords_en"],
+                "acronyms_en": names[diagnosis]["acronyms_en"],
+            }
+            for diagnosis, fields in (prefixes or candidate_prefixes()).items()
+        },
+    )
+
+
 def _arguments(
     manifest: Path,
     out: Path,
     *,
-    rows: int | None,
-    candidates: Path | None = None,
-    lexicon: Path = REPOSITORY_SECTION_HEADERS,
+    rows: int | None = None,
+    omit: str | None = None,
+    **paths: Path,
 ) -> list[str]:
-    arguments = [
-        f"--manifest={manifest}",
-        f"--candidates={candidates or write_candidates(manifest.parent / 'candidates.json')}",
-        f"--lexicon={lexicon}",
-        f"--out={out}",
-        "--prefix=canary",
-    ]
+    """Úplné platné argumenty běhu; ``paths`` přepíše ``candidates``, ``lexicon`` nebo ``mentions``.
+
+    Returns:
+        Argumenty bez volby ``omit``.
+    """
+    candidates = paths.get("candidates") or _write_candidates(
+        manifest.parent / "candidates.json"
+    )
+    options: dict[str, object] = {
+        "manifest": manifest,
+        "candidates": candidates,
+        "lexicon": REPOSITORY_SECTION_HEADERS,
+        "mentions": REPOSITORY_TEXT_MENTIONS,
+        "out": out,
+        "prefix": "canary",
+        **paths,
+    }
     if rows is not None:
-        arguments.append(f"--rows={rows}")
-    return arguments
+        options["rows"] = rows
+    return [f"--{name}={value}" for name, value in options.items() if name != omit]
 
 
 def test_writes_one_all_string_parquet_per_manifest_table(tmp_path: Path) -> None:
@@ -110,12 +148,16 @@ def test_rows_default_when_not_given(tmp_path: Path) -> None:
     assert pq.read_table(out / "admissions.parquet").num_rows == DEFAULT_ROWS
 
 
-def test_missing_candidates_argument_exits_with_usage_error(tmp_path: Path) -> None:
-    """Bez ``--candidates`` argparse skončí kódem 2."""
+@pytest.mark.parametrize("option", ["candidates", "lexicon", "mentions"])
+def test_missing_required_option_exits_with_usage_error(
+    tmp_path: Path, option: str, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Bez povinné volby argparse skončí kódem 2 a hláška volbu jmenuje."""
     with pytest.raises(SystemExit) as raised:
-        run([f"--manifest={_manifest(tmp_path)}", f"--out={tmp_path}", "--prefix=p"])
+        run(_arguments(_manifest(tmp_path), tmp_path / "tables", omit=option))
 
     assert raised.value.code == ARGPARSE_USAGE_ERROR
+    assert f"--{option}" in capsys.readouterr().err
 
 
 def test_invalid_candidates_are_refused_without_output(tmp_path: Path) -> None:
@@ -144,7 +186,7 @@ def test_candidates_without_icd9_prefix_of_block_diagnosis_are_refused(
             _manifest(tmp_path),
             out,
             rows=ROWS,
-            candidates=write_candidates(tmp_path / "candidates.json", prefixes),
+            candidates=_write_candidates(tmp_path / "candidates.json", prefixes),
         )
     )
 
@@ -203,24 +245,10 @@ def test_notes_join_codes_and_pass_the_length_filter(tmp_path: Path) -> None:
             [str(out / "discharge.parquet"), str(out / "diagnoses_icd.parquet")],
         ).fetchall()
     assert dict(joined) == {
-        9: 2 * MIN_CELL,
-        10: 2 * MIN_CELL,
-        None: DEFAULT_ROWS - 4 * MIN_CELL,
+        9: 3 * MIN_CELL,
+        10: 3 * MIN_CELL,
+        None: DEFAULT_ROWS - BLOCKS * MIN_CELL,
     }
-
-
-def test_missing_lexicon_argument_exits_with_usage_error(tmp_path: Path) -> None:
-    """Bez ``--lexicon`` argparse skončí kódem 2."""
-    candidates = write_candidates(tmp_path / "candidates.json")
-    with pytest.raises(SystemExit) as raised:
-        run([
-            f"--manifest={_manifest(tmp_path)}",
-            f"--candidates={candidates}",
-            f"--out={tmp_path}",
-            "--prefix=p",
-        ])
-
-    assert raised.value.code == ARGPARSE_USAGE_ERROR
 
 
 def test_invalid_lexicon_is_refused_without_output(tmp_path: Path) -> None:
@@ -250,7 +278,7 @@ def test_lexicon_without_bhc_section_is_refused_without_output(tmp_path: Path) -
 
 
 def test_notes_have_bhc_headers_and_bhc_pairs_refer_to_notes(tmp_path: Path) -> None:
-    """Přes DuckDB: 40 zpráv s hlavičkou BHC a 42 párů BHC s ``note_id`` propouštěcí zprávy."""
+    """Přes DuckDB: 60 zpráv s hlavičkou BHC a 62 párů BHC s ``note_id`` propouštěcí zprávy."""
     manifest = {
         "tables": [
             {
@@ -280,5 +308,71 @@ def test_notes_have_bhc_headers_and_bhc_pairs_refer_to_notes(tmp_path: Path) -> 
             "SELECT count(*) FROM read_parquet(?) b JOIN read_parquet(?) d USING (note_id)",
             [str(out / "mimic-iv-bhc.parquet"), str(out / "discharge.parquet")],
         ).fetchone()
-    assert with_header == (4 * MIN_CELL,)
+    assert with_header == (BLOCKS * MIN_CELL,)
     assert pairs == (DEFAULT_ROWS,)
+
+
+def test_invalid_mentions_are_refused_without_output(tmp_path: Path) -> None:
+    """Neplatný config zmínek skončí REFUSED a nevznikne žádný parquet."""
+    out = tmp_path / "tables"
+    broken = tmp_path / "broken.json"
+    broken.write_text("{", encoding="utf-8")
+
+    code = run(_arguments(_manifest(tmp_path), out, rows=ROWS, mentions=broken))
+
+    assert code is ExitCode.REFUSED
+    assert not out.exists()
+
+
+def test_notes_carry_mentions_from_the_configs(tmp_path: Path) -> None:
+    """Text tvrzeného bloku nese klíčové slovo diabetu z configu kandidátů a text negovaného bloku negaci z configu zmínek."""
+    manifest = {
+        "tables": [
+            {
+                "file": "discharge.csv.gz",
+                "bytes": 1,
+                "records": 3,
+                "columns": ["text"],
+            }
+        ]
+    }
+    out = tmp_path / "tables"
+
+    run(_arguments(_manifest(tmp_path, manifest), out))
+
+    texts = pq.read_table(out / "discharge.parquet").to_pydict()["text"]
+    assert "diabetes" in texts[0].splitlines()
+    assert "no diabetes" in texts[2 * MIN_CELL].splitlines()
+    assert "diabetes" not in texts[BLOCKS * MIN_CELL - 1].splitlines()
+
+
+def test_blank_negation_cue_is_refused_without_output(tmp_path: Path) -> None:
+    """Config zmínek s prázdným negačním výrazem skončí REFUSED a nevznikne žádný parquet."""
+    out = tmp_path / "tables"
+    config = json.loads(REPOSITORY_TEXT_MENTIONS.read_text(encoding="utf-8"))
+    config["negation"]["cues"] = [""]
+    path = tmp_path / "mentions.json"
+    path.write_text(json.dumps(config), encoding="utf-8")
+
+    code = run(_arguments(_manifest(tmp_path), out, rows=ROWS, mentions=path))
+
+    assert code is ExitCode.REFUSED
+    assert not out.exists()
+
+
+def test_lexicon_with_bhc_first_is_refused_without_output(tmp_path: Path) -> None:
+    """Lexikon s BHC na prvním místě skončí REFUSED bez parquetu, zmínky by změnily target BHC."""
+    lexicon = json.loads(REPOSITORY_SECTION_HEADERS.read_text(encoding="utf-8"))
+    sections = lexicon["sections"]
+    lexicon["sections"] = {
+        "hospital_course": sections["hospital_course"],
+        **{key: value for key, value in sections.items() if key != "hospital_course"},
+    }
+    path = tmp_path / "lexicon.json"
+    path.write_text(json.dumps(lexicon), encoding="utf-8")
+    out = tmp_path / "tables"
+
+    code = run(_arguments(_manifest(tmp_path), out, rows=ROWS, lexicon=path))
+
+    assert code is ExitCode.REFUSED
+    assert not out.exists()

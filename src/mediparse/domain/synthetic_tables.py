@@ -15,6 +15,12 @@ from mediparse.domain.synthetic_discharge import (
     require_bhc_layout,
     synthetic_discharge,
 )
+from mediparse.domain.synthetic_mentions import (
+    ACRONYM_SHARE_MIN_OCCURRENCES,
+    MentionState,
+    MentionVocabulary,
+    mention_lines,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -25,31 +31,65 @@ if TYPE_CHECKING:
 
 TEXT_COLUMN: Final = "text"
 
+
+@dataclass(frozen=True)
+class _Block:
+    """Vlastnosti řádků jednoho bloku: verze ICD, diagnóza s kódem a stav zmínek v textu."""
+
+    version: IcdVersion
+    diagnosis: Diagnosis
+    mention: MentionState
+
+
 # Sloupce sešitů 2 a 5-7 přetypovávají nebo porovnávají hodnoty (TRY_CAST, CASE, icd_version = '9'),
 # takže buňka s prefixem by všude vyšla jako NULL nebo "jiné" a větve výpočtu by zůstaly
 # nevyzkoušené. Typový sloupec proto nese slovník MIMIC. Řádek patří do bloku
-# (řádek // MIN_CELL) % BLOCKS a blok určuje verzi ICD a diagnózu. Každá hodnota bez prefixu
-# tak sdílí aspoň MIN_CELL řádků (pravidlo kanárka platí pro rows >= BLOCKS * MIN_CELL),
-# dvě skupiny po MIN_CELL v každé verzi projdou potlačením a prevalence diabetu je vidět.
-# CHOPN a Charlsonova kategorie cpd mají nad syntetikou stejných 20 zpráv, rozdíl je pod
-# MIN_CELL, takže je reconcile_charlson (eda/R/diagnoses.R) obě skryje; je to zamýšlená větev,
-# na které se ověřuje parita migrace EDA.
+# (řádek // MIN_CELL) % BLOCKS a blok určuje verzi ICD, diagnózu a stav zmínek. Každá hodnota
+# bez prefixu tak sdílí aspoň MIN_CELL řádků (pravidlo kanárka platí pro rows >= BLOCKS * MIN_CELL),
+# dvě skupiny aspoň po MIN_CELL v každé verzi projdou potlačením a prevalence diabetu je vidět.
+# Stav zmínek se kříží s diagnózou tak, že každá diagnóza má každý ze tří stavů jednou s kódem
+# a jednou bez něj: řádek souladu ICD x zmínka sešitu 8 má pak všech šest buněk aspoň MIN_CELL.
+# Diabetes má kód v blocích 0, 2 a 4, CHOPN v 1, 3 a 5. CHOPN a Charlsonova kategorie cpd mají
+# nad syntetikou stejných 30 zpráv, rozdíl je pod MIN_CELL, takže je reconcile_charlson
+# (eda/R/diagnoses.R) obě skryje; je to zamýšlená větev, na které se ověřuje parita migrace EDA.
 _BLOCKS: Final = (
-    (IcdVersion.NINE, Diagnosis.DIABETES),
-    (IcdVersion.NINE, Diagnosis.COPD),
-    (IcdVersion.TEN, Diagnosis.DIABETES),
-    (IcdVersion.TEN, Diagnosis.COPD),
+    _Block(IcdVersion.NINE, Diagnosis.DIABETES, MentionState.ASSERTED),
+    _Block(IcdVersion.NINE, Diagnosis.COPD, MentionState.ASSERTED),
+    _Block(IcdVersion.TEN, Diagnosis.DIABETES, MentionState.NEGATED),
+    _Block(IcdVersion.TEN, Diagnosis.COPD, MentionState.NEGATED),
+    _Block(IcdVersion.NINE, Diagnosis.DIABETES, MentionState.ABSENT),
+    _Block(IcdVersion.TEN, Diagnosis.COPD, MentionState.ABSENT),
 )
 BLOCKS: Final = len(_BLOCKS)
 RARE_ROWS: Final = 2
 DEFAULT_ROWS: Final = BLOCKS * MIN_CELL + RARE_ROWS
+# Zkratka stojí v tvrzených zprávách na vlastním řádku tolikrát, aby součet výskytů přes zprávy
+# dosáhl prahu, od kterého sešit 9 zveřejní podíl zkratky bez kódu. Negované zprávy ji mají
+# jednou (viz mention_lines), takže výskytů je o něco víc než práh.
+_ASSERTED_BLOCKS: Final = sum(
+    block.mention is MentionState.ASSERTED for block in _BLOCKS
+)
+_ACRONYM_REPEATS: Final = math.ceil(
+    ACRONYM_SHARE_MIN_OCCURRENCES / (MIN_CELL * _ASSERTED_BLOCKS)
+)
+
+
+def _first_block_per_pair() -> tuple[int, ...]:
+    first: dict[tuple[IcdVersion, Diagnosis], int] = {}
+    for index, block in enumerate(_BLOCKS):
+        first.setdefault((block.version, block.diagnosis), index)
+    return tuple(first.values())
+
+
+# Číselník nese jeden řádek na kód, ne na blok: dvojice (verze, diagnóza) se v blocích opakují.
+_DICTIONARY_BLOCKS: Final = _first_block_per_pair()
 _ERAS: Final = {IcdVersion.NINE: "2008 - 2010", IcdVersion.TEN: "2017 - 2019"}
 _BLOCK_VALUES: Final = {
-    ("patients", "gender"): ("F", "M", "F", "M"),
-    ("admissions", "insurance"): ("Medicare", "Private", "Medicare", "Private"),
-    ("admissions", "marital_status"): ("MARRIED", "SINGLE", "MARRIED", "SINGLE"),
-    ("admissions", "race"): ("WHITE", "BLACK/AFRICAN AMERICAN") * 2,
-    ("admissions", "language"): ("English", "Spanish", "English", "Spanish"),
+    ("patients", "gender"): ("F", "M") * 3,
+    ("admissions", "insurance"): ("Medicare", "Private") * 3,
+    ("admissions", "marital_status"): ("MARRIED", "SINGLE") * 3,
+    ("admissions", "race"): ("WHITE", "BLACK/AFRICAN AMERICAN") * 3,
+    ("admissions", "language"): ("English", "Spanish") * 3,
 }
 # Vzácné řádky (po blocích) nesou buňku s prefixem jen v těchto sloupcích: kategorie pod
 # MIN_CELL, kterou potlačení musí sloučit, a když selže, kanárek ji najde. Jinde mají hodnoty
@@ -61,14 +101,16 @@ _RARE_WITNESSES: Final = frozenset({
     ("diagnoses_icd", "icd_version"),
     ("diagnoses_icd", "icd_code"),
 })
-# Věk při přijetí (anchor_age + rok přijetí - anchor_year) je 20/30/40/50 podle bloku, takže
+# Věk při přijetí (anchor_age + rok přijetí - anchor_year) je 20-70 podle bloku, takže
 # se výpočet opravdu provede a desetiletá pásma sedí na bloky.
 _DERIVED: Final[dict[tuple[str, str], Callable[[int, SyntheticRun], str]]] = {
     ("patients", "anchor_age"): lambda block, _: str(15 + 10 * block),
     ("patients", "anchor_year"): lambda _block, _run: "2150",
     ("admissions", "admittime"): lambda _block, _run: "2155-01-01 00:00:00",
-    ("patients", "anchor_year_group"): lambda block, _: _ERAS[_BLOCKS[block][0]],
-    ("diagnoses_icd", "icd_version"): lambda block, _: str(_BLOCKS[block][0].value),
+    ("patients", "anchor_year_group"): lambda block, _: _ERAS[_BLOCKS[block].version],
+    ("diagnoses_icd", "icd_version"): lambda block, _: str(
+        _BLOCKS[block].version.value
+    ),
     ("diagnoses_icd", "icd_code"): lambda block, run: run.block_codes[block],
 }
 
@@ -97,6 +139,7 @@ class SyntheticRun:
         text_chars: Nejmenší délka textu, aby zpráva prošla filtrem délky vstupního korpusu.
         codes: Předpony pětice; kódy bloků se berou z nich.
         lexicon: Lexikon sekcí, podle kterého se skládá text zprávy.
+        mentions: Slovník zmínek, ze kterého se podle stavu bloku skládají řádky v textu.
         block_codes: Kód každého bloku, první předpona diagnózy bloku v jeho verzi.
     """
 
@@ -105,6 +148,7 @@ class SyntheticRun:
     text_chars: int
     codes: DiagnosisCodes
     lexicon: SectionLexicon
+    mentions: MentionVocabulary
     block_codes: tuple[str, ...] = field(init=False)
 
     def __post_init__(self) -> None:
@@ -127,7 +171,7 @@ class SyntheticRun:
             self,
             "block_codes",
             tuple(
-                self._block_code(version, diagnosis) for version, diagnosis in _BLOCKS
+                self._block_code(block.version, block.diagnosis) for block in _BLOCKS
             ),
         )
 
@@ -222,19 +266,22 @@ def _note_value(table: str, column: str, row: int, run: SyntheticRun) -> str | N
     # První řádek zprávy je tentýž text jako u vzácných řádků a radiologie, takže délku
     # text_chars splňuje každá zpráva bez ohledu na lexikon.
     head = _cell("discharge", TEXT_COLUMN, run.prefix, row, run.text_chars)
-    note = synthetic_discharge(head, _text_token(run.prefix, row), run.lexicon, block)
+    mentions = mention_lines(run.mentions, _BLOCKS[block].mention, _ACRONYM_REPEATS)
+    note = synthetic_discharge(
+        head, _text_token(run.prefix, row), run.lexicon, block, mentions
+    )
     return note.text if column == TEXT_COLUMN else note.bhc_target
 
 
 def _dictionary_value(column: str, row: int, run: SyntheticRun) -> str | None:
     # Číselník kódů pětice je veřejná konstanta: jeho řádky 0-3 jsou kódy bloků.
-    if row >= BLOCKS:
+    if row >= len(_DICTIONARY_BLOCKS):
         return None
-    version, diagnosis = _BLOCKS[row]
+    block = _BLOCKS[_DICTIONARY_BLOCKS[row]]
     values = {
-        "icd_code": run.block_codes[row],
-        "icd_version": str(version.value),
-        "long_title": f"{diagnosis.value} ICD-{version.value}",
+        "icd_code": run.block_codes[_DICTIONARY_BLOCKS[row]],
+        "icd_version": str(block.version.value),
+        "long_title": f"{block.diagnosis.value} ICD-{block.version.value}",
     }
     return values.get(column)
 

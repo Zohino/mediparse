@@ -12,6 +12,7 @@ from mediparse.domain.icd import IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.diagnosis_candidates_file import (
     load_diagnosis_codes,
+    load_diagnosis_keywords,
     load_text_normalization,
 )
 from tests.cohort_support import candidate_prefixes
@@ -177,3 +178,27 @@ def test_names_missing_file_and_invalid_json_are_invalid_input(
         load_text_normalization(tmp_path / "none.json")
     with pytest.raises(InvalidInputError):
         load_text_normalization(broken)
+
+
+def test_keywords_follow_diagnosis_order_and_skip_other_candidates(
+    tmp_path: Path,
+) -> None:
+    """Klíčová slova pětice jdou v pořadí ``Diagnosis``; kandidáti mimo pětici se neberou."""
+    keywords = load_diagnosis_keywords(_write(tmp_path, _named()))
+
+    assert keywords == (
+        "diabetes",
+        "diabetic",
+        "chronic obstructive pulmonary disease",
+        "chronic kidney disease",
+        "end-stage renal disease",
+        "pneumonia",
+        "atrial fibrillation",
+        "afib",
+    )
+
+
+def test_keywords_of_missing_diagnosis_are_invalid_input(tmp_path: Path) -> None:
+    """Chybějící diagnóza pětice je chyba vstupu."""
+    with pytest.raises(InvalidInputError, match="Chybí diagnózy: ckd"):
+        load_diagnosis_keywords(_write(tmp_path, _named(ckd=None)))

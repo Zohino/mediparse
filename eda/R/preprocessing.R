@@ -10,6 +10,8 @@ TOKEN_FORMS <- NGRAM_KINDS[["1"]]$forms
 # 28,6 % bez kódu dají jediné řešení 10 z 35 zpráv a rozdíl proti sešitu 8 by odhalil skupinu pod 10.
 # Od 1 000 výskytů připadá na podíl stovky možných jmenovatelů a počet zpráv se zkratkou a kódem
 # z něj dopočítat nejde.
+# Zrcadlo ACRONYM_SHARE_MIN_OCCURRENCES v domain/synthetic_mentions.py: syntetické zprávy z něj
+# odvozují počet opakování zkratek. Změna se dělá v obou souborech.
 SHARE_MIN_OCCURRENCES <- 1000L
 # Zkratka AF je víceznačná (afebrile), proto ji věta o zkratkách srovnává s ostatními.
 AMBIGUOUS_ACRONYM <- "AF"

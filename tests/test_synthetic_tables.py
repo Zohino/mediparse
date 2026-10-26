@@ -3,10 +3,15 @@
 from __future__ import annotations
 
 import re
+from collections import Counter
 from typing import Final
 
 import pytest
 
+from mediparse.domain.clinical_text import (
+    find_diagnosis_acronyms,
+    normalize_clinical_text,
+)
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.dua import MIN_CELL
 from mediparse.domain.icd import DiagnosisCodes, IcdVersion
@@ -17,6 +22,11 @@ from mediparse.domain.synthetic_discharge import (
     BHC_SECTION,
     synthetic_discharge,
 )
+from mediparse.domain.synthetic_mentions import (
+    ACRONYM_SHARE_MIN_OCCURRENCES,
+    MentionState,
+    mention_lines,
+)
 from mediparse.domain.synthetic_tables import (
     BLOCKS,
     DEFAULT_ROWS,
@@ -26,6 +36,7 @@ from mediparse.domain.synthetic_tables import (
 )
 from mediparse.infrastructure.mimic_inventory import read_manifest
 from tests.cohort_support import CODES, PREFIXES
+from tests.mention_support import ACRONYMS, REPOSITORY_VOCABULARY, TEXT_MENTIONS
 from tests.section_support import REPOSITORY_LEXICON
 from tests.support import REPOSITORY_MIMIC_MANIFEST
 
@@ -34,33 +45,60 @@ TEXT_CHARS: Final = 100
 SHAPE = TableShape(records=5, columns=("note_id", "subject_id", "text"))
 NOTE_SHAPE = TableShape(records=5, columns=("note_id", "subject_id", "hadm_id", "text"))
 PREFIX: Final = "eda-sentinel"
+FIRST_KEY: Final = next(iter(REPOSITORY_LEXICON.sections))
 COLUMNS: Final = {
     table: shape.columns
     for table, shape in read_manifest(REPOSITORY_MIMIC_MANIFEST).items()
 }
-BLOCK_DIAGNOSES: Final = (Diagnosis.DIABETES, Diagnosis.COPD)
+BLOCK_DIAGNOSES: Final = (
+    Diagnosis.DIABETES,
+    Diagnosis.COPD,
+    Diagnosis.DIABETES,
+    Diagnosis.COPD,
+    Diagnosis.DIABETES,
+    Diagnosis.COPD,
+)
 BLOCK_VERSIONS: Final = (
     IcdVersion.NINE,
     IcdVersion.NINE,
     IcdVersion.TEN,
     IcdVersion.TEN,
+    IcdVersion.NINE,
+    IcdVersion.TEN,
 )
 BLOCK_CODES: Final = tuple(
-    PREFIXES[BLOCK_DIAGNOSES[block % 2]][BLOCK_VERSIONS[block]][0] for block in range(4)
+    PREFIXES[BLOCK_DIAGNOSES[block]][BLOCK_VERSIONS[block]][0]
+    for block in range(len(BLOCK_VERSIONS))
 )
-# sloupec -> hodnoty bloků 0-3 (slovník MIMIC)
+CELLS_PER_DIAGNOSIS: Final = 6
+# Nezávislé orákulum: ceil(1000 / (MIN_CELL * 2 tvrzené bloky)), ne přepočet vzorce z implementace.
+ACRONYM_REPEATS: Final = 50
+BLOCK_STATES: Final = (
+    MentionState.ASSERTED,
+    MentionState.ASSERTED,
+    MentionState.NEGATED,
+    MentionState.NEGATED,
+    MentionState.ABSENT,
+    MentionState.ABSENT,
+)
+# sloupec -> hodnoty bloků 0-5 (slovník MIMIC)
 EXPECTED: Final = {
-    ("patients", "gender"): ("F", "M", "F", "M"),
-    ("patients", "anchor_year_group"): ("2008 - 2010",) * 2 + ("2017 - 2019",) * 2,
-    ("admissions", "insurance"): ("Medicare", "Private", "Medicare", "Private"),
-    ("admissions", "marital_status"): ("MARRIED", "SINGLE", "MARRIED", "SINGLE"),
-    ("admissions", "race"): ("WHITE", "BLACK/AFRICAN AMERICAN") * 2,
-    ("admissions", "language"): ("English", "Spanish", "English", "Spanish"),
-    ("diagnoses_icd", "icd_version"): ("9", "9", "10", "10"),
+    ("patients", "gender"): ("F", "M") * 3,
+    ("patients", "anchor_year_group"): tuple(
+        "2008 - 2010" if version is IcdVersion.NINE else "2017 - 2019"
+        for version in BLOCK_VERSIONS
+    ),
+    ("admissions", "insurance"): ("Medicare", "Private") * 3,
+    ("admissions", "marital_status"): ("MARRIED", "SINGLE") * 3,
+    ("admissions", "race"): ("WHITE", "BLACK/AFRICAN AMERICAN") * 3,
+    ("admissions", "language"): ("English", "Spanish") * 3,
+    ("diagnoses_icd", "icd_version"): tuple(
+        str(version.value) for version in BLOCK_VERSIONS
+    ),
     ("diagnoses_icd", "icd_code"): BLOCK_CODES,
-    ("patients", "anchor_age"): ("15", "25", "35", "45"),
-    ("patients", "anchor_year"): ("2150",) * 4,
-    ("admissions", "admittime"): ("2155-01-01 00:00:00",) * 4,
+    ("patients", "anchor_age"): tuple(str(15 + 10 * block) for block in range(BLOCKS)),
+    ("patients", "anchor_year"): ("2150",) * 6,
+    ("admissions", "admittime"): ("2155-01-01 00:00:00",) * 6,
 }
 WITNESSES: Final = {
     ("patients", "anchor_year_group"),
@@ -86,6 +124,7 @@ def _run(prefix: str, rows: int, codes: DiagnosisCodes = CODES) -> SyntheticRun:
         text_chars=TEXT_CHARS,
         codes=codes,
         lexicon=REPOSITORY_LEXICON,
+        mentions=REPOSITORY_VOCABULARY,
     )
 
 
@@ -202,8 +241,14 @@ def test_block_texts_and_targets_come_from_the_discharge_module() -> None:
 
     for row in range(BLOCKS * MIN_CELL):
         head = texts[row]["text"].splitlines()[0]
+        block = row // MIN_CELL
+        lines = mention_lines(
+            REPOSITORY_VOCABULARY,
+            BLOCK_STATES[block],
+            ACRONYM_REPEATS,
+        )
         note = synthetic_discharge(
-            head, head.split()[-1], REPOSITORY_LEXICON, row // MIN_CELL
+            head, head.split()[-1], REPOSITORY_LEXICON, block, lines
         )
         assert texts[row]["text"] == note.text
         assert targets[row]["target"] == note.bhc_target
@@ -217,7 +262,12 @@ def test_every_note_has_text_chars_and_first_line_is_the_cell_text(
     lexicon = SectionLexicon(
         sections={
             key: REPOSITORY_LEXICON.sections[key]
-            for key in (BHC_SECTION, "discharge_medications", "discharge_diagnosis")
+            for key in (
+                FIRST_KEY,
+                BHC_SECTION,
+                "discharge_medications",
+                "discharge_diagnosis",
+            )
         },
         preamble=(),
     )
@@ -227,6 +277,7 @@ def test_every_note_has_text_chars_and_first_line_is_the_cell_text(
         text_chars=text_chars,
         codes=CODES,
         lexicon=lexicon,
+        mentions=REPOSITORY_VOCABULARY,
     )
 
     rows = synthetic_rows("discharge", NOTE_SHAPE, run)
@@ -246,6 +297,7 @@ def test_token_is_added_once_when_the_cell_is_already_long_enough() -> None:
         text_chars=1,
         codes=CODES,
         lexicon=REPOSITORY_LEXICON,
+        mentions=REPOSITORY_VOCABULARY,
     )
 
     text = synthetic_rows("radiology", NOTE_SHAPE, run)[0]["text"]
@@ -291,6 +343,7 @@ def test_lexicon_without_bhc_section_is_refused() -> None:
             lexicon=SectionLexicon(
                 sections=sections, preamble=REPOSITORY_LEXICON.preamble
             ),
+            mentions=REPOSITORY_VOCABULARY,
         )
 
 
@@ -302,12 +355,12 @@ def test_typed_column_has_block_values_and_rare_rows_follow_rule(
     table, column = key
     cells = _column(table, column)
 
-    for block in range(4):
+    for block in range(BLOCKS):
         assert (
             cells[block * MIN_CELL : (block + 1) * MIN_CELL]
             == [values[block]] * MIN_CELL
         )
-    rare = cells[4 * MIN_CELL :]
+    rare = cells[BLOCKS * MIN_CELL :]
     assert len(rare) == RARE_ROWS
     if key in WITNESSES:
         assert all(cell.startswith(PREFIX) for cell in rare)
@@ -327,7 +380,7 @@ def test_values_without_prefix_are_shared_by_min_cell_rows(table: str) -> None:
 
 
 def test_patient_age_at_admission_is_shared_within_block() -> None:
-    """Věk při přijetí je 20/30/40/50 podle bloku a vzácné řádky mají věk bloku 0."""
+    """Věk při přijetí je 20-70 podle bloku a vzácné řádky mají věk bloku 0."""
     patients = _table("patients")
     admissions = _table("admissions")
     ages = [
@@ -339,11 +392,9 @@ def test_patient_age_at_admission_is_shared_within_block() -> None:
 
     expected = [20 + 10 * ((row // MIN_CELL) % BLOCKS) for row in range(DEFAULT_ROWS)]
     assert ages == expected
-    assert [ages.count(age) for age in (20, 30, 40, 50)] == [
+    assert [ages.count(age) for age in range(20, 80, 10)] == [
         MIN_CELL + RARE_ROWS,
-        MIN_CELL,
-        MIN_CELL,
-        MIN_CELL,
+        *[MIN_CELL] * (BLOCKS - 1),
     ]
 
 
@@ -361,10 +412,10 @@ def test_era_follows_version_of_same_row() -> None:
 
 
 def test_dictionary_holds_block_codes_with_versions_and_titles() -> None:
-    """Číselník: řádky 0-3 nesou kódy bloků s verzí a názvem bez prefixu, ostatní prefix."""
+    """Číselník: řádky 0-3 nesou čtyři různé kódy bloků s verzí a názvem bez prefixu, ostatní prefix."""
     rows = _table("d_icd_diagnoses")
 
-    assert [row["icd_code"] for row in rows[:4]] == list(BLOCK_CODES)
+    assert [row["icd_code"] for row in rows[:4]] == list(dict.fromkeys(BLOCK_CODES))
     assert [row["icd_version"] for row in rows[:4]] == ["9", "9", "10", "10"]
     assert [row["long_title"] for row in rows[:4]] == [
         "diabetes ICD-9",
@@ -426,3 +477,107 @@ def test_block_diagnosis_without_prefix_is_refused(
         InvalidInputError, match=rf"{diagnosis.value}.*ICD-{version.value}"
     ):
         _run(PREFIX, 1, DiagnosisCodes(prefixes=prefixes))
+
+
+def _notes() -> list[str]:
+    return _column("discharge", "text")
+
+
+def _state(text: str, phrase: str) -> MentionState:
+    lines = text.splitlines()
+    if phrase in lines:
+        return MentionState.ASSERTED
+    if f"{REPOSITORY_VOCABULARY.cue} {phrase}" in lines:
+        return MentionState.NEGATED
+    return MentionState.ABSENT
+
+
+def _mentioned_words(text: str) -> list[str]:
+    """Fráze a zkratky slovníku, které text obsahuje jako celé slovo (bez ohledu na velikost písmen).
+
+    Returns:
+        Nalezené fráze a zkratky.
+    """
+    return [
+        word
+        for word in (*REPOSITORY_VOCABULARY.phrases, *REPOSITORY_VOCABULARY.acronyms)
+        if re.search(rf"\b{re.escape(word)}\b", text, re.IGNORECASE)
+    ]
+
+
+def _has_code(code: str, diagnosis: Diagnosis) -> bool:
+    return code in {prefixes[0] for prefixes in PREFIXES[diagnosis].values()}
+
+
+def _first_phrase(diagnosis: Diagnosis) -> str:
+    return {
+        Diagnosis.DIABETES: "diabetes",
+        Diagnosis.COPD: "chronic obstructive pulmonary disease",
+    }[diagnosis]
+
+
+@pytest.mark.parametrize("diagnosis", BLOCK_DIAGNOSES[:2])
+def test_every_icd_by_mention_cell_of_a_block_diagnosis_has_min_cell_notes(
+    diagnosis: Diagnosis,
+) -> None:
+    """Řádek souladu ICD x zmínka sešitu 8 má všech šest buněk (kód, bez kódu) x (tvrzená, negovaná, bez zmínky) aspoň MIN_CELL."""
+    phrase = _first_phrase(diagnosis)
+    cells = Counter(
+        (_has_code(code, diagnosis), _state(text, phrase))
+        for code, text in zip(
+            _column("diagnoses_icd", "icd_code"), _notes(), strict=True
+        )
+    )
+
+    assert len(cells) == CELLS_PER_DIAGNOSIS
+    assert min(cells.values()) >= MIN_CELL
+
+
+def test_mention_state_follows_the_block_table() -> None:
+    """Stav zmínky řádku je stav jeho bloku a vzácné řádky zmínky nemají."""
+    notes = _notes()
+
+    for row, text in enumerate(notes):
+        expected = (
+            BLOCK_STATES[row // MIN_CELL]
+            if row < BLOCKS * MIN_CELL
+            else MentionState.ABSENT
+        )
+        assert _state(text, "diabetes") == expected
+        if expected is MentionState.ABSENT:
+            assert not _mentioned_words(text)
+
+
+def test_acronyms_reach_the_share_threshold_with_expected_code_cells() -> None:
+    """Všech šest zkratek má aspoň ACRONYM_SHARE_MIN_OCCURRENCES výskytů; DM, DM2 a COPD mají buňky zkratka x kód 20/10/20/12."""
+    codes = _column("diagnoses_icd", "icd_code")
+    found = [
+        find_diagnosis_acronyms(normalize_clinical_text(text), ACRONYMS)
+        for text in _notes()
+    ]
+    occurrences = Counter(acronym for acronyms in found for acronym in acronyms)
+
+    assert set(occurrences) == set(ACRONYMS)
+    assert min(occurrences.values()) >= ACRONYM_SHARE_MIN_OCCURRENCES
+    for acronym, diagnosis in (
+        ("DM", Diagnosis.DIABETES),
+        ("DM2", Diagnosis.DIABETES),
+        ("COPD", Diagnosis.COPD),
+    ):
+        cells = Counter(
+            (_has_code(code, diagnosis), acronym in present)
+            for code, present in zip(codes, found, strict=True)
+        )
+        assert cells == {
+            (True, True): 2 * MIN_CELL,
+            (True, False): MIN_CELL,
+            (False, True): 2 * MIN_CELL,
+            (False, False): MIN_CELL + RARE_ROWS,
+        }
+
+
+def test_every_symptom_has_min_cell_notes_in_each_state() -> None:
+    """U příznaku jsou tvrzená, jen negovaná i bez zmínky zprávy aspoň MIN_CELL."""
+    for symptom in TEXT_MENTIONS.symptoms:
+        states = Counter(_state(text, symptom) for text in _notes())
+        assert min(states[state] for state in MentionState) >= MIN_CELL
