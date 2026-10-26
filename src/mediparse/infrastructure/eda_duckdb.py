@@ -3,14 +3,18 @@
 from __future__ import annotations
 
 from contextlib import contextmanager
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Final
 
 import duckdb
 
 from mediparse.domain.data_access import check_data_access
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.synthetic_marker import read_marker
+from mediparse.infrastructure.duckdb_parquet import (
+    SPILL_DIRECTORY,
+    create_parquet_view,
+)
+from mediparse.infrastructure.synthetic_marker import MARKER_NAME, read_marker
 
 if TYPE_CHECKING:
     from collections.abc import Generator, Mapping
@@ -18,7 +22,6 @@ if TYPE_CHECKING:
 
 DEFAULT_MEMORY: Final = "8GB"
 MEMORY_VARIABLE: Final = "MEDIPARSE_DUCKDB_MEMORY"
-SPILL_DIRECTORY: Final = "duckdb-tmp"
 
 
 @dataclass(frozen=True)
@@ -38,41 +41,28 @@ class EdaDatabase:
     """
 
     parquet: Path
-    environ: Mapping[str, str]
+    # Prostředí může nést tokeny, a proto se nevypisuje v ``repr`` (log, freeze).
+    environ: Mapping[str, str] = field(repr=False)
 
-    def views(self) -> dict[str, Path]:
-        """Tabulky adresáře podle jména souboru bez přípony.
+    def guarded_views(self) -> dict[str, Path]:
+        """Tabulky adresáře podle jména souboru bez přípony, až po stráži.
 
         Returns:
             Jméno pohledu a soubor, seřazené podle jména.
 
         Raises:
-            InvalidInputError: Adresář neexistuje nebo neobsahuje žádný parquet.
-        """
-        if not self.parquet.is_dir():
-            msg = f"Adresář s parquetem {self.parquet} neexistuje."
-            raise InvalidInputError(msg)
-        files = sorted(self.parquet.glob("*.parquet"))
-        if not files:
-            msg = f"V adresáři {self.parquet} není žádný parquet."
-            raise InvalidInputError(msg)
-        return {file.stem: file for file in files}
-
-    def check_access(self) -> dict[str, Path]:
-        """Ověří adresář a stráž dřív, než se otevře spojení.
-
-        Returns:
-            Pohledy z ``views``.
-
-        Raises:
-            InvalidInputError: Adresář je prázdný nebo značka syntetiky je neplatná.
+            InvalidInputError: Adresář neexistuje, neobsahuje parquet nebo je značka
+                syntetiky neplatná.
             DataAccessError: Skutečná data v prostředí, které je nesmí číst.
         """
-        views = self.views()
+        # Adresář a parquet se ověřují před stráží, protože jejich hlášky drží testy
+        # dokumentů; stráž čte jen značku, ne data, takže pořadí bezpečnost nesnižuje.
+        views = self._views()
         check_data_access(
             self.environ,
             synthetic=read_marker(self.parquet) is not None,
             location=str(self.parquet),
+            marker=MARKER_NAME,
         )
         return views
 
@@ -95,33 +85,43 @@ class EdaDatabase:
             Spojení s nastavenou pamětí a spillem.
 
         Raises:
-            InvalidInputError: Adresář je prázdný, značka neplatná nebo se tabulka nedá číst.
+            InvalidInputError: Adresář je prázdný, značka neplatná, paměť neplatná
+                nebo se tabulka nedá číst.
             DataAccessError: Skutečná data v prostředí, které je nesmí číst.
         """
-        views = self.check_access()
-        settings = self.settings()
-        settings.temp_directory.mkdir(parents=True, exist_ok=True)
-        # Absolutní jednotka, protože DuckDB nebere procenta a výchozích 80 % RAM by
-        # udusilo Python a Quarto; spill zůstává pod resources/mimic (deny pravidla).
-        con = duckdb.connect(
+        views = self.guarded_views()
+        con = _open(self.settings())
+        try:
+            for name, path in views.items():
+                create_parquet_view(con, name, path)
+            yield con
+        finally:
+            con.close()
+
+    def _views(self) -> dict[str, Path]:
+        if not self.parquet.is_dir():
+            msg = f"Adresář s parquetem {self.parquet} neexistuje."
+            raise InvalidInputError(msg)
+        files = sorted(self.parquet.glob("*.parquet"))
+        if not files:
+            msg = f"V adresáři {self.parquet} není žádný parquet."
+            raise InvalidInputError(msg)
+        return {file.stem: file for file in files}
+
+
+def _open(settings: DuckDbSettings) -> duckdb.DuckDBPyConnection:
+    # Absolutní jednotka, protože DuckDB nebere procenta a výchozích 80 % RAM by
+    # udusilo Python a Quarto; spill zůstává pod resources/mimic (deny pravidla).
+    try:
+        return duckdb.connect(
             config={
                 "memory_limit": settings.memory_limit,
                 "temp_directory": str(settings.temp_directory),
             }
         )
-        try:
-            for name, path in views.items():
-                _create_view(con, name, path)
-            yield con
-        finally:
-            con.close()
-
-
-def _create_view(con: duckdb.DuckDBPyConnection, name: str, path: Path) -> None:
-    try:
-        con.read_parquet(str(path)).create_view(name)
     except duckdb.Error as error:
-        msg = f"Tabulka {path} nejde číst: {type(error).__name__}."
-        # Text výjimky nese hodnoty buněk z MIMIC; nesmí do hlášky ani do logu, a proto
-        # jen její typ a ``from None``.
+        msg = (
+            f"Nastavení {MEMORY_VARIABLE}={settings.memory_limit!r} "
+            f"DuckDB nepřijal: {type(error).__name__}."
+        )
         raise InvalidInputError(msg) from None

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 import duckdb
@@ -10,46 +11,62 @@ import pytest
 from mediparse.domain.data_access import DataAccessError
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.eda_duckdb import DEFAULT_MEMORY, EdaDatabase
-from mediparse.infrastructure.parquet_file import write_string_table
-from mediparse.infrastructure.synthetic_marker import (
-    MARKER_NAME,
-    SyntheticMarker,
-    write_marker,
-)
+from mediparse.infrastructure.synthetic_marker import MARKER_NAME
+from tests.eda_support import mark_synthetic, write_tables
 
 if TYPE_CHECKING:
-    from pathlib import Path
+    from collections.abc import Iterator
 
 CLAUDE_CODE = {"CLAUDECODE": "1"}
 DEFAULT_MEMORY_SHOWN = "7.4 GiB"
 
 
-def _write_tables(
-    directory: Path, names: tuple[str, ...] = ("discharge", "admissions")
-) -> Path:
-    for name in names:
-        write_string_table(directory / f"{name}.parquet", ["a"], [{"a": "x"}])
-    return directory
-
-
-def _synthetic(directory: Path) -> Path:
-    write_marker(directory, SyntheticMarker(prefix="t", rows=1))
-    return directory
-
-
-def test_views_are_sorted_by_name(tmp_path: Path) -> None:
+def test_views_are_sorted_by_name(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """Pohled nese jméno souboru bez přípony, v pořadí jmen."""
-    parquet = _write_tables(tmp_path / "parquet", ("zeta", "mimic-iv-bhc", "alfa"))
+    parquet = write_tables(tmp_path / "parquet", ("zeta", "mimic-iv-bhc", "alfa"))
+    glob = Path.glob
 
-    views = EdaDatabase(parquet, {}).views()
+    def reversed_glob(self: Path, pattern: str) -> Iterator[Path]:
+        return iter(sorted(glob(self, pattern), reverse=True))
+
+    # Pořadí souborů ve výpisu adresáře není zaručené, a proto ho test vynutí opačné.
+    monkeypatch.setattr(Path, "glob", reversed_glob)
+
+    views = EdaDatabase(parquet, {}).guarded_views()
 
     assert list(views) == ["alfa", "mimic-iv-bhc", "zeta"]
     assert views["alfa"] == parquet / "alfa.parquet"
 
 
+def test_repr_hides_environment(tmp_path: Path) -> None:
+    """Prostředí nese tokeny, a proto se nevypisuje do logu ani do výstupu dokumentu."""
+    database = EdaDatabase(tmp_path, {"API_TOKEN": "hodnota-z-prostredi"})
+
+    assert "hodnota-z-prostredi" not in repr(database)
+
+
+def test_invalid_memory_names_variable_and_value(tmp_path: Path) -> None:
+    """Procenta DuckDB nebere; hláška jmenuje proměnnou, hodnotu a typ výjimky."""
+    parquet = write_tables(tmp_path / "parquet")
+    environ = {"MEDIPARSE_DUCKDB_MEMORY": "50%"}
+
+    with (
+        pytest.raises(InvalidInputError) as refusal,
+        EdaDatabase(parquet, environ).connect(),
+    ):
+        pytest.fail("spojení nemělo vzniknout")
+
+    message = str(refusal.value)
+    assert "MEDIPARSE_DUCKDB_MEMORY" in message
+    assert "50%" in message
+    assert refusal.value.__cause__ is None
+
+
 def test_connect_creates_view_for_every_parquet(tmp_path: Path) -> None:
     """Pohled je i pro jméno s pomlčkou a čte řádky souboru."""
-    parquet = _write_tables(tmp_path / "parquet", ("discharge", "mimic-iv-bhc"))
+    parquet = write_tables(tmp_path / "parquet", ("discharge", "mimic-iv-bhc"))
 
     with EdaDatabase(parquet, {}).connect() as con:
         counts = [
@@ -62,7 +79,7 @@ def test_connect_creates_view_for_every_parquet(tmp_path: Path) -> None:
 
 def test_connect_closes_the_connection(tmp_path: Path) -> None:
     """Po výstupu z kontextu je spojení zavřené."""
-    parquet = _write_tables(tmp_path / "parquet")
+    parquet = write_tables(tmp_path / "parquet")
 
     with EdaDatabase(parquet, {}).connect() as con:
         pass
@@ -73,7 +90,7 @@ def test_connect_closes_the_connection(tmp_path: Path) -> None:
 
 def test_default_memory(tmp_path: Path) -> None:
     """Bez proměnné i s prázdnou proměnnou platí výchozí paměť."""
-    parquet = _write_tables(tmp_path / "parquet")
+    parquet = write_tables(tmp_path / "parquet")
 
     assert DEFAULT_MEMORY == "8GB"
     assert EdaDatabase(parquet, {}).settings().memory_limit == DEFAULT_MEMORY
@@ -83,7 +100,7 @@ def test_default_memory(tmp_path: Path) -> None:
 
 def test_memory_from_environment(tmp_path: Path) -> None:
     """Proměnná prostředí přebije výchozí paměť."""
-    parquet = _write_tables(tmp_path / "parquet")
+    parquet = write_tables(tmp_path / "parquet")
     environ = {"MEDIPARSE_DUCKDB_MEMORY": "3GiB"}
 
     assert EdaDatabase(parquet, environ).settings().memory_limit == "3GiB"
@@ -92,7 +109,7 @@ def test_memory_from_environment(tmp_path: Path) -> None:
 def test_spill_is_next_to_parquet_directory(tmp_path: Path) -> None:
     """Spill leží vedle adresáře parquetu, i když adresář je symlink."""
     real = tmp_path / "real"
-    parquet = _write_tables(real / "parquet")
+    parquet = write_tables(real / "parquet")
     link = tmp_path / "link"
     link.symlink_to(parquet, target_is_directory=True)
 
@@ -103,7 +120,7 @@ def test_spill_is_next_to_parquet_directory(tmp_path: Path) -> None:
 
 def test_connect_applies_settings(tmp_path: Path) -> None:
     """Spojení má paměť a spill z nastavení."""
-    parquet = _write_tables(tmp_path / "parquet")
+    parquet = write_tables(tmp_path / "parquet")
     database = EdaDatabase(parquet, {})
 
     with database.connect() as con:
@@ -117,20 +134,20 @@ def test_connect_applies_settings(tmp_path: Path) -> None:
 def test_missing_directory_is_refused(tmp_path: Path) -> None:
     """Chybějící adresář se hlásí jako neexistující."""
     with pytest.raises(InvalidInputError, match="neexistuje"):
-        EdaDatabase(tmp_path / "none", {}).views()
+        EdaDatabase(tmp_path / "none", {}).guarded_views()
 
 
 def test_directory_without_parquet_is_refused_before_guard(tmp_path: Path) -> None:
     """Adresář bez parquetu se odmítne dřív než stráží, i pod CLAUDECODE."""
     with pytest.raises(InvalidInputError, match="žádný parquet") as refusal:
-        EdaDatabase(tmp_path, CLAUDE_CODE).check_access()
+        EdaDatabase(tmp_path, CLAUDE_CODE).guarded_views()
 
     assert not isinstance(refusal.value, DataAccessError)
 
 
 def test_real_data_are_refused_in_claude_code(tmp_path: Path) -> None:
     """Data bez značky pod CLAUDECODE: spojení nevznikne."""
-    parquet = _write_tables(tmp_path / "parquet")
+    parquet = write_tables(tmp_path / "parquet")
 
     with (
         pytest.raises(DataAccessError, match="Claude Code"),
@@ -143,7 +160,7 @@ def test_real_data_are_refused_in_claude_code(tmp_path: Path) -> None:
 
 def test_synthetic_data_pass_in_claude_code(tmp_path: Path) -> None:
     """Se značkou syntetiky stráž pustí."""
-    parquet = _synthetic(_write_tables(tmp_path / "parquet"))
+    parquet = mark_synthetic(write_tables(tmp_path / "parquet"))
 
     with EdaDatabase(parquet, {"CI": "true", **CLAUDE_CODE}).connect() as con:
         assert con.sql("SELECT count(*) FROM discharge").fetchone() == (1,)
@@ -151,11 +168,11 @@ def test_synthetic_data_pass_in_claude_code(tmp_path: Path) -> None:
 
 def test_invalid_marker_is_refused(tmp_path: Path) -> None:
     """Prázdná značka není syntetika: neplatný soubor je chyba, ne průchod."""
-    parquet = _write_tables(tmp_path / "parquet")
+    parquet = write_tables(tmp_path / "parquet")
     (parquet / MARKER_NAME).write_text("{}", encoding="utf-8")
 
-    with pytest.raises(InvalidInputError) as refusal:
-        EdaDatabase(parquet, CLAUDE_CODE).check_access()
+    with pytest.raises(InvalidInputError, match=r"synthetic\.json") as refusal:
+        EdaDatabase(parquet, CLAUDE_CODE).guarded_views()
 
     assert not isinstance(refusal.value, DataAccessError)
 

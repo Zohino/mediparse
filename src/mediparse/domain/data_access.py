@@ -39,7 +39,7 @@ def blocked_reason(environ: Mapping[str, str]) -> str | None:
 
 
 def check_data_access(
-    environ: Mapping[str, str], *, synthetic: bool, location: str
+    environ: Mapping[str, str], *, synthetic: bool, location: str, marker: str
 ) -> None:
     """Odmítne čtení skutečných dat v prostředí, které je nesmí číst.
 
@@ -47,6 +47,7 @@ def check_data_access(
         environ: Proměnné prostředí.
         synthetic: Zda data nesou platnou značku syntetiky.
         location: Místo dat pro hlášku.
+        marker: Jméno souboru se značkou syntetiky pro hlášku.
 
     Raises:
         DataAccessError: Data nejsou syntetická a prostředí je blokuje.
@@ -56,7 +57,7 @@ def check_data_access(
     reason = blocked_reason(environ)
     if reason is not None:
         msg = (
-            f"Adresář {location} neobsahuje synthetic.json, "
+            f"Adresář {location} neobsahuje {marker}, "
             f"takže jde o skutečná data. {reason}"
         )
         raise DataAccessError(msg)

@@ -13,16 +13,10 @@ from mediparse.entrypoints.eda_database import (
     database,
     parquet_dir,
 )
-from mediparse.infrastructure.parquet_file import write_string_table
+from tests.eda_support import write_tables
 
 if TYPE_CHECKING:
     from pathlib import Path
-
-
-def _write_tables(directory: Path) -> Path:
-    for name in ("discharge", "admissions"):
-        write_string_table(directory / f"{name}.parquet", ["a"], [{"a": "x"}])
-    return directory
 
 
 def test_parquet_dir_prefers_explicit_variable() -> None:
@@ -49,7 +43,7 @@ def test_parquet_dir_without_any_variable_is_refused() -> None:
 
 def test_connection_settings_are_plain_text(tmp_path: Path) -> None:
     """Pro reticulate jen texty a slovník textů."""
-    parquet = _write_tables(tmp_path / "parquet")
+    parquet = write_tables(tmp_path / "parquet")
 
     result = connection_settings({"MEDIPARSE_PARQUET": str(parquet)})
 
@@ -65,7 +59,7 @@ def test_connection_settings_are_plain_text(tmp_path: Path) -> None:
 
 def test_connection_settings_apply_the_guard(tmp_path: Path) -> None:
     """Data bez značky pod CLAUDECODE: R nedostane nic."""
-    parquet = _write_tables(tmp_path / "parquet")
+    parquet = write_tables(tmp_path / "parquet")
     environ = {"MEDIPARSE_PARQUET": str(parquet), "CLAUDECODE": "1"}
 
     with pytest.raises(DataAccessError):
@@ -74,7 +68,7 @@ def test_connection_settings_apply_the_guard(tmp_path: Path) -> None:
 
 def test_database_uses_parquet_dir(tmp_path: Path) -> None:
     """Databáze čte z adresáře určeného prostředím."""
-    parquet = _write_tables(tmp_path / "parquet")
+    parquet = write_tables(tmp_path / "parquet")
     environ = {"MEDIPARSE_PARQUET": str(parquet)}
 
     result = database(environ)

@@ -61,7 +61,7 @@ def connection_settings(environ: Mapping[str, str]) -> dict[str, str | dict[str,
         ``memory_limit``, ``temp_directory`` a ``views`` (jméno na cestu), vše text.
     """
     db = database(environ)
-    views = db.check_access()
+    views = db.guarded_views()
     settings = db.settings()
     return {
         "memory_limit": settings.memory_limit,

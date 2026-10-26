@@ -420,3 +420,16 @@ def test_environment_refusal_carries_shared_reason(name: str) -> None:
     ).run({name: "1"}, COMMIT, CREATED_AT, DISCHARGE_PIN)
 
     assert outcome == AuditRefused(BLOCKING_VARIABLES[name])
+
+
+@pytest.mark.parametrize("name", ["CI", "CLAUDECODE"])
+def test_environment_refusal_precedes_workspace_refusal(name: str) -> None:
+    """Prostředí se posuzuje dřív než pracovní adresář, takže důvod zákazu čtení vyhrává."""
+    outcome = _audit(
+        _Corpus({Language.EN: {NOTE_ID: SENTENCE}}),
+        _UntouchableReference(),
+        _Report(),
+        _Workspace(missing=("discharge.csv.gz",)),
+    ).run({name: "1"}, COMMIT, CREATED_AT, DISCHARGE_PIN)
+
+    assert outcome == AuditRefused(BLOCKING_VARIABLES[name])

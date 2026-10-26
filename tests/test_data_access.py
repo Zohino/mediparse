@@ -13,6 +13,7 @@ from mediparse.domain.data_access import (
 from mediparse.domain.inputs import InvalidInputError
 
 LOCATION = "/data/parquet"
+MARKER = "znacka.json"
 
 
 def test_blocking_variables_are_ci_then_claude_code() -> None:
@@ -49,11 +50,11 @@ def test_check_refuses_real_data_in_blocked_environment(
 ) -> None:
     """Skutečná data v blokujícím prostředí hláška jmenuje místo, značku i důvod."""
     with pytest.raises(DataAccessError) as refusal:
-        check_data_access(environ, synthetic=False, location=LOCATION)
+        check_data_access(environ, synthetic=False, location=LOCATION, marker=MARKER)
 
     message = str(refusal.value)
     assert LOCATION in message
-    assert "synthetic.json" in message
+    assert MARKER in message
     assert words in message
 
 
@@ -65,10 +66,13 @@ def test_refusal_is_an_invalid_input() -> None:
 def test_check_allows_synthetic_data_in_blocked_environment() -> None:
     """Syntetická data projdou i v obou blokujících prostředích."""
     check_data_access(
-        {"CI": "true", "CLAUDECODE": "1"}, synthetic=True, location=LOCATION
+        {"CI": "true", "CLAUDECODE": "1"},
+        synthetic=True,
+        location=LOCATION,
+        marker=MARKER,
     )
 
 
 def test_check_allows_real_data_without_blocking_variable() -> None:
     """Bez blokující proměnné projdou i data bez značky."""
-    check_data_access({}, synthetic=False, location=LOCATION)
+    check_data_access({}, synthetic=False, location=LOCATION, marker=MARKER)
