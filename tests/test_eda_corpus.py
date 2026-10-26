@@ -9,7 +9,7 @@ import pytest
 
 from mediparse.domain.data_access import DataAccessError
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.entrypoints.eda_corpus import corpus_overview
+from mediparse.entrypoints.eda_corpus import MANIFEST_PATH, corpus_overview
 from mediparse.infrastructure.parquet_file import write_string_table
 from tests.eda_support import mark_synthetic
 
@@ -32,7 +32,7 @@ def _fixture(tmp_path: Path, *, agrees: bool) -> dict[str, str]:
             "bytes": 2726465013 if name == "mimic-iv-bhc" else 2500000,
         })
     mark_synthetic(parquet)
-    manifest = tmp_path / "results" / "mimic" / "manifest.json"
+    manifest = tmp_path / MANIFEST_PATH
     manifest.parent.mkdir(parents=True)
     manifest.write_text(json.dumps({"tables": tables}), encoding="utf-8")
     return {
@@ -89,7 +89,7 @@ def test_corpus_overview_uses_guard(tmp_path: Path) -> None:
     """Bez značky syntetiky se nečtou data ani manifest."""
     environ = _fixture(tmp_path, agrees=True)
     (tmp_path / "parquet" / "synthetic.json").unlink()
-    (tmp_path / "results" / "mimic" / "manifest.json").unlink()
+    (tmp_path / MANIFEST_PATH).unlink()
     with pytest.raises(DataAccessError):
         corpus_overview(environ)
 
