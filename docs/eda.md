@@ -121,6 +121,12 @@ specifikace Python a R exportu včetně provenance. Vznikly původním R exporte
 pytest i testthat ověřují stejné bajty. R implementace i její golden test zůstanou
 do S20h12. Parita zahrnuje padding markdownu, NBSP a prázdné tabulky bez `\midrule`.
 
+Parita je omezena na vstupy používané v sešitech: ochrana `{}` před `[` v kable
+používá `\s` podle locale (TRE), první hlavičku ze samých mezer kable měří jako
+prázdnou a šířku markdownu měří bez URL odkazů (`remove_urls`) přes
+`nchar(type = "width")`, zatímco Python používá `len`. Žádná z těchto odlišností
+v sešitech nenastává; obecnější napodobení by přidalo pravidla bez využití.
+
 ## Provenance
 
 Každý dokument končí přílohou s commitem, příznakem dirty, otiskem `pixi.lock`, zdrojem dat (otisky CSV z `config/mimic_tables.json`, u syntetiky prefix) a verzemi Pythonu, DuckDB a v sešitech na knitru také R. Skládá ji `mediparse.entrypoints.eda_provenance`. Při syntetickém renderu se commit předává proměnnými `MEDIPARSE_COMMIT` a `MEDIPARSE_DIRTY`, protože kopie v dočasném adresáři není repozitář git.

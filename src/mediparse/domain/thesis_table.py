@@ -11,6 +11,7 @@ from mediparse.domain.dua import OTHER_LABEL
 from mediparse.domain.inputs import InvalidInputError
 
 TABLE_LABEL: Final = re.compile(r"^tbl-[a-z0-9-]+$")
+KABLE_WHITESPACE: Final = re.compile(r"^\s+|(?<!\\)\s+$", re.ASCII)
 LATEX_SPECIALS: Final = {
     "\\": r"\textbackslash{}",
     "&": r"\&",
@@ -117,9 +118,13 @@ def _latex_cells(table: ThesisTable, row: tuple[str, ...]) -> tuple[str, ...]:
         text = latex_escape(raw)
         if header in table.code and raw != OTHER_LABEL:
             text = f"\\texttt{{{text}}}"
-        # R trimws ořezává jen ASCII whitespace; str.strip() by odstranil i NBSP.
-        cells.append(text.strip(" \t\r\n"))
+        cells.append(_trim_cell(text))
     return tuple(cells)
+
+
+def _trim_cell(text: str) -> str:
+    # Kable ořezává PCRE \s (ASCII včetně \v a \f), koncovou mezeru za \ nechá; NBSP je obsah.
+    return KABLE_WHITESPACE.sub("", text)
 
 
 def latex_tabular(table: ThesisTable) -> str:
@@ -150,8 +155,7 @@ def _markdown_cells(table: ThesisTable, row: tuple[str, ...]) -> tuple[str, ...]
     cells = []
     for header, raw in zip(table.header, row, strict=True):
         text = f"`{raw}`" if header in table.code and raw != OTHER_LABEL else raw
-        # Stejný ořez jako kable: NBSP je obsah, hlavička se neořezává.
-        cells.append(text.strip(" \t\r\n").replace("|", "&#124;"))
+        cells.append(_trim_cell(text).replace("|", "&#124;"))
     return tuple(cells)
 
 
