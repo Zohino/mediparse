@@ -135,7 +135,7 @@ def synthetic_discharge(
 def _bhc_target(parts: list[_Part], cut: _Cut) -> str:
     """Složí target BHC z částí, které generátor vytvořil.
 
-    Target se neodvozuje z ``split_sections``: sešit 9 parser proti targetu ověřuje, takže by
+    Target se neodvozuje z ``split_sections``: sešit 9 parser proti targetu ověřuje, takže
     by se z konstrukce vždy sešel a chyba parseru by zůstala skrytá. Text úseku má sloučené bílé
     znaky jako po čištění datasetu MIMIC-IV-Ext-BHC.
 
