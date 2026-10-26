@@ -12,6 +12,7 @@
 !config/verbalization_template.md
 !resources/synthetic/
 !resources/icd/
+!results/mimic/manifest.json
 !translation/note_parts.py
 !translation/markers.py
 !translation/collect.py

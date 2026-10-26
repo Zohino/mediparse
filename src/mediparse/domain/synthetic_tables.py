@@ -11,12 +11,17 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.dua import MIN_CELL
 from mediparse.domain.icd import IcdVersion
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.synthetic_discharge import (
+    require_bhc_layout,
+    synthetic_discharge,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Callable
 
     from mediparse.domain.icd import DiagnosisCodes
     from mediparse.domain.mimic_table import TableShape
+    from mediparse.domain.section_headers import SectionLexicon
 
 TEXT_COLUMN: Final = "text"
 
@@ -75,6 +80,11 @@ _KEY_OWNERS: Final = {"subject_id": "patients", "hadm_id": "admissions"}
 # note_id je v každé tabulce zpráv vlastní (propouštěcí a radiologické se v MIMIC nepotkají),
 # jen MIMIC-IV-Ext-BHC odkazuje na propouštěcí zprávu.
 _REFERENCES: Final = {("mimic-iv-bhc", "note_id"): "discharge"}
+# Text zprávy a její target BHC vznikají spolu z jedné struktury částí (domain/synthetic_discharge).
+_NOTE_COLUMNS: Final = frozenset({
+    ("discharge", TEXT_COLUMN),
+    ("mimic-iv-bhc", "target"),
+})
 
 
 @dataclass(frozen=True)
@@ -86,6 +96,7 @@ class SyntheticRun:
         rows: Počet řádků každé tabulky.
         text_chars: Nejmenší délka textu, aby zpráva prošla filtrem délky vstupního korpusu.
         codes: Předpony pětice; kódy bloků se berou z nich.
+        lexicon: Lexikon sekcí, podle kterého se skládá text zprávy.
         block_codes: Kód každého bloku, první předpona diagnózy bloku v jeho verzi.
     """
 
@@ -93,14 +104,15 @@ class SyntheticRun:
     rows: int
     text_chars: int
     codes: DiagnosisCodes
+    lexicon: SectionLexicon
     block_codes: tuple[str, ...] = field(init=False)
 
     def __post_init__(self) -> None:
         """Ověří prefix, počet řádků a předpony diagnóz bloků.
 
         Raises:
-            InvalidInputError: Prefix je prázdný, počet řádků není kladný nebo diagnóza
-                bloku nemá předponu v jeho verzi ICD.
+            InvalidInputError: Prefix je prázdný, počet řádků není kladný, diagnóza
+                bloku nemá předponu v jeho verzi ICD nebo lexikon nemá rozvržení kolem BHC.
         """
         if not self.prefix:
             msg = "Prefix syntetických buněk nesmí být prázdný."
@@ -110,6 +122,7 @@ class SyntheticRun:
                 f"Syntetická tabulka potřebuje aspoň jeden řádek, ne {self.rows} řádků."
             )
             raise InvalidInputError(msg)
+        require_bhc_layout(self.lexicon)
         object.__setattr__(
             self,
             "block_codes",
@@ -139,7 +152,8 @@ def synthetic_rows(
     nalezitelný hledáním prefixu. Typové sloupce nesou slovník MIMIC po blocích
     (``_typed_value``); hodnota bez prefixu v nich sdílí aspoň ``MIN_CELL`` řádků, když je
     řádků aspoň ``BLOCKS * MIN_CELL``. Sloupec ``text`` za buňkou opakuje token zprávy,
-    dokud nemá aspoň ``run.text_chars`` znaků (viz ``_text_token``).
+    dokud nemá aspoň ``run.text_chars`` znaků (viz ``_text_token``). Text propouštěcí zprávy
+    bloku a target BHC jdou ze ``synthetic_discharge``.
 
     Args:
         table: Jméno tabulky bez přípony.
@@ -158,6 +172,7 @@ def synthetic_rows(
     return [
         {
             column: _typed_value(table, column, row, run)
+            or _note_value(table, column, row, run)
             or _cell(table, column, run.prefix, row, run.text_chars)
             for column in shape.columns
         }
@@ -176,11 +191,39 @@ def _typed_value(table: str, column: str, row: int, run: SyntheticRun) -> str | 
         return _dictionary_value(column, row, run)
     if row >= BLOCKS * MIN_CELL and key in _RARE_WITNESSES:
         return None
-    block = (row // MIN_CELL) % BLOCKS
+    # Vzácný řádek mimo svědky bere hodnoty bloku 0.
+    block = _block_of(row) or 0
     if key in _DERIVED:
         return _DERIVED[key](block, run)
     values = _BLOCK_VALUES.get(key)
     return values[block] if values else None
+
+
+def _block_of(row: int) -> int | None:
+    """Vrátí blok řádku, nebo None pro vzácný řádek.
+
+    Returns:
+        Číslo bloku, u vzácných řádků None.
+    """
+    if row >= BLOCKS * MIN_CELL:
+        return None
+    return row // MIN_CELL
+
+
+def _note_value(table: str, column: str, row: int, run: SyntheticRun) -> str | None:
+    """Vrátí text zprávy nebo target BHC řádku v bloku, jinak None (platí buňka s prefixem).
+
+    Returns:
+        Text zprávy, target BHC, nebo None pro jiný sloupec a pro vzácný řádek.
+    """
+    block = _block_of(row)
+    if (table, column) not in _NOTE_COLUMNS or block is None:
+        return None
+    # První řádek zprávy je tentýž text jako u vzácných řádků a radiologie, takže délku
+    # text_chars splňuje každá zpráva bez ohledu na lexikon.
+    head = _cell("discharge", TEXT_COLUMN, run.prefix, row, run.text_chars)
+    note = synthetic_discharge(head, _text_token(run.prefix, row), run.lexicon, block)
+    return note.text if column == TEXT_COLUMN else note.bhc_target
 
 
 def _dictionary_value(column: str, row: int, run: SyntheticRun) -> str | None:
@@ -194,6 +237,16 @@ def _dictionary_value(column: str, row: int, run: SyntheticRun) -> str | None:
         "long_title": f"{diagnosis.value} ICD-{version.value}",
     }
     return values.get(column)
+
+
+def _cell(table: str, column: str, prefix: str, row: int, text_chars: int) -> str:
+    owner = _REFERENCES.get((table, column)) or _KEY_OWNERS.get(column, table)
+    cell = f"{prefix}-{owner}-{column}-{row}"
+    if column != TEXT_COLUMN:
+        return cell
+    token = _text_token(prefix, row)
+    copies = max(1, math.ceil((text_chars - len(cell)) / (len(token) + 1)))
+    return " ".join([cell, *[token] * copies])
 
 
 def _text_token(prefix: str, row: int) -> str:
@@ -210,16 +263,6 @@ def _text_token(prefix: str, row: int) -> str:
     """
     stem = "".join(character for character in prefix if character.isalpha())
     return stem + _letters(row)
-
-
-def _cell(table: str, column: str, prefix: str, row: int, text_chars: int) -> str:
-    owner = _REFERENCES.get((table, column)) or _KEY_OWNERS.get(column, table)
-    cell = f"{prefix}-{owner}-{column}-{row}"
-    if column != TEXT_COLUMN:
-        return cell
-    token = _text_token(prefix, row)
-    copies = max(1, math.ceil((text_chars - len(cell)) / (len(token) + 1)))
-    return " ".join([cell, *[token] * copies])
 
 
 def _letters(number: int) -> str:
