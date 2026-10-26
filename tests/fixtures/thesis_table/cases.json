@@ -1,0 +1,244 @@
+[
+  {
+    "name": "kody-dua",
+    "header": [
+      "Tabulka",
+      "Popis",
+      "Záznamů"
+    ],
+    "rows": [
+      [
+        "diagnoses_icd",
+        "a & b 100%",
+        "1 234"
+      ],
+      [
+        "ostatní (n < 10)",
+        "x",
+        "5"
+      ]
+    ],
+    "align": "llr",
+    "widths": [],
+    "code": [
+      "Tabulka"
+    ]
+  },
+  {
+    "name": "sirky",
+    "header": [
+      "Tabulka",
+      "Popis",
+      "Záznamů"
+    ],
+    "rows": [
+      [
+        "diagnoses_icd",
+        "a & b 100%",
+        "1 234"
+      ],
+      [
+        "ostatní (n < 10)",
+        "x",
+        "5"
+      ]
+    ],
+    "align": "llr",
+    "widths": [
+      22,
+      60,
+      18
+    ],
+    "code": [
+      "Tabulka"
+    ]
+  },
+  {
+    "name": "cela-sirka",
+    "header": [
+      "A"
+    ],
+    "rows": [
+      [
+        "x"
+      ]
+    ],
+    "align": "c",
+    "widths": [
+      100
+    ],
+    "code": []
+  },
+  {
+    "name": "zlomky",
+    "header": [
+      "A",
+      "B"
+    ],
+    "rows": [
+      [
+        "x",
+        "y"
+      ]
+    ],
+    "align": "lr",
+    "widths": [
+      12.5,
+      87.5
+    ],
+    "code": []
+  },
+  {
+    "name": "prazdna",
+    "header": [
+      "Kód",
+      "Název"
+    ],
+    "rows": [],
+    "align": "lc",
+    "widths": [
+      12,
+      88
+    ],
+    "code": []
+  },
+  {
+    "name": "prazdna-bez-sirek",
+    "header": [
+      "Kód",
+      "Název"
+    ],
+    "rows": [],
+    "align": "lc",
+    "widths": [],
+    "code": []
+  },
+  {
+    "name": "specialni",
+    "header": [
+      "Sloupec_1 #",
+      "Počet $",
+      "Vzor <a>"
+    ],
+    "rows": [
+      [
+        "x_y & 5%",
+        "~^\\{}",
+        "___"
+      ],
+      [
+        "[**…**]",
+        "<…>",
+        "a|b"
+      ]
+    ],
+    "align": "lrc",
+    "widths": [],
+    "code": [
+      "Vzor <a>"
+    ]
+  },
+  {
+    "name": "mezery",
+    "header": [
+      " A ",
+      "B"
+    ],
+    "rows": [
+      [
+        " x ",
+        "1"
+      ],
+      [
+        "",
+        "22"
+      ],
+      [
+        " y",
+        "333"
+      ]
+    ],
+    "align": "lr",
+    "widths": [],
+    "code": []
+  },
+  {
+    "name": "sedm-radku",
+    "header": [
+      "A"
+    ],
+    "rows": [
+      [
+        "a"
+      ],
+      [
+        "b"
+      ],
+      [
+        "c"
+      ],
+      [
+        "d"
+      ],
+      [
+        "e"
+      ],
+      [
+        "f"
+      ],
+      [
+        "g"
+      ]
+    ],
+    "align": "l",
+    "widths": [],
+    "code": []
+  },
+  {
+    "name": "stred",
+    "header": [
+      "Hlavička"
+    ],
+    "rows": [
+      [
+        "ab"
+      ],
+      [
+        "abcde"
+      ],
+      [
+        "c"
+      ]
+    ],
+    "align": "c",
+    "widths": [],
+    "code": []
+  },
+  {
+    "name": "okraje",
+    "header": [
+      " [A",
+      "A|B",
+      "C"
+    ],
+    "rows": [
+      [
+        "\tx\t",
+        "\u000bx\f",
+        "a\\ "
+      ],
+      [
+        " x ",
+        " x ",
+        "x"
+      ]
+    ],
+    "align": "lcr",
+    "widths": [
+      33.333333333333336,
+      33.333333333333336,
+      33.333333333333336
+    ],
+    "code": []
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "dirty": "true",
+  "pixi_lock_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "data_source": "syntetické tabulky (prefix canary)",
+  "csv_sha256 discharge.csv.gz": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "csv_sha256 mimic-iv-bhc.csv": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  "python": "3.13.9",
+  "duckdb": "1.4.1",
+  "jiny": "neznámý údaj"
+}

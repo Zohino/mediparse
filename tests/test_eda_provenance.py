@@ -8,9 +8,16 @@ import platform
 from importlib.metadata import version
 from typing import TYPE_CHECKING, Final
 
-from mediparse.entrypoints.eda_provenance import provenance
+import pytest
+
+from mediparse.domain import eda_provenance
+from mediparse.domain.eda_provenance import provenance_rows
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.entrypoints.eda_provenance import appendix, provenance
 from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
+from mediparse.infrastructure.thesis_table_format import latex_tabular, table_markdown
 from tests.git_support import git_output, init_repo, needs_git
+from tests.thesis_table_support import FIXTURES
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -107,3 +114,77 @@ def test_versions_of_python_and_duckdb(tmp_path: Path) -> None:
 
     assert result["python"] == platform.python_version()
     assert result["duckdb"] == version("duckdb")
+
+
+def test_provenance_table_matches_r_golden() -> None:
+    """České popisky a rozdělení otisků dávají stejný LaTeX jako R příloha."""
+    details = json.loads((FIXTURES / "provenance.json").read_text(encoding="utf-8"))
+    table = eda_provenance.provenance_table(details)
+    assert (latex_tabular(table) + "\n").encode() == (
+        FIXTURES / "provenance.tex"
+    ).read_bytes()
+
+
+@pytest.mark.parametrize(("dirty", "expected"), [("true", "ano"), ("false", "ne")])
+def test_provenance_dirty_is_czech(dirty: str, expected: str) -> None:
+    """Příznak dirty se překládá na ano nebo ne."""
+    assert provenance_rows({"dirty": dirty}) == (("Necommitnuté změny", expected),)
+
+
+@pytest.mark.parametrize(
+    ("value", "expected"),
+    [
+        ("a" * 64, " ".join(["a" * 16] * 4)),
+        ("a" * 40, "a" * 40),
+        ("A" * 64, "A" * 64),
+    ],
+)
+def test_provenance_digest_groups(value: str, expected: str) -> None:
+    """Pouze 64 malých hexadecimálních znaků se dělí po šestnácti."""
+    assert provenance_rows({"jiny": value}) == (("jiny", expected),)
+
+
+def test_provenance_keeps_key_order_and_knows_r() -> None:
+    """Popisky včetně R a neznámých klíčů zachovávají pořadí vstupu."""
+    assert provenance_rows({"r": "4.5", "jiny": "hodnota", "commit": SHA}) == (
+        ("R", "4.5"),
+        ("jiny", "hodnota"),
+        ("Revize kódu (commit)", SHA),
+    )
+
+
+def test_python_appendix_exports_provenance(tmp_path: Path) -> None:
+    """Python příloha uloží tabulku a vrátí markdown s popiskem, id a šířkami."""
+    root = _root(tmp_path)
+    parquet = _parquet(tmp_path)
+    write_marker(parquet, SyntheticMarker(prefix="canary", rows=12))
+    environ = {
+        **ENVIRONMENT,
+        "PIXI_PROJECT_ROOT": str(root),
+        "MEDIPARSE_PARQUET": str(parquet),
+        "QUARTO_DOCUMENT_PATH": str(root / "eda"),
+        "QUARTO_DOCUMENT_FILE": "1-dataset.qmd",
+    }
+    result = appendix(environ)
+    table = eda_provenance.provenance_table(provenance(environ, root, parquet))
+    destination = root / "results" / "eda" / "1-dataset" / "tbl-provenance.tex"
+    assert destination.read_bytes() == (latex_tabular(table) + "\n").encode()
+    assert result.text == table_markdown(
+        table, label="tbl-provenance", caption="Provenance renderu."
+    )
+    assert '{#tbl-provenance tbl-colwidths="[28,72]"}' in result.text
+    assert "syntetické tabulky (prefix canary)" in result.text
+    assert "|R " not in result.text
+
+
+@pytest.mark.parametrize(
+    "environ",
+    [
+        {"MEDIPARSE_PARQUET": "parquet"},
+        {"PIXI_PROJECT_ROOT": "", "MEDIPARSE_PARQUET": "parquet"},
+    ],
+)
+def test_python_appendix_requires_project_root(environ: dict[str, str]) -> None:
+    """Příloha nepokračuje bez explicitního kořene projektu ani při zadaném parquetu."""
+    with pytest.raises(InvalidInputError, match="PIXI_PROJECT_ROOT"):
+        appendix(environ)

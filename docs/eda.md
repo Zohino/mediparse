@@ -2,11 +2,11 @@
 
 Průzkum dat žije v Quarto projektu `eda/`: jeden dokument `eda/<n>-*.qmd` na sešit. R vede dokument (statistiky, tabulky, inline `` `r …` ``), Python běží v blocích přes reticulate ze stejného prostředí pixi `eda`. Obě strany dotazují parquet přes DuckDB. Dokumenty slouží hodnotiteli a zároveň jako podklad rozhodnutí pro pipeline.
 
-Příloha s provenance a seznam literatury jsou ve sdíleném `eda/_partials/appendix.qmd`, který sešity vkládají přes `{{< include _partials/appendix.qmd >}}`. Podadresář s podtržítkem nepočítá CI ani `eda_render` a `quarto render eda` ho přeskočí. Změna partialu mění všechny sešity, proto vyžaduje nový reálný render každého z nich.
+Příloha s provenance a seznam literatury jsou pro sešity na knitru ve sdíleném `eda/_partials/appendix.qmd`, který sešity vkládají přes `{{< include _partials/appendix.qmd >}}`. Podadresář s podtržítkem nepočítá CI ani `eda_render` a `quarto render eda` ho přeskočí. Změna partialu mění všechny sešity, které jej vkládají, proto vyžaduje nový reálný render každého z nich. Pro sešity na jupyteru je připravený samostatný `eda/_partials/appendix-python.qmd` se stejným nadpisem a literaturou; vloží se přes `{{< include _partials/appendix-python.qmd >}}`.
 
 ## Forma dokumentů
 
-Dokumenty mají akademickou formu: abstrakt, číslované kapitoly, obsah, číslované tabulky s titulkem (`#| label: tbl-…`, odkaz `@tbl-…`), citace `[@klíč]` z `eda/references.bib` a seznam literatury. Sdílená metadata (autor, bibliografie, obsah, číslování, A4) jsou v `eda/_quarto.yml`. Citace zpracovává citeproc (styl autor–rok), protože Typst v Quartu 1.9 nadepisuje vlastní bibliografii „Bibliografie“; kapitola „Literatura“ je proto v dokumentu ručně. Počty a podíly v tabulkách formátují `number_text`, `percent_text` a `share_table` z `eda/R/dua.R`, rozměry tabulek z veřejného manifestu validace se vkládají jako text.
+Dokumenty mají akademickou formu: abstrakt, číslované kapitoly, obsah, číslované tabulky s titulkem (v R `#| label: tbl-…`, v Pythonu argument `label` exportéru; odkaz `@tbl-…`), citace `[@klíč]` z `eda/references.bib` a seznam literatury. Sdílená metadata (autor, bibliografie, obsah, číslování, A4) jsou v `eda/_quarto.yml`. Citace zpracovává citeproc (styl autor–rok), protože Typst v Quartu 1.9 nadepisuje vlastní bibliografii „Bibliografie“; kapitola „Literatura“ je proto v dokumentu ručně. Počty a podíly v tabulkách formátují `number_text`, `percent_text` a `share_table` z `eda/R/dua.R`, rozměry tabulek z veřejného manifestu validace se vkládají jako text.
 
 ## Rendery
 
@@ -60,7 +60,7 @@ Kanárek čte i exporty: `.tex` fragmenty hledá `grep` nad `results/`, text gra
 
 ## Exporty pro text práce
 
-Každý graf a každá tabulka sešitu se ukládá i pro LaTeX do `results/eda/<sešit>/`. Text práce je odkazuje přes `../results/eda/` (`\graphicspath`, `\input`) a nekopíruje je. Soubor se jmenuje podle labelu chunku (`tbl-korpus.tex`, `fig-….pdf`); label musí odpovídat `^[a-z0-9-]+$`. `\caption`, `\label` a float píše text práce.
+Každý graf a každá tabulka sešitu se ukládá i pro LaTeX do `results/eda/<sešit>/`. Text práce je odkazuje přes `../results/eda/` (`\graphicspath`, `\input`) a nekopíruje je. V R se soubor jmenuje podle labelu chunku (`tbl-korpus.tex`, `fig-….pdf`); label musí odpovídat `^[a-z0-9-]+$`. V Pythonu název tabulky určuje argument `label` exportéru (viz níže). `\caption`, `\label` a float píše text práce.
 
 - `export_table(df, col.names, align, code = character())` (`eda/R/export.R`) zapíše fragment `tabular` s `booktabs` bez floatu a vrátí `knitr::kable` ze stejného data.frame pro Typst, chunk tedy volá jen tuto funkci. Šířky sloupců bere z `#| tbl-colwidths` chunku a sloupec se šířkou sází jako `p{\dimexpr w\linewidth-2\tabcolsep\relax}`; bez nich zůstane prosté `l/c/r`. Sloupce v `code` se v Typstu obalí backticky, v LaTeXu `\texttt{}`. Tabulky se exportují všechny, včetně provenance.
 - `export_json(x, label, dir)` (`eda/R/export.R`) zapíše strojově čitelný export `<label>.json` vedle tabulek (`check_label`, `jsonlite::write_json` s `auto_unbox`, `digits = NA` a `na = "null"`); pole, která mají zůstat polem i s jedním nebo žádným prvkem, se obalují `I()`. Sešit 8 jím v chunku `parametry-syntetiky` zapisuje `results/eda/8-mentions/parametry-syntetiky.json`: `selection` (pětice v pořadí `config/diagnosis_candidates.json`), `prevalence`, matici `conditional` a `mentions.<k>.given_positive|given_negative|keywords` po potlačení, podíly na 4 desetinná místa, potlačená hodnota je `null`, výběr „nelze“ dá prázdnou `selection` a prázdné objekty (`synthetic_parameters` v `eda/R/mentions.R`). Export čte příkaz `mediparse-synthetic-parameters` (pixi task `synthetic-parameters`), který ho převezme do `config/synthetic_plan.json`.
@@ -68,6 +68,67 @@ Každý graf a každá tabulka sešitu se ukládá i pro LaTeX do `results/eda/<
 - Písmo Libertinus Serif musí být v systému (Fedora `libertinus-fonts`, Debian `fonts-libertinus`); conda-forge ho nemá a Ubuntu ho samostatně nebalí. Jinde ho `scripts/install-libertinus.sh` stáhne z vydání Libertinus 7.051 na GitHubu, ověří otisk SHA-256 a rozbalí řez Serif do `~/.local/share/fonts`, kde ho najde fontconfig z prostředí pixi. Tak ho instaluje i CI. `export_figure` přes `pdffonts` ověří, že ho PDF vložilo, protože cairo jinak tiše dosadí jiné.
 - Exporty jdou ze stejného objektu jako sešit, po potlačení tam, kde ho pravidlo vyžaduje. Render z freeze exporty nepřepisuje ani nemaže: commitnuté `results/eda/<sešit>/` jsou výsledek posledního reálného renderu. Změna `.qmd` proto vyžaduje nový `pixi run eda <n>` a commit freeze i exportů, jinak CI krok „render z freeze“ spadne.
 
+### Tabulky v Pythonu (engine jupyter)
+
+Sešit si jednou vytvoří exportér přes entrypoint:
+
+```python
+import os
+
+from mediparse.entrypoints import eda_export
+
+export = eda_export.export(os.environ)
+```
+
+Tabulková buňka vrací posledním výrazem výsledek jediného volání:
+
+```python
+export.table(
+    [("diagnoses_icd", "1\u00a0234")],
+    header=("Tabulka", "Záznamů"),
+    align="lr",
+    code=("Tabulka",),
+    label="tbl-korpus",
+    caption="Přehled korpusu.",
+    widths=(70, 30),
+)
+```
+
+Buňka nemá `#| label`, `#| tbl-cap` ani `#| tbl-colwidths`. Label, popisek a šířky
+se zadávají jen v tomto volání. Exportér zapíše `<label>.tex` a vrátí objekt
+s protokolem `_repr_markdown_()`. Jupyter jej zobrazí jako pipe tabulku zakončenou
+řádkem `: Přehled korpusu. {#tbl-korpus tbl-colwidths="[70,30]"}`. Quarto z něj
+převezme id pro křížové odkazy, popisek i šířky; další id buňky by bylo duplicitní.
+Bez `widths` se atribut vynechá a LaTeX použije prosté sloupce `l/c/r`.
+
+Label musí odpovídat `^tbl-[a-z0-9-]+$`, popisek musí být neprázdný na jednom řádku.
+Hlavička a všechny buňky smějí obsahovat jen `str` bez konců řádku. Čísla nejprve
+naformátuje volající; exportér nepřevádí `None` ani číselné typy na text.
+`code` jmenuje sloupce podle hlavičky, v LaTeXu je obalí `\texttt{}` a v markdownu
+backticky. Popisek sloučených kategorií `ostatní (n < 10)` zůstává prostým textem.
+
+Adresář se odvodí z prostředí Quarta jako
+`<rodič QUARTO_DOCUMENT_PATH>/results/eda/<kmen QUARTO_DOCUMENT_FILE>`.
+Chybějící nebo prázdná proměnná vyvolá chybu. Adresář vznikne až po validaci celé
+tabulky, labelu a popisku; opakovaný export stejného labelu přepíše soubor.
+
+Inline text se v jupyteru vrací jako `` `{python} Markdown(s)` `` s importem
+`from IPython.display import Markdown` v sešitu. Samotný `str` se vypíše jako repr
+s uvozovkami a escape sekvencemi, například `\xa0` místo nedělitelné mezery.
+
+Golden soubory v `tests/fixtures/thesis_table/` jsou společná spustitelná
+specifikace Python a R exportu včetně provenance. Vznikly původním R exportem;
+pytest i testthat ověřují stejné bajty. R implementace i její golden test zůstanou
+do konce migrace z R. Parita zahrnuje padding markdownu, NBSP a prázdné tabulky bez `\midrule`.
+
+Parita je omezena na vstupy používané v sešitech: ochrana `{}` před `[` v kable
+používá `\s` podle locale (TRE), první hlavičku ze samých mezer kable měří jako
+prázdnou a šířku markdownu měří bez URL odkazů (`remove_urls`) přes
+`nchar(type = "width")`, zatímco Python používá `len`. Žádná z těchto odlišností
+v sešitech nenastává; obecnější napodobení by přidalo pravidla bez využití.
+
 ## Provenance
 
-Každý dokument končí přílohou s commitem, příznakem dirty, otiskem `pixi.lock`, zdrojem dat (otisky CSV z `config/mimic_tables.json`, u syntetiky prefix) a verzemi Pythonu, DuckDB a R. Skládá ji `mediparse.entrypoints.eda_provenance`. Při syntetickém renderu se commit předává proměnnými `MEDIPARSE_COMMIT` a `MEDIPARSE_DIRTY`, protože kopie v dočasném adresáři není repozitář git.
+Každý dokument končí přílohou s commitem, příznakem dirty, otiskem `pixi.lock`, zdrojem dat (otisky CSV z `config/mimic_tables.json`, u syntetiky prefix) a verzemi Pythonu, DuckDB a v sešitech na knitru také R. Skládá ji `mediparse.entrypoints.eda_provenance`. Při syntetickém renderu se commit předává proměnnými `MEDIPARSE_COMMIT` a `MEDIPARSE_DIRTY`, protože kopie v dočasném adresáři není repozitář git.
+
+Přílohu na jupyteru sestaví `mediparse.entrypoints.eda_provenance.appendix(os.environ)` a exportuje ji jako `tbl-provenance` s popiskem „Provenance renderu.“ a šířkami 28/72. Klíč `r` obsahuje jen R příloha, protože v sešitu na jupyteru R neběží; mapa českých popisků jej zná kvůli paritě s R.
