@@ -25,8 +25,10 @@ from mediparse.domain.synthetic_tables import (
     SyntheticRun,
     synthetic_rows,
 )
+from mediparse.infrastructure.mimic_inventory import read_manifest
 from tests.cohort_support import CODES, PREFIXES
 from tests.section_support import REPOSITORY_LEXICON
+from tests.support import REPOSITORY_MIMIC_MANIFEST
 
 ROWS: Final = 12
 TEXT_CHARS: Final = 100
@@ -34,25 +36,8 @@ SHAPE = TableShape(records=5, columns=("note_id", "subject_id", "text"))
 NOTE_SHAPE = TableShape(records=5, columns=("note_id", "subject_id", "hadm_id", "text"))
 PREFIX: Final = "eda-sentinel"
 COLUMNS: Final = {
-    "patients": (
-        "subject_id",
-        "gender",
-        "anchor_age",
-        "anchor_year",
-        "anchor_year_group",
-        "dod",
-    ),
-    "admissions": (
-        "hadm_id",
-        "admittime",
-        "admission_type",
-        "insurance",
-        "marital_status",
-        "race",
-        "language",
-    ),
-    "diagnoses_icd": ("subject_id", "hadm_id", "seq_num", "icd_code", "icd_version"),
-    "d_icd_diagnoses": ("icd_code", "icd_version", "long_title"),
+    table: shape.columns
+    for table, shape in read_manifest(REPOSITORY_MIMIC_MANIFEST).items()
 }
 BLOCK_DIAGNOSES: Final = (Diagnosis.DIABETES, Diagnosis.COPD)
 BLOCK_VERSIONS: Final = (
@@ -84,6 +69,16 @@ WITNESSES: Final = {
     ("diagnoses_icd", "icd_code"),
 }
 TYPED_TABLES: Final = ("patients", "admissions", "diagnoses_icd")
+
+
+def test_typed_keys_exist_in_the_public_manifest() -> None:
+    """Typové klíče (tabulka, sloupec) z testu existují ve veřejném manifestu, překlep nebo přejmenování test shodí."""
+    keys = set(EXPECTED) | WITNESSES
+
+    missing = {(t, c) for t, c in keys if c not in COLUMNS.get(t, ())}
+
+    assert missing == set()
+    assert {table for table, _ in keys} <= set(TYPED_TABLES)
 
 
 def _run(prefix: str, rows: int, codes: DiagnosisCodes = CODES) -> SyntheticRun:
