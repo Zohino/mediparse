@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from enum import Enum, auto
 from string import ascii_lowercase
 from typing import TYPE_CHECKING, Final
 
@@ -38,10 +39,20 @@ class SyntheticDischarge:
     bhc_target: str | None
 
 
+class _Cut(Enum):
+    """Kde končí target BHC vzhledem k textu zprávy."""
+
+    BODY = auto()
+    THROUGH_NEXT_SECTION = auto()
+    FIRST_LINE = auto()
+    INTO_NEXT_SECTION = auto()
+
+
 @dataclass(frozen=True)
 class _Variant:
     """Rozdíl mezi bloky: co se do textu přidá nebo vynechá a kde končí target BHC."""
 
+    cut: _Cut
     skips_section_after_bhc: bool = False
     repeats_diagnostic_header: bool = False
 
@@ -58,10 +69,10 @@ class _Part:
 # Blok se na variantu mapuje modulo, aby každá varianta měla aspoň MIN_CELL zpráv
 # i při jiném počtu bloků, než jaký tabulky dnes mají.
 _VARIANTS: Final = (
-    _Variant(),
-    _Variant(),
-    _Variant(repeats_diagnostic_header=True),
-    _Variant(skips_section_after_bhc=True),
+    _Variant(_Cut.BODY),
+    _Variant(_Cut.THROUGH_NEXT_SECTION),
+    _Variant(_Cut.FIRST_LINE, repeats_diagnostic_header=True),
+    _Variant(_Cut.INTO_NEXT_SECTION, skips_section_after_bhc=True),
 )
 
 
@@ -117,7 +128,29 @@ def synthetic_discharge(
     parts = _parts(lexicon, block, text_token(prefix, row), variant)
     preamble = [f"{field}: {DEID}" for field in lexicon.preamble]
     body = [line for part in parts for line in (part.header, *part.lines, "")]
-    return SyntheticDischarge("\n".join([cell, *preamble, *body]) + "\n", None)
+    text = "\n".join([cell, *preamble, *body]) + "\n"
+    return SyntheticDischarge(text, _bhc_target(parts, variant.cut))
+
+
+def _bhc_target(parts: list[_Part], cut: _Cut) -> str:
+    """Složí target BHC z částí, které generátor vytvořil.
+
+    Target se neodvozuje z ``split_sections``: sešit 9 parser proti targetu ověřuje, takže by
+    se shodoval z konstrukce a chyba parseru by zůstala skrytá. Text úseku má sloučené bílé
+    znaky jako po čištění datasetu MIMIC-IV-Ext-BHC.
+
+    Returns:
+        Text úseku za hlavičkou BHC.
+    """
+    index = next(i for i, part in enumerate(parts) if part.key == BHC_SECTION)
+    bhc, following = parts[index], parts[index + 1]
+    pieces = {
+        _Cut.BODY: bhc.lines,
+        _Cut.THROUGH_NEXT_SECTION: (*bhc.lines, following.header, *following.lines),
+        _Cut.FIRST_LINE: bhc.lines[:1],
+        _Cut.INTO_NEXT_SECTION: (*bhc.lines, following.header, following.lines[0]),
+    }[cut]
+    return " ".join(" ".join(pieces).split())
 
 
 def discharge_cell(prefix: str, row: int) -> str:

@@ -9,7 +9,12 @@ import pytest
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.note_text import DEID
-from mediparse.domain.section_headers import OTHER, SectionLexicon, split_sections
+from mediparse.domain.section_headers import (
+    OTHER,
+    NoteSection,
+    SectionLexicon,
+    split_sections,
+)
 from mediparse.domain.synthetic_discharge import (
     BHC_SECTION,
     SyntheticDischarge,
@@ -186,6 +191,68 @@ def test_rare_row_is_cell_and_token_without_headers() -> None:
     assert len(note.text) >= TEXT_CHARS
     assert note.bhc_target is None
     assert _header_lines(note.text) == []
+
+
+def _flat(text: str) -> str:
+    return " ".join(text.split())
+
+
+def _bhc_and_next(block: int) -> tuple[SyntheticDischarge, NoteSection, NoteSection]:
+    """Zpráva bloku, její sekce BHC a sekce hned za ní podle parseru.
+
+    Returns:
+        Zpráva, BHC a následující sekce v textu.
+    """
+    note = _note(block, block)
+    parts = [p for p in split_sections(note.text, LEXICON) if p.section != OTHER]
+    index = [p.section for p in parts].index(BHC_SECTION)
+    return note, parts[index], parts[index + 1]
+
+
+def test_target_of_variant_zero_is_the_whole_bhc_body() -> None:
+    """Varianta 0: target je celé tělo BHC (shoda)."""
+    note, bhc, _ = _bhc_and_next(0)
+
+    assert note.bhc_target == _flat(bhc.body)
+
+
+def test_target_of_variant_one_continues_through_the_whole_next_section() -> None:
+    """Varianta 1: target je tělo BHC a celá následující sekce (hlavička a tělo)."""
+    note, bhc, following = _bhc_and_next(1)
+
+    assert note.bhc_target is not None
+    assert note.bhc_target.startswith(_flat(bhc.body))
+    assert note.bhc_target == _flat(bhc.body + following.header + following.body)
+
+
+def test_target_of_variant_two_is_a_proper_prefix_of_the_body() -> None:
+    """Varianta 2: target je vlastní prefix těla BHC (konec dřív než sekce)."""
+    note, bhc, _ = _bhc_and_next(2)
+
+    assert note.bhc_target
+    assert _flat(bhc.body).startswith(note.bhc_target)
+    assert note.bhc_target != _flat(bhc.body)
+
+
+def test_target_of_variant_three_runs_into_the_section_after_the_skipped_one() -> None:
+    """Varianta 3: target je tělo BHC, hlavička další sekce a začátek jejího těla, ne celá."""
+    note, bhc, following = _bhc_and_next(3)
+
+    assert following.section == KEYS[BHC_INDEX + 2]
+    assert note.bhc_target is not None
+    assert note.bhc_target.startswith(_flat(bhc.body + following.header))
+    full = _flat(bhc.body + following.header + following.body)
+    assert full.startswith(note.bhc_target)
+    assert len(note.bhc_target) < len(full)
+
+
+@pytest.mark.parametrize("block", range(4))
+def test_target_has_only_single_spaces(block: int) -> None:
+    """Target nemá dvě mezery za sebou ani jiný bílý znak než mezeru (``necisty_target`` = 0)."""
+    target = _note(block, block).bhc_target
+
+    assert target
+    assert re.fullmatch(r"\S+( \S+)*", target)
 
 
 def _lexicon_of(*keys: str) -> SectionLexicon:
