@@ -7,8 +7,9 @@ import logging
 import re
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.cohort import MIN_CELL, CohortManifest, FunnelStepName
+from mediparse.domain.cohort import CohortManifest, FunnelStepName
 from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.dua import MIN_CELL
 from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
@@ -16,10 +17,10 @@ from tests.cohort_support import (
     EXPECTED_FUNNEL,
     EXPECTED_INVALID_CODES,
     EXPECTED_POSITIVES,
-    candidate_prefixes,
     icd,
     note,
     text,
+    write_candidates,
     write_tables,
 )
 from tests.support import REVISION, fixed_revision, missing_revision
@@ -37,11 +38,7 @@ DIAGNOSES_SHA: Final = "2" * 64
 
 
 def _configs(root: Path) -> tuple[Path, Path]:
-    candidates = root / "diagnosis_candidates.json"
-    candidates.write_text(
-        json.dumps({"candidates": candidate_prefixes()}),
-        encoding="utf-8",
-    )
+    candidates = write_candidates(root / "diagnosis_candidates.json")
     tables = root / "mimic_tables.json"
     base = "https://physionet.org/files/mimiciv/3.1/hosp"
     tables.write_text(

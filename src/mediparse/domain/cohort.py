@@ -4,20 +4,19 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import StrEnum
-from typing import TYPE_CHECKING, Final, Self
+from typing import TYPE_CHECKING, Self
 
 from pydantic import BaseModel, ConfigDict, model_validator
 
 from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
 from mediparse.domain.digest import Sha256
+from mediparse.domain.dua import MIN_CELL
 from mediparse.domain.environment import Environment
 from mediparse.domain.icd import DiagnosisCodes, IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping
-
-MIN_CELL: Final = 10
 
 type RawCode = tuple[str | None, str | None]
 
