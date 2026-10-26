@@ -93,26 +93,33 @@ def require_bhc_layout(lexicon: SectionLexicon) -> None:
 
 
 def synthetic_discharge(
-    head: str, token: str, lexicon: SectionLexicon, block: int
+    head: str,
+    token: str,
+    lexicon: SectionLexicon,
+    block: int,
+    mentions: tuple[str, ...] = (),
 ) -> SyntheticDischarge:
     """Složí text zprávy bloku a z téhož textu odvodí target BHC.
 
     Zpráva začíná hotovým prvním řádkem ``head`` (buňka s tokenem, který pro ni složí
     tabulky), pak má pole preambule se značkou ``___`` a všechny sekce lexikonu v jeho
     pořadí. Synonymum hlavičky se mění s blokem a tělo každé sekce nese token zprávy
-    (DF = 1).
+    (DF = 1). Řádky ``mentions`` stojí na konci těla první sekce: ta není BHC ani sekce
+    kolem něj, takže řezy targetu BHC a opakovaná hlavička varianty 2 zůstávají beze změny.
 
     Args:
         head: První řádek zprávy.
         token: Token zprávy ze samých písmen.
         lexicon: Lexikon sekcí z configu.
         block: Blok řádku.
+        mentions: Hotové řádky zmínek klíčových slov, zkratek a příznaků.
 
     Returns:
         Text zprávy a target BHC.
     """
     variant = _VARIANTS[block % len(_VARIANTS)]
     parts = _parts(lexicon, block, token, variant)
+    parts[0] = _Part(parts[0].key, parts[0].header, (*parts[0].lines, *mentions))
     preamble = [f"{field}: {DEID}" for field in lexicon.preamble]
     body = [line for part in parts for line in (part.header, *part.lines, "")]
     text = "\n".join([head, *preamble, *body]) + "\n"
