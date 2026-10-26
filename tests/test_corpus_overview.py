@@ -9,12 +9,12 @@ import pytest
 
 from mediparse.domain import corpus_overview as overview_module
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.mimic_table import TableShape
+from mediparse.domain.mimic_table import TableShape, table_name
+from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_mimic_tables
+from tests.support import REPOSITORY
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
-
-CATALOG_SIZE = 13
 
 
 def _shapes(counts: Mapping[str, int]) -> dict[str, TableShape]:
@@ -112,9 +112,13 @@ def test_unknown_table_is_refused(missing: str) -> None:
 
 
 def test_catalog() -> None:
-    """Katalog přenáší třináct jedinečných tabulek a tři zdroje z R."""
+    """Katalog pojmenovává právě tabulky stahované podle configu, bez duplicit."""
     catalog = overview_module.CATALOG
-    assert len(catalog) == len({entry.table for entry in catalog}) == CATALOG_SIZE
+    names = {entry.table for entry in catalog}
+    assert len(catalog) == len(names)
+    assert names == {
+        table_name(name) for name in load_mimic_tables(REPOSITORY / TABLES_PATH)
+    }
     assert all(entry.description for entry in catalog)
     assert {entry.source for entry in catalog} == {
         "MIMIC-IV (hosp)",
