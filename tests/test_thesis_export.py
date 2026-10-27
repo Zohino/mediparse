@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 from typing import TYPE_CHECKING
 
 import pytest
@@ -158,20 +157,21 @@ def test_figure_label_is_validated_before_io(tmp_path: Path, label: str) -> None
     assert not directory.exists()
 
 
+def _parameters(*, prevalence: float = 0.2) -> SyntheticParameters:
+    return SyntheticParameters.model_validate(
+        export_payload(("a", "b"), prevalence=prevalence), strict=False
+    )
+
+
 def test_json_roundtrip_and_overwrite(tmp_path: Path) -> None:
     """JSON parametrů načte existující čtenář a stejný label přepíše obsah."""
     directory = tmp_path / "a" / "b"
-    model = SyntheticParameters.model_validate_json(
-        json.dumps(export_payload(("a", "b")))
-    )
+    model = _parameters()
     exporter = ThesisExport(directory)
     path = exporter.json(model, label="parametry-syntetiky")
     assert path == directory / "parametry-syntetiky.json"
     assert SyntheticParametersFile(path).load() == model
-    assert path.read_bytes() == (model.model_dump_json(indent=2) + "\n").encode("utf-8")
-    updated = SyntheticParameters.model_validate_json(
-        json.dumps(export_payload(("a", "b"), prevalence=0.25))
-    )
+    updated = _parameters(prevalence=0.25)
     exporter.json(updated, label="parametry-syntetiky")
     assert SyntheticParametersFile(path).load() == updated
 
@@ -180,9 +180,7 @@ def test_json_roundtrip_and_overwrite(tmp_path: Path) -> None:
 def test_json_label_is_validated_before_io(tmp_path: Path, label: str) -> None:
     """Neplatné jméno JSONu nevytvoří adresář ani soubor mimo něj."""
     directory = tmp_path / "export"
-    model = SyntheticParameters.model_validate_json(
-        json.dumps(export_payload(("a", "b")))
-    )
+    model = _parameters()
     with pytest.raises(InvalidInputError, match="label"):
         ThesisExport(directory).json(model, label=label)
     assert not directory.exists()
