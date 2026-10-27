@@ -15,6 +15,7 @@ dependencies = [
     "scikit-learn>=1.9.1",
     "skops>=0.16.0",
     "snakemake>=9.27.0",
+    "matplotlib>=3.11.2",
 ]
 
 [project.scripts]
