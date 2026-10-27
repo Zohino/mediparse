@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import re
+from itertools import combinations
 from pathlib import Path
 
 import matplotlib as mpl
@@ -17,21 +18,25 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure import thesis_figure
 
 TEST_FONT = "DejaVu Serif"
-FONT_SIZE = 10
 PDF_FONT_TYPE = 3
-PALETTE = ("#0072B2", "#E69F00", "#000000", "#F0E442", "#D55E00")
 
 
 def test_figure_dimensions_style_and_legend() -> None:
     """Graf má sazební rozměr, paletu, mřížku a legendu vně vpravo."""
     with thesis_figure.figure(6, font=TEST_FONT) as (figure, axes):
-        lines = [axes.plot([0, 1], [0, i], label=str(i))[0] for i in range(5)]
+        lines = [
+            axes.plot([0, 1], [0, i], label=str(i))[0]
+            for i in range(len(thesis_figure.PALETTE_CATEGORICAL))
+        ]
         axes.set_ylabel("Počet zpráv")
         legend = figure.legend(loc="outside right upper")
         figure.canvas.draw()
-        assert tuple(line.get_color() for line in lines) == PALETTE
+        assert (
+            tuple(line.get_color() for line in lines)
+            == thesis_figure.PALETTE_CATEGORICAL
+        )
         assert axes.yaxis.label.get_fontfamily() == [TEST_FONT]
-        assert axes.yaxis.label.get_fontsize() == FONT_SIZE
+        assert axes.yaxis.label.get_fontsize() == thesis_figure.THESIS_FONT_SIZE
         assert not any(
             axes.spines[side].get_visible() for side in ("top", "right", "left")
         )
@@ -45,7 +50,10 @@ def test_figure_dimensions_style_and_legend() -> None:
         assert mpl.rcParams["pdf.fonttype"] == PDF_FONT_TYPE
         assert mpl.rcParams["savefig.pad_inches"] == 0
         assert mpl.rcParams["axes.formatter.use_locale"] is False
-    assert figure.get_size_inches() * 2.54 == pytest.approx([16.5, 6])
+    assert figure.get_size_inches() * 2.54 == pytest.approx([
+        thesis_figure.THESIS_WIDTH_CM,
+        6,
+    ])
 
 
 def test_figure_restores_style_after_exception() -> None:
@@ -85,7 +93,9 @@ def test_sequential_colormap() -> None:
     """Obrácená viridis vynechá tmavý konec a skryje NA bílou."""
     colormap = thesis_figure.sequential_colormap()
     assert colormap(0.0) == pytest.approx(mpl.colormaps["viridis"](1.0))
-    assert colormap(1.0) == pytest.approx(mpl.colormaps["viridis"](0.45))
+    assert colormap(1.0) == pytest.approx(
+        mpl.colormaps["viridis"](thesis_figure.SEQUENTIAL_BEGIN)
+    )
     masked = np.ma.masked_invalid([0, float("nan"), 1])
     assert colormap(masked)[1] == pytest.approx(to_rgba("white"))
 
@@ -105,7 +115,7 @@ def test_save_pdf_dimensions_fonts_and_style(tmp_path: Path) -> None:
     assert [float(value) for value in box[1].split()] == pytest.approx([
         0,
         0,
-        16.5 / 2.54 * 72,
+        thesis_figure.THESIS_WIDTH_CM / 2.54 * 72,
         6 / 2.54 * 72,
     ])
 
@@ -214,3 +224,38 @@ def test_registration_refreshes_stale_font_manager(
     count = len(manager.ttflist)
     thesis_figure.register_thesis_font(TEST_FONT)
     assert len(manager.ttflist) == count
+
+
+MIN_CATEGORICAL_COLORS = 5
+MIN_LUMA_GAP = 0.12
+OKABE_ITO = frozenset({
+    "#000000",
+    "#E69F00",
+    "#56B4E9",
+    "#009E73",
+    "#F0E442",
+    "#0072B2",
+    "#D55E00",
+    "#CC79A7",
+    "#999999",
+})
+
+
+def _luma(color: str | tuple[float, float, float, float]) -> float:
+    return sum(
+        weight * channel
+        for weight, channel in zip(
+            (0.299, 0.587, 0.114), to_rgba(color)[:3], strict=True
+        )
+    )
+
+
+def test_categorical_palette_is_distinct_in_grayscale() -> None:
+    """Paleta zůstává podmnožinou Okabe-Ito rozlišitelnou i proti bílé v šedi."""
+    palette = thesis_figure.PALETTE_CATEGORICAL
+    assert set(palette) <= OKABE_ITO
+    assert len(palette) >= MIN_CATEGORICAL_COLORS
+    assert all(
+        abs(_luma(first) - _luma(second)) >= MIN_LUMA_GAP
+        for first, second in combinations((*palette, "#FFFFFF"), 2)
+    )

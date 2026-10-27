@@ -23,7 +23,10 @@ if TYPE_CHECKING:
 
     from matplotlib.colors import Colormap
 
+THESIS_WIDTH_CM: Final = 16.5
 THESIS_FONT: Final = "Libertinus Serif"
+THESIS_FONT_SIZE: Final = 10
+SEQUENTIAL_BEGIN: Final = 0.45
 FONT_INSTALLATION: Final = (
     "Nainstalujte Libertinus Serif: Fedora libertinus-fonts, Debian fonts-libertinus, "
     "jinde bash scripts/install-libertinus.sh."
@@ -33,7 +36,7 @@ BASE_FONT: Final = re.compile(rb"/BaseFont /(?:[A-Z]{6}\+)?([A-Za-z0-9-]+)")
 PALETTE_CATEGORICAL: Final = ("#0072B2", "#E69F00", "#000000", "#F0E442", "#D55E00")
 THESIS_STYLE: Final[Mapping[str, object]] = {
     "font.family": THESIS_FONT,
-    "font.size": 10,
+    "font.size": THESIS_FONT_SIZE,
     "axes.prop_cycle": cycler(color=PALETTE_CATEGORICAL),
     "axes.spines.top": False,
     "axes.spines.right": False,
@@ -92,7 +95,7 @@ def figure(  # ruff: ignore[too-many-arguments] - explicitní volby rozvržení 
     """
     register_thesis_font(font)
     with mpl.rc_context(thesis_style(font=font)):
-        plot = Figure(figsize=(16.5 / 2.54, height_cm / 2.54))
+        plot = Figure(figsize=(THESIS_WIDTH_CM / 2.54, height_cm / 2.54))
         # subplots vrací podle rozměrů Axes nebo pole různých tvarů; Any zachovává toto rozhraní.
         yield (
             plot,
@@ -126,7 +129,7 @@ def sequential_colormap() -> Colormap:
     Returns:
         Škála umožňující černé popisky i na nejtmavší buňce.
     """
-    colors = mpl.colormaps["viridis"](np.linspace(0.45, 1, 256))[::-1]
+    colors = mpl.colormaps["viridis"](np.linspace(SEQUENTIAL_BEGIN, 1, 256))[::-1]
     return ListedColormap(colors).with_extremes(bad="white")
 
 
