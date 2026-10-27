@@ -6,6 +6,7 @@ import os
 import re
 from itertools import combinations
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import matplotlib as mpl
 import numpy as np
@@ -16,6 +17,9 @@ from matplotlib.figure import Figure
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure import thesis_figure
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
 
 TEST_FONT = "DejaVu Serif"
 PDF_FONT_TYPE = 3
@@ -230,6 +234,19 @@ def test_shared_subplots_keep_pdf_dimensions(tmp_path: Path) -> None:
     )
 
 
+@pytest.fixture
+def fresh_font_registration() -> Generator[None]:
+    """Izoluje cache registrace od testů s dočasným FontManagerem.
+
+    Yields:
+        Prázdná cache před registrací i po obnovení původního správce písem.
+    """
+    thesis_figure.register_thesis_font.cache_clear()
+    yield
+    thesis_figure.register_thesis_font.cache_clear()
+
+
+@pytest.mark.usefixtures("fresh_font_registration")
 def test_registration_refreshes_stale_font_manager(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -318,3 +335,36 @@ def test_save_pdf_without_text_is_valid(tmp_path: Path) -> None:
     thesis_figure.save_pdf(Figure(), path, font=TEST_FONT)
     assert path.read_bytes().startswith(b"%PDF-")
     assert thesis_figure.embedded_fonts(path.read_bytes()) == frozenset()
+
+
+@pytest.mark.usefixtures("fresh_font_registration")
+def test_registration_skips_broken_fonts_and_caches_family(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Poškozený soubor nezastaví registraci a druhé volání rodinu znovu nehledá."""
+    path = str(Path(mpl.get_data_path()) / "fonts" / "ttf" / "DejaVuSerif.ttf")
+    broken = tmp_path / "broken.ttf"
+    broken.write_bytes(b"not a font")
+    manager = font_manager.FontManager()
+    manager.ttflist = [entry for entry in manager.ttflist if entry.name != TEST_FONT]
+    registered = manager.ttflist[0].fname
+    scans = 0
+
+    def discover() -> list[str]:
+        nonlocal scans
+        scans += 1
+        return [registered, str(broken), path]
+
+    monkeypatch.setattr(font_manager, "fontManager", manager)
+    monkeypatch.setattr(font_manager, "findSystemFonts", discover)
+    thesis_figure.register_thesis_font(TEST_FONT)
+    count = len(manager.ttflist)
+    thesis_figure.register_thesis_font(TEST_FONT)
+    assert scans == 1
+    assert len(manager.ttflist) == count
+    assert (
+        manager.findfont(
+            font_manager.FontProperties(family=TEST_FONT), fallback_to_default=False
+        )
+        == path
+    )

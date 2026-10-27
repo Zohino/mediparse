@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 from contextlib import contextmanager
+from functools import cache
 from typing import TYPE_CHECKING, Any, Final
 
 import matplotlib as mpl
@@ -144,8 +145,18 @@ def _find_font(font: str) -> str:
         raise InvalidInputError(msg) from error
 
 
+def _font_family(path: str) -> str | None:
+    try:
+        return font_manager.get_font(path).family_name
+    except (OSError, RuntimeError):
+        return None
+
+
+@cache
 def register_thesis_font(font: str = THESIS_FONT) -> None:
     """Zaregistruje systémové řezy zadané rodiny i při zastaralé cache.
+
+    Nečitelné soubory přeskočí; úspěšně ověřenou rodinu v procesu znovu neprochází.
 
     Args:
         font: Rodina, jejíž řezy se mají zaregistrovat.
@@ -158,7 +169,7 @@ def register_thesis_font(font: str = THESIS_FONT) -> None:
         # Opakované addfont by pro stejnou cestu vytvářelo duplicity.
         if path in registered:
             continue
-        if font_manager.get_font(path).family_name == font:
+        if _font_family(path) == font:
             # Písmo nainstalované po vzniku cache matplotlibu je nutné doplnit ručně.
             font_manager.fontManager.addfont(path)
     _find_font(font)
