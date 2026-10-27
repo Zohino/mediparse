@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-from functools import partial
 from typing import TYPE_CHECKING
 
 import pytest
@@ -12,7 +11,7 @@ from matplotlib.figure import Figure
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.synthetic_parameters import SyntheticParameters
 from mediparse.domain.thesis_table import ThesisTable
-from mediparse.infrastructure import thesis_export, thesis_figure
+from mediparse.infrastructure import thesis_figure
 from mediparse.infrastructure.synthetic_parameters_file import SyntheticParametersFile
 from mediparse.infrastructure.thesis_export import MarkdownOutput, ThesisExport
 from tests.support import export_payload
@@ -136,18 +135,15 @@ def test_write_domain_table_matches_table_export(tmp_path: Path) -> None:
     ).read_bytes()
 
 
-def test_figure_export_returns_same_figure(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
+def test_figure_export_returns_same_figure(tmp_path: Path) -> None:
     """Export vytvoří adresář a vrátí tentýž objekt pro výstup buňky Quarta."""
-    # Exportér nemá volbu písma; na hranici zápisu použijeme přibalenou rodinu.
-    monkeypatch.setattr(
-        thesis_export, "save_pdf", partial(thesis_figure.save_pdf, font="DejaVu Serif")
-    )
     with thesis_figure.figure(6, font="DejaVu Serif") as (figure, axes):
         axes.set_title("Syntetický graf")
     directory = tmp_path / "a" / "b"
-    assert ThesisExport(directory).figure(figure, label="fig-pocty") is figure
+    assert (
+        ThesisExport(directory).figure(figure, label="fig-pocty", font="DejaVu Serif")
+        is figure
+    )
     assert (directory / "fig-pocty.pdf").read_bytes().startswith(b"%PDF-")
 
 

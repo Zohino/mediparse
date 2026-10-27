@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING, Final
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.thesis_table import ThesisTable
 from mediparse.infrastructure.json_file import write_model
-from mediparse.infrastructure.thesis_figure import save_pdf
+from mediparse.infrastructure.thesis_figure import THESIS_FONT, save_pdf
 from mediparse.infrastructure.thesis_table_format import latex_tabular, table_markdown
 
 if TYPE_CHECKING:
@@ -108,11 +108,12 @@ class ThesisExport:
         (self.directory / f"{label}.tex").write_bytes(latex.encode("utf-8"))
         return MarkdownOutput(markdown)
 
-    def figure(self, figure: Figure, *, label: str) -> Figure:
+    def figure(self, figure: Figure, *, label: str, font: str = THESIS_FONT) -> Figure:
         """Zapíše PDF grafu a vrátí stejnou figuru pro výstup buňky Quarta.
 
         Args:
             figure: Hotový graf se stylem a písmem práce.
+            font: Jediná povolená rodina písma ve výsledném PDF.
             label: Id Quarta a jméno souboru bez přípony, začíná fig-.
 
         Returns:
@@ -125,7 +126,7 @@ class ThesisExport:
             msg = "label musí odpovídat ^fig-[a-z0-9-]+$."
             raise InvalidInputError(msg)
         self.directory.mkdir(parents=True, exist_ok=True)
-        save_pdf(figure, self.directory / f"{label}.pdf")
+        save_pdf(figure, self.directory / f"{label}.pdf", font=font)
         return figure
 
     def json(self, model: BaseModel, *, label: str) -> Path:
