@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import os
 import re
-from typing import TYPE_CHECKING
+from pathlib import Path
 
 import matplotlib as mpl
 import numpy as np
@@ -15,9 +15,6 @@ from matplotlib.figure import Figure
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure import thesis_figure
-
-if TYPE_CHECKING:
-    from pathlib import Path
 
 TEST_FONT = "DejaVu Serif"
 FONT_SIZE = 10
@@ -198,3 +195,22 @@ def test_shared_subplots_keep_pdf_dimensions(tmp_path: Path) -> None:
     assert [float(value) for value in box[1].split()] == pytest.approx(
         [0, 0, 467.7165354, 7.5 / 2.54 * 72], abs=0.01
     )
+
+
+def test_registration_refreshes_stale_font_manager(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Registrace doplní rodinu nainstalovanou až po vzniku cache a je idempotentní."""
+    path = str(Path(mpl.get_data_path()) / "fonts" / "ttf" / "DejaVuSerif.ttf")
+    manager = font_manager.FontManager()
+    manager.ttflist = [entry for entry in manager.ttflist if entry.name != TEST_FONT]
+    properties = font_manager.FontProperties(family=TEST_FONT)
+    with pytest.raises(ValueError, match="Failed to find font"):
+        manager.findfont(properties, fallback_to_default=False)
+    monkeypatch.setattr(font_manager, "fontManager", manager)
+    monkeypatch.setattr(font_manager, "findSystemFonts", lambda: [path])
+    thesis_figure.register_thesis_font(TEST_FONT)
+    assert manager.findfont(properties, fallback_to_default=False) == path
+    count = len(manager.ttflist)
+    thesis_figure.register_thesis_font(TEST_FONT)
+    assert len(manager.ttflist) == count

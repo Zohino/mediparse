@@ -90,7 +90,7 @@ def figure(  # ruff: ignore[too-many-arguments] - explicitní volby rozvržení 
     Raises:
         InvalidInputError: Požadované písmo není dostupné.
     """
-    _prepare_font(font)
+    register_thesis_font(font)
     with mpl.rc_context(thesis_style(font=font)):
         plot = Figure(figsize=(16.5 / 2.54, height_cm / 2.54))
         # subplots vrací podle rozměrů Axes nebo pole různých tvarů; Any zachovává toto rozhraní.
@@ -132,7 +132,7 @@ def sequential_colormap() -> Colormap:
 
 def _find_font(font: str) -> str:
     try:
-        return font_manager.findfont(
+        return font_manager.fontManager.findfont(
             font_manager.FontProperties(family=font), fallback_to_default=False
         )
     except ValueError as error:
@@ -140,11 +140,11 @@ def _find_font(font: str) -> str:
         raise InvalidInputError(msg) from error
 
 
-def register_thesis_font() -> str:
-    """Zaregistruje systémové řezy Libertinus Serif i při zastaralé cache.
+def register_thesis_font(font: str = THESIS_FONT) -> None:
+    """Zaregistruje systémové řezy zadané rodiny i při zastaralé cache.
 
-    Returns:
-        Cesta k výchozímu řezu rodiny práce.
+    Args:
+        font: Rodina, jejíž řezy se mají zaregistrovat.
 
     Raises:
         InvalidInputError: Písmo práce není dostupné.
@@ -153,14 +153,10 @@ def register_thesis_font() -> str:
     for path in font_manager.findSystemFonts():
         if path in registered:
             continue
-        if font_manager.get_font(path).family_name == THESIS_FONT:
+        if font_manager.get_font(path).family_name == font:
             # addfont připojuje záznamy i opakovaně; kontrola cesty brání duplikátům.
             font_manager.fontManager.addfont(path)
-    return _find_font(THESIS_FONT)
-
-
-def _prepare_font(font: str) -> str:
-    return register_thesis_font() if font == THESIS_FONT else _find_font(font)
+    _find_font(font)
 
 
 def embedded_fonts(pdf: bytes) -> frozenset[str]:
@@ -184,7 +180,8 @@ def save_pdf(figure: Figure, path: Path, *, font: str = THESIS_FONT) -> None:
         InvalidInputError: Písmo chybí nebo PDF obsahuje jinou rodinu;
             neplatné PDF se po kontrole smaže.
     """
-    font_path = _prepare_font(font)
+    register_thesis_font(font)
+    font_path = _find_font(font)
     family = font_manager.get_font(font_path).postscript_name.split("-")[0]
     with mpl.rc_context(thesis_style(font=font)):
         figure.savefig(path, format="pdf")
