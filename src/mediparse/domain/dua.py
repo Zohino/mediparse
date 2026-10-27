@@ -66,6 +66,8 @@ def suppress_small_cells(
 ) -> tuple[CategoryCount, ...]:
     """Sloučí skryté kategorie uvnitř každé skupiny.
 
+    Pokud celá skupina nedosáhne MIN_CELL, řádek „ostatní“ nese její součet pod prahem (parita s R).
+
     Args:
         rows: Agregované řádky se stejným počtem popisků.
         group: Index popisku skupiny, nebo None pro celou tabulku.
