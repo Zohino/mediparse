@@ -14,7 +14,6 @@ if TYPE_CHECKING:
 
 NBSP: Final = "\u00a0"
 MISSING: Final = "\u2013"
-_R_MAX_DIGITS: Final = 15
 
 
 def format_number(value: int) -> str:
@@ -50,8 +49,6 @@ def _round_like_r(value: float) -> float:
     if value == 0 or not math.isfinite(value):
         return value
     magnitude = abs(value)
-    if math.log10(magnitude) + 1 > _R_MAX_DIGITS:
-        return value
     lower_index = math.floor(magnitude * 10)
     lower = lower_index / 10
     upper = math.ceil(magnitude * 10) / 10
