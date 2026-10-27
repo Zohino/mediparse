@@ -38,6 +38,8 @@ def decimal_text(value: float) -> str:
 
 # Parita výstupů EDA během migrace vyžaduje round(x, 1) z R >= 4.0.
 # Nativní formát i Decimal zaokrouhlují přesnou binární hodnotu jinak (0.05 -> 0.1).
+# R format u velkých čísel s málo platnými číslicemi píše vědecký zápis,
+# který Python vědomě nenapodobuje.
 # Po odstranění R kopií se k nativnímu zaokrouhlení vrátí S20h13.
 def _round_like_r(value: float) -> float:
     """Vybere bližší desetinný kandidát v aritmetice double jako R.

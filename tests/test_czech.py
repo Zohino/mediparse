@@ -44,14 +44,21 @@ def test_nbsp_is_nonbreaking() -> None:
         (-0.04, "0,0"),
         (99.95, "100,0"),
         (1234.56, "1234,6"),
-        (10000000.25, "10000000,2"),
         (0, "0,0"),
         (-0.0, "0,0"),
-        (1e15, "1000000000000000,0"),
     ],
 )
 def test_decimal_text(value: float, expected: str) -> None:
     """Desetinné hodnoty odpovídají round z R, včetně hraničních případů."""
+    assert czech.decimal_text(value) == expected
+
+
+@pytest.mark.parametrize(
+    ("value", "expected"),
+    [(10000000.25, "10000000,2"), (1e15, "1000000000000000,0")],
+)
+def test_decimal_text_stays_fixed_beyond_r_parity(value: float, expected: str) -> None:
+    """Vědomá odchylka: R tu píše vědecký zápis, Python drží pevný."""
     assert czech.decimal_text(value) == expected
 
 
