@@ -94,6 +94,8 @@ def figure(  # ruff: ignore[too-many-arguments] - explicitní volby rozvržení 
     """
     register_thesis_font(font)
     with mpl.rc_context(thesis_style(font=font)):
+        # Bez pyplotu nevznikne varování o více než 20 figurách (s filterwarnings=error chyba)
+        # a figura vrácená z buňky se nevykreslí dvakrát.
         plot = Figure(figsize=(THESIS_WIDTH_CM / 2.54, height_cm / 2.54))
         # subplots vrací podle rozměrů Axes nebo pole různých tvarů; Any zachovává toto rozhraní.
         yield (
@@ -153,10 +155,11 @@ def register_thesis_font(font: str = THESIS_FONT) -> None:
     """
     registered = {entry.fname for entry in font_manager.fontManager.ttflist}
     for path in font_manager.findSystemFonts():
+        # Opakované addfont by pro stejnou cestu vytvářelo duplicity.
         if path in registered:
             continue
         if font_manager.get_font(path).family_name == font:
-            # addfont připojuje záznamy i opakovaně; kontrola cesty brání duplikátům.
+            # Písmo nainstalované po vzniku cache matplotlibu je nutné doplnit ručně.
             font_manager.fontManager.addfont(path)
     _find_font(font)
 
