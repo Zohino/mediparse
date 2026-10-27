@@ -167,11 +167,20 @@ def test_missing_font_fails_before_saving(tmp_path: Path) -> None:
     assert not path.exists()
 
 
-@pytest.mark.parametrize("foreign_text", ["cizí písmo", "$x^2$"])
-def test_foreign_font_removes_pdf(tmp_path: Path, foreign_text: str) -> None:
+@pytest.mark.parametrize(
+    ("foreign_text", "fontfamily"),
+    [("cizí písmo", "DejaVu Sans"), ("$x^2$", None)],
+    ids=("cizi-rodina", "mathtext"),
+)
+def test_foreign_font_removes_pdf(
+    tmp_path: Path, foreign_text: str, fontfamily: str | None
+) -> None:
     """Odmítnutí cizí rodiny i příměsi mathtextu odstraní neplatný export."""
     with thesis_figure.figure(5, font=TEST_FONT) as (figure, axes):
-        axes.set_title(foreign_text, fontfamily="DejaVu Sans")
+        if fontfamily is None:
+            axes.set_title(foreign_text)
+        else:
+            axes.set_title(foreign_text, fontfamily=fontfamily)
     path = tmp_path / "foreign.pdf"
     with pytest.raises(InvalidInputError, match="DejaVuSans"):
         thesis_figure.save_pdf(figure, path, font=TEST_FONT)
