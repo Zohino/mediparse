@@ -131,3 +131,93 @@ def test_share_rows_with_multiple_labels_and_zero_total() -> None:
 def test_empty_share_rows() -> None:
     """Prázdná tabulka má prázdný textový výstup."""
     assert czech.share_rows(()) == ()
+
+
+@pytest.mark.parametrize(
+    ("n", "expected"),
+    [
+        (1, "zmínka"),
+        (2, "zmínky"),
+        (3, "zmínky"),
+        (4, "zmínky"),
+        (0, "zmínek"),
+        (5, "zmínek"),
+        (11, "zmínek"),
+        (12, "zmínek"),
+        (21, "zmínek"),
+        (22, "zmínek"),
+        (100, "zmínek"),
+        (1001, "zmínek"),
+        (-1, "zmínek"),
+        (-2, "zmínek"),
+        (1.5, "zmínky"),
+        (-1.5, "zmínky"),
+    ],
+)
+def test_plural_form(n: float, expected: str) -> None:
+    """Celé i necelé počty dostanou příslušný český tvar."""
+    forms = czech.PluralForms("zmínka", "zmínky", "zmínek")
+    assert czech.plural_form(n, forms) == expected
+
+
+@pytest.mark.parametrize(
+    ("n", "expected"), [(1, "den"), (2, "dny"), (5, "dnů"), (1.5, "dne")]
+)
+def test_plural_form_with_fraction(n: float, expected: str) -> None:
+    """Volitelný čtvrtý tvar platí jen pro desetinná čísla."""
+    assert (
+        czech.plural_form(n, czech.PluralForms("den", "dny", "dnů", "dne")) == expected
+    )
+
+
+@pytest.mark.parametrize(
+    ("n", "expected"),
+    [
+        (12345.678, "12\u00a0345,68"),
+        (1e-5, "0,00001"),
+        (2.5e-7, "0,00000025"),
+        (1234567.5, "1\u00a0234\u00a0568"),
+        (123456.75, "123\u00a0456,8"),
+        (1234.5, "1\u00a0234,5"),
+        (-1.5, "-1,5"),
+        (0, "0"),
+        (123456789012, "123\u00a0456\u00a0789\u00a0012"),
+        (-1234, "-1\u00a0234"),
+    ],
+)
+def test_number_phrase(n: float, expected: str) -> None:
+    """Sedm platných číslic odpovídá sondě R bez vědeckého zápisu."""
+    assert czech.number_phrase(n) == expected
+
+
+@pytest.mark.parametrize(
+    ("n", "zero", "expected"),
+    [
+        (5, None, "5\u00a0zmínek"),
+        (1, None, "1\u00a0zmínka"),
+        (12345, None, "12\u00a0345\u00a0zmínek"),
+        (1.5, None, "1,5\u00a0zmínky"),
+        (0, "žádná zmínka", "žádná zmínka"),
+        (3, "žádná zmínka", "3\u00a0zmínky"),
+        (0, None, "0\u00a0zmínek"),
+        (0, "", ""),
+    ],
+)
+def test_count_phrase(n: float, zero: str | None, expected: str) -> None:
+    """Počet a skloňovaný tvar spojí NBSP, nulu může nahradit text."""
+    forms = czech.PluralForms("zmínka", "zmínky", "zmínek")
+    assert czech.count_phrase(n, forms, zero=zero) == expected
+
+
+@pytest.mark.parametrize(
+    ("labels", "expected"),
+    [
+        ((), "žádný"),
+        (("a",), "a"),
+        (("a", "b"), "a a b"),
+        (("a", "b", "c"), "a, b a c"),
+    ],
+)
+def test_join_labels(labels: tuple[str, ...], expected: str) -> None:
+    """Výčet končí spojkou a; prázdný dostane pojmenování."""
+    assert czech.join_labels(labels) == expected
