@@ -2,25 +2,35 @@
 
 from __future__ import annotations
 
+import re
 from contextlib import contextmanager
 from typing import TYPE_CHECKING, Final
 
 import matplotlib as mpl
 import numpy as np
+from matplotlib import font_manager
 from matplotlib.colors import ListedColormap
 from matplotlib.figure import Figure
 from matplotlib.rcsetup import cycler
 from matplotlib.ticker import FuncFormatter
 
 from mediparse.domain.czech import NBSP, number_phrase
+from mediparse.domain.inputs import InvalidInputError
 
 if TYPE_CHECKING:
     from collections.abc import Generator, Mapping
+    from pathlib import Path
 
     from matplotlib.axes import Axes
     from matplotlib.colors import Colormap
 
 THESIS_FONT: Final = "Libertinus Serif"
+FONT_INSTALLATION: Final = (
+    "Nainstalujte Libertinus Serif: Fedora libertinus-fonts, Debian fonts-libertinus, "
+    "jinde bash scripts/install-libertinus.sh."
+)
+# Matplotlib zapisuje jména písem nekomprimovaně, prefix ABCDEF+ označuje podmnožinu.
+BASE_FONT: Final = re.compile(rb"/BaseFont /(?:[A-Z]{6}\+)?([A-Za-z0-9-]+)")
 PALETTE_CATEGORICAL: Final = ("#0072B2", "#E69F00", "#000000", "#F0E442", "#D55E00")
 THESIS_STYLE: Final[Mapping[str, object]] = {
     "font.family": THESIS_FONT,
@@ -67,7 +77,11 @@ def figure(
 
     Yields:
         Figura a její osy připravené ke kreslení.
+
+    Raises:
+        InvalidInputError: Požadované písmo není dostupné.
     """
+    _prepare_font(font)
     with mpl.rc_context(thesis_style(font=font)):
         plot = Figure(figsize=(16.5 / 2.54, height_cm / 2.54))
         yield plot, plot.subplots()
@@ -101,3 +115,73 @@ def sequential_colormap() -> Colormap:
     """
     colors = mpl.colormaps["viridis"](np.linspace(0.45, 1, 256))[::-1]
     return ListedColormap(colors).with_extremes(bad="white")
+
+
+def _find_font(font: str) -> str:
+    try:
+        return font_manager.findfont(
+            font_manager.FontProperties(family=font), fallback_to_default=False
+        )
+    except ValueError as error:
+        msg = f"Písmo {font!r} není dostupné. {FONT_INSTALLATION}"
+        raise InvalidInputError(msg) from error
+
+
+def register_thesis_font() -> str:
+    """Zaregistruje systémové řezy Libertinus Serif i při zastaralé cache.
+
+    Returns:
+        Cesta k výchozímu řezu rodiny práce.
+
+    Raises:
+        InvalidInputError: Písmo práce není dostupné.
+    """
+    registered = {entry.fname for entry in font_manager.fontManager.ttflist}
+    for path in font_manager.findSystemFonts():
+        if path in registered:
+            continue
+        if font_manager.get_font(path).family_name == THESIS_FONT:
+            # addfont připojuje záznamy i opakovaně; kontrola cesty brání duplikátům.
+            font_manager.fontManager.addfont(path)
+    return _find_font(THESIS_FONT)
+
+
+def _prepare_font(font: str) -> str:
+    return register_thesis_font() if font == THESIS_FONT else _find_font(font)
+
+
+def embedded_fonts(pdf: bytes) -> frozenset[str]:
+    """Přečte jména všech písem z PDF vytvořeného matplotlibem.
+
+    Returns:
+        PostScriptová jména řezů bez prefixů podmnožin.
+    """
+    return frozenset(name.decode("ascii") for name in BASE_FONT.findall(pdf))
+
+
+def save_pdf(figure: Figure, path: Path, *, font: str = THESIS_FONT) -> None:
+    """Uloží vektorové PDF a odmítne chybějící nebo cizí vložená písma.
+
+    Args:
+        figure: Hotový graf vytvořený ve stylu práce.
+        path: Cílový soubor v existujícím adresáři.
+        font: Jediná povolená rodina písma.
+
+    Raises:
+        InvalidInputError: Písmo chybí nebo PDF obsahuje jinou rodinu;
+            neplatné PDF se po kontrole smaže.
+    """
+    font_path = _prepare_font(font)
+    family = font_manager.get_font(font_path).postscript_name.split("-")[0]
+    with mpl.rc_context(thesis_style(font=font)):
+        figure.savefig(path, format="pdf")
+    fonts = embedded_fonts(path.read_bytes())
+    foreign = {
+        name for name in fonts if name != family and not name.startswith(f"{family}-")
+    }
+    if fonts and not foreign:
+        return
+    path.unlink()
+    found = ", ".join(sorted(foreign)) if foreign else "žádné písmo"
+    msg = f"PDF neobsahuje pouze rodinu {font!r}: {found}. {FONT_INSTALLATION}"
+    raise InvalidInputError(msg)

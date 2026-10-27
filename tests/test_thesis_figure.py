@@ -2,12 +2,22 @@
 
 from __future__ import annotations
 
+import os
+import re
+from typing import TYPE_CHECKING
+
 import matplotlib as mpl
 import numpy as np
 import pytest
+from matplotlib import font_manager
 from matplotlib.colors import to_rgba
+from matplotlib.figure import Figure
 
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure import thesis_figure
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 TEST_FONT = "DejaVu Serif"
 FONT_SIZE = 10
@@ -81,3 +91,92 @@ def test_sequential_colormap() -> None:
     assert colormap(1.0) == pytest.approx(mpl.colormaps["viridis"](0.45))
     masked = np.ma.masked_invalid([0, float("nan"), 1])
     assert colormap(masked)[1] == pytest.approx(to_rgba("white"))
+
+
+def test_save_pdf_dimensions_fonts_and_style(tmp_path: Path) -> None:
+    """PDF zachová fyzický rozměr i písmo při uložení mimo kontext kreslení."""
+    with thesis_figure.figure(6, font=TEST_FONT) as (figure, axes):
+        axes.plot([0, 1], [0, 1], label="Řada")
+        axes.set_title("Příliš žluťoučký kůň")
+        figure.legend(loc="outside right upper")
+    path = tmp_path / "figure.pdf"
+    thesis_figure.save_pdf(figure, path, font=TEST_FONT)
+    pdf = path.read_bytes()
+    assert thesis_figure.embedded_fonts(pdf) == {"DejaVuSerif"}
+    box = re.search(rb"/MediaBox\s*\[([^]]+)\]", pdf)
+    assert box is not None
+    assert [float(value) for value in box[1].split()] == pytest.approx([
+        0,
+        0,
+        16.5 / 2.54 * 72,
+        6 / 2.54 * 72,
+    ])
+
+
+def test_embedded_fonts_removes_subset_prefix() -> None:
+    """Čtenář vrátí všechny řezy bez šestipísmenného prefixu podmnožiny."""
+    pdf = b"/BaseFont /ABCDEF+LibertinusSerif-Regular /BaseFont /LibertinusSerif-Bold /BaseFont /UVWXYZ+DejaVuSans"
+    assert thesis_figure.embedded_fonts(pdf) == {
+        "LibertinusSerif-Regular",
+        "LibertinusSerif-Bold",
+        "DejaVuSans",
+    }
+
+
+def test_missing_font_fails_before_drawing() -> None:
+    """Chybějící rodina nesmí potichu přejít na náhradní písmo."""
+    with (
+        pytest.raises(
+            InvalidInputError,
+            match=r"libertinus-fonts.*fonts-libertinus.*install-libertinus\.sh",
+        ),
+        thesis_figure.figure(5, font="Mediparse Missing Font"),
+    ):
+        pass
+
+
+def test_missing_font_fails_before_saving(tmp_path: Path) -> None:
+    """Chybějící písmo nevyprodukuje soubor s náhradní rodinou."""
+    path = tmp_path / "missing.pdf"
+    with pytest.raises(
+        InvalidInputError,
+        match=r"libertinus-fonts.*fonts-libertinus.*install-libertinus\.sh",
+    ):
+        thesis_figure.save_pdf(Figure(), path, font="Mediparse Missing Font")
+    assert not path.exists()
+
+
+@pytest.mark.parametrize("foreign_text", ["cizí písmo", "$x^2$"])
+def test_foreign_font_removes_pdf(tmp_path: Path, foreign_text: str) -> None:
+    """Odmítnutí cizí rodiny i příměsi mathtextu odstraní neplatný export."""
+    with thesis_figure.figure(5, font=TEST_FONT) as (figure, axes):
+        axes.set_title(foreign_text, fontfamily="DejaVu Sans")
+    path = tmp_path / "foreign.pdf"
+    with pytest.raises(InvalidInputError, match="DejaVuSans"):
+        thesis_figure.save_pdf(figure, path, font=TEST_FONT)
+    assert not path.exists()
+
+
+def test_thesis_font_pdf(tmp_path: Path) -> None:
+    """Skutečné písmo práce je povinné v jobu Test a jinde lze test přeskočit.
+
+    Raises:
+        InvalidInputError: Povinné písmo práce chybí.
+    """
+    try:
+        thesis_figure.register_thesis_font()
+    except InvalidInputError as error:
+        if "MEDIPARSE_REQUIRE_THESIS_FONT" in os.environ:
+            raise
+        pytest.skip(str(error))
+    count = len(font_manager.fontManager.ttflist)
+    thesis_figure.register_thesis_font()
+    assert len(font_manager.fontManager.ttflist) == count
+    with thesis_figure.figure(5) as (figure, axes):
+        axes.set_title("Český popisek")
+        axes.set_ylabel("Počet")
+    path = tmp_path / "thesis.pdf"
+    thesis_figure.save_pdf(figure, path)
+    fonts = thesis_figure.embedded_fonts(path.read_bytes())
+    assert fonts
+    assert all(name.startswith("LibertinusSerif-") for name in fonts)
