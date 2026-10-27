@@ -116,6 +116,9 @@ def test_suppression_preserves_group_totals_and_removes_labels(
         for i, (group, n) in enumerate(entries)
     )
     output = dua.suppress_small_cells(rows, group=0)
+    assert all(
+        row.n >= dua.MIN_CELL for row in output if row.labels[1] != dua.OTHER_LABEL
+    )
     for group in ("A", "B"):
         members = [row for row in rows if row.labels[0] == group]
         assert sum(row.n for row in output if row.labels[0] == group) == sum(
