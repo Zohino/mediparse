@@ -183,6 +183,9 @@ def test_plural_form_with_fraction(n: float, expected: str) -> None:
         (0, "0"),
         (123456789012, "123\u00a0456\u00a0789\u00a0012"),
         (-1234, "-1\u00a0234"),
+        (12345678.5, "12\u00a0345\u00a0678"),
+        (98765432.123, "98\u00a0765\u00a0432"),
+        (9999999.5, "10\u00a0000\u00a0000"),
     ],
 )
 def test_number_phrase(n: float, expected: str) -> None:

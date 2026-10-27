@@ -135,12 +135,17 @@ def number_phrase(n: float) -> str:
     """Zapíše číslo česky bez exponentu a s NBSP mezi tisíci.
 
     Returns:
-        Celé číslo přesně, necelé se sedmi platnými číslicemi jako format z R.
+        Celé číslo přesně, necelé alespoň se sedmi platnými číslicemi jako format z R.
+        Celé číslice se nikdy nekrátí.
     """
     if n == int(n):
         return format_number(int(n))
-    # Decimal z float by přidal binární artefakty místo sedmi platných číslic z R.
-    return format(Decimal(f"{n:.7g}"), ",f").replace(",", NBSP).replace(".", ",")
+    # R používá sedm platných číslic, celé číslice ale nikdy nekrátí.
+    # Decimal z float by místo tohoto zápisu přidal binární artefakty.
+    precision = max(7, len(str(int(abs(n)))))
+    return (
+        format(Decimal(f"{n:.{precision}g}"), ",f").replace(",", NBSP).replace(".", ",")
+    )
 
 
 def count_phrase(n: float, forms: PluralForms, *, zero: str | None = None) -> str:
