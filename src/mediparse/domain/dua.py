@@ -55,11 +55,9 @@ def hidden_cells(counts: Sequence[int]) -> tuple[bool, ...]:
     if total == 0 or total >= MIN_CELL:
         return tuple(hidden)
     kept = [index for index, mask in enumerate(hidden) if not mask]
-    for index in sorted(kept, key=lambda index: counts[index]):
-        hidden[index] = True
-        total += counts[index]
-        if total >= MIN_CELL:
-            break
+    if kept:
+        # Jedna stačí: zachovaná buňka má aspoň MIN_CELL.
+        hidden[min(kept, key=counts.__getitem__)] = True
     return tuple(hidden)
 
 
