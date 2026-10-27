@@ -135,8 +135,8 @@ def test_category_count_rejects_invalid_count(n: object) -> None:
         dua.CategoryCount(("a",), cast("int", n))
 
 
-@pytest.mark.parametrize("labels", [(1,), ()])
-def test_category_count_rejects_invalid_labels(labels: tuple[object, ...]) -> None:
+@pytest.mark.parametrize("labels", [(1,), (), "velká"])
+def test_category_count_rejects_invalid_labels(labels: object) -> None:
     """Popisky jsou neprázdná n-tice textů."""
     with pytest.raises(InvalidInputError, match=r"[Pp]opisk"):
         dua.CategoryCount(cast("tuple[str, ...]", labels), 10)

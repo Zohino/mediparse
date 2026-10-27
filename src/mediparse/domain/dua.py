@@ -35,7 +35,11 @@ class CategoryCount:
         if isinstance(self.n, bool) or not isinstance(self.n, int) or self.n < 0:
             msg = "n musí být nezáporné celé číslo typu int."
             raise InvalidInputError(msg)
-        if not self.labels or any(not isinstance(label, str) for label in self.labels):
+        if (
+            not isinstance(self.labels, tuple)
+            or not self.labels
+            or any(not isinstance(label, str) for label in self.labels)
+        ):
             msg = "Popisky musí být neprázdná n-tice textů."
             raise InvalidInputError(msg)
 
