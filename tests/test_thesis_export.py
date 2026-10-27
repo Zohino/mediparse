@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.thesis_table import ThesisTable
 from mediparse.infrastructure.thesis_export import MarkdownOutput, ThesisExport
 from tests.thesis_table_support import FIXTURES, golden_case
 
@@ -98,3 +99,31 @@ def test_export_rejects_strings_instead_of_collections(
     with pytest.raises(InvalidInputError):
         ThesisExport(directory).table(**arguments)
     assert not directory.exists()
+
+
+def test_write_domain_table_matches_table_export(tmp_path: Path) -> None:
+    """Hotová doménová tabulka má bajtově stejný export jako vstup z řádků."""
+    table = ThesisTable(
+        header=tuple(CASE["header"]),
+        rows=tuple(tuple(row) for row in CASE["rows"]),
+        align=CASE["align"],
+        code=frozenset(CASE["code"]),
+    )
+    result = ThesisExport(tmp_path / "domain").write(
+        table, label="tbl-a", caption="Popisek."
+    )
+    rows_result = ThesisExport(tmp_path / "rows").table(
+        CASE["rows"],
+        header=CASE["header"],
+        align=CASE["align"],
+        code=CASE["code"],
+        label="tbl-a",
+        caption="Popisek.",
+    )
+    assert result == rows_result
+    assert (tmp_path / "domain" / "tbl-a.tex").read_bytes() == (
+        FIXTURES / "kody-dua.tex"
+    ).read_bytes()
+    assert (tmp_path / "domain" / "tbl-a.tex").read_bytes() == (
+        tmp_path / "rows" / "tbl-a.tex"
+    ).read_bytes()
