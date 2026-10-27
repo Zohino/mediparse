@@ -74,7 +74,13 @@ def test_figure_restores_style_after_exception() -> None:
 
 @pytest.mark.parametrize(
     ("value", "expected"),
-    [(12345, "12\u00a0345"), (1234.5, "1\u00a0234,5"), (-0.25, "-0,25")],
+    [
+        (12345, "12\u00a0345"),
+        (1234.5, "1\u00a0234,5"),
+        (-0.25, "-0,25"),
+        (1234567, "1\u00a0234\u00a0567"),
+        (0.5, "0,5"),
+    ],
 )
 def test_number_axis(value: float, expected: str) -> None:
     """Osa čísel používá český zápis domény."""
@@ -82,7 +88,16 @@ def test_number_axis(value: float, expected: str) -> None:
 
 
 @pytest.mark.parametrize(
-    ("value", "expected"), [(0.125, "12,5\u00a0%"), (0.07, "7\u00a0%"), (0, "0\u00a0%")]
+    ("value", "expected"),
+    [
+        (0, "0\u00a0%"),
+        (0.5, "50\u00a0%"),
+        (1, "100\u00a0%"),
+        (0.125, "12,5\u00a0%"),
+        (0.07, "7\u00a0%"),
+        (0.29, "29\u00a0%"),
+        (0.1 + 0.2, "30\u00a0%"),
+    ],
 )
 def test_percent_axis(value: float, expected: str) -> None:
     """Procentní osa odstraní float artefakty a oddělí procenta NBSP."""
@@ -280,3 +295,8 @@ def _lightness(color: tuple[float, float, float, float]) -> float:
         if luminance > LIGHTNESS_PIVOT
         else (29 / 3) ** 3 * luminance
     )
+
+
+def test_embedded_fonts_without_font_dictionary() -> None:
+    """PDF bez slovníku písem nehlásí žádnou vloženou rodinu."""
+    assert thesis_figure.embedded_fonts(b"%PDF-1.4 ...") == frozenset()
