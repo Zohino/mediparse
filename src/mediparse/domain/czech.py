@@ -108,12 +108,12 @@ def number_phrase(n: float) -> str:
     """Zapíše číslo česky bez exponentu a s NBSP mezi tisíci.
 
     Returns:
-        Celé číslo přesně, necelé alespoň se sedmi platnými číslicemi jako format z R.
-        Celé číslice se nikdy nekrátí.
+        Celé číslo přesně, necelé se sedmi platnými číslicemi bez exponentu.
+        Celé číslice se nikdy nekrátí ani při více než sedmi číslicích.
     """
     if n == int(n):
         return format_number(int(n))
-    # R používá sedm platných číslic, celé číslice ale nikdy nekrátí.
+    # Sedm platných číslic omezuje desetinnou přesnost, celé číslice ale nikdy nekrátí.
     # Decimal z float by místo tohoto zápisu přidal binární artefakty.
     precision = max(7, len(str(int(abs(n)))))
     return (

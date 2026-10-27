@@ -183,7 +183,7 @@ def test_plural_form_with_fraction(n: float, expected: str) -> None:
     ],
 )
 def test_number_phrase(n: float, expected: str) -> None:
-    """Sedm platných číslic odpovídá sondě R bez vědeckého zápisu."""
+    """Sedm platných číslic nekrátí celé číslice a nepoužívá exponent."""
     assert czech.number_phrase(n) == expected
 
 
