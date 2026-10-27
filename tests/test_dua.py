@@ -44,6 +44,8 @@ def test_hidden_cells(counts: list[int], expected: tuple[bool, ...]) -> None:
         (("velká", "a", "b"), (100, 6, 5), (("velká", 100), ("ostatní (n < 10)", 11))),
         (("a", "b"), (10, 25), (("a", 10), ("b", 25))),
         (("a", "b"), (50, 60), (("a", 50), ("b", 60))),
+        (("a", "b"), (4, 3), ()),
+        (("nulová", "velká"), (0, 100), (("velká", 100),)),
         ((), (), ()),
     ],
 )
@@ -81,6 +83,21 @@ def test_suppression_with_groups() -> None:
     )
 
 
+def test_suppression_omits_group_below_threshold() -> None:
+    """Skupina pod prahem zmizí celá, zveřejnitelná skupina zachová součet."""
+    rows = (
+        dua.CategoryCount(("A", "x"), 100),
+        dua.CategoryCount(("A", "y"), 4),
+        dua.CategoryCount(("A", "z"), 50),
+        dua.CategoryCount(("B", "x"), 3),
+        dua.CategoryCount(("B", "y"), 4),
+    )
+    assert dua.suppress_small_cells(rows, group=0) == (
+        dua.CategoryCount(("A", "x"), 100),
+        dua.CategoryCount(("A", "ostatní (n < 10)"), 54),
+    )
+
+
 def test_nonadjacent_groups_and_multiple_labels() -> None:
     """Nesouvislé skupiny se seřadí podle prvního výskytu i při group=1."""
     rows = (
@@ -110,20 +127,21 @@ def test_hidden_counts_cannot_disclose_small_sum(counts: list[int]) -> None:
 def test_suppression_preserves_group_totals_and_removes_labels(
     entries: list[tuple[str, int]],
 ) -> None:
-    """Součty zůstanou v každé skupině a skryté kategorie zmizí."""
+    """Zveřejněné skupiny zachovají součty a všechny jejich řádky splní práh."""
     rows = tuple(
         dua.CategoryCount((group, f"kategorie {i}"), n)
         for i, (group, n) in enumerate(entries)
     )
     output = dua.suppress_small_cells(rows, group=0)
-    assert all(
-        row.n >= dua.MIN_CELL for row in output if row.labels[1] != dua.OTHER_LABEL
-    )
+    assert all(row.n >= dua.MIN_CELL for row in output)
     for group in ("A", "B"):
         members = [row for row in rows if row.labels[0] == group]
-        assert sum(row.n for row in output if row.labels[0] == group) == sum(
-            row.n for row in members
-        )
+        published = [row for row in output if row.labels[0] == group]
+        total = sum(row.n for row in members)
+        if total < dua.MIN_CELL:
+            assert not published
+        else:
+            assert sum(row.n for row in published) == total
         hidden = dua.hidden_cells([row.n for row in members])
         hidden_labels = {
             row.labels[1] for row, mask in zip(members, hidden, strict=True) if mask

@@ -66,7 +66,8 @@ def suppress_small_cells(
 ) -> tuple[CategoryCount, ...]:
     """Sloučí skryté kategorie uvnitř každé skupiny.
 
-    Pokud celá skupina nedosáhne MIN_CELL, řádek „ostatní“ nese její součet pod prahem (parita s R).
+    Skupina se součtem pod MIN_CELL se nezveřejní; dopočitatelnost vynechané skupiny
+    z jiného zveřejněného celku hlídá volající.
 
     Args:
         rows: Agregované řádky se stejným počtem popisků.
@@ -108,11 +109,13 @@ def _suppress_group(
     kept = tuple(row for row, mask in zip(rows, hidden, strict=True) if not mask)
     if not any(hidden):
         return kept
+    total = sum(row.n for row, mask in zip(rows, hidden, strict=True) if mask)
+    if total < MIN_CELL:
+        return kept
     labels = tuple(
         label if index == group else OTHER_LABEL
         for index, label in enumerate(rows[0].labels)
     )
-    total = sum(row.n for row, mask in zip(rows, hidden, strict=True) if mask)
     return (*kept, CategoryCount(labels, total))
 
 
