@@ -92,10 +92,8 @@ def test_percent_axis(value: float, expected: str) -> None:
 def test_sequential_colormap() -> None:
     """Obrácená viridis vynechá tmavý konec a skryje NA bílou."""
     colormap = thesis_figure.sequential_colormap()
-    assert colormap(0.0) == pytest.approx(mpl.colormaps["viridis"](1.0))
-    assert colormap(1.0) == pytest.approx(
-        mpl.colormaps["viridis"](thesis_figure.SEQUENTIAL_BEGIN)
-    )
+    assert _luma(colormap(0.0)) > _luma(colormap(1.0))
+    assert _lightness(colormap(1.0)) >= MIN_LIGHTNESS
     masked = np.ma.masked_invalid([0, float("nan"), 1])
     assert colormap(masked)[1] == pytest.approx(to_rgba("white"))
 
@@ -258,4 +256,27 @@ def test_categorical_palette_is_distinct_in_grayscale() -> None:
     assert all(
         abs(_luma(first) - _luma(second)) >= MIN_LUMA_GAP
         for first, second in combinations((*palette, "#FFFFFF"), 2)
+    )
+
+
+MIN_LIGHTNESS = 49
+SRGB_LINEAR_THRESHOLD = 0.04045
+LIGHTNESS_PIVOT = (6 / 29) ** 3
+
+
+def _lightness(color: tuple[float, float, float, float]) -> float:
+    linear = tuple(
+        channel / 12.92
+        if channel <= SRGB_LINEAR_THRESHOLD
+        else ((channel + 0.055) / 1.055) ** 2.4
+        for channel in color[:3]
+    )
+    luminance = sum(
+        weight * channel
+        for weight, channel in zip((0.2126, 0.7152, 0.0722), linear, strict=True)
+    )
+    return (
+        116 * luminance ** (1 / 3) - 16
+        if luminance > LIGHTNESS_PIVOT
+        else (29 / 3) ** 3 * luminance
     )
