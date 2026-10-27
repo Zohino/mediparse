@@ -34,31 +34,18 @@ def test_nbsp_is_nonbreaking() -> None:
         (100, "100,0"),
         (1, "1,0"),
         (2.25, "2,2"),
-        (0.05, "0,0"),
-        (0.15, "0,1"),
-        (429.05, "429,0"),
-        (7.45, "7,4"),
-        (79.55, "79,6"),
-        (-5550.95, "-5551,0"),
-        (-389.95, "-390,0"),
+        (0.25, "0,2"),
+        (0.05, "0,1"),
         (-0.04, "0,0"),
-        (99.95, "100,0"),
-        (1234.56, "1234,6"),
+        (1234.56, "1\u00a0234,6"),
+        (10000000.25, "10\u00a0000\u00a0000,2"),
+        (-1234.56, "-1\u00a0234,6"),
         (0, "0,0"),
         (-0.0, "0,0"),
     ],
 )
 def test_decimal_text(value: float, expected: str) -> None:
-    """Desetinné hodnoty odpovídají round z R, včetně hraničních případů."""
-    assert czech.decimal_text(value) == expected
-
-
-@pytest.mark.parametrize(
-    ("value", "expected"),
-    [(10000000.25, "10000000,2"), (1e15, "1000000000000000,0")],
-)
-def test_decimal_text_stays_fixed_beyond_r_parity(value: float, expected: str) -> None:
-    """Vědomá odchylka: R tu píše vědecký zápis, Python drží pevný."""
+    """Python zaokrouhlí k sudé; binární 0.05 leží nad polovinou a dá 0,1."""
     assert czech.decimal_text(value) == expected
 
 
@@ -88,9 +75,9 @@ def test_missing_text() -> None:
         (22, 331604, "<\u00a00,1"),
         (0, 331604, "0,0"),
         (2, 1000, "0,2"),
-        (1, 2000, "<\u00a00,1"),
+        (1, 2000, "0,1"),
         (1, 3, "33,3"),
-        (5, 10000, "<\u00a00,1"),
+        (5, 10000, "0,1"),
         (499, 1000, "49,9"),
         (2, 7, "28,6"),
     ],

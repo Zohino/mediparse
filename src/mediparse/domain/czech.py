@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
 from decimal import Decimal
 from typing import TYPE_CHECKING, Final
@@ -26,38 +25,13 @@ def format_number(value: int) -> str:
 
 
 def decimal_text(value: float) -> str:
-    """Zapíše jedno desetinné místo s čárkou a bez oddělovače tisíců.
+    """Zapíše jedno desetinné místo s čárkou a NBSP mezi tisíci.
 
     Returns:
-        Desetinný zápis zaokrouhlený jako round z R.
+        Nativně zaokrouhlený desetinný zápis bez záporné nuly.
     """
-    rounded = _round_like_r(value)
-    return f"{0.0 if rounded == 0 else rounded:.1f}".replace(".", ",")
-
-
-# Parita výstupů EDA během migrace vyžaduje round(x, 1) z R >= 4.0.
-# Nativní formát i Decimal zaokrouhlují přesnou binární hodnotu jinak (0.05 -> 0.1).
-# R format u velkých čísel s málo platnými číslicemi píše vědecký zápis,
-# který Python vědomě nenapodobuje.
-# Po odstranění R kopií se k nativnímu zaokrouhlení vrátí S20h13.
-def _round_like_r(value: float) -> float:
-    """Vybere bližší desetinný kandidát v aritmetice double jako R.
-
-    Returns:
-        Zaokrouhlená hodnota, při stejných vzdálenostech se sudou poslední číslicí.
-    """
-    if value == 0 or not math.isfinite(value):
-        return value
-    magnitude = abs(value)
-    lower_index = math.floor(magnitude * 10)
-    lower = lower_index / 10
-    upper = math.ceil(magnitude * 10) / 10
-    distance_down = magnitude - lower
-    distance_up = upper - magnitude
-    choose_upper = distance_up < distance_down or (
-        distance_up == distance_down and lower_index % 2 == 1
-    )
-    return math.copysign(upper if choose_upper else lower, value)
+    formatted = f"{value:,.1f}".replace(",", NBSP).replace(".", ",")
+    return "0,0" if formatted == "-0,0" else formatted
 
 
 def number_text(value: int | None) -> str:
