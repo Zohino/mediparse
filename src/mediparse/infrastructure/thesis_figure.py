@@ -200,7 +200,8 @@ def save_pdf(figure: Figure, path: Path, *, font: str = THESIS_FONT) -> None:
     font_path = _find_font(font)
     family = font_manager.get_font(font_path).postscript_name.split("-")[0]
     with mpl.rc_context(thesis_style(font=font)):
-        figure.savefig(path, format="pdf")
+        # Samotný čas renderu nesmí měnit commitované PDF.
+        figure.savefig(path, format="pdf", metadata={"CreationDate": None})
     fonts = embedded_fonts(path.read_bytes())
     foreign = {
         name for name in fonts if name != family and not name.startswith(f"{family}-")

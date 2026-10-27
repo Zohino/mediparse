@@ -368,3 +368,19 @@ def test_registration_skips_broken_fonts_and_caches_family(
         )
         == path
     )
+
+
+def test_pdf_is_identical_across_creation_times(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Datum vytvoření nesmí měnit bajty stejného grafu při dalším renderu."""
+    figure = Figure()
+    figure.text(0.5, 0.5, "Český graf", fontfamily=TEST_FONT)
+    first = tmp_path / "first.pdf"
+    second = tmp_path / "second.pdf"
+    monkeypatch.setenv("SOURCE_DATE_EPOCH", "1000000000")
+    thesis_figure.save_pdf(figure, first, font=TEST_FONT)
+    monkeypatch.setenv("SOURCE_DATE_EPOCH", "1000000100")
+    thesis_figure.save_pdf(figure, second, font=TEST_FONT)
+    assert first.read_bytes() == second.read_bytes()
+    assert b"/CreationDate" not in first.read_bytes()
