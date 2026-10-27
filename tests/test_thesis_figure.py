@@ -300,3 +300,11 @@ def _lightness(color: tuple[float, float, float, float]) -> float:
 def test_embedded_fonts_without_font_dictionary() -> None:
     """PDF bez slovníku písem nehlásí žádnou vloženou rodinu."""
     assert thesis_figure.embedded_fonts(b"%PDF-1.4 ...") == frozenset()
+
+
+def test_save_pdf_without_text_is_valid(tmp_path: Path) -> None:
+    """Prázdná figura je platné PDF, i když nepotřebuje vložit žádné písmo."""
+    path = tmp_path / "empty.pdf"
+    thesis_figure.save_pdf(Figure(), path, font=TEST_FONT)
+    assert path.read_bytes().startswith(b"%PDF-")
+    assert thesis_figure.embedded_fonts(path.read_bytes()) == frozenset()

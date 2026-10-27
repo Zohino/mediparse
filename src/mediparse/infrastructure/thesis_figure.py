@@ -172,7 +172,7 @@ def embedded_fonts(pdf: bytes) -> frozenset[str]:
 
 
 def save_pdf(figure: Figure, path: Path, *, font: str = THESIS_FONT) -> None:
-    """Uloží vektorové PDF a odmítne chybějící nebo cizí vložená písma.
+    """Uloží vektorové PDF a odmítne cizí vložená písma.
 
     Args:
         figure: Hotový graf vytvořený ve stylu práce.
@@ -192,9 +192,9 @@ def save_pdf(figure: Figure, path: Path, *, font: str = THESIS_FONT) -> None:
     foreign = {
         name for name in fonts if name != family and not name.startswith(f"{family}-")
     }
-    if fonts and not foreign:
+    if not foreign:
         return
     path.unlink()
-    found = ", ".join(sorted(foreign)) if foreign else "žádné písmo"
+    found = ", ".join(sorted(foreign))
     msg = f"PDF neobsahuje pouze rodinu {font!r}: {found}. {FONT_INSTALLATION}"
     raise InvalidInputError(msg)
