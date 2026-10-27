@@ -10,7 +10,11 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.thesis_table import ThesisTable
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.thesis_figure import THESIS_FONT, save_pdf
-from mediparse.infrastructure.thesis_table_format import latex_tabular, table_markdown
+from mediparse.infrastructure.thesis_table_format import (
+    latex_tabular,
+    require_label,
+    table_markdown,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Collection, Sequence
@@ -122,9 +126,7 @@ class ThesisExport:
         Raises:
             InvalidInputError: Label není platný nebo graf nemá písmo práce.
         """
-        if not isinstance(label, str) or not FIGURE_LABEL.fullmatch(label):
-            msg = "label musí odpovídat ^fig-[a-z0-9-]+$."
-            raise InvalidInputError(msg)
+        require_label(label, FIGURE_LABEL)
         self.directory.mkdir(parents=True, exist_ok=True)
         save_pdf(figure, self.directory / f"{label}.pdf", font=font)
         return figure
@@ -142,9 +144,7 @@ class ThesisExport:
         Raises:
             InvalidInputError: Label není platný.
         """
-        if not isinstance(label, str) or not JSON_LABEL.fullmatch(label):
-            msg = "label musí odpovídat ^[a-z0-9-]+$."
-            raise InvalidInputError(msg)
+        require_label(label, JSON_LABEL)
         path = self.directory / f"{label}.json"
         write_model(path, model)
         return path

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import TYPE_CHECKING
 
 import pytest
@@ -9,6 +10,7 @@ import pytest
 from mediparse.domain.dua import OTHER_LABEL
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.thesis_table import ThesisTable
+from mediparse.infrastructure import thesis_table_format
 from mediparse.infrastructure.thesis_table_format import (
     latex_escape,
     latex_tabular,
@@ -173,3 +175,19 @@ def test_label_and_caption_must_be_strings(overrides: dict) -> None:
     arguments: dict = {"label": "tbl-a", "caption": "Popisek.", **overrides}
     with pytest.raises(InvalidInputError):
         table_markdown(_table(golden_case("kody-dua")), **arguments)
+
+
+@pytest.mark.parametrize("label", ["doc-0", "doc-123"])
+def test_require_label_accepts_pattern(label: str) -> None:
+    """Sdílená validace přijme label podle předaného pravidla."""
+    thesis_table_format.require_label(label, re.compile(r"^doc-[0-9]+$"))
+
+
+@pytest.mark.parametrize("label", [None, 1, "", "doc-A", "doc-12\n", "../doc-12"])
+def test_require_label_reports_pattern(label: object) -> None:
+    """Chyba labelu obsahuje předané pravidlo a odmítne i netextové hodnoty."""
+    pattern = re.compile(r"^doc-[0-9]+$")
+    with pytest.raises(
+        InvalidInputError, match=re.escape(f"label musí odpovídat {pattern.pattern}.")
+    ):
+        thesis_table_format.require_label(label, pattern)
