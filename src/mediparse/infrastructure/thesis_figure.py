@@ -47,7 +47,6 @@ THESIS_STYLE: Final[Mapping[str, object]] = {
     "axes.axisbelow": True,
     "legend.frameon": False,
     "figure.constrained_layout.use": True,
-    "savefig.pad_inches": 0,
     # OTF CFF s fonttype 42 vkládá nesoulad typu písma a jeho souboru do PDF.
     "pdf.fonttype": 3,
     "axes.formatter.use_locale": False,

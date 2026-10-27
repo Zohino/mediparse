@@ -48,7 +48,6 @@ def test_figure_dimensions_style_and_legend() -> None:
         assert not legend.get_frame_on()
         assert figure.get_constrained_layout()
         assert mpl.rcParams["pdf.fonttype"] == PDF_FONT_TYPE
-        assert mpl.rcParams["savefig.pad_inches"] == 0
         assert mpl.rcParams["axes.formatter.use_locale"] is False
     assert figure.get_size_inches() * 2.54 == pytest.approx([
         thesis_figure.THESIS_WIDTH_CM,
@@ -120,8 +119,10 @@ def test_save_pdf_dimensions_fonts_and_style(tmp_path: Path) -> None:
         axes.set_title("Příliš žluťoučký kůň")
         figure.legend(loc="outside right upper")
     path = tmp_path / "figure.pdf"
-    thesis_figure.save_pdf(figure, path, font=TEST_FONT)
+    with mpl.rc_context({"pdf.fonttype": 42}):
+        thesis_figure.save_pdf(figure, path, font=TEST_FONT)
     pdf = path.read_bytes()
+    assert b"/Subtype /Type3" in pdf
     assert thesis_figure.embedded_fonts(pdf) == {"DejaVuSerif"}
     box = re.search(rb"/MediaBox\s*\[([^]]+)\]", pdf)
     assert box is not None
