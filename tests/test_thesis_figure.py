@@ -180,3 +180,21 @@ def test_thesis_font_pdf(tmp_path: Path) -> None:
     fonts = thesis_figure.embedded_fonts(path.read_bytes())
     assert fonts
     assert all(name.startswith("LibertinusSerif-") for name in fonts)
+
+
+def test_shared_subplots_keep_pdf_dimensions(tmp_path: Path) -> None:
+    """Sdílené osy i více panelů zachovají rozměr stránky pro práci."""
+    with thesis_figure.figure(
+        7.5, nrows=2, ncols=2, sharex=True, sharey=True, font=TEST_FONT
+    ) as (figure, axes):
+        axes[0, 0].plot([0, 1], [0, 1])
+        assert axes.shape == (2, 2)
+        assert axes[0, 0].get_shared_x_axes().joined(axes[0, 0], axes[1, 1])
+        assert axes[0, 0].get_shared_y_axes().joined(axes[0, 0], axes[1, 1])
+    path = tmp_path / "panels.pdf"
+    thesis_figure.save_pdf(figure, path, font=TEST_FONT)
+    box = re.search(rb"/MediaBox\s*\[([^]]+)\]", path.read_bytes())
+    assert box is not None
+    assert [float(value) for value in box[1].split()] == pytest.approx(
+        [0, 0, 467.7165354, 7.5 / 2.54 * 72], abs=0.01
+    )

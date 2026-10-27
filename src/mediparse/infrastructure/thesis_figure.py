@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 from contextlib import contextmanager
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Any, Final
 
 import matplotlib as mpl
 import numpy as np
@@ -21,7 +21,6 @@ if TYPE_CHECKING:
     from collections.abc import Generator, Mapping
     from pathlib import Path
 
-    from matplotlib.axes import Axes
     from matplotlib.colors import Colormap
 
 THESIS_FONT: Final = "Libertinus Serif"
@@ -62,9 +61,15 @@ def thesis_style(*, font: str = THESIS_FONT) -> mpl.RcParams:
 
 
 @contextmanager
-def figure(
-    height_cm: float, *, font: str = THESIS_FONT
-) -> Generator[tuple[Figure, Axes]]:
+def figure(  # ruff: ignore[too-many-arguments] - explicitní volby rozvržení podle Figure.subplots
+    height_cm: float,
+    *,
+    nrows: int = 1,
+    ncols: int = 1,
+    sharex: bool = False,
+    sharey: bool = False,
+    font: str = THESIS_FONT,
+) -> Generator[tuple[Figure, Any]]:
     """Vytvoří figuru širokou 16,5 cm a osy v dočasném stylu práce.
 
     Popisky i kresbu přidávejte uvnitř kontextu. Legendu vně vpravo vytvoří
@@ -73,6 +78,10 @@ def figure(
 
     Args:
         height_cm: Výška figury v centimetrech.
+        nrows: Počet řádků panelů.
+        ncols: Počet sloupců panelů.
+        sharex: Zda panely sdílejí osu x.
+        sharey: Zda panely sdílejí osu y.
         font: Rodina písma; výchozí odpovídá textu práce.
 
     Yields:
@@ -84,7 +93,11 @@ def figure(
     _prepare_font(font)
     with mpl.rc_context(thesis_style(font=font)):
         plot = Figure(figsize=(16.5 / 2.54, height_cm / 2.54))
-        yield plot, plot.subplots()
+        # subplots vrací podle rozměrů Axes nebo pole různých tvarů; Any zachovává toto rozhraní.
+        yield (
+            plot,
+            plot.subplots(nrows=nrows, ncols=ncols, sharex=sharex, sharey=sharey),
+        )
 
 
 def number_axis() -> FuncFormatter:
