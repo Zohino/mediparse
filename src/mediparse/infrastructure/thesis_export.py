@@ -1,17 +1,27 @@
-"""Zápis tabulky pro práci a markdownový výstup pro Jupyter."""
+"""Export tabulek, grafů a parametrů sešitu do adresáře výstupů práce."""
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.thesis_table import ThesisTable
+from mediparse.infrastructure.json_file import write_model
+from mediparse.infrastructure.thesis_figure import save_pdf
 from mediparse.infrastructure.thesis_table_format import latex_tabular, table_markdown
 
 if TYPE_CHECKING:
     from collections.abc import Collection, Sequence
     from pathlib import Path
+
+    from matplotlib.figure import Figure
+    from pydantic import BaseModel
+
+
+FIGURE_LABEL: Final = re.compile(r"^fig-[a-z0-9-]+$")
+JSON_LABEL: Final = re.compile(r"^[a-z0-9-]+$")
 
 
 @dataclass(frozen=True)
@@ -97,3 +107,43 @@ class ThesisExport:
         self.directory.mkdir(parents=True, exist_ok=True)
         (self.directory / f"{label}.tex").write_bytes(latex.encode("utf-8"))
         return MarkdownOutput(markdown)
+
+    def figure(self, figure: Figure, *, label: str) -> Figure:
+        """Zapíše PDF grafu a vrátí stejnou figuru pro výstup buňky Quarta.
+
+        Args:
+            figure: Hotový graf se stylem a písmem práce.
+            label: Id Quarta a jméno souboru bez přípony, začíná fig-.
+
+        Returns:
+            Tatáž figura, kterou Jupyter zobrazí v sešitu.
+
+        Raises:
+            InvalidInputError: Label není platný nebo graf nemá písmo práce.
+        """
+        if not isinstance(label, str) or not FIGURE_LABEL.fullmatch(label):
+            msg = "label musí odpovídat ^fig-[a-z0-9-]+$."
+            raise InvalidInputError(msg)
+        self.directory.mkdir(parents=True, exist_ok=True)
+        save_pdf(figure, self.directory / f"{label}.pdf")
+        return figure
+
+    def json(self, model: BaseModel, *, label: str) -> Path:
+        """Zapíše model ve sdíleném formátu JSON a vrátí cestu k exportu.
+
+        Args:
+            model: Parametry určené k předání dalšímu kroku pipeline.
+            label: Jméno souboru bez přípony, malá písmena, číslice a pomlčky.
+
+        Returns:
+            Cesta k zapsanému souboru JSON.
+
+        Raises:
+            InvalidInputError: Label není platný.
+        """
+        if not isinstance(label, str) or not JSON_LABEL.fullmatch(label):
+            msg = "label musí odpovídat ^[a-z0-9-]+$."
+            raise InvalidInputError(msg)
+        path = self.directory / f"{label}.json"
+        write_model(path, model)
+        return path
