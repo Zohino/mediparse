@@ -11,11 +11,10 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
 # Práh n < 10 platí pro buňky skupin pacientů vymezených kvaziidentifikátorem (věk, pohlaví,
-# diagnóza, období...) a pro kategorie, jejichž popisek je hodnota z dat. R má vlastní kopii
-# (DUA_THRESHOLD v eda/R/dua.R).
+# diagnóza, období...) a pro kategorie, jejichž popisek je hodnota z dat.
+# eda/R/dua.R a eda/R/czech.R mají přechodné kopie celé sady pomocníků do S20h12.
 MIN_CELL: Final = 10
 
-# R má přechodnou kopii DUA_OTHER v eda/R/dua.R.
 OTHER_LABEL: Final[str] = f"ostatní (n < {MIN_CELL})"
 UNKNOWN_LABEL: Final = "neuvedeno"
 
