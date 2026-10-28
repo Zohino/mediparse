@@ -156,6 +156,18 @@ def pipe_table(table: ThesisTable) -> str:
     ])
 
 
+def require_label(label: object, pattern: re.Pattern[str]) -> None:
+    """Ověří textový label podle pravidla příslušného exportu.
+
+    Raises:
+        InvalidInputError: Label neodpovídá předanému regulárnímu výrazu.
+    """
+    if isinstance(label, str) and pattern.fullmatch(label):
+        return
+    msg = f"label musí odpovídat {pattern.pattern}."
+    raise InvalidInputError(msg)
+
+
 def table_markdown(table: ThesisTable, *, label: str, caption: str) -> str:
     """Doplní tabulku o popisek, id a volitelné šířky pro Quarto.
 
@@ -165,9 +177,7 @@ def table_markdown(table: ThesisTable, *, label: str, caption: str) -> str:
     Raises:
         InvalidInputError: Label nebo popisek není platný.
     """
-    if not isinstance(label, str) or not TABLE_LABEL.fullmatch(label):
-        msg = "label musí odpovídat ^tbl-[a-z0-9-]+$."
-        raise InvalidInputError(msg)
+    require_label(label, TABLE_LABEL)
     if (
         not isinstance(caption, str)
         or not caption.strip()
