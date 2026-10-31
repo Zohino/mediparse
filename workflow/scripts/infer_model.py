@@ -1,4 +1,4 @@
-"""Krok Snakemake: uložený model nad odloženými zprávami smoketestu."""
+"""Krok Snakemake: uložený model nad odloženými zprávami."""
 
 from pathlib import Path
 
@@ -6,7 +6,7 @@ from mediparse.entrypoints.model_inference import main
 
 raise SystemExit(
     main(
-        cohort=Path(snakemake.input.notes),
+        cohort=Path(snakemake.input.cohort),
         config=Path(snakemake.input.config),
         lexicon=Path(snakemake.input.lexicon),
         model=Path(snakemake.input.model),

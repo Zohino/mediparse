@@ -8,7 +8,7 @@ SMOKETEST_LOGS = Path("logs/smoketest")
 rule smoketest:
     input:
         metrics=SMOKETEST / "metrics.parquet",
-        demo=SMOKETEST / "demo.parquet",
+        inference=SMOKETEST / "inference.parquet",
     params:
         corpus=SYNTHETIC,
         outputs=SMOKETEST,
@@ -19,4 +19,5 @@ rule smoketest:
 
 include: "rules/cohort.smk"
 include: "rules/download.smk"
+include: "rules/experiment.smk"
 include: "rules/smoketest.smk"
