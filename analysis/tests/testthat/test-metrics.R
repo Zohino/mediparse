@@ -13,7 +13,5 @@ test_that("metriky ze sdílené syntetické fixture zachovají schéma a hodnoty
     pr_auc = c(0.8, 0.55, 0.45, 0.5, 0.9)
   )
 
-  expect_equal(nrow(actual), 5)
-  expect_identical(names(actual), names(METRICS_COLUMNS))
-  expect_equal(actual, expected)
+  expect_identical(actual, expected)
 })
