@@ -1,4 +1,4 @@
-"""Načtení configu tréninku smoketestu."""
+"""Načtení configu tréninku modelu; repo config je config smoketestu."""
 
 from __future__ import annotations
 
