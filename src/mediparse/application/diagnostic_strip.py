@@ -41,8 +41,9 @@ class DiagnosticStripTable:
 
     def _stripped(self, note: InputNote) -> InputNote:
         if note.language is not LEXICON_LANGUAGE:
+            # note_id nese subject_id pacienta MIMIC; hláška ani log ho nesmí nést.
             msg = (
-                f"Zpráva {note.note_id} je v jazyce {note.language}, lexikon sekcí "
+                f"Zpráva v jazyce {note.language}, lexikon sekcí "
                 f"je v jazyce {LEXICON_LANGUAGE} a strip by nic neodstranil."
             )
             raise InvalidInputError(msg)
