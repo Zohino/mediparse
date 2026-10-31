@@ -15,7 +15,7 @@ from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.mimic_table import TableShape
-from mediparse.domain.synthetic_mimic import mimic_tables
+from mediparse.domain.synthetic_mimic import synthetic_mimic_rows
 from mediparse.infrastructure.mimic_inventory import read_manifest
 from tests.cohort_support import CODES, PREFIXES
 from tests.support import REPOSITORY_MIMIC_MANIFEST
@@ -42,7 +42,7 @@ def test_codes_preserve_labels_and_admission_links(
 ) -> None:
     """Libovolné labely přežijí mapování ICD a každé přijetí má vlastní vazbu i výplň."""
     notes = _notes(labels)
-    tables = mimic_tables(tuple(reversed(notes)), CODES, SHAPES)
+    tables = synthetic_mimic_rows(tuple(reversed(notes)), CODES, SHAPES)
     discharge = tables["discharge"]
     diagnoses = tables["diagnoses_icd"]
     hadms = {row["hadm_id"] for row in discharge}
@@ -70,7 +70,7 @@ def test_rows_have_fixed_identity_values_and_diagnosis_order() -> None:
         {Diagnosis.CKD},
         {Diagnosis.PNEUMONIA, Diagnosis.ATRIAL_FIBRILLATION, Diagnosis.DIABETES},
     ])
-    tables = mimic_tables(notes, CODES, SHAPES)
+    tables = synthetic_mimic_rows(notes, CODES, SHAPES)
 
     assert set(tables) == {"discharge", "diagnoses_icd"}
     assert tables["discharge"][0] == {
@@ -134,7 +134,7 @@ def test_rows_have_fixed_identity_values_and_diagnosis_order() -> None:
             "icd_version": "10",
         },
     ]
-    assert mimic_tables(tuple(reversed(notes)), CODES, SHAPES) == tables
+    assert synthetic_mimic_rows(tuple(reversed(notes)), CODES, SHAPES) == tables
 
 
 @pytest.mark.parametrize("table", ["discharge", "diagnoses_icd"])
@@ -142,7 +142,7 @@ def test_missing_table_is_refused(table: str) -> None:
     """Chybějící tabulka manifestu se nesmí nahradit vlastním schématem."""
     shapes = {name: shape for name, shape in SHAPES.items() if name != table}
     with pytest.raises(InvalidInputError, match=table):
-        mimic_tables(_notes([set()]), CODES, shapes)
+        synthetic_mimic_rows(_notes([set()]), CODES, shapes)
 
 
 @pytest.mark.parametrize("table", ["discharge", "diagnoses_icd"])
@@ -153,7 +153,7 @@ def test_unknown_column_is_refused(table: str) -> None:
         table: TableShape(records=0, columns=(*SHAPES[table].columns, "unknown")),
     }
     with pytest.raises(InvalidInputError, match="unknown"):
-        mimic_tables(_notes([set()]), CODES, shapes)
+        synthetic_mimic_rows(_notes([set()]), CODES, shapes)
 
 
 @pytest.mark.parametrize(
@@ -163,7 +163,7 @@ def test_filler_in_diagnosis_is_refused(version: IcdVersion, filler: str) -> Non
     """Změna předpon nesmí výplní přidat neplánovaný label."""
     prefixes = {**PREFIXES, Diagnosis.DIABETES: {version: (filler,)}}
     with pytest.raises(InvalidInputError, match=r"výplň|Výplň"):
-        mimic_tables(_notes([set()]), DiagnosisCodes(prefixes=prefixes), SHAPES)
+        synthetic_mimic_rows(_notes([set()]), DiagnosisCodes(prefixes=prefixes), SHAPES)
 
 
 @pytest.mark.parametrize(
@@ -177,4 +177,4 @@ def test_diagnosis_without_version_prefix_is_refused(
     other = IcdVersion.TEN if version is IcdVersion.NINE else IcdVersion.NINE
     prefixes = {**PREFIXES, Diagnosis.CKD: {other: ("585",)}}
     with pytest.raises(InvalidInputError, match=rf"ckd.*{version.value}"):
-        mimic_tables(_notes(labels), DiagnosisCodes(prefixes=prefixes), SHAPES)
+        synthetic_mimic_rows(_notes(labels), DiagnosisCodes(prefixes=prefixes), SHAPES)

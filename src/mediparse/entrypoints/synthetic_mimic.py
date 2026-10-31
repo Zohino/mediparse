@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING
 from mediparse.domain.language import Language
 from mediparse.domain.mimic_table import table_name
 from mediparse.domain.smoketest_input import input_notes
-from mediparse.domain.synthetic_mimic import mimic_tables
+from mediparse.domain.synthetic_mimic import synthetic_mimic_rows
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
@@ -75,7 +75,7 @@ def run(
         PlansFile(plans).load(), CorpusDirectory(corpus).notes(Language.EN), Language.EN
     )
     shapes = read_manifest(manifest)
-    rows = mimic_tables(notes, load_diagnosis_codes(candidates), shapes)
+    rows = synthetic_mimic_rows(notes, load_diagnosis_codes(candidates), shapes)
     outputs = {"discharge": discharge, "diagnoses_icd": diagnoses}
     for table, path in outputs.items():
         write_string_table(path, shapes[table].columns, rows[table])

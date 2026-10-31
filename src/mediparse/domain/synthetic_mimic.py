@@ -23,7 +23,7 @@ _FIRST_ADMISSION: Final = 20000000
 _TIMESTAMP: Final = "2150-01-01 00:00:00"
 
 
-def mimic_tables(
+def synthetic_mimic_rows(
     notes: Sequence[InputNote],
     codes: DiagnosisCodes,
     shapes: Mapping[str, TableShape],
