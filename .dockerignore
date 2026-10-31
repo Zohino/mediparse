@@ -19,6 +19,7 @@
 !translation/collect.py
 !translation/translate.py
 !scripts/eda-canary.sh
+!scripts/check-pr-record.sh
 !pyproject.toml
 !pixi.lock
 !README.md

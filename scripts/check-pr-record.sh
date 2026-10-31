@@ -21,4 +21,15 @@ if ! tr -d '\r' <"$body" | grep -Eq '^Task: S[0-9]+$'; then
     failed=1
 fi
 
+while IFS= read -r line || [[ -n $line ]]; do
+    if [[ $line != Ruší:* || $line =~ ^Ruší:\ ADR\ D[0-9]+$ ]]; then
+        continue
+    fi
+    printf "Neplatný řádek '%s', očekává se 'Ruší: ADR D<číslo>'.\n" "$line" >&2
+    if [[ $line == 'Ruší: design doc'* ]]; then
+        echo "design doc je archivovaný; přebíjí se ADR." >&2
+    fi
+    failed=1
+done < <(tr -d '\r' <"$body")
+
 exit "$failed"
