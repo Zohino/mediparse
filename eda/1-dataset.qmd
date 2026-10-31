@@ -13,7 +13,7 @@ source("R/corpus.R")
 source("R/export.R")
 eda_check_python()
 con <- eda_connect()
-tables <- sort(DBI::dbListTables(con))
+tables <- sort(DBI::dbListTables(con), method = "radix")
 counts <- data.frame(
   tabulka = tables,
   n = vapply(

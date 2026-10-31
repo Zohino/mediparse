@@ -79,7 +79,7 @@ manifest_tables <- function(path) {
 
 refuse_tables <- function(names, source) {
   if (length(names) > 0L) {
-    stop(paste0(source, ": ", paste(sort(names), collapse = ", "), "."))
+    stop(paste0(source, ": ", paste(sort(names, method = "radix"), collapse = ", "), "."))
   }
 }
 
@@ -92,7 +92,7 @@ corpus_overview <- function(counts, manifest) {
   refuse_tables(setdiff(database, validated), "Tabulky v databázi, ale ne v manifestu validace")
   refuse_tables(setdiff(c("discharge", "radiology"), database), "Povinné tabulky chybí v databázi")
 
-  counts <- counts[order(counts$tabulka), ]
+  counts <- counts[order(counts$tabulka, method = "radix"), ]
   names <- counts$tabulka
   manifest <- manifest[match(names, manifest$tabulka), ]
   table <- catalog[match(names, catalog$tabulka), ]

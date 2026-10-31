@@ -185,3 +185,14 @@ test_that("manifest odmítne chybějící tables, neplatné hodnoty a duplicitn�
   expect_invalid_manifest_field("columns", list("text", FALSE))
   expect_error(read_test_manifest(list(tables = list(manifest_entry(), manifest_entry(file = "discharge.csv")))), "Soubor discharge.csv: duplicitní jméno tabulky discharge.", fixed = TRUE)
 })
+
+
+test_that("pořadí jmen v chybě nezávisí na kolaci locale", {
+  withr::local_collate("C.UTF-8")
+  manifest <- synthetic_manifest()
+  extra <- manifest[rep(1, 2), ]
+  extra$tabulka <- c("a", "Z")
+  manifest <- rbind(manifest, extra)
+  expect_error(corpus_overview(manifest_counts(manifest), manifest),
+               "Tabulky mimo katalog: Z, a.", fixed = TRUE)
+})
