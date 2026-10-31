@@ -103,6 +103,7 @@ def _diagnoses(
     note: InputNote, hadm: str, version: IcdVersion, codes: DiagnosisCodes
 ) -> list[dict[str, str]]:
     icd_codes = [FILLER_CODES[version]]
+    # Pořadí frozensetu závisí na PYTHONHASHSEED; seřazení drží seq_num a otisky parquetů.
     for diagnosis in sorted(note.labels):
         code = codes.representative(diagnosis, version)
         if code is None:

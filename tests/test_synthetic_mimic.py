@@ -65,7 +65,11 @@ def test_codes_preserve_labels_and_admission_links(
 
 def test_rows_follow_manifest_and_fixed_identity_values() -> None:
     """Hodnoty i pořadí sloupců odpovídají manifestu, datum a identita jsou pevné."""
-    notes = _notes([set(), {Diagnosis.CKD}])
+    notes = _notes([
+        set(),
+        {Diagnosis.CKD},
+        {Diagnosis.PNEUMONIA, Diagnosis.ATRIAL_FIBRILLATION, Diagnosis.DIABETES},
+    ])
     tables = mimic_tables(notes, CODES, SHAPES)
 
     assert set(tables) == {"discharge", "diagnoses_icd"}
@@ -102,6 +106,34 @@ def test_rows_follow_manifest_and_fixed_identity_values() -> None:
             "seq_num": "2",
             "icd_code": "585",
             "icd_version": "9",
+        },
+        {
+            "subject_id": "90000002",
+            "hadm_id": "20000002",
+            "seq_num": "1",
+            "icd_code": "Z0000",
+            "icd_version": "10",
+        },
+        {
+            "subject_id": "90000002",
+            "hadm_id": "20000002",
+            "seq_num": "2",
+            "icd_code": "I48",
+            "icd_version": "10",
+        },
+        {
+            "subject_id": "90000002",
+            "hadm_id": "20000002",
+            "seq_num": "3",
+            "icd_code": "E11",
+            "icd_version": "10",
+        },
+        {
+            "subject_id": "90000002",
+            "hadm_id": "20000002",
+            "seq_num": "4",
+            "icd_code": "J18",
+            "icd_version": "10",
         },
     ]
     assert mimic_tables(tuple(reversed(notes)), CODES, SHAPES) == tables
