@@ -89,7 +89,7 @@ Každý graf a každá tabulka sešitu se ukládá i pro LaTeX do `results/eda/<
 - Písmo Libertinus Serif musí být v systému (Fedora `libertinus-fonts`, Debian `fonts-libertinus`); conda-forge ho nemá a Ubuntu ho samostatně nebalí. Jinde ho `scripts/install-libertinus.sh` stáhne z vydání Libertinus 7.051 na GitHubu, ověří otisk SHA-256 a rozbalí řez Serif do `~/.local/share/fonts`, kde ho najde fontconfig z prostředí pixi. Tak ho instaluje i CI. `export_figure` přes `pdffonts` ověří, že ho PDF vložilo, protože cairo jinak tiše dosadí jiné.
 - Exporty jdou ze stejného objektu jako sešit, po potlačení tam, kde ho pravidlo vyžaduje. Render z freeze exporty nepřepisuje ani nemaže: commitnuté `results/eda/<sešit>/` jsou výsledek posledního reálného renderu. Změna `.qmd` proto vyžaduje nový `pixi run eda <n>` a commit freeze i exportů, jinak CI krok „render z freeze“ spadne.
 
-Golden soubory v `tests/fixtures/thesis_table/` ověřují bajtově přesný výstup
+Golden soubory v `eda/tests/testthat/fixtures/thesis_table/` ověřují bajtově přesný výstup
 R exportu v `eda/tests/testthat/test-export-golden.R`, včetně provenance,
 nedělitelných mezer a prázdných tabulek bez `\midrule`.
 
