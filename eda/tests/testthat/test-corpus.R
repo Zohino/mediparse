@@ -1,3 +1,9 @@
+test_that("katalog odpovídá veřejné konfiguraci tabulek", {
+  tables <- jsonlite::read_json("../../../config/mimic_tables.json")$mimic_tables
+  files <- vapply(tables, function(table) basename(table$url), character(1))
+  expect_setequal(mimic_catalog()$tabulka, sub("\\.csv(\\.gz)?$", "", files))
+})
+
 test_that("katalog tabulek má jedinečná jména a neprázdné popisy", {
   catalog <- mimic_catalog()
 
@@ -10,8 +16,7 @@ test_that("katalog obsahuje tabulku mimic-iv-bhc jako třetí zdroj", {
   catalog <- mimic_catalog()
   row <- catalog[catalog$tabulka == "mimic-iv-bhc", ]
 
-  expect_equal(nrow(catalog), 13L)
-  expect_equal(row$zdroj, MIMIC_BHC)
+  expect_equal(row$zdroj, "MIMIC-IV-Ext-BHC")
   expect_equal(length(unique(catalog$zdroj)), 3L)
 })
 
