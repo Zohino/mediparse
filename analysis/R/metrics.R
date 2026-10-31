@@ -64,3 +64,39 @@ metrics_figure <- function(metrics, labels) {
     ggplot2::labs(x = "Hodnota", y = NULL, fill = NULL) +
     theme_thesis()
 }
+
+write_metrics_report <- function(metrics_path, manifest_path, out_dir, candidates_path) {
+  metrics <- read_metrics(metrics_path)
+  manifest <- jsonlite::fromJSON(manifest_path, simplifyVector = FALSE)
+  row_id <- if (is.list(manifest)) manifest$row_id else NULL
+  if (!is.character(row_id) || length(row_id) != 1L || is.na(row_id) || !nzchar(row_id)) {
+    stop(sprintf("Soubor %s: row_id manifestu musí být jeden řetězec.", manifest_path))
+  }
+  runs <- unique(metrics$row_id)
+  if (length(runs) != 1L) {
+    stop(sprintf("Soubor %s: metriky musí mít právě jeden row_id.", metrics_path))
+  }
+  if (runs != row_id) {
+    stop(sprintf(
+      "Soubor %s má row_id %s, ale manifest %s má row_id %s.",
+      metrics_path, runs, manifest_path, row_id
+    ))
+  }
+  labels <- diagnosis_labels(metrics$diagnosis, candidates_path)
+  table <- metrics_table(metrics, labels)
+  plot <- metrics_figure(metrics, labels)
+  diagnoses <- nlevels(plot$data$diagnoza)
+  if (diagnoses == 0L) {
+    stop(sprintf("Soubor %s: žádná diagnóza není zveřejnitelná.", metrics_path))
+  }
+  dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+  # Návratový markdown patří Quarto; report potřebuje jen zapsaný fragment LaTeXu.
+  invisible(export_table(table, col.names = names(table), align = "lrrrrrrrr",
+                         label = "metrics", widths = NULL, dir = out_dir))
+  # Vypsání ggplotu v Rscriptu by otevřelo výchozí pdf() bez písma práce.
+  invisible(export_figure(plot, height_cm = 3 + 1.5 * diagnoses, label = "metrics", dir = out_dir))
+  outputs <- file.path(out_dir, c("metrics.tex", "metrics.pdf"))
+  sidecars <- vapply(outputs, write_sidecar, character(1),
+                     input = metrics_path, manifest = manifest_path, USE.NAMES = FALSE)
+  invisible(c(outputs, sidecars))
+}
