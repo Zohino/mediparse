@@ -111,7 +111,11 @@ test_that("přehled odmítne rozdílné množiny tabulek a chybějící povinné
 
 test_that("shoda počtů potvrzuje úplnost a shodné maximum nemá největší tabulku", {
   manifest <- synthetic_manifest()
-  out <- corpus_overview(manifest_counts(manifest), manifest)
+  counts <- manifest_counts(manifest)
+  tied <- c("discharge", "mimic-iv-bhc")
+  counts$n[counts$tabulka %in% tied] <- 200
+  manifest$records[manifest$tabulka %in% tied] <- 200
+  out <- corpus_overview(counts, manifest)
   expect_match(out$records, "odpovídají počtům v manifestu validace\\.$")
   expect_match(out$summary, "^Počty záznamů u všech tabulek odpovídají")
   expect_false(startsWith(out$records, "Nejvíce"))
