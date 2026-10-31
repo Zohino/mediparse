@@ -334,6 +334,12 @@ ignore = [
     "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá pixi task eda-synthetic
 ]
 
+"tests/test_check_pr_record_script.py" = [
+    "suspicious-subprocess-import",           # test spouští kontrolovaný shellový skript, jinak ho pokrýt nejde
+    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, shell se nepoužívá
+    "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako při lokální a CI kontrole PR
+]
+
 "src/mediparse/entrypoints/cohort.py" = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
