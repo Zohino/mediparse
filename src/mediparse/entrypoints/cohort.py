@@ -18,7 +18,7 @@ from mediparse.domain.environment import Environment
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
-from mediparse.infrastructure.duckdb_cohort import DuckDbCohort
+from mediparse.infrastructure.duckdb_cohort import SOURCE_TABLES, DuckDbCohort
 from mediparse.infrastructure.duckdb_parquet import SPILL_DIRECTORY
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
@@ -34,7 +34,6 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 PACKAGES: Final = ("python", "duckdb", "pyarrow", "pydantic")
-SOURCE_TABLES: Final = ("discharge.csv.gz", "diagnoses_icd.csv.gz")
 
 
 def main(

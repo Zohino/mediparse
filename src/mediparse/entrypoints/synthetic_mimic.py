@@ -6,12 +6,13 @@ import logging
 from typing import TYPE_CHECKING
 
 from mediparse.domain.language import Language
+from mediparse.domain.mimic_table import table_name
 from mediparse.domain.smoketest_input import input_notes
 from mediparse.domain.synthetic_mimic import mimic_tables
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
-from mediparse.entrypoints.cohort import SOURCE_TABLES
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
+from mediparse.infrastructure.duckdb_cohort import SOURCE_TABLES
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.mimic_inventory import read_manifest
@@ -78,6 +79,7 @@ def run(
     outputs = {"discharge": discharge, "diagnoses_icd": diagnoses}
     for table, path in outputs.items():
         write_string_table(path, shapes[table].columns, rows[table])
+    sources = {name: outputs[table_name(name)] for name in SOURCE_TABLES}
     # .invalid nemůže vést na skutečný zdroj. Otisky patří zapsaným parquetům,
     # protože syntetika nemá zdrojová CSV a piny MIMIC by tvrdily jiný původ kohorty.
     write_model(
@@ -88,7 +90,7 @@ def run(
                     url=f"https://mediparse.invalid/synthetic/{name}",
                     sha256=file_sha256(path),
                 )
-                for name, path in zip(SOURCE_TABLES, outputs.values(), strict=True)
+                for name, path in sources.items()
             )
         ),
     )
