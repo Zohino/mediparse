@@ -22,7 +22,7 @@ REFERENCE_PROJECT: Final = "mimic-iv-note"
 
 
 class MimicTable(BaseModel):
-    """Tabulka MIMIC na PhysioNetu: adresa ke stažení a otisk ze ``SHA256SUMS.txt``."""
+    """Zdrojová tabulka: URL souboru a otisk zdroje; syntetika odkazuje na .invalid."""
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
@@ -31,11 +31,13 @@ class MimicTable(BaseModel):
 
     @property
     def path(self) -> PurePosixPath:
-        """Cesta souboru v adrese PhysioNetu."""
+        """Cesta souboru v adrese zdroje."""
         return PurePosixPath(urlsplit(self.url).path)
 
 
-class _Tables(BaseModel):
+class MimicTables(BaseModel):
+    """Config zdrojových tabulek s jednoznačnými jmény souborů."""
+
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     mimic_tables: tuple[MimicTable, ...]
@@ -58,7 +60,7 @@ def load_mimic_tables(path: Path) -> dict[str, MimicTable]:
     Returns:
         Slovník jméno souboru z URL → tabulka, v pořadí configu.
     """
-    tables = parse_file(path, _Tables.model_validate_json)
+    tables = parse_file(path, MimicTables.model_validate_json)
     return {table.path.name: table for table in tables.mimic_tables}
 
 

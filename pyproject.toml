@@ -341,6 +341,10 @@ ignore = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
 
+"src/mediparse/entrypoints/synthetic_mimic.py" = [
+    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
+]
+
 "src/mediparse/entrypoints/smoketest_training.py" = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
