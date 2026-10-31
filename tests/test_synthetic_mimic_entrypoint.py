@@ -57,7 +57,7 @@ def synthetic_tables(tmp_path: Path) -> tuple[Path, Path, Path]:
 def test_cohort_matches_plans_and_source_hashes(
     tmp_path: Path, synthetic_tables: tuple[Path, Path, Path]
 ) -> None:
-    """Skutečná kohorta zachová všech 400 plánů i jejich labely a pravdivou provenance."""
+    """Kohorta zachová 400 zpráv v pořadí note_id, celé řádky i pravdivou provenance."""
     discharge, diagnoses, tables = synthetic_tables
     output = tmp_path / "cohort.parquet"
     manifest = tmp_path / "cohort" / "manifest.json"
@@ -78,7 +78,7 @@ def test_cohort_matches_plans_and_source_hashes(
         json.loads(line)
         for line in REPOSITORY_PLANS.read_text(encoding="utf-8").splitlines()
     ]
-    expected = {plan["note_id"]: set(plan["labels"]) for plan in plans}
+    expected = {plan["note_id"]: plan for plan in plans}
     positives = {
         "diabetes": 94,
         "atrial_fibrillation": 72,
@@ -88,11 +88,17 @@ def test_cohort_matches_plans_and_source_hashes(
     }
     rows = pq.read_table(output).to_pylist()
     assert len(rows) == EXPECTED_NOTES
-    assert {row["note_id"] for row in rows} == set(expected)
+    assert [row["note_id"] for row in rows] == sorted(plan["note_id"] for plan in plans)
     for row in rows:
-        assert {diagnosis for diagnosis in positives if row[diagnosis]} == expected[
-            row["note_id"]
-        ]
+        plan = expected[row["note_id"]]
+        assert row["subject_id"] == plan["subject_id"]
+        assert row["language"] == "en"
+        assert row["text"] == (
+            REPOSITORY_CORPUS / "en" / f"{row['note_id']}.txt"
+        ).read_text(encoding="utf-8")
+        assert {diagnosis for diagnosis in positives if row[diagnosis]} == set(
+            plan["labels"]
+        )
     assert {
         diagnosis: sum(row[diagnosis] for row in rows) for diagnosis in positives
     } == positives

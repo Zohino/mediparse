@@ -46,7 +46,7 @@ rule prepare_smoketest_subset:
 
 rule make_smoketest_splits:
     input:
-        notes=SMOKETEST / "notes.parquet",
+        notes=SMOKETEST / "cohort.parquet",
         config="config/split.json",
     output:
         SMOKETEST / "splits.parquet",
@@ -58,7 +58,7 @@ rule make_smoketest_splits:
 
 rule train_smoketest_model:
     input:
-        notes=SMOKETEST / "notes.parquet",
+        notes=SMOKETEST / "cohort.parquet",
         config="config/smoketest_training.json",
         candidates="config/diagnosis_candidates.json",
         lexicon="config/section_headers.json",
@@ -76,7 +76,7 @@ rule train_smoketest_model:
 rule evaluate_smoketest_model:
     input:
         predictions=SMOKETEST / "predictions.parquet",
-        notes=SMOKETEST / "notes.parquet",
+        notes=SMOKETEST / "cohort.parquet",
         split=SMOKETEST / "splits.parquet",
     output:
         SMOKETEST / "metrics.parquet",
@@ -88,7 +88,7 @@ rule evaluate_smoketest_model:
 
 rule infer_smoketest_model:
     input:
-        notes=SMOKETEST / "notes.parquet",
+        notes=SMOKETEST / "cohort.parquet",
         config="config/smoketest_training.json",
         lexicon="config/section_headers.json",
         model=SMOKETEST / "model.skops",
