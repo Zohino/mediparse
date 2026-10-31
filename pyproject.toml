@@ -117,8 +117,6 @@ ignore_imports = [
     "mediparse.domain.note_structure -> random",
     "mediparse.domain.synthetic_patients -> random",
     "mediparse.domain.** -> datetime",
-    # Čistý zápis sedmi platných číslic bez exponentu pro paritu s format z R.
-    "mediparse.domain.czech -> decimal",
     "mediparse.domain.** -> hashlib",
     "mediparse.domain.** -> math",
     "mediparse.domain.** -> pydantic",
