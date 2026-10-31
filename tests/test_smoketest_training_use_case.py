@@ -13,8 +13,8 @@ from mediparse.domain.evaluation import Classification, Prediction
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
-from mediparse.domain.smoketest_training import TrainingReport
 from mediparse.domain.split import SharedSplit, Split
+from mediparse.domain.training import TrainingReport
 from tests.model_support import parsed_training_config, split_config
 
 if TYPE_CHECKING:

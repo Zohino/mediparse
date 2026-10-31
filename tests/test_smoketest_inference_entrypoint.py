@@ -181,7 +181,7 @@ def test_tampered_predictions_are_refused(
 
     assert code is ExitCode.REFUSED
     assert not demo.exists()
-    assert first.note_id in caplog.text
+    assert all(item.note_id not in caplog.text for item in (first, *rest))
     assert "Nesoulad" in caplog.text
 
 

@@ -13,7 +13,7 @@ from mediparse.domain.evaluation import Classification, Prediction
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
-from mediparse.domain.smoketest_inference import ModelMismatchError
+from mediparse.domain.model_inference import ModelMismatchError
 from tests.model_support import prediction
 
 if TYPE_CHECKING:
@@ -111,7 +111,7 @@ def test_mismatch_raises_and_writes_nothing() -> None:
     wrong = (Classification(predicted=True, score=9.0), ANSWER[1])
     use_case, _, sink = _use_case(answer=wrong)
 
-    with pytest.raises(ModelMismatchError, match="Nesoulad u zprávy 3-DS-1:"):
+    with pytest.raises(ModelMismatchError, match=r"Nesoulad u 1\. predikce z 2:"):
         use_case.run()
 
     assert sink.written == []

@@ -1,4 +1,4 @@
-"""Inference smoketestu: soulad uloženého modelu s tréninkem a výběr ukázky."""
+"""Soulad predikcí uloženého modelu s tréninkem."""
 
 from __future__ import annotations
 
@@ -53,32 +53,16 @@ def ensure_same_predictions(
     if len(expected) != len(actual):
         msg = f"Nesoulad: počet predikcí {len(expected)}, klasifikací {len(actual)}."
         raise ModelMismatchError(msg)
-    for item, result in zip(expected, actual, strict=True):
+    for position, (item, result) in enumerate(zip(expected, actual, strict=True), 1):
         same_score = math.isclose(
             item.score, result.score, rel_tol=TOLERANCE, abs_tol=TOLERANCE
         )
         if item.predicted == result.predicted and same_score:
             continue
         msg = (
-            f"Nesoulad u zprávy {item.note_id}: při tréninku label {item.predicted} "
+            f"Nesoulad u {position}. predikce z {len(expected)}: "
+            f"při tréninku label {item.predicted} "
             f"a skóre {item.score}, po načtení modelu label {result.predicted} "
             f"a skóre {result.score}."
         )
         raise ModelMismatchError(msg)
-
-
-def demo_examples(predictions: Sequence[Prediction]) -> tuple[Prediction, ...]:
-    """Vybere první pozitivní a první negativní zprávu podle pravdy a note_id.
-
-    Args:
-        predictions: Predikce odložených zpráv.
-
-    Returns:
-        Pozitivní před negativní; chybí-li třída, jen druhá; jinak prázdná n-tice.
-    """
-    ordered = sorted(predictions, key=lambda item: item.note_id)
-    firsts = (
-        next((item for item in ordered if item.truth is truth), None)
-        for truth in (True, False)
-    )
-    return tuple(item for item in firsts if item is not None)

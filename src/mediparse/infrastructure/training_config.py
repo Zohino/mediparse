@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mediparse.domain.smoketest_training import TrainingConfig
+from mediparse.domain.training import TrainingConfig
 from mediparse.infrastructure.input_file import parse_file
 
 if TYPE_CHECKING:

@@ -10,7 +10,7 @@ from pydantic import ValidationError
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.smoketest_training import TrainingConfig
+from mediparse.domain.training import TrainingConfig
 from mediparse.infrastructure.training_config import load_training_config
 from tests.model_support import training_config
 from tests.support import REPOSITORY_TRAINING_CONFIG

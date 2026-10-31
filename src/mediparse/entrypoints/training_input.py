@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     from mediparse.application.ports.experiment import InputTable
-    from mediparse.domain.smoketest_training import TrainingConfig
+    from mediparse.domain.training import TrainingConfig
 
 
 def training_input(

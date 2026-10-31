@@ -168,7 +168,7 @@ forbidden_modules = [
 broken_contract_guidance = "Produkční kód nesmí záviset na testech; co potřebují oba, patří do mediparse."
 
 [[tool.importlinter.contracts]]
-name = "Kohorta a split nestojí na smoketestu"
+name = "Kohorta a split nestojí na syntetice, tréninku ani smoketestu"
 type = "forbidden"
 source_modules = [
     "mediparse.entrypoints.cohort",
@@ -185,9 +185,10 @@ source_modules = [
 ]
 forbidden_modules = [
     "mediparse.domain.synthetic_mimic",
-    "mediparse.domain.smoketest_training",
+    "mediparse.domain.training",
+    "mediparse.domain.smoketest_summary",
 ]
-broken_contract_guidance = "Řádek vstupu je v domain.input_note a pravidla splitu v domain.split; párování syntetiky je v domain.synthetic_mimic a smoketest_training je jen smoketest."
+broken_contract_guidance = "Řádek vstupu je v domain.input_note a pravidla splitu v domain.split; párování syntetiky je v domain.synthetic_mimic a trénink i souhrn smoketestu jsou samostatné kroky."
 
 [[tool.importlinter.contracts]]
 name = "Provenance nestojí na auditu korpusu"

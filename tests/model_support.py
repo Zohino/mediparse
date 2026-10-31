@@ -15,8 +15,8 @@ from mediparse.domain.evaluation import Prediction
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.language import Language
 from mediparse.domain.note import note_id, subject_of
-from mediparse.domain.smoketest_training import TrainingConfig
 from mediparse.domain.split import SharedSplit, SplitConfig
+from mediparse.domain.training import TrainingConfig
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.split_table import METADATA_KEY, SCHEMA, ParquetSplitTable
 

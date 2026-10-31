@@ -1,4 +1,4 @@
-"""Trénink smoketestu: config a výsledek běhu pro jednu diagnózu."""
+"""Trénink modelu: config a výsledek běhu pro jednu diagnózu."""
 
 from __future__ import annotations
 

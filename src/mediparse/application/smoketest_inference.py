@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.smoketest_inference import (
-    demo_examples,
+from mediparse.domain.model_inference import (
     ensure_predictions_present,
     ensure_same_predictions,
 )
+from mediparse.domain.smoketest_summary import demo_examples
 
 if TYPE_CHECKING:
     from mediparse.application.ports.experiment import (
