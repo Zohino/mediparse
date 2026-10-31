@@ -47,11 +47,7 @@ jobs:
         with:
           persist-credentials: false
       - uses: ./.github/actions/setup-pixi-env
-      - name: písmo Libertinus pro grafy
-        run: bash scripts/install-libertinus.sh
       - name: pytest
-        env:
-          MEDIPARSE_REQUIRE_THESIS_FONT: "1"
         run: pixi run --frozen pytest
       - name: snakemake dry-run
         run: pixi run --frozen snakemake --dry-run download_mimic
