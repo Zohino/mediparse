@@ -33,7 +33,11 @@ mimic_catalog <- function() {
 }
 
 manifest_tables <- function(path) {
-  tables <- jsonlite::read_json(path)$tables
+  manifest <- jsonlite::read_json(path)
+  if (is.null(manifest$tables)) {
+    stop(sprintf("Soubor %s: chybí pole tables.", path))
+  }
+  tables <- manifest$tables
   rows <- lapply(seq_along(tables), function(index) {
     entry <- tables[[index]]
     file <- if (is.null(entry$file)) paste0(path, " [", index, "]") else entry$file
@@ -42,6 +46,18 @@ manifest_tables <- function(path) {
         stop(sprintf("Soubor %s: chybí pole %s.", file, field))
       }
     }
+    for (field in c("bytes", "records")) {
+      value <- entry[[field]]
+      if (!is.numeric(value) || length(value) != 1L || !is.finite(value) || value < 0) {
+        stop(sprintf("Soubor %s: neplatné pole %s, musí být nezáporné číslo.", file, field))
+      }
+    }
+    columns <- entry$columns
+    if (!is.list(columns) || !all(vapply(columns, function(column) {
+      is.character(column) && length(column) == 1L
+    }, logical(1)))) {
+      stop(sprintf("Soubor %s: neplatné pole columns, musí být seznam textů.", file))
+    }
     data.frame(
       tabulka = sub("\\.csv(\\.gz)?$", "", entry$file),
       bytes = as.double(entry$bytes),
@@ -49,7 +65,13 @@ manifest_tables <- function(path) {
       sloupce = length(entry$columns)
     )
   })
-  do.call(rbind, rows)
+  out <- do.call(rbind, rows)
+  duplicate <- which(duplicated(out$tabulka))
+  if (length(duplicate) > 0L) {
+    index <- duplicate[1]
+    stop(sprintf("Soubor %s: duplicitní jméno tabulky %s.", tables[[index]]$file, out$tabulka[index]))
+  }
+  out
 }
 
 refuse_tables <- function(names, source) {

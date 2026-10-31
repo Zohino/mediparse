@@ -136,3 +136,43 @@ test_that("manifest hlásí chybějící pole i soubor", {
     unlink(path)
   }
 })
+
+
+manifest_entry <- function(...) {
+  entry <- list(file = "discharge.csv.gz", bytes = 1, records = 1, columns = list("text"))
+  changes <- list(...)
+  entry[names(changes)] <- changes
+  entry
+}
+
+read_test_manifest <- function(value) {
+  path <- withr::local_tempfile()
+  jsonlite::write_json(value, path, auto_unbox = TRUE, digits = NA)
+  manifest_tables(path)
+}
+
+expect_invalid_manifest_field <- function(field, value) {
+  entry <- manifest_entry()
+  entry[field] <- list(value)
+  expect_error(read_test_manifest(list(tables = list(entry))),
+               paste0("Soubor discharge.csv.gz: neplatné pole ", field), fixed = TRUE)
+}
+
+test_that("manifest přijme nulové velikosti i počty", {
+  out <- read_test_manifest(list(tables = list(manifest_entry(bytes = 0, records = 0))))
+  expect_equal(out[c("bytes", "records")], data.frame(bytes = 0, records = 0))
+})
+
+test_that("manifest odmítne chybějící tables, neplatné hodnoty a duplicitní tabulky", {
+  expect_error(read_test_manifest(list()), "Soubor .*: chybí pole tables\\.")
+  for (field in c("bytes", "records")) {
+    expect_invalid_manifest_field(field, -1)
+    expect_invalid_manifest_field(field, "1")
+    expect_invalid_manifest_field(field, TRUE)
+    expect_invalid_manifest_field(field, list(1, 2))
+  }
+  expect_invalid_manifest_field("columns", "text")
+  expect_invalid_manifest_field("columns", list(1))
+  expect_invalid_manifest_field("columns", list("text", FALSE))
+  expect_error(read_test_manifest(list(tables = list(manifest_entry(), manifest_entry(file = "discharge.csv")))), "Soubor discharge.csv: duplicitní jméno tabulky discharge.", fixed = TRUE)
+})
