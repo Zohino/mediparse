@@ -73,6 +73,8 @@ jobs:
         run: bash scripts/install-libertinus.sh
       - name: testthat
         run: pixi run --frozen eda-test
+      - name: analysis testthat
+        run: pixi run --frozen analysis-test
       - name: render nad syntetickými tabulkami a kanárek
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
