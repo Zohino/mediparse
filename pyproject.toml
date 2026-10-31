@@ -191,6 +191,28 @@ forbidden_modules = [
 broken_contract_guidance = "Řádek vstupu je v domain.input_note a pravidla splitu v domain.split; párování syntetiky je v domain.synthetic_mimic a trénink i souhrn smoketestu jsou samostatné kroky."
 
 [[tool.importlinter.contracts]]
+name = "Kroky experimentu nestojí na smoketestu ani syntetice"
+type = "forbidden"
+source_modules = [
+    "mediparse.application.model_training",
+    "mediparse.application.model_inference",
+    "mediparse.application.model_evaluation",
+    "mediparse.entrypoints.model_training",
+    "mediparse.entrypoints.model_inference",
+    "mediparse.entrypoints.model_evaluation",
+    "mediparse.entrypoints.training_input",
+    "mediparse.domain.model_inference",
+    "mediparse.domain.training",
+]
+forbidden_modules = [
+    "mediparse.domain.smoketest_summary",
+    "mediparse.domain.synthetic_mimic",
+    "mediparse.infrastructure.synthetic_corpus",
+    "mediparse.entrypoints.smoketest_summary",
+]
+broken_contract_guidance = "Kroky experimentu jsou společné pro MIMIC i smoketest; syntetiku a výběr ukázek skládá samostatný vstupní bod smoketestu."
+
+[[tool.importlinter.contracts]]
 name = "Provenance nestojí na auditu korpusu"
 type = "forbidden"
 source_modules = [
