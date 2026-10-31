@@ -59,6 +59,7 @@ def ensure_same_predictions(
         )
         if item.predicted == result.predicted and same_score:
             continue
+        # note_id nese subject_id pacienta MIMIC; hláška ani log ho nesmí nést.
         msg = (
             f"Nesoulad u {position}. predikce z {len(expected)}: "
             f"při tréninku label {item.predicted} "

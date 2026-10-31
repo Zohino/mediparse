@@ -55,11 +55,10 @@ class ModelInference:
         expected = self.predictions.read()
         ensure_predictions_present(expected)
         texts = {note.note_id: note.text for note in self.table.read()}
-        missing = [item.note_id for item in expected if item.note_id not in texts]
+        missing = sum(item.note_id not in texts for item in expected)
         if missing:
-            msg = (
-                f"Počet odložených zpráv bez textu ve vstupní tabulce: {len(missing)}."
-            )
+            # note_id nese subject_id pacienta MIMIC; hláška ani log ho nesmí nést.
+            msg = f"Počet odložených zpráv bez textu ve vstupní tabulce: {missing}."
             raise InvalidInputError(msg)
         actual = self.model.load().classify([texts[item.note_id] for item in expected])
         ensure_same_predictions(expected, actual)
