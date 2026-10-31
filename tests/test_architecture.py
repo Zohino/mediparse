@@ -16,6 +16,7 @@ from pydantic import BaseModel
 import mediparse
 import mediparse.domain
 from mediparse.domain.cohort import CohortCounts
+from mediparse.domain.dua import MIN_CELL
 from tests.support import REPOSITORY
 
 if TYPE_CHECKING:
@@ -41,8 +42,12 @@ FILE_MODE = re.compile(r"[rwxabt+]+")
 EDA = REPOSITORY / "eda"
 # Import-linter nečte Quarto ani R; stejně jako u Snakemake hlídáme text importů.
 R_IMPORT = re.compile(r"\bimport\(\s*[\"']([\w.]+)[\"']\s*\)")
-PYTHON_IMPORT = re.compile(r"^\s*(?:from|import)\s+([\w.]+)", re.MULTILINE)
-INLINE_PYTHON = re.compile(r"(?<!`)`\{python\}\s*([^`\n]*)`(?!`)")
+EDA_PYTHON = re.compile(
+    r"^\s*```\{python(?:[ ,}])|`\{python\}"
+    r"|^\s*(?:engine:\s*[\"']?jupyter\b|jupyter\s*:)"
+    r"|^\s*```\{r\b[^}\n]*\bengine\s*=\s*[\"']python[\"']",
+    re.MULTILINE,
+)
 EDA_PRESENT = pytest.mark.skipif(
     not EDA.is_dir(),
     reason="eda/ není v obrazu kontejneru; hlídá job Test v CI",
@@ -498,7 +503,7 @@ def _eda_files(root: Path) -> list[Path]:
 
 def _eda_imports(file: Path) -> list[str]:
     text = file.read_text(encoding="utf-8")
-    return [*R_IMPORT.findall(text), *PYTHON_IMPORT.findall(text)]
+    return R_IMPORT.findall(text)
 
 
 def _eda_import_violations(files: list[Path]) -> list[str]:
@@ -511,27 +516,24 @@ def _eda_import_violations(files: list[Path]) -> list[str]:
     ]
 
 
-def _eda_data_import_violations(documents: list[Path]) -> list[str]:
+def _eda_python_violations(documents: list[Path]) -> list[str]:
     return [
-        f"{document.name} importuje {module}"
+        f"{document.name}:{index}: Python v EDA"
         for document in documents
-        for module in _eda_imports(document)
-        if module.split(".")[0] in {"duckdb", "pyarrow"}
+        for index, line in enumerate(
+            document.read_text(encoding="utf-8").splitlines(), start=1
+        )
+        if EDA_PYTHON.search(line)
     ]
 
 
-def _eda_inline_violations(documents: list[Path]) -> tuple[list[str], int]:
-    violations: list[str] = []
-    inspected = 0
-    for document in documents:
-        expressions = INLINE_PYTHON.findall(document.read_text(encoding="utf-8"))
-        inspected += len(expressions)
-        violations.extend(
-            f"{document.name} inline {expression}"
-            for expression in expressions
-            if re.fullmatch(r"Markdown\(.+\)\s*", expression) is None
-        )
-    return violations, inspected
+@EDA_PRESENT
+def test_eda_small_cell_threshold_matches_domain() -> None:
+    """Python i R potlačují malé buňky podle stejného projektového prahu."""
+    source = (EDA / "R" / "dua.R").read_text(encoding="utf-8")
+    threshold = re.search(r"DUA_THRESHOLD <- (\d+)L", source)
+    assert threshold is not None
+    assert int(threshold.group(1)) == MIN_CELL
 
 
 @EDA_PRESENT
@@ -541,34 +543,16 @@ def test_eda_imports_only_entrypoints() -> None:
 
 
 @EDA_PRESENT
-def test_eda_documents_do_not_import_data_libraries() -> None:
-    """Přímý import datové technologie by v sešitu obešel stráž entrypointu."""
-    documents = _eda_documents(EDA)
-    assert _eda_data_import_violations(documents) == []
+def test_eda_documents_do_not_use_python() -> None:
+    """Všechny sešity i přílohy používají R na knitru."""
+    assert _eda_python_violations(_eda_documents(EDA)) == []
 
 
-@EDA_PRESENT
-def test_eda_inline_python_is_markdown() -> None:
-    """Samotný str Jupyter vypíše jako repr včetně uvozovek a escape sekvencí."""
-    documents = _eda_documents(EDA)
-    violations, inspected = _eda_inline_violations(documents)
-    assert inspected > 0
-    assert violations == []
-
-
-def test_eda_checks_find_violations(tmp_path: Path) -> None:
-    """Kontroly zachytí R, Python, datové knihovny i inline bez Markdown."""
+def test_eda_import_check_finds_violations(tmp_path: Path) -> None:
+    """Reticulate v R smí vstupovat jen přes entrypointy."""
     document = tmp_path / "bad.qmd"
     document.write_text(
-        "```{python}\n"
-        "from mediparse.domain.x import y\n"
-        "import mediparse\n"
-        "import duckdb\n"
-        "from pyarrow.parquet import read_table\n"
-        "from mediparse.entrypoints.ok import fine\n"
-        "```\n"
-        "`{python} corpus.tables` a `{python} Markdown(corpus.tables)`\n",
-        encoding="utf-8",
+        '```{r}\nx <- import("mediparse.domain.x")\n```\n', encoding="utf-8"
     )
     r_file = tmp_path / "bad.R"
     r_file.write_text(
@@ -576,29 +560,60 @@ def test_eda_checks_find_violations(tmp_path: Path) -> None:
         'y <- import("mediparse.entrypoints.ok")\n',
         encoding="utf-8",
     )
-    files = _eda_files(tmp_path)
-    assert _eda_import_violations(files) == [
+    assert _eda_import_violations(_eda_files(tmp_path)) == [
         "bad.qmd importuje mediparse.domain.x",
-        "bad.qmd importuje mediparse",
         "bad.R importuje mediparse.infrastructure.x",
     ]
-    assert _eda_data_import_violations([document]) == [
-        "bad.qmd importuje duckdb",
-        "bad.qmd importuje pyarrow.parquet",
+
+
+def test_eda_python_check_finds_all_three_forms(tmp_path: Path) -> None:
+    """Kontrola zachytí chunk, inline výraz i engine Pythonu."""
+    document = tmp_path / "bad.qmd"
+    document.write_text(
+        "engine: jupyter\n```{python}\nx = 1\n```\n`{python} x`\n",
+        encoding="utf-8",
+    )
+    assert _eda_python_violations([document]) == [
+        "bad.qmd:1: Python v EDA",
+        "bad.qmd:2: Python v EDA",
+        "bad.qmd:5: Python v EDA",
     ]
-    assert _eda_inline_violations([document]) == (["bad.qmd inline corpus.tables"], 2)
 
 
-def test_eda_document_checks_do_not_require_r(
+@pytest.mark.parametrize(
+    "source",
+    [
+        'engine: "jupyter"',
+        "engine: 'jupyter'",
+        "jupyter: python3",
+        "```{python echo=FALSE}",
+        '```{r engine="python"}',
+        '```{r, engine = "python"}',
+        "```{r engine='python'}",
+    ],
+)
+def test_eda_python_check_detects_engine_variants(tmp_path: Path, source: str) -> None:
+    """Nastavení enginu ani volby chunku nesmějí obejít zákaz Pythonu."""
+    document = tmp_path / "bad.qmd"
+    document.write_text(source + "\n", encoding="utf-8")
+    violations = _eda_python_violations([document])
+    assert violations == ["bad.qmd:1: Python v EDA"]
+
+
+def test_eda_python_check_accepts_r_document(tmp_path: Path) -> None:
+    """Čistý QMD na knitru nemá žádný nález."""
+    document = tmp_path / "fine.qmd"
+    document.write_text("```{r}\nx <- 1\n```\n`r x`\n", encoding="utf-8")
+    assert _eda_python_violations([document]) == []
+
+
+def test_eda_python_check_refuses_uninspected_documents(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Kontroly QMD fungují i po odstranění posledního R pomocníka."""
-    (tmp_path / "only.qmd").write_text(
-        '`{python} Markdown("Text.")`\n', encoding="utf-8"
-    )
+    """Kontrola nad repem nesmí zezelenat bez jediného dokumentu."""
     monkeypatch.setattr("tests.test_architecture.EDA", tmp_path)
-    test_eda_documents_do_not_import_data_libraries()
-    test_eda_inline_python_is_markdown()
+    with pytest.raises(AssertionError):
+        test_eda_documents_do_not_use_python()
 
 
 def test_eda_import_check_requires_r_files(tmp_path: Path) -> None:
@@ -606,26 +621,3 @@ def test_eda_import_check_requires_r_files(tmp_path: Path) -> None:
     (tmp_path / "only.qmd").write_text("Text.\n", encoding="utf-8")
     with pytest.raises(AssertionError):
         _eda_files(tmp_path)
-
-
-@pytest.mark.parametrize(
-    ("text", "inspected"),
-    [("Bez inline.\n", 0), ('`{python} Markdown("Text.")`\n', 1)],
-)
-def test_eda_inline_check_counts_valid_expressions(
-    tmp_path: Path, text: str, inspected: int
-) -> None:
-    """Počet prošlých inline výrazů zahrnuje i platné, nejen nálezy."""
-    document = tmp_path / "inline.qmd"
-    document.write_text(text, encoding="utf-8")
-    assert _eda_inline_violations([document]) == ([], inspected)
-
-
-def test_eda_inline_check_refuses_uninspected_documents(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """Kontrola nad repem nesmí zezelenat, když neprošla žádný inline výraz."""
-    (tmp_path / "only.qmd").write_text("Bez inline.\n", encoding="utf-8")
-    monkeypatch.setattr("tests.test_architecture.EDA", tmp_path)
-    with pytest.raises(AssertionError):
-        test_eda_inline_python_is_markdown()

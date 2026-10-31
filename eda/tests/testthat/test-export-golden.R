@@ -1,4 +1,4 @@
-golden_dir <- "../../../tests/fixtures/thesis_table"
+golden_dir <- "fixtures/thesis_table"
 
 golden_bytes <- function(path) {
   readBin(path, "raw", n = file.info(path)$size)
@@ -12,7 +12,7 @@ golden_frame <- function(case) {
   as.data.frame(columns, stringsAsFactors = FALSE, check.names = FALSE)
 }
 
-test_that("export tabulek odpovídá sdíleným golden souborům bajt po bajtu", {
+test_that("export tabulek odpovídá golden souborům bajt po bajtu", {
   cases <- jsonlite::read_json(file.path(golden_dir, "cases.json"))
   dir <- withr::local_tempdir()
   for (case in cases) {
@@ -34,7 +34,7 @@ test_that("export tabulek odpovídá sdíleným golden souborům bajt po bajtu",
   }
 })
 
-test_that("provenance odpovídá sdílenému golden souboru", {
+test_that("provenance odpovídá golden souboru", {
   details <- jsonlite::read_json(file.path(golden_dir, "provenance.json"))
   dir <- withr::local_tempdir()
   export_table(

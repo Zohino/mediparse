@@ -79,7 +79,7 @@ class EdaDatabase:
 
     @contextmanager
     def connect(self) -> Generator[duckdb.DuckDBPyConnection]:
-        """Spojení v paměti s pohledem nad každým parquetem; na konci se zavře.
+        """Strážené spojení v paměti s pohledem nad každým parquetem; na konci se zavře.
 
         Yields:
             Spojení s nastavenou pamětí a spillem.
@@ -89,37 +89,12 @@ class EdaDatabase:
                 nebo se tabulka nedá číst.
             DataAccessError: Skutečná data v prostředí, které je nesmí číst.
         """
-        with self._connect_views() as (con, _names):
-            yield con
-
-    def record_counts(self) -> dict[str, int]:
-        """Spočítá řádky každého pohledu přes spojení se stráží.
-
-        Returns:
-            Počty jako Python int, seřazené podle jména pohledu.
-
-        Raises:
-            InvalidInputError: Tabulku nelze otevřít nebo spočítat.
-            DataAccessError: Prostředí nesmí číst skutečná data.
-        """
-        with self._connect_views() as (con, names):
-            return {name: _record_count(con, name) for name in names}
-
-    @contextmanager
-    def _connect_views(
-        self,
-    ) -> Generator[tuple[duckdb.DuckDBPyConnection, tuple[str, ...]]]:
-        """Otevře spojení a předá jména z téhož stráženého snímku adresáře.
-
-        Yields:
-            Spojení a seřazená jména spravovaných pohledů.
-        """
         views = self.guarded_views()
         con = _open(self.settings())
         try:
             for name, path in views.items():
                 create_parquet_view(con, name, path)
-            yield con, tuple(views)
+            yield con
         finally:
             con.close()
 
@@ -149,13 +124,4 @@ def _open(settings: DuckDbSettings) -> duckdb.DuckDBPyConnection:
             f"Nastavení {MEMORY_VARIABLE}={settings.memory_limit!r} "
             f"DuckDB nepřijal: {type(error).__name__}."
         )
-        raise InvalidInputError(msg) from None
-
-
-def _record_count(con: duckdb.DuckDBPyConnection, name: str) -> int:
-    try:
-        return int(con.table(name).count("*").fetchall()[0][0])
-    except duckdb.Error as error:
-        msg = f"Počet záznamů tabulky {name} nelze přečíst: {type(error).__name__}."
-        # Text chyby DuckDB může nést buňky z dat; do renderu smí jen typ výjimky.
         raise InvalidInputError(msg) from None

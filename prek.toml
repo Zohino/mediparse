@@ -32,7 +32,7 @@ hooks = [
     { id = "mixed-line-ending", args = ["--fix=lf"], exclude = "^resources/icd/2018_I(9|10)gem\\.txt$" },
     { id = "trailing-whitespace", exclude = "^resources/icd/2018_I(9|10)gem\\.txt$" },
     # Golden markdown je přesný návrat kable, který nemá koncový newline.
-    { id = "end-of-file-fixer", exclude = "^(eda/_freeze/|resources/icd/2018_I(9|10)gem\\.txt$|tests/fixtures/thesis_table/[^/]+\\.md$)" },
+    { id = "end-of-file-fixer", exclude = "^(eda/_freeze/|resources/icd/2018_I(9|10)gem\\.txt$|eda/tests/testthat/fixtures/thesis_table/[^/]+\\.md$)" },
     { id = "check-toml" },
     { id = "check-yaml" },
     { id = "check-json" },

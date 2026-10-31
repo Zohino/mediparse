@@ -1,27 +1,21 @@
 # EDA v Quartu
 
-Průzkum dat žije v Quarto projektu `eda/`: jeden dokument `eda/<n>-*.qmd` na sešit. Sešit 1 běží na enginu jupyter v Pythonu, sešity 2–9 zatím na knitru (R s Pythonem přes reticulate). Všechny používají prostředí pixi `eda` a dotazují parquet přes DuckDB. Dokumenty slouží hodnotiteli a zároveň jako podklad rozhodnutí pro pipeline.
+Průzkum dat žije v Quarto projektu `eda/`: jeden dokument `eda/<n>-*.qmd` na sešit. Všechny sešity běží na enginu knitr v R; do S20h3 používají Python přes reticulate. Všechny používají prostředí pixi `eda` a dotazují parquet přes DuckDB. Dokumenty slouží hodnotiteli a zároveň jako podklad rozhodnutí pro pipeline.
 
-Příloha s provenance a seznam literatury jsou pro sešity na knitru ve sdíleném `eda/_partials/appendix.qmd`, který sešity vkládají přes `{{< include _partials/appendix.qmd >}}`. Podadresář s podtržítkem nepočítá CI ani `eda_render` a `quarto render eda` ho přeskočí. Změna partialu mění všechny sešity, které jej vkládají, proto vyžaduje nový reálný render každého z nich. Pro sešity na jupyteru je připravený samostatný `eda/_partials/appendix-python.qmd` se stejným nadpisem a literaturou; vloží se přes `{{< include _partials/appendix-python.qmd >}}`.
+Příloha s provenance a seznam literatury jsou ve sdíleném `eda/_partials/appendix.qmd`, který sešity vkládají přes `{{< include _partials/appendix.qmd >}}`. Podadresář s podtržítkem nepočítá CI ani `eda_render` a `quarto render eda` ho přeskočí. Změna partialu mění všechny sešity, které jej vkládají, proto vyžaduje nový reálný render každého z nich.
 
 ## Forma dokumentů
 
-Dokumenty mají akademickou formu: abstrakt, číslované kapitoly, obsah, číslované tabulky s titulkem (v R `#| label: tbl-…`, v Pythonu argument `label` exportéru; odkaz `@tbl-…`), citace `[@klíč]` z `eda/references.bib` a seznam literatury. Sdílená metadata (autor, bibliografie, obsah, číslování, A4) jsou v `eda/_quarto.yml`. Citace zpracovává citeproc (styl autor–rok), protože Typst v Quartu 1.9 nadepisuje vlastní bibliografii „Bibliografie“; kapitola „Literatura“ je proto v dokumentu ručně. V sešitech na knitru formátují počty a podíly v tabulkách `number_text`, `percent_text` a `share_table` z `eda/R/dua.R`, rozměry tabulek z veřejného manifestu validace se vkládají jako text.
+Dokumenty mají akademickou formu: abstrakt, číslované kapitoly, obsah, číslované tabulky s titulkem (`#| label: tbl-…`; odkaz `@tbl-…`), citace `[@klíč]` z `eda/references.bib` a seznam literatury. Sdílená metadata (autor, bibliografie, obsah, číslování, A4) jsou v `eda/_quarto.yml`. Citace zpracovává citeproc (styl autor–rok), protože Typst v Quartu 1.9 nadepisuje vlastní bibliografii „Bibliografie“; kapitola „Literatura“ je proto v dokumentu ručně. V sešitech formátují počty a podíly v tabulkách `number_text`, `percent_text` a `share_table` z `eda/R/dua.R`, rozměry tabulek z veřejného manifestu validace se vkládají jako text.
 
-## Engine po sešitech
+## Kontrola architektury
 
-`eda/_quarto.yml` ponechává `engine: knitr` pro nepřepsané sešity a určuje
-`jupyter: python3` pro všechny sešity na jupyteru. Přepsaný sešit nastaví ve front
-matter `engine: jupyter`, jako `eda/1-dataset.qmd`. Kernel `python3` se bere
-z prostředí pixi; bez explicitní volby by Quarto mohlo vybrat starý uživatelský
-kernel s neexistujícím interpretem. K renderu stačí balíky `ipykernel` a `nbclient`,
-celý balík `jupyter` s notebookem a labem není potřeba.
-
-Sešity a R pomocníci vstupují do `mediparse` jen přes `mediparse.entrypoints`.
-`tests/test_architecture.py` kontroluje importy v `.qmd` i `.R`, zakazuje přímý
-import `duckdb` a `pyarrow` v `.qmd` a ověřuje obalení Python inline výrazů do
-`Markdown(...)`. Import-linter tyto formáty nečte. V kontejneru se kontrola EDA
-přeskočí, protože adresář `eda/` v obrazu není; hlídá ji job Test v CI.
+`eda/_quarto.yml` určuje společný engine `knitr`. Sešity a R pomocníci vstupují
+do `mediparse` jen přes `mediparse.entrypoints`. `tests/test_architecture.py`
+kontroluje importy v `.qmd` i `.R` a zakazuje Python chunky, inline výrazy
+Pythonu a engine jupyter ve všech `eda/**/*.qmd` včetně příloh. Import-linter
+tyto formáty nečte. V kontejneru se kontrola EDA přeskočí, protože adresář
+`eda/` v obrazu není; hlídá ji job Test v CI.
 
 ## Rendery
 
@@ -54,7 +48,8 @@ Projekt má `freeze: auto`. `quarto render eda` (celý projekt) použije zmraže
 
 - DUA PhysioNetu o malých počtech nic neříká; práh n < 10 je pravidlo projektu a platí jen pro buňky skupin pacientů vymezených kvaziidentifikátorem (věk, pohlaví, rasa, období, diagnóza, výkon, lék, typ přijetí, pojištění, úmrtí) a pro kategorie, jejichž popisek je hodnota z dat. Takové kategorie s n < 10 se potlačují. Metriky textu a korpusu (počty záznamů, pacientů, přijetí a zpráv, zprávy na pacienta a přijetí, pokrytí, éra ICD, délky, značky, masky, kvalita, maska věku jako počet zpráv) nepopisují skupiny pacientů a zveřejňují se přesně. V sešitech 1–5 se potlačuje jen rozpad éry ICD podle období ukotvení pacienta (sešit 2, sešit 5 z něj přebírá jen závěr o přechodu mezi verzemi); sešit 6 potlačuje všechny kategoriální tabulky a graf demografie uvnitř každého atributu; sešit 7 potlačuje binární prevalence diagnóz funkcí `dua_binary`; sešit 8 potlačuje celé řádky kandidátů a příznaků, jejichž zmínky v textu vymezují skupinu pacientů diagnózou nebo příznakem.
 - `dua_binary(n, total)` v `eda/R/dua.R` vrátí `NA` pro buňku, kde `n < 10` nebo `total − n < 10`, protože doplněk by šel dopočítat z přesně zveřejněného jmenovatele. Používá ho sešit 7 pro každou skupinu pacientů vymezenou diagnózou (Charlsonova kategorie, kandidát, skupina kódů v žebříčku, souběh); potlačená buňka se v tabulce ukáže jako „potlačeno“ a v grafu se nekreslí. Kanárek ověří potlačení jen u nemapovaných popisků z dat (období ukotvení v sešitu 2, doloženo mutací `DUA_THRESHOLD <- 1L`). V sešitech 6 a 7 potlačení dokazují testy testthat: popisky sešitu 6 R mapuje na české a skupina kódů jsou první tři znaky po `upper`, takže se prefix `eda-sentinel-` ztratí (mutace nad sešity 6 a 7 kanárek nevidí).
-- `dua_suppress(df, by)` v `eda/R/dua.R` vyžaduje agregovanou tabulku se sloupcem `n`, řádky pod prahem sloučí do jednoho řádku „ostatní (n < 10)“ a vrací číselné `n`, z něhož se kreslí grafy. Skryté buňky doplňuje `dua_hidden` nejmenší zachovanou buňkou, dokud jejich součet není aspoň 10, aby nešly dopočítat z celku; s `by` potlačuje uvnitř každé skupiny zvlášť. Neagregovaná tabulka skončí chybou. Popisky smí být jen text nebo faktor; další číselný sloupec vedle `n` se odmítne, protože by nešel potlačit. Pythonní doménové moduly sešitů používají pravidla z `src/mediparse/domain/dua.py`, kde se skupina se součtem pod prahem nezveřejní.
+- `dua_suppress(df, by)` v `eda/R/dua.R` vyžaduje agregovanou tabulku se sloupcem `n`, řádky pod prahem sloučí do jednoho řádku „ostatní (n < 10)“ a vrací číselné `n`, z něhož se kreslí grafy. Skryté buňky doplňuje `dua_hidden` nejmenší zachovanou buňkou, dokud jejich součet není aspoň 10, aby nešly dopočítat z celku; s `by` potlačuje uvnitř každé skupiny zvlášť. Neagregovaná tabulka skončí chybou. Popisky smí být jen text nebo faktor; další číselný sloupec vedle `n` se odmítne, protože by nešel potlačit.
+- Přehled korpusu (sešit 1) je v `eda/R/corpus.R`. Manifest validace čte přímo `jsonlite`, aby velikosti nad 2^31 − 1 nepřetekly při přenosu přes reticulate. Přehled odmítne tabulky mimo katalog, rozdílné množiny databáze a manifestu i chybějící povinné tabulky; porovnání počtů určuje závěr o úplnosti dat.
 - Dotazy sešitu 2 (pacienti, pokrytí, éra ICD) jsou v `eda/R/patients.R` a testuje je testthat nad parquetem vyrobeným v testu, protože syntetika neobsahuje NULL.
 - Metriky textu (sešit 3) jsou v `eda/R/text.R`. `note_metrics(con, table)` projde text zpráv jednou a vytvoří dočasnou tabulku s délkou, počtem slov, značkami `___`, zbytkovými maskami, příznaky věku a otiskem textu; agregační funkce čtou jen ji. Značka je přesně tři podtržítka (stejná definice jako `_MARKER` v `domain/translation_consistency.py`), delší úseky se počítají zvlášť. Z textu se zveřejňují jen počty a míry, nikdy nalezené řetězce ani kontext; percentily, minimum a maximum i počty zpráv jsou bez potlačení. Funkce testuje testthat nad parquetem s textem vytvořeným v testu (`helper-mimic.R`), protože syntetika nemá masky ani věk (značky `___` nese jen preambule zpráv, viz Kanárek).
 - Tokenizace (sešit 4) je v `eda/R/tokens.R`. Tokenizují se XLM-R (`FacebookAI/xlm-roberta-base`), mDeBERTa (`microsoft/mdeberta-v3-base`) v pevných revizích a překladový model; jeho model, revize, okno a `SPLIT_RATIO` se čtou z `translation/prepare.py` přes `reticulate::import_from_path`, v `eda/R` se nepíšou znovu. `note_tokens(con, table, tokenizers)` čte zprávy z `eda_connect()` po dávkách 2 000 podle `note_id` a zapíše počty tokenů do dočasné tabulky `note_tokens_<tabulka>`, agregace čtou jen ji. Počet částí překladu z celého korpusu je spodní mez, přesné dělení (`note_parts.split` s `prepare._fits`) běží na deterministickém vzorku 1 000 zpráv na tabulku. Česká délka je odhad: poměr CS/EN z paralelní syntetiky v `resources/synthetic/{en,cs}`, ne měření na překladu MIMIC. Prostředí `eda` má kvůli tomu `transformers`, `tokenizers`, `sentencepiece`, `protobuf` a `jinja2` a `TRANSFORMERS_VERBOSITY=error`, aby hlášky transformers nešly do PDF. Tokenizér `google/translategemma-27b-it` je gated: lokálně stačí přihlášený token v `~/.cache/huggingface`, v CI ho krok `eda-synthetic` bere ze secretu repa `HF_TOKEN`. Funkce se testují offline nad falešným tokenizérem (R funkce se stejným voláním).
@@ -65,10 +60,10 @@ Projekt má `freeze: auto`. `quarto render eda` (celý projekt) použije zmraže
 - Hlavičky a lexikon sekcí (sešit 9) jsou v `eda/R/sections.R`; lexikon je `config/section_headers.json` (sekce šablony MIMIC s celofrázovými synonymy a seznam administrativních polí `preamble`), čte ho R (audit hlaviček) a parser sekcí `domain/section_headers.py` (segmentace, viz další odstavec); sekce s příznakem `diagnostic` vystřihne strip D2 (`strip_diagnostic_sections`). Hlavička je řádek `HEADER_PATTERN` (RE2, odsazení povoleno, aspoň 3 znaky, bez číslic), shoda se synonymem je rovnost řetězců normalizovaných jedinou SQL funkcí `normalized_sql` (malá písmena, bílé znaky do jedné mezery, bez koncových mezer a teček). `note_headers(con)` projde text jednou do dočasné tabulky `note_headers_input`. Žebříček hlaviček publikuje jen hlavičky nad `publishable_floor` (1 % korpusu, nejméně 10 zpráv), protože řetězec hlavičky je popisek z dat; synonyma lexikonu se publikují všechna i s nulou. Syntetický text má preambuli a všechny sekce lexikonu, takže žebříček má hodnoty a kanárek hlídá, že `publishable_floor` nepustí pseudohlavičku jediné zprávy (doloženo mutací `publishable_floor` na 1); rozsah potlačení dokazují testy nad fixture.
 - Segmentace zpráv a kostra šablony (sešit 9) jsou v `eda/R/segments.R`. Zprávy rozděluje parser sekcí z balíčku, ne dotaz: `segment_corpus(con, module, lexicon_path)` pošle texty vstupního korpusu po dávkách (`batched_table` v `eda/R/db.R`, týž pomocník jako `note_tokens`) do `mediparse.entrypoints.eda_sections.note_sections` přes reticulate a do dočasné tabulky `note_sections_input` zapíše jen pozici, klíč sekce a délky (`span_chars`, `body_chars`), ne text. Texty a identifikátory se do Pythonu předávají jako `as.list(unname(...))`, protože reticulate pojmenovaný seznam změní na slovník a duplicitní jména sloučí. Agregace (kostra podle mediánu pozice, konzistence pořadí, matice precedence, sekce na zprávu, délky těl, podíl textu stripu D2, zprávy bez nadpisů) jsou SQL nad touto tabulkou; diagnostické sekce stripu čte `strip_share` z lexikonu (příznak `diagnostic`). Funkce včetně grafů testuje testthat nad ručně vytvořenou tabulkou, protože syntetika sekce má, ale mnohé větve (odsazená hlavička, hlavička verzálkami, opakování další sekce) zůstávají nad ní nulové.
 - Předzpracování pro TF-IDF (sešit 9) je v `eda/R/preprocessing.R`. Tokeny nepočítá dotaz, ale analyzér `tfidf_vectorizer(None | normalizace)` z `infrastructure/sklearn_classifier.py`, týž vectorizer, který používá trénink, volaný přes reticulate v `mediparse.entrypoints.eda_preprocessing`. `note_preprocessing` posílá zprávy vstupního korpusu po dávkách a do tabulky `note_preprocessing_input` zapíše jen počty tokenů bez a s předzpracováním a výskyty zkratek pětice na zprávu (`find_diagnosis_acronyms` nad normalizovaným textem); `note_vocabulary` zapíše do `preprocessing_vocabulary_input` distinct tokeny dávky po variantách, slovník je `count(DISTINCT token)` (analyzér před prořezáním `min_df`/`max_df`). Tabulka zkratek nezveřejňuje počet zpráv se zkratkou, jen výskyty (1–9 jako „< 10“) a podíl zpráv bez kódu diagnózy, protože počet zpráv by s podílem a sešitem 8 prozradil malou skupinu. Výskyty počet zpráv jen shora omezují, proto se podíl uvádí jen u zkratek s aspoň 1 000 výskyty (`SHARE_MIN_OCCURRENCES`) a navíc se skryje při buňce křížení zkratka × kód pod 10. Funkce testuje testthat přes `corpus_con`. Syntetické zprávy nesou zkratky pětice v první sekci (viz Kanárek), takže tabulka zkratek ukáže u DM, DM2 a COPD podíl a u AF, CKD a ESRD výskyty bez podílu (nad syntetikou nemají buňku „s kódem“); větve „< 10“ a „0 výskytů“ zůstávají nad syntetikou nevyzkoušené.
-- Česká typografie je společná všem sešitům. `plural_form` a `count_phrase` v `eda/R/czech.R` skloňují po číslovkách (1 zmínka, 2 zmínky, 5 zmínek, 1,5 zmínky) a spojují číslo se slovem nedělitelnou mezerou; věty sešitu 8 skládané z počtů jdou přes ně. Lua filtr `eda/_filters/nbsp.lua` zapsaný v `eda/_quarto.yml` nahradí mezeru i zalomení řádku nedělitelnou mezerou po jednopísmenné předložce či spojce (k, s, v, z, o, u, a, i) a po čísle. Filtr běží až v pandocu, fragmenty `.tex` nemění (v práci je ošetří luavlna) a freeze je výsledek výpočtu, takže `quarto render eda` z commitnutých freeze změní PDF sešitů 1–7; jejich přerender a commit dělá uživatel. Pythonní doménové moduly sešitů berou český zápis z `src/mediparse/domain/czech.py`, kde `decimal_text` zaokrouhluje nativně Pythonem a odděluje tisíce nezlomitelnou mezerou.
+- Česká typografie je společná všem sešitům. `plural_form` a `count_phrase` v `eda/R/czech.R` skloňují po číslovkách (1 zmínka, 2 zmínky, 5 zmínek, 1,5 zmínky) a spojují číslo se slovem nedělitelnou mezerou; věty sešitu 8 skládané z počtů jdou přes ně. Lua filtr `eda/_filters/nbsp.lua` zapsaný v `eda/_quarto.yml` nahradí mezeru i zalomení řádku nedělitelnou mezerou po jednopísmenné předložce či spojce (k, s, v, z, o, u, a, i) a po čísle. Filtr běží až v pandocu, fragmenty `.tex` nemění (v práci je ošetří luavlna) a freeze je výsledek výpočtu, takže `quarto render eda` z commitnutých freeze změní PDF sešitů 1–7; jejich přerender a commit dělá uživatel.
 - Pravidla přístupu k datům mají jedinou kopii v Pythonu. Doména (`domain/data_access.py`) drží blokující proměnné `CI` a `CLAUDECODE` s důvody a funkce `blocked_reason` a `check_data_access`; sdílí je audit korpusu, takže obě místa hlásí tentýž důvod. Infrastruktura (`infrastructure/eda_duckdb.py`, `EdaDatabase`) je jediná cesta ke spojení: `connect()` ověří, že adresář existuje a obsahuje parquet, pak stráž, a teprve potom otevře spojení a založí pohled nad každým parquetem. Bez úspěšné stráže spojení nevznikne.
 - Stráž odmítne adresář bez platné značky `synthetic.json`, když je neprázdná proměnná `CLAUDECODE` nebo `CI`: skutečná data se tam číst nesmí. Značku čte `read_marker`, takže prázdný nebo poškozený soubor je chyba, ne průchod.
-- Dokument dostává připojení z `eda_connect()`: dočasné soubory DuckDB leží vedle adresáře parquetu (`resources/mimic/duckdb-tmp`) a paměť je omezená na `MEDIPARSE_DUCKDB_MEMORY` (výchozí `8GB`, prázdná hodnota znamená výchozí). `eda_connect()` a `eda_parquet_dir()` v `eda/R/db.R` jen volají `entrypoints/eda_database.py` (`connection_settings`, `parquet_dir`) a podle výsledku otevřou vlastní spojení `r-duckdb`; prostředí mu předávají jako `as.list(Sys.getenv())`, protože `os.environ` pod reticulate je snímek ze startu. Python sešity použijí `database(os.environ).connect()`.
+- Dokument dostává připojení z `eda_connect()`: dočasné soubory DuckDB leží vedle adresáře parquetu (`resources/mimic/duckdb-tmp`) a paměť je omezená na `MEDIPARSE_DUCKDB_MEMORY` (výchozí `8GB`, prázdná hodnota znamená výchozí). `eda_connect()` a `eda_parquet_dir()` v `eda/R/db.R` jen volají `entrypoints/eda_database.py` (`connection_settings`, `parquet_dir`) a podle výsledku otevřou vlastní spojení `r-duckdb`; prostředí mu předávají jako `as.list(Sys.getenv())`, protože `os.environ` pod reticulate je snímek ze startu.
 - `eda_check_python()` ověří, že reticulate použil Python z prostředí pixi. Prostředí obsahuje `micromamba` a nastavuje `RETICULATE_PYTHON` a `RETICULATE_CONDA`, jinak reticulate hledá binárku conda nebo tiše sáhne po cizím Pythonu.
 - Do dokumentů patří jen agregáty. Řádková data a texty z MIMIC se nevypisují.
 
@@ -86,7 +81,7 @@ Kanárek čte i exporty: `.tex` fragmenty hledá `grep` nad `results/`, text gra
 
 ## Exporty pro text práce
 
-Každý graf a každá tabulka sešitu se ukládá i pro LaTeX do `results/eda/<sešit>/`. Text práce je odkazuje přes `../results/eda/` (`\graphicspath`, `\input`) a nekopíruje je. V R se soubor jmenuje podle labelu chunku (`tbl-korpus.tex`, `fig-….pdf`); label musí odpovídat `^[a-z0-9-]+$`. V Pythonu název tabulky určuje argument `label` exportéru (viz níže). `\caption`, `\label` a float píše text práce.
+Každý graf a každá tabulka sešitu se ukládá i pro LaTeX do `results/eda/<sešit>/`. Text práce je odkazuje přes `../results/eda/` (`\graphicspath`, `\input`) a nekopíruje je. Soubor se jmenuje podle labelu chunku (`tbl-korpus.tex`, `fig-….pdf`); label musí odpovídat `^[a-z0-9-]+$`. `\caption`, `\label` a float píše text práce.
 
 - `export_table(df, col.names, align, code = character())` (`eda/R/export.R`) zapíše fragment `tabular` s `booktabs` bez floatu a vrátí `knitr::kable` ze stejného data.frame pro Typst, chunk tedy volá jen tuto funkci. Šířky sloupců bere z `#| tbl-colwidths` chunku a sloupec se šířkou sází jako `p{\dimexpr w\linewidth-2\tabcolsep\relax}`; bez nich zůstane prosté `l/c/r`. Sloupce v `code` se v Typstu obalí backticky, v LaTeXu `\texttt{}`. Tabulky se exportují všechny, včetně provenance.
 - `export_json(x, label, dir)` (`eda/R/export.R`) zapíše strojově čitelný export `<label>.json` vedle tabulek (`check_label`, `jsonlite::write_json` s `auto_unbox`, `digits = NA` a `na = "null"`); pole, která mají zůstat polem i s jedním nebo žádným prvkem, se obalují `I()`. Sešit 8 jím v chunku `parametry-syntetiky` zapisuje `results/eda/8-mentions/parametry-syntetiky.json`: `selection` (pětice v pořadí `config/diagnosis_candidates.json`), `prevalence`, matici `conditional` a `mentions.<k>.given_positive|given_negative|keywords` po potlačení, podíly na 4 desetinná místa, potlačená hodnota je `null`, výběr „nelze“ dá prázdnou `selection` a prázdné objekty (`synthetic_parameters` v `eda/R/mentions.R`). Export čte příkaz `mediparse-synthetic-parameters` (pixi task `synthetic-parameters`), který ho převezme do `config/synthetic_plan.json`.
@@ -94,93 +89,10 @@ Každý graf a každá tabulka sešitu se ukládá i pro LaTeX do `results/eda/<
 - Písmo Libertinus Serif musí být v systému (Fedora `libertinus-fonts`, Debian `fonts-libertinus`); conda-forge ho nemá a Ubuntu ho samostatně nebalí. Jinde ho `scripts/install-libertinus.sh` stáhne z vydání Libertinus 7.051 na GitHubu, ověří otisk SHA-256 a rozbalí řez Serif do `~/.local/share/fonts`, kde ho najde fontconfig z prostředí pixi. Tak ho instaluje i CI. `export_figure` přes `pdffonts` ověří, že ho PDF vložilo, protože cairo jinak tiše dosadí jiné.
 - Exporty jdou ze stejného objektu jako sešit, po potlačení tam, kde ho pravidlo vyžaduje. Render z freeze exporty nepřepisuje ani nemaže: commitnuté `results/eda/<sešit>/` jsou výsledek posledního reálného renderu. Změna `.qmd` proto vyžaduje nový `pixi run eda <n>` a commit freeze i exportů, jinak CI krok „render z freeze“ spadne.
 
-### Tabulky v Pythonu (engine jupyter)
-
-Setup buňka sešitu 1 načte přehled přes entrypoint a vytvoří exportér.
-`include: false` skryje setup i jeho výstupy ve freeze:
-
-````qmd
-```{python}
-#| include: false
-import os
-
-from IPython.display import Markdown
-
-from mediparse.entrypoints import eda_corpus, eda_export
-
-corpus = eda_corpus.corpus_overview(os.environ)
-export = eda_export.export(os.environ)
-```
-````
-
-Přehled nese hotovou doménovou `ThesisTable`, takže tabulková buňka nerozkládá
-rozvržení na jednotlivé argumenty:
-
-```python
-export.write(corpus.table, label="tbl-korpus", caption="Přehled korpusu.")
-```
-
-Pro tabulku sestavenou z textových řádků přímo v sešitu zůstává `export.table`.
-Tabulková buňka vrací posledním výrazem výsledek jediného volání:
-
-```python
-export.table(
-    [("diagnoses_icd", "1\u00a0234")],
-    header=("Tabulka", "Záznamů"),
-    align="lr",
-    code=("Tabulka",),
-    label="tbl-korpus",
-    caption="Přehled korpusu.",
-    widths=(70, 30),
-)
-```
-
-Buňka nemá `#| label`, `#| tbl-cap` ani `#| tbl-colwidths`. Label, popisek a šířky
-se zadávají jen v tomto volání. Exportér zapíše `<label>.tex` a vrátí objekt
-s protokolem `_repr_markdown_()`. Jupyter jej zobrazí jako pipe tabulku zakončenou
-řádkem `: Přehled korpusu. {#tbl-korpus tbl-colwidths="[70,30]"}`. Quarto z něj
-převezme id pro křížové odkazy, popisek i šířky; další id buňky by bylo duplicitní.
-Bez `widths` se atribut vynechá a LaTeX použije prosté sloupce `l/c/r`.
-
-Label musí odpovídat `^tbl-[a-z0-9-]+$`, popisek musí být neprázdný na jednom řádku.
-Hlavička a všechny buňky smějí obsahovat jen `str` bez konců řádku. Čísla nejprve
-naformátuje volající; exportér nepřevádí `None` ani číselné typy na text.
-`code` jmenuje sloupce podle hlavičky, v LaTeXu je obalí `\texttt{}` a v markdownu
-backticky. Popisek sloučených kategorií `ostatní (n < 10)` zůstává prostým textem.
-
-Adresář se odvodí z prostředí Quarta jako
-`<rodič QUARTO_DOCUMENT_PATH>/results/eda/<kmen QUARTO_DOCUMENT_FILE>`.
-Chybějící nebo prázdná proměnná vyvolá chybu. Adresář vznikne až po validaci celé
-tabulky, labelu a popisku; opakovaný export stejného labelu přepíše soubor.
-
-Inline text se v jupyteru vrací jako `` `{python} Markdown(s)` `` s importem
-`from IPython.display import Markdown` v sešitu. Před otevíracím backtickem musí
-být mezera, jinak Quarto inline nerozpozná. Například:
-
-```qmd
-Databáze obsahuje `{python} Markdown(corpus.tables)` tabulek.
-```
-
-`s` musí být vždy neprázdný text. Prázdný `Markdown("")` Quarto vypíše jako
-zdrojový kód inline výrazu. Volitelná věta o největší tabulce je proto spojená
-s neprázdnou větou o manifestu v `corpus.records`. Samotný `str` se vypíše jako
-repr s uvozovkami a escape sekvencemi, například `\xa0` místo nedělitelné mezery.
-`Markdown(s)` navíc čte soubor, pokud je `s` existující cesta, a u adresáře vyvolá
-`IsADirectoryError`; předávej mu věty, nikoli cesty.
-
-Golden soubory v `tests/fixtures/thesis_table/` jsou společná spustitelná
-specifikace Python a R exportu včetně provenance. Vznikly původním R exportem;
-pytest i testthat ověřují stejné bajty. R implementace i její golden test zůstanou
-do konce migrace z R. Parita zahrnuje padding markdownu, NBSP a prázdné tabulky bez `\midrule`.
-
-Parita je omezena na vstupy používané v sešitech: ochrana `{}` před `[` v kable
-používá `\s` podle locale (TRE), první hlavičku ze samých mezer kable měří jako
-prázdnou a šířku markdownu měří bez URL odkazů (`remove_urls`) přes
-`nchar(type = "width")`, zatímco Python používá `len`. Žádná z těchto odlišností
-v sešitech nenastává; obecnější napodobení by přidalo pravidla bez využití.
+Golden soubory v `eda/tests/testthat/fixtures/thesis_table/` ověřují bajtově přesný výstup
+R exportu v `eda/tests/testthat/test-export-golden.R`, včetně provenance,
+nedělitelných mezer a prázdných tabulek bez `\midrule`.
 
 ## Provenance
 
-Každý dokument končí přílohou s commitem, příznakem dirty, otiskem `pixi.lock`, zdrojem dat (otisky CSV z `config/mimic_tables.json`, u syntetiky prefix) a verzemi Pythonu, DuckDB a v sešitech na knitru také R. Skládá ji `mediparse.entrypoints.eda_provenance`. Při syntetickém renderu se commit předává proměnnými `MEDIPARSE_COMMIT` a `MEDIPARSE_DIRTY`, protože kopie v dočasném adresáři není repozitář git.
-
-Přílohu na jupyteru sestaví `mediparse.entrypoints.eda_provenance.appendix(os.environ)` a exportuje ji jako `tbl-provenance` s popiskem „Provenance renderu.“ a šířkami 28/72. Klíč `r` obsahuje jen R příloha, protože v sešitu na jupyteru R neběží; mapa českých popisků jej zná kvůli paritě s R.
+Každý dokument končí přílohou s commitem, příznakem dirty, otiskem `pixi.lock`, zdrojem dat (otisky CSV z `config/mimic_tables.json`, u syntetiky prefix) a verzemi Pythonu, DuckDB a R. Skládá ji `mediparse.entrypoints.eda_provenance`. Při syntetickém renderu se commit předává proměnnými `MEDIPARSE_COMMIT` a `MEDIPARSE_DIRTY`, protože kopie v dočasném adresáři není repozitář git.

@@ -1,20 +1,36 @@
 ---
 title: "Explorační analýza datové sady: přehled korpusu MIMIC-IV"
-engine: jupyter
 abstract: |
   Dokument zahajuje explorační analýzu datové sady, na které práce staví. Popisuje zdroje dat (MIMIC-IV, MIMIC-IV-Note a MIMIC-IV-Ext-BHC), cestu dat od stažení po dotazování a ochranu dat podle licence. Přehled korpusu uvádí pro každou tabulku počet záznamů, počet sloupců a velikost souboru a porovnává počty záznamů v databázi s manifestem validace. Dokument tak vymezuje východiska, na kterých staví další části analýzy.
 ---
 
-```{python}
+```{r}
 #| include: false
-import os
-
-from IPython.display import Markdown
-
-from mediparse.entrypoints import eda_corpus, eda_export
-
-corpus = eda_corpus.corpus_overview(os.environ)
-export = eda_export.export(os.environ)
+library(reticulate)
+source("R/dua.R")
+source("R/db.R")
+source("R/corpus.R")
+source("R/export.R")
+eda_check_python()
+con <- eda_connect()
+tables <- sort(DBI::dbListTables(con), method = "radix")
+counts <- data.frame(
+  tabulka = tables,
+  n = vapply(
+    tables,
+    function(name) {
+      DBI::dbGetQuery(
+        con,
+        paste("SELECT count(*) AS n FROM", DBI::dbQuoteIdentifier(con, name))
+      )$n
+    },
+    numeric(1)
+  )
+)
+manifest <- manifest_tables(
+  file.path(Sys.getenv("PIXI_PROJECT_ROOT"), "results", "mimic", "manifest.json")
+)
+overview <- corpus_overview(counts, manifest)
 ```
 
 # Úvod
@@ -48,26 +64,29 @@ Reprodukovatelnost zajišťují dva mechanismy. Výsledky výpočtů se ukládaj
 
 # Přehled korpusu {#sec-prehled}
 
-Databáze obsahuje `{python} Markdown(corpus.tables)` tabulek. @tbl-korpus uvádí pro každou z nich projekt a modul, popis obsahu a plánované využití v práci, počet záznamů v databázi, počet sloupců a velikost staženého souboru podle manifestu validace (u `csv.gz` komprimovaného, u BHC nekomprimovaného). Využití tabulek v práci vychází z návrhu práce.
+Databáze obsahuje `r overview$tables` tabulek. @tbl-korpus uvádí pro každou z nich projekt a modul, popis obsahu a plánované využití v práci, počet záznamů v databázi, počet sloupců a velikost staženého souboru podle manifestu validace (u `csv.gz` komprimovaného, u BHC nekomprimovaného). Využití tabulek v práci vychází z návrhu práce.
 
-```{python}
-export.write(
-    corpus.table,
-    label="tbl-korpus",
-    caption="Tabulky korpusu: zdroj, obsah a využití, počet záznamů, počet sloupců a velikost souboru (MB).",
+```{r}
+#| label: tbl-korpus
+#| tbl-cap: "Tabulky korpusu: zdroj, obsah a využití, počet záznamů, počet sloupců a velikost souboru (MB)."
+#| tbl-colwidths: [22, 16, 30, 10, 12, 10]
+export_table(
+  overview$table,
+  col.names = c("Tabulka", "Zdroj", "Obsah a využití", "Záznamů", "Sloupců", "MB"),
+  align = "lllrrr", code = "tabulka"
 )
 ```
 
 *Zdroj:* počty záznamů dotazem v DuckDB, počty sloupců a velikosti souborů z manifestu validace, popisy podle veřejné dokumentace MIMIC-IV, MIMIC-IV-Note a MIMIC-IV-Ext-BHC.
 
-Podle návrhu práce je primárním korpusem tabulka `discharge`; obsahuje `{python} Markdown(corpus.discharge)` záznamů. Radiologických zpráv je v tabulce `radiology` `{python} Markdown(corpus.radiology)`. `{python} Markdown(corpus.records)`
+Podle návrhu práce je primárním korpusem tabulka `discharge`; obsahuje `r overview$discharge` záznamů. Radiologických zpráv je v tabulce `radiology` `r overview$radiology`. `r overview$records`
 
 # Shrnutí a rozhodnutí {#sec-shrnuti}
 
-Dokument popsal zdroje dat, cestu dat k dotazování a přehled `{python} Markdown(corpus.tables)` tabulek. `{python} Markdown(corpus.summary)`
+Dokument popsal zdroje dat, cestu dat k dotazování a přehled `r overview$tables` tabulek. `r overview$summary`
 
 # Omezení {#sec-omezeni}
 
 Přehled uvádí jen počty záznamů, sloupců a velikosti souborů. O obsahu zpráv, pacientech ani rozdělení dat netvrdí nic; to je předmětem dalších částí analýzy. Počty se vztahují k verzím 3.1 (MIMIC-IV), 2.2 (MIMIC-IV-Note) a 1.2.0 (MIMIC-IV-Ext-BHC). Automatizovaná kontrola neprohledává text uvnitř obrázků, proto grafy vyžadují zvláštní zacházení.
 
-{{< include _partials/appendix-python.qmd >}}
+{{< include _partials/appendix.qmd >}}

@@ -1,4 +1,4 @@
-"""Databáze EDA, kterou volají dokumenty přes reticulate a sešity v Pythonu."""
+"""Databáze EDA, kterou volají dokumenty R přes reticulate."""
 
 from __future__ import annotations
 
@@ -14,25 +14,6 @@ if TYPE_CHECKING:
 PARQUET_VARIABLE: Final = "MEDIPARSE_PARQUET"
 ROOT_VARIABLE: Final = "PIXI_PROJECT_ROOT"
 DEFAULT_PARQUET: Final = Path("resources") / "mimic" / "parquet"
-
-
-def project_root(environ: Mapping[str, str]) -> Path:
-    """Přečte explicitní kořen projektu z prostředí pixi.
-
-    Args:
-        environ: Proměnné prostředí renderu.
-
-    Returns:
-        Kořen projektu jako cesta.
-
-    Raises:
-        InvalidInputError: Kořen chybí nebo je prázdný.
-    """
-    root = environ.get(ROOT_VARIABLE)
-    if not root:
-        msg = f"Nastavte {ROOT_VARIABLE} spuštěním přes pixi."
-        raise InvalidInputError(msg)
-    return Path(root)
 
 
 def parquet_dir(environ: Mapping[str, str]) -> str:

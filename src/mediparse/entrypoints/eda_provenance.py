@@ -1,13 +1,9 @@
-"""Provenance renderu dokumentu EDA pro přílohy na knitru i jupyteru."""
+"""Provenance renderu dokumentu EDA pro přílohy na knitru."""
 
 from __future__ import annotations
 
-from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.eda_provenance import provenance_table
-from mediparse.entrypoints.eda_database import parquet_dir, project_root
-from mediparse.entrypoints.eda_export import export
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_mimic_tables
 from mediparse.infrastructure.package_versions import installed_versions
@@ -16,8 +12,7 @@ from mediparse.infrastructure.synthetic_marker import read_marker
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
-
-    from mediparse.infrastructure.thesis_export import MarkdownOutput
+    from pathlib import Path
 
 LOCK_NAME: Final = "pixi.lock"
 PACKAGES: Final = ("python", "duckdb")
@@ -53,24 +48,3 @@ def _data_source(root: Path, parquet: Path) -> dict[str, str]:
         "data_source": "otisky CSV z config/mimic_tables.json",
         **{f"csv_sha256 {name}": table.sha256 for name, table in tables.items()},
     }
-
-
-def appendix(environ: Mapping[str, str]) -> MarkdownOutput:
-    """Zapíše a zobrazí tabulku provenance pro sešit na jupyteru.
-
-    Args:
-        environ: Prostředí renderu s kořenem projektu a proměnnými Quarta.
-
-    Returns:
-        Markdown přílohy s popiskem, id a šířkami sloupců.
-
-    Raises:
-        InvalidInputError: Chybí kořen projektu nebo proměnné Quarta.
-    """
-    root = project_root(environ)
-    details = provenance(environ, root, Path(parquet_dir(environ)))
-    return export(environ).write(
-        provenance_table(details),
-        label="tbl-provenance",
-        caption="Provenance renderu.",
-    )

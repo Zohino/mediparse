@@ -10,7 +10,6 @@ import pytest
 
 from mediparse.domain.data_access import DataAccessError
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure import eda_duckdb
 from mediparse.infrastructure.eda_duckdb import DEFAULT_MEMORY, EdaDatabase
 from mediparse.infrastructure.synthetic_marker import MARKER_NAME
 from tests.eda_support import mark_synthetic, write_tables
@@ -194,68 +193,3 @@ def test_unreadable_parquet_is_refused_without_error_text(tmp_path: Path) -> Non
     assert "CELL_CANARY" not in str(refusal.value)
     assert refusal.value.__cause__ is None
     assert refusal.value.__suppress_context__
-
-
-def test_record_counts_are_sorted_python_ints(tmp_path: Path) -> None:
-    """Počty všech pohledů mají deterministické pořadí i jméno s pomlčkou."""
-    parquet = mark_synthetic(
-        write_tables(tmp_path / "parquet", ("zeta", "mimic-iv-bhc", "alfa"))
-    )
-    result = EdaDatabase(parquet, CLAUDE_CODE).record_counts()
-    assert result == {"alfa": 1, "mimic-iv-bhc": 1, "zeta": 1}
-    assert list(result) == ["alfa", "mimic-iv-bhc", "zeta"]
-    assert all(type(value) is int for value in result.values())
-
-
-def test_record_counts_guard_precedes_parquet_read(tmp_path: Path) -> None:
-    """I poškozený soubor bez značky nejprve odmítne stráž."""
-    (tmp_path / "broken.parquet").write_text("CELL_CANARY", encoding="utf-8")
-    with pytest.raises(DataAccessError):
-        EdaDatabase(tmp_path, CLAUDE_CODE).record_counts()
-
-
-def test_record_counts_sanitizes_query_error(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """Chyba samotného count po vytvoření pohledu neprozradí text výjimky."""
-    parquet = mark_synthetic(write_tables(tmp_path / "parquet", ("discharge",)))
-
-    def fail_count(*_args: object, **_kwargs: object) -> None:
-        msg = "CELL_CANARY"
-        raise duckdb.InvalidInputException(msg)
-
-    monkeypatch.setattr(duckdb.DuckDBPyRelation, "count", fail_count)
-    with pytest.raises(
-        InvalidInputError, match=r"discharge.*InvalidInputException"
-    ) as refusal:
-        EdaDatabase(parquet, CLAUDE_CODE).record_counts()
-    assert "CELL_CANARY" not in str(refusal.value)
-    assert refusal.value.__cause__ is None
-    assert refusal.value.__suppress_context__
-
-
-def test_record_counts_use_the_guarded_view_snapshot(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """Další pohled v katalogu DuckDB nezmění počty spravovaných parquetů."""
-    parquet = mark_synthetic(write_tables(tmp_path / "parquet"))
-    original_views = EdaDatabase.guarded_views
-    original_create = eda_duckdb.create_parquet_view
-    lookups: list[Path] = []
-
-    def guarded_views(self: EdaDatabase) -> dict[str, Path]:
-        lookups.append(self.parquet)
-        return original_views(self)
-
-    def create_with_foreign_view(
-        con: duckdb.DuckDBPyConnection, name: str, path: Path
-    ) -> None:
-        original_create(con, name, path)
-        con.sql("CREATE OR REPLACE VIEW unrelated AS SELECT 1")
-
-    monkeypatch.setattr(EdaDatabase, "guarded_views", guarded_views)
-    monkeypatch.setattr(eda_duckdb, "create_parquet_view", create_with_foreign_view)
-    result = EdaDatabase(parquet, CLAUDE_CODE).record_counts()
-    assert result == {"admissions": 1, "discharge": 1}
-    assert list(result) == ["admissions", "discharge"]
-    assert lookups == [parquet]
