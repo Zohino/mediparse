@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
 from mediparse.domain.language import Language
-from mediparse.domain.smoketest_input import input_notes
+from mediparse.domain.synthetic_mimic import input_notes
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

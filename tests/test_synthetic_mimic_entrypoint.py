@@ -12,6 +12,7 @@ import pytest
 
 from mediparse.entrypoints import cohort, synthetic_mimic
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.plans_file import PlansFile
 from tests.support import (
     REPOSITORY_CORPUS,
     REPOSITORY_DIAGNOSIS_CANDIDATES,
@@ -22,6 +23,8 @@ from tests.support import (
 
 if TYPE_CHECKING:
     from pathlib import Path
+
+    from tests.conftest import PlannedNote
 
 EXPECTED_NOTES: Final = 400
 
@@ -113,6 +116,33 @@ def test_tables_have_string_columns_and_synthetic_urls(
         "https://mediparse.invalid/synthetic/discharge.csv.gz",
         "https://mediparse.invalid/synthetic/diagnoses_icd.csv.gz",
     ]
+
+
+def test_unpaired_corpus_is_refused_before_writing(
+    tmp_path: Path, planned_note: PlannedNote
+) -> None:
+    """Plán bez zprávy odmítne generátor bez kteréhokoli ze tří výstupů."""
+    plans = tmp_path / "plans.jsonl"
+    PlansFile(plans).save([planned_note.plan])
+    discharge = tmp_path / "discharge.parquet"
+    diagnoses = tmp_path / "diagnoses_icd.parquet"
+    tables = tmp_path / "tables.json"
+
+    assert (
+        synthetic_mimic.run(
+            plans=plans,
+            corpus=tmp_path,
+            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+            manifest=REPOSITORY_MIMIC_MANIFEST,
+            discharge=discharge,
+            diagnoses=diagnoses,
+            tables=tables,
+        )
+        is ExitCode.REFUSED
+    )
+    assert not discharge.exists()
+    assert not diagnoses.exists()
+    assert not tables.exists()
 
 
 def test_missing_manifest_is_refused_before_writing(tmp_path: Path) -> None:
