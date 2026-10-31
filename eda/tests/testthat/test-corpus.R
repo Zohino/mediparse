@@ -88,6 +88,15 @@ test_that("přehled odmítne tabulky mimo katalog s uspořádanými jmény", {
                "Tabulky mimo katalog: foo.", fixed = TRUE)
 })
 
+test_that("přehled odmítne i tabulku mimo katalog pouze v manifestu", {
+  manifest <- synthetic_manifest()
+  counts <- manifest_counts(manifest)
+  extra <- manifest[1, ]
+  extra$tabulka <- "foo"
+  expect_error(corpus_overview(counts, rbind(manifest, extra)),
+               "Tabulky mimo katalog: foo.", fixed = TRUE)
+})
+
 test_that("přehled odmítne rozdílné množiny tabulek a chybějící povinné tabulky", {
   manifest <- synthetic_manifest()
   counts <- manifest_counts(manifest)
