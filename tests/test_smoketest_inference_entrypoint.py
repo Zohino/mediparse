@@ -93,8 +93,8 @@ def _train(
     return trained
 
 
-def test_writes_positive_and_negative_demo(tmp_path: Path) -> None:
-    """Uložený model dá stejné predikce a demo.parquet má pozitivní a negativní ukázku."""
+def test_writes_all_held_out_predictions(tmp_path: Path) -> None:
+    """Uložený model reprodukuje predikce všech odložených zpráv."""
     trained = _train(tmp_path)
     demo = tmp_path / "build" / "demo.parquet"
 
@@ -112,8 +112,8 @@ def test_writes_positive_and_negative_demo(tmp_path: Path) -> None:
         item.note_id for item in ParquetPredictionTable(trained.predictions).read()
     }
     assert code is ExitCode.OK
-    assert [row.truth for row in rows] == [True, False]
-    assert {row.note_id for row in rows} <= held_out
+    assert len(rows) == len(held_out)
+    assert {row.note_id for row in rows} == held_out
 
 
 def test_missing_model_is_refused(

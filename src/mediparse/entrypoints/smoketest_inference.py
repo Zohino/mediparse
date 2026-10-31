@@ -9,7 +9,7 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
-from mediparse.application.smoketest_inference import SmoketestInference
+from mediparse.application.model_inference import ModelInference
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.training_input import training_input
@@ -66,11 +66,11 @@ def run(
         uložený model, který nedává stejné predikce jako trénink.
     """
     table, _ = training_input(notes, load_training_config(config), lexicon)
-    step = SmoketestInference(
+    step = ModelInference(
         table=table,
         predictions=ParquetPredictionTable(predictions),
         model=SkopsModelFile(model),
-        demo=ParquetPredictionTable(demo),
+        inference=ParquetPredictionTable(demo),
     )
     examples = step.run()
     logger.info(

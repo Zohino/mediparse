@@ -1,4 +1,4 @@
-"""Use case tréninku smoketestu: klasifikátor jedné diagnózy na odložené části pacientů."""
+"""Use case tréninku modelu: klasifikátor jedné diagnózy na odložené části pacientů."""
 
 from __future__ import annotations
 
@@ -42,7 +42,7 @@ class ModelStore[C: TextClassifier](Protocol):
 
 
 @dataclass(frozen=True)
-class SmoketestTraining[C: TextClassifier]:
+class ModelTraining[C: TextClassifier]:
     """Trénink na jedné diagnóze se zápisem predikcí odložených zpráv.
 
     Trenér a úložiště sdílejí typ klasifikátoru, takže typová kontrola odmítne

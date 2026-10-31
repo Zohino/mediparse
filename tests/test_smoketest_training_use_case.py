@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.application.smoketest_training import SmoketestTraining
+from mediparse.application.model_training import ModelTraining
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Classification, Prediction
 from mediparse.domain.input_note import InputNote
@@ -98,8 +98,8 @@ class _FakeSink:
 
 def _use_case(
     notes: Sequence[InputNote], shared: SharedSplit, recorder: _Recorder
-) -> SmoketestTraining[_FakeClassifier]:
-    return SmoketestTraining(
+) -> ModelTraining[_FakeClassifier]:
+    return ModelTraining(
         table=_FakeTable(notes),
         split=_FakeSplitSource(shared, recorder),
         trainer=_FakeTrainer(recorder),

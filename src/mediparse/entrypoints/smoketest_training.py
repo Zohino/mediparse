@@ -11,7 +11,7 @@ import os
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
-from mediparse.application.smoketest_training import SmoketestTraining
+from mediparse.application.model_training import ModelTraining
 from mediparse.domain.environment import Environment
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
@@ -108,7 +108,7 @@ def run(
         if training.normalize_clinical_text
         else None
     )
-    step = SmoketestTraining(
+    step = ModelTraining(
         table=table,
         split=ParquetSplitTable(split),
         trainer=LinearSvmTrainer(
