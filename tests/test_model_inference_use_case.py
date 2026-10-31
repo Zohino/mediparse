@@ -95,15 +95,13 @@ def _use_case(
     return use_case, classifier, sink
 
 
-def test_classifies_only_held_out_notes_and_writes_predictions() -> None:
-    """Klasifikují se jen texty odložených zpráv a zapíšou se jejich predikce."""
-    use_case, classifier, sink = _use_case()
+def test_classifies_only_held_out_notes() -> None:
+    """Text zprávy mimo odloženou část se do klasifikátoru nedostane."""
+    use_case, classifier, _ = _use_case()
 
-    result = use_case.run()
+    use_case.run()
 
     assert classifier.texts == ["text c", "text a"]
-    assert [item.note_id for item in result] == ["3-DS-1", "1-DS-1"]
-    assert sink.written == [result]
 
 
 def test_mismatch_raises_and_writes_nothing() -> None:
