@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from pathlib import Path
+from typing import TYPE_CHECKING, Final
 
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -12,6 +12,14 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import BinaryMetrics, DiagnosisMetrics
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.metrics_table import SCHEMA, ParquetMetricsTable
+from tests.support import REPOSITORY
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+METRICS_FIXTURE: Final = (
+    REPOSITORY / "tests" / "fixtures" / "contracts" / "metrics.parquet"
+)
 
 METRICS_FIXTURE_ROWS = (
     DiagnosisMetrics(
@@ -57,12 +65,13 @@ def test_shared_metrics_fixture_matches_writer(tmp_path: Path) -> None:
 
     Čte ji i analysis/tests/testthat; při změně schématu ji přegenerujte
     a upravte nezávislou deklaraci konzumenta METRICS_COLUMNS v R.
+
+    Přegenerování: ParquetMetricsTable(METRICS_FIXTURE).write(METRICS_FIXTURE_ROWS).
     """
     path = tmp_path / "metrics.parquet"
     ParquetMetricsTable(path).write(METRICS_FIXTURE_ROWS)
 
-    fixture = Path(__file__).parent / "fixtures" / "contracts" / "metrics.parquet"
-    assert pq.read_table(path).equals(pq.read_table(fixture))
+    assert pq.read_table(path).equals(pq.read_table(METRICS_FIXTURE))
 
 
 def test_written_file_has_schema_and_values(tmp_path: Path) -> None:
