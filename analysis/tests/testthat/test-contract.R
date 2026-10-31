@@ -1,12 +1,3 @@
-write_contract_parquet <- function(query, path = tempfile(fileext = ".parquet")) {
-  con <- DBI::dbConnect(duckdb::duckdb())
-  on.exit(DBI::dbDisconnect(con, shutdown = TRUE))
-  DBI::dbExecute(con, sprintf(
-    "COPY (%s) TO %s (FORMAT parquet)", query, DBI::dbQuoteString(con, path)
-  ))
-  path
-}
-
 test_that("kontrakt odmítne INTEGER místo BIGINT s kontextem chyby", {
   path <- write_contract_parquet("SELECT 1::BIGINT AS ok, 1::INTEGER AS n")
   withr::defer(unlink(path))

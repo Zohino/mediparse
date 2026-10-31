@@ -1,5 +1,5 @@
 test_that("metriky ze sdílené syntetické fixture zachovají schéma a hodnoty", {
-  actual <- read_metrics("../../../tests/fixtures/contracts/metrics.parquet")
+  actual <- read_metrics(METRICS_FIXTURE)
   expected <- data.frame(
     row_id = rep("smoketest", 5),
     diagnosis = c("diabetes", "copd", "ckd", "pneumonia", "atrial_fibrillation"),

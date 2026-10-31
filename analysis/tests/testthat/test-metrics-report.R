@@ -1,4 +1,3 @@
-METRICS_FIXTURE <- "../../../tests/fixtures/contracts/metrics.parquet"
 CANDIDATES_FIXTURE <- "../../../config/diagnosis_candidates.json"
 
 metrics_manifest <- function(dir, row_id = "smoketest") {
@@ -8,13 +7,9 @@ metrics_manifest <- function(dir, row_id = "smoketest") {
 }
 
 write_metrics_variant <- function(path, replacement) {
-  con <- DBI::dbConnect(duckdb::duckdb())
-  on.exit(DBI::dbDisconnect(con, shutdown = TRUE))
-  DBI::dbExecute(con, sprintf(
-    "COPY (SELECT * REPLACE (%s) FROM read_parquet(%s)) TO %s (FORMAT parquet)",
-    replacement, DBI::dbQuoteString(con, METRICS_FIXTURE), DBI::dbQuoteString(con, path)
-  ))
-  path
+  write_contract_parquet(sprintf(
+    "SELECT * REPLACE (%s) FROM read_parquet('%s')", replacement, METRICS_FIXTURE
+  ), path)
 }
 
 test_that("tabulka metrik má česká čísla a potlačí malé skupiny i jejich metriky", {
@@ -68,9 +63,10 @@ test_that("PDF metrik má šířku sazby a vložené Libertinus Serif", {
 
 test_that("oba výstupy nesou ověřitelný odkaz na vstup a manifest běhu", {
   dir <- withr::local_tempdir()
-  manifest <- metrics_manifest(dir)
+  metrics <- write_metrics_variant(file.path(dir, "beh-42.parquet"), "'beh-42' AS row_id")
+  manifest <- metrics_manifest(dir, "beh-42")
   out <- file.path(dir, "výstupy")
-  result <- withVisible(write_metrics_report(METRICS_FIXTURE, manifest, out, CANDIDATES_FIXTURE))
+  result <- withVisible(write_metrics_report(metrics, manifest, out, CANDIDATES_FIXTURE))
   files <- c("metrics.tex", "metrics.pdf", "metrics.tex.meta.json", "metrics.pdf.meta.json")
   expect_false(result$visible)
   expect_setequal(result$value, file.path(out, files))
@@ -81,10 +77,23 @@ test_that("oba výstupy nesou ověřitelný odkaz na vstup a manifest běhu", {
   for (output in c("metrics.tex", "metrics.pdf")) {
     sidecar <- jsonlite::fromJSON(file.path(out, paste0(output, ".meta.json")))
     expect_identical(sidecar, list(
-      input = list(path = METRICS_FIXTURE, sha256 = coreutils_sha256(METRICS_FIXTURE)),
-      run_manifest = list(path = manifest, sha256 = coreutils_sha256(manifest), row_id = "smoketest")
+      input = list(path = metrics, sha256 = coreutils_sha256(metrics)),
+      run_manifest = list(path = manifest, sha256 = coreutils_sha256(manifest), row_id = "beh-42")
     ))
   }
+})
+
+test_that("graf jediné zveřejnitelné diagnózy má výšku 4,5 cm", {
+  dir <- withr::local_tempdir()
+  metrics <- write_metrics_variant(file.path(dir, "jedna-diagnoza.parquet"),
+    "CASE WHEN diagnosis = 'diabetes' THEN test_positives ELSE 5::BIGINT END AS test_positives")
+  write_metrics_report(metrics, metrics_manifest(dir), dir, CANDIDATES_FIXTURE)
+  info <- system2("pdfinfo", shQuote(file.path(dir, "metrics.pdf")), stdout = TRUE)
+  box <- grep("Page size", info, value = TRUE)
+  height <- as.numeric(strsplit(trimws(sub("Page size:", "", box)), " +")[[1]][3])
+
+  # Cairo ukládá rozměr v celých bodech; tolerance je jeden bod jako u šířky.
+  expect_equal(height, 4.5 / 2.54 * 72, tolerance = 1 / (4.5 / 2.54 * 72))
 })
 
 test_that("cizí manifest se odmítne před zápisem a chyba jmenuje oba běhy", {
