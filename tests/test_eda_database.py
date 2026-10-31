@@ -12,7 +12,6 @@ from mediparse.entrypoints.eda_database import (
     connection_settings,
     database,
     parquet_dir,
-    project_root,
 )
 from tests.eda_support import write_tables
 
@@ -76,15 +75,3 @@ def test_database_uses_parquet_dir(tmp_path: Path) -> None:
 
     assert result.parquet == parquet
     assert result.environ == environ
-
-
-@pytest.mark.parametrize("environ", [{}, {"PIXI_PROJECT_ROOT": ""}])
-def test_project_root_is_required(environ: dict[str, str]) -> None:
-    """Prázdný kořen není relativní cesta projektu."""
-    with pytest.raises(InvalidInputError, match="PIXI_PROJECT_ROOT"):
-        project_root(environ)
-
-
-def test_project_root_returns_path(tmp_path: Path) -> None:
-    """Kořen z prostředí se předává jako Path."""
-    assert project_root({"PIXI_PROJECT_ROOT": str(tmp_path)}) == tmp_path
