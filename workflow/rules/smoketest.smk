@@ -30,23 +30,9 @@ use rule build_cohort as build_smoketest_cohort with:
         SMOKETEST_LOGS / "build_cohort.log",
 
 
-rule prepare_smoketest_subset:
-    input:
-        plans=SYNTHETIC / "plans.jsonl",
-        notes=sorted((SYNTHETIC / "en").glob("*.txt")),
-    output:
-        SMOKETEST / "notes.parquet",
-    log:
-        SMOKETEST_LOGS / "prepare_smoketest_subset.log",
-    params:
-        corpus=SYNTHETIC,
-    script:
-        "../scripts/prepare_smoketest.py"
-
-
 rule make_smoketest_splits:
     input:
-        notes=SMOKETEST / "notes.parquet",
+        notes=SMOKETEST / "cohort.parquet",
         config="config/split.json",
     output:
         SMOKETEST / "splits.parquet",
@@ -58,7 +44,7 @@ rule make_smoketest_splits:
 
 rule train_smoketest_model:
     input:
-        notes=SMOKETEST / "notes.parquet",
+        notes=SMOKETEST / "cohort.parquet",
         config="config/smoketest_training.json",
         candidates="config/diagnosis_candidates.json",
         lexicon="config/section_headers.json",
@@ -76,7 +62,7 @@ rule train_smoketest_model:
 rule evaluate_smoketest_model:
     input:
         predictions=SMOKETEST / "predictions.parquet",
-        notes=SMOKETEST / "notes.parquet",
+        notes=SMOKETEST / "cohort.parquet",
         split=SMOKETEST / "splits.parquet",
     output:
         SMOKETEST / "metrics.parquet",
@@ -88,7 +74,7 @@ rule evaluate_smoketest_model:
 
 rule infer_smoketest_model:
     input:
-        notes=SMOKETEST / "notes.parquet",
+        notes=SMOKETEST / "cohort.parquet",
         config="config/smoketest_training.json",
         lexicon="config/section_headers.json",
         model=SMOKETEST / "model.skops",
