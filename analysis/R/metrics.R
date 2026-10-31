@@ -13,11 +13,15 @@ METRIC_LABELS <- c(
   accuracy = "Správnost", roc_auc = "ROC AUC", pr_auc = "PR AUC"
 )
 
+is_single_string <- function(x) {
+  is.character(x) && length(x) == 1L && !is.na(x) && nzchar(x)
+}
+
 diagnosis_labels <- function(keys, candidates_path) {
   candidates <- jsonlite::fromJSON(candidates_path, simplifyVector = FALSE)$candidates
   vapply(keys, function(key) {
     label <- candidates[[key]]$label_cs
-    if (!is.character(label) || length(label) != 1L || is.na(label) || !nzchar(label)) {
+    if (!is_single_string(label)) {
       stop(sprintf("Soubor %s: diagnóza %s nemá label_cs.", candidates_path, key))
     }
     label
@@ -69,7 +73,7 @@ write_metrics_report <- function(metrics_path, manifest_path, out_dir, candidate
   metrics <- read_metrics(metrics_path)
   manifest <- jsonlite::fromJSON(manifest_path, simplifyVector = FALSE)
   row_id <- if (is.list(manifest)) manifest$row_id else NULL
-  if (!is.character(row_id) || length(row_id) != 1L || is.na(row_id) || !nzchar(row_id)) {
+  if (!is_single_string(row_id)) {
     stop(sprintf("Soubor %s: row_id manifestu musí být jeden řetězec.", manifest_path))
   }
   runs <- unique(metrics$row_id)
@@ -80,6 +84,13 @@ write_metrics_report <- function(metrics_path, manifest_path, out_dir, candidate
     stop(sprintf(
       "Soubor %s má row_id %s, ale manifest %s má row_id %s.",
       metrics_path, runs, manifest_path, row_id
+    ))
+  }
+  duplicate <- anyDuplicated(metrics$diagnosis)
+  if (duplicate > 0L) {
+    stop(sprintf(
+      "Soubor %s: diagnóza %s je v metrikách víckrát.",
+      metrics_path, metrics$diagnosis[[duplicate]]
     ))
   }
   labels <- diagnosis_labels(metrics$diagnosis, candidates_path)

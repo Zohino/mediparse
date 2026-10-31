@@ -109,7 +109,7 @@ test_that("cizí manifest se odmítne před zápisem a chyba jmenuje oba běhy",
 test_that("manifest musí mít row_id jako jeden řetězec", {
   dir <- withr::local_tempdir()
   out <- file.path(dir, "out")
-  for (row_id in list(NULL, 1, c("smoketest", "jiny"), list("smoketest"))) {
+  for (row_id in list(NULL, 1, c("smoketest", "jiny"), list("smoketest"), "")) {
     expect_error(
       write_metrics_report(METRICS_FIXTURE, metrics_manifest(dir, row_id), out, CANDIDATES_FIXTURE),
       "manifest běhu.json.*row_id.*řetězec"
@@ -130,16 +130,33 @@ test_that("více běhů v metrikách se odmítne před zápisem", {
   expect_length(list.files(out, recursive = TRUE, all.files = TRUE), 0L)
 })
 
-test_that("chybějící český název diagnózy se odmítne před zápisem", {
+test_that("chybějící nebo prázdný český název diagnózy se odmítne před zápisem", {
   dir <- withr::local_tempdir()
   candidates <- jsonlite::fromJSON(CANDIDATES_FIXTURE, simplifyVector = FALSE)
-  candidates$candidates$ckd$label_cs <- NULL
   config <- file.path(dir, "candidates.json")
-  jsonlite::write_json(candidates, config, auto_unbox = TRUE)
+  out <- file.path(dir, "out")
+  for (label in list(NULL, "")) {
+    candidates$candidates$ckd$label_cs <- label
+    jsonlite::write_json(candidates, config, auto_unbox = TRUE)
+    expect_error(
+      write_metrics_report(METRICS_FIXTURE, metrics_manifest(dir), out, config),
+      "candidates.json.*ckd.*label_cs"
+    )
+    expect_length(list.files(out, recursive = TRUE, all.files = TRUE), 0L)
+  }
+})
+
+test_that("duplicitní diagnóza se odmítne českou chybou před zápisem", {
+  dir <- withr::local_tempdir()
+  metrics <- write_contract_parquet(sprintf(
+    paste("SELECT * FROM read_parquet('%s') UNION ALL",
+          "SELECT * FROM read_parquet('%s') WHERE diagnosis = 'diabetes'"),
+    METRICS_FIXTURE, METRICS_FIXTURE
+  ), file.path(dir, "duplicitni.parquet"))
   out <- file.path(dir, "out")
   expect_error(
-    write_metrics_report(METRICS_FIXTURE, metrics_manifest(dir), out, config),
-    "candidates.json.*ckd.*label_cs"
+    write_metrics_report(metrics, metrics_manifest(dir), out, CANDIDATES_FIXTURE),
+    "duplicitni.parquet.*diagnóza diabetes.*víckrát"
   )
   expect_length(list.files(out, recursive = TRUE, all.files = TRUE), 0L)
 })
