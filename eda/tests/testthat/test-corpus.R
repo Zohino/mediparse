@@ -107,13 +107,14 @@ test_that("rozdíl počtů odmítá úplnost a jedinečné maximum pojmenuje tab
   manifest <- synthetic_manifest()
   counts <- manifest_counts(manifest)
   counts$n[counts$tabulka == "discharge"] <- 331794
+  counts$n[counts$tabulka == "radiology"] <- 99
   out <- corpus_overview(counts, manifest)
   expect_equal(out$records, paste0(
     "Nejvíce záznamů má tabulka discharge. ",
     "Počty záznamů v databázi neodpovídají počtům v manifestu validace."
   ))
   expect_equal(out$summary, paste0(
-    "Počty záznamů se liší od manifestu validace u tabulek: discharge. ",
+    "Počty záznamů se liší od manifestu validace u tabulek: discharge, radiology. ",
     "Data se proto nesmějí považovat za úplná a před dalším použitím je nutné rozdíl vysvětlit."
   ))
 })
