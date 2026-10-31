@@ -131,3 +131,32 @@ def test_missing_manifest_is_refused_before_writing(tmp_path: Path) -> None:
         is ExitCode.REFUSED
     )
     assert not output.exists()
+
+
+@pytest.mark.parametrize("table", ["discharge", "diagnoses_icd"])
+def test_written_columns_follow_manifest(tmp_path: Path, table: str) -> None:
+    """Zapisovač dodrží pořadí manifestu i tehdy, když se liší od pořadí klíčů řádku."""
+    inventory = json.loads(REPOSITORY_MIMIC_MANIFEST.read_text(encoding="utf-8"))
+    selected = next(
+        item for item in inventory["tables"] if item["file"] == f"{table}.csv.gz"
+    )
+    selected["columns"].reverse()
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(json.dumps(inventory), encoding="utf-8")
+    discharge = tmp_path / "discharge.parquet"
+    diagnoses = tmp_path / "diagnoses_icd.parquet"
+
+    assert (
+        synthetic_mimic.run(
+            plans=REPOSITORY_PLANS,
+            corpus=REPOSITORY_CORPUS,
+            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+            manifest=manifest,
+            discharge=discharge,
+            diagnoses=diagnoses,
+            tables=tmp_path / "tables.json",
+        )
+        is ExitCode.OK
+    )
+
+    assert pq.read_schema(tmp_path / f"{table}.parquet").names == selected["columns"]

@@ -21,25 +21,6 @@ FILLER_CODES: Final[Mapping[IcdVersion, str]] = {
 }
 _FIRST_ADMISSION: Final = 20000000
 _TIMESTAMP: Final = "2150-01-01 00:00:00"
-_COLUMNS: Final = {
-    "discharge": frozenset({
-        "note_id",
-        "subject_id",
-        "hadm_id",
-        "note_type",
-        "note_seq",
-        "charttime",
-        "storetime",
-        "text",
-    }),
-    "diagnoses_icd": frozenset({
-        "subject_id",
-        "hadm_id",
-        "seq_num",
-        "icd_code",
-        "icd_version",
-    }),
-}
 
 
 def mimic_tables(
@@ -47,7 +28,7 @@ def mimic_tables(
     codes: DiagnosisCodes,
     shapes: Mapping[str, TableShape],
 ) -> dict[str, list[dict[str, str]]]:
-    """Převede labely zpráv na kódy ICD a řádky se sloupci v pořadí manifestu.
+    """Převede labely zpráv na kódy ICD a ověří sloupce požadované manifestem.
 
     Returns:
         Tabulky discharge a diagnoses_icd se samými řetězci.
@@ -56,34 +37,35 @@ def mimic_tables(
         InvalidInputError: Chybí tvar tabulky, sloupec není známý, výplň patří
             do pětice nebo diagnóza nemá předponu v použité verzi ICD.
     """
-    _validate_shapes(shapes)
     for version, filler in FILLER_CODES.items():
         if codes.diagnosis_of(IcdCode(version=version, code=filler)) is not None:
             msg = f"Výplňový kód ICD-{version.value} patří do diagnózy pětice."
             raise InvalidInputError(msg)
-    tables: dict[str, list[dict[str, str]]] = {table: [] for table in _COLUMNS}
+    tables: dict[str, list[dict[str, str]]] = {"discharge": [], "diagnoses_icd": []}
     for index, note in enumerate(sorted(notes, key=lambda note: note.note_id)):
         hadm = str(_FIRST_ADMISSION + index)
         # Střídání verzí procvičí obě mapování předpon ve skutečné kohortě.
         version = IcdVersion.TEN if index % 2 == 0 else IcdVersion.NINE
         tables["discharge"].append(_discharge(note, hadm))
         tables["diagnoses_icd"].extend(_diagnoses(note, hadm, version, codes))
-    return {
-        table: [
-            {column: row[column] for column in shapes[table].columns} for row in rows
-        ]
-        for table, rows in tables.items()
-    }
+    _validate_shapes(shapes, tables)
+    return tables
 
 
-def _validate_shapes(shapes: Mapping[str, TableShape]) -> None:
-    for table, known in _COLUMNS.items():
+def _validate_shapes(
+    shapes: Mapping[str, TableShape], tables: Mapping[str, list[dict[str, str]]]
+) -> None:
+    for table, rows in tables.items():
         if table not in shapes:
             msg = f"V manifestu chybí tabulka {table}."
             raise InvalidInputError(msg)
-        if unknown := set(shapes[table].columns) - known:
-            msg = f"Tabulka {table} má neznámé sloupce: {', '.join(sorted(unknown))}."
-            raise InvalidInputError(msg)
+        columns = set(shapes[table].columns)
+        for row in rows:
+            if unknown := columns - row.keys():
+                msg = (
+                    f"Tabulka {table} má neznámé sloupce: {', '.join(sorted(unknown))}."
+                )
+                raise InvalidInputError(msg)
 
 
 def _discharge(note: InputNote, hadm: str) -> dict[str, str]:

@@ -63,8 +63,8 @@ def test_codes_preserve_labels_and_admission_links(
         assert len(admission) == 1 + len(note.labels)
 
 
-def test_rows_follow_manifest_and_fixed_identity_values() -> None:
-    """Hodnoty i pořadí sloupců odpovídají manifestu, datum a identita jsou pevné."""
+def test_rows_have_fixed_identity_values_and_diagnosis_order() -> None:
+    """Datum a identita jsou pevné, diagnózy řadí řetězcové hodnoty enumu abecedně."""
     notes = _notes([
         set(),
         {Diagnosis.CKD},
@@ -73,8 +73,6 @@ def test_rows_follow_manifest_and_fixed_identity_values() -> None:
     tables = mimic_tables(notes, CODES, SHAPES)
 
     assert set(tables) == {"discharge", "diagnoses_icd"}
-    for table, rows in tables.items():
-        assert all(tuple(row) == SHAPES[table].columns for row in rows)
     assert tables["discharge"][0] == {
         "note_id": "90000000-DS-10",
         "subject_id": "90000000",
