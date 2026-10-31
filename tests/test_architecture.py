@@ -44,7 +44,10 @@ EDA = REPOSITORY / "eda"
 R_IMPORT = re.compile(r"\bimport\(\s*[\"']([\w.]+)[\"']\s*\)")
 PYTHON_IMPORT = re.compile(r"^\s*(?:from|import)\s+([\w.]+)", re.MULTILINE)
 EDA_PYTHON = re.compile(
-    r"(?m)^\s*```\{python(?:[ ,}])|`\{python\}|^\s*engine:\s*jupyter\b"
+    r"^\s*```\{python(?:[ ,}])|`\{python\}"
+    r"|^\s*(?:engine:\s*[\"']?jupyter\b|jupyter\s*:)"
+    r"|^\s*```\{r\b[^}\n]*\bengine\s*=\s*[\"']python[\"']",
+    re.MULTILINE,
 )
 EDA_PRESENT = pytest.mark.skipif(
     not EDA.is_dir(),
@@ -514,8 +517,8 @@ def _eda_import_violations(files: list[Path]) -> list[str]:
     ]
 
 
-def _eda_python_violations(documents: list[Path]) -> tuple[list[str], int]:
-    violations = [
+def _eda_python_violations(documents: list[Path]) -> list[str]:
+    return [
         f"{document.name}:{index}: Python v EDA"
         for document in documents
         for index, line in enumerate(
@@ -523,7 +526,6 @@ def _eda_python_violations(documents: list[Path]) -> tuple[list[str], int]:
         )
         if EDA_PYTHON.search(line)
     ]
-    return violations, len(documents)
 
 
 @EDA_PRESENT
@@ -544,9 +546,7 @@ def test_eda_imports_only_entrypoints() -> None:
 @EDA_PRESENT
 def test_eda_documents_do_not_use_python() -> None:
     """Všechny sešity i přílohy používají R na knitru."""
-    violations, inspected = _eda_python_violations(_eda_documents(EDA))
-    assert inspected > 0
-    assert violations == []
+    assert _eda_python_violations(_eda_documents(EDA)) == []
 
 
 def test_eda_import_check_finds_violations(tmp_path: Path) -> None:
@@ -574,22 +574,38 @@ def test_eda_python_check_finds_all_three_forms(tmp_path: Path) -> None:
         "engine: jupyter\n```{python}\nx = 1\n```\n`{python} x`\n",
         encoding="utf-8",
     )
-    assert _eda_python_violations([document]) == (
-        [
-            "bad.qmd:1: Python v EDA",
-            "bad.qmd:2: Python v EDA",
-            "bad.qmd:5: Python v EDA",
-        ],
-        1,
-    )
+    assert _eda_python_violations([document]) == [
+        "bad.qmd:1: Python v EDA",
+        "bad.qmd:2: Python v EDA",
+        "bad.qmd:5: Python v EDA",
+    ]
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        'engine: "jupyter"',
+        "engine: 'jupyter'",
+        "jupyter: python3",
+        "```{python echo=FALSE}",
+        '```{r engine="python"}',
+        '```{r, engine = "python"}',
+        "```{r engine='python'}",
+    ],
+)
+def test_eda_python_check_detects_engine_variants(tmp_path: Path, source: str) -> None:
+    """Nastavení enginu ani volby chunku nesmějí obejít zákaz Pythonu."""
+    document = tmp_path / "bad.qmd"
+    document.write_text(source + "\n", encoding="utf-8")
+    violations = _eda_python_violations([document])
+    assert violations == ["bad.qmd:1: Python v EDA"]
 
 
 def test_eda_python_check_accepts_r_document(tmp_path: Path) -> None:
-    """Čistý QMD se počítá jako prošlý dokument bez nálezu."""
+    """Čistý QMD na knitru nemá žádný nález."""
     document = tmp_path / "fine.qmd"
     document.write_text("```{r}\nx <- 1\n```\n`r x`\n", encoding="utf-8")
-    assert _eda_python_violations([document]) == ([], 1)
-    assert _eda_python_violations([]) == ([], 0)
+    assert _eda_python_violations([document]) == []
 
 
 def test_eda_python_check_refuses_uninspected_documents(
