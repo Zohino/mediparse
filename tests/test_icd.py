@@ -26,6 +26,14 @@ def test_code_is_normalized() -> None:
     assert IcdCode(version=TEN, code=" e11 ").code == "E11"
 
 
+def test_representative_uses_first_prefix_or_none() -> None:
+    """Reprezentant je první předpona zvolené verze, bez předpon chybí."""
+    codes = DiagnosisCodes(prefixes=_prefixes(diabetes={TEN: ("E11", "E10")}))
+
+    assert codes.representative(Diagnosis.DIABETES, TEN) == "E11"
+    assert codes.representative(Diagnosis.DIABETES, NINE) is None
+
+
 @pytest.mark.parametrize("code", ["", "   ", "E11.9", "E11-9", "É11"])
 def test_invalid_code_is_rejected(code: str) -> None:
     """Prázdný kód, tečka a jiné znaky jsou chyba vstupu."""
