@@ -448,6 +448,11 @@ eda-synthetic = { cmd = "bash scripts/eda-synthetic.sh \"{{ n }}\"", args = [
 ], description = "Render dokumentů EDA nad syntetickými tabulkami v /tmp a kontrola kanárka; bez čísla všechny dokumenty" }
 eda-test = { cmd = "Rscript -e 'testthat::test_dir(\"eda/tests/testthat\", stop_on_failure = TRUE)'", description = "Testy R pomocníků EDA (testthat)" }
 analysis-test = { cmd = """Rscript -e 'testthat::test_dir("analysis/tests/testthat", stop_on_failure = TRUE)'""", description = "Testy R analýzy experimentů (testthat)" }
+analysis-metrics = { cmd = "Rscript analysis/scripts/metrics-report.R \"{{ metrics }}\" \"{{ manifest }}\" \"{{ out }}\" config/diagnosis_candidates.json", args = [
+    { arg = "metrics", default = "build/smoketest/metrics.parquet" },
+    { arg = "manifest", default = "build/smoketest/run_manifest.json" },
+    { arg = "out", default = "build/smoketest/analysis" },
+], description = "Tabulka .tex a graf PDF metrik se sidecarem provenance (R, mimo Snakemake)" }
 
 [tool.pixi.tasks]
 lint = { cmd = "ruff check", description = "Linting pomocí ruff" }

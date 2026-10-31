@@ -145,3 +145,11 @@ test_that("bez zveřejnitelné diagnózy se nezapíše ani tabulka", {
   )
   expect_length(list.files(out, recursive = TRUE, all.files = TRUE), 0L)
 })
+
+test_that("skript při chybném počtu argumentů vypíše použití a selže", {
+  withr::local_dir("../../..")
+  output <- suppressWarnings(system2("Rscript", "analysis/scripts/metrics-report.R",
+                                     stdout = TRUE, stderr = TRUE))
+  expect_identical(attr(output, "status"), 1L)
+  expect_true(any(grepl("Použití: Rscript analysis/scripts/metrics-report.R", output, fixed = TRUE)))
+})
