@@ -176,13 +176,13 @@ class SyntheticRun:
         )
 
     def _block_code(self, version: IcdVersion, diagnosis: Diagnosis) -> str:
-        prefixes = self.codes.prefixes[diagnosis].get(version, ())
-        if not prefixes:
+        code = self.codes.representative(diagnosis, version)
+        if code is None:
             msg = f"Diagnóza {diagnosis.value} nemá předponu ICD-{version.value}."
             raise InvalidInputError(msg)
         # Kód je první předpona z configu, ne skutečný kód: znalost kódů zůstává jen v configu.
         # Charlson (comorbidity) pak označí 491 a J41 jako cpd, ale 249 a E08 jako diab ne.
-        return prefixes[0]
+        return code
 
 
 def synthetic_rows(

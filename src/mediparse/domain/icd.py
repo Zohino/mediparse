@@ -87,6 +87,15 @@ class DiagnosisCodes(BaseModel):
                 )
                 raise ValueError(msg)
 
+    def representative(self, diagnosis: Diagnosis, version: IcdVersion) -> str | None:
+        """Vybere reprezentativní kód diagnózy ve zvolené verzi.
+
+        Returns:
+            První předpona z configu, nebo None pro verzi bez předpon.
+        """
+        prefixes = self.prefixes[diagnosis].get(version, ())
+        return prefixes[0] if prefixes else None
+
     def diagnosis_of(self, code: IcdCode) -> Diagnosis | None:
         """Najde diagnózu, jejíž předpona v téže verzi začíná kód.
 

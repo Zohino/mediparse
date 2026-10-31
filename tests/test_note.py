@@ -10,6 +10,7 @@ from mediparse.domain.note import (
     NoteSubjectMismatchError,
     ensure_note_of_subject,
     note_id,
+    order_of,
     subject_of,
 )
 
@@ -22,6 +23,29 @@ def test_subject_is_parsed_from_note_id() -> None:
 
     assert subject == SUBJECT
     assert isinstance(subject, int)
+
+
+@pytest.mark.parametrize(
+    ("name", "expected"),
+    [
+        ("90000123-DS-4", 4),
+        ("90000123-DS-004", 4),
+        ("90000123", None),
+        ("abc-DS-1", None),
+        ("90000123-RR-1", None),
+        ("0-DS-1", None),
+        ("010-DS-1", None),
+    ],
+)
+def test_order_is_parsed_only_from_valid_note_id(
+    name: str, expected: int | None
+) -> None:
+    """Pořadí je číslo z platného note_id; neplatná skladba má stejnou výjimku jako pacient."""
+    if expected is None:
+        with pytest.raises(InvalidNoteIdError, match="note_id"):
+            order_of(name)
+        return
+    assert order_of(name) == expected
 
 
 @pytest.mark.parametrize(
