@@ -29,21 +29,24 @@ diagnosis_labels <- function(keys, candidates_path) {
 }
 
 publishable_metrics <- function(metrics) {
+  # Práh hlídá skupiny vymezené diagnózou (pozitivní a negativní); buňky matice
+  # záměn dělí výstup modelu, ne atribut pacienta (AGENTS.md, MIMIC a DUA).
   !is.na(dua_binary(metrics$test_positives, metrics$test_notes))
 }
 
 metrics_table <- function(metrics, labels) {
   published <- publishable_metrics(metrics)
+  positives <- dua_binary(metrics$test_positives, metrics$test_notes)
   out <- data.frame(
     Diagnóza = labels,
     Zprávy = format_number(metrics$test_notes),
-    Pozitivní = ifelse(published, format_number(metrics$test_positives), "–"),
+    Pozitivní = number_text(positives),
     check.names = FALSE
   )
   for (name in names(METRIC_LABELS)) {
     values <- metrics[[name]]
     out[[METRIC_LABELS[[name]]]] <- ifelse(
-      published & !is.na(values),
+      published,
       formatC(values, format = "f", digits = 3, decimal.mark = ","), "–"
     )
   }
@@ -94,20 +97,24 @@ write_metrics_report <- function(metrics_path, manifest_path, out_dir, candidate
     ))
   }
   labels <- diagnosis_labels(metrics$diagnosis, candidates_path)
-  table <- metrics_table(metrics, labels)
-  plot <- metrics_figure(metrics, labels)
-  diagnoses <- nlevels(plot$data$diagnoza)
-  if (diagnoses == 0L) {
+  published <- publishable_metrics(metrics)
+  if (!any(published)) {
     stop(sprintf("Soubor %s: žádná diagnóza není zveřejnitelná.", metrics_path))
   }
+  table <- metrics_table(metrics, labels)
+  plot <- metrics_figure(metrics, labels)
+  outputs <- file.path(out_dir, c("metrics.tex", "metrics.pdf"))
+  sidecars <- paste0(outputs, ".meta.json")
+  # Starý sidecar by při selhání exportu nepravdivě popisoval nový soubor.
+  unlink(c(outputs, sidecars))
   dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
   # Návratový markdown patří Quarto; report potřebuje jen zapsaný fragment LaTeXu.
-  invisible(export_table(table, col.names = names(table), align = "lrrrrrrrr",
-                         label = "metrics", widths = NULL, dir = out_dir))
+  export_table(table, col.names = names(table), align = "lrrrrrrrr",
+               label = "metrics", widths = NULL, dir = out_dir)
+  export_figure(plot, height_cm = 3 + 1.5 * sum(published), label = "metrics", dir = out_dir)
+  for (output in outputs) {
+    write_sidecar(output, input = metrics_path, manifest = manifest_path, row_id = row_id)
+  }
   # Vypsání ggplotu v Rscriptu by otevřelo výchozí pdf() bez písma práce.
-  invisible(export_figure(plot, height_cm = 3 + 1.5 * diagnoses, label = "metrics", dir = out_dir))
-  outputs <- file.path(out_dir, c("metrics.tex", "metrics.pdf"))
-  sidecars <- vapply(outputs, write_sidecar, character(1),
-                     input = metrics_path, manifest = manifest_path, USE.NAMES = FALSE)
   invisible(c(outputs, sidecars))
 }

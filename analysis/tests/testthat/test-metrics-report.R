@@ -12,6 +12,13 @@ write_metrics_variant <- function(path, replacement) {
   ), path)
 }
 
+previous_metrics_report <- function(dir) {
+  dir.create(dir)
+  paths <- file.path(dir, c("metrics.tex", "metrics.pdf", "metrics.tex.meta.json", "metrics.pdf.meta.json"))
+  for (path in paths) writeLines("předchozí výstup", path)
+  paths
+}
+
 test_that("tabulka metrik má česká čísla a potlačí malé skupiny i jejich metriky", {
   dir <- withr::local_tempdir()
   write_metrics_report(METRICS_FIXTURE, metrics_manifest(dir), dir, CANDIDATES_FIXTURE)
@@ -66,6 +73,7 @@ test_that("oba výstupy nesou ověřitelný odkaz na vstup a manifest běhu", {
   metrics <- write_metrics_variant(file.path(dir, "beh-42.parquet"), "'beh-42' AS row_id")
   manifest <- metrics_manifest(dir, "beh-42")
   out <- file.path(dir, "výstupy")
+  previous_metrics_report(out)
   result <- withVisible(write_metrics_report(metrics, manifest, out, CANDIDATES_FIXTURE))
   files <- c("metrics.tex", "metrics.pdf", "metrics.tex.meta.json", "metrics.pdf.meta.json")
   expect_false(result$visible)
@@ -170,6 +178,36 @@ test_that("bez zveřejnitelné diagnózy se nezapíše ani tabulka", {
     "male-skupiny.parquet.*zveřejniteln"
   )
   expect_length(list.files(out, recursive = TRUE, all.files = TRUE), 0L)
+})
+
+test_that("chyba kontroly vstupu zachová všechny předchozí výstupy", {
+  dir <- withr::local_tempdir()
+  metrics <- write_metrics_variant(file.path(dir, "male-skupiny.parquet"), "5::BIGINT AS test_positives")
+  out <- file.path(dir, "out")
+  paths <- previous_metrics_report(out)
+
+  expect_error(
+    write_metrics_report(metrics, metrics_manifest(dir), out, CANDIDATES_FIXTURE),
+    "male-skupiny.parquet.*zveřejniteln"
+  )
+  expect_identical(lapply(paths, readLines), rep(list("předchozí výstup"), 4))
+})
+
+test_that("selhání exportu PDF nenechá starý sidecar u nové tabulky", {
+  dir <- withr::local_tempdir()
+  out <- file.path(dir, "out")
+  previous_metrics_report(out)
+  font_environment <- environment(theme_thesis)
+  previous_font <- get("THESIS_FONT", envir = font_environment)
+  withr::defer(assign("THESIS_FONT", previous_font, envir = font_environment))
+  assign("THESIS_FONT", "Neexistující písmo", envir = font_environment)
+
+  expect_error(
+    write_metrics_report(METRICS_FIXTURE, metrics_manifest(dir), out, CANDIDATES_FIXTURE),
+    "install-libertinus.sh"
+  )
+  expect_match(readLines(file.path(out, "metrics.tex"))[1], "\\begin{tabular}", fixed = TRUE)
+  expect_false(any(file.exists(file.path(out, c("metrics.pdf", "metrics.tex.meta.json", "metrics.pdf.meta.json")))))
 })
 
 test_that("skript při chybném počtu argumentů vypíše použití a selže", {
