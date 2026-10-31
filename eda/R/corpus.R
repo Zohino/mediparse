@@ -32,6 +32,9 @@ mimic_catalog <- function() {
   )
 }
 
+# jsonlite obchází přetečení S31h: reticulate při read_manifest převede int nad
+# 2^31 − 1 na R integer s přetečením. Tvar JSON zrcadlí _Inventory
+# v infrastructure/mimic_inventory.py, jméno tabulky table_name v domain/mimic_table.py.
 manifest_tables <- function(path) {
   manifest <- jsonlite::read_json(path)
   if (is.null(manifest$tables)) {
