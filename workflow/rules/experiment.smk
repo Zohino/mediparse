@@ -10,7 +10,9 @@ rule make_splits:
         "../scripts/make_splits.py"
 
 
-# Config řádku pro MIMIC dodá S40; smoketest ho přebije vlastním configem.
+# config/training.json chybí záměrně: config řádku pro MIMIC dodá S40,
+# smoketest ho přebije vlastním configem. config/smoketest_training.json sem
+# nepatří, protože MIMIC by trénoval pod jeho row_id.
 rule train_model:
     input:
         cohort="resources/mimic/cohort.parquet",
@@ -41,7 +43,7 @@ rule evaluate_model:
         "../scripts/evaluate_model.py"
 
 
-# Config řádku pro MIMIC dodá S40; smoketest ho přebije vlastním configem.
+# Config řádku: viz train_model.
 rule infer_model:
     input:
         cohort="resources/mimic/cohort.parquet",
