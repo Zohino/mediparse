@@ -30,20 +30,6 @@ use rule build_cohort as build_smoketest_cohort with:
         SMOKETEST_LOGS / "build_cohort.log",
 
 
-rule prepare_smoketest_subset:
-    input:
-        plans=SYNTHETIC / "plans.jsonl",
-        notes=sorted((SYNTHETIC / "en").glob("*.txt")),
-    output:
-        SMOKETEST / "notes.parquet",
-    log:
-        SMOKETEST_LOGS / "prepare_smoketest_subset.log",
-    params:
-        corpus=SYNTHETIC,
-    script:
-        "../scripts/prepare_smoketest.py"
-
-
 rule make_smoketest_splits:
     input:
         notes=SMOKETEST / "cohort.parquet",
