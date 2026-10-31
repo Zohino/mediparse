@@ -248,6 +248,18 @@ def test_duplicate_plans_are_refused(planned_note: PlannedNote) -> None:
         input_notes(plans, {"90000001-DS-1": "první"}, Language.EN)
 
 
+def test_pairing_error_reports_all_problems(planned_note: PlannedNote) -> None:
+    """Duplicitní plán bez textu se ohlásí oběma důvody v jedné výjimce."""
+    plan = _plan(planned_note, "90000001-DS-1")
+
+    with pytest.raises(UnpairedNotesError) as error:
+        input_notes((plan, plan), {}, Language.EN)
+
+    message = str(error.value)
+    assert f"Duplicitní plány: {plan.note_id}." in message
+    assert f"Plány bez zprávy v jazyce en: {plan.note_id}." in message
+
+
 def test_empty_corpus_is_refused() -> None:
     """Tabulka bez řádků by smoketest prošla bez dat."""
     with pytest.raises(
