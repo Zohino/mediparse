@@ -1,3 +1,4 @@
+# Zrcadlo MIN_CELL v src/mediparse/domain/dua.py; změna se dělá v obou souborech.
 DUA_THRESHOLD <- 10L
 UNKNOWN_LABEL <- "neuvedeno"
 NBSP <- "\u00a0"
