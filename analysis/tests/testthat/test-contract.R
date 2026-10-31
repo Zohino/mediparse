@@ -8,11 +8,11 @@ write_contract_parquet <- function(query, path = tempfile(fileext = ".parquet"))
 }
 
 test_that("kontrakt odmítne INTEGER místo BIGINT s kontextem chyby", {
-  path <- write_contract_parquet("SELECT 1::INTEGER AS n")
+  path <- write_contract_parquet("SELECT 1::BIGINT AS ok, 1::INTEGER AS n")
   withr::defer(unlink(path))
 
   expect_error(
-    read_contract_table(path, c(n = "BIGINT")),
+    read_contract_table(path, c(ok = "BIGINT", n = "BIGINT")),
     paste0(basename(path), ".*sloupec n.*BIGINT.*INTEGER")
   )
 })
@@ -28,11 +28,11 @@ test_that("kontrakt odmítne chybějící deklarovaný sloupec", {
 })
 
 test_that("kontrakt odmítne NULL v deklarovaném sloupci", {
-  path <- write_contract_parquet("SELECT NULL::BIGINT AS n")
+  path <- write_contract_parquet("SELECT 1::BIGINT AS ok, NULL::BIGINT AS n")
   withr::defer(unlink(path))
 
   expect_error(
-    read_contract_table(path, c(n = "BIGINT")),
+    read_contract_table(path, c(ok = "BIGINT", n = "BIGINT")),
     paste0(basename(path), ".*sloupec n.*BIGINT.*NULL")
   )
 })
