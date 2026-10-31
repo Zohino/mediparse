@@ -1,3 +1,34 @@
+rule synthetic_mimic:
+    input:
+        plans=SYNTHETIC / "plans.jsonl",
+        notes=sorted((SYNTHETIC / "en").glob("*.txt")),
+        candidates="config/diagnosis_candidates.json",
+        manifest="results/mimic/manifest.json",
+    output:
+        discharge=SMOKETEST / "mimic/parquet/discharge.parquet",
+        diagnoses=SMOKETEST / "mimic/parquet/diagnoses_icd.parquet",
+        tables=SMOKETEST / "mimic/tables.json",
+    log:
+        SMOKETEST_LOGS / "synthetic_mimic.log",
+    params:
+        corpus=SYNTHETIC,
+    script:
+        "../scripts/synthetic_mimic.py"
+
+
+use rule build_cohort as build_smoketest_cohort with:
+    input:
+        discharge=SMOKETEST / "mimic/parquet/discharge.parquet",
+        diagnoses=SMOKETEST / "mimic/parquet/diagnoses_icd.parquet",
+        candidates="config/diagnosis_candidates.json",
+        tables=SMOKETEST / "mimic/tables.json",
+    output:
+        cohort=SMOKETEST / "cohort.parquet",
+        manifest=SMOKETEST / "cohort/manifest.json",
+    log:
+        SMOKETEST_LOGS / "build_cohort.log",
+
+
 rule prepare_smoketest_subset:
     input:
         plans=SYNTHETIC / "plans.jsonl",
