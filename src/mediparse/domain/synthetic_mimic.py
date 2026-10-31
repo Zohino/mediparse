@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.icd import IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.note import order_of
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -74,7 +75,7 @@ def _discharge(note: InputNote, hadm: str) -> dict[str, str]:
         "subject_id": str(note.subject_id),
         "hadm_id": hadm,
         "note_type": "DS",
-        "note_seq": note.note_id.rsplit("-", 1)[1],
+        "note_seq": str(order_of(note.note_id)),
         "charttime": _TIMESTAMP,
         "storetime": _TIMESTAMP,
         "text": note.text,

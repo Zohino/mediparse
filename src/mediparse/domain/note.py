@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from mediparse.domain.identity import SubjectId
 
 # Bez úvodní nuly a nuly: int() by "010" a "10" sloučil v jednoho pacienta.
-_NOTE_ID: Final = re.compile(r"(?P<subject>[1-9]\d*)-DS-\d+")
+_NOTE_ID: Final = re.compile(r"(?P<subject>[1-9]\d*)-DS-(?P<order>\d+)")
 
 
 def note_id(subject_id: SubjectId, order: int) -> str:
@@ -29,6 +29,14 @@ class InvalidNoteIdError(NoteIdentityError):
     """Jméno zprávy není note_id propouštěcí zprávy ve skladbě MIMIC-IV-Note."""
 
 
+def _match_note_id(note_id: str) -> re.Match[str]:
+    match = _NOTE_ID.fullmatch(note_id)
+    if match is None:
+        msg = f"Neplatné note_id propouštěcí zprávy: {note_id!r}"
+        raise InvalidNoteIdError(msg)
+    return match
+
+
 def subject_of(note_id: str) -> SubjectId:
     """Subject_id pacienta z note_id propouštěcí zprávy ve skladbě MIMIC-IV-Note.
 
@@ -38,11 +46,19 @@ def subject_of(note_id: str) -> SubjectId:
     Raises:
         InvalidNoteIdError: Jméno neodpovídá skladbě ``subject_id-DS-pořadí``.
     """
-    match = _NOTE_ID.fullmatch(note_id)
-    if match is None:
-        msg = f"Neplatné note_id propouštěcí zprávy: {note_id!r}"
-        raise InvalidNoteIdError(msg)
-    return int(match["subject"])
+    return int(_match_note_id(note_id)["subject"])
+
+
+def order_of(note_id: str) -> int:
+    """Pořadí propouštěcí zprávy v note_id ve skladbě MIMIC-IV-Note.
+
+    Returns:
+        Číselné pořadí zprávy.
+
+    Raises:
+        InvalidNoteIdError: Jméno neodpovídá skladbě ``subject_id-DS-pořadí``.
+    """
+    return int(_match_note_id(note_id)["order"])
 
 
 class NoteSubjectMismatchError(NoteIdentityError):
