@@ -18,17 +18,22 @@ if TYPE_CHECKING:
 
 
 def training_input(
-    notes: Path, training: TrainingConfig, lexicon: Path
+    cohort: Path, training: TrainingConfig, lexicon: Path
 ) -> tuple[InputTable, DiagnosticStrip | None]:
     """Složí tabulku zpráv, kterou čte trénink i inference, a záznam stripu pro manifest.
 
     Trénink a inference volají tutéž funkci se stejným configem, aby klasifikovaly týž text.
 
+    Args:
+        cohort: Cesta k tabulce kohorty.
+        training: Config tréninku s přepínačem stripu.
+        lexicon: Cesta k lexikonu diagnostických sekcí.
+
     Returns:
         Tabulka beze změny a ``None``, když přepínač stripu je vypnutý. Jinak tabulka bez
         diagnostických sekcí a záznam s jejich seřazenými klíči a otiskem lexikonu.
     """
-    table = ParquetNoteTable(notes)
+    table = ParquetNoteTable(cohort)
     if not training.strip_diagnostic_sections:
         return table, None
     sections = load_section_lexicon(lexicon)

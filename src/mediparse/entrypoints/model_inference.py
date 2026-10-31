@@ -65,7 +65,9 @@ def run(
         OK po zápisu predikcí; REFUSED pro chybějící nebo neplatný vstup a pro
         uložený model, který nedává stejné predikce jako trénink.
     """
-    table, _ = training_input(cohort, load_training_config(config), lexicon)
+    table, _ = training_input(
+        cohort=cohort, training=load_training_config(config), lexicon=lexicon
+    )
     step = ModelInference(
         table=table,
         predictions=ParquetPredictionTable(predictions),

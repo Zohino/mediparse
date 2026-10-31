@@ -102,7 +102,7 @@ def run(
     """
     training = load_training_config(config)
     source = revision()
-    table, strip = training_input(cohort, training, lexicon)
+    table, strip = training_input(cohort=cohort, training=training, lexicon=lexicon)
     normalization = (
         load_text_normalization(candidates)
         if training.normalize_clinical_text
