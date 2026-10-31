@@ -3,7 +3,6 @@ project:
   output-dir: ../results/eda
 
 engine: knitr
-jupyter: python3
 lang: cs
 author: Martin Žoha
 bibliography: references.bib
