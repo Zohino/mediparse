@@ -125,9 +125,9 @@ def test_tables_have_string_columns_and_synthetic_urls(
 
 
 def test_unpaired_corpus_is_refused_before_writing(
-    tmp_path: Path, planned_note: PlannedNote
+    tmp_path: Path, planned_note: PlannedNote, caplog: pytest.LogCaptureFixture
 ) -> None:
-    """Plán bez zprávy odmítne generátor bez kteréhokoli ze tří výstupů."""
+    """Plán bez zprávy odmítne generátor s důvodem a bez kteréhokoli výstupu."""
     plans = tmp_path / "plans.jsonl"
     PlansFile(plans).save([planned_note.plan])
     discharge = tmp_path / "discharge.parquet"
@@ -149,6 +149,7 @@ def test_unpaired_corpus_is_refused_before_writing(
     assert not discharge.exists()
     assert not diagnoses.exists()
     assert not tables.exists()
+    assert f"Plány bez zprávy v jazyce en: {planned_note.plan.note_id}" in caplog.text
 
 
 def test_missing_manifest_is_refused_before_writing(tmp_path: Path) -> None:
