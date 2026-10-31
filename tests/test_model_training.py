@@ -1,4 +1,4 @@
-"""Doména tréninku smoketestu: neplatný config."""
+"""Doména tréninku modelu: neplatný config."""
 
 from __future__ import annotations
 

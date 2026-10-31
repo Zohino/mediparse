@@ -2,16 +2,16 @@
 
 from pathlib import Path
 
-from mediparse.entrypoints.smoketest_inference import main
+from mediparse.entrypoints.model_inference import main
 
 raise SystemExit(
     main(
-        notes=Path(snakemake.input.notes),
+        cohort=Path(snakemake.input.notes),
         config=Path(snakemake.input.config),
         lexicon=Path(snakemake.input.lexicon),
         model=Path(snakemake.input.model),
         predictions=Path(snakemake.input.predictions),
-        demo=Path(snakemake.output[0]),
+        inference=Path(snakemake.output[0]),
         log=Path(snakemake.log[0]),
     )
 )

@@ -1,4 +1,4 @@
-"""Vstupní bod kroku train_smoketest_model: model a predikce, odmítnutí a determinismus."""
+"""Vstupní bod kroku train_model: model a predikce, odmítnutí a determinismus."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING, Final
 import pytest
 
 from mediparse.domain.run_manifest import RunManifest
-from mediparse.entrypoints import smoketest_training
+from mediparse.entrypoints import model_training
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.file_digest import file_sha256
@@ -97,8 +97,8 @@ def _call(
     candidates: Path = REPOSITORY_DIAGNOSIS_CANDIDATES,
 ) -> ExitCode:
     notes, config, split = inputs
-    return smoketest_training.run(
-        notes=notes,
+    return model_training.run(
+        cohort=notes,
         config=config,
         candidates=candidates,
         lexicon=lexicon,
@@ -160,7 +160,7 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
     assert written.model_revision is None
     assert written.tokenizer_revision is None
     assert written.model == ESTIMATOR
-    assert tuple(written.environment.packages) == smoketest_training.PACKAGES
+    assert tuple(written.environment.packages) == model_training.PACKAGES
 
 
 @pytest.mark.parametrize(

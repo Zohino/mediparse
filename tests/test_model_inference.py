@@ -1,4 +1,4 @@
-"""Doména inference smoketestu: soulad s tréninkem a výběr ukázky."""
+"""Doména inference modelu: soulad s tréninkem."""
 
 from __future__ import annotations
 

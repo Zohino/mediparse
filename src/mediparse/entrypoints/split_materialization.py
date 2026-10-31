@@ -1,4 +1,4 @@
-"""Vstupní bod kroku Snakemake ``make_smoketest_splits``: sdílený split pacientů zpráv.
+"""Vstupní bod kroku Snakemake ``make_splits``: sdílený split pacientů zpráv.
 
 Cesty určuje pravidlo; skript workflow jen rozbalí objekt ``snakemake`` a zavolá
 ``main``. Krok nic netrénuje, proto nezapisuje run manifest: seed, počet foldů
@@ -24,18 +24,18 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-def main(*, notes: Path, config: Path, output: Path, log: Path) -> ExitCode:
+def main(*, cohort: Path, config: Path, output: Path, log: Path) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
 
     Returns:
         Návratový kód kroku.
     """
     configure_logging(log)
-    return run(notes=notes, config=config, output=output)
+    return run(cohort=cohort, config=config, output=output)
 
 
 @refusing_invalid_input
-def run(*, notes: Path, config: Path, output: Path) -> ExitCode:
+def run(*, cohort: Path, config: Path, output: Path) -> ExitCode:
     """Složí use case z tabulky, configu a adaptérů a zapíše soubor splitu.
 
     Returns:
@@ -43,7 +43,7 @@ def run(*, notes: Path, config: Path, output: Path) -> ExitCode:
         a config a pro méně pacientů, než je foldů.
     """
     step = SplitMaterialization(
-        table=ParquetNoteTable(notes),
+        table=ParquetNoteTable(cohort),
         splitter=StratifiedGroupFolds(),
         sink=ParquetSplitTable(output),
     )

@@ -346,11 +346,11 @@ ignore = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
 
-"src/mediparse/entrypoints/smoketest_training.py" = [
+"src/mediparse/entrypoints/model_training.py" = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
 
-"src/mediparse/entrypoints/smoketest_inference.py" = [
+"src/mediparse/entrypoints/model_inference.py" = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
 

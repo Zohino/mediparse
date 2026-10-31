@@ -6,7 +6,7 @@ from mediparse.entrypoints.split_materialization import main
 
 raise SystemExit(
     main(
-        notes=Path(snakemake.input.notes),
+        cohort=Path(snakemake.input.notes),
         config=Path(snakemake.input.config),
         output=Path(snakemake.output[0]),
         log=Path(snakemake.log[0]),

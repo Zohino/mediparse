@@ -1,7 +1,7 @@
-"""Vstupní bod kroku Snakemake ``infer_smoketest_model``: uložený model nad odloženými zprávami.
+"""Vstupní bod kroku Snakemake ``infer_model``: uložený model nad odloženými zprávami.
 
 Cesty určuje pravidlo; skript workflow jen rozbalí objekt ``snakemake`` a zavolá
-``main``. Pracuje jen s výstupy tréninku smoketestu, proto smí běžet kdekoli.
+``main``. Čte kohortu a uložený model, proto běží tam, kde jsou data.
 """
 
 from __future__ import annotations
@@ -25,12 +25,12 @@ logger = logging.getLogger(__name__)
 
 def main(
     *,
-    notes: Path,
+    cohort: Path,
     config: Path,
     lexicon: Path,
     model: Path,
     predictions: Path,
-    demo: Path,
+    inference: Path,
     log: Path,
 ) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
@@ -40,42 +40,42 @@ def main(
     """
     configure_logging(log)
     return run(
-        notes=notes,
+        cohort=cohort,
         config=config,
         lexicon=lexicon,
         model=model,
         predictions=predictions,
-        demo=demo,
+        inference=inference,
     )
 
 
 @refusing_invalid_input
 def run(
     *,
-    notes: Path,
+    cohort: Path,
     config: Path,
     lexicon: Path,
     model: Path,
     predictions: Path,
-    demo: Path,
+    inference: Path,
 ) -> ExitCode:
-    """Složí use case z tabulky podle configu tréninku a uloženého modelu a zapíše ukázky predikcí.
+    """Složí use case z tabulky podle configu tréninku a uloženého modelu a zapíše predikce načteného modelu.
 
     Returns:
-        OK po zápisu ukázek; REFUSED pro chybějící nebo neplatný vstup a pro
+        OK po zápisu predikcí; REFUSED pro chybějící nebo neplatný vstup a pro
         uložený model, který nedává stejné predikce jako trénink.
     """
-    table, _ = training_input(notes, load_training_config(config), lexicon)
+    table, _ = training_input(cohort, load_training_config(config), lexicon)
     step = ModelInference(
         table=table,
         predictions=ParquetPredictionTable(predictions),
         model=SkopsModelFile(model),
-        inference=ParquetPredictionTable(demo),
+        inference=ParquetPredictionTable(inference),
     )
-    examples = step.run()
+    inferred = step.run()
     logger.info(
-        "Uložený model %s dává stejné predikce jako trénink, ukázek: %d.",
+        "Uložený model %s dává stejné predikce jako trénink, predikcí: %d.",
         model,
-        len(examples),
+        len(inferred),
     )
     return ExitCode.OK

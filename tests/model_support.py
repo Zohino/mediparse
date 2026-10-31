@@ -184,7 +184,7 @@ class _MemoryNotes:
 def write_split(
     path: Path, notes: Sequence[InputNote], **overrides: object
 ) -> SharedSplit:
-    """Zapíše soubor splitu zpráv přes use case kroku ``make_smoketest_splits``.
+    """Zapíše soubor splitu zpráv přes use case kroku ``make_splits``.
 
     Args:
         path: Cíl ``splits.parquet``.
