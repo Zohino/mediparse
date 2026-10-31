@@ -9,7 +9,7 @@ raise SystemExit(
         plans=Path(snakemake.input.plans),
         corpus=Path(snakemake.params.corpus),
         candidates=Path(snakemake.input.candidates),
-        manifest=Path(snakemake.input.manifest),
+        manifest=Path(snakemake.params.manifest),
         discharge=Path(snakemake.output.discharge),
         diagnoses=Path(snakemake.output.diagnoses),
         tables=Path(snakemake.output.tables),

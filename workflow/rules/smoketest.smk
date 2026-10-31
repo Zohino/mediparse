@@ -3,7 +3,6 @@ rule synthetic_mimic:
         plans=SYNTHETIC / "plans.jsonl",
         notes=sorted((SYNTHETIC / "en").glob("*.txt")),
         candidates="config/diagnosis_candidates.json",
-        manifest="results/mimic/manifest.json",
     output:
         discharge=SMOKETEST / "mimic/parquet/discharge.parquet",
         diagnoses=SMOKETEST / "mimic/parquet/diagnoses_icd.parquet",
@@ -12,6 +11,8 @@ rule synthetic_mimic:
         SMOKETEST_LOGS / "synthetic_mimic.log",
     params:
         corpus=SYNTHETIC,
+        # Manifest vytváří validate_mimic; input by do smoketestu přitáhl pravidla MIMIC.
+        manifest="results/mimic/manifest.json",
     script:
         "../scripts/synthetic_mimic.py"
 
