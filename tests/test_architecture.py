@@ -42,7 +42,6 @@ FILE_MODE = re.compile(r"[rwxabt+]+")
 EDA = REPOSITORY / "eda"
 # Import-linter nečte Quarto ani R; stejně jako u Snakemake hlídáme text importů.
 R_IMPORT = re.compile(r"\bimport\(\s*[\"']([\w.]+)[\"']\s*\)")
-PYTHON_IMPORT = re.compile(r"^\s*(?:from|import)\s+([\w.]+)", re.MULTILINE)
 EDA_PYTHON = re.compile(
     r"^\s*```\{python(?:[ ,}])|`\{python\}"
     r"|^\s*(?:engine:\s*[\"']?jupyter\b|jupyter\s*:)"
@@ -504,7 +503,7 @@ def _eda_files(root: Path) -> list[Path]:
 
 def _eda_imports(file: Path) -> list[str]:
     text = file.read_text(encoding="utf-8")
-    return [*R_IMPORT.findall(text), *PYTHON_IMPORT.findall(text)]
+    return R_IMPORT.findall(text)
 
 
 def _eda_import_violations(files: list[Path]) -> list[str]:
