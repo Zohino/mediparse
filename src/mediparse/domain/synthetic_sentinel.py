@@ -31,10 +31,8 @@ def section_tokens(
     Raises:
         InvalidInputError: Prefix syntetických buněk je prázdný.
     """
-    if not prefix:
-        msg = "Prefix syntetických buněk nesmí být prázdný."
-        raise InvalidInputError(msg)
-    # První řádky dostanou až v sentinel_tables čísla 0 až n-1; DF musí zůstat jedna.
+    _require_prefix(prefix)
+    # _decorate_row rezervuje pro první řádky čísla 0 až n-1; těla musí mít jiné tokeny.
     number = len(discharge)
     decorated = []
     for row in discharge:
@@ -75,9 +73,7 @@ def sentinel_tables(
         InvalidInputError: Prefix je prázdný, tabulka nemá sloupce nebo manifest
             neobsahuje korpusovou tabulku či její sloupec.
     """
-    if not prefix:
-        msg = "Prefix syntetických buněk nesmí být prázdný."
-        raise InvalidInputError(msg)
+    _require_prefix(prefix)
     _validate_corpus(corpus, shapes)
     tables = {}
     for table, shape in shapes.items():
@@ -96,6 +92,12 @@ def sentinel_tables(
             for index, row in enumerate(rows)
         ]
     return tables
+
+
+def _require_prefix(prefix: str) -> None:
+    if not prefix:
+        msg = "Prefix syntetických buněk nesmí být prázdný."
+        raise InvalidInputError(msg)
 
 
 def _validate_corpus(
