@@ -57,7 +57,7 @@ def test_matrix_row_with_foreign_or_missing_column_is_rejected() -> None:
 
 
 def test_null_in_prevalence_is_rejected() -> None:
-    """Potlačená prevalence (null) export znehodnotí."""
+    """Nedefinovaná prevalence (null) export znehodnotí."""
     payload = export_payload(KEYS)
     payload["prevalence"]["a"] = None
 
@@ -66,7 +66,7 @@ def test_null_in_prevalence_is_rejected() -> None:
 
 
 def test_null_in_matrix_is_rejected() -> None:
-    """Potlačená buňka matice (null) export znehodnotí."""
+    """Nedefinovaná buňka matice (null) export znehodnotí."""
     payload = export_payload(KEYS)
     payload["conditional"]["a"]["b"] = None
 
@@ -76,7 +76,7 @@ def test_null_in_matrix_is_rejected() -> None:
 
 @pytest.mark.parametrize("field", ["given_positive", "given_negative"])
 def test_null_in_mention_rate_is_rejected(field: str) -> None:
-    """Potlačená míra zmínky (null) export znehodnotí."""
+    """Nedefinovaná míra zmínky (null) export znehodnotí."""
     payload = export_payload(KEYS)
     payload["mentions"]["a"][field] = None
 
