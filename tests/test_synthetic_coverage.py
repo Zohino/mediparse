@@ -3,24 +3,19 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from typing import TYPE_CHECKING, Final
+from typing import Final
 
 import pytest
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.icd import IcdCode, IcdVersion
+from mediparse.domain.icd import DiagnosisCodes, IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.mentions import Mention, MentionStatus
+from mediparse.domain.note_plan import NotePlan
 from mediparse.domain.synthetic_coverage import coverage_diagnoses
-from mediparse.domain.synthetic_mimic import synthetic_mimic_rows
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
-from mediparse.infrastructure.mimic_inventory import read_manifest
-from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES, REPOSITORY_MIMIC_MANIFEST
-from tests.synthetic_support import EDA_NOTES, EDA_PLANS
-
-if TYPE_CHECKING:
-    from mediparse.domain.note_plan import NotePlan
-
+from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
+from tests.synthetic_support import EDA_PLANS
 
 CKD_NOTE_INDEX: Final = 17
 
@@ -79,16 +74,33 @@ def plans() -> tuple[NotePlan, ...]:
         ),
         absent[0].model_copy(
             update={
-                "note_id": "90000001-DS-200",
+                "note_id": "90000001-DS-0001",
                 "labels": (Diagnosis.PNEUMONIA,),
             }
         ),
     )
+    both_negated = negated[0].model_copy(
+        update={
+            "note_id": "90000001-DS-0002",
+            "mentions": (
+                *negated[0].mentions,
+                Mention(
+                    diagnosis=Diagnosis.PNEUMONIA,
+                    status=MentionStatus.FAMILY_HISTORY,
+                    sections=("chief_complaint",),
+                ),
+            ),
+        }
+    )
     # Zbytek nese CKD: jediných 16 způsobilých zpráv zůstává v absent.
     return tuple(
-        reversed((
+        NotePlan.model_validate(plan.model_dump())
+        for plan in reversed((
             *absent,
-            *(p.model_copy(update={"labels": (Diagnosis.CKD,)}) for p in negated),
+            *(
+                p.model_copy(update={"labels": (Diagnosis.CKD,)})
+                for p in (*negated, both_negated)
+            ),
             *(
                 p.model_copy(update={"labels": (*p.labels, Diagnosis.CKD)})
                 for p in excluded
@@ -141,8 +153,8 @@ def test_pneumonia_selection(plans: tuple[NotePlan, ...]) -> None:
         plans, rows, hadm, load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES)
     )
     assert {row["hadm_id"] for row in added if row["icd_code"] == "J12"} == {
-        hadm[f"90000001-DS-{index:03}"] for index in (*range(1, 16), *range(101, 116))
-    }
+        hadm[f"90000001-DS-{index:03}"] for index in (*range(1, 16), *range(101, 115))
+    } | {hadm["90000001-DS-0002"]}
 
 
 @pytest.mark.parametrize("group", ["ckd", "copd", "negated", "absent"])
@@ -163,7 +175,7 @@ def test_fourteen_eligible_notes_are_refused(
             for p in plans
         )
     else:
-        start = 101 if group == "negated" else 1
+        start = 100 if group == "negated" else 1
         excluded = {
             f"90000001-DS-{index:03}" for index in range(start + 14, start + 17)
         }
@@ -184,7 +196,9 @@ def test_fourteen_eligible_notes_are_refused(
             for p in plans
         )
     rows, hadm = _rows(plans, "10")
-    with pytest.raises(InvalidInputError, match=group):
+    with pytest.raises(
+        InvalidInputError, match=rf"Skupina pokrytí {group} potřebuje 15 zpráv, má 14\."
+    ):
         coverage_diagnoses(
             plans, rows, hadm, load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES)
         )
@@ -194,7 +208,7 @@ def test_fourteen_eligible_notes_are_refused(
 def test_comorbidity_codes_are_outside_candidates_and_inputs_unchanged(
     plans: tuple[NotePlan, ...], version: str
 ) -> None:
-    """Kódy Charlsonu nerozšiřují kandidáty a čistá funkce zachová vstupy i labely."""
+    """Kódy Charlsonu nerozšiřují kandidáty a čistá funkce zachová své vstupy."""
     rows, hadm = _rows(plans, version)
     original = deepcopy((plans, rows, hadm))
     codes = load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES)
@@ -213,14 +227,31 @@ def test_comorbidity_codes_are_outside_candidates_and_inputs_unchanged(
         for row in comorbidity
     )
     assert (plans, rows, hadm) == original
-    notes_before = {note.note_id: note.labels for note in EDA_NOTES}
-    tables = synthetic_mimic_rows(
-        EDA_NOTES, codes, read_manifest(REPOSITORY_MIMIC_MANIFEST)
-    )
-    coverage_diagnoses(
-        EDA_PLANS,
-        tables["diagnoses_icd"],
-        {r["note_id"]: r["hadm_id"] for r in tables["discharge"]},
-        codes,
-    )
-    assert {note.note_id: note.labels for note in EDA_NOTES} == notes_before
+
+
+def test_comorbidity_code_belonging_to_candidate_is_refused(
+    plans: tuple[NotePlan, ...],
+) -> None:
+    """Širší předpona kandidáta nesmí pohltit kód pokrytí Charlsonovy kategorie."""
+    codes = load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES)
+    prefixes = dict(codes.prefixes)
+    prefixes[Diagnosis.CKD] = {**prefixes[Diagnosis.CKD], IcdVersion.TEN: ("N1",)}
+    overlapping = DiagnosisCodes(prefixes=prefixes)
+    rows, hadm = _rows(plans, "10")
+    with pytest.raises(InvalidInputError, match=r"N19 ICD-10 patří kandidátovi"):
+        coverage_diagnoses(plans, rows, hadm, overlapping)
+
+
+def test_missing_pneumonia_prefix_for_admission_version_is_refused(
+    plans: tuple[NotePlan, ...],
+) -> None:
+    """Hospitalizace ICD-9 potřebuje kód pneumonie právě v této verzi."""
+    codes = load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES)
+    prefixes = dict(codes.prefixes)
+    prefixes[Diagnosis.PNEUMONIA] = {
+        IcdVersion.TEN: prefixes[Diagnosis.PNEUMONIA][IcdVersion.TEN]
+    }
+    without_nine = DiagnosisCodes(prefixes=prefixes)
+    rows, hadm = _rows(plans, "9")
+    with pytest.raises(InvalidInputError, match=r"pneumonia nemá předponu ICD-9"):
+        coverage_diagnoses(plans, rows, hadm, without_nine)

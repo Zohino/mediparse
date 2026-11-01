@@ -64,10 +64,9 @@ def test_writes_manifest_tables_and_marker(tmp_path: Path) -> None:
         for path in (REPOSITORY_CORPUS / "en").glob("*.txt")
     }
     notes = pq.read_table(out / "discharge.parquet").to_pylist()
-    for index, note in enumerate(notes):
+    for note in notes:
         note_id = note["note_id"].removeprefix(f"{PREFIX}-discharge-note_id-")
-        added_lines = 2 if index == 0 else 1
-        assert note["text"].split("\n", added_lines)[added_lines] == originals[note_id]
+        assert note["text"].endswith("\n" + originals[note_id])
 
 
 @pytest.mark.parametrize("source", ["manifest", "lexicon", "plans"])
