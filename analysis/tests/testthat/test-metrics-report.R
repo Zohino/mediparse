@@ -19,7 +19,7 @@ previous_metrics_report <- function(dir) {
   paths
 }
 
-test_that("tabulka metrik má česká čísla a potlačí malé skupiny i jejich metriky", {
+test_that("tabulka metrik má česká čísla, přesné počty a metriky jen nad prahem stability", {
   dir <- withr::local_tempdir()
   write_metrics_report(METRICS_FIXTURE, metrics_manifest(dir), dir, CANDIDATES_FIXTURE)
 
@@ -30,12 +30,26 @@ test_that("tabulka metrik má česká čísla a potlačí malé skupiny i jejich
     "\\midrule",
     "Diabetes mellitus & 40 & 12 & 0,500 & 0,250 & 0,750 & 0,875 & 0,900 & 0,800\\\\",
     "CHOPN & 40 & 10 & 0,600 & 0,300 & 0,400 & 0,850 & 0,700 & 0,550\\\\",
-    "Chronické onemocnění ledvin & 40 & – & – & – & – & – & – & –\\\\",
+    "Chronické onemocnění ledvin & 40 & 8 & – & – & – & – & – & –\\\\",
     "Pneumonie & 40 & 20 & 1,000 & 0,000 & 0,000 & 0,500 & 0,500 & 0,500\\\\",
-    "Fibrilace síní & 40 & – & – & – & – & – & – & –\\\\",
+    "Fibrilace síní & 40 & 4 & – & – & – & – & – & –\\\\",
     "\\bottomrule",
     "\\end{tabular}"
   ))
+})
+
+test_that("tabulka zachová pět pozitivních zpráv a skryje jen nestabilní metriky", {
+  metrics <- read_metrics(METRICS_FIXTURE)
+  metrics$test_positives[1] <- 5
+  labels <- diagnosis_labels(metrics$diagnosis, CANDIDATES_FIXTURE)
+
+  table <- metrics_table(metrics, labels)
+
+  expect_identical(table$Pozitivní[1], "5")
+  expect_identical(
+    unname(unlist(table[1, c("Přesnost", "Úplnost", "F1", "Správnost", "ROC AUC", "PR AUC")])),
+    rep("–", 6)
+  )
 })
 
 test_that("graf nese jen F1 a AUC zveřejnitelných diagnóz", {

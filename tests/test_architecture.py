@@ -15,7 +15,7 @@ from pydantic import BaseModel
 
 import mediparse
 import mediparse.domain
-from mediparse.domain.cohort import CohortCounts
+from mediparse.domain.cohort import MIN_CELL, CohortCounts
 from tests.support import REPOSITORY
 
 if TYPE_CHECKING:
@@ -50,6 +50,12 @@ EDA_PYTHON = re.compile(
 EDA_PRESENT = pytest.mark.skipif(
     not EDA.is_dir(),
     reason="eda/ není v obrazu kontejneru; hlídá job Test v CI",
+)
+
+ANALYSIS = REPOSITORY / "analysis"
+ANALYSIS_PRESENT = pytest.mark.skipif(
+    not ANALYSIS.is_dir(),
+    reason="analysis/ není v obrazu kontejneru; hlídá job Test v CI",
 )
 
 
@@ -524,6 +530,15 @@ def _eda_python_violations(documents: list[Path]) -> list[str]:
         )
         if EDA_PYTHON.search(line)
     ]
+
+
+@ANALYSIS_PRESENT
+def test_analysis_metric_threshold_matches_cohort() -> None:
+    """R i kohorta vyžadují stejné počty obou tříd kvůli stabilitě metrik."""
+    source = (ANALYSIS / "R" / "metrics.R").read_text(encoding="utf-8")
+    threshold = re.search(r"^METRIC_MIN_NOTES <- (\d+)L$", source, re.MULTILINE)
+    assert threshold is not None
+    assert int(threshold.group(1)) == MIN_CELL
 
 
 @EDA_PRESENT

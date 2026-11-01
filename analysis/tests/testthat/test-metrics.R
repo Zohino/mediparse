@@ -15,3 +15,18 @@ test_that("metriky ze sdílené syntetické fixture zachovají schéma a hodnoty
 
   expect_identical(actual, expected)
 })
+
+test_that("metriky fixture vyžadují aspoň deset pozitivních i negativních zpráv", {
+  metrics <- read_metrics(METRICS_FIXTURE)
+
+  expect_identical(publishable_metrics(metrics), c(TRUE, TRUE, FALSE, TRUE, FALSE))
+})
+
+test_that("práh metrik přijme deset obou tříd a odmítne devět nebo neznámý počet", {
+  metrics <- data.frame(
+    test_positives = c(10, 9, 10, NA, 10),
+    test_notes = c(20, 20, 19, 20, NA)
+  )
+
+  expect_identical(publishable_metrics(metrics), c(TRUE, FALSE, FALSE, FALSE, FALSE))
+})
