@@ -8,15 +8,18 @@ from typing import TYPE_CHECKING, Final
 from mediparse.domain.icd import IcdCode, IcdVersion
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.mimic_table import TableShape
 from mediparse.domain.note import order_of
+from mediparse.domain.note_structure import Sex
+from mediparse.domain.synthetic_bhc import bhc_target
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
     from mediparse.domain.icd import DiagnosisCodes
     from mediparse.domain.language import Language
-    from mediparse.domain.mimic_table import TableShape
     from mediparse.domain.note_plan import NotePlan
+    from mediparse.domain.section_headers import SectionLexicon
 
 # Bez kódu ICD by filtr has_icd vyřadil zprávy bez labelu pětice.
 FILLER_CODES: Final[Mapping[IcdVersion, str]] = {
@@ -25,6 +28,7 @@ FILLER_CODES: Final[Mapping[IcdVersion, str]] = {
 }
 _FIRST_ADMISSION: Final = 20000000
 _TIMESTAMP: Final = "2150-01-01 00:00:00"
+_ERAS: Final = {IcdVersion.NINE: "2008 - 2010", IcdVersion.TEN: "2017 - 2019"}
 
 
 class UnpairedNotesError(InvalidInputError):
@@ -170,3 +174,84 @@ def _diagnoses(
         }
         for seq, code in enumerate(icd_codes, start=1)
     ]
+
+
+def corpus_tables(
+    plans: Sequence[NotePlan],
+    notes: Sequence[InputNote],
+    codes: DiagnosisCodes,
+    lexicon: SectionLexicon,
+) -> dict[str, list[dict[str, str]]]:
+    """Doplní jádro smoketestu o demografii, číselník a nezávislý target BHC.
+
+    Returns:
+        Šest tabulek obsahujících pouze sloupce známé z korpusu.
+
+    Raises:
+        InvalidInputError: Kódy neuchovají labely nebo chybí hlavička slíbená plánem.
+    """
+    # EDA nepožaduje projekci jádra; sloupce manifestu doplňuje až vrstva kanárku.
+    tables = synthetic_mimic_rows(
+        notes,
+        codes,
+        {
+            name: TableShape(records=0, columns=())
+            for name in ("discharge", "diagnoses_icd")
+        },
+    )
+    versions = _patient_versions(notes)
+    by_note = {plan.note_id: plan for plan in plans}
+    by_subject = {plan.subject_id: plan for plan in plans}
+    indices = {subject: index for index, subject in enumerate(sorted(versions))}
+    tables["patients"] = [
+        {
+            "subject_id": str(subject),
+            "gender": {Sex.FEMALE: "F", Sex.MALE: "M"}[by_subject[subject].sex],
+            "anchor_age": str(15 + 10 * (indices[subject] % 6)),
+            "anchor_year": "2150",
+            "anchor_year_group": _ERAS[versions[subject]],
+        }
+        for subject in sorted(versions)
+    ]
+    tables["admissions"] = [
+        _admission(row, indices[int(row["subject_id"])]) for row in tables["discharge"]
+    ]
+    tables["d_icd_diagnoses"] = _dictionary(tables["diagnoses_icd"], codes)
+    targets = []
+    for note in sorted(notes, key=lambda note: note.note_id):
+        target = bhc_target(by_note[note.note_id], note.text, lexicon, len(targets))
+        if target is not None:
+            targets.append({"note_id": note.note_id, "target": target})
+    tables["mimic-iv-bhc"] = targets
+    return tables
+
+
+def _admission(row: Mapping[str, str], patient_index: int) -> dict[str, str]:
+    index = patient_index % 2
+    return {
+        "subject_id": row["subject_id"],
+        "hadm_id": row["hadm_id"],
+        "admittime": "2155-01-01 00:00:00",
+        "insurance": ("Medicare", "Private")[index],
+        "marital_status": ("MARRIED", "SINGLE")[index],
+        "race": ("WHITE", "BLACK/AFRICAN AMERICAN")[index],
+        "language": ("English", "Spanish")[index],
+    }
+
+
+def _dictionary(
+    rows: Sequence[Mapping[str, str]], codes: DiagnosisCodes
+) -> list[dict[str, str]]:
+    pairs = sorted({(row["icd_code"], row["icd_version"]) for row in rows})
+    result = []
+    for code, version in pairs:
+        diagnosis = codes.diagnosis_of(
+            IcdCode(version=IcdVersion(int(version)), code=code)
+        )
+        title = diagnosis.value if diagnosis is not None else "filler"
+        result.append({
+            "icd_code": code,
+            "icd_version": version,
+            "long_title": f"{title} ICD-{version}",
+        })
+    return result

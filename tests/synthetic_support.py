@@ -7,7 +7,17 @@ from mediparse.domain.language import Language
 from mediparse.domain.note_plan import NotePlan
 from mediparse.domain.note_structure import Sex
 from mediparse.domain.section_headers import LexiconSection, SectionLexicon
-from mediparse.domain.synthetic_mimic import input_notes
+from mediparse.domain.synthetic_mimic import corpus_tables, input_notes
+from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
+from mediparse.infrastructure.plans_file import PlansFile
+from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
+from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
+from tests.support import (
+    REPOSITORY_CORPUS,
+    REPOSITORY_DIAGNOSIS_CANDIDATES,
+    REPOSITORY_PLANS,
+    REPOSITORY_SECTION_HEADERS,
+)
 
 TEXT: Final = """Name: ___
 Chief Complaint:
@@ -97,3 +107,21 @@ NOTES: Final = input_notes(
     },
     Language.EN,
 )
+
+
+def repository_tables() -> dict[str, list[dict[str, str]]]:
+    """Načte pouze zveřejněný syntetický korpus repozitáře a vytvoří jeho tabulky.
+
+    Returns:
+        Tabulky korpusové vrstvy bez kanárku.
+    """
+    plans = PlansFile(REPOSITORY_PLANS).load()
+    notes = input_notes(
+        plans, CorpusDirectory(REPOSITORY_CORPUS).notes(Language.EN), Language.EN
+    )
+    return corpus_tables(
+        plans,
+        notes,
+        load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES),
+        load_section_lexicon(REPOSITORY_SECTION_HEADERS),
+    )
