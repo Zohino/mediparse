@@ -1,4 +1,5 @@
-# Popisek s méně zprávami může být doslovným úryvkem jediné zprávy.
+# Popisek z dat s méně zprávami může být doslovným úryvkem zprávy nebo vzácnou
+# hodnotou mimo veřejný číselník (hlavičky, n-gramy, kódy ICD).
 LABEL_MIN_NOTES <- 10L
 UNKNOWN_LABEL <- "neuvedeno"
 NBSP <- "\u00a0"

@@ -45,4 +45,5 @@ test_that("share_table zvládne prázdnou tabulku", {
 test_that("percent_text vrátí pomlčku pro neznámý čitatel i jmenovatel", {
   expect_equal(percent_text(c(NA, 1), c(10, NA)), c("–", "–"))
   expect_equal(percent_text(1, 4), "25,0")
+  expect_equal(percent_text(c(1, 2, 3), c(10, NA, 10)), c("10,0", "–", "30,0"))
 })
