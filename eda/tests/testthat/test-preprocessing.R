@@ -185,7 +185,7 @@ test_that("acronym_summary bez zkratek vrátí prázdný souhrn a tabulku", {
 
   expect_equal(names(summary), c("zkratka", "kandidat", "label_cs", "vyskyty", "podil"))
   expect_equal(nrow(acronym_table(summary)), 0L)
-  expect_match(acronym_text(summary), "nelze posoudit", fixed = TRUE)
+  expect_equal(acronym_text(summary), paste("Podíl zpráv se zkratkou bez kódu diagnózy", UNDECIDABLE_TEXT))
 })
 
 test_that("acronym_text srovnává AF s mediánem ostatních zkratek", {
