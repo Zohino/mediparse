@@ -16,8 +16,9 @@ if TYPE_CHECKING:
     from mediparse.domain.icd import DiagnosisCodes
     from mediparse.domain.note_plan import NotePlan
 
-# Nenulové buňky ICD+ jen s negací a ICD+ bez zmínky brání triviálnímu
-# P(zmínka | ICD+) = 1; velikost skupin zachováváme kvůli srovnatelnosti renderů.
+# Skupina absent dá ICD+ bez zmínky (P(zmínka | ICD+) < 1), skupina negated
+# ICD+ jen s negací (P(tvrzení | ICD+) < P(zmínka | ICD+)); velikost skupin
+# zachováváme kvůli srovnatelnosti renderů.
 MENTION_NOTES: Final = 15
 _NEGATED: Final = frozenset({MentionStatus.NEGATED, MentionStatus.FAMILY_HISTORY})
 
