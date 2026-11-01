@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Final
 from mediparse.domain.inputs import InvalidInputError
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    from collections.abc import Mapping, Sequence
 
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.section_headers import SectionLexicon
@@ -24,6 +24,33 @@ class _Cut(IntEnum):
     THROUGH_NEXT_SECTION = 1
     FIRST_LINE = 2
     INTO_NEXT_SECTION = 3
+
+
+def bhc_rows(
+    plans: Sequence[NotePlan],
+    discharge: Sequence[Mapping[str, str]],
+    lexicon: SectionLexicon,
+) -> list[dict[str, str]]:
+    """Sestaví targety v pořadí note_id z dodaného textu zpráv.
+
+    Returns:
+        Řádky note_id a target; varianta řezu je pořadí mezi zprávami s BHC.
+
+    Raises:
+        InvalidInputError: Zpráva nemá plán, text postrádá hlavičku slíbenou plánem
+            nebo má prázdný target.
+    """
+    by_note = {plan.note_id: plan for plan in plans}
+    texts = {row["note_id"]: row["text"] for row in discharge}
+    if without_plan := texts.keys() - by_note.keys():
+        msg = f"Zprávy bez plánu: {', '.join(sorted(without_plan))}."
+        raise InvalidInputError(msg)
+    targets = []
+    for note_id in sorted(texts):
+        target = bhc_target(by_note[note_id], texts[note_id], lexicon, len(targets))
+        if target is not None:
+            targets.append({"note_id": note_id, "target": target})
+    return targets
 
 
 def bhc_target(

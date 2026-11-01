@@ -7,15 +7,55 @@ from string import ascii_lowercase
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.section_headers import split_sections
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
     from mediparse.domain.mimic_table import TableShape
+    from mediparse.domain.section_headers import SectionLexicon
 
 _KEY_COLUMNS: Final = frozenset({"subject_id", "hadm_id", "note_id"})
 _KEY_OWNERS: Final = {"subject_id": "patients", "hadm_id": "admissions"}
 _REFERENCES: Final = {("mimic-iv-bhc", "note_id"): "discharge"}
+
+
+def section_tokens(
+    discharge: Sequence[Mapping[str, str]], lexicon: SectionLexicon, prefix: str
+) -> list[dict[str, str]]:
+    """Vloží do neprázdného těla každé části zprávy vlastní token kanárku.
+
+    Returns:
+        Nové řádky s dekorovaným textem a ostatními sloupci beze změny.
+
+    Raises:
+        InvalidInputError: Prefix syntetických buněk je prázdný.
+    """
+    _require_prefix(prefix)
+    # _decorate_row rezervuje pro první řádky čísla 0 až n-1; těla musí mít jiné tokeny.
+    number = len(discharge)
+    decorated = []
+    for row in discharge:
+        parts = []
+        for part in split_sections(row["text"], lexicon):
+            body = part.body
+            if body.strip():
+                body = _body_token(body, _text_token(prefix, number))
+                number += 1
+            parts.append(part.header + body)
+        decorated.append({**row, "text": "".join(parts)})
+    return decorated
+
+
+def _body_token(body: str, token: str) -> str:
+    lines = body.splitlines(keepends=True)
+    for index, line in enumerate(lines):
+        if line.strip():
+            # Vlastní řádek by z řezu BHC „první řádek“ udělal jen token.
+            content = line.rstrip("\r\n")
+            lines[index] = f"{content} {token}{line[len(content) :]}"
+            break
+    return "".join(lines)
 
 
 def sentinel_tables(
@@ -33,9 +73,7 @@ def sentinel_tables(
         InvalidInputError: Prefix je prázdný, tabulka nemá sloupce nebo manifest
             neobsahuje korpusovou tabulku či její sloupec.
     """
-    if not prefix:
-        msg = "Prefix syntetických buněk nesmí být prázdný."
-        raise InvalidInputError(msg)
+    _require_prefix(prefix)
     _validate_corpus(corpus, shapes)
     tables = {}
     for table, shape in shapes.items():
@@ -54,6 +92,12 @@ def sentinel_tables(
             for index, row in enumerate(rows)
         ]
     return tables
+
+
+def _require_prefix(prefix: str) -> None:
+    if not prefix:
+        msg = "Prefix syntetických buněk nesmí být prázdný."
+        raise InvalidInputError(msg)
 
 
 def _validate_corpus(
@@ -116,7 +160,7 @@ def _text_value(
     header_witness: bool,
 ) -> str:
     if original is not None:
-        # První řádek zachová korpus i target BHC; token s DF=1 projde tokenizací.
+        # Samostatný první řádek nemění hlavičky; token s DF=1 projde tokenizací.
         # Svědek n=1 hlídá publishable_floor, až žebříček nevyčerpá limit 40 hlaviček
         # (méně hlaviček nad prahem nebo větší limit). Dnes ho skryje už limit;
         # samotný práh hlídá testthat.

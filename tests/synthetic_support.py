@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.diagnosis import Diagnosis
@@ -10,6 +11,7 @@ from mediparse.domain.mentions import Mention, MentionStatus
 from mediparse.domain.note_plan import NotePlan
 from mediparse.domain.note_structure import Sex
 from mediparse.domain.section_headers import LexiconSection, SectionLexicon
+from mediparse.domain.synthetic_bhc import bhc_rows
 from mediparse.domain.synthetic_mimic import corpus_tables, input_notes
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
 from mediparse.infrastructure.plans_file import PlansFile
@@ -25,6 +27,12 @@ from tests.support import (
 if TYPE_CHECKING:
     from mediparse.domain.input_note import InputNote
 
+PREFIX: Final = "eda-sentinel"
+_TOKEN_STEM: Final = "".join(character for character in PREFIX if character.isalpha())
+TOKEN_PATTERN: Final = re.compile(rf"\b{re.escape(_TOKEN_STEM)}[a-z]+\b")
+_SECTION_TOKEN_PATTERN: Final = re.compile(
+    rf" {TOKEN_PATTERN.pattern}(?=\r?$)", flags=re.MULTILINE
+)
 NEGATED_FIXTURE_NOTES: Final = 15
 
 TEXT: Final = """Name: ___
@@ -156,6 +164,15 @@ def with_coverage_groups(
 EDA_PLANS, EDA_NOTES = with_coverage_groups(PLANS, NOTES)
 
 
+def remove_section_tokens(text: str) -> str:
+    """Odstraní tokeny připojené mezerou na konci řádků.
+
+    Returns:
+        Text se zachovanými konci řádků, hlavičkami a ostatními slovy.
+    """
+    return _SECTION_TOKEN_PATTERN.sub("", text)
+
+
 def repository_tables() -> dict[str, list[dict[str, str]]]:
     """Načte pouze zveřejněný syntetický korpus repozitáře a vytvoří jeho tabulky.
 
@@ -166,9 +183,12 @@ def repository_tables() -> dict[str, list[dict[str, str]]]:
     notes = input_notes(
         plans, CorpusDirectory(REPOSITORY_CORPUS).notes(Language.EN), Language.EN
     )
-    return corpus_tables(
+    tables = corpus_tables(
         plans,
         notes,
         load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES),
-        load_section_lexicon(REPOSITORY_SECTION_HEADERS),
     )
+    tables["mimic-iv-bhc"] = bhc_rows(
+        plans, tables["discharge"], load_section_lexicon(REPOSITORY_SECTION_HEADERS)
+    )
+    return tables

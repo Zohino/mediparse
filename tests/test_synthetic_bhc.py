@@ -4,8 +4,14 @@ import pytest
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.section_headers import LexiconSection
-from mediparse.domain.synthetic_bhc import bhc_target
-from tests.synthetic_support import LEXICON, PLANS, TEXT
+from mediparse.domain.synthetic_bhc import bhc_rows, bhc_target
+from tests.synthetic_support import (
+    EDA_NOTES,
+    EDA_PLANS,
+    LEXICON,
+    PLANS,
+    TEXT,
+)
 
 
 @pytest.mark.parametrize(
@@ -146,3 +152,51 @@ def test_empty_target_is_refused() -> None:
     text = "Brief Hospital Course:\n \nMedications on Admission:\nAspirin.\n\nDischarge Diagnosis:\nDiabetes.\n"
     with pytest.raises(InvalidInputError, match="Prázdný target BHC"):
         bhc_target(PLANS[0], text, LEXICON, 0)
+
+
+def test_manual_bhc_rows() -> None:
+    """A4: varianta se počítá jen mezi zprávami s BHC v pořadí note_id."""
+    discharge = [{"note_id": note.note_id, "text": note.text} for note in EDA_NOTES]
+    targets = bhc_rows(tuple(reversed(EDA_PLANS)), list(reversed(discharge)), LEXICON)
+    assert targets == [
+        {"note_id": "90000001-DS-1", "target": "Patient improved. Started insulin."},
+        {
+            "note_id": "90000002-DS-1",
+            "target": "Patient improved. Started insulin. Medications on Admission: Aspirin. Metformin.",
+        },
+    ]
+
+
+def test_bhc_row_without_plan_is_refused() -> None:
+    """Zpráva bez protějšku v plánech má doménovou diagnostiku."""
+    discharge = [{"note_id": "synthetic-unplanned", "text": TEXT}]
+    with pytest.raises(
+        InvalidInputError, match=r"Zprávy bez plánu: synthetic-unplanned\."
+    ):
+        bhc_rows((), discharge, LEXICON)
+
+
+def test_bhc_rows_cycle_through_all_cuts() -> None:
+    """Pět BHC s jednou zprávou bez BHC mezi nimi projde variantami 0, 1, 2, 3, 0."""
+    plans = (
+        PLANS[0],
+        PLANS[1],
+        *(
+            PLANS[0].model_copy(update={"note_id": f"90000001-DS-{seq}"})
+            for seq in range(3, 7)
+        ),
+    )
+    discharge = [{"note_id": plan.note_id, "text": TEXT} for plan in reversed(plans)]
+    assert bhc_rows(tuple(reversed(plans)), discharge, LEXICON) == [
+        {"note_id": "90000001-DS-1", "target": "Patient improved. Started insulin."},
+        {
+            "note_id": "90000001-DS-3",
+            "target": "Patient improved. Started insulin. Medications on Admission: Aspirin. Metformin.",
+        },
+        {"note_id": "90000001-DS-4", "target": "Patient improved."},
+        {
+            "note_id": "90000001-DS-5",
+            "target": "Patient improved. Started insulin. Medications on Admission: Aspirin.",
+        },
+        {"note_id": "90000001-DS-6", "target": "Patient improved. Started insulin."},
+    ]
