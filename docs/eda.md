@@ -21,6 +21,7 @@ tyto formáty nečte. V kontejneru se kontrola EDA přeskočí, protože adresá
 
 - `pixi run eda <n>` vyrenderuje `eda/<n>-*.qmd` nad skutečnými tabulkami. Pouští ho jen uživatel ve vlastním terminálu. Skript odmítne běh pod Claude Code (`CLAUDECODE`) a při necommitnutých změnách, aby provenance neukazovala na jiný kód.
 - `pixi run eda-synthetic [n]` vyrenderuje jeden nebo všechny dokumenty nad syntetickými tabulkami v dočasném adresáři a zkontroluje kanárka. Na `eda/_freeze/` v repu nesahá. Na konci vypíše cestu k PDF.
+- Kanárek hledá prefix syntetických buněk a tokeny ze samých písmen s dokumentovou frekvencí jedna ve freeze, exportech a textu PDF. Vlastní token dostane první řádek i tělo každé části zprávy včetně `other`: připojí se na konec prvního neprázdného řádku těla, takže hlavičky i počet řádků zůstanou zachované. Target BHC se počítá z textu s tokeny. Kontrola tak pokrývá i n-gramy po sekcích, tělo a target BHC, následující část (`next_part`) a text po stripu D2.
 - `pixi run eda-test` pustí testy R pomocníků (testthat).
 
 V sandboxu Codexu přesměruj datový adresář Quarta jen pro konkrétní render:

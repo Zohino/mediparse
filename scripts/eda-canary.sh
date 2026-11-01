@@ -4,9 +4,11 @@
 # ve výstupu results/ a v textu PDF (pdftext/). Vrací 0 bez nálezu, 1 při úniku, 2 při chybě.
 #
 # Buňka nese prefix s pomlčkou; provenance uvádí prefix bez pomlčky za ním, proto se hledá
-# s ní. Token textu ze samých písmen (písmena prefixu a řádek, viz domain/synthetic_sentinel.py)
-# přežije tokenizaci, která pomlčky zahodí, a má DF = 1, takže se objeví jen ve výstupu,
-# který pustí token jediné zprávy.
+# s ní. Tokeny ze samých písmen (písmena prefixu a jedinečné číslo zapsané písmeny,
+# viz domain/synthetic_sentinel.py) přežijí tokenizaci, která pomlčky zahodí, a mají DF = 1.
+# Vlastní token má první řádek i tělo každé části zprávy; target BHC se počítá až z textu
+# s tokeny. Kanárek tak zachytí i únik z n-gramů po sekcích, těla a targetu BHC,
+# následující části (next_part) a textu po stripu D2.
 eda_canary() {
     local work=$1 prefix=$2
     local stem=${prefix//[^[:alpha:]]/} text cells tokens cell_status=0 token_status=0
