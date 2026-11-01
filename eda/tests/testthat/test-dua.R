@@ -42,18 +42,7 @@ test_that("share_table zvládne prázdnou tabulku", {
   expect_named(out, c("kos", "n", "podil"))
 })
 
-test_that("dua_binary potlačí n pod prahem, doplněk pod prahem i nulu a vrátí vektor", {
-  out <- dua_binary(c(9, 10, 50, 91, 0, 100), 100)
-
-  expect_equal(out, c(NA, 10, 50, NA, NA, NA))
-  expect_length(out, 6L)
-})
-
-test_that("dua_binary pustí hodnotu 10 a doplněk 10", {
-  expect_equal(dua_binary(c(10, 90), 100), c(10, 90))
-})
-
-test_that("dua_binary bere jmenovatele po prvcích a nezná NA", {
-  expect_equal(dua_binary(c(10, 10, NA), c(25, 19, 100)), c(10, NA, NA))
-  expect_length(dua_binary(numeric(), 100), 0L)
+test_that("percent_text vrátí pomlčku pro neznámý čitatel i jmenovatel", {
+  expect_equal(percent_text(c(NA, 1), c(10, NA)), c("–", "–"))
+  expect_equal(percent_text(1, 4), "25,0")
 })

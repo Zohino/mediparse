@@ -1,7 +1,6 @@
 PREVALENCE_BAND <- c(low = 0.05, high = 0.60)
 REDUNDANCY_THRESHOLD <- 0.5
 ERA_RATIO <- 1.5
-HIDDEN_TEXT <- "potlačeno"
 CODES_TABLE <- "diagnosis_codes_input"
 CANDIDATES_TABLE <- "candidate_notes"
 GROUP_KEY <- "substr(code, 1, CASE WHEN version = 9 AND starts_with(code, 'E') THEN 4 ELSE 3 END)"
@@ -340,18 +339,6 @@ symptom_share <- function(era) {
   list(kind = "share", n = n, total = era$notes, share = n / era$notes)
 }
 
-hidden_number <- function(n) {
-  ifelse(is.na(n), HIDDEN_TEXT, number_text(n))
-}
-
-hidden_percent <- function(n, total) {
-  total <- rep_len(total, length(n))
-  out <- rep("–", length(n))
-  known <- !is.na(n) & !is.na(total)
-  out[known] <- percent_text(n[known], total[known])
-  out
-}
-
 era_table <- function(era) {
   data.frame(
     ukazatel = c(
@@ -379,8 +366,8 @@ charlson_labelled <- function(counts) {
 charlson_table <- function(published, total) {
   data.frame(
     kategorie = published$popisek,
-    n = hidden_number(published$n),
-    podil = hidden_percent(published$n, total),
+    n = number_text(published$n),
+    podil = percent_text(published$n, total),
     stringsAsFactors = FALSE
   )
 }
@@ -399,10 +386,10 @@ candidate_table <- function(published, candidates) {
   verdict <- candidate_verdicts(published)
   data.frame(
     kandidat = candidate_labels(published$kandidat, candidates),
-    n = hidden_number(published$n),
-    korpus = hidden_percent(published$n, published$celkem),
-    icd9 = hidden_percent(published$n9, published$celkem9),
-    icd10 = hidden_percent(published$n10, published$celkem10),
+    n = number_text(published$n),
+    korpus = percent_text(published$n, published$celkem),
+    icd9 = percent_text(published$n9, published$celkem9),
+    icd10 = percent_text(published$n10, published$celkem10),
     pasmo = unname(BAND_LABELS[verdict]),
     stringsAsFactors = FALSE,
     row.names = NULL

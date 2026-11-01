@@ -22,8 +22,8 @@ candidates <- read_candidates(candidates_path())
 mentions <- read_text_mentions(text_mentions_path())
 era <- era_summary(con)
 prevalence <- candidate_prevalence(con, candidates)
-agreement <- align_agreement(suppress_agreement(mention_agreement(con, candidates, mentions)), prevalence)
-symptoms <- suppress_symptoms(symptom_mentions(con, candidates, mentions))
+agreement <- mention_agreement(con, candidates, mentions)
+symptoms <- symptom_mentions(con, candidates, mentions)
 ranked <- rubric(prevalence, agreement, candidates)
 selection <- select_five(ranked)
 cells <- cooccurrence_cells(cooccurrence(con, candidates))
@@ -39,7 +39,6 @@ notes_text <- count_phrase(era$notes, c("zpráva", "zprávy", "zpráv"))
 window_text <- count_phrase(mentions$negation$window_chars, c("znak", "znaky", "znaků"))
 symptom_count <- count_phrase(length(mentions$symptoms$keywords_en), c("příznak", "příznaky", "příznaků"))
 cue_count <- count_phrase(length(mentions$negation$cues), c("negační výraz", "negační výrazy", "negačních výrazů"))
-hidden_rows <- sum(is.na(agreement$icd)) + sum(is.na(symptoms$zminka))
 ```
 
 # Úvod
@@ -51,7 +50,7 @@ Tento sešit je osmým z řady sešitů explorační analýzy. Předchozí seši
 - uplatnit na kandidáty předem stanovenou rubriku a vybrat pětici diagnóz pro klasifikaci,
 - vysvětlit Charlsonovy kategorie komorbidit, které předchozí sešit jen používal.
 
-Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty. Kandidátní diagnóza i příznak vymezují skupinu pacientů klinickým atributem, a proto se potlačuje každý řádek, jehož některá buňka má méně než deset zpráv; podrobná pravidla jsou v kapitole @sec-data. Práh je pravidlo práce, DUA malé počty neupravuje.
+Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty. Počty a podíly se zveřejňují přesně; DUA malé počty neupravuje.
 
 Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky. Kapitola @sec-shrnuti shrnuje rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
 
@@ -69,13 +68,13 @@ Pojmy a jednotky jsou tyto:
 - *Charlsonovy kategorie*: Charlsonův index komorbidit [@charlson1987] je prognostický index roční mortality, který váží 19 komorbidit. Deyo a kol. [-@deyo1992] ho přizpůsobili kódům ICD-9-CM a sloučili do 17 kategorií. Quan a kol. [-@quan2005] převedli těchto 17 kategorií do ICD-10 a rozšířili mapu ICD-9-CM; tu používá sedmý sešit. Kategorie jsou přítomnost komorbidity, ne vážený index,
 - *rubrika* je stanovena předem, před pohledem na data, a má dvě kritéria: pásmo prevalence `r band_text` zpráv a P(zmínka | ICD+) aspoň `r floor_text` na surové zmínce. Pásmo zajišťuje dost pozitivních zpráv a vyřazuje příliš časté diagnózy, práh shody vyřazuje diagnózy, které se v textu téměř neobjevují, takže by pro extrakci z textu neměly oporu. P(ICD+ | zmínka) a varianta po odečtení negace jsou jen diagnostika a výběr neovlivní; kandidáty s P(ICD+ | zmínka) pod `r floor_text` sešit jmenuje jako riziko šumu v negativní třídě, což je popisná hranice, ne brána rubriky. Předběžná čísla z předchozího projektu byla při návrhu známa; výběrové pravidlo se proto zdůvodňuje metodou, ne čísly,
 - *výběr pětice*: z kandidátů, kteří projdou rubrikou, se z každé kapitoly ICD-10 vybere ten s nejvyšší P(zmínka | ICD+); při shodě rozhoduje pořadí v konfiguraci. Pool pokrývá `r chapter_count` (`r join_labels(chapters)`), takže pravidlo zajišťuje diverzitu orgánových systémů objektivně. Kapitolu bez prošlého kandidáta doplní nejlepší zbývající prošlý kandidát podle téže metriky. Projde-li rubrikou méně než pět kandidátů, vyberou se všichni prošlí a o doplnění rozhodne navazující úloha. Zamítnuto bylo vybrat pět nejlepších podle shody s diverzitou jen jako kontrolou, protože by mohlo vybrat tři srdeční diagnózy, a vybírat po pohledu na data, protože to je cherry-picking, před kterým rubrika chrání,
-- *potlačení*: řádek kandidáta se skryje celý (všechny počty i podíly), když kterákoli ze šesti atomických buněk rozkladu zpráv podle kódu (ICD+, ICD−) a zmínky (žádná, jen negovaná, tvrzená) má méně než deset zpráv. Každá buňka tabulek 2×2 je součtem atomických, takže šest buněk stačí a žádná nejde dopočítat ze zveřejněných podílů. Řádek příznaku se skryje, když zmínky nebo tvrzení nebo jejich doplněk do počtu zpráv nebo jejich rozdíl nedosahuje deseti. Kandidát, kterého sedmý sešit nezveřejnil, se skryje také, aby čísla obou sešitů byla táž. Skrytý kandidát rubrikou neprojde a ve výběru je mezi těmi, které nelze posoudit.
+- *zveřejnění*: počty se uvádějí přesně. Práh popisků se zde neuplatní, protože názvy kandidátů a příznaků pochází z konfigurace.
 
 # Výsledky {#sec-vysledky}
 
 ## Shoda kódu ICD a zmínky v textu {#sec-shoda}
 
-@tbl-shoda a @fig-shoda uvádějí shodu kódu ICD a zmínky pro `r candidate_count`. Čtyři podíly se liší jmenovatelem: první dva říkají, kolik zpráv s kódem diagnózu v textu zmiňuje, resp. tvrdí; poslední dva říkají, jak často zpráva se zmínkou, resp. s tvrzením má i kód. `r hidden_rows_text(sum(is.na(agreement$icd)))`
+@tbl-shoda a @fig-shoda uvádějí shodu kódu ICD a zmínky pro `r candidate_count`. Čtyři podíly se liší jmenovatelem: první dva říkají, kolik zpráv s kódem diagnózu v textu zmiňuje, resp. tvrdí; poslední dva říkají, jak často zpráva se zmínkou, resp. s tvrzením má i kód.
 
 ```{r}
 #| label: tbl-shoda
@@ -95,7 +94,7 @@ export_table(
 
 ```{r}
 #| label: fig-shoda
-#| fig-cap: "Podíl zpráv s kódem ICD kandidáta, které diagnózu v textu zmiňují, resp. tvrdí; svislá čára vyznačuje práh rubriky. Skryté řádky nejsou zobrazeny."
+#| fig-cap: "Podíl zpráv s kódem ICD kandidáta, které diagnózu v textu zmiňují, resp. tvrdí; svislá čára vyznačuje práh rubriky."
 #| fig-width: 6.5
 #| fig-height: 4
 points <- agreement_points(agreement, candidates)
@@ -114,7 +113,7 @@ export_figure(plot, height_cm = 10)
 
 ## Zmínky příznaků {#sec-priznaky}
 
-@tbl-priznaky a @fig-priznaky uvádějí, jak často se v textu zpráv objevují příznaky z seed lexikonu. Slouží k odhadu rozsahu extrakce příznaků a jako základ budoucího lexikonu. `r hidden_rows_text(sum(is.na(symptoms$zminka)))`
+@tbl-priznaky a @fig-priznaky uvádějí, jak často se v textu zpráv objevují příznaky z seed lexikonu. Slouží k odhadu rozsahu extrakce příznaků a jako základ budoucího lexikonu.
 
 ```{r}
 #| label: tbl-priznaky
@@ -132,7 +131,7 @@ export_table(
 
 ```{r}
 #| label: fig-priznaky
-#| fig-cap: "Podíl zpráv vstupního korpusu se zmínkou příznaku; skryté příznaky nejsou zobrazeny."
+#| fig-cap: "Podíl zpráv vstupního korpusu se zmínkou příznaku."
 #| fig-width: 6.5
 #| fig-height: 4.5
 bars <- symptom_bars(symptoms)
@@ -170,8 +169,7 @@ Dokument změřil shodu kódů ICD a zmínek v textu a vybral pětici diagnóz. 
 - **Pětice diagnóz.** `r selection_text(selection, candidates)`
 - **Riziko pro negativní třídu.** `r noise_text(agreement, candidates)`
 - **Příznaky.** `r symptom_text(symptoms)`
-- **Potlačení.** `r hidden_rows_text(hidden_rows)`
-- **Parametry syntetiky.** Sešit zapíše pro vybranou pětici po potlačení prevalenci, matici P(j | i) a míry zmínek do `results/eda/8-mentions/parametry-syntetiky.json`; příkaz `mediparse-synthetic-parameters` je převezme do plánu syntetického korpusu.
+- **Parametry syntetiky.** Sešit zapíše pro vybranou pětici prevalenci, matici P(j | i) a míry zmínek do `results/eda/8-mentions/parametry-syntetiky.json`; příkaz `mediparse-synthetic-parameters` je převezme do plánu syntetického korpusu.
 
 # Omezení {#sec-omezeni}
 
