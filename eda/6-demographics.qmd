@@ -17,12 +17,11 @@ source("R/export.R")
 eda_check_python()
 con <- eda_connect()
 summary <- demographic_summary(con)
-counts <- attribute_counts(con)
+published <- attribute_counts(con)
 age_gender <- age_gender_counts(con)
-published <- dua_suppress(counts, by = "atribut")
 majority <- majority_gender(published)
 race <- largest_race(published, total = summary$notes)
-masked <- masked_text(summary$masked, band90_count(published))
+masked <- number_text(summary$masked)
 ```
 
 # Úvod
@@ -35,7 +34,7 @@ Tento sešit je šestým z řady sešitů explorační analýzy. Pátý sešit v
 
 Sešit demografii jen popisuje. Výkon modelů podle demografických podskupin práce nevykazuje, protože zadání to nevyžaduje; menšinové skupiny jsou navíc malé a intervaly spolehlivosti by byly široké.
 
-Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty, nikdy řádková data ani texty zpráv. Počty pacientů a zpráv, zprávy bez záznamu přijetí nebo pacienta, medián a kvartily věku jsou metriky korpusu a uvádějí se přesně. Pohlaví, věkové pásmo, pojištění, rodinný stav, rasa a jazyk vymezují skupiny pacientů kvaziidentifikátorem, a proto se v každém atributu kategorie s méně než deseti pacienty nebo zprávami sloučí do řádku „ostatní (n < 10)“; práh je pravidlo práce, DUA malé počty neupravuje.
+Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty, nikdy řádková data ani texty zpráv. Počty pacientů a zpráv, zprávy bez záznamu přijetí nebo pacienta, medián a kvartily věku jsou metriky korpusu a uvádějí se přesně. Počty a podíly skupin pacientů podle pohlaví, věkového pásma, pojištění, rodinného stavu, rasy a jazyka se zveřejňují přesně, protože DUA malé počty neupravuje a pacienti se neidentifikují.
 
 Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky. Kapitola @sec-shrnuti shrnuje rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
 
@@ -81,7 +80,7 @@ export_table(
 )
 ```
 
-*Zdroj:* stejné tabulky jako u souhrnu; kategorie s méně než deseti pacienty nebo zprávami jsou v rámci atributu sloučeny.
+*Zdroj:* stejné tabulky jako u souhrnu.
 
 ## Věk podle pohlaví {#sec-vek}
 
@@ -89,10 +88,10 @@ export_table(
 
 ```{r}
 #| label: fig-vek-pohlavi
-#| fig-cap: "Počet zpráv vstupního korpusu podle věkového pásma při přijetí a pohlaví pacienta; nezobrazeny jsou buňky sloučené podle pohlaví nebo podle věkového pásma."
+#| fig-cap: "Počet zpráv vstupního korpusu podle věkového pásma při přijetí a pohlaví pacienta."
 #| fig-width: 6.5
 #| fig-height: 3.2
-drawn <- drawable_cells(age_gender)
+drawn <- age_gender
 drawn$pasmo <- factor(drawn$pasmo, levels = AGE_BANDS)
 drawn$pohlavi <- factor(drawn$pohlavi, levels = GENDER_LABELS)
 plot <- ggplot2::ggplot(drawn, ggplot2::aes(pasmo, n, fill = pohlavi)) +
@@ -109,13 +108,13 @@ export_figure(plot, height_cm = 7.5)
 Dokument popsal demografii vstupního korpusu. Pro další práci z toho plyne:
 
 - **Demografie není příznakem ani stratifikací.** Pohlaví, věk, pojištění, rodinný stav, rasa ani jazyk nevstupují jako příznak modelů ani jako proměnná stratifikace. Dělení dat stratifikuje jen podle štítků (pátý sešit).
-- **Pohlaví je reference pro extrakci.** `r switch(majority$kind, majority = paste0("Sloupec patients.gender je reference pro extrakci pohlaví z preambule zprávy. Většinové pohlaví (", majority$label, ") tvoří ", percent_label(majority$n, majority$total), " pacientů se známým pohlavím. To je přesnost konstantní odpovědi, kterou musí extrakce překonat."), nelze = "Přesnost konstantní odpovědi nelze zveřejnit: ve vstupním korpusu nemají ženy i muži aspoň deset pacientů se známým pohlavím.")`
+- **Pohlaví je reference pro extrakci.** `r switch(majority$kind, majority = paste0("Sloupec patients.gender je reference pro extrakci pohlaví z preambule zprávy. Většinové pohlaví (", majority$label, ") tvoří ", percent_label(majority$n, majority$total), " pacientů se známým pohlavím. To je přesnost konstantní odpovědi, kterou musí extrakce překonat."), nelze = "Přesnost konstantní odpovědi nelze zveřejnit: ve vstupním korpusu chybí ženy nebo muži se známým pohlavím.")`
 - **Věk se z textu neextrahuje.** Věk je ve zprávách maskovaný (třetí sešit), a zůstává proto jen popisem.
 - **Jazyk přijetí není jazyk zprávy.** Sloupec `admissions.language` je preferovaný jazyk pacienta. Zprávy jsou anglicky a jazyková osa práce (čeština a angličtina) s ním nesouvisí.
-- **Výkon podle podskupin se nevykazuje.** `r switch(race$kind, group = paste0("Největší rasovou skupinou je skupina „", race$label, "“ s podílem ", percent_label(race$n, race$total), " zpráv. Korpus pochází z jednoho centra, a výsledky se proto nemusí zobecnit na jiné populace."), nelze = "Největší rasovou skupinu nelze určit, protože žádná ze skupin nemá aspoň deset zpráv. Korpus pochází z jednoho centra, a výsledky se proto nemusí zobecnit na jiné populace.")`
+- **Výkon podle podskupin se nevykazuje.** `r switch(race$kind, group = paste0("Největší rasovou skupinou je skupina „", race$label, "“ s podílem ", percent_label(race$n, race$total), " zpráv. Korpus pochází z jednoho centra, a výsledky se proto nemusí zobecnit na jiné populace."), nelze = "Největší rasovou skupinu nelze určit, protože ve vstupním korpusu chybí známá rasová skupina. Korpus pochází z jednoho centra, a výsledky se proto nemusí zobecnit na jiné populace.")`
 
 # Omezení {#sec-omezeni}
 
-Korpus pochází z jednoho centra, takže jeho demografie nemusí odpovídat jiným populacím. Podíly různých zrnitostí se nesrovnávají: pohlaví se počítá na pacienta, ostatní atributy na zprávu, a pacient s více zprávami proto v ostatních atributech váží víc. Rasa a jazyk jsou zapsány při přijetí a rasa je sloučena do hrubých skupin, takže nevystihuje původ pacienta. Věk starších pacientů je v MIMIC-IV maskovaný, proto pásmo 90+ spojuje všechny pacienty nad 89 let a medián a kvartily vycházejí ze seřezaného věku. Rok přijetí je posunutý o náhodný interval, ale věk při přijetí zůstává vůči roku ukotvení správný [@johnson2023]. Kategorie s méně než deseti pacienty nebo zprávami se v tabulce a grafu slučují, proto menšinové skupiny nejsou vidět.
+Korpus pochází z jednoho centra, takže jeho demografie nemusí odpovídat jiným populacím. Podíly různých zrnitostí se nesrovnávají: pohlaví se počítá na pacienta, ostatní atributy na zprávu, a pacient s více zprávami proto v ostatních atributech váží víc. Rasa a jazyk jsou zapsány při přijetí a rasa je sloučena do hrubých skupin, takže nevystihuje původ pacienta. Věk starších pacientů je v MIMIC-IV maskovaný, proto pásmo 90+ spojuje všechny pacienty nad 89 let a medián a kvartily vycházejí ze seřezaného věku. Rok přijetí je posunutý o náhodný interval, ale věk při přijetí zůstává vůči roku ukotvení správný [@johnson2023].
 
 {{< include _partials/appendix.qmd >}}

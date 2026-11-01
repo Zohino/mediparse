@@ -336,69 +336,43 @@ test_that("majority_gender vrátí většinové pohlaví a podíl mezi známými
   expect_equal(out$total, 90)
 })
 
-test_that("majority_gender dá nelze, když pohlaví chybí nebo přežilo jen jedno", {
+test_that("majority_gender dá nelze, když chybí známá pohlaví", {
   none <- pub("Pohlaví", "neuvedeno", 5)
 
   expect_equal(majority_gender(none)$kind, "nelze")
   expect_equal(majority_gender(none[0, ])$kind, "nelze")
-  expect_equal(majority_gender(pub("Pohlaví", c("ženy", DUA_OTHER), c(50, 11)))$kind, "nelze")
+  expect_equal(majority_gender(pub("Pohlaví", "ženy", 50))$kind, "nelze")
 })
 
-test_that("majority_gender nezveřejní pohlaví skryté jako doplněk", {
-  counts <- pub("Pohlaví", c("ženy", "muži", "jiné"), c(50, 12, 4))
-  published <- dua_suppress(counts, by = "atribut")
-
-  expect_equal(majority_gender(published)$kind, "nelze")
-})
-
-test_that("largest_race vybere největší skupinu bez neuvedeno a jiná", {
-  counts <- pub("Rasa", c("bílá", "černá", "jiná", "neuvedeno"), c(70, 20, 90, 100))
-  out <- largest_race(counts, total = 280)
+test_that("largest_race vybere i malou největší skupinu bez neuvedeno a jiná", {
+  counts <- pub("Rasa", c("bílá", "černá", "jiná", "neuvedeno"), c(4, 2, 9, 10))
+  out <- largest_race(counts, total = 25)
 
   expect_equal(out$kind, "group")
   expect_equal(out$label, "bílá")
-  expect_equal(out$n, 70)
+  expect_equal(out$n, 4)
   expect_equal(largest_race(counts[0, ], total = 0)$kind, "nelze")
 })
 
-test_that("largest_race čte potlačenou tabulku a nezveřejní skrytý doplněk", {
-  shown <- dua_suppress(pub("Rasa", c("bílá", "černá", "hispánská"), c(40, 12, 4)), by = "atribut")
-  hidden <- dua_suppress(pub("Rasa", c("bílá", "černá", "hispánská"), c(12, 4, 3)), by = "atribut")
-
-  expect_equal(largest_race(shown, total = 56)$label, "bílá")
-  expect_equal(largest_race(hidden, total = 19)$kind, "nelze")
-})
-
-test_that("masked_text uvede číslo jen při dostatečném počtu i doplňku v pásmu 90+", {
-  expect_equal(masked_text(0, 100), "méně než 10")
-  expect_equal(masked_text(9, 100), "méně než 10")
-  expect_equal(masked_text(10, 20), "10")
-  expect_equal(masked_text(10, 19), "méně než 10")
-  expect_equal(masked_text(12345, 20000), paste0("12", NBSP, "345"))
-  expect_equal(masked_text(50, NA), "méně než 10")
-})
-
-test_that("band90_count vezme pásmo 90+ z publikované tabulky", {
-  published <- pub("Věkové pásmo", c("80–89", "90+"), c(30, 25))
-
-  expect_equal(band90_count(published), 25)
-  expect_true(is.na(band90_count(published[1, ])))
-})
-
-test_that("drawable_cells nekreslí buňku skrytou podle pohlaví ani podle pásma", {
-  cells <- data.frame(
-    pohlavi = c(rep("ženy", 4), rep("muži", 2)),
-    pasmo = c("do 29", "30–39", "40–49", "50–59", "do 29", "50–59"),
-    n = c(50, 60, 70, 3, 50, 12),
-    stringsAsFactors = FALSE
+test_that("maskovaný věk i graf zachovají malé počty", {
+  subjects <- as.character(1:5)
+  hadms <- paste0("h", subjects)
+  con <- mimic_con(
+    discharge = corpus_notes(subjects, hadms),
+    diagnoses_icd = icd_for(hadms),
+    patients = patient_rows(subjects, gender = c("F", "F", "F", "M", "M"),
+                           age = c("91", "91", "91", "90", "90")),
+    admissions = admission_rows(hadms, subjects)
   )
-  out <- drawable_cells(cells)
-  keys <- paste(out$pohlavi, out$pasmo)
+  summary <- demographic_summary(con)
+  counts <- attribute_counts(con)
+  cells <- age_gender_counts(con)
 
-  expect_false("muži 50–59" %in% keys)
-  expect_true("muži do 29" %in% keys)
-  expect_false(any(c(out$pohlavi, out$pasmo) == DUA_OTHER))
-  expect_equal(nrow(drawable_cells(cells[0, ])), 0)
+  expect_equal(counts$n[counts$kategorie == "90+"], 5)
+  expect_equal(number_text(summary$masked), "3")
+  expect_equal(cells$pohlavi, c("ženy", "muži"))
+  expect_equal(cells$pasmo, c("90+", "90+"))
+  expect_equal(cells$n, c(3, 2))
 })
 
 test_that("characteristics_table dá jmenovatele pacienty u pohlaví a zprávy jinde", {
@@ -429,10 +403,9 @@ test_that("summary_table uvádí medián s kvartily a spojí prázdné hodnoty p
   expect_equal(full$hodnota[full$ukazatel == "Pacienti"], "100")
 })
 
-test_that("dua_suppress zvládne prázdné počty atributů", {
-  empty <- dua_suppress(pub("Rasa", "bílá", 5)[0, ], by = "atribut")
+test_that("characteristics_table zvládne prázdné počty atributů", {
+  empty <- pub("Rasa", "bílá", 5)[0, ]
 
-  expect_equal(names(empty), c("atribut", "kategorie", "n"))
-  expect_equal(nrow(empty), 0)
   expect_equal(ncol(characteristics_table(empty, list(patients = 0, notes = 0))), 4)
+  expect_equal(nrow(characteristics_table(empty, list(patients = 0, notes = 0))), 0)
 })
