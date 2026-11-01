@@ -352,8 +352,7 @@ hidden_percent <- function(n, total) {
   out
 }
 
-era_table <- function(era, symptom) {
-  symptom_n <- if (symptom$kind == "share") symptom$n else NA_real_
+era_table <- function(era) {
   data.frame(
     ukazatel = c(
       "Zprávy vstupního korpusu", "Jen kódy ICD-9", "Jen kódy ICD-10", "Kódy obou verzí",
@@ -361,11 +360,11 @@ era_table <- function(era, symptom) {
     ),
     hodnota = c(
       number_text(c(era$notes, era$only9, era$only10, era$both, era$neither)),
-      hidden_number(symptom_n)
+      number_text(era$symptom)
     ),
     podil = c(
       percent_text(c(era$notes, era$only9, era$only10, era$both, era$neither), era$notes),
-      hidden_percent(symptom_n, era$notes)
+      percent_text(era$symptom, era$notes)
     ),
     stringsAsFactors = FALSE
   )

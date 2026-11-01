@@ -372,6 +372,26 @@ test_that("příznaky zachovají i čtyři zprávy ze sta", {
   expect_equal(out$share, 0.04)
 })
 
+test_that("tabulka éry uvede nulu příznaků i pro prázdný korpus", {
+  era <- list(notes = 0, only9 = 0, only10 = 0, both = 0, neither = 0, symptom = 0)
+
+  out <- era_table(era)
+  row <- out[out$ukazatel == "Zprávy s kódem kapitoly R (780–799)", ]
+
+  expect_equal(row$hodnota, "0")
+  expect_equal(row$podil, "–")
+})
+
+test_that("tabulka éry uvede čtyři zprávy s příznaky ze sta", {
+  era <- list(notes = 100, only9 = 0, only10 = 100, both = 0, neither = 0, symptom = 4)
+
+  out <- era_table(era)
+  row <- out[out$ukazatel == "Zprávy s kódem kapitoly R (780–799)", ]
+
+  expect_equal(row$hodnota, "4")
+  expect_equal(row$podil, "4,0")
+})
+
 test_that("prázdný korpus vede do větví nelze", {
   con <- mimic_con()
   pool <- read_candidates(candidates_path())

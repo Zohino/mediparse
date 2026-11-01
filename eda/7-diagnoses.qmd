@@ -79,7 +79,7 @@ Vstupní korpus tvoří `r format_number(era$notes)` zpráv. Jen kódy ICD-9 má
 #| tbl-cap: "Souhrn vstupního korpusu podle éry ICD a podíl zpráv s kódem kapitoly příznaků."
 #| tbl-colwidths: [55, 25, 20]
 export_table(
-  era_table(era, symptom),
+  era_table(era),
   col.names = c("Ukazatel", "Zprávy", "Podíl (%)"),
   align = "lrr"
 )
