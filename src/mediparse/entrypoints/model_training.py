@@ -1,7 +1,7 @@
-"""Vstupní bod kroku Snakemake ``train_smoketest_model``: model a predikce odložených zpráv.
+"""Vstupní bod kroku Snakemake ``train_model``: model a predikce odložených zpráv.
 
 Cesty určuje pravidlo; skript workflow jen rozbalí objekt ``snakemake`` a zavolá
-``main``. Pracuje jen se vstupní tabulkou smoketestu, proto smí běžet kdekoli.
+``main``. Čte kohortu, proto běží tam, kde jsou data.
 """
 
 from __future__ import annotations
@@ -11,7 +11,7 @@ import os
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
-from mediparse.application.smoketest_training import SmoketestTraining
+from mediparse.application.model_training import ModelTraining
 from mediparse.domain.environment import Environment
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
@@ -52,7 +52,7 @@ PACKAGES: Final = (
 
 def main(
     *,
-    notes: Path,
+    cohort: Path,
     config: Path,
     candidates: Path,
     lexicon: Path,
@@ -69,7 +69,7 @@ def main(
     """
     configure_logging(log)
     return run(
-        notes=notes,
+        cohort=cohort,
         config=config,
         candidates=candidates,
         lexicon=lexicon,
@@ -84,7 +84,7 @@ def main(
 @refusing_invalid_input
 def run(
     *,
-    notes: Path,
+    cohort: Path,
     config: Path,
     candidates: Path,
     lexicon: Path,
@@ -102,13 +102,13 @@ def run(
     """
     training = load_training_config(config)
     source = revision()
-    table, strip = training_input(notes, training, lexicon)
+    table, strip = training_input(cohort=cohort, training=training, lexicon=lexicon)
     normalization = (
         load_text_normalization(candidates)
         if training.normalize_clinical_text
         else None
     )
-    step = SmoketestTraining(
+    step = ModelTraining(
         table=table,
         split=ParquetSplitTable(split),
         trainer=LinearSvmTrainer(
@@ -122,7 +122,7 @@ def run(
         manifest,
         RunManifest(
             row_id=training.row_id,
-            dataset_sha256=file_sha256(notes),
+            dataset_sha256=file_sha256(cohort),
             config_sha256=file_sha256(config),
             seed=training.seed,
             split_seed=report.split_config.seed,

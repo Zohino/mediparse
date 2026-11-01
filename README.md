@@ -37,8 +37,8 @@ modelu a na konci vypíše tabulku metrik a ukázku predikce.
 
 ### Výstupy
 
-- `build/smoketest/`: data, model, predikce, metriky, ukázka predikce uloženého
-  modelu (`demo.parquet`) a run manifest
+- `build/smoketest/`: data, model, predikce, metriky, predikce uloženého
+  modelu (`inference.parquet`) a run manifest
 - `logs/smoketest/`: logy jednotlivých kroků
 
 ### Testy

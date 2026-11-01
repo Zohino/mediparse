@@ -30,21 +30,19 @@ use rule build_cohort as build_smoketest_cohort with:
         SMOKETEST_LOGS / "build_cohort.log",
 
 
-rule make_smoketest_splits:
+use rule make_splits as make_smoketest_splits with:
     input:
-        notes=SMOKETEST / "cohort.parquet",
+        cohort=SMOKETEST / "cohort.parquet",
         config="config/split.json",
     output:
         SMOKETEST / "splits.parquet",
     log:
         SMOKETEST_LOGS / "make_smoketest_splits.log",
-    script:
-        "../scripts/make_smoketest_splits.py"
 
 
-rule train_smoketest_model:
+use rule train_model as train_smoketest_model with:
     input:
-        notes=SMOKETEST / "cohort.parquet",
+        cohort=SMOKETEST / "cohort.parquet",
         config="config/smoketest_training.json",
         candidates="config/diagnosis_candidates.json",
         lexicon="config/section_headers.json",
@@ -55,33 +53,27 @@ rule train_smoketest_model:
         manifest=SMOKETEST / "run_manifest.json",
     log:
         SMOKETEST_LOGS / "train_smoketest_model.log",
-    script:
-        "../scripts/train_smoketest.py"
 
 
-rule evaluate_smoketest_model:
+use rule evaluate_model as evaluate_smoketest_model with:
     input:
         predictions=SMOKETEST / "predictions.parquet",
-        notes=SMOKETEST / "cohort.parquet",
+        cohort=SMOKETEST / "cohort.parquet",
         split=SMOKETEST / "splits.parquet",
     output:
         SMOKETEST / "metrics.parquet",
     log:
         SMOKETEST_LOGS / "evaluate_smoketest_model.log",
-    script:
-        "../scripts/evaluate_smoketest.py"
 
 
-rule infer_smoketest_model:
+use rule infer_model as infer_smoketest_model with:
     input:
-        notes=SMOKETEST / "cohort.parquet",
+        cohort=SMOKETEST / "cohort.parquet",
         config="config/smoketest_training.json",
         lexicon="config/section_headers.json",
         model=SMOKETEST / "model.skops",
         predictions=SMOKETEST / "predictions.parquet",
     output:
-        SMOKETEST / "demo.parquet",
+        SMOKETEST / "inference.parquet",
     log:
         SMOKETEST_LOGS / "infer_smoketest_model.log",
-    script:
-        "../scripts/infer_smoketest.py"

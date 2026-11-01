@@ -1,4 +1,4 @@
-"""Doména tréninku smoketestu: neplatný config."""
+"""Doména tréninku modelu: neplatný config."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.smoketest_training import TrainingConfig
+from mediparse.domain.training import TrainingConfig
 from tests.model_support import training_config
 
 VALID = training_config(row_id="smoke", diagnosis="diabetes")

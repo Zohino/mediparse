@@ -7,14 +7,14 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.application.smoketest_training import SmoketestTraining
+from mediparse.application.model_training import ModelTraining
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Classification, Prediction
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
-from mediparse.domain.smoketest_training import TrainingReport
 from mediparse.domain.split import SharedSplit, Split
+from mediparse.domain.training import TrainingReport
 from tests.model_support import parsed_training_config, split_config
 
 if TYPE_CHECKING:
@@ -98,8 +98,8 @@ class _FakeSink:
 
 def _use_case(
     notes: Sequence[InputNote], shared: SharedSplit, recorder: _Recorder
-) -> SmoketestTraining[_FakeClassifier]:
-    return SmoketestTraining(
+) -> ModelTraining[_FakeClassifier]:
+    return ModelTraining(
         table=_FakeTable(notes),
         split=_FakeSplitSource(shared, recorder),
         trainer=_FakeTrainer(recorder),

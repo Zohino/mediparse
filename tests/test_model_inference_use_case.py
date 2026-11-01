@@ -1,19 +1,19 @@
-"""Use case inference: klasifikace odložených zpráv uloženým modelem a zápis ukázek."""
+"""Use case inference: klasifikace odložených zpráv uloženým modelem a zápis predikcí."""
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.application.smoketest_inference import SmoketestInference
+from mediparse.application.model_inference import ModelInference
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Classification, Prediction
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
-from mediparse.domain.smoketest_inference import ModelMismatchError
+from mediparse.domain.model_inference import ModelMismatchError
 from tests.model_support import prediction
 
 if TYPE_CHECKING:
@@ -87,31 +87,29 @@ def _use_case(
     notes: Sequence[InputNote] = NOTES,
     items: Sequence[Prediction] = HELD_OUT,
     answer: tuple[Classification, ...] = ANSWER,
-) -> tuple[SmoketestInference, _FakeClassifier, _FakeSink]:
+) -> tuple[ModelInference, _FakeClassifier, _FakeSink]:
     classifier, sink = _FakeClassifier(answer), _FakeSink()
-    use_case = SmoketestInference(
+    use_case = ModelInference(
         _FakeTable(notes), _FakePredictions(items), _FakeModel(classifier), sink
     )
     return use_case, classifier, sink
 
 
-def test_classifies_only_held_out_notes_and_writes_examples() -> None:
-    """Klasifikují se jen texty odložených zpráv a zapíše se pozitivní a negativní ukázka."""
-    use_case, classifier, sink = _use_case()
+def test_classifies_only_held_out_notes() -> None:
+    """Text zprávy mimo odloženou část se do klasifikátoru nedostane."""
+    use_case, classifier, _ = _use_case()
 
-    result = use_case.run()
+    use_case.run()
 
     assert classifier.texts == ["text c", "text a"]
-    assert [item.note_id for item in result] == ["3-DS-1", "1-DS-1"]
-    assert sink.written == [result]
 
 
 def test_mismatch_raises_and_writes_nothing() -> None:
-    """Nesoulad s tréninkem vyhodí chybu a ukázky se nezapíší."""
+    """Nesoulad s tréninkem vyhodí chybu a predikce se nezapíší."""
     wrong = (Classification(predicted=True, score=9.0), ANSWER[1])
     use_case, _, sink = _use_case(answer=wrong)
 
-    with pytest.raises(ModelMismatchError, match="Nesoulad u zprávy 3-DS-1:"):
+    with pytest.raises(ModelMismatchError, match=r"Nesoulad u 1\. predikce z 2:"):
         use_case.run()
 
     assert sink.written == []
@@ -121,7 +119,10 @@ def test_held_out_note_without_text_raises() -> None:
     """Odložená zpráva bez textu v tabulce je neplatný vstup."""
     use_case, classifier, sink = _use_case(notes=NOTES[:2])
 
-    with pytest.raises(InvalidInputError, match="Odložená zpráva 3-DS-1 nemá"):
+    with pytest.raises(
+        InvalidInputError,
+        match="Počet odložených zpráv bez textu ve vstupní tabulce: 1",
+    ):
         use_case.run()
 
     assert classifier.texts == []
@@ -136,3 +137,35 @@ def test_empty_predictions_raise() -> None:
         use_case.run()
 
     assert sink.written == []
+
+
+def test_missing_texts_report_only_count() -> None:
+    """Dva chybějící texty ze tří syntetických zpráv neprozradí identifikátory."""
+    items = tuple(
+        prediction(f"9000000{index}-DS-1", truth=True, score=0.5) for index in (1, 2, 3)
+    )
+    notes = (InputNote("90000001-DS-1", 90000001, Language.EN, "text", frozenset()),)
+    use_case, classifier, sink = _use_case(notes=notes, items=items)
+
+    with pytest.raises(InvalidInputError) as raised:
+        use_case.run()
+
+    message = str(raised.value)
+    assert "2" in message
+    assert "9000000" not in message
+    assert "DS-" not in message
+    assert classifier.texts == []
+    assert sink.written == []
+
+
+def test_writes_all_reloaded_predictions_in_training_order() -> None:
+    """Inference zachová metadata a pořadí, skóre však pocházejí z načteného modelu."""
+    items = (*HELD_OUT, prediction("2-DS-1", truth=True, score=2.0))
+    answer = (*ANSWER, Classification(predicted=True, score=2.0 + 1e-12))
+    use_case, classifier, sink = _use_case(items=items, answer=answer)
+
+    result = use_case.run()
+
+    assert classifier.texts == ["text c", "text a", "text b"]
+    assert result == (*HELD_OUT, replace(items[2], score=2.0 + 1e-12))
+    assert sink.written == [result]

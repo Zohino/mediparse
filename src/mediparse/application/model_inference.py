@@ -1,13 +1,12 @@
-"""Use case inference smoketestu: uložený model nad odloženými zprávami proti tréninku."""
+"""Use case inference: uložený model nad odloženými zprávami proti tréninku."""
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING, Protocol
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.smoketest_inference import (
-    demo_examples,
+from mediparse.domain.model_inference import (
     ensure_predictions_present,
     ensure_same_predictions,
 )
@@ -34,19 +33,19 @@ class ModelSource(Protocol):
 
 
 @dataclass(frozen=True)
-class SmoketestInference:
-    """Uložený model nad odloženými zprávami: soulad s tréninkem a zápis ukázek."""
+class ModelInference:
+    """Uložený model nad odloženými zprávami: soulad s tréninkem a zápis predikcí."""
 
     table: InputTable
     predictions: PredictionSource
     model: ModelSource
-    demo: PredictionSink
+    inference: PredictionSink
 
     def run(self) -> tuple[Prediction, ...]:
-        """Klasifikuje odložené zprávy uloženým modelem, ověří soulad a zapíše ukázky.
+        """Klasifikuje odložené zprávy uloženým modelem, ověří soulad a zapíše predikce.
 
         Returns:
-            Zapsané ukázky: první pozitivní a první negativní odložená zpráva.
+            Predikce načteného modelu v pořadí predikcí tréninku.
 
         Raises:
             InvalidInputError: Odložená zpráva nemá text v tabulce, predikce jsou
@@ -56,12 +55,16 @@ class SmoketestInference:
         expected = self.predictions.read()
         ensure_predictions_present(expected)
         texts = {note.note_id: note.text for note in self.table.read()}
-        missing = [item.note_id for item in expected if item.note_id not in texts]
+        missing = sum(item.note_id not in texts for item in expected)
         if missing:
-            msg = f"Odložená zpráva {missing[0]} nemá text ve vstupní tabulce."
+            # note_id nese subject_id pacienta MIMIC; hláška ani log ho nesmí nést.
+            msg = f"Počet odložených zpráv bez textu ve vstupní tabulce: {missing}."
             raise InvalidInputError(msg)
         actual = self.model.load().classify([texts[item.note_id] for item in expected])
         ensure_same_predictions(expected, actual)
-        examples = demo_examples(expected)
-        self.demo.write(examples)
-        return examples
+        predictions = tuple(
+            replace(item, predicted=result.predicted, score=result.score)
+            for item, result in zip(expected, actual, strict=True)
+        )
+        self.inference.write(predictions)
+        return predictions

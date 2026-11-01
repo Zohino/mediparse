@@ -1,6 +1,6 @@
 """Vstupní bod pravidla Snakemake ``smoketest``: souhrn metrik a ukázky predikce na výstup.
 
-Cesty k metrikám a ukázce jsou vstupy pravidla, kořen korpusu a adresáře výstupů
+Cesty k metrikám a predikcím jsou vstupy pravidla, kořen korpusu a adresáře výstupů
 a logů jeho parametry; skript workflow jen rozbalí objekt ``snakemake`` a zavolá
 ``main``. Výpis jde na stdout, aby ho zkoušející viděl na konci běhu.
 """
@@ -11,6 +11,7 @@ import sys
 from typing import TYPE_CHECKING, Final, TextIO
 
 from mediparse.domain.language import Language
+from mediparse.domain.smoketest_summary import demo_examples
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.metrics_table import ParquetMetricsTable
@@ -27,7 +28,7 @@ YES_NO: Final = {True: "ano", False: "ne"}
 
 
 def main(
-    *, metrics: Path, demo: Path, corpus: Path, outputs: Path, logs: Path
+    *, metrics: Path, inference: Path, corpus: Path, outputs: Path, logs: Path
 ) -> ExitCode:
     """Krok pravidla: souhrn na stdout, diagnostika na stderr.
 
@@ -37,7 +38,7 @@ def main(
     configure_logging()
     return run(
         metrics=metrics,
-        demo=demo,
+        inference=inference,
         corpus=corpus,
         outputs=outputs,
         logs=logs,
@@ -54,12 +55,18 @@ def _write_table(out: TextIO, table: list[tuple[str, ...]]) -> None:
 
 @refusing_invalid_input
 def run(
-    *, metrics: Path, demo: Path, corpus: Path, outputs: Path, logs: Path, out: TextIO
+    *,
+    metrics: Path,
+    inference: Path,
+    corpus: Path,
+    outputs: Path,
+    logs: Path,
+    out: TextIO,
 ) -> ExitCode:
-    """Přečte metriky a ukázku predikce a vypíše souhrn s cestami k výstupům.
+    """Přečte metriky a predikce, vybere ukázku a vypíše souhrn s cestami k výstupům.
 
     Returns:
-        OK po výpisu; REFUSED pro chybějící nebo neplatnou tabulku metrik či ukázky.
+        OK po výpisu; REFUSED pro chybějící nebo neplatnou tabulku metrik či predikcí.
     """
     rows = [
         (
@@ -82,7 +89,7 @@ def run(
             YES_NO[item.predicted],
             f"{item.score:.3f}",
         )
-        for item in ParquetPredictionTable(demo).read()
+        for item in demo_examples(ParquetPredictionTable(inference).read())
     ]
     _write_table(out, [(*HEADER, *SCORES), *rows])
     out.write("\nUkázka predikce uloženého modelu na odložených zprávách")

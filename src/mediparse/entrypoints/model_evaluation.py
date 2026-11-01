@@ -1,4 +1,4 @@
-"""Vstupní bod kroku Snakemake ``evaluate_smoketest_model``: metriky z predikcí.
+"""Vstupní bod kroku Snakemake ``evaluate_model``: metriky z predikcí.
 
 Cesty určuje pravidlo; skript workflow jen rozbalí objekt ``snakemake`` a zavolá
 ``main``. Čte i zprávy a split, aby ověřil úplnost predikcí; u reálné kohorty proto
@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 
 def main(
-    *, predictions: Path, notes: Path, split: Path, metrics: Path, log: Path
+    *, predictions: Path, cohort: Path, split: Path, metrics: Path, log: Path
 ) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
 
@@ -34,11 +34,11 @@ def main(
         Návratový kód kroku.
     """
     configure_logging(log)
-    return run(predictions=predictions, notes=notes, split=split, metrics=metrics)
+    return run(predictions=predictions, cohort=cohort, split=split, metrics=metrics)
 
 
 @refusing_invalid_input
-def run(*, predictions: Path, notes: Path, split: Path, metrics: Path) -> ExitCode:
+def run(*, predictions: Path, cohort: Path, split: Path, metrics: Path) -> ExitCode:
     """Složí use case z tabulek predikcí, zpráv, splitu a adaptérů scikit-learn.
 
     Returns:
@@ -46,7 +46,7 @@ def run(*, predictions: Path, notes: Path, split: Path, metrics: Path) -> ExitCo
     """
     step = ModelEvaluation(
         predictions=ParquetPredictionTable(predictions),
-        table=ParquetNoteTable(notes),
+        table=ParquetNoteTable(cohort),
         split=ParquetSplitTable(split),
         scorer=SklearnScorer(),
         metrics=ParquetMetricsTable(metrics),

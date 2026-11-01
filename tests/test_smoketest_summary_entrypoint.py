@@ -19,9 +19,10 @@ if TYPE_CHECKING:
     import pytest
 
 
-def _demo(root: Path) -> Path:
-    demo = root / "demo.parquet"
-    ParquetPredictionTable(demo).write([
+def _inference(root: Path) -> Path:
+    inference = root / "inference.parquet"
+    ParquetPredictionTable(inference).write([
+        prediction("9002-DS-1", truth=True, score=2.0, diagnosis=Diagnosis.DIABETES),
         prediction(
             "9000-DS-1",
             truth=True,
@@ -35,7 +36,7 @@ def _demo(root: Path) -> Path:
             diagnosis=Diagnosis.DIABETES,
         ),
     ])
-    return demo
+    return inference
 
 
 def _run(
@@ -43,11 +44,11 @@ def _run(
     out: io.StringIO,
     *,
     metrics: Path | None = None,
-    demo: Path | None = None,
+    inference: Path | None = None,
 ) -> ExitCode:
     return smoketest_summary.run(
         metrics=metrics or _metrics(root),
-        demo=demo or _demo(root),
+        inference=inference or _inference(root),
         corpus=root / "korpus",
         outputs=root / "vystupy",
         logs=root / "logy",
@@ -110,10 +111,10 @@ def test_missing_metrics_are_refused(
     assert "Traceback" not in caplog.text
 
 
-def test_summary_shows_demo_with_path_truth_prediction_and_score(
+def test_summary_selects_first_positive_and_negative(
     tmp_path: Path,
 ) -> None:
-    """Pod metrikami je ukázka: cesta ke zprávě, diagnóza, pravda, predikce a skóre."""
+    """Ze tří predikcí vybere první pozitivní a první negativní podle note_id."""
     out = io.StringIO()
 
     code = _run(tmp_path, out)
@@ -132,16 +133,21 @@ def test_summary_shows_demo_with_path_truth_prediction_and_score(
         "1.235",
     ]
     assert second[2:] == ["ne", "ano", "0.100"]
+    demo_lines = [line for line in lines if "-DS-" in line]
+    assert [line.split()[0] for line in demo_lines] == [
+        str(tmp_path / "korpus" / "en" / "9000-DS-1.txt"),
+        str(tmp_path / "korpus" / "en" / "9001-DS-1.txt"),
+    ]
     assert "kladné skóre znamená ano" in text
 
 
-def test_missing_demo_is_refused(
+def test_missing_inference_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
-    """Chybějící demo.parquet krok odmítne bez tracebacku a nic se nevypíše."""
+    """Chybějící inference.parquet krok odmítne bez tracebacku a nic se nevypíše."""
     out = io.StringIO()
 
-    code = _run(tmp_path, out, demo=tmp_path / "none.parquet")
+    code = _run(tmp_path, out, inference=tmp_path / "none.parquet")
 
     assert code is ExitCode.REFUSED
     assert not out.getvalue()

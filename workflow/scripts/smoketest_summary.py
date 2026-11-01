@@ -7,7 +7,7 @@ from mediparse.entrypoints.smoketest_summary import main
 raise SystemExit(
     main(
         metrics=Path(snakemake.input.metrics),
-        demo=Path(snakemake.input.demo),
+        inference=Path(snakemake.input.inference),
         corpus=Path(snakemake.params.corpus),
         outputs=Path(snakemake.params.outputs),
         logs=Path(snakemake.params.logs),

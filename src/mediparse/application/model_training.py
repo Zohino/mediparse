@@ -1,4 +1,4 @@
-"""Use case tréninku smoketestu: klasifikátor jedné diagnózy na odložené části pacientů."""
+"""Use case tréninku modelu: klasifikátor jedné diagnózy na odložené části pacientů."""
 
 from __future__ import annotations
 
@@ -6,8 +6,8 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
 from mediparse.domain.evaluation import Prediction
-from mediparse.domain.smoketest_training import TrainingReport
 from mediparse.domain.split import ensure_patients_per_class
+from mediparse.domain.training import TrainingReport
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -20,7 +20,7 @@ if TYPE_CHECKING:
     )
     from mediparse.domain.diagnosis import Diagnosis
     from mediparse.domain.input_note import InputNote
-    from mediparse.domain.smoketest_training import TrainingConfig
+    from mediparse.domain.training import TrainingConfig
 
 
 def _labels(notes: Sequence[InputNote], diagnosis: Diagnosis) -> list[bool]:
@@ -42,7 +42,7 @@ class ModelStore[C: TextClassifier](Protocol):
 
 
 @dataclass(frozen=True)
-class SmoketestTraining[C: TextClassifier]:
+class ModelTraining[C: TextClassifier]:
     """Trénink na jedné diagnóze se zápisem predikcí odložených zpráv.
 
     Trenér a úložiště sdílejí typ klasifikátoru, takže typová kontrola odmítne

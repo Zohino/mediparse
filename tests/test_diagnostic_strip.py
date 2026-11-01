@@ -68,11 +68,18 @@ def test_empty_table_gives_empty_tuple() -> None:
     assert _stripped(()) == ()
 
 
-def test_non_english_note_is_rejected_without_leaking_text() -> None:
-    """Neanglická zpráva se odmítne, hláška nese ``note_id`` a ne text."""
-    notes = _notes(Language.CS)
+def test_non_english_note_is_rejected_without_leaking_identifiers_or_text() -> None:
+    """Neanglická syntetická zpráva se odmítne bez úniku identifikátoru a textu."""
+    note = InputNote(
+        "90000001-DS-1", 90000001, Language.CS, "syntetický text zprávy", frozenset()
+    )
 
-    with pytest.raises(InvalidInputError, match=notes[0].note_id) as error:
-        _stripped(notes)
+    with pytest.raises(InvalidInputError) as error:
+        _stripped((note,))
 
-    assert notes[0].text[:40] not in str(error.value)
+    message = str(error.value)
+    assert "9000000" not in message
+    assert "DS-" not in message
+    assert note.text not in message
+    assert "cs" in message
+    assert "en" in message

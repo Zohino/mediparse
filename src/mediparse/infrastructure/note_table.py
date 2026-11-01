@@ -38,7 +38,10 @@ class ParquetNoteTable:
     path: Path
 
     def write(self, notes: Sequence[InputNote]) -> None:
-        """Zapíše řádky v daném pořadí, nadřazený adresář založí."""
+        """Zapíše fixtury ve schématu tabulky, nadřazený adresář založí.
+
+        V pipeline tabulku zapisuje kohorta přes adaptér ``duckdb_cohort``.
+        """
         columns = {
             "note_id": [note.note_id for note in notes],
             "subject_id": [note.subject_id for note in notes],

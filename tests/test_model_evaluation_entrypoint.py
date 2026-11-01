@@ -1,4 +1,4 @@
-"""Vstupní bod kroku evaluate_smoketest_model: metriky z predikcí a odmítnutí vstupu."""
+"""Vstupní bod kroku evaluate_model: metriky z predikcí a odmítnutí vstupu."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Final
 import pyarrow.parquet as pq
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.entrypoints import smoketest_evaluation
+from mediparse.entrypoints import model_evaluation
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
@@ -34,9 +34,9 @@ class _Inputs:
     test_predictions: tuple[Prediction, ...]
 
     def run(self) -> ExitCode:
-        return smoketest_evaluation.run(
+        return model_evaluation.run(
             predictions=self.predictions,
-            notes=self.notes,
+            cohort=self.notes,
             split=self.split,
             metrics=self.metrics,
         )
@@ -119,22 +119,22 @@ def test_missing_input_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
     """Chybějící predikce, zprávy nebo split krok odmítne a log jmenuje soubor."""
-    for name in ("predictions", "notes", "split"):
+    for name in ("predictions", "cohort", "split"):
         root = tmp_path / name
         root.mkdir()
         inputs = _inputs(root)
         missing = root / "none.parquet"
         paths = {
             "predictions": inputs.predictions,
-            "notes": inputs.notes,
+            "cohort": inputs.notes,
             "split": inputs.split,
         } | {name: missing}
 
-        code = smoketest_evaluation.run(metrics=inputs.metrics, **paths)
+        code = model_evaluation.run(metrics=inputs.metrics, **paths)
 
         assert code is ExitCode.REFUSED
         assert not inputs.metrics.exists()
-    assert caplog.text.count("none.parquet") == len(("predictions", "notes", "split"))
+    assert caplog.text.count("none.parquet") == len(("predictions", "cohort", "split"))
 
 
 def test_single_class_is_refused(

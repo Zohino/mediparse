@@ -1,12 +1,12 @@
-"""Krok Snakemake: model a predikce odložených zpráv ze vstupní tabulky smoketestu."""
+"""Krok Snakemake: model a predikce odložených zpráv z kohorty."""
 
 from pathlib import Path
 
-from mediparse.entrypoints.smoketest_training import main
+from mediparse.entrypoints.model_training import main
 
 raise SystemExit(
     main(
-        notes=Path(snakemake.input.notes),
+        cohort=Path(snakemake.input.cohort),
         config=Path(snakemake.input.config),
         candidates=Path(snakemake.input.candidates),
         lexicon=Path(snakemake.input.lexicon),
