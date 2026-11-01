@@ -53,3 +53,96 @@ def test_whole_line_synonym_is_used() -> None:
     assert (
         bhc_target(PLANS[0], text, lexicon, 0) == "Patient improved. Started insulin."
     )
+
+
+@pytest.mark.parametrize(
+    ("variant", "expected"),
+    [
+        (0, "Recovered. Home."),
+        (1, "Recovered. Home."),
+        (2, "Recovered."),
+        (3, "Recovered. Home."),
+    ],
+)
+def test_bhc_as_last_section(variant: int, expected: str) -> None:
+    """Poslední BHC končí až koncem zprávy, první řádek vybírá tělo bez úvodní mezery."""
+    plan = PLANS[0].model_copy(
+        update={"sections": ("chief_complaint", "hospital_course")}
+    )
+    text = "Chief Complaint:\nCough.\n\nBrief Hospital Course:\n\nRecovered.\nHome.\n"
+    assert bhc_target(plan, text, LEXICON, variant) == expected
+
+
+def test_following_section_at_end_of_note() -> None:
+    """Celá následující poslední sekce patří do rozšířeného targetu."""
+    plan = PLANS[0].model_copy(
+        update={"sections": ("hospital_course", "medications_on_admission")}
+    )
+    text = "Brief Hospital Course:\nImproved.\n\nMedications on Admission:\nAspirin.\nMetformin.\n"
+    assert (
+        bhc_target(plan, text, LEXICON, 1)
+        == "Improved. Medications on Admission: Aspirin. Metformin."
+    )
+
+
+def test_indented_headers_with_trailing_whitespace() -> None:
+    """Odsazení a koncové mezery nejsou součástí názvu hlavičky."""
+    text = (
+        TEXT
+        .replace("Brief Hospital Course:", "  Brief Hospital Course: \t")
+        .replace("Medications on Admission:", "\tMedications on Admission: ")
+        .replace("Discharge Diagnosis:", "  Discharge Diagnosis:  ")
+    )
+    assert (
+        bhc_target(PLANS[0], text, LEXICON, 1)
+        == "Patient improved. Started insulin. Medications on Admission: Aspirin. Metformin."
+    )
+
+
+@pytest.mark.parametrize(
+    ("variant", "expected"),
+    [
+        (2, "Patient improved."),
+        (3, "Patient improved. Started insulin. Medications on Admission: Aspirin."),
+    ],
+)
+def test_blank_lines_do_not_replace_first_content_line(
+    variant: int, expected: str
+) -> None:
+    """První řádek těla i další sekce znamená první neprázdný řádek."""
+    text = TEXT.replace(
+        "Brief Hospital Course:\n", "Brief Hospital Course:\n\n"
+    ).replace("Medications on Admission:\n", "Medications on Admission:\n \n")
+    assert bhc_target(PLANS[0], text, LEXICON, variant) == expected
+
+
+@pytest.mark.parametrize("header", ["Medications on Admission", "Discharge Diagnosis"])
+def test_following_headers_before_bhc_are_ignored(header: str) -> None:
+    """Dřívější výskyt následující hlavičky neukončuje BHC zpětně."""
+    text = f"{header}:\nEarlier section.\n\n{TEXT}"
+    assert (
+        bhc_target(PLANS[0], text, LEXICON, 1)
+        == "Patient improved. Started insulin. Medications on Admission: Aspirin. Metformin."
+    )
+
+
+def test_plan_section_missing_from_lexicon_is_refused() -> None:
+    """Chybějící položka lexikonu se hlásí doménovou výjimkou."""
+    lexicon = LEXICON.model_copy(
+        update={
+            "sections": {
+                key: section
+                for key, section in LEXICON.sections.items()
+                if key != "medications_on_admission"
+            }
+        }
+    )
+    with pytest.raises(InvalidInputError, match=r"Lexikon.*medications_on_admission"):
+        bhc_target(PLANS[0], TEXT, lexicon, 0)
+
+
+def test_empty_target_is_refused() -> None:
+    """Prázdné tělo BHC není platný prázdný target."""
+    text = "Brief Hospital Course:\n \nMedications on Admission:\nAspirin.\n\nDischarge Diagnosis:\nDiabetes.\n"
+    with pytest.raises(InvalidInputError, match="Prázdný target BHC"):
+        bhc_target(PLANS[0], text, LEXICON, 0)

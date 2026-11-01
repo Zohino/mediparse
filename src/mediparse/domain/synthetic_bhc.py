@@ -37,7 +37,8 @@ def bhc_target(
         Text se sloučenými bílými znaky, nebo None pro plán bez BHC.
 
     Raises:
-        InvalidInputError: Sekce plánu chybí v lexikonu nebo její hlavička v textu.
+        InvalidInputError: Sekce plánu chybí v lexikonu, její hlavička v textu
+            nebo je výsledný target prázdný.
     """
     if BHC_SECTION not in plan.sections:
         return None
@@ -45,10 +46,12 @@ def bhc_target(
     index = plan.sections.index(BHC_SECTION)
     following = plan.sections[index + 1 :]
     start = _header_line(lines, BHC_SECTION, lexicon) + 1
-    end = _header_line(lines, following[0], lexicon) if following else len(lines)
+    end = _header_line(lines, following[0], lexicon, start) if following else len(lines)
     body = lines[start:end]
     next_end = (
-        _header_line(lines, following[1], lexicon) if len(following) > 1 else len(lines)
+        _header_line(lines, following[1], lexicon, end + 1)
+        if len(following) > 1
+        else len(lines)
     )
     next_lines = lines[end:next_end] if following else []
     cut = _Cut(variant % len(_Cut))
@@ -60,15 +63,24 @@ def bhc_target(
         pieces = [*body, *[line for line in next_lines if line.strip()][:2]]
     else:
         pieces = body
-    return " ".join(" ".join(pieces).split())
+    target = " ".join(" ".join(pieces).split())
+    if not target:
+        msg = f"Prázdný target BHC pro zprávu {plan.note_id}."
+        raise InvalidInputError(msg)
+    return target
 
 
-def _header_line(lines: Sequence[str], section: str, lexicon: SectionLexicon) -> int:
+def _header_line(
+    lines: Sequence[str],
+    section: str,
+    lexicon: SectionLexicon,
+    start: int = 0,
+) -> int:
     if section not in lexicon.sections:
         msg = f"Lexikon nemá sekci plánu {section}."
         raise InvalidInputError(msg)
     headers = {f"{synonym}:" for synonym in lexicon.sections[section].synonyms}
-    for index, line in enumerate(lines):
+    for index, line in enumerate(lines[start:], start=start):
         if line.strip() in headers:
             return index
     msg = f"Text nemá hlavičku sekce plánu {section}."
