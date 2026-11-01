@@ -44,7 +44,7 @@ Tento sešit je pátým z řady sešitů explorační analýzy a uzavírá rozbo
 - vymezit vstupní korpus, tedy zprávy, které vstupují do rozdělení dat, a změřit jeho velikost,
 - rozhodnout o jednotce a způsobu rozdělení dat na trénovací a testovací část.
 
-Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty, nikdy řádková data ani texty zpráv. Všechny tabulky sešitu jsou metriky korpusu, které nevymezují skupiny pacientů kvaziidentifikátorem, a uvádějí se přesně. Rozpad hospitalizací podle období ukotvení pacienta se nezveřejňuje; sešit z něj přebírá jen závěr o přechodu mezi verzemi ICD, stejně jako druhý sešit. Počty a podíly skupin pacientů se zveřejňují přesně, protože DUA malé počty neupravuje a pacienti se neidentifikují.
+Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty, nikdy řádková data ani texty zpráv. Všechny tabulky sešitu jsou metriky korpusu, které nevymezují skupiny pacientů kvaziidentifikátorem, a uvádějí se přesně. Rozpad podle období uvádí druhý sešit; tento sešit z něj přebírá jen závěr o přechodu mezi verzemi ICD.
 
 Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky srovnává korpusy, vymezuje vstupní korpus a popisuje éru ICD z pohledu rozdělení dat. Kapitola @sec-shrnuti shrnuje rozhodnutí a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
 
