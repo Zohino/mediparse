@@ -137,7 +137,9 @@ def _text_value(
 ) -> str:
     if original is not None:
         # První řádek zachová korpus i target BHC; token s DF=1 projde tokenizací.
-        # Jediná pseudohlavička ověřuje potlačení popisku n=1 bez stovek falešných hlaviček.
+        # Svědek n=1 hlídá publishable_floor, až žebříček nevyčerpá limit 40 hlaviček
+        # (méně hlaviček nad prahem nebo větší limit). Dnes ho skryje už limit;
+        # samotný práh hlídá testthat.
         header = f"{token.capitalize()}:\n" if header_witness else ""
         return f"{cell} {token}\n{header}{original}"
     copies = max(1, math.ceil((text_chars - len(cell)) / (len(token) + 1)))
