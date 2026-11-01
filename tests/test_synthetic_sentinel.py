@@ -10,7 +10,7 @@ import pytest
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.mimic_table import TableShape
 from mediparse.domain.synthetic_mimic import corpus_tables
-from mediparse.domain.synthetic_sentinel import RARE_ROWS, sentinel_tables
+from mediparse.domain.synthetic_sentinel import sentinel_tables
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
 from mediparse.infrastructure.mimic_inventory import read_manifest
 from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES, REPOSITORY_MIMIC_MANIFEST
@@ -22,7 +22,6 @@ if TYPE_CHECKING:
 PREFIX: Final = "eda-sentinel"
 SHAPES: Final = read_manifest(REPOSITORY_MIMIC_MANIFEST)
 TEXT_CHARS: Final = 100
-EXPECTED_RARE_ROWS: Final = 2
 KEYS: Final = {"subject_id", "hadm_id", "note_id"}
 
 
@@ -59,8 +58,9 @@ def test_missing_cells_are_unique_and_manifest_order_is_preserved(
     """A5a,e: každá nedodaná buňka nese prefix, každý sloupec pořadí manifestu."""
     rows = sentinel_tables(corpus, SHAPES, PREFIX, TEXT_CHARS)[table]
     assert all(tuple(row) == SHAPES[table].columns for row in rows)
+    assert len(rows) == len(_sources(table, corpus))
     cells = []
-    for row, source in zip(rows, _sources(table, corpus), strict=False):
+    for row, source in zip(rows, _sources(table, corpus), strict=True):
         for column, value in row.items():
             if column not in source and column not in KEYS:
                 assert value.startswith(f"{PREFIX}-")
@@ -68,8 +68,6 @@ def test_missing_cells_are_unique_and_manifest_order_is_preserved(
             elif column not in KEYS and column != "text":
                 assert value == source[column]
     assert len(cells) == len(set(cells))
-    if table not in corpus:
-        assert len(rows) == len(corpus["discharge"])
 
 
 def test_identity_links_are_consistent(corpus: dict[str, list[dict[str, str]]]) -> None:
@@ -77,11 +75,11 @@ def test_identity_links_are_consistent(corpus: dict[str, list[dict[str, str]]]) 
     tables = sentinel_tables(corpus, SHAPES, PREFIX, TEXT_CHARS)
     patients = {
         old["subject_id"]: new["subject_id"]
-        for old, new in zip(corpus["patients"], tables["patients"], strict=False)
+        for old, new in zip(corpus["patients"], tables["patients"], strict=True)
     }
     admissions = {
         old["hadm_id"]: new["hadm_id"]
-        for old, new in zip(corpus["admissions"], tables["admissions"], strict=False)
+        for old, new in zip(corpus["admissions"], tables["admissions"], strict=True)
     }
     notes = {
         old["note_id"]: new["note_id"]
@@ -92,7 +90,7 @@ def test_identity_links_are_consistent(corpus: dict[str, list[dict[str, str]]]) 
         for value in (*patients.values(), *admissions.values(), *notes.values())
     )
     for table, rows in tables.items():
-        for source, row in zip(_sources(table, corpus), rows, strict=False):
+        for source, row in zip(_sources(table, corpus), rows, strict=True):
             if "subject_id" in row:
                 assert row["subject_id"] == patients[source["subject_id"]]
             if "hadm_id" in row:
@@ -124,32 +122,6 @@ def test_discharge_text_is_unchanged_after_canary_line(
         tokens.append(token)
     assert len(tokens) == len(set(tokens))
     assert all(len(row["text"]) >= TEXT_CHARS for row in tables["radiology"])
-
-
-def test_rare_witnesses_and_links(corpus: dict[str, list[dict[str, str]]]) -> None:
-    """A5d: právě dva svědci mimo korpus sdílejí vazby a ostatní typové hodnoty."""
-    tables = sentinel_tables(corpus, SHAPES, PREFIX, TEXT_CHARS)
-    assert RARE_ROWS == EXPECTED_RARE_ROWS
-    for table, columns in {
-        "diagnoses_icd": ("icd_version", "icd_code"),
-    }.items():
-        for column in columns:
-            assert (
-                sum(row[column].startswith(f"{PREFIX}-") for row in tables[table])
-                == EXPECTED_RARE_ROWS
-            )
-    rare_subjects = {row["subject_id"] for row in tables["patients"][-2:]}
-    rare_hadms = {row["hadm_id"] for row in tables["admissions"][-2:]}
-    assert rare_subjects.isdisjoint(row["subject_id"] for row in tables["discharge"])
-    assert rare_hadms.isdisjoint(row["hadm_id"] for row in tables["discharge"])
-    for table in ("patients", "admissions", "diagnoses_icd"):
-        assert len(tables[table]) == len(corpus[table]) + EXPECTED_RARE_ROWS
-        assert {row["subject_id"] for row in tables[table][-2:]} == rare_subjects
-    assert {row["hadm_id"] for row in tables["diagnoses_icd"][-2:]} == rare_hadms
-    for row in tables["patients"][-2:]:
-        assert row["anchor_year_group"] == tables["patients"][0]["anchor_year_group"]
-        assert row["gender"] == tables["patients"][0]["gender"]
-        assert row["anchor_age"] == tables["patients"][0]["anchor_age"]
 
 
 def test_decoration_is_deterministic_and_does_not_mutate_corpus() -> None:

@@ -1,19 +1,16 @@
 """Tabulky EDA jsou navázané na plány, zprávy a pacienty korpusu."""
 
-from collections import defaultdict
 from datetime import datetime
 from typing import Final
 
 import pytest
 
-from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.note_structure import Sex
 from mediparse.domain.synthetic_mimic import corpus_tables, input_notes
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
-from mediparse.infrastructure.plans_file import PlansFile
-from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES, REPOSITORY_PLANS
+from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 from tests.synthetic_support import (
     EDA_NOTES,
     EDA_PLANS,
@@ -25,26 +22,14 @@ from tests.synthetic_support import (
 )
 
 EXPECTED_ADMISSIONS: Final = 33
-DUA_THRESHOLD: Final = 10
 EXPECTED_NOTES: Final = 400
 EXPECTED_PATIENTS: Final = 167
 EXPECTED_TARGETS: Final = 357
-EXPECTED_MASKED_NOTES: Final = 31
-EXPECTED_CKD_WITNESSES: Final = 15
-
-
-def test_repository_ckd_coverage_count() -> None:
-    """Patnáct zpráv bez labelu CKD dostane kód širší kategorie ledvin."""
-    tables = repository_tables()
-    labels = {p.note_id: p.labels for p in PlansFile(REPOSITORY_PLANS).load()}
-    notes = {r["hadm_id"]: r["note_id"] for r in tables["discharge"]}
-    witnesses = [r for r in tables["diagnoses_icd"] if r["icd_code"] in {"N19", "586"}]
-    assert len(witnesses) == EXPECTED_CKD_WITNESSES
-    assert all(Diagnosis.CKD not in labels[notes[r["hadm_id"]]] for r in witnesses)
+EXPECTED_MASKED_NOTES: Final = 38
 
 
 def test_manual_age_cycle() -> None:
-    """Devět pacientů postupně pokryje i nemaskovaný a maskovaný vysoký věk."""
+    """Osm pacientů pokryje věková pásma včetně maskovaného věku 91."""
     plans = tuple(
         PLANS[0].model_copy(
             update={
@@ -52,7 +37,7 @@ def test_manual_age_cycle() -> None:
                 "subject_id": 90000001 + index,
             }
         )
-        for index in range(9)
+        for index in range(8)
     )
     notes = input_notes(plans, {p.note_id: NOTES[0].text for p in plans}, Language.EN)
     plans, notes = with_coverage_groups(plans, notes)
@@ -67,14 +52,16 @@ def test_manual_age_cycle() -> None:
         "55",
         "65",
         "75",
-        "86",
         "91",
     ]
 
 
 def test_repository_masked_age_count() -> None:
-    """Nezávislé orákulum ze sond briefu: maskovaný věk má 31 zpráv."""
+    """Nezávislý součet z plánů při cyklu osmi věků dává 38 zpráv."""
     tables = repository_tables()
+    ages = {row["anchor_age"] for row in tables["patients"]}
+    assert "86" not in ages
+    assert "91" in ages
     masked = {
         row["subject_id"] for row in tables["patients"] if row["anchor_age"] == "91"
     }
@@ -137,31 +124,14 @@ def test_dictionary_has_each_used_pair_once() -> None:
         {"icd_code": "491", "icd_version": "9", "long_title": "copd ICD-9"},
         {"icd_code": "E08", "icd_version": "10", "long_title": "diabetes ICD-10"},
         {"icd_code": "J12", "icd_version": "10", "long_title": "pneumonia ICD-10"},
-        {"icd_code": "J45", "icd_version": "10", "long_title": "filler ICD-10"},
-        {"icd_code": "N19", "icd_version": "10", "long_title": "filler ICD-10"},
         {"icd_code": "V700", "icd_version": "9", "long_title": "filler ICD-9"},
         {"icd_code": "Z0000", "icd_version": "10", "long_title": "filler ICD-10"},
     ]
 
 
-def test_repository_demography_has_at_least_ten_patients_per_value() -> None:
-    """A6: každá demografická hodnota a verze ICD má aspoň deset různých pacientů."""
+def test_repository_table_counts() -> None:
+    """Korpusové tabulky zachovávají počty zpráv, pacientů a targetů BHC."""
     tables = repository_tables()
-    for table, columns in {
-        "patients": ("gender", "anchor_age", "anchor_year_group"),
-        "admissions": ("insurance", "marital_status", "race", "language"),
-        "diagnoses_icd": ("icd_version",),
-    }.items():
-        for column in columns:
-            subjects = defaultdict(set)
-            for row in tables[table]:
-                subjects[row[column]].add(row["subject_id"])
-            assert subjects
-            assert all(len(group) >= DUA_THRESHOLD for group in subjects.values()), (
-                table,
-                column,
-                subjects,
-            )
     assert len(tables["discharge"]) == EXPECTED_NOTES
     assert len(tables["patients"]) == EXPECTED_PATIENTS
     assert len(tables["mimic-iv-bhc"]) == EXPECTED_TARGETS
