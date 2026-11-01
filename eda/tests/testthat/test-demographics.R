@@ -336,7 +336,7 @@ test_that("majority_gender vrátí většinové pohlaví a podíl mezi známými
   expect_equal(out$total, 90)
 })
 
-test_that("majority_gender dá nelze, když chybí známá pohlaví", {
+test_that("majority_gender dá nelze, když chybí ženy nebo muži", {
   none <- pub("Pohlaví", "neuvedeno", 5)
 
   expect_equal(majority_gender(none)$kind, "nelze")
