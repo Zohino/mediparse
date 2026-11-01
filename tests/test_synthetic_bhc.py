@@ -1,7 +1,5 @@
 """Target BHC má ruční orákulum nezávislé na parseru sekcí."""
 
-from typing import Final
-
 import pytest
 
 from mediparse.domain.inputs import InvalidInputError
@@ -13,10 +11,7 @@ from tests.synthetic_support import (
     LEXICON,
     PLANS,
     TEXT,
-    repository_tables,
 )
-
-EXPECTED_TARGETS: Final = 357
 
 
 @pytest.mark.parametrize(
@@ -170,11 +165,6 @@ def test_manual_bhc_rows() -> None:
             "target": "Patient improved. Started insulin. Medications on Admission: Aspirin. Metformin.",
         },
     ]
-
-
-def test_repository_bhc_rows_count() -> None:
-    """Plány repozitáře obsahují 357 zpráv s BHC."""
-    assert len(repository_tables()["mimic-iv-bhc"]) == EXPECTED_TARGETS
 
 
 def test_bhc_row_without_plan_is_refused() -> None:

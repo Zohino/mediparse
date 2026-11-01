@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.diagnosis import Diagnosis
@@ -26,6 +27,12 @@ from tests.support import (
 if TYPE_CHECKING:
     from mediparse.domain.input_note import InputNote
 
+PREFIX: Final = "eda-sentinel"
+_TOKEN_STEM: Final = "".join(character for character in PREFIX if character.isalpha())
+TOKEN_PATTERN: Final = re.compile(rf"\b{re.escape(_TOKEN_STEM)}[a-z]+\b")
+_SECTION_TOKEN_PATTERN: Final = re.compile(
+    rf" {TOKEN_PATTERN.pattern}(?=\r?$)", flags=re.MULTILINE
+)
 NEGATED_FIXTURE_NOTES: Final = 15
 
 TEXT: Final = """Name: ___
@@ -155,6 +162,15 @@ def with_coverage_groups(
 
 
 EDA_PLANS, EDA_NOTES = with_coverage_groups(PLANS, NOTES)
+
+
+def remove_section_tokens(text: str) -> str:
+    """Odstraní tokeny připojené mezerou na konci řádků.
+
+    Returns:
+        Text se zachovanými konci řádků, hlavičkami a ostatními slovy.
+    """
+    return _SECTION_TOKEN_PATTERN.sub("", text)
 
 
 def repository_tables() -> dict[str, list[dict[str, str]]]:

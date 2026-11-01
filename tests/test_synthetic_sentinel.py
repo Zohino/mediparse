@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import re
 from copy import deepcopy
 from typing import TYPE_CHECKING, Final
 
@@ -28,12 +27,19 @@ from tests.support import (
     REPOSITORY_PLANS,
     REPOSITORY_SECTION_HEADERS,
 )
-from tests.synthetic_support import EDA_NOTES, EDA_PLANS, LEXICON, repository_tables
+from tests.synthetic_support import (
+    EDA_NOTES,
+    EDA_PLANS,
+    LEXICON,
+    PREFIX,
+    TOKEN_PATTERN,
+    remove_section_tokens,
+    repository_tables,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
-PREFIX: Final = "eda-sentinel"
 SHAPES: Final = read_manifest(REPOSITORY_MIMIC_MANIFEST)
 TEXT_CHARS: Final = 100
 EXPECTED_TARGETS: Final = 357
@@ -216,10 +222,7 @@ def test_section_decoration_preserves_original_text() -> None:
         corpus["discharge"], load_section_lexicon(REPOSITORY_SECTION_HEADERS), PREFIX
     )
     for source, row in zip(original, decorated, strict=True):
-        assert (
-            re.sub(r" edasentinel[a-z]+(?=\r?$)", "", row["text"], flags=re.MULTILINE)
-            == source["text"]
-        )
+        assert remove_section_tokens(row["text"]) == source["text"]
         assert {k: v for k, v in row.items() if k != "text"} == {
             k: v for k, v in source.items() if k != "text"
         }
@@ -241,9 +244,7 @@ def test_each_body_has_one_token_and_preserves_section_boundaries() -> None:
             (p.section, p.header) for p in before
         ]
         for old, new in zip(before, after, strict=True):
-            assert len(re.findall(r"\bedasentinel[a-z]+\b", new.body)) == int(
-                bool(old.body.strip())
-            )
+            assert len(TOKEN_PATTERN.findall(new.body)) == int(bool(old.body.strip()))
 
 
 def test_all_discharge_tokens_are_unique(
@@ -255,7 +256,7 @@ def test_all_discharge_tokens_are_unique(
     tokens = [
         token
         for row in tables["discharge"]
-        for token in re.findall(r"\bedasentinel[a-z]+\b", row["text"])
+        for token in TOKEN_PATTERN.findall(row["text"])
     ]
     assert tokens
     assert len(tokens) == len(set(tokens))
@@ -271,11 +272,11 @@ def test_every_bhc_target_contains_a_token(
     assert expected == EXPECTED_TARGETS
     targets = tables["mimic-iv-bhc"]
     assert len(targets) == expected
-    assert all(re.search(r"\bedasentinel[a-z]+\b", row["target"]) for row in targets)
+    assert all(TOKEN_PATTERN.search(row["target"]) for row in targets)
     texts = {row["note_id"]: row["text"] for row in tables["discharge"]}
     assert all(
-        set(re.findall(r"\bedasentinel[a-z]+\b", row["target"]))
-        <= set(re.findall(r"\bedasentinel[a-z]+\b", texts[row["note_id"]]))
+        set(TOKEN_PATTERN.findall(row["target"]))
+        <= set(TOKEN_PATTERN.findall(texts[row["note_id"]]))
         for row in targets
     )
 

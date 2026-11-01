@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import re
 from typing import TYPE_CHECKING, Final
 
 import pyarrow as pa
@@ -22,12 +21,11 @@ from tests.support import (
     REPOSITORY_PLANS,
     REPOSITORY_SECTION_HEADERS,
 )
-from tests.synthetic_support import PLANS
+from tests.synthetic_support import PLANS, PREFIX, TOKEN_PATTERN, remove_section_tokens
 
 if TYPE_CHECKING:
     from pathlib import Path
 
-PREFIX: Final = "eda-sentinel"
 EXPECTED_NOTES: Final = 400
 
 
@@ -67,12 +65,10 @@ def test_writes_manifest_tables_and_marker(tmp_path: Path) -> None:
     notes = pq.read_table(out / "discharge.parquet").to_pylist()
     for note in notes:
         note_id = note["note_id"].removeprefix(f"{PREFIX}-discharge-note_id-")
-        text = re.sub(
-            r" edasentinel[a-z]+(?=\r?$)", "", note["text"], flags=re.MULTILINE
-        )
+        text = remove_section_tokens(note["text"])
         assert text.endswith("\n" + originals[note_id])
     targets = pq.read_table(out / "mimic-iv-bhc.parquet").to_pylist()
-    assert all(re.search(r"\bedasentinel[a-z]+\b", row["target"]) for row in targets)
+    assert all(TOKEN_PATTERN.search(row["target"]) for row in targets)
 
 
 @pytest.mark.parametrize("source", ["manifest", "lexicon", "plans"])
