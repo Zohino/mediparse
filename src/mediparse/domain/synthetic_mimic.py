@@ -196,10 +196,11 @@ def corpus_tables(
         Šest tabulek obsahujících pouze sloupce známé z korpusu.
 
     Raises:
-        InvalidInputError: Kódy neuchovají labely nebo chybí hlavička slíbená plánem.
+        InvalidInputError: Plány neodpovídají zprávám, pohlaví pacienta se liší,
+            kódy neuchovají labely nebo chybí hlavička slíbená plánem.
     """
+    by_note = _plans_for_notes(plans, notes)
     tables, versions = _mimic_core(notes, codes)
-    by_note = {plan.note_id: plan for plan in plans}
     by_subject = {plan.subject_id: plan for plan in plans}
     indices = {subject: index for index, subject in enumerate(sorted(versions))}
     tables["patients"] = [
@@ -223,6 +224,27 @@ def corpus_tables(
             targets.append({"note_id": note.note_id, "target": target})
     tables["mimic-iv-bhc"] = targets
     return tables
+
+
+def _plans_for_notes(
+    plans: Sequence[NotePlan],
+    notes: Sequence[InputNote],
+) -> dict[str, NotePlan]:
+    by_note = {plan.note_id: plan for plan in plans}
+    note_ids = {note.note_id for note in notes}
+    if without_plan := note_ids - by_note.keys():
+        msg = f"Zprávy bez plánu: {', '.join(sorted(without_plan))}."
+        raise InvalidInputError(msg)
+    if without_note := by_note.keys() - note_ids:
+        msg = f"Plány bez zprávy: {', '.join(sorted(without_note))}."
+        raise InvalidInputError(msg)
+    sexes: dict[int, Sex] = {}
+    for plan in plans:
+        sex = sexes.setdefault(plan.subject_id, plan.sex)
+        if sex is not plan.sex:
+            msg = f"Pacient {plan.subject_id} má v plánech různé pohlaví."
+            raise InvalidInputError(msg)
+    return by_note
 
 
 def _admission(row: Mapping[str, str], patient_index: int) -> dict[str, str]:

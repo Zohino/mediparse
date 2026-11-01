@@ -3,6 +3,10 @@
 from collections import defaultdict
 from typing import Final
 
+import pytest
+
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.note_structure import Sex
 from mediparse.domain.synthetic_mimic import corpus_tables
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
 from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
@@ -87,3 +91,21 @@ def test_repository_demography_has_at_least_ten_patients_per_value() -> None:
     assert len(tables["discharge"]) == EXPECTED_NOTES
     assert len(tables["patients"]) == EXPECTED_PATIENTS
     assert len(tables["mimic-iv-bhc"]) == EXPECTED_TARGETS
+
+
+@pytest.mark.parametrize("missing", ["plan", "note"])
+def test_unpaired_plans_and_notes_are_refused(missing: str) -> None:
+    """Přímý volající korpusové vrstvy dostane doménovou chybu pro obě neshody."""
+    plans = PLANS[:-1] if missing == "plan" else PLANS
+    notes = NOTES[:-1] if missing == "note" else NOTES
+    codes = load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES)
+    with pytest.raises(InvalidInputError, match=r"plán|zpráv"):
+        corpus_tables(plans, notes, codes, LEXICON)
+
+
+def test_conflicting_patient_sexes_are_refused() -> None:
+    """Jedna osoba nemůže mít v plánech rozdílné pohlaví závislé na pořadí zpráv."""
+    plans = (PLANS[0], PLANS[1].model_copy(update={"sex": Sex.MALE}), PLANS[2])
+    codes = load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES)
+    with pytest.raises(InvalidInputError, match=r"90000001.*pohlaví"):
+        corpus_tables(plans, NOTES, codes, LEXICON)
