@@ -16,7 +16,6 @@ from pydantic import BaseModel
 import mediparse
 import mediparse.domain
 from mediparse.domain.cohort import CohortCounts
-from mediparse.domain.dua import MIN_CELL
 from tests.support import REPOSITORY
 
 if TYPE_CHECKING:
@@ -525,15 +524,6 @@ def _eda_python_violations(documents: list[Path]) -> list[str]:
         )
         if EDA_PYTHON.search(line)
     ]
-
-
-@EDA_PRESENT
-def test_eda_small_cell_threshold_matches_domain() -> None:
-    """Python i R potlačují malé buňky podle stejného projektového prahu."""
-    source = (EDA / "R" / "dua.R").read_text(encoding="utf-8")
-    threshold = re.search(r"DUA_THRESHOLD <- (\d+)L", source)
-    assert threshold is not None
-    assert int(threshold.group(1)) == MIN_CELL
 
 
 @EDA_PRESENT

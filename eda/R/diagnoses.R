@@ -178,12 +178,12 @@ code_ranking <- function(con, version, prefixes = NULL, top = 20L) {
   codes <- diagnosis_codes(con)
   filter <- if (length(prefixes) == 0L) "true" else version_clause(con, version, prefixes)
   rows <- DBI::dbGetQuery(con, sprintf(
-    GROUP_SQL, codes, as.integer(version), filter, DUA_THRESHOLD,
+    GROUP_SQL, codes, as.integer(version), filter, LABEL_MIN_NOTES,
     as.integer(version), codes, as.integer(version)
   ))
   rows$n <- as.numeric(rows$n)
   rows$total <- as.numeric(rows$total)
-  rows <- rows[rows$n >= DUA_THRESHOLD, , drop = FALSE]
+  rows <- rows[rows$n >= LABEL_MIN_NOTES, , drop = FALSE]
   rows <- rows[order(-rows$n, rows$kod), , drop = FALSE]
   rows <- utils::head(rows, top)
   data.frame(

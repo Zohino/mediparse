@@ -7,9 +7,8 @@ import logging
 import re
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.cohort import CohortManifest, FunnelStepName
+from mediparse.domain.cohort import MIN_CELL, CohortManifest, FunnelStepName
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.dua import MIN_CELL
 from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256

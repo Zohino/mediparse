@@ -34,7 +34,7 @@ preamble_count <- count_phrase(length(lexicon$preamble), c("pole", "pole", "pol�
 short_text <- count_phrase(SHORT_LIMIT, c("znak", "znaky", "znaků"))
 notes_text <- count_phrase(totals$celkem, c("zpráva", "zprávy", "zpráv"))
 coverage_floor <- coverage_threshold_text(MIN_COVERAGE)
-count_floor <- count_phrase(DUA_THRESHOLD, c("zpráva", "zprávy", "zpráv"))
+count_floor <- count_phrase(LABEL_MIN_NOTES, c("zpráva", "zprávy", "zpráv"))
 candidate_floor <- coverage_threshold_text(CANDIDATE_COVERAGE)
 repeat_floor <- coverage_threshold_text(REPEAT_SHARE)
 ranking_size <- count_phrase(RANKING_SIZE, c("hlavička", "hlavičky", "hlaviček"))

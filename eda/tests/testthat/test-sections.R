@@ -123,7 +123,7 @@ test_that("note_headers vrací tutéž tabulku podruhé a jeden řádek na výsk
   expect_equal(DBI::dbGetQuery(con, "SELECT count(*) AS n FROM note_headers_input")$n, 2)
 })
 
-test_that("publishable_floor je 1 % korpusu a nejméně DUA_THRESHOLD", {
+test_that("publishable_floor je 1 % korpusu a nejméně LABEL_MIN_NOTES", {
   expect_equal(publishable_floor(c(0, 500, 100000)), c(10, 10, 1000))
 })
 

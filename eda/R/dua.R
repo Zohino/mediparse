@@ -1,5 +1,5 @@
-# Zrcadlo MIN_CELL v src/mediparse/domain/dua.py; změna se dělá v obou souborech.
-DUA_THRESHOLD <- 10L
+# Popisek s méně zprávami může být doslovným úryvkem jediné zprávy.
+LABEL_MIN_NOTES <- 10L
 UNKNOWN_LABEL <- "neuvedeno"
 NBSP <- "\u00a0"
 
