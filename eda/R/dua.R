@@ -1,5 +1,6 @@
-# Zrcadlo MIN_CELL v src/mediparse/domain/dua.py; změna se dělá v obou souborech.
-DUA_THRESHOLD <- 10L
+# Popisek z dat s méně zprávami může být doslovným úryvkem zprávy nebo vzácnou
+# hodnotou mimo veřejný číselník (hlavičky, n-gramy, kódy ICD).
+LABEL_MIN_NOTES <- 10L
 UNKNOWN_LABEL <- "neuvedeno"
 NBSP <- "\u00a0"
 
@@ -18,7 +19,7 @@ number_text <- function(x) {
 percent_text <- function(n, total) {
   total <- rep_len(total, length(n))
   out <- rep("–", length(n))
-  known <- total > 0
+  known <- !is.na(n) & !is.na(total) & total > 0
   out[known] <- dua_decimal(100 * n[known] / total[known])
   # Nenulový počet zaokrouhlený na 0,0 by vedle čísla zpráv vypadal jako rozpor (22 zpráv, 0,0 %).
   out[known & n > 0 & out == dua_decimal(0)] <- paste0("<", NBSP, dua_decimal(0.1))
@@ -35,10 +36,4 @@ share_table <- function(df) {
   out$n <- number_text(df$n)
   out$podil <- percent_text(df$n, sum(df$n))
   out
-}
-
-dua_binary <- function(n, total) {
-  total <- rep_len(total, length(n))
-  hidden <- is.na(n) | is.na(total) | n < DUA_THRESHOLD | total - n < DUA_THRESHOLD
-  ifelse(hidden, NA_real_, as.numeric(n))
 }

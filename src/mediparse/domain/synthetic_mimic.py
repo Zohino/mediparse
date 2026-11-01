@@ -30,7 +30,7 @@ FILLER_CODES: Final[Mapping[IcdVersion, str]] = {
 _FIRST_ADMISSION: Final = 20000000
 _TIMESTAMP: Final = "2155-01-01 00:00:00"
 _ERAS: Final = {IcdVersion.NINE: "2008 - 2010", IcdVersion.TEN: "2017 - 2019"}
-_ANCHOR_AGES: Final = (15, 25, 35, 45, 55, 65, 75, 86, 91)
+_ANCHOR_AGES: Final = (15, 25, 35, 45, 55, 65, 75, 91)
 
 
 class UnpairedNotesError(InvalidInputError):

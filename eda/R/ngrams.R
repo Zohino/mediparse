@@ -78,7 +78,7 @@ ngram_list_sql <- function(size) {
   sprintf("[concat_ws(' ', %s) FOR i IN range(1, len(t) - %d + 2)]", paste(parts, collapse = ", "), size)
 }
 
-# Brána DUA je v SQL, takže do R jde jen to, co se smí zveřejnit. `sections = NULL` je celek
+# Práh popisků je v SQL, takže do R jde jen to, co se smí zveřejnit. `sections = NULL` je celek
 # (dokumentová frekvence přes všechny části zprávy), jinak se počítá po zadaných sekcích.
 ngram_counts <- function(con, stopwords, sections = NULL, floor_fn = publishable_floor) {
   if (length(sections) == 0L && !is.null(sections)) {

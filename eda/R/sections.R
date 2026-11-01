@@ -50,7 +50,7 @@ normalized_sql <- function(column) {
 }
 
 publishable_floor <- function(total) {
-  pmax(DUA_THRESHOLD, ceiling(MIN_COVERAGE * total))
+  pmax(LABEL_MIN_NOTES, ceiling(MIN_COVERAGE * total))
 }
 
 note_headers <- function(con) {

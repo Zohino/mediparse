@@ -427,6 +427,7 @@ test_that("Charlson zachová malé počty i jejich podíly", {
   published <- charlson_labelled(counts)
 
   expect_equal(published$n, c(3, 12))
+  expect_equal(charlson_table(published, 100)$n, c("3", "12"))
   expect_equal(charlson_table(published, 100)$podil, c("3,0", "12,0"))
 })
 
@@ -446,7 +447,6 @@ test_that("kód v izolovaném prostředí nepotřebuje demographics.R", {
   sys.source("../../R/diagnoses.R", envir = env)
 
   expect_equal(env$UNKNOWN_LABEL, "neuvedeno")
-  expect_true(env$HIDDEN_TEXT == "potlačeno")
 })
 
 test_that("souběh vrací i počet zpráv kandidáta ve sloupci", {

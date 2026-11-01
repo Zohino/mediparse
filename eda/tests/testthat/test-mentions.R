@@ -266,70 +266,6 @@ agreement_row <- function(...) {
   as.data.frame(modifyList(base, list(...)), stringsAsFactors = FALSE)
 }
 
-AGREEMENT_COLUMNS <- c("icd", "zminka", "tvrzeni", "icd_zminka", "icd_tvrzeni")
-
-test_that("suppress_agreement ponechá řádek, kde nejmenší buňka má právě deset zpráv", {
-  edge <- agreement_row(
-    icd = 30, zminka = 40, tvrzeni = 20, icd_zminka = 20, icd_tvrzeni = 10, celkem = 60
-  )
-
-  expect_equal(suppress_agreement(agreement_row()), agreement_row())
-  expect_equal(suppress_agreement(edge), edge)
-  expect_equal(min(agreement_cells(edge)), 10)
-})
-
-test_that("suppress_agreement skryje řádek celý, když jediná z šesti atomických buněk má devět zpráv", {
-  cases <- list(
-    "ICD+ s tvrzením" = agreement_row(icd_tvrzeni = 9, zminka = 181),
-    "ICD+ jen negovaná zmínka" = agreement_row(icd_tvrzeni = 71),
-    "ICD+ bez zmínky" = agreement_row(icd = 89),
-    "bez ICD s tvrzením" = agreement_row(tvrzeni = 69),
-    "bez ICD jen negovaná zmínka" = agreement_row(zminka = 129),
-    "ani ICD ani zmínka" = agreement_row(celkem = 169)
-  )
-
-  for (name in names(cases)) {
-    cells <- agreement_cells(cases[[name]])
-    expect_equal(sum(cells < DUA_THRESHOLD), 1L, info = name)
-    out <- suppress_agreement(cases[[name]])
-    expect_true(all(is.na(out[AGREEMENT_COLUMNS])), info = name)
-    expect_equal(out$kandidat, "dm", info = name)
-    expect_equal(out$celkem, cases[[name]]$celkem, info = name)
-  }
-})
-
-test_that("suppress_agreement skryje kandidáta i s devíti zprávami ICD+ se zmínkou", {
-  out <- suppress_agreement(agreement_row(icd_zminka = 9, icd_tvrzeni = 0))
-
-  expect_true(all(is.na(out[AGREEMENT_COLUMNS])))
-})
-
-test_that("align_agreement skryje kandidáta, jehož prevalenci sešit 7 nezveřejnil", {
-  agreement <- rbind(agreement_row(kandidat = "dm"), agreement_row(kandidat = "pn"))
-  prevalence <- data.frame(kandidat = c("dm", "pn"), n = c(100, NA))
-
-  out <- align_agreement(agreement, prevalence)
-
-  expect_false(anyNA(out[out$kandidat == "dm", AGREEMENT_COLUMNS]))
-  expect_true(all(is.na(out[out$kandidat == "pn", AGREEMENT_COLUMNS])))
-})
-
-test_that("suppress_symptoms skryje řádek podle dua_binary a rozdílu zmínek a tvrzení", {
-  symptoms <- data.frame(
-    priznak = c("fever", "cough", "nausea", "edema", "syncope"),
-    zminka = c(100, 9, 395, 100, 100),
-    tvrzeni = c(90, 9, 395, 91, 9),
-    celkem = 400,
-    stringsAsFactors = FALSE
-  )
-
-  out <- suppress_symptoms(symptoms)
-
-  expect_equal(out$zminka, c(100, NA, NA, NA, NA))
-  expect_equal(out$tvrzeni, c(90, NA, NA, NA, NA))
-  expect_equal(out$priznak, symptoms$priznak)
-})
-
 RUBRIC_POOL <- list(
   dm = list(label_cs = "Diabetes", kapitola = "E"),
   hf = list(label_cs = "Srdeční selhání", kapitola = "I"),
@@ -389,15 +325,19 @@ test_that("práh shody 0,5 a hranice pásma projdou včetně", {
   )
 })
 
-test_that("potlačený kandidát je nelze posoudit", {
+test_that("kandidát bez ICD má nedefinovanou shodu a nelze jej posoudit", {
   inputs <- rubric_inputs()
-  inputs$agreement[2, AGREEMENT_COLUMNS] <- NA_real_
+  inputs$agreement$icd[2] <- 0
+  inputs$agreement$icd_zminka[2] <- 0
 
   out <- run_rubric(inputs)
 
   expect_true(is.na(out$shoda[2]))
   expect_equal(out$vysledek[2], "nelze")
   expect_equal(out$verdikt_shody[2], "nelze")
+  table <- rubric_table(out, select_five(out), RUBRIC_POOL)
+  expect_equal(table$shoda[2], "–")
+  expect_equal(table$vysledek[2], "nelze posoudit")
 })
 
 SHARES <- function(...) {
@@ -405,11 +345,11 @@ SHARES <- function(...) {
   replace(base, names(list(...)), unlist(list(...)))
 }
 
-test_that("skrytá shoda dá nelze posoudit i u kandidáta mimo pásmo", {
+test_that("nedefinovaná shoda dá nelze posoudit i u kandidáta mimo pásmo", {
   inputs <- rubric_inputs(prevalence = c(
     dm = 0.01, hf = 0.2, af = 0.9, copd = 0.2, pn = 0.2, ckd = 0.2, sepsis = 0.1
   ))
-  inputs$agreement[1:3, AGREEMENT_COLUMNS] <- NA_real_
+  inputs$agreement[1:3, c("icd", "icd_zminka")] <- 0
 
   out <- run_rubric(inputs)
 
@@ -417,11 +357,11 @@ test_that("skrytá shoda dá nelze posoudit i u kandidáta mimo pásmo", {
   expect_equal(out$vysledek[1:3], rep("nelze", 3L))
 })
 
-test_that("všechny skryté shody dají kind nelze i při viditelné prevalenci mimo pásmo", {
+test_that("všechny nedefinované shody dají kind nelze i při viditelné prevalenci mimo pásmo", {
   inputs <- rubric_inputs(prevalence = c(
     dm = 0.01, hf = 0.01, af = 0.01, copd = 0.9, pn = 0.9, ckd = 0.9, sepsis = 0.9
   ))
-  inputs$agreement[AGREEMENT_COLUMNS] <- NA_real_
+  inputs$agreement[c("icd", "icd_zminka")] <- 0
 
   expect_equal(select_five(run_rubric(inputs))$kind, "nelze")
 })
@@ -477,9 +417,9 @@ test_that("když nikdo neprojde, výběr je prázdný a typ zůstává vyber", {
   expect_equal(out$failed, names(RUBRIC_POOL))
 })
 
-test_that("všichni potlačení a prázdný korpus dají nelze", {
+test_that("chybějící hodnoty a prázdný korpus dají nelze", {
   inputs <- rubric_inputs()
-  inputs$agreement[AGREEMENT_COLUMNS] <- NA_real_
+  inputs$agreement[c("icd", "icd_zminka")] <- 0
   inputs$prevalence$n <- NA_real_
   empty <- list(prevalence = inputs$prevalence[0, ], agreement = inputs$agreement[0, ])
 
@@ -498,7 +438,7 @@ test_that("select_five odmítne pool s víc kapitolami, než kolik má pětice m
 
 test_that("rubric_table označí vybrané, doplněné, neprošlé a nelze posoudit", {
   inputs <- rubric_inputs(share = SHARES(copd = 0.3, pn = 0.2, ckd = 0.6))
-  inputs$agreement[7, AGREEMENT_COLUMNS] <- NA_real_
+  inputs$agreement[7, c("icd", "icd_zminka")] <- 0
   ranked <- run_rubric(inputs)
 
   out <- rubric_table(ranked, select_five(ranked), RUBRIC_POOL)
@@ -521,51 +461,68 @@ test_that("rubric_table označí prošlého kandidáta, který výběr nepojal",
   )
 })
 
-test_that("agreement_table uvede podmíněné podíly a skrytý řádek jako pomlčky", {
-  agreement <- rbind(
-    agreement_row(kandidat = "dm"),
-    suppress_agreement(agreement_row(kandidat = "pn", icd = 5))
+test_that("agreement_table zveřejní malé buňky shody přesně", {
+  agreement <- agreement_row(
+    icd = 50, zminka = 40, tvrzeni = 30, icd_zminka = 9, icd_tvrzeni = 6, celkem = 200
   )
 
   out <- agreement_table(agreement, CASES)
 
-  expect_equal(out$kandidat, c("Diabetes", "Pneumonie"))
-  expect_equal(out$icd, c("100", "potlačeno"))
-  expect_equal(out$zminka_icd, c("80,0", "–"))
-  expect_equal(out$tvrzeni_icd, c("60,0", "–"))
-  expect_equal(out$icd_zminka, c("57,1", "–"))
-  expect_equal(out$icd_tvrzeni, c("60,0", "–"))
+  expect_equal(out$icd, "50")
+  expect_equal(out$zminka_icd, "18,0")
+  expect_equal(out$tvrzeni_icd, "12,0")
+  expect_equal(out$icd_zminka, "22,5")
+  expect_equal(out$icd_tvrzeni, "20,0")
 })
 
-test_that("agreement_points vrátí jen zveřejnitelné kandidáty ve dvou metrikách", {
+test_that("agreement_points vrátí i malé počty kandidáta ve dvou metrikách", {
+  agreement <- agreement_row(icd = 5, icd_zminka = 4, icd_tvrzeni = 3)
+
+  out <- agreement_points(agreement, CASES)
+
+  expect_equal(nrow(out), 2L)
+  expect_equal(as.character(out$kandidat), c("Diabetes", "Diabetes"))
+  expect_equal(out$podil, c(0.8, 0.6))
+  expect_equal(nrow(agreement_points(agreement[0, ], CASES)), 0L)
+})
+
+test_that("agreement_points vynechá nedefinované podíly a zachová všechny úrovně kandidátů", {
   agreement <- rbind(
-    agreement_row(kandidat = "dm"),
-    suppress_agreement(agreement_row(kandidat = "pn", icd = 5))
+    agreement_row(kandidat = "dm", icd = 5, icd_zminka = 4, icd_tvrzeni = 3),
+    agreement_row(kandidat = "pn", icd = 0, icd_zminka = 0, icd_tvrzeni = 0)
   )
 
   out <- agreement_points(agreement, CASES)
 
   expect_equal(nrow(out), 2L)
   expect_equal(as.character(out$kandidat), c("Diabetes", "Diabetes"))
-  expect_equal(sort(out$podil), c(0.6, 0.8))
-  expect_equal(nrow(agreement_points(agreement[0, ], CASES)), 0L)
+  expect_equal(out$podil, c(0.8, 0.6))
+  expect_true(all(is.finite(out$podil)))
+  expect_equal(levels(out$kandidat), c("Fibrilace", "Infarkt", "Pneumonie", "Diabetes"))
 })
 
-test_that("symptom_table a symptom_bars řadí podle podílu a skrývají potlačené řádky", {
-  symptoms <- suppress_symptoms(data.frame(
-    priznak = c("fever", "cough", "nausea"), zminka = c(100, 200, 9),
-    tvrzeni = c(50, 120, 9), celkem = 400, stringsAsFactors = FALSE
-  ))
+test_that("symptom_table a symptom_bars zveřejní čtyři zmínky ze sta zpráv", {
+  symptoms <- data.frame(priznak = "fever", zminka = 4, tvrzeni = 3, celkem = 100)
 
   table <- symptom_table(symptoms)
   bars <- symptom_bars(symptoms)
 
-  expect_equal(table$priznak, c("fever", "cough", "nausea"))
-  expect_equal(table$zminka, c("100", "200", "potlačeno"))
-  expect_equal(table$podil, c("25,0", "50,0", "–"))
-  expect_equal(table$bez_negace, c("12,5", "30,0", "–"))
-  expect_equal(as.character(bars$priznak), c("cough", "fever"))
-  expect_equal(bars$podil, c(0.5, 0.25))
+  expect_equal(table$zminka, "4")
+  expect_equal(table$podil, "4,0")
+  expect_equal(table$bez_negace, "3,0")
+  expect_equal(as.character(bars$priznak), "fever")
+  expect_equal(bars$podil, 0.04)
+  expect_equal(bars$bez_negace, 0.03)
+})
+
+test_that("symptom_bars řadí podle četnosti a při shodě podle příznaku", {
+  symptoms <- data.frame(
+    priznak = c("nausea", "cough", "fever"), zminka = c(4, 10, 4),
+    tvrzeni = c(3, 5, 2), celkem = 100
+  )
+
+  expect_equal(as.character(symptom_bars(symptoms)$priznak), c("cough", "fever", "nausea"))
+  expect_equal(nrow(symptom_bars(symptoms[0, ])), 0L)
 })
 
 test_that("selection_text popíše výběr, doplnění, neúplnost i větev nelze", {
@@ -583,23 +540,16 @@ test_that("selection_text popíše výběr, doplnění, neúplnost i větev nelz
   expect_match(selection_text(complete, pool), "Doplněním prázdných kapitol vznikla část výběru: Srdeční selhání (`hf`)", fixed = TRUE)
   expect_match(selection_text(modifyList(complete, list(selected = "dm", filled = character())), pool), "vybrala 1 diagnózu", fixed = TRUE)
   expect_match(selection_text(modifyList(complete, list(selected = character(), filled = character())), pool), "Žádný kandidát", fixed = TRUE)
-  expect_match(selection_text(list(kind = "nelze"), pool), "nelze zveřejnit", fixed = TRUE)
+  expect_match(selection_text(list(kind = "nelze"), pool), "nelze posoudit", fixed = TRUE)
 })
 
-test_that("hidden_rows_text skloňuje počet skrytých řádků", {
-  expect_equal(hidden_rows_text(0), "Potlačení neskrylo žádný řádek.")
-  expect_equal(hidden_rows_text(1), "Potlačení skrylo 1 řádek.")
-  expect_equal(hidden_rows_text(3), "Potlačení skrylo 3 řádky.")
-  expect_equal(hidden_rows_text(10), "Potlačení skrylo 10 řádků.")
-})
-
-test_that("noise_text skloňuje počet kandidátů s nízkým P(ICD+ | zmínka) a mlčí o skrytých", {
+test_that("noise_text skloňuje počet kandidátů s nízkým P(ICD+ | zmínka) a ošetří nulový jmenovatel", {
   low <- function(key) {
     agreement_row(kandidat = key, zminka = 300, icd_zminka = 80, tvrzeni = 250, icd_tvrzeni = 60)
   }
   one <- rbind(low("dm"), agreement_row(kandidat = "pn"))
   two <- rbind(low("dm"), low("pn"), agreement_row(kandidat = "ami"))
-  hidden <- suppress_agreement(agreement_row(kandidat = "ami", icd = 5))
+  empty <- agreement_row(kandidat = "ami", zminka = 0, icd_zminka = 0)
   tail <- paste(
     "U diagnóz s nízkou hodnotou nemusí být zpráva bez kódu, ale se zmínkou, opravdu negativní."
   )
@@ -612,28 +562,15 @@ test_that("noise_text skloňuje počet kandidátů s nízkým P(ICD+ | zmínka) 
     noise_text(two, CASES),
     paste("Riziko šumu v negativní třídě se týká 2\u00a0kandidátů s P(ICD+ | zmínka) pod 50\u00a0%: Diabetes a Pneumonie.", tail)
   )
-  expect_match(noise_text(agreement_row(kandidat = "pn"), CASES), "Žádný zveřejnitelný kandidát", fixed = TRUE)
-  expect_match(noise_text(hidden, CASES), "nelze posoudit", fixed = TRUE)
+  expect_match(noise_text(agreement_row(kandidat = "pn"), CASES), "Žádný kandidát", fixed = TRUE)
+  expect_match(noise_text(empty, CASES), "nelze posoudit", fixed = TRUE)
 })
 
-symptom_fixture <- function(visible, total = 20L) {
-  suppress_symptoms(data.frame(
-    priznak = paste0("s", seq_len(total)),
-    zminka = c(seq(200, by = -10, length.out = visible), rep(9, total - visible)),
-    tvrzeni = c(seq(100, by = -5, length.out = visible), rep(9, total - visible)),
-    celkem = 400, stringsAsFactors = FALSE
-  ))
-}
+test_that("symptom_text popíše nejčastější příznak a ošetří prázdný vstup", {
+  symptoms <- data.frame(priznak = c("fever", "cough"), zminka = c(4, 2), tvrzeni = c(3, 1), celkem = 100)
 
-test_that("symptom_text skloňuje počet příznaků s podílem pro 1, 2 a 5", {
-  expected <- function(count) {
-    sprintf("Podíl lze zveřejnit u %s z 20. Nejčastější je s1, zmínku má 50,0\u00a0%% zpráv korpusu.", count)
-  }
-
-  expect_equal(symptom_text(symptom_fixture(1)), expected("1\u00a0příznaku"))
-  expect_equal(symptom_text(symptom_fixture(2)), expected("2\u00a0příznaků"))
-  expect_equal(symptom_text(symptom_fixture(5)), expected("5\u00a0příznaků"))
-  expect_match(symptom_text(symptom_fixture(0)), "nelze", fixed = TRUE)
+  expect_equal(symptom_text(symptoms), "Nejčastější je fever, zmínku má 4,0\u00a0% zpráv korpusu.")
+  expect_match(symptom_text(symptoms[0, ]), "nejsou", fixed = TRUE)
 })
 
 PARAMETER_POOL <- list(
@@ -711,20 +648,17 @@ test_that("klíčová slova jsou fráze a pak zkratky a kandidát bez zkratek ne
   expect_equal(as.character(out$mentions$hf$keywords), "heart failure")
 })
 
-test_that("potlačená buňka projde jako NA", {
+test_that("nulové jmenovatele měr zmínek projdou do parametrů jako NA", {
   inputs <- parameter_inputs(c("dm", "pn"))
-  inputs$prevalence$n[inputs$prevalence$kandidat == "pn"] <- NA_real_
-  inputs$agreement[inputs$agreement$kandidat == "pn", AGREEMENT_COLUMNS] <- NA_real_
-  inputs$cells$n_ij[inputs$cells$radek == "dm" & inputs$cells$sloupec == "pn"] <- NA_real_
-  inputs$cells$podil[inputs$cells$radek == "dm" & inputs$cells$sloupec == "pn"] <- NA_real_
+  inputs$agreement[inputs$agreement$kandidat == "dm", c("icd", "icd_zminka")] <- 0
+  inputs$agreement$celkem[inputs$agreement$kandidat == "pn"] <- 80
 
   out <- run_parameters(inputs)
 
-  expect_true(is.na(out$prevalence$pn))
-  expect_true(is.na(out$mentions$pn$given_positive))
+  expect_true(is.na(out$mentions$dm$given_positive))
   expect_true(is.na(out$mentions$pn$given_negative))
-  expect_true(is.na(out$conditional$dm$pn))
-  expect_equal(out$conditional$pn$dm, 0.25)
+  expect_equal(out$mentions$dm$given_negative, 0.3)
+  expect_equal(out$mentions$pn$given_positive, 0.5)
 })
 
 test_that("výběr nelze a prázdný výběr dají prázdné objekty", {

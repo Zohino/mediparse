@@ -20,7 +20,7 @@ _CEIL_PRECISION: Final = 9
 
 
 class SyntheticParameters(BaseModel):
-    """Export sešitu 8: vybraná pětice a její čísla, všechna zveřejnitelná (bez potlačených buněk)."""
+    """Export sešitu 8: vybraná pětice a její čísla; každý podíl musí být definovaný."""
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 

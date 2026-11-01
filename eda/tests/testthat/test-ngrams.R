@@ -62,8 +62,8 @@ test_that("n-gram ve dvou sekcích téže zprávy je pro celek jedna zpráva", {
 })
 
 test_that("brána vynechá n-gram pod publishable_floor i s mnoha výskyty v jedné zprávě", {
-  common <- rep("Allergies:\nrash itch\n", DUA_THRESHOLD)
-  texts <- c(common, paste0("Allergies:\n", strrep("secret ", 2L * DUA_THRESHOLD), "\n"))
+  common <- rep("Allergies:\nrash itch\n", LABEL_MIN_NOTES)
+  texts <- c(common, paste0("Allergies:\n", strrep("secret ", 2L * LABEL_MIN_NOTES), "\n"))
   counts <- counts_of(texts, floor = publishable_floor)
 
   expect_true("rash" %in% grams(counts, 1L))

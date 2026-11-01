@@ -123,107 +123,87 @@ af_summary <- function(groups) {
 
 af_row <- function(summary) summary[summary$zkratka == "AF", ]
 
-test_that("acronym_summary dá podíl zpráv se zkratkou bez kódu a výskyty doslovně", {
-  summary <- af_summary(af_groups(oba = 12L))
+test_that("acronym_summary zveřejní sedm výskytů a podíl tří z pěti zpráv", {
+  summary <- af_summary(af_groups(oba = 2L, jen_zkratka = 3L, jen_kod = 1L, zadne = 94L, repeats = c(3L, 1L, 1L, 1L, 1L)))
   af <- af_row(summary)
+  table <- acronym_table(af)
 
-  expect_equal(af$vyskyty, 22 * 60)
-  expect_equal(af$podil, 10 / 22)
-  expect_false(af$skryto)
+  expect_equal(af$vyskyty, 7)
+  expect_equal(af$podil, 0.6)
   expect_equal(af$kandidat, "atrial_fibrillation")
   expect_equal(af$label_cs, "Fibrilace síní")
-  expect_equal(acronym_table(summary)$bez_kodu[summary$zkratka == "AF"], "45,5")
+  expect_equal(table$vyskyty, "7")
+  expect_equal(table$bez_kodu, "60,0")
 })
 
-test_that("podíl je viditelný, když jsou všechny čtyři buňky přesně 10", {
-  af <- af_row(af_summary(af_groups()))
+test_that("podíl se uvádí i pro jedinou zprávu se zkratkou", {
+  summary <- af_summary(af_groups(oba = 0L, jen_zkratka = 1L, jen_kod = 0L, zadne = 0L, repeats = 1L))
 
-  expect_false(af$skryto)
-  expect_equal(af$podil, 0.5)
+  expect_equal(af_row(summary)$podil, 1)
+  expect_equal(acronym_table(af_row(summary))$bez_kodu, "100,0")
 })
 
-test_that("každá ze čtyř buněk 2×2 pod prahem skryje podíl, výskyty zůstanou", {
-  cases <- list(
-    oba = af_groups(oba = 9L), jen_zkratka = af_groups(jen_zkratka = 9L, repeats = 70L),
-    jen_kod = af_groups(jen_kod = 9L), zadne = af_groups(zadne = 9L)
-  )
-  for (name in names(cases)) {
-    summary <- af_summary(cases[[name]])
-    af <- af_row(summary)
-
-    expect_true(af$skryto, info = name)
-    expect_true(is.na(af$podil), info = name)
-    expect_gt(af$vyskyty, SHARE_MIN_OCCURRENCES - 1)
-    expect_equal(acronym_table(summary)$bez_kodu[summary$zkratka == "AF"], "–", info = name)
-  }
-})
-
-test_that("zkratka s 35 výskyty má podíl skrytý, i když všechny buňky jsou aspoň 10", {
-  summary <- af_summary(af_groups(oba = 25L, jen_zkratka = 10L, repeats = 1L))
-  af <- af_row(summary)
-
-  expect_equal(af$vyskyty, 35)
-  expect_true(af$skryto)
-  expect_true(is.na(af$podil))
-})
-
-test_that("hranice výskytů: 999 skryje podíl, 1 000 ho zobrazí", {
-  repeats <- function(last) c(rep(50L, 19L), last)
-  below <- af_row(af_summary(af_groups(repeats = repeats(49L))))
-  at <- af_row(af_summary(af_groups(repeats = repeats(50L))))
-
-  expect_equal(below$vyskyty, SHARE_MIN_OCCURRENCES - 1)
-  expect_true(below$skryto)
-  expect_equal(at$vyskyty, SHARE_MIN_OCCURRENCES)
-  expect_false(at$skryto)
-})
-
-test_that("výskyty 1–9 se v tabulce zobrazí jako < 10", {
+test_that("výskyty zkratek se v tabulce zobrazí přesně", {
   summary <- data.frame(
     zkratka = c("A", "B", "C", "D", "E"), label_cs = "x", vyskyty = c(0, 5, 9, 10, 1500),
     podil = NA_real_, stringsAsFactors = FALSE
   )
 
-  expect_equal(
-    acronym_table(summary)$vyskyty,
-    c("0", paste0("<", NBSP, "10"), paste0("<", NBSP, "10"), "10", paste0("1", NBSP, "500"))
-  )
+  expect_equal(acronym_table(summary)$vyskyty, c("0", "5", "9", "10", "1\u00a0500"))
 })
 
-test_that("souhrn a tabulka zkratek nemají sloupec s počtem zpráv a věta neuvádí počty buněk", {
+test_that("souhrn a tabulka zkratek zachovají požadované sloupce a pořadí", {
   summary <- af_summary(af_groups(jen_kod = 9L))
 
-  expect_equal(names(summary), c("zkratka", "kandidat", "label_cs", "vyskyty", "podil", "skryto"))
+  expect_equal(names(summary), c("zkratka", "kandidat", "label_cs", "vyskyty", "podil"))
   expect_equal(names(acronym_table(summary)), c("zkratka", "label_cs", "vyskyty", "bez_kodu"))
   expect_equal(acronym_table(summary)$zkratka, sort(acronym_table(summary)$zkratka))
-  expect_true(all(summary$skryto[summary$zkratka != "AF"]))
-  expect_no_match(acronym_text(summary), "\\b9\\b")
 })
 
-test_that("acronym_summary nad prázdným korpusem nespadne a věta nelze posoudit", {
+test_that("nulové výskyty a jmenovatel dají nedefinovaný podíl a vlastní větu", {
+  summary <- af_summary(af_groups(oba = 0L, jen_zkratka = 0L, jen_kod = 1L, zadne = 99L))
+  af <- af_row(summary)
+
+  expect_equal(af$vyskyty, 0)
+  expect_true(is.na(af$podil))
+  expect_equal(acronym_table(af)$bez_kodu, "–")
+  expect_match(acronym_text(summary), "zkratka nemá výskyt", fixed = TRUE)
+})
+
+test_that("acronym_summary nad prázdným korpusem nespadne", {
   summary <- af_summary(list(texts = character(), codes = character()))
 
   expect_equal(nrow(summary), length(corpus_acronyms(MODULE, PATH)))
-  expect_true(all(summary$skryto))
+  expect_true(all(is.na(summary$podil)))
   expect_equal(acronym_table(summary)$vyskyty, rep("0", nrow(summary)))
-  expect_match(acronym_text(summary), "nelze posoudit")
+  expect_match(acronym_text(summary), "zkratka nemá výskyt", fixed = TRUE)
 })
 
-test_that("acronym_text srovnává AF s mediánem ostatních zkratek a jmenuje skrytý podíl", {
+test_that("acronym_summary bez zkratek vrátí prázdný souhrn a tabulku", {
+  con <- mimic_con()
+  summary <- acronym_summary(con, character(), read_candidates(PATH))
+
+  expect_equal(names(summary), c("zkratka", "kandidat", "label_cs", "vyskyty", "podil"))
+  expect_equal(nrow(acronym_table(summary)), 0L)
+  expect_equal(acronym_text(summary), paste("Podíl zpráv se zkratkou bez kódu diagnózy", UNDECIDABLE_TEXT))
+})
+
+test_that("acronym_text srovnává AF s mediánem ostatních zkratek", {
   base <- data.frame(
     zkratka = c("AF", "COPD", "DM", "CKD"), vyskyty = 10,
-    podil = c(0.5, 0.1, 0.3, 0.2), skryto = FALSE, stringsAsFactors = FALSE
+    podil = c(0.5, 0.1, 0.3, 0.2), stringsAsFactors = FALSE
   )
   expect_match(acronym_text(base), paste0("AF je bez kódu diagnózy 50,0", NBSP, "%, u ostatních zkratek v mediánu 20,0", NBSP, "%"))
 
-  hidden <- base
-  hidden$podil[1] <- NA_real_
-  expect_match(acronym_text(hidden), "nelze uvést")
-  expect_no_match(acronym_text(hidden), "50")
+  absent <- base
+  absent$podil[1] <- NA_real_
+  absent$vyskyty[1] <- 0
+  expect_match(acronym_text(absent), "zkratka nemá výskyt", fixed = TRUE)
 
   alone <- base
   alone$podil[-1] <- NA_real_
-  expect_match(acronym_text(alone), "ostatní zkratky nelze srovnat")
+  alone$vyskyty[-1] <- 0
+  expect_match(acronym_text(alone), "ostatní zkratky nemají výskyt", fixed = TRUE)
 })
 
 test_that("preprocessing_text skloňuje počty tokenů a uvádí změnu slovníku", {

@@ -8,6 +8,10 @@ METRICS_COLUMNS <- c(
 
 read_metrics <- function(path) read_contract_table(path, METRICS_COLUMNS)
 
+# Dostatek zpráv obou tříd chrání stabilitu metrik. Zrcadlo MIN_CELL
+# v src/mediparse/domain/cohort.py; práh se mění v obou souborech.
+METRIC_MIN_NOTES <- 10L
+
 METRIC_LABELS <- c(
   precision = "Přesnost", recall = "Úplnost", f1 = "F1",
   accuracy = "Správnost", roc_auc = "ROC AUC", pr_auc = "PR AUC"
@@ -29,18 +33,19 @@ diagnosis_labels <- function(keys, candidates_path) {
 }
 
 publishable_metrics <- function(metrics) {
-  # Práh hlídá skupiny vymezené diagnózou (pozitivní a negativní); buňky matice
-  # záměn dělí výstup modelu, ne atribut pacienta (AGENTS.md, MIMIC a DUA).
-  !is.na(dua_binary(metrics$test_positives, metrics$test_notes))
+  # Práh chrání stabilitu metrik při malém počtu pozitivních nebo negativních zpráv.
+  n <- metrics$test_positives
+  total <- metrics$test_notes
+  !is.na(n) & !is.na(total) &
+    n >= METRIC_MIN_NOTES & total - n >= METRIC_MIN_NOTES
 }
 
 metrics_table <- function(metrics, labels) {
   published <- publishable_metrics(metrics)
-  positives <- dua_binary(metrics$test_positives, metrics$test_notes)
   out <- data.frame(
     Diagnóza = labels,
     Zprávy = format_number(metrics$test_notes),
-    Pozitivní = number_text(positives),
+    Pozitivní = number_text(metrics$test_positives),
     check.names = FALSE
   )
   for (name in names(METRIC_LABELS)) {

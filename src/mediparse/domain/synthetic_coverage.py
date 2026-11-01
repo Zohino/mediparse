@@ -16,15 +16,10 @@ if TYPE_CHECKING:
     from mediparse.domain.icd import DiagnosisCodes
     from mediparse.domain.note_plan import NotePlan
 
-# Práh zveřejnění 10 + rezerva 5 pro rozdíl mezi plánem a detekcí zmínek v R.
-COMORBIDITY_NOTES: Final = 15
+# Skupina absent dá ICD+ bez zmínky (P(zmínka | ICD+) < 1), skupina negated
+# ICD+ jen s negací (P(tvrzení | ICD+) < P(zmínka | ICD+)); velikost skupin
+# zachováváme kvůli srovnatelnosti renderů.
 MENTION_NOTES: Final = 15
-# Mapy Quan v R comorbidity (tidy.codes = TRUE): rend a cpd jsou širší než
-# kandidáti CKD a CHOPN. Tyto kódy mimo předpony kandidátů odkrývají jejich rozdíl.
-_COMORBIDITY_WITNESSES: Final = {
-    Diagnosis.CKD: {IcdVersion.TEN: "N19", IcdVersion.NINE: "586"},
-    Diagnosis.COPD: {IcdVersion.TEN: "J45", IcdVersion.NINE: "4930"},
-}
 _NEGATED: Final = frozenset({MentionStatus.NEGATED, MentionStatus.FAMILY_HISTORY})
 
 
@@ -46,22 +41,14 @@ def coverage_diagnoses(
         Přidané kódy s navazujícím seq_num, bez změny vstupních řádků a labelů.
 
     Raises:
-        InvalidInputError: Skupina nemá dost zpráv, kód Charlsonu patří kandidátovi
-            nebo pneumonie nemá reprezentativní kód v použité verzi.
+        InvalidInputError: Skupina nemá dost zpráv nebo pneumonie nemá
+            reprezentativní kód v použité verzi.
     """
     ordered = sorted(plans, key=lambda plan: plan.note_id)
     versions = {
         row["hadm_id"]: IcdVersion(int(row["icd_version"])) for row in diagnoses
     }
     selected: list[tuple[NotePlan, IcdCode]] = []
-    for diagnosis, witnesses in _COMORBIDITY_WITNESSES.items():
-        eligible = [plan for plan in ordered if diagnosis not in plan.labels]
-        for plan in _first(eligible, COMORBIDITY_NOTES, diagnosis.value):
-            version = versions[hadm_of[plan.note_id]]
-            selected.append((
-                plan,
-                _comorbidity_code(witnesses[version], version, codes),
-            ))
     pneumonia = [plan for plan in ordered if Diagnosis.PNEUMONIA not in plan.labels]
     for group, predicate in (("negated", _only_negated), ("absent", _unmentioned)):
         eligible = [plan for plan in pneumonia if predicate(plan)]
@@ -115,14 +102,6 @@ def _diagnosis_rows(
             "icd_version": str(code.version.value),
         })
     return result
-
-
-def _comorbidity_code(code: str, version: IcdVersion, codes: DiagnosisCodes) -> IcdCode:
-    icd = IcdCode(version=version, code=code)
-    if codes.diagnosis_of(icd) is not None:
-        msg = f"Kód pokrytí {code} ICD-{version.value} patří kandidátovi pětice."
-        raise InvalidInputError(msg)
-    return icd
 
 
 def _pneumonia_code(version: IcdVersion, codes: DiagnosisCodes) -> IcdCode:

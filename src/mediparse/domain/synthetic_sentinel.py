@@ -13,16 +13,9 @@ if TYPE_CHECKING:
 
     from mediparse.domain.mimic_table import TableShape
 
-RARE_ROWS: Final = 2
 _KEY_COLUMNS: Final = frozenset({"subject_id", "hadm_id", "note_id"})
 _KEY_OWNERS: Final = {"subject_id": "patients", "hadm_id": "admissions"}
 _REFERENCES: Final = {("mimic-iv-bhc", "note_id"): "discharge"}
-# Vzácné řádky nemají zprávu v discharge, takže jejich prefixy do výstupů EDA
-# nedosáhnou. Práh popisků kódů dnes ověřuje testthat v test-diagnoses.R.
-_RARE_WITNESSES: Final = frozenset({
-    ("diagnoses_icd", "icd_version"),
-    ("diagnoses_icd", "icd_code"),
-})
 
 
 def sentinel_tables(
@@ -31,7 +24,7 @@ def sentinel_tables(
     prefix: str,
     text_chars: int,
 ) -> dict[str, list[dict[str, str]]]:
-    """Doplní tabulky manifestu, přeznačí klíče a vloží svědky úniku a potlačení.
+    """Doplní tabulky manifestu, přeznačí klíče a vloží svědky úniku textu a popisků.
 
     Returns:
         Nové řádky všech tabulek se sloupci v pořadí manifestu.
@@ -83,19 +76,7 @@ def _source_rows(
 ) -> list[dict[str, str]]:
     if table not in corpus:
         return [{key: row[key] for key in _KEY_COLUMNS} for row in corpus["discharge"]]
-    rows = [dict(row) for row in corpus[table]]
-    if table in {"patients", "admissions", "diagnoses_icd"} and rows:
-        for index in range(RARE_ROWS):
-            rare = {
-                column: value
-                for column, value in rows[0].items()
-                if (table, column) not in _RARE_WITNESSES
-            }
-            rare["subject_id"] = f"rare-subject-{index}"
-            if table != "patients":
-                rare["hadm_id"] = f"rare-admission-{index}"
-            rows.append(rare)
-    return rows
+    return [dict(row) for row in corpus[table]]
 
 
 def _decorate_row(
