@@ -198,7 +198,7 @@ def corpus_tables(
         InvalidInputError: Plány neodpovídají zprávám, pohlaví pacienta se liší,
             chybí skupina pokrytí nebo kód nepatří do očekávané skupiny.
     """
-    _plans_for_notes(plans, notes)
+    _validate_plans_for_notes(plans, notes)
     tables, versions = _mimic_core(notes, codes)
     # Kódy bez labelu jsou svědci EDA; smoketest dál používá jen fakta plánu.
     tables["diagnoses_icd"].extend(
@@ -228,10 +228,10 @@ def corpus_tables(
     return tables
 
 
-def _plans_for_notes(
+def _validate_plans_for_notes(
     plans: Sequence[NotePlan],
     notes: Sequence[InputNote],
-) -> dict[str, NotePlan]:
+) -> None:
     by_note = {plan.note_id: plan for plan in plans}
     note_ids = {note.note_id for note in notes}
     if without_plan := note_ids - by_note.keys():
@@ -246,7 +246,6 @@ def _plans_for_notes(
         if sex is not plan.sex:
             msg = f"Pacient {plan.subject_id} má v plánech různé pohlaví."
             raise InvalidInputError(msg)
-    return by_note
 
 
 def _admission(row: Mapping[str, str], patient_index: int) -> dict[str, str]:

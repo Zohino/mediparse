@@ -175,3 +175,12 @@ def test_manual_bhc_rows() -> None:
 def test_repository_bhc_rows_count() -> None:
     """Plány repozitáře obsahují 357 zpráv s BHC."""
     assert len(repository_tables()["mimic-iv-bhc"]) == EXPECTED_TARGETS
+
+
+def test_bhc_row_without_plan_is_refused() -> None:
+    """Zpráva bez protějšku v plánech má doménovou diagnostiku."""
+    discharge = [{"note_id": "synthetic-unplanned", "text": TEXT}]
+    with pytest.raises(
+        InvalidInputError, match=r"Zprávy bez plánu: synthetic-unplanned\."
+    ):
+        bhc_rows((), discharge, LEXICON)

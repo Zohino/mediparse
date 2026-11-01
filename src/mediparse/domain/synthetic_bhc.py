@@ -37,10 +37,14 @@ def bhc_rows(
         Řádky note_id a target; varianta řezu je pořadí mezi zprávami s BHC.
 
     Raises:
-        InvalidInputError: Text postrádá hlavičku slíbenou plánem nebo má prázdný target.
+        InvalidInputError: Zpráva nemá plán, text postrádá hlavičku slíbenou plánem
+            nebo má prázdný target.
     """
     by_note = {plan.note_id: plan for plan in plans}
     texts = {row["note_id"]: row["text"] for row in discharge}
+    if without_plan := texts.keys() - by_note.keys():
+        msg = f"Zprávy bez plánu: {', '.join(sorted(without_plan))}."
+        raise InvalidInputError(msg)
     targets = []
     for note_id in sorted(texts):
         target = bhc_target(by_note[note_id], texts[note_id], lexicon, len(targets))
