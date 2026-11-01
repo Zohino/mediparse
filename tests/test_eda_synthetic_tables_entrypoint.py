@@ -91,3 +91,28 @@ def test_invalid_last_table_leaves_no_partial_output(tmp_path: Path) -> None:
     out = tmp_path / "tables"
     assert run(_arguments(out, manifest=path)) is ExitCode.REFUSED
     assert not out.exists()
+
+
+@pytest.mark.parametrize("missing", ["column", "table"])
+def test_manifest_omitting_corpus_facts_leaves_no_output(
+    tmp_path: Path,
+    missing: str,
+) -> None:
+    """Odmítnutí ztráty korpusového sloupce nebo tabulky předchází všem zápisům."""
+    manifest = json.loads(REPOSITORY_MIMIC_MANIFEST.read_text(encoding="utf-8"))
+    if missing == "column":
+        admission = next(
+            table
+            for table in manifest["tables"]
+            if table["file"] == "admissions.csv.gz"
+        )
+        admission["columns"].remove("race")
+    else:
+        manifest["tables"] = [
+            table for table in manifest["tables"] if table["file"] != "patients.csv.gz"
+        ]
+    path = tmp_path / "manifest.json"
+    path.write_text(json.dumps(manifest), encoding="utf-8")
+    out = tmp_path / "tables"
+    assert run(_arguments(out, manifest=path)) is ExitCode.REFUSED
+    assert not out.exists()

@@ -163,3 +163,21 @@ def test_invalid_input_is_refused(*, empty_prefix: bool) -> None:
         sentinel_tables(
             repository_tables(), shapes, "" if empty_prefix else PREFIX, TEXT_CHARS
         )
+
+
+def test_corpus_column_outside_manifest_is_refused(
+    corpus: dict[str, list[dict[str, str]]],
+) -> None:
+    """Korpusový sloupec mimo manifest se nesmí tiše zahodit."""
+    corpus["patients"][0]["unexpected"] = "synthetic"
+    with pytest.raises(InvalidInputError, match=r"patients.*unexpected"):
+        sentinel_tables(corpus, SHAPES, PREFIX, TEXT_CHARS)
+
+
+def test_corpus_table_outside_manifest_is_refused(
+    corpus: dict[str, list[dict[str, str]]],
+) -> None:
+    """Korpusová tabulka mimo manifest se nesmí tiše zahodit."""
+    shapes = {name: shape for name, shape in SHAPES.items() if name != "patients"}
+    with pytest.raises(InvalidInputError, match="patients"):
+        sentinel_tables(corpus, shapes, PREFIX, TEXT_CHARS)

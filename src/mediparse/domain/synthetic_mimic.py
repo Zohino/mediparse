@@ -8,7 +8,6 @@ from typing import TYPE_CHECKING, Final
 from mediparse.domain.icd import IcdCode, IcdVersion
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.mimic_table import TableShape
 from mediparse.domain.note import order_of
 from mediparse.domain.note_structure import Sex
 from mediparse.domain.synthetic_bhc import bhc_target
@@ -18,6 +17,7 @@ if TYPE_CHECKING:
 
     from mediparse.domain.icd import DiagnosisCodes
     from mediparse.domain.language import Language
+    from mediparse.domain.mimic_table import TableShape
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.section_headers import SectionLexicon
 
@@ -101,6 +101,15 @@ def synthetic_mimic_rows(
         InvalidInputError: Chybí tvar tabulky, sloupec není známý, výplň patří
             do pětice nebo diagnóza nemá předponu v použité verzi ICD.
     """
+    tables, _ = _mimic_core(notes, codes)
+    _validate_shapes(shapes, tables)
+    return tables
+
+
+def _mimic_core(
+    notes: Sequence[InputNote],
+    codes: DiagnosisCodes,
+) -> tuple[dict[str, list[dict[str, str]]], dict[int, IcdVersion]]:
     for version, filler in FILLER_CODES.items():
         if codes.diagnosis_of(IcdCode(version=version, code=filler)) is not None:
             msg = f"Výplňový kód ICD-{version.value} patří do diagnózy pětice."
@@ -112,8 +121,7 @@ def synthetic_mimic_rows(
         version = versions[note.subject_id]
         tables["discharge"].append(_discharge(note, hadm))
         tables["diagnoses_icd"].extend(_diagnoses(note, hadm, version, codes))
-    _validate_shapes(shapes, tables)
-    return tables
+    return tables, versions
 
 
 def _patient_versions(notes: Sequence[InputNote]) -> dict[int, IcdVersion]:
@@ -190,16 +198,7 @@ def corpus_tables(
     Raises:
         InvalidInputError: Kódy neuchovají labely nebo chybí hlavička slíbená plánem.
     """
-    # EDA nepožaduje projekci jádra; sloupce manifestu doplňuje až vrstva kanárku.
-    tables = synthetic_mimic_rows(
-        notes,
-        codes,
-        {
-            name: TableShape(records=0, columns=())
-            for name in ("discharge", "diagnoses_icd")
-        },
-    )
-    versions = _patient_versions(notes)
+    tables, versions = _mimic_core(notes, codes)
     by_note = {plan.note_id: plan for plan in plans}
     by_subject = {plan.subject_id: plan for plan in plans}
     indices = {subject: index for index, subject in enumerate(sorted(versions))}

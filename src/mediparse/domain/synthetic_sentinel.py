@@ -37,11 +37,13 @@ def sentinel_tables(
         Nové řádky všech tabulek se sloupci v pořadí manifestu.
 
     Raises:
-        InvalidInputError: Prefix je prázdný nebo tabulka nemá sloupce.
+        InvalidInputError: Prefix je prázdný, tabulka nemá sloupce nebo manifest
+            neobsahuje korpusovou tabulku či její sloupec.
     """
     if not prefix:
         msg = "Prefix syntetických buněk nesmí být prázdný."
         raise InvalidInputError(msg)
+    _validate_corpus(corpus, shapes)
     tables = {}
     for table, shape in shapes.items():
         if not shape.columns:
@@ -59,6 +61,21 @@ def sentinel_tables(
             for index, row in enumerate(rows)
         ]
     return tables
+
+
+def _validate_corpus(
+    corpus: Mapping[str, Sequence[Mapping[str, str]]],
+    shapes: Mapping[str, TableShape],
+) -> None:
+    if missing := corpus.keys() - shapes.keys():
+        msg = f"V manifestu chybí korpusové tabulky: {', '.join(sorted(missing))}."
+        raise InvalidInputError(msg)
+    for table, rows in corpus.items():
+        columns = set(shapes[table].columns)
+        unknown = {column for row in rows for column in row if column not in columns}
+        if unknown:
+            msg = f"Tabulka {table} má sloupce mimo manifest: {', '.join(sorted(unknown))}."
+            raise InvalidInputError(msg)
 
 
 def _source_rows(
