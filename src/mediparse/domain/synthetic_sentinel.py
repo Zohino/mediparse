@@ -18,8 +18,7 @@ _KEY_COLUMNS: Final = frozenset({"subject_id", "hadm_id", "note_id"})
 _KEY_OWNERS: Final = {"subject_id": "patients", "hadm_id": "admissions"}
 _REFERENCES: Final = {("mimic-iv-bhc", "note_id"): "discharge"}
 # Vzácné řádky nemají zprávu v discharge, takže jejich prefixy do výstupů EDA
-# nedosáhnou. Práh popisků kódů dnes ověřuje testthat v test-diagnoses.R;
-# další využití těchto svědků řeší S100b.
+# nedosáhnou. Práh popisků kódů dnes ověřuje testthat v test-diagnoses.R.
 _RARE_WITNESSES: Final = frozenset({
     ("diagnoses_icd", "icd_version"),
     ("diagnoses_icd", "icd_code"),
