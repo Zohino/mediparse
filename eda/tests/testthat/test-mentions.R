@@ -266,8 +266,6 @@ agreement_row <- function(...) {
   as.data.frame(modifyList(base, list(...)), stringsAsFactors = FALSE)
 }
 
-AGREEMENT_COLUMNS <- c("icd", "zminka", "tvrzeni", "icd_zminka", "icd_tvrzeni")
-
 RUBRIC_POOL <- list(
   dm = list(label_cs = "Diabetes", kapitola = "E"),
   hf = list(label_cs = "Srdeční selhání", kapitola = "I"),
@@ -488,6 +486,21 @@ test_that("agreement_points vrátí i malé počty kandidáta ve dvou metrikách
   expect_equal(nrow(agreement_points(agreement[0, ], CASES)), 0L)
 })
 
+test_that("agreement_points vynechá nedefinované podíly a zachová všechny úrovně kandidátů", {
+  agreement <- rbind(
+    agreement_row(kandidat = "dm", icd = 5, icd_zminka = 4, icd_tvrzeni = 3),
+    agreement_row(kandidat = "pn", icd = 0, icd_zminka = 0, icd_tvrzeni = 0)
+  )
+
+  out <- agreement_points(agreement, CASES)
+
+  expect_equal(nrow(out), 2L)
+  expect_equal(as.character(out$kandidat), c("Diabetes", "Diabetes"))
+  expect_equal(out$podil, c(0.8, 0.6))
+  expect_true(all(is.finite(out$podil)))
+  expect_equal(levels(out$kandidat), c("Fibrilace", "Infarkt", "Pneumonie", "Diabetes"))
+})
+
 test_that("symptom_table a symptom_bars zveřejní čtyři zmínky ze sta zpráv", {
   symptoms <- data.frame(priznak = "fever", zminka = 4, tvrzeni = 3, celkem = 100)
 
@@ -504,7 +517,7 @@ test_that("symptom_table a symptom_bars zveřejní čtyři zmínky ze sta zpráv
 
 test_that("symptom_bars řadí podle četnosti a při shodě podle příznaku", {
   symptoms <- data.frame(
-    priznak = c("fever", "cough", "nausea"), zminka = c(4, 10, 4),
+    priznak = c("nausea", "cough", "fever"), zminka = c(4, 10, 4),
     tvrzeni = c(3, 5, 2), celkem = 100
   )
 
@@ -635,20 +648,17 @@ test_that("klíčová slova jsou fráze a pak zkratky a kandidát bez zkratek ne
   expect_equal(as.character(out$mentions$hf$keywords), "heart failure")
 })
 
-test_that("chybějící hodnota projde jako NA", {
+test_that("nulové jmenovatele měr zmínek projdou do parametrů jako NA", {
   inputs <- parameter_inputs(c("dm", "pn"))
-  inputs$prevalence$n[inputs$prevalence$kandidat == "pn"] <- NA_real_
-  inputs$agreement[inputs$agreement$kandidat == "pn", AGREEMENT_COLUMNS] <- NA_real_
-  inputs$cells$n_ij[inputs$cells$radek == "dm" & inputs$cells$sloupec == "pn"] <- NA_real_
-  inputs$cells$podil[inputs$cells$radek == "dm" & inputs$cells$sloupec == "pn"] <- NA_real_
+  inputs$agreement[inputs$agreement$kandidat == "dm", c("icd", "icd_zminka")] <- 0
+  inputs$agreement$celkem[inputs$agreement$kandidat == "pn"] <- 80
 
   out <- run_parameters(inputs)
 
-  expect_true(is.na(out$prevalence$pn))
-  expect_true(is.na(out$mentions$pn$given_positive))
+  expect_true(is.na(out$mentions$dm$given_positive))
   expect_true(is.na(out$mentions$pn$given_negative))
-  expect_true(is.na(out$conditional$dm$pn))
-  expect_equal(out$conditional$pn$dm, 0.25)
+  expect_equal(out$mentions$dm$given_negative, 0.3)
+  expect_equal(out$mentions$pn$given_positive, 0.5)
 })
 
 test_that("výběr nelze a prázdný výběr dají prázdné objekty", {

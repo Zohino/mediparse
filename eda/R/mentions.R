@@ -250,6 +250,7 @@ agreement_table <- function(agreement, candidates) {
 }
 
 agreement_points <- function(agreement, candidates) {
+  agreement <- agreement[agreement$icd > 0, , drop = FALSE]
   labels <- candidate_labels(names(candidates), candidates)
   metrics <- c(zminka = "P(zmínka | ICD+)", tvrzeni = "P(tvrzení | ICD+)")
   data.frame(
