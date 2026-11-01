@@ -1,6 +1,6 @@
 sample_table <- function() {
   data.frame(
-    tabulka = c("diagnoses_icd", DUA_OTHER),
+    tabulka = c("diagnoses_icd", "patients"),
     popis = c("a & b 100%", "x"),
     n = c(paste0("1", NBSP, "234"), "5"),
     stringsAsFactors = FALSE
@@ -63,16 +63,16 @@ test_that("export_table escapuje buňky i hlavičku a NBSP projde", {
   expect_match(tex, paste0("1", NBSP, "234"), fixed = TRUE)
 })
 
-test_that("code obalí hodnoty v LaTeXu texttt a v kable backticky, DUA_OTHER nechá", {
+test_that("code obalí hodnoty v LaTeXu texttt a v kable backticky", {
   dir <- withr::local_tempdir()
   md <- export_sample(dir, code = "tabulka")
   tex <- read_tex(dir, "tbl-a")
   md_text <- paste(as.character(md), collapse = "\n")
 
   expect_match(tex, "\\texttt{diagnoses\\_icd}", fixed = TRUE)
-  expect_false(grepl("texttt{ostatní", tex, fixed = TRUE))
+  expect_match(tex, "\\texttt{patients}", fixed = TRUE)
   expect_match(md_text, "`diagnoses_icd`", fixed = TRUE)
-  expect_false(grepl(paste0("`", DUA_OTHER), md_text, fixed = TRUE))
+  expect_match(md_text, "`patients`", fixed = TRUE)
 })
 
 test_that("widths vytvoří p sloupce podle zarovnání, bez widths prosté l/r", {
@@ -319,4 +319,16 @@ test_that("export_json odmítne neplatný label a nic nezapíše", {
   expect_error(export_json(list(a = 1), label = "Špatný label", dir = dir), "label")
   expect_error(export_json(list(a = 1), label = NULL, dir = dir), "label")
   expect_length(list.files(dir), 0L)
+})
+
+test_that("export_table zachová prázdnou tabulku i při formátování kódů", {
+  dir <- withr::local_tempdir()
+  md <- export_table(
+    sample_table()[0, ],
+    col.names = c("Tabulka", "Popis", "Záznamů"),
+    align = "llr", code = "tabulka", label = "tbl-empty", widths = NULL, dir = dir
+  )
+
+  expect_length(md, 2L)
+  expect_false(grepl("\\texttt{}", read_tex(dir, "tbl-empty"), fixed = TRUE))
 })

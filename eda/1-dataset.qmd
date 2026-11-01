@@ -54,7 +54,7 @@ Práce používá tři projekty PhysioNetu. MIMIC-IV, verze 3.1 [@mimiciv], obsa
 Data podléhají DUA. Dokument dodržuje tato pravidla:
 
 - řádková data a texty zpráv se nevypisují,
-- výsledky jsou agregáty; skupiny pacientů vymezené kvaziidentifikátorem (například věkem, pohlavím, obdobím nebo diagnózou) a kategorie, jejichž popisek je hodnota z dat, se pod deset záznamů sloučí do řádku „ostatní (n < 10)“ a jejich popisky se nezobrazí; práh je pravidlo práce, DUA malé počty neupravuje,
+- výsledky jsou agregáty; počty a podíly skupin pacientů vymezených kvaziidentifikátorem (například věkem, pohlavím, obdobím nebo diagnózou) se zveřejňují přesně, protože DUA malé počty neupravuje a pacienti se neidentifikují. Práh deseti zpráv platí pro popisky z textu nebo hodnoty z dat mimo zveřejněný číselník MIMIC (hlavičky, n-gramy, zkratky, kódy ICD a jejich názvy); hlavičky a n-gramy navíc potřebují aspoň 1 % korpusu,
 - metriky korpusu a textu, například počty záznamů tabulek, nepopisují skupiny pacientů, a proto se uvádějí přesně,
 - skutečná data zpracovává jen autor mimo automatizované nástroje; automatizovaná kontrola běží nad syntetickými tabulkami stejného tvaru a ověřuje, že jejich obsah neunikl do výstupu.
 
