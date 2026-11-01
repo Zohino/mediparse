@@ -1,5 +1,5 @@
 BHC_TABLE <- "mimic-iv-bhc"
-# Protějšek BHC_SECTION v src/mediparse/domain/synthetic_discharge.py (generátor syntetického
+# Protějšek BHC_SECTION v src/mediparse/domain/synthetic_bhc.py (generátor syntetického
 # targetu BHC); změna klíče se dělá v obou souborech.
 BHC_SECTION <- "hospital_course"
 

@@ -9,6 +9,8 @@ from mediparse.domain.icd import IcdCode, IcdVersion
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.note import order_of
+from mediparse.domain.note_structure import Sex
+from mediparse.domain.synthetic_bhc import bhc_target
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -17,6 +19,7 @@ if TYPE_CHECKING:
     from mediparse.domain.language import Language
     from mediparse.domain.mimic_table import TableShape
     from mediparse.domain.note_plan import NotePlan
+    from mediparse.domain.section_headers import SectionLexicon
 
 # Bez kódu ICD by filtr has_icd vyřadil zprávy bez labelu pětice.
 FILLER_CODES: Final[Mapping[IcdVersion, str]] = {
@@ -24,7 +27,8 @@ FILLER_CODES: Final[Mapping[IcdVersion, str]] = {
     IcdVersion.TEN: "Z0000",
 }
 _FIRST_ADMISSION: Final = 20000000
-_TIMESTAMP: Final = "2150-01-01 00:00:00"
+_TIMESTAMP: Final = "2155-01-01 00:00:00"
+_ERAS: Final = {IcdVersion.NINE: "2008 - 2010", IcdVersion.TEN: "2017 - 2019"}
 
 
 class UnpairedNotesError(InvalidInputError):
@@ -97,19 +101,35 @@ def synthetic_mimic_rows(
         InvalidInputError: Chybí tvar tabulky, sloupec není známý, výplň patří
             do pětice nebo diagnóza nemá předponu v použité verzi ICD.
     """
+    tables, _ = _mimic_core(notes, codes)
+    _validate_shapes(shapes, tables)
+    return tables
+
+
+def _mimic_core(
+    notes: Sequence[InputNote],
+    codes: DiagnosisCodes,
+) -> tuple[dict[str, list[dict[str, str]]], dict[int, IcdVersion]]:
     for version, filler in FILLER_CODES.items():
         if codes.diagnosis_of(IcdCode(version=version, code=filler)) is not None:
             msg = f"Výplňový kód ICD-{version.value} patří do diagnózy pětice."
             raise InvalidInputError(msg)
     tables: dict[str, list[dict[str, str]]] = {"discharge": [], "diagnoses_icd": []}
+    versions = _patient_versions(notes)
     for index, note in enumerate(sorted(notes, key=lambda note: note.note_id)):
         hadm = str(_FIRST_ADMISSION + index)
-        # Střídání verzí procvičí obě mapování předpon ve skutečné kohortě.
-        version = IcdVersion.TEN if index % 2 == 0 else IcdVersion.NINE
+        version = versions[note.subject_id]
         tables["discharge"].append(_discharge(note, hadm))
         tables["diagnoses_icd"].extend(_diagnoses(note, hadm, version, codes))
-    _validate_shapes(shapes, tables)
-    return tables
+    return tables, versions
+
+
+def _patient_versions(notes: Sequence[InputNote]) -> dict[int, IcdVersion]:
+    # Období pacienta i všechny jeho hospitalizace musí sdílet jednu verzi ICD.
+    return {
+        subject: IcdVersion.TEN if index % 2 == 0 else IcdVersion.NINE
+        for index, subject in enumerate(sorted({note.subject_id for note in notes}))
+    }
 
 
 def _validate_shapes(
@@ -162,3 +182,97 @@ def _diagnoses(
         }
         for seq, code in enumerate(icd_codes, start=1)
     ]
+
+
+def corpus_tables(
+    plans: Sequence[NotePlan],
+    notes: Sequence[InputNote],
+    codes: DiagnosisCodes,
+    lexicon: SectionLexicon,
+) -> dict[str, list[dict[str, str]]]:
+    """Doplní jádro smoketestu o demografii, číselník a nezávislý target BHC.
+
+    Returns:
+        Šest tabulek obsahujících pouze sloupce známé z korpusu.
+
+    Raises:
+        InvalidInputError: Plány neodpovídají zprávám, pohlaví pacienta se liší,
+            kódy neuchovají labely nebo chybí hlavička slíbená plánem.
+    """
+    by_note = _plans_for_notes(plans, notes)
+    tables, versions = _mimic_core(notes, codes)
+    by_subject = {plan.subject_id: plan for plan in plans}
+    indices = {subject: index for index, subject in enumerate(sorted(versions))}
+    tables["patients"] = [
+        {
+            "subject_id": str(subject),
+            "gender": {Sex.FEMALE: "F", Sex.MALE: "M"}[by_subject[subject].sex],
+            "anchor_age": str(15 + 10 * (indices[subject] % 6)),
+            "anchor_year": "2150",
+            "anchor_year_group": _ERAS[versions[subject]],
+        }
+        for subject in sorted(versions)
+    ]
+    tables["admissions"] = [
+        _admission(row, indices[int(row["subject_id"])]) for row in tables["discharge"]
+    ]
+    tables["d_icd_diagnoses"] = _dictionary(tables["diagnoses_icd"], codes)
+    targets = []
+    for note in sorted(notes, key=lambda note: note.note_id):
+        target = bhc_target(by_note[note.note_id], note.text, lexicon, len(targets))
+        if target is not None:
+            targets.append({"note_id": note.note_id, "target": target})
+    tables["mimic-iv-bhc"] = targets
+    return tables
+
+
+def _plans_for_notes(
+    plans: Sequence[NotePlan],
+    notes: Sequence[InputNote],
+) -> dict[str, NotePlan]:
+    by_note = {plan.note_id: plan for plan in plans}
+    note_ids = {note.note_id for note in notes}
+    if without_plan := note_ids - by_note.keys():
+        msg = f"Zprávy bez plánu: {', '.join(sorted(without_plan))}."
+        raise InvalidInputError(msg)
+    if without_note := by_note.keys() - note_ids:
+        msg = f"Plány bez zprávy: {', '.join(sorted(without_note))}."
+        raise InvalidInputError(msg)
+    sexes: dict[int, Sex] = {}
+    for plan in plans:
+        sex = sexes.setdefault(plan.subject_id, plan.sex)
+        if sex is not plan.sex:
+            msg = f"Pacient {plan.subject_id} má v plánech různé pohlaví."
+            raise InvalidInputError(msg)
+    return by_note
+
+
+def _admission(row: Mapping[str, str], patient_index: int) -> dict[str, str]:
+    index = patient_index % 2
+    return {
+        "subject_id": row["subject_id"],
+        "hadm_id": row["hadm_id"],
+        "admittime": _TIMESTAMP,
+        "insurance": ("Medicare", "Private")[index],
+        "marital_status": ("MARRIED", "SINGLE")[index],
+        "race": ("WHITE", "BLACK/AFRICAN AMERICAN")[index],
+        "language": ("English", "Spanish")[index],
+    }
+
+
+def _dictionary(
+    rows: Sequence[Mapping[str, str]], codes: DiagnosisCodes
+) -> list[dict[str, str]]:
+    pairs = sorted({(row["icd_code"], row["icd_version"]) for row in rows})
+    result = []
+    for code, version in pairs:
+        diagnosis = codes.diagnosis_of(
+            IcdCode(version=IcdVersion(int(version)), code=code)
+        )
+        title = diagnosis.value if diagnosis is not None else "filler"
+        result.append({
+            "icd_code": code,
+            "icd_version": version,
+            "long_title": f"{title} ICD-{version}",
+        })
+    return result

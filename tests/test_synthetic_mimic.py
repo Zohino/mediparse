@@ -21,9 +21,11 @@ from mediparse.domain.synthetic_mimic import (
     input_notes,
     synthetic_mimic_rows,
 )
+from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
 from mediparse.infrastructure.mimic_inventory import read_manifest
 from tests.cohort_support import CODES, PREFIXES
-from tests.support import REPOSITORY_MIMIC_MANIFEST
+from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES, REPOSITORY_MIMIC_MANIFEST
+from tests.synthetic_support import NOTES
 
 if TYPE_CHECKING:
     from mediparse.domain.note_plan import NotePlan
@@ -88,8 +90,8 @@ def test_rows_have_fixed_identity_values_and_diagnosis_order() -> None:
         "hadm_id": "20000000",
         "note_type": "DS",
         "note_seq": "10",
-        "charttime": "2150-01-01 00:00:00",
-        "storetime": "2150-01-01 00:00:00",
+        "charttime": "2155-01-01 00:00:00",
+        "storetime": "2155-01-01 00:00:00",
         "text": "Syntetická zpráva 0.",
     }
     assert tables["diagnoses_icd"] == [
@@ -266,3 +268,26 @@ def test_empty_corpus_is_refused() -> None:
         UnpairedNotesError, match="Korpus nemá v jazyce en žádnou zprávu"
     ):
         input_notes((), {}, Language.EN)
+
+
+def test_versions_follow_patients_in_fixture_f() -> None:
+    """A2: dvě přijetí první pacientky mají ICD-10, druhý pacient ICD-9."""
+    tables = synthetic_mimic_rows(
+        NOTES, load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES), SHAPES
+    )
+    by_hadm = {
+        row["hadm_id"]: [
+            r for r in tables["diagnoses_icd"] if r["hadm_id"] == row["hadm_id"]
+        ]
+        for row in tables["discharge"]
+    }
+    assert [{r["icd_version"] for r in rows} for rows in by_hadm.values()] == [
+        {"10"},
+        {"10"},
+        {"9"},
+    ]
+    assert [(r["seq_num"], r["icd_code"]) for r in by_hadm["20000002"]] == [
+        ("1", "V700"),
+        ("2", "491"),
+        ("3", "249"),
+    ]

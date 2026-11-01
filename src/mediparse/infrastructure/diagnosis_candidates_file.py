@@ -119,19 +119,3 @@ def _selected[T: BaseModel](
         for diagnosis in Diagnosis
         if diagnosis.value in candidates
     }
-
-
-def load_diagnosis_keywords(path: Path) -> tuple[str, ...]:
-    """Přečte klíčová slova diagnóz pětice v pořadí ``Diagnosis``; ostatní kandidáty ignoruje.
-
-    Returns:
-        Všechna ``keywords_en`` pětice, diagnózu po diagnóze.
-    """
-    return parse_file(path, _parse_keywords)
-
-
-def _parse_keywords(text: str) -> tuple[str, ...]:
-    vocabulary = _vocabulary(text)
-    return tuple(
-        keyword for names in vocabulary.names.values() for keyword in names.keywords_en
-    )
