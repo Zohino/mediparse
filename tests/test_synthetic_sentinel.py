@@ -9,6 +9,7 @@ import pytest
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.mimic_table import TableShape
+from mediparse.domain.synthetic_bhc import bhc_rows
 from mediparse.domain.synthetic_mimic import corpus_tables
 from mediparse.domain.synthetic_sentinel import sentinel_tables
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
@@ -34,12 +35,13 @@ def corpus(request: pytest.FixtureRequest) -> dict[str, list[dict[str, str]]]:
     """
     if request.param == "repository":
         return repository_tables()
-    return corpus_tables(
+    tables = corpus_tables(
         EDA_PLANS,
         EDA_NOTES,
         load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES),
-        LEXICON,
     )
+    tables["mimic-iv-bhc"] = bhc_rows(EDA_PLANS, tables["discharge"], LEXICON)
+    return tables
 
 
 def _sources(

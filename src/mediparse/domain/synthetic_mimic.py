@@ -10,7 +10,6 @@ from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.note import order_of
 from mediparse.domain.note_structure import Sex
-from mediparse.domain.synthetic_bhc import bhc_target
 from mediparse.domain.synthetic_coverage import coverage_diagnoses
 
 if TYPE_CHECKING:
@@ -20,7 +19,6 @@ if TYPE_CHECKING:
     from mediparse.domain.language import Language
     from mediparse.domain.mimic_table import TableShape
     from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.section_headers import SectionLexicon
 
 # Bez kódu ICD by filtr has_icd vyřadil zprávy bez labelu pětice.
 FILLER_CODES: Final[Mapping[IcdVersion, str]] = {
@@ -190,19 +188,17 @@ def corpus_tables(
     plans: Sequence[NotePlan],
     notes: Sequence[InputNote],
     codes: DiagnosisCodes,
-    lexicon: SectionLexicon,
 ) -> dict[str, list[dict[str, str]]]:
-    """Doplní jádro smoketestu o pokrytí EDA, demografii, číselník a target BHC.
+    """Doplní jádro smoketestu o pokrytí EDA, demografii a číselník.
 
     Returns:
-        Šest tabulek EDA s korpusovými fakty a doplněným pokrytím.
+        Pět tabulek EDA s korpusovými fakty a doplněným pokrytím.
 
     Raises:
         InvalidInputError: Plány neodpovídají zprávám, pohlaví pacienta se liší,
-            chybí skupina pokrytí, kód nepatří do očekávané skupiny nebo chybí
-            hlavička slíbená plánem.
+            chybí skupina pokrytí nebo kód nepatří do očekávané skupiny.
     """
-    by_note = _plans_for_notes(plans, notes)
+    _plans_for_notes(plans, notes)
     tables, versions = _mimic_core(notes, codes)
     # Kódy bez labelu jsou svědci EDA; smoketest dál používá jen fakta plánu.
     tables["diagnoses_icd"].extend(
@@ -229,12 +225,6 @@ def corpus_tables(
         _admission(row, indices[int(row["subject_id"])]) for row in tables["discharge"]
     ]
     tables["d_icd_diagnoses"] = _dictionary(tables["diagnoses_icd"], codes)
-    targets = []
-    for note in sorted(notes, key=lambda note: note.note_id):
-        target = bhc_target(by_note[note.note_id], note.text, lexicon, len(targets))
-        if target is not None:
-            targets.append({"note_id": note.note_id, "target": target})
-    tables["mimic-iv-bhc"] = targets
     return tables
 
 

@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.domain.language import Language
+from mediparse.domain.synthetic_bhc import bhc_rows
 from mediparse.domain.synthetic_mimic import corpus_tables, input_notes
 from mediparse.domain.synthetic_sentinel import sentinel_tables
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
@@ -51,12 +52,13 @@ def run(argv: Sequence[str]) -> ExitCode:
     notes = input_notes(
         plans, CorpusDirectory(args.corpus).notes(Language.EN), Language.EN
     )
+    lexicon = load_section_lexicon(args.lexicon)
     corpus = corpus_tables(
         plans,
         notes,
         load_diagnosis_codes(args.candidates),
-        load_section_lexicon(args.lexicon),
     )
+    corpus["mimic-iv-bhc"] = bhc_rows(plans, corpus["discharge"], lexicon)
     # Úplná validace před prvním zápisem brání napůl zapsanému adresáři při odmítnutí.
     tables = sentinel_tables(corpus, shapes, args.prefix, MIN_CHARS)
     for table, rows in tables.items():

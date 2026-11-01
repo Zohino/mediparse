@@ -14,7 +14,6 @@ from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 from tests.synthetic_support import (
     EDA_NOTES,
     EDA_PLANS,
-    LEXICON,
     NOTES,
     PLANS,
     repository_tables,
@@ -24,7 +23,6 @@ from tests.synthetic_support import (
 EXPECTED_ADMISSIONS: Final = 33
 EXPECTED_NOTES: Final = 400
 EXPECTED_PATIENTS: Final = 167
-EXPECTED_TARGETS: Final = 357
 EXPECTED_MASKED_NOTES: Final = 38
 
 
@@ -42,7 +40,7 @@ def test_manual_age_cycle() -> None:
     notes = input_notes(plans, {p.note_id: NOTES[0].text for p in plans}, Language.EN)
     plans, notes = with_coverage_groups(plans, notes)
     tables = corpus_tables(
-        plans, notes, load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES), LEXICON
+        plans, notes, load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES)
     )
     assert [row["anchor_age"] for row in tables["patients"]] == [
         "15",
@@ -71,13 +69,12 @@ def test_repository_masked_age_count() -> None:
     )
 
 
-def test_manual_demography_and_bhc() -> None:
-    """A2 až A4: dvě osoby a dva targety F i s přidanými skupinami pokrytí."""
+def test_manual_demography() -> None:
+    """A2 až A3: dvě osoby F i s přidanými skupinami pokrytí."""
     tables = corpus_tables(
         EDA_PLANS,
         EDA_NOTES,
         load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES),
-        LEXICON,
     )
     assert tables["patients"] == [
         {
@@ -102,13 +99,6 @@ def test_manual_demography_and_bhc() -> None:
     }
     assert [r["insurance"] for r in admissions] == ["Medicare"] * 32 + ["Private"]
     assert all(r["admittime"] == "2155-01-01 00:00:00" for r in admissions)
-    assert tables["mimic-iv-bhc"] == [
-        {"note_id": "90000001-DS-1", "target": "Patient improved. Started insulin."},
-        {
-            "note_id": "90000002-DS-1",
-            "target": "Patient improved. Started insulin. Medications on Admission: Aspirin. Metformin.",
-        },
-    ]
 
 
 def test_dictionary_has_each_used_pair_once() -> None:
@@ -117,7 +107,6 @@ def test_dictionary_has_each_used_pair_once() -> None:
         EDA_PLANS,
         EDA_NOTES,
         load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES),
-        LEXICON,
     )
     assert tables["d_icd_diagnoses"] == [
         {"icd_code": "249", "icd_version": "9", "long_title": "diabetes ICD-9"},
@@ -130,11 +119,13 @@ def test_dictionary_has_each_used_pair_once() -> None:
 
 
 def test_repository_table_counts() -> None:
-    """Korpusové tabulky zachovávají počty zpráv, pacientů a targetů BHC."""
+    """Korpusové tabulky zachovávají počty zpráv a pacientů; target skládá volající."""
     tables = repository_tables()
     assert len(tables["discharge"]) == EXPECTED_NOTES
     assert len(tables["patients"]) == EXPECTED_PATIENTS
-    assert len(tables["mimic-iv-bhc"]) == EXPECTED_TARGETS
+    assert "mimic-iv-bhc" not in corpus_tables(
+        EDA_PLANS, EDA_NOTES, load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES)
+    )
 
 
 @pytest.mark.parametrize("missing", ["plan", "note"])
@@ -144,7 +135,7 @@ def test_unpaired_plans_and_notes_are_refused(missing: str) -> None:
     notes = NOTES[:-1] if missing == "note" else NOTES
     codes = load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES)
     with pytest.raises(InvalidInputError, match=r"plán|zpráv"):
-        corpus_tables(plans, notes, codes, LEXICON)
+        corpus_tables(plans, notes, codes)
 
 
 def test_conflicting_patient_sexes_are_refused() -> None:
@@ -152,7 +143,7 @@ def test_conflicting_patient_sexes_are_refused() -> None:
     plans = (PLANS[0], PLANS[1].model_copy(update={"sex": Sex.MALE}), PLANS[2])
     codes = load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES)
     with pytest.raises(InvalidInputError, match=r"90000001.*pohlaví"):
-        corpus_tables(plans, NOTES, codes, LEXICON)
+        corpus_tables(plans, NOTES, codes)
 
 
 def test_discharge_is_not_before_admission() -> None:
@@ -161,7 +152,6 @@ def test_discharge_is_not_before_admission() -> None:
         EDA_PLANS,
         EDA_NOTES,
         load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES),
-        LEXICON,
     )
     admissions = {
         row["hadm_id"]: datetime.fromisoformat(row["admittime"])

@@ -10,6 +10,7 @@ from mediparse.domain.mentions import Mention, MentionStatus
 from mediparse.domain.note_plan import NotePlan
 from mediparse.domain.note_structure import Sex
 from mediparse.domain.section_headers import LexiconSection, SectionLexicon
+from mediparse.domain.synthetic_bhc import bhc_rows
 from mediparse.domain.synthetic_mimic import corpus_tables, input_notes
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
 from mediparse.infrastructure.plans_file import PlansFile
@@ -166,9 +167,12 @@ def repository_tables() -> dict[str, list[dict[str, str]]]:
     notes = input_notes(
         plans, CorpusDirectory(REPOSITORY_CORPUS).notes(Language.EN), Language.EN
     )
-    return corpus_tables(
+    tables = corpus_tables(
         plans,
         notes,
         load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES),
-        load_section_lexicon(REPOSITORY_SECTION_HEADERS),
     )
+    tables["mimic-iv-bhc"] = bhc_rows(
+        plans, tables["discharge"], load_section_lexicon(REPOSITORY_SECTION_HEADERS)
+    )
+    return tables

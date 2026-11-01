@@ -1,11 +1,22 @@
 """Target BHC má ruční orákulum nezávislé na parseru sekcí."""
 
+from typing import Final
+
 import pytest
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.section_headers import LexiconSection
-from mediparse.domain.synthetic_bhc import bhc_target
-from tests.synthetic_support import LEXICON, PLANS, TEXT
+from mediparse.domain.synthetic_bhc import bhc_rows, bhc_target
+from tests.synthetic_support import (
+    EDA_NOTES,
+    EDA_PLANS,
+    LEXICON,
+    PLANS,
+    TEXT,
+    repository_tables,
+)
+
+EXPECTED_TARGETS: Final = 357
 
 
 @pytest.mark.parametrize(
@@ -146,3 +157,21 @@ def test_empty_target_is_refused() -> None:
     text = "Brief Hospital Course:\n \nMedications on Admission:\nAspirin.\n\nDischarge Diagnosis:\nDiabetes.\n"
     with pytest.raises(InvalidInputError, match="Prázdný target BHC"):
         bhc_target(PLANS[0], text, LEXICON, 0)
+
+
+def test_manual_bhc_rows() -> None:
+    """A4: varianta se počítá jen mezi zprávami s BHC v pořadí note_id."""
+    discharge = [{"note_id": note.note_id, "text": note.text} for note in EDA_NOTES]
+    targets = bhc_rows(tuple(reversed(EDA_PLANS)), list(reversed(discharge)), LEXICON)
+    assert targets == [
+        {"note_id": "90000001-DS-1", "target": "Patient improved. Started insulin."},
+        {
+            "note_id": "90000002-DS-1",
+            "target": "Patient improved. Started insulin. Medications on Admission: Aspirin. Metformin.",
+        },
+    ]
+
+
+def test_repository_bhc_rows_count() -> None:
+    """Plány repozitáře obsahují 357 zpráv s BHC."""
+    assert len(repository_tables()["mimic-iv-bhc"]) == EXPECTED_TARGETS
