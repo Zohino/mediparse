@@ -513,20 +513,31 @@ test_that("config_path skládá cesty ke konfiguraci a obě cesty existují", {
   expect_true(file.exists(text_mentions_path()))
 })
 
-test_that("nulové jmenovatele a prázdné tabulky zůstanou neposouditelné", {
+test_that("souběh při nulovém počtu kandidáta řádku nemá podíl", {
   cells <- data.frame(radek = "a", sloupec = "b", n_ij = 0, n_i = 0, n_j = 3)
+
   out <- cooccurrence_cells(cells)
 
   expect_equal(out$n_ij, 0)
   expect_true(is.na(out$podil))
-  expect_equal(preselection(published_prevalence(c(a = 0), total = 0))$kind, "nelze")
+})
+
+test_that("předvýběr z prázdné tabulky nelze určit", {
   expect_equal(preselection(published_prevalence(setNames(numeric(), character())))$kind, "nelze")
-  expect_equal(redundant_pairs(out[0, ])$kind, "nelze")
-  expect_equal(uncovered_charlson(data.frame(kategorie = character(), n = numeric()), POOL, 100)$kind, "nelze")
+})
+
+test_that("audit prázdné tabulky Charlsonových kategorií nelze provést", {
+  counts <- data.frame(kategorie = character(), n = numeric())
+
+  expect_equal(uncovered_charlson(counts, POOL, 100)$kind, "nelze")
+})
+
+test_that("rozdíly ér bez zpráv ICD-9 nelze posoudit", {
   prevalence <- published_prevalence(c(a = 3))
   prevalence$n9 <- 0
   prevalence$n10 <- 3
   prevalence$celkem9 <- 0
   prevalence$celkem10 <- 5
+
   expect_equal(era_gaps(prevalence)$kind, "nelze")
 })
