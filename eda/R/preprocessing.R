@@ -6,11 +6,6 @@ VOCABULARY_COLUMNS <- c(variant = "VARCHAR", token = "VARCHAR")
 PREPROCESSING_VARIANTS <- c(raw = "tokens_raw", preprocessed = "tokens_preprocessed")
 PREPROCESSING_LABELS <- c(raw = "Bez předzpracování", preprocessed = "S předzpracováním")
 TOKEN_FORMS <- NGRAM_KINDS[["1"]]$forms
-# Výskyty zkratky shora omezují počet zpráv s ní, tedy neveřejný jmenovatel podílu: 35 výskytů a
-# 28,6 % bez kódu dají jediné řešení 10 z 35 zpráv a rozdíl proti sešitu 8 by odhalil skupinu pod 10.
-# Od 1 000 výskytů připadá na podíl stovky možných jmenovatelů a počet zpráv se zkratkou a kódem
-# z něj dopočítat nejde.
-SHARE_MIN_OCCURRENCES <- 1000L
 # Zkratka AF je víceznačná (afebrile), proto ji věta o zkratkách srovnává s ostatními.
 AMBIGUOUS_ACRONYM <- "AF"
 
@@ -128,9 +123,6 @@ percent_change_text <- function(after, before) {
   paste0(ifelse(change > 0, "+", ""), dua_decimal(change), NBSP, "%")
 }
 
-# Buňky čtyřpolní tabulky zkratka × kód diagnózy zůstávají uvnitř funkce: veřejný je jen podíl a
-# příznak skrytí: počet zpráv se zkratkou by s podílem prozradil rozdíl proti sešitu 8, výskyty ho
-# jen shora omezují, proto se podíl uvádí jen u zkratek s aspoň SHARE_MIN_OCCURRENCES výskyty.
 acronym_cells <- function(con, acronym, key) {
   cells <- DBI::dbGetQuery(con, sprintf("
     SELECT
@@ -166,21 +158,19 @@ acronym_summary <- function(con, acronyms, candidates) {
       "SELECT coalesce(sum(%s), 0) AS n FROM %s", DBI::dbQuoteIdentifier(con, acronym), PREPROCESSING_TABLE
     ))$n)
     with_acronym <- cells[["oba"]] + cells[["jen_zkratka"]]
-    hidden <- any(cells < DUA_THRESHOLD) || occurrences < SHARE_MIN_OCCURRENCES
     data.frame(
       zkratka = acronym,
       kandidat = key,
       label_cs = candidates[[key]]$label_cs,
       vyskyty = occurrences,
-      podil = if (hidden) NA_real_ else cells[["jen_zkratka"]] / with_acronym,
-      skryto = hidden,
+      podil = if (with_acronym > 0) cells[["jen_zkratka"]] / with_acronym else NA_real_,
       stringsAsFactors = FALSE
     )
   })
   if (length(rows) == 0L) {
     return(data.frame(
       zkratka = character(), kandidat = character(), label_cs = character(),
-      vyskyty = numeric(), podil = numeric(), skryto = logical(), stringsAsFactors = FALSE
+      vyskyty = numeric(), podil = numeric(), stringsAsFactors = FALSE
     ))
   }
   do.call(rbind, rows)
@@ -190,30 +180,27 @@ acronym_table <- function(summary) {
   data.frame(
     zkratka = summary$zkratka,
     label_cs = summary$label_cs,
-    vyskyty = ifelse(
-      summary$vyskyty > 0 & summary$vyskyty < DUA_THRESHOLD,
-      paste0("<", NBSP, DUA_THRESHOLD), number_text(summary$vyskyty)
-    ),
-    bez_kodu = ifelse(is.na(summary$podil), "–", percent_text(summary$podil, 1)),
+    vyskyty = number_text(summary$vyskyty),
+    bez_kodu = percent_text(summary$podil, 1),
     stringsAsFactors = FALSE
   )
 }
 
 acronym_text <- function(summary) {
-  if (nrow(summary) == 0L || sum(summary$vyskyty) == 0) {
+  if (nrow(summary) == 0L) {
     return(paste("Podíl zpráv se zkratkou bez kódu diagnózy", UNDECIDABLE_TEXT))
   }
   focus <- summary[summary$zkratka == AMBIGUOUS_ACRONYM, ]
   others <- summary$podil[summary$zkratka != AMBIGUOUS_ACRONYM & !is.na(summary$podil)]
   if (nrow(focus) == 0L || is.na(focus$podil)) {
     return(sprintf(
-      "Podíl zpráv se zkratkou %s bez kódu diagnózy nelze uvést, protože zkratka nemá aspoň %d výskytů nebo má některá buňka křížení zkratky a kódu méně než %d zpráv.",
-      AMBIGUOUS_ACRONYM, SHARE_MIN_OCCURRENCES, DUA_THRESHOLD
+      "Podíl zpráv se zkratkou %s bez kódu diagnózy nelze posoudit: zkratka nemá výskyt.",
+      AMBIGUOUS_ACRONYM
     ))
   }
   if (length(others) == 0L) {
     return(sprintf(
-      "Zpráv se zkratkou %s je bez kódu diagnózy %s; ostatní zkratky nelze srovnat, protože jejich podíl je skrytý.",
+      "Zpráv se zkratkou %s je bez kódu diagnózy %s; ostatní zkratky nemají výskyt.",
       AMBIGUOUS_ACRONYM, percent_label(focus$podil, 1)
     ))
   }
