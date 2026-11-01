@@ -155,14 +155,21 @@ def test_decoration_is_deterministic_and_does_not_mutate_corpus() -> None:
     assert corpus == original
 
 
-@pytest.mark.parametrize("empty_prefix", [False, True])
-def test_invalid_input_is_refused(*, empty_prefix: bool) -> None:
-    """Prázdný prefix a prázdné sloupce nemohou vyrobit zdánlivě platnou tabulku."""
-    shapes = SHAPES if empty_prefix else {"empty": TableShape(records=0, columns=())}
-    with pytest.raises(InvalidInputError):
-        sentinel_tables(
-            repository_tables(), shapes, "" if empty_prefix else PREFIX, TEXT_CHARS
-        )
+def test_empty_prefix_is_refused() -> None:
+    """Prázdný prefix má vlastní diagnostiku nad jinak platným korpusem."""
+    corpus = repository_tables()
+    with pytest.raises(
+        InvalidInputError, match="Prefix syntetických buněk nesmí být prázdný"
+    ):
+        sentinel_tables(corpus, SHAPES, "", TEXT_CHARS)
+
+
+def test_empty_columns_are_refused() -> None:
+    """Tabulka bez sloupců je odmítnutá při jinak úplném manifestu."""
+    corpus = repository_tables()
+    shapes = {**SHAPES, "empty": TableShape(records=0, columns=())}
+    with pytest.raises(InvalidInputError, match=r"Tabulka empty nemá žádné sloupce\."):
+        sentinel_tables(corpus, shapes, PREFIX, TEXT_CHARS)
 
 
 def test_corpus_column_outside_manifest_is_refused(
