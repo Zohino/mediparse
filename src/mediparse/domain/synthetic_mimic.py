@@ -102,14 +102,22 @@ def synthetic_mimic_rows(
             msg = f"Výplňový kód ICD-{version.value} patří do diagnózy pětice."
             raise InvalidInputError(msg)
     tables: dict[str, list[dict[str, str]]] = {"discharge": [], "diagnoses_icd": []}
+    versions = _patient_versions(notes)
     for index, note in enumerate(sorted(notes, key=lambda note: note.note_id)):
         hadm = str(_FIRST_ADMISSION + index)
-        # Střídání verzí procvičí obě mapování předpon ve skutečné kohortě.
-        version = IcdVersion.TEN if index % 2 == 0 else IcdVersion.NINE
+        version = versions[note.subject_id]
         tables["discharge"].append(_discharge(note, hadm))
         tables["diagnoses_icd"].extend(_diagnoses(note, hadm, version, codes))
     _validate_shapes(shapes, tables)
     return tables
+
+
+def _patient_versions(notes: Sequence[InputNote]) -> dict[int, IcdVersion]:
+    # Období pacienta i všechny jeho hospitalizace musí sdílet jednu verzi ICD.
+    return {
+        subject: IcdVersion.TEN if index % 2 == 0 else IcdVersion.NINE
+        for index, subject in enumerate(sorted({note.subject_id for note in notes}))
+    }
 
 
 def _validate_shapes(
