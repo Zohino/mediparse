@@ -66,7 +66,7 @@ def test_writes_manifest_tables_and_marker(tmp_path: Path) -> None:
     notes = pq.read_table(out / "discharge.parquet").to_pylist()
     for note in notes:
         note_id = note["note_id"].removeprefix(f"{PREFIX}-discharge-note_id-")
-        assert note["text"].split("\n", 1)[1] == originals[note_id]
+        assert note["text"].endswith("\n" + originals[note_id])
 
 
 @pytest.mark.parametrize("source", ["manifest", "lexicon", "plans"])

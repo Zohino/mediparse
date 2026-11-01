@@ -54,7 +54,6 @@ REPOSITORY_SECTION_HEADERS: Final = REPOSITORY / "config" / "section_headers.jso
 REPOSITORY_DIAGNOSIS_CANDIDATES: Final = (
     REPOSITORY / "config" / "diagnosis_candidates.json"
 )
-REPOSITORY_TEXT_MENTIONS: Final = REPOSITORY / "config" / "text_mentions.json"
 REPOSITORY_MATRIX: Final = REPOSITORY / "config" / "matrix.json"
 STRUCTURE_LABELS: Final = frozenset({"Name", "Unit No"})
 

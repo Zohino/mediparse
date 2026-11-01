@@ -14,7 +14,7 @@ from mediparse.domain.synthetic_sentinel import RARE_ROWS, sentinel_tables
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
 from mediparse.infrastructure.mimic_inventory import read_manifest
 from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES, REPOSITORY_MIMIC_MANIFEST
-from tests.synthetic_support import LEXICON, NOTES, PLANS, repository_tables
+from tests.synthetic_support import EDA_NOTES, EDA_PLANS, LEXICON, repository_tables
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -36,7 +36,10 @@ def corpus(request: pytest.FixtureRequest) -> dict[str, list[dict[str, str]]]:
     if request.param == "repository":
         return repository_tables()
     return corpus_tables(
-        PLANS, NOTES, load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES), LEXICON
+        EDA_PLANS,
+        EDA_NOTES,
+        load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES),
+        LEXICON,
     )
 
 
@@ -102,16 +105,21 @@ def test_identity_links_are_consistent(corpus: dict[str, list[dict[str, str]]]) 
 def test_discharge_text_is_unchanged_after_canary_line(
     corpus: dict[str, list[dict[str, str]]],
 ) -> None:
-    """A5c: jediný nový řádek obsahuje buňku a různý token ze samých písmen."""
+    """A5c: první zpráva nese i vzácnou hlavičku, text za dekorací je zachovaný."""
     tables = sentinel_tables(corpus, SHAPES, PREFIX, TEXT_CHARS)
     tokens = []
-    for original, decorated in zip(
-        corpus["discharge"], tables["discharge"], strict=True
+    for index, (original, decorated) in enumerate(
+        zip(corpus["discharge"], tables["discharge"], strict=True)
     ):
         head, text = decorated["text"].split("\n", 1)
         cell, token = head.split()
         assert cell.startswith(f"{PREFIX}-")
         assert token.isalpha()
+        if index == 0:
+            header, text = text.split("\n", 1)
+            assert header == f"{token.capitalize()}:"
+        else:
+            assert f"{token.capitalize()}:" not in text.splitlines()
         assert text == original["text"]
         tokens.append(token)
     assert len(tokens) == len(set(tokens))

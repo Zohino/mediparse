@@ -120,16 +120,28 @@ def _decorate_row(
                 cell,
                 _text_token(prefix, index),
                 text_chars,
+                header_witness=table == "discharge" and index == 0,
             )
         else:
             decorated[column] = original if original is not None else cell
     return decorated
 
 
-def _text_value(original: str | None, cell: str, token: str, text_chars: int) -> str:
+def _text_value(
+    original: str | None,
+    cell: str,
+    token: str,
+    text_chars: int,
+    *,
+    header_witness: bool,
+) -> str:
     if original is not None:
         # První řádek zachová korpus i target BHC; token s DF=1 projde tokenizací.
-        return f"{cell} {token}\n{original}"
+        # Svědek n=1 hlídá publishable_floor, až žebříček nevyčerpá limit 40 hlaviček
+        # (méně hlaviček nad prahem nebo větší limit). Dnes ho skryje už limit;
+        # samotný práh hlídá testthat.
+        header = f"{token.capitalize()}:\n" if header_witness else ""
+        return f"{cell} {token}\n{header}{original}"
     copies = max(1, math.ceil((text_chars - len(cell)) / (len(token) + 1)))
     return " ".join([cell, *[token] * copies])
 
