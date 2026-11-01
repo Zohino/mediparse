@@ -370,7 +370,7 @@ era_table <- function(era) {
   )
 }
 
-charlson_published <- function(counts) {
+charlson_labelled <- function(counts) {
   out <- counts
   out$popisek <- unname(CHARLSON_LABELS[counts$kategorie])
   out

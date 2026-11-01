@@ -17,10 +17,10 @@ source("R/export.R")
 eda_check_python()
 con <- eda_connect()
 summary <- demographic_summary(con)
-published <- attribute_counts(con)
+counts <- attribute_counts(con)
 age_gender <- age_gender_counts(con)
-majority <- majority_gender(published)
-race <- largest_race(published, total = summary$notes)
+majority <- majority_gender(counts)
+race <- largest_race(counts, total = summary$notes)
 masked <- number_text(summary$masked)
 ```
 
@@ -74,7 +74,7 @@ export_table(summary_table(summary), col.names = c("Ukazatel", "Hodnota"), align
 #| tbl-cap: "Charakteristika vstupního korpusu; podíl pacientů u pohlaví, podíl zpráv u ostatních atributů."
 #| tbl-colwidths: [28, 32, 20, 20]
 export_table(
-  characteristics_table(published, summary),
+  characteristics_table(counts, summary),
   col.names = c("Atribut", "Kategorie", "Počet", "Podíl (%)"),
   align = "llrr"
 )

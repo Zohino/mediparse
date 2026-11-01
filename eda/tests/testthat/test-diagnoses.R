@@ -424,7 +424,7 @@ test_that("read_candidates načte reálný config a každý kandidát je úplný
 test_that("Charlson zachová malé počty i jejich podíly", {
   counts <- data.frame(kategorie = c("A", "B"), n = c(3, 12), stringsAsFactors = FALSE)
 
-  published <- charlson_published(counts)
+  published <- charlson_labelled(counts)
 
   expect_equal(published$n, c(3, 12))
   expect_equal(charlson_table(published, 100)$podil, c("3,0", "12,0"))
