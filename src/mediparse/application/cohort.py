@@ -49,15 +49,15 @@ class CohortResult:
 
 @dataclass(frozen=True)
 class CohortMaterialization:
-    """Přiřadí diagnózy kódům, ověří pravidlo DUA nad výběrem a nechá zdroj zapsat kohortu."""
+    """Přiřadí diagnózy kódům, ověří práh kohorty (``MIN_CELL``) nad výběrem a nechá zdroj zapsat kohortu."""
 
     source: CohortSource
 
     def run(self, codes: DiagnosisCodes) -> CohortResult:
-        """Zapíše kohortu, kterou pravidlo DUA propustí.
+        """Zapíše kohortu, která splňuje práh kohorty (``MIN_CELL``).
 
         Kohortu, kterou pravidlo odmítne, nezapíše; ``InvalidInputError``
-        z pravidla DUA i ze zdroje projde ven.
+        z kontroly prahu kohorty i ze zdroje projde ven.
 
         Args:
             codes: Config diagnóz, podle něhož se kódům přiřadí štítky pětice.
