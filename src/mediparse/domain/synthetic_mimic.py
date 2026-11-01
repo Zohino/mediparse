@@ -27,7 +27,7 @@ FILLER_CODES: Final[Mapping[IcdVersion, str]] = {
     IcdVersion.TEN: "Z0000",
 }
 _FIRST_ADMISSION: Final = 20000000
-_TIMESTAMP: Final = "2150-01-01 00:00:00"
+_TIMESTAMP: Final = "2155-01-01 00:00:00"
 _ERAS: Final = {IcdVersion.NINE: "2008 - 2010", IcdVersion.TEN: "2017 - 2019"}
 
 
@@ -252,7 +252,7 @@ def _admission(row: Mapping[str, str], patient_index: int) -> dict[str, str]:
     return {
         "subject_id": row["subject_id"],
         "hadm_id": row["hadm_id"],
-        "admittime": "2155-01-01 00:00:00",
+        "admittime": _TIMESTAMP,
         "insurance": ("Medicare", "Private")[index],
         "marital_status": ("MARRIED", "SINGLE")[index],
         "race": ("WHITE", "BLACK/AFRICAN AMERICAN")[index],

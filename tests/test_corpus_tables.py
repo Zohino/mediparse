@@ -1,6 +1,7 @@
 """Tabulky EDA jsou navázané na plány, zprávy a pacienty korpusu."""
 
 from collections import defaultdict
+from datetime import datetime
 from typing import Final
 
 import pytest
@@ -109,3 +110,19 @@ def test_conflicting_patient_sexes_are_refused() -> None:
     codes = load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES)
     with pytest.raises(InvalidInputError, match=r"90000001.*pohlaví"):
         corpus_tables(plans, NOTES, codes, LEXICON)
+
+
+def test_discharge_is_not_before_admission() -> None:
+    """Zpráva vznikne při přijetí nebo po něm, u všech přijetí fixture F."""
+    tables = corpus_tables(
+        PLANS, NOTES, load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES), LEXICON
+    )
+    admissions = {
+        row["hadm_id"]: datetime.fromisoformat(row["admittime"])
+        for row in tables["admissions"]
+    }
+    for row in tables["discharge"]:
+        charttime = datetime.fromisoformat(row["charttime"])
+        storetime = datetime.fromisoformat(row["storetime"])
+        assert charttime >= admissions[row["hadm_id"]]
+        assert storetime >= charttime

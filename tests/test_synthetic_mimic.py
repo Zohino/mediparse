@@ -90,8 +90,8 @@ def test_rows_have_fixed_identity_values_and_diagnosis_order() -> None:
         "hadm_id": "20000000",
         "note_type": "DS",
         "note_seq": "10",
-        "charttime": "2150-01-01 00:00:00",
-        "storetime": "2150-01-01 00:00:00",
+        "charttime": "2155-01-01 00:00:00",
+        "storetime": "2155-01-01 00:00:00",
         "text": "Syntetická zpráva 0.",
     }
     assert tables["diagnoses_icd"] == [
