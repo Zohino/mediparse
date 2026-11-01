@@ -7,8 +7,9 @@ from typing import Final
 import pytest
 
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.language import Language
 from mediparse.domain.note_structure import Sex
-from mediparse.domain.synthetic_mimic import corpus_tables
+from mediparse.domain.synthetic_mimic import corpus_tables, input_notes
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
 from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 from tests.synthetic_support import LEXICON, NOTES, PLANS, repository_tables
@@ -18,6 +19,47 @@ DUA_THRESHOLD: Final = 10
 EXPECTED_NOTES: Final = 400
 EXPECTED_PATIENTS: Final = 167
 EXPECTED_TARGETS: Final = 357
+EXPECTED_MASKED_NOTES: Final = 31
+
+
+def test_manual_age_cycle() -> None:
+    """Devět pacientů postupně pokryje i nemaskovaný a maskovaný vysoký věk."""
+    plans = tuple(
+        PLANS[0].model_copy(
+            update={
+                "note_id": f"{90000001 + index}-DS-1",
+                "subject_id": 90000001 + index,
+            }
+        )
+        for index in range(9)
+    )
+    notes = input_notes(plans, {p.note_id: NOTES[0].text for p in plans}, Language.EN)
+    tables = corpus_tables(
+        plans, notes, load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES), LEXICON
+    )
+    assert [row["anchor_age"] for row in tables["patients"]] == [
+        "15",
+        "25",
+        "35",
+        "45",
+        "55",
+        "65",
+        "75",
+        "86",
+        "91",
+    ]
+
+
+def test_repository_masked_age_count() -> None:
+    """Nezávislé orákulum ze sond briefu: maskovaný věk má 31 zpráv."""
+    tables = repository_tables()
+    masked = {
+        row["subject_id"] for row in tables["patients"] if row["anchor_age"] == "91"
+    }
+    assert (
+        sum(row["subject_id"] in masked for row in tables["discharge"])
+        == EXPECTED_MASKED_NOTES
+    )
 
 
 def test_manual_demography_and_bhc() -> None:

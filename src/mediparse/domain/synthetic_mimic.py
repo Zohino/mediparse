@@ -29,6 +29,7 @@ FILLER_CODES: Final[Mapping[IcdVersion, str]] = {
 _FIRST_ADMISSION: Final = 20000000
 _TIMESTAMP: Final = "2155-01-01 00:00:00"
 _ERAS: Final = {IcdVersion.NINE: "2008 - 2010", IcdVersion.TEN: "2017 - 2019"}
+_ANCHOR_AGES: Final = (15, 25, 35, 45, 55, 65, 75, 86, 91)
 
 
 class UnpairedNotesError(InvalidInputError):
@@ -207,7 +208,7 @@ def corpus_tables(
         {
             "subject_id": str(subject),
             "gender": {Sex.FEMALE: "F", Sex.MALE: "M"}[by_subject[subject].sex],
-            "anchor_age": str(15 + 10 * (indices[subject] % 6)),
+            "anchor_age": str(_ANCHOR_AGES[indices[subject] % len(_ANCHOR_AGES)]),
             "anchor_year": "2150",
             "anchor_year_group": _ERAS[versions[subject]],
         }
