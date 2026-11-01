@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from typing import TYPE_CHECKING, Final
 
 import pyarrow as pa
@@ -66,7 +67,12 @@ def test_writes_manifest_tables_and_marker(tmp_path: Path) -> None:
     notes = pq.read_table(out / "discharge.parquet").to_pylist()
     for note in notes:
         note_id = note["note_id"].removeprefix(f"{PREFIX}-discharge-note_id-")
-        assert note["text"].endswith("\n" + originals[note_id])
+        text = re.sub(
+            r" edasentinel[a-z]+(?=\r?$)", "", note["text"], flags=re.MULTILINE
+        )
+        assert text.endswith("\n" + originals[note_id])
+    targets = pq.read_table(out / "mimic-iv-bhc.parquet").to_pylist()
+    assert all(re.search(r"\bedasentinel[a-z]+\b", row["target"]) for row in targets)
 
 
 @pytest.mark.parametrize("source", ["manifest", "lexicon", "plans"])

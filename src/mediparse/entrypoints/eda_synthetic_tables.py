@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING
 from mediparse.domain.language import Language
 from mediparse.domain.synthetic_bhc import bhc_rows
 from mediparse.domain.synthetic_mimic import corpus_tables, input_notes
-from mediparse.domain.synthetic_sentinel import sentinel_tables
+from mediparse.domain.synthetic_sentinel import section_tokens, sentinel_tables
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
@@ -58,6 +58,8 @@ def run(argv: Sequence[str]) -> ExitCode:
         notes,
         load_diagnosis_codes(args.candidates),
     )
+    corpus["discharge"] = section_tokens(corpus["discharge"], lexicon, args.prefix)
+    # Target má nést token, aby kanárek zachytil i výpis targetu jediné zprávy.
     corpus["mimic-iv-bhc"] = bhc_rows(plans, corpus["discharge"], lexicon)
     # Úplná validace před prvním zápisem brání napůl zapsanému adresáři při odmítnutí.
     tables = sentinel_tables(corpus, shapes, args.prefix, MIN_CHARS)
