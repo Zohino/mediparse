@@ -96,11 +96,17 @@ def _funnel(
 
 def test_counts_with_ten_and_ten_pass() -> None:
     """Deset pozitivních a deset negativních zpráv je nejmenší přípustná buňka."""
-    counts = make_counts(
-        dict.fromkeys(Diagnosis, MIN_CELL), funnel=_funnel(30, 30, 30, 20)
-    )
+    counts = make_counts(dict.fromkeys(Diagnosis, 10), funnel=_funnel(30, 30, 30, 20))
 
     ensure_publishable(counts)
+
+
+def test_counts_with_nine_and_nine_are_refused() -> None:
+    """Devět pozitivních a devět negativních zpráv nesplňuje práh kohorty."""
+    counts = make_counts(dict.fromkeys(Diagnosis, 9), funnel=_funnel(30, 30, 30, 18))
+
+    with pytest.raises(InvalidInputError):
+        ensure_publishable(counts)
 
 
 def _numbers(error: pytest.ExceptionInfo[InvalidInputError]) -> set[str]:
