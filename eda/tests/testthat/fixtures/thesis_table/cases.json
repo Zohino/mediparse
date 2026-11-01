@@ -1,6 +1,6 @@
 [
   {
-    "name": "kody-dua",
+    "name": "kody",
     "header": [
       "Tabulka",
       "Popis",
@@ -13,7 +13,7 @@
         "1 234"
       ],
       [
-        "ostatní (n < 10)",
+        "patients",
         "x",
         "5"
       ]
@@ -38,7 +38,7 @@
         "1 234"
       ],
       [
-        "ostatní (n < 10)",
+        "patients",
         "x",
         "5"
       ]

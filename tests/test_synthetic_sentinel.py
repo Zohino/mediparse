@@ -131,7 +131,6 @@ def test_rare_witnesses_and_links(corpus: dict[str, list[dict[str, str]]]) -> No
     tables = sentinel_tables(corpus, SHAPES, PREFIX, TEXT_CHARS)
     assert RARE_ROWS == EXPECTED_RARE_ROWS
     for table, columns in {
-        "patients": ("anchor_year_group",),
         "diagnoses_icd": ("icd_version", "icd_code"),
     }.items():
         for column in columns:
@@ -148,6 +147,7 @@ def test_rare_witnesses_and_links(corpus: dict[str, list[dict[str, str]]]) -> No
         assert {row["subject_id"] for row in tables[table][-2:]} == rare_subjects
     assert {row["hadm_id"] for row in tables["diagnoses_icd"][-2:]} == rare_hadms
     for row in tables["patients"][-2:]:
+        assert row["anchor_year_group"] == tables["patients"][0]["anchor_year_group"]
         assert row["gender"] == tables["patients"][0]["gender"]
         assert row["anchor_age"] == tables["patients"][0]["anchor_age"]
 

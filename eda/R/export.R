@@ -95,7 +95,7 @@ latex_cells <- function(df, code) {
     if (!name %in% code) {
       return(cells)
     }
-    ifelse(df[[name]] == DUA_OTHER, cells, paste0("\\texttt{", cells, "}"))
+    sprintf("\\texttt{%s}", cells)
   })
   names(out) <- names(df)
   as.data.frame(out, stringsAsFactors = FALSE, check.names = FALSE)
@@ -104,7 +104,7 @@ latex_cells <- function(df, code) {
 markdown_cells <- function(df, code) {
   out <- df
   for (name in intersect(code, names(df))) {
-    out[[name]] <- ifelse(df[[name]] == DUA_OTHER, df[[name]], paste0("`", df[[name]], "`"))
+    out[[name]] <- sprintf("`%s`", df[[name]])
   }
   out
 }

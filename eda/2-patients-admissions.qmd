@@ -28,8 +28,7 @@ mean_notes <- if (summary_d$patients > 0) {
 } else {
   "–"
 }
-era_published <- dua_suppress(era_group, by = "era")
-transition <- era_transition(era_published)
+transition <- era_transition(era_group)
 verdict <- coverage_verdict(coverage)
 s_icd_text <- percent_label(coverage$s_icd, coverage$zprav)
 s_icd_discharge <- s_icd_text[coverage$tabulka == "discharge"]
@@ -46,7 +45,7 @@ Tento sešit je druhým z řady sešitů explorační analýzy. Navazuje na pře
 
 Rozdělení dat na trénovací a testovací část se provádí po pacientech, aby tentýž pacient nebyl v obou částech a nedošlo k úniku informací. Počty zpráv na pacienta proto určují, jak velký vliv má volba jednotky dělení. Štítky klasifikace vznikají z diagnóz ICD připojených přes `hadm_id`; pokrytí tohoto spojení proto rozhoduje, které zprávy mají štítek. Verze ICD ovlivňuje volbu mezi náhodným a časovým rozdělením a přípravu mapování kódů.
 
-Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty, nikdy řádková data ani texty zpráv. Počty pacientů, přijetí a zpráv, pokrytí a rozdělení podle verze ICD jsou metriky korpusu, které nevymezují skupiny pacientů kvaziidentifikátorem, a uvádějí se přesně. Rozpad hospitalizací podle období ukotvení pacienta takové skupiny vymezuje, a proto se v něm kategorie s méně než deseti hospitalizacemi sloučí do řádku „ostatní (n < 10)“; práh je pravidlo práce, DUA malé počty neupravuje.
+Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty, nikdy řádková data ani texty zpráv. Počty pacientů, přijetí a zpráv, pokrytí a rozdělení podle verze ICD jsou metriky korpusu, které nevymezují skupiny pacientů kvaziidentifikátorem, a uvádějí se přesně. Počty a podíly skupin pacientů podle období ukotvení se zveřejňují přesně, protože DUA malé počty neupravuje a pacienti se neidentifikují.
 
 Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky o pacientech a zprávách, pokrytí a éře ICD. Kapitola @sec-shrnuti shrnuje výsledky a rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
 
@@ -171,10 +170,10 @@ export_table(
 
 ```{r}
 #| label: fig-era-obdobi
-#| fig-cap: "Hospitalizace s propouštěcí zprávou podle období ukotvení pacienta a verze ICD; kategorie s n < 10 jsou vynechány."
+#| fig-cap: "Hospitalizace s propouštěcí zprávou podle období ukotvení pacienta a verze ICD."
 #| fig-width: 6.5
 #| fig-height: 3.5
-published <- era_published[era_published$obdobi != DUA_OTHER, , drop = FALSE]
+published <- era_group
 published$obdobi <- factor(published$obdobi, levels = unique(published$obdobi))
 published$era <- factor(published$era, levels = unique(c(ICD_ERAS, published$era)))
 plot <- ggplot2::ggplot(published, ggplot2::aes(obdobi, n, fill = era)) +
@@ -185,7 +184,7 @@ plot <- ggplot2::ggplot(published, ggplot2::aes(obdobi, n, fill = era)) +
 export_figure(plot, height_cm = 8.5)
 ```
 
-`r switch(transition$kind, separated = paste0("Éry jsou v čase odděleny: hospitalizace jen s ICD-9 leží v obdobích ", paste(transition$periods_9, collapse = ", "), ", hospitalizace jen s ICD-10 v obdobích ", paste(transition$periods_10, collapse = ", "), "."), overlap = paste0("Éry se překrývají: obě verze se vyskytují společně v obdobích ", paste(transition$both, collapse = ", "), "."), none = "Rozpad přechod mezi verzemi nedokládá: aspoň jedna z verzí se v žádném období s dostatečným počtem hospitalizací nevyskytuje samostatně.")`
+`r switch(transition$kind, separated = paste0("Éry jsou v čase odděleny: hospitalizace jen s ICD-9 leží v obdobích ", paste(transition$periods_9, collapse = ", "), ", hospitalizace jen s ICD-10 v obdobích ", paste(transition$periods_10, collapse = ", "), "."), overlap = paste0("Éry se překrývají: obě verze se vyskytují společně v obdobích ", paste(transition$both, collapse = ", "), "."), none = "Rozpad přechod mezi verzemi nedokládá: aspoň jedna z verzí se v žádném známém období nevyskytuje samostatně.")`
 
 # Shrnutí a rozhodnutí {#sec-shrnuti}
 
@@ -199,6 +198,6 @@ Konečná volba korpusu a způsobu rozdělení patří do navazujícího sešitu
 
 # Omezení {#sec-omezeni}
 
-Období `anchor_year_group` je tříleté, takže poloha přechodu mezi verzemi ICD je určena jen s touto přesností. Skutečný rok přijetí se nepřepočítává z `anchor_year`, protože jeho přesnost okolo ±1,5 roku by nepřidala informaci. Kalendářní rok přijetí v datech nic neříká, protože MIMIC-IV data posouvá. Éra je určena kódy v `diagnoses_icd`; hospitalizace s kódem jiné verze než 9 a 10 se počítá jako „bez kódu“. Kategorie s n < 10 se potlačují jen v rozpadu podle období, a to uvnitř každé éry: skryté buňky se doplňují nejmenší zachovanou buňkou, dokud jejich součet není aspoň 10, takže z celku éry v @tbl-era a zveřejněných buněk nelze odvodit žádnou buňku pod 10. Kategorie vynechané z grafu se nezveřejňují jednotlivě. Sešit nepopisuje délku zpráv, pohlaví ani věk pacientů a nevybírá diagnózy; to je předmětem dalších sešitů.
+Období `anchor_year_group` je tříleté, takže poloha přechodu mezi verzemi ICD je určena jen s touto přesností. Skutečný rok přijetí se nepřepočítává z `anchor_year`, protože jeho přesnost okolo ±1,5 roku by nepřidala informaci. Kalendářní rok přijetí v datech nic neříká, protože MIMIC-IV data posouvá. Éra je určena kódy v `diagnoses_icd`; hospitalizace s kódem jiné verze než 9 a 10 se počítá jako „bez kódu“. Sešit nepopisuje délku zpráv, pohlaví ani věk pacientů a nevybírá diagnózy; to je předmětem dalších sešitů.
 
 {{< include _partials/appendix.qmd >}}

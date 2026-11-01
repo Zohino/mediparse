@@ -137,9 +137,9 @@ icd_era_by_group <- function(con) {
   out
 }
 
-era_transition <- function(era_published) {
-  known <- era_published[
-    !era_published$obdobi %in% c("neznámé", DUA_OTHER) & era_published$era != DUA_OTHER,
+era_transition <- function(era_group) {
+  known <- era_group[
+    era_group$obdobi != "neznámé" & era_group$n > 0,
     , drop = FALSE
   ]
   periods_9 <- unique(known$obdobi[known$era == "jen ICD-9"])

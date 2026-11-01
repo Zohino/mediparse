@@ -184,7 +184,7 @@ code_ranking <- function(con, version, prefixes = NULL, top = 20L) {
   ))
   rows$n <- as.numeric(rows$n)
   rows$total <- as.numeric(rows$total)
-  rows <- rows[!is.na(dua_binary(rows$n, rows$total)), , drop = FALSE]
+  rows <- rows[rows$n >= DUA_THRESHOLD, , drop = FALSE]
   rows <- rows[order(-rows$n, rows$kod), , drop = FALSE]
   rows <- utils::head(rows, top)
   data.frame(
@@ -237,17 +237,6 @@ candidate_prevalence <- function(con, candidates) {
   )
 }
 
-suppress_prevalence <- function(prevalence) {
-  out <- prevalence
-  out$n <- dua_binary(prevalence$n, prevalence$celkem)
-  out$n9 <- dua_binary(prevalence$n9, prevalence$celkem9)
-  out$n10 <- dua_binary(prevalence$n10, prevalence$celkem10)
-  both <- !is.na(out$n9) & !is.na(out$n10)
-  out$n9[!both] <- NA_real_
-  out$n10[!both] <- NA_real_
-  out
-}
-
 cooccurrence <- function(con, candidates) {
   table <- candidate_notes(con, candidates)
   keys <- names(candidates)
@@ -277,9 +266,7 @@ cooccurrence <- function(con, candidates) {
 
 cooccurrence_cells <- function(co) {
   out <- co
-  visible <- !is.na(dua_binary(co$n_ij, co$n_i)) & !is.na(dua_binary(co$n_ij, co$n_j))
-  out$n_ij <- ifelse(visible, co$n_ij, NA_real_)
-  out$podil <- ifelse(visible, co$n_ij / co$n_i, NA_real_)
+  out$podil <- ifelse(co$n_i > 0, co$n_ij / co$n_i, NA_real_)
   out
 }
 
@@ -303,54 +290,28 @@ preselection <- function(published) {
   }
   keys <- function(verdict) published$kandidat[verdicts == verdict]
   list(
-    kind = "vyber", in_band = keys("v"), below = keys("pod"), above = keys("nad"),
-    unknown = keys("nelze")
+    kind = "vyber", in_band = keys("v"), below = keys("pod"), above = keys("nad")
   )
 }
 
-reconcile_charlson <- function(charlson, prevalence, candidates) {
-  hide_category <- character()
-  hide_candidate <- character()
-  for (key in intersect(names(candidates), prevalence$kandidat)) {
-    categories <- intersect(candidates[[key]]$charlson, charlson$kategorie)
-    n_candidate <- prevalence$n[prevalence$kandidat == key]
-    if (length(categories) == 0L || is.na(n_candidate)) next
-    n_category <- charlson$n[match(categories, charlson$kategorie)]
-    if (anyNA(n_category)) next
-    differences <- c(n_category - n_candidate, sum(n_category) - n_candidate)
-    if (any(abs(differences) < DUA_THRESHOLD)) {
-      hide_candidate <- c(hide_candidate, key)
-      hide_category <- c(hide_category, categories)
-    }
-  }
-  charlson$n[charlson$kategorie %in% hide_category] <- NA_real_
-  hidden <- prevalence$kandidat %in% hide_candidate
-  prevalence$n[hidden] <- NA_real_
-  prevalence$n9[hidden] <- NA_real_
-  prevalence$n10[hidden] <- NA_real_
-  list(charlson = charlson, prevalence = prevalence)
-}
-
 uncovered_charlson <- function(counts, candidates, total) {
-  known <- counts[!is.na(counts$n), , drop = FALSE]
-  if (nrow(known) == 0L || total <= 0) {
+  if (nrow(counts) == 0L || total <= 0) {
     return(list(kind = "nelze"))
   }
-  in_band <- known$kategorie[band_verdict(known$n / total) == "v"]
+  in_band <- counts$kategorie[band_verdict(counts$n / total) == "v"]
   covered <- unlist(lapply(candidates, function(entry) entry$charlson))
   list(kind = "audit", categories = setdiff(in_band, covered))
 }
 
 redundant_pairs <- function(cells) {
   known <- cells[!is.na(cells$podil), , drop = FALSE]
-  hidden <- sum(is.na(cells$podil))
   if (nrow(known) == 0L) {
     return(list(kind = "nelze"))
   }
   pairs <- known[known$podil >= REDUNDANCY_THRESHOLD, c("radek", "sloupec", "podil"), drop = FALSE]
   pairs <- pairs[order(-pairs$podil, pairs$radek, pairs$sloupec), , drop = FALSE]
   rownames(pairs) <- NULL
-  list(kind = "dvojice", pairs = pairs, hidden = hidden)
+  list(kind = "dvojice", pairs = pairs)
 }
 
 era_gaps <- function(published) {
@@ -367,14 +328,13 @@ era_gaps <- function(published) {
     gaps = data.frame(
       kandidat = published$kandidat[gap], podil9 = share9[gap], podil10 = share10[gap],
       stringsAsFactors = FALSE
-    ),
-    unknown = published$kandidat[!known]
+    )
   )
 }
 
 symptom_share <- function(era) {
-  n <- dua_binary(era$symptom, era$notes)
-  if (is.na(n)) {
+  n <- era$symptom
+  if (era$notes <= 0) {
     return(list(kind = "nelze"))
   }
   list(kind = "share", n = n, total = era$notes, share = n / era$notes)
@@ -392,8 +352,7 @@ hidden_percent <- function(n, total) {
   out
 }
 
-era_table <- function(era, symptom) {
-  symptom_n <- if (symptom$kind == "share") symptom$n else NA_real_
+era_table <- function(era) {
   data.frame(
     ukazatel = c(
       "Zprávy vstupního korpusu", "Jen kódy ICD-9", "Jen kódy ICD-10", "Kódy obou verzí",
@@ -401,19 +360,18 @@ era_table <- function(era, symptom) {
     ),
     hodnota = c(
       number_text(c(era$notes, era$only9, era$only10, era$both, era$neither)),
-      hidden_number(symptom_n)
+      number_text(era$symptom)
     ),
     podil = c(
       percent_text(c(era$notes, era$only9, era$only10, era$both, era$neither), era$notes),
-      hidden_percent(symptom_n, era$notes)
+      percent_text(era$symptom, era$notes)
     ),
     stringsAsFactors = FALSE
   )
 }
 
-charlson_published <- function(counts, total) {
+charlson_labelled <- function(counts) {
   out <- counts
-  out$n <- dua_binary(counts$n, total)
   out$popisek <- unname(CHARLSON_LABELS[counts$kategorie])
   out
 }

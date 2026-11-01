@@ -278,9 +278,9 @@ test_that("era_transition pozná překryv v jednom období", {
   expect_equal(out$both, "2011 - 2013")
 })
 
-test_that("era_transition vyřadí neznámé období i řádek ostatní", {
+test_that("era_transition vyřadí neznámé období", {
   out <- era_transition(era_frame(
-    c("neznámé", DUA_OTHER, "2008 - 2010"),
+    c("neznámé", "neznámé", "2008 - 2010"),
     c("jen ICD-9", "jen ICD-10", "jen ICD-9")
   ))
 
@@ -291,4 +291,20 @@ test_that("era_transition vyřadí neznámé období i řádek ostatní", {
 
 test_that("era_transition z prázdné tabulky nedoloží přechod", {
   expect_equal(era_transition(era_frame(character(), character()))$kind, "none")
+})
+
+
+test_that("era_transition zachová překryv i při jediné hospitalizaci", {
+  breakdown <- era_frame(c("2014 - 2016", "2014 - 2016"), c("jen ICD-10", "jen ICD-9"))
+  breakdown$n <- c(1, 50)
+
+  out <- era_transition(breakdown)
+
+  expect_equal(out$kind, "overlap")
+  expect_equal(out$periods_9, "2014 - 2016")
+  expect_equal(out$periods_10, "2014 - 2016")
+  expect_equal(out$both, "2014 - 2016")
+
+  breakdown$n[1] <- 0
+  expect_length(era_transition(breakdown)$periods_10, 0)
 })

@@ -205,34 +205,12 @@ majority_gender <- function(published) {
 
 largest_race <- function(published, total) {
   race <- published[published$atribut == "Rasa", , drop = FALSE]
-  groups <- race[!race$kategorie %in% c(NON_GROUP_LABELS, DUA_OTHER), , drop = FALSE]
+  groups <- race[!race$kategorie %in% NON_GROUP_LABELS, , drop = FALSE]
   if (nrow(groups) == 0L) {
     return(list(kind = "nelze"))
   }
   top <- groups[which.max(groups$n), ]
   list(kind = "group", label = top$kategorie, n = top$n, total = total, share = top$n / total)
-}
-
-band90_count <- function(published) {
-  band <- published$n[published$atribut == "Věkové pásmo" & published$kategorie == "90+"]
-  if (length(band) == 0L) NA_real_ else band
-}
-
-masked_text <- function(masked, band90) {
-  safe <- !is.na(band90) & masked >= DUA_THRESHOLD & band90 - masked >= DUA_THRESHOLD
-  ifelse(safe, number_text(masked), sprintf("méně než %d", DUA_THRESHOLD))
-}
-
-drawable_cells <- function(age_gender) {
-  by_gender <- dua_suppress(age_gender, by = "pohlavi")
-  by_band <- dua_suppress(age_gender, by = "pasmo")
-  key <- function(cells) paste(cells$pohlavi, cells$pasmo)
-  visible_band <- key(by_band)[by_band$pohlavi != DUA_OTHER & by_band$pasmo != DUA_OTHER]
-  kept <- by_gender[
-    by_gender$pasmo != DUA_OTHER & key(by_gender) %in% visible_band, , drop = FALSE
-  ]
-  rownames(kept) <- NULL
-  kept
 }
 
 characteristics_table <- function(published, summary) {
