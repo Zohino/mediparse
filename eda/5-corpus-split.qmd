@@ -25,7 +25,7 @@ comparison <- corpus_comparison(summaries, coverage, quality, shown)
 funnel <- corpus_funnel(con)
 selected <- funnel[nrow(funnel), ]
 era <- icd_era(con)
-transition <- era_transition(dua_suppress(icd_era_by_group(con), by = "era"))
+transition <- era_transition(icd_era_by_group(con))
 n_hospitalizations <- sum(era$n)
 era_share <- function(label) {
   percent_label(sum(era$n[era$era == label]), n_hospitalizations)
@@ -44,7 +44,7 @@ Tento sešit je pátým z řady sešitů explorační analýzy a uzavírá rozbo
 - vymezit vstupní korpus, tedy zprávy, které vstupují do rozdělení dat, a změřit jeho velikost,
 - rozhodnout o jednotce a způsobu rozdělení dat na trénovací a testovací část.
 
-Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty, nikdy řádková data ani texty zpráv. Všechny tabulky sešitu jsou metriky korpusu, které nevymezují skupiny pacientů kvaziidentifikátorem, a uvádějí se přesně. Rozpad hospitalizací podle období ukotvení pacienta se nezveřejňuje; sešit z něj po potlačení kategorií s méně než deseti hospitalizacemi přebírá jen závěr o přechodu mezi verzemi ICD, stejně jako druhý sešit.
+Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023] a MIMIC-IV-Note [@mimicivnote], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty, nikdy řádková data ani texty zpráv. Všechny tabulky sešitu jsou metriky korpusu, které nevymezují skupiny pacientů kvaziidentifikátorem, a uvádějí se přesně. Rozpad hospitalizací podle období ukotvení pacienta se nezveřejňuje; sešit z něj přebírá jen závěr o přechodu mezi verzemi ICD, stejně jako druhý sešit. Počty a podíly skupin pacientů se zveřejňují přesně, protože DUA malé počty neupravuje a pacienti se neidentifikují.
 
 Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky srovnává korpusy, vymezuje vstupní korpus a popisuje éru ICD z pohledu rozdělení dat. Kapitola @sec-shrnuti shrnuje rozhodnutí a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
 
@@ -104,7 +104,7 @@ export_table(
 
 ## Éra ICD a rozdělení dat {#sec-era}
 
-Z hospitalizací s propouštěcí zprávou je jen v ICD-10 kódováno `r era_share("jen ICD-10")`, jen v ICD-9 `r era_share("jen ICD-9")` a oběma verzemi `r era_share("obě éry")`. `r switch(transition$kind, separated = "Podle druhého sešitu jsou éry v čase odděleny: hospitalizace jen s ICD-9 a jen s ICD-10 se nevyskytují ve stejném období.", overlap = "Podle druhého sešitu se éry v čase překrývají: hospitalizace jen s ICD-9 a jen s ICD-10 se vyskytují ve stejném období.", none = "Rozpad podle období přechod mezi verzemi nedokládá: aspoň jedna z verzí se v žádném období s dostatečným počtem hospitalizací nevyskytuje samostatně.")`
+Z hospitalizací s propouštěcí zprávou je jen v ICD-10 kódováno `r era_share("jen ICD-10")`, jen v ICD-9 `r era_share("jen ICD-9")` a oběma verzemi `r era_share("obě éry")`. `r switch(transition$kind, separated = "Podle druhého sešitu jsou éry v čase odděleny: hospitalizace jen s ICD-9 a jen s ICD-10 se nevyskytují ve stejném období.", overlap = "Podle druhého sešitu se éry v čase překrývají: hospitalizace jen s ICD-9 a jen s ICD-10 se vyskytují ve stejném období.", none = "Rozpad podle období přechod mezi verzemi nedokládá: aspoň jedna z verzí se v žádném známém období nevyskytuje samostatně.")`
 
 # Shrnutí a rozhodnutí {#sec-shrnuti}
 

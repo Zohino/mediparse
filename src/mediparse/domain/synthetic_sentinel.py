@@ -18,9 +18,9 @@ _KEY_COLUMNS: Final = frozenset({"subject_id", "hadm_id", "note_id"})
 _KEY_OWNERS: Final = {"subject_id": "patients", "hadm_id": "admissions"}
 _REFERENCES: Final = {("mimic-iv-bhc", "note_id"): "discharge"}
 # Vzácná verze i kód musí nést prefix: platná verze by kód zařadila do tříznakové
-# skupiny a prefix by se v žebříčku ztratil. Ostatní typové hodnoty nepřidávají kategorii.
+# skupiny a prefix by se v žebříčku ztratil. Období pacienta je pevný číselník MIMIC,
+# proto se stejně jako ostatní typové hodnoty přebírá z prvního řádku.
 _RARE_WITNESSES: Final = frozenset({
-    ("patients", "anchor_year_group"),
     ("diagnoses_icd", "icd_version"),
     ("diagnoses_icd", "icd_code"),
 })
