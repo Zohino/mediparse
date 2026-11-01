@@ -14,6 +14,7 @@ if TYPE_CHECKING:
     from mediparse.domain.mimic_table import TableShape
 
 RARE_ROWS: Final = 2
+_KEY_COLUMNS: Final = frozenset({"subject_id", "hadm_id", "note_id"})
 _KEY_OWNERS: Final = {"subject_id": "patients", "hadm_id": "admissions"}
 _REFERENCES: Final = {("mimic-iv-bhc", "note_id"): "discharge"}
 # Vzácná verze i kód musí nést prefix: platná verze by kód zařadila do tříznakové
@@ -82,10 +83,7 @@ def _source_rows(
     table: str, corpus: Mapping[str, Sequence[Mapping[str, str]]]
 ) -> list[dict[str, str]]:
     if table not in corpus:
-        return [
-            {key: row[key] for key in ("subject_id", "hadm_id", "note_id")}
-            for row in corpus["discharge"]
-        ]
+        return [{key: row[key] for key in _KEY_COLUMNS} for row in corpus["discharge"]]
     rows = [dict(row) for row in corpus[table]]
     if table in {"patients", "admissions", "diagnoses_icd"} and rows:
         for index in range(RARE_ROWS):
@@ -111,16 +109,14 @@ def _decorate_row(
     decorated = {}
     for column, original in row.items():
         key = (
-            original
-            if column in {"subject_id", "hadm_id", "note_id"} and original is not None
-            else str(index)
+            original if column in _KEY_COLUMNS and original is not None else str(index)
         )
         cell = _cell(table, column, prefix, key)
-        if column in {"subject_id", "hadm_id", "note_id"}:
+        if column in _KEY_COLUMNS:
             decorated[column] = cell
-        elif column == "text" and (table == "discharge" or original is None):
+        elif column == "text":
             decorated[column] = _text_value(
-                original if table == "discharge" else None,
+                original,
                 cell,
                 _text_token(prefix, index),
                 text_chars,
