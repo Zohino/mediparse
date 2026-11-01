@@ -1,9 +1,12 @@
 """Ruční fixture F pro společný generátor syntetického MIMIC."""
 
-from typing import Final
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.language import Language
+from mediparse.domain.mentions import Mention, MentionStatus
 from mediparse.domain.note_plan import NotePlan
 from mediparse.domain.note_structure import Sex
 from mediparse.domain.section_headers import LexiconSection, SectionLexicon
@@ -18,6 +21,11 @@ from tests.support import (
     REPOSITORY_PLANS,
     REPOSITORY_SECTION_HEADERS,
 )
+
+if TYPE_CHECKING:
+    from mediparse.domain.input_note import InputNote
+
+NEGATED_FIXTURE_NOTES: Final = 15
 
 TEXT: Final = """Name: ___
 Chief Complaint:
@@ -107,6 +115,45 @@ NOTES: Final = input_notes(
     },
     Language.EN,
 )
+
+
+def with_coverage_groups(
+    plans: tuple[NotePlan, ...], notes: tuple[InputNote, ...]
+) -> tuple[tuple[NotePlan, ...], tuple[InputNote, ...]]:
+    """Doplní ruční fixture o 15 negovaných a 15 nezmíněných pneumonií.
+
+    Returns:
+        Rozšířené plány a zprávy téhož prvního pacienta bez dalších targetů BHC.
+    """
+    extra = tuple(
+        plans[0].model_copy(
+            update={
+                "note_id": f"{plans[0].subject_id}-DS-{100 + index}",
+                "labels": (),
+                "sections": ("chief_complaint",),
+                "mentions": (
+                    Mention(
+                        diagnosis=Diagnosis.PNEUMONIA,
+                        status=MentionStatus.NEGATED,
+                        sections=("chief_complaint",),
+                    ),
+                )
+                if index < NEGATED_FIXTURE_NOTES
+                else (),
+            }
+        )
+        for index in range(30)
+    )
+    texts = {
+        p.note_id: "Chief Complaint:\nNo pneumonia.\n"
+        if p.mentions
+        else "Chief Complaint:\nCough.\n"
+        for p in extra
+    }
+    return (*plans, *extra), (*notes, *input_notes(extra, texts, Language.EN))
+
+
+EDA_PLANS, EDA_NOTES = with_coverage_groups(PLANS, NOTES)
 
 
 def repository_tables() -> dict[str, list[dict[str, str]]]:

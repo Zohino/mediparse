@@ -14,7 +14,7 @@ from mediparse.domain.synthetic_sentinel import RARE_ROWS, sentinel_tables
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
 from mediparse.infrastructure.mimic_inventory import read_manifest
 from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES, REPOSITORY_MIMIC_MANIFEST
-from tests.synthetic_support import LEXICON, NOTES, PLANS, repository_tables
+from tests.synthetic_support import EDA_NOTES, EDA_PLANS, LEXICON, repository_tables
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -36,7 +36,10 @@ def corpus(request: pytest.FixtureRequest) -> dict[str, list[dict[str, str]]]:
     if request.param == "repository":
         return repository_tables()
     return corpus_tables(
-        PLANS, NOTES, load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES), LEXICON
+        EDA_PLANS,
+        EDA_NOTES,
+        load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES),
+        LEXICON,
     )
 
 

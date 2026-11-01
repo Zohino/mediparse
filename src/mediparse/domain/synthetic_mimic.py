@@ -11,6 +11,7 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.note import order_of
 from mediparse.domain.note_structure import Sex
 from mediparse.domain.synthetic_bhc import bhc_target
+from mediparse.domain.synthetic_coverage import coverage_diagnoses
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -191,17 +192,27 @@ def corpus_tables(
     codes: DiagnosisCodes,
     lexicon: SectionLexicon,
 ) -> dict[str, list[dict[str, str]]]:
-    """Doplní jádro smoketestu o demografii, číselník a nezávislý target BHC.
+    """Doplní jádro smoketestu o pokrytí EDA, demografii, číselník a target BHC.
 
     Returns:
-        Šest tabulek obsahujících pouze sloupce známé z korpusu.
+        Šest tabulek EDA s korpusovými fakty a doplněným pokrytím.
 
     Raises:
         InvalidInputError: Plány neodpovídají zprávám, pohlaví pacienta se liší,
-            kódy neuchovají labely nebo chybí hlavička slíbená plánem.
+            chybí skupina pokrytí, kód nepatří do očekávané skupiny nebo chybí
+            hlavička slíbená plánem.
     """
     by_note = _plans_for_notes(plans, notes)
     tables, versions = _mimic_core(notes, codes)
+    # Kódy bez labelu jsou svědci EDA; smoketest dál používá jen fakta plánu.
+    tables["diagnoses_icd"].extend(
+        coverage_diagnoses(
+            plans,
+            tables["diagnoses_icd"],
+            {row["note_id"]: row["hadm_id"] for row in tables["discharge"]},
+            codes,
+        )
+    )
     by_subject = {plan.subject_id: plan for plan in plans}
     indices = {subject: index for index, subject in enumerate(sorted(versions))}
     tables["patients"] = [

@@ -6,20 +6,41 @@ from typing import Final
 
 import pytest
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.note_structure import Sex
 from mediparse.domain.synthetic_mimic import corpus_tables, input_notes
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
-from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
-from tests.synthetic_support import LEXICON, NOTES, PLANS, repository_tables
+from mediparse.infrastructure.plans_file import PlansFile
+from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES, REPOSITORY_PLANS
+from tests.synthetic_support import (
+    EDA_NOTES,
+    EDA_PLANS,
+    LEXICON,
+    NOTES,
+    PLANS,
+    repository_tables,
+    with_coverage_groups,
+)
 
-EXPECTED_ADMISSIONS: Final = 3
+EXPECTED_ADMISSIONS: Final = 33
 DUA_THRESHOLD: Final = 10
 EXPECTED_NOTES: Final = 400
 EXPECTED_PATIENTS: Final = 167
 EXPECTED_TARGETS: Final = 357
 EXPECTED_MASKED_NOTES: Final = 31
+EXPECTED_CKD_WITNESSES: Final = 15
+
+
+def test_repository_ckd_coverage_count() -> None:
+    """Patnáct zpráv bez labelu CKD dostane kód širší kategorie ledvin."""
+    tables = repository_tables()
+    labels = {p.note_id: p.labels for p in PlansFile(REPOSITORY_PLANS).load()}
+    notes = {r["hadm_id"]: r["note_id"] for r in tables["discharge"]}
+    witnesses = [r for r in tables["diagnoses_icd"] if r["icd_code"] in {"N19", "586"}]
+    assert len(witnesses) == EXPECTED_CKD_WITNESSES
+    assert all(Diagnosis.CKD not in labels[notes[r["hadm_id"]]] for r in witnesses)
 
 
 def test_manual_age_cycle() -> None:
@@ -34,6 +55,7 @@ def test_manual_age_cycle() -> None:
         for index in range(9)
     )
     notes = input_notes(plans, {p.note_id: NOTES[0].text for p in plans}, Language.EN)
+    plans, notes = with_coverage_groups(plans, notes)
     tables = corpus_tables(
         plans, notes, load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES), LEXICON
     )
@@ -63,9 +85,12 @@ def test_repository_masked_age_count() -> None:
 
 
 def test_manual_demography_and_bhc() -> None:
-    """A2 až A4: dvě osoby, tři přijetí a dva nezávislé targety podle F."""
+    """A2 až A4: dvě osoby a dva targety F i s přidanými skupinami pokrytí."""
     tables = corpus_tables(
-        PLANS, NOTES, load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES), LEXICON
+        EDA_PLANS,
+        EDA_NOTES,
+        load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES),
+        LEXICON,
     )
     assert tables["patients"] == [
         {
@@ -88,7 +113,7 @@ def test_manual_demography_and_bhc() -> None:
     assert {r["hadm_id"] for r in admissions} == {
         r["hadm_id"] for r in tables["discharge"]
     }
-    assert [r["insurance"] for r in admissions] == ["Medicare", "Medicare", "Private"]
+    assert [r["insurance"] for r in admissions] == ["Medicare"] * 32 + ["Private"]
     assert all(r["admittime"] == "2155-01-01 00:00:00" for r in admissions)
     assert tables["mimic-iv-bhc"] == [
         {"note_id": "90000001-DS-1", "target": "Patient improved. Started insulin."},
@@ -102,12 +127,18 @@ def test_manual_demography_and_bhc() -> None:
 def test_dictionary_has_each_used_pair_once() -> None:
     """Číselník popisuje všechny použité kódy včetně výplně a obou verzí."""
     tables = corpus_tables(
-        PLANS, NOTES, load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES), LEXICON
+        EDA_PLANS,
+        EDA_NOTES,
+        load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES),
+        LEXICON,
     )
     assert tables["d_icd_diagnoses"] == [
         {"icd_code": "249", "icd_version": "9", "long_title": "diabetes ICD-9"},
         {"icd_code": "491", "icd_version": "9", "long_title": "copd ICD-9"},
         {"icd_code": "E08", "icd_version": "10", "long_title": "diabetes ICD-10"},
+        {"icd_code": "J12", "icd_version": "10", "long_title": "pneumonia ICD-10"},
+        {"icd_code": "J45", "icd_version": "10", "long_title": "filler ICD-10"},
+        {"icd_code": "N19", "icd_version": "10", "long_title": "filler ICD-10"},
         {"icd_code": "V700", "icd_version": "9", "long_title": "filler ICD-9"},
         {"icd_code": "Z0000", "icd_version": "10", "long_title": "filler ICD-10"},
     ]
@@ -157,7 +188,10 @@ def test_conflicting_patient_sexes_are_refused() -> None:
 def test_discharge_is_not_before_admission() -> None:
     """Zpráva vznikne při přijetí nebo po něm, u všech přijetí fixture F."""
     tables = corpus_tables(
-        PLANS, NOTES, load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES), LEXICON
+        EDA_PLANS,
+        EDA_NOTES,
+        load_diagnosis_codes(REPOSITORY_DIAGNOSIS_CANDIDATES),
+        LEXICON,
     )
     admissions = {
         row["hadm_id"]: datetime.fromisoformat(row["admittime"])
