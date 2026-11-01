@@ -204,8 +204,8 @@ test_that("filtr předpon vybere jen kapitolu R, resp. 780–799", {
   expect_equal(code_ranking(con, 9L, SYMPTOM_PREFIXES$icd9)$kod, c("780", "799"))
 })
 
-test_that("skupina s n < 10 nebo doplňkem < 10 ve výstupu není ani kódem, ani názvem", {
-  codes <- rbind(bulk("I10", "10", 30), bulk("Z99", "10", 5), bulk("E119", "10", 14))
+test_that("práh popisku vynechá devět zpráv, pustí deset a neomezuje doplněk", {
+  codes <- rbind(bulk("I10", "10", 30), bulk("Z99", "10", 9), bulk("E119", "10", 10))
   titles <- data.frame(
     icd_code = c("I10", "Z99", "E119"), icd_version = "10",
     long_title = c("Hypertenze", "Závislost na přístroji", "Diabetes"),
@@ -214,13 +214,16 @@ test_that("skupina s n < 10 nebo doplňkem < 10 ve výstupu není ani kódem, an
   con <- diag_con(codes, titles = titles)
 
   out <- code_ranking(con, 10L)
-  text <- paste(unlist(out), collapse = "|")
 
   expect_equal(out$kod, c("I10", "E11"))
-  expect_false(grepl("Z99|Závislost", text))
+  expect_equal(out$n, c(30, 10))
+  expect_false(any(grepl("Z99|Závislost", unlist(out))))
 
-  tight <- diag_con(rbind(bulk("I10", "10", 40), bulk("Z99", "10", 6)))
-  expect_equal(nrow(code_ranking(tight, 10L)), 0L)
+  tight <- diag_con(rbind(bulk("I10", "10", 40), bulk("Z99", "10", 2)))
+  tight_out <- code_ranking(tight, 10L)
+  expect_equal(tight_out$kod, "I10")
+  expect_equal(tight_out$n, 40)
+  expect_equal(tight_out$podil, 40 / 42)
 })
 
 test_that("žebříček prázdného korpusu je prázdná tabulka", {
@@ -230,12 +233,11 @@ test_that("žebříček prázdného korpusu je prázdná tabulka", {
   expect_named(out, c("kod", "nazev", "n", "podil"))
 })
 
-test_that("kandidát bez zpráv má nulu a potlačení se řídí dua_binary", {
+test_that("kandidát bez zpráv má nulu a malý kandidát zachová počet", {
   codes <- rbind(bulk("I500", "10", 30), bulk("N189", "10", 3), bulk("I10", "10", 40))
   con <- diag_con(codes)
 
   raw <- candidate_prevalence(con, POOL)
-  published <- suppress_prevalence(raw)
   row <- function(frame, key) frame[frame$kandidat == key, ]
 
   expect_equal(raw$kandidat, names(POOL))
@@ -243,10 +245,6 @@ test_that("kandidát bez zpráv má nulu a potlačení se řídí dua_binary", {
   expect_equal(row(raw, "hf")$n, 30)
   expect_equal(row(raw, "ckd")$n, 3)
   expect_equal(row(raw, "hf")$celkem, 73)
-  expect_equal(published$n, dua_binary(raw$n, raw$celkem))
-  expect_true(is.na(row(published, "pn")$n))
-  expect_true(is.na(row(published, "ckd")$n))
-  expect_equal(row(published, "hf")$celkem, 73)
 })
 
 group <- function(id, n, codes, version = "10") {
@@ -282,20 +280,13 @@ test_that("souběh počítá P(sloupec | řádek) ze správných počtů a nemá
   expect_equal(cell("ckd", "dm")$n_ij, 0)
 })
 
-test_that("buňka souběhu s n_ij < 10 nebo n_i - n_ij < 10 je skrytá", {
-  con <- cooccurrence_fixture()
+test_that("souběh zachová malý počet a podíl ze jmenovatele řádku", {
+  co <- data.frame(radek = "a", sloupec = "b", n_ij = 3, n_i = 50, n_j = 40)
 
-  cells <- cooccurrence_cells(cooccurrence(con, POOL))
-  cell <- function(row, column) cells[cells$radek == row & cells$sloupec == column, ]
+  out <- cooccurrence_cells(co)
 
-  expect_equal(cell("hf", "dm")$podil, 25 / 53)
-  expect_equal(cell("dm", "hf")$podil, 25 / 55)
-  expect_true(is.na(cell("hf", "pn")$podil))
-  expect_true(is.na(cell("pn", "hf")$podil))
-  expect_true(is.na(cell("ckd", "hf")$podil))
-  expect_true(is.na(cell("hf", "ckd")$podil))
-  expect_true(is.na(cell("pn", "hf")$podil))
-  expect_true(is.na(cell("ckd", "dm")$podil))
+  expect_equal(out$n_ij, 3)
+  expect_equal(out$podil, 0.06)
 })
 
 test_that("pásmo prevalence rozliší pod, v pásmu, nad a neznámé", {
@@ -306,28 +297,28 @@ test_that("pásmo prevalence rozliší pod, v pásmu, nad a neznámé", {
 
 published_prevalence <- function(n, total = 1000) {
   keys <- names(n)
+  total <- rep_len(total, length(n))
   data.frame(
-    kandidat = keys, n = n, n9 = NA_real_, n10 = NA_real_, celkem = total,
-    celkem9 = NA_real_, celkem10 = NA_real_, stringsAsFactors = FALSE
+    kandidat = keys, n = n, n9 = n, n10 = n, celkem = total,
+    celkem9 = total, celkem10 = total, stringsAsFactors = FALSE
   )
 }
 
 test_that("předvýběr pustí kandidáty v pásmu a ostatní jmenuje s důvodem", {
-  published <- published_prevalence(c(hf = 300, dm = 20, ckd = 700, pn = NA))
+  published <- published_prevalence(c(hf = 300, dm = 20, ckd = 700, pn = 0))
 
   out <- preselection(published)
 
   expect_equal(out$kind, "vyber")
   expect_equal(out$in_band, "hf")
-  expect_equal(out$below, "dm")
+  expect_equal(out$below, c("dm", "pn"))
   expect_equal(out$above, "ckd")
-  expect_equal(out$unknown, "pn")
 })
 
 test_that("nepokryté Charlsonovy kategorie v pásmu se určí podle pole charlson", {
   counts <- data.frame(
     kategorie = c("chf", "diab", "pvd", "dementia", "aids", "cpd"),
-    n = c(300, 200, 100, 30, 400, NA),
+    n = c(300, 200, 100, 30, 400, 0),
     stringsAsFactors = FALSE
   )
 
@@ -338,13 +329,13 @@ test_that("nepokryté Charlsonovy kategorie v pásmu se určí podle pole charls
   expect_equal(uncovered_charlson(counts[1:2, ], POOL, total = 1000)$categories, character())
 })
 
-test_that("dvojice s P(j | i) ≥ 0,5 se jmenují a skryté buňky se přiznají", {
+test_that("dvojice s P(j | i) ≥ 0,5 se jmenují", {
   cells <- data.frame(
     radek = c("hf", "dm", "ckd", "pn"),
     sloupec = c("dm", "hf", "hf", "hf"),
-    n_ij = c(30, 10, NA, 12),
-    n_i = c(60, 60, NA, 100),
-    podil = c(0.5, 10 / 60, NA, 0.12),
+    n_ij = c(30, 10, 0, 12),
+    n_i = c(60, 60, 5, 100),
+    podil = c(0.5, 10 / 60, 0, 0.12),
     stringsAsFactors = FALSE
   )
 
@@ -353,14 +344,13 @@ test_that("dvojice s P(j | i) ≥ 0,5 se jmenují a skryté buňky se přiznají
   expect_equal(out$kind, "dvojice")
   expect_equal(out$pairs$radek, "hf")
   expect_equal(out$pairs$sloupec, "dm")
-  expect_equal(out$hidden, 1)
 })
 
 test_that("éry se liší, když je prevalence v jedné víc než 1,5krát větší", {
   published <- data.frame(
     kandidat = c("hf", "dm", "ckd", "pn", "ami"),
     n = 100,
-    n9 = c(30, 15, 0, NA, 10),
+    n9 = c(30, 15, 0, 5, 10),
     n10 = c(10, 10, 20, 10, 10),
     celkem = 1000,
     celkem9 = 100,
@@ -371,23 +361,24 @@ test_that("éry se liší, když je prevalence v jedné víc než 1,5krát vět�
   out <- era_gaps(published)
 
   expect_equal(out$kind, "rozdily")
-  expect_equal(out$gaps$kandidat, c("hf", "ckd"))
-  expect_equal(out$unknown, "pn")
+  expect_equal(out$gaps$kandidat, c("hf", "ckd", "pn"))
 })
 
-test_that("příznaky pokrývají podíl zpráv s kódem kapitoly R, jinak nelze", {
-  expect_equal(symptom_share(list(notes = 100, symptom = 40))$share, 0.4)
-  expect_equal(symptom_share(list(notes = 100, symptom = 5))$kind, "nelze")
+test_that("příznaky zachovají i čtyři zprávy ze sta", {
+  out <- symptom_share(list(notes = 100, symptom = 4))
+
+  expect_equal(out$kind, "share")
+  expect_equal(out$n, 4)
+  expect_equal(out$share, 0.04)
 })
 
 test_that("prázdný korpus vede do větví nelze", {
   con <- mimic_con()
   pool <- read_candidates(candidates_path())
   era <- era_summary(con)
-  published <- suppress_prevalence(candidate_prevalence(con, pool))
+  published <- candidate_prevalence(con, pool)
   cells <- cooccurrence_cells(cooccurrence(con, pool))
   counts <- charlson_counts(con)
-  counts$n <- dua_binary(counts$n, era$notes)
 
   expect_equal(era$notes, 0)
   expect_equal(preselection(published)$kind, "nelze")
@@ -410,26 +401,24 @@ test_that("read_candidates načte reálný config a každý kandidát je úplný
   expect_equal(pool$sepsis$icd10_prefixes, c("A40", "A41", "R652"))
 })
 
-test_that("tabulky ukážou potlačenou buňku jako potlačeno a bez podílu", {
-  counts <- data.frame(kategorie = c("chf", "aids"), n = c(300, 4), stringsAsFactors = FALSE)
+test_that("Charlson zachová malé počty i jejich podíly", {
+  counts <- data.frame(kategorie = c("A", "B"), n = c(3, 12), stringsAsFactors = FALSE)
 
-  out <- charlson_table(charlson_published(counts, 1000), 1000)
+  published <- charlson_published(counts)
 
-  expect_equal(out$kategorie, c("Srdeční selhání", "AIDS/HIV"))
-  expect_equal(out$n, c("300", "potlačeno"))
-  expect_equal(out$podil, c("30,0", "–"))
+  expect_equal(published$n, c(3, 12))
+  expect_equal(charlson_table(published, 100)$podil, c("3,0", "12,0"))
 })
 
 test_that("tabulka kandidátů uvádí české popisky a pásmo", {
-  published <- published_prevalence(c(hf = 300, dm = NA))
+  published <- published_prevalence(c(hf = 300, dm = 3))
 
   out <- candidate_table(published, POOL)
 
   expect_equal(out$kandidat, c("Srdeční selhání", "Diabetes"))
-  expect_equal(out$pasmo, c("v pásmu", "nelze posoudit"))
-  expect_equal(out$n, c("300", "potlačeno"))
+  expect_equal(out$pasmo, c("v pásmu", "pod pásmem"))
+  expect_equal(out$n, c("300", "3"))
 })
-
 
 test_that("kód v izolovaném prostředí nepotřebuje demographics.R", {
   env <- new.env(parent = baseenv())
@@ -447,71 +436,16 @@ test_that("souběh vrací i počet zpráv kandidáta ve sloupci", {
   expect_equal(c(cell("hf", "dm")$n_j, cell("dm", "hf")$n_j), c(55, 53))
 })
 
-test_that("souběh se skryje v obou směrech, když doplněk sloupce je pod prahem", {
+test_that("souběh zachová oba směry i malý doplněk", {
   co <- data.frame(
     radek = c("a", "b"), sloupec = c("b", "a"),
-    n_ij = 25, n_i = c(100, 30), n_j = c(30, 100),
-    stringsAsFactors = FALSE
+    n_ij = 25, n_i = c(100, 30), n_j = c(30, 100), stringsAsFactors = FALSE
   )
 
   out <- cooccurrence_cells(co)
 
-  expect_true(all(is.na(out$podil)))
-  expect_true(all(is.na(out$n_ij)))
-})
-
-test_that("doplněk ér skryje obě éry, když je skrytá jedna, a celkový počet nechá", {
-  raw <- data.frame(
-    kandidat = "hf", n = 35, n9 = 5, n10 = 30, celkem = 1000, celkem9 = 500, celkem10 = 500,
-    stringsAsFactors = FALSE
-  )
-
-  out <- suppress_prevalence(raw)
-
-  expect_true(is.na(out$n9))
-  expect_true(is.na(out$n10))
-  expect_equal(out$n, 35)
-})
-
-test_that("rozdíl kategorie a kandidáta pod prahem skryje obě čísla", {
-  charlson <- data.frame(
-    kategorie = c("chf", "diab", "diabwc", "cpd", "rend"),
-    n = c(305, 100, 195, 400, 500), popisek = "x", stringsAsFactors = FALSE
-  )
-  prevalence <- published_prevalence(c(hf = 300, diabetes = 300, copd = 150, ckd = 80))
-  pool <- list(
-    hf = candidate("a", "428", "I50", "chf"),
-    diabetes = candidate("b", "250", "E11", c("diab", "diabwc")),
-    copd = candidate("c", "491", "J44", "cpd"),
-    ckd = candidate("d", "585", "N18", "rend")
-  )
-
-  out <- reconcile_charlson(charlson, prevalence, pool)
-  cat_n <- function(key) out$charlson$n[out$charlson$kategorie == key]
-  cand_n <- function(key) out$prevalence$n[out$prevalence$kandidat == key]
-
-  expect_true(is.na(cand_n("hf")))
-  expect_true(is.na(cat_n("chf")))
-  expect_true(is.na(cand_n("diabetes")))
-  expect_true(is.na(cat_n("diab")))
-  expect_true(is.na(cat_n("diabwc")))
-  expect_equal(cand_n("copd"), 150)
-  expect_equal(cat_n("cpd"), 400)
-  expect_equal(cand_n("ckd"), 80)
-  expect_equal(cat_n("rend"), 500)
-})
-
-test_that("rozdíl dvou kategorií a kandidáta skryje diabetes, i když dílčí rozdíly jsou velké", {
-  charlson <- data.frame(
-    kategorie = c("diab", "diabwc"), n = c(100, 205), popisek = "x", stringsAsFactors = FALSE
-  )
-  prevalence <- published_prevalence(c(diabetes = 300))
-  pool <- list(diabetes = candidate("b", "250", "E11", c("diab", "diabwc")))
-
-  out <- reconcile_charlson(charlson, prevalence, pool)
-
-  expect_true(is.na(out$prevalence$n))
-  expect_true(all(is.na(out$charlson$n)))
+  expect_equal(out$n_ij, c(25, 25))
+  expect_equal(out$podil, c(0.25, 25 / 30))
 })
 
 test_that("název skupiny nepochází z kódu pod prahem, jinak je neuvedeno", {
@@ -546,28 +480,6 @@ test_that("prázdný seznam předpon u žebříčku bere všechny kódy", {
   expect_equal(code_ranking(con, 10L, character())$kod, c("I10", "E11"))
 })
 
-test_that("audit s potlačenými kategoriemi je nelze, nebo je vynechá", {
-  none <- data.frame(kategorie = c("chf", "pvd"), n = NA_real_, stringsAsFactors = FALSE)
-  some <- data.frame(kategorie = c("chf", "pvd"), n = c(NA, 300), stringsAsFactors = FALSE)
-
-  expect_equal(uncovered_charlson(none, POOL, 1000)$kind, "nelze")
-  expect_equal(uncovered_charlson(some, POOL, 1000)$categories, "pvd")
-})
-
-test_that("kandidát skrytý rozdílem s kategorií má NA i v prevalencích podle ér", {
-  charlson <- data.frame(kategorie = "chf", n = 305, popisek = "x", stringsAsFactors = FALSE)
-  prevalence <- published_prevalence(c(hf = 300))
-  prevalence$n9 <- 100
-  prevalence$n10 <- 200
-  pool <- list(hf = candidate("a", "428", "I50", "chf"))
-
-  out <- reconcile_charlson(charlson, prevalence, pool)
-
-  expect_true(is.na(out$prevalence$n))
-  expect_true(is.na(out$prevalence$n9))
-  expect_true(is.na(out$prevalence$n10))
-})
-
 test_that("candidate_labels vrátí české popisky bez jmen v pořadí klíčů", {
   pool <- list(a = list(label_cs = "Áčko"), b = list(label_cs = "Béčko"))
 
@@ -579,4 +491,22 @@ test_that("config_path skládá cesty ke konfiguraci a obě cesty existují", {
   expect_equal(basename(config_path("x.json")), "x.json")
   expect_true(file.exists(candidates_path()))
   expect_true(file.exists(text_mentions_path()))
+})
+
+test_that("nulové jmenovatele a prázdné tabulky zůstanou neposouditelné", {
+  cells <- data.frame(radek = "a", sloupec = "b", n_ij = 0, n_i = 0, n_j = 3)
+  out <- cooccurrence_cells(cells)
+
+  expect_equal(out$n_ij, 0)
+  expect_true(is.na(out$podil))
+  expect_equal(preselection(published_prevalence(c(a = 0), total = 0))$kind, "nelze")
+  expect_equal(preselection(published_prevalence(setNames(numeric(), character())))$kind, "nelze")
+  expect_equal(redundant_pairs(out[0, ])$kind, "nelze")
+  expect_equal(uncovered_charlson(data.frame(kategorie = character(), n = numeric()), POOL, 100)$kind, "nelze")
+  prevalence <- published_prevalence(c(a = 3))
+  prevalence$n9 <- 0
+  prevalence$n10 <- 3
+  prevalence$celkem9 <- 0
+  prevalence$celkem10 <- 5
+  expect_equal(era_gaps(prevalence)$kind, "nelze")
 })
