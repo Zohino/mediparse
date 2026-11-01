@@ -17,9 +17,9 @@ RARE_ROWS: Final = 2
 _KEY_COLUMNS: Final = frozenset({"subject_id", "hadm_id", "note_id"})
 _KEY_OWNERS: Final = {"subject_id": "patients", "hadm_id": "admissions"}
 _REFERENCES: Final = {("mimic-iv-bhc", "note_id"): "discharge"}
-# Vzácná verze i kód musí nést prefix: platná verze by kód zařadila do tříznakové
-# skupiny a prefix by se v žebříčku ztratil. Období pacienta je pevný číselník MIMIC,
-# proto se stejně jako ostatní typové hodnoty přebírá z prvního řádku.
+# Vzácné řádky nemají zprávu v discharge, takže jejich prefixy do výstupů EDA
+# nedosáhnou. Práh popisků kódů dnes ověřuje testthat v test-diagnoses.R;
+# další využití těchto svědků řeší S100b.
 _RARE_WITNESSES: Final = frozenset({
     ("diagnoses_icd", "icd_version"),
     ("diagnoses_icd", "icd_code"),
