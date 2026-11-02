@@ -10,9 +10,10 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import pytest
 
-from mediparse.entrypoints import cohort, synthetic_mimic
+from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.plans_file import PlansFile
+from mediparse.synthetic.entrypoints import synthetic_mimic
 from tests.support import (
     REPOSITORY_CORPUS,
     REPOSITORY_DIAGNOSIS_CANDIDATES,

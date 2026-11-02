@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from mediparse.entrypoints.synthetic_mimic import main
+from mediparse.synthetic.entrypoints.synthetic_mimic import main
 
 raise SystemExit(
     main(

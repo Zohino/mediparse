@@ -9,9 +9,6 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.domain.language import Language
-from mediparse.domain.synthetic_bhc import bhc_rows
-from mediparse.domain.synthetic_mimic import corpus_tables, input_notes
-from mediparse.domain.synthetic_sentinel import section_tokens, sentinel_tables
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
@@ -22,6 +19,13 @@ from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
 from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
+from mediparse.synthetic.domain.corpus_tables import corpus_tables
+from mediparse.synthetic.domain.synthetic_bhc import bhc_rows
+from mediparse.synthetic.domain.synthetic_mimic import input_notes
+from mediparse.synthetic.domain.synthetic_sentinel import (
+    section_tokens,
+    sentinel_tables,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence

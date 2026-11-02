@@ -4,7 +4,7 @@ import pytest
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.section_headers import LexiconSection
-from mediparse.domain.synthetic_bhc import bhc_rows, bhc_target
+from mediparse.synthetic.domain.synthetic_bhc import bhc_rows, bhc_target
 from tests.synthetic_support import (
     EDA_NOTES,
     EDA_PLANS,

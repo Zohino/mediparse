@@ -9,11 +9,11 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import pytest
 
-from mediparse.entrypoints.eda_synthetic_tables import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.mimic_inventory import read_manifest
 from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.synthetic_marker import SyntheticMarker, read_marker
+from mediparse.synthetic.entrypoints.eda_synthetic_tables import run
 from tests.support import (
     REPOSITORY_CORPUS,
     REPOSITORY_DIAGNOSIS_CANDIDATES,

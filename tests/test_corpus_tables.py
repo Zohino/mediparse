@@ -8,8 +8,9 @@ import pytest
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.note_structure import Sex
-from mediparse.domain.synthetic_mimic import corpus_tables, input_notes
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
+from mediparse.synthetic.domain.corpus_tables import corpus_tables
+from mediparse.synthetic.domain.synthetic_mimic import input_notes
 from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 from tests.synthetic_support import (
     EDA_NOTES,
@@ -98,6 +99,9 @@ def test_manual_demography() -> None:
         r["hadm_id"] for r in tables["discharge"]
     }
     assert [r["insurance"] for r in admissions] == ["Medicare"] * 32 + ["Private"]
+    assert [(r["race"], r["marital_status"], r["language"]) for r in admissions] == [
+        ("WHITE", "MARRIED", "English")
+    ] * 32 + [("BLACK/AFRICAN AMERICAN", "SINGLE", "Spanish")]
     assert all(r["admittime"] == "2155-01-01 00:00:00" for r in admissions)
 
 
