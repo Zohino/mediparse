@@ -3,17 +3,21 @@
 from __future__ import annotations
 
 import json
+from dataclasses import asdict
 from typing import TYPE_CHECKING
 
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
 from mediparse.domain import section_headers
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.entrypoints import eda_sections
-from mediparse.entrypoints.eda_sections import note_sections
+from mediparse.domain.note_sections import section_spans
+from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from tests.support import REPOSITORY_SECTION_HEADERS
 
 if TYPE_CHECKING:
+    from collections.abc import Sequence
     from pathlib import Path
 
 COLUMNS = {
@@ -28,6 +32,23 @@ COLUMNS = {
 }
 WITH_PREAMBLE = "Name: ___\n\nAllergies:\nnone\n\nChief Complaint:\npain\n"
 WITHOUT_PREAMBLE = "Allergies:\n  none  \n"
+
+
+def note_sections(
+    lexicon: Path, note_ids: Sequence[str], texts: Sequence[str]
+) -> dict[str, list]:
+    """Převede doménové řádky na původní očekávání sloupců.
+
+    Returns:
+        Sloupce částí zpráv.
+    """
+    parsed = load_section_lexicon(lexicon)
+    columns = {name: [] for name in COLUMNS}
+    for note_id, text in zip(note_ids, texts, strict=True):
+        for row in section_spans(note_id, text, parsed):
+            for name, value in asdict(row).items():
+                columns[name].append(value)
+    return columns
 
 
 @pytest.fixture
@@ -163,7 +184,12 @@ def test_missing_lexicon_is_invalid_input(tmp_path: Path) -> None:
 
 def test_other_is_the_domain_constant() -> None:
     """Klíč `other` se shoduje s doménou."""
-    assert eda_sections.OTHER == section_headers.OTHER
+    assert (
+        section_spans("a", "text", load_section_lexicon(REPOSITORY_SECTION_HEADERS))[
+            0
+        ].section
+        == section_headers.OTHER
+    )
 
 
 def test_repository_lexicon_loads() -> None:
@@ -171,3 +197,15 @@ def test_repository_lexicon_loads() -> None:
     result = note_sections(REPOSITORY_SECTION_HEADERS, ["a"], [WITHOUT_PREAMBLE])
 
     assert result["section"] == ["allergies"]
+
+
+@given(st.text())
+def test_spans_preserve_length_and_bodies(text: str) -> None:
+    """Offsety vyříznou těla parseru a součet délek zachová celý text."""
+    lexicon = load_section_lexicon(REPOSITORY_SECTION_HEADERS)
+    rows = section_spans("a", text, lexicon)
+    parts = section_headers.split_sections(text, lexicon)
+    assert sum(row.span_chars for row in rows) == len(text)
+    assert [text[row.body_start : row.body_end] for row in rows] == [
+        part.body for part in parts
+    ]

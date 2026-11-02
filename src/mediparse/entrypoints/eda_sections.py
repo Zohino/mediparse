@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
+from dataclasses import asdict
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.note_text import DEID
+from mediparse.domain.note_sections import section_spans
 from mediparse.domain.section_headers import OTHER as _OTHER
-from mediparse.domain.section_headers import split_sections
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 
 if TYPE_CHECKING:
@@ -43,35 +43,21 @@ def note_sections(
         InvalidInputError: Lexikon chybí nebo neodpovídá schématu.
     """
     parsed = load_section_lexicon(lexicon)
-    ids: list[str] = []
-    positions: list[int] = []
-    sections: list[str] = []
-    spans: list[int] = []
-    bodies: list[int] = []
-    masked: list[bool] = []
-    starts: list[int] = []
-    ends: list[int] = []
-    for note_id, text in zip(note_ids, texts, strict=True):
-        cursor = 0
-        for position, part in enumerate(split_sections(text, parsed)):
-            body_start = cursor + len(part.header)
-            cursor = body_start + len(part.body)
-            starts.append(body_start)
-            ends.append(cursor)
-            ids.append(note_id)
-            positions.append(position)
-            sections.append(part.section)
-            spans.append(len(part.header) + len(part.body))
-            body = part.body.strip()
-            bodies.append(len(body))
-            masked.append(body == DEID)
-    return {
-        "note_id": ids,
-        "position": positions,
-        "section": sections,
-        "span_chars": spans,
-        "body_chars": bodies,
-        "body_masked": masked,
-        "body_start": starts,
-        "body_end": ends,
+    columns: dict[str, list] = {
+        name: []
+        for name in (
+            "note_id",
+            "position",
+            "section",
+            "span_chars",
+            "body_chars",
+            "body_masked",
+            "body_start",
+            "body_end",
+        )
     }
+    for note_id, text in zip(note_ids, texts, strict=True):
+        for row in section_spans(note_id, text, parsed):
+            for name, value in asdict(row).items():
+                columns[name].append(value)
+    return columns
