@@ -16,7 +16,7 @@ from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.eda_duckdb import EdaDatabase
 from mediparse.infrastructure.hf_tokenizers import (
-    HfTokenLengths,
+    counter_for,
     load_tokenizer,
     prompt_overhead,
     special_tokens,
@@ -87,17 +87,11 @@ def run(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
         SAMPLE_LIMIT,
     )
     counters = {
-        info.tokenizer: HfTokenLengths(
-            loaded[info.tokenizer],
-            special=info.role == "encoder",
-            strip=info.role == "translation",
-        )
+        info.tokenizer: counter_for(info, loaded[info.tokenizer], parallel=False)
         for info in infos
     }
     parallel_counters = {
-        info.tokenizer: HfTokenLengths(
-            loaded[info.tokenizer], special=False, strip=info.role == "translation"
-        )
+        info.tokenizer: counter_for(info, loaded[info.tokenizer], parallel=True)
         for info in infos
     }
     with (

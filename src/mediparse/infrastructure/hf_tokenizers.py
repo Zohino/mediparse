@@ -61,6 +61,24 @@ class HfTokenLengths:
             raise InvalidInputError(msg) from None
 
 
+def counter_for(
+    info: TokenizerInfo,
+    tokenizer: PreTrainedTokenizerBase,
+    *,
+    parallel: bool,
+) -> HfTokenLengths:
+    """Určí režim speciálních tokenů a ořezu pro měření zpráv nebo párů.
+
+    Returns:
+        Encoder se speciálními tokeny jen mimo páry; překlad vždy po ořezu.
+    """
+    return HfTokenLengths(
+        tokenizer,
+        special=info.role == "encoder" and not parallel,
+        strip=info.role == "translation",
+    )
+
+
 def load_tokenizer(model: str, revision: str) -> PreTrainedTokenizerBase:
     """Načte tokenizér v pevné revizi bez modelových vah.
 

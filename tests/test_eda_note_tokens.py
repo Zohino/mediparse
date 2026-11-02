@@ -7,6 +7,7 @@ import shutil
 import sys
 from pathlib import Path
 from types import ModuleType
+from typing import Literal
 from unittest.mock import Mock
 
 import pyarrow as pa
@@ -15,6 +16,7 @@ import pytest
 
 from mediparse.domain.data_access import DataAccessError
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.note_tokens import TokenizerInfo
 from mediparse.entrypoints import eda_note_tokens
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure import hf_tokenizers, note_tokens_input
@@ -29,7 +31,12 @@ from mediparse.infrastructure.note_features_table import ParquetNoteTexts
 from mediparse.infrastructure.note_tokens_input import SampleNoteTexts, read_parallel
 from mediparse.infrastructure.note_tokens_table import ARTIFACTS, ParquetNoteTokens
 from mediparse.infrastructure.translation_script import ScriptSplitter, load_translation
-from tests.note_tokens_support import NOTES, FakeSplitter, word_tokenizer
+from tests.note_tokens_support import (
+    NOTES,
+    FakeSplitter,
+    whitespace_tokenizer,
+    word_tokenizer,
+)
 from tests.support import REPOSITORY
 
 type Inputs = tuple[Path, Path, Path, Path, Path]
@@ -384,3 +391,26 @@ def test_sample_uses_declared_python_limit(
     rows = next(SampleNoteTexts(EdaDatabase(inputs[0], {}), "discharge").batches())
     expected_count = 2
     assert len(rows) == expected_count
+
+
+@pytest.mark.parametrize(
+    ("role", "parallel", "expected"),
+    [
+        ("encoder", False, [5, 2, 5]),
+        ("encoder", True, [3, 0, 3]),
+        ("translation", False, [3, 0, 2]),
+        ("translation", True, [3, 0, 2]),
+    ],
+)
+def test_counter_policy_counts_whitespace_sensitive_tokens(
+    role: Literal["encoder", "translation"],
+    *,
+    parallel: bool,
+    expected: list[int],
+) -> None:
+    """Dvě slova, nový řádek a BOS/EOS dávají ručně pět tokenů encoderu."""
+    info = TokenizerInfo(
+        "test", "model", "revision", 512, role, 2 if role == "encoder" else 0, "test"
+    )
+    counter = hf_tokenizers.counter_for(info, whitespace_tokenizer(), parallel=parallel)
+    assert counter.lengths(["a b c", "", "  a b \n"]) == expected
