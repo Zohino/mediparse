@@ -95,7 +95,12 @@ def test_manual_wordlevel_lengths_and_prompt() -> None:
     assert HfTokenLengths(tokenizer, special=False).lengths([]) == []
     assert (
         special_tokens(tokenizer),
-        prompt_overhead(load_translation(REPOSITORY / "translation"), tokenizer),
+        prompt_overhead(
+            load_translation(REPOSITORY / "translation").prompt_ids(
+                tokenizer, "The weather is nice today."
+            ),
+            5,
+        ),
     ) == (2, 3)
 
 
@@ -241,11 +246,11 @@ def test_translation_import_restores_modules_and_path(
         monkeypatch.setitem(sys.modules, name, module)
     path = sys.path[:]
     script = load_translation(REPOSITORY / "translation")
-    assert script.prepare.MODEL == "google/translategemma-27b-it"
+    assert script.model == "google/translategemma-27b-it"
     assert (
-        script.prepare.WINDOW,
-        script.prepare.SPLIT_RATIO,
-        len(script.prepare.REVISION),
+        script.window,
+        script.split_ratio,
+        len(script.revision),
     ) == (2048, 2.2, 40)
     assert sys.path == path
     assert all(sys.modules[name] is module for name, module in original.items())
@@ -256,12 +261,17 @@ def test_translation_import_restores_modules_and_path(
 
 
 def test_real_script_splitter_handles_fitting_divided_and_unsplittable(
-    monkeypatch: pytest.MonkeyPatch,
+    inputs: Inputs,
 ) -> None:
     """Skutečné PEP 723 dělení pracuje nad tokenizérem bez Hubu."""
-    script = load_translation(REPOSITORY / "translation")
-    monkeypatch.setattr(script.prepare, "WINDOW", 12)
-    monkeypatch.setattr(script.prepare, "SPLIT_RATIO", 1.0)
+    prepare = inputs[1] / "prepare.py"
+    prepare.write_bytes(
+        prepare
+        .read_bytes()
+        .replace(b"WINDOW: Final = 2048", b"WINDOW: Final = 12")
+        .replace(b"SPLIT_RATIO: Final = 2.2", b"SPLIT_RATIO: Final = 1.0")
+    )
+    script = load_translation(inputs[1])
     splitter = ScriptSplitter(script, word_tokenizer())
     assert splitter.fits("a b c")
     assert splitter.parts("a b c") == 1

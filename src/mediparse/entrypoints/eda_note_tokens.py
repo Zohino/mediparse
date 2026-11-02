@@ -17,6 +17,7 @@ from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.eda_cache import is_current, pending_cache
 from mediparse.infrastructure.eda_duckdb import EdaDatabase
 from mediparse.infrastructure.hf_tokenizers import (
+    OVERHEAD_SENTENCE,
     counter_for,
     load_tokenizer,
     prompt_overhead,
@@ -64,7 +65,7 @@ def run(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
             msg = f"V adresáři tabulek chybí {table}.parquet."
             raise InvalidInputError(msg)
     script = load_translation(translation)
-    infos = tokenizer_info(script)
+    infos = tokenizer_info(script.model, script.revision, script.window)
     key = tokens_key(views, translation, english, czech, infos)
     directory = out / "tokens"
     artifacts = tuple(name for name, _ in ARTIFACTS)
@@ -81,11 +82,6 @@ def run(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
         else info
         for info in infos
     ]
-    prompt = TranslationPrompt(
-        prompt_overhead(script, loaded["translategemma"]),
-        script.prepare.SPLIT_RATIO,
-        SAMPLE_LIMIT,
-    )
     counters = {
         info.tokenizer: counter_for(info, loaded[info.tokenizer], parallel=False)
         for info in infos
@@ -94,6 +90,14 @@ def run(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
         info.tokenizer: counter_for(info, loaded[info.tokenizer], parallel=True)
         for info in infos
     }
+    prompt = TranslationPrompt(
+        prompt_overhead(
+            script.prompt_ids(loaded["translategemma"], OVERHEAD_SENTENCE),
+            counters["translategemma"].lengths([OVERHEAD_SENTENCE])[0],
+        ),
+        script.split_ratio,
+        SAMPLE_LIMIT,
+    )
     with (
         pending_cache(directory, key, artifacts) as temporary,
         ParquetNoteTokens(temporary).writer() as sink,

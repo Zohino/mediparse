@@ -14,7 +14,6 @@ if TYPE_CHECKING:
 
     from transformers import PreTrainedTokenizerBase
 
-    from mediparse.infrastructure.translation_script import TranslationScript
 
 ENCODERS: Final = (
     (
@@ -113,21 +112,16 @@ def special_tokens(tokenizer: PreTrainedTokenizerBase) -> int:
     return HfTokenLengths(tokenizer, special=True).lengths([""])[0]
 
 
-def prompt_overhead(
-    script: TranslationScript, tokenizer: PreTrainedTokenizerBase
-) -> int:
-    """Odečte délku pevné neklinické věty od jejího chat promptu.
+def prompt_overhead(ids: Sequence[int], source_length: int) -> int:
+    """Odečte délku zdroje od délky promptu pevné neklinické věty.
 
     Returns:
         Režie promptu bez tokenů zdroje.
     """
-    # PEP 723 příprava je jediným zdrojem chat promptu pro překlad.
-    ids = script.prepare._token_ids(tokenizer, OVERHEAD_SENTENCE)  # ruff: ignore[private-member-access]
-    source = HfTokenLengths(tokenizer, special=False, strip=True)
-    return len(ids) - source.lengths([OVERHEAD_SENTENCE])[0]
+    return len(ids) - source_length
 
 
-def tokenizer_info(script: TranslationScript) -> list[TokenizerInfo]:
+def tokenizer_info(model: str, revision: str, window: int) -> list[TokenizerInfo]:
     """Složí revize a okna ještě před načtením tokenizérů.
 
     Returns:
@@ -143,9 +137,9 @@ def tokenizer_info(script: TranslationScript) -> list[TokenizerInfo]:
         ),
         TokenizerInfo(
             "translategemma",
-            script.prepare.MODEL,
-            script.prepare.REVISION,
-            script.prepare.WINDOW,
+            model,
+            revision,
+            window,
             "translation",
             0,
             transformers_version,

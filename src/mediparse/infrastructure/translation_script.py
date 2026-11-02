@@ -18,10 +18,61 @@ if TYPE_CHECKING:
 
 @dataclass(frozen=True)
 class TranslationScript:
-    """Příprava překladu a sourozenecký algoritmus dělení."""
+    """Typovaná hranice přípravy překladu a sourozeneckého dělení."""
 
-    prepare: ModuleType
-    note_parts: ModuleType
+    _prepare: ModuleType
+    _note_parts: ModuleType
+
+    @property
+    def model(self) -> str:
+        """Identifikátor překladového modelu."""
+        return self._prepare.MODEL
+
+    @property
+    def revision(self) -> str:
+        """Pevná revize překladového modelu."""
+        return self._prepare.REVISION
+
+    @property
+    def window(self) -> int:
+        """Počet tokenů okna překladu."""
+        return self._prepare.WINDOW
+
+    @property
+    def split_ratio(self) -> float:
+        """Rezerva tokenů pro překlad vůči zdroji."""
+        return self._prepare.SPLIT_RATIO
+
+    def prompt_ids(self, tokenizer: PreTrainedTokenizerBase, text: str) -> list[int]:
+        """Sestaví prompt stejnou chat šablonou jako příprava překladu.
+
+        Returns:
+            Tokeny promptu včetně právě jednoho BOS.
+        """
+        # PEP 723 příprava je jediným zdrojem chat promptu pro překlad.
+        return self._prepare._token_ids(tokenizer, text)  # ruff: ignore[private-member-access]
+
+    def fits(self, tokenizer: PreTrainedTokenizerBase, text: str) -> bool:
+        """Použije původní kontrolu okna překladu.
+
+        Returns:
+            Zda se vejde celý text včetně rezervy na překlad.
+        """
+        # Soukromá funkce skriptu je skutečná kontrola používaná překladem.
+        return self._prepare._fits(tokenizer, text)  # ruff: ignore[private-member-access]
+
+    def parts(self, tokenizer: PreTrainedTokenizerBase, text: str) -> int | None:
+        """Použije původní algoritmus dělení překladu.
+
+        Returns:
+            Počet částí nebo None pro nedělitelný řádek.
+        """
+        try:
+            return len(
+                self._note_parts.split(text, lambda part: self.fits(tokenizer, part))
+            )
+        except self._note_parts.UnsplittableError:
+            return None
 
 
 @dataclass(frozen=True)
@@ -32,23 +83,20 @@ class ScriptSplitter:
     tokenizer: PreTrainedTokenizerBase
 
     def fits(self, text: str) -> bool:
-        """Použije kontrolu okna v přípravě překladu.
+        """Ověří okno původní přípravou překladu.
 
         Returns:
-            Zda se zpráva vejde včetně rezervy na překlad.
+            Zda se zpráva vejde včetně rezervy.
         """
-        return self.script.prepare._fits(self.tokenizer, text)  # ruff: ignore[private-member-access] — stejná kontrola jako v PEP 723 přípravě
+        return self.script.fits(self.tokenizer, text)
 
     def parts(self, text: str) -> int | None:
-        """Použije dělení přípravy překladu.
+        """Rozdělí zprávu původní přípravou překladu.
 
         Returns:
-            Počet částí; None pro nedělitelný řádek.
+            Počet částí nebo None pro nedělitelnou zprávu.
         """
-        try:
-            return len(self.script.note_parts.split(text, self.fits))
-        except self.script.note_parts.UnsplittableError:
-            return None
+        return self.script.parts(self.tokenizer, text)
 
 
 def load_translation(directory: Path) -> TranslationScript:
