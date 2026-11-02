@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from contextlib import ExitStack, contextmanager
 from dataclasses import asdict, dataclass
 from typing import TYPE_CHECKING, Final
@@ -10,6 +11,9 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.infrastructure.eda_cache import cache_key
+from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.infrastructure.hf_tokenizers import library_versions
 from mediparse.infrastructure.parquet_file import COMPRESSION
 
 if TYPE_CHECKING:
@@ -138,3 +142,43 @@ class ParquetNoteTokens:
         except (OSError, pa.ArrowException) as error:
             msg = f"Délky tokenů nelze zapsat: {type(error).__name__}."
             raise InvalidInputError(msg) from None
+
+
+def tokens_key(
+    views: Mapping[str, Path],
+    translation: Path,
+    english: Path,
+    czech: Path,
+    infos: Sequence[TokenizerInfo],
+) -> str:
+    """Otiskne tabulky, skripty, páry, revize a verze tokenizace.
+
+    Returns:
+        Klíč skupiny tokens se stejnou konstrukcí jako cache sešitu 9.
+
+    Raises:
+        InvalidInputError: Vstup klíče nelze přečíst.
+    """
+    try:
+        inputs = [
+            (name, file_sha256(views[name]).encode())
+            for name in ("discharge", "radiology")
+        ]
+        inputs.extend(
+            (f"translation/{path.name}", path.read_bytes())
+            for path in sorted(translation.glob("*.py"))
+        )
+        for label, directory in (("english", english), ("czech", czech)):
+            inputs.extend(
+                (f"{label}/{path.name}", path.read_bytes())
+                for path in sorted(directory.glob("*.txt"))
+            )
+        inputs.append((
+            "tokenizers",
+            json.dumps([asdict(info) for info in infos], sort_keys=True).encode(),
+        ))
+        inputs.extend(library_versions())
+        return cache_key(inputs)
+    except OSError as error:
+        msg = f"Vstup klíče cache nelze přečíst: {type(error).__name__}."
+        raise InvalidInputError(msg) from None

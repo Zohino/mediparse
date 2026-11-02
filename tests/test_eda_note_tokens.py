@@ -19,7 +19,11 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.note_tokens import TokenizerInfo
 from mediparse.entrypoints import eda_note_tokens
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure import hf_tokenizers, note_tokens_input
+from mediparse.infrastructure import (
+    hf_tokenizers,
+    note_tokens_sample,
+    note_tokens_table,
+)
 from mediparse.infrastructure.eda_cache import is_current
 from mediparse.infrastructure.eda_duckdb import EdaDatabase
 from mediparse.infrastructure.hf_tokenizers import (
@@ -28,8 +32,9 @@ from mediparse.infrastructure.hf_tokenizers import (
     special_tokens,
 )
 from mediparse.infrastructure.note_texts_parquet import ParquetNoteTexts
-from mediparse.infrastructure.note_tokens_input import SampleNoteTexts, read_parallel
+from mediparse.infrastructure.note_tokens_sample import SampleNoteTexts
 from mediparse.infrastructure.note_tokens_table import ARTIFACTS, ParquetNoteTokens
+from mediparse.infrastructure.parallel_texts import read_parallel
 from mediparse.infrastructure.translation_script import ScriptSplitter, load_translation
 from tests.note_tokens_support import (
     NOTES,
@@ -188,7 +193,7 @@ def test_guard_precedes_hashing_and_parquet_open(
     """Bez značky syntetiky se neotevře ani nehashuje žádný parquet."""
     (inputs[0] / "synthetic.json").unlink()
     digest, reader = Mock(), Mock()
-    monkeypatch.setattr(note_tokens_input, "file_sha256", digest)
+    monkeypatch.setattr(note_tokens_table, "file_sha256", digest)
     monkeypatch.setattr(pq, "ParquetFile", reader)
     with pytest.raises(DataAccessError):
         eda_note_tokens.run(*inputs, {"CLAUDECODE": "1"})
@@ -387,7 +392,7 @@ def test_sample_uses_declared_python_limit(
     inputs: Inputs, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Limit SQL pochází z jediné deklarace velikosti vzorku v Pythonu."""
-    monkeypatch.setattr(note_tokens_input, "SAMPLE_LIMIT", 2)
+    monkeypatch.setattr(note_tokens_sample, "SAMPLE_LIMIT", 2)
     rows = next(SampleNoteTexts(EdaDatabase(inputs[0], {}), "discharge").batches())
     expected_count = 2
     assert len(rows) == expected_count

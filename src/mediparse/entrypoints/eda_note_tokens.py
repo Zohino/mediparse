@@ -24,13 +24,13 @@ from mediparse.infrastructure.hf_tokenizers import (
     tokenizer_info,
 )
 from mediparse.infrastructure.note_texts_parquet import ParquetNoteTexts
-from mediparse.infrastructure.note_tokens_input import (
-    SAMPLE_LIMIT,
-    SampleNoteTexts,
-    read_parallel,
+from mediparse.infrastructure.note_tokens_sample import SAMPLE_LIMIT, SampleNoteTexts
+from mediparse.infrastructure.note_tokens_table import (
+    ARTIFACTS,
+    ParquetNoteTokens,
     tokens_key,
 )
-from mediparse.infrastructure.note_tokens_table import ARTIFACTS, ParquetNoteTokens
+from mediparse.infrastructure.parallel_texts import read_parallel
 from mediparse.infrastructure.translation_script import ScriptSplitter, load_translation
 
 if TYPE_CHECKING:
