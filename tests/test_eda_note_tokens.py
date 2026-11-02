@@ -20,14 +20,14 @@ from mediparse.domain.note_tokens import TokenizerInfo
 from mediparse.entrypoints import eda_note_tokens
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure import hf_tokenizers, note_tokens_input
+from mediparse.infrastructure.eda_cache import is_current
 from mediparse.infrastructure.eda_duckdb import EdaDatabase
 from mediparse.infrastructure.hf_tokenizers import (
     HfTokenLengths,
     prompt_overhead,
     special_tokens,
 )
-from mediparse.infrastructure.note_features_cache import is_current
-from mediparse.infrastructure.note_features_table import ParquetNoteTexts
+from mediparse.infrastructure.note_texts_parquet import ParquetNoteTexts
 from mediparse.infrastructure.note_tokens_input import SampleNoteTexts, read_parallel
 from mediparse.infrastructure.note_tokens_table import ARTIFACTS, ParquetNoteTokens
 from mediparse.infrastructure.translation_script import ScriptSplitter, load_translation

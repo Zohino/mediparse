@@ -9,9 +9,9 @@ from typing import TYPE_CHECKING, Final
 import duckdb
 
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.infrastructure.eda_cache import cache_key
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.hf_tokenizers import library_versions
-from mediparse.infrastructure.note_features_cache import cache_key
 
 if TYPE_CHECKING:
     from collections.abc import Generator, Mapping, Sequence

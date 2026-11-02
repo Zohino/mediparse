@@ -14,6 +14,7 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.note_tokens import TranslationPrompt
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.eda_cache import is_current, pending_cache
 from mediparse.infrastructure.eda_duckdb import EdaDatabase
 from mediparse.infrastructure.hf_tokenizers import (
     counter_for,
@@ -22,8 +23,7 @@ from mediparse.infrastructure.hf_tokenizers import (
     special_tokens,
     tokenizer_info,
 )
-from mediparse.infrastructure.note_features_cache import is_current, pending_cache
-from mediparse.infrastructure.note_features_table import ParquetNoteTexts
+from mediparse.infrastructure.note_texts_parquet import ParquetNoteTexts
 from mediparse.infrastructure.note_tokens_input import (
     SAMPLE_LIMIT,
     SampleNoteTexts,

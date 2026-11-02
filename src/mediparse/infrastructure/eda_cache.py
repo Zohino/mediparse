@@ -8,11 +8,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import TYPE_CHECKING, Final
 
-import sklearn
-
 from mediparse.domain.digest import fingerprint
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.file_digest import file_sha256
 
 if TYPE_CHECKING:
     from collections.abc import Generator, Sequence
@@ -20,27 +17,6 @@ if TYPE_CHECKING:
 FORMAT_VERSION: Final = "1"
 PACKAGE: Final = Path(__file__).parents[1]
 CACHE_FILE: Final = "cache.json"
-
-
-def note_features_key(discharge: Path, lexicon: Path, candidates: Path) -> str:
-    """Otisk vstupu, konfigurace, formátu, Python kódu a verze scikit-learn.
-
-    Returns:
-        SHA-256 klíč cache.
-
-    Raises:
-        InvalidInputError: Vstup klíče nelze přečíst.
-    """
-    try:
-        return cache_key([
-            ("discharge", file_sha256(discharge).encode()),
-            ("lexicon", lexicon.read_bytes()),
-            ("candidates", candidates.read_bytes()),
-            ("scikit-learn", sklearn.__version__.encode()),
-        ])
-    except OSError as error:
-        msg = f"Vstup klíče cache nelze přečíst: {type(error).__name__}."
-        raise InvalidInputError(msg) from None
 
 
 def cache_key(inputs: Sequence[tuple[str, bytes]]) -> str:

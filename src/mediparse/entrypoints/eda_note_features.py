@@ -13,17 +13,17 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
-from mediparse.infrastructure.eda_duckdb import EdaDatabase
-from mediparse.infrastructure.note_features_cache import (
+from mediparse.infrastructure.eda_cache import (
     is_current,
-    note_features_key,
     pending_cache,
 )
+from mediparse.infrastructure.eda_duckdb import EdaDatabase
 from mediparse.infrastructure.note_features_table import (
     ARTIFACTS,
     ParquetNoteFeatures,
-    ParquetNoteTexts,
+    note_features_key,
 )
+from mediparse.infrastructure.note_texts_parquet import ParquetNoteTexts
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
 
