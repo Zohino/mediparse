@@ -153,13 +153,22 @@ def test_cache_and_fresh_result_match_manual_oracle(inputs: Inputs) -> None:
 
 
 @pytest.mark.parametrize(
-    "changed", ["radiology", "script", "pair", "revision", "transformers", "tokenizers"]
+    "changed",
+    [
+        "radiology",
+        "script",
+        "pair",
+        "czech_pair",
+        "revision",
+        "transformers",
+        "tokenizers",
+    ],
 )
 def test_each_scientific_input_invalidates_cache(
     inputs: Inputs, changed: str, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Klíč zachytí tabulky, Python překladu, pár, model i obě knihovny."""
-    parquet, translation, english, _, out = inputs
+    parquet, translation, english, czech, out = inputs
     eda_note_tokens.run(*inputs, {})
     old = (out / "tokens/cache.json").read_bytes()
     if changed == "radiology":
@@ -172,6 +181,8 @@ def test_each_scientific_input_invalidates_cache(
         path.write_bytes(path.read_bytes() + b"\n")
     elif changed == "pair":
         (english / "a.txt").write_bytes(b"a\n")
+    elif changed == "czech_pair":
+        (czech / "a.txt").write_bytes("č b\n".encode())
     elif changed == "revision":
         key, model, _, window = hf_tokenizers.ENCODERS[0]
         monkeypatch.setattr(
