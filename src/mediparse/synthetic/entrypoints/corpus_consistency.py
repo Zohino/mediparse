@@ -12,19 +12,19 @@ import argparse
 import sys
 from typing import TYPE_CHECKING
 
-from mediparse.application.corpus_consistency import CorpusConsistency
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.plans_file import PlansFile
-from mediparse.infrastructure.sampler_config import (
-    load_sampler_config,
-)
-from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
+from mediparse.synthetic.application.corpus_consistency import CorpusConsistency
 from mediparse.synthetic.entrypoints.corpus_cli import (
     add_corpus_option,
     add_plans_option,
     add_sampler_config_option,
 )
+from mediparse.synthetic.infrastructure.plans_file import PlansFile
+from mediparse.synthetic.infrastructure.sampler_config import (
+    load_sampler_config,
+)
+from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

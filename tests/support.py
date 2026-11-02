@@ -26,10 +26,10 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.environment import SourceRevision
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
-from mediparse.infrastructure.plans_file import LABELS_PATH, PLANS_PATH
-from mediparse.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
-from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT
-from mediparse.infrastructure.verbalization_template import (
+from mediparse.synthetic.infrastructure.plans_file import LABELS_PATH, PLANS_PATH
+from mediparse.synthetic.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
+from mediparse.synthetic.infrastructure.synthetic_corpus import CORPUS_ROOT
+from mediparse.synthetic.infrastructure.verbalization_template import (
     VERBALIZATION_TEMPLATE_PATH,
 )
 

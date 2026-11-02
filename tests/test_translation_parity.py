@@ -20,7 +20,7 @@ from mediparse.domain.translation_consistency import (
     binding_violations,
     restored_markers,
 )
-from mediparse.infrastructure.translation_workdir import TranslationWorkdir
+from mediparse.synthetic.infrastructure.translation_workdir import TranslationWorkdir
 from tests.support import REPOSITORY, load_script
 from tests.workdir_support import (
     LAST_START,

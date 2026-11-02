@@ -22,8 +22,8 @@ from mediparse.domain.section_headers import (
     split_sections,
     strip_diagnostic_sections,
 )
-from mediparse.infrastructure.sampler_config import load_sampler_config
-from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
+from mediparse.synthetic.infrastructure.sampler_config import load_sampler_config
+from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
 from tests.section_support import (
     MIMIC_SHAPED_NOTES,
     REPOSITORY_LEXICON,

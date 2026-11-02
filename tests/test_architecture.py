@@ -29,8 +29,10 @@ MAIN_GUARD = re.compile(r"__name__\s*==\s*[\"']__main__[\"']")
 RULE_IMPORT = re.compile(r"^\s*(?:from|import)\s+(mediparse[\w.]*)", re.MULTILINE)
 ENTRYPOINTS_MODULES = ("mediparse.entrypoints", "mediparse.synthetic.entrypoints")
 RUN_DIRECTIVE = re.compile(r"^\s*run\s*:", re.MULTILINE)
-APPLICATION = PACKAGE / "application"
-APPLICATION_PREFIX = "mediparse.application."
+APPLICATIONS = (
+    (PACKAGE / "application", "mediparse.application."),
+    (PACKAGE / "synthetic" / "application", "mediparse.synthetic.application."),
+)
 ENCODING_ROOTS = tuple(
     REPOSITORY / name for name in ("src", "tests", "workflow", "translation")
 )
@@ -270,7 +272,9 @@ def _protocol_names(module: Path) -> set[str]:
     }
 
 
-def _imported_module(module: Path, application: Path, node: ast.ImportFrom) -> str:
+def _imported_module(
+    module: Path, application: Path, application_prefix: str, node: ast.ImportFrom
+) -> str:
     """Úplné jméno importovaného modulu; relativní import se přeloží podle ``node.level``.
 
     Returns:
@@ -278,12 +282,15 @@ def _imported_module(module: Path, application: Path, node: ast.ImportFrom) -> s
     """
     if node.level == 0:
         return node.module or ""
-    package = ["mediparse", "application", *module.relative_to(application).parts[:-1]]
+    package = [
+        *application_prefix.rstrip(".").split("."),
+        *module.relative_to(application).parts[:-1],
+    ]
     base = package[: len(package) - (node.level - 1)]
     return ".".join([*base, *(node.module.split(".") if node.module else [])])
 
 
-def _foreign_protocol_imports(application: Path) -> list[str]:
+def _foreign_protocol_imports(application: Path, application_prefix: str) -> list[str]:
     """Importy portu z modulu jiného use casu; ``ports.*`` je jediné místo sdílených portů.
 
     Returns:
@@ -300,10 +307,10 @@ def _foreign_protocol_imports(application: Path) -> list[str]:
         for node in ast.walk(tree):
             if not isinstance(node, ast.ImportFrom):
                 continue
-            imported = _imported_module(module, application, node)
-            if not imported.startswith(APPLICATION_PREFIX):
+            imported = _imported_module(module, application, application_prefix, node)
+            if not imported.startswith(application_prefix):
                 continue
-            source = imported.removeprefix(APPLICATION_PREFIX)
+            source = imported.removeprefix(application_prefix)
             if source == "ports" or source.startswith("ports."):
                 continue
             source_file = application / Path(*source.split(".")).with_suffix(".py")
@@ -318,10 +325,13 @@ def _foreign_protocol_imports(application: Path) -> list[str]:
     return violations
 
 
-def test_shared_port_lives_in_ports_package() -> None:
+@pytest.mark.parametrize(("application", "application_prefix"), APPLICATIONS)
+def test_shared_port_lives_in_ports_package(
+    application: Path, application_prefix: str
+) -> None:
     """Port, který používá víc use casů, leží v ``application.ports``, ne v modulu use casu."""
-    assert any(APPLICATION.glob("*.py"))
-    assert _foreign_protocol_imports(APPLICATION) == []
+    assert any(application.glob("*.py"))
+    assert _foreign_protocol_imports(application, application_prefix) == []
 
 
 def test_use_case_may_import_function_of_another_use_case(tmp_path: Path) -> None:
@@ -340,7 +350,9 @@ def test_use_case_may_import_function_of_another_use_case(tmp_path: Path) -> Non
         encoding="utf-8",
     )
 
-    assert _foreign_protocol_imports(tmp_path) == ["bad.py importuje port Port z gate"]
+    assert _foreign_protocol_imports(tmp_path, "mediparse.application.") == [
+        "bad.py importuje port Port z gate"
+    ]
 
 
 def _is_binary_mode(node: ast.expr | None) -> bool:

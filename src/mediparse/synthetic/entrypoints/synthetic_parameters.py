@@ -13,18 +13,18 @@ import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from mediparse.application.synthetic_parameters import ParameterTransfer
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.sampler_config import (
-    SamplerConfigFile,
-)
-from mediparse.infrastructure.synthetic_parameters_file import (
-    PARAMETERS_PATH,
-    SyntheticParametersFile,
-)
+from mediparse.synthetic.application.synthetic_parameters import ParameterTransfer
 from mediparse.synthetic.entrypoints.corpus_cli import (
     add_sampler_config_option,
+)
+from mediparse.synthetic.infrastructure.sampler_config import (
+    SamplerConfigFile,
+)
+from mediparse.synthetic.infrastructure.synthetic_parameters_file import (
+    PARAMETERS_PATH,
+    SyntheticParametersFile,
 )
 
 if TYPE_CHECKING:

@@ -15,9 +15,7 @@ from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_co
 from mediparse.infrastructure.duckdb_cohort import MIN_CHARS
 from mediparse.infrastructure.mimic_inventory import read_manifest
 from mediparse.infrastructure.parquet_file import write_string_table
-from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
-from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
 from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
 from mediparse.synthetic.domain.corpus_tables import corpus_tables
 from mediparse.synthetic.domain.synthetic_bhc import bhc_rows
@@ -26,6 +24,8 @@ from mediparse.synthetic.domain.synthetic_sentinel import (
     section_tokens,
     sentinel_tables,
 )
+from mediparse.synthetic.infrastructure.plans_file import PlansFile
+from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence

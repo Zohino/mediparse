@@ -14,9 +14,9 @@ from mediparse.domain.translation_consistency import (
 )
 
 if TYPE_CHECKING:
-    from mediparse.application.ports.corpus import NoteSource, PlanSource
     from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.application.ports.corpus import NoteSource, PlanSource
 
 
 @dataclass(frozen=True)

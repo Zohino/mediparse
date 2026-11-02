@@ -11,7 +11,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
-from mediparse.application.ports.corpus import FingerprintedCorpus, NoteSource
 from mediparse.domain.corpus_audit import (
     NGRAM_SIZE,
     NORMALIZATION,
@@ -23,6 +22,7 @@ from mediparse.domain.corpus_audit import (
 from mediparse.domain.data_access import blocked_reason
 from mediparse.domain.language import Language
 from mediparse.domain.note import InvalidNoteIdError, subject_of
+from mediparse.synthetic.application.ports.corpus import FingerprintedCorpus, NoteSource
 
 if TYPE_CHECKING:
     from collections.abc import Collection, Iterable, Mapping, Sequence

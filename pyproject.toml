@@ -97,8 +97,8 @@ containers = [
     "mediparse",
     "mediparse.synthetic",
 ]
-# Závorky jsou kvůli kontejneru mediparse.synthetic: nemá vrstvu synthetic ani
-# application a infrastructure; jádro poslední dvě má, takže mu nepovinnost nic nepovolí.
+# Závorky dovolují kontejneru mediparse.synthetic nemít další vrstvu synthetic;
+# application a infrastructure jsou nepovinné v obou kontejnerech.
 layers = [
     "(synthetic)",
     "entrypoints",
@@ -114,11 +114,34 @@ type = "layers"
 layers = [
     "mediparse.synthetic.entrypoints",
     "mediparse.entrypoints",
+    "mediparse.synthetic.application | mediparse.synthetic.infrastructure",
     "mediparse.application | mediparse.infrastructure",
     "mediparse.synthetic.domain",
     "mediparse.domain",
 ]
 broken_contract_guidance = "Vnitřní vrstva syntetiky smí používat jen stejnou nebo nižší vrstvu jádra; složení s adaptéry patří do synthetic.entrypoints."
+
+[[tool.importlinter.contracts]]
+name = "Use case syntetiky nezná adaptéry jádra"
+type = "forbidden"
+source_modules = [
+    "mediparse.synthetic.application",
+]
+forbidden_modules = [
+    "mediparse.infrastructure",
+]
+broken_contract_guidance = "Use case syntetiky popíše potřebu portem; adaptér jádra zapojí synthetic.entrypoints."
+
+[[tool.importlinter.contracts]]
+name = "Adaptér syntetiky nezná use casy jádra"
+type = "forbidden"
+source_modules = [
+    "mediparse.synthetic.infrastructure",
+]
+forbidden_modules = [
+    "mediparse.application",
+]
+broken_contract_guidance = "Adaptér syntetiky řeší I/O, use casy skládá synthetic.entrypoints."
 
 [[tool.importlinter.contracts]]
 name = "Technologie jen v infrastructure"
@@ -127,6 +150,7 @@ source_modules = [
     "mediparse.application",
     "mediparse.domain",
     "mediparse.entrypoints",
+    "mediparse.synthetic.application",
     "mediparse.synthetic.domain",
     "mediparse.synthetic.entrypoints",
 ]
@@ -146,8 +170,8 @@ ignore_imports = [
     # Jen typy pod TYPE_CHECKING; po modulech, ne po vrstvě, protože import-linter
     # typový import od běhového nerozliší a ruff S311 nechytí random.shuffle ani seed.
     "mediparse.application.cohort -> contextlib",
-    "mediparse.application.corpus_audit -> datetime",
-    "mediparse.application.plan_sampling -> random",
+    "mediparse.synthetic.application.corpus_audit -> datetime",
+    "mediparse.synthetic.application.plan_sampling -> random",
     "mediparse.domain.mentions -> random",
     "mediparse.domain.note_structure -> random",
     "mediparse.domain.synthetic_patients -> random",
@@ -184,7 +208,9 @@ protected_modules = [
     "mediparse.application",
     "mediparse.domain",
     "mediparse.infrastructure",
+    "mediparse.synthetic.application",
     "mediparse.synthetic.domain",
+    "mediparse.synthetic.infrastructure",
 ]
 allowed_importers = [
     "mediparse",
@@ -247,7 +273,7 @@ source_modules = [
     "mediparse.domain.training",
 ]
 forbidden_modules = [
-    "mediparse.infrastructure.synthetic_corpus",
+    "mediparse.synthetic.infrastructure.synthetic_corpus",
 ]
 broken_contract_guidance = "Kroky experimentu jsou společné pro MIMIC i smoketest; syntetiku a výběr ukázek skládá samostatný vstupní bod smoketestu."
 

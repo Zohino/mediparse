@@ -8,14 +8,14 @@ import pytest
 
 from mediparse.domain.corpus_audit import AuditPin
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.audit_pin import load_audit_pin
 from mediparse.infrastructure.mimic_tables import load_reference_sha256
+from mediparse.synthetic.infrastructure.audit_pin import load_audit_pin
 from tests.support import REPOSITORY_CONFIG, REPOSITORY_TABLES
 
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from mediparse.infrastructure.sampler_config import SamplerConfig
+    from mediparse.synthetic.infrastructure.sampler_config import SamplerConfig
 
 
 def test_repository_pin_holds_note_reference_and_sampler_labels(

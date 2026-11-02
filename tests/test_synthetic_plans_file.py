@@ -8,10 +8,10 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.application.plan_sampling import PlanSampling
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.plans_file import (
+from mediparse.synthetic.application.plan_sampling import PlanSampling
+from mediparse.synthetic.infrastructure.plans_file import (
     PlansFile,
     SyntheticPlanFiles,
 )

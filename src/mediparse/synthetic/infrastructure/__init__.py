@@ -1,0 +1,1 @@
+"""Adaptéry nástroje syntetického korpusu."""

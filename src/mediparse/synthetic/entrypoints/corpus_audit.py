@@ -16,12 +16,6 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, assert_never
 
-from mediparse.application.corpus_audit import (
-    AuditClean,
-    AuditOverlap,
-    AuditRefused,
-    CorpusAudit,
-)
 from mediparse.domain.corpus_audit import NGRAM_SIZE
 from mediparse.domain.digest import commit_sha
 from mediparse.entrypoints.cli import (
@@ -30,21 +24,27 @@ from mediparse.entrypoints.cli import (
     refusing_invalid_input,
 )
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.audit_pin import load_audit_pin
-from mediparse.infrastructure.audit_workspace import LocalWorkspace
-from mediparse.infrastructure.mimic_reference import MimicReference
-from mediparse.infrastructure.overlap_report import OverlapReportFile
-from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
+from mediparse.synthetic.application.corpus_audit import (
+    AuditClean,
+    AuditOverlap,
+    AuditRefused,
+    CorpusAudit,
+)
 from mediparse.synthetic.entrypoints.corpus_cli import (
     add_corpus_option,
     add_sampler_config_option,
     add_tables_option,
 )
+from mediparse.synthetic.infrastructure.audit_pin import load_audit_pin
+from mediparse.synthetic.infrastructure.audit_workspace import LocalWorkspace
+from mediparse.synthetic.infrastructure.mimic_reference import MimicReference
+from mediparse.synthetic.infrastructure.overlap_report import OverlapReportFile
+from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
-    from mediparse.application.corpus_audit import AuditOutcome
+    from mediparse.synthetic.application.corpus_audit import AuditOutcome
 
 logger = logging.getLogger(__name__)
 

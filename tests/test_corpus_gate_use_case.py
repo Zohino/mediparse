@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from mediparse.application.corpus_gate import CorpusGate
 from mediparse.domain.corpus_audit import (
     AuditRecord,
     InvalidAuditRecordError,
@@ -14,6 +13,7 @@ from mediparse.domain.corpus_provenance import (
     ProvenanceRecord,
 )
 from mediparse.domain.language import Language
+from mediparse.synthetic.application.corpus_gate import CorpusGate
 from tests.support import (
     CORPUS_SHA,
     PIN,

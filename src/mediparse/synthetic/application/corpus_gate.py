@@ -13,8 +13,8 @@ from mediparse.domain.corpus_provenance import (
 from mediparse.domain.language import Language
 
 if TYPE_CHECKING:
-    from mediparse.application.ports.corpus import AuditedCorpus, GatedCorpus
     from mediparse.domain.corpus_audit import AuditPin
+    from mediparse.synthetic.application.ports.corpus import AuditedCorpus, GatedCorpus
 
 
 @dataclass(frozen=True)

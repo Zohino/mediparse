@@ -11,16 +11,16 @@ import argparse
 import sys
 from typing import TYPE_CHECKING
 
-from mediparse.application.corpus_gate import CorpusGate
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.audit_pin import load_audit_pin
-from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
+from mediparse.synthetic.application.corpus_gate import CorpusGate
 from mediparse.synthetic.entrypoints.corpus_cli import (
     add_corpus_option,
     add_sampler_config_option,
     add_tables_option,
 )
+from mediparse.synthetic.infrastructure.audit_pin import load_audit_pin
+from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

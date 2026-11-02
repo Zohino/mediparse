@@ -9,8 +9,8 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.verbalization import render_prompt
 
 if TYPE_CHECKING:
-    from mediparse.application.ports.corpus import PlanSource
     from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.application.ports.corpus import PlanSource
 
 
 @dataclass(frozen=True)

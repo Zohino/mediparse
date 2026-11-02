@@ -12,9 +12,6 @@ import sys
 from datetime import date
 from typing import TYPE_CHECKING
 
-from mediparse.application.corpus_provenance import (
-    CorpusProvenance,
-)
 from mediparse.domain.corpus_provenance import (
     Generation,
     model_id,
@@ -27,18 +24,9 @@ from mediparse.entrypoints.cli import (
     configure_logging,
     refusing_invalid_input,
 )
-from mediparse.infrastructure.audit_pin import load_audit_pin
 from mediparse.infrastructure.file_digest import file_sha256
-from mediparse.infrastructure.plans_file import PlansFile
-from mediparse.infrastructure.sampler_config import (
-    load_sampler_config,
-)
-from mediparse.infrastructure.synthetic_corpus import (
-    PROVENANCE_NAME,
-    CorpusDirectory,
-)
-from mediparse.infrastructure.verbalization_template import (
-    load_verbalization_template,
+from mediparse.synthetic.application.corpus_provenance import (
+    CorpusProvenance,
 )
 from mediparse.synthetic.entrypoints.corpus_cli import (
     add_corpus_option,
@@ -48,6 +36,18 @@ from mediparse.synthetic.entrypoints.corpus_cli import (
     add_template_option,
 )
 from mediparse.synthetic.entrypoints.provenance_exit import provenance_exit_code
+from mediparse.synthetic.infrastructure.audit_pin import load_audit_pin
+from mediparse.synthetic.infrastructure.plans_file import PlansFile
+from mediparse.synthetic.infrastructure.sampler_config import (
+    load_sampler_config,
+)
+from mediparse.synthetic.infrastructure.synthetic_corpus import (
+    PROVENANCE_NAME,
+    CorpusDirectory,
+)
+from mediparse.synthetic.infrastructure.verbalization_template import (
+    load_verbalization_template,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

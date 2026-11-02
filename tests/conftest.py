@@ -15,13 +15,13 @@ from mediparse.domain.mentions import Mention, MentionStatus
 from mediparse.domain.note_plan import NotePlan
 from mediparse.domain.note_structure import Sex
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.mimic_reference import MimicReference
-from mediparse.infrastructure.plans_file import PlansFile
-from mediparse.infrastructure.sampler_config import load_sampler_config
-from mediparse.infrastructure.verbalization_template import (
+from mediparse.synthetic.entrypoints import corpus_audit, corpus_provenance
+from mediparse.synthetic.infrastructure.mimic_reference import MimicReference
+from mediparse.synthetic.infrastructure.plans_file import PlansFile
+from mediparse.synthetic.infrastructure.sampler_config import load_sampler_config
+from mediparse.synthetic.infrastructure.verbalization_template import (
     load_verbalization_template,
 )
-from mediparse.synthetic.entrypoints import corpus_audit, corpus_provenance
 from tests.support import (
     COMMIT,
     GENERATION_ARGS,

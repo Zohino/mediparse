@@ -8,17 +8,17 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.application.corpus_provenance import (
-    ProvenanceRefused,
-    ProvenanceWritten,
-)
-from mediparse.application.translation_provenance import TranslationProvenance
 from mediparse.domain.corpus_provenance import (
     ProvenanceRecord,
     Translation,
 )
 from mediparse.domain.language import Language
 from mediparse.domain.translation_consistency import TranslatedNote
+from mediparse.synthetic.application.corpus_provenance import (
+    ProvenanceRefused,
+    ProvenanceWritten,
+)
+from mediparse.synthetic.application.translation_provenance import TranslationProvenance
 from tests.support import (
     CORPUS_SHA,
     PIN,

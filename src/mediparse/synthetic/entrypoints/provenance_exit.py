@@ -5,14 +5,14 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING, assert_never
 
-from mediparse.application.corpus_provenance import (
+from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.synthetic.application.corpus_provenance import (
     ProvenanceRefused,
     ProvenanceWritten,
 )
-from mediparse.entrypoints.exit_code import ExitCode
 
 if TYPE_CHECKING:
-    from mediparse.application.corpus_provenance import ProvenanceOutcome
+    from mediparse.synthetic.application.corpus_provenance import ProvenanceOutcome
 
 logger = logging.getLogger(__name__)
 

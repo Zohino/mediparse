@@ -5,8 +5,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.synthetic.entrypoints.corpus_consistency import run
+from mediparse.synthetic.infrastructure.plans_file import PlansFile
 from tests.support import REPOSITORY_CONFIG, REPOSITORY_CORPUS, REPOSITORY_PLANS
 
 if TYPE_CHECKING:
@@ -90,7 +90,7 @@ def test_notices_alone_keep_exit_ok(
 ) -> None:
     """Nesoulad počtu ___ v překladu se vypíše jako upozornění a exit zůstane OK."""
     monkeypatch.setattr(
-        "mediparse.application.corpus_consistency.corpus_violations",
+        "mediparse.synthetic.application.corpus_consistency.corpus_violations",
         lambda *_: (),
     )
     czech = planned_note.text.replace("___", "x", 1)

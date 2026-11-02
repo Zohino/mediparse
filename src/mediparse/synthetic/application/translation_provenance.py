@@ -9,13 +9,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
-from mediparse.application.corpus_provenance import (
-    ProvenanceOutcome,
-    ProvenanceRefused,
-    ProvenanceWritten,
-    audit_refusal,
-)
-from mediparse.application.ports.corpus import GatedCorpus, ProvenanceCorpus
 from mediparse.domain.corpus_provenance import (
     InvalidProvenanceRecordError,
     ProvenanceRecord,
@@ -26,6 +19,13 @@ from mediparse.domain.translation_consistency import (
     marker_mismatches,
     translation_violations,
 )
+from mediparse.synthetic.application.corpus_provenance import (
+    ProvenanceOutcome,
+    ProvenanceRefused,
+    ProvenanceWritten,
+    audit_refusal,
+)
+from mediparse.synthetic.application.ports.corpus import GatedCorpus, ProvenanceCorpus
 
 if TYPE_CHECKING:
     from mediparse.domain.corpus_audit import AuditPin

@@ -6,10 +6,10 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
-from mediparse.infrastructure.plans_file import PLANS_PATH
-from mediparse.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
-from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT
-from mediparse.infrastructure.verbalization_template import (
+from mediparse.synthetic.infrastructure.plans_file import PLANS_PATH
+from mediparse.synthetic.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
+from mediparse.synthetic.infrastructure.synthetic_corpus import CORPUS_ROOT
+from mediparse.synthetic.infrastructure.verbalization_template import (
     VERBALIZATION_TEMPLATE_PATH,
 )
 

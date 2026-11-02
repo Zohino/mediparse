@@ -8,16 +8,16 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.application.corpus_audit import (
+from mediparse.domain.corpus_audit import AuditPin, ReferenceNote
+from mediparse.domain.data_access import BLOCKING_VARIABLES
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.language import Language
+from mediparse.synthetic.application.corpus_audit import (
     AuditClean,
     AuditOverlap,
     AuditRefused,
     CorpusAudit,
 )
-from mediparse.domain.corpus_audit import AuditPin, ReferenceNote
-from mediparse.domain.data_access import BLOCKING_VARIABLES
-from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.language import Language
 from tests.support import (
     COMMIT,
     CORPUS_SHA,

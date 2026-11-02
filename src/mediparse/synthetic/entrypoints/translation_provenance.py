@@ -13,23 +13,23 @@ import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from mediparse.application.translation_provenance import TranslationProvenance
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
-from mediparse.infrastructure.audit_pin import load_audit_pin
-from mediparse.infrastructure.synthetic_corpus import (
-    PROVENANCE_NAME,
-    CorpusDirectory,
-)
-from mediparse.infrastructure.translation_workdir import (
-    WORKDIR_PATH,
-    TranslationWorkdir,
-)
+from mediparse.synthetic.application.translation_provenance import TranslationProvenance
 from mediparse.synthetic.entrypoints.corpus_cli import (
     add_corpus_option,
     add_sampler_config_option,
     add_tables_option,
 )
 from mediparse.synthetic.entrypoints.provenance_exit import provenance_exit_code
+from mediparse.synthetic.infrastructure.audit_pin import load_audit_pin
+from mediparse.synthetic.infrastructure.synthetic_corpus import (
+    PROVENANCE_NAME,
+    CorpusDirectory,
+)
+from mediparse.synthetic.infrastructure.translation_workdir import (
+    WORKDIR_PATH,
+    TranslationWorkdir,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

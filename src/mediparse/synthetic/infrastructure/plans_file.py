@@ -10,7 +10,7 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.note_plan import NotePlan
 from mediparse.infrastructure.input_file import parse_file
 from mediparse.infrastructure.json_file import parse_lines
-from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT
+from mediparse.synthetic.infrastructure.synthetic_corpus import CORPUS_ROOT
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

@@ -8,9 +8,9 @@ import mediparse
 PACKAGE = Path(mediparse.__file__).parent
 AUDIT_MODULES = frozenset({
     "domain/corpus_audit.py",
-    "application/corpus_audit.py",
+    "synthetic/application/corpus_audit.py",
     "synthetic/entrypoints/corpus_audit.py",
-    "infrastructure/overlap_report.py",
+    "synthetic/infrastructure/overlap_report.py",
 })
 # Tvary slov shoda, neshoda, shodný a shodovat; „shodit“ a „shodí“ s nimi nesouvisí.
 OVERLAP_WORD = re.compile(r"(?<!\w)(?:ne)?shod(?![ií])\w*", re.IGNORECASE)

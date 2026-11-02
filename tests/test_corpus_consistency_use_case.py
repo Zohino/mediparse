@@ -5,11 +5,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from mediparse.application.corpus_consistency import (
+from mediparse.domain.language import Language
+from mediparse.synthetic.application.corpus_consistency import (
     ConsistencyReport,
     CorpusConsistency,
 )
-from mediparse.domain.language import Language
 from tests.support import PlansFake
 
 if TYPE_CHECKING:

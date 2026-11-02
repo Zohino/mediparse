@@ -12,12 +12,12 @@ from mediparse.domain.note_plan import NotePlan
 from mediparse.domain.note_structure import Sex
 from mediparse.domain.section_headers import LexiconSection, SectionLexicon
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
-from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
-from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
 from mediparse.synthetic.domain.corpus_tables import corpus_tables
 from mediparse.synthetic.domain.synthetic_bhc import bhc_rows
 from mediparse.synthetic.domain.synthetic_mimic import input_notes
+from mediparse.synthetic.infrastructure.plans_file import PlansFile
+from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
 from tests.support import (
     REPOSITORY_CORPUS,
     REPOSITORY_DIAGNOSIS_CANDIDATES,
