@@ -24,7 +24,7 @@ FILLER_CODES: Final[Mapping[IcdVersion, str]] = {
     IcdVersion.TEN: "Z0000",
 }
 _FIRST_ADMISSION: Final = 20000000
-_TIMESTAMP: Final = "2155-01-01 00:00:00"
+TIMESTAMP: Final = "2155-01-01 00:00:00"
 
 
 class UnpairedNotesError(InvalidInputError):
@@ -160,8 +160,8 @@ def _discharge(note: InputNote, hadm: str) -> dict[str, str]:
         "hadm_id": hadm,
         "note_type": "DS",
         "note_seq": str(order_of(note.note_id)),
-        "charttime": _TIMESTAMP,
-        "storetime": _TIMESTAMP,
+        "charttime": TIMESTAMP,
+        "storetime": TIMESTAMP,
         "text": note.text,
     }
 

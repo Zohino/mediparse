@@ -8,7 +8,7 @@ from mediparse.domain.icd import IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.note_structure import Sex
 from mediparse.synthetic.domain.synthetic_coverage import coverage_diagnoses
-from mediparse.synthetic.domain.synthetic_mimic import mimic_core
+from mediparse.synthetic.domain.synthetic_mimic import TIMESTAMP, mimic_core
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -17,7 +17,6 @@ if TYPE_CHECKING:
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.note_plan import NotePlan
 
-_TIMESTAMP: Final = "2155-01-01 00:00:00"
 _ERAS: Final = {IcdVersion.NINE: "2008 - 2010", IcdVersion.TEN: "2017 - 2019"}
 _ANCHOR_AGES: Final = (15, 25, 35, 45, 55, 65, 75, 91)
 
@@ -27,7 +26,7 @@ def corpus_tables(
     notes: Sequence[InputNote],
     codes: DiagnosisCodes,
 ) -> dict[str, list[dict[str, str]]]:
-    """Doplní jádro smoketestu o pokrytí EDA, demografii a číselník.
+    """Doplní řádky discharge a diagnoses_icd z `mimic_core` o pokrytí EDA, demografii a číselník.
 
     Returns:
         Pět tabulek EDA s korpusovými fakty a doplněným pokrytím.
@@ -91,7 +90,7 @@ def _admission(row: Mapping[str, str], patient_index: int) -> dict[str, str]:
     return {
         "subject_id": row["subject_id"],
         "hadm_id": row["hadm_id"],
-        "admittime": _TIMESTAMP,
+        "admittime": TIMESTAMP,
         "insurance": ("Medicare", "Private")[index],
         "marital_status": ("MARRIED", "SINGLE")[index],
         "race": ("WHITE", "BLACK/AFRICAN AMERICAN")[index],

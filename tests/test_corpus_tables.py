@@ -99,6 +99,9 @@ def test_manual_demography() -> None:
         r["hadm_id"] for r in tables["discharge"]
     }
     assert [r["insurance"] for r in admissions] == ["Medicare"] * 32 + ["Private"]
+    assert [(r["race"], r["marital_status"], r["language"]) for r in admissions] == [
+        ("WHITE", "MARRIED", "English")
+    ] * 32 + [("BLACK/AFRICAN AMERICAN", "SINGLE", "Spanish")]
     assert all(r["admittime"] == "2155-01-01 00:00:00" for r in admissions)
 
 
