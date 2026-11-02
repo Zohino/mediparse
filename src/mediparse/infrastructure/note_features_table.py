@@ -1,4 +1,4 @@
-"""Proudové čtení textů a zápis měření s pevným kontraktem Python → R."""
+"""Parquet kontrakty, zápis měření zpráv a klíč jejich cache."""
 
 from __future__ import annotations
 
