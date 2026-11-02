@@ -322,11 +322,6 @@ def test_parallel_missing_pair_or_empty_is_refused(
     assert eda_note_tokens.main() is ExitCode.REFUSED
 
 
-def test_parallel_preserves_utf8_and_crlf(inputs: Inputs) -> None:
-    """Čtení bajtů nezmění CRLF ani české znaky."""
-    assert read_parallel(inputs[2], inputs[3]) == [("a", "a b\r\n", "a b č\r\n")]
-
-
 def test_interrupted_publication_invalidates_both_keys_and_preserves_features(
     inputs: Inputs, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -405,12 +400,22 @@ def test_strip_only_when_requested() -> None:
     tokenizer.assert_called_once_with(texts, add_special_tokens=True)
 
 
-def test_parallel_pairs_by_sorted_filename(inputs: Inputs) -> None:
-    """Párování nezávisí na pořadí vytvoření anglických a českých souborů."""
+def test_parallel_pairs_by_sorted_filename(
+    inputs: Inputs, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Výpis b, c, a se seřadí podle jména a čtení zachová UTF-8 i CRLF."""
     (inputs[3] / "c.txt").write_bytes(b"c")
     (inputs[2] / "b.txt").write_bytes(b"b")
     (inputs[2] / "c.txt").write_bytes(b"c")
     (inputs[3] / "b.txt").write_bytes(b"b")
+    original = Path.glob
+
+    def shuffled(path: Path, pattern: str) -> list[Path]:
+        if path in {inputs[2], inputs[3]} and pattern == "*.txt":
+            return [path / name for name in ("b.txt", "c.txt", "a.txt")]
+        return list(original(path, pattern))
+
+    monkeypatch.setattr(Path, "glob", shuffled)
     assert read_parallel(inputs[2], inputs[3]) == [
         ("a", "a b\r\n", "a b č\r\n"),
         ("b", "b", "b"),
