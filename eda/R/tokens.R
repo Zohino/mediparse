@@ -2,39 +2,6 @@ ENCODER_WINDOW <- 512L
 ENCODER_FULL_SHARE <- 0.95
 CZECH_TOLERANCE <- 0.05
 
-encoder_models <- function() {
-  data.frame(
-    klic = c("xlmr", "mdeberta"),
-    model = c("FacebookAI/xlm-roberta-base", "microsoft/mdeberta-v3-base"),
-    revize = c(
-      "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
-      "a0484667b22365f84929a935b5e50a51f71f159d"
-    ),
-    okno = c(ENCODER_WINDOW, ENCODER_WINDOW),
-    stringsAsFactors = FALSE
-  )
-}
-
-load_tokenizer <- function(model, revision) {
-  transformers <- reticulate::import("transformers")
-  transformers$logging$set_verbosity_error()
-  transformers$AutoTokenizer$from_pretrained(model, revision = revision)
-}
-
-strip_text <- function(texts) {
-  trimws(texts, whitespace = "[\\h\\v]")
-}
-
-token_lengths <- function(tok, texts, special, strip = FALSE) {
-  if (length(texts) == 0L) {
-    return(integer())
-  }
-  texts <- ifelse(is.na(texts), "", texts)
-  if (strip) texts <- strip_text(texts)
-  ids <- tok(as.list(texts), add_special_tokens = special)$input_ids
-  vapply(ids, length, integer(1))
-}
-
 tokens_table_name <- function(table) paste0("note_tokens_", table)
 
 tokens_for <- function(con, table) {
@@ -45,25 +12,39 @@ tokens_for <- function(con, table) {
   name
 }
 
-batch_counts <- function(chunk, tokenizers) {
-  counts <- lapply(tokenizers, function(spec) {
-    token_lengths(spec$tok, chunk$text, spec$special, isTRUE(spec$strip))
-  })
-  data.frame(note_id = chunk$note_id, counts, check.names = FALSE, stringsAsFactors = FALSE)
+TOKEN_COLUMNS <- c(note_id = "VARCHAR", xlmr = "INTEGER", mdeberta = "INTEGER", translategemma = "INTEGER")
+TOKENIZER_COLUMNS <- c(
+  tokenizer = "VARCHAR", model = "VARCHAR", revision = "VARCHAR", window = "INTEGER",
+  role = "VARCHAR", special_tokens = "INTEGER", transformers = "VARCHAR"
+)
+PROMPT_COLUMNS <- c(prompt_overhead = "INTEGER", split_ratio = "DOUBLE")
+SPLIT_COLUMNS <- c(note_table = "VARCHAR", note_id = "VARCHAR", fits = "BOOLEAN", parts = "INTEGER", unsplittable = "BOOLEAN")
+PARALLEL_COLUMNS <- c(pair_id = "VARCHAR", tokenizer = "VARCHAR", english = "INTEGER", czech = "INTEGER")
+
+tokens_source <- function(con, file, columns) {
+  root <- Sys.getenv("MEDIPARSE_EDA_CACHE")
+  if (root == "") stop("Chybí MEDIPARSE_EDA_CACHE; spusťte render skriptem EDA.")
+  feature_source(con, file, columns, directory = file.path(root, "tokens"), command = "mediparse-eda-note-tokens")
 }
 
-note_tokens <- function(con, table, tokenizers, batch = 2000L) {
+note_tokens <- function(con, table) {
   name <- tokens_table_name(table)
-  columns <- c(
-    note_id = "VARCHAR",
-    setNames(rep("INTEGER", length(tokenizers)), names(tokenizers))
-  )
-  rows_sql <- sprintf("SELECT note_id, text FROM %s", DBI::dbQuoteIdentifier(con, table))
-  batched_table(
-    con, name, columns, rows_sql,
-    function(chunk) batch_counts(chunk, tokenizers),
-    batch = batch
-  )
+  if (name %in% DBI::dbListTables(con)) return(name)
+  source <- tokens_source(con, paste0(name, ".parquet"), TOKEN_COLUMNS)
+  DBI::dbExecute(con, sprintf(
+    "CREATE TEMP VIEW %s AS SELECT * FROM %s", DBI::dbQuoteIdentifier(con, name), source
+  ))
+  name
+}
+
+tokenizer_settings <- function(con) {
+  source <- tokens_source(con, "tokenizers.parquet", TOKENIZER_COLUMNS)
+  DBI::dbGetQuery(con, sprintf("SELECT * FROM %s", source))
+}
+
+translation_prompt <- function(con) {
+  source <- tokens_source(con, "translation_prompt.parquet", PROMPT_COLUMNS)
+  DBI::dbGetQuery(con, sprintf("SELECT * FROM %s", source))
 }
 
 per_tokenizer <- function(con, tables, columns, query) {
@@ -136,47 +117,10 @@ encoder_verdict <- function(share, median, window) {
   if (median <= window) "vetsina" else "chunkovani"
 }
 
-OVERHEAD_SENTENCE <- "The weather is nice today."
 SAMPLE_SIZE <- 1000L
-UNSPLITTABLE_CLASS <- "note_parts.UnsplittableError"
-
-translation_settings <- function(root) {
-  path <- file.path(root, "translation")
-  prepare <- reticulate::import_from_path("prepare", path = path)
-  note_parts <- reticulate::import_from_path("note_parts", path = path)
-  list(
-    model = prepare$MODEL,
-    revision = prepare$REVISION,
-    window = prepare$WINDOW,
-    split_ratio = prepare$SPLIT_RATIO,
-    prepare = prepare,
-    note_parts = note_parts
-  )
-}
-
-translation_overhead <- function(settings, tok) {
-  prompt <- length(settings$prepare$`_token_ids`(tok, OVERHEAD_SENTENCE))
-  source <- token_lengths(tok, OVERHEAD_SENTENCE, FALSE, strip = TRUE)
-  as.integer(prompt - source)
-}
 
 translation_limit <- function(window, split_ratio, overhead) {
   (window - overhead) / (1 + split_ratio)
-}
-
-translation_fits <- function(settings, tok) {
-  function(text) settings$prepare$`_fits`(tok, text)
-}
-
-translation_split <- function(settings, fits) {
-  function(text) {
-    tryCatch(
-      settings$note_parts$split(text, fits),
-      error = function(error) {
-        if (inherits(error, UNSPLITTABLE_CLASS)) NULL else stop(error)
-      }
-    )
-  }
 }
 
 token_windows <- function(encoders, translation, scale = 1) {
@@ -191,25 +135,15 @@ token_windows <- function(encoders, translation, scale = 1) {
   )
 }
 
-sample_notes <- function(con, table, n = SAMPLE_SIZE) {
-  DBI::dbGetQuery(con, sprintf("
-    SELECT note_id, text
-    FROM %s
-    WHERE coalesce(length(text), 0) > 0
-    ORDER BY hash(note_id), note_id
-    LIMIT %d
-  ", DBI::dbQuoteIdentifier(con, table), as.integer(n)))
-}
-
-split_sample <- function(con, table, fits, split, length_of, limit, n = SAMPLE_SIZE) {
-  notes <- sample_notes(con, table, n)
-  lengths <- vapply(notes$text, length_of, numeric(1), USE.NAMES = FALSE)
-  disagree <- vapply(seq_along(lengths), function(index) {
-    (lengths[index] <= limit) != fits(notes$text[index])
-  }, logical(1))
-  parts <- lapply(notes$text, split)
-  splittable <- !vapply(parts, is.null, logical(1))
-  exact <- vapply(parts[splittable], length, numeric(1))
+split_sample <- function(con, table, limit) {
+  source <- tokens_source(con, "translation_sample.parquet", SPLIT_COLUMNS)
+  notes <- DBI::dbGetQuery(con, sprintf(
+    "SELECT s.*, t.translategemma FROM %s s JOIN %s t USING (note_id) WHERE s.note_table = %s",
+    source, DBI::dbQuoteIdentifier(con, tokens_for(con, table)), DBI::dbQuoteString(con, table)
+  ))
+  lengths <- notes$translategemma
+  splittable <- !notes$unsplittable
+  exact <- notes$parts[splittable]
   lower <- sum(ceiling(lengths[splittable] / limit))
   data.frame(
     tabulka = table,
@@ -219,7 +153,7 @@ split_sample <- function(con, table, fits, split, length_of, limit, n = SAMPLE_S
     casti_presne = sum(exact),
     casti_dolni = lower,
     pomer = if (lower > 0) sum(exact) / lower else NA_real_,
-    neshod = sum(disagree),
+    neshod = sum((lengths <= limit) != notes$fits),
     stringsAsFactors = FALSE
   )
 }
@@ -256,40 +190,18 @@ tokenizer_label <- function(keys) {
   unname(TOKENIZER_LABELS[keys])
 }
 
-read_text <- function(path) {
-  text <- readChar(path, file.size(path), useBytes = TRUE)
-  Encoding(text) <- "UTF-8"
-  text
-}
-
-read_parallel <- function(english, czech) {
-  files <- list(en = sort(list.files(english, "\\.txt$")), cs = sort(list.files(czech, "\\.txt$")))
-  if (length(files$en) == 0L && length(files$cs) == 0L) {
-    stop(sprintf("V adresářích %s a %s nejsou žádné zprávy.", english, czech))
-  }
-  missing <- c(setdiff(files$en, files$cs), setdiff(files$cs, files$en))
-  if (length(missing) > 0L) {
-    stop(sprintf("Zpráva nemá protějšek: %s.", paste(sort(missing), collapse = ", ")))
-  }
-  data.frame(
-    id = tools::file_path_sans_ext(files$en),
-    en = vapply(file.path(english, files$en), read_text, character(1), USE.NAMES = FALSE),
-    cs = vapply(file.path(czech, files$cs), read_text, character(1), USE.NAMES = FALSE),
-    stringsAsFactors = FALSE
-  )
-}
-
-parallel_ratio <- function(pairs, tokenizers, windows) {
-  rows <- lapply(names(tokenizers), function(key) {
-    spec <- tokenizers[[key]]
-    strip <- isTRUE(spec$strip)
-    en <- token_lengths(spec$tok, pairs$en, FALSE, strip)
-    cs <- token_lengths(spec$tok, pairs$cs, FALSE, strip)
+parallel_ratio <- function(con, windows) {
+  source <- tokens_source(con, "parallel_tokens.parquet", PARALLEL_COLUMNS)
+  pairs <- DBI::dbGetQuery(con, sprintf("SELECT * FROM %s", source))
+  rows <- lapply(windows$tokenizer, function(key) {
+    selected <- pairs[pairs$tokenizer == key, ]
+    en <- selected$english
+    cs <- selected$czech
     capacity <- windows$capacity[windows$tokenizer == key]
     ratio <- cs[en > 0] / en[en > 0]
     data.frame(
       tokenizer = key,
-      zprav = nrow(pairs),
+      zprav = nrow(selected),
       median = unname(quantile(ratio, 0.5, type = 1)),
       p95 = unname(quantile(ratio, 0.95, type = 1)),
       v_okne_en = sum(en <= capacity),

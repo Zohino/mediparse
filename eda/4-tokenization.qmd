@@ -10,55 +10,39 @@ library(reticulate)
 source("R/dua.R")
 source("R/db.R")
 source("R/text.R")
+source("../analysis/R/contract.R")
+source("R/note_features.R")
 source("R/tokens.R")
 source("R/export.R")
 eda_check_python()
 con <- eda_connect()
 tables <- c("discharge", "radiology")
-root <- Sys.getenv("PIXI_PROJECT_ROOT")
-settings <- translation_settings(root)
-encoders <- encoder_models()
-encoder_tokenizers <- setNames(
-  Map(load_tokenizer, encoders$model, encoders$revize), encoders$klic
+metadata <- tokenizer_settings(con)
+models <- data.frame(
+  klic = metadata$tokenizer, model = metadata$model, revize = metadata$revision,
+  okno = metadata$window, uloha = ifelse(metadata$role == "encoder", "encoder", "překlad"),
+  stringsAsFactors = FALSE
 )
-gemma_tokenizer <- load_tokenizer(settings$model, settings$revision)
-specials <- vapply(
-  encoder_tokenizers, function(tok) token_lengths(tok, "", TRUE), integer(1)
-)
-overhead <- translation_overhead(settings, gemma_tokenizer)
+encoders <- models[metadata$role == "encoder", ]
+settings <- metadata[metadata$role == "translation", ]
+prompt <- translation_prompt(con)
+settings$split_ratio <- prompt$split_ratio
+specials <- setNames(metadata$special_tokens[metadata$role == "encoder"], encoders$klic)
+overhead <- prompt$prompt_overhead
 limit <- translation_limit(settings$window, settings$split_ratio, overhead)
-tokenizers <- c(
-  lapply(encoder_tokenizers, function(tok) list(tok = tok, special = TRUE)),
-  list(translategemma = list(tok = gemma_tokenizer, special = FALSE, strip = TRUE))
-)
-keys <- names(tokenizers)
-for (table in tables) note_tokens(con, table, tokenizers)
+keys <- models$klic
+for (table in tables) note_tokens(con, table)
 percentiles <- token_percentiles(con, tables, keys)
 shown <- format_percentiles(percentiles)
 hist <- token_histogram(con, tables, keys)
 windows <- token_windows(specials, c(translategemma = limit))
 win <- window_summary(con, tables, windows)
-fits <- translation_fits(settings, gemma_tokenizer)
-split_text <- translation_split(settings, fits)
-length_of <- function(text) token_lengths(gemma_tokenizer, text, FALSE, strip = TRUE)
-samples <- do.call(rbind, lapply(tables, function(table) {
-  split_sample(con, table, fits, split_text, length_of, limit)
-}))
-pairs <- read_parallel(
-  file.path(root, "resources", "synthetic", "en"),
-  file.path(root, "resources", "synthetic", "cs")
-)
-ratio <- parallel_ratio(pairs, tokenizers, windows)
+samples <- do.call(rbind, lapply(tables, function(table) split_sample(con, table, limit)))
+ratio <- parallel_ratio(con, windows)
+pair_count <- ratio$zprav[1]
 scales <- setNames(ratio$median, ratio$tokenizer)
 win_cs <- window_summary(con, tables, token_windows(specials, c(translategemma = limit), scale = scales))
-transformers_version <- reticulate::import("transformers")$`__version__`
-models <- rbind(
-  cbind(encoders, uloha = "encoder"),
-  data.frame(
-    klic = "translategemma", model = settings$model, revize = settings$revision,
-    okno = settings$window, uloha = "překlad", stringsAsFactors = FALSE
-  )
-)
+transformers_version <- metadata$transformers[1]
 
 pick <- function(df, table, key, column) df[[column]][df$tabulka == table & df$tokenizer == key]
 share <- function(df, table, key) pick(df, table, key, "v_okne") / pick(df, table, key, "zprav")
@@ -127,7 +111,7 @@ Kapitola @sec-data popisuje modely a metody. Kapitola @sec-vysledky uvádí výs
 
 # Data a metody {#sec-data}
 
-Sešit čte sloupec `text` propouštěcích a radiologických zpráv. Tokenizuje se celý korpus, ne vzorek: R čte zprávy po dávkách 2 000 podle `note_id`, každou dávku tokenizují všechny tři tokenizéry a počty se zapíšou do dočasné tabulky DuckDB. Agregace čtou jen ji. Logika je v `eda/R/tokens.R` a testuje se nad falešným tokenizérem, Python se volá jen jako knihovna.
+Sešit čte sloupec `text` propouštěcích a radiologických zpráv. Tokenizuje se celý korpus, ne vzorek: nástroj `mediparse-eda-note-tokens` čte celé tabulky po dávkách 2 000, každou dávku tokenizují všechny tři tokenizéry a počty uloží do parquetu. R soubory čte přes DuckDB s kontrolou kontraktu a agreguje je funkcemi v `eda/R/tokens.R`. Výpočet v Pythonu se testuje lokálním tokenizérem bez sítě.
 
 ## Tokenizéry {#sec-tokenizery}
 
@@ -162,7 +146,7 @@ Zprávy se v tokenech uvádějí v logaritmických koších o šířce 0,1 deká
 
 ## Čeština
 
-Český korpus zatím není přeložený. Poměr CS/EN se proto odhaduje z veřejné paralelní syntetiky (`r nrow(pairs)` zpráv v `resources/synthetic/en` a `cs`, párovaných podle jména souboru). Pro každý tokenizér se uvede medián a 95. percentil poměru a podíl syntetických zpráv v okně v obou jazycích. Podíl reálných českých zpráv v okně se odhadne jako podíl anglických zpráv MIMIC, pro něž délka krát medián poměru vyjde do okna. Stejné měřítko přepočte i odhad počtu částí encoderů. Je to odhad, ne měření.
+Český korpus zatím není přeložený. Poměr CS/EN se proto odhaduje z veřejné paralelní syntetiky (`r pair_count` zpráv v `resources/synthetic/en` a `cs`, párovaných podle jména souboru). Pro každý tokenizér se uvede medián a 95. percentil poměru a podíl syntetických zpráv v okně v obou jazycích. Podíl reálných českých zpráv v okně se odhadne jako podíl anglických zpráv MIMIC, pro něž délka krát medián poměru vyjde do okna. Stejné měřítko přepočte i odhad počtu částí encoderů. Je to odhad, ne měření.
 
 # Výsledky {#sec-vysledky}
 
@@ -186,7 +170,7 @@ export_table(
 )
 ```
 
-*Zdroj:* dotazy v DuckDB nad dočasnou tabulkou počtů tokenů; encodery včetně speciálních tokenů, Gemma bez nich. „Prop.“ jsou propouštěcí, „Rad.“ radiologické zprávy.
+*Zdroj:* dotazy v DuckDB nad parquetem počtů tokenů; encodery včetně speciálních tokenů, Gemma bez nich. „Prop.“ jsou propouštěcí, „Rad.“ radiologické zprávy.
 
 @fig-tokeny ukazuje podíl zpráv v logaritmických koších. Svislé čáry označují okno encoderu a limit zdroje v překladu.
 
@@ -260,7 +244,7 @@ export_table(
 
 ## Čeština jako odhad {#sec-cestina}
 
-@tbl-cestina-pomer uvádí poměr CS/EN na paralelní syntetice. Poměr je odhad z `r nrow(pairs)` syntetických zpráv, ne měření na překladu MIMIC.
+@tbl-cestina-pomer uvádí poměr CS/EN na paralelní syntetice. Poměr je odhad z `r pair_count` syntetických zpráv, ne měření na překladu MIMIC.
 
 ```{r}
 #| label: tbl-cestina-pomer
@@ -302,6 +286,6 @@ Dokument přepočítal délky zpráv na tokeny tří tokenizérů. Pro další p
 
 # Omezení {#sec-omezeni}
 
-Počty částí encoderů předpokládají dělení bez překryvu; politika chunkování ještě není rozhodnutá, takže jde o odhad. Spodní mez částí překladu podhodnocuje skutečný počet, protože dělení probíhá po blocích; rozsah rozdílu měří vzorek, který pokrývá `r format_number(SAMPLE_SIZE)` zpráv na tabulku, nikoli celý korpus. Součet částí nepočítá prázdné zprávy. Odhad pro češtinu vychází z `r nrow(pairs)` syntetických zpráv a z jediného měřítka pro všechny zprávy, i když poměr CS/EN se mezi zprávami liší (95. percentil je v @tbl-cestina-pomer); syntetika navíc nemusí mít stejný slovník jako klinické zprávy. U mDeBERTa je okno 512 délka předtrénování, ne technický limit. Délka v tokenech se měří na textu před maskováním značek `___`, který používá i příprava překladu pro dělení. Metriky tokenů jsou metriky textu, a proto se zveřejňují přesně, bez potlačení malých počtů. Z textu zpráv se nezveřejňuje žádný řetězec ani kontext.
+Počty částí encoderů předpokládají dělení bez překryvu; politika chunkování ještě není rozhodnutá, takže jde o odhad. Spodní mez částí překladu podhodnocuje skutečný počet, protože dělení probíhá po blocích; rozsah rozdílu měří vzorek, který pokrývá `r format_number(SAMPLE_SIZE)` zpráv na tabulku, nikoli celý korpus. Součet částí nepočítá prázdné zprávy. Odhad pro češtinu vychází z `r pair_count` syntetických zpráv a z jediného měřítka pro všechny zprávy, i když poměr CS/EN se mezi zprávami liší (95. percentil je v @tbl-cestina-pomer); syntetika navíc nemusí mít stejný slovník jako klinické zprávy. U mDeBERTa je okno 512 délka předtrénování, ne technický limit. Délka v tokenech se měří na textu před maskováním značek `___`, který používá i příprava překladu pro dělení. Metriky tokenů jsou metriky textu, a proto se zveřejňují přesně, bez potlačení malých počtů. Z textu zpráv se nezveřejňuje žádný řetězec ani kontext.
 
 {{< include _partials/appendix.qmd >}}
