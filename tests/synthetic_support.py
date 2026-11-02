@@ -15,8 +15,9 @@ from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_co
 from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
+from mediparse.synthetic.domain.corpus_tables import corpus_tables
 from mediparse.synthetic.domain.synthetic_bhc import bhc_rows
-from mediparse.synthetic.domain.synthetic_mimic import corpus_tables, input_notes
+from mediparse.synthetic.domain.synthetic_mimic import input_notes
 from tests.support import (
     REPOSITORY_CORPUS,
     REPOSITORY_DIAGNOSIS_CANDIDATES,

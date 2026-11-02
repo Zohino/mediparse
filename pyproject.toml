@@ -247,6 +247,21 @@ forbidden_modules = [
 broken_contract_guidance = "Kroky experimentu jsou společné pro MIMIC i smoketest; syntetiku a výběr ukázek skládá samostatný vstupní bod smoketestu."
 
 [[tool.importlinter.contracts]]
+name = "Generátor smoketestu nestojí na pravidlech EDA"
+type = "forbidden"
+source_modules = [
+    "mediparse.synthetic.domain.synthetic_mimic",
+    "mediparse.synthetic.entrypoints.synthetic_mimic",
+]
+forbidden_modules = [
+    "mediparse.synthetic.domain.corpus_tables",
+    "mediparse.synthetic.domain.synthetic_coverage",
+    "mediparse.synthetic.domain.synthetic_sentinel",
+    "mediparse.synthetic.domain.synthetic_bhc",
+]
+broken_contract_guidance = "Smoketest používá jen labely plánu a výplňové kódy; pokrytí EDA, demografii, targety BHC a kanárek skládá samostatný vstupní bod EDA."
+
+[[tool.importlinter.contracts]]
 name = "Provenance nestojí na auditu korpusu"
 type = "forbidden"
 source_modules = [

@@ -16,8 +16,9 @@ from mediparse.infrastructure.mimic_inventory import read_manifest
 from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
+from mediparse.synthetic.domain.corpus_tables import corpus_tables
 from mediparse.synthetic.domain.synthetic_bhc import bhc_rows
-from mediparse.synthetic.domain.synthetic_mimic import corpus_tables, input_notes
+from mediparse.synthetic.domain.synthetic_mimic import input_notes
 from mediparse.synthetic.domain.synthetic_sentinel import (
     section_tokens,
     sentinel_tables,
