@@ -97,12 +97,11 @@ containers = [
     "mediparse",
     "mediparse.synthetic",
 ]
-# Závorky dovolují kontejneru mediparse.synthetic nemít další vrstvu synthetic;
-# application a infrastructure jsou nepovinné v obou kontejnerech.
+# Kontejner mediparse.synthetic nemá další podbalík synthetic.
 layers = [
     "(synthetic)",
     "entrypoints",
-    "(application) | (infrastructure)",
+    "application | infrastructure",
     "domain",
 ]
 exhaustive = true
