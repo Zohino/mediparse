@@ -1,1 +1,1 @@
-"""Porty sdílené víc use casy, rozdělené podle kontextu: ``corpus`` a ``experiment``."""
+"""Porty sdílené use casy experimentu."""

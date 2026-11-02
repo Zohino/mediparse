@@ -16,9 +16,9 @@ from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.mimic_inventory import read_manifest
 from mediparse.infrastructure.mimic_tables import MimicTable, MimicTables
 from mediparse.infrastructure.parquet_file import write_string_table
-from mediparse.infrastructure.plans_file import PlansFile
-from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
 from mediparse.synthetic.domain.synthetic_mimic import input_notes, synthetic_mimic_rows
+from mediparse.synthetic.infrastructure.plans_file import PlansFile
+from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
 
 if TYPE_CHECKING:
     from pathlib import Path

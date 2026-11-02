@@ -11,7 +11,9 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.domain.digest import commit_sha
-from mediparse.entrypoints import (
+from mediparse.entrypoints.cli import argument, configure_logging
+from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.synthetic.entrypoints import (
     corpus_audit,
     corpus_consistency,
     corpus_gate,
@@ -19,8 +21,6 @@ from mediparse.entrypoints import (
     synthetic_plans,
     verbalization_prompt,
 )
-from mediparse.entrypoints.cli import argument, configure_logging
-from mediparse.entrypoints.exit_code import ExitCode
 from tests.support import (
     COMMIT,
     GENERATION_ARGS,

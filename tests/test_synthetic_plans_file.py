@@ -8,10 +8,10 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.application.plan_sampling import PlanSampling
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.plans_file import (
+from mediparse.synthetic.application.plan_sampling import PlanSampling
+from mediparse.synthetic.infrastructure.plans_file import (
     PlansFile,
     SyntheticPlanFiles,
 )
@@ -20,8 +20,8 @@ from tests.support import REPOSITORY_LABELS, REPOSITORY_PLANS
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 
 def test_repository_plans_match_a_fresh_run(

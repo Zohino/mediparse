@@ -10,18 +10,20 @@ import pytest
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.synthetic_parameters import SyntheticParameters
-from mediparse.infrastructure.sampler_config import (
+from mediparse.synthetic.domain.synthetic_parameters import SyntheticParameters
+from mediparse.synthetic.infrastructure.sampler_config import (
     SamplerConfigFile,
     load_sampler_config,
 )
-from mediparse.infrastructure.synthetic_parameters_file import SyntheticParametersFile
+from mediparse.synthetic.infrastructure.synthetic_parameters_file import (
+    SyntheticParametersFile,
+)
 from tests.support import REPOSITORY_CONFIG, export_payload
 
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 
 NEW_NOTES = 300

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mediparse.infrastructure.audit_workspace import LocalWorkspace
+from mediparse.synthetic.infrastructure.audit_workspace import LocalWorkspace
 
 if TYPE_CHECKING:
     from pathlib import Path

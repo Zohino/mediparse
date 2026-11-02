@@ -29,8 +29,10 @@ MAIN_GUARD = re.compile(r"__name__\s*==\s*[\"']__main__[\"']")
 RULE_IMPORT = re.compile(r"^\s*(?:from|import)\s+(mediparse[\w.]*)", re.MULTILINE)
 ENTRYPOINTS_MODULES = ("mediparse.entrypoints", "mediparse.synthetic.entrypoints")
 RUN_DIRECTIVE = re.compile(r"^\s*run\s*:", re.MULTILINE)
-APPLICATION = PACKAGE / "application"
-APPLICATION_PREFIX = "mediparse.application."
+APPLICATIONS = (
+    PACKAGE / "application",
+    PACKAGE / "synthetic" / "application",
+)
 ENCODING_ROOTS = tuple(
     REPOSITORY / name for name in ("src", "tests", "workflow", "translation")
 )
@@ -270,7 +272,7 @@ def _protocol_names(module: Path) -> set[str]:
     }
 
 
-def _imported_module(module: Path, application: Path, node: ast.ImportFrom) -> str:
+def _imported_module(module: Path, node: ast.ImportFrom) -> str:
     """Úplné jméno importovaného modulu; relativní import se přeloží podle ``node.level``.
 
     Returns:
@@ -278,9 +280,23 @@ def _imported_module(module: Path, application: Path, node: ast.ImportFrom) -> s
     """
     if node.level == 0:
         return node.module or ""
-    package = ["mediparse", "application", *module.relative_to(application).parts[:-1]]
+    package = module.relative_to(PACKAGE.parent).parts[:-1]
     base = package[: len(package) - (node.level - 1)]
     return ".".join([*base, *(node.module.split(".") if node.module else [])])
+
+
+def _use_case_source(imported: str) -> tuple[Path, str] | None:
+    for application in APPLICATIONS:
+        prefix = ".".join(application.relative_to(PACKAGE.parent).parts) + "."
+        if not imported.startswith(prefix):
+            continue
+        source = imported.removeprefix(prefix)
+        if source == "ports" or source.startswith("ports."):
+            return None
+        source_file = application / Path(*source.split(".")).with_suffix(".py")
+        if source_file.is_file():
+            return source_file, source
+    return None
 
 
 def _foreign_protocol_imports(application: Path) -> list[str]:
@@ -300,47 +316,86 @@ def _foreign_protocol_imports(application: Path) -> list[str]:
         for node in ast.walk(tree):
             if not isinstance(node, ast.ImportFrom):
                 continue
-            imported = _imported_module(module, application, node)
-            if not imported.startswith(APPLICATION_PREFIX):
+            source = _use_case_source(_imported_module(module, node))
+            if source is None:
                 continue
-            source = imported.removeprefix(APPLICATION_PREFIX)
-            if source == "ports" or source.startswith("ports."):
-                continue
-            source_file = application / Path(*source.split(".")).with_suffix(".py")
-            if not source_file.is_file():
-                continue
+            source_file, source_name = source
             protocols = _protocol_names(source_file)
             violations.extend(
-                f"{module.name} importuje port {alias.name} z {source}"
+                f"{module.name} importuje port {alias.name} z {source_name}"
                 for alias in node.names
                 if alias.name in protocols
             )
     return violations
 
 
-def test_shared_port_lives_in_ports_package() -> None:
+@pytest.mark.parametrize("application", APPLICATIONS)
+def test_shared_port_lives_in_ports_package(application: Path) -> None:
     """Port, který používá víc use casů, leží v ``application.ports``, ne v modulu use casu."""
-    assert any(APPLICATION.glob("*.py"))
-    assert _foreign_protocol_imports(APPLICATION) == []
+    assert any(application.glob("*.py"))
+    assert _foreign_protocol_imports(application) == []
 
 
-def test_use_case_may_import_function_of_another_use_case(tmp_path: Path) -> None:
+def test_use_case_may_import_function_of_another_use_case(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """Pravidlo se týká portů; funkci jiného use casu smí use case volat (S11s)."""
-    (tmp_path / "gate.py").write_text(
+    application = tmp_path / "mediparse" / "application"
+    application.mkdir(parents=True)
+    monkeypatch.setattr("tests.test_architecture.PACKAGE", application.parent)
+    monkeypatch.setattr("tests.test_architecture.APPLICATIONS", (application,))
+    (application / "gate.py").write_text(
         "from typing import Protocol\n\n"
         "class Port(Protocol):\n    ...\n\n"
         "def audit_violations() -> None:\n    ...\n",
         encoding="utf-8",
     )
-    (tmp_path / "user.py").write_text(
+    (application / "user.py").write_text(
         "from mediparse.application.gate import audit_violations\n", encoding="utf-8"
     )
-    (tmp_path / "bad.py").write_text(
+    (application / "bad.py").write_text(
         "if True:\n    from mediparse.application.gate import Port\n",
         encoding="utf-8",
     )
 
-    assert _foreign_protocol_imports(tmp_path) == ["bad.py importuje port Port z gate"]
+    assert _foreign_protocol_imports(application) == [
+        "bad.py importuje port Port z gate"
+    ]
+
+
+@pytest.mark.parametrize(
+    "source", ["mediparse.application.gate", "...application.gate"]
+)
+def test_shared_port_rule_covers_imports_from_another_application(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, source: str
+) -> None:
+    """Port jiného kontextu patří do ports; funkci jeho use casu volat lze."""
+    package = tmp_path / "mediparse"
+    application = package / "application"
+    synthetic_application = package / "synthetic" / "application"
+    application.mkdir(parents=True)
+    synthetic_application.mkdir(parents=True)
+    (application / "gate.py").write_text(
+        "from typing import Protocol\n\n"
+        "class Port(Protocol):\n    ...\n\n"
+        "def audit_violations() -> None:\n    ...\n",
+        encoding="utf-8",
+    )
+    (synthetic_application / "bad.py").write_text(
+        f"from {source} import Port\n", encoding="utf-8"
+    )
+    (synthetic_application / "user.py").write_text(
+        f"from {source} import audit_violations\n", encoding="utf-8"
+    )
+    monkeypatch.setattr("tests.test_architecture.PACKAGE", package)
+    monkeypatch.setattr(
+        "tests.test_architecture.APPLICATIONS",
+        (application, synthetic_application),
+    )
+
+    assert _foreign_protocol_imports(synthetic_application) == [
+        "bad.py importuje port Port z gate"
+    ]
 
 
 def _is_binary_mode(node: ast.expr | None) -> bool:

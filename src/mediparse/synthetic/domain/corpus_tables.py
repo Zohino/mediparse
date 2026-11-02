@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.icd import IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.note_structure import Sex
+from mediparse.synthetic.domain.note_structure import Sex
 from mediparse.synthetic.domain.synthetic_coverage import coverage_diagnoses
 from mediparse.synthetic.domain.synthetic_mimic import TIMESTAMP, mimic_core
 
@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
     from mediparse.domain.icd import DiagnosisCodes
     from mediparse.domain.input_note import InputNote
-    from mediparse.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.note_plan import NotePlan
 
 _ERAS: Final = {IcdVersion.NINE: "2008 - 2010", IcdVersion.TEN: "2017 - 2019"}
 _ANCHOR_AGES: Final = (15, 25, 35, 45, 55, 65, 75, 91)

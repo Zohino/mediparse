@@ -7,16 +7,16 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.domain.corpus_statistics import (
+from mediparse.domain.diagnosis import Diagnosis
+from mediparse.synthetic.domain.corpus_statistics import (
     CorpusStatistics,
     corpus_statistics,
     corpus_violations,
     statistics_violations,
 )
-from mediparse.domain.diagnosis import Diagnosis
 
 if TYPE_CHECKING:
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
     from tests.conftest import PlannedNote
 
 

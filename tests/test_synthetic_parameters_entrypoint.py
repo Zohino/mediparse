@@ -8,8 +8,8 @@ from typing import TYPE_CHECKING
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.entrypoints.synthetic_parameters import run
-from mediparse.infrastructure.sampler_config import load_sampler_config
+from mediparse.synthetic.entrypoints.synthetic_parameters import run
+from mediparse.synthetic.infrastructure.sampler_config import load_sampler_config
 from tests.support import REPOSITORY_CONFIG, export_payload
 
 if TYPE_CHECKING:

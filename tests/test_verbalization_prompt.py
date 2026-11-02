@@ -6,10 +6,10 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.application.verbalization_prompt import VerbalizationPrompt
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.entrypoints.verbalization_prompt import run
+from mediparse.synthetic.application.verbalization_prompt import VerbalizationPrompt
+from mediparse.synthetic.entrypoints.verbalization_prompt import run
 from tests.support import (
     REPOSITORY_CONFIG,
     REPOSITORY_PLANS,
@@ -18,8 +18,8 @@ from tests.support import (
 )
 
 if TYPE_CHECKING:
-    from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
     from tests.conftest import PlannedNote
 
 

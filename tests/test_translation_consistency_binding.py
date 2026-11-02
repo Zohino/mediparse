@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from mediparse.domain.translation_consistency import (
+from mediparse.synthetic.domain.translation_consistency import (
     TranslatedNote,
     binding_violations,
     joined_translation,

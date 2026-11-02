@@ -15,8 +15,8 @@ from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.metrics_table import ParquetMetricsTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
-from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
 from mediparse.synthetic.domain.smoketest_summary import demo_examples
+from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
 
 if TYPE_CHECKING:
     from pathlib import Path

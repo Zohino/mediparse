@@ -28,7 +28,7 @@ from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES, REPOSITORY_MIMIC_MANI
 from tests.synthetic_support import NOTES
 
 if TYPE_CHECKING:
-    from mediparse.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.note_plan import NotePlan
     from tests.conftest import PlannedNote
 
 SHAPES: Final = read_manifest(REPOSITORY_MIMIC_MANIFEST)

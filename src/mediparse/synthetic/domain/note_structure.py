@@ -1,0 +1,292 @@
+"""Struktura plánu syntetické zprávy: pohlaví, věková značka, sekce, podnadpisy a délka narativu."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from enum import StrEnum
+from math import floor, log
+from typing import TYPE_CHECKING, Annotated, Self
+
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    PositiveFloat,
+    PositiveInt,
+    model_validator,
+)
+
+from mediparse.synthetic.domain.probability import Probability, sums_to_one
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping, Sequence
+    from random import Random
+
+    from mediparse.domain.identity import SubjectId
+    from mediparse.synthetic.domain.synthetic_note import SyntheticNote
+
+
+class Sex(StrEnum):
+    """Pohlaví pacienta, které se ve zprávě projeví polem Sex a zájmeny."""
+
+    FEMALE = "female"
+    MALE = "male"
+
+    @property
+    def code(self) -> str:
+        """Hodnota pole Sex v preambuli.
+
+        Returns:
+            ``F`` nebo ``M``.
+        """
+        return "F" if self is Sex.FEMALE else "M"
+
+
+class PreambleValue(StrEnum):
+    """Hodnota pole preambule: de-identifikační značka, pohlaví z plánu, nebo text verbalizace."""
+
+    DEID = "deid"
+    SEX = "sex"
+    TEXT = "text"
+
+
+class PreambleField(BaseModel):
+    """Pole preambule a druh jeho hodnoty."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+
+    name: str
+    value: PreambleValue
+
+
+class Subheading(BaseModel):
+    """Podnadpis uvnitř sekce, pravděpodobnost jeho výskytu a zda je jeho hodnotou značka."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+
+    header: str
+    probability: Probability
+    deid_value: bool = False
+
+
+class SectionModel(BaseModel):
+    """Sekce zprávy: kanonický klíč, hlavička, pravděpodobnost výskytu a skupiny podnadpisů.
+
+    Skupina s více podnadpisy jsou vzájemně se vylučující varianty, losuje se nejvýš jedna.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+
+    key: str
+    header: str
+    probability: Probability
+    narrative_share: Probability = 0.0
+    deid_body: bool = False
+    subheadings: tuple[Annotated[tuple[Subheading, ...], Field(min_length=1)], ...] = ()
+
+    @model_validator(mode="after")
+    def _groups_are_probabilities(self) -> Self:
+        if any(sum(s.probability for s in group) > 1.0 for group in self.subheadings):
+            msg = f"Varianty podnadpisu v sekci {self.key} mají součet pravděpodobností nad 1."
+            raise ValueError(msg)
+        return self
+
+
+class NarrativeModel(BaseModel):
+    """Délka narativu ve slovech, hustota narativních značek a tolerance korpusu i zprávy.
+
+    Délka má oříznuté log-normální rozdělení. Tolerance mediánu, hustoty a délky
+    narativu zprávy proti plánu jsou relativní, tolerance rozptylu logaritmu délky
+    absolutní.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+
+    median_words: PositiveInt
+    sigma: PositiveFloat
+    min_words: PositiveInt
+    max_words: PositiveInt
+    deid_per_word: Annotated[float, Field(gt=0.0, le=1.0)]
+    median_tolerance: PositiveFloat
+    sigma_tolerance: PositiveFloat
+    deid_tolerance: PositiveFloat
+    note_tolerance: PositiveFloat
+
+    @model_validator(mode="after")
+    def _median_lies_inside_bounds(self) -> Self:
+        if not self.min_words < self.median_words < self.max_words:
+            msg = "Medián délky narativu musí ležet uvnitř mezí oříznutí."
+            raise ValueError(msg)
+        return self
+
+
+class StructureModel(BaseModel):
+    """Preambule, sekce v pořadí, v němž se ve zprávě vyskytují, a atributy pacienta a zprávy."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+
+    preamble: Annotated[
+        tuple[Annotated[tuple[PreambleField, ...], Field(min_length=1)], ...],
+        Field(min_length=1),
+    ]
+    sections: Annotated[tuple[SectionModel, ...], Field(min_length=1)]
+    narrative: NarrativeModel
+    female_probability: Probability
+    age_marker_probability: Probability
+
+    @property
+    def preamble_fields(self) -> tuple[PreambleField, ...]:
+        """Pole preambule bez ohledu na řádky.
+
+        Returns:
+            Pole v pořadí řádků.
+        """
+        return tuple(field for line in self.preamble for field in line)
+
+    @property
+    def subheadings(self) -> tuple[tuple[str, Subheading], ...]:
+        """Podnadpisy všech sekcí s klíčem sekce, ke které patří.
+
+        Returns:
+            Dvojice klíč sekce, podnadpis v pořadí configu.
+        """
+        return tuple(
+            (section.key, subheading)
+            for section in self.sections
+            for group in section.subheadings
+            for subheading in group
+        )
+
+    @property
+    def headers(self) -> dict[str, str]:
+        """Hlavičky sekcí podle kanonického klíče.
+
+        Returns:
+            Slovník klíč sekce → hlavička.
+        """
+        return {section.key: section.header for section in self.sections}
+
+    @property
+    def structure_labels(self) -> frozenset[str]:
+        """Štítky, které zprávě předepisuje config: pole preambule, hlavičky a podnadpisy.
+
+        Returns:
+            Jména polí preambule, hlavičky sekcí a podnadpisy bez dvojtečky.
+        """
+        return frozenset((
+            *(field.name for field in self.preamble_fields),
+            *self.headers.values(),
+            *(subheading.header for _, subheading in self.subheadings),
+        ))
+
+    @model_validator(mode="after")
+    def _preamble_carries_sex_once(self) -> Self:
+        if sum(field.value is PreambleValue.SEX for field in self.preamble_fields) != 1:
+            msg = "Preambule musí mít právě jedno pole s pohlavím."
+            raise ValueError(msg)
+        return self
+
+    @model_validator(mode="after")
+    def _keys_are_unique(self) -> Self:
+        keys = [section.key for section in self.sections]
+        if len(set(keys)) != len(keys):
+            msg = "Klíče sekcí se opakují."
+            raise ValueError(msg)
+        return self
+
+    @model_validator(mode="after")
+    def _narrative_shares_sum_to_one(self) -> Self:
+        shares = [section.narrative_share for section in self.sections]
+        if not sums_to_one(shares):
+            msg = f"Podíly narativních sekcí musí dávat 1, dávají {sum(shares)}."
+            raise ValueError(msg)
+        return self
+
+
+@dataclass(frozen=True)
+class NoteStructure:
+    """Plánovaná struktura jedné zprávy."""
+
+    note_id: str
+    sex: Sex
+    age_marker: bool
+    sections: tuple[str, ...]
+    subheadings: tuple[str, ...]
+    section_words: Mapping[str, int]
+    narrative_deid: int
+
+
+def sample_structure(
+    notes: Sequence[SyntheticNote], model: StructureModel, rng: Random
+) -> tuple[NoteStructure, ...]:
+    """Vylosuje strukturu každé zprávy; pohlaví se losuje jednou za pacienta.
+
+    Returns:
+        Struktury ve stejném pořadí jako zprávy.
+    """
+    sexes: dict[SubjectId, Sex] = {}
+    structures: list[NoteStructure] = []
+    for note in notes:
+        if note.subject_id not in sexes:
+            sexes[note.subject_id] = _sex(model, rng)
+        structures.append(_structure(note.note_id, sexes[note.subject_id], model, rng))
+    return tuple(structures)
+
+
+def _sex(model: StructureModel, rng: Random) -> Sex:
+    return Sex.FEMALE if rng.random() < model.female_probability else Sex.MALE
+
+
+def _structure(
+    note_id: str, sex: Sex, model: StructureModel, rng: Random
+) -> NoteStructure:
+    age_marker = rng.random() < model.age_marker_probability
+    present = tuple(s for s in model.sections if rng.random() < s.probability)
+    subheadings = tuple(
+        header
+        for section in present
+        for group in section.subheadings
+        if (header := _pick(group, rng)) is not None
+    )
+    # Délka se losuje i pro zprávu bez narativní sekce, aby se proud náhodnosti
+    # dalších zpráv nezměnil; narativ pak tvoří jen slova, která dostala nějaká sekce.
+    section_words = _allocate(_narrative_words(model.narrative, rng), present)
+    words = sum(section_words.values())
+    return NoteStructure(
+        note_id=note_id,
+        sex=sex,
+        age_marker=age_marker,
+        sections=tuple(section.key for section in present),
+        subheadings=subheadings,
+        section_words=section_words,
+        narrative_deid=round(words * model.narrative.deid_per_word),
+    )
+
+
+def _pick(group: Sequence[Subheading], rng: Random) -> str | None:
+    draw = rng.random()
+    for subheading in group:
+        if draw < subheading.probability:
+            return subheading.header
+        draw -= subheading.probability
+    return None
+
+
+def _narrative_words(model: NarrativeModel, rng: Random) -> int:
+    while True:
+        words = round(rng.lognormvariate(log(model.median_words), model.sigma))
+        if model.min_words <= words <= model.max_words:
+            return words
+
+
+def _allocate(words: int, present: Sequence[SectionModel]) -> dict[str, int]:
+    narrative = [section for section in present if section.narrative_share > 0]
+    total = sum(section.narrative_share for section in narrative)
+    quotas = [words * section.narrative_share / total for section in narrative]
+    counts = [floor(quota) for quota in quotas]
+    by_remainder = sorted(range(len(narrative)), key=lambda i: counts[i] - quotas[i])
+    for index in by_remainder[: words - sum(counts)]:
+        counts[index] += 1
+    return {
+        section.key: count for section, count in zip(narrative, counts, strict=True)
+    }

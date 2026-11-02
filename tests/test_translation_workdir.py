@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Final
 import pytest
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.translation_workdir import TranslationWorkdir
+from mediparse.synthetic.infrastructure.translation_workdir import TranslationWorkdir
 from tests.workdir_support import (
     FIRST_START,
     LAST_START,

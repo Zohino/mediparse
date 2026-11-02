@@ -5,12 +5,12 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
-from mediparse.application.corpus_provenance import (
+from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.synthetic.application.corpus_provenance import (
     ProvenanceRefused,
     ProvenanceWritten,
 )
-from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.entrypoints.provenance_exit import provenance_exit_code
+from mediparse.synthetic.entrypoints.provenance_exit import provenance_exit_code
 
 if TYPE_CHECKING:
     import pytest

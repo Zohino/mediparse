@@ -5,16 +5,16 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from mediparse.application.corpus_consistency import (
+from mediparse.domain.language import Language
+from mediparse.synthetic.application.corpus_consistency import (
     ConsistencyReport,
     CorpusConsistency,
 )
-from mediparse.domain.language import Language
 from tests.support import PlansFake
 
 if TYPE_CHECKING:
-    from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
     from tests.conftest import PlannedNote
 
 

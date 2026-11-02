@@ -8,10 +8,13 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.domain.corpus_provenance import prompts_sha256
-from mediparse.entrypoints.corpus_provenance import run
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.synthetic_corpus import PROVENANCE_NAME, RECORD_NAME
+from mediparse.synthetic.domain.corpus_provenance import prompts_sha256
+from mediparse.synthetic.entrypoints.corpus_provenance import run
+from mediparse.synthetic.infrastructure.synthetic_corpus import (
+    PROVENANCE_NAME,
+    RECORD_NAME,
+)
 from tests.support import (
     GENERATION_FIELDS,
     NOTE,
@@ -22,8 +25,8 @@ from tests.support import (
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
     from tests.conftest import AuditFiles
 
 

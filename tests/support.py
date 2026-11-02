@@ -10,26 +10,26 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Final
 
-from mediparse.domain.corpus_audit import (
+from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.environment import SourceRevision
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.infrastructure.mimic_tables import TABLES_PATH
+from mediparse.synthetic.domain.corpus_audit import (
     NGRAM_SIZE,
     NORMALIZATION,
     AuditPin,
     AuditRecord,
 )
-from mediparse.domain.corpus_provenance import (
+from mediparse.synthetic.domain.corpus_provenance import (
     Decoding,
     Generation,
     Translation,
     TranslationRun,
 )
-from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.environment import SourceRevision
-from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.mimic_tables import TABLES_PATH
-from mediparse.infrastructure.plans_file import LABELS_PATH, PLANS_PATH
-from mediparse.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
-from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT
-from mediparse.infrastructure.verbalization_template import (
+from mediparse.synthetic.infrastructure.plans_file import LABELS_PATH, PLANS_PATH
+from mediparse.synthetic.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
+from mediparse.synthetic.infrastructure.synthetic_corpus import CORPUS_ROOT
+from mediparse.synthetic.infrastructure.verbalization_template import (
     VERBALIZATION_TEMPLATE_PATH,
 )
 
@@ -38,7 +38,7 @@ if TYPE_CHECKING:
 
     import pytest
 
-    from mediparse.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.note_plan import NotePlan
 
 REPOSITORY: Final = Path(__file__).parents[1]
 REPOSITORY_CONFIG: Final = REPOSITORY / SAMPLER_CONFIG_PATH

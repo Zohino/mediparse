@@ -7,9 +7,9 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.domain.corpus_audit import ReferenceNote
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.mimic_reference import MimicReference
+from mediparse.synthetic.domain.corpus_audit import ReferenceNote
+from mediparse.synthetic.infrastructure.mimic_reference import MimicReference
 
 if TYPE_CHECKING:
     from pathlib import Path

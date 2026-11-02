@@ -5,8 +5,8 @@ from __future__ import annotations
 import json
 from typing import TYPE_CHECKING
 
-from mediparse.domain.corpus_audit import Position
-from mediparse.infrastructure.overlap_report import OverlapReportFile
+from mediparse.synthetic.domain.corpus_audit import Position
+from mediparse.synthetic.infrastructure.overlap_report import OverlapReportFile
 
 if TYPE_CHECKING:
     from pathlib import Path

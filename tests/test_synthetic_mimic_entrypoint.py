@@ -12,8 +12,8 @@ import pytest
 
 from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.synthetic.entrypoints import synthetic_mimic
+from mediparse.synthetic.infrastructure.plans_file import PlansFile
 from tests.support import (
     REPOSITORY_CORPUS,
     REPOSITORY_DIAGNOSIS_CANDIDATES,

@@ -10,8 +10,8 @@ from mediparse.domain.inputs import InvalidInputError
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
-    from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.section_headers import SectionLexicon
+    from mediparse.synthetic.domain.note_plan import NotePlan
 
 # Protějšek BHC_SECTION z eda/R/bhc.R; role BHC není součástí schématu lexikonu.
 BHC_SECTION: Final = "hospital_course"

@@ -10,9 +10,9 @@ import pytest
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.icd import DiagnosisCodes, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.mentions import Mention, MentionStatus
-from mediparse.domain.note_plan import NotePlan
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
+from mediparse.synthetic.domain.mentions import Mention, MentionStatus
+from mediparse.synthetic.domain.note_plan import NotePlan
 from mediparse.synthetic.domain.synthetic_coverage import coverage_diagnoses
 from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 from tests.synthetic_support import EDA_PLANS

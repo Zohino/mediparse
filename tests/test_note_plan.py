@@ -6,10 +6,14 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.mentions import Mention, MentionStatus
-from mediparse.domain.note_plan import MismatchedPlanPartsError, NotePlan, note_plan
-from mediparse.domain.note_structure import NoteStructure, Sex
-from mediparse.domain.synthetic_note import SyntheticNote
+from mediparse.synthetic.domain.mentions import Mention, MentionStatus
+from mediparse.synthetic.domain.note_plan import (
+    MismatchedPlanPartsError,
+    NotePlan,
+    note_plan,
+)
+from mediparse.synthetic.domain.note_structure import NoteStructure, Sex
+from mediparse.synthetic.domain.synthetic_note import SyntheticNote
 
 NOTE_ID = "90000001-DS-1"
 NOTE = SyntheticNote(

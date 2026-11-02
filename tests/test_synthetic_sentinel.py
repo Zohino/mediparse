@@ -13,9 +13,7 @@ from mediparse.domain.mimic_table import TableShape
 from mediparse.domain.section_headers import split_sections
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
 from mediparse.infrastructure.mimic_inventory import read_manifest
-from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
-from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
 from mediparse.synthetic.domain.corpus_tables import corpus_tables
 from mediparse.synthetic.domain.synthetic_bhc import bhc_rows
 from mediparse.synthetic.domain.synthetic_mimic import input_notes
@@ -24,6 +22,8 @@ from mediparse.synthetic.domain.synthetic_sentinel import (
     sentinel_tables,
 )
 from mediparse.synthetic.entrypoints.eda_synthetic_tables import eda_tables
+from mediparse.synthetic.infrastructure.plans_file import PlansFile
+from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
 from tests.support import (
     REPOSITORY_CORPUS,
     REPOSITORY_DIAGNOSIS_CANDIDATES,

@@ -6,13 +6,13 @@ from dataclasses import dataclass, field
 from random import Random
 from typing import TYPE_CHECKING
 
-from mediparse.application.plan_sampling import PlanSampling
+from mediparse.synthetic.application.plan_sampling import PlanSampling
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 
 @dataclass

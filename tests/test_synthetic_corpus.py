@@ -9,7 +9,7 @@ import pytest
 from mediparse.domain.digest import fingerprint
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
-from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
+from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
 
 if TYPE_CHECKING:
     from pathlib import Path

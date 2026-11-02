@@ -14,13 +14,13 @@ from typing import TYPE_CHECKING, Final
 
 import pytest
 
-from mediparse.domain.corpus_provenance import Masking
 from mediparse.domain.note_text import deid_markers
-from mediparse.domain.translation_consistency import (
+from mediparse.synthetic.domain.corpus_provenance import Masking
+from mediparse.synthetic.domain.translation_consistency import (
     binding_violations,
     restored_markers,
 )
-from mediparse.infrastructure.translation_workdir import TranslationWorkdir
+from mediparse.synthetic.infrastructure.translation_workdir import TranslationWorkdir
 from tests.support import REPOSITORY, load_script
 from tests.workdir_support import (
     LAST_START,

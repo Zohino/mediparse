@@ -8,7 +8,7 @@ from pydantic import ValidationError
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import (
+from mediparse.synthetic.domain.labels import (
     InfeasibleMarginalsError,
     IpfNotConvergedError,
     LabelModel,

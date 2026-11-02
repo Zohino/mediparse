@@ -18,15 +18,15 @@ dependencies = [
 ]
 
 [project.scripts]
-mediparse-corpus-audit = "mediparse.entrypoints.corpus_audit:main"
-mediparse-corpus-check = "mediparse.entrypoints.corpus_consistency:main"
-mediparse-corpus-gate = "mediparse.entrypoints.corpus_gate:main"
-mediparse-corpus-provenance = "mediparse.entrypoints.corpus_provenance:main"
+mediparse-corpus-audit = "mediparse.synthetic.entrypoints.corpus_audit:main"
+mediparse-corpus-check = "mediparse.synthetic.entrypoints.corpus_consistency:main"
+mediparse-corpus-gate = "mediparse.synthetic.entrypoints.corpus_gate:main"
+mediparse-corpus-provenance = "mediparse.synthetic.entrypoints.corpus_provenance:main"
 mediparse-eda-synthetic-tables = "mediparse.synthetic.entrypoints.eda_synthetic_tables:main"
-mediparse-sample-plans = "mediparse.entrypoints.synthetic_plans:main"
-mediparse-synthetic-parameters = "mediparse.entrypoints.synthetic_parameters:main"
-mediparse-translation-provenance = "mediparse.entrypoints.translation_provenance:main"
-mediparse-verbalization-prompt = "mediparse.entrypoints.verbalization_prompt:main"
+mediparse-sample-plans = "mediparse.synthetic.entrypoints.synthetic_plans:main"
+mediparse-synthetic-parameters = "mediparse.synthetic.entrypoints.synthetic_parameters:main"
+mediparse-translation-provenance = "mediparse.synthetic.entrypoints.translation_provenance:main"
+mediparse-verbalization-prompt = "mediparse.synthetic.entrypoints.verbalization_prompt:main"
 
 [project.urls]
 Repository = "https://github.com/Zohino/mediparse"
@@ -97,12 +97,11 @@ containers = [
     "mediparse",
     "mediparse.synthetic",
 ]
-# Závorky jsou kvůli kontejneru mediparse.synthetic: nemá vrstvu synthetic ani
-# application a infrastructure; jádro poslední dvě má, takže mu nepovinnost nic nepovolí.
+# Kontejner mediparse.synthetic nemá další podbalík synthetic.
 layers = [
     "(synthetic)",
     "entrypoints",
-    "(application) | (infrastructure)",
+    "application | infrastructure",
     "domain",
 ]
 exhaustive = true
@@ -114,11 +113,34 @@ type = "layers"
 layers = [
     "mediparse.synthetic.entrypoints",
     "mediparse.entrypoints",
+    "mediparse.synthetic.application | mediparse.synthetic.infrastructure",
     "mediparse.application | mediparse.infrastructure",
     "mediparse.synthetic.domain",
     "mediparse.domain",
 ]
 broken_contract_guidance = "Vnitřní vrstva syntetiky smí používat jen stejnou nebo nižší vrstvu jádra; složení s adaptéry patří do synthetic.entrypoints."
+
+[[tool.importlinter.contracts]]
+name = "Use case syntetiky nezná adaptéry jádra"
+type = "forbidden"
+source_modules = [
+    "mediparse.synthetic.application",
+]
+forbidden_modules = [
+    "mediparse.infrastructure",
+]
+broken_contract_guidance = "Use case syntetiky popíše potřebu portem; adaptér jádra zapojí synthetic.entrypoints."
+
+[[tool.importlinter.contracts]]
+name = "Adaptér syntetiky nezná use casy jádra"
+type = "forbidden"
+source_modules = [
+    "mediparse.synthetic.infrastructure",
+]
+forbidden_modules = [
+    "mediparse.application",
+]
+broken_contract_guidance = "Adaptér syntetiky řeší I/O, use casy skládá synthetic.entrypoints."
 
 [[tool.importlinter.contracts]]
 name = "Technologie jen v infrastructure"
@@ -127,6 +149,7 @@ source_modules = [
     "mediparse.application",
     "mediparse.domain",
     "mediparse.entrypoints",
+    "mediparse.synthetic.application",
     "mediparse.synthetic.domain",
     "mediparse.synthetic.entrypoints",
 ]
@@ -146,32 +169,34 @@ ignore_imports = [
     # Jen typy pod TYPE_CHECKING; po modulech, ne po vrstvě, protože import-linter
     # typový import od běhového nerozliší a ruff S311 nechytí random.shuffle ani seed.
     "mediparse.application.cohort -> contextlib",
-    "mediparse.application.corpus_audit -> datetime",
-    "mediparse.application.plan_sampling -> random",
-    "mediparse.domain.mentions -> random",
-    "mediparse.domain.note_structure -> random",
-    "mediparse.domain.synthetic_patients -> random",
-    "mediparse.domain.** -> datetime",
+    "mediparse.synthetic.application.corpus_audit -> datetime",
+    "mediparse.synthetic.application.plan_sampling -> random",
+    "mediparse.synthetic.domain.mentions -> random",
+    "mediparse.synthetic.domain.note_structure -> random",
+    "mediparse.synthetic.domain.synthetic_patients -> random",
     "mediparse.domain.** -> hashlib",
     "mediparse.domain.** -> math",
     "mediparse.domain.** -> pydantic",
     "mediparse.domain.** -> re",
-    "mediparse.domain.** -> statistics",
-    "mediparse.domain.** -> string",
-    "mediparse.domain.** -> unicodedata",
     "mediparse.entrypoints.** -> argparse",
-    "mediparse.entrypoints.** -> datetime",
     "mediparse.entrypoints.** -> functools",
     "mediparse.entrypoints.** -> logging",
     "mediparse.entrypoints.** -> os",
     "mediparse.entrypoints.** -> pathlib",
-    "mediparse.entrypoints.** -> random",
-    "mediparse.entrypoints.** -> sys",
+    "mediparse.synthetic.domain.** -> datetime",
+    "mediparse.synthetic.domain.** -> hashlib",
     "mediparse.synthetic.domain.** -> math",
+    "mediparse.synthetic.domain.** -> pydantic",
+    "mediparse.synthetic.domain.** -> re",
+    "mediparse.synthetic.domain.** -> statistics",
     "mediparse.synthetic.domain.** -> string",
+    "mediparse.synthetic.domain.** -> unicodedata",
     "mediparse.synthetic.entrypoints.** -> argparse",
+    "mediparse.synthetic.entrypoints.** -> datetime",
     "mediparse.synthetic.entrypoints.** -> logging",
+    "mediparse.synthetic.entrypoints.** -> os",
     "mediparse.synthetic.entrypoints.** -> pathlib",
+    "mediparse.synthetic.entrypoints.** -> random",
     "mediparse.synthetic.entrypoints.** -> sys",
 ]
 broken_contract_guidance = "Knihovny, soubory, síť a procesy patří do infrastructure; doména a use casy k nim přistupují přes porty. Modul, který je opravdu čistý, přidej do ignore_imports vědomě a s důvodem v těle commitu."
@@ -183,7 +208,9 @@ protected_modules = [
     "mediparse.application",
     "mediparse.domain",
     "mediparse.infrastructure",
+    "mediparse.synthetic.application",
     "mediparse.synthetic.domain",
+    "mediparse.synthetic.infrastructure",
 ]
 allowed_importers = [
     "mediparse",
@@ -232,25 +259,6 @@ forbidden_modules = [
 broken_contract_guidance = "Řádek vstupu je v domain.input_note a pravidla splitu v domain.split; párování syntetiky je v synthetic.domain.synthetic_mimic a trénink i souhrn smoketestu jsou samostatné kroky."
 
 [[tool.importlinter.contracts]]
-name = "Kroky experimentu nestojí na smoketestu ani syntetice"
-type = "forbidden"
-source_modules = [
-    "mediparse.application.model_training",
-    "mediparse.application.model_inference",
-    "mediparse.application.model_evaluation",
-    "mediparse.entrypoints.model_training",
-    "mediparse.entrypoints.model_inference",
-    "mediparse.entrypoints.model_evaluation",
-    "mediparse.entrypoints.training_input",
-    "mediparse.domain.model_inference",
-    "mediparse.domain.training",
-]
-forbidden_modules = [
-    "mediparse.infrastructure.synthetic_corpus",
-]
-broken_contract_guidance = "Kroky experimentu jsou společné pro MIMIC i smoketest; syntetiku a výběr ukázek skládá samostatný vstupní bod smoketestu."
-
-[[tool.importlinter.contracts]]
 name = "Generátor smoketestu nestojí na pravidlech EDA"
 type = "forbidden"
 source_modules = [
@@ -269,52 +277,27 @@ broken_contract_guidance = "Smoketest používá jen labely plánu a výplňové
 name = "Provenance nestojí na auditu korpusu"
 type = "forbidden"
 source_modules = [
-    "mediparse.domain.environment",
-    "mediparse.domain.run_manifest",
-    "mediparse.domain.cohort",
-    "mediparse.domain.corpus_provenance",
-    "mediparse.domain.digest",
+    "mediparse.synthetic.domain.corpus_provenance",
 ]
 forbidden_modules = [
-    "mediparse.domain.corpus_audit",
+    "mediparse.synthetic.domain.corpus_audit",
 ]
-broken_contract_guidance = "Typy otisků (Sha256, CommitSha, commit_sha, fingerprint) jsou v domain.digest; corpus_audit je audit syntetického korpusu."
-
-[[tool.importlinter.contracts]]
-name = "Kohorta a evaluace nestojí na modelu labelů syntetiky"
-type = "forbidden"
-source_modules = [
-    "mediparse.domain.diagnosis",
-    "mediparse.domain.cohort",
-    "mediparse.domain.evaluation",
-    "mediparse.domain.icd",
-    "mediparse.domain.input_note",
-    "mediparse.domain.split",
-    "mediparse.application.cohort",
-    "mediparse.application.model_evaluation",
-    "mediparse.entrypoints.cohort",
-    "mediparse.infrastructure.duckdb_cohort",
-    "mediparse.infrastructure.note_table",
-]
-forbidden_modules = [
-    "mediparse.domain.labels",
-]
-broken_contract_guidance = "Diagnóza je v domain.diagnosis; labels je model labelů syntetiky (prevalence, IPF)."
+broken_contract_guidance = "Typy otisků (Sha256, CommitSha, commit_sha, fingerprint) jsou v domain.digest; synthetic.domain.corpus_audit je audit syntetického korpusu."
 
 [[tool.importlinter.contracts]]
 name = "Typy plánu syntetiky nestojí na losování pacientů"
 type = "forbidden"
 source_modules = [
-    "mediparse.domain.note_structure",
-    "mediparse.domain.mentions",
-    "mediparse.domain.note_plan",
-    "mediparse.domain.synthetic_plan",
-    "mediparse.domain.synthetic_note",
+    "mediparse.synthetic.domain.note_structure",
+    "mediparse.synthetic.domain.mentions",
+    "mediparse.synthetic.domain.note_plan",
+    "mediparse.synthetic.domain.synthetic_plan",
+    "mediparse.synthetic.domain.synthetic_note",
 ]
 forbidden_modules = [
-    "mediparse.domain.synthetic_patients",
+    "mediparse.synthetic.domain.synthetic_patients",
 ]
-broken_contract_guidance = "SyntheticNote je v domain.synthetic_note a PatientModel v domain.synthetic_plan; synthetic_patients je jen algoritmus losování."
+broken_contract_guidance = "SyntheticNote je v synthetic.domain.synthetic_note a PatientModel v synthetic.domain.synthetic_plan; synthetic_patients je jen algoritmus losování."
 
 [tool.ruff]
 fix = true
@@ -368,7 +351,7 @@ ignore = [
     "error-instead-of-exception", # odmítnutí neplatného vstupu je očekávaný stav: hláška bez tracebacku
 ]
 
-"src/mediparse/entrypoints/synthetic_plans.py" = [
+"src/mediparse/synthetic/entrypoints/synthetic_plans.py" = [
     "suspicious-non-cryptographic-random-usage", # seedovaná simulace plánů, ne kryptografie
 ]
 

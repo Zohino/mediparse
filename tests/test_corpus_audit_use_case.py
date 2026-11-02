@@ -8,16 +8,16 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.application.corpus_audit import (
+from mediparse.domain.data_access import BLOCKING_VARIABLES
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.language import Language
+from mediparse.synthetic.application.corpus_audit import (
     AuditClean,
     AuditOverlap,
     AuditRefused,
     CorpusAudit,
 )
-from mediparse.domain.corpus_audit import AuditPin, ReferenceNote
-from mediparse.domain.data_access import BLOCKING_VARIABLES
-from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.language import Language
+from mediparse.synthetic.domain.corpus_audit import AuditPin, ReferenceNote
 from tests.support import (
     COMMIT,
     CORPUS_SHA,
@@ -30,8 +30,8 @@ from tests.support import (
 if TYPE_CHECKING:
     from collections.abc import Collection, Iterator, Sequence
 
-    from mediparse.domain.corpus_audit import AuditRecord, Position
     from mediparse.domain.identity import SubjectId
+    from mediparse.synthetic.domain.corpus_audit import AuditRecord, Position
 
 CREATED_AT = datetime(2026, 9, 29, tzinfo=UTC)
 DISCHARGE_SHA = PINNED["discharge.csv.gz"]

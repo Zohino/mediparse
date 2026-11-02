@@ -1,0 +1,141 @@
+"""Vstupní bod lokálního auditu syntetického korpusu proti volnému textu MIMIC-IV-Note.
+
+Konzolový skript ``mediparse-corpus-audit`` spouští jen autor v kontrolovaném
+prostředí, mimo veřejné CI i mimo relaci hostovaného modelu. Na výstup jde jen
+počet shod a note_id dotčených syntetických zpráv. Pozice shod jdou do reportu
+mimo repozitář a shodný text se nevypisuje nikdy.
+"""
+
+from __future__ import annotations
+
+import argparse
+import logging
+import os
+import sys
+from datetime import UTC, datetime
+from pathlib import Path
+from typing import TYPE_CHECKING, assert_never
+
+from mediparse.domain.digest import commit_sha
+from mediparse.entrypoints.cli import (
+    argument,
+    configure_logging,
+    refusing_invalid_input,
+)
+from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.synthetic.application.corpus_audit import (
+    AuditClean,
+    AuditOverlap,
+    AuditRefused,
+    CorpusAudit,
+)
+from mediparse.synthetic.domain.corpus_audit import NGRAM_SIZE
+from mediparse.synthetic.entrypoints.corpus_cli import (
+    add_corpus_option,
+    add_sampler_config_option,
+    add_tables_option,
+)
+from mediparse.synthetic.infrastructure.audit_pin import load_audit_pin
+from mediparse.synthetic.infrastructure.audit_workspace import LocalWorkspace
+from mediparse.synthetic.infrastructure.mimic_reference import MimicReference
+from mediparse.synthetic.infrastructure.overlap_report import OverlapReportFile
+from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping, Sequence
+
+    from mediparse.synthetic.application.corpus_audit import AuditOutcome
+
+logger = logging.getLogger(__name__)
+
+
+def main() -> ExitCode:
+    """Konzolový skript ``mediparse-corpus-audit``.
+
+    Returns:
+        Návratový kód auditu.
+    """
+    configure_logging()
+    return run(sys.argv[1:], os.environ)
+
+
+@refusing_invalid_input
+def run(argv: Sequence[str], environ: Mapping[str, str]) -> ExitCode:
+    """Složí audit z adaptérů podle argumentů a přeloží jeho výsledek na návratový kód.
+
+    Returns:
+        OK bez shod, BLOCKED při shodě, REFUSED při odmítnutí auditu nebo chybějícím
+        či neplatném configu tabulek nebo vzorkovače.
+    """
+    args = _parser().parse_args(argv)
+    references = tuple(args.reference)
+    audit = CorpusAudit(
+        workspace=LocalWorkspace(args.corpus, references, args.report),
+        corpus=CorpusDirectory(args.corpus),
+        references=tuple(MimicReference(path) for path in references),
+        report=OverlapReportFile(args.report),
+    )
+    outcome = audit.run(
+        environ,
+        args.commit,
+        datetime.now(tz=UTC),
+        load_audit_pin(args.tables, args.config),
+    )
+    return _present(outcome, args.report)
+
+
+def _present(outcome: AuditOutcome, report: Path) -> ExitCode:
+    match outcome:
+        case AuditClean(notes=notes, ngrams=ngrams, reference_notes=rows):
+            _say(
+                f"Audit čistý: {notes} zpráv, {ngrams} n-gramů, {rows} referenčních zpráv."
+            )
+            return ExitCode.OK
+        case AuditOverlap(
+            shared_ngrams=shared, colliding_subjects=colliding, notes=notes
+        ):
+            _say(
+                f"Sdílené {NGRAM_SIZE}-gramy: {shared}, kolize subject_id: {colliding}."
+            )
+            _say(f"Zprávy k přegenerování: {', '.join(notes) or 'žádné'}")
+            _say(f"Pozice shod: {report}")
+            return ExitCode.BLOCKED
+        case AuditRefused(reason=reason):
+            logger.error("%s", reason)
+            return ExitCode.REFUSED
+        case _:
+            assert_never(outcome)
+
+
+def _parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="mediparse-corpus-audit",
+        description="Audit syntetického korpusu proti volnému textu MIMIC-IV-Note.",
+    )
+    add_corpus_option(parser)
+    parser.add_argument(
+        "--reference",
+        type=Path,
+        action="append",
+        required=True,
+        help="discharge.csv.gz nebo radiology.csv.gz z MIMIC-IV-Note; opakovatelný",
+    )
+    add_tables_option(parser)
+    add_sampler_config_option(parser)
+    parser.add_argument(
+        "--report",
+        type=Path,
+        required=True,
+        help="soubor s pozicemi shod mimo repozitář",
+    )
+    parser.add_argument(
+        "--commit",
+        type=argument(commit_sha),
+        required=True,
+        help="commit nástroje, `git rev-parse HEAD`",
+    )
+    return parser
+
+
+def _say(message: str) -> None:
+    sys.stdout.write(f"{message}\n")

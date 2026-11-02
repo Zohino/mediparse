@@ -8,17 +8,17 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.application.corpus_provenance import (
+from mediparse.domain.language import Language
+from mediparse.synthetic.application.corpus_provenance import (
     ProvenanceRefused,
     ProvenanceWritten,
 )
-from mediparse.application.translation_provenance import TranslationProvenance
-from mediparse.domain.corpus_provenance import (
+from mediparse.synthetic.application.translation_provenance import TranslationProvenance
+from mediparse.synthetic.domain.corpus_provenance import (
     ProvenanceRecord,
     Translation,
 )
-from mediparse.domain.language import Language
-from mediparse.domain.translation_consistency import TranslatedNote
+from mediparse.synthetic.domain.translation_consistency import TranslatedNote
 from tests.support import (
     CORPUS_SHA,
     PIN,
@@ -31,7 +31,7 @@ from tests.workdir_support import sha256_text
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from mediparse.domain.corpus_audit import AuditRecord
+    from mediparse.synthetic.domain.corpus_audit import AuditRecord
 
 NEW_AUDIT_FILE = "8" * 64
 OLD_AUDIT_FILE = "9" * 64

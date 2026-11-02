@@ -7,10 +7,10 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.entrypoints.corpus_audit import run
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.mimic_reference import MimicReference
-from mediparse.infrastructure.synthetic_corpus import (
+from mediparse.synthetic.entrypoints.corpus_audit import run
+from mediparse.synthetic.infrastructure.mimic_reference import MimicReference
+from mediparse.synthetic.infrastructure.synthetic_corpus import (
     RECORD_NAME,
     CorpusDirectory,
 )

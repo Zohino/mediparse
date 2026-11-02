@@ -8,7 +8,10 @@ from typing import Any
 import pytest
 from pydantic import ValidationError
 
-from mediparse.domain.synthetic_parameters import SyntheticParameters, required_notes
+from mediparse.synthetic.domain.synthetic_parameters import (
+    SyntheticParameters,
+    required_notes,
+)
 from tests.support import export_payload
 
 KEYS = ("a", "b", "c")
