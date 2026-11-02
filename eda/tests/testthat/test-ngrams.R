@@ -1,14 +1,13 @@
-# Zprávy rozdělí skutečný parser, takže offsety v tabulce odpovídají textu; `discharge` dodá mimic_con.
+# Offsety jsou pevná fixtura zapisovače nad zkonstruovanými zprávami těchto testů.
 ngram_con <- function(texts, env = parent.frame()) {
   notes <- if (length(texts) == 0L) NULL else text_notes(texts)
   con <- mimic_con(discharge = notes, env = env)
-  chunk <- if (is.null(notes)) {
-    list(note_id = character(), text = character())
-  } else {
-    list(note_id = notes$note_id, text = notes$text)
-  }
-  frame <- section_rows(sections_module(), section_headers_path(), chunk)
-  write_temp(con, SECTIONS_TABLE, frame)
+  use_feature_fixtures(con, env)
+  source <- feature_source(con, "note_sections.parquet", SECTION_COLUMNS)
+  DBI::dbExecute(con, sprintf(
+    "CREATE TEMP TABLE %s AS SELECT f.* FROM %s f JOIN discharge d USING (note_id)",
+    SECTIONS_TABLE, source
+  ))
   con
 }
 

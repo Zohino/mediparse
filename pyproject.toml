@@ -18,6 +18,7 @@ dependencies = [
 ]
 
 [project.scripts]
+mediparse-eda-note-features = "mediparse.entrypoints.eda_note_features:main"
 mediparse-corpus-audit = "mediparse.synthetic.entrypoints.corpus_audit:main"
 mediparse-corpus-check = "mediparse.synthetic.entrypoints.corpus_consistency:main"
 mediparse-corpus-gate = "mediparse.synthetic.entrypoints.corpus_gate:main"

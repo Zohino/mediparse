@@ -1,11 +1,12 @@
-"""Kanárek renderu nad syntetikou: funkce ``eda_canary`` ze scripts/eda-canary.sh.
+"""Shellové pomocníky EDA: kanárek, staging a spuštění přípravy cache.
 
-Funkce běží nad dočasným pracovním adresářem ve tvaru renderu (``eda/``, ``results/``
+Kanárek běží nad dočasným pracovním adresářem ve tvaru renderu (``eda/``, ``results/``
 a ``pdftext/`` s textem PDF) a hledá buňku s prefixem i token textu ze samých písmen.
 """
 
 from __future__ import annotations
 
+import os
 import subprocess
 from pathlib import Path
 from typing import Final
@@ -13,6 +14,10 @@ from typing import Final
 import pytest
 
 SCRIPT: Final = Path(__file__).parents[1] / "scripts" / "eda-canary.sh"
+EDA_PRESENT: Final = pytest.mark.skipif(
+    not (SCRIPT.parent.parent / "eda").is_dir(),
+    reason="Skripty renderu EDA nejsou v obrazu kontejneru; hlídá job Test v CI.",
+)
 PREFIX: Final = "eda-sentinel"
 SOFT_HYPHEN: Final = "\N{SOFT HYPHEN}"
 CLEAN, LEAKED, FAILED = 0, 1, 2
@@ -120,3 +125,90 @@ def test_missing_directory_is_an_error_not_a_clean_result(tmp_path: Path) -> Non
 
     assert result.returncode == FAILED
     assert "selhal" in result.stderr
+
+
+@EDA_PRESENT
+@pytest.mark.parametrize("number", ["1", "4", "9"])
+def test_render_script_prepares_features_only_for_notebook_nine(
+    tmp_path: Path, number: str
+) -> None:
+    """Izolované stuby spouštějí přípravu cache jen pro spotřebitele sešitu 9."""
+    scripts = tmp_path / "scripts"
+    scripts.mkdir()
+    render = scripts / "eda.sh"
+    render.write_bytes((SCRIPT.parent / "eda.sh").read_bytes())
+    (scripts / "eda-render.sh").write_text(
+        "eda_stage() { :; }\neda_revision() { :; }\neda_render() { :; }\n",
+        encoding="utf-8",
+    )
+    commands = tmp_path / "bin"
+    commands.mkdir()
+    stubs = {
+        "git": "#!/bin/sh\nexit 0\n",
+        "mediparse-eda-note-features": '#!/bin/sh\nprintf "%s\\n" "$*" >> "$EDA_TEST_CALLS"\n',
+    }
+    for name, text in stubs.items():
+        command = commands / name
+        command.write_text(text, encoding="utf-8")
+        command.chmod(0o755)
+    calls = tmp_path / "feature-calls.txt"
+    result = subprocess.run(
+        ["bash", str(render), number],
+        env={
+            **os.environ,
+            "PATH": f"{commands}{os.pathsep}{os.environ['PATH']}",
+            "PIXI_PROJECT_ROOT": str(tmp_path),
+            "MEDIPARSE_PARQUET": str(tmp_path / "tables"),
+            "MEDIPARSE_EDA_CACHE": str(tmp_path / "cache"),
+            "CLAUDECODE": "",
+            "EDA_TEST_CALLS": str(calls),
+        },
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=60,
+    )
+    assert result.returncode == CLEAN, result.stderr
+    assert calls.exists() is (number == "9")
+
+
+@EDA_PRESENT
+def test_staging_includes_shared_contract_and_excludes_render_cache(
+    tmp_path: Path,
+) -> None:
+    """Pracovní kopie má sdílený kontrakt ve správné relativní cestě bez freeze."""
+    root, work = tmp_path / "root", tmp_path / "work"
+    work.mkdir()
+    for name in ("eda/_freeze", "eda/.quarto", "analysis/R"):
+        (root / name).mkdir(parents=True)
+    for name in (
+        "eda/_freeze/old",
+        "eda/.quarto/old",
+        "eda/9.qmd",
+        "analysis/R/contract.R",
+    ):
+        (root / name).write_text("zkonstruovaná fixtura", encoding="utf-8")
+    result = subprocess.run(
+        [
+            "bash",
+            "-c",
+            'source "$1"; eda_stage "$2" "$3"',
+            "eda-stage-test",
+            str(SCRIPT.parent / "eda-render.sh"),
+            str(root),
+            str(work),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=60,
+    )
+    assert result.returncode == CLEAN, result.stderr
+    assert (work / "analysis/R/contract.R").read_bytes() == (
+        root / "analysis/R/contract.R"
+    ).read_bytes()
+    assert (work / "eda/9.qmd").exists()
+    assert not (work / "eda/_freeze").exists()
+    assert not (work / "eda/.quarto").exists()

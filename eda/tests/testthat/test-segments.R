@@ -1,70 +1,4 @@
-OTHER <- sections_module()$OTHER
-LEXICON_PATH <- function() section_headers_path()
-TEXT_WITH_SECTIONS <- "Name: ___\n\nAllergies:\nnone\n\nChief Complaint:\npain\n"
-
-test_that("section_rows přijme dvě shodné zprávy pod různými note_id", {
-  module <- sections_module()
-  chunk <- list(
-    note_id = c(k = "n1", k = "n2"),
-    text = c(k = TEXT_WITH_SECTIONS, k = TEXT_WITH_SECTIONS)
-  )
-  out <- section_rows(module, LEXICON_PATH(), chunk)
-
-  expect_equal(unique(out$note_id), c("n1", "n2"))
-  expect_equal(nrow(out), 6L)
-  expect_equal(out$section[1:3], c(module$OTHER, "allergies", "chief_complaint"))
-})
-
-test_that("section_rows ukončí alergie polem Attending jako v šabloně MIMIC", {
-  chunk <- list(note_id = "mimic", text = "Allergies:\nnone\nAttending: ___.\nChief Complaint:\npain\n")
-  out <- section_rows(sections_module(), LEXICON_PATH(), chunk)
-
-  expect_equal(out$section, c("allergies", OTHER, "chief_complaint"))
-  expect_equal(out$body_chars[[1]], nchar("none"))
-})
-
-test_that("section_rows zvládne dávku o jedné zprávě", {
-  chunk <- list(note_id = "jediny", text = "Allergies:\nnone\n")
-  out <- section_rows(sections_module(), LEXICON_PATH(), chunk)
-
-  expect_equal(out$note_id, "jediny")
-  expect_equal(out$section, "allergies")
-  expect_equal(out$position, 0L)
-})
-
-test_that("section_rows vrátí pro prázdnou dávku typovaný data.frame se všemi sloupci", {
-  chunk <- list(note_id = character(), text = character())
-  out <- section_rows(sections_module(), LEXICON_PATH(), chunk)
-
-  expect_equal(names(out), names(SECTION_COLUMNS))
-  expect_equal(nrow(out), 0L)
-  expect_type(out$note_id, "character")
-  expect_type(out$position, "integer")
-  expect_type(out$span_chars, "integer")
-  expect_type(out$body_chars, "integer")
-  expect_type(out$body_masked, "logical")
-  expect_type(out$body_start, "integer")
-  expect_type(out$body_end, "integer")
-})
-
-test_that("section_rows vrátí offsety těla jako integer, které z textu vyříznou tělo", {
-  chunk <- list(note_id = "o", text = TEXT_WITH_SECTIONS)
-  out <- section_rows(sections_module(), LEXICON_PATH(), chunk)
-
-  expect_type(out$body_start, "integer")
-  expect_equal(
-    substring(TEXT_WITH_SECTIONS, out$body_start + 1L, out$body_end),
-    c("Name: ___\n\n", "\nnone\n\n", "\npain\n")
-  )
-})
-
-test_that("section_rows označí tělo, které je jen maska ___", {
-  chunk <- list(note_id = "m", text = "Allergies:\n___\n\nChief Complaint:\npain since ___\n")
-  out <- section_rows(sections_module(), LEXICON_PATH(), chunk)
-
-  expect_equal(out$section, c("allergies", "chief_complaint"))
-  expect_equal(out$body_masked, c(TRUE, FALSE))
-})
+OTHER <- OTHER_SECTION
 
 test_that("segment_corpus naplní tabulku jen zprávami vstupního korpusu", {
   texts <- c("Allergies:\nnone\n", "Chief Complaint:\npain\n")
@@ -74,7 +8,7 @@ test_that("segment_corpus naplní tabulku jen zprávami vstupního korpusu", {
   short <- text_notes("Allergies:\nnone\n", prefix = "krátká")
   short$hadm_id <- "h1"
   con <- mimic_con(discharge = rbind(notes, short), diagnoses_icd = icd)
-  name <- segment_corpus(con, sections_module(), LEXICON_PATH())
+  name <- fixture_segments(con)
   out <- DBI::dbGetQuery(con, sprintf("SELECT * FROM %s ORDER BY note_id, position", name))
 
   expect_equal(name, SECTIONS_TABLE)
@@ -85,7 +19,7 @@ test_that("segment_corpus naplní tabulku jen zprávami vstupního korpusu", {
 
 test_that("segment_corpus nad prázdným korpusem vytvoří prázdnou typovanou tabulku", {
   con <- mimic_con()
-  name <- segment_corpus(con, sections_module(), LEXICON_PATH())
+  name <- fixture_segments(con)
   out <- DBI::dbGetQuery(con, sprintf("SELECT * FROM %s", name))
 
   expect_equal(names(out), names(SECTION_COLUMNS))
@@ -120,7 +54,7 @@ sections_frame <- function(notes, span = 10L, body = 5L) {
 sections_con <- function(notes, env = parent.frame(), ...) {
   con <- mimic_con(env = env)
   frame <- if (length(notes) == 0L) {
-    section_rows(sections_module(), LEXICON_PATH(), list(note_id = character(), text = character()))
+    read_contract_table(file.path(CONTRACT_FIXTURES, "note_sections.parquet"), SECTION_COLUMNS)[FALSE, ]
   } else {
     sections_frame(notes, ...)
   }
@@ -651,7 +585,7 @@ RESIDUE_TEXTS <- c(
 
 residue_con <- function(texts, env = parent.frame()) {
   con <- corpus_con(texts, env = env)
-  segment_corpus(con, sections_module(), LEXICON_PATH())
+  fixture_segments(con)
   con
 }
 
@@ -687,7 +621,7 @@ test_that("strip_residue zastaví render, když lexikon nemá diagnostickou sekc
 
 test_that("strip_residue nad prázdnou tabulkou a bez diagnostické sekce: nuly a nelze posoudit", {
   con <- mimic_con()
-  segment_corpus(con, sections_module(), LEXICON_PATH())
+  fixture_segments(con)
   empty <- strip_residue(con, REAL_LEXICON())
   none <- strip_residue(residue_con(RESIDUE_TEXTS[[3]]), REAL_LEXICON())
 
@@ -729,7 +663,7 @@ test_that("strip_residue_text se zprávou s diagnostickou sekcí a bez zbytku uv
 test_that("header_text_sql vrátí přesně hlavičku části včetně odsazení a dvojtečky", {
   text <- "  Allergies:\nnone\n\n\tChief Complaint: pain\n"
   con <- corpus_con(text)
-  segment_corpus(con, sections_module(), LEXICON_PATH())
+  fixture_segments(con)
 
   out <- DBI::dbGetQuery(con, sprintf("
     SELECT s.section, %s AS header, %s AS part
@@ -744,7 +678,7 @@ test_that("header_text_sql vrátí přesně hlavičku části včetně odsazení
 test_that("header_text_sql je prefix part_text_sql a zbytek je tělo části", {
   text <- "Allergies:\nžluť\n\nChief Complaint:\npain\n"
   con <- corpus_con(text)
-  segment_corpus(con, sections_module(), LEXICON_PATH())
+  fixture_segments(con)
 
   out <- DBI::dbGetQuery(con, sprintf("
     SELECT %s AS header, %s AS part, substring(d.text, s.body_start + 1, s.body_end - s.body_start) AS body

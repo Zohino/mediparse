@@ -16,6 +16,8 @@ mediparse-eda-synthetic-tables --manifest "$root/results/mimic/manifest.json" --
 
 eda_revision "$root"
 export MEDIPARSE_PARQUET="$work/tables"
+export MEDIPARSE_EDA_CACHE="$work/eda-cache"
+mediparse-eda-note-features --parquet "$MEDIPARSE_PARQUET" --lexicon "$root/config/section_headers.json" --candidates "$root/config/diagnosis_candidates.json" --out "$MEDIPARSE_EDA_CACHE"
 
 eda_render "$work" "$number"
 

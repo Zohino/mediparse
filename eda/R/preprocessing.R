@@ -1,8 +1,11 @@
 PREPROCESSING_TABLE <- "note_preprocessing_input"
-VOCABULARY_TABLE <- "preprocessing_vocabulary_input"
-VOCABULARY_COLUMNS <- c(variant = "VARCHAR", token = "VARCHAR")
-# Varianty vectorizeru (klíč je hodnota `variant` z mostu) a sloupec s tokeny na zprávu; pořadí
-# určuje pořadí řádků tabulky. Shodu klíčů s konstantami mostu hlídá test.
+ACRONYMS_TABLE <- "note_acronyms_input"
+PREPROCESSING_COLUMNS <- c(
+  note_id = "VARCHAR", tokens_raw = "INTEGER", tokens_preprocessed = "INTEGER",
+  vocabulary_raw = "VARCHAR[]", vocabulary_preprocessed = "VARCHAR[]"
+)
+ACRONYM_COLUMNS <- c(note_id = "VARCHAR", acronym = "VARCHAR", occurrences = "INTEGER")
+# Pořadí variant určuje pořadí řádků tabulky.
 PREPROCESSING_VARIANTS <- c(raw = "tokens_raw", preprocessed = "tokens_preprocessed")
 PREPROCESSING_LABELS <- c(raw = "Bez předzpracování", preprocessed = "S předzpracováním")
 TOKEN_FORMS <- NGRAM_KINDS[["1"]]$forms
@@ -20,56 +23,15 @@ PREPROCESSING_LAYOUTS <- list(
   )
 )
 
-preprocessing_module <- function() reticulate::import("mediparse.entrypoints.eda_preprocessing")
-
-# Texty a identifikátory musí do Pythonu jako nepojmenovaný seznam ze stejného důvodu jako u
-# `section_rows`; typy se skládají ručně, protože prázdný sloupec by přišel jako `list()`.
-preprocessing_rows <- function(module, path, acronyms, chunk) {
-  rows <- module$note_preprocessing(
-    python_path(path), as.list(unname(chunk$note_id)), as.list(unname(chunk$text))
-  )
-  counts <- lapply(setNames(acronyms, acronyms), function(acronym) as.integer(unlist(rows[[acronym]])))
-  data.frame(
-    note_id = as.character(unlist(rows$note_id)),
-    tokens_raw = as.integer(unlist(rows$tokens_raw)),
-    tokens_preprocessed = as.integer(unlist(rows$tokens_preprocessed)),
-    counts,
-    stringsAsFactors = FALSE,
-    check.names = FALSE
-  )
+corpus_acronyms <- function(con) {
+  source <- feature_source(con, "note_acronyms.parquet", ACRONYM_COLUMNS)
+  DBI::dbGetQuery(con, paste("SELECT DISTINCT acronym FROM", source, "ORDER BY acronym"))$acronym
 }
 
-vocabulary_rows <- function(module, path, chunk) {
-  rows <- module$note_vocabulary(python_path(path), as.list(unname(chunk$text)))
-  data.frame(
-    variant = as.character(unlist(rows$variant)),
-    token = as.character(unlist(rows$token)),
-    stringsAsFactors = FALSE
-  )
-}
-
-corpus_acronyms <- function(module, path) {
-  as.character(unlist(module$diagnosis_acronyms(python_path(path))))
-}
-
-note_preprocessing <- function(con, module, path, batch = 2000L) {
-  acronyms <- corpus_acronyms(module, path)
-  columns <- c(
-    note_id = "VARCHAR", tokens_raw = "INTEGER", tokens_preprocessed = "INTEGER",
-    setNames(rep("INTEGER", length(acronyms)), acronyms)
-  )
-  batched_table(
-    con, PREPROCESSING_TABLE, columns, input_texts_sql(con),
-    function(chunk) preprocessing_rows(module, path, acronyms, chunk), batch = batch
-  )
-}
-
-# Slovník je sjednocení distinct tokenů dávek, počítá ho DuckDB; Python nedrží stav mezi dávkami.
-note_vocabulary <- function(con, module, path, batch = 2000L) {
-  batched_table(
-    con, VOCABULARY_TABLE, VOCABULARY_COLUMNS, input_texts_sql(con),
-    function(chunk) vocabulary_rows(module, path, chunk), batch = batch
-  )
+note_preprocessing <- function(con) {
+  feature_table(con, PREPROCESSING_TABLE, "note_preprocessing.parquet", PREPROCESSING_COLUMNS)
+  feature_table(con, ACRONYMS_TABLE, "note_acronyms.parquet", ACRONYM_COLUMNS)
+  PREPROCESSING_TABLE
 }
 
 preprocessing_summary <- function(con) {
@@ -77,9 +39,13 @@ preprocessing_summary <- function(con) {
   tokens <- DBI::dbGetQuery(con, paste(sprintf(selects, PREPROCESSING_TABLE), collapse = " UNION ALL "))
   tokens <- as_numeric_columns(tokens, c("n", "prumer", "minimum", "maximum", PERCENTILE_COLUMNS))
   tokens <- tokens[match(names(PREPROCESSING_VARIANTS), tokens$metrika), , drop = FALSE]
-  vocabulary <- DBI::dbGetQuery(con, sprintf(
-    "SELECT variant, count(DISTINCT token) AS slovnik FROM %s GROUP BY variant", VOCABULARY_TABLE
-  ))
+  vocabulary <- DBI::dbGetQuery(con, sprintf("
+    SELECT 'raw' AS variant, count(DISTINCT token) AS slovnik
+    FROM (SELECT unnest(vocabulary_raw) AS token FROM %1$s)
+    UNION ALL
+    SELECT 'preprocessed' AS variant, count(DISTINCT token) AS slovnik
+    FROM (SELECT unnest(vocabulary_preprocessed) AS token FROM %1$s)
+  ", PREPROCESSING_TABLE))
   slovnik <- as.numeric(vocabulary$slovnik[match(names(PREPROCESSING_VARIANTS), vocabulary$variant)])
   slovnik[is.na(slovnik)] <- 0
   out <- cbind(varianta = names(PREPROCESSING_VARIANTS), slovnik = slovnik, tokens[setdiff(names(tokens), "metrika")])
@@ -131,13 +97,13 @@ acronym_cells <- function(con, acronym, key) {
       count(*) FILTER (WHERE NOT has_acronym AND has_code) AS jen_kod,
       count(*) FILTER (WHERE NOT has_acronym AND NOT has_code) AS zadne
     FROM (
-      SELECT p.%1$s > 0 AS has_acronym,
+      SELECT p.occurrences > 0 AS has_acronym,
         EXISTS (
           SELECT 1 FROM %2$s c WHERE c.kandidat = %3$s AND c.note_id = p.note_id
         ) AS has_code
-      FROM %4$s p
+      FROM %4$s p WHERE p.acronym = %1$s
     )
-  ", DBI::dbQuoteIdentifier(con, acronym), CANDIDATES_TABLE, DBI::dbQuoteString(con, key), PREPROCESSING_TABLE))
+  ", DBI::dbQuoteString(con, acronym), CANDIDATES_TABLE, DBI::dbQuoteString(con, key), ACRONYMS_TABLE))
   vapply(cells, as.numeric, numeric(1))
 }
 
@@ -155,7 +121,7 @@ acronym_summary <- function(con, acronyms, candidates) {
     key <- acronym_owner(acronym, candidates)
     cells <- acronym_cells(con, acronym, key)
     occurrences <- as.numeric(DBI::dbGetQuery(con, sprintf(
-      "SELECT coalesce(sum(%s), 0) AS n FROM %s", DBI::dbQuoteIdentifier(con, acronym), PREPROCESSING_TABLE
+      "SELECT coalesce(sum(occurrences), 0) AS n FROM %s WHERE acronym = %s", ACRONYMS_TABLE, DBI::dbQuoteString(con, acronym)
     ))$n)
     with_acronym <- cells[["oba"]] + cells[["jen_zkratka"]]
     data.frame(

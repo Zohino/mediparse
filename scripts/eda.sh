@@ -18,6 +18,11 @@ documents=()
 source "$(dirname "${BASH_SOURCE[0]}")/eda-render.sh"
 
 export MEDIPARSE_PARQUET=${MEDIPARSE_PARQUET:-$root/resources/mimic/parquet}
+export MEDIPARSE_EDA_CACHE=${MEDIPARSE_EDA_CACHE:-$root/resources/mimic/eda-cache}
+# Výpočet nad celou discharge stojí minuty a potřebuje ho jen sešit 9.
+if [[ "$number" == 9 ]]; then
+    mediparse-eda-note-features --parquet "$MEDIPARSE_PARQUET" --lexicon "$root/config/section_headers.json" --candidates "$root/config/diagnosis_candidates.json" --out "$MEDIPARSE_EDA_CACHE"
+fi
 work=$(mktemp -d -p "$(dirname "$MEDIPARSE_PARQUET")")
 trap 'rm -rf "$work"' EXIT
 

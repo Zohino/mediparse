@@ -1,3 +1,5 @@
+source("../../../analysis/R/contract.R")
+source("../../R/note_features.R")
 source("../../R/dua.R")
 source("../../R/czech.R")
 source("../../R/db.R")
