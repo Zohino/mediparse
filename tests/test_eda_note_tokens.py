@@ -292,9 +292,17 @@ def test_real_script_splitter_handles_fitting_divided_and_unsplittable(
     assert splitter.parts("a b c a b c") is None
 
 
-@pytest.mark.parametrize("missing", ["english", "czech", "empty"])
+@pytest.mark.parametrize(
+    ("missing", "message"),
+    [
+        ("english", r"^Zpráva nemá protějšek: a\.txt\.$"),
+        ("czech", r"^Zpráva nemá protějšek: a\.txt\.$"),
+        ("empty", r"nejsou žádné zprávy"),
+        ("unmatched", r"^Zpráva nemá protějšek: b\.txt\.$"),
+    ],
+)
 def test_parallel_missing_pair_or_empty_is_refused(
-    inputs: Inputs, missing: str, monkeypatch: pytest.MonkeyPatch
+    inputs: Inputs, missing: str, message: str, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Chybějící protějšek odmítne run i CLI a uvede jméno souboru."""
     _, _, english, czech, _ = inputs
@@ -302,7 +310,9 @@ def test_parallel_missing_pair_or_empty_is_refused(
         (english / "a.txt").unlink()
     if missing in {"czech", "empty"}:
         (czech / "a.txt").unlink()
-    with pytest.raises(InvalidInputError, match=r"žádné.*txt|a\.txt"):
+    if missing == "unmatched":
+        (english / "b.txt").write_bytes(b"b")
+    with pytest.raises(InvalidInputError, match=message):
         eda_note_tokens.run(*inputs, {})
     argv = ["mediparse-eda-note-tokens"]
     for name, path in zip(
