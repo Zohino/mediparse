@@ -9,7 +9,7 @@ import pytest
 from mediparse.application.verbalization_prompt import VerbalizationPrompt
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.entrypoints.verbalization_prompt import run
+from mediparse.synthetic.entrypoints.verbalization_prompt import run
 from tests.support import (
     REPOSITORY_CONFIG,
     REPOSITORY_PLANS,

@@ -29,17 +29,17 @@ from mediparse.entrypoints.cli import (
     configure_logging,
     refusing_invalid_input,
 )
-from mediparse.entrypoints.corpus_cli import (
-    add_corpus_option,
-    add_sampler_config_option,
-    add_tables_option,
-)
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.audit_pin import load_audit_pin
 from mediparse.infrastructure.audit_workspace import LocalWorkspace
 from mediparse.infrastructure.mimic_reference import MimicReference
 from mediparse.infrastructure.overlap_report import OverlapReportFile
 from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
+from mediparse.synthetic.entrypoints.corpus_cli import (
+    add_corpus_option,
+    add_sampler_config_option,
+    add_tables_option,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence

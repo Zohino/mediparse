@@ -16,9 +16,6 @@ from typing import TYPE_CHECKING
 
 from mediparse.application.plan_sampling import PlanSampling
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
-from mediparse.entrypoints.corpus_cli import (
-    add_sampler_config_option,
-)
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.plans_file import (
     LABELS_PATH,
@@ -27,6 +24,9 @@ from mediparse.infrastructure.plans_file import (
 )
 from mediparse.infrastructure.sampler_config import (
     load_sampler_config,
+)
+from mediparse.synthetic.entrypoints.corpus_cli import (
+    add_sampler_config_option,
 )
 
 if TYPE_CHECKING:

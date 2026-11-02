@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mediparse.entrypoints.corpus_consistency import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.plans_file import PlansFile
+from mediparse.synthetic.entrypoints.corpus_consistency import run
 from tests.support import REPOSITORY_CONFIG, REPOSITORY_CORPUS, REPOSITORY_PLANS
 
 if TYPE_CHECKING:

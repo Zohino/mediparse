@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 
 from mediparse.domain.note_plan import NotePlan
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.entrypoints.synthetic_plans import run
+from mediparse.synthetic.entrypoints.synthetic_plans import run
 from tests.support import REPOSITORY_CONFIG
 
 if TYPE_CHECKING:

@@ -18,15 +18,15 @@ dependencies = [
 ]
 
 [project.scripts]
-mediparse-corpus-audit = "mediparse.entrypoints.corpus_audit:main"
-mediparse-corpus-check = "mediparse.entrypoints.corpus_consistency:main"
-mediparse-corpus-gate = "mediparse.entrypoints.corpus_gate:main"
-mediparse-corpus-provenance = "mediparse.entrypoints.corpus_provenance:main"
+mediparse-corpus-audit = "mediparse.synthetic.entrypoints.corpus_audit:main"
+mediparse-corpus-check = "mediparse.synthetic.entrypoints.corpus_consistency:main"
+mediparse-corpus-gate = "mediparse.synthetic.entrypoints.corpus_gate:main"
+mediparse-corpus-provenance = "mediparse.synthetic.entrypoints.corpus_provenance:main"
 mediparse-eda-synthetic-tables = "mediparse.synthetic.entrypoints.eda_synthetic_tables:main"
-mediparse-sample-plans = "mediparse.entrypoints.synthetic_plans:main"
-mediparse-synthetic-parameters = "mediparse.entrypoints.synthetic_parameters:main"
-mediparse-translation-provenance = "mediparse.entrypoints.translation_provenance:main"
-mediparse-verbalization-prompt = "mediparse.entrypoints.verbalization_prompt:main"
+mediparse-sample-plans = "mediparse.synthetic.entrypoints.synthetic_plans:main"
+mediparse-synthetic-parameters = "mediparse.synthetic.entrypoints.synthetic_parameters:main"
+mediparse-translation-provenance = "mediparse.synthetic.entrypoints.translation_provenance:main"
+mediparse-verbalization-prompt = "mediparse.synthetic.entrypoints.verbalization_prompt:main"
 
 [project.urls]
 Repository = "https://github.com/Zohino/mediparse"
@@ -160,18 +160,19 @@ ignore_imports = [
     "mediparse.domain.** -> string",
     "mediparse.domain.** -> unicodedata",
     "mediparse.entrypoints.** -> argparse",
-    "mediparse.entrypoints.** -> datetime",
     "mediparse.entrypoints.** -> functools",
     "mediparse.entrypoints.** -> logging",
     "mediparse.entrypoints.** -> os",
     "mediparse.entrypoints.** -> pathlib",
-    "mediparse.entrypoints.** -> random",
     "mediparse.entrypoints.** -> sys",
     "mediparse.synthetic.domain.** -> math",
     "mediparse.synthetic.domain.** -> string",
     "mediparse.synthetic.entrypoints.** -> argparse",
+    "mediparse.synthetic.entrypoints.** -> datetime",
     "mediparse.synthetic.entrypoints.** -> logging",
+    "mediparse.synthetic.entrypoints.** -> os",
     "mediparse.synthetic.entrypoints.** -> pathlib",
+    "mediparse.synthetic.entrypoints.** -> random",
     "mediparse.synthetic.entrypoints.** -> sys",
 ]
 broken_contract_guidance = "Knihovny, soubory, síť a procesy patří do infrastructure; doména a use casy k nim přistupují přes porty. Modul, který je opravdu čistý, přidej do ignore_imports vědomě a s důvodem v těle commitu."
@@ -368,7 +369,7 @@ ignore = [
     "error-instead-of-exception", # odmítnutí neplatného vstupu je očekávaný stav: hláška bez tracebacku
 ]
 
-"src/mediparse/entrypoints/synthetic_plans.py" = [
+"src/mediparse/synthetic/entrypoints/synthetic_plans.py" = [
     "suspicious-non-cryptographic-random-usage", # seedovaná simulace plánů, ne kryptografie
 ]
 

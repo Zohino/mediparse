@@ -14,17 +14,17 @@ from typing import TYPE_CHECKING
 
 from mediparse.application.corpus_consistency import CorpusConsistency
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
-from mediparse.entrypoints.corpus_cli import (
-    add_corpus_option,
-    add_plans_option,
-    add_sampler_config_option,
-)
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.sampler_config import (
     load_sampler_config,
 )
 from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
+from mediparse.synthetic.entrypoints.corpus_cli import (
+    add_corpus_option,
+    add_plans_option,
+    add_sampler_config_option,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

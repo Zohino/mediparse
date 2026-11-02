@@ -10,7 +10,7 @@ from mediparse.application.corpus_provenance import (
     ProvenanceWritten,
 )
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.entrypoints.provenance_exit import provenance_exit_code
+from mediparse.synthetic.entrypoints.provenance_exit import provenance_exit_code
 
 if TYPE_CHECKING:
     import pytest

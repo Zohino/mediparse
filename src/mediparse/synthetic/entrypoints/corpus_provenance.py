@@ -27,14 +27,6 @@ from mediparse.entrypoints.cli import (
     configure_logging,
     refusing_invalid_input,
 )
-from mediparse.entrypoints.corpus_cli import (
-    add_corpus_option,
-    add_plans_option,
-    add_sampler_config_option,
-    add_tables_option,
-    add_template_option,
-)
-from mediparse.entrypoints.provenance_exit import provenance_exit_code
 from mediparse.infrastructure.audit_pin import load_audit_pin
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.plans_file import PlansFile
@@ -48,6 +40,14 @@ from mediparse.infrastructure.synthetic_corpus import (
 from mediparse.infrastructure.verbalization_template import (
     load_verbalization_template,
 )
+from mediparse.synthetic.entrypoints.corpus_cli import (
+    add_corpus_option,
+    add_plans_option,
+    add_sampler_config_option,
+    add_tables_option,
+    add_template_option,
+)
+from mediparse.synthetic.entrypoints.provenance_exit import provenance_exit_code
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

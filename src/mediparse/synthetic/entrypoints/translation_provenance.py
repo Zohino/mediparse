@@ -15,12 +15,6 @@ from typing import TYPE_CHECKING
 
 from mediparse.application.translation_provenance import TranslationProvenance
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
-from mediparse.entrypoints.corpus_cli import (
-    add_corpus_option,
-    add_sampler_config_option,
-    add_tables_option,
-)
-from mediparse.entrypoints.provenance_exit import provenance_exit_code
 from mediparse.infrastructure.audit_pin import load_audit_pin
 from mediparse.infrastructure.synthetic_corpus import (
     PROVENANCE_NAME,
@@ -30,6 +24,12 @@ from mediparse.infrastructure.translation_workdir import (
     WORKDIR_PATH,
     TranslationWorkdir,
 )
+from mediparse.synthetic.entrypoints.corpus_cli import (
+    add_corpus_option,
+    add_sampler_config_option,
+    add_tables_option,
+)
+from mediparse.synthetic.entrypoints.provenance_exit import provenance_exit_code
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

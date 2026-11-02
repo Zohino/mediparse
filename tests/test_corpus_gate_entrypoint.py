@@ -8,13 +8,13 @@ import pytest
 
 from mediparse.domain.corpus_audit import InvalidAuditRecordError
 from mediparse.domain.corpus_provenance import InvalidProvenanceRecordError
-from mediparse.entrypoints.corpus_gate import run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.synthetic_corpus import (
     PROVENANCE_NAME,
     RECORD_NAME,
     CorpusDirectory,
 )
+from mediparse.synthetic.entrypoints.corpus_gate import run
 from tests.support import (
     NOTE,
     REPOSITORY_CORPUS,

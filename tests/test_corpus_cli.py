@@ -8,19 +8,19 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.entrypoints.corpus_cli import (
-    add_corpus_option,
-    add_plans_option,
-    add_sampler_config_option,
-    add_tables_option,
-    add_template_option,
-)
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.plans_file import PLANS_PATH
 from mediparse.infrastructure.sampler_config import SAMPLER_CONFIG_PATH
 from mediparse.infrastructure.synthetic_corpus import CORPUS_ROOT
 from mediparse.infrastructure.verbalization_template import (
     VERBALIZATION_TEMPLATE_PATH,
+)
+from mediparse.synthetic.entrypoints.corpus_cli import (
+    add_corpus_option,
+    add_plans_option,
+    add_sampler_config_option,
+    add_tables_option,
+    add_template_option,
 )
 
 if TYPE_CHECKING:

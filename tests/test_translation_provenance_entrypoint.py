@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mediparse.entrypoints import corpus_gate, translation_provenance
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
+from mediparse.synthetic.entrypoints import corpus_gate, translation_provenance
 from tests.support import REPOSITORY_CONFIG
 from tests.workdir_support import write_single_part_workdir
 

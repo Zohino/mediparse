@@ -12,11 +12,6 @@ from typing import TYPE_CHECKING
 
 from mediparse.application.verbalization_prompt import VerbalizationPrompt
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
-from mediparse.entrypoints.corpus_cli import (
-    add_plans_option,
-    add_sampler_config_option,
-    add_template_option,
-)
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.sampler_config import (
@@ -24,6 +19,11 @@ from mediparse.infrastructure.sampler_config import (
 )
 from mediparse.infrastructure.verbalization_template import (
     load_verbalization_template,
+)
+from mediparse.synthetic.entrypoints.corpus_cli import (
+    add_plans_option,
+    add_sampler_config_option,
+    add_template_option,
 )
 
 if TYPE_CHECKING:

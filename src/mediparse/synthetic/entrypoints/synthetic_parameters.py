@@ -15,9 +15,6 @@ from typing import TYPE_CHECKING
 
 from mediparse.application.synthetic_parameters import ParameterTransfer
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
-from mediparse.entrypoints.corpus_cli import (
-    add_sampler_config_option,
-)
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.sampler_config import (
     SamplerConfigFile,
@@ -25,6 +22,9 @@ from mediparse.infrastructure.sampler_config import (
 from mediparse.infrastructure.synthetic_parameters_file import (
     PARAMETERS_PATH,
     SyntheticParametersFile,
+)
+from mediparse.synthetic.entrypoints.corpus_cli import (
+    add_sampler_config_option,
 )
 
 if TYPE_CHECKING:
