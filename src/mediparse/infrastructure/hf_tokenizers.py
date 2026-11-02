@@ -87,8 +87,9 @@ def load_tokenizer(model: str, revision: str) -> PreTrainedTokenizerBase:
     Raises:
         InvalidInputError: Tokenizér nejde načíst.
     """
-    # Cache potřebuje jen metadata verzí; odložený import navíc zabrání tomu,
-    # aby skops při introspekci načítal nepoužívané obrazové backendy transformers.
+    # Cache potřebuje jen metadata verzí. skops.io se musí importovat dřív než
+    # transformers; jinak introspekce skops načte jeho obrazový backend a spadne
+    # na PILImageResampling.
     from transformers import AutoTokenizer, logging  # ruff: ignore[import-outside-top-level]
 
     # Diagnostika knihovny nesmí přidat řetězce do výstupů sešitu.
