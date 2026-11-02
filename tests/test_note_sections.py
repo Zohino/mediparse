@@ -1,4 +1,4 @@
-"""Vstupní bod EDA, který rozdělí zprávy parserem sekcí na sloupce pro sešit."""
+"""Doménové délky, příznaky a offsety částí zkonstruovaných zpráv."""
 
 from __future__ import annotations
 

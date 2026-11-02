@@ -1,65 +1,29 @@
-MODULE <- preprocessing_module()
 PATH <- candidates_path()
 # corpus_con předřadí každé zprávě řádek `xxx… h<n>`, což jsou dva tokeny v obou variantách.
 PADDING_TOKENS <- 2L
+ACRONYM_KEYS <- c("AF", "CKD", "COPD", "DM", "DM2", "ESRD")
 
-chunk_of <- function(texts) {
-  list(note_id = paste0("n", seq_along(texts)), text = texts)
-}
-
-test_that("preprocessing_rows spočítá tokeny a zkratky jedné zprávy a typy sedí", {
-  acronyms <- corpus_acronyms(MODULE, PATH)
-  out <- preprocessing_rows(MODULE, PATH, acronyms, chunk_of("Pt 5mg ___ AF"))
-
-  expect_equal(names(out), c("note_id", "tokens_raw", "tokens_preprocessed", acronyms))
-  expect_equal(out$tokens_raw, 4L)
-  expect_equal(out$tokens_preprocessed, 6L)
-  expect_equal(out$AF, 1L)
-  expect_equal(out$DM2, 0L)
-  expect_type(out$tokens_raw, "integer")
-  expect_type(out$COPD, "integer")
-})
-
-test_that("preprocessing_rows a vocabulary_rows zvládnou prázdnou dávku s typovanými sloupci", {
-  acronyms <- corpus_acronyms(MODULE, PATH)
-  empty <- list(note_id = character(), text = character())
-  rows <- preprocessing_rows(MODULE, PATH, acronyms, empty)
-  vocabulary <- vocabulary_rows(MODULE, PATH, empty)
-
-  expect_equal(nrow(rows), 0L)
-  expect_equal(names(rows), c("note_id", "tokens_raw", "tokens_preprocessed", acronyms))
-  expect_type(rows$tokens_raw, "integer")
-  expect_type(rows$AF, "integer")
-  expect_equal(nrow(vocabulary), 0L)
-  expect_equal(names(vocabulary), names(VOCABULARY_COLUMNS))
-  expect_type(vocabulary$token, "character")
-})
-
-test_that("klíče PREPROCESSING_VARIANTS odpovídají variantám mostu", {
-  expect_equal(names(PREPROCESSING_VARIANTS), c(MODULE$RAW, MODULE$PREPROCESSED))
-})
-
-test_that("note_preprocessing dá řádek na zprávu vstupního korpusu i přes víc dávek a podruhé nepřepočítá", {
+test_that("note_preprocessing připojí zprávy vstupního korpusu a podruhé nepřepočítá", {
   con <- corpus_con(c("Pt AF", "Pt DM2 and DM", "Pt"))
-  note_preprocessing(con, MODULE, PATH, batch = 2L)
+  fixture_preprocessing(con)
   table <- DBI::dbGetQuery(con, sprintf("SELECT * FROM %s ORDER BY note_id", PREPROCESSING_TABLE))
 
   expect_equal(nrow(table), 3L)
-  expect_equal(table$AF, c(1L, 0L, 0L))
-  expect_equal(table$DM2, c(0L, 1L, 0L))
-  expect_equal(table$DM, c(0L, 1L, 0L))
+  counts <- DBI::dbGetQuery(con, sprintf("SELECT * FROM %s ORDER BY note_id", ACRONYMS_TABLE))
+  expect_equal(counts$occurrences[counts$acronym == "AF"], c(1L, 0L, 0L))
+  expect_equal(counts$occurrences[counts$acronym == "DM2"], c(0L, 1L, 0L))
+  expect_equal(counts$occurrences[counts$acronym == "DM"], c(0L, 1L, 0L))
   expect_equal(table$tokens_raw, PADDING_TOKENS + c(2L, 4L, 1L))
   expect_equal(table$tokens_preprocessed, PADDING_TOKENS + c(3L, 4L, 1L))
 
   DBI::dbExecute(con, sprintf("DELETE FROM %s", PREPROCESSING_TABLE))
-  note_preprocessing(con, MODULE, PATH, batch = 2L)
+  fixture_preprocessing(con)
   expect_equal(DBI::dbGetQuery(con, sprintf("SELECT count(*) AS n FROM %s", PREPROCESSING_TABLE))$n, 0)
 })
 
-test_that("slovník je sjednocení přes dávky: sdílený token se započte jednou", {
+test_that("slovník je sjednocení přes zprávy: sdílený token se započte jednou", {
   con <- corpus_con(c("alpha AF", "alpha gamma"))
-  note_preprocessing(con, MODULE, PATH)
-  note_vocabulary(con, MODULE, PATH, batch = 1L)
+  fixture_preprocessing(con)
   summary <- preprocessing_summary(con)
 
   # xxx…, h1, h2, alpha, af, gamma a v druhé variantě atrial, fibrillation místo af.
@@ -69,8 +33,7 @@ test_that("slovník je sjednocení přes dávky: sdílený token se započte jed
 
 test_that("preprocessing_summary uvádí medián, p95 a průměr tokenů na zprávu", {
   con <- corpus_con(c("AF", "AF AF", "alpha"))
-  note_preprocessing(con, MODULE, PATH)
-  note_vocabulary(con, MODULE, PATH)
+  fixture_preprocessing(con)
   summary <- preprocessing_summary(con)
 
   expect_equal(summary$p50, PADDING_TOKENS + c(1, 2))
@@ -86,8 +49,7 @@ test_that("preprocessing_summary uvádí medián, p95 a průměr tokenů na zpr�
 
 test_that("prázdný korpus dá slovník 0, percentily NA a tabulku s pomlčkami", {
   con <- mimic_con()
-  note_preprocessing(con, MODULE, PATH)
-  note_vocabulary(con, MODULE, PATH)
+  fixture_preprocessing(con)
   summary <- preprocessing_summary(con)
   table <- preprocessing_table(summary)
 
@@ -117,8 +79,8 @@ af_groups <- function(oba = 10L, jen_zkratka = 10L, jen_kod = 10L, zadne = 10L, 
 
 af_summary <- function(groups) {
   con <- if (length(groups$texts) == 0L) mimic_con() else corpus_con(groups$texts, codes = groups$codes)
-  note_preprocessing(con, MODULE, PATH)
-  acronym_summary(con, corpus_acronyms(MODULE, PATH), read_candidates(PATH))
+  fixture_preprocessing(con)
+  acronym_summary(con, corpus_acronyms(con), read_candidates(PATH))
 }
 
 af_row <- function(summary) summary[summary$zkratka == "AF", ]
@@ -173,7 +135,7 @@ test_that("nulové výskyty a jmenovatel dají nedefinovaný podíl a vlastní v
 test_that("acronym_summary nad prázdným korpusem nespadne", {
   summary <- af_summary(list(texts = character(), codes = character()))
 
-  expect_equal(nrow(summary), length(corpus_acronyms(MODULE, PATH)))
+  expect_equal(nrow(summary), length(ACRONYM_KEYS))
   expect_true(all(is.na(summary$podil)))
   expect_equal(acronym_table(summary)$vyskyty, rep("0", nrow(summary)))
   expect_match(acronym_text(summary), "zkratka nemá výskyt", fixed = TRUE)
@@ -227,11 +189,10 @@ test_that("preprocessing_text skloňuje počty tokenů a uvádí změnu slovník
 test_that("tabulky projdou export_table s rozvržením a funkce zvládnou jedinečné řetězce", {
   texts <- paste("jedinecny-retezec-1 AF", c("jedinecny-retezec-2", "jedinecny-retezec-3"))
   con <- corpus_con(texts, codes = c("I48", "Z99"))
-  note_preprocessing(con, MODULE, PATH)
-  note_vocabulary(con, MODULE, PATH)
+  fixture_preprocessing(con)
   dir <- withr::local_tempdir()
   summary <- preprocessing_summary(con)
-  acronyms <- acronym_summary(con, corpus_acronyms(MODULE, PATH), read_candidates(PATH))
+  acronyms <- acronym_summary(con, corpus_acronyms(con), read_candidates(PATH))
 
   for (spec in list(
     list("tbl-predzpracovani", preprocessing_table(summary)),

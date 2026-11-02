@@ -5,7 +5,7 @@ SECTION_COLUMNS <- c(
   body_start = "INTEGER", body_end = "INTEGER"
 )
 
-# Most vrací konec těla a délku části (hlavička + tělo), ne její začátek, proto se začátek
+# Parser vrací konec těla a délku části (hlavička + tělo), ne její začátek, proto se začátek
 # odvozuje jako body_end - span_chars; dotazy, které část vyřezávají, berou výraz odsud.
 part_start_sql <- function(alias) sprintf("%1$s.body_end - %1$s.span_chars", alias)
 
@@ -21,35 +21,10 @@ header_text_sql <- function(text = "d.text", alias = "s") {
   )
 }
 
-sections_module <- function() reticulate::import("mediparse.entrypoints.eda_sections")
+OTHER_SECTION <- "other"
 
-# Texty a identifikátory musí do Pythonu jako nepojmenovaný seznam: pojmenovaný vektor
-# reticulate převede na slovník, duplicitní jméno (dvě shodné zprávy) se v něm sloučí
-# a zip() pak spadne na nestejných délkách; vektor délky 1 by se zase stal řetězcem.
-section_rows <- function(module, lexicon_path, chunk) {
-  path <- python_path(lexicon_path)
-  rows <- module$note_sections(
-    path, as.list(unname(chunk$note_id)), as.list(unname(chunk$text))
-  )
-  # Prázdný výsledek by reticulate vrátil jako data.frame bez sloupců, proto typy skládáme sami.
-  data.frame(
-    note_id = as.character(unlist(rows$note_id)),
-    position = as.integer(unlist(rows$position)),
-    section = as.character(unlist(rows$section)),
-    span_chars = as.integer(unlist(rows$span_chars)),
-    body_chars = as.integer(unlist(rows$body_chars)),
-    body_masked = as.logical(unlist(rows$body_masked)),
-    body_start = as.integer(unlist(rows$body_start)),
-    body_end = as.integer(unlist(rows$body_end)),
-    stringsAsFactors = FALSE
-  )
-}
-
-segment_corpus <- function(con, module, lexicon_path) {
-  batched_table(
-    con, SECTIONS_TABLE, SECTION_COLUMNS, input_texts_sql(con),
-    function(chunk) section_rows(module, lexicon_path, chunk)
-  )
+segment_corpus <- function(con) {
+  feature_table(con, SECTIONS_TABLE, "note_sections.parquet", SECTION_COLUMNS)
 }
 
 # Kostra jsou sekce, které má většina zpráv; popisná hranice jako CANDIDATE_COVERAGE, ale jiný

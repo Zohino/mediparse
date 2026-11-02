@@ -1,4 +1,4 @@
-"""Vstupní bod EDA, který měří předzpracování TF-IDF a zkratky diagnóz pro sešit 9."""
+"""Výpočet tokenů, slovníků a zkratek zpráv přes use case."""
 
 from __future__ import annotations
 

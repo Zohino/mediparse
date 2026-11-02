@@ -49,3 +49,15 @@ test_that("kontrakt vrátí jen deklarované sloupce v deklarovaném pořadí", 
   expected <- data.frame('a"b' = 0.5, n = 7, check.names = FALSE)
   expect_identical(actual, expected)
 })
+
+test_that("check_contract kontroluje zdroj v existujícím spojení bez materializace", {
+  con <- DBI::dbConnect(duckdb::duckdb())
+  withr::defer(DBI::dbDisconnect(con, shutdown = TRUE))
+  DBI::dbExecute(con, "CREATE TEMP TABLE valid AS SELECT 1::INTEGER AS n, ['a', 'b']::VARCHAR[] AS tokens")
+  expect_invisible(check_contract(con, "valid", c(n = "INTEGER", tokens = "VARCHAR[]")))
+  expect_error(check_contract(con, "valid", c(missing = "INTEGER")), "sloupec missing.*chybí")
+  expect_error(check_contract(con, "valid", c(n = "BIGINT")), "sloupec n.*BIGINT.*INTEGER")
+  DBI::dbExecute(con, "INSERT INTO valid VALUES (NULL, [])")
+  expect_error(check_contract(con, "valid", c(n = "INTEGER")), "sloupec n.*NULL")
+  expect_true(DBI::dbIsValid(con))
+})

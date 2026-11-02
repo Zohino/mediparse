@@ -50,7 +50,7 @@ test_that("bhc_clean_sql zachová NULL jako NULL", {
   expect_true(is.na(clean_in_sql(NA_character_)))
 })
 
-OTHER_KEY <- sections_module()$OTHER
+OTHER_KEY <- OTHER_SECTION
 
 AGREEMENT_TEXTS <- c(
   n1 = "Brief Hospital Course:\nPt  was   ok\nand well.\n\nDischarge Medications:\nasa\n",
@@ -100,7 +100,7 @@ agreement_con <- function(texts = AGREEMENT_TEXTS, targets = AGREEMENT_TARGETS, 
   bhc <- data.frame(note_id = names(targets), target = unname(targets), stringsAsFactors = FALSE)
   con <- corpus_con(unname(texts), env = env, `mimic-iv-bhc` = bhc)
   # corpus_con pojmenovává zprávy n1…, shodně s klíči AGREEMENT_TEXTS
-  segment_corpus(con, sections_module(), section_headers_path())
+  fixture_segments(con)
   con
 }
 
@@ -232,7 +232,7 @@ test_that("bhc_agreement zastaví render na note_id NULL", {
   texts <- c(n1 = "Brief Hospital Course:\nalpha\n")
   rows <- data.frame(note_id = c("n1", NA), target = c("a", "b"), stringsAsFactors = FALSE)
   con <- corpus_con(unname(texts), `mimic-iv-bhc` = rows)
-  segment_corpus(con, sections_module(), section_headers_path())
+  fixture_segments(con)
 
   expect_error(bhc_agreement(con, OTHER_KEY), "duplicit", fixed = TRUE)
 })
@@ -241,12 +241,12 @@ test_that("bhc_agreement zastaví render na duplicitním note_id nebo NULL v tar
   texts <- c(n1 = "Brief Hospital Course:\nalpha\n")
   duplicated <- data.frame(note_id = c("n1", "n1"), target = c("a", "b"), stringsAsFactors = FALSE)
   con <- corpus_con(unname(texts), `mimic-iv-bhc` = duplicated)
-  segment_corpus(con, sections_module(), section_headers_path())
+  fixture_segments(con)
   expect_error(bhc_agreement(con, OTHER_KEY), "duplicit", fixed = TRUE)
 
   missing <- data.frame(note_id = "n1", target = NA_character_, stringsAsFactors = FALSE)
   con <- corpus_con(unname(texts), `mimic-iv-bhc` = missing)
-  segment_corpus(con, sections_module(), section_headers_path())
+  fixture_segments(con)
   expect_error(bhc_agreement(con, OTHER_KEY), "NULL", fixed = TRUE)
 })
 

@@ -179,3 +179,13 @@ def test_empty_input_writes_three_typed_files(tmp_path: Path) -> None:
         table = pq.read_table(tmp_path / name)
         assert table.schema.equals(schema)
         assert table.num_rows == 0
+
+
+def test_r_aggregation_fixtures_equal_writer(tmp_path: Path) -> None:
+    """Pevné vstupy agregací R mají stejný kontrakt a výstup zapisovače."""
+    directory = REPOSITORY / "tests/fixtures/note_features"
+    notes = pq.read_table(directory / "notes.parquet").to_pylist()
+    with ParquetNoteFeatures(tmp_path).writer() as sink:
+        compute([(row["note_id"], row["text"]) for row in notes], sink)
+    for name, _ in ARTIFACTS:
+        assert pq.read_table(tmp_path / name).equals(pq.read_table(directory / name))
