@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -265,7 +266,9 @@ def test_translation_import_restores_modules_and_path(
     ) == (2048, 2.2, 40)
     assert sys.path == path
     assert all(sys.modules[name] is module for name, module in original.items())
-    with pytest.raises(InvalidInputError):
+    with pytest.raises(
+        InvalidInputError, match=r"^Skripty překladu nelze načíst: FileNotFoundError\.$"
+    ):
         load_translation(tmp_path)
     assert sys.path == path
     assert all(sys.modules[name] is module for name, module in original.items())
@@ -301,8 +304,9 @@ def test_real_script_splitter_handles_fitting_divided_and_unsplittable(
         ("unmatched", r"^Zpráva nemá protějšek: b\.txt\.$"),
     ],
 )
+@pytest.mark.usefixtures("cli_args")
 def test_parallel_missing_pair_or_empty_is_refused(
-    inputs: Inputs, missing: str, message: str, monkeypatch: pytest.MonkeyPatch
+    inputs: Inputs, missing: str, message: str
 ) -> None:
     """Chybějící protějšek odmítne run i CLI a uvede jméno souboru."""
     _, _, english, czech, _ = inputs
@@ -314,12 +318,6 @@ def test_parallel_missing_pair_or_empty_is_refused(
         (english / "b.txt").write_bytes(b"b")
     with pytest.raises(InvalidInputError, match=message):
         eda_note_tokens.run(*inputs, {})
-    argv = ["mediparse-eda-note-tokens"]
-    for name, path in zip(
-        ("parquet", "translation", "english", "czech", "out"), inputs, strict=True
-    ):
-        argv.extend((f"--{name}", str(path)))
-    monkeypatch.setattr(sys, "argv", argv)
     assert eda_note_tokens.main() is ExitCode.REFUSED
 
 
@@ -485,3 +483,95 @@ def test_translation_import_cleans_new_modules_and_precedes_decoy(
         assert script.model == "[[n]]"
     assert not any(name in sys.modules for name in names)
     assert sys.path == original_path
+
+
+@pytest.fixture
+def cli_args(inputs: Inputs, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Předá CLI výhradně explicitní syntetické cesty fixtury."""
+    argv = ["mediparse-eda-note-tokens"]
+    for name, path in zip(
+        ("parquet", "translation", "english", "czech", "out"), inputs, strict=True
+    ):
+        argv.extend((f"--{name}", str(path)))
+    monkeypatch.setattr(sys, "argv", argv)
+
+
+def test_missing_tokenizer_is_refused_offline(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Chybějící model je doménová chyba s modelem a revizí i bez Hubu."""
+    monkeypatch.setenv("HF_HUB_OFFLINE", "1")
+    monkeypatch.setattr("huggingface_hub.constants.HF_HUB_OFFLINE", True)
+    model, revision = "neexistuje/model", "0" * 40
+    message = re.escape(f"Tokenizér {model}@{revision} nelze načíst:")
+    with pytest.raises(InvalidInputError, match=message):
+        hf_tokenizers.load_tokenizer(model, revision)
+
+
+@pytest.mark.parametrize("error", [ValueError, TypeError])
+def test_tokenization_error_is_translated(error: type[Exception]) -> None:
+    """Chyba knihovny nepropustí text zprávy do doménové hlášky."""
+    tokenizer = Mock(side_effect=error("zkonstruovaná chyba tokenizéru"))
+    with pytest.raises(
+        InvalidInputError, match=rf"^Tokenizace selhala: {error.__name__}\.$"
+    ):
+        HfTokenLengths(tokenizer, special=True).lengths(["a"])
+
+
+@pytest.mark.usefixtures("cli_args")
+def test_missing_radiology_is_refused(
+    inputs: Inputs, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Chybějící tabulka má stejnou přesnou chybu v run i CLI."""
+    (inputs[0] / "radiology.parquet").unlink()
+    message = "V adresáři tabulek chybí radiology.parquet."
+    with pytest.raises(InvalidInputError, match=f"^{re.escape(message)}$"):
+        eda_note_tokens.run(*inputs, {})
+    assert eda_note_tokens.main() is ExitCode.REFUSED
+    assert message in caplog.text
+
+
+def test_invalid_parallel_utf8_names_file(inputs: Inputs) -> None:
+    """Vadný UTF-8 pár se odmítne se jménem souboru a bez jeho obsahu."""
+    (inputs[3] / "a.txt").write_bytes(b"\xff")
+    with pytest.raises(
+        InvalidInputError,
+        match=r"^Syntetický pár a\.txt nelze přečíst: UnicodeDecodeError\.$",
+    ):
+        read_parallel(inputs[2], inputs[3])
+
+
+def test_unreadable_cache_input_is_translated(
+    inputs: Inputs, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Chyba čtení vstupu klíče se odmítne před načtením tokenizérů."""
+    original = Path.read_bytes
+
+    def unreadable(path: Path) -> bytes:
+        if path == inputs[3] / "a.txt":
+            msg = "zkonstruovaná chyba čtení"
+            raise OSError(msg)
+        return original(path)
+
+    monkeypatch.setattr(Path, "read_bytes", unreadable)
+    with pytest.raises(
+        InvalidInputError, match=r"^Vstup klíče cache nelze přečíst: OSError\.$"
+    ):
+        eda_note_tokens.run(*inputs, {})
+
+
+def test_invalid_sample_table_is_refused(inputs: Inputs) -> None:
+    """Uzavřený seznam zdrojů vzorku odmítne jinou tabulku."""
+    source = SampleNoteTexts(EdaDatabase(inputs[0], {}), "admissions")
+    with pytest.raises(
+        InvalidInputError, match=r"^Vzorek musí pocházet z discharge nebo radiology\.$"
+    ):
+        next(source.batches())
+
+
+def test_sample_query_error_is_translated(inputs: Inputs) -> None:
+    """Chybějící sloupec text v syntetické tabulce má doménovou chybu."""
+    pq.write_table(pa.table({"note_id": ["n1"]}), inputs[0] / "discharge.parquet")
+    source = SampleNoteTexts(EdaDatabase(inputs[0], {}), "discharge")
+    with pytest.raises(
+        InvalidInputError, match=r"^Vzorek discharge nelze číst: BinderException\.$"
+    ):
+        next(source.batches())
