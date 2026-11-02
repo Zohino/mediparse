@@ -11,15 +11,18 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.mimic_table import TableShape
 from mediparse.domain.section_headers import split_sections
-from mediparse.domain.synthetic_bhc import bhc_rows
-from mediparse.domain.synthetic_mimic import corpus_tables, input_notes
-from mediparse.domain.synthetic_sentinel import section_tokens, sentinel_tables
-from mediparse.entrypoints.eda_synthetic_tables import eda_tables
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
 from mediparse.infrastructure.mimic_inventory import read_manifest
 from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
+from mediparse.synthetic.domain.synthetic_bhc import bhc_rows
+from mediparse.synthetic.domain.synthetic_mimic import corpus_tables, input_notes
+from mediparse.synthetic.domain.synthetic_sentinel import (
+    section_tokens,
+    sentinel_tables,
+)
+from mediparse.synthetic.entrypoints.eda_synthetic_tables import eda_tables
 from tests.support import (
     REPOSITORY_CORPUS,
     REPOSITORY_DIAGNOSIS_CANDIDATES,

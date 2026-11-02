@@ -8,8 +8,8 @@ import pytest
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.note_structure import Sex
-from mediparse.domain.synthetic_mimic import corpus_tables, input_notes
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
+from mediparse.synthetic.domain.synthetic_mimic import corpus_tables, input_notes
 from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 from tests.synthetic_support import (
     EDA_NOTES,

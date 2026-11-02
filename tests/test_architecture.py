@@ -15,6 +15,7 @@ from pydantic import BaseModel
 
 import mediparse
 import mediparse.domain
+import mediparse.synthetic.domain
 from mediparse.domain.cohort import MIN_CELL, CohortCounts
 from tests.support import REPOSITORY
 
@@ -26,7 +27,7 @@ WORKFLOW = REPOSITORY / "workflow"
 MAX_SCRIPT_LINES = 20
 MAIN_GUARD = re.compile(r"__name__\s*==\s*[\"']__main__[\"']")
 RULE_IMPORT = re.compile(r"^\s*(?:from|import)\s+(mediparse[\w.]*)", re.MULTILINE)
-ENTRYPOINTS_MODULE = "mediparse.entrypoints"
+ENTRYPOINTS_MODULES = ("mediparse.entrypoints", "mediparse.synthetic.entrypoints")
 RUN_DIRECTIVE = re.compile(r"^\s*run\s*:", re.MULTILINE)
 APPLICATION = PACKAGE / "application"
 APPLICATION_PREFIX = "mediparse.application."
@@ -76,7 +77,10 @@ def _workflow_rules() -> list[Path]:
 
 
 def _in_entrypoints(module: str) -> bool:
-    return module == ENTRYPOINTS_MODULE or module.startswith(f"{ENTRYPOINTS_MODULE}.")
+    return any(
+        module == entrypoints or module.startswith(f"{entrypoints}.")
+        for entrypoints in ENTRYPOINTS_MODULES
+    )
 
 
 def _code_lines(path: Path) -> int:
@@ -85,7 +89,7 @@ def _code_lines(path: Path) -> int:
 
 
 def test_console_scripts_enter_through_entrypoints() -> None:
-    """Konzolový skript vede jen do mediparse.entrypoints, jinudy se do balíčku nevstupuje."""
+    """Konzolový skript vede jen do entrypoints jádra nebo syntetiky."""
     targets = _pyproject()["project"]["scripts"].values()
 
     assert targets
@@ -216,8 +220,10 @@ def test_import_linter_sees_type_checking_imports() -> None:
 
 def _domain_models() -> list[type[BaseModel]]:
     models: list[type[BaseModel]] = []
-    for info in pkgutil.walk_packages(
-        mediparse.domain.__path__, prefix="mediparse.domain."
+    for info in (
+        info
+        for domain in (mediparse.domain, mediparse.synthetic.domain)
+        for info in pkgutil.walk_packages(domain.__path__, prefix=f"{domain.__name__}.")
     ):
         module = importlib.import_module(info.name)
         models.extend(

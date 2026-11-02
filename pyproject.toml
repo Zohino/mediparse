@@ -22,7 +22,7 @@ mediparse-corpus-audit = "mediparse.entrypoints.corpus_audit:main"
 mediparse-corpus-check = "mediparse.entrypoints.corpus_consistency:main"
 mediparse-corpus-gate = "mediparse.entrypoints.corpus_gate:main"
 mediparse-corpus-provenance = "mediparse.entrypoints.corpus_provenance:main"
-mediparse-eda-synthetic-tables = "mediparse.entrypoints.eda_synthetic_tables:main"
+mediparse-eda-synthetic-tables = "mediparse.synthetic.entrypoints.eda_synthetic_tables:main"
 mediparse-sample-plans = "mediparse.entrypoints.synthetic_plans:main"
 mediparse-synthetic-parameters = "mediparse.entrypoints.synthetic_parameters:main"
 mediparse-translation-provenance = "mediparse.entrypoints.translation_provenance:main"
@@ -92,14 +92,29 @@ name = "Hexagonální vrstvy mediparse"
 type = "layers"
 containers = [
     "mediparse",
+    "mediparse.synthetic",
 ]
+# Syntetika dostane application a infrastructure až s nástrojem korpusu v S95d2.
 layers = [
+    "(synthetic)",
     "entrypoints",
-    "application | infrastructure",
+    "(application) | (infrastructure)",
     "domain",
 ]
 exhaustive = true
 broken_contract_guidance = "Doména nezná nic nad sebou. Application a infrastructure se neznají a potkávají se jen v entrypoints: use case popíše potřebu portem (typing.Protocol) a adaptér ji splní. Nový balíček v mediparse je nová vrstva, zařaď ho do kontraktu a důvod napiš do těla commitu."
+
+[[tool.importlinter.contracts]]
+name = "Vrstva syntetiky stojí jen na téže nebo nižší vrstvě jádra"
+type = "layers"
+layers = [
+    "mediparse.synthetic.entrypoints",
+    "mediparse.entrypoints",
+    "mediparse.application | mediparse.infrastructure",
+    "mediparse.synthetic.domain",
+    "mediparse.domain",
+]
+broken_contract_guidance = "Vnitřní vrstva syntetiky smí používat jen stejnou nebo nižší vrstvu jádra; složení s adaptéry patří do synthetic.entrypoints."
 
 [[tool.importlinter.contracts]]
 name = "Technologie jen v infrastructure"
@@ -108,6 +123,8 @@ source_modules = [
     "mediparse.application",
     "mediparse.domain",
     "mediparse.entrypoints",
+    "mediparse.synthetic.domain",
+    "mediparse.synthetic.entrypoints",
 ]
 forbidden_modules = [
     "*",
@@ -146,6 +163,12 @@ ignore_imports = [
     "mediparse.entrypoints.** -> pathlib",
     "mediparse.entrypoints.** -> random",
     "mediparse.entrypoints.** -> sys",
+    "mediparse.synthetic.domain.** -> math",
+    "mediparse.synthetic.domain.** -> string",
+    "mediparse.synthetic.entrypoints.** -> argparse",
+    "mediparse.synthetic.entrypoints.** -> logging",
+    "mediparse.synthetic.entrypoints.** -> pathlib",
+    "mediparse.synthetic.entrypoints.** -> sys",
 ]
 broken_contract_guidance = "Knihovny, soubory, síť a procesy patří do infrastructure; doména a use casy k nim přistupují přes porty. Modul, který je opravdu čistý, přidej do ignore_imports vědomě a s důvodem v těle commitu."
 
@@ -156,12 +179,13 @@ protected_modules = [
     "mediparse.application",
     "mediparse.domain",
     "mediparse.infrastructure",
+    "mediparse.synthetic.domain",
 ]
 allowed_importers = [
     "mediparse",
     "tests",
 ]
-broken_contract_guidance = "Zvenku, například ze skriptu Snakemake, se do mediparse vstupuje jen přes mediparse.entrypoints, který složí use case s adaptéry. Chybí-li vstupní bod, přidej ho tam."
+broken_contract_guidance = "Zvenku, například ze skriptu Snakemake, se do mediparse vstupuje jen přes mediparse.entrypoints nebo mediparse.synthetic.entrypoints, který složí use case s adaptéry. Chybí-li vstupní bod, přidej ho tam."
 
 [[tool.importlinter.contracts]]
 name = "Mediparse je acyklické"
@@ -199,11 +223,9 @@ source_modules = [
     "mediparse.domain.input_note",
 ]
 forbidden_modules = [
-    "mediparse.domain.synthetic_mimic",
     "mediparse.domain.training",
-    "mediparse.domain.smoketest_summary",
 ]
-broken_contract_guidance = "Řádek vstupu je v domain.input_note a pravidla splitu v domain.split; párování syntetiky je v domain.synthetic_mimic a trénink i souhrn smoketestu jsou samostatné kroky."
+broken_contract_guidance = "Řádek vstupu je v domain.input_note a pravidla splitu v domain.split; párování syntetiky je v synthetic.domain.synthetic_mimic a trénink i souhrn smoketestu jsou samostatné kroky."
 
 [[tool.importlinter.contracts]]
 name = "Kroky experimentu nestojí na smoketestu ani syntetice"
@@ -220,10 +242,7 @@ source_modules = [
     "mediparse.domain.training",
 ]
 forbidden_modules = [
-    "mediparse.domain.smoketest_summary",
-    "mediparse.domain.synthetic_mimic",
     "mediparse.infrastructure.synthetic_corpus",
-    "mediparse.entrypoints.smoketest_summary",
 ]
 broken_contract_guidance = "Kroky experimentu jsou společné pro MIMIC i smoketest; syntetiku a výběr ukázek skládá samostatný vstupní bod smoketestu."
 
@@ -379,7 +398,7 @@ ignore = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
 
-"src/mediparse/entrypoints/synthetic_mimic.py" = [
+"src/mediparse/synthetic/entrypoints/synthetic_mimic.py" = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
 
@@ -391,7 +410,7 @@ ignore = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
 
-"src/mediparse/entrypoints/smoketest_summary.py" = [
+"src/mediparse/synthetic/entrypoints/smoketest_summary.py" = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
 

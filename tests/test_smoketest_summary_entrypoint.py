@@ -7,10 +7,10 @@ from typing import TYPE_CHECKING
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import BinaryMetrics, DiagnosisMetrics
-from mediparse.entrypoints import smoketest_summary
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.metrics_table import ParquetMetricsTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
+from mediparse.synthetic.entrypoints import smoketest_summary
 from tests.model_support import prediction
 
 if TYPE_CHECKING:

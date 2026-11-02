@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING
 
 from mediparse.domain.language import Language
 from mediparse.domain.mimic_table import table_name
-from mediparse.domain.synthetic_mimic import input_notes, synthetic_mimic_rows
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
@@ -19,6 +18,7 @@ from mediparse.infrastructure.mimic_tables import MimicTable, MimicTables
 from mediparse.infrastructure.parquet_file import write_string_table
 from mediparse.infrastructure.plans_file import PlansFile
 from mediparse.infrastructure.synthetic_corpus import CorpusDirectory
+from mediparse.synthetic.domain.synthetic_mimic import input_notes, synthetic_mimic_rows
 
 if TYPE_CHECKING:
     from pathlib import Path

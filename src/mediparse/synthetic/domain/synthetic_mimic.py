@@ -10,7 +10,7 @@ from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.note import order_of
 from mediparse.domain.note_structure import Sex
-from mediparse.domain.synthetic_coverage import coverage_diagnoses
+from mediparse.synthetic.domain.synthetic_coverage import coverage_diagnoses
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence

@@ -16,13 +16,13 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.mimic_table import TableShape
 from mediparse.domain.note import subject_of
-from mediparse.domain.synthetic_mimic import (
+from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
+from mediparse.infrastructure.mimic_inventory import read_manifest
+from mediparse.synthetic.domain.synthetic_mimic import (
     UnpairedNotesError,
     input_notes,
     synthetic_mimic_rows,
 )
-from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
-from mediparse.infrastructure.mimic_inventory import read_manifest
 from tests.cohort_support import CODES, PREFIXES
 from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES, REPOSITORY_MIMIC_MANIFEST
 from tests.synthetic_support import NOTES

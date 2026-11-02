@@ -1,6 +1,6 @@
 """Výběr ukázky predikcí pro souhrn smoketestu."""
 
-from mediparse.domain.smoketest_summary import demo_examples
+from mediparse.synthetic.domain.smoketest_summary import demo_examples
 from tests.model_support import prediction
 
 

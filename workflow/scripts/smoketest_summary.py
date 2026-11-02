@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from mediparse.entrypoints.smoketest_summary import main
+from mediparse.synthetic.entrypoints.smoketest_summary import main
 
 raise SystemExit(
     main(
