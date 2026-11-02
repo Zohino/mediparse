@@ -1,4 +1,3 @@
-ENCODER_WINDOW <- 512L
 ENCODER_FULL_SHARE <- 0.95
 CZECH_TOLERANCE <- 0.05
 
@@ -17,7 +16,7 @@ TOKENIZER_COLUMNS <- c(
   tokenizer = "VARCHAR", model = "VARCHAR", revision = "VARCHAR", window = "INTEGER",
   role = "VARCHAR", special_tokens = "INTEGER", transformers = "VARCHAR"
 )
-PROMPT_COLUMNS <- c(prompt_overhead = "INTEGER", split_ratio = "DOUBLE")
+PROMPT_COLUMNS <- c(prompt_overhead = "INTEGER", split_ratio = "DOUBLE", sample_limit = "INTEGER")
 SPLIT_COLUMNS <- c(note_table = "VARCHAR", note_id = "VARCHAR", fits = "BOOLEAN", parts = "INTEGER", unsplittable = "BOOLEAN")
 PARALLEL_COLUMNS <- c(pair_id = "VARCHAR", tokenizer = "VARCHAR", english = "INTEGER", czech = "INTEGER")
 
@@ -40,6 +39,12 @@ note_tokens <- function(con, table) {
 tokenizer_settings <- function(con) {
   source <- tokens_source(con, "tokenizers.parquet", TOKENIZER_COLUMNS)
   DBI::dbGetQuery(con, sprintf("SELECT * FROM %s", source))
+}
+
+encoder_window <- function(settings) {
+  windows <- unique(settings$window[settings$role == "encoder"])
+  if (length(windows) != 1L) stop("Encodery musí mít jediné společné okno.")
+  windows[[1]]
 }
 
 translation_prompt <- function(con) {
@@ -117,19 +122,17 @@ encoder_verdict <- function(share, median, window) {
   if (median <= window) "vetsina" else "chunkovani"
 }
 
-SAMPLE_SIZE <- 1000L
-
 translation_limit <- function(window, split_ratio, overhead) {
   (window - overhead) / (1 + split_ratio)
 }
 
-token_windows <- function(encoders, translation, scale = 1) {
+token_windows <- function(encoders, translation, encoder_window, scale = 1) {
   tokenizer <- c(names(encoders), names(translation))
   scales <- if (is.null(names(scale))) rep_len(scale, length(tokenizer)) else unname(scale[tokenizer])
   data.frame(
     tokenizer = tokenizer,
     specials = c(unname(encoders), rep(0, length(translation))),
-    capacity = c(ENCODER_WINDOW - unname(encoders), unname(translation)),
+    capacity = c(encoder_window - unname(encoders), unname(translation)),
     scale = scales,
     stringsAsFactors = FALSE
   )

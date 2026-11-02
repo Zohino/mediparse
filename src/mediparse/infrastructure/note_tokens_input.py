@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import asdict, dataclass
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Final
 
 import duckdb
 
@@ -19,6 +19,9 @@ if TYPE_CHECKING:
 
     from mediparse.domain.note_tokens import TokenizerInfo
     from mediparse.infrastructure.eda_duckdb import EdaDatabase
+
+
+SAMPLE_LIMIT: Final = 1000
 
 
 def read_parallel(english: Path, czech: Path) -> list[tuple[str, str, str]]:
@@ -117,7 +120,7 @@ class SampleNoteTexts:
             WITH chosen AS MATERIALIZED (
                 SELECT note_id FROM "{self.table}"
                 WHERE coalesce(length(text), 0) > 0
-                ORDER BY hash(note_id), note_id LIMIT 1000
+                ORDER BY hash(note_id), note_id LIMIT {SAMPLE_LIMIT}
             )
             SELECT chosen.note_id, notes.text FROM chosen
             JOIN "{self.table}" notes USING (note_id)

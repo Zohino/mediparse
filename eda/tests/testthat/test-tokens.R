@@ -198,7 +198,7 @@ test_that("spodní mez překladu na hranici limitu: 616 tokenů je jedna část,
 })
 
 test_that("token_windows složí okna encoderů a překladu a měřítko českého textu", {
-  out <- token_windows(c(xlmr = 2, mdeberta = 2), translation = c(gemma = 616.5625), scale = 1.5)
+  out <- token_windows(c(xlmr = 2, mdeberta = 2), translation = c(gemma = 616.5625), encoder_window = 512, scale = 1.5)
 
   expect_equal(out$tokenizer, c("xlmr", "mdeberta", "gemma"))
   expect_equal(out$specials, c(2, 2, 0))
@@ -264,7 +264,7 @@ test_that("parallel_ratio spočítá medián a 95. percentil poměru CS/EN", {
   con <- mimic_con()
   token_cache()
   parallel_input(con)
-  windows <- token_windows(c(translategemma = 0), translation = numeric())
+  windows <- token_windows(c(translategemma = 0), translation = numeric(), encoder_window = 512)
   windows$capacity <- 12
   out <- parallel_ratio(con, windows)
 
@@ -278,7 +278,7 @@ test_that("parallel_ratio spočítá podíl zpráv v okně v obou jazycích", {
   con <- mimic_con()
   token_cache()
   parallel_input(con)
-  windows <- token_windows(c(translategemma = 0), translation = numeric())
+  windows <- token_windows(c(translategemma = 0), translation = numeric(), encoder_window = 512)
   windows$capacity <- 12
   out <- parallel_ratio(con, windows)
 
@@ -290,7 +290,7 @@ test_that("parallel_ratio ignoruje zprávy bez anglických tokenů při poměru"
   con <- mimic_con()
   token_cache()
   parallel_input(con, zero = TRUE)
-  windows <- token_windows(c(translategemma = 0), translation = numeric())
+  windows <- token_windows(c(translategemma = 0), translation = numeric(), encoder_window = 512)
   out <- parallel_ratio(con, windows)
 
   expect_equal(out$zprav, 5)
@@ -299,7 +299,7 @@ test_that("parallel_ratio ignoruje zprávy bez anglických tokenů při poměru"
 
 test_that("token_windows přijme měřítko pojmenované podle tokenizéru", {
   out <- token_windows(
-    c(xlmr = 2, mdeberta = 2), translation = c(gemma = 600),
+    c(xlmr = 2, mdeberta = 2), translation = c(gemma = 600), encoder_window = 512,
     scale = c(gemma = 1.7, xlmr = 1.3, mdeberta = 1.5)
   )
 
@@ -405,9 +405,10 @@ test_that("tokenové fixtury Pythonu splňují všechny kontrakty konzumenta", {
   expect_identical(note_tokens(con, "radiology"), "note_tokens_radiology")
   expect_equal(nrow(tokenizer_settings(con)), 3)
   expect_equal(translation_prompt(con)$prompt_overhead, 3)
+  expect_equal(translation_prompt(con)$sample_limit, 1000)
   source <- tokens_source(con, "translation_sample.parquet", SPLIT_COLUMNS)
   expect_equal(DBI::dbGetQuery(con, sprintf("SELECT count(*) AS n FROM %s", source))$n, 6)
-  windows <- token_windows(c(xlmr = 2, mdeberta = 2), c(translategemma = 600))
+  windows <- token_windows(c(xlmr = 2, mdeberta = 2), c(translategemma = 600), encoder_window = 512)
   expect_equal(parallel_ratio(con, windows)$median, c(1.5, 1.5, 1.5))
   expect_equal(split_sample(con, "discharge", 2)$nedelitelnych, 1)
 })
@@ -427,7 +428,7 @@ test_that("tokenová cache odmítá BIGINT místo INTEGER", {
 test_that("tokenová cache odmítá NULL na hranici konzumenta", {
   con <- mimic_con()
   token_cache()
-  write_token_input(con, "translation_prompt.parquet", data.frame(prompt_overhead = NA_integer_, split_ratio = 2.2))
+  write_token_input(con, "translation_prompt.parquet", data.frame(prompt_overhead = NA_integer_, split_ratio = 2.2, sample_limit = 1000L))
   expect_error(translation_prompt(con), "NULL")
 })
 
@@ -437,4 +438,13 @@ test_that("nepublikovaná tokenová cache odmítne i hotový parquet", {
   file.copy(file.path(CONTRACT_FIXTURES, "note_tokens_discharge.parquet"), directory)
   unlink(file.path(directory, "cache.json"))
   expect_error(note_tokens(con, "discharge"), "cache není publikovaná")
+})
+
+test_that("okno encoderů přebírá metadata a odmítá rozporná okna", {
+  settings <- data.frame(role = c("encoder", "encoder", "translation"), window = c(768L, 768L, 2048L))
+  expect_identical(encoder_window(settings), 768L)
+  expect_equal(token_windows(c(xlmr = 2, mdeberta = 2), numeric(), encoder_window(settings))$capacity, c(766, 766))
+  settings$window[2] <- 512L
+  expect_error(encoder_window(settings), "jediné společné okno")
+  expect_error(encoder_window(settings[FALSE, ]), "jediné společné okno")
 })

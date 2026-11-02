@@ -42,6 +42,7 @@ TOKENIZERS_SCHEMA: Final = pa.schema([
 PROMPT_SCHEMA: Final = pa.schema([
     pa.field("prompt_overhead", pa.int32(), nullable=False),
     pa.field("split_ratio", pa.float64(), nullable=False),
+    pa.field("sample_limit", pa.int32(), nullable=False),
 ])
 SAMPLE_SCHEMA: Final = pa.schema([
     pa.field("note_table", pa.string(), nullable=False),

@@ -33,6 +33,7 @@ class TranslationPrompt:
 
     prompt_overhead: int
     split_ratio: float
+    sample_limit: int
 
 
 @dataclass(frozen=True)

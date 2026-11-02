@@ -121,7 +121,7 @@ def test_cache_and_fresh_result_match_manual_oracle(inputs: Inputs) -> None:
             "translategemma": [3, 0, 2, 3],
         }
     assert pq.read_table(directory / "translation_prompt.parquet").to_pylist() == [
-        {"prompt_overhead": 3, "split_ratio": 2.2}
+        {"prompt_overhead": 3, "split_ratio": 2.2, "sample_limit": 1000}
     ]
     sample = pq.read_table(directory / "translation_sample.parquet").to_pylist()
     assert {
@@ -374,3 +374,13 @@ def test_parallel_pairs_by_sorted_filename(inputs: Inputs) -> None:
         ("b", "b", "b"),
         ("c", "c", "c"),
     ]
+
+
+def test_sample_uses_declared_python_limit(
+    inputs: Inputs, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Limit SQL pochází z jediné deklarace velikosti vzorku v Pythonu."""
+    monkeypatch.setattr(note_tokens_input, "SAMPLE_LIMIT", 2)
+    rows = next(SampleNoteTexts(EdaDatabase(inputs[0], {}), "discharge").batches())
+    expected_count = 2
+    assert len(rows) == expected_count

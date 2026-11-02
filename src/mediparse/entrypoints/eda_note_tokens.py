@@ -25,6 +25,7 @@ from mediparse.infrastructure.hf_tokenizers import (
 from mediparse.infrastructure.note_features_cache import is_current, pending_cache
 from mediparse.infrastructure.note_features_table import ParquetNoteTexts
 from mediparse.infrastructure.note_tokens_input import (
+    SAMPLE_LIMIT,
     SampleNoteTexts,
     read_parallel,
     tokens_key,
@@ -81,7 +82,9 @@ def run(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
         for info in infos
     ]
     prompt = TranslationPrompt(
-        prompt_overhead(script, loaded["translategemma"]), script.prepare.SPLIT_RATIO
+        prompt_overhead(script, loaded["translategemma"]),
+        script.prepare.SPLIT_RATIO,
+        SAMPLE_LIMIT,
     )
     counters = {
         info.tokenizer: HfTokenLengths(
