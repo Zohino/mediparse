@@ -17,7 +17,8 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.eda_note_features import main, run
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure import note_features_cache
-from mediparse.infrastructure.note_features_cache import cache_key, is_current
+from mediparse.infrastructure.note_features_cache import is_current
+from mediparse.infrastructure.note_features_cache import note_features_key as cache_key
 from mediparse.infrastructure.note_features_table import ARTIFACTS, ParquetNoteFeatures
 from tests.note_features_support import CONTRACT_NOTES, compute
 from tests.support import (
@@ -132,10 +133,10 @@ def test_missing_artifact_or_invalid_manifest_is_not_current(
     run(*inputs, {})
     key = cache_key(parquet / "discharge.parquet", lexicon, candidates)
     (out / ARTIFACTS[0][0]).unlink()
-    assert not is_current(out, key)
+    assert not is_current(out, key, [name for name, _ in ARTIFACTS])
     run(*inputs, {})
     (out / "cache.json").write_text("[]", encoding="utf-8")
-    assert not is_current(out, key)
+    assert not is_current(out, key, [name for name, _ in ARTIFACTS])
 
 
 def test_interrupted_sink_does_not_publish_cache(
@@ -233,8 +234,8 @@ def test_interrupted_publication_invalidates_old_and_new_key(
         InvalidInputError, match="Cache měření zpráv nelze publikovat: OSError\\."
     ):
         run(*inputs, {})
-    assert is_current(out, key_a) is False
-    assert is_current(out, key_b) is False
+    assert is_current(out, key_a, [name for name, _ in ARTIFACTS]) is False
+    assert is_current(out, key_b, [name for name, _ in ARTIFACTS]) is False
 
 
 @pytest.fixture

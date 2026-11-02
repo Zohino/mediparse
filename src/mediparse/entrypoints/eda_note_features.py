@@ -15,11 +15,12 @@ from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.eda_duckdb import EdaDatabase
 from mediparse.infrastructure.note_features_cache import (
-    cache_key,
     is_current,
+    note_features_key,
     pending_cache,
 )
 from mediparse.infrastructure.note_features_table import (
+    ARTIFACTS,
     ParquetNoteFeatures,
     ParquetNoteTexts,
 )
@@ -53,14 +54,15 @@ def run(
         msg = "V adresáři tabulek chybí discharge.parquet."
         raise InvalidInputError(msg)
     discharge = views["discharge"]
-    key = cache_key(discharge, lexicon, candidates)
-    if is_current(out, key):
+    key = note_features_key(discharge, lexicon, candidates)
+    artifacts = tuple(name for name, _ in ARTIFACTS)
+    if is_current(out, key, artifacts):
         logger.info("cache platí")
         return False
     parsed = load_section_lexicon(lexicon)
     normalization = load_text_normalization(candidates)
     with (
-        pending_cache(out, key) as temporary,
+        pending_cache(out, key, artifacts) as temporary,
         ParquetNoteFeatures(temporary).writer() as sink,
     ):
         total = ComputeNoteFeatures(
