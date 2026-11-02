@@ -15,6 +15,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import pytest
 
+from mediparse.application.note_tokens import MeasureNoteTokens
 from mediparse.domain.data_access import DataAccessError
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.note_tokens import TokenizerInfo
@@ -575,3 +576,33 @@ def test_sample_query_error_is_translated(inputs: Inputs) -> None:
         InvalidInputError, match=r"^Vzorek discharge nelze číst: BinderException\.$"
     ):
         next(source.batches())
+
+
+@pytest.mark.parametrize(
+    ("batches", "expected"),
+    [
+        ([[("a", "a")], [("b", "b"), ("c", "c")]], 5),
+        ([], 0),
+    ],
+)
+def test_measure_returns_total_across_tables_and_batches(
+    batches: list[list[tuple[str, str]]],
+    expected: int,
+) -> None:
+    """Tři zprávy ve dvou dávkách a dvě ve druhé tabulce dávají dohromady pět."""
+    discharge, radiology = Mock(), Mock()
+    discharge.batches.return_value = batches
+    radiology.batches.return_value = [[("d", "d"), ("e", "e")]] if batches else []
+    counter = Mock()
+    counter.lengths.side_effect = lambda texts: [1] * len(texts)
+    use_case = MeasureNoteTokens(
+        texts={"discharge": discharge, "radiology": radiology},
+        samples={},
+        xlmr=counter,
+        mdeberta=counter,
+        translategemma=counter,
+        parallel_tokenizers=(),
+        splitter=FakeSplitter(),
+        sink=Mock(),
+    )
+    assert use_case.run([]) == expected
