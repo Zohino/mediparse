@@ -14,18 +14,11 @@ from mediparse.domain.note_features import AcronymCount, NotePreprocessing
 from mediparse.domain.note_sections import SectionSpan, section_spans
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Iterable, Sequence
+    from collections.abc import Callable, Sequence
 
+    from mediparse.application.ports.corpus import NoteTexts
     from mediparse.domain.clinical_text import TextNormalization
     from mediparse.domain.section_headers import SectionLexicon
-
-
-class NoteTexts(Protocol):
-    """Zdroj textů celé tabulky v pořadí souboru."""
-
-    def batches(self) -> Iterable[Sequence[tuple[str, str]]]:
-        """Vrátí dávky dvojic identifikátor a text."""
-        ...
 
 
 class NoteFeatureSink(Protocol):
