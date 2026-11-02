@@ -15,9 +15,6 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
     from pathlib import Path
 
-RAW = "raw"
-PREPROCESSED = "preprocessed"
-
 
 def diagnosis_acronyms(candidates: Path) -> list[str]:
     """Vrátí seřazené klíče konfigurace pro původní očekávání.
@@ -49,30 +46,8 @@ def note_preprocessing(
     }
 
 
-def note_vocabulary(_candidates: Path, texts: Sequence[str]) -> dict[str, list[str]]:
-    """Sjednotí slovníky zpráv na původní očekávání slovníku dávky.
-
-    Returns:
-        Varianty a tokeny v původním pořadí.
-    """
-    sink = MemoryFeatures()
-    compute([(str(i), text) for i, text in enumerate(texts)], sink)
-    rows = [
-        (variant, token)
-        for variant, column in (
-            (RAW, "vocabulary_raw"),
-            (PREPROCESSED, "vocabulary_preprocessed"),
-        )
-        for token in sorted({
-            token for row in sink.preprocessing for token in getattr(row, column)
-        })
-    ]
-    return {"variant": [row[0] for row in rows], "token": [row[1] for row in rows]}
-
-
 ACRONYMS = ["AF", "CKD", "COPD", "DM", "DM2", "ESRD"]
 TWICE: Final = 2
-BASE_COLUMNS = {"note_id", "tokens_raw", "tokens_preprocessed"}
 
 
 def test_diagnosis_acronyms_are_sorted_keys_of_the_config() -> None:
@@ -109,36 +84,19 @@ def test_acronyms_are_counted_after_normalization() -> None:
     assert [columns[acronym] for acronym in ACRONYMS] == [[0], [0], [1], [1], [1], [0]]
 
 
-def test_empty_input_keeps_every_column() -> None:
-    """Prázdná dávka dá všechny sloupce, aby R složilo typovaný data.frame."""
-    columns = note_preprocessing(REPOSITORY_DIAGNOSIS_CANDIDATES, [], [])
-    vocabulary = note_vocabulary(REPOSITORY_DIAGNOSIS_CANDIDATES, [])
-
-    assert set(columns) == BASE_COLUMNS | set(ACRONYMS)
-    assert all(column == [] for column in columns.values())
-    assert vocabulary == {"variant": [], "token": []}
+def test_empty_input_has_no_features() -> None:
+    """Prázdná dávka nezapíše sekce, tokeny, slovníky ani zkratky."""
+    sink = MemoryFeatures()
+    assert compute([], sink) == 0
+    assert sink.sections == []
+    assert sink.preprocessing == []
+    assert sink.acronyms == []
 
 
 def test_different_lengths_raise_value_error() -> None:
     """Zprávy a identifikátory musí být stejně dlouhé."""
     with pytest.raises(ValueError, match="argument 2 is shorter"):
         note_preprocessing(REPOSITORY_DIAGNOSIS_CANDIDATES, ["n1", "n2"], ["text"])
-
-
-def test_vocabulary_lists_distinct_tokens_by_variant() -> None:
-    """Slovník dávky: distinct tokeny po variantách."""
-    vocabulary = note_vocabulary(REPOSITORY_DIAGNOSIS_CANDIDATES, ["Pt AF pt", "Pt DM"])
-
-    rows = list(zip(vocabulary["variant"], vocabulary["token"], strict=True))
-    assert rows == [
-        (RAW, "af"),
-        (RAW, "dm"),
-        (RAW, "pt"),
-        (PREPROCESSED, "atrial"),
-        (PREPROCESSED, "diabetes"),
-        (PREPROCESSED, "fibrillation"),
-        (PREPROCESSED, "pt"),
-    ]
 
 
 def test_every_acronym_expands_in_the_model_analyzer() -> None:

@@ -199,9 +199,27 @@ def test_repository_lexicon_loads() -> None:
     assert result["section"] == ["allergies"]
 
 
-@given(st.text())
-def test_spans_preserve_length_and_bodies(text: str) -> None:
+@given(
+    st.lists(
+        st.tuples(
+            st.sampled_from(
+                tuple(
+                    synonym
+                    for section in load_section_lexicon(
+                        REPOSITORY_SECTION_HEADERS
+                    ).sections.values()
+                    for synonym in section.synonyms
+                )
+            ),
+            st.text(),
+        ),
+        min_size=1,
+        max_size=6,
+    )
+)
+def test_spans_preserve_length_and_bodies(fragments: list[tuple[str, str]]) -> None:
     """Offsety vyříznou těla parseru a součet délek zachová celý text."""
+    text = "".join(f"{header}:\n{body}\n" for header, body in fragments)
     lexicon = load_section_lexicon(REPOSITORY_SECTION_HEADERS)
     rows = section_spans("a", text, lexicon)
     parts = section_headers.split_sections(text, lexicon)
