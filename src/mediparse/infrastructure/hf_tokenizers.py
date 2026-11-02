@@ -10,7 +10,7 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.note_tokens import TokenizerInfo
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    from collections.abc import Mapping, Sequence
 
     from transformers import PreTrainedTokenizerBase
 
@@ -121,17 +121,39 @@ def prompt_overhead(ids: Sequence[int], source_length: int) -> int:
     return len(ids) - source_length
 
 
-def tokenizer_info(model: str, revision: str, window: int) -> list[TokenizerInfo]:
-    """Složí revize a okna ještě před načtením tokenizérů.
+def tokenizer_specs(
+    model: str, revision: str, window: int
+) -> tuple[tuple[str, str, str, int], ...]:
+    """Složí specifikace z pevných encoderů a přípravy překladu bez načítání modelů.
 
     Returns:
-        Dva encodery a překladový tokenizér, zatím s nulovou režií encoderů.
+        Klíče, modely, revize a okna všech tří tokenizérů.
+    """
+    return (*ENCODERS, ("translategemma", model, revision, window))
+
+
+def tokenizer_info(
+    model: str,
+    revision: str,
+    window: int,
+    loaded: Mapping[str, PreTrainedTokenizerBase],
+) -> list[TokenizerInfo]:
+    """Spojí specifikace s počtem skutečně změřených speciálních tokenů.
+
+    Returns:
+        Konečná metadata encoderů a překladového tokenizéru.
     """
     transformers_version = version("transformers")
     return [
         *(
             TokenizerInfo(
-                key, model, revision, window, "encoder", 0, transformers_version
+                key,
+                model,
+                revision,
+                window,
+                "encoder",
+                special_tokens(loaded[key]),
+                transformers_version,
             )
             for key, model, revision, window in ENCODERS
         ),

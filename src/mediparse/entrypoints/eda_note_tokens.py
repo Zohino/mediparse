@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import logging
 import os
-from dataclasses import replace
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -21,8 +20,8 @@ from mediparse.infrastructure.hf_tokenizers import (
     counter_for,
     load_tokenizer,
     prompt_overhead,
-    special_tokens,
     tokenizer_info,
+    tokenizer_specs,
 )
 from mediparse.infrastructure.note_texts_parquet import ParquetNoteTexts
 from mediparse.infrastructure.note_tokens_sample import SAMPLE_LIMIT, SampleNoteTexts
@@ -65,8 +64,8 @@ def run(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
             msg = f"V adresáři tabulek chybí {table}.parquet."
             raise InvalidInputError(msg)
     script = load_translation(translation)
-    infos = tokenizer_info(script.model, script.revision, script.window)
-    key = tokens_key(views, translation, english, czech, infos)
+    translation_model = (script.model, script.revision, script.window)
+    key = tokens_key(views, translation, english, czech, translation_model)
     directory = out / "tokens"
     artifacts = tuple(name for name, _ in ARTIFACTS)
     if is_current(directory, key, artifacts):
@@ -74,14 +73,10 @@ def run(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
         return False
     pairs = read_parallel(english, czech)
     loaded = {
-        info.tokenizer: load_tokenizer(info.model, info.revision) for info in infos
+        key: load_tokenizer(model, revision)
+        for key, model, revision, _ in tokenizer_specs(*translation_model)
     }
-    infos = [
-        replace(info, special_tokens=special_tokens(loaded[info.tokenizer]))
-        if info.role == "encoder"
-        else info
-        for info in infos
-    ]
+    infos = tokenizer_info(*translation_model, loaded)
     counters = {
         info.tokenizer: counter_for(info, loaded[info.tokenizer], parallel=False)
         for info in infos

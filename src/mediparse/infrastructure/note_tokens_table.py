@@ -13,7 +13,7 @@ import pyarrow.parquet as pq
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.eda_cache import cache_key
 from mediparse.infrastructure.file_digest import file_sha256
-from mediparse.infrastructure.hf_tokenizers import library_versions
+from mediparse.infrastructure.hf_tokenizers import library_versions, tokenizer_specs
 from mediparse.infrastructure.parquet_file import COMPRESSION
 
 if TYPE_CHECKING:
@@ -149,7 +149,7 @@ def tokens_key(
     translation: Path,
     english: Path,
     czech: Path,
-    infos: Sequence[TokenizerInfo],
+    translation_model: tuple[str, str, int],
 ) -> str:
     """Otiskne tabulky, skripty, páry, revize a verze tokenizace.
 
@@ -175,7 +175,7 @@ def tokens_key(
             )
         inputs.append((
             "tokenizers",
-            json.dumps([asdict(info) for info in infos], sort_keys=True).encode(),
+            json.dumps(tokenizer_specs(*translation_model), sort_keys=True).encode(),
         ))
         inputs.extend(library_versions())
         return cache_key(inputs)
