@@ -2,9 +2,8 @@
 
 eda_stage() {
     local root=$1 work=$2
-    mkdir -p "$work/analysis/R"
-    cp "$root/analysis/R/contract.R" "$work/analysis/R/contract.R"
-    (cd "$root" && tar --create --exclude=eda/_freeze --exclude=eda/.quarto eda) | tar --extract --directory "$work"
+    # Sešit 9 sourcuje kontrolu kontraktu sdílenou s analýzou relativní cestou.
+    (cd "$root" && tar --create --exclude=eda/_freeze --exclude=eda/.quarto eda analysis/R/contract.R) | tar --extract --directory "$work"
 }
 
 eda_revision() {
