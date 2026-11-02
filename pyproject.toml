@@ -41,6 +41,7 @@ dev = [
     { include-group = "test" },
     "prek>=0.5.3",
     "pytest-cov>=7.1.0",
+    "mutmut>=3.8.1",
 ]
 lint = [
     "hadolint-py>=2.15.1.2",
@@ -66,6 +67,20 @@ filterwarnings = ["error"]
 [tool.coverage.run]
 branch = true
 source = ["mediparse"]
+
+[tool.mutmut]
+source_paths = ["src/mediparse"]
+only_mutate = [
+    "src/mediparse/domain/*",
+    "src/mediparse/application/*",
+    "src/mediparse/infrastructure/*",
+]
+pytest_add_cli_args_test_selection = ["--ignore=tests/test_architecture.py"]
+also_copy = [
+    "workflow", "config", "translation", "scripts",
+    "resources/synthetic", "resources/icd", "results/mimic",
+    "pixi.lock", "README.md", "LICENSE",
+]
 
 [tool.importlinter]
 root_packages = ["mediparse", "tests", "workflow"]
