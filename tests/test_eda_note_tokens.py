@@ -429,3 +429,38 @@ def test_counter_policy_counts_whitespace_sensitive_tokens(
     )
     counter = hf_tokenizers.counter_for(info, whitespace_tokenizer(), parallel=parallel)
     assert counter.lengths(["a b c", "", "  a b \n"]) == expected
+
+
+@pytest.mark.parametrize("invalid", [False, True])
+def test_translation_import_cleans_new_modules_and_precedes_decoy(
+    inputs: Inputs,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    *,
+    invalid: bool,
+) -> None:
+    """Import používá sourozenecké markers a uklidí i původně nepřítomné moduly."""
+    names = ("prepare", "note_parts", "markers")
+    for name in names:
+        monkeypatch.delitem(sys.modules, name, raising=False)
+    decoy = tmp_path / "decoy"
+    decoy.mkdir()
+    (decoy / "markers.py").write_text(
+        'PLACEHOLDER = "návnada"\ndef mask(text):\n    return text\n', encoding="utf-8"
+    )
+    monkeypatch.syspath_prepend(str(decoy))
+    original_path = sys.path[:]
+    prepare = inputs[1] / "prepare.py"
+    if invalid:
+        prepare.unlink()
+        with pytest.raises(
+            InvalidInputError,
+            match=r"^Skripty překladu nelze načíst: FileNotFoundError\.$",
+        ):
+            load_translation(inputs[1])
+    else:
+        prepare.write_bytes(prepare.read_bytes() + b"\nMODEL = PLACEHOLDER\n")
+        script = load_translation(inputs[1])
+        assert script.model == "[[n]]"
+    assert not any(name in sys.modules for name in names)
+    assert sys.path == original_path
