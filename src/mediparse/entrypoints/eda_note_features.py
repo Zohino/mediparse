@@ -10,6 +10,8 @@ from typing import TYPE_CHECKING
 
 from mediparse.application.note_features import ComputeNoteFeatures
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
+from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.eda_duckdb import EdaDatabase
 from mediparse.infrastructure.note_features_cache import (
@@ -71,11 +73,18 @@ def run(
     return True
 
 
-def main() -> None:
-    """Načte explicitní cesty nástroje a nastaví logování."""
-    logging.basicConfig(
-        level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s"
-    )
+def main() -> ExitCode:
+    """Načte explicitní cesty nástroje a nastaví logování.
+
+    Returns:
+        OK při výpočtu i platné cache; REFUSED při odmítnutí vstupu.
+    """
+    configure_logging()
+    return _run_cli()
+
+
+@refusing_invalid_input
+def _run_cli() -> ExitCode:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--parquet", type=Path, required=True)
     parser.add_argument("--lexicon", type=Path, required=True)
@@ -83,3 +92,4 @@ def main() -> None:
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     run(args.parquet, args.lexicon, args.candidates, args.out, os.environ)
+    return ExitCode.OK

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import re
+import sys
 from pathlib import Path
 from unittest.mock import Mock
 
@@ -12,7 +14,8 @@ import pytest
 
 from mediparse.domain.data_access import DataAccessError
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.entrypoints.eda_note_features import run
+from mediparse.entrypoints.eda_note_features import main, run
+from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure import note_features_cache
 from mediparse.infrastructure.note_features_cache import cache_key, is_current
 from mediparse.infrastructure.note_features_table import ARTIFACTS, ParquetNoteFeatures
@@ -232,3 +235,66 @@ def test_interrupted_publication_invalidates_old_and_new_key(
         run(*inputs, {})
     assert is_current(out, key_a) is False
     assert is_current(out, key_b) is False
+
+
+@pytest.fixture
+def cli_args(
+    inputs: tuple[Path, Path, Path, Path], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Předá konzolovému vstupu explicitní syntetické cesty z fixtury."""
+    command_argv = ["mediparse-eda-note-features"]
+    for name, path in zip(
+        ("parquet", "lexicon", "candidates", "out"), inputs, strict=True
+    ):
+        command_argv.extend((f"--{name}", str(path)))
+    monkeypatch.setattr(sys, "argv", command_argv)
+
+
+@pytest.mark.parametrize(
+    "invalid", ["missing-discharge", "missing-lexicon", "corrupt-parquet", "null-text"]
+)
+@pytest.mark.usefixtures("cli_args")
+def test_invalid_input_has_domain_error_and_cli_refuses(
+    inputs: tuple[Path, Path, Path, Path],
+    invalid: str,
+) -> None:
+    """Vadné syntetické vstupy mají přesnou doménovou hlášku a CLI je odmítne."""
+    parquet, lexicon, _, _ = inputs
+    discharge = parquet / "discharge.parquet"
+    if invalid == "missing-discharge":
+        discharge.rename(parquet / "other.parquet")
+        message = "V adresáři tabulek chybí discharge.parquet."
+    elif invalid == "missing-lexicon":
+        lexicon.unlink()
+        message = "Vstup klíče cache nelze přečíst: FileNotFoundError."
+    elif invalid == "corrupt-parquet":
+        discharge.write_bytes(b"not parquet")
+        message = "Tabulku discharge nelze číst: ArrowInvalid."
+    else:
+        pq.write_table(
+            pa.table({"note_id": ["n"], "text": pa.array([None], type=pa.string())}),
+            discharge,
+        )
+        message = (
+            "Tabulka discharge musí obsahovat note_id a text bez NULL jako řetězce."
+        )
+    with pytest.raises(InvalidInputError, match=f"^{re.escape(message)}$"):
+        run(*inputs, {"CLAUDECODE": "1"})
+    assert main() is ExitCode.REFUSED
+
+
+@pytest.mark.usefixtures("cli_args")
+def test_cli_refuses_data_access_error(
+    inputs: tuple[Path, Path, Path, Path], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Odmítnutí stráží jde stejnou cestou jako neplatný vstup."""
+    (inputs[0] / "synthetic.json").unlink()
+    monkeypatch.setenv("CLAUDECODE", "1")
+    assert main() is ExitCode.REFUSED
+
+
+@pytest.mark.usefixtures("cli_args")
+def test_cli_accepts_computation_and_current_cache() -> None:
+    """Úspěšný výpočet i použití cache mají návratový kód OK."""
+    assert main() is ExitCode.OK
+    assert main() is ExitCode.OK
