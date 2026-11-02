@@ -11,7 +11,8 @@ Signalizace odmítnutí, kterou dodržuje každý use case:
   nevrací jako hodnotu;
 - věcný výsledek kontroly je outcome typ, který vstupní bod mapuje na OK, BLOCKED
   nebo REFUSED; outcome s odmítnutím má jen use case, jehož výsledkem je výčet stavů
-  kontroly (audit, provenance), a jen pro předpoklady, které ověřuje sám;
+  kontroly (audit a provenance korpusu v ``mediparse.synthetic.application``),
+  a jen pro předpoklady, které ověřuje sám;
 - porušený invariant programu je obyčejná výjimka s tracebackem;
 - ``run`` nevrací ``None``;
 - data configu jsou argumenty ``run``, v polích dataclass jsou jen porty.
