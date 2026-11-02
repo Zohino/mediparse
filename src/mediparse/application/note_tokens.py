@@ -55,8 +55,10 @@ class MeasureNoteTokens:
 
     texts: Mapping[str, NoteTexts]
     samples: Mapping[str, NoteTexts]
-    tokenizers: Mapping[str, TokenLengths]
-    parallel_tokenizers: Mapping[str, TokenLengths]
+    xlmr: TokenLengths
+    mdeberta: TokenLengths
+    translategemma: TokenLengths
+    parallel_tokenizers: Sequence[tuple[str, TokenLengths]]
     splitter: TranslationSplitter
     sink: NoteTokenSink
 
@@ -69,7 +71,7 @@ class MeasureNoteTokens:
         total = sum(self._notes(table, source) for table, source in self.texts.items())
         for table, source in self.samples.items():
             self._sample(table, source)
-        for key, counter in self.parallel_tokenizers.items():
+        for key, counter in self.parallel_tokenizers:
             english = counter.lengths([en for _, en, _ in pairs])
             czech = counter.lengths([cs for _, _, cs in pairs])
             self.sink.parallel([
@@ -82,15 +84,17 @@ class MeasureNoteTokens:
         total = 0
         for batch in source.batches():
             texts = [text for _, text in batch]
-            lengths = [
-                self.tokenizers[key].lengths(texts)
-                for key in ("xlmr", "mdeberta", "translategemma")
-            ]
             self.sink.notes(
                 table,
                 [
                     NoteTokens(note[0], xlmr, mdeberta, gemma)
-                    for note, xlmr, mdeberta, gemma in zip(batch, *lengths, strict=True)
+                    for note, xlmr, mdeberta, gemma in zip(
+                        batch,
+                        self.xlmr.lengths(texts),
+                        self.mdeberta.lengths(texts),
+                        self.translategemma.lengths(texts),
+                        strict=True,
+                    )
                 ],
             )
             total += len(batch)

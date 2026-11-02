@@ -1,7 +1,9 @@
 """Délky tokenů zpráv, nastavení tokenizérů a fakta o dělení překladu."""
 
 from dataclasses import dataclass
-from typing import Literal
+from typing import Final, Literal
+
+TOKEN_TABLES: Final = ("discharge", "radiology")
 
 
 @dataclass(frozen=True)

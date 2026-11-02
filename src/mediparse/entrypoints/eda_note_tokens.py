@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING
 
 from mediparse.application.note_tokens import MeasureNoteTokens
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.note_tokens import TranslationPrompt
+from mediparse.domain.note_tokens import TOKEN_TABLES, TranslationPrompt
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.eda_cache import is_current, pending_cache
@@ -59,7 +59,7 @@ def run(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
     """
     database = EdaDatabase(parquet, environ)
     views = database.guarded_views()
-    for table in ("discharge", "radiology"):
+    for table in TOKEN_TABLES:
         if table not in views:
             msg = f"V adresáři tabulek chybí {table}.parquet."
             raise InvalidInputError(msg)
@@ -81,10 +81,10 @@ def run(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
         info.tokenizer: counter_for(info, loaded[info.tokenizer], parallel=False)
         for info in infos
     }
-    parallel_counters = {
-        info.tokenizer: counter_for(info, loaded[info.tokenizer], parallel=True)
+    parallel_counters = tuple(
+        (info.tokenizer, counter_for(info, loaded[info.tokenizer], parallel=True))
         for info in infos
-    }
+    )
     prompt = TranslationPrompt(
         prompt_overhead(
             script.prompt_ids(loaded["translategemma"], OVERHEAD_SENTENCE),
@@ -99,15 +99,11 @@ def run(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
     ):
         sink.settings(infos, prompt)
         total = MeasureNoteTokens(
-            {
-                name: ParquetNoteTexts(views[name])
-                for name in ("discharge", "radiology")
-            },
-            {
-                name: SampleNoteTexts(database, name)
-                for name in ("discharge", "radiology")
-            },
-            counters,
+            {name: ParquetNoteTexts(views[name]) for name in TOKEN_TABLES},
+            {name: SampleNoteTexts(database, name) for name in TOKEN_TABLES},
+            counters["xlmr"],
+            counters["mdeberta"],
+            counters["translategemma"],
             parallel_counters,
             ScriptSplitter(script, loaded["translategemma"]),
             sink,

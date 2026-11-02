@@ -11,6 +11,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.note_tokens import TOKEN_TABLES
 from mediparse.infrastructure.eda_cache import cache_key
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.hf_tokenizers import library_versions, tokenizer_specs
@@ -62,8 +63,7 @@ PARALLEL_SCHEMA: Final = pa.schema([
     pa.field("czech", pa.int32(), nullable=False),
 ])
 ARTIFACTS: Final = (
-    ("note_tokens_discharge.parquet", NOTE_TOKENS_SCHEMA),
-    ("note_tokens_radiology.parquet", NOTE_TOKENS_SCHEMA),
+    *((f"note_tokens_{table}.parquet", NOTE_TOKENS_SCHEMA) for table in TOKEN_TABLES),
     ("tokenizers.parquet", TOKENIZERS_SCHEMA),
     ("translation_prompt.parquet", PROMPT_SCHEMA),
     ("translation_sample.parquet", SAMPLE_SCHEMA),
@@ -160,10 +160,7 @@ def tokens_key(
         InvalidInputError: Vstup klíče nelze přečíst.
     """
     try:
-        inputs = [
-            (name, file_sha256(views[name]).encode())
-            for name in ("discharge", "radiology")
-        ]
+        inputs = [(name, file_sha256(views[name]).encode()) for name in TOKEN_TABLES]
         inputs.extend(
             (f"translation/{path.name}", path.read_bytes())
             for path in sorted(translation.glob("*.py"))

@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Final
 import duckdb
 
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.note_tokens import TOKEN_TABLES
 
 if TYPE_CHECKING:
     from collections.abc import Generator
@@ -33,7 +34,7 @@ class SampleNoteTexts:
         Raises:
             InvalidInputError: Vzorek nelze číst.
         """
-        if self.table not in {"discharge", "radiology"}:
+        if self.table not in TOKEN_TABLES:
             msg = "Vzorek musí pocházet z discharge nebo radiology."
             raise InvalidInputError(msg)
         # Řazení celých textů by při radiologii spillovalo gigabajty na disk.
