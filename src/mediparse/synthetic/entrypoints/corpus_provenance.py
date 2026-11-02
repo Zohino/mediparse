@@ -12,12 +12,6 @@ import sys
 from datetime import date
 from typing import TYPE_CHECKING
 
-from mediparse.domain.corpus_provenance import (
-    Generation,
-    model_id,
-    prompts_sha256,
-    semantic_version,
-)
 from mediparse.domain.digest import commit_sha
 from mediparse.entrypoints.cli import (
     argument,
@@ -27,6 +21,12 @@ from mediparse.entrypoints.cli import (
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.synthetic.application.corpus_provenance import (
     CorpusProvenance,
+)
+from mediparse.synthetic.domain.corpus_provenance import (
+    Generation,
+    model_id,
+    prompts_sha256,
+    semantic_version,
 )
 from mediparse.synthetic.entrypoints.corpus_cli import (
     add_corpus_option,

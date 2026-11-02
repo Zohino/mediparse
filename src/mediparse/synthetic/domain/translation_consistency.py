@@ -12,7 +12,7 @@ from mediparse.domain.note_text import DEID, deid_markers
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping, Sequence
 
-    from mediparse.domain.corpus_provenance import Masking
+    from mediparse.synthetic.domain.corpus_provenance import Masking
 
 LENGTH_RATIO: Final = (0.8, 1.6)
 _NUMBERED: Final = re.compile(r"\[\[\s*(\d+)\s*\]\]")

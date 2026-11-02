@@ -10,16 +10,16 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from mediparse.domain.corpus_provenance import ProvenanceRecord
 from mediparse.synthetic.application.corpus_gate import audit_violations
+from mediparse.synthetic.domain.corpus_provenance import ProvenanceRecord
 
 if TYPE_CHECKING:
-    from mediparse.domain.corpus_audit import AuditPin
-    from mediparse.domain.corpus_provenance import Generation
     from mediparse.synthetic.application.ports.corpus import (
         AuditedCorpus,
         ProvenanceCorpus,
     )
+    from mediparse.synthetic.domain.corpus_audit import AuditPin
+    from mediparse.synthetic.domain.corpus_provenance import Generation
 
 
 @dataclass(frozen=True)

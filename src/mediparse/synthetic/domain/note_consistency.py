@@ -5,7 +5,6 @@ from __future__ import annotations
 import re
 from typing import TYPE_CHECKING, Final, NamedTuple
 
-from mediparse.domain.note_structure import PreambleValue
 from mediparse.domain.note_text import (
     AGE_MARKER,
     AGE_SUFFIX,
@@ -16,15 +15,16 @@ from mediparse.domain.note_text import (
     line_headers,
     segment,
 )
+from mediparse.synthetic.domain.note_structure import PreambleValue
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping, Sequence
 
     from mediparse.domain.diagnosis import Diagnosis
-    from mediparse.domain.mentions import MentionModel
-    from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.note_structure import PreambleField, StructureModel
     from mediparse.domain.note_text import Sections
+    from mediparse.synthetic.domain.mentions import MentionModel
+    from mediparse.synthetic.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.note_structure import PreambleField, StructureModel
 
 _NUMERIC_AGE: Final = re.compile(rf"\b\d{{1,3}}{AGE_SUFFIX}", re.IGNORECASE)
 _FOREIGN_MARK: Final = re.compile(r"\[\*\*|\bXXX\b|(?<!_)(?:_{1,2}|_{4,})(?!_)")

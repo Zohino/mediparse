@@ -9,18 +9,18 @@ from typing import Final
 
 from pydantic import BaseModel, ConfigDict, PositiveInt
 
-from mediparse.domain.corpus_provenance import (
+from mediparse.domain.digest import CommitSha, Sha256
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.infrastructure.input_file import parse_file
+from mediparse.infrastructure.json_file import parse_lines
+from mediparse.synthetic.domain.corpus_provenance import (
     Decoding,
     Masking,
     Translation,
     TranslationRun,
 )
-from mediparse.domain.digest import CommitSha, Sha256
-from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.translation_consistency import TranslatedNote
-from mediparse.infrastructure.file_digest import file_sha256
-from mediparse.infrastructure.input_file import parse_file
-from mediparse.infrastructure.json_file import parse_lines
+from mediparse.synthetic.domain.translation_consistency import TranslatedNote
 
 REQUESTS_NAME: Final = "requests.json"
 RUNS_NAME: Final = "runs.jsonl"

@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from mediparse.domain.identity import SubjectId
-    from mediparse.domain.labels import LabelSet
+    from mediparse.synthetic.domain.labels import LabelSet
 
 
 @dataclass(frozen=True)

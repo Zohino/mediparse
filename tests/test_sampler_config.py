@@ -5,11 +5,11 @@ from __future__ import annotations
 from random import Random
 from typing import TYPE_CHECKING
 
-from mediparse.domain.note_structure import sample_structure
-from mediparse.domain.synthetic_patients import sample_notes
+from mediparse.synthetic.domain.note_structure import sample_structure
+from mediparse.synthetic.domain.synthetic_patients import sample_notes
 
 if TYPE_CHECKING:
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 
 def test_repository_config_samples_structure(sampler_config: SamplerConfig) -> None:

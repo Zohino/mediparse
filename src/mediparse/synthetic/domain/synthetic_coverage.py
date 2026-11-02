@@ -8,13 +8,13 @@ from typing import TYPE_CHECKING, Final
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.icd import IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.mentions import MentionStatus
+from mediparse.synthetic.domain.mentions import MentionStatus
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
     from mediparse.domain.icd import DiagnosisCodes
-    from mediparse.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.note_plan import NotePlan
 
 # Skupina absent dá ICD+ bez zmínky (P(zmínka | ICD+) < 1), skupina negated
 # ICD+ jen s negací (P(tvrzení | ICD+) < P(zmínka | ICD+)); velikost skupin

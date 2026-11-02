@@ -8,7 +8,7 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.mentions import (
+from mediparse.synthetic.domain.mentions import (
     DiagnosisMentions,
     Mention,
     MentionModel,
@@ -16,8 +16,8 @@ from mediparse.domain.mentions import (
     Negation,
     sample_mentions,
 )
-from mediparse.domain.note_structure import NoteStructure, Sex
-from mediparse.domain.synthetic_note import SyntheticNote
+from mediparse.synthetic.domain.note_structure import NoteStructure, Sex
+from mediparse.synthetic.domain.synthetic_note import SyntheticNote
 
 SEED = 20260929
 LARGE = 40000

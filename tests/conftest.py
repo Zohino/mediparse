@@ -11,10 +11,10 @@ from typing import TYPE_CHECKING, Final
 import pytest
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.mentions import Mention, MentionStatus
-from mediparse.domain.note_plan import NotePlan
-from mediparse.domain.note_structure import Sex
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.synthetic.domain.mentions import Mention, MentionStatus
+from mediparse.synthetic.domain.note_plan import NotePlan
+from mediparse.synthetic.domain.note_structure import Sex
 from mediparse.synthetic.entrypoints import corpus_audit, corpus_provenance
 from mediparse.synthetic.infrastructure.mimic_reference import MimicReference
 from mediparse.synthetic.infrastructure.plans_file import PlansFile
@@ -34,7 +34,7 @@ if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
     from pathlib import Path
 
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 type Rows = Sequence[tuple[str, str]]
 

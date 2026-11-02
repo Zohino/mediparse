@@ -7,8 +7,8 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.synthetic_plan import SamplerConfig
 from mediparse.infrastructure.input_file import parse_file
+from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 if TYPE_CHECKING:
     from pathlib import Path

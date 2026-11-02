@@ -172,9 +172,9 @@ ignore_imports = [
     "mediparse.application.cohort -> contextlib",
     "mediparse.synthetic.application.corpus_audit -> datetime",
     "mediparse.synthetic.application.plan_sampling -> random",
-    "mediparse.domain.mentions -> random",
-    "mediparse.domain.note_structure -> random",
-    "mediparse.domain.synthetic_patients -> random",
+    "mediparse.synthetic.domain.mentions -> random",
+    "mediparse.synthetic.domain.note_structure -> random",
+    "mediparse.synthetic.domain.synthetic_patients -> random",
     "mediparse.domain.** -> datetime",
     "mediparse.domain.** -> hashlib",
     "mediparse.domain.** -> math",
@@ -189,8 +189,14 @@ ignore_imports = [
     "mediparse.entrypoints.** -> os",
     "mediparse.entrypoints.** -> pathlib",
     "mediparse.entrypoints.** -> sys",
+    "mediparse.synthetic.domain.** -> datetime",
+    "mediparse.synthetic.domain.** -> hashlib",
     "mediparse.synthetic.domain.** -> math",
+    "mediparse.synthetic.domain.** -> pydantic",
+    "mediparse.synthetic.domain.** -> re",
+    "mediparse.synthetic.domain.** -> statistics",
     "mediparse.synthetic.domain.** -> string",
+    "mediparse.synthetic.domain.** -> unicodedata",
     "mediparse.synthetic.entrypoints.** -> argparse",
     "mediparse.synthetic.entrypoints.** -> datetime",
     "mediparse.synthetic.entrypoints.** -> logging",
@@ -259,25 +265,6 @@ forbidden_modules = [
 broken_contract_guidance = "Řádek vstupu je v domain.input_note a pravidla splitu v domain.split; párování syntetiky je v synthetic.domain.synthetic_mimic a trénink i souhrn smoketestu jsou samostatné kroky."
 
 [[tool.importlinter.contracts]]
-name = "Kroky experimentu nestojí na smoketestu ani syntetice"
-type = "forbidden"
-source_modules = [
-    "mediparse.application.model_training",
-    "mediparse.application.model_inference",
-    "mediparse.application.model_evaluation",
-    "mediparse.entrypoints.model_training",
-    "mediparse.entrypoints.model_inference",
-    "mediparse.entrypoints.model_evaluation",
-    "mediparse.entrypoints.training_input",
-    "mediparse.domain.model_inference",
-    "mediparse.domain.training",
-]
-forbidden_modules = [
-    "mediparse.synthetic.infrastructure.synthetic_corpus",
-]
-broken_contract_guidance = "Kroky experimentu jsou společné pro MIMIC i smoketest; syntetiku a výběr ukázek skládá samostatný vstupní bod smoketestu."
-
-[[tool.importlinter.contracts]]
 name = "Generátor smoketestu nestojí na pravidlech EDA"
 type = "forbidden"
 source_modules = [
@@ -296,52 +283,27 @@ broken_contract_guidance = "Smoketest používá jen labely plánu a výplňové
 name = "Provenance nestojí na auditu korpusu"
 type = "forbidden"
 source_modules = [
-    "mediparse.domain.environment",
-    "mediparse.domain.run_manifest",
-    "mediparse.domain.cohort",
-    "mediparse.domain.corpus_provenance",
-    "mediparse.domain.digest",
+    "mediparse.synthetic.domain.corpus_provenance",
 ]
 forbidden_modules = [
-    "mediparse.domain.corpus_audit",
+    "mediparse.synthetic.domain.corpus_audit",
 ]
-broken_contract_guidance = "Typy otisků (Sha256, CommitSha, commit_sha, fingerprint) jsou v domain.digest; corpus_audit je audit syntetického korpusu."
-
-[[tool.importlinter.contracts]]
-name = "Kohorta a evaluace nestojí na modelu labelů syntetiky"
-type = "forbidden"
-source_modules = [
-    "mediparse.domain.diagnosis",
-    "mediparse.domain.cohort",
-    "mediparse.domain.evaluation",
-    "mediparse.domain.icd",
-    "mediparse.domain.input_note",
-    "mediparse.domain.split",
-    "mediparse.application.cohort",
-    "mediparse.application.model_evaluation",
-    "mediparse.entrypoints.cohort",
-    "mediparse.infrastructure.duckdb_cohort",
-    "mediparse.infrastructure.note_table",
-]
-forbidden_modules = [
-    "mediparse.domain.labels",
-]
-broken_contract_guidance = "Diagnóza je v domain.diagnosis; labels je model labelů syntetiky (prevalence, IPF)."
+broken_contract_guidance = "Typy otisků (Sha256, CommitSha, commit_sha, fingerprint) jsou v domain.digest; synthetic.domain.corpus_audit je audit syntetického korpusu."
 
 [[tool.importlinter.contracts]]
 name = "Typy plánu syntetiky nestojí na losování pacientů"
 type = "forbidden"
 source_modules = [
-    "mediparse.domain.note_structure",
-    "mediparse.domain.mentions",
-    "mediparse.domain.note_plan",
-    "mediparse.domain.synthetic_plan",
-    "mediparse.domain.synthetic_note",
+    "mediparse.synthetic.domain.note_structure",
+    "mediparse.synthetic.domain.mentions",
+    "mediparse.synthetic.domain.note_plan",
+    "mediparse.synthetic.domain.synthetic_plan",
+    "mediparse.synthetic.domain.synthetic_note",
 ]
 forbidden_modules = [
-    "mediparse.domain.synthetic_patients",
+    "mediparse.synthetic.domain.synthetic_patients",
 ]
-broken_contract_guidance = "SyntheticNote je v domain.synthetic_note a PatientModel v domain.synthetic_plan; synthetic_patients je jen algoritmus losování."
+broken_contract_guidance = "SyntheticNote je v synthetic.domain.synthetic_note a PatientModel v synthetic.domain.synthetic_plan; synthetic_patients je jen algoritmus losování."
 
 [tool.ruff]
 fix = true

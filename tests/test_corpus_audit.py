@@ -3,7 +3,7 @@
 import pytest
 from pydantic import ValidationError
 
-from mediparse.domain.corpus_audit import (
+from mediparse.synthetic.domain.corpus_audit import (
     NGRAM_SIZE,
     AuditPin,
     NgramIndex,

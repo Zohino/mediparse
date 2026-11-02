@@ -15,13 +15,13 @@ from pydantic import (
 )
 
 from mediparse.domain.digest import CommitSha, Sha256, fingerprint
-from mediparse.domain.verbalization import render_prompt
+from mediparse.synthetic.domain.verbalization import render_prompt
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
-    from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 type Masking = Literal["[[n]]"]
 

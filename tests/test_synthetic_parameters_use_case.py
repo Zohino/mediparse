@@ -8,10 +8,10 @@ from dataclasses import dataclass, field
 import pytest
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.synthetic_parameters import SyntheticParameters
 from mediparse.synthetic.application.synthetic_parameters import (
     ParameterTransfer,
 )
+from mediparse.synthetic.domain.synthetic_parameters import SyntheticParameters
 from tests.support import export_payload
 
 KEYS = ("a", "b")

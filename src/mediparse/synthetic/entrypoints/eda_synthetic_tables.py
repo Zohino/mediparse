@@ -33,8 +33,8 @@ if TYPE_CHECKING:
     from mediparse.domain.icd import DiagnosisCodes
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.mimic_table import TableShape
-    from mediparse.domain.note_plan import NotePlan
     from mediparse.domain.section_headers import SectionLexicon
+    from mediparse.synthetic.domain.note_plan import NotePlan
 
 logger = logging.getLogger(__name__)
 

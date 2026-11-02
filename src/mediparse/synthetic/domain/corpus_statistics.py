@@ -7,18 +7,18 @@ import statistics
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from mediparse.domain.labels import label_shares, prevalence_outliers
-from mediparse.domain.note_consistency import measure_narrative
 from mediparse.domain.note_text import segment
+from mediparse.synthetic.domain.labels import label_shares, prevalence_outliers
+from mediparse.synthetic.domain.note_consistency import measure_narrative
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
     from mediparse.domain.diagnosis import Diagnosis
-    from mediparse.domain.labels import LabelModel
-    from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.note_structure import NarrativeModel, StructureModel
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.labels import LabelModel
+    from mediparse.synthetic.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.note_structure import NarrativeModel, StructureModel
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 
 @dataclass(frozen=True)

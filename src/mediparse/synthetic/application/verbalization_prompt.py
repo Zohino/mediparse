@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.verbalization import render_prompt
+from mediparse.synthetic.domain.verbalization import render_prompt
 
 if TYPE_CHECKING:
-    from mediparse.domain.synthetic_plan import SamplerConfig
     from mediparse.synthetic.application.ports.corpus import PlanSource
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 
 @dataclass(frozen=True)

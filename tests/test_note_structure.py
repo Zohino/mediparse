@@ -9,7 +9,7 @@ from statistics import median, stdev
 import pytest
 from pydantic import ValidationError
 
-from mediparse.domain.note_structure import (
+from mediparse.synthetic.domain.note_structure import (
     NarrativeModel,
     NoteStructure,
     PreambleField,
@@ -20,7 +20,7 @@ from mediparse.domain.note_structure import (
     Subheading,
     sample_structure,
 )
-from mediparse.domain.synthetic_note import SyntheticNote
+from mediparse.synthetic.domain.synthetic_note import SyntheticNote
 
 SEED = 20260929
 LARGE = 40000

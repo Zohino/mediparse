@@ -7,9 +7,9 @@ from typing import TYPE_CHECKING
 
 from pydantic import BaseModel, ConfigDict
 
-from mediparse.domain.corpus_audit import Position
 from mediparse.domain.identity import SubjectId
 from mediparse.infrastructure.json_file import write_model
+from mediparse.synthetic.domain.corpus_audit import Position
 
 if TYPE_CHECKING:
     from collections.abc import Collection, Sequence

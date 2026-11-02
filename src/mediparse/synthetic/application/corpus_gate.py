@@ -5,16 +5,16 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from mediparse.domain.corpus_audit import InvalidAuditRecordError
-from mediparse.domain.corpus_provenance import (
+from mediparse.domain.language import Language
+from mediparse.synthetic.domain.corpus_audit import InvalidAuditRecordError
+from mediparse.synthetic.domain.corpus_provenance import (
     InvalidProvenanceRecordError,
     provenance_violations,
 )
-from mediparse.domain.language import Language
 
 if TYPE_CHECKING:
-    from mediparse.domain.corpus_audit import AuditPin
     from mediparse.synthetic.application.ports.corpus import AuditedCorpus, GatedCorpus
+    from mediparse.synthetic.domain.corpus_audit import AuditPin
 
 
 @dataclass(frozen=True)

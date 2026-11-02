@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Final
 
 import pytest
 
-from mediparse.domain.corpus_provenance import (
+from mediparse.synthetic.domain.corpus_provenance import (
     ProvenanceRecord,
     Translation,
     model_id,
@@ -19,7 +19,7 @@ from mediparse.domain.corpus_provenance import (
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
     from tests.conftest import PlannedNote
 
 from tests.support import GENERATION_FIELDS, translation_record

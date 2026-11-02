@@ -6,8 +6,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Final
 
-from mediparse.domain.synthetic_parameters import SyntheticParameters
 from mediparse.infrastructure.input_file import parse_file
+from mediparse.synthetic.domain.synthetic_parameters import SyntheticParameters
 
 PARAMETERS_PATH: Final = Path("results/eda/8-mentions/parametry-syntetiky.json")
 

@@ -10,7 +10,7 @@ from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
 from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS, Diagnosis, PerDiagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.probability import Probability
+from mediparse.synthetic.domain.probability import Probability
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Collection, Mapping, Sequence

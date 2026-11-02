@@ -20,8 +20,8 @@ from tests.support import REPOSITORY_LABELS, REPOSITORY_PLANS
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 
 def test_repository_plans_match_a_fresh_run(

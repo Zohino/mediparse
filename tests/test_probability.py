@@ -2,7 +2,7 @@
 
 import pytest
 
-from mediparse.domain.probability import sums_to_one
+from mediparse.synthetic.domain.probability import sums_to_one
 
 
 @pytest.mark.parametrize("values", [[0.5, 0.5], [0.1] * 10])

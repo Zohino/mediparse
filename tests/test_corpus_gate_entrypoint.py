@@ -6,9 +6,9 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.domain.corpus_audit import InvalidAuditRecordError
-from mediparse.domain.corpus_provenance import InvalidProvenanceRecordError
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.synthetic.domain.corpus_audit import InvalidAuditRecordError
+from mediparse.synthetic.domain.corpus_provenance import InvalidProvenanceRecordError
 from mediparse.synthetic.entrypoints.corpus_gate import run
 from mediparse.synthetic.infrastructure.synthetic_corpus import (
     PROVENANCE_NAME,

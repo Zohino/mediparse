@@ -5,23 +5,23 @@ from __future__ import annotations
 from string import Template
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.mentions import MentionStatus
-from mediparse.domain.note_structure import PreambleValue
 from mediparse.domain.note_text import DEID
+from mediparse.synthetic.domain.mentions import MentionStatus
+from mediparse.synthetic.domain.note_structure import PreambleValue
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
     from collections.abc import Set as AbstractSet
 
     from mediparse.domain.diagnosis import Diagnosis
-    from mediparse.domain.mentions import Mention, MentionModel
-    from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.note_structure import (
+    from mediparse.synthetic.domain.mentions import Mention, MentionModel
+    from mediparse.synthetic.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.note_structure import (
         PreambleField,
         SectionModel,
         StructureModel,
     )
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 _STATUS_INSTRUCTIONS: Final = {
     MentionStatus.AFFIRMED: "state that the patient has it",

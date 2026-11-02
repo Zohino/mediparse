@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mediparse.domain.corpus_audit import AuditPin
 from mediparse.infrastructure.mimic_tables import load_reference_sha256
+from mediparse.synthetic.domain.corpus_audit import AuditPin
 from mediparse.synthetic.infrastructure.sampler_config import load_sampler_config
 
 if TYPE_CHECKING:

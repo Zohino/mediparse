@@ -7,7 +7,7 @@ import mediparse
 
 PACKAGE = Path(mediparse.__file__).parent
 AUDIT_MODULES = frozenset({
-    "domain/corpus_audit.py",
+    "synthetic/domain/corpus_audit.py",
     "synthetic/application/corpus_audit.py",
     "synthetic/entrypoints/corpus_audit.py",
     "synthetic/infrastructure/overlap_report.py",

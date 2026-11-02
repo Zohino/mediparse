@@ -15,14 +15,14 @@ from pydantic import (
 )
 
 from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
-from mediparse.domain.probability import Probability, sums_to_one
+from mediparse.synthetic.domain.probability import Probability, sums_to_one
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
     from random import Random
 
-    from mediparse.domain.note_structure import NoteStructure
-    from mediparse.domain.synthetic_note import SyntheticNote
+    from mediparse.synthetic.domain.note_structure import NoteStructure
+    from mediparse.synthetic.domain.synthetic_note import SyntheticNote
 
 
 class MentionStatus(StrEnum):

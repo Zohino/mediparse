@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from mediparse.domain.translation_consistency import (
+from mediparse.synthetic.domain.translation_consistency import (
     LENGTH_RATIO,
     marker_mismatches,
     translation_violations,

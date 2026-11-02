@@ -8,19 +8,19 @@ from typing import Final
 
 from pydantic import BaseModel, ValidationError
 
-from mediparse.domain.corpus_audit import (
-    AuditRecord,
-    InvalidAuditRecordError,
-)
-from mediparse.domain.corpus_provenance import (
-    InvalidProvenanceRecordError,
-    ProvenanceRecord,
-)
 from mediparse.domain.digest import fingerprint
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
+from mediparse.synthetic.domain.corpus_audit import (
+    AuditRecord,
+    InvalidAuditRecordError,
+)
+from mediparse.synthetic.domain.corpus_provenance import (
+    InvalidProvenanceRecordError,
+    ProvenanceRecord,
+)
 
 CORPUS_ROOT: Final = Path("resources/synthetic")
 RECORD_NAME: Final = "audit.json"

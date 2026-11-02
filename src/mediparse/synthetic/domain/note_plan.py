@@ -8,15 +8,15 @@ from pydantic import BaseModel, ConfigDict, NonNegativeInt, model_validator
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.identity import SubjectId
-from mediparse.domain.mentions import Mention
 from mediparse.domain.note import subject_of
-from mediparse.domain.note_structure import Sex
+from mediparse.synthetic.domain.mentions import Mention
+from mediparse.synthetic.domain.note_structure import Sex
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.domain.note_structure import NoteStructure
-    from mediparse.domain.synthetic_note import SyntheticNote
+    from mediparse.synthetic.domain.note_structure import NoteStructure
+    from mediparse.synthetic.domain.synthetic_note import SyntheticNote
 
 
 class NotePlan(BaseModel):

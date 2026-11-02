@@ -16,7 +16,6 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, assert_never
 
-from mediparse.domain.corpus_audit import NGRAM_SIZE
 from mediparse.domain.digest import commit_sha
 from mediparse.entrypoints.cli import (
     argument,
@@ -30,6 +29,7 @@ from mediparse.synthetic.application.corpus_audit import (
     AuditRefused,
     CorpusAudit,
 )
+from mediparse.synthetic.domain.corpus_audit import NGRAM_SIZE
 from mediparse.synthetic.entrypoints.corpus_cli import (
     add_corpus_option,
     add_sampler_config_option,

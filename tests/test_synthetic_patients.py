@@ -12,19 +12,19 @@ from pydantic import ValidationError
 
 from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS, Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import LabelModel
 from mediparse.domain.note import subject_of
-from mediparse.domain.synthetic_patients import (
+from mediparse.synthetic.domain.labels import LabelModel
+from mediparse.synthetic.domain.synthetic_patients import (
     PrevalenceNotReachedError,
     continuation_ratio,
     sample_notes,
 )
-from mediparse.domain.synthetic_plan import MIN_MULTIPLE_NOTES, PatientModel
+from mediparse.synthetic.domain.synthetic_plan import MIN_MULTIPLE_NOTES, PatientModel
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.domain.synthetic_note import SyntheticNote
+    from mediparse.synthetic.domain.synthetic_note import SyntheticNote
 
 PREVALENCE = {
     Diagnosis.DIABETES: 0.27,

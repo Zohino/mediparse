@@ -16,7 +16,7 @@ if TYPE_CHECKING:
     from mediparse.domain.icd import DiagnosisCodes
     from mediparse.domain.language import Language
     from mediparse.domain.mimic_table import TableShape
-    from mediparse.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.note_plan import NotePlan
 
 # Bez kódu ICD by filtr has_icd vyřadil zprávy bez labelu pětice.
 FILLER_CODES: Final[Mapping[IcdVersion, str]] = {

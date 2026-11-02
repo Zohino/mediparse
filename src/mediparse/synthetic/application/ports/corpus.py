@@ -7,10 +7,10 @@ from typing import TYPE_CHECKING, Protocol
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
-    from mediparse.domain.corpus_audit import AuditRecord
-    from mediparse.domain.corpus_provenance import ProvenanceRecord
     from mediparse.domain.language import Language
-    from mediparse.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.corpus_audit import AuditRecord
+    from mediparse.synthetic.domain.corpus_provenance import ProvenanceRecord
+    from mediparse.synthetic.domain.note_plan import NotePlan
 
 
 class PlanSource(Protocol):

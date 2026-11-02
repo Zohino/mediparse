@@ -6,10 +6,10 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.domain.verbalization import render_prompt
+from mediparse.synthetic.domain.verbalization import render_prompt
 
 if TYPE_CHECKING:
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
     from tests.conftest import PlannedNote
 
 

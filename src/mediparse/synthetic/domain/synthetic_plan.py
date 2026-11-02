@@ -14,10 +14,10 @@ from pydantic import (
 )
 
 from mediparse.domain.identity import SubjectId
-from mediparse.domain.labels import LabelModel
-from mediparse.domain.mentions import MentionModel
-from mediparse.domain.note_structure import StructureModel
-from mediparse.domain.probability import Probability
+from mediparse.synthetic.domain.labels import LabelModel
+from mediparse.synthetic.domain.mentions import MentionModel
+from mediparse.synthetic.domain.note_structure import StructureModel
+from mediparse.synthetic.domain.probability import Probability
 
 # Model pacientů je část schématu configu vzorkovače, proto neleží u algoritmu: v synthetic_patients
 # by na modulu losování stály config i typy plánu (SDP, hlídá kontrakt import-linteru).

@@ -5,18 +5,18 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from mediparse.domain.corpus_statistics import corpus_violations
 from mediparse.domain.language import Language
-from mediparse.domain.note_consistency import note_violations
-from mediparse.domain.translation_consistency import (
+from mediparse.synthetic.domain.corpus_statistics import corpus_violations
+from mediparse.synthetic.domain.note_consistency import note_violations
+from mediparse.synthetic.domain.translation_consistency import (
     marker_mismatches,
     translation_violations,
 )
 
 if TYPE_CHECKING:
-    from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.synthetic_plan import SamplerConfig
     from mediparse.synthetic.application.ports.corpus import NoteSource, PlanSource
+    from mediparse.synthetic.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 
 @dataclass(frozen=True)

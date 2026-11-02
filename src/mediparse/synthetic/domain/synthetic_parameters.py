@@ -7,8 +7,8 @@ from typing import TYPE_CHECKING, Annotated, Final, Self
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from mediparse.domain.mentions import DiagnosisMentions
-from mediparse.domain.probability import Probability
+from mediparse.synthetic.domain.mentions import DiagnosisMentions
+from mediparse.synthetic.domain.probability import Probability
 
 if TYPE_CHECKING:
     from collections.abc import Mapping

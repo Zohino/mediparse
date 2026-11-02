@@ -7,7 +7,8 @@ from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import (
+from mediparse.domain.note import note_id
+from mediparse.synthetic.domain.labels import (
     LabelModel,
     LabelSet,
     acute_given_chronic,
@@ -15,9 +16,8 @@ from mediparse.domain.labels import (
     max_entropy_joint,
     prevalence_outliers,
 )
-from mediparse.domain.note import note_id
-from mediparse.domain.synthetic_note import SyntheticNote
-from mediparse.domain.synthetic_plan import MIN_MULTIPLE_NOTES, PatientModel
+from mediparse.synthetic.domain.synthetic_note import SyntheticNote
+from mediparse.synthetic.domain.synthetic_plan import MIN_MULTIPLE_NOTES, PatientModel
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence

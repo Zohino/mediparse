@@ -7,9 +7,9 @@ import gzip
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.corpus_audit import ReferenceNote
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.synthetic.domain.corpus_audit import ReferenceNote
 
 if TYPE_CHECKING:
     from collections.abc import Iterator

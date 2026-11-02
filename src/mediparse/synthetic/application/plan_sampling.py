@@ -6,17 +6,17 @@ from dataclasses import dataclass
 from itertools import starmap
 from typing import TYPE_CHECKING, Protocol
 
-from mediparse.domain.mentions import sample_mentions
-from mediparse.domain.note_plan import note_plan
-from mediparse.domain.note_structure import sample_structure
-from mediparse.domain.synthetic_patients import sample_notes
+from mediparse.synthetic.domain.mentions import sample_mentions
+from mediparse.synthetic.domain.note_plan import note_plan
+from mediparse.synthetic.domain.note_structure import sample_structure
+from mediparse.synthetic.domain.synthetic_patients import sample_notes
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Sequence
     from random import Random
 
-    from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 
 class PlanStore(Protocol):

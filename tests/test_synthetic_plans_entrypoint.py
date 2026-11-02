@@ -5,8 +5,8 @@ from __future__ import annotations
 import json
 from typing import TYPE_CHECKING
 
-from mediparse.domain.note_plan import NotePlan
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.synthetic.domain.note_plan import NotePlan
 from mediparse.synthetic.entrypoints.synthetic_plans import run
 from tests.support import REPOSITORY_CONFIG
 
@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
     import pytest
 
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 
 def test_entrypoint_writes_one_valid_plan_per_note(

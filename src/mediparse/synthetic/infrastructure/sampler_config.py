@@ -10,12 +10,12 @@ from typing import TYPE_CHECKING, Any, Final
 from pydantic import BaseModel, ConfigDict, ValidationError
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.labels import IpfNotConvergedError, max_entropy_joint
-from mediparse.domain.synthetic_plan import SamplerConfig
 from mediparse.infrastructure.input_file import parse_file
+from mediparse.synthetic.domain.labels import IpfNotConvergedError, max_entropy_joint
+from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
 
 if TYPE_CHECKING:
-    from mediparse.domain.synthetic_parameters import SyntheticParameters
+    from mediparse.synthetic.domain.synthetic_parameters import SyntheticParameters
 
 SAMPLER_CONFIG_PATH: Final = Path("config/synthetic_plan.json")
 _JSON_INDENT: Final = 2

@@ -5,10 +5,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
-from mediparse.domain.synthetic_parameters import required_notes
+from mediparse.synthetic.domain.synthetic_parameters import required_notes
 
 if TYPE_CHECKING:
-    from mediparse.domain.synthetic_parameters import SyntheticParameters
+    from mediparse.synthetic.domain.synthetic_parameters import SyntheticParameters
 
 
 class ParameterExport(Protocol):

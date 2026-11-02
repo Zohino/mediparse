@@ -16,14 +16,14 @@ from pydantic import (
     model_validator,
 )
 
-from mediparse.domain.probability import Probability, sums_to_one
+from mediparse.synthetic.domain.probability import Probability, sums_to_one
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
     from random import Random
 
     from mediparse.domain.identity import SubjectId
-    from mediparse.domain.synthetic_note import SyntheticNote
+    from mediparse.synthetic.domain.synthetic_note import SyntheticNote
 
 
 class Sex(StrEnum):

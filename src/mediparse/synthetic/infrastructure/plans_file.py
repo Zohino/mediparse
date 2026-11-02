@@ -7,9 +7,9 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.note_plan import NotePlan
 from mediparse.infrastructure.input_file import parse_file
 from mediparse.infrastructure.json_file import parse_lines
+from mediparse.synthetic.domain.note_plan import NotePlan
 from mediparse.synthetic.infrastructure.synthetic_corpus import CORPUS_ROOT
 
 if TYPE_CHECKING:

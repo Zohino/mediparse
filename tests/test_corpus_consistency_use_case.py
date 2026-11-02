@@ -13,8 +13,8 @@ from mediparse.synthetic.application.corpus_consistency import (
 from tests.support import PlansFake
 
 if TYPE_CHECKING:
-    from mediparse.domain.note_plan import NotePlan
-    from mediparse.domain.synthetic_plan import SamplerConfig
+    from mediparse.synthetic.domain.note_plan import NotePlan
+    from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
     from tests.conftest import PlannedNote
 
 

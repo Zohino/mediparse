@@ -6,9 +6,9 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.domain.corpus_audit import AuditPin
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.mimic_tables import load_reference_sha256
+from mediparse.synthetic.domain.corpus_audit import AuditPin
 from mediparse.synthetic.infrastructure.audit_pin import load_audit_pin
 from tests.support import REPOSITORY_CONFIG, REPOSITORY_TABLES
 
