@@ -74,6 +74,9 @@ only_mutate = [
     "src/mediparse/domain/*",
     "src/mediparse/application/*",
     "src/mediparse/infrastructure/*",
+    "src/mediparse/synthetic/domain/*",
+    "src/mediparse/synthetic/application/*",
+    "src/mediparse/synthetic/infrastructure/*",
 ]
 pytest_add_cli_args_test_selection = ["--ignore=tests/test_architecture.py"]
 also_copy = [
