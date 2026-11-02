@@ -97,7 +97,8 @@ containers = [
     "mediparse",
     "mediparse.synthetic",
 ]
-# Syntetika dostane application a infrastructure až s nástrojem korpusu v S95d2.
+# Závorky jsou kvůli kontejneru mediparse.synthetic: nemá vrstvu synthetic ani
+# application a infrastructure; jádro poslední dvě má, takže mu nepovinnost nic nepovolí.
 layers = [
     "(synthetic)",
     "entrypoints",

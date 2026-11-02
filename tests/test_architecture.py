@@ -193,7 +193,9 @@ def test_rule_import_check_finds_violations(tmp_path: Path) -> None:
         "        z\n"
         "if True:\n"
         "    from mediparse.application.q import w\n"
-        "from mediparse.entrypoints.ok import fine\n",
+        "from mediparse.synthetic.domain.x import y\n"
+        "from mediparse.entrypoints.ok import fine\n"
+        "from mediparse.synthetic.entrypoints.ok import fine\n",
         encoding="utf-8",
     )
 
@@ -201,6 +203,7 @@ def test_rule_import_check_finds_violations(tmp_path: Path) -> None:
         "bad.smk importuje mediparse.domain.x",
         "bad.smk importuje mediparse",
         "bad.smk importuje mediparse.application.q",
+        "bad.smk importuje mediparse.synthetic.domain.x",
     ]
 
 
@@ -563,17 +566,24 @@ def test_eda_import_check_finds_violations(tmp_path: Path) -> None:
     """Reticulate v R smí vstupovat jen přes entrypointy."""
     document = tmp_path / "bad.qmd"
     document.write_text(
-        '```{r}\nx <- import("mediparse.domain.x")\n```\n', encoding="utf-8"
+        '```{r}\nx <- import("mediparse.domain.x")\n'
+        'y <- import("mediparse.synthetic.domain.x")\n'
+        'z <- import("mediparse.synthetic.entrypoints.ok")\n```\n',
+        encoding="utf-8",
     )
     r_file = tmp_path / "bad.R"
     r_file.write_text(
         'x <- reticulate::import("mediparse.infrastructure.x")\n'
-        'y <- import("mediparse.entrypoints.ok")\n',
+        'y <- import("mediparse.entrypoints.ok")\n'
+        'z <- import("mediparse.synthetic.domain.x")\n'
+        'w <- import("mediparse.synthetic.entrypoints.ok")\n',
         encoding="utf-8",
     )
     assert _eda_import_violations(_eda_files(tmp_path)) == [
         "bad.qmd importuje mediparse.domain.x",
+        "bad.qmd importuje mediparse.synthetic.domain.x",
         "bad.R importuje mediparse.infrastructure.x",
+        "bad.R importuje mediparse.synthetic.domain.x",
     ]
 
 
