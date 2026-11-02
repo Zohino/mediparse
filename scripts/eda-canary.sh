@@ -5,7 +5,7 @@
 #
 # Buňka nese prefix s pomlčkou; provenance uvádí prefix bez pomlčky za ním, proto se hledá
 # s ní. Tokeny ze samých písmen (písmena prefixu a jedinečné číslo zapsané písmeny,
-# viz domain/synthetic_sentinel.py) přežijí tokenizaci, která pomlčky zahodí, a mají DF = 1.
+# viz synthetic/domain/synthetic_sentinel.py) přežijí tokenizaci, která pomlčky zahodí, a mají DF = 1.
 # Vlastní token má první řádek i tělo každé části zprávy; target BHC se počítá až z textu
 # s tokeny. Kanárek tak zachytí i únik z n-gramů po sekcích, těla a targetu BHC,
 # následující části (next_part) a textu po stripu D2.
