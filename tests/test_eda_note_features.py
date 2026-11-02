@@ -3,13 +3,15 @@
 from __future__ import annotations
 
 import json
-from typing import TYPE_CHECKING
+from pathlib import Path
+from unittest.mock import Mock
 
 import pyarrow as pa
 import pyarrow.parquet as pq
 import pytest
 
 from mediparse.domain.data_access import DataAccessError
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.eda_note_features import run
 from mediparse.infrastructure import note_features_cache
 from mediparse.infrastructure.note_features_cache import cache_key, is_current
@@ -20,9 +22,6 @@ from tests.support import (
     REPOSITORY_DIAGNOSIS_CANDIDATES,
     REPOSITORY_SECTION_HEADERS,
 )
-
-if TYPE_CHECKING:
-    from pathlib import Path
 
 
 @pytest.fixture
@@ -66,7 +65,14 @@ def test_second_run_preserves_bytes_mtimes_and_matches_fresh_computation(
     fresh = out.parent / "fresh"
     assert run(parquet, lexicon, candidates, fresh, {"CLAUDECODE": "1"}) is True
     for name, _ in ARTIFACTS:
-        assert pq.read_table(fresh / name).equals(pq.read_table(out / name))
+        actual = pq.read_table(out / name)
+        assert pq.read_table(fresh / name).equals(actual)
+        assert actual.equals(
+            pq.read_table(REPOSITORY / "tests/fixtures/contracts" / name)
+        )
+    first = pq.read_table(out / "note_preprocessing.parquet").to_pylist()[0]
+    # Ručně: raw má deset tokenů; normalizace rozdělí 5mg a rozvine AF, obojí přidá jeden.
+    assert (first["tokens_raw"], first["tokens_preprocessed"]) == (10, 12)
 
 
 @pytest.mark.parametrize("changed", ["lexicon", "candidates", "discharge"])
@@ -148,13 +154,22 @@ def test_interrupted_sink_does_not_publish_cache(
     assert list(inputs[3].iterdir()) == []
 
 
-def test_guard_precedes_any_parquet_read(inputs: tuple[Path, Path, Path, Path]) -> None:
+def test_guard_precedes_any_parquet_read(
+    inputs: tuple[Path, Path, Path, Path],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     """Bez značky syntetiky stráž odmítne i nečitelný parquet před hashováním."""
     parquet, _, _, out = inputs
     (parquet / "synthetic.json").unlink()
     (parquet / "discharge.parquet").write_bytes(b"not parquet")
+    hash_file = Mock(return_value="0" * 64)
+    open_parquet = Mock(wraps=pq.ParquetFile)
+    monkeypatch.setattr(note_features_cache, "file_sha256", hash_file)
+    monkeypatch.setattr(pq, "ParquetFile", open_parquet)
     with pytest.raises(DataAccessError):
         run(*inputs, {"CLAUDECODE": "1"})
+    hash_file.assert_not_called()
+    open_parquet.assert_not_called()
     assert not out.exists()
 
 
@@ -189,3 +204,31 @@ def test_r_aggregation_fixtures_equal_writer(tmp_path: Path) -> None:
         compute([(row["note_id"], row["text"]) for row in notes], sink)
     for name, _ in ARTIFACTS:
         assert pq.read_table(tmp_path / name).equals(pq.read_table(directory / name))
+
+
+def test_interrupted_publication_invalidates_old_and_new_key(
+    inputs: tuple[Path, Path, Path, Path],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Směs artefaktů po přerušení publikace nesmí zplatnit starý ani nový klíč."""
+    parquet, lexicon, candidates, out = inputs
+    assert run(*inputs, {}) is True
+    discharge = parquet / "discharge.parquet"
+    key_a = cache_key(discharge, lexicon, candidates)
+    lexicon.write_bytes(lexicon.read_bytes() + b" ")
+    key_b = cache_key(discharge, lexicon, candidates)
+    replace = Path.replace
+
+    def interrupted(path: Path, target: Path) -> Path:
+        if target.name == "note_preprocessing.parquet":
+            msg = "přerušená publikace"
+            raise OSError(msg)
+        return replace(path, target)
+
+    monkeypatch.setattr(Path, "replace", interrupted)
+    with pytest.raises(
+        InvalidInputError, match="Cache měření zpráv nelze publikovat: OSError\\."
+    ):
+        run(*inputs, {})
+    assert is_current(out, key_a) is False
+    assert is_current(out, key_b) is False
