@@ -12,14 +12,15 @@ use_feature_fixtures <- function(con, env = parent.frame()) {
   for (file in c("note_sections.parquet", "note_preprocessing.parquet", "note_acronyms.parquet")) {
     DBI::dbExecute(con, sprintf("
       COPY (
-        SELECT coalesce(d.note_id, f.note_id) AS note_id, f.* EXCLUDE (note_id)
+        SELECT d.note_id, f.* EXCLUDE (note_id)
         FROM read_parquet(%s) f JOIN %s l USING (note_id)
-        LEFT JOIN discharge d ON d.text = l.text
+        JOIN discharge d ON d.text = l.text
       ) TO %s (FORMAT parquet)",
       DBI::dbQuoteString(con, file.path(FEATURE_FIXTURES, file)), lookup,
       DBI::dbQuoteString(con, file.path(directory, file))
     ))
   }
+  writeLines("{}", file.path(directory, "cache.json"))
   invisible(directory)
 }
 

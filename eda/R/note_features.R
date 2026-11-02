@@ -1,6 +1,9 @@
 feature_source <- function(con, file, columns) {
   directory <- Sys.getenv("MEDIPARSE_EDA_CACHE")
   if (directory == "") stop("Chybí MEDIPARSE_EDA_CACHE; spusťte render skriptem EDA.")
+  if (!file.exists(file.path(directory, "cache.json"))) {
+    stop("cache není publikovaná; spusťte mediparse-eda-note-features")
+  }
   path <- file.path(directory, file)
   if (!file.exists(path)) stop(sprintf("Soubor %s neexistuje; spusťte nástroj mediparse-eda-note-features.", path))
   source <- sprintf("read_parquet(%s)", DBI::dbQuoteString(con, path))

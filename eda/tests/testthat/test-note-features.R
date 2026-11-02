@@ -1,7 +1,10 @@
 test_that("fixtury Pythonu splňují nezávislé kontrakty EDA včetně seznamů tokenů", {
   con <- DBI::dbConnect(duckdb::duckdb())
   withr::defer(DBI::dbDisconnect(con, shutdown = TRUE))
-  withr::local_envvar(MEDIPARSE_EDA_CACHE = CONTRACT_FIXTURES)
+  directory <- withr::local_tempdir()
+  file.copy(list.files(CONTRACT_FIXTURES, pattern = "^note_.*[.]parquet$", full.names = TRUE), directory)
+  writeLines("{}", file.path(directory, "cache.json"))
+  withr::local_envvar(MEDIPARSE_EDA_CACHE = directory)
   for (item in list(
     list("note_sections.parquet", SECTION_COLUMNS),
     list("note_preprocessing.parquet", PREPROCESSING_COLUMNS),
@@ -24,7 +27,9 @@ test_that("čtení cache vyžaduje umístění a existující soubor", {
   withr::defer(DBI::dbDisconnect(con, shutdown = TRUE))
   withr::local_envvar(MEDIPARSE_EDA_CACHE = "")
   expect_error(feature_source(con, "note_sections.parquet", SECTION_COLUMNS), "Chybí MEDIPARSE_EDA_CACHE")
-  Sys.setenv(MEDIPARSE_EDA_CACHE = withr::local_tempdir())
+  directory <- withr::local_tempdir()
+  writeLines("{}", file.path(directory, "cache.json"))
+  Sys.setenv(MEDIPARSE_EDA_CACHE = directory)
   expect_error(feature_source(con, "note_sections.parquet", SECTION_COLUMNS), "neexistuje")
 })
 
@@ -34,4 +39,42 @@ test_that("opakované čtení sekcí ponechá materializovanou tabulku", {
   DBI::dbExecute(con, sprintf("DELETE FROM %s", SECTIONS_TABLE))
   expect_identical(segment_corpus(con), SECTIONS_TABLE)
   expect_equal(DBI::dbGetQuery(con, sprintf("SELECT count(*) AS n FROM %s", SECTIONS_TABLE))$n, 0)
+})
+
+test_that("segment_corpus odmítne nesprávný typ z publikované cache", {
+  con <- mimic_con()
+  directory <- withr::local_tempdir()
+  withr::local_envvar(MEDIPARSE_EDA_CACHE = directory)
+  path <- file.path(directory, "note_sections.parquet")
+  fixture <- file.path(CONTRACT_FIXTURES, "note_sections.parquet")
+  DBI::dbExecute(con, sprintf("
+    COPY (
+      SELECT note_id, position::BIGINT AS position, section, span_chars, body_chars,
+        body_masked, body_start, body_end FROM read_parquet(%s)
+    ) TO %s (FORMAT parquet)", DBI::dbQuoteString(con, fixture), DBI::dbQuoteString(con, path)
+  ))
+  writeLines("{}", file.path(directory, "cache.json"))
+
+  expect_error(segment_corpus(con), "sloupec position")
+})
+
+test_that("čtení cache odmítne hotový parquet bez publikačního markeru", {
+  con <- mimic_con()
+  directory <- withr::local_tempdir()
+  withr::local_envvar(MEDIPARSE_EDA_CACHE = directory)
+  file.copy(file.path(CONTRACT_FIXTURES, "note_sections.parquet"), directory)
+
+  expect_error(segment_corpus(con), "cache není publikovaná; spusťte mediparse-eda-note-features", fixed = TRUE)
+})
+
+test_that("fixtura cache obsahuje jen zprávy discharge a pro prázdnou tabulku je prázdná", {
+  con <- mimic_con()
+  directory <- use_feature_fixtures(con)
+  for (file in c("note_sections.parquet", "note_preprocessing.parquet", "note_acronyms.parquet")) {
+    count <- DBI::dbGetQuery(con, sprintf(
+      "SELECT count(*) AS n FROM read_parquet(%s)", DBI::dbQuoteString(con, file.path(directory, file))
+    ))$n
+    expect_equal(count, 0)
+  }
+  expect_identical(corpus_acronyms(con), character())
 })

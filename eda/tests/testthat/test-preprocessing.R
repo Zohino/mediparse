@@ -1,7 +1,6 @@
 PATH <- candidates_path()
 # corpus_con předřadí každé zprávě řádek `xxx… h<n>`, což jsou dva tokeny v obou variantách.
 PADDING_TOKENS <- 2L
-ACRONYM_KEYS <- c("AF", "CKD", "COPD", "DM", "DM2", "ESRD")
 
 test_that("note_preprocessing připojí zprávy vstupního korpusu a podruhé nepřepočítá", {
   con <- corpus_con(c("Pt AF", "Pt DM2 and DM", "Pt"))
@@ -135,10 +134,9 @@ test_that("nulové výskyty a jmenovatel dají nedefinovaný podíl a vlastní v
 test_that("acronym_summary nad prázdným korpusem nespadne", {
   summary <- af_summary(list(texts = character(), codes = character()))
 
-  expect_equal(nrow(summary), length(ACRONYM_KEYS))
-  expect_true(all(is.na(summary$podil)))
-  expect_equal(acronym_table(summary)$vyskyty, rep("0", nrow(summary)))
-  expect_match(acronym_text(summary), "zkratka nemá výskyt", fixed = TRUE)
+  expect_equal(nrow(summary), 0L)
+  expect_equal(nrow(acronym_table(summary)), 0L)
+  expect_match(acronym_text(summary), "nelze posoudit", fixed = TRUE)
 })
 
 test_that("acronym_summary bez zkratek vrátí prázdný souhrn a tabulku", {
