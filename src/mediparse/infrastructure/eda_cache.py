@@ -8,51 +8,43 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import TYPE_CHECKING, Final
 
-import sklearn
-
 from mediparse.domain.digest import fingerprint
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.file_digest import file_sha256
-from mediparse.infrastructure.note_features_table import ARTIFACTS
 
 if TYPE_CHECKING:
-    from collections.abc import Generator
+    from collections.abc import Generator, Sequence
 
 FORMAT_VERSION: Final = "1"
 PACKAGE: Final = Path(__file__).parents[1]
 CACHE_FILE: Final = "cache.json"
 
 
-def cache_key(discharge: Path, lexicon: Path, candidates: Path) -> str:
-    """Otisk vstupu, konfigurace, formátu, Python kódu a verze scikit-learn.
+def cache_key(inputs: Sequence[tuple[str, bytes]]) -> str:
+    """Spojí pojmenované vstupy skupiny s formátem a obsahem balíčku.
 
     Returns:
         SHA-256 klíč cache.
 
     Raises:
-        InvalidInputError: Vstup klíče nelze přečíst.
+        InvalidInputError: Kód balíčku nelze přečíst.
     """
-    # Commit by zneplatnil cache i po kosmetické změně sešitu; celý balíček naopak
-    # zachytí změnu parseru či analyzéru bez křehkého seznamu importovaných modulů.
+    # Commit by invalidoval i po změně sešitu; celý balíček zachytí změny
+    # algoritmů bez křehkého seznamu importovaných modulů.
     try:
-        files = [
+        return fingerprint([
             ("format", FORMAT_VERSION.encode()),
-            ("discharge", file_sha256(discharge).encode()),
-            ("lexicon", lexicon.read_bytes()),
-            ("candidates", candidates.read_bytes()),
-            ("scikit-learn", sklearn.__version__.encode()),
-        ]
-        files.extend(
-            (path.relative_to(PACKAGE).as_posix(), path.read_bytes())
-            for path in sorted(PACKAGE.rglob("*.py"))
-        )
-        return fingerprint(files)
+            *inputs,
+            *(
+                (path.relative_to(PACKAGE).as_posix(), path.read_bytes())
+                for path in sorted(PACKAGE.rglob("*.py"))
+            ),
+        ])
     except OSError as error:
         msg = f"Vstup klíče cache nelze přečíst: {type(error).__name__}."
         raise InvalidInputError(msg) from None
 
 
-def is_current(directory: Path, key: str) -> bool:
+def is_current(directory: Path, key: str, artifacts: Sequence[str]) -> bool:
     """Ověří klíč a existenci všech artefaktů bez čtení řádkových dat.
 
     Returns:
@@ -65,12 +57,14 @@ def is_current(directory: Path, key: str) -> bool:
     return (
         isinstance(manifest, dict)
         and manifest.get("key") == key
-        and all((directory / name).is_file() for name, _ in ARTIFACTS)
+        and all((directory / name).is_file() for name in artifacts)
     )
 
 
 @contextmanager
-def pending_cache(directory: Path, key: str) -> Generator[Path]:
+def pending_cache(
+    directory: Path, key: str, artifacts: Sequence[str]
+) -> Generator[Path]:
     """Publikuje hotové soubory atomicky po souborech s klíčem jako posledním.
 
     Yields:
@@ -84,15 +78,17 @@ def pending_cache(directory: Path, key: str) -> Generator[Path]:
         with TemporaryDirectory(prefix="pending-", dir=directory) as temporary:
             staging = Path(temporary)
             yield staging
-            _publish(staging, directory, key)
+            _publish(staging, directory, key, artifacts)
     except OSError as error:
         msg = f"Cache měření zpráv nelze publikovat: {type(error).__name__}."
         raise InvalidInputError(msg) from None
 
 
-def _publish(staging: Path, directory: Path, key: str) -> None:
+def _publish(
+    staging: Path, directory: Path, key: str, artifacts: Sequence[str]
+) -> None:
     (staging / CACHE_FILE).write_text(json.dumps({"key": key}) + "\n", encoding="utf-8")
     # Starý klíč nesmí zplatnit směs souborů, pokud publikaci přeruší chyba.
     (directory / CACHE_FILE).unlink(missing_ok=True)
-    for name in [*(name for name, _ in ARTIFACTS), CACHE_FILE]:
+    for name in [*artifacts, CACHE_FILE]:
         (staging / name).replace(directory / name)

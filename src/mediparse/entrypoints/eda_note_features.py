@@ -13,16 +13,17 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
-from mediparse.infrastructure.eda_duckdb import EdaDatabase
-from mediparse.infrastructure.note_features_cache import (
-    cache_key,
+from mediparse.infrastructure.eda_cache import (
     is_current,
     pending_cache,
 )
+from mediparse.infrastructure.eda_duckdb import EdaDatabase
 from mediparse.infrastructure.note_features_table import (
+    ARTIFACTS,
     ParquetNoteFeatures,
-    ParquetNoteTexts,
+    note_features_key,
 )
+from mediparse.infrastructure.note_texts_parquet import ParquetNoteTexts
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
 
@@ -53,14 +54,15 @@ def run(
         msg = "V adresáři tabulek chybí discharge.parquet."
         raise InvalidInputError(msg)
     discharge = views["discharge"]
-    key = cache_key(discharge, lexicon, candidates)
-    if is_current(out, key):
+    key = note_features_key(discharge, lexicon, candidates)
+    artifacts = tuple(name for name, _ in ARTIFACTS)
+    if is_current(out, key, artifacts):
         logger.info("cache platí")
         return False
     parsed = load_section_lexicon(lexicon)
     normalization = load_text_normalization(candidates)
     with (
-        pending_cache(out, key) as temporary,
+        pending_cache(out, key, artifacts) as temporary,
         ParquetNoteFeatures(temporary).writer() as sink,
     ):
         total = ComputeNoteFeatures(

@@ -129,10 +129,10 @@ def test_missing_directory_is_an_error_not_a_clean_result(tmp_path: Path) -> Non
 
 @EDA_PRESENT
 @pytest.mark.parametrize("number", ["1", "4", "9"])
-def test_render_script_prepares_features_only_for_notebook_nine(
+def test_render_script_prepares_cache_for_its_consumer(
     tmp_path: Path, number: str
 ) -> None:
-    """Izolované stuby spouštějí přípravu cache jen pro spotřebitele sešitu 9."""
+    """Izolované stuby spouštějí jen skupinu cache požadovaného sešitu."""
     scripts = tmp_path / "scripts"
     scripts.mkdir()
     render = scripts / "eda.sh"
@@ -145,7 +145,8 @@ def test_render_script_prepares_features_only_for_notebook_nine(
     commands.mkdir()
     stubs = {
         "git": "#!/bin/sh\nexit 0\n",
-        "mediparse-eda-note-features": '#!/bin/sh\nprintf "%s\\n" "$*" >> "$EDA_TEST_CALLS"\n',
+        "mediparse-eda-note-features": '#!/bin/sh\nprintf "features %s\\n" "$*" >> "$EDA_TEST_CALLS"\n',
+        "mediparse-eda-note-tokens": '#!/bin/sh\nprintf "tokens %s\\n" "$*" >> "$EDA_TEST_CALLS"\n',
     }
     for name, text in stubs.items():
         command = commands / name
@@ -170,7 +171,17 @@ def test_render_script_prepares_features_only_for_notebook_nine(
         timeout=60,
     )
     assert result.returncode == CLEAN, result.stderr
-    assert calls.exists() is (number == "9")
+    assert calls.exists() is (number in {"4", "9"})
+    if number in {"4", "9"}:
+        group = "tokens" if number == "4" else "features"
+        line = calls.read_text(encoding="utf-8")
+        assert line.startswith(f"{group} --parquet {tmp_path / 'tables'} ")
+        assert line.count("\n") == 1
+        assert f"--out {tmp_path / 'cache'}" in line
+        if number == "4":
+            assert f"--translation {tmp_path / 'translation'}" in line
+            assert f"--english {tmp_path / 'resources/synthetic/en'}" in line
+            assert f"--czech {tmp_path / 'resources/synthetic/cs'}" in line
 
 
 @EDA_PRESENT

@@ -19,7 +19,7 @@ import logging
 import statistics
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Any, Final, cast
 
 from markers import PLACEHOLDER, mask
 from note_parts import UnsplittableError, part_ids, split
@@ -63,7 +63,10 @@ def main() -> int:
     logging.basicConfig(format=LOG_FORMAT)
     logger.setLevel(logging.INFO)
     args = _parser().parse_args()
-    tokenizer = AutoTokenizer.from_pretrained(MODEL, revision=REVISION)
+    tokenizer = cast(
+        "PreTrainedTokenizerBase",
+        AutoTokenizer.from_pretrained(MODEL, revision=REVISION),
+    )
     paths = sorted(args.source.glob("*.txt"))
     if not paths:
         logger.error("V %s nejsou žádné zprávy.", args.source)
@@ -133,7 +136,9 @@ def _token_ids(tokenizer: PreTrainedTokenizerBase, text: str) -> list[int]:
         "target_lang_code": TARGET_LANG,
         "text": text,
     }
-    token_ids = tokenizer.apply_chat_template(
+    # Anotace transformers nezahrnují multimodální content ani nezúží návrat
+    # při return_dict=True; chat šablona translategemma oba tvary vyžaduje.
+    token_ids: list[int] = cast("Any", tokenizer).apply_chat_template(
         [{"role": "user", "content": [content]}],
         tokenize=True,
         add_generation_prompt=True,

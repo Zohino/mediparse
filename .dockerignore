@@ -13,6 +13,7 @@
 !resources/synthetic/
 !resources/icd/
 !results/mimic/manifest.json
+!translation/prepare.py
 !translation/note_parts.py
 !translation/markers.py
 !translation/collect.py

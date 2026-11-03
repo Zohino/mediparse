@@ -16,9 +16,10 @@ from mediparse.domain.data_access import DataAccessError
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.eda_note_features import main, run
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure import note_features_cache
-from mediparse.infrastructure.note_features_cache import cache_key, is_current
+from mediparse.infrastructure import eda_cache, note_features_table
+from mediparse.infrastructure.eda_cache import is_current
 from mediparse.infrastructure.note_features_table import ARTIFACTS, ParquetNoteFeatures
+from mediparse.infrastructure.note_features_table import note_features_key as cache_key
 from tests.note_features_support import CONTRACT_NOTES, compute
 from tests.support import (
     REPOSITORY,
@@ -113,14 +114,14 @@ def test_implementation_changes_invalidate_key(
     package.mkdir()
     module = package / "one.py"
     module.write_text("one", encoding="utf-8")
-    monkeypatch.setattr(note_features_cache, "PACKAGE", package)
+    monkeypatch.setattr(eda_cache, "PACKAGE", package)
     before = cache_key(parquet / "discharge.parquet", lexicon, candidates)
     if changed == "code":
         module.rename(package / "two.py")
     elif changed == "version":
-        monkeypatch.setattr(note_features_cache.sklearn, "__version__", "changed")
+        monkeypatch.setattr(note_features_table.sklearn, "__version__", "changed")
     else:
-        monkeypatch.setattr(note_features_cache, "FORMAT_VERSION", "changed")
+        monkeypatch.setattr(eda_cache, "FORMAT_VERSION", "changed")
     assert cache_key(parquet / "discharge.parquet", lexicon, candidates) != before
 
 
@@ -132,10 +133,10 @@ def test_missing_artifact_or_invalid_manifest_is_not_current(
     run(*inputs, {})
     key = cache_key(parquet / "discharge.parquet", lexicon, candidates)
     (out / ARTIFACTS[0][0]).unlink()
-    assert not is_current(out, key)
+    assert not is_current(out, key, [name for name, _ in ARTIFACTS])
     run(*inputs, {})
     (out / "cache.json").write_text("[]", encoding="utf-8")
-    assert not is_current(out, key)
+    assert not is_current(out, key, [name for name, _ in ARTIFACTS])
 
 
 def test_interrupted_sink_does_not_publish_cache(
@@ -167,7 +168,7 @@ def test_guard_precedes_any_parquet_read(
     (parquet / "discharge.parquet").write_bytes(b"not parquet")
     hash_file = Mock(return_value="0" * 64)
     open_parquet = Mock(wraps=pq.ParquetFile)
-    monkeypatch.setattr(note_features_cache, "file_sha256", hash_file)
+    monkeypatch.setattr(note_features_table, "file_sha256", hash_file)
     monkeypatch.setattr(pq, "ParquetFile", open_parquet)
     with pytest.raises(DataAccessError):
         run(*inputs, {"CLAUDECODE": "1"})
@@ -233,8 +234,8 @@ def test_interrupted_publication_invalidates_old_and_new_key(
         InvalidInputError, match="Cache měření zpráv nelze publikovat: OSError\\."
     ):
         run(*inputs, {})
-    assert is_current(out, key_a) is False
-    assert is_current(out, key_b) is False
+    assert is_current(out, key_a, [name for name, _ in ARTIFACTS]) is False
+    assert is_current(out, key_b, [name for name, _ in ARTIFACTS]) is False
 
 
 @pytest.fixture
