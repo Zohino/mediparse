@@ -20,12 +20,16 @@ def parse_file[T](path: Path, parse: Callable[[str], T]) -> T:
         Výsledek parseru.
 
     Raises:
-        InvalidInputError: Soubor neexistuje nebo jeho obsah neodpovídá schématu.
+        InvalidInputError: Soubor neexistuje, nelze ho přečíst v UTF-8 nebo jeho obsah
+            neodpovídá schématu.
     """
     try:
         return parse(path.read_text(encoding="utf-8"))
     except FileNotFoundError as error:
         msg = f"Soubor {path} neexistuje."
+        raise InvalidInputError(msg) from error
+    except (OSError, UnicodeError) as error:
+        msg = f"Soubor {path} nelze přečíst."
         raise InvalidInputError(msg) from error
     except ValidationError as error:
         msg = f"Soubor {path} neodpovídá schématu:\n{error}"

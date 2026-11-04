@@ -48,14 +48,18 @@ def test_missing_rule_is_invalid_input(tmp_path: Path) -> None:
         load_input_corpus_rule(tmp_path / "missing.json")
 
 
+@pytest.mark.parametrize("failure", ["permission", "utf8"])
 def test_unreadable_rule_is_invalid_input(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str
 ) -> None:
-    """Chyba oprávnění při čtení configu je doménová chyba."""
+    """Chyba oprávnění i skutečné neplatné bajty UTF-8 jsou doménová chyba."""
 
     def denied(*_args: object, **_kwargs: object) -> str:
         raise PermissionError
 
-    monkeypatch.setattr(Path, "read_text", denied)
+    path = tmp_path / "rule.json"
+    path.write_bytes(b'{"min_chars": 100}\xff')
+    if failure == "permission":
+        monkeypatch.setattr(Path, "read_text", denied)
     with pytest.raises(InvalidInputError):
-        load_input_corpus_rule(tmp_path / "rule.json")
+        load_input_corpus_rule(path)
