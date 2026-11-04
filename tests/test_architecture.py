@@ -12,6 +12,7 @@ from typing import TYPE_CHECKING, Any
 
 import pytest
 from pydantic import BaseModel
+from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 
 import mediparse
 import mediparse.domain
@@ -711,3 +712,10 @@ def test_eda_connection_constants_match_python() -> None:
     assert spill is not None
     assert memory.group(1) == DEFAULT_MEMORY
     assert spill.group(1) == SPILL_DIRECTORY
+
+
+@EDA_PRESENT
+def test_eda_stop_words_match_sklearn() -> None:
+    """EDA drží přesně seřazený seznam anglických stop slov sklearn."""
+    words = (EDA / "stop-words.txt").read_text(encoding="utf-8").splitlines()
+    assert words == sorted(ENGLISH_STOP_WORDS)

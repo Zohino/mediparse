@@ -13,10 +13,8 @@ FLOOR_TABLE <- "ngram_floor_input"
 TOKENS_TABLE <- "ngram_tokens_input"
 NGRAM_COLUMNS <- c("sekce", "n", "ngram", "zpravy", "vyskyty", "jmenovatel")
 
-# Stejná stop slova jako `TfidfVectorizer(stop_words = "english")`, tedy i negace "no" a "not".
-stop_words <- function() {
-  frozen <- reticulate::import("sklearn.feature_extraction.text", convert = FALSE)$ENGLISH_STOP_WORDS
-  as.character(unlist(reticulate::import_builtins()$sorted(frozen)))
+stop_words <- function(path = project_path("eda", "stop-words.txt")) {
+  readLines(path, encoding = "UTF-8")
 }
 
 empty_counts <- function() {
