@@ -156,3 +156,33 @@ def test_main_exit_codes(
         monkeypatch.setenv(name, value)
     assert eda_provenance.main() is (ExitCode.OK if valid else ExitCode.REFUSED)
     assert out.exists() is valid
+
+
+def test_run_preserves_json_bytes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Zápis zachovává konkrétní bajty UTF-8, pořadí, odsazení i koncový řádek."""
+    details = {
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "dirty": "false",
+        "pixi_lock_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "data_source": "syntetické tabulky (prefix ukázka)",
+        "python": "3.13.9",
+        "duckdb": "1.5.6",
+    }
+    monkeypatch.setattr(eda_provenance, "provenance", lambda *_: details)
+    out = tmp_path / "output" / "provenance.json"
+    eda_provenance.run(tmp_path, tmp_path, out, {})
+    assert (
+        out.read_bytes()
+        == (
+            "{\n"
+            '  "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",\n'
+            '  "dirty": "false",\n'
+            '  "pixi_lock_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",\n'
+            '  "data_source": "syntetické tabulky (prefix ukázka)",\n'
+            '  "python": "3.13.9",\n'
+            '  "duckdb": "1.5.6"\n'
+            "}\n"
+        ).encode()
+    )

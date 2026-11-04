@@ -1,17 +1,19 @@
-"""Sdílený formát JSON souborů: zápis modelu či slovníku a čtení JSON Lines."""
+"""Sdílený formát JSON souborů: zápis modelu a čtení JSON Lines."""
 
 from __future__ import annotations
 
-import json
 from typing import TYPE_CHECKING
 
-from mediparse.domain.inputs import InvalidInputError
+from pydantic import RootModel
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Mapping
+    from collections.abc import Callable
     from pathlib import Path
 
     from pydantic import BaseModel
+
+
+StringMapping = RootModel[dict[str, str]]
 
 
 def write_model(path: Path, model: BaseModel) -> None:
@@ -41,20 +43,3 @@ def parse_lines[T: BaseModel](model: type[T]) -> Callable[[str], tuple[T, ...]]:
         )
 
     return parse
-
-
-def write_mapping(path: Path, values: Mapping[str, str]) -> None:
-    """Zapíše položky JSON v pořadí slovníku v UTF-8 s koncovým řádkem.
-
-    Raises:
-        InvalidInputError: Výstup nelze zapsat.
-    """
-    try:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(
-            json.dumps(dict(values), ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8",
-        )
-    except OSError as error:
-        msg = f"Soubor {path} nelze zapsat."
-        raise InvalidInputError(msg) from error

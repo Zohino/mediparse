@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, Final
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
-from mediparse.infrastructure.json_file import write_mapping
+from mediparse.infrastructure.json_file import StringMapping, write_model
 from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_mimic_tables
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.source_revision import revision_source
@@ -57,14 +57,14 @@ def _data_source(root: Path, parquet: Path) -> dict[str, str]:
 
 def run(root: Path, parquet: Path, out: Path, environ: Mapping[str, str]) -> None:
     """Zapíše provenance renderu do souboru pro nezávislé čtení v R."""
-    write_mapping(out, provenance(environ, root, parquet))
+    write_model(out, StringMapping(provenance(environ, root, parquet)))
 
 
 def main() -> ExitCode:
     """Nastaví logování a načte cesty zdrojů a výstupu.
 
     Returns:
-        OK po zápisu, REFUSED při odmítnutém vstupu nebo výstupu.
+        OK po zápisu, REFUSED při odmítnutém vstupu.
     """
     configure_logging()
     return _run_cli()
