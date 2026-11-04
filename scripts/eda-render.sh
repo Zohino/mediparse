@@ -2,8 +2,8 @@
 
 eda_stage() {
     local root=$1 work=$2
-    # Sešit 9 sourcuje kontrolu kontraktu sdílenou s analýzou relativní cestou.
-    (cd "$root" && tar --create --exclude=eda/_freeze --exclude=eda/.quarto eda analysis/R/contract.R) | tar --extract --directory "$work"
+    # Sešity načítají sdílené funkce mimo adresář EDA relativní cestou.
+    (cd "$root" && tar --create --exclude=eda/_freeze --exclude=eda/.quarto eda R/thesis) | tar --extract --directory "$work"
 }
 
 eda_revision() {

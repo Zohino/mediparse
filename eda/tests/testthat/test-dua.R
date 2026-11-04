@@ -4,6 +4,13 @@ test_that("dua_decimal zaokrouhlí na jedno desetinné místo s čárkou", {
   expect_equal(dua_decimal(c(1, 2.25)), c("1,0", "2,2"))
 })
 
+test_that("dua_decimal odděluje tisíce a zachová zaokrouhlení i znaménko", {
+  expect_equal(dua_decimal(1234.56), "1\u00a0234,6")
+  expect_equal(dua_decimal(1234567.8), "1\u00a0234\u00a0567,8")
+  expect_equal(dua_decimal(12.34), "12,3")
+  expect_equal(dua_decimal(-10.06), "-10,1")
+})
+
 test_that("format_number odděluje tisíce nezlomitelnou mezerou", {
   expect_equal(format_number(1234567), paste0("1", NBSP, "234", NBSP, "567"))
 })

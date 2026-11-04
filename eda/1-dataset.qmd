@@ -6,10 +6,10 @@ abstract: |
 
 ```{r}
 #| include: false
-source("R/dua.R")
+source("../R/thesis/dua.R")
 source("R/db.R")
 source("R/corpus.R")
-source("R/export.R")
+source("../R/thesis/export.R")
 con <- eda_connect()
 tables <- sort(DBI::dbListTables(con), method = "radix")
 counts <- data.frame(

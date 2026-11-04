@@ -6,13 +6,13 @@ abstract: |
 
 ```{r}
 #| include: false
-source("R/dua.R")
+source("../R/thesis/dua.R")
 source("R/db.R")
 source("R/patients.R")
 source("R/text.R")
 source("R/selection.R")
 source("R/demographics.R")
-source("R/export.R")
+source("../R/thesis/export.R")
 con <- eda_connect()
 summary <- demographic_summary(con)
 counts <- attribute_counts(con)

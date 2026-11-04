@@ -3,10 +3,9 @@ if (length(args) != 4L) {
   stop("Použití: Rscript analysis/scripts/metrics-report.R <metrics> <manifest> <out> <candidates>")
 }
 
-# Sazba práce má jednu kopii v EDA; její umístění přehodnotí WP-9.
-source("eda/R/dua.R")
-source("eda/R/export.R")
-source("analysis/R/contract.R")
+source("R/thesis/dua.R")
+source("R/thesis/export.R")
+source("R/thesis/contract.R")
 source("analysis/R/metrics.R")
 source("analysis/R/provenance.R")
 

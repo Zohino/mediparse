@@ -608,9 +608,34 @@ def test_analysis_metric_threshold_matches_cohort() -> None:
 
 @EDA_PRESENT
 @ANALYSIS_PRESENT
+def test_eda_and_analysis_do_not_source_each_other() -> None:
+    """EDA a analýza sdílejí R funkce bez zpětných a křížových závislostí."""
+    thesis_files = sorted((REPOSITORY / "R/thesis").rglob("*.R"))
+    assert thesis_files
+    inspected = set()
+    violations = []
+    for files, forbidden in (
+        (_render_sources(EDA), "analysis"),
+        (_render_sources(ANALYSIS), "eda"),
+        (thesis_files, "(?:eda|analysis)"),
+    ):
+        inspected.update(file.suffix for file in files)
+        pattern = re.compile(rf"""\b(?:sys\.)?source\s*\(\s*["'][^"']*\b{forbidden}/""")
+        violations.extend(
+            str(file.relative_to(REPOSITORY))
+            for file in files
+            if pattern.search(file.read_text(encoding="utf-8"))
+        )
+
+    assert {".qmd", ".R"} <= inspected
+    assert violations == []
+
+
+@EDA_PRESENT
+@ANALYSIS_PRESENT
 def test_eda_and_analysis_do_not_use_reticulate() -> None:
     """R a Quarto čtou soubory bez živého Pythonu přes reticulate."""
-    for root in (EDA, ANALYSIS):
+    for root in (EDA, ANALYSIS, REPOSITORY / "R/thesis"):
         assert _reticulate_violations(_render_sources(root)) == []
 
 

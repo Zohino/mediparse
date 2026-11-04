@@ -6,13 +6,13 @@ abstract: |
 
 ```{r}
 #| include: false
-source("R/dua.R")
+source("../R/thesis/dua.R")
 source("R/db.R")
 source("R/text.R")
-source("../analysis/R/contract.R")
+source("../R/thesis/contract.R")
 source("R/note_features.R")
 source("R/tokens.R")
-source("R/export.R")
+source("../R/thesis/export.R")
 con <- eda_connect()
 tables <- c("discharge", "radiology")
 metadata <- tokenizer_settings(con)

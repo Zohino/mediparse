@@ -443,7 +443,7 @@ test_that("tabulka kandidátů uvádí české popisky a pásmo", {
 
 test_that("kód v izolovaném prostředí nepotřebuje demographics.R", {
   env <- new.env(parent = baseenv())
-  sys.source("../../R/dua.R", envir = env)
+  sys.source("../../../R/thesis/dua.R", envir = env)
   sys.source("../../R/diagnoses.R", envir = env)
 
   expect_equal(env$UNKNOWN_LABEL, "neuvedeno")
