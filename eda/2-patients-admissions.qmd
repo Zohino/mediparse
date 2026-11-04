@@ -6,10 +6,10 @@ abstract: |
 
 ```{r}
 #| include: false
-source("R/dua.R")
+source("../R/thesis/dua.R")
 source("R/db.R")
 source("R/patients.R")
-source("R/export.R")
+source("../R/thesis/export.R")
 con <- eda_connect()
 summary_d <- patient_summary(con)
 per_patient <- notes_per_patient(con)

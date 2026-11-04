@@ -6,10 +6,10 @@ abstract: |
 
 ```{r}
 #| include: false
-source("R/dua.R")
+source("../R/thesis/dua.R")
 source("R/db.R")
 source("R/text.R")
-source("R/export.R")
+source("../R/thesis/export.R")
 con <- eda_connect()
 tables <- c("discharge", "radiology")
 percentiles <- length_percentiles(con, tables)

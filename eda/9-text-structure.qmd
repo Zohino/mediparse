@@ -6,10 +6,10 @@ abstract: |
 
 ```{r}
 #| include: false
-source("R/dua.R")
+source("../R/thesis/dua.R")
 source("R/czech.R")
 source("R/db.R")
-source("../analysis/R/contract.R")
+source("../R/thesis/contract.R")
 source("R/note_features.R")
 source("R/patients.R")
 source("R/text.R")
@@ -20,7 +20,7 @@ source("R/segments.R")
 source("R/ngrams.R")
 source("R/bhc.R")
 source("R/preprocessing.R")
-source("R/export.R")
+source("../R/thesis/export.R")
 con <- eda_connect()
 lexicon <- read_section_headers(section_headers_path())
 ranking <- header_ranking(con, lexicon)

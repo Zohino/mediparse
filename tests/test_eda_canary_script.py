@@ -232,21 +232,24 @@ def test_render_script_prepares_cache_for_its_consumer(
 
 
 @EDA_PRESENT
-def test_staging_includes_shared_contract_and_excludes_render_cache(
+def test_staging_includes_shared_thesis_code_and_excludes_render_cache(
     tmp_path: Path,
 ) -> None:
-    """Pracovní kopie má sdílený kontrakt ve správné relativní cestě bez freeze."""
+    """Pracovní kopie má sdílené R funkce bez analýzy a cache renderu."""
     root, work = tmp_path / "root", tmp_path / "work"
     work.mkdir()
-    for name in ("eda/_freeze", "eda/.quarto", "analysis/R"):
+    for name in ("eda/_freeze", "eda/.quarto", "analysis/R", "R/thesis"):
         (root / name).mkdir(parents=True)
     for name in (
         "eda/_freeze/old",
         "eda/.quarto/old",
         "eda/9.qmd",
         "analysis/R/contract.R",
+        "R/thesis/dua.R",
+        "R/thesis/export.R",
+        "R/thesis/contract.R",
     ):
-        (root / name).write_text("zkonstruovaná fixtura", encoding="utf-8")
+        (root / name).write_text(f"zkonstruovaná fixtura {name}", encoding="utf-8")
     result = subprocess.run(
         [
             "bash",
@@ -264,9 +267,11 @@ def test_staging_includes_shared_contract_and_excludes_render_cache(
         timeout=60,
     )
     assert result.returncode == CLEAN, result.stderr
-    assert (work / "analysis/R/contract.R").read_bytes() == (
-        root / "analysis/R/contract.R"
-    ).read_bytes()
+    for name in ("dua.R", "export.R", "contract.R"):
+        assert (work / "R/thesis" / name).read_bytes() == (
+            root / "R/thesis" / name
+        ).read_bytes()
+    assert not (work / "analysis").exists()
     assert (work / "eda/9.qmd").exists()
     assert not (work / "eda/_freeze").exists()
     assert not (work / "eda/.quarto").exists()

@@ -6,14 +6,14 @@ abstract: |
 
 ```{r}
 #| include: false
-source("R/dua.R")
+source("../R/thesis/dua.R")
 source("R/czech.R")
 source("R/db.R")
 source("R/patients.R")
 source("R/text.R")
 source("R/selection.R")
 source("R/diagnoses.R")
-source("R/export.R")
+source("../R/thesis/export.R")
 con <- eda_connect()
 candidates <- read_candidates(candidates_path())
 era <- era_summary(con)
