@@ -6,7 +6,6 @@ abstract: |
 
 ```{r}
 #| include: false
-library(reticulate)
 source("R/dua.R")
 source("R/czech.R")
 source("R/db.R")
@@ -15,7 +14,6 @@ source("R/text.R")
 source("R/selection.R")
 source("R/diagnoses.R")
 source("R/export.R")
-eda_check_python()
 con <- eda_connect()
 candidates <- read_candidates(candidates_path())
 era <- era_summary(con)

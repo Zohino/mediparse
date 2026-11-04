@@ -4,11 +4,16 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from pydantic import RootModel
+
 if TYPE_CHECKING:
     from collections.abc import Callable
     from pathlib import Path
 
     from pydantic import BaseModel
+
+
+StringMapping = RootModel[dict[str, str]]
 
 
 def write_model(path: Path, model: BaseModel) -> None:

@@ -2,9 +2,15 @@
 
 from __future__ import annotations
 
+import argparse
+import os
+from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
+from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
+from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.infrastructure.json_file import StringMapping, write_model
 from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_mimic_tables
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.source_revision import revision_source
@@ -12,7 +18,6 @@ from mediparse.infrastructure.synthetic_marker import read_marker
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
-    from pathlib import Path
 
 LOCK_NAME: Final = "pixi.lock"
 PACKAGES: Final = ("python", "duckdb")
@@ -48,3 +53,28 @@ def _data_source(root: Path, parquet: Path) -> dict[str, str]:
         "data_source": "otisky CSV z config/mimic_tables.json",
         **{f"csv_sha256 {name}": table.sha256 for name, table in tables.items()},
     }
+
+
+def run(root: Path, parquet: Path, out: Path, environ: Mapping[str, str]) -> None:
+    """Zapíše provenance renderu do souboru pro nezávislé čtení v R."""
+    write_model(out, StringMapping(provenance(environ, root, parquet)))
+
+
+def main() -> ExitCode:
+    """Nastaví logování a načte cesty zdrojů a výstupu.
+
+    Returns:
+        OK po zápisu, REFUSED při odmítnutém vstupu.
+    """
+    configure_logging()
+    return _run_cli()
+
+
+@refusing_invalid_input
+def _run_cli() -> ExitCode:
+    parser = argparse.ArgumentParser(description=__doc__)
+    for name in ("root", "parquet", "out"):
+        parser.add_argument(f"--{name}", type=Path, required=True)
+    args = parser.parse_args()
+    run(args.root, args.parquet, args.out, os.environ)
+    return ExitCode.OK

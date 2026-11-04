@@ -23,6 +23,7 @@ from mediparse.entrypoints.cli import (
     refusing_invalid_input,
 )
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.data_access_rules import load_data_access_rules
 from mediparse.synthetic.application.corpus_audit import (
     AuditClean,
     AuditOverlap,
@@ -74,6 +75,7 @@ def run(argv: Sequence[str], environ: Mapping[str, str]) -> ExitCode:
         corpus=CorpusDirectory(args.corpus),
         references=tuple(MimicReference(path) for path in references),
         report=OverlapReportFile(args.report),
+        access=load_data_access_rules(),
     )
     outcome = audit.run(
         environ,

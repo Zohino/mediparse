@@ -8,9 +8,9 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.domain.data_access import BLOCKING_VARIABLES
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
+from mediparse.infrastructure.data_access_rules import load_data_access_rules
 from mediparse.synthetic.application.corpus_audit import (
     AuditClean,
     AuditOverlap,
@@ -25,6 +25,7 @@ from tests.support import (
     PINNED,
     SENTENCE,
     SHORT_TEXT,
+    blocking_reason,
 )
 
 if TYPE_CHECKING:
@@ -154,6 +155,7 @@ def _audit(
         corpus=corpus,
         references=(reference,),
         report=report,
+        access=load_data_access_rules(),
     )
 
 
@@ -266,7 +268,7 @@ def test_empty_corpus_is_refused() -> None:
         {}, COMMIT, CREATED_AT, DISCHARGE_PIN
     )
 
-    assert isinstance(outcome, AuditRefused)
+    assert outcome == AuditRefused("Korpus neobsahuje žádnou zprávu.")
 
 
 def test_empty_reference_is_refused_without_record() -> None:
@@ -419,7 +421,7 @@ def test_environment_refusal_carries_shared_reason(name: str) -> None:
         _Corpus({Language.EN: {NOTE_ID: SENTENCE}}), _UntouchableReference(), _Report()
     ).run({name: "1"}, COMMIT, CREATED_AT, DISCHARGE_PIN)
 
-    assert outcome == AuditRefused(BLOCKING_VARIABLES[name])
+    assert outcome == AuditRefused(blocking_reason(name))
 
 
 @pytest.mark.parametrize("name", ["CI", "CLAUDECODE"])
@@ -432,4 +434,4 @@ def test_environment_refusal_precedes_workspace_refusal(name: str) -> None:
         _Workspace(missing=("discharge.csv.gz",)),
     ).run({name: "1"}, COMMIT, CREATED_AT, DISCHARGE_PIN)
 
-    assert outcome == AuditRefused(BLOCKING_VARIABLES[name])
+    assert outcome == AuditRefused(blocking_reason(name))

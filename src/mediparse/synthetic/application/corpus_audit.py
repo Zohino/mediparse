@@ -11,7 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
-from mediparse.domain.data_access import blocked_reason
+from mediparse.domain.data_access import DataAccessRules, blocked_reason
 from mediparse.domain.language import Language
 from mediparse.domain.note import InvalidNoteIdError, subject_of
 from mediparse.synthetic.application.ports.corpus import FingerprintedCorpus, NoteSource
@@ -141,6 +141,7 @@ class CorpusAudit:
     corpus: SyntheticCorpus
     references: Sequence[Reference]
     report: OverlapReport
+    access: DataAccessRules
 
     def run(
         self,
@@ -179,7 +180,9 @@ class CorpusAudit:
     ) -> _CheckedCorpus | AuditRefused:
         # Pořadí je bezpečnostní: odmítnutí kvůli prostředí a korpusu přijdou dřív, než
         # se sáhne na referenci, a otisk reference (čte celý soubor) dřív než její zprávy.
-        problem = blocked_reason(environ) or _workspace_problem(self.workspace)
+        problem = blocked_reason(environ, self.access) or _workspace_problem(
+            self.workspace
+        )
         if problem is not None:
             return AuditRefused(problem)
         sha256 = self.corpus.fingerprint()

@@ -6,7 +6,6 @@ abstract: |
 
 ```{r}
 #| include: false
-library(reticulate)
 source("R/dua.R")
 source("R/czech.R")
 source("R/db.R")
@@ -22,7 +21,6 @@ source("R/ngrams.R")
 source("R/bhc.R")
 source("R/preprocessing.R")
 source("R/export.R")
-eda_check_python()
 con <- eda_connect()
 lexicon <- read_section_headers(section_headers_path())
 ranking <- header_ranking(con, lexicon)

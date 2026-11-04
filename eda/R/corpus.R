@@ -32,8 +32,8 @@ mimic_catalog <- function() {
   )
 }
 
-# jsonlite obchází přetečení S31h: reticulate při read_manifest převede int nad
-# 2^31 − 1 na R integer s přetečením. Tvar JSON zrcadlí _Inventory
+# Počty nad 2^31 − 1 potřebují numeric; jsonlite je nepřevádí do 32bitového integer.
+# Tvar JSON zrcadlí _Inventory
 # v infrastructure/mimic_inventory.py, jméno tabulky table_name v domain/mimic_table.py.
 manifest_tables <- function(path) {
   manifest <- jsonlite::read_json(path)
@@ -132,7 +132,8 @@ PROVENANCE_LABELS <- c(
   data_source = "Zdroj dat",
   python = "Python",
   duckdb = "DuckDB",
-  r = "R"
+  r = "R",
+  `r-duckdb` = "r-duckdb"
 )
 
 provenance_table <- function(details) {
@@ -147,4 +148,20 @@ provenance_table <- function(details) {
   digest <- grepl("^[0-9a-f]{64}$", values)
   values[digest] <- gsub("(.{16})(?=.)", "\\1 ", values[digest], perl = TRUE)
   data.frame(Položka = unname(labels), Hodnota = values)
+}
+
+eda_provenance <- function(path = Sys.getenv("MEDIPARSE_EDA_PROVENANCE")) {
+  if (!nzchar(path) || !file.exists(path)) {
+    stop("Chybí provenance renderu; spusťte nástroj mediparse-eda-provenance.", call. = FALSE)
+  }
+  details <- jsonlite::read_json(path)
+  required <- c("commit", "dirty", "pixi_lock_sha256", "data_source")
+  valid <- is.list(details) && all(required %in% names(details)) &&
+    all(vapply(details, function(value) {
+      is.character(value) && length(value) == 1L && !is.na(value)
+    }, logical(1)))
+  if (!valid) {
+    stop("Neplatná provenance renderu; spusťte nástroj mediparse-eda-provenance.", call. = FALSE)
+  }
+  details
 }

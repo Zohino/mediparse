@@ -5,14 +5,9 @@
 ```{r}
 #| include: false
 source("R/corpus.R")
-provenance_module <- reticulate::import("mediparse.entrypoints.eda_provenance")
-pathlib <- reticulate::import("pathlib")
-details <- provenance_module$provenance(
-  as.list(Sys.getenv()),
-  pathlib$Path(Sys.getenv("PIXI_PROJECT_ROOT")),
-  pathlib$Path(eda_parquet_dir())
-)
+details <- eda_provenance()
 details[["r"]] <- R.version.string
+details[["r-duckdb"]] <- as.character(utils::packageVersion("duckdb"))
 DBI::dbDisconnect(con, shutdown = TRUE)
 ```
 

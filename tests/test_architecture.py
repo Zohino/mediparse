@@ -12,11 +12,14 @@ from typing import TYPE_CHECKING, Any
 
 import pytest
 from pydantic import BaseModel
+from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 
 import mediparse
 import mediparse.domain
 import mediparse.synthetic.domain
 from mediparse.domain.cohort import MIN_CELL, CohortCounts
+from mediparse.infrastructure.duckdb_parquet import SPILL_DIRECTORY
+from mediparse.infrastructure.eda_duckdb import DEFAULT_MEMORY
 from tests.support import REPOSITORY
 
 if TYPE_CHECKING:
@@ -42,8 +45,6 @@ ENCODING_POSITION = {"read_text": 0, "write_text": 1}
 FILE_MODE = re.compile(r"[rwxabt+]+")
 
 EDA = REPOSITORY / "eda"
-# Import-linter nečte Quarto ani R; stejně jako u Snakemake hlídáme text importů.
-R_IMPORT = re.compile(r"\bimport\(\s*[\"']([\w.]+)[\"']\s*\)")
 EDA_PYTHON = re.compile(
     r"^\s*```\{python(?:[ ,}])|`\{python\}"
     r"|^\s*(?:engine:\s*[\"']?jupyter\b|jupyter\s*:)"
@@ -563,25 +564,25 @@ def _eda_documents(root: Path) -> list[Path]:
     return documents
 
 
-def _eda_files(root: Path) -> list[Path]:
-    documents = _eda_documents(root)
-    r_files = sorted(root.rglob("*.R"))
-    assert r_files
-    return [*documents, *r_files]
+def _render_sources(root: Path) -> list[Path]:
+    files = sorted(
+        path
+        for path in root.rglob("*")
+        if path.suffix in {".R", ".qmd"}
+        and "_freeze" not in path.relative_to(root).parts
+    )
+    assert files
+    return files
 
 
-def _eda_imports(file: Path) -> list[str]:
-    text = file.read_text(encoding="utf-8")
-    return R_IMPORT.findall(text)
-
-
-def _eda_import_violations(files: list[Path]) -> list[str]:
+def _reticulate_violations(files: Iterable[Path]) -> list[str]:
     return [
-        f"{file.name} importuje {module}"
+        f"{file.name}:{index}: reticulate"
         for file in files
-        for module in _eda_imports(file)
-        if (module == "mediparse" or module.startswith("mediparse."))
-        and not _in_entrypoints(module)
+        for index, line in enumerate(
+            file.read_text(encoding="utf-8").splitlines(), start=1
+        )
+        if re.search(r"\breticulate\b", line)
     ]
 
 
@@ -606,9 +607,11 @@ def test_analysis_metric_threshold_matches_cohort() -> None:
 
 
 @EDA_PRESENT
-def test_eda_imports_only_entrypoints() -> None:
-    """EDA vstupuje do balíčku přes stejné hranice jako pravidla workflow."""
-    assert _eda_import_violations(_eda_files(EDA)) == []
+@ANALYSIS_PRESENT
+def test_eda_and_analysis_do_not_use_reticulate() -> None:
+    """R a Quarto čtou soubory bez živého Pythonu přes reticulate."""
+    for root in (EDA, ANALYSIS):
+        assert _reticulate_violations(_render_sources(root)) == []
 
 
 @EDA_PRESENT
@@ -617,28 +620,17 @@ def test_eda_documents_do_not_use_python() -> None:
     assert _eda_python_violations(_eda_documents(EDA)) == []
 
 
-def test_eda_import_check_finds_violations(tmp_path: Path) -> None:
-    """Reticulate v R smí vstupovat jen přes entrypointy."""
-    document = tmp_path / "bad.qmd"
-    document.write_text(
-        '```{r}\nx <- import("mediparse.domain.x")\n'
-        'y <- import("mediparse.synthetic.domain.x")\n'
-        'z <- import("mediparse.synthetic.entrypoints.ok")\n```\n',
-        encoding="utf-8",
-    )
-    r_file = tmp_path / "bad.R"
-    r_file.write_text(
-        'x <- reticulate::import("mediparse.infrastructure.x")\n'
-        'y <- import("mediparse.entrypoints.ok")\n'
-        'z <- import("mediparse.synthetic.domain.x")\n'
-        'w <- import("mediparse.synthetic.entrypoints.ok")\n',
-        encoding="utf-8",
-    )
-    assert _eda_import_violations(_eda_files(tmp_path)) == [
-        "bad.qmd importuje mediparse.domain.x",
-        "bad.qmd importuje mediparse.synthetic.domain.x",
-        "bad.R importuje mediparse.infrastructure.x",
-        "bad.R importuje mediparse.synthetic.domain.x",
+@pytest.mark.parametrize("suffix", [".R", ".qmd"])
+def test_reticulate_check_finds_violations_outside_freeze(
+    tmp_path: Path, suffix: str
+) -> None:
+    """Kontrola zachytí R i Quarto, zmražené výstupy se přitom neprohledávají."""
+    source = 'x <- reticulate::import("mediparse.entrypoints.x")\n'
+    (tmp_path / f"bad{suffix}").write_text(source, encoding="utf-8")
+    (tmp_path / "_freeze").mkdir()
+    (tmp_path / "_freeze/cache.R").write_text(source, encoding="utf-8")
+    assert _reticulate_violations(_render_sources(tmp_path)) == [
+        f"bad{suffix}:1: reticulate"
     ]
 
 
@@ -692,8 +684,26 @@ def test_eda_python_check_refuses_uninspected_documents(
         test_eda_documents_do_not_use_python()
 
 
-def test_eda_import_check_requires_r_files(tmp_path: Path) -> None:
-    """Dokud se kontrolují i R importy, jejich seznam nesmí být prázdný."""
-    (tmp_path / "only.qmd").write_text("Text.\n", encoding="utf-8")
+def test_reticulate_check_requires_sources(tmp_path: Path) -> None:
+    """Kontrola nesmí zezelenat bez jediného souboru R nebo Quarto."""
     with pytest.raises(AssertionError):
-        _eda_files(tmp_path)
+        _render_sources(tmp_path)
+
+
+@EDA_PRESENT
+def test_eda_connection_constants_match_python() -> None:
+    """R používá stejný paměťový limit a spill jako Python."""
+    source = (EDA / "R/db.R").read_text(encoding="utf-8")
+    memory = re.search(r'memory <- "([^"\n]+)"', source)
+    spill = re.search(r'temp <- file.path\(dirname\(directory\), "([^"\n]+)"\)', source)
+    assert memory is not None
+    assert spill is not None
+    assert memory.group(1) == DEFAULT_MEMORY
+    assert spill.group(1) == SPILL_DIRECTORY
+
+
+@EDA_PRESENT
+def test_eda_stop_words_match_sklearn() -> None:
+    """EDA drží přesně seřazený seznam anglických stop slov sklearn."""
+    words = (EDA / "stop-words.txt").read_text(encoding="utf-8").splitlines()
+    assert words == sorted(ENGLISH_STOP_WORDS)

@@ -23,6 +23,7 @@ dependencies = [
 ]
 
 [project.scripts]
+mediparse-eda-provenance = "mediparse.entrypoints.eda_provenance:main"
 mediparse-eda-note-tokens = "mediparse.entrypoints.eda_note_tokens:main"
 mediparse-eda-note-features = "mediparse.entrypoints.eda_note_features:main"
 mediparse-corpus-audit = "mediparse.synthetic.entrypoints.corpus_audit:main"
@@ -485,19 +486,9 @@ r-ggplot2 = "*"
 r-jsonlite = "*"
 r-knitr = "*"
 r-rmarkdown = "*"
-r-reticulate = "*"
 r-testthat = "*"
 r-withr = "*"
-micromamba = "*"
 poppler = "*"
-
-[tool.pixi.feature.eda.pypi-dependencies]
-numpy = "*"
-
-[tool.pixi.feature.eda.activation.env]
-RETICULATE_PYTHON = "$CONDA_PREFIX/bin/python"
-RETICULATE_CONDA = "$CONDA_PREFIX/bin/micromamba"
-TRANSFORMERS_VERBOSITY = "error"
 
 [tool.pixi.feature.eda.tasks]
 eda = { cmd = "bash scripts/eda.sh \"{{ n }}\"", args = [

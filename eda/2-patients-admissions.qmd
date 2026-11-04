@@ -6,12 +6,10 @@ abstract: |
 
 ```{r}
 #| include: false
-library(reticulate)
 source("R/dua.R")
 source("R/db.R")
 source("R/patients.R")
 source("R/export.R")
-eda_check_python()
 con <- eda_connect()
 summary_d <- patient_summary(con)
 per_patient <- notes_per_patient(con)

@@ -41,7 +41,6 @@ test_that("provenance_table rozdělí 64znakový otisk do skupin po 16 znacích"
   expect_equal(out$Hodnota, paste(strsplit(sha, "(?<=.{16})", perl = TRUE)[[1]], collapse = " "))
 })
 
-
 synthetic_manifest <- function(env = parent.frame()) {
   path <- withr::local_tempfile(.local_envir = env)
   tables <- list(
@@ -150,7 +149,6 @@ test_that("manifest hlásí chybějící pole i soubor", {
   }
 })
 
-
 manifest_entry <- function(...) {
   entry <- list(file = "discharge.csv.gz", bytes = 1, records = 1, columns = list("text"))
   changes <- list(...)
@@ -190,7 +188,6 @@ test_that("manifest odmítne chybějící tables, neplatné hodnoty a duplicitn�
   expect_error(read_test_manifest(list(tables = list(manifest_entry(), manifest_entry(file = "discharge.csv")))), "Soubor discharge.csv: duplicitní jméno tabulky discharge.", fixed = TRUE)
 })
 
-
 test_that("pořadí jmen v chybě nezávisí na kolaci locale", {
   withr::local_collate("C.UTF-8")
   manifest <- synthetic_manifest()
@@ -199,4 +196,49 @@ test_that("pořadí jmen v chybě nezávisí na kolaci locale", {
   manifest <- rbind(manifest, extra)
   expect_error(corpus_overview(manifest_counts(manifest), manifest),
                "Tabulky mimo katalog: Z, a.", fixed = TRUE)
+})
+
+test_that("eda_provenance vyžaduje soubor připravený nástrojem", {
+  withr::local_envvar(MEDIPARSE_EDA_PROVENANCE = NA)
+  expect_error(eda_provenance(), "mediparse-eda-provenance")
+  expect_error(eda_provenance(file.path(withr::local_tempdir(), "missing.json")),
+               "mediparse-eda-provenance")
+})
+
+test_that("eda_provenance zachová hodnoty a pořadí souboru", {
+  path <- "fixtures/thesis_table/provenance.json"
+  withr::local_envvar(MEDIPARSE_EDA_PROVENANCE = path)
+  details <- eda_provenance()
+  expect_identical(names(details), c("commit", "dirty", "pixi_lock_sha256", "data_source",
+                                    "csv_sha256 discharge.csv.gz", "csv_sha256 mimic-iv-bhc.csv",
+                                    "python", "duckdb", "jiny"))
+  expect_identical(details$python, "3.13.9")
+  expect_identical(details$dirty, "true")
+})
+
+test_that("eda_provenance odmítne chybějící povinný klíč", {
+  details <- list(commit = "abc", dirty = "false", pixi_lock_sha256 = "hash",
+                  data_source = "syntetická data")
+  path <- file.path(withr::local_tempdir(), "provenance.json")
+  for (key in c("commit", "dirty", "pixi_lock_sha256", "data_source")) {
+    incomplete <- details
+    incomplete[[key]] <- NULL
+    jsonlite::write_json(incomplete, path, auto_unbox = TRUE)
+    expect_error(eda_provenance(path), "Neplatná provenance", info = key)
+  }
+})
+
+test_that("eda_provenance odmítne hodnoty jiného typu než skalární řetězec", {
+  details <- list(commit = "abc", dirty = "false", pixi_lock_sha256 = "hash",
+                  data_source = "syntetická data")
+  path <- file.path(withr::local_tempdir(), "provenance.json")
+  for (value in list(TRUE, 1L, c("a", "b"), list("a"))) {
+    invalid <- details
+    invalid$dirty <- value
+    jsonlite::write_json(invalid, path, auto_unbox = TRUE)
+    expect_error(eda_provenance(path), "Neplatná provenance")
+  }
+  details$extra <- TRUE
+  jsonlite::write_json(details, path, auto_unbox = TRUE)
+  expect_error(eda_provenance(path), "Neplatná provenance")
 })
