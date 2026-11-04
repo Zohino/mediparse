@@ -49,5 +49,19 @@
     "funnel": [[0,0],[0,0],[0,0],[0,0]],
     "selected": [],
     "multiple": [0,0,0,0]
+  },
+  {
+    "name": "jednotky",
+    "discharge": [
+      {"note_id":"1-DS-1","subject_id":"1","hadm_id":"10","text":"éxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},
+      {"note_id":"2-DS-1","subject_id":"2","hadm_id":"20","text":"éxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}
+    ],
+    "diagnoses_icd": [
+      {"hadm_id":"10","icd_code":"K1","icd_version":"10"},
+      {"hadm_id":"20","icd_code":"K2","icd_version":"10"}
+    ],
+    "funnel": [[2,2],[2,2],[1,1],[1,1]],
+    "selected": ["2-DS-1"],
+    "multiple": [0,0,0,0]
   }
 ]
