@@ -72,7 +72,7 @@ preprocessing_text <- function(summary) {
     return(paste("Dopad předzpracování na slovník a délku zprávy", UNDECIDABLE_TEXT))
   }
   change <- if (raw$slovnik > 0) {
-    sprintf(" (změna o %s)", percent_change_text(prepared$slovnik, raw$slovnik))
+    sprintf(" (%s)", percent_change_text(prepared$slovnik, raw$slovnik))
   } else {
     ""
   }
@@ -86,7 +86,11 @@ preprocessing_text <- function(summary) {
 
 percent_change_text <- function(after, before) {
   change <- 100 * (after - before) / before
-  paste0(ifelse(change > 0, "+", ""), dua_decimal(change), NBSP, "%")
+  value <- dua_decimal(abs(change))
+  if (value == dua_decimal(0)) {
+    return("beze změny")
+  }
+  paste0(if (change < 0) "pokles o " else "nárůst o ", value, NBSP, "%")
 }
 
 acronym_cells <- function(con, acronym, key) {

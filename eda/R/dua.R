@@ -9,7 +9,7 @@ format_number <- function(x) {
 }
 
 dua_decimal <- function(x) {
-  format(round(x, 1), nsmall = 1, decimal.mark = ",", trim = TRUE)
+  format(round(x, 1), nsmall = 1, decimal.mark = ",", big.mark = NBSP, trim = TRUE)
 }
 
 number_text <- function(x) {

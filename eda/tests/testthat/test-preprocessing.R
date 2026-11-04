@@ -179,9 +179,27 @@ test_that("preprocessing_text skloňuje počty tokenů a uvádí změnu slovník
   expect_match(preprocessing_text(summary(1, 5)), paste0("5", NBSP, "tokenů"))
   expect_match(preprocessing_text(summary(2, 3, 1, 4)), paste0("2", NBSP, "tokeny"))
   expect_match(preprocessing_text(summary(2, 3, 1, 4)), paste0("1", NBSP, "token"))
-  expect_match(preprocessing_text(summary(100, 80)), paste0("změna o -20,0", NBSP, "%"))
+  expect_match(preprocessing_text(summary(100, 80)), "(pokles o 20,0\u00a0%)", fixed = TRUE)
   expect_match(preprocessing_text(summary(0, 0)), paste0("0", NBSP, "tokenů"))
   expect_no_match(preprocessing_text(summary(0, 0)), "změna")
+})
+
+test_that("percent_change_text pojmenuje směr a zaokrouhlenou nulu", {
+  expect_equal(percent_change_text(80, 100), "pokles o 20,0\u00a0%")
+  expect_equal(percent_change_text(120, 100), "nárůst o 20,0\u00a0%")
+  expect_equal(percent_change_text(100, 100), "beze změny")
+  expect_equal(percent_change_text(99.96, 100), "beze změny")
+})
+
+test_that("preprocessing_table odděluje tisíce v průměru", {
+  summary <- data.frame(
+    varianta = "raw", slovnik = 2000, n = 2, minimum = 1000, maximum = 1469,
+    p01 = 1000, p05 = 1000, p10 = 1000, p25 = 1000, p50 = 1234,
+    p75 = 1469, p90 = 1469, p95 = 1469, p99 = 1469,
+    prumer = 1234.5
+  )
+
+  expect_equal(preprocessing_table(summary)$prumer, "1\u00a0234,5")
 })
 
 test_that("tabulky projdou export_table s rozvržením a funkce zvládnou jedinečné řetězce", {
