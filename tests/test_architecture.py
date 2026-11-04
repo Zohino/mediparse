@@ -609,11 +609,16 @@ def test_analysis_metric_threshold_matches_cohort() -> None:
 @EDA_PRESENT
 @ANALYSIS_PRESENT
 def test_eda_and_analysis_do_not_source_each_other() -> None:
-    """Sdílené R funkce nesmí vytvářet křížovou závislost EDA a analýzy."""
+    """EDA a analýza sdílejí R funkce bez zpětných a křížových závislostí."""
+    thesis_files = sorted((REPOSITORY / "R/thesis").rglob("*.R"))
+    assert thesis_files
     inspected = set()
     violations = []
-    for root, forbidden in ((EDA, "analysis"), (ANALYSIS, "eda")):
-        files = _render_sources(root)
+    for files, forbidden in (
+        (_render_sources(EDA), "analysis"),
+        (_render_sources(ANALYSIS), "eda"),
+        (thesis_files, "(?:eda|analysis)"),
+    ):
         inspected.update(file.suffix for file in files)
         pattern = re.compile(rf"""\b(?:sys\.)?source\s*\(\s*["'][^"']*\b{forbidden}/""")
         violations.extend(
