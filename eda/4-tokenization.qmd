@@ -6,7 +6,6 @@ abstract: |
 
 ```{r}
 #| include: false
-library(reticulate)
 source("R/dua.R")
 source("R/db.R")
 source("R/text.R")
@@ -14,7 +13,6 @@ source("../analysis/R/contract.R")
 source("R/note_features.R")
 source("R/tokens.R")
 source("R/export.R")
-eda_check_python()
 con <- eda_connect()
 tables <- c("discharge", "radiology")
 metadata <- tokenizer_settings(con)
