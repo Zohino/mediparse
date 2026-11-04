@@ -60,6 +60,7 @@ def lexicon(tmp_path: Path) -> Path:
     """
     path = tmp_path / "lexicon.json"
     document = {
+        "min_normalized_chars": 3,
         "sections": {
             "chief_complaint": {
                 "label_cs": "Hlavní obtíže",

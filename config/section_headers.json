@@ -1,4 +1,5 @@
 {
+  "min_normalized_chars": 3,
   "sections": {
     "allergies": {
       "label_cs": "Alergie",

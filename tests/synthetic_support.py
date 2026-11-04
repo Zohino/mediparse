@@ -52,6 +52,7 @@ Discharge Diagnosis:
 Diabetes.
 """
 LEXICON: Final = SectionLexicon(
+    min_normalized_chars=3,
     sections={
         "chief_complaint": LexiconSection(
             label_cs="Obtíže", synonyms=("Chief Complaint",)

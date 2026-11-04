@@ -1,3 +1,18 @@
+test_that("lexikon vyžaduje kladný práh délky hlavičky", {
+  raw <- jsonlite::read_json(section_headers_path())
+  path <- withr::local_tempfile(fileext = ".json")
+  for (value in list(NULL, 0L)) {
+    raw$min_normalized_chars <- value
+    jsonlite::write_json(raw, path, auto_unbox = TRUE)
+    expect_error(read_section_headers(path), basename(path), fixed = TRUE)
+  }
+})
+
+test_that("dodaný lexikon i MIN_HEADER_CHARS drží práh tří znaků", {
+  expect_identical(read_section_headers(section_headers_path())$min_normalized_chars, 3L)
+  expect_identical(MIN_HEADER_CHARS, 3L)
+})
+
 test_that("lexikon načte všechny sekce konfigurace, každou s popiskem a synonymem", {
   raw <- jsonlite::fromJSON(section_headers_path(), simplifyVector = FALSE)
   lexicon <- read_section_headers(section_headers_path())
@@ -20,6 +35,7 @@ test_that("lexikon načte příznak diagnostické sekce, chybějící pole je FA
 
   path <- withr::local_tempfile(fileext = ".json")
   jsonlite::write_json(list(
+    min_normalized_chars = 3L,
     sections = list(
       a = list(label_cs = "A", synonyms = list("Aaa", "Bbb"), diagnostic = TRUE),
       c = list(label_cs = "C", synonyms = list("Ccc"))
@@ -38,7 +54,9 @@ test_that("lexikon nemá dvě sekce ani sekci a preamble se stejným normalizova
 test_that("read_section_headers odmítne sekci bez synonym nebo bez popisku", {
   write_config <- function(sections) {
     path <- withr::local_tempfile(fileext = ".json", .local_envir = parent.frame())
-    jsonlite::write_json(list(sections = sections, preamble = list("Name")), path, auto_unbox = TRUE)
+    jsonlite::write_json(list(
+      min_normalized_chars = 3L, sections = sections, preamble = list("Name")
+    ), path, auto_unbox = TRUE)
     path
   }
 

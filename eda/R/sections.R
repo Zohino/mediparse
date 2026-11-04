@@ -2,6 +2,10 @@ section_headers_path <- function() config_path("section_headers.json")
 
 read_section_headers <- function(path) {
   raw <- jsonlite::fromJSON(path, simplifyVector = FALSE)
+  valid <- object_keys(raw, c("min_normalized_chars", "sections", "preamble")) &&
+    is.integer(raw$min_normalized_chars) && length(raw$min_normalized_chars) == 1L &&
+    !is.na(raw$min_normalized_chars) && raw$min_normalized_chars >= 1L
+  if (!valid) stop("Neplatný config section_headers.json: ", path, call. = FALSE)
   keys <- names(raw$sections)
   rows <- lapply(keys, function(key) {
     entry <- raw$sections[[key]]
@@ -18,7 +22,10 @@ read_section_headers <- function(path) {
     )
   })
   sections <- do.call(rbind, rows)
-  list(sections = sections, preamble = as.character(unlist(raw$preamble)))
+  list(
+    sections = sections, preamble = as.character(unlist(raw$preamble)),
+    min_normalized_chars = raw$min_normalized_chars
+  )
 }
 
 # Číslice ve výrazu nejsou, aby "10:30" nebyl hlavička; odsazení se připouští, protože hlavičky bývají odsazené.
@@ -29,7 +36,7 @@ header_matches_sql <- function(con, text_expr) {
   sprintf("regexp_extract_all(%s, %s, 1)", text_expr, DBI::dbQuoteString(con, HEADER_PATTERN))
 }
 
-MIN_HEADER_CHARS <- 3L
+MIN_HEADER_CHARS <- read_section_headers(section_headers_path())$min_normalized_chars
 MIN_COVERAGE <- 0.01
 RANKING_SIZE <- 40L
 CANDIDATE_COVERAGE <- 0.5
@@ -44,7 +51,7 @@ KIND_LABELS <- c(
 )
 
 # Pravidlo hlavičky má protějšek v src/mediparse/domain/section_headers.py: HEADER_PATTERN,
-# normalized_sql (normalized) a MIN_HEADER_CHARS (MIN_NORMALIZED_CHARS); změna se dělá v obou.
+# normalized_sql (normalized) a práh z config/section_headers.json.
 normalized_sql <- function(column) {
   sprintf("rtrim(regexp_replace(lower(%s), '\\s+', ' ', 'g'), ' .')", column)
 }

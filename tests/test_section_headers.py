@@ -34,6 +34,7 @@ from tests.support import REPOSITORY_CONFIG, REPOSITORY_CORPUS
 
 def _lexicon_json(**overrides: object) -> dict[str, object]:
     document: dict[str, object] = {
+        "min_normalized_chars": 3,
         "sections": {
             "chief_complaint": {
                 "label_cs": "Hlavní obtíže",
@@ -85,6 +86,33 @@ def test_synthetic_diagnosis_section_is_removed_by_strip() -> None:
 def test_minimal_lexicon_is_accepted() -> None:
     """Lexikon se sekcemi a preambulí projde schématem."""
     assert set(_lexicon().sections) == {"chief_complaint", "allergies"}
+
+
+@pytest.mark.parametrize("missing", [True, False], ids=["missing", "zero"])
+def test_lexicon_requires_positive_min_normalized_chars(*, missing: bool) -> None:
+    """Práh je povinné kladné celé číslo bez výchozí hodnoty."""
+    document = _lexicon_json(min_normalized_chars=0)
+    if missing:
+        del document["min_normalized_chars"]
+    with pytest.raises(ValidationError, match="min_normalized_chars"):
+        SectionLexicon.model_validate_json(json.dumps(document))
+
+
+def test_repository_lexicon_matches_protocol() -> None:
+    """Dodaný lexikon drží schválený práh tří normalizovaných znaků."""
+    expected_min_chars: Final = 3
+    assert REPOSITORY_LEXICON.min_normalized_chars == expected_min_chars
+
+
+@pytest.mark.parametrize("field", ["sections", "preamble"])
+def test_lexicon_uses_configured_minimum(field: str) -> None:
+    """Vlastní práh platí pro synonyma sekcí i administrativní pole."""
+    overrides: dict[str, object] = {"sections": {"a": _section("Abc", diagnostic=True)}}
+    if field == "preamble":
+        overrides = {"preamble": ["Abc"]}
+    _lexicon(**overrides, min_normalized_chars=3)
+    with pytest.raises(ValidationError, match="kratší než 4"):
+        _lexicon(**overrides, min_normalized_chars=4)
 
 
 def _section(
@@ -195,6 +223,7 @@ def test_too_short_synonym_is_rejected(synonym: str) -> None:
 
 DISCHARGE_LEXICON = SectionLexicon.model_validate_json(
     json.dumps({
+        "min_normalized_chars": 3,
         "sections": {
             "allergies": _section("Allergies"),
             "chief_complaint": _section("Chief Complaint", label_cs="Obtíže"),
@@ -571,6 +600,7 @@ def test_strip_removes_every_diagnostic_section_of_lexicon() -> None:
     """Označených sekcí může být víc a všechny zmizí."""
     lexicon = SectionLexicon.model_validate_json(
         json.dumps({
+            "min_normalized_chars": 3,
             "sections": {
                 "allergies": _section("Allergies", diagnostic=True),
                 "chief_complaint": _section("Chief Complaint"),
