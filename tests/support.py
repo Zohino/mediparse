@@ -49,6 +49,7 @@ REPOSITORY_LABELS: Final = REPOSITORY / LABELS_PATH
 REPOSITORY_CORPUS: Final = REPOSITORY / CORPUS_ROOT
 REPOSITORY_TABLES: Final = REPOSITORY / TABLES_PATH
 REPOSITORY_TRAINING_CONFIG: Final = REPOSITORY / "config" / "smoketest_training.json"
+REPOSITORY_INPUT_CORPUS: Final = REPOSITORY / "config" / "input_corpus.json"
 REPOSITORY_SPLIT_CONFIG: Final = REPOSITORY / "config" / "split.json"
 REPOSITORY_MIMIC_MANIFEST: Final = REPOSITORY / "results" / "mimic" / "manifest.json"
 REPOSITORY_SECTION_HEADERS: Final = REPOSITORY / "config" / "section_headers.json"

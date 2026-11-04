@@ -11,7 +11,7 @@ import pytest
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.input_corpus_rule import load_input_corpus_rule
-from tests.support import REPOSITORY
+from tests.support import REPOSITORY, REPOSITORY_INPUT_CORPUS
 
 if TYPE_CHECKING:
     from typing import Any
@@ -38,7 +38,7 @@ def test_shared_rule_cases(tmp_path: Path, case: dict[str, Any]) -> None:
 def test_repository_rule_matches_protocol() -> None:
     """Dodaný config drží schválený práh sto znaků."""
     expected_min_chars: Final = 100
-    rule = load_input_corpus_rule(REPOSITORY / "config/input_corpus.json")
+    rule = load_input_corpus_rule(REPOSITORY_INPUT_CORPUS)
     assert rule.min_chars == expected_min_chars
 
 
