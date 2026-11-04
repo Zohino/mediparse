@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+from operator import itemgetter
 from typing import TYPE_CHECKING
 
 import pytest
@@ -16,6 +18,7 @@ from mediparse.domain.data_access import (
 )
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.data_access_rules import load_data_access_rules
+from tests.support import REPOSITORY
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -107,30 +110,37 @@ def test_rules_come_from_data() -> None:
 
 
 @pytest.mark.parametrize(
-    "content",
-    [
-        '{"blocking": []}',
-        '{"blocking": [{"name":"CI","reason":"x"},{"name":"CI","reason":"y"}]}',
-        '{"blocking": [{"name":"CI","reason":""}]}',
-        '{"blocking": [{"name":"","reason":"x"}]}',
-        '{"blocking": [{"name":"CI","reason":"x","extra":1}]}',
-        '{"blocking": [{"name":"CI","reason":"x"}],"extra":1}',
-        '{"blocking": [{"name":1,"reason":"x"}]}',
-    ],
+    "case",
+    json.loads(
+        (REPOSITORY / "tests/fixtures/data_access_rules_cases.json").read_text(
+            encoding="utf-8"
+        )
+    ),
+    ids=itemgetter("name"),
 )
-def test_invalid_rules_are_refused(content: str) -> None:
-    """Prázdná, duplicitní i nestriktní pravidla nejsou bezpečnostní pravidlo."""
-    with pytest.raises(ValidationError):
-        DataAccessRules.model_validate_json(content)
-
-
-@pytest.mark.parametrize("content", [None, "", "{}", "ne-JSON"])
-def test_loader_refuses_missing_or_invalid_file(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, content: str | None
+def test_shared_rules_cases(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, case: dict[str, str | bool]
 ) -> None:
-    """Poškozená či chybějící pravidla se přeloží na doménové odmítnutí."""
-    if content is not None:
-        (tmp_path / "data_access.json").write_text(content, encoding="utf-8")
+    """Stejné případy pravidel ověřují pydantic, loader i nezávislý konzument R."""
+    content = str(case["text"])
+    (tmp_path / "data_access.json").write_text(content, encoding="utf-8")
+    monkeypatch.setattr(
+        "mediparse.infrastructure.data_access_rules.files", lambda _: tmp_path
+    )
+    if case["valid"]:
+        DataAccessRules.model_validate_json(content)
+        load_data_access_rules()
+    else:
+        with pytest.raises(ValidationError):
+            DataAccessRules.model_validate_json(content)
+        with pytest.raises(InvalidInputError, match=r"data_access\.json"):
+            load_data_access_rules()
+
+
+def test_loader_refuses_missing_file(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Chybějící pravidla se přeloží na doménové odmítnutí."""
     monkeypatch.setattr(
         "mediparse.infrastructure.data_access_rules.files", lambda _: tmp_path
     )

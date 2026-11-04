@@ -1,0 +1,72 @@
+[
+  {
+    "name": "valid",
+    "text": "{\"blocking\":[{\"name\":\"CI\",\"reason\":\"x\"}]}",
+    "valid": true
+  },
+  {
+    "name": "root-extra",
+    "text": "{\"blocking\":[{\"name\":\"CI\",\"reason\":\"x\"}],\"extra\":1}",
+    "valid": false
+  },
+  {
+    "name": "partial-key",
+    "text": "{\"blockingX\":[{\"name\":\"CI\",\"reason\":\"x\"}]}",
+    "valid": false
+  },
+  {
+    "name": "empty-blocking",
+    "text": "{\"blocking\":[]}",
+    "valid": false
+  },
+  {
+    "name": "empty-name",
+    "text": "{\"blocking\":[{\"name\":\"\",\"reason\":\"x\"}]}",
+    "valid": false
+  },
+  {
+    "name": "numeric-name",
+    "text": "{\"blocking\":[{\"name\":1,\"reason\":\"x\"}]}",
+    "valid": false
+  },
+  {
+    "name": "missing-reason",
+    "text": "{\"blocking\":[{\"name\":\"CI\"}]}",
+    "valid": false
+  },
+  {
+    "name": "item-extra",
+    "text": "{\"blocking\":[{\"name\":\"CI\",\"reason\":\"x\",\"extra\":1}]}",
+    "valid": false
+  },
+  {
+    "name": "duplicate-names",
+    "text": "{\"blocking\":[{\"name\":\"CI\",\"reason\":\"x\"},{\"name\":\"CI\",\"reason\":\"y\"}]}",
+    "valid": false
+  },
+  {
+    "name": "empty-reason",
+    "text": "{\"blocking\":[{\"name\":\"CI\",\"reason\":\"\"}]}",
+    "valid": false
+  },
+  {
+    "name": "numeric-reason",
+    "text": "{\"blocking\":[{\"name\":\"CI\",\"reason\":1}]}",
+    "valid": false
+  },
+  {
+    "name": "empty-file",
+    "text": "",
+    "valid": false
+  },
+  {
+    "name": "empty-object",
+    "text": "{}",
+    "valid": false
+  },
+  {
+    "name": "not-json",
+    "text": "ne-JSON",
+    "valid": false
+  }
+]

@@ -173,16 +173,35 @@ test_that("eda_connect čte blokující proměnnou a důvod ze souboru", {
   expect_error(eda_connect(), "testovací důvod")
 })
 
-test_that("data_access_rules odmítne chybějící a neplatná pravidla", {
+test_that("data_access_rules odmítne chybějící soubor", {
   path <- file.path(withr::local_tempdir(), "rules.json")
   expect_error(data_access_rules(path), "data_access.json")
-  for (text in c("", "{}", '{"blocking":[]}',
-                 '{"blocking":[{"name":"X","reason":""}]}',
-                 '{"blocking":[{"name":"X","reason":"x"},{"name":"X","reason":"y"}]}',
-                 '{"blocking":[{"name":"X","reason":"x","extra":1}]}')) {
-    writeLines(text, path)
-    expect_error(data_access_rules(path), "data_access.json", info = text)
+})
+
+test_that("data_access_rules splňuje sdílené případy Pythonu a R", {
+  cases <- jsonlite::read_json(project_path("tests", "fixtures", "data_access_rules_cases.json"))
+  path <- file.path(withr::local_tempdir(), "rules.json")
+  for (case in cases) {
+    writeLines(case$text, path)
+    if (case$valid) {
+      expect_no_error(data_access_rules(path))
+    } else {
+      expect_error(data_access_rules(path), "data_access.json", info = case$name)
+    }
   }
+})
+
+test_that("eda_connect hlásí důvod první blokující proměnné ze souboru", {
+  root <- withr::local_tempdir()
+  path <- file.path(root, "src", "mediparse", "domain", "data_access.json")
+  dir.create(dirname(path), recursive = TRUE)
+  writeLines('{"blocking":[{"name":"MEDIPARSE_TEST_FIRST","reason":"první zákaz"},{"name":"MEDIPARSE_TEST_SECOND","reason":"druhý zákaz"}]}', path)
+  dir <- file.path(root, "parquet")
+  write_parquet_tables(dir, marker = FALSE)
+  withr::local_envvar(PIXI_PROJECT_ROOT = root, MEDIPARSE_PARQUET = dir,
+                    MEDIPARSE_TEST_FIRST = "1", MEDIPARSE_TEST_SECOND = "1",
+                    CI = NA, CLAUDECODE = NA)
+  expect_error(eda_connect(), "první zákaz")
 })
 
 test_that("eda_connect odmítne i syntetiku s chybějícími pravidly", {
