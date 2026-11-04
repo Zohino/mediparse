@@ -200,3 +200,22 @@ test_that("pořadí jmen v chybě nezávisí na kolaci locale", {
   expect_error(corpus_overview(manifest_counts(manifest), manifest),
                "Tabulky mimo katalog: Z, a.", fixed = TRUE)
 })
+
+
+test_that("eda_provenance vyžaduje soubor připravený nástrojem", {
+  withr::local_envvar(MEDIPARSE_EDA_PROVENANCE = NA)
+  expect_error(eda_provenance(), "mediparse-eda-provenance")
+  expect_error(eda_provenance(file.path(withr::local_tempdir(), "missing.json")),
+               "mediparse-eda-provenance")
+})
+
+test_that("eda_provenance zachová hodnoty a pořadí souboru", {
+  path <- "fixtures/thesis_table/provenance.json"
+  withr::local_envvar(MEDIPARSE_EDA_PROVENANCE = path)
+  details <- eda_provenance()
+  expect_identical(names(details), c("commit", "dirty", "pixi_lock_sha256", "data_source",
+                                    "csv_sha256 discharge.csv.gz", "csv_sha256 mimic-iv-bhc.csv",
+                                    "python", "duckdb", "jiny"))
+  expect_identical(details$python, "3.13.9")
+  expect_identical(details$dirty, "true")
+})

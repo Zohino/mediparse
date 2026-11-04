@@ -31,6 +31,8 @@ trap 'rm -rf "$work"' EXIT
 
 eda_stage "$root" "$work"
 eda_revision "$root"
+mediparse-eda-provenance --root "$root" --parquet "$MEDIPARSE_PARQUET" --out "$work/provenance.json"
+export MEDIPARSE_EDA_PROVENANCE="$work/provenance.json"
 eda_render "$work" "$number"
 
 for document in "${documents[@]}"; do

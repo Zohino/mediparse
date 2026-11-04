@@ -132,7 +132,8 @@ PROVENANCE_LABELS <- c(
   data_source = "Zdroj dat",
   python = "Python",
   duckdb = "DuckDB",
-  r = "R"
+  r = "R",
+  `r-duckdb` = "r-duckdb"
 )
 
 provenance_table <- function(details) {
@@ -147,4 +148,12 @@ provenance_table <- function(details) {
   digest <- grepl("^[0-9a-f]{64}$", values)
   values[digest] <- gsub("(.{16})(?=.)", "\\1 ", values[digest], perl = TRUE)
   data.frame(Položka = unname(labels), Hodnota = values)
+}
+
+
+eda_provenance <- function(path = Sys.getenv("MEDIPARSE_EDA_PROVENANCE")) {
+  if (!nzchar(path) || !file.exists(path)) {
+    stop("Chybí provenance renderu; spusťte nástroj mediparse-eda-provenance.", call. = FALSE)
+  }
+  jsonlite::read_json(path)
 }

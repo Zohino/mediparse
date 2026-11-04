@@ -138,13 +138,15 @@ def test_render_script_prepares_cache_for_its_consumer(
     render = scripts / "eda.sh"
     render.write_bytes((SCRIPT.parent / "eda.sh").read_bytes())
     (scripts / "eda-render.sh").write_text(
-        "eda_stage() { :; }\neda_revision() { :; }\neda_render() { :; }\n",
+        "eda_stage() { :; }\neda_revision() { :; }\n"
+        'eda_render() { printf "%s\\n" "$MEDIPARSE_EDA_PROVENANCE" > "$EDA_TEST_PROVENANCE_PATH"; }\n',
         encoding="utf-8",
     )
     commands = tmp_path / "bin"
     commands.mkdir()
     stubs = {
         "git": "#!/bin/sh\nexit 0\n",
+        "mediparse-eda-provenance": '#!/bin/sh\nprintf "provenance %s\\n" "$*" > "$EDA_TEST_PROVENANCE"\n',
         "mediparse-eda-note-features": '#!/bin/sh\nprintf "features %s\\n" "$*" >> "$EDA_TEST_CALLS"\n',
         "mediparse-eda-note-tokens": '#!/bin/sh\nprintf "tokens %s\\n" "$*" >> "$EDA_TEST_CALLS"\n',
     }
@@ -153,6 +155,8 @@ def test_render_script_prepares_cache_for_its_consumer(
         command.write_text(text, encoding="utf-8")
         command.chmod(0o755)
     calls = tmp_path / "feature-calls.txt"
+    provenance_calls = tmp_path / "provenance-calls.txt"
+    provenance_path = tmp_path / "provenance-path.txt"
     result = subprocess.run(
         ["bash", str(render), number],
         env={
@@ -163,6 +167,8 @@ def test_render_script_prepares_cache_for_its_consumer(
             "MEDIPARSE_EDA_CACHE": str(tmp_path / "cache"),
             "CLAUDECODE": "",
             "EDA_TEST_CALLS": str(calls),
+            "EDA_TEST_PROVENANCE": str(provenance_calls),
+            "EDA_TEST_PROVENANCE_PATH": str(provenance_path),
         },
         check=False,
         capture_output=True,
@@ -171,6 +177,11 @@ def test_render_script_prepares_cache_for_its_consumer(
         timeout=60,
     )
     assert result.returncode == CLEAN, result.stderr
+    out = provenance_path.read_text(encoding="utf-8").strip()
+    assert out.endswith("/provenance.json")
+    assert provenance_calls.read_text(encoding="utf-8") == (
+        f"provenance --root {tmp_path} --parquet {tmp_path / 'tables'} --out {out}\n"
+    )
     assert calls.exists() is (number in {"4", "9"})
     if number in {"4", "9"}:
         group = "tokens" if number == "4" else "features"
