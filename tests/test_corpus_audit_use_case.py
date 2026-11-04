@@ -267,7 +267,7 @@ def test_empty_corpus_is_refused() -> None:
         {}, COMMIT, CREATED_AT, DISCHARGE_PIN
     )
 
-    assert isinstance(outcome, AuditRefused)
+    assert outcome == AuditRefused("Korpus neobsahuje žádnou zprávu.")
 
 
 def test_empty_reference_is_refused_without_record() -> None:
