@@ -20,9 +20,8 @@ if TYPE_CHECKING:
 LEXICON_LANGUAGE: Final = Language.EN
 # Klíč pro text mimo rozpoznané sekce; v lexikonu být nesmí, jinak by splynul se zbytkem.
 OTHER: Final = "other"
-# Pravidlo hlavičky má tři části a každá má protějšek v eda/R/sections.R:
-# HEADER_PATTERN, normalized (normalized_sql) a práh z config/section_headers.json.
-# Sešit 9 měřil pokrytí lexikonu právě jím, změna se dělá v obou. Délku hlídá validace
+# Soulad HEADER_PATTERN, normalizace a délky s eda/R/sections.R hlídá sdílená sada
+# tests/fixtures/section_header_cases.json. Délku hlídá validace
 # lexikonu místo filtru: stejnost je rovnost normalizovaných tvarů, takže kratší tvar
 # synonymem být nemůže a vyřazení kratších hlaviček z textu je tentýž výsledek.
 HEADER_PATTERN: Final = re.compile(

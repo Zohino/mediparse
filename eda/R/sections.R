@@ -50,8 +50,8 @@ KIND_LABELS <- c(
   sekce = "sekce lexikonu", preamble = "administrativní pole", mimo = "mimo lexikon"
 )
 
-# Pravidlo hlavičky má protějšek v src/mediparse/domain/section_headers.py: HEADER_PATTERN,
-# normalized_sql (normalized) a práh z config/section_headers.json.
+# Soulad výrazu, normalizace a délky s Pythonem hlídá tests/fixtures/section_header_cases.json.
+# Python validuje délku synonym místo filtru: kratší normalizovaný tvar se synonymem neshodne.
 normalized_sql <- function(column) {
   sprintf("rtrim(regexp_replace(lower(%s), '\\s+', ' ', 'g'), ' .')", column)
 }
