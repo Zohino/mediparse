@@ -25,6 +25,7 @@ from tests.support import (
     PINNED,
     SENTENCE,
     SHORT_TEXT,
+    blocking_reason,
 )
 
 if TYPE_CHECKING:
@@ -420,9 +421,7 @@ def test_environment_refusal_carries_shared_reason(name: str) -> None:
         _Corpus({Language.EN: {NOTE_ID: SENTENCE}}), _UntouchableReference(), _Report()
     ).run({name: "1"}, COMMIT, CREATED_AT, DISCHARGE_PIN)
 
-    assert outcome == AuditRefused(
-        next(v.reason for v in load_data_access_rules().blocking if v.name == name)
-    )
+    assert outcome == AuditRefused(blocking_reason(name))
 
 
 @pytest.mark.parametrize("name", ["CI", "CLAUDECODE"])
@@ -435,6 +434,4 @@ def test_environment_refusal_precedes_workspace_refusal(name: str) -> None:
         _Workspace(missing=("discharge.csv.gz",)),
     ).run({name: "1"}, COMMIT, CREATED_AT, DISCHARGE_PIN)
 
-    assert outcome == AuditRefused(
-        next(v.reason for v in load_data_access_rules().blocking if v.name == name)
-    )
+    assert outcome == AuditRefused(blocking_reason(name))

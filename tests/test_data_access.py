@@ -18,7 +18,7 @@ from mediparse.domain.data_access import (
 )
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.data_access_rules import load_data_access_rules
-from tests.support import REPOSITORY
+from tests.support import REPOSITORY, blocking_reason
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -35,8 +35,8 @@ def test_blocking_variables_are_ci_then_claude_code() -> None:
 @pytest.mark.parametrize("name", ["CI", "CLAUDECODE"])
 def test_blocked_reason_names_the_variable_reason(name: str) -> None:
     """Každá blokující proměnná vrátí svůj důvod."""
-    assert blocked_reason({name: "1"}, load_data_access_rules()) == next(
-        v.reason for v in load_data_access_rules().blocking if v.name == name
+    assert blocked_reason({name: "1"}, load_data_access_rules()) == blocking_reason(
+        name
     )
 
 

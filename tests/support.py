@@ -13,6 +13,7 @@ from typing import TYPE_CHECKING, Any, Final
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.environment import SourceRevision
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.infrastructure.data_access_rules import load_data_access_rules
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.synthetic.domain.corpus_audit import (
     NGRAM_SIZE,
@@ -230,3 +231,16 @@ def export_payload(
             for key in selection
         },
     }
+
+
+def blocking_reason(name: str) -> str:
+    """Přečte důvod blokující proměnné ze sdíleného pravidla.
+
+    Returns:
+        Důvod proměnné s daným jménem.
+    """
+    return next(
+        variable.reason
+        for variable in load_data_access_rules().blocking
+        if variable.name == name
+    )
