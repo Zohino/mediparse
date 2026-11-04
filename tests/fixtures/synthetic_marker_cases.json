@@ -43,5 +43,10 @@
     "name": "array",
     "text": "[{\"prefix\":\"t\",\"rows\":1}]",
     "valid": false
+  },
+  {
+    "name": "oversized-float",
+    "text": "{\"prefix\":\"t\",\"rows\":1e100}",
+    "valid": false
   }
 ]

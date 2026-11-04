@@ -41,9 +41,9 @@ eda_synthetic_marker <- function(directory) {
   marker <- tryCatch(jsonlite::read_json(path), error = function(error) {
     stop("Neplatná značka synthetic.json.", call. = FALSE)
   })
+  # R smí být přísnější: typ integer odmítne i velké JSON floaty, které Python nepřevede na int.
   valid <- object_keys(marker, c("prefix", "rows")) && scalar_text(marker$prefix) &&
-    is.numeric(marker$rows) && length(marker$rows) == 1L &&
-    is.finite(marker$rows) && marker$rows == floor(marker$rows)
+    is.integer(marker$rows) && length(marker$rows) == 1L && !is.na(marker$rows)
   if (!valid) stop("Neplatná značka synthetic.json.", call. = FALSE)
   TRUE
 }
