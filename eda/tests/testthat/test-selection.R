@@ -1,68 +1,31 @@
-long_text <- function(seed) paste0(seed, strrep("x", SHORT_LIMIT))
-
-discharge_rows <- function(subject, hadm, text) {
-  data.frame(
-    note_id = paste0("n", seq_along(subject)),
-    subject_id = subject,
-    hadm_id = hadm,
-    text = text,
-    stringsAsFactors = FALSE
-  )
+corpus_case_frame <- function(rows, columns) {
+  values <- lapply(columns, function(column) {
+    vapply(rows, function(row) {
+      if (is.null(row[[column]])) NA_character_ else row[[column]]
+    }, character(1))
+  })
+  as.data.frame(setNames(values, columns), stringsAsFactors = FALSE)
 }
 
-coded <- function(hadm) {
-  data.frame(
-    hadm_id = hadm,
-    icd_code = paste0("K", seq_along(hadm)),
-    icd_version = "10",
-    stringsAsFactors = FALSE
-  )
+cases <- jsonlite::read_json(project_path("tests", "fixtures", "input_corpus_cases.json"))
+for (case in cases) {
+  test_that(paste("vstupní korpus splňuje sdílený případ", case$name), {
+    con <- mimic_con(
+      discharge = corpus_case_frame(case$discharge, EMPTY_TABLES$discharge),
+      diagnoses_icd = corpus_case_frame(case$diagnoses_icd, EMPTY_TABLES$diagnoses_icd)
+    )
+    funnel <- corpus_funnel(con)
+    selected <- DBI::dbGetQuery(con, input_corpus_sql(con))
+
+    expect_equal(funnel$zprav, vapply(case$funnel, `[[`, numeric(1), 1L))
+    expect_equal(funnel$pacientu, vapply(case$funnel, `[[`, numeric(1), 2L))
+    expect_setequal(selected$note_id, as.character(unlist(case$selected)))
+    expect_equal(funnel$krok, FUNNEL_STEPS)
+    expect_equal(names(selected), c("note_id", "subject_id", "hadm_id"))
+    expected_multiple <- if (case$name == "filtry") c(1, 1, 1, 1) else c(0, 0, 0, 0)
+    expect_equal(funnel$vice_zprav, expected_multiple)
+  })
 }
-
-test_that("corpus_funnel postupně vyřadí zprávy bez kódu ICD, krátké a duplicitní", {
-  con <- mimic_con(
-    discharge = discharge_rows(
-      c("1", "1", "2", "3", "4", "5"),
-      c("a", "b", "c", NA, "d", "e"),
-      c(long_text("A"), long_text("B"), long_text("C"), long_text("D"), "krátká", long_text("A"))
-    ),
-    diagnoses_icd = coded(c("a", "a", "b", "d", "e"))
-  )
-  out <- corpus_funnel(con)
-
-  expect_equal(out$krok, FUNNEL_STEPS)
-  expect_equal(out$zprav, c(6, 4, 3, 2))
-  expect_equal(out$pacientu, c(5, 3, 2, 1))
-  expect_equal(out$vice_zprav, c(1, 1, 1, 1))
-})
-
-test_that("corpus_funnel z duplicit ponechá zprávu s nejmenším note_id", {
-  con <- mimic_con(
-    discharge = discharge_rows(
-      c("1", "2", "2"), c("a", "b", "c"), c(long_text("A"), long_text("A"), long_text("B"))
-    ),
-    diagnoses_icd = coded(c("a", "b", "c"))
-  )
-  out <- corpus_funnel(con)
-
-  expect_equal(out$zprav[4], 2)
-  expect_equal(out$pacientu[4], 2)
-  expect_equal(out$vice_zprav[4], 0)
-})
-
-test_that("corpus_funnel vrátí nulové kroky pro prázdnou tabulku i bez spojení s ICD", {
-  empty <- corpus_funnel(mimic_con())
-  unjoined <- corpus_funnel(mimic_con(
-    discharge = discharge_rows(c("1", "2"), c("a", "b"), c(long_text("A"), long_text("B"))),
-    diagnoses_icd = coded(c("x", "y"))
-  ))
-
-  expect_equal(empty$krok, FUNNEL_STEPS)
-  expect_equal(empty$zprav, c(0, 0, 0, 0))
-  expect_equal(empty$pacientu, c(0, 0, 0, 0))
-  expect_equal(unjoined$zprav, c(2, 0, 0, 0))
-  expect_equal(unjoined$vice_zprav, c(0, 0, 0, 0))
-})
 
 comparison_inputs <- function() {
   list(
@@ -122,38 +85,4 @@ test_that("corpus_comparison dá pomlčku chybějící nebo prázdné tabulce", 
   )
 
   expect_equal(out$radiology, c("0", "–", "–", "–", "–", "–", "–", "–"))
-})
-
-test_that("input_corpus_sql vrátí přesně zprávy posledního kroku výběru", {
-  con <- mimic_con(
-    discharge = discharge_rows(
-      c("1", "1", "2", "3", "4", "5"),
-      c("a", "b", "c", NA, "d", "e"),
-      c(long_text("A"), long_text("B"), long_text("C"), long_text("D"), "krátká", long_text("A"))
-    ),
-    diagnoses_icd = coded(c("a", "a", "b", "d", "e"))
-  )
-  out <- DBI::dbGetQuery(con, input_corpus_sql(con))
-
-  expect_equal(names(out), c("note_id", "subject_id", "hadm_id"))
-  expect_equal(sort(out$note_id), c("n1", "n2"))
-  expect_equal(nrow(out), corpus_funnel(con)$zprav[4])
-})
-
-test_that("input_corpus_sql z duplicit ponechá nejmenší note_id", {
-  con <- mimic_con(
-    discharge = discharge_rows(
-      c("1", "2", "2"), c("a", "b", "c"), c(long_text("A"), long_text("A"), long_text("B"))
-    ),
-    diagnoses_icd = coded(c("a", "b", "c"))
-  )
-  out <- DBI::dbGetQuery(con, input_corpus_sql(con))
-
-  expect_equal(sort(out$note_id), c("n1", "n3"))
-})
-
-test_that("input_corpus_sql nad prázdnou tabulkou nevrátí nic", {
-  con <- mimic_con()
-
-  expect_equal(nrow(DBI::dbGetQuery(con, input_corpus_sql(con))), 0)
 })
