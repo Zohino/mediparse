@@ -181,7 +181,7 @@ test_that("preprocessing_text skloňuje počty tokenů a uvádí změnu slovník
   expect_match(preprocessing_text(summary(2, 3, 1, 4)), paste0("1", NBSP, "token"))
   expect_match(preprocessing_text(summary(100, 80)), "(pokles o 20,0\u00a0%)", fixed = TRUE)
   expect_match(preprocessing_text(summary(0, 0)), paste0("0", NBSP, "tokenů"))
-  expect_no_match(preprocessing_text(summary(0, 0)), "změna")
+  expect_no_match(preprocessing_text(summary(0, 0)), "pokles|nárůst|beze změny")
 })
 
 test_that("percent_change_text pojmenuje směr a zaokrouhlenou nulu", {
