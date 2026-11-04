@@ -150,7 +150,6 @@ provenance_table <- function(details) {
   data.frame(Položka = unname(labels), Hodnota = values)
 }
 
-
 eda_provenance <- function(path = Sys.getenv("MEDIPARSE_EDA_PROVENANCE")) {
   if (!nzchar(path) || !file.exists(path)) {
     stop("Chybí provenance renderu; spusťte nástroj mediparse-eda-provenance.", call. = FALSE)

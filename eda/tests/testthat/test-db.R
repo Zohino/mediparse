@@ -131,8 +131,6 @@ test_that("eda_connect čte prostředí při každém volání, ne snímek ze st
   expect_equal(setting(con, "memory_limit"), "3.0 GiB")
 })
 
-
-
 test_that("eda_connect založí pohled se jménem s pomlčkou", {
   dir <- file.path(withr::local_tempdir(), "parquet")
   write_parquet_tables(dir)
@@ -144,16 +142,11 @@ test_that("eda_connect založí pohled se jménem s pomlčkou", {
   expect_equal(DBI::dbGetQuery(con, 'SELECT count(*) AS n FROM "mimic-iv-bhc"')$n, 1)
 })
 
-
-
-
-
 test_that("eda_parquet_dir má výchozí adresář pod kořenem projektu", {
   withr::local_envvar(MEDIPARSE_PARQUET = NA, PIXI_PROJECT_ROOT = "/koren")
 
   expect_equal(eda_parquet_dir(), "/koren/resources/mimic/parquet")
 })
-
 
 test_that("eda_parquet_dir s prázdnou proměnnou použije výchozí adresář", {
   withr::local_envvar(MEDIPARSE_PARQUET = "", PIXI_PROJECT_ROOT = "/koren")

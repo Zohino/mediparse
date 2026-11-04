@@ -41,7 +41,6 @@ test_that("provenance_table rozdělí 64znakový otisk do skupin po 16 znacích"
   expect_equal(out$Hodnota, paste(strsplit(sha, "(?<=.{16})", perl = TRUE)[[1]], collapse = " "))
 })
 
-
 synthetic_manifest <- function(env = parent.frame()) {
   path <- withr::local_tempfile(.local_envir = env)
   tables <- list(
@@ -150,7 +149,6 @@ test_that("manifest hlásí chybějící pole i soubor", {
   }
 })
 
-
 manifest_entry <- function(...) {
   entry <- list(file = "discharge.csv.gz", bytes = 1, records = 1, columns = list("text"))
   changes <- list(...)
@@ -190,7 +188,6 @@ test_that("manifest odmítne chybějící tables, neplatné hodnoty a duplicitn�
   expect_error(read_test_manifest(list(tables = list(manifest_entry(), manifest_entry(file = "discharge.csv")))), "Soubor discharge.csv: duplicitní jméno tabulky discharge.", fixed = TRUE)
 })
 
-
 test_that("pořadí jmen v chybě nezávisí na kolaci locale", {
   withr::local_collate("C.UTF-8")
   manifest <- synthetic_manifest()
@@ -200,7 +197,6 @@ test_that("pořadí jmen v chybě nezávisí na kolaci locale", {
   expect_error(corpus_overview(manifest_counts(manifest), manifest),
                "Tabulky mimo katalog: Z, a.", fixed = TRUE)
 })
-
 
 test_that("eda_provenance vyžaduje soubor připravený nástrojem", {
   withr::local_envvar(MEDIPARSE_EDA_PROVENANCE = NA)
@@ -219,7 +215,6 @@ test_that("eda_provenance zachová hodnoty a pořadí souboru", {
   expect_identical(details$python, "3.13.9")
   expect_identical(details$dirty, "true")
 })
-
 
 test_that("eda_provenance odmítne chybějící povinný klíč", {
   details <- list(commit = "abc", dirty = "false", pixi_lock_sha256 = "hash",
