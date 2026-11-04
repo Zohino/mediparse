@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from operator import itemgetter
 from typing import TYPE_CHECKING
 
@@ -305,3 +306,20 @@ def test_positive_counts_match_label_columns_of_the_file(tmp_path: Path) -> None
     for diagnosis in Diagnosis:
         in_file = sum(diagnosis in item.labels for item in items)
         assert in_file == counts.positives[diagnosis]
+
+
+def test_codes_missing_column_is_sanitized_invalid_input(tmp_path: Path) -> None:
+    """Chybějící icd_code se ohlásí cestou a typem chyby bez hodnot buněk a příčiny."""
+    discharge, diagnoses = write_tables(tmp_path)
+    canary = "SYNTHETIC_CELL_CANARY"
+    pq.write_table(pa.table({"hadm_id": [canary], "icd_version": ["10"]}), diagnoses)
+    source = DuckDbCohort(
+        discharge, diagnoses, tmp_path / "c.parquet", tmp_path / "spill", min_chars=100
+    )
+
+    with pytest.raises(InvalidInputError, match=re.escape(str(diagnoses))) as error:
+        source.codes()
+
+    assert "BinderException" in str(error.value)
+    assert error.value.__cause__ is None
+    assert canary not in str(error.value)
