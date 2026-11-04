@@ -90,7 +90,7 @@ comparison_column <- function(table, summaries, coverage, quality, shown) {
     share("s_icd"),
     percentile_cell(shown, table, "znaky", "p50"),
     percentile_cell(shown, table, "znaky", "p95"),
-    count(checked$prazdne + checked$pod_100),
+    count(checked$prazdne + checked$pod_limitem),
     count(checked$duplicity)
   )
 }

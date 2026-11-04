@@ -43,8 +43,8 @@ comparison_inputs <- function() {
       tabulka = c("discharge", "radiology"),
       zprav = c(2000, 4000),
       prazdne = c(1, 0),
-      pod_100 = c(2, 30),
-      od_100_do_500 = c(5, 900),
+      pod_limitem = c(2, 30),
+      od_limitu_do_500 = c(5, 900),
       nad_50000 = c(0, 0),
       duplicity = c(3, 1500)
     ),

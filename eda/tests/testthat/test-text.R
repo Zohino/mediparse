@@ -204,10 +204,11 @@ test_that("note_quality rozliší NULL, prázdný text a hranice délek", {
     strrep("e", 50000), strrep("f", 50001)
   ))
 
+  expect_named(out, c("tabulka", "zprav", "prazdne", "pod_limitem", "od_limitu_do_500", "nad_50000", "duplicity"))
   expect_equal(out$zprav, 8)
   expect_equal(out$prazdne, 2)
-  expect_equal(out$pod_100, 1)
-  expect_equal(out$od_100_do_500, 2)
+  expect_equal(out$pod_limitem, 1)
+  expect_equal(out$od_limitu_do_500, 2)
   expect_equal(out$nad_50000, 1)
   expect_equal(out$duplicity, 0)
 })
@@ -290,8 +291,8 @@ test_that("quality_table zveřejní počty a podíly v každé tabulce", {
     tabulka = c("discharge", "radiology"),
     zprav = c(1000, 0),
     prazdne = c(3, 0),
-    pod_100 = c(50, 0),
-    od_100_do_500 = c(100, 0),
+    pod_limitem = c(50, 0),
+    od_limitu_do_500 = c(100, 0),
     nad_50000 = c(5, 0),
     duplicity = c(20, 0)
   )
