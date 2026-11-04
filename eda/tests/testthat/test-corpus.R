@@ -219,3 +219,31 @@ test_that("eda_provenance zachová hodnoty a pořadí souboru", {
   expect_identical(details$python, "3.13.9")
   expect_identical(details$dirty, "true")
 })
+
+
+test_that("eda_provenance odmítne chybějící povinný klíč", {
+  details <- list(commit = "abc", dirty = "false", pixi_lock_sha256 = "hash",
+                  data_source = "syntetická data")
+  path <- file.path(withr::local_tempdir(), "provenance.json")
+  for (key in c("commit", "dirty", "pixi_lock_sha256", "data_source")) {
+    incomplete <- details
+    incomplete[[key]] <- NULL
+    jsonlite::write_json(incomplete, path, auto_unbox = TRUE)
+    expect_error(eda_provenance(path), "Neplatná provenance", info = key)
+  }
+})
+
+test_that("eda_provenance odmítne hodnoty jiného typu než skalární řetězec", {
+  details <- list(commit = "abc", dirty = "false", pixi_lock_sha256 = "hash",
+                  data_source = "syntetická data")
+  path <- file.path(withr::local_tempdir(), "provenance.json")
+  for (value in list(TRUE, 1L, c("a", "b"), list("a"))) {
+    invalid <- details
+    invalid$dirty <- value
+    jsonlite::write_json(invalid, path, auto_unbox = TRUE)
+    expect_error(eda_provenance(path), "Neplatná provenance")
+  }
+  details$extra <- TRUE
+  jsonlite::write_json(details, path, auto_unbox = TRUE)
+  expect_error(eda_provenance(path), "Neplatná provenance")
+})

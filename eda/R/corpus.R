@@ -155,5 +155,14 @@ eda_provenance <- function(path = Sys.getenv("MEDIPARSE_EDA_PROVENANCE")) {
   if (!nzchar(path) || !file.exists(path)) {
     stop("Chybí provenance renderu; spusťte nástroj mediparse-eda-provenance.", call. = FALSE)
   }
-  jsonlite::read_json(path)
+  details <- jsonlite::read_json(path)
+  required <- c("commit", "dirty", "pixi_lock_sha256", "data_source")
+  valid <- is.list(details) && all(required %in% names(details)) &&
+    all(vapply(details, function(value) {
+      is.character(value) && length(value) == 1L && !is.na(value)
+    }, logical(1)))
+  if (!valid) {
+    stop("Neplatná provenance renderu; spusťte nástroj mediparse-eda-provenance.", call. = FALSE)
+  }
+  details
 }
