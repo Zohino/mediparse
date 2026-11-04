@@ -1,0 +1,50 @@
+[
+  {
+    "name": "filtry",
+    "discharge": [
+      {"note_id":"1-DS-1","subject_id":"1","hadm_id":"10","text":"Axxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},
+      {"note_id":"1-DS-2","subject_id":"1","hadm_id":"11","text":"Bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},
+      {"note_id":"2-DS-1","subject_id":"2","hadm_id":null,"text":"Cxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},
+      {"note_id":"3-DS-1","subject_id":"3","hadm_id":"30","text":"Dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},
+      {"note_id":"4-DS-1","subject_id":"4","hadm_id":"40","text":"Exxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},
+      {"note_id":"5-DS-1","subject_id":"5","hadm_id":"50","text":null},
+      {"note_id":"6-DS-1","subject_id":"6","hadm_id":"60","text":""},
+      {"note_id":"7-DS-1","subject_id":"7","hadm_id":"70","text":"Axxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},
+      {"note_id":"8-DS-1","subject_id":"8","hadm_id":"80","text":"Fxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}
+    ],
+    "diagnoses_icd": [
+      {"hadm_id":"10","icd_code":"K1","icd_version":"10"},
+      {"hadm_id":"11","icd_code":"K2","icd_version":"10"},
+      {"hadm_id":"40","icd_code":"K3","icd_version":"10"},
+      {"hadm_id":"50","icd_code":"K4","icd_version":"10"},
+      {"hadm_id":"60","icd_code":"K5","icd_version":"10"},
+      {"hadm_id":"70","icd_code":"K6","icd_version":"10"},
+      {"hadm_id":"80","icd_code":null,"icd_version":null}
+    ],
+    "funnel": [[9,8],[7,6],[4,3],[3,2]],
+    "selected": ["1-DS-1","1-DS-2","8-DS-1"]
+  },
+  {
+    "name": "duplicity",
+    "discharge": [
+      {"note_id":"1-DS-1","subject_id":"1","hadm_id":null,"text":"Axxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},
+      {"note_id":"2-DS-1","subject_id":"2","hadm_id":"20","text":"Axxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},
+      {"note_id":"10-DS-1","subject_id":"10","hadm_id":"100","text":"Bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},
+      {"note_id":"9-DS-1","subject_id":"9","hadm_id":"90","text":"Bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}
+    ],
+    "diagnoses_icd": [
+      {"hadm_id":"20","icd_code":"K1","icd_version":"10"},
+      {"hadm_id":"90","icd_code":"K2","icd_version":"10"},
+      {"hadm_id":"100","icd_code":"K3","icd_version":"10"}
+    ],
+    "funnel": [[4,4],[3,3],[3,3],[2,2]],
+    "selected": ["2-DS-1","10-DS-1"]
+  },
+  {
+    "name": "prazdne",
+    "discharge": [],
+    "diagnoses_icd": [],
+    "funnel": [[0,0],[0,0],[0,0],[0,0]],
+    "selected": []
+  }
+]
