@@ -150,11 +150,13 @@ def test_real_data_are_refused_in_claude_code(tmp_path: Path) -> None:
     parquet = write_tables(tmp_path / "parquet")
 
     with (
-        pytest.raises(DataAccessError, match="Claude Code"),
+        pytest.raises(DataAccessError, match="Claude Code") as refusal,
         EdaDatabase(parquet, CLAUDE_CODE).connect(),
     ):
         pytest.fail("spojení nemělo vzniknout")
 
+    assert str(parquet) in str(refusal.value)
+    assert "synthetic.json" in str(refusal.value)
     assert not (tmp_path / "duckdb-tmp").exists()
 
 
