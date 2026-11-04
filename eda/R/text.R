@@ -2,7 +2,7 @@ PERCENTILES <- c(0.01, 0.05, 0.10, 0.25, 0.50, 0.75, 0.90, 0.95, 0.99)
 PERCENTILE_COLUMNS <- sprintf("p%02d", as.integer(round(100 * PERCENTILES)))
 LENGTH_METRICS <- c(znaky = "chars", slova = "words", znacky = "markers")
 
-SHORT_LIMIT <- 100L
+SHORT_LIMIT <- input_corpus_rule()$min_chars
 MEDIUM_LIMIT <- 500L
 LONG_LIMIT <- 50000L
 REFERENCE_MARKERS <- 60.6

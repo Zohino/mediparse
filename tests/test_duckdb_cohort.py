@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import json
+import re
+from operator import itemgetter
 from typing import TYPE_CHECKING
 
 import pyarrow as pa
@@ -13,8 +16,11 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.duckdb_cohort import DuckDbCohort
 from mediparse.infrastructure.note_table import ParquetNoteTable
+from mediparse.infrastructure.parquet_file import write_string_table
 from tests.cohort_support import (
     CODES,
+    DIAGNOSES_COLUMNS,
+    DISCHARGE_COLUMNS,
     EXPECTED_FUNNEL,
     EXPECTED_POSITIVES,
     icd,
@@ -22,17 +28,44 @@ from tests.cohort_support import (
     text,
     write_tables,
 )
+from tests.support import REPOSITORY
 
 if TYPE_CHECKING:
     from pathlib import Path
+    from typing import Any
 
     from mediparse.domain.input_note import InputNote
+
+INPUT_CORPUS_CASES = json.loads(
+    (REPOSITORY / "tests/fixtures/input_corpus_cases.json").read_text(encoding="utf-8")
+)
+
+
+@pytest.mark.parametrize("case", INPUT_CORPUS_CASES, ids=itemgetter("name"))
+def test_shared_input_corpus_cases(tmp_path: Path, case: dict[str, Any]) -> None:
+    """Výběr i čtyři kroky trychtýře odpovídají sdílenému ručnímu orákulu."""
+    discharge = tmp_path / "discharge.parquet"
+    diagnoses = tmp_path / "diagnoses_icd.parquet"
+    write_string_table(discharge, DISCHARGE_COLUMNS, case["discharge"])
+    write_string_table(diagnoses, DIAGNOSES_COLUMNS, case["diagnoses_icd"])
+    out = tmp_path / "cohort.parquet"
+    source = DuckDbCohort(discharge, diagnoses, out, tmp_path / "spill", min_chars=100)
+
+    with source.select({}) as selected:
+        assert [[step.notes, step.patients] for step in selected.counts.funnel] == case[
+            "funnel"
+        ]
+        selected.write()
+
+    assert set(_notes(out)) == set(case["selected"])
 
 
 def _build(root: Path, name: str = "cohort") -> tuple[CohortCounts, Path]:
     discharge, diagnoses = write_tables(root)
     out = root / f"{name}.parquet"
-    source = DuckDbCohort(discharge, diagnoses, out, root / f"spill-{name}")
+    source = DuckDbCohort(
+        discharge, diagnoses, out, root / f"spill-{name}", min_chars=100
+    )
     labels = label_codes(source.codes(), CODES).diagnoses
     with source.select(labels) as selected:
         selected.write()
@@ -133,7 +166,9 @@ def test_connection_uses_given_spill_directory(tmp_path: Path) -> None:
     """Spill DuckDB jde do předaného adresáře, ne do ``.tmp`` v pracovním adresáři."""
     discharge, diagnoses = write_tables(tmp_path)
     spill = tmp_path / "duckdb-tmp"
-    source = DuckDbCohort(discharge, diagnoses, tmp_path / "c.parquet", spill)
+    source = DuckDbCohort(
+        discharge, diagnoses, tmp_path / "c.parquet", spill, min_chars=100
+    )
 
     with source.connect() as con:
         row = con.execute("SELECT current_setting('temp_directory')").fetchone()
@@ -145,7 +180,9 @@ def test_missing_input_is_invalid_input(tmp_path: Path) -> None:
     """Chybějící vstupní soubor je InvalidInputError."""
     discharge, diagnoses = write_tables(tmp_path)
     discharge.unlink()
-    source = DuckDbCohort(discharge, diagnoses, tmp_path / "c.parquet", tmp_path / "s")
+    source = DuckDbCohort(
+        discharge, diagnoses, tmp_path / "c.parquet", tmp_path / "s", min_chars=100
+    )
 
     with pytest.raises(InvalidInputError, match="discharge"):
         source.codes()
@@ -163,7 +200,9 @@ def _small_source(root: Path) -> DuckDbCohort:
         [icd(10, 1, "E119", "10")],
         padded=False,
     )
-    return DuckDbCohort(discharge, diagnoses, root / "c.parquet", root / "s")
+    return DuckDbCohort(
+        discharge, diagnoses, root / "c.parquet", root / "s", min_chars=100
+    )
 
 
 def test_small_cohort_is_selected_and_written_by_adapter(tmp_path: Path) -> None:
@@ -194,7 +233,9 @@ def test_output_parent_that_is_a_file_is_invalid_input(tmp_path: Path) -> None:
     discharge, diagnoses = write_tables(tmp_path)
     blocker = tmp_path / "blocker"
     blocker.write_text("soubor místo adresáře", encoding="utf-8")
-    source = DuckDbCohort(discharge, diagnoses, blocker / "c.parquet", tmp_path / "s")
+    source = DuckDbCohort(
+        discharge, diagnoses, blocker / "c.parquet", tmp_path / "s", min_chars=100
+    )
 
     with pytest.raises(InvalidInputError, match="zapsat"):
         _select_and_write(source)
@@ -225,7 +266,7 @@ def test_null_subject_id_in_write_is_invalid_input_and_leaves_no_file(
         discharge,
     )
     out = tmp_path / "c.parquet"
-    source = DuckDbCohort(discharge, diagnoses, out, tmp_path / "s")
+    source = DuckDbCohort(discharge, diagnoses, out, tmp_path / "s", min_chars=100)
 
     with pytest.raises(InvalidInputError, match="zapsat"):
         _select_and_write(source)
@@ -245,7 +286,9 @@ def test_error_messages_do_not_echo_cell_values(tmp_path: Path) -> None:
         }),
         discharge,
     )
-    source = DuckDbCohort(discharge, diagnoses, tmp_path / "c.parquet", tmp_path / "s")
+    source = DuckDbCohort(
+        discharge, diagnoses, tmp_path / "c.parquet", tmp_path / "s", min_chars=100
+    )
 
     with pytest.raises(InvalidInputError) as raised:
         _select_and_write(source)
@@ -263,3 +306,40 @@ def test_positive_counts_match_label_columns_of_the_file(tmp_path: Path) -> None
     for diagnosis in Diagnosis:
         in_file = sum(diagnosis in item.labels for item in items)
         assert in_file == counts.positives[diagnosis]
+
+
+def test_codes_missing_column_is_sanitized_invalid_input(tmp_path: Path) -> None:
+    """Chybějící icd_code se ohlásí cestou a typem chyby bez hodnot buněk a příčiny."""
+    discharge, diagnoses = write_tables(tmp_path)
+    canary = "SYNTHETIC_CELL_CANARY"
+    pq.write_table(pa.table({"hadm_id": [canary], "icd_version": ["10"]}), diagnoses)
+    source = DuckDbCohort(
+        discharge, diagnoses, tmp_path / "c.parquet", tmp_path / "spill", min_chars=100
+    )
+
+    with pytest.raises(InvalidInputError, match=re.escape(str(diagnoses))) as error:
+        source.codes()
+
+    assert "BinderException" in str(error.value)
+    assert error.value.__cause__ is None
+    assert canary not in str(error.value)
+
+
+def test_macro_exports_only_consumed_columns(tmp_path: Path) -> None:
+    """Veřejný výstup makra nese identifikátory, přítomnost ICD a pořadí kopie."""
+    source = _small_source(tmp_path)
+
+    with source.select({}) as selected:
+        result = selected.connection.execute(
+            "SELECT * FROM input_corpus_selection(100) LIMIT 0"
+        )
+        description = result.description
+
+    assert description is not None
+    assert [column[0] for column in description] == [
+        "note_id",
+        "subject_id",
+        "hadm_id",
+        "has_icd",
+        "copy",
+    ]

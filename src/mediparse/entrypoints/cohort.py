@@ -21,6 +21,7 @@ from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_co
 from mediparse.infrastructure.duckdb_cohort import SOURCE_TABLES, DuckDbCohort
 from mediparse.infrastructure.duckdb_parquet import SPILL_DIRECTORY
 from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.infrastructure.input_corpus_rule import load_input_corpus_rule
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.mimic_tables import load_source_digests
 from mediparse.infrastructure.package_versions import installed_versions
@@ -41,6 +42,7 @@ def main(
     discharge: Path,
     diagnoses: Path,
     candidates: Path,
+    corpus_rule: Path,
     tables: Path,
     cohort: Path,
     manifest: Path,
@@ -56,6 +58,7 @@ def main(
         discharge=discharge,
         diagnoses=diagnoses,
         candidates=candidates,
+        corpus_rule=corpus_rule,
         tables=tables,
         cohort=cohort,
         manifest=manifest,
@@ -69,6 +72,7 @@ def run(
     discharge: Path,
     diagnoses: Path,
     candidates: Path,
+    corpus_rule: Path,
     tables: Path,
     cohort: Path,
     manifest: Path,
@@ -81,16 +85,24 @@ def run(
         nečitelnou revizi zdroje, diagnózu pod deset zpráv a prázdnou kohortu.
     """
     codes = load_diagnosis_codes(candidates)
+    rule = load_input_corpus_rule(corpus_rule)
     sources = load_source_digests(tables, SOURCE_TABLES)
     source = revision()
     result = CohortMaterialization(
-        DuckDbCohort(discharge, diagnoses, cohort, cohort.parent / SPILL_DIRECTORY)
+        DuckDbCohort(
+            discharge,
+            diagnoses,
+            cohort,
+            cohort.parent / SPILL_DIRECTORY,
+            min_chars=rule.min_chars,
+        )
     ).run(codes)
     write_model(
         manifest,
         CohortManifest(
             cohort_sha256=file_sha256(cohort),
             config_sha256=file_sha256(candidates),
+            input_corpus_sha256=file_sha256(corpus_rule),
             sources=sources,
             environment=Environment(
                 packages=installed_versions(PACKAGES), source=source

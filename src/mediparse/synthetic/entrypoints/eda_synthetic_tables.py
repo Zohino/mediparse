@@ -12,7 +12,7 @@ from mediparse.domain.language import Language
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
-from mediparse.infrastructure.duckdb_cohort import MIN_CHARS
+from mediparse.infrastructure.input_corpus_rule import load_input_corpus_rule
 from mediparse.infrastructure.mimic_inventory import read_manifest
 from mediparse.infrastructure.parquet_file import write_string_table
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
@@ -70,7 +70,7 @@ def run(argv: Sequence[str]) -> ExitCode:
         lexicon,
         shapes,
         prefix=args.prefix,
-        text_chars=MIN_CHARS,
+        text_chars=load_input_corpus_rule(args.corpus_rule).min_chars,
     )
     for table, rows in tables.items():
         write_string_table(args.out / f"{table}.parquet", shapes[table].columns, rows)
@@ -111,7 +111,15 @@ def _parser() -> argparse.ArgumentParser:
         prog="mediparse-eda-synthetic-tables",
         description="Syntetické tabulky ve tvaru MIMIC pro render EDA.",
     )
-    for name in ("plans", "corpus", "manifest", "candidates", "lexicon", "out"):
+    for name in (
+        "plans",
+        "corpus",
+        "manifest",
+        "candidates",
+        "corpus-rule",
+        "lexicon",
+        "out",
+    ):
         parser.add_argument(f"--{name}", type=Path, required=True)
     parser.add_argument("--prefix", required=True)
     return parser

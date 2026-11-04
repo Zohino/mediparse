@@ -22,6 +22,7 @@ use rule build_cohort as build_smoketest_cohort with:
         discharge=SMOKETEST / "mimic/parquet/discharge.parquet",
         diagnoses=SMOKETEST / "mimic/parquet/diagnoses_icd.parquet",
         candidates="config/diagnosis_candidates.json",
+        corpus_rule="config/input_corpus.json",
         tables=SMOKETEST / "mimic/tables.json",
     output:
         cohort=SMOKETEST / "cohort.parquet",

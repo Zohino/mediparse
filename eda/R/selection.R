@@ -5,44 +5,35 @@ FUNNEL_STEPS <- c(
   "Bez přesných duplicit"
 )
 
-eligible_cte <- function(con) {
-  metrics <- DBI::dbQuoteIdentifier(con, metrics_for(con, "discharge"))
-  sprintf("
-    WITH base AS (
-      SELECT
-        d.note_id,
-        d.subject_id,
-        d.hadm_id,
-        d.hadm_id IS NOT NULL AND EXISTS (
-          SELECT 1 FROM diagnoses_icd i WHERE i.hadm_id = d.hadm_id
-        ) AS has_icd,
-        coalesce(m.chars, 0) >= %d AS long_enough,
-        m.fingerprint
-      FROM discharge d
-      JOIN %s m ON m.note_id = d.note_id
-    ),
-    eligible AS (
-      SELECT *, row_number() OVER (PARTITION BY fingerprint ORDER BY note_id) AS copy
-      FROM base
-      WHERE has_icd AND long_enough
-    )
-  ", SHORT_LIMIT, metrics)
+INPUT_CORPUS_TABLE <- "input_corpus"
+
+input_corpus_table <- function(con) {
+  if (INPUT_CORPUS_TABLE %in% DBI::dbListTables(con)) return(INPUT_CORPUS_TABLE)
+  path <- project_path("src", "mediparse", "infrastructure", "input_corpus.sql")
+  # DuckDB váže tabulky při definici makra, proto musí pohledy už existovat.
+  invisible(DBI::dbExecute(con, paste(readLines(path, encoding = "UTF-8"), collapse = "\n")))
+  invisible(DBI::dbExecute(con, sprintf(
+    "CREATE TEMP TABLE %s AS SELECT * FROM input_corpus_selection(?)",
+    DBI::dbQuoteIdentifier(con, INPUT_CORPUS_TABLE)
+  ), params = list(SHORT_LIMIT)))
+  INPUT_CORPUS_TABLE
 }
 
 input_corpus_sql <- function(con) {
-  paste(
-    eligible_cte(con),
-    "SELECT note_id, subject_id, hadm_id FROM eligible WHERE copy = 1"
+  sprintf(
+    "SELECT note_id, subject_id, hadm_id FROM %s WHERE copy = 1",
+    DBI::dbQuoteIdentifier(con, input_corpus_table(con))
   )
 }
 
 corpus_funnel <- function(con) {
-  rows <- DBI::dbGetQuery(con, paste0(eligible_cte(con), ",
-    steps AS (
-      SELECT 1 AS step, subject_id FROM base
-      UNION ALL SELECT 2, subject_id FROM base WHERE has_icd
-      UNION ALL SELECT 3, subject_id FROM eligible
-      UNION ALL SELECT 4, subject_id FROM eligible WHERE copy = 1
+  table <- DBI::dbQuoteIdentifier(con, input_corpus_table(con))
+  rows <- DBI::dbGetQuery(con, sprintf("
+    WITH steps AS (
+      SELECT 1 AS step, subject_id FROM %s
+      UNION ALL SELECT 2, subject_id FROM %s WHERE has_icd
+      UNION ALL SELECT 3, subject_id FROM %s WHERE copy IS NOT NULL
+      UNION ALL SELECT 4, subject_id FROM %s WHERE copy = 1
     ),
     per_patient AS (
       SELECT step, subject_id, count(*) AS notes FROM steps GROUP BY step, subject_id
@@ -54,7 +45,7 @@ corpus_funnel <- function(con) {
       count(*) FILTER (WHERE notes > 1) AS vice_zprav
     FROM per_patient
     GROUP BY step
-  "))
+  ", table, table, table, table))
   index <- match(seq_along(FUNNEL_STEPS), rows$step)
   counts <- function(column) {
     out <- as.numeric(rows[[column]][index])

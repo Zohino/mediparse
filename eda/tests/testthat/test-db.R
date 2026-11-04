@@ -15,6 +15,29 @@ setting <- function(con, name) {
   DBI::dbGetQuery(con, sprintf("SELECT current_setting('%s') AS v", name))$v
 }
 
+test_that("input_corpus_rule splňuje sdílené případy Pythonu a R", {
+  cases <- jsonlite::read_json(project_path("tests", "fixtures", "input_corpus_rule_cases.json"))
+  path <- file.path(withr::local_tempdir(), "rule.json")
+  for (case in cases) {
+    writeLines(case$text, path)
+    if (case$valid) {
+      expect_no_error(input_corpus_rule(path))
+    } else {
+      expect_error(input_corpus_rule(path), "input_corpus.json", info = case$name)
+    }
+  }
+})
+
+test_that("input_corpus_rule odmítne chybějící i nečitelný soubor", {
+  directory <- withr::local_tempdir()
+  expect_error(input_corpus_rule(file.path(directory, "missing.json")), "input_corpus.json")
+  expect_error(suppressWarnings(input_corpus_rule(directory)), "input_corpus.json")
+})
+
+test_that("SHORT_LIMIT odpovídá schválenému prahu sto znaků", {
+  expect_identical(SHORT_LIMIT, 100L)
+})
+
 test_that("eda_connect vytvoří view pro každý parquet", {
   dir <- file.path(withr::local_tempdir(), "parquet")
   write_parquet_tables(dir)

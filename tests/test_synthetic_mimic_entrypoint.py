@@ -17,6 +17,7 @@ from mediparse.synthetic.infrastructure.plans_file import PlansFile
 from tests.support import (
     REPOSITORY_CORPUS,
     REPOSITORY_DIAGNOSIS_CANDIDATES,
+    REPOSITORY_INPUT_CORPUS,
     REPOSITORY_MIMIC_MANIFEST,
     REPOSITORY_PLANS,
     fixed_revision,
@@ -68,6 +69,7 @@ def test_cohort_matches_plans_and_source_hashes(
             diagnoses=diagnoses,
             candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
             tables=tables,
+            corpus_rule=REPOSITORY_INPUT_CORPUS,
             cohort=output,
             manifest=manifest,
             revision=fixed_revision,

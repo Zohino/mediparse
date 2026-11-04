@@ -13,6 +13,17 @@ object_keys <- function(value, keys) {
   is.list(value) && length(value) == length(keys) && setequal(names(value), keys)
 }
 
+input_corpus_rule <- function(path = config_path("input_corpus.json")) {
+  if (!file.exists(path)) stop("Soubor input_corpus.json neexistuje: ", path, call. = FALSE)
+  rule <- tryCatch(jsonlite::read_json(path), error = function(error) {
+    stop("Soubor input_corpus.json nelze přečíst: ", path, call. = FALSE)
+  })
+  valid <- object_keys(rule, "min_chars") && is.integer(rule$min_chars) &&
+    length(rule$min_chars) == 1L && !is.na(rule$min_chars) && rule$min_chars >= 1L
+  if (!valid) stop("Neplatný config input_corpus.json: ", path, call. = FALSE)
+  rule
+}
+
 data_access_rules <- function(path = project_path("src", "mediparse", "domain", "data_access.json")) {
   if (!file.exists(path)) stop("Soubor pravidel data_access.json neexistuje: ", path, call. = FALSE)
   rules <- tryCatch(jsonlite::read_json(path), error = function(error) {

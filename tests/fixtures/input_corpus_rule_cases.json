@@ -1,0 +1,15 @@
+[
+  {"name": "valid", "text": "{\"min_chars\":100}", "valid": true},
+  {"name": "float", "text": "{\"min_chars\":100.0}", "valid": false},
+  {"name": "string", "text": "{\"min_chars\":\"100\"}", "valid": false},
+  {"name": "boolean", "text": "{\"min_chars\":true}", "valid": false},
+  {"name": "zero", "text": "{\"min_chars\":0}", "valid": false},
+  {"name": "overflow", "text": "{\"min_chars\":2147483648}", "valid": false},
+  {"name": "extra", "text": "{\"min_chars\":100,\"extra\":1}", "valid": false},
+  {"name": "missing", "text": "{}", "valid": false},
+  {"name": "not-json", "text": "ne-JSON", "valid": false},
+  {"name": "array", "text": "{\"min_chars\":[100]}", "valid": false},
+  {"name": "null", "text": "{\"min_chars\":null}", "valid": false},
+  {"name": "negative", "text": "{\"min_chars\":-1}", "valid": false},
+  {"name": "exponent", "text": "{\"min_chars\":1e2}", "valid": false}
+]

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from contextlib import closing, contextmanager, suppress
 from dataclasses import dataclass
+from importlib.resources import files
 from typing import TYPE_CHECKING, Final
 
 import duckdb
@@ -29,7 +30,6 @@ if TYPE_CHECKING:
 
     from mediparse.domain.cohort import RawCode
 
-MIN_CHARS: Final = 100
 SOURCE_TABLES: Final = ("discharge.csv.gz", "diagnoses_icd.csv.gz")
 BATCH_ROWS: Final = 4096
 LANGUAGE: Final = Language.EN
@@ -39,46 +39,20 @@ WITH admissions AS (
     SELECT
         i.hadm_id,
         list(DISTINCT l.diagnosis) FILTER (WHERE l.diagnosis IS NOT NULL) AS labels
-    FROM diagnoses i
+    FROM diagnoses_icd i
     LEFT JOIN code_labels l
         ON i.icd_version = l.icd_version AND i.icd_code = l.icd_code
     GROUP BY i.hadm_id
-),
--- Otisk a délka vznikají v samostatné CTE před oknem: okno přímo nad hash(text)
--- by materializovalo celý text. Text se připojí až v _COHORT. Celý text jako klíč
--- deduplikace (PARTITION BY text) spadl v sondě S23 na paměť.
-metrics AS (
-    SELECT
-        note_id,
-        CAST(subject_id AS BIGINT) AS subject_id,
-        hadm_id,
-        hash(text) AS fingerprint,
-        coalesce(length(text), 0) AS chars
-    FROM discharge
-),
-joined AS (
-    SELECT
-        m.note_id,
-        m.subject_id,
-        m.fingerprint,
-        a.hadm_id IS NOT NULL AS has_icd,
-        m.chars >= $min_chars AS long_enough,
-        coalesce(a.labels, CAST([] AS VARCHAR[])) AS labels
-    FROM metrics m
-    LEFT JOIN admissions a ON a.hadm_id = m.hadm_id
-),
--- Filtry platí před deduplikací, aby kopie bez ICD nebo příliš krátká nevyřadila
--- platnou kopii; počty tak odpovídají sešitům EDA 5, 7 a 8.
-eligible AS (
-    SELECT
-        note_id,
-        row_number() OVER (PARTITION BY fingerprint ORDER BY note_id) AS copy
-    FROM joined
-    WHERE has_icd AND long_enough
 )
-SELECT j.*, e.copy
-FROM joined j
-LEFT JOIN eligible e ON e.note_id = j.note_id
+SELECT
+    s.note_id,
+    CAST(s.subject_id AS BIGINT) AS subject_id,
+    s.hadm_id,
+    s.has_icd,
+    s.copy,
+    coalesce(a.labels, CAST([] AS VARCHAR[])) AS labels
+FROM input_corpus_selection($min_chars) s
+LEFT JOIN admissions a ON a.hadm_id = s.hadm_id
 """
 _FILTERS: Final[dict[FunnelStepName, Expression]] = {
     FunnelStepName.ALL_NOTES: ConstantExpression(value=True),
@@ -121,12 +95,13 @@ class DuckDbCohort:
     diagnoses: Path
     out: Path
     spill: Path
+    min_chars: int
 
     def connect(self) -> duckdb.DuckDBPyConnection:
         """Spojení v paměti se spillem v předaném adresáři a s oběma tabulkami.
 
         Returns:
-            Spojení s pohledy ``discharge`` a ``diagnoses``.
+            Spojení s pohledy ``discharge`` a ``diagnoses_icd``.
 
         Raises:
             InvalidInputError: Vstupní tabulka chybí nebo se nedá číst.
@@ -136,7 +111,7 @@ class DuckDbCohort:
         try:
             for name, path in (
                 ("discharge", self.discharge),
-                ("diagnoses", self.diagnoses),
+                ("diagnoses_icd", self.diagnoses),
             ):
                 create_parquet_view(con, name, path)
         except InvalidInputError:
@@ -156,7 +131,7 @@ class DuckDbCohort:
         with closing(self.connect()) as con:
             try:
                 rows = con.execute(
-                    "SELECT DISTINCT icd_version, icd_code FROM diagnoses"
+                    "SELECT DISTINCT icd_version, icd_code FROM diagnoses_icd"
                 ).fetchall()
             except duckdb.Error as error:
                 msg = f"Tabulka {self.diagnoses} nejde číst: {type(error).__name__}."
@@ -177,7 +152,7 @@ class DuckDbCohort:
         """
         with closing(self.connect()) as con:
             try:
-                _select(con, labels)
+                _select(con, labels, self.min_chars)
                 counts = _counts(con)
             except duckdb.Error as error:
                 msg = (
@@ -218,7 +193,7 @@ class DuckDbSelection:
 
 
 def _select(
-    con: duckdb.DuckDBPyConnection, labels: Mapping[RawCode, Diagnosis]
+    con: duckdb.DuckDBPyConnection, labels: Mapping[RawCode, Diagnosis], min_chars: int
 ) -> None:
     pairs = list(labels)
     table = pa.table({
@@ -227,7 +202,13 @@ def _select(
         "diagnosis": pa.array([labels[pair].value for pair in pairs], pa.string()),
     })
     con.register("code_labels", table)
-    con.execute(_BASE, {"min_chars": MIN_CHARS})
+    # DuckDB váže tabulky při definici makra, proto musí pohledy už existovat.
+    con.execute(
+        files("mediparse.infrastructure")
+        .joinpath("input_corpus.sql")
+        .read_text(encoding="utf-8")
+    )
+    con.execute(_BASE, {"min_chars": min_chars})
 
 
 def _step(base: duckdb.DuckDBPyRelation, step: FunnelStepName) -> FunnelStep:

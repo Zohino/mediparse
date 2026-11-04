@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import re
@@ -36,7 +37,7 @@ DISCHARGE_SHA: Final = "1" * 64
 DIAGNOSES_SHA: Final = "2" * 64
 
 
-def _configs(root: Path) -> tuple[Path, Path]:
+def _configs(root: Path) -> tuple[Path, Path, Path]:
     candidates = write_candidates(root / "diagnosis_candidates.json")
     tables = root / "mimic_tables.json"
     base = "https://physionet.org/files/mimiciv/3.1/hosp"
@@ -49,13 +50,15 @@ def _configs(root: Path) -> tuple[Path, Path]:
         }),
         encoding="utf-8",
     )
-    return candidates, tables
+    rule = root / "input_corpus.json"
+    rule.write_text('{"min_chars":100}', encoding="utf-8")
+    return candidates, tables, rule
 
 
 def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
     """Kohorta a manifest vzniknou; otisky odpovídají souborům a configu tabulek."""
     discharge, diagnoses = write_tables(tmp_path)
-    candidates, tables = _configs(tmp_path)
+    candidates, tables, rule = _configs(tmp_path)
     out = tmp_path / "resources" / "cohort.parquet"
     manifest = tmp_path / "results" / "cohort" / "manifest.json"
 
@@ -63,6 +66,7 @@ def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
         discharge=discharge,
         diagnoses=diagnoses,
         candidates=candidates,
+        corpus_rule=rule,
         tables=tables,
         cohort=out,
         manifest=manifest,
@@ -74,7 +78,8 @@ def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
     )
     assert code is ExitCode.OK
     assert written.cohort_sha256 == file_sha256(out)
-    assert written.config_sha256 == file_sha256(candidates)
+    assert written.config_sha256 == hashlib.sha256(candidates.read_bytes()).hexdigest()
+    assert written.input_corpus_sha256 == hashlib.sha256(rule.read_bytes()).hexdigest()
     assert written.sources == {
         "discharge.csv.gz": DISCHARGE_SHA,
         "diagnoses_icd.csv.gz": DIAGNOSES_SHA,
@@ -101,7 +106,7 @@ def test_cell_below_threshold_is_refused_and_nothing_is_written(
         [icd(10, 1, "E119", "10")],
         padded=False,
     )
-    candidates, tables = _configs(tmp_path)
+    candidates, tables, rule = _configs(tmp_path)
     out = tmp_path / "cohort.parquet"
     manifest = tmp_path / "manifest.json"
 
@@ -109,6 +114,7 @@ def test_cell_below_threshold_is_refused_and_nothing_is_written(
         discharge=discharge,
         diagnoses=diagnoses,
         candidates=candidates,
+        corpus_rule=rule,
         tables=tables,
         cohort=out,
         manifest=manifest,
@@ -124,17 +130,23 @@ def test_cell_below_threshold_is_refused_and_nothing_is_written(
 
 
 def _run(
-    tmp_path: Path, *, discharge: Path | None, revision: Callable[[], SourceRevision]
+    tmp_path: Path,
+    *,
+    discharge: Path | None,
+    revision: Callable[[], SourceRevision],
+    corpus_rule: Path | None = None,
+    manifest: Path | None = None,
 ) -> ExitCode:
     existing, diagnoses = write_tables(tmp_path)
-    candidates, tables = _configs(tmp_path)
+    candidates, tables, rule = _configs(tmp_path)
     return cohort.run(
         discharge=discharge or existing,
         diagnoses=diagnoses,
         candidates=candidates,
+        corpus_rule=corpus_rule or rule,
         tables=tables,
         cohort=tmp_path / "cohort.parquet",
-        manifest=tmp_path / "manifest.json",
+        manifest=manifest or tmp_path / "manifest.json",
         revision=revision,
     )
 
@@ -162,7 +174,7 @@ def test_config_without_source_table_is_refused(
 ) -> None:
     """Config tabulek bez zdrojové tabulky krok odmítne dřív, než zapíše kohortu či manifest."""
     discharge, diagnoses = write_tables(tmp_path)
-    candidates, tables = _configs(tmp_path)
+    candidates, tables, rule = _configs(tmp_path)
     kept = json.loads(tables.read_text(encoding="utf-8"))
     kept["mimic_tables"] = kept["mimic_tables"][:1]
     tables.write_text(json.dumps(kept), encoding="utf-8")
@@ -171,6 +183,7 @@ def test_config_without_source_table_is_refused(
         discharge=discharge,
         diagnoses=diagnoses,
         candidates=candidates,
+        corpus_rule=rule,
         tables=tables,
         cohort=tmp_path / "cohort.parquet",
         manifest=tmp_path / "manifest.json",
@@ -181,3 +194,45 @@ def test_config_without_source_table_is_refused(
     assert any("diagnoses_icd.csv.gz" in message for message in caplog.messages)
     assert not (tmp_path / "cohort.parquet").exists()
     assert not (tmp_path / "manifest.json").exists()
+
+
+def test_rule_changes_manifest_hash_and_funnel(tmp_path: Path) -> None:
+    """Práh tří znaků pustí krátkou zprávu ze základu a má vlastní otisk configu."""
+    candidates, _, _ = _configs(tmp_path)
+    rule = tmp_path / "custom_rule.json"
+    manifest = tmp_path / "custom_manifest.json"
+    counts = []
+    hashes = []
+    for threshold in (100, 3):
+        rule.write_text(json.dumps({"min_chars": threshold}), encoding="utf-8")
+        assert (
+            _run(
+                tmp_path,
+                discharge=None,
+                revision=fixed_revision,
+                corpus_rule=rule,
+                manifest=manifest,
+            )
+            is ExitCode.OK
+        )
+        written = CohortManifest.model_validate_json(
+            manifest.read_text(encoding="utf-8"), strict=False
+        )
+        assert (
+            written.input_corpus_sha256 == hashlib.sha256(rule.read_bytes()).hexdigest()
+        )
+        assert (
+            written.config_sha256 == hashlib.sha256(candidates.read_bytes()).hexdigest()
+        )
+        counts.append({
+            step.step: (step.notes, step.patients) for step in written.counts.funnel
+        })
+        hashes.append(written.input_corpus_sha256)
+
+    # Padding přidá 50 zpráv od 50 pacientů; práh 3 navíc propustí zprávu 5-DS-1.
+    short_funnel = EXPECTED_FUNNEL | {
+        step: (EXPECTED_FUNNEL[step][0] + 1, EXPECTED_FUNNEL[step][1] + 1)
+        for step in (FunnelStepName.LONG_ENOUGH, FunnelStepName.UNIQUE)
+    }
+    assert counts == [EXPECTED_FUNNEL, short_funnel]
+    assert hashes[0] != hashes[1]
