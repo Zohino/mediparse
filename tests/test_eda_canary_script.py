@@ -9,9 +9,14 @@ from __future__ import annotations
 import os
 import subprocess
 from pathlib import Path
-from typing import Final
+from typing import TYPE_CHECKING, Final
 
 import pytest
+
+from mediparse.infrastructure.data_access_rules import load_data_access_rules
+
+if TYPE_CHECKING:
+    from mediparse.domain.data_access import BlockingVariable
 
 SCRIPT: Final = Path(__file__).parents[1] / "scripts" / "eda-canary.sh"
 EDA_PRESENT: Final = pytest.mark.skipif(
@@ -127,12 +132,7 @@ def test_missing_directory_is_an_error_not_a_clean_result(tmp_path: Path) -> Non
     assert "selhal" in result.stderr
 
 
-@EDA_PRESENT
-@pytest.mark.parametrize("number", ["1", "4", "9"])
-def test_render_script_prepares_cache_for_its_consumer(
-    tmp_path: Path, number: str
-) -> None:
-    """Izolované stuby spouštějí jen skupinu cache požadovaného sešitu."""
+def _render_environment(tmp_path: Path) -> dict[str, str]:
     scripts = tmp_path / "scripts"
     scripts.mkdir()
     render = scripts / "eda.sh"
@@ -145,7 +145,7 @@ def test_render_script_prepares_cache_for_its_consumer(
     commands = tmp_path / "bin"
     commands.mkdir()
     stubs = {
-        "git": "#!/bin/sh\nexit 0\n",
+        "git": '#!/bin/sh\nprintf "git %s\\n" "$*" >> "$EDA_TEST_GIT_CALLS"\n',
         "mediparse-eda-provenance": '#!/bin/sh\nprintf "provenance %s\\n" "$*" > "$EDA_TEST_PROVENANCE"\n',
         "mediparse-eda-note-features": '#!/bin/sh\nprintf "features %s\\n" "$*" >> "$EDA_TEST_CALLS"\n',
         "mediparse-eda-note-tokens": '#!/bin/sh\nprintf "tokens %s\\n" "$*" >> "$EDA_TEST_CALLS"\n',
@@ -154,22 +154,57 @@ def test_render_script_prepares_cache_for_its_consumer(
         command = commands / name
         command.write_text(text, encoding="utf-8")
         command.chmod(0o755)
-    calls = tmp_path / "feature-calls.txt"
-    provenance_calls = tmp_path / "provenance-calls.txt"
-    provenance_path = tmp_path / "provenance-path.txt"
+    return {
+        **os.environ,
+        **{variable.name: "" for variable in load_data_access_rules().blocking},
+        "PATH": f"{commands}{os.pathsep}{os.environ['PATH']}",
+        "PIXI_PROJECT_ROOT": str(tmp_path),
+        "MEDIPARSE_PARQUET": str(tmp_path / "tables"),
+        "MEDIPARSE_EDA_CACHE": str(tmp_path / "cache"),
+        "EDA_TEST_CALLS": str(tmp_path / "feature-calls.txt"),
+        "EDA_TEST_GIT_CALLS": str(tmp_path / "git-calls.txt"),
+        "EDA_TEST_PROVENANCE": str(tmp_path / "provenance-calls.txt"),
+        "EDA_TEST_PROVENANCE_PATH": str(tmp_path / "provenance-path.txt"),
+    }
+
+
+@EDA_PRESENT
+@pytest.mark.parametrize(
+    "variable", load_data_access_rules().blocking, ids=lambda variable: variable.name
+)
+def test_render_script_blocks_before_any_preparation(
+    tmp_path: Path, variable: BlockingVariable
+) -> None:
+    """Každé pravidlo z JSON zastaví render ještě před git a přípravou cache."""
+    environ = _render_environment(tmp_path)
+    environ[variable.name] = "1"
+
     result = subprocess.run(
-        ["bash", str(render), number],
-        env={
-            **os.environ,
-            "PATH": f"{commands}{os.pathsep}{os.environ['PATH']}",
-            "PIXI_PROJECT_ROOT": str(tmp_path),
-            "MEDIPARSE_PARQUET": str(tmp_path / "tables"),
-            "MEDIPARSE_EDA_CACHE": str(tmp_path / "cache"),
-            "CLAUDECODE": "",
-            "EDA_TEST_CALLS": str(calls),
-            "EDA_TEST_PROVENANCE": str(provenance_calls),
-            "EDA_TEST_PROVENANCE_PATH": str(provenance_path),
-        },
+        ["bash", str(tmp_path / "scripts/eda.sh"), "9"],
+        env=environ,
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=60,
+    )
+
+    assert result.returncode != CLEAN
+    assert variable.reason in result.stderr
+    for key in ("EDA_TEST_GIT_CALLS", "EDA_TEST_CALLS", "EDA_TEST_PROVENANCE"):
+        assert not Path(environ[key]).exists()
+
+
+@EDA_PRESENT
+@pytest.mark.parametrize("number", ["1", "4", "9"])
+def test_render_script_prepares_cache_for_its_consumer(
+    tmp_path: Path, number: str
+) -> None:
+    """Izolované stuby spouštějí jen skupinu cache požadovaného sešitu."""
+    environ = _render_environment(tmp_path)
+    result = subprocess.run(
+        ["bash", str(tmp_path / "scripts/eda.sh"), number],
+        env=environ,
         check=False,
         capture_output=True,
         text=True,
@@ -177,11 +212,12 @@ def test_render_script_prepares_cache_for_its_consumer(
         timeout=60,
     )
     assert result.returncode == CLEAN, result.stderr
-    out = provenance_path.read_text(encoding="utf-8").strip()
+    out = Path(environ["EDA_TEST_PROVENANCE_PATH"]).read_text(encoding="utf-8").strip()
     assert out.endswith("/provenance.json")
-    assert provenance_calls.read_text(encoding="utf-8") == (
+    assert Path(environ["EDA_TEST_PROVENANCE"]).read_text(encoding="utf-8") == (
         f"provenance --root {tmp_path} --parquet {tmp_path / 'tables'} --out {out}\n"
     )
+    calls = Path(environ["EDA_TEST_CALLS"])
     assert calls.exists() is (number in {"4", "9"})
     if number in {"4", "9"}:
         group = "tokens" if number == "4" else "features"
