@@ -196,6 +196,29 @@ def test_render_script_blocks_before_any_preparation(
 
 
 @EDA_PRESENT
+def test_render_script_blocks_when_python_fails_silently(tmp_path: Path) -> None:
+    """Chyba Pythonu bez důvodu nesmí spustit git ani přípravu cache a provenance."""
+    environ = _render_environment(tmp_path)
+    python = tmp_path / "bin/python"
+    python.write_text("#!/bin/sh\nexit 1\n", encoding="utf-8")
+    python.chmod(0o755)
+
+    result = subprocess.run(
+        ["bash", str(tmp_path / "scripts/eda.sh"), "9"],
+        env=environ,
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=60,
+    )
+
+    assert result.returncode != CLEAN
+    for key in ("EDA_TEST_GIT_CALLS", "EDA_TEST_CALLS", "EDA_TEST_PROVENANCE"):
+        assert not Path(environ[key]).exists()
+
+
+@EDA_PRESENT
 @pytest.mark.parametrize("number", ["1", "4", "9"])
 def test_render_script_prepares_cache_for_its_consumer(
     tmp_path: Path, number: str
