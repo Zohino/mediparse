@@ -17,6 +17,8 @@ import mediparse
 import mediparse.domain
 import mediparse.synthetic.domain
 from mediparse.domain.cohort import MIN_CELL, CohortCounts
+from mediparse.infrastructure.duckdb_parquet import SPILL_DIRECTORY
+from mediparse.infrastructure.eda_duckdb import DEFAULT_MEMORY
 from tests.support import REPOSITORY
 
 if TYPE_CHECKING:
@@ -697,3 +699,15 @@ def test_eda_import_check_requires_r_files(tmp_path: Path) -> None:
     (tmp_path / "only.qmd").write_text("Text.\n", encoding="utf-8")
     with pytest.raises(AssertionError):
         _eda_files(tmp_path)
+
+
+@EDA_PRESENT
+def test_eda_connection_constants_match_python() -> None:
+    """R používá stejný paměťový limit a spill jako Python."""
+    source = (EDA / "R/db.R").read_text(encoding="utf-8")
+    memory = re.search(r'memory <- "([^"\n]+)"', source)
+    spill = re.search(r'temp <- file.path\(dirname\(directory\), "([^"\n]+)"\)', source)
+    assert memory is not None
+    assert spill is not None
+    assert memory.group(1) == DEFAULT_MEMORY
+    assert spill.group(1) == SPILL_DIRECTORY

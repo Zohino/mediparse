@@ -1,0 +1,47 @@
+[
+  {
+    "name": "valid",
+    "text": "{\"prefix\":\"t\",\"rows\":1}",
+    "valid": true
+  },
+  {
+    "name": "empty",
+    "text": "",
+    "valid": false
+  },
+  {
+    "name": "empty-object",
+    "text": "{}",
+    "valid": false
+  },
+  {
+    "name": "not-json",
+    "text": "not JSON",
+    "valid": false
+  },
+  {
+    "name": "extra",
+    "text": "{\"prefix\":\"t\",\"rows\":1,\"extra\":0}",
+    "valid": false
+  },
+  {
+    "name": "missing-rows",
+    "text": "{\"prefix\":\"t\"}",
+    "valid": false
+  },
+  {
+    "name": "numeric-prefix",
+    "text": "{\"prefix\":1,\"rows\":1}",
+    "valid": false
+  },
+  {
+    "name": "string-rows",
+    "text": "{\"prefix\":\"t\",\"rows\":\"x\"}",
+    "valid": false
+  },
+  {
+    "name": "array",
+    "text": "[{\"prefix\":\"t\",\"rows\":1}]",
+    "valid": false
+  }
+]
