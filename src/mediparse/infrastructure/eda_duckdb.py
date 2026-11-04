@@ -10,6 +10,7 @@ import duckdb
 
 from mediparse.domain.data_access import check_data_access
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.infrastructure.data_access_rules import load_data_access_rules
 from mediparse.infrastructure.duckdb_parquet import (
     SPILL_DIRECTORY,
     create_parquet_view,
@@ -60,6 +61,7 @@ class EdaDatabase:
         views = self._views()
         check_data_access(
             self.environ,
+            load_data_access_rules(),
             synthetic=read_marker(self.parquet) is not None,
             location=str(self.parquet),
             marker=MARKER_NAME,

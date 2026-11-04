@@ -1,0 +1,6 @@
+{
+  "blocking": [
+    {"name": "CI", "reason": "Veřejné CI nesmí číst data MIMIC."},
+    {"name": "CLAUDECODE", "reason": "Relace Claude Code nesmí číst data MIMIC: výstup by odešel hostovanému modelu."}
+  ]
+}
