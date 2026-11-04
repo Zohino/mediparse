@@ -146,14 +146,14 @@ note_quality <- function(con, tables) {
     SELECT
       count(*) AS zprav,
       count(*) FILTER (WHERE coalesce(chars, 0) = 0) AS prazdne,
-      count(*) FILTER (WHERE chars > 0 AND chars < %d) AS pod_100,
-      count(*) FILTER (WHERE chars >= %d AND chars <= %d) AS od_100_do_500,
+      count(*) FILTER (WHERE chars > 0 AND chars < %d) AS pod_limitem,
+      count(*) FILTER (WHERE chars >= %d AND chars <= %d) AS od_limitu_do_500,
       count(*) FILTER (WHERE chars > %d) AS nad_50000,
       count(fingerprint) - count(DISTINCT fingerprint) AS duplicity
     FROM %s
   ", SHORT_LIMIT, SHORT_LIMIT, MEDIUM_LIMIT, LONG_LIMIT, metrics))
   as_numeric_columns(
-    out, c("zprav", "prazdne", "pod_100", "od_100_do_500", "nad_50000", "duplicity")
+    out, c("zprav", "prazdne", "pod_limitem", "od_limitu_do_500", "nad_50000", "duplicity")
   )
 }
 
@@ -266,7 +266,7 @@ age_table <- function(age) {
   )
 }
 
-QUALITY_ROWS <- c("prazdne", "pod_100", "od_100_do_500", "nad_50000", "duplicity")
+QUALITY_ROWS <- c("prazdne", "pod_limitem", "od_limitu_do_500", "nad_50000", "duplicity")
 
 quality_labels <- function() {
   c(

@@ -44,7 +44,7 @@ reference_text <- switch(
 )
 anchor_text <- paste0(percent_text(age$kotva, age$zprav), NBSP, "%")
 quality_d <- quality[quality$tabulka == "discharge", ]
-short_text <- format_number(quality_d$prazdne + quality_d$pod_100)
+short_text <- format_number(quality_d$prazdne + quality_d$pod_limitem)
 duplicates_text <- format_number(quality_d$duplicity)
 ```
 
