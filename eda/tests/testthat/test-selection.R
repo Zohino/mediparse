@@ -85,3 +85,22 @@ test_that("corpus_comparison dá pomlčku chybějící nebo prázdné tabulce", 
 
   expect_equal(out$radiology, c("0", "–", "–", "–", "–", "–", "–", "–"))
 })
+
+test_that("input_corpus_table předá práh jako poziční parametr DBI", {
+  con <- mimic_con()
+  execute <- DBI::dbExecute
+  bound <- FALSE
+  testthat::local_mocked_bindings(
+    dbExecute = function(conn, statement, ...) {
+      if (grepl("^CREATE TEMP TABLE", statement)) {
+        bound <<- TRUE
+        expect_identical(list(...)$params, list(100L))
+      }
+      execute(conn, statement, ...)
+    },
+    .package = "DBI"
+  )
+
+  input_corpus_table(con)
+  expect_true(bound)
+})

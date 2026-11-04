@@ -12,11 +12,10 @@ input_corpus_table <- function(con) {
   path <- project_path("src", "mediparse", "infrastructure", "input_corpus.sql")
   # DuckDB váže tabulky při definici makra, proto musí pohledy už existovat.
   invisible(DBI::dbExecute(con, paste(readLines(path, encoding = "UTF-8"), collapse = "\n")))
-  # r-duckdb odmítá pojmenované parametry; SHORT_LIMIT prošel validací integeru.
   invisible(DBI::dbExecute(con, sprintf(
-    "CREATE TEMP TABLE %s AS SELECT * FROM input_corpus_selection(%d)",
-    DBI::dbQuoteIdentifier(con, INPUT_CORPUS_TABLE), SHORT_LIMIT
-  )))
+    "CREATE TEMP TABLE %s AS SELECT * FROM input_corpus_selection(?)",
+    DBI::dbQuoteIdentifier(con, INPUT_CORPUS_TABLE)
+  ), params = list(SHORT_LIMIT)))
   INPUT_CORPUS_TABLE
 }
 
