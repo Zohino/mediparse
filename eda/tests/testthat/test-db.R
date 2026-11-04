@@ -109,13 +109,13 @@ test_that("eda_connect bez blokujících proměnných projde i bez značky", {
   expect_true("discharge" %in% DBI::dbListTables(con))
 })
 
-test_that("eda_connect odmítne neplatnou značku synthetic.json pod CLAUDECODE", {
+test_that("eda_connect odmítne neplatnou značku synthetic.json bez blokujících proměnných", {
   dir <- file.path(withr::local_tempdir(), "parquet")
   write_parquet_tables(dir, marker = FALSE)
   writeLines("{}", file.path(dir, "synthetic.json"))
-  withr::local_envvar(MEDIPARSE_PARQUET = dir, CLAUDECODE = "1", CI = NA)
+  withr::local_envvar(MEDIPARSE_PARQUET = dir, CLAUDECODE = NA, CI = NA)
 
-  expect_error(eda_connect(), "synthetic.json")
+  expect_error(eda_connect(), "Neplatná značka")
 })
 
 test_that("eda_connect čte prostředí při každém volání, ne snímek ze startu", {
@@ -197,7 +197,7 @@ test_that("synthetic.json splňuje sdílené případy Pythonu a R", {
   cases <- jsonlite::read_json(project_path("tests", "fixtures", "synthetic_marker_cases.json"))
   dir <- file.path(withr::local_tempdir(), "parquet")
   write_parquet_tables(dir, marker = FALSE)
-  withr::local_envvar(MEDIPARSE_PARQUET = dir, CLAUDECODE = "1", CI = NA)
+  withr::local_envvar(MEDIPARSE_PARQUET = dir, CLAUDECODE = NA, CI = NA)
   for (case in cases) {
     writeLines(case$text, file.path(dir, "synthetic.json"))
     if (case$valid) {
@@ -205,7 +205,7 @@ test_that("synthetic.json splňuje sdílené případy Pythonu a R", {
       expect_true("discharge" %in% DBI::dbListTables(con), info = case$name)
       DBI::dbDisconnect(con, shutdown = TRUE)
     } else {
-      expect_error(eda_connect(), "synthetic.json", info = case$name)
+      expect_error(eda_connect(), "Neplatná značka", info = case$name)
     }
   }
 })
