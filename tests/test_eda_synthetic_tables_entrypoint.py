@@ -15,6 +15,7 @@ from mediparse.infrastructure.synthetic_marker import SyntheticMarker, read_mark
 from mediparse.synthetic.entrypoints.eda_synthetic_tables import run
 from mediparse.synthetic.infrastructure.plans_file import PlansFile
 from tests.support import (
+    REPOSITORY,
     REPOSITORY_CORPUS,
     REPOSITORY_DIAGNOSIS_CANDIDATES,
     REPOSITORY_MIMIC_MANIFEST,
@@ -35,6 +36,7 @@ def _arguments(out: Path, **overrides: Path) -> list[str]:
         "corpus": REPOSITORY_CORPUS,
         "manifest": REPOSITORY_MIMIC_MANIFEST,
         "candidates": REPOSITORY_DIAGNOSIS_CANDIDATES,
+        "corpus-rule": REPOSITORY / "config/input_corpus.json",
         "lexicon": REPOSITORY_SECTION_HEADERS,
         "out": out,
     } | overrides

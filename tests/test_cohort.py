@@ -190,6 +190,7 @@ def _manifest(**overrides: object) -> CohortManifest:
     fields: dict[str, object] = {
         "cohort_sha256": "a" * 64,
         "config_sha256": "b" * 64,
+        "input_corpus_sha256": "e" * 64,
         "sources": {"discharge.csv.gz": "c" * 64},
         "environment": Environment(
             packages={"python": "3.13.0"},

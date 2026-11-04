@@ -3,6 +3,7 @@ rule build_cohort:
         discharge="resources/mimic/parquet/discharge.parquet",
         diagnoses="resources/mimic/parquet/diagnoses_icd.parquet",
         candidates="config/diagnosis_candidates.json",
+        corpus_rule="config/input_corpus.json",
         tables="config/mimic_tables.json",
     output:
         cohort="resources/mimic/cohort.parquet",

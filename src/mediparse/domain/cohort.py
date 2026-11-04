@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import StrEnum
-from typing import TYPE_CHECKING, Final, Self
+from typing import TYPE_CHECKING, Annotated, Final, Self
 
-from pydantic import BaseModel, ConfigDict, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
 from mediparse.domain.digest import Sha256
@@ -21,6 +21,14 @@ if TYPE_CHECKING:
 MIN_CELL: Final = 10
 
 type RawCode = tuple[str | None, str | None]
+
+
+class InputCorpusRule(BaseModel):
+    """Práh délky zprávy z configu, který čte i ``eda/R/db.R``."""
+
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+
+    min_chars: Annotated[int, Field(ge=1, le=2_147_483_647)]
 
 
 @dataclass(frozen=True)
@@ -133,6 +141,7 @@ class CohortManifest(BaseModel):
 
     cohort_sha256: Sha256
     config_sha256: Sha256
+    input_corpus_sha256: Sha256
     sources: dict[str, Sha256]
     environment: Environment
     counts: CohortCounts

@@ -32,7 +32,9 @@ if TYPE_CHECKING:
 def _build(root: Path, name: str = "cohort") -> tuple[CohortCounts, Path]:
     discharge, diagnoses = write_tables(root)
     out = root / f"{name}.parquet"
-    source = DuckDbCohort(discharge, diagnoses, out, root / f"spill-{name}")
+    source = DuckDbCohort(
+        discharge, diagnoses, out, root / f"spill-{name}", min_chars=100
+    )
     labels = label_codes(source.codes(), CODES).diagnoses
     with source.select(labels) as selected:
         selected.write()
@@ -133,7 +135,9 @@ def test_connection_uses_given_spill_directory(tmp_path: Path) -> None:
     """Spill DuckDB jde do předaného adresáře, ne do ``.tmp`` v pracovním adresáři."""
     discharge, diagnoses = write_tables(tmp_path)
     spill = tmp_path / "duckdb-tmp"
-    source = DuckDbCohort(discharge, diagnoses, tmp_path / "c.parquet", spill)
+    source = DuckDbCohort(
+        discharge, diagnoses, tmp_path / "c.parquet", spill, min_chars=100
+    )
 
     with source.connect() as con:
         row = con.execute("SELECT current_setting('temp_directory')").fetchone()
@@ -145,7 +149,9 @@ def test_missing_input_is_invalid_input(tmp_path: Path) -> None:
     """Chybějící vstupní soubor je InvalidInputError."""
     discharge, diagnoses = write_tables(tmp_path)
     discharge.unlink()
-    source = DuckDbCohort(discharge, diagnoses, tmp_path / "c.parquet", tmp_path / "s")
+    source = DuckDbCohort(
+        discharge, diagnoses, tmp_path / "c.parquet", tmp_path / "s", min_chars=100
+    )
 
     with pytest.raises(InvalidInputError, match="discharge"):
         source.codes()
@@ -163,7 +169,9 @@ def _small_source(root: Path) -> DuckDbCohort:
         [icd(10, 1, "E119", "10")],
         padded=False,
     )
-    return DuckDbCohort(discharge, diagnoses, root / "c.parquet", root / "s")
+    return DuckDbCohort(
+        discharge, diagnoses, root / "c.parquet", root / "s", min_chars=100
+    )
 
 
 def test_small_cohort_is_selected_and_written_by_adapter(tmp_path: Path) -> None:
@@ -194,7 +202,9 @@ def test_output_parent_that_is_a_file_is_invalid_input(tmp_path: Path) -> None:
     discharge, diagnoses = write_tables(tmp_path)
     blocker = tmp_path / "blocker"
     blocker.write_text("soubor místo adresáře", encoding="utf-8")
-    source = DuckDbCohort(discharge, diagnoses, blocker / "c.parquet", tmp_path / "s")
+    source = DuckDbCohort(
+        discharge, diagnoses, blocker / "c.parquet", tmp_path / "s", min_chars=100
+    )
 
     with pytest.raises(InvalidInputError, match="zapsat"):
         _select_and_write(source)
@@ -225,7 +235,7 @@ def test_null_subject_id_in_write_is_invalid_input_and_leaves_no_file(
         discharge,
     )
     out = tmp_path / "c.parquet"
-    source = DuckDbCohort(discharge, diagnoses, out, tmp_path / "s")
+    source = DuckDbCohort(discharge, diagnoses, out, tmp_path / "s", min_chars=100)
 
     with pytest.raises(InvalidInputError, match="zapsat"):
         _select_and_write(source)
@@ -245,7 +255,9 @@ def test_error_messages_do_not_echo_cell_values(tmp_path: Path) -> None:
         }),
         discharge,
     )
-    source = DuckDbCohort(discharge, diagnoses, tmp_path / "c.parquet", tmp_path / "s")
+    source = DuckDbCohort(
+        discharge, diagnoses, tmp_path / "c.parquet", tmp_path / "s", min_chars=100
+    )
 
     with pytest.raises(InvalidInputError) as raised:
         _select_and_write(source)

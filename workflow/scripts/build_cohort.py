@@ -9,6 +9,7 @@ raise SystemExit(
         discharge=Path(snakemake.input.discharge),
         diagnoses=Path(snakemake.input.diagnoses),
         candidates=Path(snakemake.input.candidates),
+        corpus_rule=Path(snakemake.input.corpus_rule),
         tables=Path(snakemake.input.tables),
         cohort=Path(snakemake.output.cohort),
         manifest=Path(snakemake.output.manifest),

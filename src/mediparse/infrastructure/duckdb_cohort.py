@@ -29,7 +29,6 @@ if TYPE_CHECKING:
 
     from mediparse.domain.cohort import RawCode
 
-MIN_CHARS: Final = 100
 SOURCE_TABLES: Final = ("discharge.csv.gz", "diagnoses_icd.csv.gz")
 BATCH_ROWS: Final = 4096
 LANGUAGE: Final = Language.EN
@@ -121,6 +120,7 @@ class DuckDbCohort:
     diagnoses: Path
     out: Path
     spill: Path
+    min_chars: int
 
     def connect(self) -> duckdb.DuckDBPyConnection:
         """Spojení v paměti se spillem v předaném adresáři a s oběma tabulkami.
@@ -177,7 +177,7 @@ class DuckDbCohort:
         """
         with closing(self.connect()) as con:
             try:
-                _select(con, labels)
+                _select(con, labels, self.min_chars)
                 counts = _counts(con)
             except duckdb.Error as error:
                 msg = (
@@ -218,7 +218,7 @@ class DuckDbSelection:
 
 
 def _select(
-    con: duckdb.DuckDBPyConnection, labels: Mapping[RawCode, Diagnosis]
+    con: duckdb.DuckDBPyConnection, labels: Mapping[RawCode, Diagnosis], min_chars: int
 ) -> None:
     pairs = list(labels)
     table = pa.table({
@@ -227,7 +227,7 @@ def _select(
         "diagnosis": pa.array([labels[pair].value for pair in pairs], pa.string()),
     })
     con.register("code_labels", table)
-    con.execute(_BASE, {"min_chars": MIN_CHARS})
+    con.execute(_BASE, {"min_chars": min_chars})
 
 
 def _step(base: duckdb.DuckDBPyRelation, step: FunnelStepName) -> FunnelStep:
