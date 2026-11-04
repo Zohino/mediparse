@@ -13,6 +13,8 @@ FLOOR_TABLE <- "ngram_floor_input"
 TOKENS_TABLE <- "ngram_tokens_input"
 NGRAM_COLUMNS <- c("sekce", "n", "ngram", "zpravy", "vyskyty", "jmenovatel")
 
+# EDA podle S27a3 používá ENGLISH_STOP_WORDS ze scikit-learn; baseline stop-slova
+# neodstraňuje, takže jeho vectorizer není zdrojem tohoto seznamu.
 stop_words <- function(path = project_path("eda", "stop-words.txt")) {
   readLines(path, encoding = "UTF-8")
 }
