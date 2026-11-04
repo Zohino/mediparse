@@ -130,7 +130,12 @@ def test_cell_below_threshold_is_refused_and_nothing_is_written(
 
 
 def _run(
-    tmp_path: Path, *, discharge: Path | None, revision: Callable[[], SourceRevision]
+    tmp_path: Path,
+    *,
+    discharge: Path | None,
+    revision: Callable[[], SourceRevision],
+    corpus_rule: Path | None = None,
+    manifest: Path | None = None,
 ) -> ExitCode:
     existing, diagnoses = write_tables(tmp_path)
     candidates, tables, rule = _configs(tmp_path)
@@ -138,10 +143,10 @@ def _run(
         discharge=discharge or existing,
         diagnoses=diagnoses,
         candidates=candidates,
-        corpus_rule=rule,
+        corpus_rule=corpus_rule or rule,
         tables=tables,
         cohort=tmp_path / "cohort.parquet",
-        manifest=tmp_path / "manifest.json",
+        manifest=manifest or tmp_path / "manifest.json",
         revision=revision,
     )
 
@@ -193,23 +198,20 @@ def test_config_without_source_table_is_refused(
 
 def test_rule_changes_manifest_hash_and_funnel(tmp_path: Path) -> None:
     """Práh tří znaků pustí krátkou zprávu ze základu a má vlastní otisk configu."""
-    discharge, diagnoses = write_tables(tmp_path)
-    candidates, tables, rule = _configs(tmp_path)
+    candidates, _, _ = _configs(tmp_path)
+    rule = tmp_path / "custom_rule.json"
+    manifest = tmp_path / "custom_manifest.json"
     counts = []
     hashes = []
     for threshold in (100, 3):
         rule.write_text(json.dumps({"min_chars": threshold}), encoding="utf-8")
-        manifest = tmp_path / "manifest.json"
         assert (
-            cohort.run(
-                discharge=discharge,
-                diagnoses=diagnoses,
-                candidates=candidates,
-                corpus_rule=rule,
-                tables=tables,
-                cohort=tmp_path / "cohort.parquet",
-                manifest=manifest,
+            _run(
+                tmp_path,
+                discharge=None,
                 revision=fixed_revision,
+                corpus_rule=rule,
+                manifest=manifest,
             )
             is ExitCode.OK
         )
@@ -222,12 +224,15 @@ def test_rule_changes_manifest_hash_and_funnel(tmp_path: Path) -> None:
         assert (
             written.config_sha256 == hashlib.sha256(candidates.read_bytes()).hexdigest()
         )
-        counts.append([(step.notes, step.patients) for step in written.counts.funnel])
+        counts.append({
+            step.step: (step.notes, step.patients) for step in written.counts.funnel
+        })
         hashes.append(written.input_corpus_sha256)
 
     # Padding přidá 50 zpráv od 50 pacientů; práh 3 navíc propustí zprávu 5-DS-1.
-    assert counts == [
-        [(62, 60), (59, 57), (57, 55), (56, 55)],
-        [(62, 60), (59, 57), (58, 56), (57, 56)],
-    ]
+    short_funnel = EXPECTED_FUNNEL | {
+        step: (EXPECTED_FUNNEL[step][0] + 1, EXPECTED_FUNNEL[step][1] + 1)
+        for step in (FunnelStepName.LONG_ENOUGH, FunnelStepName.UNIQUE)
+    }
+    assert counts == [EXPECTED_FUNNEL, short_funnel]
     assert hashes[0] != hashes[1]
