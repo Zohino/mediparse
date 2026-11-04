@@ -22,7 +22,8 @@
       {"hadm_id":"80","icd_code":null,"icd_version":null}
     ],
     "funnel": [[9,8],[7,6],[4,3],[3,2]],
-    "selected": ["1-DS-1","1-DS-2","8-DS-1"]
+    "selected": ["1-DS-1","1-DS-2","8-DS-1"],
+    "multiple": [1,1,1,1]
   },
   {
     "name": "duplicity",
@@ -38,13 +39,15 @@
       {"hadm_id":"100","icd_code":"K3","icd_version":"10"}
     ],
     "funnel": [[4,4],[3,3],[3,3],[2,2]],
-    "selected": ["2-DS-1","10-DS-1"]
+    "selected": ["2-DS-1","10-DS-1"],
+    "multiple": [0,0,0,0]
   },
   {
     "name": "prazdne",
     "discharge": [],
     "diagnoses_icd": [],
     "funnel": [[0,0],[0,0],[0,0],[0,0]],
-    "selected": []
+    "selected": [],
+    "multiple": [0,0,0,0]
   }
 ]

@@ -22,8 +22,7 @@ for (case in cases) {
     expect_setequal(selected$note_id, as.character(unlist(case$selected)))
     expect_equal(funnel$krok, FUNNEL_STEPS)
     expect_equal(names(selected), c("note_id", "subject_id", "hadm_id"))
-    expected_multiple <- if (case$name == "filtry") c(1, 1, 1, 1) else c(0, 0, 0, 0)
-    expect_equal(funnel$vice_zprav, expected_multiple)
+    expect_equal(funnel$vice_zprav, unlist(case$multiple))
   })
 }
 
