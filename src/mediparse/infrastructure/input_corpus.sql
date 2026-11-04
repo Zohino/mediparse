@@ -31,6 +31,6 @@ eligible AS (
     FROM base
     WHERE has_icd AND long_enough
 )
-SELECT b.note_id, b.subject_id, b.hadm_id, b.has_icd, b.long_enough, e.copy
+SELECT b.note_id, b.subject_id, b.hadm_id, b.has_icd, e.copy
 FROM base b
 LEFT JOIN eligible e ON e.note_id = b.note_id;

@@ -323,3 +323,23 @@ def test_codes_missing_column_is_sanitized_invalid_input(tmp_path: Path) -> None
     assert "BinderException" in str(error.value)
     assert error.value.__cause__ is None
     assert canary not in str(error.value)
+
+
+def test_macro_exports_only_consumed_columns(tmp_path: Path) -> None:
+    """Veřejný výstup makra nese identifikátory, přítomnost ICD a pořadí kopie."""
+    source = _small_source(tmp_path)
+
+    with source.select({}) as selected:
+        result = selected.connection.execute(
+            "SELECT * FROM input_corpus_selection(100) LIMIT 0"
+        )
+        description = result.description
+
+    assert description is not None
+    assert [column[0] for column in description] == [
+        "note_id",
+        "subject_id",
+        "hadm_id",
+        "has_icd",
+        "copy",
+    ]

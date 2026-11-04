@@ -49,7 +49,6 @@ SELECT
     CAST(s.subject_id AS BIGINT) AS subject_id,
     s.hadm_id,
     s.has_icd,
-    s.long_enough,
     s.copy,
     coalesce(a.labels, CAST([] AS VARCHAR[])) AS labels
 FROM input_corpus_selection($min_chars) s
