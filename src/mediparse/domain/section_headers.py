@@ -15,15 +15,13 @@ from mediparse.domain.language import Language
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
-MIN_NORMALIZED_CHARS: Final = 3
 # Hlavičky a synonyma v config/section_headers.json jsou anglické (šablona MIMIC-IV-Note),
 # strip a validace matice proto smí pracovat jen se zprávami v tomto jazyce.
 LEXICON_LANGUAGE: Final = Language.EN
 # Klíč pro text mimo rozpoznané sekce; v lexikonu být nesmí, jinak by splynul se zbytkem.
 OTHER: Final = "other"
-# Pravidlo hlavičky má tři části a každá má protějšek v eda/R/sections.R:
-# HEADER_PATTERN, normalized (normalized_sql) a MIN_NORMALIZED_CHARS (MIN_HEADER_CHARS).
-# Sešit 9 měřil pokrytí lexikonu právě jím, změna se dělá v obou. Délku hlídá validace
+# Soulad HEADER_PATTERN, normalizace a délky s eda/R/sections.R hlídá sdílená sada
+# tests/fixtures/section_header_cases.json. Délku hlídá validace
 # lexikonu místo filtru: stejnost je rovnost normalizovaných tvarů, takže kratší tvar
 # synonymem být nemůže a vyřazení kratších hlaviček z textu je tentýž výsledek.
 HEADER_PATTERN: Final = re.compile(
@@ -65,6 +63,7 @@ class SectionLexicon(BaseModel):
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
+    min_normalized_chars: Annotated[int, Field(ge=1)]
     sections: Annotated[dict[str, LexiconSection], Field(min_length=1)]
     preamble: tuple[str, ...]
 
@@ -90,10 +89,10 @@ class SectionLexicon(BaseModel):
     def _synonyms_are_recognizable_and_unique(self) -> Self:
         synonyms = [s for section in self.sections.values() for s in section.synonyms]
         for synonym in synonyms:
-            _require_recognizable(synonym, "Synonymum")
+            _require_recognizable(synonym, "Synonymum", self.min_normalized_chars)
         # Pole preambule ukončují sekci (split_sections), nerozpoznatelné by tiše nikdy nezačalo.
         for name in self.preamble:
-            _require_recognizable(name, "Pole")
+            _require_recognizable(name, "Pole", self.min_normalized_chars)
         forms = Counter(normalized(name) for name in [*synonyms, *self.preamble])
         clashes = sorted(form for form, count in forms.items() if count > 1)
         if clashes:
@@ -231,11 +230,11 @@ def _first_matches(text: str, key_of: Mapping[str, str]) -> dict[str, re.Match[s
     return found
 
 
-def _require_recognizable(name: str, kind: str) -> None:
+def _require_recognizable(name: str, kind: str, min_normalized_chars: int) -> None:
     found = HEADER_PATTERN.fullmatch(f"{name}:")
     if found is None or found["header"] != name:
         msg = f"{kind} {name!r} nesplňuje výraz hlavičky, parser by ho nenašel."
         raise ValueError(msg)
-    if len(normalized(name)) < MIN_NORMALIZED_CHARS:
-        msg = f"{kind} {name!r} má normalizovaný tvar kratší než {MIN_NORMALIZED_CHARS} znaky."
+    if len(normalized(name)) < min_normalized_chars:
+        msg = f"{kind} {name!r} má normalizovaný tvar kratší než {min_normalized_chars} znaky."
         raise ValueError(msg)

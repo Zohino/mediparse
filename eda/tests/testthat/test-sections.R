@@ -1,3 +1,18 @@
+test_that("lexikon vyžaduje kladný práh délky hlavičky", {
+  raw <- jsonlite::read_json(section_headers_path())
+  path <- withr::local_tempfile(fileext = ".json")
+  for (value in list(NULL, 0L)) {
+    raw$min_normalized_chars <- value
+    jsonlite::write_json(raw, path, auto_unbox = TRUE)
+    expect_error(read_section_headers(path), basename(path), fixed = TRUE)
+  }
+})
+
+test_that("dodaný lexikon i MIN_HEADER_CHARS drží práh tří znaků", {
+  expect_identical(read_section_headers(section_headers_path())$min_normalized_chars, 3L)
+  expect_identical(MIN_HEADER_CHARS, 3L)
+})
+
 test_that("lexikon načte všechny sekce konfigurace, každou s popiskem a synonymem", {
   raw <- jsonlite::fromJSON(section_headers_path(), simplifyVector = FALSE)
   lexicon <- read_section_headers(section_headers_path())
@@ -20,6 +35,7 @@ test_that("lexikon načte příznak diagnostické sekce, chybějící pole je FA
 
   path <- withr::local_tempfile(fileext = ".json")
   jsonlite::write_json(list(
+    min_normalized_chars = 3L,
     sections = list(
       a = list(label_cs = "A", synonyms = list("Aaa", "Bbb"), diagnostic = TRUE),
       c = list(label_cs = "C", synonyms = list("Ccc"))
@@ -38,7 +54,9 @@ test_that("lexikon nemá dvě sekce ani sekci a preamble se stejným normalizova
 test_that("read_section_headers odmítne sekci bez synonym nebo bez popisku", {
   write_config <- function(sections) {
     path <- withr::local_tempfile(fileext = ".json", .local_envir = parent.frame())
-    jsonlite::write_json(list(sections = sections, preamble = list("Name")), path, auto_unbox = TRUE)
+    jsonlite::write_json(list(
+      min_normalized_chars = 3L, sections = sections, preamble = list("Name")
+    ), path, auto_unbox = TRUE)
     path
   }
 
@@ -76,41 +94,35 @@ LEXICON <- list(
   preamble = "Service"
 )
 
-found_headers <- function(texts) {
+HEADER_CASES <- jsonlite::read_json(project_path("tests", "fixtures", "section_header_cases.json"))
+
+test_that("výraz hlavičky splňuje sdílené případy Pythonu a R v pořadí textu", {
+  con <- mimic_con()
+  for (case in HEADER_CASES$patterns) {
+    text <- DBI::dbQuoteString(con, case$text)
+    out <- DBI::dbGetQuery(con, paste("SELECT", header_matches_sql(con, text), "AS headers"))
+    expect_identical(
+      as.character(unlist(out$headers[[1]])), as.character(unlist(case$headers)), info = case$name
+    )
+  }
+})
+
+test_that("normalizace splňuje sdílené případy Pythonu a R", {
+  con <- mimic_con()
+  for (case in HEADER_CASES$normalized) {
+    header <- DBI::dbQuoteString(con, case$header)
+    out <- DBI::dbGetQuery(con, paste("SELECT", normalized_sql(header), "AS norm"))
+    expect_identical(out$norm, case$normalized, info = case$header)
+  }
+})
+
+test_that("note_headers filtruje délku podle sdílených případů Pythonu a R", {
+  texts <- vapply(HEADER_CASES$lengths, function(case) paste0(case$header, ": x"), character(1))
   con <- corpus_con(texts)
   table <- DBI::dbQuoteIdentifier(con, note_headers(con))
-  out <- DBI::dbGetQuery(con, sprintf("SELECT note_id, header, norm FROM %s ORDER BY note_id, header", table))
-  split(out$header, factor(out$note_id, levels = paste0("n", seq_along(texts))))
-}
-
-test_that("note_headers najde hlavičku na začátku řádku včetně vloženého pole a odsazení", {
-  found <- found_headers(c(
-    "Service: MEDICINE",
-    "  Chief Complaint:\n\tAllergies: none",
-    "Allergies:\r\nPenicillin\r\nSocial History:\r\nnone",
-    "text\nFamily History:"
-  ))
-
-  expect_equal(unname(found), list(
-    "Service", c("Allergies", "Chief Complaint"), c("Allergies", "Social History"), "Family History"
-  ))
-})
-
-test_that("note_headers nebere řetězec s normalizovaným tvarem pod MIN_HEADER_CHARS, čas, značku ani text uprostřed řádku", {
-  found <- found_headers(c(
-    "Ab: x", "Ab.: x", "Ab : x", "Time 10:30", "# CHF: yes", "see Chief Complaint: x"
-  ))
-
-  expect_equal(unname(found), rep(list(character()), 6L))
-})
-
-test_that("normalizace sloučí velikost písmen, mezery a koncové tečky", {
-  con <- corpus_con(c("Chief Complaint:", "CHIEF  COMPLAINT :", "Chief Complaint.:"))
-  table <- DBI::dbQuoteIdentifier(con, note_headers(con))
-
-  out <- DBI::dbGetQuery(con, sprintf("SELECT DISTINCT norm FROM %s", table))
-
-  expect_equal(out$norm, "chief complaint")
+  found <- DBI::dbGetQuery(con, sprintf("SELECT note_id FROM %s", table))$note_id
+  expected <- vapply(HEADER_CASES$lengths, function(case) case$accepted, logical(1))
+  expect_identical(paste0("n", seq_along(texts)) %in% found, expected)
 })
 
 test_that("note_headers vrací tutéž tabulku podruhé a jeden řádek na výskyt", {

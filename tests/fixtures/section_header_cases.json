@@ -1,0 +1,114 @@
+{
+  "patterns": [
+    {
+      "name": "time",
+      "text": "Time 10:30",
+      "headers": []
+    },
+    {
+      "name": "marker",
+      "text": "# CHF: yes",
+      "headers": []
+    },
+    {
+      "name": "mid_line",
+      "text": "see Chief Complaint: x",
+      "headers": []
+    },
+    {
+      "name": "indented",
+      "text": "  Chief Complaint:\n\tAllergies: none",
+      "headers": [
+        "Chief Complaint",
+        "Allergies"
+      ]
+    },
+    {
+      "name": "crlf",
+      "text": "Allergies:\r\nPenicillin\r\nSocial History:\r\nnone",
+      "headers": [
+        "Allergies",
+        "Social History"
+      ]
+    },
+    {
+      "name": "inline_value",
+      "text": "Service: MEDICINE",
+      "headers": [
+        "Service"
+      ]
+    },
+    {
+      "name": "last_line",
+      "text": "text\nFamily History:",
+      "headers": [
+        "Family History"
+      ]
+    },
+    {
+      "name": "punctuation",
+      "text": "Patient's Name & Unit (A/B):",
+      "headers": [
+        "Patient's Name & Unit (A/B)"
+      ]
+    },
+    {
+      "name": "49_chars",
+      "text": "Abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb:",
+      "headers": [
+        "Abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      ]
+    },
+    {
+      "name": "50_chars",
+      "text": "Abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb:",
+      "headers": []
+    },
+    {
+      "name": "lowercase",
+      "text": "ab:",
+      "headers": []
+    },
+    {
+      "name": "digit",
+      "text": "A1:",
+      "headers": []
+    }
+  ],
+  "normalized": [
+    {
+      "header": "CHIEF  COMPLAINT ",
+      "normalized": "chief complaint"
+    },
+    {
+      "header": "Chief Complaint.",
+      "normalized": "chief complaint"
+    },
+    {
+      "header": "Chief\tComplaint . ",
+      "normalized": "chief complaint"
+    }
+  ],
+  "lengths": [
+    {
+      "header": "Ab",
+      "accepted": false
+    },
+    {
+      "header": "Ab.",
+      "accepted": false
+    },
+    {
+      "header": "Ab ",
+      "accepted": false
+    },
+    {
+      "header": "Abc",
+      "accepted": true
+    },
+    {
+      "header": "Ab c",
+      "accepted": true
+    }
+  ]
+}

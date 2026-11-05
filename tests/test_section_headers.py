@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+from operator import itemgetter
 from typing import Any, Final
 
 import pytest
@@ -29,11 +30,18 @@ from tests.section_support import (
     REPOSITORY_LEXICON,
     mimic_shaped_notes,
 )
-from tests.support import REPOSITORY_CONFIG, REPOSITORY_CORPUS
+from tests.support import REPOSITORY, REPOSITORY_CONFIG, REPOSITORY_CORPUS
+
+HEADER_CASES: Final = json.loads(
+    (REPOSITORY / "tests/fixtures/section_header_cases.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _lexicon_json(**overrides: object) -> dict[str, object]:
     document: dict[str, object] = {
+        "min_normalized_chars": 3,
         "sections": {
             "chief_complaint": {
                 "label_cs": "Hlavní obtíže",
@@ -54,12 +62,10 @@ def _lexicon(**overrides: object) -> SectionLexicon:
     return SectionLexicon.model_validate_json(json.dumps(_lexicon_json(**overrides)))
 
 
-@pytest.mark.parametrize(
-    "header", ["CHIEF  COMPLAINT ", "Chief Complaint.", "chief\tcomplaint"]
-)
-def test_normalization_merges_spelling_variants(header: str) -> None:
-    """Velikost písmen, běh bílých znaků a koncové mezery a tečky se sloučí."""
-    assert normalized(header) == "chief complaint"
+@pytest.mark.parametrize("case", HEADER_CASES["normalized"], ids=itemgetter("header"))
+def test_shared_normalization_cases(case: dict[str, str]) -> None:
+    """Python normalizuje podle stejných ručně určených očekávání jako R."""
+    assert normalized(case["header"]) == case["normalized"]
 
 
 def test_section_without_flag_is_not_diagnostic() -> None:
@@ -85,6 +91,36 @@ def test_synthetic_diagnosis_section_is_removed_by_strip() -> None:
 def test_minimal_lexicon_is_accepted() -> None:
     """Lexikon se sekcemi a preambulí projde schématem."""
     assert set(_lexicon().sections) == {"chief_complaint", "allergies"}
+
+
+@pytest.mark.parametrize("missing", [True, False], ids=["missing", "zero"])
+def test_lexicon_requires_positive_min_normalized_chars(*, missing: bool) -> None:
+    """Práh je povinné kladné celé číslo bez výchozí hodnoty."""
+    document = _lexicon_json(min_normalized_chars=0)
+    if missing:
+        del document["min_normalized_chars"]
+    with pytest.raises(ValidationError, match="min_normalized_chars"):
+        SectionLexicon.model_validate_json(json.dumps(document))
+
+
+def test_repository_lexicon_matches_protocol() -> None:
+    """Dodaný lexikon drží schválený práh tří normalizovaných znaků."""
+    expected_min_chars: Final = 3
+    assert REPOSITORY_LEXICON.min_normalized_chars == expected_min_chars
+
+
+@pytest.mark.parametrize("field", ["sections", "preamble"])
+def test_lexicon_uses_configured_minimum(field: str) -> None:
+    """Vlastní práh platí pro synonyma sekcí i administrativní pole."""
+    overrides: dict[str, object] = {
+        "sections": {"a": _section("Abc", diagnostic=True)},
+        "preamble": [],
+    }
+    if field == "preamble":
+        overrides = {"preamble": ["Abc"]}
+    _lexicon(**overrides, min_normalized_chars=3)
+    with pytest.raises(ValidationError, match="kratší než 4"):
+        _lexicon(**overrides, min_normalized_chars=4)
 
 
 def _section(
@@ -129,10 +165,6 @@ INVALID_LEXICONS: Final = {
         {"sections": {"a": _section(" Allergies", diagnostic=True)}},
         "nesplňuje výraz hlavičky",
     ),
-    "normalizovaný tvar pod 3 znaky": (
-        {"sections": {"a": _section("Ab", diagnostic=True)}},
-        "kratší než",
-    ),
     "pole preambule mimo výraz hlavičky": (
         {"preamble": ["attending"]},
         "Pole 'attending' nesplňuje výraz hlavičky",
@@ -165,36 +197,32 @@ def test_invalid_lexicon_is_rejected(
         _lexicon(**overrides)
 
 
-@pytest.mark.parametrize(
-    ("text", "headers"),
-    [
-        ("Time 10:30", []),
-        ("# CHF: yes", []),
-        ("see Chief Complaint: x", []),
-        ("  Chief Complaint:\n\tAllergies: none", ["Chief Complaint", "Allergies"]),
-        (
-            "Allergies:\r\nPenicillin\r\nSocial History:\r\nnone",
-            ["Allergies", "Social History"],
-        ),
-        ("Service: MEDICINE", ["Service"]),
-    ],
-)
-def test_header_pattern_mirrors_note_headers_cases(
-    text: str, headers: list[str]
-) -> None:
-    """Případy note_headers z eda/tests/testthat/test-sections.R dávají totéž."""
-    assert [m["header"] for m in HEADER_PATTERN.finditer(text)] == headers
+@pytest.mark.parametrize("case", HEADER_CASES["patterns"], ids=itemgetter("name"))
+def test_shared_header_pattern_cases(case: dict[str, Any]) -> None:
+    """Výraz Pythonu zachytí surové hlavičky ve stejném pořadí jako výraz R."""
+    assert [m["header"] for m in HEADER_PATTERN.finditer(case["text"])] == case[
+        "headers"
+    ]
 
 
-@pytest.mark.parametrize("synonym", ["Ab", "Ab.", "Ab "])
-def test_too_short_synonym_is_rejected(synonym: str) -> None:
-    """Délku, kterou R filtruje v note_headers, Python hlídá ve validaci lexikonu."""
-    with pytest.raises(ValidationError, match="kratší"):
-        _lexicon(sections={"a": _section(synonym, diagnostic=True)})
+@pytest.mark.parametrize("case", HEADER_CASES["lengths"], ids=itemgetter("header"))
+def test_shared_header_length_cases(case: dict[str, Any]) -> None:
+    """Práh z dodaného lexikonu rozhoduje o délce podle společného orákula."""
+    document = _lexicon_json(
+        sections={"a": _section(case["header"], diagnostic=True)},
+        preamble=[],
+        min_normalized_chars=REPOSITORY_LEXICON.min_normalized_chars,
+    )
+    if case["accepted"]:
+        SectionLexicon.model_validate_json(json.dumps(document))
+    else:
+        with pytest.raises(ValidationError, match="kratší"):
+            SectionLexicon.model_validate_json(json.dumps(document))
 
 
 DISCHARGE_LEXICON = SectionLexicon.model_validate_json(
     json.dumps({
+        "min_normalized_chars": 3,
         "sections": {
             "allergies": _section("Allergies"),
             "chief_complaint": _section("Chief Complaint", label_cs="Obtíže"),
@@ -571,6 +599,7 @@ def test_strip_removes_every_diagnostic_section_of_lexicon() -> None:
     """Označených sekcí může být víc a všechny zmizí."""
     lexicon = SectionLexicon.model_validate_json(
         json.dumps({
+            "min_normalized_chars": 3,
             "sections": {
                 "allergies": _section("Allergies", diagnostic=True),
                 "chief_complaint": _section("Chief Complaint"),
