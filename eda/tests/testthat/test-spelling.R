@@ -159,3 +159,18 @@ test_that("tvary se stejnou DF řadí podle tokenu", {
   con <- spelling_con(c("abcdefg", "abcdefi", "abcdefh"), c(1000, 100, 100))
   expect_identical(near_miss_forms(con, "abcdefg")$tvar, c("abcdefh", "abcdefi"))
 })
+
+
+test_that("slovník odhadu vyřadí token s číslicí a nulový podíl zůstane definovaný", {
+  estimate <- typo_estimate(spelling_con(c("abcde", "abcd1"), c(1000, 5)))
+  expect_equal(estimate$slovnik, 1)
+  expect_equal(estimate$vyskyty, 1000)
+  table <- typo_table(estimate)
+  expect_identical(table$podil_slovniku, "0,0")
+  expect_identical(table$podil_vyskytu, "0,0")
+})
+
+test_that("společné okolí nepostačí ke kandidátu ve vzdálenosti dvě", {
+  estimate <- typo_estimate(spelling_con(c("abcde", "abdxe"), c(1000, 1)))
+  expect_equal(estimate$kandidati, 0)
+})
