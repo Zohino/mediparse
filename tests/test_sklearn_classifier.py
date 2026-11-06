@@ -110,10 +110,11 @@ def test_model_file_untrusted_type_is_invalid_input(tmp_path: Path) -> None:
 
 
 _NORMALIZATION: Final = TextNormalization(
+    variants={},
     acronyms={
         "COPD": "chronic obstructive pulmonary disease",
         "AF": "atrial fibrillation",
-    }
+    },
 )
 
 

@@ -98,11 +98,12 @@ def load_text_normalization(path: Path) -> TextNormalization:
 def _parse_normalization(text: str) -> TextNormalization:
     vocabulary = _vocabulary(text)
     return TextNormalization(
+        variants={},
         acronyms={
             acronym: names.keywords_en[0]
             for names in vocabulary.names.values()
             for acronym in names.acronyms_en
-        }
+        },
     )
 
 

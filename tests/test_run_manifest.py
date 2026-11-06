@@ -151,7 +151,7 @@ def test_manifest_records_normalization_as_sorted_pairs() -> None:
     dumped = RunManifest.model_validate(
         _fields(
             normalize_clinical_text=TextNormalization(
-                acronyms={"DM2": "diabetes", "AF": "atrial fibrillation"}
+                variants={}, acronyms={"DM2": "diabetes", "AF": "atrial fibrillation"}
             )
         )
     ).model_dump(mode="json")
