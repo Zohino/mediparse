@@ -338,3 +338,20 @@ def test_duplicate_variant_before_dictionary_construction_is_rejected(
     tree["candidates"]["ckd"]["variants_en"] = ["T2DM"]
     with pytest.raises(InvalidInputError, match="Duplicitní"):
         load_text_normalization(_write(tmp_path, tree), variants=True)
+
+
+def test_variant_loader_rejects_equivalent_whitespace_forms(tmp_path: Path) -> None:
+    """Dvě různá rozložení bílých znaků nesmějí vytvořit kolidující varianty."""
+    tree = json.loads(REPOSITORY_DIAGNOSIS_CANDIDATES.read_text(encoding="utf-8"))
+    tree["candidates"]["atrial_fibrillation"]["variants_en"] = ["a fib", "a  fib"]
+    with pytest.raises(InvalidInputError):
+        load_diagnosis_variants(_write(tmp_path, tree))
+
+
+def test_misspelling_keys_are_stripped_at_config_boundary(tmp_path: Path) -> None:
+    """Okrajové mezery klíče překlepu odstraní striktní loader před doménou."""
+    tree = json.loads(REPOSITORY_DIAGNOSIS_CANDIDATES.read_text(encoding="utf-8"))
+    tree["candidates"]["ckd"]["misspellings_en"] = {" kindey ": "kidney"}
+    normalization = load_text_normalization(_write(tmp_path, tree), variants=True)
+    assert normalization.variants["kindey"] == "kidney"
+    assert " kindey " not in normalization.variants

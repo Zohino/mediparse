@@ -535,3 +535,10 @@ def test_rewrite_repository_dictionary_is_idempotent(text: str) -> None:
     """Idempotence platí i pro celý slovník včetně navazujících oprav překlepů."""
     once = rewrite_diagnosis_variants(text, _REPOSITORY_NORMALIZATION.variants)
     assert rewrite_diagnosis_variants(once, _REPOSITORY_NORMALIZATION.variants) == once
+
+
+@pytest.mark.parametrize("variant", ["a  fib", " afib", " ", "a\tfib"])
+def test_normalization_rejects_noncanonical_variant_whitespace(variant: str) -> None:
+    """Klíč s nesloučenými bílými znaky by neodpovídal nalezenému tvaru."""
+    with pytest.raises(ValidationError):
+        TextNormalization(acronyms={}, variants={variant: "x"})

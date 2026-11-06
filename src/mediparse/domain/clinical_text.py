@@ -100,10 +100,17 @@ def find_diagnosis_acronyms(text: str, acronyms: Mapping[str, str]) -> list[str]
     return [match[0] for match in _acronym_pattern(acronyms).finditer(text)]
 
 
+def _variant_key(text: str) -> str:
+    return " ".join(text.lower().split())
+
+
 def _variant_keys(variants: Iterable[str]) -> dict[str, str]:
     canonical: dict[str, str] = {}
     for variant in variants:
-        key = variant.lower()
+        key = _variant_key(variant)
+        if key != variant.lower():
+            message = f"Varianta nemá sloučené bílé znaky: {variant!r}."
+            raise ValueError(message)
         if key in canonical:
             message = f"Duplicitní varianta: {variant}."
             raise ValueError(message)
@@ -128,13 +135,13 @@ def find_diagnosis_variants(text: str, variants: Iterable[str]) -> list[str]:
         Tvary z konfigurace v pořadí výskytu; prázdný slovník dá prázdný seznam.
 
     Raises:
-        ValueError: Tvary jsou duplicitní bez rozlišení velikosti písmen.
+        ValueError: Tvary jsou duplicitní nebo nemají sloučené bílé znaky.
     """
     canonical = _variant_keys(variants)
     if not canonical:
         return []
     return [
-        canonical[" ".join(match[0].lower().split())]
+        canonical[_variant_key(match[0])]
         for match in _variant_pattern(canonical).finditer(text)
     ]
 
@@ -152,7 +159,7 @@ def rewrite_diagnosis_variants(text: str, variants: Mapping[str, str]) -> str:
     # Oprava překlepu uvnitř víceslovné varianty ji odhalí až po první náhradě.
     for _ in range(2):
         text = pattern.sub(
-            lambda match: variants[canonical[" ".join(match[0].lower().split())]], text
+            lambda match: variants[canonical[_variant_key(match[0])]], text
         )
     return text
 
