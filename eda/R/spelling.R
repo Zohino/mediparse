@@ -124,7 +124,7 @@ near_miss_text <- function(forms) {
 typo_estimate <- function(con) {
   table <- token_frequency(con)
   # Společné okolí po vypuštění znaku omezuje páry před ověřením vzdálenosti;
-  # křížové spojení v sondě briefu vycházelo na desítky minut.
+  # křížové spojení by nad stovkami tisíc tokenů trvalo desítky minut.
   out <- DBI::dbGetQuery(con, sprintf("
     WITH words AS (
       SELECT token, df FROM %1$s WHERE regexp_full_match(token, '[a-z]+') AND length(token) >= %2$d
