@@ -121,11 +121,11 @@ Pojmy a jednotky jsou tyto:
 
 ## Varianty názvů a kandidáti na překlep
 
-Varianty jsou předem dané tvary názvů pětice v `config/diagnosis_variants.json`, sestavené z klinické znalosti před pohledem na data: diabetes (`T1DM`, `T2DM`, `DM1`, `DMII`, `IDDM`, `NIDDM`), CHOPN (`chronic obstructive lung disease`), CKD (`ESKD`, `CRI`, `CRF`), pneumonie (`PNA`) a fibrilace síní (`afib`, `a-fib`, `a fib`, `PAF`). Python je měří funkcí `find_diagnosis_variants` po `normalize_clinical_text`, s hranicemi jako u zkratek, bez rozlišení velikosti písmen a v ASCII. Tentýž vzor bude podkladem přepisu v S37b. Artefakt `note_variants.parquet` obsahuje řádek na zprávu a variantu včetně nuly a klíč diagnózy. R připojí vstupní korpus a porovná variantu s kódem stejným výpočtem jako u zkratek. Jmenovatel podílu bez kódu tvoří zprávy s aspoň jedním výskytem varianty. Popisky jsou z konfigurace a práh popisků se na ně nevztahuje.
+Varianty jsou předem dané tvary názvů pětice v `config/diagnosis_variants.json`, sestavené z klinické znalosti před pohledem na data; úplný seznam uvádí @tbl-varianty. Python je měří funkcí `find_diagnosis_variants` po `normalize_clinical_text`, s hranicemi jako u zkratek, bez rozlišení velikosti písmen a v ASCII. Tentýž vzor bude podkladem přepisu v S37b. Artefakt `note_variants.parquet` obsahuje řádek na zprávu a variantu včetně nuly a klíč diagnózy. R připojí vstupní korpus a porovná variantu s kódem stejným výpočtem jako u zkratek. Jmenovatel podílu bez kódu tvoří zprávy s aspoň jedním výskytem varianty. Popisky jsou z konfigurace a práh popisků se na ně nevztahuje.
 
 Dokumentová frekvence (DF) tokenu je počet zpráv, v nichž je token aspoň jednou. Počítá se v SQL z distinct tokenů `vocabulary_raw` v `note_preprocessing.parquet`, tedy z výchozího analyzéru TF-IDF nad celou zprávou. `eda/R/spelling.R` ji jednou materializuje do tabulky `token_frequency`. Vzdálenost Damerauova–Levenshteinova (`damerau_levenshtein`) zahrnuje vložení, vypuštění, záměnu i přehození sousedních znaků.
 
-Cíle blízkých tvarů jsou slova z `keywords_en` pětice, kterou určuje klíč `diagnosis` v artefaktu variant. Cíl musí mít jen písmena a–z, délku aspoň `r TARGET_MIN_LENGTH` a patřit jediné diagnóze; sdílená slova `chronic` a `disease` proto vypadnou. Blízký tvar je token ve vzdálenosti 1 od cíle, sám není žádným cílem, má DF aspoň `r LABEL_MIN_NOTES` a cíl má aspoň `r NEAR_MISS_RATIO`× větší DF. Práh zpráv chrání popisek z textu. Na rozdíl od n-gramů se nevyžaduje 1 % korpusu: tvar je z definice blízký veřejnému slovu z configu a překlep by 1 % korpusu nikdy nedosáhl. Tabulka uvádí nejvýše `r NEAR_MISS_LIMIT` dvojic tvar–cíl podle DF tvaru; věta uvádí celkový počet tvarů nad prahy.
+Cíle blízkých tvarů jsou slova z `keywords_en` pětice, kterou určuje klíč `diagnosis` v artefaktu variant. Cíl musí mít jen písmena a–z, délku aspoň `r TARGET_MIN_LENGTH` a patřit jediné diagnóze; slova sdílená více diagnózami proto vypadnou. Blízký tvar je token ve vzdálenosti 1 od cíle, sám není žádným cílem, má DF aspoň `r LABEL_MIN_NOTES` a cíl má aspoň `r NEAR_MISS_RATIO`× větší DF. Práh zpráv chrání popisek z textu. Na rozdíl od n-gramů se nevyžaduje 1 % korpusu: tvar je z definice blízký veřejnému slovu z configu a překlep by 1 % korpusu nikdy nedosáhl. Tabulka uvádí nejvýše `r NEAR_MISS_LIMIT` dvojic tvar–cíl podle DF tvaru; věta uvádí celkový počet tvarů nad prahy.
 
 Kandidát na překlep v odhadu je token složený jen z písmen a–z, dlouhý aspoň `r TYPO_MIN_LENGTH`, s jiným takovým slovem ve vzdálenosti 1, které má aspoň `r TYPO_RATIO`× větší DF. Páry se hledají přes společné okolí po vypuštění jednoho znaku a ověří se vzdáleností; token s více sousedy je jediný kandidát. Výstup je pouze agregát: počet kandidátů, podíl ze slovníku těchto slov a podíl součtu jejich DF ze součtu DF všech těchto slov. „Výskyty ve zprávách“ tedy znamenají dvojice token–zpráva, nikoli opakování tokenu uvnitř zprávy ani podíl zpráv s překlepem. Prahy délky a poměrů jsou popisné konstanty zvolené před pohledem na data, bez opory v literatuře. Jde o popisný odhad podle definice. Může zahrnout vzácná legitimní slova vedle častých slov, ale vynechává překlepy ve vzdálenosti větší než 1, tokeny kratší než zvolená délka nebo s číslicí a překlepy s poměrem DF pod stanoveným prahem.
 
@@ -462,7 +462,7 @@ export_table(
 
 ```{r}
 #| label: tbl-blizke-tvary
-#| tbl-cap: "Tvary ve vzdálenosti 1 od slov názvů pětice s aspoň 10 zprávami a aspoň desetinásobnou DF cíle."
+#| tbl-cap: "Blízké tvary slov názvů pětice podle pravidel v metodách."
 #| tbl-colwidths: [30, 30, 20, 20]
 export_table(
   near_miss_table(near_forms),
@@ -479,7 +479,7 @@ export_table(
 
 ```{r}
 #| label: tbl-preklepy
-#| tbl-cap: "Odhad kandidátů na překlep mezi slovy a–z délky aspoň 5: počet, podíl slovníku a podíl součtu dokumentových frekvencí."
+#| tbl-cap: "Kandidáti na překlep podle definice v metodách: počet, podíl slovníku a podíl součtu dokumentových frekvencí."
 #| tbl-colwidths: [22, 18, 28, 32]
 export_table(
   typo_table(typos),
