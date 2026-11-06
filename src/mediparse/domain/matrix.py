@@ -60,6 +60,7 @@ class MatrixRow(BaseModel):
     model: ModelName
     strip_diagnostic_sections: bool
     normalize_clinical_text: bool
+    normalize_diagnosis_variants: bool
     tuning_trials: PositiveInt
 
     @model_validator(mode="after")
@@ -93,14 +94,22 @@ class MatrixRow(BaseModel):
             raise ValueError(msg)
         return self
 
+    @model_validator(mode="after")
+    def _variants_require_normalization(self) -> Self:
+        if self.normalize_diagnosis_variants and not self.normalize_clinical_text:
+            msg = f"Řádek {self.id}: přepis variant vyžaduje normalizaci klinického textu."
+            raise ValueError(msg)
+        return self
+
     @property
-    def axes(self) -> tuple[Language, ModelName, bool, bool]:
+    def axes(self) -> tuple[Language, ModelName, bool, bool, bool]:
         """Osy, které experiment jednoznačně určují."""
         return (
             self.language,
             self.model,
             self.strip_diagnostic_sections,
             self.normalize_clinical_text,
+            self.normalize_diagnosis_variants,
         )
 
 
