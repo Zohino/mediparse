@@ -6,6 +6,7 @@ import json
 from functools import partial
 from typing import TYPE_CHECKING, Any, Final
 
+import duckdb
 import pytest
 
 from mediparse.domain.diagnosis import Diagnosis
@@ -373,3 +374,16 @@ def test_variant_loaders_reject_empty_keywords_without_acronyms(
     tree["candidates"]["pneumonia"]["misspellings_en"] = {}
     with pytest.raises(InvalidInputError):
         loader(_write(tmp_path, tree))
+
+
+def test_repository_misspellings_are_one_edit_from_their_targets() -> None:
+    """Každá schválená dvojice splňuje nezávislou definici blízkého tvaru S37a."""
+    tree = json.loads(REPOSITORY_DIAGNOSIS_CANDIDATES.read_text(encoding="utf-8"))
+    with duckdb.connect() as connection:
+        for diagnosis in Diagnosis:
+            pairs = tree["candidates"][diagnosis.value]["misspellings_en"]
+            for form, target in pairs.items():
+                distance = connection.execute(
+                    "SELECT damerau_levenshtein(?, ?)", [form, target]
+                ).fetchone()
+                assert distance == (1,), (diagnosis, form, target, distance)
