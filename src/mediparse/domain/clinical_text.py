@@ -11,7 +11,7 @@ from mediparse.domain.language import Language
 from mediparse.domain.note_text import STANDALONE_DEID, alternation
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Iterable, Mapping
 
 NORMALIZATION_LANGUAGE: Final = Language.EN
 AGE_PLACEHOLDER: Final = "__age__"
@@ -92,6 +92,23 @@ def find_diagnosis_acronyms(text: str, acronyms: Mapping[str, str]) -> list[str]
     if not acronyms:
         return []
     return [match[0] for match in _acronym_pattern(acronyms).finditer(text)]
+
+
+def find_diagnosis_variants(text: str, variants: Iterable[str]) -> list[str]:
+    """Najde celé varianty bez rozlišení velikosti písmen po normalizaci textu.
+
+    Returns:
+        Tvary z konfigurace v pořadí výskytu; prázdný slovník dá prázdný seznam.
+    """
+    canonical = {variant.lower(): variant for variant in variants}
+    if not canonical:
+        return []
+    # ASCII brání záměně dlouhého s (U+017F) a znaku Kelvina za písmena slovníku.
+    pattern = re.compile(
+        f"{_WORD_START}(?:{alternation(canonical)}){_WORD_END}",
+        re.IGNORECASE | re.ASCII,
+    )
+    return [canonical[match[0].lower()] for match in pattern.finditer(text)]
 
 
 class TextNormalization(BaseModel):

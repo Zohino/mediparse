@@ -19,6 +19,7 @@ from mediparse.domain.clinical_text import (
     TextNormalization,
     expand_diagnosis_acronyms,
     find_diagnosis_acronyms,
+    find_diagnosis_variants,
     normalize_clinical_text,
 )
 from mediparse.domain.note_text import deid_markers
@@ -353,3 +354,39 @@ def test_text_normalization_rejects_bytes(acronyms: dict[object, object]) -> Non
     """Strict odmítne bytes v klíči i hodnotě, které lax režim převede na řetězec."""
     with pytest.raises(ValidationError):
         TextNormalization.model_validate({"acronyms": acronyms})
+
+
+_VARIANTS: Final = ("T1DM", "T2DM", "IDDM", "NIDDM", "PNA", "afib", "a-fib", "a fib")
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("T2DM and t2dm; NIDDM", ["T2DM", "T2DM", "NIDDM"]),
+        ("AFib, A-FIB and a fib", ["afib", "a-fib", "a fib"]),
+        ("afibrillation Xafib pna1", []),
+        ("Tafib", []),
+        ("pna.", ["PNA"]),
+        ("___T2DM", ["T2DM"]),
+        ("", []),
+    ],
+)
+def test_variants_match_manual_examples(text: str, expected: list[str]) -> None:
+    """Ruční příklady chrání hranice, pořadí a podobu variant z configu."""
+    assert find_diagnosis_variants(normalize_clinical_text(text), _VARIANTS) == expected
+
+
+@given(
+    st.lists(st.sampled_from(_VARIANTS), max_size=30),
+    st.text(alphabet=" .,;/()\n-", min_size=1, max_size=5),
+)
+def test_variants_preserve_composed_order(variants: list[str], separator: str) -> None:
+    """Nepísmenné oddělovače zachovají varianty v pořadí složení."""
+    text = normalize_clinical_text(separator.join(variants))
+    assert find_diagnosis_variants(text, _VARIANTS) == variants
+
+
+def test_variants_empty_dictionary_and_ascii_matching() -> None:
+    """Prázdný slovník nic nenajde, Unicode podobné znaky se neshodují."""
+    assert find_diagnosis_variants("afib", []) == []
+    assert find_diagnosis_variants("E\u017fKD ESKD", ["ESKD"]) == ["ESKD"]
