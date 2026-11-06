@@ -8,14 +8,14 @@ from typing import TYPE_CHECKING, Annotated, Any
 
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 
-from mediparse.domain.clinical_text import TextNormalization, find_diagnosis_variants
+from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
 from mediparse.domain.icd import DiagnosisCodes, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.input_file import parse_file
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Iterable, Mapping
     from pathlib import Path
 
 
@@ -99,50 +99,55 @@ def load_text_normalization(path: Path, *, variants: bool) -> TextNormalization:
 
 
 def _parse_normalization(text: str, *, variants: bool) -> TextNormalization:
-    if not variants:
-        vocabulary = _vocabulary(text)
-        return TextNormalization(acronyms=_acronyms(vocabulary.names), variants={})
-    candidates = _Candidates.model_validate_json(text).candidates
-    names = _selected(candidates, _MisspellingNames)
-    return _normalization_with_variants(text, names)
+    vocabulary = _vocabulary(text)
+    pairs: list[tuple[str, str]] = []
+    if variants:
+        names = _selected(vocabulary, _MisspellingNames)
+        pairs = [*_variant_pairs(names), *_misspelling_pairs(names)]
+    return TextNormalization(
+        acronyms=_acronyms(vocabulary), variants=_unique_forms(pairs)
+    )
 
 
-def _acronyms(names: Mapping[Diagnosis, _Names]) -> dict[str, str]:
+def _acronyms(candidates: Mapping[str, dict[str, Any]]) -> dict[str, str]:
+    vocabulary = _Vocabulary(names=_selected(candidates, _Names))
     return {
         acronym: entry.keywords_en[0]
-        for entry in names.values()
+        for entry in vocabulary.names.values()
         for acronym in entry.acronyms_en
     }
 
 
-def _normalization_with_variants(
-    text: str,
-    names: Mapping[Diagnosis, _VariantNames],
-) -> TextNormalization:
-    pairs = [
+def _variant_pairs(names: Mapping[Diagnosis, _VariantNames]) -> list[tuple[str, str]]:
+    return [
         (variant, entry.keywords_en[0])
         for entry in names.values()
         for variant in entry.variants_en
     ]
-    pairs.extend(
+
+
+def _misspelling_pairs(
+    names: Mapping[Diagnosis, _MisspellingNames],
+) -> list[tuple[str, str]]:
+    return [
         (form, word)
         for entry in names.values()
-        if isinstance(entry, _MisspellingNames)
         for form, word in entry.misspellings_en.items()
-    )
-    # Kontrola před dict zachová i přesné duplicity napříč diagnózami a poli.
-    try:
-        find_diagnosis_variants("", [form for form, _ in pairs])
-    except ValueError as error:
-        raise InvalidInputError(str(error)) from error
-    return TextNormalization(
-        acronyms=_acronyms(_vocabulary(text).names), variants=dict(pairs)
-    )
+    ]
 
 
-def _vocabulary(text: str) -> _Vocabulary:
-    candidates = _Candidates.model_validate_json(text).candidates
-    return _Vocabulary(names=_selected(candidates, _Names))
+def _unique_forms(pairs: Iterable[tuple[str, str]]) -> dict[str, str]:
+    forms: dict[str, str] = {}
+    for form, word in pairs:
+        if form in forms:
+            msg = f"Duplicitní varianta: {form}."
+            raise InvalidInputError(msg)
+        forms[form] = word
+    return forms
+
+
+def _vocabulary(text: str) -> dict[str, dict[str, Any]]:
+    return _Candidates.model_validate_json(text).candidates
 
 
 class _VariantNames(BaseModel):
@@ -182,16 +187,18 @@ def load_diagnosis_variants(path: Path) -> dict[str, Diagnosis]:
 
 
 def _parse_variants(text: str) -> dict[str, Diagnosis]:
-    candidates = _Candidates.model_validate_json(text).candidates
-    parsed = _selected(candidates, _VariantNames)
-    _normalization_with_variants(text, parsed)
-    return dict(
-        sorted(
-            (variant, diagnosis)
-            for diagnosis, names in parsed.items()
-            for variant in names.variants_en
-        )
+    vocabulary = _vocabulary(text)
+    names = _selected(vocabulary, _VariantNames)
+    normalization = TextNormalization(
+        acronyms=_acronyms(vocabulary),
+        variants=_unique_forms(_variant_pairs(names)),
     )
+    diagnoses = {
+        variant: diagnosis
+        for diagnosis, entry in names.items()
+        for variant in entry.variants_en
+    }
+    return {variant: diagnoses[variant] for variant in normalization.variants}
 
 
 def _selected[T: BaseModel](
