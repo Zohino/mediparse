@@ -93,21 +93,22 @@ percent_change_text <- function(after, before) {
   paste0(if (change < 0) "pokles o " else "nárůst o ", value, NBSP, "%")
 }
 
-acronym_cells <- function(con, acronym, key) {
+term_cells <- function(con, table, column, term, key) {
   cells <- DBI::dbGetQuery(con, sprintf("
     SELECT
-      count(*) FILTER (WHERE has_acronym AND has_code) AS oba,
-      count(*) FILTER (WHERE has_acronym AND NOT has_code) AS jen_zkratka,
-      count(*) FILTER (WHERE NOT has_acronym AND has_code) AS jen_kod,
-      count(*) FILTER (WHERE NOT has_acronym AND NOT has_code) AS zadne
+      count(*) FILTER (WHERE has_term AND has_code) AS oba,
+      count(*) FILTER (WHERE has_term AND NOT has_code) AS jen_termin,
+      count(*) FILTER (WHERE NOT has_term AND has_code) AS jen_kod,
+      count(*) FILTER (WHERE NOT has_term AND NOT has_code) AS zadne
     FROM (
-      SELECT p.occurrences > 0 AS has_acronym,
+      SELECT p.occurrences > 0 AS has_term,
         EXISTS (
           SELECT 1 FROM %2$s c WHERE c.kandidat = %3$s AND c.note_id = p.note_id
         ) AS has_code
-      FROM %4$s p WHERE p.acronym = %1$s
+      FROM %4$s p WHERE p.%5$s = %1$s
     )
-  ", DBI::dbQuoteString(con, acronym), CANDIDATES_TABLE, DBI::dbQuoteString(con, key), ACRONYMS_TABLE))
+  ", DBI::dbQuoteString(con, term), CANDIDATES_TABLE, DBI::dbQuoteString(con, key),
+    DBI::dbQuoteIdentifier(con, table), DBI::dbQuoteIdentifier(con, column)))
   vapply(cells, as.numeric, numeric(1))
 }
 
@@ -123,17 +124,17 @@ acronym_summary <- function(con, acronyms, candidates) {
   candidate_notes(con, candidates)
   rows <- lapply(acronyms, function(acronym) {
     key <- acronym_owner(acronym, candidates)
-    cells <- acronym_cells(con, acronym, key)
+    cells <- term_cells(con, ACRONYMS_TABLE, "acronym", acronym, key)
     occurrences <- as.numeric(DBI::dbGetQuery(con, sprintf(
       "SELECT coalesce(sum(occurrences), 0) AS n FROM %s WHERE acronym = %s", ACRONYMS_TABLE, DBI::dbQuoteString(con, acronym)
     ))$n)
-    with_acronym <- cells[["oba"]] + cells[["jen_zkratka"]]
+    with_acronym <- cells[["oba"]] + cells[["jen_termin"]]
     data.frame(
       zkratka = acronym,
       kandidat = key,
       label_cs = candidates[[key]]$label_cs,
       vyskyty = occurrences,
-      podil = if (with_acronym > 0) cells[["jen_zkratka"]] / with_acronym else NA_real_,
+      podil = if (with_acronym > 0) cells[["jen_termin"]] / with_acronym else NA_real_,
       stringsAsFactors = FALSE
     )
   })
