@@ -17,7 +17,7 @@ SPELLING_LAYOUTS <- list(
     align = "llrr", widths = c(30, 30, 20, 20)
   ),
   `tbl-preklepy` = list(
-    col.names = c("Slova ve slovníku", "Kandidáti", "Podíl slovníku (%)", "Podíl výskytů ve zprávách (%)"),
+    col.names = c("Slova ve slovníku", "Kandidáti", "Podíl slovníku (%)", "Podíl součtu DF (%)"),
     align = "rrrr", widths = c(22, 18, 28, 32)
   )
 )
