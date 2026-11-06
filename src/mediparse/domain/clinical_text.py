@@ -1,4 +1,4 @@
-"""Normalizace klinického textu pro TF-IDF: zástupné tokeny a rozvinutí zkratek."""
+"""Normalizace, rozvinutí zkratek a přepis variant a překlepů pro TF-IDF."""
 
 from __future__ import annotations
 

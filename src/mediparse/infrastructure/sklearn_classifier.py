@@ -59,8 +59,9 @@ def tfidf_preprocessor(
     Returns:
         Normalizovaný text malými písmeny, zkratky rozvinuté a varianty i překlepy přepsané.
     """
-    # Rozvinutí rozlišuje velikost písmen, proto jde před .lower(); jde po
-    # normalizaci, aby ___COPD nebylo zablokované podtržítky.
+    # Rozvinutí rozlišuje velikost písmen, proto jde před .lower(). Zkratky i
+    # varianty běží po normalizaci, aby podtržítka v ___COPD či ___T2DM
+    # neblokovala hranici slova.
     expanded = expand_diagnosis_acronyms(normalize_clinical_text(text), acronyms)
     # Vlastní preprocessor vypíná lowercase vectorizeru, snížení písmen proto nese
     # tato funkce. Bez něj by CAST a Cast byly dva příznaky.
@@ -89,7 +90,7 @@ def tfidf_vectorizer(normalization: TextNormalization | None) -> TfidfVectorizer
 
 # Seznam platí při načtení, ne při uložení: skops model uloží vždy a při načtení
 # pustí funkci jen z tohoto seznamu. Přejmenování funkce proto rozbije načítání
-# dříve uložených modelů. Slovník zkratek nese functools.partial, který musí být
+# dříve uložených modelů. Oba slovníky nese functools.partial, který musí být
 # v seznamu také; funkci uvnitř partialu skops kontroluje zvlášť.
 TRUSTED_FUNCTIONS: Final = (
     "functools.partial",
