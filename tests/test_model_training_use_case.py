@@ -33,8 +33,8 @@ NOTES = (
 
 
 ANSWER = (
-    Classification(predicted=True, score=1.5),
-    Classification(predicted=False, score=-0.5),
+    Classification(predicted=False, score=-1.5),
+    Classification(predicted=True, score=0.5),
 )
 
 
@@ -119,7 +119,14 @@ def test_trains_on_train_and_predicts_test() -> None:
     assert isinstance(recorder.calls["save"], _FakeClassifier)
     assert recorder.calls["predictions"] == (
         Prediction(
-            "row", 0, "1-DS-1", 1, Diagnosis.CKD, truth=True, predicted=True, score=1.5
+            "row",
+            0,
+            "1-DS-1",
+            1,
+            Diagnosis.CKD,
+            truth=True,
+            predicted=False,
+            score=-1.5,
         ),
         Prediction(
             "row",
@@ -128,8 +135,8 @@ def test_trains_on_train_and_predicts_test() -> None:
             2,
             Diagnosis.CKD,
             truth=False,
-            predicted=False,
-            score=-0.5,
+            predicted=True,
+            score=0.5,
         ),
     )
     assert report == TrainingReport(
