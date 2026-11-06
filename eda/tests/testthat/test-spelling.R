@@ -82,13 +82,14 @@ test_that("cíle jsou jedinečná dost dlouhá slova jen vybraných diagnóz", {
 
 test_that("DF počítá zprávy s tokenem a materializuje se pouze jednou", {
   con <- corpus_con(c("alpha AF", "alpha gamma"))
-  fixture_preprocessing(con)
-  expect_identical(token_frequency(con), "token_frequency")
+  use_feature_fixtures(con)
+  near_miss_forms(con, "alpha")
   freq <- DBI::dbGetQuery(con, "SELECT * FROM token_frequency WHERE token IN ('af', 'alpha', 'gamma') ORDER BY token")
   expect_identical(freq$token, c("af", "alpha", "gamma"))
   expect_equal(as.numeric(freq$df), c(1, 2, 1))
+  expect_identical(token_frequency(con), "token_frequency")
   DBI::dbExecute(con, "DELETE FROM token_frequency")
-  token_frequency(con)
+  near_miss_forms(con, "alpha")
   expect_equal(DBI::dbGetQuery(con, "SELECT count(*) AS n FROM token_frequency")$n, 0)
 })
 
