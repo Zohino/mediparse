@@ -126,3 +126,36 @@ test_that("nulový výskyt varianty nemá jmenovatel a prázdný korpus nespadne
   expect_equal(nrow(variant_summary(empty)), 0L)
   expect_equal(nrow(variant_table(variant_summary(empty))), 0L)
 })
+
+
+test_that("tvar ve vzdálenosti dvě a tvar mezi cíli do výsledku nepatří", {
+  con <- manual_spelling_con()
+  DBI::dbExecute(con, "INSERT INTO token_frequency VALUES ('diabetic', 1000)")
+  expect_false("diabetic" %in% near_miss_forms(con, "diabetes")$tvar)
+  expect_false("pneumonias" %in% near_miss_forms(con, c(MANUAL_TARGETS, "pneumonias"))$tvar)
+})
+
+test_that("blízký tvar zahrne přesný desetinásobek DF cíle", {
+  con <- spelling_con(c("abcdefg", "abcdefh"), c(1000, 100))
+  expect_identical(near_miss_forms(con, "abcdefg")$tvar, "abcdefh")
+  DBI::dbExecute(con, "UPDATE token_frequency SET df = 101 WHERE token = 'abcdefh'")
+  expect_equal(nrow(near_miss_forms(con, "abcdefg")), 0L)
+})
+
+test_that("tabulka omezí 41 dvojic na 40 a věta zachová všech 41 tvarů", {
+  forms <- data.frame(tvar = paste0("tvar", 1:41), cil = "cil", df = 41:1, cil_df = 10000)
+  expect_equal(nrow(near_miss_table(forms)), 40L)
+  expect_match(near_miss_text(forms), "41\u00a0tvarů", fixed = TRUE)
+})
+
+test_that("tvar u dvou cílů se ve větě počítá jednou", {
+  con <- spelling_con(c("abcdefg", "abcdefi", "abcdefh"), c(1000, 1000, 100))
+  forms <- near_miss_forms(con, c("abcdefg", "abcdefi"))
+  expect_equal(nrow(forms), 2L)
+  expect_match(near_miss_text(forms), "1\u00a0tvar;", fixed = TRUE)
+})
+
+test_that("tvary se stejnou DF řadí podle tokenu", {
+  con <- spelling_con(c("abcdefg", "abcdefi", "abcdefh"), c(1000, 100, 100))
+  expect_identical(near_miss_forms(con, "abcdefg")$tvar, c("abcdefh", "abcdefi"))
+})
