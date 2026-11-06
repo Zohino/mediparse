@@ -162,7 +162,7 @@ typo_text <- function(estimate) {
     return(paste("Podíl kandidátů na překlep ve slovníku", UNDECIDABLE_TEXT))
   }
   sprintf(
-    "Z %s splňuje definici kandidáta %s (%s slovníku, %s součtu dokumentových frekvencí). Jde o horní odhad: blízkost k častému slovu nepotvrzuje překlep.",
+    "Z %s splňuje definici kandidáta %s (%s slovníku, %s součtu dokumentových frekvencí). Jde o popisný odhad podle definice. Může zahrnovat legitimní slova a vynechává překlepy ve vzdálenosti větší než 1, tokeny kratší než 5 nebo s číslicí a překlepy s poměrem DF pod stanoveným prahem.",
     count_phrase(estimate$slovnik, c("slova", "slov", "slov")),
     count_phrase(estimate$kandidati, c("slovo", "slova", "slov")),
     percent_label(estimate$kandidati, estimate$slovnik),

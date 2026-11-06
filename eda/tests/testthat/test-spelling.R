@@ -35,7 +35,10 @@ test_that("odhad překlepů odpovídá ručně spočtenému čitateli a jmenovat
   table <- typo_table(estimate)
   expect_identical(table$podil_slovniku, "36,4")
   expect_identical(table$podil_vyskytu, "0,1")
-  expect_match(typo_text(estimate), "horní odhad", fixed = TRUE)
+  text <- typo_text(estimate)
+  expect_match(text, "popisný odhad podle definice", fixed = TRUE)
+  expect_match(text, "legitimní slova", fixed = TRUE)
+  expect_match(text, "vynechává překlepy", fixed = TRUE)
 })
 
 test_that("token se dvěma častými sousedy je jediný kandidát", {
