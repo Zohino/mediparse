@@ -63,7 +63,7 @@ def run(
         logger.info("cache platí")
         return False
     parsed = load_section_lexicon(lexicon)
-    normalization = load_text_normalization(candidates, variants=False)
+    normalization = load_text_normalization(candidates, variants=True)
     variant_map = load_diagnosis_variants(candidates)
     with (
         pending_cache(out, key, artifacts) as temporary,
