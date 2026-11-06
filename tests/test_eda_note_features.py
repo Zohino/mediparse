@@ -306,3 +306,21 @@ def test_cli_accepts_computation_and_current_cache() -> None:
     """Úspěšný výpočet i použití cache mají návratový kód OK."""
     assert main() is ExitCode.OK
     assert main() is ExitCode.OK
+
+
+def test_eda_rewrites_variants_but_counts_them_before_rewrite(
+    inputs: tuple[Path, Path, Path, Path],
+) -> None:
+    """EDA měří celý preprocessor a zachová výskyt T2DM v původním normalizovaném textu."""
+    parquet, _, _, out = inputs
+    pq.write_table(
+        pa.table({"note_id": ["synthetic-note"], "text": ["___T2DM"]}),
+        parquet / "discharge.parquet",
+    )
+    assert run(*inputs, {"CLAUDECODE": "1"}) is True
+    preprocessed = pq.read_table(out / "note_preprocessing.parquet").to_pylist()
+    assert preprocessed[0]["vocabulary_preprocessed"] == ["__deid__", "diabetes"]
+    variants = pq.read_table(out / "note_variants.parquet").to_pylist()
+    assert [
+        (row["variant"], row["occurrences"]) for row in variants if row["occurrences"]
+    ] == [("T2DM", 1)]

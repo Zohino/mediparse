@@ -1,11 +1,17 @@
-"""Normalizace klinického textu pro TF-IDF: zástupné tokeny a rozvinutí zkratek."""
+"""Normalizace, rozvinutí zkratek a přepis variant a překlepů pro TF-IDF."""
 
 from __future__ import annotations
 
 import re
 from typing import TYPE_CHECKING, Annotated, Final
 
-from pydantic import BaseModel, ConfigDict, StringConstraints, field_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    StringConstraints,
+    field_validator,
+    model_validator,
+)
 
 from mediparse.domain.language import Language
 from mediparse.domain.note_text import STANDALONE_DEID, alternation
@@ -94,34 +100,76 @@ def find_diagnosis_acronyms(text: str, acronyms: Mapping[str, str]) -> list[str]
     return [match[0] for match in _acronym_pattern(acronyms).finditer(text)]
 
 
+def _variant_key(text: str) -> str:
+    return " ".join(text.lower().split())
+
+
+def _variant_keys(variants: Iterable[str]) -> dict[str, str]:
+    canonical: dict[str, str] = {}
+    for variant in variants:
+        key = _variant_key(variant)
+        if key != variant.lower():
+            message = f"Varianta nemá sloučené bílé znaky: {variant!r}."
+            raise ValueError(message)
+        if key in canonical:
+            message = f"Duplicitní varianta: {variant}."
+            raise ValueError(message)
+        canonical[key] = variant
+    return canonical
+
+
+def _variant_pattern(variants: Iterable[str]) -> re.Pattern[str]:
+    # Víceslovná varianta přijímá bílé znaky stejně jako zmínka v sešitu 8.
+    alternatives = alternation(variants).replace(r"\ ", r"\s+")
+    # ASCII brání záměně dlouhého s (U+017F) a znaku Kelvina za písmena slovníku.
+    return re.compile(
+        f"{_WORD_START}(?:{alternatives}){_WORD_END}",
+        re.IGNORECASE | re.ASCII,
+    )
+
+
 def find_diagnosis_variants(text: str, variants: Iterable[str]) -> list[str]:
     """Najde celé varianty bez rozlišení velikosti písmen po normalizaci textu.
 
     Returns:
         Tvary z konfigurace v pořadí výskytu; prázdný slovník dá prázdný seznam.
+
+    Raises:
+        ValueError: Tvary jsou duplicitní nebo nemají sloučené bílé znaky.
     """
-    canonical = {variant.lower(): variant for variant in variants}
+    canonical = _variant_keys(variants)
     if not canonical:
         return []
-    # Víceslovná varianta přijímá bílé znaky stejně jako zmínka v sešitu 8.
-    alternatives = alternation(canonical).replace(r"\ ", r"\s+")
-    # ASCII brání záměně dlouhého s (U+017F) a znaku Kelvina za písmena slovníku.
-    pattern = re.compile(
-        f"{_WORD_START}(?:{alternatives}){_WORD_END}",
-        re.IGNORECASE | re.ASCII,
-    )
     return [
-        canonical[" ".join(match[0].lower().split())]
-        for match in pattern.finditer(text)
+        canonical[_variant_key(match[0])]
+        for match in _variant_pattern(canonical).finditer(text)
     ]
 
 
+def rewrite_diagnosis_variants(text: str, variants: Mapping[str, str]) -> str:
+    """Přepíše celé varianty a překlepy bez rozlišení velikosti písmen.
+
+    Returns:
+        Text s náhradami ze slovníku; prázdný slovník nechá text beze změny.
+    """
+    if not variants:
+        return text
+    canonical = _variant_keys(variants)
+    pattern = _variant_pattern(canonical)
+    # Oprava překlepu uvnitř víceslovné varianty ji odhalí až po první náhradě.
+    for _ in range(2):
+        text = pattern.sub(
+            lambda match: variants[canonical[_variant_key(match[0])]], text
+        )
+    return text
+
+
 class TextNormalization(BaseModel):
-    """Záznam normalizace vstupu TF-IDF: slovník zkratek diagnóz a jejich tvarů.
+    """Záznam normalizace vstupu TF-IDF: slovníky zkratek, variant a překlepů.
 
     Tentýž objekt dostane trenér i run manifest. Klíče se seřadí, aby byl JSON
-    deterministický. Tvar nesmí obsahovat zkratku slovníku jako celé slovo, jinak by
-    rozvinutí nebylo idempotentní.
+    deterministický. Náhrady nesmějí obsahovat tvary ani zkratky slovníků jako celá slova,
+    jinak by přepis nebyl idempotentní.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
@@ -131,12 +179,31 @@ class TextNormalization(BaseModel):
         Annotated[str, StringConstraints(min_length=1)],
     ]
 
-    @field_validator("acronyms")
+    variants: dict[
+        Annotated[str, StringConstraints(min_length=1)],
+        Annotated[str, StringConstraints(min_length=1)],
+    ]
+
+    @field_validator("acronyms", "variants")
     @classmethod
-    def _sorted_and_idempotent(cls, acronyms: dict[str, str]) -> dict[str, str]:
-        pattern = _acronym_pattern(acronyms)
-        for acronym, form in acronyms.items():
-            if pattern.search(form):
-                message = f"Tvar zkratky {acronym} obsahuje zkratku slovníku: {form}"
+    def _sorted_dictionary(cls, dictionary: dict[str, str]) -> dict[str, str]:
+        return dict(sorted(dictionary.items()))
+
+    @model_validator(mode="after")
+    def _dictionaries_are_idempotent(self) -> TextNormalization:
+        _variant_keys(self.variants)
+        collisions = [
+            variant
+            for variant in self.variants
+            if find_diagnosis_variants(variant, self.acronyms)
+        ]
+        if collisions:
+            message = f"Varianty obsahují zkratky slovníku: {sorted(collisions)}."
+            raise ValueError(message)
+        for form in (*self.acronyms.values(), *self.variants.values()):
+            if find_diagnosis_variants(form, self.variants) or (
+                self.acronyms and _acronym_pattern(self.acronyms).search(form)
+            ):
+                message = f"Náhrada obsahuje variantu nebo zkratku slovníku: {form}"
                 raise ValueError(message)
-        return dict(sorted(acronyms.items()))
+        return self

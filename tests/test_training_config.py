@@ -81,3 +81,37 @@ def test_normalization_switch_as_string_is_rejected() -> None:
         TrainingConfig.model_validate_json(
             json.dumps(training_config(normalize_clinical_text="true"))
         )
+
+
+def test_variant_switch_is_required() -> None:
+    """Přepis variant musí každý config explicitně zapnout či vypnout."""
+    fields = training_config()
+    del fields["normalize_diagnosis_variants"]
+    with pytest.raises(ValidationError, match="normalize_diagnosis_variants"):
+        TrainingConfig.model_validate_json(json.dumps(fields))
+
+
+@pytest.mark.parametrize("value", ["true", 1, None])
+def test_variant_switch_is_strict_bool(value: object) -> None:
+    """Řetězec, číslo ani null nenahrazují bool přepínače."""
+    with pytest.raises(ValidationError, match="normalize_diagnosis_variants"):
+        TrainingConfig.model_validate_json(
+            json.dumps(
+                training_config(
+                    normalize_clinical_text=True, normalize_diagnosis_variants=value
+                )
+            )
+        )
+
+
+def test_variants_require_clinical_normalization() -> None:
+    """Bez normalizace není kde přepis spustit a manifest by lhal."""
+    with pytest.raises(ValidationError, match="vyžaduje normalizaci"):
+        TrainingConfig.model_validate_json(
+            json.dumps(training_config(normalize_diagnosis_variants=True))
+        )
+
+
+def test_smoketest_enables_variants() -> None:
+    """Smoketest zapíná celou cestu včetně přepisu variant."""
+    assert load_training_config(REPOSITORY_TRAINING_CONFIG).normalize_diagnosis_variants

@@ -25,6 +25,7 @@ def _row(**overrides: object) -> dict[str, object]:
         "model": "logreg",
         "strip_diagnostic_sections": False,
         "normalize_clinical_text": False,
+        "normalize_diagnosis_variants": False,
         "tuning_trials": 20,
     } | overrides
 
@@ -241,6 +242,11 @@ def test_repository_manifest_declares_normalization_ablation() -> None:
         rows["en-logreg-strip"],
         rows["en-logreg-nonorm"],
     )
+    assert rows["en-logreg-novariants"].normalize_clinical_text is True
+    assert rows["en-logreg-novariants"].normalize_diagnosis_variants is False
+    assert main.normalize_diagnosis_variants is True
+    assert stripped.normalize_diagnosis_variants is True
+    assert ablation.normalize_diagnosis_variants is False
     assert main.normalize_clinical_text is True
     assert stripped.normalize_clinical_text is True
     assert ablation.normalize_clinical_text is False
@@ -251,3 +257,36 @@ def test_repository_manifest_declares_normalization_ablation() -> None:
 def test_repository_manifest_is_valid() -> None:
     """Manifest v repu je platný — neplatná matice neprojde CI."""
     assert load_matrix(REPOSITORY_MATRIX).rows
+
+
+def test_matrix_variants_require_normalization() -> None:
+    """Přepis variant nelze deklarovat bez preprocessoru S36."""
+    with pytest.raises(ValidationError, match="vyžaduje normalizaci"):
+        _validate(_row(normalize_diagnosis_variants=True))
+
+
+def test_repository_variants_ablation_changes_only_variant_axis() -> None:
+    """Dvojice ablace S37 liší jen id a vlastní přepínač."""
+    rows = {row.id: row for row in load_matrix(REPOSITORY_MATRIX).rows}
+    main = rows["en-logreg"].model_dump(exclude={"id", "normalize_diagnosis_variants"})
+    ablation = rows["en-logreg-novariants"].model_dump(
+        exclude={"id", "normalize_diagnosis_variants"}
+    )
+    assert main == ablation
+
+
+@pytest.mark.parametrize("value", ["true", 1, None])
+def test_matrix_variant_switch_is_strict_bool(value: object) -> None:
+    """Nová osa matice přijímá jen skutečný bool."""
+    with pytest.raises(ValidationError, match="normalize_diagnosis_variants"):
+        _validate(
+            _row(normalize_clinical_text=True, normalize_diagnosis_variants=value)
+        )
+
+
+def test_matrix_variant_switch_is_required() -> None:
+    """Nová osa musí být v každém řádku explicitně deklarovaná."""
+    row = _row()
+    del row["normalize_diagnosis_variants"]
+    with pytest.raises(ValidationError, match="normalize_diagnosis_variants"):
+        _validate(row)

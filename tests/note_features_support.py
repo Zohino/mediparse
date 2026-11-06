@@ -79,7 +79,9 @@ def compute(rows: Sequence[tuple[str, str]], sink: NoteFeatureSink) -> int:
     Returns:
         Počet zpráv.
     """
-    normalization = load_text_normalization(REPOSITORY_DIAGNOSIS_CANDIDATES)
+    normalization = load_text_normalization(
+        REPOSITORY_DIAGNOSIS_CANDIDATES, variants=True
+    )
     return ComputeNoteFeatures(
         MemoryTexts(rows),
         sink,

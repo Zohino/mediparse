@@ -34,7 +34,16 @@
         "DMII",
         "IDDM",
         "NIDDM"
-      ]
+      ],
+      "misspellings_en": {
+        "diabtes": "diabetes",
+        "diabete": "diabetes",
+        "diabets": "diabetes",
+        "dibetes": "diabetes",
+        "diabetis": "diabetes",
+        "mellitis": "mellitus",
+        "melitus": "mellitus"
+      }
     },
     "heart_failure": {
       "label_cs": "Srdeční selhání",
@@ -88,7 +97,14 @@
       ],
       "variants_en": [
         "chronic obstructive lung disease"
-      ]
+      ],
+      "misspellings_en": {
+        "pumonary": "pulmonary",
+        "pulmomary": "pulmonary",
+        "pulmoanry": "pulmonary",
+        "pulomonary": "pulmonary",
+        "obstuctive": "obstructive"
+      }
     },
     "ckd": {
       "label_cs": "Chronické onemocnění ledvin",
@@ -116,7 +132,14 @@
         "ESKD",
         "CRI",
         "CRF"
-      ]
+      ],
+      "misspellings_en": {
+        "kindey": "kidney",
+        "kideny": "kidney",
+        "insufficency": "insufficiency",
+        "insuficiency": "insufficiency",
+        "insufficieny": "insufficiency"
+      }
     },
     "pneumonia": {
       "label_cs": "Pneumonie",
@@ -156,7 +179,14 @@
       "acronyms_en": [],
       "variants_en": [
         "PNA"
-      ]
+      ],
+      "misspellings_en": {
+        "pnuemonia": "pneumonia",
+        "penumonia": "pneumonia",
+        "pnemonia": "pneumonia",
+        "pneumona": "pneumonia",
+        "pneuomonia": "pneumonia"
+      }
     },
     "ami": {
       "label_cs": "Akutní infarkt myokardu",
@@ -247,7 +277,15 @@
         "a-fib",
         "a fib",
         "PAF"
-      ]
+      ],
+      "misspellings_en": {
+        "fibrilation": "fibrillation",
+        "fibrilliation": "fibrillation",
+        "fibrillaion": "fibrillation",
+        "fibillation": "fibrillation",
+        "atiral": "atrial",
+        "atrail": "atrial"
+      }
     },
     "sepsis": {
       "label_cs": "Sepse",

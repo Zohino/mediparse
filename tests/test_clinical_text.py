@@ -7,7 +7,7 @@ import string
 from typing import Final
 
 import pytest
-from hypothesis import given
+from hypothesis import example, given
 from hypothesis import strategies as st
 from pydantic import ValidationError
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -21,8 +21,11 @@ from mediparse.domain.clinical_text import (
     find_diagnosis_acronyms,
     find_diagnosis_variants,
     normalize_clinical_text,
+    rewrite_diagnosis_variants,
 )
 from mediparse.domain.note_text import deid_markers
+from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
+from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 
 _ANALYZER: Final = TfidfVectorizer().build_analyzer()
 _UNREPLACED_NUMBER: Final = re.compile(r"(?<![A-Za-z0-9_])(?<![0-9][.,])[0-9]")
@@ -312,7 +315,9 @@ def test_find_count_equals_number_of_replacements(text: str) -> None:
 
 def test_text_normalization_sorts_acronyms() -> None:
     """Klíče se seřadí, aby byl JSON deterministický."""
-    normalization = TextNormalization(acronyms={"DM2": "diabetes", "AF": "atrial"})
+    normalization = TextNormalization(
+        variants={}, acronyms={"DM2": "diabetes", "AF": "atrial"}
+    )
 
     assert list(normalization.acronyms) == ["AF", "DM2"]
     assert list(
@@ -335,15 +340,18 @@ def test_text_normalization_rejects_invalid_dictionary(
 ) -> None:
     """Prázdná zkratka, prázdný tvar a tvar se zkratkou slovníku jsou chyba."""
     with pytest.raises(ValidationError):
-        TextNormalization(acronyms=acronyms)
+        TextNormalization(variants={}, acronyms=acronyms)
 
 
 def test_text_normalization_is_strict_and_forbids_extra() -> None:
     """Pole mimo model a jiný typ než dict jsou chyba."""
     with pytest.raises(ValidationError):
-        TextNormalization.model_validate({"acronyms": {}, "other": 1})
+        TextNormalization.model_validate({"acronyms": {}, "variants": {}, "other": 1})
     with pytest.raises(ValidationError):
-        TextNormalization.model_validate({"acronyms": [("AF", "atrial")]})
+        TextNormalization.model_validate({
+            "acronyms": [("AF", "atrial")],
+            "variants": {},
+        })
 
 
 @pytest.mark.parametrize(
@@ -353,7 +361,7 @@ def test_text_normalization_is_strict_and_forbids_extra() -> None:
 def test_text_normalization_rejects_bytes(acronyms: dict[object, object]) -> None:
     """Strict odmítne bytes v klíči i hodnotě, které lax režim převede na řetězec."""
     with pytest.raises(ValidationError):
-        TextNormalization.model_validate({"acronyms": acronyms})
+        TextNormalization.model_validate({"acronyms": acronyms, "variants": {}})
 
 
 _VARIANTS: Final = (
@@ -404,3 +412,133 @@ def test_variants_empty_dictionary_and_ascii_matching() -> None:
     """Prázdný slovník nic nenajde, Unicode podobné znaky se neshodují."""
     assert find_diagnosis_variants("afib", []) == []
     assert find_diagnosis_variants("E\u017fKD ESKD", ["ESKD"]) == ["ESKD"]
+
+
+_REWRITE_VARIANTS: Final = {
+    "T2DM": "diabetes",
+    "NIDDM": "diabetes",
+    "IDDM": "diabetes",
+    "PNA": "pneumonia",
+    "afib": "atrial fibrillation",
+    "a-fib": "atrial fibrillation",
+    "a fib": "atrial fibrillation",
+    "kindey": "kidney",
+}
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("T2DM and t2dm", "diabetes and diabetes"),
+        ("NIDDM", "diabetes"),
+        (
+            "A-Fib, AFIB, a\n fib",
+            "atrial fibrillation, atrial fibrillation, atrial fibrillation",
+        ),
+        ("Xafib pna1 afibrillation", "Xafib pna1 afibrillation"),
+        ("pna.", "pneumonia."),
+        ("acute KINDEY injury", "acute kidney injury"),
+    ],
+)
+def test_rewrite_variants_matches_manual_examples(text: str, expected: str) -> None:
+    """Přepis odpovídá ručnímu orákulu pro hranice, velikost a překlep slova."""
+    assert rewrite_diagnosis_variants(text, _REWRITE_VARIANTS) == expected
+
+
+@given(_TEXT)
+def test_empty_variants_keep_any_text(text: str) -> None:
+    """Prázdný slovník text nemění."""
+    assert rewrite_diagnosis_variants(text, {}) == text
+
+
+@given(_TEXT | st.lists(st.sampled_from(list(_REWRITE_VARIANTS))).map(" ".join))
+def test_rewrite_is_idempotent_and_independent_of_dictionary_order(text: str) -> None:
+    """Přepis nemění vlastní výstup a nezávisí na pořadí položek."""
+    once = rewrite_diagnosis_variants(text, _REWRITE_VARIANTS)
+    assert rewrite_diagnosis_variants(once, _REWRITE_VARIANTS) == once
+    assert (
+        rewrite_diagnosis_variants(
+            text, dict(reversed(list(_REWRITE_VARIANTS.items())))
+        )
+        == once
+    )
+
+
+@given(st.text(alphabet="xyzXYZ012 _.,\n", max_size=80))
+def test_text_without_variant_stays(text: str) -> None:
+    """Abeceda bez tvarů slovníku se přepisem nemění."""
+    assert rewrite_diagnosis_variants(text, _REWRITE_VARIANTS) == text
+
+
+@pytest.mark.parametrize(
+    ("acronyms", "variants"),
+    [
+        ({}, {"afib": "atrial", "AFIB": "atrial"}),
+        ({"DM": "diabetes"}, {"dm": "diabetes"}),
+        ({}, {"afib": "afib rhythm"}),
+        ({"AF": "atrial fibrillation"}, {"afib": "AF rhythm"}),
+        ({"AF": "afib"}, {"afib": "atrial fibrillation"}),
+        ({}, {"": "diabetes"}),
+        ({}, {"afib": ""}),
+    ],
+)
+def test_normalization_rejects_colliding_or_nonidempotent_variants(
+    acronyms: dict[str, str], variants: dict[str, str]
+) -> None:
+    """Kolize a náhrady obsahující klíče slovníků by změnily další průchod."""
+    with pytest.raises(ValidationError):
+        TextNormalization(acronyms=acronyms, variants=variants)
+
+
+def test_find_rejects_case_insensitive_collision() -> None:
+    """Regrese S37a: hledání nesmí tiše vybrat poslední shodný klíč."""
+    with pytest.raises(ValueError, match="Duplicitní"):
+        find_diagnosis_variants("x", ["afib", "AFIB"])
+
+
+def test_normalization_sorts_variants_in_json() -> None:
+    """Slovník variant má deterministické pořadí i po serializaci."""
+    normalization = TextNormalization(
+        acronyms={}, variants={"kindey": "kidney", "afib": "atrial"}
+    )
+    assert list(
+        TextNormalization.model_validate_json(normalization.model_dump_json()).variants
+    ) == ["afib", "kindey"]
+
+
+@pytest.mark.parametrize("variant", ["DM mellitus", "dm mellitus"])
+def test_variant_cannot_contain_acronym_word(variant: str) -> None:
+    """Zkratka uvnitř klíče varianty by měnila výsledek podle pořadí operací."""
+    with pytest.raises(ValidationError, match="zkrat"):
+        TextNormalization(
+            acronyms={"DM": "diabetes"}, variants={variant: "sugar disease"}
+        )
+
+
+_REPOSITORY_NORMALIZATION: Final = load_text_normalization(
+    REPOSITORY_DIAGNOSIS_CANDIDATES, variants=True
+)
+
+
+@given(
+    _TEXT
+    | st.lists(
+        st.sampled_from([
+            *_REPOSITORY_NORMALIZATION.variants,
+            *_REPOSITORY_NORMALIZATION.variants.values(),
+            "chronic obstuctive lung disease",
+        ])
+    ).map(" ".join)
+)
+@example("chronic obstuctive lung disease")
+def test_rewrite_repository_dictionary_is_idempotent(text: str) -> None:
+    """Idempotence platí i pro celý slovník včetně navazujících oprav překlepů."""
+    once = rewrite_diagnosis_variants(text, _REPOSITORY_NORMALIZATION.variants)
+    assert rewrite_diagnosis_variants(once, _REPOSITORY_NORMALIZATION.variants) == once
+
+
+@pytest.mark.parametrize("variant", ["a  fib", " afib", " ", "a\tfib"])
+def test_normalization_rejects_noncanonical_variant_whitespace(variant: str) -> None:
+    """Klíč s nesloučenými bílými znaky by neodpovídal nalezenému tvaru."""
+    with pytest.raises(ValidationError):
+        TextNormalization(acronyms={}, variants={variant: "x"})

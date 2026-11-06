@@ -151,11 +151,16 @@ def test_manifest_records_normalization_as_sorted_pairs() -> None:
     dumped = RunManifest.model_validate(
         _fields(
             normalize_clinical_text=TextNormalization(
-                acronyms={"DM2": "diabetes", "AF": "atrial fibrillation"}
+                variants={"kindey": "kidney", "afib": "atrial fibrillation"},
+                acronyms={"DM2": "diabetes", "AF": "atrial fibrillation"},
             )
         )
     ).model_dump(mode="json")
 
+    assert list(dumped["normalize_clinical_text"]["variants"].items()) == [
+        ("afib", "atrial fibrillation"),
+        ("kindey", "kidney"),
+    ]
     assert list(dumped["normalize_clinical_text"]["acronyms"].items()) == [
         ("AF", "atrial fibrillation"),
         ("DM2", "diabetes"),

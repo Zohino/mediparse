@@ -6,7 +6,8 @@
       "model": "logreg",
       "strip_diagnostic_sections": false,
       "normalize_clinical_text": true,
-      "tuning_trials": 20
+      "tuning_trials": 20,
+      "normalize_diagnosis_variants": true
     },
     {
       "id": "en-logreg-strip",
@@ -14,7 +15,8 @@
       "model": "logreg",
       "strip_diagnostic_sections": true,
       "normalize_clinical_text": true,
-      "tuning_trials": 20
+      "tuning_trials": 20,
+      "normalize_diagnosis_variants": true
     },
     {
       "id": "en-logreg-nonorm",
@@ -22,7 +24,17 @@
       "model": "logreg",
       "strip_diagnostic_sections": false,
       "normalize_clinical_text": false,
-      "tuning_trials": 20
+      "tuning_trials": 20,
+      "normalize_diagnosis_variants": false
+    },
+    {
+      "id": "en-logreg-novariants",
+      "language": "en",
+      "model": "logreg",
+      "strip_diagnostic_sections": false,
+      "normalize_clinical_text": true,
+      "tuning_trials": 20,
+      "normalize_diagnosis_variants": false
     }
   ]
 }
