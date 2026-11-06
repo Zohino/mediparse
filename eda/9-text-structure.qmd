@@ -1,7 +1,7 @@
 ---
 title: "Explorační analýza datové sady: hlavičky, lexikon a kostra sekcí"
 abstract: |
-  Dokument zjišťuje, které hlavičky začínají v propouštěcích zprávách vstupního korpusu oddíly, a ověřuje na nich seed lexikon sekcí šablony MIMIC. Počítá dokumentovou frekvenci všech hlaviček, pokrytí sekcí a synonym lexikonu, mrtvá synonyma a synonyma, která se ve zprávě opakují, což je signál falešné hranice sekce. Hlavičky mimo lexikon s vysokým pokrytím jmenuje jako kandidáty na doplnění, o kterých rozhodne autor. Zprávy pak rozdělí parserem sekcí a zjistí kostru šablony (pořadí sekcí, jejich pokrytí a konzistenci pořadí), počet sekcí na zprávu, délky těl sekcí ve znacích, podíl textu, který odstraní vystřižení sekce Discharge Diagnosis, a zprávy bez nadpisů. Nakonec spočítá nejčastější tokeny, bigramy a trigramy těl sekcí v celém korpusu i po sekcích kostry, aby ukázal fráze šablony, které mají skoro všechny zprávy. Správnost hranic parseru ověří na sekci Brief Hospital Course proti referenčnímu datasetu MIMIC-IV-Ext-BHC (podíl shody a rozpad neshod) a změří, v kolika zprávách zůstane po stripu hlavička diagnostické sekce. Změří také dopad předzpracování TF-IDF (normalizace textu a rozvinutí zkratek diagnóz) na velikost slovníku a délku zprávy v tokenech a u zkratek diagnóz podíl zpráv bez kódu diagnózy.
+  Dokument zjišťuje, které hlavičky začínají v propouštěcích zprávách vstupního korpusu oddíly, a ověřuje na nich seed lexikon sekcí šablony MIMIC. Počítá dokumentovou frekvenci všech hlaviček, pokrytí sekcí a synonym lexikonu, mrtvá synonyma a synonyma, která se ve zprávě opakují, což je signál falešné hranice sekce. Hlavičky mimo lexikon s vysokým pokrytím jmenuje jako kandidáty na doplnění, o kterých rozhodne autor. Zprávy pak rozdělí parserem sekcí a zjistí kostru šablony (pořadí sekcí, jejich pokrytí a konzistenci pořadí), počet sekcí na zprávu, délky těl sekcí ve znacích, podíl textu, který odstraní vystřižení sekce Discharge Diagnosis, a zprávy bez nadpisů. Nakonec spočítá nejčastější tokeny, bigramy a trigramy těl sekcí v celém korpusu i po sekcích kostry, aby ukázal fráze šablony, které mají skoro všechny zprávy. Správnost hranic parseru ověří na sekci Brief Hospital Course proti referenčnímu datasetu MIMIC-IV-Ext-BHC (podíl shody a rozpad neshod) a změří, v kolika zprávách zůstane po stripu hlavička diagnostické sekce. Změří také dopad předzpracování TF-IDF (normalizace textu a rozvinutí zkratek diagnóz) na velikost slovníku a délku zprávy v tokenech a u zkratek diagnóz podíl zpráv bez kódu diagnózy. Vedle toho měří varianty názvů pětice, blízké tvary těchto názvů a podíl kandidátů na překlep ve slovníku.
 ---
 
 ```{r}
@@ -20,6 +20,7 @@ source("R/segments.R")
 source("R/ngrams.R")
 source("R/bhc.R")
 source("R/preprocessing.R")
+source("R/spelling.R")
 source("../R/thesis/export.R")
 con <- eda_connect()
 lexicon <- read_section_headers(section_headers_path())
@@ -56,6 +57,13 @@ note_preprocessing(con)
 candidate_pool <- read_candidates(candidates_path())
 preprocessing <- preprocessing_summary(con)
 acronyms <- acronym_summary(con, corpus_acronyms(con), candidate_pool)
+note_variants(con)
+variants <- variant_summary(con)
+variant_keys <- DBI::dbGetQuery(con, sprintf("SELECT DISTINCT diagnosis FROM %s", VARIANTS_TABLE))$diagnosis
+targets <- spelling_targets(candidate_pool, variant_keys)
+token_frequency(con)
+near_forms <- near_miss_forms(con, targets)
+typos <- typo_estimate(con)
 skeleton_floor <- coverage_threshold_text(SKELETON_COVERAGE)
 stopwords <- stop_words()
 ngrams_total <- ngram_counts(con, stopwords)
@@ -79,11 +87,12 @@ Tento sešit je devátým z řady sešitů explorační analýzy a otevírá fá
 - změřit, v kolika zprávách zůstane po stripu D2 hlavička diagnostické sekce i s diagnózou pod ní,
 - ověřit hranice sekce Brief Hospital Course proti referenčnímu datasetu MIMIC-IV-Ext-BHC,
 - spočítat nejčastější tokeny a n-gramy těl sekcí (celkem i po sekcích kostry) a najít fráze šablony, které nic nerozlišují,
-- změřit, o kolik předzpracování TF-IDF (normalizace textu a rozvinutí zkratek diagnóz) zmenší slovník a změní délku zprávy v tokenech, a u zkratek diagnóz podíl zpráv bez kódu diagnózy (zkratka AF je víceznačná).
+- změřit, o kolik předzpracování TF-IDF (normalizace textu a rozvinutí zkratek diagnóz) zmenší slovník a změní délku zprávy v tokenech, a u zkratek diagnóz podíl zpráv bez kódu diagnózy (zkratka AF je víceznačná),
+- změřit výskyty předem daných variant názvů pětice a podíl zpráv s variantou bez příslušného kódu, najít blízké tvary názvů a odhadnout podíl kandidátů na překlep ve slovníku.
 
 Data pocházejí z MIMIC-IV [@mimiciv; @johnson2023], MIMIC-IV-Note [@mimicivnote] a MIMIC-IV-Ext-BHC [@aali2025bhc; @aali2024], které podléhají smlouvě o užívání dat (DUA). Dokument proto zveřejňuje jen agregáty. Řetězec hlavičky je popisek z dat, a zveřejní se proto jen hlavička, kterou má aspoň `r coverage_floor` zpráv a nejméně `r count_floor`; podrobná pravidla jsou v kapitole @sec-data.
 
-Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky hlaviček a lexikonu, kapitola @sec-segmentace výsledky rozdělení zpráv na sekce a frekvenci tokenů a n-gramů a kapitola @sec-bhc validaci parseru proti MIMIC-IV-Ext-BHC a kapitola @sec-predzpracovani dopad předzpracování TF-IDF. Kapitola @sec-shrnuti shrnuje rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
+Dokument je členěn takto. Kapitola @sec-data popisuje metody. Kapitola @sec-vysledky uvádí výsledky hlaviček a lexikonu, kapitola @sec-segmentace výsledky rozdělení zpráv na sekce a frekvenci tokenů a n-gramů a kapitola @sec-bhc validaci parseru proti MIMIC-IV-Ext-BHC a kapitola @sec-predzpracovani dopad předzpracování TF-IDF. Kapitola @sec-preklepy měří varianty názvů a kandidáty na překlep. Kapitola @sec-shrnuti shrnuje rozhodnutí pro další práci a kapitola @sec-omezeni jmenuje omezení. Příloha A dokumentuje provenance renderu.
 
 # Data a metody {#sec-data}
 
@@ -110,6 +119,15 @@ Pojmy a jednotky jsou tyto:
 - *předzpracování pro TF-IDF*: nástroj `mediparse-eda-note-features` počítá nad celou tabulkou `discharge` do cache parquetu analyzérem téhož vectorizeru, který používá trénink (`tfidf_vectorizer` v `infrastructure/sklearn_classifier.py`); sešit čte výsledky přes DuckDB a výběr vstupního korpusu připojí joinem. Varianta „bez předzpracování“ je vectorizer ablace `en-logreg-nonorm` (výchozí tokenizace se snížením písmen, `___` a čísla zůstávají tokeny), varianta „s předzpracováním“ vectorizer hlavních řádků (věk, značky `___` a čísla nahradí zástupné tokeny, zkratky pětice se rozvinou). Tokeny se tedy liší od frekvenční analýzy výše (`TOKEN_SQL`: jen písmena a–z, bez čísel a masky): tam jde o čitelné n-gramy, tady o tokeny, které vidí model. *Slovník* je počet distinct tokenů analyzéru nad celým korpusem před prořezáním: `min_df`, `max_df` a `max_features` filtrují až při `fit`, takže jde o horní mez slovníku modelu učeného jen na trénovacích foldech. Počítá ho DuckDB jako počet distinct tokenů po rozbalení seznamů tokenů zpráv vybraného korpusu. *Tokeny na zprávu* jsou délka výstupu analyzéru. *Výskyt zkratky* je jedno rozvinutí, tedy shoda zkratky pětice (rozlišuje velikost písmen, ASCII hranice slova, `DM2` před `DM`) v normalizovaném textu. *Kód diagnózy* mají zprávy, jejichž přijetí má ICD s předponou diagnózy z `config/diagnosis_candidates.json`, tytéž předpony jako sešity 7 a 8. *Podíl bez kódu* je podíl zpráv se zkratkou, které kód diagnózy nemají. Je to nepřímý ukazatel nesouladu zkratky a kódu, ne odhad víceznačnosti,
 - *zveřejnění u předzpracování*: tokeny na zprávu, slovník a výskyty zkratek jsou metriky textu a korpusu a uvádějí se přesně. Zkratky pochází z konfigurace. Podíl zpráv se zkratkou bez kódu diagnózy se uvádí u každé zkratky, kterou má aspoň jedna zpráva; bez výskytu je podíl nedefinovaný.
 
+## Varianty názvů a kandidáti na překlep
+
+Varianty jsou předem dané tvary názvů pětice v `config/diagnosis_variants.json`, sestavené z klinické znalosti před pohledem na data: diabetes (`T1DM`, `T2DM`, `DM1`, `DMII`, `IDDM`, `NIDDM`), CHOPN (`chronic obstructive lung disease`), CKD (`ESKD`, `CRI`, `CRF`), pneumonie (`PNA`) a fibrilace síní (`afib`, `a-fib`, `a fib`, `PAF`). Python je měří funkcí `find_diagnosis_variants` po `normalize_clinical_text`, s hranicemi jako u zkratek, bez rozlišení velikosti písmen a v ASCII. Tentýž vzor bude podkladem přepisu v S37b. Artefakt `note_variants.parquet` obsahuje řádek na zprávu a variantu včetně nuly a klíč diagnózy. R připojí vstupní korpus a porovná variantu s kódem stejným výpočtem jako u zkratek. Jmenovatel podílu bez kódu tvoří zprávy s aspoň jedním výskytem varianty. Popisky jsou z konfigurace a práh popisků se na ně nevztahuje.
+
+Dokumentová frekvence (DF) tokenu je počet zpráv, v nichž je token aspoň jednou. Počítá se v SQL z distinct tokenů `vocabulary_raw` v `note_preprocessing.parquet`, tedy z výchozího analyzéru TF-IDF nad celou zprávou. `eda/R/spelling.R` ji jednou materializuje do tabulky `token_frequency`. Vzdálenost Damerauova–Levenshteinova (`damerau_levenshtein`) zahrnuje vložení, vypuštění, záměnu i přehození sousedních znaků.
+
+Cíle blízkých tvarů jsou slova z `keywords_en` pětice, kterou určuje klíč `diagnosis` v artefaktu variant. Cíl musí mít jen písmena a–z, délku aspoň `r TARGET_MIN_LENGTH` a patřit jediné diagnóze; sdílená slova `chronic` a `disease` proto vypadnou. Blízký tvar je token ve vzdálenosti 1 od cíle, sám není žádným cílem, má DF aspoň `r LABEL_MIN_NOTES` a cíl má aspoň `r NEAR_MISS_RATIO`× větší DF. Práh zpráv chrání popisek z textu. Tabulka uvádí nejvýše `r NEAR_MISS_LIMIT` dvojic tvar–cíl podle DF tvaru; věta uvádí celkový počet tvarů nad prahy.
+
+Kandidát na překlep v odhadu je token složený jen z písmen a–z, dlouhý aspoň `r TYPO_MIN_LENGTH`, s jiným takovým slovem ve vzdálenosti 1, které má DF aspoň `r TYPO_MIN_DF` a aspoň `r TYPO_RATIO`× větší DF. Páry se hledají přes společné okolí po vypuštění jednoho znaku a ověří se vzdáleností; token s více sousedy je jediný kandidát. Výstup je pouze agregát: počet kandidátů, podíl ze slovníku těchto slov a podíl součtu jejich DF ze součtu DF všech těchto slov. „Výskyty ve zprávách“ tedy znamenají dvojice token–zpráva, nikoli opakování tokenu uvnitř zprávy ani podíl zpráv s překlepem. Prahy délky, DF a poměrů jsou popisné konstanty zvolené před pohledem na data, bez opory v literatuře. Jde o horní odhad: také vzácné legitimní slovo může ležet vedle častého.
 
 # Výsledky {#sec-vysledky}
 
@@ -421,6 +439,56 @@ export_table(
 
 *Zdroj:* zkratky a kanonické tvary z `config/diagnosis_candidates.json`, kódy diagnóz z `diagnoses_icd` podle předpon téhož souboru.
 
+# Překlepy a varianty názvů diagnóz {#sec-preklepy}
+
+`r variant_text(variants)` @tbl-varianty porovnává předem dané varianty s kódy diagnóz.
+
+```{r}
+#| label: tbl-varianty
+#| tbl-cap: "Varianty názvů pětice: přesné výskyty a podíl zpráv s variantou bez kódu diagnózy; pomlčka značí variantu bez výskytu."
+#| tbl-colwidths: [30, 30, 14, 26]
+export_table(
+  variant_table(variants),
+  col.names = SPELLING_LAYOUTS[["tbl-varianty"]]$col.names,
+  align = SPELLING_LAYOUTS[["tbl-varianty"]]$align,
+  widths = SPELLING_LAYOUTS[["tbl-varianty"]]$widths,
+  code = "varianta"
+)
+```
+
+*Zdroj:* varianty z `config/diagnosis_variants.json`, výskyty v normalizovaných zprávách vstupního korpusu z `note_variants.parquet`.
+
+`r near_miss_text(near_forms)` @tbl-blizke-tvary je podklad pro výběr slovníku v S37b; zahrnuje i plurály a platná slova, o přepisu zde nerozhoduje.
+
+```{r}
+#| label: tbl-blizke-tvary
+#| tbl-cap: "Tvary ve vzdálenosti 1 od slov názvů pětice s aspoň 10 zprávami a aspoň desetinásobnou DF cíle."
+#| tbl-colwidths: [30, 30, 20, 20]
+export_table(
+  near_miss_table(near_forms),
+  col.names = SPELLING_LAYOUTS[["tbl-blizke-tvary"]]$col.names,
+  align = SPELLING_LAYOUTS[["tbl-blizke-tvary"]]$align,
+  widths = SPELLING_LAYOUTS[["tbl-blizke-tvary"]]$widths,
+  code = c("tvar", "cil")
+)
+```
+
+*Zdroj:* DF tokenů `vocabulary_raw` ve vstupním korpusu; cíle z `keywords_en` pětice v `config/diagnosis_candidates.json`.
+
+`r typo_text(typos)` @tbl-preklepy uvádí pouze agregát kandidátů podle předem zvolené definice.
+
+```{r}
+#| label: tbl-preklepy
+#| tbl-cap: "Odhad kandidátů na překlep mezi slovy a–z délky aspoň 5: počet, podíl slovníku a podíl součtu dokumentových frekvencí."
+#| tbl-colwidths: [22, 18, 28, 32]
+export_table(
+  typo_table(typos),
+  col.names = SPELLING_LAYOUTS[["tbl-preklepy"]]$col.names,
+  align = SPELLING_LAYOUTS[["tbl-preklepy"]]$align,
+  widths = SPELLING_LAYOUTS[["tbl-preklepy"]]$widths
+)
+```
+
 # Shrnutí a rozhodnutí {#sec-shrnuti}
 
 Dokument ověřil seed lexikon sekcí na vstupním korpusu. Pro další práci z toho plyne:
@@ -436,6 +504,7 @@ Dokument ověřil seed lexikon sekcí na vstupním korpusu. Pro další práci z
 - **Zprávy bez nadpisů.** `r headerless_text(headerless)`
 - **Validace parseru.** `r bhc_text(bhc)` Falešný první výskyt hlavičky Brief Hospital Course se projeví jen v kategoriích „náš začátek dřív“ a „jiná neshoda“, a ty mají dohromady jen jednotky zpráv; podnadpis uvnitř jejího těla, který parser přečte jako hlavičku jiné sekce, tyto kategorie nezachytí a ověřuje ho tabulka příčin. `r bhc_cut_text(bhc_cut)` `r bhc_cause_text(bhc_causes)` Hlavní experiment běží nad celou zprávou a strip uřízne konec BHC jen výjimečně, takže posunutá hranice na ně nemá vliv a uvádějí ji Omezení. Týká se hranic sekcí: úsek Brief Hospital Course je u zpráv s koncem dřív kratší než reference. Zda reference polkla celou skutečnou sekci, nebo parser přečetl podnadpis uvnitř Brief Hospital Course jako hlavičku, rozlišují opakování hlavičky a poloha Medications on Admission v tabulce @tbl-bhc-pricina. Převažuje podpis polknuté jediné sekce: zpráva nemá sekci Medications on Admission, hlavička, která úsek uřízla, je jediným výskytem své sekce zapsaným jako synonymum lexikonu a reference obsahuje celou tuto sekci. Reference tedy končí Brief Hospital Course až na Medications on Admission a bez ní pokračuje přes další sekci, nejčastěji Discharge Medications; odchylka je na straně reference, ne parseru. Pravidlo prvního výskytu ani lexikon se proto nemění: úprava, která by hranici za Brief Hospital Course posunula, by u těchto zpráv zrušila skutečnou sekci Discharge Medications a vyrobila falešnou hranici, kterou by převzaly n-gramy po sekcích, strip D2 i varianta vstupu jen z Brief Hospital Course. Podpis podnadpisu (opakovaná hlavička nebo Medications on Admission až za uříznutím) má jen zlomek zpráv s koncem dřív a uvádějí ho Omezení. Pro variantu vstupu jen z Brief Hospital Course platí hranice parseru; reference BHC jako vstup pro tuto variantu nevyhovuje, protože u zpráv bez Medications on Admission obsahuje i léky při propuštění.
 - **Předzpracování pro TF-IDF.** `r preprocessing_text(preprocessing)` `r acronym_text(acronyms)` Pro S40 z toho plyne podklad pro `min_df` (velikost slovníku před prořezáním je horní mez) a pro rozhodnutí o rozvinutí zkratky AF: rozvinutí by do zpráv se zkratkou AF bez kódu fibrilace (podíl výše) vkládalo „atrial fibrillation“.
+- **Varianty a překlepy.** `r variant_text(variants)` `r near_miss_text(near_forms)` `r typo_text(typos)` Tabulky jsou podklad pro S37b: slovník bude obsahovat jen vybrané varianty názvů pětice, zejména u CRF, CRI a PAF se posoudí podíl bez kódu. Obecné překlepy se neopravují kvůli riziku změny významu; vliv přepisu pětice změří samostatná ablace v S84.
 - **Tokeny a n-gramy.** `r ngram_text(ngrams_total)` Pro S40 (baseline TF-IDF + LR) z toho plyne argument pro `ngram_range` a `max_df`: n-gramy, které má většina zpráv, nic nerozlišují. Tokenizace sešitu se liší od výchozí v TF-IDF: ponechává jen písmena a–z, takže čísla a masku `___` vynechává. Počty frází šablony jsou podklad pro deduplikaci boilerplate (D26).
 
 # Omezení {#sec-omezeni}
@@ -443,5 +512,7 @@ Dokument ověřil seed lexikon sekcí na vstupním korpusu. Pro další práci z
 Řádkově ukotvený výraz nevidí pole, které stojí na řádku za jiným polem, hlavičky bez dvojtečky ani hlavičky rozdělené na víc řádků. Pokrytí administrativních polí se proto neměří. Opakování je jen nepřímý signál falešné hranice: synonymum se může opakovat i ve zprávě, kde je každý výskyt skutečnou hlavičkou. Hranice `r candidate_floor` pro kandidáty je popisná a nerozliší sekci šablony od pole, které má ve většině zpráv podsekce. Žebříček neukazuje hlavičky pod `r coverage_floor` zpráv, takže vzácnou sekci šablony nemusí zveřejnit. Pozice počítá jen sekce lexikonu, takže pole a podnadpisy mimo lexikon pořadí nezkreslují, ale ani nepopisují. Pozice je pořadí mezi sekcemi, které zpráva má: chybí-li dřívější sekce, pozice všech pozdějších klesne o jedna, a IQR pozice proto měří i chybějící sekce, ne jen přeházené pořadí. Frekvenční analýza nelemmatizuje, takže „fever“ a „fevers“ jsou dva tokeny, a ztrácí negace, protože „no“ a „not“ jsou stop slova: „no fever“ se spočítá jako „fever“. Výchozí tokenizace TF-IDF masku `___` a čísla jako tokeny ponechá, počty n-gramů z tohoto sešitu tedy nejsou přímo počty příznaků baseline; tokeny modelu měří kapitola @sec-predzpracovani. Slova z administrativních polí leží v části `other` a počítají se jen do celku, ne do sekcí. Bigram může spojit slova, mezi nimiž stálo stop slovo. N-gramy pod branou (`r coverage_floor` zpráv a nejméně `r count_floor`) se nezobrazí, takže vzácná, ale rozlišující fráze v žebříčku chybí. Strip vystřihne první výskyt diagnostické sekce a hlavičku uvnitř těla jiné sekce nehlídá; kolik zpráv tím zůstane se zbytkem diagnózy, měří kapitola @sec-zbytek-stripu, parser bere první výskyt. Validace proti BHC porovnává jen sekci Brief Hospital Course a jen na průniku korpusu a BHC; BHC vyřadil zprávy bez sekce Sex a s krátkým BHC, takže průnik nemusí být reprezentativní. Reference je výstup regulárního výrazu autorů, ne ruční anotace, a shoda s ním neznamená shodu s pravdou. Kategorie „náš začátek dřív“ je dolní odhad falešného prvního výskytu hlavičky. U zpráv, kde je náš úsek vlastním prefixem targetu (kategorie „náš konec dřív“ a „reference obsahuje celou naši následující sekci“), je sekce Brief Hospital Course kratší než reference. Rozklad uvádí, která část zprávy následuje za sekcí, zápis její hlavičky, její opakování ve zprávě a polohu Medications on Admission. Kategorie „reference obsahuje celou naši následující sekci“ sama správnost hranice nedokládá, protože ji splní i podnadpis uvnitř Brief Hospital Course; závěr o příčině stojí na souběhu vlastností v @tbl-bhc-pricina, tedy na nepřímých znacích (opakování hlavičky, poloha Medications on Admission), ne na ruční kontrole hranic. Zprávy s podpisem podnadpisu mohou mít skutečně falešnou hranici uvnitř Brief Hospital Course; jejich podíl je okrajový a parser se kvůli nim nemění.
 
 Slovník v kapitole @sec-predzpracovani je slovník analyzéru před prořezáním nad celým korpusem, tedy horní mez slovníku modelu, který se učí jen na trénovacích foldech a s `min_df` a `max_df` z S40. Podíl zpráv se zkratkou bez kódu diagnózy je nepřímý ukazatel nesouladu zkratky a kódu, ne odhad víceznačnosti, protože kód neurčuje význam jednotlivého výskytu: zkratka AF může znamenat i afebrilní, a to i ve zprávě s kódem fibrilace, a zpráva bez kódu může nést nekódovanou anamnézu.
+
+DF z `vocabulary_raw` nevidí víceslovné varianty jako celek; ty proto samostatně měří Python nad normalizovaným textem. Kandidát na překlep není potvrzený překlep: blízká slova mohou mít různé významy, například zkonstruovaná dvojice `dysphasia`/`dysphagia`. Odhad ani tabulka blízkých tvarů nejsou slovníkem oprav. Tabulka zahrnuje i plurály a platná slova; prahy jsou popisné a předem zvolené, nikoli odvozené z literatury. Varianty bez kódu nejsou důkaz víceznačnosti: může jít o nekódovanou anamnézu a kód neurčuje význam jednotlivého výskytu. Syntetický korpus zůstává bez vložených překlepů, proto jeho render pokrývá prázdnou tabulku blízkých tvarů; neprázdnou větev ověřují ruční testy a následný reálný render autora.
 
 {{< include _partials/appendix.qmd >}}
