@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from functools import partial
 from typing import TYPE_CHECKING, Any, Final
 
 import pytest
@@ -19,6 +20,7 @@ from tests.cohort_support import candidate_prefixes
 from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
     from pathlib import Path
 
 
@@ -355,3 +357,19 @@ def test_misspelling_keys_are_stripped_at_config_boundary(tmp_path: Path) -> Non
     normalization = load_text_normalization(_write(tmp_path, tree), variants=True)
     assert normalization.variants["kindey"] == "kidney"
     assert " kindey " not in normalization.variants
+
+
+@pytest.mark.parametrize(
+    "loader",
+    [load_diagnosis_variants, partial(load_text_normalization, variants=True)],
+    ids=["measurement", "normalization"],
+)
+def test_variant_loaders_reject_empty_keywords_without_acronyms(
+    tmp_path: Path, loader: Callable[[Path], object]
+) -> None:
+    """Varianta potřebuje kanonický název i u diagnózy bez zkratek."""
+    tree = json.loads(REPOSITORY_DIAGNOSIS_CANDIDATES.read_text(encoding="utf-8"))
+    tree["candidates"]["pneumonia"]["keywords_en"] = []
+    tree["candidates"]["pneumonia"]["misspellings_en"] = {}
+    with pytest.raises(InvalidInputError):
+        loader(_write(tmp_path, tree))
