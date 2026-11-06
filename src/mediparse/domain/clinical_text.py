@@ -103,12 +103,17 @@ def find_diagnosis_variants(text: str, variants: Iterable[str]) -> list[str]:
     canonical = {variant.lower(): variant for variant in variants}
     if not canonical:
         return []
+    # Víceslovná varianta přijímá bílé znaky stejně jako zmínka v sešitu 8.
+    alternatives = alternation(canonical).replace(r"\ ", r"\s+")
     # ASCII brání záměně dlouhého s (U+017F) a znaku Kelvina za písmena slovníku.
     pattern = re.compile(
-        f"{_WORD_START}(?:{alternation(canonical)}){_WORD_END}",
+        f"{_WORD_START}(?:{alternatives}){_WORD_END}",
         re.IGNORECASE | re.ASCII,
     )
-    return [canonical[match[0].lower()] for match in pattern.finditer(text)]
+    return [
+        canonical[" ".join(match[0].lower().split())]
+        for match in pattern.finditer(text)
+    ]
 
 
 class TextNormalization(BaseModel):

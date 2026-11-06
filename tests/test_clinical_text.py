@@ -356,7 +356,17 @@ def test_text_normalization_rejects_bytes(acronyms: dict[object, object]) -> Non
         TextNormalization.model_validate({"acronyms": acronyms})
 
 
-_VARIANTS: Final = ("T1DM", "T2DM", "IDDM", "NIDDM", "PNA", "afib", "a-fib", "a fib")
+_VARIANTS: Final = (
+    "T1DM",
+    "T2DM",
+    "IDDM",
+    "NIDDM",
+    "PNA",
+    "afib",
+    "a-fib",
+    "a fib",
+    "chronic obstructive lung disease",
+)
 
 
 @pytest.mark.parametrize(
@@ -368,6 +378,10 @@ _VARIANTS: Final = ("T1DM", "T2DM", "IDDM", "NIDDM", "PNA", "afib", "a-fib", "a 
         ("Tafib", []),
         ("pna.", ["PNA"]),
         ("___T2DM", ["T2DM"]),
+        ("a\nfib", ["a fib"]),
+        ("a  fib", ["a fib"]),
+        ("chronic obstructive\nlung disease", ["chronic obstructive lung disease"]),
+        ("chronic  obstructive lung disease", ["chronic obstructive lung disease"]),
         ("", []),
     ],
 )
