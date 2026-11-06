@@ -1,4 +1,4 @@
-"""Výpočet tokenů, slovníků a zkratek zpráv přes use case."""
+"""Výpočet tokenů, slovníků, zkratek a variant diagnóz zpráv přes use case."""
 
 from __future__ import annotations
 

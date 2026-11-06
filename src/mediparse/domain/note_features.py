@@ -1,4 +1,4 @@
-"""Měření analyzéru TF-IDF a výskytů zkratek jedné zprávy."""
+"""Měření analyzéru TF-IDF a výskytů zkratek i variant diagnóz jedné zprávy."""
 
 from __future__ import annotations
 

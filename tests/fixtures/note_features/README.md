@@ -1,7 +1,7 @@
 # Zkonstruované zprávy testů R
 
 Tyto tabulky obsahují výhradně zkonstruované texty testů `test-segments.R`,
-`test-bhc.R`, `test-preprocessing.R` a `test-ngrams.R`, včetně výplně z `corpus_con`.
+`test-bhc.R`, `test-preprocessing.R`, `test-ngrams.R` a `test-spelling.R`, včetně výplně z `corpus_con`.
 Vstupy byly zaznamenány při běhu původních testů před odstraněním mostu
 (415 + 55 úspěšných kontrol). Žádný text nepochází z MIMIC.
 
@@ -16,7 +16,7 @@ všechny čtyři artefakty stejným zapisovačem. Očekávání agregací v R se
 podle výstupu tohoto výpočtu.
 
 `note_variants.parquet` nese všechny varianty z `config/diagnosis_variants.json`
-včetně nul. Obě sady fixtur se obnoví z kořene repozitáře příkazem:
+včetně nul, a měří tak varianty názvů diagnóz ve stejných zprávách. Obě sady fixtur se obnoví z kořene repozitáře příkazem:
 
 ```bash
 pixi run --frozen python - <<'PYTHON'

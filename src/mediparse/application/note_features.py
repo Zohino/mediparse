@@ -1,4 +1,4 @@
-"""Výpočet částí zpráv, tokenů TF-IDF a výskytů zkratek po dávkách."""
+"""Výpočet částí zpráv, tokenů TF-IDF a výskytů zkratek i variant diagnóz po dávkách."""
 
 from __future__ import annotations
 
