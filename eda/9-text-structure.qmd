@@ -118,7 +118,7 @@ Pojmy a jednotky jsou tyto:
 
 ## Varianty názvů a kandidáti na překlep
 
-Varianty jsou předem dané tvary názvů pětice v `config/diagnosis_variants.json`, sestavené z klinické znalosti před pohledem na data; úplný seznam uvádí @tbl-varianty. Python je měří funkcí `find_diagnosis_variants` po `normalize_clinical_text`, s hranicemi jako u zkratek, bez rozlišení velikosti písmen a v ASCII. Tentýž vzor bude podkladem přepisu v S37b. Artefakt `note_variants.parquet` obsahuje řádek na zprávu a variantu včetně nuly a klíč diagnózy. R připojí vstupní korpus a porovná variantu s kódem stejným výpočtem jako u zkratek. Jmenovatel podílu bez kódu tvoří zprávy s aspoň jedním výskytem varianty. Popisky jsou z konfigurace a práh popisků se na ně nevztahuje.
+Varianty jsou předem dané tvary názvů pětice v poli `variants_en` souboru `config/diagnosis_candidates.json`, sestavené z klinické znalosti před pohledem na data; úplný seznam uvádí @tbl-varianty. Python je měří funkcí `find_diagnosis_variants` po `normalize_clinical_text`, s hranicemi jako u zkratek, bez rozlišení velikosti písmen a v ASCII. Tentýž vzor bude podkladem přepisu v S37b. Artefakt `note_variants.parquet` obsahuje řádek na zprávu a variantu včetně nuly a klíč diagnózy. R připojí vstupní korpus a porovná variantu s kódem stejným výpočtem jako u zkratek. Jmenovatel podílu bez kódu tvoří zprávy s aspoň jedním výskytem varianty. Popisky jsou z konfigurace a práh popisků se na ně nevztahuje.
 
 Dokumentová frekvence (DF) tokenu je počet zpráv, v nichž je token aspoň jednou. Počítá se v SQL z distinct tokenů `vocabulary_raw` v `note_preprocessing.parquet`, tedy z výchozího analyzéru TF-IDF nad celou zprávou. `eda/R/spelling.R` ji jednou materializuje do tabulky `token_frequency`. Vzdálenost Damerauova–Levenshteinova (`damerau_levenshtein`) zahrnuje vložení, vypuštění, záměnu i přehození sousedních znaků.
 
@@ -453,7 +453,7 @@ export_table(
 )
 ```
 
-*Zdroj:* varianty z `config/diagnosis_variants.json`, výskyty v normalizovaných zprávách vstupního korpusu z `note_variants.parquet`.
+*Zdroj:* pole `variants_en` v `config/diagnosis_candidates.json`, výskyty v normalizovaných zprávách vstupního korpusu z `note_variants.parquet`.
 
 `r near_miss_text(near_forms)` @tbl-blizke-tvary je podklad pro výběr slovníku v S37b; zahrnuje i plurály a platná slova, o přepisu zde nerozhoduje.
 

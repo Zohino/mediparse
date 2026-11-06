@@ -6,13 +6,14 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 from mediparse.application.note_features import ComputeNoteFeatures
-from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
-from mediparse.infrastructure.diagnosis_variants_file import load_diagnosis_variants
+from mediparse.infrastructure.diagnosis_candidates_file import (
+    load_diagnosis_variants,
+    load_text_normalization,
+)
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
 from tests.support import (
     REPOSITORY_DIAGNOSIS_CANDIDATES,
-    REPOSITORY_DIAGNOSIS_VARIANTS,
     REPOSITORY_SECTION_HEADERS,
 )
 
@@ -87,5 +88,5 @@ def compute(rows: Sequence[tuple[str, str]], sink: NoteFeatureSink) -> int:
     ).run(
         load_section_lexicon(REPOSITORY_SECTION_HEADERS),
         normalization,
-        load_diagnosis_variants(REPOSITORY_DIAGNOSIS_VARIANTS),
+        load_diagnosis_variants(REPOSITORY_DIAGNOSIS_CANDIDATES),
     )

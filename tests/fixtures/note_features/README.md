@@ -15,7 +15,7 @@ Při přidání zkonstruovaného případu doplňte `notes.parquet` a znovu zapi
 všechny čtyři artefakty stejným zapisovačem. Očekávání agregací v R se nemění
 podle výstupu tohoto výpočtu.
 
-`note_variants.parquet` nese všechny varianty z `config/diagnosis_variants.json`
+`note_variants.parquet` nese všechny varianty z pole `variants_en` v `config/diagnosis_candidates.json`
 včetně nul, a měří tak varianty názvů diagnóz ve stejných zprávách. Obě sady fixtur se obnoví z kořene repozitáře příkazem:
 
 ```bash

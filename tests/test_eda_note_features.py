@@ -24,13 +24,12 @@ from tests.note_features_support import CONTRACT_NOTES, compute
 from tests.support import (
     REPOSITORY,
     REPOSITORY_DIAGNOSIS_CANDIDATES,
-    REPOSITORY_DIAGNOSIS_VARIANTS,
     REPOSITORY_SECTION_HEADERS,
 )
 
 
 @pytest.fixture
-def inputs(tmp_path: Path) -> tuple[Path, Path, Path, Path, Path]:
+def inputs(tmp_path: Path) -> tuple[Path, Path, Path, Path]:
     """Připraví tabulku syntetiky a soukromé kopie konfigurace.
 
     Returns:
@@ -49,16 +48,14 @@ def inputs(tmp_path: Path) -> tuple[Path, Path, Path, Path, Path]:
     lexicon, candidates = tmp_path / "lexicon.json", tmp_path / "candidates.json"
     lexicon.write_bytes(REPOSITORY_SECTION_HEADERS.read_bytes())
     candidates.write_bytes(REPOSITORY_DIAGNOSIS_CANDIDATES.read_bytes())
-    variants = tmp_path / "variants.json"
-    variants.write_bytes(REPOSITORY_DIAGNOSIS_VARIANTS.read_bytes())
-    return parquet, lexicon, candidates, variants, tmp_path / "cache"
+    return parquet, lexicon, candidates, tmp_path / "cache"
 
 
 def test_second_run_preserves_bytes_mtimes_and_matches_fresh_computation(
-    inputs: tuple[Path, Path, Path, Path, Path],
+    inputs: tuple[Path, Path, Path, Path],
 ) -> None:
     """Cache nemění soubory a její obsah odpovídá nezávislému běhu bez cache."""
-    parquet, lexicon, candidates, variants, out = inputs
+    parquet, lexicon, candidates, out = inputs
     assert run(*inputs, {"CLAUDECODE": "1"}) is True
     before = {
         path.name: (path.read_bytes(), path.stat().st_mtime_ns)
@@ -70,9 +67,7 @@ def test_second_run_preserves_bytes_mtimes_and_matches_fresh_computation(
         for path in out.iterdir()
     }
     fresh = out.parent / "fresh"
-    assert (
-        run(parquet, lexicon, candidates, variants, fresh, {"CLAUDECODE": "1"}) is True
-    )
+    assert run(parquet, lexicon, candidates, fresh, {"CLAUDECODE": "1"}) is True
     for name, _ in ARTIFACTS:
         actual = pq.read_table(out / name)
         assert pq.read_table(fresh / name).equals(actual)
@@ -84,23 +79,29 @@ def test_second_run_preserves_bytes_mtimes_and_matches_fresh_computation(
     assert (first["tokens_raw"], first["tokens_preprocessed"]) == (10, 12)
 
 
-@pytest.mark.parametrize("changed", ["lexicon", "candidates", "variants", "discharge"])
+@pytest.mark.parametrize(
+    "changed", ["lexicon", "candidates", "variant-terms", "discharge"]
+)
 def test_changed_input_recomputes(
-    inputs: tuple[Path, Path, Path, Path, Path], changed: str
+    inputs: tuple[Path, Path, Path, Path], changed: str
 ) -> None:
     """I nevýznamný bílý znak configu či jiné bajty parquetu invalidují cache."""
-    parquet, lexicon, candidates, variants, out = inputs
+    parquet, lexicon, candidates, out = inputs
     assert run(*inputs, {}) is True
     old = json.loads((out / "cache.json").read_text(encoding="utf-8"))
     path = {
         "lexicon": lexicon,
         "candidates": candidates,
-        "variants": variants,
+        "variant-terms": candidates,
         "discharge": parquet / "discharge.parquet",
     }[changed]
     if changed == "discharge":
         table = pq.read_table(path)
         pq.write_table(table.replace_schema_metadata({b"changed": b"1"}), path)
+    elif changed == "variant-terms":
+        tree = json.loads(path.read_text(encoding="utf-8"))
+        tree["candidates"]["diabetes"]["variants_en"].append("syntheticvariant")
+        path.write_text(json.dumps(tree), encoding="utf-8")
     else:
         path.write_bytes(path.read_bytes() + b" ")
     assert run(*inputs, {}) is True
@@ -109,38 +110,35 @@ def test_changed_input_recomputes(
 
 @pytest.mark.parametrize("changed", ["code", "version", "format"])
 def test_implementation_changes_invalidate_key(
-    inputs: tuple[Path, Path, Path, Path, Path],
+    inputs: tuple[Path, Path, Path, Path],
     changed: str,
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Klíč pokrývá obsah i relativní cesty Pythonu, verzi sklearn a formát."""
-    parquet, lexicon, candidates, variants, _ = inputs
+    parquet, lexicon, candidates, _ = inputs
     package = tmp_path / "package"
     package.mkdir()
     module = package / "one.py"
     module.write_text("one", encoding="utf-8")
     monkeypatch.setattr(eda_cache, "PACKAGE", package)
-    before = cache_key(parquet / "discharge.parquet", lexicon, candidates, variants)
+    before = cache_key(parquet / "discharge.parquet", lexicon, candidates)
     if changed == "code":
         module.rename(package / "two.py")
     elif changed == "version":
         monkeypatch.setattr(note_features_table.sklearn, "__version__", "changed")
     else:
         monkeypatch.setattr(eda_cache, "FORMAT_VERSION", "changed")
-    assert (
-        cache_key(parquet / "discharge.parquet", lexicon, candidates, variants)
-        != before
-    )
+    assert cache_key(parquet / "discharge.parquet", lexicon, candidates) != before
 
 
 def test_missing_artifact_or_invalid_manifest_is_not_current(
-    inputs: tuple[Path, Path, Path, Path, Path],
+    inputs: tuple[Path, Path, Path, Path],
 ) -> None:
     """Klíč bez všech čtyř artefaktů ani poškozený manifest nestačí."""
-    parquet, lexicon, candidates, variants, out = inputs
+    parquet, lexicon, candidates, out = inputs
     run(*inputs, {})
-    key = cache_key(parquet / "discharge.parquet", lexicon, candidates, variants)
+    key = cache_key(parquet / "discharge.parquet", lexicon, candidates)
     (out / ARTIFACTS[0][0]).unlink()
     assert not is_current(out, key, [name for name, _ in ARTIFACTS])
     run(*inputs, {})
@@ -149,7 +147,7 @@ def test_missing_artifact_or_invalid_manifest_is_not_current(
 
 
 def test_interrupted_sink_does_not_publish_cache(
-    inputs: tuple[Path, Path, Path, Path, Path],
+    inputs: tuple[Path, Path, Path, Path],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Výjimka po zápisu dávky nenechá platný manifest ani dočasné soubory."""
@@ -163,16 +161,16 @@ def test_interrupted_sink_does_not_publish_cache(
     monkeypatch.setattr(pq.ParquetWriter, "write_table", interrupted)
     with pytest.raises(RuntimeError, match="přerušený sink"):
         run(*inputs, {})
-    assert not (inputs[4] / "cache.json").exists()
-    assert list(inputs[4].iterdir()) == []
+    assert not (inputs[3] / "cache.json").exists()
+    assert list(inputs[3].iterdir()) == []
 
 
 def test_guard_precedes_any_parquet_read(
-    inputs: tuple[Path, Path, Path, Path, Path],
+    inputs: tuple[Path, Path, Path, Path],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Bez značky syntetiky stráž odmítne i nečitelný parquet před hashováním."""
-    parquet, _, _, _, out = inputs
+    parquet, _, _, out = inputs
     (parquet / "synthetic.json").unlink()
     (parquet / "discharge.parquet").write_bytes(b"not parquet")
     hash_file = Mock(return_value="0" * 64)
@@ -220,16 +218,16 @@ def test_r_aggregation_fixtures_equal_writer(tmp_path: Path) -> None:
 
 
 def test_interrupted_publication_invalidates_old_and_new_key(
-    inputs: tuple[Path, Path, Path, Path, Path],
+    inputs: tuple[Path, Path, Path, Path],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Směs artefaktů po přerušení publikace nesmí zplatnit starý ani nový klíč."""
-    parquet, lexicon, candidates, variants, out = inputs
+    parquet, lexicon, candidates, out = inputs
     assert run(*inputs, {}) is True
     discharge = parquet / "discharge.parquet"
-    key_a = cache_key(discharge, lexicon, candidates, variants)
+    key_a = cache_key(discharge, lexicon, candidates)
     lexicon.write_bytes(lexicon.read_bytes() + b" ")
-    key_b = cache_key(discharge, lexicon, candidates, variants)
+    key_b = cache_key(discharge, lexicon, candidates)
     replace = Path.replace
 
     def interrupted(path: Path, target: Path) -> Path:
@@ -249,12 +247,12 @@ def test_interrupted_publication_invalidates_old_and_new_key(
 
 @pytest.fixture
 def cli_args(
-    inputs: tuple[Path, Path, Path, Path, Path], monkeypatch: pytest.MonkeyPatch
+    inputs: tuple[Path, Path, Path, Path], monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Předá konzolovému vstupu explicitní syntetické cesty z fixtury."""
     command_argv = ["mediparse-eda-note-features"]
     for name, path in zip(
-        ("parquet", "lexicon", "candidates", "variants", "out"), inputs, strict=True
+        ("parquet", "lexicon", "candidates", "out"), inputs, strict=True
     ):
         command_argv.extend((f"--{name}", str(path)))
     monkeypatch.setattr(sys, "argv", command_argv)
@@ -265,11 +263,11 @@ def cli_args(
 )
 @pytest.mark.usefixtures("cli_args")
 def test_invalid_input_has_domain_error_and_cli_refuses(
-    inputs: tuple[Path, Path, Path, Path, Path],
+    inputs: tuple[Path, Path, Path, Path],
     invalid: str,
 ) -> None:
     """Vadné syntetické vstupy mají přesnou doménovou hlášku a CLI je odmítne."""
-    parquet, lexicon, _, _, _ = inputs
+    parquet, lexicon, _, _ = inputs
     discharge = parquet / "discharge.parquet"
     if invalid == "missing-discharge":
         discharge.rename(parquet / "other.parquet")
@@ -295,7 +293,7 @@ def test_invalid_input_has_domain_error_and_cli_refuses(
 
 @pytest.mark.usefixtures("cli_args")
 def test_cli_refuses_data_access_error(
-    inputs: tuple[Path, Path, Path, Path, Path], monkeypatch: pytest.MonkeyPatch
+    inputs: tuple[Path, Path, Path, Path], monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Odmítnutí stráží jde stejnou cestou jako neplatný vstup."""
     (inputs[0] / "synthetic.json").unlink()

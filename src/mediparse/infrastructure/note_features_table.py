@@ -122,9 +122,7 @@ class ParquetNoteFeatures:
             raise InvalidInputError(msg) from None
 
 
-def note_features_key(
-    discharge: Path, lexicon: Path, candidates: Path, variants: Path
-) -> str:
+def note_features_key(discharge: Path, lexicon: Path, candidates: Path) -> str:
     """Otisk vstupu, konfigurace, formátu, Python kódu a verze scikit-learn.
 
     Returns:
@@ -138,7 +136,6 @@ def note_features_key(
             ("discharge", file_sha256(discharge).encode()),
             ("lexicon", lexicon.read_bytes()),
             ("candidates", candidates.read_bytes()),
-            ("variants", variants.read_bytes()),
             ("scikit-learn", sklearn.__version__.encode()),
         ])
     except OSError as error:

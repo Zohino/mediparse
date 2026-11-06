@@ -7,11 +7,13 @@ from typing import TYPE_CHECKING, Final
 import pytest
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
-from mediparse.infrastructure.diagnosis_variants_file import load_diagnosis_variants
+from mediparse.infrastructure.diagnosis_candidates_file import (
+    load_diagnosis_variants,
+    load_text_normalization,
+)
 from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
 from tests.note_features_support import MemoryFeatures, compute
-from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES, REPOSITORY_DIAGNOSIS_VARIANTS
+from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -160,7 +162,7 @@ def test_variants_include_zero_rows_and_config_diagnoses() -> None:
     """Každá zpráva má všechny varianty, počty po normalizaci a diagnózu configu."""
     sink = MemoryFeatures()
     compute([("n1", "___T2DM t2dm and A-FIB"), ("n2", "No variants")], sink)
-    variants = load_diagnosis_variants(REPOSITORY_DIAGNOSIS_VARIANTS)
+    variants = load_diagnosis_variants(REPOSITORY_DIAGNOSIS_CANDIDATES)
     assert [(row.note_id, row.variant, row.diagnosis) for row in sink.variants] == [
         (note_id, variant, diagnosis)
         for note_id in ("n1", "n2")

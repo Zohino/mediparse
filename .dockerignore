@@ -9,7 +9,6 @@
 !config/synthetic_plan.json
 !config/mimic_tables.json
 !config/diagnosis_candidates.json
-!config/diagnosis_variants.json
 !config/input_corpus.json
 !config/verbalization_template.md
 !resources/synthetic/
