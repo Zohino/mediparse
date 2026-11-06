@@ -23,6 +23,7 @@ from tests.model_support import (
     ACRONYM_VOCABULARY,
     OVERLAPPING,
     SPELLING_VOCABULARY,
+    VARIANT_VOCABULARY,
     sectioned_notes,
     separable_notes,
     training_config,
@@ -502,5 +503,35 @@ def test_normalization_changes_scores_on_spelling_variants(tmp_path: Path) -> No
             row.score for row in ParquetPredictionTable(outputs.predictions).read()
         }
 
+    assert len(scores[False]) > 1
+    assert len(scores[True]) == 1
+
+
+def test_variant_switch_controls_model_and_manifest(tmp_path: Path) -> None:
+    """Přepínač sjednotí skóre varianty a názvu a manifest nese právě použitý slovník."""
+    corpus = separable_notes(PATIENTS, VARIANT_VOCABULARY)
+    scores = {}
+    for enabled in (False, True):
+        root = tmp_path / str(enabled)
+        root.mkdir()
+        notes, config, split = _inputs(
+            root,
+            corpus,
+            normalize_clinical_text=True,
+            normalize_diagnosis_variants=enabled,
+        )
+        outputs = _Outputs.under(root / "out")
+        assert _run(notes, config, split, outputs) is ExitCode.OK
+        normalization = _manifest(outputs).normalize_clinical_text
+        assert normalization is not None
+        assert normalization.acronyms
+        if enabled:
+            assert normalization.variants["kindey"] == "kidney"
+        else:
+            assert normalization.variants == {}
+        classifier = SkopsModelFile(outputs.model).load()
+        scores[enabled] = {
+            item.score for item in classifier.classify(VARIANT_VOCABULARY)
+        }
     assert len(scores[False]) > 1
     assert len(scores[True]) == 1

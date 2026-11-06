@@ -17,6 +17,7 @@ from mediparse.domain.clinical_text import (
     TextNormalization,
     expand_diagnosis_acronyms,
     normalize_clinical_text,
+    rewrite_diagnosis_variants,
 )
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
@@ -31,6 +32,7 @@ from mediparse.infrastructure.sklearn_classifier import (
 from tests.model_support import (
     ACRONYM_VOCABULARY,
     SPELLING_VOCABULARY,
+    VARIANT_VOCABULARY,
     separable_notes,
 )
 from tests.section_support import REPOSITORY_LEXICON, mimic_shaped_notes
@@ -110,7 +112,16 @@ def test_model_file_untrusted_type_is_invalid_input(tmp_path: Path) -> None:
 
 
 _NORMALIZATION: Final = TextNormalization(
-    variants={},
+    variants={
+        "T2DM": "diabetes",
+        "NIDDM": "diabetes",
+        "IDDM": "diabetes",
+        "PNA": "pneumonia",
+        "afib": "atrial fibrillation",
+        "a-fib": "atrial fibrillation",
+        "a fib": "atrial fibrillation",
+        "kindey": "kidney",
+    },
     acronyms={
         "COPD": "chronic obstructive pulmonary disease",
         "AF": "atrial fibrillation",
@@ -136,13 +147,15 @@ def test_preprocessor_lowercases_after_normalization() -> None:
     """Vlastní preprocessor vypíná lowercase vectorizeru, snížení písmen nese funkce."""
     text = "CAST 500mg ___yo"
 
-    assert tfidf_preprocessor(text, {}) == normalize_clinical_text(text).lower()
-    assert "cast" in tfidf_preprocessor(text, {})
+    assert tfidf_preprocessor(text, {}, {}) == normalize_clinical_text(text).lower()
+    assert "cast" in tfidf_preprocessor(text, {}, {})
 
 
 def test_preprocessor_expands_acronym_next_to_marker_and_lowercases() -> None:
     """Zkratka za značkou se rozvine před snížením písmen."""
-    result = tfidf_preprocessor("___COPD", _NORMALIZATION.acronyms)
+    result = tfidf_preprocessor(
+        "___COPD", _NORMALIZATION.acronyms, _NORMALIZATION.variants
+    )
 
     assert "chronic obstructive pulmonary disease" in result
     assert "copd" not in result
@@ -172,7 +185,11 @@ def test_model_file_round_trip_keeps_acronyms(tmp_path: Path) -> None:
         ACRONYM_VOCABULARY
     )
     preprocessor = loaded.pipeline["tfidf"].preprocessor
-    assert preprocessor.keywords == {"acronyms": dict(_NORMALIZATION.acronyms)}
+    assert preprocessor.keywords == {
+        "acronyms": dict(_NORMALIZATION.acronyms),
+        "variants": dict(_NORMALIZATION.variants),
+    }
+    assert type(preprocessor.keywords["variants"]) is dict
     assert type(preprocessor.keywords["acronyms"]) is dict
 
 
@@ -265,8 +282,11 @@ def test_analyzer_sees_normalized_stripped_fixture(name: str) -> None:
     stripped = strip_diagnostic_sections(text, REPOSITORY_LEXICON)
 
     expected = TfidfVectorizer().build_analyzer()(
-        expand_diagnosis_acronyms(
-            normalize_clinical_text(stripped), _NORMALIZATION.acronyms
+        rewrite_diagnosis_variants(
+            expand_diagnosis_acronyms(
+                normalize_clinical_text(stripped), _NORMALIZATION.acronyms
+            ),
+            _NORMALIZATION.variants,
         ).lower()
     )
 
@@ -315,13 +335,14 @@ def test_vectorizer_without_normalization_has_no_preprocessor_and_lowercases() -
 
 
 def test_vectorizer_with_normalization_carries_preprocessor_with_dictionary() -> None:
-    """Preprocessor je partial se slovníkem zkratek jako holým dictem."""
+    """Preprocessor je partial s oběma slovníky jako holými dicty."""
     vectorizer = tfidf_vectorizer(_NORMALIZATION)
 
     assert isinstance(vectorizer.preprocessor, functools.partial)
     assert vectorizer.preprocessor.func is tfidf_preprocessor
     assert vectorizer.preprocessor.keywords == {
-        "acronyms": dict(_NORMALIZATION.acronyms)
+        "acronyms": dict(_NORMALIZATION.acronyms),
+        "variants": dict(_NORMALIZATION.variants),
     }
     assert vectorizer.sublinear_tf
 
@@ -351,3 +372,39 @@ def test_vectorizer_variants_differ_only_in_preprocessor() -> None:
     assert plain.pop("preprocessor") is None
     assert prepared.pop("preprocessor") is not None
     assert plain == prepared
+
+
+def test_analyzer_rewrites_variant_after_deid_normalization() -> None:
+    """Podtržítka se odstraní dřív, než hranice varianty hledá T2DM."""
+    analyzer = tfidf_vectorizer(_NORMALIZATION).build_analyzer()
+    assert analyzer("___T2DM") == ["__deid__", "diabetes"]
+
+
+def test_preprocessor_expands_acronyms_and_variants_before_lowercase() -> None:
+    """Zkratka i varianta dají stejný název diagnózy v ručně sestavené větě."""
+    assert (
+        tfidf_preprocessor(
+            "h/o AF, afib", _NORMALIZATION.acronyms, _NORMALIZATION.variants
+        )
+        == "h/o atrial fibrillation, atrial fibrillation"
+    )
+
+
+def test_variant_model_is_self_contained_after_round_trip(tmp_path: Path) -> None:
+    """Přepis sjednotí skóre i po načtení skops bez přístupu ke configu."""
+    texts = [VARIANT_VOCABULARY[0]] * 4 + [VARIANT_VOCABULARY[1]] * 4
+    labels = [True] * 4 + [False] * 4
+    with_variants = _trainer(_NORMALIZATION).fit(texts, labels)
+    without_variants = _trainer(
+        TextNormalization(acronyms=_NORMALIZATION.acronyms, variants={})
+    ).fit(texts, labels)
+    model_file = SkopsModelFile(tmp_path / "variant.skops")
+    model_file.save(with_variants)
+    loaded = model_file.load()
+    scores = loaded.classify(VARIANT_VOCABULARY)
+    assert scores[0].score == scores[1].score
+    assert loaded.classify(VARIANT_VOCABULARY) == with_variants.classify(
+        VARIANT_VOCABULARY
+    )
+    raw_scores = without_variants.classify(VARIANT_VOCABULARY)
+    assert raw_scores[0].score != raw_scores[1].score

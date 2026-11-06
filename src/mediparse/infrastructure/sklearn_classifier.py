@@ -17,6 +17,7 @@ from mediparse.domain.clinical_text import (
     TextNormalization,
     expand_diagnosis_acronyms,
     normalize_clinical_text,
+    rewrite_diagnosis_variants,
 )
 from mediparse.domain.evaluation import Classification
 from mediparse.domain.inputs import InvalidInputError
@@ -50,18 +51,20 @@ class SklearnClassifier:
 ESTIMATOR: Final = "sklearn TfidfVectorizer+LinearSVC"
 
 
-def tfidf_preprocessor(text: str, acronyms: Mapping[str, str]) -> str:
-    """Normalizace, rozvinutí zkratek diagnóz a snížení písmen před tokenizací TF-IDF.
+def tfidf_preprocessor(
+    text: str, acronyms: Mapping[str, str], variants: Mapping[str, str]
+) -> str:
+    """Normalizace, rozvinutí zkratek, přepis variant a snížení písmen před tokenizací TF-IDF.
 
     Returns:
-        Normalizovaný text malými písmeny, zkratky ze slovníku rozvinuté.
+        Normalizovaný text malými písmeny, zkratky rozvinuté a varianty i překlepy přepsané.
     """
     # Rozvinutí rozlišuje velikost písmen, proto jde před .lower(); jde po
     # normalizaci, aby ___COPD nebylo zablokované podtržítky.
     expanded = expand_diagnosis_acronyms(normalize_clinical_text(text), acronyms)
     # Vlastní preprocessor vypíná lowercase vectorizeru, snížení písmen proto nese
     # tato funkce. Bez něj by CAST a Cast byly dva příznaky.
-    return expanded.lower()
+    return rewrite_diagnosis_variants(expanded, variants).lower()
 
 
 def tfidf_vectorizer(normalization: TextNormalization | None) -> TfidfVectorizer:
@@ -76,7 +79,9 @@ def tfidf_vectorizer(normalization: TextNormalization | None) -> TfidfVectorizer
         # Holý dict, ne Mapping ani pydantic objekt: skops uloží dict, jiný typ
         # by vyžadoval další důvěryhodný typ.
         else functools.partial(
-            tfidf_preprocessor, acronyms=dict(normalization.acronyms)
+            tfidf_preprocessor,
+            acronyms=dict(normalization.acronyms),
+            variants=dict(normalization.variants),
         )
     )
     return TfidfVectorizer(sublinear_tf=True, preprocessor=preprocessor)

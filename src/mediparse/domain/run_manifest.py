@@ -39,7 +39,8 @@ class RunManifest(BaseModel):
     nese ``split_seed``, ``split_folds`` a ``split_sha256``, otisk přiřazení pacientů do foldů.
     ``diagnostic_strip`` je ``None``, když se zprávy nestripovaly.
     ``normalize_clinical_text`` je ``None``, když vstup TF-IDF neprošel normalizací,
-    jinak slovník zkratek diagnóz, který dostal trenér.
+    jinak slovníky zkratek, variant a překlepů, které dostal trenér.
+    Prázdné ``variants`` znamená vypnutý přepínač přepisu variant.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
