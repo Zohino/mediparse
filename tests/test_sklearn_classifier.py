@@ -22,6 +22,7 @@ from mediparse.domain.clinical_text import (
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.section_headers import strip_diagnostic_sections
+from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.sklearn_classifier import (
     TRUSTED_FUNCTIONS,
     LinearSvmTrainer,
@@ -36,6 +37,7 @@ from tests.model_support import (
     separable_notes,
 )
 from tests.section_support import REPOSITORY_LEXICON, mimic_shaped_notes
+from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -408,3 +410,18 @@ def test_variant_model_is_self_contained_after_round_trip(tmp_path: Path) -> Non
     )
     raw_scores = without_variants.classify(VARIANT_VOCABULARY)
     assert raw_scores[0].score != raw_scores[1].score
+
+
+def test_preprocessor_repairs_misspelling_inside_multiword_variant() -> None:
+    """Oprava překlepu odhalí víceslovnou variantu už v témže předzpracování."""
+    normalization = load_text_normalization(
+        REPOSITORY_DIAGNOSIS_CANDIDATES, variants=True
+    )
+    assert (
+        tfidf_preprocessor(
+            "chronic obstuctive lung disease",
+            normalization.acronyms,
+            normalization.variants,
+        )
+        == "chronic obstructive pulmonary disease"
+    )

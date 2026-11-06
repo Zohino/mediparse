@@ -7,7 +7,7 @@ import string
 from typing import Final
 
 import pytest
-from hypothesis import given
+from hypothesis import example, given
 from hypothesis import strategies as st
 from pydantic import ValidationError
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -24,6 +24,8 @@ from mediparse.domain.clinical_text import (
     rewrite_diagnosis_variants,
 )
 from mediparse.domain.note_text import deid_markers
+from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
+from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
 
 _ANALYZER: Final = TfidfVectorizer().build_analyzer()
 _UNREPLACED_NUMBER: Final = re.compile(r"(?<![A-Za-z0-9_])(?<![0-9][.,])[0-9]")
@@ -502,3 +504,34 @@ def test_normalization_sorts_variants_in_json() -> None:
     assert list(
         TextNormalization.model_validate_json(normalization.model_dump_json()).variants
     ) == ["afib", "kindey"]
+
+
+@pytest.mark.parametrize("variant", ["DM mellitus", "dm mellitus"])
+def test_variant_cannot_contain_acronym_word(variant: str) -> None:
+    """Zkratka uvnitř klíče varianty by měnila výsledek podle pořadí operací."""
+    with pytest.raises(ValidationError, match="zkrat"):
+        TextNormalization(
+            acronyms={"DM": "diabetes"}, variants={variant: "sugar disease"}
+        )
+
+
+_REPOSITORY_NORMALIZATION: Final = load_text_normalization(
+    REPOSITORY_DIAGNOSIS_CANDIDATES, variants=True
+)
+
+
+@given(
+    _TEXT
+    | st.lists(
+        st.sampled_from([
+            *_REPOSITORY_NORMALIZATION.variants,
+            *_REPOSITORY_NORMALIZATION.variants.values(),
+            "chronic obstuctive lung disease",
+        ])
+    ).map(" ".join)
+)
+@example("chronic obstuctive lung disease")
+def test_rewrite_repository_dictionary_is_idempotent(text: str) -> None:
+    """Idempotence platí i pro celý slovník včetně navazujících oprav překlepů."""
+    once = rewrite_diagnosis_variants(text, _REPOSITORY_NORMALIZATION.variants)
+    assert rewrite_diagnosis_variants(once, _REPOSITORY_NORMALIZATION.variants) == once

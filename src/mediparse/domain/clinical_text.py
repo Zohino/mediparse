@@ -148,9 +148,13 @@ def rewrite_diagnosis_variants(text: str, variants: Mapping[str, str]) -> str:
     if not variants:
         return text
     canonical = _variant_keys(variants)
-    return _variant_pattern(canonical).sub(
-        lambda match: variants[canonical[" ".join(match[0].lower().split())]], text
-    )
+    pattern = _variant_pattern(canonical)
+    # Oprava překlepu uvnitř víceslovné varianty ji odhalí až po první náhradě.
+    for _ in range(2):
+        text = pattern.sub(
+            lambda match: variants[canonical[" ".join(match[0].lower().split())]], text
+        )
+    return text
 
 
 class TextNormalization(BaseModel):
@@ -180,10 +184,14 @@ class TextNormalization(BaseModel):
 
     @model_validator(mode="after")
     def _dictionaries_are_idempotent(self) -> TextNormalization:
-        keys = _variant_keys(self.variants)
-        collisions = set(keys).intersection(key.lower() for key in self.acronyms)
+        _variant_keys(self.variants)
+        collisions = [
+            variant
+            for variant in self.variants
+            if find_diagnosis_variants(variant, self.acronyms)
+        ]
         if collisions:
-            message = f"Varianty jsou zároveň zkratkami: {sorted(collisions)}."
+            message = f"Varianty obsahují zkratky slovníku: {sorted(collisions)}."
             raise ValueError(message)
         for form in (*self.acronyms.values(), *self.variants.values()):
             if find_diagnosis_variants(form, self.variants) or (
