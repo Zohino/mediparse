@@ -174,3 +174,24 @@ test_that("společné okolí nepostačí ke kandidátu ve vzdálenosti dvě", {
   estimate <- typo_estimate(spelling_con(c("abcde", "abdxe"), c(1000, 1)))
   expect_equal(estimate$kandidati, 0)
 })
+
+
+test_that("neprázdné tabulky překlepů projdou exportem včetně podtržítka v tvaru", {
+  summary <- data.frame(variant = "synthetic_variant", label_cs = "Diabetes", vyskyty = 7, podil = 0.6)
+  forms <- data.frame(tvar = "synthetic_form", cil = "syntheticform", df = 10, cil_df = 1000)
+  estimate <- typo_estimate(manual_spelling_con())
+  dir <- withr::local_tempdir()
+  for (spec in list(
+    list("tbl-varianty", variant_table(summary)),
+    list("tbl-blizke-tvary", near_miss_table(forms)),
+    list("tbl-preklepy", typo_table(estimate))
+  )) {
+    layout <- SPELLING_LAYOUTS[[spec[[1]]]]
+    export_table(
+      spec[[2]], col.names = layout$col.names, align = layout$align,
+      widths = layout$widths, label = spec[[1]], dir = dir,
+      code = intersect(c("varianta", "tvar", "cil"), names(spec[[2]]))
+    )
+  }
+  expect_true(all(file.exists(file.path(dir, paste0(names(SPELLING_LAYOUTS), ".tex")))))
+})
