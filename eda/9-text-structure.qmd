@@ -486,6 +486,8 @@ export_table(
 )
 ```
 
+*Zdroj:* DF tokenů `vocabulary_raw` ve zprávách vstupního korpusu.
+
 # Shrnutí a rozhodnutí {#sec-shrnuti}
 
 Dokument ověřil seed lexikon sekcí na vstupním korpusu. Pro další práci z toho plyne:
