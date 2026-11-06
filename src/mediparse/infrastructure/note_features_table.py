@@ -19,12 +19,17 @@ if TYPE_CHECKING:
     from collections.abc import Generator, Sequence
     from pathlib import Path
 
-    from mediparse.domain.note_features import AcronymCount, NotePreprocessing
+    from mediparse.domain.note_features import (
+        AcronymCount,
+        NotePreprocessing,
+        VariantCount,
+    )
     from mediparse.domain.note_sections import SectionSpan
 
 SECTIONS_FILE: Final = "note_sections.parquet"
 PREPROCESSING_FILE: Final = "note_preprocessing.parquet"
 ACRONYMS_FILE: Final = "note_acronyms.parquet"
+VARIANTS_FILE: Final = "note_variants.parquet"
 SECTIONS_SCHEMA: Final = pa.schema([
     pa.field("note_id", pa.string(), nullable=False),
     pa.field("position", pa.int32(), nullable=False),
@@ -47,10 +52,17 @@ ACRONYMS_SCHEMA: Final = pa.schema([
     pa.field("acronym", pa.string(), nullable=False),
     pa.field("occurrences", pa.int32(), nullable=False),
 ])
+VARIANTS_SCHEMA: Final = pa.schema([
+    pa.field("note_id", pa.string(), nullable=False),
+    pa.field("variant", pa.string(), nullable=False),
+    pa.field("diagnosis", pa.string(), nullable=False),
+    pa.field("occurrences", pa.int32(), nullable=False),
+])
 ARTIFACTS: Final = (
     (SECTIONS_FILE, SECTIONS_SCHEMA),
     (PREPROCESSING_FILE, PREPROCESSING_SCHEMA),
     (ACRONYMS_FILE, ACRONYMS_SCHEMA),
+    (VARIANTS_FILE, VARIANTS_SCHEMA),
 )
 
 
@@ -63,12 +75,13 @@ class _BatchWriter:
         sections: Sequence[SectionSpan],
         preprocessing: Sequence[NotePreprocessing],
         acronyms: Sequence[AcronymCount],
+        variants: Sequence[VariantCount],
     ) -> None:
         """Zapíše dávku do otevřených souborů podle deklarovaných schémat."""
         for writer, (_, schema), rows in zip(
             self.writers,
             ARTIFACTS,
-            (sections, preprocessing, acronyms),
+            (sections, preprocessing, acronyms, variants),
             strict=True,
         ):
             writer.write_table(
@@ -78,7 +91,7 @@ class _BatchWriter:
 
 @dataclass(frozen=True)
 class ParquetNoteFeatures:
-    """Vlastník životnosti tří zapisovačů v adresáři artefaktů."""
+    """Vlastník životnosti čtyř zapisovačů v adresáři artefaktů."""
 
     directory: Path
 
@@ -109,7 +122,9 @@ class ParquetNoteFeatures:
             raise InvalidInputError(msg) from None
 
 
-def note_features_key(discharge: Path, lexicon: Path, candidates: Path) -> str:
+def note_features_key(
+    discharge: Path, lexicon: Path, candidates: Path, variants: Path
+) -> str:
     """Otisk vstupu, konfigurace, formátu, Python kódu a verze scikit-learn.
 
     Returns:
@@ -123,6 +138,7 @@ def note_features_key(discharge: Path, lexicon: Path, candidates: Path) -> str:
             ("discharge", file_sha256(discharge).encode()),
             ("lexicon", lexicon.read_bytes()),
             ("candidates", candidates.read_bytes()),
+            ("variants", variants.read_bytes()),
             ("scikit-learn", sklearn.__version__.encode()),
         ])
     except OSError as error:

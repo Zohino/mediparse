@@ -19,7 +19,7 @@ export MEDIPARSE_PARQUET="$work/tables"
 export MEDIPARSE_EDA_CACHE="$work/eda-cache"
 mediparse-eda-provenance --root "$root" --parquet "$MEDIPARSE_PARQUET" --out "$work/provenance.json"
 export MEDIPARSE_EDA_PROVENANCE="$work/provenance.json"
-mediparse-eda-note-features --parquet "$MEDIPARSE_PARQUET" --lexicon "$root/config/section_headers.json" --candidates "$root/config/diagnosis_candidates.json" --out "$MEDIPARSE_EDA_CACHE"
+mediparse-eda-note-features --parquet "$MEDIPARSE_PARQUET" --lexicon "$root/config/section_headers.json" --candidates "$root/config/diagnosis_candidates.json" --variants "$root/config/diagnosis_variants.json" --out "$MEDIPARSE_EDA_CACHE"
 
 mediparse-eda-note-tokens --parquet "$MEDIPARSE_PARQUET" --translation "$root/translation" --english "$root/resources/synthetic/en" --czech "$root/resources/synthetic/cs" --out "$MEDIPARSE_EDA_CACHE"
 
