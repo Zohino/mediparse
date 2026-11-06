@@ -77,7 +77,7 @@ token_frequency <- function(con) {
 spelling_targets <- function(candidates, keys) {
   words <- lapply(candidates[keys], function(entry) {
     tokens <- unlist(strsplit(tolower(entry$keywords_en), "[^a-z]+"), use.names = FALSE)
-    unique(tokens[grepl("^[a-z]+$", tokens) & nchar(tokens) >= TARGET_MIN_LENGTH])
+    unique(tokens[nchar(tokens) >= TARGET_MIN_LENGTH])
   })
   tokens <- as.character(unlist(words, use.names = FALSE))
   counts <- table(tokens)
