@@ -5,7 +5,6 @@ TARGET_MIN_LENGTH <- 6L
 NEAR_MISS_RATIO <- 10L
 NEAR_MISS_LIMIT <- 40L
 TYPO_MIN_LENGTH <- 5L
-TYPO_MIN_DF <- 100L
 TYPO_RATIO <- 100L
 
 SPELLING_LAYOUTS <- list(
@@ -137,14 +136,14 @@ typo_estimate <- function(con) {
     ), candidates AS (
       SELECT DISTINCT r.token
       FROM deletions r JOIN deletions f USING (d)
-      WHERE f.df >= %3$d AND f.df >= %4$d * r.df
+      WHERE f.df >= %3$d * r.df
         AND damerau_levenshtein(r.token, f.token) = 1
     )
     SELECT count(*) AS slovnik, count(c.token) AS kandidati,
       coalesce(sum(w.df), 0) AS vyskyty,
       coalesce(sum(w.df) FILTER (WHERE c.token IS NOT NULL), 0) AS vyskyty_kandidatu
     FROM words w LEFT JOIN candidates c USING (token)
-  ", table, TYPO_MIN_LENGTH, TYPO_MIN_DF, TYPO_RATIO))
+  ", table, TYPO_MIN_LENGTH, TYPO_RATIO))
   as_numeric_columns(out, c("slovnik", "kandidati", "vyskyty", "vyskyty_kandidatu"))
 }
 

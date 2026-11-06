@@ -55,7 +55,7 @@ test_that("odhad zahrne přesný poměr sto a vyřadí menší poměr", {
   expect_equal(typo_estimate(con)$kandidati, 0)
 })
 
-test_that("odhad potřebuje častého souseda s DF aspoň sto", {
+test_that("poměr DF musí dosáhnout sta i u jediného výskytu", {
   expect_equal(typo_estimate(spelling_con(c("aaaaa", "aaaab"), c(99, 1)))$kandidati, 0)
   expect_equal(typo_estimate(spelling_con(c("aaaaa", "aaaab"), c(100, 1)))$kandidati, 1)
 })
