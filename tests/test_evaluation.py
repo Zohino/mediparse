@@ -9,6 +9,7 @@ from mediparse.domain.evaluation import (
     Prediction,
     ensure_both_classes,
     ensure_complete_folds,
+    ensure_truth_matches_labels,
     ensure_unique_keys,
 )
 from mediparse.domain.input_note import InputNote
@@ -17,6 +18,63 @@ from mediparse.domain.language import Language
 from mediparse.domain.note import NoteSubjectMismatchError, note_id
 from mediparse.domain.split import Split
 from tests.model_support import prediction
+
+LABELED_NOTES = (
+    InputNote("1-DS-1", 1, Language.EN, "text", frozenset({Diagnosis.DIABETES})),
+    InputNote("2-DS-1", 2, Language.EN, "text", frozenset()),
+    InputNote("3-DS-1", 3, Language.EN, "text", frozenset({Diagnosis.CKD})),
+)
+
+
+def test_truth_matches_the_label_of_each_diagnosis() -> None:
+    """Pravda závisí na dané diagnóze, tatáž zpráva má pro jinou jinou pravdu."""
+    ensure_truth_matches_labels(
+        [
+            prediction("1-DS-1", truth=True, score=1.0),
+            prediction("2-DS-1", truth=False, score=-1.0),
+            prediction("3-DS-1", truth=False, score=-1.0),
+            prediction("3-DS-1", truth=True, score=1.0, diagnosis=Diagnosis.CKD),
+            prediction("1-DS-1", truth=False, score=-1.0, diagnosis=Diagnosis.CKD),
+        ],
+        LABELED_NOTES,
+    )
+
+
+@pytest.mark.parametrize("mismatched_note", ["2-DS-1", "3-DS-1"])
+def test_truth_mismatch_is_rejected_without_identifiers(mismatched_note: str) -> None:
+    """Pozitivní pravda bez daného labelu je chyba i při přítomnosti jiného labelu."""
+    items = [
+        prediction("1-DS-1", truth=True, score=1.0),
+        prediction("2-DS-1", truth=mismatched_note == "2-DS-1", score=-1.0),
+        prediction("3-DS-1", truth=mismatched_note == "3-DS-1", score=-1.0),
+    ]
+
+    with pytest.raises(InvalidInputError) as raised:
+        ensure_truth_matches_labels(items, LABELED_NOTES)
+
+    assert str(raised.value) == (
+        "Pravda predikcí neodpovídá labelům zpráv: řádek row, diagnóza diabetes, "
+        "počet nesouladů 1."
+    )
+
+
+def test_truth_mismatch_reports_all_row_diagnosis_pairs() -> None:
+    """Chyba uvede všechny dotčené dvojice s počty, bez identifikátorů zpráv a pacientů."""
+    items = [
+        prediction("2-DS-1", truth=True, score=1.0, row_id="a"),
+        prediction(
+            "1-DS-1", truth=True, score=1.0, row_id="b", diagnosis=Diagnosis.CKD
+        ),
+    ]
+
+    with pytest.raises(InvalidInputError) as raised:
+        ensure_truth_matches_labels(items, LABELED_NOTES)
+
+    assert str(raised.value) == (
+        "Pravda predikcí neodpovídá labelům zpráv: "
+        "řádek a, diagnóza diabetes, počet nesouladů 1; "
+        "řádek b, diagnóza ckd, počet nesouladů 1."
+    )
 
 
 def test_mixed_truth_passes() -> None:

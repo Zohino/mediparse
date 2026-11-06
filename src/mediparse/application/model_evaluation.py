@@ -10,6 +10,7 @@ from mediparse.domain.evaluation import (
     DiagnosisMetrics,
     ensure_both_classes,
     ensure_complete_folds,
+    ensure_truth_matches_labels,
     ensure_unique_keys,
 )
 from mediparse.domain.inputs import InvalidInputError
@@ -67,8 +68,8 @@ class ModelEvaluation:
 
         Raises:
             InvalidInputError: Predikce jsou prázdné, opakuje se klíč predikce,
-                nepokrývají přesně test foldu nebo některá skupina nemá obě třídy
-                pravdy.
+                nepokrývají přesně test foldu, pravda nesouhlasí s labely zpráv
+                nebo některá skupina nemá obě třídy pravdy.
         """
         items = self.predictions.read()
         if not items:
@@ -76,7 +77,9 @@ class ModelEvaluation:
             raise InvalidInputError(msg)
         # Před úplností: porovnání množin duplicitu sloučí a neohlásila by se.
         ensure_unique_keys(items)
-        ensure_complete_folds(items, self.table.read(), self.split.read().split)
+        notes = self.table.read()
+        ensure_complete_folds(items, notes, self.split.read().split)
+        ensure_truth_matches_labels(items, notes)
         groups: defaultdict[tuple[str, Diagnosis], list[Prediction]] = defaultdict(list)
         for item in items:
             groups[item.row_id, item.diagnosis].append(item)

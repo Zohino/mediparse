@@ -151,3 +151,33 @@ def ensure_complete_folds(
                 f"diagnóza {diagnosis}, fold {fold}, chybí {missing}, navíc {extra}."
             )
             raise InvalidInputError(msg)
+
+
+def ensure_truth_matches_labels(
+    predictions: Sequence[Prediction], notes: Sequence[InputNote]
+) -> None:
+    """Ověří pravdu predikcí proti labelům dané diagnózy ve zprávách.
+
+    Předpokládá, že každá predikce patří zprávě z tabulky; to zajišťuje předchozí
+    kontrola ``ensure_complete_folds``.
+
+    Args:
+        predictions: Predikce ke zpracování.
+        notes: Zprávy korpusu s labely diagnóz.
+
+    Raises:
+        InvalidInputError: Pravda některé predikce nesouhlasí s labelem zprávy.
+    """
+    labels = {note.note_id: note.labels for note in notes}
+    mismatches: defaultdict[tuple[str, Diagnosis], int] = defaultdict(int)
+    for item in predictions:
+        if item.truth != (item.diagnosis in labels[item.note_id]):
+            mismatches[item.row_id, item.diagnosis] += 1
+    if mismatches:
+        # Identifikátory zpráv nesou subject_id pacienta MIMIC; hlásíme jen agregáty.
+        details = "; ".join(
+            f"řádek {row_id}, diagnóza {diagnosis}, počet nesouladů {count}"
+            for (row_id, diagnosis), count in sorted(mismatches.items())
+        )
+        msg = f"Pravda predikcí neodpovídá labelům zpráv: {details}."
+        raise InvalidInputError(msg)

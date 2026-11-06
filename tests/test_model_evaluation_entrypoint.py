@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING, Final
 
 import pyarrow.parquet as pq
@@ -149,10 +149,48 @@ def test_single_class_is_refused(
             for item in inputs.test_predictions
         ],
     )
+    table = ParquetNoteTable(inputs.notes)
+    test_ids = {item.note_id for item in inputs.test_predictions}
+    table.write([
+        replace(note, labels=note.labels | {Diagnosis.DIABETES})
+        if note.note_id in test_ids
+        else note
+        for note in table.read()
+    ])
 
     code = inputs.run()
 
     assert code is ExitCode.REFUSED
     assert not inputs.metrics.exists()
     assert "diabetes" in caplog.text
+    assert "metriky potřebují obě třídy" in caplog.text
     assert "Traceback" not in caplog.text
+
+
+def test_truth_copied_from_imperfect_predictions_is_refused(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Záměna pravdy za chybné predikce skončí odmítnutím bez metrik a identifikátorů."""
+    inputs = _inputs(tmp_path)
+    imperfect = tuple(
+        prediction(item.note_id, truth=item.truth, score=-1.0)
+        for item in inputs.test_predictions
+    )
+    _rewrite_predictions(
+        inputs, [replace(item, truth=item.predicted) for item in imperfect]
+    )
+
+    code = inputs.run()
+
+    assert code is ExitCode.REFUSED
+    assert not inputs.metrics.exists()
+    assert "Pravda predikcí neodpovídá labelům" in caplog.text
+    assert "-DS-" not in caplog.text
+    assert "subject_id" not in caplog.text
+    assert "Traceback" not in caplog.text
+    assert [record.getMessage() for record in caplog.records] == [
+        (
+            "Pravda predikcí neodpovídá labelům zpráv: řádek row, diagnóza diabetes, "
+            f"počet nesouladů {sum(item.truth for item in inputs.test_predictions)}."
+        )
+    ]

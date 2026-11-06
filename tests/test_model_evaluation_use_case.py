@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections import Counter
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import TYPE_CHECKING
 
 import pytest
@@ -80,17 +80,33 @@ class _FakeSplitSource:
 
 
 def _use_case(
-    items: Sequence[Prediction], split: Split = SPLIT
+    items: Sequence[Prediction],
+    split: Split = SPLIT,
+    notes: Sequence[InputNote] | None = None,
 ) -> tuple[ModelEvaluation, _FakeScorer, _FakeSink]:
     scorer, sink = _FakeScorer(), _FakeSink()
     use_case = ModelEvaluation(
         _FakePredictions(items),
-        _FakeTable(NOTES),
+        _FakeTable(_labeled_notes(items) if notes is None else notes),
         _FakeSplitSource(split),
         scorer,
         sink,
     )
     return use_case, scorer, sink
+
+
+def _labeled_notes(items: Sequence[Prediction]) -> tuple[InputNote, ...]:
+    return tuple(
+        replace(
+            note,
+            labels=frozenset(
+                item.diagnosis
+                for item in items
+                if item.note_id == note.note_id and item.truth
+            ),
+        )
+        for note in NOTES
+    )
 
 
 def _group(
@@ -114,14 +130,16 @@ def _group(
 
 
 MIXED = (
-    *_group("b", Diagnosis.DIABETES, ((True, 1.0), (False, 0.5), (False, -3.0))),
+    *_group(
+        "b", Diagnosis.ATRIAL_FIBRILLATION, ((True, 1.0), (False, 0.5), (False, -3.0))
+    ),
     *_group("a", Diagnosis.CKD, ((False, -1.0), (True, 3.0), (True, -0.5))),
     *_group("a", Diagnosis.DIABETES, ((False, -2.0), (True, 2.0), (True, 1.0))),
 )
 
 
 def test_groups_are_sorted_with_sizes() -> None:
-    """Dvě diagnózy a dva row_id dají seřazené řádky se správnými velikostmi."""
+    """Tři diagnózy a dva row_id dají seřazené řádky se správnými velikostmi."""
     use_case, _, sink = _use_case(MIXED)
 
     result = use_case.run()
@@ -129,7 +147,7 @@ def test_groups_are_sorted_with_sizes() -> None:
     assert [(item.row_id, item.diagnosis) for item in result] == [
         ("a", Diagnosis.CKD),
         ("a", Diagnosis.DIABETES),
-        ("b", Diagnosis.DIABETES),
+        ("b", Diagnosis.ATRIAL_FIBRILLATION),
     ]
     assert [(item.test_notes, item.test_positives) for item in result] == [
         (3, 2),
@@ -173,6 +191,28 @@ def test_single_class_is_rejected_before_scoring() -> None:
     use_case, scorer, sink = _use_case(items)
 
     with pytest.raises(InvalidInputError, match="pneumonia"):
+        use_case.run()
+
+    assert not scorer.calls
+    assert not sink.written
+
+
+@pytest.mark.parametrize("single_class", [False, True])
+def test_truth_mismatch_is_rejected_before_classes_and_scoring(
+    *,
+    single_class: bool,
+) -> None:
+    """Neshoda pravdy odmítne vstup před scorerem i před kontrolou jediné třídy."""
+    original = _group(
+        "row", Diagnosis.DIABETES, ((True, 1.0), (False, -1.0), (False, -1.0))
+    )
+    items = tuple(
+        replace(item, truth=True if single_class else not item.truth)
+        for item in original
+    )
+    use_case, scorer, sink = _use_case(items, notes=_labeled_notes(original))
+
+    with pytest.raises(InvalidInputError, match="Pravda predikcí neodpovídá labelům"):
         use_case.run()
 
     assert not scorer.calls
