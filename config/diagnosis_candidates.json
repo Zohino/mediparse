@@ -26,6 +26,14 @@
       "acronyms_en": [
         "DM",
         "DM2"
+      ],
+      "variants_en": [
+        "T1DM",
+        "T2DM",
+        "DM1",
+        "DMII",
+        "IDDM",
+        "NIDDM"
       ]
     },
     "heart_failure": {
@@ -77,6 +85,9 @@
       ],
       "acronyms_en": [
         "COPD"
+      ],
+      "variants_en": [
+        "chronic obstructive lung disease"
       ]
     },
     "ckd": {
@@ -100,6 +111,11 @@
       "acronyms_en": [
         "CKD",
         "ESRD"
+      ],
+      "variants_en": [
+        "ESKD",
+        "CRI",
+        "CRF"
       ]
     },
     "pneumonia": {
@@ -137,7 +153,10 @@
         "pneumonia",
         "pneumonitis"
       ],
-      "acronyms_en": []
+      "acronyms_en": [],
+      "variants_en": [
+        "PNA"
+      ]
     },
     "ami": {
       "label_cs": "Akutní infarkt myokardu",
@@ -222,6 +241,12 @@
       ],
       "acronyms_en": [
         "AF"
+      ],
+      "variants_en": [
+        "afib",
+        "a-fib",
+        "a fib",
+        "PAF"
       ]
     },
     "sepsis": {

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, Final
 
 import pytest
 
@@ -12,6 +12,7 @@ from mediparse.domain.icd import IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.diagnosis_candidates_file import (
     load_diagnosis_codes,
+    load_diagnosis_variants,
     load_text_normalization,
 )
 from tests.cohort_support import candidate_prefixes
@@ -177,3 +178,100 @@ def test_names_missing_file_and_invalid_json_are_invalid_input(
         load_text_normalization(tmp_path / "none.json")
     with pytest.raises(InvalidInputError):
         load_text_normalization(broken)
+
+
+_VARIANT_COUNT: Final = 15
+
+
+def test_repository_variants_load_sorted() -> None:
+    """Repozitní config dá patnáct původních variant pětice včetně afib z keywords."""
+    variants = load_diagnosis_variants(REPOSITORY_DIAGNOSIS_CANDIDATES)
+    assert len(variants) == _VARIANT_COUNT
+    assert variants == {
+        "CRF": Diagnosis.CKD,
+        "CRI": Diagnosis.CKD,
+        "DM1": Diagnosis.DIABETES,
+        "DMII": Diagnosis.DIABETES,
+        "ESKD": Diagnosis.CKD,
+        "IDDM": Diagnosis.DIABETES,
+        "NIDDM": Diagnosis.DIABETES,
+        "PAF": Diagnosis.ATRIAL_FIBRILLATION,
+        "PNA": Diagnosis.PNEUMONIA,
+        "T1DM": Diagnosis.DIABETES,
+        "T2DM": Diagnosis.DIABETES,
+        "a fib": Diagnosis.ATRIAL_FIBRILLATION,
+        "a-fib": Diagnosis.ATRIAL_FIBRILLATION,
+        "afib": Diagnosis.ATRIAL_FIBRILLATION,
+        "chronic obstructive lung disease": Diagnosis.COPD,
+    }
+    assert list(variants) == sorted(variants)
+
+
+@pytest.mark.parametrize(
+    ("key", "value"),
+    [
+        ("ckd", None),
+        ("ckd", []),
+        ("ckd", [""]),
+        ("ckd", [" "]),
+        ("ckd", ["AFIB"]),
+        ("ckd", ["CRI", "cri"]),
+        ("ckd", [1]),
+        ("ckd", "CRI"),
+    ],
+)
+def test_invalid_variants_are_rejected(tmp_path: Path, key: str, value: object) -> None:
+    """Chybějící, prázdné, netypované a duplicitní varianty jsou chyba vstupu."""
+    tree = json.loads(REPOSITORY_DIAGNOSIS_CANDIDATES.read_text(encoding="utf-8"))
+    if value is None:
+        del tree["candidates"][key]
+    else:
+        tree["candidates"][key]["variants_en"] = value
+    with pytest.raises(InvalidInputError):
+        load_diagnosis_variants(_write(tmp_path, tree))
+
+
+def test_missing_variants_field_is_rejected(tmp_path: Path) -> None:
+    """Diagnóza bez pole variant není úplná konfigurace měření."""
+    tree = json.loads(REPOSITORY_DIAGNOSIS_CANDIDATES.read_text(encoding="utf-8"))
+    del tree["candidates"]["ckd"]["variants_en"]
+    with pytest.raises(InvalidInputError, match="variants_en"):
+        load_diagnosis_variants(_write(tmp_path, tree))
+
+
+@pytest.mark.parametrize("key", ["diabetes", "ckd"])
+def test_variant_colliding_with_acronym_is_rejected(tmp_path: Path, key: str) -> None:
+    """Varianta dm nesmí zdvojit DM ani u vlastní, ani u jiné diagnózy pětice."""
+    tree = json.loads(REPOSITORY_DIAGNOSIS_CANDIDATES.read_text(encoding="utf-8"))
+    tree["candidates"][key]["variants_en"] = ["dm"]
+    with pytest.raises(InvalidInputError, match="zkrat"):
+        load_diagnosis_variants(_write(tmp_path, tree))
+
+
+def test_variant_loader_ignores_other_candidates_and_fields(tmp_path: Path) -> None:
+    """Loader čte jen varianty a zkratky pětice z podmnožiny sdíleného configu."""
+    tree = json.loads(REPOSITORY_DIAGNOSIS_CANDIDATES.read_text(encoding="utf-8"))
+    tree["other"] = 1
+    tree["candidates"]["other"] = {"variants_en": ["dm"]}
+    tree["candidates"]["ckd"]["variants_en"] = ["CHF"]
+    variants = load_diagnosis_variants(_write(tmp_path, tree))
+    assert variants["CHF"] is Diagnosis.CKD
+    assert "dm" not in variants
+
+
+def test_other_loaders_ignore_variants(tmp_path: Path) -> None:
+    """Přidání variant nemění předpony ICD ani slovník zkratek normalizace."""
+    tree = json.loads(REPOSITORY_DIAGNOSIS_CANDIDATES.read_text(encoding="utf-8"))
+    selected = {
+        key for key, entry in tree["candidates"].items() if "variants_en" in entry
+    }
+    assert selected == set(Diagnosis)
+    for entry in tree["candidates"].values():
+        entry.pop("variants_en", None)
+    path = _write(tmp_path, tree)
+    assert load_text_normalization(
+        REPOSITORY_DIAGNOSIS_CANDIDATES
+    ) == load_text_normalization(path)
+    assert load_diagnosis_codes(
+        REPOSITORY_DIAGNOSIS_CANDIDATES
+    ) == load_diagnosis_codes(path)

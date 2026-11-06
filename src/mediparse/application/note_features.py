@@ -1,4 +1,4 @@
-"""Výpočet částí zpráv, tokenů TF-IDF a výskytů zkratek po dávkách."""
+"""Výpočet částí zpráv, tokenů TF-IDF a výskytů zkratek i variant diagnóz po dávkách."""
 
 from __future__ import annotations
 
@@ -8,27 +8,30 @@ from typing import TYPE_CHECKING, Protocol
 
 from mediparse.domain.clinical_text import (
     find_diagnosis_acronyms,
+    find_diagnosis_variants,
     normalize_clinical_text,
 )
-from mediparse.domain.note_features import AcronymCount, NotePreprocessing
+from mediparse.domain.note_features import AcronymCount, NotePreprocessing, VariantCount
 from mediparse.domain.note_sections import SectionSpan, section_spans
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Sequence
+    from collections.abc import Callable, Mapping, Sequence
 
     from mediparse.application.ports.corpus import NoteTexts
     from mediparse.domain.clinical_text import TextNormalization
+    from mediparse.domain.diagnosis import Diagnosis
     from mediparse.domain.section_headers import SectionLexicon
 
 
 class NoteFeatureSink(Protocol):
-    """Zápis měření jedné dávky do tří artefaktů."""
+    """Zápis měření jedné dávky do čtyř artefaktů."""
 
     def write(
         self,
         sections: Sequence[SectionSpan],
         preprocessing: Sequence[NotePreprocessing],
         acronyms: Sequence[AcronymCount],
+        variants: Sequence[VariantCount],
     ) -> None:
         """Zapíše řádky v daném pořadí."""
         ...
@@ -43,7 +46,12 @@ class ComputeNoteFeatures:
     raw: Callable[[str], list[str]]
     preprocessed: Callable[[str], list[str]]
 
-    def run(self, lexicon: SectionLexicon, normalization: TextNormalization) -> int:
+    def run(
+        self,
+        lexicon: SectionLexicon,
+        normalization: TextNormalization,
+        variants: Mapping[str, Diagnosis],
+    ) -> int:
         """Spočítá a zapíše měření po dávkách bez výběru vstupního korpusu.
 
         Returns:
@@ -54,6 +62,7 @@ class ComputeNoteFeatures:
             sections: list[SectionSpan] = []
             preprocessing: list[NotePreprocessing] = []
             acronyms: list[AcronymCount] = []
+            variant_rows: list[VariantCount] = []
             for note_id, text in batch:
                 sections.extend(section_spans(note_id, text, lexicon))
                 raw, prepared = self.raw(text), self.preprocessed(text)
@@ -66,9 +75,10 @@ class ComputeNoteFeatures:
                         tuple(sorted(set(prepared))),
                     )
                 )
+                normalized = normalize_clinical_text(text)
                 counts = Counter(
                     find_diagnosis_acronyms(
-                        normalize_clinical_text(text),
+                        normalized,
                         normalization.acronyms,
                     )
                 )
@@ -76,6 +86,13 @@ class ComputeNoteFeatures:
                     AcronymCount(note_id, acronym, counts[acronym])
                     for acronym in sorted(normalization.acronyms)
                 )
-            self.sink.write(sections, preprocessing, acronyms)
+                variant_counts = Counter(find_diagnosis_variants(normalized, variants))
+                variant_rows.extend(
+                    VariantCount(
+                        note_id, variant, variants[variant], variant_counts[variant]
+                    )
+                    for variant in sorted(variants)
+                )
+            self.sink.write(sections, preprocessing, acronyms, variant_rows)
             total += len(batch)
         return total

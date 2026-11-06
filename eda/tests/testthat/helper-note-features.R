@@ -9,7 +9,7 @@ use_feature_fixtures <- function(con, env = parent.frame()) {
     "SELECT count(*) AS n FROM discharge d WHERE NOT EXISTS (SELECT 1 FROM %s l WHERE l.text = d.text)", lookup
   ))$n
   if (missing > 0) stop("Zkonstruovaná zpráva chybí ve fixtuře měření; doplňte fixturu zapisovačem Pythonu.")
-  for (file in c("note_sections.parquet", "note_preprocessing.parquet", "note_acronyms.parquet")) {
+  for (file in c("note_sections.parquet", "note_preprocessing.parquet", "note_acronyms.parquet", "note_variants.parquet")) {
     DBI::dbExecute(con, sprintf("
       COPY (
         SELECT d.note_id, f.* EXCLUDE (note_id)

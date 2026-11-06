@@ -79,7 +79,9 @@ def test_second_run_preserves_bytes_mtimes_and_matches_fresh_computation(
     assert (first["tokens_raw"], first["tokens_preprocessed"]) == (10, 12)
 
 
-@pytest.mark.parametrize("changed", ["lexicon", "candidates", "discharge"])
+@pytest.mark.parametrize(
+    "changed", ["lexicon", "candidates", "variant-terms", "discharge"]
+)
 def test_changed_input_recomputes(
     inputs: tuple[Path, Path, Path, Path], changed: str
 ) -> None:
@@ -90,11 +92,16 @@ def test_changed_input_recomputes(
     path = {
         "lexicon": lexicon,
         "candidates": candidates,
+        "variant-terms": candidates,
         "discharge": parquet / "discharge.parquet",
     }[changed]
     if changed == "discharge":
         table = pq.read_table(path)
         pq.write_table(table.replace_schema_metadata({b"changed": b"1"}), path)
+    elif changed == "variant-terms":
+        tree = json.loads(path.read_text(encoding="utf-8"))
+        tree["candidates"]["diabetes"]["variants_en"].append("syntheticvariant")
+        path.write_text(json.dumps(tree), encoding="utf-8")
     else:
         path.write_bytes(path.read_bytes() + b" ")
     assert run(*inputs, {}) is True
@@ -128,7 +135,7 @@ def test_implementation_changes_invalidate_key(
 def test_missing_artifact_or_invalid_manifest_is_not_current(
     inputs: tuple[Path, Path, Path, Path],
 ) -> None:
-    """Klíč bez všech tří artefaktů ani poškozený manifest nestačí."""
+    """Klíč bez všech čtyř artefaktů ani poškozený manifest nestačí."""
     parquet, lexicon, candidates, out = inputs
     run(*inputs, {})
     key = cache_key(parquet / "discharge.parquet", lexicon, candidates)
@@ -190,8 +197,8 @@ def test_contract_fixtures_equal_writer(tmp_path: Path) -> None:
         )
 
 
-def test_empty_input_writes_three_typed_files(tmp_path: Path) -> None:
-    """Prázdný zdroj má tři čitelné prázdné artefakty s pevným schématem."""
+def test_empty_input_writes_four_typed_files(tmp_path: Path) -> None:
+    """Prázdný zdroj má čtyři čitelné prázdné artefakty s pevným schématem."""
     with ParquetNoteFeatures(tmp_path).writer() as sink:
         assert compute([], sink) == 0
     for name, schema in ARTIFACTS:

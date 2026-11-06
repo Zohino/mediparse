@@ -12,7 +12,10 @@ from mediparse.application.note_features import ComputeNoteFeatures
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
+from mediparse.infrastructure.diagnosis_candidates_file import (
+    load_diagnosis_variants,
+    load_text_normalization,
+)
 from mediparse.infrastructure.eda_cache import (
     is_current,
     pending_cache,
@@ -61,6 +64,7 @@ def run(
         return False
     parsed = load_section_lexicon(lexicon)
     normalization = load_text_normalization(candidates)
+    variant_map = load_diagnosis_variants(candidates)
     with (
         pending_cache(out, key, artifacts) as temporary,
         ParquetNoteFeatures(temporary).writer() as sink,
@@ -70,7 +74,7 @@ def run(
             sink,
             tfidf_vectorizer(None).build_analyzer(),
             tfidf_vectorizer(normalization).build_analyzer(),
-        ).run(parsed, normalization)
+        ).run(parsed, normalization, variant_map)
     logger.info("Měření zpráv zapsáno: %d zpráv.", total)
     return True
 

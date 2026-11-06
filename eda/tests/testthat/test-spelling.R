@@ -1,0 +1,198 @@
+spelling_con <- function(tokens = character(), df = numeric(), env = parent.frame()) {
+  con <- DBI::dbConnect(duckdb::duckdb())
+  withr::defer(DBI::dbDisconnect(con, shutdown = TRUE), envir = env)
+  DBI::dbWriteTable(con, "token_frequency", data.frame(token = tokens, df = df))
+  con
+}
+
+manual_spelling_con <- function(env = parent.frame()) {
+  spelling_con(
+    c("pneumonia", "pnuemonia", "pnemonia", "pneumonias", "diabetes", "diabtes", "atrial", "trial", "fibrillation", "fibrilation", "zzzzz", "dm2", "abcd"),
+    c(100000, 300, 9, 5000, 80000, 120, 90000, 40000, 60000, 1, 50, 3, 2), env
+  )
+}
+
+MANUAL_TARGETS <- c("pneumonia", "diabetes", "atrial", "fibrillation")
+
+test_that("blízké tvary dodrží ruční vzdálenost, poměr DF a práh popisků", {
+  con <- manual_spelling_con()
+  forms <- near_miss_forms(con, MANUAL_TARGETS)
+  expect_identical(forms$tvar, c("pneumonias", "pnuemonia", "diabtes"))
+  expect_equal(forms$df, c(5000, 300, 120))
+  expect_identical(forms$cil, c("pneumonia", "pneumonia", "diabetes"))
+  expect_identical(near_miss_table(forms)$zpravy, c("5\u00a0000", "300", "120"))
+  expect_match(near_miss_text(forms), "3\u00a0tvary", fixed = TRUE)
+  DBI::dbExecute(con, "UPDATE token_frequency SET df = 10 WHERE token = 'pnemonia'")
+  expect_true("pnemonia" %in% near_miss_forms(con, MANUAL_TARGETS)$tvar)
+})
+
+test_that("odhad překlepů odpovídá ručně spočtenému čitateli a jmenovateli", {
+  estimate <- typo_estimate(manual_spelling_con())
+  expect_equal(estimate$slovnik, 11)
+  expect_equal(estimate$kandidati, 4)
+  expect_equal(estimate$vyskyty_kandidatu, 430)
+  expect_equal(estimate$vyskyty, 375480)
+  table <- typo_table(estimate)
+  expect_identical(table$podil_slovniku, "36,4")
+  expect_identical(table$podil_vyskytu, "0,1")
+  text <- typo_text(estimate)
+  expect_match(text, "popisný odhad podle definice", fixed = TRUE)
+  expect_match(text, "legitimní slova", fixed = TRUE)
+  expect_match(text, "vynechává překlepy", fixed = TRUE)
+})
+
+test_that("token se dvěma častými sousedy je jediný kandidát", {
+  estimate <- typo_estimate(spelling_con(c("bbbbb", "bbbby", "bbbbx"), c(500, 500, 1)))
+  expect_equal(estimate$kandidati, 1)
+  expect_equal(estimate$slovnik, 3)
+  expect_equal(estimate$vyskyty_kandidatu, 1)
+})
+
+test_that("odhad zahrne přesný poměr sto a vyřadí menší poměr", {
+  con <- spelling_con(c("aaaaa", "aaaab"), c(1000, 10))
+  expect_equal(typo_estimate(con)$kandidati, 1)
+  DBI::dbExecute(con, "UPDATE token_frequency SET df = 11 WHERE token = 'aaaab'")
+  expect_equal(typo_estimate(con)$kandidati, 0)
+})
+
+test_that("poměr DF musí dosáhnout sta i u jediného výskytu", {
+  expect_equal(typo_estimate(spelling_con(c("aaaaa", "aaaab"), c(99, 1)))$kandidati, 0)
+  expect_equal(typo_estimate(spelling_con(c("aaaaa", "aaaab"), c(100, 1)))$kandidati, 1)
+})
+
+test_that("prázdné souhrny vrátí nerozhodnutelný text a prázdné tabulky", {
+  con <- spelling_con()
+  forms <- near_miss_forms(con, MANUAL_TARGETS)
+  expect_match(near_miss_text(forms), UNDECIDABLE_TEXT, fixed = TRUE)
+  expect_match(typo_text(typo_estimate(con)), UNDECIDABLE_TEXT, fixed = TRUE)
+  expect_match(variant_text(data.frame(vyskyty = numeric())), UNDECIDABLE_TEXT, fixed = TRUE)
+  expect_equal(nrow(near_miss_table(forms)), 0L)
+  expect_equal(nrow(near_miss_forms(con, character())), 0L)
+})
+
+test_that("cíle jsou jedinečná dost dlouhá slova jen vybraných diagnóz", {
+  candidates <- list(
+    first = list(keywords_en = c("chronic pulmonary disease", "pulmonary")),
+    second = list(keywords_en = c("chronic kidney disease", "end-stage renal disease")),
+    ignored = list(keywords_en = "pulmonary extraneous")
+  )
+  expect_identical(spelling_targets(candidates, c("first", "second")), c("kidney", "pulmonary"))
+  expect_identical(spelling_targets(candidates, character()), character())
+})
+
+test_that("DF počítá zprávy s tokenem a materializuje se pouze jednou", {
+  con <- corpus_con(c("alpha AF", "alpha gamma"))
+  use_feature_fixtures(con)
+  near_miss_forms(con, "alpha")
+  freq <- DBI::dbGetQuery(con, "SELECT * FROM token_frequency WHERE token IN ('af', 'alpha', 'gamma') ORDER BY token")
+  expect_identical(freq$token, c("af", "alpha", "gamma"))
+  expect_equal(as.numeric(freq$df), c(1, 2, 1))
+  expect_identical(token_frequency(con), "token_frequency")
+  DBI::dbExecute(con, "DELETE FROM token_frequency")
+  near_miss_forms(con, "alpha")
+  expect_equal(DBI::dbGetQuery(con, "SELECT count(*) AS n FROM token_frequency")$n, 0)
+})
+
+test_that("varianty z konfigurace zveřejní sedm výskytů a tři z pěti zpráv bez kódu", {
+  con <- corpus_con(rep("Pt stable", 100), codes = c("I48", "I48", "Z99", "Z99", "Z99", "I48", rep("Z99", 94)))
+  use_feature_fixtures(con)
+  note_variants(con)
+  # Zkonstruované dlouhé řádky drží počty výskytů nezávislé na počtu zpráv s kódem.
+  DBI::dbExecute(con, sprintf("DELETE FROM %s", VARIANTS_TABLE))
+  ids <- DBI::dbGetQuery(con, "SELECT note_id FROM discharge ORDER BY CAST(substr(note_id, 2) AS INTEGER)")$note_id
+  DBI::dbAppendTable(con, VARIANTS_TABLE, data.frame(
+    note_id = ids, variant = "afib", diagnosis = "atrial_fibrillation",
+    occurrences = c(3L, 1L, 1L, 1L, 1L, rep(0L, 95))
+  ))
+  summary <- variant_summary(con)
+  expect_equal(summary$vyskyty, 7)
+  expect_equal(summary$podil, 0.6)
+  expect_identical(summary$diagnosis, "atrial_fibrillation")
+  expect_identical(summary$label_cs, "Fibrilace síní")
+  expect_identical(variant_table(summary)$bez_kodu, "60,0")
+  expect_identical(variant_table(summary)$vyskyty, "7")
+  expect_match(variant_text(summary), "1\u00a0varianta", fixed = TRUE)
+})
+
+test_that("nulový výskyt varianty nemá jmenovatel a prázdný korpus nespadne", {
+  con <- corpus_con("Pt stable")
+  use_feature_fixtures(con)
+  summary <- variant_summary(con)
+  expect_true(all(summary$vyskyty == 0))
+  expect_true(all(is.na(summary$podil)))
+  expect_true(all(variant_table(summary)$bez_kodu == "–"))
+  expect_match(variant_text(summary), UNDECIDABLE_TEXT, fixed = TRUE)
+  empty <- mimic_con()
+  use_feature_fixtures(empty)
+  expect_equal(nrow(variant_summary(empty)), 0L)
+  expect_equal(nrow(variant_table(variant_summary(empty))), 0L)
+})
+
+
+test_that("tvar ve vzdálenosti dvě a tvar mezi cíli do výsledku nepatří", {
+  con <- manual_spelling_con()
+  DBI::dbExecute(con, "INSERT INTO token_frequency VALUES ('diabetic', 1000)")
+  expect_false("diabetic" %in% near_miss_forms(con, "diabetes")$tvar)
+  expect_false("pneumonias" %in% near_miss_forms(con, c(MANUAL_TARGETS, "pneumonias"))$tvar)
+})
+
+test_that("blízký tvar zahrne přesný desetinásobek DF cíle", {
+  con <- spelling_con(c("abcdefg", "abcdefh"), c(1000, 100))
+  expect_identical(near_miss_forms(con, "abcdefg")$tvar, "abcdefh")
+  DBI::dbExecute(con, "UPDATE token_frequency SET df = 101 WHERE token = 'abcdefh'")
+  expect_equal(nrow(near_miss_forms(con, "abcdefg")), 0L)
+})
+
+test_that("tabulka omezí 41 dvojic na 40 a věta zachová všech 41 tvarů", {
+  forms <- data.frame(tvar = paste0("tvar", 1:41), cil = "cil", df = 41:1, cil_df = 10000)
+  expect_equal(nrow(near_miss_table(forms)), 40L)
+  expect_match(near_miss_text(forms), "41\u00a0tvarů", fixed = TRUE)
+})
+
+test_that("tvar u dvou cílů se ve větě počítá jednou", {
+  con <- spelling_con(c("abcdefg", "abcdefi", "abcdefh"), c(1000, 1000, 100))
+  forms <- near_miss_forms(con, c("abcdefg", "abcdefi"))
+  expect_equal(nrow(forms), 2L)
+  expect_match(near_miss_text(forms), "1\u00a0tvar;", fixed = TRUE)
+})
+
+test_that("tvary se stejnou DF řadí podle tokenu", {
+  con <- spelling_con(c("abcdefg", "abcdefi", "abcdefh"), c(1000, 100, 100))
+  expect_identical(near_miss_forms(con, "abcdefg")$tvar, c("abcdefh", "abcdefi"))
+})
+
+
+test_that("slovník odhadu vyřadí token s číslicí a nulový podíl zůstane definovaný", {
+  estimate <- typo_estimate(spelling_con(c("abcde", "abcd1"), c(1000, 5)))
+  expect_equal(estimate$slovnik, 1)
+  expect_equal(estimate$vyskyty, 1000)
+  table <- typo_table(estimate)
+  expect_identical(table$podil_slovniku, "0,0")
+  expect_identical(table$podil_vyskytu, "0,0")
+})
+
+test_that("společné okolí nepostačí ke kandidátu ve vzdálenosti dvě", {
+  estimate <- typo_estimate(spelling_con(c("abcde", "abdxe"), c(1000, 1)))
+  expect_equal(estimate$kandidati, 0)
+})
+
+
+test_that("neprázdné tabulky překlepů projdou exportem včetně podtržítka v tvaru", {
+  summary <- data.frame(variant = "synthetic_variant", label_cs = "Diabetes", vyskyty = 7, podil = 0.6)
+  forms <- data.frame(tvar = "synthetic_form", cil = "syntheticform", df = 10, cil_df = 1000)
+  estimate <- typo_estimate(manual_spelling_con())
+  dir <- withr::local_tempdir()
+  for (spec in list(
+    list("tbl-varianty", variant_table(summary)),
+    list("tbl-blizke-tvary", near_miss_table(forms)),
+    list("tbl-preklepy", typo_table(estimate))
+  )) {
+    layout <- SPELLING_LAYOUTS[[spec[[1]]]]
+    export_table(
+      spec[[2]], col.names = layout$col.names, align = layout$align,
+      widths = layout$widths, label = spec[[1]], dir = dir,
+      code = intersect(c("varianta", "tvar", "cil"), names(spec[[2]]))
+    )
+  }
+  expect_true(all(file.exists(file.path(dir, paste0(names(SPELLING_LAYOUTS), ".tex")))))
+})

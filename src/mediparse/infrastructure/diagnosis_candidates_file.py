@@ -1,10 +1,10 @@
-"""Načtení předpon kódů ICD a zkratek diagnóz pětice z configu kandidátů, který sdílí EDA a kohorta."""
+"""Načtení kódů ICD, zkratek a variant názvů pětice ze sdíleného configu kandidátů."""
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Annotated, Any
 
-from pydantic import BaseModel, ConfigDict, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 
 from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
@@ -109,6 +109,63 @@ def _parse_normalization(text: str) -> TextNormalization:
 def _vocabulary(text: str) -> _Vocabulary:
     candidates = _Candidates.model_validate_json(text).candidates
     return _Vocabulary(names=_selected(candidates, _Names))
+
+
+class _VariantNames(BaseModel):
+    model_config = ConfigDict(frozen=True, strict=True, extra="ignore")
+
+    acronyms_en: list[str]
+    variants_en: Annotated[
+        list[Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]],
+        Field(min_length=1),
+    ]
+
+
+class _Variants(BaseModel):
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+
+    names: PerDiagnosis[_VariantNames]
+
+    @model_validator(mode="after")
+    def _unique_variants(self) -> _Variants:
+        acronyms = {
+            acronym.lower()
+            for names in self.names.values()
+            for acronym in names.acronyms_en
+        }
+        seen: set[str] = set()
+        for names in self.names.values():
+            for variant in names.variants_en:
+                key = variant.lower()
+                if key in seen:
+                    msg = f"Duplicitní varianta: {variant}."
+                    raise ValueError(msg)
+                if key in acronyms:
+                    msg = f"Varianta {variant} je zároveň zkratkou diagnózy pětice."
+                    raise ValueError(msg)
+                seen.add(key)
+        return self
+
+
+def load_diagnosis_variants(path: Path) -> dict[str, Diagnosis]:
+    """Přečte varianty pětice, ostatní kandidáty a pole sdíleného configu ignoruje.
+
+    Returns:
+        Seřazený slovník varianta → diagnóza bez duplicit a kolizí se zkratkami.
+    """
+    return parse_file(path, _parse_variants)
+
+
+def _parse_variants(text: str) -> dict[str, Diagnosis]:
+    candidates = _Candidates.model_validate_json(text).candidates
+    parsed = _Variants(names=_selected(candidates, _VariantNames))
+    return dict(
+        sorted(
+            (variant, diagnosis)
+            for diagnosis, names in parsed.names.items()
+            for variant in names.variants_en
+        )
+    )
 
 
 def _selected[T: BaseModel](

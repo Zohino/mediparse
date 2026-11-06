@@ -248,6 +248,11 @@ def test_render_script_prepares_cache_for_its_consumer(
         assert line.startswith(f"{group} --parquet {tmp_path / 'tables'} ")
         assert line.count("\n") == 1
         assert f"--out {tmp_path / 'cache'}" in line
+        if number == "9":
+            assert (
+                f"--candidates {tmp_path / 'config/diagnosis_candidates.json'}" in line
+            )
+            assert "--variants" not in line
         if number == "4":
             assert f"--translation {tmp_path / 'translation'}" in line
             assert f"--english {tmp_path / 'resources/synthetic/en'}" in line

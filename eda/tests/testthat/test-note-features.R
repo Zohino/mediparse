@@ -8,7 +8,8 @@ test_that("fixtury Pythonu splňují nezávislé kontrakty EDA včetně seznamů
   for (item in list(
     list("note_sections.parquet", SECTION_COLUMNS),
     list("note_preprocessing.parquet", PREPROCESSING_COLUMNS),
-    list("note_acronyms.parquet", ACRONYM_COLUMNS)
+    list("note_acronyms.parquet", ACRONYM_COLUMNS),
+    list("note_variants.parquet", VARIANT_COLUMNS)
   )) {
     expect_type(feature_source(con, item[[1]], item[[2]]), "character")
   }
@@ -70,11 +71,33 @@ test_that("čtení cache odmítne hotový parquet bez publikačního markeru", {
 test_that("fixtura cache obsahuje jen zprávy discharge a pro prázdnou tabulku je prázdná", {
   con <- mimic_con()
   directory <- use_feature_fixtures(con)
-  for (file in c("note_sections.parquet", "note_preprocessing.parquet", "note_acronyms.parquet")) {
+  for (file in c("note_sections.parquet", "note_preprocessing.parquet", "note_acronyms.parquet", "note_variants.parquet")) {
     count <- DBI::dbGetQuery(con, sprintf(
       "SELECT count(*) AS n FROM read_parquet(%s)", DBI::dbQuoteString(con, file.path(directory, file))
     ))$n
     expect_equal(count, 0)
   }
   expect_identical(corpus_acronyms(con), character())
+})
+
+
+test_that("varianty odmítnou chybějící sloupec, jiný typ a NULL", {
+  con <- mimic_con()
+  directory <- withr::local_tempdir()
+  withr::local_envvar(MEDIPARSE_EDA_CACHE = directory)
+  path <- file.path(directory, "note_variants.parquet")
+  fixture <- file.path(CONTRACT_FIXTURES, "note_variants.parquet")
+  writeLines("{}", file.path(directory, "cache.json"))
+  for (columns in c(
+    "note_id, variant, occurrences",
+    "note_id, variant, diagnosis, occurrences::BIGINT AS occurrences",
+    "note_id, variant, NULL::VARCHAR AS diagnosis, occurrences"
+  )) {
+    if (file.exists(path)) unlink(path)
+    DBI::dbExecute(con, sprintf(
+      "COPY (SELECT %s FROM read_parquet(%s)) TO %s (FORMAT parquet)",
+      columns, DBI::dbQuoteString(con, fixture), DBI::dbQuoteString(con, path)
+    ))
+    expect_error(note_variants(con), "sloupec (diagnosis|occurrences)")
+  }
 })

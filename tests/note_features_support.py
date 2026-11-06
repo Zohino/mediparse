@@ -6,16 +6,26 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 from mediparse.application.note_features import ComputeNoteFeatures
-from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
+from mediparse.infrastructure.diagnosis_candidates_file import (
+    load_diagnosis_variants,
+    load_text_normalization,
+)
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
-from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES, REPOSITORY_SECTION_HEADERS
+from tests.support import (
+    REPOSITORY_DIAGNOSIS_CANDIDATES,
+    REPOSITORY_SECTION_HEADERS,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Sequence
 
     from mediparse.application.note_features import NoteFeatureSink
-    from mediparse.domain.note_features import AcronymCount, NotePreprocessing
+    from mediparse.domain.note_features import (
+        AcronymCount,
+        NotePreprocessing,
+        VariantCount,
+    )
     from mediparse.domain.note_sections import SectionSpan
 
 CONTRACT_NOTES = (
@@ -47,17 +57,20 @@ class MemoryFeatures:
     sections: list[SectionSpan] = field(default_factory=list)
     preprocessing: list[NotePreprocessing] = field(default_factory=list)
     acronyms: list[AcronymCount] = field(default_factory=list)
+    variants: list[VariantCount] = field(default_factory=list)
 
     def write(
         self,
         sections: Sequence[SectionSpan],
         preprocessing: Sequence[NotePreprocessing],
         acronyms: Sequence[AcronymCount],
+        variants: Sequence[VariantCount],
     ) -> None:
         """Připojí další dávku."""
         self.sections.extend(sections)
         self.preprocessing.extend(preprocessing)
         self.acronyms.extend(acronyms)
+        self.variants.extend(variants)
 
 
 def compute(rows: Sequence[tuple[str, str]], sink: NoteFeatureSink) -> int:
@@ -72,4 +85,8 @@ def compute(rows: Sequence[tuple[str, str]], sink: NoteFeatureSink) -> int:
         sink,
         tfidf_vectorizer(None).build_analyzer(),
         tfidf_vectorizer(normalization).build_analyzer(),
-    ).run(load_section_lexicon(REPOSITORY_SECTION_HEADERS), normalization)
+    ).run(
+        load_section_lexicon(REPOSITORY_SECTION_HEADERS),
+        normalization,
+        load_diagnosis_variants(REPOSITORY_DIAGNOSIS_CANDIDATES),
+    )
