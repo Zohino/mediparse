@@ -429,7 +429,9 @@ def test_manifest_records_normalization_with_acronyms(tmp_path: Path) -> None:
         recorded.append(_manifest(outputs).normalize_clinical_text)
 
     assert recorded[0] is None
-    assert recorded[1] == load_text_normalization(REPOSITORY_DIAGNOSIS_CANDIDATES)
+    assert recorded[1] == load_text_normalization(
+        REPOSITORY_DIAGNOSIS_CANDIDATES, variants=False
+    )
 
 
 def test_normalization_without_candidates_file_is_refused(

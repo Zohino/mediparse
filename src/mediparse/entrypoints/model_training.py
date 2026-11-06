@@ -104,7 +104,7 @@ def run(
     source = revision()
     table, strip = training_input(cohort=cohort, training=training, lexicon=lexicon)
     normalization = (
-        load_text_normalization(candidates)
+        load_text_normalization(candidates, variants=False)
         if training.normalize_clinical_text
         else None
     )

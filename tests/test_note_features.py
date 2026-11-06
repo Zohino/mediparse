@@ -26,7 +26,7 @@ def diagnosis_acronyms(candidates: Path) -> list[str]:
     Returns:
         Zkratky konfigurace.
     """
-    return sorted(load_text_normalization(candidates).acronyms)
+    return sorted(load_text_normalization(candidates, variants=False).acronyms)
 
 
 def note_preprocessing(
@@ -106,7 +106,9 @@ def test_different_lengths_raise_value_error() -> None:
 
 def test_every_acronym_expands_in_the_model_analyzer() -> None:
     """Počet zkratek v mostu odpovídá rozvinutí v modelu: kanonický tvar je v tokenech."""
-    normalization = load_text_normalization(REPOSITORY_DIAGNOSIS_CANDIDATES)
+    normalization = load_text_normalization(
+        REPOSITORY_DIAGNOSIS_CANDIDATES, variants=False
+    )
     analyzer = tfidf_vectorizer(normalization).build_analyzer()
 
     for acronym, form in normalization.acronyms.items():
@@ -119,7 +121,9 @@ def test_every_acronym_expands_in_the_model_analyzer() -> None:
 
 def test_acronym_order_with_marker_matches_model_expansion() -> None:
     """Zkratka přilepená ke značce se počítá dvakrát a model ji dvakrát rozvine."""
-    normalization = load_text_normalization(REPOSITORY_DIAGNOSIS_CANDIDATES)
+    normalization = load_text_normalization(
+        REPOSITORY_DIAGNOSIS_CANDIDATES, variants=False
+    )
     analyzer = tfidf_vectorizer(normalization).build_analyzer()
 
     for acronym, form in normalization.acronyms.items():
