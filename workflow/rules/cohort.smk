@@ -11,5 +11,7 @@ rule build_cohort:
         manifest="results/cohort/manifest.json",
     log:
         "logs/cohort/build_cohort.log",
+    params:
+        code=code_fingerprint("workflow/scripts/build_cohort.py"),
     script:
         "../scripts/build_cohort.py"

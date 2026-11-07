@@ -6,6 +6,8 @@ rule make_splits:
         "resources/mimic/splits.parquet",
     log:
         "logs/experiment/make_splits.log",
+    params:
+        code=code_fingerprint("workflow/scripts/make_splits.py"),
     script:
         "../scripts/make_splits.py"
 
@@ -30,6 +32,8 @@ rule train_model:
     benchmark:
         # repeat() by zopakovalo celý trénink, proto měříme jediný běh.
         "results/experiment/benchmarks/train_model.tsv"
+    params:
+        code=code_fingerprint("workflow/scripts/train_model.py"),
     script:
         "../scripts/train_model.py"
 
@@ -43,6 +47,8 @@ rule evaluate_model:
         "results/experiment/metrics.parquet",
     log:
         "logs/experiment/evaluate_model.log",
+    params:
+        code=code_fingerprint("workflow/scripts/evaluate_model.py"),
     script:
         "../scripts/evaluate_model.py"
 
@@ -62,5 +68,7 @@ rule infer_model:
         "logs/experiment/infer_model.log",
     benchmark:
         "results/experiment/benchmarks/infer_model.tsv"
+    params:
+        code=code_fingerprint("workflow/scripts/infer_model.py"),
     script:
         "../scripts/infer_model.py"

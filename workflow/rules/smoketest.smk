@@ -11,6 +11,7 @@ rule synthetic_mimic:
     log:
         SMOKETEST_LOGS / "synthetic_mimic.log",
     params:
+        code=code_fingerprint("workflow/scripts/synthetic_mimic.py"),
         corpus=SYNTHETIC,
         # Manifest vytváří validate_mimic; input by do smoketestu přitáhl pravidla MIMIC.
         manifest="results/mimic/manifest.json",

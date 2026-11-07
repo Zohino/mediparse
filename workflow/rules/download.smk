@@ -57,6 +57,7 @@ rule inventory_mimic_table:
         file="|".join(map(re.escape, MIMIC_TABLES)),
     params:
         sha256=lambda wildcards: MIMIC_TABLES[wildcards.file].sha256,
+        code=code_fingerprint("workflow/scripts/inventory.sh"),
     shell:
         "workflow/scripts/inventory.sh {input:q} {params.sha256:q} {output:q}"
 
@@ -80,5 +81,7 @@ rule parquet_mimic_table:
         "logs/parquet/{table}.log",
     wildcard_constraints:
         table="|".join(map(re.escape, MIMIC_TABLE_FILES)),
+    params:
+        code=code_fingerprint("workflow/scripts/convert_mimic.py"),
     script:
         "../scripts/convert_mimic.py"

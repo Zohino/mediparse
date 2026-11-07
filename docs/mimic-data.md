@@ -66,6 +66,51 @@ při společném uživatelském přepočtu po S39c3.
 
 Před prvním reálným renderem EDA po této změně je nutné převést tabulky znovu (`snakemake parquet_mimic`), aby každý čtený parquet měl ověřitelnou vazbu původu.
 
+## Přepočet po změně kódu
+
+Každé pravidlo s Python skriptem má v `params.code` SHA-256 kódu dosažitelného
+importy tohoto skriptu uvnitř balíčku `mediparse`, včetně transitivních importů
+a importů pod `TYPE_CHECKING`. Otisk zahrnuje také samotný skript a všechna
+ne-Python data balíčku mimo `__pycache__` (například SQL kohorty a pravidla přístupu
+k datům). Pokud má výstup v `.snakemake/metadata` daného pracovního adresáře
+použitelný záznam (formát 6 nebo novější), změna otisku naplánuje přepočet
+pravidla a navazujících výstupů.
+Změna nesouvisejícího Python modulu jej nespustí. Python se otiskuje přes AST:
+komentáře, prázdné řádky a formátování otisk nemění, změna kódu nebo docstringu ano.
+Data balíčku se otiskují po bajtech.
+
+`inventory_mimic_table` má v `params.code` otisk bajtů `inventory.sh`, takže změna
+validace obnoví inventáře. `download.sh` se nesleduje: změna stahovacího skriptu
+nemá znovu stahovat již ověřené a chráněné soubory. Otisk nepokrývá verze knihoven
+z `pixi.lock`; po jejich změně je třeba dotčená pravidla vynutit přes `--forcerun`.
+Nepokrývá ani dynamické importy přes `importlib` (dnes jen `translation_script.py`,
+mimo pipeline). Smoketest v kontejneru nadále používá `--forceall`, protože
+metadata `.snakemake/` mezi běhy kontejneru nepřetrvávají.
+
+Bez použitelných metadat Snakemake změnu `params.code` nerozpozná. To platí
+pro nový klon nebo worktree, po smazání `.snakemake/`, pro výstupy přenesené
+například na MetaCentrum i pro výstupy vytvořené mimo Snakemake. V takovém případě
+se přepočet dotčeného pravidla vynutí přes `--forcerun <pravidlo>`.
+
+Při vědomém převzetí existujících výstupů lze pro daný běh použít
+`--rerun-triggers mtime input code`: vypustí spouštěč `params`, tedy i sledování
+ostatních parametrů pravidel. Volba `--touch` místo výpočtu označí existující
+výstupy naplánovaných pravidel jako aktuální a uloží metadata, jako by pravidla
+proběhla; chybějící výstup odmítne. Tím se ztrácí informace o skutečném původu
+výsledku, proto ji použij jen při vědomém rozhodnutí přepočet přeskočit.
+
+První běh po merge S39c3 naplánuje přepočet všech pravidel s novým `params.code`
+jen u výstupů s použitelným záznamem metadat. Před jednorázovým přepočtem uživatel
+spustí `pixi run --frozen snakemake -n parquet_mimic build_cohort` a zkontroluje,
+že `reason` uvádí „Params have changed“. Jinak přepočet vynutí:
+
+```bash
+pixi run --frozen snakemake parquet_mimic build_cohort --forcerun inventory_mimic_table parquet_mimic_table build_cohort
+```
+
+Uživatel tak jednou skutečně přepočítá validaci, parquety a kohortu a poté
+znovu vyrenderuje EDA, aby výstupy zahrnovaly změny S39c1 a S39c2.
+
 ## Tabulky
 
 Stav podle manifestu. Velikost je velikost staženého souboru, u `.csv.gz` komprimovaná, u BHC nekomprimovaná.
