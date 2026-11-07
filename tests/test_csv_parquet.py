@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING
 
 import duckdb
 import pyarrow as pa
+import pyarrow.csv as pacsv
 import pyarrow.parquet as pq
 import pytest
 
@@ -48,6 +49,24 @@ def test_empty_value_is_null(tmp_path: Path) -> None:
     _convert(tmp_path, HEADER + ROWS)
     table = pq.read_table(tmp_path / "out" / "table.parquet")
     assert table.column("hadm_id").to_pylist() == ["10", None]
+
+
+def test_nonempty_default_null_values_survive(tmp_path: Path) -> None:
+    """Neprázdné značky NULL knihovny zůstanou řetězci, prázdná pole jsou NULL."""
+    values = sorted(
+        {*pacsv.ConvertOptions().null_values, "NA", "NULL", "nan", "N/A", "n/a"} - {""}
+    )
+    header = ",".join([*values, "empty", "quoted_empty"]) + "\n"
+    row = ",".join(values) + ',,""\n'
+
+    _convert(tmp_path, header + row)
+
+    table = pq.read_table(tmp_path / "out" / "table.parquet")
+    expected = {value: [value] for value in values} | {
+        "empty": [None],
+        "quoted_empty": [None],
+    }
+    assert table.to_pydict() == expected
 
 
 def test_codes_stay_strings_with_leading_zero(tmp_path: Path) -> None:
