@@ -210,6 +210,85 @@ def test_rule_import_check_finds_violations(tmp_path: Path) -> None:
     ]
 
 
+def _rule_code_violations(rule: Path) -> list[str]:
+    """Najde pravidla, jejichž params.code neotiskuje vlastní script.
+
+    Returns:
+        Jména porušujících pravidel; use rule bez script dědí otisk rodiče.
+    """
+    source = rule.read_text(encoding="utf-8")
+    blocks = re.findall(
+        r"^rule (\w+):\n((?:[ \t]+[^\n]*(?:\n|$)|\n)*)", source, re.MULTILINE
+    )
+    violations = []
+    for name, body in blocks:
+        script = re.search(r"^    script:\s*[\"']([^\"']+)[\"']", body, re.MULTILINE)
+        if script is None:
+            continue
+        expected = (rule.parent / script[1]).resolve()
+        params = re.search(
+            r"^    params:[ \t]*\n((?:        [^\n]*(?:\n|$)|\n)*)",
+            body,
+            re.MULTILINE,
+        )
+        code = re.search(
+            r"^        code\s*=\s*code_fingerprint\([\"']([^\"']+)[\"']\)",
+            params[1] if params else "",
+            re.MULTILINE,
+        )
+        if code is None or (REPOSITORY / code[1]).resolve() != expected:
+            violations.append(f"{rule.name}: {name}")
+    return violations
+
+
+def test_workflow_scripts_have_matching_code_fingerprint() -> None:
+    """Každé pravidlo se script má v params otisk právě tohoto skriptu."""
+    assert [
+        violation
+        for rule in _workflow_rules()
+        for violation in _rule_code_violations(rule)
+    ] == []
+
+
+def test_rule_code_check_finds_missing_and_mismatched_fingerprints(
+    tmp_path: Path,
+) -> None:
+    """Chybějící, cizí i zakomentovaný otisk jsou porušení; shoda a dědění projdou."""
+    rule = tmp_path / "bad.smk"
+    script = tmp_path / "run.py"
+    rule.write_text(
+        "rule missing:\n"
+        "    script:\n"
+        '        "run.py"\n'
+        "rule mismatched:\n"
+        "    params:\n"
+        '        code=code_fingerprint("other.py"),\n'
+        "    script:\n"
+        '        "run.py"\n'
+        "rule commented:\n"
+        "    params:\n"
+        f'        # code=code_fingerprint("{script}"),\n'
+        "        other=1,\n"
+        "    script:\n"
+        '        "run.py"\n'
+        "rule matching:\n"
+        "    params:\n"
+        f'        code=code_fingerprint("{script}"),\n'
+        "    script:\n"
+        '        "run.py"\n'
+        "use rule matching as inherited with:\n"
+        "    output:\n"
+        '        "out.txt",\n',
+        encoding="utf-8",
+    )
+
+    assert _rule_code_violations(rule) == [
+        "bad.smk: missing",
+        "bad.smk: mismatched",
+        "bad.smk: commented",
+    ]
+
+
 def test_import_linter_sees_workflow_scripts() -> None:
     """Skripty workflow musí import-linter vidět jako root package."""
     root_packages = _pyproject()["tool"]["importlinter"]["root_packages"]
