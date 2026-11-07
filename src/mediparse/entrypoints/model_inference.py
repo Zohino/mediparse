@@ -10,7 +10,7 @@ import logging
 from typing import TYPE_CHECKING, Final
 
 from mediparse.application.model_inference import ModelInference
-from mediparse.domain.costs import InferenceCosts, LatencyPlan
+from mediparse.domain.costs import GpuMeasurement, InferenceCosts, LatencyPlan
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.training_input import training_input
@@ -92,7 +92,8 @@ def run(
             plan=LATENCY_PLAN,
             latency=inferred.latency,
             batch=inferred.batch,
-            hardware=machine_hardware(),
+            hardware=machine_hardware(gpus=()),
+            gpu=GpuMeasurement(seconds=0.0, devices=()),
         ),
     )
     logger.info(

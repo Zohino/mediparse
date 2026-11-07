@@ -8,7 +8,12 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.clinical_text import TextNormalization
-from mediparse.domain.environment import Environment, SourceRevision
+from mediparse.domain.environment import (
+    Environment,
+    GpuDevice,
+    Hardware,
+    SourceRevision,
+)
 from mediparse.domain.run_manifest import DiagnosticStrip, RunManifest
 
 COMMIT: Final = "a" * 40
@@ -18,6 +23,7 @@ HARDWARE: Final = {
     "logical_cores": 8,
     "available_cores": 2,
     "memory_bytes": 1024,
+    "gpus": (),
 }
 
 
@@ -63,11 +69,11 @@ def test_manifest_requires_hardware() -> None:
 
 
 def test_manifest_records_hardware() -> None:
-    """Manifest zachová všechny čtyři údaje o stroji."""
+    """Manifest zachová údaje CPU, paměti a GPU o stroji."""
     fields = _fields()
     dumped = RunManifest.model_validate(fields).model_dump(mode="json")
 
-    assert dumped["hardware"] == fields["hardware"]
+    assert dumped["hardware"] == HARDWARE | {"gpus": []}
 
 
 @pytest.mark.parametrize(
@@ -228,3 +234,18 @@ def test_normalization_as_string_is_rejected() -> None:
     for value in ("true", True, False):
         with pytest.raises(ValidationError, match="normalize_clinical_text"):
             RunManifest.model_validate(_fields(normalize_clinical_text=value))
+
+
+def test_hardware_requires_gpu_devices() -> None:
+    """Chybějící pole GPU není totéž co seznam bez zařízení."""
+    with pytest.raises(ValidationError, match="gpus"):
+        Hardware.model_validate({
+            key: value for key, value in HARDWARE.items() if key != "gpus"
+        })
+
+
+@pytest.mark.parametrize(("name", "memory"), [("", 1000), ("Fake GPU", 0)])
+def test_gpu_device_requires_name_and_capacity(name: str, memory: int) -> None:
+    """Prázdné jméno a nulová kapacita nemohou popsat GPU."""
+    with pytest.raises(ValidationError):
+        GpuDevice(name=name, memory_total_bytes=memory)

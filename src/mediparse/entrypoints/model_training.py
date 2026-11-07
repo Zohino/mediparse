@@ -104,7 +104,7 @@ def run(
     """
     training = load_training_config(config)
     source = revision()
-    hardware = machine_hardware()
+    hardware = machine_hardware(gpus=())
     table, strip = training_input(cohort=cohort, training=training, lexicon=lexicon)
     normalization = (
         load_text_normalization(

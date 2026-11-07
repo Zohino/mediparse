@@ -44,7 +44,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable
     from pathlib import Path
 
-    from mediparse.domain.environment import Hardware, SourceRevision
+    from mediparse.domain.environment import GpuDevice, Hardware, SourceRevision
     from mediparse.domain.input_note import InputNote
 
 PATIENTS: Final = 12
@@ -160,7 +160,7 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
     assert written.split_sha256 == ParquetSplitTable(split).read().split.sha256()
     assert written.row_id == "row"
     assert written.environment.source == REVISION
-    assert written.hardware == machine_hardware()
+    assert written.hardware == machine_hardware(gpus=())
     assert written.model_revision is None
     assert written.tokenizer_revision is None
     assert written.model == ESTIMATOR
@@ -303,7 +303,8 @@ def test_unknown_hardware_is_refused_before_training(
     outputs = _Outputs.under(tmp_path / "out")
     message = "Hardware stroje nelze zjistit ze systémových údajů."
 
-    def unavailable_hardware() -> Hardware:
+    def unavailable_hardware(gpus: tuple[GpuDevice, ...]) -> Hardware:
+        assert gpus == ()
         raise InvalidInputError(message)
 
     def unexpected_fit(*_args: object) -> None:

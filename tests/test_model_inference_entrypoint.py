@@ -258,4 +258,4 @@ def test_writes_aggregate_costs_with_measurement_plan(tmp_path: Path) -> None:
     )
     assert written.latency.samples == min(100, count)
     assert written.batch.notes == count
-    assert written.hardware == machine_hardware()
+    assert written.hardware == machine_hardware(gpus=())
