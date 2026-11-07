@@ -8,7 +8,9 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.entrypoints.workflow_code import code_fingerprint as workflow_fingerprint
 from mediparse.infrastructure.code_fingerprint import code_fingerprint
+from tests.support import REPOSITORY
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -93,6 +95,25 @@ def test_missing_package_import_is_rejected(package: Path) -> None:
 
     with pytest.raises(InvalidInputError, match=r"pkg\.missing"):
         code_fingerprint(script, package)
+
+
+def test_script_without_package_import_is_rejected(package: Path) -> None:
+    """Chybný kořen balíčku nesmí vytvořit tichý otisk bez modulů balíčku."""
+    script = package.parent / "run.py"
+    script.write_text("import sys\n", encoding="utf-8")
+
+    with pytest.raises(InvalidInputError, match="pkg"):
+        code_fingerprint(script, package)
+
+
+@pytest.mark.parametrize(
+    "script",
+    sorted((REPOSITORY / "workflow" / "scripts").glob("*.py")),
+    ids=lambda p: p.name,
+)
+def test_workflow_entrypoint_fingerprints_each_python_script(script: Path) -> None:
+    """Entrypoint doplní správný kořen instalovaného balíčku pro každý skript."""
+    assert re.fullmatch(r"[0-9a-f]{64}", workflow_fingerprint(str(script)))
 
 
 def test_shell_script_byte_change_changes_fingerprint(package: Path) -> None:

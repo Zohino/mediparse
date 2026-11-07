@@ -22,7 +22,8 @@ def code_fingerprint(script: Path, package: Path) -> str:
         Hexadecimální SHA-256 seřazených řádků druhu, jména a otisku.
 
     Raises:
-        InvalidInputError: Skript nebo modul chybí, zdroj nelze přečíst či parsovat.
+        InvalidInputError: Skript nebo modul chybí, zdroj nelze přečíst či parsovat
+            nebo skript neimportuje žádný modul požadovaného balíčku.
     """
     try:
         rows = _fingerprint_rows(script, package)
@@ -47,12 +48,20 @@ def _fingerprint_rows(script: Path, package: Path) -> list[str]:
         msg = f"Nelze otisknout {script}: chybí moduly {', '.join(missing)}"
         raise InvalidInputError(msg)
 
+    modules = {
+        name: module
+        for name, module in finder.modules.items()
+        if _in_package(name, package.name)
+    }
+    if not modules:
+        msg = f"Nelze otisknout {script}: žádný import z balíčku {package}"
+        raise InvalidInputError(msg)
+
     rows = [f"python script {_python_sha256(script)}"]
     # Typeshed u Module neuvádí __file__, který ModuleFinder nastavuje při načtení.
     rows.extend(
         f"python {name} {_python_sha256(Path(vars(module)['__file__']))}"
-        for name, module in finder.modules.items()
-        if _in_package(name, package.name)
+        for name, module in modules.items()
     )
     rows.extend(
         f"data {path.relative_to(package).as_posix()} {file_sha256(path)}"
