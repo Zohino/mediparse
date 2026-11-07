@@ -12,6 +12,7 @@ import pytest
 from mediparse.domain.costs import InferenceCosts, LatencyPlan
 from mediparse.entrypoints import model_inference, model_training
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.machine_hardware import machine_hardware
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from tests.model_support import (
@@ -315,4 +316,4 @@ def test_writes_aggregate_costs_with_measurement_plan(tmp_path: Path) -> None:
     )
     assert written.latency.samples == min(100, count)
     assert written.batch.notes == count
-    assert written.hardware.cpu_model
+    assert written.hardware == machine_hardware()

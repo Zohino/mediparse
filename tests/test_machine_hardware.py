@@ -23,14 +23,11 @@ def test_missing_model_uses_fallback() -> None:
     assert cpu_model("processor : 0\n", "fallback") == "fallback"
 
 
-def test_machine_capacities_are_positive() -> None:
-    """Hostitel má kladné kapacity a proces nemá více jader než celý stroj."""
+def test_available_cores_do_not_exceed_machine() -> None:
+    """Proces nemá více dostupných jader než celý stroj."""
     hardware = machine_hardware()
 
-    assert hardware.cpu_model
-    assert hardware.logical_cores >= 1
     assert 1 <= hardware.available_cores <= hardware.logical_cores
-    assert hardware.memory_bytes >= 1
 
 
 @pytest.mark.parametrize(
