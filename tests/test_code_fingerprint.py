@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import TYPE_CHECKING
 
 import pytest
@@ -11,8 +12,6 @@ from mediparse.infrastructure.code_fingerprint import code_fingerprint
 
 if TYPE_CHECKING:
     from pathlib import Path
-
-SHA256_HEX_LENGTH = 64
 
 
 @pytest.fixture
@@ -26,7 +25,7 @@ def package(tmp_path: Path) -> Path:
     root.mkdir()
     for name, source in {
         "__init__.py": "",
-        "a.py": "from pkg.b import f\nx = f()\n",
+        "a.py": "import json\nimport sys\nfrom pkg.b import f\nx = f()\n",
         "b.py": "def f():\n    return 1\n",
         "c.py": "x = 1\n",
         "data.sql": "SELECT 1;\n",
@@ -74,6 +73,19 @@ def test_package_data_change_changes_fingerprint(package: Path) -> None:
     assert code_fingerprint(script, package) != before
 
 
+def test_bytecode_cache_does_not_change_fingerprint(package: Path) -> None:
+    """Změna bajtů v __pycache__ nepatří ke změnám zdrojů ani dat balíčku."""
+    script = package.parent / "run.py"
+    cache = package / "__pycache__"
+    cache.mkdir()
+    bytecode = cache / "b.cpython-313.pyc"
+    bytecode.write_bytes(b"old bytecode")
+    before = code_fingerprint(script, package)
+    bytecode.write_bytes(b"new bytecode")
+
+    assert code_fingerprint(script, package) == before
+
+
 def test_missing_package_import_is_rejected(package: Path) -> None:
     """Chybějící modul balíčku nesmí vytvořit neúplný otisk."""
     script = package.parent / "run.py"
@@ -99,8 +111,7 @@ def test_fingerprint_is_deterministic_sha256(package: Path) -> None:
     before = code_fingerprint(script, package)
 
     assert code_fingerprint(script, package) == before
-    assert len(before) == SHA256_HEX_LENGTH
-    assert int(before, 16) >= 0
+    assert re.fullmatch(r"[0-9a-f]{64}", before)
 
 
 @pytest.mark.parametrize("name", ["missing.py", "missing.sh"])
