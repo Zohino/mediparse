@@ -53,7 +53,9 @@ def test_empty_value_is_null(tmp_path: Path) -> None:
 
 def test_nonempty_default_null_values_survive(tmp_path: Path) -> None:
     """Neprázdné značky NULL knihovny zůstanou řetězci, prázdná pole jsou NULL."""
-    values = [value for value in pacsv.ConvertOptions().null_values if value]
+    values = sorted(
+        {*pacsv.ConvertOptions().null_values, "NA", "NULL", "nan", "N/A", "n/a"} - {""}
+    )
     header = ",".join([*values, "empty", "quoted_empty"]) + "\n"
     row = ",".join(values) + ',,""\n'
 
