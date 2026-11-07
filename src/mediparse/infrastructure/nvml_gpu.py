@@ -35,7 +35,7 @@ def visible_indices(
 
     Args:
         cuda_visible_devices: Výběr zařízení CUDA nebo None pro všechna zařízení.
-        cuda_device_order: Pořadí zařízení CUDA; číselný výběr více karet vyžaduje PCI_BUS_ID.
+        cuda_device_order: Pořadí CUDA; na stroji s více kartami číselný výběr vyžaduje PCI_BUS_ID.
         uuids: UUID zařízení v pořadí výčtu NVML.
         pci_bus_ids: PCI adresy stejných zařízení ve stejném pořadí NVML.
 
@@ -49,6 +49,9 @@ def visible_indices(
         return tuple(range(len(uuids)))
     if cuda_visible_devices.strip() in {"", "-1"}:
         return ()
+    # Výčet NVML není stabilní mezi restarty a jeho index nemusí odpovídat CUDA.
+    # Číselné pořadí proto odvozujeme z PCI adres; NVML API, nvmlDeviceGetIndex:
+    # https://docs.nvidia.com/deploy/nvml-api/latest/api/group__nvmlDeviceQueries.html
     pci_order = sorted(range(len(uuids)), key=lambda index: pci_bus_ids[index].lower())
     indices: list[int] = []
     # NVML ignoruje CUDA_VISIBLE_DEVICES, proto viditelnost mapujeme sami.
