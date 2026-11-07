@@ -44,6 +44,8 @@ def visible_indices(
         return ()
     indices: list[int] = []
     # NVML ignoruje CUDA_VISIBLE_DEVICES, proto viditelnost mapujeme sami.
+    # CUDA přijímá prefix UUID a při neplatné položce seznam zkrátí; přesná UUID
+    # a odmítnutí celého seznamu brání tomu, aby překlep tiše zúžil měření.
     for item in cuda_visible_devices.split(","):
         token = item.strip()
         if token.isascii() and token.isdecimal():
