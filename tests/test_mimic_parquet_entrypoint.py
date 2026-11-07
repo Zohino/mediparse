@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import gzip
+import hashlib
 import json
 from typing import TYPE_CHECKING
 
@@ -22,6 +23,7 @@ def _files(root: Path, records: int) -> tuple[Path, Path]:
     inventory.write_text(
         json.dumps({
             "file": table.name,
+            "sha256": hashlib.sha256(table.read_bytes()).hexdigest(),
             "bytes": table.stat().st_size,
             "records": records,
             "columns": ["a", "b"],

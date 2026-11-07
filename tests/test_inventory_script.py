@@ -7,6 +7,7 @@ přípona, záznamy se počítají paritou uvozovek, ne fyzickými řádky.
 from __future__ import annotations
 
 import gzip
+import hashlib
 import json
 import subprocess
 from pathlib import Path
@@ -28,10 +29,20 @@ def _write(directory: Path, name: str, text: str) -> Path:
     return path
 
 
-def _inventory(table: Path) -> tuple[subprocess.CompletedProcess[str], Path]:
+def _inventory(
+    table: Path, sha256: str | None = None
+) -> tuple[subprocess.CompletedProcess[str], Path]:
     output = table.with_name(table.name + ".json")
     result = subprocess.run(
-        ["bash", str(SCRIPT), str(table), str(output)],
+        [
+            "bash",
+            str(SCRIPT),
+            str(table),
+            sha256
+            if sha256 is not None
+            else hashlib.sha256(table.read_bytes()).hexdigest(),
+            str(output),
+        ],
         check=False,
         capture_output=True,
         text=True,
@@ -61,7 +72,21 @@ def test_inventory_counts_records_by_quote_parity(tmp_path: Path, name: str) -> 
         "bytes": table.stat().st_size,
         "records": 2,
         "columns": ["note_id", "text"],
+        "sha256": hashlib.sha256(table.read_bytes()).hexdigest(),
     }
+
+
+def test_changed_digest_is_refused(tmp_path: Path) -> None:
+    """Otisk lišící se v posledním znaku odmítne CSV bez vytvoření inventáře."""
+    table = _write(tmp_path, "discharge.csv.gz", TRICKY)
+    expected = hashlib.sha256(table.read_bytes()).hexdigest()
+    changed = expected[:-1] + ("0" if expected[-1] != "0" else "1")
+
+    result, output = _inventory(table, changed)
+
+    assert result.returncode != 0
+    assert f"{table}: otisk SHA-256 nesouhlasí s configem" in result.stderr
+    assert not output.exists()
 
 
 @pytest.mark.parametrize("name", ["discharge.csv", "discharge.csv.gz"])

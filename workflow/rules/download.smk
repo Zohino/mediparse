@@ -55,8 +55,10 @@ rule inventory_mimic_table:
         "resources/mimic/inventory/{file}.json",
     wildcard_constraints:
         file="|".join(map(re.escape, MIMIC_TABLES)),
+    params:
+        sha256=lambda wildcards: MIMIC_TABLES[wildcards.file].sha256,
     shell:
-        "workflow/scripts/inventory.sh {input:q} {output:q}"
+        "workflow/scripts/inventory.sh {input:q} {params.sha256:q} {output:q}"
 
 
 rule parquet_mimic:

@@ -6,10 +6,15 @@ fail() {
     exit 1
 }
 
-(($# == 2)) || fail "použití: $0 TABULKA VÝSTUP"
+(($# == 3)) || fail "použití: $0 TABULKA OČEKÁVANÝ_SHA256 VÝSTUP"
 
 table=$1
-output=$2
+expected_sha256=$2
+output=$3
+
+digest=$(sha256sum -- "$table") || fail "$table nejde přečíst"
+sha256=${digest%% *}
+[[ $sha256 == "$expected_sha256" ]] || fail "$table: otisk SHA-256 nesouhlasí s configem"
 
 # komprimovanost určuje přípona jako v převodu na parquet: gzip, který nejde rozbalit, nesmí projít jako prosté CSV
 read_table() {
@@ -29,8 +34,9 @@ read -r header < <(read_table) || fail "$table nemá hlavičku"
 
 jq -n \
     --arg file "${table##*/}" \
+    --arg sha256 "$sha256" \
     --argjson bytes "$(stat -c %s -- "$table")" \
     --argjson records "$records" \
     --arg header "${header%$'\r'}" \
-    '{file: $file, bytes: $bytes, records: $records, columns: ($header | split(","))}' \
+    '{file: $file, sha256: $sha256, bytes: $bytes, records: $records, columns: ($header | split(","))}' \
     >"$output"

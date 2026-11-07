@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING
 
 from pydantic import BaseModel, ConfigDict
 
+from mediparse.domain.digest import Sha256
 from mediparse.domain.mimic_table import TableShape, table_name
 from mediparse.infrastructure.input_file import parse_file
 
@@ -14,8 +15,8 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 
-class _Inventory(BaseModel):
-    model_config = ConfigDict(frozen=True, extra="forbid")
+class _TableSummary(BaseModel):
+    model_config = ConfigDict(frozen=True, extra="ignore")
 
     file: str
     bytes: int
@@ -23,10 +24,17 @@ class _Inventory(BaseModel):
     columns: tuple[str, ...]
 
 
+class _Inventory(_TableSummary):
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    sha256: Sha256
+
+
 class _Manifest(BaseModel):
     model_config = ConfigDict(frozen=True)
 
-    tables: tuple[_Inventory, ...]
+    # Syntetika potřebuje jen tvar a velikost i ze starého veřejného manifestu před reálným přepočtem.
+    tables: tuple[_TableSummary, ...]
 
 
 def read_manifest(path: Path) -> dict[str, TableShape]:
@@ -57,6 +65,14 @@ class InventoryFile:
     """JSON inventář jedné tabulky, který zapisuje ``inventory.sh``."""
 
     path: Path
+
+    def sha256(self) -> Sha256:
+        """Přečte otisk CSV ověřený při sestavení inventáře.
+
+        Returns:
+            SHA-256 zdrojového souboru CSV.
+        """
+        return parse_file(self.path, _Inventory.model_validate_json).sha256
 
     def read(self) -> TableShape:
         """Přečte tvar tabulky z inventáře.
