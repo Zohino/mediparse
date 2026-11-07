@@ -7,8 +7,11 @@ from typing import TYPE_CHECKING
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import BinaryMetrics, DiagnosisMetrics
+from mediparse.domain.input_note import InputNote
+from mediparse.domain.language import Language
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.metrics_table import ParquetMetricsTable
+from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.synthetic.entrypoints import smoketest_summary
 from tests.model_support import prediction
@@ -22,16 +25,14 @@ if TYPE_CHECKING:
 def _inference(root: Path) -> Path:
     inference = root / "inference.parquet"
     ParquetPredictionTable(inference).write([
-        prediction("9002-DS-1", truth=True, score=2.0, diagnosis=Diagnosis.DIABETES),
+        prediction("9002-DS-1", score=2.0, diagnosis=Diagnosis.DIABETES),
         prediction(
             "9000-DS-1",
-            truth=True,
             score=1.23456,
             diagnosis=Diagnosis.DIABETES,
         ),
         prediction(
             "9001-DS-1",
-            truth=False,
             score=0.1,
             diagnosis=Diagnosis.DIABETES,
         ),
@@ -45,15 +46,31 @@ def _run(
     *,
     metrics: Path | None = None,
     inference: Path | None = None,
+    cohort: Path | None = None,
 ) -> ExitCode:
     return smoketest_summary.run(
         metrics=metrics or _metrics(root),
         inference=inference or _inference(root),
+        cohort=cohort or _cohort(root),
         corpus=root / "korpus",
         outputs=root / "vystupy",
         logs=root / "logy",
         out=out,
     )
+
+
+def _cohort(root: Path) -> Path:
+    cohort = root / "cohort.parquet"
+    ParquetNoteTable(cohort).write([
+        InputNote(
+            "9002-DS-1", 9002, Language.EN, "text", frozenset({Diagnosis.DIABETES})
+        ),
+        InputNote(
+            "9000-DS-1", 9000, Language.EN, "text", frozenset({Diagnosis.DIABETES})
+        ),
+        InputNote("9001-DS-1", 9001, Language.EN, "text", frozenset({Diagnosis.CKD})),
+    ])
+    return cohort
 
 
 def _metrics(root: Path) -> Path:
@@ -152,4 +169,36 @@ def test_missing_inference_is_refused(
     assert code is ExitCode.REFUSED
     assert not out.getvalue()
     assert "none.parquet" in caplog.text
+    assert "Traceback" not in caplog.text
+
+
+def test_missing_cohort_is_refused(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Chybějící kohorta krok odmítne bez výpisu a tracebacku."""
+    out = io.StringIO()
+
+    code = _run(tmp_path, out, cohort=tmp_path / "none.parquet")
+
+    assert code is ExitCode.REFUSED
+    assert not out.getvalue()
+    assert "none.parquet" in caplog.text
+    assert "Traceback" not in caplog.text
+
+
+def test_inference_note_missing_from_cohort_is_refused(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Predikce bez zprávy v kohortě se odmítne s počtem, bez identifikátorů v logu."""
+    cohort = _cohort(tmp_path)
+    table = ParquetNoteTable(cohort)
+    table.write(table.read()[1:])
+    out = io.StringIO()
+
+    code = _run(tmp_path, out, cohort=cohort)
+
+    assert code is ExitCode.REFUSED
+    assert not out.getvalue()
+    assert "Počet predikcí bez zprávy ve vstupní tabulce: 1." in caplog.text
+    assert "-DS-" not in caplog.text
     assert "Traceback" not in caplog.text

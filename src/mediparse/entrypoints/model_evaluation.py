@@ -1,8 +1,8 @@
 """Vstupní bod kroku Snakemake ``evaluate_model``: metriky z predikcí.
 
 Cesty určuje pravidlo; skript workflow jen rozbalí objekt ``snakemake`` a zavolá
-``main``. Čte i zprávy a split, aby ověřil úplnost predikcí; u reálné kohorty proto
-běží tam, kde jsou data.
+``main``. Čte i zprávy a split, aby ověřil úplnost predikcí a odvodil pravdu z labelů;
+u reálné kohorty proto běží tam, kde jsou data.
 """
 
 from __future__ import annotations

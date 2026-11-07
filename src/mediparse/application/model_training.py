@@ -24,7 +24,7 @@ if TYPE_CHECKING:
 
 
 def _labels(notes: Sequence[InputNote], diagnosis: Diagnosis) -> list[bool]:
-    return [diagnosis in note.labels for note in notes]
+    return [note.has_label(diagnosis) for note in notes]
 
 
 class ClassifierTrainer[C: TextClassifier](Protocol):
@@ -78,7 +78,6 @@ class ModelTraining[C: TextClassifier]:
             [note.text for note in holdout.train],
             _labels(holdout.train, config.diagnosis),
         )
-        truth = _labels(holdout.test, config.diagnosis)
         classifications = classifier.classify([note.text for note in holdout.test])
         predictions = [
             Prediction(
@@ -87,13 +86,10 @@ class ModelTraining[C: TextClassifier]:
                 note.note_id,
                 note.subject_id,
                 config.diagnosis,
-                truth=label,
                 predicted=classification.predicted,
                 score=classification.score,
             )
-            for note, label, classification in zip(
-                holdout.test, truth, classifications, strict=True
-            )
+            for note, classification in zip(holdout.test, classifications, strict=True)
         ]
         self.store.save(classifier)
         self.predictions.write(predictions)
@@ -101,7 +97,7 @@ class ModelTraining[C: TextClassifier]:
             diagnosis=config.diagnosis,
             train_notes=len(holdout.train),
             test_notes=len(holdout.test),
-            test_positives=sum(truth),
+            test_positives=sum(_labels(holdout.test, config.diagnosis)),
             split_config=shared.config,
             split_sha256=shared.split.sha256(),
         )

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import functools
 import re
+from math import log
 from typing import TYPE_CHECKING, Final
 
 import pytest
@@ -67,6 +68,35 @@ def test_classify_returns_label_with_signed_score() -> None:
         bool(label) for label in classifier.pipeline.predict(texts)
     )
     assert all((item.score > 0) == item.predicted for item in classifications)
+
+
+def test_smaller_regularization_parameter_reduces_score_range() -> None:
+    """Menší C zesílí regularizaci a zmenší rozpětí rozhodovacích skóre."""
+    texts, labels = _corpus()
+    score_ranges = []
+
+    for regularization in (0.001, 1000.0):
+        classifier = LinearSvmTrainer(
+            regularization=regularization, seed=0, normalization=None
+        ).fit(texts, labels)
+        scores = [item.score for item in classifier.classify(texts)]
+        score_ranges.append(max(scores) - min(scores))
+
+    assert score_ranges[0] < score_ranges[1]
+
+
+def test_sublinear_tf_weight_ratio_matches_definition() -> None:
+    """Poměr vah odpovídá ručnímu výpočtu sublineárního TF a vyhlazeného IDF."""
+    vectorizer = tfidf_vectorizer(None)
+
+    weights = vectorizer.fit_transform([
+        "alpha alpha alpha beta",
+        "beta gamma",
+    ]).toarray()
+
+    alpha = weights[0, vectorizer.vocabulary_["alpha"]]
+    beta = weights[0, vectorizer.vocabulary_["beta"]]
+    assert alpha / beta == pytest.approx((1 + log(3)) * (log(3 / 2) + 1) / 1)
 
 
 def test_model_file_round_trip(tmp_path: Path) -> None:
@@ -346,7 +376,6 @@ def test_vectorizer_with_normalization_carries_preprocessor_with_dictionary() ->
         "acronyms": dict(_NORMALIZATION.acronyms),
         "variants": dict(_NORMALIZATION.variants),
     }
-    assert vectorizer.sublinear_tf
 
 
 def test_trainer_builds_vectorizer_through_factory(

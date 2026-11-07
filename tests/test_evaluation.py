@@ -10,6 +10,7 @@ from mediparse.domain.evaluation import (
     ensure_both_classes,
     ensure_complete_folds,
     ensure_unique_keys,
+    truth_of,
 )
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
@@ -17,6 +18,33 @@ from mediparse.domain.language import Language
 from mediparse.domain.note import NoteSubjectMismatchError, note_id
 from mediparse.domain.split import Split
 from tests.model_support import prediction
+
+LABELED_NOTES = (
+    InputNote("1-DS-1", 1, Language.EN, "text", frozenset({Diagnosis.DIABETES})),
+    InputNote("2-DS-1", 2, Language.EN, "text", frozenset()),
+    InputNote("3-DS-1", 3, Language.EN, "text", frozenset({Diagnosis.CKD})),
+)
+
+
+def test_truth_of_uses_labels_in_prediction_order() -> None:
+    """Pravda závisí jen na labelech dané diagnózy a zachovává pořadí predikcí."""
+    items = [
+        prediction("2-DS-1", score=1.0),
+        prediction("1-DS-1", score=-1.0),
+        prediction("3-DS-1", score=1.0),
+        prediction("3-DS-1", score=-1.0, diagnosis=Diagnosis.CKD),
+        prediction("1-DS-1", score=1.0, diagnosis=Diagnosis.CKD),
+    ]
+
+    assert truth_of(items, LABELED_NOTES) == (False, True, False, True, False)
+
+
+def test_truth_of_missing_note_is_invalid_input_without_identifiers() -> None:
+    """Chybějící zpráva skončí doménovou chybou s počtem, bez identifikátorů."""
+    with pytest.raises(InvalidInputError) as raised:
+        truth_of([prediction("9-DS-1", score=1.0)], LABELED_NOTES)
+
+    assert str(raised.value) == "Počet predikcí bez zprávy ve vstupní tabulce: 1."
 
 
 def test_mixed_truth_passes() -> None:
@@ -34,10 +62,10 @@ def test_single_class_is_rejected(truth: list[bool]) -> None:
 def test_unique_keys_pass() -> None:
     """Jiná zpráva, diagnóza nebo řádek matice tvoří jiný klíč."""
     ensure_unique_keys([
-        prediction("1-DS-1", truth=True, score=1.0),
-        prediction("1-DS-2", truth=True, score=1.0),
-        prediction("1-DS-1", truth=True, score=1.0, diagnosis=Diagnosis.CKD),
-        prediction("1-DS-1", truth=True, score=1.0, row_id="other"),
+        prediction("1-DS-1", score=1.0),
+        prediction("1-DS-2", score=1.0),
+        prediction("1-DS-1", score=1.0, diagnosis=Diagnosis.CKD),
+        prediction("1-DS-1", score=1.0, row_id="other"),
     ])
 
 
@@ -47,8 +75,8 @@ def test_duplicate_key_is_rejected_without_note_id() -> None:
         InvalidInputError, match="řádek row, diagnóza diabetes"
     ) as raised:
         ensure_unique_keys([
-            prediction("90000001-DS-1", truth=True, score=1.0),
-            prediction("90000001-DS-1", truth=True, score=1.0),
+            prediction("90000001-DS-1", score=1.0),
+            prediction("90000001-DS-1", score=1.0),
         ])
 
     assert "90000001" not in str(raised.value)
@@ -58,17 +86,15 @@ def test_same_note_in_two_folds_is_rejected() -> None:
     """Zpráva ve dvou foldech by se ve sloučené metrice započetla dvakrát."""
     with pytest.raises(InvalidInputError, match="Opakovaná predikce"):
         ensure_unique_keys([
-            prediction("1-DS-1", truth=True, score=1.0, fold=0),
-            prediction("1-DS-1", truth=True, score=1.0, fold=1),
+            prediction("1-DS-1", score=1.0, fold=0),
+            prediction("1-DS-1", score=1.0, fold=1),
         ])
 
 
 def test_prediction_of_another_subjects_note_is_rejected() -> None:
     """Predikci s note_id jiného pacienta než subject_id nejde vytvořit."""
     with pytest.raises(NoteSubjectMismatchError):
-        Prediction(
-            "row", 0, "1-DS-1", 2, Diagnosis.CKD, truth=True, predicted=True, score=1.0
-        )
+        Prediction("row", 0, "1-DS-1", 2, Diagnosis.CKD, predicted=True, score=1.0)
 
 
 SPLIT = Split((frozenset({1, 2}), frozenset({3}), frozenset({4})))
@@ -86,9 +112,7 @@ def _fold(
     diagnosis: Diagnosis = Diagnosis.DIABETES,
 ) -> list[Prediction]:
     return [
-        prediction(
-            name, truth=True, score=1.0, fold=fold, row_id=row_id, diagnosis=diagnosis
-        )
+        prediction(name, score=1.0, fold=fold, row_id=row_id, diagnosis=diagnosis)
         for name in notes
     ]
 

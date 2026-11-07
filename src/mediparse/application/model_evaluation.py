@@ -1,4 +1,4 @@
-"""Use case evaluace: metriky z predikcí po diagnóze a řádku matice."""
+"""Use case evaluace: metriky predikcí proti labelům kohorty po diagnóze a řádku matice."""
 
 from __future__ import annotations
 
@@ -11,6 +11,7 @@ from mediparse.domain.evaluation import (
     ensure_both_classes,
     ensure_complete_folds,
     ensure_unique_keys,
+    truth_of,
 )
 from mediparse.domain.inputs import InvalidInputError
 
@@ -44,7 +45,7 @@ class MetricsSink(Protocol):
 
 @dataclass(frozen=True)
 class ModelEvaluation:
-    """Metriky na diagnózu a řádek matice spočtené z predikcí."""
+    """Metriky na diagnózu a řádek matice z predikcí a labelů zpráv kohorty."""
 
     predictions: PredictionSource
     table: InputTable
@@ -61,6 +62,7 @@ class ModelEvaluation:
 
         Predikce každého foldu musí pokrývat přesně testovací zprávy foldu podle
         splitu, jinak by metriky vznikly nad jinou množinou, než jakou split určil.
+        Pravda se odvozuje z labelů těchto zpráv v kohortě.
 
         Returns:
             Metriky seřazené podle řádku matice a diagnózy.
@@ -68,7 +70,7 @@ class ModelEvaluation:
         Raises:
             InvalidInputError: Predikce jsou prázdné, opakuje se klíč predikce,
                 nepokrývají přesně test foldu nebo některá skupina nemá obě třídy
-                pravdy.
+                pravdy podle labelů kohorty.
         """
         items = self.predictions.read()
         if not items:
@@ -76,22 +78,26 @@ class ModelEvaluation:
             raise InvalidInputError(msg)
         # Před úplností: porovnání množin duplicitu sloučí a neohlásila by se.
         ensure_unique_keys(items)
-        ensure_complete_folds(items, self.table.read(), self.split.read().split)
-        groups: defaultdict[tuple[str, Diagnosis], list[Prediction]] = defaultdict(list)
-        for item in items:
-            groups[item.row_id, item.diagnosis].append(item)
+        notes = self.table.read()
+        ensure_complete_folds(items, notes, self.split.read().split)
+        truth = truth_of(items, notes)
+        groups: defaultdict[tuple[str, Diagnosis], list[tuple[Prediction, bool]]] = (
+            defaultdict(list)
+        )
+        for item, is_positive in zip(items, truth, strict=True):
+            groups[item.row_id, item.diagnosis].append((item, is_positive))
         for (_, diagnosis), group in groups.items():
-            ensure_both_classes(diagnosis, [item.truth for item in group])
+            ensure_both_classes(diagnosis, [is_positive for _, is_positive in group])
         result = tuple(
             DiagnosisMetrics(
                 row_id,
                 diagnosis,
                 len(group),
-                sum(item.truth for item in group),
+                sum(is_positive for _, is_positive in group),
                 self.scorer.score(
-                    [item.truth for item in group],
-                    [item.predicted for item in group],
-                    [item.score for item in group],
+                    [is_positive for _, is_positive in group],
+                    [item.predicted for item, _ in group],
+                    [item.score for item, _ in group],
                 ),
             )
             for (row_id, diagnosis), group in sorted(groups.items())

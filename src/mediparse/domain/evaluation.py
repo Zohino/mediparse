@@ -35,7 +35,6 @@ class Prediction:
     note_id: str
     subject_id: SubjectId
     diagnosis: Diagnosis
-    truth: bool
     predicted: bool
     score: float
 
@@ -151,3 +150,29 @@ def ensure_complete_folds(
                 f"diagnóza {diagnosis}, fold {fold}, chybí {missing}, navíc {extra}."
             )
             raise InvalidInputError(msg)
+
+
+def truth_of(
+    predictions: Sequence[Prediction], notes: Sequence[InputNote]
+) -> tuple[bool, ...]:
+    """Odvodí pravdu každé predikce z labelů dané diagnózy v kohortě.
+
+    Args:
+        predictions: Predikce ke zpracování.
+        notes: Zprávy korpusu s labely diagnóz.
+
+    Returns:
+        Pravda ve stejném pořadí jako predikce.
+
+    Raises:
+        InvalidInputError: Některá predikce nemá zprávu ve vstupní tabulce.
+    """
+    notes_by_id = {note.note_id: note for note in notes}
+    missing = sum(item.note_id not in notes_by_id for item in predictions)
+    if missing:
+        # Identifikátory zpráv nesou subject_id pacienta MIMIC; hlásíme jen počet.
+        msg = f"Počet predikcí bez zprávy ve vstupní tabulce: {missing}."
+        raise InvalidInputError(msg)
+    return tuple(
+        notes_by_id[item.note_id].has_label(item.diagnosis) for item in predictions
+    )

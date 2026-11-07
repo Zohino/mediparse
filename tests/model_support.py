@@ -108,7 +108,6 @@ def sectioned_notes(patients: int) -> list[InputNote]:
 def prediction(
     note_id: str,
     *,
-    truth: bool,
     score: float,
     diagnosis: Diagnosis = Diagnosis.DIABETES,
     fold: int = 0,
@@ -125,7 +124,6 @@ def prediction(
         note_id,
         subject_of(note_id),
         diagnosis,
-        truth=truth,
         predicted=score > 0,
         score=score,
     )

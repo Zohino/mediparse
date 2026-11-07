@@ -28,8 +28,8 @@ NOTES = (
     InputNote("3-DS-1", 3, Language.EN, "text c", frozenset()),
 )
 HELD_OUT = (
-    prediction("3-DS-1", truth=True, score=1.5, diagnosis=Diagnosis.CKD),
-    prediction("1-DS-1", truth=False, score=-0.5, diagnosis=Diagnosis.CKD),
+    prediction("3-DS-1", score=1.5, diagnosis=Diagnosis.CKD),
+    prediction("1-DS-1", score=-0.5, diagnosis=Diagnosis.CKD),
 )
 ANSWER = (
     Classification(predicted=True, score=1.5),
@@ -141,9 +141,7 @@ def test_empty_predictions_raise() -> None:
 
 def test_missing_texts_report_only_count() -> None:
     """Dva chybějící texty ze tří syntetických zpráv neprozradí identifikátory."""
-    items = tuple(
-        prediction(f"9000000{index}-DS-1", truth=True, score=0.5) for index in (1, 2, 3)
-    )
+    items = tuple(prediction(f"9000000{index}-DS-1", score=0.5) for index in (1, 2, 3))
     notes = (InputNote("90000001-DS-1", 90000001, Language.EN, "text", frozenset()),)
     use_case, classifier, sink = _use_case(notes=notes, items=items)
 
@@ -160,7 +158,7 @@ def test_missing_texts_report_only_count() -> None:
 
 def test_writes_all_reloaded_predictions_in_training_order() -> None:
     """Inference zachová metadata a pořadí, skóre však pocházejí z načteného modelu."""
-    items = (*HELD_OUT, prediction("2-DS-1", truth=True, score=2.0))
+    items = (*HELD_OUT, prediction("2-DS-1", score=2.0))
     answer = (*ANSWER, Classification(predicted=True, score=2.0 + 1e-12))
     use_case, classifier, sink = _use_case(items=items, answer=answer)
 

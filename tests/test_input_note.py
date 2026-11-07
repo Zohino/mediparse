@@ -4,11 +4,27 @@ from __future__ import annotations
 
 import pytest
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
 from mediparse.domain.language import Language
 from mediparse.domain.note import InvalidNoteIdError, NoteSubjectMismatchError
 
 SUBJECT = 90000001
+
+
+def test_has_label_identifies_the_positive_class_of_each_diagnosis() -> None:
+    """Label CKD znamená pozitivní CKD a negativní DIABETES."""
+    note = InputNote("1-DS-1", 1, Language.EN, "text", frozenset({Diagnosis.CKD}))
+
+    assert note.has_label(Diagnosis.CKD)
+    assert not note.has_label(Diagnosis.DIABETES)
+
+
+def test_empty_labels_have_no_positive_diagnosis() -> None:
+    """Prázdné labely jsou negativní pro každou diagnózu."""
+    note = InputNote("1-DS-1", 1, Language.EN, "text", frozenset())
+
+    assert not any(note.has_label(diagnosis) for diagnosis in Diagnosis)
 
 
 def test_note_of_its_subject_passes() -> None:

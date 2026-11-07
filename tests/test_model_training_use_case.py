@@ -33,8 +33,8 @@ NOTES = (
 
 
 ANSWER = (
-    Classification(predicted=True, score=1.5),
-    Classification(predicted=False, score=-0.5),
+    Classification(predicted=False, score=-1.5),
+    Classification(predicted=True, score=0.5),
 )
 
 
@@ -74,10 +74,11 @@ class _FakeClassifier:
 @dataclass
 class _FakeTrainer:
     recorder: _Recorder
+    answer: tuple[Classification, ...] = ANSWER
 
     def fit(self, texts: Sequence[str], labels: Sequence[bool]) -> _FakeClassifier:
         self.recorder.calls["fit"] = (tuple(texts), tuple(labels))
-        return _FakeClassifier(ANSWER, self.recorder)
+        return _FakeClassifier(self.answer, self.recorder)
 
 
 @dataclass
@@ -97,12 +98,16 @@ class _FakeSink:
 
 
 def _use_case(
-    notes: Sequence[InputNote], shared: SharedSplit, recorder: _Recorder
+    notes: Sequence[InputNote],
+    shared: SharedSplit,
+    recorder: _Recorder,
+    *,
+    answer: tuple[Classification, ...] = ANSWER,
 ) -> ModelTraining[_FakeClassifier]:
     return ModelTraining(
         table=_FakeTable(notes),
         split=_FakeSplitSource(shared, recorder),
-        trainer=_FakeTrainer(recorder),
+        trainer=_FakeTrainer(recorder, answer),
         store=_FakeStore(recorder),
         predictions=_FakeSink(recorder),
     )
@@ -119,7 +124,13 @@ def test_trains_on_train_and_predicts_test() -> None:
     assert isinstance(recorder.calls["save"], _FakeClassifier)
     assert recorder.calls["predictions"] == (
         Prediction(
-            "row", 0, "1-DS-1", 1, Diagnosis.CKD, truth=True, predicted=True, score=1.5
+            "row",
+            0,
+            "1-DS-1",
+            1,
+            Diagnosis.CKD,
+            predicted=False,
+            score=-1.5,
         ),
         Prediction(
             "row",
@@ -127,9 +138,8 @@ def test_trains_on_train_and_predicts_test() -> None:
             "2-DS-1",
             2,
             Diagnosis.CKD,
-            truth=False,
-            predicted=False,
-            score=-0.5,
+            predicted=True,
+            score=0.5,
         ),
     )
     assert report == TrainingReport(
@@ -140,6 +150,20 @@ def test_trains_on_train_and_predicts_test() -> None:
         split_config=SPLIT_CONFIG,
         split_sha256=SPLIT.sha256(),
     )
+
+
+def test_too_few_classifications_stop_before_saving() -> None:
+    """Chybějící klasifikace testovací zprávy vyvolá chybu před uložením výstupů."""
+    recorder = _Recorder()
+    use_case = _use_case(NOTES, SHARED, recorder, answer=ANSWER[:1])
+
+    with pytest.raises(
+        ValueError, match=r"zip\(\) argument 2 is shorter than argument 1"
+    ):
+        use_case.run(CONFIG)
+
+    assert "save" not in recorder.calls
+    assert "predictions" not in recorder.calls
 
 
 def test_test_fold_comes_from_config() -> None:

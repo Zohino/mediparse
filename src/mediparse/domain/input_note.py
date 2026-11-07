@@ -31,3 +31,11 @@ class InputNote:
             NoteSubjectMismatchError: Note_id patří jinému pacientovi než ``subject_id``.
         """
         ensure_note_of_subject(self.note_id, self.subject_id)
+
+    def has_label(self, diagnosis: Diagnosis) -> bool:
+        """Určí pozitivní třídu podle labelu dané diagnózy.
+
+        Returns:
+            True, pokud má zpráva label dané diagnózy.
+        """
+        return diagnosis in self.labels
