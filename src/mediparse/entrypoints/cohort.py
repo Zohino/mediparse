@@ -18,13 +18,13 @@ from mediparse.domain.environment import Environment
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
-from mediparse.infrastructure.duckdb_cohort import SOURCE_TABLES, DuckDbCohort
+from mediparse.infrastructure.duckdb_cohort import DuckDbCohort
 from mediparse.infrastructure.duckdb_parquet import SPILL_DIRECTORY
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.input_corpus_rule import load_input_corpus_rule
 from mediparse.infrastructure.json_file import write_model
-from mediparse.infrastructure.mimic_tables import load_source_digests
 from mediparse.infrastructure.package_versions import installed_versions
+from mediparse.infrastructure.parquet_source import verified_parquet_source
 from mediparse.infrastructure.source_revision import revision_source
 
 if TYPE_CHECKING:
@@ -43,7 +43,6 @@ def main(
     diagnoses: Path,
     candidates: Path,
     corpus_rule: Path,
-    tables: Path,
     cohort: Path,
     manifest: Path,
     log: Path,
@@ -59,7 +58,6 @@ def main(
         diagnoses=diagnoses,
         candidates=candidates,
         corpus_rule=corpus_rule,
-        tables=tables,
         cohort=cohort,
         manifest=manifest,
         revision=revision_source(os.environ, Path.cwd()),
@@ -73,7 +71,6 @@ def run(
     diagnoses: Path,
     candidates: Path,
     corpus_rule: Path,
-    tables: Path,
     cohort: Path,
     manifest: Path,
     revision: Callable[[], SourceRevision],
@@ -86,7 +83,10 @@ def run(
     """
     codes = load_diagnosis_codes(candidates)
     rule = load_input_corpus_rule(corpus_rule)
-    sources = load_source_digests(tables, SOURCE_TABLES)
+    sources = {
+        "discharge": verified_parquet_source(discharge),
+        "diagnoses_icd": verified_parquet_source(diagnoses),
+    }
     source = revision()
     result = CohortMaterialization(
         DuckDbCohort(

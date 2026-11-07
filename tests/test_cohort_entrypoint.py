@@ -8,11 +8,15 @@ import logging
 import re
 from typing import TYPE_CHECKING, Final
 
+import pyarrow.parquet as pq
+import pytest
+
 from mediparse.domain.cohort import MIN_CELL, CohortManifest, FunnelStepName
 from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.mimic_table import ParquetSource
 from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.infrastructure.parquet_source import source_path, write_parquet_source
 from tests.cohort_support import (
     EXPECTED_FUNNEL,
     EXPECTED_INVALID_CODES,
@@ -29,36 +33,37 @@ if TYPE_CHECKING:
     from collections.abc import Callable
     from pathlib import Path
 
-    import pytest
-
     from mediparse.domain.environment import SourceRevision
+    from tests.cohort_support import IcdRow, NoteRow
 
-DISCHARGE_SHA: Final = "1" * 64
-DIAGNOSES_SHA: Final = "2" * 64
+DISCHARGE_SHA: Final = hashlib.sha256(b"synthetic discharge CSV").hexdigest()
+DIAGNOSES_SHA: Final = hashlib.sha256(b"synthetic diagnoses CSV").hexdigest()
 
 
-def _configs(root: Path) -> tuple[Path, Path, Path]:
+def _tables(
+    root: Path,
+    notes: list[NoteRow] | None = None,
+    codes: list[IcdRow] | None = None,
+    *,
+    padded: bool = True,
+) -> tuple[Path, Path]:
+    discharge, diagnoses = write_tables(root, notes, codes, padded=padded)
+    for path, digest in ((discharge, DISCHARGE_SHA), (diagnoses, DIAGNOSES_SHA)):
+        write_parquet_source(path, source=f"{path.stem}.csv.gz", source_sha256=digest)
+    return discharge, diagnoses
+
+
+def _configs(root: Path) -> tuple[Path, Path]:
     candidates = write_candidates(root / "diagnosis_candidates.json")
-    tables = root / "mimic_tables.json"
-    base = "https://physionet.org/files/mimiciv/3.1/hosp"
-    tables.write_text(
-        json.dumps({
-            "mimic_tables": [
-                {"url": f"{base}/discharge.csv.gz", "sha256": DISCHARGE_SHA},
-                {"url": f"{base}/diagnoses_icd.csv.gz", "sha256": DIAGNOSES_SHA},
-            ]
-        }),
-        encoding="utf-8",
-    )
     rule = root / "input_corpus.json"
     rule.write_text('{"min_chars":100}', encoding="utf-8")
-    return candidates, tables, rule
+    return candidates, rule
 
 
 def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
-    """Kohorta a manifest vzniknou; otisky odpovídají souborům a configu tabulek."""
-    discharge, diagnoses = write_tables(tmp_path)
-    candidates, tables, rule = _configs(tmp_path)
+    """Kohorta a manifest vzniknou; otisky odpovídají skutečně čteným parquetům a ověřeným CSV."""
+    discharge, diagnoses = _tables(tmp_path)
+    candidates, rule = _configs(tmp_path)
     out = tmp_path / "resources" / "cohort.parquet"
     manifest = tmp_path / "results" / "cohort" / "manifest.json"
 
@@ -67,7 +72,6 @@ def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
         diagnoses=diagnoses,
         candidates=candidates,
         corpus_rule=rule,
-        tables=tables,
         cohort=out,
         manifest=manifest,
         revision=fixed_revision,
@@ -77,12 +81,20 @@ def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
         manifest.read_text(encoding="utf-8"), strict=False
     )
     assert code is ExitCode.OK
-    assert written.cohort_sha256 == file_sha256(out)
+    assert written.cohort_sha256 == hashlib.sha256(out.read_bytes()).hexdigest()
     assert written.config_sha256 == hashlib.sha256(candidates.read_bytes()).hexdigest()
     assert written.input_corpus_sha256 == hashlib.sha256(rule.read_bytes()).hexdigest()
     assert written.sources == {
-        "discharge.csv.gz": DISCHARGE_SHA,
-        "diagnoses_icd.csv.gz": DIAGNOSES_SHA,
+        "discharge": ParquetSource(
+            source="discharge.csv.gz",
+            source_sha256=DISCHARGE_SHA,
+            sha256=hashlib.sha256(discharge.read_bytes()).hexdigest(),
+        ),
+        "diagnoses_icd": ParquetSource(
+            source="diagnoses_icd.csv.gz",
+            source_sha256=DIAGNOSES_SHA,
+            sha256=hashlib.sha256(diagnoses.read_bytes()).hexdigest(),
+        ),
     }
     assert written.environment.source == REVISION
     assert set(written.environment.packages) == set(cohort.PACKAGES)
@@ -100,13 +112,13 @@ def test_cell_below_threshold_is_refused_and_nothing_is_written(
 ) -> None:
     """Diagnóza pod deset zpráv krok odmítne; log ji jmenuje a nenese počty."""
     caplog.set_level(logging.DEBUG)
-    discharge, diagnoses = write_tables(
+    discharge, diagnoses = _tables(
         tmp_path,
         [note("1-DS-1", 1, 10, text("a"))],
         [icd(10, 1, "E119", "10")],
         padded=False,
     )
-    candidates, tables, rule = _configs(tmp_path)
+    candidates, rule = _configs(tmp_path)
     out = tmp_path / "cohort.parquet"
     manifest = tmp_path / "manifest.json"
 
@@ -115,7 +127,6 @@ def test_cell_below_threshold_is_refused_and_nothing_is_written(
         diagnoses=diagnoses,
         candidates=candidates,
         corpus_rule=rule,
-        tables=tables,
         cohort=out,
         manifest=manifest,
         revision=fixed_revision,
@@ -137,14 +148,13 @@ def _run(
     corpus_rule: Path | None = None,
     manifest: Path | None = None,
 ) -> ExitCode:
-    existing, diagnoses = write_tables(tmp_path)
-    candidates, tables, rule = _configs(tmp_path)
+    existing, diagnoses = _tables(tmp_path)
+    candidates, rule = _configs(tmp_path)
     return cohort.run(
         discharge=discharge or existing,
         diagnoses=diagnoses,
         candidates=candidates,
         corpus_rule=corpus_rule or rule,
-        tables=tables,
         cohort=tmp_path / "cohort.parquet",
         manifest=manifest or tmp_path / "manifest.json",
         revision=revision,
@@ -169,36 +179,55 @@ def test_unreadable_revision_is_refused(tmp_path: Path) -> None:
     assert not (tmp_path / "manifest.json").exists()
 
 
-def test_config_without_source_table_is_refused(
-    tmp_path: Path, caplog: pytest.LogCaptureFixture
-) -> None:
-    """Config tabulek bez zdrojové tabulky krok odmítne dřív, než zapíše kohortu či manifest."""
-    discharge, diagnoses = write_tables(tmp_path)
-    candidates, tables, rule = _configs(tmp_path)
-    kept = json.loads(tables.read_text(encoding="utf-8"))
-    kept["mimic_tables"] = kept["mimic_tables"][:1]
-    tables.write_text(json.dumps(kept), encoding="utf-8")
+@pytest.mark.parametrize("table", ["discharge", "diagnoses_icd"])
+def test_changed_parquet_is_refused_before_writing(tmp_path: Path, table: str) -> None:
+    """Platný parquet změněný po zápisu vazby nesmí vytvořit kohortu ani manifest."""
+    discharge, diagnoses = _tables(tmp_path)
+    candidates, rule = _configs(tmp_path)
+    changed = tmp_path / f"{table}.parquet"
+    rows = pq.read_table(changed).replace_schema_metadata({b"changed": b"yes"})
+    pq.write_table(rows, changed)
 
     code = cohort.run(
         discharge=discharge,
         diagnoses=diagnoses,
         candidates=candidates,
         corpus_rule=rule,
-        tables=tables,
         cohort=tmp_path / "cohort.parquet",
         manifest=tmp_path / "manifest.json",
         revision=fixed_revision,
     )
 
     assert code is ExitCode.REFUSED
-    assert any("diagnoses_icd.csv.gz" in message for message in caplog.messages)
+    assert not (tmp_path / "cohort.parquet").exists()
+    assert not (tmp_path / "manifest.json").exists()
+
+
+def test_missing_source_is_refused_before_writing(tmp_path: Path) -> None:
+    """Kohorta bez vazby jedné tabulky nevznikne."""
+    discharge, diagnoses = _tables(tmp_path)
+    candidates, rule = _configs(tmp_path)
+    source_path(diagnoses).unlink()
+
+    assert (
+        cohort.run(
+            discharge=discharge,
+            diagnoses=diagnoses,
+            candidates=candidates,
+            corpus_rule=rule,
+            cohort=tmp_path / "cohort.parquet",
+            manifest=tmp_path / "manifest.json",
+            revision=fixed_revision,
+        )
+        is ExitCode.REFUSED
+    )
     assert not (tmp_path / "cohort.parquet").exists()
     assert not (tmp_path / "manifest.json").exists()
 
 
 def test_rule_changes_manifest_hash_and_funnel(tmp_path: Path) -> None:
     """Práh tří znaků pustí krátkou zprávu ze základu a má vlastní otisk configu."""
-    candidates, _, _ = _configs(tmp_path)
+    candidates, _ = _configs(tmp_path)
     rule = tmp_path / "custom_rule.json"
     manifest = tmp_path / "custom_manifest.json"
     counts = []
