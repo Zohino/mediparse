@@ -99,7 +99,8 @@ def run(
 
     Returns:
         OK po uložení modelu, predikcí a manifestu; REFUSED pro chybějící nebo
-        neplatnou tabulku, config, kandidáty (při zapnuté normalizaci), lexikon a soubor splitu a pro nečitelnou revizi zdroje.
+        neplatnou tabulku, config, kandidáty (při zapnuté normalizaci), lexikon a soubor splitu,
+        pro nečitelnou revizi zdroje nebo nezjistitelný HW stroje.
     """
     training = load_training_config(config)
     source = revision()

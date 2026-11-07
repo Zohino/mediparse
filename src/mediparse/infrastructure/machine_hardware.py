@@ -6,6 +6,8 @@ import os
 import platform
 from pathlib import Path
 
+from pydantic import ValidationError
+
 from mediparse.domain.environment import Hardware
 from mediparse.domain.inputs import InvalidInputError
 
@@ -37,18 +39,23 @@ def machine_hardware() -> Hardware:
     except OSError:
         # Mimo procfs je architektura jediný dostupný popis CPU.
         cpuinfo = ""
+    unknown_hardware = "Hardware stroje nelze zjistit ze systémových údajů."
     try:
         page_size = os.sysconf("SC_PAGE_SIZE")
         physical_pages = os.sysconf("SC_PHYS_PAGES")
-        if page_size <= 0 or physical_pages <= 0:
-            msg = "Systém neuvádí kladnou velikost fyzické paměti."
-            raise InvalidInputError(msg)
+        logical_cores = os.cpu_count()
+        available_cores = os.process_cpu_count()
+    except (OSError, ValueError) as error:
+        raise InvalidInputError(unknown_hardware) from error
+    if page_size <= 0 or physical_pages <= 0:
+        msg = "Systém neuvádí kladnou velikost fyzické paměti."
+        raise InvalidInputError(msg)
+    try:
         return Hardware.model_validate({
             "cpu_model": cpu_model(cpuinfo, platform.machine()),
-            "logical_cores": os.cpu_count(),
-            "available_cores": os.process_cpu_count(),
+            "logical_cores": logical_cores,
+            "available_cores": available_cores,
             "memory_bytes": page_size * physical_pages,
         })
-    except (OSError, ValueError) as error:
-        msg = "Hardware stroje nelze zjistit ze systémových údajů."
-        raise InvalidInputError(msg) from error
+    except ValidationError as error:
+        raise InvalidInputError(unknown_hardware) from error

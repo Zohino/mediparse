@@ -72,7 +72,7 @@ def run(
 
     Returns:
         OK po zápisu predikcí a nákladů; REFUSED pro chybějící nebo neplatný vstup a pro
-        uložený model, který nedává stejné predikce jako trénink.
+        uložený model, který nedává stejné predikce jako trénink, nebo nezjistitelný HW stroje.
     """
     table, _ = training_input(
         cohort=cohort, training=load_training_config(config), lexicon=lexicon
