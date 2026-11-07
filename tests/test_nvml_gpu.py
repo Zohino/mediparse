@@ -238,8 +238,15 @@ def test_measurement_is_unavailable_inside_window() -> None:
         monitor.measurement()
 
 
+@pytest.mark.parametrize(
+    "sampling_error",
+    [
+        pynvml.NVMLError(pynvml.NVML_ERROR_UNKNOWN),
+        ValueError("Synthetic sampler failure"),
+    ],
+)
 def test_sampling_error_is_refused_after_body(
-    monkeypatch: pytest.MonkeyPatch, nvml: SimpleNamespace
+    monkeypatch: pytest.MonkeyPatch, nvml: SimpleNamespace, sampling_error: Exception
 ) -> None:
     """Chyba prostředního vzorku nesmí zmizet ve vlákně démona."""
     sampled = Event()
@@ -249,7 +256,7 @@ def test_sampling_error_is_refused_after_body(
     def memory(handle: int) -> SimpleNamespace:
         if nvml.nvmlDeviceGetMemoryInfo.call_count == sample_call:
             sampled.set()
-            raise pynvml.NVMLError(pynvml.NVML_ERROR_UNKNOWN)
+            raise sampling_error
         return {0: SimpleNamespace(total=1000, used=100)}[handle]
 
     monkeypatch.setattr(nvml_gpu, "Event", _OneSampleEvent)
@@ -393,3 +400,37 @@ def test_measurement_uses_elapsed_window_seconds(
         pass
     expected_seconds = 2.5
     assert monitor.measurement().seconds == expected_seconds
+
+
+@pytest.mark.parametrize("phase", ["energy", "shutdown"])
+def test_completion_inside_except_refuses_its_own_error(
+    nvml: SimpleNamespace, phase: str
+) -> None:
+    """Obsluhovaná KeyError volajícího není výjimka těla měřicího okna."""
+    if phase == "energy":
+        nvml.nvmlDeviceGetTotalEnergyConsumption.side_effect = _energy_readings({
+            0: [1000, pynvml.NVMLError(pynvml.NVML_ERROR_UNKNOWN)]
+        })
+    else:
+        nvml.nvmlShutdown.side_effect = pynvml.NVMLError(pynvml.NVML_ERROR_UNKNOWN)
+    empty: dict[str, int] = {}
+    try:
+        empty.pop("synthetic-missing-key")
+    except KeyError:
+        with pytest.raises(InvalidInputError), gpu_monitor(None, None):
+            pass
+
+
+@pytest.mark.parametrize(
+    "code", [pynvml.NVML_ERROR_LIBRARY_NOT_FOUND, pynvml.NVML_ERROR_DRIVER_NOT_LOADED]
+)
+def test_missing_driver_does_not_chain_into_body(
+    nvml: SimpleNamespace, code: int
+) -> None:
+    """Zpracovaná chyba ovladače se nepřipojí jako kontext chyby měřeného těla."""
+    nvml.nvmlInit.side_effect = pynvml.NVMLError(code)
+    error = RuntimeError("Synthetic body failure")
+    with pytest.raises(RuntimeError) as caught, gpu_monitor(None, None):
+        raise error
+    assert caught.value is error
+    assert caught.value.__context__ is None

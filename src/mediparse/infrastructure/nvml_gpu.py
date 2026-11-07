@@ -3,10 +3,8 @@
 from __future__ import annotations
 
 import logging
-import sys
-from concurrent.futures import Future
 from contextlib import contextmanager
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from math import isfinite
 from threading import Event, Thread
 from time import perf_counter
@@ -64,12 +62,13 @@ def visible_indices(
     return tuple(indices)
 
 
-@dataclass(frozen=True)
 class GpuMonitor:
     """Viditelná zařízení a výsledek dostupný až po uzavření okna."""
 
-    devices: tuple[GpuDevice, ...]
-    _result: Future[GpuMeasurement] = field(repr=False)
+    def __init__(self, devices: tuple[GpuDevice, ...]) -> None:
+        """Připraví monitor viditelných zařízení bez dokončeného měření."""
+        self.devices = devices
+        self._measurement: GpuMeasurement | None = None
 
     def measurement(self) -> GpuMeasurement:
         """Vrátí dokončené měření.
@@ -80,10 +79,29 @@ class GpuMonitor:
         Raises:
             RuntimeError: Okno ještě nebylo úspěšně uzavřeno.
         """
-        if not self._result.done():
+        if self._measurement is None:
             msg = "Měření GPU je dostupné až po uzavření okna."
             raise RuntimeError(msg)
-        return self._result.result()
+        return self._measurement
+
+    def finish(
+        self, sampler: _MemorySampler, thread: Thread | None, start: float
+    ) -> None:
+        """Zastaví vzorkování a uloží dokončené měření.
+
+        Raises:
+            InvalidInputError: Čtení nebo validace nákladů selhaly.
+        """
+        sampler.stop.set()
+        if thread is not None:
+            thread.join()
+        try:
+            usages = sampler.usages()
+            self._measurement = GpuMeasurement(
+                seconds=perf_counter() - start, devices=usages
+            )
+        except (pynvml.NVMLError, ValidationError) as error:
+            raise InvalidInputError(NVML_FAILURE) from error
 
 
 @dataclass(frozen=True)
@@ -131,12 +149,12 @@ def _read_start(handle: object) -> _DeviceStart:
     )
 
 
-@dataclass(frozen=True)
+@dataclass
 class _MemorySampler:
     starts: tuple[_DeviceStart, ...]
     peaks: list[int]
     stop: Event
-    failure: Future[None] = field(default_factory=Future)
+    failure: Exception | None = None
 
     def sample(self) -> None:
         for index, start in enumerate(self.starts):
@@ -147,13 +165,17 @@ class _MemorySampler:
         try:
             while not self.stop.wait(interval_seconds):
                 self.sample()
-        except pynvml.NVMLError as error:
-            self.failure.set_exception(error)
+        except Exception as error:
+            self.failure = error
+            logger.debug(
+                "Vzorkování paměti GPU selhalo; chybu předá hlavní vlákno.",
+                exc_info=True,
+            )
 
     def usages(self) -> tuple[GpuUsage, ...]:
         self.sample()
-        if self.failure.done():
-            self.failure.result()
+        if self.failure is not None:
+            raise InvalidInputError(NVML_FAILURE) from self.failure
         return tuple(
             _usage(start, peak)
             for start, peak in zip(self.starts, self.peaks, strict=True)
@@ -177,51 +199,40 @@ def _usage(start: _DeviceStart, peak: int) -> GpuUsage:
     )
 
 
-def _finish_window(
-    result: Future[GpuMeasurement],
-    sampler: _MemorySampler,
-    thread: Thread | None,
-    start: float,
-) -> None:
-    body_error = sys.exception()
-    sampler.stop.set()
-    if thread is not None:
-        thread.join()
+def _shutdown_nvml() -> None:
     try:
-        usages = sampler.usages()
-        result.set_result(
-            GpuMeasurement(seconds=perf_counter() - start, devices=usages)
-        )
-    except (pynvml.NVMLError, ValidationError) as error:
-        if body_error is not None:
-            # Původní selhání kroku má přednost před chybou dokončení měření.
-            logger.warning("Dokončení měření GPU selhalo při výjimce měřeného kroku.")
-            return
+        pynvml.nvmlShutdown()
+    except pynvml.NVMLError as error:
         raise InvalidInputError(NVML_FAILURE) from error
 
 
 @contextmanager
 def _nvml_session() -> Generator[bool]:
+    available = True
     try:
         pynvml.nvmlInit()
     except pynvml.NVMLError as error:
-        if getattr(error, "value", None) in {
+        if getattr(error, "value", None) not in {
             pynvml.NVML_ERROR_LIBRARY_NOT_FOUND,
             pynvml.NVML_ERROR_DRIVER_NOT_LOADED,
         }:
-            yield False
-            return
-        raise InvalidInputError(NVML_FAILURE) from error
+            raise InvalidInputError(NVML_FAILURE) from error
+        available = False
+    if not available:
+        yield False
+        return
     try:
         yield True
-    finally:
-        active_error = sys.exception()
+    except BaseException:
         try:
-            pynvml.nvmlShutdown()
-        except pynvml.NVMLError as error:
-            if active_error is None:
-                raise InvalidInputError(NVML_FAILURE) from error
-            logger.warning("Ukončení NVML selhalo při zpracování původní výjimky.")
+            _shutdown_nvml()
+        except Exception:
+            logger.warning(
+                "Ukončení NVML selhalo při zpracování původní výjimky.", exc_info=True
+            )
+        raise
+    else:
+        _shutdown_nvml()
 
 
 @contextmanager
@@ -247,8 +258,7 @@ def gpu_monitor(
         starts = (
             _read_devices(cuda_visible_devices, cuda_device_order) if available else ()
         )
-        result: Future[GpuMeasurement] = Future()
-        monitor = GpuMonitor(tuple(start.device for start in starts), result)
+        monitor = GpuMonitor(tuple(start.device for start in starts))
         sampler = _MemorySampler(
             starts, [start.memory_used_bytes for start in starts], Event()
         )
@@ -262,5 +272,14 @@ def gpu_monitor(
             thread.start()
         try:
             yield monitor
-        finally:
-            _finish_window(result, sampler, thread, start)
+        except BaseException:
+            try:
+                monitor.finish(sampler, thread, start)
+            except Exception:
+                logger.warning(
+                    "Dokončení měření GPU selhalo při výjimce měřeného kroku.",
+                    exc_info=True,
+                )
+            raise
+        else:
+            monitor.finish(sampler, thread, start)
