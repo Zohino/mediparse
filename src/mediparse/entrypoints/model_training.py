@@ -20,6 +20,7 @@ from mediparse.entrypoints.training_input import training_input
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
+from mediparse.infrastructure.machine_hardware import machine_hardware
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.sklearn_classifier import (
@@ -98,10 +99,12 @@ def run(
 
     Returns:
         OK po uložení modelu, predikcí a manifestu; REFUSED pro chybějící nebo
-        neplatnou tabulku, config, kandidáty (při zapnuté normalizaci), lexikon a soubor splitu a pro nečitelnou revizi zdroje.
+        neplatnou tabulku, config, kandidáty (při zapnuté normalizaci), lexikon a soubor splitu,
+        pro nečitelnou revizi zdroje nebo nezjistitelný HW stroje.
     """
     training = load_training_config(config)
     source = revision()
+    hardware = machine_hardware()
     table, strip = training_input(cohort=cohort, training=training, lexicon=lexicon)
     normalization = (
         load_text_normalization(
@@ -135,6 +138,7 @@ def run(
             model=ESTIMATOR,
             model_revision=None,
             tokenizer_revision=None,
+            hardware=hardware,
             environment=Environment(
                 packages=installed_versions(PACKAGES), source=source
             ),

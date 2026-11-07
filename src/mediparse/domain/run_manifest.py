@@ -8,7 +8,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.digest import Sha256
-from mediparse.domain.environment import Environment
+from mediparse.domain.environment import Environment, Hardware
 from mediparse.domain.identity import RowId
 from mediparse.domain.seed import Seed
 
@@ -58,3 +58,4 @@ class RunManifest(BaseModel):
     model_revision: str | None
     tokenizer_revision: str | None
     environment: Environment
+    hardware: Hardware
