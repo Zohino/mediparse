@@ -5,8 +5,15 @@ from __future__ import annotations
 import pytest
 from hypothesis import given
 from hypothesis import strategies as st
+from pydantic import ValidationError
 
-from mediparse.domain.costs import latency, nearest_rank
+from mediparse.domain.costs import LatencyPlan, latency, nearest_rank
+
+
+def test_latency_plan_requires_at_least_one_sample() -> None:
+    """Plán bez měřených vzorků nemá definovanou latenci."""
+    with pytest.raises(ValidationError, match="samples"):
+        LatencyPlan(warmup=0, samples=0)
 
 
 def test_nearest_rank_of_three_unsorted_values() -> None:

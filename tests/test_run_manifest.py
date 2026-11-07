@@ -13,6 +13,12 @@ from mediparse.domain.run_manifest import DiagnosticStrip, RunManifest
 
 COMMIT: Final = "a" * 40
 DIGEST: Final = "b" * 64
+HARDWARE: Final = {
+    "cpu_model": "Synthetic CPU",
+    "logical_cores": 8,
+    "available_cores": 2,
+    "memory_bytes": 1024,
+}
 
 
 def _fields(**changes: object) -> dict[str, object]:
@@ -29,12 +35,7 @@ def _fields(**changes: object) -> dict[str, object]:
         "model": "sklearn TfidfVectorizer+LinearSVC",
         "model_revision": None,
         "tokenizer_revision": None,
-        "hardware": {
-            "cpu_model": "Synthetic CPU",
-            "logical_cores": 8,
-            "available_cores": 2,
-            "memory_bytes": 1024,
-        },
+        "hardware": HARDWARE,
         "environment": Environment(
             packages={"python": "3.13.0"},
             source=SourceRevision(commit=COMMIT, dirty=False),
@@ -67,6 +68,22 @@ def test_manifest_records_hardware() -> None:
     dumped = RunManifest.model_validate(fields).model_dump(mode="json")
 
     assert dumped["hardware"] == fields["hardware"]
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("logical_cores", 0),
+        ("available_cores", 0),
+        ("memory_bytes", 0),
+        ("cpu_model", ""),
+        ("latency_seconds", 0.1),
+    ],
+)
+def test_manifest_rejects_invalid_hardware(field: str, value: object) -> None:
+    """Manifest odmítne nulové kapacity, prázdný model CPU a měření navíc v HW."""
+    with pytest.raises(ValidationError, match=rf"hardware\.{field}"):
+        RunManifest.model_validate(_fields(hardware=HARDWARE | {field: value}))
 
 
 @pytest.mark.parametrize("field", ["dataset_sha256", "config_sha256", "split_sha256"])
