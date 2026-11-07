@@ -63,6 +63,26 @@ def _configs(root: Path) -> tuple[Path, Path]:
     return candidates, rule
 
 
+def _cohort(
+    tmp_path: Path,
+    discharge: Path,
+    diagnoses: Path,
+    *,
+    configs: tuple[Path, Path],
+    revision: Callable[[], SourceRevision] = fixed_revision,
+) -> ExitCode:
+    candidates, corpus_rule = configs
+    return cohort.run(
+        discharge=discharge,
+        diagnoses=diagnoses,
+        candidates=candidates,
+        corpus_rule=corpus_rule,
+        cohort=tmp_path / "resources" / "cohort.parquet",
+        manifest=tmp_path / "results" / "cohort" / "manifest.json",
+        revision=revision,
+    )
+
+
 def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
     """Kohorta a manifest vzniknou; otisky odpovídají skutečně čteným parquetům a ověřeným CSV."""
     discharge, diagnoses = _tables(tmp_path)
@@ -70,13 +90,11 @@ def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
     out = tmp_path / "resources" / "cohort.parquet"
     manifest = tmp_path / "results" / "cohort" / "manifest.json"
 
-    code = cohort.run(
-        discharge=discharge,
-        diagnoses=diagnoses,
-        candidates=candidates,
-        corpus_rule=rule,
-        cohort=out,
-        manifest=manifest,
+    code = _cohort(
+        tmp_path,
+        discharge,
+        diagnoses,
+        configs=(candidates, rule),
         revision=fixed_revision,
     )
 
@@ -122,16 +140,14 @@ def test_cell_below_threshold_is_refused_and_nothing_is_written(
         padded=False,
     )
     candidates, rule = _configs(tmp_path)
-    out = tmp_path / "cohort.parquet"
-    manifest = tmp_path / "manifest.json"
+    out = tmp_path / "resources" / "cohort.parquet"
+    manifest = tmp_path / "results" / "cohort" / "manifest.json"
 
-    code = cohort.run(
-        discharge=discharge,
-        diagnoses=diagnoses,
-        candidates=candidates,
-        corpus_rule=rule,
-        cohort=out,
-        manifest=manifest,
+    code = _cohort(
+        tmp_path,
+        discharge,
+        diagnoses,
+        configs=(candidates, rule),
         revision=fixed_revision,
     )
 
@@ -143,43 +159,37 @@ def test_cell_below_threshold_is_refused_and_nothing_is_written(
     assert not manifest.exists()
 
 
-def _run(
-    tmp_path: Path,
-    *,
-    discharge: Path | None,
-    revision: Callable[[], SourceRevision],
-    corpus_rule: Path | None = None,
-    manifest: Path | None = None,
-) -> ExitCode:
-    existing, diagnoses = _tables(tmp_path)
-    candidates, rule = _configs(tmp_path)
-    return cohort.run(
-        discharge=discharge or existing,
-        diagnoses=diagnoses,
-        candidates=candidates,
-        corpus_rule=corpus_rule or rule,
-        cohort=tmp_path / "cohort.parquet",
-        manifest=manifest or tmp_path / "manifest.json",
-        revision=revision,
-    )
-
-
 def test_missing_input_table_is_refused(tmp_path: Path) -> None:
     """Chybějící vstupní tabulka krok odmítne, kohorta ani manifest nevzniknou."""
-    code = _run(tmp_path, discharge=tmp_path / "none.parquet", revision=fixed_revision)
+    _, diagnoses = _tables(tmp_path)
+    candidates, rule = _configs(tmp_path)
+    code = _cohort(
+        tmp_path,
+        tmp_path / "none.parquet",
+        diagnoses,
+        configs=(candidates, rule),
+    )
 
     assert code is ExitCode.REFUSED
-    assert not (tmp_path / "cohort.parquet").exists()
-    assert not (tmp_path / "manifest.json").exists()
+    assert not (tmp_path / "resources" / "cohort.parquet").exists()
+    assert not (tmp_path / "results" / "cohort" / "manifest.json").exists()
 
 
 def test_unreadable_revision_is_refused(tmp_path: Path) -> None:
     """Nečitelná revize repa krok odmítne, kohorta ani manifest nevzniknou."""
-    code = _run(tmp_path, discharge=None, revision=missing_revision)
+    discharge, diagnoses = _tables(tmp_path)
+    candidates, rule = _configs(tmp_path)
+    code = _cohort(
+        tmp_path,
+        discharge,
+        diagnoses,
+        configs=(candidates, rule),
+        revision=missing_revision,
+    )
 
     assert code is ExitCode.REFUSED
-    assert not (tmp_path / "cohort.parquet").exists()
-    assert not (tmp_path / "manifest.json").exists()
+    assert not (tmp_path / "resources" / "cohort.parquet").exists()
+    assert not (tmp_path / "results" / "cohort" / "manifest.json").exists()
 
 
 @pytest.mark.parametrize("table", ["discharge", "diagnoses_icd"])
@@ -191,19 +201,16 @@ def test_changed_parquet_is_refused_before_writing(tmp_path: Path, table: str) -
     rows = pq.read_table(changed).replace_schema_metadata({b"changed": b"yes"})
     pq.write_table(rows, changed)
 
-    code = cohort.run(
-        discharge=discharge,
-        diagnoses=diagnoses,
-        candidates=candidates,
-        corpus_rule=rule,
-        cohort=tmp_path / "cohort.parquet",
-        manifest=tmp_path / "manifest.json",
-        revision=fixed_revision,
+    code = _cohort(
+        tmp_path,
+        discharge,
+        diagnoses,
+        configs=(candidates, rule),
     )
 
     assert code is ExitCode.REFUSED
-    assert not (tmp_path / "cohort.parquet").exists()
-    assert not (tmp_path / "manifest.json").exists()
+    assert not (tmp_path / "resources" / "cohort.parquet").exists()
+    assert not (tmp_path / "results" / "cohort" / "manifest.json").exists()
 
 
 def test_missing_source_is_refused_before_writing(tmp_path: Path) -> None:
@@ -213,37 +220,34 @@ def test_missing_source_is_refused_before_writing(tmp_path: Path) -> None:
     provenance_path(diagnoses).unlink()
 
     assert (
-        cohort.run(
-            discharge=discharge,
-            diagnoses=diagnoses,
-            candidates=candidates,
-            corpus_rule=rule,
-            cohort=tmp_path / "cohort.parquet",
-            manifest=tmp_path / "manifest.json",
-            revision=fixed_revision,
+        _cohort(
+            tmp_path,
+            discharge,
+            diagnoses,
+            configs=(candidates, rule),
         )
         is ExitCode.REFUSED
     )
-    assert not (tmp_path / "cohort.parquet").exists()
-    assert not (tmp_path / "manifest.json").exists()
+    assert not (tmp_path / "resources" / "cohort.parquet").exists()
+    assert not (tmp_path / "results" / "cohort" / "manifest.json").exists()
 
 
 def test_rule_changes_manifest_hash_and_funnel(tmp_path: Path) -> None:
     """Práh tří znaků pustí krátkou zprávu ze základu a má vlastní otisk configu."""
+    discharge, diagnoses = _tables(tmp_path)
     candidates, _ = _configs(tmp_path)
     rule = tmp_path / "custom_rule.json"
-    manifest = tmp_path / "custom_manifest.json"
+    manifest = tmp_path / "results" / "cohort" / "manifest.json"
     counts = []
     hashes = []
     for threshold in (100, 3):
         rule.write_text(json.dumps({"min_chars": threshold}), encoding="utf-8")
         assert (
-            _run(
+            _cohort(
                 tmp_path,
-                discharge=None,
-                revision=fixed_revision,
-                corpus_rule=rule,
-                manifest=manifest,
+                discharge,
+                diagnoses,
+                configs=(candidates, rule),
             )
             is ExitCode.OK
         )
