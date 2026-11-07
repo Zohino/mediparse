@@ -210,7 +210,7 @@ test_that("eda_provenance zachová hodnoty a pořadí souboru", {
   withr::local_envvar(MEDIPARSE_EDA_PROVENANCE = path)
   details <- eda_provenance()
   expect_identical(names(details), c("commit", "dirty", "pixi_lock_sha256", "data_source",
-                                    "csv_sha256 discharge.csv.gz", "csv_sha256 mimic-iv-bhc.csv",
+                                    "csv_sha256 discharge", "parquet_sha256 discharge",
                                     "python", "duckdb", "jiny"))
   expect_identical(details$python, "3.13.9")
   expect_identical(details$dirty, "true")

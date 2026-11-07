@@ -48,7 +48,7 @@ def _data_source(parquet: Path) -> dict[str, str]:
     marker = read_marker(parquet)
     if marker is not None:
         return {"data_source": f"syntetické tabulky (prefix {marker.prefix})"}
-    details = {"data_source": "tabulky parquet ověřené proti otiskům CSV"}
+    details = {"data_source": "tabulky parquet ověřené proti vazbě na otisky CSV"}
     for path in sorted(parquet.glob("*.parquet")):
         source = verified_table_provenance(path)
         details[f"csv_sha256 {path.stem}"] = source.source_sha256

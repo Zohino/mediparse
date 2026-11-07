@@ -73,7 +73,15 @@ def test_real_tables_carry_verified_csv_and_parquet_hashes(tmp_path: Path) -> No
 
     result = provenance(ENVIRONMENT, _root(tmp_path), directory)
 
-    assert result["data_source"] == "tabulky parquet ověřené proti otiskům CSV"
+    assert result["data_source"] == "tabulky parquet ověřené proti vazbě na otisky CSV"
+    assert [
+        key for key in result if key.startswith(("csv_sha256 ", "parquet_sha256 "))
+    ] == [
+        "csv_sha256 diagnoses_icd",
+        "parquet_sha256 diagnoses_icd",
+        "csv_sha256 discharge",
+        "parquet_sha256 discharge",
+    ]
     assert {
         key: value
         for key, value in result.items()
