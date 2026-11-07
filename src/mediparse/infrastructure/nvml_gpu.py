@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from dataclasses import dataclass
 from math import isfinite
 from threading import Event, Thread
@@ -271,7 +271,12 @@ def gpu_monitor(
     if not isfinite(interval_seconds) or interval_seconds <= 0:
         msg = "Interval vzorkování GPU musí být konečný a kladný."
         raise ValueError(msg)
-    with _nvml_session() as available:
+    hidden = cuda_visible_devices is not None and cuda_visible_devices.strip() in {
+        "",
+        "-1",
+    }
+    session = nullcontext(enter_result=False) if hidden else _nvml_session()
+    with session as available:
         starts = (
             _read_devices(cuda_visible_devices, cuda_device_order) if available else ()
         )

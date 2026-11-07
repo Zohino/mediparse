@@ -640,7 +640,20 @@ def test_nvml_error_refuses_training_before_fit(
     fit = Mock(side_effect=AssertionError("Trénink po chybě NVML nesmí začít."))
     monkeypatch.setattr(model_training.LinearSvmTrainer, "fit", fit)
 
-    code = _run(notes, config, split, outputs)
+    code = model_training.run(
+        cohort=notes,
+        config=config,
+        split=split,
+        candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+        lexicon=REPOSITORY_SECTION_HEADERS,
+        model=outputs.model,
+        predictions=outputs.predictions,
+        manifest=outputs.manifest,
+        costs=outputs.costs,
+        revision=fixed_revision,
+        cuda_visible_devices=None,
+        cuda_device_order=None,
+    )
 
     assert code is ExitCode.REFUSED
     assert outputs.existing() == []

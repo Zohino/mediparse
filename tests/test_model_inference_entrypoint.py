@@ -106,7 +106,13 @@ def _train(
     return trained
 
 
-def _infer(trained: Trained, tmp_path: Path, **changes: Path) -> ExitCode:
+def _infer(
+    trained: Trained,
+    tmp_path: Path,
+    *,
+    cuda_visible_devices: str | None = "",
+    **changes: Path,
+) -> ExitCode:
     inference = changes.get("inference", tmp_path / "inference.parquet")
     paths = {
         "cohort": trained.notes,
@@ -118,7 +124,9 @@ def _infer(trained: Trained, tmp_path: Path, **changes: Path) -> ExitCode:
         "costs": inference.with_suffix(".costs.json"),
     }
     return model_inference.run(
-        **(paths | changes), cuda_visible_devices="", cuda_device_order=None
+        **(paths | changes),
+        cuda_visible_devices=cuda_visible_devices,
+        cuda_device_order=None,
     )
 
 
@@ -333,7 +341,7 @@ def test_nvml_error_refuses_inference(
         Mock(side_effect=pynvml.NVMLError(pynvml.NVML_ERROR_NO_PERMISSION)),
     )
 
-    code = _infer(trained, tmp_path)
+    code = _infer(trained, tmp_path, cuda_visible_devices=None)
 
     assert code is ExitCode.REFUSED
     assert not (tmp_path / "inference.parquet").exists()

@@ -180,15 +180,18 @@ def test_missing_driver_has_no_devices(nvml: SimpleNamespace, error: Exception) 
 
 
 @pytest.mark.parametrize("visible", ["", "-1"])
-def test_hidden_gpu_shuts_down_without_sampling(
+def test_hidden_gpu_skips_nvml_even_with_driver_error(
     nvml: SimpleNamespace, visible: str
 ) -> None:
-    """Skrytá karta není měřena, dostupná knihovna se korektně ukončí."""
+    """Skrytá GPU nevyžaduje ovladač ani při chybě jeho verze."""
+    nvml.nvmlInit.side_effect = pynvml.NVMLError(
+        pynvml.NVML_ERROR_LIB_RM_VERSION_MISMATCH
+    )
     with gpu_monitor(visible, None) as monitor:
         assert monitor.devices == ()
     assert monitor.measurement().devices == ()
-    nvml.nvmlDeviceGetMemoryInfo.assert_not_called()
-    nvml.nvmlShutdown.assert_called_once_with()
+    for function in vars(nvml).values():
+        function.assert_not_called()
 
 
 def test_unsupported_energy_preserves_memory(nvml: SimpleNamespace) -> None:
