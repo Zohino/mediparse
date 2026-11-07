@@ -1,6 +1,6 @@
 """Vstupní bod pravidla Snakemake ``smoketest``: souhrn metrik a ukázky predikce na výstup.
 
-Cesty k metrikám a predikcím jsou vstupy pravidla, kořen korpusu a adresáře výstupů
+Cesty k metrikám, predikcím a kohortě jsou vstupy pravidla, kořen korpusu a adresáře výstupů
 a logů jeho parametry; skript workflow jen rozbalí objekt ``snakemake`` a zavolá
 ``main``. Výpis jde na stdout, aby ho zkoušející viděl na konci běhu.
 """
@@ -14,6 +14,7 @@ from mediparse.domain.language import Language
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.metrics_table import ParquetMetricsTable
+from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.synthetic.domain.smoketest_summary import demo_examples
 from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
@@ -28,7 +29,13 @@ YES_NO: Final = {True: "ano", False: "ne"}
 
 
 def main(
-    *, metrics: Path, inference: Path, corpus: Path, outputs: Path, logs: Path
+    *,
+    metrics: Path,
+    inference: Path,
+    cohort: Path,
+    corpus: Path,
+    outputs: Path,
+    logs: Path,
 ) -> ExitCode:
     """Krok pravidla: souhrn na stdout, diagnostika na stderr.
 
@@ -39,6 +46,7 @@ def main(
     return run(
         metrics=metrics,
         inference=inference,
+        cohort=cohort,
         corpus=corpus,
         outputs=outputs,
         logs=logs,
@@ -58,15 +66,17 @@ def run(
     *,
     metrics: Path,
     inference: Path,
+    cohort: Path,
     corpus: Path,
     outputs: Path,
     logs: Path,
     out: TextIO,
 ) -> ExitCode:
-    """Přečte metriky a predikce, vybere ukázku a vypíše souhrn s cestami k výstupům.
+    """Přečte metriky, predikce a labely kohorty, vypíše souhrn a ukázku s pravdou.
 
     Returns:
-        OK po výpisu; REFUSED pro chybějící nebo neplatnou tabulku metrik či predikcí.
+        OK po výpisu; REFUSED pro chybějící nebo neplatnou tabulku metrik,
+        predikcí či kohorty nebo pro predikci bez zprávy v kohortě.
     """
     rows = [
         (
@@ -80,16 +90,18 @@ def run(
         )
         for item in ParquetMetricsTable(metrics).read()
     ]
-    notes = CorpusDirectory(corpus)
+    directory = CorpusDirectory(corpus)
     examples = [
         (
-            str(notes.note_path(Language.EN, item.note_id)),
+            str(directory.note_path(Language.EN, item.note_id)),
             item.diagnosis.value,
-            YES_NO[item.truth],
+            YES_NO[truth],
             YES_NO[item.predicted],
             f"{item.score:.3f}",
         )
-        for item in demo_examples(ParquetPredictionTable(inference).read())
+        for item, truth in demo_examples(
+            ParquetPredictionTable(inference).read(), ParquetNoteTable(cohort).read()
+        )
     ]
     _write_table(out, [(*HEADER, *SCORES), *rows])
     out.write("\nUkázka predikce uloženého modelu na odložených zprávách")

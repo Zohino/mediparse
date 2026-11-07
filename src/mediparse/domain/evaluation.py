@@ -35,7 +35,6 @@ class Prediction:
     note_id: str
     subject_id: SubjectId
     diagnosis: Diagnosis
-    truth: bool
     predicted: bool
     score: float
 
@@ -153,31 +152,25 @@ def ensure_complete_folds(
             raise InvalidInputError(msg)
 
 
-def ensure_truth_matches_labels(
+def truth_of(
     predictions: Sequence[Prediction], notes: Sequence[InputNote]
-) -> None:
-    """Ověří pravdu predikcí proti labelům dané diagnózy ve zprávách.
-
-    Předpokládá, že každá predikce patří zprávě z tabulky; to zajišťuje předchozí
-    kontrola ``ensure_complete_folds``.
+) -> tuple[bool, ...]:
+    """Odvodí pravdu každé predikce z labelů dané diagnózy v kohortě.
 
     Args:
         predictions: Predikce ke zpracování.
         notes: Zprávy korpusu s labely diagnóz.
 
+    Returns:
+        Pravda ve stejném pořadí jako predikce.
+
     Raises:
-        InvalidInputError: Pravda některé predikce nesouhlasí s labelem zprávy.
+        InvalidInputError: Některá predikce nemá zprávu ve vstupní tabulce.
     """
     labels = {note.note_id: note.labels for note in notes}
-    mismatches: defaultdict[tuple[str, Diagnosis], int] = defaultdict(int)
-    for item in predictions:
-        if item.truth != (item.diagnosis in labels[item.note_id]):
-            mismatches[item.row_id, item.diagnosis] += 1
-    if mismatches:
-        # Identifikátory zpráv nesou subject_id pacienta MIMIC; hlásíme jen agregáty.
-        details = "; ".join(
-            f"řádek {row_id}, diagnóza {diagnosis}, počet nesouladů {count}"
-            for (row_id, diagnosis), count in sorted(mismatches.items())
-        )
-        msg = f"Pravda predikcí neodpovídá labelům zpráv: {details}."
+    missing = sum(item.note_id not in labels for item in predictions)
+    if missing:
+        # Identifikátory zpráv nesou subject_id pacienta MIMIC; hlásíme jen počet.
+        msg = f"Počet predikcí bez zprávy ve vstupní tabulce: {missing}."
         raise InvalidInputError(msg)
+    return tuple(item.diagnosis in labels[item.note_id] for item in predictions)

@@ -28,7 +28,6 @@ SCHEMA: Final = pa.schema([
     pa.field("note_id", pa.string(), nullable=False),
     pa.field("subject_id", pa.int64(), nullable=False),
     pa.field("diagnosis", pa.string(), nullable=False),
-    pa.field("truth", pa.bool_(), nullable=False),
     pa.field("predicted", pa.bool_(), nullable=False),
     pa.field("score", pa.float64(), nullable=False),
 ])
@@ -48,7 +47,6 @@ class ParquetPredictionTable:
             "note_id": [item.note_id for item in predictions],
             "subject_id": [item.subject_id for item in predictions],
             "diagnosis": [item.diagnosis.value for item in predictions],
-            "truth": [item.truth for item in predictions],
             "predicted": [item.predicted for item in predictions],
             "score": [item.score for item in predictions],
         }
@@ -79,7 +77,6 @@ class ParquetPredictionTable:
                 row["note_id"],
                 row["subject_id"],
                 diagnosis,
-                truth=row["truth"],
                 predicted=row["predicted"],
                 score=row["score"],
             )

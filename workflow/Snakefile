@@ -9,6 +9,7 @@ rule smoketest:
     input:
         metrics=SMOKETEST / "metrics.parquet",
         inference=SMOKETEST / "inference.parquet",
+        cohort=SMOKETEST / "cohort.parquet",
     params:
         corpus=SYNTHETIC,
         outputs=SMOKETEST,

@@ -16,6 +16,7 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.note import note_id
 from mediparse.domain.split import SharedSplit, Split, SplitConfig
+from mediparse.infrastructure.sklearn_metrics import SklearnScorer
 from tests.model_support import prediction
 
 if TYPE_CHECKING:
@@ -51,14 +52,30 @@ class _FakeSink:
         self.written.append(tuple(metrics))
 
 
-def _notes(*subjects: int) -> tuple[InputNote, ...]:
-    return tuple(
-        InputNote(note_id(subject, 1), subject, Language.EN, "text", frozenset())
-        for subject in subjects
-    )
-
-
-NOTES = _notes(1, 2, 3, 4)
+NOTES = (
+    InputNote(
+        "1-DS-1",
+        1,
+        Language.EN,
+        "text",
+        frozenset({Diagnosis.ATRIAL_FIBRILLATION, Diagnosis.PNEUMONIA}),
+    ),
+    InputNote(
+        "2-DS-1",
+        2,
+        Language.EN,
+        "text",
+        frozenset({Diagnosis.CKD, Diagnosis.DIABETES, Diagnosis.PNEUMONIA}),
+    ),
+    InputNote(
+        "3-DS-1",
+        3,
+        Language.EN,
+        "text",
+        frozenset({Diagnosis.CKD, Diagnosis.DIABETES, Diagnosis.PNEUMONIA}),
+    ),
+    InputNote("4-DS-1", 4, Language.EN, "text", frozenset()),
+)
 SPLIT = Split((frozenset({1, 2, 3}), frozenset({4})))
 HALVES = Split((frozenset({1, 2}), frozenset({3, 4})))
 
@@ -82,12 +99,12 @@ class _FakeSplitSource:
 def _use_case(
     items: Sequence[Prediction],
     split: Split = SPLIT,
-    notes: Sequence[InputNote] | None = None,
+    notes: Sequence[InputNote] = NOTES,
 ) -> tuple[ModelEvaluation, _FakeScorer, _FakeSink]:
     scorer, sink = _FakeScorer(), _FakeSink()
     use_case = ModelEvaluation(
         _FakePredictions(items),
-        _FakeTable(_labeled_notes(items) if notes is None else notes),
+        _FakeTable(notes),
         _FakeSplitSource(split),
         scorer,
         sink,
@@ -95,47 +112,63 @@ def _use_case(
     return use_case, scorer, sink
 
 
-def _labeled_notes(items: Sequence[Prediction]) -> tuple[InputNote, ...]:
-    return tuple(
-        replace(
-            note,
-            labels=frozenset(
-                item.diagnosis
-                for item in items
-                if item.note_id == note.note_id and item.truth
-            ),
-        )
-        for note in NOTES
-    )
-
-
 def _group(
     row_id: str,
     diagnosis: Diagnosis,
-    outcomes: Sequence[tuple[bool, float]],
+    scores: Sequence[float],
     fold: int = 0,
     subjects: Sequence[int] = (1, 2, 3),
 ) -> tuple[Prediction, ...]:
     return tuple(
         prediction(
             note_id(subject, 1),
-            truth=truth,
             score=score,
             diagnosis=diagnosis,
             row_id=row_id,
             fold=fold,
         )
-        for subject, (truth, score) in zip(subjects, outcomes, strict=True)
+        for subject, score in zip(subjects, scores, strict=True)
     )
 
 
 MIXED = (
-    *_group(
-        "b", Diagnosis.ATRIAL_FIBRILLATION, ((True, 1.0), (False, 0.5), (False, -3.0))
-    ),
-    *_group("a", Diagnosis.CKD, ((False, -1.0), (True, 3.0), (True, -0.5))),
-    *_group("a", Diagnosis.DIABETES, ((False, -2.0), (True, 2.0), (True, 1.0))),
+    *_group("b", Diagnosis.ATRIAL_FIBRILLATION, (1.0, 0.5, -3.0)),
+    *_group("a", Diagnosis.CKD, (-1.0, 3.0, -0.5)),
+    *_group("a", Diagnosis.DIABETES, (-2.0, 2.0, 1.0)),
 )
+
+
+def test_metrics_use_cohort_labels_instead_of_predictions() -> None:
+    """Ručně spočtené metriky dvou pozitivních a dvou negativních zpráv."""
+    notes = (
+        InputNote("1-DS-1", 1, Language.EN, "A", frozenset({Diagnosis.DIABETES})),
+        InputNote("2-DS-1", 2, Language.EN, "B", frozenset({Diagnosis.DIABETES})),
+        InputNote("3-DS-1", 3, Language.EN, "C", frozenset()),
+        InputNote("4-DS-1", 4, Language.EN, "D", frozenset()),
+    )
+    items = tuple(
+        prediction(note.note_id, score=score)
+        for note, score in zip(notes, (2.0, -1.0, 1.0, -2.0), strict=True)
+    )
+    sink = _FakeSink()
+    use_case = ModelEvaluation(
+        _FakePredictions(items),
+        _FakeTable(notes),
+        _FakeSplitSource(Split((frozenset({1, 2, 3, 4}), frozenset({5})))),
+        SklearnScorer(),
+        sink,
+    )
+
+    (result,) = use_case.run()
+
+    assert (result.test_notes, result.test_positives) == (4, 2)
+    assert result.metrics.precision == pytest.approx(1 / 2)
+    assert result.metrics.recall == pytest.approx(1 / 2)
+    assert result.metrics.f1 == pytest.approx(1 / 2)
+    assert result.metrics.accuracy == pytest.approx(1 / 2)
+    assert result.metrics.roc_auc == pytest.approx(3 / 4)
+    assert result.metrics.pr_auc == pytest.approx(5 / 6)
+    assert sink.written == [(result,)]
 
 
 def test_groups_are_sorted_with_sizes() -> None:
@@ -186,33 +219,13 @@ def test_single_class_is_rejected_before_scoring() -> None:
     """Skupina s jedinou třídou pravdy skončí InvalidInputError před výpočtem."""
     items = (
         *MIXED,
-        *_group("c", Diagnosis.PNEUMONIA, ((True, 1.0), (True, 2.0), (True, 3.0))),
+        *_group("c", Diagnosis.PNEUMONIA, (1.0, 2.0, 3.0)),
     )
     use_case, scorer, sink = _use_case(items)
 
-    with pytest.raises(InvalidInputError, match="pneumonia"):
-        use_case.run()
-
-    assert not scorer.calls
-    assert not sink.written
-
-
-@pytest.mark.parametrize("single_class", [False, True])
-def test_truth_mismatch_is_rejected_before_classes_and_scoring(
-    *,
-    single_class: bool,
-) -> None:
-    """Neshoda pravdy odmítne vstup před scorerem i před kontrolou jediné třídy."""
-    original = _group(
-        "row", Diagnosis.DIABETES, ((True, 1.0), (False, -1.0), (False, -1.0))
-    )
-    items = tuple(
-        replace(item, truth=True if single_class else not item.truth)
-        for item in original
-    )
-    use_case, scorer, sink = _use_case(items, notes=_labeled_notes(original))
-
-    with pytest.raises(InvalidInputError, match="Pravda predikcí neodpovídá labelům"):
+    with pytest.raises(
+        InvalidInputError, match=r"pneumonia.*metriky potřebují obě třídy"
+    ):
         use_case.run()
 
     assert not scorer.calls
@@ -237,10 +250,16 @@ def test_folds_of_one_row_and_diagnosis_are_pooled() -> None:
     by skončilo na kontrole obou tříd.
     """
     items = (
-        *_group("row", Diagnosis.DIABETES, ((True, 1.0), (True, -1.0)), 0, (1, 2)),
-        *_group("row", Diagnosis.DIABETES, ((False, -2.0), (False, 0.5)), 1, (3, 4)),
+        *_group("row", Diagnosis.DIABETES, (1.0, -1.0), 0, (1, 2)),
+        *_group("row", Diagnosis.DIABETES, (-2.0, 0.5), 1, (3, 4)),
     )
-    use_case, scorer, _ = _use_case(items, HALVES)
+    notes = (
+        replace(NOTES[0], labels=frozenset({Diagnosis.DIABETES})),
+        replace(NOTES[1], labels=frozenset({Diagnosis.DIABETES})),
+        replace(NOTES[2], labels=frozenset()),
+        replace(NOTES[3], labels=frozenset()),
+    )
+    use_case, scorer, _ = _use_case(items, HALVES, notes=notes)
 
     result = use_case.run()
 

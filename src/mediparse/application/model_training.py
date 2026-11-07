@@ -87,13 +87,10 @@ class ModelTraining[C: TextClassifier]:
                 note.note_id,
                 note.subject_id,
                 config.diagnosis,
-                truth=label,
                 predicted=classification.predicted,
                 score=classification.score,
             )
-            for note, label, classification in zip(
-                holdout.test, truth, classifications, strict=True
-            )
+            for note, classification in zip(holdout.test, classifications, strict=True)
         ]
         self.store.save(classifier)
         self.predictions.write(predictions)

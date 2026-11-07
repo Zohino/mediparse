@@ -112,10 +112,10 @@ def test_writes_all_held_out_predictions(tmp_path: Path) -> None:
     expected = ParquetPredictionTable(trained.predictions).read()
     assert code is ExitCode.OK
     assert [
-        (row.row_id, row.fold, row.note_id, row.subject_id, row.diagnosis, row.truth)
+        (row.row_id, row.fold, row.note_id, row.subject_id, row.diagnosis)
         for row in rows
     ] == [
-        (row.row_id, row.fold, row.note_id, row.subject_id, row.diagnosis, row.truth)
+        (row.row_id, row.fold, row.note_id, row.subject_id, row.diagnosis)
         for row in expected
     ]
     assert [row.predicted for row in rows] == [row.predicted for row in expected]

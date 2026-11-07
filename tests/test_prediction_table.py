@@ -23,7 +23,6 @@ PREDICTIONS = (
         "7-DS-2",
         7,
         Diagnosis.DIABETES,
-        truth=True,
         predicted=True,
         score=1.25,
     ),
@@ -33,13 +32,10 @@ PREDICTIONS = (
         "5-DS-1",
         5,
         Diagnosis.DIABETES,
-        truth=False,
         predicted=True,
         score=0.5,
     ),
-    Prediction(
-        "row", 1, "5-DS-2", 5, Diagnosis.CKD, truth=False, predicted=False, score=-0.75
-    ),
+    Prediction("row", 1, "5-DS-2", 5, Diagnosis.CKD, predicted=False, score=-0.75),
 )
 
 
@@ -73,6 +69,40 @@ def test_other_schema_is_invalid_input(tmp_path: Path) -> None:
     """Soubor s jiným schématem je InvalidInputError."""
     path = tmp_path / "other.parquet"
     pq.write_table(pa.table({"note_id": ["a"]}), path)
+
+    with pytest.raises(InvalidInputError, match="neodpovídá schématu"):
+        ParquetPredictionTable(path).read()
+
+
+def test_legacy_truth_column_is_invalid_input(tmp_path: Path) -> None:
+    """Staré schéma s redundantní pravdou se odmítne."""
+    path = tmp_path / "legacy.parquet"
+    legacy_schema = pa.schema([
+        pa.field("row_id", pa.string(), nullable=False),
+        pa.field("fold", pa.int64(), nullable=False),
+        pa.field("note_id", pa.string(), nullable=False),
+        pa.field("subject_id", pa.int64(), nullable=False),
+        pa.field("diagnosis", pa.string(), nullable=False),
+        pa.field("truth", pa.bool_(), nullable=False),
+        pa.field("predicted", pa.bool_(), nullable=False),
+        pa.field("score", pa.float64(), nullable=False),
+    ])
+    pq.write_table(
+        pa.Table.from_pydict(
+            {
+                "row_id": ["row"],
+                "fold": [0],
+                "note_id": ["1-DS-1"],
+                "subject_id": [1],
+                "diagnosis": ["diabetes"],
+                "truth": [True],
+                "predicted": [True],
+                "score": [1.0],
+            },
+            schema=legacy_schema,
+        ),
+        path,
+    )
 
     with pytest.raises(InvalidInputError, match="neodpovídá schématu"):
         ParquetPredictionTable(path).read()

@@ -6,6 +6,7 @@ from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING, Final
 
 import pyarrow.parquet as pq
+import pytest
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.entrypoints import model_evaluation
@@ -17,8 +18,6 @@ from tests.model_support import prediction, separable_notes, write_split
 if TYPE_CHECKING:
     from collections.abc import Sequence
     from pathlib import Path
-
-    import pytest
 
     from mediparse.domain.evaluation import Prediction
 
@@ -52,7 +51,6 @@ def _inputs(root: Path) -> _Inputs:
     items = tuple(
         prediction(
             note.note_id,
-            truth=Diagnosis.DIABETES in note.labels,
             score=1.0 if Diagnosis.DIABETES in note.labels else -1.0,
         )
         for note in test
@@ -77,9 +75,6 @@ def test_writes_metrics_row(tmp_path: Path) -> None:
     assert len(rows) == 1
     assert (rows[0]["row_id"], rows[0]["diagnosis"]) == ("row", "diabetes")
     assert rows[0]["test_notes"] == len(inputs.test_predictions)
-    assert rows[0]["test_positives"] == sum(
-        item.truth for item in inputs.test_predictions
-    )
     for name in ("precision", "recall", "f1", "accuracy", "roc_auc", "pr_auc"):
         assert 0.0 <= rows[0][name] <= 1.0
 
@@ -104,7 +99,7 @@ def test_prediction_of_note_outside_test_is_refused(
 ) -> None:
     """Predikce zprávy, která do testu foldu nepatří, krok odmítne."""
     inputs = _inputs(tmp_path)
-    foreign = prediction("2-DS-1", truth=True, score=1.0, fold=0)
+    foreign = prediction("2-DS-1", score=1.0, fold=0)
     assert foreign.note_id not in {item.note_id for item in inputs.test_predictions}
     _rewrite_predictions(inputs, (*inputs.test_predictions, foreign))
 
@@ -142,13 +137,6 @@ def test_single_class_is_refused(
 ) -> None:
     """Jediná třída pravdy krok odmítne bez tracebacku a nic nevznikne."""
     inputs = _inputs(tmp_path)
-    _rewrite_predictions(
-        inputs,
-        [
-            prediction(item.note_id, truth=True, score=item.score)
-            for item in inputs.test_predictions
-        ],
-    )
     table = ParquetNoteTable(inputs.notes)
     test_ids = {item.note_id for item in inputs.test_predictions}
     table.write([
@@ -167,30 +155,19 @@ def test_single_class_is_refused(
     assert "Traceback" not in caplog.text
 
 
-def test_truth_copied_from_imperfect_predictions_is_refused(
-    tmp_path: Path, caplog: pytest.LogCaptureFixture
-) -> None:
-    """Záměna pravdy za chybné predikce skončí odmítnutím bez metrik a identifikátorů."""
+def test_all_negative_predictions_are_evaluated_against_labels(tmp_path: Path) -> None:
+    """Samé záporné predikce mají F1 a recall nula a při stejných skóre ROC-AUC půl."""
     inputs = _inputs(tmp_path)
-    imperfect = tuple(
-        prediction(item.note_id, truth=item.truth, score=-1.0)
-        for item in inputs.test_predictions
-    )
     _rewrite_predictions(
-        inputs, [replace(item, truth=item.predicted) for item in imperfect]
+        inputs,
+        [prediction(item.note_id, score=-1.0) for item in inputs.test_predictions],
     )
 
     code = inputs.run()
 
-    assert code is ExitCode.REFUSED
-    assert not inputs.metrics.exists()
-    assert "Pravda predikcí neodpovídá labelům" in caplog.text
-    assert "-DS-" not in caplog.text
-    assert "subject_id" not in caplog.text
-    assert "Traceback" not in caplog.text
-    assert [record.getMessage() for record in caplog.records] == [
-        (
-            "Pravda predikcí neodpovídá labelům zpráv: řádek row, diagnóza diabetes, "
-            f"počet nesouladů {sum(item.truth for item in inputs.test_predictions)}."
-        )
-    ]
+    assert code is ExitCode.OK
+    (row,) = pq.read_table(inputs.metrics).to_pylist()
+    assert row["f1"] == pytest.approx(0.0)
+    assert row["recall"] == pytest.approx(0.0)
+    assert row["roc_auc"] == pytest.approx(0.5)
+    assert row["test_positives"] == 9  # ruff: ignore[magic-value-comparison]
