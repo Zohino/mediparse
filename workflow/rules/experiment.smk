@@ -24,6 +24,7 @@ rule train_model:
         model="resources/mimic/model.skops",
         predictions="resources/mimic/predictions.parquet",
         manifest="results/experiment/run_manifest.json",
+        costs="results/experiment/training_costs.json",
     log:
         "logs/experiment/train_model.log",
     benchmark:

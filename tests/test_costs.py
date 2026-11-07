@@ -9,7 +9,17 @@ from hypothesis import given
 from hypothesis import strategies as st
 from pydantic import ValidationError
 
-from mediparse.domain.costs import LatencyPlan, latency, nearest_rank
+from mediparse.domain.costs import (
+    BatchThroughput,
+    GpuMeasurement,
+    GpuUsage,
+    InferenceCosts,
+    LatencyPlan,
+    TrainingCosts,
+    latency,
+    nearest_rank,
+)
+from mediparse.domain.environment import GpuDevice, Hardware
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -80,3 +90,78 @@ def test_latency_percentiles_are_ordered_observed_values(
 def test_full_percentile_is_maximum(values: list[float]) -> None:
     """Stý percentil má pořadí n a je největší hodnotou neprázdného vstupu."""
     assert nearest_rank(values, 100) == max(values)
+
+
+def _gpu_usage(energy: float | None = 3.5, peak: int = 300) -> GpuUsage:
+    return GpuUsage(
+        device=GpuDevice(name="Fake GPU", memory_total_bytes=1000),
+        energy_joules=energy,
+        memory_used_start_bytes=100,
+        memory_used_peak_bytes=peak,
+    )
+
+
+def test_gpu_peak_cannot_be_below_start() -> None:
+    """Špička nemůže být nižší než první měřená paměť."""
+    with pytest.raises(ValidationError, match="špičk"):
+        _gpu_usage(peak=99)
+
+
+def test_unsupported_energy_is_accepted() -> None:
+    """Nepodporovaný čítač nebrání měření paměti."""
+    assert _gpu_usage(energy=None).energy_joules is None
+
+
+def test_negative_energy_is_rejected() -> None:
+    """Obrácené odečtení čítačů není platná energie."""
+    with pytest.raises(ValidationError, match="energy_joules"):
+        _gpu_usage(energy=-3.5)
+
+
+def _inference_costs(
+    gpus: tuple[GpuDevice, ...], usages: tuple[GpuUsage, ...]
+) -> InferenceCosts:
+    return InferenceCosts(
+        plan=LatencyPlan(warmup=0, samples=1),
+        latency=latency([0.1]),
+        batch=BatchThroughput(notes=1, seconds=0.1),
+        hardware=Hardware(
+            cpu_model="Synthetic CPU",
+            logical_cores=2,
+            available_cores=1,
+            memory_bytes=1024,
+            gpus=gpus,
+        ),
+        gpu=GpuMeasurement(seconds=1.0, devices=usages),
+    )
+
+
+def test_empty_gpu_measurement_is_accepted() -> None:
+    """Stroj bez GPU nese prázdný hardware i měření."""
+    assert _inference_costs((), ()).gpu.devices == ()
+
+
+@pytest.mark.parametrize("indices", [(), (0,), (1, 0)])
+def test_inference_requires_exact_hardware_gpu_order(indices: tuple[int, ...]) -> None:
+    """Chybějící zařízení i záměnu pořadí odmítne provenance nákladů."""
+    first = _gpu_usage()
+    second = first.model_copy(
+        update={"device": GpuDevice(name="Other GPU", memory_total_bytes=2000)}
+    )
+    usages = (first, second)
+    with pytest.raises(ValidationError, match="zařízení"):
+        _inference_costs(
+            tuple(usage.device for usage in usages), tuple(usages[i] for i in indices)
+        )
+
+
+def test_training_costs_roundtrip() -> None:
+    """Náklady tréninku jsou samostatně čitelným měřením GPU."""
+    costs = TrainingCosts(gpu=GpuMeasurement(seconds=1.0, devices=(_gpu_usage(),)))
+    assert TrainingCosts.model_validate_json(costs.model_dump_json()) == costs
+
+
+def test_negative_gpu_window_is_rejected() -> None:
+    """Záporná délka okna nemůže vyjadřovat spotřebovaný čas GPU."""
+    with pytest.raises(ValidationError, match="seconds"):
+        GpuMeasurement(seconds=-1.0, devices=())

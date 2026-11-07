@@ -8,7 +8,7 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from mediparse.domain.environment import Hardware
+from mediparse.domain.environment import GpuDevice, Hardware
 from mediparse.domain.inputs import InvalidInputError
 
 
@@ -25,8 +25,11 @@ def cpu_model(cpuinfo: str, fallback: str) -> str:
     return fallback
 
 
-def machine_hardware() -> Hardware:
+def machine_hardware(gpus: tuple[GpuDevice, ...]) -> Hardware:
     """Zjistí CPU, jádra systému i procesu a fyzickou paměť hostitele.
+
+    Args:
+        gpus: Viditelná GPU z adaptéru NVML, převezmou se beze změny.
 
     Returns:
         Hardware stroje, na kterém běží proces.
@@ -56,6 +59,7 @@ def machine_hardware() -> Hardware:
             "logical_cores": logical_cores,
             "available_cores": available_cores,
             "memory_bytes": page_size * physical_pages,
+            "gpus": gpus,
         })
     except ValidationError as error:
         raise InvalidInputError(unknown_hardware) from error

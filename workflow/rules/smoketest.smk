@@ -52,6 +52,7 @@ use rule train_model as train_smoketest_model with:
         model=SMOKETEST / "model.skops",
         predictions=SMOKETEST / "predictions.parquet",
         manifest=SMOKETEST / "run_manifest.json",
+        costs=SMOKETEST / "training_costs.json",
     log:
         SMOKETEST_LOGS / "train_smoketest_model.log",
     benchmark:

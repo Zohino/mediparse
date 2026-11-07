@@ -4,12 +4,18 @@ from __future__ import annotations
 
 import json
 import shutil
+from contextlib import contextmanager
 from dataclasses import replace
+from threading import Event
+from types import SimpleNamespace
 from typing import TYPE_CHECKING, Final, NamedTuple
+from unittest.mock import Mock
 
+import pynvml
 import pytest
 
-from mediparse.domain.costs import InferenceCosts, LatencyPlan
+from mediparse.domain.costs import GpuMeasurement, GpuUsage, InferenceCosts, LatencyPlan
+from mediparse.domain.environment import GpuDevice
 from mediparse.entrypoints import model_inference, model_training
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.machine_hardware import machine_hardware
@@ -31,6 +37,7 @@ from tests.support import (
 )
 
 if TYPE_CHECKING:
+    from collections.abc import Generator
     from pathlib import Path
 
 
@@ -91,12 +98,21 @@ def _train(
         predictions=trained.predictions,
         manifest=root / "run_manifest.json",
         revision=fixed_revision,
+        costs=root / "training_costs.json",
+        cuda_visible_devices="",
+        cuda_device_order=None,
     )
     assert code is ExitCode.OK
     return trained
 
 
-def _infer(trained: Trained, tmp_path: Path, **changes: Path) -> ExitCode:
+def _infer(
+    trained: Trained,
+    tmp_path: Path,
+    *,
+    cuda_visible_devices: str | None = "",
+    **changes: Path,
+) -> ExitCode:
     inference = changes.get("inference", tmp_path / "inference.parquet")
     paths = {
         "cohort": trained.notes,
@@ -107,7 +123,11 @@ def _infer(trained: Trained, tmp_path: Path, **changes: Path) -> ExitCode:
         "inference": inference,
         "costs": inference.with_suffix(".costs.json"),
     }
-    return model_inference.run(**(paths | changes))
+    return model_inference.run(
+        **(paths | changes),
+        cuda_visible_devices=cuda_visible_devices,
+        cuda_device_order=None,
+    )
 
 
 def test_writes_all_held_out_predictions(tmp_path: Path) -> None:
@@ -258,4 +278,95 @@ def test_writes_aggregate_costs_with_measurement_plan(tmp_path: Path) -> None:
     )
     assert written.latency.samples == min(100, count)
     assert written.batch.notes == count
-    assert written.hardware == machine_hardware()
+    assert written.hardware == machine_hardware(gpus=())
+    assert written.hardware.gpus == ()
+    assert written.gpu.devices == ()
+
+
+def test_inference_records_visible_gpu_and_measurement(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Soubor nákladů inference propojí HW s měřením stejného zařízení."""
+    trained = _train(tmp_path)
+    device = GpuDevice(name="Fake GPU", memory_total_bytes=1000)
+    measurement = GpuMeasurement(
+        seconds=2.0,
+        devices=(
+            GpuUsage(
+                device=device,
+                energy_joules=3.5,
+                memory_used_start_bytes=100,
+                memory_used_peak_bytes=300,
+            ),
+        ),
+    )
+    closed = Event()
+
+    def result() -> GpuMeasurement:
+        assert closed.is_set(), "Náklady se smí číst až po uzavření okna."
+        return measurement
+
+    @contextmanager
+    def monitor(visible: str | None, order: str | None) -> Generator[SimpleNamespace]:
+        assert visible is not None
+        assert not visible
+        assert order is None
+        try:
+            yield SimpleNamespace(devices=(device,), measurement=result)
+        finally:
+            closed.set()
+        assert (tmp_path / "inference.parquet").exists(), (
+            "Inference musí běžet uvnitř okna."
+        )
+
+    monkeypatch.setattr(model_inference, "gpu_monitor", monitor)
+    code = _infer(trained, tmp_path)
+
+    assert code is ExitCode.OK
+    costs = InferenceCosts.model_validate_json(
+        (tmp_path / "inference.costs.json").read_text(encoding="utf-8")
+    )
+    assert costs.hardware.gpus == (device,)
+    assert costs.gpu == measurement
+
+
+def test_nvml_error_refuses_inference(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Chyba NVML nezapíše predikce ani neúplné náklady inference."""
+    trained = _train(tmp_path)
+    monkeypatch.setattr(
+        pynvml,
+        "nvmlInit",
+        Mock(side_effect=pynvml.NVMLError(pynvml.NVML_ERROR_NO_PERMISSION)),
+    )
+
+    code = _infer(trained, tmp_path, cuda_visible_devices=None)
+
+    assert code is ExitCode.REFUSED
+    assert not (tmp_path / "inference.parquet").exists()
+    assert not (tmp_path / "inference.costs.json").exists()
+
+
+def test_inference_main_forwards_cuda_environment(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Composition root přečte obě proměnné CUDA a předá je do run."""
+    monkeypatch.setenv("CUDA_VISIBLE_DEVICES", "GPU-synthetic")
+    monkeypatch.setenv("CUDA_DEVICE_ORDER", "PCI_BUS_ID")
+    execute = Mock(return_value=ExitCode.OK)
+    monkeypatch.setattr(model_inference, "run", execute)
+    monkeypatch.setattr(model_inference, "configure_logging", Mock())
+    code = model_inference.main(
+        cohort=tmp_path / "notes.parquet",
+        config=tmp_path / "config.json",
+        lexicon=tmp_path / "lexicon.json",
+        model=tmp_path / "model.skops",
+        predictions=tmp_path / "predictions.parquet",
+        inference=tmp_path / "inference.parquet",
+        costs=tmp_path / "costs.json",
+        log=tmp_path / "infer.log",
+    )
+    assert code is ExitCode.OK
+    assert execute.call_args.kwargs["cuda_visible_devices"] == "GPU-synthetic"
+    assert execute.call_args.kwargs["cuda_device_order"] == "PCI_BUS_ID"

@@ -14,6 +14,7 @@ raise SystemExit(
         model=Path(snakemake.output.model),
         predictions=Path(snakemake.output.predictions),
         manifest=Path(snakemake.output.manifest),
+        costs=Path(snakemake.output.costs),
         log=Path(snakemake.log[0]),
     )
 )

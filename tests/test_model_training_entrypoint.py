@@ -5,11 +5,18 @@ from __future__ import annotations
 import hashlib
 import json
 import shutil
+from contextlib import contextmanager
 from dataclasses import dataclass, replace
+from threading import Event
+from types import SimpleNamespace
 from typing import TYPE_CHECKING, Final
+from unittest.mock import Mock
 
+import pynvml
 import pytest
 
+from mediparse.domain.costs import GpuMeasurement, GpuUsage, TrainingCosts
+from mediparse.domain.environment import GpuDevice
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints import model_training
@@ -41,7 +48,7 @@ from tests.support import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
+    from collections.abc import Callable, Generator
     from pathlib import Path
 
     from mediparse.domain.environment import Hardware, SourceRevision
@@ -74,6 +81,7 @@ class _Outputs:
     model: Path
     predictions: Path
     manifest: Path
+    costs: Path
 
     @classmethod
     def under(cls, directory: Path) -> _Outputs:
@@ -81,12 +89,13 @@ class _Outputs:
             directory / "model.skops",
             directory / "predictions.parquet",
             directory / "run_manifest.json",
+            directory / "training_costs.json",
         )
 
     def existing(self) -> list[Path]:
         return [
             path
-            for path in (self.model, self.predictions, self.manifest)
+            for path in (self.model, self.predictions, self.manifest, self.costs)
             if path.exists()
         ]
 
@@ -110,6 +119,9 @@ def _call(
         predictions=outputs.predictions,
         manifest=outputs.manifest,
         revision=revision,
+        costs=outputs.costs,
+        cuda_visible_devices="",
+        cuda_device_order=None,
     )
 
 
@@ -160,7 +172,10 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
     assert written.split_sha256 == ParquetSplitTable(split).read().split.sha256()
     assert written.row_id == "row"
     assert written.environment.source == REVISION
-    assert written.hardware == machine_hardware()
+    assert written.hardware == machine_hardware(gpus=())
+    costs = TrainingCosts.model_validate_json(outputs.costs.read_text(encoding="utf-8"))
+    assert costs.gpu.devices == ()
+    assert written.hardware.gpus == ()
     assert written.model_revision is None
     assert written.tokenizer_revision is None
     assert written.model == ESTIMATOR
@@ -303,7 +318,8 @@ def test_unknown_hardware_is_refused_before_training(
     outputs = _Outputs.under(tmp_path / "out")
     message = "Hardware stroje nelze zjistit ze systémových údajů."
 
-    def unavailable_hardware() -> Hardware:
+    def unavailable_hardware(gpus: tuple[GpuDevice, ...]) -> Hardware:
+        assert gpus == ()
         raise InvalidInputError(message)
 
     def unexpected_fit(*_args: object) -> None:
@@ -562,3 +578,137 @@ def test_variant_switch_controls_model_and_manifest(tmp_path: Path) -> None:
         }
     assert len(scores[False]) > 1
     assert len(scores[True]) == 1
+
+
+def test_training_records_visible_gpu_and_measurement(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Manifest a samostatné náklady nesou stejnou podvrženou kartu i měření."""
+    notes, config, split = _inputs(tmp_path)
+    outputs = _Outputs.under(tmp_path / "out")
+    device = GpuDevice(name="Fake GPU", memory_total_bytes=1000)
+    measurement = GpuMeasurement(
+        seconds=2.0,
+        devices=(
+            GpuUsage(
+                device=device,
+                energy_joules=3.5,
+                memory_used_start_bytes=100,
+                memory_used_peak_bytes=300,
+            ),
+        ),
+    )
+    closed = Event()
+
+    def result() -> GpuMeasurement:
+        assert closed.is_set(), "Náklady se smí číst až po uzavření okna."
+        return measurement
+
+    @contextmanager
+    def monitor(visible: str | None, order: str | None) -> Generator[SimpleNamespace]:
+        assert visible is not None
+        assert not visible
+        assert order is None
+        try:
+            yield SimpleNamespace(devices=(device,), measurement=result)
+        finally:
+            closed.set()
+        assert outputs.model.exists(), "Trénink musí běžet uvnitř okna."
+
+    monkeypatch.setattr(model_training, "gpu_monitor", monitor)
+    code = _run(notes, config, split, outputs)
+
+    assert code is ExitCode.OK
+    assert _manifest(outputs).hardware.gpus == (device,)
+    written = TrainingCosts.model_validate_json(
+        outputs.costs.read_text(encoding="utf-8")
+    )
+    assert written.gpu == measurement
+
+
+def test_nvml_error_refuses_training_before_fit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Chyba NVML nesmí začít trénink ani zapsat model, manifest nebo náklady."""
+    notes, config, split = _inputs(tmp_path)
+    outputs = _Outputs.under(tmp_path / "out")
+    monkeypatch.setattr(
+        pynvml,
+        "nvmlInit",
+        Mock(side_effect=pynvml.NVMLError(pynvml.NVML_ERROR_NO_PERMISSION)),
+    )
+    fit = Mock(side_effect=AssertionError("Trénink po chybě NVML nesmí začít."))
+    monkeypatch.setattr(model_training.LinearSvmTrainer, "fit", fit)
+
+    code = model_training.run(
+        cohort=notes,
+        config=config,
+        split=split,
+        candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+        lexicon=REPOSITORY_SECTION_HEADERS,
+        model=outputs.model,
+        predictions=outputs.predictions,
+        manifest=outputs.manifest,
+        costs=outputs.costs,
+        revision=fixed_revision,
+        cuda_visible_devices=None,
+        cuda_device_order=None,
+    )
+
+    assert code is ExitCode.REFUSED
+    assert outputs.existing() == []
+    fit.assert_not_called()
+
+
+def test_training_main_forwards_cuda_environment(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Composition root předá obě proměnné CUDA i cestu nákladů do run."""
+    monkeypatch.setenv("CUDA_VISIBLE_DEVICES", "GPU-synthetic")
+    monkeypatch.setenv("CUDA_DEVICE_ORDER", "PCI_BUS_ID")
+    execute = Mock(return_value=ExitCode.OK)
+    monkeypatch.setattr(model_training, "run", execute)
+    monkeypatch.setattr(model_training, "configure_logging", Mock())
+    code = model_training.main(
+        cohort=tmp_path / "notes.parquet",
+        config=tmp_path / "config.json",
+        candidates=tmp_path / "candidates.json",
+        lexicon=tmp_path / "lexicon.json",
+        split=tmp_path / "splits.parquet",
+        model=tmp_path / "model.skops",
+        predictions=tmp_path / "predictions.parquet",
+        manifest=tmp_path / "manifest.json",
+        costs=tmp_path / "costs.json",
+        log=tmp_path / "train.log",
+    )
+    assert code is ExitCode.OK
+    assert execute.call_args.kwargs["cuda_visible_devices"] == "GPU-synthetic"
+    assert execute.call_args.kwargs["cuda_device_order"] == "PCI_BUS_ID"
+    assert execute.call_args.kwargs["costs"] == tmp_path / "costs.json"
+
+
+@pytest.mark.parametrize("phase", ["input", "normalization"])
+def test_invalid_preparation_is_refused_before_gpu_monitor(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, phase: str
+) -> None:
+    """Chybný lexikon i slovník normalizace se odmítnou před otevřením GPU okna."""
+    inputs = _inputs(
+        tmp_path,
+        strip_diagnostic_sections=phase == "input",
+        normalize_clinical_text=phase == "normalization",
+    )
+    outputs = _Outputs.under(tmp_path / "out")
+    monitor = Mock(
+        side_effect=AssertionError("Neplatná příprava nesmí otevřít GPU okno.")
+    )
+    monkeypatch.setattr(model_training, "gpu_monitor", monitor)
+
+    code = (
+        _call(inputs, outputs, tmp_path / "missing-lexicon.json", fixed_revision)
+        if phase == "input"
+        else _run_with_candidates(inputs, outputs, tmp_path / "missing-candidates.json")
+    )
+
+    assert code is ExitCode.REFUSED
+    assert outputs.existing() == []
+    monitor.assert_not_called()
