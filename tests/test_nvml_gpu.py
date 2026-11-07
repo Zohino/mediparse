@@ -40,25 +40,38 @@ def test_visible_indices_follow_cuda_order(
 
 
 @pytest.mark.parametrize(
-    ("visible", "order"),
+    ("visible", "order", "pattern"),
     [
-        ("1", None),
-        ("2", "PCI_BUS_ID"),
-        ("0,0", "PCI_BUS_ID"),
-        ("GPU-c", None),
-        ("MIG-x", None),
-        ("abc", None),
-        ("GPU-a,0", "PCI_BUS_ID"),
-        ("GPU-a,GPU-a", None),
-        ("0,", "PCI_BUS_ID"),
+        (
+            "1",
+            None,
+            r"^Číselný výběr GPU na stroji s více kartami vyžaduje CUDA_DEVICE_ORDER=PCI_BUS_ID\.$",
+        ),
+        ("2", "PCI_BUS_ID", r"^Číselný index GPU je mimo rozsah zařízení NVML\.$"),
+        ("0,0", "PCI_BUS_ID", r"^Viditelnost GPU obsahuje opakovanou položku\.$"),
+        ("GPU-c", None, r"^Viditelnost GPU obsahuje neznámou položku\.$"),
+        ("MIG-x", None, r"^Viditelnost GPU obsahuje neznámou položku\.$"),
+        ("abc", None, r"^Viditelnost GPU obsahuje neznámou položku\.$"),
+        ("GPU-a,0", "PCI_BUS_ID", r"^Viditelnost GPU obsahuje opakovanou položku\.$"),
+        ("GPU-a,GPU-a", None, r"^Viditelnost GPU obsahuje opakovanou položku\.$"),
+        ("0,", "PCI_BUS_ID", r"^Viditelnost GPU obsahuje neznámou položku\.$"),
     ],
 )
-def test_invalid_visibility_is_refused_without_disclosing_value(
-    visible: str, order: str | None
+def test_invalid_visibility_reports_reason(
+    visible: str, order: str | None, pattern: str
 ) -> None:
-    """Neznámé, opakované a nejednoznačné položky se neodhadují."""
-    with pytest.raises(InvalidInputError) as caught:
+    """Diagnostika rozliší neznámou položku, duplicitu, pořadí a index mimo rozsah."""
+    with pytest.raises(InvalidInputError, match=pattern):
         visible_indices(visible, order, ("GPU-a", "GPU-b"))
+
+
+def test_visibility_error_does_not_disclose_value() -> None:
+    """Neznámé syntetické UUID se do chybové zprávy nesmí opsat."""
+    visible = "GPU-synthetic-private-value-cannot-match-message"
+    with pytest.raises(
+        InvalidInputError, match=r"^Viditelnost GPU obsahuje neznámou položku\.$"
+    ) as caught:
+        visible_indices(visible, None, ("GPU-a", "GPU-b"))
     assert visible not in str(caught.value)
 
 
@@ -195,7 +208,13 @@ def test_unsupported_energy_preserves_memory(nvml: SimpleNamespace) -> None:
 def test_other_init_error_is_refused(nvml: SimpleNamespace) -> None:
     """Chyba oprávnění není neexistující GPU a nesmí se tiše přeskočit."""
     nvml.nvmlInit.side_effect = pynvml.NVMLError(pynvml.NVML_ERROR_NO_PERMISSION)
-    with pytest.raises(InvalidInputError), gpu_monitor(None, None):
+    with (
+        pytest.raises(
+            InvalidInputError,
+            match=r"^Měření GPU přes NVML selhalo: Insufficient Permissions$",
+        ),
+        gpu_monitor(None, None),
+    ):
         pytest.fail("Tělo po chybě startu nesmí běžet.")
 
 
@@ -204,7 +223,12 @@ def test_start_read_error_shuts_down_before_body(nvml: SimpleNamespace) -> None:
     nvml.nvmlDeviceGetMemoryInfo.side_effect = pynvml.NVMLError(
         pynvml.NVML_ERROR_UNKNOWN
     )
-    with pytest.raises(InvalidInputError), gpu_monitor(None, None):
+    with (
+        pytest.raises(
+            InvalidInputError, match=r"^Měření GPU přes NVML selhalo: Unknown Error$"
+        ),
+        gpu_monitor(None, None),
+    ):
         pytest.fail("Tělo po chybě prvního čtení nesmí běžet.")
     nvml.nvmlShutdown.assert_called_once_with()
 
@@ -218,7 +242,9 @@ def test_body_exception_is_preserved_and_nvml_closed(nvml: SimpleNamespace) -> N
     nvml.nvmlShutdown.assert_called_once_with()
 
 
-def test_cleanup_error_does_not_mask_body(nvml: SimpleNamespace) -> None:
+def test_cleanup_error_does_not_mask_body(
+    nvml: SimpleNamespace, caplog: pytest.LogCaptureFixture
+) -> None:
     """Ani chyba posledního čtení a shutdownu nezakryje původní příčinu."""
     error = RuntimeError("Synthetic body failure")
     nvml.nvmlDeviceGetTotalEnergyConsumption.side_effect = _energy_readings({
@@ -230,6 +256,12 @@ def test_cleanup_error_does_not_mask_body(nvml: SimpleNamespace) -> None:
     assert caught.value is error
     nvml.nvmlShutdown.assert_called_once_with()
 
+    assert caplog.messages == [
+        "Dokončení měření GPU selhalo při výjimce měřeného kroku: Měření GPU přes NVML selhalo: Unknown Error",
+        "Ukončení NVML selhalo při zpracování původní výjimky: Měření GPU přes NVML selhalo: Unknown Error",
+    ]
+    assert [record.levelname for record in caplog.records] == ["WARNING", "WARNING"]
+
 
 @pytest.mark.usefixtures("nvml")
 def test_measurement_is_unavailable_inside_window() -> None:
@@ -239,14 +271,20 @@ def test_measurement_is_unavailable_inside_window() -> None:
 
 
 @pytest.mark.parametrize(
-    "sampling_error",
+    ("sampling_error", "pattern"),
     [
-        pynvml.NVMLError(pynvml.NVML_ERROR_UNKNOWN),
-        ValueError("Synthetic sampler failure"),
+        (
+            pynvml.NVMLError(pynvml.NVML_ERROR_UNKNOWN),
+            r"^Měření GPU přes NVML selhalo: Unknown Error$",
+        ),
+        (ValueError("Synthetic sampler failure"), r"^Měření GPU přes NVML selhalo\.$"),
     ],
 )
 def test_sampling_error_is_refused_after_body(
-    monkeypatch: pytest.MonkeyPatch, nvml: SimpleNamespace, sampling_error: Exception
+    monkeypatch: pytest.MonkeyPatch,
+    nvml: SimpleNamespace,
+    sampling_error: Exception,
+    pattern: str,
 ) -> None:
     """Chyba prostředního vzorku nesmí zmizet ve vlákně démona."""
     sampled = Event()
@@ -268,7 +306,7 @@ def test_sampling_error_is_refused_after_body(
             assert sampled.wait(5), "Vzorkovací vlákno nepřečetlo paměť."
             completed.set()
 
-    with pytest.raises(InvalidInputError):
+    with pytest.raises(InvalidInputError, match=pattern):
         measured_step()
     assert completed.is_set()
     nvml.nvmlShutdown.assert_called_once_with()
@@ -368,7 +406,12 @@ def test_final_read_error_is_refused(nvml: SimpleNamespace) -> None:
     nvml.nvmlDeviceGetTotalEnergyConsumption.side_effect = _energy_readings({
         0: [1000, pynvml.NVMLError(pynvml.NVML_ERROR_UNKNOWN)],
     })
-    with pytest.raises(InvalidInputError), gpu_monitor(None, None):
+    with (
+        pytest.raises(
+            InvalidInputError, match=r"^Měření GPU přes NVML selhalo: Unknown Error$"
+        ),
+        gpu_monitor(None, None),
+    ):
         pass
     nvml.nvmlShutdown.assert_called_once_with()
 
@@ -376,7 +419,12 @@ def test_final_read_error_is_refused(nvml: SimpleNamespace) -> None:
 def test_shutdown_error_is_refused(nvml: SimpleNamespace) -> None:
     """Chyba při ukončení dostupného NVML se nesmí vydávat za úspěch."""
     nvml.nvmlShutdown.side_effect = pynvml.NVMLError(pynvml.NVML_ERROR_UNKNOWN)
-    with pytest.raises(InvalidInputError), gpu_monitor(None, None):
+    with (
+        pytest.raises(
+            InvalidInputError, match=r"^Měření GPU přes NVML selhalo: Unknown Error$"
+        ),
+        gpu_monitor(None, None),
+    ):
         pass
 
 
@@ -417,7 +465,13 @@ def test_completion_inside_except_refuses_its_own_error(
     try:
         empty.pop("synthetic-missing-key")
     except KeyError:
-        with pytest.raises(InvalidInputError), gpu_monitor(None, None):
+        with (
+            pytest.raises(
+                InvalidInputError,
+                match=r"^Měření GPU přes NVML selhalo: Unknown Error$",
+            ),
+            gpu_monitor(None, None),
+        ):
             pass
 
 

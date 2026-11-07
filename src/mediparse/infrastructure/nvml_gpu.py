@@ -22,7 +22,7 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 MILLIJOULES_PER_JOULE: Final = 1000
-NVML_FAILURE: Final = "Měření GPU přes NVML selhalo."
+NVML_FAILURE: Final = "Měření GPU přes NVML selhalo"
 
 
 def visible_indices(
@@ -43,21 +43,26 @@ def visible_indices(
     if cuda_visible_devices.strip() in {"", "-1"}:
         return ()
     indices: list[int] = []
-    invalid_visibility = "Viditelnost GPU nelze jednoznačně přiřadit k zařízením NVML."
     # NVML ignoruje CUDA_VISIBLE_DEVICES, proto viditelnost mapujeme sami.
     for item in cuda_visible_devices.split(","):
         token = item.strip()
         if token.isascii() and token.isdecimal():
             # CUDA jinak řadí nejrychlejší kartu první, NVML podle sběrnice PCI.
             if len(uuids) > 1 and cuda_device_order != "PCI_BUS_ID":
-                raise InvalidInputError(invalid_visibility)
+                msg = "Číselný výběr GPU na stroji s více kartami vyžaduje CUDA_DEVICE_ORDER=PCI_BUS_ID."
+                raise InvalidInputError(msg)
             index = int(token)
         elif token.startswith("GPU-") and token in uuids:
             index = uuids.index(token)
         else:
-            raise InvalidInputError(invalid_visibility)
-        if index >= len(uuids) or index in indices:
-            raise InvalidInputError(invalid_visibility)
+            msg = "Viditelnost GPU obsahuje neznámou položku."
+            raise InvalidInputError(msg)
+        if index >= len(uuids):
+            msg = "Číselný index GPU je mimo rozsah zařízení NVML."
+            raise InvalidInputError(msg)
+        if index in indices:
+            msg = "Viditelnost GPU obsahuje opakovanou položku."
+            raise InvalidInputError(msg)
         indices.append(index)
     return tuple(indices)
 
@@ -101,7 +106,7 @@ class GpuMonitor:
                 seconds=perf_counter() - start, devices=usages
             )
         except (pynvml.NVMLError, ValidationError) as error:
-            raise InvalidInputError(NVML_FAILURE) from error
+            raise InvalidInputError(_measurement_message(error)) from error
 
 
 @dataclass(frozen=True)
@@ -110,6 +115,14 @@ class _DeviceStart:
     device: GpuDevice
     energy_millijoules: int | None
     memory_used_bytes: int
+
+
+def _measurement_message(error: Exception) -> str:
+    return (
+        f"{NVML_FAILURE}: {error}"
+        if isinstance(error, pynvml.NVMLError)
+        else f"{NVML_FAILURE}."
+    )
 
 
 def _energy(handle: object) -> int | None:
@@ -134,7 +147,7 @@ def _read_devices(visible: str | None, order: str | None) -> tuple[_DeviceStart,
             for index in visible_indices(visible, order, uuids)
         )
     except (pynvml.NVMLError, ValidationError) as error:
-        raise InvalidInputError(NVML_FAILURE) from error
+        raise InvalidInputError(_measurement_message(error)) from error
 
 
 def _read_start(handle: object) -> _DeviceStart:
@@ -175,7 +188,9 @@ class _MemorySampler:
     def usages(self) -> tuple[GpuUsage, ...]:
         self.sample()
         if self.failure is not None:
-            raise InvalidInputError(NVML_FAILURE) from self.failure
+            raise InvalidInputError(
+                _measurement_message(self.failure)
+            ) from self.failure
         return tuple(
             _usage(start, peak)
             for start, peak in zip(self.starts, self.peaks, strict=True)
@@ -203,7 +218,7 @@ def _shutdown_nvml() -> None:
     try:
         pynvml.nvmlShutdown()
     except pynvml.NVMLError as error:
-        raise InvalidInputError(NVML_FAILURE) from error
+        raise InvalidInputError(_measurement_message(error)) from error
 
 
 @contextmanager
@@ -216,7 +231,7 @@ def _nvml_session() -> Generator[bool]:
             pynvml.NVML_ERROR_LIBRARY_NOT_FOUND,
             pynvml.NVML_ERROR_DRIVER_NOT_LOADED,
         }:
-            raise InvalidInputError(NVML_FAILURE) from error
+            raise InvalidInputError(_measurement_message(error)) from error
         available = False
     if not available:
         yield False
@@ -226,9 +241,11 @@ def _nvml_session() -> Generator[bool]:
     except BaseException:
         try:
             _shutdown_nvml()
-        except Exception:
+        except Exception as error:
             logger.warning(
-                "Ukončení NVML selhalo při zpracování původní výjimky.", exc_info=True
+                "Ukončení NVML selhalo při zpracování původní výjimky: %s",
+                error,
+                exc_info=True,
             )
         raise
     else:
@@ -275,9 +292,10 @@ def gpu_monitor(
         except BaseException:
             try:
                 monitor.finish(sampler, thread, start)
-            except Exception:
+            except Exception as error:
                 logger.warning(
-                    "Dokončení měření GPU selhalo při výjimce měřeného kroku.",
+                    "Dokončení měření GPU selhalo při výjimce měřeného kroku: %s",
+                    error,
                     exc_info=True,
                 )
             raise
