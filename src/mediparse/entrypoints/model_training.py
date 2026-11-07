@@ -113,25 +113,25 @@ def run(
     """
     training = load_training_config(config)
     source = revision()
+    table, strip = training_input(cohort=cohort, training=training, lexicon=lexicon)
+    normalization = (
+        load_text_normalization(
+            candidates, variants=training.normalize_diagnosis_variants
+        )
+        if training.normalize_clinical_text
+        else None
+    )
+    step = ModelTraining(
+        table=table,
+        split=ParquetSplitTable(split),
+        trainer=LinearSvmTrainer(
+            training.regularization, training.seed, normalization=normalization
+        ),
+        store=SkopsModelFile(model),
+        predictions=ParquetPredictionTable(predictions),
+    )
     with gpu_monitor(cuda_visible_devices, cuda_device_order) as monitor:
         hardware = machine_hardware(monitor.devices)
-        table, strip = training_input(cohort=cohort, training=training, lexicon=lexicon)
-        normalization = (
-            load_text_normalization(
-                candidates, variants=training.normalize_diagnosis_variants
-            )
-            if training.normalize_clinical_text
-            else None
-        )
-        step = ModelTraining(
-            table=table,
-            split=ParquetSplitTable(split),
-            trainer=LinearSvmTrainer(
-                training.regularization, training.seed, normalization=normalization
-            ),
-            store=SkopsModelFile(model),
-            predictions=ParquetPredictionTable(predictions),
-        )
         report = step.run(training)
     write_model(
         manifest,

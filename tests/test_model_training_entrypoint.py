@@ -685,3 +685,30 @@ def test_training_main_forwards_cuda_environment(
     assert execute.call_args.kwargs["cuda_visible_devices"] == "GPU-synthetic"
     assert execute.call_args.kwargs["cuda_device_order"] == "PCI_BUS_ID"
     assert execute.call_args.kwargs["costs"] == tmp_path / "costs.json"
+
+
+@pytest.mark.parametrize("phase", ["input", "normalization"])
+def test_invalid_preparation_is_refused_before_gpu_monitor(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, phase: str
+) -> None:
+    """Chybný lexikon i slovník normalizace se odmítnou před otevřením GPU okna."""
+    inputs = _inputs(
+        tmp_path,
+        strip_diagnostic_sections=phase == "input",
+        normalize_clinical_text=phase == "normalization",
+    )
+    outputs = _Outputs.under(tmp_path / "out")
+    monitor = Mock(
+        side_effect=AssertionError("Neplatná příprava nesmí otevřít GPU okno.")
+    )
+    monkeypatch.setattr(model_training, "gpu_monitor", monitor)
+
+    code = (
+        _call(inputs, outputs, tmp_path / "missing-lexicon.json", fixed_revision)
+        if phase == "input"
+        else _run_with_candidates(inputs, outputs, tmp_path / "missing-candidates.json")
+    )
+
+    assert code is ExitCode.REFUSED
+    assert outputs.existing() == []
+    monitor.assert_not_called()

@@ -71,7 +71,7 @@ class GpuMeasurement(BaseModel):
 
 
 class TrainingCosts(BaseModel):
-    """Měření GPU za celý use case tréninku, mimo deterministický manifest."""
+    """Měření GPU během tréninku po přípravě vstupů a adaptérů, mimo manifest."""
 
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 
