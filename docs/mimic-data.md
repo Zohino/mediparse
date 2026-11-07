@@ -50,7 +50,7 @@ Převod čte CSV po blocích, takže paměť drží jen jeden blok i u `discharg
 Všechny sloupce zůstávají řetězce a prázdná hodnota je NULL, takže parquet je
 bezeztrátová kopie CSV: kód `0389` si nechá úvodní nulu. Typy sloupců přiřadí
 až dotazy nad parquetem. Počet záznamů a jména sloupců z převodu se porovnají
-s inventářem validace. Pokud se liší, krok skončí chybou a výstup se smaže.
+s inventářem validace. Převod také znovu spočte SHA-256 čteného CSV a porovná ho s inventářem; CSV vyměněné se starším mtime odmítne před zápisem vazby a vyžádá novou validaci. Pokud se tvar nebo otisk liší, krok skončí chybou a Snakemake výstup smaže.
 Počty tak ověřují dvě nezávislé metody: parita uvozovek ve validaci a parser
 pyarrow v převodu. Krok nad reálnými daty se spouští ručně; testy běží nad malými
 syntetickými `.csv.gz`.
@@ -63,6 +63,8 @@ EDA rozpoznává svůj syntetický adresář nadále pomocí `synthetic.json`.
 
 Nový tvar veřejných manifestů a provenance EDA se nad reálnými daty vytvoří
 při společném uživatelském přepočtu po S39c3.
+
+Před prvním reálným renderem EDA po této změně je nutné převést tabulky znovu (`snakemake parquet_mimic`), aby každý čtený parquet měl ověřitelnou vazbu původu.
 
 ## Tabulky
 
