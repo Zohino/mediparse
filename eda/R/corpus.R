@@ -141,7 +141,8 @@ provenance_table <- function(details) {
   labels <- ifelse(
     keys %in% names(PROVENANCE_LABELS),
     PROVENANCE_LABELS[keys],
-    sub("^csv_sha256 (.*)$", "Otisk \\1 (SHA-256)", keys)
+    sub("^parquet_sha256 (.*)$", "Otisk parquetu \\1 (SHA-256)",
+        sub("^csv_sha256 (.*)$", "Otisk CSV \\1 (SHA-256)", keys))
   )
   values <- unlist(details, use.names = FALSE)
   values[keys == "dirty"] <- ifelse(values[keys == "dirty"] == "true", "ano", "ne")

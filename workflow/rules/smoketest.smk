@@ -6,7 +6,8 @@ rule synthetic_mimic:
     output:
         discharge=SMOKETEST / "mimic/parquet/discharge.parquet",
         diagnoses=SMOKETEST / "mimic/parquet/diagnoses_icd.parquet",
-        tables=SMOKETEST / "mimic/tables.json",
+        discharge_source=SMOKETEST / "mimic/parquet/discharge.source.json",
+        diagnoses_source=SMOKETEST / "mimic/parquet/diagnoses_icd.source.json",
     log:
         SMOKETEST_LOGS / "synthetic_mimic.log",
     params:
@@ -23,7 +24,8 @@ use rule build_cohort as build_smoketest_cohort with:
         diagnoses=SMOKETEST / "mimic/parquet/diagnoses_icd.parquet",
         candidates="config/diagnosis_candidates.json",
         corpus_rule="config/input_corpus.json",
-        tables=SMOKETEST / "mimic/tables.json",
+        discharge_source=SMOKETEST / "mimic/parquet/discharge.source.json",
+        diagnoses_source=SMOKETEST / "mimic/parquet/diagnoses_icd.source.json",
     output:
         cohort=SMOKETEST / "cohort.parquet",
         manifest=SMOKETEST / "cohort/manifest.json",

@@ -1,9 +1,10 @@
-"""Tabulka MIMIC: jméno odvozené ze staženého souboru a tvar, podle kterého se porovnává inventář s převodem."""
+"""Tabulka MIMIC: jméno, tvar pro porovnání inventáře s převodem a původ převedené tabulky."""
 
 from typing import Final
 
 from pydantic import BaseModel, ConfigDict
 
+from mediparse.domain.digest import Sha256
 from mediparse.domain.inputs import InvalidInputError
 
 CSV_SUFFIXES: Final = (".csv.gz", ".csv")
@@ -16,6 +17,20 @@ class TableShape(BaseModel):
 
     records: int
     columns: tuple[str, ...]
+
+
+class TableProvenance(BaseModel):
+    """Zdroj tabulky a vazba otisku ověřeného CSV na otisk převedeného parquetu.
+
+    Attributes:
+        source: Jméno zdrojového CSV, u syntetiky URL na doméně `.invalid`.
+    """
+
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+
+    source: str
+    source_sha256: Sha256
+    sha256: Sha256
 
 
 def table_name(file_name: str) -> str:

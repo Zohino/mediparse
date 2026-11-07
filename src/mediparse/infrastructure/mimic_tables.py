@@ -4,24 +4,20 @@ from __future__ import annotations
 
 from collections import Counter
 from pathlib import Path, PurePosixPath
-from typing import TYPE_CHECKING, Final, Self
+from typing import Final, Self
 from urllib.parse import urlsplit
 
 from pydantic import BaseModel, ConfigDict, model_validator
 
 from mediparse.domain.digest import Sha256
-from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.mimic_table import table_name
 from mediparse.infrastructure.input_file import parse_file
-
-if TYPE_CHECKING:
-    from collections.abc import Sequence
 
 TABLES_PATH: Final = Path("config/mimic_tables.json")
 
 
 class MimicTable(BaseModel):
-    """Zdrojová tabulka: URL souboru a otisk zdroje; syntetika odkazuje na .invalid."""
+    """Zdrojová tabulka MIMIC: URL souboru a očekávaný otisk CSV."""
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
@@ -61,20 +57,3 @@ def load_mimic_tables(path: Path) -> dict[str, MimicTable]:
     """
     tables = parse_file(path, MimicTables.model_validate_json)
     return {table.path.name: table for table in tables.mimic_tables}
-
-
-def load_source_digests(path: Path, names: Sequence[str]) -> dict[str, Sha256]:
-    """Přečte otisky zdrojových tabulek, ze kterých krok vychází.
-
-    Returns:
-        Slovník jméno souboru → SHA-256, v pořadí zadaných jmen.
-
-    Raises:
-        InvalidInputError: Config některou z tabulek neobsahuje.
-    """
-    pinned = load_mimic_tables(path)
-    missing = [name for name in names if name not in pinned]
-    if missing:
-        msg = f"V configu tabulek {path} chybí: {', '.join(missing)}."
-        raise InvalidInputError(msg)
-    return {name: pinned[name].sha256 for name in names}

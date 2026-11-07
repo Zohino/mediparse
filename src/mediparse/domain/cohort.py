@@ -13,6 +13,7 @@ from mediparse.domain.digest import Sha256
 from mediparse.domain.environment import Environment
 from mediparse.domain.icd import DiagnosisCodes, IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.mimic_table import TableProvenance
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping
@@ -142,7 +143,7 @@ class CohortManifest(BaseModel):
     cohort_sha256: Sha256
     config_sha256: Sha256
     input_corpus_sha256: Sha256
-    sources: dict[str, Sha256]
+    sources: dict[str, TableProvenance]
     environment: Environment
     counts: CohortCounts
     invalid_codes: int

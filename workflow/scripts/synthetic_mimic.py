@@ -12,7 +12,6 @@ raise SystemExit(
         manifest=Path(snakemake.params.manifest),
         discharge=Path(snakemake.output.discharge),
         diagnoses=Path(snakemake.output.diagnoses),
-        tables=Path(snakemake.output.tables),
         log=Path(snakemake.log[0]),
     )
 )

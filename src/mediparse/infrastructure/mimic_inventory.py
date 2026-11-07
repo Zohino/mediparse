@@ -7,11 +7,20 @@ from typing import TYPE_CHECKING
 
 from pydantic import BaseModel, ConfigDict
 
+from mediparse.domain.digest import Sha256
 from mediparse.domain.mimic_table import TableShape, table_name
 from mediparse.infrastructure.input_file import parse_file
 
 if TYPE_CHECKING:
     from pathlib import Path
+
+
+class _TableSummary(BaseModel):
+    model_config = ConfigDict(frozen=True, extra="ignore")
+
+    file: str
+    records: int
+    columns: tuple[str, ...]
 
 
 class _Inventory(BaseModel):
@@ -21,12 +30,15 @@ class _Inventory(BaseModel):
     bytes: int
     records: int
     columns: tuple[str, ...]
+    sha256: Sha256
 
 
 class _Manifest(BaseModel):
     model_config = ConfigDict(frozen=True)
 
-    tables: tuple[_Inventory, ...]
+    # Čtenáři manifestu potřebují jen tvar; inventáře ověřuje striktně `_Inventory`,
+    # manifest je jejich spojení, proto projekce další pole (i `sha256`) ignoruje.
+    tables: tuple[_TableSummary, ...]
 
 
 def read_manifest(path: Path) -> dict[str, TableShape]:
@@ -42,21 +54,19 @@ def read_manifest(path: Path) -> dict[str, TableShape]:
     }
 
 
-def read_manifest_bytes(path: Path) -> dict[str, int]:
-    """Přečte z veřejného manifestu validace velikost každého souboru v bajtech.
-
-    Returns:
-        Jméno tabulky (`table_name`) a velikost souboru v pořadí manifestu.
-    """
-    manifest = parse_file(path, _Manifest.model_validate_json)
-    return {table_name(table.file): table.bytes for table in manifest.tables}
-
-
 @dataclass(frozen=True)
 class InventoryFile:
     """JSON inventář jedné tabulky, který zapisuje ``inventory.sh``."""
 
     path: Path
+
+    def sha256(self) -> Sha256:
+        """Přečte otisk CSV ověřený při sestavení inventáře.
+
+        Returns:
+            SHA-256 zdrojového souboru CSV.
+        """
+        return parse_file(self.path, _Inventory.model_validate_json).sha256
 
     def read(self) -> TableShape:
         """Přečte tvar tabulky z inventáře.

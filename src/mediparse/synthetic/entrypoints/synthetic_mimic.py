@@ -6,16 +6,13 @@ import logging
 from typing import TYPE_CHECKING
 
 from mediparse.domain.language import Language
-from mediparse.domain.mimic_table import table_name
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
-from mediparse.infrastructure.duckdb_cohort import SOURCE_TABLES
 from mediparse.infrastructure.file_digest import file_sha256
-from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.mimic_inventory import read_manifest
-from mediparse.infrastructure.mimic_tables import MimicTable, MimicTables
 from mediparse.infrastructure.parquet_file import write_string_table
+from mediparse.infrastructure.table_provenance import write_table_provenance
 from mediparse.synthetic.domain.synthetic_mimic import input_notes, synthetic_mimic_rows
 from mediparse.synthetic.infrastructure.plans_file import PlansFile
 from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
@@ -34,7 +31,6 @@ def main(
     manifest: Path,
     discharge: Path,
     diagnoses: Path,
-    tables: Path,
     log: Path,
 ) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
@@ -50,7 +46,6 @@ def main(
         manifest=manifest,
         discharge=discharge,
         diagnoses=diagnoses,
-        tables=tables,
     )
 
 
@@ -63,7 +58,6 @@ def run(
     manifest: Path,
     discharge: Path,
     diagnoses: Path,
-    tables: Path,
 ) -> ExitCode:
     """Zapíše tabulky discharge a diagnoses_icd a jejich otisky pro manifest kohorty.
 
@@ -78,20 +72,13 @@ def run(
     outputs = {"discharge": discharge, "diagnoses_icd": diagnoses}
     for table, path in outputs.items():
         write_string_table(path, shapes[table].columns, rows[table])
-    sources = {name: outputs[table_name(name)] for name in SOURCE_TABLES}
-    # .invalid nemůže vést na skutečný zdroj. Otisky patří zapsaným parquetům,
-    # protože syntetika nemá zdrojová CSV a piny MIMIC by tvrdily jiný původ kohorty.
-    write_model(
-        tables,
-        MimicTables(
-            mimic_tables=tuple(
-                MimicTable(
-                    url=f"https://mediparse.invalid/synthetic/{name}",
-                    sha256=file_sha256(path),
-                )
-                for name, path in sources.items()
-            )
-        ),
+        # Syntetika nemá CSV; .invalid odliší její původ od skutečných tabulek MIMIC.
+        write_table_provenance(
+            path,
+            source=f"https://mediparse.invalid/synthetic/{table}",
+            source_sha256=file_sha256(path),
+        )
+    logger.info(
+        "Syntetické tabulky MIMIC: %d zpráv v %s.", len(notes), discharge.parent
     )
-    logger.info("Syntetické tabulky MIMIC: %d zpráv, otisky v %s.", len(notes), tables)
     return ExitCode.OK

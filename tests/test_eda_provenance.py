@@ -11,35 +11,26 @@ from typing import TYPE_CHECKING, Final
 
 import pytest
 
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints import eda_provenance
 from mediparse.entrypoints.eda_provenance import provenance
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
+from mediparse.infrastructure.table_provenance import write_table_provenance
 from tests.git_support import git_output, init_repo, needs_git
 
 if TYPE_CHECKING:
     from pathlib import Path
 
 SHA: Final = "b" * 40
-CSV_SHA: Final = "c" * 64
+CSV_SHA: Final = hashlib.sha256(b"synthetic CSV").hexdigest()
 ENVIRONMENT: Final = {"MEDIPARSE_COMMIT": SHA, "MEDIPARSE_DIRTY": "true"}
 
 
 def _root(tmp_path: Path) -> Path:
     root = tmp_path / "root"
-    (root / "config").mkdir(parents=True)
+    root.mkdir()
     (root / "pixi.lock").write_text("zámek\n", encoding="utf-8")
-    tables = {
-        "mimic_tables": [
-            {
-                "url": "https://physionet.org/files/mimic-iv-note/2.2/note/discharge.csv.gz",
-                "sha256": CSV_SHA,
-            }
-        ]
-    }
-    (root / "config" / "mimic_tables.json").write_text(
-        json.dumps(tables), encoding="utf-8"
-    )
     return root
 
 
@@ -61,12 +52,93 @@ def test_synthetic_tables_are_named_without_mimic_hashes(tmp_path: Path) -> None
     assert not [key for key in result if key.startswith("csv_sha256")]
 
 
-def test_real_tables_carry_csv_hashes_from_config(tmp_path: Path) -> None:
-    """Bez synthetic.json jsou zdrojem otisky CSV z configu."""
-    result = provenance(ENVIRONMENT, _root(tmp_path), _parquet(tmp_path))
+def test_real_tables_carry_verified_csv_and_parquet_hashes(tmp_path: Path) -> None:
+    """Adresář bez značky zveřejní ověřené otisky všech čtených tabulek bez configu."""
+    directory = _parquet(tmp_path)
+    contents = {
+        "discharge": b"synthetic discharge parquet",
+        "diagnoses_icd": b"synthetic diagnoses parquet",
+    }
+    csv_digests = {
+        "discharge": hashlib.sha256(b"synthetic discharge CSV").hexdigest(),
+        "diagnoses_icd": hashlib.sha256(b"synthetic diagnoses CSV").hexdigest(),
+    }
+    for name, data in contents.items():
+        path = directory / f"{name}.parquet"
+        path.write_bytes(data)
+        write_table_provenance(
+            path, source=f"{name}.csv.gz", source_sha256=csv_digests[name]
+        )
+    (directory / "unrelated.json").write_text("{}", encoding="utf-8")
 
-    assert result["data_source"] == "otisky CSV z config/mimic_tables.json"
-    assert result["csv_sha256 discharge.csv.gz"] == CSV_SHA
+    result = provenance(ENVIRONMENT, _root(tmp_path), directory)
+
+    assert result["data_source"] == "tabulky parquet ověřené proti vazbě na otisky CSV"
+    assert [
+        key for key in result if key.startswith(("csv_sha256 ", "parquet_sha256 "))
+    ] == [
+        "csv_sha256 diagnoses_icd",
+        "parquet_sha256 diagnoses_icd",
+        "csv_sha256 discharge",
+        "parquet_sha256 discharge",
+    ]
+    assert {
+        key: value
+        for key, value in result.items()
+        if key.startswith(("csv_sha256 ", "parquet_sha256 "))
+    } == {
+        "csv_sha256 discharge": csv_digests["discharge"],
+        "parquet_sha256 discharge": hashlib.sha256(contents["discharge"]).hexdigest(),
+        "csv_sha256 diagnoses_icd": csv_digests["diagnoses_icd"],
+        "parquet_sha256 diagnoses_icd": hashlib.sha256(
+            contents["diagnoses_icd"]
+        ).hexdigest(),
+    }
+
+
+def test_missing_table_provenance_is_refused(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Parquet bez vazby ukončí CLI jako REFUSED a provenance nevznikne."""
+    root = _root(tmp_path)
+    directory = _parquet(tmp_path)
+    (directory / "discharge.parquet").write_bytes(b"synthetic private content")
+    out = tmp_path / "provenance.json"
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "mediparse-eda-provenance",
+            "--root",
+            str(root),
+            "--parquet",
+            str(directory),
+            "--out",
+            str(out),
+        ],
+    )
+    for name, value in ENVIRONMENT.items():
+        monkeypatch.setenv(name, value)
+
+    assert eda_provenance.main() is ExitCode.REFUSED
+    assert not out.exists()
+    assert "převeďte tabulku znovu" in caplog.text
+    assert "synthetic private content" not in caplog.text
+
+
+def test_changed_table_provenance_is_refused(tmp_path: Path) -> None:
+    """EDA odmítne změněný parquet stejnou kontrolou jako kohorta."""
+    root = _root(tmp_path)
+    directory = _parquet(tmp_path)
+    path = directory / "discharge.parquet"
+    path.write_bytes(b"synthetic parquet")
+    write_table_provenance(path, source="discharge.csv.gz", source_sha256=CSV_SHA)
+    path.write_bytes(b"Synthetic parquet")
+    out = tmp_path / "provenance.json"
+
+    with pytest.raises(InvalidInputError, match="převeďte tabulku znovu"):
+        eda_provenance.run(root, directory, out, ENVIRONMENT)
+    assert not out.exists()
 
 
 def test_commit_and_dirty_come_from_environment(tmp_path: Path) -> None:
@@ -82,10 +154,6 @@ def test_commit_and_dirty_come_from_git_without_environment(tmp_path: Path) -> N
     """Bez proměnných se revize čte z gitu v kořeni."""
     root = tmp_path / "repo"
     init_repo(root, "a\n")
-    (root / "config").mkdir()
-    (root / "config" / "mimic_tables.json").write_text(
-        '{"mimic_tables": []}', encoding="utf-8"
-    )
     (root / "pixi.lock").write_text("zámek\n", encoding="utf-8")
 
     result = provenance({}, root, _parquet(tmp_path))

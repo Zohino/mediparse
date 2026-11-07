@@ -30,7 +30,6 @@ if TYPE_CHECKING:
 
     from mediparse.domain.cohort import RawCode
 
-SOURCE_TABLES: Final = ("discharge.csv.gz", "diagnoses_icd.csv.gz")
 BATCH_ROWS: Final = 4096
 LANGUAGE: Final = Language.EN
 _BASE: Final = """

@@ -12,6 +12,7 @@ import pytest
 
 from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.table_provenance import provenance_path
 from mediparse.synthetic.entrypoints import synthetic_mimic
 from mediparse.synthetic.infrastructure.plans_file import PlansFile
 from tests.support import (
@@ -32,15 +33,14 @@ EXPECTED_NOTES: Final = 400
 
 
 @pytest.fixture
-def synthetic_tables(tmp_path: Path) -> tuple[Path, Path, Path]:
+def synthetic_tables(tmp_path: Path) -> tuple[Path, Path]:
     """Zapíše obě vstupní tabulky a otisky skutečným entrypointem.
 
     Returns:
-        Cesty k discharge, diagnoses_icd a configu otisků.
+        Cesty k discharge a diagnoses_icd s vazbami zdrojů.
     """
     discharge = tmp_path / "mimic" / "parquet" / "discharge.parquet"
     diagnoses = discharge.with_name("diagnoses_icd.parquet")
-    tables = tmp_path / "mimic" / "tables.json"
     assert (
         synthetic_mimic.run(
             plans=REPOSITORY_PLANS,
@@ -49,18 +49,17 @@ def synthetic_tables(tmp_path: Path) -> tuple[Path, Path, Path]:
             manifest=REPOSITORY_MIMIC_MANIFEST,
             discharge=discharge,
             diagnoses=diagnoses,
-            tables=tables,
         )
         is ExitCode.OK
     )
-    return discharge, diagnoses, tables
+    return discharge, diagnoses
 
 
 def test_cohort_matches_plans_and_source_hashes(
-    tmp_path: Path, synthetic_tables: tuple[Path, Path, Path]
+    tmp_path: Path, synthetic_tables: tuple[Path, Path]
 ) -> None:
     """Kohorta zachová 400 zpráv v pořadí note_id, celé řádky i pravdivou provenance."""
-    discharge, diagnoses, tables = synthetic_tables
+    discharge, diagnoses = synthetic_tables
     output = tmp_path / "cohort.parquet"
     manifest = tmp_path / "cohort" / "manifest.json"
     assert (
@@ -68,7 +67,6 @@ def test_cohort_matches_plans_and_source_hashes(
             discharge=discharge,
             diagnoses=diagnoses,
             candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            tables=tables,
             corpus_rule=REPOSITORY_INPUT_CORPUS,
             cohort=output,
             manifest=manifest,
@@ -108,23 +106,30 @@ def test_cohort_matches_plans_and_source_hashes(
     written = json.loads(manifest.read_text(encoding="utf-8"))
     assert written["invalid_codes"] == 0
     assert written["sources"] == {
-        "discharge.csv.gz": hashlib.sha256(discharge.read_bytes()).hexdigest(),
-        "diagnoses_icd.csv.gz": hashlib.sha256(diagnoses.read_bytes()).hexdigest(),
+        path.stem: {
+            "source": f"https://mediparse.invalid/synthetic/{path.stem}",
+            "source_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        }
+        for path in (discharge, diagnoses)
     }
 
 
 def test_tables_have_string_columns_and_synthetic_urls(
-    synthetic_tables: tuple[Path, Path, Path],
+    synthetic_tables: tuple[Path, Path],
 ) -> None:
     """Vstup odpovídá typům MIMIC a URL nemohou vést na skutečný zdroj dat."""
-    discharge, diagnoses, tables = synthetic_tables
+    discharge, diagnoses = synthetic_tables
     for path in (discharge, diagnoses):
         assert all(field.type == pa.string() for field in pq.read_schema(path))
-    written = json.loads(tables.read_text(encoding="utf-8"))
-    assert [table["url"] for table in written["mimic_tables"]] == [
-        "https://mediparse.invalid/synthetic/discharge.csv.gz",
-        "https://mediparse.invalid/synthetic/diagnoses_icd.csv.gz",
-    ]
+    for path in (discharge, diagnoses):
+        written = json.loads(provenance_path(path).read_text(encoding="utf-8"))
+        assert written == {
+            "source": f"https://mediparse.invalid/synthetic/{path.stem}",
+            "source_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        }
+    assert not (discharge.parent.parent / "tables.json").exists()
 
 
 def test_unpaired_corpus_is_refused_before_writing(
@@ -135,7 +140,6 @@ def test_unpaired_corpus_is_refused_before_writing(
     PlansFile(plans).save([planned_note.plan])
     discharge = tmp_path / "discharge.parquet"
     diagnoses = tmp_path / "diagnoses_icd.parquet"
-    tables = tmp_path / "tables.json"
 
     assert (
         synthetic_mimic.run(
@@ -145,13 +149,13 @@ def test_unpaired_corpus_is_refused_before_writing(
             manifest=REPOSITORY_MIMIC_MANIFEST,
             discharge=discharge,
             diagnoses=diagnoses,
-            tables=tables,
         )
         is ExitCode.REFUSED
     )
     assert not discharge.exists()
     assert not diagnoses.exists()
-    assert not tables.exists()
+    assert not provenance_path(discharge).exists()
+    assert not provenance_path(diagnoses).exists()
     assert f"Plány bez zprávy v jazyce en: {planned_note.plan.note_id}" in caplog.text
 
 
@@ -166,7 +170,6 @@ def test_missing_manifest_is_refused_before_writing(tmp_path: Path) -> None:
             manifest=tmp_path / "missing.json",
             discharge=output / "discharge.parquet",
             diagnoses=output / "diagnoses_icd.parquet",
-            tables=output / "tables.json",
         )
         is ExitCode.REFUSED
     )
@@ -194,7 +197,6 @@ def test_written_columns_follow_manifest(tmp_path: Path, table: str) -> None:
             manifest=manifest,
             discharge=discharge,
             diagnoses=diagnoses,
-            tables=tmp_path / "tables.json",
         )
         is ExitCode.OK
     )

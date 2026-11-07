@@ -8,22 +8,34 @@ jeho autoři vytáhli vlastním regexem; práce ji používá jen jako referenci
 pro validaci parseru sekcí. Všechny tři projekty jsou pod DUA a každý má vlastní
 podpis smlouvy na PhysioNetu. Do repa proto smí jen agregáty a veřejné schéma,
 nikdy hodnoty z řádků. Seznam tabulek, URL a SHA-256 drží
-`config/mimic_tables.json` jako jediný zdroj.
+`config/mimic_tables.json` jako jediný zdroj očekávaných otisků CSV.
 
 ## Postup
 
 1. **Stažení.** `snakemake download_mimic` stáhne tabulky do `resources/mimic/`
    a každý soubor ověří proti otisku z oficiálních `SHA256SUMS.txt`.
 2. **Kontrola otisků.** `pixi run verify-mimic` otisky přepočítá i později, například
-   po přesunu dat nebo na jiném stroji.
-3. **Validace.** `snakemake validate_mimic` zapíše
+   po přesunu dat nebo na jiném stroji. Kontrola je potřebná i po přesunu se
+   zachovaným mtime, kdy Snakemake nemusí inventář znovu spustit.
+3. **Validace.** `snakemake validate_mimic` přepočte SHA-256 každého CSV a porovná
+   ho s configem, i když soubor pipeline nestahovala. Ověřený otisk zapíše
+   do inventáře tabulky jako `sha256` a společně s počty a sloupci do
    [`results/mimic/manifest.json`](../results/mimic/manifest.json) a flag
-   `resources/mimic/validated.flag`. Kroky nad daty MIMIC mají flag na vstupu
-   a bez prošlé validace nepoběží.
+   `resources/mimic/validated.flag` označí úspěšnou validaci. Převod má flag na
+   vstupu a bez prošlé validace nepoběží.
 4. **Převod na parquet.** `snakemake parquet_mimic` převede každou validovanou
-   tabulku na `resources/mimic/parquet/<tabulka>.parquet`.
+   tabulku na `resources/mimic/parquet/<tabulka>.parquet`. Vedle ní zapíše
+   `<tabulka>.source.json`: `source` je jméno CSV, `source_sha256` jeho ověřený
+   otisk z inventáře a `sha256` otisk zapsaného parquetu. Oba soubory jsou
+   výstupem pravidla převodu.
+5. **Kohorta a EDA.** Před použitím tabulky znovu spočítají otisk parquetu a
+   porovnají ho s vazbou. Chybějící nebo neodpovídající vazba krok odmítne
+   s pokynem převést tabulku znovu. Manifest kohorty uvádí pod jmény
+   `discharge` a `diagnoses_icd` celé vazby skutečně čtených tabulek.
+   Provenance EDA ověří všechny `*.parquet` v adresáři a uvede pro každou
+   tabulku `csv_sha256 <tabulka>` a `parquet_sha256 <tabulka>`.
 
-Validace selže, pokud tabulka nejde rozbalit, nemá hlavičku ani záznam nebo
+Validace selže, pokud otisk CSV nesouhlasí s configem, tabulka nejde rozbalit, nemá hlavičku ani záznam nebo
 končí neuzavřeným polem v uvozovkách. Takhle vypadá useknutý gzip nebo rozbitý
 CSV. Počet záznamů se nepočítá z fyzických řádků, protože text zpráv má
 zalomení uvnitř polí v uvozovkách. Záznam končí tam, kde je od začátku souboru
@@ -38,10 +50,21 @@ Převod čte CSV po blocích, takže paměť drží jen jeden blok i u `discharg
 Všechny sloupce zůstávají řetězce a prázdná hodnota je NULL, takže parquet je
 bezeztrátová kopie CSV: kód `0389` si nechá úvodní nulu. Typy sloupců přiřadí
 až dotazy nad parquetem. Počet záznamů a jména sloupců z převodu se porovnají
-s inventářem validace. Pokud se liší, krok skončí chybou a výstup se smaže.
+s inventářem validace. Převod také znovu spočte SHA-256 čteného CSV a porovná ho s inventářem; CSV vyměněné se starším mtime odmítne před zápisem vazby a vyžádá novou validaci. Pokud se tvar nebo otisk liší, krok skončí chybou a Snakemake výstup smaže.
 Počty tak ověřují dvě nezávislé metody: parita uvozovek ve validaci a parser
 pyarrow v převodu. Krok nad reálnými daty se spouští ručně; testy běží nad malými
 syntetickými `.csv.gz`.
+
+Řetěz původu je tedy config → ověřené CSV v inventáři → vazba CSV a parquetu
+→ znovu ověřený parquet u konzumenta. Syntetický smoketest zapisuje stejné
+vazby se zdrojem `https://mediparse.invalid/synthetic/<tabulka>`; protože
+nemá zdrojové CSV, oba otisky ve vazbě patří syntetickému parquetu.
+EDA rozpoznává svůj syntetický adresář nadále pomocí `synthetic.json`.
+
+Nový tvar veřejných manifestů a provenance EDA se nad reálnými daty vytvoří
+při společném uživatelském přepočtu po S39c3.
+
+Před prvním reálným renderem EDA po této změně je nutné převést tabulky znovu (`snakemake parquet_mimic`), aby každý čtený parquet měl ověřitelnou vazbu původu.
 
 ## Tabulky
 

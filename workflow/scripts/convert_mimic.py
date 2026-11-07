@@ -8,7 +8,7 @@ raise SystemExit(
     main(
         table=Path(snakemake.input.table),
         inventory=Path(snakemake.input.inventory),
-        parquet=Path(snakemake.output[0]),
+        parquet=Path(snakemake.output.parquet),
         log=Path(snakemake.log[0]),
     )
 )

@@ -28,10 +28,10 @@ test_that("provenance_table překládá klíče na české popisky a dirty na an
   expect_equal(out$Hodnota, c("abc", "ne", "3.13", "R 4.5"))
 })
 
-test_that("provenance_table pojmenuje otisky CSV", {
-  out <- provenance_table(list(`csv_sha256 discharge.csv.gz` = "x"))
+test_that("provenance_table pojmenuje otisky CSV a parquetu", {
+  out <- provenance_table(list(`csv_sha256 discharge` = "x", `parquet_sha256 discharge` = "y"))
 
-  expect_equal(out$Položka, "Otisk discharge.csv.gz (SHA-256)")
+  expect_equal(out$Položka, c("Otisk CSV discharge (SHA-256)", "Otisk parquetu discharge (SHA-256)"))
 })
 
 test_that("provenance_table rozdělí 64znakový otisk do skupin po 16 znacích", {
@@ -210,7 +210,7 @@ test_that("eda_provenance zachová hodnoty a pořadí souboru", {
   withr::local_envvar(MEDIPARSE_EDA_PROVENANCE = path)
   details <- eda_provenance()
   expect_identical(names(details), c("commit", "dirty", "pixi_lock_sha256", "data_source",
-                                    "csv_sha256 discharge.csv.gz", "csv_sha256 mimic-iv-bhc.csv",
+                                    "csv_sha256 discharge", "parquet_sha256 discharge",
                                     "python", "duckdb", "jiny"))
   expect_identical(details$python, "3.13.9")
   expect_identical(details$dirty, "true")
