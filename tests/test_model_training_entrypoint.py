@@ -10,6 +10,7 @@ from typing import TYPE_CHECKING, Final
 
 import pytest
 
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints import model_training
 from mediparse.entrypoints.exit_code import ExitCode
@@ -43,7 +44,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable
     from pathlib import Path
 
-    from mediparse.domain.environment import SourceRevision
+    from mediparse.domain.environment import Hardware, SourceRevision
     from mediparse.domain.input_note import InputNote
 
 PATIENTS: Final = 12
@@ -292,6 +293,30 @@ def test_unreadable_revision_is_refused_before_training(tmp_path: Path) -> None:
 
     assert code is ExitCode.REFUSED
     assert outputs.existing() == []
+
+
+def test_unknown_hardware_is_refused_before_training(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Nezjistitelný HW odmítne běh před nákladným fit i před zápisem modelu."""
+    notes, config, split = _inputs(tmp_path)
+    outputs = _Outputs.under(tmp_path / "out")
+    message = "Hardware stroje nelze zjistit ze systémových údajů."
+
+    def unavailable_hardware() -> Hardware:
+        raise InvalidInputError(message)
+
+    def unexpected_fit(*_args: object) -> None:
+        pytest.fail("Trénink nesmí začít před úspěšným zjištěním HW.")
+
+    monkeypatch.setattr(model_training, "machine_hardware", unavailable_hardware)
+    monkeypatch.setattr(model_training.LinearSvmTrainer, "fit", unexpected_fit)
+
+    code = _run(notes, config, split, outputs)
+
+    assert code is ExitCode.REFUSED
+    assert outputs.existing() == []
+    assert message in caplog.text
 
 
 def _manifest(outputs: _Outputs) -> RunManifest:

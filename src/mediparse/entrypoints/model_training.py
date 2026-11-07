@@ -104,6 +104,7 @@ def run(
     """
     training = load_training_config(config)
     source = revision()
+    hardware = machine_hardware()
     table, strip = training_input(cohort=cohort, training=training, lexicon=lexicon)
     normalization = (
         load_text_normalization(
@@ -137,7 +138,7 @@ def run(
             model=ESTIMATOR,
             model_revision=None,
             tokenizer_revision=None,
-            hardware=machine_hardware(),
+            hardware=hardware,
             environment=Environment(
                 packages=installed_versions(PACKAGES), source=source
             ),
