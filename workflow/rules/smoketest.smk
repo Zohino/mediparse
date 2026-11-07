@@ -75,6 +75,7 @@ use rule infer_model as infer_smoketest_model with:
         model=SMOKETEST / "model.skops",
         predictions=SMOKETEST / "predictions.parquet",
     output:
-        SMOKETEST / "inference.parquet",
+        inference=SMOKETEST / "inference.parquet",
+        costs=SMOKETEST / "inference_costs.json",
     log:
         SMOKETEST_LOGS / "infer_smoketest_model.log",

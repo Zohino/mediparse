@@ -52,7 +52,8 @@ rule infer_model:
         model="resources/mimic/model.skops",
         predictions="resources/mimic/predictions.parquet",
     output:
-        "resources/mimic/inference.parquet",
+        inference="resources/mimic/inference.parquet",
+        costs="results/experiment/inference_costs.json",
     log:
         "logs/experiment/infer_model.log",
     script:

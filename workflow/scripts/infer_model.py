@@ -11,7 +11,8 @@ raise SystemExit(
         lexicon=Path(snakemake.input.lexicon),
         model=Path(snakemake.input.model),
         predictions=Path(snakemake.input.predictions),
-        inference=Path(snakemake.output[0]),
+        inference=Path(snakemake.output.inference),
+        costs=Path(snakemake.output.costs),
         log=Path(snakemake.log[0]),
     )
 )

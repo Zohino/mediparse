@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING, Final, NamedTuple
 
 import pytest
 
+from mediparse.domain.costs import InferenceCosts, LatencyPlan
 from mediparse.entrypoints import model_inference, model_training
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.note_table import ParquetNoteTable
@@ -106,6 +107,7 @@ def test_writes_all_held_out_predictions(tmp_path: Path) -> None:
         model=trained.model,
         predictions=trained.predictions,
         inference=inference,
+        costs=inference.with_suffix(".costs.json"),
     )
 
     rows = ParquetPredictionTable(inference).read()
@@ -138,10 +140,12 @@ def test_missing_model_is_refused(
         model=tmp_path / "none.skops",
         predictions=trained.predictions,
         inference=inference,
+        costs=inference.with_suffix(".costs.json"),
     )
 
     assert code is ExitCode.REFUSED
     assert not inference.exists()
+    assert not inference.with_suffix(".costs.json").exists()
     assert "none.skops" in caplog.text
     assert "Traceback" not in caplog.text
 
@@ -160,10 +164,12 @@ def test_missing_predictions_are_refused(
         model=trained.model,
         predictions=tmp_path / "none.parquet",
         inference=inference,
+        costs=inference.with_suffix(".costs.json"),
     )
 
     assert code is ExitCode.REFUSED
     assert not inference.exists()
+    assert not inference.with_suffix(".costs.json").exists()
     assert "none.parquet" in caplog.text
     assert "Traceback" not in caplog.text
 
@@ -185,10 +191,12 @@ def test_tampered_predictions_are_refused(
         model=trained.model,
         predictions=trained.predictions,
         inference=inference,
+        costs=inference.with_suffix(".costs.json"),
     )
 
     assert code is ExitCode.REFUSED
     assert not inference.exists()
+    assert not inference.with_suffix(".costs.json").exists()
     assert all(item.note_id not in caplog.text for item in (first, *rest))
     assert "Nesoulad" in caplog.text
 
@@ -205,6 +213,7 @@ def test_stripped_training_and_inference_agree(tmp_path: Path) -> None:
         model=trained.model,
         predictions=trained.predictions,
         inference=inference,
+        costs=inference.with_suffix(".costs.json"),
     )
 
     assert code is ExitCode.OK
@@ -230,10 +239,12 @@ def test_model_trained_without_strip_mismatches_stripped_inference(
         model=trained.model,
         predictions=trained.predictions,
         inference=inference,
+        costs=inference.with_suffix(".costs.json"),
     )
 
     assert code is ExitCode.REFUSED
     assert not inference.exists()
+    assert not inference.with_suffix(".costs.json").exists()
     assert "Nesoulad" in caplog.text
 
 
@@ -251,6 +262,7 @@ def test_normalized_model_infers_from_raw_notes(tmp_path: Path) -> None:
         model=trained.model,
         predictions=trained.predictions,
         inference=inference,
+        costs=inference.with_suffix(".costs.json"),
     )
 
     assert code is ExitCode.OK
@@ -270,7 +282,37 @@ def test_model_with_acronyms_infers_without_candidates_file(tmp_path: Path) -> N
         model=trained.model,
         predictions=trained.predictions,
         inference=inference,
+        costs=inference.with_suffix(".costs.json"),
     )
 
     assert code is ExitCode.OK
     assert inference.exists()
+
+
+def test_writes_aggregate_costs_with_measurement_plan(tmp_path: Path) -> None:
+    """Soubor nákladů se načte zpět s plánem 10/100 a skutečným počtem vzorků."""
+    trained = _train(tmp_path)
+    inference = tmp_path / "inference.parquet"
+    costs = tmp_path / "costs" / "inference.json"
+
+    code = model_inference.run(
+        cohort=trained.notes,
+        config=trained.config,
+        lexicon=REPOSITORY_SECTION_HEADERS,
+        model=trained.model,
+        predictions=trained.predictions,
+        inference=inference,
+        costs=costs,
+    )
+
+    written = InferenceCosts.model_validate_json(costs.read_text(encoding="utf-8"))
+    count = len(ParquetPredictionTable(inference).read())
+    assert code is ExitCode.OK
+    assert (
+        written.plan
+        == model_inference.LATENCY_PLAN
+        == LatencyPlan(warmup=10, samples=100)
+    )
+    assert written.latency.samples == min(100, count)
+    assert written.batch.notes == count
+    assert written.hardware.cpu_model
