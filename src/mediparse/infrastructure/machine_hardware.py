@@ -28,6 +28,9 @@ def cpu_model(cpuinfo: str, fallback: str) -> str:
 def machine_hardware(gpus: tuple[GpuDevice, ...]) -> Hardware:
     """Zjistí CPU, jádra systému i procesu a fyzickou paměť hostitele.
 
+    Args:
+        gpus: Viditelná GPU z adaptéru NVML, převezmou se beze změny.
+
     Returns:
         Hardware stroje, na kterém běží proces.
 
