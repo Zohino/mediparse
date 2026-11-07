@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
 from mediparse.application.model_training import ModelTraining
+from mediparse.domain.costs import TrainingCosts
 from mediparse.domain.environment import Environment
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
@@ -21,6 +22,7 @@ from mediparse.infrastructure.diagnosis_candidates_file import load_text_normali
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.machine_hardware import machine_hardware
+from mediparse.infrastructure.nvml_gpu import gpu_monitor
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.sklearn_classifier import (
@@ -61,6 +63,7 @@ def main(
     model: Path,
     predictions: Path,
     manifest: Path,
+    costs: Path,
     log: Path,
 ) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
@@ -78,6 +81,9 @@ def main(
         model=model,
         predictions=predictions,
         manifest=manifest,
+        costs=costs,
+        cuda_visible_devices=os.environ.get("CUDA_VISIBLE_DEVICES"),
+        cuda_device_order=os.environ.get("CUDA_DEVICE_ORDER"),
         revision=revision_source(os.environ, Path.cwd()),
     )
 
@@ -93,36 +99,40 @@ def run(
     model: Path,
     predictions: Path,
     manifest: Path,
+    costs: Path,
     revision: Callable[[], SourceRevision],
+    cuda_visible_devices: str | None,
+    cuda_device_order: str | None,
 ) -> ExitCode:
     """Složí use case z tabulky, configu, souboru splitu a adaptérů scikit-learn a spustí trénink.
 
     Returns:
-        OK po uložení modelu, predikcí a manifestu; REFUSED pro chybějící nebo
+        OK po uložení modelu, predikcí, manifestu a nákladů; REFUSED pro chybějící nebo
         neplatnou tabulku, config, kandidáty (při zapnuté normalizaci), lexikon a soubor splitu,
-        pro nečitelnou revizi zdroje nebo nezjistitelný HW stroje.
+        pro nečitelnou revizi zdroje, nezjistitelný HW stroje nebo selhání měření GPU.
     """
     training = load_training_config(config)
     source = revision()
-    hardware = machine_hardware(gpus=())
-    table, strip = training_input(cohort=cohort, training=training, lexicon=lexicon)
-    normalization = (
-        load_text_normalization(
-            candidates, variants=training.normalize_diagnosis_variants
+    with gpu_monitor(cuda_visible_devices, cuda_device_order) as monitor:
+        hardware = machine_hardware(monitor.devices)
+        table, strip = training_input(cohort=cohort, training=training, lexicon=lexicon)
+        normalization = (
+            load_text_normalization(
+                candidates, variants=training.normalize_diagnosis_variants
+            )
+            if training.normalize_clinical_text
+            else None
         )
-        if training.normalize_clinical_text
-        else None
-    )
-    step = ModelTraining(
-        table=table,
-        split=ParquetSplitTable(split),
-        trainer=LinearSvmTrainer(
-            training.regularization, training.seed, normalization=normalization
-        ),
-        store=SkopsModelFile(model),
-        predictions=ParquetPredictionTable(predictions),
-    )
-    report = step.run(training)
+        step = ModelTraining(
+            table=table,
+            split=ParquetSplitTable(split),
+            trainer=LinearSvmTrainer(
+                training.regularization, training.seed, normalization=normalization
+            ),
+            store=SkopsModelFile(model),
+            predictions=ParquetPredictionTable(predictions),
+        )
+        report = step.run(training)
     write_model(
         manifest,
         RunManifest(
@@ -144,6 +154,7 @@ def run(
             ),
         ),
     )
+    write_model(costs, TrainingCosts(gpu=monitor.measurement()))
     logger.info(
         "Model diagnózy %s: %d trénovacích a %d testovacích zpráv, uložen do %s.",
         report.diagnosis,

@@ -7,15 +7,17 @@ Cesty určuje pravidlo; skript workflow jen rozbalí objekt ``snakemake`` a zavo
 from __future__ import annotations
 
 import logging
+import os
 from typing import TYPE_CHECKING, Final
 
 from mediparse.application.model_inference import ModelInference
-from mediparse.domain.costs import GpuMeasurement, InferenceCosts, LatencyPlan
+from mediparse.domain.costs import InferenceCosts, LatencyPlan
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.training_input import training_input
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.machine_hardware import machine_hardware
+from mediparse.infrastructure.nvml_gpu import gpu_monitor
 from mediparse.infrastructure.perf_clock import PerfCounterClock
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.sklearn_classifier import SkopsModelFile
@@ -54,6 +56,8 @@ def main(
         predictions=predictions,
         inference=inference,
         costs=costs,
+        cuda_visible_devices=os.environ.get("CUDA_VISIBLE_DEVICES"),
+        cuda_device_order=os.environ.get("CUDA_DEVICE_ORDER"),
     )
 
 
@@ -67,12 +71,14 @@ def run(
     predictions: Path,
     inference: Path,
     costs: Path,
+    cuda_visible_devices: str | None,
+    cuda_device_order: str | None,
 ) -> ExitCode:
     """Složí inferenci z adaptérů, zapíše predikce a agregované náklady s HW stroje.
 
     Returns:
-        OK po zápisu predikcí a nákladů; REFUSED pro chybějící nebo neplatný vstup a pro
-        uložený model, který nedává stejné predikce jako trénink, nebo nezjistitelný HW stroje.
+        OK po zápisu predikcí a nákladů; REFUSED při neplatném vstupu, nesouladu
+        predikcí uloženého modelu s tréninkem, nezjistitelném HW nebo selhání měření GPU.
     """
     table, _ = training_input(
         cohort=cohort, training=load_training_config(config), lexicon=lexicon
@@ -85,15 +91,17 @@ def run(
         clock=PerfCounterClock(),
         plan=LATENCY_PLAN,
     )
-    inferred = step.run()
+    with gpu_monitor(cuda_visible_devices, cuda_device_order) as monitor:
+        hardware = machine_hardware(monitor.devices)
+        inferred = step.run()
     write_model(
         costs,
         InferenceCosts(
             plan=LATENCY_PLAN,
             latency=inferred.latency,
             batch=inferred.batch,
-            hardware=machine_hardware(gpus=()),
-            gpu=GpuMeasurement(seconds=0.0, devices=()),
+            hardware=hardware,
+            gpu=monitor.measurement(),
         ),
     )
     logger.info(
