@@ -12,9 +12,9 @@ from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import StringMapping, write_model
 from mediparse.infrastructure.package_versions import installed_versions
-from mediparse.infrastructure.parquet_source import verified_parquet_source
 from mediparse.infrastructure.source_revision import revision_source
 from mediparse.infrastructure.synthetic_marker import read_marker
+from mediparse.infrastructure.table_provenance import verified_table_provenance
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -50,7 +50,7 @@ def _data_source(parquet: Path) -> dict[str, str]:
         return {"data_source": f"syntetické tabulky (prefix {marker.prefix})"}
     details = {"data_source": "tabulky parquet ověřené proti otiskům CSV"}
     for path in sorted(parquet.glob("*.parquet")):
-        source = verified_parquet_source(path)
+        source = verified_table_provenance(path)
         details[f"csv_sha256 {path.stem}"] = source.source_sha256
         details[f"parquet_sha256 {path.stem}"] = source.sha256
     return details

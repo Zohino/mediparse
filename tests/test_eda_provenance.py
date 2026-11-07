@@ -15,8 +15,8 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints import eda_provenance
 from mediparse.entrypoints.eda_provenance import provenance
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.parquet_source import write_parquet_source
 from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
+from mediparse.infrastructure.table_provenance import write_table_provenance
 from tests.git_support import git_output, init_repo, needs_git
 
 if TYPE_CHECKING:
@@ -66,7 +66,7 @@ def test_real_tables_carry_verified_csv_and_parquet_hashes(tmp_path: Path) -> No
     for name, data in contents.items():
         path = directory / f"{name}.parquet"
         path.write_bytes(data)
-        write_parquet_source(
+        write_table_provenance(
             path, source=f"{name}.csv.gz", source_sha256=csv_digests[name]
         )
     (directory / "unrelated.json").write_text("{}", encoding="utf-8")
@@ -88,7 +88,7 @@ def test_real_tables_carry_verified_csv_and_parquet_hashes(tmp_path: Path) -> No
     }
 
 
-def test_missing_parquet_source_is_refused(
+def test_missing_table_provenance_is_refused(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
 ) -> None:
     """Parquet bez vazby ukončí CLI jako REFUSED a provenance nevznikne."""
@@ -118,13 +118,13 @@ def test_missing_parquet_source_is_refused(
     assert "synthetic private content" not in caplog.text
 
 
-def test_changed_parquet_source_is_refused(tmp_path: Path) -> None:
+def test_changed_table_provenance_is_refused(tmp_path: Path) -> None:
     """EDA odmítne změněný parquet stejnou kontrolou jako kohorta."""
     root = _root(tmp_path)
     directory = _parquet(tmp_path)
     path = directory / "discharge.parquet"
     path.write_bytes(b"synthetic parquet")
-    write_parquet_source(path, source="discharge.csv.gz", source_sha256=CSV_SHA)
+    write_table_provenance(path, source="discharge.csv.gz", source_sha256=CSV_SHA)
     path.write_bytes(b"Synthetic parquet")
     out = tmp_path / "provenance.json"
 

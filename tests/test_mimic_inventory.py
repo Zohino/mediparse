@@ -12,7 +12,6 @@ from mediparse.domain.mimic_table import TableShape
 from mediparse.infrastructure.mimic_inventory import (
     InventoryFile,
     read_manifest,
-    read_manifest_bytes,
 )
 
 if TYPE_CHECKING:
@@ -85,18 +84,6 @@ def test_invalid_json_manifest_is_refused(tmp_path: Path) -> None:
         read_manifest(path)
 
 
-def test_manifest_bytes_by_table_name(tmp_path: Path) -> None:
-    """Velikost souboru z manifestu je pod jménem tabulky bez přípony CSV."""
-    path = tmp_path / "manifest.json"
-    path.write_text(MANIFEST, encoding="utf-8")
-
-    assert read_manifest_bytes(path) == {
-        "discharge": 1,
-        "d_icd_diagnoses": 2,
-        "mimic-iv-bhc": 5,
-    }
-
-
 @pytest.mark.parametrize("digest", [None, "neplatný otisk", "a" * 63])
 def test_missing_or_invalid_digest_is_refused(
     tmp_path: Path, digest: str | None
@@ -114,13 +101,23 @@ def test_missing_or_invalid_digest_is_refused(
         InventoryFile(path).sha256()
 
 
-def test_legacy_manifest_still_supplies_shapes_and_sizes(tmp_path: Path) -> None:
-    """Starý veřejný manifest slouží syntetice do uživatelského přepočtu."""
+def test_manifest_reader_ignores_fields_beyond_shape(tmp_path: Path) -> None:
+    """Čtenář tvarů ignoruje další pole spojených inventářů."""
     payload = json.loads(MANIFEST)
     for table in payload["tables"]:
-        del table["sha256"]
+        table["unexpected"] = "syntetická hodnota"
     path = tmp_path / "manifest.json"
     path.write_text(json.dumps(payload), encoding="utf-8")
 
     assert read_manifest(path)["discharge"] == TableShape(records=3, columns=("b", "a"))
-    assert read_manifest_bytes(path)["discharge"] == 1
+
+
+def test_inventory_with_extra_field_is_refused(tmp_path: Path) -> None:
+    """Jinak platný inventář odmítá neznámý klíč."""
+    payload = json.loads(MANIFEST)["tables"][0]
+    payload["unexpected"] = "syntetická hodnota"
+    path = tmp_path / "inventory.json"
+    path.write_text(json.dumps(payload), encoding="utf-8")
+
+    with pytest.raises(InvalidInputError, match="unexpected"):
+        InventoryFile(path).read()

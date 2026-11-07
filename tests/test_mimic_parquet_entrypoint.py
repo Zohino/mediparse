@@ -7,7 +7,7 @@ import hashlib
 import json
 from typing import TYPE_CHECKING
 
-from mediparse.domain.mimic_table import ParquetSource
+from mediparse.domain.mimic_table import TableProvenance
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.mimic_parquet import run
 
@@ -43,15 +43,14 @@ def test_matching_inventory_writes_parquet(tmp_path: Path) -> None:
             table=table,
             inventory=inventory,
             parquet=parquet,
-            source=parquet.with_suffix(".source.json"),
         )
         == ExitCode.OK
     )
     assert parquet.is_file()
-    written = ParquetSource.model_validate_json(
+    written = TableProvenance.model_validate_json(
         parquet.with_suffix(".source.json").read_bytes()
     )
-    assert written == ParquetSource(
+    assert written == TableProvenance(
         source=table.name,
         source_sha256=hashlib.sha256(table.read_bytes()).hexdigest(),
         sha256=hashlib.sha256(parquet.read_bytes()).hexdigest(),
@@ -67,21 +66,6 @@ def test_count_mismatch_is_refused(tmp_path: Path) -> None:
             table=table,
             inventory=inventory,
             parquet=parquet,
-            source=parquet.with_suffix(".source.json"),
         )
         == ExitCode.REFUSED
     )
-
-
-def test_noncanonical_source_path_is_refused_before_conversion(tmp_path: Path) -> None:
-    """Výstup pravidla musí souhlasit s cestou vazby, kterou pak čtou konzumenti."""
-    table, inventory = _files(tmp_path, RECORDS)
-    parquet = tmp_path / "t.parquet"
-    source = tmp_path / "different.json"
-
-    assert (
-        run(table=table, inventory=inventory, parquet=parquet, source=source)
-        == ExitCode.REFUSED
-    )
-    assert not parquet.exists()
-    assert not source.exists()

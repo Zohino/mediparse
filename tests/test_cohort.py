@@ -20,7 +20,7 @@ from mediparse.domain.cohort import (
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.environment import Environment, SourceRevision
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.mimic_table import ParquetSource
+from mediparse.domain.mimic_table import TableProvenance
 from tests.cohort_support import (
     CODES,
     EMPTY_COHORT,
@@ -193,7 +193,7 @@ def _manifest(**overrides: object) -> CohortManifest:
         "config_sha256": "b" * 64,
         "input_corpus_sha256": "e" * 64,
         "sources": {
-            "discharge": ParquetSource(
+            "discharge": TableProvenance(
                 source="discharge.csv.gz", source_sha256="c" * 64, sha256="f" * 64
             )
         },

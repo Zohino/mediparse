@@ -24,8 +24,8 @@ from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.input_corpus_rule import load_input_corpus_rule
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.package_versions import installed_versions
-from mediparse.infrastructure.parquet_source import verified_parquet_source
 from mediparse.infrastructure.source_revision import revision_source
+from mediparse.infrastructure.table_provenance import verified_table_provenance
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -84,8 +84,8 @@ def run(
     codes = load_diagnosis_codes(candidates)
     rule = load_input_corpus_rule(corpus_rule)
     sources = {
-        "discharge": verified_parquet_source(discharge),
-        "diagnoses_icd": verified_parquet_source(diagnoses),
+        "discharge": verified_table_provenance(discharge),
+        "diagnoses_icd": verified_table_provenance(diagnoses),
     }
     source = revision()
     result = CohortMaterialization(

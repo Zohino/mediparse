@@ -12,7 +12,7 @@ import pytest
 
 from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.parquet_source import source_path
+from mediparse.infrastructure.table_provenance import provenance_path
 from mediparse.synthetic.entrypoints import synthetic_mimic
 from mediparse.synthetic.infrastructure.plans_file import PlansFile
 from tests.support import (
@@ -123,7 +123,7 @@ def test_tables_have_string_columns_and_synthetic_urls(
     for path in (discharge, diagnoses):
         assert all(field.type == pa.string() for field in pq.read_schema(path))
     for path in (discharge, diagnoses):
-        written = json.loads(source_path(path).read_text(encoding="utf-8"))
+        written = json.loads(provenance_path(path).read_text(encoding="utf-8"))
         assert written == {
             "source": f"https://mediparse.invalid/synthetic/{path.stem}",
             "source_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
@@ -154,8 +154,8 @@ def test_unpaired_corpus_is_refused_before_writing(
     )
     assert not discharge.exists()
     assert not diagnoses.exists()
-    assert not source_path(discharge).exists()
-    assert not source_path(diagnoses).exists()
+    assert not provenance_path(discharge).exists()
+    assert not provenance_path(diagnoses).exists()
     assert f"Plány bez zprávy v jazyce en: {planned_note.plan.note_id}" in caplog.text
 
 

@@ -1,4 +1,4 @@
-"""Tabulka MIMIC: jméno odvozené ze staženého souboru a tvar, podle kterého se porovnává inventář s převodem."""
+"""Tabulka MIMIC: jméno, tvar pro porovnání inventáře s převodem a původ převedené tabulky."""
 
 from typing import Final
 
@@ -19,8 +19,12 @@ class TableShape(BaseModel):
     columns: tuple[str, ...]
 
 
-class ParquetSource(BaseModel):
-    """Zdroj tabulky a vazba otisku ověřeného CSV na otisk převedeného parquetu."""
+class TableProvenance(BaseModel):
+    """Zdroj tabulky a vazba otisku ověřeného CSV na otisk převedeného parquetu.
+
+    Attributes:
+        source: Jméno zdrojového CSV, u syntetiky URL na doméně `.invalid`.
+    """
 
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 

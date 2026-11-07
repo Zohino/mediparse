@@ -19,21 +19,25 @@ class _TableSummary(BaseModel):
     model_config = ConfigDict(frozen=True, extra="ignore")
 
     file: str
-    bytes: int
     records: int
     columns: tuple[str, ...]
 
 
-class _Inventory(_TableSummary):
+class _Inventory(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid")
 
+    file: str
+    bytes: int
+    records: int
+    columns: tuple[str, ...]
     sha256: Sha256
 
 
 class _Manifest(BaseModel):
     model_config = ConfigDict(frozen=True)
 
-    # Syntetika potřebuje jen tvar a velikost i ze starého veřejného manifestu před reálným přepočtem.
+    # Čtenáři manifestu potřebují jen tvar; inventáře ověřuje striktně `_Inventory`,
+    # manifest je jejich spojení, proto projekce další pole (i `sha256`) ignoruje.
     tables: tuple[_TableSummary, ...]
 
 
@@ -48,16 +52,6 @@ def read_manifest(path: Path) -> dict[str, TableShape]:
         table_name(table.file): TableShape(records=table.records, columns=table.columns)
         for table in manifest.tables
     }
-
-
-def read_manifest_bytes(path: Path) -> dict[str, int]:
-    """Přečte z veřejného manifestu validace velikost každého souboru v bajtech.
-
-    Returns:
-        Jméno tabulky (`table_name`) a velikost souboru v pořadí manifestu.
-    """
-    manifest = parse_file(path, _Manifest.model_validate_json)
-    return {table_name(table.file): table.bytes for table in manifest.tables}
 
 
 @dataclass(frozen=True)

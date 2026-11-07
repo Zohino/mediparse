@@ -13,10 +13,13 @@ import pytest
 
 from mediparse.domain.cohort import MIN_CELL, CohortManifest, FunnelStepName
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.mimic_table import ParquetSource
+from mediparse.domain.mimic_table import TableProvenance
 from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.parquet_source import source_path, write_parquet_source
+from mediparse.infrastructure.table_provenance import (
+    provenance_path,
+    write_table_provenance,
+)
 from tests.cohort_support import (
     EXPECTED_FUNNEL,
     EXPECTED_INVALID_CODES,
@@ -49,7 +52,7 @@ def _tables(
 ) -> tuple[Path, Path]:
     discharge, diagnoses = write_tables(root, notes, codes, padded=padded)
     for path, digest in ((discharge, DISCHARGE_SHA), (diagnoses, DIAGNOSES_SHA)):
-        write_parquet_source(path, source=f"{path.stem}.csv.gz", source_sha256=digest)
+        write_table_provenance(path, source=f"{path.stem}.csv.gz", source_sha256=digest)
     return discharge, diagnoses
 
 
@@ -85,12 +88,12 @@ def test_writes_cohort_and_manifest(tmp_path: Path) -> None:
     assert written.config_sha256 == hashlib.sha256(candidates.read_bytes()).hexdigest()
     assert written.input_corpus_sha256 == hashlib.sha256(rule.read_bytes()).hexdigest()
     assert written.sources == {
-        "discharge": ParquetSource(
+        "discharge": TableProvenance(
             source="discharge.csv.gz",
             source_sha256=DISCHARGE_SHA,
             sha256=hashlib.sha256(discharge.read_bytes()).hexdigest(),
         ),
-        "diagnoses_icd": ParquetSource(
+        "diagnoses_icd": TableProvenance(
             source="diagnoses_icd.csv.gz",
             source_sha256=DIAGNOSES_SHA,
             sha256=hashlib.sha256(diagnoses.read_bytes()).hexdigest(),
@@ -207,7 +210,7 @@ def test_missing_source_is_refused_before_writing(tmp_path: Path) -> None:
     """Kohorta bez vazby jedné tabulky nevznikne."""
     discharge, diagnoses = _tables(tmp_path)
     candidates, rule = _configs(tmp_path)
-    source_path(diagnoses).unlink()
+    provenance_path(diagnoses).unlink()
 
     assert (
         cohort.run(
