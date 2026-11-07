@@ -96,20 +96,26 @@ def _train(
     return trained
 
 
+def _infer(trained: Trained, tmp_path: Path, **changes: Path) -> ExitCode:
+    inference = changes.get("inference", tmp_path / "inference.parquet")
+    paths = {
+        "cohort": trained.notes,
+        "config": trained.config,
+        "lexicon": REPOSITORY_SECTION_HEADERS,
+        "model": trained.model,
+        "predictions": trained.predictions,
+        "inference": inference,
+        "costs": inference.with_suffix(".costs.json"),
+    }
+    return model_inference.run(**(paths | changes))
+
+
 def test_writes_all_held_out_predictions(tmp_path: Path) -> None:
     """Uložený model reprodukuje predikce všech odložených zpráv."""
     trained = _train(tmp_path)
     inference = tmp_path / "build" / "inference.parquet"
 
-    code = model_inference.run(
-        cohort=trained.notes,
-        config=trained.config,
-        lexicon=REPOSITORY_SECTION_HEADERS,
-        model=trained.model,
-        predictions=trained.predictions,
-        inference=inference,
-        costs=inference.with_suffix(".costs.json"),
-    )
+    code = _infer(trained, tmp_path, inference=inference)
 
     rows = ParquetPredictionTable(inference).read()
     expected = ParquetPredictionTable(trained.predictions).read()
@@ -134,15 +140,7 @@ def test_missing_model_is_refused(
     trained = _train(tmp_path)
     inference = tmp_path / "inference.parquet"
 
-    code = model_inference.run(
-        cohort=trained.notes,
-        config=trained.config,
-        lexicon=REPOSITORY_SECTION_HEADERS,
-        model=tmp_path / "none.skops",
-        predictions=trained.predictions,
-        inference=inference,
-        costs=inference.with_suffix(".costs.json"),
-    )
+    code = _infer(trained, tmp_path, model=tmp_path / "none.skops")
 
     assert code is ExitCode.REFUSED
     assert not inference.exists()
@@ -158,15 +156,7 @@ def test_missing_predictions_are_refused(
     trained = _train(tmp_path)
     inference = tmp_path / "inference.parquet"
 
-    code = model_inference.run(
-        cohort=trained.notes,
-        config=trained.config,
-        lexicon=REPOSITORY_SECTION_HEADERS,
-        model=trained.model,
-        predictions=tmp_path / "none.parquet",
-        inference=inference,
-        costs=inference.with_suffix(".costs.json"),
-    )
+    code = _infer(trained, tmp_path, predictions=tmp_path / "none.parquet")
 
     assert code is ExitCode.REFUSED
     assert not inference.exists()
@@ -185,15 +175,7 @@ def test_tampered_predictions_are_refused(
     table.write([replace(first, predicted=not first.predicted), *rest])
     inference = tmp_path / "inference.parquet"
 
-    code = model_inference.run(
-        cohort=trained.notes,
-        config=trained.config,
-        lexicon=REPOSITORY_SECTION_HEADERS,
-        model=trained.model,
-        predictions=trained.predictions,
-        inference=inference,
-        costs=inference.with_suffix(".costs.json"),
-    )
+    code = _infer(trained, tmp_path)
 
     assert code is ExitCode.REFUSED
     assert not inference.exists()
@@ -207,15 +189,7 @@ def test_stripped_training_and_inference_agree(tmp_path: Path) -> None:
     trained = _train(tmp_path, strip=True, sections=True)
     inference = tmp_path / "inference.parquet"
 
-    code = model_inference.run(
-        cohort=trained.notes,
-        config=trained.config,
-        lexicon=REPOSITORY_SECTION_HEADERS,
-        model=trained.model,
-        predictions=trained.predictions,
-        inference=inference,
-        costs=inference.with_suffix(".costs.json"),
-    )
+    code = _infer(trained, tmp_path)
 
     assert code is ExitCode.OK
     assert inference.exists()
@@ -233,15 +207,7 @@ def test_model_trained_without_strip_mismatches_stripped_inference(
     )
     inference = tmp_path / "inference.parquet"
 
-    code = model_inference.run(
-        cohort=trained.notes,
-        config=stripping,
-        lexicon=REPOSITORY_SECTION_HEADERS,
-        model=trained.model,
-        predictions=trained.predictions,
-        inference=inference,
-        costs=inference.with_suffix(".costs.json"),
-    )
+    code = _infer(trained, tmp_path, config=stripping)
 
     assert code is ExitCode.REFUSED
     assert not inference.exists()
@@ -256,15 +222,7 @@ def test_normalized_model_infers_from_raw_notes(tmp_path: Path) -> None:
     plain.write_text(json.dumps(training_config(row_id="row")), encoding="utf-8")
     inference = tmp_path / "inference.parquet"
 
-    code = model_inference.run(
-        cohort=trained.notes,
-        config=plain,
-        lexicon=REPOSITORY_SECTION_HEADERS,
-        model=trained.model,
-        predictions=trained.predictions,
-        inference=inference,
-        costs=inference.with_suffix(".costs.json"),
-    )
+    code = _infer(trained, tmp_path, config=plain)
 
     assert code is ExitCode.OK
     assert inference.exists()
@@ -276,15 +234,7 @@ def test_model_with_acronyms_infers_without_candidates_file(tmp_path: Path) -> N
     (tmp_path / "candidates.json").unlink()
     inference = tmp_path / "inference.parquet"
 
-    code = model_inference.run(
-        cohort=trained.notes,
-        config=trained.config,
-        lexicon=REPOSITORY_SECTION_HEADERS,
-        model=trained.model,
-        predictions=trained.predictions,
-        inference=inference,
-        costs=inference.with_suffix(".costs.json"),
-    )
+    code = _infer(trained, tmp_path)
 
     assert code is ExitCode.OK
     assert inference.exists()
@@ -296,15 +246,7 @@ def test_writes_aggregate_costs_with_measurement_plan(tmp_path: Path) -> None:
     inference = tmp_path / "inference.parquet"
     costs = tmp_path / "costs" / "inference.json"
 
-    code = model_inference.run(
-        cohort=trained.notes,
-        config=trained.config,
-        lexicon=REPOSITORY_SECTION_HEADERS,
-        model=trained.model,
-        predictions=trained.predictions,
-        inference=inference,
-        costs=costs,
-    )
+    code = _infer(trained, tmp_path, costs=costs)
 
     written = InferenceCosts.model_validate_json(costs.read_text(encoding="utf-8"))
     count = len(ParquetPredictionTable(inference).read())
