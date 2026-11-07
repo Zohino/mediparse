@@ -2,12 +2,17 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 from pydantic import ValidationError
 
 from mediparse.domain.costs import LatencyPlan, latency, nearest_rank
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 
 def test_latency_plan_requires_at_least_one_sample() -> None:
@@ -20,6 +25,17 @@ def test_nearest_rank_of_three_unsorted_values() -> None:
     """ceil(1,5) = 2: medián je druhá nejmenší skutečně naměřená hodnota."""
     expected = 0.2
     assert nearest_rank([0.3, 0.1, 0.2], 50) == expected
+
+
+@pytest.mark.parametrize(
+    ("values", "percent", "expected"),
+    [(range(1, 101), 7, 7), ([0.1, 0.2], 0.5, 0.1)],
+)
+def test_nearest_rank_keeps_exact_and_fractional_ranks(
+    values: Sequence[float], percent: float, expected: float
+) -> None:
+    """Sedm procent ze sta má pořadí 7, půl procenta ze dvou má pořadí 1."""
+    assert nearest_rank(values, percent) == expected
 
 
 @pytest.mark.parametrize(
@@ -58,3 +74,9 @@ def test_latency_percentiles_are_ordered_observed_values(
     assert result.p50_seconds in durations
     assert result.p95_seconds in durations
     assert result.p50_seconds <= result.p95_seconds
+
+
+@given(st.lists(st.floats(min_value=0, max_value=1e6), min_size=1, max_size=100))
+def test_full_percentile_is_maximum(values: list[float]) -> None:
+    """Stý percentil má pořadí n a je největší hodnotou neprázdného vstupu."""
+    assert nearest_rank(values, 100) == max(values)

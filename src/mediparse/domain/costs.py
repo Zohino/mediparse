@@ -55,7 +55,7 @@ class InferenceCosts(BaseModel):
 
 
 def nearest_rank(values: Sequence[float], percent: float) -> float:
-    """Vybere ceil(percent / 100 * n)-tou nejmenší hodnotu bez interpolace.
+    """Vybere ceil(percent * n / 100)-tou nejmenší hodnotu bez interpolace.
 
     Returns:
         Skutečná vstupní hodnota na příslušném pořadí.
@@ -66,7 +66,7 @@ def nearest_rank(values: Sequence[float], percent: float) -> float:
     if not values or not 0 < percent <= PERCENT_SCALE:
         msg = "Percentil vyžaduje neprázdný vstup a percent v (0, 100]."
         raise ValueError(msg)
-    return sorted(values)[ceil(percent / PERCENT_SCALE * len(values)) - 1]
+    return sorted(values)[ceil(percent * len(values) / PERCENT_SCALE) - 1]
 
 
 def latency(durations: Sequence[float]) -> Latency:
