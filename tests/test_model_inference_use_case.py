@@ -59,14 +59,12 @@ class _FakePredictions:
 @dataclass
 class _FakeClassifier:
     answer: tuple[Classification, ...]
-    texts: list[str] = field(default_factory=list)
     calls: list[tuple[str, ...]] = field(default_factory=list)
 
     def classify(self, texts: Sequence[str]) -> tuple[Classification, ...]:
         if not texts:
             msg = "Found array with 0 sample(s)"
             raise ValueError(msg)
-        self.texts.extend(texts)
         self.calls.append(tuple(texts))
         return self.answer[: len(texts)]
 
@@ -145,7 +143,7 @@ def test_held_out_note_without_text_raises() -> None:
     ):
         use_case.run()
 
-    assert classifier.texts == []
+    assert classifier.calls == []
     assert sink.written == []
 
 
@@ -172,7 +170,7 @@ def test_missing_texts_report_only_count() -> None:
     assert "2" in message
     assert "9000000" not in message
     assert "DS-" not in message
-    assert classifier.texts == []
+    assert classifier.calls == []
     assert sink.written == []
 
 
