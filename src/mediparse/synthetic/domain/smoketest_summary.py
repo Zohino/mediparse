@@ -29,12 +29,17 @@ def demo_examples(
     Raises:
         InvalidInputError: Některá predikce nemá zprávu v kohortě.
     """
-    ordered = sorted(
-        zip(predictions, truth_of(predictions, notes), strict=True),
-        key=lambda item: item[0].note_id,
-    )
+    ordered = sorted(predictions, key=lambda item: item.note_id)
+    labeled = tuple(zip(ordered, truth_of(ordered, notes), strict=True))
     firsts = (
-        next((item for item in ordered if item[1] is truth), None)
+        next(
+            (
+                (item, is_positive)
+                for item, is_positive in labeled
+                if is_positive is truth
+            ),
+            None,
+        )
         for truth in (True, False)
     )
     return tuple(item for item in firsts if item is not None)

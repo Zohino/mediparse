@@ -175,7 +175,7 @@ def test_missing_inference_is_refused(
 def test_missing_cohort_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
-    """Chybějící kohorta krok odmítne bez výpisu, tracebacku a identifikátorů v logu."""
+    """Chybějící kohorta krok odmítne bez výpisu a tracebacku."""
     out = io.StringIO()
 
     code = _run(tmp_path, out, cohort=tmp_path / "none.parquet")
@@ -183,8 +183,22 @@ def test_missing_cohort_is_refused(
     assert code is ExitCode.REFUSED
     assert not out.getvalue()
     assert "none.parquet" in caplog.text
+    assert "Traceback" not in caplog.text
+
+
+def test_inference_note_missing_from_cohort_is_refused(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Predikce bez zprávy v kohortě se odmítne s počtem, bez identifikátorů v logu."""
+    cohort = _cohort(tmp_path)
+    table = ParquetNoteTable(cohort)
+    table.write(table.read()[1:])
+    out = io.StringIO()
+
+    code = _run(tmp_path, out, cohort=cohort)
+
+    assert code is ExitCode.REFUSED
+    assert not out.getvalue()
+    assert "Počet predikcí bez zprávy ve vstupní tabulce: 1." in caplog.text
     assert "-DS-" not in caplog.text
-    assert "9000" not in caplog.text
-    assert "9001" not in caplog.text
-    assert "9002" not in caplog.text
     assert "Traceback" not in caplog.text

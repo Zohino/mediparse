@@ -170,4 +170,5 @@ def test_all_negative_predictions_are_evaluated_against_labels(tmp_path: Path) -
     assert row["f1"] == pytest.approx(0.0)
     assert row["recall"] == pytest.approx(0.0)
     assert row["roc_auc"] == pytest.approx(0.5)
+    # Ruční součet z fixtury: pozitivní pacienti 1, 9 a 11 ve foldu 0 mají 1 + 5 + 3 zpráv.
     assert row["test_positives"] == 9  # ruff: ignore[magic-value-comparison]

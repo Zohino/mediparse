@@ -167,10 +167,12 @@ def truth_of(
     Raises:
         InvalidInputError: Některá predikce nemá zprávu ve vstupní tabulce.
     """
-    labels = {note.note_id: note.labels for note in notes}
-    missing = sum(item.note_id not in labels for item in predictions)
+    notes_by_id = {note.note_id: note for note in notes}
+    missing = sum(item.note_id not in notes_by_id for item in predictions)
     if missing:
         # Identifikátory zpráv nesou subject_id pacienta MIMIC; hlásíme jen počet.
         msg = f"Počet predikcí bez zprávy ve vstupní tabulce: {missing}."
         raise InvalidInputError(msg)
-    return tuple(item.diagnosis in labels[item.note_id] for item in predictions)
+    return tuple(
+        notes_by_id[item.note_id].has_label(item.diagnosis) for item in predictions
+    )

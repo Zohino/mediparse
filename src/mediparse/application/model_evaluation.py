@@ -84,18 +84,18 @@ class ModelEvaluation:
         groups: defaultdict[tuple[str, Diagnosis], list[tuple[Prediction, bool]]] = (
             defaultdict(list)
         )
-        for item, label in zip(items, truth, strict=True):
-            groups[item.row_id, item.diagnosis].append((item, label))
+        for item, is_positive in zip(items, truth, strict=True):
+            groups[item.row_id, item.diagnosis].append((item, is_positive))
         for (_, diagnosis), group in groups.items():
-            ensure_both_classes(diagnosis, [label for _, label in group])
+            ensure_both_classes(diagnosis, [is_positive for _, is_positive in group])
         result = tuple(
             DiagnosisMetrics(
                 row_id,
                 diagnosis,
                 len(group),
-                sum(label for _, label in group),
+                sum(is_positive for _, is_positive in group),
                 self.scorer.score(
-                    [label for _, label in group],
+                    [is_positive for _, is_positive in group],
                     [item.predicted for item, _ in group],
                     [item.score for item, _ in group],
                 ),
