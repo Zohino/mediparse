@@ -4,6 +4,7 @@ from typing import Final
 
 from pydantic import BaseModel, ConfigDict
 
+from mediparse.domain.digest import Sha256
 from mediparse.domain.inputs import InvalidInputError
 
 CSV_SUFFIXES: Final = (".csv.gz", ".csv")
@@ -16,6 +17,16 @@ class TableShape(BaseModel):
 
     records: int
     columns: tuple[str, ...]
+
+
+class ParquetSource(BaseModel):
+    """Zdroj tabulky a vazba otisku ověřeného CSV na otisk převedeného parquetu."""
+
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+
+    source: str
+    source_sha256: Sha256
+    sha256: Sha256
 
 
 def table_name(file_name: str) -> str:

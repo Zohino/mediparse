@@ -74,7 +74,8 @@ rule parquet_mimic_table:
         ),
         validated="resources/mimic/validated.flag",
     output:
-        "resources/mimic/parquet/{table}.parquet",
+        parquet="resources/mimic/parquet/{table}.parquet",
+        source="resources/mimic/parquet/{table}.source.json",
     log:
         "logs/parquet/{table}.log",
     wildcard_constraints:
