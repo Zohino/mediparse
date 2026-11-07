@@ -54,6 +54,8 @@ use rule train_model as train_smoketest_model with:
         manifest=SMOKETEST / "run_manifest.json",
     log:
         SMOKETEST_LOGS / "train_smoketest_model.log",
+    benchmark:
+        SMOKETEST / "benchmarks/train_model.tsv"
 
 
 use rule evaluate_model as evaluate_smoketest_model with:
@@ -79,3 +81,5 @@ use rule infer_model as infer_smoketest_model with:
         costs=SMOKETEST / "inference_costs.json",
     log:
         SMOKETEST_LOGS / "infer_smoketest_model.log",
+    benchmark:
+        SMOKETEST / "benchmarks/infer_model.tsv"

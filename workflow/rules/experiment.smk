@@ -26,6 +26,9 @@ rule train_model:
         manifest="results/experiment/run_manifest.json",
     log:
         "logs/experiment/train_model.log",
+    benchmark:
+        # repeat() by zopakovalo celý trénink, proto měříme jediný běh.
+        "results/experiment/benchmarks/train_model.tsv"
     script:
         "../scripts/train_model.py"
 
@@ -56,5 +59,7 @@ rule infer_model:
         costs="results/experiment/inference_costs.json",
     log:
         "logs/experiment/infer_model.log",
+    benchmark:
+        "results/experiment/benchmarks/infer_model.tsv"
     script:
         "../scripts/infer_model.py"
