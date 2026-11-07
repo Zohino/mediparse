@@ -29,6 +29,12 @@ def _fields(**changes: object) -> dict[str, object]:
         "model": "sklearn TfidfVectorizer+LinearSVC",
         "model_revision": None,
         "tokenizer_revision": None,
+        "hardware": {
+            "cpu_model": "Synthetic CPU",
+            "logical_cores": 8,
+            "available_cores": 2,
+            "memory_bytes": 1024,
+        },
         "environment": Environment(
             packages={"python": "3.13.0"},
             source=SourceRevision(commit=COMMIT, dirty=False),
@@ -44,6 +50,23 @@ def test_valid_manifest_with_null_revisions() -> None:
     assert manifest.model_revision is None
     assert manifest.tokenizer_revision is None
     assert manifest.environment.source.commit == COMMIT
+
+
+def test_manifest_requires_hardware() -> None:
+    """Manifest bez údajů o stroji nelze vydávat za úplnou provenance."""
+    fields = _fields()
+    del fields["hardware"]
+
+    with pytest.raises(ValidationError, match="hardware"):
+        RunManifest.model_validate(fields)
+
+
+def test_manifest_records_hardware() -> None:
+    """Manifest zachová všechny čtyři údaje o stroji."""
+    fields = _fields()
+    dumped = RunManifest.model_validate(fields).model_dump(mode="json")
+
+    assert dumped["hardware"] == fields["hardware"]
 
 
 @pytest.mark.parametrize("field", ["dataset_sha256", "config_sha256", "split_sha256"])

@@ -15,6 +15,7 @@ from mediparse.entrypoints import model_training
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.infrastructure.machine_hardware import machine_hardware
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.sklearn_classifier import ESTIMATOR, SkopsModelFile
@@ -158,6 +159,7 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
     assert written.split_sha256 == ParquetSplitTable(split).read().split.sha256()
     assert written.row_id == "row"
     assert written.environment.source == REVISION
+    assert written.hardware == machine_hardware()
     assert written.model_revision is None
     assert written.tokenizer_revision is None
     assert written.model == ESTIMATOR
