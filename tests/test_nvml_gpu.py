@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from threading import Event
 from types import SimpleNamespace
+from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
 import pynvml
@@ -14,6 +15,9 @@ from mediparse.domain.environment import GpuDevice
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure import nvml_gpu
 from mediparse.infrastructure.nvml_gpu import gpu_monitor, visible_indices
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 @pytest.mark.parametrize(
@@ -63,6 +67,16 @@ def test_single_device_needs_no_bus_order() -> None:
     assert visible_indices("0", None, ("GPU-a",)) == (0,)
 
 
+def _energy_readings(values: dict[int, list[int | Exception]]) -> Callable[[int], int]:
+    def energy(handle: int) -> int:
+        value = values[handle].pop(0)
+        if isinstance(value, Exception):
+            raise value
+        return value
+
+    return energy
+
+
 @pytest.fixture
 def nvml(monkeypatch: pytest.MonkeyPatch) -> SimpleNamespace:
     """Jedna syntetická karta s ručně zadaným čítačem energie a pamětí.
@@ -75,12 +89,16 @@ def nvml(monkeypatch: pytest.MonkeyPatch) -> SimpleNamespace:
         "nvmlShutdown": Mock(),
         "nvmlDeviceGetCount": Mock(return_value=1),
         "nvmlDeviceGetHandleByIndex": Mock(side_effect=lambda index: index),
-        "nvmlDeviceGetUUID": Mock(return_value="GPU-a"),
-        "nvmlDeviceGetName": Mock(return_value="Fake GPU"),
+        "nvmlDeviceGetUUID": Mock(side_effect=lambda handle: {0: "GPU-a"}[handle]),
+        "nvmlDeviceGetName": Mock(side_effect=lambda handle: {0: "Fake GPU"}[handle]),
         "nvmlDeviceGetMemoryInfo": Mock(
-            return_value=SimpleNamespace(total=1000, used=100)
+            side_effect=lambda handle: {0: SimpleNamespace(total=1000, used=100)}[
+                handle
+            ]
         ),
-        "nvmlDeviceGetTotalEnergyConsumption": Mock(side_effect=[1000, 4500]),
+        "nvmlDeviceGetTotalEnergyConsumption": Mock(
+            side_effect=_energy_readings({0: [1000, 4500]})
+        ),
     }
     for name, function in functions.items():
         monkeypatch.setattr(pynvml, name, function)
@@ -108,10 +126,10 @@ def test_monitor_measures_energy_and_middle_memory_peak(
     sampled = Event()
     middle_peak = 300
     expected_samples = 3
-    readings = iter((100, 300, 200))
+    readings = {0: iter((100, 300, 200))}
 
-    def memory(_handle: object) -> SimpleNamespace:
-        used = next(readings)
+    def memory(handle: int) -> SimpleNamespace:
+        used = next(readings[handle])
         if used == middle_peak:
             sampled.set()
         return SimpleNamespace(total=1000, used=used)
@@ -203,10 +221,9 @@ def test_body_exception_is_preserved_and_nvml_closed(nvml: SimpleNamespace) -> N
 def test_cleanup_error_does_not_mask_body(nvml: SimpleNamespace) -> None:
     """Ani chyba posledního čtení a shutdownu nezakryje původní příčinu."""
     error = RuntimeError("Synthetic body failure")
-    nvml.nvmlDeviceGetTotalEnergyConsumption.side_effect = [
-        1000,
-        pynvml.NVMLError(pynvml.NVML_ERROR_UNKNOWN),
-    ]
+    nvml.nvmlDeviceGetTotalEnergyConsumption.side_effect = _energy_readings({
+        0: [1000, pynvml.NVMLError(pynvml.NVML_ERROR_UNKNOWN)],
+    })
     nvml.nvmlShutdown.side_effect = pynvml.NVMLError(pynvml.NVML_ERROR_UNKNOWN)
     with pytest.raises(RuntimeError) as caught, gpu_monitor(None, None):
         raise error
@@ -229,11 +246,11 @@ def test_sampling_error_is_refused_after_body(
 
     sample_call = 2
 
-    def memory(_handle: object) -> SimpleNamespace:
+    def memory(handle: int) -> SimpleNamespace:
         if nvml.nvmlDeviceGetMemoryInfo.call_count == sample_call:
             sampled.set()
             raise pynvml.NVMLError(pynvml.NVML_ERROR_UNKNOWN)
-        return SimpleNamespace(total=1000, used=100)
+        return {0: SimpleNamespace(total=1000, used=100)}[handle]
 
     monkeypatch.setattr(nvml_gpu, "Event", _OneSampleEvent)
     nvml.nvmlDeviceGetMemoryInfo.side_effect = memory
@@ -263,31 +280,87 @@ def test_real_machine_has_consistent_measurement() -> None:
     )
 
 
-def test_monitor_preserves_uuid_selection_order(nvml: SimpleNamespace) -> None:
-    """Dvě karty se měří podle UUID v pořadí CUDA, bez cizích zařízení."""
+@pytest.mark.parametrize(
+    ("selection", "expected"),
+    [
+        (
+            ("GPU-b,GPU-a", None, 0),
+            (
+                GpuUsage(
+                    device=GpuDevice(name="Fake GPU B", memory_total_bytes=2000),
+                    energy_joules=7.0,
+                    memory_used_start_bytes=400,
+                    memory_used_peak_bytes=800,
+                ),
+                GpuUsage(
+                    device=GpuDevice(name="Fake GPU A", memory_total_bytes=1000),
+                    energy_joules=3.5,
+                    memory_used_start_bytes=100,
+                    memory_used_peak_bytes=300,
+                ),
+            ),
+        ),
+        (
+            ("1", "PCI_BUS_ID", 1),
+            (
+                GpuUsage(
+                    device=GpuDevice(name="Fake GPU B", memory_total_bytes=2000),
+                    energy_joules=7.0,
+                    memory_used_start_bytes=400,
+                    memory_used_peak_bytes=800,
+                ),
+            ),
+        ),
+    ],
+)
+def test_monitor_measures_selected_device_handles(
+    monkeypatch: pytest.MonkeyPatch,
+    nvml: SimpleNamespace,
+    selection: tuple[str, str | None, int],
+    expected: tuple[GpuUsage, ...],
+) -> None:
+    """A: (4500-1000)/1000=3,5 J, max=300 B; B: (9000-2000)/1000=7 J, max=800 B."""
+    visible, order, last_sampled_handle = selection
+    sampled = Event()
+    readings = {0: iter((100, 300, 200)), 1: iter((400, 800, 500))}
+    middle_peaks = {0: 300, 1: 800}
+
+    def memory(handle: int) -> SimpleNamespace:
+        used = next(readings[handle])
+        if handle == last_sampled_handle and used == middle_peaks[handle]:
+            sampled.set()
+        return SimpleNamespace(total={0: 1000, 1: 2000}[handle], used=used)
+
+    monkeypatch.setattr(nvml_gpu, "Event", _OneSampleEvent)
     nvml.nvmlDeviceGetCount.return_value = 2
-    nvml.nvmlDeviceGetUUID.side_effect = lambda index: ("GPU-a", "GPU-b")[index]
-    nvml.nvmlDeviceGetName.side_effect = lambda index: ("Fake GPU A", "Fake GPU B")[
-        index
-    ]
-    nvml.nvmlDeviceGetTotalEnergyConsumption.side_effect = [1000, 2000, 4500, 7000]
-    with gpu_monitor("GPU-b,GPU-a", None) as monitor:
-        assert tuple(device.name for device in monitor.devices) == (
-            "Fake GPU B",
-            "Fake GPU A",
-        )
-    assert tuple(usage.energy_joules for usage in monitor.measurement().devices) == (
-        3.5,
-        5.0,
-    )
+    nvml.nvmlDeviceGetUUID.side_effect = lambda handle: {0: "GPU-a", 1: "GPU-b"}[handle]
+    nvml.nvmlDeviceGetName.side_effect = lambda handle: {
+        0: "Fake GPU A",
+        1: "Fake GPU B",
+    }[handle]
+    nvml.nvmlDeviceGetMemoryInfo.side_effect = memory
+    nvml.nvmlDeviceGetTotalEnergyConsumption.side_effect = _energy_readings({
+        0: [1000, 4500],
+        1: [2000, 9000],
+    })
+    with gpu_monitor(visible, order) as monitor:
+        assert sampled.wait(5), "Vzorkovací vlákno nepřečetlo vybrané karty."
+        assert monitor.devices == tuple(usage.device for usage in expected)
+    assert monitor.measurement().devices == expected
+    selected = {last_sampled_handle} if visible == "1" else {0, 1}
+    assert {
+        call.args[0] for call in nvml.nvmlDeviceGetMemoryInfo.call_args_list
+    } == selected
+    assert {
+        call.args[0] for call in nvml.nvmlDeviceGetTotalEnergyConsumption.call_args_list
+    } == selected
 
 
 def test_final_read_error_is_refused(nvml: SimpleNamespace) -> None:
     """Selhání čítače na konci nevyrobí neúplné náklady."""
-    nvml.nvmlDeviceGetTotalEnergyConsumption.side_effect = [
-        1000,
-        pynvml.NVMLError(pynvml.NVML_ERROR_UNKNOWN),
-    ]
+    nvml.nvmlDeviceGetTotalEnergyConsumption.side_effect = _energy_readings({
+        0: [1000, pynvml.NVMLError(pynvml.NVML_ERROR_UNKNOWN)],
+    })
     with pytest.raises(InvalidInputError), gpu_monitor(None, None):
         pass
     nvml.nvmlShutdown.assert_called_once_with()
