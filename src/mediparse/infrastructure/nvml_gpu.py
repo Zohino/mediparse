@@ -29,8 +29,15 @@ def visible_indices(
     cuda_visible_devices: str | None,
     cuda_device_order: str | None,
     uuids: Sequence[str],
+    pci_bus_ids: Sequence[str],
 ) -> tuple[int, ...]:
     """Přiřadí viditelnost CUDA k indexům NVML bez odhadu jiné karty.
+
+    Args:
+        cuda_visible_devices: Výběr zařízení CUDA nebo None pro všechna zařízení.
+        cuda_device_order: Pořadí zařízení CUDA; číselný výběr více karet vyžaduje PCI_BUS_ID.
+        uuids: UUID zařízení v pořadí výčtu NVML.
+        pci_bus_ids: PCI adresy stejných zařízení ve stejném pořadí NVML.
 
     Returns:
         Indexy NVML v pořadí viditelnosti.
@@ -42,6 +49,7 @@ def visible_indices(
         return tuple(range(len(uuids)))
     if cuda_visible_devices.strip() in {"", "-1"}:
         return ()
+    pci_order = sorted(range(len(uuids)), key=lambda index: pci_bus_ids[index].lower())
     indices: list[int] = []
     # NVML ignoruje CUDA_VISIBLE_DEVICES, proto viditelnost mapujeme sami.
     # CUDA přijímá prefix UUID a při neplatné položce seznam zkrátí; přesná UUID
@@ -49,18 +57,18 @@ def visible_indices(
     for item in cuda_visible_devices.split(","):
         token = item.strip()
         if token.isascii() and token.isdecimal():
-            # CUDA jinak řadí nejrychlejší kartu první, NVML podle sběrnice PCI.
             if len(uuids) > 1 and cuda_device_order != "PCI_BUS_ID":
                 msg = "Číselný výběr GPU na stroji s více kartami vyžaduje CUDA_DEVICE_ORDER=PCI_BUS_ID."
                 raise InvalidInputError(msg)
-            index = int(token)
+            position = int(token)
+            if position >= len(uuids):
+                msg = "Číselný index GPU je mimo rozsah zařízení NVML."
+                raise InvalidInputError(msg)
+            index = pci_order[position]
         elif token.startswith("GPU-") and token in uuids:
             index = uuids.index(token)
         else:
             msg = "Viditelnost GPU obsahuje neznámou položku."
-            raise InvalidInputError(msg)
-        if index >= len(uuids):
-            msg = "Číselný index GPU je mimo rozsah zařízení NVML."
             raise InvalidInputError(msg)
         if index in indices:
             msg = "Viditelnost GPU obsahuje opakovanou položku."
@@ -144,9 +152,12 @@ def _read_devices(visible: str | None, order: str | None) -> tuple[_DeviceStart,
             for index in range(pynvml.nvmlDeviceGetCount())
         )
         uuids = tuple(pynvml.nvmlDeviceGetUUID(handle) for handle in handles)
+        pci_bus_ids = tuple(
+            pynvml.nvmlDeviceGetPciInfo(handle).busId for handle in handles
+        )
         return tuple(
             _read_start(handles[index])
-            for index in visible_indices(visible, order, uuids)
+            for index in visible_indices(visible, order, uuids, pci_bus_ids)
         )
     except (pynvml.NVMLError, ValidationError) as error:
         raise InvalidInputError(_measurement_message(error)) from error

@@ -26,8 +26,11 @@ if TYPE_CHECKING:
         (None, None, (0, 1)),
         ("", None, ()),
         ("-1", None, ()),
-        ("1", "PCI_BUS_ID", (1,)),
-        (" 1 , 0 ", "PCI_BUS_ID", (1, 0)),
+        ("0", "PCI_BUS_ID", (1,)),
+        ("1", "PCI_BUS_ID", (0,)),
+        ("1,0", "PCI_BUS_ID", (0, 1)),
+        (" 1 , 0 ", "PCI_BUS_ID", (0, 1)),
+        ("GPU-a,0", "PCI_BUS_ID", (0, 1)),
         ("GPU-b", None, (1,)),
         ("GPU-b,GPU-a", None, (1, 0)),
     ],
@@ -35,8 +38,13 @@ if TYPE_CHECKING:
 def test_visible_indices_follow_cuda_order(
     visible: str | None, order: str | None, expected: tuple[int, ...]
 ) -> None:
-    """Ruční tabulka mapuje indexy a přesná UUID v pořadí viditelnosti."""
-    assert visible_indices(visible, order, ("GPU-a", "GPU-b")) == expected
+    """PCI řadí B (17) před A (65), výsledek odkazuje do původního pořadí NVML."""
+    assert (
+        visible_indices(
+            visible, order, ("GPU-a", "GPU-b"), ("0000:65:00.0", "0000:17:00.0")
+        )
+        == expected
+    )
 
 
 @pytest.mark.parametrize(
@@ -52,7 +60,7 @@ def test_visible_indices_follow_cuda_order(
         ("GPU-c", None, r"^Viditelnost GPU obsahuje neznámou položku\.$"),
         ("MIG-x", None, r"^Viditelnost GPU obsahuje neznámou položku\.$"),
         ("abc", None, r"^Viditelnost GPU obsahuje neznámou položku\.$"),
-        ("GPU-a,0", "PCI_BUS_ID", r"^Viditelnost GPU obsahuje opakovanou položku\.$"),
+        ("GPU-b,0", "PCI_BUS_ID", r"^Viditelnost GPU obsahuje opakovanou položku\.$"),
         ("GPU-a,GPU-a", None, r"^Viditelnost GPU obsahuje opakovanou položku\.$"),
         ("0,", "PCI_BUS_ID", r"^Viditelnost GPU obsahuje neznámou položku\.$"),
     ],
@@ -62,7 +70,9 @@ def test_invalid_visibility_reports_reason(
 ) -> None:
     """Diagnostika rozliší neznámou položku, duplicitu, pořadí a index mimo rozsah."""
     with pytest.raises(InvalidInputError, match=pattern):
-        visible_indices(visible, order, ("GPU-a", "GPU-b"))
+        visible_indices(
+            visible, order, ("GPU-a", "GPU-b"), ("0000:65:00.0", "0000:17:00.0")
+        )
 
 
 def test_visibility_error_does_not_disclose_value() -> None:
@@ -71,13 +81,22 @@ def test_visibility_error_does_not_disclose_value() -> None:
     with pytest.raises(
         InvalidInputError, match=r"^Viditelnost GPU obsahuje neznámou položku\.$"
     ) as caught:
-        visible_indices(visible, None, ("GPU-a", "GPU-b"))
+        visible_indices(
+            visible, None, ("GPU-a", "GPU-b"), ("0000:65:00.0", "0000:17:00.0")
+        )
     assert visible not in str(caught.value)
 
 
 def test_single_device_needs_no_bus_order() -> None:
     """U jediné karty se CUDA a NVML v pořadí nemohou lišit."""
-    assert visible_indices("0", None, ("GPU-a",)) == (0,)
+    assert visible_indices("0", None, ("GPU-a",), ("0000:65:00.0",)) == (0,)
+
+
+def test_visible_indices_normalize_pci_case() -> None:
+    """Hexadecimální a7 je před b5 bez ohledu na velikost písmen v bus id."""
+    assert visible_indices(
+        "0", "PCI_BUS_ID", ("GPU-a", "GPU-b"), ("0000:B5:00.0", "0000:a7:00.0")
+    ) == (1,)
 
 
 def _energy_readings(values: dict[int, list[int | Exception]]) -> Callable[[int], int]:
@@ -104,6 +123,11 @@ def nvml(monkeypatch: pytest.MonkeyPatch) -> SimpleNamespace:
         "nvmlDeviceGetHandleByIndex": Mock(side_effect=lambda index: index),
         "nvmlDeviceGetUUID": Mock(side_effect=lambda handle: {0: "GPU-a"}[handle]),
         "nvmlDeviceGetName": Mock(side_effect=lambda handle: {0: "Fake GPU"}[handle]),
+        "nvmlDeviceGetPciInfo": Mock(
+            side_effect=lambda handle: {0: SimpleNamespace(busId="0000:65:00.0")}[
+                handle
+            ]
+        ),
         "nvmlDeviceGetMemoryInfo": Mock(
             side_effect=lambda handle: {0: SimpleNamespace(total=1000, used=100)}[
                 handle
@@ -349,13 +373,13 @@ def test_real_machine_has_consistent_measurement() -> None:
             ),
         ),
         (
-            ("1", "PCI_BUS_ID", 1),
+            ("1", "PCI_BUS_ID", 0),
             (
                 GpuUsage(
-                    device=GpuDevice(name="Fake GPU B", memory_total_bytes=2000),
-                    energy_joules=7.0,
-                    memory_used_start_bytes=400,
-                    memory_used_peak_bytes=800,
+                    device=GpuDevice(name="Fake GPU A", memory_total_bytes=1000),
+                    energy_joules=3.5,
+                    memory_used_start_bytes=100,
+                    memory_used_peak_bytes=300,
                 ),
             ),
         ),
@@ -368,14 +392,14 @@ def test_monitor_measures_selected_device_handles(
     expected: tuple[GpuUsage, ...],
 ) -> None:
     """A: (4500-1000)/1000=3,5 J, max=300 B; B: (9000-2000)/1000=7 J, max=800 B."""
-    visible, order, last_sampled_handle = selection
+    visible, order, last_visible_handle = selection
     sampled = Event()
     readings = {0: iter((100, 300, 200)), 1: iter((400, 800, 500))}
     middle_peaks = {0: 300, 1: 800}
 
     def memory(handle: int) -> SimpleNamespace:
         used = next(readings[handle])
-        if handle == last_sampled_handle and used == middle_peaks[handle]:
+        if used == middle_peaks[handle]:
             sampled.set()
         return SimpleNamespace(total={0: 1000, 1: 2000}[handle], used=used)
 
@@ -386,6 +410,10 @@ def test_monitor_measures_selected_device_handles(
         0: "Fake GPU A",
         1: "Fake GPU B",
     }[handle]
+    nvml.nvmlDeviceGetPciInfo.side_effect = lambda handle: {
+        0: SimpleNamespace(busId="0000:65:00.0"),
+        1: SimpleNamespace(busId="0000:17:00.0"),
+    }[handle]
     nvml.nvmlDeviceGetMemoryInfo.side_effect = memory
     nvml.nvmlDeviceGetTotalEnergyConsumption.side_effect = _energy_readings({
         0: [1000, 4500],
@@ -395,7 +423,7 @@ def test_monitor_measures_selected_device_handles(
         assert sampled.wait(5), "Vzorkovací vlákno nepřečetlo vybrané karty."
         assert monitor.devices == tuple(usage.device for usage in expected)
     assert monitor.measurement().devices == expected
-    selected = {last_sampled_handle} if visible == "1" else {0, 1}
+    selected = {last_visible_handle} if visible == "1" else {0, 1}
     assert {
         call.args[0] for call in nvml.nvmlDeviceGetMemoryInfo.call_args_list
     } == selected
