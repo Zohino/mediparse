@@ -84,6 +84,9 @@ class ModelInference:
             raise InvalidInputError(msg)
         classifier = self.model.load()
         ordered_texts = [texts[item.note_id] for item in expected]
+        # Dávka i jednotlivé zprávy mají měřit ustálený provoz bez prvních alokací a cache.
+        for index in range(self.plan.warmup):
+            classifier.classify([ordered_texts[index % len(ordered_texts)]])
         started = self.clock.now()
         actual = classifier.classify(ordered_texts)
         finished = self.clock.now()
@@ -101,9 +104,6 @@ class ModelInference:
     def _measure_latency(
         self, classifier: TextClassifier, texts: Sequence[str]
     ) -> Latency:
-        # První volání nesou náklady alokací a cache, které nepatří do ustálené latence.
-        for index in range(self.plan.warmup):
-            classifier.classify([texts[index % len(texts)]])
         durations = []
         # Pro provoz po jedné zprávě měříme dávku 1; celá dávka má vlastní propustnost.
         for text in texts[: self.plan.samples]:

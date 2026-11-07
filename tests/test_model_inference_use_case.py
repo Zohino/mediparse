@@ -206,9 +206,9 @@ def test_measures_batch_and_three_samples_after_warmup() -> None:
     assert result.batch.notes == len(items)
     assert result.batch.seconds == pytest.approx(1.0)
     assert classifier.calls == [
-        ("text c", "text a", "text b"),
         ("text c",),
         ("text a",),
+        ("text c", "text a", "text b"),
         ("text c",),
         ("text a",),
         ("text b",),
@@ -225,12 +225,12 @@ def test_warmup_cycles_and_samples_stop_at_note_count() -> None:
     assert result.latency.samples == len(HELD_OUT)
     assert result.batch.notes == len(HELD_OUT)
     assert classifier.calls == [
+        ("text c",),
+        ("text a",),
+        ("text c",),
+        ("text a",),
+        ("text c",),
         ("text c", "text a"),
-        ("text c",),
-        ("text a",),
-        ("text c",),
-        ("text a",),
-        ("text c",),
         ("text c",),
         ("text a",),
     ]
