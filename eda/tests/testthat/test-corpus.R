@@ -28,10 +28,10 @@ test_that("provenance_table překládá klíče na české popisky a dirty na an
   expect_equal(out$Hodnota, c("abc", "ne", "3.13", "R 4.5"))
 })
 
-test_that("provenance_table pojmenuje otisky CSV", {
-  out <- provenance_table(list(`csv_sha256 discharge.csv.gz` = "x"))
+test_that("provenance_table pojmenuje otisky CSV a parquetu", {
+  out <- provenance_table(list(`csv_sha256 discharge` = "x", `parquet_sha256 discharge` = "y"))
 
-  expect_equal(out$Položka, "Otisk discharge.csv.gz (SHA-256)")
+  expect_equal(out$Položka, c("Otisk CSV discharge (SHA-256)", "Otisk parquetu discharge (SHA-256)"))
 })
 
 test_that("provenance_table rozdělí 64znakový otisk do skupin po 16 znacích", {

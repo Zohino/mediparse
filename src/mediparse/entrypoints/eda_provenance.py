@@ -11,8 +11,8 @@ from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import StringMapping, write_model
-from mediparse.infrastructure.mimic_tables import TABLES_PATH, load_mimic_tables
 from mediparse.infrastructure.package_versions import installed_versions
+from mediparse.infrastructure.parquet_source import verified_parquet_source
 from mediparse.infrastructure.source_revision import revision_source
 from mediparse.infrastructure.synthetic_marker import read_marker
 
@@ -28,7 +28,7 @@ def provenance(environ: Mapping[str, str], root: Path, parquet: Path) -> dict[st
 
     Args:
         environ: Proměnné prostředí; MEDIPARSE_COMMIT a MEDIPARSE_DIRTY mají přednost před gitem.
-        root: Kořen repozitáře s ``pixi.lock`` a ``config/``.
+        root: Kořen repozitáře s ``pixi.lock``.
         parquet: Adresář tabulek parquet, ze kterých dokument čte.
 
     Returns:
@@ -39,20 +39,21 @@ def provenance(environ: Mapping[str, str], root: Path, parquet: Path) -> dict[st
         "commit": revision.commit,
         "dirty": str(revision.dirty).lower(),
         "pixi_lock_sha256": file_sha256(root / LOCK_NAME),
-        **_data_source(root, parquet),
+        **_data_source(parquet),
         **installed_versions(PACKAGES),
     }
 
 
-def _data_source(root: Path, parquet: Path) -> dict[str, str]:
+def _data_source(parquet: Path) -> dict[str, str]:
     marker = read_marker(parquet)
     if marker is not None:
         return {"data_source": f"syntetické tabulky (prefix {marker.prefix})"}
-    tables = load_mimic_tables(root / TABLES_PATH)
-    return {
-        "data_source": "otisky CSV z config/mimic_tables.json",
-        **{f"csv_sha256 {name}": table.sha256 for name, table in tables.items()},
-    }
+    details = {"data_source": "tabulky parquet ověřené proti otiskům CSV"}
+    for path in sorted(parquet.glob("*.parquet")):
+        source = verified_parquet_source(path)
+        details[f"csv_sha256 {path.stem}"] = source.source_sha256
+        details[f"parquet_sha256 {path.stem}"] = source.sha256
+    return details
 
 
 def run(root: Path, parquet: Path, out: Path, environ: Mapping[str, str]) -> None:
