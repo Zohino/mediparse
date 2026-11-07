@@ -210,22 +210,45 @@ def test_rule_import_check_finds_violations(tmp_path: Path) -> None:
     ]
 
 
+def _rule_script_path(rule: Path, body: str) -> Path | None:
+    """Najde Python skript nebo shellový skript workflow, který vyžaduje otisk.
+
+    Returns:
+        Absolutní cesta skriptu, nebo None pro pravidlo bez sledovaného skriptu.
+    """
+    script = re.search(r"^    script:\s*[\"']([^\"']+)[\"']", body, re.MULTILINE)
+    if script:
+        return (rule.parent / script[1]).resolve()
+    shell = re.search(r"^    shell:([\s\S]*)", body, re.MULTILINE)
+    if shell is None:
+        return None
+    path = re.search(r"\bworkflow/scripts/[\w.-]+", shell[1])
+    if path is None:
+        return None
+    if path[0] == "workflow/scripts/download.sh":
+        # Změna downloaderu nesmí znovu stahovat chráněné a ověřené vstupy.
+        return None
+    return (REPOSITORY / path[0]).resolve()
+
+
 def _rule_code_violations(rule: Path) -> list[str]:
-    """Najde pravidla, jejichž params.code neotiskuje vlastní script.
+    """Najde pravidla, jejichž params.code neotiskuje vlastní skript.
 
     Returns:
         Jména porušujících pravidel; use rule bez script dědí otisk rodiče.
     """
     source = rule.read_text(encoding="utf-8")
     blocks = re.findall(
-        r"^rule (\w+):\n((?:[ \t]+[^\n]*(?:\n|$)|\n)*)", source, re.MULTILINE
+        r"^(?:rule (\w+):|use rule (\w+)(?: as (\w+))? with:)\n"
+        r"((?:[ \t]+[^\n]*(?:\n|$)|\n)*)",
+        source,
+        re.MULTILINE,
     )
     violations = []
-    for name, body in blocks:
-        script = re.search(r"^    script:\s*[\"']([^\"']+)[\"']", body, re.MULTILINE)
-        if script is None:
+    for name, parent, alias, body in blocks:
+        expected = _rule_script_path(rule, body)
+        if expected is None:
             continue
-        expected = (rule.parent / script[1]).resolve()
         params = re.search(
             r"^    params:[ \t]*\n((?:        [^\n]*(?:\n|$)|\n)*)",
             body,
@@ -237,12 +260,12 @@ def _rule_code_violations(rule: Path) -> list[str]:
             re.MULTILINE,
         )
         if code is None or (REPOSITORY / code[1]).resolve() != expected:
-            violations.append(f"{rule.name}: {name}")
+            violations.append(f"{rule.name}: {name or alias or parent}")
     return violations
 
 
 def test_workflow_scripts_have_matching_code_fingerprint() -> None:
-    """Každé pravidlo se script má v params otisk právě tohoto skriptu."""
+    """Pravidla s Pythonem i shellovými skripty mají v params otisk svého skriptu."""
     assert [
         violation
         for rule in _workflow_rules()
@@ -253,7 +276,7 @@ def test_workflow_scripts_have_matching_code_fingerprint() -> None:
 def test_rule_code_check_finds_missing_and_mismatched_fingerprints(
     tmp_path: Path,
 ) -> None:
-    """Chybějící, cizí i zakomentovaný otisk jsou porušení; shoda a dědění projdou."""
+    """Kontrola rozliší otisky Pythonu, shellu i vlastního skriptu děděného pravidla."""
     rule = tmp_path / "bad.smk"
     script = tmp_path / "run.py"
     rule.write_text(
@@ -276,9 +299,40 @@ def test_rule_code_check_finds_missing_and_mismatched_fingerprints(
         f'        code=code_fingerprint("{script}"),\n'
         "    script:\n"
         '        "run.py"\n'
+        "rule shell_missing:\n"
+        "    shell:\n"
+        '        "workflow/scripts/inventory.sh"\n'
+        "rule shell_mismatched:\n"
+        "    params:\n"
+        '        code=code_fingerprint("workflow/scripts/other.sh"),\n'
+        "    shell:\n"
+        '        "workflow/scripts/inventory.sh"\n'
+        "rule shell_matching:\n"
+        "    params:\n"
+        '        code=code_fingerprint("workflow/scripts/inventory.sh"),\n'
+        "    shell:\n"
+        '        "workflow/scripts/inventory.sh"\n'
+        "rule download:\n"
+        "    output:\n"
+        '        protected("verified.csv"),\n'
+        "    shell:\n"
+        '        "workflow/scripts/download.sh"\n'
         "use rule matching as inherited with:\n"
         "    output:\n"
-        '        "out.txt",\n',
+        '        "out.txt",\n'
+        "use rule matching as custom_missing with:\n"
+        "    script:\n"
+        '        "run.py"\n'
+        "use rule matching as custom_mismatched with:\n"
+        "    params:\n"
+        '        code=code_fingerprint("other.py"),\n'
+        "    script:\n"
+        '        "run.py"\n'
+        "use rule matching as custom_matching with:\n"
+        "    params:\n"
+        f'        code=code_fingerprint("{script}"),\n'
+        "    script:\n"
+        '        "run.py"\n',
         encoding="utf-8",
     )
 
@@ -286,6 +340,10 @@ def test_rule_code_check_finds_missing_and_mismatched_fingerprints(
         "bad.smk: missing",
         "bad.smk: mismatched",
         "bad.smk: commented",
+        "bad.smk: shell_missing",
+        "bad.smk: shell_mismatched",
+        "bad.smk: custom_missing",
+        "bad.smk: custom_mismatched",
     ]
 
 
