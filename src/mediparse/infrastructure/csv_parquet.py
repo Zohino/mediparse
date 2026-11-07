@@ -107,6 +107,8 @@ class CsvParquetConversion:
             convert_options=pacsv.ConvertOptions(
                 column_types=dict.fromkeys(columns, pa.string()),
                 strings_can_be_null=True,
+                # Výchozí seznam PyArrow by zničil i doslovné řetězce NA, NULL či nan.
+                null_values=[""],
             ),
         )
         records = 0
