@@ -159,3 +159,9 @@ def test_training_costs_roundtrip() -> None:
     """Náklady tréninku jsou samostatně čitelným měřením GPU."""
     costs = TrainingCosts(gpu=GpuMeasurement(seconds=1.0, devices=(_gpu_usage(),)))
     assert TrainingCosts.model_validate_json(costs.model_dump_json()) == costs
+
+
+def test_negative_gpu_window_is_rejected() -> None:
+    """Záporná délka okna nemůže vyjadřovat spotřebovaný čas GPU."""
+    with pytest.raises(ValidationError, match="seconds"):
+        GpuMeasurement(seconds=-1.0, devices=())

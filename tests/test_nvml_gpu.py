@@ -381,3 +381,15 @@ def test_invalid_sampling_interval_is_rejected(interval: float) -> None:
         gpu_monitor(None, None, interval_seconds=interval),
     ):
         pass
+
+
+@pytest.mark.usefixtures("nvml")
+def test_measurement_uses_elapsed_window_seconds(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Délka okna je ručně 12,5 - 10,0 = 2,5 sekundy."""
+    monkeypatch.setattr(nvml_gpu, "perf_counter", iter((10.0, 12.5)).__next__)
+    with gpu_monitor(None, None) as monitor:
+        pass
+    expected_seconds = 2.5
+    assert monitor.measurement().seconds == expected_seconds
