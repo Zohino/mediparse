@@ -1,6 +1,9 @@
 """Údaje o stroji: zkonstruovaný cpuinfo a skutečné kapacity hostitele."""
 
 import os
+import platform
+from pathlib import Path
+from unittest.mock import Mock
 
 import pytest
 
@@ -32,7 +35,8 @@ def test_available_cores_do_not_exceed_machine() -> None:
 
 
 @pytest.mark.parametrize(
-    ("page_size", "physical_pages"), [(-1, 4096), (4096, -1), (-1, -1)]
+    ("page_size", "physical_pages"),
+    [(-1, 4096), (4096, -1), (-1, -1), (0, 4096), (4096, 0)],
 )
 def test_unknown_memory_keeps_specific_reason(
     monkeypatch: pytest.MonkeyPatch, page_size: int, physical_pages: int
@@ -66,3 +70,14 @@ def test_hardware_preserves_visible_gpu_order() -> None:
         GpuDevice(name="Fake GPU A", memory_total_bytes=1000),
     )
     assert machine_hardware(gpus).gpus == gpus
+
+
+def test_unreadable_cpuinfo_records_architecture(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """OSError při čtení procfs zachová známou syntetickou architekturu CPU."""
+    monkeypatch.setattr(
+        Path, "read_text", Mock(side_effect=OSError("Synthetic procfs failure"))
+    )
+    monkeypatch.setattr(platform, "machine", lambda: "synthetic-arch")
+    assert machine_hardware(gpus=()).cpu_model == "synthetic-arch"
