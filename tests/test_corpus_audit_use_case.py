@@ -19,6 +19,7 @@ from mediparse.synthetic.application.corpus_audit import (
 )
 from mediparse.synthetic.domain.corpus_audit import AuditPin, ReferenceNote
 from tests.support import (
+    BLOCKING_NAMES,
     COMMIT,
     CORPUS_SHA,
     NOTE_ID,
@@ -213,10 +214,10 @@ def test_subject_collision_is_overlap() -> None:
 
 
 @pytest.mark.parametrize(
-    "environ", [{"CI": "true"}, {"CLAUDECODE": "1"}], ids=["ci", "claude-code"]
+    "environ", [{name: "1"} for name in BLOCKING_NAMES], ids=BLOCKING_NAMES
 )
 def test_environment_refusal_never_touches_reference(environ: dict[str, str]) -> None:
-    """V CI ani v relaci Claude Code audit na MIMIC nesáhne."""
+    """V CI ani v prostředí agenta audit na MIMIC nesáhne."""
     corpus = _Corpus({Language.EN: {NOTE_ID: SENTENCE}})
     report = _Report()
 
@@ -414,9 +415,7 @@ def test_subjects_come_from_every_language() -> None:
     assert outcome == AuditOverlap(shared_ngrams=0, colliding_subjects=1, notes=())
 
 
-@pytest.mark.parametrize(
-    "name", [variable.name for variable in load_data_access_rules().blocking]
-)
+@pytest.mark.parametrize("name", BLOCKING_NAMES)
 def test_environment_refusal_carries_shared_reason(name: str) -> None:
     """Audit a EDA hlásí tentýž důvod zákazu."""
     outcome = _audit(
@@ -426,9 +425,7 @@ def test_environment_refusal_carries_shared_reason(name: str) -> None:
     assert outcome == AuditRefused(blocking_reason(name))
 
 
-@pytest.mark.parametrize(
-    "name", [variable.name for variable in load_data_access_rules().blocking]
-)
+@pytest.mark.parametrize("name", BLOCKING_NAMES)
 def test_environment_refusal_precedes_workspace_refusal(name: str) -> None:
     """Prostředí se posuzuje dřív než pracovní adresář, takže důvod zákazu čtení vyhrává."""
     outcome = _audit(

@@ -234,6 +234,11 @@ def export_payload(
     }
 
 
+BLOCKING_NAMES: tuple[str, ...] = tuple(
+    variable.name for variable in load_data_access_rules().blocking
+)
+
+
 def blocking_reason(name: str) -> str:
     """Přečte důvod blokující proměnné ze sdíleného pravidla.
 

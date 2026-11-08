@@ -18,7 +18,7 @@ from mediparse.domain.data_access import (
 )
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.data_access_rules import load_data_access_rules
-from tests.support import REPOSITORY, blocking_reason
+from tests.support import BLOCKING_NAMES, REPOSITORY, blocking_reason
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -29,16 +29,14 @@ MARKER = "znacka.json"
 
 def test_blocking_variables_are_ci_then_claude_code_then_codex() -> None:
     """Pořadí proměnných určuje, který důvod se nahlásí první."""
-    assert [v.name for v in load_data_access_rules().blocking] == [
+    assert list(BLOCKING_NAMES) == [
         "CI",
         "CLAUDECODE",
         "CODEX_THREAD_ID",
     ]
 
 
-@pytest.mark.parametrize(
-    "name", [variable.name for variable in load_data_access_rules().blocking]
-)
+@pytest.mark.parametrize("name", BLOCKING_NAMES)
 def test_blocked_reason_names_the_variable_reason(name: str) -> None:
     """Každá blokující proměnná vrátí svůj důvod."""
     assert blocked_reason({name: "1"}, load_data_access_rules()) == blocking_reason(
@@ -50,7 +48,7 @@ def test_blocked_reason_prefers_ci() -> None:
     """Při všech proměnných vyhrává CI."""
     assert (
         blocked_reason(
-            {variable.name: "1" for variable in load_data_access_rules().blocking},
+            dict.fromkeys(BLOCKING_NAMES, "1"),
             load_data_access_rules(),
         )
         == load_data_access_rules().blocking[0].reason
@@ -68,7 +66,7 @@ def test_blocked_reason_identifies_codex() -> None:
     "environ",
     [
         {},
-        {variable.name: "" for variable in load_data_access_rules().blocking},
+        dict.fromkeys(BLOCKING_NAMES, ""),
         {"JINE": "1"},
     ],
 )
@@ -79,16 +77,14 @@ def test_blocked_reason_is_none_without_non_empty_variable(
     assert blocked_reason(environ, load_data_access_rules()) is None
 
 
-@pytest.mark.parametrize(
-    "variable", load_data_access_rules().blocking, ids=lambda variable: variable.name
-)
+@pytest.mark.parametrize("name", BLOCKING_NAMES)
 def test_check_refuses_real_data_in_blocked_environment(
-    variable: BlockingVariable,
+    name: str,
 ) -> None:
     """Skutečná data v blokujícím prostředí hláška jmenuje místo, značku i důvod."""
     with pytest.raises(DataAccessError) as refusal:
         check_data_access(
-            {variable.name: "1"},
+            {name: "1"},
             load_data_access_rules(),
             synthetic=False,
             location=LOCATION,
@@ -98,7 +94,7 @@ def test_check_refuses_real_data_in_blocked_environment(
     message = str(refusal.value)
     assert LOCATION in message
     assert MARKER in message
-    assert variable.reason in message
+    assert blocking_reason(name) in message
 
 
 def test_refusal_is_an_invalid_input() -> None:
@@ -109,7 +105,7 @@ def test_refusal_is_an_invalid_input() -> None:
 def test_check_allows_synthetic_data_in_blocked_environment() -> None:
     """Syntetická data projdou i při všech blokujících proměnných."""
     check_data_access(
-        {variable.name: "1" for variable in load_data_access_rules().blocking},
+        dict.fromkeys(BLOCKING_NAMES, "1"),
         load_data_access_rules(),
         synthetic=True,
         location=LOCATION,
