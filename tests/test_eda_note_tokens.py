@@ -41,10 +41,11 @@ from mediparse.infrastructure.translation_script import ScriptSplitter, load_tra
 from tests.note_tokens_support import (
     NOTES,
     FakeSplitter,
+    marker_tokenizer,
     whitespace_tokenizer,
     word_tokenizer,
 )
-from tests.support import REPOSITORY
+from tests.support import REPOSITORY, load_script
 
 type Inputs = tuple[Path, Path, Path, Path, Path]
 
@@ -294,6 +295,30 @@ def test_real_script_splitter_handles_fitting_divided_and_unsplittable(
     expected_parts = 2
     assert splitter.parts("a b c\n\na b c") == expected_parts
     assert splitter.parts("a b c a b c") is None
+
+
+def test_script_splitter_uses_masked_preparation(
+    inputs: Inputs, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """EDA přebírá kontrolu i dělení maskované zprávy z téže kopie přípravy."""
+    path = inputs[1] / "prepare.py"
+    path.write_bytes(
+        path
+        .read_bytes()
+        .replace(b"WINDOW: Final = 2048", b"WINDOW: Final = 25")
+        .replace(b"SPLIT_RATIO: Final = 2.2", b"SPLIT_RATIO: Final = 1.0")
+    )
+    prepare = load_script(path, monkeypatch)
+    tokenizer = marker_tokenizer()
+    splitter = ScriptSplitter(load_translation(inputs[1]), tokenizer)
+    text = "a ___ ___\n\nb ___ ___"
+    # Příprava je autoritou EDA; příklad se po maskování do jedné části nevejde.
+    assert prepare._fits(tokenizer, text)  # ruff: ignore[private-member-access]
+    assert splitter.fits(text) is False
+    assert splitter.fits(text) == prepare._note_fits(tokenizer, text)  # ruff: ignore[private-member-access]
+    expected_parts = 2
+    assert splitter.parts(text) == expected_parts
+    assert splitter.parts(text) == len(prepare._parts(tokenizer, text))  # ruff: ignore[private-member-access]
 
 
 @pytest.mark.parametrize(
