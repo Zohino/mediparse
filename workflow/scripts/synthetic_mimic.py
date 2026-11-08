@@ -12,6 +12,7 @@ raise SystemExit(
         manifest=Path(snakemake.params.manifest),
         discharge=Path(snakemake.output.discharge),
         diagnoses=Path(snakemake.output.diagnoses),
+        artifacts=Path(snakemake.output.artifacts_marker).parent,
         log=Path(snakemake.log[0]),
     )
 )

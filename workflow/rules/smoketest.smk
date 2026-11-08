@@ -4,6 +4,8 @@ rule synthetic_mimic:
         notes=sorted((SYNTHETIC / "en").glob("*.txt")),
         candidates="config/diagnosis_candidates.json",
     output:
+        tables_marker=SMOKETEST / "mimic/parquet/synthetic.json",
+        artifacts_marker=SMOKETEST / "synthetic.json",
         discharge=SMOKETEST / "mimic/parquet/discharge.parquet",
         diagnoses=SMOKETEST / "mimic/parquet/diagnoses_icd.parquet",
         discharge_source=SMOKETEST / "mimic/parquet/discharge.source.json",

@@ -12,6 +12,7 @@ import pytest
 
 from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.synthetic_marker import SyntheticMarker, read_marker
 from mediparse.infrastructure.table_provenance import provenance_path
 from mediparse.synthetic.entrypoints import synthetic_mimic
 from mediparse.synthetic.infrastructure.plans_file import PlansFile
@@ -49,10 +50,22 @@ def synthetic_tables(tmp_path: Path) -> tuple[Path, Path]:
             manifest=REPOSITORY_MIMIC_MANIFEST,
             discharge=discharge,
             diagnoses=diagnoses,
+            artifacts=tmp_path,
         )
         is ExitCode.OK
     )
     return discharge, diagnoses
+
+
+def test_tables_and_artifacts_have_synthetic_markers(
+    tmp_path: Path, synthetic_tables: tuple[Path, Path]
+) -> None:
+    """Tabulky i odvozené artefakty nesou značku bez vymyšleného prefixu."""
+    discharge, _ = synthetic_tables
+    for directory in (discharge.parent, tmp_path):
+        assert read_marker(directory) == SyntheticMarker(
+            prefix=None, rows=EXPECTED_NOTES
+        )
 
 
 def test_cohort_matches_plans_and_source_hashes(
@@ -149,6 +162,7 @@ def test_unpaired_corpus_is_refused_before_writing(
             manifest=REPOSITORY_MIMIC_MANIFEST,
             discharge=discharge,
             diagnoses=diagnoses,
+            artifacts=tmp_path,
         )
         is ExitCode.REFUSED
     )
@@ -170,6 +184,7 @@ def test_missing_manifest_is_refused_before_writing(tmp_path: Path) -> None:
             manifest=tmp_path / "missing.json",
             discharge=output / "discharge.parquet",
             diagnoses=output / "diagnoses_icd.parquet",
+            artifacts=output,
         )
         is ExitCode.REFUSED
     )
@@ -197,6 +212,7 @@ def test_written_columns_follow_manifest(tmp_path: Path, table: str) -> None:
             manifest=manifest,
             discharge=discharge,
             diagnoses=diagnoses,
+            artifacts=tmp_path,
         )
         is ExitCode.OK
     )

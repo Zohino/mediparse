@@ -12,6 +12,7 @@ from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_co
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.mimic_inventory import read_manifest
 from mediparse.infrastructure.parquet_file import write_string_table
+from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
 from mediparse.infrastructure.table_provenance import write_table_provenance
 from mediparse.synthetic.domain.synthetic_mimic import input_notes, synthetic_mimic_rows
 from mediparse.synthetic.infrastructure.plans_file import PlansFile
@@ -31,6 +32,7 @@ def main(
     manifest: Path,
     discharge: Path,
     diagnoses: Path,
+    artifacts: Path,
     log: Path,
 ) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
@@ -46,6 +48,7 @@ def main(
         manifest=manifest,
         discharge=discharge,
         diagnoses=diagnoses,
+        artifacts=artifacts,
     )
 
 
@@ -58,8 +61,9 @@ def run(
     manifest: Path,
     discharge: Path,
     diagnoses: Path,
+    artifacts: Path,
 ) -> ExitCode:
-    """Zapíše tabulky discharge a diagnoses_icd a jejich otisky pro manifest kohorty.
+    """Zapíše tabulky, jejich otisky a značky syntetiky tabulek i odvozených artefaktů.
 
     Returns:
         OK po zápisu; REFUSED pro neplatné vstupy nebo nespárované plány a zprávy.
@@ -78,6 +82,9 @@ def run(
             source=f"https://mediparse.invalid/synthetic/{table}",
             source_sha256=file_sha256(path),
         )
+    marker = SyntheticMarker(prefix=None, rows=len(notes))
+    write_marker(discharge.parent, marker)
+    write_marker(artifacts, marker)
     logger.info(
         "Syntetické tabulky MIMIC: %d zpráv v %s.", len(notes), discharge.parent
     )
