@@ -17,10 +17,6 @@ METRIC_LABELS <- c(
   accuracy = "Správnost", roc_auc = "ROC AUC", pr_auc = "PR AUC"
 )
 
-is_single_string <- function(x) {
-  is.character(x) && length(x) == 1L && !is.na(x) && nzchar(x)
-}
-
 diagnosis_labels <- function(keys, candidates_path) {
   candidates <- jsonlite::fromJSON(candidates_path, simplifyVector = FALSE)$candidates
   vapply(keys, function(key) {
@@ -77,7 +73,7 @@ metrics_figure <- function(metrics, labels) {
     theme_thesis()
 }
 
-write_metrics_report <- function(metrics_path, manifest_path, out_dir, candidates_path) {
+write_metrics_report <- function(metrics_path, evaluation_path, manifest_path, out_dir, candidates_path) {
   metrics <- read_metrics(metrics_path)
   manifest <- jsonlite::fromJSON(manifest_path, simplifyVector = FALSE)
   row_id <- if (is.list(manifest)) manifest$row_id else NULL
@@ -94,6 +90,7 @@ write_metrics_report <- function(metrics_path, manifest_path, out_dir, candidate
       metrics_path, runs, manifest_path, row_id
     ))
   }
+  ensure_evaluation_lineage(metrics_path, evaluation_path, manifest_path, manifest)
   duplicate <- anyDuplicated(metrics$diagnosis)
   if (duplicate > 0L) {
     stop(sprintf(
@@ -118,7 +115,8 @@ write_metrics_report <- function(metrics_path, manifest_path, out_dir, candidate
                label = "metrics", widths = NULL, dir = out_dir)
   export_figure(plot, height_cm = 3 + 1.5 * sum(published), label = "metrics", dir = out_dir)
   for (output in outputs) {
-    write_sidecar(output, input = metrics_path, manifest = manifest_path, row_id = row_id)
+    write_sidecar(output, input = metrics_path, evaluation = evaluation_path,
+                  manifest = manifest_path, row_id = row_id)
   }
   # Vypsání ggplotu v Rscriptu by otevřelo výchozí pdf() bez písma práce.
   invisible(c(outputs, sidecars))
