@@ -71,9 +71,9 @@ def parse_diagnosis(path: Path, value: str) -> Diagnosis:
     """
     try:
         return Diagnosis(value)
-    except ValueError as error:
-        msg = f"Soubor {path} obsahuje neznámou diagnózu {value!r}."
-        raise InvalidInputError(msg) from error
+    except ValueError:
+        msg = f"Soubor {path} obsahuje neznámou diagnózu ve sloupci diagnosis."
+        raise InvalidInputError(msg) from None
 
 
 def note_identity_error(path: Path, error: NoteIdentityError) -> InvalidInputError:

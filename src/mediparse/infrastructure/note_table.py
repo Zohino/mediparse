@@ -82,6 +82,6 @@ class ParquetNoteTable:
     def _language(self, value: str) -> Language:
         try:
             return Language(value)
-        except ValueError as error:
-            msg = f"Soubor {self.path} obsahuje neznámý jazyk {value!r}."
-            raise InvalidInputError(msg) from error
+        except ValueError:
+            msg = f"Soubor {self.path} obsahuje neznámý jazyk ve sloupci language."
+            raise InvalidInputError(msg) from None

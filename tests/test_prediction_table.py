@@ -103,12 +103,12 @@ def test_legacy_truth_column_is_invalid_input(tmp_path: Path) -> None:
 
 
 def test_unknown_diagnosis_is_invalid_input(tmp_path: Path) -> None:
-    """Neznámá diagnóza je InvalidInputError s cestou a hodnotou."""
+    """Neznámá diagnóza je InvalidInputError s cestou a sloupcem."""
     path = tmp_path / "predictions.parquet"
     ParquetPredictionTable(path).write(PREDICTIONS)
     _rewrite_row(path, 0, diagnosis="asthma")
 
-    with pytest.raises(InvalidInputError, match=r"predictions\.parquet.*asthma"):
+    with pytest.raises(InvalidInputError, match=r"predictions\.parquet.*diagnosis"):
         ParquetPredictionTable(path).read()
 
 
