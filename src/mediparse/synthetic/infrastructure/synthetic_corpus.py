@@ -136,23 +136,17 @@ class CorpusDirectory:
         ]
         if unexpected:
             msg = f"Korpus {self.root} obsahuje nepovolené cesty: {', '.join(unexpected)}."
-            unknown = [
-                path.name
-                for path in paths
-                if path.parent == self.root
-                and path.is_dir()
-                and path.name not in _LANGUAGES
-            ]
-            if unknown:
-                msg += f" Adresář neznámého jazyka: {', '.join(unknown)}."
             raise InvalidInputError(msg)
-        return [path for path in paths if path.is_file() and path.suffix == _SUFFIX]
+        return [path for path in paths if self._is_note(path)]
 
     def _is_expected_path(self, path: Path) -> bool:
         if path.parent == self.root:
             return (path.is_file() and path.name in _ROOT_FILES) or (
                 path.is_dir() and path.name in _LANGUAGES
             )
+        return self._is_note(path)
+
+    def _is_note(self, path: Path) -> bool:
         return (
             path.parent.parent == self.root
             and path.parent.name in _LANGUAGES

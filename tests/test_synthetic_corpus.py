@@ -58,9 +58,10 @@ def test_unknown_language_directory_is_refused(tmp_path: Path) -> None:
     _write(tmp_path, "de/90000001-DS-1.txt", b"deutsch")
     corpus = CorpusDirectory(tmp_path)
 
-    with pytest.raises(InvalidInputError, match="neznámého jazyka: de"):
+    with pytest.raises(InvalidInputError, match="nepovolené cesty: de") as raised:
         corpus.notes(Language.EN)
-    with pytest.raises(InvalidInputError, match="neznámého jazyka: de"):
+    assert "Adresář neznámého jazyka:" not in str(raised.value)
+    with pytest.raises(InvalidInputError, match="nepovolené cesty: de"):
         corpus.fingerprint()
 
 
