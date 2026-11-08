@@ -178,6 +178,20 @@ def _render_environment(tmp_path: Path) -> dict[str, str]:
     }
 
 
+def _render(
+    tmp_path: Path, environ: dict[str, str], number: str
+) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        ["bash", str(tmp_path / "scripts/eda.sh"), number],
+        env=environ,
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=60,
+    )
+
+
 @EDA_PRESENT
 @needs_git
 @pytest.mark.parametrize(
@@ -190,15 +204,7 @@ def test_render_script_blocks_before_any_preparation(
     environ = _render_environment(tmp_path)
     environ[variable.name] = "1"
 
-    result = subprocess.run(
-        ["bash", str(tmp_path / "scripts/eda.sh"), "9"],
-        env=environ,
-        check=False,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        timeout=60,
-    )
+    result = _render(tmp_path, environ, "9")
 
     assert result.returncode != CLEAN
     assert variable.reason in result.stderr
@@ -215,15 +221,7 @@ def test_render_script_blocks_when_python_fails_silently(tmp_path: Path) -> None
     python.write_text("#!/bin/sh\nexit 1\n", encoding="utf-8")
     python.chmod(0o755)
 
-    result = subprocess.run(
-        ["bash", str(tmp_path / "scripts/eda.sh"), "9"],
-        env=environ,
-        check=False,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        timeout=60,
-    )
+    result = _render(tmp_path, environ, "9")
 
     assert result.returncode != CLEAN
     for key in ("EDA_TEST_GIT_CALLS", "EDA_TEST_CALLS", "EDA_TEST_PROVENANCE"):
@@ -238,15 +236,7 @@ def test_render_script_prepares_cache_for_its_consumer(
 ) -> None:
     """Izolované stuby spouštějí jen skupinu cache požadovaného sešitu."""
     environ = _render_environment(tmp_path)
-    result = subprocess.run(
-        ["bash", str(tmp_path / "scripts/eda.sh"), number],
-        env=environ,
-        check=False,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        timeout=60,
-    )
+    result = _render(tmp_path, environ, number)
     assert result.returncode == CLEAN, result.stderr
     root = Path(environ["PIXI_PROJECT_ROOT"])
     out = Path(environ["EDA_TEST_PROVENANCE_PATH"]).read_text(encoding="utf-8").strip()
@@ -283,15 +273,7 @@ def test_render_script_allows_uncommitted_outputs(tmp_path: Path, name: str) -> 
     path.parent.mkdir(parents=True)
     path.write_text("{}\n", encoding="utf-8")
 
-    result = subprocess.run(
-        ["bash", str(tmp_path / "scripts/eda.sh"), "1"],
-        env=environ,
-        check=False,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        timeout=60,
-    )
+    result = _render(tmp_path, environ, "1")
 
     assert result.returncode == CLEAN, result.stderr
     assert Path(environ["EDA_TEST_PROVENANCE_PATH"]).exists()
@@ -307,15 +289,7 @@ def test_render_script_blocks_uncommitted_source(tmp_path: Path, name: str) -> N
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("změna\n", encoding="utf-8")
 
-    result = subprocess.run(
-        ["bash", str(tmp_path / "scripts/eda.sh"), "9"],
-        env=environ,
-        check=False,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        timeout=60,
-    )
+    result = _render(tmp_path, environ, "9")
 
     assert result.returncode != CLEAN
     assert "necommitnutý kód" in result.stderr
