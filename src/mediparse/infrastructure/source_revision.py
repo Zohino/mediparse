@@ -40,12 +40,13 @@ RENDER_OUTPUT: Final = "eda/_freeze"
 
 @dataclass(frozen=True)
 class GitRevision:
-    """Commit a stav pracovního stromu repozitáře v adresáři ``root``."""
+    """Revize v ``root`` s výjimkami ``excluded`` zadanými od kořene repa."""
 
     root: Path
+    excluded: tuple[str, ...] = ()
 
     def read(self) -> SourceRevision:
-        """Přečte HEAD a změny v SOURCE_PATHS mimo eda/_freeze, i netrackované.
+        """Přečte HEAD a změny kódu mimo freeze a výjimky volajícího, i netrackované.
 
         Returns:
             Revize zdroje.
@@ -57,7 +58,7 @@ class GitRevision:
                 "--porcelain",
                 "--",
                 *(f":/{path}" for path in SOURCE_PATHS),
-                f":!/{RENDER_OUTPUT}",
+                *(f":!/{path}" for path in (RENDER_OUTPUT, *self.excluded)),
             )
         )
         return SourceRevision(commit=commit, dirty=dirty)

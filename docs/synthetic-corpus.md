@@ -196,8 +196,10 @@ korpusem v repu.
   odmítne soubory, které s nimi nesedí, dřív, než je začne číst.
 - **Protokol.**
   1. Audit spouští autor lokálně, mimo CI a mimo relaci Claude Code
-     (`pixi run audit-corpus ...`). Recept odmítne necommitnuté změny mimo korpus, aby
-     commit v záznamu auditu odpovídal kódu, který běžel.
+     (`pixi run audit-corpus ...`). Recept odmítne necommitnutý kód podle
+     `GitRevision` (`SOURCE_PATHS`) s výjimkou auditovaného `resources/synthetic`,
+     aby commit v záznamu auditu odpovídal kódu, který běžel. Necommitnuté výstupy
+     v `results/` a `eda/_freeze/` audit neblokují.
   2. Výstupem jsou jen počty a `note_id` dotčených zpráv; pozice shod jdou do
      reportu mimo repozitář, shodný text se nevypisuje nikdy.
   3. Zpráva se shodou se napíše znovu ze svého plánu. Generátor se dozví jen
