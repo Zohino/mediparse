@@ -18,11 +18,14 @@ def file_sha256(path: Path) -> str:
         Hexadecimální otisk.
 
     Raises:
-        InvalidInputError: Vstupní soubor nelze přečíst.
+        InvalidInputError: Soubor neexistuje nebo ho nelze přečíst.
     """
     try:
         with path.open("rb") as stream:
             return hashlib.file_digest(stream, "sha256").hexdigest()
+    except FileNotFoundError as error:
+        msg = f"Soubor {path} neexistuje."
+        raise InvalidInputError(msg) from error
     except OSError as error:
-        msg = f"Soubor {path} nelze přečíst pro výpočet SHA-256."
+        msg = f"Soubor {path} nelze přečíst."
         raise InvalidInputError(msg) from error
