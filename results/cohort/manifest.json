@@ -1,18 +1,30 @@
 {
   "cohort_sha256": "39f8d71d8cc13af7ea7a596936463de411304257570229908505febe2d6426bb",
-  "config_sha256": "5bc219812d8a51de35fcb58e8ccc55e6ee0cb09a25c1c7bee1590c0e4a8ced13",
+  "config_sha256": "bba484ea704d8663c60f1dfaf0ee610bf943f880c4d445aa8d80fe567158b981",
+  "input_corpus_sha256": "1e63d706a188bb57465725875036e26d4a281a4a2509a86ba5c6c3435cc8331f",
   "sources": {
-    "discharge.csv.gz": "27bc552edaf81c2af322040cb7e8eb36417173b23c79405bb92fcf73bef2dbc5",
-    "diagnoses_icd.csv.gz": "47665a41b2a3ad990d6f314062d5bd6d29d467b0fd402dd94662044ec8b073d2"
+    "discharge": {
+      "source": "discharge.csv.gz",
+      "source_sha256": "27bc552edaf81c2af322040cb7e8eb36417173b23c79405bb92fcf73bef2dbc5",
+      "sha256": "0b817f1662e2c0857f99caca2bda8a5cc6bf677738a3b6ebcf9ed43dbc55aae5"
+    },
+    "diagnoses_icd": {
+      "source": "diagnoses_icd.csv.gz",
+      "source_sha256": "47665a41b2a3ad990d6f314062d5bd6d29d467b0fd402dd94662044ec8b073d2",
+      "sha256": "c98d378ffafb8cf8a81428570fcef4aa57106eb8cb60f01ebf8143792ae83922"
+    }
   },
-  "packages": {
-    "python": "3.13.16",
-    "duckdb": "1.5.6",
-    "pyarrow": "26.0.0"
-  },
-  "source": {
-    "commit": "74e40a03eee45ef7683abada5479351e50c9893b",
-    "dirty": false
+  "environment": {
+    "packages": {
+      "python": "3.13.16",
+      "duckdb": "1.5.6",
+      "pyarrow": "26.0.0",
+      "pydantic": "2.14.0"
+    },
+    "source": {
+      "commit": "50a84f05aad1ce645eae5b1380736f6e27c53037",
+      "dirty": true
+    }
   },
   "counts": {
     "funnel": [
