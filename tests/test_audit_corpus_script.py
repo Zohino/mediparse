@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from tests.git_support import git_output, init_repo, needs_git
+from tests.git_support import git_environment, git_output, init_repo, needs_git
 from tests.support import REPOSITORY
 
 if TYPE_CHECKING:
@@ -19,6 +19,7 @@ if TYPE_CHECKING:
 
 
 @needs_git
+@pytest.mark.parametrize("from_other_repo", [False, True])
 @pytest.mark.parametrize(
     ("changed", "allowed"),
     [
@@ -28,7 +29,7 @@ if TYPE_CHECKING:
     ],
 )
 def test_audit_recipe_blocks_only_uncommitted_code(
-    tmp_path: Path, changed: str, *, allowed: bool
+    tmp_path: Path, changed: str, *, allowed: bool, from_other_repo: bool
 ) -> None:
     """Výstup ani auditovaný korpus neblokují recept; necommitnutý kód ano."""
     root = tmp_path / "repo"
@@ -50,16 +51,20 @@ def test_audit_recipe_blocks_only_uncommitted_code(
         '#!/bin/sh\nprintf "%s\\n" "$@" > "$AUDIT_TEST_CALLS"\n', encoding="utf-8"
     )
     stub.chmod(0o755)
-    environ = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+    environ = git_environment()
     environ.update({
         "PATH": f"{commands}{os.pathsep}{os.environ['PATH']}",
         "PIXI_PROJECT_ROOT": str(root),
         "AUDIT_TEST_CALLS": str(calls),
     })
+    caller = root
+    if from_other_repo:
+        caller = tmp_path / "caller"
+        init_repo(caller, "jiné repo volajícího\n")
 
     result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         ["bash", str(script), "discharge", "radiology", "audit.json"],  # ruff: ignore[start-process-with-partial-path]
-        cwd=root,
+        cwd=caller,
         env=environ,
         capture_output=True,
         text=True,

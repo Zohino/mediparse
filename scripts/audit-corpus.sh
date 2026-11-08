@@ -15,4 +15,4 @@ sys.exit(GitRevision(Path(sys.argv[1]), excluded=("resources/synthetic",)).read(
     echo "Repo má necommitnutý kód mimo korpus; záznam auditu by ukazoval na jiný kód." >&2
     exit 1
 }
-mediparse-corpus-audit --reference "$discharge" --reference "$radiology" --report "$report" --commit "$(git rev-parse HEAD)"
+mediparse-corpus-audit --reference "$discharge" --reference "$radiology" --report "$report" --commit "$(git -C "$root" rev-parse HEAD)"
