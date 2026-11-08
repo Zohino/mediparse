@@ -207,12 +207,12 @@ def test_render_script_blocks_before_any_preparation(tmp_path: Path, name: str) 
 
 @EDA_PRESENT
 @needs_git
-def test_render_script_blocks_when_python_fails_silently(tmp_path: Path) -> None:
-    """Chyba Pythonu bez důvodu nesmí spustit git ani přípravu cache a provenance."""
+def test_render_script_blocks_when_access_check_fails_silently(tmp_path: Path) -> None:
+    """Tiché selhání stráže nesmí spustit git ani přípravu cache a provenance."""
     environ = _render_environment(tmp_path)
-    python = tmp_path / "bin/python"
-    python.write_text("#!/bin/sh\nexit 1\n", encoding="utf-8")
-    python.chmod(0o755)
+    command = tmp_path / "bin/mediparse-data-access-check"
+    command.write_text("#!/bin/sh\nexit 1\n", encoding="utf-8")
+    command.chmod(0o755)
 
     result = _render(tmp_path, environ, "9")
 

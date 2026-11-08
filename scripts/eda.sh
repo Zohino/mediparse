@@ -3,15 +3,8 @@ set -euo pipefail
 
 number=${1:?chybí číslo dokumentu EDA}
 
-# Seznam blokujících proměnných i jeho validace mají jediný zdroj v data_access.json.
-reason=$(python -I -c '
-import os
-import sys
-from mediparse.domain.data_access import blocked_reason
-from mediparse.infrastructure.data_access_rules import load_data_access_rules
-sys.exit(blocked_reason(os.environ, load_data_access_rules()))
-' 2>&1) || {
-    echo "Reálný render EDA čte data MIMIC; pouští ho jen uživatel ve vlastním terminálu. $reason" >&2
+mediparse-data-access-check || {
+    echo "Reálný render EDA čte data MIMIC; pouští ho jen uživatel ve vlastním terminálu." >&2
     exit 1
 }
 root=${PIXI_PROJECT_ROOT:-$(git rev-parse --show-toplevel)}
