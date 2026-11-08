@@ -7,6 +7,8 @@ a ``pdftext/`` s textem PDF) a hledá buňku s prefixem i token textu ze samých
 from __future__ import annotations
 
 import os
+import shlex
+import shutil
 import subprocess
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
@@ -14,6 +16,7 @@ from typing import TYPE_CHECKING, Final
 import pytest
 
 from mediparse.infrastructure.data_access_rules import load_data_access_rules
+from tests.git_support import init_repo, needs_git
 
 if TYPE_CHECKING:
     from mediparse.domain.data_access import BlockingVariable
@@ -133,19 +136,26 @@ def test_missing_directory_is_an_error_not_a_clean_result(tmp_path: Path) -> Non
 
 
 def _render_environment(tmp_path: Path) -> dict[str, str]:
+    root = tmp_path / "repo"
+    init_repo(root, "a\n")
     scripts = tmp_path / "scripts"
     scripts.mkdir()
     render = scripts / "eda.sh"
     render.write_bytes((SCRIPT.parent / "eda.sh").read_bytes())
     (scripts / "eda-render.sh").write_text(
-        "eda_stage() { :; }\neda_revision() { :; }\n"
+        "eda_stage() { :; }\n"
         'eda_render() { printf "%s\\n" "$MEDIPARSE_EDA_PROVENANCE" > "$EDA_TEST_PROVENANCE_PATH"; }\n',
         encoding="utf-8",
     )
     commands = tmp_path / "bin"
     commands.mkdir()
+    git = shutil.which("git")
+    assert git is not None
     stubs = {
-        "git": '#!/bin/sh\nprintf "git %s\\n" "$*" >> "$EDA_TEST_GIT_CALLS"\n',
+        "git": (
+            '#!/bin/sh\nprintf "git %s\\n" "$*" >> "$EDA_TEST_GIT_CALLS"\n'
+            f'exec {shlex.quote(git)} "$@"\n'
+        ),
         "mediparse-eda-provenance": '#!/bin/sh\nprintf "provenance %s\\n" "$*" > "$EDA_TEST_PROVENANCE"\n',
         "mediparse-eda-note-features": '#!/bin/sh\nprintf "features %s\\n" "$*" >> "$EDA_TEST_CALLS"\n',
         "mediparse-eda-note-tokens": '#!/bin/sh\nprintf "tokens %s\\n" "$*" >> "$EDA_TEST_CALLS"\n',
@@ -158,7 +168,7 @@ def _render_environment(tmp_path: Path) -> dict[str, str]:
         **os.environ,
         **{variable.name: "" for variable in load_data_access_rules().blocking},
         "PATH": f"{commands}{os.pathsep}{os.environ['PATH']}",
-        "PIXI_PROJECT_ROOT": str(tmp_path),
+        "PIXI_PROJECT_ROOT": str(root),
         "MEDIPARSE_PARQUET": str(tmp_path / "tables"),
         "MEDIPARSE_EDA_CACHE": str(tmp_path / "cache"),
         "EDA_TEST_CALLS": str(tmp_path / "feature-calls.txt"),
@@ -169,6 +179,7 @@ def _render_environment(tmp_path: Path) -> dict[str, str]:
 
 
 @EDA_PRESENT
+@needs_git
 @pytest.mark.parametrize(
     "variable", load_data_access_rules().blocking, ids=lambda variable: variable.name
 )
@@ -196,6 +207,7 @@ def test_render_script_blocks_before_any_preparation(
 
 
 @EDA_PRESENT
+@needs_git
 def test_render_script_blocks_when_python_fails_silently(tmp_path: Path) -> None:
     """Chyba Pythonu bez důvodu nesmí spustit git ani přípravu cache a provenance."""
     environ = _render_environment(tmp_path)
@@ -219,6 +231,7 @@ def test_render_script_blocks_when_python_fails_silently(tmp_path: Path) -> None
 
 
 @EDA_PRESENT
+@needs_git
 @pytest.mark.parametrize("number", ["1", "4", "9"])
 def test_render_script_prepares_cache_for_its_consumer(
     tmp_path: Path, number: str
@@ -235,10 +248,11 @@ def test_render_script_prepares_cache_for_its_consumer(
         timeout=60,
     )
     assert result.returncode == CLEAN, result.stderr
+    root = Path(environ["PIXI_PROJECT_ROOT"])
     out = Path(environ["EDA_TEST_PROVENANCE_PATH"]).read_text(encoding="utf-8").strip()
     assert out.endswith("/provenance.json")
     assert Path(environ["EDA_TEST_PROVENANCE"]).read_text(encoding="utf-8") == (
-        f"provenance --root {tmp_path} --parquet {tmp_path / 'tables'} --out {out}\n"
+        f"provenance --root {root} --parquet {tmp_path / 'tables'} --out {out}\n"
     )
     calls = Path(environ["EDA_TEST_CALLS"])
     assert calls.exists() is (number in {"4", "9"})
@@ -249,14 +263,64 @@ def test_render_script_prepares_cache_for_its_consumer(
         assert line.count("\n") == 1
         assert f"--out {tmp_path / 'cache'}" in line
         if number == "9":
-            assert (
-                f"--candidates {tmp_path / 'config/diagnosis_candidates.json'}" in line
-            )
+            assert f"--candidates {root / 'config/diagnosis_candidates.json'}" in line
             assert "--variants" not in line
         if number == "4":
-            assert f"--translation {tmp_path / 'translation'}" in line
-            assert f"--english {tmp_path / 'resources/synthetic/en'}" in line
-            assert f"--czech {tmp_path / 'resources/synthetic/cs'}" in line
+            assert f"--translation {root / 'translation'}" in line
+            assert f"--english {root / 'resources/synthetic/en'}" in line
+            assert f"--czech {root / 'resources/synthetic/cs'}" in line
+
+
+@EDA_PRESENT
+@needs_git
+@pytest.mark.parametrize(
+    "name", ["results/cohort/manifest.json", "eda/_freeze/x/y.json"]
+)
+def test_render_script_allows_uncommitted_outputs(tmp_path: Path, name: str) -> None:
+    """Výstupy předchozího renderu nebrání další přípravě provenance a renderu."""
+    environ = _render_environment(tmp_path)
+    path = Path(environ["PIXI_PROJECT_ROOT"]) / name
+    path.parent.mkdir(parents=True)
+    path.write_text("{}\n", encoding="utf-8")
+
+    result = subprocess.run(
+        ["bash", str(tmp_path / "scripts/eda.sh"), "1"],
+        env=environ,
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=60,
+    )
+
+    assert result.returncode == CLEAN, result.stderr
+    assert Path(environ["EDA_TEST_PROVENANCE_PATH"]).exists()
+
+
+@EDA_PRESENT
+@needs_git
+@pytest.mark.parametrize("name", ["src/new.py", "eda/1-x.qmd", "pixi.lock"])
+def test_render_script_blocks_uncommitted_source(tmp_path: Path, name: str) -> None:
+    """Rozpracovaný kód zastaví render před přípravou cache i provenance."""
+    environ = _render_environment(tmp_path)
+    path = Path(environ["PIXI_PROJECT_ROOT"]) / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("změna\n", encoding="utf-8")
+
+    result = subprocess.run(
+        ["bash", str(tmp_path / "scripts/eda.sh"), "9"],
+        env=environ,
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=60,
+    )
+
+    assert result.returncode != CLEAN
+    assert "necommitnutý kód" in result.stderr
+    for key in ("EDA_TEST_CALLS", "EDA_TEST_PROVENANCE", "EDA_TEST_PROVENANCE_PATH"):
+        assert not Path(environ[key]).exists()
 
 
 @EDA_PRESENT

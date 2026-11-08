@@ -150,16 +150,31 @@ def test_commit_and_dirty_come_from_environment(tmp_path: Path) -> None:
 
 
 @needs_git
-def test_commit_and_dirty_come_from_git_without_environment(tmp_path: Path) -> None:
-    """Bez proměnných se revize čte z gitu v kořeni."""
+@pytest.mark.parametrize(
+    ("name", "dirty"),
+    [
+        ("pixi.lock", "true"),
+        ("results/cohort/manifest.json", "false"),
+        ("eda/_freeze/x/y.json", "false"),
+    ],
+)
+def test_commit_and_dirty_come_from_git_without_environment(
+    tmp_path: Path, name: str, dirty: str
+) -> None:
+    """Bez proměnných se revize čte z kořene gitu, výstupy dirty nezmění."""
     root = tmp_path / "repo"
     init_repo(root, "a\n")
     (root / "pixi.lock").write_text("zámek\n", encoding="utf-8")
+    git_output(root, "add", "pixi.lock")
+    git_output(root, "commit", "-q", "-m", "lock")
+    path = root / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("změna\n", encoding="utf-8")
 
     result = provenance({}, root, _parquet(tmp_path))
 
     assert result["commit"] == git_output(root, "rev-parse", "HEAD")
-    assert result["dirty"] == "true"
+    assert result["dirty"] == dirty
 
 
 def test_lock_hash_matches_file(tmp_path: Path) -> None:
