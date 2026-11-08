@@ -869,3 +869,101 @@ def test_eda_stop_words_match_sklearn() -> None:
     """EDA drží přesně seřazený seznam anglických stop slov sklearn."""
     words = (EDA / "stop-words.txt").read_text(encoding="utf-8").splitlines()
     assert words == sorted(ENGLISH_STOP_WORDS)
+
+
+DATA_ADAPTER = re.compile(
+    r"(?:Parquet\w+|DuckDb\w+|SkopsModelFile|CsvParquetConversion)"
+)
+DATA_ACCESS_IMPORTS = frozenset({
+    ("mediparse.infrastructure.data_access_guard", "check_inputs_access"),
+    ("mediparse.infrastructure.eda_duckdb", "EdaDatabase"),
+})
+DATA_ACCESS_EXCEPTIONS = {
+    "training_input.py": (
+        "Skládá líný adaptér bez čtení dat; stráž volají model_training a model_inference."
+    ),
+}
+
+
+def _infrastructure_imports(module: Path) -> set[tuple[str, str]]:
+    tree = ast.parse(module.read_text(encoding="utf-8"))
+    return {
+        (_imported_module(module, node), alias.name)
+        for node in ast.walk(tree)
+        if isinstance(node, ast.ImportFrom)
+        and _imported_module(module, node).startswith("mediparse.infrastructure.")
+        for alias in node.names
+    }
+
+
+def _unguarded_data_entrypoints(root: Path) -> tuple[list[str], set[str]]:
+    violations = []
+    inspected = set()
+    for module in sorted(root.rglob("*.py")):
+        imports = _infrastructure_imports(module)
+        if not any(DATA_ADAPTER.fullmatch(name) for _, name in imports):
+            continue
+        name = module.relative_to(root).as_posix()
+        inspected.add(name)
+        if name not in DATA_ACCESS_EXCEPTIONS and imports.isdisjoint(
+            DATA_ACCESS_IMPORTS
+        ):
+            violations.append(name)
+    return violations, inspected
+
+
+def test_data_reading_entrypoints_import_access_guard() -> None:
+    """Entrypoint s datovým adaptérem zná přímou stráž nebo stráženou databázi EDA."""
+    violations, inspected = _unguarded_data_entrypoints(PACKAGE / "entrypoints")
+
+    assert "cohort.py" in inspected
+    assert DATA_ACCESS_EXCEPTIONS.keys() <= inspected
+    assert violations == []
+
+
+@pytest.mark.parametrize(
+    ("source", "adapter"),
+    [
+        ("note_table", "ParquetNoteTable"),
+        ("note_texts_parquet", "ParquetNoteTexts"),
+        ("duckdb_cohort", "DuckDbCohort"),
+        ("sklearn_classifier", "SkopsModelFile"),
+        ("csv_parquet", "CsvParquetConversion"),
+    ],
+)
+def test_data_guard_check_detects_unprotected_adapter(
+    tmp_path: Path, source: str, adapter: str
+) -> None:
+    """Stráž vyžadují různé datové adaptéry i s přejmenovaným importem."""
+    (tmp_path / "unguarded.py").write_text(
+        f"from mediparse.infrastructure.{source} import {adapter} as Adapter\n",
+        encoding="utf-8",
+    )
+
+    violations, inspected = _unguarded_data_entrypoints(tmp_path)
+
+    assert violations == ["unguarded.py"]
+    assert inspected == {"unguarded.py"}
+
+
+@pytest.mark.parametrize(
+    "guard",
+    [
+        "data_access_guard import check_inputs_access as check",
+        "eda_duckdb import EdaDatabase as Database",
+    ],
+)
+def test_data_guard_check_accepts_both_guard_imports(
+    tmp_path: Path, guard: str
+) -> None:
+    """Přímá stráž i databáze EDA plní kontrakt při importu pod aliasem."""
+    (tmp_path / "guarded.py").write_text(
+        "from mediparse.infrastructure.note_table import ParquetNoteTable\n"
+        f"from mediparse.infrastructure.{guard}\n",
+        encoding="utf-8",
+    )
+
+    violations, inspected = _unguarded_data_entrypoints(tmp_path)
+
+    assert violations == []
+    assert inspected == {"guarded.py"}

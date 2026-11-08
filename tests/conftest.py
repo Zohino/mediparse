@@ -15,7 +15,11 @@ from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.synthetic.domain.mentions import Mention, MentionStatus
 from mediparse.synthetic.domain.note_plan import NotePlan
 from mediparse.synthetic.domain.note_structure import Sex
-from mediparse.synthetic.entrypoints import corpus_audit, corpus_provenance
+from mediparse.synthetic.entrypoints import (
+    corpus_audit,
+    corpus_provenance,
+    synthetic_mimic,
+)
 from mediparse.synthetic.infrastructure.mimic_reference import MimicReference
 from mediparse.synthetic.infrastructure.plans_file import PlansFile
 from mediparse.synthetic.infrastructure.sampler_config import load_sampler_config
@@ -26,6 +30,9 @@ from tests.support import (
     COMMIT,
     GENERATION_ARGS,
     REPOSITORY_CONFIG,
+    REPOSITORY_CORPUS,
+    REPOSITORY_DIAGNOSIS_CANDIDATES,
+    REPOSITORY_MIMIC_MANIFEST,
     REPOSITORY_PLANS,
     REPOSITORY_TEMPLATE,
 )
@@ -319,3 +326,27 @@ def repository_plans() -> tuple[NotePlan, ...]:
         Plány načtené jednou za běh testů.
     """
     return PlansFile(REPOSITORY_PLANS).load()
+
+
+@pytest.fixture
+def synthetic_tables(tmp_path: Path) -> tuple[Path, Path]:
+    """Zapíše obě vstupní tabulky a otisky skutečným entrypointem.
+
+    Returns:
+        Cesty k discharge a diagnoses_icd s vazbami zdrojů.
+    """
+    discharge = tmp_path / "mimic" / "parquet" / "discharge.parquet"
+    diagnoses = discharge.with_name("diagnoses_icd.parquet")
+    assert (
+        synthetic_mimic.run(
+            plans=REPOSITORY_PLANS,
+            corpus=REPOSITORY_CORPUS,
+            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+            manifest=REPOSITORY_MIMIC_MANIFEST,
+            discharge=discharge,
+            diagnoses=diagnoses,
+            artifacts=tmp_path,
+        )
+        is ExitCode.OK
+    )
+    return discharge, diagnoses

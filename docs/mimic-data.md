@@ -65,6 +65,12 @@ vazby se zdrojem `https://mediparse.invalid/synthetic/<tabulka>`; protože
 nemá zdrojové CSV, oba otisky ve vazbě patří syntetickému parquetu.
 EDA rozpoznává svůj syntetický adresář nadále pomocí `synthetic.json`.
 
+Kroky převodu, kohorty, splitu, tréninku, evaluace a inference odmítnou neoznačený
+datový vstup, pokud je neprázdná některá blokující proměnná z
+[`data_access.json`](../src/mediparse/domain/data_access.json).
+Smoketest zapisuje značku `synthetic.json` do `build/smoketest/mimic/parquet/`
+i `build/smoketest/`.
+
 Nový tvar veřejných manifestů a provenance EDA se nad reálnými daty vytvoří
 při společném uživatelském přepočtu po S39c3.
 

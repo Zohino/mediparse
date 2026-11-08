@@ -12,6 +12,7 @@ import pytest
 
 from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.synthetic_marker import SyntheticMarker, read_marker
 from mediparse.infrastructure.table_provenance import provenance_path
 from mediparse.synthetic.entrypoints import synthetic_mimic
 from mediparse.synthetic.infrastructure.plans_file import PlansFile
@@ -32,27 +33,15 @@ if TYPE_CHECKING:
 EXPECTED_NOTES: Final = 400
 
 
-@pytest.fixture
-def synthetic_tables(tmp_path: Path) -> tuple[Path, Path]:
-    """Zapíše obě vstupní tabulky a otisky skutečným entrypointem.
-
-    Returns:
-        Cesty k discharge a diagnoses_icd s vazbami zdrojů.
-    """
-    discharge = tmp_path / "mimic" / "parquet" / "discharge.parquet"
-    diagnoses = discharge.with_name("diagnoses_icd.parquet")
-    assert (
-        synthetic_mimic.run(
-            plans=REPOSITORY_PLANS,
-            corpus=REPOSITORY_CORPUS,
-            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            manifest=REPOSITORY_MIMIC_MANIFEST,
-            discharge=discharge,
-            diagnoses=diagnoses,
+def test_tables_and_artifacts_have_synthetic_markers(
+    tmp_path: Path, synthetic_tables: tuple[Path, Path]
+) -> None:
+    """Tabulky i odvozené artefakty nesou značku bez vymyšleného prefixu."""
+    discharge, _ = synthetic_tables
+    for directory in (discharge.parent, tmp_path):
+        assert read_marker(directory) == SyntheticMarker(
+            prefix=None, rows=EXPECTED_NOTES
         )
-        is ExitCode.OK
-    )
-    return discharge, diagnoses
 
 
 def test_cohort_matches_plans_and_source_hashes(
@@ -64,6 +53,7 @@ def test_cohort_matches_plans_and_source_hashes(
     manifest = tmp_path / "cohort" / "manifest.json"
     assert (
         cohort.run(
+            environ={},
             discharge=discharge,
             diagnoses=diagnoses,
             candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
@@ -149,6 +139,7 @@ def test_unpaired_corpus_is_refused_before_writing(
             manifest=REPOSITORY_MIMIC_MANIFEST,
             discharge=discharge,
             diagnoses=diagnoses,
+            artifacts=tmp_path,
         )
         is ExitCode.REFUSED
     )
@@ -170,6 +161,7 @@ def test_missing_manifest_is_refused_before_writing(tmp_path: Path) -> None:
             manifest=tmp_path / "missing.json",
             discharge=output / "discharge.parquet",
             diagnoses=output / "diagnoses_icd.parquet",
+            artifacts=output,
         )
         is ExitCode.REFUSED
     )
@@ -197,6 +189,7 @@ def test_written_columns_follow_manifest(tmp_path: Path, table: str) -> None:
             manifest=manifest,
             discharge=discharge,
             diagnoses=diagnoses,
+            artifacts=tmp_path,
         )
         is ExitCode.OK
     )

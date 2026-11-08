@@ -43,6 +43,7 @@ def test_matching_inventory_writes_parquet(tmp_path: Path) -> None:
     parquet = tmp_path / "parquet" / "t.parquet"
     assert (
         run(
+            environ={},
             table=table,
             inventory=inventory,
             parquet=parquet,
@@ -66,6 +67,7 @@ def test_count_mismatch_is_refused(tmp_path: Path) -> None:
     parquet = tmp_path / "t.parquet"
     assert (
         run(
+            environ={},
             table=table,
             inventory=inventory,
             parquet=parquet,
@@ -85,7 +87,10 @@ def test_csv_changed_since_inventory_is_refused_without_provenance(
     inventory.write_text(json.dumps(payload), encoding="utf-8")
     parquet = tmp_path / "t.parquet"
 
-    assert run(table=table, inventory=inventory, parquet=parquet) is ExitCode.REFUSED
+    assert (
+        run(environ={}, table=table, inventory=inventory, parquet=parquet)
+        is ExitCode.REFUSED
+    )
     assert not provenance_path(parquet).exists()
     assert caplog.messages == [
         f"Soubor {table.name} se od validace změnil; spusťte validaci znovu."

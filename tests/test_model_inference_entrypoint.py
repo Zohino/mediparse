@@ -89,6 +89,7 @@ def _train(
     shutil.copy(REPOSITORY_DIAGNOSIS_CANDIDATES, candidates)
     trained = Trained(notes, config, root / "model.skops", root / "predictions.parquet")
     code = model_training.run(
+        environ={},
         cohort=notes,
         config=config,
         candidates=candidates,
@@ -124,6 +125,7 @@ def _infer(
         "costs": inference.with_suffix(".costs.json"),
     }
     return model_inference.run(
+        environ={},
         **(paths | changes),
         cuda_visible_devices=cuda_visible_devices,
         cuda_device_order=None,

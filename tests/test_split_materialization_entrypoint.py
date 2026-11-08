@@ -35,7 +35,9 @@ def _inputs(
 
 
 def _run(notes: Path, config: Path, output: Path) -> ExitCode:
-    return split_materialization.run(cohort=notes, config=config, output=output)
+    return split_materialization.run(
+        environ={}, cohort=notes, config=config, output=output
+    )
 
 
 def test_writes_split_readable_by_adapter(tmp_path: Path) -> None:

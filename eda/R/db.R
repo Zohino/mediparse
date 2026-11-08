@@ -53,7 +53,8 @@ eda_synthetic_marker <- function(directory) {
     stop("Neplatná značka synthetic.json.", call. = FALSE)
   })
   # R smí být přísnější: typ integer odmítne i velké JSON floaty, které Python nepřevede na int.
-  valid <- object_keys(marker, c("prefix", "rows")) && scalar_text(marker$prefix) &&
+  valid <- object_keys(marker, c("prefix", "rows")) &&
+    (is.null(marker$prefix) || scalar_text(marker$prefix)) &&
     is.integer(marker$rows) && length(marker$rows) == 1L && !is.na(marker$rows)
   if (!valid) stop("Neplatná značka synthetic.json.", call. = FALSE)
   TRUE

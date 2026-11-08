@@ -45,7 +45,9 @@ def test_shared_marker_cases(tmp_path: Path, case: dict[str, str | bool]) -> Non
     """Stejné případy značky ověřují Python i nezávislý konzument R."""
     (tmp_path / MARKER_NAME).write_text(str(case["text"]), encoding="utf-8")
     if case["valid"]:
-        assert read_marker(tmp_path) == SyntheticMarker(prefix="t", rows=1)
+        assert read_marker(tmp_path) == SyntheticMarker(
+            prefix=json.loads(str(case["text"]))["prefix"], rows=1
+        )
     else:
         with pytest.raises(InvalidInputError, match=r"synthetic\.json"):
             read_marker(tmp_path)

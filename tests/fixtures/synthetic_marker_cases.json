@@ -5,6 +5,16 @@
     "valid": true
   },
   {
+    "name": "null-prefix",
+    "text": "{\"prefix\":null,\"rows\":1}",
+    "valid": true
+  },
+  {
+    "name": "missing-prefix",
+    "text": "{\"rows\":1}",
+    "valid": false
+  },
+  {
     "name": "empty",
     "text": "",
     "valid": false
