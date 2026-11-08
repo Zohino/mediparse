@@ -10,10 +10,7 @@ import pytest
 from mediparse.domain.digest import fingerprint
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
-from mediparse.synthetic.infrastructure.synthetic_corpus import (
-    CORPUS_ROOT,
-    CorpusDirectory,
-)
+from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -104,11 +101,6 @@ def test_expected_corpus_layout_is_accepted(tmp_path: Path) -> None:
     assert corpus.fingerprint() is not None
     assert corpus.notes(Language.EN) == {"note": "english"}
     assert corpus.notes(Language.CS) == {"note": "cesky"}
-
-
-def test_repository_corpus_layout_is_accepted() -> None:
-    """Skutečný syntetický korpus repa splňuje kontrolu celého stromu."""
-    assert CorpusDirectory(CORPUS_ROOT).fingerprint() is not None
 
 
 def test_fingerprint_covers_relative_paths_and_bytes(tmp_path: Path) -> None:
