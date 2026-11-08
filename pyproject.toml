@@ -395,6 +395,12 @@ ignore = [
     "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá Snakemake
 ]
 
+"tests/test_verify_mimic_script.py" = [
+    "suspicious-subprocess-import",           # test spouští pevný shellový skript kontroly otisků
+    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam bez shell=True a bez vstupu od uživatele
+    "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá pixi task verify-mimic
+]
+
 "tests/test_smoketest_script.py" = [
     "suspicious-subprocess-import",         # integrační test spouští pevný skript smoketestu proti falešnému enginu
     "subprocess-without-shell-equals-true", # argumenty jdou jako seznam bez shell=True a bez vstupu od uživatele

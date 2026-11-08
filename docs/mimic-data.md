@@ -17,6 +17,7 @@ nikdy hodnoty z řádků. Seznam tabulek, URL a SHA-256 drží
 2. **Kontrola otisků.** `pixi run verify-mimic` otisky přepočítá i později, například
    po přesunu dat nebo na jiném stroji. Kontrola je potřebná i po přesunu se
    zachovaným mtime, kdy Snakemake nemusí inventář znovu spustit.
+   Pod neprázdnou blokující proměnnou z `data_access.json` odmítne běh před čtením souborů.
 3. **Validace.** `snakemake validate_mimic` přepočte SHA-256 každého CSV a porovná
    ho s configem, i když soubor pipeline nestahovala. Ověřený otisk zapíše
    do inventáře tabulky jako `sha256` a společně s počty a sloupci do
