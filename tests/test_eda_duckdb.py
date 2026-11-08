@@ -12,7 +12,8 @@ from mediparse.domain.data_access import DataAccessError
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.eda_duckdb import DEFAULT_MEMORY, EdaDatabase
 from mediparse.infrastructure.synthetic_marker import MARKER_NAME
-from tests.eda_support import mark_synthetic, write_tables
+from tests.eda_support import write_tables
+from tests.support import mark_synthetic
 
 if TYPE_CHECKING:
     from collections.abc import Iterator

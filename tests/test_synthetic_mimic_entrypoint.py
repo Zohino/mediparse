@@ -33,30 +33,6 @@ if TYPE_CHECKING:
 EXPECTED_NOTES: Final = 400
 
 
-@pytest.fixture
-def synthetic_tables(tmp_path: Path) -> tuple[Path, Path]:
-    """Zapíše obě vstupní tabulky a otisky skutečným entrypointem.
-
-    Returns:
-        Cesty k discharge a diagnoses_icd s vazbami zdrojů.
-    """
-    discharge = tmp_path / "mimic" / "parquet" / "discharge.parquet"
-    diagnoses = discharge.with_name("diagnoses_icd.parquet")
-    assert (
-        synthetic_mimic.run(
-            plans=REPOSITORY_PLANS,
-            corpus=REPOSITORY_CORPUS,
-            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            manifest=REPOSITORY_MIMIC_MANIFEST,
-            discharge=discharge,
-            diagnoses=diagnoses,
-            artifacts=tmp_path,
-        )
-        is ExitCode.OK
-    )
-    return discharge, diagnoses
-
-
 def test_tables_and_artifacts_have_synthetic_markers(
     tmp_path: Path, synthetic_tables: tuple[Path, Path]
 ) -> None:

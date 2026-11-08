@@ -15,6 +15,7 @@ from mediparse.domain.environment import SourceRevision
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.data_access_rules import load_data_access_rules
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
+from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
 from mediparse.synthetic.domain.corpus_audit import (
     NGRAM_SIZE,
     NORMALIZATION,
@@ -250,3 +251,13 @@ def blocking_reason(name: str) -> str:
         for variable in load_data_access_rules().blocking
         if variable.name == name
     )
+
+
+def mark_synthetic(directory: Path) -> Path:
+    """Přidá do adresáře značku syntetiky.
+
+    Returns:
+        Týž adresář.
+    """
+    write_marker(directory, SyntheticMarker(prefix="t", rows=1))
+    return directory

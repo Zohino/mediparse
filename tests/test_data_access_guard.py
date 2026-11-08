@@ -9,7 +9,7 @@ import pytest
 from mediparse.domain.data_access import DataAccessError
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.data_access_guard import check_tables_access
-from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
+from tests.support import mark_synthetic
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 def test_guard_checks_every_input_directory(tmp_path: Path) -> None:
     """Značka prvního adresáře nepovolí neoznačený druhý adresář."""
     first, second = tmp_path / "first", tmp_path / "second"
-    write_marker(first, SyntheticMarker(prefix="t", rows=1))
+    mark_synthetic(first)
 
     with pytest.raises(DataAccessError) as refusal:
         check_tables_access(
@@ -33,7 +33,7 @@ def test_guard_allows_marked_directories(tmp_path: Path) -> None:
     """Platná značka každého adresáře dovolí čtení v prostředí Codexu."""
     first, second = tmp_path / "first", tmp_path / "second"
     for directory in (first, second):
-        write_marker(directory, SyntheticMarker(prefix="t", rows=1))
+        mark_synthetic(directory)
 
     check_tables_access(
         {"CODEX_THREAD_ID": "x"}, [first / "a.parquet", second / "b.parquet"]

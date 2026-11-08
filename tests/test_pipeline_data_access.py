@@ -19,13 +19,9 @@ from mediparse.entrypoints import (
 )
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.table_provenance import write_table_provenance
-from mediparse.synthetic.entrypoints import synthetic_mimic
 from tests.support import (
-    REPOSITORY_CORPUS,
     REPOSITORY_DIAGNOSIS_CANDIDATES,
     REPOSITORY_INPUT_CORPUS,
-    REPOSITORY_MIMIC_MANIFEST,
-    REPOSITORY_PLANS,
     REPOSITORY_SECTION_HEADERS,
     REPOSITORY_SPLIT_CONFIG,
     REPOSITORY_TRAINING_CONFIG,
@@ -156,24 +152,12 @@ def test_entrypoint_refuses_before_opening_input(
     assert set(tmp_path.rglob("*")) == before
 
 
+@pytest.mark.usefixtures("synthetic_tables")
 def test_native_synthetic_pipeline_under_codex(
-    tmp_path: Path, caplog: pytest.LogCaptureFixture
+    tmp_path: Path,
+    caplog: pytest.LogCaptureFixture,
 ) -> None:
     """Značky dovolí celou cestu smoketestu; odebrání značky artefaktů zastaví split."""
-    tables = tmp_path / "mimic/parquet"
-    assert (
-        synthetic_mimic.run(
-            plans=REPOSITORY_PLANS,
-            corpus=REPOSITORY_CORPUS,
-            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            manifest=REPOSITORY_MIMIC_MANIFEST,
-            discharge=tables / "discharge.parquet",
-            diagnoses=tables / "diagnoses_icd.parquet",
-            artifacts=tmp_path,
-        )
-        is ExitCode.OK
-    )
-
     steps = _steps(tmp_path, BLOCKED)
     for name in INPUTS:
         if name != "mimic_parquet":
