@@ -32,9 +32,10 @@ nikdy hodnoty z řádků. Seznam tabulek, URL a SHA-256 drží
    porovnají ho s vazbou. Chybějící nebo neodpovídající vazba krok odmítne
    s pokynem převést tabulku znovu. Manifest kohorty uvádí pod jmény
    `discharge` a `diagnoses_icd` celé vazby skutečně čtených tabulek.
-   Jeho příznak `dirty` označuje necommitnuté změny včetně netrackovaných souborů
-   pouze v `src`, `workflow`, `config`, `scripts`, `resources`, `R`, `analysis`,
-   `eda`, `translation`, `pyproject.toml` a `pixi.lock`, mimo `eda/_freeze/`.
+   Jeho příznak `dirty` označuje necommitnuté změny, i netrackované, v cestách
+   s kódem (`SOURCE_PATHS` v
+   [`infrastructure/source_revision.py`](../src/mediparse/infrastructure/source_revision.py));
+   výstupy v `results/` a `eda/_freeze/` se nepočítají.
    Provenance EDA ověří všechny `*.parquet` v adresáři a uvede pro každou
    tabulku `csv_sha256 <tabulka>` a `parquet_sha256 <tabulka>`.
 
