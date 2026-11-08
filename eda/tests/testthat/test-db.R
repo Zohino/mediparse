@@ -99,7 +99,8 @@ test_that("eda_connect odmítne adresář bez parquetu", {
 test_that("eda_connect odmítne skutečná data pod CLAUDECODE", {
   dir <- file.path(withr::local_tempdir(), "parquet")
   write_parquet_tables(dir, marker = FALSE)
-  withr::local_envvar(MEDIPARSE_PARQUET = dir, CLAUDECODE = "1", CI = NA)
+  local_clear_blocking_variables()
+  withr::local_envvar(MEDIPARSE_PARQUET = dir, CLAUDECODE = "1")
 
   expect_error(eda_connect(), "Claude Code")
 })
@@ -107,14 +108,25 @@ test_that("eda_connect odmítne skutečná data pod CLAUDECODE", {
 test_that("eda_connect odmítne skutečná data v CI", {
   dir <- file.path(withr::local_tempdir(), "parquet")
   write_parquet_tables(dir, marker = FALSE)
-  withr::local_envvar(MEDIPARSE_PARQUET = dir, CLAUDECODE = NA, CI = "true")
+  local_clear_blocking_variables()
+  withr::local_envvar(MEDIPARSE_PARQUET = dir, CI = "true")
 
   expect_error(eda_connect(), "CI")
+})
+
+test_that("eda_connect odmítne skutečná data pod CODEX_THREAD_ID", {
+  dir <- file.path(withr::local_tempdir(), "parquet")
+  write_parquet_tables(dir, marker = FALSE)
+  local_clear_blocking_variables()
+  withr::local_envvar(MEDIPARSE_PARQUET = dir, CODEX_THREAD_ID = "x")
+
+  expect_error(eda_connect(), "Codex")
 })
 
 test_that("eda_connect pod CLAUDECODE projde se syntetickou značkou", {
   dir <- file.path(withr::local_tempdir(), "parquet")
   write_parquet_tables(dir)
+  local_clear_blocking_variables()
   withr::local_envvar(MEDIPARSE_PARQUET = dir, CLAUDECODE = "1", CI = "true")
   con <- eda_connect()
   withr::defer(DBI::dbDisconnect(con, shutdown = TRUE))
@@ -125,7 +137,8 @@ test_that("eda_connect pod CLAUDECODE projde se syntetickou značkou", {
 test_that("eda_connect bez blokujících proměnných projde i bez značky", {
   dir <- file.path(withr::local_tempdir(), "parquet")
   write_parquet_tables(dir, marker = FALSE)
-  withr::local_envvar(MEDIPARSE_PARQUET = dir, CLAUDECODE = NA, CI = NA)
+  local_clear_blocking_variables()
+  withr::local_envvar(MEDIPARSE_PARQUET = dir)
   con <- eda_connect()
   withr::defer(DBI::dbDisconnect(con, shutdown = TRUE))
 
@@ -136,7 +149,8 @@ test_that("eda_connect odmítne neplatnou značku synthetic.json bez blokující
   dir <- file.path(withr::local_tempdir(), "parquet")
   write_parquet_tables(dir, marker = FALSE)
   writeLines("{}", file.path(dir, "synthetic.json"))
-  withr::local_envvar(MEDIPARSE_PARQUET = dir, CLAUDECODE = NA, CI = NA)
+  local_clear_blocking_variables()
+  withr::local_envvar(MEDIPARSE_PARQUET = dir)
 
   expect_error(eda_connect(), "Neplatná značka")
 })
@@ -183,8 +197,9 @@ test_that("eda_connect čte blokující proměnnou a důvod ze souboru", {
   writeLines('{"blocking":[{"name":"MEDIPARSE_TEST_BLOCK","reason":"testovací důvod"}]}', path)
   dir <- file.path(root, "parquet")
   write_parquet_tables(dir, marker = FALSE)
+  local_clear_blocking_variables()
   withr::local_envvar(PIXI_PROJECT_ROOT = root, MEDIPARSE_PARQUET = dir,
-                    MEDIPARSE_TEST_BLOCK = "1", CI = NA, CLAUDECODE = NA)
+                    MEDIPARSE_TEST_BLOCK = "1")
   expect_equal(data_access_rules()[[1]]$name, "MEDIPARSE_TEST_BLOCK")
   expect_error(eda_connect(), "testovací důvod")
 })
@@ -214,9 +229,9 @@ test_that("eda_connect hlásí důvod první blokující proměnné ze souboru",
   writeLines('{"blocking":[{"name":"MEDIPARSE_TEST_FIRST","reason":"první zákaz"},{"name":"MEDIPARSE_TEST_SECOND","reason":"druhý zákaz"}]}', path)
   dir <- file.path(root, "parquet")
   write_parquet_tables(dir, marker = FALSE)
+  local_clear_blocking_variables()
   withr::local_envvar(PIXI_PROJECT_ROOT = root, MEDIPARSE_PARQUET = dir,
-                    MEDIPARSE_TEST_FIRST = "1", MEDIPARSE_TEST_SECOND = "1",
-                    CI = NA, CLAUDECODE = NA)
+                    MEDIPARSE_TEST_FIRST = "1", MEDIPARSE_TEST_SECOND = "1")
   expect_error(eda_connect(), "první zákaz")
 })
 
@@ -232,7 +247,8 @@ test_that("synthetic.json splňuje sdílené případy Pythonu a R", {
   cases <- jsonlite::read_json(project_path("tests", "fixtures", "synthetic_marker_cases.json"))
   dir <- file.path(withr::local_tempdir(), "parquet")
   write_parquet_tables(dir, marker = FALSE)
-  withr::local_envvar(MEDIPARSE_PARQUET = dir, CLAUDECODE = NA, CI = NA)
+  local_clear_blocking_variables()
+  withr::local_envvar(MEDIPARSE_PARQUET = dir)
   for (case in cases) {
     writeLines(case$text, file.path(dir, "synthetic.json"))
     if (case$valid) {

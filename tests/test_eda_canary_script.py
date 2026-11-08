@@ -11,15 +11,12 @@ import shlex
 import shutil
 import subprocess
 from pathlib import Path
-from typing import TYPE_CHECKING, Final
+from typing import Final
 
 import pytest
 
-from mediparse.infrastructure.data_access_rules import load_data_access_rules
 from tests.git_support import init_repo, needs_git
-
-if TYPE_CHECKING:
-    from mediparse.domain.data_access import BlockingVariable
+from tests.support import BLOCKING_NAMES, blocking_reason
 
 SCRIPT: Final = Path(__file__).parents[1] / "scripts" / "eda-canary.sh"
 EDA_PRESENT: Final = pytest.mark.skipif(
@@ -166,7 +163,7 @@ def _render_environment(tmp_path: Path) -> dict[str, str]:
         command.chmod(0o755)
     return {
         **os.environ,
-        **{variable.name: "" for variable in load_data_access_rules().blocking},
+        **dict.fromkeys(BLOCKING_NAMES, ""),
         "PATH": f"{commands}{os.pathsep}{os.environ['PATH']}",
         "PIXI_PROJECT_ROOT": str(root),
         "MEDIPARSE_PARQUET": str(tmp_path / "tables"),
@@ -194,20 +191,16 @@ def _render(
 
 @EDA_PRESENT
 @needs_git
-@pytest.mark.parametrize(
-    "variable", load_data_access_rules().blocking, ids=lambda variable: variable.name
-)
-def test_render_script_blocks_before_any_preparation(
-    tmp_path: Path, variable: BlockingVariable
-) -> None:
+@pytest.mark.parametrize("name", BLOCKING_NAMES)
+def test_render_script_blocks_before_any_preparation(tmp_path: Path, name: str) -> None:
     """Každé pravidlo z JSON zastaví render ještě před git a přípravou cache."""
     environ = _render_environment(tmp_path)
-    environ[variable.name] = "1"
+    environ[name] = "1"
 
     result = _render(tmp_path, environ, "9")
 
     assert result.returncode != CLEAN
-    assert variable.reason in result.stderr
+    assert blocking_reason(name) in result.stderr
     for key in ("EDA_TEST_GIT_CALLS", "EDA_TEST_CALLS", "EDA_TEST_PROVENANCE"):
         assert not Path(environ[key]).exists()
 
