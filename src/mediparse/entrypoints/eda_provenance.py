@@ -42,7 +42,10 @@ def provenance(root: Path, parquet: Path) -> dict[str, str]:
 def _data_source(parquet: Path) -> dict[str, str]:
     marker = read_marker(parquet)
     if marker is not None:
-        return {"data_source": f"syntetické tabulky (prefix {marker.prefix})"}
+        source = "syntetické tabulky"
+        if marker.prefix is not None:
+            source += f" (prefix {marker.prefix})"
+        return {"data_source": source}
     details = {"data_source": "tabulky parquet ověřené proti vazbě na otisky CSV"}
     for path in sorted(parquet.glob("*.parquet")):
         source = verified_table_provenance(path)

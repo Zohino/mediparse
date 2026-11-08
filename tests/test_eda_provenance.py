@@ -55,6 +55,17 @@ def test_synthetic_tables_are_named_without_mimic_hashes(tmp_path: Path) -> None
 
 
 @needs_git
+def test_synthetic_tables_without_prefix_have_plain_source(tmp_path: Path) -> None:
+    """Syntetika bez prefixu nenese v popisku vymyšlený prefix buněk."""
+    parquet = _parquet(tmp_path)
+    write_marker(parquet, SyntheticMarker(prefix=None, rows=1))
+
+    result = provenance(_root(tmp_path), parquet)
+
+    assert result["data_source"] == "syntetické tabulky"
+
+
+@needs_git
 def test_real_tables_carry_verified_csv_and_parquet_hashes(tmp_path: Path) -> None:
     """Adresář bez značky zveřejní ověřené otisky všech čtených tabulek bez configu."""
     directory = _parquet(tmp_path)

@@ -16,11 +16,11 @@ MARKER_NAME: Final = "synthetic.json"
 
 
 class SyntheticMarker(BaseModel):
-    """Prefix buněk a počet řádků syntetických tabulek."""
+    """Volitelný prefix buněk a počet řádků syntetických tabulek."""
 
     model_config = ConfigDict(frozen=True, extra="forbid")
 
-    prefix: str
+    prefix: str | None
     rows: int
 
 
