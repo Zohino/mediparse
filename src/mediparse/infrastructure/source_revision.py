@@ -19,22 +19,48 @@ if TYPE_CHECKING:
 COMMIT_VARIABLE: Final = "MEDIPARSE_COMMIT"
 DIRTY_VARIABLE: Final = "MEDIPARSE_DIRTY"
 DIRTY_VALUES: Final = {"true": True, "false": False}
+# Revize se čte i uprostřed pipeline, kdy předchozí pravidla už zapsala výstupy.
+# Nová kořenová složka s kódem musí do seznamu. Build kontejneru záměrně kontroluje
+# celý strom: image obsahuje i testy a manifest MIMIC a kontrola běží před pipeline.
+SOURCE_PATHS: Final[tuple[str, ...]] = (
+    "src",
+    "workflow",
+    "config",
+    "scripts",
+    "resources",
+    "R",
+    "analysis",
+    "eda",
+    "translation",
+    "pyproject.toml",
+    "pixi.lock",
+)
+RENDER_OUTPUT: Final = "eda/_freeze"
 
 
 @dataclass(frozen=True)
 class GitRevision:
-    """Commit a stav pracovního stromu repozitáře v adresáři ``root``."""
+    """Revize v ``root`` s výjimkami ``excluded`` zadanými od kořene repa."""
 
     root: Path
+    excluded: tuple[str, ...] = ()
 
     def read(self) -> SourceRevision:
-        """Přečte HEAD a zjistí, zda strom obsahuje změny včetně netrackovaných.
+        """Přečte HEAD a změny kódu mimo freeze a výjimky volajícího, i netrackované.
 
         Returns:
             Revize zdroje.
         """
         commit = self._git("rev-parse", "HEAD")
-        dirty = bool(self._git("status", "--porcelain"))
+        dirty = bool(
+            self._git(
+                "status",
+                "--porcelain",
+                "--",
+                *(f":/{path}" for path in SOURCE_PATHS),
+                *(f":!/{path}" for path in (RENDER_OUTPUT, *self.excluded)),
+            )
+        )
         return SourceRevision(commit=commit, dirty=dirty)
 
     def _git(self, *args: str) -> str:

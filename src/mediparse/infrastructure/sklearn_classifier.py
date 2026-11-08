@@ -138,7 +138,12 @@ class SkopsModelFile:
     path: Path
 
     def save(self, classifier: SklearnClassifier) -> None:
-        """Uloží pipeline klasifikátoru a nadřazený adresář založí."""
+        """Uloží pipeline klasifikátoru a nadřazený adresář založí.
+
+        Bajty souboru se mezi běhy mohou lišit: skops pojmenovává členy ZIPu
+        podle id() objektů a ukládá čas zápisu. Stejný model proto dokládají
+        stejné predikce včetně skóre, nikoli SHA-256 souboru.
+        """
         self.path.parent.mkdir(parents=True, exist_ok=True)
         sio.dump(classifier.pipeline, self.path)
 

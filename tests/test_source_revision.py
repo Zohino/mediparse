@@ -21,13 +21,18 @@ if TYPE_CHECKING:
 
 @pytest.fixture
 def repo(tmp_path: Path) -> Path:
-    """Čerstvé repo s jedním commitem a ignorovaným vzorem ``*.log``.
+    """Čerstvé repo s commitnutým kódem, zámkem a ignorovaným vzorem ``*.log``.
 
     Returns:
         Kořen repa.
     """
     root = tmp_path / "repo"
     init_repo(root, "a\n")
+    (root / "src").mkdir()
+    (root / "src/a.py").write_text("a\n", encoding="utf-8")
+    (root / "pixi.lock").write_text("zámek\n", encoding="utf-8")
+    git_output(root, "add", "src/a.py", "pixi.lock")
+    git_output(root, "commit", "-q", "-m", "source")
     return root
 
 
@@ -41,27 +46,104 @@ def test_clean_repo_returns_head(repo: Path) -> None:
 
 
 @needs_git
-def test_modified_tracked_file_is_dirty(repo: Path) -> None:
-    """Úprava trackovaného souboru je dirty."""
-    (repo / "tracked.txt").write_text("b\n", encoding="utf-8")
+@pytest.mark.parametrize("name", ["src/a.py", "pixi.lock"])
+def test_modified_tracked_file_is_dirty(repo: Path, name: str) -> None:
+    """Úprava trackovaného kódu nebo zámku je dirty."""
+    (repo / name).write_text("b\n", encoding="utf-8")
 
     assert GitRevision(repo).read().dirty is True
 
 
 @needs_git
-def test_untracked_file_is_dirty(repo: Path) -> None:
-    """Nový netrackovaný soubor je dirty."""
-    (repo / "new.py").write_text("x\n", encoding="utf-8")
+@pytest.mark.parametrize(
+    "name",
+    [
+        "src/new.py",
+        "workflow/new.smk",
+        "config/x.json",
+        "scripts/new.sh",
+        "resources/synthetic/new.txt",
+        "R/new.R",
+        "analysis/new.R",
+        "eda/1-x.qmd",
+        "translation/new.txt",
+        "pyproject.toml",
+    ],
+)
+def test_untracked_source_file_is_dirty(repo: Path, name: str) -> None:
+    """Nový netrackovaný soubor v cestě s kódem je dirty."""
+    path = repo / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("x\n", encoding="utf-8")
 
     assert GitRevision(repo).read().dirty is True
+
+
+@needs_git
+@pytest.mark.parametrize(
+    "name",
+    [
+        "results/cohort/manifest.json",
+        "eda/_freeze/x/y.json",
+        "notebooks/n.py",
+        "docs/src/z",
+        "tests/test_x.py",
+    ],
+)
+def test_untracked_file_outside_source_is_not_dirty(repo: Path, name: str) -> None:
+    """Výstupy a cesty mimo seznam nemění příznak rozpracovaného kódu."""
+    path = repo / name
+    path.parent.mkdir(parents=True)
+    path.write_text("x\n", encoding="utf-8")
+
+    assert GitRevision(repo).read().dirty is False
+
+
+@needs_git
+@pytest.mark.parametrize(
+    ("name", "dirty"),
+    [("src/a.py", True), ("eda/_freeze/x/y.json", False)],
+)
+def test_source_paths_are_rooted_when_read_from_subdirectory(
+    repo: Path, name: str, *, dirty: bool
+) -> None:
+    """Čtení z podadresáře rozpozná kód a vyjme freeze v kořeni repa."""
+    subdirectory = repo / "nested"
+    subdirectory.mkdir()
+    path = repo / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("b\n", encoding="utf-8")
+
+    assert GitRevision(subdirectory).read().dirty is dirty
 
 
 @needs_git
 def test_ignored_file_is_not_dirty(repo: Path) -> None:
     """Gitignorovaný soubor dirty nezmění."""
-    (repo / "run.log").write_text("x\n", encoding="utf-8")
+    (repo / "src/run.log").write_text("x\n", encoding="utf-8")
 
     assert GitRevision(repo).read().dirty is False
+
+
+@needs_git
+@pytest.mark.parametrize(
+    ("name", "excluded", "dirty"),
+    [
+        ("resources/synthetic/x", ("resources/synthetic",), False),
+        ("src/a.py", ("resources/synthetic",), True),
+        ("resources/synthetic/x", (), True),
+        ("eda/_freeze/x/y.json", ("resources/synthetic",), False),
+    ],
+)
+def test_caller_exclusions_preserve_source_and_render_rules(
+    repo: Path, name: str, excluded: tuple[str, ...], *, dirty: bool
+) -> None:
+    """Výjimka korpusu nevyřadí zdrojový kód a zachová výjimku freeze."""
+    path = repo / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("změna\n", encoding="utf-8")
+
+    assert GitRevision(repo, excluded=excluded).read().dirty is dirty
 
 
 @needs_git

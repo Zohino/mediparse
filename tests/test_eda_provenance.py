@@ -24,13 +24,14 @@ if TYPE_CHECKING:
 
 SHA: Final = "b" * 40
 CSV_SHA: Final = hashlib.sha256(b"synthetic CSV").hexdigest()
-ENVIRONMENT: Final = {"MEDIPARSE_COMMIT": SHA, "MEDIPARSE_DIRTY": "true"}
 
 
 def _root(tmp_path: Path) -> Path:
     root = tmp_path / "root"
-    root.mkdir()
+    init_repo(root, "a\n")
     (root / "pixi.lock").write_text("zámek\n", encoding="utf-8")
+    git_output(root, "add", "pixi.lock")
+    git_output(root, "commit", "-q", "-m", "lock")
     return root
 
 
@@ -40,18 +41,20 @@ def _parquet(tmp_path: Path) -> Path:
     return parquet
 
 
+@needs_git
 def test_synthetic_tables_are_named_without_mimic_hashes(tmp_path: Path) -> None:
     """Adresář se synthetic.json je zdroj syntetický a otisky MIMIC v provenance nejsou."""
     parquet = _parquet(tmp_path)
     write_marker(parquet, SyntheticMarker(prefix="canary", rows=12))
 
-    result = provenance(ENVIRONMENT, _root(tmp_path), parquet)
+    result = provenance(_root(tmp_path), parquet)
 
     assert result["data_source"] == "syntetické tabulky (prefix canary)"
     assert CSV_SHA not in result.values()
     assert not [key for key in result if key.startswith("csv_sha256")]
 
 
+@needs_git
 def test_real_tables_carry_verified_csv_and_parquet_hashes(tmp_path: Path) -> None:
     """Adresář bez značky zveřejní ověřené otisky všech čtených tabulek bez configu."""
     directory = _parquet(tmp_path)
@@ -71,7 +74,7 @@ def test_real_tables_carry_verified_csv_and_parquet_hashes(tmp_path: Path) -> No
         )
     (directory / "unrelated.json").write_text("{}", encoding="utf-8")
 
-    result = provenance(ENVIRONMENT, _root(tmp_path), directory)
+    result = provenance(_root(tmp_path), directory)
 
     assert result["data_source"] == "tabulky parquet ověřené proti vazbě na otisky CSV"
     assert [
@@ -96,6 +99,7 @@ def test_real_tables_carry_verified_csv_and_parquet_hashes(tmp_path: Path) -> No
     }
 
 
+@needs_git
 def test_missing_table_provenance_is_refused(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
 ) -> None:
@@ -117,15 +121,13 @@ def test_missing_table_provenance_is_refused(
             str(out),
         ],
     )
-    for name, value in ENVIRONMENT.items():
-        monkeypatch.setenv(name, value)
-
     assert eda_provenance.main() is ExitCode.REFUSED
     assert not out.exists()
     assert "převeďte tabulku znovu" in caplog.text
     assert "synthetic private content" not in caplog.text
 
 
+@needs_git
 def test_changed_table_provenance_is_refused(tmp_path: Path) -> None:
     """EDA odmítne změněný parquet stejnou kontrolou jako kohorta."""
     root = _root(tmp_path)
@@ -137,36 +139,52 @@ def test_changed_table_provenance_is_refused(tmp_path: Path) -> None:
     out = tmp_path / "provenance.json"
 
     with pytest.raises(InvalidInputError, match="převeďte tabulku znovu"):
-        eda_provenance.run(root, directory, out, ENVIRONMENT)
+        eda_provenance.run(root, directory, out)
     assert not out.exists()
 
 
-def test_commit_and_dirty_come_from_environment(tmp_path: Path) -> None:
-    """Proměnné MEDIPARSE_COMMIT a MEDIPARSE_DIRTY mají přednost před gitem."""
-    result = provenance(ENVIRONMENT, _root(tmp_path), _parquet(tmp_path))
+@needs_git
+def test_environment_does_not_override_git_revision(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Cizí revize v prostředí nezmění HEAD ani dirty čistého repozitáře EDA."""
+    root = _root(tmp_path)
+    monkeypatch.setenv("MEDIPARSE_COMMIT", SHA)
+    monkeypatch.setenv("MEDIPARSE_DIRTY", "true")
 
-    assert result["commit"] == SHA
-    assert result["dirty"] == "true"
+    result = provenance(root, _parquet(tmp_path))
+
+    assert result["commit"] == git_output(root, "rev-parse", "HEAD")
+    assert result["dirty"] == "false"
 
 
 @needs_git
-def test_commit_and_dirty_come_from_git_without_environment(tmp_path: Path) -> None:
-    """Bez proměnných se revize čte z gitu v kořeni."""
-    root = tmp_path / "repo"
-    init_repo(root, "a\n")
-    (root / "pixi.lock").write_text("zámek\n", encoding="utf-8")
+@pytest.mark.parametrize(
+    ("name", "dirty"),
+    [
+        ("pixi.lock", "true"),
+        ("results/cohort/manifest.json", "false"),
+    ],
+)
+def test_commit_and_dirty_come_from_git(tmp_path: Path, name: str, dirty: str) -> None:
+    """Revize z kořene gitu rozliší změnu zámku od výstupů renderu."""
+    root = _root(tmp_path)
+    path = root / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("změna\n", encoding="utf-8")
 
-    result = provenance({}, root, _parquet(tmp_path))
+    result = provenance(root, _parquet(tmp_path))
 
     assert result["commit"] == git_output(root, "rev-parse", "HEAD")
-    assert result["dirty"] == "true"
+    assert result["dirty"] == dirty
 
 
+@needs_git
 def test_lock_hash_matches_file(tmp_path: Path) -> None:
     """Otisk pixi.lock je sha256 souboru."""
     root = _root(tmp_path)
 
-    result = provenance(ENVIRONMENT, root, _parquet(tmp_path))
+    result = provenance(root, _parquet(tmp_path))
 
     assert (
         result["pixi_lock_sha256"]
@@ -174,29 +192,32 @@ def test_lock_hash_matches_file(tmp_path: Path) -> None:
     )
 
 
+@needs_git
 def test_versions_of_python_and_duckdb(tmp_path: Path) -> None:
     """Provenance nese verzi Pythonu a duckdb."""
-    result = provenance(ENVIRONMENT, _root(tmp_path), _parquet(tmp_path))
+    result = provenance(_root(tmp_path), _parquet(tmp_path))
 
     assert result["python"] == platform.python_version()
     assert result["duckdb"] == version("duckdb")
 
 
+@needs_git
 def test_run_writes_ordered_provenance(tmp_path: Path) -> None:
     """Nástroj zapíše pořadí položek a nezávisle ověřené údaje renderu."""
     root = _root(tmp_path)
     parquet = _parquet(tmp_path)
     write_marker(parquet, SyntheticMarker(prefix="canary", rows=12))
     out = tmp_path / "output" / "provenance.json"
-    eda_provenance.run(root, parquet, out, ENVIRONMENT)
+    eda_provenance.run(root, parquet, out)
     actual = json.loads(out.read_text(encoding="utf-8"))
-    assert list(actual.items()) == list(provenance(ENVIRONMENT, root, parquet).items())
-    assert actual["commit"] == SHA
-    assert actual["dirty"] == "true"
+    assert list(actual.items()) == list(provenance(root, parquet).items())
+    assert actual["commit"] == git_output(root, "rev-parse", "HEAD")
+    assert actual["dirty"] == "false"
     assert actual["pixi_lock_sha256"] == hashlib.sha256("zámek\n".encode()).hexdigest()
     assert actual["data_source"] == "syntetické tabulky (prefix canary)"
 
 
+@needs_git
 @pytest.mark.parametrize("valid", [True, False])
 def test_main_exit_codes(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, valid: bool
@@ -220,8 +241,6 @@ def test_main_exit_codes(
             str(out),
         ],
     )
-    for name, value in ENVIRONMENT.items():
-        monkeypatch.setenv(name, value)
     assert eda_provenance.main() is (ExitCode.OK if valid else ExitCode.REFUSED)
     assert out.exists() is valid
 
@@ -240,7 +259,7 @@ def test_run_preserves_json_bytes(
     }
     monkeypatch.setattr(eda_provenance, "provenance", lambda *_: details)
     out = tmp_path / "output" / "provenance.json"
-    eda_provenance.run(tmp_path, tmp_path, out, {})
+    eda_provenance.run(tmp_path, tmp_path, out)
     assert (
         out.read_bytes()
         == (

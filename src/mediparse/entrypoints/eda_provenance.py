@@ -3,38 +3,33 @@
 from __future__ import annotations
 
 import argparse
-import os
 from pathlib import Path
-from typing import TYPE_CHECKING, Final
+from typing import Final
 
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import StringMapping, write_model
 from mediparse.infrastructure.package_versions import installed_versions
-from mediparse.infrastructure.source_revision import revision_source
+from mediparse.infrastructure.source_revision import GitRevision
 from mediparse.infrastructure.synthetic_marker import read_marker
 from mediparse.infrastructure.table_provenance import verified_table_provenance
-
-if TYPE_CHECKING:
-    from collections.abc import Mapping
 
 LOCK_NAME: Final = "pixi.lock"
 PACKAGES: Final = ("python", "duckdb")
 
 
-def provenance(environ: Mapping[str, str], root: Path, parquet: Path) -> dict[str, str]:
+def provenance(root: Path, parquet: Path) -> dict[str, str]:
     """Složí provenance renderu: revizi zdroje, otisk zámku, zdroj dat a verze.
 
     Args:
-        environ: Proměnné prostředí; MEDIPARSE_COMMIT a MEDIPARSE_DIRTY mají přednost před gitem.
         root: Kořen repozitáře s ``pixi.lock``.
         parquet: Adresář tabulek parquet, ze kterých dokument čte.
 
     Returns:
         Popisek a hodnota ve stabilním pořadí pro tabulku přílohy.
     """
-    revision = revision_source(environ, root)()
+    revision = GitRevision(root).read()
     return {
         "commit": revision.commit,
         "dirty": str(revision.dirty).lower(),
@@ -56,9 +51,9 @@ def _data_source(parquet: Path) -> dict[str, str]:
     return details
 
 
-def run(root: Path, parquet: Path, out: Path, environ: Mapping[str, str]) -> None:
+def run(root: Path, parquet: Path, out: Path) -> None:
     """Zapíše provenance renderu do souboru pro nezávislé čtení v R."""
-    write_model(out, StringMapping(provenance(environ, root, parquet)))
+    write_model(out, StringMapping(provenance(root, parquet)))
 
 
 def main() -> ExitCode:
@@ -77,5 +72,5 @@ def _run_cli() -> ExitCode:
     for name in ("root", "parquet", "out"):
         parser.add_argument(f"--{name}", type=Path, required=True)
     args = parser.parse_args()
-    run(args.root, args.parquet, args.out, os.environ)
+    run(args.root, args.parquet, args.out)
     return ExitCode.OK
