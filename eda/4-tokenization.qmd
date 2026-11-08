@@ -139,7 +139,7 @@ Délky se definují takto:
 - *délka pro překlad* je počet tokenů zdroje bez speciálních tokenů po ořezu okrajových mezer, stejně jako v `_fits` přípravy překladu. Zpráva se vejde, když `okno − (s + režie) ≥ poměr · s`. Režie chat šablony se změřila jednou na pevné neklinické větě a je `r overhead` tokenů, poměr dělení je `r format(settings$split_ratio, decimal.mark = ",")` a okno `r format_number(settings$window)`, takže se vejde zpráva do `r format(floor(limit), decimal.mark = ",")` tokenů zdroje,
 - *spodní mez částí překladu* je `ceil(s / limit)` s `limit = (okno − režie) / (1 + poměr)`, vychází na `r format(round(limit, 1), decimal.mark = ",")` tokenu. Prázdná zpráva má nula částí, takže součet částí nepočítá prázdné zprávy.
 
-Spodní mez se ověřuje přesným dělením (`note_parts.split` s `_fits`) na deterministickém vzorku `r format_number(prompt$sample_limit)` zpráv na tabulku, vybraném podle `hash(note_id)`. Dělení celého korpusu by trvalo hodiny. Verdikty na konci sešitu se řídí dvěma pravidly. Encoder vystačí s ořezem, když se do okna vejde aspoň `r share_text(ENCODER_FULL_SHARE)` propouštěcích zpráv, protože ořez pak zasáhne nejvýš `r share_text(1 - ENCODER_FULL_SHARE)` zpráv; jinak se rozhoduje podle mediánu délky. Čeština snižuje podíl v okně, když je anglický podíl větší než odhadovaný český o víc než `r percent_text(CZECH_TOLERANCE, 1)` procentního bodu.
+Spodní mez se ověřuje přesným dělením maskovaného textu (`prepare._parts`) na deterministickém vzorku `r format_number(prompt$sample_limit)` zpráv na tabulku, vybraném podle `hash(note_id)`. Dělení celého korpusu by trvalo hodiny. Verdikty na konci sešitu se řídí dvěma pravidly. Encoder vystačí s ořezem, když se do okna vejde aspoň `r share_text(ENCODER_FULL_SHARE)` propouštěcích zpráv, protože ořez pak zasáhne nejvýš `r share_text(1 - ENCODER_FULL_SHARE)` zpráv; jinak se rozhoduje podle mediánu délky. Čeština snižuje podíl v okně, když je anglický podíl větší než odhadovaný český o víc než `r percent_text(CZECH_TOLERANCE, 1)` procentního bodu.
 
 Zprávy se v tokenech uvádějí v logaritmických koších o šířce 0,1 dekády a percentily se počítají stejně jako v sešitu o délce (`quantile_disc`).
 
@@ -239,7 +239,7 @@ export_table(
 )
 ```
 
-*Zdroj:* `note_parts.split` s `prepare._fits` nad vzorkem vybraným podle `hash(note_id)`.
+*Zdroj:* `prepare._parts` včetně maskování nad vzorkem vybraným podle `hash(note_id)`.
 
 ## Čeština jako odhad {#sec-cestina}
 
@@ -285,6 +285,6 @@ Dokument přepočítal délky zpráv na tokeny tří tokenizérů. Pro další p
 
 # Omezení {#sec-omezeni}
 
-Počty částí encoderů předpokládají dělení bez překryvu; politika chunkování ještě není rozhodnutá, takže jde o odhad. Spodní mez částí překladu podhodnocuje skutečný počet, protože dělení probíhá po blocích; rozsah rozdílu měří vzorek, který pokrývá `r format_number(prompt$sample_limit)` zpráv na tabulku, nikoli celý korpus. Součet částí nepočítá prázdné zprávy. Odhad pro češtinu vychází z `r pair_count` syntetických zpráv a z jediného měřítka pro všechny zprávy, i když poměr CS/EN se mezi zprávami liší (95. percentil je v @tbl-cestina-pomer); syntetika navíc nemusí mít stejný slovník jako klinické zprávy. U mDeBERTa je okno `r encoder_capacity` délka předtrénování, ne technický limit. Délka v tokenech se měří na textu před maskováním značek `___`, který používá i příprava překladu pro dělení. Metriky tokenů jsou metriky textu, a proto se zveřejňují přesně, bez potlačení malých počtů. Z textu zpráv se nezveřejňuje žádný řetězec ani kontext.
+Počty částí encoderů předpokládají dělení bez překryvu; politika chunkování ještě není rozhodnutá, takže jde o odhad. Spodní mez částí překladu podhodnocuje skutečný počet, protože příprava dělí po blocích a navíc maskuje značky, které mohou přidat tokeny; rozsah rozdílu ukazují sloupce vzorku, který pokrývá `r format_number(prompt$sample_limit)` zpráv na tabulku, nikoli celý korpus. Součet částí nepočítá prázdné zprávy. Odhad pro češtinu vychází z `r pair_count` syntetických zpráv a z jediného měřítka pro všechny zprávy, i když poměr CS/EN se mezi zprávami liší (95. percentil je v @tbl-cestina-pomer); syntetika navíc nemusí mít stejný slovník jako klinické zprávy. U mDeBERTa je okno `r encoder_capacity` délka předtrénování, ne technický limit. Délka v tokenech se měří na nemaskovaném textu, který vidí encodery. Příprava překladu nejprve nahradí značky `___` číslovanými `[[n]]` a pak dělí maskovaný text; spodní mez nad nemaskovanými délkami proto podhodnocuje počet částí i kvůli maskování. Metriky tokenů jsou metriky textu, a proto se zveřejňují přesně, bez potlačení malých počtů. Z textu zpráv se nezveřejňuje žádný řetězec ani kontext.
 
 {{< include _partials/appendix.qmd >}}
