@@ -133,8 +133,9 @@ def test_read_unknown_language_is_invalid_input(tmp_path: Path) -> None:
         ParquetNoteTable(path).read()
 
     assert value not in str(raised.value)
-    assert str(path) in str(raised.value)
-    assert "language" in str(raised.value)
+    assert str(raised.value) == (
+        f"Soubor {path} obsahuje neznámý jazyk ve sloupci language."
+    )
     assert raised.value.__cause__ is None
     assert raised.value.__suppress_context__ is True
 

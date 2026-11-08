@@ -94,7 +94,8 @@ def test_parse_diagnosis_names_path_and_column_without_value(tmp_path: Path) -> 
         parse_diagnosis(path, value)
 
     assert value not in str(raised.value)
-    assert str(path) in str(raised.value)
-    assert "diagnosis" in str(raised.value)
+    assert str(raised.value) == (
+        f"Soubor {path} obsahuje neznámou diagnózu ve sloupci diagnosis."
+    )
     assert raised.value.__cause__ is None
     assert raised.value.__suppress_context__ is True
