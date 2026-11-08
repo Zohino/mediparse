@@ -6,17 +6,6 @@ eda_stage() {
     (cd "$root" && tar --create --exclude=eda/_freeze --exclude=eda/.quarto eda R/thesis) | tar --extract --directory "$work"
 }
 
-eda_revision() {
-    local root=$1
-    MEDIPARSE_COMMIT=$(git -C "$root" rev-parse HEAD)
-    if [[ -n "$(git -C "$root" status --porcelain)" ]]; then
-        MEDIPARSE_DIRTY=true
-    else
-        MEDIPARSE_DIRTY=false
-    fi
-    export MEDIPARSE_COMMIT MEDIPARSE_DIRTY
-}
-
 eda_render() {
     local work=$1 number=$2 document stem
     if [[ -n "$number" ]]; then

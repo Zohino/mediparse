@@ -14,7 +14,6 @@ source "$(dirname "${BASH_SOURCE[0]}")/eda-canary.sh"
 eda_stage "$root" "$work"
 mediparse-eda-synthetic-tables --manifest "$root/results/mimic/manifest.json" --candidates "$root/config/diagnosis_candidates.json" --corpus-rule "$root/config/input_corpus.json" --lexicon "$root/config/section_headers.json" --plans "$root/resources/synthetic/plans.jsonl" --corpus "$root/resources/synthetic" --out "$work/tables" --prefix "$prefix"
 
-eda_revision "$root"
 export MEDIPARSE_PARQUET="$work/tables"
 export MEDIPARSE_EDA_CACHE="$work/eda-cache"
 mediparse-eda-provenance --root "$root" --parquet "$MEDIPARSE_PARQUET" --out "$work/provenance.json"

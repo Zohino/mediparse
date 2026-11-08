@@ -15,8 +15,13 @@ sys.exit(blocked_reason(os.environ, load_data_access_rules()))
     exit 1
 }
 root=${PIXI_PROJECT_ROOT:-$(git rev-parse --show-toplevel)}
-[[ -z "$(git -C "$root" status --porcelain)" ]] || {
-    echo "Repo má necommitnuté změny; provenance renderu by ukazovala na jiný kód." >&2
+python -I -c '
+import sys
+from pathlib import Path
+from mediparse.infrastructure.source_revision import GitRevision
+sys.exit(GitRevision(Path(sys.argv[1])).read().dirty)
+' "$root" || {
+    echo "Repo má necommitnutý kód; provenance renderu by ukazovala na jiný kód." >&2
     exit 1
 }
 
@@ -37,7 +42,6 @@ work=$(mktemp -d -p "$(dirname "$MEDIPARSE_PARQUET")")
 trap 'rm -rf "$work"' EXIT
 
 eda_stage "$root" "$work"
-eda_revision "$root"
 mediparse-eda-provenance --root "$root" --parquet "$MEDIPARSE_PARQUET" --out "$work/provenance.json"
 export MEDIPARSE_EDA_PROVENANCE="$work/provenance.json"
 eda_render "$work" "$number"
