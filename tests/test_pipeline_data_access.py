@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from dataclasses import dataclass
 from functools import partial
 from typing import TYPE_CHECKING, Final
 
@@ -26,6 +27,7 @@ from tests.support import (
     REPOSITORY_SPLIT_CONFIG,
     REPOSITORY_TRAINING_CONFIG,
     fixed_revision,
+    mark_synthetic,
 )
 
 if TYPE_CHECKING:
@@ -33,20 +35,9 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 BLOCKED: Final = {"CODEX_THREAD_ID": "x"}
-INPUTS: Final = {
-    "mimic_parquet": ("mimic/parquet/table.csv.gz",),
-    "cohort": (
-        "mimic/parquet/discharge.parquet",
-        "mimic/parquet/diagnoses_icd.parquet",
-    ),
-    "split_materialization": ("cohort.parquet",),
-    "model_training": ("cohort.parquet", "splits.parquet"),
-    "model_evaluation": ("predictions.parquet", "cohort.parquet", "splits.parquet"),
-    "model_inference": ("cohort.parquet", "model.skops", "predictions.parquet"),
-}
 
 
-def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, Callable[[], ExitCode]]:
+def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode]]:
     tables = root / "mimic/parquet"
     notes = root / "cohort.parquet"
     split = root / "splits.parquet"
@@ -118,37 +109,72 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, Callable[[], Exi
     }
 
 
-@pytest.mark.parametrize("entrypoint", INPUTS)
+def _prepare_inventory(root: Path, inputs: Mapping[str, Path]) -> None:
+    table = inputs["table"]
+    (root / "inventory.json").write_text(
+        json.dumps({
+            "file": table.name,
+            "sha256": hashlib.sha256(b"not parquet").hexdigest(),
+            "bytes": len(b"not parquet"),
+            "records": 1,
+            "columns": ["a"],
+        }),
+        encoding="utf-8",
+    )
+
+
+def _prepare_sources(_root: Path, inputs: Mapping[str, Path]) -> None:
+    for path in inputs.values():
+        write_table_provenance(
+            path,
+            source=f"https://mediparse.invalid/synthetic/{path.stem}",
+            source_sha256=hashlib.sha256(b"not parquet").hexdigest(),
+        )
+
+
+@dataclass(frozen=True)
+class _GuardCase:
+    inputs: tuple[str, ...]
+    prepare: Callable[[Path, Mapping[str, Path]], None] | None = None
+
+
+GUARD_CASES: Final = {
+    "mimic_parquet": _GuardCase(("table",), _prepare_inventory),
+    "cohort": _GuardCase(("discharge", "diagnoses"), _prepare_sources),
+    "split_materialization": _GuardCase(("cohort",)),
+    "model_training": _GuardCase(("cohort", "split")),
+    "model_evaluation": _GuardCase(("predictions", "cohort", "split")),
+    "model_inference": _GuardCase(("cohort", "model", "predictions")),
+}
+
+
+@pytest.mark.parametrize(
+    ("entrypoint", "unmarked"),
+    [(name, item) for name, case in GUARD_CASES.items() for item in case.inputs],
+)
 def test_entrypoint_refuses_before_opening_input(
-    tmp_path: Path, caplog: pytest.LogCaptureFixture, entrypoint: str
+    tmp_path: Path,
+    caplog: pytest.LogCaptureFixture,
+    entrypoint: str,
+    unmarked: str,
 ) -> None:
-    """Stráž má přednost před rozbitým vstupem a nevytvoří žádný výstup."""
-    for relative in INPUTS[entrypoint]:
-        path = tmp_path / relative
+    """Každý datový vstup má vlastní stráž před otevřením a bez nového výstupu."""
+    step = _steps(tmp_path, BLOCKED)[entrypoint]
+    case = GUARD_CASES[entrypoint]
+    inputs = {name: tmp_path / name / step.keywords[name].name for name in case.inputs}
+    for name, path in inputs.items():
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(b"not parquet")
-        if entrypoint == "cohort":
-            write_table_provenance(
-                path,
-                source=f"https://mediparse.invalid/synthetic/{path.stem}",
-                source_sha256=hashlib.sha256(b"not parquet").hexdigest(),
-            )
-    if entrypoint == "mimic_parquet":
-        (tmp_path / "inventory.json").write_text(
-            json.dumps({
-                "file": "table.csv.gz",
-                "sha256": hashlib.sha256(b"not parquet").hexdigest(),
-                "bytes": len(b"not parquet"),
-                "records": 1,
-                "columns": ["a"],
-            }),
-            encoding="utf-8",
-        )
+        if name != unmarked:
+            mark_synthetic(path.parent)
+    if case.prepare is not None:
+        case.prepare(tmp_path, inputs)
     before = set(tmp_path.rglob("*"))
 
-    assert _steps(tmp_path, BLOCKED)[entrypoint]() is ExitCode.REFUSED
+    assert step(**inputs) is ExitCode.REFUSED
 
     assert "Agent Codex nesmí číst data MIMIC" in caplog.text
+    assert str(inputs[unmarked].parent) in caplog.text
     assert set(tmp_path.rglob("*")) == before
 
 
@@ -159,7 +185,7 @@ def test_native_synthetic_pipeline_under_codex(
 ) -> None:
     """Značky dovolí celou cestu smoketestu; odebrání značky artefaktů zastaví split."""
     steps = _steps(tmp_path, BLOCKED)
-    for name in INPUTS:
+    for name in GUARD_CASES:
         if name != "mimic_parquet":
             assert steps[name]() is ExitCode.OK, name
 
