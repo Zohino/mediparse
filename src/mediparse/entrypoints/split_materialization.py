@@ -14,7 +14,7 @@ from typing import TYPE_CHECKING
 from mediparse.application.split_materialization import SplitMaterialization
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.data_access_guard import check_tables_access
+from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.split_config import load_split_config
@@ -47,7 +47,7 @@ def run(
         OK po zápisu splitu; REFUSED pro chybějící nebo neplatnou tabulku
         a config a pro méně pacientů, než je foldů.
     """
-    check_tables_access(environ, (cohort,))
+    check_inputs_access(environ, (cohort,))
     step = SplitMaterialization(
         table=ParquetNoteTable(cohort),
         splitter=StratifiedGroupFolds(),

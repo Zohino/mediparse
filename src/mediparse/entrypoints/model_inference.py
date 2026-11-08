@@ -15,7 +15,7 @@ from mediparse.domain.costs import InferenceCosts, LatencyPlan
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.training_input import training_input
-from mediparse.infrastructure.data_access_guard import check_tables_access
+from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.machine_hardware import machine_hardware
 from mediparse.infrastructure.nvml_gpu import gpu_monitor
@@ -84,7 +84,7 @@ def run(
         OK po zápisu predikcí a nákladů; REFUSED při neplatném vstupu, nesouladu
         predikcí uloženého modelu s tréninkem, nezjistitelném HW nebo selhání měření GPU.
     """
-    check_tables_access(environ, (cohort, model, predictions))
+    check_inputs_access(environ, (cohort, model, predictions))
     table, _ = training_input(
         cohort=cohort, training=load_training_config(config), lexicon=lexicon
     )

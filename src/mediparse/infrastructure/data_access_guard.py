@@ -13,7 +13,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 
-def check_tables_access(environ: Mapping[str, str], tables: Iterable[Path]) -> None:
+def check_inputs_access(environ: Mapping[str, str], inputs: Iterable[Path]) -> None:
     """Ověří každý jedinečný adresář vstupů v pořadí jejich předání.
 
     Raises:
@@ -21,7 +21,7 @@ def check_tables_access(environ: Mapping[str, str], tables: Iterable[Path]) -> N
         InvalidInputError: Značka syntetiky nebo pravidla přístupu jsou neplatná.
     """
     rules = load_data_access_rules()
-    for directory in dict.fromkeys(table.parent for table in tables):
+    for directory in dict.fromkeys(path.parent for path in inputs):
         check_data_access(
             environ,
             rules,

@@ -16,7 +16,7 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.csv_parquet import CsvParquetConversion
-from mediparse.infrastructure.data_access_guard import check_tables_access
+from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.mimic_inventory import InventoryFile
 from mediparse.infrastructure.table_provenance import write_table_provenance
@@ -51,7 +51,7 @@ def run(
     Raises:
         InvalidInputError: Rozdíl v otisku CSV dekorátor přeloží na REFUSED.
     """
-    check_tables_access(environ, (table,))
+    check_inputs_access(environ, (table,))
     inventory_file = InventoryFile(inventory)
     shape = MimicParquetConversion(
         inventory_file, CsvParquetConversion(table, parquet)

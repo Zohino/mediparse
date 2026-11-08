@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING, Final
 import duckdb
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.data_access_guard import check_tables_access
+from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.duckdb_parquet import (
     SPILL_DIRECTORY,
     create_parquet_view,
@@ -57,7 +57,7 @@ class EdaDatabase:
         # Adresář a parquet se ověřují před stráží, protože jejich hlášky drží testy
         # dokumentů; stráž čte jen značku, ne data, takže pořadí bezpečnost nesnižuje.
         views = self._views()
-        check_tables_access(self.environ, views.values())
+        check_inputs_access(self.environ, views.values())
         return views
 
     def settings(self) -> DuckDbSettings:

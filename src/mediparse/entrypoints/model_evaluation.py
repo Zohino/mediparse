@@ -14,7 +14,7 @@ from typing import TYPE_CHECKING
 from mediparse.application.model_evaluation import ModelEvaluation
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure.data_access_guard import check_tables_access
+from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.metrics_table import ParquetMetricsTable
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
@@ -60,7 +60,7 @@ def run(
     Returns:
         OK po zápisu metrik; REFUSED pro chybějící či neplatné vstupy a neúplné predikce.
     """
-    check_tables_access(environ, (predictions, cohort, split))
+    check_inputs_access(environ, (predictions, cohort, split))
     step = ModelEvaluation(
         predictions=ParquetPredictionTable(predictions),
         table=ParquetNoteTable(cohort),

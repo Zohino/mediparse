@@ -8,7 +8,7 @@ import pytest
 
 from mediparse.domain.data_access import DataAccessError
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.data_access_guard import check_tables_access
+from mediparse.infrastructure.data_access_guard import check_inputs_access
 from tests.support import mark_synthetic
 
 if TYPE_CHECKING:
@@ -21,7 +21,7 @@ def test_guard_checks_every_input_directory(tmp_path: Path) -> None:
     mark_synthetic(first)
 
     with pytest.raises(DataAccessError) as refusal:
-        check_tables_access(
+        check_inputs_access(
             {"CODEX_THREAD_ID": "x"}, [first / "a.parquet", second / "b.parquet"]
         )
 
@@ -35,7 +35,7 @@ def test_guard_allows_marked_directories(tmp_path: Path) -> None:
     for directory in (first, second):
         mark_synthetic(directory)
 
-    check_tables_access(
+    check_inputs_access(
         {"CODEX_THREAD_ID": "x"}, [first / "a.parquet", second / "b.parquet"]
     )
 
@@ -44,7 +44,7 @@ def test_guard_allows_unmarked_directories_without_blocking_variable(
     tmp_path: Path,
 ) -> None:
     """Prázdné prostředí dovolí vstupy bez značky."""
-    check_tables_access(
+    check_inputs_access(
         {}, [tmp_path / "first/a.parquet", tmp_path / "second/b.parquet"]
     )
 
@@ -54,4 +54,4 @@ def test_guard_rejects_invalid_marker_without_blocking_variable(tmp_path: Path) 
     (tmp_path / "synthetic.json").write_text("{}", encoding="utf-8")
 
     with pytest.raises(InvalidInputError, match=r"synthetic\.json"):
-        check_tables_access({}, [tmp_path / "a.parquet"])
+        check_inputs_access({}, [tmp_path / "a.parquet"])
