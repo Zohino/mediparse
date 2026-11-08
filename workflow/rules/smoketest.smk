@@ -69,8 +69,10 @@ use rule evaluate_model as evaluate_smoketest_model with:
         predictions=SMOKETEST / "predictions.parquet",
         cohort=SMOKETEST / "cohort.parquet",
         split=SMOKETEST / "splits.parquet",
+        training_manifest=SMOKETEST / "run_manifest.json",
     output:
-        SMOKETEST / "metrics.parquet",
+        metrics=SMOKETEST / "metrics.parquet",
+        manifest=SMOKETEST / "evaluation_manifest.json",
     log:
         SMOKETEST_LOGS / "evaluate_smoketest_model.log",
 

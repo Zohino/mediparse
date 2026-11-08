@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from functools import partial
 from typing import TYPE_CHECKING, Final
 
@@ -19,6 +19,7 @@ from mediparse.entrypoints import (
     split_materialization,
 )
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.table_provenance import write_table_provenance
 from tests.support import (
     REPOSITORY_DIAGNOSIS_CANDIDATES,
@@ -91,6 +92,9 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
             cohort=notes,
             split=split,
             metrics=root / "metrics.parquet",
+            training_manifest=root / "run_manifest.json",
+            manifest=root / "evaluation_manifest.json",
+            revision=fixed_revision,
             environ=environ,
         ),
         "model_inference": partial(
@@ -192,3 +196,36 @@ def test_native_synthetic_pipeline_under_codex(
     (tmp_path / "synthetic.json").unlink()
     assert steps["split_materialization"]() is ExitCode.REFUSED
     assert "Agent Codex nesmí číst data MIMIC" in caplog.text
+
+
+@pytest.mark.usefixtures("synthetic_tables")
+def test_changed_predictions_after_training_are_refused(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
+    """A1: změna rozhodnutí a skóre při stejných klíčích odmítne celý krok."""
+    steps = _steps(tmp_path, BLOCKED)
+    for name in (
+        "cohort",
+        "split_materialization",
+        "model_training",
+        "model_evaluation",
+    ):
+        assert steps[name]() is ExitCode.OK
+    table = ParquetPredictionTable(tmp_path / "predictions.parquet")
+    first, *rest = table.read()
+    changed = tmp_path / "changed_predictions.parquet"
+    ParquetPredictionTable(changed).write([
+        replace(first, predicted=not first.predicted, score=-first.score),
+        *rest,
+    ])
+    metrics = tmp_path / "changed" / "metrics.parquet"
+    manifest = tmp_path / "changed" / "evaluation_manifest.json"
+
+    code = steps["model_evaluation"](
+        predictions=changed, metrics=metrics, manifest=manifest
+    )
+
+    assert code is ExitCode.REFUSED
+    assert "predictions_sha256" in caplog.text
+    assert not metrics.exists()
+    assert not manifest.exists()

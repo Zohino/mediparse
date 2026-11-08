@@ -9,7 +9,9 @@ raise SystemExit(
         predictions=Path(snakemake.input.predictions),
         cohort=Path(snakemake.input.cohort),
         split=Path(snakemake.input.split),
-        metrics=Path(snakemake.output[0]),
+        training_manifest=Path(snakemake.input.training_manifest),
+        metrics=Path(snakemake.output.metrics),
+        manifest=Path(snakemake.output.manifest),
         log=Path(snakemake.log[0]),
     )
 )

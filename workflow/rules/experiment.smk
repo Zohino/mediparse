@@ -43,8 +43,10 @@ rule evaluate_model:
         predictions="resources/mimic/predictions.parquet",
         cohort="resources/mimic/cohort.parquet",
         split="resources/mimic/splits.parquet",
+        training_manifest="results/experiment/run_manifest.json",
     output:
-        "results/experiment/metrics.parquet",
+        metrics="results/experiment/metrics.parquet",
+        manifest="results/experiment/evaluation_manifest.json",
     log:
         "logs/experiment/evaluate_model.log",
     params:
