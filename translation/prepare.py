@@ -123,11 +123,12 @@ def _prompts(tokenizer: PreTrainedTokenizerBase, path: Path) -> list[Prompt]:
 
 
 def _parts(tokenizer: PreTrainedTokenizerBase, text: str) -> list[str]:
-    return split(mask([text])[0], functools.partial(_fits, tokenizer))
+    return split(mask(text), functools.partial(_fits, tokenizer))
 
 
 def _note_fits(tokenizer: PreTrainedTokenizerBase, text: str) -> bool:
-    return _fits(tokenizer, mask([text])[0])
+    # EDA ji volá přes TranslationScript.fits, aby měla stejnou kontrolu masky.
+    return _fits(tokenizer, mask(text))
 
 
 def _fits(tokenizer: PreTrainedTokenizerBase, text: str) -> bool:

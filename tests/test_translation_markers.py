@@ -24,19 +24,21 @@ def markers(monkeypatch: pytest.MonkeyPatch) -> ModuleType:
     return load_script(SCRIPT, monkeypatch)
 
 
-def test_mask_numbers_across_parts(markers: ModuleType) -> None:
-    """Čísla značek běží napříč částmi zprávy."""
-    assert markers.mask(["a ___ b ___", "c ___"]) == ["a [[1]] b [[2]]", "c [[3]]"]
+def test_mask_numbers_across_note(markers: ModuleType) -> None:
+    """Čísla značek běží napříč celou zprávou a další zpráva začíná od 1."""
+    assert markers.mask("a ___ b ___\n\nc ___") == "a [[1]] b [[2]]\n\nc [[3]]"
+    assert markers.mask("x ___") == "x [[1]]"
 
 
 def test_mask_keeps_longer_and_shorter_runs(markers: ModuleType) -> None:
     """Řady čtyř a dvou podtržítek se nemaskují."""
-    assert markers.mask(["a ____ b __ c ___"]) == ["a ____ b __ c [[1]]"]
+    assert markers.mask("a ____ b __ c ___") == "a ____ b __ c [[1]]"
 
 
-def test_mask_leaves_part_without_marker(markers: ModuleType) -> None:
-    """Část bez značky zůstane beze změny."""
-    assert markers.mask(["plain", "x ___"]) == ["plain", "x [[1]]"]
+@pytest.mark.parametrize("text", ["plain", "", "a\n\nb"])
+def test_mask_leaves_note_without_marker(markers: ModuleType, text: str) -> None:
+    """Zpráva bez značek zůstane beze změny."""
+    assert markers.mask(text) == text
 
 
 def test_restore_tolerates_spaces_and_extra_numbers(markers: ModuleType) -> None:

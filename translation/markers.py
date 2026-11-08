@@ -3,8 +3,8 @@
 # ///
 """Maskuje značky ___ číslovanými [[n]] pro překlad a po překladu je vrací.
 
-Číslování běží napříč částmi jedné zprávy, takže číslo určuje, která značka
-originálu se ztratila nebo přibyla. Pořadí čísel v překladu se neposuzuje,
+Číslování běží napříč celou zprávou, dělí se až maskovaný text. Číslo určuje,
+která značka originálu se ztratila nebo přibyla. Pořadí čísel se neposuzuje,
 český slovosled ho legitimně přehazuje.
 """
 
@@ -14,10 +14,7 @@ import re
 from collections import Counter
 from dataclasses import dataclass
 from itertools import count
-from typing import TYPE_CHECKING, Final
-
-if TYPE_CHECKING:
-    from collections.abc import Sequence
+from typing import Final
 
 PLACEHOLDER: Final = "[[n]]"
 MARKER: Final = re.compile(r"(?<!_)___(?!_)")
@@ -34,17 +31,19 @@ class PlaceholderProblems:
     duplicated: tuple[int, ...]
 
 
-def mask(parts: Sequence[str]) -> list[str]:
-    """Nahradí značky ___ v částech zprávy značkami [[n]] číslovanými od 1.
+def mask(text: str) -> str:
+    """Nahradí značky ___ v celé zprávě značkami [[n]] číslovanými od 1.
+
+    Zpráva se dělí až po maskování, aby rezerva platila pro skutečný prompt.
 
     Args:
-        parts: Části jedné zprávy v pořadí.
+        text: Celá zpráva před dělením.
 
     Returns:
-        Části se značkami očíslovanými sdíleným čítačem napříč částmi.
+        Zpráva se značkami očíslovanými jedním čítačem napříč celým textem.
     """
     numbers = count(1)
-    return [MARKER.sub(lambda _: f"[[{next(numbers)}]]", part) for part in parts]
+    return MARKER.sub(lambda _: f"[[{next(numbers)}]]", text)
 
 
 def restore(text: str) -> str:

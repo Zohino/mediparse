@@ -58,7 +58,8 @@ class TranslationScript:
         Returns:
             Zda se vejde celý text včetně rezervy na překlad.
         """
-        # Soukromá funkce skriptu je skutečná kontrola používaná překladem.
+        # Stejná kontrola maskované celé zprávy jako v _parts brání tomu,
+        # aby sešit 4 držel vlastní kopii maskování.
         return self._prepare._note_fits(tokenizer, text)  # ruff: ignore[private-member-access]
 
     def parts(self, tokenizer: PreTrainedTokenizerBase, text: str) -> int | None:

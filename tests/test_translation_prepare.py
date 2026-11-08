@@ -5,12 +5,13 @@
 from __future__ import annotations
 
 import functools
+import hashlib
 import shutil
 from typing import TYPE_CHECKING
 
 import pytest
 
-from tests.note_tokens_support import marker_tokenizer
+from tests.note_tokens_support import copy_prepare, marker_tokenizer
 from tests.support import REPOSITORY, load_script
 
 if TYPE_CHECKING:
@@ -31,13 +32,7 @@ def prepare(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> ModuleType:
         directory,
         ignore=shutil.ignore_patterns("__pycache__"),
     )
-    path = directory / "prepare.py"
-    path.write_bytes(
-        path
-        .read_bytes()
-        .replace(b"WINDOW: Final = 2048", b"WINDOW: Final = 25")
-        .replace(b"SPLIT_RATIO: Final = 2.2", b"SPLIT_RATIO: Final = 1.0")
-    )
+    path = copy_prepare(directory, window=25, split_ratio=1.0)
     return load_script(path, monkeypatch)
 
 
@@ -55,6 +50,28 @@ def test_parts_reserve_room_after_masking(prepare: ModuleType) -> None:
 
     assert parts == ["a [[1]] [[2]]", "b [[3]] [[4]]"]
     assert all(prepare._fits(tokenizer, part) for part in parts)  # ruff: ignore[private-member-access]
+
+
+def test_prompts_use_masked_split_with_original_digest(
+    prepare: ModuleType, tmp_path: Path
+) -> None:
+    """Požadavky nesou dvě maskované části a společný otisk původních bajtů."""
+    path = tmp_path / "n1.txt"
+    raw = b"a ___ ___\n\nb ___ ___"
+    path.write_bytes(raw)
+    tokenizer = marker_tokenizer()
+    expected_parts = ["a [[1]] [[2]]", "b [[3]] [[4]]"]
+
+    prompts = prepare._prompts(tokenizer, path)  # ruff: ignore[private-member-access]
+
+    assert [prompt.request_id for prompt in prompts] == ["n1/1", "n1/2"]
+    assert [prompt.source_sha256 for prompt in prompts] == [
+        hashlib.sha256(raw).hexdigest()
+    ] * 2
+    assert [prompt.token_ids for prompt in prompts] == [
+        prepare._token_ids(tokenizer, part)  # ruff: ignore[private-member-access]
+        for part in expected_parts
+    ]
 
 
 @pytest.mark.parametrize("text", ["a b c", "a b c\n\na b c\n\na b c\n\na b c"])
