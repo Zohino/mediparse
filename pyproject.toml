@@ -24,6 +24,7 @@ dependencies = [
 ]
 
 [project.scripts]
+mediparse-data-access-check = "mediparse.entrypoints.data_access_check:main"
 mediparse-eda-provenance = "mediparse.entrypoints.eda_provenance:main"
 mediparse-eda-note-tokens = "mediparse.entrypoints.eda_note_tokens:main"
 mediparse-eda-note-features = "mediparse.entrypoints.eda_note_features:main"
