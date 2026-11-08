@@ -73,6 +73,7 @@ def _cohort(
 ) -> ExitCode:
     candidates, corpus_rule = configs
     return cohort.run(
+        environ={},
         discharge=discharge,
         diagnoses=diagnoses,
         candidates=candidates,

@@ -77,6 +77,7 @@ def test_cohort_matches_plans_and_source_hashes(
     manifest = tmp_path / "cohort" / "manifest.json"
     assert (
         cohort.run(
+            environ={},
             discharge=discharge,
             diagnoses=diagnoses,
             candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,

@@ -17,6 +17,7 @@ from mediparse.domain.cohort import CohortManifest
 from mediparse.domain.environment import Environment
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.data_access_guard import check_tables_access
 from mediparse.infrastructure.diagnosis_candidates_file import load_diagnosis_codes
 from mediparse.infrastructure.duckdb_cohort import DuckDbCohort
 from mediparse.infrastructure.duckdb_parquet import SPILL_DIRECTORY
@@ -28,7 +29,7 @@ from mediparse.infrastructure.source_revision import revision_source
 from mediparse.infrastructure.table_provenance import verified_table_provenance
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
+    from collections.abc import Callable, Mapping
 
     from mediparse.domain.environment import SourceRevision
 
@@ -54,6 +55,7 @@ def main(
     """
     configure_logging(log)
     return run(
+        environ=os.environ,
         discharge=discharge,
         diagnoses=diagnoses,
         candidates=candidates,
@@ -67,6 +69,7 @@ def main(
 @refusing_invalid_input
 def run(
     *,
+    environ: Mapping[str, str],
     discharge: Path,
     diagnoses: Path,
     candidates: Path,
@@ -81,6 +84,7 @@ def run(
         OK po zápisu kohorty a manifestu; REFUSED pro chybějící nebo neplatný vstup,
         nečitelnou revizi zdroje, diagnózu pod deset zpráv a prázdnou kohortu.
     """
+    check_tables_access(environ, (discharge, diagnoses))
     codes = load_diagnosis_codes(candidates)
     rule = load_input_corpus_rule(corpus_rule)
     sources = {

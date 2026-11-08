@@ -110,6 +110,7 @@ def _call(
 ) -> ExitCode:
     notes, config, split = inputs
     return model_training.run(
+        environ={},
         cohort=notes,
         config=config,
         candidates=candidates,
@@ -641,6 +642,7 @@ def test_nvml_error_refuses_training_before_fit(
     monkeypatch.setattr(model_training.LinearSvmTrainer, "fit", fit)
 
     code = model_training.run(
+        environ={},
         cohort=notes,
         config=config,
         split=split,

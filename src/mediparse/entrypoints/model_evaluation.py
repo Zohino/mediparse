@@ -8,11 +8,13 @@ u reálné kohorty proto běží tam, kde jsou data.
 from __future__ import annotations
 
 import logging
+import os
 from typing import TYPE_CHECKING
 
 from mediparse.application.model_evaluation import ModelEvaluation
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.data_access_guard import check_tables_access
 from mediparse.infrastructure.metrics_table import ParquetMetricsTable
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
@@ -20,6 +22,7 @@ from mediparse.infrastructure.sklearn_metrics import SklearnScorer
 from mediparse.infrastructure.split_table import ParquetSplitTable
 
 if TYPE_CHECKING:
+    from collections.abc import Mapping
     from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -34,16 +37,30 @@ def main(
         Návratový kód kroku.
     """
     configure_logging(log)
-    return run(predictions=predictions, cohort=cohort, split=split, metrics=metrics)
+    return run(
+        environ=os.environ,
+        predictions=predictions,
+        cohort=cohort,
+        split=split,
+        metrics=metrics,
+    )
 
 
 @refusing_invalid_input
-def run(*, predictions: Path, cohort: Path, split: Path, metrics: Path) -> ExitCode:
+def run(
+    *,
+    environ: Mapping[str, str],
+    predictions: Path,
+    cohort: Path,
+    split: Path,
+    metrics: Path,
+) -> ExitCode:
     """Složí use case z tabulek predikcí, zpráv, splitu a adaptérů scikit-learn.
 
     Returns:
         OK po zápisu metrik; REFUSED pro chybějící či neplatné vstupy a neúplné predikce.
     """
+    check_tables_access(environ, (predictions, cohort, split))
     step = ModelEvaluation(
         predictions=ParquetPredictionTable(predictions),
         table=ParquetNoteTable(cohort),

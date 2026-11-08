@@ -15,6 +15,7 @@ from mediparse.domain.costs import InferenceCosts, LatencyPlan
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.training_input import training_input
+from mediparse.infrastructure.data_access_guard import check_tables_access
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.machine_hardware import machine_hardware
 from mediparse.infrastructure.nvml_gpu import gpu_monitor
@@ -24,6 +25,7 @@ from mediparse.infrastructure.sklearn_classifier import SkopsModelFile
 from mediparse.infrastructure.training_config import load_training_config
 
 if TYPE_CHECKING:
+    from collections.abc import Mapping
     from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -49,6 +51,7 @@ def main(
     """
     configure_logging(log)
     return run(
+        environ=os.environ,
         cohort=cohort,
         config=config,
         lexicon=lexicon,
@@ -64,6 +67,7 @@ def main(
 @refusing_invalid_input
 def run(
     *,
+    environ: Mapping[str, str],
     cohort: Path,
     config: Path,
     lexicon: Path,
@@ -80,6 +84,7 @@ def run(
         OK po zápisu predikcí a nákladů; REFUSED při neplatném vstupu, nesouladu
         predikcí uloženého modelu s tréninkem, nezjistitelném HW nebo selhání měření GPU.
     """
+    check_tables_access(environ, (cohort, model, predictions))
     table, _ = training_input(
         cohort=cohort, training=load_training_config(config), lexicon=lexicon
     )

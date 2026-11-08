@@ -8,17 +8,20 @@ a otisk jsou v souboru a odtud v manifestech kroků, které split čtou.
 from __future__ import annotations
 
 import logging
+import os
 from typing import TYPE_CHECKING
 
 from mediparse.application.split_materialization import SplitMaterialization
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.data_access_guard import check_tables_access
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.split_config import load_split_config
 from mediparse.infrastructure.split_table import ParquetSplitTable
 
 if TYPE_CHECKING:
+    from collections.abc import Mapping
     from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -31,17 +34,20 @@ def main(*, cohort: Path, config: Path, output: Path, log: Path) -> ExitCode:
         Návratový kód kroku.
     """
     configure_logging(log)
-    return run(cohort=cohort, config=config, output=output)
+    return run(environ=os.environ, cohort=cohort, config=config, output=output)
 
 
 @refusing_invalid_input
-def run(*, cohort: Path, config: Path, output: Path) -> ExitCode:
+def run(
+    *, environ: Mapping[str, str], cohort: Path, config: Path, output: Path
+) -> ExitCode:
     """Složí use case z tabulky, configu a adaptérů a zapíše soubor splitu.
 
     Returns:
         OK po zápisu splitu; REFUSED pro chybějící nebo neplatnou tabulku
         a config a pro méně pacientů, než je foldů.
     """
+    check_tables_access(environ, (cohort,))
     step = SplitMaterialization(
         table=ParquetNoteTable(cohort),
         splitter=StratifiedGroupFolds(),

@@ -18,6 +18,7 @@ from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.training_input import training_input
+from mediparse.infrastructure.data_access_guard import check_tables_access
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
@@ -35,7 +36,7 @@ from mediparse.infrastructure.split_table import ParquetSplitTable
 from mediparse.infrastructure.training_config import load_training_config
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
+    from collections.abc import Callable, Mapping
 
     from mediparse.domain.environment import SourceRevision
 
@@ -73,6 +74,7 @@ def main(
     """
     configure_logging(log)
     return run(
+        environ=os.environ,
         cohort=cohort,
         config=config,
         candidates=candidates,
@@ -91,6 +93,7 @@ def main(
 @refusing_invalid_input
 def run(
     *,
+    environ: Mapping[str, str],
     cohort: Path,
     config: Path,
     candidates: Path,
@@ -111,6 +114,7 @@ def run(
         neplatnou tabulku, config, kandidáty (při zapnuté normalizaci), lexikon a soubor splitu,
         pro nečitelnou revizi zdroje, nezjistitelný HW stroje nebo selhání měření GPU.
     """
+    check_tables_access(environ, (cohort, split))
     training = load_training_config(config)
     source = revision()
     table, strip = training_input(cohort=cohort, training=training, lexicon=lexicon)

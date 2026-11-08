@@ -34,6 +34,7 @@ class _Inputs:
 
     def run(self) -> ExitCode:
         return model_evaluation.run(
+            environ={},
             predictions=self.predictions,
             cohort=self.notes,
             split=self.split,
@@ -125,7 +126,7 @@ def test_missing_input_is_refused(
             "split": inputs.split,
         } | {name: missing}
 
-        code = model_evaluation.run(metrics=inputs.metrics, **paths)
+        code = model_evaluation.run(environ={}, metrics=inputs.metrics, **paths)
 
         assert code is ExitCode.REFUSED
         assert not inputs.metrics.exists()
