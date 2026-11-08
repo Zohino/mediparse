@@ -100,10 +100,21 @@ def test_container_copy_sources_exclude_stage_copies() -> None:
     }
 
 
-def test_container_copy_rejects_line_continuation() -> None:
-    """Víceřádkové COPY nesmí potichu změnit parsovanou množinu."""
+@pytest.mark.parametrize(
+    "source",
+    [
+        "COPY config/split.json \\\n    config/\n",
+        "COPY config/split.json \\  \n    config/\n",
+    ],
+    ids=["backslash", "backslash-trailing-spaces"],
+)
+def test_container_copy_rejects_line_continuation(source: str) -> None:
+    """Víceřádkové COPY nesmí potichu změnit parsovanou množinu.
+
+    Docker i podman berou za pokračování i zpětné lomítko s mezerami za ním.
+    """
     with pytest.raises(ValueError, match="Víceřádkové COPY není podporováno"):
-        _copied_paths("COPY config/split.json \\\n    config/\n")
+        _copied_paths(source)
 
 
 @BUILD_CONTEXT_PRESENT
