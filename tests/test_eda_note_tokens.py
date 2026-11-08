@@ -41,10 +41,12 @@ from mediparse.infrastructure.translation_script import ScriptSplitter, load_tra
 from tests.note_tokens_support import (
     NOTES,
     FakeSplitter,
+    copy_prepare,
+    marker_tokenizer,
     whitespace_tokenizer,
     word_tokenizer,
 )
-from tests.support import REPOSITORY
+from tests.support import REPOSITORY, load_script
 
 type Inputs = tuple[Path, Path, Path, Path, Path]
 
@@ -279,13 +281,7 @@ def test_real_script_splitter_handles_fitting_divided_and_unsplittable(
     inputs: Inputs,
 ) -> None:
     """Skutečné PEP 723 dělení pracuje nad tokenizérem bez Hubu."""
-    prepare = inputs[1] / "prepare.py"
-    prepare.write_bytes(
-        prepare
-        .read_bytes()
-        .replace(b"WINDOW: Final = 2048", b"WINDOW: Final = 12")
-        .replace(b"SPLIT_RATIO: Final = 2.2", b"SPLIT_RATIO: Final = 1.0")
-    )
+    copy_prepare(inputs[1], window=12, split_ratio=1.0)
     script = load_translation(inputs[1])
     splitter = ScriptSplitter(script, word_tokenizer())
     assert splitter.fits("a b c")
@@ -294,6 +290,22 @@ def test_real_script_splitter_handles_fitting_divided_and_unsplittable(
     expected_parts = 2
     assert splitter.parts("a b c\n\na b c") == expected_parts
     assert splitter.parts("a b c a b c") is None
+
+
+def test_script_splitter_uses_masked_preparation(
+    inputs: Inputs, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """EDA přebírá kontrolu i dělení maskované zprávy z téže kopie přípravy."""
+    path = copy_prepare(inputs[1], window=25, split_ratio=1.0)
+    prepare = load_script(path, monkeypatch)
+    tokenizer = marker_tokenizer()
+    splitter = ScriptSplitter(load_translation(inputs[1]), tokenizer)
+    text = "a ___ ___\n\nb ___ ___"
+    # Příprava je autoritou EDA; příklad se po maskování do jedné části nevejde.
+    assert prepare._fits(tokenizer, text)  # ruff: ignore[private-member-access]
+    assert splitter.fits(text) is False
+    assert splitter.fits(text) == prepare._note_fits(tokenizer, text)  # ruff: ignore[private-member-access]
+    assert splitter.parts(text) == len(prepare._parts(tokenizer, text))  # ruff: ignore[private-member-access]
 
 
 @pytest.mark.parametrize(

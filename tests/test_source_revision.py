@@ -126,6 +126,27 @@ def test_ignored_file_is_not_dirty(repo: Path) -> None:
 
 
 @needs_git
+@pytest.mark.parametrize(
+    ("name", "excluded", "dirty"),
+    [
+        ("resources/synthetic/x", ("resources/synthetic",), False),
+        ("src/a.py", ("resources/synthetic",), True),
+        ("resources/synthetic/x", (), True),
+        ("eda/_freeze/x/y.json", ("resources/synthetic",), False),
+    ],
+)
+def test_caller_exclusions_preserve_source_and_render_rules(
+    repo: Path, name: str, excluded: tuple[str, ...], *, dirty: bool
+) -> None:
+    """Výjimka korpusu nevyřadí zdrojový kód a zachová výjimku freeze."""
+    path = repo / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("změna\n", encoding="utf-8")
+
+    assert GitRevision(repo, excluded=excluded).read().dirty is dirty
+
+
+@needs_git
 def test_git_environment_does_not_override_root(
     repo: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

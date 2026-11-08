@@ -520,7 +520,7 @@ audit-corpus = { cmd = "bash scripts/audit-corpus.sh \"{{ discharge }}\" \"{{ ra
     "discharge",
     "radiology",
     "report",
-], description = "Audit syntetického korpusu proti MIMIC-IV-Note; jen lokálně, mimo CI a Claude Code, s commitnutým repem mimo korpus" }
+], description = "Audit syntetického korpusu proti MIMIC-IV-Note; jen lokálně, mimo CI a Claude Code, s commitnutým kódem (cesty SOURCE_PATHS) mimo korpus" }
 provenance-corpus = { cmd = "bash scripts/provenance-corpus.sh \"{{ model }}\"", args = [
     "model",
 ], description = "Provenance auditovaného korpusu; commit specifikace z historie docs/synthetic-corpus.md" }

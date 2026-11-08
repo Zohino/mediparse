@@ -7,10 +7,14 @@ from typing import TYPE_CHECKING
 
 from tokenizers import Tokenizer
 from tokenizers.models import WordLevel
-from tokenizers.pre_tokenizers import Split, WhitespaceSplit
+from tokenizers.pre_tokenizers import Split, Whitespace, WhitespaceSplit
 from tokenizers.processors import TemplateProcessing
 
+from tests.support import REPOSITORY
+
 if TYPE_CHECKING:
+    from pathlib import Path
+
     from transformers import PreTrainedTokenizerFast
 
 UNKNOWN = "<unk>"
@@ -18,6 +22,26 @@ BOS = "<bos>"
 EOS = "<eos>"
 
 NOTES = (("n1", "a b c"), ("n2", ""), ("n3", "  a b \n"), ("n4", "a\n\nb\n\nc"))
+
+
+def copy_prepare(directory: Path, *, window: int, split_ratio: float) -> Path:
+    """Zkopíruje přípravu s testovacím oknem a ověří změnu obou deklarací.
+
+    Returns:
+        Cesta upraveného prepare.py ve složce se sourozeneckými skripty.
+    """
+    source = (REPOSITORY / "translation/prepare.py").read_bytes()
+    replacements = {
+        b"WINDOW: Final = 2048": f"WINDOW: Final = {window}".encode(),
+        b"SPLIT_RATIO: Final = 2.2": f"SPLIT_RATIO: Final = {split_ratio}".encode(),
+    }
+    for original, replacement in replacements.items():
+        assert source.count(original) == 1, original
+        source = source.replace(original, replacement)
+        assert replacement in source
+    path = directory / "prepare.py"
+    path.write_bytes(source)
+    return path
 
 
 def word_tokenizer() -> PreTrainedTokenizerFast:
@@ -80,6 +104,17 @@ class FakeSplitter:
             return 1
         blocks = text.split("\n\n")
         return len(blocks) if all(self.fits(block) for block in blocks) else None
+
+
+def marker_tokenizer() -> PreTrainedTokenizerFast:
+    """Rozliší růst značky z jednoho tokenu ___ na tři tokeny [[n]].
+
+    Returns:
+        WordLevel s chat režií tří tokenů a dělením slov a interpunkce.
+    """
+    tokenizer = word_tokenizer()
+    tokenizer.backend_tokenizer.pre_tokenizer = Whitespace()
+    return tokenizer
 
 
 def whitespace_tokenizer() -> PreTrainedTokenizerFast:

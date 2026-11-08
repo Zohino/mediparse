@@ -15,6 +15,15 @@ if TYPE_CHECKING:
 needs_git: Final = pytest.mark.skipif(shutil.which("git") is None, reason="git chybí")
 
 
+def git_environment() -> dict[str, str]:
+    """Odstraní GIT_*, aby hook nebo rebase nepřesměroval test do cizího repa.
+
+    Returns:
+        Kopie prostředí bez proměnných přebíjejících adresář repozitáře.
+    """
+    return {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+
+
 def git_output(root: Path, *args: str) -> str:
     """Spustí git v ``root`` bez proměnných GIT_*.
 
@@ -24,14 +33,13 @@ def git_output(root: Path, *args: str) -> str:
     Returns:
         Oříznutý stdout.
     """
-    env = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
     done = subprocess.run(
         ["git", "-C", str(root), *args],
         check=True,
         capture_output=True,
         text=True,
         encoding="utf-8",
-        env=env,
+        env=git_environment(),
     )
     return done.stdout.strip()
 

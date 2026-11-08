@@ -53,24 +53,24 @@ class TranslationScript:
         return self._prepare._token_ids(tokenizer, text)  # ruff: ignore[private-member-access]
 
     def fits(self, tokenizer: PreTrainedTokenizerBase, text: str) -> bool:
-        """Použije původní kontrolu okna překladu.
+        """Ověří okno překladu po maskování celé zprávy.
 
         Returns:
             Zda se vejde celý text včetně rezervy na překlad.
         """
-        # Soukromá funkce skriptu je skutečná kontrola používaná překladem.
-        return self._prepare._fits(tokenizer, text)  # ruff: ignore[private-member-access]
+        # Stejná kontrola maskované celé zprávy jako v _parts brání tomu,
+        # aby sešit 4 držel vlastní kopii maskování.
+        return self._prepare._note_fits(tokenizer, text)  # ruff: ignore[private-member-access]
 
     def parts(self, tokenizer: PreTrainedTokenizerBase, text: str) -> int | None:
-        """Použije původní algoritmus dělení překladu.
+        """Použije přípravu překladu včetně maskování před dělením.
 
         Returns:
             Počet částí nebo None pro nedělitelný řádek.
         """
         try:
-            return len(
-                self._note_parts.split(text, lambda part: self.fits(tokenizer, part))
-            )
+            # PEP 723 příprava je jediným zdrojem pořadí maskování a dělení.
+            return len(self._prepare._parts(tokenizer, text))  # ruff: ignore[private-member-access]
         except self._note_parts.UnsplittableError:
             return None
 

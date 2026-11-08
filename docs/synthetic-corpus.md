@@ -196,8 +196,10 @@ korpusem v repu.
   odmítne soubory, které s nimi nesedí, dřív, než je začne číst.
 - **Protokol.**
   1. Audit spouští autor lokálně, mimo CI a mimo relaci Claude Code
-     (`pixi run audit-corpus ...`). Recept odmítne necommitnuté změny mimo korpus, aby
-     commit v záznamu auditu odpovídal kódu, který běžel.
+     (`pixi run audit-corpus ...`). Recept odmítne necommitnutý kód podle
+     `GitRevision` (`SOURCE_PATHS`) s výjimkou auditovaného `resources/synthetic`,
+     aby commit v záznamu auditu odpovídal kódu, který běžel. Necommitnuté výstupy
+     v `results/` a `eda/_freeze/` audit neblokují.
   2. Výstupem jsou jen počty a `note_id` dotčených zpráv; pozice shod jdou do
      reportu mimo repozitář, shodný text se nevypisuje nikdy.
   3. Zpráva se shodou se napíše znovu ze svého plánu. Generátor se dozví jen
@@ -255,8 +257,9 @@ Každá anglická zpráva se překládá do češtiny modelem `google/translateg
 (bfloat16, okno 2048 tokenů, teplota 0, karta s 80 GB). Páry sdílejí `note_id`, pacienta, labely
 i plán; labely jdou z plánů, ne z textu překladu. Zprávy, které se do okna nevejdou,
 se dělí po blocích oddělených prázdným řádkem a po překladu se skládají zpět.
-Dělení se počítá nad originálem. Značky `___` se nahradí číslovanými `[[n]]`
-až v částech, číslují se od 1 napříč částmi jedné zprávy a hlavička `requests.json`
+Značky `___` se v celé zprávě nahradí číslovanými `[[n]]` od 1 a teprve pak se
+dělí maskovaný text, aby rezerva na překlad platila pro skutečný prompt.
+Číslování zůstává průběžné napříč částmi jedné zprávy a hlavička `requests.json`
 nese `"masking": "[[n]]"`. Sběr překladů (`translation/collect.py`) zapisuje `cs/<note_id>.txt` jen z úplných
 výstupů aktuálních originálů a text normalizuje stejně jako hooky repa. Při
 maskování vrátí každé `[[n]]`, i s mezerou uvnitř a s číslem navíc, na `___`
