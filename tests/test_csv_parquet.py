@@ -36,6 +36,17 @@ def _convert(root: Path, text: str, block_size: int = 1 << 20) -> TableShape:
     ).convert()
 
 
+def test_nested_target_creates_missing_parents(tmp_path: Path) -> None:
+    """Převod založí několik chybějících rodičů a zapíše čitelný parquet."""
+    source = _csv(tmp_path, "a,b\n1,2\n")
+    target = tmp_path / "a" / "b" / "table.parquet"
+
+    CsvParquetConversion(source, target).convert()
+
+    assert target.is_file()
+    assert pq.read_table(target).to_pydict() == {"a": ["1"], "b": ["2"]}
+
+
 def test_field_with_newline_and_quotes_survives(tmp_path: Path) -> None:
     """Zalomení a zdvojené uvozovky uvnitř pole zůstanou beze změny."""
     _convert(tmp_path, HEADER + ROWS)
