@@ -82,7 +82,8 @@ def run(
 
     Returns:
         OK po zápisu kohorty a manifestu; REFUSED pro chybějící nebo neplatný vstup,
-        nečitelnou revizi zdroje, diagnózu pod deset zpráv a prázdnou kohortu.
+        nečitelnou revizi zdroje, diagnózu pod deset zpráv, prázdnou kohortu
+        a pro neoznačená data v prostředí, které nesmí číst MIMIC.
     """
     check_inputs_access(environ, (discharge, diagnoses))
     codes = load_diagnosis_codes(candidates)

@@ -81,8 +81,9 @@ def run(
     """Složí inferenci z adaptérů, zapíše predikce a agregované náklady s HW stroje.
 
     Returns:
-        OK po zápisu predikcí a nákladů; REFUSED při neplatném vstupu, nesouladu
-        predikcí uloženého modelu s tréninkem, nezjistitelném HW nebo selhání měření GPU.
+        OK po zápisu predikcí a nákladů; REFUSED pro neplatný vstup, nesoulad
+        predikcí uloženého modelu s tréninkem, nezjistitelný HW, selhání měření GPU
+        a pro neoznačená data v prostředí, které nesmí číst MIMIC.
     """
     check_inputs_access(environ, (cohort, model, predictions))
     table, _ = training_input(

@@ -112,7 +112,8 @@ def run(
     Returns:
         OK po uložení modelu, predikcí, manifestu a nákladů; REFUSED pro chybějící nebo
         neplatnou tabulku, config, kandidáty (při zapnuté normalizaci), lexikon a soubor splitu,
-        pro nečitelnou revizi zdroje, nezjistitelný HW stroje nebo selhání měření GPU.
+        pro nečitelnou revizi zdroje, nezjistitelný HW stroje, selhání měření GPU
+        a pro neoznačená data v prostředí, které nesmí číst MIMIC.
     """
     check_inputs_access(environ, (cohort, split))
     training = load_training_config(config)

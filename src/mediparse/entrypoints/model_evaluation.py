@@ -58,7 +58,8 @@ def run(
     """Složí use case z tabulek predikcí, zpráv, splitu a adaptérů scikit-learn.
 
     Returns:
-        OK po zápisu metrik; REFUSED pro chybějící či neplatné vstupy a neúplné predikce.
+        OK po zápisu metrik; REFUSED pro chybějící či neplatné vstupy, neúplné predikce
+        a pro neoznačená data v prostředí, které nesmí číst MIMIC.
     """
     check_inputs_access(environ, (predictions, cohort, split))
     step = ModelEvaluation(

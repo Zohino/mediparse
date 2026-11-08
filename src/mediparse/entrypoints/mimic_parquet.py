@@ -46,7 +46,8 @@ def run(
 
     Returns:
         OK po ověřeném převodu; REFUSED pro chybějící nebo rozbitý vstup
-        a pro otisk CSV nebo tvar, který se liší od inventáře.
+        a pro otisk CSV nebo tvar, který se liší od inventáře,
+        a pro neoznačená data v prostředí, které nesmí číst MIMIC.
 
     Raises:
         InvalidInputError: Rozdíl v otisku CSV dekorátor přeloží na REFUSED.

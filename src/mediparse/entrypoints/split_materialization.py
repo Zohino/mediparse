@@ -45,7 +45,8 @@ def run(
 
     Returns:
         OK po zápisu splitu; REFUSED pro chybějící nebo neplatnou tabulku
-        a config a pro méně pacientů, než je foldů.
+        a config, pro méně pacientů, než je foldů,
+        a pro neoznačená data v prostředí, které nesmí číst MIMIC.
     """
     check_inputs_access(environ, (cohort,))
     step = SplitMaterialization(
