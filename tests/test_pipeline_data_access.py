@@ -1,7 +1,7 @@
 """Stráž veřejných kroků a nativní cesta syntetiky v prostředí Codexu.
 
-Pokrývá také celou cestu trénink → evaluace a návaznost evaluace na trénink
-(akceptační příklad A1 briefu S39m).
+Pokrývá také celou cestu trénink → evaluace a odmítnutí predikcí, které po tréninku
+změnily obsah.
 """
 
 from __future__ import annotations
@@ -206,7 +206,7 @@ def test_native_synthetic_pipeline_under_codex(
 def test_changed_predictions_after_training_are_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
-    """A1 briefu S39m: evaluace odmítne změněné predikce se zachovanými klíči."""
+    """Evaluace odmítne predikce změněné po tréninku se zachovanými klíči a splitem."""
     steps = _steps(tmp_path, BLOCKED)
     for name in (
         "cohort",
