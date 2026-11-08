@@ -100,13 +100,21 @@ def test_untracked_file_outside_source_is_not_dirty(repo: Path, name: str) -> No
 
 
 @needs_git
-def test_source_paths_are_rooted_when_read_from_subdirectory(repo: Path) -> None:
-    """Změnu v src rozpozná i čtení revize z jiného podadresáře repa."""
+@pytest.mark.parametrize(
+    ("name", "dirty"),
+    [("src/a.py", True), ("eda/_freeze/x/y.json", False)],
+)
+def test_source_paths_are_rooted_when_read_from_subdirectory(
+    repo: Path, name: str, *, dirty: bool
+) -> None:
+    """Čtení z podadresáře rozpozná kód a vyjme freeze v kořeni repa."""
     subdirectory = repo / "nested"
     subdirectory.mkdir()
-    (repo / "src/a.py").write_text("b\n", encoding="utf-8")
+    path = repo / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("b\n", encoding="utf-8")
 
-    assert GitRevision(subdirectory).read().dirty is True
+    assert GitRevision(subdirectory).read().dirty is dirty
 
 
 @needs_git
