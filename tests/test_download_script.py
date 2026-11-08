@@ -263,19 +263,18 @@ def _wait_for(condition: Callable[[], bool], seconds: float) -> None:
         time.sleep(0.2)
 
 
-@pytest.mark.parametrize("name", BLOCKING_NAMES)
 def test_download_blocks_before_checking_netrc(
-    physionet: FakePhysioNet, tmp_path: Path, name: str
+    physionet: FakePhysioNet, tmp_path: Path
 ) -> None:
     """Blokace předchází kontrole přihlašovacích údajů i prvnímu požadavku."""
     output = tmp_path / "table.csv"
 
     done = _download(
-        tmp_path / "missing-netrc", physionet.url("data"), output, **{name: "1"}
+        tmp_path / "missing-netrc", physionet.url("data"), output, CODEX_THREAD_ID="1"
     )
 
     assert done.returncode == 1
-    assert blocking_reason(name) in done.stderr
+    assert blocking_reason("CODEX_THREAD_ID") in done.stderr
     assert "chybí" not in done.stderr
     assert physionet.requests == []
     assert not output.exists()

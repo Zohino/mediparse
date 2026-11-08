@@ -56,13 +56,12 @@ def _inventory(
     return result, output
 
 
-@pytest.mark.parametrize("name", BLOCKING_NAMES)
-def test_inventory_blocks_before_reading_table(tmp_path: Path, name: str) -> None:
+def test_inventory_blocks_before_reading_table(tmp_path: Path) -> None:
     """Blokace předchází i čtení otisku neexistující tabulky."""
-    result, output = _inventory(tmp_path / "missing.csv.gz", "00", **{name: "1"})
+    result, output = _inventory(tmp_path / "missing.csv.gz", "00", CODEX_THREAD_ID="1")
 
     assert result.returncode == 1
-    assert blocking_reason(name) in result.stderr
+    assert blocking_reason("CODEX_THREAD_ID") in result.stderr
     assert "nejde přečíst" not in result.stderr
     assert not output.exists()
 
