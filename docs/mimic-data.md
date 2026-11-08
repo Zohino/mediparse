@@ -17,6 +17,7 @@ nikdy hodnoty z řádků. Seznam tabulek, URL a SHA-256 drží
 2. **Kontrola otisků.** `pixi run verify-mimic` otisky přepočítá i později, například
    po přesunu dat nebo na jiném stroji. Kontrola je potřebná i po přesunu se
    zachovaným mtime, kdy Snakemake nemusí inventář znovu spustit.
+   Pod neprázdnou blokující proměnnou z `data_access.json` odmítne běh před čtením souborů.
 3. **Validace.** `snakemake validate_mimic` přepočte SHA-256 každého CSV a porovná
    ho s configem, i když soubor pipeline nestahovala. Ověřený otisk zapíše
    do inventáře tabulky jako `sha256` a společně s počty a sloupci do
@@ -68,6 +69,8 @@ EDA rozpoznává svůj syntetický adresář nadále pomocí `synthetic.json`.
 Kroky převodu, kohorty, splitu, tréninku, evaluace a inference odmítnou neoznačený
 datový vstup, pokud je neprázdná některá blokující proměnná z
 [`data_access.json`](../src/mediparse/domain/data_access.json).
+Stažení a inventář tabulek pod neprázdnou blokující proměnnou ze stejných
+pravidel odmítnou běh ještě před přístupem ke vstupním souborům.
 Smoketest zapisuje značku `synthetic.json` do `build/smoketest/mimic/parquet/`
 i `build/smoketest/`.
 

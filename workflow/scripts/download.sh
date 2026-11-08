@@ -8,6 +8,8 @@ fail() {
 
 (($# == 4)) || fail "použití: $0 NETRC URL VÝSTUP LOG" 2
 
+mediparse-data-access-check || fail "Stažení čte data MIMIC; pouští ho jen uživatel ve vlastním terminálu." 1
+
 netrc=$1
 url=$2
 output=$3

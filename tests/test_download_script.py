@@ -21,6 +21,8 @@ from typing import TYPE_CHECKING, Final, cast
 
 import pytest
 
+from tests.support import BLOCKING_NAMES, blocking_reason
+
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterator
 
@@ -51,6 +53,7 @@ class FakePhysioNet(ThreadingHTTPServer):
         """Naslouchá na volném portu localhostu."""
         super().__init__(("127.0.0.1", 0), _Handler)
         self.ranges: list[str | None] = []
+        self.requests: list[str] = []
         self.stalls_left = 1
         self.release = threading.Event()
         self.lock = threading.Lock()
@@ -84,6 +87,8 @@ class _Handler(BaseHTTPRequestHandler):
         spojení se po kusu dat na chvíli zasekne, ``missing`` 404 a
         ``forbidden`` 403.
         """
+        with self.physionet.lock:
+            self.physionet.requests.append(self.path)
         if self.path == "/missing":
             self._empty(HTTPStatus.NOT_FOUND)
             return
@@ -244,6 +249,7 @@ def _command(netrc: Path, url: str, output: Path) -> list[str]:
 def _environment(timeout: str, env: dict[str, str]) -> dict[str, str]:
     return {
         **os.environ,
+        **dict.fromkeys(BLOCKING_NAMES, ""),
         **QUICK_RETRIES,
         "MEDIPARSE_DOWNLOAD_TIMEOUT": timeout,
         **env,
@@ -255,6 +261,24 @@ def _wait_for(condition: Callable[[], bool], seconds: float) -> None:
     while not condition():
         assert time.monotonic() < deadline, "podmínka nenastala včas"
         time.sleep(0.2)
+
+
+def test_download_blocks_before_checking_netrc(
+    physionet: FakePhysioNet, tmp_path: Path
+) -> None:
+    """Blokace předchází kontrole přihlašovacích údajů i prvnímu požadavku."""
+    output = tmp_path / "table.csv"
+
+    done = _download(
+        tmp_path / "missing-netrc", physionet.url("data"), output, CODEX_THREAD_ID="1"
+    )
+
+    assert done.returncode == 1
+    assert blocking_reason("CODEX_THREAD_ID") in done.stderr
+    assert "chybí" not in done.stderr
+    assert physionet.requests == []
+    assert not output.exists()
+    assert not (tmp_path / "table.csv.part").exists()
 
 
 def test_downloads_file_and_keeps_attempt_log(

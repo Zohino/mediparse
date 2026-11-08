@@ -883,6 +883,7 @@ DATA_ACCESS_EXCEPTIONS = {
         "Skládá líný adaptér bez čtení dat; stráž volají model_training a model_inference."
     ),
 }
+SHELL_DATA_ACCESS_EXCEPTIONS: dict[str, str] = {}
 
 
 def _infrastructure_imports(module: Path) -> set[tuple[str, str]]:
@@ -919,6 +920,69 @@ def test_data_reading_entrypoints_import_access_guard() -> None:
     assert "cohort.py" in inspected
     assert DATA_ACCESS_EXCEPTIONS.keys() <= inspected
     assert violations == []
+
+
+def _unguarded_mimic_shell_scripts(root: Path) -> tuple[list[str], set[str]]:
+    """Najde shellové kroky MIMIC bez přímého volání konzolové stráže.
+
+    Returns:
+        Porušení a prohlédnuté cesty relativně ke kořeni repozitáře.
+    """
+    scripts = [
+        *(root / "workflow/scripts").glob("*.sh"),
+        *(root / "scripts").glob("eda.sh"),
+        *(root / "scripts").glob("verify-mimic.sh"),
+    ]
+    violations = []
+    inspected = set()
+    for script in sorted(scripts):
+        name = script.relative_to(root).as_posix()
+        inspected.add(name)
+        guarded = any(
+            line.lstrip().startswith("mediparse-data-access-check ||")
+            for line in script.read_text(encoding="utf-8").splitlines()
+        )
+        if name not in SHELL_DATA_ACCESS_EXCEPTIONS and not guarded:
+            violations.append(name)
+    return violations, inspected
+
+
+def test_mimic_shell_scripts_call_access_guard() -> None:
+    """Shellové kroky nad MIMIC přímo volají stráž; workflow nepoužívá syntetiku."""
+    violations, inspected = _unguarded_mimic_shell_scripts(REPOSITORY)
+
+    assert {
+        "workflow/scripts/download.sh",
+        "workflow/scripts/inventory.sh",
+    } <= inspected
+    assert SHELL_DATA_ACCESS_EXCEPTIONS.keys() <= inspected
+    assert violations == []
+
+
+@pytest.mark.parametrize(
+    ("source", "expected"),
+    [
+        ("echo tabulka\n", ["workflow/scripts/example.sh"]),
+        ("    mediparse-data-access-check || exit 1\n", []),
+        (
+            "# mediparse-data-access-check || exit 1\n",
+            ["workflow/scripts/example.sh"],
+        ),
+    ],
+    ids=["missing-guard", "guarded", "commented-guard"],
+)
+def test_shell_guard_check_detects_only_active_guard(
+    tmp_path: Path, source: str, expected: list[str]
+) -> None:
+    """Chybějící i zakomentovaná stráž porušují kontrakt, odsazené volání projde."""
+    script = tmp_path / "workflow/scripts/example.sh"
+    script.parent.mkdir(parents=True)
+    script.write_text(source, encoding="utf-8")
+
+    violations, inspected = _unguarded_mimic_shell_scripts(tmp_path)
+
+    assert violations == expected
+    assert inspected == {"workflow/scripts/example.sh"}
 
 
 @pytest.mark.parametrize(

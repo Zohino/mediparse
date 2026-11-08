@@ -24,6 +24,7 @@ dependencies = [
 ]
 
 [project.scripts]
+mediparse-data-access-check = "mediparse.entrypoints.data_access_check:main"
 mediparse-eda-provenance = "mediparse.entrypoints.eda_provenance:main"
 mediparse-eda-note-tokens = "mediparse.entrypoints.eda_note_tokens:main"
 mediparse-eda-note-features = "mediparse.entrypoints.eda_note_features:main"
@@ -392,6 +393,12 @@ ignore = [
     "suspicious-subprocess-import",           # test spouští shellový skript pravidla, jinak ho pokrýt nejde
     "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, shell se nepoužívá
     "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá Snakemake
+]
+
+"tests/test_verify_mimic_script.py" = [
+    "suspicious-subprocess-import",           # test spouští pevný shellový skript kontroly otisků
+    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam bez shell=True a bez vstupu od uživatele
+    "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá pixi task verify-mimic
 ]
 
 "tests/test_smoketest_script.py" = [

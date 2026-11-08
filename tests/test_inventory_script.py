@@ -9,11 +9,14 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
+import os
 import subprocess
 from pathlib import Path
 from typing import Final
 
 import pytest
+
+from tests.support import BLOCKING_NAMES, blocking_reason
 
 SCRIPT: Final = Path(__file__).parents[1] / "workflow" / "scripts" / "inventory.sh"
 # Hlavička s CRLF, zdvojená uvozovka a zalomení uvnitř pole: dva záznamy na pěti řádcích.
@@ -30,7 +33,7 @@ def _write(directory: Path, name: str, text: str) -> Path:
 
 
 def _inventory(
-    table: Path, sha256: str | None = None
+    table: Path, sha256: str | None = None, **environ: str
 ) -> tuple[subprocess.CompletedProcess[str], Path]:
     output = table.with_name(table.name + ".json")
     result = subprocess.run(
@@ -47,9 +50,35 @@ def _inventory(
         capture_output=True,
         text=True,
         encoding="utf-8",
+        env={**os.environ, **dict.fromkeys(BLOCKING_NAMES, ""), **environ},
         timeout=60,
     )
     return result, output
+
+
+def test_inventory_blocks_before_reading_table(tmp_path: Path) -> None:
+    """Blokace předchází i čtení otisku neexistující tabulky."""
+    result, output = _inventory(tmp_path / "missing.csv.gz", "00", CODEX_THREAD_ID="1")
+
+    assert result.returncode == 1
+    assert blocking_reason("CODEX_THREAD_ID") in result.stderr
+    assert "nejde přečíst" not in result.stderr
+    assert not output.exists()
+
+
+def test_inventory_blocks_when_access_check_fails_silently(tmp_path: Path) -> None:
+    """Nenulový kód stráže zastaví inventář i bez diagnostiky."""
+    table = _write(tmp_path, "table.csv", "a,b\n1,2\n")
+    command = tmp_path / "mediparse-data-access-check"
+    command.write_text("#!/bin/sh\nexit 1\n", encoding="utf-8")
+    command.chmod(0o755)
+
+    result, output = _inventory(
+        table, PATH=f"{tmp_path}{os.pathsep}{os.environ['PATH']}"
+    )
+
+    assert result.returncode != 0
+    assert not output.exists()
 
 
 def _refused(table: Path, message: str) -> None:
