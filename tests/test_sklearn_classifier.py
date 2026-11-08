@@ -113,6 +113,19 @@ def test_model_file_round_trip(tmp_path: Path) -> None:
     assert loaded.classify(texts) == classifier.classify(texts)
 
 
+def test_model_file_creates_nested_parents(tmp_path: Path) -> None:
+    """Uložení založí oba chybějící rodiče a model lze načíst."""
+    texts, labels = _corpus()
+    classifier = LinearSvmTrainer(regularization=1.0, seed=0, normalization=None).fit(
+        texts, labels
+    )
+    model_file = SkopsModelFile(tmp_path / "a" / "b" / "model.skops")
+
+    model_file.save(classifier)
+
+    assert model_file.load().classify(texts) == classifier.classify(texts)
+
+
 def test_repeated_training_keeps_predictions_after_saving(tmp_path: Path) -> None:
     """Dva stejné tréninky i po uložení dávají přesně stejné labely a skóre."""
     texts, labels = _corpus()
