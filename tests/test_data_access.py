@@ -27,12 +27,18 @@ LOCATION = "/data/parquet"
 MARKER = "znacka.json"
 
 
-def test_blocking_variables_are_ci_then_claude_code() -> None:
+def test_blocking_variables_are_ci_then_claude_code_then_codex() -> None:
     """Pořadí proměnných určuje, který důvod se nahlásí první."""
-    assert [v.name for v in load_data_access_rules().blocking] == ["CI", "CLAUDECODE"]
+    assert [v.name for v in load_data_access_rules().blocking] == [
+        "CI",
+        "CLAUDECODE",
+        "CODEX_THREAD_ID",
+    ]
 
 
-@pytest.mark.parametrize("name", ["CI", "CLAUDECODE"])
+@pytest.mark.parametrize(
+    "name", [variable.name for variable in load_data_access_rules().blocking]
+)
 def test_blocked_reason_names_the_variable_reason(name: str) -> None:
     """Každá blokující proměnná vrátí svůj důvod."""
     assert blocked_reason({name: "1"}, load_data_access_rules()) == blocking_reason(
@@ -41,14 +47,31 @@ def test_blocked_reason_names_the_variable_reason(name: str) -> None:
 
 
 def test_blocked_reason_prefers_ci() -> None:
-    """Při obou proměnných vyhrává CI."""
+    """Při všech proměnných vyhrává CI."""
     assert (
-        blocked_reason({"CI": "true", "CLAUDECODE": "1"}, load_data_access_rules())
+        blocked_reason(
+            {variable.name: "1" for variable in load_data_access_rules().blocking},
+            load_data_access_rules(),
+        )
         == load_data_access_rules().blocking[0].reason
     )
 
 
-@pytest.mark.parametrize("environ", [{}, {"CI": "", "CLAUDECODE": ""}, {"JINE": "1"}])
+def test_blocked_reason_identifies_codex() -> None:
+    """Neprázdné ID relace Codexu vrátí důvod jmenující agenta."""
+    reason = blocked_reason({"CODEX_THREAD_ID": "019a…"}, load_data_access_rules())
+    assert reason is not None
+    assert "Codex" in reason
+
+
+@pytest.mark.parametrize(
+    "environ",
+    [
+        {},
+        {variable.name: "" for variable in load_data_access_rules().blocking},
+        {"JINE": "1"},
+    ],
+)
 def test_blocked_reason_is_none_without_non_empty_variable(
     environ: dict[str, str],
 ) -> None:
@@ -57,17 +80,15 @@ def test_blocked_reason_is_none_without_non_empty_variable(
 
 
 @pytest.mark.parametrize(
-    ("environ", "words"),
-    [({"CI": "true"}, "CI"), ({"CLAUDECODE": "1"}, "Claude Code")],
-    ids=["ci", "claude-code"],
+    "variable", load_data_access_rules().blocking, ids=lambda variable: variable.name
 )
 def test_check_refuses_real_data_in_blocked_environment(
-    environ: dict[str, str], words: str
+    variable: BlockingVariable,
 ) -> None:
     """Skutečná data v blokujícím prostředí hláška jmenuje místo, značku i důvod."""
     with pytest.raises(DataAccessError) as refusal:
         check_data_access(
-            environ,
+            {variable.name: "1"},
             load_data_access_rules(),
             synthetic=False,
             location=LOCATION,
@@ -77,7 +98,7 @@ def test_check_refuses_real_data_in_blocked_environment(
     message = str(refusal.value)
     assert LOCATION in message
     assert MARKER in message
-    assert words in message
+    assert variable.reason in message
 
 
 def test_refusal_is_an_invalid_input() -> None:
@@ -86,9 +107,9 @@ def test_refusal_is_an_invalid_input() -> None:
 
 
 def test_check_allows_synthetic_data_in_blocked_environment() -> None:
-    """Syntetická data projdou i v obou blokujících prostředích."""
+    """Syntetická data projdou i při všech blokujících proměnných."""
     check_data_access(
-        {"CI": "true", "CLAUDECODE": "1"},
+        {variable.name: "1" for variable in load_data_access_rules().blocking},
         load_data_access_rules(),
         synthetic=True,
         location=LOCATION,

@@ -414,7 +414,9 @@ def test_subjects_come_from_every_language() -> None:
     assert outcome == AuditOverlap(shared_ngrams=0, colliding_subjects=1, notes=())
 
 
-@pytest.mark.parametrize("name", ["CI", "CLAUDECODE"])
+@pytest.mark.parametrize(
+    "name", [variable.name for variable in load_data_access_rules().blocking]
+)
 def test_environment_refusal_carries_shared_reason(name: str) -> None:
     """Audit a EDA hlásí tentýž důvod zákazu."""
     outcome = _audit(
@@ -424,7 +426,9 @@ def test_environment_refusal_carries_shared_reason(name: str) -> None:
     assert outcome == AuditRefused(blocking_reason(name))
 
 
-@pytest.mark.parametrize("name", ["CI", "CLAUDECODE"])
+@pytest.mark.parametrize(
+    "name", [variable.name for variable in load_data_access_rules().blocking]
+)
 def test_environment_refusal_precedes_workspace_refusal(name: str) -> None:
     """Prostředí se posuzuje dřív než pracovní adresář, takže důvod zákazu čtení vyhrává."""
     outcome = _audit(
