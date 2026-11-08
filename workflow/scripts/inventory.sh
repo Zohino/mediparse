@@ -8,6 +8,8 @@ fail() {
 
 (($# == 3)) || fail "použití: $0 TABULKA OČEKÁVANÝ_SHA256 VÝSTUP"
 
+mediparse-data-access-check || fail "Inventář čte data MIMIC; pouští ho jen uživatel ve vlastním terminálu."
+
 table=$1
 expected_sha256=$2
 output=$3
