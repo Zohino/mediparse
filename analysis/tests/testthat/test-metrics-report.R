@@ -294,4 +294,12 @@ test_that("každé čtené pole evaluace musí být jeden neprázdný řetězec"
       expect_length(list.files(out, recursive = TRUE, all.files = TRUE), 0L)
     }
   }
+  for (value in list("x", 5)) {
+    jsonlite::write_json(value, chain$evaluation, auto_unbox = TRUE)
+    expect_error(
+      write_metrics_report(METRICS_FIXTURE, chain$evaluation, chain$manifest, out, CANDIDATES_FIXTURE),
+      "manifest evaluace.json.*řetězec"
+    )
+    expect_length(list.files(out, recursive = TRUE, all.files = TRUE), 0L)
+  }
 })
