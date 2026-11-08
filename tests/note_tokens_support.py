@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 
 from tokenizers import Tokenizer
 from tokenizers.models import WordLevel
-from tokenizers.pre_tokenizers import Split, WhitespaceSplit
+from tokenizers.pre_tokenizers import Split, Whitespace, WhitespaceSplit
 from tokenizers.processors import TemplateProcessing
 
 if TYPE_CHECKING:
@@ -80,6 +80,17 @@ class FakeSplitter:
             return 1
         blocks = text.split("\n\n")
         return len(blocks) if all(self.fits(block) for block in blocks) else None
+
+
+def marker_tokenizer() -> PreTrainedTokenizerFast:
+    """Rozliší růst značky z jednoho tokenu ___ na tři tokeny [[n]].
+
+    Returns:
+        WordLevel s chat režií tří tokenů a dělením slov a interpunkce.
+    """
+    tokenizer = word_tokenizer()
+    tokenizer.backend_tokenizer.pre_tokenizer = Whitespace()
+    return tokenizer
 
 
 def whitespace_tokenizer() -> PreTrainedTokenizerFast:

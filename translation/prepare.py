@@ -3,9 +3,9 @@
 Prompt skládá chat šablona modelu v pevné revizi, takže ID tokenů jsou přesně ta,
 která model čeká, a překladový skript je na GPU jen předá. Klíč požadavku je hash
 všeho, co určuje překlad, a slouží zároveň jako cache. Zpráva, které v okně zbude
-na překlad méně než SPLIT_RATIO násobek tokenů originálu, se rozdělí na části po
-blocích a každá část jde jako samostatný požadavek. Dělení se počítá nad originálem,
-značky ___ se nahradí číslovanými [[n]] až v částech. Zprávy, které rozdělit nejde,
+na překlad méně než SPLIT_RATIO násobek tokenů maskovaného zdroje, se rozdělí na
+části po blocích a každá část jde jako samostatný požadavek. Značky ___ se nahradí
+číslovanými [[n]] v celé zprávě před dělením. Zprávy, které rozdělit nejde,
 skript vypíše a požadavky nezapíše.
 """
 
@@ -108,10 +108,9 @@ def main() -> int:
 
 def _prompts(tokenizer: PreTrainedTokenizerBase, path: Path) -> list[Prompt]:
     raw = path.read_bytes()
-    fits = functools.partial(_fits, tokenizer)
     digest = hashlib.sha256(raw).hexdigest()
     try:
-        texts = mask(split(raw.decode("utf-8"), fits))
+        texts = _parts(tokenizer, raw.decode("utf-8"))
         return [
             Prompt(request_id, path.stem, digest, _token_ids(tokenizer, text))
             for request_id, text in zip(
@@ -121,6 +120,14 @@ def _prompts(tokenizer: PreTrainedTokenizerBase, path: Path) -> list[Prompt]:
     except RuntimeError as error:
         msg = f"Prompt zprávy {path.stem} nezačíná právě jedním BOS."
         raise RuntimeError(msg) from error
+
+
+def _parts(tokenizer: PreTrainedTokenizerBase, text: str) -> list[str]:
+    return split(mask([text])[0], functools.partial(_fits, tokenizer))
+
+
+def _note_fits(tokenizer: PreTrainedTokenizerBase, text: str) -> bool:
+    return _fits(tokenizer, mask([text])[0])
 
 
 def _fits(tokenizer: PreTrainedTokenizerBase, text: str) -> bool:
