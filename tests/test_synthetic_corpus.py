@@ -83,10 +83,11 @@ def test_unexpected_corpus_path_is_refused(
     else:
         _write(tmp_path, relative, b"unexpected")
     corpus = CorpusDirectory(tmp_path)
+    match = rf"cesty: (.*, )?{re.escape(relative)}[,.]"
 
-    with pytest.raises(InvalidInputError, match=re.escape(relative)):
+    with pytest.raises(InvalidInputError, match=match):
         corpus.fingerprint()
-    with pytest.raises(InvalidInputError, match=re.escape(relative)):
+    with pytest.raises(InvalidInputError, match=match):
         corpus.notes(Language.EN)
 
 
