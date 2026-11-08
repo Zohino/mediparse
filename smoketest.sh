@@ -29,7 +29,8 @@ if [ -n "$status" ]; then
     dirty=true
 fi
 
-set -- run --rm --network none
+# CI z hostitele zapne v GitHub Actions stráž a ověří značky syntetiky v celém DAG.
+set -- run --rm --network none -e CI
 case "$(basename "$engine")" in
     docker*)
         if [ "$(uname -s)" = Linux ]; then

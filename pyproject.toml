@@ -394,6 +394,12 @@ ignore = [
     "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá Snakemake
 ]
 
+"tests/test_smoketest_script.py" = [
+    "suspicious-subprocess-import",         # integrační test spouští pevný skript smoketestu proti falešnému enginu
+    "subprocess-without-shell-equals-true", # argumenty jdou jako seznam bez shell=True a bez vstupu od uživatele
+    "start-process-with-partial-path",     # sh se hledá v PATH, stejně jako při ručním spuštění smoketest.sh
+]
+
 "tests/test_eda_canary_script.py" = [
     "suspicious-subprocess-import",           # test spouští shellovou funkci kanárka, jinak ji pokrýt nejde
     "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, skript se předává bashi jako soubor
