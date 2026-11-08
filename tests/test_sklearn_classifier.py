@@ -113,6 +113,32 @@ def test_model_file_round_trip(tmp_path: Path) -> None:
     assert loaded.classify(texts) == classifier.classify(texts)
 
 
+def test_repeated_training_keeps_predictions_after_saving(tmp_path: Path) -> None:
+    """Dva stejné tréninky i po uložení dávají přesně stejné labely a skóre."""
+    texts, labels = _corpus()
+    first = LinearSvmTrainer(regularization=1.0, seed=0, normalization=None).fit(
+        texts, labels
+    )
+    second = LinearSvmTrainer(regularization=1.0, seed=0, normalization=None).fit(
+        texts, labels
+    )
+    first_file = SkopsModelFile(tmp_path / "first.skops")
+    second_file = SkopsModelFile(tmp_path / "second.skops")
+    first_file.save(first)
+    second_file.save(second)
+    evaluation = [*texts, "diabetes treatment", "a new synthetic note"]
+
+    first_predictions = first_file.load().classify(evaluation)
+    second_predictions = second_file.load().classify(evaluation)
+
+    assert [item.predicted for item in first_predictions] == [
+        item.predicted for item in second_predictions
+    ]
+    assert [item.score for item in first_predictions] == [
+        item.score for item in second_predictions
+    ]
+
+
 def test_model_file_missing_is_invalid_input(tmp_path: Path) -> None:
     """Chybějící soubor modelu je neplatný vstup a jmenuje cestu."""
     path = tmp_path / "model.skops"
