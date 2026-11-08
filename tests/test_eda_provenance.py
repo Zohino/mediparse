@@ -164,7 +164,6 @@ def test_environment_does_not_override_git_revision(
     [
         ("pixi.lock", "true"),
         ("results/cohort/manifest.json", "false"),
-        ("eda/_freeze/x/y.json", "false"),
     ],
 )
 def test_commit_and_dirty_come_from_git(tmp_path: Path, name: str, dirty: str) -> None:

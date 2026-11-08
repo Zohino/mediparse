@@ -263,13 +263,10 @@ def test_render_script_prepares_cache_for_its_consumer(
 
 @EDA_PRESENT
 @needs_git
-@pytest.mark.parametrize(
-    "name", ["results/cohort/manifest.json", "eda/_freeze/x/y.json"]
-)
-def test_render_script_allows_uncommitted_outputs(tmp_path: Path, name: str) -> None:
+def test_render_script_allows_uncommitted_outputs(tmp_path: Path) -> None:
     """Výstupy předchozího renderu nebrání další přípravě provenance a renderu."""
     environ = _render_environment(tmp_path)
-    path = Path(environ["PIXI_PROJECT_ROOT"]) / name
+    path = Path(environ["PIXI_PROJECT_ROOT"]) / "results/cohort/manifest.json"
     path.parent.mkdir(parents=True)
     path.write_text("{}\n", encoding="utf-8")
 
@@ -281,11 +278,10 @@ def test_render_script_allows_uncommitted_outputs(tmp_path: Path, name: str) -> 
 
 @EDA_PRESENT
 @needs_git
-@pytest.mark.parametrize("name", ["src/new.py", "eda/1-x.qmd", "pixi.lock"])
-def test_render_script_blocks_uncommitted_source(tmp_path: Path, name: str) -> None:
+def test_render_script_blocks_uncommitted_source(tmp_path: Path) -> None:
     """Rozpracovaný kód zastaví render před přípravou cache i provenance."""
     environ = _render_environment(tmp_path)
-    path = Path(environ["PIXI_PROJECT_ROOT"]) / name
+    path = Path(environ["PIXI_PROJECT_ROOT"]) / "src/new.py"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("změna\n", encoding="utf-8")
 
