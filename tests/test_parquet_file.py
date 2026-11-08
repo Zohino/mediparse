@@ -85,9 +85,17 @@ def test_parse_diagnosis_converts_known_value(tmp_path: Path) -> None:
     assert parse_diagnosis(tmp_path / "t.parquet", "ckd") is Diagnosis.CKD
 
 
-def test_parse_diagnosis_names_path_and_value_of_unknown(tmp_path: Path) -> None:
-    """Neznámá diagnóza je chybný vstup, jehož hláška nese cestu i hodnotu."""
-    with pytest.raises(
-        InvalidInputError, match=r"t\.parquet obsahuje neznámou diagnózu 'flu'"
-    ):
-        parse_diagnosis(tmp_path / "t.parquet", "flu")
+def test_parse_diagnosis_names_path_and_column_without_value(tmp_path: Path) -> None:
+    """Neznámá diagnóza ohlásí cestu a sloupec bez hodnoty buňky a kontextu."""
+    path = tmp_path / "t.parquet"
+    value = "tajny-text-123"
+
+    with pytest.raises(InvalidInputError) as raised:
+        parse_diagnosis(path, value)
+
+    assert value not in str(raised.value)
+    assert str(raised.value) == (
+        f"Soubor {path} obsahuje neznámou diagnózu ve sloupci diagnosis."
+    )
+    assert raised.value.__cause__ is None
+    assert raised.value.__suppress_context__ is True

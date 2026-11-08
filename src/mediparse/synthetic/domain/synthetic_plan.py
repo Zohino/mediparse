@@ -54,3 +54,18 @@ class SamplerConfig(BaseModel):
     patients: PatientModel
     structure: StructureModel
     mentions: MentionModel
+
+    @model_validator(mode="after")
+    def _mention_sections_exist(self) -> Self:
+        section_keys = {section.key for section in self.structure.sections}
+        mention_sections = {
+            self.mentions.diagnosis_section,
+            self.mentions.family_section,
+            *self.mentions.chronic_sections,
+            *self.mentions.acute_sections,
+        }
+        unknown = sorted(mention_sections - section_keys)
+        if unknown:
+            msg = f"Zmínky odkazují na neznámé sekce: {', '.join(unknown)}."
+            raise ValueError(msg)
+        return self

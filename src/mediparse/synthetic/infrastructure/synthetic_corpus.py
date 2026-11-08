@@ -25,8 +25,10 @@ from mediparse.synthetic.domain.corpus_provenance import (
 CORPUS_ROOT: Final = Path("resources/synthetic")
 RECORD_NAME: Final = "audit.json"
 PROVENANCE_NAME: Final = "provenance.json"
+PLANS_NAME: Final = "plans.jsonl"
+LABELS_NAME: Final = "labels.csv"
+_ROOT_FILES: Final = frozenset({RECORD_NAME, PROVENANCE_NAME, PLANS_NAME, LABELS_NAME})
 _SUFFIX: Final = ".txt"
-_NOTES: Final = f"*/*{_SUFFIX}"
 _LANGUAGES: Final = frozenset(language.value for language in Language)
 
 
@@ -39,7 +41,7 @@ class CorpusDirectory:
     def notes(self, language: Language) -> dict[str, str]:
         """Texty zpráv jednoho jazyka.
 
-        Adresář jazyka mimo Language a zprávu, která nejde přečíst nebo není v UTF-8,
+        Nepovolenou cestu v korpusu a zprávu, která nejde přečíst nebo není v UTF-8,
         odmítne jako InvalidInputError.
 
         Returns:
@@ -60,7 +62,7 @@ class CorpusDirectory:
         return self.root / language.value / f"{note_id}{_SUFFIX}"
 
     def fingerprint(self) -> str | None:
-        """Otisk zpráv tak, jak leží na disku; adresář jazyka mimo Language odmítne jako InvalidInputError.
+        """Otisk zpráv tak, jak leží na disku; nepovolenou cestu v korpusu odmítne jako InvalidInputError.
 
         Returns:
             SHA-256 otisk, nebo None, když korpus neobsahuje žádnou zprávu.
@@ -126,16 +128,31 @@ class CorpusDirectory:
         write_model(self.root / name, record)
 
     def _paths(self) -> list[Path]:
-        # Otisk pokrývá všechny */*.txt, audit jen jazyky z Language. Neznámý adresář by tak
-        # byl otisknutý, ale neauditovaný, a proto se odmítne zde, v jediném místě pro obojí.
-        paths = sorted(self.root.glob(_NOTES))
-        unknown = sorted({
-            path.parent.name for path in paths if path.parent.name not in _LANGUAGES
-        })
-        if unknown:
-            msg = f"Korpus {self.root} obsahuje adresář neznámého jazyka: {', '.join(unknown)}."
+        # Brána, audit i otisk musí odmítnout stejný strom; cizí soubory by jinak
+        # odešly do image bez auditu.
+        paths = sorted(self.root.rglob("*"))
+        unexpected = [
+            self._relative(path) for path in paths if not self._is_expected_path(path)
+        ]
+        if unexpected:
+            msg = f"Korpus {self.root} obsahuje nepovolené cesty: {', '.join(unexpected)}."
             raise InvalidInputError(msg)
-        return paths
+        return [path for path in paths if self._is_note(path)]
+
+    def _is_expected_path(self, path: Path) -> bool:
+        if path.parent == self.root:
+            return (path.is_file() and path.name in _ROOT_FILES) or (
+                path.is_dir() and path.name in _LANGUAGES
+            )
+        return self._is_note(path)
+
+    def _is_note(self, path: Path) -> bool:
+        return (
+            path.parent.parent == self.root
+            and path.parent.name in _LANGUAGES
+            and path.is_file()
+            and path.suffix == _SUFFIX
+        )
 
     def _read(self, path: Path) -> str:
         try:

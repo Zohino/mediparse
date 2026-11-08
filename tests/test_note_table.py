@@ -124,12 +124,20 @@ def _write_row(path: Path, **overrides: object) -> None:
 
 
 def test_read_unknown_language_is_invalid_input(tmp_path: Path) -> None:
-    """Jazyk mimo výčet je InvalidInputError, ne ValueError z adaptéru."""
+    """Neznámý jazyk ohlásí cestu a sloupec bez hodnoty buňky a kontextu."""
     path = tmp_path / "notes.parquet"
-    _write_row(path, language="de")
+    value = "tajny-text-456"
+    _write_row(path, language=value)
 
-    with pytest.raises(InvalidInputError, match="neznámý jazyk 'de'"):
+    with pytest.raises(InvalidInputError) as raised:
         ParquetNoteTable(path).read()
+
+    assert value not in str(raised.value)
+    assert str(raised.value) == (
+        f"Soubor {path} obsahuje neznámý jazyk ve sloupci language."
+    )
+    assert raised.value.__cause__ is None
+    assert raised.value.__suppress_context__ is True
 
 
 @pytest.mark.parametrize(

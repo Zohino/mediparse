@@ -10,14 +10,18 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.infrastructure.input_file import parse_file
 from mediparse.infrastructure.json_file import parse_lines
 from mediparse.synthetic.domain.note_plan import NotePlan
-from mediparse.synthetic.infrastructure.synthetic_corpus import CORPUS_ROOT
+from mediparse.synthetic.infrastructure.synthetic_corpus import (
+    CORPUS_ROOT,
+    LABELS_NAME,
+    PLANS_NAME,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
     from pathlib import Path
 
-PLANS_PATH: Final = CORPUS_ROOT / "plans.jsonl"
-LABELS_PATH: Final = CORPUS_ROOT / "labels.csv"
+PLANS_PATH: Final = CORPUS_ROOT / PLANS_NAME
+LABELS_PATH: Final = CORPUS_ROOT / LABELS_NAME
 
 
 @dataclass(frozen=True)
