@@ -136,7 +136,7 @@ Délky se definují takto:
 
 - *délka pro encoder* je počet tokenů včetně speciálních tokenů (`add_special_tokens = TRUE`). Okno `r encoder_capacity` zahrnuje oba speciální tokeny, obsah části je tedy `r encoder_capacity` minus `r specials[["xlmr"]]` tokenů. U XLM-R je `r encoder_capacity` tvrdý limit (absolutní pozice), u mDeBERTa délka předtrénování: relativní pozice delší vstup technicky připustí, ale model ho neviděl,
 - *části encoderu* jsou ceil((n − s) / (`r encoder_capacity` − s)) bez překryvu, kde `s` je počet speciálních tokenů. Je to odhad, protože politika chunkování encoderu (překryv, ořez) ještě rozhodnutá není,
-- *délka pro překlad* je počet tokenů zdroje bez speciálních tokenů po ořezu okrajových mezer, stejně jako v `_fits` přípravy překladu. Zpráva se vejde, když `okno − (s + režie) ≥ poměr · s`. Režie chat šablony se změřila jednou na pevné neklinické větě a je `r overhead` tokenů, poměr dělení je `r format(settings$split_ratio, decimal.mark = ",")` a okno `r format_number(settings$window)`, takže se vejde zpráva do `r format(floor(limit), decimal.mark = ",")` tokenů zdroje,
+- *délka pro překlad* `s` je počet tokenů nemaskovaného zdroje bez speciálních tokenů po ořezu okrajových mezer. Vzorec `okno − (s + režie) ≥ poměr · s` proto posuzuje vejití nemaskovaného textu. Režie chat šablony se změřila jednou na pevné neklinické větě a je `r overhead` tokenů, poměr dělení je `r format(settings$split_ratio, decimal.mark = ",")` a okno `r format_number(settings$window)`. Hranice `r format(floor(limit), decimal.mark = ",")` tokenů nemaskovaného zdroje slouží jen pro spodní mez počtu dělených zpráv a částí. Skutečné vejití ověřuje `prepare._note_fits` nad maskovaným textem, kde značky `[[n]]` přidají tokeny; zpráva pod touto hranicí se proto přesto nemusí vejít,
 - *spodní mez částí překladu* je `ceil(s / limit)` s `limit = (okno − režie) / (1 + poměr)`, vychází na `r format(round(limit, 1), decimal.mark = ",")` tokenu. Prázdná zpráva má nula částí, takže součet částí nepočítá prázdné zprávy.
 
 Spodní mez se ověřuje přesným dělením maskovaného textu (`prepare._parts`) na deterministickém vzorku `r format_number(prompt$sample_limit)` zpráv na tabulku, vybraném podle `hash(note_id)`. Dělení celého korpusu by trvalo hodiny. Verdikty na konci sešitu se řídí dvěma pravidly. Encoder vystačí s ořezem, když se do okna vejde aspoň `r share_text(ENCODER_FULL_SHARE)` propouštěcích zpráv, protože ořez pak zasáhne nejvýš `r share_text(1 - ENCODER_FULL_SHARE)` zpráv; jinak se rozhoduje podle mediánu délky. Čeština snižuje podíl v okně, když je anglický podíl větší než odhadovaný český o víc než `r percent_text(CZECH_TOLERANCE, 1)` procentního bodu.
@@ -222,11 +222,11 @@ export_table(
 
 ## Přesné dělení překladu na vzorku {#sec-vzorek}
 
-@tbl-vzorek porovnává spodní mez s přesným dělením skutečným algoritmem přípravy překladu na deterministickém vzorku. Poměr přesného počtu částí ke spodní mezi říká, o kolik spodní mez podhodnocuje počet požadavků. Neshody uvádějí zprávy, u nichž se vzorec zvolený pro spodní mez rozchází s `_fits`. Nedělitelná zpráva je ta, jejíž řádek se nevejde do okna ani sám; do částí se nepočítá.
+@tbl-vzorek porovnává spodní mez s přesným dělením skutečným algoritmem přípravy překladu na deterministickém vzorku. Poměr přesného počtu částí ke spodní mezi říká, o kolik spodní mez podhodnocuje počet požadavků. Neshody uvádějí rozdíl mezi vzorcem nad nemaskovanou délkou a kontrolou okna přípravy (`prepare._note_fits`) nad maskovaným textem. Zahrnují tedy i zprávy, které se vejdou jen bez maskování; takový rozdíl není chybou vzorce. Nedělitelná zpráva je ta, jejíž řádek se nevejde do okna ani sám; do částí se nepočítá.
 
 ```{r}
 #| label: tbl-vzorek
-#| tbl-cap: "Přesné dělení na deterministickém vzorku zpráv: zprávy dělené na více částí, přesný počet částí, spodní mez, jejich poměr, neshody vzorce s kontrolou vejde-se a nedělitelné zprávy."
+#| tbl-cap: "Přesné dělení na deterministickém vzorku zpráv: zprávy dělené na více částí, přesný počet částí, spodní mez, jejich poměr, rozdíly vzorce nad nemaskovaným textem a kontroly maskované zprávy a nedělitelné zprávy."
 #| tbl-colwidths: [14, 10, 10, 8, 12, 12, 10, 12, 12]
 export_table(
   sample_table(samples),
@@ -278,7 +278,7 @@ export_table(
 
 Dokument přepočítal délky zpráv na tokeny tří tokenizérů. Pro další práci z toho plyne:
 
-- **Dělení při překladu.** `r switch(translation_choice, nedeli = "Žádná propouštěcí zpráva se nemusí dělit, každá se vejde do okna překladu.", deli = sprintf("Překlad musí dělit %s propouštěcích zpráv (%s). Spodní mez počtu požadavků na propouštěcí zprávy je %s částí; po přepočtu poměrem přesného dělení ke spodní mezi na vzorku (%s) vychází odhad %s požadavků.", divided_text, divided_share, parts_text, ratio_text(sample_d$pomer), requests_text), nelze = "Počet zpráv nestačí na odhad.")`
+- **Dělení při překladu.** `r switch(translation_choice, nedeli = "Podle nemaskovaných délek je spodní mez počtu dělených propouštěcích zpráv nulová; maskování může dělení přesto vyžadovat.", deli = sprintf("Překlad musí dělit aspoň %s propouštěcích zpráv (podle nemaskovaných délek; %s). Spodní mez počtu požadavků na propouštěcí zprávy je %s částí; po přepočtu poměrem přesného dělení ke spodní mezi na vzorku (%s) vychází odhad %s požadavků.", divided_text, divided_share, parts_text, ratio_text(sample_d$pomer), requests_text), nelze = "Počet zpráv nestačí na odhad.")`
 - **Encodery.** `r encoder_sentence("xlmr")` `r encoder_sentence("mdeberta")`
 - **Čeština.** `r czech_sentence("xlmr")` `r czech_sentence("mdeberta")` Odhad vychází z paralelní syntetiky, ne z překladu MIMIC.
 - **Volba korpusu.** Medián propouštěcí zprávy je `r format_number(median_gemma_d)` tokenů, radiologické `r format_number(median_gemma_r)` tokenů (translategemma). `r switch(corpus_choice, radiologie_kratsi = "Radiologické zprávy jsou kratší, takže se do okna vejdou častěji a překlad je dělí méně.", propousteci_kratsi = "Propouštěcí zprávy jsou kratší než radiologické.", stejne = "Mediány jsou stejné.", nelze = "Počet zpráv nestačí na srovnání.")` Počty zpráv v okně a částí obou korpusů jsou v @tbl-okno a slouží jako podklad pro volbu primárního korpusu a splitu.
