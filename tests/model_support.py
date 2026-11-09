@@ -207,7 +207,7 @@ def write_split(
     """
     step = SplitMaterialization(
         table=_MemoryNotes(notes),
-        splitter=StratifiedGroupFolds(),
+        partitioner=StratifiedGroupFolds(),
         sink=ParquetSplitTable(path),
     )
     return step.run(split_config(**overrides))
@@ -215,7 +215,7 @@ def write_split(
 
 def write_raw_split(
     path: Path,
-    rows: Sequence[tuple[int, int]],
+    rows: Sequence[tuple[int, int | None]],
     metadata: dict[str, object] | None,
 ) -> None:
     """Zapíše soubor splitu mimo adaptér, aby šlo vyrobit stav, který adaptér nezapíše.

@@ -1,30 +1,32 @@
-"""Use case materializace splitu: pacienti zpráv do foldů, uložení pro všechny kroky."""
+"""Use case materializace splitu: rozdělení do částí a uložení pro všechny kroky."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
-from mediparse.domain.split import SharedSplit, ensure_enough_patients, strata
+from mediparse.domain.split import SharedSplit, Split, ensure_enough_patients, strata
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from mediparse.application.ports.experiment import InputTable
     from mediparse.domain.identity import SubjectId
-    from mediparse.domain.split import Split, SplitConfig
+    from mediparse.domain.seed import Seed
+    from mediparse.domain.split import SplitConfig
 
 
-class PatientSplitter(Protocol):
-    """Rozdělení pacientů do foldů."""
+class PatientPartitioner(Protocol):
+    """Stratifikované rozdělení pacientů do disjunktních částí."""
 
-    def split(
+    def partition(
         self,
         subjects: Sequence[SubjectId],
         strata: Sequence[int],
-        config: SplitConfig,
-    ) -> Split:
-        """Rozdělí pacienty zpráv do foldů podle třídy stratifikace každé zprávy."""
+        parts: int,
+        seed: Seed,
+    ) -> tuple[frozenset[SubjectId], ...]:
+        """Rozdělí pacienty do daného počtu částí podle stratifikace zpráv."""
 
 
 class SplitSink(Protocol):
@@ -39,11 +41,11 @@ class SplitMaterialization:
     """Spočte split pacientů jednou a uloží ho jako sdílený artefakt."""
 
     table: InputTable
-    splitter: PatientSplitter
+    partitioner: PatientPartitioner
     sink: SplitSink
 
     def run(self, config: SplitConfig) -> SharedSplit:
-        """Rozdělí pacienty tabulky do foldů a výsledek zapíše.
+        """Vyčlení vývojovou část vedle foldů evaluace a sdílený split zapíše.
 
         Args:
             config: Seed a počet foldů splitu.
@@ -53,8 +55,11 @@ class SplitMaterialization:
         """
         notes = self.table.read()
         subjects = [note.subject_id for note in notes]
-        ensure_enough_patients(subjects, config.folds)
-        split = self.splitter.split(subjects, strata(notes, config.folds), config)
-        shared = SharedSplit(config, split)
+        parts = config.folds + 1
+        ensure_enough_patients(subjects, parts)
+        partition = self.partitioner.partition(
+            subjects, strata(notes, parts), parts, config.seed
+        )
+        shared = SharedSplit(config, Split.from_parts(partition))
         self.sink.write(shared)
         return shared

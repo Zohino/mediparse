@@ -48,9 +48,50 @@ def _labelled(*patients: tuple[int, set[Diagnosis]]) -> list[InputNote]:
 
 def test_disjoint_folds_pass() -> None:
     """Foldy bez společného pacienta tvoří platný split."""
-    split = Split((frozenset({1, 2}), frozenset({3})))
+    split = Split((frozenset({1, 2}), frozenset({3})), development=frozenset())
 
     assert split.holdout(_notes(1, 2, 3), 1).test == tuple(_notes(1, 2, 3)[2:])
+
+
+def test_development_notes_are_outside_holdout() -> None:
+    """Pacienti 1 a 2 tvoří test a trénink, vývojový pacient 3 do nich nevstoupí."""
+    notes = _notes(1, 2, 3)
+    split = Split((frozenset({1}), frozenset({2})), development=frozenset({3}))
+
+    assert split.holdout(notes, 0) == Holdout(0, (notes[1],), (notes[0],))
+
+
+def test_development_subject_in_fold_is_a_leak() -> None:
+    """Vývojová část nesmí sdílet pacienta s žádným foldem."""
+    with pytest.raises(SubjectLeakError):
+        Split((frozenset({1}), frozenset({2})), development=frozenset({2}))
+
+
+def test_from_parts_reserves_last_part_for_development() -> None:
+    """První dvě části jsou foldy, poslední vývojová část."""
+    split = Split.from_parts([frozenset({1}), frozenset({2}), frozenset({3})])
+
+    assert split == Split((frozenset({1}), frozenset({2})), development=frozenset({3}))
+
+
+@pytest.mark.parametrize(
+    "parts", [(), (frozenset({1}),), (frozenset({1}), frozenset({2}))]
+)
+def test_from_parts_needs_two_folds_and_development(
+    parts: tuple[frozenset[int], ...],
+) -> None:
+    """Méně než tři části je chyba volajícího kódu."""
+    with pytest.raises(ValueError, match="aspoň 3 části"):
+        Split.from_parts(parts)
+
+
+def test_sha256_includes_development_in_numeric_order() -> None:
+    """Nezávislé orákulum je sha256sum nad 2 TAB 0, 5 TAB development, 10 TAB 1."""
+    split = Split((frozenset({2}), frozenset({10})), development=frozenset({5}))
+
+    assert split.sha256() == (
+        "0f4a94aad52205bf10af72b289f926bffcbdce3fc141500daf9762d7777ce608"
+    )
 
 
 def test_shared_subject_is_a_leak() -> None:
@@ -58,9 +99,9 @@ def test_shared_subject_is_a_leak() -> None:
     folds = (frozenset({1, 2, 987654}), frozenset({2, 3}), frozenset({987654, 4}))
 
     with pytest.raises(
-        SubjectLeakError, match=r"^Pacientů ve více foldech: 2\.$"
+        SubjectLeakError, match=r"^Pacientů ve více částech splitu: 2\.$"
     ) as raised:
-        Split(folds)
+        Split(folds, development=frozenset())
 
     assert "987654" not in str(raised.value)
 
@@ -68,7 +109,7 @@ def test_shared_subject_is_a_leak() -> None:
 def test_holdout_splits_notes_by_subject_in_input_order() -> None:
     """Test jsou zprávy pacientů foldu, trénink ostatní; pořadí zůstává a fold se přenese."""
     notes = _notes(1, 2, 1, 3, 2)
-    split = Split((frozenset({1, 3}), frozenset({2})))
+    split = Split((frozenset({1, 3}), frozenset({2})), development=frozenset())
 
     holdout = split.holdout(notes, 0)
 
@@ -84,7 +125,7 @@ def test_holdout_splits_notes_by_subject_in_input_order() -> None:
 @pytest.mark.parametrize("fold", [2, -1])
 def test_fold_out_of_range_is_invalid_input(fold: int) -> None:
     """Fold mimo 0..počet-1 je neplatný vstup, záporný index nevybere poslední."""
-    split = Split((frozenset({1}), frozenset({2})))
+    split = Split((frozenset({1}), frozenset({2})), development=frozenset())
 
     with pytest.raises(
         InvalidInputError, match=rf"^Fold {fold} neexistuje, počet foldů splitu: 2\.$"
@@ -94,7 +135,7 @@ def test_fold_out_of_range_is_invalid_input(fold: int) -> None:
 
 def test_note_of_subject_outside_split_is_invalid_input() -> None:
     """Zpráva pacienta mimo split nese v hlášce počet, ne identifikátor."""
-    split = Split((frozenset({1}), frozenset({2})))
+    split = Split((frozenset({1}), frozenset({2})), development=frozenset())
 
     with pytest.raises(
         InvalidInputError, match=r"^Zprávy pacientů mimo split: 2\.$"
@@ -275,42 +316,42 @@ def test_invalid_split_config_is_rejected(body: dict[str, object]) -> None:
 
 def test_sha256_matches_golden_value() -> None:
     """Otisk ukotvuje tvar řádků ``subject_id TAB fold LF``; stejný musí vyjít v S26 ze souboru."""
-    split = Split((frozenset({1, 3}), frozenset({2})))
+    split = Split((frozenset({1, 3}), frozenset({2})), development=frozenset())
 
     assert split.sha256() == GOLDEN_SHA256
 
 
 def test_sha256_changes_when_subject_moves_fold() -> None:
     """Přesun pacienta do jiného foldu otisk změní."""
-    moved = Split((frozenset({1}), frozenset({2, 3})))
+    moved = Split((frozenset({1}), frozenset({2, 3})), development=frozenset())
 
     assert moved.sha256() != GOLDEN_SHA256
 
 
 def test_sha256_changes_when_folds_swap_order() -> None:
     """Číslo foldu je součástí přiřazení, takže prohození pořadí foldů otisk změní."""
-    swapped = Split((frozenset({2}), frozenset({1, 3})))
+    swapped = Split((frozenset({2}), frozenset({1, 3})), development=frozenset())
 
     assert swapped.sha256() != GOLDEN_SHA256
 
 
 def test_sha256_ignores_construction_order() -> None:
     """Stejné přiřazení z jiné konstrukce frozensetů dá týž otisk."""
-    rebuilt = Split((frozenset([3, 1]), frozenset([2])))
+    rebuilt = Split((frozenset([3, 1]), frozenset([2])), development=frozenset())
 
     assert rebuilt.sha256() == GOLDEN_SHA256
 
 
 def test_sha256_orders_subjects_numerically() -> None:
     """Pacient 10 je za pacientem 2, ne před ním jako při textovém řazení."""
-    split = Split((frozenset({2}), frozenset({10})))
+    split = Split((frozenset({2}), frozenset({10})), development=frozenset())
 
     assert split.sha256() == NUMERIC_ORDER_SHA256
 
 
 def test_shared_split_with_matching_folds_is_created() -> None:
     """K z configu shodné s počtem foldů splitu vznikne bez chyby."""
-    split = Split((frozenset({1}), frozenset({2})))
+    split = Split((frozenset({1}), frozenset({2})), development=frozenset())
     config = SplitConfig(seed=3, folds=FOLDS)
 
     SharedSplit(config, split)
@@ -318,7 +359,9 @@ def test_shared_split_with_matching_folds_is_created() -> None:
 
 def test_shared_split_with_other_folds_is_a_code_error() -> None:
     """Split s jiným počtem foldů, než říká config, je chyba kódu (ValueError)."""
-    split = Split((frozenset({1}), frozenset({2}), frozenset({3})))
+    split = Split(
+        (frozenset({1}), frozenset({2}), frozenset({3})), development=frozenset()
+    )
 
     with pytest.raises(ValueError, match=r"^Config má 2 foldů, split 3\.$"):
         SharedSplit(SplitConfig(seed=0, folds=FOLDS), split)
@@ -333,7 +376,7 @@ def test_fewer_patients_than_folds_is_invalid_input() -> None:
     """K - 1 pacientů je neplatný vstup; hláška nese jen počty."""
     with pytest.raises(
         InvalidInputError,
-        match=r"^Pacientů je 1, dělení do 2 foldů potřebuje aspoň 2\.$",
+        match=r"^Pacientů je 1, dělení do 2 částí \(foldy a vývojová\) potřebuje aspoň 2\.$",
     ):
         ensure_enough_patients([987654], FOLDS)
 

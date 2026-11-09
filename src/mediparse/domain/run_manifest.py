@@ -38,7 +38,8 @@ class RunManifest(BaseModel):
     """Provenance tréninku; funkce vstupů a prostředí, bez času běhu.
 
     ``config_sha256`` je hash configu tréninku, ``seed`` seed modelu. Split
-    nese ``split_seed``, ``split_folds`` a ``split_sha256``, otisk přiřazení pacientů do foldů.
+    nese ``split_seed``, ``split_folds`` a ``split_sha256``, otisk přiřazení pacientů
+    do foldů a vývojové části.
     ``diagnostic_strip`` je ``None``, když se zprávy nestripovaly.
     ``text_preprocessing`` zaznamenává úroveň předzpracování vstupu TF-IDF.
     ``text_normalization`` nese slovníky předané trenérovi, při úrovni ``none`` je ``None``.

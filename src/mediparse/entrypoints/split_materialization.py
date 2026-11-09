@@ -45,20 +45,21 @@ def run(
 
     Returns:
         OK po zápisu splitu; REFUSED pro chybějící nebo neplatnou tabulku
-        a config, pro méně pacientů, než je foldů,
+        a config, pro méně pacientů, než je foldů + 1,
         a pro neoznačená data v prostředí, které nesmí číst MIMIC.
     """
     check_inputs_access(environ, (cohort,))
     step = SplitMaterialization(
         table=ParquetNoteTable(cohort),
-        splitter=StratifiedGroupFolds(),
+        partitioner=StratifiedGroupFolds(),
         sink=ParquetSplitTable(output),
     )
     shared = step.run(load_split_config(config))
     logger.info(
-        "Split do %d foldů, pacientů na fold: %s, uložen do %s.",
+        "Split do %d foldů, pacientů na fold: %s, vývojových pacientů: %d, uložen do %s.",
         shared.config.folds,
         [len(subjects) for subjects in shared.split.folds],
+        len(shared.split.development),
         output,
     )
     return ExitCode.OK

@@ -97,7 +97,9 @@ def test_prediction_of_another_subjects_note_is_rejected() -> None:
         Prediction("row", 0, "1-DS-1", 2, Diagnosis.CKD, predicted=True, score=1.0)
 
 
-SPLIT = Split((frozenset({1, 2}), frozenset({3}), frozenset({4})))
+SPLIT = Split(
+    (frozenset({1, 2}), frozenset({3}), frozenset({4})), development=frozenset()
+)
 NOTES = tuple(
     InputNote(note_id(subject, order), subject, Language.EN, "text", frozenset())
     for subject, order in [(1, 1), (1, 2), (2, 1), (3, 1), (4, 1)]

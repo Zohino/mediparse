@@ -256,7 +256,7 @@ def test_split_with_subject_in_two_folds_is_refused(
 
     assert code is ExitCode.REFUSED
     assert outputs.existing() == []
-    assert "ve více foldech: 1" in caplog.text
+    assert "ve více částech splitu: 1" in caplog.text
     assert "90000001" not in caplog.text
     assert "90000002" not in caplog.text
 

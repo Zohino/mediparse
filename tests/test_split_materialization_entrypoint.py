@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from typing import TYPE_CHECKING, Final
 
 import pytest
@@ -40,17 +41,27 @@ def _run(notes: Path, config: Path, output: Path) -> ExitCode:
     )
 
 
-def test_writes_split_readable_by_adapter(tmp_path: Path) -> None:
+def test_writes_split_readable_by_adapter(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
     """Běh zapíše splits.parquet s configem a pacienty všech zpráv."""
     notes, config = _inputs(tmp_path)
     output = tmp_path / "build" / "splits.parquet"
 
-    code = _run(notes, config, output)
+    with caplog.at_level(logging.INFO):
+        code = _run(notes, config, output)
 
     shared = ParquetSplitTable(output).read()
     assert code is ExitCode.OK
     assert shared.config == split_config(seed=0)
-    assert frozenset().union(*shared.split.folds) == set(range(1, PATIENTS + 1))
+    assert frozenset().union(*shared.split.folds, shared.split.development) == set(
+        range(1, PATIENTS + 1)
+    )
+    assert shared.split.development
+    assert (
+        f"pacientů na fold: {[len(fold) for fold in shared.split.folds]}" in caplog.text
+    )
+    assert f"vývojových pacientů: {len(shared.split.development)}" in caplog.text
 
 
 @pytest.mark.parametrize("missing", ["notes", "config"])
@@ -88,7 +99,7 @@ def test_invalid_config_is_refused(
 def test_fewer_patients_than_folds_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
-    """Méně pacientů než foldů skončí REFUSED s počty, ne tracebackem."""
+    """Méně pacientů než foldů + 1 skončí REFUSED s počty, ne tracebackem."""
     notes, config = _inputs(tmp_path, patients=1)
     output = tmp_path / "out" / "splits.parquet"
 
@@ -96,7 +107,10 @@ def test_fewer_patients_than_folds_is_refused(
 
     assert code is ExitCode.REFUSED
     assert not output.exists()
-    assert "Pacientů je 1" in caplog.text
+    assert (
+        "Pacientů je 1, dělení do 3 částí (foldy a vývojová) potřebuje aspoň 3."
+        in caplog.text
+    )
 
 
 def test_same_inputs_give_identical_file(tmp_path: Path) -> None:

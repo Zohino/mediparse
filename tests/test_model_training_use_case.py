@@ -21,7 +21,7 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
 CONFIG = parsed_training_config(diagnosis="ckd", row_id="row")
-SPLIT = Split((frozenset({1, 2}), frozenset({3, 4})))
+SPLIT = Split((frozenset({1, 2}), frozenset({3, 4})), development=frozenset())
 SPLIT_CONFIG = split_config(folds=2, seed=4)
 SHARED = SharedSplit(SPLIT_CONFIG, SPLIT)
 NOTES = (
@@ -152,6 +152,62 @@ def test_trains_on_train_and_predicts_test() -> None:
     )
 
 
+@pytest.mark.parametrize("fold", [0, 1])
+def test_training_and_predictions_exclude_development(fold: int) -> None:
+    """Jedinečné syntetické vývojové texty ani jejich zprávy nedostane trenér či sink."""
+    development = (
+        InputNote("5-DS-1", 5, Language.EN, "syntetický vývoj první", frozenset()),
+        InputNote("5-DS-2", 5, Language.EN, "syntetický vývoj druhý", frozenset()),
+    )
+    shared = SharedSplit(SPLIT_CONFIG, Split(SPLIT.folds, development=frozenset({5})))
+    recorder = _Recorder()
+    config = parsed_training_config(diagnosis="ckd", row_id="row", fold=fold)
+
+    _use_case((*NOTES, *development), shared, recorder).run(config)
+
+    fit = recorder.calls["fit"]
+    assert isinstance(fit, tuple)
+    texts, _ = fit
+    assert all(note.text not in texts for note in development)
+    predictions = recorder.calls["predictions"]
+    assert isinstance(predictions, tuple)
+    assert {item.note_id for item in predictions}.isdisjoint(
+        note.note_id for note in development
+    )
+
+
+def test_development_positives_do_not_satisfy_class_check() -> None:
+    """Dva pozitivní pacienti jen ve vývoji nestačí; foldy mají nula pozitivních."""
+    development = (
+        InputNote(
+            "5-DS-1",
+            5,
+            Language.EN,
+            "syntetický vývoj",
+            frozenset({Diagnosis.PNEUMONIA}),
+        ),
+        InputNote(
+            "6-DS-1",
+            6,
+            Language.EN,
+            "syntetický vývoj",
+            frozenset({Diagnosis.PNEUMONIA}),
+        ),
+    )
+    shared = SharedSplit(
+        SPLIT_CONFIG, Split(SPLIT.folds, development=frozenset({5, 6}))
+    )
+    recorder = _Recorder()
+    config = parsed_training_config(diagnosis="pneumonia", row_id="row")
+
+    with pytest.raises(
+        InvalidInputError, match=r"pneumonia.*0 pozitivních a 4 negativních"
+    ):
+        _use_case((*NOTES, *development), shared, recorder).run(config)
+
+    assert recorder.calls.keys() <= {"split"}
+
+
 def test_too_few_classifications_stop_before_saving() -> None:
     """Chybějící klasifikace testovací zprávy vyvolá chybu před uložením výstupů."""
     recorder = _Recorder()
@@ -222,7 +278,9 @@ def test_class_check_uses_folds_of_shared_split() -> None:
     recorder = _Recorder()
     shared = SharedSplit(
         split_config(folds=3),
-        Split((frozenset({1}), frozenset({2}), frozenset({3, 4}))),
+        Split(
+            (frozenset({1}), frozenset({2}), frozenset({3, 4})), development=frozenset()
+        ),
     )
 
     with pytest.raises(InvalidInputError, match=r"ckd.*aspoň 3\."):
