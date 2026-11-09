@@ -16,8 +16,7 @@ from sklearn.svm import LinearSVC
 
 from mediparse.domain.classical_screening import ClassifierFamily
 from mediparse.domain.evaluation import Classification
-from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
+from mediparse.infrastructure.sklearn_classifier import ensure_tokens, tfidf_vectorizer
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 
 if TYPE_CHECKING:
@@ -51,20 +50,12 @@ class TfidfFeaturizer:
 
         Raises:
             InvalidInputError: Z tréninkových textů nevznikne žádný příznak.
-            ValueError: Jiná chyba parametrů vektorizéru.
         """
         vectorizer = tfidf_vectorizer(
             self.normalization, analyzer=spec.analyzer, ngram_range=spec.ngram_range
         )
-        try:
-            features = vectorizer.fit_transform(list(train))
-        except ValueError as error:
-            if "empty vocabulary" not in str(error):
-                raise
-            msg = (
-                "Trénovací texty neobsahují žádný token, slovník TF-IDF by byl prázdný."
-            )
-            raise InvalidInputError(msg) from error
+        ensure_tokens(vectorizer, train)
+        features = vectorizer.fit_transform(list(train))
         logger.info(
             "Vektorizér %s: %d trénovacích a %d testovacích zpráv, %d příznaků.",
             spec.name,

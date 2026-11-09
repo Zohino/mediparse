@@ -98,6 +98,18 @@ def tfidf_vectorizer(
     )
 
 
+def ensure_tokens(vectorizer: TfidfVectorizer, texts: Sequence[str]) -> None:
+    """Odmítne texty, ze kterých analyzátor nevytvoří žádný příznak.
+
+    Raises:
+        InvalidInputError: Trénovací slovník by byl prázdný.
+    """
+    analyzer = vectorizer.build_analyzer()
+    if not any(analyzer(text) for text in texts):
+        msg = "Trénovací texty neobsahují žádný token, slovník TF-IDF by byl prázdný."
+        raise InvalidInputError(msg)
+
+
 # Seznam platí při načtení, ne při uložení: skops model uloží vždy a při načtení
 # pustí funkci jen z tohoto seznamu. Přejmenování funkce proto rozbije načítání
 # dříve uložených modelů. Oba slovníky nese functools.partial, který musí být
@@ -127,12 +139,7 @@ class LinearSvmTrainer:
                 diagnostických sekcí ze zpráv, které z nich sestávají.
         """
         vectorizer = tfidf_vectorizer(self.normalization)
-        analyzer = vectorizer.build_analyzer()
-        if not any(analyzer(text) for text in texts):
-            msg = (
-                "Trénovací texty neobsahují žádný token, slovník TF-IDF by byl prázdný."
-            )
-            raise InvalidInputError(msg)
+        ensure_tokens(vectorizer, texts)
         pipeline = Pipeline([
             ("tfidf", vectorizer),
             ("svm", LinearSVC(C=self.regularization, random_state=self.seed)),
