@@ -5,7 +5,7 @@ from __future__ import annotations
 import functools
 import zipfile
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Final, Literal
 
 import skops.io as sio
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -68,7 +68,12 @@ def tfidf_preprocessor(
     return rewrite_diagnosis_variants(expanded, variants).lower()
 
 
-def tfidf_vectorizer(normalization: TextNormalization | None) -> TfidfVectorizer:
+def tfidf_vectorizer(
+    normalization: TextNormalization | None,
+    *,
+    analyzer: Literal["word", "char_wb"] = "word",
+    ngram_range: tuple[int, int] = (1, 1),
+) -> TfidfVectorizer:
     """Vectorizer, který používá trénink i měření v sešitu EDA.
 
     Returns:
@@ -85,7 +90,12 @@ def tfidf_vectorizer(normalization: TextNormalization | None) -> TfidfVectorizer
             variants=dict(normalization.variants),
         )
     )
-    return TfidfVectorizer(sublinear_tf=True, preprocessor=preprocessor)
+    return TfidfVectorizer(
+        sublinear_tf=True,
+        preprocessor=preprocessor,
+        analyzer=analyzer,
+        ngram_range=ngram_range,
+    )
 
 
 # Seznam platí při načtení, ne při uložení: skops model uloží vždy a při načtení
