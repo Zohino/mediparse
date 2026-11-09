@@ -1,4 +1,4 @@
-"""Porty experimentu ML: vstupní tabulka, hotový split, klasifikátor a predikce."""
+"""Sdílené porty experimentu ML: vstup, dělení pacientů, klasifikace, predikce a metriky."""
 
 from __future__ import annotations
 

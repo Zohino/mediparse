@@ -191,7 +191,7 @@ def ensure_enough_patients(subjects: Sequence[SubjectId], parts: int) -> None:
 
     Args:
         subjects: Pacient každé zprávy; pacient s více zprávami se počítá jednou.
-        parts: Počet částí dělení (foldy a vývojová část).
+        parts: Počet částí dělení.
 
     Raises:
         InvalidInputError: Pacientů je méně než částí dělení.
@@ -210,12 +210,12 @@ def strata(notes: Sequence[InputNote], parts: int) -> tuple[int, ...]:
 
     Kombinace diagnóz pacienta (sjednocení labelů všech jeho zpráv) je bitová
     maska v pořadí ``Diagnosis``; na pořadí čísel nezáleží, jen na identitě třídy.
-    Předpokládá aspoň tolik pacientů jako částí dělení (krok splitu to zajistí přes
-    ``ensure_enough_patients``); jinak by zbytková třída vyvolala varování sklearn.
+    Předpokládá aspoň tolik různých pacientů jako částí dělení; jinak by zbytková
+    třída vyvolala varování sklearn.
 
     Args:
         notes: Zprávy korpusu.
-        parts: Počet částí dělení (foldy a vývojová část).
+        parts: Počet částí dělení.
 
     Returns:
         Třída každé zprávy v pořadí vstupu.
@@ -238,7 +238,7 @@ def _stratum_of(combinations: dict[SubjectId, int], parts: int) -> dict[SubjectI
 
     Args:
         combinations: Bitová maska kombinace diagnóz každého pacienta.
-        parts: Počet částí dělení (foldy a vývojová část).
+        parts: Počet částí dělení.
 
     Returns:
         Třída stratifikace každého pacienta.
