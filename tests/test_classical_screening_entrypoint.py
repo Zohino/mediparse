@@ -4,20 +4,20 @@ from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
 import pyarrow.parquet as pq
 import pytest
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import ScreeningManifest
 from mediparse.entrypoints import classical_screening
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.split_table import ParquetSplitTable
-from tests.model_support import write_raw_split
 from tests.screening_support import DEVELOPMENT, SHARED, notes
 from tests.support import (
     REPOSITORY_DIAGNOSIS_CANDIDATES,
@@ -46,20 +46,7 @@ def _inputs(root: Path, *, preprocessing: str = "none", strip: bool = False) -> 
     cohort = root / "cohort.parquet"
     ParquetNoteTable(cohort).write(notes())
     split = root / "split.parquet"
-    write_raw_split(
-        split,
-        [
-            (subject, fold)
-            for fold, subjects in enumerate(SHARED.split.folds)
-            for subject in sorted(subjects)
-        ]
-        + [(subject, None) for subject in sorted(DEVELOPMENT)],
-        {
-            "seed": SHARED.config.seed,
-            "folds": SHARED.config.folds,
-            "sha256": SHARED.split.sha256(),
-        },
-    )
+    ParquetSplitTable(split).write(SHARED)
     config = root / "config.json"
     config.write_text(
         json.dumps({
@@ -232,3 +219,28 @@ def test_main_parses_required_paths(
     monkeypatch.setattr(classical_screening, "configure_logging", Mock())
     assert classical_screening.main() is ExitCode.REFUSED
     assert {name: execute.call_args.kwargs[name] for name in names} == paths
+
+
+def test_preprocessing_changes_screening_result_bytes(tmp_path: Path) -> None:
+    """Zkratka COPD změní příznaky a agregované výsledky při dictionary oproti none."""
+    corpus = tuple(
+        replace(
+            note,
+            text=(
+                "COPD wheeze"
+                if note.has_label(Diagnosis.DIABETES)
+                else "chronic obstructive pulmonary disease cough"
+            ),
+        )
+        for note in notes()
+    )
+    results = []
+    for preprocessing in ("none", "dictionary"):
+        root = tmp_path / preprocessing
+        inputs = _inputs(root, preprocessing=preprocessing)
+        ParquetNoteTable(inputs.cohort).write(corpus)
+        out = root / "out"
+        assert _run(inputs, out) is ExitCode.OK
+        results.append((out / "classical.parquet").read_bytes())
+
+    assert results[0] != results[1]

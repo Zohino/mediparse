@@ -320,3 +320,39 @@ def test_featurizer_logs_only_name_and_manual_counts(
     assert all(
         token not in caplog.text for token in ("quartz", "amber", "opal", "jasper")
     )
+
+
+def test_featurizer_applies_its_normalization() -> None:
+    """Rozvinutí COPD vytvoří čtyři slovní příznaky místo jediného."""
+    train, _ = TfidfFeaturizer(
+        TextNormalization(
+            acronyms={"COPD": "chronic obstructive pulmonary disease"}, variants={}
+        )
+    ).fit_transform(
+        VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
+        ["COPD"],
+        ["COPD"],
+    )
+    expected_features = 4
+    assert train.shape[1] == expected_features
+
+
+@pytest.mark.parametrize(
+    ("analyzer", "ngram_range", "expected_features"),
+    [
+        ("char_wb", (3, 3), 3),
+        ("word", (1, 1), 1),
+    ],
+)
+def test_featurizer_uses_spec_analyzer(
+    analyzer: Literal["word", "char_wb"],
+    ngram_range: tuple[int, int],
+    expected_features: int,
+) -> None:
+    """Abc má tři znakové trigramy s hranicemi slova, ale jediný slovní unigram."""
+    train, _ = TfidfFeaturizer(None).fit_transform(
+        VectorizerSpec(name="test", analyzer=analyzer, ngram_range=ngram_range),
+        ["abc"],
+        ["abc"],
+    )
+    assert train.shape[1] == expected_features
