@@ -18,6 +18,7 @@ import pytest
 from mediparse.domain.costs import GpuMeasurement, GpuUsage, TrainingCosts
 from mediparse.domain.environment import GpuDevice
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints import model_training
 from mediparse.entrypoints.exit_code import ExitCode
@@ -33,6 +34,7 @@ from tests.model_support import (
     OVERLAPPING,
     SPELLING_VOCABULARY,
     VARIANT_VOCABULARY,
+    model_input,
     sectioned_notes,
     separable_notes,
     training_config,
@@ -346,7 +348,10 @@ def _manifest(outputs: _Outputs) -> RunManifest:
 
 def test_manifest_records_strip_sections_and_lexicon_digest(tmp_path: Path) -> None:
     """Se stripem nese manifest klíče diagnostických sekcí a otisk lexikonu."""
-    notes, config, split = _inputs(tmp_path, strip_diagnostic_sections=True)
+    notes, config, split = _inputs(
+        tmp_path,
+        input=model_input(strip=True),
+    )
     outputs = _Outputs.under(tmp_path / "out")
 
     code = _run(notes, config, split, outputs)
@@ -385,7 +390,10 @@ def _lexicon(path: Path, *, extra_diagnostic: bool, synonym: str | None = None) 
 def test_manifest_lists_diagnostic_sections_sorted(tmp_path: Path) -> None:
     """Sekce jsou seřazené, i když je lexikon deklaruje v opačném pořadí."""
     lexicon = _lexicon(tmp_path / "lexicon.json", extra_diagnostic=True)
-    notes, config, split = _inputs(tmp_path, strip_diagnostic_sections=True)
+    notes, config, split = _inputs(
+        tmp_path,
+        input=model_input(strip=True),
+    )
     outputs = _Outputs.under(tmp_path / "out")
 
     code = _call((notes, config, split), outputs, lexicon, fixed_revision)
@@ -398,7 +406,10 @@ def test_manifest_lists_diagnostic_sections_sorted(tmp_path: Path) -> None:
 
 def test_synonym_change_changes_lexicon_digest(tmp_path: Path) -> None:
     """Změna synonyma při stejném datasetu a configu změní otisk lexikonu."""
-    notes, config, split = _inputs(tmp_path, strip_diagnostic_sections=True)
+    notes, config, split = _inputs(
+        tmp_path,
+        input=model_input(strip=True),
+    )
     digests = []
     for name, synonym in (("a", None), ("b", "Allergy list")):
         lexicon = _lexicon(
@@ -418,7 +429,10 @@ def test_synonym_change_changes_lexicon_digest(tmp_path: Path) -> None:
 
 def test_missing_lexicon_is_refused(tmp_path: Path) -> None:
     """Chybějící lexikon při zapnutém stripu krok odmítne a nic nevznikne."""
-    notes, config, split = _inputs(tmp_path, strip_diagnostic_sections=True)
+    notes, config, split = _inputs(
+        tmp_path,
+        input=model_input(strip=True),
+    )
     outputs = _Outputs.under(tmp_path / "out")
 
     code = _call(
@@ -436,7 +450,11 @@ def test_strip_changes_scores_on_sectioned_notes(tmp_path: Path) -> None:
     for strip in (False, True):
         root = tmp_path / str(strip)
         root.mkdir()
-        notes, config, split = _inputs(root, corpus, strip_diagnostic_sections=strip)
+        notes, config, split = _inputs(
+            root,
+            corpus,
+            input=model_input(strip=strip),
+        )
         outputs = _Outputs.under(root / "out")
         assert _run(notes, config, split, outputs) is ExitCode.OK
         scores.append([
@@ -454,7 +472,11 @@ def test_strip_removing_all_text_is_refused(
         replace(note, text=f"Discharge Diagnosis:\n{note.text}\n")
         for note in separable_notes(PATIENTS, OVERLAPPING)
     ]
-    notes, config, split = _inputs(tmp_path, corpus, strip_diagnostic_sections=True)
+    notes, config, split = _inputs(
+        tmp_path,
+        corpus,
+        input=model_input(strip=True),
+    )
     outputs = _Outputs.under(tmp_path / "out")
 
     code = _run(notes, config, split, outputs)
@@ -472,10 +494,17 @@ def test_manifest_records_normalization_with_acronyms(tmp_path: Path) -> None:
     for normalize in (False, True):
         root = tmp_path / str(normalize)
         root.mkdir()
-        notes, config, split = _inputs(root, normalize_clinical_text=normalize)
+        notes, config, split = _inputs(
+            root,
+            input=model_input(preprocessing="normalized" if normalize else "none"),
+        )
         outputs = _Outputs.under(root / "out")
         assert _run(notes, config, split, outputs) is ExitCode.OK
-        recorded.append(_manifest(outputs).normalize_clinical_text)
+        manifest = _manifest(outputs)
+        assert manifest.text_preprocessing is (
+            TextPreprocessing.NORMALIZED if normalize else TextPreprocessing.NONE
+        )
+        recorded.append(manifest.text_normalization)
 
     assert recorded[0] is None
     assert recorded[1] == load_text_normalization(
@@ -487,7 +516,10 @@ def test_normalization_without_candidates_file_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
     """Zapnutá normalizace bez souboru kandidátů krok odmítne a nic nezapíše."""
-    notes, config, split = _inputs(tmp_path, normalize_clinical_text=True)
+    notes, config, split = _inputs(
+        tmp_path,
+        input=model_input(preprocessing="normalized"),
+    )
     outputs = _Outputs.under(tmp_path / "out")
 
     code = _run_with_candidates((notes, config, split), outputs, tmp_path / "none.json")
@@ -499,7 +531,10 @@ def test_normalization_without_candidates_file_is_refused(
 
 def test_candidates_file_is_not_read_without_normalization(tmp_path: Path) -> None:
     """Při vypnuté normalizaci se soubor kandidátů nečte, neexistující cesta projde."""
-    notes, config, split = _inputs(tmp_path, normalize_clinical_text=False)
+    notes, config, split = _inputs(
+        tmp_path,
+        input=model_input(),
+    )
     outputs = _Outputs.under(tmp_path / "out")
 
     code = _run_with_candidates((notes, config, split), outputs, tmp_path / "none.json")
@@ -517,7 +552,11 @@ def test_normalization_merges_abbreviation_and_full_name(tmp_path: Path) -> None
     for normalize in (False, True):
         root = tmp_path / str(normalize)
         root.mkdir()
-        notes, config, split = _inputs(root, corpus, normalize_clinical_text=normalize)
+        notes, config, split = _inputs(
+            root,
+            corpus,
+            input=model_input(preprocessing="normalized" if normalize else "none"),
+        )
         candidates = root / "candidates.json"
         shutil.copy(REPOSITORY_DIAGNOSIS_CANDIDATES, candidates)
         outputs = _Outputs.under(root / "out")
@@ -544,7 +583,11 @@ def test_normalization_changes_scores_on_spelling_variants(tmp_path: Path) -> No
     for normalize in (False, True):
         root = tmp_path / str(normalize)
         root.mkdir()
-        notes, config, split = _inputs(root, corpus, normalize_clinical_text=normalize)
+        notes, config, split = _inputs(
+            root,
+            corpus,
+            input=model_input(preprocessing="normalized" if normalize else "none"),
+        )
         outputs = _Outputs.under(root / "out")
         assert _run(notes, config, split, outputs) is ExitCode.OK
         scores[normalize] = {
@@ -565,12 +608,15 @@ def test_variant_switch_controls_model_and_manifest(tmp_path: Path) -> None:
         notes, config, split = _inputs(
             root,
             corpus,
-            normalize_clinical_text=True,
-            normalize_diagnosis_variants=enabled,
+            input=model_input(preprocessing="dictionary" if enabled else "normalized"),
         )
         outputs = _Outputs.under(root / "out")
         assert _run(notes, config, split, outputs) is ExitCode.OK
-        normalization = _manifest(outputs).normalize_clinical_text
+        manifest = _manifest(outputs)
+        assert manifest.text_preprocessing is (
+            TextPreprocessing.DICTIONARY if enabled else TextPreprocessing.NORMALIZED
+        )
+        normalization = manifest.text_normalization
         assert normalization is not None
         assert normalization.acronyms
         if enabled:
@@ -700,8 +746,10 @@ def test_invalid_preparation_is_refused_before_gpu_monitor(
     """Chybný lexikon i slovník normalizace se odmítnou před otevřením GPU okna."""
     inputs = _inputs(
         tmp_path,
-        strip_diagnostic_sections=phase == "input",
-        normalize_clinical_text=phase == "normalization",
+        input=model_input(
+            strip=phase == "input",
+            preprocessing="normalized" if phase == "normalization" else "none",
+        ),
     )
     outputs = _Outputs.under(tmp_path / "out")
     monitor = Mock(

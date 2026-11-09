@@ -10,6 +10,7 @@ from pydantic import ValidationError
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.training import TrainingConfig
 from mediparse.infrastructure.training_config import load_training_config
 from tests.model_support import training_config
@@ -24,7 +25,7 @@ def test_repository_config_loads() -> None:
     config = load_training_config(REPOSITORY_TRAINING_CONFIG)
 
     assert config.row_id == "smoketest-en-svm-strip"
-    assert config.strip_diagnostic_sections is True
+    assert config.input.strip_diagnostic_sections is True
     assert config.diagnosis is Diagnosis.DIABETES
     assert config.regularization > 0
 
@@ -44,74 +45,34 @@ def test_wrong_schema_is_invalid_input(tmp_path: Path) -> None:
         load_training_config(path)
 
 
-def test_config_without_strip_switch_is_rejected() -> None:
-    """Přepínač stripu je povinný, bez výchozí hodnoty."""
+def test_input_is_required() -> None:
+    """Config musí výslovně deklarovat vstup modelu."""
     fields = training_config()
-    del fields["strip_diagnostic_sections"]
+    del fields["input"]
 
-    with pytest.raises(ValidationError, match="strip_diagnostic_sections"):
+    with pytest.raises(ValidationError, match="input"):
         TrainingConfig.model_validate_json(json.dumps(fields))
 
 
-def test_strip_switch_as_string_is_rejected() -> None:
-    """Přepínač je striktní bool, řetězec ``"true"`` neprojde."""
-    with pytest.raises(ValidationError, match="strip_diagnostic_sections"):
+@pytest.mark.parametrize(
+    "field",
+    [
+        "normalize_clinical_text",
+        "strip_diagnostic_sections",
+        "normalize_diagnosis_variants",
+    ],
+)
+def test_legacy_top_level_switches_are_rejected(field: str) -> None:
+    """Staré přepínače na nejvyšší úrovni jsou pole navíc."""
+    with pytest.raises(ValidationError, match=field):
         TrainingConfig.model_validate_json(
-            json.dumps(training_config(strip_diagnostic_sections="true"))
+            json.dumps(training_config(**{field: False}))
         )
 
 
-def test_repository_config_normalizes() -> None:
-    """Smoketest běží s normalizací."""
-    assert load_training_config(REPOSITORY_TRAINING_CONFIG).normalize_clinical_text
-
-
-def test_config_without_normalization_switch_is_rejected() -> None:
-    """Přepínač normalizace je povinný, bez výchozí hodnoty."""
-    fields = training_config()
-    del fields["normalize_clinical_text"]
-
-    with pytest.raises(ValidationError, match="normalize_clinical_text"):
-        TrainingConfig.model_validate_json(json.dumps(fields))
-
-
-def test_normalization_switch_as_string_is_rejected() -> None:
-    """Přepínač je striktní bool, řetězec ``"true"`` neprojde."""
-    with pytest.raises(ValidationError, match="normalize_clinical_text"):
-        TrainingConfig.model_validate_json(
-            json.dumps(training_config(normalize_clinical_text="true"))
-        )
-
-
-def test_variant_switch_is_required() -> None:
-    """Přepis variant musí každý config explicitně zapnout či vypnout."""
-    fields = training_config()
-    del fields["normalize_diagnosis_variants"]
-    with pytest.raises(ValidationError, match="normalize_diagnosis_variants"):
-        TrainingConfig.model_validate_json(json.dumps(fields))
-
-
-@pytest.mark.parametrize("value", ["true", 1, None])
-def test_variant_switch_is_strict_bool(value: object) -> None:
-    """Řetězec, číslo ani null nenahrazují bool přepínače."""
-    with pytest.raises(ValidationError, match="normalize_diagnosis_variants"):
-        TrainingConfig.model_validate_json(
-            json.dumps(
-                training_config(
-                    normalize_clinical_text=True, normalize_diagnosis_variants=value
-                )
-            )
-        )
-
-
-def test_variants_require_clinical_normalization() -> None:
-    """Bez normalizace není kde přepis spustit a manifest by lhal."""
-    with pytest.raises(ValidationError, match="vyžaduje normalizaci"):
-        TrainingConfig.model_validate_json(
-            json.dumps(training_config(normalize_diagnosis_variants=True))
-        )
-
-
-def test_smoketest_enables_variants() -> None:
+def test_smoketest_enables_dictionary() -> None:
     """Smoketest zapíná celou cestu včetně přepisu variant."""
-    assert load_training_config(REPOSITORY_TRAINING_CONFIG).normalize_diagnosis_variants
+    assert (
+        load_training_config(REPOSITORY_TRAINING_CONFIG).input.text_preprocessing
+        is TextPreprocessing.DICTIONARY
+    )

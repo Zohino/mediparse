@@ -12,6 +12,7 @@ from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 from mediparse.domain.clinical_text import NORMALIZATION_LANGUAGE
 from mediparse.domain.identity import RowId
 from mediparse.domain.language import Language
+from mediparse.domain.model_input import ModelInput
 from mediparse.domain.section_headers import LEXICON_LANGUAGE
 
 if TYPE_CHECKING:
@@ -58,14 +59,15 @@ class MatrixRow(BaseModel):
     id: RowId
     language: Language
     model: ModelName
-    strip_diagnostic_sections: bool
-    normalize_clinical_text: bool
-    normalize_diagnosis_variants: bool
+    input: ModelInput
     tuning_trials: PositiveInt
 
     @model_validator(mode="after")
     def _strip_is_english_only(self) -> Self:
-        if self.strip_diagnostic_sections and self.language is not LEXICON_LANGUAGE:
+        if (
+            self.input.strip_diagnostic_sections
+            and self.language is not LEXICON_LANGUAGE
+        ):
             msg = (
                 f"Řádek {self.id}: strip diagnostických sekcí zná jen jazyk "
                 f"lexikonu sekcí ({LEXICON_LANGUAGE})"
@@ -75,7 +77,10 @@ class MatrixRow(BaseModel):
 
     @model_validator(mode="after")
     def _normalization_is_english_only(self) -> Self:
-        if self.normalize_clinical_text and self.language is not NORMALIZATION_LANGUAGE:
+        if (
+            self.input.text_preprocessing.normalizes
+            and self.language is not NORMALIZATION_LANGUAGE
+        ):
             msg = (
                 f"Řádek {self.id}: normalizace klinického textu zná jen jazyk "
                 f"svých pravidel ({NORMALIZATION_LANGUAGE})"
@@ -85,7 +90,10 @@ class MatrixRow(BaseModel):
 
     @model_validator(mode="after")
     def _normalization_is_classical_only(self) -> Self:
-        if self.normalize_clinical_text and self.model.tier is not Tier.CLASSICAL:
+        if (
+            self.input.text_preprocessing.normalizes
+            and self.model.tier is not Tier.CLASSICAL
+        ):
             msg = (
                 f"Řádek {self.id}: normalizace klinického textu je příznak "
                 "klasického modelu (TF-IDF), ne modelu stupně "
@@ -94,23 +102,10 @@ class MatrixRow(BaseModel):
             raise ValueError(msg)
         return self
 
-    @model_validator(mode="after")
-    def _variants_require_normalization(self) -> Self:
-        if self.normalize_diagnosis_variants and not self.normalize_clinical_text:
-            msg = f"Řádek {self.id}: přepis variant vyžaduje normalizaci klinického textu."
-            raise ValueError(msg)
-        return self
-
     @property
-    def axes(self) -> tuple[Language, ModelName, bool, bool, bool]:
+    def axes(self) -> tuple[Language, ModelName, ModelInput]:
         """Osy, které experiment jednoznačně určují."""
-        return (
-            self.language,
-            self.model,
-            self.strip_diagnostic_sections,
-            self.normalize_clinical_text,
-            self.normalize_diagnosis_variants,
-        )
+        return self.language, self.model, self.input
 
 
 class ExperimentMatrix(BaseModel):
@@ -132,7 +127,7 @@ class ExperimentMatrix(BaseModel):
     def _axes_are_unique(self) -> Self:
         duplicates = _duplicates(row.axes for row in self.rows)
         if duplicates:
-            msg = f"Více řádků má stejné osy: {sorted(duplicates)}"
+            msg = f"Více řádků má stejné osy: {sorted(duplicates, key=repr)}"
             raise ValueError(msg)
         return self
 

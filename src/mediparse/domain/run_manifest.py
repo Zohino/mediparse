@@ -2,15 +2,16 @@
 
 from __future__ import annotations
 
-from typing import Annotated
+from typing import Annotated, Self
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.digest import Sha256
 from mediparse.domain.environment import Environment, Hardware
 from mediparse.domain.identity import RowId
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.seed import Seed
 
 
@@ -39,9 +40,9 @@ class RunManifest(BaseModel):
     ``config_sha256`` je hash configu tréninku, ``seed`` seed modelu. Split
     nese ``split_seed``, ``split_folds`` a ``split_sha256``, otisk přiřazení pacientů do foldů.
     ``diagnostic_strip`` je ``None``, když se zprávy nestripovaly.
-    ``normalize_clinical_text`` je ``None``, když vstup TF-IDF neprošel normalizací,
-    jinak slovníky zkratek, variant a překlepů, které dostal trenér.
-    Prázdné ``variants`` znamená vypnutý přepínač přepisu variant.
+    ``text_preprocessing`` zaznamenává úroveň předzpracování vstupu TF-IDF.
+    ``text_normalization`` nese slovníky předané trenérovi, při úrovni ``none`` je ``None``.
+    Úroveň ``normalized`` používá jen zkratky, s prázdným slovníkem variant.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
@@ -55,12 +56,27 @@ class RunManifest(BaseModel):
     split_folds: Annotated[int, Field(ge=2)]
     split_sha256: Sha256
     diagnostic_strip: DiagnosticStrip | None
-    normalize_clinical_text: TextNormalization | None
+    text_preprocessing: TextPreprocessing
+    text_normalization: TextNormalization | None
     model: str
     model_revision: str | None
     tokenizer_revision: str | None
     environment: Environment
     hardware: Hardware
+
+    @model_validator(mode="after")
+    def _normalization_matches_preprocessing(self) -> Self:
+        if self.text_preprocessing.normalizes != (self.text_normalization is not None):
+            msg = "Úroveň předzpracování none musí odpovídat nepřítomnému slovníku normalizace."
+            raise ValueError(msg)
+        if (
+            not self.text_preprocessing.rewrites_variants
+            and self.text_normalization is not None
+            and self.text_normalization.variants
+        ):
+            msg = "Úroveň předzpracování normalized nesmí obsahovat varianty diagnóz."
+            raise ValueError(msg)
+        return self
 
 
 class EvaluationManifest(BaseModel):

@@ -129,12 +129,23 @@ def prediction(
     )
 
 
+def model_input(
+    *, strip: bool = False, preprocessing: str = "none"
+) -> dict[str, object]:
+    """Volby vstupu ve tvaru JSON pro testy configů a entrypointů.
+
+    Returns:
+        Přepínač stripu a úroveň předzpracování s dodanými hodnotami.
+    """
+    return {"strip_diagnostic_sections": strip, "text_preprocessing": preprocessing}
+
+
 def training_config(**overrides: object) -> dict[str, object]:
     """Platný config tréninku ve tvaru JSON; test změní jen pole, o kterém je.
 
     Returns:
         Slovník s klíči ``row_id``, ``diagnosis``, ``seed``, ``fold``,
-        ``regularization``, ``strip_diagnostic_sections``, ``normalize_clinical_text`` a ``normalize_diagnosis_variants``, přepsanými hodnotami z ``overrides``.
+        ``regularization`` a ``input``, přepsanými hodnotami z ``overrides``.
     """
     return {
         "row_id": "row",
@@ -142,9 +153,7 @@ def training_config(**overrides: object) -> dict[str, object]:
         "seed": 0,
         "fold": 0,
         "regularization": 1.0,
-        "strip_diagnostic_sections": False,
-        "normalize_clinical_text": False,
-        "normalize_diagnosis_variants": False,
+        "input": model_input(),
     } | overrides
 
 

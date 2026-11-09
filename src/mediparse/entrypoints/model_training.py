@@ -121,9 +121,10 @@ def run(
     table, strip = training_input(cohort=cohort, training=training, lexicon=lexicon)
     normalization = (
         load_text_normalization(
-            candidates, variants=training.normalize_diagnosis_variants
+            candidates,
+            variants=training.input.text_preprocessing.rewrites_variants,
         )
-        if training.normalize_clinical_text
+        if training.input.text_preprocessing.normalizes
         else None
     )
     step = ModelTraining(
@@ -150,7 +151,8 @@ def run(
             split_folds=report.split_config.folds,
             split_sha256=report.split_sha256,
             diagnostic_strip=strip,
-            normalize_clinical_text=normalization,
+            text_preprocessing=training.input.text_preprocessing,
+            text_normalization=normalization,
             model=ESTIMATOR,
             model_revision=None,
             tokenizer_revision=None,
