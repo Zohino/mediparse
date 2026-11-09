@@ -1,4 +1,4 @@
-"""Use case materializace splitu: pacienti zpráv do foldů, uložení pro všechny kroky."""
+"""Use case materializace splitu: rozdělení do částí a uložení pro všechny kroky."""
 
 from __future__ import annotations
 

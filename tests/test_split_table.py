@@ -127,10 +127,10 @@ def test_read_missing_file_is_invalid_input(tmp_path: Path) -> None:
         ([(1, 0)], _metadata() | {"extra": 1}, "neplatná metadata splitu"),
         ([(1, -1)], _metadata(), "mimo"),
         ([(1, 3)], _metadata(), "mimo"),
-        ([(1, 0), (2, 1), (2, 2)], _metadata(), "ve více foldech: 1"),
+        ([(1, 0), (2, 1), (2, 2)], _metadata(), "ve více částech splitu: 1"),
         ([(1, 0), (2, 1), (2, 1), (3, 2)], _metadata(), "řádků"),
         ([(1, None), (1, None)], _metadata(), "řádků"),
-        ([(1, 0), (1, None)], _metadata(), "ve více foldech: 1"),
+        ([(1, 0), (1, None)], _metadata(), "ve více částech splitu: 1"),
         ([(1, 0), (2, 1), (3, 2)], _metadata(sha256="0" * 64), "otisk"),
     ],
     ids=[
@@ -167,7 +167,7 @@ def test_read_subject_in_two_folds_hides_identifier(tmp_path: Path) -> None:
     path = tmp_path / "splits.parquet"
     write_raw_split(path, [(LEAKING, 0), (LEAKING, 1)], _metadata())
 
-    with pytest.raises(InvalidInputError, match="ve více foldech: 1") as raised:
+    with pytest.raises(InvalidInputError, match="ve více částech splitu: 1") as raised:
         ParquetSplitTable(path).read()
 
     assert str(LEAKING) not in str(raised.value)

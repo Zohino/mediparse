@@ -1,4 +1,4 @@
-"""Rozdělení pacientů do foldů ve scikit-learn."""
+"""Rozdělení pacientů do částí ve scikit-learn."""
 
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 
 @dataclass(frozen=True)
 class StratifiedGroupFolds:
-    """Stratifikované rozdělení pacientů do foldů; pacient je celý v jednom."""
+    """Stratifikované rozdělení pacientů do částí; pacient je celý v jedné."""
 
     @staticmethod
     def partition(

@@ -99,7 +99,7 @@ def test_shared_subject_is_a_leak() -> None:
     folds = (frozenset({1, 2, 987654}), frozenset({2, 3}), frozenset({987654, 4}))
 
     with pytest.raises(
-        SubjectLeakError, match=r"^Pacientů ve více foldech: 2\.$"
+        SubjectLeakError, match=r"^Pacientů ve více částech splitu: 2\.$"
     ) as raised:
         Split(folds, development=frozenset())
 
@@ -376,7 +376,7 @@ def test_fewer_patients_than_folds_is_invalid_input() -> None:
     """K - 1 pacientů je neplatný vstup; hláška nese jen počty."""
     with pytest.raises(
         InvalidInputError,
-        match=r"^Pacientů je 1, dělení do 2 foldů potřebuje aspoň 2\.$",
+        match=r"^Pacientů je 1, dělení do 2 částí \(foldy a vývojová\) potřebuje aspoň 2\.$",
     ):
         ensure_enough_patients([987654], FOLDS)
 

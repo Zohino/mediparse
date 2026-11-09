@@ -99,7 +99,7 @@ def test_invalid_config_is_refused(
 def test_fewer_patients_than_folds_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
-    """Méně pacientů než foldů skončí REFUSED s počty, ne tracebackem."""
+    """Méně pacientů než foldů + 1 skončí REFUSED s počty, ne tracebackem."""
     notes, config = _inputs(tmp_path, patients=1)
     output = tmp_path / "out" / "splits.parquet"
 
@@ -107,7 +107,10 @@ def test_fewer_patients_than_folds_is_refused(
 
     assert code is ExitCode.REFUSED
     assert not output.exists()
-    assert "Pacientů je 1" in caplog.text
+    assert (
+        "Pacientů je 1, dělení do 3 částí (foldy a vývojová) potřebuje aspoň 3."
+        in caplog.text
+    )
 
 
 def test_same_inputs_give_identical_file(tmp_path: Path) -> None:

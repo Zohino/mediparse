@@ -69,7 +69,7 @@ class Split:
             shared |= seen & fold
             seen |= fold
         if shared:
-            msg = f"Pacientů ve více foldech: {len(shared)}."
+            msg = f"Pacientů ve více částech splitu: {len(shared)}."
             raise SubjectLeakError(msg)
 
     @classmethod
@@ -77,7 +77,7 @@ class Split:
         """Vyhradí poslední část pro vývoj, ostatní pro foldy evaluace.
 
         Args:
-            parts: Stratifikované části pacientů ve společném pořadí pro jazyky.
+            parts: Stratifikované části pacientů v pořadí částí z dělení.
 
         Returns:
             Split s poslední částí vyčleněnou pro výběr modelů.
@@ -168,40 +168,41 @@ class SharedSplit:
             raise ValueError(msg)
 
 
-def ensure_enough_patients(subjects: Sequence[SubjectId], folds: int) -> None:
-    """Ověří, že pacientů je aspoň tolik jako foldů.
+def ensure_enough_patients(subjects: Sequence[SubjectId], parts: int) -> None:
+    """Ověří, že pacientů je aspoň tolik jako částí dělení.
 
     Args:
         subjects: Pacient každé zprávy; pacient s více zprávami se počítá jednou.
-        folds: Počet foldů splitu.
+        parts: Počet částí dělení (foldy a vývojová část).
 
     Raises:
-        InvalidInputError: Pacientů je méně než foldů.
+        InvalidInputError: Pacientů je méně než částí dělení.
     """
     patients = len(set(subjects))
-    if patients < folds:
+    if patients < parts:
         msg = (
-            f"Pacientů je {patients}, dělení do {folds} foldů potřebuje aspoň {folds}."
+            f"Pacientů je {patients}, dělení do {parts} částí (foldy a vývojová) "
+            f"potřebuje aspoň {parts}."
         )
         raise InvalidInputError(msg)
 
 
-def strata(notes: Sequence[InputNote], folds: int) -> tuple[int, ...]:
+def strata(notes: Sequence[InputNote], parts: int) -> tuple[int, ...]:
     """Určí třídu stratifikace každé zprávy z kombinace diagnóz jejího pacienta.
 
     Kombinace diagnóz pacienta (sjednocení labelů všech jeho zpráv) je bitová
     maska v pořadí ``Diagnosis``; na pořadí čísel nezáleží, jen na identitě třídy.
-    Předpokládá aspoň tolik pacientů jako foldů (krok splitu to zajistí přes
+    Předpokládá aspoň tolik pacientů jako částí dělení (krok splitu to zajistí přes
     ``ensure_enough_patients``); jinak by zbytková třída vyvolala varování sklearn.
 
     Args:
         notes: Zprávy korpusu.
-        folds: Počet foldů splitu.
+        parts: Počet částí dělení (foldy a vývojová část).
 
     Returns:
         Třída každé zprávy v pořadí vstupu.
     """
-    stratum = _stratum_of(_combinations(notes), folds)
+    stratum = _stratum_of(_combinations(notes), parts)
     return tuple(stratum[note.subject_id] for note in notes)
 
 
@@ -214,14 +215,23 @@ def _combinations(notes: Sequence[InputNote]) -> dict[SubjectId, int]:
     return combinations
 
 
-def _stratum_of(combinations: dict[SubjectId, int], folds: int) -> dict[SubjectId, int]:
-    # sklearn StratifiedGroupKFold ohlásí varováním třídu s méně členy než foldů,
-    # a ta se stejně nedá rozložit do všech foldů; vzácné kombinace proto sloučíme.
+def _stratum_of(combinations: dict[SubjectId, int], parts: int) -> dict[SubjectId, int]:
+    """Přiřadí pacientům třídy stratifikace se sloučením vzácných kombinací.
+
+    Args:
+        combinations: Bitová maska kombinace diagnóz každého pacienta.
+        parts: Počet částí dělení (foldy a vývojová část).
+
+    Returns:
+        Třída stratifikace každého pacienta.
+    """
+    # sklearn StratifiedGroupKFold ohlásí varováním třídu s méně členy než částí,
+    # a ta se nedá rozložit do všech částí; vzácné kombinace proto sloučíme.
     patients = Counter(combinations.values())
-    rare = {mask for mask, count in patients.items() if count < folds}
+    rare = {mask for mask, count in patients.items() if count < parts}
     frequent = {mask: count for mask, count in patients.items() if mask not in rare}
     residual_patients = sum(patients[mask] for mask in rare)
-    if frequent and 0 < residual_patients < folds:
+    if frequent and 0 < residual_patients < parts:
         # Sám by zbytek varování vyvolal, proto ho převezme nejčastější kombinace.
         target = min(frequent, key=lambda mask: (-frequent[mask], mask))
         return {
