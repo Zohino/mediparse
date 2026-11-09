@@ -21,7 +21,7 @@ if TYPE_CHECKING:
 
 SCHEMA: Final = pa.schema([
     pa.field("subject_id", pa.int64(), nullable=False),
-    pa.field("fold", pa.int64(), nullable=False),
+    pa.field("fold", pa.int64(), nullable=True),
 ])
 METADATA_KEY: Final = b"mediparse.split"
 
@@ -34,17 +34,19 @@ class _SplitMetadata(SplitConfig):
 
 @dataclass(frozen=True)
 class ParquetSplitTable:
-    """Split v souboru parquet; seed, počet foldů a otisk přiřazení nese metadata."""
+    """Split v parquetu s NULL foldem pro vývoj a parametry a otiskem v metadatech."""
 
     path: Path
 
     def write(self, shared: SharedSplit) -> None:
         """Zapíše pacienty seřazené podle ``subject_id``, nadřazený adresář založí."""
-        assignment = sorted(
+        assignment: list[tuple[SubjectId, int | None]] = [
             (subject, fold)
             for fold, subjects in enumerate(shared.split.folds)
             for subject in subjects
-        )
+        ]
+        assignment.extend((subject, None) for subject in shared.split.development)
+        assignment.sort()
         metadata = _SplitMetadata(
             folds=shared.config.folds,
             seed=shared.config.seed,
@@ -70,7 +72,7 @@ class ParquetSplitTable:
 
         Raises:
             InvalidInputError: Soubor chybí, má jiné schéma nebo neplatná
-                metadata, fold mimo rozsah, pacienta ve dvou foldech, opakovaný
+                metadata, fold mimo rozsah, pacienta ve více částech, opakovaný
                 řádek pacienta nebo otisk, který nesedí s řádky.
         """
         table = read_table(self.path, SCHEMA)
@@ -82,7 +84,9 @@ class ParquetSplitTable:
                 strict=True,
             )
         )
-        outside = sum(not 0 <= fold < metadata.folds for _, fold in rows)
+        outside = sum(
+            fold is not None and not 0 <= fold < metadata.folds for _, fold in rows
+        )
         if outside:
             msg = (
                 f"Soubor {self.path} obsahuje pacienty ve foldu mimo "
@@ -90,7 +94,9 @@ class ParquetSplitTable:
             )
             raise InvalidInputError(msg)
         split = self._split(rows, metadata.folds)
-        patients = sum(len(subjects) for subjects in split.folds)
+        patients = sum(len(subjects) for subjects in split.folds) + len(
+            split.development
+        )
         if len(rows) != patients:
             msg = (
                 f"Soubor {self.path} má {len(rows)} řádků, ale "
@@ -113,15 +119,19 @@ class ParquetSplitTable:
             msg = f"Soubor {self.path} má neplatná metadata splitu:\n{error}"
             raise InvalidInputError(msg) from error
 
-    def _split(self, rows: list[tuple[SubjectId, int]], folds: int) -> Split:
+    def _split(self, rows: list[tuple[SubjectId, int | None]], folds: int) -> Split:
         # K z metadat, ne z řádků: prázdný fold se z řádků nepozná.
         members: list[set[SubjectId]] = [set() for _ in range(folds)]
+        development: set[SubjectId] = set()
         for subject, fold in rows:
-            members[fold].add(subject)
+            if fold is None:
+                development.add(subject)
+            else:
+                members[fold].add(subject)
         try:
             return Split(
                 tuple(frozenset(subjects) for subjects in members),
-                development=frozenset(),
+                development=frozenset(development),
             )
         except SubjectLeakError as error:
             msg = f"Soubor {self.path} je neplatný. {error}"

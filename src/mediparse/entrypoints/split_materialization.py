@@ -51,14 +51,15 @@ def run(
     check_inputs_access(environ, (cohort,))
     step = SplitMaterialization(
         table=ParquetNoteTable(cohort),
-        splitter=StratifiedGroupFolds(),
+        partitioner=StratifiedGroupFolds(),
         sink=ParquetSplitTable(output),
     )
     shared = step.run(load_split_config(config))
     logger.info(
-        "Split do %d foldů, pacientů na fold: %s, uložen do %s.",
+        "Split do %d foldů, pacientů na fold: %s, vývojových pacientů: %d, uložen do %s.",
         shared.config.folds,
         [len(subjects) for subjects in shared.split.folds],
+        len(shared.split.development),
         output,
     )
     return ExitCode.OK

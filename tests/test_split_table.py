@@ -21,7 +21,7 @@ if TYPE_CHECKING:
 LEAKING: Final = 987654
 CONFIG: Final = SplitConfig(seed=7, folds=3)
 SPLIT: Final = Split(
-    (frozenset({2, 40}), frozenset({10}), frozenset({1})), development=frozenset()
+    (frozenset({2, 40}), frozenset({10}), frozenset({1})), development=frozenset({5})
 )
 SHARED: Final = SharedSplit(CONFIG, SPLIT)
 
@@ -67,8 +67,8 @@ def test_rows_are_sorted_numerically_by_subject(tmp_path: Path) -> None:
 
     table = pq.read_table(path)
     assert table.schema.equals(SCHEMA)
-    assert table.column("subject_id").to_pylist() == [1, 2, 10, 40]
-    assert table.column("fold").to_pylist() == [2, 0, 1, 0]
+    assert table.column("subject_id").to_pylist() == [1, 2, 5, 10, 40]
+    assert table.column("fold").to_pylist() == [2, 0, None, 1, 0]
 
 
 def test_same_split_gives_identical_bytes(tmp_path: Path) -> None:
@@ -113,6 +113,8 @@ def test_read_missing_file_is_invalid_input(tmp_path: Path) -> None:
         ([(1, 3)], _metadata(), "mimo"),
         ([(1, 0), (2, 1), (2, 2)], _metadata(), "ve více foldech: 1"),
         ([(1, 0), (2, 1), (2, 1), (3, 2)], _metadata(), "řádků"),
+        ([(1, None), (1, None)], _metadata(), "řádků"),
+        ([(1, 0), (1, None)], _metadata(), "ve více foldech: 1"),
         ([(1, 0), (2, 1), (3, 2)], _metadata(sha256="0" * 64), "otisk"),
     ],
     ids=[
@@ -123,12 +125,14 @@ def test_read_missing_file_is_invalid_input(tmp_path: Path) -> None:
         "fold-K",
         "pacient-ve-dvou-foldech",
         "duplicitni-radek",
+        "duplicitni-vyvojovy-pacient",
+        "vyvojovy-pacient-ve-foldu",
         "otisk-nesedi",
     ],
 )
 def test_read_invalid_file_is_invalid_input(
     tmp_path: Path,
-    rows: Sequence[tuple[int, int]],
+    rows: Sequence[tuple[int, int | None]],
     metadata: dict[str, object] | None,
     reason: str,
 ) -> None:
@@ -159,6 +163,49 @@ def test_read_other_schema_is_invalid_input(tmp_path: Path) -> None:
     """Soubor s jiným schématem je InvalidInputError."""
     path = tmp_path / "other.parquet"
     pq.write_table(pa.table({"subject_id": [1]}), path)
+
+    with pytest.raises(InvalidInputError, match="neodpovídá schématu"):
+        ParquetSplitTable(path).read()
+
+
+def test_null_fold_is_development(tmp_path: Path) -> None:
+    """NULL ve foldu označuje vývojového pacienta i při čtení nezávislého souboru."""
+    path = tmp_path / "splits.parquet"
+    write_raw_split(
+        path,
+        [(2, 0), (5, None), (10, 1)],
+        {
+            "seed": 0,
+            "folds": 2,
+            "sha256": "0f4a94aad52205bf10af72b289f926bffcbdce3fc141500daf9762d7777ce608",
+        },
+    )
+
+    assert ParquetSplitTable(path).read().split == Split(
+        (frozenset({2}), frozenset({10})), development=frozenset({5})
+    )
+
+
+def test_old_nonnullable_fold_schema_is_rejected(tmp_path: Path) -> None:
+    """Původní schéma s povinným foldem se odmítne i s platnými metadaty a otiskem."""
+    path = tmp_path / "old.parquet"
+    schema = pa.schema(
+        [
+            pa.field("subject_id", pa.int64(), nullable=False),
+            pa.field("fold", pa.int64(), nullable=False),
+        ],
+        metadata={
+            METADATA_KEY: json.dumps({
+                "seed": 0,
+                "folds": 2,
+                "sha256": "91f9e8d3b27133625651802f23ad0fbbdb182b788cbf7058427385a493b5c85d",
+            }).encode()
+        },
+    )
+    pq.write_table(
+        pa.Table.from_pydict({"subject_id": [2, 10], "fold": [0, 1]}, schema=schema),
+        path,
+    )
 
     with pytest.raises(InvalidInputError, match="neodpovídá schématu"):
         ParquetSplitTable(path).read()

@@ -12,6 +12,7 @@ import pytest
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.run_manifest import EvaluationManifest
+from mediparse.domain.split import SharedSplit, Split
 from mediparse.entrypoints import model_evaluation
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.json_file import write_model
@@ -19,7 +20,7 @@ from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.split_table import ParquetSplitTable
 from tests.manifest_support import training_manifest
-from tests.model_support import prediction, separable_notes, write_split
+from tests.model_support import prediction, separable_notes, split_config, write_split
 from tests.support import REVISION, fixed_revision, missing_revision
 
 if TYPE_CHECKING:
@@ -54,12 +55,15 @@ class _Inputs:
         )
 
 
-def _inputs(root: Path) -> _Inputs:
+def _inputs(root: Path, shared: SharedSplit | None = None) -> _Inputs:
     corpus = separable_notes(PATIENTS)
     notes = root / "notes.parquet"
     ParquetNoteTable(notes).write(corpus)
     split = root / "splits.parquet"
-    shared = write_split(split, corpus)
+    if shared is None:
+        shared = write_split(split, corpus)
+    else:
+        ParquetSplitTable(split).write(shared)
     test = shared.split.holdout(corpus, 0).test
     items = tuple(
         prediction(
@@ -202,7 +206,14 @@ def test_single_class_is_refused(
 
 def test_all_negative_predictions_are_evaluated_against_labels(tmp_path: Path) -> None:
     """Samé záporné predikce mají F1 a recall nula a při stejných skóre ROC-AUC půl."""
-    inputs = _inputs(tmp_path)
+    shared = SharedSplit(
+        split_config(),
+        Split(
+            (frozenset({1, 4, 9, 11}), frozenset({2, 3, 5, 6, 7, 8})),
+            development=frozenset({10, 12}),
+        ),
+    )
+    inputs = _inputs(tmp_path, shared)
     _rewrite_predictions(
         inputs,
         [prediction(item.note_id, score=-1.0) for item in inputs.test_predictions],
