@@ -280,14 +280,28 @@ def test_report_describes_development_and_original_split() -> None:
     assert report == ScreeningReport(40, 20, SHARED.config, SHARED.split.sha256())
 
 
-def test_repeated_run_with_same_seed_has_identical_rows() -> None:
-    """Deterministické fakes a skutečný partitioner se stejným seedem vrátí týž výstup."""
-    first, second = _Recording(), _Recording()
+@dataclass
+class _RecordingPartitioner:
+    calls: list[tuple[int, Seed]] = field(default_factory=list)
 
-    _step(first, _notes()).run(CONFIG)
-    _step(second, _notes()).run(CONFIG)
+    def partition(
+        self,
+        subjects: Sequence[SubjectId],
+        strata: Sequence[int],
+        parts: int,
+        seed: Seed,
+    ) -> tuple[frozenset[SubjectId], ...]:
+        self.calls.append((parts, seed))
+        return PARTITIONER.partition(subjects, strata, parts, seed)
 
-    assert first.writes == second.writes
+
+def test_partitioner_receives_screening_folds_and_seed() -> None:
+    """Skutečné dělení dostane počet vnějších foldů a seed screeningu."""
+    partitioner = _RecordingPartitioner()
+
+    _step(_Recording(), _notes(), partitioner).run(CONFIG)
+
+    assert partitioner.calls == [(CONFIG.folds, CONFIG.seed)]
 
 
 @dataclass(frozen=True)
