@@ -95,6 +95,22 @@ def test_metadata_carry_seed_folds_and_fingerprint(tmp_path: Path) -> None:
     }
 
 
+def test_metadata_bytes_are_canonical(tmp_path: Path) -> None:
+    """Doslovné bajty metadat mají abecední pořadí klíčů a známý otisk splitu."""
+    path = tmp_path / "splits.parquet"
+    shared = SharedSplit(
+        SplitConfig(seed=0, folds=2),
+        Split((frozenset({2}), frozenset({10})), development=frozenset({5})),
+    )
+
+    ParquetSplitTable(path).write(shared)
+
+    assert pq.read_schema(path).metadata[METADATA_KEY] == (
+        b'{"folds": 2, "seed": 0, "sha256": '
+        b'"0f4a94aad52205bf10af72b289f926bffcbdce3fc141500daf9762d7777ce608"}'
+    )
+
+
 def test_read_missing_file_is_invalid_input(tmp_path: Path) -> None:
     """Chybějící soubor je InvalidInputError s cestou."""
     path = tmp_path / "missing.parquet"
