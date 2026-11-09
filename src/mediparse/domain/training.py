@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Annotated, Self
+from typing import TYPE_CHECKING, Annotated
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.identity import RowId
+from mediparse.domain.model_input import ModelInput
 from mediparse.domain.seed import Seed
 
 if TYPE_CHECKING:
@@ -18,10 +19,7 @@ if TYPE_CHECKING:
 class TrainingConfig(BaseModel):
     """Parametry tréninku: řádek matice, diagnóza, seed modelu, testovací fold a regularizace.
 
-    ``strip_diagnostic_sections`` zapíná ablaci D2: zprávy se čtou bez diagnostických sekcí.
-    ``normalize_clinical_text`` zapíná normalizaci věku, značek a čísel a rozvinutí
-    zkratek diagnóz pětice ve vstupu TF-IDF.
-    ``normalize_diagnosis_variants`` přepisuje varianty a překlepy ze slovníku.
+    ``input`` určuje ablaci diagnostických sekcí a úroveň předzpracování textu TF-IDF.
     ``fold`` je číslo foldu, který slouží jako test; jeho horní mez zná až ``Split``.
     """
 
@@ -32,16 +30,7 @@ class TrainingConfig(BaseModel):
     seed: Seed
     fold: Annotated[int, Field(ge=0)]
     regularization: Annotated[float, Field(gt=0.0)]
-    strip_diagnostic_sections: bool
-    normalize_clinical_text: bool
-    normalize_diagnosis_variants: bool
-
-    @model_validator(mode="after")
-    def _variants_require_normalization(self) -> Self:
-        if self.normalize_diagnosis_variants and not self.normalize_clinical_text:
-            msg = "Přepis variant vyžaduje normalizaci klinického textu."
-            raise ValueError(msg)
-        return self
+    input: ModelInput
 
 
 @dataclass(frozen=True)

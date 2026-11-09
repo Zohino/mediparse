@@ -4,7 +4,8 @@
   "seed": 0,
   "fold": 0,
   "regularization": 1.0,
-  "strip_diagnostic_sections": true,
-  "normalize_clinical_text": true,
-  "normalize_diagnosis_variants": true
+  "input": {
+    "strip_diagnostic_sections": true,
+    "text_preprocessing": "dictionary"
+  }
 }

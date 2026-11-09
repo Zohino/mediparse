@@ -77,8 +77,10 @@ def _train(
             training_config(
                 row_id="row",
                 diagnosis="diabetes",
-                strip_diagnostic_sections=strip,
-                normalize_clinical_text=normalize,
+                input={
+                    "strip_diagnostic_sections": strip,
+                    "text_preprocessing": "normalized" if normalize else "none",
+                },
             )
         ),
         encoding="utf-8",
@@ -224,7 +226,12 @@ def test_model_trained_without_strip_mismatches_stripped_inference(
     trained = _train(tmp_path, strip=False, sections=True)
     stripping = tmp_path / "strip.json"
     stripping.write_text(
-        json.dumps(training_config(row_id="row", strip_diagnostic_sections=True)),
+        json.dumps(
+            training_config(
+                row_id="row",
+                input={"strip_diagnostic_sections": True, "text_preprocessing": "none"},
+            )
+        ),
         encoding="utf-8",
     )
     inference = tmp_path / "inference.parquet"

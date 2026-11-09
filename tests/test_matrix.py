@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from itertools import product
 from typing import TYPE_CHECKING
 
 import pytest
@@ -10,7 +11,8 @@ from pydantic import ValidationError
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
-from mediparse.domain.matrix import ExperimentMatrix, ModelName, Tier
+from mediparse.domain.matrix import ExperimentMatrix, MatrixRow, ModelName, Tier
+from mediparse.domain.model_input import TextPreprocessing
 from mediparse.infrastructure.matrix_manifest import load_matrix
 from tests.support import REPOSITORY_MATRIX
 
@@ -23,9 +25,7 @@ def _row(**overrides: object) -> dict[str, object]:
         "id": "en-logreg",
         "language": "en",
         "model": "logreg",
-        "strip_diagnostic_sections": False,
-        "normalize_clinical_text": False,
-        "normalize_diagnosis_variants": False,
+        "input": {"strip_diagnostic_sections": False, "text_preprocessing": "none"},
         "tuning_trials": 20,
     } | overrides
 
@@ -69,8 +69,16 @@ def test_every_model_has_tier() -> None:
         {"model": "random-forest"},
         {"tuning_trials": 0},
         {"tuning_trials": "20"},
-        {"strip_diagnostic_sections": "true"},
-        {"normalize_clinical_text": "true"},
+        {"input": {"strip_diagnostic_sections": "true", "text_preprocessing": "none"}},
+        {"input": {"strip_diagnostic_sections": False, "text_preprocessing": "full"}},
+        {"normalize_clinical_text": False},
+        {
+            "input": {
+                "strip_diagnostic_sections": False,
+                "text_preprocessing": "none",
+                "extra": 0,
+            }
+        },
         {"id": "EN logreg"},
         {"tier": "classical"},
     ],
@@ -80,7 +88,9 @@ def test_every_model_has_tier() -> None:
         "zero-trials",
         "string-trials",
         "string-bool",
-        "string-normalization",
+        "unknown-preprocessing",
+        "legacy-field",
+        "extra-input-field",
         "bad-id",
         "extra-field",
     ],
@@ -97,21 +107,23 @@ def test_diagnosis_is_not_matrix_axis() -> None:
         _validate(_row(diagnosis="diabetes"))
 
 
-def test_missing_axis_is_rejected() -> None:
-    """Každá osa je povinná, manifest nesmí spoléhat na výchozí hodnoty."""
+@pytest.mark.parametrize(
+    "field", ["input", "strip_diagnostic_sections", "text_preprocessing"]
+)
+def test_missing_axis_is_rejected(field: str) -> None:
+    """Vstup i každá jeho osa jsou povinné, bez výchozích hodnot."""
     row = _row()
-    del row["strip_diagnostic_sections"]
+    if field == "input":
+        del row[field]
+    else:
+        input_fields: dict[str, object] = {
+            "strip_diagnostic_sections": False,
+            "text_preprocessing": "none",
+        }
+        del input_fields[field]
+        row["input"] = input_fields
 
-    with pytest.raises(ValidationError):
-        _validate(row)
-
-
-def test_missing_normalization_axis_is_rejected() -> None:
-    """Přepínač normalizace je povinný, bez výchozí hodnoty."""
-    row = _row()
-    del row["normalize_clinical_text"]
-
-    with pytest.raises(ValidationError, match="normalize_clinical_text"):
+    with pytest.raises(ValidationError, match=field):
         _validate(row)
 
 
@@ -136,12 +148,17 @@ def test_duplicate_experiments_are_rejected() -> None:
 def test_rows_differing_only_in_normalization_are_distinct() -> None:
     """Normalizace je osa: dva řádky lišící se jen jí projdou."""
     matrix = _validate(
-        _row(normalize_clinical_text=True),
+        _row(
+            input={
+                "strip_diagnostic_sections": False,
+                "text_preprocessing": "normalized",
+            }
+        ),
         _row(id="en-logreg-nonorm"),
     )
 
     assert len({row.axes for row in matrix.rows}) == len(matrix.rows)
-    assert matrix.rows[0].axes[3] is True
+    assert matrix.rows[0].axes[2].text_preprocessing is TextPreprocessing.NORMALIZED
 
 
 def test_models_of_same_tier_are_distinct_experiments() -> None:
@@ -181,7 +198,11 @@ def test_load_matrix_rejects_invalid_content(tmp_path: Path) -> None:
 
 def test_czech_row_with_strip_is_rejected_with_row_id() -> None:
     """Lexikon je anglický, strip české zprávy by nic neodstranil; hláška nese id řádku."""
-    row = _row(id="cs-logreg-strip", language="cs", strip_diagnostic_sections=True)
+    row = _row(
+        id="cs-logreg-strip",
+        language="cs",
+        input={"strip_diagnostic_sections": True, "text_preprocessing": "none"},
+    )
 
     with pytest.raises(ValidationError) as error:
         _validate(row)
@@ -193,7 +214,11 @@ def test_czech_row_with_strip_is_rejected_with_row_id() -> None:
 
 def test_czech_row_with_normalization_is_rejected_with_row_id() -> None:
     """Pravidla normalizace jsou anglická; hláška nese id řádku."""
-    row = _row(id="cs-logreg-norm", language="cs", normalize_clinical_text=True)
+    row = _row(
+        id="cs-logreg-norm",
+        language="cs",
+        input={"strip_diagnostic_sections": False, "text_preprocessing": "normalized"},
+    )
 
     with pytest.raises(ValidationError) as error:
         _validate(row)
@@ -206,7 +231,11 @@ def test_czech_row_with_normalization_is_rejected_with_row_id() -> None:
 @pytest.mark.parametrize("model", ["fasttext", "xlm-r-base", "mdeberta-v3-base"])
 def test_non_classical_row_with_normalization_is_rejected(model: str) -> None:
     """Normalizace je příznak klasického modelu; hláška nese id řádku."""
-    row = _row(id=f"en-{model}", model=model, normalize_clinical_text=True)
+    row = _row(
+        id=f"en-{model}",
+        model=model,
+        input={"strip_diagnostic_sections": False, "text_preprocessing": "normalized"},
+    )
 
     with pytest.raises(ValidationError, match=rf"Řádek en-{model}: .*klasick"):
         _validate(row)
@@ -219,39 +248,40 @@ def test_czech_row_without_strip_is_valid() -> None:
     assert row.language is Language.CS
 
 
-def test_repository_manifest_declares_main_and_ablation_rows() -> None:
-    """Hlavní řádek je bez stripu, ablační se stripem a ostatní osy jsou stejné."""
+@pytest.mark.parametrize(
+    ("row_id", "strip", "preprocessing", "changed_axis"),
+    [
+        (
+            "en-logreg-strip",
+            True,
+            TextPreprocessing.DICTIONARY,
+            "strip_diagnostic_sections",
+        ),
+        ("en-logreg-nonorm", False, TextPreprocessing.NONE, "text_preprocessing"),
+        (
+            "en-logreg-novariants",
+            False,
+            TextPreprocessing.NORMALIZED,
+            "text_preprocessing",
+        ),
+    ],
+)
+def test_repository_ablation_changes_one_input_axis(
+    row_id: str, *, strip: bool, preprocessing: TextPreprocessing, changed_axis: str
+) -> None:
+    """Ruční ablační řádky mění právě jednu osu vstupu oproti hlavnímu řádku."""
     rows = {row.id: row for row in load_matrix(REPOSITORY_MATRIX).rows}
-
-    main, ablation = rows["en-logreg"], rows["en-logreg-strip"]
-    assert main.strip_diagnostic_sections is False
-    assert ablation.strip_diagnostic_sections is True
-    assert (main.language, main.model, main.tuning_trials) == (
-        ablation.language,
-        ablation.model,
-        ablation.tuning_trials,
+    main, ablation = rows["en-logreg"], rows[row_id]
+    assert main.input.strip_diagnostic_sections is False
+    assert main.input.text_preprocessing is TextPreprocessing.DICTIONARY
+    assert ablation.input.strip_diagnostic_sections is strip
+    assert ablation.input.text_preprocessing is preprocessing
+    assert main.model_dump(exclude={"id", "input"}) == ablation.model_dump(
+        exclude={"id", "input"}
     )
-
-
-def test_repository_manifest_declares_normalization_ablation() -> None:
-    """Hlavní řádky normalizují, ablační řádek ne a ostatní osy má jako hlavní."""
-    rows = {row.id: row for row in load_matrix(REPOSITORY_MATRIX).rows}
-
-    main, stripped, ablation = (
-        rows["en-logreg"],
-        rows["en-logreg-strip"],
-        rows["en-logreg-nonorm"],
+    assert main.input.model_dump(exclude={changed_axis}) == ablation.input.model_dump(
+        exclude={changed_axis}
     )
-    assert rows["en-logreg-novariants"].normalize_clinical_text is True
-    assert rows["en-logreg-novariants"].normalize_diagnosis_variants is False
-    assert main.normalize_diagnosis_variants is True
-    assert stripped.normalize_diagnosis_variants is True
-    assert ablation.normalize_diagnosis_variants is False
-    assert main.normalize_clinical_text is True
-    assert stripped.normalize_clinical_text is True
-    assert ablation.normalize_clinical_text is False
-    assert ablation.strip_diagnostic_sections is False
-    assert (main.language, main.model) == (ablation.language, ablation.model)
 
 
 def test_repository_manifest_is_valid() -> None:
@@ -259,34 +289,55 @@ def test_repository_manifest_is_valid() -> None:
     assert load_matrix(REPOSITORY_MATRIX).rows
 
 
-def test_matrix_variants_require_normalization() -> None:
-    """Přepis variant nelze deklarovat bez preprocessoru S36."""
-    with pytest.raises(ValidationError, match="vyžaduje normalizaci"):
-        _validate(_row(normalize_diagnosis_variants=True))
-
-
-def test_repository_variants_ablation_changes_only_variant_axis() -> None:
-    """Dvojice ablace S37 liší jen id a vlastní přepínač."""
-    rows = {row.id: row for row in load_matrix(REPOSITORY_MATRIX).rows}
-    main = rows["en-logreg"].model_dump(exclude={"id", "normalize_diagnosis_variants"})
-    ablation = rows["en-logreg-novariants"].model_dump(
-        exclude={"id", "normalize_diagnosis_variants"}
-    )
-    assert main == ablation
-
-
-@pytest.mark.parametrize("value", ["true", 1, None])
-def test_matrix_variant_switch_is_strict_bool(value: object) -> None:
-    """Nová osa matice přijímá jen skutečný bool."""
-    with pytest.raises(ValidationError, match="normalize_diagnosis_variants"):
-        _validate(
-            _row(normalize_clinical_text=True, normalize_diagnosis_variants=value)
+def test_matrix_accepts_exactly_23_of_60_input_combinations() -> None:
+    """Ruční orákulum: CS 5, EN klasika 12, EN ostatní 6 platných kombinací."""
+    total_combinations, total_accepted = 60, 23
+    czech_accepted, english_classical, english_other = 5, 12, 6
+    accepted = []
+    combinations = list(product(Language, ModelName, (False, True), TextPreprocessing))
+    assert len(combinations) == total_combinations
+    for language, model, strip, preprocessing in combinations:
+        row = _row(
+            language=language,
+            model=model,
+            input={
+                "strip_diagnostic_sections": strip,
+                "text_preprocessing": preprocessing,
+            },
         )
+        try:
+            accepted.append(MatrixRow.model_validate_json(json.dumps(row)))
+        except ValidationError:
+            continue
+
+    assert len(accepted) == total_accepted
+    assert sum(row.language is Language.CS for row in accepted) == czech_accepted
+    assert (
+        sum(
+            row.language is Language.EN and row.model.tier is Tier.CLASSICAL
+            for row in accepted
+        )
+        == english_classical
+    )
+    assert (
+        sum(
+            row.language is Language.EN and row.model.tier is not Tier.CLASSICAL
+            for row in accepted
+        )
+        == english_other
+    )
 
 
-def test_matrix_variant_switch_is_required() -> None:
-    """Nová osa musí být v každém řádku explicitně deklarovaná."""
-    row = _row()
-    del row["normalize_diagnosis_variants"]
-    with pytest.raises(ValidationError, match="normalize_diagnosis_variants"):
-        _validate(row)
+def test_multiple_duplicated_input_axes_are_rejected() -> None:
+    """Více opakovaných vstupů stejného modelu skončí validační chybou."""
+    normalized = {
+        "strip_diagnostic_sections": False,
+        "text_preprocessing": "normalized",
+    }
+    with pytest.raises(ValidationError, match="stejné osy"):
+        _validate(
+            _row(),
+            _row(id="copy-none"),
+            _row(id="normalized", input=normalized),
+            _row(id="copy-normalized", input=normalized),
+        )

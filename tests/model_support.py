@@ -134,7 +134,7 @@ def training_config(**overrides: object) -> dict[str, object]:
 
     Returns:
         Slovník s klíči ``row_id``, ``diagnosis``, ``seed``, ``fold``,
-        ``regularization``, ``strip_diagnostic_sections``, ``normalize_clinical_text`` a ``normalize_diagnosis_variants``, přepsanými hodnotami z ``overrides``.
+        ``regularization`` a ``input``, přepsanými hodnotami z ``overrides``.
     """
     return {
         "row_id": "row",
@@ -142,9 +142,7 @@ def training_config(**overrides: object) -> dict[str, object]:
         "seed": 0,
         "fold": 0,
         "regularization": 1.0,
-        "strip_diagnostic_sections": False,
-        "normalize_clinical_text": False,
-        "normalize_diagnosis_variants": False,
+        "input": {"strip_diagnostic_sections": False, "text_preprocessing": "none"},
     } | overrides
 
 

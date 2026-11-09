@@ -34,7 +34,7 @@ def training_input(
         diagnostických sekcí a záznam s jejich seřazenými klíči a otiskem lexikonu.
     """
     table = ParquetNoteTable(cohort)
-    if not training.strip_diagnostic_sections:
+    if not training.input.strip_diagnostic_sections:
         return table, None
     sections = load_section_lexicon(lexicon)
     record = DiagnosticStrip(

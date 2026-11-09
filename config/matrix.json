@@ -4,37 +4,41 @@
       "id": "en-logreg",
       "language": "en",
       "model": "logreg",
-      "strip_diagnostic_sections": false,
-      "normalize_clinical_text": true,
       "tuning_trials": 20,
-      "normalize_diagnosis_variants": true
+      "input": {
+        "strip_diagnostic_sections": false,
+        "text_preprocessing": "dictionary"
+      }
     },
     {
       "id": "en-logreg-strip",
       "language": "en",
       "model": "logreg",
-      "strip_diagnostic_sections": true,
-      "normalize_clinical_text": true,
       "tuning_trials": 20,
-      "normalize_diagnosis_variants": true
+      "input": {
+        "strip_diagnostic_sections": true,
+        "text_preprocessing": "dictionary"
+      }
     },
     {
       "id": "en-logreg-nonorm",
       "language": "en",
       "model": "logreg",
-      "strip_diagnostic_sections": false,
-      "normalize_clinical_text": false,
       "tuning_trials": 20,
-      "normalize_diagnosis_variants": false
+      "input": {
+        "strip_diagnostic_sections": false,
+        "text_preprocessing": "none"
+      }
     },
     {
       "id": "en-logreg-novariants",
       "language": "en",
       "model": "logreg",
-      "strip_diagnostic_sections": false,
-      "normalize_clinical_text": true,
       "tuning_trials": 20,
-      "normalize_diagnosis_variants": false
+      "input": {
+        "strip_diagnostic_sections": false,
+        "text_preprocessing": "normalized"
+      }
     }
   ]
 }
