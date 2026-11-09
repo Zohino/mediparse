@@ -148,15 +148,15 @@ class ClassicalScreening[F]:
                 )
                 rows.append(
                     ScreeningResult(
-                        holdout.fold,
-                        spec.name,
-                        family,
-                        diagnosis,
-                        len(truth),
-                        sum(truth),
-                        classifier.threshold,
-                        classifier.converged,
-                        metrics,
+                        fold=holdout.fold,
+                        vectorizer=spec.name,
+                        family=family,
+                        diagnosis=diagnosis,
+                        test_notes=len(truth),
+                        test_positives=sum(truth),
+                        threshold=classifier.threshold,
+                        converged=classifier.converged,
+                        metrics=metrics,
                     )
                 )
         return tuple(rows)

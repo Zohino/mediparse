@@ -69,7 +69,7 @@ class ClassicalScreeningConfig(BaseModel):
         return self
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, kw_only=True)
 class ScreeningResult:
     """Metriky jedné buňky mřížky pro diagnózu a vnější fold."""
 
