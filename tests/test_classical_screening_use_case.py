@@ -346,7 +346,11 @@ def test_invalid_last_fold_is_refused_before_any_fit_or_write() -> None:
     recording = _Recording()
 
     with pytest.raises(
-        InvalidInputError, match="9 pozitivních a 10 negativních"
+        InvalidInputError,
+        match=(
+            r"^Diagnóza diabetes: 9 pozitivních a 10 negativních zpráv, "
+            r"metriky potřebují v každé třídě aspoň 10\.$"
+        ),
     ) as raised:
         _step(recording, notes, _FixedPartitioner()).run(CONFIG)
 
@@ -367,7 +371,11 @@ def test_class_check_counts_development_patients_not_notes() -> None:
     recording = _Recording()
 
     with pytest.raises(
-        InvalidInputError, match="1 pozitivních a 19 negativních pacientů"
+        InvalidInputError,
+        match=(
+            r"^Diagnóza diabetes: 1 pozitivních a 19 negativních pacientů, "
+            r"odložení potřebuje v každé třídě aspoň 2\.$"
+        ),
     ):
         _step(recording, notes).run(CONFIG)
 
@@ -401,7 +409,11 @@ def test_empty_development_is_refused() -> None:
     recording = _Recording()
 
     with pytest.raises(
-        InvalidInputError, match="0 pozitivních a 0 negativních pacientů"
+        InvalidInputError,
+        match=(
+            r"^Diagnóza diabetes: 0 pozitivních a 0 negativních pacientů, "
+            r"odložení potřebuje v každé třídě aspoň 2\.$"
+        ),
     ):
         _step(recording, ()).run(CONFIG)
 
