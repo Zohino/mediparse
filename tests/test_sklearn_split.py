@@ -59,12 +59,12 @@ def _partition(
 )
 def test_every_patient_is_in_exactly_one_fold(notes: list[InputNote]) -> None:
     """Foldy se nepřekrývají, dají všechny pacienty a je jich tolik, kolik se chtělo."""
-    split = _partition(notes, parts=FOLDS, seed=0)
+    parts = _partition(notes, parts=FOLDS, seed=0)
 
-    patients = [subject for fold in split for subject in fold]
-    assert len(split) == FOLDS
+    patients = [subject for fold in parts for subject in fold]
+    assert len(parts) == FOLDS
     assert len(patients) == len(set(patients))
-    assert all(split)
+    assert all(parts)
     assert set(patients) == {note.subject_id for note in notes}
 
 
@@ -84,9 +84,9 @@ def test_positive_patients_are_spread_evenly_over_folds(seed: int) -> None:
     notes = _imbalanced_notes()
     positive = {note.subject_id for note in notes if note.labels}
 
-    split = _partition(notes, parts=FOLDS, seed=seed)
+    parts = _partition(notes, parts=FOLDS, seed=seed)
 
-    assert [len(fold & positive) for fold in split] == [EXPECTED_POSITIVES] * FOLDS
+    assert [len(fold & positive) for fold in parts] == [EXPECTED_POSITIVES] * FOLDS
 
 
 def test_rare_combination_does_not_warn() -> None:
@@ -102,6 +102,6 @@ def test_rare_combination_does_not_warn() -> None:
         )
     ]
 
-    split = _partition(notes, parts=FOLDS, seed=0)
+    parts = _partition(notes, parts=FOLDS, seed=0)
 
-    assert sum(len(fold) for fold in split) == len(notes)
+    assert sum(len(fold) for fold in parts) == len(notes)
