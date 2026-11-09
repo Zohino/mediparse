@@ -119,7 +119,10 @@ class ParquetSplitTable:
         for subject, fold in rows:
             members[fold].add(subject)
         try:
-            return Split(tuple(frozenset(subjects) for subjects in members))
+            return Split(
+                tuple(frozenset(subjects) for subjects in members),
+                development=frozenset(),
+            )
         except SubjectLeakError as error:
             msg = f"Soubor {self.path} je neplatný. {error}"
             # Text výjimky nese jen počet, ale ``from None`` zahodí i řetěz příčin,

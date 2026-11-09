@@ -76,8 +76,8 @@ NOTES = (
     ),
     InputNote("4-DS-1", 4, Language.EN, "text", frozenset()),
 )
-SPLIT = Split((frozenset({1, 2, 3}), frozenset({4})))
-HALVES = Split((frozenset({1, 2}), frozenset({3, 4})))
+SPLIT = Split((frozenset({1, 2, 3}), frozenset({4})), development=frozenset())
+HALVES = Split((frozenset({1, 2}), frozenset({3, 4})), development=frozenset())
 
 
 @dataclass
@@ -154,7 +154,9 @@ def test_metrics_use_cohort_labels_instead_of_predictions() -> None:
     use_case = ModelEvaluation(
         _FakePredictions(items),
         _FakeTable(notes),
-        _FakeSplitSource(Split((frozenset({1, 2, 3, 4}), frozenset({5})))),
+        _FakeSplitSource(
+            Split((frozenset({1, 2, 3, 4}), frozenset({5})), development=frozenset())
+        ),
         SklearnScorer(),
         sink,
     )

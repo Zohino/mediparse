@@ -21,7 +21,7 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
 CONFIG = parsed_training_config(diagnosis="ckd", row_id="row")
-SPLIT = Split((frozenset({1, 2}), frozenset({3, 4})))
+SPLIT = Split((frozenset({1, 2}), frozenset({3, 4})), development=frozenset())
 SPLIT_CONFIG = split_config(folds=2, seed=4)
 SHARED = SharedSplit(SPLIT_CONFIG, SPLIT)
 NOTES = (
@@ -222,7 +222,9 @@ def test_class_check_uses_folds_of_shared_split() -> None:
     recorder = _Recorder()
     shared = SharedSplit(
         split_config(folds=3),
-        Split((frozenset({1}), frozenset({2}), frozenset({3, 4}))),
+        Split(
+            (frozenset({1}), frozenset({2}), frozenset({3, 4})), development=frozenset()
+        ),
     )
 
     with pytest.raises(InvalidInputError, match=r"ckd.*aspoň 3\."):

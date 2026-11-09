@@ -20,7 +20,9 @@ if TYPE_CHECKING:
 
 LEAKING: Final = 987654
 CONFIG: Final = SplitConfig(seed=7, folds=3)
-SPLIT: Final = Split((frozenset({2, 40}), frozenset({10}), frozenset({1})))
+SPLIT: Final = Split(
+    (frozenset({2, 40}), frozenset({10}), frozenset({1})), development=frozenset()
+)
 SHARED: Final = SharedSplit(CONFIG, SPLIT)
 
 
@@ -49,7 +51,7 @@ def test_empty_fold_survives_round_trip(
     tmp_path: Path, folds: tuple[frozenset[int], ...]
 ) -> None:
     """K je z metadat, takže prázdný fold, i poslední, zůstane prázdným foldem."""
-    shared = SharedSplit(CONFIG, Split(folds))
+    shared = SharedSplit(CONFIG, Split(folds, development=frozenset()))
     table = ParquetSplitTable(tmp_path / "splits.parquet")
 
     table.write(shared)

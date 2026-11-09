@@ -19,7 +19,7 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
 CONFIG = split_config(folds=2, seed=4)
-SPLIT = Split((frozenset({1, 2}), frozenset({3})))
+SPLIT = Split((frozenset({1, 2}), frozenset({3})), development=frozenset())
 NOTES = (
     InputNote("1-DS-1", 1, Language.EN, "a", frozenset({Diagnosis.CKD})),
     InputNote("2-DS-1", 2, Language.EN, "b", frozenset()),

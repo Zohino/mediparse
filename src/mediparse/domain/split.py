@@ -24,7 +24,7 @@ RESIDUAL_STRATUM: Final = -1
 
 
 class SubjectLeakError(ValueError):
-    """Jeden pacient je ve dvou foldech."""
+    """Jeden pacient je ve více částech splitu."""
 
 
 class SplitConfig(BaseModel):
@@ -47,54 +47,77 @@ class Holdout:
 
 @dataclass(frozen=True)
 class Split:
-    """Pacienti každého foldu; žádný pacient není ve dvou foldech.
+    """Disjunktní pacienti foldů evaluace a vývojové části.
 
     Attributes:
         folds: Množina ``subject_id`` testovací části každého foldu.
+        development: Pacienti vyčlenění pro výběr modelů mimo evaluaci.
     """
 
     folds: tuple[frozenset[SubjectId], ...]
+    development: frozenset[SubjectId]
 
     def __post_init__(self) -> None:
-        """Ověří disjunktnost foldů, aby neplatný split nešel vytvořit.
+        """Ověří disjunktnost všech částí, aby neplatný split nešel vytvořit.
 
         Raises:
-            SubjectLeakError: Některý pacient je ve dvou foldech.
+            SubjectLeakError: Některý pacient je ve více částech splitu.
         """
         seen: set[SubjectId] = set()
         shared: set[SubjectId] = set()
-        for fold in self.folds:
+        for fold in (*self.folds, self.development):
             shared |= seen & fold
             seen |= fold
         if shared:
             msg = f"Pacientů ve více foldech: {len(shared)}."
             raise SubjectLeakError(msg)
 
+    @classmethod
+    def from_parts(cls, parts: Sequence[frozenset[SubjectId]]) -> Split:
+        """Vyhradí poslední část pro vývoj, ostatní pro foldy evaluace.
+
+        Args:
+            parts: Stratifikované části pacientů ve společném pořadí pro jazyky.
+
+        Returns:
+            Split s poslední částí vyčleněnou pro výběr modelů.
+
+        Raises:
+            ValueError: Méně než dva foldy a vývojová část jsou chybou kódu.
+        """
+        if len(parts) < 3:  # ruff: ignore[magic-value-comparison]
+            msg = "Split potřebuje aspoň 3 části: dva foldy a vývojovou část."
+            raise ValueError(msg)
+        # Vývoj má tutéž stratifikaci jako evaluace, bez druhého algoritmu výběru.
+        return cls(tuple(parts[:-1]), development=parts[-1])
+
     def sha256(self) -> str:
-        """Otisk přiřazení pacientů do foldů.
+        """Otisk přiřazení pacientů do foldů a vývojové části.
 
         Kontrakt pro každého, kdo otisk počítá z jiného zdroje splitu: SHA-256
         (hex) UTF-8 textu, kde každý pacient je jeden řádek ``subject_id`` TAB
         ``fold`` LF (i poslední řádek končí LF). Čísla jsou desítková bez
         úvodních nul, ``fold`` je pozice foldu v ``folds`` od 0 a řádky jsou
-        seřazené vzestupně číselně podle ``subject_id``. Prázdný fold se v otisku
-        neprojeví.
+        seřazené vzestupně číselně podle ``subject_id``. Vývojový pacient má
+        místo čísla foldu doslovný řetězec ``development``. Prázdná část se
+        v otisku neprojeví.
 
         Returns:
             Hex SHA-256 přiřazení.
         """
         # Číselně, protože nezávislý čtenář souboru (DuckDB, sort -n) řadí celá
         # čísla; textové řazení (10 před 2) by dalo jiný otisk.
-        assignment = sorted(
-            (subject, fold)
+        assignment = [
+            (subject, str(fold))
             for fold, subjects in enumerate(self.folds)
             for subject in subjects
-        )
-        lines = "".join(f"{subject}\t{fold}\n" for subject, fold in assignment)
+        ]
+        assignment.extend((subject, "development") for subject in self.development)
+        lines = "".join(f"{subject}\t{fold}\n" for subject, fold in sorted(assignment))
         return hashlib.sha256(lines.encode()).hexdigest()
 
     def holdout(self, notes: Sequence[InputNote], fold: int) -> Holdout:
-        """Rozdělí zprávy na test pacientů foldu a trénink ostatních.
+        """Vrátí test pacientů foldu a trénink ostatních foldů, bez vývojových.
 
         Args:
             notes: Zprávy, jejichž pacienti musí být všichni ve splitu.
@@ -110,13 +133,15 @@ class Split:
         if not 0 <= fold < len(self.folds):
             msg = f"Fold {fold} neexistuje, počet foldů splitu: {len(self.folds)}."
             raise InvalidInputError(msg)
-        covered = frozenset().union(*self.folds)
+        evaluation = frozenset().union(*self.folds)
+        covered = evaluation | self.development
         outside = sum(note.subject_id not in covered for note in notes)
         if outside:
             msg = f"Zprávy pacientů mimo split: {outside}."
             raise InvalidInputError(msg)
         test = tuple(note for note in notes if note.subject_id in self.folds[fold])
-        train = tuple(note for note in notes if note.subject_id not in self.folds[fold])
+        train_subjects = evaluation - self.folds[fold]
+        train = tuple(note for note in notes if note.subject_id in train_subjects)
         return Holdout(fold, train, test)
 
 

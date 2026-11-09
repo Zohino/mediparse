@@ -40,5 +40,6 @@ class StratifiedGroupFolds:
         )
         parts = splitter.split(list(subjects), list(strata), list(subjects))
         return Split(
-            tuple(frozenset(subjects[index] for index in test) for _, test in parts)
+            tuple(frozenset(subjects[index] for index in test) for _, test in parts),
+            development=frozenset(),
         )
