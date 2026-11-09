@@ -22,9 +22,10 @@ if TYPE_CHECKING:
 def model_input_table(
     cohort: Path, model_input: ModelInput, lexicon: Path
 ) -> tuple[InputTable, DiagnosticStrip | None]:
-    """Složí tabulku zpráv, kterou čte trénink i inference, a záznam stripu pro manifest.
+    """Složí tabulku zpráv pro trénink, inferenci i screening a záznam stripu pro manifest.
 
-    Trénink a inference volají tutéž funkci se stejnými volbami, aby klasifikovaly týž text.
+    Trénink, inference i screening volají tutéž funkci se stejnými volbami,
+    aby klasifikovaly týž text.
 
     Args:
         cohort: Cesta k tabulce kohorty.
