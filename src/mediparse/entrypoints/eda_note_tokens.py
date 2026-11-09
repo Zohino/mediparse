@@ -39,7 +39,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-# Explicitní cesty jsou veřejným kontraktem nástroje podle briefu.
+# Explicitní cesty jsou veřejným kontraktem nástroje.
 def run(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
     parquet: Path,
     translation: Path,

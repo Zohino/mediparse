@@ -166,6 +166,10 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
         outputs.manifest.read_text(encoding="utf-8")
     )
     assert written.dataset_sha256 == file_sha256(notes)
+    assert (
+        written.predictions_sha256
+        == hashlib.sha256(outputs.predictions.read_bytes()).hexdigest()
+    )
     assert written.config_sha256 == file_sha256(config)
     assert written.seed == 0
     assert written.split_seed == 0

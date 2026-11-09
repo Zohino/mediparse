@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING, Final
 
@@ -9,11 +11,16 @@ import pyarrow.parquet as pq
 import pytest
 
 from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.run_manifest import EvaluationManifest
 from mediparse.entrypoints import model_evaluation
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
+from mediparse.infrastructure.split_table import ParquetSplitTable
+from tests.manifest_support import training_manifest
 from tests.model_support import prediction, separable_notes, write_split
+from tests.support import REVISION, fixed_revision, missing_revision
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -30,6 +37,8 @@ class _Inputs:
     notes: Path
     split: Path
     metrics: Path
+    training_manifest: Path
+    manifest: Path
     test_predictions: tuple[Prediction, ...]
 
     def run(self) -> ExitCode:
@@ -39,6 +48,9 @@ class _Inputs:
             cohort=self.notes,
             split=self.split,
             metrics=self.metrics,
+            training_manifest=self.training_manifest,
+            manifest=self.manifest,
+            revision=fixed_revision,
         )
 
 
@@ -58,11 +70,35 @@ def _inputs(root: Path) -> _Inputs:
     )
     predictions = root / "predictions.parquet"
     ParquetPredictionTable(predictions).write(items)
-    return _Inputs(predictions, notes, split, root / "build" / "metrics.parquet", items)
+    inputs = _Inputs(
+        predictions,
+        notes,
+        split,
+        root / "build" / "metrics.parquet",
+        root / "run_manifest.json",
+        root / "build" / "evaluation_manifest.json",
+        items,
+    )
+    _record_training(inputs)
+    return inputs
+
+
+def _record_training(inputs: _Inputs) -> None:
+    write_model(
+        inputs.training_manifest,
+        training_manifest(
+            predictions_sha256=hashlib.sha256(
+                inputs.predictions.read_bytes()
+            ).hexdigest(),
+            dataset_sha256=hashlib.sha256(inputs.notes.read_bytes()).hexdigest(),
+            split_sha256=ParquetSplitTable(inputs.split).read().split.sha256(),
+        ),
+    )
 
 
 def _rewrite_predictions(inputs: _Inputs, items: Sequence[Prediction]) -> None:
     ParquetPredictionTable(inputs.predictions).write(items)
+    _record_training(inputs)
 
 
 def test_writes_metrics_row(tmp_path: Path) -> None:
@@ -126,7 +162,14 @@ def test_missing_input_is_refused(
             "split": inputs.split,
         } | {name: missing}
 
-        code = model_evaluation.run(environ={}, metrics=inputs.metrics, **paths)
+        code = model_evaluation.run(
+            environ={},
+            metrics=inputs.metrics,
+            training_manifest=inputs.training_manifest,
+            manifest=inputs.manifest,
+            revision=fixed_revision,
+            **paths,
+        )
 
         assert code is ExitCode.REFUSED
         assert not inputs.metrics.exists()
@@ -147,6 +190,7 @@ def test_single_class_is_refused(
         for note in table.read()
     ])
 
+    _record_training(inputs)
     code = inputs.run()
 
     assert code is ExitCode.REFUSED
@@ -173,3 +217,92 @@ def test_all_negative_predictions_are_evaluated_against_labels(tmp_path: Path) -
     assert row["roc_auc"] == pytest.approx(0.5)
     # Ruční součet z fixtury: pozitivní pacienti 1, 9 a 11 ve foldu 0 mají 1 + 5 + 3 zpráv.
     assert row["test_positives"] == 9  # ruff: ignore[magic-value-comparison]
+
+
+def test_evaluation_manifest_records_digests_and_is_deterministic(
+    tmp_path: Path,
+) -> None:
+    """A6: manifest váže bajty metrik a všech vstupů a opakování ho nezmění."""
+    inputs = _inputs(tmp_path)
+    assert inputs.run() is ExitCode.OK
+    first = inputs.manifest.read_bytes()
+    manifest = EvaluationManifest.model_validate_json(first)
+
+    for field, path in (
+        ("metrics_sha256", inputs.metrics),
+        ("training_manifest_sha256", inputs.training_manifest),
+        ("predictions_sha256", inputs.predictions),
+        ("dataset_sha256", inputs.notes),
+    ):
+        assert getattr(manifest, field) == hashlib.sha256(path.read_bytes()).hexdigest()
+    assert (
+        manifest.split_sha256
+        == json.loads(inputs.training_manifest.read_bytes())["split_sha256"]
+    )
+    assert manifest.row_id == "row"
+    assert manifest.environment.source == REVISION
+    assert tuple(manifest.environment.packages) == model_evaluation.PACKAGES
+    assert inputs.run() is ExitCode.OK
+    assert inputs.manifest.read_bytes() == first
+
+
+@pytest.mark.parametrize("input_name", ["cohort", "split"])
+def test_changed_training_input_is_refused(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture, input_name: str
+) -> None:
+    """A5: jiné bajty kohorty se stejnými klíči i jiné přiřazení splitu se odmítnou."""
+    inputs = _inputs(tmp_path)
+    table = ParquetNoteTable(inputs.notes)
+    if input_name == "cohort":
+        notes = table.read()
+        table.write([replace(notes[0], text=notes[0].text + " synthetic"), *notes[1:]])
+        field = "dataset_sha256"
+    else:
+        shared = ParquetSplitTable(inputs.split).read()
+        ParquetSplitTable(inputs.split).write(
+            replace(
+                shared,
+                split=replace(shared.split, folds=tuple(reversed(shared.split.folds))),
+            )
+        )
+        field = "split_sha256"
+
+    assert inputs.run() is ExitCode.REFUSED
+    assert field in caplog.text
+    assert str(inputs.training_manifest) in caplog.text
+    assert not inputs.metrics.exists()
+    assert not inputs.manifest.exists()
+
+
+@pytest.mark.parametrize("content", [None, "{}", "neplatný JSON"])
+def test_missing_or_invalid_training_manifest_is_refused(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture, content: str | None
+) -> None:
+    """Chybějící nebo neplatný manifest skončí REFUSED před zápisem výstupů."""
+    inputs = _inputs(tmp_path)
+    inputs.training_manifest.unlink()
+    if content is not None:
+        inputs.training_manifest.write_text(content, encoding="utf-8")
+
+    assert inputs.run() is ExitCode.REFUSED
+    assert str(inputs.training_manifest) in caplog.text
+    assert not inputs.metrics.exists()
+    assert not inputs.manifest.exists()
+
+
+def test_unreadable_revision_is_refused_before_evaluation(tmp_path: Path) -> None:
+    """Nečitelná revize odmítne evaluaci před prvním výstupem."""
+    inputs = _inputs(tmp_path)
+    code = model_evaluation.run(
+        environ={},
+        predictions=inputs.predictions,
+        cohort=inputs.notes,
+        split=inputs.split,
+        training_manifest=inputs.training_manifest,
+        metrics=inputs.metrics,
+        manifest=inputs.manifest,
+        revision=missing_revision,
+    )
+    assert code is ExitCode.REFUSED
+    assert not inputs.metrics.exists()
+    assert not inputs.manifest.exists()

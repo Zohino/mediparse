@@ -10,6 +10,7 @@ from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.digest import Sha256
 from mediparse.domain.environment import Environment, Hardware
 from mediparse.domain.identity import RowId
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.seed import Seed
 
 
@@ -47,6 +48,7 @@ class RunManifest(BaseModel):
 
     row_id: RowId
     dataset_sha256: Sha256
+    predictions_sha256: Sha256
     config_sha256: Sha256
     seed: Seed
     split_seed: Seed
@@ -59,3 +61,42 @@ class RunManifest(BaseModel):
     tokenizer_revision: str | None
     environment: Environment
     hardware: Hardware
+
+
+class EvaluationManifest(BaseModel):
+    """Provenance evaluace: ověřené vstupy, otisk metrik a prostředí evaluátoru."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+
+    row_id: RowId
+    training_manifest_sha256: Sha256
+    predictions_sha256: Sha256
+    dataset_sha256: Sha256
+    split_sha256: Sha256
+    metrics_sha256: Sha256
+    environment: Environment
+
+
+def ensure_training_lineage(
+    training: RunManifest,
+    *,
+    predictions_sha256: str,
+    dataset_sha256: str,
+    split_sha256: str,
+) -> None:
+    """Ověří, že vstupy evaluace pocházejí z dodaného tréninku.
+
+    Raises:
+        InvalidInputError: Otisky nesedí; zpráva uvádí všechna pole s rozdílem.
+    """
+    actual = {
+        "predictions_sha256": predictions_sha256,
+        "dataset_sha256": dataset_sha256,
+        "split_sha256": split_sha256,
+    }
+    mismatched = [
+        field for field, digest in actual.items() if getattr(training, field) != digest
+    ]
+    if mismatched:
+        msg = f"Vstupy evaluace neodpovídají tréninku: {', '.join(mismatched)}."
+        raise InvalidInputError(msg)
