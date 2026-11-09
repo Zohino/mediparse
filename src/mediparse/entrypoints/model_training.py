@@ -17,9 +17,8 @@ from mediparse.domain.environment import Environment
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.entrypoints.training_input import training_input
+from mediparse.entrypoints.training_input import text_normalization, training_input
 from mediparse.infrastructure.data_access_guard import check_inputs_access
-from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.machine_hardware import machine_hardware
@@ -118,15 +117,10 @@ def run(
     check_inputs_access(environ, (cohort, split))
     training = load_training_config(config)
     source = revision()
-    table, strip = training_input(cohort=cohort, training=training, lexicon=lexicon)
-    normalization = (
-        load_text_normalization(
-            candidates,
-            variants=training.input.text_preprocessing.rewrites_variants,
-        )
-        if training.input.text_preprocessing.normalizes
-        else None
+    table, strip = training_input(
+        cohort=cohort, model_input=training.input, lexicon=lexicon
     )
+    normalization = text_normalization(candidates, training.input)
     step = ModelTraining(
         table=table,
         split=ParquetSplitTable(split),

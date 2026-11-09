@@ -87,7 +87,7 @@ def run(
     """
     check_inputs_access(environ, (cohort, model, predictions))
     table, _ = training_input(
-        cohort=cohort, training=load_training_config(config), lexicon=lexicon
+        cohort=cohort, model_input=load_training_config(config).input, lexicon=lexicon
     )
     step = ModelInference(
         table=table,
