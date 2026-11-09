@@ -38,7 +38,8 @@ modelu a na konci vypíše tabulku metrik a ukázku predikce.
 ### Výstupy
 
 - `build/smoketest/`: data, model, predikce, metriky, predikce uloženého
-  modelu (`inference.parquet`) a run manifest
+  modelu (`inference.parquet`), run manifest a manifest evaluace
+  (`evaluation_manifest.json`)
 - `logs/smoketest/`: logy jednotlivých kroků
 
 ### Testy

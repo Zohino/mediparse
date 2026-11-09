@@ -143,6 +143,7 @@ def run(
         RunManifest(
             row_id=training.row_id,
             dataset_sha256=file_sha256(cohort),
+            predictions_sha256=file_sha256(predictions),
             config_sha256=file_sha256(config),
             seed=training.seed,
             split_seed=report.split_config.seed,

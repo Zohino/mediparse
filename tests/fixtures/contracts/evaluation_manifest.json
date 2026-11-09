@@ -1,0 +1,17 @@
+{
+  "row_id": "smoketest",
+  "training_manifest_sha256": "a3c0f43338d7b990b6bbe5c502b517a66067bef272d806ad6edefada86dc111c",
+  "predictions_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "dataset_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "split_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "metrics_sha256": "5892cf39e9ebbf7bf7a161220256d1cc64fefe81ef4a8aed6201c7932c7cc8a5",
+  "environment": {
+    "packages": {
+      "python": "3.13.0"
+    },
+    "source": {
+      "commit": "cccccccccccccccccccccccccccccccccccccccc",
+      "dirty": false
+    }
+  }
+}

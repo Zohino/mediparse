@@ -14,7 +14,13 @@ from mediparse.domain.environment import (
     Hardware,
     SourceRevision,
 )
-from mediparse.domain.run_manifest import DiagnosticStrip, RunManifest
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.run_manifest import (
+    DiagnosticStrip,
+    EvaluationManifest,
+    RunManifest,
+    ensure_training_lineage,
+)
 
 COMMIT: Final = "a" * 40
 DIGEST: Final = "b" * 64
@@ -31,6 +37,7 @@ def _fields(**changes: object) -> dict[str, object]:
     fields: dict[str, object] = {
         "row_id": "row",
         "dataset_sha256": DIGEST,
+        "predictions_sha256": DIGEST,
         "config_sha256": DIGEST,
         "seed": 0,
         "split_seed": 1,
@@ -92,7 +99,9 @@ def test_manifest_rejects_invalid_hardware(field: str, value: object) -> None:
         RunManifest.model_validate(_fields(hardware=HARDWARE | {field: value}))
 
 
-@pytest.mark.parametrize("field", ["dataset_sha256", "config_sha256", "split_sha256"])
+@pytest.mark.parametrize(
+    "field", ["dataset_sha256", "config_sha256", "split_sha256", "predictions_sha256"]
+)
 @pytest.mark.parametrize("digest", ["b" * 63, "b" * 65])
 def test_digest_of_other_length_is_rejected(field: str, digest: str) -> None:
     """Hash jiné délky než 64 znaků je odmítnut."""
@@ -249,3 +258,88 @@ def test_gpu_device_requires_name_and_capacity(name: str, memory: int) -> None:
     """Prázdné jméno a nulová kapacita nemohou popsat GPU."""
     with pytest.raises(ValidationError):
         GpuDevice(name=name, memory_total_bytes=memory)
+
+
+def _evaluation_fields() -> dict[str, object]:
+    return {
+        "row_id": "row",
+        "training_manifest_sha256": DIGEST,
+        "predictions_sha256": DIGEST,
+        "dataset_sha256": DIGEST,
+        "split_sha256": DIGEST,
+        "metrics_sha256": DIGEST,
+        "environment": _fields()["environment"],
+    }
+
+
+@pytest.mark.parametrize("field", list(_evaluation_fields()))
+def test_evaluation_manifest_requires_every_field(field: str) -> None:
+    """Každý článek provenance evaluace je povinný."""
+    fields = _evaluation_fields()
+    del fields[field]
+    with pytest.raises(ValidationError, match=field):
+        EvaluationManifest.model_validate(fields)
+
+
+@pytest.mark.parametrize(
+    "field",
+    [
+        "training_manifest_sha256",
+        "predictions_sha256",
+        "dataset_sha256",
+        "split_sha256",
+        "metrics_sha256",
+    ],
+)
+@pytest.mark.parametrize("value", ["b" * 63, "g" * 64, 1])
+def test_evaluation_manifest_rejects_invalid_digest(field: str, value: object) -> None:
+    """Otisky jsou přísné řetězce SHA-256, nikoli libovolné hodnoty."""
+    with pytest.raises(ValidationError, match=field):
+        EvaluationManifest.model_validate(_evaluation_fields() | {field: value})
+
+
+def test_evaluation_manifest_forbids_extra_fields() -> None:
+    """Manifest neznámý klíč nepřijme."""
+    with pytest.raises(ValidationError, match="extra"):
+        EvaluationManifest.model_validate(_evaluation_fields() | {"extra": 1})
+
+
+def test_evaluation_manifest_is_frozen() -> None:
+    """Manifest po validaci nelze měnit."""
+    manifest = EvaluationManifest.model_validate(_evaluation_fields())
+    with pytest.raises(ValidationError, match="frozen"):
+        manifest.row_id = "other"  # ty: ignore[invalid-assignment]
+
+
+@pytest.mark.parametrize(
+    "matching", ["predictions_sha256", "dataset_sha256", "split_sha256"]
+)
+def test_lineage_names_all_mismatched_fields(matching: str) -> None:
+    """Dvě neshody vrátí obě jména, bez otisků nebo identifikátorů."""
+    digests = dict.fromkeys(
+        ("predictions_sha256", "dataset_sha256", "split_sha256"), "c" * 64
+    )
+    digests[matching] = DIGEST
+    with pytest.raises(InvalidInputError) as error:
+        ensure_training_lineage(RunManifest.model_validate(_fields()), **digests)
+    for field in digests:
+        assert (field in str(error.value)) == (field != matching)
+    assert "c" * 64 not in str(error.value)
+
+
+def test_matching_training_lineage_is_accepted() -> None:
+    """Shodné vstupy pokračují bez výjimky."""
+    ensure_training_lineage(
+        RunManifest.model_validate(_fields()),
+        predictions_sha256=DIGEST,
+        dataset_sha256=DIGEST,
+        split_sha256=DIGEST,
+    )
+
+
+def test_training_manifest_requires_prediction_digest() -> None:
+    """Manifest bez vazby na predikce není platná provenance."""
+    fields = _fields()
+    del fields["predictions_sha256"]
+    with pytest.raises(ValidationError, match="predictions_sha256"):
+        RunManifest.model_validate(fields)
