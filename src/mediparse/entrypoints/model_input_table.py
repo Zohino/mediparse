@@ -19,7 +19,7 @@ if TYPE_CHECKING:
     from mediparse.domain.model_input import ModelInput
 
 
-def training_input(
+def model_input_table(
     cohort: Path, model_input: ModelInput, lexicon: Path
 ) -> tuple[InputTable, DiagnosticStrip | None]:
     """Složí tabulku zpráv, kterou čte trénink i inference, a záznam stripu pro manifest.

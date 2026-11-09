@@ -880,7 +880,7 @@ DATA_ACCESS_IMPORTS = frozenset({
     ("mediparse.infrastructure.eda_duckdb", "EdaDatabase"),
 })
 DATA_ACCESS_EXCEPTIONS = {
-    "training_input.py": (
+    "model_input_table.py": (
         "Skládá líný adaptér bez čtení dat; stráž volají model_training a model_inference."
     ),
 }
