@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, Final
 
 import pyarrow as pa
 
+from mediparse.infrastructure.metrics_table import METRIC_FIELDS, metric_columns
 from mediparse.infrastructure.parquet_file import write_table
 
 if TYPE_CHECKING:
@@ -24,12 +25,7 @@ SCHEMA: Final = pa.schema([
     pa.field("test_positives", pa.int64(), nullable=False),
     pa.field("threshold", pa.float64(), nullable=False),
     pa.field("converged", pa.bool_(), nullable=False),
-    pa.field("precision", pa.float64(), nullable=False),
-    pa.field("recall", pa.float64(), nullable=False),
-    pa.field("f1", pa.float64(), nullable=False),
-    pa.field("accuracy", pa.float64(), nullable=False),
-    pa.field("roc_auc", pa.float64(), nullable=False),
-    pa.field("pr_auc", pa.float64(), nullable=False),
+    *METRIC_FIELDS,
 ])
 
 
@@ -50,11 +46,6 @@ class ParquetScreeningTable:
             "test_positives": [item.test_positives for item in results],
             "threshold": [item.threshold for item in results],
             "converged": [item.converged for item in results],
-            "precision": [item.metrics.precision for item in results],
-            "recall": [item.metrics.recall for item in results],
-            "f1": [item.metrics.f1 for item in results],
-            "accuracy": [item.metrics.accuracy for item in results],
-            "roc_auc": [item.metrics.roc_auc for item in results],
-            "pr_auc": [item.metrics.pr_auc for item in results],
+            **metric_columns([item.metrics for item in results]),
         }
         write_table(self.path, columns, SCHEMA)
