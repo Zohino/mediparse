@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import StrEnum
-from typing import TYPE_CHECKING, Annotated, Final, Self
+from typing import TYPE_CHECKING, Annotated, Self
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
@@ -14,12 +14,10 @@ from mediparse.domain.environment import Environment
 from mediparse.domain.icd import DiagnosisCodes, IcdCode, IcdVersion
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.mimic_table import TableProvenance
+from mediparse.domain.min_cell import MIN_CELL, below_min_cell
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping
-
-# Dostatek pozitivních i negativních zpráv zajišťuje stabilitu splitu a metrik.
-MIN_CELL: Final = 10
 
 type RawCode = tuple[str | None, str | None]
 
@@ -127,7 +125,7 @@ def ensure_publishable(counts: CohortCounts) -> None:
         raise InvalidInputError(msg)
     for diagnosis in Diagnosis:
         positive = counts.positives[diagnosis]
-        if min(positive, notes - positive) < MIN_CELL:
+        if below_min_cell(positive, notes):
             msg = (
                 f"Diagnóza {diagnosis.value} nemá v kohortě aspoň {MIN_CELL} "
                 "pozitivních a negativních zpráv."

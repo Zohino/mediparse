@@ -6,8 +6,8 @@ from collections import defaultdict
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from mediparse.domain.cohort import MIN_CELL
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.min_cell import MIN_CELL, below_min_cell
 from mediparse.domain.note import ensure_note_of_subject
 
 if TYPE_CHECKING:
@@ -104,7 +104,7 @@ def ensure_min_cell(diagnosis: Diagnosis, truth: Sequence[bool]) -> None:
     """
     positives = sum(truth)
     negatives = len(truth) - positives
-    if min(positives, negatives) < MIN_CELL:
+    if below_min_cell(positives, len(truth)):
         msg = (
             f"Diagnóza {diagnosis}: {positives} pozitivních a {negatives} negativních "
             f"zpráv, metriky potřebují v každé třídě aspoň {MIN_CELL}."

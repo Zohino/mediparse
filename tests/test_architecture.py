@@ -17,7 +17,8 @@ from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 import mediparse
 import mediparse.domain
 import mediparse.synthetic.domain
-from mediparse.domain.cohort import MIN_CELL, CohortCounts
+from mediparse.domain.cohort import CohortCounts
+from mediparse.domain.min_cell import MIN_CELL
 from mediparse.infrastructure.duckdb_parquet import SPILL_DIRECTORY
 from mediparse.infrastructure.eda_duckdb import DEFAULT_MEMORY
 from tests.support import REPOSITORY
