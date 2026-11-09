@@ -205,6 +205,9 @@ def test_only_development_texts_reach_featurizer_without_patient_leak() -> None:
         )
     assert seen == {note.text for note in notes if note.subject_id in DEVELOPMENT}
     assert len(recording.featurizations) == CONFIG.folds * len(CONFIG.vectorizers)
+    assert [spec for spec, _, _ in recording.featurizations] == list(
+        CONFIG.vectorizers
+    ) * CONFIG.folds
 
 
 def test_tuner_gets_only_training_labels_subjects_and_features() -> None:
