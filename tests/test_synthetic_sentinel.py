@@ -152,11 +152,7 @@ def test_discharge_text_is_unchanged_after_canary_line(
     assert all(len(row["text"]) >= TEXT_CHARS for row in tables["radiology"])
 
 
-@given(text_chars=st.integers(min_value=0, max_value=200))
-@example(text_chars=1)
-@example(text_chars=40)
-def test_generated_text_has_minimal_token_padding(text_chars: int) -> None:
-    """Výplň je nejkratší možná; délky 1 a 40 vyžadují právě jeden a osm tokenů."""
+def _generated_radiology_text(text_chars: int) -> str:
     shapes = {
         "discharge": TableShape(
             records=1, columns=("subject_id", "hadm_id", "note_id")
@@ -165,7 +161,27 @@ def test_generated_text_has_minimal_token_padding(text_chars: int) -> None:
     }
     corpus = {"discharge": [{"subject_id": "1", "hadm_id": "2", "note_id": "3"}]}
 
-    value = sentinel_tables(corpus, shapes, "x", text_chars)["radiology"][0]["text"]
+    return sentinel_tables(corpus, shapes, "x", text_chars)["radiology"][0]["text"]
+
+
+@pytest.mark.parametrize(
+    ("text_chars", "expected"),
+    [
+        (1, "x-radiology-text-0 xa"),
+        (40, "x-radiology-text-0" + " xa" * 8),
+    ],
+)
+def test_generated_text_matches_manual_padding(text_chars: int, expected: str) -> None:
+    """Ruční příklady délek 1 a 40 dávají právě jeden a osm tokenů výplně."""
+    assert _generated_radiology_text(text_chars) == expected
+
+
+@given(text_chars=st.integers(min_value=0, max_value=200))
+@example(text_chars=1)
+@example(text_chars=40)
+def test_generated_text_has_minimal_token_padding(text_chars: int) -> None:
+    """Výplň dosáhne požadované délky s nejmenším kladným počtem tokenů."""
+    value = _generated_radiology_text(text_chars)
 
     cell, *padding = value.split(" ")
     assert cell == "x-radiology-text-0"
