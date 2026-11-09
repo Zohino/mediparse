@@ -61,6 +61,22 @@ def test_development_notes_are_outside_holdout() -> None:
     assert split.holdout(notes, 0) == Holdout(0, (notes[1],), (notes[0],))
 
 
+def test_development_notes_preserve_input_order() -> None:
+    """Pořadí [3a, 1a, 3b, 2a] dá jen [3a, 3b] vývojového pacienta 3."""
+    notes = _notes(3, 1, 3, 2)
+    split = Split((frozenset({1}), frozenset({2})), development=frozenset({3}))
+
+    assert split.development_notes(notes) == (notes[0], notes[2])
+
+
+def test_development_notes_reject_subject_outside_split() -> None:
+    """Pacient 4 mimo foldy i vývojovou část se odmítne s počtem zpráv."""
+    split = Split((frozenset({1}), frozenset({2})), development=frozenset({3}))
+
+    with pytest.raises(InvalidInputError, match=r"^Zprávy pacientů mimo split: 1\.$"):
+        split.development_notes(_notes(3, 1, 3, 2, 4))
+
+
 def test_development_subject_in_fold_is_a_leak() -> None:
     """Vývojová část nesmí sdílet pacienta s žádným foldem."""
     with pytest.raises(SubjectLeakError):
