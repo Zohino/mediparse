@@ -74,7 +74,15 @@ def tfidf_vectorizer(
     analyzer: Literal["word", "char_wb"] = "word",
     ngram_range: tuple[int, int] = (1, 1),
 ) -> TfidfVectorizer:
-    """Vectorizer, který používá trénink i měření v sešitu EDA.
+    """Vectorizer pro trénink, screening i měření v sešitu EDA.
+
+    Args:
+        normalization: Slovníky sdíleného preprocessoru, nebo None pro jeho vypnutí.
+            Preprocessor se uplatní i u znakového analyzátoru char_wb.
+        analyzer: Typ analyzátoru word nebo char_wb; výchozí word zachovává slovník
+            tréninku a EDA.
+        ngram_range: Nejmenší a největší délka n-gramu; výchozí (1, 1) zachovává
+            unigramový slovník tréninku a EDA.
 
     Returns:
         Nenatrénovaný vectorizer; bez normalizace je to ablace bez preprocessoru.
