@@ -3,8 +3,12 @@
 from __future__ import annotations
 
 import json
+import os
 import re
+import subprocess  # ruff: ignore[suspicious-subprocess-import]
+import sys
 from operator import itemgetter
+from textwrap import dedent
 from typing import TYPE_CHECKING
 
 import pyarrow as pa
@@ -193,16 +197,104 @@ def _select_and_write(source: DuckDbCohort) -> None:
         selected.write()
 
 
-def _small_source(root: Path) -> DuckDbCohort:
+def _small_source(
+    root: Path, *, code: str = "E119", out: Path | None = None
+) -> DuckDbCohort:
     discharge, diagnoses = write_tables(
         root,
         [note("1-DS-1", 1, 10, text("a"))],
-        [icd(10, 1, "E119", "10")],
+        [icd(10, 1, code, "10")],
         padded=False,
     )
     return DuckDbCohort(
-        discharge, diagnoses, root / "c.parquet", root / "s", min_chars=100
+        discharge,
+        diagnoses,
+        out if out is not None else root / "c.parquet",
+        root / "s",
+        min_chars=100,
     )
+
+
+def test_untracked_code_has_zero_positives_for_every_diagnosis(tmp_path: Path) -> None:
+    """Jediný nesledovaný kód Z99 nedává žádné z pěti diagnóz pozitivní zprávu."""
+    source = _small_source(tmp_path, code="Z99")
+
+    with source.select(label_codes(source.codes(), CODES).diagnoses) as selected:
+        assert selected.counts.positives == dict.fromkeys(Diagnosis, 0)
+
+
+def test_write_creates_missing_output_parents(tmp_path: Path) -> None:
+    """Zápis vytvoří i několik chybějících rodičů výstupu mimo spill."""
+    out = tmp_path / "absent/deep/out.parquet"
+    source = _small_source(tmp_path, out=out)
+    assert not out.parent.exists()
+
+    with source.select({}) as selected:
+        selected.write()
+
+    assert pq.ParquetFile(out).metadata.num_rows == 1
+
+
+def test_written_cohort_is_zstd_compressed(tmp_path: Path) -> None:
+    """Každý sloupec každé skupiny řádků kohorty používá kodek ZSTD."""
+    source = _small_source(tmp_path)
+
+    with source.select({}) as selected:
+        selected.write()
+
+    metadata = pq.ParquetFile(source.out).metadata
+    assert metadata.num_row_groups > 0
+    assert metadata.num_columns > 0
+    for index in range(metadata.num_row_groups):
+        group = metadata.row_group(index)
+        for column in range(group.num_columns):
+            assert group.column(column).compression == "ZSTD"
+
+
+def test_select_and_write_work_in_ascii_locale(tmp_path: Path) -> None:
+    """Načtení SQL nezávisí na implicitním kódování locale procesu."""
+    source = _small_source(tmp_path)
+    code = dedent("""\
+        import locale
+        import sys
+        from pathlib import Path
+        from mediparse.infrastructure.duckdb_cohort import DuckDbCohort
+
+        encoding = locale.getencoding().lower().replace("-", "").replace("_", "")
+        if encoding == "utf8":
+            raise RuntimeError("Locale C must not use UTF-8 in this test.")
+
+        source = DuckDbCohort(
+            Path(sys.argv[1]), Path(sys.argv[2]),
+            Path(sys.argv[3]), Path(sys.argv[4]), min_chars=100,
+        )
+        with source.select({}) as selected:
+            selected.write()
+        """)
+    # Bez -X utf8=0 by Python v locale C sám zapnul režim UTF-8 (PEP 540).
+    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
+        [
+            sys.executable,
+            "-X",
+            "utf8=0",
+            "-c",
+            code,
+            str(source.discharge),
+            str(source.diagnoses),
+            str(source.out),
+            str(source.spill),
+        ],
+        env={
+            **os.environ,
+            "LC_ALL": "C",
+        },
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
 
 
 def test_small_cohort_is_selected_and_written_by_adapter(tmp_path: Path) -> None:
@@ -242,12 +334,12 @@ def test_output_parent_that_is_a_file_is_invalid_input(tmp_path: Path) -> None:
 
 
 def test_duckdb_error_in_write_is_invalid_input(tmp_path: Path) -> None:
-    """Chyba DuckDB ve ``write`` po úspěšném výběru je InvalidInputError."""
+    """Chyba DuckDB ve ``write`` je InvalidInputError; hláška nese jen typ původní chyby."""
     source = _small_source(tmp_path)
 
     with source.select(label_codes(source.codes(), CODES).diagnoses) as selected:
         selected.connection.execute("DROP TABLE base")
-        with pytest.raises(InvalidInputError, match="zapsat"):
+        with pytest.raises(InvalidInputError, match=r"zapsat.*CatalogException"):
             selected.write()
 
 
