@@ -12,7 +12,7 @@ from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 from mediparse.domain.clinical_text import NORMALIZATION_LANGUAGE
 from mediparse.domain.identity import RowId
 from mediparse.domain.language import Language
-from mediparse.domain.model_input import ModelInput, TextPreprocessing
+from mediparse.domain.model_input import ModelInput
 from mediparse.domain.section_headers import LEXICON_LANGUAGE
 
 if TYPE_CHECKING:
@@ -78,7 +78,7 @@ class MatrixRow(BaseModel):
     @model_validator(mode="after")
     def _normalization_is_english_only(self) -> Self:
         if (
-            self.input.text_preprocessing is not TextPreprocessing.NONE
+            self.input.text_preprocessing.normalizes
             and self.language is not NORMALIZATION_LANGUAGE
         ):
             msg = (
@@ -91,7 +91,7 @@ class MatrixRow(BaseModel):
     @model_validator(mode="after")
     def _normalization_is_classical_only(self) -> Self:
         if (
-            self.input.text_preprocessing is not TextPreprocessing.NONE
+            self.input.text_preprocessing.normalizes
             and self.model.tier is not Tier.CLASSICAL
         ):
             msg = (

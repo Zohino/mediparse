@@ -14,7 +14,6 @@ from typing import TYPE_CHECKING, Final
 from mediparse.application.model_training import ModelTraining
 from mediparse.domain.costs import TrainingCosts
 from mediparse.domain.environment import Environment
-from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
@@ -123,9 +122,9 @@ def run(
     normalization = (
         load_text_normalization(
             candidates,
-            variants=training.input.text_preprocessing is TextPreprocessing.DICTIONARY,
+            variants=training.input.text_preprocessing.rewrites_variants,
         )
-        if training.input.text_preprocessing is not TextPreprocessing.NONE
+        if training.input.text_preprocessing.normalizes
         else None
     )
     step = ModelTraining(

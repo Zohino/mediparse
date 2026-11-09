@@ -66,13 +66,11 @@ class RunManifest(BaseModel):
 
     @model_validator(mode="after")
     def _normalization_matches_preprocessing(self) -> Self:
-        if (self.text_preprocessing is TextPreprocessing.NONE) != (
-            self.text_normalization is None
-        ):
+        if self.text_preprocessing.normalizes != (self.text_normalization is not None):
             msg = "Úroveň předzpracování none musí odpovídat nepřítomnému slovníku normalizace."
             raise ValueError(msg)
         if (
-            self.text_preprocessing is TextPreprocessing.NORMALIZED
+            not self.text_preprocessing.rewrites_variants
             and self.text_normalization is not None
             and self.text_normalization.variants
         ):
