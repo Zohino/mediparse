@@ -7,8 +7,10 @@ from typing import TYPE_CHECKING, Protocol
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.domain.evaluation import Classification, Prediction
+    from mediparse.domain.evaluation import BinaryMetrics, Classification, Prediction
+    from mediparse.domain.identity import SubjectId
     from mediparse.domain.input_note import InputNote
+    from mediparse.domain.seed import Seed
     from mediparse.domain.split import SharedSplit
 
 
@@ -45,3 +47,25 @@ class PredictionSink(Protocol):
 
     def write(self, predictions: Sequence[Prediction]) -> None:
         """Zapíše predikce."""
+
+
+class PatientPartitioner(Protocol):
+    """Stratifikované rozdělení pacientů do disjunktních částí."""
+
+    def partition(
+        self,
+        subjects: Sequence[SubjectId],
+        strata: Sequence[int],
+        parts: int,
+        seed: Seed,
+    ) -> tuple[frozenset[SubjectId], ...]:
+        """Rozdělí pacienty do daného počtu částí podle stratifikace zpráv."""
+
+
+class Scorer(Protocol):
+    """Výpočet metrik binární klasifikace."""
+
+    def score(
+        self, truth: Sequence[bool], predicted: Sequence[bool], scores: Sequence[float]
+    ) -> BinaryMetrics:
+        """Spočte metriky predikcí a skóre proti pravdě."""
