@@ -1,6 +1,7 @@
 """Pevná syntetická provenance pro testy manifestů a jejich kontraktu s R."""
 
 from mediparse.domain.environment import Environment, Hardware
+from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import RunManifest
 from tests.support import REVISION
 
@@ -27,7 +28,8 @@ def training_manifest(
         split_seed=0,
         split_folds=2,
         diagnostic_strip=None,
-        normalize_clinical_text=None,
+        text_preprocessing=TextPreprocessing.NONE,
+        text_normalization=None,
         model="synthetic classifier",
         model_revision=None,
         tokenizer_revision=None,

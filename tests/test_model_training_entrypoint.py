@@ -18,6 +18,7 @@ import pytest
 from mediparse.domain.costs import GpuMeasurement, GpuUsage, TrainingCosts
 from mediparse.domain.environment import GpuDevice
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints import model_training
 from mediparse.entrypoints.exit_code import ExitCode
@@ -501,7 +502,11 @@ def test_manifest_records_normalization_with_acronyms(tmp_path: Path) -> None:
         )
         outputs = _Outputs.under(root / "out")
         assert _run(notes, config, split, outputs) is ExitCode.OK
-        recorded.append(_manifest(outputs).normalize_clinical_text)
+        manifest = _manifest(outputs)
+        assert manifest.text_preprocessing is (
+            TextPreprocessing.NORMALIZED if normalize else TextPreprocessing.NONE
+        )
+        recorded.append(manifest.text_normalization)
 
     assert recorded[0] is None
     assert recorded[1] == load_text_normalization(
@@ -618,7 +623,11 @@ def test_variant_switch_controls_model_and_manifest(tmp_path: Path) -> None:
         )
         outputs = _Outputs.under(root / "out")
         assert _run(notes, config, split, outputs) is ExitCode.OK
-        normalization = _manifest(outputs).normalize_clinical_text
+        manifest = _manifest(outputs)
+        assert manifest.text_preprocessing is (
+            TextPreprocessing.DICTIONARY if enabled else TextPreprocessing.NORMALIZED
+        )
+        normalization = manifest.text_normalization
         assert normalization is not None
         assert normalization.acronyms
         if enabled:

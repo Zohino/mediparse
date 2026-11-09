@@ -15,6 +15,7 @@ from mediparse.domain.environment import (
     SourceRevision,
 )
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import (
     DiagnosticStrip,
     EvaluationManifest,
@@ -44,7 +45,8 @@ def _fields(**changes: object) -> dict[str, object]:
         "split_folds": 5,
         "split_sha256": DIGEST,
         "diagnostic_strip": None,
-        "normalize_clinical_text": None,
+        "text_preprocessing": TextPreprocessing.NONE,
+        "text_normalization": None,
         "model": "sklearn TfidfVectorizer+LinearSVC",
         "model_revision": None,
         "tokenizer_revision": None,
@@ -205,18 +207,19 @@ def test_manifest_records_normalization_as_sorted_pairs() -> None:
     """Záznam normalizace se zapíše jako objekt se seřazenými dvojicemi zkratka a tvar."""
     dumped = RunManifest.model_validate(
         _fields(
-            normalize_clinical_text=TextNormalization(
+            text_preprocessing=TextPreprocessing.DICTIONARY,
+            text_normalization=TextNormalization(
                 variants={"kindey": "kidney", "afib": "atrial fibrillation"},
                 acronyms={"DM2": "diabetes", "AF": "atrial fibrillation"},
-            )
+            ),
         )
     ).model_dump(mode="json")
 
-    assert list(dumped["normalize_clinical_text"]["variants"].items()) == [
+    assert list(dumped["text_normalization"]["variants"].items()) == [
         ("afib", "atrial fibrillation"),
         ("kindey", "kidney"),
     ]
-    assert list(dumped["normalize_clinical_text"]["acronyms"].items()) == [
+    assert list(dumped["text_normalization"]["acronyms"].items()) == [
         ("AF", "atrial fibrillation"),
         ("DM2", "diabetes"),
     ]
@@ -226,23 +229,77 @@ def test_manifest_without_normalization_is_none() -> None:
     """Bez normalizace pole nese ``None`` a v JSON je ``null``."""
     dumped = RunManifest.model_validate(_fields()).model_dump(mode="json")
 
-    assert dumped["normalize_clinical_text"] is None
+    assert dumped["text_normalization"] is None
 
 
-def test_manifest_without_normalization_key_is_rejected() -> None:
-    """Klíč ``normalize_clinical_text`` je povinný, bez výchozí hodnoty."""
+@pytest.mark.parametrize("field", ["text_preprocessing", "text_normalization"])
+def test_manifest_requires_preprocessing_fields(field: str) -> None:
+    """Úroveň i záznam slovníků jsou povinné bez výchozí hodnoty."""
     fields = _fields()
-    del fields["normalize_clinical_text"]
-
-    with pytest.raises(ValidationError, match="normalize_clinical_text"):
+    del fields[field]
+    with pytest.raises(ValidationError, match=field):
         RunManifest.model_validate(fields)
+
+
+@pytest.mark.parametrize(
+    ("level", "normalization"),
+    [
+        (TextPreprocessing.NONE, TextNormalization(acronyms={}, variants={})),
+        (
+            TextPreprocessing.NONE,
+            TextNormalization(acronyms={"DM": "diabetes"}, variants={}),
+        ),
+        (TextPreprocessing.NORMALIZED, None),
+        (TextPreprocessing.DICTIONARY, None),
+        (
+            TextPreprocessing.NORMALIZED,
+            TextNormalization(acronyms={}, variants={"kindey": "kidney"}),
+        ),
+    ],
+)
+def test_manifest_rejects_inconsistent_preprocessing(
+    level: TextPreprocessing, normalization: TextNormalization | None
+) -> None:
+    """Provenance odmítne rozpor mezi úrovní předzpracování a slovníky."""
+    with pytest.raises(ValidationError, match="předzpracování"):
+        RunManifest.model_validate(
+            _fields(text_preprocessing=level, text_normalization=normalization)
+        )
+
+
+@pytest.mark.parametrize(
+    ("level", "normalization"),
+    [
+        (TextPreprocessing.NONE, None),
+        (
+            TextPreprocessing.NORMALIZED,
+            TextNormalization(acronyms={"DM": "diabetes"}, variants={}),
+        ),
+        (TextPreprocessing.DICTIONARY, TextNormalization(acronyms={}, variants={})),
+        (
+            TextPreprocessing.DICTIONARY,
+            TextNormalization(acronyms={}, variants={"kindey": "kidney"}),
+        ),
+    ],
+)
+def test_manifest_accepts_consistent_preprocessing(
+    level: TextPreprocessing, normalization: TextNormalization | None
+) -> None:
+    """Úroveň je explicitní i pro slovníkový režim bez definovaných variant."""
+    dumped = RunManifest.model_validate(
+        _fields(text_preprocessing=level, text_normalization=normalization)
+    ).model_dump(mode="json")
+    assert dumped["text_preprocessing"] == level.value
+    assert dumped["text_normalization"] == (
+        normalization.model_dump(mode="json") if normalization is not None else None
+    )
 
 
 def test_normalization_as_string_is_rejected() -> None:
     """Bool ani řetězec nejsou záznam normalizace."""
     for value in ("true", True, False):
-        with pytest.raises(ValidationError, match="normalize_clinical_text"):
-            RunManifest.model_validate(_fields(normalize_clinical_text=value))
+        with pytest.raises(ValidationError, match="text_normalization"):
+            RunManifest.model_validate(_fields(text_normalization=value))
 
 
 def test_hardware_requires_gpu_devices() -> None:
