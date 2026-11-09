@@ -571,12 +571,24 @@ def test_normalization_rejects_composed_replacement_chains(
     "variants",
     [
         {"xx": "aa bb", "bb cc": "dd", "dd ee": "ff"},
+        {"xx": "yy zz aa", "aa bb": "dd", "dd ee": "ff"},
+        {"xx": "aa bb", "cc dd aa": "dd", "dd ee": "ff"},
+        {"xx": "aa bb", "cc zz aa": "dd", "dd ee": "ff"},
         {"xx": "aa bb", "cc aa": "dd", "dd ee": "ff"},
         {"xx": "bb", "aa bb cc": "dd", "dd ee": "ff"},
         {"xx": "A-FIB", "prefix a fib suffix": "dd", "dd ee": "ff"},
         {"xx": "A1_B2", "prefix a1_b2 suffix": "dd", "dd ee": "ff"},
     ],
-    ids=["suffix-prefix", "prefix-suffix", "inner-words", "hyphen-case", "ascii-word"],
+    ids=[
+        "suffix-prefix",
+        "long-replacement-suffix",
+        "long-variant-suffix",
+        "long-variant-suffix-discriminating",
+        "prefix-suffix",
+        "inner-words",
+        "hyphen-case",
+        "ascii-word",
+    ],
 )
 def test_normalization_rejects_chains_across_word_overlaps(
     variants: dict[str, str],
