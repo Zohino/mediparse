@@ -65,15 +65,15 @@ class ModelTraining[C: TextClassifier]:
             Velikosti částí odložení, config a otisk splitu.
         """
         notes = self.table.read()
-        labels = _labels(notes, config.diagnosis)
         shared = self.split.read()
+        holdout = shared.split.holdout(notes, config.fold)
+        evaluation_notes = holdout.train + holdout.test
         ensure_patients_per_class(
-            labels,
-            [note.subject_id for note in notes],
+            _labels(evaluation_notes, config.diagnosis),
+            [note.subject_id for note in evaluation_notes],
             config.diagnosis,
             shared.config.folds,
         )
-        holdout = shared.split.holdout(notes, config.fold)
         classifier = self.trainer.fit(
             [note.text for note in holdout.train],
             _labels(holdout.train, config.diagnosis),

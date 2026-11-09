@@ -282,6 +282,23 @@ def test_incomplete_fold_is_rejected_before_scoring() -> None:
     assert not sink.written
 
 
+def test_development_prediction_is_extra_before_scoring() -> None:
+    """Predikce vývojové zprávy je navíc, přestože zpráva leží v kohortě."""
+    development = InputNote("5-DS-1", 5, Language.EN, "syntetický vývoj", frozenset())
+    split = Split(SPLIT.folds, development=frozenset({5}))
+    items = (
+        *_group("row", Diagnosis.CKD, (-1.0, 1.0, 1.0)),
+        prediction(development.note_id, score=-1.0, diagnosis=Diagnosis.CKD),
+    )
+    use_case, scorer, sink = _use_case(items, split, notes=(*NOTES, development))
+
+    with pytest.raises(InvalidInputError, match="chybí 0, navíc 1"):
+        use_case.run()
+
+    assert not scorer.calls
+    assert not sink.written
+
+
 def test_duplicate_is_reported_as_duplicate_not_as_incompleteness() -> None:
     """Skupina s duplicitou a chybějící zprávou se ohlásí jako duplicita.
 
