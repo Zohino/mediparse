@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Literal
+import warnings
+from typing import TYPE_CHECKING, Literal, Self, override
 
 import pytest
 from hypothesis import given
@@ -23,8 +24,9 @@ from mediparse.infrastructure.sklearn_screening import (
 from tests.model_support import OVERLAPPING, separable_notes
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
+    from collections.abc import Callable, Sequence
 
+    from scipy.sparse import csr_matrix
     from sklearn.base import ClassifierMixin
 
     from mediparse.domain.seed import Seed
@@ -161,3 +163,50 @@ def test_featurizer_fits_only_training_vocabulary() -> None:
     assert train.shape == (1, expected_features)
     assert test.shape == train.shape
     assert test.nnz == 0
+
+
+def _observing_estimator(
+    on_fit: Callable[[int], None],
+) -> Callable[[ClassifierFamily, Seed], ClassifierMixin]:
+    class _ObservedLogreg(LogisticRegression):
+        @override
+        def fit(
+            self,
+            X: csr_matrix,
+            y: Sequence[bool],
+            sample_weight: Sequence[float] | None = None,
+        ) -> Self:
+            on_fit(len(y))
+            return super().fit(X, y, sample_weight=sample_weight)
+
+    def factory(family: ClassifierFamily, seed: Seed) -> ClassifierMixin:
+        del family
+        return _ObservedLogreg(random_state=seed)
+
+    return factory
+
+
+def test_tuner_preserves_nonconvergence_unrelated_warning() -> None:
+    """Tuner předá volajícímu UserWarning a nepovažuje ho za nekonvergenci."""
+    notes = separable_notes(24, OVERLAPPING)
+    features, _ = TfidfFeaturizer(None).fit_transform(
+        VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
+        [note.text for note in notes],
+        ["clinic review"],
+    )
+
+    def warn_on_fit(size: int) -> None:
+        del size
+        warnings.warn("Syntetické varování estimatoru.", UserWarning, stacklevel=2)
+
+    with pytest.warns(UserWarning, match="Syntetické varování estimatoru"):
+        model = SklearnThresholdTuner(estimator=_observing_estimator(warn_on_fit)).fit(
+            ClassifierFamily.LOGREG,
+            features,
+            [note.has_label(Diagnosis.DIABETES) for note in notes],
+            [note.subject_id for note in notes],
+            3,
+            7,
+        )
+
+    assert model.converged is True

@@ -174,6 +174,12 @@ class SklearnThresholdTuner:
         with warnings.catch_warnings(record=True) as caught:
             warnings.simplefilter("always", ConvergenceWarning)
             model.fit(features, list(labels))
+        # record=True zachytí i jiné kategorie; jejich diagnostika nesmí v reálném běhu zmizet.
+        for item in caught:
+            if not issubclass(item.category, ConvergenceWarning):
+                warnings.warn_explicit(
+                    item.message, item.category, item.filename, item.lineno
+                )
         converged = not any(
             issubclass(item.category, ConvergenceWarning) for item in caught
         )
