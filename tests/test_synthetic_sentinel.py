@@ -6,6 +6,8 @@ from copy import deepcopy
 from typing import TYPE_CHECKING, Final
 
 import pytest
+from hypothesis import example, given
+from hypothesis import strategies as st
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
@@ -148,6 +150,29 @@ def test_discharge_text_is_unchanged_after_canary_line(
         tokens.append(token)
     assert len(tokens) == len(set(tokens))
     assert all(len(row["text"]) >= TEXT_CHARS for row in tables["radiology"])
+
+
+@given(text_chars=st.integers(min_value=0, max_value=200))
+@example(text_chars=1)
+@example(text_chars=40)
+def test_generated_text_has_minimal_token_padding(text_chars: int) -> None:
+    """Výplň je nejkratší možná; délky 1 a 40 vyžadují právě jeden a osm tokenů."""
+    shapes = {
+        "discharge": TableShape(
+            records=1, columns=("subject_id", "hadm_id", "note_id")
+        ),
+        "radiology": TableShape(records=1, columns=("note_id", "text")),
+    }
+    corpus = {"discharge": [{"subject_id": "1", "hadm_id": "2", "note_id": "3"}]}
+
+    value = sentinel_tables(corpus, shapes, "x", text_chars)["radiology"][0]["text"]
+
+    cell, *padding = value.split(" ")
+    assert cell == "x-radiology-text-0"
+    assert padding
+    assert all(piece == "xa" for piece in padding)
+    assert len(value) >= text_chars
+    assert len(padding) == 1 or len(value.removesuffix(" xa")) < text_chars
 
 
 def test_decoration_is_deterministic_and_does_not_mutate_corpus() -> None:
@@ -307,6 +332,20 @@ def test_manual_section_tokens() -> None:
             "text": "Intro. xyf\r\nChief Complaint:\r\nPain. xyg\r\nBrief Hospital Course:\r\nRecovered. xyh",
         },
     ]
+
+
+def test_section_tokens_preserve_trailing_whitespace() -> None:
+    """Token se vloží za původní mezeru a tabulátor, před CRLF."""
+    assert section_tokens(
+        [{"text": "Chief Complaint:\nCough. \t\r\n"}], LEXICON, "x"
+    ) == [{"text": "Chief Complaint:\nCough. \t xb\r\n"}]
+
+
+def test_section_tokens_increase_after_preamble() -> None:
+    """Číslování od jedné zprávy pokračuje z preambule do sekce jako xb, xc."""
+    assert section_tokens(
+        [{"text": "preamble\nChief Complaint:\nbeta\n"}], LEXICON, "x"
+    ) == [{"text": "preamble xb\nChief Complaint:\nbeta xc\n"}]
 
 
 def test_empty_bodies_and_text_are_preserved() -> None:

@@ -177,7 +177,7 @@ def test_bhc_row_without_plan_is_refused() -> None:
 
 
 def test_bhc_rows_cycle_through_all_cuts() -> None:
-    """Pět BHC s jednou zprávou bez BHC mezi nimi projde variantami 0, 1, 2, 3, 0."""
+    """Obecná permutace pěti BHC a zprávy bez BHC dá v pořadí note_id řezy 0, 1, 2, 3, 0."""
     plans = (
         PLANS[0],
         PLANS[1],
@@ -186,8 +186,9 @@ def test_bhc_rows_cycle_through_all_cuts() -> None:
             for seq in range(3, 7)
         ),
     )
-    discharge = [{"note_id": plan.note_id, "text": TEXT} for plan in reversed(plans)]
-    assert bhc_rows(tuple(reversed(plans)), discharge, LEXICON) == [
+    permuted = tuple(plans[index] for index in (3, 0, 1, 5, 2, 4))
+    discharge = [{"note_id": plan.note_id, "text": TEXT} for plan in permuted]
+    assert bhc_rows(permuted, discharge, LEXICON) == [
         {"note_id": "90000001-DS-1", "target": "Patient improved. Started insulin."},
         {
             "note_id": "90000001-DS-3",
