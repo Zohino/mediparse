@@ -6,6 +6,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
+from mediparse.domain.cohort import MIN_CELL
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.note import ensure_note_of_subject
 
@@ -89,6 +90,26 @@ def ensure_both_classes(diagnosis: Diagnosis, truth: Sequence[bool]) -> None:
         "metriky potřebují obě třídy."
     )
     raise InvalidInputError(msg)
+
+
+def ensure_min_cell(diagnosis: Diagnosis, truth: Sequence[bool]) -> None:
+    """Ověří minimální počet pozitivních i negativních zpráv pro stabilní metriky.
+
+    Args:
+        diagnosis: Diagnóza, pro kterou se počítají metriky.
+        truth: Pravda testovacích zpráv.
+
+    Raises:
+        InvalidInputError: Některá třída obsahuje méně než ``MIN_CELL`` zpráv.
+    """
+    positives = sum(truth)
+    negatives = len(truth) - positives
+    if min(positives, negatives) < MIN_CELL:
+        msg = (
+            f"Diagnóza {diagnosis}: {positives} pozitivních a {negatives} negativních "
+            f"zpráv, metriky potřebují v každé třídě aspoň {MIN_CELL}."
+        )
+        raise InvalidInputError(msg)
 
 
 def ensure_unique_keys(predictions: Sequence[Prediction]) -> None:
