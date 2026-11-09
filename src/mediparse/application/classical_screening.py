@@ -101,7 +101,8 @@ class ClassicalScreening[F]:
 
         Raises:
             InvalidInputError: Zpráva je mimo split, vývojová část nemá dost
-                pacientů v každé třídě nebo některý test foldu nesplňuje ``MIN_CELL``.
+                pacientů v každé třídě, některý test foldu nesplňuje ``MIN_CELL``
+                nebo trénink foldu nemá dost pacientů pro vnitřní CV prahu.
         """
         shared = self.split.read()
         notes = shared.split.development_notes(self.table.read())
@@ -180,8 +181,15 @@ def _development_holdouts(
     split = Split(parts, development=frozenset())
     holdouts = tuple(split.holdout(notes, fold) for fold in range(config.folds))
     for holdout in holdouts:
+        train_subjects = [note.subject_id for note in holdout.train]
         for diagnosis in Diagnosis:
             ensure_min_cell(
                 diagnosis, [note.has_label(diagnosis) for note in holdout.test]
+            )
+            ensure_patients_per_class(
+                [note.has_label(diagnosis) for note in holdout.train],
+                train_subjects,
+                diagnosis,
+                config.threshold_folds,
             )
     return holdouts

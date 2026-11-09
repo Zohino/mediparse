@@ -317,7 +317,10 @@ class _FixedPartitioner(PatientPartitioner):
         parts: int,
         seed: Seed,
     ) -> tuple[frozenset[SubjectId], ...]:
-        return (frozenset({90000001, 90000002}), frozenset({90000003, 90000004}))
+        return (
+            frozenset(range(90000001, 90000007)),
+            frozenset(range(90000007, 90000013)),
+        )
 
 
 def test_invalid_last_fold_is_refused_before_any_fit_or_write() -> None:
@@ -325,10 +328,18 @@ def test_invalid_last_fold_is_refused_before_any_fit_or_write() -> None:
     notes = tuple(
         _note(subject, visit, positive=subject % 2 == 1)
         for subject, visits in [
-            (90000001, 10),
-            (90000002, 10),
-            (90000003, 9),
-            (90000004, 10),
+            (90000001, 4),
+            (90000002, 4),
+            (90000003, 3),
+            (90000004, 3),
+            (90000005, 3),
+            (90000006, 3),
+            (90000007, 3),
+            (90000008, 4),
+            (90000009, 3),
+            (90000010, 3),
+            (90000011, 3),
+            (90000012, 3),
         ]
         for visit in range(visits)
     )
@@ -360,6 +371,28 @@ def test_class_check_counts_development_patients_not_notes() -> None:
     ):
         _step(recording, notes).run(CONFIG)
 
+    assert recording == _Recording()
+
+
+def test_threshold_cv_requires_enough_training_patients_before_any_fit() -> None:
+    """Vývoj má dvě třídy po dvou pacientech, trénink foldu jen po jednom místo tří."""
+    notes = tuple(
+        _note(subject, visit, positive=subject % 2 == 1)
+        for subject in range(90000001, 90000005)
+        for visit in range(10)
+    )
+    recording = _Recording()
+
+    with pytest.raises(
+        InvalidInputError,
+        match=(
+            r"^Diagnóza diabetes: 1 pozitivních a 1 negativních pacientů, "
+            r"odložení potřebuje v každé třídě aspoň 3\.$"
+        ),
+    ) as raised:
+        _step(recording, notes).run(CONFIG)
+
+    assert "9000000" not in str(raised.value)
     assert recording == _Recording()
 
 
