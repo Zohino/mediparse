@@ -116,3 +116,10 @@ def test_screening_is_frozen() -> None:
     manifest = ScreeningManifest.model_validate(_fields())
     with pytest.raises(ValidationError, match="frozen"):
         manifest.seed = 8  # ty: ignore[invalid-assignment]
+
+
+@pytest.mark.parametrize("folds", [0, 1])
+def test_screening_requires_at_least_two_split_folds(folds: int) -> None:
+    """Manifest screeningu odmítne split s méně než dvěma foldy."""
+    with pytest.raises(ValidationError, match="split_folds"):
+        ScreeningManifest.model_validate(_fields(split_folds=folds))
