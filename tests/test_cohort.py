@@ -8,7 +8,6 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.cohort import (
-    MIN_CELL,
     CohortCounts,
     CohortManifest,
     FunnelStep,
@@ -21,6 +20,7 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.environment import Environment, SourceRevision
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.mimic_table import TableProvenance
+from mediparse.domain.min_cell import MIN_CELL
 from tests.cohort_support import (
     CODES,
     EMPTY_COHORT,

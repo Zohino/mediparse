@@ -17,7 +17,8 @@ from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 import mediparse
 import mediparse.domain
 import mediparse.synthetic.domain
-from mediparse.domain.cohort import MIN_CELL, CohortCounts
+from mediparse.domain.cohort import CohortCounts
+from mediparse.domain.min_cell import MIN_CELL
 from mediparse.infrastructure.duckdb_parquet import SPILL_DIRECTORY
 from mediparse.infrastructure.eda_duckdb import DEFAULT_MEMORY
 from tests.support import REPOSITORY
@@ -879,7 +880,7 @@ DATA_ACCESS_IMPORTS = frozenset({
     ("mediparse.infrastructure.eda_duckdb", "EdaDatabase"),
 })
 DATA_ACCESS_EXCEPTIONS = {
-    "training_input.py": (
+    "model_input_table.py": (
         "Skládá líný adaptér bez čtení dat; stráž volají model_training a model_inference."
     ),
 }

@@ -11,9 +11,10 @@ from typing import TYPE_CHECKING, Final
 import pyarrow.parquet as pq
 import pytest
 
-from mediparse.domain.cohort import MIN_CELL, CohortManifest, FunnelStepName
+from mediparse.domain.cohort import CohortManifest, FunnelStepName
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.mimic_table import TableProvenance
+from mediparse.domain.min_cell import MIN_CELL
 from mediparse.entrypoints import cohort
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.table_provenance import (

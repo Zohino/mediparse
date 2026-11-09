@@ -3,12 +3,15 @@
 from __future__ import annotations
 
 import pytest
+from hypothesis import example, given
+from hypothesis import strategies as st
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import (
     Prediction,
     ensure_both_classes,
     ensure_complete_folds,
+    ensure_min_cell,
     ensure_unique_keys,
     truth_of,
 )
@@ -50,6 +53,24 @@ def test_truth_of_missing_note_is_invalid_input_without_identifiers() -> None:
 def test_mixed_truth_passes() -> None:
     """Smíšená pravda projde."""
     ensure_both_classes(Diagnosis.CKD, [True, False, True])
+
+
+@given(positives=st.integers(0, 30), negatives=st.integers(0, 30))
+@example(positives=9, negatives=10)
+@example(positives=10, negatives=9)
+@example(positives=10, negatives=10)
+def test_min_cell_needs_ten_notes_in_each_class(positives: int, negatives: int) -> None:
+    """Pravidlo stability je 10 zpráv v obou třídách; chyba nese diagnózu a oba počty."""
+    truth = [True] * positives + [False] * negatives
+
+    if positives >= 10 and negatives >= 10:  # ruff: ignore[magic-value-comparison]
+        ensure_min_cell(Diagnosis.CKD, truth)
+    else:
+        with pytest.raises(
+            InvalidInputError,
+            match=rf"ckd: {positives} pozitivních a {negatives} negativních zpráv",
+        ):
+            ensure_min_cell(Diagnosis.CKD, truth)
 
 
 @pytest.mark.parametrize("truth", [[True, True], [False, False, False], []])

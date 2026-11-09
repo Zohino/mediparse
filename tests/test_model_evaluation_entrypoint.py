@@ -258,7 +258,7 @@ def test_evaluation_manifest_records_digests_and_is_deterministic(
 
 
 @pytest.mark.parametrize("input_name", ["cohort", "split"])
-def test_changed_training_input_is_refused(
+def test_changed_model_input_table_is_refused(
     tmp_path: Path, caplog: pytest.LogCaptureFixture, input_name: str
 ) -> None:
     """A5: jiné bajty kohorty se stejnými klíči i jiné přiřazení splitu se odmítnou."""

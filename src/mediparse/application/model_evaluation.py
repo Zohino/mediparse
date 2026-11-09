@@ -21,19 +21,11 @@ if TYPE_CHECKING:
     from mediparse.application.ports.experiment import (
         InputTable,
         PredictionSource,
+        Scorer,
         SplitSource,
     )
     from mediparse.domain.diagnosis import Diagnosis
-    from mediparse.domain.evaluation import BinaryMetrics, Prediction
-
-
-class Scorer(Protocol):
-    """Výpočet metrik binární klasifikace."""
-
-    def score(
-        self, truth: Sequence[bool], predicted: Sequence[bool], scores: Sequence[float]
-    ) -> BinaryMetrics:
-        """Spočte metriky predikcí a skóre proti pravdě."""
+    from mediparse.domain.evaluation import Prediction
 
 
 class MetricsSink(Protocol):
