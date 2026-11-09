@@ -156,7 +156,8 @@ def rewrite_diagnosis_variants(text: str, variants: Mapping[str, str]) -> str:
         return text
     canonical = _variant_keys(variants)
     pattern = _variant_pattern(canonical)
-    # Oprava překlepu uvnitř víceslovné varianty ji odhalí až po první náhradě.
+    # Oprava překlepu může odhalit víceslovnou variantu až po první náhradě.
+    # TextNormalization odmítá delší řetězy návazností, proto dva průchody stačí.
     for _ in range(2):
         text = pattern.sub(
             lambda match: variants[canonical[_variant_key(match[0])]], text
@@ -164,12 +165,50 @@ def rewrite_diagnosis_variants(text: str, variants: Mapping[str, str]) -> str:
     return text
 
 
+def _form_words(form: str) -> tuple[str, ...]:
+    return tuple(re.findall(r"[a-z0-9_]+", form.lower()))
+
+
+def _replacement_can_form_variant(
+    replacement_words: tuple[str, ...], variant_words: tuple[str, ...]
+) -> bool:
+    if any(
+        variant_words[start : start + len(replacement_words)] == replacement_words
+        for start in range(len(variant_words) - len(replacement_words) + 1)
+    ):
+        return True
+    return any(
+        replacement_words[-overlap:] == variant_words[:overlap]
+        or replacement_words[:overlap] == variant_words[-overlap:]
+        for overlap in range(1, min(len(replacement_words) - 1, len(variant_words)) + 1)
+    )
+
+
+def _composed_replacement_chains(
+    variants: Mapping[str, str],
+) -> list[tuple[str, str]]:
+    variant_words = {variant: _form_words(variant) for variant in variants}
+    next_variants = {}
+    for variant, replacement in variants.items():
+        replacement_words = _form_words(replacement)
+        next_variants[variant] = {
+            target
+            for target, words in variant_words.items()
+            if _replacement_can_form_variant(replacement_words, words)
+        }
+    composable = {target for targets in next_variants.values() for target in targets}
+    return sorted(
+        (variant, target) for variant in composable for target in next_variants[variant]
+    )
+
+
 class TextNormalization(BaseModel):
     """Záznam normalizace vstupu TF-IDF: slovníky zkratek, variant a překlepů.
 
     Tentýž objekt dostane trenér i run manifest. Klíče se seřadí, aby byl JSON
     deterministický. Náhrady nesmějí obsahovat tvary ani zkratky slovníků jako celá slova,
-    jinak by přepis nebyl idempotentní.
+    jinak by přepis nebyl idempotentní. Náhrada se s okolím smí složit do další varianty,
+    jejíž náhrada už další variantu složit nesmí; díky tomu dva průchody přepisu stačí.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
@@ -206,4 +245,10 @@ class TextNormalization(BaseModel):
             ):
                 message = f"Náhrada obsahuje variantu nebo zkratku slovníku: {form}"
                 raise ValueError(message)
+        chains = _composed_replacement_chains(self.variants)
+        if chains:
+            message = (
+                f"Řetěz složených náhrad variant má více než jednu návaznost: {chains}."
+            )
+            raise ValueError(message)
         return self

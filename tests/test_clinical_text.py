@@ -7,7 +7,7 @@ import string
 from typing import Final
 
 import pytest
-from hypothesis import example, given
+from hypothesis import assume, example, given
 from hypothesis import strategies as st
 from pydantic import ValidationError
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -542,3 +542,101 @@ def test_normalization_rejects_noncanonical_variant_whitespace(variant: str) -> 
     """Klíč s nesloučenými bílými znaky by neodpovídal nalezenému tvaru."""
     with pytest.raises(ValidationError):
         TextNormalization(acronyms={}, variants={variant: "x"})
+
+
+@pytest.mark.parametrize(
+    ("variants", "pairs"),
+    [
+        (
+            {"aa": "bb", "bb cc": "dd", "dd ee": "ff", "ff gg": "hh"},
+            [("bb cc", "dd ee"), ("dd ee", "ff gg")],
+        ),
+        ({"aa bb": "aa"}, [("aa bb", "aa bb")]),
+    ],
+    ids=["N06", "repeated-replacement"],
+)
+def test_normalization_rejects_composed_replacement_chains(
+    variants: dict[str, str], pairs: list[tuple[str, str]]
+) -> None:
+    """Řetěz delší než jedna návaznost se odmítne s výčtem jeho dvojic."""
+    with pytest.raises(ValidationError) as error:
+        TextNormalization(acronyms={}, variants=variants)
+
+    message = error.value.errors()[0]["msg"]
+    for pair in pairs:
+        assert repr(pair) in message
+
+
+@pytest.mark.parametrize(
+    "variants",
+    [
+        {"xx": "aa bb", "bb cc": "dd", "dd ee": "ff"},
+        {"xx": "aa bb", "cc aa": "dd", "dd ee": "ff"},
+        {"xx": "bb", "aa bb cc": "dd", "dd ee": "ff"},
+        {"xx": "A-FIB", "prefix a fib suffix": "dd", "dd ee": "ff"},
+        {"xx": "A1_B2", "prefix a1_b2 suffix": "dd", "dd ee": "ff"},
+    ],
+    ids=["suffix-prefix", "prefix-suffix", "inner-words", "hyphen-case", "ascii-word"],
+)
+def test_normalization_rejects_chains_across_word_overlaps(
+    variants: dict[str, str],
+) -> None:
+    """Skládání bere v úvahu slova uvnitř variant i překryvy konců náhrad."""
+    with pytest.raises(ValidationError, match="Řetěz"):
+        TextNormalization(acronyms={}, variants=variants)
+
+
+def test_normalization_allows_one_composed_replacement() -> None:
+    """Jediná návaznost bb→cc, aa cc→dd se dokončí dvěma průchody."""
+    normalization = TextNormalization(acronyms={}, variants={"bb": "cc", "aa cc": "dd"})
+
+    assert rewrite_diagnosis_variants("aa bb", normalization.variants) == "dd"
+
+
+@pytest.mark.parametrize(
+    "variants",
+    [
+        {"xx": "aa cc", "aa bb cc": "dd", "dd ee": "ff"},
+        {"xx": "aa", "baab cc": "dd", "dd ee": "ff"},
+    ],
+    ids=["noncontiguous-words", "part-of-word"],
+)
+def test_disconnected_words_do_not_compose_variants(variants: dict[str, str]) -> None:
+    """Rozptýlená slova ani podřetězec slova nezakládají další návaznost."""
+    assert TextNormalization(acronyms={}, variants=variants).variants == variants
+
+
+def test_acronyms_do_not_count_toward_variant_chain() -> None:
+    """Zkratka se rozvine před oběma průchody, jejich rozpočet nespotřebuje."""
+    normalization = TextNormalization(
+        acronyms={"XX": "aa"}, variants={"aa bb": "cc", "cc dd": "ee"}
+    )
+    expanded = expand_diagnosis_acronyms("XX bb dd", normalization.acronyms)
+
+    assert rewrite_diagnosis_variants(expanded, normalization.variants) == "ee"
+
+
+_REWRITE_WORDS: Final = st.sampled_from(["aa", "bb", "cc", "dd", "ee"])
+_REWRITE_FORMS: Final = st.lists(_REWRITE_WORDS, min_size=1, max_size=2).map(" ".join)
+
+
+@given(
+    variants=st.dictionaries(_REWRITE_FORMS, _REWRITE_FORMS, max_size=5),
+    text=st.lists(_REWRITE_WORDS, max_size=15).map(" ".join),
+)
+@example(
+    variants={"aa": "bb", "bb cc": "dd", "dd ee": "ff", "ff gg": "hh"},
+    text="aa cc ee gg",
+)
+@example(variants={"aa bb": "aa"}, text="aa bb bb bb")
+@example(variants={"bb": "cc", "aa cc": "dd"}, text="aa bb")
+def test_rewrite_validated_small_dictionaries_is_idempotent(
+    variants: dict[str, str], text: str
+) -> None:
+    """Každý přijatý slovník nad malou abecedou dává idempotentní přepis."""
+    try:
+        normalization = TextNormalization(acronyms={}, variants=variants)
+    except ValidationError:
+        assume(condition=False)
+    once = rewrite_diagnosis_variants(text, normalization.variants)
+    assert rewrite_diagnosis_variants(once, normalization.variants) == once
