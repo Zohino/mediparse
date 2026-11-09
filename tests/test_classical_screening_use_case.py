@@ -131,8 +131,8 @@ class _Featurizer:
 @dataclass(frozen=True)
 class _Classifier:
     recording: _Recording
-    threshold: float = 0.37
-    converged: bool = False
+    threshold: float
+    converged: bool
 
     def classify(self, features: Features) -> tuple[Classification, ...]:
         self.recording.classifications.append(features)
@@ -163,7 +163,14 @@ class _Tuner(ThresholdTuner[Features]):
         self.recording.fits.append(
             _Fit(family, features, tuple(labels), tuple(subjects), folds, seed)
         )
-        return _Classifier(self.recording)
+        threshold = {
+            ClassifierFamily.COMPLEMENT_NB: 0.25,
+            ClassifierFamily.LOGREG: 0.5,
+            ClassifierFamily.LINEAR_SVM: 0.75,
+        }[family]
+        return _Classifier(
+            self.recording, threshold, converged=family is ClassifierFamily.LOGREG
+        )
 
 
 @dataclass(frozen=True)
@@ -264,16 +271,28 @@ def test_rows_follow_config_order_in_single_write() -> None:
     )
 
 
-def test_rows_carry_tuner_metadata() -> None:
-    """Řádek přenese zvolený práh a nekonvergenci klasifikátoru."""
+@pytest.mark.parametrize(
+    ("family", "threshold", "converged"),
+    [
+        (ClassifierFamily.COMPLEMENT_NB, 0.25, False),
+        (ClassifierFamily.LOGREG, 0.5, True),
+        (ClassifierFamily.LINEAR_SVM, 0.75, False),
+    ],
+    ids=["complement-nb", "logreg", "linear-svm"],
+)
+def test_rows_carry_tuner_metadata(
+    family: ClassifierFamily, threshold: float, *, converged: bool
+) -> None:
+    """Každý řádek přenese práh a konvergenci tuneru své rodiny."""
     recording = _Recording()
 
     _step(recording, _notes()).run(CONFIG)
 
-    rows = recording.writes[0]
-    assert all(
-        row.threshold == pytest.approx(0.37) and row.converged is False for row in rows
-    )
+    rows = [row for row in recording.writes[0] if row.family is family]
+    assert rows
+    for row in rows:
+        assert row.threshold == pytest.approx(threshold)
+        assert row.converged is converged
 
 
 def test_report_describes_development_and_original_split() -> None:
