@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass, field, replace
 from itertools import batched, product
-from random import Random
 from typing import TYPE_CHECKING, override
 
 import pytest
@@ -21,18 +20,20 @@ from mediparse.domain.classical_screening import (
 )
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Classification
-from mediparse.domain.input_note import InputNote
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.language import Language
-from mediparse.domain.split import SharedSplit, Split, SplitConfig
 from mediparse.infrastructure.sklearn_metrics import SklearnScorer
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
+from tests.screening_support import DEVELOPMENT, SHARED
+from tests.screening_support import note as _note
+from tests.screening_support import notes as _notes
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from mediparse.domain.identity import SubjectId
+    from mediparse.domain.input_note import InputNote
     from mediparse.domain.seed import Seed
+    from mediparse.domain.split import SharedSplit
 
 type Features = tuple[str, ...]
 
@@ -53,33 +54,6 @@ CONFIG = ClassicalScreeningConfig.model_validate_json(
         "families": ["linear_svm", "complement_nb", "logreg"],
     })
 )
-DEVELOPMENT = frozenset(range(90000001, 90000021))
-SHARED = SharedSplit(
-    SplitConfig(seed=23, folds=2),
-    Split((frozenset({1}), frozenset({2})), development=DEVELOPMENT),
-)
-
-
-def _note(subject: int, visit: int, *, positive: bool) -> InputNote:
-    labels = frozenset(Diagnosis) - {Diagnosis.CKD} if positive else {Diagnosis.CKD}
-    return InputNote(
-        f"{subject}-DS-{visit}",
-        subject,
-        Language.EN,
-        f"synthetic {'positive' if positive else 'negative'} {subject} visit {visit}",
-        frozenset(labels),
-    )
-
-
-def _notes() -> tuple[InputNote, ...]:
-    notes = [
-        _note(subject, visit, positive=subject % 2 == 1)
-        for subject in sorted(DEVELOPMENT)
-        for visit in range(2)
-    ]
-    notes.extend((_note(1, 0, positive=True), _note(2, 0, positive=False)))
-    Random(19).shuffle(notes)
-    return tuple(notes)
 
 
 @dataclass(frozen=True)

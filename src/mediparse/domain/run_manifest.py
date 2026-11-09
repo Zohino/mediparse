@@ -4,7 +4,14 @@ from __future__ import annotations
 
 from typing import Annotated, Self
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    PositiveInt,
+    field_validator,
+    model_validator,
+)
 
 from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.digest import Sha256
@@ -32,6 +39,21 @@ class DiagnosticStrip(BaseModel):
         if not isinstance(sections, (tuple, list)):
             return sections
         return tuple(sorted(set(sections)))
+
+
+def _ensure_normalization_matches_preprocessing(
+    preprocessing: TextPreprocessing, normalization: TextNormalization | None
+) -> None:
+    if preprocessing.normalizes != (normalization is not None):
+        msg = "Úroveň předzpracování none musí odpovídat nepřítomnému slovníku normalizace."
+        raise ValueError(msg)
+    if (
+        not preprocessing.rewrites_variants
+        and normalization is not None
+        and normalization.variants
+    ):
+        msg = "Úroveň předzpracování normalized nesmí obsahovat varianty diagnóz."
+        raise ValueError(msg)
 
 
 class RunManifest(BaseModel):
@@ -67,16 +89,36 @@ class RunManifest(BaseModel):
 
     @model_validator(mode="after")
     def _normalization_matches_preprocessing(self) -> Self:
-        if self.text_preprocessing.normalizes != (self.text_normalization is not None):
-            msg = "Úroveň předzpracování none musí odpovídat nepřítomnému slovníku normalizace."
-            raise ValueError(msg)
-        if (
-            not self.text_preprocessing.rewrites_variants
-            and self.text_normalization is not None
-            and self.text_normalization.variants
-        ):
-            msg = "Úroveň předzpracování normalized nesmí obsahovat varianty diagnóz."
-            raise ValueError(msg)
+        _ensure_normalization_matches_preprocessing(
+            self.text_preprocessing, self.text_normalization
+        )
+        return self
+
+
+class ScreeningManifest(BaseModel):
+    """Provenance screeningu: vývojová část, konfigurace, výsledky a prostředí."""
+
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+
+    dataset_sha256: Sha256
+    split_seed: Seed
+    split_folds: Annotated[int, Field(ge=2)]
+    split_sha256: Sha256
+    config_sha256: Sha256
+    seed: Seed
+    results_sha256: Sha256
+    development_notes: PositiveInt
+    development_patients: PositiveInt
+    diagnostic_strip: DiagnosticStrip | None
+    text_preprocessing: TextPreprocessing
+    text_normalization: TextNormalization | None
+    environment: Environment
+
+    @model_validator(mode="after")
+    def _normalization_matches_preprocessing(self) -> Self:
+        _ensure_normalization_matches_preprocessing(
+            self.text_preprocessing, self.text_normalization
+        )
         return self
 
 

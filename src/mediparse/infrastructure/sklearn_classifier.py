@@ -5,7 +5,7 @@ from __future__ import annotations
 import functools
 import zipfile
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Final, Literal
 
 import skops.io as sio
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -68,8 +68,21 @@ def tfidf_preprocessor(
     return rewrite_diagnosis_variants(expanded, variants).lower()
 
 
-def tfidf_vectorizer(normalization: TextNormalization | None) -> TfidfVectorizer:
-    """Vectorizer, který používá trénink i měření v sešitu EDA.
+def tfidf_vectorizer(
+    normalization: TextNormalization | None,
+    *,
+    analyzer: Literal["word", "char_wb"] = "word",
+    ngram_range: tuple[int, int] = (1, 1),
+) -> TfidfVectorizer:
+    """Vectorizer pro trénink, screening i měření v sešitu EDA.
+
+    Args:
+        normalization: Slovníky sdíleného preprocessoru, nebo None pro jeho vypnutí.
+            Preprocessor se uplatní i u znakového analyzátoru char_wb.
+        analyzer: Typ analyzátoru word nebo char_wb; výchozí word zachovává slovník
+            tréninku a EDA.
+        ngram_range: Nejmenší a největší délka n-gramu; výchozí (1, 1) zachovává
+            unigramový slovník tréninku a EDA.
 
     Returns:
         Nenatrénovaný vectorizer; bez normalizace je to ablace bez preprocessoru.
@@ -85,7 +98,24 @@ def tfidf_vectorizer(normalization: TextNormalization | None) -> TfidfVectorizer
             variants=dict(normalization.variants),
         )
     )
-    return TfidfVectorizer(sublinear_tf=True, preprocessor=preprocessor)
+    return TfidfVectorizer(
+        sublinear_tf=True,
+        preprocessor=preprocessor,
+        analyzer=analyzer,
+        ngram_range=ngram_range,
+    )
+
+
+def ensure_tokens(vectorizer: TfidfVectorizer, texts: Sequence[str]) -> None:
+    """Odmítne texty, ze kterých analyzátor nevytvoří žádný příznak.
+
+    Raises:
+        InvalidInputError: Trénovací slovník by byl prázdný.
+    """
+    analyzer = vectorizer.build_analyzer()
+    if not any(analyzer(text) for text in texts):
+        msg = "Trénovací texty neobsahují žádný token, slovník TF-IDF by byl prázdný."
+        raise InvalidInputError(msg)
 
 
 # Seznam platí při načtení, ne při uložení: skops model uloží vždy a při načtení
@@ -117,12 +147,7 @@ class LinearSvmTrainer:
                 diagnostických sekcí ze zpráv, které z nich sestávají.
         """
         vectorizer = tfidf_vectorizer(self.normalization)
-        analyzer = vectorizer.build_analyzer()
-        if not any(analyzer(text) for text in texts):
-            msg = (
-                "Trénovací texty neobsahují žádný token, slovník TF-IDF by byl prázdný."
-            )
-            raise InvalidInputError(msg)
+        ensure_tokens(vectorizer, texts)
         pipeline = Pipeline([
             ("tfidf", vectorizer),
             ("svm", LinearSVC(C=self.regularization, random_state=self.seed)),
