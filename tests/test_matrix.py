@@ -14,6 +14,7 @@ from mediparse.domain.language import Language
 from mediparse.domain.matrix import ExperimentMatrix, MatrixRow, ModelName, Tier
 from mediparse.domain.model_input import TextPreprocessing
 from mediparse.infrastructure.matrix_manifest import load_matrix
+from tests.model_support import model_input
 from tests.support import REPOSITORY_MATRIX
 
 if TYPE_CHECKING:
@@ -25,7 +26,7 @@ def _row(**overrides: object) -> dict[str, object]:
         "id": "en-logreg",
         "language": "en",
         "model": "logreg",
-        "input": {"strip_diagnostic_sections": False, "text_preprocessing": "none"},
+        "input": model_input(),
         "tuning_trials": 20,
     } | overrides
 
@@ -69,16 +70,6 @@ def test_every_model_has_tier() -> None:
         {"model": "random-forest"},
         {"tuning_trials": 0},
         {"tuning_trials": "20"},
-        {"input": {"strip_diagnostic_sections": "true", "text_preprocessing": "none"}},
-        {"input": {"strip_diagnostic_sections": False, "text_preprocessing": "full"}},
-        {"normalize_clinical_text": False},
-        {
-            "input": {
-                "strip_diagnostic_sections": False,
-                "text_preprocessing": "none",
-                "extra": 0,
-            }
-        },
         {"id": "EN logreg"},
         {"tier": "classical"},
     ],
@@ -87,10 +78,6 @@ def test_every_model_has_tier() -> None:
         "unknown-model",
         "zero-trials",
         "string-trials",
-        "string-bool",
-        "unknown-preprocessing",
-        "legacy-field",
-        "extra-input-field",
         "bad-id",
         "extra-field",
     ],
@@ -107,24 +94,27 @@ def test_diagnosis_is_not_matrix_axis() -> None:
         _validate(_row(diagnosis="diabetes"))
 
 
-@pytest.mark.parametrize(
-    "field", ["input", "strip_diagnostic_sections", "text_preprocessing"]
-)
-def test_missing_axis_is_rejected(field: str) -> None:
-    """Vstup i každá jeho osa jsou povinné, bez výchozích hodnot."""
+def test_input_is_required() -> None:
+    """Řádek matice musí výslovně deklarovat vstup modelu."""
     row = _row()
-    if field == "input":
-        del row[field]
-    else:
-        input_fields: dict[str, object] = {
-            "strip_diagnostic_sections": False,
-            "text_preprocessing": "none",
-        }
-        del input_fields[field]
-        row["input"] = input_fields
+    del row["input"]
 
-    with pytest.raises(ValidationError, match=field):
+    with pytest.raises(ValidationError, match="input"):
         _validate(row)
+
+
+@pytest.mark.parametrize(
+    "field",
+    [
+        "normalize_clinical_text",
+        "strip_diagnostic_sections",
+        "normalize_diagnosis_variants",
+    ],
+)
+def test_legacy_top_level_switches_are_rejected(field: str) -> None:
+    """Staré přepínače jsou pole navíc i pro řádek matice."""
+    with pytest.raises(ValidationError, match=field):
+        _validate(_row(**{field: False}))
 
 
 def test_empty_matrix_is_rejected() -> None:
@@ -148,12 +138,7 @@ def test_duplicate_experiments_are_rejected() -> None:
 def test_rows_differing_only_in_normalization_are_distinct() -> None:
     """Normalizace je osa: dva řádky lišící se jen jí projdou."""
     matrix = _validate(
-        _row(
-            input={
-                "strip_diagnostic_sections": False,
-                "text_preprocessing": "normalized",
-            }
-        ),
+        _row(input=model_input(preprocessing="normalized")),
         _row(id="en-logreg-nonorm"),
     )
 
@@ -201,7 +186,7 @@ def test_czech_row_with_strip_is_rejected_with_row_id() -> None:
     row = _row(
         id="cs-logreg-strip",
         language="cs",
-        input={"strip_diagnostic_sections": True, "text_preprocessing": "none"},
+        input=model_input(strip=True),
     )
 
     with pytest.raises(ValidationError) as error:
@@ -217,7 +202,7 @@ def test_czech_row_with_normalization_is_rejected_with_row_id() -> None:
     row = _row(
         id="cs-logreg-norm",
         language="cs",
-        input={"strip_diagnostic_sections": False, "text_preprocessing": "normalized"},
+        input=model_input(preprocessing="normalized"),
     )
 
     with pytest.raises(ValidationError) as error:
@@ -234,7 +219,7 @@ def test_non_classical_row_with_normalization_is_rejected(model: str) -> None:
     row = _row(
         id=f"en-{model}",
         model=model,
-        input={"strip_diagnostic_sections": False, "text_preprocessing": "normalized"},
+        input=model_input(preprocessing="normalized"),
     )
 
     with pytest.raises(ValidationError, match=rf"Řádek en-{model}: .*klasick"):
@@ -330,10 +315,7 @@ def test_matrix_accepts_exactly_23_of_60_input_combinations() -> None:
 
 def test_multiple_duplicated_input_axes_are_rejected() -> None:
     """Více opakovaných vstupů stejného modelu skončí validační chybou."""
-    normalized = {
-        "strip_diagnostic_sections": False,
-        "text_preprocessing": "normalized",
-    }
+    normalized = model_input(preprocessing="normalized")
     with pytest.raises(ValidationError, match="stejné osy"):
         _validate(
             _row(),

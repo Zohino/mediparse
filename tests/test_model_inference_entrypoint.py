@@ -25,6 +25,7 @@ from tests.model_support import (
     ACRONYM_VOCABULARY,
     SEPARABLE_VOCABULARY,
     SPELLING_VOCABULARY,
+    model_input,
     sectioned_notes,
     separable_notes,
     training_config,
@@ -77,10 +78,9 @@ def _train(
             training_config(
                 row_id="row",
                 diagnosis="diabetes",
-                input={
-                    "strip_diagnostic_sections": strip,
-                    "text_preprocessing": "normalized" if normalize else "none",
-                },
+                input=model_input(
+                    strip=strip, preprocessing="normalized" if normalize else "none"
+                ),
             )
         ),
         encoding="utf-8",
@@ -229,7 +229,7 @@ def test_model_trained_without_strip_mismatches_stripped_inference(
         json.dumps(
             training_config(
                 row_id="row",
-                input={"strip_diagnostic_sections": True, "text_preprocessing": "none"},
+                input=model_input(strip=True),
             )
         ),
         encoding="utf-8",

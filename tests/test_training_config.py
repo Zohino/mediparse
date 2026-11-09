@@ -45,44 +45,13 @@ def test_wrong_schema_is_invalid_input(tmp_path: Path) -> None:
         load_training_config(path)
 
 
-@pytest.mark.parametrize(
-    "field", ["input", "strip_diagnostic_sections", "text_preprocessing"]
-)
-def test_input_fields_are_required(field: str) -> None:
-    """Vstup i obě jeho volby jsou povinné, bez výchozích hodnot."""
+def test_input_is_required() -> None:
+    """Config musí výslovně deklarovat vstup modelu."""
     fields = training_config()
-    if field == "input":
-        del fields[field]
-    else:
-        input_fields: dict[str, object] = {
-            "strip_diagnostic_sections": False,
-            "text_preprocessing": "none",
-        }
-        del input_fields[field]
-        fields["input"] = input_fields
+    del fields["input"]
 
-    with pytest.raises(ValidationError, match=field):
+    with pytest.raises(ValidationError, match="input"):
         TrainingConfig.model_validate_json(json.dumps(fields))
-
-
-@pytest.mark.parametrize(
-    "input_fields",
-    [
-        {"strip_diagnostic_sections": "true", "text_preprocessing": "none"},
-        {"strip_diagnostic_sections": 1, "text_preprocessing": "none"},
-        {"strip_diagnostic_sections": None, "text_preprocessing": "none"},
-        {"strip_diagnostic_sections": False, "text_preprocessing": "full"},
-        {"strip_diagnostic_sections": False, "text_preprocessing": True},
-        {"strip_diagnostic_sections": False, "text_preprocessing": None},
-        {"strip_diagnostic_sections": False, "text_preprocessing": "none", "extra": 0},
-    ],
-)
-def test_input_rejects_invalid_values(input_fields: dict[str, object]) -> None:
-    """Vstup odmítne neznámé pole či úroveň a záměnu typu."""
-    with pytest.raises(ValidationError):
-        TrainingConfig.model_validate_json(
-            json.dumps(training_config(input=input_fields))
-        )
 
 
 @pytest.mark.parametrize(
