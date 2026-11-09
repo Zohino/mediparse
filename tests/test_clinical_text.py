@@ -616,18 +616,31 @@ def test_acronyms_do_not_count_toward_variant_chain() -> None:
     assert rewrite_diagnosis_variants(expanded, normalization.variants) == "ee"
 
 
-_REWRITE_WORDS: Final = st.sampled_from(["aa", "bb", "cc", "dd", "ee"])
-_REWRITE_FORMS: Final = st.lists(_REWRITE_WORDS, min_size=1, max_size=2).map(" ".join)
+_REWRITE_WORDS: Final = st.sampled_from([
+    "aa",
+    "bb",
+    "cc",
+    "dd",
+    "ee",
+    "aa-bb",
+    "bb.cc",
+])
+_REWRITE_FORMS: Final = st.lists(_REWRITE_WORDS, min_size=1, max_size=3).map(" ".join)
 
 
 @given(
-    variants=st.dictionaries(_REWRITE_FORMS, _REWRITE_FORMS, max_size=5),
+    variants=st.dictionaries(
+        _REWRITE_FORMS, _REWRITE_FORMS | st.sampled_from(["bb-", "x ."]), max_size=5
+    ),
     text=st.lists(_REWRITE_WORDS, max_size=15).map(" ".join),
 )
 @example(
     variants={"aa": "bb", "bb cc": "dd", "dd ee": "ff", "ff gg": "hh"},
     text="aa cc ee gg",
 )
+@example(variants={"aa": "bb-", "-cc": "dd-", "-ee": "ff"}, text="aa-cc-ee")
+@example(variants={"aa": "x .", ". y": "zz", "zz w": "q"}, text="aa. y w")
+@example(variants={"aa": "bb-", ".cc": "dd-", ".ee": "ff"}, text="aa.cc.ee")
 @example(variants={"aa bb": "aa"}, text="aa bb bb bb")
 @example(variants={"bb": "cc", "aa cc": "dd"}, text="aa bb")
 def test_rewrite_validated_small_dictionaries_is_idempotent(
@@ -640,3 +653,43 @@ def test_rewrite_validated_small_dictionaries_is_idempotent(
         assume(condition=False)
     once = rewrite_diagnosis_variants(text, normalization.variants)
     assert rewrite_diagnosis_variants(once, normalization.variants) == once
+
+
+@pytest.mark.parametrize(
+    "variants",
+    [
+        {"aa": "bb-", "-cc": "dd-", "-ee": "ff"},
+        {"aa": "x .", ". y": "zz", "zz w": "q"},
+        {"aa": "bb-", ".cc": "dd-", ".ee": "ff"},
+        {"aa-": "bb"},
+        {"aa.": "bb"},
+    ],
+)
+def test_normalization_rejects_nonword_variant_edges(variants: dict[str, str]) -> None:
+    """Neslovní okraj klíče umožní návaznost závislou na sousedním znaku."""
+    with pytest.raises(ValidationError, match="okrajový znak"):
+        TextNormalization(acronyms={}, variants=variants)
+
+
+def test_nonword_replacement_edges_preserve_idempotence() -> None:
+    """Neslovní konce náhrad jsou povolené, když klíče mají slovní okraje."""
+    normalization = TextNormalization(
+        acronyms={}, variants={"aa": "bb-", "cc": "dd.", "ee": "ff"}
+    )
+    once = rewrite_diagnosis_variants("aa cc ee", normalization.variants)
+
+    assert once == "bb- dd. ff"
+    assert rewrite_diagnosis_variants(once, normalization.variants) == once
+
+
+@pytest.mark.parametrize("variant", ["a", "A1", "_aa_", "a-fib", "aa.bb"])
+def test_normalization_accepts_word_variant_edges(variant: str) -> None:
+    """Jediné písmeno, číslice a podtržítko na okraji i vnitřní interpunkce projdou."""
+    assert TextNormalization(
+        acronyms={}, variants={variant: "replacement"}
+    ).variants == {variant: "replacement"}
+
+
+def test_variant_search_allows_nonword_edges() -> None:
+    """Hledání pro EDA nevyžaduje invariant slovníku pro dvouprůchodový přepis."""
+    assert find_diagnosis_variants(".cc and -ee", [".cc", "-ee"]) == [".cc", "-ee"]

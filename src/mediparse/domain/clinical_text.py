@@ -157,7 +157,8 @@ def rewrite_diagnosis_variants(text: str, variants: Mapping[str, str]) -> str:
     canonical = _variant_keys(variants)
     pattern = _variant_pattern(canonical)
     # Oprava překlepu může odhalit víceslovnou variantu až po první náhradě.
-    # TextNormalization odmítá delší řetězy návazností, proto dva průchody stačí.
+    # TextNormalization omezuje řetězy návazností a vyžaduje slovní okraje variant,
+    # proto dva průchody stačí i při změně sousedního znaku náhradou.
     for _ in range(2):
         text = pattern.sub(
             lambda match: variants[canonical[_variant_key(match[0])]], text
@@ -208,7 +209,9 @@ class TextNormalization(BaseModel):
     Tentýž objekt dostane trenér i run manifest. Klíče se seřadí, aby byl JSON
     deterministický. Náhrady nesmějí obsahovat tvary ani zkratky slovníků jako celá slova,
     jinak by přepis nebyl idempotentní. Náhrada se s okolím smí složit do další varianty,
-    jejíž náhrada už další variantu složit nesmí; díky tomu dva průchody přepisu stačí.
+    jejíž náhrada už další variantu složit nesmí. Varianta musí začínat i končit
+    písmenem a-z, číslicí nebo podtržítkem po převodu na malá písmena; společně
+    s pravidlem návaznosti to zajišťuje, že dva průchody přepisu stačí.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
@@ -231,6 +234,15 @@ class TextNormalization(BaseModel):
     @model_validator(mode="after")
     def _dictionaries_are_idempotent(self) -> TextNormalization:
         _variant_keys(self.variants)
+        invalid_edges = [
+            variant
+            for variant in self.variants
+            if re.fullmatch(r"[a-z0-9_](?:.*[a-z0-9_])?", variant.lower(), re.DOTALL)
+            is None
+        ]
+        if invalid_edges:
+            message = f"Varianta má neslovní okrajový znak: {invalid_edges}."
+            raise ValueError(message)
         collisions = [
             variant
             for variant in self.variants
