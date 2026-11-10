@@ -119,6 +119,6 @@ export_table(screening_phi_table(phi, selection),
 
 Screening používá výchozí hodnoty bez ladění podle D39. Edin a kol. na MIMIC-IV ukazují, že slabé výsledky dřívějších prací plynuly z konfigurace, ne z architektury [@Edin2023]; pořadí screeningu proto vyžaduje opatrnost a neznamená konečné pořadí po ladění. Random forest je vědomě mimo rozsah: stromové ansámbly zastupuje LightGBM. Sešit netvrdí, že je random forest horší.
 
-SE z korelovaných foldů křížové validace podceňuje nejistotu; pásmo není interval spolehlivosti. φ popisuje souběh chyb a samo nezaručuje zlepšení ensemblu. Nedefinované buňky se vynechávají a jejich počet je zveřejněn. Nekonvergované buňky zůstávají v porovnání a mohou pořadí ovlivnit. Syntetická kontraktová fixture ověřuje propojení a výpočet sešitu, nikoli výkon modelů na klinických datech; závěry pro skutečnou pipeline vyžadují reálný render.
+SE z korelovaných foldů křížové validace podceňuje nejistotu; pásmo není interval spolehlivosti. φ popisuje souběh chyb a samo nezaručuje zlepšení ensemblu. Nedefinované buňky se vynechávají a jejich počet je zveřejněn. Nekonvergované buňky zůstávají v porovnání a mohou pořadí ovlivnit.
 
 {{< include _partials/appendix.qmd >}}
