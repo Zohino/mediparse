@@ -64,3 +64,109 @@ testthat::test_that("A8 mřížka musí být úplná a bez duplicit", {
   wrong$fold[1] <- config$folds
   testthat::expect_error(check_screening_grid(wrong, config), "mřížku")
 })
+screening_example <- function(b_c = 0.79) {
+  rows <- expand.grid(fold = 0:2, diagnosis = c("x", "y"), vectorizer = c("w", "c"), family = c("a", "b", "d"))
+  rows$f1 <- mapply(function(family, vectorizer, fold) {
+    values <- list(a = list(w = c(0.80, 0.78, 0.82), c = rep(0.70, 3)),
+      b = list(w = rep(0.60, 3), c = rep(b_c, 3)),
+      d = list(w = rep(0.78, 3), c = rep(0.50, 3)))
+    values[[family]][[vectorizer]][fold + 1L]
+  }, as.character(rows$family), as.character(rows$vectorizer), rows$fold)
+  rows$family <- as.character(rows$family)
+  rows$vectorizer <- as.character(rows$vectorizer)
+  rows$pr_auc <- 0.9
+  rows$converged <- TRUE
+  rows$converged[1] <- FALSE
+  rows
+}
+
+testthat::test_that("A1 vítěz a pásmo používají SE přes vnější foldy", {
+  summary <- screening_summary(screening_example())
+  best <- summary[summary$best, ]
+  testthat::expect_equal(setNames(best$vectorizer, best$family), c(a = "w", b = "c", d = "w"))
+  a <- best[best$family == "a", ]
+  testthat::expect_equal(a$mean, 0.80)
+  testthat::expect_equal(a$sd, 0.02)
+  testthat::expect_equal(a$se, 0.011547, tolerance = 1e-6)
+  testthat::expect_equal(a$nonconverged, 1)
+  selection <- screening_selection(summary)
+  testthat::expect_equal(selection$threshold, 0.788453, tolerance = 1e-6)
+  testthat::expect_equal(selection$winner$family, "a")
+  testthat::expect_equal(selection$band$family, c("a", "b"))
+  testthat::expect_equal(selection$comparison$family, "b")
+  testthat::expect_false(selection$fallback)
+})
+
+testthat::test_that("A2 jediné rodině v pásmu se přiřadí druhá nejlepší", {
+  selection <- screening_selection(screening_summary(screening_example(0.785)))
+  testthat::expect_equal(selection$band$family, "a")
+  testthat::expect_equal(selection$comparison$family, "b")
+  testthat::expect_true(selection$fallback)
+})
+
+testthat::test_that("A3 shodu rodin i vektorizérů rozhoduje jméno vzestupně", {
+  rows <- screening_example()
+  rows <- rows[rows$family != "d", ]
+  rows$f1 <- 0.8
+  summary <- screening_summary(rows[nrow(rows):1, ])
+  testthat::expect_equal(summary$vectorizer[summary$best], c("c", "c"))
+  testthat::expect_equal(screening_selection(summary)$winner$family, "a")
+})
+
+phi_example <- function(counts, diagnosis) {
+  correct_a <- rep(c(TRUE, TRUE, FALSE, FALSE), counts)
+  correct_b <- rep(c(TRUE, FALSE, TRUE, FALSE), counts)
+  labels <- rep(c(TRUE, FALSE), length.out = length(correct_a))
+  rows <- data.frame(fold = 0, diagnosis = diagnosis, note_id = paste0("synthetic-", seq_along(labels)),
+    label = labels, vectorizer = "w")
+  a <- transform(rows, family = "a", predicted = ifelse(correct_a, labels, !labels))
+  b <- transform(rows, family = "b", predicted = ifelse(correct_b, labels, !labels))
+  rbind(a, b)
+}
+
+phi_models <- function() list(winner = data.frame(family = "a", vectorizer = "w"),
+  others = data.frame(family = "b", vectorizer = "c"))
+
+phi_from_rows <- function(rows, env = parent.frame()) {
+  con <- screening_test_con(env)
+  rows$vectorizer[rows$family == "b"] <- "c"
+  DBI::dbWriteTable(con, "predictions", rows)
+  models <- phi_models()
+  error_correlation(con, "predictions", models$winner, models$others)
+}
+
+testthat::test_that("A4 φ je průměr správnosti obou tříd po buňkách", {
+  rows <- rbind(phi_example(c(3, 1, 1, 3), "x"), phi_example(c(2, 2, 2, 2), "y"))
+  phi <- phi_from_rows(rows)
+  testthat::expect_equal(phi$phi, 0.25)
+  testthat::expect_equal(phi$defined, 2L)
+  testthat::expect_equal(phi$cells, 2L)
+  testthat::expect_true(ensemble_needed(phi, phi_models()$others))
+  descriptive <- data.frame(family = "d", phi = 0)
+  testthat::expect_false(ensemble_needed(descriptive, phi_models()$others) %in% TRUE)
+})
+
+testthat::test_that("A5 hranice 0,5 je ostrá a nedefinované buňky se vynechají", {
+  x <- phi_example(c(3, 1, 1, 3), "x")
+  phi <- phi_from_rows(x)
+  testthat::expect_equal(phi$phi, 0.5)
+  testthat::expect_false(ensemble_needed(phi, phi_models()$others))
+  undefined <- phi_example(c(4, 0, 0, 0), "z")
+  mixed <- phi_from_rows(rbind(x, undefined))
+  testthat::expect_equal(mixed$phi, 0.5)
+  testthat::expect_equal(mixed$defined, 1L)
+  testthat::expect_equal(mixed$cells, 2L)
+  testthat::expect_false(ensemble_needed(mixed, phi_models()$others))
+  unavailable <- phi_from_rows(undefined)
+  testthat::expect_true(is.na(unavailable$phi))
+  testthat::expect_equal(unavailable$defined, 0L)
+  testthat::expect_true(is.na(ensemble_needed(unavailable, phi_models()$others)))
+})
+
+testthat::test_that("A8 párování odmítá chybějící zprávu, duplicitu i rozdílný label", {
+  rows <- phi_example(c(3, 1, 1, 3), "x")
+  testthat::expect_error(phi_from_rows(rows[-1, ]), "nepárují")
+  testthat::expect_error(phi_from_rows(rbind(rows, rows[1, ])), "nepárují")
+  rows$label[1] <- !rows$label[1]
+  testthat::expect_error(phi_from_rows(rows), "nepárují")
+})
