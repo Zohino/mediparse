@@ -172,3 +172,108 @@ ensemble_needed <- function(phi, comparison) {
   if (all(is.na(values))) return(NA)
   any(values < 0.5, na.rm = TRUE)
 }
+
+screening_number <- function(x) {
+  out <- formatC(x, format = "f", digits = 3, decimal.mark = ",")
+  out[is.na(x)] <- "–"
+  out
+}
+
+screening_model_text <- function(models) {
+  paste0(unname(FAMILY_LABELS[models$family]), " (", models$vectorizer, ")")
+}
+
+screening_grid_table <- function(summary) {
+  data.frame(
+    rodina = unname(FAMILY_LABELS[summary$family]), vektorizér = summary$vectorizer,
+    macro = paste(screening_number(summary$mean), "±", screening_number(summary$sd)),
+    pr_auc = screening_number(summary$pr_auc),
+    konvergence = paste(summary$nonconverged, "z", summary$cells),
+    nejlepší = ifelse(summary$best, "ano", "ne")
+  )
+}
+
+screening_diagnosis_table <- function(results, summary, candidates) {
+  best <- summary[summary$best, c("family", "vectorizer")]
+  rows <- merge(results, best, by = c("family", "vectorizer"))
+  means <- stats::aggregate(rows["f1"], rows[c("family", "diagnosis")], mean)
+  data.frame(
+    rodina = unname(FAMILY_LABELS[means$family]),
+    diagnóza = candidate_labels(means$diagnosis, candidates), f1 = screening_number(means$f1)
+  )
+}
+
+screening_phi_table <- function(phi, selection) {
+  data.frame(
+    rodina = unname(FAMILY_LABELS[phi$family]), vektorizér = phi$vectorizer,
+    phi = screening_number(phi$phi), buňky = paste(phi$defined, "z", phi$cells),
+    pásmo = ifelse(phi$family %in% selection$band$family, "ano", "ne"),
+    rozhoduje = ifelse(phi$family %in% selection$comparison$family, "ano", "ne")
+  )
+}
+
+screening_plot <- function(results, summary, selection) {
+  best <- summary[summary$best, ]
+  best <- best[order(best$mean, best$family), ]
+  folds <- merge(screening_fold_metrics(results), best[c("family", "vectorizer")])
+  labels <- setNames(screening_model_text(best), best$family)
+  folds$rodina <- factor(labels[folds$family], levels = labels)
+  best$rodina <- factor(labels[best$family], levels = labels)
+  ggplot2::ggplot(folds, ggplot2::aes(x = f1, y = rodina)) +
+    ggplot2::geom_vline(xintercept = selection$threshold, linetype = "dashed") +
+    ggplot2::geom_point(colour = "grey50", size = 1.8) +
+    ggplot2::geom_point(data = best, ggplot2::aes(x = mean), shape = 18, size = 3) +
+    ggplot2::scale_x_continuous(labels = screening_number) +
+    ggplot2::labs(x = "Macro-F1", y = NULL) + theme_thesis()
+}
+
+screening_provenance_table <- function(manifest) {
+  items <- c(
+    "Dataset SHA-256" = manifest$dataset_sha256,
+    "Split SHA-256" = manifest$split_sha256,
+    "Seed a foldy původního splitu" = paste(manifest$split_seed, manifest$split_folds, sep = "; "),
+    "Config SHA-256" = manifest$config_sha256,
+    "Výsledky SHA-256" = manifest$results_sha256,
+    "Predikce SHA-256" = manifest$predictions_sha256,
+    "Seed screeningu" = as.character(manifest$seed),
+    "Vývojové zprávy" = format_number(manifest$development_notes),
+    "Vývojoví pacienti" = format_number(manifest$development_patients),
+    "Předzpracování" = manifest$text_preprocessing,
+    "Strip diagnostických sekcí" = if (is.null(manifest$diagnostic_strip)) "ne" else "ano",
+    "Revize kódu screeningu" = manifest$environment$source$commit,
+    "Rozpracovaný strom" = if (manifest$environment$source$dirty) "ano" else "ne",
+    unlist(manifest$environment$packages)
+  )
+  provenance_table(as.list(items))
+}
+
+screening_vectorizers_text <- function(config) {
+  labels <- vapply(config$vectorizers, function(spec) {
+    analyzer <- switch(spec$analyzer, word = "slovní", char_wb = "znakové uvnitř slov")
+    sprintf("%s: %s n-gramy %d–%d", spec$name, analyzer, spec$ngram_range[[1]], spec$ngram_range[[2]])
+  }, character(1))
+  join_labels(labels)
+}
+
+screening_selection_text <- function(selection) {
+  sprintf(
+    "Vítězem je %s s průměrnou macro-F1 %s. Hranice pásma 1 SE je %s; do S39j postupují %s.",
+    screening_model_text(selection$winner), screening_number(selection$winner$mean),
+    screening_number(selection$threshold), join_labels(screening_model_text(selection$band))
+  )
+}
+
+screening_ensemble_text <- function(phi, selection) {
+  comparison <- join_labels(screening_model_text(selection$comparison))
+  rule <- if (selection$fallback) {
+    paste0("V pásmu zůstal jen vítěz; rozhoduje srovnání s druhou nejlepší rodinou: ", comparison, ". ")
+  } else {
+    paste0("O ensemblu rozhoduje srovnání vítěze s rodinami pásma: ", comparison, ". ")
+  }
+  needed <- ensemble_needed(phi, selection$comparison)
+  if (is.na(needed)) return(paste0(rule,
+    "Pro rozhodující dvojice není φ k dispozici; nejde rozhodnout o podtasku ensemblu a výsledek patří do diskuse."))
+  if (needed) return(paste0(rule,
+    "Alespoň jedna rozhodující dvojice má průměr φ < 0,5; před S39j má vzniknout podtask ensemblu."))
+  paste0(rule, "Žádná rozhodující dvojice nemá průměr φ < 0,5; podtask ensemblu nevzniká a výsledek patří do diskuse.")
+}

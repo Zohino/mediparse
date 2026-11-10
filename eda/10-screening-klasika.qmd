@@ -1,0 +1,124 @@
+---
+title: "Screening klasického stupně klasifikace"
+abstract: |
+  Sešit porovnává rodiny klasických klasifikátorů nad TF-IDF na vývojové části pacientů. Předem vymezuje výběr rodiny s nejlepším vektorizérem podle macro-F1, pásmo jedné standardní chyby a pravidlo pro zkoumání ensemblu podle korelace chyb. Čte agregované výsledky screeningu a v DuckDB páruje predikce pouze pro výpočet agregátů φ.
+---
+
+```{r}
+#| include: false
+source("../R/thesis/dua.R")
+source("../R/thesis/contract.R")
+source("../R/thesis/export.R")
+source("R/czech.R")
+source("R/db.R")
+source("R/corpus.R")
+source("R/diagnoses.R")
+source("R/screening.R")
+paths <- screening_paths()
+screening_config_path <- config_path("screening_classical.json")
+manifest <- read_screening_manifest(paths, screening_config_path)
+config <- jsonlite::read_json(screening_config_path)
+results <- read_screening_results(paths$results)
+check_screening_grid(results, config)
+summary <- screening_summary(results)
+selection <- screening_selection(summary)
+candidates <- read_candidates(candidates_path())
+# Příloha A odpojuje připojení pod jménem con; tabulky MIMIC tento sešit nepotřebuje.
+con <- DBI::dbConnect(duckdb::duckdb())
+prediction_source <- screening_predictions_source(con, paths$predictions)
+others <- summary[summary$best & summary$family != selection$winner$family, ]
+phi <- error_correlation(con, prediction_source, selection$winner, others)
+```
+
+# Úvod
+
+Desátý sešit vybírá klasické rodiny pro ladění v S39j. Screening podle D39 používá výchozí hyperparametry na vývojové části pacientů, kterou následná evaluace nikdy nevidí. Výběr nepoužívá held-out test. Jednotkou rozhodnutí je rodina se svým nejlepším vektorizérem, nikoli jednotlivá diagnóza.
+
+# Data a metody
+
+## Kandidáti
+
+Complement NB upravuje naivní Bayes pro nevyvážené třídy textu [@Rennie2003]. NB-SVM kombinuje log-count ratio NB s lineární SVM a představuje silný baseline klasifikace textu [@Wang2012]. Logistická regrese a lineární SVM nad TF-IDF jsou obvyklé baseline klinického textu: Costa a kol. je používají pro klasifikaci z konzultačních zpráv [@Costa2020]. V preprintu Chen a kol. měla LR nad TF-IDF v triážních zprávách nejvyšší AUPRC a F1, zatímco doladěné varianty BERT byly mírně horší [@Chen2026]. LightGBM je gradient boosting rozhodovacích stromů [@Ke2017]; zde pracuje nad LSA [@Deerwester1990] a zastupuje stromové ansámbly. Implementace využívá také scikit-learn [@pedregosa2011].
+
+## Protokol
+
+Mřížka kombinuje `r length(config$families)` rodin a `r length(config$vectorizers)` vektorizéry TF-IDF: `r screening_vectorizers_text(config)`. LightGBM používá LSA s `r config$lsa_components` komponentami. Každá kombinace se vyhodnocuje pro pět diagnóz v `r config$folds` vnějších foldech dělených po pacientech. Práh se vybírá uvnitř trénovací části pomocí `r config$threshold_folds` vnitřních foldů. Velikost vývojové části, předzpracování a provenance běhu uvádí @tbl-screening-provenance.
+
+Sešit ověřuje SHA-256 výsledků, predikcí a configu proti manifestu. Výsledky musí obsahovat přesně úplnou mřížku configu, každou buňku jednou. Predikce dvojice se spojují úplně a jednoznačně přes fold, diagnózu a identitu zprávy. Do R přicházejí jen agregované počty správnosti po buňkách, nikoli identity ani řádky predikcí.
+
+```{r}
+#| label: tbl-screening-provenance
+#| tbl-cap: "Provenance běhu screeningu; otisky vstupů byly ověřeny před výběrem."
+#| tbl-colwidths: [30, 70]
+export_table(screening_provenance_table(manifest), col.names = c("Položka", "Hodnota"), align = "ll")
+```
+
+## Kritérium výběru zapsané před reálným během
+
+Pro každý vnější fold je macro-F1 aritmetický průměr F1 přes pět diagnóz. Průměr a výběrová SD (jmenovatel K − 1) se počítají přes K vnějších foldů. Každou rodinu reprezentuje vektorizér s nejvyšší průměrnou macro-F1. Vítězí rodina s nejvyšším takovým průměrem; shodu rozhoduje jméno vzestupně, nejprve u vektorizéru a potom u rodiny. PR-AUC je pouze pomocná metrika, rovněž makro přes diagnózy.
+
+Do S39j postupuje vítěz a všechny rodiny s průměrem alespoň průměr vítěze minus jeho SE, kde SE = SD / √K. Jde o pásmo 1 SE inspirované pravidlem jedné standardní chyby [@Hastie2009, §7.10]. Nekonvergované buňky zůstávají ve všech průměrech; jejich počet je uveden v tabulce mřížky.
+
+## Pravidlo ensemblu zapsané před reálným během
+
+Vítěz se porovnává se všemi ostatními rodinami, každá se svým nejlepším vektorizérem. Pro rozhodnutí jsou určující jen rodiny v pásmu; pokud v pásmu zůstane pouze vítěz, rozhoduje druhá nejlepší rodina. Ostatní dvojice v tabulce jsou popisné.
+
+Korelace chybových indikátorů φ je stejná jako korelace indikátorů správnosti. Pro každou buňku (fold, diagnóza) se ze správnosti `predicted == label` obou rodin počítá [@Kuncheva2003]:
+
+$$
+\varphi = \frac{N_{11}N_{00}-N_{01}N_{10}}{\sqrt{(N_{11}+N_{10})(N_{01}+N_{00})(N_{11}+N_{01})(N_{10}+N_{00})}}.
+$$
+
+Hodnota N11 značí obě rodiny správně, N00 obě chybně, N10 pouze vítěze správně a N01 pouze druhou rodinu správně. Při nulovém jmenovateli je φ nedefinované a z průměru přes diagnózy a foldy se vynechá; tabulka uvádí počet definovaných buněk z celkového počtu. Pokud má alespoň jedna rozhodující dvojice průměr φ **ostře menší než 0,5**, vznikne před S39j podtask ensemblu. Hranice vychází z Cohenova vymezení silné korelace [@Cohen1988]. Jinak výsledek patří do diskuse. Pokud žádná rozhodující dvojice nemá definovanou buňku, φ není k dispozici a patří věta do diskuse.
+
+# Výsledky
+
+@tbl-mrizka zahrnuje všechny kombinace, včetně nekonvergovaných buněk. Značka nejlepšího vektorizéru je určena jen macro-F1.
+
+```{r}
+#| label: tbl-mrizka
+#| tbl-cap: "Úplná mřížka: průměr ± SD macro-F1 přes foldy, průměrná makro PR-AUC a nekonvergované buňky."
+#| tbl-colwidths: [24, 20, 20, 12, 14, 10]
+export_table(screening_grid_table(summary),
+  col.names = c("Rodina", "Vektorizér", "Macro-F1 ± SD", "PR-AUC", "Nekonv.", "Nejlepší"), align = "llrrrc")
+```
+
+```{r}
+#| label: tbl-diagnozy
+#| tbl-cap: "Průměr F1 přes vnější foldy po diagnózách; každá rodina se svým nejlepším vektorizérem."
+#| tbl-colwidths: [36, 48, 16]
+export_table(screening_diagnosis_table(results, summary, candidates),
+  col.names = c("Rodina", "Diagnóza", "F1"), align = "llr")
+```
+
+```{r}
+#| label: fig-screening
+#| fig-cap: "Macro-F1 po vnějších foldech (šedé body) a průměr (kosočtverec) u nejlepšího vektorizéru každé rodiny. Svislá čárkovaná čára je hranice pásma 1 SE."
+#| fig-width: 6.5
+#| fig-height: 3.5
+export_figure(screening_plot(results, summary, selection), height_cm = 9)
+```
+
+`r screening_selection_text(selection)`
+
+```{r}
+#| label: tbl-phi
+#| tbl-cap: "Vítěz proti ostatním rodinám: průměr φ, definované buňky z celku, příslušnost k pásmu a rozhodující dvojice. Pomlčka značí nedefinované φ."
+#| tbl-colwidths: [26, 20, 12, 16, 12, 14]
+export_table(screening_phi_table(phi, selection),
+  col.names = c("Rodina", "Vektorizér", "φ", "Buňky", "Pásmo", "Rozhoduje"), align = "llrrcc")
+```
+
+# Shrnutí a rozhodnutí
+
+`r screening_selection_text(selection)` Ladění S39j se týká těchto rodin s uvedenými vektorizéry; screening neurčuje jejich laděné hyperparametry.
+
+`r screening_ensemble_text(phi, selection)` Případný podtask zkoumá ensemble samostatně; tabulka φ sama výkon ensemblu neměří.
+
+# Omezení a ohrožení validity
+
+Screening používá výchozí hodnoty bez ladění podle D39. Edin a kol. na MIMIC-IV ukazují, že slabé výsledky dřívějších prací plynuly z konfigurace, ne z architektury [@Edin2023]; pořadí screeningu proto vyžaduje opatrnost a neznamená konečné pořadí po ladění. Random forest je vědomě mimo rozsah: stromové ansámbly zastupuje LightGBM. Sešit netvrdí, že je random forest horší.
+
+SE z korelovaných foldů křížové validace podceňuje nejistotu; pásmo není interval spolehlivosti. φ popisuje souběh chyb a samo nezaručuje zlepšení ensemblu. Nedefinované buňky se vynechávají a jejich počet je zveřejněn. Nekonvergované buňky zůstávají v porovnání a mohou pořadí ovlivnit. Syntetická kontraktová fixture ověřuje propojení a výpočet sešitu, nikoli výkon modelů na klinických datech; závěry pro skutečnou pipeline vyžadují reálný render.
+
+{{< include _partials/appendix.qmd >}}
