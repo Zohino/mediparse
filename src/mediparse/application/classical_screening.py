@@ -141,12 +141,12 @@ class ClassicalScreening[F]:
                     config.threshold_folds,
                     config.seed,
                 )
-                predictions = classifier.classify(test)
+                classifications = classifier.classify(test)
                 truth = tuple(note.has_label(diagnosis) for note in holdout.test)
                 metrics = self.scorer.score(
                     truth,
-                    [item.predicted for item in predictions],
-                    [item.score for item in predictions],
+                    [item.predicted for item in classifications],
+                    [item.score for item in classifications],
                 )
                 rows.append(
                     ScreeningResult(
@@ -156,7 +156,7 @@ class ClassicalScreening[F]:
                         diagnosis=diagnosis,
                         note_ids=tuple(note.note_id for note in holdout.test),
                         labels=truth,
-                        classifications=predictions,
+                        classifications=classifications,
                         threshold=classifier.threshold,
                         converged=classifier.converged,
                         metrics=metrics,
