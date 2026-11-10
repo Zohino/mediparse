@@ -116,10 +116,11 @@ screening_pair_counts <- function(con, source, winner, other) {
     "SELECT fold, diagnosis, note_id, label, predicted = label AS correct FROM %s WHERE family = %s AND vectorizer = %s",
     source, DBI::dbQuoteString(con, model$family), DBI::dbQuoteString(con, model$vectorizer)
   )
+  # Úplné spojení umožní kontrolovat chybějící i duplicitní zprávy obou stran;
+  # vnitřní spojení by chybějící protějšky skrylo.
   counts <- DBI::dbGetQuery(con, sprintf("
     WITH a AS (%s), b AS (%s)
     SELECT fold, diagnosis, count(*) AS n,
-      count(a.note_id) AS n_a, count(b.note_id) AS n_b,
       count(DISTINCT a.note_id) AS unique_a, count(DISTINCT b.note_id) AS unique_b,
       count(*) FILTER (WHERE a.label != b.label) AS different_labels,
       count(*) FILTER (WHERE a.correct AND b.correct) AS n11,
@@ -129,10 +130,9 @@ screening_pair_counts <- function(con, source, winner, other) {
     FROM a FULL OUTER JOIN b USING (fold, diagnosis, note_id)
     GROUP BY fold, diagnosis ORDER BY fold, diagnosis
   ", subset(winner), subset(other)))
-  if (nrow(counts) == 0L || any(
-    counts$n_a != counts$n | counts$n_b != counts$n |
-      counts$unique_a != counts$n | counts$unique_b != counts$n | counts$different_labels > 0
-  )) {
+  complete <- counts$unique_a == counts$n & counts$unique_b == counts$n &
+    counts$different_labels == 0 & counts$n11 + counts$n10 + counts$n01 + counts$n00 == counts$n
+  if (nrow(counts) == 0L || any(!complete)) {
     stop("Predikce dvojice screeningu se nepárují úplně a jednoznačně se stejnými labely.", call. = FALSE)
   }
   counts

@@ -195,3 +195,24 @@ testthat::test_that("Macro-F1 i PR-AUC jsou průměry různých diagnóz", {
   testthat::expect_equal(summary$pr_auc, c(0.7, 0.7))
   testthat::expect_equal(screening_selection(summary)$winner$family, "b")
 })
+
+testthat::test_that("Párování odmítne NULL v pravdě i predikci", {
+  for (column in c("label", "predicted")) {
+    rows <- phi_example(c(3, 1, 1, 3), "x")
+    rows[1, column] <- NA
+    testthat::expect_error(phi_from_rows(rows), "nepárují")
+  }
+})
+
+testthat::test_that("Čtení predikcí zapojuje deklarovaný typ BOOLEAN", {
+  con <- screening_test_con()
+  source <- screening_predictions_source(con, screening_fixture_paths()$predictions)
+  directory <- withr::local_tempdir()
+  file.copy(file.path(CONTRACT_FIXTURES, "screening", "synthetic.json"), directory)
+  path <- file.path(directory, "wrong-predictions.parquet")
+  DBI::dbExecute(con, sprintf(
+    "COPY (SELECT * REPLACE (CAST(predicted AS VARCHAR) AS predicted) FROM %s) TO %s (FORMAT parquet)",
+    source, DBI::dbQuoteString(con, path)
+  ))
+  testthat::expect_error(screening_predictions_source(con, path), "sloupec predicted, očekávaný typ BOOLEAN, skutečný typ VARCHAR", fixed = TRUE)
+})
