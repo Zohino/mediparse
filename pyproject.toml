@@ -21,6 +21,7 @@ dependencies = [
     "protobuf>=7.36.2,<8",
     "jinja2>=3.1.6",
     "nvidia-ml-py>=13.615.71",
+    "lightgbm>=4.7.0",
 ]
 
 [project.scripts]

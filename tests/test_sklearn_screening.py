@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import warnings
+from random import Random
 from typing import TYPE_CHECKING, Literal, Self, override
 
 import numpy as np
@@ -11,6 +12,7 @@ from hypothesis import given
 from hypothesis import strategies as st
 from scipy.sparse import csr_matrix
 from sklearn.base import BaseEstimator, ClassifierMixin
+from sklearn.decomposition import TruncatedSVD
 from sklearn.exceptions import ConvergenceWarning
 from sklearn.linear_model import LogisticRegression
 
@@ -20,9 +22,9 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
 from mediparse.infrastructure.sklearn_screening import (
+    ClassifierFactory,
     SklearnThresholdTuner,
     TfidfFeaturizer,
-    classifier_estimator,
     threshold_splits,
 )
 from tests.model_support import OVERLAPPING, separable_notes
@@ -82,7 +84,7 @@ def test_prediction_matches_threshold_on_score_scale(
         [note.text for note in notes],
         ["diabetes clinic", "fracture review", "insulin splint visit"],
     )
-    model = SklearnThresholdTuner().fit(
+    model = SklearnThresholdTuner(ClassifierFactory(2)).fit(
         family,
         train,
         [note.has_label(Diagnosis.DIABETES) for note in notes],
@@ -97,13 +99,100 @@ def test_prediction_matches_threshold_on_score_scale(
     )
 
 
+def test_lightgbm_factory_preserves_lsa_and_determinism_parameters() -> None:
+    """Veřejné parametry pipeline nesou počet komponent, seed a stabilní LightGBM."""
+    estimator = ClassifierFactory(7)(ClassifierFamily.LIGHTGBM_LSA, 13)
+    assert isinstance(estimator, BaseEstimator)
+    params = estimator.get_params()
+
+    expected = {
+        "truncatedsvd__n_components": 7,
+        "truncatedsvd__random_state": 13,
+        "lgbmclassifier__random_state": 13,
+        "lgbmclassifier__deterministic": True,
+        "lgbmclassifier__force_row_wise": True,
+        "lgbmclassifier__verbose": -1,
+    }
+    assert {key: params[key] for key in expected} == expected
+
+
+def test_lightgbm_repeats_nonconstant_scores_and_threshold() -> None:
+    """Na 240 syntetických zprávách se stromy dělí a opakovaný seed opakuje skóre i práh."""
+    random = Random(31)
+    vocabulary = [f"word{i}" for i in range(300)]
+    labels = [i % 2 == 0 for i in range(240)]
+    texts = [
+        " ".join([
+            *random.sample(vocabulary, 20),
+            "positive" if label else "negative",
+        ])
+        for label in labels
+    ]
+    features, _ = TfidfFeaturizer(None).fit_transform(
+        VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
+        texts,
+        texts,
+    )
+    subjects = list(range(len(labels)))
+    tuner = SklearnThresholdTuner(ClassifierFactory(8))
+    first = tuner.fit(ClassifierFamily.LIGHTGBM_LSA, features, labels, subjects, 3, 7)
+    second = tuner.fit(ClassifierFamily.LIGHTGBM_LSA, features, labels, subjects, 3, 7)
+    different = tuner.fit(
+        ClassifierFamily.LIGHTGBM_LSA, features, labels, subjects, 3, 11
+    )
+
+    predictions = first.classify(features)
+    assert len({prediction.score for prediction in predictions}) > 1
+    assert second.classify(features) == predictions
+    assert second.threshold == first.threshold
+    assert different.classify(features) != predictions
+    assert first.converged
+    assert second.converged
+    assert different.converged
+
+
+def test_lsa_fits_only_inner_and_full_training_rows(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Každý fit SVD dostane přesně trénink své vnitřní části, refit celý trénink."""
+    notes = separable_notes(24, OVERLAPPING)
+    labels = [note.has_label(Diagnosis.DIABETES) for note in notes]
+    subjects = [note.subject_id for note in notes]
+    features, _ = TfidfFeaturizer(None).fit_transform(
+        VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
+        [note.text for note in notes],
+        ["clinic review"],
+    )
+    observed: list[bytes] = []
+    fit_transform = TruncatedSVD.fit_transform
+
+    def observe_fit(
+        svd: TruncatedSVD, features: csr_matrix, labels: object = None
+    ) -> np.ndarray:
+        observed.append(features.toarray().tobytes())
+        return fit_transform(svd, features, labels)
+
+    monkeypatch.setattr(TruncatedSVD, "fit_transform", observe_fit)
+    expected = [
+        features[train].toarray().tobytes()
+        for train, _ in threshold_splits(labels, subjects, 3, 7)
+    ]
+    expected.append(features.toarray().tobytes())
+
+    SklearnThresholdTuner(ClassifierFactory(2)).fit(
+        ClassifierFamily.LIGHTGBM_LSA, features, labels, subjects, 3, 7
+    )
+
+    assert sorted(observed) == sorted(expected)
+
+
 def _nonconverging(family: ClassifierFamily, seed: Seed) -> ClassifierMixin:
     del family, seed
     return LogisticRegression(max_iter=1)
 
 
 @pytest.mark.parametrize(
-    ("factory", "converged"), [(classifier_estimator, True), (_nonconverging, False)]
+    ("factory", "converged"), [(ClassifierFactory(2), True), (_nonconverging, False)]
 )
 def test_convergence_includes_inner_fits_and_refit(
     factory: Callable[[ClassifierFamily, Seed], ClassifierMixin], *, converged: bool

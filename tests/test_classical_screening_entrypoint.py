@@ -34,6 +34,8 @@ if TYPE_CHECKING:
 
     from mediparse.domain.environment import SourceRevision
 
+VISITS_PER_PATIENT = 16
+
 
 @dataclass(frozen=True)
 class _Inputs:
@@ -44,7 +46,7 @@ class _Inputs:
 
 def _inputs(root: Path, *, preprocessing: str = "none", strip: bool = False) -> _Inputs:
     cohort = root / "cohort.parquet"
-    ParquetNoteTable(cohort).write(notes())
+    ParquetNoteTable(cohort).write(notes(visits=VISITS_PER_PATIENT))
     split = root / "split.parquet"
     ParquetSplitTable(split).write(SHARED)
     config = root / "config.json"
@@ -53,6 +55,7 @@ def _inputs(root: Path, *, preprocessing: str = "none", strip: bool = False) -> 
             "seed": 7,
             "folds": 2,
             "threshold_folds": 2,
+            "lsa_components": 2,
             "input": {
                 "strip_diagnostic_sections": strip,
                 "text_preprocessing": preprocessing,
@@ -60,7 +63,7 @@ def _inputs(root: Path, *, preprocessing: str = "none", strip: bool = False) -> 
             "vectorizers": [
                 {"name": "word", "analyzer": "word", "ngram_range": [1, 1]}
             ],
-            "families": ["complement_nb", "linear_svm"],
+            "families": ["complement_nb", "linear_svm", "nb_svm", "lightgbm_lsa"],
         }),
         encoding="utf-8",
     )
@@ -108,7 +111,11 @@ def test_results_manifest_records_actual_inputs_and_development(tmp_path: Path) 
     assert written.split_sha256 == shared.split.sha256()
     assert written.split_seed == shared.config.seed
     assert written.split_folds == shared.config.folds
-    development = [note for note in notes() if note.subject_id in DEVELOPMENT]
+    development = [
+        note
+        for note in notes(visits=VISITS_PER_PATIENT)
+        if note.subject_id in DEVELOPMENT
+    ]
     assert written.development_notes == len(development)
     assert written.development_patients == len({
         note.subject_id for note in development
@@ -123,6 +130,7 @@ def test_results_manifest_records_actual_inputs_and_development(tmp_path: Path) 
         "numpy",
         "scipy",
         "scikit-learn",
+        "lightgbm",
         "pyarrow",
         "pydantic",
     }
@@ -232,7 +240,7 @@ def test_preprocessing_changes_screening_result_bytes(tmp_path: Path) -> None:
                 else "chronic obstructive pulmonary disease cough"
             ),
         )
-        for note in notes()
+        for note in notes(visits=VISITS_PER_PATIENT)
     )
     results = []
     for preprocessing in ("none", "dictionary"):

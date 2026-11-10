@@ -46,6 +46,7 @@ CONFIG = ClassicalScreeningConfig.model_validate_json(
         "seed": 7,
         "folds": 2,
         "threshold_folds": 3,
+        "lsa_components": 2,
         "input": {"strip_diagnostic_sections": False, "text_preprocessing": "none"},
         "vectorizers": [
             {"name": "z-char", "analyzer": "char_wb", "ngram_range": [3, 5]},

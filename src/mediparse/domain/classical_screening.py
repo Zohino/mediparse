@@ -23,6 +23,8 @@ class ClassifierFamily(StrEnum):
     COMPLEMENT_NB = "complement_nb"
     LOGREG = "logreg"
     LINEAR_SVM = "linear_svm"
+    NB_SVM = "nb_svm"
+    LIGHTGBM_LSA = "lightgbm_lsa"
 
 
 class VectorizerSpec(BaseModel):
@@ -50,6 +52,7 @@ class ClassicalScreeningConfig(BaseModel):
     seed: Seed
     folds: Annotated[int, Field(ge=2)]
     threshold_folds: Annotated[int, Field(ge=2)]
+    lsa_components: PositiveInt
     input: ModelInput
     vectorizers: Annotated[tuple[VectorizerSpec, ...], Field(min_length=1)]
     families: Annotated[tuple[ClassifierFamily, ...], Field(min_length=1)]

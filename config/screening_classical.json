@@ -2,6 +2,7 @@
   "seed": 0,
   "folds": 5,
   "threshold_folds": 3,
+  "lsa_components": 100,
   "input": {
     "strip_diagnostic_sections": false,
     "text_preprocessing": "dictionary"
@@ -10,5 +11,11 @@
     {"name": "word-1-2", "analyzer": "word", "ngram_range": [1, 2]},
     {"name": "char_wb-3-5", "analyzer": "char_wb", "ngram_range": [3, 5]}
   ],
-  "families": ["complement_nb", "logreg", "linear_svm"]
+  "families": [
+    "complement_nb",
+    "logreg",
+    "linear_svm",
+    "nb_svm",
+    "lightgbm_lsa"
+  ]
 }
