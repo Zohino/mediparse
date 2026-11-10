@@ -136,6 +136,13 @@ def test_integer_counts_match_floating_point_scores() -> None:
     )
 
 
+@pytest.mark.parametrize("label", [False, True])
+def test_single_class_is_rejected(*, label: bool) -> None:
+    """Jediná třída je odmítnutá stráží NB-SVM před výpočtem poměru četností."""
+    with pytest.raises(ValueError, match=r"^NB-SVM vyžaduje právě dvě třídy\.$"):
+        NbSvmClassifier().fit(_features(), [label] * 3)
+
+
 def test_clone_exposes_parameters_without_fitted_state() -> None:
     """Tuner může estimator klonovat a budoucí ladění používá jméno C ze sklearn."""
     model = NbSvmClassifier(alpha=2.0, beta=0.5, C=3.0, random_state=7).fit(
