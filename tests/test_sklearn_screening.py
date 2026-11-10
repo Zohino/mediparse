@@ -35,6 +35,25 @@ if TYPE_CHECKING:
     from mediparse.domain.seed import Seed
 
 
+def _word_training() -> tuple[csr_matrix, list[bool], list[int]]:
+    """Připraví překrývající se korpus pro testy tuneru.
+
+    Returns:
+        Slovní unigramy, labely diabetu a pacienti v pořadí řádků.
+    """
+    notes = separable_notes(24, OVERLAPPING)
+    features, _ = TfidfFeaturizer(None).fit_transform(
+        VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
+        [note.text for note in notes],
+        ["clinic review"],
+    )
+    return (
+        features,
+        [note.has_label(Diagnosis.DIABETES) for note in notes],
+        [note.subject_id for note in notes],
+    )
+
+
 @st.composite
 def _patient_labels(draw: st.DrawFn) -> tuple[list[int], list[bool], int]:
     folds = draw(st.integers(2, 4))
@@ -162,14 +181,7 @@ def test_lsa_fits_only_inner_and_full_training_rows(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Každý fit SVD dostane přesně trénink své vnitřní části, refit celý trénink."""
-    notes = separable_notes(24, OVERLAPPING)
-    labels = [note.has_label(Diagnosis.DIABETES) for note in notes]
-    subjects = [note.subject_id for note in notes]
-    features, _ = TfidfFeaturizer(None).fit_transform(
-        VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
-        [note.text for note in notes],
-        ["clinic review"],
-    )
+    features, labels, subjects = _word_training()
     observed: list[bytes] = []
     fit_transform = TruncatedSVD.fit_transform
 
@@ -205,17 +217,12 @@ def test_convergence_includes_inner_fits_and_refit(
     factory: Callable[[ClassifierFamily, Seed], BaseEstimator], *, converged: bool
 ) -> None:
     """Nekonvergence je výsledek i pod filterwarnings=error, výchozí LR konverguje."""
-    notes = separable_notes(24, OVERLAPPING)
-    features, _ = TfidfFeaturizer(None).fit_transform(
-        VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
-        [note.text for note in notes],
-        ["clinic review"],
-    )
+    features, labels, subjects = _word_training()
     model = SklearnThresholdTuner(estimator=factory).fit(
         ClassifierFamily.LOGREG,
         features,
-        [note.has_label(Diagnosis.DIABETES) for note in notes],
-        [note.subject_id for note in notes],
+        labels,
+        subjects,
         3,
         7,
     )
@@ -285,12 +292,7 @@ def _observing_estimator(
 
 def test_tuner_preserves_nonconvergence_unrelated_warning() -> None:
     """Tuner předá volajícímu UserWarning a nepovažuje ho za nekonvergenci."""
-    notes = separable_notes(24, OVERLAPPING)
-    features, _ = TfidfFeaturizer(None).fit_transform(
-        VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
-        [note.text for note in notes],
-        ["clinic review"],
-    )
+    features, labels, subjects = _word_training()
 
     def warn_on_fit(size: int) -> None:
         del size
@@ -300,8 +302,8 @@ def test_tuner_preserves_nonconvergence_unrelated_warning() -> None:
         model = SklearnThresholdTuner(estimator=_observing_estimator(warn_on_fit)).fit(
             ClassifierFamily.LOGREG,
             features,
-            [note.has_label(Diagnosis.DIABETES) for note in notes],
-            [note.subject_id for note in notes],
+            labels,
+            subjects,
             3,
             7,
         )
@@ -322,14 +324,7 @@ class _FixedScoresClassifier(ClassifierMixin, BaseEstimator):
 
 def test_tuner_uses_patient_cv_and_refits_all_training_rows() -> None:
     """Velikosti všech vnitřních fitů odpovídají zadaným částem pacientů, navíc je jeden refit."""
-    notes = separable_notes(24, OVERLAPPING)
-    labels = [note.has_label(Diagnosis.DIABETES) for note in notes]
-    subjects = [note.subject_id for note in notes]
-    features, _ = TfidfFeaturizer(None).fit_transform(
-        VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
-        [note.text for note in notes],
-        ["clinic review"],
-    )
+    features, labels, subjects = _word_training()
     sizes: list[int] = []
     expected = [
         len(labels) - len(test) for _, test in threshold_splits(labels, subjects, 3, 7)
@@ -374,15 +369,10 @@ def test_tuner_maximizes_f1_instead_of_balanced_accuracy() -> None:
 @pytest.mark.parametrize("phase", ["inner", "refit"])
 def test_tuner_detects_convergence_warning_in_each_fit_phase(phase: str) -> None:
     """Samostatné varování pouze vnitřních fitů i pouze refitu znamená nekonvergenci."""
-    notes = separable_notes(24, OVERLAPPING)
-    features, _ = TfidfFeaturizer(None).fit_transform(
-        VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
-        [note.text for note in notes],
-        ["clinic review"],
-    )
+    features, labels, subjects = _word_training()
 
     def warn_in_phase(size: int) -> None:
-        if (size < len(notes)) == (phase == "inner"):
+        if (size < len(labels)) == (phase == "inner"):
             warnings.warn(
                 "Syntetická nekonvergence fáze fitu.", ConvergenceWarning, stacklevel=2
             )
@@ -390,8 +380,8 @@ def test_tuner_detects_convergence_warning_in_each_fit_phase(phase: str) -> None
     model = SklearnThresholdTuner(estimator=_observing_estimator(warn_in_phase)).fit(
         ClassifierFamily.LOGREG,
         features,
-        [note.has_label(Diagnosis.DIABETES) for note in notes],
-        [note.subject_id for note in notes],
+        labels,
+        subjects,
         3,
         7,
     )
