@@ -28,7 +28,7 @@ if TYPE_CHECKING:
 
     from numpy import ndarray
     from scipy.sparse import csr_matrix
-    from sklearn.base import ClassifierMixin
+    from sklearn.base import BaseEstimator
 
     from mediparse.domain.classical_screening import VectorizerSpec
     from mediparse.domain.clinical_text import TextNormalization
@@ -76,7 +76,7 @@ class ClassifierFactory:
 
     lsa_components: int
 
-    def __call__(self, family: ClassifierFamily, seed: Seed) -> ClassifierMixin:
+    def __call__(self, family: ClassifierFamily, seed: Seed) -> BaseEstimator:
         """Vytvoří estimator rodiny, LSA se učí uvnitř každého fitu.
 
         Returns:
@@ -161,7 +161,7 @@ class SklearnTunedClassifier:
 class SklearnThresholdTuner:
     """Volba prahu a refit s evidencí nekonvergence všech vnitřních fitů."""
 
-    estimator: Callable[[ClassifierFamily, Seed], ClassifierMixin]
+    estimator: Callable[[ClassifierFamily, Seed], BaseEstimator]
 
     def fit(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
         self,

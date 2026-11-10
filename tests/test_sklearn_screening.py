@@ -102,7 +102,6 @@ def test_prediction_matches_threshold_on_score_scale(
 def test_lightgbm_factory_preserves_lsa_and_determinism_parameters() -> None:
     """Veřejné parametry pipeline nesou počet komponent, seed a stabilní LightGBM."""
     estimator = ClassifierFactory(7)(ClassifierFamily.LIGHTGBM_LSA, 13)
-    assert isinstance(estimator, BaseEstimator)
     params = estimator.get_params()
 
     expected = {
@@ -186,7 +185,7 @@ def test_lsa_fits_only_inner_and_full_training_rows(
     assert sorted(observed) == sorted(expected)
 
 
-def _nonconverging(family: ClassifierFamily, seed: Seed) -> ClassifierMixin:
+def _nonconverging(family: ClassifierFamily, seed: Seed) -> BaseEstimator:
     del family, seed
     return LogisticRegression(max_iter=1)
 
@@ -195,7 +194,7 @@ def _nonconverging(family: ClassifierFamily, seed: Seed) -> ClassifierMixin:
     ("factory", "converged"), [(ClassifierFactory(2), True), (_nonconverging, False)]
 )
 def test_convergence_includes_inner_fits_and_refit(
-    factory: Callable[[ClassifierFamily, Seed], ClassifierMixin], *, converged: bool
+    factory: Callable[[ClassifierFamily, Seed], BaseEstimator], *, converged: bool
 ) -> None:
     """Nekonvergence je výsledek i pod filterwarnings=error, výchozí LR konverguje."""
     notes = separable_notes(24, OVERLAPPING)
@@ -257,7 +256,7 @@ def test_featurizer_fits_only_training_vocabulary() -> None:
 
 def _observing_estimator(
     on_fit: Callable[[int], None],
-) -> Callable[[ClassifierFamily, Seed], ClassifierMixin]:
+) -> Callable[[ClassifierFamily, Seed], BaseEstimator]:
     class _ObservedLogreg(LogisticRegression):
         @override
         def fit(
@@ -269,7 +268,7 @@ def _observing_estimator(
             on_fit(len(y))
             return super().fit(X, y, sample_weight=sample_weight)
 
-    def factory(family: ClassifierFamily, seed: Seed) -> ClassifierMixin:
+    def factory(family: ClassifierFamily, seed: Seed) -> BaseEstimator:
         del family
         return _ObservedLogreg(random_state=seed)
 
