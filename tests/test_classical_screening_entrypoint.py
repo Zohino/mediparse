@@ -375,7 +375,9 @@ def test_prediction_labels_match_cohort(screened: tuple[_Inputs, Path]) -> None:
     """Pravdivý label řádku patří dané diagnóze a identitě zprávy v kohortě."""
     inputs, out = screened
     cohort = {note.note_id: note for note in ParquetNoteTable(inputs.cohort).read()}
-    for row in pq.read_table(out / "classical_predictions.parquet").to_pylist():
+    rows = pq.read_table(out / "classical_predictions.parquet").to_pylist()
+    assert rows
+    for row in rows:
         assert row["label"] == cohort[row["note_id"]].has_label(
             Diagnosis(row["diagnosis"])
         )
@@ -407,5 +409,7 @@ def test_predictions_use_cell_threshold(screened: tuple[_Inputs, Path]) -> None:
         _cell_key(row): row["threshold"]
         for row in pq.read_table(out / "classical.parquet").to_pylist()
     }
-    for row in pq.read_table(out / "classical_predictions.parquet").to_pylist():
+    rows = pq.read_table(out / "classical_predictions.parquet").to_pylist()
+    assert rows
+    for row in rows:
         assert row["predicted"] == (row["score"] >= thresholds[_cell_key(row)])
