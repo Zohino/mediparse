@@ -11,16 +11,20 @@ from mediparse.infrastructure.metrics_table import METRIC_FIELDS, metric_columns
 from mediparse.infrastructure.parquet_file import write_table
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    from collections.abc import Callable, Sequence
     from pathlib import Path
 
     from mediparse.domain.classical_screening import ScreeningResult
 
-SCHEMA: Final = pa.schema([
+CELL_FIELDS: Final = (
     pa.field("fold", pa.int64(), nullable=False),
     pa.field("vectorizer", pa.string(), nullable=False),
     pa.field("family", pa.string(), nullable=False),
     pa.field("diagnosis", pa.string(), nullable=False),
+)
+
+SCHEMA: Final = pa.schema([
+    *CELL_FIELDS,
     pa.field("test_notes", pa.int64(), nullable=False),
     pa.field("test_positives", pa.int64(), nullable=False),
     pa.field("threshold", pa.float64(), nullable=False),
@@ -29,10 +33,7 @@ SCHEMA: Final = pa.schema([
 ])
 
 PREDICTIONS_SCHEMA: Final = pa.schema([
-    pa.field("fold", pa.int64(), nullable=False),
-    pa.field("vectorizer", pa.string(), nullable=False),
-    pa.field("family", pa.string(), nullable=False),
-    pa.field("diagnosis", pa.string(), nullable=False),
+    *CELL_FIELDS,
     pa.field("note_id", pa.string(), nullable=False),
     pa.field("label", pa.bool_(), nullable=False),
     pa.field("predicted", pa.bool_(), nullable=False),
@@ -49,10 +50,7 @@ class ParquetScreeningTable:
     def write(self, results: Sequence[ScreeningResult]) -> None:
         """Zapíše řádky v daném pořadí, nadřazený adresář založí."""
         columns = {
-            "fold": [item.fold for item in results],
-            "vectorizer": [item.vectorizer for item in results],
-            "family": [item.family.value for item in results],
-            "diagnosis": [item.diagnosis.value for item in results],
+            **_cell_columns(results, lambda _: 1),
             "test_notes": [item.test_notes for item in results],
             "test_positives": [item.test_positives for item in results],
             "threshold": [item.threshold for item in results],
@@ -71,12 +69,7 @@ class ParquetScreeningPredictions:
     def write(self, results: Sequence[ScreeningResult]) -> None:
         """Rozbalí buňky do řádků po zprávách, nadřazený adresář založí."""
         columns = {
-            "fold": [cell.fold for cell in results for _ in cell.note_ids],
-            "vectorizer": [cell.vectorizer for cell in results for _ in cell.note_ids],
-            "family": [cell.family.value for cell in results for _ in cell.note_ids],
-            "diagnosis": [
-                cell.diagnosis.value for cell in results for _ in cell.note_ids
-            ],
+            **_cell_columns(results, lambda cell: len(cell.note_ids)),
             "note_id": [note_id for cell in results for note_id in cell.note_ids],
             "label": [label for cell in results for label in cell.labels],
             "predicted": [
@@ -85,3 +78,18 @@ class ParquetScreeningPredictions:
             "score": [item.score for cell in results for item in cell.classifications],
         }
         write_table(self.path, columns, PREDICTIONS_SCHEMA)
+
+
+def _cell_columns(
+    results: Sequence[ScreeningResult], repeat: Callable[[ScreeningResult], int]
+) -> dict[str, list[object]]:
+    return {
+        "fold": [cell.fold for cell in results for _ in range(repeat(cell))],
+        "vectorizer": [
+            cell.vectorizer for cell in results for _ in range(repeat(cell))
+        ],
+        "family": [cell.family.value for cell in results for _ in range(repeat(cell))],
+        "diagnosis": [
+            cell.diagnosis.value for cell in results for _ in range(repeat(cell))
+        ],
+    }
