@@ -92,7 +92,7 @@ class ClassicalScreening[F]:
     predictions: ResultSink
 
     def run(self, config: ClassicalScreeningConfig) -> ScreeningReport:
-        """Ověří všechny foldy před fitováním, spočte metriky a zapíše je najednou.
+        """Ověří foldy před fitováním a zapíše spočtené buňky do obou výstupů.
 
         Args:
             config: Mřížka v pořadí výpočtu, parametry CV a seed screeningu.
