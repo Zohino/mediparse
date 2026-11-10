@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import dataclass, replace
+from random import Random
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
@@ -158,6 +159,35 @@ def test_repeated_run_has_identical_result_bytes(tmp_path: Path) -> None:
     assert (first / "classical.parquet").read_bytes() == (
         second / "classical.parquet"
     ).read_bytes()
+
+
+def test_lsa_components_changes_screening_result_bytes(tmp_path: Path) -> None:
+    """Dvě a tři komponenty LSA mění výsledky LightGBM nad syntetickým korpusem."""
+    random = Random(31)
+    vocabulary = [f"word{i}" for i in range(300)]
+    corpus = tuple(
+        replace(
+            note,
+            text=" ".join([
+                *random.sample(vocabulary, 20),
+                "positive" if note.has_label(Diagnosis.DIABETES) else "negative",
+            ]),
+        )
+        for note in notes(visits=VISITS_PER_PATIENT)
+    )
+    results = []
+    for components in (2, 3):
+        root = tmp_path / str(components)
+        inputs = _inputs(root, families=("lightgbm_lsa",), visits=VISITS_PER_PATIENT)
+        ParquetNoteTable(inputs.cohort).write(corpus)
+        config = json.loads(inputs.config.read_text(encoding="utf-8"))
+        config["lsa_components"] = components
+        inputs.config.write_text(json.dumps(config), encoding="utf-8")
+        out = root / "out"
+        assert _run(inputs, out) is ExitCode.OK
+        results.append((out / "classical.parquet").read_bytes())
+
+    assert results[0] != results[1]
 
 
 @pytest.mark.parametrize("unmarked", ["cohort", "split"])
