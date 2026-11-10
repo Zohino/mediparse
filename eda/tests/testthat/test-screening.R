@@ -220,3 +220,12 @@ testthat::test_that("Čtení predikcí zapojuje deklarovaný typ BOOLEAN", {
   ))
   testthat::expect_error(screening_predictions_source(con, path), "sloupec predicted, očekávaný typ BOOLEAN, skutečný typ VARCHAR", fixed = TRUE)
 })
+
+testthat::test_that("Mřížka odmítne neznámou rodinu i při shodě s configem", {
+  config <- jsonlite::read_json(config_path("screening_classical.json"))
+  results <- read_screening_results(screening_fixture_paths()$results)
+  original <- config$families[[1]]
+  config$families[[1]] <- "unknown_family"
+  results$family[results$family == original] <- "unknown_family"
+  testthat::expect_error(check_screening_grid(results, config), "Neznámá rodina", fixed = TRUE)
+})
