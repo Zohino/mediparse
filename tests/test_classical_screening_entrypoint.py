@@ -35,6 +35,8 @@ if TYPE_CHECKING:
 
     from mediparse.domain.environment import SourceRevision
 
+# Vnitřní trénink musí umožnit dělení uzlů při min_child_samples=20;
+# konstantní skóre TunedThresholdClassifierCV odmítne.
 VISITS_PER_PATIENT = 16
 
 
