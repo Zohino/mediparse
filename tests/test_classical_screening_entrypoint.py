@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections import Counter
 from dataclasses import dataclass, replace
+from itertools import product
 from random import Random
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
@@ -95,6 +97,7 @@ def _run(
         candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
         lexicon=REPOSITORY_SECTION_HEADERS,
         out=root / "classical.parquet",
+        predictions=root / "classical_predictions.parquet",
         manifest=root / "classical_manifest.json",
         revision=revision,
     )
@@ -114,6 +117,12 @@ def test_results_manifest_records_actual_inputs_and_development(tmp_path: Path) 
         written.dataset_sha256 == hashlib.sha256(inputs.cohort.read_bytes()).hexdigest()
     )
     assert written.results_sha256 == hashlib.sha256(result.read_bytes()).hexdigest()
+    assert (
+        written.predictions_sha256
+        == hashlib.sha256(
+            (out / "classical_predictions.parquet").read_bytes()
+        ).hexdigest()
+    )
     assert (
         written.config_sha256 == hashlib.sha256(inputs.config.read_bytes()).hexdigest()
     )
@@ -149,7 +158,7 @@ def test_results_manifest_records_actual_inputs_and_development(tmp_path: Path) 
 
 
 def test_repeated_run_has_identical_result_bytes(tmp_path: Path) -> None:
-    """Dva běhy nad stejnými vstupy zapíší bajtově shodné výsledky."""
+    """Dva běhy nad stejnými vstupy zapíší bajtově shodné agregáty i predikce."""
     inputs = _inputs(
         tmp_path,
         families=("complement_nb", "logreg", "linear_svm", "nb_svm", "lightgbm_lsa"),
@@ -160,6 +169,9 @@ def test_repeated_run_has_identical_result_bytes(tmp_path: Path) -> None:
     assert _run(inputs, second) is ExitCode.OK
     assert (first / "classical.parquet").read_bytes() == (
         second / "classical.parquet"
+    ).read_bytes()
+    assert (first / "classical_predictions.parquet").read_bytes() == (
+        second / "classical_predictions.parquet"
     ).read_bytes()
 
 
@@ -196,7 +208,7 @@ def test_lsa_components_changes_screening_result_bytes(tmp_path: Path) -> None:
 def test_agent_refuses_each_unmarked_input_before_reading(
     tmp_path: Path, unmarked: str, caplog: pytest.LogCaptureFixture
 ) -> None:
-    """Stráž odmítne každý neoznačený adresář před čtením souborů a nic nezapíše."""
+    """Stráž odmítne vstupy před čtením; adresář agregátů, predikcí a manifestu nevznikne."""
     marked = tmp_path / "marked"
     mark_synthetic(marked)
     paths = {
@@ -248,7 +260,16 @@ def test_main_parses_required_paths(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """CLI předá všechny explicitní cesty a návratový kód run."""
-    names = ("cohort", "split", "config", "candidates", "lexicon", "out", "manifest")
+    names = (
+        "cohort",
+        "split",
+        "config",
+        "candidates",
+        "lexicon",
+        "out",
+        "predictions",
+        "manifest",
+    )
     paths = {name: tmp_path / name for name in names}
     monkeypatch.setattr(
         "sys.argv",
@@ -291,3 +312,104 @@ def test_preprocessing_changes_screening_result_bytes(tmp_path: Path) -> None:
         results.append((out / "classical.parquet").read_bytes())
 
     assert results[0] != results[1]
+
+
+@pytest.fixture(scope="module")
+def screened(tmp_path_factory: pytest.TempPathFactory) -> tuple[_Inputs, Path]:
+    """Spustí skutečný screening nad syntetickou kohortou.
+
+    Returns:
+        Vstupní soubory a adresář obou výstupů.
+    """
+    # Dva foldy by při záměně testu za trénink zachovaly celkové pokrytí identit.
+    root = tmp_path_factory.mktemp("screened")
+    inputs = _inputs(root, visits=4)
+    config = json.loads(inputs.config.read_text(encoding="utf-8"))
+    config["folds"] = 3
+    inputs.config.write_text(json.dumps(config), encoding="utf-8")
+    out = root / "out"
+    assert _run(inputs, out) is ExitCode.OK
+    return inputs, out
+
+
+def _cell_key(row: Mapping[str, object]) -> tuple[object, ...]:
+    return tuple(row[name] for name in ("fold", "vectorizer", "family", "diagnosis"))
+
+
+def test_predictions_cover_development_notes_once_per_grid_combination(
+    screened: tuple[_Inputs, Path],
+) -> None:
+    """Každá kombinace má přes foldy každou vývojovou zprávu právě jednou."""
+    inputs, out = screened
+    expected = {
+        note.note_id: 1
+        for note in ParquetNoteTable(inputs.cohort).read()
+        if note.subject_id in DEVELOPMENT
+    }
+    grid = json.loads(inputs.config.read_text(encoding="utf-8"))
+    combinations = set(
+        product(
+            (spec["name"] for spec in grid["vectorizers"]),
+            grid["families"],
+            (diagnosis.value for diagnosis in Diagnosis),
+        )
+    )
+    rows = pq.read_table(out / "classical_predictions.parquet").to_pylist()
+    assert {
+        tuple(row[name] for name in ("vectorizer", "family", "diagnosis"))
+        for row in rows
+    } == combinations
+    for vectorizer, family, diagnosis in combinations:
+        assert (
+            Counter(
+                row["note_id"]
+                for row in rows
+                if (row["vectorizer"], row["family"], row["diagnosis"])
+                == (vectorizer, family, diagnosis)
+            )
+            == expected
+        )
+
+
+def test_prediction_labels_match_cohort(screened: tuple[_Inputs, Path]) -> None:
+    """Pravdivý label řádku patří dané diagnóze a identitě zprávy v kohortě."""
+    inputs, out = screened
+    cohort = {note.note_id: note for note in ParquetNoteTable(inputs.cohort).read()}
+    rows = pq.read_table(out / "classical_predictions.parquet").to_pylist()
+    assert rows
+    for row in rows:
+        assert row["label"] == cohort[row["note_id"]].has_label(
+            Diagnosis(row["diagnosis"])
+        )
+
+
+def test_metrics_recompute_from_predictions(screened: tuple[_Inputs, Path]) -> None:
+    """Ruční TP/FP/FN/TN reprodukují metriky a počty každé buňky agregátů."""
+    _, out = screened
+    predictions = pq.read_table(out / "classical_predictions.parquet").to_pylist()
+    for result in pq.read_table(out / "classical.parquet").to_pylist():
+        rows = [row for row in predictions if _cell_key(row) == _cell_key(result)]
+        counts = Counter((row["label"], row["predicted"]) for row in rows)
+        tp, fp = counts[True, True], counts[False, True]
+        fn, tn = counts[True, False], counts[False, False]
+        assert result["test_notes"] == len(rows)
+        assert result["test_positives"] == sum(row["label"] for row in rows)
+        assert result["precision"] == pytest.approx(tp / (tp + fp) if tp + fp else 0.0)
+        assert result["recall"] == pytest.approx(tp / (tp + fn) if tp + fn else 0.0)
+        assert result["f1"] == pytest.approx(
+            2 * tp / (2 * tp + fp + fn) if 2 * tp + fp + fn else 0.0
+        )
+        assert result["accuracy"] == pytest.approx((tp + tn) / (tp + fp + fn + tn))
+
+
+def test_predictions_use_cell_threshold(screened: tuple[_Inputs, Path]) -> None:
+    """Binární predikce respektuje skóre a práh odpovídající buňky."""
+    _, out = screened
+    thresholds = {
+        _cell_key(row): row["threshold"]
+        for row in pq.read_table(out / "classical.parquet").to_pylist()
+    }
+    rows = pq.read_table(out / "classical_predictions.parquet").to_pylist()
+    assert rows
+    for row in rows:
+        assert row["predicted"] == (row["score"] >= thresholds[_cell_key(row)])

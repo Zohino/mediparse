@@ -2,6 +2,8 @@
 
 Doporučené výstupy jsou ``results/screening/classical.parquet`` a
 ``results/screening/classical_manifest.json``. Nad MIMIC nástroj spouští jen uživatel.
+Predikce patří do ``resources/mimic/screening/classical_predictions.parquet``:
+jde o řádková data, která do ``results/`` nesmí.
 """
 
 from __future__ import annotations
@@ -26,7 +28,10 @@ from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.screening_config import load_classical_screening_config
-from mediparse.infrastructure.screening_table import ParquetScreeningTable
+from mediparse.infrastructure.screening_table import (
+    ParquetScreeningPredictions,
+    ParquetScreeningTable,
+)
 from mediparse.infrastructure.sklearn_metrics import SklearnScorer
 from mediparse.infrastructure.sklearn_screening import (
     ClassifierFactory,
@@ -58,7 +63,7 @@ def main() -> ExitCode:
     """Načte explicitní cesty screeningu a nastaví logování.
 
     Returns:
-        OK po zápisu výsledků a manifestu, REFUSED při odmítnutí vstupů.
+        OK po zápisu výsledků, predikcí a manifestu, REFUSED při odmítnutí vstupů.
     """
     configure_logging()
     parser = argparse.ArgumentParser(description=__doc__)
@@ -68,6 +73,15 @@ def main() -> ExitCode:
     parser.add_argument("--candidates", type=Path, required=True)
     parser.add_argument("--lexicon", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument(
+        "--predictions",
+        type=Path,
+        required=True,
+        help=(
+            "Řádkové predikce; doporučeno "
+            "resources/mimic/screening/classical_predictions.parquet, mimo results/."
+        ),
+    )
     parser.add_argument("--manifest", type=Path, required=True)
     args = parser.parse_args()
     return run(
@@ -78,6 +92,7 @@ def main() -> ExitCode:
         candidates=args.candidates,
         lexicon=args.lexicon,
         out=args.out,
+        predictions=args.predictions,
         manifest=args.manifest,
         revision=revision_source(os.environ, Path.cwd()),
     )
@@ -93,10 +108,11 @@ def run(  # ruff: ignore[too-many-arguments] - composition root předává expli
     candidates: Path,
     lexicon: Path,
     out: Path,
+    predictions: Path,
     manifest: Path,
     revision: Callable[[], SourceRevision],
 ) -> ExitCode:
-    """Složí screening z adaptérů a zapíše agregované výsledky s provenance.
+    """Složí screening a zapíše agregáty i řádkové predikce s provenance.
 
     Returns:
         OK po dokončení mřížky; REFUSED při neplatných vstupech, nečitelné
@@ -117,6 +133,7 @@ def run(  # ruff: ignore[too-many-arguments] - composition root předává expli
         tuner=SklearnThresholdTuner(ClassifierFactory(screening.lsa_components)),
         scorer=SklearnScorer(),
         results=ParquetScreeningTable(out),
+        predictions=ParquetScreeningPredictions(predictions),
     ).run(screening)
     write_model(
         manifest,
@@ -128,6 +145,7 @@ def run(  # ruff: ignore[too-many-arguments] - composition root předává expli
             config_sha256=file_sha256(config),
             seed=screening.seed,
             results_sha256=file_sha256(out),
+            predictions_sha256=file_sha256(predictions),
             development_notes=report.development_notes,
             development_patients=report.development_patients,
             diagnostic_strip=strip,

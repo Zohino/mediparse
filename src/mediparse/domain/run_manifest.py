@@ -107,6 +107,7 @@ class ScreeningManifest(BaseModel):
     config_sha256: Sha256
     seed: Seed
     results_sha256: Sha256
+    predictions_sha256: Sha256
     development_notes: PositiveInt
     development_patients: PositiveInt
     diagnostic_strip: DiagnosticStrip | None

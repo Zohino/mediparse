@@ -21,6 +21,7 @@ def _fields(**changes: object) -> dict[str, object]:
         "config_sha256": "c" * 64,
         "seed": 7,
         "results_sha256": "d" * 64,
+        "predictions_sha256": "e" * 64,
         "development_notes": 40,
         "development_patients": 20,
         "diagnostic_strip": None,
@@ -88,7 +89,14 @@ def test_screening_accepts_consistent_preprocessing(
 
 
 @pytest.mark.parametrize(
-    "field", ["dataset_sha256", "split_sha256", "config_sha256", "results_sha256"]
+    "field",
+    [
+        "dataset_sha256",
+        "split_sha256",
+        "config_sha256",
+        "results_sha256",
+        "predictions_sha256",
+    ],
 )
 @pytest.mark.parametrize("value", ["a" * 63, "g" * 64, 1])
 def test_screening_rejects_invalid_hash(field: str, value: object) -> None:

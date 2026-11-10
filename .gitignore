@@ -186,6 +186,9 @@ tempCodeRunnerFile.py
 /data/
 /.netrc
 
+# Řádkové predikce screeningu nesou note_id a patří do resources/mimic/, ne do publikovaného results/.
+/results/**/*predictions*.parquet
+
 # resources/ je opt-in: zveřejňuje se jen výslovná výjimka
 /resources/*
 !/resources/synthetic/

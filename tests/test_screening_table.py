@@ -6,14 +6,45 @@ from typing import TYPE_CHECKING
 
 import pyarrow as pa
 import pyarrow.parquet as pq
+import pytest
 
 from mediparse.domain.classical_screening import ClassifierFamily, ScreeningResult
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.evaluation import BinaryMetrics
-from mediparse.infrastructure.screening_table import SCHEMA, ParquetScreeningTable
+from mediparse.domain.evaluation import BinaryMetrics, Classification
+from mediparse.infrastructure.screening_table import (
+    PREDICTIONS_SCHEMA,
+    SCHEMA,
+    ParquetScreeningPredictions,
+    ParquetScreeningTable,
+)
 
 if TYPE_CHECKING:
     from pathlib import Path
+
+
+@pytest.mark.parametrize("empty_field", ["note_ids", "labels", "classifications"])
+def test_cell_rejects_mismatched_lengths(empty_field: str) -> None:
+    """Každá n-tice musí mít stejnou délku jako zbývající dvě."""
+    with pytest.raises(
+        ValueError,
+        match=r"^Identity, labely a predikce buňky musí mít stejné délky\.$",
+    ):
+        ScreeningResult(
+            fold=0,
+            vectorizer="word",
+            family=ClassifierFamily.LOGREG,
+            diagnosis=Diagnosis.CKD,
+            note_ids=() if empty_field == "note_ids" else ("synthetic-a",),
+            labels=() if empty_field == "labels" else (True,),
+            classifications=(
+                ()
+                if empty_field == "classifications"
+                else (Classification(predicted=True, score=0.75),)
+            ),
+            threshold=0.5,
+            converged=True,
+            metrics=BinaryMetrics(1.0, 1.0, 1.0, 1.0, 1.0, 1.0),
+        )
 
 
 def test_written_schema_and_rows_match_contract(tmp_path: Path) -> None:
@@ -25,8 +56,9 @@ def test_written_schema_and_rows_match_contract(tmp_path: Path) -> None:
             vectorizer="word",
             family=ClassifierFamily.LOGREG,
             diagnosis=Diagnosis.CKD,
-            test_notes=40,
-            test_positives=12,
+            note_ids=tuple(f"synthetic-{index}" for index in range(40)),
+            labels=(True,) * 12 + (False,) * 28,
+            classifications=(Classification(predicted=True, score=0.75),) * 40,
             threshold=0.25,
             converged=converged,
             metrics=BinaryMetrics(0.5, 0.25, 0.75, 0.875, 0.9, 0.8),
@@ -73,4 +105,96 @@ def test_written_schema_and_rows_match_contract(tmp_path: Path) -> None:
             "pr_auc": 0.8,
         }
         for fold, converged in [(1, False), (0, True)]
+    ]
+
+
+def test_predictions_preserve_schema_cell_order_and_note_order(tmp_path: Path) -> None:
+    """Tři řádky dvou buněk přenesou přesné hodnoty i nenulovatelné typy."""
+    path = tmp_path / "rows" / "predictions.parquet"
+    rows = [
+        ScreeningResult(
+            fold=fold,
+            vectorizer=vectorizer,
+            family=family,
+            diagnosis=diagnosis,
+            note_ids=note_ids,
+            labels=labels,
+            classifications=classifications,
+            threshold=0.5,
+            converged=True,
+            metrics=BinaryMetrics(0.5, 0.25, 0.75, 0.875, 0.9, 0.8),
+        )
+        for fold, vectorizer, family, diagnosis, note_ids, labels, classifications in [
+            (
+                1,
+                "word",
+                ClassifierFamily.LOGREG,
+                Diagnosis.CKD,
+                ("synthetic-b", "synthetic-a"),
+                (True, False),
+                (
+                    Classification(predicted=False, score=0.2),
+                    Classification(predicted=True, score=0.9),
+                ),
+            ),
+            (
+                0,
+                "char",
+                ClassifierFamily.LINEAR_SVM,
+                Diagnosis.DIABETES,
+                ("synthetic-a",),
+                (True,),
+                (Classification(predicted=True, score=0.7),),
+            ),
+        ]
+    ]
+    expected_schema = pa.schema([
+        pa.field(name, kind, nullable=False)
+        for name, kind in [
+            ("fold", pa.int64()),
+            ("vectorizer", pa.string()),
+            ("family", pa.string()),
+            ("diagnosis", pa.string()),
+            ("note_id", pa.string()),
+            ("label", pa.bool_()),
+            ("predicted", pa.bool_()),
+            ("score", pa.float64()),
+        ]
+    ])
+
+    ParquetScreeningPredictions(path).write(rows)
+
+    table = pq.read_table(path)
+    assert table.schema == expected_schema == PREDICTIONS_SCHEMA
+    assert table.to_pylist() == [
+        {
+            "fold": 1,
+            "vectorizer": "word",
+            "family": "logreg",
+            "diagnosis": "ckd",
+            "note_id": "synthetic-b",
+            "label": True,
+            "predicted": False,
+            "score": 0.2,
+        },
+        {
+            "fold": 1,
+            "vectorizer": "word",
+            "family": "logreg",
+            "diagnosis": "ckd",
+            "note_id": "synthetic-a",
+            "label": False,
+            "predicted": True,
+            "score": 0.9,
+        },
+        {
+            "fold": 0,
+            "vectorizer": "char",
+            "family": "linear_svm",
+            "diagnosis": "diabetes",
+            "note_id": "synthetic-a",
+            "label": True,
+            "predicted": True,
+            "score": 0.7,
+        },
     ]
