@@ -44,9 +44,16 @@ class _Inputs:
     config: Path
 
 
-def _inputs(root: Path, *, preprocessing: str = "none", strip: bool = False) -> _Inputs:
+def _inputs(
+    root: Path,
+    *,
+    preprocessing: str = "none",
+    strip: bool = False,
+    families: tuple[str, ...] = ("complement_nb", "linear_svm"),
+    visits: int = 2,
+) -> _Inputs:
     cohort = root / "cohort.parquet"
-    ParquetNoteTable(cohort).write(notes(visits=VISITS_PER_PATIENT))
+    ParquetNoteTable(cohort).write(notes(visits=visits))
     split = root / "split.parquet"
     ParquetSplitTable(split).write(SHARED)
     config = root / "config.json"
@@ -63,7 +70,7 @@ def _inputs(root: Path, *, preprocessing: str = "none", strip: bool = False) -> 
             "vectorizers": [
                 {"name": "word", "analyzer": "word", "ngram_range": [1, 1]}
             ],
-            "families": ["complement_nb", "linear_svm", "nb_svm", "lightgbm_lsa"],
+            "families": families,
         }),
         encoding="utf-8",
     )
@@ -111,11 +118,7 @@ def test_results_manifest_records_actual_inputs_and_development(tmp_path: Path) 
     assert written.split_sha256 == shared.split.sha256()
     assert written.split_seed == shared.config.seed
     assert written.split_folds == shared.config.folds
-    development = [
-        note
-        for note in notes(visits=VISITS_PER_PATIENT)
-        if note.subject_id in DEVELOPMENT
-    ]
+    development = [note for note in notes() if note.subject_id in DEVELOPMENT]
     assert written.development_notes == len(development)
     assert written.development_patients == len({
         note.subject_id for note in development
@@ -144,7 +147,11 @@ def test_results_manifest_records_actual_inputs_and_development(tmp_path: Path) 
 
 def test_repeated_run_has_identical_result_bytes(tmp_path: Path) -> None:
     """Dva běhy nad stejnými vstupy zapíší bajtově shodné výsledky."""
-    inputs = _inputs(tmp_path)
+    inputs = _inputs(
+        tmp_path,
+        families=("complement_nb", "logreg", "linear_svm", "nb_svm", "lightgbm_lsa"),
+        visits=VISITS_PER_PATIENT,
+    )
     first, second = tmp_path / "first", tmp_path / "second"
     assert _run(inputs, first) is ExitCode.OK
     assert _run(inputs, second) is ExitCode.OK
@@ -240,7 +247,7 @@ def test_preprocessing_changes_screening_result_bytes(tmp_path: Path) -> None:
                 else "chronic obstructive pulmonary disease cough"
             ),
         )
-        for note in notes(visits=VISITS_PER_PATIENT)
+        for note in notes()
     )
     results = []
     for preprocessing in ("none", "dictionary"):
