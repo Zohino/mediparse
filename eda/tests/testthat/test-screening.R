@@ -182,3 +182,16 @@ testthat::test_that("Ensemble vyžaduje alespoň jednu rozhodující dvojici pod
   phi$phi <- c(NA_real_, NA_real_)
   testthat::expect_true(is.na(ensemble_needed(phi, comparison)))
 })
+
+testthat::test_that("Macro-F1 i PR-AUC jsou průměry různých diagnóz", {
+  rows <- expand.grid(fold = 0:2, diagnosis = c("x", "y"), family = c("a", "b"),
+    vectorizer = "w", stringsAsFactors = FALSE)
+  rows$f1 <- ifelse(rows$diagnosis == "x", 0.6, 0.8)
+  rows$f1[rows$family == "b"] <- 0.75
+  rows$pr_auc <- ifelse(rows$diagnosis == "x", 0.5, 0.9)
+  rows$converged <- TRUE
+  summary <- screening_summary(rows)
+  testthat::expect_equal(summary$mean, c(0.7, 0.75))
+  testthat::expect_equal(summary$pr_auc, c(0.7, 0.7))
+  testthat::expect_equal(screening_selection(summary)$winner$family, "b")
+})
