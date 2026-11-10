@@ -314,19 +314,20 @@ def test_preprocessing_changes_screening_result_bytes(tmp_path: Path) -> None:
     assert results[0] != results[1]
 
 
-@pytest.fixture
-def screened(tmp_path: Path) -> tuple[_Inputs, Path]:
+@pytest.fixture(scope="module")
+def screened(tmp_path_factory: pytest.TempPathFactory) -> tuple[_Inputs, Path]:
     """Spustí skutečný screening nad syntetickou kohortou.
 
     Returns:
         Vstupní soubory a adresář obou výstupů.
     """
     # Dva foldy by při záměně testu za trénink zachovaly celkové pokrytí identit.
-    inputs = _inputs(tmp_path, visits=4)
+    root = tmp_path_factory.mktemp("screened")
+    inputs = _inputs(root, visits=4)
     config = json.loads(inputs.config.read_text(encoding="utf-8"))
     config["folds"] = 3
     inputs.config.write_text(json.dumps(config), encoding="utf-8")
-    out = tmp_path / "out"
+    out = root / "out"
     assert _run(inputs, out) is ExitCode.OK
     return inputs, out
 
