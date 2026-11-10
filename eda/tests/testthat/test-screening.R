@@ -170,3 +170,15 @@ testthat::test_that("A8 párování odmítá chybějící zprávu, duplicitu i r
   rows$label[1] <- !rows$label[1]
   testthat::expect_error(phi_from_rows(rows), "nepárují")
 })
+
+testthat::test_that("Ensemble vyžaduje alespoň jednu rozhodující dvojici pod hranicí", {
+  comparison <- data.frame(family = c("b", "d"))
+  phi <- data.frame(family = c("b", "d"), phi = c(0.3, 0.7))
+  testthat::expect_true(ensemble_needed(phi, comparison))
+  phi$phi <- c(NA_real_, 0.7)
+  testthat::expect_false(ensemble_needed(phi, comparison))
+  phi$phi <- c(NA_real_, 0.3)
+  testthat::expect_true(ensemble_needed(phi, comparison))
+  phi$phi <- c(NA_real_, NA_real_)
+  testthat::expect_true(is.na(ensemble_needed(phi, comparison)))
+})
