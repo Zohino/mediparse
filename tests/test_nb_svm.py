@@ -108,6 +108,34 @@ def test_fit_and_scoring_preserve_input_bytes() -> None:
     )
 
 
+def test_explicit_sparse_zero_cannot_change_ratio_or_scores() -> None:
+    """Uložená nula nepřidává výskyt příznaku ani příspěvek k rozhodovacímu skóre."""
+    without_zero = _features()
+    with_zero = csr_matrix(
+        ([2.0, 0.0, 0.5, 3.0, 1.0], [0, 1, 0, 1, 1], [0, 2, 4, 5]),
+        shape=(3, 2),
+    )
+    reference = NbSvmClassifier(random_state=7).fit(without_zero, [True, True, False])
+    model = NbSvmClassifier(random_state=7).fit(with_zero, [True, True, False])
+
+    np.testing.assert_allclose(model.r_, reference.r_)
+    np.testing.assert_allclose(
+        model.decision_function(with_zero), reference.decision_function(without_zero)
+    )
+
+
+def test_integer_counts_match_floating_point_scores() -> None:
+    """Celočíselné četnosti a jejich float verze dávají shodná skóre."""
+    features = csr_matrix([[2, 0], [1, 3], [0, 1]])
+    floating = features.astype(float)
+    model = NbSvmClassifier(random_state=7).fit(features, [True, True, False])
+    reference = NbSvmClassifier(random_state=7).fit(floating, [True, True, False])
+
+    np.testing.assert_allclose(
+        model.decision_function(features), reference.decision_function(floating)
+    )
+
+
 def test_clone_exposes_parameters_without_fitted_state() -> None:
     """Tuner může estimator klonovat a budoucí ladění používá jméno C ze sklearn."""
     model = NbSvmClassifier(alpha=2.0, beta=0.5, C=3.0, random_state=7).fit(
