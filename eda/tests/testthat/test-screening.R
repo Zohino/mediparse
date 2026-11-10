@@ -229,3 +229,19 @@ testthat::test_that("Mřížka odmítne neznámou rodinu i při shodě s confige
   results$family[results$family == original] <- "unknown_family"
   testthat::expect_error(check_screening_grid(results, config), "Neznámá rodina", fixed = TRUE)
 })
+
+testthat::test_that("Shody se řadí podle kódových bodů i při jiné kolaci locale", {
+  original <- Sys.getlocale("LC_COLLATE")
+  withr::defer(Sys.setlocale("LC_COLLATE", original))
+  Sys.setlocale("LC_COLLATE", "C.UTF-8")
+  rows <- screening_example()
+  rows <- rows[rows$family != "d", ]
+  rows$family <- ifelse(rows$family == "a", "á", "z")
+  rows$vectorizer <- ifelse(rows$vectorizer == "c", "á", "z")
+  rows$f1 <- 0.8
+  summary <- screening_summary(rows)
+  best <- summary[summary$best, ]
+  testthat::expect_equal(best$family, c("z", "á"))
+  testthat::expect_equal(best$vectorizer, c("z", "z"))
+  testthat::expect_equal(screening_selection(summary)$winner$family, "z")
+})

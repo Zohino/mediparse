@@ -93,7 +93,7 @@ screening_summary <- function(results) {
       nonconverged = sum(!cells$converged), cells = nrow(cells)
     )
   }))
-  summary <- summary[order(summary$family, -summary$mean, summary$vectorizer), ]
+  summary <- summary[order(summary$family, -summary$mean, summary$vectorizer, method = "radix"), ]
   summary$best <- !duplicated(summary$family)
   rownames(summary) <- NULL
   summary
@@ -101,7 +101,7 @@ screening_summary <- function(results) {
 
 screening_selection <- function(summary) {
   best <- summary[summary$best, ]
-  best <- best[order(-best$mean, best$family), ]
+  best <- best[order(-best$mean, best$family, method = "radix"), ]
   winner <- best[1, ]
   threshold <- winner$mean - winner$se
   band <- best[best$mean >= threshold, ]
