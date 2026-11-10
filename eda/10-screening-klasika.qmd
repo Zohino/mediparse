@@ -42,7 +42,7 @@ Complement NB upravuje naivní Bayes pro nevyvážené třídy textu [@Rennie200
 
 ## Protokol
 
-Mřížka kombinuje `r length(config$families)` rodin a `r length(config$vectorizers)` vektorizéry TF-IDF: `r screening_vectorizers_text(config)`. LightGBM používá LSA s `r config$lsa_components` komponentami. Každá kombinace se vyhodnocuje pro pět diagnóz v `r config$folds` vnějších foldech dělených po pacientech. Práh se vybírá uvnitř trénovací části pomocí `r config$threshold_folds` vnitřních foldů. Velikost vývojové části, předzpracování a provenance běhu uvádí @tbl-screening-provenance.
+Mřížka kombinuje `r count_phrase(length(config$families), c("rodinu", "rodiny", "rodin"))` a `r count_phrase(length(config$vectorizers), c("vektorizér", "vektorizéry", "vektorizérů"))` TF-IDF: `r screening_vectorizers_text(config)`. LightGBM používá LSA s `r count_phrase(config$lsa_components, c("komponentou", "komponentami", "komponentami"))`. Každá kombinace se vyhodnocuje pro pět diagnóz v `r count_phrase(config$folds, c("vnějším foldu", "vnějších foldech", "vnějších foldech"))` s dělením po pacientech. Práh se vybírá uvnitř trénovací části pomocí `r count_phrase(config$threshold_folds, c("vnitřního foldu", "vnitřních foldů", "vnitřních foldů"))`. Velikost vývojové části, předzpracování a provenance běhu uvádí @tbl-screening-provenance.
 
 Sešit ověřuje SHA-256 výsledků, predikcí a configu proti manifestu. Výsledky musí obsahovat přesně úplnou mřížku configu, každou buňku jednou. Predikce dvojice se spojují úplně a jednoznačně přes fold, diagnózu a identitu zprávy. Do R přicházejí jen agregované počty správnosti po buňkách, nikoli identity ani řádky predikcí.
 
@@ -99,7 +99,7 @@ export_table(screening_diagnosis_table(results, summary, candidates),
 export_figure(screening_plot(results, summary, selection), height_cm = 9)
 ```
 
-`r screening_selection_text(selection)`
+Nejvyšší průměr macro-F1 je `r screening_number(selection$winner$mean)` a hranice pásma 1 SE je `r screening_number(selection$threshold)`.
 
 ```{r}
 #| label: tbl-phi
@@ -111,7 +111,7 @@ export_table(screening_phi_table(phi, selection),
 
 # Shrnutí a rozhodnutí
 
-`r screening_selection_text(selection)` Ladění S39j se týká těchto rodin s uvedenými vektorizéry; screening neurčuje jejich laděné hyperparametry.
+`r screening_selection_text(selection)`
 
 `r screening_ensemble_text(phi, selection)` Případný podtask zkoumá ensemble samostatně; tabulka φ sama výkon ensemblu neměří.
 

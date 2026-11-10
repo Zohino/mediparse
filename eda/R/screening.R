@@ -249,17 +249,24 @@ screening_provenance_table <- function(manifest) {
 
 screening_vectorizers_text <- function(config) {
   labels <- vapply(config$vectorizers, function(spec) {
-    analyzer <- switch(spec$analyzer, word = "slovní", char_wb = "znakové uvnitř slov")
-    sprintf("%s: %s n-gramy %d–%d", spec$name, analyzer, spec$ngram_range[[1]], spec$ngram_range[[2]])
+    analyzer <- switch(spec$analyzer, word = "slovní", char_wb = "znakové")
+    location <- if (spec$analyzer == "char_wb") " uvnitř slov" else ""
+    sprintf("%s: %s n-gramy %d–%d%s", spec$name, analyzer, spec$ngram_range[[1]], spec$ngram_range[[2]], location)
   }, character(1))
   join_labels(labels)
 }
 
 screening_selection_text <- function(selection) {
+  single <- nrow(selection$band) == 1L
+  verb <- if (single) "postupuje" else "postupují"
+  target <- if (single) "této rodiny s uvedeným vektorizérem" else "těchto rodin s uvedenými vektorizéry"
   sprintf(
-    "Vítězem je %s s průměrnou macro-F1 %s. Hranice pásma 1 SE je %s; do S39j postupují %s.",
+    paste0(
+      "Vítězem je %s s průměrnou macro-F1 %s. Hranice pásma 1 SE je %s; do S39j %s %s. ",
+      "Ladění S39j se týká %s; screening neurčuje laděné hyperparametry."
+    ),
     screening_model_text(selection$winner), screening_number(selection$winner$mean),
-    screening_number(selection$threshold), join_labels(screening_model_text(selection$band))
+    screening_number(selection$threshold), verb, join_labels(screening_model_text(selection$band)), target
   )
 }
 
