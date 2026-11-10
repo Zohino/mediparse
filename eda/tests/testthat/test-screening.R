@@ -114,6 +114,7 @@ testthat::test_that("A3 shodu rodin i vektorizérů rozhoduje jméno vzestupně"
   summary <- screening_summary(rows[nrow(rows):1, ])
   testthat::expect_equal(summary$vectorizer[summary$best], c("c", "c"))
   testthat::expect_equal(screening_selection(summary)$winner$family, "a")
+  testthat::expect_equal(screening_selection(summary)$band$family, c("a", "b"))
 })
 
 phi_example <- function(counts, diagnosis) {
