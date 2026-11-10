@@ -58,6 +58,23 @@ def test_beta_one_matches_svm_scores_and_predictions() -> None:
     )
 
 
+def test_dual_solver_preserves_regularization_and_seed() -> None:
+    """Při 12 řádcích a 80 příznacích odpovídá skóre CSR orákulu s C=0,01 a seedem 13."""
+    features = csr_matrix(np.random.default_rng(31).integers(0, 4, size=(12, 80)))
+    labels = [True, False] * 6
+    binary = (features.toarray() > 0).astype(float)
+    positive = 1 + binary[np.array(labels)].sum(axis=0)
+    negative = 1 + binary[~np.array(labels)].sum(axis=0)
+    ratio = np.log((positive / positive.sum()) / (negative / negative.sum()))
+    weighted = csr_matrix(binary * ratio)
+    reference = LinearSVC(C=0.01, random_state=13).fit(weighted, labels)
+    model = NbSvmClassifier(beta=1.0, C=0.01, random_state=13).fit(features, labels)
+
+    np.testing.assert_allclose(
+        model.decision_function(features), reference.decision_function(weighted)
+    )
+
+
 @given(st.lists(st.floats(0.01, 100, allow_nan=False), min_size=4, max_size=4))
 def test_positive_rescaling_cannot_change_scores(scales: list[float]) -> None:
     """Kladné škálování nenulových hodnot při fitu i predikci nemění skóre."""

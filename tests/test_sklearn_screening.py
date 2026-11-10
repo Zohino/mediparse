@@ -99,6 +99,14 @@ def test_prediction_matches_threshold_on_score_scale(
     )
 
 
+@pytest.mark.parametrize(
+    "family", [ClassifierFamily.LINEAR_SVM, ClassifierFamily.NB_SVM]
+)
+def test_svm_factory_preserves_seed(family: ClassifierFamily) -> None:
+    """Obě rodiny s duálním řešičem dostanou seed screeningu."""
+    assert ClassifierFactory(2)(family, 13).get_params()["random_state"] == 13  # ruff: ignore[magic-value-comparison]
+
+
 def test_lightgbm_factory_preserves_lsa_and_determinism_parameters() -> None:
     """Veřejné parametry pipeline nesou počet komponent, seed a stabilní LightGBM."""
     estimator = ClassifierFactory(7)(ClassifierFamily.LIGHTGBM_LSA, 13)
