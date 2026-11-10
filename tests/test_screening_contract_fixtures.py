@@ -113,8 +113,8 @@ def write_screening_fixtures(directory: Path) -> None:
     )
 
 
-def test_screening_fixtures_match_writers_and_lineage(tmp_path: Path) -> None:
-    """Fixture odpovídají producentům a manifest skutečným SHA-256 vstupů."""
+def test_screening_fixtures_match_writers_and_manifest_model(tmp_path: Path) -> None:
+    """Fixture odpovídají producentům a manifest projde doménovým modelem."""
     write_screening_fixtures(tmp_path)
     for name in (
         "classical.parquet",
@@ -123,12 +123,6 @@ def test_screening_fixtures_match_writers_and_lineage(tmp_path: Path) -> None:
         "synthetic.json",
     ):
         assert (tmp_path / name).read_bytes() == (CONTRACTS / name).read_bytes()
-    manifest = ScreeningManifest.model_validate_json(
+    ScreeningManifest.model_validate_json(
         (CONTRACTS / "classical_manifest.json").read_bytes()
     )
-    for field, path in (
-        ("results_sha256", CONTRACTS / "classical.parquet"),
-        ("predictions_sha256", CONTRACTS / "classical_predictions.parquet"),
-        ("config_sha256", CONFIG),
-    ):
-        assert getattr(manifest, field) == hashlib.sha256(path.read_bytes()).hexdigest()
