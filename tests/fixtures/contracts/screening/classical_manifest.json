@@ -1,0 +1,27 @@
+{
+  "dataset_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "split_seed": 0,
+  "split_folds": 5,
+  "split_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "config_sha256": "140522ab51a87d557c96a23fd326f384889554a044db7dbb3d44323a336e97c7",
+  "seed": 0,
+  "results_sha256": "e6fee104b0d89c2b4fc9bb187bf9f24cc661e4ea47d878eeafb16c11b063e0d7",
+  "predictions_sha256": "29d4b600d504e29f0df936275a326e1b8a51b8c2f89db11830af2ff04fa417fa",
+  "development_notes": 120,
+  "development_patients": 120,
+  "diagnostic_strip": null,
+  "text_preprocessing": "dictionary",
+  "text_normalization": {
+    "acronyms": {},
+    "variants": {}
+  },
+  "environment": {
+    "packages": {
+      "python": "3.13.0"
+    },
+    "source": {
+      "commit": "cccccccccccccccccccccccccccccccccccccccc",
+      "dirty": false
+    }
+  }
+}
