@@ -60,6 +60,9 @@ testthat::test_that("A8 mřížka musí být úplná a bez duplicit", {
   testthat::expect_silent(check_screening_grid(results, config))
   testthat::expect_error(check_screening_grid(results[-1, ], config), "mřížku")
   testthat::expect_error(check_screening_grid(rbind(results, results[1, ]), config), "mřížku")
+  swapped <- results
+  swapped[2, c("fold", "vectorizer", "family", "diagnosis")] <- swapped[1, c("fold", "vectorizer", "family", "diagnosis")]
+  testthat::expect_error(check_screening_grid(swapped, config), "mřížku")
   wrong <- results
   wrong$fold[1] <- config$folds
   testthat::expect_error(check_screening_grid(wrong, config), "mřížku")
