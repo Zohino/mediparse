@@ -21,12 +21,13 @@ def _config() -> dict[str, object]:
         "seed": 0,
         "folds": 5,
         "threshold_folds": 3,
+        "lsa_components": 100,
         "input": {
             "strip_diagnostic_sections": False,
             "text_preprocessing": "dictionary",
         },
         "vectorizers": [WORD, CHAR],
-        "families": ["complement_nb", "logreg", "linear_svm"],
+        "families": ["complement_nb", "logreg", "linear_svm", "nb_svm", "lightgbm_lsa"],
     }
 
 
@@ -45,6 +46,8 @@ def test_repository_config_matches_protocol() -> None:
         ("vectorizers", [WORD | {"ngram_range": [3, 2]}]),
         ("folds", 1),
         ("threshold_folds", 1),
+        ("lsa_components", 0),
+        ("lsa_components", True),
         ("unknown", 0),
         ("vectorizers", []),
         ("families", []),
@@ -65,6 +68,8 @@ def test_repository_config_matches_protocol() -> None:
         "reversed-ngram-range",
         "one-fold",
         "one-threshold-fold",
+        "zero-lsa-components",
+        "non-strict-lsa-components",
         "unknown-key",
         "no-vectorizers",
         "no-families",
@@ -92,6 +97,16 @@ def test_missing_file_is_invalid_input(tmp_path: Path) -> None:
     """Chybějící config se přeloží na doménovou chybu."""
     with pytest.raises(InvalidInputError, match="neexistuje"):
         load_classical_screening_config(tmp_path / "missing.json")
+
+
+def test_missing_lsa_components_is_rejected() -> None:
+    """Počet komponent je povinná vědecká volba i pro mřížku bez LightGBM."""
+    body = _config()
+    body["families"] = ["logreg"]
+    del body["lsa_components"]
+
+    with pytest.raises(ValidationError, match="lsa_components"):
+        ClassicalScreeningConfig.model_validate_json(json.dumps(body))
 
 
 def test_invalid_file_is_invalid_input(tmp_path: Path) -> None:

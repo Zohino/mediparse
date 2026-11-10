@@ -30,8 +30,11 @@ def note(subject: int, visit: int, *, positive: bool) -> InputNote:
     )
 
 
-def notes() -> tuple[InputNote, ...]:
+def notes(*, visits: int = 2) -> tuple[InputNote, ...]:
     """Sestaví korpus screeningu.
+
+    Args:
+        visits: Počet zpráv každého vývojového pacienta.
 
     Returns:
         Promíchané zprávy vývojových i evaluačních pacientů.
@@ -39,7 +42,7 @@ def notes() -> tuple[InputNote, ...]:
     notes = [
         note(subject, visit, positive=subject % 2 == 1)
         for subject in sorted(DEVELOPMENT)
-        for visit in range(2)
+        for visit in range(visits)
     ]
     notes.extend((note(1, 0, positive=True), note(2, 0, positive=False)))
     Random(19).shuffle(notes)

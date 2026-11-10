@@ -8,14 +8,18 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, assert_never
 
 import numpy as np
+from lightgbm import LGBMClassifier
+from sklearn.decomposition import TruncatedSVD
 from sklearn.exceptions import ConvergenceWarning
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import TunedThresholdClassifierCV
 from sklearn.naive_bayes import ComplementNB
+from sklearn.pipeline import make_pipeline
 from sklearn.svm import LinearSVC
 
 from mediparse.domain.classical_screening import ClassifierFamily
 from mediparse.domain.evaluation import Classification
+from mediparse.infrastructure.nb_svm import NbSvmClassifier
 from mediparse.infrastructure.sklearn_classifier import ensure_tokens, tfidf_vectorizer
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 
@@ -24,7 +28,7 @@ if TYPE_CHECKING:
 
     from numpy import ndarray
     from scipy.sparse import csr_matrix
-    from sklearn.base import ClassifierMixin
+    from sklearn.base import BaseEstimator
 
     from mediparse.domain.classical_screening import VectorizerSpec
     from mediparse.domain.clinical_text import TextNormalization
@@ -66,21 +70,40 @@ class TfidfFeaturizer:
         return features, vectorizer.transform(list(test))
 
 
-def classifier_estimator(family: ClassifierFamily, seed: Seed) -> ClassifierMixin:
-    """Vytvoří rodinu s výchozími hyperparametry screeningu.
+@dataclass(frozen=True)
+class ClassifierFactory:
+    """Továrna rodin s explicitním počtem komponent LSA z configu screeningu."""
 
-    Returns:
-        Nenatrénovaný estimator, u náhodného SVM se seedem screeningu.
-    """
-    match family:
-        case ClassifierFamily.COMPLEMENT_NB:
-            return ComplementNB()
-        case ClassifierFamily.LOGREG:
-            return LogisticRegression()
-        case ClassifierFamily.LINEAR_SVM:
-            return LinearSVC(random_state=seed)
-        case _:
-            assert_never(family)
+    lsa_components: int
+
+    def __call__(self, family: ClassifierFamily, seed: Seed) -> BaseEstimator:
+        """Vytvoří estimator rodiny, LSA se učí uvnitř každého fitu.
+
+        Returns:
+            Nenatrénovaný estimator s výchozími hyperparametry rodiny.
+        """
+        match family:
+            case ClassifierFamily.COMPLEMENT_NB:
+                return ComplementNB()
+            case ClassifierFamily.LOGREG:
+                return LogisticRegression()
+            case ClassifierFamily.LINEAR_SVM:
+                return LinearSVC(random_state=seed)
+            case ClassifierFamily.NB_SVM:
+                return NbSvmClassifier(random_state=seed)
+            case ClassifierFamily.LIGHTGBM_LSA:
+                return make_pipeline(
+                    TruncatedSVD(n_components=self.lsa_components, random_state=seed),
+                    # LightGBM doporučuje force_row_wise pro stabilitu mezi počty vláken.
+                    LGBMClassifier(
+                        random_state=seed,
+                        deterministic=True,
+                        force_row_wise=True,
+                        verbose=-1,
+                    ),
+                )
+            case _:
+                assert_never(family)
 
 
 def threshold_splits(
@@ -138,9 +161,7 @@ class SklearnTunedClassifier:
 class SklearnThresholdTuner:
     """Volba prahu a refit s evidencí nekonvergence všech vnitřních fitů."""
 
-    estimator: Callable[[ClassifierFamily, Seed], ClassifierMixin] = (
-        classifier_estimator
-    )
+    estimator: Callable[[ClassifierFamily, Seed], BaseEstimator]
 
     def fit(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
         self,

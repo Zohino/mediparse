@@ -29,6 +29,7 @@ from mediparse.infrastructure.screening_config import load_classical_screening_c
 from mediparse.infrastructure.screening_table import ParquetScreeningTable
 from mediparse.infrastructure.sklearn_metrics import SklearnScorer
 from mediparse.infrastructure.sklearn_screening import (
+    ClassifierFactory,
     SklearnThresholdTuner,
     TfidfFeaturizer,
 )
@@ -42,7 +43,15 @@ if TYPE_CHECKING:
     from mediparse.domain.environment import SourceRevision
 
 logger = logging.getLogger(__name__)
-PACKAGES: Final = ("python", "numpy", "scipy", "scikit-learn", "pyarrow", "pydantic")
+PACKAGES: Final = (
+    "python",
+    "numpy",
+    "scipy",
+    "scikit-learn",
+    "lightgbm",
+    "pyarrow",
+    "pydantic",
+)
 
 
 def main() -> ExitCode:
@@ -105,7 +114,7 @@ def run(  # ruff: ignore[too-many-arguments] - composition root předává expli
         split=ParquetSplitTable(split),
         partitioner=StratifiedGroupFolds(),
         featurizer=TfidfFeaturizer(normalization),
-        tuner=SklearnThresholdTuner(),
+        tuner=SklearnThresholdTuner(ClassifierFactory(screening.lsa_components)),
         scorer=SklearnScorer(),
         results=ParquetScreeningTable(out),
     ).run(screening)

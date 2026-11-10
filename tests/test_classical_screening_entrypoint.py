@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import dataclass, replace
+from random import Random
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
@@ -34,6 +35,10 @@ if TYPE_CHECKING:
 
     from mediparse.domain.environment import SourceRevision
 
+# Vnitřní trénink musí umožnit dělení uzlů při min_child_samples=20;
+# konstantní skóre TunedThresholdClassifierCV odmítne.
+VISITS_PER_PATIENT = 16
+
 
 @dataclass(frozen=True)
 class _Inputs:
@@ -42,9 +47,16 @@ class _Inputs:
     config: Path
 
 
-def _inputs(root: Path, *, preprocessing: str = "none", strip: bool = False) -> _Inputs:
+def _inputs(
+    root: Path,
+    *,
+    preprocessing: str = "none",
+    strip: bool = False,
+    families: tuple[str, ...] = ("complement_nb", "linear_svm"),
+    visits: int = 2,
+) -> _Inputs:
     cohort = root / "cohort.parquet"
-    ParquetNoteTable(cohort).write(notes())
+    ParquetNoteTable(cohort).write(notes(visits=visits))
     split = root / "split.parquet"
     ParquetSplitTable(split).write(SHARED)
     config = root / "config.json"
@@ -53,6 +65,7 @@ def _inputs(root: Path, *, preprocessing: str = "none", strip: bool = False) -> 
             "seed": 7,
             "folds": 2,
             "threshold_folds": 2,
+            "lsa_components": 2,
             "input": {
                 "strip_diagnostic_sections": strip,
                 "text_preprocessing": preprocessing,
@@ -60,7 +73,7 @@ def _inputs(root: Path, *, preprocessing: str = "none", strip: bool = False) -> 
             "vectorizers": [
                 {"name": "word", "analyzer": "word", "ngram_range": [1, 1]}
             ],
-            "families": ["complement_nb", "linear_svm"],
+            "families": families,
         }),
         encoding="utf-8",
     )
@@ -123,6 +136,7 @@ def test_results_manifest_records_actual_inputs_and_development(tmp_path: Path) 
         "numpy",
         "scipy",
         "scikit-learn",
+        "lightgbm",
         "pyarrow",
         "pydantic",
     }
@@ -136,13 +150,46 @@ def test_results_manifest_records_actual_inputs_and_development(tmp_path: Path) 
 
 def test_repeated_run_has_identical_result_bytes(tmp_path: Path) -> None:
     """Dva běhy nad stejnými vstupy zapíší bajtově shodné výsledky."""
-    inputs = _inputs(tmp_path)
+    inputs = _inputs(
+        tmp_path,
+        families=("complement_nb", "logreg", "linear_svm", "nb_svm", "lightgbm_lsa"),
+        visits=VISITS_PER_PATIENT,
+    )
     first, second = tmp_path / "first", tmp_path / "second"
     assert _run(inputs, first) is ExitCode.OK
     assert _run(inputs, second) is ExitCode.OK
     assert (first / "classical.parquet").read_bytes() == (
         second / "classical.parquet"
     ).read_bytes()
+
+
+def test_lsa_components_changes_screening_result_bytes(tmp_path: Path) -> None:
+    """Dvě a tři komponenty LSA mění výsledky LightGBM nad syntetickým korpusem."""
+    random = Random(31)
+    vocabulary = [f"word{i}" for i in range(300)]
+    corpus = tuple(
+        replace(
+            note,
+            text=" ".join([
+                *random.sample(vocabulary, 20),
+                "positive" if note.has_label(Diagnosis.DIABETES) else "negative",
+            ]),
+        )
+        for note in notes(visits=VISITS_PER_PATIENT)
+    )
+    results = []
+    for components in (2, 3):
+        root = tmp_path / str(components)
+        inputs = _inputs(root, families=("lightgbm_lsa",), visits=VISITS_PER_PATIENT)
+        ParquetNoteTable(inputs.cohort).write(corpus)
+        config = json.loads(inputs.config.read_text(encoding="utf-8"))
+        config["lsa_components"] = components
+        inputs.config.write_text(json.dumps(config), encoding="utf-8")
+        out = root / "out"
+        assert _run(inputs, out) is ExitCode.OK
+        results.append((out / "classical.parquet").read_bytes())
+
+    assert results[0] != results[1]
 
 
 @pytest.mark.parametrize("unmarked", ["cohort", "split"])
