@@ -1,4 +1,4 @@
-"""Mřížka klasického screeningu a agregované výsledky na vývojové části."""
+"""Mřížka klasického screeningu a výsledky buněk na vývojové části."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from mediparse.domain.seed import Seed
 
 if TYPE_CHECKING:
     from mediparse.domain.diagnosis import Diagnosis
-    from mediparse.domain.evaluation import BinaryMetrics
+    from mediparse.domain.evaluation import BinaryMetrics, Classification
     from mediparse.domain.split import SplitConfig
 
 
@@ -74,17 +74,38 @@ class ClassicalScreeningConfig(BaseModel):
 
 @dataclass(frozen=True, kw_only=True)
 class ScreeningResult:
-    """Metriky jedné buňky mřížky pro diagnózu a vnější fold."""
+    """Predikce a metriky jedné buňky mřížky pro diagnózu a vnější fold."""
 
     fold: int
     vectorizer: str
     family: ClassifierFamily
     diagnosis: Diagnosis
-    test_notes: int
-    test_positives: int
+    note_ids: tuple[str, ...]
+    labels: tuple[bool, ...]
+    classifications: tuple[Classification, ...]
     threshold: float
     converged: bool
     metrics: BinaryMetrics
+
+    def __post_init__(self) -> None:
+        """Ověří společnou délku identit, labelů a predikcí.
+
+        Raises:
+            ValueError: N-tice buňky mají různé délky.
+        """
+        if not (len(self.note_ids) == len(self.labels) == len(self.classifications)):
+            msg = "Identity, labely a predikce buňky musí mít stejné délky."
+            raise ValueError(msg)
+
+    @property
+    def test_notes(self) -> int:
+        """Počet testovacích zpráv buňky."""
+        return len(self.labels)
+
+    @property
+    def test_positives(self) -> int:
+        """Počet pozitivních testovacích zpráv buňky."""
+        return sum(self.labels)
 
 
 @dataclass(frozen=True)

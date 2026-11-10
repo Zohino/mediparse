@@ -74,7 +74,9 @@ class _Recording:
     )
     fits: list[_Fit] = field(default_factory=list)
     classifications: list[Features] = field(default_factory=list)
+    classified: list[tuple[Classification, ...]] = field(default_factory=list)
     writes: list[tuple[ScreeningResult, ...]] = field(default_factory=list)
+    prediction_writes: list[tuple[ScreeningResult, ...]] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
@@ -113,12 +115,15 @@ class _Classifier:
         self.recording.classifications.append(features)
         seen = {True: 0, False: 0}
         predictions = []
-        for text in features:
+        for index, text in enumerate(features):
             positive = "positive" in text
             predicted = not positive if seen[positive] < ERRORS_PER_CLASS else positive
             seen[positive] += 1
-            predictions.append(Classification(predicted, 0.9 if predicted else 0.1))
-        return tuple(predictions)
+            score = (0.9 if predicted else 0.1) + index / (100 * len(features))
+            predictions.append(Classification(predicted, score))
+        classified = tuple(predictions)
+        self.recording.classified.append(classified)
+        return classified
 
 
 @dataclass(frozen=True)
@@ -150,10 +155,10 @@ class _Tuner(ThresholdTuner[Features]):
 
 @dataclass(frozen=True)
 class _Sink:
-    recording: _Recording
+    writes: list[tuple[ScreeningResult, ...]]
 
     def write(self, results: Sequence[ScreeningResult]) -> None:
-        self.recording.writes.append(tuple(results))
+        self.writes.append(tuple(results))
 
 
 def _step(
@@ -168,7 +173,8 @@ def _step(
         featurizer=_Featurizer(recording),
         tuner=_Tuner(recording),
         scorer=SklearnScorer(),
-        results=_Sink(recording),
+        results=_Sink(recording.writes),
+        predictions=_Sink(recording.prediction_writes),
     )
 
 
@@ -240,10 +246,44 @@ def test_rows_follow_config_order_in_single_write() -> None:
     _step(recording, _notes()).run(CONFIG)
 
     assert len(recording.writes) == 1
+    assert len(recording.prediction_writes) == 1
     rows = recording.writes[0]
+    assert all(
+        result is prediction
+        for result, prediction in zip(rows, recording.prediction_writes[0], strict=True)
+    )
     assert [(r.fold, r.vectorizer, r.family, r.diagnosis) for r in rows] == list(
         product(range(2), ("z-char", "a-word"), CONFIG.families, Diagnosis)
     )
+
+
+def test_cells_preserve_test_identity_labels_and_classifications() -> None:
+    """Buňka zachová pořadí testu, jeho labely a přesné výstupy klasifikátoru."""
+    notes, recording = _notes(), _Recording()
+
+    _step(recording, notes).run(CONFIG)
+
+    by_text = {note.text: note for note in notes}
+    for row, texts, classified in zip(
+        recording.writes[0],
+        recording.classifications,
+        recording.classified,
+        strict=True,
+    ):
+        assert row.note_ids == tuple(by_text[text].note_id for text in texts)
+        assert row.labels == tuple(
+            by_text[text].has_label(row.diagnosis) for text in texts
+        )
+        assert row.classifications is classified
+
+
+@pytest.mark.parametrize("field", ["note_ids", "labels", "classifications"])
+def test_cell_rejects_mismatched_lengths(field: str) -> None:
+    """Každá z n-tic musí mít shodnou délku se zbývajícími dvěma."""
+    recording = _Recording()
+    _step(recording, _notes()).run(CONFIG)
+    with pytest.raises(ValueError, match="délk"):
+        replace(recording.writes[0][0], **{field: ()})
 
 
 @pytest.mark.parametrize(

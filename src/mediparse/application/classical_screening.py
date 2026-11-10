@@ -72,7 +72,7 @@ class ThresholdTuner[F](Protocol):
 
 
 class ResultSink(Protocol):
-    """Výstup agregovaných řádků screeningu."""
+    """Výstup buněk screeningu."""
 
     def write(self, results: Sequence[ScreeningResult]) -> None:
         """Zapíše všechny buňky mřížky po dokončení výpočtu."""
@@ -89,6 +89,7 @@ class ClassicalScreening[F]:
     tuner: ThresholdTuner[F]
     scorer: Scorer
     results: ResultSink
+    predictions: ResultSink
 
     def run(self, config: ClassicalScreeningConfig) -> ScreeningReport:
         """Ověří všechny foldy před fitováním, spočte metriky a zapíše je najednou.
@@ -112,6 +113,7 @@ class ClassicalScreening[F]:
             for spec in config.vectorizers:
                 rows.extend(self._screen_vectorizer(holdout, spec, config))
         self.results.write(rows)
+        self.predictions.write(rows)
         return ScreeningReport(
             development_notes=len(notes),
             development_patients=len({note.subject_id for note in notes}),
@@ -140,7 +142,7 @@ class ClassicalScreening[F]:
                     config.seed,
                 )
                 predictions = classifier.classify(test)
-                truth = [note.has_label(diagnosis) for note in holdout.test]
+                truth = tuple(note.has_label(diagnosis) for note in holdout.test)
                 metrics = self.scorer.score(
                     truth,
                     [item.predicted for item in predictions],
@@ -152,8 +154,9 @@ class ClassicalScreening[F]:
                         vectorizer=spec.name,
                         family=family,
                         diagnosis=diagnosis,
-                        test_notes=len(truth),
-                        test_positives=sum(truth),
+                        note_ids=tuple(note.note_id for note in holdout.test),
+                        labels=truth,
+                        classifications=predictions,
                         threshold=classifier.threshold,
                         converged=classifier.converged,
                         metrics=metrics,

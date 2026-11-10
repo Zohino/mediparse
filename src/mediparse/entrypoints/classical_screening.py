@@ -117,6 +117,7 @@ def run(  # ruff: ignore[too-many-arguments] - composition root předává expli
         tuner=SklearnThresholdTuner(ClassifierFactory(screening.lsa_components)),
         scorer=SklearnScorer(),
         results=ParquetScreeningTable(out),
+        predictions=ParquetScreeningTable(out),
     ).run(screening)
     write_model(
         manifest,

@@ -9,7 +9,7 @@ import pyarrow.parquet as pq
 
 from mediparse.domain.classical_screening import ClassifierFamily, ScreeningResult
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.evaluation import BinaryMetrics
+from mediparse.domain.evaluation import BinaryMetrics, Classification
 from mediparse.infrastructure.screening_table import SCHEMA, ParquetScreeningTable
 
 if TYPE_CHECKING:
@@ -25,8 +25,9 @@ def test_written_schema_and_rows_match_contract(tmp_path: Path) -> None:
             vectorizer="word",
             family=ClassifierFamily.LOGREG,
             diagnosis=Diagnosis.CKD,
-            test_notes=40,
-            test_positives=12,
+            note_ids=tuple(f"synthetic-{index}" for index in range(40)),
+            labels=(True,) * 12 + (False,) * 28,
+            classifications=(Classification(predicted=True, score=0.75),) * 40,
             threshold=0.25,
             converged=converged,
             metrics=BinaryMetrics(0.5, 0.25, 0.75, 0.875, 0.9, 0.8),
