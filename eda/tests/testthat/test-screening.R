@@ -1,5 +1,3 @@
-source("../../R/screening.R")
-
 screening_fixture_paths <- function(directory = file.path(CONTRACT_FIXTURES, "screening")) {
   list(
     results = file.path(directory, "classical.parquet"),
