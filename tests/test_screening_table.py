@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING
 
 import pyarrow as pa
 import pyarrow.parquet as pq
+import pytest
 
 from mediparse.domain.classical_screening import ClassifierFamily, ScreeningResult
 from mediparse.domain.diagnosis import Diagnosis
@@ -19,6 +20,31 @@ from mediparse.infrastructure.screening_table import (
 
 if TYPE_CHECKING:
     from pathlib import Path
+
+
+@pytest.mark.parametrize("empty_field", ["note_ids", "labels", "classifications"])
+def test_cell_rejects_mismatched_lengths(empty_field: str) -> None:
+    """Každá n-tice musí mít stejnou délku jako zbývající dvě."""
+    with pytest.raises(
+        ValueError,
+        match=r"^Identity, labely a predikce buňky musí mít stejné délky\.$",
+    ):
+        ScreeningResult(
+            fold=0,
+            vectorizer="word",
+            family=ClassifierFamily.LOGREG,
+            diagnosis=Diagnosis.CKD,
+            note_ids=() if empty_field == "note_ids" else ("synthetic-a",),
+            labels=() if empty_field == "labels" else (True,),
+            classifications=(
+                ()
+                if empty_field == "classifications"
+                else (Classification(predicted=True, score=0.75),)
+            ),
+            threshold=0.5,
+            converged=True,
+            metrics=BinaryMetrics(1.0, 1.0, 1.0, 1.0, 1.0, 1.0),
+        )
 
 
 def test_written_schema_and_rows_match_contract(tmp_path: Path) -> None:

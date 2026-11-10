@@ -277,15 +277,6 @@ def test_cells_preserve_test_identity_labels_and_classifications() -> None:
         assert row.classifications is classified
 
 
-@pytest.mark.parametrize("field", ["note_ids", "labels", "classifications"])
-def test_cell_rejects_mismatched_lengths(field: str) -> None:
-    """Každá z n-tic musí mít shodnou délku se zbývajícími dvěma."""
-    recording = _Recording()
-    _step(recording, _notes()).run(CONFIG)
-    with pytest.raises(ValueError, match="délk"):
-        replace(recording.writes[0][0], **{field: ()})
-
-
 @pytest.mark.parametrize(
     ("family", "threshold", "converged"),
     [
