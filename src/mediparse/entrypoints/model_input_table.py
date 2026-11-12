@@ -14,14 +14,14 @@ from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from mediparse.application.ports.experiment import InputTable
+    from mediparse.application.ports.experiment import PatientNoteTable
     from mediparse.domain.clinical_text import TextNormalization
     from mediparse.domain.model_input import ModelInput
 
 
 def model_input_table(
     cohort: Path, model_input: ModelInput, lexicon: Path
-) -> tuple[InputTable, DiagnosticStrip | None]:
+) -> tuple[PatientNoteTable, DiagnosticStrip | None]:
     """Složí tabulku zpráv pro trénink, inferenci i screening a záznam stripu pro manifest.
 
     Trénink, inference i screening volají tutéž funkci se stejnými volbami,

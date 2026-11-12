@@ -23,6 +23,12 @@ class _Table:
     def read(self) -> tuple[InputNote, ...]:
         return self.notes
 
+    def subjects(self) -> frozenset[int]:
+        return frozenset(note.subject_id for note in self.notes)
+
+    def read_patients(self, subjects: frozenset[int]) -> tuple[InputNote, ...]:
+        return tuple(note for note in self.notes if note.subject_id in subjects)
+
 
 def _notes(language: Language = Language.EN) -> tuple[InputNote, ...]:
     return tuple(
@@ -83,3 +89,15 @@ def test_non_english_note_is_rejected_without_leaking_identifiers_or_text() -> N
     assert note.text not in message
     assert "cs" in message
     assert "en" in message
+
+
+def test_patient_methods_delegate_selection_and_strip() -> None:
+    """Pacientský výběr stripuje stejně jako celé čtení a zachová pořadí."""
+    source = _Table(_notes())
+    table = DiagnosticStripTable(source, REPOSITORY_LEXICON)
+    subjects = frozenset({1, 3})
+
+    assert table.subjects() == source.subjects()
+    assert table.read_patients(subjects) == tuple(
+        note for note in table.read() if note.subject_id in subjects
+    )

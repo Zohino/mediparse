@@ -83,8 +83,18 @@ class _Recording:
 class _Table:
     notes: tuple[InputNote, ...]
 
-    def read(self) -> tuple[InputNote, ...]:
-        return self.notes
+    requested: list[frozenset[SubjectId]] = field(default_factory=list)
+
+    @staticmethod
+    def read() -> tuple[InputNote, ...]:
+        pytest.fail("Screening nesmí číst celou kohortu.")
+
+    def subjects(self) -> frozenset[SubjectId]:
+        return frozenset(note.subject_id for note in self.notes)
+
+    def read_patients(self, subjects: frozenset[SubjectId]) -> tuple[InputNote, ...]:
+        self.requested.append(subjects)
+        return tuple(note for note in self.notes if note.subject_id in subjects)
 
 
 @dataclass(frozen=True)
@@ -443,3 +453,24 @@ def test_empty_development_is_refused() -> None:
         _step(recording, ()).run(CONFIG)
 
     assert recording == _Recording()
+
+
+def test_table_gets_exact_development_patients() -> None:
+    """Screening čte přesně pacienty vývoje; fake odmítá čtení celé tabulky."""
+    step = _step(_Recording(), _notes())
+    table = _Table(_notes())
+
+    replace(step, table=table).run(CONFIG)
+
+    assert table.requested == [SHARED.split.development]
+
+
+def test_outside_patient_is_rejected_before_reading_notes() -> None:
+    """Pacient mimo split se odmítne před prvním čtením textů."""
+    table = _Table((*_notes(), _note(999, 1, positive=False)))
+    step = replace(_step(_Recording(), ()), table=table)
+
+    with pytest.raises(InvalidInputError, match=r"^Pacienti mimo split: 1\.$"):
+        step.run(CONFIG)
+
+    assert table.requested == []
