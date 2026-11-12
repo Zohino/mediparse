@@ -22,9 +22,11 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
 from mediparse.infrastructure.sklearn_screening import (
-    ClassifierFactory,
+    Lsa,
+    ScreeningFeatures,
     SklearnThresholdTuner,
     TfidfFeaturizer,
+    classifier_estimator,
     threshold_splits,
 )
 from tests.model_support import OVERLAPPING, separable_notes
@@ -35,7 +37,7 @@ if TYPE_CHECKING:
     from mediparse.domain.seed import Seed
 
 
-def _word_training() -> tuple[csr_matrix, list[bool], list[int]]:
+def _word_training() -> tuple[ScreeningFeatures, list[bool], list[int]]:
     """Připraví překrývající se korpus pro testy tuneru.
 
     Returns:
@@ -98,12 +100,12 @@ def test_prediction_matches_threshold_on_score_scale(
 ) -> None:
     """Všechny rodiny a analyzátory vracejí predikci při prahu na téže škále skóre."""
     notes = separable_notes(24, OVERLAPPING)
-    train, test = TfidfFeaturizer(None).fit_transform(
+    train, test = TfidfFeaturizer(None, Lsa(2, 7)).fit_transform(
         VectorizerSpec(name="test", analyzer=analyzer, ngram_range=ngram_range),
         [note.text for note in notes],
         ["diabetes clinic", "fracture review", "insulin splint visit"],
     )
-    model = SklearnThresholdTuner(ClassifierFactory(2)).fit(
+    model = SklearnThresholdTuner().fit(
         family,
         train,
         [note.has_label(Diagnosis.DIABETES) for note in notes],
@@ -112,7 +114,7 @@ def test_prediction_matches_threshold_on_score_scale(
         7,
     )
     predictions = model.classify(test)
-    assert len(predictions) == test.shape[0]
+    assert len(predictions) == test.sparse.shape[0]
     assert all(
         item.predicted == (item.score >= model.threshold) for item in predictions
     )
@@ -123,21 +125,19 @@ def test_prediction_matches_threshold_on_score_scale(
 )
 def test_svm_factory_preserves_seed(family: ClassifierFamily) -> None:
     """Obě rodiny s duálním řešičem dostanou seed screeningu."""
-    assert ClassifierFactory(2)(family, 13).get_params()["random_state"] == 13  # ruff: ignore[magic-value-comparison]
+    assert classifier_estimator(family, 13).get_params()["random_state"] == 13  # ruff: ignore[magic-value-comparison]
 
 
-def test_lightgbm_factory_preserves_lsa_and_determinism_parameters() -> None:
-    """Veřejné parametry pipeline nesou počet komponent, seed a stabilní LightGBM."""
-    estimator = ClassifierFactory(7)(ClassifierFamily.LIGHTGBM_LSA, 13)
+def test_lightgbm_factory_preserves_determinism_parameters() -> None:
+    """Veřejné parametry LightGBM drží seed a determinismus; SVD patří featurizéru."""
+    estimator = classifier_estimator(ClassifierFamily.LIGHTGBM_LSA, 13)
     params = estimator.get_params()
 
     expected = {
-        "truncatedsvd__n_components": 7,
-        "truncatedsvd__random_state": 13,
-        "lgbmclassifier__random_state": 13,
-        "lgbmclassifier__deterministic": True,
-        "lgbmclassifier__force_row_wise": True,
-        "lgbmclassifier__verbose": -1,
+        "random_state": 13,
+        "deterministic": True,
+        "force_row_wise": True,
+        "verbose": -1,
     }
     assert {key: params[key] for key in expected} == expected
 
@@ -154,55 +154,96 @@ def test_lightgbm_repeats_nonconstant_scores_and_threshold() -> None:
         ])
         for label in labels
     ]
-    features, _ = TfidfFeaturizer(None).fit_transform(
-        VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
-        texts,
-        texts,
-    )
+    spec = VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1))
+    features, _ = TfidfFeaturizer(None, Lsa(8, 7)).fit_transform(spec, texts, texts)
+    repeated, _ = TfidfFeaturizer(None, Lsa(8, 7)).fit_transform(spec, texts, texts)
+    changed, _ = TfidfFeaturizer(None, Lsa(8, 11)).fit_transform(spec, texts, texts)
     subjects = list(range(len(labels)))
-    tuner = SklearnThresholdTuner(ClassifierFactory(8))
+    tuner = SklearnThresholdTuner()
     first = tuner.fit(ClassifierFamily.LIGHTGBM_LSA, features, labels, subjects, 3, 7)
-    second = tuner.fit(ClassifierFamily.LIGHTGBM_LSA, features, labels, subjects, 3, 7)
+    second = tuner.fit(ClassifierFamily.LIGHTGBM_LSA, repeated, labels, subjects, 3, 7)
     different = tuner.fit(
-        ClassifierFamily.LIGHTGBM_LSA, features, labels, subjects, 3, 11
+        ClassifierFamily.LIGHTGBM_LSA, changed, labels, subjects, 3, 11
     )
 
     predictions = first.classify(features)
     assert len({prediction.score for prediction in predictions}) > 1
-    assert second.classify(features) == predictions
+    assert second.classify(repeated) == predictions
     assert second.threshold == first.threshold
-    assert different.classify(features) != predictions
+    assert different.classify(changed) != predictions
     assert first.converged
     assert second.converged
     assert different.converged
 
 
-def test_lsa_fits_only_inner_and_full_training_rows(
+def test_lsa_fits_once_on_outer_training_and_only_transforms_test(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Každý fit SVD dostane přesně trénink své vnitřní části, refit celý trénink."""
-    features, labels, subjects = _word_training()
-    observed: list[bytes] = []
+    """Jediný fit SVD vidí přesně vnější trénink, test se jen transformuje."""
+    notes = separable_notes(24, OVERLAPPING)
+    labels = [note.has_label(Diagnosis.DIABETES) for note in notes]
+    subjects = [note.subject_id for note in notes]
+    observed: list[csr_matrix] = []
+    transformed: list[csr_matrix] = []
+    seeds: list[tuple[int, object]] = []
     fit_transform = TruncatedSVD.fit_transform
+    transform = TruncatedSVD.transform
 
     def observe_fit(
         svd: TruncatedSVD, features: csr_matrix, labels: object = None
     ) -> np.ndarray:
-        observed.append(features.toarray().tobytes())
+        observed.append(features.copy())
+        seeds.append((svd.n_components, svd.random_state))
         return fit_transform(svd, features, labels)
 
+    def observe_transform(svd: TruncatedSVD, features: csr_matrix) -> np.ndarray:
+        transformed.append(features.copy())
+        return transform(svd, features)
+
+    def refuse_fit(*args: object, **kwargs: object) -> None:
+        del args, kwargs
+        pytest.fail("Tuner nesmí znovu učit SVD.")
+
     monkeypatch.setattr(TruncatedSVD, "fit_transform", observe_fit)
-    expected = [
-        features[train].toarray().tobytes()
-        for train, _ in threshold_splits(labels, subjects, 3, 7)
-    ]
-    expected.append(features.toarray().tobytes())
-
-    SklearnThresholdTuner(ClassifierFactory(2)).fit(
-        ClassifierFamily.LIGHTGBM_LSA, features, labels, subjects, 3, 7
+    monkeypatch.setattr(TruncatedSVD, "transform", observe_transform)
+    train, test = TfidfFeaturizer(None, Lsa(2, 7)).fit_transform(
+        VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
+        [note.text for note in notes],
+        ["clinic review", "testonly"],
     )
+    assert len(observed) == 1
+    np.testing.assert_array_equal(observed[0].toarray(), train.sparse.toarray())
+    assert len(transformed) == 1
+    np.testing.assert_array_equal(transformed[0].toarray(), test.sparse.toarray())
+    assert seeds == [(2, 7)]
+    assert train.lsa is not None
+    assert train.lsa.shape == (len(notes), 2)
+    assert test.lsa is not None
+    assert test.lsa.shape == (2, 2)
+    assert test.sparse[1].nnz == 0
+    monkeypatch.setattr(TruncatedSVD, "fit_transform", refuse_fit)
+    monkeypatch.setattr(TruncatedSVD, "fit", refuse_fit)
+    tuner = SklearnThresholdTuner()
+    for _ in Diagnosis:
+        tuner.fit(
+            ClassifierFamily.LIGHTGBM_LSA, train, labels, subjects, 3, 7
+        ).classify(test)
 
-    assert sorted(observed) == sorted(expected)
+
+def test_features_without_lsa_reject_lightgbm_and_share_sparse() -> None:
+    """Bez LSA se LightGBM odmítne, ostatní rodiny dostanou tutéž řídkou matici."""
+    train, _ = TfidfFeaturizer(None).fit_transform(
+        VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
+        ["alpha beta"],
+        ["gamma"],
+    )
+    assert train.lsa is None
+    for family in ClassifierFamily:
+        if family is ClassifierFamily.LIGHTGBM_LSA:
+            with pytest.raises(ValueError, match="LSA"):
+                train.for_family(family)
+        else:
+            assert train.for_family(family) is train.sparse
 
 
 def _nonconverging(family: ClassifierFamily, seed: Seed) -> BaseEstimator:
@@ -211,7 +252,7 @@ def _nonconverging(family: ClassifierFamily, seed: Seed) -> BaseEstimator:
 
 
 @pytest.mark.parametrize(
-    ("factory", "converged"), [(ClassifierFactory(2), True), (_nonconverging, False)]
+    ("factory", "converged"), [(classifier_estimator, True), (_nonconverging, False)]
 )
 def test_convergence_includes_inner_fits_and_refit(
     factory: Callable[[ClassifierFamily, Seed], BaseEstimator], *, converged: bool
@@ -264,9 +305,9 @@ def test_featurizer_fits_only_training_vocabulary() -> None:
         ["gamma"],
     )
     expected_features = 3
-    assert train.shape == (1, expected_features)
-    assert test.shape == train.shape
-    assert test.nnz == 0
+    assert train.sparse.shape == (1, expected_features)
+    assert test.sparse.shape == train.sparse.shape
+    assert test.sparse.nnz == 0
 
 
 def _observing_estimator(
@@ -360,7 +401,14 @@ def test_tuner_maximizes_f1_instead_of_balanced_accuracy() -> None:
         estimator=lambda _family, _seed: _FixedScoresClassifier()
     )
 
-    classifier = tuner.fit(ClassifierFamily.LOGREG, features, labels, subjects, 3, 7)
+    classifier = tuner.fit(
+        ClassifierFamily.LOGREG,
+        ScreeningFeatures(features, None),
+        labels,
+        subjects,
+        3,
+        7,
+    )
 
     lower, upper = 0.6, 0.9
     assert lower < classifier.threshold <= upper
@@ -420,7 +468,7 @@ def test_featurizer_applies_its_normalization() -> None:
         ["COPD"],
     )
     expected_features = 4
-    assert train.shape[1] == expected_features
+    assert train.sparse.shape[1] == expected_features
 
 
 @pytest.mark.parametrize(
@@ -441,4 +489,4 @@ def test_featurizer_uses_spec_analyzer(
         ["abc"],
         ["abc"],
     )
-    assert train.shape[1] == expected_features
+    assert train.sparse.shape[1] == expected_features

@@ -12,7 +12,7 @@ from sklearn.naive_bayes import ComplementNB
 from mediparse.domain.classical_screening import ClassifierFamily
 from mediparse.infrastructure.complement_nb import ComplementNbLogOdds
 from mediparse.infrastructure.sklearn_screening import (
-    ClassifierFactory,
+    ScreeningFeatures,
     SklearnThresholdTuner,
     threshold_splits,
 )
@@ -82,8 +82,16 @@ def test_log_odds_resolves_constant_probability_regression() -> None:
             features, labels
         )
 
-    model = SklearnThresholdTuner(ClassifierFactory(2)).fit(
-        ClassifierFamily.COMPLEMENT_NB, features, labels.tolist(), subjects, 3, 7
+    model = SklearnThresholdTuner().fit(
+        ClassifierFamily.COMPLEMENT_NB,
+        ScreeningFeatures(features, None),
+        labels.tolist(),
+        subjects,
+        3,
+        7,
     )
 
-    assert len({item.score for item in model.classify(features)}) > 1
+    assert (
+        len({item.score for item in model.classify(ScreeningFeatures(features, None))})
+        > 1
+    )
