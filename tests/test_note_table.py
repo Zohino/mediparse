@@ -211,6 +211,18 @@ def test_patient_reads_reject_invalid_file(
         pq.write_table(pa.table({"subject_id": [1]}), path)
     elif invalid == "corrupt":
         path.write_text("není parquet", encoding="utf-8")
+    messages = {
+        "missing": f"Soubor {path} neexistuje.",
+        "schema": (
+            f"Soubor {path} neodpovídá schématu: čekané sloupce "
+            "note_id, subject_id, language, text, diabetes, copd, ckd, "
+            "pneumonia, atrial_fibrillation."
+        ),
+        "corrupt": (
+            f"Soubor {path} neodpovídá schématu: Parquet magic bytes not found in footer. "
+            "Either the file is corrupted or this is not a parquet file."
+        ),
+    }
     table = ParquetNoteTable(path)
 
     read = (
@@ -218,7 +230,7 @@ def test_patient_reads_reject_invalid_file(
         if method == "subjects"
         else lambda: table.read_patients(frozenset({1}))
     )
-    with pytest.raises(InvalidInputError):
+    with pytest.raises(InvalidInputError, match=f"^{re.escape(messages[invalid])}$"):
         read()
 
 

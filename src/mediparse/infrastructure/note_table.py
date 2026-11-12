@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING, Any, Final
 
 import pyarrow as pa
 import pyarrow.compute as pc
-import pyarrow.parquet as pq
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
@@ -15,6 +14,7 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.note import NoteIdentityError
 from mediparse.infrastructure.parquet_file import (
+    iter_batches,
     note_identity_error,
     read_table,
     write_table,
@@ -107,20 +107,9 @@ class ParquetNoteTable:
         )
 
     def _batches(self, columns: list[str] | None = None) -> Iterator[pa.RecordBatch]:
-        try:
-            with pq.ParquetFile(self.path) as source:
-                if not source.schema_arrow.equals(SCHEMA):
-                    msg = f"Soubor {self.path} neodpovídá schématu: čekané sloupce {', '.join(SCHEMA.names)}."
-                    raise InvalidInputError(msg)
-                yield from source.iter_batches(
-                    batch_size=self.batch_size, columns=columns
-                )
-        except FileNotFoundError as error:
-            msg = f"Soubor {self.path} neexistuje."
-            raise InvalidInputError(msg) from error
-        except pa.ArrowInvalid as error:
-            msg = f"Soubor {self.path} neodpovídá schématu: {error}"
-            raise InvalidInputError(msg) from error
+        return iter_batches(
+            self.path, SCHEMA, columns=columns, batch_size=self.batch_size
+        )
 
     def _note(self, row: dict[str, Any]) -> InputNote:
         language = self._language(row["language"])

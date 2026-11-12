@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import TYPE_CHECKING
 
 import pyarrow as pa
@@ -11,6 +12,7 @@ import pytest
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.parquet_file import (
+    iter_batches,
     parse_diagnosis,
     read_table,
     write_string_table,
@@ -18,6 +20,7 @@ from mediparse.infrastructure.parquet_file import (
 )
 
 if TYPE_CHECKING:
+    from collections.abc import Iterator
     from pathlib import Path
 
 SCHEMA = pa.schema([pa.field("note_id", pa.string(), nullable=False)])
@@ -99,3 +102,67 @@ def test_parse_diagnosis_names_path_and_column_without_value(tmp_path: Path) -> 
     )
     assert raised.value.__cause__ is None
     assert raised.value.__suppress_context__ is True
+
+
+def test_batches_preserve_rows_and_project_columns(tmp_path: Path) -> None:
+    """Pět řádků se čte v dávkách 2, 2, 1 a promítne se jen požadovaný sloupec."""
+    path = tmp_path / "batches.parquet"
+    schema = pa.schema([("note_id", pa.string()), ("count", pa.int64())])
+    pq.write_table(
+        pa.table(
+            {"note_id": ["a", "b", "c", "d", "e"], "count": [1, 2, 3, 4, 5]},
+            schema=schema,
+        ),
+        path,
+    )
+
+    batches = list(iter_batches(path, schema, columns=["note_id"], batch_size=2))
+
+    assert [batch.num_rows for batch in batches] == [2, 2, 1]
+    assert pa.Table.from_batches(batches).to_pydict() == {
+        "note_id": ["a", "b", "c", "d", "e"]
+    }
+
+
+@pytest.mark.parametrize("invalid", ["missing", "corrupt", "schema"])
+def test_batches_translate_file_errors_with_complete_message(
+    tmp_path: Path, invalid: str
+) -> None:
+    """Proudové čtení hlásí celé doménové chyby stejně jako společná hranice souboru."""
+    path = tmp_path / "table.parquet"
+    messages = {
+        "missing": f"Soubor {path} neexistuje.",
+        "schema": f"Soubor {path} neodpovídá schématu: čekané sloupce note_id.",
+        "corrupt": (
+            f"Soubor {path} neodpovídá schématu: Parquet magic bytes not found in footer. "
+            "Either the file is corrupted or this is not a parquet file."
+        ),
+    }
+    if invalid == "schema":
+        pq.write_table(pa.table({"note_id": ["a"], "other": [1]}), path)
+    elif invalid == "corrupt":
+        path.write_text("není parquet", encoding="utf-8")
+
+    with pytest.raises(InvalidInputError, match=f"^{re.escape(messages[invalid])}$"):
+        list(iter_batches(path, SCHEMA, columns=["note_id"], batch_size=2))
+
+
+def test_batches_translate_error_while_reading_next_batch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Překlad chyb pokryje i selhání po vydání první platné dávky."""
+    path = tmp_path / "table.parquet"
+    pq.write_table(pa.Table.from_pydict({"note_id": ["a"]}, schema=SCHEMA), path)
+
+    def broken_batches(*args: object, **kwargs: object) -> Iterator[pa.RecordBatch]:
+        del args, kwargs
+        yield pa.record_batch([["a"]], schema=SCHEMA)
+        msg = "Syntetická chyba další dávky."
+        raise pa.ArrowInvalid(msg)
+
+    monkeypatch.setattr(pq.ParquetFile, "iter_batches", broken_batches)
+    batches = iter_batches(path, SCHEMA, batch_size=1)
+    assert next(batches).column("note_id").to_pylist() == ["a"]
+    message = f"Soubor {path} neodpovídá schématu: Syntetická chyba další dávky."
+    with pytest.raises(InvalidInputError, match=f"^{re.escape(message)}$"):
+        next(batches)
