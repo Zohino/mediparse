@@ -19,16 +19,26 @@ from mediparse.infrastructure.sklearn_screening import (
 
 
 def test_log_odds_matches_library_probabilities_and_predictions() -> None:
-    """Na nesaturovaném vstupu je skóre logit knihovní pravděpodobnosti."""
+    """Knihovní orákulum platí i pro nulové skóre a malé kladné log-odds pod jedničkou."""
     features = csr_matrix([[1.0, 3.0], [2.0, 4.0], [3.0, 1.0], [4.0, 2.0]])
     labels = [False, False, True, True]
     reference = ComplementNB().fit(features, labels)
     model = ComplementNbLogOdds().fit(features, labels)
-    probabilities = reference.predict_proba(features)
+    evaluated = csr_matrix([
+        [1.0, 3.0],
+        [2.0, 4.0],
+        [3.0, 1.0],
+        [4.0, 2.0],
+        [0.0, 0.0],
+        [0.1, 0.0],
+    ])
+    probabilities = reference.predict_proba(evaluated)
 
-    np.testing.assert_array_equal(model.predict(features), reference.predict(features))
+    np.testing.assert_array_equal(
+        model.predict(evaluated), reference.predict(evaluated)
+    )
     np.testing.assert_allclose(
-        model.decision_function(features),
+        model.decision_function(evaluated),
         np.log(probabilities[:, 1]) - np.log(probabilities[:, 0]),
     )
     assert not hasattr(model, "predict_proba")
