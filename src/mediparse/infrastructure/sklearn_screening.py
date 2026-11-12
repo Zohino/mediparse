@@ -46,6 +46,19 @@ class Lsa:
     seed: Seed
 
 
+def screening_lsa(
+    families: Sequence[ClassifierFamily], components: int, seed: Seed
+) -> Lsa | None:
+    """Připraví redukci pouze pro screening obsahující rodinu nad LSA.
+
+    Returns:
+        Komponenty a seed LSA pro LightGBM, jinak žádná redukce.
+    """
+    if ClassifierFamily.LIGHTGBM_LSA in families:
+        return Lsa(components, seed)
+    return None
+
+
 @dataclass(frozen=True)
 class ScreeningFeatures:
     """Řídká a případně redukovaná reprezentace stejných zpráv foldu."""

@@ -15,7 +15,6 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
 from mediparse.application.classical_screening import ClassicalScreening
-from mediparse.domain.classical_screening import ClassifierFamily
 from mediparse.domain.environment import Environment
 from mediparse.domain.run_manifest import ScreeningManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
@@ -35,9 +34,9 @@ from mediparse.infrastructure.screening_table import (
 )
 from mediparse.infrastructure.sklearn_metrics import SklearnScorer
 from mediparse.infrastructure.sklearn_screening import (
-    Lsa,
     SklearnThresholdTuner,
     TfidfFeaturizer,
+    screening_lsa,
 )
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.source_revision import revision_source
@@ -132,9 +131,7 @@ def run(  # ruff: ignore[too-many-arguments] - composition root předává expli
         partitioner=StratifiedGroupFolds(),
         featurizer=TfidfFeaturizer(
             normalization,
-            Lsa(screening.lsa_components, screening.seed)
-            if ClassifierFamily.LIGHTGBM_LSA in screening.families
-            else None,
+            screening_lsa(screening.families, screening.lsa_components, screening.seed),
         ),
         tuner=SklearnThresholdTuner(),
         scorer=SklearnScorer(),

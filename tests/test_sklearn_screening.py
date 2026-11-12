@@ -27,6 +27,7 @@ from mediparse.infrastructure.sklearn_screening import (
     SklearnThresholdTuner,
     TfidfFeaturizer,
     classifier_estimator,
+    screening_lsa,
     threshold_splits,
 )
 from tests.model_support import OVERLAPPING, separable_notes
@@ -530,3 +531,18 @@ def test_tuner_passes_seed_to_estimator_factory() -> None:
     )
 
     assert received == [(ClassifierFamily.LOGREG, 13)]
+
+
+@pytest.mark.parametrize(
+    ("families", "expected"),
+    [
+        ((ClassifierFamily.LOGREG, ClassifierFamily.LIGHTGBM_LSA), Lsa(7, 13)),
+        ((ClassifierFamily.COMPLEMENT_NB, ClassifierFamily.NB_SVM), None),
+    ],
+)
+def test_screening_lsa_is_prepared_only_for_families_that_need_it(
+    families: tuple[ClassifierFamily, ...],
+    expected: Lsa | None,
+) -> None:
+    """LightGBM ve směsi rodin dostane komponenty a seed; ostatní rodiny LSA nepotřebují."""
+    assert screening_lsa(families, 7, 13) == expected
