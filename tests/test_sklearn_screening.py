@@ -157,20 +157,19 @@ def test_lightgbm_repeats_nonconstant_scores_and_threshold() -> None:
     spec = VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1))
     features, _ = TfidfFeaturizer(None, Lsa(8, 7)).fit_transform(spec, texts, texts)
     repeated, _ = TfidfFeaturizer(None, Lsa(8, 7)).fit_transform(spec, texts, texts)
-    changed, _ = TfidfFeaturizer(None, Lsa(8, 11)).fit_transform(spec, texts, texts)
     subjects = list(range(len(labels)))
     tuner = SklearnThresholdTuner()
     first = tuner.fit(ClassifierFamily.LIGHTGBM_LSA, features, labels, subjects, 3, 7)
     second = tuner.fit(ClassifierFamily.LIGHTGBM_LSA, repeated, labels, subjects, 3, 7)
     different = tuner.fit(
-        ClassifierFamily.LIGHTGBM_LSA, changed, labels, subjects, 3, 11
+        ClassifierFamily.LIGHTGBM_LSA, features, labels, subjects, 3, 11
     )
 
     predictions = first.classify(features)
     assert len({prediction.score for prediction in predictions}) > 1
     assert second.classify(repeated) == predictions
     assert second.threshold == first.threshold
-    assert different.classify(changed) != predictions
+    assert different.classify(features) != predictions
     assert first.converged
     assert second.converged
     assert different.converged
@@ -515,3 +514,19 @@ def test_tuner_logs_family_and_peak_rss(
         )
 
     assert caplog.messages == ["Rodina logreg: peak RSS 1.50 GB."]
+
+
+def test_tuner_passes_seed_to_estimator_factory() -> None:
+    """Seed 13 předá továrně estimatoru, nezůstane jen u vnitřního dělení pacientů."""
+    features, labels, subjects = _word_training()
+    received: list[tuple[ClassifierFamily, Seed]] = []
+
+    def recording(family: ClassifierFamily, seed: Seed) -> BaseEstimator:
+        received.append((family, seed))
+        return LogisticRegression(random_state=seed)
+
+    SklearnThresholdTuner(estimator=recording).fit(
+        ClassifierFamily.LOGREG, features, labels, subjects, 3, 13
+    )
+
+    assert received == [(ClassifierFamily.LOGREG, 13)]
