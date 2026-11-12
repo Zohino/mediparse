@@ -100,10 +100,7 @@ class ParquetNoteTable:
         return tuple(
             self._note(row)
             for batch in self._batches()
-            for row in batch.filter(
-                # PyArrow generuje výpočetní funkce za běhu, statický analyzátor je nevidí.
-                pc.is_in(batch.column("subject_id"), value_set=selected)  # ty: ignore[unresolved-attribute]
-            ).to_pylist()
+            for row in batch.filter(pc.field("subject_id").isin(selected)).to_pylist()
         )
 
     def _batches(self, columns: list[str] | None = None) -> Iterator[pa.RecordBatch]:
