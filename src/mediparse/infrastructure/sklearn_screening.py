@@ -13,12 +13,12 @@ from sklearn.decomposition import TruncatedSVD
 from sklearn.exceptions import ConvergenceWarning
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import TunedThresholdClassifierCV
-from sklearn.naive_bayes import ComplementNB
 from sklearn.pipeline import make_pipeline
 from sklearn.svm import LinearSVC
 
 from mediparse.domain.classical_screening import ClassifierFamily
 from mediparse.domain.evaluation import Classification
+from mediparse.infrastructure.complement_nb import ComplementNbLogOdds
 from mediparse.infrastructure.nb_svm import NbSvmClassifier
 from mediparse.infrastructure.sklearn_classifier import ensure_tokens, tfidf_vectorizer
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
@@ -84,7 +84,7 @@ class ClassifierFactory:
         """
         match family:
             case ClassifierFamily.COMPLEMENT_NB:
-                return ComplementNB()
+                return ComplementNbLogOdds()
             case ClassifierFamily.LOGREG:
                 return LogisticRegression()
             case ClassifierFamily.LINEAR_SVM:
