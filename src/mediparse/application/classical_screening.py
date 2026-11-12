@@ -101,7 +101,7 @@ class ClassicalScreening[F]:
             Velikost vývojové části a provenance původního splitu.
 
         Raises:
-            InvalidInputError: Zpráva je mimo split, vývojová část nemá dost
+            InvalidInputError: Pacient tabulky je mimo split, vývojová část nemá dost
                 pacientů v každé třídě, některý test foldu nesplňuje ``MIN_CELL``
                 nebo trénink foldu nemá dost pacientů pro vnitřní CV prahu.
         """

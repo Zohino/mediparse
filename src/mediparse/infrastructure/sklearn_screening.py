@@ -18,7 +18,7 @@ from sklearn.svm import LinearSVC
 from mediparse.domain.classical_screening import ClassifierFamily
 from mediparse.domain.evaluation import Classification
 from mediparse.infrastructure.complement_nb import ComplementNbLogOdds
-from mediparse.infrastructure.machine_hardware import peak_rss_bytes
+from mediparse.infrastructure.machine_hardware import peak_rss_gb
 from mediparse.infrastructure.nb_svm import NbSvmClassifier
 from mediparse.infrastructure.sklearn_classifier import ensure_tokens, tfidf_vectorizer
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
@@ -118,13 +118,13 @@ class TfidfFeaturizer:
             test_lsa = svd.transform(test_features)
         logger.info(
             "Vektorizér %s: %d trénovacích a %d testovacích zpráv, %d příznaků, "
-            "%d nenulových hodnot, peak RSS %.2f GB.",
+            "%d nenulových hodnot, %s.",
             spec.name,
             len(train),
             len(test),
             len(vectorizer.vocabulary_),
             features.nnz,
-            peak_rss_bytes() / 1_000_000_000,
+            peak_rss_gb(),
         )
         return ScreeningFeatures(features, train_lsa), ScreeningFeatures(
             test_features, test_lsa
@@ -249,9 +249,7 @@ class SklearnThresholdTuner:
         converged = not any(
             issubclass(item.category, ConvergenceWarning) for item in caught
         )
-        logger.info(
-            "Rodina %s: peak RSS %.2f GB.", family, peak_rss_bytes() / 1_000_000_000
-        )
+        logger.info("Rodina %s: %s.", family, peak_rss_gb())
         return SklearnTunedClassifier(
             family, model, float(model.best_threshold_), converged
         )

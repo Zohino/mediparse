@@ -15,6 +15,7 @@ from mediparse.infrastructure.machine_hardware import (
     cpu_model,
     machine_hardware,
     peak_rss_bytes,
+    peak_rss_gb,
 )
 
 
@@ -97,3 +98,13 @@ def test_peak_rss_converts_linux_kib_to_bytes(monkeypatch: pytest.MonkeyPatch) -
     expected_bytes = 1_572_864
     assert peak_rss_bytes() == expected_bytes
     usage.assert_called_once_with(resource.RUSAGE_SELF)
+
+
+def test_peak_rss_gb_uses_decimal_gigabytes(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Jeden a půl miliardy bajtů se formátuje jako 1,50 desítkového GB."""
+    monkeypatch.setattr(
+        "mediparse.infrastructure.machine_hardware.peak_rss_bytes",
+        lambda: 1_500_000_000,
+    )
+
+    assert peak_rss_gb() == "peak RSS 1.50 GB"

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+
 import numpy as np
 import pytest
 from scipy.sparse import csr_matrix
@@ -61,7 +63,8 @@ def test_fit_rejects_one_class_and_invalid_shape(
 
 def test_fit_rejects_more_than_two_classes() -> None:
     """Obal je binární i pro labely mimo bool."""
-    with pytest.raises(ValueError, match="právě dvě třídy"):
+    message = "Complement NB vyžaduje právě dvě třídy."
+    with pytest.raises(ValueError, match=f"^{re.escape(message)}$"):
         ComplementNbLogOdds().fit(
             csr_matrix([[1.0], [2.0], [3.0]]), np.array([0, 1, 2])
         )

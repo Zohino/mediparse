@@ -1,4 +1,4 @@
-"""Hardware stroje ze systémových údajů Linuxu."""
+"""Hardware stroje a spotřeba paměti procesu ze systémových údajů Linuxu."""
 
 from __future__ import annotations
 
@@ -73,3 +73,12 @@ def peak_rss_bytes() -> int:
         Peak RSS v bajtech; Linux uvádí ru_maxrss v KiB.
     """
     return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024
+
+
+def peak_rss_gb() -> str:
+    """Naformátuje nejvyšší RSS procesu v desítkových gigabajtech pro log.
+
+    Returns:
+        Text ``peak RSS … GB`` se dvěma desetinnými místy; 1 GB = 1 000 000 000 bajtů.
+    """
+    return f"peak RSS {peak_rss_bytes() / 1_000_000_000:.2f} GB"

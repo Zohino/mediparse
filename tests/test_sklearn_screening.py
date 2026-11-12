@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import warnings
 from random import Random
 from typing import TYPE_CHECKING, Literal, Self, override
@@ -240,7 +241,8 @@ def test_features_without_lsa_reject_lightgbm_and_share_sparse() -> None:
     assert train.lsa is None
     for family in ClassifierFamily:
         if family is ClassifierFamily.LIGHTGBM_LSA:
-            with pytest.raises(ValueError, match="LSA"):
+            message = "LightGBM vyžaduje příznaky LSA."
+            with pytest.raises(ValueError, match=f"^{re.escape(message)}$"):
                 train.for_family(family)
         else:
             assert train.for_family(family) is train.sparse
@@ -443,8 +445,8 @@ def test_featurizer_logs_only_name_and_manual_counts(
 ) -> None:
     """Log nese ruční počty zpráv, příznaků, nnz a pevný peak bez vstupních tokenů."""
     monkeypatch.setattr(
-        "mediparse.infrastructure.sklearn_screening.peak_rss_bytes",
-        lambda: 1_500_000_000,
+        "mediparse.infrastructure.sklearn_screening.peak_rss_gb",
+        lambda: "peak RSS 1.50 GB",
     )
     with caplog.at_level("INFO", logger="mediparse.infrastructure.sklearn_screening"):
         TfidfFeaturizer(None).fit_transform(
@@ -504,8 +506,8 @@ def test_tuner_logs_family_and_peak_rss(
     """Dokončená buňka zaznamená jen rodinu a pevný celoživotní peak procesu."""
     features, labels, subjects = _word_training()
     monkeypatch.setattr(
-        "mediparse.infrastructure.sklearn_screening.peak_rss_bytes",
-        lambda: 1_500_000_000,
+        "mediparse.infrastructure.sklearn_screening.peak_rss_gb",
+        lambda: "peak RSS 1.50 GB",
     )
     caplog.clear()
 
