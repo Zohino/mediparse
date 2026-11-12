@@ -439,8 +439,13 @@ def test_tuner_detects_convergence_warning_in_each_fit_phase(phase: str) -> None
 
 def test_featurizer_logs_only_name_and_manual_counts(
     caplog: pytest.LogCaptureFixture,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Log nese ručně spočtené počty 2/1 zpráv a 3 příznaků, nikoli vstupní tokeny."""
+    """Log nese ruční počty zpráv, příznaků, nnz a pevný peak bez vstupních tokenů."""
+    monkeypatch.setattr(
+        "mediparse.infrastructure.sklearn_screening.peak_rss_bytes",
+        lambda: 1_500_000_000,
+    )
     with caplog.at_level("INFO", logger="mediparse.infrastructure.sklearn_screening"):
         TfidfFeaturizer(None).fit_transform(
             VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
@@ -449,7 +454,7 @@ def test_featurizer_logs_only_name_and_manual_counts(
         )
 
     assert caplog.messages == [
-        "Vektorizér word: 2 trénovacích a 1 testovacích zpráv, 3 příznaků."
+        "Vektorizér word: 2 trénovacích a 1 testovacích zpráv, 3 příznaků, 3 nenulových hodnot, peak RSS 1.50 GB."
     ]
     assert all(
         token not in caplog.text for token in ("quartz", "amber", "opal", "jasper")
@@ -490,3 +495,23 @@ def test_featurizer_uses_spec_analyzer(
         ["abc"],
     )
     assert train.sparse.shape[1] == expected_features
+
+
+def test_tuner_logs_family_and_peak_rss(
+    caplog: pytest.LogCaptureFixture,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Dokončená buňka zaznamená jen rodinu a pevný celoživotní peak procesu."""
+    features, labels, subjects = _word_training()
+    monkeypatch.setattr(
+        "mediparse.infrastructure.sklearn_screening.peak_rss_bytes",
+        lambda: 1_500_000_000,
+    )
+    caplog.clear()
+
+    with caplog.at_level("INFO", logger="mediparse.infrastructure.sklearn_screening"):
+        SklearnThresholdTuner().fit(
+            ClassifierFamily.LOGREG, features, labels, subjects, 3, 7
+        )
+
+    assert caplog.messages == ["Rodina logreg: peak RSS 1.50 GB."]

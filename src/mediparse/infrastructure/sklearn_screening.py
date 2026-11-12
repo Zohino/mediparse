@@ -18,6 +18,7 @@ from sklearn.svm import LinearSVC
 from mediparse.domain.classical_screening import ClassifierFamily
 from mediparse.domain.evaluation import Classification
 from mediparse.infrastructure.complement_nb import ComplementNbLogOdds
+from mediparse.infrastructure.machine_hardware import peak_rss_bytes
 from mediparse.infrastructure.nb_svm import NbSvmClassifier
 from mediparse.infrastructure.sklearn_classifier import ensure_tokens, tfidf_vectorizer
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
@@ -92,13 +93,6 @@ class TfidfFeaturizer:
         )
         ensure_tokens(vectorizer, train)
         features = vectorizer.fit_transform(list(train))
-        logger.info(
-            "Vektorizér %s: %d trénovacích a %d testovacích zpráv, %d příznaků.",
-            spec.name,
-            len(train),
-            len(test),
-            len(vectorizer.vocabulary_),
-        )
         test_features = vectorizer.transform(list(test))
         train_lsa, test_lsa = None, None
         if self.lsa is not None:
@@ -109,6 +103,16 @@ class TfidfFeaturizer:
             # validací, test vnějšího foldu do učení redukce nevstoupí.
             train_lsa = svd.fit_transform(features)
             test_lsa = svd.transform(test_features)
+        logger.info(
+            "Vektorizér %s: %d trénovacích a %d testovacích zpráv, %d příznaků, "
+            "%d nenulových hodnot, peak RSS %.2f GB.",
+            spec.name,
+            len(train),
+            len(test),
+            len(vectorizer.vocabulary_),
+            features.nnz,
+            peak_rss_bytes() / 1_000_000_000,
+        )
         return ScreeningFeatures(features, train_lsa), ScreeningFeatures(
             test_features, test_lsa
         )
@@ -231,6 +235,9 @@ class SklearnThresholdTuner:
                 )
         converged = not any(
             issubclass(item.category, ConvergenceWarning) for item in caught
+        )
+        logger.info(
+            "Rodina %s: peak RSS %.2f GB.", family, peak_rss_bytes() / 1_000_000_000
         )
         return SklearnTunedClassifier(
             family, model, float(model.best_threshold_), converged

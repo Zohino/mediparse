@@ -2,14 +2,20 @@
 
 import os
 import platform
+import resource
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import Mock
 
 import pytest
 
 from mediparse.domain.environment import GpuDevice
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.machine_hardware import cpu_model, machine_hardware
+from mediparse.infrastructure.machine_hardware import (
+    cpu_model,
+    machine_hardware,
+    peak_rss_bytes,
+)
 
 
 def test_first_cpu_model_is_stripped() -> None:
@@ -81,3 +87,13 @@ def test_unreadable_cpuinfo_records_architecture(
     )
     monkeypatch.setattr(platform, "machine", lambda: "synthetic-arch")
     assert machine_hardware(gpus=()).cpu_model == "synthetic-arch"
+
+
+def test_peak_rss_converts_linux_kib_to_bytes(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Linux ru_maxrss=1536 KiB znamená ručně spočtených 1572864 bajtů."""
+    usage = Mock(return_value=SimpleNamespace(ru_maxrss=1536))
+    monkeypatch.setattr(resource, "getrusage", usage)
+
+    expected_bytes = 1_572_864
+    assert peak_rss_bytes() == expected_bytes
+    usage.assert_called_once_with(resource.RUSAGE_SELF)

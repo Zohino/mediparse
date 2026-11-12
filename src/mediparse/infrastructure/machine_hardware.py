@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import platform
+import resource
 from pathlib import Path
 
 from pydantic import ValidationError
@@ -63,3 +64,12 @@ def machine_hardware(gpus: tuple[GpuDevice, ...]) -> Hardware:
         })
     except ValidationError as error:
         raise InvalidInputError(unknown_hardware) from error
+
+
+def peak_rss_bytes() -> int:
+    """Vrátí nejvyšší RSS procesu za celý jeho život podle Linuxu.
+
+    Returns:
+        Peak RSS v bajtech; Linux uvádí ru_maxrss v KiB.
+    """
+    return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024
