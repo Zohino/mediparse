@@ -13,12 +13,12 @@ from sklearn.decomposition import TruncatedSVD
 from sklearn.exceptions import ConvergenceWarning
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import TunedThresholdClassifierCV
-from sklearn.naive_bayes import ComplementNB
-from sklearn.pipeline import make_pipeline
 from sklearn.svm import LinearSVC
 
 from mediparse.domain.classical_screening import ClassifierFamily
 from mediparse.domain.evaluation import Classification
+from mediparse.infrastructure.complement_nb import ComplementNbLogOdds
+from mediparse.infrastructure.machine_hardware import peak_rss_gb
 from mediparse.infrastructure.nb_svm import NbSvmClassifier
 from mediparse.infrastructure.sklearn_classifier import ensure_tokens, tfidf_vectorizer
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
@@ -39,18 +39,64 @@ logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
+class Lsa:
+    """Počet komponent a seed redukce sdílené vnějším foldem."""
+
+    components: int
+    seed: Seed
+
+
+def screening_lsa(
+    families: Sequence[ClassifierFamily], components: int, seed: Seed
+) -> Lsa | None:
+    """Připraví redukci pouze pro screening obsahující rodinu nad LSA.
+
+    Returns:
+        Komponenty a seed LSA pro LightGBM, jinak žádná redukce.
+    """
+    if ClassifierFamily.LIGHTGBM_LSA in families:
+        return Lsa(components, seed)
+    return None
+
+
+@dataclass(frozen=True)
+class ScreeningFeatures:
+    """Řídká a případně redukovaná reprezentace stejných zpráv foldu."""
+
+    sparse: csr_matrix
+    lsa: ndarray | None
+
+    def for_family(self, family: ClassifierFamily) -> csr_matrix | ndarray:
+        """Vybere tutéž reprezentaci pro fit i klasifikaci rodiny.
+
+        Returns:
+            LSA pro LightGBM, jinak původní řídké TF-IDF.
+
+        Raises:
+            ValueError: LightGBM nedostal LSA (chyba složení screeningu).
+        """
+        if family is ClassifierFamily.LIGHTGBM_LSA:
+            if self.lsa is None:
+                msg = "LightGBM vyžaduje příznaky LSA."
+                raise ValueError(msg)
+            return self.lsa
+        return self.sparse
+
+
+@dataclass(frozen=True)
 class TfidfFeaturizer:
     """Příznaky se společným předzpracováním fitované jen na tréninkových textech."""
 
     normalization: TextNormalization | None
+    lsa: Lsa | None = None
 
     def fit_transform(
         self, spec: VectorizerSpec, train: Sequence[str], test: Sequence[str]
-    ) -> tuple[csr_matrix, csr_matrix]:
-        """Fitne TF-IDF na tréninku a transformuje odložený test.
+    ) -> tuple[ScreeningFeatures, ScreeningFeatures]:
+        """Fitne TF-IDF a volitelnou LSA na vnějším tréninku a transformuje test.
 
         Returns:
-            Matice příznaků tréninku a testu v pořadí vstupů.
+            Obě reprezentace tréninku a testu v pořadí vstupů.
 
         Raises:
             InvalidInputError: Z tréninkových textů nevznikne žádný příznak.
@@ -60,50 +106,56 @@ class TfidfFeaturizer:
         )
         ensure_tokens(vectorizer, train)
         features = vectorizer.fit_transform(list(train))
+        test_features = vectorizer.transform(list(test))
+        train_lsa, test_lsa = None, None
+        if self.lsa is not None:
+            svd = TruncatedSVD(
+                n_components=self.lsa.components, random_state=self.lsa.seed
+            )
+            # Jednou na vnější fold jako TF-IDF: vnitřní CV prahu vidí SVD ze svých
+            # validací, test vnějšího foldu do učení redukce nevstoupí.
+            train_lsa = svd.fit_transform(features)
+            test_lsa = svd.transform(test_features)
         logger.info(
-            "Vektorizér %s: %d trénovacích a %d testovacích zpráv, %d příznaků.",
+            "Vektorizér %s: %d trénovacích a %d testovacích zpráv, %d příznaků, "
+            "%d nenulových hodnot, %s.",
             spec.name,
             len(train),
             len(test),
             len(vectorizer.vocabulary_),
+            features.nnz,
+            peak_rss_gb(),
         )
-        return features, vectorizer.transform(list(test))
+        return ScreeningFeatures(features, train_lsa), ScreeningFeatures(
+            test_features, test_lsa
+        )
 
 
-@dataclass(frozen=True)
-class ClassifierFactory:
-    """Továrna rodin s explicitním počtem komponent LSA z configu screeningu."""
+def classifier_estimator(family: ClassifierFamily, seed: Seed) -> BaseEstimator:
+    """Vytvoří estimator rodiny; případnou redukci už provedl featurizér.
 
-    lsa_components: int
-
-    def __call__(self, family: ClassifierFamily, seed: Seed) -> BaseEstimator:
-        """Vytvoří estimator rodiny, LSA se učí uvnitř každého fitu.
-
-        Returns:
-            Nenatrénovaný estimator s výchozími hyperparametry rodiny.
-        """
-        match family:
-            case ClassifierFamily.COMPLEMENT_NB:
-                return ComplementNB()
-            case ClassifierFamily.LOGREG:
-                return LogisticRegression()
-            case ClassifierFamily.LINEAR_SVM:
-                return LinearSVC(random_state=seed)
-            case ClassifierFamily.NB_SVM:
-                return NbSvmClassifier(random_state=seed)
-            case ClassifierFamily.LIGHTGBM_LSA:
-                return make_pipeline(
-                    TruncatedSVD(n_components=self.lsa_components, random_state=seed),
-                    # LightGBM doporučuje force_row_wise pro stabilitu mezi počty vláken.
-                    LGBMClassifier(
-                        random_state=seed,
-                        deterministic=True,
-                        force_row_wise=True,
-                        verbose=-1,
-                    ),
-                )
-            case _:
-                assert_never(family)
+    Returns:
+        Nenatrénovaný estimator s výchozími hyperparametry rodiny.
+    """
+    match family:
+        case ClassifierFamily.COMPLEMENT_NB:
+            return ComplementNbLogOdds()
+        case ClassifierFamily.LOGREG:
+            return LogisticRegression()
+        case ClassifierFamily.LINEAR_SVM:
+            return LinearSVC(random_state=seed)
+        case ClassifierFamily.NB_SVM:
+            return NbSvmClassifier(random_state=seed)
+        case ClassifierFamily.LIGHTGBM_LSA:
+            # LightGBM doporučuje force_row_wise pro stabilitu mezi počty vláken.
+            return LGBMClassifier(
+                random_state=seed,
+                deterministic=True,
+                force_row_wise=True,
+                verbose=-1,
+            )
+        case _:
+            assert_never(family)
 
 
 def threshold_splits(
@@ -136,21 +188,23 @@ def threshold_splits(
 class SklearnTunedClassifier:
     """Klasifikátor s prahem maximalizujícím F1 vnitřní CV."""
 
+    family: ClassifierFamily
     model: TunedThresholdClassifierCV
     threshold: float
     converged: bool
 
-    def classify(self, features: csr_matrix) -> tuple[Classification, ...]:
+    def classify(self, features: ScreeningFeatures) -> tuple[Classification, ...]:
         """Predikuje při zvoleném prahu a vrací odezvu na stejné škále.
 
         Returns:
             Labely tuneru a pravděpodobnosti, případně rozhodovací skóre.
         """
-        labels = self.model.predict(features)
+        selected = features.for_family(self.family)
+        labels = self.model.predict(selected)
         if hasattr(self.model.estimator_, "predict_proba"):
-            scores = self.model.predict_proba(features)[:, 1]
+            scores = self.model.predict_proba(selected)[:, 1]
         else:
-            scores = self.model.decision_function(features)
+            scores = self.model.decision_function(selected)
         return tuple(
             Classification(bool(label), float(score))
             for label, score in zip(labels, scores, strict=True)
@@ -161,12 +215,12 @@ class SklearnTunedClassifier:
 class SklearnThresholdTuner:
     """Volba prahu a refit s evidencí nekonvergence všech vnitřních fitů."""
 
-    estimator: Callable[[ClassifierFamily, Seed], BaseEstimator]
+    estimator: Callable[[ClassifierFamily, Seed], BaseEstimator] = classifier_estimator
 
     def fit(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
         self,
         family: ClassifierFamily,
-        features: csr_matrix,
+        features: ScreeningFeatures,
         labels: Sequence[bool],
         subjects: Sequence[SubjectId],
         folds: int,
@@ -185,7 +239,7 @@ class SklearnThresholdTuner:
         )
         with warnings.catch_warnings(record=True) as caught:
             warnings.simplefilter("always", ConvergenceWarning)
-            model.fit(features, list(labels))
+            model.fit(features.for_family(family), list(labels))
         # record=True zachytí i jiné kategorie; jejich diagnostika nesmí v reálném běhu zmizet.
         for item in caught:
             if not issubclass(item.category, ConvergenceWarning):
@@ -195,4 +249,7 @@ class SklearnThresholdTuner:
         converged = not any(
             issubclass(item.category, ConvergenceWarning) for item in caught
         )
-        return SklearnTunedClassifier(model, float(model.best_threshold_), converged)
+        logger.info("Rodina %s: %s.", family, peak_rss_gb())
+        return SklearnTunedClassifier(
+            family, model, float(model.best_threshold_), converged
+        )

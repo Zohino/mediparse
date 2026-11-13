@@ -169,3 +169,78 @@ def test_written_file_is_zstd_compressed(tmp_path: Path) -> None:
     ])
 
     assert pq.ParquetFile(path).metadata.row_group(0).column(0).compression == "ZSTD"
+
+
+@pytest.mark.parametrize("batch_size", [2, 100])
+def test_patient_reads_preserve_manual_selection(
+    tmp_path: Path, batch_size: int
+) -> None:
+    """Ruční výběr pacientů 1 a 2 zachová zprávy 1, 2, 3 a 5 přes hranice dávek."""
+    notes = tuple(
+        InputNote(
+            f"{subject}-DS-{index}",
+            subject,
+            Language.EN,
+            f"text {index}",
+            frozenset({Diagnosis.CKD}) if index % 2 else frozenset(),
+        )
+        for index, subject in enumerate((1, 1, 2, 3, 2), start=1)
+    )
+    table = ParquetNoteTable(tmp_path / "notes.parquet", batch_size=batch_size)
+    table.write(notes)
+
+    assert table.subjects() == frozenset({1, 2, 3})
+    assert table.read_patients(frozenset({2, 1})) == (
+        notes[0],
+        notes[1],
+        notes[2],
+        notes[4],
+    )
+    assert table.read() == notes
+    assert table.read_patients(frozenset()) == ()
+
+
+@pytest.mark.parametrize("method", ["subjects", "read_patients"])
+@pytest.mark.parametrize("invalid", ["missing", "schema", "corrupt"])
+def test_patient_reads_reject_invalid_file(
+    tmp_path: Path, method: str, invalid: str
+) -> None:
+    """Obě pacientské metody překládají vadný vstup na doménovou chybu."""
+    path = tmp_path / "notes.parquet"
+    if invalid == "schema":
+        pq.write_table(pa.table({"subject_id": [1]}), path)
+    elif invalid == "corrupt":
+        path.write_text("není parquet", encoding="utf-8")
+    messages = {
+        "missing": f"Soubor {path} neexistuje.",
+        "schema": (
+            f"Soubor {path} neodpovídá schématu: čekané sloupce "
+            "note_id, subject_id, language, text, diabetes, copd, ckd, "
+            "pneumonia, atrial_fibrillation."
+        ),
+        "corrupt": (
+            f"Soubor {path} neodpovídá schématu: Parquet magic bytes not found in footer. "
+            "Either the file is corrupted or this is not a parquet file."
+        ),
+    }
+    table = ParquetNoteTable(path)
+
+    read = (
+        table.subjects
+        if method == "subjects"
+        else lambda: table.read_patients(frozenset({1}))
+    )
+    with pytest.raises(InvalidInputError, match=f"^{re.escape(messages[invalid])}$"):
+        read()
+
+
+def test_patient_read_validates_only_selected_identities(tmp_path: Path) -> None:
+    """Nesoulad identity se odmítne až při čtení zpráv vybraného pacienta."""
+    path = tmp_path / "notes.parquet"
+    _write_row(path, note_id="2-DS-1")
+    table = ParquetNoteTable(path)
+
+    assert table.subjects() == frozenset({1})
+    assert table.read_patients(frozenset({2})) == ()
+    with pytest.raises(InvalidInputError, match="note_id nepatří"):
+        table.read_patients(frozenset({1}))

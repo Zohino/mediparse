@@ -14,7 +14,7 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.seed import Seed
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    from collections.abc import Collection, Sequence
 
     from mediparse.domain.identity import SubjectId
     from mediparse.domain.input_note import InputNote
@@ -133,33 +133,23 @@ class Split:
         if not 0 <= fold < len(self.folds):
             msg = f"Fold {fold} neexistuje, počet foldů splitu: {len(self.folds)}."
             raise InvalidInputError(msg)
-        self._ensure_covered(notes)
+        self.ensure_covers({note.subject_id for note in notes})
         evaluation = frozenset().union(*self.folds)
         test = tuple(note for note in notes if note.subject_id in self.folds[fold])
         train_subjects = evaluation - self.folds[fold]
         train = tuple(note for note in notes if note.subject_id in train_subjects)
         return Holdout(fold, train, test)
 
-    def development_notes(self, notes: Sequence[InputNote]) -> tuple[InputNote, ...]:
-        """Vrátí zprávy vývojových pacientů v pořadí vstupu.
-
-        Args:
-            notes: Zprávy, jejichž pacienti musí být všichni ve splitu.
-
-        Returns:
-            Zprávy vyčleněné pro výběr modelů mimo evaluaci.
+    def ensure_covers(self, subjects: Collection[SubjectId]) -> None:
+        """Ověří, že všichni pacienti patří do foldů nebo vývojové části.
 
         Raises:
-            InvalidInputError: Zpráva patří pacientovi mimo split.
+            InvalidInputError: Některý pacient není ve splitu; hlásí počet různých pacientů.
         """
-        self._ensure_covered(notes)
-        return tuple(note for note in notes if note.subject_id in self.development)
-
-    def _ensure_covered(self, notes: Sequence[InputNote]) -> None:
         covered = frozenset().union(*self.folds, self.development)
-        outside = sum(note.subject_id not in covered for note in notes)
+        outside = set(subjects) - covered
         if outside:
-            msg = f"Zprávy pacientů mimo split: {outside}."
+            msg = f"Pacienti mimo split: {len(outside)}."
             raise InvalidInputError(msg)
 
 

@@ -12,7 +12,8 @@ from mediparse.domain.section_headers import (
 )
 
 if TYPE_CHECKING:
-    from mediparse.application.ports.experiment import InputTable
+    from mediparse.application.ports.experiment import PatientNoteTable
+    from mediparse.domain.identity import SubjectId
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.section_headers import SectionLexicon
 
@@ -24,7 +25,7 @@ class DiagnosticStripTable:
     Trénink i inference ji skládají stejně, aby klasifikovaly týž text.
     """
 
-    table: InputTable
+    table: PatientNoteTable
     lexicon: SectionLexicon
 
     def read(self) -> tuple[InputNote, ...]:
@@ -38,6 +39,24 @@ class DiagnosticStripTable:
                 neodstranil.
         """
         return tuple(self._stripped(note) for note in self.table.read())
+
+    def subjects(self) -> frozenset[SubjectId]:
+        """Vrátí pacienty obalené tabulky bez čtení textů.
+
+        Returns:
+            Všichni pacienti zdroje.
+        """
+        return self.table.subjects()
+
+    def read_patients(self, subjects: frozenset[SubjectId]) -> tuple[InputNote, ...]:
+        """Přečte a stripuje jen zprávy vybraných pacientů v pořadí tabulky.
+
+        Returns:
+            Vybrané zprávy se změněným textem.
+        """
+        return tuple(
+            self._stripped(note) for note in self.table.read_patients(subjects)
+        )
 
     def _stripped(self, note: InputNote) -> InputNote:
         if note.language is not LEXICON_LANGUAGE:

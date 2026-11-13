@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from mediparse.application.ports.experiment import (
-        InputTable,
+        PatientNoteTable,
         PatientPartitioner,
         Scorer,
         SplitSource,
@@ -82,7 +82,7 @@ class ResultSink(Protocol):
 class ClassicalScreening[F]:
     """Provede mřížku klasického stupně na vývojové části původního splitu."""
 
-    table: InputTable
+    table: PatientNoteTable
     split: SplitSource
     partitioner: PatientPartitioner
     featurizer: Featurizer[F]
@@ -101,12 +101,13 @@ class ClassicalScreening[F]:
             Velikost vývojové části a provenance původního splitu.
 
         Raises:
-            InvalidInputError: Zpráva je mimo split, vývojová část nemá dost
+            InvalidInputError: Pacient tabulky je mimo split, vývojová část nemá dost
                 pacientů v každé třídě, některý test foldu nesplňuje ``MIN_CELL``
                 nebo trénink foldu nemá dost pacientů pro vnitřní CV prahu.
         """
         shared = self.split.read()
-        notes = shared.split.development_notes(self.table.read())
+        shared.split.ensure_covers(self.table.subjects())
+        notes = self.table.read_patients(shared.split.development)
         holdouts = _development_holdouts(notes, config, self.partitioner)
         rows: list[ScreeningResult] = []
         for holdout in holdouts:
