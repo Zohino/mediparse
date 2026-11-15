@@ -26,8 +26,8 @@ class DecisionRule(BaseModel):
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 
     margin: Annotated[float, Field(gt=0, lt=1)]
-    latency_ratio: Annotated[float, Field(ge=1)]
-    training_cost_ratio: Annotated[float, Field(ge=1)]
+    min_latency_ratio: Annotated[float, Field(ge=1)]
+    min_training_cost_ratio: Annotated[float, Field(ge=1)]
     confidence: Annotated[float, Field(gt=0, lt=1)]
     bootstrap_resamples: Annotated[int, Field(ge=1000)]
     min_evaluation_notes: PositiveInt
@@ -70,6 +70,6 @@ class DecisionRule(BaseModel):
             Zda alespoň jeden poměr dosahuje preregistrovaného prahu.
         """
         return (
-            latency_ratio >= self.latency_ratio
-            or training_cost_ratio >= self.training_cost_ratio
+            latency_ratio >= self.min_latency_ratio
+            or training_cost_ratio >= self.min_training_cost_ratio
         )

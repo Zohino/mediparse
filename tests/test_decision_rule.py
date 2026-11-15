@@ -27,8 +27,8 @@ def test_repository_config_matches_protocol(rule: DecisionRule) -> None:
     """Soubor obsahuje přesně hodnoty schválené před evaluací."""
     assert rule.model_dump() == {
         "margin": 0.02,
-        "latency_ratio": 10.0,
-        "training_cost_ratio": 10.0,
+        "min_latency_ratio": 10.0,
+        "min_training_cost_ratio": 10.0,
         "confidence": 0.95,
         "bootstrap_resamples": 2000,
         "min_evaluation_notes": 25000,
@@ -90,8 +90,8 @@ def test_is_cheaper(
     [
         ("margin", 0),
         ("margin", 1),
-        ("latency_ratio", 0.5),
-        ("training_cost_ratio", 0.5),
+        ("min_latency_ratio", 0.5),
+        ("min_training_cost_ratio", 0.5),
         ("confidence", 0),
         ("confidence", 1),
         ("bootstrap_resamples", 999),
