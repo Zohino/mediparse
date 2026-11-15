@@ -179,6 +179,8 @@ def test_invalid_config_is_rejected(
         (-0.014, 0.003, False),
         (-0.030, 0.006, True),
         (0.0, 0.0, False),
+        (-1.0, 0.0, False),
+        (1.0, 0.0, False),
     ],
 )
 def test_is_seed_sensitive(
@@ -190,7 +192,7 @@ def test_is_seed_sensitive(
 
 @pytest.mark.parametrize(
     ("difference", "seed_sd"),
-    [(0.0, -0.001), (0.0, math.nan), (1.5, 0.003)],
+    [(0.0, -0.001), (0.0, math.nan), (1.5, 0.003), (-1.5, 0.003)],
 )
 def test_seed_sensitivity_rejects_invalid_inputs(
     rule: DecisionRule, difference: float, seed_sd: float
