@@ -1,0 +1,9 @@
+{
+  "margin": 0.02,
+  "latency_ratio": 10.0,
+  "training_cost_ratio": 10.0,
+  "confidence": 0.95,
+  "bootstrap_resamples": 2000,
+  "min_evaluation_notes": 25000,
+  "seed": 0
+}
