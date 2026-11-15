@@ -76,9 +76,9 @@ class DecisionRule(BaseModel):
     (6P + 8E + 2LP) Core Ultra 9 185H; Intel, specifikace SKU 236849,
     ověřeno 2026-11-15. Maximum Turbo Power 115 W se nepoužije. Metoda
     per-core TDP vychází z Green Algorithms (Lannelongue a kol., 2021,
-    arXiv:2007.07610). Součet CPU-sekund přes 22 logických vláken s výkonem
-    na fyzické jádro spíš nadhodnocuje klasiku, tedy konzervativně vůči
-    hypotéze. Trénink na rozdílném HW se hodnotí jen popisně: GPU-h, CPU-h
+    arXiv:2007.07610). Směr odchylky odhadu vůči skutečné spotřebě není znám:
+    jednovláknová zátěž v turbu bere víc než 45/16 W, souběh dvou vláken
+    jednoho P-jádra méně. Trénink na rozdílném HW se hodnotí jen popisně: GPU-h, CPU-h
     a kWh včetně ladění do cenového verdiktu nevstupují.
     """
 
