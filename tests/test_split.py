@@ -61,20 +61,19 @@ def test_development_notes_are_outside_holdout() -> None:
     assert split.holdout(notes, 0) == Holdout(0, (notes[1],), (notes[0],))
 
 
-def test_development_notes_preserve_input_order() -> None:
-    """Pořadí [3a, 1a, 3b, 2a] dá jen [3a, 3b] vývojového pacienta 3."""
-    notes = _notes(3, 1, 3, 2)
+def test_ensure_covers_accepts_all_split_parts() -> None:
+    """Pokrytí přijímá pacienty všech foldů i vývojové části."""
     split = Split((frozenset({1}), frozenset({2})), development=frozenset({3}))
 
-    assert split.development_notes(notes) == (notes[0], notes[2])
+    split.ensure_covers([3, 1, 3, 2])
 
 
-def test_development_notes_reject_subject_outside_split() -> None:
-    """Pacient 4 mimo foldy i vývojovou část se odmítne s počtem zpráv."""
+def test_ensure_covers_counts_distinct_outside_patients() -> None:
+    """Opakované zprávy pacienta 4 a pacient 5 znamenají dva pacienty mimo split."""
     split = Split((frozenset({1}), frozenset({2})), development=frozenset({3}))
 
-    with pytest.raises(InvalidInputError, match=r"^Zprávy pacientů mimo split: 1\.$"):
-        split.development_notes(_notes(3, 1, 3, 2, 4))
+    with pytest.raises(InvalidInputError, match=r"^Pacienti mimo split: 2\.$"):
+        split.ensure_covers([3, 1, 3, 2, 4, 4, 5])
 
 
 def test_development_subject_in_fold_is_a_leak() -> None:
@@ -154,7 +153,7 @@ def test_note_of_subject_outside_split_is_invalid_input() -> None:
     split = Split((frozenset({1}), frozenset({2})), development=frozenset())
 
     with pytest.raises(
-        InvalidInputError, match=r"^Zprávy pacientů mimo split: 2\.$"
+        InvalidInputError, match=r"^Pacienti mimo split: 1\.$"
     ) as raised:
         split.holdout(_notes(1, 2, 987654, 987654), 0)
 

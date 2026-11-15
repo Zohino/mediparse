@@ -34,9 +34,9 @@ from mediparse.infrastructure.screening_table import (
 )
 from mediparse.infrastructure.sklearn_metrics import SklearnScorer
 from mediparse.infrastructure.sklearn_screening import (
-    ClassifierFactory,
     SklearnThresholdTuner,
     TfidfFeaturizer,
+    screening_lsa,
 )
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.source_revision import revision_source
@@ -129,8 +129,11 @@ def run(  # ruff: ignore[too-many-arguments] - composition root předává expli
         table=table,
         split=ParquetSplitTable(split),
         partitioner=StratifiedGroupFolds(),
-        featurizer=TfidfFeaturizer(normalization),
-        tuner=SklearnThresholdTuner(ClassifierFactory(screening.lsa_components)),
+        featurizer=TfidfFeaturizer(
+            normalization,
+            screening_lsa(screening.families, screening.lsa_components, screening.seed),
+        ),
+        tuner=SklearnThresholdTuner(),
         scorer=SklearnScorer(),
         results=ParquetScreeningTable(out),
         predictions=ParquetScreeningPredictions(predictions),

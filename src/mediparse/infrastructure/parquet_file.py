@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from contextlib import contextmanager
 from typing import TYPE_CHECKING, Final
 
 import pyarrow as pa
@@ -11,7 +12,7 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Sequence
+    from collections.abc import Generator, Iterator, Mapping, Sequence
     from pathlib import Path
 
     from mediparse.domain.note import NoteIdentityError
@@ -28,18 +29,44 @@ def read_table(path: Path, schema: pa.Schema) -> pa.Table:
     Raises:
         InvalidInputError: Soubor neexistuje, není parquet nebo má jiné schéma.
     """
-    try:
+    with _parquet_errors(path):
         table = pq.read_table(path)
+        _ensure_schema(path, table.schema, schema)
+    return table
+
+
+def iter_batches(
+    path: Path, schema: pa.Schema, *, columns: list[str] | None = None, batch_size: int
+) -> Iterator[pa.RecordBatch]:
+    """Proudově přečte dávky a před projekcí sloupců ověří celé schéma souboru.
+
+    Yields:
+        Dávky v pořadí souboru, případně omezené na požadované sloupce.
+
+    Raises:
+        InvalidInputError: Soubor neexistuje, není parquet nebo má jiné schéma.
+    """
+    with _parquet_errors(path), pq.ParquetFile(path) as source:
+        _ensure_schema(path, source.schema_arrow, schema)
+        yield from source.iter_batches(batch_size=batch_size, columns=columns)
+
+
+@contextmanager
+def _parquet_errors(path: Path) -> Generator[None]:
+    try:
+        yield
     except FileNotFoundError as error:
         msg = f"Soubor {path} neexistuje."
         raise InvalidInputError(msg) from error
     except pa.ArrowInvalid as error:
         msg = f"Soubor {path} neodpovídá schématu: {error}"
         raise InvalidInputError(msg) from error
-    if not table.schema.equals(schema):
-        msg = f"Soubor {path} neodpovídá schématu: čekané sloupce {', '.join(schema.names)}."
+
+
+def _ensure_schema(path: Path, actual: pa.Schema, expected: pa.Schema) -> None:
+    if not actual.equals(expected):
+        msg = f"Soubor {path} neodpovídá schématu: čekané sloupce {', '.join(expected.names)}."
         raise InvalidInputError(msg)
-    return table
 
 
 def write_table(

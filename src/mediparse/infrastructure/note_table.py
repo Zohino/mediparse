@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
 import pyarrow as pa
+import pyarrow.compute as pc
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
@@ -13,14 +14,17 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.note import NoteIdentityError
 from mediparse.infrastructure.parquet_file import (
+    iter_batches,
     note_identity_error,
     read_table,
     write_table,
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    from collections.abc import Iterator, Sequence
     from pathlib import Path
+
+    from mediparse.domain.identity import SubjectId
 
 SCHEMA: Final = pa.schema([
     pa.field("note_id", pa.string(), nullable=False),
@@ -36,6 +40,7 @@ class ParquetNoteTable:
     """Tabulka zpráv v souboru parquet; labely jako bool sloupec na diagnózu."""
 
     path: Path
+    batch_size: int = 1024
 
     def write(self, notes: Sequence[InputNote]) -> None:
         """Zapíše fixtury ve schématu tabulky, nadřazený adresář založí.
@@ -65,6 +70,43 @@ class ParquetNoteTable:
         """
         table = read_table(self.path, SCHEMA)
         return tuple(self._note(row) for row in table.to_pylist())
+
+    def subjects(self) -> frozenset[SubjectId]:
+        """Přečte pouze sloupec pacientů a ověří schéma souboru.
+
+        Returns:
+            Všichni různí pacienti tabulky.
+
+        Raises:
+            InvalidInputError: Soubor chybí, není parquet nebo má jiné schéma.
+        """
+        return frozenset(
+            subject
+            for batch in self._batches(["subject_id"])
+            for subject in batch.column("subject_id").to_pylist()
+        )
+
+    def read_patients(self, subjects: frozenset[SubjectId]) -> tuple[InputNote, ...]:
+        """Proudově přečte a ověří zprávy vybraných pacientů v pořadí souboru.
+
+        Returns:
+            Vybrané zprávy ve stejném tvaru jako read().
+
+        Raises:
+            InvalidInputError: Soubor nebo vybraná zpráva porušuje vstupní kontrakt.
+        """
+        selected = pa.array(sorted(subjects), type=pa.int64())
+        # Celé čtení drží paměť uvolněných řetězců; parquet filters načte text row groupu.
+        return tuple(
+            self._note(row)
+            for batch in self._batches()
+            for row in batch.filter(pc.field("subject_id").isin(selected)).to_pylist()
+        )
+
+    def _batches(self, columns: list[str] | None = None) -> Iterator[pa.RecordBatch]:
+        return iter_batches(
+            self.path, SCHEMA, columns=columns, batch_size=self.batch_size
+        )
 
     def _note(self, row: dict[str, Any]) -> InputNote:
         language = self._language(row["language"])

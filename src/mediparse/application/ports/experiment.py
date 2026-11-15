@@ -21,6 +21,16 @@ class InputTable(Protocol):
         """Přečte řádky v pořadí tabulky."""
 
 
+class PatientNoteTable(InputTable, Protocol):
+    """Tabulka s levným přehledem pacientů a výběrovým čtením zpráv."""
+
+    def subjects(self) -> frozenset[SubjectId]:
+        """Vrátí všechny pacienty tabulky bez načítání textů."""
+
+    def read_patients(self, subjects: frozenset[SubjectId]) -> tuple[InputNote, ...]:
+        """Přečte zprávy daných pacientů v pořadí tabulky."""
+
+
 class SplitSource(Protocol):
     """Zdroj hotového splitu, který spočetl krok před tréninkem a evaluací."""
 
