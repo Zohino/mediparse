@@ -118,12 +118,25 @@ def test_rule_is_frozen(rule: DecisionRule) -> None:
         rule.margin = 0.05  # ty: ignore[invalid-assignment]
 
 
-def test_bootstrap_resamples_minimum_is_accepted(rule: DecisionRule) -> None:
-    """Hranice 1000 překreslení je platná."""
-    minimum = 1000
-    config = rule.model_dump() | {"bootstrap_resamples": minimum}
-    loaded = DecisionRule.model_validate_json(json.dumps(config))
-    assert loaded.bootstrap_resamples == minimum
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("bootstrap_resamples", 1000),
+        ("seed_runs", 2),
+        ("min_latency_ratio", 1.0),
+        ("min_inference_energy_ratio", 1.0),
+    ],
+)
+def test_config_boundary_is_accepted(
+    rule: DecisionRule, field: str, value: float
+) -> None:
+    """Schéma přijímá inkluzivní dolní hranice preregistrovaných parametrů."""
+    assert (
+        DecisionRule.model_validate_json(
+            json.dumps(rule.model_dump() | {field: value})
+        ).model_dump()[field]
+        == value
+    )
 
 
 @pytest.mark.parametrize(
