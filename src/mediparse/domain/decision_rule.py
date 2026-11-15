@@ -45,10 +45,10 @@ class DecisionRule(BaseModel):
             Prokázaná, vyvrácená nebo nerozhodnutá non-inferiorita.
 
         Raises:
-            InvalidInputError: Obrácené meze CI nebo příliš málo zpráv.
+            InvalidInputError: Neplatné meze CI nebo příliš málo zpráv.
         """
-        if ci_low > ci_high:
-            msg = "Obrácené meze CI: dolní mez nesmí překročit horní mez."
+        if not -1 <= ci_low <= ci_high <= 1:
+            msg = "Neplatné meze CI: musí být v rozsahu [-1, 1] a dolní mez nesmí překročit horní."
             raise InvalidInputError(msg)
         if evaluation_notes < self.min_evaluation_notes:
             msg = f"Evaluace vyžaduje alespoň {self.min_evaluation_notes} zpráv."

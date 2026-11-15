@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 from pathlib import Path
 
 import pytest
@@ -46,6 +47,8 @@ def test_repository_config_matches_protocol(rule: DecisionRule) -> None:
         (-0.020, -0.010, 276000, "inconclusive"),
         (-0.030, -0.020, 276000, "inconclusive"),
         (-0.015, -0.005, 25000, "non_inferior"),
+        (0.0, 0.0, 276000, "non_inferior"),
+        (-1.0, 1.0, 276000, "inconclusive"),
     ],
 )
 def test_verdict(
@@ -60,12 +63,18 @@ def test_verdict(
     [
         (-0.010, -0.015, 276000, "meze"),
         (-0.015, -0.005, 24999, "zpráv"),
+        (math.nan, -0.01, 276000, "meze"),
+        (-0.03, math.nan, 276000, "meze"),
+        (math.inf, math.inf, 276000, "meze"),
+        (-math.inf, -0.01, 276000, "meze"),
+        (-1.01, -0.01, 276000, "meze"),
+        (-0.01, 1.01, 276000, "meze"),
     ],
 )
 def test_invalid_evaluation_is_rejected(
     rule: DecisionRule, ci_low: float, ci_high: float, notes: int, message: str
 ) -> None:
-    """Obrácené meze a evaluace pod minimem odmítnou výpočet verdiktu."""
+    """Neplatné meze a evaluace pod minimem odmítnou výpočet verdiktu."""
     with pytest.raises(InvalidInputError, match=message):
         rule.verdict(ci_low, ci_high, notes)
 
