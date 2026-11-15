@@ -29,11 +29,17 @@ def test_repository_config_matches_protocol(rule: DecisionRule) -> None:
     assert rule.model_dump() == {
         "margin": 0.02,
         "min_latency_ratio": 10.0,
-        "min_training_cost_ratio": 10.0,
+        "min_inference_energy_ratio": 10.0,
         "confidence": 0.95,
         "bootstrap_resamples": 2000,
         "min_evaluation_notes": 25000,
         "seed": 0,
+        "seed_runs": 3,
+        "seed_sensitivity_sd_multiple": 2.0,
+        "latency": {"warmup": 10, "samples": 1000},
+        "reference_cpu": "Intel(R) Core(TM) Ultra 9 185H",
+        "reference_gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "cpu_watts_per_core": 2.8125,
     }
 
 
@@ -80,30 +86,30 @@ def test_invalid_evaluation_is_rejected(
 
 
 @pytest.mark.parametrize(
-    ("latency_ratio", "training_cost_ratio", "expected"),
+    ("latency_ratio", "energy_ratio", "expected"),
     [(12.0, 1.0, True), (1.0, 10.0, True), (10.0, 1.0, True), (9.9, 9.9, False)],
 )
 def test_is_cheaper(
     rule: DecisionRule,
     latency_ratio: float,
-    training_cost_ratio: float,
+    energy_ratio: float,
     *,
     expected: bool,
 ) -> None:
     """Stačí dosáhnout alespoň jednoho prahu poměru transformer ku klasice."""
-    assert rule.is_cheaper(latency_ratio, training_cost_ratio) is expected
+    assert rule.is_cheaper(latency_ratio, energy_ratio) is expected
 
 
 @pytest.mark.parametrize(
-    ("latency_ratio", "training_cost_ratio"),
+    ("latency_ratio", "energy_ratio"),
     [(math.nan, 1.0), (1.0, math.inf), (-1.0, 1.0), (1.0, -1.0)],
 )
 def test_is_cheaper_rejects_invalid_ratios(
-    rule: DecisionRule, latency_ratio: float, training_cost_ratio: float
+    rule: DecisionRule, latency_ratio: float, energy_ratio: float
 ) -> None:
     """Neplatný poměr nákladů se odmítne, ne tiše porovná."""
     with pytest.raises(InvalidInputError, match="poměr"):
-        rule.is_cheaper(latency_ratio, training_cost_ratio)
+        rule.is_cheaper(latency_ratio, energy_ratio)
 
 
 def test_rule_is_frozen(rule: DecisionRule) -> None:
@@ -126,7 +132,7 @@ def test_bootstrap_resamples_minimum_is_accepted(rule: DecisionRule) -> None:
         ("margin", 0),
         ("margin", 1),
         ("min_latency_ratio", 0.5),
-        ("min_training_cost_ratio", 0.5),
+        ("min_inference_energy_ratio", 0.5),
         ("confidence", 0),
         ("confidence", 1),
         ("bootstrap_resamples", 999),
@@ -135,6 +141,12 @@ def test_bootstrap_resamples_minimum_is_accepted(rule: DecisionRule) -> None:
         ("seed", 2**32),
         ("unknown", 0),
         ("margin", "0.02"),
+        ("seed_runs", 1),
+        ("seed_sensitivity_sd_multiple", 0),
+        ("cpu_watts_per_core", 0),
+        ("reference_cpu", ""),
+        ("latency", {"warmup": 10, "samples": 0}),
+        ("min_training_cost_ratio", 10.0),
     ],
 )
 def test_invalid_config_is_rejected(
@@ -143,3 +155,55 @@ def test_invalid_config_is_rejected(
     """Config odmítne neplatné meze, neznámé pole i převod řetězce na číslo."""
     with pytest.raises(ValidationError):
         DecisionRule.model_validate_json(json.dumps(rule.model_dump() | {field: value}))
+
+
+@pytest.mark.parametrize(
+    ("difference", "seed_sd", "expected"),
+    [
+        (-0.015, 0.003, True),
+        (-0.015, 0.002, False),
+        (-0.014, 0.003, False),
+        (-0.030, 0.006, True),
+        (0.0, 0.0, False),
+    ],
+)
+def test_is_seed_sensitive(
+    rule: DecisionRule, difference: float, seed_sd: float, *, expected: bool
+) -> None:
+    """Vzdálenost od hranice se ostře porovná s násobkem SD přes seedy."""
+    assert rule.is_seed_sensitive(difference, seed_sd) is expected
+
+
+@pytest.mark.parametrize(
+    ("difference", "seed_sd"),
+    [(0.0, -0.001), (0.0, math.nan), (1.5, 0.003)],
+)
+def test_seed_sensitivity_rejects_invalid_inputs(
+    rule: DecisionRule, difference: float, seed_sd: float
+) -> None:
+    """Neplatný rozdíl nebo SD nesmí dát značku citlivosti na seed."""
+    with pytest.raises(InvalidInputError):
+        rule.is_seed_sensitive(difference, seed_sd)
+
+
+@pytest.mark.parametrize(
+    ("cpu_seconds", "gpu_joules", "expected"),
+    [(100.0, 0.0, 281.25), (100.0, 500.0, 781.25), (0.0, 0.0, 0.0)],
+)
+def test_inference_energy_joules(
+    rule: DecisionRule, cpu_seconds: float, gpu_joules: float, expected: float
+) -> None:
+    """CPU-sekundy krát výkon na jádro a NVML dávají ručně spočtenou energii."""
+    assert rule.inference_energy_joules(cpu_seconds, gpu_joules) == expected
+
+
+@pytest.mark.parametrize(
+    ("cpu_seconds", "gpu_joules"),
+    [(-1.0, 0.0), (math.inf, 0.0), (0.0, -1.0), (0.0, math.nan)],
+)
+def test_inference_energy_rejects_invalid_inputs(
+    rule: DecisionRule, cpu_seconds: float, gpu_joules: float
+) -> None:
+    """Energie inference odmítá záporné a nekonečné vstupy i NaN."""
+    with pytest.raises(InvalidInputError):
+        rule.inference_energy_joules(cpu_seconds, gpu_joules)
