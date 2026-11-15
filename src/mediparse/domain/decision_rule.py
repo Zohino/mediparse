@@ -29,6 +29,9 @@ class DecisionRule(BaseModel):
     stejně, vnitřní CV po pacientech jen na tréninkové části příslušného foldu.
     Oboustranný percentilový CI s hladinou ``confidence`` vzniká párovým
     cluster bootstrapem přes pacienty na týchž zprávách obou ramen.
+    Bootstrap má ``bootstrap_resamples`` replikací s generátorem ze seedu
+    ``seed`` (ne seed tréninku); ``verdict`` odmítne evaluaci pod
+    ``min_evaluation_notes`` zpráv.
 
     Jde o jedno primární srovnání bez korekce na multiplicitu. Strip
     diagnostických sekcí zůstává ablací: rozdíl s CI se reportuje popisně,
