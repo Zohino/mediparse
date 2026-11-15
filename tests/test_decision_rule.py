@@ -191,14 +191,19 @@ def test_is_seed_sensitive(
 
 
 @pytest.mark.parametrize(
-    ("difference", "seed_sd"),
-    [(0.0, -0.001), (0.0, math.nan), (1.5, 0.003), (-1.5, 0.003)],
+    ("difference", "seed_sd", "message"),
+    [
+        (0.0, -0.001, "konečné a nezáporné"),
+        (0.0, math.nan, "konečné a nezáporné"),
+        (1.5, 0.003, "Rozdíl macro-F1"),
+        (-1.5, 0.003, "Rozdíl macro-F1"),
+    ],
 )
 def test_seed_sensitivity_rejects_invalid_inputs(
-    rule: DecisionRule, difference: float, seed_sd: float
+    rule: DecisionRule, difference: float, seed_sd: float, message: str
 ) -> None:
     """Neplatný rozdíl nebo SD nesmí dát značku citlivosti na seed."""
-    with pytest.raises(InvalidInputError):
+    with pytest.raises(InvalidInputError, match=message):
         rule.is_seed_sensitive(difference, seed_sd)
 
 
@@ -250,7 +255,7 @@ def test_credibility_rejects_invalid_scores(
     rule: DecisionRule, transformer_f1: float, baseline_f1: float
 ) -> None:
     """Obě macro-F1 musí být konečná čísla v intervalu [0, 1]."""
-    with pytest.raises(InvalidInputError):
+    with pytest.raises(InvalidInputError, match="Macro-F1"):
         rule.is_credible(transformer_f1, baseline_f1)
 
 
