@@ -158,6 +158,7 @@ def test_config_boundary_is_accepted(
         ("seed_sensitivity_sd_multiple", 0),
         ("cpu_watts_per_core", 0),
         ("reference_cpu", ""),
+        ("reference_gpu", ""),
         ("latency", {"warmup": 10, "samples": 0}),
         ("min_training_cost_ratio", 10.0),
     ],
