@@ -81,7 +81,7 @@ def test_invalid_evaluation_is_rejected(
 
 @pytest.mark.parametrize(
     ("latency_ratio", "training_cost_ratio", "expected"),
-    [(12.0, 1.0, True), (1.0, 10.0, True), (9.9, 9.9, False)],
+    [(12.0, 1.0, True), (1.0, 10.0, True), (10.0, 1.0, True), (9.9, 9.9, False)],
 )
 def test_is_cheaper(
     rule: DecisionRule,
@@ -92,6 +92,32 @@ def test_is_cheaper(
 ) -> None:
     """Stačí dosáhnout alespoň jednoho prahu poměru transformer ku klasice."""
     assert rule.is_cheaper(latency_ratio, training_cost_ratio) is expected
+
+
+@pytest.mark.parametrize(
+    ("latency_ratio", "training_cost_ratio"),
+    [(math.nan, 1.0), (1.0, math.inf), (-1.0, 1.0), (1.0, -1.0)],
+)
+def test_is_cheaper_rejects_invalid_ratios(
+    rule: DecisionRule, latency_ratio: float, training_cost_ratio: float
+) -> None:
+    """Neplatný poměr nákladů se odmítne, ne tiše porovná."""
+    with pytest.raises(InvalidInputError, match="poměr"):
+        rule.is_cheaper(latency_ratio, training_cost_ratio)
+
+
+def test_rule_is_frozen(rule: DecisionRule) -> None:
+    """Preregistrované pravidlo nelze po načtení měnit."""
+    with pytest.raises(ValidationError):
+        rule.margin = 0.05  # ty: ignore[invalid-assignment]
+
+
+def test_bootstrap_resamples_minimum_is_accepted(rule: DecisionRule) -> None:
+    """Hranice 1000 překreslení je platná."""
+    minimum = 1000
+    config = rule.model_dump() | {"bootstrap_resamples": minimum}
+    loaded = DecisionRule.model_validate_json(json.dumps(config))
+    assert loaded.bootstrap_resamples == minimum
 
 
 @pytest.mark.parametrize(
@@ -106,6 +132,7 @@ def test_is_cheaper(
         ("bootstrap_resamples", 999),
         ("min_evaluation_notes", 0),
         ("seed", -1),
+        ("seed", 2**32),
         ("unknown", 0),
         ("margin", "0.02"),
     ],

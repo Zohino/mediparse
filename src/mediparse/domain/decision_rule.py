@@ -1,11 +1,13 @@
 """Preregistrované pravidlo non-inferiority a cenového srovnání modelů."""
 
+import math
 from enum import StrEnum
 from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt
 
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.seed import Seed
 
 
 class Verdict(StrEnum):
@@ -31,7 +33,7 @@ class DecisionRule(BaseModel):
     confidence: Annotated[float, Field(gt=0, lt=1)]
     bootstrap_resamples: Annotated[int, Field(ge=1000)]
     min_evaluation_notes: PositiveInt
-    seed: Annotated[int, Field(ge=0)]
+    seed: Seed
 
     def verdict(self, ci_low: float, ci_high: float, evaluation_notes: int) -> Verdict:
         """Určí non-inferioritu z mezí CI s ostrou hranicí minus delta.
@@ -68,7 +70,15 @@ class DecisionRule(BaseModel):
 
         Returns:
             Zda alespoň jeden poměr dosahuje preregistrovaného prahu.
+
+        Raises:
+            InvalidInputError: Některý poměr není konečný nebo je záporný.
         """
+        if not all(
+            math.isfinite(r) and r >= 0 for r in (latency_ratio, training_cost_ratio)
+        ):
+            msg = "Neplatný poměr: musí být konečný a nezáporný."
+            raise InvalidInputError(msg)
         return (
             latency_ratio >= self.min_latency_ratio
             or training_cost_ratio >= self.min_training_cost_ratio
