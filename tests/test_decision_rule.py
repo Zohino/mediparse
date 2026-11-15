@@ -225,7 +225,13 @@ def test_inference_energy_rejects_invalid_inputs(
 
 @pytest.mark.parametrize(
     ("transformer_f1", "baseline_f1", "expected"),
-    [(0.80, 0.70, True), (0.70, 0.70, False), (0.60, 0.70, False)],
+    [
+        (0.80, 0.70, True),
+        (0.70, 0.70, False),
+        (0.60, 0.70, False),
+        (1.0, 0.0, True),
+        (0.0, 1.0, False),
+    ],
 )
 def test_is_credible(
     rule: DecisionRule, transformer_f1: float, baseline_f1: float, *, expected: bool
@@ -236,7 +242,7 @@ def test_is_credible(
 
 @pytest.mark.parametrize(
     ("transformer_f1", "baseline_f1"),
-    [(1.2, 0.7), (math.nan, 0.7), (0.8, math.nan), (0.8, -0.1)],
+    [(1.2, 0.7), (math.nan, 0.7), (0.8, math.nan), (0.8, -0.1), (0.8, 1.2)],
 )
 def test_credibility_rejects_invalid_scores(
     rule: DecisionRule, transformer_f1: float, baseline_f1: float
