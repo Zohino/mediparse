@@ -47,7 +47,8 @@ class DecisionRule(BaseModel):
     | INFERIOR | libovolně | vyvrácena |
     | INCONCLUSIVE | libovolně | nerozhodnuto |
 
-    SD macro-F1 transformeru se měří přes ``seed_runs`` seedy na jednom foldu.
+    SD je výběrová směrodatná odchylka (n - 1) macro-F1 transformeru
+    z ``seed_runs`` běhů na foldu 0 se seedy tréninku 0 až ``seed_runs`` - 1.
     Je-li vzdálenost rozdílu od hranice minus delta ostře menší než
     ``seed_sensitivity_sd_multiple`` krát SD, výsledek se označí jako citlivý
     na seed. Značka verdikt nemění a uvádí se u každého výsledku hypotézy.
