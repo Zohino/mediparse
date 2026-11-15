@@ -207,3 +207,60 @@ def test_inference_energy_rejects_invalid_inputs(
     """Energie inference odmítá záporné a nekonečné vstupy i NaN."""
     with pytest.raises(InvalidInputError):
         rule.inference_energy_joules(cpu_seconds, gpu_joules)
+
+
+@pytest.mark.parametrize(
+    ("transformer_f1", "baseline_f1", "expected"),
+    [(0.80, 0.70, True), (0.70, 0.70, False), (0.60, 0.70, False)],
+)
+def test_is_credible(
+    rule: DecisionRule, transformer_f1: float, baseline_f1: float, *, expected: bool
+) -> None:
+    """Transformer musí ostře překonat neladěný TF-IDF + LR na téže sadě."""
+    assert rule.is_credible(transformer_f1, baseline_f1) is expected
+
+
+@pytest.mark.parametrize(
+    ("transformer_f1", "baseline_f1"),
+    [(1.2, 0.7), (math.nan, 0.7), (0.8, math.nan), (0.8, -0.1)],
+)
+def test_credibility_rejects_invalid_scores(
+    rule: DecisionRule, transformer_f1: float, baseline_f1: float
+) -> None:
+    """Obě macro-F1 musí být konečná čísla v intervalu [0, 1]."""
+    with pytest.raises(InvalidInputError):
+        rule.is_credible(transformer_f1, baseline_f1)
+
+
+@pytest.mark.parametrize(
+    ("ci", "latency_ratio", "energy_ratio", "expected"),
+    [
+        ((-0.015, -0.005), 2.0, 1.0, True),
+        ((-0.015, -0.005), 1.0, 1.0, False),
+        ((-0.015, -0.005), 2.0, 0.9, False),
+        ((-0.025, -0.010), 5.0, 5.0, False),
+        ((-0.035, -0.025), 5.0, 5.0, False),
+    ],
+)
+def test_dominates(
+    rule: DecisionRule,
+    ci: tuple[float, float],
+    latency_ratio: float,
+    energy_ratio: float,
+    *,
+    expected: bool,
+) -> None:
+    """NI a náklady nedražší v obou osách s jednou ostrou úsporou určují dominanci."""
+    assert rule.dominates(*ci, 276000, latency_ratio, energy_ratio) is expected
+
+
+@pytest.mark.parametrize(
+    ("latency_ratio", "energy_ratio"),
+    [(math.nan, 1.0), (1.0, math.nan), (-1.0, 1.0), (1.0, math.inf)],
+)
+def test_dominance_rejects_invalid_ratios(
+    rule: DecisionRule, latency_ratio: float, energy_ratio: float
+) -> None:
+    """Dominance odmítá neplatné poměry stejným kontraktem jako cenový verdikt."""
+    with pytest.raises(InvalidInputError):
+        rule.dominates(-0.015, -0.005, 276000, latency_ratio, energy_ratio)

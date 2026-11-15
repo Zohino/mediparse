@@ -12,7 +12,7 @@ from mediparse.domain.seed import Seed
 
 
 class Verdict(StrEnum):
-    """Tři výsledky posouzení non-inferiority klasického modelu."""
+    """Tři výsledky posouzení non-inferiority modelu A vůči modelu B."""
 
     NON_INFERIOR = "non_inferior"
     INFERIOR = "inferior"
@@ -33,6 +33,7 @@ class DecisionRule(BaseModel):
     Jde o jedno primární srovnání bez korekce na multiplicitu. Strip
     diagnostických sekcí zůstává ablací: rozdíl s CI se reportuje popisně,
     bez verdiktu. Čeština a další transformery jsou také popisná srovnání.
+    Rozdíly F1 s CI po jednotlivých diagnózách se reportují bez verdiktu.
 
     Výsledek hypotézy podle verdiktu celé zprávy a ``is_cheaper``:
 
@@ -47,6 +48,14 @@ class DecisionRule(BaseModel):
     Je-li vzdálenost rozdílu od hranice minus delta ostře menší než
     ``seed_sensitivity_sd_multiple`` krát SD, výsledek se označí jako citlivý
     na seed. Značka verdikt nemění a uvádí se u každého výsledku hypotézy.
+    U každého výsledku se uvede i výhrada věrohodnosti, pokud macro-F1
+    transformeru ostře nepřevýší neladěný TF-IDF + LR na téže sadě.
+    Jde o kontrolu věrohodnosti transformeru, nikoli assay sensitivity.
+
+    Rodina A ε-dominuje B pro ε = ``margin``, pokud je A non-inferiorní
+    týmž testem, není dražší v latenci p95 ani energii inference a v alespoň
+    jedné ose je ostře levnější. Paretova hranice je popisná; primárním
+    verdiktem zůstává jediná dvojice modelů výše.
 
     Levnější znamená alespoň ``min_latency_ratio`` krát vyšší latenci p95
     nebo ``min_inference_energy_ratio`` krát vyšší energii inference
@@ -171,6 +180,56 @@ class DecisionRule(BaseModel):
         """
         _validate_nonnegative_finite(cpu_seconds, gpu_joules)
         return cpu_seconds * self.cpu_watts_per_core + gpu_joules
+
+    @staticmethod
+    def is_credible(transformer_f1: float, baseline_f1: float) -> bool:
+        """Ověří, že transformer ostře překonává neladěný TF-IDF + LR.
+
+        Args:
+            transformer_f1: Macro-F1 transformeru na společné evaluační sadě.
+            baseline_f1: Macro-F1 neladěného TF-IDF + LR na téže sadě.
+
+        Returns:
+            Zda transformer splňuje preregistrovanou kontrolu věrohodnosti.
+
+        Raises:
+            InvalidInputError: Některá macro-F1 není konečná v [0, 1].
+        """
+        if not (0 <= transformer_f1 <= 1 and 0 <= baseline_f1 <= 1):
+            msg = "Macro-F1 transformeru i baseline musí být konečná v rozsahu [0, 1]."
+            raise InvalidInputError(msg)
+        return transformer_f1 > baseline_f1
+
+    def dominates(
+        self,
+        ci_low: float,
+        ci_high: float,
+        evaluation_notes: int,
+        latency_ratio: float,
+        energy_ratio: float,
+    ) -> bool:
+        """Určí ε-dominanci rodiny A vůči B s ε rovným okraji non-inferiority.
+
+        Args:
+            ci_low: Dolní mez CI rozdílu macro-F1 modelu A minus model B.
+            ci_high: Horní mez téhož CI.
+            evaluation_notes: Počet společně evaluovaných zpráv.
+            latency_ratio: Poměr latence p95 na zprávu modelu B ku modelu A.
+            energy_ratio: Poměr energie inference modelu B ku modelu A.
+
+        Returns:
+            Zda je A non-inferiorní, nedražší v obou osách a v jedné levnější.
+
+        Raises:
+            InvalidInputError: Neplatné meze CI, příliš málo zpráv nebo
+                některý poměr není konečný a nezáporný.
+        """
+        _validate_nonnegative_finite(latency_ratio, energy_ratio)
+        return (
+            self.verdict(ci_low, ci_high, evaluation_notes) is Verdict.NON_INFERIOR
+            and min(latency_ratio, energy_ratio) >= 1
+            and max(latency_ratio, energy_ratio) > 1
+        )
 
 
 def _validate_nonnegative_finite(*values: float) -> None:
