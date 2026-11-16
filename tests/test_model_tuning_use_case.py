@@ -100,7 +100,9 @@ class _Scorer:
             )
             for diagnosis in Diagnosis
         }
-        return ValidationScores(scores, converged=params["c"] in {1.5, 2.5})
+        return ValidationScores(
+            scores, converged=params["c"] in {1.5, 2.5} or fold.fold != 0
+        )
 
 
 @dataclass(frozen=True)

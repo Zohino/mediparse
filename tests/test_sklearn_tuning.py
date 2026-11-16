@@ -25,6 +25,8 @@ from tests.support import REPOSITORY
 from tests.tuning_support import SVM_PARAMS
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
+
     from mediparse.domain.tuning import ParamValue
 
 
@@ -133,3 +135,17 @@ def test_svm_passes_seed_to_every_diagnosis(monkeypatch: pytest.MonkeyPatch) -> 
     assert [call.kwargs.get("random_state") for call in factory.call_args_list] == [
         seed
     ] * 5
+
+
+def test_svm_keeps_nonconvergence_from_first_diagnosis(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Pozdější konvergence čtyř diagnóz nepřepíše nekonvergenci první."""
+    convergence = Mock(side_effect=[False, True, True, True, True])
+
+    def fit_converged(fit: Callable[[], object]) -> bool:
+        fit()
+        return convergence()
+
+    monkeypatch.setattr(sklearn_tuning, "fit_converged", fit_converged)
+    assert not SklearnLinearSvmScorer(None, 7).score(SVM_PARAMS, _fold()).converged
