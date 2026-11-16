@@ -437,6 +437,10 @@ ignore = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
 
+"src/mediparse/entrypoints/model_tuning.py" = [
+    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
+]
+
 "src/mediparse/entrypoints/model_inference.py" = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
