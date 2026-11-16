@@ -5,6 +5,7 @@ from __future__ import annotations
 import functools
 from dataclasses import replace
 from typing import TYPE_CHECKING
+from unittest.mock import Mock
 
 import numpy as np
 import pytest
@@ -15,6 +16,7 @@ from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.split import Holdout
+from mediparse.infrastructure import sklearn_tuning
 from mediparse.infrastructure.sklearn_classifier import tfidf_preprocessor
 from mediparse.infrastructure.sklearn_tuning import SklearnLinearSvmScorer
 from mediparse.infrastructure.tuning_config import load_tuning_config
@@ -120,3 +122,14 @@ def test_invalid_svm_parameters_or_vocabulary_are_domain_errors(
     """Obecný prostor nemůže obejít meze konkrétního estimatoru."""
     with pytest.raises(InvalidInputError):
         SklearnLinearSvmScorer(None, 7).score(SVM_PARAMS | changes, _fold())
+
+
+def test_svm_passes_seed_to_every_diagnosis(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Všech pět estimatorů dostane seed scoreru i při deterministickém řešiči."""
+    seed = 13
+    factory = Mock(wraps=LinearSVC)
+    monkeypatch.setattr(sklearn_tuning, "LinearSVC", factory)
+    SklearnLinearSvmScorer(None, seed).score(SVM_PARAMS, _fold())
+    assert [call.kwargs.get("random_state") for call in factory.call_args_list] == [
+        seed
+    ] * 5
