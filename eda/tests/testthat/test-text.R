@@ -439,3 +439,20 @@ test_that("reference_verdict vyhodnotí průměr přesných značek i při malé
   expect_equal(reference_verdict(markers(10, 10), residual), "rozdil")
   expect_equal(reference_verdict(markers(0, 0), residual), "nelze")
 })
+
+
+test_that("masky věku odpovídají sdílené tabulce po jednotlivých případech", {
+  cases <- jsonlite::fromJSON("../../../tests/fixtures/age_marker_cases.json")
+  out <- metrics_of(cases$text)
+
+  for (i in seq_len(nrow(cases))) {
+    expect_equal(as.numeric(out$age_masks[[i]]), cases$markers[[i]], info = cases$name[[i]])
+  }
+})
+
+test_that("kotva i číselný věk přijmou přilepené pohlaví", {
+  out <- age_of(c("is a ___yoM", "67 yoF"))
+
+  expect_equal(out$kotva, 1)
+  expect_equal(out$ciselny, 1)
+})
