@@ -5,10 +5,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
+from mediparse.application.patient_cv import patient_holdouts
 from mediparse.domain.classical_screening import ScreeningReport, ScreeningResult
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.evaluation import ensure_min_cell
-from mediparse.domain.split import Split, ensure_patients_per_class, strata
+from mediparse.domain.split import ensure_patients_per_class
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -171,25 +171,10 @@ def _development_holdouts(
     config: ClassicalScreeningConfig,
     partitioner: PatientPartitioner,
 ) -> tuple[Holdout, ...]:
-    subjects = [note.subject_id for note in notes]
-    for diagnosis in Diagnosis:
-        ensure_patients_per_class(
-            [note.has_label(diagnosis) for note in notes],
-            subjects,
-            diagnosis,
-            config.folds,
-        )
-    parts = partitioner.partition(
-        subjects, strata(notes, config.folds), config.folds, config.seed
-    )
-    split = Split(parts, development=frozenset())
-    holdouts = tuple(split.holdout(notes, fold) for fold in range(config.folds))
+    holdouts = patient_holdouts(notes, config.folds, config.seed, partitioner)
     for holdout in holdouts:
         train_subjects = [note.subject_id for note in holdout.train]
         for diagnosis in Diagnosis:
-            ensure_min_cell(
-                diagnosis, [note.has_label(diagnosis) for note in holdout.test]
-            )
             ensure_patients_per_class(
                 [note.has_label(diagnosis) for note in holdout.train],
                 train_subjects,
