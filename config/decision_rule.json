@@ -1,0 +1,15 @@
+{
+  "margin": 0.02,
+  "min_latency_ratio": 10.0,
+  "min_inference_energy_ratio": 10.0,
+  "confidence": 0.95,
+  "bootstrap_resamples": 2000,
+  "min_evaluation_notes": 25000,
+  "seed": 0,
+  "seed_runs": 3,
+  "seed_sensitivity_sd_multiple": 2.0,
+  "latency": {"warmup": 10, "samples": 1000},
+  "reference_cpu": "Intel(R) Core(TM) Ultra 9 185H",
+  "reference_gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "cpu_watts_per_core": 2.8125
+}

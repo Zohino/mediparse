@@ -6,6 +6,7 @@
 !config/smoketest_training.json
 !config/split.json
 !config/screening_classical.json
+!config/decision_rule.json
 !config/section_headers.json
 !config/synthetic_plan.json
 !config/mimic_tables.json
