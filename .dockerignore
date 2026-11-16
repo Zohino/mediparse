@@ -3,6 +3,7 @@
 !tests/
 !workflow/
 !config/matrix.json
+!config/tuning.json
 !config/smoketest_training.json
 !config/split.json
 !config/screening_classical.json

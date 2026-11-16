@@ -237,14 +237,14 @@ def test_czech_row_without_strip_is_valid() -> None:
     ("row_id", "strip", "preprocessing", "changed_axis"),
     [
         (
-            "en-logreg-strip",
+            "en-svm-strip",
             True,
             TextPreprocessing.DICTIONARY,
             "strip_diagnostic_sections",
         ),
-        ("en-logreg-nonorm", False, TextPreprocessing.NONE, "text_preprocessing"),
+        ("en-svm-nonorm", False, TextPreprocessing.NONE, "text_preprocessing"),
         (
-            "en-logreg-novariants",
+            "en-svm-novariants",
             False,
             TextPreprocessing.NORMALIZED,
             "text_preprocessing",
@@ -256,7 +256,7 @@ def test_repository_ablation_changes_one_input_axis(
 ) -> None:
     """Ruční ablační řádky mění právě jednu osu vstupu oproti hlavnímu řádku."""
     rows = {row.id: row for row in load_matrix(REPOSITORY_MATRIX).rows}
-    main, ablation = rows["en-logreg"], rows[row_id]
+    main, ablation = rows["en-svm"], rows[row_id]
     assert main.input.strip_diagnostic_sections is False
     assert main.input.text_preprocessing is TextPreprocessing.DICTIONARY
     assert ablation.input.strip_diagnostic_sections is strip
@@ -323,3 +323,11 @@ def test_multiple_duplicated_input_axes_are_rejected() -> None:
             _row(id="normalized", input=normalized),
             _row(id="copy-normalized", input=normalized),
         )
+
+
+def test_row_lookup_returns_declared_row_and_refuses_unknown() -> None:
+    """Id vybírá jeden řádek; chybějící identita je chyba vstupu."""
+    matrix = load_matrix(REPOSITORY_MATRIX)
+    assert matrix.row("en-svm") == matrix.rows[0]
+    with pytest.raises(InvalidInputError, match="missing"):
+        matrix.row("missing")

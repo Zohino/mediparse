@@ -1,9 +1,9 @@
 {
   "rows": [
     {
-      "id": "en-logreg",
+      "id": "en-svm",
       "language": "en",
-      "model": "logreg",
+      "model": "svm",
       "tuning_trials": 20,
       "input": {
         "strip_diagnostic_sections": false,
@@ -11,9 +11,9 @@
       }
     },
     {
-      "id": "en-logreg-strip",
+      "id": "en-svm-strip",
       "language": "en",
-      "model": "logreg",
+      "model": "svm",
       "tuning_trials": 20,
       "input": {
         "strip_diagnostic_sections": true,
@@ -21,9 +21,9 @@
       }
     },
     {
-      "id": "en-logreg-nonorm",
+      "id": "en-svm-nonorm",
       "language": "en",
-      "model": "logreg",
+      "model": "svm",
       "tuning_trials": 20,
       "input": {
         "strip_diagnostic_sections": false,
@@ -31,9 +31,9 @@
       }
     },
     {
-      "id": "en-logreg-novariants",
+      "id": "en-svm-novariants",
       "language": "en",
-      "model": "logreg",
+      "model": "svm",
       "tuning_trials": 20,
       "input": {
         "strip_diagnostic_sections": false,
