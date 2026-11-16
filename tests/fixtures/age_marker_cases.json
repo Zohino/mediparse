@@ -1,0 +1,112 @@
+[
+  {
+    "name": "age-1",
+    "text": "___ yo",
+    "markers": 1
+  },
+  {
+    "name": "age-2",
+    "text": "___ y/oF",
+    "markers": 1
+  },
+  {
+    "name": "age-3",
+    "text": "___yoM",
+    "markers": 1
+  },
+  {
+    "name": "age-4",
+    "text": "___ y/om",
+    "markers": 1
+  },
+  {
+    "name": "age-5",
+    "text": "___-year-old",
+    "markers": 1
+  },
+  {
+    "name": "age-6",
+    "text": "___ yearold",
+    "markers": 1
+  },
+  {
+    "name": "age-7",
+    "text": "___ yearsold",
+    "markers": 1
+  },
+  {
+    "name": "age-8",
+    "text": "___ y.o.",
+    "markers": 1
+  },
+  {
+    "name": "age-9",
+    "text": "A ___ Year Old woman",
+    "markers": 1
+  },
+  {
+    "name": "age-10",
+    "text": "a___ yo",
+    "markers": 1
+  },
+  {
+    "name": "age-11",
+    "text": "___ yo2",
+    "markers": 1
+  },
+  {
+    "name": "age-12",
+    "text": "___ yo,___ yo",
+    "markers": 2
+  },
+  {
+    "name": "age-13",
+    "text": "___ yo ___ y/o",
+    "markers": 2
+  },
+  {
+    "name": "non-age-1",
+    "text": "___young",
+    "markers": 0
+  },
+  {
+    "name": "non-age-2",
+    "text": "____ yo",
+    "markers": 0
+  },
+  {
+    "name": "non-age-3",
+    "text": "__ yo",
+    "markers": 0
+  },
+  {
+    "name": "non-age-4",
+    "text": "___ years ago",
+    "markers": 0
+  },
+  {
+    "name": "non-age-5",
+    "text": "___ yearly",
+    "markers": 0
+  },
+  {
+    "name": "non-age-6",
+    "text": "___ yoyo",
+    "markers": 0
+  },
+  {
+    "name": "non-age-7",
+    "text": "___ yogurt",
+    "markers": 0
+  },
+  {
+    "name": "non-age-8",
+    "text": "___ year-older",
+    "markers": 0
+  },
+  {
+    "name": "non-age-9",
+    "text": "___ yoMF",
+    "markers": 0
+  }
+]
