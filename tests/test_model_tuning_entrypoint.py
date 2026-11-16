@@ -5,10 +5,14 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import dataclass, replace
+from random import Random
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
+import optuna
 import pytest
+from optuna.storages import RDBStorage
+from sqlalchemy.pool import NullPool
 
 from mediparse.domain.run_manifest import TuningManifest
 from mediparse.entrypoints import model_tuning
@@ -28,6 +32,10 @@ from tests.tuning_support import matrix_row, tuning_config
 
 if TYPE_CHECKING:
     from pathlib import Path
+
+    from optuna.trial import TrialState
+
+    from mediparse.domain.tuning import ParamValue
 
 
 @dataclass(frozen=True)
@@ -136,6 +144,13 @@ def test_repeated_search_is_independent_of_outer_test_and_development(
 ) -> None:
     """Dva nové sqlite opakují výsledek i po přepsání všech vyloučených textů."""
     inputs = _inputs(tmp_path)
+    table = ParquetNoteTable(inputs.cohort)
+    corpus = table.read()
+    donors = Random(17).sample(corpus, len(corpus))
+    table.write([
+        replace(note, text=donor.text) if index % 3 == 0 else note
+        for index, (note, donor) in enumerate(zip(corpus, donors, strict=True))
+    ])
     first, second = tmp_path / "first", tmp_path / "second"
     assert _run(inputs, first) is ExitCode.OK
     if rewrite_excluded:
@@ -149,10 +164,27 @@ def test_repeated_search_is_independent_of_outer_test_and_development(
             for note in table.read()
         ])
     assert _run(inputs, second) is ExitCode.OK
+    first_trials, second_trials = _trial_history(first), _trial_history(second)
+    minimum_distinct_values = 2
+    assert (
+        len({value for _, value, _ in first_trials if value is not None})
+        >= minimum_distinct_values
+    )
+    assert second_trials == first_trials
     before, after = _manifest(first), _manifest(second)
     assert after.best == before.best
     assert after.best_macro_f1 == before.best_macro_f1
     assert (after.dataset_sha256 != before.dataset_sha256) is rewrite_excluded
+
+
+def _trial_history(
+    out: Path,
+) -> list[tuple[dict[str, ParamValue], float | None, TrialState]]:
+    storage = RDBStorage(
+        f"sqlite:///{out / 'tuning.sqlite3'}", engine_kwargs={"poolclass": NullPool}
+    )
+    study = optuna.load_study(study_name="model-tuning", storage=storage)
+    return [(trial.params, trial.value, trial.state) for trial in study.trials]
 
 
 def test_existing_sqlite_is_refused_without_overwriting_manifest(

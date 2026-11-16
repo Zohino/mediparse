@@ -105,11 +105,13 @@ class _Scorer:
 
 @dataclass(frozen=True)
 class _PairedParts:
-    @staticmethod
+    seeds: list[Seed] = field(default_factory=list)
+
     def partition(
-        subjects: Sequence[int], strata: Sequence[int], parts: int, seed: Seed
+        self, subjects: Sequence[int], strata: Sequence[int], parts: int, seed: Seed
     ) -> tuple[frozenset[int], ...]:
-        del strata, seed
+        del strata
+        self.seeds.append(seed)
         pairs = {
             subject: index // 2 for index, subject in enumerate(sorted(set(subjects)))
         }
@@ -137,7 +139,9 @@ def _run(
 def test_trial_loop_uses_budget_running_means_and_counts_nonconvergence_once() -> None:
     """Trial 0 má foldy 1 a 2/3 (průměr 5/6), trial 1 se prořeže, trial 2 má 2/3."""
     search, scorer = _Search(), _Scorer()
-    report = _run(search, scorer, _PairedParts())
+    partitioner = _PairedParts()
+    report = _run(search, scorer, partitioner)
+    assert partitioner.seeds == [tuning_config().seed]
     assert (report.outcome.completed_trials, report.outcome.pruned_trials) == (2, 1)
     assert report.outcome.nonconverged_trials == 1
     assert report.outcome.best == SVM_PARAMS
