@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import functools
 from dataclasses import replace
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Literal
 from unittest.mock import Mock
 
 import numpy as np
@@ -36,7 +36,7 @@ def _fold() -> Holdout:
         replace(
             note,
             labels=frozenset(Diagnosis) if note.labels else frozenset(),
-            text=f"COPD {note.text}",
+            text=f"COPD COPD {note.text}",
         )
         for note in separable_notes(30)
     ]
@@ -59,17 +59,25 @@ def _fold() -> Holdout:
 @pytest.mark.parametrize(
     ("min_df", "max_df", "sublinear_tf"), [(1, 1.0, True), (2, 0.9, False)]
 )
+@pytest.mark.parametrize("analyzer", ["word", "char_wb"])
 def test_svm_scores_match_independent_word_bigram_pipeline(
     normalization: TextNormalization | None,
+    analyzer: Literal["word", "char_wb"],
     min_df: int,
     max_df: float,
     *,
     sublinear_tf: bool,
 ) -> None:
-    """C=0,5, balanced a word-1-2 dávají tutéž decision_function s přesností 1e-12."""
+    """Oba analyzátory a opakovaný token ověří všechny volby TF-IDF s přesností 1e-12."""
     fold, seed = _fold(), 7
     actual = SklearnLinearSvmScorer(normalization, seed).score(
-        SVM_PARAMS | {"min_df": min_df, "max_df": max_df, "sublinear_tf": sublinear_tf},
+        SVM_PARAMS
+        | {
+            "analyzer": analyzer,
+            "min_df": min_df,
+            "max_df": max_df,
+            "sublinear_tf": sublinear_tf,
+        },
         fold,
     )
     preprocessor = (
@@ -82,6 +90,7 @@ def test_svm_scores_match_independent_word_bigram_pipeline(
         )
     )
     vectorizer = TfidfVectorizer(
+        analyzer=analyzer,
         ngram_range=(1, 2),
         min_df=min_df,
         max_df=max_df,

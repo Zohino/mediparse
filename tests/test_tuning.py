@@ -149,6 +149,9 @@ def test_repository_tuning_config_and_loader(tmp_path: Path) -> None:
     ("params", "expected"),
     [
         ({"c": 1.0, "n": 2, "flag": True}, True),
+        ({"c": 0.1, "n": 2, "flag": True}, True),
+        ({"c": 0.5, "n": 1, "flag": True}, True),
+        ({"c": 0.5, "n": 3, "flag": True}, True),
         ({"c": 0.0, "n": 2, "flag": True}, False),
         ({"c": 2.0, "n": 2, "flag": True}, False),
         ({"c": 0.5, "n": True, "flag": True}, False),
@@ -174,3 +177,15 @@ def test_space_membership_is_complete_and_typed(
         })
     )
     assert space.contains(params) is expected
+
+
+def test_tuning_config_refuses_single_inner_fold(tmp_path: Path) -> None:
+    """Vnitřní CV potřebuje alespoň dva foldy, jeden musí odmítnout loader."""
+    config = load_tuning_config(REPOSITORY / "config/tuning.json")
+    invalid = tmp_path / "invalid.json"
+    invalid.write_text(
+        json.dumps(config.model_dump(mode="json") | {"inner_folds": 1}),
+        encoding="utf-8",
+    )
+    with pytest.raises(InvalidInputError, match="inner_folds"):
+        load_tuning_config(invalid)
