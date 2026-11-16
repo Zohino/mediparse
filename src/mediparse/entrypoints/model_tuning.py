@@ -35,8 +35,8 @@ from mediparse.infrastructure.tuning_config import load_tuning_config
 if TYPE_CHECKING:
     from collections.abc import Callable, Mapping
 
-    from mediparse.application.model_inference import Clock
     from mediparse.application.model_tuning import ValidationScorer
+    from mediparse.application.ports.experiment import Clock
     from mediparse.domain.clinical_text import TextNormalization
     from mediparse.domain.environment import SourceRevision
     from mediparse.domain.seed import Seed
