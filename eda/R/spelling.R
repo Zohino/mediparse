@@ -52,9 +52,12 @@ variant_table <- function(summary) {
   )
 }
 
-variant_text <- function(summary) {
-  if (nrow(summary) == 0L || !any(summary$vyskyty > 0)) {
+variant_text <- function(summary, notes) {
+  if (notes == 0) {
     return(paste("Výskyt variant názvů diagnóz", UNDECIDABLE_TEXT))
+  }
+  if (!any(summary$vyskyty > 0)) {
+    return("Žádná z předem daných variant názvů diagnóz se ve vstupním korpusu nevyskytuje.")
   }
   sprintf(
     "Z předem daného seznamu se vyskytuje %s. Tabulka uvádí přesné výskyty a podíl zpráv s variantou bez kódu příslušné diagnózy.",
@@ -110,9 +113,12 @@ near_miss_table <- function(forms) {
   )
 }
 
-near_miss_text <- function(forms) {
-  if (nrow(forms) == 0L) {
+near_miss_text <- function(forms, notes) {
+  if (notes == 0) {
     return(paste("Blízké tvary názvů diagnóz nad zvolenými prahy", UNDECIDABLE_TEXT))
+  }
+  if (nrow(forms) == 0L) {
+    return("Žádný blízký tvar nesplňuje zvolené prahy.")
   }
   sprintf(
     "Podmínky splňuje %s; tabulka ukazuje nejvýše %s podle dokumentové frekvence.",

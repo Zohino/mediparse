@@ -438,7 +438,7 @@ export_table(
 
 # Překlepy a varianty názvů diagnóz {#sec-preklepy}
 
-`r variant_text(variants)` @tbl-varianty porovnává předem dané varianty s kódy diagnóz.
+`r variant_text(variants, totals$celkem)` @tbl-varianty porovnává předem dané varianty s kódy diagnóz.
 
 ```{r}
 #| label: tbl-varianty
@@ -455,7 +455,7 @@ export_table(
 
 *Zdroj:* pole `variants_en` v `config/diagnosis_candidates.json`, výskyty v normalizovaných zprávách vstupního korpusu z `note_variants.parquet`.
 
-`r near_miss_text(near_forms)` @tbl-blizke-tvary je podklad pro slovník vybraných překlepů; zahrnuje i plurály a platná slova, které se nepřepisují.
+`r near_miss_text(near_forms, totals$celkem)` @tbl-blizke-tvary je podklad pro slovník vybraných překlepů; zahrnuje i plurály a platná slova, které se nepřepisují.
 
 ```{r}
 #| label: tbl-blizke-tvary
@@ -503,7 +503,7 @@ Dokument ověřil seed lexikon sekcí na vstupním korpusu. Pro další práci z
 - **Zprávy bez nadpisů.** `r headerless_text(headerless)`
 - **Validace parseru.** `r bhc_text(bhc)` Falešný první výskyt hlavičky Brief Hospital Course se projeví jen v kategoriích „náš začátek dřív“ a „jiná neshoda“, a ty mají dohromady jen jednotky zpráv; podnadpis uvnitř jejího těla, který parser přečte jako hlavičku jiné sekce, tyto kategorie nezachytí a ověřuje ho tabulka příčin. `r bhc_cut_text(bhc_cut)` `r bhc_cause_text(bhc_causes)` Hlavní experiment běží nad celou zprávou a strip uřízne konec BHC jen výjimečně, takže posunutá hranice na ně nemá vliv a uvádějí ji Omezení. Týká se hranic sekcí: úsek Brief Hospital Course je u zpráv s koncem dřív kratší než reference. Zda reference polkla celou skutečnou sekci, nebo parser přečetl podnadpis uvnitř Brief Hospital Course jako hlavičku, rozlišují opakování hlavičky a poloha Medications on Admission v tabulce @tbl-bhc-pricina. Převažuje podpis polknuté jediné sekce: zpráva nemá sekci Medications on Admission, hlavička, která úsek uřízla, je jediným výskytem své sekce zapsaným jako synonymum lexikonu a reference obsahuje celou tuto sekci. Reference tedy končí Brief Hospital Course až na Medications on Admission a bez ní pokračuje přes další sekci, nejčastěji Discharge Medications; odchylka je na straně reference, ne parseru. Pravidlo prvního výskytu ani lexikon se proto nemění: úprava, která by hranici za Brief Hospital Course posunula, by u těchto zpráv zrušila skutečnou sekci Discharge Medications a vyrobila falešnou hranici, kterou by převzaly n-gramy po sekcích, strip D2 i varianta vstupu jen z Brief Hospital Course. Podpis podnadpisu (opakovaná hlavička nebo Medications on Admission až za uříznutím) má jen zlomek zpráv s koncem dřív a uvádějí ho Omezení. Pro variantu vstupu jen z Brief Hospital Course platí hranice parseru; reference BHC jako vstup pro tuto variantu nevyhovuje, protože u zpráv bez Medications on Admission obsahuje i léky při propuštění.
 - **Předzpracování pro TF-IDF.** `r preprocessing_text(preprocessing)` `r acronym_text(acronyms)` Tabulka předzpracování zahrnuje i přepis variant a překlepů ze slovníku. Pro S40 z toho plyne podklad pro `min_df` (velikost slovníku před prořezáním je horní mez) a pro rozhodnutí o rozvinutí zkratky AF: rozvinutí by do zpráv se zkratkou AF bez kódu fibrilace (podíl výše) vkládalo „atrial fibrillation“.
-- **Varianty a překlepy.** `r variant_text(variants)` `r near_miss_text(near_forms)` `r typo_text(typos)` Mapa přepisu obsahuje všechny předem dané varianty a vybrané překlepy ze zveřejněné tabulky blízkých tvarů. Varianty míří na kanonický název diagnózy, překlepy na správné slovo, aby například oprava slova kidney nevložila diagnózu CKD. Plurály, platná slova a tvary zaměnitelné s jinými běžnými slovy jsou vyřazené; podíl bez kódu žádný tvar z výběru nevyřadil. Obecné překlepy se neopravují kvůli riziku změny významu. S84 porovná `en-logreg` s `en-logreg-novariants` pro vliv S37 a `en-logreg-novariants` s `en-logreg-nonorm` pro vliv S36.
+- **Varianty a překlepy.** `r variant_text(variants, totals$celkem)` `r near_miss_text(near_forms, totals$celkem)` `r typo_text(typos)` Mapa přepisu obsahuje všechny předem dané varianty a vybrané překlepy ze zveřejněné tabulky blízkých tvarů. Varianty míří na kanonický název diagnózy, překlepy na správné slovo, aby například oprava slova kidney nevložila diagnózu CKD. Plurály, platná slova a tvary zaměnitelné s jinými běžnými slovy jsou vyřazené; podíl bez kódu žádný tvar z výběru nevyřadil. Obecné překlepy se neopravují kvůli riziku změny významu. S84 porovná `en-logreg` s `en-logreg-novariants` pro vliv S37 a `en-logreg-novariants` s `en-logreg-nonorm` pro vliv S36.
 - **Tokeny a n-gramy.** `r ngram_text(ngrams_total)` `max_df` a `ngram_range` ladí S40 na trénovacích foldech; tento sešit dává jen kandidáty na opakované fráze šablony. Tokenizace sešitu se liší od výchozí v TF-IDF: ponechává jen písmena a–z, takže čísla a masku `___` vynechává. Počty kandidátů na frázi šablony jsou podklad pro deduplikaci boilerplate (D26).
 
 # Omezení {#sec-omezeni}
