@@ -60,12 +60,7 @@ eda_synthetic_marker <- function(directory) {
   TRUE
 }
 
-eda_connect <- function() {
-  directory <- eda_parquet_dir()
-  if (!dir.exists(directory)) stop("Adresář s parquetem neexistuje: ", directory, call. = FALSE)
-  directory <- normalizePath(directory, mustWork = TRUE)
-  files <- sort(list.files(directory, pattern = "\\.parquet$", full.names = TRUE))
-  if (length(files) == 0L) stop("Adresář neobsahuje žádný parquet: ", directory, call. = FALSE)
+ensure_data_access <- function(directory) {
   synthetic <- eda_synthetic_marker(directory)
   rules <- data_access_rules()
   for (variable in rules) {
@@ -73,6 +68,16 @@ eda_connect <- function() {
       stop("Adresář neobsahuje synthetic.json, takže jde o skutečná data. ", variable$reason, call. = FALSE)
     }
   }
+  invisible(NULL)
+}
+
+eda_connect <- function() {
+  directory <- eda_parquet_dir()
+  if (!dir.exists(directory)) stop("Adresář s parquetem neexistuje: ", directory, call. = FALSE)
+  directory <- normalizePath(directory, mustWork = TRUE)
+  files <- sort(list.files(directory, pattern = "\\.parquet$", full.names = TRUE))
+  if (length(files) == 0L) stop("Adresář neobsahuje žádný parquet: ", directory, call. = FALSE)
+  ensure_data_access(directory)
   memory <- Sys.getenv("MEDIPARSE_DUCKDB_MEMORY")
   if (!nzchar(memory)) memory <- "8GB"
   temp <- file.path(dirname(directory), "duckdb-tmp")

@@ -1,0 +1,10 @@
+\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.26\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.2\linewidth-2\tabcolsep\relax}>{\raggedleft\arraybackslash}p{\dimexpr 0.12\linewidth-2\tabcolsep\relax}>{\raggedleft\arraybackslash}p{\dimexpr 0.16\linewidth-2\tabcolsep\relax}>{\centering\arraybackslash}p{\dimexpr 0.12\linewidth-2\tabcolsep\relax}>{\centering\arraybackslash}p{\dimexpr 0.14\linewidth-2\tabcolsep\relax}}
+\toprule
+Rodina & Vektorizér & φ & Buňky & Pásmo & Rozhoduje\\
+\midrule
+Complement NB & word-1-2 & 0,063 & 25 z 25 & ne & ne\\
+LightGBM nad LSA & char\_wb-3-5 & 0,481 & 25 z 25 & ne & ne\\
+Logistická regrese & char\_wb-3-5 & 0,710 & 25 z 25 & ne & ne\\
+NB-SVM & word-1-2 & 0,681 & 25 z 25 & ne & ano\\
+\bottomrule
+\end{tabular}
