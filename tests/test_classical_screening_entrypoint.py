@@ -19,7 +19,7 @@ from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import ScreeningManifest
 from mediparse.entrypoints import classical_screening
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.entrypoints.model_input_table import ModelCorpusPaths
+from mediparse.entrypoints.model_corpus import ModelCorpusPaths
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.split_table import ParquetSplitTable
 from tests.screening_support import DEVELOPMENT, SHARED, notes

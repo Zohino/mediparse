@@ -1,4 +1,4 @@
-"""Složení vstupní tabulky, normalizace a sdíleného korpusu modelových kroků."""
+"""Sdílený korpus modelových kroků s tabulkou, normalizací, splitem a otiskem."""
 
 from __future__ import annotations
 

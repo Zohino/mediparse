@@ -22,7 +22,7 @@ from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints import model_training
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.entrypoints.model_input_table import ModelCorpusPaths
+from mediparse.entrypoints.model_corpus import ModelCorpusPaths
 from mediparse.entrypoints.model_training import TrainingPaths
 from mediparse.infrastructure import sklearn_classifier
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization

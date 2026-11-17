@@ -907,7 +907,7 @@ def test_eda_stop_words_match_sklearn() -> None:
     assert words == sorted(ENGLISH_STOP_WORDS)
 
 
-CORPUS_LOADER: Final = "mediparse.entrypoints.model_input_table"
+CORPUS_LOADER: Final = "mediparse.entrypoints.model_corpus"
 DATA_ADAPTER = re.compile(
     r"(?:Parquet\w+|DuckDb\w+|SkopsModelFile|CsvParquetConversion)"
 )
@@ -916,7 +916,7 @@ DATA_ACCESS_IMPORTS = frozenset({
     ("mediparse.infrastructure.eda_duckdb", "EdaDatabase"),
 })
 DATA_ACCESS_EXCEPTIONS = {
-    "model_input_table.py": (
+    "model_corpus.py": (
         "Skládá adaptéry a otisk kohorty; každý importér sám volá stráž, hlídá to tento test."
     ),
 }

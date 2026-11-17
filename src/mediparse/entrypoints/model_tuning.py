@@ -15,7 +15,7 @@ from mediparse.domain.matrix import ModelName
 from mediparse.domain.run_manifest import TuningManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.entrypoints.model_input_table import (
+from mediparse.entrypoints.model_corpus import (
     ModelCorpusPaths,
     model_corpus,
 )

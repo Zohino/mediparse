@@ -18,7 +18,7 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.run_manifest import TuningManifest
 from mediparse.entrypoints import model_tuning
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.entrypoints.model_input_table import ModelCorpusPaths
+from mediparse.entrypoints.model_corpus import ModelCorpusPaths
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.split_table import ParquetSplitTable
 from tests.model_support import ACRONYM_VOCABULARY, model_input, write_split

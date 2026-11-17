@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from mediparse.entrypoints.model_input_table import ModelCorpusPaths
+from mediparse.entrypoints.model_corpus import ModelCorpusPaths
 from mediparse.entrypoints.model_training import TrainingPaths, main
 
 tuning = snakemake.input.get("tuning")

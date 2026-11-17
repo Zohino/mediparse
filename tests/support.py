@@ -13,7 +13,7 @@ from typing import TYPE_CHECKING, Any, Final
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.environment import SourceRevision
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.entrypoints.model_input_table import ModelCorpusPaths
+from mediparse.entrypoints.model_corpus import ModelCorpusPaths
 from mediparse.infrastructure.data_access_rules import load_data_access_rules
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker

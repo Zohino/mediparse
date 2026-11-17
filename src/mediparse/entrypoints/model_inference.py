@@ -15,7 +15,7 @@ from mediparse.application.model_inference import ModelInference
 from mediparse.domain.costs import InferenceCosts, LatencyPlan
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.entrypoints.model_input_table import model_input_table
+from mediparse.entrypoints.model_corpus import model_input_table
 from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.machine_hardware import machine_hardware
