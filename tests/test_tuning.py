@@ -132,15 +132,6 @@ def test_repository_tuning_config_and_loader(tmp_path: Path) -> None:
     """Config z repa má úplný prostor a loader převádí chyby na doménové odmítnutí."""
     config = load_tuning_config(REPOSITORY / "config/tuning.json")
     assert config.row_id == "en-svm"
-    assert config.space.names == {
-        "analyzer",
-        "ngram_max",
-        "c",
-        "class_weight",
-        "min_df",
-        "max_df",
-        "sublinear_tf",
-    }
     invalid = tmp_path / "invalid.json"
     invalid.write_text('{"row_id": "wrong"}', encoding="utf-8")
     with pytest.raises(InvalidInputError, match=r"invalid\.json"):

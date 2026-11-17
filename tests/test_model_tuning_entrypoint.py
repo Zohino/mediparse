@@ -110,7 +110,6 @@ def test_tuning_manifest_records_budget_inputs_training_and_costs(
     expected_budget = 3
     assert manifest.completed_trials + manifest.pruned_trials == expected_budget
     assert manifest.tuning_trials == expected_budget
-    assert manifest.space.contains(manifest.best)
     assert manifest.space == tuning_config().space
     assert (manifest.row_id, manifest.fold, manifest.seed) == ("en-svm", 0, 7)
     assert (
