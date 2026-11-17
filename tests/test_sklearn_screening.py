@@ -21,7 +21,6 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.sklearn_classifier import (
     tfidf_vectorizer,
-    threshold_splits,
 )
 from mediparse.infrastructure.sklearn_screening import (
     Lsa,
@@ -31,6 +30,7 @@ from mediparse.infrastructure.sklearn_screening import (
     classifier_estimator,
     screening_lsa,
 )
+from mediparse.infrastructure.sklearn_split import threshold_splits
 from tests.model_support import OVERLAPPING, separable_notes
 
 if TYPE_CHECKING:

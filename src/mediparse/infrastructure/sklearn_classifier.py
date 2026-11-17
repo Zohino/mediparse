@@ -8,7 +8,6 @@ import zipfile
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Annotated, Final, Literal
 
-import numpy as np
 import skops.io as sio
 from pydantic import BaseModel, ConfigDict, Field, PositiveFloat, PositiveInt
 from sklearn.exceptions import ConvergenceWarning
@@ -27,13 +26,11 @@ from mediparse.domain.clinical_text import (
 )
 from mediparse.domain.evaluation import Classification
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
+from mediparse.infrastructure.sklearn_split import threshold_splits
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Mapping, Sequence
     from pathlib import Path
-
-    from numpy import ndarray
 
     from mediparse.domain.identity import SubjectId
     from mediparse.domain.seed import Seed
@@ -81,32 +78,6 @@ def svm_estimator(params: SvmParameters, seed: Seed) -> LinearSVC:
         Nenatrénovaný estimator se seedem běhu.
     """
     return LinearSVC(C=params.c, class_weight=params.class_weight, random_state=seed)
-
-
-def threshold_splits(
-    labels: Sequence[bool], subjects: Sequence[SubjectId], folds: int, seed: Seed
-) -> list[tuple[ndarray, ndarray]]:
-    """Převede stratifikované části pacientů na indexy zpráv pro vnitřní CV.
-
-    Returns:
-        Páry indexů tréninku a testu; každý pacient náleží jedinému testu.
-    """
-    # Předpočítané indexy nevyžadují globální enable_metadata_routing pro groups.
-    partitions = StratifiedGroupFolds.partition(
-        subjects, [int(label) for label in labels], folds, seed
-    )
-    return [
-        (
-            np.array(
-                [i for i, subject in enumerate(subjects) if subject not in part],
-                dtype=int,
-            ),
-            np.array(
-                [i for i, subject in enumerate(subjects) if subject in part], dtype=int
-            ),
-        )
-        for part in partitions
-    ]
 
 
 @dataclass(frozen=True)

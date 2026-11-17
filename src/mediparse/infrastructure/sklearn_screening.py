@@ -21,8 +21,8 @@ from mediparse.infrastructure.sklearn_classifier import (
     ensure_tokens,
     fit_converged,
     tfidf_vectorizer,
-    threshold_splits,
 )
+from mediparse.infrastructure.sklearn_split import threshold_splits
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Sequence
