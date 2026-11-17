@@ -83,13 +83,14 @@ def test_parallel_pytest(
 
 
 def test_termination_stops_background_pytest(tmp_path: Path) -> None:
-    """SIGTERM ukončí čekací část a zachová již vypsaný postup zbytku testů."""
+    """SIGTERM ukončí čekací část a zachová výstup obou částí."""
     pid_file = tmp_path / "slow.pid"
     ready_file = tmp_path / "ready"
     fake_pytest = tmp_path / "pytest"
     fake_pytest.write_text(
         "#!/usr/bin/env bash\n"
         'if [[ "$1" == tests/test_download_script.py ]]; then\n'
+        '  echo "slow partial output"\n'
         '  echo "$$" > "$SLOW_PID_FILE"\n'
         "  exec sleep 60\n"
         "fi\n"
@@ -124,7 +125,7 @@ def test_termination_stops_background_pytest(tmp_path: Path) -> None:
             assert process.returncode != 0
             with pytest.raises(ProcessLookupError):
                 os.kill(int(pid_file.read_text(encoding="utf-8")), 0)
-            assert output == "rest ready\n"
+            assert output == "rest ready\nslow partial output\n"
         finally:
             if process.poll() is None:
                 process.kill()
