@@ -13,18 +13,19 @@ feature_source <- function(con, file, columns, directory = Sys.getenv("MEDIPARSE
 feature_table <- function(con, name, file, columns, key, complete) {
   if (name %in% DBI::dbListTables(con)) return(name)
   source <- feature_source(con, file, columns)
+  table <- DBI::dbQuoteIdentifier(con, name)
   # Materializace zabrání opakování výběru korpusu (okno přes otisky discharge)
   # v každém z mnoha agregačních dotazů sešitu.
   DBI::dbExecute(con, sprintf(
     "CREATE TEMP TABLE %s AS SELECT f.* FROM %s f JOIN (%s) c USING (note_id)",
-    DBI::dbQuoteIdentifier(con, name), source, input_corpus_sql(con)
+    table, source, input_corpus_sql(con)
   ))
-  table <- DBI::dbQuoteIdentifier(con, name)
   duplicates <- DBI::dbGetQuery(con, sprintf(
     "SELECT count(*) AS n FROM (SELECT 1 FROM %s GROUP BY %s HAVING count(*) > 1)",
     table, paste(DBI::dbQuoteIdentifier(con, key), collapse = ", ")
   ))$n
   if (duplicates > 0) {
+    DBI::dbRemoveTable(con, name)
     stop(sprintf("Soubor %s má %s duplicitních klíčů; spusťte mediparse-eda-note-features.", file, duplicates))
   }
   if (complete) {
@@ -33,6 +34,7 @@ feature_table <- function(con, name, file, columns, key, complete) {
       input_corpus_sql(con), table
     ))$n
     if (missing > 0) {
+      DBI::dbRemoveTable(con, name)
       stop(sprintf("V souboru %s chybí %s zpráv; spusťte mediparse-eda-note-features.", file, missing))
     }
   }
