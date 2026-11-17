@@ -4,8 +4,8 @@ set -uo pipefail
 # které SIGINT posílají svým podprocesům.
 set -m
 
-# Čekací testy s reálnými limity (~112 s ze ~230 s) běží vedle výpočetních;
-# jejich výstup vypíšeme až nakonec, aby se bloky nepromíchaly.
+# Testy stahování čekají na reálné časové limity aria2c, proto běží vedle
+# výpočetních; jejich výstup vypíšeme až nakonec, aby se bloky nepromíchaly.
 slow=tests/test_download_script.py
 output=$(mktemp) || exit 1
 
