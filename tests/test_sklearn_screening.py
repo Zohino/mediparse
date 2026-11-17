@@ -273,8 +273,7 @@ def test_featurizer_fits_only_training_vocabulary() -> None:
         ["alpha beta"],
         ["gamma"],
     )
-    expected_features = 3
-    assert train.sparse.shape == (1, expected_features)
+    assert train.sparse.shape == (1, 3)
     assert test.sparse.shape == train.sparse.shape
     assert test.sparse.nnz == 0
 
@@ -441,8 +440,7 @@ def test_featurizer_applies_its_normalization() -> None:
         ["COPD"],
         ["COPD"],
     )
-    expected_features = 4
-    assert train.sparse.shape[1] == expected_features
+    assert train.sparse.shape[1] == 4
 
 
 @pytest.mark.parametrize(
