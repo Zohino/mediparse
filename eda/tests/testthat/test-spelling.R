@@ -21,7 +21,7 @@ test_that("blízké tvary dodrží ruční vzdálenost, poměr DF a práh popisk
   expect_equal(forms$df, c(5000, 300, 120))
   expect_identical(forms$cil, c("pneumonia", "pneumonia", "diabetes"))
   expect_identical(near_miss_table(forms)$zpravy, c("5\u00a0000", "300", "120"))
-  expect_match(near_miss_text(forms), "3\u00a0tvary", fixed = TRUE)
+  expect_match(near_miss_text(forms, 1000), "3\u00a0tvary", fixed = TRUE)
   DBI::dbExecute(con, "UPDATE token_frequency SET df = 10 WHERE token = 'pnemonia'")
   expect_true("pnemonia" %in% near_miss_forms(con, MANUAL_TARGETS)$tvar)
 })
@@ -63,9 +63,9 @@ test_that("poměr DF musí dosáhnout sta i u jediného výskytu", {
 test_that("prázdné souhrny vrátí nerozhodnutelný text a prázdné tabulky", {
   con <- spelling_con()
   forms <- near_miss_forms(con, MANUAL_TARGETS)
-  expect_match(near_miss_text(forms), UNDECIDABLE_TEXT, fixed = TRUE)
+  expect_match(near_miss_text(forms, 0), UNDECIDABLE_TEXT, fixed = TRUE)
   expect_match(typo_text(typo_estimate(con)), UNDECIDABLE_TEXT, fixed = TRUE)
-  expect_match(variant_text(data.frame(vyskyty = numeric())), UNDECIDABLE_TEXT, fixed = TRUE)
+  expect_match(variant_text(data.frame(vyskyty = numeric()), 0), UNDECIDABLE_TEXT, fixed = TRUE)
   expect_equal(nrow(near_miss_table(forms)), 0L)
   expect_equal(nrow(near_miss_forms(con, character())), 0L)
 })
@@ -111,7 +111,7 @@ test_that("varianty z konfigurace zveřejní sedm výskytů a tři z pěti zprá
   expect_identical(summary$label_cs, "Fibrilace síní")
   expect_identical(variant_table(summary)$bez_kodu, "60,0")
   expect_identical(variant_table(summary)$vyskyty, "7")
-  expect_match(variant_text(summary), "1\u00a0varianta", fixed = TRUE)
+  expect_match(variant_text(summary, 100), "1\u00a0varianta", fixed = TRUE)
 })
 
 test_that("nulový výskyt varianty nemá jmenovatel a prázdný korpus nespadne", {
@@ -121,7 +121,7 @@ test_that("nulový výskyt varianty nemá jmenovatel a prázdný korpus nespadne
   expect_true(all(summary$vyskyty == 0))
   expect_true(all(is.na(summary$podil)))
   expect_true(all(variant_table(summary)$bez_kodu == "–"))
-  expect_match(variant_text(summary), UNDECIDABLE_TEXT, fixed = TRUE)
+  expect_match(variant_text(summary, 1), "nevyskytuje", fixed = TRUE)
   empty <- mimic_con()
   use_feature_fixtures(empty)
   expect_equal(nrow(variant_summary(empty)), 0L)
@@ -146,14 +146,14 @@ test_that("blízký tvar zahrne přesný desetinásobek DF cíle", {
 test_that("tabulka omezí 41 dvojic na 40 a věta zachová všech 41 tvarů", {
   forms <- data.frame(tvar = paste0("tvar", 1:41), cil = "cil", df = 41:1, cil_df = 10000)
   expect_equal(nrow(near_miss_table(forms)), 40L)
-  expect_match(near_miss_text(forms), "41\u00a0tvarů", fixed = TRUE)
+  expect_match(near_miss_text(forms, 1000), "41\u00a0tvarů", fixed = TRUE)
 })
 
 test_that("tvar u dvou cílů se ve větě počítá jednou", {
   con <- spelling_con(c("abcdefg", "abcdefi", "abcdefh"), c(1000, 1000, 100))
   forms <- near_miss_forms(con, c("abcdefg", "abcdefi"))
   expect_equal(nrow(forms), 2L)
-  expect_match(near_miss_text(forms), "1\u00a0tvar;", fixed = TRUE)
+  expect_match(near_miss_text(forms, 1000), "1\u00a0tvar;", fixed = TRUE)
 })
 
 test_that("tvary se stejnou DF řadí podle tokenu", {
@@ -195,4 +195,25 @@ test_that("neprázdné tabulky překlepů projdou exportem včetně podtržítka
     )
   }
   expect_true(all(file.exists(file.path(dir, paste0(names(SPELLING_LAYOUTS), ".tex")))))
+})
+
+
+test_that("prázdný korpus, nulové varianty a tvary pod prahem mají různá vysvětlení", {
+  zero <- data.frame(vyskyty = 0)
+  forms <- data.frame()
+  empty_variant <- variant_text(zero, 0)
+  empty_forms <- near_miss_text(forms, 0)
+  absent <- variant_text(zero, 100)
+  below <- near_miss_text(forms, 100)
+
+  expect_match(empty_variant, "prázdný")
+  expect_match(empty_forms, "prázdný")
+  expect_match(absent, "Žádná z předem daných variant")
+  expect_match(absent, "nevyskytuje")
+  expect_match(below, "Žádný blízký tvar nesplňuje")
+  expect_false(grepl("prázdný", absent, fixed = TRUE))
+  expect_false(grepl("prázdný", below, fixed = TRUE))
+  expect_length(unique(c(empty_variant, absent, below)), 3L)
+  expect_length(unique(c(empty_forms, absent, below)), 3L)
+  expect_identical(variant_text(data.frame(vyskyty = numeric()), 100), absent)
 })

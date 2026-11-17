@@ -13,7 +13,9 @@ DEID: Final = "___"
 # proto nelze zjednodušit na str.count, ten by ____ započítal jako značku.
 STANDALONE_DEID: Final = rf"(?<!_){re.escape(DEID)}(?!_)"
 _DEID_PATTERN: Final = re.compile(STANDALONE_DEID)
-AGE_SUFFIX: Final = r"[ -]?(?:years?[ -]old|y/?o)\b"
+# Lookahead místo \b přijme i y.o. končící tečkou; jedno m/f patří k masce
+# věku s přilepeným pohlavím. Protějšek pro RE2 je v eda/R/text.R.
+AGE_SUFFIX: Final = r"[ -]?(?:years?[ -]?old|yo|y/o|y\.o\.)[mf]?(?![a-z])"
 AGE_MARKER: Final = re.compile(rf"{STANDALONE_DEID}{AGE_SUFFIX}", re.IGNORECASE)
 
 type Sections = tuple[tuple[str, str], ...]

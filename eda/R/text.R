@@ -15,9 +15,13 @@ RESIDUAL_PATTERNS <- c(
 )
 RESIDUAL_COLUMNS <- c("brackets", "html", "xxx")
 
-AGE_MASK <- "(?i)___[ -]?(years?[ -]?old|yo|y/o|y\\.o\\.)"
-AGE_ANCHOR <- "(?i)is an? ___[ -]?(years?[ -]?old|yo|y/o)"
-AGE_NUMERIC <- "(?i)\\b[0-9]{1,3}[ -]?(years?[ -]?old|y/o|yo)\\b"
+# RE2 nemá lookaround. Vytažení a filtr celého kandidáta zachovají i sousední
+# masky; vzor se spotřebovanou hranicí by ___ yo,___ yo započítal jen jednou.
+AGE_SUFFIX <- "[ -]?(years?[ -]?old|yo|y/o|y\\.o\\.)"
+AGE_MASK <- paste0("(?i)___", AGE_SUFFIX, "[mf]?")
+AGE_CANDIDATE <- paste0("(?i)_+", AGE_SUFFIX, "[a-z]*")
+AGE_ANCHOR <- paste0("(?i)is an? ", AGE_MASK, "($|[^a-z])")
+AGE_NUMERIC <- paste0("(?i)\\b[0-9]{1,3}", AGE_SUFFIX, "[mf]?($|[^a-z])")
 
 metrics_table_name <- function(table) paste0("note_metrics_", table)
 
@@ -34,7 +38,7 @@ note_metrics <- function(con, table) {
       len(regexp_extract_all(text, %s)) AS brackets,
       len(regexp_extract_all(text, %s)) AS html,
       len(regexp_extract_all(text, %s)) AS xxx,
-      len(regexp_extract_all(text, %s)) AS age_masks,
+      len(list_filter(regexp_extract_all(text, %s), x -> regexp_full_match(x, %s))) AS age_masks,
       regexp_matches(text, %s) AS age_anchor,
       regexp_matches(text, %s) AS age_numeric,
       CASE WHEN length(text) > 0 THEN hash(text) END AS fingerprint
@@ -44,6 +48,7 @@ note_metrics <- function(con, table) {
     DBI::dbQuoteString(con, RESIDUAL_PATTERNS[[1]]),
     DBI::dbQuoteString(con, RESIDUAL_PATTERNS[[2]]),
     DBI::dbQuoteString(con, RESIDUAL_PATTERNS[[3]]),
+    DBI::dbQuoteString(con, AGE_CANDIDATE),
     DBI::dbQuoteString(con, AGE_MASK),
     DBI::dbQuoteString(con, AGE_ANCHOR),
     DBI::dbQuoteString(con, AGE_NUMERIC),

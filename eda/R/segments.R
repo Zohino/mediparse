@@ -24,7 +24,10 @@ header_text_sql <- function(text = "d.text", alias = "s") {
 OTHER_SECTION <- "other"
 
 segment_corpus <- function(con) {
-  feature_table(con, SECTIONS_TABLE, "note_sections.parquet", SECTION_COLUMNS)
+  feature_table(
+    con, SECTIONS_TABLE, "note_sections.parquet", SECTION_COLUMNS,
+    key = c("note_id", "position"), complete = TRUE
+  )
 }
 
 # Kostra jsou sekce, které má většina zpráv; popisná hranice jako CANDIDATE_COVERAGE, ale jiný

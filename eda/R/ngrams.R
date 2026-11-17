@@ -5,7 +5,7 @@ TOKEN_SQL <- "regexp_extract_all(lower(%s), '[a-z]{2,}')"
 NGRAM_SIZES <- 1:3
 NGRAM_RANKING <- 15L
 SECTION_NGRAMS <- 5L
-# Fráze šablony je n-gram, který má aspoň polovina zpráv; vlastní konstanta, protože má jiný důvod
+# Kandidát na frázi šablony je n-gram, který má aspoň polovina zpráv; vlastní konstanta, protože má jiný důvod
 # změny než CANDIDATE_COVERAGE (kandidáti na lexikon) a SKELETON_COVERAGE (sestavení kostry).
 BOILERPLATE_COVERAGE <- 0.5
 STOP_TABLE <- "ngram_stop_input"
@@ -55,7 +55,7 @@ ngram_tokens <- function(con, stopwords, sections) {
   TOKENS_TABLE
 }
 
-# Jmenovatel brány: u celku zprávy vstupního korpusu (`segment_corpus` je plní z něj), u sekce
+# Jmenovatel podílu: u celku zprávy vstupního korpusu (`segment_corpus` je plní z něj), u sekce
 # zprávy, které ji mají.
 ngram_denominators <- function(con, sections) {
   if (is.null(sections)) {
@@ -92,7 +92,8 @@ ngram_counts <- function(con, stopwords, sections = NULL, floor_fn = publishable
     add = TRUE
   )
   denominators <- ngram_denominators(con, sections)
-  denominators$prah <- as.numeric(floor_fn(denominators$jmenovatel))
+  total <- ngram_denominators(con, NULL)$jmenovatel
+  denominators$prah <- rep(as.numeric(floor_fn(total)), nrow(denominators))
   limits <- write_temp(con, FLOOR_TABLE, denominators)
   per_size <- lapply(NGRAM_SIZES, function(size) {
     DBI::dbGetQuery(con, sprintf("
@@ -207,7 +208,6 @@ top_ngram_text <- function(counts, size) {
   )
 }
 
-# Fráze šablony jsou n-gramy, které má aspoň polovina zpráv; podklad pro `max_df` v S40 a D26.
 ngram_text <- function(counts) {
   if (nrow(counts) == 0L) {
     return("Žádný n-gram nepřekročil bránu DUA, nejčastější n-gramy nelze uvést.")
@@ -218,7 +218,7 @@ ngram_text <- function(counts) {
     count_phrase(sum(common & counts$n == size), NGRAM_KINDS[[as.character(size)]]$forms)
   }, character(1))
   sprintf(
-    "Nejčastější je %s. Aspoň %s zpráv má %s; jsou to fráze šablony, které nic nerozlišují.",
+    "Nejčastější je %s. Aspoň %s zpráv má %s; jsou to kandidáti na opakovanou frázi šablony. Dokumentová frekvence sama neříká, zda n-gram rozlišuje diagnózy.",
     join_labels(unlist(tops)), coverage_threshold_text(BOILERPLATE_COVERAGE),
     join_labels(counted)
   )
