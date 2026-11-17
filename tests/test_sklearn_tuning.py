@@ -16,6 +16,7 @@ from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.split import Holdout
+from mediparse.domain.tuning import CategoricalParam
 from mediparse.infrastructure import sklearn_tuning
 from mediparse.infrastructure.sklearn_classifier import tfidf_preprocessor
 from mediparse.infrastructure.sklearn_tuning import SklearnLinearSvmScorer
@@ -164,3 +165,32 @@ def test_invalid_svm_message_includes_parameter_cause() -> None:
     """Odmítnutí záporného C zachová příčinu validace bez textu zpráv."""
     with pytest.raises(InvalidInputError, match="Input should be greater than 0"):
         SklearnLinearSvmScorer(None, 7).score(SVM_PARAMS | {"c": -1.0}, _fold())
+
+
+def _repository_parameter_cases() -> list[tuple[str, ParamValue]]:
+    space = load_tuning_config(REPOSITORY / "config/tuning.json").space
+    cases = []
+    for param in space.params:
+        values = (
+            param.choices
+            if isinstance(param, CategoricalParam)
+            else (param.low, param.high)
+        )
+        cases.extend((param.name, value) for value in values)
+    return cases
+
+
+@pytest.mark.parametrize(("name", "value"), _repository_parameter_cases())
+def test_repository_space_values_produce_finite_svm_scores(
+    name: str, value: ParamValue
+) -> None:
+    """Každá volba a krajní hodnota veřejného prostoru funguje se skutečným scorerem."""
+    space = load_tuning_config(REPOSITORY / "config/tuning.json").space
+    params = {
+        param.name: param.choices[0]
+        if isinstance(param, CategoricalParam)
+        else param.low
+        for param in space.params
+    }
+    result = SklearnLinearSvmScorer(None, 7).score(params | {name: value}, _fold())
+    assert all(np.isfinite(scores).all() for scores in result.scores.values())
