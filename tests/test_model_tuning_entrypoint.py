@@ -14,15 +14,17 @@ import pytest
 from optuna.storages import RDBStorage
 from sqlalchemy.pool import NullPool
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.run_manifest import TuningManifest
 from mediparse.entrypoints import model_tuning
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_input_table import ModelCorpusPaths
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.split_table import ParquetSplitTable
-from tests.model_support import write_split
+from tests.model_support import ACRONYM_VOCABULARY, model_input, write_split
 from tests.screening_support import notes
 from tests.support import (
+    REPOSITORY_SECTION_HEADERS,
     REVISION,
     fixed_revision,
     mark_synthetic,
@@ -265,3 +267,53 @@ def test_main_passes_workflow_paths_and_runtime_dependencies(
     assert run.call_args.kwargs["paths"] == paths
     assert callable(run.call_args.kwargs["revision"])
     assert callable(run.call_args.kwargs["clock"].now)
+
+
+@pytest.mark.parametrize("preprocessing", ["normalized", "dictionary"])
+def test_manifest_preserves_preprocessing_and_strip(
+    tmp_path: Path, preprocessing: str
+) -> None:
+    """Manifest ladění nese strip, slovník a explicitní úroveň předzpracování."""
+    inputs = _inputs(
+        tmp_path,
+        row_changes={"input": model_input(strip=True, preprocessing=preprocessing)},
+    )
+    out = tmp_path / "out"
+    assert _run(inputs, out) is ExitCode.OK
+    manifest = _manifest(out)
+    assert manifest.diagnostic_strip is not None
+    assert manifest.diagnostic_strip.sections == ("discharge_diagnosis",)
+    assert (
+        manifest.diagnostic_strip.lexicon_sha256
+        == hashlib.sha256(REPOSITORY_SECTION_HEADERS.read_bytes()).hexdigest()
+    )
+    assert manifest.text_preprocessing.value == preprocessing
+    assert manifest.text_normalization is not None
+    assert (
+        manifest.text_normalization.acronyms["COPD"]
+        == "chronic obstructive pulmonary disease"
+    )
+    assert bool(manifest.text_normalization.variants) == (preprocessing == "dictionary")
+
+
+def test_normalization_changes_tuning_scores(tmp_path: Path) -> None:
+    """Sjednocení zkratky a názvu odstraní signál syntetických tříd a změní skóre."""
+    scores = []
+    for preprocessing in ("none", "normalized"):
+        root = tmp_path / preprocessing
+        inputs = _inputs(
+            root, row_changes={"input": model_input(preprocessing=preprocessing)}
+        )
+        table = ParquetNoteTable(inputs.cohort)
+        table.write([
+            replace(
+                note,
+                text=ACRONYM_VOCABULARY[0 if note.has_label(Diagnosis.DIABETES) else 1],
+            )
+            for note in table.read()
+        ])
+        out = root / "out"
+        assert _run(inputs, out) is ExitCode.OK
+        scores.append(_manifest(out).best_macro_f1)
+
+    assert scores[0] != scores[1]
