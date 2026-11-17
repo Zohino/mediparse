@@ -96,6 +96,7 @@ def test_sqlite_lifecycle_counts_pruned_and_refuses_existing_study(
         "Pokus 0 COMPLETE",
         "Pokus 1 PRUNED",
     ]
+    assert all("čas 0:00:" in message for message in caplog.messages)
     assert storage.is_file()
     with pytest.raises(InvalidInputError, match="už existuje"):
         OptunaSearch.create(space, 7, 1, storage)
