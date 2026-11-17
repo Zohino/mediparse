@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 set -uo pipefail
+# Bez řízení úloh asynchronní příkaz ignoruje SIGINT; pytest to předá testům,
+# které SIGINT posílají svým podprocesům.
+set -m
 
 # Čekací testy s reálnými limity (~112 s ze ~230 s) běží vedle výpočetních;
 # jejich výstup vypíšeme až nakonec, aby se bloky nepromíchaly.
@@ -8,7 +11,7 @@ output=$(mktemp) || exit 1
 
 pytest "$@" "$slow" >"$output" 2>&1 &
 slow_pid=$!
-trap 'kill "$slow_pid" 2>/dev/null || :; wait "$slow_pid" 2>/dev/null || :; cat "$output"; rm -f "$output"' EXIT
+trap 'kill -- "-$slow_pid" 2>/dev/null || :; wait "$slow_pid" 2>/dev/null || :; cat "$output"; rm -f "$output"' EXIT
 trap 'exit 143' TERM
 trap 'exit 130' INT
 
