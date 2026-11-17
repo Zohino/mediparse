@@ -31,7 +31,12 @@ if TYPE_CHECKING:
     from mediparse.domain.tuning import ParamValue, SearchSpace
 
 logger = logging.getLogger(__name__)
-SAMPLER: Final = "optuna.samplers.TPESampler"
+TPE_STARTUP_TRIALS: Final = 10
+TPE_MULTIVARIATE: Final = False
+SAMPLER: Final = (
+    f"optuna.samplers.TPESampler(n_startup_trials={TPE_STARTUP_TRIALS}, "
+    f"multivariate={TPE_MULTIVARIATE})"
+)
 PRUNER: Final = "optuna.pruners.MedianPruner"
 
 
@@ -77,7 +82,11 @@ class OptunaSearch:
                 study_name="model-tuning",
                 storage=backend,
                 direction="maximize",
-                sampler=TPESampler(seed=seed),
+                sampler=TPESampler(
+                    seed=seed,
+                    n_startup_trials=TPE_STARTUP_TRIALS,
+                    multivariate=TPE_MULTIVARIATE,
+                ),
                 pruner=MedianPruner(
                     n_startup_trials=pruner_startup_trials, n_warmup_steps=0
                 ),
