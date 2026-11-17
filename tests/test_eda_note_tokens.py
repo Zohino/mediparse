@@ -309,10 +309,10 @@ def test_script_splitter_uses_masked_preparation(
     splitter = ScriptSplitter(load_translation(inputs["translation"]), tokenizer)
     text = "a ___ ___\n\nb ___ ___"
     # Příprava je autoritou EDA; příklad se po maskování do jedné části nevejde.
-    assert prepare._fits(tokenizer, text)  # ruff: ignore[private-member-access]
+    assert prepare.fits(tokenizer, text)
     assert splitter.fits(text) is False
-    assert splitter.fits(text) == prepare._note_fits(tokenizer, text)  # ruff: ignore[private-member-access]
-    assert splitter.parts(text) == len(prepare._parts(tokenizer, text))  # ruff: ignore[private-member-access]
+    assert splitter.fits(text) == prepare.note_fits(tokenizer, text)
+    assert splitter.parts(text) == len(prepare.parts(tokenizer, text))
 
 
 @pytest.mark.parametrize(

@@ -50,7 +50,7 @@ class TranslationScript:
             Tokeny promptu včetně právě jednoho BOS.
         """
         # PEP 723 příprava je jediným zdrojem chat promptu pro překlad.
-        return self._prepare._token_ids(tokenizer, text)  # ruff: ignore[private-member-access]
+        return self._prepare.prompt_ids(tokenizer, text)
 
     def fits(self, tokenizer: PreTrainedTokenizerBase, text: str) -> bool:
         """Ověří okno překladu po maskování celé zprávy.
@@ -58,9 +58,9 @@ class TranslationScript:
         Returns:
             Zda se vejde celý text včetně rezervy na překlad.
         """
-        # Stejná kontrola maskované celé zprávy jako v _parts brání tomu,
+        # Stejná kontrola maskované celé zprávy jako v parts brání tomu,
         # aby sešit 4 držel vlastní kopii maskování.
-        return self._prepare._note_fits(tokenizer, text)  # ruff: ignore[private-member-access]
+        return self._prepare.note_fits(tokenizer, text)
 
     def parts(self, tokenizer: PreTrainedTokenizerBase, text: str) -> int | None:
         """Použije přípravu překladu včetně maskování před dělením.
@@ -70,7 +70,7 @@ class TranslationScript:
         """
         try:
             # PEP 723 příprava je jediným zdrojem pořadí maskování a dělení.
-            return len(self._prepare._parts(tokenizer, text))  # ruff: ignore[private-member-access]
+            return len(self._prepare.parts(tokenizer, text))
         except self._note_parts.UnsplittableError:
             return None
 

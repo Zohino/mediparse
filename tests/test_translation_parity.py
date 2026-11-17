@@ -51,7 +51,7 @@ def collect(monkeypatch: pytest.MonkeyPatch) -> ModuleType:
 
 @pytest.fixture
 def translate(monkeypatch: pytest.MonkeyPatch) -> ModuleType:
-    """Načte translate.py s náhradními moduly vllm a torch, které `_read` nepoužívá.
+    """Načte translate.py s náhradními moduly vllm a torch, které `read_records` nepoužívá.
 
     Returns:
         Načtený modul.
@@ -95,11 +95,6 @@ def _write_notes(
     return workdir, english
 
 
-def _read_outputs(translate: ModuleType, path: Path) -> list[dict[str, str]]:
-    # Čtení výstupů je soukromá funkce skriptu a právě ta je předmětem parity.
-    return translate._read(path)  # ruff: ignore[private-member-access]
-
-
 def _collect(
     collect: ModuleType,
     monkeypatch: pytest.MonkeyPatch,
@@ -124,7 +119,7 @@ def test_json_lines_with_unicode_line_breaks_are_read_alike(
     notes = {note_id: ("A\n", text) for note_id, text in texts.items()}
     workdir, english = _write_notes(tmp_path, notes)
 
-    read = _read_outputs(translate, workdir / "outputs.jsonl")
+    read = translate.read_records(workdir / "outputs.jsonl")
     code, target = _collect(collect, monkeypatch, workdir, english)
     domain = TranslationWorkdir(workdir).notes()
 
@@ -149,7 +144,7 @@ def test_translate_reads_missing_outputs_as_empty(
     translate: ModuleType, tmp_path: Path
 ) -> None:
     """Bez výstupů z dřívějšího běhu nezbývá nic přeskočit."""
-    assert _read_outputs(translate, tmp_path / "outputs.jsonl") == []
+    assert translate.read_records(tmp_path / "outputs.jsonl") == []
 
 
 def test_translate_read_keeps_record_order(
@@ -159,7 +154,7 @@ def test_translate_read_keeps_record_order(
     path = tmp_path / "outputs.jsonl"
     path.write_text('{"key": "b"}\n\n   \n{"key": "a"}\n', encoding="utf-8")
 
-    assert [record["key"] for record in _read_outputs(translate, path)] == ["b", "a"]
+    assert [record["key"] for record in translate.read_records(path)] == ["b", "a"]
 
 
 @pytest.fixture
