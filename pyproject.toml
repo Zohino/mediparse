@@ -396,10 +396,6 @@ ignore = [
     "hardcoded-password-string",              # heslo lokálního testovacího serveru, ne přihlášení k PhysioNetu
 ]
 
-"src/mediparse/**/entrypoints/*.py" = [
-    "too-many-arguments", # composition root předává explicitní vstupy a výstupy kroku; typ jen pro předání polí by nic nepojmenoval
-]
-
 [tool.ruff.lint.flake8-type-checking]
 runtime-evaluated-base-classes = ["pydantic.BaseModel"]  # pydantic čte anotace za běhu
 
