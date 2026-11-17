@@ -24,6 +24,19 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
     from pathlib import Path
 
+    from mediparse.domain.tuning import ParamValue
+
+FIXED_SVM_PARAMS: Final[dict[str, ParamValue]] = {
+    "analyzer": "word",
+    "ngram_max": 1,
+    "c": 1.0,
+    "class_weight": None,
+    "min_df": 1,
+    "max_df": 1.0,
+    "sublinear_tf": True,
+}
+
+
 SEPARABLE_VOCABULARY: Final = (
     "diabetes insulin glucose metformin hyperglycemia",
     "fracture cast orthopedic surgery splint",
@@ -42,6 +55,9 @@ ACRONYM_VOCABULARY: Final = (
 """Slova zpráv, která se liší jen zkratkou a vypsaným názvem diagnózy."""
 
 VARIANT_VOCABULARY: Final = ("T2DM review", "diabetes review")
+
+
+NEGATIVE_CONTROL: Final = "fracture orthopedic splint"
 
 
 OVERLAPPING: Final = (
@@ -79,6 +95,25 @@ def separable_notes(
             for visit in range(1 + (patient * patient * 3 + patient) % 7)
         )
     return notes
+
+
+def with_negative_controls(notes: Sequence[InputNote]) -> list[InputNote]:
+    """Doplní negativní kontrolu každému pacientovi pro CV i po sjednocení synonym.
+
+    Returns:
+        Původní zprávy a jedna syntetická kontrola s odlišným textem na pacienta.
+    """
+    subjects = sorted({note.subject_id for note in notes})
+    return list(notes) + [
+        InputNote(
+            note_id(subject, 999),
+            subject,
+            Language.EN,
+            NEGATIVE_CONTROL,
+            frozenset(),
+        )
+        for subject in subjects
+    ]
 
 
 def sectioned_notes(patients: int) -> list[InputNote]:
@@ -145,14 +180,15 @@ def training_config(**overrides: object) -> dict[str, object]:
 
     Returns:
         Slovník s klíči ``row_id``, ``diagnosis``, ``seed``, ``fold``,
-        ``regularization`` a ``input``, přepsanými hodnotami z ``overrides``.
+        ``parameters``, ``threshold_folds`` a ``input``, přepsanými hodnotami z ``overrides``.
     """
     return {
         "row_id": "row",
         "diagnosis": "diabetes",
         "seed": 0,
         "fold": 0,
-        "regularization": 1.0,
+        "parameters": FIXED_SVM_PARAMS.copy(),
+        "threshold_folds": 3,
         "input": model_input(),
     } | overrides
 

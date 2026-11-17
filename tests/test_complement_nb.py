@@ -16,8 +16,8 @@ from mediparse.infrastructure.complement_nb import ComplementNbLogOdds
 from mediparse.infrastructure.sklearn_screening import (
     ScreeningFeatures,
     SklearnThresholdTuner,
-    threshold_splits,
 )
+from mediparse.infrastructure.sklearn_split import threshold_splits
 
 
 def test_log_odds_matches_library_probabilities_and_predictions() -> None:

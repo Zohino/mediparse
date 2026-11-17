@@ -4,24 +4,17 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from functools import partial
-from typing import TYPE_CHECKING, Annotated, Literal
-
-from pydantic import (
-    BaseModel,
-    ConfigDict,
-    Field,
-    PositiveFloat,
-    PositiveInt,
-)
-from sklearn.svm import LinearSVC
+from typing import TYPE_CHECKING
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.tuning import ValidationScores
 from mediparse.infrastructure.sklearn_classifier import (
+    SvmParameters,
     ensure_tokens,
     fit_converged,
-    tfidf_vectorizer,
+    svm_estimator,
+    svm_vectorizer,
 )
 
 if TYPE_CHECKING:
@@ -31,22 +24,6 @@ if TYPE_CHECKING:
     from mediparse.domain.seed import Seed
     from mediparse.domain.split import Holdout
     from mediparse.domain.tuning import ParamValue
-
-
-class _SvmParameters(BaseModel):
-    """Typové meze konkrétního estimatoru na hranici obecného prostoru."""
-
-    model_config = ConfigDict(
-        frozen=True, strict=True, extra="forbid", allow_inf_nan=False
-    )
-
-    analyzer: Literal["word", "char_wb"]
-    ngram_max: PositiveInt
-    c: PositiveFloat
-    class_weight: Literal["balanced"] | None
-    min_df: PositiveInt
-    max_df: Annotated[float, Field(gt=0, le=1)]
-    sublinear_tf: bool
 
 
 @dataclass(frozen=True)
@@ -59,7 +36,7 @@ class SklearnLinearSvmScorer:
     @property
     def parameters(self) -> frozenset[str]:
         """Jména podporovaných parametrů včetně pevných voleb vektorizéru."""
-        return frozenset(_SvmParameters.model_fields)
+        return frozenset(SvmParameters.model_fields)
 
     def score(
         self, params: Mapping[str, ParamValue], fold: Holdout
@@ -73,21 +50,14 @@ class SklearnLinearSvmScorer:
             InvalidInputError: Parametry neodpovídají SVM nebo nevznikne slovník.
         """
         try:
-            return self._score(_SvmParameters.model_validate(params), fold)
+            return self._score(SvmParameters.model_validate(params), fold)
         except ValueError as error:
             msg = f"Parametry nebo trénovací slovník ladění SVM nejsou platné: {error}"
             raise InvalidInputError(msg) from error
 
-    def _score(self, params: _SvmParameters, fold: Holdout) -> ValidationScores:
+    def _score(self, params: SvmParameters, fold: Holdout) -> ValidationScores:
         # Parametry TF-IDF se ladí, proto nový fit patří do každého pokusu a foldu.
-        vectorizer = tfidf_vectorizer(
-            self.normalization,
-            analyzer=params.analyzer,
-            ngram_range=(1, params.ngram_max),
-            min_df=params.min_df,
-            max_df=params.max_df,
-            sublinear_tf=params.sublinear_tf,
-        )
+        vectorizer = svm_vectorizer(params, self.normalization)
         texts = [note.text for note in fold.train]
         ensure_tokens(vectorizer, texts)
         train = vectorizer.fit_transform(texts)
@@ -95,9 +65,7 @@ class SklearnLinearSvmScorer:
         scores = {}
         converged = True
         for diagnosis in Diagnosis:
-            model = LinearSVC(
-                C=params.c, class_weight=params.class_weight, random_state=self.seed
-            )
+            model = svm_estimator(params, self.seed)
             labels = [note.has_label(diagnosis) for note in fold.train]
             converged &= fit_converged(partial(model.fit, train, labels))
             scores[diagnosis] = tuple(

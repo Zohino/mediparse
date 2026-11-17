@@ -76,6 +76,7 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
         ),
         "model_training": partial(
             model_training.run,
+            tuning=None,
             cohort=notes,
             config=REPOSITORY_TRAINING_CONFIG,
             candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,

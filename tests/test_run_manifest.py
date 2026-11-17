@@ -40,6 +40,11 @@ def _fields(**changes: object) -> dict[str, object]:
         "dataset_sha256": DIGEST,
         "predictions_sha256": DIGEST,
         "config_sha256": DIGEST,
+        "tuning_manifest_sha256": None,
+        "parameters": {"c": 1.0},
+        "threshold": 0.25,
+        "threshold_folds": 3,
+        "converged": True,
         "seed": 0,
         "split_seed": 1,
         "split_folds": 5,
@@ -400,3 +405,41 @@ def test_training_manifest_requires_prediction_digest() -> None:
     del fields["predictions_sha256"]
     with pytest.raises(ValidationError, match="predictions_sha256"):
         RunManifest.model_validate(fields)
+
+
+@pytest.mark.parametrize(
+    "field",
+    [
+        "tuning_manifest_sha256",
+        "parameters",
+        "threshold",
+        "threshold_folds",
+        "converged",
+    ],
+)
+def test_training_manifest_requires_tuning_record(field: str) -> None:
+    """Parametry, práh, konvergence a explicitní původ ladění jsou povinné."""
+    fields = _fields()
+    del fields[field]
+    with pytest.raises(ValidationError, match=field):
+        RunManifest.model_validate(fields)
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("threshold", float("inf")),
+        ("threshold", float("-inf")),
+        ("threshold", float("nan")),
+        ("threshold_folds", 1),
+        ("threshold_folds", True),
+        ("converged", 1),
+        ("tuning_manifest_sha256", "g" * 64),
+    ],
+)
+def test_training_manifest_rejects_invalid_tuning_record(
+    field: str, value: object
+) -> None:
+    """Práh musí být konečný, CV má aspoň dva foldy a provenance drží přísné typy."""
+    with pytest.raises(ValidationError, match=field):
+        RunManifest.model_validate(_fields(**{field: value}))

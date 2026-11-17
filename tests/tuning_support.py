@@ -5,7 +5,10 @@ from __future__ import annotations
 import json
 
 from mediparse.domain.matrix import MatrixRow
+from mediparse.domain.model_input import TextPreprocessing
+from mediparse.domain.run_manifest import TuningManifest
 from mediparse.domain.tuning import ParamValue, TuningConfig
+from tests.manifest_support import training_manifest
 from tests.model_support import model_input
 
 SVM_PARAMS: dict[str, ParamValue] = {
@@ -73,3 +76,66 @@ def matrix_row(**overrides: object) -> MatrixRow:
             | overrides
         )
     )
+
+
+def tuning_manifest_fields(**changes: object) -> dict[str, object]:
+    """Sestaví společná syntetická pole manifestu pro validní i neplatné případy.
+
+    Returns:
+        Pole s rozpočtem tří pokusů, z nichž dva skončily a jeden byl prořezán.
+    """
+    training = training_manifest()
+    return {
+        "row_id": "row",
+        "fold": 0,
+        "dataset_sha256": "b" * 64,
+        "config_sha256": "b" * 64,
+        "matrix_sha256": "c" * 64,
+        "split_sha256": "c" * 64,
+        "split_seed": 23,
+        "split_folds": 2,
+        "seed": 7,
+        "tuning_trials": 3,
+        "completed_trials": 2,
+        "pruned_trials": 1,
+        "nonconverged_trials": 1,
+        "best_macro_f1": 6 / 7,
+        "best": SVM_PARAMS,
+        "space": tuning_config().space.model_dump(),
+        "sampler": "sampler",
+        "pruner": "pruner",
+        "seconds": 2.5,
+        "train_notes": 40,
+        "train_patients": 20,
+        "diagnostic_strip": None,
+        "text_preprocessing": TextPreprocessing.NONE,
+        "text_normalization": None,
+        "environment": training.environment.model_dump(),
+        "hardware": training.hardware.model_dump(),
+    } | changes
+
+
+def tuning_manifest(
+    *, best: dict[str, ParamValue] | None = None, **overrides: object
+) -> TuningManifest:
+    """Validuje společná pole manifestu s jednobodovým prostorem nejlepších parametrů.
+
+    Returns:
+        Manifest s přepsanými poli a zadanými nejlepšími parametry.
+    """
+    parameters = SVM_PARAMS if best is None else best
+    fields = tuning_manifest_fields(
+        **(
+            {
+                "best": parameters,
+                "space": {
+                    "params": [
+                        {"kind": "categorical", "name": name, "choices": [value]}
+                        for name, value in parameters.items()
+                    ]
+                },
+            }
+            | overrides
+        )
+    )
+    return TuningManifest.model_validate_json(json.dumps(fields))

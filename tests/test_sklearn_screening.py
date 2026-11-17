@@ -9,8 +9,6 @@ from typing import TYPE_CHECKING, Literal, Self, override
 
 import numpy as np
 import pytest
-from hypothesis import given
-from hypothesis import strategies as st
 from scipy.sparse import csr_matrix
 from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.decomposition import TruncatedSVD
@@ -21,7 +19,9 @@ from mediparse.domain.classical_screening import ClassifierFamily, VectorizerSpe
 from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
+from mediparse.infrastructure.sklearn_classifier import (
+    tfidf_vectorizer,
+)
 from mediparse.infrastructure.sklearn_screening import (
     Lsa,
     ScreeningFeatures,
@@ -29,8 +29,8 @@ from mediparse.infrastructure.sklearn_screening import (
     TfidfFeaturizer,
     classifier_estimator,
     screening_lsa,
-    threshold_splits,
 )
+from mediparse.infrastructure.sklearn_split import threshold_splits
 from tests.model_support import OVERLAPPING, separable_notes
 
 if TYPE_CHECKING:
@@ -56,39 +56,6 @@ def _word_training() -> tuple[ScreeningFeatures, list[bool], list[int]]:
         [note.has_label(Diagnosis.DIABETES) for note in notes],
         [note.subject_id for note in notes],
     )
-
-
-@st.composite
-def _patient_labels(draw: st.DrawFn) -> tuple[list[int], list[bool], int]:
-    folds = draw(st.integers(2, 4))
-    labels = draw(st.lists(st.booleans(), min_size=2 * folds, max_size=30))
-    labels[: 2 * folds] = [False, True] * folds
-    visits = draw(
-        st.lists(st.integers(1, 4), min_size=len(labels), max_size=len(labels))
-    )
-    rows = [
-        (subject, label)
-        for subject, (label, count) in enumerate(zip(labels, visits, strict=True))
-        for _ in range(count)
-    ]
-    rows = list(draw(st.permutations(rows)))
-    return [subject for subject, _ in rows], [label for _, label in rows], folds
-
-
-@given(_patient_labels())
-def test_threshold_splits_separate_patients_and_cover_every_index_once(
-    corpus: tuple[list[int], list[bool], int],
-) -> None:
-    """Žádný pacient nepřekročí hranici a každý index je právě jednou v testu."""
-    subjects, labels, folds = corpus
-    splits = threshold_splits(labels, subjects, folds, 7)
-    tested = []
-    for train, test in splits:
-        assert {subjects[i] for i in train}.isdisjoint(subjects[i] for i in test)
-        assert sorted([*train, *test]) == list(range(len(subjects)))
-        tested.extend(test)
-    assert len(splits) == folds
-    assert sorted(tested) == list(range(len(subjects)))
 
 
 @pytest.mark.parametrize("family", ClassifierFamily)

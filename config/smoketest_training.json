@@ -3,9 +3,18 @@
   "diagnosis": "diabetes",
   "seed": 0,
   "fold": 0,
-  "regularization": 1.0,
   "input": {
     "strip_diagnostic_sections": true,
     "text_preprocessing": "dictionary"
-  }
+  },
+  "parameters": {
+    "analyzer": "word",
+    "ngram_max": 1,
+    "c": 1.0,
+    "class_weight": null,
+    "min_df": 1,
+    "max_df": 1.0,
+    "sublinear_tf": true
+  },
+  "threshold_folds": 3
 }

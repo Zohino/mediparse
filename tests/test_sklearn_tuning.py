@@ -17,7 +17,7 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.split import Holdout
 from mediparse.domain.tuning import CategoricalParam
-from mediparse.infrastructure import sklearn_tuning
+from mediparse.infrastructure import sklearn_classifier, sklearn_tuning
 from mediparse.infrastructure.sklearn_classifier import tfidf_preprocessor
 from mediparse.infrastructure.sklearn_tuning import SklearnLinearSvmScorer
 from mediparse.infrastructure.tuning_config import load_tuning_config
@@ -143,7 +143,7 @@ def test_svm_passes_seed_to_every_diagnosis(monkeypatch: pytest.MonkeyPatch) -> 
     """Všech pět estimatorů dostane seed scoreru i při deterministickém řešiči."""
     seed = 13
     factory = Mock(wraps=LinearSVC)
-    monkeypatch.setattr(sklearn_tuning, "LinearSVC", factory)
+    monkeypatch.setattr(sklearn_classifier, "LinearSVC", factory)
     SklearnLinearSvmScorer(None, seed).score(SVM_PARAMS, _fold())
     assert [call.kwargs.get("random_state") for call in factory.call_args_list] == [
         seed

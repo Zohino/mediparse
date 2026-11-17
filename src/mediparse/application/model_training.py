@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
+from mediparse.application.ports.experiment import TextClassifier
 from mediparse.domain.evaluation import Prediction
 from mediparse.domain.split import ensure_patients_per_class
 from mediparse.domain.training import TrainingReport
@@ -16,9 +17,9 @@ if TYPE_CHECKING:
         InputTable,
         PredictionSink,
         SplitSource,
-        TextClassifier,
     )
     from mediparse.domain.diagnosis import Diagnosis
+    from mediparse.domain.identity import SubjectId
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.training import TrainingConfig
 
@@ -27,10 +28,27 @@ def _labels(notes: Sequence[InputNote], diagnosis: Diagnosis) -> list[bool]:
     return [note.has_label(diagnosis) for note in notes]
 
 
-class ClassifierTrainer[C: TextClassifier](Protocol):
+class TrainedClassifier(TextClassifier, Protocol):
+    """Výsledek tréninku s prahem a konvergencí pro provenance běhu."""
+
+    @property
+    def threshold(self) -> float:
+        """Konečný práh na stejné škále jako rozhodovací skóre."""
+
+    @property
+    def converged(self) -> bool:
+        """Zda konvergovaly všechny fity včetně vnitřní CV."""
+
+
+class ClassifierTrainer[C: TrainedClassifier](Protocol):
     """Trénink klasifikátoru textu."""
 
-    def fit(self, texts: Sequence[str], labels: Sequence[bool]) -> C:
+    def fit(
+        self,
+        texts: Sequence[str],
+        labels: Sequence[bool],
+        subjects: Sequence[SubjectId],
+    ) -> C:
         """Natrénuje klasifikátor na textech a labelech."""
 
 
@@ -42,7 +60,7 @@ class ModelStore[C: TextClassifier](Protocol):
 
 
 @dataclass(frozen=True)
-class ModelTraining[C: TextClassifier]:
+class ModelTraining[C: TrainedClassifier]:
     """Trénink na jedné diagnóze se zápisem predikcí odložených zpráv.
 
     Trenér a úložiště sdílejí typ klasifikátoru, takže typová kontrola odmítne
@@ -62,7 +80,7 @@ class ModelTraining[C: TextClassifier]:
             config: Diagnóza a parametry tréninku.
 
         Returns:
-            Velikosti částí odložení, config a otisk splitu.
+            Velikosti částí, původ splitu, zvolený práh a konvergence.
         """
         notes = self.table.read()
         shared = self.split.read()
@@ -74,9 +92,18 @@ class ModelTraining[C: TextClassifier]:
             config.diagnosis,
             shared.config.folds,
         )
+        train_labels = _labels(holdout.train, config.diagnosis)
+        train_subjects = [note.subject_id for note in holdout.train]
+        ensure_patients_per_class(
+            train_labels,
+            train_subjects,
+            config.diagnosis,
+            config.threshold_folds,
+        )
         classifier = self.trainer.fit(
             [note.text for note in holdout.train],
-            _labels(holdout.train, config.diagnosis),
+            train_labels,
+            train_subjects,
         )
         classifications = classifier.classify([note.text for note in holdout.test])
         predictions = [
@@ -100,4 +127,6 @@ class ModelTraining[C: TextClassifier]:
             test_positives=sum(_labels(holdout.test, config.diagnosis)),
             split_config=shared.config,
             split_sha256=shared.split.sha256(),
+            threshold=classifier.threshold,
+            converged=classifier.converged,
         )

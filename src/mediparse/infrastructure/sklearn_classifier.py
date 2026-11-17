@@ -6,11 +6,14 @@ import functools
 import warnings
 import zipfile
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Final, Literal
+from typing import TYPE_CHECKING, Annotated, Final, Literal
 
 import skops.io as sio
+from pydantic import BaseModel, ConfigDict, Field, PositiveFloat, PositiveInt
 from sklearn.exceptions import ConvergenceWarning
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.frozen import FrozenEstimator
+from sklearn.model_selection import FixedThresholdClassifier, TunedThresholdClassifierCV
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
 from skops.io.exceptions import UntrustedTypesFoundException
@@ -23,17 +26,70 @@ from mediparse.domain.clinical_text import (
 )
 from mediparse.domain.evaluation import Classification
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.infrastructure.sklearn_split import threshold_splits
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Mapping, Sequence
     from pathlib import Path
 
+    from mediparse.domain.identity import SubjectId
+    from mediparse.domain.seed import Seed
+    from mediparse.domain.tuning import ParamValue
+
+
+class SvmParameters(BaseModel):
+    """Typové meze konkrétního estimatoru na hranici obecného prostoru."""
+
+    model_config = ConfigDict(
+        frozen=True, strict=True, extra="forbid", allow_inf_nan=False
+    )
+
+    analyzer: Literal["word", "char_wb"]
+    ngram_max: PositiveInt
+    c: PositiveFloat
+    class_weight: Literal["balanced"] | None
+    min_df: PositiveInt
+    max_df: Annotated[float, Field(gt=0, le=1)]
+    sublinear_tf: bool
+
+
+def svm_vectorizer(
+    params: SvmParameters, normalization: TextNormalization | None
+) -> TfidfVectorizer:
+    """Sestaví TF-IDF z validovaných parametrů ladění nebo tréninku.
+
+    Returns:
+        Nenatrénovaný vektorizér se společným předzpracováním.
+    """
+    return tfidf_vectorizer(
+        normalization,
+        analyzer=params.analyzer,
+        ngram_range=(1, params.ngram_max),
+        min_df=params.min_df,
+        max_df=params.max_df,
+        sublinear_tf=params.sublinear_tf,
+    )
+
+
+def svm_estimator(params: SvmParameters, seed: Seed) -> LinearSVC:
+    """Sestaví lineární SVM z validovaných parametrů.
+
+    Returns:
+        Nenatrénovaný estimator se seedem běhu.
+    """
+    return LinearSVC(C=params.c, class_weight=params.class_weight, random_state=seed)
+
 
 @dataclass(frozen=True)
 class SklearnClassifier:
-    """Natrénovaná pipeline TF-IDF a lineárního SVM."""
+    """Natrénované TF-IDF a SVM s prahem z vnitřní CV po pacientech."""
 
-    pipeline: Pipeline
+    model: FixedThresholdClassifier
+
+    @property
+    def threshold(self) -> float:
+        """Konečný práh na škále rozhodovací funkce uloženého modelu."""
+        return float(self.model.threshold)
 
     def classify(self, texts: Sequence[str]) -> tuple[Classification, ...]:
         """Určí label a rozhodovací skóre lineárního SVM v jednom průchodu.
@@ -42,15 +98,22 @@ class SklearnClassifier:
             Klasifikace v pořadí textů; label je ``predict``, skóre ``decision_function``.
         """
         listed = list(texts)
-        labels = self.pipeline.predict(listed)
-        scores = self.pipeline.decision_function(listed)
+        labels = self.model.predict(listed)
+        scores = self.model.decision_function(listed)
         return tuple(
             Classification(bool(label), float(score))
             for label, score in zip(labels, scores, strict=True)
         )
 
 
-ESTIMATOR: Final = "sklearn TfidfVectorizer+LinearSVC"
+@dataclass(frozen=True)
+class TrainedSvm(SklearnClassifier):
+    """Výsledek tréninku s konvergencí všech vnitřních fitů pro manifest."""
+
+    converged: bool
+
+
+ESTIMATOR: Final = "sklearn TfidfVectorizer+LinearSVC+FixedThresholdClassifier"
 
 
 def tfidf_preprocessor(
@@ -143,28 +206,48 @@ TRUSTED_FUNCTIONS: Final = (
 class LinearSvmTrainer:
     """Trénink TF-IDF s lineárním SVM."""
 
-    regularization: float
-    seed: int
+    parameters: Mapping[str, ParamValue]
+    seed: Seed
     normalization: TextNormalization | None
+    threshold_folds: int
 
-    def fit(self, texts: Sequence[str], labels: Sequence[bool]) -> SklearnClassifier:
-        """Natrénuje pipeline na textech a labelech.
+    def fit(
+        self,
+        texts: Sequence[str],
+        labels: Sequence[bool],
+        subjects: Sequence[SubjectId],
+    ) -> TrainedSvm:
+        """Zvolí práh ve vnitřní CV a refitne pipeline na celém tréninku.
 
         Returns:
-            Natrénovaný klasifikátor.
+            Klasifikátor s uložitelným prahem a konvergencí všech fitů.
 
         Raises:
-            InvalidInputError: Z žádného textu nevznikne token, třeba po stripu
-                diagnostických sekcí ze zpráv, které z nich sestávají.
+            InvalidInputError: Neplatné parametry SVM nebo nepoužitelný trénovací slovník.
         """
-        vectorizer = tfidf_vectorizer(self.normalization)
-        ensure_tokens(vectorizer, texts)
-        pipeline = Pipeline([
-            ("tfidf", vectorizer),
-            ("svm", LinearSVC(C=self.regularization, random_state=self.seed)),
-        ])
-        pipeline.fit(list(texts), list(labels))
-        return SklearnClassifier(pipeline)
+        try:
+            params = SvmParameters.model_validate(self.parameters)
+            vectorizer = svm_vectorizer(params, self.normalization)
+            ensure_tokens(vectorizer, texts)
+            tuned = TunedThresholdClassifierCV(
+                Pipeline([
+                    ("tfidf", vectorizer),
+                    ("svm", svm_estimator(params, self.seed)),
+                ]),
+                scoring="f1",
+                cv=threshold_splits(labels, subjects, self.threshold_folds, self.seed),
+            )
+            converged = fit_converged(lambda: tuned.fit(list(texts), list(labels)))
+        except ValueError as error:
+            msg = f"Parametry nebo trénovací slovník SVM nejsou platné: {error}"
+            raise InvalidInputError(msg) from error
+        # TTCV už refitoval celou pipeline; FrozenEstimator zabrání druhému fitu.
+        model = FixedThresholdClassifier(
+            FrozenEstimator(tuned.estimator_),
+            threshold=float(tuned.best_threshold_),
+            response_method="decision_function",
+        ).fit(list(texts), list(labels))
+        return TrainedSvm(model, converged)
 
 
 @dataclass(frozen=True)
@@ -174,34 +257,34 @@ class SkopsModelFile:
     path: Path
 
     def save(self, classifier: SklearnClassifier) -> None:
-        """Uloží pipeline klasifikátoru a nadřazený adresář založí.
+        """Uloží model s prahem a nadřazený adresář založí.
 
         Bajty souboru se mezi běhy mohou lišit: skops pojmenovává členy ZIPu
         podle id() objektů a ukládá čas zápisu. Stejný model proto dokládají
         stejné predikce včetně skóre, nikoli SHA-256 souboru.
         """
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        sio.dump(classifier.pipeline, self.path)
+        sio.dump(classifier.model, self.path)
 
     def load(self) -> SklearnClassifier:
         """Načte model; z cizích typů důvěřuje jen funkcím ze ``TRUSTED_FUNCTIONS``.
 
         Returns:
-            Klasifikátor s načtenou pipeline.
+            Klasifikátor s načteným modelem a prahem.
 
         Raises:
             InvalidInputError: Soubor modelu neexistuje, je poškozený nebo
                 obsahuje typ mimo důvěryhodné.
         """
         try:
-            pipeline = sio.load(self.path, trusted=list(TRUSTED_FUNCTIONS))
+            model = sio.load(self.path, trusted=list(TRUSTED_FUNCTIONS))
         except FileNotFoundError as error:
             msg = f"Soubor modelu {self.path} neexistuje."
             raise InvalidInputError(msg) from error
         except (zipfile.BadZipFile, UntrustedTypesFoundException) as error:
             msg = f"Soubor modelu {self.path} nelze bezpečně načíst: {error}"
             raise InvalidInputError(msg) from error
-        return SklearnClassifier(pipeline)
+        return SklearnClassifier(model)
 
 
 def fit_converged(fit: Callable[[], object]) -> bool:
