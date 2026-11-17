@@ -1,7 +1,8 @@
-"""Složení vstupní tabulky a normalizace textu ze sdílených voleb vstupu modelu."""
+"""Složení vstupní tabulky, normalizace a sdíleného korpusu modelových kroků."""
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from mediparse.application.diagnostic_strip import DiagnosticStripTable
@@ -10,13 +11,64 @@ from mediparse.infrastructure.diagnosis_candidates_file import load_text_normali
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
+from mediparse.infrastructure.split_table import ParquetSplitTable
 
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from mediparse.application.ports.experiment import PatientNoteTable
+    from mediparse.application.ports.experiment import PatientNoteTable, SplitSource
     from mediparse.domain.clinical_text import TextNormalization
     from mediparse.domain.model_input import ModelInput
+
+
+@dataclass(frozen=True, kw_only=True)
+class ModelCorpusPaths:
+    """Sdílené cesty ke korpusu modelových kroků."""
+
+    cohort: Path
+    candidates: Path
+    lexicon: Path
+    split: Path
+
+    @property
+    def data(self) -> tuple[Path, Path]:
+        """Vrátí vstupy pod DUA; stráž volá vstupní bod před načtením configu.
+
+        Lexikon a kandidáti jsou konfigurace z repozitáře.
+        """
+        return self.cohort, self.split
+
+
+@dataclass(frozen=True)
+class ModelCorpus:
+    """Složené adaptéry korpusu a jeho záznamy pro manifest."""
+
+    table: PatientNoteTable
+    strip: DiagnosticStrip | None
+    normalization: TextNormalization | None
+    split: SplitSource
+    dataset_sha256: str
+
+
+def model_corpus(paths: ModelCorpusPaths, model_input: ModelInput) -> ModelCorpus:
+    """Složí tabulku vstupu, strip, normalizaci, split a otisk kohorty.
+
+    Returns:
+        Sdílený korpus modelového kroku.
+
+    Raises:
+        InvalidInputError: Kohorta chybí nebo lexikon či kandidáti nejsou platní.
+    """
+    table, strip = model_input_table(
+        cohort=paths.cohort, model_input=model_input, lexicon=paths.lexicon
+    )
+    return ModelCorpus(
+        table=table,
+        strip=strip,
+        normalization=text_normalization(paths.candidates, model_input),
+        split=ParquetSplitTable(paths.split),
+        dataset_sha256=file_sha256(paths.cohort),
+    )
 
 
 def model_input_table(
@@ -24,8 +76,8 @@ def model_input_table(
 ) -> tuple[PatientNoteTable, DiagnosticStrip | None]:
     """Složí tabulku zpráv pro trénink, inferenci i screening a záznam stripu pro manifest.
 
-    Trénink, inference i screening volají tutéž funkci se stejnými volbami,
-    aby klasifikovaly týž text.
+    Funkci volá sdílený korpus tréninku, ladění a screeningu i inference
+    se stejnými volbami, aby klasifikovaly týž text.
 
     Args:
         cohort: Cesta k tabulce kohorty.

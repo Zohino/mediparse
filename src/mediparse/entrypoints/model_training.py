@@ -20,8 +20,8 @@ from mediparse.domain.run_manifest import RunManifest, ensure_tuning_lineage
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_input_table import (
-    model_input_table,
-    text_normalization,
+    ModelCorpusPaths,
+    model_corpus,
 )
 from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.file_digest import file_sha256
@@ -37,7 +37,6 @@ from mediparse.infrastructure.sklearn_classifier import (
     SkopsModelFile,
 )
 from mediparse.infrastructure.source_revision import revision_source
-from mediparse.infrastructure.split_table import ParquetSplitTable
 from mediparse.infrastructure.training_config import load_training_config
 
 if TYPE_CHECKING:
@@ -85,11 +84,8 @@ def _parameters(
 class TrainingPaths:
     """Vstupní a výstupní cesty tréninku modelu."""
 
-    cohort: Path
+    corpus: ModelCorpusPaths
     config: Path
-    candidates: Path
-    lexicon: Path
-    split: Path
     tuning: Path | None
     model: Path
     predictions: Path
@@ -134,39 +130,34 @@ def run(
     Raises:
         InvalidInputError: Manifest neodpovídá tréninku; dekorátor přeloží na REFUSED.
     """
-    check_inputs_access(environ, (paths.cohort, paths.split))
+    check_inputs_access(environ, paths.corpus.data)
     training = load_training_config(paths.config)
     tuned = load_tuning_manifest(paths.tuning) if paths.tuning is not None else None
     parameters = _parameters(training, tuned)
     source = revision()
-    table, strip = model_input_table(
-        cohort=paths.cohort, model_input=training.input, lexicon=paths.lexicon
-    )
-    normalization = text_normalization(paths.candidates, training.input)
-    dataset_sha256 = file_sha256(paths.cohort)
-    shared_split = ParquetSplitTable(paths.split)
+    corpus = model_corpus(paths.corpus, training.input)
     if tuned is not None:
         try:
             ensure_tuning_lineage(
                 tuned,
                 row_id=training.row_id,
                 fold=training.fold,
-                dataset_sha256=dataset_sha256,
-                split_sha256=shared_split.read().split.sha256(),
-                diagnostic_strip=strip,
+                dataset_sha256=corpus.dataset_sha256,
+                split_sha256=corpus.split.read().split.sha256(),
+                diagnostic_strip=corpus.strip,
                 text_preprocessing=training.input.text_preprocessing,
-                text_normalization=normalization,
+                text_normalization=corpus.normalization,
             )
         except InvalidInputError as error:
             msg = f"Manifest {paths.tuning}: {error}"
             raise InvalidInputError(msg) from error
     step = ModelTraining(
-        table=table,
-        split=shared_split,
+        table=corpus.table,
+        split=corpus.split,
         trainer=LinearSvmTrainer(
             parameters,
             training.seed,
-            normalization=normalization,
+            normalization=corpus.normalization,
             threshold_folds=training.threshold_folds,
         ),
         store=SkopsModelFile(paths.model),
@@ -179,7 +170,7 @@ def run(
         paths.manifest,
         RunManifest(
             row_id=training.row_id,
-            dataset_sha256=dataset_sha256,
+            dataset_sha256=corpus.dataset_sha256,
             predictions_sha256=file_sha256(paths.predictions),
             config_sha256=file_sha256(paths.config),
             tuning_manifest_sha256=file_sha256(paths.tuning)
@@ -193,9 +184,9 @@ def run(
             split_seed=report.split_config.seed,
             split_folds=report.split_config.folds,
             split_sha256=report.split_sha256,
-            diagnostic_strip=strip,
+            diagnostic_strip=corpus.strip,
             text_preprocessing=training.input.text_preprocessing,
-            text_normalization=normalization,
+            text_normalization=corpus.normalization,
             model=ESTIMATOR,
             model_revision=None,
             tokenizer_revision=None,

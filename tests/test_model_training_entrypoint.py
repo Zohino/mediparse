@@ -22,6 +22,7 @@ from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints import model_training
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.entrypoints.model_input_table import ModelCorpusPaths
 from mediparse.entrypoints.model_training import TrainingPaths
 from mediparse.infrastructure import sklearn_classifier
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
@@ -51,6 +52,7 @@ from tests.support import (
     REVISION,
     fixed_revision,
     missing_revision,
+    repository_corpus,
 )
 from tests.tuning_support import tuning_manifest
 
@@ -80,17 +82,18 @@ def _inputs(
     split = root / "splits.parquet"
     write_split(split, corpus)
     return TrainingPaths(
-        cohort=notes,
+        corpus=repository_corpus(notes, split),
         config=config,
-        candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-        lexicon=REPOSITORY_SECTION_HEADERS,
-        split=split,
         tuning=None,
         model=root / "out/model.skops",
         predictions=root / "out/predictions.parquet",
         manifest=root / "out/run_manifest.json",
         costs=root / "out/training_costs.json",
     )
+
+
+def _corpus(paths: TrainingPaths, **changes: Path) -> TrainingPaths:
+    return replace(paths, corpus=replace(paths.corpus, **changes))
 
 
 def _under(paths: TrainingPaths, directory: Path) -> TrainingPaths:
@@ -140,7 +143,7 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
     written = RunManifest.model_validate_json(
         outputs.manifest.read_text(encoding="utf-8")
     )
-    assert written.dataset_sha256 == file_sha256(paths.cohort)
+    assert written.dataset_sha256 == file_sha256(paths.corpus.cohort)
     assert (
         written.predictions_sha256
         == hashlib.sha256(outputs.predictions.read_bytes()).hexdigest()
@@ -157,7 +160,10 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
     assert written.seed == 0
     assert written.split_seed == 0
     assert written.split_folds == 2
-    assert written.split_sha256 == ParquetSplitTable(paths.split).read().split.sha256()
+    assert (
+        written.split_sha256
+        == ParquetSplitTable(paths.corpus.split).read().split.sha256()
+    )
     assert written.row_id == "row"
     assert written.environment.source == REVISION
     assert written.hardware == machine_hardware(gpus=())
@@ -171,19 +177,22 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
 
 
 @pytest.mark.parametrize(
-    ("field", "missing"),
+    ("change", "missing"),
     [
-        ("cohort", "none.parquet"),
-        ("config", "none.json"),
-        ("split", "none-splits.parquet"),
+        (lambda paths, path: _corpus(paths, cohort=path), "none.parquet"),
+        (lambda paths, path: replace(paths, config=path), "none.json"),
+        (lambda paths, path: _corpus(paths, split=path), "none-splits.parquet"),
     ],
     ids=["table", "config", "split"],
 )
 def test_missing_input_is_refused(
-    tmp_path: Path, caplog: pytest.LogCaptureFixture, field: str, missing: str
+    tmp_path: Path,
+    caplog: pytest.LogCaptureFixture,
+    change: Callable[[TrainingPaths, Path], TrainingPaths],
+    missing: str,
 ) -> None:
     """Chybějící tabulka, config tréninku nebo soubor splitu krok odmítne, nic nevznikne a log jmenuje soubor."""
-    paths = replace(_inputs(tmp_path), **{field: tmp_path / missing})
+    paths = change(_inputs(tmp_path), tmp_path / missing)
 
     code = _run(paths)
 
@@ -227,7 +236,7 @@ def test_split_with_subject_in_two_folds_is_refused(
     rows = [(90000001, 0), (90000001, 1), (90000002, 1)]
     lines = "".join(f"{subject}\t{fold}\n" for subject, fold in rows)
     write_raw_split(
-        paths.split,
+        paths.corpus.split,
         rows,
         {"folds": 2, "seed": 0, "sha256": hashlib.sha256(lines.encode()).hexdigest()},
     )
@@ -245,7 +254,7 @@ def test_manifest_split_comes_from_split_file(tmp_path: Path) -> None:
     """Seed, počet foldů a otisk manifestu jsou ze souboru splitu, ne z configu."""
     corpus = separable_notes(PATIENTS, OVERLAPPING)
     paths = _inputs(tmp_path)
-    shared = write_split(paths.split, corpus, seed=5, folds=3)
+    shared = write_split(paths.corpus.split, corpus, seed=5, folds=3)
 
     code = _run(paths)
 
@@ -374,7 +383,7 @@ def test_manifest_lists_diagnostic_sections_sorted(tmp_path: Path) -> None:
         input=model_input(strip=True),
     )
 
-    code = _run(replace(paths, lexicon=lexicon))
+    code = _run(_corpus(paths, lexicon=lexicon))
 
     strip = _manifest(paths).diagnostic_strip
     assert code is ExitCode.OK
@@ -394,7 +403,7 @@ def test_synonym_change_changes_lexicon_digest(tmp_path: Path) -> None:
             tmp_path / f"{name}.json", extra_diagnostic=False, synonym=synonym
         )
         outputs = _under(paths, tmp_path / name)
-        assert _run(replace(outputs, lexicon=lexicon)) is ExitCode.OK
+        assert _run(_corpus(outputs, lexicon=lexicon)) is ExitCode.OK
         strip = _manifest(outputs).diagnostic_strip
         assert strip is not None
         digests.append(strip.lexicon_sha256)
@@ -409,7 +418,7 @@ def test_missing_lexicon_is_refused(tmp_path: Path) -> None:
         input=model_input(strip=True),
     )
 
-    code = _run(replace(paths, lexicon=tmp_path / "none.json"))
+    code = _run(_corpus(paths, lexicon=tmp_path / "none.json"))
 
     assert code is ExitCode.REFUSED
     assert _existing(paths) == []
@@ -490,7 +499,7 @@ def test_normalization_without_candidates_file_is_refused(
         input=model_input(preprocessing="normalized"),
     )
 
-    code = _run(replace(paths, candidates=tmp_path / "none.json"))
+    code = _run(_corpus(paths, candidates=tmp_path / "none.json"))
 
     assert code is ExitCode.REFUSED
     assert _existing(paths) == []
@@ -504,7 +513,7 @@ def test_candidates_file_is_not_read_without_normalization(tmp_path: Path) -> No
         input=model_input(),
     )
 
-    code = _run(replace(paths, candidates=tmp_path / "none.json"))
+    code = _run(_corpus(paths, candidates=tmp_path / "none.json"))
 
     assert code is ExitCode.OK
 
@@ -526,7 +535,7 @@ def test_normalization_merges_abbreviation_and_full_name(tmp_path: Path) -> None
         )
         candidates = root / "candidates.json"
         shutil.copy(REPOSITORY_DIAGNOSIS_CANDIDATES, candidates)
-        assert _run(replace(paths, candidates=candidates)) is ExitCode.OK
+        assert _run(_corpus(paths, candidates=candidates)) is ExitCode.OK
         classifier = SkopsModelFile(paths.model).load()
         scores[normalize] = {
             item.score for item in classifier.classify(list(ACRONYM_VOCABULARY))
@@ -674,11 +683,13 @@ def test_training_main_forwards_cuda_environment(
     code = model_training.main(
         paths=TrainingPaths(
             tuning=tmp_path / "tuning.json",
-            cohort=tmp_path / "notes.parquet",
+            corpus=ModelCorpusPaths(
+                cohort=tmp_path / "notes.parquet",
+                candidates=tmp_path / "candidates.json",
+                lexicon=tmp_path / "lexicon.json",
+                split=tmp_path / "splits.parquet",
+            ),
             config=tmp_path / "config.json",
-            candidates=tmp_path / "candidates.json",
-            lexicon=tmp_path / "lexicon.json",
-            split=tmp_path / "splits.parquet",
             model=tmp_path / "model.skops",
             predictions=tmp_path / "predictions.parquet",
             manifest=tmp_path / "manifest.json",
@@ -711,9 +722,9 @@ def test_invalid_preparation_is_refused_before_gpu_monitor(
     monkeypatch.setattr(model_training, "gpu_monitor", monitor)
 
     code = (
-        _run(replace(inputs, lexicon=tmp_path / "missing-lexicon.json"))
+        _run(_corpus(inputs, lexicon=tmp_path / "missing-lexicon.json"))
         if phase == "input"
-        else _run(replace(inputs, candidates=tmp_path / "missing-candidates.json"))
+        else _run(_corpus(inputs, candidates=tmp_path / "missing-candidates.json"))
     )
 
     assert code is ExitCode.REFUSED
@@ -739,8 +750,8 @@ def _write_tuning(inputs: TrainingPaths, path: Path, **changes: object) -> Path:
             best=_TUNED_PARAMETERS,
             **(
                 {
-                    "dataset_sha256": file_sha256(inputs.cohort),
-                    "split_sha256": ParquetSplitTable(inputs.split)
+                    "dataset_sha256": file_sha256(inputs.corpus.cohort),
+                    "split_sha256": ParquetSplitTable(inputs.corpus.split)
                     .read()
                     .split.sha256(),
                 }
