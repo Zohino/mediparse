@@ -6,6 +6,7 @@ import functools
 import re
 from math import log
 from typing import TYPE_CHECKING, Final
+from unittest.mock import Mock
 
 import pytest
 import skops.io as sio
@@ -61,6 +62,37 @@ def _corpus() -> tuple[list[str], list[bool], list[int]]:
         [Diagnosis.DIABETES in note.labels for note in notes],
         [note.subject_id for note in notes],
     )
+
+
+def _noisy_corpus(flip_every: int = 5) -> tuple[list[str], list[bool], list[int]]:
+    notes = separable_notes(24)
+    return (
+        [note.text for note in notes],
+        [
+            note.has_label(Diagnosis.DIABETES) != (note.subject_id % flip_every == 0)
+            for note in notes
+        ],
+        [note.subject_id for note in notes],
+    )
+
+
+def _threshold_oracle(
+    corpus: tuple[list[str], list[bool], list[int]], *, seed: int, scoring: str = "f1"
+) -> TunedThresholdClassifierCV:
+    texts, labels, subjects = corpus
+    return TunedThresholdClassifierCV(
+        Pipeline([
+            (
+                "tfidf",
+                TfidfVectorizer(
+                    sublinear_tf=True, ngram_range=(1, 1), min_df=1, max_df=1.0
+                ),
+            ),
+            ("svm", LinearSVC(C=1.0, class_weight=None, random_state=seed)),
+        ]),
+        scoring=scoring,
+        cv=threshold_splits(labels, subjects, 3, seed),
+    ).fit(texts, labels)
 
 
 def test_classify_returns_label_at_threshold_with_decision_score() -> None:
@@ -137,7 +169,7 @@ def test_model_file_creates_nested_parents(tmp_path: Path) -> None:
 
 def test_repeated_training_keeps_predictions_after_saving(tmp_path: Path) -> None:
     """Dva stejné tréninky i po uložení dávají přesně stejné labely a skóre."""
-    texts, labels, subjects = _corpus()
+    texts, labels, subjects = _noisy_corpus()
     first = _trainer(None).fit(texts, labels, subjects)
     second = _trainer(None).fit(texts, labels, subjects)
     first_file = SkopsModelFile(tmp_path / "first.skops")
@@ -567,21 +599,12 @@ def test_threshold_splits_separate_patients_and_cover_every_index_once(
 
 
 def test_threshold_matches_library_cross_validation() -> None:
-    """Práh je shodný s nezávisle složenou pipeline knihovny, skóre se refitem nezmění."""
-    texts, labels, subjects = _corpus()
-    oracle = TunedThresholdClassifierCV(
-        Pipeline([
-            (
-                "tfidf",
-                TfidfVectorizer(
-                    sublinear_tf=True, ngram_range=(1, 1), min_df=1, max_df=1.0
-                ),
-            ),
-            ("svm", LinearSVC(C=1.0, class_weight=None, random_state=0)),
-        ]),
-        scoring="f1",
-        cv=threshold_splits(labels, subjects, 3, 0),
-    ).fit(texts, labels)
+    """Zašuměný korpus rozliší seedy a práh odpovídá nezávisle složenému TTCV."""
+    corpus = _noisy_corpus()
+    texts, labels, subjects = corpus
+    oracle = _threshold_oracle(corpus, seed=0)
+    other_seed = _threshold_oracle(corpus, seed=1)
+    assert oracle.best_threshold_ != other_seed.best_threshold_
 
     classifier = _trainer(None).fit(texts, labels, subjects)
 
@@ -589,6 +612,36 @@ def test_threshold_matches_library_cross_validation() -> None:
     assert [item.score for item in classifier.classify(texts)] == pytest.approx(
         oracle.estimator_.decision_function(texts)
     )
+
+
+def test_threshold_optimizes_f1_instead_of_balanced_accuracy() -> None:
+    """Při převrácení každého třetího pacienta zvolí F1 jiný práh než výchozí metrika."""
+    corpus = _noisy_corpus(flip_every=3)
+    f1 = _threshold_oracle(corpus, seed=0)
+    balanced = _threshold_oracle(corpus, seed=0, scoring="balanced_accuracy")
+    assert f1.best_threshold_ != balanced.best_threshold_
+
+    classifier = _trainer(None).fit(*corpus)
+
+    assert classifier.threshold == f1.best_threshold_
+
+
+def test_trainer_passes_seed_to_svm_and_threshold_splits(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Seed běhu dostane SVM i dělení pacientů, i když řešič seed nepotřebuje."""
+    seed = 13
+    estimator = Mock(wraps=LinearSVC)
+    splitter = Mock(wraps=threshold_splits)
+    monkeypatch.setattr(sklearn_classifier, "LinearSVC", estimator)
+    monkeypatch.setattr(sklearn_classifier, "threshold_splits", splitter)
+
+    LinearSvmTrainer(
+        FIXED_SVM_PARAMS, seed=seed, normalization=None, threshold_folds=3
+    ).fit(*_noisy_corpus())
+
+    assert estimator.call_args.kwargs["random_state"] == seed
+    assert splitter.call_args.args[-1] == seed
 
 
 @pytest.mark.parametrize(
