@@ -74,13 +74,15 @@ def _cohort(
 ) -> ExitCode:
     candidates, corpus_rule = configs
     return cohort.run(
+        paths=cohort.CohortPaths(
+            discharge=discharge,
+            diagnoses=diagnoses,
+            candidates=candidates,
+            corpus_rule=corpus_rule,
+            cohort=tmp_path / "resources" / "cohort.parquet",
+            manifest=tmp_path / "results" / "cohort" / "manifest.json",
+        ),
         environ={},
-        discharge=discharge,
-        diagnoses=diagnoses,
-        candidates=candidates,
-        corpus_rule=corpus_rule,
-        cohort=tmp_path / "resources" / "cohort.parquet",
-        manifest=tmp_path / "results" / "cohort" / "manifest.json",
         revision=revision,
     )
 

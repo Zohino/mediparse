@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import logging
 import os
+from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
 from mediparse.application.model_inference import ModelInference
@@ -33,15 +34,22 @@ logger = logging.getLogger(__name__)
 LATENCY_PLAN: Final = LatencyPlan(warmup=10, samples=100)
 
 
+@dataclass(frozen=True)
+class InferencePaths:
+    """Vstupní a výstupní cesty inference modelu."""
+
+    cohort: Path
+    config: Path
+    lexicon: Path
+    model: Path
+    predictions: Path
+    inference: Path
+    costs: Path
+
+
 def main(
     *,
-    cohort: Path,
-    config: Path,
-    lexicon: Path,
-    model: Path,
-    predictions: Path,
-    inference: Path,
-    costs: Path,
+    paths: InferencePaths,
     log: Path,
 ) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
@@ -52,13 +60,7 @@ def main(
     configure_logging(log)
     return run(
         environ=os.environ,
-        cohort=cohort,
-        config=config,
-        lexicon=lexicon,
-        model=model,
-        predictions=predictions,
-        inference=inference,
-        costs=costs,
+        paths=paths,
         cuda_visible_devices=os.environ.get("CUDA_VISIBLE_DEVICES"),
         cuda_device_order=os.environ.get("CUDA_DEVICE_ORDER"),
     )
@@ -68,13 +70,7 @@ def main(
 def run(
     *,
     environ: Mapping[str, str],
-    cohort: Path,
-    config: Path,
-    lexicon: Path,
-    model: Path,
-    predictions: Path,
-    inference: Path,
-    costs: Path,
+    paths: InferencePaths,
     cuda_visible_devices: str | None,
     cuda_device_order: str | None,
 ) -> ExitCode:
@@ -85,15 +81,17 @@ def run(
         predikcí uloženého modelu s tréninkem, nezjistitelný HW, selhání měření GPU
         a pro neoznačená data v prostředí, které nesmí číst MIMIC.
     """
-    check_inputs_access(environ, (cohort, model, predictions))
+    check_inputs_access(environ, (paths.cohort, paths.model, paths.predictions))
     table, _ = model_input_table(
-        cohort=cohort, model_input=load_training_config(config).input, lexicon=lexicon
+        cohort=paths.cohort,
+        model_input=load_training_config(paths.config).input,
+        lexicon=paths.lexicon,
     )
     step = ModelInference(
         table=table,
-        predictions=ParquetPredictionTable(predictions),
-        model=SkopsModelFile(model),
-        inference=ParquetPredictionTable(inference),
+        predictions=ParquetPredictionTable(paths.predictions),
+        model=SkopsModelFile(paths.model),
+        inference=ParquetPredictionTable(paths.inference),
         clock=PerfCounterClock(),
         plan=LATENCY_PLAN,
     )
@@ -101,7 +99,7 @@ def run(
         hardware = machine_hardware(monitor.devices)
         inferred = step.run()
     write_model(
-        costs,
+        paths.costs,
         InferenceCosts(
             plan=LATENCY_PLAN,
             latency=inferred.latency,
@@ -112,7 +110,7 @@ def run(
     )
     logger.info(
         "Uložený model %s dává stejné predikce jako trénink, predikcí: %d.",
-        model,
+        paths.model,
         len(inferred.predictions),
     )
     return ExitCode.OK

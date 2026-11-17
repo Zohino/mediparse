@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import os
+from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
@@ -54,16 +55,23 @@ PACKAGES: Final = (
 )
 
 
+@dataclass(frozen=True)
+class TuningPaths:
+    """Vstupní a výstupní cesty ladění modelu."""
+
+    cohort: Path
+    config: Path
+    matrix: Path
+    candidates: Path
+    lexicon: Path
+    split: Path
+    storage: Path
+    manifest: Path
+
+
 def main(
     *,
-    cohort: Path,
-    config: Path,
-    matrix: Path,
-    candidates: Path,
-    lexicon: Path,
-    split: Path,
-    storage: Path,
-    manifest: Path,
+    paths: TuningPaths,
     log: Path,
 ) -> ExitCode:
     """Převezme cesty pravidla a nastaví souborovou diagnostiku.
@@ -74,14 +82,7 @@ def main(
     configure_logging(log)
     return run(
         environ=os.environ,
-        cohort=cohort,
-        config=config,
-        matrix=matrix,
-        candidates=candidates,
-        lexicon=lexicon,
-        split=split,
-        storage=storage,
-        manifest=manifest,
+        paths=paths,
         revision=revision_source(os.environ, Path.cwd()),
         clock=PerfCounterClock(),
     )
@@ -91,14 +92,7 @@ def main(
 def run(
     *,
     environ: Mapping[str, str],
-    cohort: Path,
-    config: Path,
-    matrix: Path,
-    candidates: Path,
-    lexicon: Path,
-    split: Path,
-    storage: Path,
-    manifest: Path,
+    paths: TuningPaths,
     revision: Callable[[], SourceRevision],
     clock: Clock,
 ) -> ExitCode:
@@ -107,22 +101,22 @@ def run(
     Returns:
         OK po zápisu manifestu, REFUSED pro neplatné vstupy a nepovolený přístup k datům.
     """
-    check_inputs_access(environ, (cohort, split))
-    tuning = load_tuning_config(config)
-    row = load_matrix(matrix).row(tuning.row_id)
+    check_inputs_access(environ, (paths.cohort, paths.split))
+    tuning = load_tuning_config(paths.config)
+    row = load_matrix(paths.matrix).row(tuning.row_id)
     source = revision()
     table, strip = model_input_table(
-        cohort=cohort, model_input=row.input, lexicon=lexicon
+        cohort=paths.cohort, model_input=row.input, lexicon=paths.lexicon
     )
-    normalization = text_normalization(candidates, row.input)
+    normalization = text_normalization(paths.candidates, row.input)
     scorer = _validation_scorer(row.model, normalization, tuning.seed)
     hardware = machine_hardware(())
     step = ModelTuning(
         table=table,
-        split=ParquetSplitTable(split),
+        split=ParquetSplitTable(paths.split),
         partitioner=StratifiedGroupFolds(),
         search=OptunaSearch.create(
-            tuning.space, tuning.seed, tuning.pruner_startup_trials, storage
+            tuning.space, tuning.seed, tuning.pruner_startup_trials, paths.storage
         ),
         scorer=scorer,
     )
@@ -131,13 +125,13 @@ def run(
     seconds = clock.now() - started
     outcome = report.outcome
     write_model(
-        manifest,
+        paths.manifest,
         TuningManifest(
             row_id=row.id,
             fold=tuning.fold,
-            dataset_sha256=file_sha256(cohort),
-            config_sha256=file_sha256(config),
-            matrix_sha256=file_sha256(matrix),
+            dataset_sha256=file_sha256(paths.cohort),
+            config_sha256=file_sha256(paths.config),
+            matrix_sha256=file_sha256(paths.matrix),
             split_seed=report.split_config.seed,
             split_folds=report.split_config.folds,
             split_sha256=report.split_sha256,

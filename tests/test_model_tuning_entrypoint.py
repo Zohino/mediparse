@@ -79,15 +79,17 @@ def _inputs(
 
 def _run(inputs: _Inputs, out: Path) -> ExitCode:
     return model_tuning.run(
+        paths=model_tuning.TuningPaths(
+            cohort=inputs.cohort,
+            split=inputs.split,
+            config=inputs.config,
+            matrix=inputs.matrix,
+            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+            lexicon=REPOSITORY_SECTION_HEADERS,
+            storage=out / "tuning.sqlite3",
+            manifest=out / "tuning_manifest.json",
+        ),
         environ={"CODEX_THREAD_ID": "test"},
-        cohort=inputs.cohort,
-        split=inputs.split,
-        config=inputs.config,
-        matrix=inputs.matrix,
-        candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-        lexicon=REPOSITORY_SECTION_HEADERS,
-        storage=out / "tuning.sqlite3",
-        manifest=out / "tuning_manifest.json",
         revision=fixed_revision,
         clock=Mock(now=Mock(side_effect=[10.0, 12.5])),
     )
@@ -250,28 +252,23 @@ def test_main_passes_workflow_paths_and_runtime_dependencies(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Composition root přenese cesty pravidla do testovatelného run a nastaví log."""
-    paths = {
-        name: tmp_path / name
-        for name in (
-            "cohort",
-            "config",
-            "matrix",
-            "candidates",
-            "lexicon",
-            "split",
-            "storage",
-            "manifest",
-            "log",
-        )
-    }
+    paths = model_tuning.TuningPaths(
+        cohort=tmp_path / "cohort",
+        config=tmp_path / "config",
+        matrix=tmp_path / "matrix",
+        candidates=tmp_path / "candidates",
+        lexicon=tmp_path / "lexicon",
+        split=tmp_path / "split",
+        storage=tmp_path / "storage",
+        manifest=tmp_path / "manifest",
+    )
+    log = tmp_path / "log"
     run = Mock(return_value=ExitCode.OK)
     logging = Mock()
     monkeypatch.setattr(model_tuning, "run", run)
     monkeypatch.setattr(model_tuning, "configure_logging", logging)
-    assert model_tuning.main(**paths) is ExitCode.OK
-    logging.assert_called_once_with(paths["log"])
-    assert {key: run.call_args.kwargs[key] for key in paths if key != "log"} == {
-        key: value for key, value in paths.items() if key != "log"
-    }
+    assert model_tuning.main(paths=paths, log=log) is ExitCode.OK
+    logging.assert_called_once_with(log)
+    assert run.call_args.kwargs["paths"] == paths
     assert callable(run.call_args.kwargs["revision"])
     assert callable(run.call_args.kwargs["clock"].now)

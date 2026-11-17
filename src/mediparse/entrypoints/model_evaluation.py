@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import logging
 import os
+from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
@@ -48,14 +49,21 @@ PACKAGES: Final = (
 )
 
 
+@dataclass(frozen=True)
+class EvaluationPaths:
+    """Vstupní a výstupní cesty vyhodnocení modelu."""
+
+    predictions: Path
+    cohort: Path
+    split: Path
+    training_manifest: Path
+    metrics: Path
+    manifest: Path
+
+
 def main(
     *,
-    predictions: Path,
-    cohort: Path,
-    split: Path,
-    training_manifest: Path,
-    metrics: Path,
-    manifest: Path,
+    paths: EvaluationPaths,
     log: Path,
 ) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
@@ -66,12 +74,7 @@ def main(
     configure_logging(log)
     return run(
         environ=os.environ,
-        predictions=predictions,
-        cohort=cohort,
-        split=split,
-        training_manifest=training_manifest,
-        metrics=metrics,
-        manifest=manifest,
+        paths=paths,
         revision=revision_source(os.environ, Path.cwd()),
     )
 
@@ -80,12 +83,7 @@ def main(
 def run(
     *,
     environ: Mapping[str, str],
-    predictions: Path,
-    cohort: Path,
-    split: Path,
-    training_manifest: Path,
-    metrics: Path,
-    manifest: Path,
+    paths: EvaluationPaths,
     revision: Callable[[], SourceRevision],
 ) -> ExitCode:
     """Složí use case z tabulek predikcí, zpráv, splitu a adaptérů scikit-learn.
@@ -98,12 +96,12 @@ def run(
     Raises:
         InvalidInputError: Vstupy neodpovídají tréninku; dekorátor přeloží na REFUSED.
     """
-    check_inputs_access(environ, (predictions, cohort, split))
-    training = load_run_manifest(training_manifest)
+    check_inputs_access(environ, (paths.predictions, paths.cohort, paths.split))
+    training = load_run_manifest(paths.training_manifest)
     environment = Environment(packages=installed_versions(PACKAGES), source=revision())
-    predictions_digest = file_sha256(predictions)
-    dataset_digest = file_sha256(cohort)
-    split_digest = ParquetSplitTable(split).read().split.sha256()
+    predictions_digest = file_sha256(paths.predictions)
+    dataset_digest = file_sha256(paths.cohort)
+    split_digest = ParquetSplitTable(paths.split).read().split.sha256()
     try:
         ensure_training_lineage(
             training,
@@ -112,14 +110,14 @@ def run(
             split_sha256=split_digest,
         )
     except InvalidInputError as error:
-        msg = f"Manifest {training_manifest}: {error}"
+        msg = f"Manifest {paths.training_manifest}: {error}"
         raise InvalidInputError(msg) from error
     step = ModelEvaluation(
-        predictions=ParquetPredictionTable(predictions),
-        table=ParquetNoteTable(cohort),
-        split=ParquetSplitTable(split),
+        predictions=ParquetPredictionTable(paths.predictions),
+        table=ParquetNoteTable(paths.cohort),
+        split=ParquetSplitTable(paths.split),
         scorer=SklearnScorer(),
-        metrics=ParquetMetricsTable(metrics),
+        metrics=ParquetMetricsTable(paths.metrics),
     )
     for item in step.run():
         logger.info(
@@ -132,14 +130,14 @@ def run(
             item.test_notes,
         )
     write_model(
-        manifest,
+        paths.manifest,
         EvaluationManifest(
             row_id=training.row_id,
-            training_manifest_sha256=file_sha256(training_manifest),
+            training_manifest_sha256=file_sha256(paths.training_manifest),
             predictions_sha256=predictions_digest,
             dataset_sha256=dataset_digest,
             split_sha256=split_digest,
-            metrics_sha256=file_sha256(metrics),
+            metrics_sha256=file_sha256(paths.metrics),
             environment=environment,
         ),
     )

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import logging
 import os
+from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
@@ -80,18 +81,25 @@ def _parameters(
     raise InvalidInputError(msg)
 
 
+@dataclass(frozen=True)
+class TrainingPaths:
+    """Vstupní a výstupní cesty tréninku modelu."""
+
+    cohort: Path
+    config: Path
+    candidates: Path
+    lexicon: Path
+    split: Path
+    tuning: Path | None
+    model: Path
+    predictions: Path
+    manifest: Path
+    costs: Path
+
+
 def main(
     *,
-    cohort: Path,
-    config: Path,
-    candidates: Path,
-    lexicon: Path,
-    split: Path,
-    tuning: Path | None,
-    model: Path,
-    predictions: Path,
-    manifest: Path,
-    costs: Path,
+    paths: TrainingPaths,
     log: Path,
 ) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
@@ -102,16 +110,7 @@ def main(
     configure_logging(log)
     return run(
         environ=os.environ,
-        cohort=cohort,
-        config=config,
-        candidates=candidates,
-        lexicon=lexicon,
-        split=split,
-        tuning=tuning,
-        model=model,
-        predictions=predictions,
-        manifest=manifest,
-        costs=costs,
+        paths=paths,
         cuda_visible_devices=os.environ.get("CUDA_VISIBLE_DEVICES"),
         cuda_device_order=os.environ.get("CUDA_DEVICE_ORDER"),
         revision=revision_source(os.environ, Path.cwd()),
@@ -122,16 +121,7 @@ def main(
 def run(
     *,
     environ: Mapping[str, str],
-    cohort: Path,
-    config: Path,
-    candidates: Path,
-    lexicon: Path,
-    split: Path,
-    tuning: Path | None,
-    model: Path,
-    predictions: Path,
-    manifest: Path,
-    costs: Path,
+    paths: TrainingPaths,
     revision: Callable[[], SourceRevision],
     cuda_visible_devices: str | None,
     cuda_device_order: str | None,
@@ -148,17 +138,17 @@ def run(
     Raises:
         InvalidInputError: Manifest neodpovídá tréninku; dekorátor přeloží na REFUSED.
     """
-    check_inputs_access(environ, (cohort, split))
-    training = load_training_config(config)
-    tuned = load_tuning_manifest(tuning) if tuning is not None else None
+    check_inputs_access(environ, (paths.cohort, paths.split))
+    training = load_training_config(paths.config)
+    tuned = load_tuning_manifest(paths.tuning) if paths.tuning is not None else None
     parameters = _parameters(training, tuned)
     source = revision()
     table, strip = model_input_table(
-        cohort=cohort, model_input=training.input, lexicon=lexicon
+        cohort=paths.cohort, model_input=training.input, lexicon=paths.lexicon
     )
-    normalization = text_normalization(candidates, training.input)
-    dataset_sha256 = file_sha256(cohort)
-    shared_split = ParquetSplitTable(split)
+    normalization = text_normalization(paths.candidates, training.input)
+    dataset_sha256 = file_sha256(paths.cohort)
+    shared_split = ParquetSplitTable(paths.split)
     if tuned is not None:
         try:
             ensure_tuning_lineage(
@@ -172,7 +162,7 @@ def run(
                 text_normalization=normalization,
             )
         except InvalidInputError as error:
-            msg = f"Manifest {tuning}: {error}"
+            msg = f"Manifest {paths.tuning}: {error}"
             raise InvalidInputError(msg) from error
     step = ModelTraining(
         table=table,
@@ -183,20 +173,22 @@ def run(
             normalization=normalization,
             threshold_folds=training.threshold_folds,
         ),
-        store=SkopsModelFile(model),
-        predictions=ParquetPredictionTable(predictions),
+        store=SkopsModelFile(paths.model),
+        predictions=ParquetPredictionTable(paths.predictions),
     )
     with gpu_monitor(cuda_visible_devices, cuda_device_order) as monitor:
         hardware = machine_hardware(monitor.devices)
         report = step.run(training)
     write_model(
-        manifest,
+        paths.manifest,
         RunManifest(
             row_id=training.row_id,
             dataset_sha256=dataset_sha256,
-            predictions_sha256=file_sha256(predictions),
-            config_sha256=file_sha256(config),
-            tuning_manifest_sha256=file_sha256(tuning) if tuning is not None else None,
+            predictions_sha256=file_sha256(paths.predictions),
+            config_sha256=file_sha256(paths.config),
+            tuning_manifest_sha256=file_sha256(paths.tuning)
+            if paths.tuning is not None
+            else None,
             parameters=parameters,
             threshold=report.threshold,
             threshold_folds=training.threshold_folds,
@@ -217,12 +209,12 @@ def run(
             ),
         ),
     )
-    write_model(costs, TrainingCosts(gpu=monitor.measurement()))
+    write_model(paths.costs, TrainingCosts(gpu=monitor.measurement()))
     logger.info(
         "Model diagnózy %s: %d trénovacích a %d testovacích zpráv, uložen do %s.",
         report.diagnosis,
         report.train_notes,
         report.test_notes,
-        model,
+        paths.model,
     )
     return ExitCode.OK

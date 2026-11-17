@@ -94,18 +94,20 @@ def _train(
     shutil.copy(REPOSITORY_DIAGNOSIS_CANDIDATES, candidates)
     trained = Trained(notes, config, root / "model.skops", root / "predictions.parquet")
     code = model_training.run(
-        tuning=None,
+        paths=model_training.TrainingPaths(
+            tuning=None,
+            cohort=notes,
+            config=config,
+            candidates=candidates,
+            lexicon=REPOSITORY_SECTION_HEADERS,
+            split=split,
+            model=trained.model,
+            predictions=trained.predictions,
+            manifest=root / "run_manifest.json",
+            costs=root / "training_costs.json",
+        ),
         environ={},
-        cohort=notes,
-        config=config,
-        candidates=candidates,
-        lexicon=REPOSITORY_SECTION_HEADERS,
-        split=split,
-        model=trained.model,
-        predictions=trained.predictions,
-        manifest=root / "run_manifest.json",
         revision=fixed_revision,
-        costs=root / "training_costs.json",
         cuda_visible_devices="",
         cuda_device_order=None,
     )
@@ -121,18 +123,18 @@ def _infer(
     **changes: Path,
 ) -> ExitCode:
     inference = changes.get("inference", tmp_path / "inference.parquet")
-    paths = {
-        "cohort": trained.notes,
-        "config": trained.config,
-        "lexicon": REPOSITORY_SECTION_HEADERS,
-        "model": trained.model,
-        "predictions": trained.predictions,
-        "inference": inference,
-        "costs": inference.with_suffix(".costs.json"),
-    }
+    paths = model_inference.InferencePaths(
+        cohort=trained.notes,
+        config=trained.config,
+        lexicon=REPOSITORY_SECTION_HEADERS,
+        model=trained.model,
+        predictions=trained.predictions,
+        inference=inference,
+        costs=inference.with_suffix(".costs.json"),
+    )
     return model_inference.run(
         environ={},
-        **(paths | changes),
+        paths=replace(paths, **changes),
         cuda_visible_devices=cuda_visible_devices,
         cuda_device_order=None,
     )
@@ -371,13 +373,15 @@ def test_inference_main_forwards_cuda_environment(
     monkeypatch.setattr(model_inference, "run", execute)
     monkeypatch.setattr(model_inference, "configure_logging", Mock())
     code = model_inference.main(
-        cohort=tmp_path / "notes.parquet",
-        config=tmp_path / "config.json",
-        lexicon=tmp_path / "lexicon.json",
-        model=tmp_path / "model.skops",
-        predictions=tmp_path / "predictions.parquet",
-        inference=tmp_path / "inference.parquet",
-        costs=tmp_path / "costs.json",
+        paths=model_inference.InferencePaths(
+            cohort=tmp_path / "notes.parquet",
+            config=tmp_path / "config.json",
+            lexicon=tmp_path / "lexicon.json",
+            model=tmp_path / "model.skops",
+            predictions=tmp_path / "predictions.parquet",
+            inference=tmp_path / "inference.parquet",
+            costs=tmp_path / "costs.json",
+        ),
         log=tmp_path / "infer.log",
     )
     assert code is ExitCode.OK

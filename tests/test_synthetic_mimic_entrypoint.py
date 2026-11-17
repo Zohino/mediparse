@@ -53,13 +53,15 @@ def test_cohort_matches_plans_and_source_hashes(
     manifest = tmp_path / "cohort" / "manifest.json"
     assert (
         cohort.run(
+            paths=cohort.CohortPaths(
+                discharge=discharge,
+                diagnoses=diagnoses,
+                candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+                corpus_rule=REPOSITORY_INPUT_CORPUS,
+                cohort=output,
+                manifest=manifest,
+            ),
             environ={},
-            discharge=discharge,
-            diagnoses=diagnoses,
-            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            corpus_rule=REPOSITORY_INPUT_CORPUS,
-            cohort=output,
-            manifest=manifest,
             revision=fixed_revision,
         )
         is ExitCode.OK
