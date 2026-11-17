@@ -158,3 +158,9 @@ def test_svm_keeps_nonconvergence_from_first_diagnosis(
 
     monkeypatch.setattr(sklearn_tuning, "fit_converged", fit_converged)
     assert not SklearnLinearSvmScorer(None, 7).score(SVM_PARAMS, _fold()).converged
+
+
+def test_invalid_svm_message_includes_parameter_cause() -> None:
+    """Odmítnutí záporného C zachová příčinu validace bez textu zpráv."""
+    with pytest.raises(InvalidInputError, match="Input should be greater than 0"):
+        SklearnLinearSvmScorer(None, 7).score(SVM_PARAMS | {"c": -1.0}, _fold())

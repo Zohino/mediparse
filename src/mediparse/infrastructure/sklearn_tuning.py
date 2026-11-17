@@ -75,7 +75,7 @@ class SklearnLinearSvmScorer:
         try:
             return self._score(_SvmParameters.model_validate(params), fold)
         except ValueError as error:
-            msg = "Parametry nebo trénovací slovník ladění SVM nejsou platné."
+            msg = f"Parametry nebo trénovací slovník ladění SVM nejsou platné: {error}"
             raise InvalidInputError(msg) from error
 
     def _score(self, params: _SvmParameters, fold: Holdout) -> ValidationScores:
