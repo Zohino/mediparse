@@ -385,47 +385,14 @@ ignore = [
     "start-process-with-partial-path",        # git se hledá v PATH, stejně jako v testovaném adaptéru
 ]
 
+"tests/test_*_script.py" = [
+    "suspicious-subprocess-import",           # test spouští pevný shellový skript projektu, jinak ho pokrýt nejde
+    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, shell se nepoužívá
+    "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá Snakemake, pixi task nebo CI
+]
+
 "tests/test_download_script.py" = [
-    "suspicious-subprocess-import",           # test spouští shellový skript pravidla, jinak ho pokrýt nejde
-    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, shell se nepoužívá
-    "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá Snakemake
     "hardcoded-password-string",              # heslo lokálního testovacího serveru, ne přihlášení k PhysioNetu
-]
-
-"tests/test_inventory_script.py" = [
-    "suspicious-subprocess-import",           # test spouští shellový skript pravidla, jinak ho pokrýt nejde
-    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, shell se nepoužívá
-    "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá Snakemake
-]
-
-"tests/test_verify_mimic_script.py" = [
-    "suspicious-subprocess-import",           # test spouští pevný shellový skript kontroly otisků
-    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam bez shell=True a bez vstupu od uživatele
-    "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá pixi task verify-mimic
-]
-
-"tests/test_smoketest_script.py" = [
-    "suspicious-subprocess-import",         # integrační test spouští pevný skript smoketestu proti falešnému enginu
-    "subprocess-without-shell-equals-true", # argumenty jdou jako seznam bez shell=True a bez vstupu od uživatele
-    "start-process-with-partial-path",     # sh se hledá v PATH, stejně jako při ručním spuštění smoketest.sh
-]
-
-"tests/test_eda_canary_script.py" = [
-    "suspicious-subprocess-import",           # test spouští shellovou funkci kanárka, jinak ji pokrýt nejde
-    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, skript se předává bashi jako soubor
-    "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá pixi task eda-synthetic
-]
-
-"tests/test_check_pr_record_script.py" = [
-    "suspicious-subprocess-import",           # test spouští kontrolovaný shellový skript, jinak ho pokrýt nejde
-    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, shell se nepoužívá
-    "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako při lokální a CI kontrole PR
-]
-
-"tests/test_pytest_parallel_script.py" = [
-    "suspicious-subprocess-import",           # test spouští kontrolovaný shellový skript proti zástupnému pytestu
-    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, shell se nepoužívá
-    "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako v CI a kontejneru
 ]
 
 "src/mediparse/entrypoints/cohort.py" = [
