@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 LATENCY_PLAN: Final = LatencyPlan(warmup=10, samples=100)
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, kw_only=True)
 class InferencePaths:
     """Vstupní a výstupní cesty inference modelu."""
 

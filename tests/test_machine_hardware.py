@@ -95,8 +95,7 @@ def test_peak_rss_converts_linux_kib_to_bytes(monkeypatch: pytest.MonkeyPatch) -
     usage = Mock(return_value=SimpleNamespace(ru_maxrss=1536))
     monkeypatch.setattr(resource, "getrusage", usage)
 
-    expected_bytes = 1_572_864
-    assert peak_rss_bytes() == expected_bytes
+    assert peak_rss_bytes() == 1_572_864
     usage.assert_called_once_with(resource.RUSAGE_SELF)
 
 

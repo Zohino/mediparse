@@ -55,7 +55,7 @@ PACKAGES: Final = (
 )
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, kw_only=True)
 class TuningPaths:
     """Vstupní a výstupní cesty ladění modelu."""
 

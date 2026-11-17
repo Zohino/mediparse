@@ -25,7 +25,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, kw_only=True)
 class SyntheticMimicPaths:
     """Vstupní a výstupní cesty tvorby syntetických tabulek MIMIC."""
 

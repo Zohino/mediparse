@@ -40,7 +40,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, kw_only=True)
 class NoteTokensPaths:
     """Vstupní a výstupní cesty měření tokenů zpráv."""
 

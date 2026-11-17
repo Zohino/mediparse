@@ -162,7 +162,6 @@ def test_monitor_measures_energy_and_middle_memory_peak(
     """(4500 - 1000) / 1000 = 3,5 J; max(100, 300, 200) = 300 B."""
     sampled = Event()
     middle_peak = 300
-    expected_samples = 3
     readings = {0: iter((100, 300, 200))}
 
     def memory(handle: int) -> SimpleNamespace:
@@ -183,7 +182,7 @@ def test_monitor_measures_energy_and_middle_memory_peak(
             memory_used_peak_bytes=300,
         ),
     )
-    assert nvml.nvmlDeviceGetMemoryInfo.call_count == expected_samples
+    assert nvml.nvmlDeviceGetMemoryInfo.call_count == 3
     nvml.nvmlShutdown.assert_called_once_with()
 
 
@@ -477,8 +476,7 @@ def test_measurement_uses_elapsed_window_seconds(
     monkeypatch.setattr(nvml_gpu, "perf_counter", iter((10.0, 12.5)).__next__)
     with gpu_monitor(None, None) as monitor:
         pass
-    expected_seconds = 2.5
-    assert monitor.measurement().seconds == expected_seconds
+    assert monitor.measurement().seconds == pytest.approx(2.5)
 
 
 @pytest.mark.parametrize("phase", ["energy", "shutdown"])
