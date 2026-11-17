@@ -13,7 +13,8 @@ trap 'exit 143' TERM
 trap 'exit 130' INT
 
 status=0
-pytest "$@" --ignore="$slow" 2>&1 || status=1
+# Časově citlivé aserce čekacích testů potřebují přednost před výpočetními testy.
+nice -n 10 pytest "$@" --ignore="$slow" 2>&1 || status=1
 wait "$slow_pid" || status=1
 cat "$output"
 exit "$status"

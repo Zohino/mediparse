@@ -5,6 +5,8 @@ from __future__ import annotations
 import os
 import signal
 import subprocess
+import sys
+import textwrap
 import time
 from contextlib import suppress
 from typing import TYPE_CHECKING
@@ -31,20 +33,28 @@ def test_parallel_pytest(
     """Nula platí právě pro dvě úspěšné části; argumenty i bloky zůstanou celé."""
     fake_pytest = tmp_path / "pytest"
     fake_pytest.write_text(
-        "#!/usr/bin/env bash\n"
-        '[[ "$#" == 2 && "$1" == "argument s mezerou" ]] || exit 90\n'
-        'case "$2" in\n'
-        "  tests/test_download_script.py) part=download; other=rest; "
-        "code=$DOWNLOAD_CODE ;;\n"
-        "  --ignore=tests/test_download_script.py) part=rest; other=download; "
-        "code=$REST_CODE ;;\n"
-        "  *) exit 91 ;;\n"
-        "esac\n"
-        'echo "$part start"\n'
-        'touch "$RENDEZVOUS/$part"\n'
-        'until [[ -f "$RENDEZVOUS/$other" ]]; do sleep 0.01; done\n'
-        'echo "$part end" >&2\n'
-        'exit "$code"\n',
+        f"#!{sys.executable}\n"
+        + textwrap.dedent("""\
+            import os
+            import sys
+            import time
+            from pathlib import Path
+
+            if len(sys.argv) != 3 or sys.argv[1] != "argument s mezerou":
+                sys.exit(90)
+            part, other = {
+                "tests/test_download_script.py": ("download", "rest"),
+                "--ignore=tests/test_download_script.py": ("rest", "download"),
+            }[sys.argv[2]]
+            root = Path(os.environ["RENDEZVOUS"])
+            (root / f"{part}.nice").write_text(str(os.nice(0)))
+            print(f"{part} start", flush=True)
+            (root / part).touch()
+            while not (root / other).exists():
+                time.sleep(0.01)
+            print(f"{part} end", file=sys.stderr, flush=True)
+            sys.exit(int(os.environ[f"{part.upper()}_CODE"]))
+            """),
         encoding="utf-8",
     )
     fake_pytest.chmod(0o755)
@@ -67,6 +77,9 @@ def test_parallel_pytest(
 
     assert (result.returncode == 0) is success, result.stderr
     assert result.stdout == "rest start\nrest end\ndownload start\ndownload end\n"
+    assert int((tmp_path / "rest.nice").read_text(encoding="utf-8")) > int(
+        (tmp_path / "download.nice").read_text(encoding="utf-8")
+    )
 
 
 def test_termination_stops_background_pytest(tmp_path: Path) -> None:
