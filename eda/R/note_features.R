@@ -1,4 +1,6 @@
-feature_source <- function(con, file, columns, directory = Sys.getenv("MEDIPARSE_EDA_CACHE"), command = "mediparse-eda-note-features") {
+NOTE_FEATURES_COMMAND <- "mediparse-eda-note-features"
+
+feature_source <- function(con, file, columns, directory = Sys.getenv("MEDIPARSE_EDA_CACHE"), command = NOTE_FEATURES_COMMAND) {
   if (directory == "") stop("Chybí MEDIPARSE_EDA_CACHE; spusťte render skriptem EDA.")
   if (!file.exists(file.path(directory, "cache.json"))) {
     stop(sprintf("cache není publikovaná; spusťte %s", command))
@@ -26,7 +28,7 @@ feature_table <- function(con, name, file, columns, key, complete) {
   ))$n
   if (duplicates > 0) {
     DBI::dbRemoveTable(con, name)
-    stop(sprintf("Soubor %s má %s duplicitních klíčů; spusťte mediparse-eda-note-features.", file, duplicates))
+    stop(sprintf("Soubor %s má duplicitní klíče (počet: %s); spusťte %s.", file, duplicates, NOTE_FEATURES_COMMAND))
   }
   if (complete) {
     missing <- DBI::dbGetQuery(con, sprintf(
@@ -35,7 +37,7 @@ feature_table <- function(con, name, file, columns, key, complete) {
     ))$n
     if (missing > 0) {
       DBI::dbRemoveTable(con, name)
-      stop(sprintf("V souboru %s chybí %s zpráv; spusťte mediparse-eda-note-features.", file, missing))
+      stop(sprintf("V souboru %s chybí zprávy (počet: %s); spusťte %s.", file, missing, NOTE_FEATURES_COMMAND))
     }
   }
   name

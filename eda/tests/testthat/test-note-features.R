@@ -125,7 +125,9 @@ for (spec in list(
 
     message <- tryCatch(spec$read(con), error = conditionMessage)
 
-    expect_match(message, paste0(spec$file, ".*1.*mediparse-eda-note-features"))
+    expect_match(message, spec$file, fixed = TRUE)
+    expect_match(message, "chybí zprávy (počet: 1);", fixed = TRUE)
+    expect_match(message, "mediparse-eda-note-features", fixed = TRUE)
     expect_false(grepl("n1|n2|note_id|alpha|gamma|AF", message))
     expect_error(spec$read(con), spec$file, fixed = TRUE)
   })
@@ -145,7 +147,7 @@ for (spec in list(
     message <- tryCatch(spec$read(con), error = conditionMessage)
 
     expect_match(message, spec$file, fixed = TRUE)
-    expect_match(message, "duplicit")
+    expect_match(message, "duplicitní klíče (počet: 1);", fixed = TRUE)
     expect_match(message, "mediparse-eda-note-features", fixed = TRUE)
     expect_false(grepl("n1|note_id|Allergies", message))
     expect_error(spec$read(con), spec$file, fixed = TRUE)
