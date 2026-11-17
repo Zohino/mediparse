@@ -1,8 +1,9 @@
-"""Architektura mimo dosah import-linteru: vstupy do balíčku, skripty workflow, umístění sdílených portů a konfigurace modelů domény a explicitní kódování textového I/O."""
+"""Architektura mimo dosah import-linteru: vstupy do balíčku, objekty cest vstupních bodů, skripty workflow, umístění sdílených portů a konfigurace modelů domény a explicitní kódování textového I/O."""
 
 from __future__ import annotations
 
 import ast
+import dataclasses
 import importlib
 import pkgutil
 import re
@@ -19,6 +20,7 @@ import mediparse.domain
 import mediparse.synthetic.domain
 from mediparse.domain.cohort import CohortCounts
 from mediparse.domain.min_cell import MIN_CELL
+from mediparse.entrypoints.eda_note_tokens import NoteTokensPaths
 from mediparse.infrastructure.duckdb_parquet import SPILL_DIRECTORY
 from mediparse.infrastructure.eda_duckdb import DEFAULT_MEMORY
 from tests.support import REPOSITORY
@@ -360,6 +362,39 @@ def test_import_linter_sees_type_checking_imports() -> None:
     config = _pyproject()["tool"]["importlinter"]
 
     assert config.get("exclude_type_checking_imports", False) is False
+
+
+def _entrypoint_paths() -> list[type]:
+    paths: list[type] = []
+    for entrypoints in ENTRYPOINTS_MODULES:
+        package = importlib.import_module(entrypoints)
+        for info in pkgutil.walk_packages(package.__path__, prefix=f"{entrypoints}."):
+            module = importlib.import_module(info.name)
+            paths.extend(
+                value
+                for value in vars(module).values()
+                if isinstance(value, type)
+                and dataclasses.is_dataclass(value)
+                and value.__name__.endswith("Paths")
+                and value.__module__ == module.__name__
+            )
+    return paths
+
+
+def test_entrypoint_paths_are_discovered() -> None:
+    """Objevení najde objekty cest, aby parametrizace nemohla tiše zůstat prázdná."""
+    assert NoteTokensPaths in _entrypoint_paths()
+
+
+@pytest.mark.parametrize(
+    "paths",
+    _entrypoint_paths(),
+    ids=lambda paths: f"{paths.__module__}.{paths.__name__}",
+)
+def test_entrypoint_paths_are_keyword_only(paths: type) -> None:
+    """Každé pole objektu cest se předává jménem, aby nešlo cesty tiše prohodit."""
+    assert dataclasses.is_dataclass(paths)
+    assert all(field.kw_only for field in dataclasses.fields(paths))
 
 
 def _domain_models() -> list[type[BaseModel]]:

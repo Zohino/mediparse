@@ -81,7 +81,7 @@ def _parameters(
     raise InvalidInputError(msg)
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, kw_only=True)
 class TrainingPaths:
     """Vstupní a výstupní cesty tréninku modelu."""
 

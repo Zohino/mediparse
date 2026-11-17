@@ -60,7 +60,7 @@ PACKAGES: Final = (
 )
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, kw_only=True)
 class ScreeningPaths:
     """Vstupní a výstupní cesty screeningu klasických modelů."""
 

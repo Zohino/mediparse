@@ -49,7 +49,7 @@ PACKAGES: Final = (
 )
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, kw_only=True)
 class EvaluationPaths:
     """Vstupní a výstupní cesty vyhodnocení modelu."""
 

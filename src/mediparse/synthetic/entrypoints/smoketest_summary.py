@@ -29,7 +29,7 @@ DEMO_HEADER: Final = ("zpráva", "diagnóza", "pravda", "predikce", "skóre")
 YES_NO: Final = {True: "ano", False: "ne"}
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, kw_only=True)
 class SmoketestPaths:
     """Vstupní a výstupní cesty souhrnu smoketestu."""
 

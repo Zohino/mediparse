@@ -39,7 +39,7 @@ logger = logging.getLogger(__name__)
 PACKAGES: Final = ("python", "duckdb", "pyarrow", "pydantic")
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, kw_only=True)
 class CohortPaths:
     """Vstupní a výstupní cesty tvorby kohorty."""
 
