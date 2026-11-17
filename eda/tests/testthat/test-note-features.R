@@ -114,16 +114,21 @@ rewrite_feature_fixture <- function(con, directory, file, query) {
   file.rename(temporary, path)
 }
 
-test_that("neúplná měření předzpracování zastaví výpočet bez identifikátorů a textu", {
-  con <- corpus_con(c("alpha AF", "alpha gamma"))
-  directory <- use_feature_fixtures(con)
-  rewrite_feature_fixture(con, directory, "note_preprocessing.parquet", "SELECT * FROM %s WHERE note_id <> 'n2'")
+for (spec in list(
+  list(file = "note_preprocessing.parquet", read = note_preprocessing),
+  list(file = "note_sections.parquet", read = segment_corpus)
+)) {
+  test_that(paste("neúplná měření zastaví výpočet bez identifikátorů a textu", spec$file), {
+    con <- corpus_con(c("alpha AF", "alpha gamma"))
+    directory <- use_feature_fixtures(con)
+    rewrite_feature_fixture(con, directory, spec$file, "SELECT * FROM %s WHERE note_id <> 'n2'")
 
-  message <- tryCatch(note_preprocessing(con), error = conditionMessage)
+    message <- tryCatch(spec$read(con), error = conditionMessage)
 
-  expect_match(message, "note_preprocessing[.]parquet.*1.*mediparse-eda-note-features")
-  expect_false(grepl("n1|n2|note_id|alpha|gamma|AF", message))
-})
+    expect_match(message, paste0(spec$file, ".*1.*mediparse-eda-note-features"))
+    expect_false(grepl("n1|n2|note_id|alpha|gamma|AF", message))
+  })
+}
 
 for (spec in list(
   list(file = "note_sections.parquet", read = segment_corpus),
