@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import os
+import signal
 import subprocess
+import time
+from contextlib import suppress
 from typing import TYPE_CHECKING
 
 import pytest
@@ -63,7 +66,55 @@ def test_parallel_pytest(
     )
 
     assert (result.returncode == 0) is success, result.stderr
-    assert result.stdout in {
-        "download start\ndownload end\nrest start\nrest end\n",
-        "rest start\nrest end\ndownload start\ndownload end\n",
-    }
+    assert result.stdout == "rest start\nrest end\ndownload start\ndownload end\n"
+
+
+def test_termination_stops_background_pytest(tmp_path: Path) -> None:
+    """SIGTERM ukončí čekací část a zachová již vypsaný postup zbytku testů."""
+    pid_file = tmp_path / "slow.pid"
+    ready_file = tmp_path / "ready"
+    fake_pytest = tmp_path / "pytest"
+    fake_pytest.write_text(
+        "#!/usr/bin/env bash\n"
+        'if [[ "$1" == tests/test_download_script.py ]]; then\n'
+        '  echo "$$" > "$SLOW_PID_FILE"\n'
+        "  exec sleep 60\n"
+        "fi\n"
+        'until [[ -s "$SLOW_PID_FILE" ]]; do sleep 0.01; done\n'
+        'echo "rest ready"\n'
+        'touch "$READY_FILE"\n',
+        encoding="utf-8",
+    )
+    fake_pytest.chmod(0o755)
+
+    with subprocess.Popen(
+        ["bash", str(REPOSITORY / "scripts/pytest-parallel.sh")],
+        env={
+            **os.environ,
+            "PATH": f"{tmp_path}{os.pathsep}{os.environ['PATH']}",
+            "SLOW_PID_FILE": str(pid_file),
+            "READY_FILE": str(ready_file),
+        },
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        encoding="utf-8",
+    ) as process:
+        try:
+            deadline = time.monotonic() + 5
+            while not ready_file.exists() and time.monotonic() < deadline:
+                time.sleep(0.01)
+            assert ready_file.exists(), "Zbytek testů nedoběhl souběžně s čekací částí."
+            process.terminate()
+            output, _ = process.communicate(timeout=5)
+
+            assert process.returncode != 0
+            with pytest.raises(ProcessLookupError):
+                os.kill(int(pid_file.read_text(encoding="utf-8")), 0)
+            assert output == "rest ready\n"
+        finally:
+            if process.poll() is None:
+                process.kill()
+            with suppress(FileNotFoundError, ProcessLookupError):
+                os.kill(int(pid_file.read_text(encoding="utf-8")), signal.SIGKILL)
+            process.communicate(timeout=5)
