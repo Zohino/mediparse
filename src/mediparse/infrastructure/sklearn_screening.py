@@ -3,14 +3,12 @@
 from __future__ import annotations
 
 import logging
-import warnings
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, assert_never
 
 import numpy as np
 from lightgbm import LGBMClassifier
 from sklearn.decomposition import TruncatedSVD
-from sklearn.exceptions import ConvergenceWarning
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import TunedThresholdClassifierCV
 from sklearn.svm import LinearSVC
@@ -20,7 +18,11 @@ from mediparse.domain.evaluation import Classification
 from mediparse.infrastructure.complement_nb import ComplementNbLogOdds
 from mediparse.infrastructure.machine_hardware import peak_rss_gb
 from mediparse.infrastructure.nb_svm import NbSvmClassifier
-from mediparse.infrastructure.sklearn_classifier import ensure_tokens, tfidf_vectorizer
+from mediparse.infrastructure.sklearn_classifier import (
+    ensure_tokens,
+    fit_converged,
+    tfidf_vectorizer,
+)
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 
 if TYPE_CHECKING:
@@ -237,17 +239,8 @@ class SklearnThresholdTuner:
             scoring="f1",
             cv=threshold_splits(labels, subjects, folds, seed),
         )
-        with warnings.catch_warnings(record=True) as caught:
-            warnings.simplefilter("always", ConvergenceWarning)
-            model.fit(features.for_family(family), list(labels))
-        # record=True zachytí i jiné kategorie; jejich diagnostika nesmí v reálném běhu zmizet.
-        for item in caught:
-            if not issubclass(item.category, ConvergenceWarning):
-                warnings.warn_explicit(
-                    item.message, item.category, item.filename, item.lineno
-                )
-        converged = not any(
-            issubclass(item.category, ConvergenceWarning) for item in caught
+        converged = fit_converged(
+            lambda: model.fit(features.for_family(family), list(labels))
         )
         logger.info("Rodina %s: %s.", family, peak_rss_gb())
         return SklearnTunedClassifier(

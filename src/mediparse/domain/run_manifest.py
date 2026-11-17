@@ -20,6 +20,7 @@ from mediparse.domain.identity import RowId
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.seed import Seed
+from mediparse.domain.tuning import ParamValue, SearchSpace
 
 
 class DiagnosticStrip(BaseModel):
@@ -160,3 +161,54 @@ def ensure_training_lineage(
     if mismatched:
         msg = f"Vstupy evaluace neodpovídají tréninku: {', '.join(mismatched)}."
         raise InvalidInputError(msg)
+
+
+class TuningManifest(BaseModel):
+    """Publikovatelné agregáty ladění a provenance vnějšího tréninku."""
+
+    model_config = ConfigDict(
+        frozen=True, strict=True, extra="forbid", allow_inf_nan=False
+    )
+
+    row_id: RowId
+    fold: Annotated[int, Field(ge=0)]
+    dataset_sha256: Sha256
+    config_sha256: Sha256
+    matrix_sha256: Sha256
+    split_seed: Seed
+    split_folds: Annotated[int, Field(ge=2)]
+    split_sha256: Sha256
+    seed: Seed
+    tuning_trials: PositiveInt
+    completed_trials: Annotated[int, Field(ge=0)]
+    pruned_trials: Annotated[int, Field(ge=0)]
+    nonconverged_trials: Annotated[int, Field(ge=0)]
+    best_macro_f1: Annotated[float, Field(ge=0, le=1)]
+    best: dict[str, ParamValue]
+    space: SearchSpace
+    sampler: str
+    pruner: str
+    seconds: Annotated[float, Field(ge=0)]
+    train_notes: PositiveInt
+    train_patients: PositiveInt
+    diagnostic_strip: DiagnosticStrip | None
+    text_preprocessing: TextPreprocessing
+    text_normalization: TextNormalization | None
+    environment: Environment
+    hardware: Hardware
+
+    @model_validator(mode="after")
+    def _consistent_tuning(self) -> Self:
+        if self.completed_trials + self.pruned_trials != self.tuning_trials:
+            msg = "Dokončené a prořezané pokusy musí vyčerpat rozpočet ladění."
+            raise ValueError(msg)
+        if self.nonconverged_trials > self.tuning_trials:
+            msg = "Nekonvergujících pokusů nesmí být více než rozpočet ladění."
+            raise ValueError(msg)
+        if not self.space.contains(self.best):
+            msg = "Nejlepší parametry nepatří do prostoru ladění."
+            raise ValueError(msg)
+        _ensure_normalization_matches_preprocessing(
+            self.text_preprocessing, self.text_normalization
+        )
+        return self

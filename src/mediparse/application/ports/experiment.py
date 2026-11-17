@@ -79,3 +79,10 @@ class Scorer(Protocol):
         self, truth: Sequence[bool], predicted: Sequence[bool], scores: Sequence[float]
     ) -> BinaryMetrics:
         """Spočte metriky predikcí a skóre proti pravdě."""
+
+
+class Clock(Protocol):
+    """Monotonní hodiny pro měření rozdílu časů v sekundách."""
+
+    def now(self) -> float:
+        """Vrátí čas v sekundách s libovolným pevným počátkem."""

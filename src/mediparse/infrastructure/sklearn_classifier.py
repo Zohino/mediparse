@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import functools
+import warnings
 import zipfile
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final, Literal
 
 import skops.io as sio
+from sklearn.exceptions import ConvergenceWarning
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
@@ -23,7 +25,7 @@ from mediparse.domain.evaluation import Classification
 from mediparse.domain.inputs import InvalidInputError
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Sequence
+    from collections.abc import Callable, Mapping, Sequence
     from pathlib import Path
 
 
@@ -68,11 +70,15 @@ def tfidf_preprocessor(
     return rewrite_diagnosis_variants(expanded, variants).lower()
 
 
-def tfidf_vectorizer(
+# Volby TF-IDF zůstávají keyword-only, aby stávající volání zachovala výchozí chování.
+def tfidf_vectorizer(  # ruff: ignore[too-many-arguments]
     normalization: TextNormalization | None,
     *,
     analyzer: Literal["word", "char_wb"] = "word",
     ngram_range: tuple[int, int] = (1, 1),
+    min_df: int = 1,
+    max_df: float = 1.0,
+    sublinear_tf: bool = True,
 ) -> TfidfVectorizer:
     """Vectorizer pro trénink, screening i měření v sešitu EDA.
 
@@ -83,6 +89,9 @@ def tfidf_vectorizer(
             tréninku a EDA.
         ngram_range: Nejmenší a největší délka n-gramu; výchozí (1, 1) zachovává
             unigramový slovník tréninku a EDA.
+        min_df: Nejmenší počet dokumentů s příznakem.
+        max_df: Největší podíl dokumentů s příznakem.
+        sublinear_tf: Zda použít logaritmickou frekvenci místo počtu výskytů.
 
     Returns:
         Nenatrénovaný vectorizer; bez normalizace je to ablace bez preprocessoru.
@@ -99,7 +108,9 @@ def tfidf_vectorizer(
         )
     )
     return TfidfVectorizer(
-        sublinear_tf=True,
+        sublinear_tf=sublinear_tf,
+        min_df=min_df,
+        max_df=max_df,
         preprocessor=preprocessor,
         analyzer=analyzer,
         ngram_range=ngram_range,
@@ -191,3 +202,21 @@ class SkopsModelFile:
             msg = f"Soubor modelu {self.path} nelze bezpečně načíst: {error}"
             raise InvalidInputError(msg) from error
         return SklearnClassifier(pipeline)
+
+
+def fit_converged(fit: Callable[[], object]) -> bool:
+    """Fitne estimator a zachová ostatní varování jako diagnostiku volajícího.
+
+    Returns:
+        Zda všechny fity estimatoru konvergovaly.
+    """
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always", ConvergenceWarning)
+        fit()
+    # record=True zachytí i jiné kategorie; jejich diagnostika nesmí zmizet.
+    for item in caught:
+        if not issubclass(item.category, ConvergenceWarning):
+            warnings.warn_explicit(
+                item.message, item.category, item.filename, item.lineno
+            )
+    return not any(issubclass(item.category, ConvergenceWarning) for item in caught)

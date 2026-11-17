@@ -22,6 +22,7 @@ dependencies = [
     "jinja2>=3.1.6",
     "nvidia-ml-py>=13.615.71",
     "lightgbm>=4.7.0",
+    "optuna>=5.1.0",
 ]
 
 [project.scripts]
@@ -433,6 +434,10 @@ ignore = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
 "src/mediparse/entrypoints/model_evaluation.py" = [
+    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
+]
+
+"src/mediparse/entrypoints/model_tuning.py" = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
 

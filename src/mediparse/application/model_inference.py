@@ -16,6 +16,7 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from mediparse.application.ports.experiment import (
+        Clock,
         InputTable,
         PredictionSink,
         PredictionSource,
@@ -23,13 +24,6 @@ if TYPE_CHECKING:
     )
     from mediparse.domain.costs import Latency, LatencyPlan
     from mediparse.domain.evaluation import Prediction
-
-
-class Clock(Protocol):
-    """Monotonní hodiny pro měření rozdílu časů v sekundách."""
-
-    def now(self) -> float:
-        """Vrátí čas v sekundách s libovolným pevným počátkem."""
 
 
 class ModelSource(Protocol):

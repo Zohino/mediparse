@@ -11,6 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
 from mediparse.domain.clinical_text import NORMALIZATION_LANGUAGE
 from mediparse.domain.identity import RowId
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.model_input import ModelInput
 from mediparse.domain.section_headers import LEXICON_LANGUAGE
@@ -114,6 +115,21 @@ class ExperimentMatrix(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
 
     rows: Annotated[tuple[MatrixRow, ...], Field(min_length=1)]
+
+    def row(self, row_id: RowId) -> MatrixRow:
+        """Vybere řádek matice podle identity.
+
+        Returns:
+            Jediný deklarovaný řádek s daným id.
+
+        Raises:
+            InvalidInputError: Matice požadovaný řádek neobsahuje.
+        """
+        for row in self.rows:
+            if row.id == row_id:
+                return row
+        msg = f"Řádek {row_id} není v experimentální matici."
+        raise InvalidInputError(msg)
 
     @model_validator(mode="after")
     def _ids_are_unique(self) -> Self:
