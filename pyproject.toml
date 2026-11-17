@@ -388,7 +388,7 @@ ignore = [
 "tests/test_*_script.py" = [
     "suspicious-subprocess-import",           # test spouští pevný shellový skript projektu, jinak ho pokrýt nejde
     "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, shell se nepoužívá
-    "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako ho volá Snakemake, pixi task nebo CI
+    "start-process-with-partial-path",        # bash nebo sh se hledá v PATH, stejně jako při spuštění skriptu mimo test
 ]
 
 "tests/test_download_script.py" = [
