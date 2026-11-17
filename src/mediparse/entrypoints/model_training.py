@@ -144,6 +144,9 @@ def run(
         pro nečitelnou revizi zdroje, nezjistitelný HW stroje, selhání měření GPU
         a pro neoznačená data v prostředí, které nesmí číst MIMIC. Odmítne také chybějící
         či dvojitý zdroj parametrů a manifest ladění z jiného tréninku.
+
+    Raises:
+        InvalidInputError: Manifest neodpovídá tréninku; dekorátor přeloží na REFUSED.
     """
     check_inputs_access(environ, (cohort, split))
     training = load_training_config(config)
@@ -157,16 +160,20 @@ def run(
     dataset_sha256 = file_sha256(cohort)
     shared_split = ParquetSplitTable(split)
     if tuned is not None:
-        ensure_tuning_lineage(
-            tuned,
-            row_id=training.row_id,
-            fold=training.fold,
-            dataset_sha256=dataset_sha256,
-            split_sha256=shared_split.read().split.sha256(),
-            diagnostic_strip=strip,
-            text_preprocessing=training.input.text_preprocessing,
-            text_normalization=normalization,
-        )
+        try:
+            ensure_tuning_lineage(
+                tuned,
+                row_id=training.row_id,
+                fold=training.fold,
+                dataset_sha256=dataset_sha256,
+                split_sha256=shared_split.read().split.sha256(),
+                diagnostic_strip=strip,
+                text_preprocessing=training.input.text_preprocessing,
+                text_normalization=normalization,
+            )
+        except InvalidInputError as error:
+            msg = f"Manifest {tuning}: {error}"
+            raise InvalidInputError(msg) from error
     step = ModelTraining(
         table=table,
         split=shared_split,

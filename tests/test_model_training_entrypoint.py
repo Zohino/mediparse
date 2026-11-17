@@ -919,7 +919,10 @@ def test_training_refuses_tuning_with_different_lineage(
         )
         is ExitCode.REFUSED
     )
-    assert f"Manifest ladění neodpovídá tréninku: {mismatched}." in caplog.messages
+    assert (
+        f"Manifest {tuning}: Manifest ladění neodpovídá tréninku: {mismatched}."
+        in caplog.messages
+    )
     assert outputs.existing() == []
     fit.assert_not_called()
 
