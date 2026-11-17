@@ -114,7 +114,6 @@ class SklearnClassifier:
     """Natrénované TF-IDF a SVM s prahem z vnitřní CV po pacientech."""
 
     model: FixedThresholdClassifier
-    converged: bool
 
     @property
     def threshold(self) -> float:
@@ -134,6 +133,13 @@ class SklearnClassifier:
             Classification(bool(label), float(score))
             for label, score in zip(labels, scores, strict=True)
         )
+
+
+@dataclass(frozen=True)
+class TrainedSvm(SklearnClassifier):
+    """Výsledek tréninku s konvergencí všech vnitřních fitů pro manifest."""
+
+    converged: bool
 
 
 ESTIMATOR: Final = "sklearn TfidfVectorizer+LinearSVC+FixedThresholdClassifier"
@@ -239,7 +245,7 @@ class LinearSvmTrainer:
         texts: Sequence[str],
         labels: Sequence[bool],
         subjects: Sequence[SubjectId],
-    ) -> SklearnClassifier:
+    ) -> TrainedSvm:
         """Zvolí práh ve vnitřní CV a refitne pipeline na celém tréninku.
 
         Returns:
@@ -270,9 +276,7 @@ class LinearSvmTrainer:
             threshold=float(tuned.best_threshold_),
             response_method="decision_function",
         ).fit(list(texts), list(labels))
-        # Příznak zahrnuje i vnitřní fity, z finálního SVM ho po načtení nelze odvodit.
-        model.converged_ = converged
-        return SklearnClassifier(model, converged)
+        return TrainedSvm(model, converged)
 
 
 @dataclass(frozen=True)
@@ -309,7 +313,7 @@ class SkopsModelFile:
         except (zipfile.BadZipFile, UntrustedTypesFoundException) as error:
             msg = f"Soubor modelu {self.path} nelze bezpečně načíst: {error}"
             raise InvalidInputError(msg) from error
-        return SklearnClassifier(model, model.converged_)
+        return SklearnClassifier(model)
 
 
 def fit_converged(fit: Callable[[], object]) -> bool:

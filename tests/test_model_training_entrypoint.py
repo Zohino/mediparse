@@ -22,6 +22,7 @@ from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints import model_training
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure import sklearn_classifier
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
@@ -853,7 +854,7 @@ def test_training_uses_tuned_parameters_threshold_and_provenance(
     assert manifest.tuning_manifest_sha256 == file_sha256(tuning)
     assert manifest.parameters == _TUNED_PARAMETERS
     assert manifest.threshold == model.threshold
-    assert manifest.converged == model.converged
+    assert manifest.converged is True
     assert load_tuning_manifest(tuning).best == _TUNED_PARAMETERS
 
 
@@ -921,3 +922,20 @@ def test_training_refuses_tuning_with_different_lineage(
     assert f"Manifest ladění neodpovídá tréninku: {mismatched}." in caplog.messages
     assert outputs.existing() == []
     fit.assert_not_called()
+
+
+def test_training_manifest_records_nonconvergence(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Nekonvergence skutečného fitu se propíše do jediného trvalého záznamu v manifestu."""
+    original = sklearn_classifier.svm_estimator
+    monkeypatch.setattr(
+        sklearn_classifier,
+        "svm_estimator",
+        lambda params, seed: original(params, seed).set_params(max_iter=1),
+    )
+    notes, config, split = _inputs(tmp_path)
+    outputs = _Outputs.under(tmp_path / "out")
+
+    assert _run(notes, config, split, outputs) is ExitCode.OK
+    assert _manifest(outputs).converged is False

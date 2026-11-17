@@ -13,7 +13,8 @@ import skops.io as sio
 from hypothesis import given
 from hypothesis import strategies as st
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.model_selection import TunedThresholdClassifierCV
+from sklearn.frozen import FrozenEstimator
+from sklearn.model_selection import FixedThresholdClassifier, TunedThresholdClassifierCV
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
 
@@ -662,10 +663,10 @@ def test_invalid_svm_parameters_are_invalid_input(
         LinearSvmTrainer(parameters, 0, None, 3).fit(texts, labels, subjects)
 
 
-def test_nonconvergence_survives_training_and_round_trip(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+def test_nonconvergence_is_reported_after_training(
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Varování ze skutečného fitu se zaznamená i v uloženém modelu."""
+    """Varování ze skutečného fitu určuje konvergenci výsledku tréninku."""
     original = sklearn_classifier.svm_estimator
     monkeypatch.setattr(
         sklearn_classifier,
@@ -674,8 +675,27 @@ def test_nonconvergence_survives_training_and_round_trip(
     )
     texts, labels, subjects = _corpus()
     classifier = _trainer(None).fit(texts, labels, subjects)
-    model_file = SkopsModelFile(tmp_path / "model.skops")
-    model_file.save(classifier)
-
     assert classifier.converged is False
-    assert model_file.load().converged is False
+
+
+def test_model_file_loads_fixed_threshold_archive_without_training_metadata(
+    tmp_path: Path,
+) -> None:
+    """Archiv knihovny bez metadat tréninku lze načíst a reprodukovat jeho predikce."""
+    texts, labels, _ = _corpus()
+    pipeline = Pipeline([
+        ("tfidf", TfidfVectorizer(sublinear_tf=True)),
+        ("svm", LinearSVC(random_state=0)),
+    ]).fit(texts, labels)
+    model = FixedThresholdClassifier(
+        FrozenEstimator(pipeline), threshold=0.25, response_method="decision_function"
+    ).fit(texts, labels)
+    path = tmp_path / "model.skops"
+    sio.dump(model, path)
+
+    predictions = SkopsModelFile(path).load().classify(texts)
+
+    assert [item.predicted for item in predictions] == list(model.predict(texts))
+    assert [item.score for item in predictions] == pytest.approx(
+        model.decision_function(texts)
+    )
