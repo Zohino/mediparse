@@ -114,6 +114,7 @@ def note_prompts(tokenizer: PreTrainedTokenizerBase, path: Path) -> list[Prompt]
 
     Raises:
         RuntimeError: Prompt zprávy nezačíná právě jedním BOS.
+        UnsplittableError: Řádek zprávy se nevejde do okna ani sám.
     """
     raw = path.read_bytes()
     digest = hashlib.sha256(raw).hexdigest()
@@ -135,6 +136,9 @@ def parts(tokenizer: PreTrainedTokenizerBase, text: str) -> list[str]:
 
     Returns:
         Maskované části zprávy v původním pořadí.
+
+    Raises:
+        UnsplittableError: Řádek zprávy se nevejde do okna ani sám.
     """
     return split(mask(text), functools.partial(fits, tokenizer))
 

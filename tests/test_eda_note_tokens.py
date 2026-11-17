@@ -175,23 +175,20 @@ def test_each_scientific_input_invalidates_cache(
     inputs: Inputs, changed: str, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Klíč zachytí tabulky, Python překladu, pár, model i obě knihovny."""
-    parquet, translation, english, czech, out = (
-        inputs[name] for name in ("parquet", "translation", "english", "czech", "out")
-    )
     eda_note_tokens.run(**inputs, environ={})
-    old = (out / "tokens/cache.json").read_bytes()
+    old = (inputs["out"] / "tokens/cache.json").read_bytes()
     if changed == "radiology":
-        path = parquet / "radiology.parquet"
+        path = inputs["parquet"] / "radiology.parquet"
         pq.write_table(
             pq.read_table(path).replace_schema_metadata({b"changed": b"1"}), path
         )
     elif changed == "script":
-        path = translation / "note_parts.py"
+        path = inputs["translation"] / "note_parts.py"
         path.write_bytes(path.read_bytes() + b"\n")
     elif changed == "pair":
-        (english / "a.txt").write_bytes(b"a\n")
+        (inputs["english"] / "a.txt").write_bytes(b"a\n")
     elif changed == "czech_pair":
-        (czech / "a.txt").write_bytes("č b\n".encode())
+        (inputs["czech"] / "a.txt").write_bytes("č b\n".encode())
     elif changed == "revision":
         key, model, _, window = hf_tokenizers.ENCODERS[0]
         monkeypatch.setattr(
@@ -209,7 +206,7 @@ def test_each_scientific_input_invalidates_cache(
             ),
         )
     assert eda_note_tokens.run(**inputs, environ={}) is True
-    assert old != (out / "tokens/cache.json").read_bytes()
+    assert old != (inputs["out"] / "tokens/cache.json").read_bytes()
 
 
 def test_guard_precedes_hashing_and_parquet_open(
@@ -255,8 +252,7 @@ def test_sample_has_limit_1000(inputs: Inputs) -> None:
     rows = next(
         SampleNoteTexts(EdaDatabase(inputs["parquet"], {}), "discharge").batches()
     )
-    expected_size = 1000
-    assert len(rows) == expected_size
+    assert len(rows) == 1000
 
 
 def test_translation_import_restores_modules_and_path(
@@ -294,8 +290,7 @@ def test_real_script_splitter_handles_fitting_divided_and_unsplittable(
     assert splitter.fits("a b c")
     assert splitter.parts("a b c") == 1
     assert not splitter.fits("a b c\n\na b c")
-    expected_parts = 2
-    assert splitter.parts("a b c\n\na b c") == expected_parts
+    assert splitter.parts("a b c\n\na b c") == 2
     assert splitter.parts("a b c a b c") is None
 
 
@@ -450,8 +445,7 @@ def test_sample_uses_declared_python_limit(
     rows = next(
         SampleNoteTexts(EdaDatabase(inputs["parquet"], {}), "discharge").batches()
     )
-    expected_count = 2
-    assert len(rows) == expected_count
+    assert len(rows) == 2
 
 
 @pytest.mark.parametrize(
