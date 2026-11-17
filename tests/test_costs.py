@@ -33,8 +33,7 @@ def test_latency_plan_requires_at_least_one_sample() -> None:
 
 def test_nearest_rank_of_three_unsorted_values() -> None:
     """ceil(1,5) = 2: medián je druhá nejmenší skutečně naměřená hodnota."""
-    expected = 0.2
-    assert nearest_rank([0.3, 0.1, 0.2], 50) == expected
+    assert nearest_rank([0.3, 0.1, 0.2], 50) == pytest.approx(0.2)
 
 
 @pytest.mark.parametrize(
