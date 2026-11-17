@@ -412,13 +412,17 @@ def test_interrupt_stops_download_and_keeps_partial_state(
 def test_restart_period_shorter_than_exhausted_tries_is_refused(
     physionet: FakePhysioNet, netrc: Path, tmp_path: Path
 ) -> None:
-    """Restart dřív, než mrtvý server vyčerpá pokusy, by ho nikdy neodhalil."""
+    """Restart dřív, než mrtvý server vyčerpá pokusy, by ho nikdy neodhalil.
+
+    Perioda leží přesně na hranici výchozích pěti pokusů, takže test hlídá
+    výchozí počet pokusů i ostrost nerovnosti.
+    """
     done = _download(
         netrc,
         physionet.url("data"),
         tmp_path / "table.csv",
         timeout="10",
-        MEDIPARSE_DOWNLOAD_PERIOD="30",
+        MEDIPARSE_DOWNLOAD_PERIOD="50",
     )
 
     assert done.returncode != 0
