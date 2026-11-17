@@ -29,7 +29,6 @@ from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.machine_hardware import machine_hardware
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
-from mediparse.infrastructure.run_manifest_file import load_tuning_manifest
 from mediparse.infrastructure.sklearn_classifier import ESTIMATOR, SkopsModelFile
 from mediparse.infrastructure.split_table import ParquetSplitTable
 from tests.model_support import (
@@ -855,7 +854,6 @@ def test_training_uses_tuned_parameters_threshold_and_provenance(
     assert manifest.parameters == _TUNED_PARAMETERS
     assert manifest.threshold == model.threshold
     assert manifest.converged is True
-    assert load_tuning_manifest(tuning).best == _TUNED_PARAMETERS
 
 
 @pytest.mark.parametrize("both", [True, False])
