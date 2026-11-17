@@ -49,12 +49,14 @@ def _run(
     cohort: Path | None = None,
 ) -> ExitCode:
     return smoketest_summary.run(
-        metrics=metrics or _metrics(root),
-        inference=inference or _inference(root),
-        cohort=cohort or _cohort(root),
-        corpus=root / "korpus",
-        outputs=root / "vystupy",
-        logs=root / "logy",
+        paths=smoketest_summary.SmoketestPaths(
+            metrics=metrics or _metrics(root),
+            inference=inference or _inference(root),
+            cohort=cohort or _cohort(root),
+            corpus=root / "korpus",
+            outputs=root / "vystupy",
+            logs=root / "logy",
+        ),
         out=out,
     )
 

@@ -8,6 +8,7 @@ a logů jeho parametry; skript workflow jen rozbalí objekt ``snakemake`` a zavo
 from __future__ import annotations
 
 import sys
+from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final, TextIO
 
 from mediparse.domain.language import Language
@@ -28,14 +29,21 @@ DEMO_HEADER: Final = ("zpráva", "diagnóza", "pravda", "predikce", "skóre")
 YES_NO: Final = {True: "ano", False: "ne"}
 
 
+@dataclass(frozen=True)
+class SmoketestPaths:
+    """Vstupní a výstupní cesty souhrnu smoketestu."""
+
+    metrics: Path
+    inference: Path
+    cohort: Path
+    corpus: Path
+    outputs: Path
+    logs: Path
+
+
 def main(
     *,
-    metrics: Path,
-    inference: Path,
-    cohort: Path,
-    corpus: Path,
-    outputs: Path,
-    logs: Path,
+    paths: SmoketestPaths,
 ) -> ExitCode:
     """Krok pravidla: souhrn na stdout, diagnostika na stderr.
 
@@ -44,12 +52,7 @@ def main(
     """
     configure_logging()
     return run(
-        metrics=metrics,
-        inference=inference,
-        cohort=cohort,
-        corpus=corpus,
-        outputs=outputs,
-        logs=logs,
+        paths=paths,
         out=sys.stdout,
     )
 
@@ -64,12 +67,7 @@ def _write_table(out: TextIO, table: list[tuple[str, ...]]) -> None:
 @refusing_invalid_input
 def run(
     *,
-    metrics: Path,
-    inference: Path,
-    cohort: Path,
-    corpus: Path,
-    outputs: Path,
-    logs: Path,
+    paths: SmoketestPaths,
     out: TextIO,
 ) -> ExitCode:
     """Přečte metriky, predikce a labely kohorty, vypíše souhrn a ukázku s pravdou.
@@ -88,9 +86,9 @@ def run(
             f"{item.metrics.roc_auc:.3f}",
             f"{item.metrics.pr_auc:.3f}",
         )
-        for item in ParquetMetricsTable(metrics).read()
+        for item in ParquetMetricsTable(paths.metrics).read()
     ]
-    directory = CorpusDirectory(corpus)
+    directory = CorpusDirectory(paths.corpus)
     examples = [
         (
             str(directory.note_path(Language.EN, item.note_id)),
@@ -100,13 +98,14 @@ def run(
             f"{item.score:.3f}",
         )
         for item, truth in demo_examples(
-            ParquetPredictionTable(inference).read(), ParquetNoteTable(cohort).read()
+            ParquetPredictionTable(paths.inference).read(),
+            ParquetNoteTable(paths.cohort).read(),
         )
     ]
     _write_table(out, [(*HEADER, *SCORES), *rows])
     out.write("\nUkázka predikce uloženého modelu na odložených zprávách")
     out.write(" (kladné skóre znamená ano):\n")
     _write_table(out, [DEMO_HEADER, *examples])
-    out.write(f"\nData, model, predikce, metriky a manifest: {outputs}/\n")
-    out.write(f"Logy kroků: {logs}/\n")
+    out.write(f"\nData, model, predikce, metriky a manifest: {paths.outputs}/\n")
+    out.write(f"Logy kroků: {paths.logs}/\n")
     return ExitCode.OK
