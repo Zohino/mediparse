@@ -4,9 +4,7 @@ from __future__ import annotations
 
 import os
 import shutil
-
-# Test musí spustit skutečný shellový recept; audit nahrazuje lokální stub.
-import subprocess  # ruff: ignore[suspicious-subprocess-import]
+import subprocess
 from typing import TYPE_CHECKING
 
 import pytest
@@ -62,8 +60,8 @@ def test_audit_recipe_blocks_only_uncommitted_code(
         caller = tmp_path / "caller"
         init_repo(caller, "jiné repo volajícího\n")
 
-    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
-        ["bash", str(script), "discharge", "radiology", "audit.json"],  # ruff: ignore[start-process-with-partial-path]
+    result = subprocess.run(
+        ["bash", str(script), "discharge", "radiology", "audit.json"],
         cwd=caller,
         env=environ,
         capture_output=True,
