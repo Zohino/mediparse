@@ -186,11 +186,11 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
         == json.loads(config.read_text(encoding="utf-8"))["parameters"]
     )
     assert written.threshold == SkopsModelFile(outputs.model).load().threshold
-    assert written.threshold_folds == 3  # ruff: ignore[magic-value-comparison]
+    assert written.threshold_folds == 3
     assert written.converged is True
     assert written.seed == 0
     assert written.split_seed == 0
-    assert written.split_folds == 2  # ruff: ignore[magic-value-comparison]
+    assert written.split_folds == 2
     assert written.split_sha256 == ParquetSplitTable(split).read().split.sha256()
     assert written.row_id == "row"
     assert written.environment.source == REVISION
@@ -844,10 +844,10 @@ def test_training_uses_tuned_parameters_threshold_and_provenance(
     svm = model.model.estimator_["svm"]
     assert vectorizer.analyzer == "word"
     assert vectorizer.ngram_range == (1, 2)
-    assert vectorizer.min_df == 2  # ruff: ignore[magic-value-comparison]
-    assert vectorizer.max_df == 0.9  # ruff: ignore[float-equality-comparison, magic-value-comparison]
+    assert vectorizer.min_df == 2
+    assert vectorizer.max_df == 0.9  # ruff: ignore[float-equality-comparison]
     assert vectorizer.sublinear_tf is False
-    assert svm.C == 0.05  # ruff: ignore[float-equality-comparison, magic-value-comparison]
+    assert svm.C == 0.05  # ruff: ignore[float-equality-comparison]
     assert svm.class_weight == "balanced"
     manifest = _manifest(outputs)
     assert manifest.tuning_manifest_sha256 == file_sha256(tuning)

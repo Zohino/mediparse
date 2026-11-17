@@ -198,7 +198,7 @@ def test_measures_batch_and_three_samples_after_warmup() -> None:
 
     result = use_case.run()
 
-    assert result.latency.samples == 3  # ruff: ignore[magic-value-comparison]
+    assert result.latency.samples == 3
     assert result.latency.p50_seconds == pytest.approx(0.2)
     assert result.latency.p95_seconds == pytest.approx(0.3)
     assert result.batch.notes == len(items)

@@ -135,7 +135,7 @@ def test_results_manifest_records_actual_inputs_and_development(tmp_path: Path) 
     assert written.development_patients == len({
         note.subject_id for note in development
     })
-    assert written.seed == 7  # ruff: ignore[magic-value-comparison]
+    assert written.seed == 7
     assert written.diagnostic_strip is None
     assert written.text_preprocessing is TextPreprocessing.NONE
     assert written.text_normalization is None

@@ -29,7 +29,7 @@ def test_repository_config_loads() -> None:
     assert config.diagnosis is Diagnosis.DIABETES
     assert config.parameters is not None
     assert config.parameters["c"] == pytest.approx(1.0)
-    assert config.threshold_folds == 3  # ruff: ignore[magic-value-comparison]
+    assert config.threshold_folds == 3
 
 
 def test_missing_file_is_invalid_input(tmp_path: Path) -> None:

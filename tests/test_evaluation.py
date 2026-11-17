@@ -63,7 +63,7 @@ def test_min_cell_needs_ten_notes_in_each_class(positives: int, negatives: int) 
     """Pravidlo stability je 10 zpráv v obou třídách; chyba nese diagnózu a oba počty."""
     truth = [True] * positives + [False] * negatives
 
-    if positives >= 10 and negatives >= 10:  # ruff: ignore[magic-value-comparison]
+    if positives >= 10 and negatives >= 10:
         ensure_min_cell(Diagnosis.CKD, truth)
     else:
         with pytest.raises(
