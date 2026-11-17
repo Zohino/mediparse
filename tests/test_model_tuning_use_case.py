@@ -189,18 +189,26 @@ def test_inner_cv_sees_only_outer_training_patients(fold: int, seed: int) -> Non
 
 
 @pytest.mark.parametrize(
-    "changes",
+    ("changes", "message"),
     [
-        {"row_id": "other"},
-        {"space": {"params": [{"kind": "categorical", "name": "C", "choices": [1.0]}]}},
+        ({"row_id": "other"}, "neodpovídá row_id"),
+        (
+            {
+                "space": {
+                    "params": [{"kind": "categorical", "name": "C", "choices": [1.0]}]
+                }
+            },
+            "Jména prostoru",
+        ),
     ],
 )
 def test_mismatched_identity_or_parameters_are_refused(
     changes: dict[str, object],
+    message: str,
 ) -> None:
     """Cizí řádek a překlep C se odmítnou před prvním pokusem."""
     search = _Search()
-    with pytest.raises(InvalidInputError):
+    with pytest.raises(InvalidInputError, match=message):
         ModelTuning(_Table(), _Split(), _PairedParts(), search, _Scorer()).run(
             tuning_config(**changes), matrix_row()
         )

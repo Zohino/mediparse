@@ -72,17 +72,19 @@ def test_max_f1_matches_brute_force(rows: list[tuple[bool, int]]) -> None:
 
 
 @pytest.mark.parametrize(
-    ("labels", "scores"),
+    ("labels", "scores", "message"),
     [
-        ([False], [0.0]),
-        ([True], []),
-        ([True], [float("nan")]),
-        ([True], [float("inf")]),
+        ([False], [0.0], "pozitivní label"),
+        ([True], [], "stejnou délku"),
+        ([True], [float("nan")], "stejnou délku"),
+        ([True], [float("inf")], "stejnou délku"),
     ],
 )
-def test_max_f1_rejects_invalid_scores(labels: list[bool], scores: list[float]) -> None:
+def test_max_f1_rejects_invalid_scores(
+    labels: list[bool], scores: list[float], message: str
+) -> None:
     """Bez pozitivních, konečných skóre a shodných délek cíl nevznikne."""
-    with pytest.raises(InvalidInputError):
+    with pytest.raises(InvalidInputError, match=message):
         max_f1(labels, scores)
 
 

@@ -132,7 +132,10 @@ def test_invalid_svm_parameters_or_vocabulary_are_domain_errors(
     changes: dict[str, ParamValue],
 ) -> None:
     """Obecný prostor nemůže obejít meze konkrétního estimatoru."""
-    with pytest.raises(InvalidInputError):
+    with pytest.raises(
+        InvalidInputError,
+        match="Parametry nebo trénovací slovník ladění SVM nejsou platné",
+    ):
         SklearnLinearSvmScorer(None, 7).score(SVM_PARAMS | changes, _fold())
 
 
