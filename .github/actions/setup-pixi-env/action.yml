@@ -9,10 +9,37 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Cache pixi binary
+      id: pixi-cache
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: ${{ runner.temp }}/pixi-bin
+        key: pixi-bin-${{ runner.os }}-${{ hashFiles('.github/actions/setup-pixi-env/action.yml') }}
+    # Verze a SHA-256 pinují binárku; verzi držíme shodnou s Containerfile.
+    - name: Download pixi
+      if: steps.pixi-cache.outputs.cache-hit != 'true'
+      shell: bash
+      env:
+        PIXI_VERSION: v0.73.0
+        PIXI_DIR: ${{ runner.temp }}/pixi-bin
+      run: |
+        mkdir -p "$PIXI_DIR"
+        curl --fail --location --retry 6 --retry-all-errors --retry-delay 10 \
+          --output "$PIXI_DIR/pixi" \
+          "https://github.com/prefix-dev/pixi/releases/download/$PIXI_VERSION/pixi-x86_64-unknown-linux-musl"
+    - name: Add pixi to PATH
+      shell: bash
+      env:
+        PIXI_SHA256: 7127a393da11ff7c76b1fbc458731e24ab8105c3ddb415459cd85fd84a75e715
+        PIXI_DIR: ${{ runner.temp }}/pixi-bin
+      run: |
+        echo "$PIXI_SHA256  $PIXI_DIR/pixi" | sha256sum --check
+        chmod +x "$PIXI_DIR/pixi"
+        echo "$PIXI_DIR" >> "$GITHUB_PATH"
     - name: Install pixi
       uses: prefix-dev/setup-pixi@9dabb60412d3d2d967a8d682f7ce01317af40514 # v0.11.0
       with:
-        pixi-version: v0.73.0
         locked: true
         cache: true
+        cache-write: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
         environments: ${{ inputs.environments }}
