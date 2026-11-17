@@ -95,7 +95,7 @@ test_that("řez těla zvládne ne-ASCII znaky před tělem a tělo bez koncovéh
   expect_setequal(grams(counts, 1L), c("rash", "itch"))
 })
 
-test_that("brána po sekcích používá jmenovatel vlastní sekce", {
+test_that("brána po sekcích používá práh celého korpusu", {
   notes <- 1500L
   allergies <- ifelse(seq_len(notes) <= 15L, "zebra", ifelse(seq_len(notes) <= 27L, "xenon", "filler"))
   complaint <- ifelse(seq_len(notes) <= 10L, "yak", "wolf")
@@ -108,9 +108,8 @@ test_that("brána po sekcích používá jmenovatel vlastní sekce", {
   found <- function(section) counts$ngram[counts$sekce == section & counts$n == 1L]
 
   expect_equal(unique(counts$jmenovatel[counts$sekce == "allergies"]), 1500)
-  expect_equal(unique(counts$jmenovatel[counts$sekce == "chief_complaint"]), 20)
   expect_setequal(found("allergies"), c("zebra", "filler"))
-  expect_setequal(found("chief_complaint"), c("yak", "wolf"))
+  expect_length(found("chief_complaint"), 0L)
 })
 
 test_that("celek počítá i text other a má sekci NA", {
@@ -192,16 +191,18 @@ test_that("ngram_plot se sestaví pro tři panely i nad prázdným výsledkem", 
   expect_no_error(ggplot2::ggplot_build(ngram_plot(empty_counts())))
 })
 
-test_that("ngram_text jmenuje nejčastější n-gramy a počet frází šablony pro každé n", {
+test_that("ngram_text jmenuje nejčastější n-gramy a počet kandidátů na frázi šablony pro každé n", {
   text <- ngram_text(RANKED[1:3, ])
 
+  expect_match(text, "kandidát")
+  expect_false(grepl("nerozlišují", text, fixed = TRUE))
   expect_match(text, "token `pain` (90,0", fixed = TRUE)
   expect_match(text, "bigram `chest pain`", fixed = TRUE)
   expect_match(text, paste0("1", NBSP, "token, 1", NBSP, "bigram a 0", NBSP, "trigramů"), fixed = TRUE)
   expect_match(ngram_text(empty_counts()), "nelze uvést")
 })
 
-test_that("fráze šablony se počítá od přesné poloviny zpráv", {
+test_that("kandidát na frázi šablony se počítá od přesné poloviny zpráv", {
   half <- data.frame(
     sekce = NA_character_, n = 1L, ngram = "pain", zpravy = 50, vyskyty = 50,
     jmenovatel = 100, stringsAsFactors = FALSE
@@ -226,4 +227,21 @@ test_that("tabulky n-gramů projdou export_table s rozvržením sešitu", {
       expect_true(file.exists(file.path(dir, paste0(spec[[1]], ".tex"))))
     }
   }
+})
+
+
+test_that("procento n-gramu po sekcích zůstává nad jmenovatelem sekce", {
+  counts <- counts_of(c(
+    rep("Allergies:\nzebra\n\nChief Complaint:\nyak\n", 16),
+    rep("Allergies:\nxenon\n\nChief Complaint:\nwolf\n", 4),
+    rep("Allergies:\nfiller\n", 1480)
+  ), sections = "chief_complaint", floor = publishable_floor)
+  row <- counts[counts$n == 1L & counts$ngram == "yak", ]
+
+  expect_equal(row$zpravy, 16)
+  expect_equal(row$jmenovatel, 20)
+  expect_identical(
+    section_ngram_table(counts, "chief_complaint")$ngramy[[1]],
+    paste0("yak (80,0", NBSP, "%)")
+  )
 })

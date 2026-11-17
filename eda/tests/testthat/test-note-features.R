@@ -101,3 +101,63 @@ test_that("varianty odmítnou chybějící sloupec, jiný typ a NULL", {
     expect_error(note_variants(con), "sloupec (diagnosis|occurrences)")
   }
 })
+
+
+rewrite_feature_fixture <- function(con, directory, file, query) {
+  path <- file.path(directory, file)
+  temporary <- file.path(directory, "changed.parquet")
+  source <- sprintf("read_parquet(%s)", DBI::dbQuoteString(con, path))
+  DBI::dbExecute(con, sprintf(
+    "COPY (%s) TO %s (FORMAT parquet)", sprintf(query, source),
+    DBI::dbQuoteString(con, temporary)
+  ))
+  file.rename(temporary, path)
+}
+
+for (spec in list(
+  list(file = "note_preprocessing.parquet", read = note_preprocessing),
+  list(file = "note_sections.parquet", read = segment_corpus)
+)) {
+  test_that(paste("neúplná měření zastaví výpočet bez identifikátorů a textu", spec$file), {
+    con <- corpus_con(c("alpha AF", "alpha gamma"))
+    directory <- use_feature_fixtures(con)
+    rewrite_feature_fixture(con, directory, spec$file, "SELECT * FROM %s WHERE note_id <> 'n2'")
+
+    message <- tryCatch(spec$read(con), error = conditionMessage)
+
+    expect_match(message, spec$file, fixed = TRUE)
+    expect_match(message, "chybí zprávy (počet: 1);", fixed = TRUE)
+    expect_match(message, "mediparse-eda-note-features", fixed = TRUE)
+    expect_false(grepl("n1|n2|note_id|alpha|gamma|AF", message))
+    expect_error(spec$read(con), spec$file, fixed = TRUE)
+  })
+}
+
+for (spec in list(
+  list(file = "note_sections.parquet", read = segment_corpus),
+  list(file = "note_preprocessing.parquet", read = note_preprocessing),
+  list(file = "note_acronyms.parquet", read = note_preprocessing),
+  list(file = "note_variants.parquet", read = note_variants)
+)) {
+  test_that(paste("duplicitní klíč zastaví čtení", spec$file), {
+    con <- corpus_con("Allergies:\nnone\n")
+    directory <- use_feature_fixtures(con)
+    rewrite_feature_fixture(con, directory, spec$file, "SELECT * FROM %1$s UNION ALL (SELECT * FROM %1$s LIMIT 1)")
+
+    message <- tryCatch(spec$read(con), error = conditionMessage)
+
+    expect_match(message, spec$file, fixed = TRUE)
+    expect_match(message, "duplicitní klíče (počet: 1);", fixed = TRUE)
+    expect_match(message, "mediparse-eda-note-features", fixed = TRUE)
+    expect_false(grepl("n1|note_id|Allergies", message))
+    expect_error(spec$read(con), spec$file, fixed = TRUE)
+  })
+}
+
+test_that("řídká měření zkratek nevyžadují řádek pro každou zprávu", {
+  con <- corpus_con(c("alpha AF", "alpha gamma"))
+  directory <- use_feature_fixtures(con)
+  rewrite_feature_fixture(con, directory, "note_acronyms.parquet", "SELECT * FROM %s WHERE note_id <> 'n2'")
+
+  expect_no_error(note_preprocessing(con))
+})

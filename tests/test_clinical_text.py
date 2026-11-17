@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import re
 import string
-from typing import Final
+from operator import itemgetter
+from typing import Any, Final
 
 import pytest
 from hypothesis import assume, example, given
@@ -25,7 +26,7 @@ from mediparse.domain.clinical_text import (
 )
 from mediparse.domain.note_text import deid_markers
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
-from tests.support import REPOSITORY_DIAGNOSIS_CANDIDATES
+from tests.support import AGE_MARKER_CASES, REPOSITORY_DIAGNOSIS_CANDIDATES
 
 _ANALYZER: Final = TfidfVectorizer().build_analyzer()
 _UNREPLACED_NUMBER: Final = re.compile(r"(?<![A-Za-z0-9_])(?<![0-9][.,])[0-9]")
@@ -38,32 +39,22 @@ def _tokens(text: str) -> list[str]:
     return _ANALYZER(normalize_clinical_text(text))
 
 
-@pytest.mark.parametrize(
-    "form",
-    [
-        "___ year old",
-        "___ years old",
-        "___-year-old",
-        "___ yearsold",
-        "___yo",
-        "___ y/o",
-        "___ y.o.",
-        "___ YO",
-    ],
-)
-def test_every_age_form_from_eda_becomes_age_placeholder(form: str) -> None:
-    """Všechny tvary věku naměřené v MIMIC dají týž zástupný token."""
-    assert normalize_clinical_text(f"a {form} woman").split() == [
+@pytest.mark.parametrize("case", AGE_MARKER_CASES, ids=itemgetter("name"))
+def test_shared_age_normalization_cases(case: dict[str, Any]) -> None:
+    """Sdílené případy definují masku věku v Pythonu i R."""
+    assert (
+        normalize_clinical_text(case["text"]).split().count(AGE_PLACEHOLDER)
+        == case["markers"]
+    )
+
+
+def test_age_placeholder_consumes_attached_gender() -> None:
+    """Přilepené pohlaví se pohltí do zástupného tokenu věku."""
+    assert normalize_clinical_text("a ___yoM woman").split() == [
         "a",
         AGE_PLACEHOLDER,
         "woman",
     ]
-
-
-@pytest.mark.parametrize("text", ["___ yogurt", "___ y/om"])
-def test_age_suffix_continuing_into_letters_is_not_age(text: str) -> None:
-    """Přípona věku, za níž pokračují písmena, je jiné slovo."""
-    assert AGE_PLACEHOLDER not in normalize_clinical_text(text)
 
 
 @pytest.mark.parametrize(
