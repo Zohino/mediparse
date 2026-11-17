@@ -94,7 +94,6 @@ class OptunaSearch:
         except DuplicatedStudyError as error:
             msg = "Studie ladění už existuje; nový běh vyžaduje nové úložiště."
             raise InvalidInputError(msg) from error
-        # I pevný vektorizér je categorical s jednou volbou, aby prostor popsal celý model.
         return cls(study, {param.name: _distribution(param) for param in space.params})
 
     def ask(self) -> Trial:
