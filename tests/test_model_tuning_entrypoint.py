@@ -134,7 +134,7 @@ def test_tuning_manifest_records_budget_inputs_training_and_costs(
     assert "optuna" in manifest.environment.packages
     assert (
         manifest.sampler
-        == "optuna.samplers.TPESampler(n_startup_trials=10, multivariate=False)"
+        == "optuna.samplers.TPESampler(n_startup_trials=10, multivariate=True)"
     )
     assert manifest.pruner == "optuna.pruners.MedianPruner"
     assert (out / "tuning.sqlite3").is_file()

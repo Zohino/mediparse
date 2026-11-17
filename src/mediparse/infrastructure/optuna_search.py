@@ -32,7 +32,7 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 TPE_STARTUP_TRIALS: Final = 10
-TPE_MULTIVARIATE: Final = False
+TPE_MULTIVARIATE: Final = True
 SAMPLER: Final = (
     f"optuna.samplers.TPESampler(n_startup_trials={TPE_STARTUP_TRIALS}, "
     f"multivariate={TPE_MULTIVARIATE})"

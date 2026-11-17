@@ -16,6 +16,8 @@ from optuna.trial import TrialState
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.tuning import SearchSpace
 from mediparse.infrastructure.optuna_search import OptunaSearch
+from mediparse.infrastructure.tuning_config import load_tuning_config
+from tests.support import REPOSITORY
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -116,3 +118,15 @@ def test_sqlite_does_not_leave_open_connections_for_gc(tmp_path: Path) -> None:
     assert not [
         warning for warning in caught if issubclass(warning.category, ResourceWarning)
     ]
+
+
+def test_multivariate_search_with_fixed_categories_emits_no_warnings(
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    """Produkční prostor nevydá varování při startu ani po deseti úvodních pokusech."""
+    space = load_tuning_config(REPOSITORY / "config/tuning.json").space
+    with caplog.at_level("WARNING"):
+        search = OptunaSearch.create(space, 7, 5, None)
+        for _ in range(20):
+            search.complete(search.ask(), 0.5)
+    assert not caplog.records
