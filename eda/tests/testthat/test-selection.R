@@ -104,3 +104,21 @@ test_that("input_corpus_table předá práh jako poziční parametr DBI", {
   input_corpus_table(con)
   expect_true(bound)
 })
+
+
+test_that("text trychtýře jmenuje kroky bez úbytku", {
+  funnel <- data.frame(krok = FUNNEL_STEPS, zprav = c(100, 90, 90, 90))
+  text <- idle_steps_text(funnel)
+
+  expect_match(text, "Aspoň 100 znaků", fixed = TRUE)
+  expect_match(text, "Bez přesných duplicit", fixed = TRUE)
+  expect_false(grepl("S kódem ICD", text, fixed = TRUE))
+  expect_match(text, "žádnou zprávu nevyřadí", fixed = TRUE)
+  expect_match(text, "jsou pojistkou, ne filtrem", fixed = TRUE)
+})
+
+test_that("text o krocích bez úbytku nevznikne, pokud každý krok vyřazuje", {
+  funnel <- data.frame(krok = FUNNEL_STEPS, zprav = c(100, 90, 80, 70))
+
+  expect_identical(idle_steps_text(funnel), "")
+})

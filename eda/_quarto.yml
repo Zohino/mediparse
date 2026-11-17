@@ -1,4 +1,5 @@
 project:
+  render: ["*.qmd"]
   type: default
   output-dir: ../results/eda
 

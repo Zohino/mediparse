@@ -61,6 +61,15 @@ corpus_funnel <- function(con) {
   )
 }
 
+idle_steps_text <- function(funnel) {
+  steps <- funnel$krok[-1][diff(funnel$zprav) == 0]
+  if (length(steps) == 0L) return("")
+  sprintf(
+    "Kroky %s na těchto datech žádnou zprávu nevyřadí; jsou pojistkou, ne filtrem.",
+    join_labels(steps)
+  )
+}
+
 COMPARISON_ROWS <- c(
   "Zpráv",
   "Pacientů",
