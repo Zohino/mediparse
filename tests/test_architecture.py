@@ -943,11 +943,7 @@ def _unguarded_data_entrypoints(root: Path) -> tuple[list[str], set[str]]:
     for module in sorted(root.rglob("*.py")):
         imports = _data_imports(module)
         if not any(
-            DATA_ADAPTER.fullmatch(name)
-            or (
-                source == CORPUS_LOADER
-                and name in {"model_corpus", "model_input_table"}
-            )
+            DATA_ADAPTER.fullmatch(name) or source == CORPUS_LOADER
             for source, name in imports
         ):
             continue
@@ -1036,19 +1032,20 @@ def test_shell_guard_check_detects_only_active_guard(
 @pytest.mark.parametrize(
     ("source", "adapter"),
     [
-        ("note_table", "ParquetNoteTable"),
-        ("note_texts_parquet", "ParquetNoteTexts"),
-        ("duckdb_cohort", "DuckDbCohort"),
-        ("sklearn_classifier", "SkopsModelFile"),
-        ("csv_parquet", "CsvParquetConversion"),
+        ("mediparse.infrastructure.note_table", "ParquetNoteTable"),
+        ("mediparse.infrastructure.note_texts_parquet", "ParquetNoteTexts"),
+        ("mediparse.infrastructure.duckdb_cohort", "DuckDbCohort"),
+        ("mediparse.infrastructure.sklearn_classifier", "SkopsModelFile"),
+        ("mediparse.infrastructure.csv_parquet", "CsvParquetConversion"),
+        ("mediparse.entrypoints.model_corpus", "ModelCorpusPaths"),
     ],
 )
 def test_data_guard_check_detects_unprotected_adapter(
     tmp_path: Path, source: str, adapter: str
 ) -> None:
-    """Stráž vyžadují různé datové adaptéry i s přejmenovaným importem."""
+    """Stráž vyžadují datové adaptéry i importy sdíleného korpusu pod aliasem."""
     (tmp_path / "unguarded.py").write_text(
-        f"from mediparse.infrastructure.{source} import {adapter} as Adapter\n",
+        f"from {source} import {adapter} as Adapter\n",
         encoding="utf-8",
     )
 
