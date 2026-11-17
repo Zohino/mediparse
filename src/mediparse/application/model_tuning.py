@@ -111,7 +111,9 @@ class ModelTuning:
             scores = self.scorer.score(trial.params, fold)
             values.append(macro_max_f1(fold.test, scores))
             converged &= scores.converged
-            if self.search.should_prune(trial, sum(values) / len(values), step):
+            if step + 1 < len(folds) and self.search.should_prune(
+                trial, sum(values) / len(values), step
+            ):
                 self.search.prune(trial)
                 return True, converged
         self.search.complete(trial, sum(values) / len(values))

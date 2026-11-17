@@ -54,6 +54,7 @@ class _Split:
 
 @dataclass
 class _Search:
+    prune_last: bool = False
     asked: int = 0
     reported: list[tuple[int, float, int]] = field(default_factory=list)
     completed: dict[int, tuple[Mapping[str, ParamValue], float]] = field(
@@ -68,7 +69,7 @@ class _Search:
 
     def should_prune(self, trial: Trial, value: float, step: int) -> bool:
         self.reported.append((trial.number, value, step))
-        return trial.number == 1 and step == 0
+        return trial.number == 1 and step == (1 if self.prune_last else 0)
 
     def complete(self, trial: Trial, value: float) -> None:
         self.completed[trial.number] = trial.params, value
@@ -151,16 +152,12 @@ def test_trial_loop_uses_budget_running_means_and_counts_nonconvergence_once() -
     assert (search.asked, search.pruned, list(search.completed)) == (3, [1], [0, 2])
     assert [(trial, step) for trial, _, step in search.reported] == [
         (0, 0),
-        (0, 1),
         (1, 0),
         (2, 0),
-        (2, 1),
     ]
     assert [value for _, value, _ in search.reported] == pytest.approx([
         1.0,
-        5 / 6,
         1.0,
-        2 / 3,
         2 / 3,
     ])
     assert (report.train_notes, report.train_patients) == (100, 10)
@@ -231,3 +228,11 @@ def test_scorer_failure_aborts_without_counting_failed_trial() -> None:
     assert search.asked == 1
     assert not search.completed
     assert not search.pruned
+
+
+def test_last_fold_always_completes_trial() -> None:
+    """Prořezání po posledním foldu už nešetří výpočet, search se na něj nezeptá."""
+    search = _Search(prune_last=True)
+    report = _run(search, _Scorer(), _PairedParts())
+    assert (report.outcome.completed_trials, report.outcome.pruned_trials) == (3, 0)
+    assert all(step == 0 for _, _, step in search.reported)
