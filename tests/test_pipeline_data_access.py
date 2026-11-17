@@ -20,9 +20,11 @@ from mediparse.entrypoints import (
     model_evaluation,
     model_inference,
     model_training,
+    model_tuning,
     split_materialization,
 )
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.perf_clock import PerfCounterClock
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.table_provenance import write_table_provenance
 from tests.support import (
@@ -93,6 +95,19 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
             cuda_device_order=None,
             environ=environ,
         ),
+        "model_tuning": partial(
+            model_tuning.run,
+            paths=model_tuning.TuningPaths(
+                corpus=repository_corpus(notes, split),
+                config=root / "missing.json",
+                matrix=root / "missing.json",
+                storage=root / "tuning/tuning.sqlite3",
+                manifest=root / "tuning/tuning_manifest.json",
+            ),
+            revision=fixed_revision,
+            clock=PerfCounterClock(),
+            environ=environ,
+        ),
         "model_evaluation": partial(
             model_evaluation.run,
             paths=model_evaluation.EvaluationPaths(
@@ -160,6 +175,7 @@ GUARD_CASES: Final = {
     "cohort": _GuardCase(("discharge", "diagnoses"), prepare=_prepare_sources),
     "split_materialization": _GuardCase(("cohort",)),
     "model_training": _GuardCase(("cohort", "split"), corpus=True),
+    "model_tuning": _GuardCase(("cohort", "split"), corpus=True, native=False),
     "model_evaluation": _GuardCase(("predictions", "cohort", "split")),
     "model_inference": _GuardCase(("cohort", "model", "predictions")),
 }

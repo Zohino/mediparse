@@ -16,8 +16,8 @@ from mediparse.domain.run_manifest import TuningManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_input_table import (
-    model_input_table,
-    text_normalization,
+    ModelCorpusPaths,
+    model_corpus,
 )
 from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.file_digest import file_sha256
@@ -30,7 +30,6 @@ from mediparse.infrastructure.perf_clock import PerfCounterClock
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.sklearn_tuning import SklearnLinearSvmScorer
 from mediparse.infrastructure.source_revision import revision_source
-from mediparse.infrastructure.split_table import ParquetSplitTable
 from mediparse.infrastructure.tuning_config import load_tuning_config
 
 if TYPE_CHECKING:
@@ -59,12 +58,9 @@ PACKAGES: Final = (
 class TuningPaths:
     """Vstupní a výstupní cesty ladění modelu."""
 
-    cohort: Path
+    corpus: ModelCorpusPaths
     config: Path
     matrix: Path
-    candidates: Path
-    lexicon: Path
-    split: Path
     storage: Path
     manifest: Path
 
@@ -97,19 +93,16 @@ def run(
     Returns:
         OK po zápisu manifestu, REFUSED pro neplatné vstupy a nepovolený přístup k datům.
     """
-    check_inputs_access(environ, (paths.cohort, paths.split))
+    check_inputs_access(environ, paths.corpus.data)
     tuning = load_tuning_config(paths.config)
     row = load_matrix(paths.matrix).row(tuning.row_id)
     source = revision()
-    table, strip = model_input_table(
-        cohort=paths.cohort, model_input=row.input, lexicon=paths.lexicon
-    )
-    normalization = text_normalization(paths.candidates, row.input)
-    scorer = _validation_scorer(row.model, normalization, tuning.seed)
+    corpus = model_corpus(paths.corpus, row.input)
+    scorer = _validation_scorer(row.model, corpus.normalization, tuning.seed)
     hardware = machine_hardware(())
     step = ModelTuning(
-        table=table,
-        split=ParquetSplitTable(paths.split),
+        table=corpus.table,
+        split=corpus.split,
         partitioner=StratifiedGroupFolds(),
         search=OptunaSearch.create(
             tuning.space, tuning.seed, tuning.pruner_startup_trials, paths.storage
@@ -125,7 +118,7 @@ def run(
         TuningManifest(
             row_id=row.id,
             fold=tuning.fold,
-            dataset_sha256=file_sha256(paths.cohort),
+            dataset_sha256=corpus.dataset_sha256,
             config_sha256=file_sha256(paths.config),
             matrix_sha256=file_sha256(paths.matrix),
             split_seed=report.split_config.seed,
@@ -144,9 +137,9 @@ def run(
             seconds=seconds,
             train_notes=report.train_notes,
             train_patients=report.train_patients,
-            diagnostic_strip=strip,
+            diagnostic_strip=corpus.strip,
             text_preprocessing=row.input.text_preprocessing,
-            text_normalization=normalization,
+            text_normalization=corpus.normalization,
             environment=Environment(
                 packages=installed_versions(PACKAGES), source=source
             ),
