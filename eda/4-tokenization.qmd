@@ -136,10 +136,10 @@ Délky se definují takto:
 
 - *délka pro encoder* je počet tokenů včetně speciálních tokenů (`add_special_tokens = TRUE`). Okno `r encoder_capacity` zahrnuje oba speciální tokeny, obsah části je tedy `r encoder_capacity` minus `r specials[["xlmr"]]` tokenů. U XLM-R je `r encoder_capacity` tvrdý limit (absolutní pozice), u mDeBERTa délka předtrénování: relativní pozice delší vstup technicky připustí, ale model ho neviděl,
 - *části encoderu* jsou ceil((n − s) / (`r encoder_capacity` − s)) bez překryvu, kde `s` je počet speciálních tokenů. Je to odhad, protože politika chunkování encoderu (překryv, ořez) ještě rozhodnutá není,
-- *délka pro překlad* `s` je počet tokenů nemaskovaného zdroje bez speciálních tokenů po ořezu okrajových mezer. Vzorec `okno − (s + režie) ≥ poměr · s` proto posuzuje vejití nemaskovaného textu. Režie chat šablony se změřila jednou na pevné neklinické větě a je `r overhead` tokenů, poměr dělení je `r format(settings$split_ratio, decimal.mark = ",")` a okno `r format_number(settings$window)`. Hranice `r format(floor(limit), decimal.mark = ",")` tokenů nemaskovaného zdroje slouží jen pro spodní mez počtu dělených zpráv a částí. Skutečné vejití ověřuje `prepare._note_fits` nad maskovaným textem, kde značky `[[n]]` přidají tokeny; zpráva pod touto hranicí se proto přesto nemusí vejít,
+- *délka pro překlad* `s` je počet tokenů nemaskovaného zdroje bez speciálních tokenů po ořezu okrajových mezer. Vzorec `okno − (s + režie) ≥ poměr · s` proto posuzuje vejití nemaskovaného textu. Režie chat šablony se změřila jednou na pevné neklinické větě a je `r overhead` tokenů, poměr dělení je `r format(settings$split_ratio, decimal.mark = ",")` a okno `r format_number(settings$window)`. Hranice `r format(floor(limit), decimal.mark = ",")` tokenů nemaskovaného zdroje slouží jen pro spodní mez počtu dělených zpráv a částí. Skutečné vejití ověřuje `prepare.note_fits` nad maskovaným textem, kde značky `[[n]]` přidají tokeny; zpráva pod touto hranicí se proto přesto nemusí vejít,
 - *spodní mez částí překladu* je `ceil(s / limit)` s `limit = (okno − režie) / (1 + poměr)`, vychází na `r format(round(limit, 1), decimal.mark = ",")` tokenu. Prázdná zpráva má nula částí, takže součet částí nepočítá prázdné zprávy.
 
-Spodní mez se ověřuje přesným dělením maskovaného textu (`prepare._parts`) na deterministickém vzorku `r format_number(prompt$sample_limit)` zpráv na tabulku, vybraném podle `hash(note_id)`. Dělení celého korpusu by trvalo hodiny. Verdikty na konci sešitu se řídí dvěma pravidly. Encoder vystačí s ořezem, když se do okna vejde aspoň `r share_text(ENCODER_FULL_SHARE)` propouštěcích zpráv, protože ořez pak zasáhne nejvýš `r share_text(1 - ENCODER_FULL_SHARE)` zpráv; jinak se rozhoduje podle mediánu délky. Čeština snižuje podíl v okně, když je anglický podíl větší než odhadovaný český o víc než `r percent_text(CZECH_TOLERANCE, 1)` procentního bodu.
+Spodní mez se ověřuje přesným dělením maskovaného textu (`prepare.parts`) na deterministickém vzorku `r format_number(prompt$sample_limit)` zpráv na tabulku, vybraném podle `hash(note_id)`. Dělení celého korpusu by trvalo hodiny. Verdikty na konci sešitu se řídí dvěma pravidly. Encoder vystačí s ořezem, když se do okna vejde aspoň `r share_text(ENCODER_FULL_SHARE)` propouštěcích zpráv, protože ořez pak zasáhne nejvýš `r share_text(1 - ENCODER_FULL_SHARE)` zpráv; jinak se rozhoduje podle mediánu délky. Čeština snižuje podíl v okně, když je anglický podíl větší než odhadovaný český o víc než `r percent_text(CZECH_TOLERANCE, 1)` procentního bodu.
 
 Zprávy se v tokenech uvádějí v logaritmických koších o šířce 0,1 dekády a percentily se počítají stejně jako v sešitu o délce (`quantile_disc`).
 
@@ -222,7 +222,7 @@ export_table(
 
 ## Přesné dělení překladu na vzorku {#sec-vzorek}
 
-@tbl-vzorek porovnává spodní mez s přesným dělením skutečným algoritmem přípravy překladu na deterministickém vzorku. Poměr přesného počtu částí ke spodní mezi říká, o kolik spodní mez podhodnocuje počet požadavků. Neshody uvádějí rozdíl mezi vzorcem nad nemaskovanou délkou a kontrolou okna přípravy (`prepare._note_fits`) nad maskovaným textem. Zahrnují tedy i zprávy, které se vejdou jen bez maskování; takový rozdíl není chybou vzorce. Nedělitelná zpráva je ta, jejíž řádek se nevejde do okna ani sám; do částí se nepočítá.
+@tbl-vzorek porovnává spodní mez s přesným dělením skutečným algoritmem přípravy překladu na deterministickém vzorku. Poměr přesného počtu částí ke spodní mezi říká, o kolik spodní mez podhodnocuje počet požadavků. Neshody uvádějí rozdíl mezi vzorcem nad nemaskovanou délkou a kontrolou okna přípravy (`prepare.note_fits`) nad maskovaným textem. Zahrnují tedy i zprávy, které se vejdou jen bez maskování; takový rozdíl není chybou vzorce. Nedělitelná zpráva je ta, jejíž řádek se nevejde do okna ani sám; do částí se nepočítá.
 
 ```{r}
 #| label: tbl-vzorek
@@ -239,7 +239,7 @@ export_table(
 )
 ```
 
-*Zdroj:* `prepare._parts` včetně maskování nad vzorkem vybraným podle `hash(note_id)`.
+*Zdroj:* `prepare.parts` včetně maskování nad vzorkem vybraným podle `hash(note_id)`.
 
 ## Čeština jako odhad {#sec-cestina}
 

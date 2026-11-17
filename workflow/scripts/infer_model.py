@@ -2,17 +2,16 @@
 
 from pathlib import Path
 
-from mediparse.entrypoints.model_inference import main
+from mediparse.entrypoints.model_inference import InferencePaths, main
 
-raise SystemExit(
-    main(
-        cohort=Path(snakemake.input.cohort),
-        config=Path(snakemake.input.config),
-        lexicon=Path(snakemake.input.lexicon),
-        model=Path(snakemake.input.model),
-        predictions=Path(snakemake.input.predictions),
-        inference=Path(snakemake.output.inference),
-        costs=Path(snakemake.output.costs),
-        log=Path(snakemake.log[0]),
-    )
+paths = InferencePaths(
+    cohort=Path(snakemake.input.cohort),
+    config=Path(snakemake.input.config),
+    lexicon=Path(snakemake.input.lexicon),
+    model=Path(snakemake.input.model),
+    predictions=Path(snakemake.input.predictions),
+    inference=Path(snakemake.output.inference),
+    costs=Path(snakemake.output.costs),
 )
+
+raise SystemExit(main(paths=paths, log=Path(snakemake.log[0])))

@@ -90,15 +90,17 @@ def _run(
     revision: Callable[[], SourceRevision] = fixed_revision,
 ) -> ExitCode:
     return classical_screening.run(
+        paths=classical_screening.ScreeningPaths(
+            cohort=inputs.cohort,
+            split=inputs.split,
+            config=inputs.config,
+            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+            lexicon=REPOSITORY_SECTION_HEADERS,
+            out=root / "classical.parquet",
+            predictions=root / "classical_predictions.parquet",
+            manifest=root / "classical_manifest.json",
+        ),
         environ={} if environ is None else environ,
-        cohort=inputs.cohort,
-        split=inputs.split,
-        config=inputs.config,
-        candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-        lexicon=REPOSITORY_SECTION_HEADERS,
-        out=root / "classical.parquet",
-        predictions=root / "classical_predictions.parquet",
-        manifest=root / "classical_manifest.json",
         revision=revision,
     )
 
@@ -135,7 +137,7 @@ def test_results_manifest_records_actual_inputs_and_development(tmp_path: Path) 
     assert written.development_patients == len({
         note.subject_id for note in development
     })
-    assert written.seed == 7  # ruff: ignore[magic-value-comparison]
+    assert written.seed == 7
     assert written.diagnostic_strip is None
     assert written.text_preprocessing is TextPreprocessing.NONE
     assert written.text_normalization is None
@@ -286,7 +288,9 @@ def test_main_parses_required_paths(
     monkeypatch.setattr(classical_screening, "run", execute)
     monkeypatch.setattr(classical_screening, "configure_logging", Mock())
     assert classical_screening.main() is ExitCode.REFUSED
-    assert {name: execute.call_args.kwargs[name] for name in names} == paths
+    assert execute.call_args.kwargs["paths"] == classical_screening.ScreeningPaths(
+        **paths
+    )
 
 
 def test_preprocessing_changes_screening_result_bytes(tmp_path: Path) -> None:

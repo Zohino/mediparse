@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import logging
 import os
+from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
@@ -59,6 +60,20 @@ PACKAGES: Final = (
 )
 
 
+@dataclass(frozen=True)
+class ScreeningPaths:
+    """Vstupní a výstupní cesty screeningu klasických modelů."""
+
+    cohort: Path
+    split: Path
+    config: Path
+    candidates: Path
+    lexicon: Path
+    out: Path
+    predictions: Path
+    manifest: Path
+
+
 def main() -> ExitCode:
     """Načte explicitní cesty screeningu a nastaví logování.
 
@@ -86,30 +101,25 @@ def main() -> ExitCode:
     args = parser.parse_args()
     return run(
         environ=os.environ,
-        cohort=args.cohort,
-        split=args.split,
-        config=args.config,
-        candidates=args.candidates,
-        lexicon=args.lexicon,
-        out=args.out,
-        predictions=args.predictions,
-        manifest=args.manifest,
+        paths=ScreeningPaths(
+            cohort=args.cohort,
+            split=args.split,
+            config=args.config,
+            candidates=args.candidates,
+            lexicon=args.lexicon,
+            out=args.out,
+            predictions=args.predictions,
+            manifest=args.manifest,
+        ),
         revision=revision_source(os.environ, Path.cwd()),
     )
 
 
 @refusing_invalid_input
-def run(  # ruff: ignore[too-many-arguments] - composition root předává explicitní cesty a zdroj revize
+def run(
     *,
     environ: Mapping[str, str],
-    cohort: Path,
-    split: Path,
-    config: Path,
-    candidates: Path,
-    lexicon: Path,
-    out: Path,
-    predictions: Path,
-    manifest: Path,
+    paths: ScreeningPaths,
     revision: Callable[[], SourceRevision],
 ) -> ExitCode:
     """Složí screening a zapíše agregáty i řádkové predikce s provenance.
@@ -118,16 +128,16 @@ def run(  # ruff: ignore[too-many-arguments] - composition root předává expli
         OK po dokončení mřížky; REFUSED při neplatných vstupech, nečitelné
         revizi nebo neoznačených datech v prostředí agenta.
     """
-    check_inputs_access(environ, (cohort, split))
-    screening = load_classical_screening_config(config)
+    check_inputs_access(environ, (paths.cohort, paths.split))
+    screening = load_classical_screening_config(paths.config)
     source = revision()
     table, strip = model_input_table(
-        cohort=cohort, model_input=screening.input, lexicon=lexicon
+        cohort=paths.cohort, model_input=screening.input, lexicon=paths.lexicon
     )
-    normalization = text_normalization(candidates, screening.input)
+    normalization = text_normalization(paths.candidates, screening.input)
     report = ClassicalScreening(
         table=table,
-        split=ParquetSplitTable(split),
+        split=ParquetSplitTable(paths.split),
         partitioner=StratifiedGroupFolds(),
         featurizer=TfidfFeaturizer(
             normalization,
@@ -135,20 +145,20 @@ def run(  # ruff: ignore[too-many-arguments] - composition root předává expli
         ),
         tuner=SklearnThresholdTuner(),
         scorer=SklearnScorer(),
-        results=ParquetScreeningTable(out),
-        predictions=ParquetScreeningPredictions(predictions),
+        results=ParquetScreeningTable(paths.out),
+        predictions=ParquetScreeningPredictions(paths.predictions),
     ).run(screening)
     write_model(
-        manifest,
+        paths.manifest,
         ScreeningManifest(
-            dataset_sha256=file_sha256(cohort),
+            dataset_sha256=file_sha256(paths.cohort),
             split_seed=report.split_config.seed,
             split_folds=report.split_config.folds,
             split_sha256=report.split_sha256,
-            config_sha256=file_sha256(config),
+            config_sha256=file_sha256(paths.config),
             seed=screening.seed,
-            results_sha256=file_sha256(out),
-            predictions_sha256=file_sha256(predictions),
+            results_sha256=file_sha256(paths.out),
+            predictions_sha256=file_sha256(paths.predictions),
             development_notes=report.development_notes,
             development_patients=report.development_patients,
             diagnostic_strip=strip,
@@ -163,6 +173,6 @@ def run(  # ruff: ignore[too-many-arguments] - composition root předává expli
         "Screening: %d vývojových zpráv a %d pacientů, výsledky zapsány do %s.",
         report.development_notes,
         report.development_patients,
-        out,
+        paths.out,
     )
     return ExitCode.OK

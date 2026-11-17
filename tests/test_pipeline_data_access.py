@@ -58,12 +58,14 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
         ),
         "cohort": partial(
             cohort.run,
-            discharge=tables / "discharge.parquet",
-            diagnoses=tables / "diagnoses_icd.parquet",
-            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            corpus_rule=REPOSITORY_INPUT_CORPUS,
-            cohort=notes,
-            manifest=root / "cohort/manifest.json",
+            paths=cohort.CohortPaths(
+                discharge=tables / "discharge.parquet",
+                diagnoses=tables / "diagnoses_icd.parquet",
+                candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+                corpus_rule=REPOSITORY_INPUT_CORPUS,
+                cohort=notes,
+                manifest=root / "cohort/manifest.json",
+            ),
             revision=fixed_revision,
             environ=environ,
         ),
@@ -76,16 +78,18 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
         ),
         "model_training": partial(
             model_training.run,
-            tuning=None,
-            cohort=notes,
-            config=REPOSITORY_TRAINING_CONFIG,
-            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            lexicon=REPOSITORY_SECTION_HEADERS,
-            split=split,
-            model=model,
-            predictions=predictions,
-            manifest=root / "run_manifest.json",
-            costs=root / "training_costs.json",
+            paths=model_training.TrainingPaths(
+                tuning=None,
+                cohort=notes,
+                config=REPOSITORY_TRAINING_CONFIG,
+                candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+                lexicon=REPOSITORY_SECTION_HEADERS,
+                split=split,
+                model=model,
+                predictions=predictions,
+                manifest=root / "run_manifest.json",
+                costs=root / "training_costs.json",
+            ),
             revision=fixed_revision,
             cuda_visible_devices="",
             cuda_device_order=None,
@@ -93,24 +97,28 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
         ),
         "model_evaluation": partial(
             model_evaluation.run,
-            predictions=predictions,
-            cohort=notes,
-            split=split,
-            metrics=root / "metrics.parquet",
-            training_manifest=root / "run_manifest.json",
-            manifest=root / "evaluation_manifest.json",
+            paths=model_evaluation.EvaluationPaths(
+                predictions=predictions,
+                cohort=notes,
+                split=split,
+                metrics=root / "metrics.parquet",
+                training_manifest=root / "run_manifest.json",
+                manifest=root / "evaluation_manifest.json",
+            ),
             revision=fixed_revision,
             environ=environ,
         ),
         "model_inference": partial(
             model_inference.run,
-            cohort=notes,
-            config=REPOSITORY_TRAINING_CONFIG,
-            lexicon=REPOSITORY_SECTION_HEADERS,
-            model=model,
-            predictions=predictions,
-            inference=root / "inference.parquet",
-            costs=root / "inference_costs.json",
+            paths=model_inference.InferencePaths(
+                cohort=notes,
+                config=REPOSITORY_TRAINING_CONFIG,
+                lexicon=REPOSITORY_SECTION_HEADERS,
+                model=model,
+                predictions=predictions,
+                inference=root / "inference.parquet",
+                costs=root / "inference_costs.json",
+            ),
             cuda_visible_devices="",
             cuda_device_order=None,
             environ=environ,
@@ -170,7 +178,13 @@ def test_entrypoint_refuses_before_opening_input(
     """Každý datový vstup má vlastní stráž před otevřením a bez nového výstupu."""
     step = _steps(tmp_path, BLOCKED)[entrypoint]
     case = GUARD_CASES[entrypoint]
-    inputs = {name: tmp_path / name / step.keywords[name].name for name in case.inputs}
+    paths = step.keywords.get("paths")
+    inputs = {
+        name: tmp_path
+        / name
+        / (getattr(paths, name) if paths is not None else step.keywords[name]).name
+        for name in case.inputs
+    }
     for name, path in inputs.items():
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(b"not parquet")
@@ -180,7 +194,8 @@ def test_entrypoint_refuses_before_opening_input(
         case.prepare(tmp_path, inputs)
     before = set(tmp_path.rglob("*"))
 
-    assert step(**inputs) is ExitCode.REFUSED
+    arguments = {"paths": replace(paths, **inputs)} if paths is not None else inputs
+    assert step(**arguments) is ExitCode.REFUSED
 
     assert "Agent Codex nesmí číst data MIMIC" in caplog.text
     assert str(inputs[unmarked].parent) in caplog.text
@@ -226,8 +241,14 @@ def test_changed_predictions_after_training_are_refused(
     metrics = tmp_path / "changed" / "metrics.parquet"
     manifest = tmp_path / "changed" / "evaluation_manifest.json"
 
-    code = steps["model_evaluation"](
-        predictions=changed, metrics=metrics, manifest=manifest
+    step = steps["model_evaluation"]
+    code = step(
+        paths=replace(
+            step.keywords["paths"],
+            predictions=changed,
+            metrics=metrics,
+            manifest=manifest,
+        )
     )
 
     assert code is ExitCode.REFUSED

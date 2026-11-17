@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import logging
 import os
+from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
@@ -38,16 +39,19 @@ logger = logging.getLogger(__name__)
 PACKAGES: Final = ("python", "duckdb", "pyarrow", "pydantic")
 
 
-def main(
-    *,
-    discharge: Path,
-    diagnoses: Path,
-    candidates: Path,
-    corpus_rule: Path,
-    cohort: Path,
-    manifest: Path,
-    log: Path,
-) -> ExitCode:
+@dataclass(frozen=True)
+class CohortPaths:
+    """Vstupní a výstupní cesty tvorby kohorty."""
+
+    discharge: Path
+    diagnoses: Path
+    candidates: Path
+    corpus_rule: Path
+    cohort: Path
+    manifest: Path
+
+
+def main(*, paths: CohortPaths, log: Path) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
 
     Returns:
@@ -56,12 +60,7 @@ def main(
     configure_logging(log)
     return run(
         environ=os.environ,
-        discharge=discharge,
-        diagnoses=diagnoses,
-        candidates=candidates,
-        corpus_rule=corpus_rule,
-        cohort=cohort,
-        manifest=manifest,
+        paths=paths,
         revision=revision_source(os.environ, Path.cwd()),
     )
 
@@ -70,12 +69,7 @@ def main(
 def run(
     *,
     environ: Mapping[str, str],
-    discharge: Path,
-    diagnoses: Path,
-    candidates: Path,
-    corpus_rule: Path,
-    cohort: Path,
-    manifest: Path,
+    paths: CohortPaths,
     revision: Callable[[], SourceRevision],
 ) -> ExitCode:
     """Složí use case z tabulek, configu a adaptéru DuckDB a zapíše kohortu s manifestem.
@@ -85,29 +79,29 @@ def run(
         nečitelnou revizi zdroje, diagnózu pod deset zpráv, prázdnou kohortu
         a pro neoznačená data v prostředí, které nesmí číst MIMIC.
     """
-    check_inputs_access(environ, (discharge, diagnoses))
-    codes = load_diagnosis_codes(candidates)
-    rule = load_input_corpus_rule(corpus_rule)
+    check_inputs_access(environ, (paths.discharge, paths.diagnoses))
+    codes = load_diagnosis_codes(paths.candidates)
+    rule = load_input_corpus_rule(paths.corpus_rule)
     sources = {
-        "discharge": verified_table_provenance(discharge),
-        "diagnoses_icd": verified_table_provenance(diagnoses),
+        "discharge": verified_table_provenance(paths.discharge),
+        "diagnoses_icd": verified_table_provenance(paths.diagnoses),
     }
     source = revision()
     result = CohortMaterialization(
         DuckDbCohort(
-            discharge,
-            diagnoses,
-            cohort,
-            cohort.parent / SPILL_DIRECTORY,
+            paths.discharge,
+            paths.diagnoses,
+            paths.cohort,
+            paths.cohort.parent / SPILL_DIRECTORY,
             min_chars=rule.min_chars,
         )
     ).run(codes)
     write_model(
-        manifest,
+        paths.manifest,
         CohortManifest(
-            cohort_sha256=file_sha256(cohort),
-            config_sha256=file_sha256(candidates),
-            input_corpus_sha256=file_sha256(corpus_rule),
+            cohort_sha256=file_sha256(paths.cohort),
+            config_sha256=file_sha256(paths.candidates),
+            input_corpus_sha256=file_sha256(paths.corpus_rule),
             sources=sources,
             environment=Environment(
                 packages=installed_versions(PACKAGES), source=source
@@ -120,7 +114,7 @@ def run(
         "Kohorta: %d zpráv a %d pacientů v %s, neplatných kódů %d.",
         result.counts.funnel[-1].notes,
         result.counts.funnel[-1].patients,
-        cohort,
+        paths.cohort,
         result.invalid_codes,
     )
     return ExitCode.OK

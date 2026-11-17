@@ -50,7 +50,7 @@ def main() -> int:
     args = _parser().parse_args()
     raw = (args.workdir / REQUESTS).read_bytes()
     plan = json.loads(raw)
-    outputs = _read(args.workdir / OUTPUTS)
+    outputs = read_records(args.workdir / OUTPUTS)
     done = {output["key"] for output in outputs}
     pending = [
         request
@@ -62,7 +62,7 @@ def main() -> int:
         return 0
     run = _run(hashlib.sha256(raw).hexdigest(), _checked_gpu())
     runs = args.workdir / RUNS
-    _write(runs, [*_read(runs), run])
+    _write(runs, [*read_records(runs), run])
     llm = LLM(
         model=plan["model"],
         revision=plan["revision"],
@@ -145,7 +145,12 @@ def _output(request: Record, result: RequestOutput, run: str) -> Record:
     }
 
 
-def _read(path: Path) -> list[Record]:
+def read_records(path: Path) -> list[Record]:
+    """Načte záznamy JSON Lines a přeskočí prázdné řádky.
+
+    Returns:
+        Záznamy v pořadí řádků, nebo prázdný seznam, když soubor neexistuje.
+    """
     if not path.exists():
         return []
     # splitlines() láme i na U+0085 a U+2028, které _write s ensure_ascii=False

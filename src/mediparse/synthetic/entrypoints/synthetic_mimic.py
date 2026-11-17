@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from mediparse.domain.language import Language
@@ -24,56 +25,44 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-def main(
-    *,
-    plans: Path,
-    corpus: Path,
-    candidates: Path,
-    manifest: Path,
-    discharge: Path,
-    diagnoses: Path,
-    artifacts: Path,
-    log: Path,
-) -> ExitCode:
+@dataclass(frozen=True)
+class SyntheticMimicPaths:
+    """Vstupní a výstupní cesty tvorby syntetických tabulek MIMIC."""
+
+    plans: Path
+    corpus: Path
+    candidates: Path
+    manifest: Path
+    discharge: Path
+    diagnoses: Path
+    artifacts: Path
+
+
+def main(*, paths: SyntheticMimicPaths, log: Path) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
 
     Returns:
         Návratový kód kroku.
     """
     configure_logging(log)
-    return run(
-        plans=plans,
-        corpus=corpus,
-        candidates=candidates,
-        manifest=manifest,
-        discharge=discharge,
-        diagnoses=diagnoses,
-        artifacts=artifacts,
-    )
+    return run(paths=paths)
 
 
 @refusing_invalid_input
-def run(
-    *,
-    plans: Path,
-    corpus: Path,
-    candidates: Path,
-    manifest: Path,
-    discharge: Path,
-    diagnoses: Path,
-    artifacts: Path,
-) -> ExitCode:
+def run(*, paths: SyntheticMimicPaths) -> ExitCode:
     """Zapíše tabulky, jejich otisky a značky syntetiky tabulek i odvozených artefaktů.
 
     Returns:
         OK po zápisu; REFUSED pro neplatné vstupy nebo nespárované plány a zprávy.
     """
     notes = input_notes(
-        PlansFile(plans).load(), CorpusDirectory(corpus).notes(Language.EN), Language.EN
+        PlansFile(paths.plans).load(),
+        CorpusDirectory(paths.corpus).notes(Language.EN),
+        Language.EN,
     )
-    shapes = read_manifest(manifest)
-    rows = synthetic_mimic_rows(notes, load_diagnosis_codes(candidates), shapes)
-    outputs = {"discharge": discharge, "diagnoses_icd": diagnoses}
+    shapes = read_manifest(paths.manifest)
+    rows = synthetic_mimic_rows(notes, load_diagnosis_codes(paths.candidates), shapes)
+    outputs = {"discharge": paths.discharge, "diagnoses_icd": paths.diagnoses}
     for table, path in outputs.items():
         write_string_table(path, shapes[table].columns, rows[table])
         # Syntetika nemá CSV; .invalid odliší její původ od skutečných tabulek MIMIC.
@@ -83,9 +72,9 @@ def run(
             source_sha256=file_sha256(path),
         )
     marker = SyntheticMarker(prefix=None, rows=len(notes))
-    write_marker(discharge.parent, marker)
-    write_marker(artifacts, marker)
+    write_marker(paths.discharge.parent, marker)
+    write_marker(paths.artifacts, marker)
     logger.info(
-        "Syntetické tabulky MIMIC: %d zpráv v %s.", len(notes), discharge.parent
+        "Syntetické tabulky MIMIC: %d zpráv v %s.", len(notes), paths.discharge.parent
     )
     return ExitCode.OK

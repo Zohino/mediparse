@@ -43,13 +43,13 @@ def test_parts_reserve_room_after_masking(prepare: ModuleType) -> None:
     # Zkonstruovaná zpráva: originál má 6 tokenů, maskovaná 2 + 4*3 = 14.
     # Režie chatu je 3: v okně 25 zbude originálu 16 >= 6, masce 8 < 14.
     # Každý maskovaný blok má 7 tokenů a zbude mu 25 - (7 + 3) = 15 >= 7.
-    assert prepare._fits(tokenizer, text)  # ruff: ignore[private-member-access]
-    assert not prepare._note_fits(tokenizer, text)  # ruff: ignore[private-member-access]
+    assert prepare.fits(tokenizer, text)
+    assert not prepare.note_fits(tokenizer, text)
 
-    parts = prepare._parts(tokenizer, text)  # ruff: ignore[private-member-access]
+    parts = prepare.parts(tokenizer, text)
 
     assert parts == ["a [[1]] [[2]]", "b [[3]] [[4]]"]
-    assert all(prepare._fits(tokenizer, part) for part in parts)  # ruff: ignore[private-member-access]
+    assert all(prepare.fits(tokenizer, part) for part in parts)
 
 
 def test_prompts_use_masked_split_with_original_digest(
@@ -62,15 +62,14 @@ def test_prompts_use_masked_split_with_original_digest(
     tokenizer = marker_tokenizer()
     expected_parts = ["a [[1]] [[2]]", "b [[3]] [[4]]"]
 
-    prompts = prepare._prompts(tokenizer, path)  # ruff: ignore[private-member-access]
+    prompts = prepare.note_prompts(tokenizer, path)
 
     assert [prompt.request_id for prompt in prompts] == ["n1/1", "n1/2"]
     assert [prompt.source_sha256 for prompt in prompts] == [
         hashlib.sha256(raw).hexdigest()
     ] * 2
     assert [prompt.token_ids for prompt in prompts] == [
-        prepare._token_ids(tokenizer, part)  # ruff: ignore[private-member-access]
-        for part in expected_parts
+        prepare.prompt_ids(tokenizer, part) for part in expected_parts
     ]
 
 
@@ -80,6 +79,6 @@ def test_parts_without_markers_keep_original_split(
 ) -> None:
     """Bez značek je maskování identita a původní dělení se zachová."""
     tokenizer = marker_tokenizer()
-    expected = prepare.split(text, functools.partial(prepare._fits, tokenizer))  # ruff: ignore[private-member-access]
+    expected = prepare.split(text, functools.partial(prepare.fits, tokenizer))
 
-    assert prepare._parts(tokenizer, text) == expected  # ruff: ignore[private-member-access]
+    assert prepare.parts(tokenizer, text) == expected

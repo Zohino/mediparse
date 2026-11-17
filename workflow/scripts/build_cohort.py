@@ -2,16 +2,15 @@
 
 from pathlib import Path
 
-from mediparse.entrypoints.cohort import main
+from mediparse.entrypoints.cohort import CohortPaths, main
 
-raise SystemExit(
-    main(
-        discharge=Path(snakemake.input.discharge),
-        diagnoses=Path(snakemake.input.diagnoses),
-        candidates=Path(snakemake.input.candidates),
-        corpus_rule=Path(snakemake.input.corpus_rule),
-        cohort=Path(snakemake.output.cohort),
-        manifest=Path(snakemake.output.manifest),
-        log=Path(snakemake.log[0]),
-    )
+paths = CohortPaths(
+    discharge=Path(snakemake.input.discharge),
+    diagnoses=Path(snakemake.input.diagnoses),
+    candidates=Path(snakemake.input.candidates),
+    corpus_rule=Path(snakemake.input.corpus_rule),
+    cohort=Path(snakemake.output.cohort),
+    manifest=Path(snakemake.output.manifest),
 )
+
+raise SystemExit(main(paths=paths, log=Path(snakemake.log[0])))

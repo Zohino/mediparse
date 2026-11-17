@@ -349,6 +349,7 @@ ignore = [
 "tests/**" = [
     "assert",                     # pytest staví na holém assert
     "implicit-namespace-package", # --import-mode=importlib nepotřebuje __init__.py
+    "magic-value-comparison",     # test porovnává s očekávaným literálem, jméno konstanty by nic nepřidalo
     "suspicious-non-cryptographic-random-usage", # seedovaná simulace, ne kryptografie
 ]
 
@@ -393,33 +394,6 @@ ignore = [
 
 "tests/test_download_script.py" = [
     "hardcoded-password-string",              # heslo lokálního testovacího serveru, ne přihlášení k PhysioNetu
-]
-
-"src/mediparse/entrypoints/cohort.py" = [
-    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
-]
-
-"src/mediparse/synthetic/entrypoints/synthetic_mimic.py" = [
-    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
-]
-
-"src/mediparse/entrypoints/model_training.py" = [
-    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
-]
-"src/mediparse/entrypoints/model_evaluation.py" = [
-    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
-]
-
-"src/mediparse/entrypoints/model_tuning.py" = [
-    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
-]
-
-"src/mediparse/entrypoints/model_inference.py" = [
-    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
-]
-
-"src/mediparse/synthetic/entrypoints/smoketest_summary.py" = [
-    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]
 
 [tool.ruff.lint.flake8-type-checking]

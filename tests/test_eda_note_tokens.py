@@ -6,6 +6,7 @@ import json
 import re
 import shutil
 import sys
+from dataclasses import fields, replace
 from pathlib import Path
 from types import ModuleType
 from typing import Literal
@@ -20,6 +21,7 @@ from mediparse.domain.data_access import DataAccessError
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.note_tokens import TokenizerInfo
 from mediparse.entrypoints import eda_note_tokens
+from mediparse.entrypoints.eda_note_tokens import NoteTokensPaths
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure import (
     hf_tokenizers,
@@ -48,15 +50,13 @@ from tests.note_tokens_support import (
 )
 from tests.support import REPOSITORY, load_script
 
-type Inputs = tuple[Path, Path, Path, Path, Path]
-
 
 @pytest.fixture
-def inputs(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Inputs:
+def inputs(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> NoteTokensPaths:
     """Připraví syntetické tabulky a nahradí stahování lokálním tokenizérem.
 
     Returns:
-        Pět cest pro run nástroje.
+        Pět cest pro run nástroje podle jména parametru.
     """
     parquet = tmp_path / "tables"
     parquet.mkdir()
@@ -82,7 +82,13 @@ def inputs(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Inputs:
     (czech / "a.txt").write_bytes("a b č\r\n".encode())
     monkeypatch.setattr(eda_note_tokens, "load_tokenizer", lambda *_: word_tokenizer())
     monkeypatch.setattr(eda_note_tokens, "ScriptSplitter", lambda *_: FakeSplitter())
-    return parquet, translation, english, czech, tmp_path / "cache"
+    return NoteTokensPaths(
+        parquet=parquet,
+        translation=translation,
+        english=english,
+        czech=czech,
+        out=tmp_path / "cache",
+    )
 
 
 def test_manual_wordlevel_lengths_and_prompt() -> None:
@@ -108,23 +114,20 @@ def test_manual_wordlevel_lengths_and_prompt() -> None:
     ) == (2, 3)
 
 
-def test_cache_and_fresh_result_match_manual_oracle(inputs: Inputs) -> None:
+def test_cache_and_fresh_result_match_manual_oracle(inputs: NoteTokensPaths) -> None:
     """Cache zachová bajty a mtime; čerstvý běh má stejné řádky a ruční délky."""
-    out = inputs[-1]
-    assert eda_note_tokens.run(*inputs, {"CLAUDECODE": "1"}) is True
+    out = inputs.out
+    assert eda_note_tokens.run(paths=inputs, environ={"CLAUDECODE": "1"}) is True
     directory = out / "tokens"
     before = {
         p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in directory.iterdir()
     }
-    assert eda_note_tokens.run(*inputs, {"CLAUDECODE": "1"}) is False
+    assert eda_note_tokens.run(paths=inputs, environ={"CLAUDECODE": "1"}) is False
     assert before == {
         p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in directory.iterdir()
     }
     fresh = out.parent / "fresh"
-    assert (
-        eda_note_tokens.run(inputs[0], inputs[1], inputs[2], inputs[3], fresh, {})
-        is True
-    )
+    assert eda_note_tokens.run(paths=replace(inputs, out=fresh), environ={}) is True
     for name, schema in ARTIFACTS:
         actual = pq.read_table(directory / name)
         assert actual.schema.equals(schema)
@@ -169,24 +172,23 @@ def test_cache_and_fresh_result_match_manual_oracle(inputs: Inputs) -> None:
     ],
 )
 def test_each_scientific_input_invalidates_cache(
-    inputs: Inputs, changed: str, monkeypatch: pytest.MonkeyPatch
+    inputs: NoteTokensPaths, changed: str, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Klíč zachytí tabulky, Python překladu, pár, model i obě knihovny."""
-    parquet, translation, english, czech, out = inputs
-    eda_note_tokens.run(*inputs, {})
-    old = (out / "tokens/cache.json").read_bytes()
+    eda_note_tokens.run(paths=inputs, environ={})
+    old = (inputs.out / "tokens/cache.json").read_bytes()
     if changed == "radiology":
-        path = parquet / "radiology.parquet"
+        path = inputs.parquet / "radiology.parquet"
         pq.write_table(
             pq.read_table(path).replace_schema_metadata({b"changed": b"1"}), path
         )
     elif changed == "script":
-        path = translation / "note_parts.py"
+        path = inputs.translation / "note_parts.py"
         path.write_bytes(path.read_bytes() + b"\n")
     elif changed == "pair":
-        (english / "a.txt").write_bytes(b"a\n")
+        (inputs.english / "a.txt").write_bytes(b"a\n")
     elif changed == "czech_pair":
-        (czech / "a.txt").write_bytes("č b\n".encode())
+        (inputs.czech / "a.txt").write_bytes("č b\n".encode())
     elif changed == "revision":
         key, model, _, window = hf_tokenizers.ENCODERS[0]
         monkeypatch.setattr(
@@ -203,30 +205,30 @@ def test_each_scientific_input_invalidates_cache(
                 "changed" if package == changed else original_version(package)
             ),
         )
-    assert eda_note_tokens.run(*inputs, {}) is True
-    assert old != (out / "tokens/cache.json").read_bytes()
+    assert eda_note_tokens.run(paths=inputs, environ={}) is True
+    assert old != (inputs.out / "tokens/cache.json").read_bytes()
 
 
 def test_guard_precedes_hashing_and_parquet_open(
-    inputs: Inputs, monkeypatch: pytest.MonkeyPatch
+    inputs: NoteTokensPaths, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Bez značky syntetiky se neotevře ani nehashuje žádný parquet."""
-    (inputs[0] / "synthetic.json").unlink()
+    (inputs.parquet / "synthetic.json").unlink()
     digest, reader = Mock(), Mock()
     monkeypatch.setattr(note_tokens_table, "file_sha256", digest)
     monkeypatch.setattr(pq, "ParquetFile", reader)
     with pytest.raises(DataAccessError):
-        eda_note_tokens.run(*inputs, {"CLAUDECODE": "1"})
+        eda_note_tokens.run(paths=inputs, environ={"CLAUDECODE": "1"})
     digest.assert_not_called()
     reader.assert_not_called()
-    assert not inputs[-1].exists()
+    assert not inputs.out.exists()
 
 
 def test_sample_excludes_empty_and_keeps_duckdb_hash_order(
-    inputs: Inputs,
+    inputs: NoteTokensPaths,
 ) -> None:
     """Vzorek zachová původní hash pořadí a menší tabulka vrátí všechny neprázdné."""
-    database = EdaDatabase(inputs[0], {})
+    database = EdaDatabase(inputs.parquet, {})
     first = next(SampleNoteTexts(database, "discharge").batches())
     assert first == next(SampleNoteTexts(database, "discharge").batches())
     assert {note_id for note_id, _ in first} == {"n1", "n3", "n4"}
@@ -240,16 +242,15 @@ def test_sample_excludes_empty_and_keeps_duckdb_hash_order(
         assert con.execute("SELECT hash('n1')").fetchone() == (5454746921843688977,)
 
 
-def test_sample_has_limit_1000(inputs: Inputs) -> None:
+def test_sample_has_limit_1000(inputs: NoteTokensPaths) -> None:
     """Tisícovkový limit se uplatní před dočtením textů."""
-    path = inputs[0] / "discharge.parquet"
+    path = inputs.parquet / "discharge.parquet"
     pq.write_table(
         pa.table({"note_id": [f"n{i}" for i in range(1005)], "text": ["a"] * 1005}),
         path,
     )
-    rows = next(SampleNoteTexts(EdaDatabase(inputs[0], {}), "discharge").batches())
-    expected_size = 1000
-    assert len(rows) == expected_size
+    rows = next(SampleNoteTexts(EdaDatabase(inputs.parquet, {}), "discharge").batches())
+    assert len(rows) == 1000
 
 
 def test_translation_import_restores_modules_and_path(
@@ -278,34 +279,33 @@ def test_translation_import_restores_modules_and_path(
 
 
 def test_real_script_splitter_handles_fitting_divided_and_unsplittable(
-    inputs: Inputs,
+    inputs: NoteTokensPaths,
 ) -> None:
     """Skutečné PEP 723 dělení pracuje nad tokenizérem bez Hubu."""
-    copy_prepare(inputs[1], window=12, split_ratio=1.0)
-    script = load_translation(inputs[1])
+    copy_prepare(inputs.translation, window=12, split_ratio=1.0)
+    script = load_translation(inputs.translation)
     splitter = ScriptSplitter(script, word_tokenizer())
     assert splitter.fits("a b c")
     assert splitter.parts("a b c") == 1
     assert not splitter.fits("a b c\n\na b c")
-    expected_parts = 2
-    assert splitter.parts("a b c\n\na b c") == expected_parts
+    assert splitter.parts("a b c\n\na b c") == 2
     assert splitter.parts("a b c a b c") is None
 
 
 def test_script_splitter_uses_masked_preparation(
-    inputs: Inputs, monkeypatch: pytest.MonkeyPatch
+    inputs: NoteTokensPaths, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """EDA přebírá kontrolu i dělení maskované zprávy z téže kopie přípravy."""
-    path = copy_prepare(inputs[1], window=25, split_ratio=1.0)
+    path = copy_prepare(inputs.translation, window=25, split_ratio=1.0)
     prepare = load_script(path, monkeypatch)
     tokenizer = marker_tokenizer()
-    splitter = ScriptSplitter(load_translation(inputs[1]), tokenizer)
+    splitter = ScriptSplitter(load_translation(inputs.translation), tokenizer)
     text = "a ___ ___\n\nb ___ ___"
     # Příprava je autoritou EDA; příklad se po maskování do jedné části nevejde.
-    assert prepare._fits(tokenizer, text)  # ruff: ignore[private-member-access]
+    assert prepare.fits(tokenizer, text)
     assert splitter.fits(text) is False
-    assert splitter.fits(text) == prepare._note_fits(tokenizer, text)  # ruff: ignore[private-member-access]
-    assert splitter.parts(text) == len(prepare._parts(tokenizer, text))  # ruff: ignore[private-member-access]
+    assert splitter.fits(text) == prepare.note_fits(tokenizer, text)
+    assert splitter.parts(text) == len(prepare.parts(tokenizer, text))
 
 
 @pytest.mark.parametrize(
@@ -319,10 +319,10 @@ def test_script_splitter_uses_masked_preparation(
 )
 @pytest.mark.usefixtures("cli_args")
 def test_parallel_missing_pair_or_empty_is_refused(
-    inputs: Inputs, missing: str, message: str
+    inputs: NoteTokensPaths, missing: str, message: str
 ) -> None:
     """Chybějící protějšek odmítne run i CLI a uvede jméno souboru."""
-    _, _, english, czech, _ = inputs
+    english, czech = inputs.english, inputs.czech
     if missing in {"english", "empty"}:
         (english / "a.txt").unlink()
     if missing in {"czech", "empty"}:
@@ -330,20 +330,20 @@ def test_parallel_missing_pair_or_empty_is_refused(
     if missing == "unmatched":
         (english / "b.txt").write_bytes(b"b")
     with pytest.raises(InvalidInputError, match=message):
-        eda_note_tokens.run(*inputs, {})
+        eda_note_tokens.run(paths=inputs, environ={})
     assert eda_note_tokens.main() is ExitCode.REFUSED
 
 
 def test_interrupted_publication_invalidates_both_keys_and_preserves_features(
-    inputs: Inputs, monkeypatch: pytest.MonkeyPatch
+    inputs: NoteTokensPaths, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Přerušená skupina nezplatní směs artefaktů a nemění kořenovou cache."""
-    out = inputs[-1]
+    out = inputs.out
     out.mkdir()
     sentinel = out / "cache.json"
     sentinel.write_bytes(b'{"key":"features"}')
     before = (sentinel.read_bytes(), sentinel.stat().st_mtime_ns)
-    eda_note_tokens.run(*inputs, {})
+    eda_note_tokens.run(paths=inputs, environ={})
     directory = out / "tokens"
     key = json.loads((directory / "cache.json").read_bytes())["key"]
     original = Path.replace
@@ -354,10 +354,10 @@ def test_interrupted_publication_invalidates_both_keys_and_preserves_features(
             raise OSError(msg)
         return original(path, target)
 
-    (inputs[2] / "a.txt").write_bytes(b"a\n")
+    (inputs.english / "a.txt").write_bytes(b"a\n")
     monkeypatch.setattr(Path, "replace", interrupted)
     with pytest.raises(InvalidInputError, match="publikovat"):
-        eda_note_tokens.run(*inputs, {})
+        eda_note_tokens.run(paths=inputs, environ={})
     assert not is_current(directory, key, [name for name, _ in ARTIFACTS])
     assert not (directory / "cache.json").exists()
     assert (sentinel.read_bytes(), sentinel.stat().st_mtime_ns) == before
@@ -374,9 +374,11 @@ def test_empty_writer_preserves_all_schemas(tmp_path: Path) -> None:
 
 
 @pytest.mark.parametrize("table", ["discharge", "radiology"])
-def test_null_text_is_refused_with_table_name(inputs: Inputs, table: str) -> None:
+def test_null_text_is_refused_with_table_name(
+    inputs: NoteTokensPaths, table: str
+) -> None:
     """NULL není prázdná zpráva; čtečka odmítá obě tabulky stejným kontraktem."""
-    path = inputs[0] / f"{table}.parquet"
+    path = inputs.parquet / f"{table}.parquet"
     pq.write_table(
         pa.table({"note_id": ["n"], "text": pa.array([None], type=pa.string())}), path
     )
@@ -384,14 +386,14 @@ def test_null_text_is_refused_with_table_name(inputs: Inputs, table: str) -> Non
         list(ParquetNoteTexts(path).batches())
 
 
-def test_streaming_keeps_order_across_batches(inputs: Inputs) -> None:
+def test_streaming_keeps_order_across_batches(inputs: NoteTokensPaths) -> None:
     """Poslední neúplná dávka zachová prázdnou zprávu i pořadí souboru."""
-    path = inputs[0] / "discharge.parquet"
+    path = inputs.parquet / "discharge.parquet"
     ids = [f"n{i}" for i in reversed(range(2001))]
     pq.write_table(pa.table({"note_id": ids, "text": ["a"] * 2000 + [""]}), path)
-    eda_note_tokens.run(*inputs, {})
+    eda_note_tokens.run(paths=inputs, environ={})
     rows = pq.read_table(
-        inputs[-1] / "tokens/note_tokens_discharge.parquet"
+        inputs.out / "tokens/note_tokens_discharge.parquet"
     ).to_pydict()
     assert rows == {
         "note_id": ids,
@@ -413,22 +415,22 @@ def test_strip_only_when_requested() -> None:
 
 
 def test_parallel_pairs_by_sorted_filename(
-    inputs: Inputs, monkeypatch: pytest.MonkeyPatch
+    inputs: NoteTokensPaths, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Výpis b, c, a se seřadí podle jména a čtení zachová UTF-8 i CRLF."""
-    (inputs[3] / "c.txt").write_bytes(b"c")
-    (inputs[2] / "b.txt").write_bytes(b"b")
-    (inputs[2] / "c.txt").write_bytes(b"c")
-    (inputs[3] / "b.txt").write_bytes(b"b")
+    (inputs.czech / "c.txt").write_bytes(b"c")
+    (inputs.english / "b.txt").write_bytes(b"b")
+    (inputs.english / "c.txt").write_bytes(b"c")
+    (inputs.czech / "b.txt").write_bytes(b"b")
     original = Path.glob
 
     def shuffled(path: Path, pattern: str) -> list[Path]:
-        if path in {inputs[2], inputs[3]} and pattern == "*.txt":
+        if path in {inputs.english, inputs.czech} and pattern == "*.txt":
             return [path / name for name in ("b.txt", "c.txt", "a.txt")]
         return list(original(path, pattern))
 
     monkeypatch.setattr(Path, "glob", shuffled)
-    assert read_parallel(inputs[2], inputs[3]) == [
+    assert read_parallel(inputs.english, inputs.czech) == [
         ("a", "a b\r\n", "a b č\r\n"),
         ("b", "b", "b"),
         ("c", "c", "c"),
@@ -436,13 +438,12 @@ def test_parallel_pairs_by_sorted_filename(
 
 
 def test_sample_uses_declared_python_limit(
-    inputs: Inputs, monkeypatch: pytest.MonkeyPatch
+    inputs: NoteTokensPaths, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Limit SQL pochází z jediné deklarace velikosti vzorku v Pythonu."""
     monkeypatch.setattr(note_tokens_sample, "SAMPLE_LIMIT", 2)
-    rows = next(SampleNoteTexts(EdaDatabase(inputs[0], {}), "discharge").batches())
-    expected_count = 2
-    assert len(rows) == expected_count
+    rows = next(SampleNoteTexts(EdaDatabase(inputs.parquet, {}), "discharge").batches())
+    assert len(rows) == 2
 
 
 @pytest.mark.parametrize(
@@ -470,7 +471,7 @@ def test_counter_policy_counts_whitespace_sensitive_tokens(
 
 @pytest.mark.parametrize("invalid", [False, True])
 def test_translation_import_cleans_new_modules_and_precedes_decoy(
-    inputs: Inputs,
+    inputs: NoteTokensPaths,
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
     *,
@@ -487,30 +488,28 @@ def test_translation_import_cleans_new_modules_and_precedes_decoy(
     )
     monkeypatch.syspath_prepend(str(decoy))
     original_path = sys.path[:]
-    prepare = inputs[1] / "prepare.py"
+    prepare = inputs.translation / "prepare.py"
     if invalid:
         prepare.unlink()
         with pytest.raises(
             InvalidInputError,
             match=r"^Skripty překladu nelze načíst: FileNotFoundError\.$",
         ):
-            load_translation(inputs[1])
+            load_translation(inputs.translation)
     else:
         prepare.write_bytes(prepare.read_bytes() + b"\nMODEL = PLACEHOLDER\n")
-        script = load_translation(inputs[1])
+        script = load_translation(inputs.translation)
         assert script.model == "[[n]]"
     assert not any(name in sys.modules for name in names)
     assert sys.path == original_path
 
 
 @pytest.fixture
-def cli_args(inputs: Inputs, monkeypatch: pytest.MonkeyPatch) -> None:
+def cli_args(inputs: NoteTokensPaths, monkeypatch: pytest.MonkeyPatch) -> None:
     """Předá CLI výhradně explicitní syntetické cesty fixtury."""
     argv = ["mediparse-eda-note-tokens"]
-    for name, path in zip(
-        ("parquet", "translation", "english", "czech", "out"), inputs, strict=True
-    ):
-        argv.extend((f"--{name}", str(path)))
+    for field in fields(inputs):
+        argv.extend((f"--{field.name}", str(getattr(inputs, field.name))))
     monkeypatch.setattr(sys, "argv", argv)
 
 
@@ -536,35 +535,35 @@ def test_tokenization_error_is_translated(error: type[Exception]) -> None:
 
 @pytest.mark.usefixtures("cli_args")
 def test_missing_radiology_is_refused(
-    inputs: Inputs, caplog: pytest.LogCaptureFixture
+    inputs: NoteTokensPaths, caplog: pytest.LogCaptureFixture
 ) -> None:
     """Chybějící tabulka má stejnou přesnou chybu v run i CLI."""
-    (inputs[0] / "radiology.parquet").unlink()
+    (inputs.parquet / "radiology.parquet").unlink()
     message = "V adresáři tabulek chybí radiology.parquet."
     with pytest.raises(InvalidInputError, match=f"^{re.escape(message)}$"):
-        eda_note_tokens.run(*inputs, {})
+        eda_note_tokens.run(paths=inputs, environ={})
     assert eda_note_tokens.main() is ExitCode.REFUSED
     assert message in caplog.text
 
 
-def test_invalid_parallel_utf8_names_file(inputs: Inputs) -> None:
+def test_invalid_parallel_utf8_names_file(inputs: NoteTokensPaths) -> None:
     """Vadný UTF-8 pár se odmítne se jménem souboru a bez jeho obsahu."""
-    (inputs[3] / "a.txt").write_bytes(b"\xff")
+    (inputs.czech / "a.txt").write_bytes(b"\xff")
     with pytest.raises(
         InvalidInputError,
         match=r"^Syntetický pár a\.txt nelze přečíst: UnicodeDecodeError\.$",
     ):
-        read_parallel(inputs[2], inputs[3])
+        read_parallel(inputs.english, inputs.czech)
 
 
 def test_unreadable_cache_input_is_translated(
-    inputs: Inputs, monkeypatch: pytest.MonkeyPatch
+    inputs: NoteTokensPaths, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Chyba čtení vstupu klíče se odmítne před načtením tokenizérů."""
     original = Path.read_bytes
 
     def unreadable(path: Path) -> bytes:
-        if path == inputs[3] / "a.txt":
+        if path == inputs.czech / "a.txt":
             msg = "zkonstruovaná chyba čtení"
             raise OSError(msg)
         return original(path)
@@ -573,22 +572,22 @@ def test_unreadable_cache_input_is_translated(
     with pytest.raises(
         InvalidInputError, match=r"^Vstup klíče cache nelze přečíst: OSError\.$"
     ):
-        eda_note_tokens.run(*inputs, {})
+        eda_note_tokens.run(paths=inputs, environ={})
 
 
-def test_invalid_sample_table_is_refused(inputs: Inputs) -> None:
+def test_invalid_sample_table_is_refused(inputs: NoteTokensPaths) -> None:
     """Uzavřený seznam zdrojů vzorku odmítne jinou tabulku."""
-    source = SampleNoteTexts(EdaDatabase(inputs[0], {}), "admissions")
+    source = SampleNoteTexts(EdaDatabase(inputs.parquet, {}), "admissions")
     with pytest.raises(
         InvalidInputError, match=r"^Vzorek musí pocházet z discharge nebo radiology\.$"
     ):
         next(source.batches())
 
 
-def test_sample_query_error_is_translated(inputs: Inputs) -> None:
+def test_sample_query_error_is_translated(inputs: NoteTokensPaths) -> None:
     """Chybějící sloupec text v syntetické tabulce má doménovou chybu."""
-    pq.write_table(pa.table({"note_id": ["n1"]}), inputs[0] / "discharge.parquet")
-    source = SampleNoteTexts(EdaDatabase(inputs[0], {}), "discharge")
+    pq.write_table(pa.table({"note_id": ["n1"]}), inputs.parquet / "discharge.parquet")
+    source = SampleNoteTexts(EdaDatabase(inputs.parquet, {}), "discharge")
     with pytest.raises(
         InvalidInputError, match=r"^Vzorek discharge nelze číst: BinderException\.$"
     ):

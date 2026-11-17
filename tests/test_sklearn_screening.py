@@ -94,7 +94,7 @@ def test_prediction_matches_threshold_on_score_scale(
 )
 def test_svm_factory_preserves_seed(family: ClassifierFamily) -> None:
     """Obě rodiny s duálním řešičem dostanou seed screeningu."""
-    assert classifier_estimator(family, 13).get_params()["random_state"] == 13  # ruff: ignore[magic-value-comparison]
+    assert classifier_estimator(family, 13).get_params()["random_state"] == 13
 
 
 def test_lightgbm_factory_preserves_determinism_parameters() -> None:

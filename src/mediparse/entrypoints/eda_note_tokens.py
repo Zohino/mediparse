@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import logging
 import os
+from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -39,15 +40,18 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-# Explicitní cesty jsou veřejným kontraktem nástroje.
-def run(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
-    parquet: Path,
-    translation: Path,
-    english: Path,
-    czech: Path,
-    out: Path,
-    environ: Mapping[str, str],
-) -> bool:
+@dataclass(frozen=True)
+class NoteTokensPaths:
+    """Vstupní a výstupní cesty měření tokenů zpráv."""
+
+    parquet: Path
+    translation: Path
+    english: Path
+    czech: Path
+    out: Path
+
+
+def run(*, paths: NoteTokensPaths, environ: Mapping[str, str]) -> bool:
     """Stráží vstup před čtením a hashováním, pak spočítá nebo použije cache.
 
     Returns:
@@ -57,21 +61,23 @@ def run(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
         DataAccessError: Prostředí nesmí číst skutečná data.
         InvalidInputError: Vstup nebo cache neodpovídá kontraktu.
     """
-    database = EdaDatabase(parquet, environ)
+    database = EdaDatabase(paths.parquet, environ)
     views = database.guarded_views()
     for table in TOKEN_TABLES:
         if table not in views:
             msg = f"V adresáři tabulek chybí {table}.parquet."
             raise InvalidInputError(msg)
-    script = load_translation(translation)
+    script = load_translation(paths.translation)
     translation_model = (script.model, script.revision, script.window)
-    key = tokens_key(views, translation, english, czech, translation_model)
-    directory = out / "tokens"
+    key = tokens_key(
+        views, paths.translation, paths.english, paths.czech, translation_model
+    )
+    directory = paths.out / "tokens"
     artifacts = tuple(name for name, _ in ARTIFACTS)
     if is_current(directory, key, artifacts):
         logger.info("cache tokenů platí")
         return False
-    pairs = read_parallel(english, czech)
+    pairs = read_parallel(paths.english, paths.czech)
     loaded = {
         key: load_tokenizer(model, revision)
         for key, model, revision, _ in tokenizer_specs(*translation_model)
@@ -128,5 +134,14 @@ def _run_cli() -> ExitCode:
     for name in ("parquet", "translation", "english", "czech", "out"):
         parser.add_argument(f"--{name}", type=Path, required=True)
     args = parser.parse_args()
-    run(args.parquet, args.translation, args.english, args.czech, args.out, os.environ)
+    run(
+        paths=NoteTokensPaths(
+            parquet=args.parquet,
+            translation=args.translation,
+            english=args.english,
+            czech=args.czech,
+            out=args.out,
+        ),
+        environ=os.environ,
+    )
     return ExitCode.OK

@@ -53,13 +53,15 @@ def test_cohort_matches_plans_and_source_hashes(
     manifest = tmp_path / "cohort" / "manifest.json"
     assert (
         cohort.run(
+            paths=cohort.CohortPaths(
+                discharge=discharge,
+                diagnoses=diagnoses,
+                candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+                corpus_rule=REPOSITORY_INPUT_CORPUS,
+                cohort=output,
+                manifest=manifest,
+            ),
             environ={},
-            discharge=discharge,
-            diagnoses=diagnoses,
-            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            corpus_rule=REPOSITORY_INPUT_CORPUS,
-            cohort=output,
-            manifest=manifest,
             revision=fixed_revision,
         )
         is ExitCode.OK
@@ -133,13 +135,15 @@ def test_unpaired_corpus_is_refused_before_writing(
 
     assert (
         synthetic_mimic.run(
-            plans=plans,
-            corpus=tmp_path,
-            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            manifest=REPOSITORY_MIMIC_MANIFEST,
-            discharge=discharge,
-            diagnoses=diagnoses,
-            artifacts=tmp_path,
+            paths=synthetic_mimic.SyntheticMimicPaths(
+                plans=plans,
+                corpus=tmp_path,
+                candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+                manifest=REPOSITORY_MIMIC_MANIFEST,
+                discharge=discharge,
+                diagnoses=diagnoses,
+                artifacts=tmp_path,
+            )
         )
         is ExitCode.REFUSED
     )
@@ -155,13 +159,15 @@ def test_missing_manifest_is_refused_before_writing(tmp_path: Path) -> None:
     output = tmp_path / "output"
     assert (
         synthetic_mimic.run(
-            plans=REPOSITORY_PLANS,
-            corpus=REPOSITORY_CORPUS,
-            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            manifest=tmp_path / "missing.json",
-            discharge=output / "discharge.parquet",
-            diagnoses=output / "diagnoses_icd.parquet",
-            artifacts=output,
+            paths=synthetic_mimic.SyntheticMimicPaths(
+                plans=REPOSITORY_PLANS,
+                corpus=REPOSITORY_CORPUS,
+                candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+                manifest=tmp_path / "missing.json",
+                discharge=output / "discharge.parquet",
+                diagnoses=output / "diagnoses_icd.parquet",
+                artifacts=output,
+            )
         )
         is ExitCode.REFUSED
     )
@@ -183,13 +189,15 @@ def test_written_columns_follow_manifest(tmp_path: Path, table: str) -> None:
 
     assert (
         synthetic_mimic.run(
-            plans=REPOSITORY_PLANS,
-            corpus=REPOSITORY_CORPUS,
-            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            manifest=manifest,
-            discharge=discharge,
-            diagnoses=diagnoses,
-            artifacts=tmp_path,
+            paths=synthetic_mimic.SyntheticMimicPaths(
+                plans=REPOSITORY_PLANS,
+                corpus=REPOSITORY_CORPUS,
+                candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+                manifest=manifest,
+                discharge=discharge,
+                diagnoses=diagnoses,
+                artifacts=tmp_path,
+            )
         )
         is ExitCode.OK
     )

@@ -75,7 +75,7 @@ def main() -> int:
     unsplittable: list[str] = []
     for path in paths:
         try:
-            prompts.extend(_prompts(tokenizer, path))
+            prompts.extend(note_prompts(tokenizer, path))
         except UnsplittableError:
             unsplittable.append(path.stem)
     if unsplittable:
@@ -106,13 +106,22 @@ def main() -> int:
     return 0
 
 
-def _prompts(tokenizer: PreTrainedTokenizerBase, path: Path) -> list[Prompt]:
+def note_prompts(tokenizer: PreTrainedTokenizerBase, path: Path) -> list[Prompt]:
+    """Sestaví prompty všech částí zprávy a přiřadí jim ID a hash zdroje.
+
+    Returns:
+        Prompty maskovaných částí v pořadí zprávy.
+
+    Raises:
+        RuntimeError: Prompt zprávy nezačíná právě jedním BOS.
+        UnsplittableError: Řádek zprávy se nevejde do okna ani sám.
+    """
     raw = path.read_bytes()
     digest = hashlib.sha256(raw).hexdigest()
     try:
-        texts = _parts(tokenizer, raw.decode("utf-8"))
+        texts = parts(tokenizer, raw.decode("utf-8"))
         return [
-            Prompt(request_id, path.stem, digest, _token_ids(tokenizer, text))
+            Prompt(request_id, path.stem, digest, prompt_ids(tokenizer, text))
             for request_id, text in zip(
                 part_ids(path.stem, len(texts)), texts, strict=True
             )
@@ -122,22 +131,49 @@ def _prompts(tokenizer: PreTrainedTokenizerBase, path: Path) -> list[Prompt]:
         raise RuntimeError(msg) from error
 
 
-def _parts(tokenizer: PreTrainedTokenizerBase, text: str) -> list[str]:
-    return split(mask(text), functools.partial(_fits, tokenizer))
+def parts(tokenizer: PreTrainedTokenizerBase, text: str) -> list[str]:
+    """Zamaskuje zprávu a rozdělí ji podle okna a rezervy na překlad.
+
+    Returns:
+        Maskované části zprávy v původním pořadí.
+
+    Raises:
+        UnsplittableError: Řádek zprávy se nevejde do okna ani sám.
+    """
+    return split(mask(text), functools.partial(fits, tokenizer))
 
 
-def _note_fits(tokenizer: PreTrainedTokenizerBase, text: str) -> bool:
-    # EDA ji volá přes TranslationScript.fits, aby měla stejnou kontrolu masky.
-    return _fits(tokenizer, mask(text))
+def note_fits(tokenizer: PreTrainedTokenizerBase, text: str) -> bool:
+    """Ověří okno překladu po maskování celé zprávy.
+
+    EDA ji volá přes TranslationScript.fits, aby měla stejnou kontrolu masky.
+
+    Returns:
+        Zda se maskovaná zpráva vejde včetně rezervy na překlad.
+    """
+    return fits(tokenizer, mask(text))
 
 
-def _fits(tokenizer: PreTrainedTokenizerBase, text: str) -> bool:
-    room = WINDOW - len(_token_ids(tokenizer, text))
+def fits(tokenizer: PreTrainedTokenizerBase, text: str) -> bool:
+    """Ověří okno a rezervu na překlad pro připravený text.
+
+    Returns:
+        Zda v okně zbývá požadovaná rezerva na překlad.
+    """
+    room = WINDOW - len(prompt_ids(tokenizer, text))
     source = len(tokenizer(text.strip(), add_special_tokens=False)["input_ids"])
     return room >= SPLIT_RATIO * source
 
 
-def _token_ids(tokenizer: PreTrainedTokenizerBase, text: str) -> list[int]:
+def prompt_ids(tokenizer: PreTrainedTokenizerBase, text: str) -> list[int]:
+    """Sestaví tokeny promptu chat šablonou modelu v pevné revizi.
+
+    Returns:
+        Tokeny promptu včetně právě jednoho BOS.
+
+    Raises:
+        RuntimeError: Prompt nezačíná právě jedním BOS.
+    """
     content = {
         "type": "text",
         "source_lang_code": SOURCE_LANG,

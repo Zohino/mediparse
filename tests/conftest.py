@@ -339,13 +339,15 @@ def synthetic_tables(tmp_path: Path) -> tuple[Path, Path]:
     diagnoses = discharge.with_name("diagnoses_icd.parquet")
     assert (
         synthetic_mimic.run(
-            plans=REPOSITORY_PLANS,
-            corpus=REPOSITORY_CORPUS,
-            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            manifest=REPOSITORY_MIMIC_MANIFEST,
-            discharge=discharge,
-            diagnoses=diagnoses,
-            artifacts=tmp_path,
+            paths=synthetic_mimic.SyntheticMimicPaths(
+                plans=REPOSITORY_PLANS,
+                corpus=REPOSITORY_CORPUS,
+                candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+                manifest=REPOSITORY_MIMIC_MANIFEST,
+                discharge=discharge,
+                diagnoses=diagnoses,
+                artifacts=tmp_path,
+            )
         )
         is ExitCode.OK
     )

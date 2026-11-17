@@ -206,7 +206,7 @@ def test_same_combination_shares_stratum_and_different_ones_do_not() -> None:
     assert stratum[1] == stratum[2]
     assert stratum[3] == stratum[4]
     assert stratum[5] == stratum[6]
-    assert len({stratum[1], stratum[3], stratum[5]}) == 3  # ruff: ignore[magic-value-comparison]
+    assert len({stratum[1], stratum[3], stratum[5]}) == 3
 
 
 def test_stratum_is_union_of_patient_labels() -> None:

@@ -2,17 +2,16 @@
 
 from pathlib import Path
 
-from mediparse.synthetic.entrypoints.synthetic_mimic import main
+from mediparse.synthetic.entrypoints.synthetic_mimic import SyntheticMimicPaths, main
 
-raise SystemExit(
-    main(
-        plans=Path(snakemake.input.plans),
-        corpus=Path(snakemake.params.corpus),
-        candidates=Path(snakemake.input.candidates),
-        manifest=Path(snakemake.params.manifest),
-        discharge=Path(snakemake.output.discharge),
-        diagnoses=Path(snakemake.output.diagnoses),
-        artifacts=Path(snakemake.output.artifacts_marker).parent,
-        log=Path(snakemake.log[0]),
-    )
+paths = SyntheticMimicPaths(
+    plans=Path(snakemake.input.plans),
+    corpus=Path(snakemake.params.corpus),
+    candidates=Path(snakemake.input.candidates),
+    manifest=Path(snakemake.params.manifest),
+    discharge=Path(snakemake.output.discharge),
+    diagnoses=Path(snakemake.output.diagnoses),
+    artifacts=Path(snakemake.output.artifacts_marker).parent,
 )
+
+raise SystemExit(main(paths=paths, log=Path(snakemake.log[0])))

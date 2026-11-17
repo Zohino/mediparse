@@ -44,13 +44,15 @@ class _Inputs:
 
     def run(self) -> ExitCode:
         return model_evaluation.run(
+            paths=model_evaluation.EvaluationPaths(
+                predictions=self.predictions,
+                cohort=self.notes,
+                split=self.split,
+                metrics=self.metrics,
+                training_manifest=self.training_manifest,
+                manifest=self.manifest,
+            ),
             environ={},
-            predictions=self.predictions,
-            cohort=self.notes,
-            split=self.split,
-            metrics=self.metrics,
-            training_manifest=self.training_manifest,
-            manifest=self.manifest,
             revision=fixed_revision,
         )
 
@@ -160,19 +162,18 @@ def test_missing_input_is_refused(
         root.mkdir()
         inputs = _inputs(root)
         missing = root / "none.parquet"
-        paths = {
-            "predictions": inputs.predictions,
-            "cohort": inputs.notes,
-            "split": inputs.split,
-        } | {name: missing}
-
+        paths = model_evaluation.EvaluationPaths(
+            predictions=inputs.predictions,
+            cohort=inputs.notes,
+            split=inputs.split,
+            training_manifest=inputs.training_manifest,
+            metrics=inputs.metrics,
+            manifest=inputs.manifest,
+        )
         code = model_evaluation.run(
             environ={},
-            metrics=inputs.metrics,
-            training_manifest=inputs.training_manifest,
-            manifest=inputs.manifest,
+            paths=replace(paths, **{name: missing}),
             revision=fixed_revision,
-            **paths,
         )
 
         assert code is ExitCode.REFUSED
@@ -227,7 +228,7 @@ def test_all_negative_predictions_are_evaluated_against_labels(tmp_path: Path) -
     assert row["recall"] == pytest.approx(0.0)
     assert row["roc_auc"] == pytest.approx(0.5)
     # Ruční součet z fixtury: pozitivní pacienti 1, 9 a 11 ve foldu 0 mají 1 + 5 + 3 zpráv.
-    assert row["test_positives"] == 9  # ruff: ignore[magic-value-comparison]
+    assert row["test_positives"] == 9
 
 
 def test_evaluation_manifest_records_digests_and_is_deterministic(
@@ -305,13 +306,15 @@ def test_unreadable_revision_is_refused_before_evaluation(tmp_path: Path) -> Non
     """Nečitelná revize odmítne evaluaci před prvním výstupem."""
     inputs = _inputs(tmp_path)
     code = model_evaluation.run(
+        paths=model_evaluation.EvaluationPaths(
+            predictions=inputs.predictions,
+            cohort=inputs.notes,
+            split=inputs.split,
+            training_manifest=inputs.training_manifest,
+            metrics=inputs.metrics,
+            manifest=inputs.manifest,
+        ),
         environ={},
-        predictions=inputs.predictions,
-        cohort=inputs.notes,
-        split=inputs.split,
-        training_manifest=inputs.training_manifest,
-        metrics=inputs.metrics,
-        manifest=inputs.manifest,
         revision=missing_revision,
     )
     assert code is ExitCode.REFUSED
