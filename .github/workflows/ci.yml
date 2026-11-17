@@ -65,6 +65,15 @@ jobs:
       - uses: ./.github/actions/setup-pixi-env
         with:
           environments: eda
+      - name: cache písma Libertinus
+        id: libertinus-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.local/share/fonts/libertinus
+          key: libertinus-${{ hashFiles('scripts/install-libertinus.sh') }}
+      - name: písmo Libertinus pro grafy
+        if: steps.libertinus-cache.outputs.cache-hit != 'true'
+        run: bash scripts/install-libertinus.sh
       - name: testthat
         run: pixi run --frozen eda-test
       - name: analysis testthat
@@ -88,8 +97,7 @@ jobs:
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.local/share/fonts/libertinus
-          # Veřejný SHA-256 archivu písma v klíči cache není přístupový údaj.
-          key: libertinus-7.051-4d9be29b5cb380c35af8ba967abcc752ad1e07be1f738a9789c33e0dd7478c92 # gitleaks:allow
+          key: libertinus-${{ hashFiles('scripts/install-libertinus.sh') }}
       - name: písmo Libertinus pro grafy
         if: steps.libertinus-cache.outputs.cache-hit != 'true'
         run: bash scripts/install-libertinus.sh
