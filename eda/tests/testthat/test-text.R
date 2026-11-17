@@ -442,11 +442,11 @@ test_that("reference_verdict vyhodnotí průměr přesných značek i při malé
 
 
 test_that("masky věku odpovídají sdílené tabulce po jednotlivých případech", {
-  cases <- jsonlite::fromJSON("../../../tests/fixtures/age_marker_cases.json")
-  out <- metrics_of(cases$text)
+  cases <- jsonlite::read_json(project_path("tests", "fixtures", "age_marker_cases.json"))
+  out <- metrics_of(vapply(cases, `[[`, character(1), "text"))
 
-  for (i in seq_len(nrow(cases))) {
-    expect_equal(as.numeric(out$age_masks[[i]]), cases$markers[[i]], info = cases$name[[i]])
+  for (i in seq_along(cases)) {
+    expect_equal(as.numeric(out$age_masks[[i]]), cases[[i]]$markers, info = cases[[i]]$name)
   }
 })
 

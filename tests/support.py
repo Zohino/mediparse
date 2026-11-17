@@ -43,6 +43,9 @@ if TYPE_CHECKING:
     from mediparse.synthetic.domain.note_plan import NotePlan
 
 REPOSITORY: Final = Path(__file__).parents[1]
+AGE_MARKER_CASES: Final = json.loads(
+    (REPOSITORY / "tests/fixtures/age_marker_cases.json").read_text(encoding="utf-8")
+)
 REPOSITORY_CONFIG: Final = REPOSITORY / SAMPLER_CONFIG_PATH
 REPOSITORY_TEMPLATE: Final = REPOSITORY / VERBALIZATION_TEMPLATE_PATH
 REPOSITORY_PLANS: Final = REPOSITORY / PLANS_PATH

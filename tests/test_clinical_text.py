@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 import re
 import string
 from operator import itemgetter
@@ -27,7 +26,7 @@ from mediparse.domain.clinical_text import (
 )
 from mediparse.domain.note_text import deid_markers
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
-from tests.support import REPOSITORY, REPOSITORY_DIAGNOSIS_CANDIDATES
+from tests.support import AGE_MARKER_CASES, REPOSITORY_DIAGNOSIS_CANDIDATES
 
 _ANALYZER: Final = TfidfVectorizer().build_analyzer()
 _UNREPLACED_NUMBER: Final = re.compile(r"(?<![A-Za-z0-9_])(?<![0-9][.,])[0-9]")
@@ -40,15 +39,7 @@ def _tokens(text: str) -> list[str]:
     return _ANALYZER(normalize_clinical_text(text))
 
 
-@pytest.mark.parametrize(
-    "case",
-    json.loads(
-        (REPOSITORY / "tests/fixtures/age_marker_cases.json").read_text(
-            encoding="utf-8"
-        )
-    ),
-    ids=itemgetter("name"),
-)
+@pytest.mark.parametrize("case", AGE_MARKER_CASES, ids=itemgetter("name"))
 def test_shared_age_normalization_cases(case: dict[str, Any]) -> None:
     """Sdílené případy definují masku věku v Pythonu i R."""
     assert (

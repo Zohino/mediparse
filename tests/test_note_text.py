@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 from operator import itemgetter
 from typing import Any, Final
 
@@ -13,7 +12,7 @@ from mediparse.domain.note_text import (
     deid_markers,
     segment,
 )
-from tests.support import REPOSITORY
+from tests.support import AGE_MARKER_CASES
 
 TWO: Final = 2
 
@@ -27,15 +26,7 @@ def test_marker_is_exactly_three_underscores() -> None:
     assert deid_markers("___ ___") == TWO
 
 
-@pytest.mark.parametrize(
-    "case",
-    json.loads(
-        (REPOSITORY / "tests/fixtures/age_marker_cases.json").read_text(
-            encoding="utf-8"
-        )
-    ),
-    ids=itemgetter("name"),
-)
+@pytest.mark.parametrize("case", AGE_MARKER_CASES, ids=itemgetter("name"))
 def test_shared_age_marker_cases(case: dict[str, Any]) -> None:
     """Sdílené případy definují masku věku v Pythonu i R."""
     assert len(AGE_MARKER.findall(case["text"])) == case["markers"]
