@@ -228,7 +228,7 @@ def test_invalid_tuning_is_refused(  # ruff: ignore[too-many-arguments]
     *,
     message: str,
 ) -> None:
-    """Chybějící řádek, rodina, překlep, MIN_CELL mají doménové odmítnutí."""
+    """Chybějící řádek, rodina, překlep i MIN_CELL mají doménové odmítnutí."""
     inputs = _inputs(
         tmp_path,
         visits=visits,
