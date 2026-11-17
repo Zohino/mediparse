@@ -13,10 +13,10 @@ from sklearn.naive_bayes import ComplementNB
 
 from mediparse.domain.classical_screening import ClassifierFamily
 from mediparse.infrastructure.complement_nb import ComplementNbLogOdds
+from mediparse.infrastructure.sklearn_classifier import threshold_splits
 from mediparse.infrastructure.sklearn_screening import (
     ScreeningFeatures,
     SklearnThresholdTuner,
-    threshold_splits,
 )
 
 

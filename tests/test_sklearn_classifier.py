@@ -9,6 +9,8 @@ from typing import TYPE_CHECKING, Final
 
 import pytest
 import skops.io as sio
+from hypothesis import given
+from hypothesis import strategies as st
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
@@ -30,6 +32,7 @@ from mediparse.infrastructure.sklearn_classifier import (
     SkopsModelFile,
     tfidf_preprocessor,
     tfidf_vectorizer,
+    threshold_splits,
 )
 from tests.model_support import (
     ACRONYM_VOCABULARY,
@@ -493,3 +496,36 @@ def test_preprocessor_repairs_misspelling_inside_multiword_variant() -> None:
         )
         == "chronic obstructive pulmonary disease"
     )
+
+
+@st.composite
+def _patient_labels(draw: st.DrawFn) -> tuple[list[int], list[bool], int]:
+    folds = draw(st.integers(2, 4))
+    labels = draw(st.lists(st.booleans(), min_size=2 * folds, max_size=30))
+    labels[: 2 * folds] = [False, True] * folds
+    visits = draw(
+        st.lists(st.integers(1, 4), min_size=len(labels), max_size=len(labels))
+    )
+    rows = [
+        (subject, label)
+        for subject, (label, count) in enumerate(zip(labels, visits, strict=True))
+        for _ in range(count)
+    ]
+    rows = list(draw(st.permutations(rows)))
+    return [subject for subject, _ in rows], [label for _, label in rows], folds
+
+
+@given(_patient_labels())
+def test_threshold_splits_separate_patients_and_cover_every_index_once(
+    corpus: tuple[list[int], list[bool], int],
+) -> None:
+    """Žádný pacient nepřekročí hranici a každý index je právě jednou v testu."""
+    subjects, labels, folds = corpus
+    splits = threshold_splits(labels, subjects, folds, 7)
+    tested = []
+    for train, test in splits:
+        assert {subjects[i] for i in train}.isdisjoint(subjects[i] for i in test)
+        assert sorted([*train, *test]) == list(range(len(subjects)))
+        tested.extend(test)
+    assert len(splits) == folds
+    assert sorted(tested) == list(range(len(subjects)))

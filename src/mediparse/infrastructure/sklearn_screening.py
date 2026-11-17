@@ -6,7 +6,6 @@ import logging
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, assert_never
 
-import numpy as np
 from lightgbm import LGBMClassifier
 from sklearn.decomposition import TruncatedSVD
 from sklearn.linear_model import LogisticRegression
@@ -22,8 +21,8 @@ from mediparse.infrastructure.sklearn_classifier import (
     ensure_tokens,
     fit_converged,
     tfidf_vectorizer,
+    threshold_splits,
 )
-from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Sequence
@@ -158,32 +157,6 @@ def classifier_estimator(family: ClassifierFamily, seed: Seed) -> BaseEstimator:
             )
         case _:
             assert_never(family)
-
-
-def threshold_splits(
-    labels: Sequence[bool], subjects: Sequence[SubjectId], folds: int, seed: Seed
-) -> list[tuple[ndarray, ndarray]]:
-    """Převede stratifikované části pacientů na indexy zpráv pro vnitřní CV.
-
-    Returns:
-        Páry indexů tréninku a testu; každý pacient náleží jedinému testu.
-    """
-    # Předpočítané indexy nevyžadují globální enable_metadata_routing pro groups.
-    partitions = StratifiedGroupFolds.partition(
-        subjects, [int(label) for label in labels], folds, seed
-    )
-    return [
-        (
-            np.array(
-                [i for i, subject in enumerate(subjects) if subject not in part],
-                dtype=int,
-            ),
-            np.array(
-                [i for i, subject in enumerate(subjects) if subject in part], dtype=int
-            ),
-        )
-        for part in partitions
-    ]
 
 
 @dataclass(frozen=True)
