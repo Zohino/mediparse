@@ -33,10 +33,10 @@ PASSWORD: Final = "secret"
 PARTIAL_BYTES: Final = 500_000
 # aria2c navazuje kousek před koncem rozpracovaného souboru (z 500 000 B od 491 520).
 RESUME_SLACK: Final = 16 * 1024
-SLOW_PIECE: Final = 10_000
+SLOW_PIECE: Final = 25_000
 SLOW_PAUSE: Final = 0.1
-STUTTER_BYTES: Final = 100_000
-STUTTER_PAUSE: Final = 3.0
+STUTTER_BYTES: Final = 300_000
+STUTTER_PAUSE: Final = 1.5
 QUICK_RETRIES: Final = {
     "MEDIPARSE_DOWNLOAD_TIMEOUT": "2",
     "MEDIPARSE_DOWNLOAD_ATTEMPTS": "2",
@@ -328,11 +328,13 @@ def test_every_connection_stalling_once_completes_in_one_attempt(
     aria2c (``--lowest-speed-limit``) je ukončí dřív než timeout a zrušená
     spojení už neobnoví, takže souběh klesá až na nulu a pokus skončí. Timeout
     delší než ta kontrola (asi 10 s) to v testu odhalí.
+    Na testovací soubor aria2c otevře tři spojení (``--min-split-size=1M``),
+    proto tři zaseknutí znamenají každé spojení jednou.
     """
-    physionet.stalls_left = 9
+    physionet.stalls_left = 3
     output = tmp_path / "table.csv"
 
-    done = _download(netrc, physionet.url("stall"), output, timeout="15")
+    done = _download(netrc, physionet.url("stall"), output, timeout="12")
 
     assert done.returncode == 0, done.stderr
     assert "pokus" not in done.stderr
@@ -356,7 +358,8 @@ def test_connections_stalling_repeatedly_keep_downloading_without_attempts(
         physionet.url("stutter"),
         output,
         timeout="1",
-        MEDIPARSE_DOWNLOAD_PERIOD="8",
+        MEDIPARSE_DOWNLOAD_PERIOD="3",
+        MEDIPARSE_DOWNLOAD_TRIES="2",
     )
 
     assert done.returncode == 0, done.stderr
@@ -381,7 +384,7 @@ def test_interrupt_stops_download_and_keeps_partial_state(
         stderr=subprocess.PIPE,
         text=True,
         encoding="utf-8",
-        env=_environment(QUICK_RETRIES["MEDIPARSE_DOWNLOAD_TIMEOUT"], {}),
+        env=_environment("1", {"MEDIPARSE_DOWNLOAD_TRIES": "1"}),
         start_new_session=True,
     )
     try:
@@ -409,17 +412,37 @@ def test_interrupt_stops_download_and_keeps_partial_state(
 def test_restart_period_shorter_than_exhausted_tries_is_refused(
     physionet: FakePhysioNet, netrc: Path, tmp_path: Path
 ) -> None:
-    """Restart dřív, než mrtvý server vyčerpá pokusy, by ho nikdy neodhalil."""
+    """Restart dřív, než mrtvý server vyčerpá pokusy, by ho nikdy neodhalil.
+
+    Perioda leží přesně na hranici výchozích pěti pokusů, takže test hlídá
+    výchozí počet pokusů i ostrost nerovnosti.
+    """
     done = _download(
         netrc,
         physionet.url("data"),
         tmp_path / "table.csv",
         timeout="10",
-        MEDIPARSE_DOWNLOAD_PERIOD="30",
+        MEDIPARSE_DOWNLOAD_PERIOD="50",
     )
 
     assert done.returncode != 0
     assert "MEDIPARSE_DOWNLOAD_PERIOD" in done.stderr
+    assert physionet.ranges == []
+
+
+def test_zero_connection_tries_is_refused(
+    physionet: FakePhysioNet, netrc: Path, tmp_path: Path
+) -> None:
+    """Nulový počet pokusů by dovolil mrtvému serveru opakování bez omezení."""
+    done = _download(
+        netrc,
+        physionet.url("data"),
+        tmp_path / "table.csv",
+        MEDIPARSE_DOWNLOAD_TRIES="0",
+    )
+
+    assert done.returncode != 0
+    assert "MEDIPARSE_DOWNLOAD_TRIES" in done.stderr
     assert physionet.ranges == []
 
 
@@ -429,7 +452,9 @@ def test_dead_server_leaves_no_output_but_keeps_partial_state(
     """Po vyčerpání pokusů nevznikne useknutý výstup a rozpracovaný stav zůstane."""
     output = tmp_path / "table.csv"
 
-    done = _download(netrc, physionet.url("dead"), output)
+    done = _download(
+        netrc, physionet.url("dead"), output, timeout="1", MEDIPARSE_DOWNLOAD_TRIES="1"
+    )
 
     assert done.returncode != 0
     assert not output.exists()
