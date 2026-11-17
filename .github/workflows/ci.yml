@@ -162,7 +162,7 @@ jobs:
             MEDIPARSE_COMMIT=${{ github.event.pull_request.head.sha || github.sha }}
             MEDIPARSE_DIRTY=false
           cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-to: ${{ github.event_name == 'push' && github.ref_name == 'main' && 'type=gha,mode=max' || '' }}
       - name: pytest v kontejneru
         # Hypothesis v CI načte deterministický profil ci podle proměnné CI; do kontejneru ji předá -e.
         run: docker run --rm -e CI mediparse:ci bash scripts/pytest-parallel.sh
