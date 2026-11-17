@@ -8,6 +8,7 @@ work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 
 curl --fail --silent --show-error --location \
+    --retry 6 --retry-all-errors --retry-delay 10 \
     --output "$work/libertinus.zip" \
     "https://github.com/alerque/libertinus/releases/download/v$version/Libertinus-$version.zip"
 echo "$sha256  $work/libertinus.zip" | sha256sum --check --quiet
