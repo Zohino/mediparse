@@ -422,6 +422,12 @@ ignore = [
     "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako při lokální a CI kontrole PR
 ]
 
+"tests/test_pytest_parallel_script.py" = [
+    "suspicious-subprocess-import",           # test spouští kontrolovaný shellový skript proti zástupnému pytestu
+    "subprocess-without-shell-equals-true",   # argumenty jdou jako seznam, shell se nepoužívá
+    "start-process-with-partial-path",        # bash se hledá v PATH, stejně jako v CI a kontejneru
+]
+
 "src/mediparse/entrypoints/cohort.py" = [
     "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
 ]

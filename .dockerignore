@@ -25,6 +25,7 @@
 !scripts/eda-canary.sh
 !scripts/check-pr-record.sh
 !scripts/verify-mimic.sh
+!scripts/pytest-parallel.sh
 !pyproject.toml
 !pixi.lock
 !README.md
