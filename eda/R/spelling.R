@@ -23,7 +23,10 @@ SPELLING_LAYOUTS <- list(
 )
 
 note_variants <- function(con) {
-  feature_table(con, VARIANTS_TABLE, "note_variants.parquet", VARIANT_COLUMNS)
+  feature_table(
+    con, VARIANTS_TABLE, "note_variants.parquet", VARIANT_COLUMNS,
+    key = c("note_id", "variant", "diagnosis"), complete = FALSE
+  )
 }
 
 variant_summary <- function(con) {

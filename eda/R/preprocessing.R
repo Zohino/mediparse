@@ -29,8 +29,14 @@ corpus_acronyms <- function(con) {
 }
 
 note_preprocessing <- function(con) {
-  feature_table(con, PREPROCESSING_TABLE, "note_preprocessing.parquet", PREPROCESSING_COLUMNS)
-  feature_table(con, ACRONYMS_TABLE, "note_acronyms.parquet", ACRONYM_COLUMNS)
+  feature_table(
+    con, PREPROCESSING_TABLE, "note_preprocessing.parquet", PREPROCESSING_COLUMNS,
+    key = "note_id", complete = TRUE
+  )
+  feature_table(
+    con, ACRONYMS_TABLE, "note_acronyms.parquet", ACRONYM_COLUMNS,
+    key = c("note_id", "acronym"), complete = FALSE
+  )
   PREPROCESSING_TABLE
 }
 
