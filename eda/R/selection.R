@@ -62,11 +62,13 @@ corpus_funnel <- function(con) {
 }
 
 idle_steps_text <- function(funnel) {
-  steps <- funnel$krok[-1][diff(funnel$zprav) == 0]
+  steps <- funnel$krok[-1][diff(funnel$zprav) == 0 & utils::head(funnel$zprav, -1) > 0]
   if (length(steps) == 0L) return("")
+  singular <- length(steps) == 1L
   sprintf(
-    "Kroky %s na těchto datech žádnou zprávu nevyřadí; jsou pojistkou, ne filtrem.",
-    join_labels(steps)
+    "%s %s na těchto datech žádnou zprávu nevyřadí; %s pojistkou, ne filtrem.",
+    if (singular) "Krok" else "Kroky", join_labels(sprintf("„%s“", steps)),
+    if (singular) "je" else "jsou"
   )
 }
 

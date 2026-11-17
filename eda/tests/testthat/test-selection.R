@@ -108,17 +108,30 @@ test_that("input_corpus_table předá práh jako poziční parametr DBI", {
 
 test_that("text trychtýře jmenuje kroky bez úbytku", {
   funnel <- data.frame(krok = FUNNEL_STEPS, zprav = c(100, 90, 90, 90))
-  text <- idle_steps_text(funnel)
-
-  expect_match(text, "Aspoň 100 znaků", fixed = TRUE)
-  expect_match(text, "Bez přesných duplicit", fixed = TRUE)
-  expect_false(grepl("S kódem ICD", text, fixed = TRUE))
-  expect_match(text, "žádnou zprávu nevyřadí", fixed = TRUE)
-  expect_match(text, "jsou pojistkou, ne filtrem", fixed = TRUE)
+  expect_identical(
+    idle_steps_text(funnel),
+    "Kroky „Aspoň 100 znaků“ a „Bez přesných duplicit“ na těchto datech žádnou zprávu nevyřadí; jsou pojistkou, ne filtrem."
+  )
 })
 
 test_that("text o krocích bez úbytku nevznikne, pokud každý krok vyřazuje", {
   funnel <- data.frame(krok = FUNNEL_STEPS, zprav = c(100, 90, 80, 70))
+
+  expect_identical(idle_steps_text(funnel), "")
+})
+
+
+test_that("jediný nečinný krok má jednotné číslo a uvozovky", {
+  funnel <- data.frame(krok = FUNNEL_STEPS, zprav = c(100, 90, 80, 80))
+
+  expect_identical(
+    idle_steps_text(funnel),
+    "Krok „Bez přesných duplicit“ na těchto datech žádnou zprávu nevyřadí; je pojistkou, ne filtrem."
+  )
+})
+
+test_that("prázdný korpus nemá nečinné kroky s pojistkou", {
+  funnel <- data.frame(krok = FUNNEL_STEPS, zprav = c(0, 0, 0, 0))
 
   expect_identical(idle_steps_text(funnel), "")
 })
