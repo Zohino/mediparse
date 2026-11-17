@@ -456,3 +456,9 @@ test_that("kotva i číselný věk přijmou přilepené pohlaví", {
   expect_equal(out$kotva, 1)
   expect_equal(out$ciselny, 1)
 })
+
+
+test_that("kotva a číselný věk odmítnou pokračování přípony do slova", {
+  expect_equal(age_of("is a ___ yoyo")$kotva, 0)
+  expect_equal(age_of("67 yogurt")$ciselny, 0)
+})
