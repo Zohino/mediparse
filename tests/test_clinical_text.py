@@ -57,6 +57,15 @@ def test_shared_age_normalization_cases(case: dict[str, Any]) -> None:
     )
 
 
+def test_age_placeholder_consumes_attached_gender() -> None:
+    """Přilepené pohlaví se pohltí do zástupného tokenu věku."""
+    assert normalize_clinical_text("a ___yoM woman").split() == [
+        "a",
+        AGE_PLACEHOLDER,
+        "woman",
+    ]
+
+
 @pytest.mark.parametrize(
     ("text", "expected"),
     [
