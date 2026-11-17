@@ -29,6 +29,7 @@ from tests.model_support import (
     sectioned_notes,
     separable_notes,
     training_config,
+    with_negative_controls,
     write_split,
 )
 from tests.support import (
@@ -42,7 +43,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 
-PATIENTS: Final = 12
+PATIENTS: Final = 48
 
 
 class Trained(NamedTuple):
@@ -71,6 +72,8 @@ def _train(
             vocabulary or (SPELLING_VOCABULARY if normalize else SEPARABLE_VOCABULARY),
         )
     )
+    if sections or normalize:
+        corpus = with_negative_controls(corpus)
     ParquetNoteTable(notes).write(corpus)
     config = root / "config.json"
     config.write_text(

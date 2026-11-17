@@ -14,6 +14,7 @@ from typing import TYPE_CHECKING, Final
 from mediparse.application.model_training import ModelTraining
 from mediparse.domain.costs import TrainingCosts
 from mediparse.domain.environment import Environment
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
@@ -41,6 +42,8 @@ if TYPE_CHECKING:
     from collections.abc import Callable, Mapping
 
     from mediparse.domain.environment import SourceRevision
+    from mediparse.domain.training import TrainingConfig
+    from mediparse.domain.tuning import ParamValue
 
 logger = logging.getLogger(__name__)
 
@@ -54,6 +57,21 @@ PACKAGES: Final = (
     "pydantic",
     "snakemake",
 )
+
+
+def _parameters(config: TrainingConfig) -> dict[str, ParamValue]:
+    """Vybere pevné parametry pro trénink bez ladění.
+
+    Returns:
+        Parametry explicitně přítomné v configu.
+
+    Raises:
+        InvalidInputError: Config neobsahuje parametry.
+    """
+    if config.parameters is None:
+        msg = "Trénink vyžaduje parametry SVM."
+        raise InvalidInputError(msg)
+    return config.parameters
 
 
 def main(
@@ -119,6 +137,7 @@ def run(
     """
     check_inputs_access(environ, (cohort, split))
     training = load_training_config(config)
+    parameters = _parameters(training)
     source = revision()
     table, strip = model_input_table(
         cohort=cohort, model_input=training.input, lexicon=lexicon
@@ -128,7 +147,10 @@ def run(
         table=table,
         split=ParquetSplitTable(split),
         trainer=LinearSvmTrainer(
-            training.regularization, training.seed, normalization=normalization
+            parameters,
+            training.seed,
+            normalization=normalization,
+            threshold_folds=training.threshold_folds,
         ),
         store=SkopsModelFile(model),
         predictions=ParquetPredictionTable(predictions),

@@ -38,6 +38,7 @@ from tests.model_support import (
     sectioned_notes,
     separable_notes,
     training_config,
+    with_negative_controls,
     write_raw_split,
     write_split,
 )
@@ -56,7 +57,7 @@ if TYPE_CHECKING:
     from mediparse.domain.environment import Hardware, SourceRevision
     from mediparse.domain.input_note import InputNote
 
-PATIENTS: Final = 12
+PATIENTS: Final = 48
 
 
 def _inputs(
@@ -445,7 +446,7 @@ def test_missing_lexicon_is_refused(tmp_path: Path) -> None:
 
 def test_strip_changes_scores_on_sectioned_notes(tmp_path: Path) -> None:
     """Trénink se stripem čte stripnutý text, takže skóre predikcí se liší od běhu bez stripu."""
-    corpus = sectioned_notes(PATIENTS)
+    corpus = with_negative_controls(sectioned_notes(PATIENTS))
     scores = []
     for strip in (False, True):
         root = tmp_path / str(strip)
@@ -547,7 +548,7 @@ def test_normalization_merges_abbreviation_and_full_name(tmp_path: Path) -> None
 
     Bez něj by test prošel i tehdy, kdyby entrypoint slovník trenérovi nepředal.
     """
-    corpus = separable_notes(PATIENTS, ACRONYM_VOCABULARY)
+    corpus = with_negative_controls(separable_notes(PATIENTS, ACRONYM_VOCABULARY))
     scores = {}
     for normalize in (False, True):
         root = tmp_path / str(normalize)
@@ -578,7 +579,7 @@ def test_normalization_changes_scores_on_spelling_variants(tmp_path: Path) -> No
 
     Výchozí slovník testů žádné rozdíly zápisu nemá a test by prošel naprázdno.
     """
-    corpus = separable_notes(PATIENTS, SPELLING_VOCABULARY)
+    corpus = with_negative_controls(separable_notes(PATIENTS, SPELLING_VOCABULARY))
     scores = {}
     for normalize in (False, True):
         root = tmp_path / str(normalize)
@@ -591,7 +592,10 @@ def test_normalization_changes_scores_on_spelling_variants(tmp_path: Path) -> No
         outputs = _Outputs.under(root / "out")
         assert _run(notes, config, split, outputs) is ExitCode.OK
         scores[normalize] = {
-            row.score for row in ParquetPredictionTable(outputs.predictions).read()
+            item.score
+            for item in SkopsModelFile(outputs.model)
+            .load()
+            .classify(SPELLING_VOCABULARY)
         }
 
     assert len(scores[False]) > 1
@@ -600,7 +604,7 @@ def test_normalization_changes_scores_on_spelling_variants(tmp_path: Path) -> No
 
 def test_variant_switch_controls_model_and_manifest(tmp_path: Path) -> None:
     """Přepínač sjednotí skóre varianty a názvu a manifest nese právě použitý slovník."""
-    corpus = separable_notes(PATIENTS, VARIANT_VOCABULARY)
+    corpus = with_negative_controls(separable_notes(PATIENTS, VARIANT_VOCABULARY))
     scores = {}
     for enabled in (False, True):
         root = tmp_path / str(enabled)

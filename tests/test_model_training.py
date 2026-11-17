@@ -52,8 +52,10 @@ def test_config_without_row_id_is_rejected() -> None:
         {"fold": -1},
         {"seed": -1},
         {"seed": 2**32},
-        {"regularization": 0.0},
-        {"regularization": -1.0},
+        {"regularization": 1.0},
+        {"threshold_folds": 1},
+        {"threshold_folds": True},
+        {"threshold_folds": "3"},
         {"diagnosis": "asthma"},
         {"unexpected": 1},
         {"row_id": ""},
@@ -62,6 +64,6 @@ def test_config_without_row_id_is_rejected() -> None:
     ],
 )
 def test_invalid_config_is_rejected(override: dict[str, object]) -> None:
-    """Pole folds (patří splitu), nekladné C, neznámá diagnóza, extra klíč i neplatný row_id config odmítnou."""
+    """Pole folds (patří splitu), neplatné vnitřní CV, neznámá diagnóza, extra klíč i neplatný row_id config odmítnou."""
     with pytest.raises(ValidationError):
         TrainingConfig.model_validate_json(json.dumps({**VALID, **override}))
