@@ -97,11 +97,7 @@ class TrainingPaths:
     costs: Path
 
 
-def main(
-    *,
-    paths: TrainingPaths,
-    log: Path,
-) -> ExitCode:
+def main(*, paths: TrainingPaths, log: Path) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
 
     Returns:

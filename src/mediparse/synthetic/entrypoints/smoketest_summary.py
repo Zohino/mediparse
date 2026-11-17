@@ -41,10 +41,7 @@ class SmoketestPaths:
     logs: Path
 
 
-def main(
-    *,
-    paths: SmoketestPaths,
-) -> ExitCode:
+def main(*, paths: SmoketestPaths) -> ExitCode:
     """Krok pravidla: souhrn na stdout, diagnostika na stderr.
 
     Returns:
@@ -65,11 +62,7 @@ def _write_table(out: TextIO, table: list[tuple[str, ...]]) -> None:
 
 
 @refusing_invalid_input
-def run(
-    *,
-    paths: SmoketestPaths,
-    out: TextIO,
-) -> ExitCode:
+def run(*, paths: SmoketestPaths, out: TextIO) -> ExitCode:
     """Přečte metriky, predikce a labely kohorty, vypíše souhrn a ukázku s pravdou.
 
     Returns:

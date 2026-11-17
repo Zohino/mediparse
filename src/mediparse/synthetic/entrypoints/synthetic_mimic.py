@@ -38,11 +38,7 @@ class SyntheticMimicPaths:
     artifacts: Path
 
 
-def main(
-    *,
-    paths: SyntheticMimicPaths,
-    log: Path,
-) -> ExitCode:
+def main(*, paths: SyntheticMimicPaths, log: Path) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
 
     Returns:
@@ -53,10 +49,7 @@ def main(
 
 
 @refusing_invalid_input
-def run(
-    *,
-    paths: SyntheticMimicPaths,
-) -> ExitCode:
+def run(*, paths: SyntheticMimicPaths) -> ExitCode:
     """Zapíše tabulky, jejich otisky a značky syntetiky tabulek i odvozených artefaktů.
 
     Returns:

@@ -61,11 +61,7 @@ class EvaluationPaths:
     manifest: Path
 
 
-def main(
-    *,
-    paths: EvaluationPaths,
-    log: Path,
-) -> ExitCode:
+def main(*, paths: EvaluationPaths, log: Path) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
 
     Returns:

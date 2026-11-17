@@ -51,11 +51,7 @@ class CohortPaths:
     manifest: Path
 
 
-def main(
-    *,
-    paths: CohortPaths,
-    log: Path,
-) -> ExitCode:
+def main(*, paths: CohortPaths, log: Path) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
 
     Returns:

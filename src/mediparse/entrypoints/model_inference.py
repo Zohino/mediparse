@@ -47,11 +47,7 @@ class InferencePaths:
     costs: Path
 
 
-def main(
-    *,
-    paths: InferencePaths,
-    log: Path,
-) -> ExitCode:
+def main(*, paths: InferencePaths, log: Path) -> ExitCode:
     """Krok pravidla: diagnostika do souboru logu pravidla.
 
     Returns:

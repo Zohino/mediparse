@@ -374,7 +374,7 @@ def test_manifest_lists_diagnostic_sections_sorted(tmp_path: Path) -> None:
         input=model_input(strip=True),
     )
 
-    code = _run(replace(paths, lexicon=lexicon), revision=fixed_revision)
+    code = _run(replace(paths, lexicon=lexicon))
 
     strip = _manifest(paths).diagnostic_strip
     assert code is ExitCode.OK
@@ -394,10 +394,7 @@ def test_synonym_change_changes_lexicon_digest(tmp_path: Path) -> None:
             tmp_path / f"{name}.json", extra_diagnostic=False, synonym=synonym
         )
         outputs = _under(paths, tmp_path / name)
-        assert (
-            _run(replace(outputs, lexicon=lexicon), revision=fixed_revision)
-            is ExitCode.OK
-        )
+        assert _run(replace(outputs, lexicon=lexicon)) is ExitCode.OK
         strip = _manifest(outputs).diagnostic_strip
         assert strip is not None
         digests.append(strip.lexicon_sha256)
@@ -412,7 +409,7 @@ def test_missing_lexicon_is_refused(tmp_path: Path) -> None:
         input=model_input(strip=True),
     )
 
-    code = _run(replace(paths, lexicon=tmp_path / "none.json"), revision=fixed_revision)
+    code = _run(replace(paths, lexicon=tmp_path / "none.json"))
 
     assert code is ExitCode.REFUSED
     assert _existing(paths) == []
@@ -653,18 +650,7 @@ def test_nvml_error_refuses_training_before_fit(
     monkeypatch.setattr(model_training.LinearSvmTrainer, "fit", fit)
 
     code = model_training.run(
-        paths=model_training.TrainingPaths(
-            tuning=None,
-            cohort=paths.cohort,
-            config=paths.config,
-            split=paths.split,
-            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            lexicon=REPOSITORY_SECTION_HEADERS,
-            model=paths.model,
-            predictions=paths.predictions,
-            manifest=paths.manifest,
-            costs=paths.costs,
-        ),
+        paths=paths,
         environ={},
         revision=fixed_revision,
         cuda_visible_devices=None,
@@ -686,7 +672,7 @@ def test_training_main_forwards_cuda_environment(
     monkeypatch.setattr(model_training, "run", execute)
     monkeypatch.setattr(model_training, "configure_logging", Mock())
     code = model_training.main(
-        paths=model_training.TrainingPaths(
+        paths=TrainingPaths(
             tuning=tmp_path / "tuning.json",
             cohort=tmp_path / "notes.parquet",
             config=tmp_path / "config.json",
@@ -725,9 +711,7 @@ def test_invalid_preparation_is_refused_before_gpu_monitor(
     monkeypatch.setattr(model_training, "gpu_monitor", monitor)
 
     code = (
-        _run(
-            replace(inputs, lexicon=tmp_path / "missing-lexicon.json"),
-        )
+        _run(replace(inputs, lexicon=tmp_path / "missing-lexicon.json"))
         if phase == "input"
         else _run(replace(inputs, candidates=tmp_path / "missing-candidates.json"))
     )
@@ -774,12 +758,7 @@ def test_training_uses_tuned_parameters_threshold_and_provenance(
     inputs = _inputs(tmp_path, parameters=None)
     tuning = _write_tuning(inputs, tmp_path / "tuning.json")
 
-    assert (
-        _run(
-            replace(inputs, tuning=tuning),
-        )
-        is ExitCode.OK
-    )
+    assert _run(replace(inputs, tuning=tuning)) is ExitCode.OK
 
     model = SkopsModelFile(inputs.model).load()
     vectorizer = model.model.estimator_["tfidf"]
@@ -812,12 +791,7 @@ def test_training_requires_exactly_one_parameter_source(
     fit = Mock(side_effect=AssertionError("Nejednoznačný zdroj nesmí trénovat."))
     monkeypatch.setattr(model_training.LinearSvmTrainer, "fit", fit)
 
-    assert (
-        _run(
-            replace(inputs, tuning=tuning),
-        )
-        is ExitCode.REFUSED
-    )
+    assert _run(replace(inputs, tuning=tuning)) is ExitCode.REFUSED
     assert "právě jeden" in caplog.text
     assert _existing(inputs) == []
     fit.assert_not_called()
@@ -851,12 +825,7 @@ def test_training_refuses_tuning_with_different_lineage(
     fit = Mock(side_effect=AssertionError("Cizí původ nesmí trénovat."))
     monkeypatch.setattr(model_training.LinearSvmTrainer, "fit", fit)
 
-    assert (
-        _run(
-            replace(inputs, tuning=tuning),
-        )
-        is ExitCode.REFUSED
-    )
+    assert _run(replace(inputs, tuning=tuning)) is ExitCode.REFUSED
     assert (
         f"Manifest {tuning}: Manifest ladění neodpovídá tréninku: {mismatched}."
         in caplog.messages

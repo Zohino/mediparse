@@ -69,11 +69,7 @@ class TuningPaths:
     manifest: Path
 
 
-def main(
-    *,
-    paths: TuningPaths,
-    log: Path,
-) -> ExitCode:
+def main(*, paths: TuningPaths, log: Path) -> ExitCode:
     """Převezme cesty pravidla a nastaví souborovou diagnostiku.
 
     Returns:

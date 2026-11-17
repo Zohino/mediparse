@@ -51,11 +51,7 @@ class NoteTokensPaths:
     out: Path
 
 
-def run(
-    *,
-    paths: NoteTokensPaths,
-    environ: Mapping[str, str],
-) -> bool:
+def run(*, paths: NoteTokensPaths, environ: Mapping[str, str]) -> bool:
     """Stráží vstup před čtením a hashováním, pak spočítá nebo použije cache.
 
     Returns:
