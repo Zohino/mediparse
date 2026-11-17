@@ -39,6 +39,7 @@ from mediparse.infrastructure.sklearn_split import threshold_splits
 from tests.model_support import (
     ACRONYM_VOCABULARY,
     FIXED_SVM_PARAMS,
+    NEGATIVE_CONTROL,
     SPELLING_VOCABULARY,
     VARIANT_VOCABULARY,
     separable_notes,
@@ -242,19 +243,11 @@ def _trainer(normalization: TextNormalization | None) -> LinearSvmTrainer:
     )
 
 
-def _acronym_corpus() -> tuple[list[str], list[bool], list[int]]:
-    texts = [*ACRONYM_VOCABULARY[:1] * 4, *ACRONYM_VOCABULARY[1:] * 4]
+def _paired_corpus(
+    vocabulary: tuple[str, str],
+) -> tuple[list[str], list[bool], list[int]]:
     return (
-        texts + ["fracture cast splint"] * 8,
-        [True] * 4 + [False] * 12,
-        list(range(16)),
-    )
-
-
-def _dose_corpus() -> tuple[list[str], list[bool], list[int]]:
-    texts = [*SPELLING_VOCABULARY[:1] * 4, *SPELLING_VOCABULARY[1:] * 4]
-    return (
-        texts + ["fracture cast splint"] * 8,
+        [vocabulary[0]] * 4 + [vocabulary[1]] * 4 + [NEGATIVE_CONTROL] * 8,
         [True] * 4 + [False] * 12,
         list(range(16)),
     )
@@ -280,7 +273,7 @@ def test_preprocessor_expands_acronym_next_to_marker_and_lowercases() -> None:
 
 def test_trainer_with_acronyms_scores_abbreviation_and_full_name_alike() -> None:
     """Zkratka a vypsaný název dostanou se slovníkem stejné skóre, bez něj různé."""
-    texts, labels, subjects = _acronym_corpus()
+    texts, labels, subjects = _paired_corpus(ACRONYM_VOCABULARY)
 
     expanded = (
         _trainer(_NORMALIZATION)
@@ -295,7 +288,7 @@ def test_trainer_with_acronyms_scores_abbreviation_and_full_name_alike() -> None
 
 def test_model_file_round_trip_keeps_acronyms(tmp_path: Path) -> None:
     """Načtený model skóruje shodně a jeho preprocessor nese slovník jako data."""
-    texts, labels, subjects = _acronym_corpus()
+    texts, labels, subjects = _paired_corpus(ACRONYM_VOCABULARY)
     classifier = _trainer(_NORMALIZATION).fit(texts, labels, subjects)
     model_file = SkopsModelFile(tmp_path / "model.skops")
 
@@ -339,7 +332,7 @@ def test_model_file_partial_around_foreign_function_is_invalid_input(
 
 def test_trainer_with_normalization_scores_spellings_alike() -> None:
     """Se zapnutou normalizací dostanou dva zápisy téže dávky a věku stejné skóre."""
-    texts, labels, subjects = _dose_corpus()
+    texts, labels, subjects = _paired_corpus(SPELLING_VOCABULARY)
 
     normalized = (
         _trainer(_NORMALIZATION)
@@ -358,7 +351,7 @@ def test_trainer_with_normalization_scores_spellings_alike() -> None:
 
 def test_model_file_round_trip_with_preprocessor(tmp_path: Path) -> None:
     """Model s preprocessorem se načte a skóre se shodují."""
-    texts, labels, subjects = _dose_corpus()
+    texts, labels, subjects = _paired_corpus(SPELLING_VOCABULARY)
     classifier = _trainer(_NORMALIZATION).fit(texts, labels, subjects)
     model_file = SkopsModelFile(tmp_path / "model.skops")
 
@@ -402,7 +395,7 @@ def test_trusted_functions_are_exact_full_names() -> None:
 def test_analyzer_sees_normalized_stripped_fixture(name: str) -> None:
     """Analyzátor modelu vidí text po stripu a normalizaci tokeny výchozího vzoru."""
     text = mimic_shaped_notes()[name]
-    texts, labels, subjects = _dose_corpus()
+    texts, labels, subjects = _paired_corpus(SPELLING_VOCABULARY)
     analyzer = (
         _trainer(_NORMALIZATION)
         .fit(texts, labels, subjects)
@@ -430,7 +423,7 @@ def test_analyzer_sees_normalized_stripped_fixture(name: str) -> None:
 
 def test_analyzer_tokens_after_strip_normalization_and_expansion() -> None:
     """Doslovný seznam tokenů po stripu, normalizaci a rozvinutí, bez produkčních funkcí."""
-    texts, labels, subjects = _dose_corpus()
+    texts, labels, subjects = _paired_corpus(SPELLING_VOCABULARY)
     analyzer = (
         _trainer(_NORMALIZATION).fit(texts, labels, subjects).model.estimator_["tfidf"]
     )
@@ -488,7 +481,7 @@ def test_trainer_builds_vectorizer_through_factory(
             token_pattern=r"[a-z]{3,}"  # ruff: ignore[hardcoded-password-func-arg]
         ),
     )
-    texts, labels, subjects = _dose_corpus()
+    texts, labels, subjects = _paired_corpus(SPELLING_VOCABULARY)
 
     model = _trainer(None).fit(texts, labels, subjects)
 
@@ -526,13 +519,7 @@ def test_preprocessor_expands_acronyms_and_variants_before_lowercase() -> None:
 
 def test_variant_model_is_self_contained_after_round_trip(tmp_path: Path) -> None:
     """Přepis sjednotí skóre i po načtení skops bez přístupu ke configu."""
-    texts = (
-        [VARIANT_VOCABULARY[0]] * 4
-        + [VARIANT_VOCABULARY[1]] * 4
-        + ["fracture cast splint"] * 8
-    )
-    labels = [True] * 4 + [False] * 12
-    subjects = list(range(16))
+    texts, labels, subjects = _paired_corpus(VARIANT_VOCABULARY)
     with_variants = _trainer(_NORMALIZATION).fit(texts, labels, subjects)
     without_variants = _trainer(
         TextNormalization(acronyms=_NORMALIZATION.acronyms, variants={})

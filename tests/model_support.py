@@ -57,6 +57,9 @@ ACRONYM_VOCABULARY: Final = (
 VARIANT_VOCABULARY: Final = ("T2DM review", "diabetes review")
 
 
+NEGATIVE_CONTROL: Final = "fracture orthopedic splint"
+
+
 OVERLAPPING: Final = (
     "diabetes insulin glucose clinic review",
     "fracture cast splint clinic review",
@@ -106,7 +109,7 @@ def with_negative_controls(notes: Sequence[InputNote]) -> list[InputNote]:
             note_id(subject, 999),
             subject,
             Language.EN,
-            "fracture orthopedic splint",
+            NEGATIVE_CONTROL,
             frozenset(),
         )
         for subject in subjects
