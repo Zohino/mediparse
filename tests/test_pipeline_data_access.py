@@ -15,6 +15,7 @@ from typing import TYPE_CHECKING, Final
 import pytest
 
 from mediparse.entrypoints import (
+    classical_screening,
     cohort,
     mimic_parquet,
     model_evaluation,
@@ -108,6 +109,18 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
             clock=PerfCounterClock(),
             environ=environ,
         ),
+        "classical_screening": partial(
+            classical_screening.run,
+            paths=classical_screening.ScreeningPaths(
+                corpus=repository_corpus(notes, split),
+                config=root / "missing.json",
+                out=root / "screening/classical.parquet",
+                predictions=root / "screening/classical_predictions.parquet",
+                manifest=root / "screening/classical_manifest.json",
+            ),
+            revision=fixed_revision,
+            environ=environ,
+        ),
         "model_evaluation": partial(
             model_evaluation.run,
             paths=model_evaluation.EvaluationPaths(
@@ -176,6 +189,7 @@ GUARD_CASES: Final = {
     "split_materialization": _GuardCase(("cohort",)),
     "model_training": _GuardCase(("cohort", "split"), corpus=True),
     "model_tuning": _GuardCase(("cohort", "split"), corpus=True, native=False),
+    "classical_screening": _GuardCase(("cohort", "split"), corpus=True, native=False),
     "model_evaluation": _GuardCase(("predictions", "cohort", "split")),
     "model_inference": _GuardCase(("cohort", "model", "predictions")),
 }
