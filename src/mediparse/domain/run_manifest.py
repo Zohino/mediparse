@@ -75,6 +75,11 @@ class RunManifest(BaseModel):
     dataset_sha256: Sha256
     predictions_sha256: Sha256
     config_sha256: Sha256
+    tuning_manifest_sha256: Sha256 | None
+    parameters: dict[str, ParamValue]
+    threshold: Annotated[float, Field(allow_inf_nan=False)]
+    threshold_folds: Annotated[int, Field(ge=2)]
+    converged: bool
     seed: Seed
     split_seed: Seed
     split_folds: Annotated[int, Field(ge=2)]
@@ -212,3 +217,36 @@ class TuningManifest(BaseModel):
             self.text_preprocessing, self.text_normalization
         )
         return self
+
+
+def ensure_tuning_lineage(  # ruff: ignore[too-many-arguments]
+    tuning: TuningManifest,
+    *,
+    row_id: RowId,
+    fold: int,
+    dataset_sha256: str,
+    split_sha256: str,
+    diagnostic_strip: DiagnosticStrip | None,
+    text_preprocessing: TextPreprocessing,
+    text_normalization: TextNormalization | None,
+) -> None:
+    """Ověří původ parametrů vůči řádku, vnějšímu foldu a vstupům tréninku.
+
+    Raises:
+        InvalidInputError: Původ nesedí; zpráva uvádí všechna pole s rozdílem.
+    """
+    actual = {
+        "row_id": row_id,
+        "fold": fold,
+        "dataset_sha256": dataset_sha256,
+        "split_sha256": split_sha256,
+        "diagnostic_strip": diagnostic_strip,
+        "text_preprocessing": text_preprocessing,
+        "text_normalization": text_normalization,
+    }
+    mismatched = [
+        field for field, value in actual.items() if getattr(tuning, field) != value
+    ]
+    if mismatched:
+        msg = f"Manifest ladění neodpovídá tréninku: {', '.join(mismatched)}."
+        raise InvalidInputError(msg)

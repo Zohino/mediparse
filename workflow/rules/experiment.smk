@@ -43,6 +43,7 @@ rule train_model:
         candidates="config/diagnosis_candidates.json",
         lexicon="config/section_headers.json",
         split="resources/mimic/splits.parquet",
+        tuning="results/experiment/tuning_manifest.json",
     output:
         model="resources/mimic/model.skops",
         predictions="resources/mimic/predictions.parquet",

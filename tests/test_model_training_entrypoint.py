@@ -24,9 +24,11 @@ from mediparse.entrypoints import model_training
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.machine_hardware import machine_hardware
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
+from mediparse.infrastructure.run_manifest_file import load_tuning_manifest
 from mediparse.infrastructure.sklearn_classifier import ESTIMATOR, SkopsModelFile
 from mediparse.infrastructure.split_table import ParquetSplitTable
 from tests.model_support import (
@@ -49,6 +51,7 @@ from tests.support import (
     fixed_revision,
     missing_revision,
 )
+from tests.tuning_support import tuning_manifest
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Generator
@@ -56,6 +59,7 @@ if TYPE_CHECKING:
 
     from mediparse.domain.environment import Hardware, SourceRevision
     from mediparse.domain.input_note import InputNote
+    from mediparse.domain.tuning import ParamValue
 
 PATIENTS: Final = 48
 
@@ -103,17 +107,19 @@ class _Outputs:
         ]
 
 
-def _call(
+def _call(  # ruff: ignore[too-many-arguments]
     inputs: tuple[Path, Path, Path],
     outputs: _Outputs,
     lexicon: Path,
     revision: Callable[[], SourceRevision],
     *,
     candidates: Path = REPOSITORY_DIAGNOSIS_CANDIDATES,
+    tuning: Path | None = None,
 ) -> ExitCode:
     notes, config, split = inputs
     return model_training.run(
         environ={},
+        tuning=tuning,
         cohort=notes,
         config=config,
         candidates=candidates,
@@ -174,6 +180,14 @@ def test_writes_model_and_predictions(tmp_path: Path) -> None:
         == hashlib.sha256(outputs.predictions.read_bytes()).hexdigest()
     )
     assert written.config_sha256 == file_sha256(config)
+    assert written.tuning_manifest_sha256 is None
+    assert (
+        written.parameters
+        == json.loads(config.read_text(encoding="utf-8"))["parameters"]
+    )
+    assert written.threshold == SkopsModelFile(outputs.model).load().threshold
+    assert written.threshold_folds == 3  # ruff: ignore[magic-value-comparison]
+    assert written.converged is True
     assert written.seed == 0
     assert written.split_seed == 0
     assert written.split_folds == 2  # ruff: ignore[magic-value-comparison]
@@ -290,10 +304,14 @@ def _manifest_bytes(root: Path, seed: int, name: str) -> bytes:
     return _successful_run(root, seed, name).manifest.read_bytes()
 
 
-def test_manifest_is_byte_identical_for_same_inputs(tmp_path: Path) -> None:
-    """Dva běhy se stejnými vstupy dají bajtově totožný manifest."""
-    assert _manifest_bytes(tmp_path, 0, "first") == _manifest_bytes(
-        tmp_path, 0, "second"
+def test_repeated_runs_preserve_manifest_and_prediction_scores(tmp_path: Path) -> None:
+    """Dva běhy se stejnými vstupy zachovají manifest i všechny labely a skóre."""
+    first = _successful_run(tmp_path, 0, "first")
+    second = _successful_run(tmp_path, 0, "second")
+    assert first.manifest.read_bytes() == second.manifest.read_bytes()
+    assert (
+        ParquetPredictionTable(first.predictions).read()
+        == ParquetPredictionTable(second.predictions).read()
     )
 
 
@@ -696,6 +714,7 @@ def test_nvml_error_refuses_training_before_fit(
     monkeypatch.setattr(model_training.LinearSvmTrainer, "fit", fit)
 
     code = model_training.run(
+        tuning=None,
         environ={},
         cohort=notes,
         config=config,
@@ -726,6 +745,7 @@ def test_training_main_forwards_cuda_environment(
     monkeypatch.setattr(model_training, "run", execute)
     monkeypatch.setattr(model_training, "configure_logging", Mock())
     code = model_training.main(
+        tuning=tmp_path / "tuning.json",
         cohort=tmp_path / "notes.parquet",
         config=tmp_path / "config.json",
         candidates=tmp_path / "candidates.json",
@@ -741,6 +761,7 @@ def test_training_main_forwards_cuda_environment(
     assert execute.call_args.kwargs["cuda_visible_devices"] == "GPU-synthetic"
     assert execute.call_args.kwargs["cuda_device_order"] == "PCI_BUS_ID"
     assert execute.call_args.kwargs["costs"] == tmp_path / "costs.json"
+    assert execute.call_args.kwargs["tuning"] == tmp_path / "tuning.json"
 
 
 @pytest.mark.parametrize("phase", ["input", "normalization"])
@@ -770,3 +791,110 @@ def test_invalid_preparation_is_refused_before_gpu_monitor(
     assert code is ExitCode.REFUSED
     assert outputs.existing() == []
     monitor.assert_not_called()
+
+
+_TUNED_PARAMETERS: dict[str, ParamValue] = {
+    "analyzer": "word",
+    "ngram_max": 2,
+    "c": 0.05,
+    "class_weight": "balanced",
+    "min_df": 2,
+    "max_df": 0.9,
+    "sublinear_tf": False,
+}
+
+
+def _write_tuning(
+    inputs: tuple[Path, Path, Path], path: Path, **changes: object
+) -> Path:
+    notes, _, split = inputs
+    write_model(
+        path,
+        tuning_manifest(
+            dataset_sha256=file_sha256(notes),
+            split_sha256=ParquetSplitTable(split).read().split.sha256(),
+            best=_TUNED_PARAMETERS,
+            **changes,
+        ),
+    )
+    return path
+
+
+def test_training_uses_tuned_parameters_threshold_and_provenance(
+    tmp_path: Path,
+) -> None:
+    """Načtený model nese přesné parametry manifestu a trénink jeho otisk i práh."""
+    inputs = _inputs(tmp_path, parameters=None)
+    tuning = _write_tuning(inputs, tmp_path / "tuning.json")
+    outputs = _Outputs.under(tmp_path / "out")
+
+    assert (
+        _call(
+            inputs, outputs, REPOSITORY_SECTION_HEADERS, fixed_revision, tuning=tuning
+        )
+        is ExitCode.OK
+    )
+
+    model = SkopsModelFile(outputs.model).load()
+    vectorizer = model.model.estimator_["tfidf"]
+    svm = model.model.estimator_["svm"]
+    assert vectorizer.analyzer == "word"
+    assert vectorizer.ngram_range == (1, 2)
+    assert vectorizer.min_df == 2  # ruff: ignore[magic-value-comparison]
+    assert vectorizer.max_df == 0.9  # ruff: ignore[float-equality-comparison, magic-value-comparison]
+    assert vectorizer.sublinear_tf is False
+    assert svm.C == 0.05  # ruff: ignore[float-equality-comparison, magic-value-comparison]
+    assert svm.class_weight == "balanced"
+    manifest = _manifest(outputs)
+    assert manifest.tuning_manifest_sha256 == file_sha256(tuning)
+    assert manifest.parameters == _TUNED_PARAMETERS
+    assert manifest.threshold == model.threshold
+    assert manifest.converged == model.converged
+    assert load_tuning_manifest(tuning).best == _TUNED_PARAMETERS
+
+
+@pytest.mark.parametrize("both", [True, False])
+def test_training_requires_exactly_one_parameter_source(
+    tmp_path: Path,
+    caplog: pytest.LogCaptureFixture,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    both: bool,
+) -> None:
+    """Chybějící i dvojitý zdroj parametrů odmítne běh před tréninkem."""
+    inputs = _inputs(tmp_path, **({} if both else {"parameters": None}))
+    tuning = _write_tuning(inputs, tmp_path / "tuning.json") if both else None
+    outputs = _Outputs.under(tmp_path / "out")
+    fit = Mock(side_effect=AssertionError("Nejednoznačný zdroj nesmí trénovat."))
+    monkeypatch.setattr(model_training.LinearSvmTrainer, "fit", fit)
+
+    assert (
+        _call(
+            inputs, outputs, REPOSITORY_SECTION_HEADERS, fixed_revision, tuning=tuning
+        )
+        is ExitCode.REFUSED
+    )
+    assert "právě jeden" in caplog.text
+    assert outputs.existing() == []
+    fit.assert_not_called()
+
+
+def test_training_refuses_tuning_from_other_fold(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Config foldu 1 nesmí použít manifest foldu 0 ani začít fit."""
+    inputs = _inputs(tmp_path, parameters=None, fold=1)
+    tuning = _write_tuning(inputs, tmp_path / "tuning.json", fold=0)
+    outputs = _Outputs.under(tmp_path / "out")
+    fit = Mock(side_effect=AssertionError("Cizí fold nesmí trénovat."))
+    monkeypatch.setattr(model_training.LinearSvmTrainer, "fit", fit)
+
+    assert (
+        _call(
+            inputs, outputs, REPOSITORY_SECTION_HEADERS, fixed_revision, tuning=tuning
+        )
+        is ExitCode.REFUSED
+    )
+    assert "fold" in caplog.text
+    assert outputs.existing() == []
+    fit.assert_not_called()

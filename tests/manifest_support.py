@@ -3,6 +3,7 @@
 from mediparse.domain.environment import Environment, Hardware
 from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import RunManifest
+from tests.model_support import FIXED_SVM_PARAMS
 from tests.support import REVISION
 
 
@@ -24,6 +25,11 @@ def training_manifest(
         dataset_sha256=dataset_sha256,
         split_sha256=split_sha256,
         config_sha256="d" * 64,
+        tuning_manifest_sha256=None,
+        parameters=FIXED_SVM_PARAMS,
+        threshold=0.25,
+        threshold_folds=3,
+        converged=True,
         seed=0,
         split_seed=0,
         split_folds=2,

@@ -15,7 +15,7 @@ from mediparse.application.model_training import ModelTraining
 from mediparse.domain.costs import TrainingCosts
 from mediparse.domain.environment import Environment
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.run_manifest import RunManifest
+from mediparse.domain.run_manifest import RunManifest, ensure_tuning_lineage
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_input_table import (
@@ -29,6 +29,7 @@ from mediparse.infrastructure.machine_hardware import machine_hardware
 from mediparse.infrastructure.nvml_gpu import gpu_monitor
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
+from mediparse.infrastructure.run_manifest_file import load_tuning_manifest
 from mediparse.infrastructure.sklearn_classifier import (
     ESTIMATOR,
     LinearSvmTrainer,
@@ -42,6 +43,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable, Mapping
 
     from mediparse.domain.environment import SourceRevision
+    from mediparse.domain.run_manifest import TuningManifest
     from mediparse.domain.training import TrainingConfig
     from mediparse.domain.tuning import ParamValue
 
@@ -59,19 +61,23 @@ PACKAGES: Final = (
 )
 
 
-def _parameters(config: TrainingConfig) -> dict[str, ParamValue]:
-    """Vybere pevné parametry pro trénink bez ladění.
+def _parameters(
+    config: TrainingConfig, tuning: TuningManifest | None
+) -> dict[str, ParamValue]:
+    """Vybere právě jeden zdroj parametrů tréninku.
 
     Returns:
-        Parametry explicitně přítomné v configu.
+        Nejlepší parametry manifestu, nebo pevné parametry configu.
 
     Raises:
-        InvalidInputError: Config neobsahuje parametry.
+        InvalidInputError: Parametry chybějí, nebo jsou přítomné oba zdroje.
     """
-    if config.parameters is None:
-        msg = "Trénink vyžaduje parametry SVM."
-        raise InvalidInputError(msg)
-    return config.parameters
+    if tuning is None and config.parameters is not None:
+        return config.parameters
+    if tuning is not None and config.parameters is None:
+        return tuning.best
+    msg = "Trénink vyžaduje právě jeden zdroj parametrů: tuning nebo config.parameters."
+    raise InvalidInputError(msg)
 
 
 def main(
@@ -81,6 +87,7 @@ def main(
     candidates: Path,
     lexicon: Path,
     split: Path,
+    tuning: Path | None,
     model: Path,
     predictions: Path,
     manifest: Path,
@@ -100,6 +107,7 @@ def main(
         candidates=candidates,
         lexicon=lexicon,
         split=split,
+        tuning=tuning,
         model=model,
         predictions=predictions,
         manifest=manifest,
@@ -119,6 +127,7 @@ def run(
     candidates: Path,
     lexicon: Path,
     split: Path,
+    tuning: Path | None,
     model: Path,
     predictions: Path,
     manifest: Path,
@@ -133,19 +142,34 @@ def run(
         OK po uložení modelu, predikcí, manifestu a nákladů; REFUSED pro chybějící nebo
         neplatnou tabulku, config, kandidáty (při zapnuté normalizaci), lexikon a soubor splitu,
         pro nečitelnou revizi zdroje, nezjistitelný HW stroje, selhání měření GPU
-        a pro neoznačená data v prostředí, které nesmí číst MIMIC.
+        a pro neoznačená data v prostředí, které nesmí číst MIMIC. Odmítne také chybějící
+        či dvojitý zdroj parametrů a manifest ladění z jiného tréninku.
     """
     check_inputs_access(environ, (cohort, split))
     training = load_training_config(config)
-    parameters = _parameters(training)
+    tuned = load_tuning_manifest(tuning) if tuning is not None else None
+    parameters = _parameters(training, tuned)
     source = revision()
     table, strip = model_input_table(
         cohort=cohort, model_input=training.input, lexicon=lexicon
     )
     normalization = text_normalization(candidates, training.input)
+    dataset_sha256 = file_sha256(cohort)
+    shared_split = ParquetSplitTable(split)
+    if tuned is not None:
+        ensure_tuning_lineage(
+            tuned,
+            row_id=training.row_id,
+            fold=training.fold,
+            dataset_sha256=dataset_sha256,
+            split_sha256=shared_split.read().split.sha256(),
+            diagnostic_strip=strip,
+            text_preprocessing=training.input.text_preprocessing,
+            text_normalization=normalization,
+        )
     step = ModelTraining(
         table=table,
-        split=ParquetSplitTable(split),
+        split=shared_split,
         trainer=LinearSvmTrainer(
             parameters,
             training.seed,
@@ -162,9 +186,14 @@ def run(
         manifest,
         RunManifest(
             row_id=training.row_id,
-            dataset_sha256=file_sha256(cohort),
+            dataset_sha256=dataset_sha256,
             predictions_sha256=file_sha256(predictions),
             config_sha256=file_sha256(config),
+            tuning_manifest_sha256=file_sha256(tuning) if tuning is not None else None,
+            parameters=parameters,
+            threshold=report.threshold,
+            threshold_folds=training.threshold_folds,
+            converged=report.converged,
             seed=training.seed,
             split_seed=report.split_config.seed,
             split_folds=report.split_config.folds,

@@ -94,6 +94,7 @@ def _train(
     shutil.copy(REPOSITORY_DIAGNOSIS_CANDIDATES, candidates)
     trained = Trained(notes, config, root / "model.skops", root / "predictions.parquet")
     code = model_training.run(
+        tuning=None,
         environ={},
         cohort=notes,
         config=config,
