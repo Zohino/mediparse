@@ -811,10 +811,14 @@ def _write_tuning(
     write_model(
         path,
         tuning_manifest(
-            dataset_sha256=file_sha256(notes),
-            split_sha256=ParquetSplitTable(split).read().split.sha256(),
             best=_TUNED_PARAMETERS,
-            **changes,
+            **(
+                {
+                    "dataset_sha256": file_sha256(notes),
+                    "split_sha256": ParquetSplitTable(split).read().split.sha256(),
+                }
+                | changes
+            ),
         ),
     )
     return path
@@ -879,14 +883,33 @@ def test_training_requires_exactly_one_parameter_source(
     fit.assert_not_called()
 
 
-def test_training_refuses_tuning_from_other_fold(
-    tmp_path: Path, caplog: pytest.LogCaptureFixture, monkeypatch: pytest.MonkeyPatch
+@pytest.mark.parametrize(
+    ("field", "other"),
+    [
+        ("fold", 1),
+        ("dataset_sha256", "f" * 64),
+        ("split_sha256", "f" * 64),
+        ("diagnostic_strip", {"sections": ["diagnosis"], "lexicon_sha256": "f" * 64}),
+        ("text_preprocessing", "normalized"),
+    ],
+)
+def test_training_refuses_tuning_with_different_lineage(
+    tmp_path: Path,
+    caplog: pytest.LogCaptureFixture,
+    monkeypatch: pytest.MonkeyPatch,
+    field: str,
+    other: object,
 ) -> None:
-    """Config foldu 1 nesmí použít manifest foldu 0 ani začít fit."""
-    inputs = _inputs(tmp_path, parameters=None, fold=1)
-    tuning = _write_tuning(inputs, tmp_path / "tuning.json", fold=0)
+    """Každý počítaný vstup se porovná s tréninkem a neshoda zabrání fitu."""
+    inputs = _inputs(tmp_path, parameters=None)
+    changes = {field: other}
+    mismatched = field
+    if field == "text_preprocessing":
+        changes["text_normalization"] = {"acronyms": {}, "variants": {}}
+        mismatched += ", text_normalization"
+    tuning = _write_tuning(inputs, tmp_path / "tuning.json", **changes)
     outputs = _Outputs.under(tmp_path / "out")
-    fit = Mock(side_effect=AssertionError("Cizí fold nesmí trénovat."))
+    fit = Mock(side_effect=AssertionError("Cizí původ nesmí trénovat."))
     monkeypatch.setattr(model_training.LinearSvmTrainer, "fit", fit)
 
     assert (
@@ -895,6 +918,6 @@ def test_training_refuses_tuning_from_other_fold(
         )
         is ExitCode.REFUSED
     )
-    assert "fold" in caplog.text
+    assert f"Manifest ladění neodpovídá tréninku: {mismatched}." in caplog.messages
     assert outputs.existing() == []
     fit.assert_not_called()
