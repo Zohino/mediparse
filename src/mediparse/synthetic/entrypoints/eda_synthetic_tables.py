@@ -79,8 +79,7 @@ def run(argv: Sequence[str]) -> ExitCode:
     return ExitCode.OK
 
 
-# Vstupy kompozice zůstávají explicitní, bez konfiguračního typu jen pro předávání polí.
-def eda_tables(  # ruff: ignore[too-many-arguments]
+def eda_tables(
     plans: Sequence[NotePlan],
     notes: Sequence[InputNote],
     codes: DiagnosisCodes,

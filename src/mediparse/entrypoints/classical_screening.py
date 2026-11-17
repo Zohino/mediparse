@@ -99,7 +99,7 @@ def main() -> ExitCode:
 
 
 @refusing_invalid_input
-def run(  # ruff: ignore[too-many-arguments] - composition root předává explicitní cesty a zdroj revize
+def run(
     *,
     environ: Mapping[str, str],
     cohort: Path,

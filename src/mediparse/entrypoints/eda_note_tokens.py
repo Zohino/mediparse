@@ -39,8 +39,8 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-# Explicitní cesty jsou veřejným kontraktem nástroje.
-def run(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
+def run(
+    *,
     parquet: Path,
     translation: Path,
     english: Path,
@@ -128,5 +128,12 @@ def _run_cli() -> ExitCode:
     for name in ("parquet", "translation", "english", "czech", "out"):
         parser.add_argument(f"--{name}", type=Path, required=True)
     args = parser.parse_args()
-    run(args.parquet, args.translation, args.english, args.czech, args.out, os.environ)
+    run(
+        parquet=args.parquet,
+        translation=args.translation,
+        english=args.english,
+        czech=args.czech,
+        out=args.out,
+        environ=os.environ,
+    )
     return ExitCode.OK

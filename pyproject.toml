@@ -396,31 +396,8 @@ ignore = [
     "hardcoded-password-string",              # heslo lokálního testovacího serveru, ne přihlášení k PhysioNetu
 ]
 
-"src/mediparse/entrypoints/cohort.py" = [
-    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
-]
-
-"src/mediparse/synthetic/entrypoints/synthetic_mimic.py" = [
-    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
-]
-
-"src/mediparse/entrypoints/model_training.py" = [
-    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
-]
-"src/mediparse/entrypoints/model_evaluation.py" = [
-    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
-]
-
-"src/mediparse/entrypoints/model_tuning.py" = [
-    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
-]
-
-"src/mediparse/entrypoints/model_inference.py" = [
-    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
-]
-
-"src/mediparse/synthetic/entrypoints/smoketest_summary.py" = [
-    "too-many-arguments", # signatura kroku Snakemake nese všechny vstupy a výstupy pravidla
+"src/mediparse/**/entrypoints/*.py" = [
+    "too-many-arguments", # composition root předává explicitní vstupy a výstupy kroku; typ jen pro předání polí by nic nepojmenoval
 ]
 
 [tool.ruff.lint.flake8-type-checking]
