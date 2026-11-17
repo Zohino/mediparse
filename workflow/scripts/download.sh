@@ -26,8 +26,8 @@ tries=${MEDIPARSE_DOWNLOAD_TRIES:-5}
 
 # Mrtvý server musí vyčerpat pokusy všech spojení dřív, než aria2c skončí
 # plánovaně, jinak by se neúspěšný pokus nikdy nezapočítal.
-((period > tries * (timeout + retry_wait))) \
-    || fail "MEDIPARSE_DOWNLOAD_PERIOD ($period s) musí být delší než $tries × (timeout + čekání)" 2
+((tries > 0 && period > tries * (timeout + retry_wait))) \
+    || fail "MEDIPARSE_DOWNLOAD_TRIES ($tries) musí být kladné a MEDIPARSE_DOWNLOAD_PERIOD ($period s) delší než $tries × (timeout + čekání)" 2
 
 [[ -r $netrc ]] || fail "chybí $netrc s přihlašovacími údaji" 1
 [[ -z $(find -L "$netrc" -perm /077) ]] || fail "$netrc smí číst jen vlastník: chmod 600 $netrc" 1

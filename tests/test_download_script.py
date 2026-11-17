@@ -430,6 +430,22 @@ def test_restart_period_shorter_than_exhausted_tries_is_refused(
     assert physionet.ranges == []
 
 
+def test_zero_connection_tries_is_refused(
+    physionet: FakePhysioNet, netrc: Path, tmp_path: Path
+) -> None:
+    """Nulový počet pokusů by dovolil mrtvému serveru opakování bez omezení."""
+    done = _download(
+        netrc,
+        physionet.url("data"),
+        tmp_path / "table.csv",
+        MEDIPARSE_DOWNLOAD_TRIES="0",
+    )
+
+    assert done.returncode != 0
+    assert "MEDIPARSE_DOWNLOAD_TRIES" in done.stderr
+    assert physionet.ranges == []
+
+
 def test_dead_server_leaves_no_output_but_keeps_partial_state(
     physionet: FakePhysioNet, netrc: Path, tmp_path: Path
 ) -> None:
