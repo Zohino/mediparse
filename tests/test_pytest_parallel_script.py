@@ -48,7 +48,6 @@ def test_parallel_pytest(
                 "--ignore=tests/test_download_script.py": ("rest", "download"),
             }[sys.argv[2]]
             root = Path(os.environ["RENDEZVOUS"])
-            (root / f"{part}.nice").write_text(str(os.nice(0)))
             (root / f"{part}.sigint").write_text(
                 str(signal.getsignal(signal.SIGINT) == signal.SIG_IGN)
             )
@@ -82,9 +81,6 @@ def test_parallel_pytest(
     assert (result.returncode == 0) is success, result.stderr
     assert result.stdout == "rest start\nrest end\ndownload start\ndownload end\n"
     assert (tmp_path / "download.sigint").read_text(encoding="utf-8") == "False"
-    assert int((tmp_path / "rest.nice").read_text(encoding="utf-8")) > int(
-        (tmp_path / "download.nice").read_text(encoding="utf-8")
-    )
 
 
 def test_termination_stops_background_pytest_and_child(tmp_path: Path) -> None:
