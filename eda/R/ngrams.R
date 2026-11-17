@@ -92,7 +92,7 @@ ngram_counts <- function(con, stopwords, sections = NULL, floor_fn = publishable
     add = TRUE
   )
   denominators <- ngram_denominators(con, sections)
-  total <- DBI::dbGetQuery(con, sprintf("SELECT count(DISTINCT note_id) AS n FROM %s", SECTIONS_TABLE))$n
+  total <- ngram_denominators(con, NULL)$jmenovatel
   denominators$prah <- rep(as.numeric(floor_fn(total)), nrow(denominators))
   limits <- write_temp(con, FLOOR_TABLE, denominators)
   per_size <- lapply(NGRAM_SIZES, function(size) {
