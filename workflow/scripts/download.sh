@@ -22,7 +22,7 @@ timeout=${MEDIPARSE_DOWNLOAD_TIMEOUT:-60}
 max_attempts=${MEDIPARSE_DOWNLOAD_ATTEMPTS:-50}
 retry_wait=${MEDIPARSE_DOWNLOAD_RETRY_WAIT:-10}
 period=${MEDIPARSE_DOWNLOAD_PERIOD:-1200}
-tries=5
+tries=${MEDIPARSE_DOWNLOAD_TRIES:-5}
 
 # Mrtvý server musí vyčerpat pokusy všech spojení dřív, než aria2c skončí
 # plánovaně, jinak by se neúspěšný pokus nikdy nezapočítal.
