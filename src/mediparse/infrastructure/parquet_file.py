@@ -79,11 +79,19 @@ def write_table(
         columns: Hodnoty sloupců podle jména.
         schema: Schéma souboru, podle kterého se hodnoty převedou.
     """
+    write_arrow(path, pa.Table.from_pydict(dict(columns), schema=schema))
+
+
+def write_arrow(path: Path, table: pa.Table) -> None:
+    """Zapíše tabulku s jednotnou kompresí a založí nadřazený adresář."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    pq.write_table(
-        pa.Table.from_pydict(dict(columns), schema=schema),
-        path,
-        compression=COMPRESSION,
+    pq.write_table(table, path, compression=COMPRESSION)
+
+
+def concat_files(target: Path, sources: Sequence[Path], schema: pa.Schema) -> None:
+    """Složí díly se shodným schématem do jediné tabulky v pořadí vstupů."""
+    write_arrow(
+        target, pa.concat_tables([read_table(source, schema) for source in sources])
     )
 
 

@@ -2,18 +2,26 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
 from typing import TYPE_CHECKING
 
 import pyarrow as pa
 import pyarrow.parquet as pq
 import pytest
 
-from mediparse.domain.classical_screening import ClassifierFamily, ScreeningResult
+from mediparse.domain.classical_screening import (
+    ClassifierFamily,
+    ScreeningResult,
+    ScreeningUnit,
+)
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import BinaryMetrics, Classification
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.infrastructure.parquet_file import write_table
 from mediparse.infrastructure.screening_table import (
     PREDICTIONS_SCHEMA,
     SCHEMA,
+    ParquetScreeningCheckpoint,
     ParquetScreeningPredictions,
     ParquetScreeningTable,
 )
@@ -198,3 +206,137 @@ def test_predictions_preserve_schema_cell_order_and_note_order(tmp_path: Path) -
             "score": 0.7,
         },
     ]
+
+
+@pytest.fixture
+def checkpoint(tmp_path: Path) -> ParquetScreeningCheckpoint:
+    """Sestaví checkpoint výhradně nad syntetickými cestami.
+
+    Returns:
+        Adaptér se samostatnými výstupy.
+    """
+    return ParquetScreeningCheckpoint(
+        tmp_path / "checkpoint",
+        "synthetic-key",
+        tmp_path / "results.parquet",
+        tmp_path / "predictions.parquet",
+    )
+
+
+def _unit_rows(fold: int) -> list[ScreeningResult]:
+    return [
+        ScreeningResult(
+            fold=fold,
+            vectorizer="word",
+            family=ClassifierFamily.LOGREG,
+            diagnosis=diagnosis,
+            note_ids=("synthetic-a",),
+            labels=(True,),
+            classifications=(Classification(predicted=True, score=0.75),),
+            threshold=0.5,
+            converged=True,
+            metrics=BinaryMetrics(1.0, 1.0, 1.0, 1.0, 1.0, 1.0),
+        )
+        for diagnosis in Diagnosis
+    ]
+
+
+def test_finish_concatenates_parts_in_write_order_and_removes_directory(
+    checkpoint: ParquetScreeningCheckpoint,
+) -> None:
+    """Dvě jednotky zachovají deset buněk i predikcí v pořadí zápisu."""
+    checkpoint.write(_unit_rows(1))
+    checkpoint.write(_unit_rows(0))
+    checkpoint.finish()
+    for path in (checkpoint.results, checkpoint.predictions):
+        table = pq.read_table(path)
+        assert table.num_rows == 10
+        assert table["fold"].to_pylist() == [1] * 5 + [0] * 5
+    assert not checkpoint.directory.exists()
+
+
+def test_completed_reads_units_of_written_parts(
+    checkpoint: ParquetScreeningCheckpoint,
+) -> None:
+    """Čtení nevytváří adresář a nová instance obnoví obě jednotky."""
+    assert checkpoint.completed() == frozenset()
+    assert not checkpoint.directory.exists()
+    checkpoint.write(_unit_rows(1))
+    checkpoint.write(_unit_rows(0))
+    assert replace(checkpoint).completed() == frozenset(
+        ScreeningUnit(fold, "word", ClassifierFamily.LOGREG) for fold in (1, 0)
+    )
+
+
+@pytest.mark.parametrize("damage", ["key", "missing-key", "gap", "predictions"])
+def test_checkpoint_of_other_run_is_refused_untouched(
+    checkpoint: ParquetScreeningCheckpoint,
+    damage: str,
+) -> None:
+    """Cizí klíč a neúplná řada se odmítnou bez změny bajtů."""
+    checkpoint.write(_unit_rows(0))
+    checkpoint.write(_unit_rows(1))
+    if damage == "key":
+        (checkpoint.directory / "key.json").write_text('{"key":"other"}')
+    else:
+        name = {
+            "missing-key": "key.json",
+            "gap": "0000.results.parquet",
+            "predictions": "0000.predictions.parquet",
+        }[damage]
+        (checkpoint.directory / name).unlink()
+    before = {p.name: p.read_bytes() for p in checkpoint.directory.iterdir()}
+    with pytest.raises(InvalidInputError, match=str(checkpoint.directory)):
+        checkpoint.completed()
+    assert {p.name: p.read_bytes() for p in checkpoint.directory.iterdir()} == before
+
+
+def test_finish_with_foreign_file_refuses_before_outputs(
+    checkpoint: ParquetScreeningCheckpoint,
+) -> None:
+    """Cizí soubor odmítne dokončení před jakýmkoli finálním zápisem."""
+    checkpoint.write(_unit_rows(0))
+    (checkpoint.directory / "foreign").write_bytes(b"foreign")
+    before = {p.name: p.read_bytes() for p in checkpoint.directory.iterdir()}
+    with pytest.raises(InvalidInputError):
+        checkpoint.finish()
+    assert not checkpoint.results.exists()
+    assert not checkpoint.predictions.exists()
+    assert {p.name: p.read_bytes() for p in checkpoint.directory.iterdir()} == before
+
+
+def test_predictions_part_without_results_is_rewritten(
+    checkpoint: ParquetScreeningCheckpoint,
+) -> None:
+    """Predikce bez značky dokončení se přepíší další jednotkou."""
+    checkpoint.write(_unit_rows(0))
+    (checkpoint.directory / "0000.results.parquet").unlink()
+    assert checkpoint.completed() == frozenset()
+    checkpoint.write(_unit_rows(1))
+    checkpoint.finish()
+    for path in (checkpoint.results, checkpoint.predictions):
+        assert pq.read_table(path)["fold"].to_pylist() == [1] * 5
+
+
+def test_interrupted_finish_refuses_resume(
+    checkpoint: ParquetScreeningCheckpoint,
+) -> None:
+    """Úklid přerušený po odstranění klíče nesmí obnovit neúplný běh."""
+    checkpoint.write(_unit_rows(0))
+    checkpoint.write(_unit_rows(1))
+    (checkpoint.directory / "key.json").unlink()
+    with pytest.raises(InvalidInputError):
+        checkpoint.completed()
+
+
+def test_unknown_family_in_part_is_refused(
+    checkpoint: ParquetScreeningCheckpoint,
+) -> None:
+    """Neznámá rodina v dílu je doménová chyba."""
+    checkpoint.write(_unit_rows(0))
+    path = checkpoint.directory / "0000.results.parquet"
+    columns = pq.read_table(path).to_pydict()
+    columns["family"] = ["nope"] * 5
+    write_table(path, columns, SCHEMA)
+    with pytest.raises(InvalidInputError):
+        checkpoint.completed()
