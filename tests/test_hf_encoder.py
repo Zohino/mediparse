@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+from unittest.mock import Mock
+
 import numpy as np
 import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.infrastructure import hf_encoder
 from mediparse.infrastructure.hf_encoder import (
     HfMeanEncoder,
     load_encoder,
@@ -84,8 +87,6 @@ def test_load_validates_window_boundaries(
     pytest.importorskip("torch")
     from transformers import AutoModel  # ruff: ignore[import-outside-top-level]
 
-    from mediparse.infrastructure import hf_encoder  # ruff: ignore[import-outside-top-level]
-
     model, tokenizer = encoder_parts()
     monkeypatch.setattr(
         "huggingface_hub.snapshot_download",
@@ -107,3 +108,28 @@ def test_cuda_unavailable_is_explicit(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(torch.cuda, "is_available", lambda: False)
     with pytest.raises(InvalidInputError, match="device"):
         load_encoder(SPEC.model_copy(update={"device": "cuda", "dtype": "bfloat16"}))
+
+
+def test_load_preserves_revision_local_snapshot_and_dtype(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Model a tokenizér sdílejí připnutý snapshot a explicitní numerický režim."""
+    torch = pytest.importorskip("torch")
+    from transformers import AutoModel  # ruff: ignore[import-outside-top-level]
+
+    model, tokenizer = encoder_parts()
+    snapshot = Mock(return_value="/synthetic-model")
+    model_loader = Mock(return_value=model)
+    tokenizer_loader = Mock(return_value=tokenizer)
+    monkeypatch.setattr("huggingface_hub.snapshot_download", snapshot)
+    monkeypatch.setattr(AutoModel, "from_pretrained", model_loader)
+    monkeypatch.setattr(hf_encoder, "load_tokenizer", tokenizer_loader)
+    spec = SPEC.model_copy(update={"window": 64, "dtype": "bfloat16"})
+    load_encoder(spec)
+    snapshot.assert_called_once()
+    assert snapshot.call_args.args == (spec.model,)
+    assert snapshot.call_args.kwargs["revision"] == spec.revision
+    model_loader.assert_called_once_with(
+        "/synthetic-model", dtype=torch.bfloat16, attn_implementation="sdpa"
+    )
+    tokenizer_loader.assert_called_once_with("/synthetic-model", spec.revision)
