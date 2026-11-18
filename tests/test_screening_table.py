@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import replace
-from typing import TYPE_CHECKING
+from pathlib import Path
 
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -25,9 +25,6 @@ from mediparse.infrastructure.screening_table import (
     ParquetScreeningPredictions,
     ParquetScreeningTable,
 )
-
-if TYPE_CHECKING:
-    from pathlib import Path
 
 
 @pytest.mark.parametrize("empty_field", ["note_ids", "labels", "classifications"])
@@ -329,11 +326,29 @@ def test_predictions_part_without_results_is_rewritten(
 
 def test_interrupted_finish_refuses_resume(
     checkpoint: ParquetScreeningCheckpoint,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Úklid přerušený po odstranění klíče nesmí obnovit neúplný běh."""
+    """Chyba druhého odstranění ponechá díly bez klíče a znemožní obnovu."""
     checkpoint.write(_unit_rows(0))
     checkpoint.write(_unit_rows(1))
-    (checkpoint.directory / "key.json").unlink()
+    parts = {p.name: p.read_bytes() for p in checkpoint.directory.glob("*.parquet")}
+    original = Path.unlink
+    calls = 0
+
+    def interrupted(path: Path, *, missing_ok: bool = False) -> None:
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            raise OSError
+        original(path, missing_ok=missing_ok)
+
+    monkeypatch.setattr(Path, "unlink", interrupted)
+    with pytest.raises(InvalidInputError, match="OSError"):
+        checkpoint.finish()
+    assert not (checkpoint.directory / "key.json").exists()
+    assert {
+        p.name: p.read_bytes() for p in checkpoint.directory.glob("*.parquet")
+    } == parts
     with pytest.raises(InvalidInputError):
         checkpoint.completed()
 
