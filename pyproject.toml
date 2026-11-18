@@ -422,6 +422,11 @@ include = ["translation/**"]
 [tool.ty.overrides.analysis]
 allowed-unresolved-imports = ["torch", "transformers", "vllm", "vllm.**"]
 
+[[tool.ty.overrides]]
+include = ["src/mediparse/infrastructure/hf_encoder.py", "tests/hf_encoder_support.py", "tests/test_hf_encoder.py"]
+[tool.ty.overrides.analysis]
+allowed-unresolved-imports = ["torch"]
+
 [tool.pixi.workspace]
 channels = ["conda-forge"]
 platforms = ["linux-64"]
@@ -440,6 +445,12 @@ test = { features = ["test", "cpu"], solve-group = "main" }
 translate = { features = ["translate"], no-default-feature = true, solve-group = "translate" }
 eda = { features = ["eda"], solve-group = "main" }
 gpu = { features = ["dev", "gpu"], solve-group = "gpu" }
+
+[tool.pixi.feature.cpu.pypi-dependencies]
+torch = { version = "==2.14.1", index = "https://download.pytorch.org/whl/cpu" }
+
+[tool.pixi.feature.gpu.pypi-dependencies]
+torch = { version = "==2.14.1", index = "https://download.pytorch.org/whl/cu130" }
 
 [tool.pixi.feature.translate.dependencies]
 python = "3.13.*"
@@ -504,14 +515,3 @@ verify-mimic = { cmd = "bash scripts/verify-mimic.sh \"{{ dir }}\"", args = [
 coverage-changed = { cmd = "bash scripts/coverage-changed.sh \"{{ base }}\"", args = [
     { arg = "base", default = "origin/main" },
 ], description = "Nepokryté řádky a větve modulů src/, kterých se větev dotkla proti základu; bez prahu, podklad pro review" }
-
-[tool.pixi.feature.cpu.pypi-dependencies]
-torch = { version = "==2.14.1", index = "https://download.pytorch.org/whl/cpu" }
-
-[tool.pixi.feature.gpu.pypi-dependencies]
-torch = { version = "==2.14.1", index = "https://download.pytorch.org/whl/cu130" }
-
-[[tool.ty.overrides]]
-include = ["src/mediparse/infrastructure/hf_encoder.py", "tests/hf_encoder_support.py", "tests/test_hf_encoder.py"]
-[tool.ty.overrides.analysis]
-allowed-unresolved-imports = ["torch"]
