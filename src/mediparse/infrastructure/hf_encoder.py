@@ -151,6 +151,8 @@ def load_encoder(spec: EncoderSpec) -> HfMeanEncoder:
 def _encoder_errors() -> Generator[None]:
     try:
         yield
+    except InvalidInputError:
+        raise
     except (OSError, ValueError, TypeError, RuntimeError) as error:
         msg = f"Encoder nelze načíst nebo použít: {type(error).__name__}."
         raise InvalidInputError(msg) from None
