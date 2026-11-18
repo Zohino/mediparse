@@ -16,6 +16,9 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
 
+PACKAGE: Final = Path(__file__).parents[1]
+
+
 def code_fingerprint(script: Path, package: Path) -> str:
     """Otiskne uzávěr importů v balíčku, jeho data nebo bajty shellového skriptu.
 
@@ -88,11 +91,8 @@ def _python_sha256(path: Path) -> str:
     return hashlib.sha256(tree.encode("utf-8")).hexdigest()
 
 
-PACKAGE: Final = Path(__file__).parents[1]
-
-
 def code_key(inputs: Sequence[tuple[str, bytes]]) -> str:
-    """Spojí pojmenované vstupy s obsahem balíčku.
+    """Spojí pojmenované vstupy s AST Python souborů celého balíčku.
 
     Returns:
         SHA-256 klíč vstupů a kódu.
@@ -106,7 +106,7 @@ def code_key(inputs: Sequence[tuple[str, bytes]]) -> str:
         return fingerprint([
             *inputs,
             *(
-                (path.relative_to(PACKAGE).as_posix(), path.read_bytes())
+                (path.relative_to(PACKAGE).as_posix(), _python_sha256(path).encode())
                 for path in sorted(PACKAGE.rglob("*.py"))
             ),
         ])

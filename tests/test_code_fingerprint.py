@@ -160,3 +160,24 @@ def test_code_key_refuses_unreadable_source(
         InvalidInputError, match="Kód balíčku pro klíč nelze přečíst: IsADirectoryError"
     ):
         code_key([])
+
+
+@pytest.mark.parametrize(
+    ("source", "changes_key"),
+    [
+        ("# Komentář\n\ndef f( ):\n    return (1)\n", False),
+        ("def f():\n    return 2\n", True),
+    ],
+)
+def test_code_key_tracks_ast_changes(
+    package: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    source: str,
+    *,
+    changes_key: bool,
+) -> None:
+    """Otisk balíčku ignoruje komentáře a formátování, změnu výsledku funkce zachytí."""
+    monkeypatch.setattr("mediparse.infrastructure.code_fingerprint.PACKAGE", package)
+    before = code_key([])
+    (package / "b.py").write_text(source, encoding="utf-8")
+    assert (code_key([]) != before) is changes_key
