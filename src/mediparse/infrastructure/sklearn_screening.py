@@ -151,8 +151,10 @@ class EncoderFeaturizer:
         scaler = StandardScaler()
         # Stejně jako TF-IDF se fituje jednou na vnější fold; vnitřní CV prahu
         # vidí scaler ze svých validací, vnější test do fitu nevstoupí.
-        train_features = scaler.fit_transform(self.embeddings.embed(spec, train))
-        test_features = scaler.transform(self.embeddings.embed(spec, test))
+        # Společná matice a řez umožní načíst model v prvním foldu jen jednou.
+        matrix = self.embeddings.embed(spec, [*train, *test])
+        train_features = scaler.fit_transform(matrix[: len(train)])
+        test_features = scaler.transform(matrix[len(train) :])
         return ScreeningFeatures(train_features, None), ScreeningFeatures(
             test_features, None
         )

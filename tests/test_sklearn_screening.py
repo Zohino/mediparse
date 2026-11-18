@@ -6,7 +6,7 @@ import re
 import warnings
 from random import Random
 from typing import TYPE_CHECKING, Literal, Self, override
-from unittest.mock import Mock
+from unittest.mock import Mock, call
 
 import numpy as np
 import pytest
@@ -525,8 +525,11 @@ def test_screening_lsa_is_prepared_only_for_families_that_need_it(
 def test_encoder_scaler_fits_only_outer_train() -> None:
     """Průměr 1 a populační std 1 z tréninku převedou test 4 na 3."""
     embeddings = Mock()
-    embeddings.embed.side_effect = [np.array([[0.0], [2.0]]), np.array([[4.0]])]
+    embeddings.embed.side_effect = lambda _spec, texts: np.array([
+        [{"a": 0.0, "b": 2.0, "c": 4.0}[text]] for text in texts
+    ])
     train, test = EncoderFeaturizer(embeddings).fit_transform(SPEC, ["a", "b"], ["c"])
+    assert embeddings.embed.call_args_list == [call(SPEC, ["a", "b", "c"])]
     np.testing.assert_array_equal(train.matrix, [[-1.0], [1.0]])
     np.testing.assert_array_equal(test.matrix, [[3.0]])
     assert train.lsa is None
