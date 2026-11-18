@@ -13,6 +13,7 @@ from typing import TYPE_CHECKING, Any, Final
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.environment import SourceRevision
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.entrypoints.model_corpus import ModelCorpusPaths
 from mediparse.infrastructure.data_access_rules import load_data_access_rules
 from mediparse.infrastructure.mimic_tables import TABLES_PATH
 from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
@@ -264,3 +265,17 @@ def mark_synthetic(directory: Path) -> Path:
     """
     write_marker(directory, SyntheticMarker(prefix="t", rows=1))
     return directory
+
+
+def repository_corpus(cohort: Path, split: Path) -> ModelCorpusPaths:
+    """Sestaví cesty korpusu.
+
+    Returns:
+        Cesty s kandidáty a lexikonem z repozitáře.
+    """
+    return ModelCorpusPaths(
+        cohort=cohort,
+        split=split,
+        candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
+        lexicon=REPOSITORY_SECTION_HEADERS,
+    )

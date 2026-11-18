@@ -36,6 +36,7 @@ from tests.support import (
     REPOSITORY_DIAGNOSIS_CANDIDATES,
     REPOSITORY_SECTION_HEADERS,
     fixed_revision,
+    repository_corpus,
 )
 
 if TYPE_CHECKING:
@@ -96,11 +97,8 @@ def _train(
     code = model_training.run(
         paths=model_training.TrainingPaths(
             tuning=None,
-            cohort=notes,
+            corpus=replace(repository_corpus(notes, split), candidates=candidates),
             config=config,
-            candidates=candidates,
-            lexicon=REPOSITORY_SECTION_HEADERS,
-            split=split,
             model=trained.model,
             predictions=trained.predictions,
             manifest=root / "run_manifest.json",

@@ -19,16 +19,17 @@ from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import ScreeningManifest
 from mediparse.entrypoints import classical_screening
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.entrypoints.model_corpus import ModelCorpusPaths
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.split_table import ParquetSplitTable
 from tests.screening_support import DEVELOPMENT, SHARED, notes
 from tests.support import (
-    REPOSITORY_DIAGNOSIS_CANDIDATES,
     REPOSITORY_SECTION_HEADERS,
     REVISION,
     fixed_revision,
     mark_synthetic,
     missing_revision,
+    repository_corpus,
 )
 
 if TYPE_CHECKING:
@@ -91,11 +92,8 @@ def _run(
 ) -> ExitCode:
     return classical_screening.run(
         paths=classical_screening.ScreeningPaths(
-            cohort=inputs.cohort,
-            split=inputs.split,
+            corpus=repository_corpus(inputs.cohort, inputs.split),
             config=inputs.config,
-            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            lexicon=REPOSITORY_SECTION_HEADERS,
             out=root / "classical.parquet",
             predictions=root / "classical_predictions.parquet",
             manifest=root / "classical_manifest.json",
@@ -206,25 +204,6 @@ def test_lsa_components_changes_screening_result_bytes(tmp_path: Path) -> None:
     assert results[0] != results[1]
 
 
-@pytest.mark.parametrize("unmarked", ["cohort", "split"])
-def test_agent_refuses_each_unmarked_input_before_reading(
-    tmp_path: Path, unmarked: str, caplog: pytest.LogCaptureFixture
-) -> None:
-    """Stráž odmítne vstupy před čtením; adresář agregátů, predikcí a manifestu nevznikne."""
-    marked = tmp_path / "marked"
-    mark_synthetic(marked)
-    paths = {
-        name: (tmp_path / "unmarked" if name == unmarked else marked)
-        / f"{name}.parquet"
-        for name in ("cohort", "split")
-    }
-    inputs = _Inputs(paths["cohort"], paths["split"], tmp_path / "missing.json")
-    out = tmp_path / "out"
-    assert _run(inputs, out, environ={"CODEX_THREAD_ID": "test"}) is ExitCode.REFUSED
-    assert "Agent Codex nesmí číst data MIMIC" in caplog.text
-    assert not out.exists()
-
-
 @pytest.mark.parametrize("preprocessing", ["normalized", "dictionary"])
 def test_manifest_preserves_preprocessing_and_strip(
     tmp_path: Path, preprocessing: str
@@ -289,7 +268,16 @@ def test_main_parses_required_paths(
     monkeypatch.setattr(classical_screening, "configure_logging", Mock())
     assert classical_screening.main() is ExitCode.REFUSED
     assert execute.call_args.kwargs["paths"] == classical_screening.ScreeningPaths(
-        **paths
+        corpus=ModelCorpusPaths(
+            cohort=paths["cohort"],
+            split=paths["split"],
+            candidates=paths["candidates"],
+            lexicon=paths["lexicon"],
+        ),
+        config=paths["config"],
+        out=paths["out"],
+        predictions=paths["predictions"],
+        manifest=paths["manifest"],
     )
 
 

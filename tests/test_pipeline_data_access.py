@@ -15,14 +15,17 @@ from typing import TYPE_CHECKING, Final
 import pytest
 
 from mediparse.entrypoints import (
+    classical_screening,
     cohort,
     mimic_parquet,
     model_evaluation,
     model_inference,
     model_training,
+    model_tuning,
     split_materialization,
 )
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure.perf_clock import PerfCounterClock
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
 from mediparse.infrastructure.table_provenance import write_table_provenance
 from tests.support import (
@@ -33,6 +36,7 @@ from tests.support import (
     REPOSITORY_TRAINING_CONFIG,
     fixed_revision,
     mark_synthetic,
+    repository_corpus,
 )
 
 if TYPE_CHECKING:
@@ -80,11 +84,8 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
             model_training.run,
             paths=model_training.TrainingPaths(
                 tuning=None,
-                cohort=notes,
+                corpus=repository_corpus(notes, split),
                 config=REPOSITORY_TRAINING_CONFIG,
-                candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-                lexicon=REPOSITORY_SECTION_HEADERS,
-                split=split,
                 model=model,
                 predictions=predictions,
                 manifest=root / "run_manifest.json",
@@ -93,6 +94,31 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
             revision=fixed_revision,
             cuda_visible_devices="",
             cuda_device_order=None,
+            environ=environ,
+        ),
+        "model_tuning": partial(
+            model_tuning.run,
+            paths=model_tuning.TuningPaths(
+                corpus=repository_corpus(notes, split),
+                config=root / "missing.json",
+                matrix=root / "missing.json",
+                storage=root / "tuning/tuning.sqlite3",
+                manifest=root / "tuning/tuning_manifest.json",
+            ),
+            revision=fixed_revision,
+            clock=PerfCounterClock(),
+            environ=environ,
+        ),
+        "classical_screening": partial(
+            classical_screening.run,
+            paths=classical_screening.ScreeningPaths(
+                corpus=repository_corpus(notes, split),
+                config=root / "missing.json",
+                out=root / "screening/classical.parquet",
+                predictions=root / "screening/classical_predictions.parquet",
+                manifest=root / "screening/classical_manifest.json",
+            ),
+            revision=fixed_revision,
             environ=environ,
         ),
         "model_evaluation": partial(
@@ -152,14 +178,18 @@ def _prepare_sources(_root: Path, inputs: Mapping[str, Path]) -> None:
 @dataclass(frozen=True)
 class _GuardCase:
     inputs: tuple[str, ...]
+    corpus: bool = False
+    native: bool = True
     prepare: Callable[[Path, Mapping[str, Path]], None] | None = None
 
 
 GUARD_CASES: Final = {
-    "mimic_parquet": _GuardCase(("table",), _prepare_inventory),
-    "cohort": _GuardCase(("discharge", "diagnoses"), _prepare_sources),
+    "mimic_parquet": _GuardCase(("table",), prepare=_prepare_inventory),
+    "cohort": _GuardCase(("discharge", "diagnoses"), prepare=_prepare_sources),
     "split_materialization": _GuardCase(("cohort",)),
-    "model_training": _GuardCase(("cohort", "split")),
+    "model_training": _GuardCase(("cohort", "split"), corpus=True),
+    "model_tuning": _GuardCase(("cohort", "split"), corpus=True, native=False),
+    "classical_screening": _GuardCase(("cohort", "split"), corpus=True, native=False),
     "model_evaluation": _GuardCase(("predictions", "cohort", "split")),
     "model_inference": _GuardCase(("cohort", "model", "predictions")),
 }
@@ -179,10 +209,11 @@ def test_entrypoint_refuses_before_opening_input(
     step = _steps(tmp_path, BLOCKED)[entrypoint]
     case = GUARD_CASES[entrypoint]
     paths = step.keywords.get("paths")
+    data_paths = paths.corpus if paths is not None and case.corpus else paths
     inputs = {
         name: tmp_path
         / name
-        / (getattr(paths, name) if paths is not None else step.keywords[name]).name
+        / (getattr(data_paths, name) if paths is not None else step.keywords[name]).name
         for name in case.inputs
     }
     for name, path in inputs.items():
@@ -194,7 +225,10 @@ def test_entrypoint_refuses_before_opening_input(
         case.prepare(tmp_path, inputs)
     before = set(tmp_path.rglob("*"))
 
-    arguments = {"paths": replace(paths, **inputs)} if paths is not None else inputs
+    if paths is not None and case.corpus:
+        arguments = {"paths": replace(paths, corpus=replace(paths.corpus, **inputs))}
+    else:
+        arguments = {"paths": replace(paths, **inputs)} if paths is not None else inputs
     assert step(**arguments) is ExitCode.REFUSED
 
     assert "Agent Codex nesmí číst data MIMIC" in caplog.text
@@ -209,8 +243,8 @@ def test_native_synthetic_pipeline_under_codex(
 ) -> None:
     """Značky dovolí celou cestu smoketestu; odebrání značky artefaktů zastaví split."""
     steps = _steps(tmp_path, BLOCKED)
-    for name in GUARD_CASES:
-        if name != "mimic_parquet":
+    for name, case in GUARD_CASES.items():
+        if name != "mimic_parquet" and case.native:
             assert steps[name]() is ExitCode.OK, name
 
     (tmp_path / "synthetic.json").unlink()

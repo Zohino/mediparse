@@ -9,7 +9,7 @@ import pkgutil
 import re
 import tomllib
 from pathlib import Path
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, Final
 
 import pytest
 from pydantic import BaseModel
@@ -907,6 +907,7 @@ def test_eda_stop_words_match_sklearn() -> None:
     assert words == sorted(ENGLISH_STOP_WORDS)
 
 
+CORPUS_LOADER: Final = "mediparse.entrypoints.model_corpus"
 DATA_ADAPTER = re.compile(
     r"(?:Parquet\w+|DuckDb\w+|SkopsModelFile|CsvParquetConversion)"
 )
@@ -915,20 +916,23 @@ DATA_ACCESS_IMPORTS = frozenset({
     ("mediparse.infrastructure.eda_duckdb", "EdaDatabase"),
 })
 DATA_ACCESS_EXCEPTIONS = {
-    "model_input_table.py": (
-        "Skládá líný adaptér bez čtení dat; stráž volají model_training a model_inference."
+    "model_corpus.py": (
+        "Skládá adaptéry a otisk kohorty; každý importér sám volá stráž, hlídá to tento test."
     ),
 }
 SHELL_DATA_ACCESS_EXCEPTIONS: dict[str, str] = {}
 
 
-def _infrastructure_imports(module: Path) -> set[tuple[str, str]]:
+def _data_imports(module: Path) -> set[tuple[str, str]]:
     tree = ast.parse(module.read_text(encoding="utf-8"))
     return {
         (_imported_module(module, node), alias.name)
         for node in ast.walk(tree)
         if isinstance(node, ast.ImportFrom)
-        and _imported_module(module, node).startswith("mediparse.infrastructure.")
+        and (
+            _imported_module(module, node).startswith("mediparse.infrastructure.")
+            or _imported_module(module, node) == CORPUS_LOADER
+        )
         for alias in node.names
     }
 
@@ -937,8 +941,11 @@ def _unguarded_data_entrypoints(root: Path) -> tuple[list[str], set[str]]:
     violations = []
     inspected = set()
     for module in sorted(root.rglob("*.py")):
-        imports = _infrastructure_imports(module)
-        if not any(DATA_ADAPTER.fullmatch(name) for _, name in imports):
+        imports = _data_imports(module)
+        if not any(
+            DATA_ADAPTER.fullmatch(name) or source == CORPUS_LOADER
+            for source, name in imports
+        ):
             continue
         name = module.relative_to(root).as_posix()
         inspected.add(name)
@@ -954,6 +961,7 @@ def test_data_reading_entrypoints_import_access_guard() -> None:
     violations, inspected = _unguarded_data_entrypoints(PACKAGE / "entrypoints")
 
     assert "cohort.py" in inspected
+    assert "model_tuning.py" in inspected
     assert DATA_ACCESS_EXCEPTIONS.keys() <= inspected
     assert violations == []
 
@@ -1024,19 +1032,20 @@ def test_shell_guard_check_detects_only_active_guard(
 @pytest.mark.parametrize(
     ("source", "adapter"),
     [
-        ("note_table", "ParquetNoteTable"),
-        ("note_texts_parquet", "ParquetNoteTexts"),
-        ("duckdb_cohort", "DuckDbCohort"),
-        ("sklearn_classifier", "SkopsModelFile"),
-        ("csv_parquet", "CsvParquetConversion"),
+        ("mediparse.infrastructure.note_table", "ParquetNoteTable"),
+        ("mediparse.infrastructure.note_texts_parquet", "ParquetNoteTexts"),
+        ("mediparse.infrastructure.duckdb_cohort", "DuckDbCohort"),
+        ("mediparse.infrastructure.sklearn_classifier", "SkopsModelFile"),
+        ("mediparse.infrastructure.csv_parquet", "CsvParquetConversion"),
+        ("mediparse.entrypoints.model_corpus", "ModelCorpusPaths"),
     ],
 )
 def test_data_guard_check_detects_unprotected_adapter(
     tmp_path: Path, source: str, adapter: str
 ) -> None:
-    """Stráž vyžadují různé datové adaptéry i s přejmenovaným importem."""
+    """Stráž vyžadují datové adaptéry i importy sdíleného korpusu pod aliasem."""
     (tmp_path / "unguarded.py").write_text(
-        f"from mediparse.infrastructure.{source} import {adapter} as Adapter\n",
+        f"from {source} import {adapter} as Adapter\n",
         encoding="utf-8",
     )
 

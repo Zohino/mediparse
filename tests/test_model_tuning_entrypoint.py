@@ -14,19 +14,21 @@ import pytest
 from optuna.storages import RDBStorage
 from sqlalchemy.pool import NullPool
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.run_manifest import TuningManifest
 from mediparse.entrypoints import model_tuning
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.entrypoints.model_corpus import ModelCorpusPaths
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.split_table import ParquetSplitTable
-from tests.model_support import write_split
+from tests.model_support import ACRONYM_VOCABULARY, model_input, write_split
 from tests.screening_support import notes
 from tests.support import (
-    REPOSITORY_DIAGNOSIS_CANDIDATES,
     REPOSITORY_SECTION_HEADERS,
     REVISION,
     fixed_revision,
     mark_synthetic,
+    repository_corpus,
 )
 from tests.tuning_support import matrix_row, tuning_config
 
@@ -50,7 +52,6 @@ def _inputs(
     root: Path,
     *,
     visits: int = 10,
-    marked: bool = True,
     config_changes: dict[str, object] | None = None,
     row_changes: dict[str, object] | None = None,
 ) -> _Inputs:
@@ -72,20 +73,16 @@ def _inputs(
         }),
         encoding="utf-8",
     )
-    if marked:
-        mark_synthetic(root)
+    mark_synthetic(root)
     return paths
 
 
 def _run(inputs: _Inputs, out: Path) -> ExitCode:
     return model_tuning.run(
         paths=model_tuning.TuningPaths(
-            cohort=inputs.cohort,
-            split=inputs.split,
+            corpus=repository_corpus(inputs.cohort, inputs.split),
             config=inputs.config,
             matrix=inputs.matrix,
-            candidates=REPOSITORY_DIAGNOSIS_CANDIDATES,
-            lexicon=REPOSITORY_SECTION_HEADERS,
             storage=out / "tuning.sqlite3",
             manifest=out / "tuning_manifest.json",
         ),
@@ -204,10 +201,10 @@ def test_existing_sqlite_is_refused_without_overwriting_manifest(
 
 
 @pytest.mark.parametrize(
-    ("config_changes", "row_changes", "visits", "marked", "message"),
+    ("config_changes", "row_changes", "visits", "message"),
     [
-        ({"row_id": "absent"}, {}, 10, True, "není v experimentální matici"),
-        ({}, {"model": "logreg"}, 10, True, "zatím není scorer"),
+        ({"row_id": "absent"}, {}, 10, "není v experimentální matici"),
+        ({}, {"model": "logreg"}, 10, "zatím není scorer"),
         (
             {
                 "space": {
@@ -216,14 +213,12 @@ def test_existing_sqlite_is_refused_without_overwriting_manifest(
             },
             {},
             10,
-            True,
             "parametrům scoreru",
         ),
-        ({}, {}, 1, True, "zpráv, metriky potřebují v každé třídě aspoň 10"),
-        ({}, {}, 10, False, "MIMIC"),
+        ({}, {}, 1, "zpráv, metriky potřebují v každé třídě aspoň 10"),
     ],
 )
-# Signatura parametrizace rozlišuje config, řádek, velikost kohorty a stráž.
+# Signatura parametrizace rozlišuje config, řádek a velikost kohorty.
 def test_invalid_tuning_is_refused(  # ruff: ignore[too-many-arguments]
     tmp_path: Path,
     caplog: pytest.LogCaptureFixture,
@@ -231,14 +226,12 @@ def test_invalid_tuning_is_refused(  # ruff: ignore[too-many-arguments]
     row_changes: dict[str, object],
     visits: int,
     *,
-    marked: bool,
     message: str,
 ) -> None:
-    """Chybějící řádek, rodina, překlep, MIN_CELL i stráž agenta mají doménové odmítnutí."""
+    """Chybějící řádek, rodina, překlep i MIN_CELL mají doménové odmítnutí."""
     inputs = _inputs(
         tmp_path,
         visits=visits,
-        marked=marked,
         config_changes=config_changes,
         row_changes=row_changes,
     )
@@ -253,12 +246,14 @@ def test_main_passes_workflow_paths_and_runtime_dependencies(
 ) -> None:
     """Composition root přenese cesty pravidla do testovatelného run a nastaví log."""
     paths = model_tuning.TuningPaths(
-        cohort=tmp_path / "cohort",
+        corpus=ModelCorpusPaths(
+            cohort=tmp_path / "cohort",
+            candidates=tmp_path / "candidates",
+            lexicon=tmp_path / "lexicon",
+            split=tmp_path / "split",
+        ),
         config=tmp_path / "config",
         matrix=tmp_path / "matrix",
-        candidates=tmp_path / "candidates",
-        lexicon=tmp_path / "lexicon",
-        split=tmp_path / "split",
         storage=tmp_path / "storage",
         manifest=tmp_path / "manifest",
     )
@@ -272,3 +267,53 @@ def test_main_passes_workflow_paths_and_runtime_dependencies(
     assert run.call_args.kwargs["paths"] == paths
     assert callable(run.call_args.kwargs["revision"])
     assert callable(run.call_args.kwargs["clock"].now)
+
+
+@pytest.mark.parametrize("preprocessing", ["normalized", "dictionary"])
+def test_manifest_preserves_preprocessing_and_strip(
+    tmp_path: Path, preprocessing: str
+) -> None:
+    """Manifest ladění nese strip, slovník a explicitní úroveň předzpracování."""
+    inputs = _inputs(
+        tmp_path,
+        row_changes={"input": model_input(strip=True, preprocessing=preprocessing)},
+    )
+    out = tmp_path / "out"
+    assert _run(inputs, out) is ExitCode.OK
+    manifest = _manifest(out)
+    assert manifest.diagnostic_strip is not None
+    assert manifest.diagnostic_strip.sections == ("discharge_diagnosis",)
+    assert (
+        manifest.diagnostic_strip.lexicon_sha256
+        == hashlib.sha256(REPOSITORY_SECTION_HEADERS.read_bytes()).hexdigest()
+    )
+    assert manifest.text_preprocessing.value == preprocessing
+    assert manifest.text_normalization is not None
+    assert (
+        manifest.text_normalization.acronyms["COPD"]
+        == "chronic obstructive pulmonary disease"
+    )
+    assert bool(manifest.text_normalization.variants) == (preprocessing == "dictionary")
+
+
+def test_normalization_changes_tuning_scores(tmp_path: Path) -> None:
+    """Sjednocení zkratky a názvu odstraní signál syntetických tříd a změní skóre."""
+    scores = []
+    for preprocessing in ("none", "normalized"):
+        root = tmp_path / preprocessing
+        inputs = _inputs(
+            root, row_changes={"input": model_input(preprocessing=preprocessing)}
+        )
+        table = ParquetNoteTable(inputs.cohort)
+        table.write([
+            replace(
+                note,
+                text=ACRONYM_VOCABULARY[0 if note.has_label(Diagnosis.DIABETES) else 1],
+            )
+            for note in table.read()
+        ])
+        out = root / "out"
+        assert _run(inputs, out) is ExitCode.OK
+        scores.append(_manifest(out).best_macro_f1)
+
+    assert scores[0] != scores[1]

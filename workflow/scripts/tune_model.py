@@ -2,15 +2,18 @@
 
 from pathlib import Path
 
+from mediparse.entrypoints.model_corpus import ModelCorpusPaths
 from mediparse.entrypoints.model_tuning import TuningPaths, main
 
 paths = TuningPaths(
-    cohort=Path(snakemake.input.cohort),
+    corpus=ModelCorpusPaths(
+        cohort=Path(snakemake.input.cohort),
+        candidates=Path(snakemake.input.candidates),
+        lexicon=Path(snakemake.input.lexicon),
+        split=Path(snakemake.input.split),
+    ),
     config=Path(snakemake.input.config),
     matrix=Path(snakemake.input.matrix),
-    candidates=Path(snakemake.input.candidates),
-    lexicon=Path(snakemake.input.lexicon),
-    split=Path(snakemake.input.split),
     storage=Path(snakemake.output.storage),
     manifest=Path(snakemake.output.manifest),
 )
