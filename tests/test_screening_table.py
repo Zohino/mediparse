@@ -268,7 +268,10 @@ def test_completed_reads_units_of_written_parts(
     )
 
 
-@pytest.mark.parametrize("damage", ["key", "missing-key", "gap", "predictions"])
+@pytest.mark.parametrize(
+    "damage",
+    ["key", "corrupt-key", "invalid-key-type", "missing-key", "gap", "predictions"],
+)
 def test_checkpoint_of_other_run_is_refused_untouched(
     checkpoint: ParquetScreeningCheckpoint,
     damage: str,
@@ -279,6 +282,10 @@ def test_checkpoint_of_other_run_is_refused_untouched(
     if damage == "key":
         (checkpoint.directory / "key.json").write_text(
             '{"key":"other"}', encoding="utf-8"
+        )
+    elif damage in {"corrupt-key", "invalid-key-type"}:
+        (checkpoint.directory / "key.json").write_bytes(
+            b"{" if damage == "corrupt-key" else b'{"key": 1}'
         )
     else:
         name = {
