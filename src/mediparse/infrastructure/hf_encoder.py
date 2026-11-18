@@ -135,11 +135,8 @@ def load_encoder(spec: EncoderSpec) -> HfMeanEncoder:
             directory, dtype=getattr(torch, spec.dtype), attn_implementation="sdpa"
         )
         _, prefix, suffix = _token_parts(tokenizer, "")
-        if (
-            not len(prefix) + len(suffix)
-            < spec.window
-            <= model.config.max_position_embeddings
-        ):
+        wrapper = len(prefix) + len(suffix)
+        if spec.window <= wrapper or spec.window > model.config.max_position_embeddings:
             msg = "Okno encoderu musí přesáhnout obal a nepřekročit kapacitu modelu."
             raise InvalidInputError(msg)
         return HfMeanEncoder(

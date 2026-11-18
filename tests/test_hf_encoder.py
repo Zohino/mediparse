@@ -75,9 +75,11 @@ def test_pooling_matches_position_mean(count: int, *, bf16: bool) -> None:
         )
 
 
-@pytest.mark.parametrize("window", [2, 65])
-def test_load_rejects_invalid_window(
-    monkeypatch: pytest.MonkeyPatch, window: int
+@pytest.mark.parametrize(
+    ("window", "accepted"), [(2, False), (65, False), (3, True), (64, True)]
+)
+def test_load_validates_window_boundaries(
+    monkeypatch: pytest.MonkeyPatch, window: int, *, accepted: bool
 ) -> None:
     """Okno musí pojmout obsah a nepřekročit kapacitu modelu."""
     pytest.importorskip("torch")
@@ -92,17 +94,19 @@ def test_load_rejects_invalid_window(
     )
     monkeypatch.setattr(AutoModel, "from_pretrained", lambda *_args, **_kwargs: model)
     monkeypatch.setattr(hf_encoder, "load_tokenizer", lambda *_args: tokenizer)
-    with pytest.raises(InvalidInputError, match=r"okn|Okno"):
-        load_encoder(
-            EncoderSpec(
-                name="test",
-                model="test",
-                revision="a" * 40,
-                window=window,
-                device="cpu",
-                dtype="float32",
-            )
-        )
+    spec = EncoderSpec(
+        name="test",
+        model="test",
+        revision="a" * 40,
+        window=window,
+        device="cpu",
+        dtype="float32",
+    )
+    if accepted:
+        assert load_encoder(spec).window == window
+    else:
+        with pytest.raises(InvalidInputError, match=r"okn|Okno"):
+            load_encoder(spec)
 
 
 def test_cuda_unavailable_is_explicit(monkeypatch: pytest.MonkeyPatch) -> None:
