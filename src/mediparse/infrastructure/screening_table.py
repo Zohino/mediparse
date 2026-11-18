@@ -24,6 +24,7 @@ if TYPE_CHECKING:
     from mediparse.domain.classical_screening import ScreeningResult
 
 logger = logging.getLogger(__name__)
+KEY_FILE: Final = "key.json"
 
 CELL_FIELDS: Final = (
     pa.field("fold", pa.int64(), nullable=False),
@@ -133,7 +134,7 @@ class ParquetScreeningCheckpoint:
         with self._errors():
             if not self.directory.exists():
                 return frozenset()
-            key_path = self.directory / "key.json"
+            key_path = self.directory / KEY_FILE
             try:
                 valid = key_path.is_file() and (
                     CheckpointKey.model_validate_json(key_path.read_bytes()).key
@@ -165,16 +166,17 @@ class ParquetScreeningCheckpoint:
         with self._errors():
             if not self.directory.exists():
                 self.directory.mkdir(parents=True)
-                write_model(self.directory / "key.json", CheckpointKey(key=self.key))
+                write_model(self.directory / KEY_FILE, CheckpointKey(key=self.key))
             index = len(list(self.directory.glob("*.results.parquet")))
-            predictions = self.directory / f"{index:04d}.predictions.parquet"
-            temporary = predictions.with_suffix(".parquet.tmp")
-            ParquetScreeningPredictions(temporary).write(results)
-            temporary.replace(predictions)
-            target = self.directory / f"{index:04d}.results.parquet"
-            temporary = target.with_suffix(".parquet.tmp")
-            ParquetScreeningTable(temporary).write(results)
-            temporary.replace(target)
+            # Výsledky musí přijít až po predikcích jako značka hotové jednotky.
+            for kind, writer in (
+                ("predictions", ParquetScreeningPredictions),
+                ("results", ParquetScreeningTable),
+            ):
+                target = self.directory / f"{index:04d}.{kind}.parquet"
+                temporary = target.with_suffix(".parquet.tmp")
+                writer(temporary).write(results)
+                temporary.replace(target)
 
     def finish(self) -> None:
         """Ověří vlastní soubory, složí výstupy a odstraní rozpracovaný běh.
@@ -185,11 +187,10 @@ class ParquetScreeningCheckpoint:
         with self._errors():
             files = list(self.directory.iterdir())
             if any(
-                path.name != "key.json"
-                and not re.fullmatch(
-                    r"\d{4}\.(results|predictions)\.parquet", path.name
+                not re.fullmatch(
+                    r"key\.json|\d{4}\.(results|predictions)\.parquet|.*\.tmp",
+                    path.name,
                 )
-                and not path.name.endswith(".tmp")
                 for path in files
             ):
                 reason = "adresář obsahuje cizí soubor"
@@ -203,9 +204,9 @@ class ParquetScreeningCheckpoint:
                 PREDICTIONS_SCHEMA,
             )
             # Bez klíče přerušený úklid odmítne obnovu neúplných dílů.
-            (self.directory / "key.json").unlink()
+            (self.directory / KEY_FILE).unlink()
             for path in files:
-                if path.name != "key.json":
+                if path.name != KEY_FILE:
                     path.unlink()
             self.directory.rmdir()
 
