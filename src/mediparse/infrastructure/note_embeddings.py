@@ -72,41 +72,20 @@ class NoteEmbeddings:
         """
         with self._errors():
             directory = self.directory / cache_key(spec, self.versions)
-            parts = sorted(directory.glob("*.parquet"))
-            if [part.name for part in parts] != [
-                f"{index:04d}.parquet" for index in range(len(parts))
-            ]:
-                msg = "Díly cache embeddingů netvoří souvislou řadu."
-                raise InvalidInputError(msg)
-            vectors = {}
-            for part in parts:
-                rows = read_table(part, SCHEMA).to_pydict()
-                vectors.update(zip(rows["text_sha256"], rows["embedding"], strict=True))
-            self._ensure_width(vectors.values())
+            parts, vectors = _read(directory)
             identities = [hashlib.sha256(text.encode()).hexdigest() for text in texts]
-            missing = dict(zip(identities, texts, strict=True))
+            unique = dict(zip(identities, texts, strict=True))
             missing = [
-                (key, text) for key, text in missing.items() if key not in vectors
+                (key, text) for key, text in unique.items() if key not in vectors
             ]
             if missing:
                 encoder = self.encoders(spec)
                 for start in range(0, len(missing), PART_NOTES):
                     batch = missing[start : start + PART_NOTES]
                     computed = {key: encoder(text).tolist() for key, text in batch}
-                    self._ensure_width([*vectors.values(), *computed.values()])
-                    target = (
-                        directory / f"{len(parts) + start // PART_NOTES:04d}.parquet"
-                    )
-                    temporary = target.with_suffix(".parquet.tmp")
-                    write_table(
-                        temporary,
-                        {
-                            "text_sha256": list(computed),
-                            "embedding": list(computed.values()),
-                        },
-                        SCHEMA,
-                    )
-                    temporary.replace(target)
+                    _ensure_width([*vectors.values(), *computed.values()])
+                    target = directory / f"{parts + start // PART_NOTES:04d}.parquet"
+                    _write_part(target, computed)
                     vectors.update(computed)
                     logger.info(
                         "Embeddingy: %d hotových, %d chybějících zpráv, %s.",
@@ -124,8 +103,36 @@ class NoteEmbeddings:
             msg = f"Cache embeddingů {self.directory} nelze přečíst nebo zapsat: {type(error).__name__}."
             raise InvalidInputError(msg) from None
 
-    @staticmethod
-    def _ensure_width(vectors: Iterable[Sequence[float]]) -> None:
-        if len({len(vector) for vector in vectors}) > 1:
-            msg = "Embeddingy v cache mají nejednotné délky."
-            raise InvalidInputError(msg)
+
+def _read(directory: Path) -> tuple[int, dict[str, list[float]]]:
+    parts = sorted(directory.glob("*.parquet"))
+    if [part.name for part in parts] != [
+        f"{index:04d}.parquet" for index in range(len(parts))
+    ]:
+        msg = "Díly cache embeddingů netvoří souvislou řadu."
+        raise InvalidInputError(msg)
+    vectors = {}
+    for part in parts:
+        rows = read_table(part, SCHEMA).to_pydict()
+        vectors.update(zip(rows["text_sha256"], rows["embedding"], strict=True))
+    _ensure_width(vectors.values())
+    return len(parts), vectors
+
+
+def _write_part(target: Path, computed: Mapping[str, Sequence[float]]) -> None:
+    temporary = target.with_suffix(".parquet.tmp")
+    write_table(
+        temporary,
+        {
+            "text_sha256": list(computed),
+            "embedding": list(computed.values()),
+        },
+        SCHEMA,
+    )
+    temporary.replace(target)
+
+
+def _ensure_width(vectors: Iterable[Sequence[float]]) -> None:
+    if len({len(vector) for vector in vectors}) > 1:
+        msg = "Embeddingy v cache mají nejednotné délky."
+        raise InvalidInputError(msg)
