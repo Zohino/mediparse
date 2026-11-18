@@ -8,13 +8,12 @@ from hypothesis import given
 from hypothesis import strategies as st
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.screening import EncoderSpec
 from mediparse.infrastructure.hf_encoder import (
     HfMeanEncoder,
     load_encoder,
     token_windows,
 )
-from tests.hf_encoder_support import encoder_parts
+from tests.hf_encoder_support import SPEC, encoder_parts
 
 
 @given(
@@ -94,14 +93,7 @@ def test_load_validates_window_boundaries(
     )
     monkeypatch.setattr(AutoModel, "from_pretrained", lambda *_args, **_kwargs: model)
     monkeypatch.setattr(hf_encoder, "load_tokenizer", lambda *_args: tokenizer)
-    spec = EncoderSpec(
-        name="test",
-        model="test",
-        revision="a" * 40,
-        window=window,
-        device="cpu",
-        dtype="float32",
-    )
+    spec = SPEC.model_copy(update={"window": window})
     if accepted:
         assert load_encoder(spec).window == window
     else:
@@ -114,13 +106,4 @@ def test_cuda_unavailable_is_explicit(monkeypatch: pytest.MonkeyPatch) -> None:
     torch = pytest.importorskip("torch")
     monkeypatch.setattr(torch.cuda, "is_available", lambda: False)
     with pytest.raises(InvalidInputError, match="device"):
-        load_encoder(
-            EncoderSpec(
-                name="test",
-                model="test",
-                revision="a" * 40,
-                window=8,
-                device="cuda",
-                dtype="bfloat16",
-            )
-        )
+        load_encoder(SPEC.model_copy(update={"device": "cuda", "dtype": "bfloat16"}))

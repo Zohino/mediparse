@@ -22,6 +22,7 @@ from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_corpus import ModelCorpusPaths
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.split_table import ParquetSplitTable
+from tests.hf_encoder_support import SPEC, VERSIONS
 from tests.screening_support import DEVELOPMENT, SHARED, notes
 from tests.support import (
     REPOSITORY_SECTION_HEADERS,
@@ -469,7 +470,6 @@ def test_encoder_screening_end_to_end(tmp_path: Path) -> None:
     pytest.importorskip("torch")
     from mediparse.infrastructure.hf_encoder import ENCODER_PACKAGES, HfMeanEncoder  # ruff: ignore[import-outside-top-level]
     from tests.hf_encoder_support import encoder_parts  # ruff: ignore[import-outside-top-level]
-    from tests.test_note_embeddings import SPEC  # ruff: ignore[import-outside-top-level]
 
     inputs = _inputs(tmp_path, families=("logreg",))
     spec = SPEC.model_copy(update={"name": "mmbert-base-mean"})
@@ -515,8 +515,6 @@ def test_encoder_screening_end_to_end(tmp_path: Path) -> None:
 
 def test_encoder_revision_and_versions_change_checkpoint_key(tmp_path: Path) -> None:
     """Revize i knihovny encoderu mění obnovu také v prostředí bez torch."""
-    from tests.test_note_embeddings import SPEC, VERSIONS  # ruff: ignore[import-outside-top-level]
-
     inputs = _inputs(tmp_path, families=("logreg",))
     config = json.loads(inputs.config.read_text(encoding="utf-8"))
     config["vectorizers"] = [SPEC.model_dump(mode="json")]

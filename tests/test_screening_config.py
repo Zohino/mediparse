@@ -11,6 +11,7 @@ from pydantic import ValidationError
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.screening import EncoderSpec, ScreeningConfig
 from mediparse.infrastructure.screening_config import load_screening_config
+from tests.hf_encoder_support import SPEC
 
 WORD = {"name": "word-1-2", "analyzer": "word", "ngram_range": [1, 2]}
 CHAR = {"name": "char_wb-3-5", "analyzer": "char_wb", "ngram_range": [3, 5]}
@@ -149,14 +150,7 @@ def test_shallow_config_matches_protocol() -> None:
 )
 def test_encoder_spec_rejects_invalid_values(changes: dict[str, object]) -> None:
     """Encoder vyžaduje plnou revizi, známé zařízení a uzavřené schéma."""
-    spec = {
-        "name": "encoder",
-        "model": "test",
-        "revision": "a" * 40,
-        "window": 8,
-        "device": "cpu",
-        "dtype": "float32",
-    }
+    spec = SPEC.model_dump(mode="json")
     with pytest.raises(ValidationError):
         EncoderSpec.model_validate(spec | changes)
 
@@ -168,14 +162,7 @@ def test_encoder_grid_rejects_incompatible_family_or_duplicate_name(
     families: list[str], *, duplicate: bool
 ) -> None:
     """Hustý encoder smí jen k LR a jména sdílí s TF-IDF jeden prostor."""
-    encoder = {
-        "name": WORD["name"],
-        "model": "test",
-        "revision": "a" * 40,
-        "window": 8,
-        "device": "cpu",
-        "dtype": "float32",
-    }
+    encoder = SPEC.model_dump(mode="json") | {"name": WORD["name"]}
     with pytest.raises(ValidationError):
         ScreeningConfig.model_validate_json(
             json.dumps(

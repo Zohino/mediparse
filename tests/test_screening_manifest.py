@@ -9,6 +9,7 @@ from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.environment import Environment
 from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import ScreeningManifest
+from tests.hf_encoder_support import SPEC
 from tests.support import REVISION
 
 
@@ -136,8 +137,6 @@ def test_screening_requires_at_least_two_split_folds(folds: int) -> None:
 
 def test_encoder_manifest_round_trip() -> None:
     """Revize a numerický režim encoderu přežijí serializaci provenance."""
-    from tests.test_note_embeddings import SPEC  # ruff: ignore[import-outside-top-level]
-
     manifest = ScreeningManifest.model_validate(_fields(encoders=(SPEC,)))
     assert ScreeningManifest.model_validate_json(
         manifest.model_dump_json()

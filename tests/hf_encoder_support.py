@@ -4,6 +4,19 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from mediparse.domain.screening import EncoderSpec
+
+SPEC = EncoderSpec(
+    name="test",
+    model="test",
+    revision="a" * 40,
+    window=8,
+    device="cpu",
+    dtype="float32",
+)
+VERSIONS = {"torch": "test", "transformers": "test", "tokenizers": "test"}
+
+
 if TYPE_CHECKING:
     from collections.abc import Sequence
 

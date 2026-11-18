@@ -6,6 +6,7 @@ import re
 import warnings
 from random import Random
 from typing import TYPE_CHECKING, Literal, Self, override
+from unittest.mock import Mock
 
 import numpy as np
 import pytest
@@ -23,14 +24,17 @@ from mediparse.infrastructure.sklearn_classifier import (
     tfidf_vectorizer,
 )
 from mediparse.infrastructure.sklearn_screening import (
+    EncoderFeaturizer,
     Lsa,
     ScreeningFeatures,
+    ScreeningFeaturizer,
     SklearnThresholdTuner,
     TfidfFeaturizer,
     classifier_estimator,
     screening_lsa,
 )
 from mediparse.infrastructure.sklearn_split import threshold_splits
+from tests.hf_encoder_support import SPEC
 from tests.model_support import OVERLAPPING, separable_notes
 
 if TYPE_CHECKING:
@@ -520,11 +524,6 @@ def test_screening_lsa_is_prepared_only_for_families_that_need_it(
 
 def test_encoder_scaler_fits_only_outer_train() -> None:
     """Průměr 1 a populační std 1 z tréninku převedou test 4 na 3."""
-    from unittest.mock import Mock  # ruff: ignore[import-outside-top-level]
-
-    from mediparse.infrastructure.sklearn_screening import EncoderFeaturizer  # ruff: ignore[import-outside-top-level]
-    from tests.test_note_embeddings import SPEC  # ruff: ignore[import-outside-top-level]
-
     embeddings = Mock()
     embeddings.embed.side_effect = [np.array([[0.0], [2.0]]), np.array([[4.0]])]
     train, test = EncoderFeaturizer(embeddings).fit_transform(SPEC, ["a", "b"], ["c"])
@@ -537,11 +536,6 @@ def test_encoder_scaler_fits_only_outer_train() -> None:
 @pytest.mark.parametrize("encoder", [False, True])
 def test_representation_dispatch(*, encoder: bool) -> None:
     """Typ specifikace vybere právě odpovídající featurizér."""
-    from unittest.mock import Mock  # ruff: ignore[import-outside-top-level]
-
-    from mediparse.infrastructure.sklearn_screening import ScreeningFeaturizer  # ruff: ignore[import-outside-top-level]
-    from tests.test_note_embeddings import SPEC  # ruff: ignore[import-outside-top-level]
-
     tfidf, dense = Mock(), Mock()
     spec = (
         SPEC

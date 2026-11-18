@@ -10,23 +10,13 @@ import numpy as np
 import pytest
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.screening import EncoderSpec
 from mediparse.infrastructure import note_embeddings
 from mediparse.infrastructure.note_embeddings import SCHEMA, NoteEmbeddings, cache_key
 from mediparse.infrastructure.parquet_file import write_table
+from tests.hf_encoder_support import SPEC, VERSIONS
 
 if TYPE_CHECKING:
     from pathlib import Path
-
-SPEC = EncoderSpec(
-    name="test",
-    model="test",
-    revision="a" * 40,
-    window=8,
-    device="cpu",
-    dtype="float32",
-)
-VERSIONS = {"torch": "test", "transformers": "test", "tokenizers": "test"}
 
 
 def _vector(text: str) -> np.ndarray:
