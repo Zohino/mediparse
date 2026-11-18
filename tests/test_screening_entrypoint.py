@@ -20,9 +20,10 @@ from mediparse.domain.run_manifest import ScreeningManifest
 from mediparse.entrypoints import screening
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_corpus import ModelCorpusPaths
+from mediparse.infrastructure.hf_encoder import ENCODER_PACKAGES, HfMeanEncoder
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.split_table import ParquetSplitTable
-from tests.hf_encoder_support import SPEC, VERSIONS
+from tests.hf_encoder_support import SPEC, VERSIONS, encoder_parts
 from tests.screening_support import DEVELOPMENT, SHARED, notes
 from tests.support import (
     REPOSITORY_SECTION_HEADERS,
@@ -470,8 +471,6 @@ def test_foreign_checkpoint_refuses_before_outputs(tmp_path: Path) -> None:
 def test_encoder_screening_end_to_end(tmp_path: Path) -> None:
     """Malý encoder dodá příznaky LR, cache i úplnou provenance bez stahování."""
     pytest.importorskip("torch")
-    from mediparse.infrastructure.hf_encoder import ENCODER_PACKAGES, HfMeanEncoder  # ruff: ignore[import-outside-top-level]
-    from tests.hf_encoder_support import encoder_parts  # ruff: ignore[import-outside-top-level]
 
     inputs = _inputs(tmp_path, families=("logreg",))
     spec = SPEC.model_copy(update={"name": "mmbert-base-mean"})
@@ -501,7 +500,7 @@ def test_encoder_screening_end_to_end(tmp_path: Path) -> None:
         is ExitCode.OK
     )
     rows = pq.read_table(paths.out).to_pylist()
-    assert len(rows) == 2 * len(Diagnosis)
+    assert len(rows) == config["folds"] * len(Diagnosis)
     assert {row["vectorizer"] for row in rows} == {"mmbert-base-mean"}
     assert {row["family"] for row in rows} == {"logreg"}
     manifest = ScreeningManifest.model_validate_json(paths.manifest.read_bytes())
@@ -509,10 +508,6 @@ def test_encoder_screening_end_to_end(tmp_path: Path) -> None:
     assert set(ENCODER_PACKAGES) <= manifest.environment.packages.keys()
     assert list(paths.embeddings.glob("*/*.parquet"))
     assert not paths.checkpoint.exists()
-    before = screening.checkpoint_key(paths, "dataset", {})
-    config["vectorizers"][0]["revision"] = "b" * 40
-    inputs.config.write_text(json.dumps(config), encoding="utf-8")
-    assert screening.checkpoint_key(paths, "dataset", {}) != before
 
 
 def test_encoder_revision_and_versions_change_checkpoint_key(tmp_path: Path) -> None:
