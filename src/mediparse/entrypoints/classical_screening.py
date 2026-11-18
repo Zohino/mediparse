@@ -4,6 +4,8 @@ Doporučené výstupy jsou ``results/screening/classical.parquet`` a
 ``results/screening/classical_manifest.json``. Nad MIMIC nástroj spouští jen uživatel.
 Predikce patří do ``resources/mimic/screening/classical_predictions.parquet``:
 jde o řádková data, která do ``results/`` nesmí.
+Rozpracovaný běh patří do ``resources/mimic/screening/classical_checkpoint``.
+Po pádu stačí spustit týž příkaz.
 """
 
 from __future__ import annotations
@@ -24,14 +26,14 @@ from mediparse.entrypoints.model_corpus import (
     ModelCorpusPaths,
     model_corpus,
 )
+from mediparse.infrastructure.code_fingerprint import code_key
 from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.file_digest import file_sha256
-from mediparse.infrastructure.json_file import write_model
+from mediparse.infrastructure.json_file import sorted_json_bytes, write_model
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.screening_config import load_classical_screening_config
 from mediparse.infrastructure.screening_table import (
-    ParquetScreeningPredictions,
-    ParquetScreeningTable,
+    ParquetScreeningCheckpoint,
 )
 from mediparse.infrastructure.sklearn_metrics import SklearnScorer
 from mediparse.infrastructure.sklearn_screening import (
@@ -68,6 +70,7 @@ class ScreeningPaths:
     out: Path
     predictions: Path
     manifest: Path
+    checkpoint: Path
 
 
 def main() -> ExitCode:
@@ -93,6 +96,12 @@ def main() -> ExitCode:
             "resources/mimic/screening/classical_predictions.parquet, mimo results/."
         ),
     )
+    parser.add_argument(
+        "--checkpoint",
+        type=Path,
+        required=True,
+        help="Rozpracovaný běh s řádkovými díly; doporučeno resources/mimic/screening/classical_checkpoint, mimo results/.",
+    )
     parser.add_argument("--manifest", type=Path, required=True)
     args = parser.parse_args()
     return run(
@@ -108,6 +117,7 @@ def main() -> ExitCode:
             out=args.out,
             predictions=args.predictions,
             manifest=args.manifest,
+            checkpoint=args.checkpoint,
         ),
         revision=revision_source(os.environ, Path.cwd()),
     )
@@ -140,8 +150,12 @@ def run(
         ),
         tuner=SklearnThresholdTuner(),
         scorer=SklearnScorer(),
-        results=ParquetScreeningTable(paths.out),
-        predictions=ParquetScreeningPredictions(paths.predictions),
+        progress=ParquetScreeningCheckpoint(
+            directory=paths.checkpoint,
+            key=checkpoint_key(paths, corpus.dataset_sha256),
+            results=paths.out,
+            predictions=paths.predictions,
+        ),
     ).run(screening)
     write_model(
         paths.manifest,
@@ -171,3 +185,19 @@ def run(
         paths.out,
     )
     return ExitCode.OK
+
+
+def checkpoint_key(paths: ScreeningPaths, dataset_sha256: str) -> str:
+    """Otiskne vstupy, kód a verze knihoven pro obnovu screeningu.
+
+    Returns:
+        Klíč rozpracovaného běhu.
+    """
+    return code_key([
+        ("config", file_sha256(paths.config).encode()),
+        ("cohort", dataset_sha256.encode()),
+        ("split", file_sha256(paths.corpus.split).encode()),
+        ("candidates", file_sha256(paths.corpus.candidates).encode()),
+        ("lexicon", file_sha256(paths.corpus.lexicon).encode()),
+        ("packages", sorted_json_bytes(installed_versions(PACKAGES))),
+    ])

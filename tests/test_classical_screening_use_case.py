@@ -16,11 +16,13 @@ from mediparse.domain.classical_screening import (
     ClassifierFamily,
     ScreeningReport,
     ScreeningResult,
+    ScreeningUnit,
     VectorizerSpec,
 )
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Classification
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.infrastructure.screening_table import ParquetScreeningCheckpoint
 from mediparse.infrastructure.sklearn_metrics import SklearnScorer
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from tests.screening_support import DEVELOPMENT, SHARED
@@ -29,6 +31,7 @@ from tests.screening_support import notes as _notes
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
+    from pathlib import Path
 
     from mediparse.domain.identity import SubjectId
     from mediparse.domain.input_note import InputNote
@@ -76,7 +79,7 @@ class _Recording:
     classifications: list[Features] = field(default_factory=list)
     classified: list[tuple[Classification, ...]] = field(default_factory=list)
     writes: list[tuple[ScreeningResult, ...]] = field(default_factory=list)
-    prediction_writes: list[tuple[ScreeningResult, ...]] = field(default_factory=list)
+    events: list[str] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
@@ -139,6 +142,7 @@ class _Classifier:
 @dataclass(frozen=True)
 class _Tuner(ThresholdTuner[Features]):
     recording: _Recording
+    fail_at: int | None = None
 
     @override
     def fit(
@@ -150,6 +154,8 @@ class _Tuner(ThresholdTuner[Features]):
         folds: int,
         seed: Seed,
     ) -> _Classifier:
+        if len(self.recording.fits) + 1 == self.fail_at:
+            raise RuntimeError
         self.recording.fits.append(
             _Fit(family, features, tuple(labels), tuple(subjects), folds, seed)
         )
@@ -164,11 +170,21 @@ class _Tuner(ThresholdTuner[Features]):
 
 
 @dataclass(frozen=True)
-class _Sink:
+class _Progress:
+    done: frozenset[ScreeningUnit]
+    events: list[str]
     writes: list[tuple[ScreeningResult, ...]]
 
+    def completed(self) -> frozenset[ScreeningUnit]:
+        self.events.append("completed")
+        return self.done
+
     def write(self, results: Sequence[ScreeningResult]) -> None:
+        self.events.append("write")
         self.writes.append(tuple(results))
+
+    def finish(self) -> None:
+        self.events.append("finish")
 
 
 def _step(
@@ -183,8 +199,7 @@ def _step(
         featurizer=_Featurizer(recording),
         tuner=_Tuner(recording),
         scorer=SklearnScorer(),
-        results=_Sink(recording.writes),
-        predictions=_Sink(recording.prediction_writes),
+        progress=_Progress(frozenset(), recording.events, recording.writes),
     )
 
 
@@ -239,7 +254,12 @@ def test_metrics_match_manual_confusion_matrix() -> None:
 
     _step(recording, _notes()).run(CONFIG)
 
-    rows = [row for row in recording.writes[0] if row.diagnosis is Diagnosis.DIABETES]
+    rows = [
+        row
+        for write in recording.writes
+        for row in write
+        if row.diagnosis is Diagnosis.DIABETES
+    ]
     assert rows
     for row in rows:
         assert (row.test_notes, row.test_positives) == (20, 10)
@@ -249,22 +269,38 @@ def test_metrics_match_manual_confusion_matrix() -> None:
         assert row.metrics.accuracy == pytest.approx(0.8)
 
 
-def test_rows_follow_config_order_in_single_write() -> None:
-    """Jediný zápis řadí fold, vektorizér, rodinu a diagnózu podle protokolu."""
+def test_each_unit_is_written_once_in_config_order() -> None:
+    """Dvanáct zápisů uchová pořadí mřížky a pět diagnóz každé jednotky."""
     recording = _Recording()
-
     _step(recording, _notes()).run(CONFIG)
+    assert recording.events == ["completed", *["write"] * 12, "finish"]
+    assert [
+        (rows[0].fold, rows[0].vectorizer, rows[0].family) for rows in recording.writes
+    ] == list(product(range(2), ("z-char", "a-word"), CONFIG.families))
+    for rows in recording.writes:
+        assert [row.diagnosis for row in rows] == list(Diagnosis)
+        assert len({(row.fold, row.vectorizer, row.family) for row in rows}) == 1
 
-    assert len(recording.writes) == 1
-    assert len(recording.prediction_writes) == 1
-    rows = recording.writes[0]
-    assert all(
-        result is prediction
-        for result, prediction in zip(rows, recording.prediction_writes[0], strict=True)
+
+def test_completed_units_are_skipped_without_refit() -> None:
+    """Čtyři hotové jednotky ušetří dvacet fitů a první featurizaci."""
+    recording = _Recording()
+    units = list(product(range(2), ("z-char", "a-word"), CONFIG.families))
+    done = frozenset(ScreeningUnit(*unit) for unit in units[:4])
+    step = replace(
+        _step(recording, _notes()),
+        progress=_Progress(done, recording.events, recording.writes),
     )
-    assert [(r.fold, r.vectorizer, r.family, r.diagnosis) for r in rows] == list(
-        product(range(2), ("z-char", "a-word"), CONFIG.families, Diagnosis)
-    )
+    step.run(CONFIG)
+    assert len(recording.fits) == 40
+    assert [spec for spec, _, _ in recording.featurizations] == [
+        CONFIG.vectorizers[1],
+        CONFIG.vectorizers[0],
+        CONFIG.vectorizers[1],
+    ]
+    assert [
+        (rows[0].fold, rows[0].vectorizer, rows[0].family) for rows in recording.writes
+    ] == units[4:]
 
 
 def test_cells_preserve_test_identity_labels_and_classifications() -> None:
@@ -275,7 +311,7 @@ def test_cells_preserve_test_identity_labels_and_classifications() -> None:
 
     by_text = {note.text: note for note in notes}
     for row, texts, classified in zip(
-        recording.writes[0],
+        [row for write in recording.writes for row in write],
         recording.classifications,
         recording.classified,
         strict=True,
@@ -304,7 +340,7 @@ def test_rows_carry_tuner_metadata(
 
     _step(recording, _notes()).run(CONFIG)
 
-    rows = [row for row in recording.writes[0] if row.family is family]
+    rows = [row for write in recording.writes for row in write if row.family is family]
     assert rows
     for row in rows:
         assert row.threshold == pytest.approx(threshold)
@@ -474,3 +510,32 @@ def test_outside_patient_is_rejected_before_reading_notes() -> None:
         step.run(CONFIG)
 
     assert table.requested == []
+
+
+def test_interrupted_run_resumes_to_identical_outputs(tmp_path: Path) -> None:
+    """Pád na 23. fitu ponechá čtyři jednotky a obnova dá shodné bajty."""
+    checkpoint = ParquetScreeningCheckpoint(
+        tmp_path / "checkpoint", "key", tmp_path / "results", tmp_path / "predictions"
+    )
+    recording = _Recording()
+    with pytest.raises(RuntimeError):
+        replace(
+            _step(recording, _notes()), progress=checkpoint, tuner=_Tuner(recording, 23)
+        ).run(CONFIG)
+    assert checkpoint.completed() == frozenset(
+        ScreeningUnit(*unit)
+        for unit in list(product(range(2), ("z-char", "a-word"), CONFIG.families))[:4]
+    )
+    resumed = _Recording()
+    replace(_step(resumed, _notes()), progress=checkpoint).run(CONFIG)
+    assert len(resumed.fits) == 40
+    whole = ParquetScreeningCheckpoint(
+        tmp_path / "whole",
+        "key",
+        tmp_path / "whole-results",
+        tmp_path / "whole-predictions",
+    )
+    replace(_step(_Recording(), _notes()), progress=whole).run(CONFIG)
+    assert checkpoint.results.read_bytes() == whole.results.read_bytes()
+    assert checkpoint.predictions.read_bytes() == whole.predictions.read_bytes()
+    assert not checkpoint.directory.exists()

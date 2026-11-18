@@ -6,7 +6,11 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
 from mediparse.application.patient_cv import patient_holdouts
-from mediparse.domain.classical_screening import ScreeningReport, ScreeningResult
+from mediparse.domain.classical_screening import (
+    ScreeningReport,
+    ScreeningResult,
+    ScreeningUnit,
+)
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.split import ensure_patients_per_class
 
@@ -71,11 +75,17 @@ class ThresholdTuner[F](Protocol):
         """Zvolí práh vnitřní CV po pacientech bez přístupu k testu vnějšího foldu."""
 
 
-class ResultSink(Protocol):
-    """Výstup buněk screeningu."""
+class ScreeningProgress(Protocol):
+    """Rozpracovaný běh screeningu: hotové jednotky, jejich trvalý zápis a složení výstupů."""
+
+    def completed(self) -> frozenset[ScreeningUnit]:
+        """Ověří, že rozpracovaný běh patří tomuto screeningu, a vrátí jeho hotové jednotky."""
 
     def write(self, results: Sequence[ScreeningResult]) -> None:
-        """Zapíše všechny buňky mřížky po dokončení výpočtu."""
+        """Trvale uloží výsledky a predikce jedné jednotky, než vrátí řízení."""
+
+    def finish(self) -> None:
+        """Složí výstupy ze všech jednotek v pořadí zápisu a rozpracovaný běh odstraní."""
 
 
 @dataclass(frozen=True)
@@ -88,8 +98,7 @@ class ClassicalScreening[F]:
     featurizer: Featurizer[F]
     tuner: ThresholdTuner[F]
     scorer: Scorer
-    results: ResultSink
-    predictions: ResultSink
+    progress: ScreeningProgress
 
     def run(self, config: ClassicalScreeningConfig) -> ScreeningReport:
         """Ověří foldy před fitováním a zapíše spočtené buňky do obou výstupů.
@@ -109,12 +118,17 @@ class ClassicalScreening[F]:
         shared.split.ensure_covers(self.table.subjects())
         notes = self.table.read_patients(shared.split.development)
         holdouts = _development_holdouts(notes, config, self.partitioner)
-        rows: list[ScreeningResult] = []
+        done = self.progress.completed()
         for holdout in holdouts:
             for spec in config.vectorizers:
-                rows.extend(self._screen_vectorizer(holdout, spec, config))
-        self.results.write(rows)
-        self.predictions.write(rows)
+                families = [
+                    family
+                    for family in config.families
+                    if ScreeningUnit(holdout.fold, spec.name, family) not in done
+                ]
+                if families:
+                    self._screen_vectorizer(holdout, spec, families, config)
+        self.progress.finish()
         return ScreeningReport(
             development_notes=len(notes),
             development_patients=len({note.subject_id for note in notes}),
@@ -123,16 +137,20 @@ class ClassicalScreening[F]:
         )
 
     def _screen_vectorizer(
-        self, holdout: Holdout, spec: VectorizerSpec, config: ClassicalScreeningConfig
-    ) -> tuple[ScreeningResult, ...]:
+        self,
+        holdout: Holdout,
+        spec: VectorizerSpec,
+        families: Sequence[ClassifierFamily],
+        config: ClassicalScreeningConfig,
+    ) -> None:
         train, test = self.featurizer.fit_transform(
             spec,
             [note.text for note in holdout.train],
             [note.text for note in holdout.test],
         )
         subjects = [note.subject_id for note in holdout.train]
-        rows = []
-        for family in config.families:
+        for family in families:
+            rows = []
             for diagnosis in Diagnosis:
                 classifier = self.tuner.fit(
                     family,
@@ -163,7 +181,7 @@ class ClassicalScreening[F]:
                         metrics=metrics,
                     )
                 )
-        return tuple(rows)
+            self.progress.write(rows)
 
 
 def _development_holdouts(
