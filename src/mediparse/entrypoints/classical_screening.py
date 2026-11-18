@@ -29,7 +29,7 @@ from mediparse.entrypoints.model_corpus import (
 from mediparse.infrastructure.code_fingerprint import code_key
 from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.file_digest import file_sha256
-from mediparse.infrastructure.json_file import sorted_json_bytes, write_model
+from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.screening_config import load_classical_screening_config
 from mediparse.infrastructure.screening_table import (
@@ -199,5 +199,8 @@ def checkpoint_key(paths: ScreeningPaths, dataset_sha256: str) -> str:
         ("split", file_sha256(paths.corpus.split).encode()),
         ("candidates", file_sha256(paths.corpus.candidates).encode()),
         ("lexicon", file_sha256(paths.corpus.lexicon).encode()),
-        ("packages", sorted_json_bytes(installed_versions(PACKAGES))),
+        *(
+            (f"packages/{name}", value.encode())
+            for name, value in installed_versions(PACKAGES).items()
+        ),
     ])

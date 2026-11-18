@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 
-import json
 from typing import TYPE_CHECKING
 
 from pydantic import RootModel
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Mapping
+    from collections.abc import Callable
     from pathlib import Path
 
     from pydantic import BaseModel
@@ -44,12 +43,3 @@ def parse_lines[T: BaseModel](model: type[T]) -> Callable[[str], tuple[T, ...]]:
         )
 
     return parse
-
-
-def sorted_json_bytes(values: Mapping[str, str]) -> bytes:
-    """Zakóduje mapu jako JSON se stabilním pořadím klíčů pro otisk vstupů.
-
-    Returns:
-        UTF-8 bajty JSON s abecedně seřazenými klíči.
-    """
-    return json.dumps(values, sort_keys=True).encode()
