@@ -23,6 +23,7 @@ dependencies = [
     "nvidia-ml-py>=13.615.71",
     "lightgbm>=4.7.0",
     "optuna>=5.1.0",
+    "huggingface-hub>=1.33.0,<2",
 ]
 
 [project.scripts]
@@ -435,9 +436,10 @@ mediparse = { path = ".", editable = true }
 
 [tool.pixi.environments]
 default = { features = ["dev"], solve-group = "main" }
-test = { features = ["test"], solve-group = "main" }
+test = { features = ["test", "cpu"], solve-group = "main" }
 translate = { features = ["translate"], no-default-feature = true, solve-group = "translate" }
 eda = { features = ["eda"], solve-group = "main" }
+gpu = { features = ["dev", "gpu"], solve-group = "gpu" }
 
 [tool.pixi.feature.translate.dependencies]
 python = "3.13.*"
@@ -502,3 +504,9 @@ verify-mimic = { cmd = "bash scripts/verify-mimic.sh \"{{ dir }}\"", args = [
 coverage-changed = { cmd = "bash scripts/coverage-changed.sh \"{{ base }}\"", args = [
     { arg = "base", default = "origin/main" },
 ], description = "Nepokryté řádky a větve modulů src/, kterých se větev dotkla proti základu; bez prahu, podklad pro review" }
+
+[tool.pixi.feature.cpu.pypi-dependencies]
+torch = { version = "==2.14.1", index = "https://download.pytorch.org/whl/cpu" }
+
+[tool.pixi.feature.gpu.pypi-dependencies]
+torch = { version = "==2.14.1", index = "https://download.pytorch.org/whl/cu130" }
