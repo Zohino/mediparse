@@ -9,7 +9,8 @@ import pytest
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.workflow_code import code_fingerprint as workflow_fingerprint
-from mediparse.infrastructure.code_fingerprint import code_fingerprint
+from mediparse.infrastructure.code_fingerprint import code_fingerprint, code_key
+from mediparse.infrastructure.eda_cache import FORMAT_VERSION, cache_key
 from tests.support import REPOSITORY
 
 if TYPE_CHECKING:
@@ -140,3 +141,10 @@ def test_missing_script_is_rejected(package: Path, name: str) -> None:
     """Chybějící skript skončí doménovou chybou se jménem souboru."""
     with pytest.raises(InvalidInputError, match=name):
         code_fingerprint(package.parent / name, package)
+
+
+def test_eda_cache_key_differs_from_code_key_by_format() -> None:
+    """Formát EDA odděluje její klíč od obecného otisku balíčku."""
+    inputs = [("input", b"synthetic")]
+    assert cache_key(inputs) == code_key([("format", FORMAT_VERSION.encode()), *inputs])
+    assert cache_key(inputs) != code_key(inputs)

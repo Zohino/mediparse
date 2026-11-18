@@ -8,14 +8,13 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.digest import fingerprint
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.infrastructure.code_fingerprint import code_key
 
 if TYPE_CHECKING:
     from collections.abc import Generator, Sequence
 
 FORMAT_VERSION: Final = "1"
-PACKAGE: Final = Path(__file__).parents[1]
 CACHE_FILE: Final = "cache.json"
 
 
@@ -28,20 +27,7 @@ def cache_key(inputs: Sequence[tuple[str, bytes]]) -> str:
     Raises:
         InvalidInputError: Kód balíčku nelze přečíst.
     """
-    # Commit by invalidoval i po změně sešitu; celý balíček zachytí změny
-    # algoritmů bez křehkého seznamu importovaných modulů.
-    try:
-        return fingerprint([
-            ("format", FORMAT_VERSION.encode()),
-            *inputs,
-            *(
-                (path.relative_to(PACKAGE).as_posix(), path.read_bytes())
-                for path in sorted(PACKAGE.rglob("*.py"))
-            ),
-        ])
-    except OSError as error:
-        msg = f"Vstup klíče cache nelze přečíst: {type(error).__name__}."
-        raise InvalidInputError(msg) from None
+    return code_key([("format", FORMAT_VERSION.encode()), *inputs])
 
 
 def is_current(directory: Path, key: str, artifacts: Sequence[str]) -> bool:

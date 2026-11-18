@@ -16,7 +16,7 @@ from mediparse.domain.data_access import DataAccessError
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.eda_note_features import main, run
 from mediparse.entrypoints.exit_code import ExitCode
-from mediparse.infrastructure import eda_cache, note_features_table
+from mediparse.infrastructure import code_fingerprint, eda_cache, note_features_table
 from mediparse.infrastructure.eda_cache import is_current
 from mediparse.infrastructure.note_features_table import ARTIFACTS, ParquetNoteFeatures
 from mediparse.infrastructure.note_features_table import note_features_key as cache_key
@@ -121,7 +121,7 @@ def test_implementation_changes_invalidate_key(
     package.mkdir()
     module = package / "one.py"
     module.write_text("one", encoding="utf-8")
-    monkeypatch.setattr(eda_cache, "PACKAGE", package)
+    monkeypatch.setattr(code_fingerprint, "PACKAGE", package)
     before = cache_key(parquet / "discharge.parquet", lexicon, candidates)
     if changed == "code":
         module.rename(package / "two.py")

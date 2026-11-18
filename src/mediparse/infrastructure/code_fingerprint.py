@@ -1,4 +1,4 @@
-"""Otisk kódu dosažitelného importy skriptu a dat balíčku pro Snakemake."""
+"""Otisk kódu dosažitelného importy skriptu a dat balíčku pro Snakemake a otisk celého balíčku pro klíče."""
 
 from __future__ import annotations
 
@@ -6,9 +6,14 @@ import ast
 import hashlib
 from modulefinder import ModuleFinder
 from pathlib import Path
+from typing import TYPE_CHECKING, Final
 
+from mediparse.domain.digest import fingerprint
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.file_digest import file_sha256
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 
 def code_fingerprint(script: Path, package: Path) -> str:
@@ -81,3 +86,30 @@ def _python_sha256(path: Path) -> str:
     # AST vynechá komentáře a polohu uzlů, aby formátování nespouštělo trénink.
     tree = ast.dump(ast.parse(path.read_text(encoding="utf-8")))
     return hashlib.sha256(tree.encode("utf-8")).hexdigest()
+
+
+PACKAGE: Final = Path(__file__).parents[1]
+
+
+def code_key(inputs: Sequence[tuple[str, bytes]]) -> str:
+    """Spojí pojmenované vstupy s obsahem balíčku.
+
+    Returns:
+        SHA-256 klíč vstupů a kódu.
+
+    Raises:
+        InvalidInputError: Kód balíčku nelze přečíst.
+    """
+    # Commit by invalidoval i po změně sešitu; celý balíček zachytí změny
+    # algoritmů bez křehkého seznamu importovaných modulů.
+    try:
+        return fingerprint([
+            *inputs,
+            *(
+                (path.relative_to(PACKAGE).as_posix(), path.read_bytes())
+                for path in sorted(PACKAGE.rglob("*.py"))
+            ),
+        ])
+    except OSError as error:
+        msg = f"Vstup klíče cache nelze přečíst: {type(error).__name__}."
+        raise InvalidInputError(msg) from None
