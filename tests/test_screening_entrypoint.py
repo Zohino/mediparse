@@ -98,6 +98,7 @@ def _run(
             predictions=root / "classical_predictions.parquet",
             manifest=root / "classical_manifest.json",
             checkpoint=root / "checkpoint",
+            embeddings=root / "embeddings",
         ),
         environ={} if environ is None else environ,
         revision=revision,
@@ -113,6 +114,8 @@ def test_results_manifest_records_actual_inputs_and_development(tmp_path: Path) 
     written = ScreeningManifest.model_validate_json(
         (out / "classical_manifest.json").read_text(encoding="utf-8")
     )
+    assert written.encoders == ()
+    assert "torch" not in written.environment.packages
     result = out / "classical.parquet"
     assert (
         written.dataset_sha256 == hashlib.sha256(inputs.cohort.read_bytes()).hexdigest()
@@ -252,6 +255,7 @@ def test_main_parses_required_paths(
         "predictions",
         "manifest",
         "checkpoint",
+        "embeddings",
     )
     paths = {name: tmp_path / name for name in names}
     monkeypatch.setattr(
@@ -281,6 +285,7 @@ def test_main_parses_required_paths(
         predictions=paths["predictions"],
         manifest=paths["manifest"],
         checkpoint=paths["checkpoint"],
+        embeddings=paths["embeddings"],
     )
 
 
@@ -431,9 +436,10 @@ def test_checkpoint_key_changes_with_each_input(
         predictions=tmp_path / "predictions",
         manifest=tmp_path / "manifest",
         checkpoint=tmp_path / "checkpoint",
+        embeddings=tmp_path / "embeddings",
     )
-    before = screening.checkpoint_key(paths, "dataset")
-    assert screening.checkpoint_key(paths, "dataset") == before
+    before = screening.checkpoint_key(paths, "dataset", {})
+    assert screening.checkpoint_key(paths, "dataset", {}) == before
     dataset = "dataset"
     if changed == "dataset_sha256":
         dataset = "other"
@@ -444,7 +450,7 @@ def test_checkpoint_key_changes_with_each_input(
     else:
         path = paths.config if changed == "config" else getattr(paths.corpus, changed)
         path.write_bytes(path.read_bytes() + b" ")
-    assert screening.checkpoint_key(paths, dataset) != before
+    assert screening.checkpoint_key(paths, dataset, {}) != before
 
 
 def test_foreign_checkpoint_refuses_before_outputs(tmp_path: Path) -> None:
@@ -456,3 +462,79 @@ def test_foreign_checkpoint_refuses_before_outputs(tmp_path: Path) -> None:
     (checkpoint / "key.json").write_text('{"key":"other"}', encoding="utf-8")
     assert _run(inputs, out) is ExitCode.REFUSED
     assert {p.name for p in out.iterdir()} == {"checkpoint"}
+
+
+def test_encoder_screening_end_to_end(tmp_path: Path) -> None:
+    """Malý encoder dodá příznaky LR, cache i úplnou provenance bez stahování."""
+    pytest.importorskip("torch")
+    from mediparse.infrastructure.hf_encoder import ENCODER_PACKAGES, HfMeanEncoder  # ruff: ignore[import-outside-top-level]
+    from tests.hf_encoder_support import encoder_parts  # ruff: ignore[import-outside-top-level]
+    from tests.test_note_embeddings import SPEC  # ruff: ignore[import-outside-top-level]
+
+    inputs = _inputs(tmp_path, families=("logreg",))
+    spec = SPEC.model_copy(update={"name": "mmbert-base-mean"})
+    config = json.loads(inputs.config.read_text(encoding="utf-8"))
+    config["vectorizers"] = [spec.model_dump(mode="json")]
+    inputs.config.write_text(json.dumps(config), encoding="utf-8")
+    model, tokenizer = encoder_parts(
+        sorted({word for note in notes() for word in note.text.split()})
+    )
+    factory = Mock(
+        return_value=HfMeanEncoder(model, tokenizer, spec.window, spec.device)
+    )
+    out = tmp_path / "out"
+    paths = screening.ScreeningPaths(
+        corpus=repository_corpus(inputs.cohort, inputs.split),
+        config=inputs.config,
+        out=out / "results.parquet",
+        predictions=out / "predictions.parquet",
+        manifest=out / "manifest.json",
+        checkpoint=out / "checkpoint",
+        embeddings=out / "embeddings",
+    )
+    assert (
+        screening.run(
+            environ={}, paths=paths, revision=fixed_revision, encoders=factory
+        )
+        is ExitCode.OK
+    )
+    rows = pq.read_table(paths.out).to_pylist()
+    assert len(rows) == 2 * len(Diagnosis)
+    assert {row["vectorizer"] for row in rows} == {"mmbert-base-mean"}
+    assert {row["family"] for row in rows} == {"logreg"}
+    manifest = ScreeningManifest.model_validate_json(paths.manifest.read_bytes())
+    assert manifest.encoders == (spec,)
+    assert set(ENCODER_PACKAGES) <= manifest.environment.packages.keys()
+    assert list(paths.embeddings.glob("*/*.parquet"))
+    assert not paths.checkpoint.exists()
+    before = screening.checkpoint_key(paths, "dataset", {})
+    config["vectorizers"][0]["revision"] = "b" * 40
+    inputs.config.write_text(json.dumps(config), encoding="utf-8")
+    assert screening.checkpoint_key(paths, "dataset", {}) != before
+
+
+def test_encoder_revision_and_versions_change_checkpoint_key(tmp_path: Path) -> None:
+    """Revize i knihovny encoderu mění obnovu také v prostředí bez torch."""
+    from tests.test_note_embeddings import SPEC, VERSIONS  # ruff: ignore[import-outside-top-level]
+
+    inputs = _inputs(tmp_path, families=("logreg",))
+    config = json.loads(inputs.config.read_text(encoding="utf-8"))
+    config["vectorizers"] = [SPEC.model_dump(mode="json")]
+    inputs.config.write_text(json.dumps(config), encoding="utf-8")
+    paths = screening.ScreeningPaths(
+        corpus=repository_corpus(inputs.cohort, inputs.split),
+        config=inputs.config,
+        out=tmp_path / "results",
+        predictions=tmp_path / "predictions",
+        manifest=tmp_path / "manifest",
+        checkpoint=tmp_path / "checkpoint",
+        embeddings=tmp_path / "embeddings",
+    )
+    before = screening.checkpoint_key(paths, "dataset", VERSIONS)
+    assert (
+        screening.checkpoint_key(paths, "dataset", VERSIONS | {"torch": "other"})
+        != before
+    )
+    config["vectorizers"][0]["revision"] = "b" * 40
+    inputs.config.write_text(json.dumps(config), encoding="utf-8")
+    assert screening.checkpoint_key(paths, "dataset", VERSIONS) != before

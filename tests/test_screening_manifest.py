@@ -132,3 +132,13 @@ def test_screening_requires_at_least_two_split_folds(folds: int) -> None:
     """Manifest screeningu odmítne split s méně než dvěma foldy."""
     with pytest.raises(ValidationError, match="split_folds"):
         ScreeningManifest.model_validate(_fields(split_folds=folds))
+
+
+def test_encoder_manifest_round_trip() -> None:
+    """Revize a numerický režim encoderu přežijí serializaci provenance."""
+    from tests.test_note_embeddings import SPEC  # ruff: ignore[import-outside-top-level]
+
+    manifest = ScreeningManifest.model_validate(_fields(encoders=(SPEC,)))
+    assert ScreeningManifest.model_validate_json(
+        manifest.model_dump_json()
+    ).encoders == (SPEC,)

@@ -31,7 +31,13 @@ from mediparse.entrypoints.model_corpus import (
 from mediparse.infrastructure.code_fingerprint import code_key
 from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.infrastructure.hf_encoder import (
+    ENCODER_PACKAGES,
+    HfMeanEncoder,
+    load_encoder,
+)
 from mediparse.infrastructure.json_file import write_model
+from mediparse.infrastructure.note_embeddings import NoteEmbeddings
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.screening_config import load_screening_config
 from mediparse.infrastructure.screening_table import (
@@ -39,6 +45,8 @@ from mediparse.infrastructure.screening_table import (
 )
 from mediparse.infrastructure.sklearn_metrics import SklearnScorer
 from mediparse.infrastructure.sklearn_screening import (
+    EncoderFeaturizer,
+    ScreeningFeaturizer,
     SklearnThresholdTuner,
     TfidfFeaturizer,
     screening_lsa,
@@ -50,6 +58,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable, Mapping
 
     from mediparse.domain.environment import SourceRevision
+    from mediparse.domain.screening import EncoderSpec
 
 logger = logging.getLogger(__name__)
 PACKAGES: Final = (
@@ -73,6 +82,7 @@ class ScreeningPaths:
     predictions: Path
     manifest: Path
     checkpoint: Path
+    embeddings: Path
 
 
 def main() -> ExitCode:
@@ -104,6 +114,12 @@ def main() -> ExitCode:
         required=True,
         help="Rozpracovaný běh s řádkovými díly; doporučeno resources/mimic/screening/classical_checkpoint, mimo results/.",
     )
+    parser.add_argument(
+        "--embeddings",
+        type=Path,
+        required=True,
+        help="Cache embeddingů; doporučeno resources/mimic/screening/embeddings, mimo results/.",
+    )
     parser.add_argument("--manifest", type=Path, required=True)
     args = parser.parse_args()
     return run(
@@ -120,6 +136,7 @@ def main() -> ExitCode:
             predictions=args.predictions,
             manifest=args.manifest,
             checkpoint=args.checkpoint,
+            embeddings=args.embeddings,
         ),
         revision=revision_source(os.environ, Path.cwd()),
     )
@@ -131,6 +148,7 @@ def run(
     environ: Mapping[str, str],
     paths: ScreeningPaths,
     revision: Callable[[], SourceRevision],
+    encoders: Callable[[EncoderSpec], HfMeanEncoder] = load_encoder,
 ) -> ExitCode:
     """Složí screening a zapíše agregáty i řádkové predikce s provenance.
 
@@ -140,21 +158,31 @@ def run(
     """
     check_inputs_access(environ, paths.corpus.data)
     screening = load_screening_config(paths.config)
+    versions = installed_versions(ENCODER_PACKAGES) if screening.encoders else {}
     source = revision()
     corpus = model_corpus(paths.corpus, screening.input)
     report = Screening(
         table=corpus.table,
         split=corpus.split,
         partitioner=StratifiedGroupFolds(),
-        featurizer=TfidfFeaturizer(
-            corpus.normalization,
-            screening_lsa(screening.families, screening.lsa_components, screening.seed),
+        featurizer=ScreeningFeaturizer(
+            TfidfFeaturizer(
+                corpus.normalization,
+                screening_lsa(
+                    screening.families, screening.lsa_components, screening.seed
+                ),
+            ),
+            EncoderFeaturizer(
+                NoteEmbeddings(
+                    paths.embeddings, versions, lambda spec: encoders(spec).embed
+                )
+            ),
         ),
         tuner=SklearnThresholdTuner(),
         scorer=SklearnScorer(),
         progress=ParquetScreeningCheckpoint(
             directory=paths.checkpoint,
-            key=checkpoint_key(paths, corpus.dataset_sha256),
+            key=checkpoint_key(paths, corpus.dataset_sha256, versions),
             results=paths.out,
             predictions=paths.predictions,
         ),
@@ -177,7 +205,7 @@ def run(
             text_preprocessing=screening.input.text_preprocessing,
             text_normalization=corpus.normalization,
             environment=Environment(
-                packages=installed_versions(PACKAGES), source=source
+                packages=installed_versions(PACKAGES) | versions, source=source
             ),
         ),
     )
@@ -190,7 +218,11 @@ def run(
     return ExitCode.OK
 
 
-def checkpoint_key(paths: ScreeningPaths, dataset_sha256: str) -> str:
+def checkpoint_key(
+    paths: ScreeningPaths,
+    dataset_sha256: str,
+    encoder_versions: Mapping[str, str],
+) -> str:
     """Otiskne vstupy, kód a verze knihoven pro obnovu screeningu.
 
     Returns:
@@ -204,6 +236,9 @@ def checkpoint_key(paths: ScreeningPaths, dataset_sha256: str) -> str:
         ("lexicon", file_sha256(paths.corpus.lexicon).encode()),
         *(
             (f"packages/{name}", value.encode())
-            for name, value in installed_versions(PACKAGES).items()
+            for name, value in {
+                **installed_versions(PACKAGES),
+                **encoder_versions,
+            }.items()
         ),
     ])

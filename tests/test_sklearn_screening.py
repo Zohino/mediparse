@@ -83,7 +83,7 @@ def test_prediction_matches_threshold_on_score_scale(
         7,
     )
     predictions = model.classify(test)
-    assert len(predictions) == test.sparse.shape[0]
+    assert len(predictions) == test.matrix.shape[0]
     assert all(
         item.predicted == (item.score >= model.threshold) for item in predictions
     )
@@ -179,16 +179,18 @@ def test_lsa_fits_once_on_outer_training_and_only_transforms_test(
         [note.text for note in notes],
         ["clinic review", "testonly"],
     )
+    assert isinstance(train.matrix, csr_matrix)
+    assert isinstance(test.matrix, csr_matrix)
     assert len(observed) == 1
-    np.testing.assert_array_equal(observed[0].toarray(), train.sparse.toarray())
+    np.testing.assert_array_equal(observed[0].toarray(), train.matrix.toarray())
     assert len(transformed) == 1
-    np.testing.assert_array_equal(transformed[0].toarray(), test.sparse.toarray())
+    np.testing.assert_array_equal(transformed[0].toarray(), test.matrix.toarray())
     assert seeds == [(2, 7)]
     assert train.lsa is not None
     assert train.lsa.shape == (len(notes), 2)
     assert test.lsa is not None
     assert test.lsa.shape == (2, 2)
-    assert test.sparse[1].nnz == 0
+    assert test.matrix[1].nnz == 0
     monkeypatch.setattr(TruncatedSVD, "fit_transform", refuse_fit)
     monkeypatch.setattr(TruncatedSVD, "fit", refuse_fit)
     tuner = SklearnThresholdTuner()
@@ -212,7 +214,7 @@ def test_features_without_lsa_reject_lightgbm_and_share_sparse() -> None:
             with pytest.raises(ValueError, match=f"^{re.escape(message)}$"):
                 train.for_family(family)
         else:
-            assert train.for_family(family) is train.sparse
+            assert train.for_family(family) is train.matrix
 
 
 def _nonconverging(family: ClassifierFamily, seed: Seed) -> BaseEstimator:
@@ -273,9 +275,10 @@ def test_featurizer_fits_only_training_vocabulary() -> None:
         ["alpha beta"],
         ["gamma"],
     )
-    assert train.sparse.shape == (1, 3)
-    assert test.sparse.shape == train.sparse.shape
-    assert test.sparse.nnz == 0
+    assert train.matrix.shape == (1, 3)
+    assert test.matrix.shape == train.matrix.shape
+    assert isinstance(test.matrix, csr_matrix)
+    assert test.matrix.nnz == 0
 
 
 def _observing_estimator(
@@ -440,7 +443,7 @@ def test_featurizer_applies_its_normalization() -> None:
         ["COPD"],
         ["COPD"],
     )
-    assert train.sparse.shape[1] == 4
+    assert train.matrix.shape[1] == 4
 
 
 @pytest.mark.parametrize(
@@ -461,7 +464,7 @@ def test_featurizer_uses_spec_analyzer(
         ["abc"],
         ["abc"],
     )
-    assert train.sparse.shape[1] == expected_features
+    assert train.matrix.shape[1] == expected_features
 
 
 def test_tuner_logs_family_and_peak_rss(
@@ -513,3 +516,40 @@ def test_screening_lsa_is_prepared_only_for_families_that_need_it(
 ) -> None:
     """LightGBM ve směsi rodin dostane komponenty a seed; ostatní rodiny LSA nepotřebují."""
     assert screening_lsa(families, 7, 13) == expected
+
+
+def test_encoder_scaler_fits_only_outer_train() -> None:
+    """Průměr 1 a populační std 1 z tréninku převedou test 4 na 3."""
+    from unittest.mock import Mock  # ruff: ignore[import-outside-top-level]
+
+    from mediparse.infrastructure.sklearn_screening import EncoderFeaturizer  # ruff: ignore[import-outside-top-level]
+    from tests.test_note_embeddings import SPEC  # ruff: ignore[import-outside-top-level]
+
+    embeddings = Mock()
+    embeddings.embed.side_effect = [np.array([[0.0], [2.0]]), np.array([[4.0]])]
+    train, test = EncoderFeaturizer(embeddings).fit_transform(SPEC, ["a", "b"], ["c"])
+    np.testing.assert_array_equal(train.matrix, [[-1.0], [1.0]])
+    np.testing.assert_array_equal(test.matrix, [[3.0]])
+    assert train.lsa is None
+    assert test.lsa is None
+
+
+@pytest.mark.parametrize("encoder", [False, True])
+def test_representation_dispatch(*, encoder: bool) -> None:
+    """Typ specifikace vybere právě odpovídající featurizér."""
+    from unittest.mock import Mock  # ruff: ignore[import-outside-top-level]
+
+    from mediparse.infrastructure.sklearn_screening import ScreeningFeaturizer  # ruff: ignore[import-outside-top-level]
+    from tests.test_note_embeddings import SPEC  # ruff: ignore[import-outside-top-level]
+
+    tfidf, dense = Mock(), Mock()
+    spec = (
+        SPEC
+        if encoder
+        else VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1))
+    )
+    result = ScreeningFeaturizer(tfidf, dense).fit_transform(spec, ["a"], ["b"])
+    selected, unused = (dense, tfidf) if encoder else (tfidf, dense)
+    assert result == selected.fit_transform.return_value
+    selected.fit_transform.assert_called_once_with(spec, ["a"], ["b"])
+    unused.fit_transform.assert_not_called()
