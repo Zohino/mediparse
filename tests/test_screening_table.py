@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from dataclasses import replace
 from pathlib import Path
 
@@ -266,12 +267,20 @@ def test_completed_reads_units_of_written_parts(
 
 
 @pytest.mark.parametrize(
-    "damage",
-    ["key", "corrupt-key", "invalid-key-type", "missing-key", "gap", "predictions"],
+    ("damage", "reason"),
+    [
+        ("key", "jiný config, data, kód nebo knihovny"),
+        ("corrupt-key", "jiný config, data, kód nebo knihovny"),
+        ("invalid-key-type", "jiný config, data, kód nebo knihovny"),
+        ("missing-key", "jiný config, data, kód nebo knihovny"),
+        ("gap", "řada dílů je přerušená"),
+        ("predictions", "řada dílů je přerušená"),
+    ],
 )
 def test_checkpoint_of_other_run_is_refused_untouched(
     checkpoint: ParquetScreeningCheckpoint,
     damage: str,
+    reason: str,
 ) -> None:
     """Cizí klíč a neúplná řada se odmítnou bez změny bajtů."""
     checkpoint.write(_unit_rows(0))
@@ -292,7 +301,10 @@ def test_checkpoint_of_other_run_is_refused_untouched(
         }[damage]
         (checkpoint.directory / name).unlink()
     before = {p.name: p.read_bytes() for p in checkpoint.directory.iterdir()}
-    with pytest.raises(InvalidInputError, match=str(checkpoint.directory)):
+    with pytest.raises(
+        InvalidInputError,
+        match=re.escape(f"{checkpoint.directory} patří jinému běhu ({reason})"),
+    ):
         checkpoint.completed()
     assert {p.name: p.read_bytes() for p in checkpoint.directory.iterdir()} == before
 
@@ -304,7 +316,7 @@ def test_finish_with_foreign_file_refuses_before_outputs(
     checkpoint.write(_unit_rows(0))
     (checkpoint.directory / "foreign").write_bytes(b"foreign")
     before = {p.name: p.read_bytes() for p in checkpoint.directory.iterdir()}
-    with pytest.raises(InvalidInputError):
+    with pytest.raises(InvalidInputError, match="cizí soubor"):
         checkpoint.finish()
     assert not checkpoint.results.exists()
     assert not checkpoint.predictions.exists()
@@ -362,5 +374,5 @@ def test_unknown_family_in_part_is_refused(
     columns = pq.read_table(path).to_pydict()
     columns["family"] = ["nope"] * 5
     write_table(path, columns, SCHEMA)
-    with pytest.raises(InvalidInputError):
+    with pytest.raises(InvalidInputError, match="neznámou rodinu"):
         checkpoint.completed()
