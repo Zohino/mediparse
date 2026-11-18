@@ -1,10 +1,10 @@
-"""Mřížka klasického screeningu: hodnoty protokolu a odmítnutí neplatného configu."""
+"""Mřížka screeningu: hodnoty protokolu a odmítnutí neplatného configu."""
 
 from __future__ import annotations
 
 import json
 import re
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 from pydantic import ValidationError
@@ -13,6 +13,10 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.screening import EncoderSpec, ScreeningConfig
 from mediparse.infrastructure.screening_config import load_screening_config
 from tests.hf_encoder_support import SPEC
+from tests.support import REPOSITORY
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 WORD = {"name": "word-1-2", "analyzer": "word", "ngram_range": [1, 2]}
 CHAR = {"name": "char_wb-3-5", "analyzer": "char_wb", "ngram_range": [3, 5]}
@@ -35,7 +39,7 @@ def _config() -> dict[str, object]:
 
 def test_repository_config_matches_protocol() -> None:
     """Soubor deklaruje přesně mřížku a volby vstupu schválené v briefu."""
-    path = Path(__file__).parents[1] / "config/screening_classical.json"
+    path = REPOSITORY / "config/screening_classical.json"
 
     assert load_screening_config(path).model_dump(mode="json") == _config()
 
@@ -122,7 +126,7 @@ def test_invalid_file_is_invalid_input(tmp_path: Path) -> None:
 
 def test_shallow_config_matches_protocol() -> None:
     """Mělký stupeň používá původní text a připnutý mmBERT s LR."""
-    config = load_screening_config(Path("config/screening_shallow.json"))
+    config = load_screening_config(REPOSITORY / "config/screening_shallow.json")
     assert len(config.encoders) == 1
     assert config.encoders[0].model_dump() == {
         "name": "mmbert-base-mean",
@@ -143,7 +147,10 @@ def test_shallow_config_matches_protocol() -> None:
         config.threshold_folds,
         config.lsa_components,
     ) == (0, 5, 3, 100)
-    assert load_screening_config(Path("config/screening_classical.json")).encoders == ()
+    assert (
+        load_screening_config(REPOSITORY / "config/screening_classical.json").encoders
+        == ()
+    )
 
 
 @pytest.mark.parametrize(
