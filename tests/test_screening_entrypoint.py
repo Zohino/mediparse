@@ -106,12 +106,17 @@ def _run(
     )
 
 
-def test_results_manifest_records_actual_inputs_and_development(tmp_path: Path) -> None:
+def test_results_manifest_records_actual_inputs_and_development(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """Manifest váže agregáty na skutečné soubory, původní split, prostředí a velikost vývoje."""
+    packages = Mock(wraps=screening.installed_versions)
+    monkeypatch.setattr(screening, "installed_versions", packages)
     inputs = _inputs(tmp_path)
     out = tmp_path / "out"
     mark_synthetic(tmp_path)
     assert _run(inputs, out, environ={"CODEX_THREAD_ID": "test"}) is ExitCode.OK
+    packages.assert_called_once_with(screening.PACKAGES)
     written = ScreeningManifest.model_validate_json(
         (out / "classical_manifest.json").read_text(encoding="utf-8")
     )
@@ -420,9 +425,7 @@ def test_predictions_use_cell_threshold(screened: tuple[_Inputs, Path]) -> None:
     "changed",
     ["config", "split", "candidates", "lexicon", "dataset_sha256", "packages"],
 )
-def test_checkpoint_key_changes_with_each_input(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, changed: str
-) -> None:
+def test_checkpoint_key_changes_with_each_input(tmp_path: Path, changed: str) -> None:
     """Každý vědecký vstup a verze knihoven jsou součástí klíče."""
     inputs = _inputs(tmp_path)
     corpus = repository_corpus(inputs.cohort, inputs.split)
@@ -439,19 +442,18 @@ def test_checkpoint_key_changes_with_each_input(
         checkpoint=tmp_path / "checkpoint",
         embeddings=tmp_path / "embeddings",
     )
-    before = screening.checkpoint_key(paths, "dataset", {})
-    assert screening.checkpoint_key(paths, "dataset", {}) == before
+    packages = {"python": "test"}
+    before = screening.checkpoint_key(paths, "dataset", packages)
+    assert screening.checkpoint_key(paths, "dataset", packages) == before
     dataset = "dataset"
     if changed == "dataset_sha256":
         dataset = "other"
     elif changed == "packages":
-        monkeypatch.setattr(
-            screening, "installed_versions", lambda _: {"python": "other"}
-        )
+        packages = {"python": "other"}
     else:
         path = paths.config if changed == "config" else getattr(paths.corpus, changed)
         path.write_bytes(path.read_bytes() + b" ")
-    assert screening.checkpoint_key(paths, dataset, {}) != before
+    assert screening.checkpoint_key(paths, dataset, packages) != before
 
 
 def test_foreign_checkpoint_refuses_before_outputs(tmp_path: Path) -> None:

@@ -159,6 +159,7 @@ def run(
     check_inputs_access(environ, paths.corpus.data)
     screening = load_screening_config(paths.config)
     versions = installed_versions(ENCODER_PACKAGES) if screening.encoders else {}
+    packages = installed_versions(PACKAGES) | versions
     source = revision()
     corpus = model_corpus(paths.corpus, screening.input)
     report = Screening(
@@ -182,7 +183,7 @@ def run(
         scorer=SklearnScorer(),
         progress=ParquetScreeningCheckpoint(
             directory=paths.checkpoint,
-            key=checkpoint_key(paths, corpus.dataset_sha256, versions),
+            key=checkpoint_key(paths, corpus.dataset_sha256, packages),
             results=paths.out,
             predictions=paths.predictions,
         ),
@@ -204,9 +205,7 @@ def run(
             diagnostic_strip=corpus.strip,
             text_preprocessing=screening.input.text_preprocessing,
             text_normalization=corpus.normalization,
-            environment=Environment(
-                packages=installed_versions(PACKAGES) | versions, source=source
-            ),
+            environment=Environment(packages=packages, source=source),
         ),
     )
     logger.info(
@@ -221,7 +220,7 @@ def run(
 def checkpoint_key(
     paths: ScreeningPaths,
     dataset_sha256: str,
-    encoder_versions: Mapping[str, str],
+    packages: Mapping[str, str],
 ) -> str:
     """Otiskne vstupy, kód a verze knihoven pro obnovu screeningu.
 
@@ -234,11 +233,5 @@ def checkpoint_key(
         ("split", file_sha256(paths.corpus.split).encode()),
         ("candidates", file_sha256(paths.corpus.candidates).encode()),
         ("lexicon", file_sha256(paths.corpus.lexicon).encode()),
-        *(
-            (f"packages/{name}", value.encode())
-            for name, value in {
-                **installed_versions(PACKAGES),
-                **encoder_versions,
-            }.items()
-        ),
+        *((f"packages/{name}", value.encode()) for name, value in packages.items()),
     ])
