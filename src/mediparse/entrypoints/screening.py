@@ -162,6 +162,7 @@ def run(
     write_model(
         paths.manifest,
         ScreeningManifest(
+            encoders=screening.encoders,
             dataset_sha256=corpus.dataset_sha256,
             split_seed=report.split_config.seed,
             split_folds=report.split_config.folds,

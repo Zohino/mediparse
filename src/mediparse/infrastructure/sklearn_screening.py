@@ -13,7 +13,8 @@ from sklearn.model_selection import TunedThresholdClassifierCV
 from sklearn.svm import LinearSVC
 
 from mediparse.domain.evaluation import Classification
-from mediparse.domain.screening import ClassifierFamily
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.screening import ClassifierFamily, VectorizerSpec
 from mediparse.infrastructure.complement_nb import ComplementNbLogOdds
 from mediparse.infrastructure.machine_hardware import peak_rss_gb
 from mediparse.infrastructure.nb_svm import NbSvmClassifier
@@ -33,7 +34,7 @@ if TYPE_CHECKING:
 
     from mediparse.domain.clinical_text import TextNormalization
     from mediparse.domain.identity import SubjectId
-    from mediparse.domain.screening import VectorizerSpec
+    from mediparse.domain.screening import Representation
     from mediparse.domain.seed import Seed
 
 logger = logging.getLogger(__name__)
@@ -92,7 +93,7 @@ class TfidfFeaturizer:
     lsa: Lsa | None = None
 
     def fit_transform(
-        self, spec: VectorizerSpec, train: Sequence[str], test: Sequence[str]
+        self, spec: Representation, train: Sequence[str], test: Sequence[str]
     ) -> tuple[ScreeningFeatures, ScreeningFeatures]:
         """Fitne TF-IDF a volitelnou LSA na vnějším tréninku a transformuje test.
 
@@ -102,6 +103,9 @@ class TfidfFeaturizer:
         Raises:
             InvalidInputError: Z tréninkových textů nevznikne žádný příznak.
         """
+        if not isinstance(spec, VectorizerSpec):
+            msg = "Encoder vyžaduje adaptér embeddingů."
+            raise InvalidInputError(msg)
         vectorizer = tfidf_vectorizer(
             self.normalization, analyzer=spec.analyzer, ngram_range=spec.ngram_range
         )

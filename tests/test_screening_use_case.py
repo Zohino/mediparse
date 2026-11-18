@@ -16,11 +16,11 @@ from mediparse.domain.evaluation import Classification
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.screening import (
     ClassifierFamily,
+    Representation,
     ScreeningConfig,
     ScreeningReport,
     ScreeningResult,
     ScreeningUnit,
-    VectorizerSpec,
 )
 from mediparse.infrastructure.screening_table import ParquetScreeningCheckpoint
 from mediparse.infrastructure.sklearn_metrics import SklearnScorer
@@ -72,7 +72,7 @@ class _Fit:
 
 @dataclass
 class _Recording:
-    featurizations: list[tuple[VectorizerSpec, Features, Features]] = field(
+    featurizations: list[tuple[Representation, Features, Features]] = field(
         default_factory=list
     )
     fits: list[_Fit] = field(default_factory=list)
@@ -112,7 +112,7 @@ class _Featurizer:
     recording: _Recording
 
     def fit_transform(
-        self, spec: VectorizerSpec, train: Sequence[str], test: Sequence[str]
+        self, spec: Representation, train: Sequence[str], test: Sequence[str]
     ) -> tuple[Features, Features]:
         self.recording.featurizations.append((spec, tuple(train), tuple(test)))
         return tuple(train), tuple(test)

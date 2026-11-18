@@ -28,8 +28,8 @@ if TYPE_CHECKING:
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.screening import (
         ClassifierFamily,
+        Representation,
         ScreeningConfig,
-        VectorizerSpec,
     )
     from mediparse.domain.seed import Seed
     from mediparse.domain.split import Holdout
@@ -39,7 +39,7 @@ class Featurizer[F](Protocol):
     """Příznaky fitované jen na tréninku, sdílené rodinami a diagnózami foldu."""
 
     def fit_transform(
-        self, spec: VectorizerSpec, train: Sequence[str], test: Sequence[str]
+        self, spec: Representation, train: Sequence[str], test: Sequence[str]
     ) -> tuple[F, F]:
         """Fitne vektorizér na tréninku a vrátí příznaky tréninku i testu."""
 
@@ -140,7 +140,7 @@ class Screening[F]:
     def _screen_vectorizer(
         self,
         holdout: Holdout,
-        spec: VectorizerSpec,
+        spec: Representation,
         families: Sequence[ClassifierFamily],
         config: ScreeningConfig,
     ) -> None:

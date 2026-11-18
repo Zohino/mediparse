@@ -9,7 +9,7 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.screening import ScreeningConfig
+from mediparse.domain.screening import EncoderSpec, ScreeningConfig
 from mediparse.infrastructure.screening_config import load_screening_config
 
 WORD = {"name": "word-1-2", "analyzer": "word", "ngram_range": [1, 2]}
@@ -116,3 +116,73 @@ def test_invalid_file_is_invalid_input(tmp_path: Path) -> None:
 
     with pytest.raises(InvalidInputError, match="neodpovídá schématu"):
         load_screening_config(path)
+
+
+def test_shallow_config_matches_protocol() -> None:
+    """Mělký stupeň používá původní text a připnutý mmBERT s LR."""
+    config = load_screening_config(Path("config/screening_shallow.json"))
+    assert len(config.encoders) == 1
+    assert config.encoders[0].model_dump() == {
+        "name": "mmbert-base-mean",
+        "model": "jhu-clsp/mmBERT-base",
+        "revision": "c5955035435e2bf121cde7f3c8863ef52ff35d82",
+        "window": 8192,
+        "device": "cuda",
+        "dtype": "bfloat16",
+    }
+    assert config.input.model_dump(mode="json") == {
+        "strip_diagnostic_sections": False,
+        "text_preprocessing": "none",
+    }
+    assert config.model_dump(mode="json")["families"] == ["logreg"]
+    assert (
+        config.seed,
+        config.folds,
+        config.threshold_folds,
+        config.lsa_components,
+    ) == (0, 5, 3, 100)
+    assert load_screening_config(Path("config/screening_classical.json")).encoders == ()
+
+
+@pytest.mark.parametrize(
+    "changes", [{"revision": "a" * 39}, {"device": "mps"}, {"extra": 1}]
+)
+def test_encoder_spec_rejects_invalid_values(changes: dict[str, object]) -> None:
+    """Encoder vyžaduje plnou revizi, známé zařízení a uzavřené schéma."""
+    spec = {
+        "name": "encoder",
+        "model": "test",
+        "revision": "a" * 40,
+        "window": 8,
+        "device": "cpu",
+        "dtype": "float32",
+    }
+    with pytest.raises(ValidationError):
+        EncoderSpec.model_validate(spec | changes)
+
+
+@pytest.mark.parametrize(
+    ("families", "duplicate"), [(["complement_nb"], False), (["logreg"], True)]
+)
+def test_encoder_grid_rejects_incompatible_family_or_duplicate_name(
+    families: list[str], *, duplicate: bool
+) -> None:
+    """Hustý encoder smí jen k LR a jména sdílí s TF-IDF jeden prostor."""
+    encoder = {
+        "name": WORD["name"],
+        "model": "test",
+        "revision": "a" * 40,
+        "window": 8,
+        "device": "cpu",
+        "dtype": "float32",
+    }
+    with pytest.raises(ValidationError):
+        ScreeningConfig.model_validate_json(
+            json.dumps(
+                _config()
+                | {
+                    "families": families,
+                    "vectorizers": [encoder, WORD] if duplicate else [encoder],
+                }
+            )
+        )

@@ -1,0 +1,23 @@
+{
+  "seed": 0,
+  "folds": 5,
+  "threshold_folds": 3,
+  "lsa_components": 100,
+  "input": {
+    "strip_diagnostic_sections": false,
+    "text_preprocessing": "none"
+  },
+  "vectorizers": [
+    {
+      "name": "mmbert-base-mean",
+      "model": "jhu-clsp/mmBERT-base",
+      "revision": "c5955035435e2bf121cde7f3c8863ef52ff35d82",
+      "window": 8192,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    }
+  ],
+  "families": [
+    "logreg"
+  ]
+}

@@ -14,6 +14,7 @@ from tests.support import REVISION
 
 def _fields(**changes: object) -> dict[str, object]:
     return {
+        "encoders": (),
         "dataset_sha256": "a" * 64,
         "split_seed": 23,
         "split_folds": 2,

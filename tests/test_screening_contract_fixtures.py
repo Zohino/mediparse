@@ -89,6 +89,7 @@ def write_screening_fixtures(directory: Path) -> None:
     ParquetScreeningTable(results).write(cells)
     ParquetScreeningPredictions(predictions).write(cells)
     manifest = ScreeningManifest(
+        encoders=(),
         dataset_sha256="a" * 64,
         split_seed=0,
         split_folds=5,
