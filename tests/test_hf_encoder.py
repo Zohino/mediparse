@@ -6,7 +6,7 @@ from unittest.mock import Mock
 
 import numpy as np
 import pytest
-from hypothesis import given
+from hypothesis import example, given
 from hypothesis import strategies as st
 
 from mediparse.domain.inputs import InvalidInputError
@@ -19,6 +19,7 @@ from mediparse.infrastructure.hf_encoder import (
 from tests.hf_encoder_support import SPEC, encoder_parts
 
 
+@example(content=[], prefix=[2], suffix=[3], extra=1)
 @given(
     content=st.lists(st.integers(), max_size=200),
     prefix=st.lists(st.integers(), max_size=2),
@@ -34,12 +35,12 @@ def test_windows_preserve_content(
     assert [
         token
         for part in windows
-        for token in part[len(prefix) : len(part) - len(suffix) if suffix else None]
+        for token in part[len(prefix) : len(part) - len(suffix)]
     ] == content
     assert all(
         len(part) <= window
         and part[: len(prefix)] == prefix
-        and (not suffix or part[-len(suffix) :] == suffix)
+        and part[len(part) - len(suffix) :] == suffix
         for part in windows
     )
     if not content:
@@ -98,7 +99,9 @@ def test_load_validates_window_boundaries(
     if accepted:
         assert load_encoder(spec).window == window
     else:
-        with pytest.raises(InvalidInputError, match=r"okn|Okno"):
+        with pytest.raises(
+            InvalidInputError, match="Okno encoderu musí přesáhnout obal"
+        ):
             load_encoder(spec)
 
 
