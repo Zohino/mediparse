@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -156,14 +157,19 @@ def test_encoder_spec_rejects_invalid_values(changes: dict[str, object]) -> None
 
 
 @pytest.mark.parametrize(
-    ("families", "duplicate"), [(["complement_nb"], False), (["logreg"], True)]
+    ("families", "duplicate", "message"),
+    [
+        (["complement_nb"], False, "Encoder podporuje jen rodinu logreg."),
+        (["logreg", "complement_nb"], False, "Encoder podporuje jen rodinu logreg."),
+        (["logreg"], True, "Jména vektorizérů screeningu musí být jedinečná."),
+    ],
 )
 def test_encoder_grid_rejects_incompatible_family_or_duplicate_name(
-    families: list[str], *, duplicate: bool
+    families: list[str], message: str, *, duplicate: bool
 ) -> None:
     """Hustý encoder smí jen k LR a jména sdílí s TF-IDF jeden prostor."""
     encoder = SPEC.model_dump(mode="json") | {"name": WORD["name"]}
-    with pytest.raises(ValidationError):
+    with pytest.raises(ValidationError, match=re.escape(message)):
         ScreeningConfig.model_validate_json(
             json.dumps(
                 _config()
