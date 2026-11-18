@@ -101,7 +101,7 @@ class ClassicalScreening[F]:
     progress: ScreeningProgress
 
     def run(self, config: ClassicalScreeningConfig) -> ScreeningReport:
-        """Ověří foldy před fitováním a zapíše spočtené buňky do obou výstupů.
+        """Ověří foldy, přeskočí hotové jednotky rozpracovaného běhu, ostatní zapíše po jednotkách a složí výstupy.
 
         Args:
             config: Mřížka v pořadí výpočtu, parametry CV a seed screeningu.
@@ -112,7 +112,8 @@ class ClassicalScreening[F]:
         Raises:
             InvalidInputError: Pacient tabulky je mimo split, vývojová část nemá dost
                 pacientů v každé třídě, některý test foldu nesplňuje ``MIN_CELL``
-                nebo trénink foldu nemá dost pacientů pro vnitřní CV prahu.
+                nebo trénink foldu nemá dost pacientů pro vnitřní CV prahu;
+                rozpracovaný běh patří jinému běhu nebo je poškozený.
         """
         shared = self.split.read()
         shared.split.ensure_covers(self.table.subjects())
