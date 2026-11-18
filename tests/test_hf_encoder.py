@@ -133,3 +133,23 @@ def test_load_preserves_revision_local_snapshot_and_dtype(
         "/synthetic-model", dtype=torch.bfloat16, attn_implementation="sdpa"
     )
     tokenizer_loader.assert_called_once_with("/synthetic-model", spec.revision)
+
+
+def test_window_requires_space_for_content() -> None:
+    """Obal bez místa pro jediný obsahový token je neplatné okno i bez torch."""
+    with pytest.raises(InvalidInputError, match="pojmout obsah"):
+        token_windows([1], [2], [3], 2)
+
+
+@pytest.mark.parametrize("error_type", [TypeError, RuntimeError])
+def test_encoder_preserves_programming_errors(
+    monkeypatch: pytest.MonkeyPatch, error_type: type[Exception]
+) -> None:
+    """Chyba programu se nesmí vydávat za odmítnutí vstupu encoderu."""
+    pytest.importorskip("torch")
+    model, tokenizer = encoder_parts()
+    error = error_type("syntetická chyba")
+    monkeypatch.setattr(model, "forward", Mock(side_effect=error))
+    with pytest.raises(error_type) as caught:
+        HfMeanEncoder(model, tokenizer, 8, "cpu").embed("w1")
+    assert caught.value is error

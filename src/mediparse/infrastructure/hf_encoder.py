@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.hf_tokenizers import load_tokenizer
+from mediparse.infrastructure.hf_tokenizers import load_tokenizer, special_tokens
 
 if TYPE_CHECKING:
     from collections.abc import Generator, Sequence
@@ -72,7 +72,7 @@ class HfMeanEncoder:
         Raises:
             InvalidInputError: Tokenizace nebo forward selhaly.
         """
-        # Torch chybí v default; transformers musí následovat až po skops.
+        # Torch chybí v default.
         import torch  # ruff: ignore[import-outside-top-level]
 
         with _encoder_errors():
@@ -134,8 +134,7 @@ def load_encoder(spec: EncoderSpec) -> HfMeanEncoder:
         model = AutoModel.from_pretrained(
             directory, dtype=getattr(torch, spec.dtype), attn_implementation="sdpa"
         )
-        _, prefix, suffix = _token_parts(tokenizer, "")
-        wrapper = len(prefix) + len(suffix)
+        wrapper = special_tokens(tokenizer)
         if spec.window <= wrapper or spec.window > model.config.max_position_embeddings:
             msg = "Okno encoderu musí přesáhnout obal a nepřekročit kapacitu modelu."
             raise InvalidInputError(msg)
@@ -146,10 +145,14 @@ def load_encoder(spec: EncoderSpec) -> HfMeanEncoder:
 
 @contextmanager
 def _encoder_errors() -> Generator[None]:
+    # Torch chybí v default.
+    import torch  # ruff: ignore[import-outside-top-level]
+
     try:
         yield
+    # Doménová chyba dědí z ValueError; její vlastní vysvětlení musí zůstat.
     except InvalidInputError:
         raise
-    except (OSError, ValueError, TypeError, RuntimeError) as error:
+    except (OSError, ValueError, torch.OutOfMemoryError) as error:
         msg = f"Encoder nelze načíst nebo použít: {type(error).__name__}."
         raise InvalidInputError(msg) from None
