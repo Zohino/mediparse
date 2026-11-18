@@ -111,5 +111,5 @@ def code_key(inputs: Sequence[tuple[str, bytes]]) -> str:
             ),
         ])
     except OSError as error:
-        msg = f"Vstup klíče cache nelze přečíst: {type(error).__name__}."
+        msg = f"Kód balíčku pro klíč nelze přečíst: {type(error).__name__}."
         raise InvalidInputError(msg) from None

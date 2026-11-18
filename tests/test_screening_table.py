@@ -376,3 +376,20 @@ def test_unknown_family_in_part_is_refused(
     write_table(path, columns, SCHEMA)
     with pytest.raises(InvalidInputError, match="neznámou rodinu"):
         checkpoint.completed()
+
+
+def test_checkpoint_write_refuses_file_as_parent(tmp_path: Path) -> None:
+    """Soubor místo rodičovského adresáře se přeloží na doménovou chybu."""
+    parent = tmp_path / "file"
+    parent.write_bytes(b"synthetic")
+    checkpoint = ParquetScreeningCheckpoint(
+        parent / "checkpoint",
+        "key",
+        tmp_path / "results",
+        tmp_path / "predictions",
+    )
+    with pytest.raises(
+        InvalidInputError,
+        match="NotADirectoryError",
+    ):
+        checkpoint.write(_unit_rows(0))

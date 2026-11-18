@@ -148,3 +148,15 @@ def test_eda_cache_key_differs_from_code_key_by_format() -> None:
     inputs = [("input", b"synthetic")]
     assert cache_key(inputs) == code_key([("format", FORMAT_VERSION.encode()), *inputs])
     assert cache_key(inputs) != code_key(inputs)
+
+
+def test_code_key_refuses_unreadable_source(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Adresář s příponou Pythonu nesmí uniknout jako surová chyba souborového systému."""
+    monkeypatch.setattr("mediparse.infrastructure.code_fingerprint.PACKAGE", tmp_path)
+    (tmp_path / "x.py").mkdir()
+    with pytest.raises(
+        InvalidInputError, match="Kód balíčku pro klíč nelze přečíst: IsADirectoryError"
+    ):
+        code_key([])
