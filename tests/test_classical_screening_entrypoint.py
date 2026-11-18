@@ -453,6 +453,6 @@ def test_foreign_checkpoint_refuses_before_outputs(tmp_path: Path) -> None:
     out = tmp_path / "out"
     checkpoint = out / "checkpoint"
     checkpoint.mkdir(parents=True)
-    (checkpoint / "key.json").write_text('{"key":"other"}')
+    (checkpoint / "key.json").write_text('{"key":"other"}', encoding="utf-8")
     assert _run(inputs, out) is ExitCode.REFUSED
     assert {p.name for p in out.iterdir()} == {"checkpoint"}

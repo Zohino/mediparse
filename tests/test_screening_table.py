@@ -277,7 +277,9 @@ def test_checkpoint_of_other_run_is_refused_untouched(
     checkpoint.write(_unit_rows(0))
     checkpoint.write(_unit_rows(1))
     if damage == "key":
-        (checkpoint.directory / "key.json").write_text('{"key":"other"}')
+        (checkpoint.directory / "key.json").write_text(
+            '{"key":"other"}', encoding="utf-8"
+        )
     else:
         name = {
             "missing-key": "key.json",

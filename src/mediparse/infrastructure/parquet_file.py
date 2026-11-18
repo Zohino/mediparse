@@ -89,7 +89,7 @@ def write_arrow(path: Path, table: pa.Table) -> None:
 
 
 def concat_files(target: Path, sources: Sequence[Path], schema: pa.Schema) -> None:
-    """Složí díly se shodným schématem do jediné tabulky v pořadí vstupů."""
+    """Složí díly se stejným schématem do jediné tabulky v pořadí vstupů."""
     write_arrow(
         target, pa.concat_tables([read_table(source, schema) for source in sources])
     )
