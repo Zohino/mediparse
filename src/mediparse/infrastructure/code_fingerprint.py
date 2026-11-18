@@ -65,10 +65,10 @@ def _fingerprint_rows(script: Path, package: Path) -> list[str]:
         msg = f"Nelze otisknout {script}: žádný import z balíčku {package}"
         raise InvalidInputError(msg)
 
-    rows = [f"python script {_python_sha256(script)}"]
+    rows = [f"python script {module_sha256(script)}"]
     # Typeshed u Module neuvádí __file__, který ModuleFinder nastavuje při načtení.
     rows.extend(
-        f"python {name} {_python_sha256(Path(vars(module)['__file__']))}"
+        f"python {name} {module_sha256(Path(vars(module)['__file__']))}"
         for name, module in modules.items()
     )
     rows.extend(
@@ -85,7 +85,12 @@ def _in_package(module: str, package: str) -> bool:
     return module == package or module.startswith(f"{package}.")
 
 
-def _python_sha256(path: Path) -> str:
+def module_sha256(path: Path) -> str:
+    """Otiskne AST modulu bez komentářů a polohy uzlů.
+
+    Returns:
+        SHA-256 reprezentace stromu.
+    """
     # AST vynechá komentáře a polohu uzlů, aby formátování nespouštělo trénink.
     tree = ast.dump(ast.parse(path.read_text(encoding="utf-8")))
     return hashlib.sha256(tree.encode("utf-8")).hexdigest()
@@ -106,7 +111,7 @@ def code_key(inputs: Sequence[tuple[str, bytes]]) -> str:
         return fingerprint([
             *inputs,
             *(
-                (path.relative_to(PACKAGE).as_posix(), _python_sha256(path).encode())
+                (path.relative_to(PACKAGE).as_posix(), module_sha256(path).encode())
                 for path in sorted(PACKAGE.rglob("*.py"))
             ),
         ])

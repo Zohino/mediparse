@@ -510,3 +510,8 @@ torch = { version = "==2.14.1", index = "https://download.pytorch.org/whl/cpu" }
 
 [tool.pixi.feature.gpu.pypi-dependencies]
 torch = { version = "==2.14.1", index = "https://download.pytorch.org/whl/cu130" }
+
+[[tool.ty.overrides]]
+include = ["src/mediparse/infrastructure/hf_encoder.py", "tests/hf_encoder_support.py", "tests/test_hf_encoder.py"]
+[tool.ty.overrides.analysis]
+allowed-unresolved-imports = ["torch"]
