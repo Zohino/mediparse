@@ -15,6 +15,7 @@ import pyarrow as pa
 
 from mediparse.domain.digest import fingerprint
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.infrastructure import hf_encoder, hf_tokenizers
 from mediparse.infrastructure.code_fingerprint import module_sha256
 from mediparse.infrastructure.machine_hardware import peak_rss_gb
 from mediparse.infrastructure.parquet_file import read_table, write_table
@@ -47,7 +48,8 @@ def cache_key(spec: EncoderSpec, versions: Mapping[str, str]) -> str:
             for name, value in spec.model_dump(exclude={"name"}).items()
         ),
         *((f"packages/{name}", value.encode()) for name, value in versions.items()),
-        ("encoder", module_sha256(Path(__file__).with_name("hf_encoder.py")).encode()),
+        ("encoder", module_sha256(Path(hf_encoder.__file__)).encode()),
+        ("tokenizer", module_sha256(Path(hf_tokenizers.__file__)).encode()),
     ])
 
 
@@ -68,8 +70,8 @@ class NoteEmbeddings:
         Raises:
             InvalidInputError: Cache má nekonzistentní šířku, nesouvislé díly či chybu I/O.
         """
-        directory = self.directory / cache_key(spec, self.versions)
         with self._errors():
+            directory = self.directory / cache_key(spec, self.versions)
             parts = sorted(directory.glob("*.parquet"))
             if [part.name for part in parts] != [
                 f"{index:04d}.parquet" for index in range(len(parts))

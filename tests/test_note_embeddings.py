@@ -104,3 +104,28 @@ def test_inconsistent_cached_width_is_rejected(tmp_path: Path) -> None:
     )
     with pytest.raises(InvalidInputError, match="délk"):
         NoteEmbeddings(tmp_path, VERSIONS, Mock()).embed(SPEC, ["a"])
+
+
+@pytest.mark.parametrize("module", ["hf_encoder.py", "hf_tokenizers.py"])
+def test_cache_key_tracks_input_modules(
+    monkeypatch: pytest.MonkeyPatch, module: str
+) -> None:
+    """Změna AST encoderu i tokenizace musí změnit obsahový klíč."""
+    digests = {"hf_encoder.py": "x", "hf_tokenizers.py": "x"}
+    monkeypatch.setattr(
+        note_embeddings, "module_sha256", lambda path: digests[path.name]
+    )
+    before = cache_key(SPEC, VERSIONS)
+    digests[module] = "y"
+    assert cache_key(SPEC, VERSIONS) != before
+
+
+def test_cache_key_io_error_is_invalid_input(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Chyba čtení modulu při výpočtu klíče patří pod I/O hranici cache."""
+    monkeypatch.setattr(
+        note_embeddings, "module_sha256", Mock(side_effect=OSError("syntetická chyba"))
+    )
+    with pytest.raises(InvalidInputError, match="Cache embeddingů"):
+        NoteEmbeddings(tmp_path, VERSIONS, Mock()).embed(SPEC, ["a"])
