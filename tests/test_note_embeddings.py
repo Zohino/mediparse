@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import logging
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
@@ -23,19 +24,15 @@ def _vector(text: str) -> np.ndarray:
     return np.array([len(text), ord(text[0])], dtype=np.float32)
 
 
-def test_cache_order_uniqueness_and_lazy_factory(
-    tmp_path: Path, caplog: pytest.LogCaptureFixture
-) -> None:
+def test_cache_order_uniqueness_and_lazy_factory(tmp_path: Path) -> None:
     """Pořadí i duplicity přežijí cache a plná cache encoder vůbec nenačte."""
     fake = Mock(side_effect=_vector)
-    cache = NoteEmbeddings(tmp_path, VERSIONS, lambda _: fake)
-    with caplog.at_level(logging.INFO):
-        result = cache.embed(SPEC, ["a", "b", "a"])
-        assert fake.call_count == 2
-        cache.embed(SPEC, ["SENTINEL-TEXT-private"])
+    factory = Mock(return_value=fake)
+    result = NoteEmbeddings(tmp_path, VERSIONS, factory).embed(SPEC, ["a", "b", "a"])
     np.testing.assert_array_equal(result, [[1, 97], [1, 98], [1, 97]])
-    assert fake.call_count == 3
-    assert "SENTINEL-TEXT-private" not in caplog.text
+    assert result.dtype == np.float32
+    assert fake.call_count == 2
+    factory.assert_called_once_with(SPEC)
     factory = Mock(side_effect=AssertionError("Plná cache nesmí načítat encoder"))
     np.testing.assert_array_equal(
         NoteEmbeddings(tmp_path, VERSIONS, factory).embed(SPEC, ["a", "b", "a"]), result
@@ -43,8 +40,19 @@ def test_cache_order_uniqueness_and_lazy_factory(
     factory.assert_not_called()
 
 
+def test_cache_logging_omits_text_and_hash(
+    tmp_path: Path, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Log postupu neobsahuje vstupní text ani jeho identifikační otisk."""
+    sentinel = "SENTINEL-TEXT-private"
+    with caplog.at_level(logging.INFO):
+        NoteEmbeddings(tmp_path, VERSIONS, lambda _: _vector).embed(SPEC, [sentinel])
+    assert sentinel not in caplog.text
+    assert hashlib.sha256(sentinel.encode()).hexdigest() not in caplog.text
+
+
 def test_restart_reuses_completed_parts(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
 ) -> None:
     """Pád na třetím textu ponechá první díl a restart dopočte jen tři texty."""
     monkeypatch.setattr(note_embeddings, "PART_NOTES", 2)
@@ -55,9 +63,11 @@ def test_restart_reuses_completed_parts(
             SPEC, texts
         )
     healthy = Mock(side_effect=_vector)
-    actual = NoteEmbeddings(tmp_path / "restart", VERSIONS, lambda _: healthy).embed(
-        SPEC, texts
-    )
+    with caplog.at_level(logging.INFO):
+        actual = NoteEmbeddings(
+            tmp_path / "restart", VERSIONS, lambda _: healthy
+        ).embed(SPEC, texts)
+    assert "Embeddingy: 2 hotových, 1 chybějících zpráv" in caplog.text
     expected = NoteEmbeddings(tmp_path / "fresh", VERSIONS, lambda _: _vector).embed(
         SPEC, texts
     )
@@ -128,4 +138,15 @@ def test_cache_key_io_error_is_invalid_input(
         note_embeddings, "module_sha256", Mock(side_effect=OSError("syntetická chyba"))
     )
     with pytest.raises(InvalidInputError, match="Cache embeddingů"):
+        NoteEmbeddings(tmp_path, VERSIONS, Mock()).embed(SPEC, ["a"])
+
+
+def test_cache_rejects_gap_in_parts(tmp_path: Path) -> None:
+    """Druhý díl bez prvního nesmí být použit jako úplná obnova."""
+    write_table(
+        tmp_path / cache_key(SPEC, VERSIONS) / "0001.parquet",
+        {"text_sha256": ["a" * 64], "embedding": [[1.0]]},
+        SCHEMA,
+    )
+    with pytest.raises(InvalidInputError, match="netvoří souvislou řadu"):
         NoteEmbeddings(tmp_path, VERSIONS, Mock()).embed(SPEC, ["a"])
