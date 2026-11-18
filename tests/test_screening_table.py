@@ -214,10 +214,10 @@ def checkpoint(tmp_path: Path) -> ParquetScreeningCheckpoint:
         Adaptér se samostatnými výstupy.
     """
     return ParquetScreeningCheckpoint(
-        tmp_path / "checkpoint",
+        tmp_path / "a" / "checkpoint",
         "synthetic-key",
-        tmp_path / "results.parquet",
-        tmp_path / "predictions.parquet",
+        tmp_path / "b" / "c" / "results.parquet",
+        tmp_path / "b" / "c" / "predictions.parquet",
     )
 
 
