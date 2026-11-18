@@ -97,6 +97,7 @@ def _run(
             out=root / "classical.parquet",
             predictions=root / "classical_predictions.parquet",
             manifest=root / "classical_manifest.json",
+            checkpoint=root / "checkpoint",
         ),
         environ={} if environ is None else environ,
         revision=revision,
@@ -250,6 +251,7 @@ def test_main_parses_required_paths(
         "out",
         "predictions",
         "manifest",
+        "checkpoint",
     )
     paths = {name: tmp_path / name for name in names}
     monkeypatch.setattr(
@@ -278,6 +280,7 @@ def test_main_parses_required_paths(
         out=paths["out"],
         predictions=paths["predictions"],
         manifest=paths["manifest"],
+        checkpoint=paths["checkpoint"],
     )
 
 
@@ -405,3 +408,51 @@ def test_predictions_use_cell_threshold(screened: tuple[_Inputs, Path]) -> None:
     assert rows
     for row in rows:
         assert row["predicted"] == (row["score"] >= thresholds[_cell_key(row)])
+
+
+@pytest.mark.parametrize(
+    "changed",
+    ["config", "split", "candidates", "lexicon", "dataset_sha256", "packages"],
+)
+def test_checkpoint_key_changes_with_each_input(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, changed: str
+) -> None:
+    """Každý vědecký vstup a verze knihoven jsou součástí klíče."""
+    inputs = _inputs(tmp_path)
+    corpus = repository_corpus(inputs.cohort, inputs.split)
+    for field in ("candidates", "lexicon"):
+        copy = tmp_path / field
+        copy.write_bytes(getattr(corpus, field).read_bytes())
+        corpus = replace(corpus, **{field: copy})
+    paths = classical_screening.ScreeningPaths(
+        corpus=corpus,
+        config=inputs.config,
+        out=tmp_path / "out",
+        predictions=tmp_path / "predictions",
+        manifest=tmp_path / "manifest",
+        checkpoint=tmp_path / "checkpoint",
+    )
+    before = classical_screening.checkpoint_key(paths, "dataset")
+    assert classical_screening.checkpoint_key(paths, "dataset") == before
+    dataset = "dataset"
+    if changed == "dataset_sha256":
+        dataset = "other"
+    elif changed == "packages":
+        monkeypatch.setattr(
+            classical_screening, "installed_versions", lambda _: {"python": "other"}
+        )
+    else:
+        path = paths.config if changed == "config" else getattr(paths.corpus, changed)
+        path.write_bytes(path.read_bytes() + b" ")
+    assert classical_screening.checkpoint_key(paths, dataset) != before
+
+
+def test_foreign_checkpoint_refuses_before_outputs(tmp_path: Path) -> None:
+    """Cizí checkpoint odmítne běh před výsledky, predikcemi i manifestem."""
+    inputs = _inputs(tmp_path)
+    out = tmp_path / "out"
+    checkpoint = out / "checkpoint"
+    checkpoint.mkdir(parents=True)
+    (checkpoint / "key.json").write_text('{"key":"other"}', encoding="utf-8")
+    assert _run(inputs, out) is ExitCode.REFUSED
+    assert {p.name for p in out.iterdir()} == {"checkpoint"}

@@ -27,6 +27,15 @@ class ClassifierFamily(StrEnum):
     LIGHTGBM_LSA = "lightgbm_lsa"
 
 
+@dataclass(frozen=True)
+class ScreeningUnit:
+    """Jednotka obnovy screeningu: vnější fold, vektorizér a rodina se všemi diagnózami."""
+
+    fold: int
+    vectorizer: str
+    family: ClassifierFamily
+
+
 class VectorizerSpec(BaseModel):
     """Pojmenovaný vektorizér s analyzátorem a rozsahem n-gramů."""
 
