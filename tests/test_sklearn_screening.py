@@ -15,10 +15,10 @@ from sklearn.decomposition import TruncatedSVD
 from sklearn.exceptions import ConvergenceWarning
 from sklearn.linear_model import LogisticRegression
 
-from mediparse.domain.classical_screening import ClassifierFamily, VectorizerSpec
 from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.screening import ClassifierFamily, VectorizerSpec
 from mediparse.infrastructure.sklearn_classifier import (
     tfidf_vectorizer,
 )

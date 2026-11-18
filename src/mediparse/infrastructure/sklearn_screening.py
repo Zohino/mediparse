@@ -12,8 +12,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import TunedThresholdClassifierCV
 from sklearn.svm import LinearSVC
 
-from mediparse.domain.classical_screening import ClassifierFamily
 from mediparse.domain.evaluation import Classification
+from mediparse.domain.screening import ClassifierFamily
 from mediparse.infrastructure.complement_nb import ComplementNbLogOdds
 from mediparse.infrastructure.machine_hardware import peak_rss_gb
 from mediparse.infrastructure.nb_svm import NbSvmClassifier
@@ -31,9 +31,9 @@ if TYPE_CHECKING:
     from scipy.sparse import csr_matrix
     from sklearn.base import BaseEstimator
 
-    from mediparse.domain.classical_screening import VectorizerSpec
     from mediparse.domain.clinical_text import TextNormalization
     from mediparse.domain.identity import SubjectId
+    from mediparse.domain.screening import VectorizerSpec
     from mediparse.domain.seed import Seed
 
 logger = logging.getLogger(__name__)

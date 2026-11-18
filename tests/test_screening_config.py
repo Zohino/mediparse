@@ -8,9 +8,9 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from mediparse.domain.classical_screening import ClassicalScreeningConfig
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.infrastructure.screening_config import load_classical_screening_config
+from mediparse.domain.screening import ScreeningConfig
+from mediparse.infrastructure.screening_config import load_screening_config
 
 WORD = {"name": "word-1-2", "analyzer": "word", "ngram_range": [1, 2]}
 CHAR = {"name": "char_wb-3-5", "analyzer": "char_wb", "ngram_range": [3, 5]}
@@ -35,7 +35,7 @@ def test_repository_config_matches_protocol() -> None:
     """Soubor deklaruje přesně mřížku a volby vstupu schválené v briefu."""
     path = Path(__file__).parents[1] / "config/screening_classical.json"
 
-    assert load_classical_screening_config(path).model_dump(mode="json") == _config()
+    assert load_screening_config(path).model_dump(mode="json") == _config()
 
 
 @pytest.mark.parametrize(
@@ -90,13 +90,13 @@ def test_invalid_config_is_rejected(field: str, value: object) -> None:
     body = _config() | {field: value}
 
     with pytest.raises(ValidationError):
-        ClassicalScreeningConfig.model_validate_json(json.dumps(body))
+        ScreeningConfig.model_validate_json(json.dumps(body))
 
 
 def test_missing_file_is_invalid_input(tmp_path: Path) -> None:
     """Chybějící config se přeloží na doménovou chybu."""
     with pytest.raises(InvalidInputError, match="neexistuje"):
-        load_classical_screening_config(tmp_path / "missing.json")
+        load_screening_config(tmp_path / "missing.json")
 
 
 def test_missing_lsa_components_is_rejected() -> None:
@@ -106,7 +106,7 @@ def test_missing_lsa_components_is_rejected() -> None:
     del body["lsa_components"]
 
     with pytest.raises(ValidationError, match="lsa_components"):
-        ClassicalScreeningConfig.model_validate_json(json.dumps(body))
+        ScreeningConfig.model_validate_json(json.dumps(body))
 
 
 def test_invalid_file_is_invalid_input(tmp_path: Path) -> None:
@@ -115,4 +115,4 @@ def test_invalid_file_is_invalid_input(tmp_path: Path) -> None:
     path.write_text(json.dumps(_config() | {"folds": 1}), encoding="utf-8")
 
     with pytest.raises(InvalidInputError, match="neodpovídá schématu"):
-        load_classical_screening_config(path)
+        load_screening_config(path)

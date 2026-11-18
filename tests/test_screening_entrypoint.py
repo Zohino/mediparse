@@ -17,7 +17,7 @@ import pytest
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import ScreeningManifest
-from mediparse.entrypoints import classical_screening
+from mediparse.entrypoints import screening
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_corpus import ModelCorpusPaths
 from mediparse.infrastructure.note_table import ParquetNoteTable
@@ -90,8 +90,8 @@ def _run(
     environ: Mapping[str, str] | None = None,
     revision: Callable[[], SourceRevision] = fixed_revision,
 ) -> ExitCode:
-    return classical_screening.run(
-        paths=classical_screening.ScreeningPaths(
+    return screening.run(
+        paths=screening.ScreeningPaths(
             corpus=repository_corpus(inputs.cohort, inputs.split),
             config=inputs.config,
             out=root / "classical.parquet",
@@ -257,7 +257,7 @@ def test_main_parses_required_paths(
     monkeypatch.setattr(
         "sys.argv",
         [
-            "mediparse-screening-classical",
+            "mediparse-screening",
             *(
                 argument
                 for name, path in paths.items()
@@ -266,10 +266,10 @@ def test_main_parses_required_paths(
         ],
     )
     execute = Mock(return_value=ExitCode.REFUSED)
-    monkeypatch.setattr(classical_screening, "run", execute)
-    monkeypatch.setattr(classical_screening, "configure_logging", Mock())
-    assert classical_screening.main() is ExitCode.REFUSED
-    assert execute.call_args.kwargs["paths"] == classical_screening.ScreeningPaths(
+    monkeypatch.setattr(screening, "run", execute)
+    monkeypatch.setattr(screening, "configure_logging", Mock())
+    assert screening.main() is ExitCode.REFUSED
+    assert execute.call_args.kwargs["paths"] == screening.ScreeningPaths(
         corpus=ModelCorpusPaths(
             cohort=paths["cohort"],
             split=paths["split"],
@@ -424,7 +424,7 @@ def test_checkpoint_key_changes_with_each_input(
         copy = tmp_path / field
         copy.write_bytes(getattr(corpus, field).read_bytes())
         corpus = replace(corpus, **{field: copy})
-    paths = classical_screening.ScreeningPaths(
+    paths = screening.ScreeningPaths(
         corpus=corpus,
         config=inputs.config,
         out=tmp_path / "out",
@@ -432,19 +432,19 @@ def test_checkpoint_key_changes_with_each_input(
         manifest=tmp_path / "manifest",
         checkpoint=tmp_path / "checkpoint",
     )
-    before = classical_screening.checkpoint_key(paths, "dataset")
-    assert classical_screening.checkpoint_key(paths, "dataset") == before
+    before = screening.checkpoint_key(paths, "dataset")
+    assert screening.checkpoint_key(paths, "dataset") == before
     dataset = "dataset"
     if changed == "dataset_sha256":
         dataset = "other"
     elif changed == "packages":
         monkeypatch.setattr(
-            classical_screening, "installed_versions", lambda _: {"python": "other"}
+            screening, "installed_versions", lambda _: {"python": "other"}
         )
     else:
         path = paths.config if changed == "config" else getattr(paths.corpus, changed)
         path.write_bytes(path.read_bytes() + b" ")
-    assert classical_screening.checkpoint_key(paths, dataset) != before
+    assert screening.checkpoint_key(paths, dataset) != before
 
 
 def test_foreign_checkpoint_refuses_before_outputs(tmp_path: Path) -> None:

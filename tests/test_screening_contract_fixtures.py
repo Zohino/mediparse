@@ -7,13 +7,13 @@ from itertools import product
 from random import Random
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.classical_screening import ScreeningResult
 from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Classification
 from mediparse.domain.run_manifest import ScreeningManifest
+from mediparse.domain.screening import ScreeningResult
 from mediparse.infrastructure.json_file import write_model
-from mediparse.infrastructure.screening_config import load_classical_screening_config
+from mediparse.infrastructure.screening_config import load_screening_config
 from mediparse.infrastructure.screening_table import (
     ParquetScreeningPredictions,
     ParquetScreeningTable,
@@ -40,7 +40,7 @@ def screening_cells() -> tuple[ScreeningResult, ...]:
     Returns:
         Deterministické buňky s oběma třídami a rozdílnou chybovostí rodin.
     """
-    config = load_classical_screening_config(CONFIG)
+    config = load_screening_config(CONFIG)
     cells = []
     grid = product(range(config.folds), config.vectorizers, config.families, Diagnosis)
     for index, (fold, vectorizer, family, diagnosis) in enumerate(grid):
@@ -82,7 +82,7 @@ def write_screening_fixtures(directory: Path) -> None:
     'from tests.test_screening_contract_fixtures import CONTRACTS, write_screening_fixtures;
     write_screening_fixtures(CONTRACTS)'.
     """
-    config = load_classical_screening_config(CONFIG)
+    config = load_screening_config(CONFIG)
     cells = screening_cells()
     results = directory / "classical.parquet"
     predictions = directory / "classical_predictions.parquet"

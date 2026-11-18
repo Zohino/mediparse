@@ -1,4 +1,4 @@
-"""Mřížka klasického screeningu a výsledky buněk na vývojové části."""
+"""Mřížka screeningu stupně a výsledky buněk na vývojové části."""
 
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 
 
 class ClassifierFamily(StrEnum):
-    """Rodiny klasického stupně s výchozími hyperparametry."""
+    """Rodiny klasifikátorů nad reprezentací s výchozími hyperparametry."""
 
     COMPLEMENT_NB = "complement_nb"
     LOGREG = "logreg"
@@ -53,8 +53,8 @@ class VectorizerSpec(BaseModel):
         return self
 
 
-class ClassicalScreeningConfig(BaseModel):
-    """Parametry vnější CV, volby prahu a mřížky klasického screeningu."""
+class ScreeningConfig(BaseModel):
+    """Parametry vnější CV, volby prahu a mřížky screeningu stupně."""
 
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 

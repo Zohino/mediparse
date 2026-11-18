@@ -9,19 +9,19 @@ from typing import TYPE_CHECKING, override
 
 import pytest
 
-from mediparse.application.classical_screening import ClassicalScreening, ThresholdTuner
 from mediparse.application.ports.experiment import PatientPartitioner
-from mediparse.domain.classical_screening import (
-    ClassicalScreeningConfig,
+from mediparse.application.screening import Screening, ThresholdTuner
+from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.evaluation import Classification
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.screening import (
     ClassifierFamily,
+    ScreeningConfig,
     ScreeningReport,
     ScreeningResult,
     ScreeningUnit,
     VectorizerSpec,
 )
-from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.evaluation import Classification
-from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.screening_table import ParquetScreeningCheckpoint
 from mediparse.infrastructure.sklearn_metrics import SklearnScorer
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
@@ -44,7 +44,7 @@ ERRORS_PER_CLASS = 2
 PARTITIONER = StratifiedGroupFolds()
 SINGLE_POSITIVE_SUBJECT = 90000001
 
-CONFIG = ClassicalScreeningConfig.model_validate_json(
+CONFIG = ScreeningConfig.model_validate_json(
     json.dumps({
         "seed": 7,
         "folds": 2,
@@ -191,8 +191,8 @@ def _step(
     recording: _Recording,
     notes: tuple[InputNote, ...],
     partitioner: PatientPartitioner = PARTITIONER,
-) -> ClassicalScreening[Features]:
-    return ClassicalScreening(
+) -> Screening[Features]:
+    return Screening(
         table=_Table(notes),
         split=_SplitSource(),
         partitioner=partitioner,

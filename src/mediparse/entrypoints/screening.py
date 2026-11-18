@@ -1,10 +1,12 @@
-"""Klasický screening vývojové části mimo pipeline Snakemake.
+"""Screening stupně na vývojové části mimo pipeline Snakemake.
 
 Doporučené výstupy jsou ``results/screening/classical.parquet`` a
 ``results/screening/classical_manifest.json``. Nad MIMIC nástroj spouští jen uživatel.
 Predikce patří do ``resources/mimic/screening/classical_predictions.parquet``:
 jde o řádková data, která do ``results/`` nesmí.
 Rozpracovaný běh patří do ``resources/mimic/screening/classical_checkpoint``.
+Mělký stupeň používá obdobné cesty ``results/screening/shallow.parquet`` a
+``resources/mimic/screening/shallow_checkpoint``.
 Po pádu stačí spustit týž příkaz.
 """
 
@@ -17,7 +19,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
-from mediparse.application.classical_screening import ClassicalScreening
+from mediparse.application.screening import Screening
 from mediparse.domain.environment import Environment
 from mediparse.domain.run_manifest import ScreeningManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
@@ -31,7 +33,7 @@ from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.package_versions import installed_versions
-from mediparse.infrastructure.screening_config import load_classical_screening_config
+from mediparse.infrastructure.screening_config import load_screening_config
 from mediparse.infrastructure.screening_table import (
     ParquetScreeningCheckpoint,
 )
@@ -63,7 +65,7 @@ PACKAGES: Final = (
 
 @dataclass(frozen=True, kw_only=True)
 class ScreeningPaths:
-    """Vstupní a výstupní cesty screeningu klasických modelů."""
+    """Vstupní a výstupní cesty screeningu stupně."""
 
     corpus: ModelCorpusPaths
     config: Path
@@ -137,10 +139,10 @@ def run(
         revizi nebo neoznačených datech v prostředí agenta.
     """
     check_inputs_access(environ, paths.corpus.data)
-    screening = load_classical_screening_config(paths.config)
+    screening = load_screening_config(paths.config)
     source = revision()
     corpus = model_corpus(paths.corpus, screening.input)
-    report = ClassicalScreening(
+    report = Screening(
         table=corpus.table,
         split=corpus.split,
         partitioner=StratifiedGroupFolds(),
