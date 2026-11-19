@@ -56,6 +56,7 @@ def test_training_is_single_threaded_with_seed(
     tmp_path: Path,
     corpus: tuple[np.ndarray, list[bool]],
     monkeypatch: pytest.MonkeyPatch,
+    capfd: pytest.CaptureFixture[str],
 ) -> None:
     """Knihovna dostane jedno vlákno a seed estimátoru."""
     spy = Mock(wraps=fasttext.train_supervised)
@@ -64,6 +65,7 @@ def test_training_is_single_threaded_with_seed(
     assert spy.call_count == 1
     assert spy.call_args.kwargs["thread"] == 1
     assert spy.call_args.kwargs["seed"] == 5
+    assert tuple(capfd.readouterr()) == ("", "")
 
 
 @pytest.mark.parametrize("error", [None, RuntimeError("Syntetické selhání tréninku.")])
