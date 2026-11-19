@@ -2,21 +2,24 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import TYPE_CHECKING
 
 import pytest
 
 from mediparse.application.stage_tuning import StageTuning
 from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.tuning import ValidationScores
 from mediparse.infrastructure.optuna_search import OptunaStageSearch
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
+from mediparse.infrastructure.stage_trials_table import ParquetStageCheckpoint
 from tests.screening_support import DEVELOPMENT, SHARED, notes
 from tests.stage_support import stage_config
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
+    from pathlib import Path
 
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.split import Holdout, SharedSplit
@@ -144,3 +147,49 @@ def test_defaults_and_development_sample(parts: int) -> None:
         assert report.best.value == progress.records[report.best.number].value
         samples.append(sample)
     assert samples[0] == samples[1]
+
+
+@pytest.mark.parametrize("cut", [3, 5])
+def test_interrupted_run_resumes_to_identical_outputs(tmp_path: Path, cut: int) -> None:
+    """Pád uvnitř i po výchozích pokusech nemění jediný bajt obou výstupů."""
+    config = stage_config()
+    checkpoints = [
+        ParquetStageCheckpoint(
+            tmp_path / name / "parts",
+            "key",
+            tmp_path / name / "trials.parquet",
+            tmp_path / name / "predictions.parquet",
+        )
+        for name in ("whole", "resumed")
+    ]
+    for i, progress in enumerate(checkpoints):
+        if i:
+            with pytest.raises(RuntimeError, match="přerušení"):
+                StageTuning(
+                    _Table(),
+                    _SplitSource(),
+                    StratifiedGroupFolds(),
+                    OptunaStageSearch.create(config.branches, config.seed, 5),
+                    _Scorer(fail_at=cut * 2),
+                    progress,
+                    _Clock(),
+                ).run(config)
+            records = progress.completed()
+            assert len(records) == cut
+            with pytest.raises(InvalidInputError, match="patří jinému běhu"):
+                replace(progress, key="foreign").completed()
+        StageTuning(
+            _Table(),
+            _SplitSource(),
+            StratifiedGroupFolds(),
+            OptunaStageSearch.create(config.branches, config.seed, 5),
+            _Scorer(),
+            progress,
+            _Clock(),
+        ).run(config)
+        assert not progress.directory.exists()
+    assert checkpoints[0].results.read_bytes() == checkpoints[1].results.read_bytes()
+    assert (
+        checkpoints[0].predictions.read_bytes()
+        == checkpoints[1].predictions.read_bytes()
+    )
