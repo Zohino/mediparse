@@ -228,15 +228,13 @@ def fold_max_f1(
     }
 
 
-def macro_max_f1(notes: Sequence[InputNote], scores: ValidationScores) -> float:
+def macro_max_f1(f1: Mapping[Diagnosis, MaxF1]) -> float:
     """Spočte průměr pěti optimálních F1 na validaci.
 
     Returns:
         Společný cíl pro řazení konfigurací.
     """
-    return sum(item.value for item in fold_max_f1(notes, scores).values()) / len(
-        Diagnosis
-    )
+    return sum(item.value for item in f1.values()) / len(Diagnosis)
 
 
 @dataclass(frozen=True)

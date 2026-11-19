@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from mediparse.domain.tuning import fold_max_f1
+from mediparse.domain.tuning import fold_max_f1, macro_max_f1
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -48,7 +48,7 @@ def run_trial(
         scores.append(scored)
         metrics = fold_max_f1(fold.test, scored)
         f1.append(metrics)
-        values.append(sum(item.value for item in metrics.values()) / len(metrics))
+        values.append(macro_max_f1(metrics))
         value = sum(values) / len(values)
         converged &= scored.converged
         if step + 1 < len(folds) and search.should_prune(trial, value, step):
