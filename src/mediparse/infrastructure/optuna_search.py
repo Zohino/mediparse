@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 import warnings
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Final, TypedDict
 
 import optuna
 from optuna.distributions import (
@@ -161,16 +161,27 @@ def _distribution(param: FloatParam | IntParam | CategoricalParam) -> BaseDistri
 STAGE_PRUNER: Final = "optuna.pruners.NopPruner"
 
 
+class _StageSamplerOptions(TypedDict):
+    n_startup_trials: int
+    multivariate: bool
+    group: bool
+
+
+def _stage_sampler_options(startup_trials: int) -> _StageSamplerOptions:
+    return {"n_startup_trials": startup_trials, "multivariate": True, "group": True}
+
+
 def stage_sampler(startup_trials: int) -> str:
     """Popíše parametry sampleru pro provenance.
 
     Returns:
         Jednoznačný popis strategie.
     """
-    return (
-        f"optuna.samplers.TPESampler(n_startup_trials={startup_trials}, "
-        "multivariate=True, group=True)"
+    options = ", ".join(
+        f"{name}={value}"
+        for name, value in _stage_sampler_options(startup_trials).items()
     )
+    return f"optuna.samplers.TPESampler({options})"
 
 
 @dataclass(frozen=True)
@@ -213,9 +224,7 @@ class OptunaStageSearch(OptunaTrials):
             warnings.simplefilter("ignore", ExperimentalWarning)
             self.study.sampler = TPESampler(
                 seed=self.seed + len(self.study.trials),
-                n_startup_trials=self.startup_trials,
-                multivariate=True,
-                group=True,
+                **_stage_sampler_options(self.startup_trials),
             )
         trial = self.study.ask()
         name = trial.suggest_categorical("branch", tuple(self.branches))

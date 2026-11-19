@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from mediparse.infrastructure.optuna_search import OptunaStageSearch
+from mediparse.infrastructure.optuna_search import OptunaStageSearch, stage_sampler
 from tests.stage_support import stage_config
 
 if TYPE_CHECKING:
@@ -56,3 +56,10 @@ def test_stage_never_prunes_after_startup() -> None:
         search.complete(search.ask(), 1.0)
     trial = search.ask()
     assert search.should_prune(trial, 0.0, 0) is False
+
+
+def test_sampler_description_uses_actual_options() -> None:
+    """Manifest pojmenuje přesné nastavení TPE včetně group."""
+    assert stage_sampler(20) == (
+        "optuna.samplers.TPESampler(n_startup_trials=20, multivariate=True, group=True)"
+    )
