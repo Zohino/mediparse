@@ -1,0 +1,12 @@
+{
+  "seed": 0,
+  "folds": 5,
+  "threshold_folds": 3,
+  "lsa_components": 100,
+  "input": {
+    "strip_diagnostic_sections": false,
+    "text_preprocessing": "dictionary"
+  },
+  "vectorizers": [{"name": "word-tokens"}],
+  "families": ["fasttext"]
+}

@@ -52,12 +52,13 @@ class _Inputs:
     config: Path
 
 
-def _inputs(
+def _inputs(  # ruff: ignore[too-many-arguments]
     root: Path,
     *,
     preprocessing: str = "none",
     strip: bool = False,
     families: tuple[str, ...] = ("complement_nb", "linear_svm"),
+    vectorizers: list[dict[str, object]] | None = None,
     visits: int = 2,
 ) -> _Inputs:
     cohort = root / "cohort.parquet"
@@ -75,9 +76,9 @@ def _inputs(
                 "strip_diagnostic_sections": strip,
                 "text_preprocessing": preprocessing,
             },
-            "vectorizers": [
-                {"name": "word", "analyzer": "word", "ngram_range": [1, 1]}
-            ],
+            "vectorizers": vectorizers
+            if vectorizers is not None
+            else [{"name": "word", "analyzer": "word", "ngram_range": [1, 1]}],
             "families": families,
         }),
         encoding="utf-8",
@@ -158,6 +159,7 @@ def test_results_manifest_records_actual_inputs_and_development(
         "scipy",
         "scikit-learn",
         "lightgbm",
+        "fasttext",
         "pyarrow",
         "pydantic",
     }
@@ -169,11 +171,23 @@ def test_results_manifest_records_actual_inputs_and_development(
     )
 
 
-def test_repeated_run_has_identical_result_bytes(tmp_path: Path) -> None:
+@pytest.mark.parametrize(
+    ("families", "vectorizers"),
+    [
+        (("complement_nb", "logreg", "linear_svm", "nb_svm", "lightgbm_lsa"), None),
+        (("fasttext",), [{"name": "word-tokens"}]),
+    ],
+)
+def test_repeated_run_has_identical_result_bytes(
+    tmp_path: Path,
+    families: tuple[str, ...],
+    vectorizers: list[dict[str, object]] | None,
+) -> None:
     """Dva běhy nad stejnými vstupy zapíší bajtově shodné agregáty i predikce."""
     inputs = _inputs(
         tmp_path,
-        families=("complement_nb", "logreg", "linear_svm", "nb_svm", "lightgbm_lsa"),
+        families=families,
+        vectorizers=vectorizers,
         visits=VISITS_PER_PATIENT,
     )
     first, second = tmp_path / "first", tmp_path / "second"
@@ -539,3 +553,26 @@ def test_encoder_revision_and_versions_change_checkpoint_key(tmp_path: Path) -> 
     config["vectorizers"][0]["revision"] = "b" * 40
     inputs.config.write_text(json.dumps(config), encoding="utf-8")
     assert screening.checkpoint_key(paths, "dataset", VERSIONS) != before
+
+
+def test_fasttext_screening_end_to_end(tmp_path: Path) -> None:
+    """Tokeny projdou skutečným screeningem s provenance a úklidem checkpointu."""
+    inputs = _inputs(
+        tmp_path,
+        families=("fasttext",),
+        vectorizers=[{"name": "word-tokens"}],
+        visits=VISITS_PER_PATIENT,
+    )
+    out = tmp_path / "out"
+    assert _run(inputs, out) is ExitCode.OK
+    rows = pq.read_table(out / "classical.parquet").to_pylist()
+    config = json.loads(inputs.config.read_text(encoding="utf-8"))
+    assert len(rows) == config["folds"] * len(Diagnosis)
+    assert {row["family"] for row in rows} == {"fasttext"}
+    assert {row["vectorizer"] for row in rows} == {"word-tokens"}
+    manifest = ScreeningManifest.model_validate_json(
+        (out / "classical_manifest.json").read_bytes()
+    )
+    assert manifest.environment.packages["fasttext"] == "0.9.2"
+    assert not (out / "checkpoint").exists()
+    assert list((out / "scratch").iterdir()) == []

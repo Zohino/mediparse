@@ -236,3 +236,21 @@ def test_tokens_spec_rejects_extra_field() -> None:
     """Tokeny mají pouze jméno, nikoli parametry TF-IDF."""
     with pytest.raises(ValidationError):
         TokensSpec.model_validate({"name": "x", "analyzer": "word"})
+
+
+def test_fasttext_config_matches_protocol() -> None:
+    """FastText drží slovník a parametry klasiky, embeddingy se učí sám."""
+    config = load_screening_config(REPOSITORY / "config/screening_fasttext.json")
+    assert config.vectorizers == (TokensSpec(name="word-tokens"),)
+    assert config.model_dump(mode="json")["families"] == ["fasttext"]
+    assert config.input.model_dump(mode="json") == {
+        "strip_diagnostic_sections": False,
+        "text_preprocessing": "dictionary",
+    }
+    assert (
+        config.seed,
+        config.folds,
+        config.threshold_folds,
+        config.lsa_components,
+    ) == (0, 5, 3, 100)
+    assert config.encoders == ()
