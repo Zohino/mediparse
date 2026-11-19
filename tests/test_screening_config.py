@@ -148,12 +148,6 @@ def test_shallow_config_matches_protocol() -> None:
     }
     assert config.model_dump(mode="json")["families"] == ["logreg"]
     assert (
-        config.seed,
-        config.folds,
-        config.threshold_folds,
-        config.lsa_components,
-    ) == (0, 5, 3, 100)
-    assert (
         load_screening_config(REPOSITORY / "config/screening_classical.json").encoders
         == ()
     )
@@ -248,10 +242,15 @@ def test_fasttext_config_matches_protocol() -> None:
         "strip_diagnostic_sections": False,
         "text_preprocessing": "dictionary",
     }
+
+
+@pytest.mark.parametrize("name", ["classical", "shallow", "fasttext"])
+def test_stage_configs_share_protocol(name: str) -> None:
+    """Všechny stupně sdílejí seed a parametry vnější i vnitřní CV a LSA."""
+    config = load_screening_config(REPOSITORY / f"config/screening_{name}.json")
     assert (
         config.seed,
         config.folds,
         config.threshold_folds,
         config.lsa_components,
     ) == (0, 5, 3, 100)
-    assert config.encoders == ()
