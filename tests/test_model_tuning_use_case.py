@@ -248,23 +248,29 @@ def test_last_fold_always_completes_trial() -> None:
     assert all(step == 0 for _, _, step in search.reported)
 
 
-@pytest.mark.parametrize("pruned", [False, True])
-def test_shared_trial_returns_fold_metrics_and_nonconvergence(*, pruned: bool) -> None:
-    """Dva foldy dávají 5/6; nekonvergence zůstává i po prořezání."""
+def test_completed_trial_returns_fold_metrics_and_nonconvergence() -> None:
+    """Dva dokončené foldy dávají cíl 5/6 a zachovají nekonvergenci."""
     search = _Search()
-    scorer = _Scorer()
     folds = patient_holdouts(notes(visits=10), 2, 7, _PairedParts())
-    trial = Trial(1 if pruned else 0, SVM_PARAMS)
-    result = run_trial(search, scorer, trial, folds)
-    assert result.pruned is pruned
+    result = run_trial(search, _Scorer(), Trial(0, SVM_PARAMS), folds)
+    assert not result.pruned
     assert not result.converged
-    if pruned:
-        assert search.pruned == [1]
-    else:
-        assert result.value == pytest.approx(5 / 6)
-        assert len(result.f1) == 2
-        assert all(list(metrics) == list(Diagnosis) for metrics in result.f1)
-        assert search.completed[0][1] == result.value
+    assert result.value == pytest.approx(5 / 6)
+    assert len(result.f1) == 2
+    assert all(list(metrics) == list(Diagnosis) for metrics in result.f1)
+    assert search.completed[0][1] == result.value
+
+
+def test_pruned_trial_returns_only_evaluated_fold() -> None:
+    """Prořezaný pokus vrátí jen první fold s cílem 1 a nekonvergencí."""
+    search = _Search()
+    folds = patient_holdouts(notes(visits=10), 2, 7, _PairedParts())
+    result = run_trial(search, _Scorer(), Trial(1, SVM_PARAMS), folds)
+    assert result.pruned
+    assert not result.converged
+    assert len(result.f1) == 1
+    assert result.value == pytest.approx(1.0)
+    assert search.pruned == [1]
 
 
 def test_pruned_nonconverged_trial_counts_in_model_outcome() -> None:

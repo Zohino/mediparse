@@ -43,8 +43,6 @@ def test_logreg_parameters_change_scores(tmp_path: Path) -> None:
     low = scorer.score(params | {"logreg.C": 1e-4}, fold)
     high = scorer.score(params | {"logreg.C": 1e2}, fold)
     assert low.scores[Diagnosis.CKD] != high.scores[Diagnosis.CKD]
-    with pytest.raises(InvalidInputError, match="slovník"):
-        scorer.score(params | {"r1.min_df": 100000}, fold)
 
 
 def test_lightgbm_receives_lsa_components(
@@ -177,3 +175,12 @@ def test_convergence_accumulates_all_diagnoses(
     scored = scorer.score(config.branches[0].default_params(), _clinical_fold())
     assert scored.converged is (failed_call is None)
     assert calls == 5
+
+
+def test_min_df_above_training_documents_is_refused(tmp_path: Path) -> None:
+    """Sklearn odmítne min_df větší než počet trénovacích dokumentů."""
+    config = stage_config()
+    scorer = SklearnStageScorer(config, None, 2, 7, tmp_path)
+    params = config.branches[0].default_params() | {"r1.min_df": 100000}
+    with pytest.raises(InvalidInputError, match="min_df"):
+        scorer.score(params, _clinical_fold())

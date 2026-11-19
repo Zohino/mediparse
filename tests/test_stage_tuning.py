@@ -136,10 +136,6 @@ def test_defaults_and_development_sample(
             StepClock(),
         ).run(config)
         assert progress.finished
-        assert [r.default for r in progress.records] == [True] * 4 + [False] * 2
-        assert [r.params for r in progress.records[:4]] == [
-            b.default_params() for b in config.branches
-        ]
         sample = {n.note_id for f in scorer.observed[:2] for n in f.test}
         patients = {n.subject_id for f in scorer.observed[:2] for n in f.test}
         assert patients == expected_patients

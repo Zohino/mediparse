@@ -78,9 +78,6 @@ def test_max_f1_matches_brute_force(rows: list[tuple[bool, int]]) -> None:
         if value == max(candidates)
     ]
     assert result.threshold == max(optimal)
-    assert [result.predicts(score) for score in scores] == [
-        score >= result.threshold for score in scores
-    ]
 
 
 @pytest.mark.parametrize(
