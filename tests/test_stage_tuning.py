@@ -14,8 +14,12 @@ from mediparse.domain.split import strata
 from mediparse.domain.stage_tuning import StageFoldResult, StageTrialRecord
 from mediparse.domain.tuning import MaxF1, Trial, ValidationScores
 from mediparse.infrastructure.optuna_search import OptunaStageSearch
+from mediparse.infrastructure.parquet_file import read_table
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
-from mediparse.infrastructure.stage_trials_table import ParquetStageCheckpoint
+from mediparse.infrastructure.stage_trials_table import (
+    TRIALS_SCHEMA,
+    ParquetStageCheckpoint,
+)
 from tests.screening_support import DEVELOPMENT, SHARED, notes
 from tests.stage_support import StepClock, stage_config
 
@@ -276,13 +280,12 @@ def test_enqueue_protocol_and_restore(cut: int) -> None:
 
 def test_checkpoint_round_trip_record_and_fold_results(tmp_path: Path) -> None:
     """Souhrn drží uložený cíl a nekonvergenci libovolného foldu."""
-    config = stage_config()
     progress = ParquetStageCheckpoint(
         tmp_path / "parts", "key", tmp_path / "trials", tmp_path / "predictions"
     )
     record = StageTrialRecord(
         0,
-        config.branches[0].default_params(),
+        {"word.min_df": 1, "branch": "word/logreg", "logreg.C": 1.0},
         default=True,
         value=0.8,
         converged=False,
@@ -301,6 +304,10 @@ def test_checkpoint_round_trip_record_and_fold_results(tmp_path: Path) -> None:
     assert progress.completed() == (record,)
     progress.finish()
     assert not progress.directory.exists()
+    assert (
+        read_table(progress.results, TRIALS_SCHEMA)["params"].to_pylist()
+        == ['{"branch": "word/logreg", "logreg.C": 1.0, "word.min_df": 1}'] * 2
+    )
 
 
 def test_stage_rejects_pruned_trial() -> None:
