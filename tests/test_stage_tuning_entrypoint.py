@@ -16,6 +16,7 @@ from sklearn.metrics import f1_score
 from mediparse.domain.run_manifest import StageTuningManifest
 from mediparse.entrypoints import stage_tuning
 from mediparse.entrypoints.exit_code import ExitCode
+from mediparse.infrastructure import sklearn_stage
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.split_table import ParquetSplitTable
 from mediparse.infrastructure.stage_config import load_stage_config
@@ -24,6 +25,7 @@ from tests.stage_support import StepClock, stage_config
 from tests.support import REPOSITORY, fixed_revision, mark_synthetic, repository_corpus
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
     from pathlib import Path
 
 
@@ -54,8 +56,19 @@ def _run(paths: stage_tuning.StageTuningPaths) -> ExitCode:
     )
 
 
-def test_end_to_end_metrics_predictions_manifest_and_repeat(tmp_path: Path) -> None:
+def test_end_to_end_metrics_predictions_manifest_and_repeat(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """F1 ze skutečných predikcí souhlasí s tabulkou i vítězem v manifestu."""
+    original = sklearn_stage.fit_converged
+    calls = 0
+
+    def fit_once(fit: Callable[[], object]) -> bool:
+        nonlocal calls
+        calls += 1
+        return original(fit) and calls % 60 != 6
+
+    monkeypatch.setattr(sklearn_stage, "fit_converged", fit_once)
     paths = _paths(tmp_path)
     assert _run(paths) is ExitCode.OK
     trials = pq.read_table(paths.out).to_pylist()
@@ -63,6 +76,9 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(tmp_path: Path) -> N
     written = StageTuningManifest.model_validate_json(paths.manifest.read_bytes())
     assert written.completed_trials == written.trials == 6
     assert written.seconds == pytest.approx(6.0)
+    affected = {row["trial"] for row in trials if not row["converged"]}
+    assert affected == {0}
+    assert written.nonconverged_trials == len(affected)
     for field, path in (
         ("dataset_sha256", paths.corpus.cohort),
         ("config_sha256", paths.config),

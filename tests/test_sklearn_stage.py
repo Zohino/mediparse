@@ -24,6 +24,7 @@ from tests.stage_support import stage_config
 from tests.support import REPOSITORY, REPOSITORY_DIAGNOSIS_CANDIDATES
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
     from pathlib import Path
 
     import numpy as np
@@ -159,3 +160,26 @@ def test_seeded_scores_repeat(tmp_path: Path, family: str) -> None:
     assert first.scores == repeated.scores
     if family == "lightgbm_lsa":
         assert first.scores != other.scores
+
+
+@pytest.mark.parametrize("failed_call", [2, None])
+def test_convergence_accumulates_all_diagnoses(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failed_call: int | None
+) -> None:
+    """Jediná nekonvergující diagnóza zneplatní konvergenci celého foldu."""
+    original = sklearn_stage.fit_converged
+    calls = 0
+
+    def fit_once(fit: Callable[[], object]) -> bool:
+        nonlocal calls
+        calls += 1
+        return original(fit) and calls != failed_call
+
+    monkeypatch.setattr(sklearn_stage, "fit_converged", fit_once)
+    config = stage_config()
+    scorer = SklearnStageScorer(
+        {b.name: b for b in config.branches}, None, 2, 7, tmp_path
+    )
+    scored = scorer.score(config.branches[0].default_params(), _clinical_fold())
+    assert scored.converged is (failed_call is None)
+    assert calls == 5

@@ -283,7 +283,7 @@ def test_checkpoint_round_trip_record_and_fold_results(tmp_path: Path) -> None:
         max_f1=MaxF1(1.0, 0.9),
         converged=False,
     )
-    progress.write(record, [result])
+    progress.write(record, [replace(result, converged=True), replace(result, fold=1)])
     assert progress.completed() == (record,)
     progress.finish()
     assert not progress.directory.exists()
@@ -315,3 +315,35 @@ def test_stage_rejects_pruned_trial() -> None:
         ).run(stage_config())
     assert not progress.records
     assert not progress.finished
+
+
+def test_nonconvergence_counts_each_affected_trial_once() -> None:
+    """Nekonvergence jednoho foldu pokusů 1 a 4 se promítne do obou záznamů."""
+
+    class Nonconverged(_Scorer):
+        def score(
+            self, params: Mapping[str, ParamValue], fold: Holdout
+        ) -> ValidationScores:
+            scored = super().score(params, fold)
+            number = (len(self.observed) - 1) // 2
+            return replace(scored, converged=not (number in {1, 4} and fold.fold == 0))
+
+    progress = _Progress()
+    report = StageTuning(
+        _Table(),
+        _SplitSource(),
+        StratifiedGroupFolds(),
+        _Search(),
+        Nonconverged(),
+        progress,
+        StepClock(),
+    ).run(stage_config())
+    assert [r.converged for r in progress.records] == [
+        True,
+        False,
+        True,
+        True,
+        False,
+        True,
+    ]
+    assert report.nonconverged_trials == 2
