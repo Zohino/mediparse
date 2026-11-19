@@ -22,23 +22,29 @@ def stage_config(**changes: object) -> StageTuningConfig:
             "max_df": 1.0,
             "sublinear_tf": True,
         }
+        params: list[dict[str, object]] = [
+            {"name": key, "kind": "categorical", "choices": [value]}
+            for key, value in default.items()
+        ]
+        params[3] = {
+            "name": "max_df",
+            "kind": "float",
+            "low": 0.5,
+            "high": 1.0,
+            "log": False,
+        }
+        if name == "r1":
+            params[2] = {
+                "name": "min_df",
+                "kind": "int",
+                "low": 1,
+                "high": 2,
+                "log": True,
+            }
         representations.append({
             "name": name,
             "analyzer": "word",
-            "space": {
-                "params": [
-                    {
-                        "name": key,
-                        "kind": "float",
-                        "low": 0.5,
-                        "high": 1.0,
-                        "log": False,
-                    }
-                    if key == "max_df"
-                    else {"name": key, "kind": "categorical", "choices": [value]}
-                    for key, value in default.items()
-                ]
-            },
+            "space": {"params": params},
             "default": default,
         })
     return StageTuningConfig.model_validate_json(

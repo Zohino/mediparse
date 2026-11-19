@@ -37,3 +37,22 @@ def test_restore_matches_uninterrupted(cut: int) -> None:
         trial = resumed.ask()
         assert trial == history[n][0]
         resumed.complete(trial, history[n][1])
+
+
+def test_stage_maximizes_objective() -> None:
+    """Studie vybírá 0,9 z dokončených hodnot 0,2; 0,9; 0,5."""
+    config = stage_config()
+    search = OptunaStageSearch.create(config.branches, config.seed, 5)
+    for value in (0.2, 0.9, 0.5):
+        search.complete(search.ask(), value)
+    assert search.best()[1] == pytest.approx(0.9)
+
+
+def test_stage_never_prunes_after_startup() -> None:
+    """Ani výrazný propad po pěti pokusech není důvodem k prořezání."""
+    config = stage_config()
+    search = OptunaStageSearch.create(config.branches, config.seed, 5)
+    for _ in range(5):
+        search.complete(search.ask(), 1.0)
+    trial = search.ask()
+    assert search.should_prune(trial, 0.0, 0) is False
