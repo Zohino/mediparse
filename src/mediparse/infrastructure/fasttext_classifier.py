@@ -49,7 +49,7 @@ class FastTextClassifier(ClassifierMixin, BaseEstimator):
                     output.write(f"{LABEL_PREFIX}{label} {document}\n")
             self.model_ = fasttext.train_supervised(
                 input=str(path),
-                # Více vláken mění pravděpodobnosti i při shodném seedu.
+                # Více vláken mění pravděpodobnosti i při stejném seedu.
                 thread=1,
                 seed=self.random_state,
                 verbose=0,
