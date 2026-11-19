@@ -1,10 +1,12 @@
-"""Klasický screening vývojové části mimo pipeline Snakemake.
+"""Screening stupně na vývojové části mimo pipeline Snakemake.
 
 Doporučené výstupy jsou ``results/screening/classical.parquet`` a
 ``results/screening/classical_manifest.json``. Nad MIMIC nástroj spouští jen uživatel.
 Predikce patří do ``resources/mimic/screening/classical_predictions.parquet``:
 jde o řádková data, která do ``results/`` nesmí.
 Rozpracovaný běh patří do ``resources/mimic/screening/classical_checkpoint``.
+Mělký stupeň používá obdobné cesty ``results/screening/shallow.parquet`` a
+``resources/mimic/screening/shallow_checkpoint``.
 Po pádu stačí spustit týž příkaz.
 """
 
@@ -17,7 +19,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
-from mediparse.application.classical_screening import ClassicalScreening
+from mediparse.application.screening import Screening
 from mediparse.domain.environment import Environment
 from mediparse.domain.run_manifest import ScreeningManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
@@ -29,14 +31,22 @@ from mediparse.entrypoints.model_corpus import (
 from mediparse.infrastructure.code_fingerprint import code_key
 from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.infrastructure.hf_encoder import (
+    ENCODER_PACKAGES,
+    HfMeanEncoder,
+    load_encoder,
+)
 from mediparse.infrastructure.json_file import write_model
+from mediparse.infrastructure.note_embeddings import NoteEmbeddings
 from mediparse.infrastructure.package_versions import installed_versions
-from mediparse.infrastructure.screening_config import load_classical_screening_config
+from mediparse.infrastructure.screening_config import load_screening_config
 from mediparse.infrastructure.screening_table import (
     ParquetScreeningCheckpoint,
 )
 from mediparse.infrastructure.sklearn_metrics import SklearnScorer
 from mediparse.infrastructure.sklearn_screening import (
+    EncoderFeaturizer,
+    ScreeningFeaturizer,
     SklearnThresholdTuner,
     TfidfFeaturizer,
     screening_lsa,
@@ -48,6 +58,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable, Mapping
 
     from mediparse.domain.environment import SourceRevision
+    from mediparse.domain.screening import EncoderSpec
 
 logger = logging.getLogger(__name__)
 PACKAGES: Final = (
@@ -63,7 +74,7 @@ PACKAGES: Final = (
 
 @dataclass(frozen=True, kw_only=True)
 class ScreeningPaths:
-    """Vstupní a výstupní cesty screeningu klasických modelů."""
+    """Vstupní a výstupní cesty screeningu stupně."""
 
     corpus: ModelCorpusPaths
     config: Path
@@ -71,6 +82,7 @@ class ScreeningPaths:
     predictions: Path
     manifest: Path
     checkpoint: Path
+    embeddings: Path
 
 
 def main() -> ExitCode:
@@ -102,6 +114,12 @@ def main() -> ExitCode:
         required=True,
         help="Rozpracovaný běh s řádkovými díly; doporučeno resources/mimic/screening/classical_checkpoint, mimo results/.",
     )
+    parser.add_argument(
+        "--embeddings",
+        type=Path,
+        required=True,
+        help="Cache embeddingů; doporučeno resources/mimic/screening/embeddings, mimo results/.",
+    )
     parser.add_argument("--manifest", type=Path, required=True)
     args = parser.parse_args()
     return run(
@@ -118,6 +136,7 @@ def main() -> ExitCode:
             predictions=args.predictions,
             manifest=args.manifest,
             checkpoint=args.checkpoint,
+            embeddings=args.embeddings,
         ),
         revision=revision_source(os.environ, Path.cwd()),
     )
@@ -129,6 +148,7 @@ def run(
     environ: Mapping[str, str],
     paths: ScreeningPaths,
     revision: Callable[[], SourceRevision],
+    encoders: Callable[[EncoderSpec], HfMeanEncoder] = load_encoder,
 ) -> ExitCode:
     """Složí screening a zapíše agregáty i řádkové predikce s provenance.
 
@@ -137,22 +157,33 @@ def run(
         revizi nebo neoznačených datech v prostředí agenta.
     """
     check_inputs_access(environ, paths.corpus.data)
-    screening = load_classical_screening_config(paths.config)
+    screening = load_screening_config(paths.config)
+    versions = installed_versions(ENCODER_PACKAGES) if screening.encoders else {}
+    packages = installed_versions(PACKAGES) | versions
     source = revision()
     corpus = model_corpus(paths.corpus, screening.input)
-    report = ClassicalScreening(
+    report = Screening(
         table=corpus.table,
         split=corpus.split,
         partitioner=StratifiedGroupFolds(),
-        featurizer=TfidfFeaturizer(
-            corpus.normalization,
-            screening_lsa(screening.families, screening.lsa_components, screening.seed),
+        featurizer=ScreeningFeaturizer(
+            TfidfFeaturizer(
+                corpus.normalization,
+                screening_lsa(
+                    screening.families, screening.lsa_components, screening.seed
+                ),
+            ),
+            EncoderFeaturizer(
+                NoteEmbeddings(
+                    paths.embeddings, versions, lambda spec: encoders(spec).embed
+                )
+            ),
         ),
         tuner=SklearnThresholdTuner(),
         scorer=SklearnScorer(),
         progress=ParquetScreeningCheckpoint(
             directory=paths.checkpoint,
-            key=checkpoint_key(paths, corpus.dataset_sha256),
+            key=checkpoint_key(paths, corpus.dataset_sha256, packages),
             results=paths.out,
             predictions=paths.predictions,
         ),
@@ -160,6 +191,7 @@ def run(
     write_model(
         paths.manifest,
         ScreeningManifest(
+            encoders=screening.encoders,
             dataset_sha256=corpus.dataset_sha256,
             split_seed=report.split_config.seed,
             split_folds=report.split_config.folds,
@@ -173,9 +205,7 @@ def run(
             diagnostic_strip=corpus.strip,
             text_preprocessing=screening.input.text_preprocessing,
             text_normalization=corpus.normalization,
-            environment=Environment(
-                packages=installed_versions(PACKAGES), source=source
-            ),
+            environment=Environment(packages=packages, source=source),
         ),
     )
     logger.info(
@@ -187,7 +217,11 @@ def run(
     return ExitCode.OK
 
 
-def checkpoint_key(paths: ScreeningPaths, dataset_sha256: str) -> str:
+def checkpoint_key(
+    paths: ScreeningPaths,
+    dataset_sha256: str,
+    packages: Mapping[str, str],
+) -> str:
     """Otiskne vstupy, kód a verze knihoven pro obnovu screeningu.
 
     Returns:
@@ -199,8 +233,5 @@ def checkpoint_key(paths: ScreeningPaths, dataset_sha256: str) -> str:
         ("split", file_sha256(paths.corpus.split).encode()),
         ("candidates", file_sha256(paths.corpus.candidates).encode()),
         ("lexicon", file_sha256(paths.corpus.lexicon).encode()),
-        *(
-            (f"packages/{name}", value.encode())
-            for name, value in installed_versions(PACKAGES).items()
-        ),
+        *((f"packages/{name}", value.encode()) for name, value in packages.items()),
     ])

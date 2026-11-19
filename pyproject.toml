@@ -23,10 +23,11 @@ dependencies = [
     "nvidia-ml-py>=13.615.71",
     "lightgbm>=4.7.0",
     "optuna>=5.1.0",
+    "huggingface-hub>=1.33.0,<2",
 ]
 
 [project.scripts]
-mediparse-screening-classical = "mediparse.entrypoints.classical_screening:main"
+mediparse-screening = "mediparse.entrypoints.screening:main"
 mediparse-data-access-check = "mediparse.entrypoints.data_access_check:main"
 mediparse-eda-provenance = "mediparse.entrypoints.eda_provenance:main"
 mediparse-eda-note-tokens = "mediparse.entrypoints.eda_note_tokens:main"
@@ -421,6 +422,11 @@ include = ["translation/**"]
 [tool.ty.overrides.analysis]
 allowed-unresolved-imports = ["torch", "transformers", "vllm", "vllm.**"]
 
+[[tool.ty.overrides]]
+include = ["src/mediparse/infrastructure/hf_encoder.py", "tests/hf_encoder_support.py", "tests/test_hf_encoder.py"]
+[tool.ty.overrides.analysis]
+allowed-unresolved-imports = ["torch"]
+
 [tool.pixi.workspace]
 channels = ["conda-forge"]
 platforms = ["linux-64"]
@@ -435,9 +441,16 @@ mediparse = { path = ".", editable = true }
 
 [tool.pixi.environments]
 default = { features = ["dev"], solve-group = "main" }
-test = { features = ["test"], solve-group = "main" }
+test = { features = ["test", "cpu"], solve-group = "main" }
 translate = { features = ["translate"], no-default-feature = true, solve-group = "translate" }
 eda = { features = ["eda"], solve-group = "main" }
+gpu = { features = ["dev", "gpu"], solve-group = "gpu" }
+
+[tool.pixi.feature.cpu.pypi-dependencies]
+torch = { version = "==2.14.1", index = "https://download.pytorch.org/whl/cpu" }
+
+[tool.pixi.feature.gpu.pypi-dependencies]
+torch = { version = "==2.14.1", index = "https://download.pytorch.org/whl/cu130" }
 
 [tool.pixi.feature.translate.dependencies]
 python = "3.13.*"

@@ -11,8 +11,8 @@ from typing import TYPE_CHECKING, Final
 import pyarrow as pa
 from pydantic import BaseModel, ConfigDict
 
-from mediparse.domain.classical_screening import ClassifierFamily, ScreeningUnit
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.screening import ClassifierFamily, ScreeningUnit
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.metrics_table import METRIC_FIELDS, metric_columns
 from mediparse.infrastructure.parquet_file import concat_files, read_table, write_table
@@ -21,7 +21,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable, Generator, Sequence
     from pathlib import Path
 
-    from mediparse.domain.classical_screening import ScreeningResult
+    from mediparse.domain.screening import ScreeningResult
 
 logger = logging.getLogger(__name__)
 KEY_FILE: Final = "key.json"

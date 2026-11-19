@@ -10,14 +10,14 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import pytest
 
-from mediparse.domain.classical_screening import (
+from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.evaluation import BinaryMetrics, Classification
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.screening import (
     ClassifierFamily,
     ScreeningResult,
     ScreeningUnit,
 )
-from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.evaluation import BinaryMetrics, Classification
-from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.parquet_file import write_table
 from mediparse.infrastructure.screening_table import (
     PREDICTIONS_SCHEMA,

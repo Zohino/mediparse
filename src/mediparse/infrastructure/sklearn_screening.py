@@ -10,10 +10,11 @@ from lightgbm import LGBMClassifier
 from sklearn.decomposition import TruncatedSVD
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import TunedThresholdClassifierCV
+from sklearn.preprocessing import StandardScaler
 from sklearn.svm import LinearSVC
 
-from mediparse.domain.classical_screening import ClassifierFamily
 from mediparse.domain.evaluation import Classification
+from mediparse.domain.screening import ClassifierFamily, EncoderSpec, VectorizerSpec
 from mediparse.infrastructure.complement_nb import ComplementNbLogOdds
 from mediparse.infrastructure.machine_hardware import peak_rss_gb
 from mediparse.infrastructure.nb_svm import NbSvmClassifier
@@ -31,10 +32,11 @@ if TYPE_CHECKING:
     from scipy.sparse import csr_matrix
     from sklearn.base import BaseEstimator
 
-    from mediparse.domain.classical_screening import VectorizerSpec
     from mediparse.domain.clinical_text import TextNormalization
     from mediparse.domain.identity import SubjectId
+    from mediparse.domain.screening import Representation
     from mediparse.domain.seed import Seed
+    from mediparse.infrastructure.note_embeddings import NoteEmbeddings
 
 logger = logging.getLogger(__name__)
 
@@ -62,16 +64,16 @@ def screening_lsa(
 
 @dataclass(frozen=True)
 class ScreeningFeatures:
-    """Řídká a případně redukovaná reprezentace stejných zpráv foldu."""
+    """Původní a případně redukovaná reprezentace stejných zpráv foldu."""
 
-    sparse: csr_matrix
+    matrix: csr_matrix | ndarray
     lsa: ndarray | None
 
     def for_family(self, family: ClassifierFamily) -> csr_matrix | ndarray:
         """Vybere tutéž reprezentaci pro fit i klasifikaci rodiny.
 
         Returns:
-            LSA pro LightGBM, jinak původní řídké TF-IDF.
+            LSA pro LightGBM, jinak původní reprezentace.
 
         Raises:
             ValueError: LightGBM nedostal LSA (chyba složení screeningu).
@@ -81,7 +83,7 @@ class ScreeningFeatures:
                 msg = "LightGBM vyžaduje příznaky LSA."
                 raise ValueError(msg)
             return self.lsa
-        return self.sparse
+        return self.matrix
 
 
 @dataclass(frozen=True)
@@ -130,6 +132,56 @@ class TfidfFeaturizer:
         return ScreeningFeatures(features, train_lsa), ScreeningFeatures(
             test_features, test_lsa
         )
+
+
+@dataclass(frozen=True)
+class EncoderFeaturizer:
+    """Embeddingy standardizované podle vnějšího tréninku."""
+
+    embeddings: NoteEmbeddings
+
+    def fit_transform(
+        self, spec: EncoderSpec, train: Sequence[str], test: Sequence[str]
+    ) -> tuple[ScreeningFeatures, ScreeningFeatures]:
+        """Fitne škálování na tréninku a transformuje test.
+
+        Returns:
+            Husté příznaky v pořadí zpráv bez LSA.
+        """
+        scaler = StandardScaler()
+        # Stejně jako TF-IDF se fituje jednou na vnější fold; vnitřní CV prahu
+        # vidí scaler ze svých validací, vnější test do fitu nevstoupí.
+        # Společná matice a řez umožní načíst model v prvním foldu jen jednou.
+        matrix = self.embeddings.embed(spec, [*train, *test])
+        train_features = scaler.fit_transform(matrix[: len(train)])
+        test_features = scaler.transform(matrix[len(train) :])
+        return ScreeningFeatures(train_features, None), ScreeningFeatures(
+            test_features, None
+        )
+
+
+@dataclass(frozen=True)
+class ScreeningFeaturizer:
+    """Vybere adaptér příznaků podle specifikace reprezentace."""
+
+    tfidf: TfidfFeaturizer
+    encoder: EncoderFeaturizer
+
+    def fit_transform(
+        self, spec: Representation, train: Sequence[str], test: Sequence[str]
+    ) -> tuple[ScreeningFeatures, ScreeningFeatures]:
+        """Deleguje příznaky na TF-IDF nebo zmražený encoder.
+
+        Returns:
+            Reprezentace tréninku a testu.
+        """
+        match spec:
+            case VectorizerSpec():
+                return self.tfidf.fit_transform(spec, train, test)
+            case EncoderSpec():
+                return self.encoder.fit_transform(spec, train, test)
+            case _:
+                assert_never(spec)
 
 
 def classifier_estimator(family: ClassifierFamily, seed: Seed) -> BaseEstimator:

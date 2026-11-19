@@ -15,13 +15,13 @@ from typing import TYPE_CHECKING, Final
 import pytest
 
 from mediparse.entrypoints import (
-    classical_screening,
     cohort,
     mimic_parquet,
     model_evaluation,
     model_inference,
     model_training,
     model_tuning,
+    screening,
     split_materialization,
 )
 from mediparse.entrypoints.exit_code import ExitCode
@@ -109,15 +109,16 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
             clock=PerfCounterClock(),
             environ=environ,
         ),
-        "classical_screening": partial(
-            classical_screening.run,
-            paths=classical_screening.ScreeningPaths(
+        "screening": partial(
+            screening.run,
+            paths=screening.ScreeningPaths(
                 corpus=repository_corpus(notes, split),
                 config=root / "missing.json",
                 out=root / "screening/classical.parquet",
                 predictions=root / "screening/classical_predictions.parquet",
                 manifest=root / "screening/classical_manifest.json",
                 checkpoint=root / "screening/checkpoint",
+                embeddings=root / "screening/embeddings",
             ),
             revision=fixed_revision,
             environ=environ,
@@ -190,7 +191,7 @@ GUARD_CASES: Final = {
     "split_materialization": _GuardCase(("cohort",)),
     "model_training": _GuardCase(("cohort", "split"), corpus=True),
     "model_tuning": _GuardCase(("cohort", "split"), corpus=True, native=False),
-    "classical_screening": _GuardCase(("cohort", "split"), corpus=True, native=False),
+    "screening": _GuardCase(("cohort", "split"), corpus=True, native=False),
     "model_evaluation": _GuardCase(("predictions", "cohort", "split")),
     "model_inference": _GuardCase(("cohort", "model", "predictions")),
 }

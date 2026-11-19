@@ -1,4 +1,4 @@
-"""Mřížka klasického screeningu a výsledky buněk na vývojové části."""
+"""Mřížka screeningu stupně a výsledky buněk na vývojové části."""
 
 from __future__ import annotations
 
@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Annotated, Literal, Self
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
+from mediparse.domain.digest import CommitSha
 from mediparse.domain.model_input import ModelInput
 from mediparse.domain.seed import Seed
 
@@ -18,7 +19,7 @@ if TYPE_CHECKING:
 
 
 class ClassifierFamily(StrEnum):
-    """Rodiny klasického stupně s výchozími hyperparametry."""
+    """Rodiny klasifikátorů nad reprezentací s výchozími hyperparametry."""
 
     COMPLEMENT_NB = "complement_nb"
     LOGREG = "logreg"
@@ -53,8 +54,24 @@ class VectorizerSpec(BaseModel):
         return self
 
 
-class ClassicalScreeningConfig(BaseModel):
-    """Parametry vnější CV, volby prahu a mřížky klasického screeningu."""
+class EncoderSpec(BaseModel):
+    """Připnutý encoder a explicitní numerický režim reprezentace."""
+
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+
+    name: Annotated[str, Field(min_length=1)]
+    model: Annotated[str, Field(min_length=1)]
+    revision: CommitSha
+    window: PositiveInt
+    device: Literal["cpu", "cuda"]
+    dtype: Literal["float32", "bfloat16"]
+
+
+type Representation = VectorizerSpec | EncoderSpec
+
+
+class ScreeningConfig(BaseModel):
+    """Parametry vnější CV, volby prahu a mřížky screeningu stupně."""
 
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 
@@ -63,8 +80,20 @@ class ClassicalScreeningConfig(BaseModel):
     threshold_folds: Annotated[int, Field(ge=2)]
     lsa_components: PositiveInt
     input: ModelInput
-    vectorizers: Annotated[tuple[VectorizerSpec, ...], Field(min_length=1)]
+    vectorizers: Annotated[tuple[Representation, ...], Field(min_length=1)]
     families: Annotated[tuple[ClassifierFamily, ...], Field(min_length=1)]
+
+    @property
+    def encoders(self) -> tuple[EncoderSpec, ...]:
+        """Encodery použité v mřížce a zapsané do provenance."""
+        return tuple(spec for spec in self.vectorizers if isinstance(spec, EncoderSpec))
+
+    @model_validator(mode="after")
+    def _encoder_families_are_compatible(self) -> Self:
+        if self.encoders and self.families != (ClassifierFamily.LOGREG,):
+            msg = "Encoder podporuje jen rodinu logreg."
+            raise ValueError(msg)
+        return self
 
     @model_validator(mode="after")
     def _vectorizer_names_are_unique(self) -> Self:

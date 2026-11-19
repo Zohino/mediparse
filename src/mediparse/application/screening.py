@@ -1,4 +1,4 @@
-"""Screening klasické mřížky s vnější CV jen mezi vývojovými pacienty."""
+"""Screening mřížky stupně s vnější CV jen mezi vývojovými pacienty."""
 
 from __future__ import annotations
 
@@ -6,12 +6,12 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
 from mediparse.application.patient_cv import patient_holdouts
-from mediparse.domain.classical_screening import (
+from mediparse.domain.diagnosis import Diagnosis
+from mediparse.domain.screening import (
     ScreeningReport,
     ScreeningResult,
     ScreeningUnit,
 )
-from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.split import ensure_patients_per_class
 
 if TYPE_CHECKING:
@@ -23,14 +23,14 @@ if TYPE_CHECKING:
         Scorer,
         SplitSource,
     )
-    from mediparse.domain.classical_screening import (
-        ClassicalScreeningConfig,
-        ClassifierFamily,
-        VectorizerSpec,
-    )
     from mediparse.domain.evaluation import Classification
     from mediparse.domain.identity import SubjectId
     from mediparse.domain.input_note import InputNote
+    from mediparse.domain.screening import (
+        ClassifierFamily,
+        Representation,
+        ScreeningConfig,
+    )
     from mediparse.domain.seed import Seed
     from mediparse.domain.split import Holdout
 
@@ -39,7 +39,7 @@ class Featurizer[F](Protocol):
     """Příznaky fitované jen na tréninku, sdílené rodinami a diagnózami foldu."""
 
     def fit_transform(
-        self, spec: VectorizerSpec, train: Sequence[str], test: Sequence[str]
+        self, spec: Representation, train: Sequence[str], test: Sequence[str]
     ) -> tuple[F, F]:
         """Fitne vektorizér na tréninku a vrátí příznaky tréninku i testu."""
 
@@ -89,8 +89,8 @@ class ScreeningProgress(Protocol):
 
 
 @dataclass(frozen=True)
-class ClassicalScreening[F]:
-    """Provede mřížku klasického stupně na vývojové části původního splitu."""
+class Screening[F]:
+    """Provede mřížku stupně na vývojové části původního splitu."""
 
     table: PatientNoteTable
     split: SplitSource
@@ -100,7 +100,7 @@ class ClassicalScreening[F]:
     scorer: Scorer
     progress: ScreeningProgress
 
-    def run(self, config: ClassicalScreeningConfig) -> ScreeningReport:
+    def run(self, config: ScreeningConfig) -> ScreeningReport:
         """Ověří foldy, přeskočí hotové jednotky rozpracovaného běhu, ostatní zapíše po jednotkách a složí výstupy.
 
         Args:
@@ -140,9 +140,9 @@ class ClassicalScreening[F]:
     def _screen_vectorizer(
         self,
         holdout: Holdout,
-        spec: VectorizerSpec,
+        spec: Representation,
         families: Sequence[ClassifierFamily],
-        config: ClassicalScreeningConfig,
+        config: ScreeningConfig,
     ) -> None:
         train, test = self.featurizer.fit_transform(
             spec,
@@ -187,7 +187,7 @@ class ClassicalScreening[F]:
 
 def _development_holdouts(
     notes: Sequence[InputNote],
-    config: ClassicalScreeningConfig,
+    config: ScreeningConfig,
     partitioner: PatientPartitioner,
 ) -> tuple[Holdout, ...]:
     holdouts = patient_holdouts(notes, config.folds, config.seed, partitioner)

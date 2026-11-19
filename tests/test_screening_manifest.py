@@ -9,11 +9,13 @@ from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.environment import Environment
 from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import ScreeningManifest
+from tests.hf_encoder_support import SPEC
 from tests.support import REVISION
 
 
 def _fields(**changes: object) -> dict[str, object]:
     return {
+        "encoders": (),
         "dataset_sha256": "a" * 64,
         "split_seed": 23,
         "split_folds": 2,
@@ -131,3 +133,11 @@ def test_screening_requires_at_least_two_split_folds(folds: int) -> None:
     """Manifest screeningu odmítne split s méně než dvěma foldy."""
     with pytest.raises(ValidationError, match="split_folds"):
         ScreeningManifest.model_validate(_fields(split_folds=folds))
+
+
+def test_encoder_manifest_round_trip() -> None:
+    """Revize a numerický režim encoderu přežijí serializaci provenance."""
+    manifest = ScreeningManifest.model_validate(_fields(encoders=(SPEC,)))
+    assert ScreeningManifest.model_validate_json(
+        manifest.model_dump_json()
+    ).encoders == (SPEC,)

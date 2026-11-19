@@ -229,3 +229,5 @@ checklist.txt
 
 # Poznámky k teoretické části práce
 docs/notes-synthesis.tex
+
+/results/**/embeddings/
