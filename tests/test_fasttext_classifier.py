@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+from contextlib import nullcontext
 from pathlib import Path
 from unittest.mock import Mock
 
@@ -64,28 +66,24 @@ def test_training_is_single_threaded_with_seed(
     assert spy.call_args.kwargs["seed"] == 5
 
 
-@pytest.mark.parametrize("fails", [False, True])
+@pytest.mark.parametrize("error", [None, RuntimeError("Syntetické selhání tréninku.")])
 def test_scratch_is_empty_after_fit(
     tmp_path: Path,
     corpus: tuple[np.ndarray, list[bool]],
     monkeypatch: pytest.MonkeyPatch,
-    *,
-    fails: bool,
+    error: RuntimeError | None,
 ) -> None:
-    """Tokeny nezůstanou ve scratch ani po výjimce tréninku."""
-    scratch = tmp_path / "scratch"
-    if fails:
-
-        def fail(**kwargs: object) -> None:
-            assert Path(str(kwargs["input"])).is_file()
-            msg = "Syntetické selhání tréninku."
-            raise RuntimeError(msg)
-
-        monkeypatch.setattr(fasttext, "train_supervised", fail)
-        with pytest.raises(RuntimeError, match="Syntetické selhání"):
-            FastTextClassifier(scratch).fit(*corpus)
-    else:
+    """Tokeny vzniknou jen ve scratch a nezůstanou ani po výjimce tréninku."""
+    scratch = tmp_path / "missing" / "scratch"
+    spy = Mock(wraps=fasttext.train_supervised, side_effect=error)
+    monkeypatch.setattr(fasttext, "train_supervised", spy)
+    with (
+        pytest.raises(RuntimeError, match=re.escape("Syntetické selhání tréninku."))
+        if error is not None
+        else nullcontext()
+    ):
         FastTextClassifier(scratch).fit(*corpus)
+    assert Path(spy.call_args.kwargs["input"]).is_relative_to(scratch)
     assert list(scratch.iterdir()) == []
 
 

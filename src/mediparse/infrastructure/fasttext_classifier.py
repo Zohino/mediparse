@@ -42,6 +42,7 @@ class FastTextClassifier(ClassifierMixin, BaseEstimator):
             msg = "fastText vyžaduje právě dvě třídy."
             raise ValueError(msg)
         self.scratch.mkdir(parents=True, exist_ok=True)
+        # Tokeny zpráv MIMIC patří pod chráněný scratch; systémové /tmp je mimo ochranu DUA.
         with TemporaryDirectory(dir=self.scratch) as directory:
             path = Path(directory) / "train.txt"
             with path.open("w", encoding="utf-8") as output:
