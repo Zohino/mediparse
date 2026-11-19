@@ -1,4 +1,4 @@
-"""TF-IDF a volba prahu klasických rodin při CV po pacientech."""
+"""Příznaky a volba prahu rodin screeningu při CV po pacientech."""
 
 from __future__ import annotations
 
@@ -6,6 +6,7 @@ import logging
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, assert_never
 
+import numpy as np
 from lightgbm import LGBMClassifier
 from sklearn.decomposition import TruncatedSVD
 from sklearn.linear_model import LogisticRegression
@@ -14,8 +15,14 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import LinearSVC
 
 from mediparse.domain.evaluation import Classification
-from mediparse.domain.screening import ClassifierFamily, EncoderSpec, VectorizerSpec
+from mediparse.domain.screening import (
+    ClassifierFamily,
+    EncoderSpec,
+    TokensSpec,
+    VectorizerSpec,
+)
 from mediparse.infrastructure.complement_nb import ComplementNbLogOdds
+from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
 from mediparse.infrastructure.machine_hardware import peak_rss_gb
 from mediparse.infrastructure.nb_svm import NbSvmClassifier
 from mediparse.infrastructure.sklearn_classifier import (
@@ -27,6 +34,7 @@ from mediparse.infrastructure.sklearn_split import threshold_splits
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Sequence
+    from pathlib import Path
 
     from numpy import ndarray
     from scipy.sparse import csr_matrix
@@ -135,6 +143,35 @@ class TfidfFeaturizer:
 
 
 @dataclass(frozen=True)
+class TokenFeaturizer:
+    """Slovní unigramy se společným předzpracováním bez matice TF-IDF."""
+
+    normalization: TextNormalization | None
+
+    def fit_transform(
+        self, spec: TokensSpec, train: Sequence[str], test: Sequence[str]
+    ) -> tuple[ScreeningFeatures, ScreeningFeatures]:
+        """Spojí tokeny analyzátoru do dokumentů pro trénink i test.
+
+        Returns:
+            Pole řetězců ve vstupním pořadí bez LSA.
+        """
+        del spec
+        vectorizer = tfidf_vectorizer(self.normalization)
+        ensure_tokens(vectorizer, train)
+        analyzer = vectorizer.build_analyzer()
+        # Pevná šířka <U zarovná zprávy na nejdelší: 44 tis. krát 60 tis. znaků je ~9,8 GiB.
+
+        def features(texts: Sequence[str]) -> ScreeningFeatures:
+            return ScreeningFeatures(
+                np.array([" ".join(analyzer(text)) for text in texts], dtype=object),
+                None,
+            )
+
+        return features(train), features(test)
+
+
+@dataclass(frozen=True)
 class EncoderFeaturizer:
     """Embeddingy standardizované podle vnějšího tréninku."""
 
@@ -166,11 +203,12 @@ class ScreeningFeaturizer:
 
     tfidf: TfidfFeaturizer
     encoder: EncoderFeaturizer
+    tokens: TokenFeaturizer
 
     def fit_transform(
         self, spec: Representation, train: Sequence[str], test: Sequence[str]
     ) -> tuple[ScreeningFeatures, ScreeningFeatures]:
-        """Deleguje příznaky na TF-IDF nebo zmražený encoder.
+        """Deleguje příznaky podle typu reprezentace.
 
         Returns:
             Reprezentace tréninku a testu.
@@ -180,11 +218,15 @@ class ScreeningFeaturizer:
                 return self.tfidf.fit_transform(spec, train, test)
             case EncoderSpec():
                 return self.encoder.fit_transform(spec, train, test)
+            case TokensSpec():
+                return self.tokens.fit_transform(spec, train, test)
             case _:
                 assert_never(spec)
 
 
-def classifier_estimator(family: ClassifierFamily, seed: Seed) -> BaseEstimator:
+def classifier_estimator(
+    family: ClassifierFamily, seed: Seed, scratch: Path
+) -> BaseEstimator:
     """Vytvoří estimator rodiny; případnou redukci už provedl featurizér.
 
     Returns:
@@ -207,6 +249,8 @@ def classifier_estimator(family: ClassifierFamily, seed: Seed) -> BaseEstimator:
                 force_row_wise=True,
                 verbose=-1,
             )
+        case ClassifierFamily.FASTTEXT:
+            return FastTextClassifier(scratch, random_state=seed)
         case _:
             assert_never(family)
 
@@ -242,7 +286,10 @@ class SklearnTunedClassifier:
 class SklearnThresholdTuner:
     """Volba prahu a refit s evidencí nekonvergence všech vnitřních fitů."""
 
-    estimator: Callable[[ClassifierFamily, Seed], BaseEstimator] = classifier_estimator
+    scratch: Path
+    estimator: Callable[[ClassifierFamily, Seed, Path], BaseEstimator] = (
+        classifier_estimator
+    )
 
     def fit(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
         self,
@@ -260,7 +307,7 @@ class SklearnThresholdTuner:
         """
         # Výchozí n_jobs drží fity ve stejném procesu, kde lze zachytit jejich varování.
         model = TunedThresholdClassifierCV(
-            self.estimator(family, seed),
+            self.estimator(family, seed, self.scratch),
             scoring="f1",
             cv=threshold_splits(labels, subjects, folds, seed),
         )

@@ -188,7 +188,7 @@ def ensure_tokens(vectorizer: TfidfVectorizer, texts: Sequence[str]) -> None:
     """
     analyzer = vectorizer.build_analyzer()
     if not any(analyzer(text) for text in texts):
-        msg = "Trénovací texty neobsahují žádný token, slovník TF-IDF by byl prázdný."
+        msg = "Trénovací texty neobsahují žádný token, slovník by byl prázdný."
         raise InvalidInputError(msg)
 
 

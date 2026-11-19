@@ -8,6 +8,7 @@
 !config/split.json
 !config/screening_classical.json
 !config/screening_shallow.json
+!config/screening_fasttext.json
 !config/decision_rule.json
 !config/section_headers.json
 !config/synthetic_plan.json

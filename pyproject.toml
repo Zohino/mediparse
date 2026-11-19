@@ -435,6 +435,7 @@ platforms = ["linux-64"]
 python = "3.13.*"
 aria2 = ">=1.37.0,<2"
 jq = ">=1.8.2,<2"
+fasttext = "==0.9.2"
 
 [tool.pixi.pypi-dependencies]
 mediparse = { path = ".", editable = true }

@@ -7,6 +7,12 @@ jde o řádková data, která do ``results/`` nesmí.
 Rozpracovaný běh patří do ``resources/mimic/screening/classical_checkpoint``.
 Mělký stupeň používá obdobné cesty ``results/screening/shallow.parquet`` a
 ``resources/mimic/screening/shallow_checkpoint``.
+fastText používá ``results/screening/fasttext.parquet``,
+``results/screening/fasttext_manifest.json``,
+``resources/mimic/screening/fasttext_predictions.parquet`` a
+``resources/mimic/screening/fasttext_checkpoint``.
+Povinný ``--scratch`` doporučeně míří na ``resources/mimic/screening/scratch``:
+dočasné soubory obsahují tokeny zpráv a patří mimo adresář checkpointu.
 Po pádu stačí spustit týž příkaz.
 """
 
@@ -49,6 +55,7 @@ from mediparse.infrastructure.sklearn_screening import (
     ScreeningFeaturizer,
     SklearnThresholdTuner,
     TfidfFeaturizer,
+    TokenFeaturizer,
     screening_lsa,
 )
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
@@ -67,6 +74,7 @@ PACKAGES: Final = (
     "scipy",
     "scikit-learn",
     "lightgbm",
+    "fasttext",
     "pyarrow",
     "pydantic",
 )
@@ -83,6 +91,7 @@ class ScreeningPaths:
     manifest: Path
     checkpoint: Path
     embeddings: Path
+    scratch: Path
 
 
 def main() -> ExitCode:
@@ -120,6 +129,12 @@ def main() -> ExitCode:
         required=True,
         help="Cache embeddingů; doporučeno resources/mimic/screening/embeddings, mimo results/.",
     )
+    parser.add_argument(
+        "--scratch",
+        type=Path,
+        required=True,
+        help="Dočasné tokeny zpráv; doporučeno resources/mimic/screening/scratch, mimo checkpoint a results/.",
+    )
     parser.add_argument("--manifest", type=Path, required=True)
     args = parser.parse_args()
     return run(
@@ -137,6 +152,7 @@ def main() -> ExitCode:
             manifest=args.manifest,
             checkpoint=args.checkpoint,
             embeddings=args.embeddings,
+            scratch=args.scratch,
         ),
         revision=revision_source(os.environ, Path.cwd()),
     )
@@ -178,8 +194,9 @@ def run(
                     paths.embeddings, versions, lambda spec: encoders(spec).embed
                 )
             ),
+            tokens=TokenFeaturizer(corpus.normalization),
         ),
-        tuner=SklearnThresholdTuner(),
+        tuner=SklearnThresholdTuner(paths.scratch),
         scorer=SklearnScorer(),
         progress=ParquetScreeningCheckpoint(
             directory=paths.checkpoint,
