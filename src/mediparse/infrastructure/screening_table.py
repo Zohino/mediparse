@@ -21,7 +21,6 @@ if TYPE_CHECKING:
     from mediparse.domain.screening import ScreeningResult
 
 logger = logging.getLogger(__name__)
-KEY_FILE: Final = "key.json"
 
 CELL_FIELDS: Final = (
     pa.field("fold", pa.int64(), nullable=False),
