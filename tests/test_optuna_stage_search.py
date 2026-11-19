@@ -53,7 +53,10 @@ def test_stage_never_prunes_after_startup() -> None:
     config = stage_config()
     search = OptunaStageSearch.create(config)
     for _ in range(5):
-        search.complete(search.ask(), 1.0)
+        trial = search.ask()
+        search.should_prune(trial, 1.0, 0)
+        search.should_prune(trial, 1.0, 1)
+        search.complete(trial, 1.0)
     trial = search.ask()
     assert search.should_prune(trial, 0.0, 0) is False
 
