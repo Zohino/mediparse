@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
 import pyarrow as pa
@@ -92,19 +92,15 @@ class ParquetScreeningCheckpoint:
     key: str
     results: Path
     predictions: Path
-    parts: ParquetParts = field(init=False)
 
-    def __post_init__(self) -> None:
-        """Sestaví mechaniku dílů s výsledky jako značkou dokončení."""
-        object.__setattr__(
-            self,
-            "parts",
-            ParquetParts(
-                self.directory,
-                self.key,
-                (("predictions", PREDICTIONS_SCHEMA), ("results", SCHEMA)),
-                "screeningu",
-            ),
+    @property
+    def parts(self) -> ParquetParts:
+        """Mechanika dílů s výsledky jako značkou dokončení."""
+        return ParquetParts(
+            self.directory,
+            self.key,
+            (("predictions", PREDICTIONS_SCHEMA), ("results", SCHEMA)),
+            "screeningu",
         )
 
     def completed(self) -> frozenset[ScreeningUnit]:

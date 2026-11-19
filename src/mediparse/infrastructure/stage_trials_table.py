@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
 import pyarrow as pa
@@ -58,19 +58,15 @@ class ParquetStageCheckpoint:
     key: str
     results: Path
     predictions: Path
-    parts: ParquetParts = field(init=False)
 
-    def __post_init__(self) -> None:
-        """Sestaví díly s tabulkou pokusů jako značkou dokončení."""
-        object.__setattr__(
-            self,
-            "parts",
-            ParquetParts(
-                self.directory,
-                self.key,
-                (("predictions", TRIAL_PREDICTIONS_SCHEMA), ("results", TRIALS_SCHEMA)),
-                "ladění stupně",
-            ),
+    @property
+    def parts(self) -> ParquetParts:
+        """Mechanika dílů s výsledky jako značkou dokončení."""
+        return ParquetParts(
+            self.directory,
+            self.key,
+            (("predictions", TRIAL_PREDICTIONS_SCHEMA), ("results", TRIALS_SCHEMA)),
+            "ladění stupně",
         )
 
     def completed(self) -> tuple[StageTrialRecord, ...]:
