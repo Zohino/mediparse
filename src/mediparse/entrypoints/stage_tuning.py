@@ -25,7 +25,6 @@ from mediparse.entrypoints.model_corpus import (
     checkpoint_key,
     model_corpus,
 )
-from mediparse.entrypoints.screening import PACKAGES as SCREENING_PACKAGES
 from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
@@ -50,7 +49,16 @@ if TYPE_CHECKING:
     from mediparse.domain.environment import SourceRevision
 
 logger = logging.getLogger(__name__)
-PACKAGES: Final = (*SCREENING_PACKAGES, "optuna")
+PACKAGES: Final = (
+    "python",
+    "numpy",
+    "scipy",
+    "scikit-learn",
+    "lightgbm",
+    "optuna",
+    "pyarrow",
+    "pydantic",
+)
 
 
 @dataclass(frozen=True, kw_only=True)

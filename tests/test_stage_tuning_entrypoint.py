@@ -75,6 +75,16 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
     predictions = pq.read_table(paths.predictions).to_pylist()
     written = StageTuningManifest.model_validate_json(paths.manifest.read_bytes())
     assert written.completed_trials == written.trials == 6
+    assert set(written.environment.packages) == {
+        "python",
+        "numpy",
+        "scipy",
+        "scikit-learn",
+        "lightgbm",
+        "optuna",
+        "pyarrow",
+        "pydantic",
+    }
     assert written.seconds == pytest.approx(6.0)
     affected = {row["trial"] for row in trials if not row["converged"]}
     assert affected == {0}
