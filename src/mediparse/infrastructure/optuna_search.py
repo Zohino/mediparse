@@ -1,4 +1,4 @@
-"""Optuna jako strategie návrhů a prořezávání, se sqlite pro jednotlivý běh."""
+"""Návrhy Optuny: sqlite pro model a studie stupně v paměti obnovovaná z checkpointu."""
 
 from __future__ import annotations
 
