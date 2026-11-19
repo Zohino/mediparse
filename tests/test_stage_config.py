@@ -1,6 +1,7 @@
 """Doménové invarianty podmíněného prostoru a vítěze."""
 
 import json
+from typing import Any
 
 import pytest
 from pydantic import ValidationError
@@ -40,40 +41,121 @@ def test_winner_tie_uses_earlier_trial() -> None:
     assert best_trial(records).number == 1
 
 
-@pytest.mark.parametrize("case", range(8))
-def test_invalid_config(case: int) -> None:
-    """Osm odmítnutí podle nezávislých příkladů briefu E8."""
+@pytest.mark.parametrize(
+    ("changes", "message"),
+    [
+        pytest.param(
+            {("families", 0, "default", "C"): 10000.0},
+            "Výchozí parametry rodiny",
+            id="family-default-outside",
+        ),
+        pytest.param(
+            {("representations", 0, "default", "max_df"): 1},
+            "Výchozí parametry reprezentace",
+            id="max-df-int-default",
+        ),
+        pytest.param({("trials",): 4}, "Rozpočet", id="insufficient-budget"),
+        pytest.param(
+            {
+                ("representations", 0, "space", "params", 0): {
+                    "kind": "int",
+                    "name": "ngram_min",
+                    "low": 1,
+                    "high": 3,
+                    "log": False,
+                }
+            },
+            "Maximum ngram_min",
+            id="ngram-int-order",
+        ),
+        pytest.param(
+            {
+                ("representations", 0, "space", "params", 2): {
+                    "kind": "float",
+                    "name": "min_df",
+                    "low": 0.1,
+                    "high": 1.0,
+                    "log": False,
+                },
+                ("representations", 0, "default", "min_df"): 1.0,
+            },
+            "min_df vyžaduje celočíselný",
+            id="min-df-float-space",
+        ),
+        pytest.param(
+            {("families", 0, "family"): "fasttext"},
+            "Rodina fasttext",
+            id="incompatible-family",
+        ),
+        pytest.param(
+            {("representations", 1, "name"): "r1"},
+            "Jména reprezentací",
+            id="duplicate-representation",
+        ),
+        pytest.param(
+            {("seed",): 4294967286, ("trials",): 60}, "Seed spolu", id="seed-overflow"
+        ),
+        pytest.param(
+            {("representations", 0, "space", "params", 0, "name"): "unknown"},
+            "právě pět parametrů",
+            id="invalid-parameter-names",
+        ),
+        pytest.param(
+            {
+                ("representations", 0, "space", "params", 3): {
+                    "kind": "categorical",
+                    "name": "max_df",
+                    "choices": [1.0],
+                }
+            },
+            "max_df vyžaduje float",
+            id="max-df-category",
+        ),
+        pytest.param(
+            {
+                ("representations", 0, "space", "params", 4): {
+                    "kind": "categorical",
+                    "name": "sublinear_tf",
+                    "choices": [1],
+                }
+            },
+            "sublinear_tf bool",
+            id="sublinear-int",
+        ),
+        pytest.param(
+            {
+                ("families", 1): {
+                    "family": "logreg",
+                    "space": {
+                        "params": [
+                            {"kind": "categorical", "name": "C", "choices": [1.0]}
+                        ]
+                    },
+                    "default": {"C": 1.0},
+                }
+            },
+            "Rodiny musí být jedinečné",
+            id="duplicate-family",
+        ),
+        pytest.param(
+            {
+                ("representations", 0, "space", "params", 0, "choices"): [1, 3],
+                ("representations", 0, "space", "params", 1, "choices"): [2, 4],
+            },
+            "Maximum ngram_min",
+            id="ngram-category-order",
+        ),
+    ],
+)
+def test_invalid_config(
+    changes: dict[tuple[str | int, ...], object], message: str
+) -> None:
+    """Každou neplatnou úpravu odmítne její vlastní validační pravidlo."""
     data = stage_config().model_dump(mode="json")
-    match case:
-        case 0:
-            data["families"][0]["default"]["C"] = 1e4
-        case 1:
-            data["representations"][0]["default"]["max_df"] = 1
-        case 2:
-            data["trials"] = 4
-        case 3:
-            params = data["representations"][0]["space"]["params"]
-            params[0] = {
-                "kind": "int",
-                "name": "ngram_min",
-                "low": 1,
-                "high": 3,
-                "log": False,
-            }
-        case 4:
-            params = data["representations"][0]["space"]["params"]
-            params[2] = {
-                "kind": "float",
-                "name": "min_df",
-                "low": 0.1,
-                "high": 1.0,
-                "log": False,
-            }
-        case 5:
-            data["families"][0]["family"] = "fasttext"
-        case 6:
-            data["representations"][1]["name"] = "r1"
-        case 7:
-            data.update(seed=2**32 - 10, trials=60)
-    with pytest.raises(ValidationError):
+    for path, value in changes.items():
+        target: Any = data
+        for key in path[:-1]:
+            target = target[key]
+        target[path[-1]] = value
+    with pytest.raises(ValidationError, match=message):
         StageTuningConfig.model_validate_json(json.dumps(data))

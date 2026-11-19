@@ -28,6 +28,17 @@ if TYPE_CHECKING:
 type Parameter = FloatParam | IntParam | CategoricalParam
 
 
+def _int_choices(param: Parameter) -> tuple[int, int]:
+    if isinstance(param, IntParam):
+        return param.low, param.high
+    if isinstance(param, CategoricalParam):
+        choices = tuple(v for v in param.choices if type(v) is int)
+        if len(choices) == len(param.choices):
+            return min(choices), max(choices)
+    msg = f"Parametr {param.name} vyžaduje celočíselný prostor."
+    raise ValueError(msg)
+
+
 class TfidfRepresentation(BaseModel):
     """Pojmenovaná reprezentace se striktním prostorem TF-IDF."""
 
@@ -50,22 +61,10 @@ class TfidfRepresentation(BaseModel):
         }:
             msg = "Prostor TF-IDF musí obsahovat právě pět parametrů reprezentace."
             raise ValueError(msg)
-        bounds = {}
-        for name in ("ngram_min", "ngram_max", "min_df"):
-            param = params[name]
-            if isinstance(param, IntParam):
-                bounds[name] = (param.low, param.high)
-            elif isinstance(param, CategoricalParam) and all(
-                type(v) is int for v in param.choices
-            ):
-                bounds[name] = (
-                    min(v for v in param.choices if type(v) is int),
-                    max(v for v in param.choices if type(v) is int),
-                )
-            else:
-                msg = f"Parametr {name} vyžaduje celočíselný prostor."
-                raise ValueError(msg)
-        if bounds["ngram_min"][1] > bounds["ngram_max"][0]:
+        ngram_min = _int_choices(params["ngram_min"])
+        ngram_max = _int_choices(params["ngram_max"])
+        _int_choices(params["min_df"])
+        if ngram_min[1] > ngram_max[0]:
             msg = "Maximum ngram_min nesmí překročit minimum ngram_max."
             raise ValueError(msg)
         flag = params["sublinear_tf"]
@@ -191,10 +190,9 @@ class StageTuningConfig(BaseModel):
         if len({f.family for f in self.families}) != len(self.families):
             msg = "Rodiny musí být jedinečné."
             raise ValueError(msg)
-        for branch in self.branches:
-            if branch.family.family is ClassifierFamily.FASTTEXT:
-                msg = f"Rodina fasttext nepracuje nad reprezentací {branch.representation.name}."
-                raise ValueError(msg)
+        if any(f.family is ClassifierFamily.FASTTEXT for f in self.families):
+            msg = "Rodina fasttext nepracuje nad reprezentací TF-IDF."
+            raise ValueError(msg)
         if self.trials < len(self.branches) + self.random_startup_trials:
             msg = "Rozpočet musí pokrýt výchozí i náhodné pokusy."
             raise ValueError(msg)
