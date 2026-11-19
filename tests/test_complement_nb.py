@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from typing import TYPE_CHECKING
 
 import numpy as np
 import pytest
@@ -18,6 +19,9 @@ from mediparse.infrastructure.sklearn_screening import (
     SklearnThresholdTuner,
 )
 from mediparse.infrastructure.sklearn_split import threshold_splits
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def test_log_odds_matches_library_probabilities_and_predictions() -> None:
@@ -75,7 +79,9 @@ def test_clone_preserves_alpha() -> None:
     assert clone(ComplementNbLogOdds(alpha=0.3)).alpha == pytest.approx(0.3)
 
 
-def test_log_odds_resolves_constant_probability_regression() -> None:
+def test_log_odds_resolves_constant_probability_regression(
+    tmp_path: Path,
+) -> None:
     """Sonda 3: 90 řádků, 15 pozitivních a 5000 nulových příznaků saturuje CNB."""
     positives = 15
     labels = np.arange(90) < positives
@@ -95,7 +101,7 @@ def test_log_odds_resolves_constant_probability_regression() -> None:
             features, labels
         )
 
-    model = SklearnThresholdTuner().fit(
+    model = SklearnThresholdTuner(tmp_path).fit(
         ClassifierFamily.COMPLEMENT_NB,
         ScreeningFeatures(features, None),
         labels.tolist(),

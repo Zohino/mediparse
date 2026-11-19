@@ -10,7 +10,13 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.screening import EncoderSpec, ScreeningConfig
+from mediparse.domain.screening import (
+    ClassifierFamily,
+    EncoderSpec,
+    ScreeningConfig,
+    TokensSpec,
+    VectorizerSpec,
+)
 from mediparse.infrastructure.screening_config import load_screening_config
 from tests.hf_encoder_support import SPEC
 from tests.support import REPOSITORY
@@ -163,26 +169,70 @@ def test_encoder_spec_rejects_invalid_values(changes: dict[str, object]) -> None
         EncoderSpec.model_validate(spec | changes)
 
 
+def test_duplicate_representation_name_is_rejected() -> None:
+    """Encoder a TF-IDF sdílejí jeden prostor jedinečných jmen."""
+    encoder = SPEC.model_dump(mode="json") | {"name": WORD["name"]}
+    with pytest.raises(
+        ValidationError, match="Jména vektorizérů screeningu musí být jedinečná"
+    ):
+        ScreeningConfig.model_validate_json(
+            json.dumps(
+                _config() | {"families": ["logreg"], "vectorizers": [encoder, WORD]}
+            )
+        )
+
+
+@pytest.mark.parametrize("family", ClassifierFamily)
 @pytest.mark.parametrize(
-    ("families", "duplicate", "message"),
+    ("spec", "kind"),
     [
-        (["complement_nb"], False, "Encoder podporuje jen rodinu logreg."),
-        (["logreg", "complement_nb"], False, "Encoder podporuje jen rodinu logreg."),
-        (["logreg"], True, "Jména vektorizérů screeningu musí být jedinečná."),
+        (WORD, VectorizerSpec),
+        (SPEC.model_dump(mode="json"), EncoderSpec),
+        ({"name": "word-tokens"}, TokensSpec),
     ],
 )
-def test_encoder_grid_rejects_incompatible_family_or_duplicate_name(
-    families: list[str], message: str, *, duplicate: bool
+def test_family_representation_compatibility(
+    spec: dict[str, object],
+    kind: type,
+    family: ClassifierFamily,
 ) -> None:
-    """Hustý encoder smí jen k LR a jména sdílí s TF-IDF jeden prostor."""
-    encoder = SPEC.model_dump(mode="json") | {"name": WORD["name"]}
+    """Celý součin odpovídá doslovné tabulce sedmi povolených dvojic."""
+    allowed = {
+        (VectorizerSpec, "complement_nb"),
+        (VectorizerSpec, "logreg"),
+        (VectorizerSpec, "linear_svm"),
+        (VectorizerSpec, "nb_svm"),
+        (VectorizerSpec, "lightgbm_lsa"),
+        (EncoderSpec, "logreg"),
+        (TokensSpec, "fasttext"),
+    }
+    body = json.dumps(_config() | {"vectorizers": [spec], "families": [family]})
+    if (kind, family) in allowed:
+        assert isinstance(
+            ScreeningConfig.model_validate_json(body).vectorizers[0], kind
+        )
+    else:
+        message = f"Rodina {family} nepracuje nad reprezentací {spec['name']}."
+        with pytest.raises(ValidationError, match=re.escape(message)):
+            ScreeningConfig.model_validate_json(body)
+
+
+def test_first_incompatible_pair_is_reported() -> None:
+    """První chyba respektuje pořadí reprezentací a pak rodin."""
+    message = "Rodina fasttext nepracuje nad reprezentací word-1-2."
     with pytest.raises(ValidationError, match=re.escape(message)):
         ScreeningConfig.model_validate_json(
             json.dumps(
                 _config()
                 | {
-                    "families": families,
-                    "vectorizers": [encoder, WORD] if duplicate else [encoder],
+                    "vectorizers": [WORD, {"name": "word-tokens"}],
+                    "families": ["logreg", "fasttext"],
                 }
             )
         )
+
+
+def test_tokens_spec_rejects_extra_field() -> None:
+    """Tokeny mají pouze jméno, nikoli parametry TF-IDF."""
+    with pytest.raises(ValidationError):
+        TokensSpec.model_validate({"name": "x", "analyzer": "word"})

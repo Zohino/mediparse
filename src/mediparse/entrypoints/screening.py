@@ -49,6 +49,7 @@ from mediparse.infrastructure.sklearn_screening import (
     ScreeningFeaturizer,
     SklearnThresholdTuner,
     TfidfFeaturizer,
+    TokenFeaturizer,
     screening_lsa,
 )
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
@@ -83,6 +84,7 @@ class ScreeningPaths:
     manifest: Path
     checkpoint: Path
     embeddings: Path
+    scratch: Path
 
 
 def main() -> ExitCode:
@@ -120,6 +122,7 @@ def main() -> ExitCode:
         required=True,
         help="Cache embeddingů; doporučeno resources/mimic/screening/embeddings, mimo results/.",
     )
+    parser.add_argument("--scratch", type=Path, required=True)
     parser.add_argument("--manifest", type=Path, required=True)
     args = parser.parse_args()
     return run(
@@ -137,6 +140,7 @@ def main() -> ExitCode:
             manifest=args.manifest,
             checkpoint=args.checkpoint,
             embeddings=args.embeddings,
+            scratch=args.scratch,
         ),
         revision=revision_source(os.environ, Path.cwd()),
     )
@@ -178,8 +182,9 @@ def run(
                     paths.embeddings, versions, lambda spec: encoders(spec).embed
                 )
             ),
+            tokens=TokenFeaturizer(corpus.normalization),
         ),
-        tuner=SklearnThresholdTuner(),
+        tuner=SklearnThresholdTuner(paths.scratch),
         scorer=SklearnScorer(),
         progress=ParquetScreeningCheckpoint(
             directory=paths.checkpoint,

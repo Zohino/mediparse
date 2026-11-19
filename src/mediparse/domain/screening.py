@@ -19,13 +19,14 @@ if TYPE_CHECKING:
 
 
 class ClassifierFamily(StrEnum):
-    """Rodiny klasifikátorů nad reprezentací s výchozími hyperparametry."""
+    """Rodiny klasifikátorů screeningu s výchozími hyperparametry."""
 
     COMPLEMENT_NB = "complement_nb"
     LOGREG = "logreg"
     LINEAR_SVM = "linear_svm"
     NB_SVM = "nb_svm"
     LIGHTGBM_LSA = "lightgbm_lsa"
+    FASTTEXT = "fasttext"
 
 
 @dataclass(frozen=True)
@@ -67,7 +68,25 @@ class EncoderSpec(BaseModel):
     dtype: Literal["float32", "bfloat16"]
 
 
-type Representation = VectorizerSpec | EncoderSpec
+class TokensSpec(BaseModel):
+    """Slovní tokeny pro rodinu, která se reprezentaci učí sama."""
+
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+
+    name: Annotated[str, Field(min_length=1)]
+
+
+type Representation = VectorizerSpec | EncoderSpec | TokensSpec
+
+
+def _accepts(spec: Representation, family: ClassifierFamily) -> bool:
+    match spec:
+        case EncoderSpec():
+            return family is ClassifierFamily.LOGREG
+        case TokensSpec():
+            return family is ClassifierFamily.FASTTEXT
+        case VectorizerSpec():
+            return family is not ClassifierFamily.FASTTEXT
 
 
 class ScreeningConfig(BaseModel):
@@ -89,10 +108,12 @@ class ScreeningConfig(BaseModel):
         return tuple(spec for spec in self.vectorizers if isinstance(spec, EncoderSpec))
 
     @model_validator(mode="after")
-    def _encoder_families_are_compatible(self) -> Self:
-        if self.encoders and self.families != (ClassifierFamily.LOGREG,):
-            msg = "Encoder podporuje jen rodinu logreg."
-            raise ValueError(msg)
+    def _families_match_representations(self) -> Self:
+        for spec in self.vectorizers:
+            for family in self.families:
+                if not _accepts(spec, family):
+                    msg = f"Rodina {family} nepracuje nad reprezentací {spec.name}."
+                    raise ValueError(msg)
         return self
 
     @model_validator(mode="after")

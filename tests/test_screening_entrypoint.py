@@ -101,6 +101,7 @@ def _run(
             manifest=root / "classical_manifest.json",
             checkpoint=root / "checkpoint",
             embeddings=root / "embeddings",
+            scratch=root / "scratch",
         ),
         environ={} if environ is None else environ,
         revision=revision,
@@ -263,6 +264,7 @@ def test_main_parses_required_paths(
         "manifest",
         "checkpoint",
         "embeddings",
+        "scratch",
     )
     paths = {name: tmp_path / name for name in names}
     monkeypatch.setattr(
@@ -293,6 +295,7 @@ def test_main_parses_required_paths(
         manifest=paths["manifest"],
         checkpoint=paths["checkpoint"],
         embeddings=paths["embeddings"],
+        scratch=paths["scratch"],
     )
 
 
@@ -442,6 +445,7 @@ def test_checkpoint_key_changes_with_each_input(tmp_path: Path, changed: str) ->
         manifest=tmp_path / "manifest",
         checkpoint=tmp_path / "checkpoint",
         embeddings=tmp_path / "embeddings",
+        scratch=tmp_path / "scratch",
     )
     packages = {"python": "test"}
     before = screening.checkpoint_key(paths, "dataset", packages)
@@ -492,6 +496,7 @@ def test_encoder_screening_end_to_end(tmp_path: Path) -> None:
         manifest=out / "manifest.json",
         checkpoint=out / "checkpoint",
         embeddings=out / "embeddings",
+        scratch=out / "scratch",
     )
     assert (
         screening.run(
@@ -524,6 +529,7 @@ def test_encoder_revision_and_versions_change_checkpoint_key(tmp_path: Path) -> 
         manifest=tmp_path / "manifest",
         checkpoint=tmp_path / "checkpoint",
         embeddings=tmp_path / "embeddings",
+        scratch=tmp_path / "scratch",
     )
     before = screening.checkpoint_key(paths, "dataset", VERSIONS)
     assert (

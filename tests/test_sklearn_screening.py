@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 import warnings
+from itertools import product
 from random import Random
 from typing import TYPE_CHECKING, Literal, Self, override
 from unittest.mock import Mock, call
@@ -19,7 +20,13 @@ from sklearn.linear_model import LogisticRegression
 from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.screening import ClassifierFamily, VectorizerSpec
+from mediparse.domain.screening import (
+    ClassifierFamily,
+    Representation,
+    TokensSpec,
+    VectorizerSpec,
+)
+from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
 from mediparse.infrastructure.sklearn_classifier import (
     tfidf_vectorizer,
 )
@@ -30,6 +37,7 @@ from mediparse.infrastructure.sklearn_screening import (
     ScreeningFeaturizer,
     SklearnThresholdTuner,
     TfidfFeaturizer,
+    TokenFeaturizer,
     classifier_estimator,
     screening_lsa,
 )
@@ -39,6 +47,7 @@ from tests.model_support import OVERLAPPING, separable_notes
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Sequence
+    from pathlib import Path
 
     from mediparse.domain.seed import Seed
 
@@ -62,23 +71,39 @@ def _word_training() -> tuple[ScreeningFeatures, list[bool], list[int]]:
     )
 
 
-@pytest.mark.parametrize("family", ClassifierFamily)
 @pytest.mark.parametrize(
-    ("analyzer", "ngram_range"), [("word", (1, 2)), ("char_wb", (3, 5))]
+    ("family", "spec"),
+    [
+        *product(
+            [
+                family
+                for family in ClassifierFamily
+                if family is not ClassifierFamily.FASTTEXT
+            ],
+            [
+                VectorizerSpec(name="test", analyzer="word", ngram_range=(1, 2)),
+                VectorizerSpec(name="test", analyzer="char_wb", ngram_range=(3, 5)),
+            ],
+        ),
+        (ClassifierFamily.FASTTEXT, TokensSpec(name="test")),
+    ],
 )
 def test_prediction_matches_threshold_on_score_scale(
+    tmp_path: Path,
     family: ClassifierFamily,
-    analyzer: Literal["word", "char_wb"],
-    ngram_range: tuple[int, int],
+    spec: VectorizerSpec | TokensSpec,
 ) -> None:
-    """Všechny rodiny a analyzátory vracejí predikci při prahu na téže škále skóre."""
-    notes = separable_notes(24, OVERLAPPING)
-    train, test = TfidfFeaturizer(None, Lsa(2, 7)).fit_transform(
-        VectorizerSpec(name="test", analyzer=analyzer, ngram_range=ngram_range),
+    """Rodiny vracejí predikci při prahu na téže škále skóre."""
+    # Menší korpus dává fastTextu v některých vnitřních foldech konstantní skóre.
+    notes = separable_notes(120, OVERLAPPING)
+    train, test = ScreeningFeaturizer(
+        TfidfFeaturizer(None, Lsa(2, 7)), Mock(), TokenFeaturizer(None)
+    ).fit_transform(
+        spec,
         [note.text for note in notes],
         ["diabetes clinic", "fracture review", "insulin splint visit"],
     )
-    model = SklearnThresholdTuner().fit(
+    model = SklearnThresholdTuner(tmp_path).fit(
         family,
         train,
         [note.has_label(Diagnosis.DIABETES) for note in notes],
@@ -96,14 +121,16 @@ def test_prediction_matches_threshold_on_score_scale(
 @pytest.mark.parametrize(
     "family", [ClassifierFamily.LINEAR_SVM, ClassifierFamily.NB_SVM]
 )
-def test_svm_factory_preserves_seed(family: ClassifierFamily) -> None:
+def test_svm_factory_preserves_seed(tmp_path: Path, family: ClassifierFamily) -> None:
     """Obě rodiny s duálním řešičem dostanou seed screeningu."""
-    assert classifier_estimator(family, 13).get_params()["random_state"] == 13
+    assert classifier_estimator(family, 13, tmp_path).get_params()["random_state"] == 13
 
 
-def test_lightgbm_factory_preserves_determinism_parameters() -> None:
+def test_lightgbm_factory_preserves_determinism_parameters(
+    tmp_path: Path,
+) -> None:
     """Veřejné parametry LightGBM drží seed a determinismus; SVD patří featurizéru."""
-    estimator = classifier_estimator(ClassifierFamily.LIGHTGBM_LSA, 13)
+    estimator = classifier_estimator(ClassifierFamily.LIGHTGBM_LSA, 13, tmp_path)
     params = estimator.get_params()
 
     expected = {
@@ -115,7 +142,9 @@ def test_lightgbm_factory_preserves_determinism_parameters() -> None:
     assert {key: params[key] for key in expected} == expected
 
 
-def test_lightgbm_repeats_nonconstant_scores_and_threshold() -> None:
+def test_lightgbm_repeats_nonconstant_scores_and_threshold(
+    tmp_path: Path,
+) -> None:
     """Na 240 syntetických zprávách se stromy dělí a opakovaný seed opakuje skóre i práh."""
     random = Random(31)
     vocabulary = [f"word{i}" for i in range(300)]
@@ -131,7 +160,7 @@ def test_lightgbm_repeats_nonconstant_scores_and_threshold() -> None:
     features, _ = TfidfFeaturizer(None, Lsa(8, 7)).fit_transform(spec, texts, texts)
     repeated, _ = TfidfFeaturizer(None, Lsa(8, 7)).fit_transform(spec, texts, texts)
     subjects = list(range(len(labels)))
-    tuner = SklearnThresholdTuner()
+    tuner = SklearnThresholdTuner(tmp_path)
     first = tuner.fit(ClassifierFamily.LIGHTGBM_LSA, features, labels, subjects, 3, 7)
     second = tuner.fit(ClassifierFamily.LIGHTGBM_LSA, repeated, labels, subjects, 3, 7)
     different = tuner.fit(
@@ -149,6 +178,7 @@ def test_lightgbm_repeats_nonconstant_scores_and_threshold() -> None:
 
 
 def test_lsa_fits_once_on_outer_training_and_only_transforms_test(
+    tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Jediný fit SVD vidí přesně vnější trénink, test se jen transformuje."""
@@ -197,7 +227,7 @@ def test_lsa_fits_once_on_outer_training_and_only_transforms_test(
     assert test.matrix[1].nnz == 0
     monkeypatch.setattr(TruncatedSVD, "fit_transform", refuse_fit)
     monkeypatch.setattr(TruncatedSVD, "fit", refuse_fit)
-    tuner = SklearnThresholdTuner()
+    tuner = SklearnThresholdTuner(tmp_path)
     for _ in Diagnosis:
         tuner.fit(
             ClassifierFamily.LIGHTGBM_LSA, train, labels, subjects, 3, 7
@@ -221,8 +251,10 @@ def test_features_without_lsa_reject_lightgbm_and_share_sparse() -> None:
             assert train.for_family(family) is train.matrix
 
 
-def _nonconverging(family: ClassifierFamily, seed: Seed) -> BaseEstimator:
-    del family, seed
+def _nonconverging(
+    family: ClassifierFamily, seed: Seed, scratch: Path
+) -> BaseEstimator:
+    del family, seed, scratch
     return LogisticRegression(max_iter=1)
 
 
@@ -230,11 +262,14 @@ def _nonconverging(family: ClassifierFamily, seed: Seed) -> BaseEstimator:
     ("factory", "converged"), [(classifier_estimator, True), (_nonconverging, False)]
 )
 def test_convergence_includes_inner_fits_and_refit(
-    factory: Callable[[ClassifierFamily, Seed], BaseEstimator], *, converged: bool
+    tmp_path: Path,
+    factory: Callable[[ClassifierFamily, Seed, Path], BaseEstimator],
+    *,
+    converged: bool,
 ) -> None:
     """Nekonvergence je výsledek i pod filterwarnings=error, výchozí LR konverguje."""
     features, labels, subjects = _word_training()
-    model = SklearnThresholdTuner(estimator=factory).fit(
+    model = SklearnThresholdTuner(tmp_path, estimator=factory).fit(
         ClassifierFamily.LOGREG,
         features,
         labels,
@@ -245,14 +280,19 @@ def test_convergence_includes_inner_fits_and_refit(
     assert model.converged is converged
 
 
-def test_empty_vocabulary_is_invalid_input() -> None:
+@pytest.mark.parametrize(
+    "spec",
+    [
+        VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
+        TokensSpec(name="tokens"),
+    ],
+)
+def test_empty_vocabulary_is_invalid_input(spec: VectorizerSpec | TokensSpec) -> None:
     """Texty bez tokenu odmítne doménová výjimka."""
     with pytest.raises(InvalidInputError, match="prázdný"):
-        TfidfFeaturizer(None).fit_transform(
-            VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)),
-            ["!", "?"],
-            ["clinic"],
-        )
+        ScreeningFeaturizer(
+            TfidfFeaturizer(None), Mock(), TokenFeaturizer(None)
+        ).fit_transform(spec, ["!", "?"], ["clinic"])
 
 
 def test_char_ngrams_apply_shared_preprocessor() -> None:
@@ -287,7 +327,7 @@ def test_featurizer_fits_only_training_vocabulary() -> None:
 
 def _observing_estimator(
     on_fit: Callable[[int], None],
-) -> Callable[[ClassifierFamily, Seed], BaseEstimator]:
+) -> Callable[[ClassifierFamily, Seed, Path], BaseEstimator]:
     class _ObservedLogreg(LogisticRegression):
         @override
         def fit(
@@ -299,14 +339,16 @@ def _observing_estimator(
             on_fit(len(y))
             return super().fit(X, y, sample_weight=sample_weight)
 
-    def factory(family: ClassifierFamily, seed: Seed) -> BaseEstimator:
-        del family
+    def factory(family: ClassifierFamily, seed: Seed, scratch: Path) -> BaseEstimator:
+        del family, scratch
         return _ObservedLogreg(random_state=seed)
 
     return factory
 
 
-def test_tuner_preserves_nonconvergence_unrelated_warning() -> None:
+def test_tuner_preserves_nonconvergence_unrelated_warning(
+    tmp_path: Path,
+) -> None:
     """Tuner předá volajícímu UserWarning a nepovažuje ho za nekonvergenci."""
     features, labels, subjects = _word_training()
 
@@ -315,7 +357,9 @@ def test_tuner_preserves_nonconvergence_unrelated_warning() -> None:
         warnings.warn("Syntetické varování estimatoru.", UserWarning, stacklevel=2)
 
     with pytest.warns(UserWarning, match="Syntetické varování estimatoru"):
-        model = SklearnThresholdTuner(estimator=_observing_estimator(warn_on_fit)).fit(
+        model = SklearnThresholdTuner(
+            tmp_path, estimator=_observing_estimator(warn_on_fit)
+        ).fit(
             ClassifierFamily.LOGREG,
             features,
             labels,
@@ -338,7 +382,9 @@ class _FixedScoresClassifier(ClassifierMixin, BaseEstimator):
         return features[:, 0].toarray().ravel()
 
 
-def test_tuner_uses_patient_cv_and_refits_all_training_rows() -> None:
+def test_tuner_uses_patient_cv_and_refits_all_training_rows(
+    tmp_path: Path,
+) -> None:
     """Velikosti všech vnitřních fitů odpovídají zadaným částem pacientů, navíc je jeden refit."""
     features, labels, subjects = _word_training()
     sizes: list[int] = []
@@ -347,7 +393,7 @@ def test_tuner_uses_patient_cv_and_refits_all_training_rows() -> None:
     ]
     expected.append(len(labels))
 
-    SklearnThresholdTuner(estimator=_observing_estimator(sizes.append)).fit(
+    SklearnThresholdTuner(tmp_path, estimator=_observing_estimator(sizes.append)).fit(
         ClassifierFamily.LOGREG,
         features,
         labels,
@@ -359,7 +405,9 @@ def test_tuner_uses_patient_cv_and_refits_all_training_rows() -> None:
     assert sorted(sizes) == sorted(expected)
 
 
-def test_tuner_maximizes_f1_instead_of_balanced_accuracy() -> None:
+def test_tuner_maximizes_f1_instead_of_balanced_accuracy(
+    tmp_path: Path,
+) -> None:
     """Každá část má 2 pozitivní a 98 negativních se skóre z nezávislého orákula.
 
     Nad 0,6 jsou TP=1, FP=0, FN=1, TN=98: F1=2/3, BA=3/4.
@@ -373,7 +421,7 @@ def test_tuner_maximizes_f1_instead_of_balanced_accuracy() -> None:
     labels = part_labels * 3
     subjects = [subject for subject in range(3) for _ in scores]
     tuner = SklearnThresholdTuner(
-        estimator=lambda _family, _seed: _FixedScoresClassifier()
+        tmp_path, estimator=lambda _family, _seed, _scratch: _FixedScoresClassifier()
     )
 
     classifier = tuner.fit(
@@ -390,7 +438,9 @@ def test_tuner_maximizes_f1_instead_of_balanced_accuracy() -> None:
 
 
 @pytest.mark.parametrize("phase", ["inner", "refit"])
-def test_tuner_detects_convergence_warning_in_each_fit_phase(phase: str) -> None:
+def test_tuner_detects_convergence_warning_in_each_fit_phase(
+    tmp_path: Path, phase: str
+) -> None:
     """Samostatné varování pouze vnitřních fitů i pouze refitu znamená nekonvergenci."""
     features, labels, subjects = _word_training()
 
@@ -400,7 +450,9 @@ def test_tuner_detects_convergence_warning_in_each_fit_phase(phase: str) -> None
                 "Syntetická nekonvergence fáze fitu.", ConvergenceWarning, stacklevel=2
             )
 
-    model = SklearnThresholdTuner(estimator=_observing_estimator(warn_in_phase)).fit(
+    model = SklearnThresholdTuner(
+        tmp_path, estimator=_observing_estimator(warn_in_phase)
+    ).fit(
         ClassifierFamily.LOGREG,
         features,
         labels,
@@ -472,6 +524,7 @@ def test_featurizer_uses_spec_analyzer(
 
 
 def test_tuner_logs_family_and_peak_rss(
+    tmp_path: Path,
     caplog: pytest.LogCaptureFixture,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -484,27 +537,29 @@ def test_tuner_logs_family_and_peak_rss(
     caplog.clear()
 
     with caplog.at_level("INFO", logger="mediparse.infrastructure.sklearn_screening"):
-        SklearnThresholdTuner().fit(
+        SklearnThresholdTuner(tmp_path).fit(
             ClassifierFamily.LOGREG, features, labels, subjects, 3, 7
         )
 
     assert caplog.messages == ["Rodina logreg: peak RSS 1.50 GB."]
 
 
-def test_tuner_passes_seed_to_estimator_factory() -> None:
+def test_tuner_passes_seed_to_estimator_factory(
+    tmp_path: Path,
+) -> None:
     """Seed 13 předá továrně estimatoru, nezůstane jen u vnitřního dělení pacientů."""
     features, labels, subjects = _word_training()
-    received: list[tuple[ClassifierFamily, Seed]] = []
+    received: list[tuple[ClassifierFamily, Seed, Path]] = []
 
-    def recording(family: ClassifierFamily, seed: Seed) -> BaseEstimator:
-        received.append((family, seed))
+    def recording(family: ClassifierFamily, seed: Seed, scratch: Path) -> BaseEstimator:
+        received.append((family, seed, scratch))
         return LogisticRegression(random_state=seed)
 
-    SklearnThresholdTuner(estimator=recording).fit(
+    SklearnThresholdTuner(tmp_path, estimator=recording).fit(
         ClassifierFamily.LOGREG, features, labels, subjects, 3, 13
     )
 
-    assert received == [(ClassifierFamily.LOGREG, 13)]
+    assert received == [(ClassifierFamily.LOGREG, 13, tmp_path)]
 
 
 @pytest.mark.parametrize(
@@ -536,17 +591,54 @@ def test_encoder_scaler_fits_only_outer_train() -> None:
     assert test.lsa is None
 
 
-@pytest.mark.parametrize("encoder", [False, True])
-def test_representation_dispatch(*, encoder: bool) -> None:
+@pytest.mark.parametrize(
+    ("spec", "field"),
+    [
+        (VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1)), "tfidf"),
+        (SPEC, "encoder"),
+        (TokensSpec(name="t"), "tokens"),
+    ],
+)
+def test_representation_dispatch(spec: Representation, field: str) -> None:
     """Typ specifikace vybere právě odpovídající featurizér."""
-    tfidf, dense = Mock(), Mock()
-    spec = (
-        SPEC
-        if encoder
-        else VectorizerSpec(name="word", analyzer="word", ngram_range=(1, 1))
+    adapters = {name: Mock() for name in ("tfidf", "encoder", "tokens")}
+    result = ScreeningFeaturizer(**adapters).fit_transform(spec, ["a"], ["b"])
+    assert result == adapters[field].fit_transform.return_value
+    for name, adapter in adapters.items():
+        if name == field:
+            adapter.fit_transform.assert_called_once_with(spec, ["a"], ["b"])
+        else:
+            adapter.fit_transform.assert_not_called()
+
+
+def test_token_featurizer_joins_analyzer_tokens() -> None:
+    """Slovní analyzátor odstraní interpunkci a jednopísmenná slova."""
+    train, test = TokenFeaturizer(None).fit_transform(
+        TokensSpec(name="t"), ["Insulin, glucose!\nA b"], ["Fracture."]
     )
-    result = ScreeningFeaturizer(tfidf, dense).fit_transform(spec, ["a"], ["b"])
-    selected, unused = (dense, tfidf) if encoder else (tfidf, dense)
-    assert result == selected.fit_transform.return_value
-    selected.fit_transform.assert_called_once_with(spec, ["a"], ["b"])
-    unused.fit_transform.assert_not_called()
+    assert isinstance(train.matrix, np.ndarray)
+    assert isinstance(test.matrix, np.ndarray)
+    assert train.matrix.tolist() == ["insulin glucose"]
+    assert test.matrix.tolist() == ["fracture"]
+    assert train.lsa is None
+
+
+def test_token_featurizer_applies_its_normalization() -> None:
+    """Rozvinutí COPD dodá stejná slova jako TF-IDF."""
+    train, test = TokenFeaturizer(
+        TextNormalization(
+            acronyms={"COPD": "chronic obstructive pulmonary disease"}, variants={}
+        )
+    ).fit_transform(TokensSpec(name="t"), ["COPD"], ["COPD"])
+    assert isinstance(train.matrix, np.ndarray)
+    assert isinstance(test.matrix, np.ndarray)
+    assert train.matrix.tolist() == ["chronic obstructive pulmonary disease"]
+    assert test.matrix.tolist() == ["chronic obstructive pulmonary disease"]
+
+
+def test_fasttext_factory_preserves_seed_and_scratch(tmp_path: Path) -> None:
+    """Továrna předá fastTextu seed i chráněný adresář."""
+    estimator = classifier_estimator(ClassifierFamily.FASTTEXT, 11, tmp_path)
+    assert isinstance(estimator, FastTextClassifier)
+    assert estimator.random_state == 11
+    assert estimator.scratch == tmp_path

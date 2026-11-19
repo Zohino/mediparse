@@ -119,6 +119,7 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
                 manifest=root / "screening/classical_manifest.json",
                 checkpoint=root / "screening/checkpoint",
                 embeddings=root / "screening/embeddings",
+                scratch=root / "screening/scratch",
             ),
             revision=fixed_revision,
             environ=environ,
