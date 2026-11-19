@@ -288,7 +288,12 @@ def test_convergence_includes_inner_fits_and_refit(
 )
 def test_empty_vocabulary_is_invalid_input(spec: VectorizerSpec | TokensSpec) -> None:
     """Texty bez tokenu odmítne doménová výjimka."""
-    with pytest.raises(InvalidInputError, match="prázdný"):
+    with pytest.raises(
+        InvalidInputError,
+        match=re.escape(
+            "Trénovací texty neobsahují žádný token, slovník by byl prázdný."
+        ),
+    ):
         ScreeningFeaturizer(
             TfidfFeaturizer(None), Mock(), TokenFeaturizer(None)
         ).fit_transform(spec, ["!", "?"], ["clinic"])
