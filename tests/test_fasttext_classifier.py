@@ -1,0 +1,105 @@
+"""Pravděpodobnosti, determinismus a úklid tokenů skutečného fastTextu."""
+
+from __future__ import annotations
+
+from pathlib import Path
+from unittest.mock import Mock
+
+import fasttext
+import numpy as np
+import pytest
+
+from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
+
+
+@pytest.fixture
+def corpus() -> tuple[np.ndarray, list[bool]]:
+    """Připraví korpus ze sondy s oddělitelnými třídami.
+
+    Returns:
+        Sto dokumentů a jejich binární labely.
+    """
+    return (
+        np.array(["insulin glucose"] * 50 + ["fracture cast"] * 50, dtype=object),
+        [True] * 50 + [False] * 50,
+    )
+
+
+def test_probability_columns_follow_classes(
+    tmp_path: Path, corpus: tuple[np.ndarray, list[bool]]
+) -> None:
+    """Sloupec True odpovídá sondě a prázdný dokument má konečné skóre."""
+    model = FastTextClassifier(tmp_path / "scratch").fit(*corpus)
+    np.testing.assert_array_equal(model.classes_, [False, True])
+    probabilities = model.predict_proba(
+        np.array(["insulin glucose", "fracture cast", ""], dtype=object)
+    )
+    assert probabilities.shape == (3, 2)
+    assert probabilities[0, 1] > 0.5 > probabilities[1, 1]
+    assert np.isfinite(probabilities).all()
+
+
+def test_repeated_fit_is_bitwise_identical(
+    tmp_path: Path, corpus: tuple[np.ndarray, list[bool]]
+) -> None:
+    """Dva fity se stejným seedem vracejí bitově shodné pravděpodobnosti."""
+    first = FastTextClassifier(tmp_path / "scratch", random_state=3).fit(*corpus)
+    second = FastTextClassifier(tmp_path / "scratch", random_state=3).fit(*corpus)
+    assert np.array_equal(
+        first.predict_proba(corpus[0]), second.predict_proba(corpus[0])
+    )
+
+
+def test_training_is_single_threaded_with_seed(
+    tmp_path: Path,
+    corpus: tuple[np.ndarray, list[bool]],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Knihovna dostane jedno vlákno a seed estimátoru."""
+    spy = Mock(wraps=fasttext.train_supervised)
+    monkeypatch.setattr(fasttext, "train_supervised", spy)
+    FastTextClassifier(tmp_path / "scratch", random_state=5).fit(*corpus)
+    assert spy.call_count == 1
+    assert spy.call_args.kwargs["thread"] == 1
+    assert spy.call_args.kwargs["seed"] == 5
+
+
+@pytest.mark.parametrize("fails", [False, True])
+def test_scratch_is_empty_after_fit(
+    tmp_path: Path,
+    corpus: tuple[np.ndarray, list[bool]],
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    fails: bool,
+) -> None:
+    """Tokeny nezůstanou ve scratch ani po výjimce tréninku."""
+    scratch = tmp_path / "scratch"
+    if fails:
+
+        def fail(**kwargs: object) -> None:
+            assert Path(str(kwargs["input"])).is_file()
+            msg = "Syntetické selhání tréninku."
+            raise RuntimeError(msg)
+
+        monkeypatch.setattr(fasttext, "train_supervised", fail)
+        with pytest.raises(RuntimeError, match="Syntetické selhání"):
+            FastTextClassifier(scratch).fit(*corpus)
+    else:
+        FastTextClassifier(scratch).fit(*corpus)
+    assert list(scratch.iterdir()) == []
+
+
+def test_label_word_in_text_is_not_a_label(
+    tmp_path: Path, corpus: tuple[np.ndarray, list[bool]]
+) -> None:
+    """Výchozí předpona v textu nemůže vytvořit třetí label."""
+    documents, labels = corpus
+    documents[0] = documents[-1] = "__label__1 clinic"
+    model = FastTextClassifier(tmp_path / "scratch").fit(documents, labels)
+    assert set(model.model_.labels) == {"label:False", "label:True"}
+
+
+def test_single_class_is_rejected(tmp_path: Path) -> None:
+    """Binární estimator odmítne jedinou tréninkovou třídu."""
+    with pytest.raises(ValueError, match="právě dvě třídy"):
+        FastTextClassifier(tmp_path / "scratch").fit(np.array(["clinic"]), [True])
