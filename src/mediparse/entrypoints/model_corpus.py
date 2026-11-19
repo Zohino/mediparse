@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING
 
 from mediparse.application.diagnostic_strip import DiagnosticStripTable
 from mediparse.domain.run_manifest import DiagnosticStrip
+from mediparse.infrastructure.code_fingerprint import code_key
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.note_table import ParquetNoteTable
@@ -14,6 +15,7 @@ from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.split_table import ParquetSplitTable
 
 if TYPE_CHECKING:
+    from collections.abc import Mapping
     from pathlib import Path
 
     from mediparse.application.ports.experiment import PatientNoteTable, SplitSource
@@ -116,3 +118,24 @@ def text_normalization(
     return load_text_normalization(
         candidates, variants=model_input.text_preprocessing.rewrites_variants
     )
+
+
+def checkpoint_key(
+    config: Path,
+    corpus: ModelCorpusPaths,
+    dataset_sha256: str,
+    packages: Mapping[str, str],
+) -> str:
+    """Otiskne vstupy, kód a verze knihoven pro obnovu screeningu.
+
+    Returns:
+        Klíč rozpracovaného běhu.
+    """
+    return code_key([
+        ("config", file_sha256(config).encode()),
+        ("cohort", dataset_sha256.encode()),
+        ("split", file_sha256(corpus.split).encode()),
+        ("candidates", file_sha256(corpus.candidates).encode()),
+        ("lexicon", file_sha256(corpus.lexicon).encode()),
+        *((f"packages/{name}", value.encode()) for name, value in packages.items()),
+    ])

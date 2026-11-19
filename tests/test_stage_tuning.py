@@ -10,12 +10,13 @@ import pytest
 from mediparse.application.stage_tuning import StageTuning
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.tuning import ValidationScores
+from mediparse.domain.stage_tuning import StageFoldResult, StageTrialRecord
+from mediparse.domain.tuning import MaxF1, Trial, ValidationScores
 from mediparse.infrastructure.optuna_search import OptunaStageSearch
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.stage_trials_table import ParquetStageCheckpoint
 from tests.screening_support import DEVELOPMENT, SHARED, notes
-from tests.stage_support import stage_config
+from tests.stage_support import StepClock, stage_config
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -23,7 +24,6 @@ if TYPE_CHECKING:
 
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.split import Holdout, SharedSplit
-    from mediparse.domain.stage_tuning import StageFoldResult, StageTrialRecord
     from mediparse.domain.tuning import ParamValue
 
 
@@ -50,17 +50,6 @@ class _SplitSource:
     @staticmethod
     def read() -> SharedSplit:
         return SHARED
-
-
-@dataclass
-class _Clock:
-    """Hodiny s konstantním krokem."""
-
-    value: float = 0.0
-
-    def now(self) -> float:
-        self.value += 1.0
-        return self.value
 
 
 @dataclass
@@ -124,7 +113,7 @@ def test_defaults_and_development_sample(parts: int) -> None:
             search,
             scorer,
             progress,
-            _Clock(),
+            StepClock(),
         ).run(config)
         assert progress.finished
         assert [r.default for r in progress.records] == [True] * 4 + [False] * 2
@@ -140,6 +129,7 @@ def test_defaults_and_development_sample(parts: int) -> None:
         if parts == 1:
             assert patients == DEVELOPMENT
         for fold in scorer.observed:
+            assert {n.subject_id for n in (*fold.train, *fold.test)} <= patients
             assert {n.subject_id for n in fold.train}.isdisjoint(
                 n.subject_id for n in fold.test
             )
@@ -172,7 +162,7 @@ def test_interrupted_run_resumes_to_identical_outputs(tmp_path: Path, cut: int) 
                     OptunaStageSearch.create(config.branches, config.seed, 5),
                     _Scorer(fail_at=cut * 2),
                     progress,
-                    _Clock(),
+                    StepClock(),
                 ).run(config)
             records = progress.completed()
             assert len(records) == cut
@@ -185,7 +175,7 @@ def test_interrupted_run_resumes_to_identical_outputs(tmp_path: Path, cut: int) 
             OptunaStageSearch.create(config.branches, config.seed, 5),
             _Scorer(),
             progress,
-            _Clock(),
+            StepClock(),
         ).run(config)
         assert not progress.directory.exists()
     assert checkpoints[0].results.read_bytes() == checkpoints[1].results.read_bytes()
@@ -193,3 +183,107 @@ def test_interrupted_run_resumes_to_identical_outputs(tmp_path: Path, cut: int) 
         checkpoints[0].predictions.read_bytes()
         == checkpoints[1].predictions.read_bytes()
     )
+
+
+@dataclass
+class _Search:
+    asked: int = 0
+    enqueued: list[tuple[int, Mapping[str, ParamValue]]] = field(default_factory=list)
+    restored: list[tuple[Trial, float]] = field(default_factory=list)
+    values: list[float] = field(default_factory=list)
+
+    def restore(self, trials: Sequence[tuple[Trial, float]]) -> None:
+        self.restored.extend(trials)
+        self.asked = len(trials)
+
+    def enqueue(self, params: Mapping[str, ParamValue]) -> None:
+        self.enqueued.append((self.asked, params))
+
+    def ask(self) -> Trial:
+        trial = Trial(self.asked, self.enqueued[-1][1])
+        self.asked += 1
+        return trial
+
+    @staticmethod
+    def should_prune(trial: Trial, value: float, step: int) -> bool:
+        del trial, value, step
+        return False
+
+    def complete(self, trial: Trial, value: float) -> None:
+        del trial
+        self.values.append(value)
+
+    @staticmethod
+    def prune(trial: Trial) -> None:
+        del trial
+        pytest.fail("Stupeň neprořezává.")
+
+    def best(self) -> tuple[Mapping[str, ParamValue], float]:
+        return self.enqueued[0][1], max(self.values)
+
+
+@pytest.mark.parametrize("cut", [0, 3, 5])
+def test_enqueue_protocol_and_restore(cut: int) -> None:
+    """Výchozí body se vkládají jen před čtyřmi příslušnými ask, při obnově jen zbytek."""
+    config = stage_config()
+    initial = _Progress()
+    StageTuning(
+        _Table(),
+        _SplitSource(),
+        StratifiedGroupFolds(),
+        _Search(),
+        _Scorer(),
+        initial,
+        StepClock(),
+    ).run(config)
+    records = initial.records[:cut]
+    progress, search = _Progress(records=list(records)), _Search()
+    if cut >= 4:
+        search.enqueued.append((-1, config.branches[-1].default_params()))
+    StageTuning(
+        _Table(),
+        _SplitSource(),
+        StratifiedGroupFolds(),
+        search,
+        _Scorer(),
+        progress,
+        StepClock(),
+    ).run(config)
+    assert search.restored == [(Trial(r.number, r.params), r.value) for r in records]
+    assert [(n, p) for n, p in search.enqueued if n >= 0] == [
+        (n, branch.default_params())
+        for n, branch in enumerate(config.branches)
+        if n >= cut
+    ]
+    assert search.asked == 6
+    assert [r.default for r in progress.records] == [True] * 4 + [False] * 2
+    assert [r.value for r in progress.records[cut:]] == search.values
+
+
+def test_checkpoint_round_trip_record_and_fold_results(tmp_path: Path) -> None:
+    """Souhrn drží uložený cíl a nekonvergenci libovolného foldu."""
+    config = stage_config()
+    progress = ParquetStageCheckpoint(
+        tmp_path / "parts", "key", tmp_path / "trials", tmp_path / "predictions"
+    )
+    record = StageTrialRecord(
+        0,
+        config.branches[0].default_params(),
+        default=True,
+        value=0.8,
+        converged=False,
+        seconds=2.5,
+    )
+    result = StageFoldResult(
+        fold=0,
+        diagnosis=Diagnosis.CKD,
+        note_ids=("synthetic-1", "synthetic-2"),
+        labels=(True, False),
+        scores=(0.9, 0.1),
+        max_f1=MaxF1(1.0, 0.9),
+        converged=False,
+    )
+    progress.write(record, [result])
+    assert progress.completed() == (record,)
+    progress.finish()
+    assert not progress.directory.exists()

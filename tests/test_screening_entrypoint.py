@@ -471,8 +471,11 @@ def test_checkpoint_key_changes_with_each_input(tmp_path: Path, changed: str) ->
         scratch=tmp_path / "scratch",
     )
     packages = {"python": "test"}
-    before = screening.checkpoint_key(paths, "dataset", packages)
-    assert screening.checkpoint_key(paths, "dataset", packages) == before
+    before = screening.checkpoint_key(paths.config, paths.corpus, "dataset", packages)
+    assert (
+        screening.checkpoint_key(paths.config, paths.corpus, "dataset", packages)
+        == before
+    )
     dataset = "dataset"
     if changed == "dataset_sha256":
         dataset = "other"
@@ -481,7 +484,10 @@ def test_checkpoint_key_changes_with_each_input(tmp_path: Path, changed: str) ->
     else:
         path = paths.config if changed == "config" else getattr(paths.corpus, changed)
         path.write_bytes(path.read_bytes() + b" ")
-    assert screening.checkpoint_key(paths, dataset, packages) != before
+    assert (
+        screening.checkpoint_key(paths.config, paths.corpus, dataset, packages)
+        != before
+    )
 
 
 def test_foreign_checkpoint_refuses_before_outputs(tmp_path: Path) -> None:
@@ -554,14 +560,19 @@ def test_encoder_revision_and_versions_change_checkpoint_key(tmp_path: Path) -> 
         embeddings=tmp_path / "embeddings",
         scratch=tmp_path / "scratch",
     )
-    before = screening.checkpoint_key(paths, "dataset", VERSIONS)
+    before = screening.checkpoint_key(paths.config, paths.corpus, "dataset", VERSIONS)
     assert (
-        screening.checkpoint_key(paths, "dataset", VERSIONS | {"torch": "other"})
+        screening.checkpoint_key(
+            paths.config, paths.corpus, "dataset", VERSIONS | {"torch": "other"}
+        )
         != before
     )
     config["vectorizers"][0]["revision"] = "b" * 40
     inputs.config.write_text(json.dumps(config), encoding="utf-8")
-    assert screening.checkpoint_key(paths, "dataset", VERSIONS) != before
+    assert (
+        screening.checkpoint_key(paths.config, paths.corpus, "dataset", VERSIONS)
+        != before
+    )
 
 
 def test_fasttext_screening_end_to_end(tmp_path: Path) -> None:

@@ -128,6 +128,7 @@ class StageTuning:
         return StageTuningReport(
             best=best_trial(records),
             completed_trials=len(records),
+            seconds=sum(r.seconds for r in records),
             nonconverged_trials=sum(not r.converged for r in records),
             sample_notes=len(sample),
             sample_patients=len({note.subject_id for note in sample}),

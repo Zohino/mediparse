@@ -254,6 +254,7 @@ class StageTuningReport:
 
     best: StageTrialRecord
     completed_trials: int
+    seconds: float
     nonconverged_trials: int
     sample_notes: int
     sample_patients: int

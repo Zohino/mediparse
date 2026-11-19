@@ -1,6 +1,7 @@
 """Malé prostory stupně pro syntetická ověření."""
 
 import json
+from dataclasses import dataclass
 
 from mediparse.domain.stage_tuning import StageTuningConfig
 from tests.model_support import model_input
@@ -73,3 +74,19 @@ def stage_config(**changes: object) -> StageTuningConfig:
             | changes
         )
     )
+
+
+@dataclass
+class StepClock:
+    """Hodiny s konstantním krokem pro bajtově shodné výstupy."""
+
+    value: float = 0.0
+
+    def now(self) -> float:
+        """Posune čas o sekundu.
+
+        Returns:
+            Nový stav hodin.
+        """
+        self.value += 1.0
+        return self.value

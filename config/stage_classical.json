@@ -1,0 +1,261 @@
+{
+  "seed": 0,
+  "subsample_parts": 3,
+  "folds": 3,
+  "trials": 60,
+  "random_startup_trials": 10,
+  "lsa_components": 100,
+  "input": {
+    "strip_diagnostic_sections": false,
+    "text_preprocessing": "dictionary"
+  },
+  "representations": [
+    {
+      "name": "word",
+      "analyzer": "word",
+      "space": {
+        "params": [
+          {
+            "kind": "categorical",
+            "name": "ngram_min",
+            "choices": [
+              1
+            ]
+          },
+          {
+            "kind": "int",
+            "name": "ngram_max",
+            "low": 1,
+            "high": 3,
+            "log": false
+          },
+          {
+            "kind": "int",
+            "name": "min_df",
+            "low": 1,
+            "high": 20,
+            "log": true
+          },
+          {
+            "kind": "float",
+            "name": "max_df",
+            "low": 0.5,
+            "high": 1.0,
+            "log": false
+          },
+          {
+            "kind": "categorical",
+            "name": "sublinear_tf",
+            "choices": [
+              true,
+              false
+            ]
+          }
+        ]
+      },
+      "default": {
+        "ngram_min": 1,
+        "ngram_max": 2,
+        "min_df": 1,
+        "max_df": 1.0,
+        "sublinear_tf": true
+      }
+    },
+    {
+      "name": "char_wb",
+      "analyzer": "char_wb",
+      "space": {
+        "params": [
+          {
+            "kind": "int",
+            "name": "ngram_min",
+            "low": 2,
+            "high": 3,
+            "log": false
+          },
+          {
+            "kind": "int",
+            "name": "ngram_max",
+            "low": 4,
+            "high": 6,
+            "log": false
+          },
+          {
+            "kind": "int",
+            "name": "min_df",
+            "low": 1,
+            "high": 20,
+            "log": true
+          },
+          {
+            "kind": "float",
+            "name": "max_df",
+            "low": 0.5,
+            "high": 1.0,
+            "log": false
+          },
+          {
+            "kind": "categorical",
+            "name": "sublinear_tf",
+            "choices": [
+              true,
+              false
+            ]
+          }
+        ]
+      },
+      "default": {
+        "ngram_min": 3,
+        "ngram_max": 5,
+        "min_df": 1,
+        "max_df": 1.0,
+        "sublinear_tf": true
+      }
+    }
+  ],
+  "families": [
+    {
+      "family": "complement_nb",
+      "space": {
+        "params": [
+          {
+            "kind": "float",
+            "name": "alpha",
+            "low": 0.01,
+            "high": 10,
+            "log": true
+          }
+        ]
+      },
+      "default": {
+        "alpha": 1.0
+      }
+    },
+    {
+      "family": "logreg",
+      "space": {
+        "params": [
+          {
+            "kind": "float",
+            "name": "C",
+            "low": 0.001,
+            "high": 1000.0,
+            "log": true
+          },
+          {
+            "kind": "categorical",
+            "name": "class_weight",
+            "choices": [
+              null,
+              "balanced"
+            ]
+          }
+        ]
+      },
+      "default": {
+        "C": 1.0,
+        "class_weight": null
+      }
+    },
+    {
+      "family": "linear_svm",
+      "space": {
+        "params": [
+          {
+            "kind": "float",
+            "name": "C",
+            "low": 0.001,
+            "high": 100.0,
+            "log": true
+          },
+          {
+            "kind": "categorical",
+            "name": "class_weight",
+            "choices": [
+              null,
+              "balanced"
+            ]
+          }
+        ]
+      },
+      "default": {
+        "C": 1.0,
+        "class_weight": null
+      }
+    },
+    {
+      "family": "nb_svm",
+      "space": {
+        "params": [
+          {
+            "kind": "float",
+            "name": "alpha",
+            "low": 0.1,
+            "high": 10,
+            "log": true
+          },
+          {
+            "kind": "float",
+            "name": "beta",
+            "low": 0,
+            "high": 1,
+            "log": false
+          },
+          {
+            "kind": "float",
+            "name": "C",
+            "low": 0.001,
+            "high": 100.0,
+            "log": true
+          }
+        ]
+      },
+      "default": {
+        "alpha": 1.0,
+        "beta": 0.25,
+        "C": 1.0
+      }
+    },
+    {
+      "family": "lightgbm_lsa",
+      "space": {
+        "params": [
+          {
+            "kind": "int",
+            "name": "n_estimators",
+            "low": 50,
+            "high": 1000,
+            "log": true
+          },
+          {
+            "kind": "float",
+            "name": "learning_rate",
+            "low": 0.01,
+            "high": 0.3,
+            "log": true
+          },
+          {
+            "kind": "int",
+            "name": "num_leaves",
+            "low": 8,
+            "high": 128,
+            "log": true
+          },
+          {
+            "kind": "int",
+            "name": "min_child_samples",
+            "low": 5,
+            "high": 100,
+            "log": true
+          }
+        ]
+      },
+      "default": {
+        "n_estimators": 100,
+        "learning_rate": 0.1,
+        "num_leaves": 31,
+        "min_child_samples": 20
+      }
+    }
+  ]
+}

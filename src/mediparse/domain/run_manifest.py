@@ -252,3 +252,50 @@ def ensure_tuning_lineage(  # ruff: ignore[too-many-arguments]
     if mismatched:
         msg = f"Manifest ladění neodpovídá tréninku: {', '.join(mismatched)}."
         raise InvalidInputError(msg)
+
+
+class StageTuningManifest(BaseModel):
+    """Provenance CASH stupně, vítěz a otisky obou výstupů."""
+
+    model_config = ConfigDict(
+        frozen=True, strict=True, extra="forbid", allow_inf_nan=False
+    )
+
+    dataset_sha256: Sha256
+    config_sha256: Sha256
+    split_seed: Seed
+    split_folds: Annotated[int, Field(ge=2)]
+    split_sha256: Sha256
+    seed: Seed
+    trials: PositiveInt
+    random_startup_trials: Annotated[int, Field(ge=0)]
+    completed_trials: PositiveInt
+    nonconverged_trials: Annotated[int, Field(ge=0)]
+    best_trial: Annotated[int, Field(ge=0)]
+    best_branch: str
+    best_params: dict[str, ParamValue]
+    best_macro_f1: Annotated[float, Field(ge=0, le=1)]
+    sampler: str
+    pruner: str
+    seconds: Annotated[float, Field(ge=0)]
+    sample_notes: PositiveInt
+    sample_patients: PositiveInt
+    development_notes: PositiveInt
+    development_patients: PositiveInt
+    results_sha256: Sha256
+    predictions_sha256: Sha256
+    diagnostic_strip: DiagnosticStrip | None
+    text_preprocessing: TextPreprocessing
+    text_normalization: TextNormalization | None
+    environment: Environment
+    hardware: Hardware
+
+    @model_validator(mode="after")
+    def _consistent_stage(self) -> Self:
+        if self.completed_trials != self.trials:
+            msg = "Dokončené pokusy musí vyčerpat rozpočet stupně."
+            raise ValueError(msg)
+        _ensure_normalization_matches_preprocessing(
+            self.text_preprocessing, self.text_normalization
+        )
+        return self

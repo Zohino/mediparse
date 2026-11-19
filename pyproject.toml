@@ -27,6 +27,7 @@ dependencies = [
 ]
 
 [project.scripts]
+mediparse-stage-tuning = "mediparse.entrypoints.stage_tuning:main"
 mediparse-screening = "mediparse.entrypoints.screening:main"
 mediparse-data-access-check = "mediparse.entrypoints.data_access_check:main"
 mediparse-eda-provenance = "mediparse.entrypoints.eda_provenance:main"
