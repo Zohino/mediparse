@@ -22,6 +22,7 @@ from optuna.trial import TrialState, create_trial
 from sqlalchemy.pool import NullPool
 
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.stage_tuning import BRANCH_KEY
 from mediparse.domain.tuning import CategoricalParam, FloatParam, IntParam, Trial
 
 if TYPE_CHECKING:
@@ -29,7 +30,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     from mediparse.domain.seed import Seed
-    from mediparse.domain.stage_tuning import Branch
+    from mediparse.domain.stage_tuning import StageTuningConfig
     from mediparse.domain.tuning import ParamValue, SearchSpace
 
 logger = logging.getLogger(__name__)
@@ -188,14 +189,10 @@ def stage_sampler(startup_trials: int) -> str:
 class OptunaStageSearch(OptunaTrials):
     """Podmíněné CASH návrhy s obnovou z dokončených pokusů."""
 
-    branches: Mapping[str, Branch]
-    seed: Seed
-    startup_trials: int
+    config: StageTuningConfig
 
     @classmethod
-    def create(
-        cls, branches: Sequence[Branch], seed: Seed, startup_trials: int
-    ) -> OptunaStageSearch:
+    def create(cls, config: StageTuningConfig) -> OptunaStageSearch:
         """Vytvoří prázdnou studii v paměti bez prořezávání.
 
         Returns:
@@ -203,9 +200,7 @@ class OptunaStageSearch(OptunaTrials):
         """
         return cls(
             optuna.create_study(direction="maximize", pruner=NopPruner()),
-            {branch.name: branch for branch in branches},
-            seed,
-            startup_trials,
+            config,
         )
 
     def enqueue(self, params: Mapping[str, ParamValue]) -> None:
@@ -223,12 +218,14 @@ class OptunaStageSearch(OptunaTrials):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", ExperimentalWarning)
             self.study.sampler = TPESampler(
-                seed=self.seed + len(self.study.trials),
-                **_stage_sampler_options(self.startup_trials),
+                seed=self.config.seed + len(self.study.trials),
+                **_stage_sampler_options(self.config.startup_trials),
             )
         trial = self.study.ask()
-        name = trial.suggest_categorical("branch", tuple(self.branches))
-        for param in self.branches[name].prefixed_space():
+        trial.suggest_categorical(
+            BRANCH_KEY, tuple(b.name for b in self.config.branches)
+        )
+        for param in self.config.branch(trial.params).prefixed_space():
             match param:
                 case FloatParam():
                     trial.suggest_float(
@@ -244,9 +241,11 @@ class OptunaStageSearch(OptunaTrials):
     def restore(self, trials: Sequence[tuple[Trial, float]]) -> None:
         """Znovu postaví historii studie z checkpointu."""
         for trial, value in trials:
-            branch = self.branches[str(trial.params["branch"])]
+            branch = self.config.branch(trial.params)
             distributions = {
-                "branch": CategoricalDistribution(tuple(self.branches)),
+                BRANCH_KEY: CategoricalDistribution(
+                    tuple(b.name for b in self.config.branches)
+                ),
                 **{p.name: _distribution(p) for p in branch.prefixed_space()},
             }
             self.study.add_trial(

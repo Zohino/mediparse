@@ -104,9 +104,6 @@ class ParameterSearch(Protocol):
     def prune(self, trial: Trial) -> None:
         """Uzavře prořezaný pokus započítaný do rozpočtu."""
 
-    def best(self) -> tuple[Mapping[str, ParamValue], float]:
-        """Vrátí parametry a cíl nejlepšího dokončeného pokusu."""
-
 
 class TrialScorer(Protocol):
     """Skóre validačních zpráv jednoho pokusu."""

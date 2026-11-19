@@ -125,7 +125,7 @@ def test_defaults_and_development_sample(
     samples = []
     for _ in range(2):
         scorer, progress = _Scorer(), _Progress()
-        search = OptunaStageSearch.create(config.branches, config.seed, 5)
+        search = OptunaStageSearch.create(config)
         report = StageTuning(
             _Table(),
             _SplitSource(),
@@ -180,7 +180,7 @@ def test_interrupted_run_resumes_to_identical_outputs(tmp_path: Path, cut: int) 
                     _Table(),
                     _SplitSource(),
                     StratifiedGroupFolds(),
-                    OptunaStageSearch.create(config.branches, config.seed, 5),
+                    OptunaStageSearch.create(config),
                     _Scorer(fail_at=cut * 2),
                     progress,
                     StepClock(),
@@ -193,7 +193,7 @@ def test_interrupted_run_resumes_to_identical_outputs(tmp_path: Path, cut: int) 
             _Table(),
             _SplitSource(),
             StratifiedGroupFolds(),
-            OptunaStageSearch.create(config.branches, config.seed, 5),
+            OptunaStageSearch.create(config),
             _Scorer(),
             progress,
             StepClock(),
@@ -238,9 +238,6 @@ class _Search:
     def prune(trial: Trial) -> None:
         del trial
         pytest.fail("Stupeň neprořezává.")
-
-    def best(self) -> tuple[Mapping[str, ParamValue], float]:
-        return self.enqueued[0][1], max(self.values)
 
 
 @pytest.mark.parametrize("cut", [0, 3, 5])

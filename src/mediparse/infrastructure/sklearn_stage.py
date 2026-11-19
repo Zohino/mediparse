@@ -30,7 +30,7 @@ if TYPE_CHECKING:
     from mediparse.domain.clinical_text import TextNormalization
     from mediparse.domain.seed import Seed
     from mediparse.domain.split import Holdout
-    from mediparse.domain.stage_tuning import Branch
+    from mediparse.domain.stage_tuning import StageTuningConfig
     from mediparse.domain.tuning import ParamValue
 
 
@@ -38,7 +38,7 @@ if TYPE_CHECKING:
 class SklearnStageScorer:
     """Fitne reprezentaci jednou pro pět diagnóz pokusu a foldu."""
 
-    branches: Mapping[str, Branch]
+    config: StageTuningConfig
     normalization: TextNormalization | None
     lsa_components: int
     seed: Seed
@@ -64,7 +64,7 @@ class SklearnStageScorer:
     def _score(
         self, params: Mapping[str, ParamValue], fold: Holdout
     ) -> ValidationScores:
-        branch = self.branches[str(params["branch"])]
+        branch = self.config.branch(params)
         rep, family = branch.params_of(params)
         tfidf = TfidfParameters.model_validate(rep)
         vectorizer = tfidf_from(

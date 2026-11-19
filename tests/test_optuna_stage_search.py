@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 def test_restore_matches_uninterrupted(cut: int) -> None:
     """Obnova uvnitř výchozích bodů i v TPE vrací totožné návrhy."""
     config = stage_config()
-    search = OptunaStageSearch.create(config.branches, config.seed, 5)
+    search = OptunaStageSearch.create(config)
     history: list[tuple[Trial, float]] = []
     for n in range(12):
         if n < 4:
@@ -29,7 +29,7 @@ def test_restore_matches_uninterrupted(cut: int) -> None:
         assert branch.family.space.contains(fam)
         search.complete(trial, n / 12)
         history.append((trial, n / 12))
-    resumed = OptunaStageSearch.create(config.branches, config.seed, 5)
+    resumed = OptunaStageSearch.create(config)
     resumed.restore(history[:cut])
     for n in range(cut, 12):
         if n < 4:
@@ -42,7 +42,7 @@ def test_restore_matches_uninterrupted(cut: int) -> None:
 def test_stage_maximizes_objective() -> None:
     """Studie vybírá 0,9 z dokončených hodnot 0,2; 0,9; 0,5."""
     config = stage_config()
-    search = OptunaStageSearch.create(config.branches, config.seed, 5)
+    search = OptunaStageSearch.create(config)
     for value in (0.2, 0.9, 0.5):
         search.complete(search.ask(), value)
     assert search.best()[1] == pytest.approx(0.9)
@@ -51,7 +51,7 @@ def test_stage_maximizes_objective() -> None:
 def test_stage_never_prunes_after_startup() -> None:
     """Ani výrazný propad po pěti pokusech není důvodem k prořezání."""
     config = stage_config()
-    search = OptunaStageSearch.create(config.branches, config.seed, 5)
+    search = OptunaStageSearch.create(config)
     for _ in range(5):
         search.complete(search.ask(), 1.0)
     trial = search.ask()

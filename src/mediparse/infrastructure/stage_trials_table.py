@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Final
 
 import pyarrow as pa
 
-from mediparse.domain.stage_tuning import StageTrialRecord
+from mediparse.domain.stage_tuning import BRANCH_KEY, StageTrialRecord, branch_parts
 from mediparse.infrastructure.parquet_checkpoint import ParquetParts
 from mediparse.infrastructure.parquet_file import read_table
 
@@ -98,13 +98,13 @@ class ParquetStageCheckpoint:
         self, record: StageTrialRecord, results: Sequence[StageFoldResult]
     ) -> None:
         """Serializuje uloženou metriku a skóre bez přepočítávání cíle."""
-        branch = str(record.params["branch"])
-        representation, family = branch.split("/")
+        branch = str(record.params[BRANCH_KEY])
+        representation, family = branch_parts(branch)
         shared = {
             "trial": record.number,
             "branch": branch,
             "representation": representation,
-            "family": family,
+            "family": family.value,
             "default": record.default,
             "params": json.dumps(dict(record.params), sort_keys=True),
             "value": record.value,

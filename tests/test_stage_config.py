@@ -6,6 +6,7 @@ from typing import Any
 import pytest
 from pydantic import ValidationError
 
+from mediparse.domain import stage_tuning as stage_domain
 from mediparse.domain.stage_tuning import (
     StageTrialRecord,
     StageTuningConfig,
@@ -160,3 +161,16 @@ def test_invalid_config(
         target[path[-1]] = value
     with pytest.raises(ValidationError, match=message):
         StageTuningConfig.model_validate_json(json.dumps(data))
+
+
+def test_branch_identity_is_resolved_in_domain() -> None:
+    """Doména vrátí větev i její části z identity uložené v pokusu."""
+    config = stage_config()
+    for branch in config.branches:
+        params = branch.default_params()
+        assert params[stage_domain.BRANCH_KEY] == branch.name
+        assert config.branch(params) == branch
+        assert stage_domain.branch_parts(branch.name) == (
+            branch.representation.name,
+            branch.family.family,
+        )

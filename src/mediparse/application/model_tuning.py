@@ -12,6 +12,8 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.tuning import TuningOutcome, TuningReport
 
 if TYPE_CHECKING:
+    from collections.abc import Mapping
+
     from mediparse.application.ports.experiment import (
         InputTable,
         PatientPartitioner,
@@ -19,8 +21,16 @@ if TYPE_CHECKING:
     )
     from mediparse.domain.matrix import MatrixRow
     from mediparse.domain.tuning import (
+        ParamValue,
         TuningConfig,
     )
+
+
+class TuningSearch(ParameterSearch, Protocol):
+    """Hledání jednoho modelu s výběrem nejlepšího pokusu."""
+
+    def best(self) -> tuple[Mapping[str, ParamValue], float]:
+        """Vrátí parametry a cíl nejlepšího dokončeného pokusu."""
 
 
 class ValidationScorer(TrialScorer, Protocol):
@@ -38,7 +48,7 @@ class ModelTuning:
     table: InputTable
     split: SplitSource
     partitioner: PatientPartitioner
-    search: ParameterSearch
+    search: TuningSearch
     scorer: ValidationScorer
 
     def run(self, config: TuningConfig, row: MatrixRow) -> TuningReport:

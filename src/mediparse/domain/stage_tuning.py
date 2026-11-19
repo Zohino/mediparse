@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Annotated, Literal, Self
+from typing import TYPE_CHECKING, Annotated, Final, Literal, Self
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
@@ -24,6 +24,8 @@ if TYPE_CHECKING:
     from mediparse.domain.diagnosis import Diagnosis
     from mediparse.domain.split import SplitConfig
     from mediparse.domain.tuning import MaxF1
+
+BRANCH_KEY: Final = "branch"
 
 type Parameter = FloatParam | IntParam | CategoricalParam
 
@@ -130,7 +132,7 @@ class Branch:
         Returns:
             Úplné parametry pokusu.
         """
-        params: dict[str, ParamValue] = {"branch": self.name}
+        params: dict[str, ParamValue] = {BRANCH_KEY: self.name}
         for prefix, default in (
             (self.representation.name, self.representation.default),
             (self.family.family.value, self.family.default),
@@ -182,6 +184,16 @@ class StageTuningConfig(BaseModel):
             Branch(rep, fam) for rep in self.representations for fam in self.families
         )
 
+    def branch(self, params: Mapping[str, ParamValue]) -> Branch:
+        """Vyhledá větev aktivní v parametrech pokusu.
+
+        Returns:
+            Deklarovaná dvojice reprezentace a rodiny.
+        """
+        return next(
+            branch for branch in self.branches if branch.name == params[BRANCH_KEY]
+        )
+
     @property
     def startup_trials(self) -> int:
         """Počet výchozích a náhodných pokusů před TPE."""
@@ -205,6 +217,16 @@ class StageTuningConfig(BaseModel):
             msg = "Seed spolu s rozpočtem překračuje rozsah sampleru."
             raise ValueError(msg)
         return self
+
+
+def branch_parts(name: str) -> tuple[str, ClassifierFamily]:
+    """Rozloží doménovou identitu větve pro tabulkový výstup.
+
+    Returns:
+        Jméno reprezentace a rodina klasifikátoru.
+    """
+    representation, family = name.split("/")
+    return representation, ClassifierFamily(family)
 
 
 @dataclass(frozen=True, kw_only=True)

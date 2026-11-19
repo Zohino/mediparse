@@ -137,11 +137,9 @@ def run(
         table=corpus.table,
         split=corpus.split,
         partitioner=StratifiedGroupFolds(),
-        search=OptunaStageSearch.create(
-            config.branches, config.seed, config.startup_trials
-        ),
+        search=OptunaStageSearch.create(config),
         scorer=SklearnStageScorer(
-            {b.name: b for b in config.branches},
+            config,
             corpus.normalization,
             config.lsa_components,
             config.seed,
@@ -170,7 +168,7 @@ def run(
             completed_trials=report.completed_trials,
             nonconverged_trials=report.nonconverged_trials,
             best_trial=report.best.number,
-            best_branch=str(report.best.params["branch"]),
+            best_branch=config.branch(report.best.params).name,
             best_params=dict(report.best.params),
             best_macro_f1=report.best.value,
             sampler=stage_sampler(config.startup_trials),
@@ -193,7 +191,7 @@ def run(
         "Ladění stupně: %d pokusů, vítěz %d (%s), čas %.3f s.",
         report.completed_trials,
         report.best.number,
-        report.best.params["branch"],
+        config.branch(report.best.params).name,
         report.seconds,
     )
     return ExitCode.OK

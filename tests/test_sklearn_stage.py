@@ -37,8 +37,7 @@ if TYPE_CHECKING:
 def test_logreg_parameters_change_scores(tmp_path: Path) -> None:
     """Silnější a slabší regularizace dávají různá skóre na stejné syntetice."""
     config = stage_config()
-    branches = {b.name: b for b in config.branches}
-    scorer = SklearnStageScorer(branches, None, 2, 7, tmp_path)
+    scorer = SklearnStageScorer(config, None, 2, 7, tmp_path)
     fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
     params = config.branches[0].default_params()
     low = scorer.score(params | {"logreg.C": 1e-4}, fold)
@@ -77,9 +76,7 @@ def test_lightgbm_receives_lsa_components(
         return model
 
     monkeypatch.setattr(sklearn_stage, "classifier_estimator", estimator)
-    scorer = SklearnStageScorer(
-        {b.name: b for b in config.branches}, None, 3, 7, tmp_path
-    )
+    scorer = SklearnStageScorer(config, None, 3, 7, tmp_path)
     fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
     scorer.score(config.branches[0].default_params(), fold)
     assert observed == [3] * 5
@@ -113,9 +110,9 @@ def test_nondefault_char_tfidf_matches_manual_pipeline(tmp_path: Path) -> None:
         "char_wb.sublinear_tf": False,
         "logreg.C": 0.25,
     }
-    scored = SklearnStageScorer(
-        {b.name: b for b in config.branches}, normalization, 3, 7, tmp_path
-    ).score(params, fold)
+    scored = SklearnStageScorer(config, normalization, 3, 7, tmp_path).score(
+        params, fold
+    )
     vectorizer = tfidf_vectorizer(
         normalization,
         analyzer="char_wb",
@@ -147,14 +144,13 @@ def test_seeded_scores_repeat(tmp_path: Path, family: str) -> None:
         for n in notes(visits=10)
     )
     fold = patient_holdouts(corpus, 2, 7, StratifiedGroupFolds())[0]
-    branches = {b.name: b for b in config.branches}
-    first = SklearnStageScorer(branches, None, 3, 7, tmp_path).score(
+    first = SklearnStageScorer(config, None, 3, 7, tmp_path).score(
         branch.default_params(), fold
     )
-    repeated = SklearnStageScorer(branches, None, 3, 7, tmp_path).score(
+    repeated = SklearnStageScorer(config, None, 3, 7, tmp_path).score(
         branch.default_params(), fold
     )
-    other = SklearnStageScorer(branches, None, 3, 29, tmp_path).score(
+    other = SklearnStageScorer(config, None, 3, 29, tmp_path).score(
         branch.default_params(), fold
     )
     assert first.scores == repeated.scores
@@ -177,9 +173,7 @@ def test_convergence_accumulates_all_diagnoses(
 
     monkeypatch.setattr(sklearn_stage, "fit_converged", fit_once)
     config = stage_config()
-    scorer = SklearnStageScorer(
-        {b.name: b for b in config.branches}, None, 2, 7, tmp_path
-    )
+    scorer = SklearnStageScorer(config, None, 2, 7, tmp_path)
     scored = scorer.score(config.branches[0].default_params(), _clinical_fold())
     assert scored.converged is (failed_call is None)
     assert calls == 5
