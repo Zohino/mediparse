@@ -160,16 +160,15 @@ class TokenFeaturizer:
         vectorizer = tfidf_vectorizer(self.normalization)
         ensure_tokens(vectorizer, train)
         analyzer = vectorizer.build_analyzer()
-        return (
-            ScreeningFeatures(
-                np.array([" ".join(analyzer(text)) for text in train], dtype=object),
+        # Pevná šířka <U zarovná zprávy na nejdelší: 44 tis. krát 60 tis. znaků je ~9,8 GiB.
+
+        def features(texts: Sequence[str]) -> ScreeningFeatures:
+            return ScreeningFeatures(
+                np.array([" ".join(analyzer(text)) for text in texts], dtype=object),
                 None,
-            ),
-            ScreeningFeatures(
-                np.array([" ".join(analyzer(text)) for text in test], dtype=object),
-                None,
-            ),
-        )
+            )
+
+        return features(train), features(test)
 
 
 @dataclass(frozen=True)

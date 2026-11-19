@@ -615,10 +615,10 @@ def test_token_featurizer_joins_analyzer_tokens() -> None:
     train, test = TokenFeaturizer(None).fit_transform(
         TokensSpec(name="t"), ["Insulin, glucose!\nA b"], ["Fracture."]
     )
-    assert isinstance(train.matrix, np.ndarray)
-    assert isinstance(test.matrix, np.ndarray)
-    assert train.matrix.tolist() == ["insulin glucose"]
-    assert test.matrix.tolist() == ["fracture"]
+    assert train.matrix.dtype == object
+    assert test.matrix.dtype == object
+    np.testing.assert_array_equal(train.matrix, ["insulin glucose"])
+    np.testing.assert_array_equal(test.matrix, ["fracture"])
     assert train.lsa is None
 
 
@@ -629,10 +629,14 @@ def test_token_featurizer_applies_its_normalization() -> None:
             acronyms={"COPD": "chronic obstructive pulmonary disease"}, variants={}
         )
     ).fit_transform(TokensSpec(name="t"), ["COPD"], ["COPD"])
-    assert isinstance(train.matrix, np.ndarray)
-    assert isinstance(test.matrix, np.ndarray)
-    assert train.matrix.tolist() == ["chronic obstructive pulmonary disease"]
-    assert test.matrix.tolist() == ["chronic obstructive pulmonary disease"]
+    assert train.matrix.dtype == object
+    assert test.matrix.dtype == object
+    np.testing.assert_array_equal(
+        train.matrix, ["chronic obstructive pulmonary disease"]
+    )
+    np.testing.assert_array_equal(
+        test.matrix, ["chronic obstructive pulmonary disease"]
+    )
 
 
 def test_fasttext_factory_preserves_seed_and_scratch(tmp_path: Path) -> None:
