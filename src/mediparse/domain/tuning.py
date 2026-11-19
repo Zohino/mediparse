@@ -181,7 +181,7 @@ def max_f1(labels: Sequence[bool], scores: Sequence[float]) -> MaxF1:
     """Najde maximum F1 přes dosažitelné prahy, stejná skóre nedělí.
 
     Returns:
-        Nejvyšší F1 z definice 2 TP / (počet predikovaných + počet pozitivních).
+        Nejvyšší F1 a nejvyšší práh, který ho dosahuje.
 
     Raises:
         InvalidInputError: Chybí pozitivní label, délky nesedí nebo skóre není konečné.
@@ -207,10 +207,10 @@ def max_f1(labels: Sequence[bool], scores: Sequence[float]) -> MaxF1:
 def fold_max_f1(
     notes: Sequence[InputNote], scores: ValidationScores
 ) -> dict[Diagnosis, MaxF1]:
-    """Spočte stejný cíl pro každou rodinu jako průměr pěti max-F1.
+    """Spočte maximum F1 a práh každé diagnózy validačního foldu.
 
     Returns:
-        Macro-F1 validačního foldu, nikoli odhad výkonu finálního modelu.
+        Pět maxim s prahy v pořadí diagnóz.
 
     Raises:
         InvalidInputError: Scorer nedodal přesně pět diagnóz nebo neplatná skóre.

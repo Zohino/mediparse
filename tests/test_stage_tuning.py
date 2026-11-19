@@ -287,3 +287,31 @@ def test_checkpoint_round_trip_record_and_fold_results(tmp_path: Path) -> None:
     assert progress.completed() == (record,)
     progress.finish()
     assert not progress.directory.exists()
+
+
+def test_stage_rejects_pruned_trial() -> None:
+    """Porušení smlouvy hledání bez pruneru nesmí vytvořit dokončený výstup."""
+
+    class PruningSearch(_Search):
+        @staticmethod
+        def should_prune(trial: Trial, value: float, step: int) -> bool:
+            del trial, value, step
+            return True
+
+        @staticmethod
+        def prune(trial: Trial) -> None:
+            del trial
+
+    progress = _Progress()
+    with pytest.raises(InvalidInputError, match="neprořezává"):
+        StageTuning(
+            _Table(),
+            _SplitSource(),
+            StratifiedGroupFolds(),
+            PruningSearch(),
+            _Scorer(),
+            progress,
+            StepClock(),
+        ).run(stage_config())
+    assert not progress.records
+    assert not progress.finished

@@ -126,7 +126,7 @@ def checkpoint_key(
     dataset_sha256: str,
     packages: Mapping[str, str],
 ) -> str:
-    """Otiskne vstupy, kód a verze knihoven pro obnovu screeningu.
+    """Otiskne vstupy, kód a verze knihoven pro obnovu modelového kroku.
 
     Returns:
         Klíč rozpracovaného běhu.

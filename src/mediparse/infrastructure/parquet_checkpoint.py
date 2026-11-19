@@ -131,5 +131,5 @@ class ParquetParts:
         try:
             yield
         except OSError as error:
-            msg = f"Rozpracovaný {self.label} {self.directory} nelze zapsat: {type(error).__name__}."
+            msg = f"Rozpracovaný běh {self.label} {self.directory} nelze zapsat: {type(error).__name__}."
             raise InvalidInputError(msg) from None

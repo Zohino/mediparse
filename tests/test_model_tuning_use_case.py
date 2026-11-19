@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections import Counter
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from operator import itemgetter
 from typing import TYPE_CHECKING
 
@@ -265,3 +265,17 @@ def test_shared_trial_returns_fold_metrics_and_nonconvergence(*, pruned: bool) -
         assert len(result.f1) == 2
         assert all(list(metrics) == list(Diagnosis) for metrics in result.f1)
         assert search.completed[0][1] == result.value
+
+
+def test_pruned_nonconverged_trial_counts_in_model_outcome() -> None:
+    """Nekonvergence prořezaného pokusu se započítá stejně jako dokončená."""
+
+    class Nonconverged(_Scorer):
+        def score(
+            self, params: Mapping[str, ParamValue], fold: Holdout
+        ) -> ValidationScores:
+            return replace(super().score(params, fold), converged=False)
+
+    report = _run(_Search(), Nonconverged(), _PairedParts())
+    assert report.outcome.pruned_trials == 1
+    assert report.outcome.nonconverged_trials == 3
