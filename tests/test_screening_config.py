@@ -232,10 +232,11 @@ def test_first_incompatible_pair_is_reported() -> None:
         )
 
 
-def test_tokens_spec_rejects_extra_field() -> None:
-    """Tokeny mají pouze jméno, nikoli parametry TF-IDF."""
+@pytest.mark.parametrize("value", [{"name": ""}, {"name": "x", "analyzer": "word"}])
+def test_tokens_spec_rejects_invalid_values(value: dict[str, object]) -> None:
+    """Tokeny vyžadují neprázdné jméno a odmítají parametry TF-IDF."""
     with pytest.raises(ValidationError):
-        TokensSpec.model_validate({"name": "x", "analyzer": "word"})
+        TokensSpec.model_validate(value)
 
 
 def test_fasttext_config_matches_protocol() -> None:
