@@ -17,6 +17,7 @@ from tests.stage_support import stage_config
 def test_branches_and_namespaces() -> None:
     """Reprezentace tvoří vnější smyčku a rodiny sdílejí jmenný prostor."""
     config = stage_config()
+    assert config.startup_trials == 5
     assert [b.name for b in config.branches] == [
         "r1/logreg",
         "r1/complement_nb",

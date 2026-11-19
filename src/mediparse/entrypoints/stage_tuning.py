@@ -132,13 +132,14 @@ def run(
     packages = installed_versions(PACKAGES)
     source = revision()
     corpus = model_corpus(paths.corpus, config.input)
-    startup = len(config.branches) + config.random_startup_trials
     hardware = machine_hardware(())
     report = StageTuning(
         table=corpus.table,
         split=corpus.split,
         partitioner=StratifiedGroupFolds(),
-        search=OptunaStageSearch.create(config.branches, config.seed, startup),
+        search=OptunaStageSearch.create(
+            config.branches, config.seed, config.startup_trials
+        ),
         scorer=SklearnStageScorer(
             {b.name: b for b in config.branches},
             corpus.normalization,
@@ -172,7 +173,7 @@ def run(
             best_branch=str(report.best.params["branch"]),
             best_params=dict(report.best.params),
             best_macro_f1=report.best.value,
-            sampler=stage_sampler(startup),
+            sampler=stage_sampler(config.startup_trials),
             pruner=STAGE_PRUNER,
             seconds=report.seconds,
             sample_notes=report.sample_notes,

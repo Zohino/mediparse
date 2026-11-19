@@ -182,6 +182,11 @@ class StageTuningConfig(BaseModel):
             Branch(rep, fam) for rep in self.representations for fam in self.families
         )
 
+    @property
+    def startup_trials(self) -> int:
+        """Počet výchozích a náhodných pokusů před TPE."""
+        return len(self.branches) + self.random_startup_trials
+
     @model_validator(mode="after")
     def _valid_stage(self) -> Self:
         if len({r.name for r in self.representations}) != len(self.representations):
@@ -193,7 +198,7 @@ class StageTuningConfig(BaseModel):
         if any(f.family is ClassifierFamily.FASTTEXT for f in self.families):
             msg = "Rodina fasttext nepracuje nad reprezentací TF-IDF."
             raise ValueError(msg)
-        if self.trials < len(self.branches) + self.random_startup_trials:
+        if self.trials < self.startup_trials:
             msg = "Rozpočet musí pokrýt výchozí i náhodné pokusy."
             raise ValueError(msg)
         if self.seed + self.trials >= 2**32:
