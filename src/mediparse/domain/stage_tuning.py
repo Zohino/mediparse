@@ -220,7 +220,7 @@ class StageFoldResult:
         """Ověří délky sloupců buňky.
 
         Raises:
-            ValueError: Identity, labely a skóre nemají shodné délky.
+            ValueError: Identity, labely a skóre nemají stejné délky.
         """
         if not (len(self.note_ids) == len(self.labels) == len(self.scores)):
             msg = "Identity, labely a skóre musí mít stejné délky."
@@ -240,7 +240,7 @@ class StageTrialRecord:
 
 
 def best_trial(records: Sequence[StageTrialRecord]) -> StageTrialRecord:
-    """Vybere nejvyšší cíl a při shodě dřívější pokus.
+    """Vybere nejvyšší cíl a při stejném cíli dřívější pokus.
 
     Returns:
         Vítězný záznam.
