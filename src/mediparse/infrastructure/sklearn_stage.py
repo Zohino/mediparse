@@ -4,9 +4,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from functools import partial
-from typing import TYPE_CHECKING, Annotated
+from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, ConfigDict, Field, PositiveInt
 from sklearn.decomposition import TruncatedSVD
 
 from mediparse.domain.diagnosis import Diagnosis
@@ -14,9 +13,10 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.screening import ClassifierFamily
 from mediparse.domain.tuning import ValidationScores
 from mediparse.infrastructure.sklearn_classifier import (
+    TfidfParameters,
     ensure_tokens,
     fit_converged,
-    tfidf_vectorizer,
+    tfidf_from,
 )
 from mediparse.infrastructure.sklearn_screening import (
     classifier_estimator,
@@ -32,18 +32,6 @@ if TYPE_CHECKING:
     from mediparse.domain.split import Holdout
     from mediparse.domain.stage_tuning import Branch
     from mediparse.domain.tuning import ParamValue
-
-
-class TfidfParameters(BaseModel):
-    """Typované parametry reprezentace na hranici sklearn."""
-
-    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
-
-    ngram_min: PositiveInt
-    ngram_max: PositiveInt
-    min_df: PositiveInt
-    max_df: Annotated[float, Field(gt=0, le=1)]
-    sublinear_tf: bool
 
 
 @dataclass(frozen=True)
@@ -79,13 +67,8 @@ class SklearnStageScorer:
         branch = self.branches[str(params["branch"])]
         rep, family = branch.params_of(params)
         tfidf = TfidfParameters.model_validate(rep)
-        vectorizer = tfidf_vectorizer(
-            self.normalization,
-            analyzer=branch.representation.analyzer,
-            ngram_range=(tfidf.ngram_min, tfidf.ngram_max),
-            min_df=tfidf.min_df,
-            max_df=tfidf.max_df,
-            sublinear_tf=tfidf.sublinear_tf,
+        vectorizer = tfidf_from(
+            tfidf, branch.representation.analyzer, self.normalization
         )
         texts = [note.text for note in fold.train]
         ensure_tokens(vectorizer, texts)

@@ -37,20 +37,46 @@ if TYPE_CHECKING:
     from mediparse.domain.tuning import ParamValue
 
 
-class SvmParameters(BaseModel):
-    """Typové meze konkrétního estimatoru na hranici obecného prostoru."""
+class TfidfParameters(BaseModel):
+    """Typové meze reprezentace TF-IDF na hranici sklearn."""
 
     model_config = ConfigDict(
         frozen=True, strict=True, extra="forbid", allow_inf_nan=False
     )
 
-    analyzer: Literal["word", "char_wb"]
+    ngram_min: PositiveInt = 1
     ngram_max: PositiveInt
-    c: PositiveFloat
-    class_weight: Literal["balanced"] | None
     min_df: PositiveInt
     max_df: Annotated[float, Field(gt=0, le=1)]
     sublinear_tf: bool
+
+
+class SvmParameters(TfidfParameters):
+    """Parametry lineárního SVM nad sdílenou reprezentací TF-IDF."""
+
+    analyzer: Literal["word", "char_wb"]
+    c: PositiveFloat
+    class_weight: Literal["balanced"] | None
+
+
+def tfidf_from(
+    params: TfidfParameters,
+    analyzer: Literal["word", "char_wb"],
+    normalization: TextNormalization | None,
+) -> TfidfVectorizer:
+    """Sestaví vektorizér ze společných typovaných parametrů.
+
+    Returns:
+        Nenatrénovaný vektorizér s explicitními volbami reprezentace.
+    """
+    return tfidf_vectorizer(
+        normalization,
+        analyzer=analyzer,
+        ngram_range=(params.ngram_min, params.ngram_max),
+        min_df=params.min_df,
+        max_df=params.max_df,
+        sublinear_tf=params.sublinear_tf,
+    )
 
 
 def svm_vectorizer(
@@ -61,14 +87,7 @@ def svm_vectorizer(
     Returns:
         Nenatrénovaný vektorizér se společným předzpracováním.
     """
-    return tfidf_vectorizer(
-        normalization,
-        analyzer=params.analyzer,
-        ngram_range=(1, params.ngram_max),
-        min_df=params.min_df,
-        max_df=params.max_df,
-        sublinear_tf=params.sublinear_tf,
-    )
+    return tfidf_from(params, params.analyzer, normalization)
 
 
 def svm_estimator(params: SvmParameters, seed: Seed) -> LinearSVC:
