@@ -10,6 +10,7 @@ import pytest
 from mediparse.application.stage_tuning import StageTuning
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.split import strata
 from mediparse.domain.stage_tuning import StageFoldResult, StageTrialRecord
 from mediparse.domain.tuning import MaxF1, Trial, ValidationScores
 from mediparse.infrastructure.optuna_search import OptunaStageSearch
@@ -98,8 +99,27 @@ class _Progress:
         self.finished = True
 
 
-@pytest.mark.parametrize("parts", [1, 3])
-def test_defaults_and_development_sample(parts: int) -> None:
+_DEVELOPMENT_NOTES = _Table().read_patients(DEVELOPMENT)
+
+
+@pytest.mark.parametrize(
+    ("parts", "expected_patients"),
+    [
+        (1, DEVELOPMENT),
+        (
+            3,
+            StratifiedGroupFolds().partition(
+                [n.subject_id for n in _DEVELOPMENT_NOTES],
+                strata(_DEVELOPMENT_NOTES, 3),
+                3,
+                7,
+            )[0],
+        ),
+    ],
+)
+def test_defaults_and_development_sample(
+    parts: int, expected_patients: frozenset[int]
+) -> None:
     """Pouze vývojoví pacienti a všechny jejich zprávy vstupují do disjunktních foldů."""
     config = stage_config(subsample_parts=parts)
     samples = []
@@ -122,12 +142,13 @@ def test_defaults_and_development_sample(parts: int) -> None:
         ]
         sample = {n.note_id for f in scorer.observed[:2] for n in f.test}
         patients = {n.subject_id for f in scorer.observed[:2] for n in f.test}
-        assert patients <= DEVELOPMENT
+        assert patients == expected_patients
+        assert report.sample_patients == len(expected_patients)
         assert sample == {
             n.note_id for n in _Table().read_patients(frozenset(patients))
         }
-        if parts == 1:
-            assert patients == DEVELOPMENT
+        if parts == 3:
+            assert report.sample_notes < report.development_notes
         for fold in scorer.observed:
             assert {n.subject_id for n in (*fold.train, *fold.test)} <= patients
             assert {n.subject_id for n in fold.train}.isdisjoint(
