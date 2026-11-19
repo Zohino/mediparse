@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, assert_never
+from typing import TYPE_CHECKING, Protocol, assert_never, cast
 
 import numpy as np
 from lightgbm import LGBMClassifier
@@ -272,10 +272,7 @@ class SklearnTunedClassifier:
         """
         selected = features.for_family(self.family)
         labels = self.model.predict(selected)
-        if hasattr(self.model.estimator_, "predict_proba"):
-            scores = self.model.predict_proba(selected)[:, 1]
-        else:
-            scores = self.model.decision_function(selected)
+        scores = positive_scores(self.model, selected)
         return tuple(
             Classification(bool(label), float(score))
             for label, score in zip(labels, scores, strict=True)
@@ -318,3 +315,18 @@ class SklearnThresholdTuner:
         return SklearnTunedClassifier(
             family, model, float(model.best_threshold_), converged
         )
+
+
+def positive_scores(model: BaseEstimator, features: object) -> np.ndarray:
+    """Vybere skóre pozitivní třídy na škále odezvy modelu.
+
+    Returns:
+        Pravděpodobnosti, má-li je model, jinak rozhodovací skóre.
+    """
+    if callable(predict_proba := getattr(model, "predict_proba", None)):
+        return predict_proba(features)[:, 1]
+    return cast("_DecisionModel", model).decision_function(features)
+
+
+class _DecisionModel(Protocol):
+    def decision_function(self, features: object) -> np.ndarray: ...
