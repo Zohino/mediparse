@@ -115,11 +115,7 @@ class ParquetScreeningCheckpoint:
         """
         units = set()
         for path in self.parts.completed_parts():
-            units.update(
-                _part_units(
-                    path.with_name(path.name.replace(".predictions.", ".results."))
-                )
-            )
+            units.update(_part_units(path))
         if units:
             logger.info("Obnova screeningu: %d hotových jednotek.", len(units))
         return frozenset(units)

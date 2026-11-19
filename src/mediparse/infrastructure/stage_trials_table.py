@@ -82,7 +82,7 @@ class ParquetStageCheckpoint:
         records = []
         for path in self.parts.completed_parts():
             rows = read_table(
-                path.with_name(path.name.replace(".predictions.", ".results.")),
+                path,
                 TRIALS_SCHEMA,
             ).to_pylist()
             first = rows[0]

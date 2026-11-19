@@ -43,7 +43,7 @@ class ParquetParts:
         """Ověří klíč a souvislou řadu dokončených dílů.
 
         Returns:
-            Cesty prvního druhu v pořadí zápisu.
+            Cesty značek dokončení v pořadí zápisu.
 
         Raises:
             InvalidInputError: Cizí klíč nebo neúplná řada dílů.
@@ -64,7 +64,6 @@ class ParquetParts:
                 raise self._invalid(msg)
             marker = self.kinds[-1][0]
             parts = sorted(self.directory.glob(f"*.{marker}.parquet"))
-            completed = []
             for index, path in enumerate(parts):
                 if path.name != f"{index:04d}.{marker}.parquet" or any(
                     not (self.directory / f"{index:04d}.{kind}.parquet").is_file()
@@ -72,10 +71,7 @@ class ParquetParts:
                 ):
                     msg = "řada dílů je přerušená"
                     raise self._invalid(msg)
-                completed.append(
-                    self.directory / f"{index:04d}.{self.kinds[0][0]}.parquet"
-                )
-            return completed
+            return parts
 
     def write(self, tables: Mapping[str, pa.Table]) -> None:
         """Zapíše díl každého druhu přes dočasný soubor a značku až nakonec."""
