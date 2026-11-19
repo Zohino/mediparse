@@ -1,4 +1,4 @@
-"""Pravděpodobnosti, determinismus a úklid tokenů skutečného fastTextu."""
+"""Log-odds, determinismus a úklid tokenů skutečného fastTextu."""
 
 from __future__ import annotations
 
@@ -25,28 +25,28 @@ def corpus() -> tuple[np.ndarray, list[bool]]:
     )
 
 
-def test_probability_columns_follow_classes(
+def test_log_odds_sign_follows_classes(
     tmp_path: Path, corpus: tuple[np.ndarray, list[bool]]
 ) -> None:
-    """Sloupec True odpovídá sondě a prázdný dokument má konečné skóre."""
+    """Znaménko log-odds odpovídá sondě a prázdný dokument má konečné skóre."""
     model = FastTextClassifier(tmp_path / "scratch").fit(*corpus)
     np.testing.assert_array_equal(model.classes_, [False, True])
-    probabilities = model.predict_proba(
+    scores = model.decision_function(
         np.array(["insulin glucose", "fracture cast", ""], dtype=object)
     )
-    assert probabilities.shape == (3, 2)
-    assert probabilities[0, 1] > 0.5 > probabilities[1, 1]
-    assert np.isfinite(probabilities).all()
+    assert scores.shape == (3,)
+    assert scores[0] > 0 > scores[1]
+    assert np.isfinite(scores).all()
 
 
 def test_repeated_fit_is_bitwise_identical(
     tmp_path: Path, corpus: tuple[np.ndarray, list[bool]]
 ) -> None:
-    """Dva fity se stejným seedem vracejí bitově shodné pravděpodobnosti."""
+    """Dva fity se stejným seedem vracejí bitově shodné log-odds."""
     first = FastTextClassifier(tmp_path / "scratch", random_state=3).fit(*corpus)
     second = FastTextClassifier(tmp_path / "scratch", random_state=3).fit(*corpus)
     assert np.array_equal(
-        first.predict_proba(corpus[0]), second.predict_proba(corpus[0])
+        first.decision_function(corpus[0]), second.decision_function(corpus[0])
     )
 
 

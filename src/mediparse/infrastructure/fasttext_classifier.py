@@ -57,17 +57,21 @@ class FastTextClassifier(ClassifierMixin, BaseEstimator):
             )
         return self
 
-    def predict_proba(self, documents: ndarray) -> ndarray:
-        """Vrátí obě pravděpodobnosti knihovny v pořadí classes_.
+    # Log-odds brání odmítnutí téměř konstantních P ≈ 0,5 v TunedThresholdClassifierCV.
+    def decision_function(self, documents: ndarray) -> ndarray:
+        """Vrátí log-odds pozitivní vůči negativní třídě.
 
         Returns:
-            Matice dokumentů krát dvě třídy bez dopočítávání doplňku do jedné.
+            Jedno skóre log p(True) - log p(False) na dokument.
         """
         check_is_fitted(self, "model_")
         # Predikce jediného řetězce v 0.9.2 selže s numpy 2 na copy=False.
         labels, probabilities = self.model_.predict(list(documents), k=-1)
-        rows = []
+        scores = []
         for names, values in zip(labels, probabilities, strict=True):
             by_label = dict(zip(names, values, strict=True))
-            rows.append([by_label[f"{LABEL_PREFIX}{cls}"] for cls in self.classes_])
-        return np.array(rows)
+            scores.append(
+                np.log(by_label[f"{LABEL_PREFIX}{self.classes_[1]}"])
+                - np.log(by_label[f"{LABEL_PREFIX}{self.classes_[0]}"])
+            )
+        return np.array(scores)

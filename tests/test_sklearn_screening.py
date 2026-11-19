@@ -94,8 +94,7 @@ def test_prediction_matches_threshold_on_score_scale(
     spec: VectorizerSpec | TokensSpec,
 ) -> None:
     """Rodiny vracejí predikci při prahu na téže škále skóre."""
-    # Menší korpus dává fastTextu v některých vnitřních foldech konstantní skóre.
-    notes = separable_notes(120, OVERLAPPING)
+    notes = separable_notes(24, OVERLAPPING)
     train, test = ScreeningFeaturizer(
         TfidfFeaturizer(None, Lsa(2, 7)), Mock(), TokenFeaturizer(None)
     ).fit_transform(
