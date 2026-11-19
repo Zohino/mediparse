@@ -43,6 +43,10 @@ if TYPE_CHECKING:
 # Vnitřní trénink musí umožnit dělení uzlů při min_child_samples=20;
 # konstantní skóre TunedThresholdClassifierCV odmítne.
 VISITS_PER_PATIENT = 16
+CLASSICAL_GRID = {
+    "families": ("complement_nb", "linear_svm"),
+    "vectorizers": [{"name": "word", "analyzer": "word", "ngram_range": [1, 1]}],
+}
 
 
 @dataclass(frozen=True)
@@ -52,13 +56,12 @@ class _Inputs:
     config: Path
 
 
-def _inputs(  # ruff: ignore[too-many-arguments]
+def _inputs(
     root: Path,
     *,
     preprocessing: str = "none",
     strip: bool = False,
-    families: tuple[str, ...] = ("complement_nb", "linear_svm"),
-    vectorizers: list[dict[str, object]] | None = None,
+    grid: Mapping[str, object] = CLASSICAL_GRID,
     visits: int = 2,
 ) -> _Inputs:
     cohort = root / "cohort.parquet"
@@ -67,20 +70,19 @@ def _inputs(  # ruff: ignore[too-many-arguments]
     ParquetSplitTable(split).write(SHARED)
     config = root / "config.json"
     config.write_text(
-        json.dumps({
-            "seed": 7,
-            "folds": 2,
-            "threshold_folds": 2,
-            "lsa_components": 2,
-            "input": {
-                "strip_diagnostic_sections": strip,
-                "text_preprocessing": preprocessing,
-            },
-            "vectorizers": vectorizers
-            if vectorizers is not None
-            else [{"name": "word", "analyzer": "word", "ngram_range": [1, 1]}],
-            "families": families,
-        }),
+        json.dumps(
+            {
+                "seed": 7,
+                "folds": 2,
+                "threshold_folds": 2,
+                "lsa_components": 2,
+                "input": {
+                    "strip_diagnostic_sections": strip,
+                    "text_preprocessing": preprocessing,
+                },
+            }
+            | dict(grid)
+        ),
         encoding="utf-8",
     )
     return _Inputs(cohort, split, config)
@@ -172,24 +174,27 @@ def test_results_manifest_records_actual_inputs_and_development(
 
 
 @pytest.mark.parametrize(
-    ("families", "vectorizers"),
+    "grid",
     [
-        (("complement_nb", "logreg", "linear_svm", "nb_svm", "lightgbm_lsa"), None),
-        (("fasttext",), [{"name": "word-tokens"}]),
+        CLASSICAL_GRID
+        | {
+            "families": (
+                "complement_nb",
+                "logreg",
+                "linear_svm",
+                "nb_svm",
+                "lightgbm_lsa",
+            )
+        },
+        {"families": ("fasttext",), "vectorizers": [{"name": "word-tokens"}]},
     ],
 )
 def test_repeated_run_has_identical_result_bytes(
     tmp_path: Path,
-    families: tuple[str, ...],
-    vectorizers: list[dict[str, object]] | None,
+    grid: Mapping[str, object],
 ) -> None:
     """Dva běhy nad stejnými vstupy zapíší bajtově shodné agregáty i predikce."""
-    inputs = _inputs(
-        tmp_path,
-        families=families,
-        vectorizers=vectorizers,
-        visits=VISITS_PER_PATIENT,
-    )
+    inputs = _inputs(tmp_path, grid=grid, visits=VISITS_PER_PATIENT)
     first, second = tmp_path / "first", tmp_path / "second"
     assert _run(inputs, first) is ExitCode.OK
     assert _run(inputs, second) is ExitCode.OK
@@ -218,7 +223,11 @@ def test_lsa_components_changes_screening_result_bytes(tmp_path: Path) -> None:
     results = []
     for components in (2, 3):
         root = tmp_path / str(components)
-        inputs = _inputs(root, families=("lightgbm_lsa",), visits=VISITS_PER_PATIENT)
+        inputs = _inputs(
+            root,
+            grid=CLASSICAL_GRID | {"families": ("lightgbm_lsa",)},
+            visits=VISITS_PER_PATIENT,
+        )
         ParquetNoteTable(inputs.cohort).write(corpus)
         config = json.loads(inputs.config.read_text(encoding="utf-8"))
         config["lsa_components"] = components
@@ -490,7 +499,7 @@ def test_encoder_screening_end_to_end(tmp_path: Path) -> None:
     """Malý encoder dodá příznaky LR, cache i úplnou provenance bez stahování."""
     pytest.importorskip("torch")
 
-    inputs = _inputs(tmp_path, families=("logreg",))
+    inputs = _inputs(tmp_path, grid=CLASSICAL_GRID | {"families": ("logreg",)})
     spec = SPEC.model_copy(update={"name": "mmbert-base-mean"})
     config = json.loads(inputs.config.read_text(encoding="utf-8"))
     config["vectorizers"] = [spec.model_dump(mode="json")]
@@ -531,7 +540,7 @@ def test_encoder_screening_end_to_end(tmp_path: Path) -> None:
 
 def test_encoder_revision_and_versions_change_checkpoint_key(tmp_path: Path) -> None:
     """Revize i knihovny encoderu mění obnovu také v prostředí bez torch."""
-    inputs = _inputs(tmp_path, families=("logreg",))
+    inputs = _inputs(tmp_path, grid=CLASSICAL_GRID | {"families": ("logreg",)})
     config = json.loads(inputs.config.read_text(encoding="utf-8"))
     config["vectorizers"] = [SPEC.model_dump(mode="json")]
     inputs.config.write_text(json.dumps(config), encoding="utf-8")
@@ -559,8 +568,7 @@ def test_fasttext_screening_end_to_end(tmp_path: Path) -> None:
     """Tokeny projdou skutečným screeningem s provenance a úklidem checkpointu."""
     inputs = _inputs(
         tmp_path,
-        families=("fasttext",),
-        vectorizers=[{"name": "word-tokens"}],
+        grid={"families": ("fasttext",), "vectorizers": [{"name": "word-tokens"}]},
         visits=VISITS_PER_PATIENT,
     )
     out = tmp_path / "out"
