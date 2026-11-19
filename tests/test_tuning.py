@@ -13,6 +13,7 @@ from pydantic import ValidationError
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.tuning import (
+    MaxF1,
     ParamValue,
     SearchSpace,
     ValidationScores,
@@ -42,7 +43,7 @@ def test_max_f1_matches_manual_thresholds(
     labels: list[bool], scores: list[float], expected: float
 ) -> None:
     """Ruční maxima 6/7 a 2/3 nesmějí rozdělit shodné skóre na dva prahy."""
-    assert max_f1(labels, scores) == pytest.approx(expected)
+    assert max_f1(labels, scores).value == pytest.approx(expected)
 
 
 @given(st.lists(st.tuples(st.booleans(), st.integers(-5, 5)), min_size=1, max_size=30))
@@ -68,7 +69,17 @@ def test_max_f1_matches_brute_force(rows: list[tuple[bool, int]]) -> None:
         candidates.append(
             2 * true_positive / (2 * true_positive + false_positive + false_negative)
         )
-    assert max_f1(labels, scores) == pytest.approx(max(candidates))
+    result = max_f1(labels, scores)
+    assert result.value == pytest.approx(max(candidates))
+    optimal = [
+        t
+        for t, value in zip([float("inf"), *scores], candidates, strict=True)
+        if value == max(candidates)
+    ]
+    assert result.threshold == max(optimal)
+    assert [result.predicts(score) for score in scores] == [
+        score >= result.threshold for score in scores
+    ]
 
 
 @pytest.mark.parametrize(
@@ -149,6 +160,7 @@ def test_repository_tuning_config_and_loader(tmp_path: Path) -> None:
         ({"c": 2.0, "n": 2, "flag": True}, False),
         ({"c": 0.5, "n": True, "flag": True}, False),
         ({"c": True, "n": 2, "flag": True}, False),
+        ({"c": 1, "n": 2, "flag": True}, False),
         ({"c": float("nan"), "n": 2, "flag": True}, False),
         ({"c": 0.5, "n": 2, "flag": 1}, False),
         ({"c": 0.5, "n": 4, "flag": True}, False),
@@ -182,3 +194,18 @@ def test_tuning_config_refuses_single_inner_fold(tmp_path: Path) -> None:
     )
     with pytest.raises(InvalidInputError, match="inner_folds"):
         load_tuning_config(invalid)
+
+
+@pytest.mark.parametrize(
+    ("labels", "scores", "expected"),
+    [
+        ([True, False, True, False], [0.9, 0.8, 0.7, 0.1], MaxF1(0.8, 0.7)),
+        ([True, False, True], [0.5, 0.5, 0.2], MaxF1(0.8, 0.2)),
+        ([True, False, False, True], [0.9, 0.8, 0.7, 0.6], MaxF1(2 / 3, 0.9)),
+    ],
+)
+def test_max_f1_threshold_oracle(
+    labels: list[bool], scores: list[float], expected: MaxF1
+) -> None:
+    """Ruční prahy včetně shody optimálních F1."""
+    assert max_f1(labels, scores) == expected

@@ -12,6 +12,8 @@ from hypothesis import given
 from hypothesis import strategies as st
 
 from mediparse.application.model_tuning import ModelTuning
+from mediparse.application.patient_cv import patient_holdouts
+from mediparse.application.tuning_trial import run_trial
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.split import SharedSplit, Split, SplitConfig
@@ -244,3 +246,22 @@ def test_last_fold_always_completes_trial() -> None:
     report = _run(search, _Scorer(), _PairedParts())
     assert (report.outcome.completed_trials, report.outcome.pruned_trials) == (3, 0)
     assert all(step == 0 for _, _, step in search.reported)
+
+
+@pytest.mark.parametrize("pruned", [False, True])
+def test_shared_trial_returns_fold_metrics_and_nonconvergence(*, pruned: bool) -> None:
+    """Dva foldy dávají 5/6; nekonvergence zůstává i po prořezání."""
+    search = _Search()
+    scorer = _Scorer()
+    folds = patient_holdouts(notes(visits=10), 2, 7, _PairedParts())
+    trial = Trial(1 if pruned else 0, SVM_PARAMS)
+    result = run_trial(search, scorer, trial, folds)
+    assert result.pruned is pruned
+    assert not result.converged
+    if pruned:
+        assert search.pruned == [1]
+    else:
+        assert result.value == pytest.approx(5 / 6)
+        assert len(result.f1) == 2
+        assert all(list(metrics) == list(Diagnosis) for metrics in result.f1)
+        assert search.completed[0][1] == result.value
