@@ -32,9 +32,9 @@ from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_corpus import (
     ModelCorpusPaths,
+    checkpoint_key,
     model_corpus,
 )
-from mediparse.infrastructure.code_fingerprint import code_key
 from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.hf_encoder import (
@@ -200,7 +200,9 @@ def run(
         scorer=SklearnScorer(),
         progress=ParquetScreeningCheckpoint(
             directory=paths.checkpoint,
-            key=checkpoint_key(paths, corpus.dataset_sha256, packages),
+            key=checkpoint_key(
+                paths.config, paths.corpus, corpus.dataset_sha256, packages
+            ),
             results=paths.out,
             predictions=paths.predictions,
         ),
@@ -232,23 +234,3 @@ def run(
         paths.out,
     )
     return ExitCode.OK
-
-
-def checkpoint_key(
-    paths: ScreeningPaths,
-    dataset_sha256: str,
-    packages: Mapping[str, str],
-) -> str:
-    """Otiskne vstupy, kód a verze knihoven pro obnovu screeningu.
-
-    Returns:
-        Klíč rozpracovaného běhu.
-    """
-    return code_key([
-        ("config", file_sha256(paths.config).encode()),
-        ("cohort", dataset_sha256.encode()),
-        ("split", file_sha256(paths.corpus.split).encode()),
-        ("candidates", file_sha256(paths.corpus.candidates).encode()),
-        ("lexicon", file_sha256(paths.corpus.lexicon).encode()),
-        *((f"packages/{name}", value.encode()) for name, value in packages.items()),
-    ])

@@ -6,11 +6,13 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Protocol
 
 from mediparse.application.patient_cv import patient_holdouts
+from mediparse.application.ports.experiment import ParameterSearch, TrialScorer
+from mediparse.application.tuning_trial import run_trial
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.tuning import TuningOutcome, TuningReport, macro_max_f1
+from mediparse.domain.tuning import TuningOutcome, TuningReport
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Sequence
+    from collections.abc import Mapping
 
     from mediparse.application.ports.experiment import (
         InputTable,
@@ -18,45 +20,25 @@ if TYPE_CHECKING:
         SplitSource,
     )
     from mediparse.domain.matrix import MatrixRow
-    from mediparse.domain.split import Holdout
     from mediparse.domain.tuning import (
         ParamValue,
-        Trial,
         TuningConfig,
-        ValidationScores,
     )
 
 
-class ParameterSearch(Protocol):
-    """Návrhy parametrů a strategie prořezávání bez vlastnictví rozpočtu."""
-
-    def ask(self) -> Trial:
-        """Navrhne parametry nového pokusu."""
-
-    def should_prune(self, trial: Trial, value: float, step: int) -> bool:
-        """Zapíše průběžný průměr a rozhodne o prořezání."""
-
-    def complete(self, trial: Trial, value: float) -> None:
-        """Uzavře dokončený pokus s cílovou hodnotou."""
-
-    def prune(self, trial: Trial) -> None:
-        """Uzavře prořezaný pokus započítaný do rozpočtu."""
+class TuningSearch(ParameterSearch, Protocol):
+    """Hledání jednoho modelu s výběrem nejlepšího pokusu."""
 
     def best(self) -> tuple[Mapping[str, ParamValue], float]:
         """Vrátí parametry a cíl nejlepšího dokončeného pokusu."""
 
 
-class ValidationScorer(Protocol):
+class ValidationScorer(TrialScorer, Protocol):
     """Rodina modelu poskytuje pouze skóre validačních zpráv."""
 
     @property
     def parameters(self) -> frozenset[str]:
         """Jména všech parametrů rodiny včetně pevných voleb."""
-
-    def score(
-        self, params: Mapping[str, ParamValue], fold: Holdout
-    ) -> ValidationScores:
-        """Fitne rodinu na tréninku a vrátí skóre pěti diagnóz na validaci."""
 
 
 @dataclass(frozen=True)
@@ -66,7 +48,7 @@ class ModelTuning:
     table: InputTable
     split: SplitSource
     partitioner: PatientPartitioner
-    search: ParameterSearch
+    search: TuningSearch
     scorer: ValidationScorer
 
     def run(self, config: TuningConfig, row: MatrixRow) -> TuningReport:
@@ -91,10 +73,10 @@ class ModelTuning:
         )
         completed, pruned, nonconverged = 0, 0, 0
         for _ in range(row.tuning_trials):
-            was_pruned, converged = self._run_trial(self.search.ask(), folds)
-            pruned += was_pruned
-            completed += not was_pruned
-            nonconverged += not converged
+            result = run_trial(self.search, self.scorer, self.search.ask(), folds)
+            pruned += result.pruned
+            completed += not result.pruned
+            nonconverged += not result.converged
         best, value = self.search.best()
         return TuningReport(
             TuningOutcome(best, value, completed, pruned, nonconverged),
@@ -103,18 +85,3 @@ class ModelTuning:
             split_config=shared.config,
             split_sha256=shared.split.sha256(),
         )
-
-    def _run_trial(self, trial: Trial, folds: Sequence[Holdout]) -> tuple[bool, bool]:
-        values: list[float] = []
-        converged = True
-        for step, fold in enumerate(folds):
-            scores = self.scorer.score(trial.params, fold)
-            values.append(macro_max_f1(fold.test, scores))
-            converged &= scores.converged
-            if step + 1 < len(folds) and self.search.should_prune(
-                trial, sum(values) / len(values), step
-            ):
-                self.search.prune(trial)
-                return True, converged
-        self.search.complete(trial, sum(values) / len(values))
-        return False, converged

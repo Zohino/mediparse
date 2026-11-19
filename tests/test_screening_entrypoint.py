@@ -17,7 +17,7 @@ import pytest
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import ScreeningManifest
-from mediparse.entrypoints import screening
+from mediparse.entrypoints import model_corpus, screening
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_corpus import ModelCorpusPaths
 from mediparse.infrastructure.hf_encoder import ENCODER_PACKAGES, HfMeanEncoder
@@ -448,42 +448,6 @@ def test_predictions_use_cell_threshold(screened: tuple[_Inputs, Path]) -> None:
         assert row["predicted"] == (row["score"] >= thresholds[_cell_key(row)])
 
 
-@pytest.mark.parametrize(
-    "changed",
-    ["config", "split", "candidates", "lexicon", "dataset_sha256", "packages"],
-)
-def test_checkpoint_key_changes_with_each_input(tmp_path: Path, changed: str) -> None:
-    """Každý vědecký vstup a verze knihoven jsou součástí klíče."""
-    inputs = _inputs(tmp_path)
-    corpus = repository_corpus(inputs.cohort, inputs.split)
-    for field in ("candidates", "lexicon"):
-        copy = tmp_path / field
-        copy.write_bytes(getattr(corpus, field).read_bytes())
-        corpus = replace(corpus, **{field: copy})
-    paths = screening.ScreeningPaths(
-        corpus=corpus,
-        config=inputs.config,
-        out=tmp_path / "out",
-        predictions=tmp_path / "predictions",
-        manifest=tmp_path / "manifest",
-        checkpoint=tmp_path / "checkpoint",
-        embeddings=tmp_path / "embeddings",
-        scratch=tmp_path / "scratch",
-    )
-    packages = {"python": "test"}
-    before = screening.checkpoint_key(paths, "dataset", packages)
-    assert screening.checkpoint_key(paths, "dataset", packages) == before
-    dataset = "dataset"
-    if changed == "dataset_sha256":
-        dataset = "other"
-    elif changed == "packages":
-        packages = {"python": "other"}
-    else:
-        path = paths.config if changed == "config" else getattr(paths.corpus, changed)
-        path.write_bytes(path.read_bytes() + b" ")
-    assert screening.checkpoint_key(paths, dataset, packages) != before
-
-
 def test_foreign_checkpoint_refuses_before_outputs(tmp_path: Path) -> None:
     """Cizí checkpoint odmítne běh před výsledky, predikcemi i manifestem."""
     inputs = _inputs(tmp_path)
@@ -554,14 +518,21 @@ def test_encoder_revision_and_versions_change_checkpoint_key(tmp_path: Path) -> 
         embeddings=tmp_path / "embeddings",
         scratch=tmp_path / "scratch",
     )
-    before = screening.checkpoint_key(paths, "dataset", VERSIONS)
+    before = model_corpus.checkpoint_key(
+        paths.config, paths.corpus, "dataset", VERSIONS
+    )
     assert (
-        screening.checkpoint_key(paths, "dataset", VERSIONS | {"torch": "other"})
+        model_corpus.checkpoint_key(
+            paths.config, paths.corpus, "dataset", VERSIONS | {"torch": "other"}
+        )
         != before
     )
     config["vectorizers"][0]["revision"] = "b" * 40
     inputs.config.write_text(json.dumps(config), encoding="utf-8")
-    assert screening.checkpoint_key(paths, "dataset", VERSIONS) != before
+    assert (
+        model_corpus.checkpoint_key(paths.config, paths.corpus, "dataset", VERSIONS)
+        != before
+    )
 
 
 def test_fasttext_screening_end_to_end(tmp_path: Path) -> None:

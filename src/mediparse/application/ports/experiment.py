@@ -5,13 +5,14 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Protocol
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    from collections.abc import Mapping, Sequence
 
     from mediparse.domain.evaluation import BinaryMetrics, Classification, Prediction
     from mediparse.domain.identity import SubjectId
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.seed import Seed
-    from mediparse.domain.split import SharedSplit
+    from mediparse.domain.split import Holdout, SharedSplit
+    from mediparse.domain.tuning import ParamValue, Trial, ValidationScores
 
 
 class InputTable(Protocol):
@@ -86,3 +87,28 @@ class Clock(Protocol):
 
     def now(self) -> float:
         """Vrátí čas v sekundách s libovolným pevným počátkem."""
+
+
+class ParameterSearch(Protocol):
+    """Návrhy parametrů a strategie prořezávání bez vlastnictví rozpočtu."""
+
+    def ask(self) -> Trial:
+        """Navrhne parametry nového pokusu."""
+
+    def should_prune(self, trial: Trial, value: float, step: int) -> bool:
+        """Zapíše průběžný průměr a rozhodne o prořezání."""
+
+    def complete(self, trial: Trial, value: float) -> None:
+        """Uzavře dokončený pokus s cílovou hodnotou."""
+
+    def prune(self, trial: Trial) -> None:
+        """Uzavře prořezaný pokus započítaný do rozpočtu."""
+
+
+class TrialScorer(Protocol):
+    """Skóre validačních zpráv jednoho pokusu."""
+
+    def score(
+        self, params: Mapping[str, ParamValue], fold: Holdout
+    ) -> ValidationScores:
+        """Fitne model na tréninku a vrátí skóre na validaci."""

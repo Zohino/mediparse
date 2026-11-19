@@ -36,7 +36,8 @@ class SklearnLinearSvmScorer:
     @property
     def parameters(self) -> frozenset[str]:
         """Jména podporovaných parametrů včetně pevných voleb vektorizéru."""
-        return frozenset(SvmParameters.model_fields)
+        # Vnořená CV ladí jen horní mez n-gramů; dolní zůstává pevně 1.
+        return frozenset(SvmParameters.model_fields) - {"ngram_min"}
 
     def score(
         self, params: Mapping[str, ParamValue], fold: Holdout

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections import Counter
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from operator import itemgetter
 from typing import TYPE_CHECKING
 
@@ -12,6 +12,8 @@ from hypothesis import given
 from hypothesis import strategies as st
 
 from mediparse.application.model_tuning import ModelTuning
+from mediparse.application.patient_cv import patient_holdouts
+from mediparse.application.tuning_trial import run_trial
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.split import SharedSplit, Split, SplitConfig
@@ -244,3 +246,42 @@ def test_last_fold_always_completes_trial() -> None:
     report = _run(search, _Scorer(), _PairedParts())
     assert (report.outcome.completed_trials, report.outcome.pruned_trials) == (3, 0)
     assert all(step == 0 for _, _, step in search.reported)
+
+
+def test_completed_trial_returns_fold_metrics_and_nonconvergence() -> None:
+    """Dva dokončené foldy dávají cíl 5/6 a zachovají nekonvergenci."""
+    search = _Search()
+    folds = patient_holdouts(notes(visits=10), 2, 7, _PairedParts())
+    result = run_trial(search, _Scorer(), Trial(0, SVM_PARAMS), folds)
+    assert not result.pruned
+    assert not result.converged
+    assert result.value == pytest.approx(5 / 6)
+    assert len(result.f1) == 2
+    assert all(list(metrics) == list(Diagnosis) for metrics in result.f1)
+    assert search.completed[0][1] == result.value
+
+
+def test_pruned_trial_returns_only_evaluated_fold() -> None:
+    """Prořezaný pokus vrátí jen první fold s cílem 1 a nekonvergencí."""
+    search = _Search()
+    folds = patient_holdouts(notes(visits=10), 2, 7, _PairedParts())
+    result = run_trial(search, _Scorer(), Trial(1, SVM_PARAMS), folds)
+    assert result.pruned
+    assert not result.converged
+    assert len(result.f1) == 1
+    assert result.value == pytest.approx(1.0)
+    assert search.pruned == [1]
+
+
+def test_pruned_nonconverged_trial_counts_in_model_outcome() -> None:
+    """Nekonvergence prořezaného pokusu se započítá stejně jako dokončená."""
+
+    class Nonconverged(_Scorer):
+        def score(
+            self, params: Mapping[str, ParamValue], fold: Holdout
+        ) -> ValidationScores:
+            return replace(super().score(params, fold), converged=False)
+
+    report = _run(_Search(), Nonconverged(), _PairedParts())
+    assert report.outcome.pruned_trials == 1
+    assert report.outcome.nonconverged_trials == 3

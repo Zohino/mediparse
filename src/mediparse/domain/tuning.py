@@ -129,12 +129,7 @@ def _contains(
         )
     if isinstance(param, IntParam):
         return type(value) is int and param.low <= value <= param.high
-    return (
-        isinstance(value, (int, float))
-        and not isinstance(value, bool)
-        and isfinite(value)
-        and param.low <= value <= param.high
-    )
+    return type(value) is float and isfinite(value) and param.low <= value <= param.high
 
 
 class TuningConfig(BaseModel):
@@ -166,11 +161,27 @@ class ValidationScores:
     converged: bool
 
 
-def max_f1(labels: Sequence[bool], scores: Sequence[float]) -> float:
+@dataclass(frozen=True)
+class MaxF1:
+    """Maximum F1 a nejvyšší práh, který ho dosahuje."""
+
+    value: float
+    threshold: float
+
+    def predicts(self, score: float) -> bool:
+        """Určí pozitivní predikci podle optimálního prahu.
+
+        Returns:
+            Zda skóre dosahuje prahu.
+        """
+        return score >= self.threshold
+
+
+def max_f1(labels: Sequence[bool], scores: Sequence[float]) -> MaxF1:
     """Najde maximum F1 přes dosažitelné prahy, stejná skóre nedělí.
 
     Returns:
-        Nejvyšší F1 z definice 2 TP / (počet predikovaných + počet pozitivních).
+        Nejvyšší F1 a nejvyšší práh, který ho dosahuje.
 
     Raises:
         InvalidInputError: Chybí pozitivní label, délky nesedí nebo skóre není konečné.
@@ -182,20 +193,24 @@ def max_f1(labels: Sequence[bool], scores: Sequence[float]) -> float:
     if not positives:
         msg = "Max-F1 vyžaduje aspoň jeden pozitivní label."
         raise InvalidInputError(msg)
-    true_positive, best = 0, 0.0
+    true_positive, best = 0, MaxF1(0.0, max(scores))
     ordered = sorted(zip(scores, labels, strict=True), reverse=True)
     for predicted, (score, label) in enumerate(ordered, start=1):
         true_positive += label
         if predicted == len(ordered) or score != ordered[predicted][0]:
-            best = max(best, 2 * true_positive / (predicted + positives))
+            value = 2 * true_positive / (predicted + positives)
+            if value > best.value:
+                best = MaxF1(value, score)
     return best
 
 
-def macro_max_f1(notes: Sequence[InputNote], scores: ValidationScores) -> float:
-    """Spočte stejný cíl pro každou rodinu jako průměr pěti max-F1.
+def fold_max_f1(
+    notes: Sequence[InputNote], scores: ValidationScores
+) -> dict[Diagnosis, MaxF1]:
+    """Spočte maximum F1 a práh každé diagnózy validačního foldu.
 
     Returns:
-        Macro-F1 validačního foldu, nikoli odhad výkonu finálního modelu.
+        Pět maxim s prahy v pořadí diagnóz.
 
     Raises:
         InvalidInputError: Scorer nedodal přesně pět diagnóz nebo neplatná skóre.
@@ -205,10 +220,21 @@ def macro_max_f1(notes: Sequence[InputNote], scores: ValidationScores) -> float:
         raise InvalidInputError(msg)
     # Volba prahu na validaci je záměrně optimistická a společná všem ramenům;
     # slouží k řazení konfigurací, nikoli k reportování výkonu.
-    return sum(
-        max_f1([note.has_label(diagnosis) for note in notes], scores.scores[diagnosis])
+    return {
+        diagnosis: max_f1(
+            [note.has_label(diagnosis) for note in notes], scores.scores[diagnosis]
+        )
         for diagnosis in Diagnosis
-    ) / len(Diagnosis)
+    }
+
+
+def macro_max_f1(f1: Mapping[Diagnosis, MaxF1]) -> float:
+    """Spočte průměr pěti optimálních F1 na validaci.
+
+    Returns:
+        Společný cíl pro řazení konfigurací.
+    """
+    return sum(item.value for item in f1.values()) / len(Diagnosis)
 
 
 @dataclass(frozen=True)
