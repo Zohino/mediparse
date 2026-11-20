@@ -81,10 +81,6 @@ Před prvním reálným renderem EDA po této změně je nutné převést tabulk
 
 ## Přepočet po změně kódu
 
-`synthetic_mimic` nese v `params.manifest_sha256` otisk obsahu
-`results/mimic/manifest.json`, takže nová validace přeplánuje smoketest
-u výstupů s použitelnými metadaty.
-
 Každé pravidlo s Python skriptem má v `params.code` SHA-256 kódu dosažitelného
 importy tohoto skriptu uvnitř balíčku `mediparse`, včetně transitivních importů
 a importů pod `TYPE_CHECKING`. Otisk zahrnuje také samotný skript a všechna
@@ -95,6 +91,10 @@ pravidla a navazujících výstupů.
 Změna nesouvisejícího Python modulu jej nespustí. Python se otiskuje přes AST:
 komentáře, prázdné řádky a formátování otisk nemění, změna kódu nebo docstringu ano.
 Data balíčku se otiskují po bajtech.
+
+Stejně tak `synthetic_mimic` nese v `params.manifest_sha256` otisk obsahu
+`results/mimic/manifest.json`, takže nová validace přeplánuje smoketest
+u výstupů s použitelnými metadaty.
 
 `inventory_mimic_table` má v `params.code` otisk bajtů `inventory.sh`, takže změna
 validace obnoví inventáře. `download.sh` se nesleduje: změna stahovacího skriptu
