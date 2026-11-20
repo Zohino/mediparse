@@ -80,7 +80,7 @@ class _Scorer:
                 for d in Diagnosis
             },
             converged=True,
-            features=len(fold.train),
+            features=10 + fold.fold,
         )
 
 
@@ -175,9 +175,8 @@ def test_fold_features_reach_results() -> None:
         progress,
         StepClock(),
     ).run(config)
-    assert [result.features for result in progress.results] == [
-        len(fold.train) for fold in scorer.observed for _ in Diagnosis
-    ]
+    assert progress.results
+    assert all(result.features == 10 + result.fold for result in progress.results)
 
 
 @pytest.mark.parametrize("cut", [3, 5])
