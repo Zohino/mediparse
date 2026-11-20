@@ -324,8 +324,10 @@ def test_checkpoint_round_trip_record_and_fold_results(tmp_path: Path) -> None:
     assert progress.completed() == (record,)
     progress.finish()
     assert not progress.directory.exists()
+    table = read_table(progress.results, TRIALS_SCHEMA)
+    assert table["features"].to_pylist() == [17] * table.num_rows
     assert (
-        read_table(progress.results, TRIALS_SCHEMA)["params"].to_pylist()
+        table["params"].to_pylist()
         == ['{"branch": "word/logreg", "logreg.C": 1.0, "word.min_df": 1}'] * 2
     )
 
