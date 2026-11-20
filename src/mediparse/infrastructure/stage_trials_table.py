@@ -34,6 +34,7 @@ TRIALS_SCHEMA: Final = pa.schema([
         ("max_f1", pa.float64()),
         ("threshold", pa.float64()),
         ("converged", pa.bool_()),
+        ("features", pa.int64()),
     )
 ])
 TRIAL_PREDICTIONS_SCHEMA: Final = pa.schema([
@@ -125,6 +126,7 @@ class ParquetStageCheckpoint:
                     "max_f1": result.max_f1.value,
                     "threshold": result.max_f1.threshold,
                     "converged": result.converged,
+                    "features": result.features,
                 }
             )
             predictions.extend(

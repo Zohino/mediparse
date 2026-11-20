@@ -89,6 +89,7 @@ class _Progress:
     """Paměťový checkpoint pro ověření protokolu."""
 
     records: list[StageTrialRecord] = field(default_factory=list)
+    results: list[StageFoldResult] = field(default_factory=list)
     finished: bool = False
 
     def completed(self) -> tuple[StageTrialRecord, ...]:
@@ -97,7 +98,7 @@ class _Progress:
     def write(
         self, record: StageTrialRecord, results: Sequence[StageFoldResult]
     ) -> None:
-        del results
+        self.results.extend(results)
         self.records.append(record)
 
     def finish(self) -> None:
@@ -159,6 +160,24 @@ def test_defaults_and_development_sample(
         assert report.best.value == progress.records[report.best.number].value
         samples.append(sample)
     assert samples[0] == samples[1]
+
+
+def test_fold_features_reach_results() -> None:
+    """Počet příznaků každého foldu projde až do všech buněk diagnóz."""
+    config = stage_config()
+    scorer, progress = _Scorer(), _Progress()
+    StageTuning(
+        _Table(),
+        _SplitSource(),
+        StratifiedGroupFolds(),
+        OptunaStageSearch.create(config),
+        scorer,
+        progress,
+        StepClock(),
+    ).run(config)
+    assert [result.features for result in progress.results] == [
+        len(fold.train) for fold in scorer.observed for _ in Diagnosis
+    ]
 
 
 @pytest.mark.parametrize("cut", [3, 5])
@@ -299,6 +318,7 @@ def test_checkpoint_round_trip_record_and_fold_results(tmp_path: Path) -> None:
         labels=(True, False),
         scores=(0.9, 0.1),
         max_f1=MaxF1(1.0, 0.9),
+        features=17,
         converged=False,
     )
     progress.write(record, [replace(result, converged=True), replace(result, fold=1)])

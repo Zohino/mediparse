@@ -244,6 +244,7 @@ class StageFoldResult:
     scores: tuple[float, ...]
     max_f1: MaxF1
     converged: bool
+    features: int
 
     def __post_init__(self) -> None:
         """Ověří délky sloupců buňky.

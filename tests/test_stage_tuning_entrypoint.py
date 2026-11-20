@@ -86,6 +86,12 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
         "pydantic",
     }
     assert written.seconds == pytest.approx(6.0)
+    features = defaultdict(set)
+    for row in trials:
+        assert type(row["features"]) is int
+        assert row["features"] > 0
+        features[row["trial"], row["fold"]].add(row["features"])
+    assert all(len(counts) == 1 for counts in features.values())
     affected = {row["trial"] for row in trials if not row["converged"]}
     assert affected == {0}
     assert written.nonconverged_trials == len(affected)
