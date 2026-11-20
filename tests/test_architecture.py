@@ -258,7 +258,7 @@ def _rule_sections(rule: Path) -> list[tuple[str, str, str]]:
 
 
 def test_synthetic_mimic_fingerprints_manifest_content() -> None:
-    """Syntetika sleduje obsah manifestu bez připojení validace do DAG."""
+    """Syntetika nese v params cestu i otisk obsahu manifestu."""
     sections = _rule_sections(REPOSITORY / "workflow/rules/smoketest.smk")
     params = next(params for name, _, params in sections if name == "synthetic_mimic")
     assert re.search(r"^        manifest=MIMIC_MANIFEST,$", params, re.MULTILINE)
