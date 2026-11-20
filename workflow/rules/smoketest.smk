@@ -17,7 +17,9 @@ rule synthetic_mimic:
         corpus=SYNTHETIC,
         # Manifest vytváří validate_mimic nad daty MIMIC; jako input by byl uzlem
         # jeho DAG a přepočet by řídil mtime. Otisk obsahu přeplánuje smoketest
-        # po nové validaci.
+        # po nové validaci. Lambda odloží čtení na sestavení DAG se smoketestem;
+        # otisk při parsování by po selhané validaci (Snakemake výstup předem
+        # smaže) shodil každé volání snakemake.
         manifest=MIMIC_MANIFEST,
         manifest_sha256=lambda wildcards: file_fingerprint(MIMIC_MANIFEST),
     script:
