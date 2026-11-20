@@ -179,6 +179,12 @@ export_figure <- function(
   plot
 }
 
+metric_text <- function(x) {
+  out <- formatC(x, format = "f", digits = 3, decimal.mark = ",")
+  out[is.na(x)] <- "–"
+  out
+}
+
 percent_axis <- function(x) {
   paste0(format(100 * x, decimal.mark = ",", trim = TRUE), NBSP, "%")
 }
