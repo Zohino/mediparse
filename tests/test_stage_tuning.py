@@ -80,6 +80,7 @@ class _Scorer:
                 for d in Diagnosis
             },
             converged=True,
+            features=len(fold.train),
         )
 
 

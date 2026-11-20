@@ -159,6 +159,7 @@ class ValidationScores:
 
     scores: Mapping[Diagnosis, tuple[float, ...]]
     converged: bool
+    features: int
 
 
 @dataclass(frozen=True)

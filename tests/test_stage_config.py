@@ -56,6 +56,11 @@ def test_winner_tie_uses_earlier_trial() -> None:
             "Výchozí parametry reprezentace",
             id="max-df-int-default",
         ),
+        pytest.param(
+            {("lsa_max_features",): 2},
+            "Strop slovníku LSA",
+            id="lsa-cap-not-above-components",
+        ),
         pytest.param({("trials",): 4}, "Rozpočet", id="insufficient-budget"),
         pytest.param(
             {

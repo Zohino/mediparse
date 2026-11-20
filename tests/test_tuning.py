@@ -103,14 +103,14 @@ def test_macro_f1_averages_five_diagnoses() -> None:
     scores = dict.fromkeys(Diagnosis, (1.0, 0.0))
     scores[Diagnosis.CKD] = (0.5, 0.5)
     assert macro_max_f1(
-        fold_max_f1(notes, ValidationScores(scores, converged=True))
+        fold_max_f1(notes, ValidationScores(scores, converged=True, features=1))
     ) == pytest.approx(14 / 15)
 
 
 def test_fold_f1_refuses_missing_diagnosis() -> None:
     """Chybějící diagnóza nesmí potichu změnit jmenovatel macro metriky."""
     with pytest.raises(InvalidInputError, match="pět diagnóz"):
-        fold_max_f1((), ValidationScores({}, converged=True))
+        fold_max_f1((), ValidationScores({}, converged=True, features=1))
 
 
 @pytest.mark.parametrize(

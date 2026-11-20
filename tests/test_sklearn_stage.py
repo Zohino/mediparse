@@ -28,7 +28,9 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     import numpy as np
+    from scipy.sparse import csr_matrix
     from sklearn.base import BaseEstimator
+    from sklearn.decomposition import TruncatedSVD
 
     from mediparse.domain.screening import ClassifierFamily
     from mediparse.domain.split import Holdout
@@ -78,6 +80,65 @@ def test_lightgbm_receives_lsa_components(
     fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
     scorer.score(config.branches[0].default_params(), fold)
     assert observed == [3] * 5
+
+
+def test_lsa_receives_capped_vocabulary(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """LSA dostane pět sloupců a výsledek zachová jejich počet před redukcí."""
+    config = stage_config(lsa_components=3, lsa_max_features=5)
+    data = config.model_dump(mode="json")
+    data["families"][0] = {
+        "family": "lightgbm_lsa",
+        "space": {
+            "params": [{"kind": "categorical", "name": "n_estimators", "choices": [10]}]
+        },
+        "default": {"n_estimators": 10},
+    }
+    config = type(config).model_validate_json(json.dumps(data))
+    fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
+    vocabulary = (
+        tfidf_vectorizer(None, ngram_range=(1, 2))
+        .fit([n.text for n in fold.train])
+        .vocabulary_
+    )
+    assert len(vocabulary) > 5
+    observed = []
+    original = sklearn_stage.TruncatedSVD
+
+    def svd(**kwargs: int) -> TruncatedSVD:
+        model = original(**kwargs)
+        fit_transform = model.fit_transform
+
+        def recording_fit(features: csr_matrix) -> np.ndarray:
+            observed.append(features.shape[1])
+            return fit_transform(features)
+
+        monkeypatch.setattr(model, "fit_transform", recording_fit)
+        return model
+
+    monkeypatch.setattr(sklearn_stage, "TruncatedSVD", svd)
+    result = SklearnStageScorer(config, None, 3, 7, tmp_path).score(
+        config.branches[0].default_params(), fold
+    )
+    assert observed == [5]
+    assert result.features == 5
+
+
+def test_family_without_lsa_keeps_full_vocabulary(tmp_path: Path) -> None:
+    """Strop LSA nemění slovník logistické regrese."""
+    config = stage_config(lsa_max_features=5)
+    fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
+    vocabulary = (
+        tfidf_vectorizer(None, ngram_range=(1, 2))
+        .fit([n.text for n in fold.train])
+        .vocabulary_
+    )
+    assert len(vocabulary) > 5
+    result = SklearnStageScorer(config, None, 2, 7, tmp_path).score(
+        config.branches[0].default_params(), fold
+    )
+    assert result.features == len(vocabulary)
 
 
 def _clinical_fold() -> Holdout:
