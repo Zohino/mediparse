@@ -666,6 +666,7 @@ def test_model_file_loads_fixed_threshold_archive_without_training_metadata(
         "extra_step",
         "not_estimator",
         "unfitted",
+        "nested",
     ],
 )
 def test_model_file_of_other_shape_is_invalid_input(tmp_path: Path, shape: str) -> None:
@@ -686,11 +687,16 @@ def test_model_file_of_other_shape_is_invalid_input(tmp_path: Path, shape: str) 
     pipeline = Pipeline(steps)
     if shape != "unfitted":
         pipeline.fit(texts, labels)
+    estimator = pipeline if shape == "unfrozen" else FrozenEstimator(pipeline)
+    if shape == "nested":
+        estimator = FixedThresholdClassifier(
+            pipeline, threshold=0.0, response_method="decision_function"
+        )
     model = (
         pipeline
         if shape == "bare"
         else FixedThresholdClassifier(
-            pipeline if shape == "unfrozen" else FrozenEstimator(pipeline),
+            estimator,
             threshold=0.0,
             response_method="decision_function",
         )
