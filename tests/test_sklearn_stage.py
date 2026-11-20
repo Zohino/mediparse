@@ -34,6 +34,7 @@ if TYPE_CHECKING:
 
     from mediparse.domain.screening import ClassifierFamily
     from mediparse.domain.split import Holdout
+    from mediparse.domain.stage_tuning import StageTuningConfig
 
 
 def test_logreg_parameters_change_scores(tmp_path: Path) -> None:
@@ -47,11 +48,8 @@ def test_logreg_parameters_change_scores(tmp_path: Path) -> None:
     assert low.scores[Diagnosis.CKD] != high.scores[Diagnosis.CKD]
 
 
-def test_lightgbm_receives_lsa_components(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """Estimator LightGBM vidí právě tři komponenty místo řídkého TF-IDF."""
-    config = stage_config(lsa_components=3)
+def _lsa_config(**changes: object) -> StageTuningConfig:
+    config = stage_config(**changes)
     data = config.model_dump(mode="json")
     data["families"][0] = {
         "family": "lightgbm_lsa",
@@ -60,7 +58,14 @@ def test_lightgbm_receives_lsa_components(
         },
         "default": {"n_estimators": 10},
     }
-    config = type(config).model_validate_json(json.dumps(data))
+    return type(config).model_validate_json(json.dumps(data))
+
+
+def test_lightgbm_receives_lsa_components(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Estimator LightGBM vidí právě tři komponenty místo řídkého TF-IDF."""
+    config = _lsa_config(lsa_components=3)
     observed = []
     original = sklearn_stage.classifier_estimator
 
@@ -82,20 +87,14 @@ def test_lightgbm_receives_lsa_components(
     assert observed == [3] * 5
 
 
-def test_lsa_receives_capped_vocabulary(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+@pytest.mark.parametrize("lsa", [True, False])
+def test_vocabulary_cap_applies_only_to_lsa(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, lsa: bool
 ) -> None:
-    """LSA dostane pět sloupců a výsledek zachová jejich počet před redukcí."""
-    config = stage_config(lsa_components=3, lsa_max_features=5)
-    data = config.model_dump(mode="json")
-    data["families"][0] = {
-        "family": "lightgbm_lsa",
-        "space": {
-            "params": [{"kind": "categorical", "name": "n_estimators", "choices": [10]}]
-        },
-        "default": {"n_estimators": 10},
-    }
-    config = type(config).model_validate_json(json.dumps(data))
+    """Strop omezí vstup LSA na pět sloupců, logistická regrese vidí celé V."""
+    config = (_lsa_config if lsa else stage_config)(
+        lsa_components=3, lsa_max_features=5
+    )
     fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
     vocabulary = (
         tfidf_vectorizer(None, ngram_range=(1, 2))
@@ -121,24 +120,8 @@ def test_lsa_receives_capped_vocabulary(
     result = SklearnStageScorer(config, None, 7, tmp_path).score(
         config.branches[0].default_params(), fold
     )
-    assert observed == [5]
-    assert result.features == 5
-
-
-def test_family_without_lsa_keeps_full_vocabulary(tmp_path: Path) -> None:
-    """Strop LSA nemění slovník logistické regrese."""
-    config = stage_config(lsa_max_features=5)
-    fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
-    vocabulary = (
-        tfidf_vectorizer(None, ngram_range=(1, 2))
-        .fit([n.text for n in fold.train])
-        .vocabulary_
-    )
-    assert len(vocabulary) > 5
-    result = SklearnStageScorer(config, None, 7, tmp_path).score(
-        config.branches[0].default_params(), fold
-    )
-    assert result.features == len(vocabulary)
+    assert observed == ([5] if lsa else [])
+    assert result.features == (5 if lsa else len(vocabulary))
 
 
 def _clinical_fold() -> Holdout:
