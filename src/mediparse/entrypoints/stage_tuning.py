@@ -141,7 +141,6 @@ def run(
         scorer=SklearnStageScorer(
             config,
             corpus.normalization,
-            config.lsa_components,
             config.seed,
             # Scratch používá jen fastText, který tento stupeň nepřijímá.
             paths.checkpoint,

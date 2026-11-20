@@ -40,7 +40,6 @@ class SklearnStageScorer:
 
     config: StageTuningConfig
     normalization: TextNormalization | None
-    lsa_components: int
     seed: Seed
     scratch: Path
 
@@ -82,7 +81,7 @@ class SklearnStageScorer:
         features = train.shape[1]
         if lsa:
             reducer = TruncatedSVD(
-                n_components=self.lsa_components, random_state=self.seed
+                n_components=self.config.lsa_components, random_state=self.seed
             )
             train = reducer.fit_transform(train)
             validation = reducer.transform(validation)
