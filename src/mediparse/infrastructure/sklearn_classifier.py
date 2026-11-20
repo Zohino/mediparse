@@ -147,18 +147,10 @@ def _require_svm_shape(model: object, path: Path) -> None:
     # Predikce používá estimator_, parametr estimator nemusí odpovídat fitu.
     frozen = getattr(model, "estimator_", None)
     pipeline = frozen.estimator if isinstance(frozen, FrozenEstimator) else None
-    expected = (("tfidf", TfidfVectorizer), ("svm", LinearSVC))
-    if not (
-        isinstance(model, FixedThresholdClassifier)
-        and isinstance(pipeline, Pipeline)
-        and len(pipeline.steps) == len(expected)
-        and all(
-            name == expected_name and isinstance(step, expected_type)
-            for (name, step), (expected_name, expected_type) in zip(
-                pipeline.steps, expected, strict=False
-            )
-        )
-    ):
+    steps = pipeline.steps if isinstance(pipeline, Pipeline) else []
+    if not isinstance(model, FixedThresholdClassifier) or [
+        (name, type(step)) for name, step in steps
+    ] != [("tfidf", TfidfVectorizer), ("svm", LinearSVC)]:
         msg = f"Soubor modelu {path} nemá tvar {ESTIMATOR}."
         raise InvalidInputError(msg)
 
