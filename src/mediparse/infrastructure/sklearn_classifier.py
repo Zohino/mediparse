@@ -138,6 +138,31 @@ class TrainedSvm(SklearnClassifier):
 ESTIMATOR: Final = "sklearn TfidfVectorizer+LinearSVC+FixedThresholdClassifier"
 
 
+def _require_svm_shape(model: object, path: Path) -> None:
+    """Odmítne archiv mimo podporovanou rodinu klasického modelu.
+
+    Raises:
+        InvalidInputError: Model nemá podporovaný tvar.
+    """
+    # Predikce používá estimator_, parametr estimator nemusí odpovídat fitu.
+    frozen = getattr(model, "estimator_", None)
+    pipeline = frozen.estimator if isinstance(frozen, FrozenEstimator) else None
+    expected = (("tfidf", TfidfVectorizer), ("svm", LinearSVC))
+    if not (
+        isinstance(model, FixedThresholdClassifier)
+        and isinstance(pipeline, Pipeline)
+        and len(pipeline.steps) == len(expected)
+        and all(
+            name == expected_name and isinstance(step, expected_type)
+            for (name, step), (expected_name, expected_type) in zip(
+                pipeline.steps, expected, strict=False
+            )
+        )
+    ):
+        msg = f"Soubor modelu {path} nemá tvar {ESTIMATOR}."
+        raise InvalidInputError(msg)
+
+
 def tfidf_preprocessor(
     text: str, acronyms: Mapping[str, str], variants: Mapping[str, str]
 ) -> str:
@@ -299,7 +324,7 @@ class SkopsModelFile:
 
         Raises:
             InvalidInputError: Soubor modelu neexistuje, je poškozený nebo
-                obsahuje typ mimo důvěryhodné.
+                obsahuje typ mimo důvěryhodné nebo nemá podporovaný tvar.
         """
         try:
             model = sio.load(self.path, trusted=list(TRUSTED_FUNCTIONS))
@@ -309,6 +334,7 @@ class SkopsModelFile:
         except (zipfile.BadZipFile, UntrustedTypesFoundException) as error:
             msg = f"Soubor modelu {self.path} nelze bezpečně načíst: {error}"
             raise InvalidInputError(msg) from error
+        _require_svm_shape(model, self.path)
         return SklearnClassifier(model)
 
 

@@ -10,10 +10,12 @@ from unittest.mock import Mock
 
 import pytest
 import skops.io as sio
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.frozen import FrozenEstimator
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import FixedThresholdClassifier, TunedThresholdClassifierCV
 from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import MaxAbsScaler
 from sklearn.svm import LinearSVC
 
 from mediparse.domain.clinical_text import (
@@ -651,3 +653,52 @@ def test_model_file_loads_fixed_threshold_archive_without_training_metadata(
     assert [item.score for item in predictions] == pytest.approx(
         model.decision_function(texts)
     )
+
+
+@pytest.mark.parametrize(
+    "shape",
+    [
+        "bare",
+        "unfrozen",
+        "step_name",
+        "vectorizer",
+        "foreign",
+        "extra_step",
+        "not_estimator",
+        "unfitted",
+    ],
+)
+def test_model_file_of_other_shape_is_invalid_input(tmp_path: Path, shape: str) -> None:
+    """Cizí i zastaralý tvar archivu končí doménovou chybou při načtení."""
+    texts, labels, _ = _corpus()
+    steps = [
+        (
+            "vec" if shape == "step_name" else "tfidf",
+            CountVectorizer() if shape == "vectorizer" else TfidfVectorizer(),
+        ),
+        (
+            "svm",
+            LogisticRegression() if shape == "foreign" else LinearSVC(random_state=0),
+        ),
+    ]
+    if shape == "extra_step":
+        steps.insert(1, ("scale", MaxAbsScaler()))
+    pipeline = Pipeline(steps)
+    if shape != "unfitted":
+        pipeline.fit(texts, labels)
+    model = (
+        pipeline
+        if shape == "bare"
+        else FixedThresholdClassifier(
+            pipeline if shape == "unfrozen" else FrozenEstimator(pipeline),
+            threshold=0.0,
+            response_method="decision_function",
+        )
+    )
+    if shape not in {"bare", "unfitted"}:
+        model.fit(texts, labels)
+    path = tmp_path / f"{shape}.skops"
+    sio.dump({"kind": "constructed"} if shape == "not_estimator" else model, path)
+
+    with pytest.raises(InvalidInputError, match=rf"{shape}\.skops.*nemá tvar"):
+        SkopsModelFile(path).load()
