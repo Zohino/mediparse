@@ -40,7 +40,6 @@ class SklearnStageScorer:
 
     config: StageTuningConfig
     normalization: TextNormalization | None
-    lsa_components: int
     seed: Seed
     scratch: Path
 
@@ -67,17 +66,25 @@ class SklearnStageScorer:
         branch = self.config.branch(params)
         rep, family = branch.params_of(params)
         tfidf = TfidfParameters.model_validate(rep)
+        lsa = branch.family.family is ClassifierFamily.LIGHTGBM_LSA
+        # SVD alokuje husté matice úměrné šířce; strop drží paměť, jiné rodiny mají celý slovník.
         vectorizer = tfidf_from(
-            tfidf, branch.representation.analyzer, self.normalization
+            tfidf,
+            branch.representation.analyzer,
+            self.normalization,
+            max_features=self.config.lsa_max_features if lsa else None,
         )
         texts = [note.text for note in fold.train]
         ensure_tokens(vectorizer, texts)
         train = vectorizer.fit_transform(texts)
         validation = vectorizer.transform([note.text for note in fold.test])
-        if branch.family.family is ClassifierFamily.LIGHTGBM_LSA:
-            lsa = TruncatedSVD(n_components=self.lsa_components, random_state=self.seed)
-            train = lsa.fit_transform(train)
-            validation = lsa.transform(validation)
+        features = train.shape[1]
+        if lsa:
+            reducer = TruncatedSVD(
+                n_components=self.config.lsa_components, random_state=self.seed
+            )
+            train = reducer.fit_transform(train)
+            validation = reducer.transform(validation)
         scores = {}
         converged = True
         for diagnosis in Diagnosis:
@@ -95,4 +102,4 @@ class SklearnStageScorer:
             scores[diagnosis] = tuple(
                 float(v) for v in positive_scores(model, validation)
             )
-        return ValidationScores(scores, converged)
+        return ValidationScores(scores, converged, features)

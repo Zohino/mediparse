@@ -155,10 +155,16 @@ class Trial:
 
 @dataclass(frozen=True)
 class ValidationScores:
-    """Skóre v pořadí validačních zpráv pro všech pět diagnóz."""
+    """Skóre v pořadí validačních zpráv pro všech pět diagnóz.
+
+    Attributes:
+        features: Počet sloupců reprezentace předaných klasifikátoru,
+            u LSA počet sloupců vstupu SVD.
+    """
 
     scores: Mapping[Diagnosis, tuple[float, ...]]
     converged: bool
+    features: int
 
 
 @dataclass(frozen=True)

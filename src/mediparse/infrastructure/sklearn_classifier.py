@@ -63,6 +63,8 @@ def tfidf_from(
     params: TfidfParameters,
     analyzer: Literal["word", "char_wb"],
     normalization: TextNormalization | None,
+    *,
+    max_features: int | None = None,
 ) -> TfidfVectorizer:
     """Sestaví vektorizér ze společných typovaných parametrů.
 
@@ -76,6 +78,7 @@ def tfidf_from(
         min_df=params.min_df,
         max_df=params.max_df,
         sublinear_tf=params.sublinear_tf,
+        max_features=max_features,
     )
 
 
@@ -161,6 +164,7 @@ def tfidf_vectorizer(  # ruff: ignore[too-many-arguments]
     min_df: int = 1,
     max_df: float = 1.0,
     sublinear_tf: bool = True,
+    max_features: int | None = None,
 ) -> TfidfVectorizer:
     """Vectorizer pro trénink, screening i měření v sešitu EDA.
 
@@ -174,6 +178,7 @@ def tfidf_vectorizer(  # ruff: ignore[too-many-arguments]
         min_df: Nejmenší počet dokumentů s příznakem.
         max_df: Největší podíl dokumentů s příznakem.
         sublinear_tf: Zda použít logaritmickou frekvenci místo počtu výskytů.
+        max_features: Strop slovníku na nejčastější termy, None bez stropu.
 
     Returns:
         Nenatrénovaný vectorizer; bez normalizace je to ablace bez preprocessoru.
@@ -191,6 +196,7 @@ def tfidf_vectorizer(  # ruff: ignore[too-many-arguments]
     )
     return TfidfVectorizer(
         sublinear_tf=sublinear_tf,
+        max_features=max_features,
         min_df=min_df,
         max_df=max_df,
         preprocessor=preprocessor,

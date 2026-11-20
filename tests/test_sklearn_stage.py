@@ -28,16 +28,19 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     import numpy as np
+    from scipy.sparse import csr_matrix
     from sklearn.base import BaseEstimator
+    from sklearn.decomposition import TruncatedSVD
 
     from mediparse.domain.screening import ClassifierFamily
     from mediparse.domain.split import Holdout
+    from mediparse.domain.stage_tuning import StageTuningConfig
 
 
 def test_logreg_parameters_change_scores(tmp_path: Path) -> None:
     """Silnější a slabší regularizace dávají různá skóre na stejné syntetice."""
     config = stage_config()
-    scorer = SklearnStageScorer(config, None, 2, 7, tmp_path)
+    scorer = SklearnStageScorer(config, None, 7, tmp_path)
     fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
     params = config.branches[0].default_params()
     low = scorer.score(params | {"logreg.C": 1e-4}, fold)
@@ -45,11 +48,8 @@ def test_logreg_parameters_change_scores(tmp_path: Path) -> None:
     assert low.scores[Diagnosis.CKD] != high.scores[Diagnosis.CKD]
 
 
-def test_lightgbm_receives_lsa_components(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """Estimator LightGBM vidí právě tři komponenty místo řídkého TF-IDF."""
-    config = stage_config()
+def _lsa_config(**changes: object) -> StageTuningConfig:
+    config = stage_config(**changes)
     data = config.model_dump(mode="json")
     data["families"][0] = {
         "family": "lightgbm_lsa",
@@ -58,7 +58,14 @@ def test_lightgbm_receives_lsa_components(
         },
         "default": {"n_estimators": 10},
     }
-    config = type(config).model_validate_json(json.dumps(data))
+    return type(config).model_validate_json(json.dumps(data))
+
+
+def test_lightgbm_receives_lsa_components(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Estimator LightGBM vidí právě tři komponenty místo řídkého TF-IDF."""
+    config = _lsa_config(lsa_components=3)
     observed = []
     original = sklearn_stage.classifier_estimator
 
@@ -74,10 +81,47 @@ def test_lightgbm_receives_lsa_components(
         return model
 
     monkeypatch.setattr(sklearn_stage, "classifier_estimator", estimator)
-    scorer = SklearnStageScorer(config, None, 3, 7, tmp_path)
+    scorer = SklearnStageScorer(config, None, 7, tmp_path)
     fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
     scorer.score(config.branches[0].default_params(), fold)
     assert observed == [3] * 5
+
+
+@pytest.mark.parametrize("lsa", [True, False])
+def test_vocabulary_cap_applies_only_to_lsa(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, lsa: bool
+) -> None:
+    """Strop omezí vstup LSA na pět sloupců, logistická regrese vidí celé V."""
+    config = (_lsa_config if lsa else stage_config)(
+        lsa_components=3, lsa_max_features=5
+    )
+    fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
+    vocabulary = (
+        tfidf_vectorizer(None, ngram_range=(1, 2))
+        .fit([n.text for n in fold.train])
+        .vocabulary_
+    )
+    assert len(vocabulary) > 5
+    observed = []
+    original = sklearn_stage.TruncatedSVD
+
+    def svd(**kwargs: int) -> TruncatedSVD:
+        model = original(**kwargs)
+        fit_transform = model.fit_transform
+
+        def recording_fit(features: csr_matrix) -> np.ndarray:
+            observed.append(features.shape[1])
+            return fit_transform(features)
+
+        monkeypatch.setattr(model, "fit_transform", recording_fit)
+        return model
+
+    monkeypatch.setattr(sklearn_stage, "TruncatedSVD", svd)
+    result = SklearnStageScorer(config, None, 7, tmp_path).score(
+        config.branches[0].default_params(), fold
+    )
+    assert observed == ([5] if lsa else [])
+    assert result.features == (5 if lsa else len(vocabulary))
 
 
 def _clinical_fold() -> Holdout:
@@ -94,7 +138,9 @@ def _clinical_fold() -> Holdout:
 
 def test_nondefault_char_tfidf_matches_manual_pipeline(tmp_path: Path) -> None:
     """Nevýchozí znakové TF-IDF s normalizací dává ručně složená skóre."""
-    config = load_stage_config(REPOSITORY / "config/stage_classical.json")
+    config = load_stage_config(REPOSITORY / "config/stage_classical.json").model_copy(
+        update={"lsa_components": 3}
+    )
     branch = next(b for b in config.branches if b.name == "char_wb/logreg")
     normalization = load_text_normalization(
         REPOSITORY_DIAGNOSIS_CANDIDATES, variants=True
@@ -108,9 +154,7 @@ def test_nondefault_char_tfidf_matches_manual_pipeline(tmp_path: Path) -> None:
         "char_wb.sublinear_tf": False,
         "logreg.C": 0.25,
     }
-    scored = SklearnStageScorer(config, normalization, 3, 7, tmp_path).score(
-        params, fold
-    )
+    scored = SklearnStageScorer(config, normalization, 7, tmp_path).score(params, fold)
     vectorizer = tfidf_vectorizer(
         normalization,
         analyzer="char_wb",
@@ -133,7 +177,9 @@ def test_nondefault_char_tfidf_matches_manual_pipeline(tmp_path: Path) -> None:
 @pytest.mark.parametrize("family", ["lightgbm_lsa", "linear_svm", "nb_svm"])
 def test_seeded_scores_repeat(tmp_path: Path, family: str) -> None:
     """Stejný seed opakuje skóre; různé seedy rozliší alespoň větev s LSA."""
-    config = load_stage_config(REPOSITORY / "config/stage_classical.json")
+    config = load_stage_config(REPOSITORY / "config/stage_classical.json").model_copy(
+        update={"lsa_components": 3}
+    )
     branch = next(b for b in config.branches if b.name == f"char_wb/{family}")
     random = Random(117)
     vocabulary = [f"synthetic{i}" for i in range(100)]
@@ -142,13 +188,13 @@ def test_seeded_scores_repeat(tmp_path: Path, family: str) -> None:
         for n in notes(visits=10)
     )
     fold = patient_holdouts(corpus, 2, 7, StratifiedGroupFolds())[0]
-    first = SklearnStageScorer(config, None, 3, 7, tmp_path).score(
+    first = SklearnStageScorer(config, None, 7, tmp_path).score(
         branch.default_params(), fold
     )
-    repeated = SklearnStageScorer(config, None, 3, 7, tmp_path).score(
+    repeated = SklearnStageScorer(config, None, 7, tmp_path).score(
         branch.default_params(), fold
     )
-    other = SklearnStageScorer(config, None, 3, 29, tmp_path).score(
+    other = SklearnStageScorer(config, None, 29, tmp_path).score(
         branch.default_params(), fold
     )
     assert first.scores == repeated.scores
@@ -171,7 +217,7 @@ def test_convergence_accumulates_all_diagnoses(
 
     monkeypatch.setattr(sklearn_stage, "fit_converged", fit_once)
     config = stage_config()
-    scorer = SklearnStageScorer(config, None, 2, 7, tmp_path)
+    scorer = SklearnStageScorer(config, None, 7, tmp_path)
     scored = scorer.score(config.branches[0].default_params(), _clinical_fold())
     assert scored.converged is (failed_call is None)
     assert calls == 5
@@ -180,7 +226,7 @@ def test_convergence_accumulates_all_diagnoses(
 def test_min_df_above_training_documents_is_refused(tmp_path: Path) -> None:
     """Sklearn odmítne min_df větší než počet trénovacích dokumentů."""
     config = stage_config()
-    scorer = SklearnStageScorer(config, None, 2, 7, tmp_path)
+    scorer = SklearnStageScorer(config, None, 7, tmp_path)
     params = config.branches[0].default_params() | {"r1.min_df": 100000}
     with pytest.raises(InvalidInputError, match="min_df"):
         scorer.score(params, _clinical_fold())

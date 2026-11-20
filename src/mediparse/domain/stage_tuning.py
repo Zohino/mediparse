@@ -173,6 +173,7 @@ class StageTuningConfig(BaseModel):
     trials: PositiveInt
     random_startup_trials: Annotated[int, Field(ge=0)]
     lsa_components: PositiveInt
+    lsa_max_features: PositiveInt
     input: ModelInput
     representations: Annotated[tuple[TfidfRepresentation, ...], Field(min_length=1)]
     families: Annotated[tuple[FamilySpace, ...], Field(min_length=1)]
@@ -201,6 +202,9 @@ class StageTuningConfig(BaseModel):
 
     @model_validator(mode="after")
     def _valid_stage(self) -> Self:
+        if self.lsa_max_features <= self.lsa_components:
+            msg = "Strop slovníku LSA musí převyšovat počet komponent."
+            raise ValueError(msg)
         if len({r.name for r in self.representations}) != len(self.representations):
             msg = "Jména reprezentací musí být jedinečná."
             raise ValueError(msg)
@@ -240,6 +244,7 @@ class StageFoldResult:
     scores: tuple[float, ...]
     max_f1: MaxF1
     converged: bool
+    features: int
 
     def __post_init__(self) -> None:
         """Ověří délky sloupců buňky.

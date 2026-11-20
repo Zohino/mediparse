@@ -56,6 +56,7 @@ def stage_config(**changes: object) -> StageTuningConfig:
                 "trials": 6,
                 "random_startup_trials": 1,
                 "lsa_components": 2,
+                "lsa_max_features": 1000,
                 "input": model_input(),
                 "representations": representations,
                 "families": [

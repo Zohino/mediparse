@@ -72,4 +72,4 @@ class SklearnLinearSvmScorer:
             scores[diagnosis] = tuple(
                 float(value) for value in model.decision_function(validation)
             )
-        return ValidationScores(scores, converged)
+        return ValidationScores(scores, converged, len(vectorizer.vocabulary_))
