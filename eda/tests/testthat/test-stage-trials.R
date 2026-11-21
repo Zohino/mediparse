@@ -257,3 +257,18 @@ testthat::test_that("Nedefinované rozhodující φ patří do diskuse", {
   selection <- list(second = data.frame(trial = 1))
   testthat::expect_match(stage_ensemble_text(phi, selection), "diskuse")
 })
+
+testthat::test_that("Provenance formátuje počty a dobu běhu v minutách", {
+  manifest <- jsonlite::read_json(stage_fixture_paths()$manifest, simplifyVector = TRUE)
+  manifest$completed_trials <- 1234
+  manifest$random_startup_trials <- 2345
+  manifest$sample_notes <- 3456
+  manifest$sample_patients <- 4567
+  manifest$seconds <- 21534.8123
+  table <- stage_provenance_table(manifest)
+  items <- c("Pokusy", "Náhodné startovní pokusy", "Vzorek zpráv",
+    "Vzorek pacientů", "Doba běhu v minutách")
+  testthat::expect_equal(table$Hodnota[match(items, table$Položka)],
+    c(paste0("1", NBSP, "234"), paste0("2", NBSP, "345"),
+      paste0("3", NBSP, "456"), paste0("4", NBSP, "567"), "359"))
+})

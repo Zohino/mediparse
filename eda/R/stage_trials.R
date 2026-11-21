@@ -276,11 +276,11 @@ stage_provenance_table <- function(manifest) {
     "Strip diagnostických sekcí" = if (is.null(manifest$diagnostic_strip)) "ne" else "ano",
     "Revize kódu ladění stupně" = manifest$environment$source$commit,
     "Rozpracovaný strom" = if (manifest$environment$source$dirty) "ano" else "ne",
-    "Pokusy" = manifest$completed_trials,
-    "Náhodné startovní pokusy" = manifest$random_startup_trials,
+    "Pokusy" = format_number(manifest$completed_trials),
+    "Náhodné startovní pokusy" = format_number(manifest$random_startup_trials),
     "Sampler" = manifest$sampler, "Pruner" = manifest$pruner,
-    "Vzorek zpráv" = manifest$sample_notes, "Vzorek pacientů" = manifest$sample_patients,
-    "Doba běhu v sekundách" = manifest$seconds,
+    "Vzorek zpráv" = format_number(manifest$sample_notes), "Vzorek pacientů" = format_number(manifest$sample_patients),
+    "Doba běhu v minutách" = format_number(round(manifest$seconds / 60)),
     unlist(manifest$environment$packages)
   )
   provenance_table(as.list(items))
