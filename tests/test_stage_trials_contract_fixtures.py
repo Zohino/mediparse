@@ -58,9 +58,7 @@ def write_stage_trials_fixtures(directory: Path) -> None:
     rows = 0
     for trial in range(config.trials):
         branch = config.branches[trial % len(config.branches)]
-        family_index = next(
-            i for i, f in enumerate(config.families) if f == branch.family
-        )
+        family_index = config.families.index(branch.family)
         error_rate = (
             0.08 + 0.05 * family_index - 0.002 * (trial // len(config.branches))
         )
