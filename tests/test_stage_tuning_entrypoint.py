@@ -5,7 +5,9 @@ from __future__ import annotations
 import hashlib
 import json
 from collections import Counter, defaultdict
+from contextlib import nullcontext
 from dataclasses import replace
+from types import SimpleNamespace
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
@@ -14,6 +16,7 @@ import pytest
 from pydantic import ValidationError
 from sklearn.metrics import f1_score
 
+from mediparse.domain.environment import GpuDevice
 from mediparse.domain.run_manifest import StageTuningManifest
 from mediparse.domain.stage_tuning import StageLsa
 from mediparse.entrypoints import stage_tuning
@@ -293,3 +296,30 @@ def test_repository_stage_configs(stage: str) -> None:
             "word_ngrams": 1,
             "dim": 100,
         }
+
+
+def test_manifest_records_monitored_gpu(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Manifest obsahuje zařízení z monitoru s viditelností předanou prostředím."""
+    device = GpuDevice(name="synthetic", memory_total_bytes=1024)
+    monitor = Mock(return_value=nullcontext(SimpleNamespace(devices=(device,))))
+    monkeypatch.setattr(stage_tuning, "gpu_monitor", monitor)
+    paths = _paths(tmp_path)
+    assert (
+        stage_tuning.run(
+            paths=paths,
+            environ={
+                "CODEX_THREAD_ID": "test",
+                "CUDA_VISIBLE_DEVICES": "0",
+                "CUDA_DEVICE_ORDER": "PCI_BUS_ID",
+            },
+            revision=fixed_revision,
+            clock=StepClock(),
+        )
+        is ExitCode.OK
+    )
+    assert StageTuningManifest.model_validate_json(
+        paths.manifest.read_bytes()
+    ).hardware.gpus == (device,)
+    monitor.assert_called_once_with("0", "PCI_BUS_ID")

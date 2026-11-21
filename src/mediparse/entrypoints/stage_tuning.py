@@ -40,6 +40,7 @@ from mediparse.infrastructure.hf_encoder import (
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.machine_hardware import machine_hardware
 from mediparse.infrastructure.note_embeddings import NoteEmbeddings
+from mediparse.infrastructure.nvml_gpu import gpu_monitor
 from mediparse.infrastructure.optuna_search import (
     STAGE_PRUNER,
     OptunaStageSearch,
@@ -164,29 +165,34 @@ def run(
     packages = installed_versions(PACKAGES) | versions
     source = revision()
     corpus = model_corpus(paths.corpus, config.input)
-    hardware = machine_hardware(())
-    report = StageTuning(
-        table=corpus.table,
-        split=corpus.split,
-        partitioner=StratifiedGroupFolds(),
-        search=OptunaStageSearch.create(config),
-        scorer=SklearnStageScorer(
-            config,
-            corpus.normalization,
-            config.seed,
-            paths.scratch,
-            NoteEmbeddings(
-                paths.embeddings, versions, lambda spec: encoders(spec).embed
+    with gpu_monitor(
+        environ.get("CUDA_VISIBLE_DEVICES"), environ.get("CUDA_DEVICE_ORDER")
+    ) as monitor:
+        hardware = machine_hardware(monitor.devices)
+        report = StageTuning(
+            table=corpus.table,
+            split=corpus.split,
+            partitioner=StratifiedGroupFolds(),
+            search=OptunaStageSearch.create(config),
+            scorer=SklearnStageScorer(
+                config,
+                corpus.normalization,
+                config.seed,
+                paths.scratch,
+                NoteEmbeddings(
+                    paths.embeddings, versions, lambda spec: encoders(spec).embed
+                ),
             ),
-        ),
-        progress=ParquetStageCheckpoint(
-            paths.checkpoint,
-            checkpoint_key(paths.config, paths.corpus, corpus.dataset_sha256, packages),
-            paths.out,
-            paths.predictions,
-        ),
-        clock=clock,
-    ).run(config)
+            progress=ParquetStageCheckpoint(
+                paths.checkpoint,
+                checkpoint_key(
+                    paths.config, paths.corpus, corpus.dataset_sha256, packages
+                ),
+                paths.out,
+                paths.predictions,
+            ),
+            clock=clock,
+        ).run(config)
     write_model(
         paths.manifest,
         StageTuningManifest(
