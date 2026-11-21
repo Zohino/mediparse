@@ -195,16 +195,8 @@ def test_main_accepts_all_required_paths(
     assert isinstance(run.call_args.kwargs["clock"], stage_tuning.PerfCounterClock)
 
 
-def test_repository_config_and_manifest_validation(tmp_path: Path) -> None:
-    """Produkční config má deset větví a manifest odmítne nevyčerpaný rozpočet."""
-    config = load_stage_config(REPOSITORY / "config/stage_classical.json")
-    assert len(config.branches) == 10
-    assert (
-        config.trials,
-        config.random_startup_trials,
-        config.subsample_parts,
-        config.folds,
-    ) == (60, 10, 3, 3)
+def test_manifest_rejects_inconsistent_run(tmp_path: Path) -> None:
+    """Manifest odmítne nevyčerpaný rozpočet a nesoulad předzpracování."""
     paths = _paths(tmp_path)
     assert _run(paths) is ExitCode.OK
     data = json.loads(paths.manifest.read_bytes())

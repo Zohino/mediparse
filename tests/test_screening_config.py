@@ -261,52 +261,43 @@ def test_stage_configs_share_protocol(name: str) -> None:
 
 @pytest.mark.parametrize("family", ClassifierFamily)
 @pytest.mark.parametrize(
-    "kind", [VectorizerSpec, TfidfRepresentation, EncoderSpec, TokensSpec]
+    ("spec", "allowed"),
+    [
+        (
+            VectorizerSpec.model_validate_json(json.dumps(WORD)),
+            {"complement_nb", "logreg", "linear_svm", "nb_svm", "lightgbm_lsa"},
+        ),
+        (
+            stage_config().representations[0],
+            {"complement_nb", "logreg", "linear_svm", "nb_svm", "lightgbm_lsa"},
+        ),
+        (SPEC, {"logreg"}),
+        (TokensSpec(name="tok"), {"fasttext"}),
+    ],
 )
 def test_accepts_pairs(
-    kind: type[VectorizerSpec | TfidfRepresentation | EncoderSpec | TokensSpec],
+    spec: VectorizerSpec | TfidfRepresentation | EncoderSpec | TokensSpec,
+    allowed: set[str],
     family: ClassifierFamily,
 ) -> None:
     """Čtyři druhy přijímají právě rodiny uvedené v kontraktu."""
-    specs: dict[
-        type, VectorizerSpec | TfidfRepresentation | EncoderSpec | TokensSpec
-    ] = {
-        VectorizerSpec: VectorizerSpec.model_validate_json(json.dumps(WORD)),
-        TfidfRepresentation: stage_config().representations[0],
-        EncoderSpec: SPEC,
-        TokensSpec: TokensSpec(name="tok"),
-    }
-    allowed: dict[type, set[str]] = {
-        VectorizerSpec: {
-            "complement_nb",
-            "logreg",
-            "linear_svm",
-            "nb_svm",
-            "lightgbm_lsa",
-        },
-        TfidfRepresentation: {
-            "complement_nb",
-            "logreg",
-            "linear_svm",
-            "nb_svm",
-            "lightgbm_lsa",
-        },
-        EncoderSpec: {"logreg"},
-        TokensSpec: {"fasttext"},
-    }
-    assert accepts(specs[kind], family) == (family.value in allowed[kind])
+    assert accepts(spec, family) == (family.value in allowed)
 
 
 @pytest.mark.parametrize("name", ["a/b", "a.b"])
-@pytest.mark.parametrize("spec", [WORD, SPEC.model_dump(mode="json"), {"name": "tok"}])
-def test_representation_name_rejects_separators(name: str, spec: dict) -> None:
+@pytest.mark.parametrize(
+    "spec",
+    [
+        VectorizerSpec.model_validate_json(json.dumps(WORD)),
+        SPEC,
+        TokensSpec(name="tok"),
+    ],
+)
+def test_representation_name_rejects_separators(
+    name: str, spec: VectorizerSpec | EncoderSpec | TokensSpec
+) -> None:
     """Jméno nesmí obsahovat oddělovač větve ani parametru."""
-    kind = (
-        VectorizerSpec
-        if "analyzer" in spec
-        else EncoderSpec
-        if "model" in spec
-        else TokensSpec
-    )
     with pytest.raises(ValidationError):
-        kind.model_validate_json(json.dumps(spec | {"name": name}))
+        type(spec).model_validate_json(
+            json.dumps(spec.model_dump(mode="json") | {"name": name})
+        )

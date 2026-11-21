@@ -20,7 +20,7 @@ RepresentationName = Annotated[str, Field(min_length=1, pattern=r"^[^./]+$")]
 
 
 class ClassifierFamily(StrEnum):
-    """Rodiny klasifikátorů screeningu s výchozími hyperparametry."""
+    """Rodiny klasifikátorů screeningu a ladění stupňů."""
 
     COMPLEMENT_NB = "complement_nb"
     LOGREG = "logreg"
