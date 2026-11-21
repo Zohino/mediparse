@@ -110,8 +110,8 @@ stage_error_correlation <- function(con, source, winner, others) {
   do.call(rbind, rows)
 }
 
-stage_ensemble_needed <- function(phi, comparison) {
-  values <- phi$phi[phi$trial %in% comparison$trial]
+stage_ensemble_needed <- function(phi, second) {
+  values <- phi$phi[phi$trial %in% second$trial]
   if (all(is.na(values))) return(NA)
   any(values < 0.5, na.rm = TRUE)
 }

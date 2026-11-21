@@ -79,7 +79,7 @@ testthat::test_that("A4 φ je průměr správnosti obou tříd po buňkách", {
   testthat::expect_equal(phi$phi, 0.25)
   testthat::expect_equal(phi$defined, 2L)
   testthat::expect_equal(phi$cells, 2L)
-  testthat::expect_true(stage_ensemble_needed(phi, phi_models()$others))
+  testthat::expect_true(stage_ensemble_needed(phi, second = phi_models()$others))
   descriptive <- data.frame(family = "d", trial = 2, phi = 0)
   testthat::expect_false(stage_ensemble_needed(descriptive, phi_models()$others) %in% TRUE)
 })
