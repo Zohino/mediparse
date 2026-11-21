@@ -9,7 +9,8 @@ from typing import TYPE_CHECKING, Final
 import pyarrow as pa
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.screening import ClassifierFamily, ScreeningUnit
+from mediparse.domain.representation import ClassifierFamily
+from mediparse.domain.screening import ScreeningUnit
 from mediparse.infrastructure.metrics_table import METRIC_FIELDS, metric_columns
 from mediparse.infrastructure.parquet_checkpoint import ParquetParts
 from mediparse.infrastructure.parquet_file import read_table, write_arrow

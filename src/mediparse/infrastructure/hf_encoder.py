@@ -15,7 +15,7 @@ if TYPE_CHECKING:
     from numpy import ndarray
     from transformers import PreTrainedModel, PreTrainedTokenizerBase
 
-    from mediparse.domain.screening import EncoderSpec
+    from mediparse.domain.representation import EncoderSpec
 
 ENCODER_PACKAGES: Final = ("torch", "transformers", "tokenizers")
 

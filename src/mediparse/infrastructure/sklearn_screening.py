@@ -15,7 +15,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import LinearSVC
 
 from mediparse.domain.evaluation import Classification
-from mediparse.domain.screening import (
+from mediparse.domain.representation import (
     ClassifierFamily,
     EncoderSpec,
     TokensSpec,

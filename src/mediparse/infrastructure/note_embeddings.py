@@ -25,7 +25,7 @@ if TYPE_CHECKING:
 
     from numpy import ndarray
 
-    from mediparse.domain.screening import EncoderSpec
+    from mediparse.domain.representation import EncoderSpec
 
 logger = logging.getLogger(__name__)
 PART_NOTES: Final = 256

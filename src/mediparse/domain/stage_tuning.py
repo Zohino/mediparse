@@ -3,17 +3,18 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Annotated, Final, Literal, Self
+from typing import TYPE_CHECKING, Annotated, Final, Self
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
 from mediparse.domain.model_input import ModelInput
-from mediparse.domain.screening import ClassifierFamily
+from mediparse.domain.representation import (
+    ClassifierFamily,
+    Parameter,
+    TfidfRepresentation,
+)
 from mediparse.domain.seed import Seed
 from mediparse.domain.tuning import (
-    CategoricalParam,
-    FloatParam,
-    IntParam,
     ParamValue,
     SearchSpace,
 )
@@ -26,60 +27,6 @@ if TYPE_CHECKING:
     from mediparse.domain.tuning import MaxF1
 
 BRANCH_KEY: Final = "branch"
-
-type Parameter = FloatParam | IntParam | CategoricalParam
-
-
-def _int_choices(param: Parameter) -> tuple[int, int]:
-    if isinstance(param, IntParam):
-        return param.low, param.high
-    if isinstance(param, CategoricalParam):
-        choices = tuple(v for v in param.choices if type(v) is int)
-        if len(choices) == len(param.choices):
-            return min(choices), max(choices)
-    msg = f"Parametr {param.name} vyžaduje celočíselný prostor."
-    raise ValueError(msg)
-
-
-class TfidfRepresentation(BaseModel):
-    """Pojmenovaná reprezentace se striktním prostorem TF-IDF."""
-
-    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
-
-    name: Annotated[str, Field(min_length=1, pattern=r"^[^./]+$")]
-    analyzer: Literal["word", "char_wb"]
-    space: SearchSpace
-    default: dict[str, ParamValue]
-
-    @model_validator(mode="after")
-    def _valid_space(self) -> Self:
-        params = {p.name: p for p in self.space.params}
-        if params.keys() != {
-            "ngram_min",
-            "ngram_max",
-            "min_df",
-            "max_df",
-            "sublinear_tf",
-        }:
-            msg = "Prostor TF-IDF musí obsahovat právě pět parametrů reprezentace."
-            raise ValueError(msg)
-        ngram_min = _int_choices(params["ngram_min"])
-        ngram_max = _int_choices(params["ngram_max"])
-        _int_choices(params["min_df"])
-        if ngram_min[1] > ngram_max[0]:
-            msg = "Maximum ngram_min nesmí překročit minimum ngram_max."
-            raise ValueError(msg)
-        flag = params["sublinear_tf"]
-        if not isinstance(params["max_df"], FloatParam) or not (
-            isinstance(flag, CategoricalParam)
-            and all(type(v) is bool for v in flag.choices)
-        ):
-            msg = "max_df vyžaduje float a sublinear_tf bool kategorie."
-            raise ValueError(msg)
-        if not self.space.contains(self.default):
-            msg = "Výchozí parametry reprezentace neleží v prostoru."
-            raise ValueError(msg)
-        return self
 
 
 class FamilySpace(BaseModel):

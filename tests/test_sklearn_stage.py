@@ -32,7 +32,7 @@ if TYPE_CHECKING:
     from sklearn.base import BaseEstimator
     from sklearn.decomposition import TruncatedSVD
 
-    from mediparse.domain.screening import ClassifierFamily
+    from mediparse.domain.representation import ClassifierFamily
     from mediparse.domain.split import Holdout
     from mediparse.domain.stage_tuning import StageTuningConfig
 

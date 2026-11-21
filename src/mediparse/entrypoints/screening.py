@@ -65,7 +65,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable, Mapping
 
     from mediparse.domain.environment import SourceRevision
-    from mediparse.domain.screening import EncoderSpec
+    from mediparse.domain.representation import EncoderSpec
 
 logger = logging.getLogger(__name__)
 PACKAGES: Final = (

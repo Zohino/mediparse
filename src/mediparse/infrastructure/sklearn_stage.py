@@ -10,7 +10,7 @@ from sklearn.decomposition import TruncatedSVD
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.screening import ClassifierFamily
+from mediparse.domain.representation import ClassifierFamily
 from mediparse.domain.tuning import ValidationScores
 from mediparse.infrastructure.sklearn_classifier import (
     TfidfParameters,

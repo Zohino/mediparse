@@ -26,11 +26,8 @@ if TYPE_CHECKING:
     from mediparse.domain.evaluation import Classification
     from mediparse.domain.identity import SubjectId
     from mediparse.domain.input_note import InputNote
-    from mediparse.domain.screening import (
-        ClassifierFamily,
-        Representation,
-        ScreeningConfig,
-    )
+    from mediparse.domain.representation import ClassifierFamily
+    from mediparse.domain.screening import Representation, ScreeningConfig
     from mediparse.domain.seed import Seed
     from mediparse.domain.split import Holdout
 
