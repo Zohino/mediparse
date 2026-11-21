@@ -253,16 +253,14 @@ def test_work_paths_inside_checkpoint_refused(tmp_path: Path, field: str) -> Non
     )
 
 
-def test_published_classical_manifest_validates() -> None:
-    """Dřívější manifest bez encoderů zůstane platný a pravdivý."""
-    assert (
-        StageTuningManifest.model_validate_json(
-            (
-                REPOSITORY / "results/screening/classical_trials_manifest.json"
-            ).read_bytes()
-        ).encoders
-        == ()
-    )
+def test_manifest_without_encoders_validates_as_empty(tmp_path: Path) -> None:
+    """Manifest ve starším tvaru bez encoderů se načte s prázdnou n-ticí."""
+    paths = _paths(tmp_path)
+    assert _run(paths) is ExitCode.OK
+    manifest = StageTuningManifest.model_validate_json(paths.manifest.read_bytes())
+    data = manifest.model_dump(mode="json")
+    del data["encoders"]
+    assert StageTuningManifest.model_validate_json(json.dumps(data)).encoders == ()
 
 
 @pytest.mark.parametrize("stage", ["classical", "embeddings", "networks"])
