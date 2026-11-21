@@ -157,6 +157,7 @@ testthat::test_that("A2 vítěze a shody určuje cíl a číslo pokusu", {
   testthat::expect_equal(selection$winner$trial, 2L)
   testthat::expect_equal(selection$second$trial, 3L)
   testthat::expect_equal(selection$family_best$trial, c(2L, 3L, 4L))
+  testthat::expect_equal(selection$others$trial, c(3L, 4L))
   testthat::expect_equal(selection$family_best$family, c("a", "b", "c"))
   testthat::expect_error(stage_selection(summary, list(best_trial = 3)), "manifest")
   summary$value <- 0.8

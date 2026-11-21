@@ -165,7 +165,7 @@ stage_selection <- function(summary, manifest) {
   if (best$trial[1] != manifest$best_trial) {
     stop("Vítěz neodpovídá manifestu.", call. = FALSE)
   }
-  list(winner = best[1, ], family_best = best, second = best[2, ])
+  list(winner = best[1, ], family_best = best, second = best[2, ], others = best[-1, ])
 }
 
 space_value_text <- function(x) {

@@ -26,8 +26,7 @@ selection <- stage_selection(summary, manifest)
 # Příloha A odpojuje připojení pod jménem con.
 con <- DBI::dbConnect(duckdb::duckdb())
 prediction_source <- stage_predictions_source(con, paths$predictions)
-others <- selection$family_best[selection$family_best$family != selection$winner$family, ]
-phi <- stage_error_correlation(con, prediction_source, selection$winner, others)
+phi <- stage_error_correlation(con, prediction_source, selection$winner, selection$others)
 ```
 
 # Úvod
