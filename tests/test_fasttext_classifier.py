@@ -108,11 +108,15 @@ def test_single_class_is_rejected(tmp_path: Path) -> None:
 def test_defaults_match_fasttext_supervised_defaults(tmp_path: Path) -> None:
     """Výchozí parametry souhlasí s supervised_default fastTextu 0.9.2."""
     params = FastTextClassifier(tmp_path).get_params()
-    assert {name: params[name] for name in ("lr", "epoch", "word_ngrams", "dim")} == {
+    assert {
+        name: params[name]
+        for name in ("lr", "epoch", "word_ngrams", "dim", "random_state")
+    } == {
         "lr": 0.1,
         "epoch": 5,
         "word_ngrams": 1,
         "dim": 100,
+        "random_state": 0,
     }
 
 

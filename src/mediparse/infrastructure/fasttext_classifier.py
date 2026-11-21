@@ -24,9 +24,10 @@ class FastTextClassifier(ClassifierMixin, BaseEstimator):
     """Binární fastText s hyperparametry fastTextu a explicitním scratch adresářem."""
 
     # sklearn clone a set_params vyžadují jednotlivé hyperparametry v signatuře.
-    def __init__(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
+    def __init__(  # ruff: ignore[too-many-arguments]
         self,
         scratch: Path,
+        *,
         random_state: int = 0,
         lr: float = 0.1,
         epoch: int = 5,

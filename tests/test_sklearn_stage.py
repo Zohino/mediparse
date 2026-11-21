@@ -248,7 +248,7 @@ def test_min_df_above_training_documents_is_refused(tmp_path: Path) -> None:
         scorer.score(params, _clinical_fold())
 
 
-def test_encoder_branch_scores_standardized_embeddings(tmp_path: Path) -> None:
+def test_encoder_branch_scores_cached_embeddings(tmp_path: Path) -> None:
     """Encoder poskytne pět vektorů skóre a šířku čtyř příznaků."""
     base = stage_config().model_dump(mode="json")
     config = stage_config(

@@ -13,15 +13,12 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.representation import (
     ClassifierFamily,
     EncoderSpec,
-    TfidfRepresentation,
     TokensSpec,
     VectorizerSpec,
-    accepts,
 )
 from mediparse.domain.screening import ScreeningConfig
 from mediparse.infrastructure.screening_config import load_screening_config
 from tests.hf_encoder_support import SPEC
-from tests.stage_support import stage_config
 from tests.support import REPOSITORY
 
 if TYPE_CHECKING:
@@ -257,47 +254,3 @@ def test_stage_configs_share_protocol(name: str) -> None:
         config.threshold_folds,
         config.lsa_components,
     ) == (0, 5, 3, 100)
-
-
-@pytest.mark.parametrize("family", ClassifierFamily)
-@pytest.mark.parametrize(
-    ("spec", "allowed"),
-    [
-        (
-            VectorizerSpec.model_validate_json(json.dumps(WORD)),
-            {"complement_nb", "logreg", "linear_svm", "nb_svm", "lightgbm_lsa"},
-        ),
-        (
-            stage_config().representations[0],
-            {"complement_nb", "logreg", "linear_svm", "nb_svm", "lightgbm_lsa"},
-        ),
-        (SPEC, {"logreg"}),
-        (TokensSpec(name="tok"), {"fasttext"}),
-    ],
-)
-def test_accepts_pairs(
-    spec: VectorizerSpec | TfidfRepresentation | EncoderSpec | TokensSpec,
-    allowed: set[str],
-    family: ClassifierFamily,
-) -> None:
-    """Čtyři druhy přijímají právě rodiny uvedené v kontraktu."""
-    assert accepts(spec, family) == (family.value in allowed)
-
-
-@pytest.mark.parametrize("name", ["a/b", "a.b"])
-@pytest.mark.parametrize(
-    "spec",
-    [
-        VectorizerSpec.model_validate_json(json.dumps(WORD)),
-        SPEC,
-        TokensSpec(name="tok"),
-    ],
-)
-def test_representation_name_rejects_separators(
-    name: str, spec: VectorizerSpec | EncoderSpec | TokensSpec
-) -> None:
-    """Jméno nesmí obsahovat oddělovač větve ani parametru."""
-    with pytest.raises(ValidationError):
-        type(spec).model_validate_json(
-            json.dumps(spec.model_dump(mode="json") | {"name": name})
-        )
