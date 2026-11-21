@@ -43,7 +43,7 @@ Complement NB upravuje naivní Bayes pro nevyvážené třídy textu [@Rennie200
 
 Ladění používá jednu z `r config$subsample_parts` částí vývojových pacientů,
 `r manifest$sample_notes` zpráv a `r manifest$sample_patients` pacientů.
-Rozdělení má `r config$folds` foldy po pacientech. Rozpočet je
+Rozdělení má `r count_phrase(config$folds, c("fold", "foldy", "foldů"))` po pacientech. Rozpočet je
 `r config$trials` pokusů, z nichž prvních `r sum(summary$default)`
 používá výchozí hodnoty každé větve a dalších `r manifest$random_startup_trials`
 je náhodných. Potom TPE soustředí pokusy do slibných oblastí [@Bergstra2011].
@@ -156,7 +156,7 @@ Také práh vybraný na validaci foldu je optimistický, ale společný všem po
 Rozpočet se dělí mezi větve nerovnoměrně: TPE soustředí pokusy na slibné větve,
 takže nejlepší pokus slabé rodiny je méně vyladěný. Výchozí pokusy dávají každé větvi aspoň jednu šanci.
 Podvzorek jedné z `r config$subsample_parts` částí vývojových pacientů a
-`r config$folds` foldy omezují přenositelnost pořadí.
+`r count_phrase(config$folds, c("fold", "foldy", "foldů"))` omezují přenositelnost pořadí.
 SD přes korelované foldy podceňuje nejistotu.
 φ popisuje souběh chyb, nikoli výkon ensemblu; nedefinované buňky se vynechávají.
 
