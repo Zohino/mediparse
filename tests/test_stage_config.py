@@ -60,6 +60,11 @@ def test_winner_tie_uses_earlier_trial() -> None:
             "Výchozí parametry reprezentace",
             id="max-df-int-default",
         ),
+        pytest.param(
+            {("representations", 1): {"name": "tok"}},
+            "Reprezentace tok nepatří do žádné větve",
+            id="unused-representation",
+        ),
         pytest.param({("trials",): 4}, "Rozpočet", id="insufficient-budget"),
         pytest.param(
             {
@@ -185,9 +190,13 @@ def test_lsa_required_exactly_with_lightgbm() -> None:
     config = stage_config()
     data = config.model_dump(mode="json")
     data["families"][0]["family"] = "lightgbm_lsa"
-    with pytest.raises(ValidationError, match="LSA"):
+    with pytest.raises(
+        ValidationError, match="LSA musí být zadané právě s rodinou lightgbm_lsa"
+    ):
         StageTuningConfig.model_validate_json(json.dumps(data))
-    with pytest.raises(ValidationError, match="LSA"):
+    with pytest.raises(
+        ValidationError, match="LSA musí být zadané právě s rodinou lightgbm_lsa"
+    ):
         stage_config(lsa={"components": 2, "max_features": 1000})
     assert config.lsa is None
 
@@ -239,17 +248,3 @@ def test_branch_without_representation_space() -> None:
     }
     assert branch.default_params() == params
     assert branch.params_of(params) == ({}, branch.family.default)
-
-
-@pytest.mark.parametrize("tokens", [True, False])
-def test_unused_representation_or_family_rejected(*, tokens: bool) -> None:
-    """Každá reprezentace i rodina musí patřit do některé větve."""
-    base = stage_config().model_dump(mode="json")
-    token = token_stage_config().model_dump(mode="json")
-    with pytest.raises(ValidationError, match="nepatří do žádné větve"):
-        stage_config(
-            representations=token["representations"]
-            if tokens
-            else base["representations"],
-            families=base["families"][:1] if tokens else token["families"],
-        )

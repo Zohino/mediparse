@@ -13,6 +13,7 @@ import pytest
 from sklearn.linear_model import LogisticRegression
 
 from mediparse.application.patient_cv import patient_holdouts
+from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.split import Holdout
@@ -55,13 +56,18 @@ def test_logreg_parameters_change_scores(tmp_path: Path) -> None:
 def _lsa_config(**changes: object) -> StageTuningConfig:
     config = stage_config()
     data = config.model_dump(mode="json")
-    data["families"][0] = {
-        "family": "lightgbm_lsa",
-        "space": {
-            "params": [{"kind": "categorical", "name": "n_estimators", "choices": [10]}]
+    data["families"] = [
+        {
+            "family": "lightgbm_lsa",
+            "space": {
+                "params": [
+                    {"kind": "categorical", "name": "n_estimators", "choices": [10]}
+                ]
+            },
+            "default": {"n_estimators": 10},
         },
-        "default": {"n_estimators": 10},
-    }
+        data["families"][0],
+    ]
     data.update({"lsa": {"components": 2, "max_features": 1000}} | changes)
     return type(config).model_validate_json(json.dumps(data))
 
@@ -96,9 +102,12 @@ def test_lightgbm_receives_lsa_components(
 def test_vocabulary_cap_applies_only_to_lsa(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, lsa: bool
 ) -> None:
-    """Strop omezí vstup LSA na pět sloupců, logistická regrese vidí celé V."""
-    config = (
-        _lsa_config(lsa={"components": 3, "max_features": 5}) if lsa else stage_config()
+    """Strop omezí vstup LSA na pět sloupců, rodina bez LSA vidí celé V."""
+    config = _lsa_config(lsa={"components": 3, "max_features": 5})
+    branch = next(
+        b
+        for b in config.branches
+        if b.family.family.value == ("lightgbm_lsa" if lsa else "logreg")
     )
     fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
     vocabulary = (
@@ -123,7 +132,7 @@ def test_vocabulary_cap_applies_only_to_lsa(
 
     monkeypatch.setattr(sklearn_stage, "TruncatedSVD", svd)
     result = SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
-        config.branches[0].default_params(), fold
+        branch.default_params(), fold
     )
     assert observed == ([5] if lsa else [])
     assert result.features == (5 if lsa else len(vocabulary))
@@ -265,22 +274,37 @@ def test_encoder_branch_scores_standardized_embeddings(tmp_path: Path) -> None:
     ]
 
 
-def test_tokens_branch_counts_distinct_analyzer_tokens(tmp_path: Path) -> None:
-    """Analyzátor sjednotí velikost písmen a odstraní čárku: tři tokeny."""
+@pytest.mark.parametrize(
+    ("text", "normalization", "features"),
+    [
+        ("Alpha, beta alpha", None, 3),
+        (
+            "COPD beta",
+            TextNormalization(
+                acronyms={"COPD": "chronic obstructive pulmonary disease"}, variants={}
+            ),
+            6,
+        ),
+    ],
+)
+def test_tokens_branch_counts_distinct_analyzer_tokens(
+    tmp_path: Path, text: str, normalization: TextNormalization | None, features: int
+) -> None:
+    """Analyzátor počítá jedinečné tokeny včetně rozvinuté zkratky."""
     original = notes(visits=10)
     fold = Holdout(
         0,
         tuple(
-            replace(n, text="Alpha, beta alpha" if i % 2 else "beta gamma")
+            replace(n, text=text if i % 2 else "beta gamma")
             for i, n in enumerate(original[:-1])
         ),
         (replace(original[-1], text="alpha"),),
     )
     config = token_stage_config()
-    scored = SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
+    scored = SklearnStageScorer(config, normalization, 7, tmp_path, Mock()).score(
         config.branches[0].default_params(), fold
     )
-    assert scored.features == 3
+    assert scored.features == features
 
 
 def test_fasttext_family_params_reach_estimator(
