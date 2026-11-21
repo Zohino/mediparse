@@ -176,20 +176,32 @@ space_value_text <- function(x) {
   x
 }
 
+space_range_text <- function(param) {
+  if (param$kind == "categorical") {
+    return(paste(vapply(param$choices, space_value_text, character(1)), collapse = ", "))
+  }
+  range <- paste0(space_value_text(param$low), "–", space_value_text(param$high))
+  if (isTRUE(param$log)) return(paste0(range, " (log)"))
+  range
+}
+
+stage_component_space_table <- function(component, winner, active) {
+  name <- component$name %||% component$family
+  rows <- lapply(component$space$params, function(param) {
+    value <- "–"
+    if (name %in% active) {
+      value <- space_value_text(winner[[paste(name, param$name, sep = ".")]])
+    }
+    data.frame(složka = name, parametr = param$name, rozsah = space_range_text(param),
+      výchozí = space_value_text(component$default[[param$name]]), vítěz = value)
+  })
+  do.call(rbind, rows)
+}
+
 stage_space_table <- function(config, winner) {
   active <- strsplit(winner$branch, "/", fixed = TRUE)[[1]]
-  rows <- lapply(c(config$representations, config$families), function(component) {
-    name <- if (is.null(component$name)) component$family else component$name
-    do.call(rbind, lapply(component$space$params, function(param) {
-      range <- if (param$kind == "categorical") {
-        paste(vapply(param$choices, space_value_text, character(1)), collapse = ", ")
-      } else paste0(space_value_text(param$low), "–", space_value_text(param$high),
-        if (isTRUE(param$log)) " (log)" else "")
-      data.frame(složka = name, parametr = param$name, rozsah = range,
-        výchozí = space_value_text(component$default[[param$name]]),
-        vítěz = if (name %in% active) space_value_text(winner[[paste(name, param$name, sep = ".")]]) else "–")
-    }))
-  })
+  rows <- lapply(c(config$representations, config$families),
+    stage_component_space_table, winner = winner, active = active)
   do.call(rbind, rows)
 }
 
