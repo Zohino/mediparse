@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from functools import partial
-from typing import TYPE_CHECKING, assert_never
+from typing import TYPE_CHECKING, assert_never, cast
 
 from sklearn.decomposition import TruncatedSVD
 
@@ -31,7 +31,7 @@ from mediparse.infrastructure.sklearn_screening import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Mapping, Sequence
     from pathlib import Path
 
     from numpy import ndarray
@@ -100,46 +100,53 @@ class SklearnStageScorer:
     def _features(
         self, branch: Branch, rep_params: Mapping[str, ParamValue], fold: Holdout
     ) -> tuple[ndarray | csr_matrix, ndarray | csr_matrix, int]:
-        texts = [note.text for note in fold.train]
-        test_texts = [note.text for note in fold.test]
+        train_texts = [note.text for note in fold.train]
+        validation_texts = [note.text for note in fold.test]
         match branch.representation:
             case EncoderSpec() as spec:
                 train, validation = EncoderFeaturizer(self.embeddings).fit_transform(
-                    spec, texts, test_texts
+                    spec, train_texts, validation_texts
                 )
                 return train.matrix, validation.matrix, train.matrix.shape[1]
             case TokensSpec() as spec:
                 train, validation = TokenFeaturizer(self.normalization).fit_transform(
-                    spec, texts, test_texts
+                    spec, train_texts, validation_texts
                 )
                 features = len({
                     token for document in train.matrix for token in document.split()
                 })
                 return train.matrix, validation.matrix, features
             case TfidfRepresentation():
-                tfidf = TfidfParameters.model_validate(rep_params)
-                lsa = (
-                    self.config.lsa
-                    if branch.family.family is ClassifierFamily.LIGHTGBM_LSA
-                    else None
-                )
-                # SVD alokuje husté matice úměrné šířce; strop drží paměť, jiné rodiny mají celý slovník.
-                vectorizer = tfidf_from(
-                    tfidf,
-                    branch.representation.analyzer,
-                    self.normalization,
-                    max_features=lsa.max_features if lsa else None,
-                )
-                ensure_tokens(vectorizer, texts)
-                train = vectorizer.fit_transform(texts)
-                validation = vectorizer.transform(test_texts)
-                features = train.shape[1]
-                if lsa is not None:
-                    reducer = TruncatedSVD(
-                        n_components=lsa.components, random_state=self.seed
-                    )
-                    train = reducer.fit_transform(train)
-                    validation = reducer.transform(validation)
-                return train, validation, features
+                return self._tfidf(branch, rep_params, train_texts, validation_texts)
             case _:
                 assert_never(branch.representation)
+
+    def _tfidf(
+        self,
+        branch: Branch,
+        rep_params: Mapping[str, ParamValue],
+        train_texts: Sequence[str],
+        validation_texts: Sequence[str],
+    ) -> tuple[ndarray | csr_matrix, ndarray | csr_matrix, int]:
+        tfidf = TfidfParameters.model_validate(rep_params)
+        lsa = (
+            self.config.lsa
+            if branch.family.family is ClassifierFamily.LIGHTGBM_LSA
+            else None
+        )
+        # SVD alokuje husté matice úměrné šířce; strop drží paměť, jiné rodiny mají celý slovník.
+        vectorizer = tfidf_from(
+            tfidf,
+            cast("TfidfRepresentation", branch.representation).analyzer,
+            self.normalization,
+            max_features=lsa.max_features if lsa else None,
+        )
+        ensure_tokens(vectorizer, train_texts)
+        train = vectorizer.fit_transform(train_texts)
+        validation = vectorizer.transform(validation_texts)
+        features = train.shape[1]
+        if lsa is not None:
+            reducer = TruncatedSVD(n_components=lsa.components, random_state=self.seed)
+            train = reducer.fit_transform(train)
+            validation = reducer.transform(validation)
+        return train, validation, features

@@ -12,6 +12,7 @@ from mediparse.domain.tuning import (
     CategoricalParam,
     FloatParam,
     IntParam,
+    Parameter,
     ParamValue,
     SearchSpace,
 )
@@ -66,9 +67,6 @@ class TokensSpec(BaseModel):
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 
     name: RepresentationName
-
-
-type Parameter = FloatParam | IntParam | CategoricalParam
 
 
 def _int_choices(param: Parameter) -> tuple[int, int]:

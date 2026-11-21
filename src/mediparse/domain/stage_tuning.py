@@ -11,13 +11,13 @@ from mediparse.domain.model_input import ModelInput
 from mediparse.domain.representation import (
     ClassifierFamily,
     EncoderSpec,
-    Parameter,
     TfidfRepresentation,
     TokensSpec,
     accepts,
 )
 from mediparse.domain.seed import Seed
 from mediparse.domain.tuning import (
+    Parameter,
     ParamValue,
     SearchSpace,
 )
