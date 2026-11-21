@@ -159,7 +159,7 @@ jobs:
           tags: mediparse:ci
           load: true
           build-args: |
-            MEDIPARSE_COMMIT=${{ github.event.pull_request.head.sha || github.sha }}
+            MEDIPARSE_COMMIT=${{ github.sha }}
             MEDIPARSE_DIRTY=false
           cache-from: type=gha
           cache-to: ${{ github.event_name == 'push' && github.ref_name == 'main' && 'type=gha,mode=max' || '' }}

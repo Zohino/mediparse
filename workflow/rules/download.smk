@@ -42,7 +42,7 @@ rule validate_mimic:
     input:
         expand("resources/mimic/inventory/{file}.json", file=MIMIC_TABLES),
     output:
-        manifest="results/mimic/manifest.json",
+        manifest=MIMIC_MANIFEST,
         flag=touch("resources/mimic/validated.flag"),
     shell:
         "jq -s '{{tables: .}}' {input:q} >{output.manifest:q}"

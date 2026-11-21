@@ -173,12 +173,6 @@ ensemble_needed <- function(phi, comparison) {
   any(values < 0.5, na.rm = TRUE)
 }
 
-screening_number <- function(x) {
-  out <- formatC(x, format = "f", digits = 3, decimal.mark = ",")
-  out[is.na(x)] <- "–"
-  out
-}
-
 screening_model_text <- function(models) {
   paste0(unname(FAMILY_LABELS[models$family]), " (", models$vectorizer, ")")
 }
@@ -186,8 +180,8 @@ screening_model_text <- function(models) {
 screening_grid_table <- function(summary) {
   data.frame(
     rodina = unname(FAMILY_LABELS[summary$family]), vektorizér = summary$vectorizer,
-    macro = paste(screening_number(summary$mean), "±", screening_number(summary$sd)),
-    pr_auc = screening_number(summary$pr_auc),
+    macro = paste(metric_text(summary$mean), "±", metric_text(summary$sd)),
+    pr_auc = metric_text(summary$pr_auc),
     konvergence = paste(summary$nonconverged, "z", summary$cells),
     nejlepší = ifelse(summary$best, "ano", "ne")
   )
@@ -199,14 +193,14 @@ screening_diagnosis_table <- function(results, summary, candidates) {
   means <- stats::aggregate(rows["f1"], rows[c("family", "diagnosis")], mean)
   data.frame(
     rodina = unname(FAMILY_LABELS[means$family]),
-    diagnóza = candidate_labels(means$diagnosis, candidates), f1 = screening_number(means$f1)
+    diagnóza = candidate_labels(means$diagnosis, candidates), f1 = metric_text(means$f1)
   )
 }
 
 screening_phi_table <- function(phi, selection) {
   data.frame(
     rodina = unname(FAMILY_LABELS[phi$family]), vektorizér = phi$vectorizer,
-    phi = screening_number(phi$phi), buňky = paste(phi$defined, "z", phi$cells),
+    phi = metric_text(phi$phi), buňky = paste(phi$defined, "z", phi$cells),
     pásmo = ifelse(phi$family %in% selection$band$family, "ano", "ne"),
     rozhoduje = ifelse(phi$family %in% selection$comparison$family, "ano", "ne")
   )
@@ -223,7 +217,7 @@ screening_plot <- function(results, summary, selection) {
     ggplot2::geom_vline(xintercept = selection$threshold, linetype = "dashed") +
     ggplot2::geom_point(colour = "grey50", size = 1.8) +
     ggplot2::geom_point(data = best, ggplot2::aes(x = mean), shape = 18, size = 3) +
-    ggplot2::scale_x_continuous(labels = screening_number) +
+    ggplot2::scale_x_continuous(labels = metric_text) +
     ggplot2::labs(x = "Macro-F1", y = NULL) + theme_thesis()
 }
 
@@ -265,8 +259,8 @@ screening_selection_text <- function(selection) {
       "Vítězem je %s s průměrnou macro-F1 %s. Hranice pásma 1 SE je %s; do S39j %s %s. ",
       "Ladění S39j se týká %s; screening neurčuje laděné hyperparametry."
     ),
-    screening_model_text(selection$winner), screening_number(selection$winner$mean),
-    screening_number(selection$threshold), verb, join_labels(screening_model_text(selection$band)), target
+    screening_model_text(selection$winner), metric_text(selection$winner$mean),
+    metric_text(selection$threshold), verb, join_labels(screening_model_text(selection$band)), target
   )
 }
 

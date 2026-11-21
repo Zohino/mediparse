@@ -332,3 +332,7 @@ test_that("export_table zachová prázdnou tabulku i při formátování kódů"
   expect_length(md, 2L)
   expect_false(grepl("\\texttt{}", read_tex(dir, "tbl-empty"), fixed = TRUE))
 })
+
+test_that("metric_text formátuje metriky na tři desetinná místa a NA jako pomlčku", {
+  expect_equal(metric_text(c(0.12345, 1, NA)), c("0,123", "1,000", "–"))
+})

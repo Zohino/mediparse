@@ -46,10 +46,7 @@ metrics_table <- function(metrics, labels) {
   )
   for (name in names(METRIC_LABELS)) {
     values <- metrics[[name]]
-    out[[METRIC_LABELS[[name]]]] <- ifelse(
-      published,
-      formatC(values, format = "f", digits = 3, decimal.mark = ","), "–"
-    )
+    out[[METRIC_LABELS[[name]]]] <- metric_text(ifelse(published, values, NA_real_))
   }
   out
 }
