@@ -261,6 +261,7 @@ class StageTuningManifest(BaseModel):
         frozen=True, strict=True, extra="forbid", allow_inf_nan=False
     )
 
+    encoders: tuple[EncoderSpec, ...] = ()
     dataset_sha256: Sha256
     config_sha256: Sha256
     split_seed: Seed

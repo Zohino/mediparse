@@ -3,15 +3,18 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Annotated, Final, Self
+from typing import TYPE_CHECKING, Annotated, Final, Self, assert_never
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
 from mediparse.domain.model_input import ModelInput
 from mediparse.domain.representation import (
     ClassifierFamily,
+    EncoderSpec,
     Parameter,
     TfidfRepresentation,
+    TokensSpec,
+    accepts,
 )
 from mediparse.domain.seed import Seed
 from mediparse.domain.tuning import (
@@ -27,6 +30,21 @@ if TYPE_CHECKING:
     from mediparse.domain.tuning import MaxF1
 
 BRANCH_KEY: Final = "branch"
+
+
+type StageRepresentation = TfidfRepresentation | EncoderSpec | TokensSpec
+
+
+def _tuned(
+    representation: StageRepresentation,
+) -> tuple[tuple[Parameter, ...], Mapping[str, ParamValue]]:
+    match representation:
+        case TfidfRepresentation():
+            return representation.space.params, representation.default
+        case EncoderSpec() | TokensSpec():
+            return (), {}
+        case _:
+            assert_never(representation)
 
 
 class FamilySpace(BaseModel):
@@ -50,7 +68,7 @@ class FamilySpace(BaseModel):
 class Branch:
     """Platná dvojice reprezentace a rodiny se společnými jmennými prostory."""
 
-    representation: TfidfRepresentation
+    representation: StageRepresentation
     family: FamilySpace
 
     @property
@@ -67,10 +85,10 @@ class Branch:
         return tuple(
             param.model_copy(update={"name": f"{prefix}.{param.name}"})
             for prefix, space in (
-                (self.representation.name, self.representation.space),
-                (self.family.family.value, self.family.space),
+                (self.representation.name, _tuned(self.representation)[0]),
+                (self.family.family.value, self.family.space.params),
             )
-            for param in space.params
+            for param in space
         )
 
     def default_params(self) -> dict[str, ParamValue]:
@@ -81,7 +99,7 @@ class Branch:
         """
         params: dict[str, ParamValue] = {BRANCH_KEY: self.name}
         for prefix, default in (
-            (self.representation.name, self.representation.default),
+            (self.representation.name, _tuned(self.representation)[1]),
             (self.family.family.value, self.family.default),
         ):
             params.update({
@@ -100,7 +118,7 @@ class Branch:
         return (
             {
                 p.name: trial_params[f"{self.representation.name}.{p.name}"]
-                for p in self.representation.space.params
+                for p in _tuned(self.representation)[0]
             },
             {
                 p.name: trial_params[f"{self.family.family.value}.{p.name}"]
@@ -137,14 +155,24 @@ class StageTuningConfig(BaseModel):
     random_startup_trials: Annotated[int, Field(ge=0)]
     lsa: StageLsa | None = None
     input: ModelInput
-    representations: Annotated[tuple[TfidfRepresentation, ...], Field(min_length=1)]
+    representations: Annotated[tuple[StageRepresentation, ...], Field(min_length=1)]
     families: Annotated[tuple[FamilySpace, ...], Field(min_length=1)]
 
     @property
     def branches(self) -> tuple[Branch, ...]:
-        """Součin reprezentací a rodin v pořadí configu."""
+        """Kompatibilní dvojice reprezentací a rodin v pořadí configu."""
         return tuple(
-            Branch(rep, fam) for rep in self.representations for fam in self.families
+            Branch(rep, fam)
+            for rep in self.representations
+            for fam in self.families
+            if accepts(rep, fam.family)
+        )
+
+    @property
+    def encoders(self) -> tuple[EncoderSpec, ...]:
+        """Encodery použité v ladění a zapsané do provenance."""
+        return tuple(
+            rep for rep in self.representations if isinstance(rep, EncoderSpec)
         )
 
     def branch(self, params: Mapping[str, ParamValue]) -> Branch:
@@ -175,9 +203,14 @@ class StageTuningConfig(BaseModel):
         if len({f.family for f in self.families}) != len(self.families):
             msg = "Rodiny musí být jedinečné."
             raise ValueError(msg)
-        if any(f.family is ClassifierFamily.FASTTEXT for f in self.families):
-            msg = "Rodina fasttext nepracuje nad reprezentací TF-IDF."
-            raise ValueError(msg)
+        for family in self.families:
+            if not any(accepts(rep, family.family) for rep in self.representations):
+                msg = f"Rodina {family.family} nepatří do žádné větve."
+                raise ValueError(msg)
+        for rep in self.representations:
+            if not any(accepts(rep, family.family) for family in self.families):
+                msg = f"Reprezentace {rep.name} nepatří do žádné větve."
+                raise ValueError(msg)
         if self.trials < self.startup_trials:
             msg = "Rozpočet musí pokrýt výchozí i náhodné pokusy."
             raise ValueError(msg)

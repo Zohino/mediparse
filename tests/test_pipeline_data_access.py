@@ -119,6 +119,8 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
                 predictions=root / "stage/predictions.parquet",
                 manifest=root / "stage/manifest.json",
                 checkpoint=root / "stage/checkpoint",
+                embeddings=root / "stage/embeddings",
+                scratch=root / "stage/scratch",
             ),
             revision=fixed_revision,
             clock=PerfCounterClock(),

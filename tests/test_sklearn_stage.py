@@ -6,42 +6,45 @@ import json
 from dataclasses import replace
 from random import Random
 from typing import TYPE_CHECKING
+from unittest.mock import Mock, call
 
+import numpy as np
 import pytest
 from sklearn.linear_model import LogisticRegression
 
 from mediparse.application.patient_cv import patient_holdouts
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.split import Holdout
 from mediparse.domain.stage_tuning import StageLsa
 from mediparse.infrastructure import sklearn_stage
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
+from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
 from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.sklearn_stage import SklearnStageScorer
 from mediparse.infrastructure.stage_config import load_stage_config
+from tests.hf_encoder_support import SPEC
 from tests.screening_support import notes
-from tests.stage_support import stage_config
+from tests.stage_support import stage_config, token_stage_config
 from tests.support import REPOSITORY, REPOSITORY_DIAGNOSIS_CANDIDATES
 
 if TYPE_CHECKING:
     from collections.abc import Callable
     from pathlib import Path
 
-    import numpy as np
     from scipy.sparse import csr_matrix
     from sklearn.base import BaseEstimator
     from sklearn.decomposition import TruncatedSVD
 
     from mediparse.domain.representation import ClassifierFamily
-    from mediparse.domain.split import Holdout
     from mediparse.domain.stage_tuning import StageTuningConfig
 
 
 def test_logreg_parameters_change_scores(tmp_path: Path) -> None:
     """Silnější a slabší regularizace dávají různá skóre na stejné syntetice."""
     config = stage_config()
-    scorer = SklearnStageScorer(config, None, 7, tmp_path)
+    scorer = SklearnStageScorer(config, None, 7, tmp_path, Mock())
     fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
     params = config.branches[0].default_params()
     low = scorer.score(params | {"logreg.C": 1e-4}, fold)
@@ -83,7 +86,7 @@ def test_lightgbm_receives_lsa_components(
         return model
 
     monkeypatch.setattr(sklearn_stage, "classifier_estimator", estimator)
-    scorer = SklearnStageScorer(config, None, 7, tmp_path)
+    scorer = SklearnStageScorer(config, None, 7, tmp_path, Mock())
     fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
     scorer.score(config.branches[0].default_params(), fold)
     assert observed == [3] * 5
@@ -119,7 +122,7 @@ def test_vocabulary_cap_applies_only_to_lsa(
         return model
 
     monkeypatch.setattr(sklearn_stage, "TruncatedSVD", svd)
-    result = SklearnStageScorer(config, None, 7, tmp_path).score(
+    result = SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
         config.branches[0].default_params(), fold
     )
     assert observed == ([5] if lsa else [])
@@ -156,7 +159,9 @@ def test_nondefault_char_tfidf_matches_manual_pipeline(tmp_path: Path) -> None:
         "char_wb.sublinear_tf": False,
         "logreg.C": 0.25,
     }
-    scored = SklearnStageScorer(config, normalization, 7, tmp_path).score(params, fold)
+    scored = SklearnStageScorer(config, normalization, 7, tmp_path, Mock()).score(
+        params, fold
+    )
     vectorizer = tfidf_vectorizer(
         normalization,
         analyzer="char_wb",
@@ -190,13 +195,13 @@ def test_seeded_scores_repeat(tmp_path: Path, family: str) -> None:
         for n in notes(visits=10)
     )
     fold = patient_holdouts(corpus, 2, 7, StratifiedGroupFolds())[0]
-    first = SklearnStageScorer(config, None, 7, tmp_path).score(
+    first = SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
         branch.default_params(), fold
     )
-    repeated = SklearnStageScorer(config, None, 7, tmp_path).score(
+    repeated = SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
         branch.default_params(), fold
     )
-    other = SklearnStageScorer(config, None, 29, tmp_path).score(
+    other = SklearnStageScorer(config, None, 29, tmp_path, Mock()).score(
         branch.default_params(), fold
     )
     assert first.scores == repeated.scores
@@ -219,7 +224,7 @@ def test_convergence_accumulates_all_diagnoses(
 
     monkeypatch.setattr(sklearn_stage, "fit_converged", fit_once)
     config = stage_config()
-    scorer = SklearnStageScorer(config, None, 7, tmp_path)
+    scorer = SklearnStageScorer(config, None, 7, tmp_path, Mock())
     scored = scorer.score(config.branches[0].default_params(), _clinical_fold())
     assert scored.converged is (failed_call is None)
     assert calls == 5
@@ -228,7 +233,81 @@ def test_convergence_accumulates_all_diagnoses(
 def test_min_df_above_training_documents_is_refused(tmp_path: Path) -> None:
     """Sklearn odmítne min_df větší než počet trénovacích dokumentů."""
     config = stage_config()
-    scorer = SklearnStageScorer(config, None, 7, tmp_path)
+    scorer = SklearnStageScorer(config, None, 7, tmp_path, Mock())
     params = config.branches[0].default_params() | {"r1.min_df": 100000}
     with pytest.raises(InvalidInputError, match="min_df"):
         scorer.score(params, _clinical_fold())
+
+
+def test_encoder_branch_scores_standardized_embeddings(tmp_path: Path) -> None:
+    """Encoder poskytne pět vektorů skóre a šířku čtyř příznaků."""
+    base = stage_config().model_dump(mode="json")
+    config = stage_config(
+        representations=[SPEC.model_dump(mode="json")], families=base["families"][:1]
+    )
+    fold = _clinical_fold()
+    vectors = {
+        n.text: [float(i % 3), float(i % 5), float(i % 7), float(i % 11)]
+        for i, n in enumerate((*fold.train, *fold.test))
+    }
+    embeddings = Mock()
+    embeddings.embed.side_effect = lambda _spec, texts: np.array([
+        vectors[text] for text in texts
+    ])
+    scored = SklearnStageScorer(config, None, 7, tmp_path, embeddings).score(
+        config.branches[0].default_params(), fold
+    )
+    assert len(scored.scores) == 5
+    assert all(len(scores) == len(fold.test) for scores in scored.scores.values())
+    assert scored.features == 4
+    assert embeddings.embed.call_args_list == [
+        call(SPEC, [n.text for n in (*fold.train, *fold.test)])
+    ]
+
+
+def test_tokens_branch_counts_distinct_analyzer_tokens(tmp_path: Path) -> None:
+    """Analyzátor sjednotí velikost písmen a odstraní čárku: tři tokeny."""
+    original = notes(visits=10)
+    fold = Holdout(
+        0,
+        tuple(
+            replace(n, text="Alpha, beta alpha" if i % 2 else "beta gamma")
+            for i, n in enumerate(original[:-1])
+        ),
+        (replace(original[-1], text="alpha"),),
+    )
+    config = token_stage_config()
+    scored = SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
+        config.branches[0].default_params(), fold
+    )
+    assert scored.features == 3
+
+
+def test_fasttext_family_params_reach_estimator(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Každý fit dostane hyperparametry aktivního pokusu."""
+    original = sklearn_stage.classifier_estimator
+    observed = []
+
+    def estimator(family: ClassifierFamily, seed: int, scratch: Path) -> BaseEstimator:
+        model = original(family, seed, scratch)
+        assert isinstance(model, FastTextClassifier)
+        fit = model.fit
+
+        def recording_fit(documents: np.ndarray, labels: list[bool]) -> BaseEstimator:
+            observed.append({
+                name: model.get_params()[name]
+                for name in ("lr", "epoch", "word_ngrams", "dim")
+            })
+            return fit(documents, labels)
+
+        monkeypatch.setattr(model, "fit", recording_fit)
+        return model
+
+    monkeypatch.setattr(sklearn_stage, "classifier_estimator", estimator)
+    config = token_stage_config()
+    SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
+        config.branches[0].default_params(), _clinical_fold()
+    )
+    assert observed == [{"lr": 0.5, "epoch": 1, "word_ngrams": 2, "dim": 2}] * 5

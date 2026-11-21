@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from collections import Counter, defaultdict
+from dataclasses import replace
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
@@ -17,9 +18,11 @@ from mediparse.domain.run_manifest import StageTuningManifest
 from mediparse.entrypoints import stage_tuning
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure import sklearn_stage
+from mediparse.infrastructure.hf_encoder import ENCODER_PACKAGES, HfMeanEncoder
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.split_table import ParquetSplitTable
 from mediparse.infrastructure.stage_config import load_stage_config
+from tests.hf_encoder_support import SPEC, encoder_parts
 from tests.screening_support import SHARED, notes
 from tests.stage_support import StepClock, stage_config
 from tests.support import REPOSITORY, fixed_revision, mark_synthetic, repository_corpus
@@ -44,6 +47,8 @@ def _paths(root: Path) -> stage_tuning.StageTuningPaths:
         predictions=root / "out/predictions.parquet",
         checkpoint=root / "out/checkpoint",
         manifest=root / "out/manifest.json",
+        embeddings=root / "embeddings",
+        scratch=root / "scratch",
     )
 
 
@@ -81,6 +86,7 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
         "scipy",
         "scikit-learn",
         "lightgbm",
+        "fasttext",
         "optuna",
         "pyarrow",
         "pydantic",
@@ -164,6 +170,8 @@ def test_main_accepts_all_required_paths(
         "predictions",
         "checkpoint",
         "manifest",
+        "embeddings",
+        "scratch",
     )
     argv = ["mediparse-stage-tuning"]
     for name in names:
@@ -202,3 +210,63 @@ def test_repository_config_and_manifest_validation(tmp_path: Path) -> None:
     for changes in ({"completed_trials": 5}, {"text_preprocessing": "dictionary"}):
         with pytest.raises(ValidationError):
             StageTuningManifest.model_validate_json(json.dumps(data | changes))
+
+
+def test_encoder_stage_records_encoder_provenance(tmp_path: Path) -> None:
+    """Syntetický encoder zapíše specifikaci i verze knihoven do manifestu."""
+    pytest.importorskip("torch")
+    paths = _paths(tmp_path)
+    base = stage_config().model_dump(mode="json")
+    config = stage_config(
+        representations=[SPEC.model_dump(mode="json")],
+        families=base["families"][:1],
+        trials=2,
+    )
+    paths.config.write_text(config.model_dump_json(), encoding="utf-8")
+    factory = Mock(
+        return_value=HfMeanEncoder(
+            *encoder_parts(
+                sorted({word for n in notes(visits=10) for word in n.text.split()})
+            ),
+            SPEC.window,
+            SPEC.device,
+        )
+    )
+    assert (
+        stage_tuning.run(
+            paths=paths,
+            environ={"CODEX_THREAD_ID": "test"},
+            revision=fixed_revision,
+            clock=StepClock(),
+            encoders=factory,
+        )
+        is ExitCode.OK
+    )
+    manifest = StageTuningManifest.model_validate_json(paths.manifest.read_bytes())
+    assert manifest.encoders == (SPEC,)
+    assert set(ENCODER_PACKAGES) <= manifest.environment.packages.keys()
+    assert "fasttext" in manifest.environment.packages
+
+
+@pytest.mark.parametrize("field", ["scratch", "embeddings"])
+def test_work_paths_inside_checkpoint_refused(tmp_path: Path, field: str) -> None:
+    """Pracovní adresáře nesmí vytvořit neúplný checkpoint."""
+    paths = _paths(tmp_path)
+    paths = replace(paths, **{field: paths.checkpoint / field})
+    assert _run(paths) is ExitCode.REFUSED
+    assert not any(
+        p.exists()
+        for p in (paths.out, paths.predictions, paths.manifest, paths.checkpoint)
+    )
+
+
+def test_published_classical_manifest_validates() -> None:
+    """Dřívější manifest bez encoderů zůstane platný a pravdivý."""
+    assert (
+        StageTuningManifest.model_validate_json(
+            (
+                REPOSITORY / "results/screening/classical_trials_manifest.json"
+            ).read_bytes()
+        ).encoders
+        == ()
+    )

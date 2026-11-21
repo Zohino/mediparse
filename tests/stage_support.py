@@ -95,3 +95,27 @@ class StepClock:
         """
         self.value += 1.0
         return self.value
+
+
+def token_stage_config() -> StageTuningConfig:
+    """Sestaví malý prostor fastTextu bez parametrů reprezentace.
+
+    Returns:
+        Tokenová větev s pevným levným fitem.
+    """
+    default = {"lr": 0.5, "epoch": 1, "word_ngrams": 2, "dim": 2}
+    return stage_config(
+        representations=[{"name": "tok"}],
+        families=[
+            {
+                "family": "fasttext",
+                "space": {
+                    "params": [
+                        {"kind": "categorical", "name": name, "choices": [value]}
+                        for name, value in default.items()
+                    ]
+                },
+                "default": default,
+            }
+        ],
+    )

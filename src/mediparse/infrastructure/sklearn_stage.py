@@ -1,16 +1,21 @@
-"""Skórování větví klasického stupně s fitováním reprezentace v každém pokusu."""
+"""Skórování větví stupně s fitováním reprezentace v každém pokusu."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from functools import partial
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, assert_never
 
 from sklearn.decomposition import TruncatedSVD
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.representation import ClassifierFamily
+from mediparse.domain.representation import (
+    ClassifierFamily,
+    EncoderSpec,
+    TfidfRepresentation,
+    TokensSpec,
+)
 from mediparse.domain.tuning import ValidationScores
 from mediparse.infrastructure.sklearn_classifier import (
     TfidfParameters,
@@ -19,6 +24,8 @@ from mediparse.infrastructure.sklearn_classifier import (
     tfidf_from,
 )
 from mediparse.infrastructure.sklearn_screening import (
+    EncoderFeaturizer,
+    TokenFeaturizer,
     classifier_estimator,
     positive_scores,
 )
@@ -27,11 +34,15 @@ if TYPE_CHECKING:
     from collections.abc import Mapping
     from pathlib import Path
 
+    from numpy import ndarray
+    from scipy.sparse import csr_matrix
+
     from mediparse.domain.clinical_text import TextNormalization
     from mediparse.domain.seed import Seed
     from mediparse.domain.split import Holdout
-    from mediparse.domain.stage_tuning import StageTuningConfig
+    from mediparse.domain.stage_tuning import Branch, StageTuningConfig
     from mediparse.domain.tuning import ParamValue
+    from mediparse.infrastructure.note_embeddings import NoteEmbeddings
 
 
 @dataclass(frozen=True)
@@ -42,6 +53,7 @@ class SklearnStageScorer:
     normalization: TextNormalization | None
     seed: Seed
     scratch: Path
+    embeddings: NoteEmbeddings
 
     def score(
         self, params: Mapping[str, ParamValue], fold: Holdout
@@ -65,28 +77,7 @@ class SklearnStageScorer:
     ) -> ValidationScores:
         branch = self.config.branch(params)
         rep, family = branch.params_of(params)
-        tfidf = TfidfParameters.model_validate(rep)
-        lsa = (
-            self.config.lsa
-            if branch.family.family is ClassifierFamily.LIGHTGBM_LSA
-            else None
-        )
-        # SVD alokuje husté matice úměrné šířce; strop drží paměť, jiné rodiny mají celý slovník.
-        vectorizer = tfidf_from(
-            tfidf,
-            branch.representation.analyzer,
-            self.normalization,
-            max_features=lsa.max_features if lsa else None,
-        )
-        texts = [note.text for note in fold.train]
-        ensure_tokens(vectorizer, texts)
-        train = vectorizer.fit_transform(texts)
-        validation = vectorizer.transform([note.text for note in fold.test])
-        features = train.shape[1]
-        if lsa is not None:
-            reducer = TruncatedSVD(n_components=lsa.components, random_state=self.seed)
-            train = reducer.fit_transform(train)
-            validation = reducer.transform(validation)
+        train, validation, features = self._features(branch, rep, fold)
         scores = {}
         converged = True
         for diagnosis in Diagnosis:
@@ -105,3 +96,50 @@ class SklearnStageScorer:
                 float(v) for v in positive_scores(model, validation)
             )
         return ValidationScores(scores, converged, features)
+
+    def _features(
+        self, branch: Branch, rep_params: Mapping[str, ParamValue], fold: Holdout
+    ) -> tuple[ndarray | csr_matrix, ndarray | csr_matrix, int]:
+        texts = [note.text for note in fold.train]
+        test_texts = [note.text for note in fold.test]
+        match branch.representation:
+            case EncoderSpec() as spec:
+                train, validation = EncoderFeaturizer(self.embeddings).fit_transform(
+                    spec, texts, test_texts
+                )
+                return train.matrix, validation.matrix, train.matrix.shape[1]
+            case TokensSpec() as spec:
+                train, validation = TokenFeaturizer(self.normalization).fit_transform(
+                    spec, texts, test_texts
+                )
+                features = len({
+                    token for document in train.matrix for token in document.split()
+                })
+                return train.matrix, validation.matrix, features
+            case TfidfRepresentation():
+                tfidf = TfidfParameters.model_validate(rep_params)
+                lsa = (
+                    self.config.lsa
+                    if branch.family.family is ClassifierFamily.LIGHTGBM_LSA
+                    else None
+                )
+                # SVD alokuje husté matice úměrné šířce; strop drží paměť, jiné rodiny mají celý slovník.
+                vectorizer = tfidf_from(
+                    tfidf,
+                    branch.representation.analyzer,
+                    self.normalization,
+                    max_features=lsa.max_features if lsa else None,
+                )
+                ensure_tokens(vectorizer, texts)
+                train = vectorizer.fit_transform(texts)
+                validation = vectorizer.transform(test_texts)
+                features = train.shape[1]
+                if lsa is not None:
+                    reducer = TruncatedSVD(
+                        n_components=lsa.components, random_state=self.seed
+                    )
+                    train = reducer.fit_transform(train)
+                    validation = reducer.transform(validation)
+                return train, validation, features
+            case _:
+                assert_never(branch.representation)

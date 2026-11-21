@@ -7,13 +7,15 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain import stage_tuning as stage_domain
+from mediparse.domain.representation import TfidfRepresentation
 from mediparse.domain.stage_tuning import (
     StageLsa,
     StageTrialRecord,
     StageTuningConfig,
     best_trial,
 )
-from tests.stage_support import stage_config
+from tests.hf_encoder_support import SPEC
+from tests.stage_support import stage_config, token_stage_config
 
 
 def test_branches_and_namespaces() -> None:
@@ -29,6 +31,7 @@ def test_branches_and_namespaces() -> None:
     for branch in config.branches:
         params = branch.default_params()
         rep, fam = branch.params_of(params)
+        assert isinstance(branch.representation, TfidfRepresentation)
         assert rep == branch.representation.default
         assert fam == branch.family.default
         assert {p.name for p in branch.prefixed_space()} == params.keys() - {"branch"}
@@ -195,3 +198,58 @@ def test_lsa_cap_exceeds_components() -> None:
         ValidationError, match="Strop slovníku LSA musí převyšovat počet komponent"
     ):
         StageLsa(components=2, max_features=2)
+
+
+def test_branches_follow_accepted_pairs() -> None:
+    """Filtrovaný součin respektuje pořadí i rozpočet výchozích bodů."""
+    base = stage_config().model_dump(mode="json")
+    token = token_stage_config().model_dump(mode="json")
+    config = stage_config(
+        representations=[
+            base["representations"][0],
+            SPEC.model_dump(mode="json") | {"name": "enc"},
+            {"name": "tok"},
+        ],
+        families=[base["families"][0], token["families"][0]],
+    )
+    assert [b.name for b in config.branches] == [
+        "r1/logreg",
+        "enc/logreg",
+        "tok/fasttext",
+    ]
+    assert config.startup_trials == 3 + config.random_startup_trials
+    assert config.encoders == (SPEC.model_copy(update={"name": "enc"}),)
+
+
+def test_branch_without_representation_space() -> None:
+    """Tokeny ponechávají v pokusu pouze prostor rodiny."""
+    branch = token_stage_config().branches[0]
+    assert {p.name for p in branch.prefixed_space()} == {
+        "fasttext.lr",
+        "fasttext.epoch",
+        "fasttext.word_ngrams",
+        "fasttext.dim",
+    }
+    params = {
+        "branch": "tok/fasttext",
+        "fasttext.lr": 0.5,
+        "fasttext.epoch": 1,
+        "fasttext.word_ngrams": 2,
+        "fasttext.dim": 2,
+    }
+    assert branch.default_params() == params
+    assert branch.params_of(params) == ({}, branch.family.default)
+
+
+@pytest.mark.parametrize("tokens", [True, False])
+def test_unused_representation_or_family_rejected(*, tokens: bool) -> None:
+    """Každá reprezentace i rodina musí patřit do některé větve."""
+    base = stage_config().model_dump(mode="json")
+    token = token_stage_config().model_dump(mode="json")
+    with pytest.raises(ValidationError, match="nepatří do žádné větve"):
+        stage_config(
+            representations=token["representations"]
+            if tokens
+            else base["representations"],
+            families=base["families"][:1] if tokens else token["families"],
+        )
