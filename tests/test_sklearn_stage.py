@@ -135,7 +135,7 @@ def test_vocabulary_cap_applies_only_to_lsa(
         branch.default_params(), fold
     )
     assert observed == ([5] if lsa else [])
-    assert result.features == (5 if lsa else len(vocabulary))
+    assert result.n_features == (5 if lsa else len(vocabulary))
 
 
 def _clinical_fold() -> Holdout:
@@ -268,7 +268,7 @@ def test_encoder_branch_scores_cached_embeddings(tmp_path: Path) -> None:
     )
     assert len(scored.scores) == 5
     assert all(len(scores) == len(fold.test) for scores in scored.scores.values())
-    assert scored.features == 4
+    assert scored.n_features == 4
     assert embeddings.embed.call_args_list == [
         call(SPEC, [n.text for n in (*fold.train, *fold.test)])
     ]
@@ -304,7 +304,7 @@ def test_tokens_branch_counts_distinct_analyzer_tokens(
     scored = SklearnStageScorer(config, normalization, 7, tmp_path, Mock()).score(
         config.branches[0].default_params(), fold
     )
-    assert scored.features == features
+    assert scored.n_features == features
 
 
 def test_fasttext_family_params_reach_estimator(

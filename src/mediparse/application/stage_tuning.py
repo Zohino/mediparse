@@ -110,7 +110,7 @@ class StageTuning:
                     scores=run.scores[i].scores[diagnosis],
                     max_f1=run.f1[i][diagnosis],
                     converged=run.scores[i].converged,
-                    features=run.scores[i].features,
+                    n_features=run.scores[i].n_features,
                 )
                 for i, fold in enumerate(folds)
                 for diagnosis in Diagnosis

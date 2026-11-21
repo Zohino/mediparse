@@ -157,13 +157,13 @@ class ValidationScores:
     """Skóre v pořadí validačních zpráv pro všech pět diagnóz.
 
     Attributes:
-        features: Počet sloupců reprezentace předaných klasifikátoru,
+        n_features: Počet sloupců reprezentace předaných klasifikátoru,
             u LSA počet sloupců vstupu SVD.
     """
 
     scores: Mapping[Diagnosis, tuple[float, ...]]
     converged: bool
-    features: int
+    n_features: int
 
 
 @dataclass(frozen=True)

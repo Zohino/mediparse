@@ -77,7 +77,7 @@ class SklearnStageScorer:
     ) -> ValidationScores:
         branch = self.config.branch(params)
         rep, family = branch.params_of(params)
-        train, validation, features = self._features(branch, rep, fold)
+        train, validation, n_features = self._features(branch, rep, fold)
         scores = {}
         converged = True
         for diagnosis in Diagnosis:
@@ -95,7 +95,7 @@ class SklearnStageScorer:
             scores[diagnosis] = tuple(
                 float(v) for v in positive_scores(model, validation)
             )
-        return ValidationScores(scores, converged, features)
+        return ValidationScores(scores, converged, n_features)
 
     def _features(
         self, branch: Branch, rep_params: Mapping[str, ParamValue], fold: Holdout
@@ -112,10 +112,10 @@ class SklearnStageScorer:
                 train, validation = TokenFeaturizer(self.normalization).fit_transform(
                     spec, train_texts, validation_texts
                 )
-                features = len({
+                n_features = len({
                     token for document in train.matrix for token in document.split()
                 })
-                return train.matrix, validation.matrix, features
+                return train.matrix, validation.matrix, n_features
             case TfidfRepresentation():
                 return self._tfidf(branch, rep_params, train_texts, validation_texts)
             case _:
@@ -144,9 +144,9 @@ class SklearnStageScorer:
         ensure_tokens(vectorizer, train_texts)
         train = vectorizer.fit_transform(train_texts)
         validation = vectorizer.transform(validation_texts)
-        features = train.shape[1]
+        n_features = train.shape[1]
         if lsa is not None:
             reducer = TruncatedSVD(n_components=lsa.components, random_state=self.seed)
             train = reducer.fit_transform(train)
             validation = reducer.transform(validation)
-        return train, validation, features
+        return train, validation, n_features

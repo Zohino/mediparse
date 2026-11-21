@@ -80,7 +80,7 @@ class _Scorer:
                 for d in Diagnosis
             },
             converged=True,
-            features=10 + fold.fold,
+            n_features=10 + fold.fold,
         )
 
 
@@ -176,7 +176,7 @@ def test_fold_features_reach_results() -> None:
         StepClock(),
     ).run(config)
     assert progress.results
-    assert all(result.features == 10 + result.fold for result in progress.results)
+    assert all(result.n_features == 10 + result.fold for result in progress.results)
 
 
 @pytest.mark.parametrize("cut", [3, 5])
@@ -317,7 +317,7 @@ def test_checkpoint_round_trip_record_and_fold_results(tmp_path: Path) -> None:
         labels=(True, False),
         scores=(0.9, 0.1),
         max_f1=MaxF1(1.0, 0.9),
-        features=17,
+        n_features=17,
         converged=False,
     )
     progress.write(record, [replace(result, converged=True), replace(result, fold=1)])
@@ -325,7 +325,7 @@ def test_checkpoint_round_trip_record_and_fold_results(tmp_path: Path) -> None:
     progress.finish()
     assert not progress.directory.exists()
     table = read_table(progress.results, TRIALS_SCHEMA)
-    assert table["features"].to_pylist() == [17] * table.num_rows
+    assert table["n_features"].to_pylist() == [17] * table.num_rows
     assert (
         table["params"].to_pylist()
         == ['{"branch": "word/logreg", "logreg.C": 1.0, "word.min_df": 1}'] * 2
