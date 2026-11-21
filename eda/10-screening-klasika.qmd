@@ -1,7 +1,7 @@
 ---
-title: "Screening klasického stupně klasifikace"
+title: "Ladění klasického stupně klasifikace"
 abstract: |
-  Sešit porovnává rodiny klasických klasifikátorů nad TF-IDF na vývojové části pacientů. Předem vymezuje výběr rodiny s nejlepším vektorizérem podle macro-F1, pásmo jedné standardní chyby a pravidlo pro zkoumání ensemblu podle korelace chyb. Čte agregované výsledky screeningu a v DuckDB páruje predikce pouze pro výpočet agregátů φ.
+  Sešit vyhodnocuje společné ladění reprezentace, rodiny a hyperparametrů klasického stupně na vývojové části pacientů podle D40. Výchozí pokusy popisují kombinace, nejlepší pokus určuje vítěze a korelace chyb s druhou rodinou rozhoduje o tasku ensemblu. Held-out test se nepoužívá.
 ---
 
 ```{r}
@@ -13,26 +13,26 @@ source("R/czech.R")
 source("R/db.R")
 source("R/corpus.R")
 source("R/diagnoses.R")
-source("R/screening.R")
-paths <- screening_paths()
-screening_config_path <- config_path("screening_classical.json")
-manifest <- read_screening_manifest(paths, screening_config_path)
-config <- jsonlite::read_json(screening_config_path)
-results <- read_screening_results(paths$results)
-check_screening_grid(results, config)
-summary <- screening_summary(results)
-selection <- screening_selection(summary)
+source("R/stage_trials.R")
+paths <- stage_trial_paths("classical")
+stage_config_path <- config_path("stage_classical.json")
+manifest <- read_stage_manifest(paths, stage_config_path)
+config <- jsonlite::read_json(stage_config_path)
 candidates <- read_candidates(candidates_path())
-# Příloha A odpojuje připojení pod jménem con; tabulky MIMIC tento sešit nepotřebuje.
+trials <- read_stage_trials(paths$results)
+check_stage_trials(trials, manifest, config, candidates)
+summary <- stage_trial_summary(trials)
+selection <- stage_selection(summary, manifest)
+# Příloha A odpojuje připojení pod jménem con.
 con <- DBI::dbConnect(duckdb::duckdb())
-prediction_source <- screening_predictions_source(con, paths$predictions)
-others <- summary[summary$best & summary$family != selection$winner$family, ]
-phi <- error_correlation(con, prediction_source, selection$winner, others)
+prediction_source <- stage_predictions_source(con, paths$predictions)
+others <- selection$family_best[selection$family_best$family != selection$winner$family, ]
+phi <- stage_error_correlation(con, prediction_source, selection$winner, others)
 ```
 
 # Úvod
 
-Desátý sešit vybírá klasické rodiny pro ladění v S39j. Screening podle D39 používá výchozí hyperparametry na vývojové části pacientů, kterou následná evaluace nikdy nevidí. Výběr nepoužívá held-out test. Jednotkou rozhodnutí je rodina se svým nejlepším vektorizérem, nikoli jednotlivá diagnóza.
+Desátý sešit vybírá vítěze klasického stupně předkola podle D40. Společně ladí reprezentaci, rodinu a hyperparametry (CASH) [@Thornton2013] na vývojové části pacientů, kterou následná evaluace nepoužívá. Held-out test do výběru nevstupuje.
 
 # Data a metody
 
@@ -42,26 +42,48 @@ Complement NB upravuje naivní Bayes pro nevyvážené třídy textu [@Rennie200
 
 ## Protokol
 
-Mřížka kombinuje `r count_phrase(length(config$families), c("rodinu", "rodiny", "rodin"))` a `r count_phrase(length(config$vectorizers), c("vektorizér", "vektorizéry", "vektorizérů"))` TF-IDF: `r screening_vectorizers_text(config)`. LightGBM používá LSA s `r count_phrase(config$lsa_components, c("komponentou", "komponentami", "komponentami"))`. Každá kombinace se vyhodnocuje pro pět diagnóz v `r count_phrase(config$folds, c("vnějším foldu", "vnějších foldech", "vnějších foldech"))` s dělením po pacientech. Práh se vybírá uvnitř trénovací části pomocí `r count_phrase(config$threshold_folds, c("vnitřního foldu", "vnitřních foldů", "vnitřních foldů"))`. Velikost vývojové části, předzpracování a provenance běhu uvádí @tbl-screening-provenance.
-
-Sešit ověřuje SHA-256 výsledků, predikcí a configu proti manifestu. Výsledky musí obsahovat přesně úplnou mřížku configu, každou buňku jednou. Predikce dvojice se spojují úplně a jednoznačně přes fold, diagnózu a identitu zprávy. Do R přicházejí jen agregované počty správnosti po buňkách, nikoli identity ani řádky predikcí.
+Ladění používá jednu z `r config$subsample_parts` částí vývojových pacientů,
+`r manifest$sample_notes` zpráv a `r manifest$sample_patients` pacientů.
+Rozdělení má `r config$folds` foldy po pacientech. Rozpočet je
+`r config$trials` pokusů, z nichž prvních `r sum(summary$default)`
+používá výchozí hodnoty každé větve a dalších `r manifest$random_startup_trials`
+je náhodných. Potom TPE soustředí pokusy do slibných oblastí [@Bergstra2011].
+Optuna [@Akiba2019] používá multivariate a group TPE; sampler je
+`r manifest$sampler`, pruner je `r manifest$pruner` (bez prořezávání).
+Cílem je průměr foldových macro-MaxF1: v každém foldu průměr maxim F1 přes diagnózy.
+Práh se vybírá na validaci foldu, stejně pro všechny pokusy.
+TF-IDF i LSA se fitují pouze na tréninku foldu.
+LightGBM používá `r config$lsa$components` komponent LSA.
 
 ```{r}
-#| label: tbl-screening-provenance
-#| tbl-cap: "Provenance běhu screeningu; otisky vstupů byly ověřeny před výběrem."
+#| label: tbl-stage-provenance
+#| tbl-cap: "Provenance ladění stupně; otisky vstupů byly ověřeny."
 #| tbl-colwidths: [30, 70]
-export_table(screening_provenance_table(manifest), col.names = c("Položka", "Hodnota"), align = "ll")
+export_table(stage_provenance_table(manifest), col.names = c("Položka", "Hodnota"), align = "ll")
 ```
 
-## Kritérium výběru zapsané před reálným během
+## Prostor ladění
 
-Pro každý vnější fold je macro-F1 aritmetický průměr F1 přes pět diagnóz. Průměr a výběrová SD (jmenovatel K − 1) se počítají přes K vnějších foldů. Každou rodinu reprezentuje vektorizér s nejvyšší průměrnou macro-F1. Vítězí rodina s nejvyšším takovým průměrem; shodu rozhoduje jméno vzestupně, nejprve u vektorizéru a potom u rodiny. PR-AUC je pouze pomocná metrika, rovněž makro přes diagnózy.
+Tabulka zachovává pořadí configu. Pomlčka označuje složku mimo větev vítěze.
 
-Do S39j postupuje vítěz a všechny rodiny s průměrem alespoň průměr vítěze minus jeho SE, kde SE = SD / √K. Jde o pásmo 1 SE inspirované pravidlem jedné standardní chyby [@Hastie2009, §7.10]. Nekonvergované buňky zůstávají ve všech průměrech; jejich počet je uveden v tabulce mřížky.
+```{r}
+#| label: tbl-space
+#| tbl-cap: "Rozsahy hyperparametrů, výchozí hodnoty a hodnoty vítěze; log označuje logaritmickou škálu."
+export_table(stage_space_table(config, manifest$best_params),
+  col.names = c("Složka", "Parametr", "Rozsah", "Výchozí", "Vítěz"), align = "lllll")
+```
 
-## Pravidlo ensemblu zapsané před reálným během
+## Kritérium výběru stanovené v D40 před reálným během
 
-Vítěz se porovnává se všemi ostatními rodinami, každá se svým nejlepším vektorizérem. Pro rozhodnutí jsou určující jen rodiny v pásmu; pokud v pásmu zůstane pouze vítěz, rozhoduje druhá nejlepší rodina. Ostatní dvojice v tabulce jsou popisné.
+Vítězí pokus s nejvyšším cílem; shodu rozhoduje nižší číslo pokusu.
+Nejlepší pokusy rodin se řadí stejným způsobem.
+SD je výběrová směrodatná odchylka foldových macro-MaxF1 (jmenovatel K − 1).
+Nekonvergované fity zůstávají ve výběru.
+
+## Pravidlo ensemblu
+
+Popisně se vítěz porovnává s nejlepším pokusem každé další rodiny.
+O tasku ensemblu rozhoduje jen druhá nejlepší rodina podle D40.
 
 Korelace chybových indikátorů φ je stejná jako korelace indikátorů správnosti. Pro každou buňku (fold, diagnóza) se ze správnosti `predicted == label` obou rodin počítá [@Kuncheva2003]:
 
@@ -69,58 +91,80 @@ $$
 \varphi = \frac{N_{11}N_{00}-N_{01}N_{10}}{\sqrt{(N_{11}+N_{10})(N_{01}+N_{00})(N_{11}+N_{01})(N_{10}+N_{00})}}.
 $$
 
-Hodnota N11 značí obě rodiny správně, N00 obě chybně, N10 pouze vítěze správně a N01 pouze druhou rodinu správně. Při nulovém jmenovateli je φ nedefinované a z průměru přes diagnózy a foldy se vynechá; tabulka uvádí počet definovaných buněk z celkového počtu. Pokud má alespoň jedna rozhodující dvojice průměr φ **ostře menší než 0,5**, vznikne před S39j podtask ensemblu. Hranice vychází z Cohenova vymezení silné korelace [@Cohen1988]. Jinak výsledek patří do diskuse. Pokud žádná rozhodující dvojice nemá definovanou buňku, φ není k dispozici a patří věta do diskuse.
+Hodnota N11 značí obě rodiny správně, N00 obě chybně, N10 pouze vítěze správně a N01 pouze druhou rodinu správně. Při nulovém jmenovateli je φ nedefinované a z průměru přes diagnózy a foldy se vynechá; tabulka uvádí počet definovaných buněk z celkového počtu. Pokud má dvojice vítěze a druhé rodiny průměr φ **ostře menší než 0,5**, vznikne před S39j podtask ensemblu. Hranice vychází z Cohenova vymezení silné korelace [@Cohen1988]. Jinak výsledek patří do diskuse. Pokud rozhodující dvojice nemá definovanou buňku, φ není k dispozici a patří věta do diskuse.
+
+## Kontroly vstupů
+
+Sešit ověřuje otisky výsledků, predikcí a configu proti manifestu,
+úplnost pokusů a buněk fold × diagnóza i konstantní metadata pokusu.
+Nezávisle přepočítává cíl z max-F1 a ověřuje vítěze proti manifestu.
+Predikce páruje úplně a jednoznačně se stejnými labely; do R přicházejí jen agregované četnosti.
 
 # Výsledky
 
-@tbl-mrizka zahrnuje všechny kombinace, včetně nekonvergovaných buněk. Značka nejlepšího vektorizéru je určena jen macro-F1.
-
 ```{r}
-#| label: tbl-mrizka
-#| tbl-cap: "Úplná mřížka: průměr ± SD macro-F1 přes foldy, průměrná makro PR-AUC a nekonvergované buňky."
-#| tbl-colwidths: [24, 20, 20, 12, 14, 10]
-export_table(screening_grid_table(summary),
-  col.names = c("Rodina", "Vektorizér", "Macro-F1 ± SD", "PR-AUC", "Nekonv.", "Nejlepší"), align = "llrrrc")
+#| label: tbl-defaults
+#| tbl-cap: "Výchozí pokusy: macro-MaxF1 ± SD přes foldy, konvergence všech fitů a čas."
+export_table(stage_defaults_table(summary),
+  col.names = c("Reprezentace", "Rodina", "Macro-MaxF1 ± SD", "Konvergence", "Minuty"), align = "llrcr")
 ```
 
 ```{r}
-#| label: tbl-diagnozy
-#| tbl-cap: "Průměr F1 přes vnější foldy po diagnózách; každá rodina se svým nejlepším vektorizérem."
-#| tbl-colwidths: [36, 48, 16]
-export_table(screening_diagnosis_table(results, summary, candidates),
-  col.names = c("Rodina", "Diagnóza", "F1"), align = "llr")
-```
-
-```{r}
-#| label: fig-screening
-#| fig-cap: "Macro-F1 po vnějších foldech (šedé body) a průměr (kosočtverec) u nejlepšího vektorizéru každé rodiny. Svislá čárkovaná čára je hranice pásma 1 SE."
+#| label: fig-history
+#| fig-cap: "Průběh ladění: cíle pokusů podle rodiny a dosud nejlepší cíl. Čárkovaná čára ukončuje výchozí a náhodné startovní pokusy."
 #| fig-width: 6.5
 #| fig-height: 3.5
-export_figure(screening_plot(results, summary, selection), height_cm = 9)
+export_figure(stage_history_plot(summary, manifest), height_cm = 9)
 ```
 
-Nejvyšší průměr macro-F1 je `r metric_text(selection$winner$mean)` a hranice pásma 1 SE je `r metric_text(selection$threshold)`.
+```{r}
+#| label: tbl-families
+#| tbl-cap: "Nejlepší pokus každé rodiny, jeho výchozí větev a počet pokusů rodiny."
+export_table(stage_family_table(selection, summary),
+  col.names = c("Rodina", "Pokus a reprezentace", "Macro-MaxF1 ± SD", "Výchozí", "Pokusy"), align = "llrrr")
+```
+
+```{r}
+#| label: tbl-diagnoses
+#| tbl-cap: "Průměr max-F1 přes foldy po diagnózách u nejlepšího pokusu každé rodiny."
+export_table(stage_diagnosis_table(trials, selection, candidates),
+  col.names = c("Rodina", "Diagnóza", "Max-F1"), align = "llr")
+```
+
+Vítězný pokus `r selection$winner$trial` dosáhl cíle `r metric_text(selection$winner$value)`.
 
 ```{r}
 #| label: tbl-phi
-#| tbl-cap: "Vítěz proti ostatním rodinám: průměr φ, definované buňky z celku, příslušnost k pásmu a rozhodující dvojice. Pomlčka značí nedefinované φ."
-#| tbl-colwidths: [26, 20, 12, 16, 12, 14]
-export_table(screening_phi_table(phi, selection),
-  col.names = c("Rodina", "Vektorizér", "φ", "Buňky", "Pásmo", "Rozhoduje"), align = "llrrcc")
+#| tbl-cap: "Vítěz proti ostatním rodinám: průměr φ a počet definovaných buněk. Rozhoduje druhá rodina."
+export_table(stage_phi_table(phi, selection),
+  col.names = c("Rodina", "Pokus", "φ", "Buňky", "Rozhoduje"), align = "lrrrc")
 ```
+
+`r stage_lsa_cap_text(trials, config)`
 
 # Shrnutí a rozhodnutí
 
-`r screening_selection_text(selection)`
+`r stage_selection_text(selection)`
 
-`r screening_ensemble_text(phi, selection)` Případný podtask zkoumá ensemble samostatně; tabulka φ sama výkon ensemblu neměří.
+`r stage_ensemble_text(phi, selection)`
 
 # Omezení a ohrožení validity
 
-Screening používá výchozí hodnoty bez ladění podle D39. Edin a kol. na MIMIC-IV ukazují, že slabé výsledky dřívějších prací plynuly z konfigurace, ne z architektury [@Edin2023]; pořadí screeningu proto vyžaduje opatrnost a neznamená konečné pořadí po ladění. Random forest je vědomě mimo rozsah: stromové ansámbly zastupuje LightGBM. Sešit netvrdí, že je random forest horší.
+Výběr nad jedním laděním je pro vítěze optimistický (winner's curse);
+nestranný odhad dá až následná evaluace [@Cawley2010].
+Také práh vybraný na validaci foldu je optimistický, ale společný všem pokusům podle D40.
 
-TF-IDF (slovník a IDF) i LSA se učí bez labelů na celém tréninku vnějšího foldu, takže jsou vůči vnitřní CV volby prahu transduktivní. Ovlivněna je jen volba prahu; test vnějšího foldu zůstává mimo učení.
+Rozpočet se dělí mezi větve nerovnoměrně: TPE soustředí pokusy na slibné větve,
+takže nejlepší pokus slabé rodiny je méně vyladěný. Výchozí pokusy dávají každé větvi aspoň jednu šanci.
+Podvzorek jedné z `r config$subsample_parts` částí vývojových pacientů a
+`r config$folds` foldy omezují přenositelnost pořadí.
+SD přes korelované foldy podceňuje nejistotu.
+φ popisuje souběh chyb, nikoli výkon ensemblu; nedefinované buňky se vynechávají.
 
-SE z korelovaných foldů křížové validace podceňuje nejistotu; pásmo není interval spolehlivosti. φ popisuje souběh chyb a samo nezaručuje zlepšení ensemblu. Nedefinované buňky se vynechávají a jejich počet je zveřejněn. Nekonvergované buňky zůstávají v porovnání a mohou pořadí ovlivnit.
+Random forest je vědomě mimo rozsah: stromové ansámbly zastupuje LightGBM.
+Sešit netvrdí, že je random forest horší.
+Edin a kol. na MIMIC-IV ukazují, že slabé výsledky dřívějších prací plynuly
+z konfigurace, ne z architektury [@Edin2023]; ladění zde odstraňuje hlavní zdroj
+zkreslení výchozích hodnot, ale pořadí stále vyžaduje ověření evaluací.
 
 {{< include _partials/appendix.qmd >}}
