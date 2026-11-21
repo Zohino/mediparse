@@ -109,6 +109,22 @@ class Branch:
         )
 
 
+class StageLsa(BaseModel):
+    """Rozměry a paměťový strop reprezentace LSA."""
+
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+
+    components: PositiveInt
+    max_features: PositiveInt
+
+    @model_validator(mode="after")
+    def _cap_exceeds_components(self) -> Self:
+        if self.max_features <= self.components:
+            msg = "Strop slovníku LSA musí převyšovat počet komponent"
+            raise ValueError(msg)
+        return self
+
+
 class StageTuningConfig(BaseModel):
     """Rozpočet jednoho CASH ladění na vývojové části."""
 
@@ -119,8 +135,7 @@ class StageTuningConfig(BaseModel):
     folds: Annotated[int, Field(ge=2)]
     trials: PositiveInt
     random_startup_trials: Annotated[int, Field(ge=0)]
-    lsa_components: PositiveInt
-    lsa_max_features: PositiveInt
+    lsa: StageLsa | None = None
     input: ModelInput
     representations: Annotated[tuple[TfidfRepresentation, ...], Field(min_length=1)]
     families: Annotated[tuple[FamilySpace, ...], Field(min_length=1)]
@@ -149,8 +164,10 @@ class StageTuningConfig(BaseModel):
 
     @model_validator(mode="after")
     def _valid_stage(self) -> Self:
-        if self.lsa_max_features <= self.lsa_components:
-            msg = "Strop slovníku LSA musí převyšovat počet komponent."
+        if (self.lsa is not None) != any(
+            f.family is ClassifierFamily.LIGHTGBM_LSA for f in self.families
+        ):
+            msg = "LSA musí být zadané právě s rodinou lightgbm_lsa."
             raise ValueError(msg)
         if len({r.name for r in self.representations}) != len(self.representations):
             msg = "Jména reprezentací musí být jedinečná."

@@ -8,6 +8,7 @@ from pydantic import ValidationError
 
 from mediparse.domain import stage_tuning as stage_domain
 from mediparse.domain.stage_tuning import (
+    StageLsa,
     StageTrialRecord,
     StageTuningConfig,
     best_trial,
@@ -55,11 +56,6 @@ def test_winner_tie_uses_earlier_trial() -> None:
             {("representations", 0, "default", "max_df"): 1},
             "Výchozí parametry reprezentace",
             id="max-df-int-default",
-        ),
-        pytest.param(
-            {("lsa_max_features",): 2},
-            "Strop slovníku LSA",
-            id="lsa-cap-not-above-components",
         ),
         pytest.param({("trials",): 4}, "Rozpočet", id="insufficient-budget"),
         pytest.param(
@@ -179,3 +175,23 @@ def test_branch_identity_is_resolved_in_domain() -> None:
             branch.representation.name,
             branch.family.family,
         )
+
+
+def test_lsa_required_exactly_with_lightgbm() -> None:
+    """LSA je povinné právě pro rodinu lightgbm_lsa."""
+    config = stage_config()
+    data = config.model_dump(mode="json")
+    data["families"][0]["family"] = "lightgbm_lsa"
+    with pytest.raises(ValidationError, match="LSA"):
+        StageTuningConfig.model_validate_json(json.dumps(data))
+    with pytest.raises(ValidationError, match="LSA"):
+        stage_config(lsa={"components": 2, "max_features": 1000})
+    assert config.lsa is None
+
+
+def test_lsa_cap_exceeds_components() -> None:
+    """Strop slovníku musí převyšovat počet komponent."""
+    with pytest.raises(
+        ValidationError, match="Strop slovníku LSA musí převyšovat počet komponent"
+    ):
+        StageLsa(components=2, max_features=2)

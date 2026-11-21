@@ -4,8 +4,7 @@
   "folds": 3,
   "trials": 60,
   "random_startup_trials": 10,
-  "lsa_components": 100,
-  "lsa_max_features": 100000,
+  "lsa": {"components": 100, "max_features": 100000},
   "input": {
     "strip_diagnostic_sections": false,
     "text_preprocessing": "dictionary"

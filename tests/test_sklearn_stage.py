@@ -13,6 +13,7 @@ from sklearn.linear_model import LogisticRegression
 from mediparse.application.patient_cv import patient_holdouts
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.stage_tuning import StageLsa
 from mediparse.infrastructure import sklearn_stage
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
@@ -49,7 +50,7 @@ def test_logreg_parameters_change_scores(tmp_path: Path) -> None:
 
 
 def _lsa_config(**changes: object) -> StageTuningConfig:
-    config = stage_config(**changes)
+    config = stage_config()
     data = config.model_dump(mode="json")
     data["families"][0] = {
         "family": "lightgbm_lsa",
@@ -58,6 +59,7 @@ def _lsa_config(**changes: object) -> StageTuningConfig:
         },
         "default": {"n_estimators": 10},
     }
+    data.update({"lsa": {"components": 2, "max_features": 1000}} | changes)
     return type(config).model_validate_json(json.dumps(data))
 
 
@@ -65,7 +67,7 @@ def test_lightgbm_receives_lsa_components(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Estimator LightGBM vidí právě tři komponenty místo řídkého TF-IDF."""
-    config = _lsa_config(lsa_components=3)
+    config = _lsa_config(lsa={"components": 3, "max_features": 1000})
     observed = []
     original = sklearn_stage.classifier_estimator
 
@@ -92,8 +94,8 @@ def test_vocabulary_cap_applies_only_to_lsa(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, lsa: bool
 ) -> None:
     """Strop omezí vstup LSA na pět sloupců, logistická regrese vidí celé V."""
-    config = (_lsa_config if lsa else stage_config)(
-        lsa_components=3, lsa_max_features=5
+    config = (
+        _lsa_config(lsa={"components": 3, "max_features": 5}) if lsa else stage_config()
     )
     fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
     vocabulary = (
@@ -139,7 +141,7 @@ def _clinical_fold() -> Holdout:
 def test_nondefault_char_tfidf_matches_manual_pipeline(tmp_path: Path) -> None:
     """Nevýchozí znakové TF-IDF s normalizací dává ručně složená skóre."""
     config = load_stage_config(REPOSITORY / "config/stage_classical.json").model_copy(
-        update={"lsa_components": 3}
+        update={"lsa": StageLsa(components=3, max_features=100_000)}
     )
     branch = next(b for b in config.branches if b.name == "char_wb/logreg")
     normalization = load_text_normalization(
@@ -178,7 +180,7 @@ def test_nondefault_char_tfidf_matches_manual_pipeline(tmp_path: Path) -> None:
 def test_seeded_scores_repeat(tmp_path: Path, family: str) -> None:
     """Stejný seed opakuje skóre; různé seedy rozliší alespoň větev s LSA."""
     config = load_stage_config(REPOSITORY / "config/stage_classical.json").model_copy(
-        update={"lsa_components": 3}
+        update={"lsa": StageLsa(components=3, max_features=100_000)}
     )
     branch = next(b for b in config.branches if b.name == f"char_wb/{family}")
     random = Random(117)

@@ -66,23 +66,25 @@ class SklearnStageScorer:
         branch = self.config.branch(params)
         rep, family = branch.params_of(params)
         tfidf = TfidfParameters.model_validate(rep)
-        lsa = branch.family.family is ClassifierFamily.LIGHTGBM_LSA
+        lsa = (
+            self.config.lsa
+            if branch.family.family is ClassifierFamily.LIGHTGBM_LSA
+            else None
+        )
         # SVD alokuje husté matice úměrné šířce; strop drží paměť, jiné rodiny mají celý slovník.
         vectorizer = tfidf_from(
             tfidf,
             branch.representation.analyzer,
             self.normalization,
-            max_features=self.config.lsa_max_features if lsa else None,
+            max_features=lsa.max_features if lsa else None,
         )
         texts = [note.text for note in fold.train]
         ensure_tokens(vectorizer, texts)
         train = vectorizer.fit_transform(texts)
         validation = vectorizer.transform([note.text for note in fold.test])
         features = train.shape[1]
-        if lsa:
-            reducer = TruncatedSVD(
-                n_components=self.config.lsa_components, random_state=self.seed
-            )
+        if lsa is not None:
+            reducer = TruncatedSVD(n_components=lsa.components, random_state=self.seed)
             train = reducer.fit_transform(train)
             validation = reducer.transform(validation)
         scores = {}
