@@ -187,9 +187,15 @@ testthat::test_that("A8b tabulka vyžaduje přesné pokusy, buňky a konstantní
   testthat::expect_silent(check(rows))
   testthat::expect_error(check_stage_trials(rows, manifest, config,
     candidates[setdiff(names(candidates), "copd")]), "kandidát")
-  testthat::expect_error(check(rows[-1, ]))
-  testthat::expect_error(check(rbind(rows, rows[1, ])))
-  testthat::expect_error(check(rows[rows$trial != 1, ]))
+  testthat::expect_error(check(rows[-1, ]), "není úplná nebo konzistentní")
+  testthat::expect_error(check(rbind(rows, rows[1, ])), "není úplná nebo konzistentní")
+  testthat::expect_error(check(rows[rows$trial != 1, ]), "není úplná nebo konzistentní")
+  for (field in c("trials", "completed_trials")) {
+    wrong <- manifest
+    wrong[[field]] <- manifest[[field]] + 1
+    testthat::expect_error(check_stage_trials(rows, wrong, config, candidates),
+      "není úplná nebo konzistentní")
+  }
   mutations <- list(
     function(x) { x$fold[1] <- config$folds; x },
     function(x) { x$default[x$trial == 0] <- FALSE; x$default[x$trial == 10] <- TRUE; x },
@@ -198,13 +204,17 @@ testthat::test_that("A8b tabulka vyžaduje přesné pokusy, buňky a konstantní
       x$branch[x$trial == 10] <- "new/complement_nb"
       x
     },
-    function(x) { x$representation[1] <- "wrong"; x },
+    function(x) { x$branch[x$trial == 10] <- "word/logreg"; x },
     function(x) { x$value[1] <- 0; x },
     function(x) { x$params[1] <- "{}"; x },
-    function(x) { x$family[1] <- "unknown"; x },
     function(x) { x$diagnosis[1] <- "heart_failure"; x }
   )
-  for (mutate in mutations) testthat::expect_error(check(mutate(rows)))
+  for (mutate in mutations) {
+    testthat::expect_error(check(mutate(rows)), "není úplná nebo konzistentní")
+  }
+  unknown <- rows
+  unknown$family[unknown$trial == 10] <- "unknown"
+  testthat::expect_error(check(unknown), "Neznámá rodina")
 })
 
 testthat::test_that("A9 strop LSA počítá fity místo diagnóz", {
