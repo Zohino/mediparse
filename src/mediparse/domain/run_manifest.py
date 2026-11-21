@@ -19,7 +19,7 @@ from mediparse.domain.environment import Environment, Hardware
 from mediparse.domain.identity import RowId
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.model_input import TextPreprocessing
-from mediparse.domain.screening import EncoderSpec
+from mediparse.domain.representation import EncoderSpec
 from mediparse.domain.seed import Seed
 from mediparse.domain.tuning import ParamValue, SearchSpace
 
@@ -261,6 +261,7 @@ class StageTuningManifest(BaseModel):
         frozen=True, strict=True, extra="forbid", allow_inf_nan=False
     )
 
+    encoders: tuple[EncoderSpec, ...] = ()
     dataset_sha256: Sha256
     config_sha256: Sha256
     split_seed: Seed

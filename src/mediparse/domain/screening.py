@@ -3,30 +3,24 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from enum import StrEnum
-from typing import TYPE_CHECKING, Annotated, Literal, Self
+from typing import TYPE_CHECKING, Annotated, Self
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
-from mediparse.domain.digest import CommitSha
 from mediparse.domain.model_input import ModelInput
+from mediparse.domain.representation import (
+    ClassifierFamily,
+    EncoderSpec,
+    TokensSpec,
+    VectorizerSpec,
+    accepts,
+)
 from mediparse.domain.seed import Seed
 
 if TYPE_CHECKING:
     from mediparse.domain.diagnosis import Diagnosis
     from mediparse.domain.evaluation import BinaryMetrics, Classification
     from mediparse.domain.split import SplitConfig
-
-
-class ClassifierFamily(StrEnum):
-    """Rodiny klasifikátorů screeningu s výchozími hyperparametry."""
-
-    COMPLEMENT_NB = "complement_nb"
-    LOGREG = "logreg"
-    LINEAR_SVM = "linear_svm"
-    NB_SVM = "nb_svm"
-    LIGHTGBM_LSA = "lightgbm_lsa"
-    FASTTEXT = "fasttext"
 
 
 @dataclass(frozen=True)
@@ -38,55 +32,7 @@ class ScreeningUnit:
     family: ClassifierFamily
 
 
-class VectorizerSpec(BaseModel):
-    """Pojmenovaný vektorizér s analyzátorem a rozsahem n-gramů."""
-
-    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
-
-    name: Annotated[str, Field(min_length=1)]
-    analyzer: Literal["word", "char_wb"]
-    ngram_range: tuple[PositiveInt, PositiveInt]
-
-    @model_validator(mode="after")
-    def _ngram_range_is_ordered(self) -> Self:
-        if self.ngram_range[0] > self.ngram_range[1]:
-            msg = "Minimum rozsahu n-gramů nesmí překročit maximum."
-            raise ValueError(msg)
-        return self
-
-
-class EncoderSpec(BaseModel):
-    """Připnutý encoder a explicitní numerický režim reprezentace."""
-
-    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
-
-    name: Annotated[str, Field(min_length=1)]
-    model: Annotated[str, Field(min_length=1)]
-    revision: CommitSha
-    window: PositiveInt
-    device: Literal["cpu", "cuda"]
-    dtype: Literal["float32", "bfloat16"]
-
-
-class TokensSpec(BaseModel):
-    """Slovní tokeny pro rodinu, která se reprezentaci učí sama."""
-
-    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
-
-    name: Annotated[str, Field(min_length=1)]
-
-
 type Representation = VectorizerSpec | EncoderSpec | TokensSpec
-
-
-def _accepts(spec: Representation, family: ClassifierFamily) -> bool:
-    match spec:
-        case EncoderSpec():
-            return family is ClassifierFamily.LOGREG
-        case TokensSpec():
-            return family is ClassifierFamily.FASTTEXT
-        case VectorizerSpec():
-            return family is not ClassifierFamily.FASTTEXT
 
 
 class ScreeningConfig(BaseModel):
@@ -111,7 +57,7 @@ class ScreeningConfig(BaseModel):
     def _families_match_representations(self) -> Self:
         for spec in self.vectorizers:
             for family in self.families:
-                if not _accepts(spec, family):
+                if not accepts(spec, family):
                     msg = f"Rodina {family} nepracuje nad reprezentací {spec.name}."
                     raise ValueError(msg)
         return self

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mediparse.domain.screening import EncoderSpec
+from mediparse.domain.representation import EncoderSpec
 
 SPEC = EncoderSpec(
     name="test",

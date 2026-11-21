@@ -103,3 +103,30 @@ def test_single_class_is_rejected(tmp_path: Path) -> None:
     """Binární estimator odmítne jedinou tréninkovou třídu."""
     with pytest.raises(ValueError, match="právě dvě třídy"):
         FastTextClassifier(tmp_path / "scratch").fit(np.array(["clinic"]), [True])
+
+
+def test_defaults_match_fasttext_supervised_defaults(tmp_path: Path) -> None:
+    """Výchozí parametry souhlasí s supervised_default fastTextu 0.9.2."""
+    params = FastTextClassifier(tmp_path).get_params()
+    assert {
+        name: params[name]
+        for name in ("lr", "epoch", "word_ngrams", "dim", "random_state")
+    } == {
+        "lr": 0.1,
+        "epoch": 5,
+        "word_ngrams": 1,
+        "dim": 100,
+        "random_state": 0,
+    }
+
+
+def test_hyperparameters_reach_trained_model(
+    tmp_path: Path, corpus: tuple[np.ndarray, list[bool]]
+) -> None:
+    """Natrénovaný model zachová všechny zadané hyperparametry."""
+    model = (
+        FastTextClassifier(tmp_path, lr=0.5, epoch=7, word_ngrams=2, dim=12)
+        .fit(*corpus)
+        .model_
+    )
+    assert (model.lr, model.epoch, model.wordNgrams, model.dim) == (0.5, 7, 2, 12)

@@ -82,6 +82,9 @@ class CategoricalParam(BaseModel):
         return self
 
 
+type Parameter = FloatParam | IntParam | CategoricalParam
+
+
 class SearchSpace(BaseModel):
     """Celá konfigurace modelu včetně parametrů s jedinou pevnou volbou."""
 
@@ -89,9 +92,7 @@ class SearchSpace(BaseModel):
 
     params: Annotated[
         tuple[
-            Annotated[
-                FloatParam | IntParam | CategoricalParam, Field(discriminator="kind")
-            ],
+            Annotated[Parameter, Field(discriminator="kind")],
             ...,
         ],
         Field(min_length=1),
@@ -120,9 +121,7 @@ class SearchSpace(BaseModel):
         )
 
 
-def _contains(
-    param: FloatParam | IntParam | CategoricalParam, value: ParamValue
-) -> bool:
+def _contains(param: Parameter, value: ParamValue) -> bool:
     if isinstance(param, CategoricalParam):
         return any(
             type(value) is type(choice) and value == choice for choice in param.choices

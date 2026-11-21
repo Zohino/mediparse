@@ -20,12 +20,7 @@ from sklearn.linear_model import LogisticRegression
 from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.screening import (
-    ClassifierFamily,
-    Representation,
-    TokensSpec,
-    VectorizerSpec,
-)
+from mediparse.domain.representation import ClassifierFamily, TokensSpec, VectorizerSpec
 from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
 from mediparse.infrastructure.sklearn_classifier import (
     tfidf_vectorizer,
@@ -49,6 +44,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable, Sequence
     from pathlib import Path
 
+    from mediparse.domain.screening import Representation
     from mediparse.domain.seed import Seed
 
 

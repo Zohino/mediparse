@@ -13,11 +13,8 @@ import pytest
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import BinaryMetrics, Classification
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.screening import (
-    ClassifierFamily,
-    ScreeningResult,
-    ScreeningUnit,
-)
+from mediparse.domain.representation import ClassifierFamily
+from mediparse.domain.screening import ScreeningResult, ScreeningUnit
 from mediparse.infrastructure.parquet_file import write_table
 from mediparse.infrastructure.screening_table import (
     PREDICTIONS_SCHEMA,

@@ -4,8 +4,9 @@ from typing import TYPE_CHECKING
 
 import pytest
 
+from mediparse.domain.representation import TfidfRepresentation
 from mediparse.infrastructure.optuna_search import OptunaStageSearch, stage_sampler
-from tests.stage_support import stage_config
+from tests.stage_support import stage_config, token_stage_config
 
 if TYPE_CHECKING:
     from mediparse.domain.tuning import Trial
@@ -25,6 +26,7 @@ def test_restore_matches_uninterrupted(cut: int) -> None:
             assert trial.params == config.branches[n].default_params()
         branch = next(b for b in config.branches if b.name == trial.params["branch"])
         rep, fam = branch.params_of(trial.params)
+        assert isinstance(branch.representation, TfidfRepresentation)
         assert branch.representation.space.contains(rep)
         assert branch.family.space.contains(fam)
         search.complete(trial, n / 12)
@@ -66,3 +68,22 @@ def test_sampler_description_uses_actual_options() -> None:
     assert stage_sampler(20) == (
         "optuna.samplers.TPESampler(n_startup_trials=20, multivariate=True, group=True)"
     )
+
+
+def test_single_branch_without_representation_params() -> None:
+    """Optuna navrhne a obnoví tokenovou větev bez prostoru reprezentace."""
+    config = token_stage_config()
+    search = OptunaStageSearch.create(config)
+    trial = search.ask()
+    assert trial.params.keys() == {
+        "branch",
+        "fasttext.lr",
+        "fasttext.epoch",
+        "fasttext.word_ngrams",
+        "fasttext.dim",
+    }
+    search.complete(trial, 0.5)
+    restored = OptunaStageSearch.create(config)
+    restored.restore([(trial, 0.5)])
+    assert restored.best() == search.best()
+    assert restored.ask() == search.ask()

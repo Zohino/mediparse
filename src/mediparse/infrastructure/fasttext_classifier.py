@@ -21,12 +21,26 @@ LABEL_PREFIX: Final = "label:"
 
 
 class FastTextClassifier(ClassifierMixin, BaseEstimator):
-    """Binární fastText s výchozími hyperparametry a explicitním scratch adresářem."""
+    """Binární fastText s hyperparametry fastTextu a explicitním scratch adresářem."""
 
-    def __init__(self, scratch: Path, random_state: int = 0) -> None:
+    # sklearn clone a set_params vyžadují jednotlivé hyperparametry v signatuře.
+    def __init__(  # ruff: ignore[too-many-arguments]
+        self,
+        scratch: Path,
+        *,
+        random_state: int = 0,
+        lr: float = 0.1,
+        epoch: int = 5,
+        word_ngrams: int = 1,
+        dim: int = 100,
+    ) -> None:
         """Uloží parametry bez naučeného stavu pro sklearn clone."""
         self.scratch = scratch
         self.random_state = random_state
+        self.lr = lr
+        self.epoch = epoch
+        self.word_ngrams = word_ngrams
+        self.dim = dim
 
     def fit(self, documents: ndarray, labels: Sequence[bool]) -> Self:
         """Natrénuje fastText a odstraní soubor s tokeny i při chybě.
@@ -50,6 +64,10 @@ class FastTextClassifier(ClassifierMixin, BaseEstimator):
                     output.write(f"{LABEL_PREFIX}{label} {document}\n")
             self.model_ = fasttext.train_supervised(
                 input=str(path),
+                lr=self.lr,
+                epoch=self.epoch,
+                wordNgrams=self.word_ngrams,
+                dim=self.dim,
                 # Více vláken mění pravděpodobnosti i při stejném seedu.
                 thread=1,
                 seed=self.random_state,

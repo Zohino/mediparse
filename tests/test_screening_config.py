@@ -10,13 +10,13 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.screening import (
+from mediparse.domain.representation import (
     ClassifierFamily,
     EncoderSpec,
-    ScreeningConfig,
     TokensSpec,
     VectorizerSpec,
 )
+from mediparse.domain.screening import ScreeningConfig
 from mediparse.infrastructure.screening_config import load_screening_config
 from tests.hf_encoder_support import SPEC
 from tests.support import REPOSITORY

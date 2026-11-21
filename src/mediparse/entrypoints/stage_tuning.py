@@ -1,9 +1,13 @@
 """Ladění CASH stupně na vývojové části mimo Snakemake.
 
-Doporučené cesty: results/screening/classical_trials.parquet,
-resources/mimic/screening/classical_trial_predictions.parquet (řádková data,
-mimo results/), resources/mimic/screening/classical_trials_checkpoint a
-results/screening/classical_trials_manifest.json. Nad MIMIC spouští jen uživatel.
+Pro stupně classical, embeddings a networks jsou doporučené cesty:
+results/screening/<stupeň>_trials.parquet,
+resources/mimic/screening/<stupeň>_trial_predictions.parquet (řádková data),
+resources/mimic/screening/<stupeň>_trials_checkpoint a
+results/screening/<stupeň>_trials_manifest.json.
+Cache: --embeddings resources/mimic/screening/embeddings.
+Dočasné tokeny: --scratch resources/mimic/screening/scratch.
+Nad MIMIC spouští jen uživatel; řádková data patří mimo results/.
 """
 
 from __future__ import annotations
@@ -17,6 +21,7 @@ from typing import TYPE_CHECKING, Final
 
 from mediparse.application.stage_tuning import StageTuning
 from mediparse.domain.environment import Environment
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.run_manifest import StageTuningManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
@@ -27,8 +32,15 @@ from mediparse.entrypoints.model_corpus import (
 )
 from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.file_digest import file_sha256
+from mediparse.infrastructure.hf_encoder import (
+    ENCODER_PACKAGES,
+    HfMeanEncoder,
+    load_encoder,
+)
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.machine_hardware import machine_hardware
+from mediparse.infrastructure.note_embeddings import NoteEmbeddings
+from mediparse.infrastructure.nvml_gpu import gpu_monitor
 from mediparse.infrastructure.optuna_search import (
     STAGE_PRUNER,
     OptunaStageSearch,
@@ -47,6 +59,7 @@ if TYPE_CHECKING:
 
     from mediparse.application.ports.experiment import Clock
     from mediparse.domain.environment import SourceRevision
+    from mediparse.domain.representation import EncoderSpec
 
 logger = logging.getLogger(__name__)
 PACKAGES: Final = (
@@ -55,6 +68,7 @@ PACKAGES: Final = (
     "scipy",
     "scikit-learn",
     "lightgbm",
+    "fasttext",
     "optuna",
     "pyarrow",
     "pydantic",
@@ -71,6 +85,8 @@ class StageTuningPaths:
     predictions: Path
     checkpoint: Path
     manifest: Path
+    embeddings: Path
+    scratch: Path
 
 
 def main() -> ExitCode:
@@ -93,6 +109,18 @@ def main() -> ExitCode:
         "manifest",
     ):
         parser.add_argument(f"--{name}", type=Path, required=True)
+    parser.add_argument(
+        "--embeddings",
+        type=Path,
+        required=True,
+        help="Cache embeddingů; doporučeno resources/mimic/screening/embeddings, mimo results/.",
+    )
+    parser.add_argument(
+        "--scratch",
+        type=Path,
+        required=True,
+        help="Dočasné tokeny zpráv; doporučeno resources/mimic/screening/scratch, mimo checkpoint a results/.",
+    )
     args = parser.parse_args()
     return run(
         environ=os.environ,
@@ -108,6 +136,8 @@ def main() -> ExitCode:
             predictions=args.predictions,
             checkpoint=args.checkpoint,
             manifest=args.manifest,
+            embeddings=args.embeddings,
+            scratch=args.scratch,
         ),
         revision=revision_source(os.environ, Path.cwd()),
         clock=PerfCounterClock(),
@@ -121,6 +151,7 @@ def run(
     paths: StageTuningPaths,
     revision: Callable[[], SourceRevision],
     clock: Clock,
+    encoders: Callable[[EncoderSpec], HfMeanEncoder] = load_encoder,
 ) -> ExitCode:
     """Složí adaptéry a zapíše oba výstupy s manifestem.
 
@@ -128,34 +159,44 @@ def run(
         OK po dokončení, REFUSED při neplatných vstupech či nepovoleném přístupu.
     """
     check_inputs_access(environ, paths.corpus.data)
+    _check_work_paths(paths)
     config = load_stage_config(paths.config)
-    packages = installed_versions(PACKAGES)
+    versions = installed_versions(ENCODER_PACKAGES) if config.encoders else {}
+    packages = installed_versions(PACKAGES) | versions
     source = revision()
     corpus = model_corpus(paths.corpus, config.input)
-    hardware = machine_hardware(())
-    report = StageTuning(
-        table=corpus.table,
-        split=corpus.split,
-        partitioner=StratifiedGroupFolds(),
-        search=OptunaStageSearch.create(config),
-        scorer=SklearnStageScorer(
-            config,
-            corpus.normalization,
-            config.seed,
-            # Scratch používá jen fastText, který tento stupeň nepřijímá.
-            paths.checkpoint,
-        ),
-        progress=ParquetStageCheckpoint(
-            paths.checkpoint,
-            checkpoint_key(paths.config, paths.corpus, corpus.dataset_sha256, packages),
-            paths.out,
-            paths.predictions,
-        ),
-        clock=clock,
-    ).run(config)
+    with gpu_monitor(
+        environ.get("CUDA_VISIBLE_DEVICES"), environ.get("CUDA_DEVICE_ORDER")
+    ) as monitor:
+        hardware = machine_hardware(monitor.devices)
+        report = StageTuning(
+            table=corpus.table,
+            split=corpus.split,
+            partitioner=StratifiedGroupFolds(),
+            search=OptunaStageSearch.create(config),
+            scorer=SklearnStageScorer(
+                config,
+                corpus.normalization,
+                config.seed,
+                paths.scratch,
+                NoteEmbeddings(
+                    paths.embeddings, versions, lambda spec: encoders(spec).embed
+                ),
+            ),
+            progress=ParquetStageCheckpoint(
+                paths.checkpoint,
+                checkpoint_key(
+                    paths.config, paths.corpus, corpus.dataset_sha256, packages
+                ),
+                paths.out,
+                paths.predictions,
+            ),
+            clock=clock,
+        ).run(config)
     write_model(
         paths.manifest,
         StageTuningManifest(
+            encoders=config.encoders,
             dataset_sha256=corpus.dataset_sha256,
             config_sha256=file_sha256(paths.config),
             split_seed=report.split_config.seed,
@@ -194,3 +235,11 @@ def run(
         report.seconds,
     )
     return ExitCode.OK
+
+
+def _check_work_paths(paths: StageTuningPaths) -> None:
+    # Pracovní adaptéry zakládají adresáře dřív než checkpoint zapíše svůj klíč.
+    for path in (paths.scratch, paths.embeddings):
+        if path.resolve().is_relative_to(paths.checkpoint.resolve()):
+            msg = "Scratch a cache embeddingů musí ležet mimo adresář checkpointu."
+            raise InvalidInputError(msg)

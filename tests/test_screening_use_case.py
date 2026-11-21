@@ -14,8 +14,8 @@ from mediparse.application.screening import Screening, ThresholdTuner
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.evaluation import Classification
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.representation import ClassifierFamily
 from mediparse.domain.screening import (
-    ClassifierFamily,
     Representation,
     ScreeningConfig,
     ScreeningReport,
