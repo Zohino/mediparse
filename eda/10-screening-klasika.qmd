@@ -69,7 +69,7 @@ Tabulka zachovává pořadí configu. Pomlčka označuje složku mimo větev ví
 ```{r}
 #| label: tbl-space
 #| tbl-cap: "Rozsahy hyperparametrů, výchozí hodnoty a hodnoty vítěze; log označuje logaritmickou škálu."
-export_table(stage_space_table(config, manifest$best_params),
+export_table(stage_space_table(config, jsonlite::fromJSON(selection$winner$params)),
   col.names = c("Složka", "Parametr", "Rozsah", "Výchozí", "Vítěz"), align = "lllll")
 ```
 

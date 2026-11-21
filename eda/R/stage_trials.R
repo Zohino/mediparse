@@ -150,7 +150,7 @@ stage_trial_summary <- function(trials) {
     if (any(abs(group$value - mean(values)) > 1e-9)) {
       stop("Přepočtený cíl pokusu neodpovídá sloupci value.", call. = FALSE)
     }
-    row <- group[1, c("trial", "branch", "representation", "family", "default", "value", "seconds")]
+    row <- group[1, c("trial", "branch", "representation", "family", "default", "value", "seconds", "params")]
     row$sd <- stats::sd(values)
     row$converged <- all(group$converged)
     row

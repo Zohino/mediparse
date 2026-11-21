@@ -272,3 +272,11 @@ testthat::test_that("Provenance formátuje počty a dobu běhu v minutách", {
     c(paste0("1", NBSP, "234"), paste0("2", NBSP, "345"),
       paste0("3", NBSP, "456"), paste0("4", NBSP, "567"), "359"))
 })
+
+testthat::test_that("Souhrn zachová parametry pokusu pro tabulku prostoru", {
+  rows <- stage_example()
+  rows$params <- '{"branch":"word/nb_svm","word.min_df":3,"nb_svm.C":8.5}'
+  winner <- stage_trial_summary(rows)
+  testthat::expect_equal(jsonlite::fromJSON(winner$params),
+    list(branch = "word/nb_svm", word.min_df = 3, nb_svm.C = 8.5))
+})
