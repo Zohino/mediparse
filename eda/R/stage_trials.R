@@ -76,7 +76,7 @@ stage_pair_counts <- function(con, source, winner, other) {
   complete <- counts$unique_a == counts$n & counts$unique_b == counts$n &
     counts$different_labels == 0 & counts$n11 + counts$n10 + counts$n01 + counts$n00 == counts$n
   if (nrow(counts) == 0L || any(!complete)) {
-    stop("Predikce dvojice screeningu se nepárují úplně a jednoznačně se stejnými labely.", call. = FALSE)
+    stop("Predikce dvojice pokusů ladění stupně se nepárují úplně a jednoznačně se stejnými labely.", call. = FALSE)
   }
   counts
 }

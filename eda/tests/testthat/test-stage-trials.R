@@ -43,7 +43,7 @@ testthat::test_that("A6 lineage kontroluje všechny tři otisky a jmenuje soubor
 })
 
 testthat::test_that("A7 stráž odmítne predikce bez značky před čtením", {
-  withr::local_envvar(CODEX_THREAD_ID = "screening-test")
+  withr::local_envvar(CODEX_THREAD_ID = "stage-test")
   directory <- withr::local_tempdir()
   con <- stage_test_con()
   paths <- stage_fixture_paths(directory)
