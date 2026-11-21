@@ -4,15 +4,12 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Protocol, assert_never, cast
+from typing import TYPE_CHECKING, assert_never
 
 import numpy as np
-from lightgbm import LGBMClassifier
 from sklearn.decomposition import TruncatedSVD
-from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import TunedThresholdClassifierCV
 from sklearn.preprocessing import StandardScaler
-from sklearn.svm import LinearSVC
 
 from mediparse.domain.evaluation import Classification
 from mediparse.domain.representation import (
@@ -21,14 +18,15 @@ from mediparse.domain.representation import (
     TokensSpec,
     VectorizerSpec,
 )
-from mediparse.infrastructure.complement_nb import ComplementNbLogOdds
-from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
 from mediparse.infrastructure.machine_hardware import peak_rss_gb
-from mediparse.infrastructure.nb_svm import NbSvmClassifier
 from mediparse.infrastructure.sklearn_classifier import (
     ensure_tokens,
     fit_converged,
     tfidf_vectorizer,
+)
+from mediparse.infrastructure.sklearn_families import (
+    classifier_estimator,
+    positive_scores,
 )
 from mediparse.infrastructure.sklearn_split import threshold_splits
 
@@ -224,37 +222,6 @@ class ScreeningFeaturizer:
                 assert_never(spec)
 
 
-def classifier_estimator(
-    family: ClassifierFamily, seed: Seed, scratch: Path
-) -> BaseEstimator:
-    """Vytvoří estimator rodiny; případnou redukci už provedl featurizér.
-
-    Returns:
-        Nenatrénovaný estimator s výchozími hyperparametry rodiny.
-    """
-    match family:
-        case ClassifierFamily.COMPLEMENT_NB:
-            return ComplementNbLogOdds()
-        case ClassifierFamily.LOGREG:
-            return LogisticRegression()
-        case ClassifierFamily.LINEAR_SVM:
-            return LinearSVC(random_state=seed)
-        case ClassifierFamily.NB_SVM:
-            return NbSvmClassifier(random_state=seed)
-        case ClassifierFamily.LIGHTGBM_LSA:
-            # LightGBM doporučuje force_row_wise pro stabilitu mezi počty vláken.
-            return LGBMClassifier(
-                random_state=seed,
-                deterministic=True,
-                force_row_wise=True,
-                verbose=-1,
-            )
-        case ClassifierFamily.FASTTEXT:
-            return FastTextClassifier(scratch, random_state=seed)
-        case _:
-            assert_never(family)
-
-
 @dataclass(frozen=True)
 class SklearnTunedClassifier:
     """Klasifikátor s prahem maximalizujícím F1 vnitřní CV."""
@@ -315,18 +282,3 @@ class SklearnThresholdTuner:
         return SklearnTunedClassifier(
             family, model, float(model.best_threshold_), converged
         )
-
-
-def positive_scores(model: BaseEstimator, features: object) -> np.ndarray:
-    """Vybere skóre pozitivní třídy na škále odezvy modelu.
-
-    Returns:
-        Pravděpodobnosti, má-li je model, jinak rozhodovací skóre.
-    """
-    if callable(predict_proba := getattr(model, "predict_proba", None)):
-        return predict_proba(features)[:, 1]
-    return cast("_DecisionModel", model).decision_function(features)
-
-
-class _DecisionModel(Protocol):
-    def decision_function(self, features: object) -> np.ndarray: ...

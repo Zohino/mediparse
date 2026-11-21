@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import replace
 from random import Random
 from typing import TYPE_CHECKING
@@ -23,7 +24,11 @@ from mediparse.infrastructure.diagnosis_candidates_file import load_text_normali
 from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
 from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
-from mediparse.infrastructure.sklearn_stage import SklearnStageScorer
+from mediparse.infrastructure.sklearn_stage import (
+    SklearnStageScorer,
+    encoder_features,
+    token_documents,
+)
 from mediparse.infrastructure.stage_config import load_stage_config
 from tests.hf_encoder_support import SPEC
 from tests.screening_support import notes
@@ -335,3 +340,62 @@ def test_fasttext_family_params_reach_estimator(
         config.branches[0].default_params(), _clinical_fold()
     )
     assert observed == [{"lr": 0.5, "epoch": 1, "word_ngrams": 2, "dim": 2}] * 5
+
+
+def test_encoder_scaler_fits_only_outer_train() -> None:
+    """Průměr 1 a populační std 1 z tréninku převedou test 4 na 3."""
+    embeddings = Mock()
+    embeddings.embed.side_effect = lambda _spec, texts: np.array([
+        [{"a": 0.0, "b": 2.0, "c": 4.0}[text]] for text in texts
+    ])
+    train, test = encoder_features(embeddings, SPEC, ["a", "b"], ["c"])
+    assert embeddings.embed.call_args_list == [call(SPEC, ["a", "b", "c"])]
+    np.testing.assert_array_equal(train, [[-1.0], [1.0]])
+    np.testing.assert_array_equal(test, [[3.0]])
+
+
+def test_token_documents_joins_analyzer_tokens() -> None:
+    """Slovní analyzátor odstraní interpunkci a jednopísmenná slova."""
+    train, test = token_documents(None, ["Insulin, glucose!\nA b"], ["Fracture."])
+    assert train.dtype == object
+    assert test.dtype == object
+    np.testing.assert_array_equal(train, ["insulin glucose"])
+    np.testing.assert_array_equal(test, ["fracture"])
+
+
+def test_token_documents_applies_its_normalization() -> None:
+    """Rozvinutí COPD dodá stejná slova jako TF-IDF."""
+    train, test = token_documents(
+        TextNormalization(
+            acronyms={"COPD": "chronic obstructive pulmonary disease"}, variants={}
+        ),
+        ["COPD"],
+        ["COPD"],
+    )
+    assert train.dtype == object
+    assert test.dtype == object
+    np.testing.assert_array_equal(train, ["chronic obstructive pulmonary disease"])
+    np.testing.assert_array_equal(test, ["chronic obstructive pulmonary disease"])
+
+
+@pytest.mark.parametrize("config", [stage_config(), token_stage_config()])
+def test_empty_vocabulary_is_invalid_input(
+    tmp_path: Path, config: StageTuningConfig
+) -> None:
+    """TF-IDF i tokenová větev odmítnou trénink bez tokenů."""
+    fold = replace(
+        _clinical_fold(),
+        train=tuple(
+            replace(note, text=text)
+            for note, text in zip(_clinical_fold().train[:2], ["!", "?"], strict=True)
+        ),
+    )
+    with pytest.raises(
+        InvalidInputError,
+        match=re.escape(
+            "Trénovací texty neobsahují žádný token, slovník by byl prázdný."
+        ),
+    ):
+        SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
+            config.branches[0].default_params(), fold
+        )

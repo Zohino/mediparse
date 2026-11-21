@@ -6,7 +6,9 @@ from dataclasses import dataclass
 from functools import partial
 from typing import TYPE_CHECKING, assert_never, cast
 
+import numpy as np
 from sklearn.decomposition import TruncatedSVD
+from sklearn.preprocessing import StandardScaler
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
@@ -22,10 +24,9 @@ from mediparse.infrastructure.sklearn_classifier import (
     ensure_tokens,
     fit_converged,
     tfidf_from,
+    tfidf_vectorizer,
 )
-from mediparse.infrastructure.sklearn_screening import (
-    EncoderFeaturizer,
-    TokenFeaturizer,
+from mediparse.infrastructure.sklearn_families import (
     classifier_estimator,
     positive_scores,
 )
@@ -104,18 +105,18 @@ class SklearnStageScorer:
         validation_texts = [note.text for note in fold.test]
         match branch.representation:
             case EncoderSpec() as spec:
-                train, validation = EncoderFeaturizer(self.embeddings).fit_transform(
-                    spec, train_texts, validation_texts
+                train, validation = encoder_features(
+                    self.embeddings, spec, train_texts, validation_texts
                 )
-                return train.matrix, validation.matrix, train.matrix.shape[1]
-            case TokensSpec() as spec:
-                train, validation = TokenFeaturizer(self.normalization).fit_transform(
-                    spec, train_texts, validation_texts
+                return train, validation, train.shape[1]
+            case TokensSpec():
+                train, validation = token_documents(
+                    self.normalization, train_texts, validation_texts
                 )
                 n_features = len({
-                    token for document in train.matrix for token in document.split()
+                    token for document in train for token in document.split()
                 })
-                return train.matrix, validation.matrix, n_features
+                return train, validation, n_features
             case TfidfRepresentation():
                 return self._tfidf(branch, rep_params, train_texts, validation_texts)
             case _:
@@ -150,3 +151,45 @@ class SklearnStageScorer:
             train = reducer.fit_transform(train)
             validation = reducer.transform(validation)
         return train, validation, n_features
+
+
+def encoder_features(
+    embeddings: NoteEmbeddings,
+    spec: EncoderSpec,
+    train: Sequence[str],
+    validation: Sequence[str],
+) -> tuple[ndarray, ndarray]:
+    """Standardizuje embeddingy podle tréninku a transformuje validaci.
+
+    Returns:
+        Husté matice v pořadí vstupních zpráv.
+    """
+    scaler = StandardScaler()
+    # Validace nesmí ovlivnit škálování; společná matice načte encoder jen jednou.
+    matrix = embeddings.embed(spec, [*train, *validation])
+    return scaler.fit_transform(matrix[: len(train)]), scaler.transform(
+        matrix[len(train) :]
+    )
+
+
+def token_documents(
+    normalization: TextNormalization | None,
+    train: Sequence[str],
+    validation: Sequence[str],
+) -> tuple[ndarray, ndarray]:
+    """Spojí tokeny společného analyzátoru do dokumentů.
+
+    Returns:
+        Pole řetězců pro trénink a validaci ve vstupním pořadí.
+
+    Raises:
+        InvalidInputError: Trénovací texty neobsahují token.
+    """
+    vectorizer = tfidf_vectorizer(normalization)
+    ensure_tokens(vectorizer, train)
+    analyzer = vectorizer.build_analyzer()
+    # Pevná šířka <U zarovná zprávy na nejdelší: 44 tis. krát 60 tis. znaků je ~9,8 GiB.
+    return (
+        np.array([" ".join(analyzer(text)) for text in train], dtype=object),
+        np.array([" ".join(analyzer(text)) for text in validation], dtype=object),
+    )
