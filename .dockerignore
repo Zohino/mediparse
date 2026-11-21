@@ -8,6 +8,8 @@
 !config/split.json
 !config/screening_classical.json
 !config/stage_classical.json
+!config/stage_embeddings.json
+!config/stage_networks.json
 !config/screening_shallow.json
 !config/screening_fasttext.json
 !config/decision_rule.json

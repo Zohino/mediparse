@@ -1,0 +1,59 @@
+{
+  "seed": 0,
+  "subsample_parts": 3,
+  "folds": 3,
+  "trials": 20,
+  "random_startup_trials": 5,
+  "input": {
+    "strip_diagnostic_sections": false,
+    "text_preprocessing": "dictionary"
+  },
+  "representations": [
+    {
+      "name": "word-tokens"
+    }
+  ],
+  "families": [
+    {
+      "family": "fasttext",
+      "space": {
+        "params": [
+          {
+            "kind": "float",
+            "name": "lr",
+            "low": 0.01,
+            "high": 1.0,
+            "log": true
+          },
+          {
+            "kind": "int",
+            "name": "epoch",
+            "low": 5,
+            "high": 25,
+            "log": true
+          },
+          {
+            "kind": "int",
+            "name": "word_ngrams",
+            "low": 1,
+            "high": 2,
+            "log": false
+          },
+          {
+            "kind": "int",
+            "name": "dim",
+            "low": 10,
+            "high": 100,
+            "log": true
+          }
+        ]
+      },
+      "default": {
+        "lr": 0.1,
+        "epoch": 5,
+        "word_ngrams": 1,
+        "dim": 100
+      }
+    }
+  ]
+}

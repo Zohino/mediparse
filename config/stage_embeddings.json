@@ -1,0 +1,49 @@
+{
+  "seed": 0,
+  "subsample_parts": 3,
+  "folds": 3,
+  "trials": 20,
+  "random_startup_trials": 5,
+  "input": {
+    "strip_diagnostic_sections": false,
+    "text_preprocessing": "none"
+  },
+  "representations": [
+    {
+      "name": "mmbert-base-mean",
+      "model": "jhu-clsp/mmBERT-base",
+      "revision": "c5955035435e2bf121cde7f3c8863ef52ff35d82",
+      "window": 8192,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    }
+  ],
+  "families": [
+    {
+      "family": "logreg",
+      "space": {
+        "params": [
+          {
+            "kind": "float",
+            "name": "C",
+            "low": 0.001,
+            "high": 1000.0,
+            "log": true
+          },
+          {
+            "kind": "categorical",
+            "name": "class_weight",
+            "choices": [
+              null,
+              "balanced"
+            ]
+          }
+        ]
+      },
+      "default": {
+        "C": 1.0,
+        "class_weight": null
+      }
+    }
+  ]
+}
