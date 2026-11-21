@@ -1,4 +1,4 @@
-"""Sdílený syntetický korpus screeningu se všemi pěti diagnózami."""
+"""Sdílený syntetický korpus ladění stupně se všemi pěti diagnózami."""
 
 from random import Random
 
@@ -31,7 +31,7 @@ def note(subject: int, visit: int, *, positive: bool) -> InputNote:
 
 
 def notes(*, visits: int = 2) -> tuple[InputNote, ...]:
-    """Sestaví korpus screeningu.
+    """Sestaví korpus ladění stupně.
 
     Args:
         visits: Počet zpráv každého vývojového pacienta.

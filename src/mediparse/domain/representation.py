@@ -21,7 +21,7 @@ RepresentationName = Annotated[str, Field(min_length=1, pattern=r"^[^./]+$")]
 
 
 class ClassifierFamily(StrEnum):
-    """Rodiny klasifikátorů screeningu a ladění stupňů."""
+    """Rodiny klasifikátorů pro ladění a trénink."""
 
     COMPLEMENT_NB = "complement_nb"
     LOGREG = "logreg"
@@ -29,23 +29,6 @@ class ClassifierFamily(StrEnum):
     NB_SVM = "nb_svm"
     LIGHTGBM_LSA = "lightgbm_lsa"
     FASTTEXT = "fasttext"
-
-
-class VectorizerSpec(BaseModel):
-    """Pojmenovaný vektorizér s analyzátorem a rozsahem n-gramů."""
-
-    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
-
-    name: RepresentationName
-    analyzer: Literal["word", "char_wb"]
-    ngram_range: tuple[PositiveInt, PositiveInt]
-
-    @model_validator(mode="after")
-    def _ngram_range_is_ordered(self) -> Self:
-        if self.ngram_range[0] > self.ngram_range[1]:
-            msg = "Minimum rozsahu n-gramů nesmí překročit maximum."
-            raise ValueError(msg)
-        return self
 
 
 class EncoderSpec(BaseModel):
@@ -121,10 +104,10 @@ class TfidfRepresentation(BaseModel):
         return self
 
 
-def accepts(
-    spec: VectorizerSpec | TfidfRepresentation | EncoderSpec | TokensSpec,
-    family: ClassifierFamily,
-) -> bool:
+type Representation = TfidfRepresentation | EncoderSpec | TokensSpec
+
+
+def accepts(spec: Representation, family: ClassifierFamily) -> bool:
     """Určí, zda rodina pracuje nad daným druhem reprezentace.
 
     Returns:
@@ -135,7 +118,7 @@ def accepts(
             return family is ClassifierFamily.LOGREG
         case TokensSpec():
             return family is ClassifierFamily.FASTTEXT
-        case VectorizerSpec() | TfidfRepresentation():
+        case TfidfRepresentation():
             return family is not ClassifierFamily.FASTTEXT
         case _:
             assert_never(spec)

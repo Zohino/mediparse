@@ -21,7 +21,6 @@ from mediparse.entrypoints import (
     model_inference,
     model_training,
     model_tuning,
-    screening,
     split_materialization,
     stage_tuning,
 )
@@ -126,21 +125,6 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
             clock=PerfCounterClock(),
             environ=environ,
         ),
-        "screening": partial(
-            screening.run,
-            paths=screening.ScreeningPaths(
-                corpus=repository_corpus(notes, split),
-                config=root / "missing.json",
-                out=root / "screening/classical.parquet",
-                predictions=root / "screening/classical_predictions.parquet",
-                manifest=root / "screening/classical_manifest.json",
-                checkpoint=root / "screening/checkpoint",
-                embeddings=root / "screening/embeddings",
-                scratch=root / "screening/scratch",
-            ),
-            revision=fixed_revision,
-            environ=environ,
-        ),
         "model_evaluation": partial(
             model_evaluation.run,
             paths=model_evaluation.EvaluationPaths(
@@ -210,7 +194,6 @@ GUARD_CASES: Final = {
     "model_training": _GuardCase(("cohort", "split"), corpus=True),
     "model_tuning": _GuardCase(("cohort", "split"), corpus=True, native=False),
     "stage_tuning": _GuardCase(("cohort", "split"), corpus=True, native=False),
-    "screening": _GuardCase(("cohort", "split"), corpus=True, native=False),
     "model_evaluation": _GuardCase(("predictions", "cohort", "split")),
     "model_inference": _GuardCase(("cohort", "model", "predictions")),
 }

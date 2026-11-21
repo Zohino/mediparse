@@ -102,35 +102,6 @@ class RunManifest(BaseModel):
         return self
 
 
-class ScreeningManifest(BaseModel):
-    """Provenance screeningu: vývojová část, konfigurace, výsledky a prostředí."""
-
-    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
-
-    encoders: tuple[EncoderSpec, ...]
-    dataset_sha256: Sha256
-    split_seed: Seed
-    split_folds: Annotated[int, Field(ge=2)]
-    split_sha256: Sha256
-    config_sha256: Sha256
-    seed: Seed
-    results_sha256: Sha256
-    predictions_sha256: Sha256
-    development_notes: PositiveInt
-    development_patients: PositiveInt
-    diagnostic_strip: DiagnosticStrip | None
-    text_preprocessing: TextPreprocessing
-    text_normalization: TextNormalization | None
-    environment: Environment
-
-    @model_validator(mode="after")
-    def _normalization_matches_preprocessing(self) -> Self:
-        _ensure_normalization_matches_preprocessing(
-            self.text_preprocessing, self.text_normalization
-        )
-        return self
-
-
 class EvaluationManifest(BaseModel):
     """Provenance evaluace: ověřené vstupy, otisk metrik a prostředí evaluátoru."""
 

@@ -183,7 +183,7 @@ def tfidf_vectorizer(  # ruff: ignore[too-many-arguments]
     sublinear_tf: bool = True,
     max_features: int | None = None,
 ) -> TfidfVectorizer:
-    """Vectorizer pro trénink, screening i měření v sešitu EDA.
+    """Vectorizer pro trénink, ladění i měření v sešitu EDA.
 
     Args:
         normalization: Slovníky sdíleného preprocessoru, nebo None pro jeho vypnutí.

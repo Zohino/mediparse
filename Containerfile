@@ -19,7 +19,7 @@ COPY --from=builder /app/.pixi/envs/test /app/.pixi/envs/test
 COPY --from=builder /shell-hook /shell-hook
 COPY --from=builder /app/src/ src/
 COPY pyproject.toml ./
-COPY config/stage_classical.json config/stage_embeddings.json config/stage_networks.json config/tuning.json config/matrix.json config/smoketest_training.json config/split.json config/screening_classical.json config/screening_shallow.json config/screening_fasttext.json config/decision_rule.json config/section_headers.json config/synthetic_plan.json config/mimic_tables.json config/diagnosis_candidates.json config/input_corpus.json config/verbalization_template.md config/
+COPY config/stage_classical.json config/stage_embeddings.json config/stage_networks.json config/tuning.json config/matrix.json config/smoketest_training.json config/split.json config/decision_rule.json config/section_headers.json config/synthetic_plan.json config/mimic_tables.json config/diagnosis_candidates.json config/input_corpus.json config/verbalization_template.md config/
 COPY resources/synthetic/ resources/synthetic/
 COPY resources/icd/ resources/icd/
 COPY results/mimic/manifest.json results/mimic/
