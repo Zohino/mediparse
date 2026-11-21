@@ -248,7 +248,7 @@ stage_selection_text <- function(selection) {
 
 stage_ensemble_text <- function(phi, selection) {
   needed <- stage_ensemble_needed(phi, selection$second)
-  if (is.na(needed)) return("Pro druhou rodinu není φ definováno; o tasku ensemblu nelze rozhodnout.")
+  if (is.na(needed)) return("Pro druhou rodinu není φ definováno; o tasku ensemblu nelze rozhodnout a výsledek patří do diskuse.")
   if (needed) return("φ vítěze a druhé rodiny je pod 0,5; má vzniknout task ensemblu.")
   "φ vítěze a druhé rodiny není pod 0,5; task ensemblu nevzniká, výsledek patří do diskuse."
 }

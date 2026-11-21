@@ -78,8 +78,8 @@ def model_input_table(
 ) -> tuple[PatientNoteTable, DiagnosticStrip | None]:
     """Složí tabulku zpráv pro trénink, inferenci i ladění a záznam stripu pro manifest.
 
-    Funkci volá sdílený korpus tréninku, ladění modelů i stupňů i inference
-    se stejnými volbami, aby klasifikovaly týž text.
+    Trénink, ladění modelů i stupňů a inference používají stejné volby,
+    aby klasifikovaly týž text.
 
     Args:
         cohort: Cesta k tabulce kohorty.

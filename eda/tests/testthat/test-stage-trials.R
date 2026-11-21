@@ -193,7 +193,11 @@ testthat::test_that("A8b tabulka vyžaduje přesné pokusy, buňky a konstantní
   mutations <- list(
     function(x) { x$fold[1] <- config$folds; x },
     function(x) { x$default[x$trial == 0] <- FALSE; x$default[x$trial == 10] <- TRUE; x },
-    function(x) { x$branch[x$trial == 0] <- "new/family"; x },
+    function(x) {
+      x$representation[x$trial == 10] <- "new"
+      x$branch[x$trial == 10] <- "new/complement_nb"
+      x
+    },
     function(x) { x$representation[1] <- "wrong"; x },
     function(x) { x$value[1] <- 0; x },
     function(x) { x$params[1] <- "{}"; x },
@@ -236,4 +240,10 @@ testthat::test_that("A10 prostor ukazuje rozsahy, výchozí hodnoty a aktivní p
   testthat::expect_identical(space_value_text(TRUE), "ano")
   testthat::expect_identical(space_value_text(NULL), "žádná")
   testthat::expect_identical(space_value_text("balanced"), "balanced")
+})
+
+testthat::test_that("Nedefinované rozhodující φ patří do diskuse", {
+  phi <- data.frame(trial = 1, phi = NA_real_)
+  selection <- list(second = data.frame(trial = 1))
+  testthat::expect_match(stage_ensemble_text(phi, selection), "diskuse")
 })
