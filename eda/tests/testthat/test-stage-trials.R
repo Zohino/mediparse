@@ -246,7 +246,7 @@ testthat::test_that("A10 prostor ukazuje rozsahy, výchozí hodnoty a aktivní p
   testthat::expect_equal(table$výchozí, c("1", "ano", "1", "1"))
   testthat::expect_equal(table$vítěz, c("3", "ne", "8,5", "–"))
   testthat::expect_identical(space_value_text(8.5), "8,5")
-  testthat::expect_identical(space_value_text(1000), "1 000")
+  testthat::expect_identical(space_value_text(1000), paste0("1", NBSP, "000"))
   testthat::expect_identical(space_value_text(TRUE), "ano")
   testthat::expect_identical(space_value_text(NULL), "žádná")
   testthat::expect_identical(space_value_text("balanced"), "balanced")

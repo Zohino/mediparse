@@ -171,7 +171,7 @@ stage_selection <- function(summary, manifest) {
 space_value_text <- function(x) {
   if (is.null(x)) return("žádná")
   if (is.logical(x)) return(ifelse(x, "ano", "ne"))
-  if (is.numeric(x)) return(format(x, decimal.mark = ",", big.mark = " ",
+  if (is.numeric(x)) return(format(x, decimal.mark = ",", big.mark = NBSP,
     scientific = FALSE, trim = TRUE))
   x
 }
