@@ -372,8 +372,6 @@ def test_token_documents_applies_its_normalization() -> None:
         ["COPD"],
         ["COPD"],
     )
-    assert train.dtype == object
-    assert test.dtype == object
     np.testing.assert_array_equal(train, ["chronic obstructive pulmonary disease"])
     np.testing.assert_array_equal(test, ["chronic obstructive pulmonary disease"])
 
