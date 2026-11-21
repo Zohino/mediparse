@@ -234,36 +234,59 @@ def _rule_script_path(rule: Path, body: str) -> Path | None:
     return (REPOSITORY / path[0]).resolve()
 
 
+def _rule_sections(rule: Path) -> list[tuple[str, str, str]]:
+    """Rozdělí pravidla na jméno, tělo a obsah params.
+
+    Returns:
+        Sekce pravidel včetně přejmenovaných dědiců.
+    """
+    blocks = re.findall(
+        r"^(?:rule (\w+):|use rule (\w+)(?: as (\w+))? with:)\n"
+        r"((?:[ \t]+[^\n]*(?:\n|$)|\n)*)",
+        rule.read_text(encoding="utf-8"),
+        re.MULTILINE,
+    )
+    sections = []
+    for name, parent, alias, body in blocks:
+        params = re.search(
+            r"^    params:[ \t]*\n((?:        [^\n]*(?:\n|$)|\n)*)",
+            body,
+            re.MULTILINE,
+        )
+        sections.append((name or alias or parent, body, params[1] if params else ""))
+    return sections
+
+
+def test_synthetic_mimic_fingerprints_manifest_content() -> None:
+    """Syntetika nese v params cestu i otisk obsahu manifestu."""
+    sections = _rule_sections(REPOSITORY / "workflow/rules/smoketest.smk")
+    params = next(params for name, _, params in sections if name == "synthetic_mimic")
+    assert re.search(r"^        manifest=MIMIC_MANIFEST,$", params, re.MULTILINE)
+    assert re.search(
+        r"^        manifest_sha256=lambda wildcards: file_fingerprint\(MIMIC_MANIFEST\),$",
+        params,
+        re.MULTILINE,
+    )
+
+
 def _rule_code_violations(rule: Path) -> list[str]:
     """Najde pravidla, jejichž params.code neotiskuje vlastní skript.
 
     Returns:
         Jména porušujících pravidel; use rule bez script dědí otisk rodiče.
     """
-    source = rule.read_text(encoding="utf-8")
-    blocks = re.findall(
-        r"^(?:rule (\w+):|use rule (\w+)(?: as (\w+))? with:)\n"
-        r"((?:[ \t]+[^\n]*(?:\n|$)|\n)*)",
-        source,
-        re.MULTILINE,
-    )
     violations = []
-    for name, parent, alias, body in blocks:
+    for name, body, params in _rule_sections(rule):
         expected = _rule_script_path(rule, body)
         if expected is None:
             continue
-        params = re.search(
-            r"^    params:[ \t]*\n((?:        [^\n]*(?:\n|$)|\n)*)",
-            body,
-            re.MULTILINE,
-        )
         code = re.search(
             r"^        code\s*=\s*code_fingerprint\([\"']([^\"']+)[\"']\)",
-            params[1] if params else "",
+            params,
             re.MULTILINE,
         )
         if code is None or (REPOSITORY / code[1]).resolve() != expected:
-            violations.append(f"{rule.name}: {name or alias or parent}")
+            violations.append(f"{rule.name}: {name}")
     return violations
 
 

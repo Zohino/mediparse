@@ -9,6 +9,7 @@ import pytest
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.entrypoints.workflow_code import code_fingerprint as workflow_fingerprint
+from mediparse.entrypoints.workflow_code import file_fingerprint
 from mediparse.infrastructure.code_fingerprint import code_fingerprint, code_key
 from mediparse.infrastructure.eda_cache import cache_key
 from tests.support import REPOSITORY
@@ -180,3 +181,12 @@ def test_code_key_tracks_ast_changes(
     before = code_key([])
     (package / "b.py").write_text(source, encoding="utf-8")
     assert (code_key([]) != before) is changes_key
+
+
+def test_file_fingerprint_is_sha256_of_content(tmp_path: Path) -> None:
+    """Otisk vstupu odpovídá nezávisle spočítanému SHA-256 bajtů."""
+    manifest = tmp_path / "manifest.json"
+    manifest.write_bytes(b"{}\n")
+    assert file_fingerprint(str(manifest)) == (
+        "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    )

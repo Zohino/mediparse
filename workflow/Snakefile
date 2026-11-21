@@ -1,7 +1,8 @@
 from pathlib import Path
 
-from mediparse.entrypoints.workflow_code import code_fingerprint
+from mediparse.entrypoints.workflow_code import code_fingerprint, file_fingerprint
 
+MIMIC_MANIFEST = "results/mimic/manifest.json"
 SYNTHETIC = Path("resources/synthetic")
 SMOKETEST = Path("build/smoketest")
 SMOKETEST_LOGS = Path("logs/smoketest")

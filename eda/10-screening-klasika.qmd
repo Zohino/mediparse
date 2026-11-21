@@ -99,7 +99,7 @@ export_table(screening_diagnosis_table(results, summary, candidates),
 export_figure(screening_plot(results, summary, selection), height_cm = 9)
 ```
 
-Nejvyšší průměr macro-F1 je `r screening_number(selection$winner$mean)` a hranice pásma 1 SE je `r screening_number(selection$threshold)`.
+Nejvyšší průměr macro-F1 je `r metric_text(selection$winner$mean)` a hranice pásma 1 SE je `r metric_text(selection$threshold)`.
 
 ```{r}
 #| label: tbl-phi

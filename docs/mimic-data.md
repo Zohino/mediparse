@@ -92,6 +92,10 @@ Změna nesouvisejícího Python modulu jej nespustí. Python se otiskuje přes A
 komentáře, prázdné řádky a formátování otisk nemění, změna kódu nebo docstringu ano.
 Data balíčku se otiskují po bajtech.
 
+Stejně tak `synthetic_mimic` nese v `params.manifest_sha256` otisk obsahu
+`results/mimic/manifest.json`, takže nová validace přeplánuje smoketest
+u výstupů s použitelnými metadaty.
+
 `inventory_mimic_table` má v `params.code` otisk bajtů `inventory.sh`, takže změna
 validace obnoví inventáře. `download.sh` se nesleduje: změna stahovacího skriptu
 nemá znovu stahovat již ověřené a chráněné soubory. Otisk nepokrývá verze knihoven

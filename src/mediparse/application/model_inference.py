@@ -33,7 +33,7 @@ class ModelSource(Protocol):
         """Načte uložený klasifikátor.
 
         Raises:
-            InvalidInputError: Model chybí nebo ho nelze načíst.
+            InvalidInputError: Model chybí, nelze ho načíst nebo nemá podporovaný tvar.
         """
 
 
