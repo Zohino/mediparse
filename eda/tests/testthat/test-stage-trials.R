@@ -267,8 +267,6 @@ testthat::test_that("Provenance formátuje počty a dobu běhu v minutách", {
   manifest$sample_patients <- 4567
   manifest$seconds <- 21534.8123
   table <- stage_provenance_table(manifest)
-  testthat::expect_equal(table$Hodnota[table$Položka == "Předzpracování"],
-    "word: dictionary; char_wb: dictionary")
   items <- c("Pokusy", "Náhodné startovní pokusy", "Vzorek zpráv",
     "Vzorek pacientů", "Doba běhu v minutách")
   testthat::expect_equal(table$Hodnota[match(items, table$Položka)],
@@ -282,4 +280,12 @@ testthat::test_that("Souhrn zachová parametry pokusu pro tabulku prostoru", {
   winner <- stage_trial_summary(rows)
   testthat::expect_equal(jsonlite::fromJSON(winner$params),
     list(branch = "word/nb_svm", word.min_df = 3, nb_svm.C = 8.5))
+})
+
+
+testthat::test_that("Provenance vypíše předzpracování po reprezentacích", {
+  manifest <- jsonlite::read_json(stage_fixture_paths()$manifest, simplifyVector = TRUE)
+  table <- stage_provenance_table(manifest)
+  testthat::expect_equal(table$Hodnota[table$Položka == "Předzpracování"],
+    "word: dictionary; char_wb: dictionary")
 })

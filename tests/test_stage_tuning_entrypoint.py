@@ -8,7 +8,7 @@ from collections import Counter, defaultdict
 from contextlib import nullcontext
 from dataclasses import replace
 from types import SimpleNamespace
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
 import pyarrow.parquet as pq
@@ -81,24 +81,11 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
         return original(fit) and calls % 60 != 6
 
     monkeypatch.setattr(sklearn_stage, "fit_converged", fit_once)
-    tfidf = Mock(wraps=sklearn_stage.tfidf_from)
-    monkeypatch.setattr(sklearn_stage, "tfidf_from", tfidf)
     paths = _paths(tmp_path)
     assert _run(paths) is ExitCode.OK
-    dictionary = load_text_normalization(paths.corpus.candidates, variants=True)
-    assert any(c.args[2] == dictionary for c in tfidf.call_args_list)
-    assert any(c.args[2] is None for c in tfidf.call_args_list)
-    assert all(
-        c.args[2] == dictionary or c.args[2] is None for c in tfidf.call_args_list
-    )
     trials = pq.read_table(paths.out).to_pylist()
     predictions = pq.read_table(paths.predictions).to_pylist()
     written = StageTuningManifest.model_validate_json(paths.manifest.read_bytes())
-    assert written.text_preprocessing == {
-        "r1": TextPreprocessing.DICTIONARY,
-        "r2": TextPreprocessing.NONE,
-    }
-    assert written.text_normalization == {"r1": dictionary, "r2": None}
     assert written.completed_trials == written.trials == 6
     assert set(written.environment.packages) == {
         "python",
@@ -113,7 +100,16 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
         "pydantic",
     }
     assert written.seconds == pytest.approx(6.0)
-    _assert_trial_features_and_convergence(trials, written)
+    n_features = defaultdict(set)
+    for row in trials:
+        assert type(row["n_features"]) is int
+        assert row["n_features"] > 0
+        n_features[row["trial"], row["fold"]].add(row["n_features"])
+    assert all(len(counts) == 1 for counts in n_features.values())
+
+    affected = {row["trial"] for row in trials if not row["converged"]}
+    assert affected == {0}
+    assert written.nonconverged_trials == len(affected)
     for field, path in (
         ("dataset_sha256", paths.corpus.cohort),
         ("config_sha256", paths.config),
@@ -412,21 +408,6 @@ def test_manifest_records_monitored_gpu(
     monitor.assert_called_once_with("0", "PCI_BUS_ID")
 
 
-def _assert_trial_features_and_convergence(
-    trials: list[dict[str, Any]], written: StageTuningManifest
-) -> None:
-    n_features = defaultdict(set)
-    for row in trials:
-        assert type(row["n_features"]) is int
-        assert row["n_features"] > 0
-        n_features[row["trial"], row["fold"]].add(row["n_features"])
-    assert all(len(counts) == 1 for counts in n_features.values())
-
-    affected = {row["trial"] for row in trials if not row["converged"]}
-    assert affected == {0}
-    assert written.nonconverged_trials == len(affected)
-
-
 def test_manifest_preserves_diagnostic_strip(tmp_path: Path) -> None:
     """Zapnutý strip stupně zapíše diagnostické sekce i otisk lexikonu."""
     paths = _paths(tmp_path)
@@ -441,3 +422,25 @@ def test_manifest_preserves_diagnostic_strip(tmp_path: Path) -> None:
         manifest.diagnostic_strip.lexicon_sha256
         == hashlib.sha256(paths.corpus.lexicon.read_bytes()).hexdigest()
     )
+
+
+def test_stage_records_and_passes_normalization_per_representation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Scorer i manifest dostávají stejné slovníky jednotlivých reprezentací."""
+    tfidf = Mock(wraps=sklearn_stage.tfidf_from)
+    monkeypatch.setattr(sklearn_stage, "tfidf_from", tfidf)
+    paths = _paths(tmp_path)
+    assert _run(paths) is ExitCode.OK
+    dictionary = load_text_normalization(paths.corpus.candidates, variants=True)
+    assert any(c.args[2] == dictionary for c in tfidf.call_args_list)
+    assert any(c.args[2] is None for c in tfidf.call_args_list)
+    assert all(
+        c.args[2] == dictionary or c.args[2] is None for c in tfidf.call_args_list
+    )
+    written = StageTuningManifest.model_validate_json(paths.manifest.read_bytes())
+    assert written.text_preprocessing == {
+        "r1": TextPreprocessing.DICTIONARY,
+        "r2": TextPreprocessing.NONE,
+    }
+    assert written.text_normalization == {"r1": dictionary, "r2": None}
