@@ -412,14 +412,14 @@ def test_encoder_scaler_fits_only_outer_train() -> None:
     np.testing.assert_array_equal(test, [[3.0]])
 
 
-def test_token_documents_joins_analyzer_tokens() -> None:
+def test_joined_tokens_drops_punctuation_and_single_letters() -> None:
     """Slovní analyzátor odstraní interpunkci a jednopísmenná slova."""
     prepare = joined_tokens(None)
     assert prepare("Insulin, glucose!\nA b") == "insulin glucose"
     assert prepare("Fracture.") == "fracture"
 
 
-def test_token_documents_applies_its_normalization() -> None:
+def test_joined_tokens_applies_normalization() -> None:
     """Rozvinutí COPD dodá stejná slova jako TF-IDF."""
     prepare = joined_tokens(
         TextNormalization(
@@ -525,21 +525,6 @@ def test_word2vec_trains_only_on_train(
         word2vec_options, word2vec_train, ["gamma delta", "beta"]
     )
     assert np.array_equal(first, second)
-
-
-def test_word2vec_applies_normalization(
-    word2vec_options: dict[str, ParamValue],
-) -> None:
-    """Rozvinutí COPD předchází průměru vektorů slov."""
-    normalization = TextNormalization(
-        acronyms={"COPD": "chronic obstructive pulmonary disease"}, variants={}
-    )
-    _, matrix = word2vec_features(
-        word2vec_options,
-        ["chronic obstructive pulmonary disease"] * 20,
-        [joined_tokens(normalization)("COPD"), "chronic obstructive pulmonary disease"],
-    )
-    np.testing.assert_array_equal(matrix[0], matrix[1])
 
 
 def test_word2vec_splits_long_documents(
