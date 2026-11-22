@@ -39,6 +39,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable, Mapping, Sequence
     from pathlib import Path
 
+    from gensim.models import KeyedVectors
     from numpy import ndarray
     from scipy.sparse import csr_matrix
 
@@ -232,6 +233,16 @@ def word2vec_features(
     """
     analyzer = _train_analyzer(normalization, train)
     documents = [analyzer(text) for text in train]
+    vectors = _trained_vectors(options, documents)
+    return _standardized(
+        _mean_vectors(vectors, documents),
+        _mean_vectors(vectors, [analyzer(text) for text in validation]),
+    )
+
+
+def _trained_vectors(
+    options: Mapping[str, ParamValue], documents: Sequence[list[str]]
+) -> KeyedVectors:
     # Gensim slova za 10 000. pozicí věty tiše zahodí; kusy zachovají všechny tokeny.
     sentences = [
         list(chunk)
@@ -245,16 +256,14 @@ def word2vec_features(
         msg = "Žádné slovo nedosáhlo min_count, slovník word2vec by byl prázdný."
         raise InvalidInputError(msg)
     model.train(sentences, total_examples=model.corpus_count, epochs=model.epochs)
+    return model.wv
 
-    def mean_matrix(documents: Sequence[list[str]]) -> ndarray:
-        # Výchozí pre_normalize=True by průměrovalo jednotkové vektory místo vektorů slov.
-        return np.array([
-            model.wv.get_mean_vector(tokens, pre_normalize=False)
-            if tokens
-            else np.zeros(model.wv.vector_size, dtype=np.float32)
-            for tokens in documents
-        ])
 
-    return _standardized(
-        mean_matrix(documents), mean_matrix([analyzer(text) for text in validation])
-    )
+def _mean_vectors(vectors: KeyedVectors, documents: Sequence[list[str]]) -> ndarray:
+    # Výchozí pre_normalize=True by průměrovalo jednotkové vektory místo vektorů slov.
+    return np.array([
+        vectors.get_mean_vector(tokens, pre_normalize=False)
+        if tokens
+        else np.zeros(vectors.vector_size, dtype=np.float32)
+        for tokens in documents
+    ])
