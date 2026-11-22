@@ -267,6 +267,8 @@ testthat::test_that("Provenance formátuje počty a dobu běhu v minutách", {
   manifest$sample_patients <- 4567
   manifest$seconds <- 21534.8123
   table <- stage_provenance_table(manifest)
+  testthat::expect_equal(table$Hodnota[table$Položka == "Předzpracování"],
+    "word: dictionary; char_wb: dictionary")
   items <- c("Pokusy", "Náhodné startovní pokusy", "Vzorek zpráv",
     "Vzorek pacientů", "Doba běhu v minutách")
   testthat::expect_equal(table$Hodnota[match(items, table$Položka)],

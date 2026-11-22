@@ -1,7 +1,7 @@
 {
   "encoders": [],
   "dataset_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-  "config_sha256": "6dbf32c4f0d370c226c7d31d699b47604aef78061e09d8e5b228c8dbc65a40bb",
+  "config_sha256": "f1a363b3f86c141e7a107f31228516df0ea7338e7e554bec51944456c1773db6",
   "split_seed": 0,
   "split_folds": 5,
   "split_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
@@ -32,10 +32,19 @@
   "results_sha256": "f56e4b4488c4cfc6318a3f232c5da4b2c01d79a4ee0ba95015b8c5a5f6a07d93",
   "predictions_sha256": "3e8acac40dbfb20eaf2a8126bc843e4a1d9232abb3fd0b33b841da1b7d633cdc",
   "diagnostic_strip": null,
-  "text_preprocessing": "dictionary",
+  "text_preprocessing": {
+    "word": "dictionary",
+    "char_wb": "dictionary"
+  },
   "text_normalization": {
-    "acronyms": {},
-    "variants": {}
+    "word": {
+      "acronyms": {},
+      "variants": {}
+    },
+    "char_wb": {
+      "acronyms": {},
+      "variants": {}
+    }
   },
   "environment": {
     "packages": {
