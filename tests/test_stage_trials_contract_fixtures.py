@@ -83,6 +83,7 @@ def write_stage_trials_fixtures(directory: Path) -> None:
     winner = best_trial(records)
     provenance = training_manifest()
     manifest = StageTuningManifest(
+        jobs=1,
         dataset_sha256="a" * 64,
         split_seed=0,
         split_folds=5,

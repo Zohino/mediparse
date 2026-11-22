@@ -59,17 +59,19 @@ def _paths(root: Path) -> stage_tuning.StageTuningPaths:
     )
 
 
-def _run(paths: stage_tuning.StageTuningPaths) -> ExitCode:
+def _run(paths: stage_tuning.StageTuningPaths, jobs: int = 1) -> ExitCode:
     return stage_tuning.run(
         paths=paths,
         environ={"CODEX_THREAD_ID": "test"},
         revision=fixed_revision,
         clock=StepClock(),
+        jobs=jobs,
     )
 
 
+@pytest.mark.parametrize("jobs", [1, 2])
 def test_end_to_end_metrics_predictions_manifest_and_repeat(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, jobs: int
 ) -> None:
     """F1 ze skutečných predikcí souhlasí s tabulkou i vítězem v manifestu."""
     original = sklearn_stage.fit_converged
@@ -82,10 +84,11 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
 
     monkeypatch.setattr(sklearn_stage, "fit_converged", fit_once)
     paths = _paths(tmp_path)
-    assert _run(paths) is ExitCode.OK
+    assert _run(paths, jobs=jobs) is ExitCode.OK
     trials = pq.read_table(paths.out).to_pylist()
     predictions = pq.read_table(paths.predictions).to_pylist()
     written = StageTuningManifest.model_validate_json(paths.manifest.read_bytes())
+    assert written.jobs == jobs
     assert written.completed_trials == written.trials == 6
     assert set(written.environment.packages) == {
         "python",
@@ -95,6 +98,8 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
         "lightgbm",
         "fasttext",
         "gensim",
+        "joblib",
+        "threadpoolctl",
         "optuna",
         "pyarrow",
         "pydantic",
@@ -108,7 +113,7 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
     assert all(len(counts) == 1 for counts in n_features.values())
 
     affected = {row["trial"] for row in trials if not row["converged"]}
-    assert affected == {0}
+    assert affected == ({0} if jobs == 1 else set())
     assert written.nonconverged_trials == len(affected)
     for field, path in (
         ("dataset_sha256", paths.corpus.cohort),
@@ -151,7 +156,7 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
         assert {p["note_id"] for p in cell} == fold_notes[fold]
     assert len(predictions) == 6 * 5 * len(expected)
     before = paths.out.read_bytes(), paths.predictions.read_bytes()
-    assert _run(paths) is ExitCode.OK
+    assert _run(paths, jobs=jobs) is ExitCode.OK
     assert before == (paths.out.read_bytes(), paths.predictions.read_bytes())
     assert not paths.checkpoint.exists()
 
@@ -165,8 +170,9 @@ def test_foreign_checkpoint_refused_before_outputs(tmp_path: Path) -> None:
     assert not any(p.exists() for p in (paths.out, paths.predictions, paths.manifest))
 
 
+@pytest.mark.parametrize("jobs", [None, 2, 0, 6])
 def test_main_accepts_all_required_paths(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, jobs: int | None
 ) -> None:
     """CLI předá explicitní cesty a hodiny vstupnímu bodu."""
     names = (
@@ -185,10 +191,18 @@ def test_main_accepts_all_required_paths(
     argv = ["mediparse-stage-tuning"]
     for name in names:
         argv.extend((f"--{name}", str(tmp_path / name)))
+    if jobs is not None:
+        argv.extend(("--jobs", str(jobs)))
     monkeypatch.setattr("sys.argv", argv)
     run = Mock(return_value=ExitCode.REFUSED)
     monkeypatch.setattr(stage_tuning, "run", run)
+    if jobs in {0, 6}:
+        with pytest.raises(SystemExit):
+            stage_tuning.main()
+        run.assert_not_called()
+        return
     assert stage_tuning.main() is ExitCode.REFUSED
+    assert run.call_args.kwargs["jobs"] == (3 if jobs is None else jobs)
     paths = run.call_args.kwargs["paths"]
     for name in names:
         assert (

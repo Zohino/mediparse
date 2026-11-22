@@ -228,6 +228,7 @@ def ensure_tuning_lineage(  # ruff: ignore[too-many-arguments]
 class StageTuningManifest(BaseModel):
     """Provenance CASH stupně, vítěz a otisky obou výstupů.
 
+    ``jobs`` je počet procesů posledního běhu; mění dobu pokusů, ne výsledky.
     ``text_preprocessing`` mapuje jména reprezentací na úrovně vstupu.
     ``text_normalization`` nese pro stejná jména skutečně použité slovníky.
     """
@@ -243,6 +244,7 @@ class StageTuningManifest(BaseModel):
     split_folds: Annotated[int, Field(ge=2)]
     split_sha256: Sha256
     seed: Seed
+    jobs: PositiveInt
     trials: PositiveInt
     random_startup_trials: Annotated[int, Field(ge=0)]
     completed_trials: PositiveInt

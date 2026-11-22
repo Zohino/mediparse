@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Final
 
 from mediparse.application.stage_tuning import StageTuning
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.environment import Environment
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.run_manifest import StageTuningManifest
@@ -73,6 +74,8 @@ PACKAGES: Final = (
     "lightgbm",
     "fasttext",
     "gensim",
+    "joblib",
+    "threadpoolctl",
     "optuna",
     "pyarrow",
     "pydantic",
@@ -125,6 +128,17 @@ def main() -> ExitCode:
         required=True,
         help="Dočasné tokeny zpráv; doporučeno resources/mimic/screening/scratch, mimo checkpoint a results/.",
     )
+    parser.add_argument(
+        "--jobs",
+        type=int,
+        choices=range(1, len(Diagnosis) + 1),
+        default=3,
+        help=(
+            "Procesy pro fity diagnóz; výsledky na počtu nezávisí. "
+            "Každý proces drží vlastní kopii matice u SVM a NB-SVM, "
+            "menší hodnota šetří paměť. Obnova checkpointu s jiným --jobs je platná."
+        ),
+    )
     args = parser.parse_args()
     return run(
         environ=os.environ,
@@ -145,17 +159,20 @@ def main() -> ExitCode:
         ),
         revision=revision_source(os.environ, Path.cwd()),
         clock=PerfCounterClock(),
+        jobs=args.jobs,
     )
 
 
+# Explicitní vstupy composition root oddělují cesty, zdroje a provozní paralelitu.
 @refusing_invalid_input
-def run(
+def run(  # ruff: ignore[too-many-arguments]
     *,
     environ: Mapping[str, str],
     paths: StageTuningPaths,
     revision: Callable[[], SourceRevision],
     clock: Clock,
     encoders: Callable[[EncoderSpec], HfMeanEncoder] = load_encoder,
+    jobs: int = 1,
 ) -> ExitCode:
     """Složí adaptéry a zapíše oba výstupy s manifestem.
 
@@ -189,6 +206,7 @@ def run(
                 NoteEmbeddings(
                     paths.embeddings, versions, lambda spec: encoders(spec).embed
                 ),
+                jobs=jobs,
             ),
             progress=ParquetStageCheckpoint(
                 paths.checkpoint,
@@ -203,6 +221,7 @@ def run(
     write_model(
         paths.manifest,
         StageTuningManifest(
+            jobs=jobs,
             encoders=config.encoders,
             dataset_sha256=corpus.dataset_sha256,
             config_sha256=file_sha256(paths.config),
