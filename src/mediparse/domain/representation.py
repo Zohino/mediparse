@@ -8,6 +8,7 @@ from typing import Annotated, Literal, Self, assert_never
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
 from mediparse.domain.digest import CommitSha
+from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.tuning import (
     CategoricalParam,
     FloatParam,
@@ -44,6 +45,12 @@ class EncoderSpec(BaseModel):
     device: Literal["cpu", "cuda"]
     dtype: Literal["float32", "bfloat16"]
 
+    @property
+    def text_preprocessing(self) -> TextPreprocessing:
+        """Úroveň vstupu předtrénovaného tokenizéru."""
+        # Tokenizér čte původní text; property nevstupuje do klíče cache embeddingů.
+        return TextPreprocessing.NONE
+
 
 class TokensSpec(BaseModel):
     """Slovní tokeny pro rodinu, která se reprezentaci učí sama."""
@@ -51,6 +58,7 @@ class TokensSpec(BaseModel):
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 
     name: RepresentationName
+    text_preprocessing: TextPreprocessing
 
 
 def _int_choices(param: Parameter) -> tuple[int, int]:
@@ -70,6 +78,7 @@ class TfidfRepresentation(BaseModel):
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 
     name: RepresentationName
+    text_preprocessing: TextPreprocessing
     analyzer: Literal["word", "char_wb"]
     space: SearchSpace
     default: dict[str, ParamValue]
@@ -111,6 +120,7 @@ class Word2VecRepresentation(BaseModel):
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 
     name: RepresentationName
+    text_preprocessing: TextPreprocessing
     workers: PositiveInt
     space: SearchSpace
     default: dict[str, ParamValue]

@@ -4,13 +4,11 @@
   "folds": 5,
   "trials": 20,
   "random_startup_trials": 5,
-  "input": {
-    "strip_diagnostic_sections": false,
-    "text_preprocessing": "dictionary"
-  },
+  "strip_diagnostic_sections": false,
   "representations": [
     {
-      "name": "word-tokens"
+      "name": "word-tokens",
+      "text_preprocessing": "dictionary"
     }
   ],
   "families": [

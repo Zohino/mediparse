@@ -56,7 +56,7 @@ class SklearnStageScorer:
     """Fitne reprezentaci jednou pro pět diagnóz pokusu a foldu."""
 
     config: StageTuningConfig
-    normalization: TextNormalization | None
+    normalizations: Mapping[str, TextNormalization | None]
     seed: Seed
     scratch: Path
     embeddings: NoteEmbeddings
@@ -117,7 +117,7 @@ class SklearnStageScorer:
             case Word2VecRepresentation() as spec:
                 # Více vláken z configu zrychlí trénink za cenu nedeterminismu.
                 train, validation = word2vec_features(
-                    self.normalization,
+                    self.normalizations[branch.representation.name],
                     {**rep_params, "workers": spec.workers, "seed": self.seed},
                     train_texts,
                     validation_texts,
@@ -125,7 +125,9 @@ class SklearnStageScorer:
                 return train, validation, train.shape[1]
             case TokensSpec():
                 train, validation = token_documents(
-                    self.normalization, train_texts, validation_texts
+                    self.normalizations[branch.representation.name],
+                    train_texts,
+                    validation_texts,
                 )
                 n_features = len({
                     token for document in train for token in document.split()
@@ -153,7 +155,7 @@ class SklearnStageScorer:
         vectorizer = tfidf_from(
             tfidf,
             cast("TfidfRepresentation", branch.representation).analyzer,
-            self.normalization,
+            self.normalizations[branch.representation.name],
             max_features=lsa.max_features if lsa else None,
         )
         ensure_tokens(vectorizer, train_texts)

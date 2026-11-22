@@ -8,7 +8,7 @@ from collections import Counter, defaultdict
 from contextlib import nullcontext
 from dataclasses import replace
 from types import SimpleNamespace
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 from unittest.mock import Mock
 
 import pyarrow.parquet as pq
@@ -17,12 +17,14 @@ from pydantic import ValidationError
 from sklearn.metrics import f1_score
 
 from mediparse.domain.environment import GpuDevice
+from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.representation import ClassifierFamily, Word2VecRepresentation
 from mediparse.domain.run_manifest import StageTuningManifest
 from mediparse.domain.stage_tuning import StageLsa
 from mediparse.entrypoints import stage_tuning
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure import sklearn_stage
+from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.hf_encoder import ENCODER_PACKAGES, HfMeanEncoder
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.split_table import ParquetSplitTable
@@ -79,11 +81,24 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
         return original(fit) and calls % 60 != 6
 
     monkeypatch.setattr(sklearn_stage, "fit_converged", fit_once)
+    tfidf = Mock(wraps=sklearn_stage.tfidf_from)
+    monkeypatch.setattr(sklearn_stage, "tfidf_from", tfidf)
     paths = _paths(tmp_path)
     assert _run(paths) is ExitCode.OK
+    dictionary = load_text_normalization(paths.corpus.candidates, variants=True)
+    assert any(c.args[2] == dictionary for c in tfidf.call_args_list)
+    assert any(c.args[2] is None for c in tfidf.call_args_list)
+    assert all(
+        c.args[2] == dictionary or c.args[2] is None for c in tfidf.call_args_list
+    )
     trials = pq.read_table(paths.out).to_pylist()
     predictions = pq.read_table(paths.predictions).to_pylist()
     written = StageTuningManifest.model_validate_json(paths.manifest.read_bytes())
+    assert written.text_preprocessing == {
+        "r1": TextPreprocessing.DICTIONARY,
+        "r2": TextPreprocessing.NONE,
+    }
+    assert written.text_normalization == {"r1": dictionary, "r2": None}
     assert written.completed_trials == written.trials == 6
     assert set(written.environment.packages) == {
         "python",
@@ -98,15 +113,7 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
         "pydantic",
     }
     assert written.seconds == pytest.approx(6.0)
-    n_features = defaultdict(set)
-    for row in trials:
-        assert type(row["n_features"]) is int
-        assert row["n_features"] > 0
-        n_features[row["trial"], row["fold"]].add(row["n_features"])
-    assert all(len(counts) == 1 for counts in n_features.values())
-    affected = {row["trial"] for row in trials if not row["converged"]}
-    assert affected == {0}
-    assert written.nonconverged_trials == len(affected)
+    _assert_trial_features_and_convergence(trials, written)
     for field, path in (
         ("dataset_sha256", paths.corpus.cohort),
         ("config_sha256", paths.config),
@@ -205,8 +212,20 @@ def test_manifest_rejects_inconsistent_run(tmp_path: Path) -> None:
     paths = _paths(tmp_path)
     assert _run(paths) is ExitCode.OK
     data = json.loads(paths.manifest.read_bytes())
-    for changes in ({"completed_trials": 5}, {"text_preprocessing": "dictionary"}):
-        with pytest.raises(ValidationError):
+    for changes, message in (
+        ({"completed_trials": 5}, "vyčerpat rozpočet"),
+        (
+            {"text_preprocessing": {"r1": "none", "r2": "none"}},
+            "Úroveň předzpracování none",
+        ),
+        ({"text_preprocessing": {"r1": "normalized", "r2": "none"}}, "variant"),
+        (
+            {"text_normalization": {"r1": data["text_normalization"]["r1"]}},
+            "stejné reprezentace",
+        ),
+        ({"text_preprocessing": {}, "text_normalization": {}}, "at least 1 item"),
+    ):
+        with pytest.raises(ValidationError, match=message):
             StageTuningManifest.model_validate_json(json.dumps(data | changes))
 
 
@@ -273,6 +292,21 @@ def test_manifest_without_encoders_validates_as_empty(tmp_path: Path) -> None:
 def test_repository_stage_configs(stage: str) -> None:
     """Produkční stupně deklarují schválené větve, rozpočty a výchozí body."""
     config = load_stage_config(REPOSITORY / f"config/stage_{stage}.json")
+    assert config.strip_diagnostic_sections is False
+    assert (
+        config.text_preprocessing
+        == {
+            "classical": {
+                "word": TextPreprocessing.DICTIONARY,
+                "char_wb": TextPreprocessing.DICTIONARY,
+            },
+            "embeddings": {
+                "mmbert-base-mean": TextPreprocessing.NONE,
+                "word2vec": TextPreprocessing.DICTIONARY,
+            },
+            "networks": {"word-tokens": TextPreprocessing.DICTIONARY},
+        }[stage]
+    )
     assert config.seed == 0
     budget = (
         config.trials,
@@ -376,3 +410,18 @@ def test_manifest_records_monitored_gpu(
         paths.manifest.read_bytes()
     ).hardware.gpus == (device,)
     monitor.assert_called_once_with("0", "PCI_BUS_ID")
+
+
+def _assert_trial_features_and_convergence(
+    trials: list[dict[str, Any]], written: StageTuningManifest
+) -> None:
+    n_features = defaultdict(set)
+    for row in trials:
+        assert type(row["n_features"]) is int
+        assert row["n_features"] > 0
+        n_features[row["trial"], row["fold"]].add(row["n_features"])
+    assert all(len(counts) == 1 for counts in n_features.values())
+
+    affected = {row["trial"] for row in trials if not row["converged"]}
+    assert affected == {0}
+    assert written.nonconverged_trials == len(affected)

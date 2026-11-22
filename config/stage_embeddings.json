@@ -4,10 +4,7 @@
   "folds": 5,
   "trials": 36,
   "random_startup_trials": 5,
-  "input": {
-    "strip_diagnostic_sections": false,
-    "text_preprocessing": "none"
-  },
+  "strip_diagnostic_sections": false,
   "representations": [
     {
       "name": "mmbert-base-mean",
@@ -19,6 +16,7 @@
     },
     {
       "name": "word2vec",
+      "text_preprocessing": "dictionary",
       "workers": 16,
       "space": {
         "params": [

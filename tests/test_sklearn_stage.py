@@ -20,6 +20,7 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.representation import Word2VecRepresentation
 from mediparse.domain.split import Holdout
 from mediparse.domain.stage_tuning import StageLsa
+from mediparse.entrypoints.stage_tuning import stage_normalizations
 from mediparse.infrastructure import sklearn_stage
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
@@ -53,7 +54,9 @@ if TYPE_CHECKING:
 def test_logreg_parameters_change_scores(tmp_path: Path) -> None:
     """Silnější a slabší regularizace dávají různá skóre na stejné syntetice."""
     config = stage_config()
-    scorer = SklearnStageScorer(config, None, 7, tmp_path, Mock())
+    scorer = SklearnStageScorer(
+        config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
+    )
     fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
     params = config.branches[0].default_params()
     low = scorer.score(params | {"logreg.C": 1e-4}, fold)
@@ -100,7 +103,9 @@ def test_lightgbm_receives_lsa_components(
         return model
 
     monkeypatch.setattr(sklearn_stage, "classifier_estimator", estimator)
-    scorer = SklearnStageScorer(config, None, 7, tmp_path, Mock())
+    scorer = SklearnStageScorer(
+        config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
+    )
     fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
     scorer.score(config.branches[0].default_params(), fold)
     assert observed == [3] * 5
@@ -139,9 +144,9 @@ def test_vocabulary_cap_applies_only_to_lsa(
         return model
 
     monkeypatch.setattr(sklearn_stage, "TruncatedSVD", svd)
-    result = SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
-        branch.default_params(), fold
-    )
+    result = SklearnStageScorer(
+        config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
+    ).score(branch.default_params(), fold)
     assert observed == ([5] if lsa else [])
     assert result.n_features == (5 if lsa else len(vocabulary))
 
@@ -176,9 +181,13 @@ def test_nondefault_char_tfidf_matches_manual_pipeline(tmp_path: Path) -> None:
         "char_wb.sublinear_tf": False,
         "logreg.C": 0.25,
     }
-    scored = SklearnStageScorer(config, normalization, 7, tmp_path, Mock()).score(
-        params, fold
-    )
+    scored = SklearnStageScorer(
+        config,
+        dict.fromkeys(config.text_preprocessing, normalization),
+        7,
+        tmp_path,
+        Mock(),
+    ).score(params, fold)
     vectorizer = tfidf_vectorizer(
         normalization,
         analyzer="char_wb",
@@ -212,15 +221,15 @@ def test_seeded_scores_repeat(tmp_path: Path, family: str) -> None:
         for n in notes(visits=10)
     )
     fold = patient_holdouts(corpus, 2, 7, StratifiedGroupFolds())[0]
-    first = SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
-        branch.default_params(), fold
-    )
-    repeated = SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
-        branch.default_params(), fold
-    )
-    other = SklearnStageScorer(config, None, 29, tmp_path, Mock()).score(
-        branch.default_params(), fold
-    )
+    first = SklearnStageScorer(
+        config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
+    ).score(branch.default_params(), fold)
+    repeated = SklearnStageScorer(
+        config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
+    ).score(branch.default_params(), fold)
+    other = SklearnStageScorer(
+        config, dict.fromkeys(config.text_preprocessing), 29, tmp_path, Mock()
+    ).score(branch.default_params(), fold)
     assert first.scores == repeated.scores
     if family == "lightgbm_lsa":
         assert first.scores != other.scores
@@ -241,7 +250,9 @@ def test_convergence_accumulates_all_diagnoses(
 
     monkeypatch.setattr(sklearn_stage, "fit_converged", fit_once)
     config = stage_config()
-    scorer = SklearnStageScorer(config, None, 7, tmp_path, Mock())
+    scorer = SklearnStageScorer(
+        config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
+    )
     scored = scorer.score(config.branches[0].default_params(), _clinical_fold())
     assert scored.converged is (failed_call is None)
     assert calls == 5
@@ -250,7 +261,9 @@ def test_convergence_accumulates_all_diagnoses(
 def test_min_df_above_training_documents_is_refused(tmp_path: Path) -> None:
     """Sklearn odmítne min_df větší než počet trénovacích dokumentů."""
     config = stage_config()
-    scorer = SklearnStageScorer(config, None, 7, tmp_path, Mock())
+    scorer = SklearnStageScorer(
+        config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
+    )
     params = config.branches[0].default_params() | {"r1.min_df": 100000}
     with pytest.raises(InvalidInputError, match="min_df"):
         scorer.score(params, _clinical_fold())
@@ -306,9 +319,9 @@ def test_encoder_branch_scores_cached_embeddings(
     embeddings.embed.side_effect = lambda _spec, texts: np.array([
         vectors[text] for text in texts
     ])
-    scored = SklearnStageScorer(config, None, 7, tmp_path, embeddings).score(
-        config.branches[0].default_params(), fold
-    )
+    scored = SklearnStageScorer(
+        config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, embeddings
+    ).score(config.branches[0].default_params(), fold)
     assert len(scored.scores) == 5
     assert all(len(scores) == len(fold.test) for scores in scored.scores.values())
     assert scored.n_features == 4
@@ -345,9 +358,13 @@ def test_tokens_branch_counts_distinct_analyzer_tokens(
         (replace(original[-1], text="alpha"),),
     )
     config = token_stage_config()
-    scored = SklearnStageScorer(config, normalization, 7, tmp_path, Mock()).score(
-        config.branches[0].default_params(), fold
-    )
+    scored = SklearnStageScorer(
+        config,
+        dict.fromkeys(config.text_preprocessing, normalization),
+        7,
+        tmp_path,
+        Mock(),
+    ).score(config.branches[0].default_params(), fold)
     assert scored.n_features == features
 
 
@@ -375,9 +392,9 @@ def test_fasttext_family_params_reach_estimator(
 
     monkeypatch.setattr(sklearn_stage, "classifier_estimator", estimator)
     config = token_stage_config()
-    SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
-        config.branches[0].default_params(), _clinical_fold()
-    )
+    SklearnStageScorer(
+        config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
+    ).score(config.branches[0].default_params(), _clinical_fold())
     assert observed == [{"lr": 0.5, "epoch": 1, "word_ngrams": 2, "dim": 2}] * 5
 
 
@@ -433,9 +450,9 @@ def test_empty_vocabulary_is_invalid_input(
             "Trénovací texty neobsahují žádný token, slovník by byl prázdný."
         ),
     ):
-        SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
-            config.branches[0].default_params(), fold
-        )
+        SklearnStageScorer(
+            config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
+        ).score(config.branches[0].default_params(), fold)
 
 
 @pytest.fixture
@@ -608,9 +625,13 @@ def test_word2vec_branch_scores(
     normalization = TextNormalization(
         acronyms={"COPD": "chronic obstructive pulmonary disease"}, variants={}
     )
-    result = SklearnStageScorer(config, normalization, 7, tmp_path, Mock()).score(
-        config.branches[0].default_params(), fold
-    )
+    result = SklearnStageScorer(
+        config,
+        dict.fromkeys(config.text_preprocessing, normalization),
+        7,
+        tmp_path,
+        Mock(),
+    ).score(config.branches[0].default_params(), fold)
     assert len(result.scores) == 5
     assert all(len(scores) == len(fold.test) for scores in result.scores.values())
     assert result.n_features == 7
@@ -619,3 +640,52 @@ def test_word2vec_branch_scores(
     assert "copd" not in model.wv.key_to_index
     assert model.workers == 1
     assert model.seed == 7
+
+
+def test_stage_inputs_follow_representation(
+    tmp_path: Path, trained_word2vec: list[sklearn_stage.Word2Vec]
+) -> None:
+    """Encoder čte původní text a word2vec rozvinuté zkratky téhož foldu."""
+    config = load_stage_config(REPOSITORY / "config/stage_embeddings.json")
+    fold = _clinical_fold()
+    fold = replace(
+        fold,
+        train=tuple(
+            replace(n, text=n.text + " Pt with COPD and DM2 noted.") for n in fold.train
+        ),
+        test=tuple(
+            replace(n, text=n.text + " Pt with COPD and DM2 noted.") for n in fold.test
+        ),
+    )
+    embeddings = Mock()
+    embeddings.embed.side_effect = lambda _spec, texts: np.arange(
+        len(texts) * 4, dtype=float
+    ).reshape(len(texts), 4)
+    scorer = SklearnStageScorer(
+        config,
+        stage_normalizations(REPOSITORY_DIAGNOSIS_CANDIDATES, config),
+        7,
+        tmp_path,
+        embeddings,
+    )
+    encoder = next(b for b in config.branches if b.name == "mmbert-base-mean/logreg")
+    scorer.score(encoder.default_params(), fold)
+    assert embeddings.embed.call_args_list == [
+        call(config.encoders[0], [n.text for n in (*fold.train, *fold.test)])
+    ]
+    word2vec = next(b for b in config.branches if b.name == "word2vec/logreg")
+    scorer.score(
+        word2vec.default_params()
+        | {"word2vec.min_count": 1, "word2vec.vector_size": 7, "word2vec.epochs": 3},
+        fold,
+    )
+    vocabulary = trained_word2vec[0].wv.key_to_index
+    assert {
+        "chronic",
+        "obstructive",
+        "pulmonary",
+        "disease",
+        "diabetes",
+    } <= vocabulary.keys()
+    assert "copd" not in vocabulary
+    assert "dm2" not in vocabulary

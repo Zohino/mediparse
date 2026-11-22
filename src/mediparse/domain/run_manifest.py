@@ -19,7 +19,7 @@ from mediparse.domain.environment import Environment, Hardware
 from mediparse.domain.identity import RowId
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.model_input import TextPreprocessing
-from mediparse.domain.representation import EncoderSpec
+from mediparse.domain.representation import EncoderSpec, RepresentationName
 from mediparse.domain.seed import Seed
 from mediparse.domain.tuning import ParamValue, SearchSpace
 
@@ -226,7 +226,11 @@ def ensure_tuning_lineage(  # ruff: ignore[too-many-arguments]
 
 
 class StageTuningManifest(BaseModel):
-    """Provenance CASH stupně, vítěz a otisky obou výstupů."""
+    """Provenance CASH stupně, vítěz a otisky obou výstupů.
+
+    ``text_preprocessing`` mapuje jména reprezentací na úrovně vstupu.
+    ``text_normalization`` nese pro stejná jména skutečně použité slovníky.
+    """
 
     model_config = ConfigDict(
         frozen=True, strict=True, extra="forbid", allow_inf_nan=False
@@ -257,8 +261,10 @@ class StageTuningManifest(BaseModel):
     results_sha256: Sha256
     predictions_sha256: Sha256
     diagnostic_strip: DiagnosticStrip | None
-    text_preprocessing: TextPreprocessing
-    text_normalization: TextNormalization | None
+    text_preprocessing: Annotated[
+        dict[RepresentationName, TextPreprocessing], Field(min_length=1)
+    ]
+    text_normalization: dict[RepresentationName, TextNormalization | None]
     environment: Environment
     hardware: Hardware
 
@@ -267,7 +273,11 @@ class StageTuningManifest(BaseModel):
         if self.completed_trials != self.trials:
             msg = "Dokončené pokusy musí vyčerpat rozpočet stupně."
             raise ValueError(msg)
-        _ensure_normalization_matches_preprocessing(
-            self.text_preprocessing, self.text_normalization
-        )
+        if self.text_preprocessing.keys() != self.text_normalization.keys():
+            msg = "Mapy předzpracování a normalizace manifestu stupně musí mít stejné reprezentace."
+            raise ValueError(msg)
+        for name, level in self.text_preprocessing.items():
+            _ensure_normalization_matches_preprocessing(
+                level, self.text_normalization[name]
+            )
         return self

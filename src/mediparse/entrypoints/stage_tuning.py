@@ -59,8 +59,10 @@ if TYPE_CHECKING:
     from collections.abc import Callable, Mapping
 
     from mediparse.application.ports.experiment import Clock
+    from mediparse.domain.clinical_text import TextNormalization
     from mediparse.domain.environment import SourceRevision
     from mediparse.domain.representation import EncoderSpec
+    from mediparse.domain.stage_tuning import StageTuningConfig
 
 logger = logging.getLogger(__name__)
 PACKAGES: Final = (
@@ -167,11 +169,9 @@ def run(
     packages = installed_versions(PACKAGES) | versions
     source = revision()
     corpus = model_corpus(
-        paths.corpus, strip_diagnostic_sections=config.input.strip_diagnostic_sections
+        paths.corpus, strip_diagnostic_sections=config.strip_diagnostic_sections
     )
-    normalization = text_normalization(
-        paths.corpus.candidates, config.input.text_preprocessing
-    )
+    normalizations = stage_normalizations(paths.corpus.candidates, config)
     with gpu_monitor(
         environ.get("CUDA_VISIBLE_DEVICES"), environ.get("CUDA_DEVICE_ORDER")
     ) as monitor:
@@ -183,7 +183,7 @@ def run(
             search=OptunaStageSearch.create(config),
             scorer=SklearnStageScorer(
                 config,
-                normalization,
+                normalizations,
                 config.seed,
                 paths.scratch,
                 NoteEmbeddings(
@@ -228,8 +228,8 @@ def run(
             results_sha256=file_sha256(paths.out),
             predictions_sha256=file_sha256(paths.predictions),
             diagnostic_strip=corpus.strip,
-            text_preprocessing=config.input.text_preprocessing,
-            text_normalization=normalization,
+            text_preprocessing=config.text_preprocessing,
+            text_normalization=normalizations,
             environment=Environment(packages=packages, source=source),
             hardware=hardware,
         ),
@@ -250,3 +250,17 @@ def _check_work_paths(paths: StageTuningPaths) -> None:
         if path.resolve().is_relative_to(paths.checkpoint.resolve()):
             msg = "Scratch a cache embeddingů musí ležet mimo adresář checkpointu."
             raise InvalidInputError(msg)
+
+
+def stage_normalizations(
+    candidates: Path, config: StageTuningConfig
+) -> dict[str, TextNormalization | None]:
+    """Načte slovníky reprezentací společné pro scorer i manifest.
+
+    Returns:
+        Normalizace podle jména reprezentace.
+    """
+    return {
+        name: text_normalization(candidates, level)
+        for name, level in config.text_preprocessing.items()
+    }

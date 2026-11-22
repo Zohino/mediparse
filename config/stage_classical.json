@@ -5,13 +5,11 @@
   "trials": 60,
   "random_startup_trials": 10,
   "lsa": {"components": 100, "max_features": 100000},
-  "input": {
-    "strip_diagnostic_sections": false,
-    "text_preprocessing": "dictionary"
-  },
+  "strip_diagnostic_sections": false,
   "representations": [
     {
       "name": "word",
+      "text_preprocessing": "dictionary",
       "analyzer": "word",
       "space": {
         "params": [
@@ -63,6 +61,7 @@
     },
     {
       "name": "char_wb",
+      "text_preprocessing": "dictionary",
       "analyzer": "char_wb",
       "space": {
         "params": [

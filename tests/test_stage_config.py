@@ -6,10 +6,15 @@ import json
 from typing import TYPE_CHECKING, Any
 
 import pytest
-from pydantic import ValidationError
+from pydantic import BaseModel, ValidationError
 
 from mediparse.domain import stage_tuning as stage_domain
-from mediparse.domain.representation import TfidfRepresentation, Word2VecRepresentation
+from mediparse.domain.model_input import TextPreprocessing
+from mediparse.domain.representation import (
+    TfidfRepresentation,
+    TokensSpec,
+    Word2VecRepresentation,
+)
 from mediparse.domain.stage_tuning import (
     StageLsa,
     StageTrialRecord,
@@ -90,7 +95,12 @@ def test_winner_tie_uses_earlier_trial() -> None:
         ),
         pytest.param(
             stage_config,
-            {("representations", 1): {"name": "tok"}},
+            {
+                ("representations", 1): {
+                    "name": "tok",
+                    "text_preprocessing": "dictionary",
+                }
+            },
             "Reprezentace tok nepatří do žádné větve",
             id="unused-representation",
         ),
@@ -364,7 +374,7 @@ def test_branches_follow_accepted_pairs() -> None:
         representations=[
             base["representations"][0],
             SPEC.model_dump(mode="json") | {"name": "enc"},
-            {"name": "tok"},
+            {"name": "tok", "text_preprocessing": "dictionary"},
         ],
         families=[base["families"][0], token["families"][0]],
     )
@@ -425,3 +435,42 @@ def test_word2vec_branch_namespaces() -> None:
         },
         {"C": 1.0},
     )
+
+
+@pytest.mark.parametrize(
+    "spec",
+    [
+        stage_config().representations[0],
+        word2vec_stage_config().representations[0],
+        TokensSpec(name="tok", text_preprocessing=TextPreprocessing.DICTIONARY),
+    ],
+)
+def test_representation_requires_preprocessing(
+    spec: TfidfRepresentation | Word2VecRepresentation | TokensSpec,
+) -> None:
+    """Učená reprezentace vyžaduje explicitní vědeckou volbu vstupu."""
+    data = spec.model_dump(mode="json")
+    del data["text_preprocessing"]
+    with pytest.raises(ValidationError, match=r"text_preprocessing\s+Field required"):
+        type(spec).model_validate_json(json.dumps(data))
+
+
+@pytest.mark.parametrize(
+    ("model", "data"),
+    [
+        (StageTuningConfig, stage_config().model_dump(mode="json") | {"input": {}}),
+        (type(SPEC), SPEC.model_dump(mode="json") | {"text_preprocessing": "none"}),
+    ],
+)
+def test_preprocessing_rejects_obsolete_fields(
+    model: type[BaseModel], data: dict[str, Any]
+) -> None:
+    """Stupeň ani encoder nepřijímají konfigurační pole předzpracování."""
+    with pytest.raises(ValidationError, match="Extra inputs are not permitted"):
+        model.model_validate_json(json.dumps(data))
+
+
+def test_encoder_preprocessing_preserves_cache_spec() -> None:
+    """Původní text encoderu nemění serializaci klíče cache."""
+    assert SPEC.text_preprocessing is TextPreprocessing.NONE
+    assert "text_preprocessing" not in SPEC.model_dump()
