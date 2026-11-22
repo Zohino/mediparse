@@ -1,7 +1,9 @@
 """Doménové invarianty podmíněného prostoru a vítěze."""
 
+from __future__ import annotations
+
 import json
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import pytest
 from pydantic import ValidationError
@@ -16,6 +18,9 @@ from mediparse.domain.stage_tuning import (
 )
 from tests.hf_encoder_support import SPEC
 from tests.stage_support import stage_config, token_stage_config, word2vec_stage_config
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 def test_branches_and_namespaces() -> None:
@@ -48,25 +53,31 @@ def test_winner_tie_uses_earlier_trial() -> None:
 
 
 @pytest.mark.parametrize(
-    ("changes", "message"),
+    ("factory", "changes", "message"),
     [
         pytest.param(
+            stage_config,
             {("families", 0, "default", "C"): 10000.0},
             "Výchozí parametry rodiny",
             id="family-default-outside",
         ),
         pytest.param(
+            stage_config,
             {("representations", 0, "default", "max_df"): 1},
             "Výchozí parametry reprezentace",
             id="max-df-int-default",
         ),
         pytest.param(
+            stage_config,
             {("representations", 1): {"name": "tok"}},
             "Reprezentace tok nepatří do žádné větve",
             id="unused-representation",
         ),
-        pytest.param({("trials",): 4}, "Rozpočet", id="insufficient-budget"),
         pytest.param(
+            stage_config, {("trials",): 4}, "Rozpočet", id="insufficient-budget"
+        ),
+        pytest.param(
+            stage_config,
             {
                 ("representations", 0, "space", "params", 0): {
                     "kind": "int",
@@ -80,6 +91,7 @@ def test_winner_tie_uses_earlier_trial() -> None:
             id="ngram-int-order",
         ),
         pytest.param(
+            stage_config,
             {
                 ("representations", 0, "space", "params", 2): {
                     "kind": "float",
@@ -94,24 +106,31 @@ def test_winner_tie_uses_earlier_trial() -> None:
             id="min-df-float-space",
         ),
         pytest.param(
+            stage_config,
             {("families", 0, "family"): "fasttext"},
             "Rodina fasttext",
             id="incompatible-family",
         ),
         pytest.param(
+            stage_config,
             {("representations", 1, "name"): "r1"},
             "Jména reprezentací",
             id="duplicate-representation",
         ),
         pytest.param(
-            {("seed",): 4294967286, ("trials",): 60}, "Seed spolu", id="seed-overflow"
+            stage_config,
+            {("seed",): 4294967286, ("trials",): 60},
+            "Seed spolu",
+            id="seed-overflow",
         ),
         pytest.param(
+            stage_config,
             {("representations", 0, "space", "params", 0, "name"): "unknown"},
             "právě pět parametrů",
             id="invalid-parameter-names",
         ),
         pytest.param(
+            stage_config,
             {
                 ("representations", 0, "space", "params", 3): {
                     "kind": "categorical",
@@ -123,6 +142,7 @@ def test_winner_tie_uses_earlier_trial() -> None:
             id="max-df-category",
         ),
         pytest.param(
+            stage_config,
             {
                 ("representations", 0, "space", "params", 4): {
                     "kind": "categorical",
@@ -134,6 +154,7 @@ def test_winner_tie_uses_earlier_trial() -> None:
             id="sublinear-int",
         ),
         pytest.param(
+            stage_config,
             {
                 ("families", 1): {
                     "family": "logreg",
@@ -149,6 +170,7 @@ def test_winner_tie_uses_earlier_trial() -> None:
             id="duplicate-family",
         ),
         pytest.param(
+            stage_config,
             {
                 ("representations", 0, "space", "params", 0, "choices"): [1, 3],
                 ("representations", 0, "space", "params", 1, "choices"): [2, 4],
@@ -156,13 +178,117 @@ def test_winner_tie_uses_earlier_trial() -> None:
             "Maximum ngram_min",
             id="ngram-category-order",
         ),
+        (
+            word2vec_stage_config,
+            {
+                ("representations", 0, "space", "params"): [
+                    p
+                    for p in word2vec_stage_config()
+                    .representations[0]
+                    .model_dump(mode="json")["space"]["params"]
+                    if p["name"] != "epochs"
+                ]
+            },
+            "Prostor word2vec musí obsahovat právě sedm parametrů gensim",
+        ),
+        (
+            word2vec_stage_config,
+            {
+                ("representations", 0, "space", "params"): [
+                    *word2vec_stage_config()
+                    .representations[0]
+                    .model_dump(mode="json")["space"]["params"],
+                    {"name": "alpha", "kind": "categorical", "choices": [1]},
+                ]
+            },
+            "Prostor word2vec musí obsahovat právě sedm parametrů gensim",
+        ),
+        (
+            word2vec_stage_config,
+            {
+                ("representations", 0, "space", "params", 1): {
+                    "name": "window",
+                    "kind": "float",
+                    "low": 1.0,
+                    "high": 2.0,
+                    "log": False,
+                }
+            },
+            "vyžaduje celočíselný prostor",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "space", "params", 0, "choices"): [0]},
+            "Celočíselné parametry word2vec musí být kladné",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "space", "params", 1, "choices"): [0]},
+            "Celočíselné parametry word2vec musí být kladné",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "space", "params", 2, "choices"): [0]},
+            "Celočíselné parametry word2vec musí být kladné",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "space", "params", 4, "choices"): [0]},
+            "Celočíselné parametry word2vec musí být kladné",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "space", "params", 5, "choices"): [0]},
+            "Celočíselné parametry word2vec musí být kladné",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "space", "params", 3, "choices"): [0, 2]},
+            "sg vyžaduje volby 0 nebo 1",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "space", "params", 3, "choices"): [-1, 0]},
+            "sg vyžaduje volby 0 nebo 1",
+        ),
+        (
+            word2vec_stage_config,
+            {
+                ("representations", 0, "space", "params", 6): {
+                    "name": "sample",
+                    "kind": "categorical",
+                    "choices": [0.001],
+                }
+            },
+            "sample vyžaduje kladný float",
+        ),
+        (
+            word2vec_stage_config,
+            {
+                ("representations", 0, "space", "params", 6): {
+                    "name": "sample",
+                    "kind": "float",
+                    "low": 0.0,
+                    "high": 0.01,
+                    "log": False,
+                }
+            },
+            "sample vyžaduje kladný float",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "default", "window"): 3},
+            "Výchozí parametry reprezentace",
+        ),
     ],
 )
 def test_invalid_config(
-    changes: dict[tuple[str | int, ...], object], message: str
+    factory: Callable[..., StageTuningConfig],
+    changes: dict[tuple[str | int, ...], object],
+    message: str,
 ) -> None:
     """Každou neplatnou úpravu odmítne její vlastní validační pravidlo."""
-    data = stage_config().model_dump(mode="json")
+    data = factory().model_dump(mode="json")
     for path, value in changes.items():
         target: Any = data
         for key in path[:-1]:
@@ -278,66 +404,3 @@ def test_word2vec_branch_namespaces() -> None:
         },
         {"C": 1.0},
     )
-
-
-@pytest.mark.parametrize(
-    ("name", "parameter", "message"),
-    [
-        ("epochs", None, "Prostor word2vec musí obsahovat právě sedm parametrů gensim"),
-        (
-            "alpha",
-            {"kind": "categorical", "choices": [1]},
-            "Prostor word2vec musí obsahovat právě sedm parametrů gensim",
-        ),
-        (
-            "window",
-            {"kind": "float", "low": 1.0, "high": 2.0, "log": False},
-            "vyžaduje celočíselný prostor",
-        ),
-        *[
-            (
-                name,
-                {"kind": "categorical", "choices": [0]},
-                "Celočíselné parametry word2vec musí být kladné",
-            )
-            for name in ("vector_size", "window", "min_count", "epochs", "negative")
-        ],
-        (
-            "sg",
-            {"kind": "categorical", "choices": [0, 2]},
-            "sg vyžaduje volby 0 nebo 1",
-        ),
-        (
-            "sg",
-            {"kind": "categorical", "choices": [-1, 0]},
-            "sg vyžaduje volby 0 nebo 1",
-        ),
-        (
-            "sample",
-            {"kind": "categorical", "choices": [0.001]},
-            "sample vyžaduje kladný float",
-        ),
-        (
-            "sample",
-            {"kind": "float", "low": 0.0, "high": 0.01, "log": False},
-            "sample vyžaduje kladný float",
-        ),
-        ("default", None, "Výchozí parametry reprezentace"),
-    ],
-)
-def test_invalid_word2vec_space(
-    name: str, parameter: dict[str, object] | None, message: str
-) -> None:
-    """Neplatné parametry odmítne odpovídající pravidlo word2vec."""
-    data = word2vec_stage_config().model_dump(mode="json")
-    spec = data["representations"][0]
-    if name == "default":
-        spec["default"]["window"] = 3
-    else:
-        spec["space"]["params"] = [
-            p for p in spec["space"]["params"] if p["name"] != name
-        ]
-        if parameter is not None:
-            spec["space"]["params"].append({"name": name} | parameter)
-    with pytest.raises(ValidationError, match=message):
-        StageTuningConfig.model_validate_json(json.dumps(data))
