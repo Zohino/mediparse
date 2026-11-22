@@ -11,6 +11,7 @@ from unittest.mock import Mock, call
 
 import numpy as np
 import pytest
+from joblib import parallel_config
 from sklearn.linear_model import LogisticRegression
 
 from mediparse.application.patient_cv import patient_holdouts
@@ -704,7 +705,7 @@ def test_stage_inputs_follow_representation(
     assert "dm2" not in vocabulary
 
 
-def _golden_scores(scratch: Path) -> dict:
+def _golden_scores(scratch: Path, jobs: int = 1) -> dict:
     configurations = {
         "classical": load_stage_config(
             REPOSITORY / "config/stage_classical.json"
@@ -730,6 +731,7 @@ def _golden_scores(scratch: Path) -> dict:
             7,
             scratch,
             embeddings,
+            jobs=jobs,
         )
         for branch in config.branches:
             if name == "embeddings" and branch.name not in {
@@ -749,7 +751,8 @@ def _golden_scores(scratch: Path) -> dict:
     return result
 
 
-def test_scores_match_golden_values(tmp_path: Path) -> None:
+@pytest.mark.parametrize("jobs", [1, 3])
+def test_scores_match_golden_values(tmp_path: Path, jobs: int) -> None:
     """Hlídá skóre proti kódu před optimalizací.
 
     Po upgradu scikit-learn, LightGBM, gensimu, fastTextu nebo numpy se vzor
@@ -757,7 +760,8 @@ def test_scores_match_golden_values(tmp_path: Path) -> None:
     samostatným commitem test(stage): aktualizuj zlatý vzor skóre stupně.
     """
     expected = json.loads((REPOSITORY / "tests/fixtures/stage_golden.json").read_text())
-    actual = _golden_scores(tmp_path)
+    with parallel_config(max_nbytes=0):
+        actual = _golden_scores(tmp_path, jobs)
     assert actual.keys() == expected.keys()
     for name, scored in actual.items():
         assert scored["n_features"] == expected[name]["n_features"]
@@ -798,3 +802,46 @@ def test_preprocessing_runs_once_per_text_and_representation(
             branch = next(branch for branch in config.branches if branch.name == name)
             scorer.score(branch.default_params(), fold)
     assert preprocess.call_count == len({note.text for note in corpus})
+
+
+@pytest.mark.parametrize("jobs", [1, 2])
+def test_parallel_fits_report_nonconvergence(tmp_path: Path, jobs: int) -> None:
+    """Limit jedné iterace liblinear hlásí nekonvergenci i z procesu."""
+    config = stage_config(
+        families=[
+            {
+                "family": "linear_svm",
+                "space": {
+                    "params": [
+                        {"kind": "categorical", "name": "C", "choices": [1.0]},
+                        {"kind": "categorical", "name": "max_iter", "choices": [1]},
+                    ]
+                },
+                "default": {"C": 1.0, "max_iter": 1},
+            }
+        ]
+    )
+    scored = SklearnStageScorer(
+        config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock(), jobs=jobs
+    ).score(config.branches[0].default_params(), _clinical_fold())
+    assert scored.converged is False
+
+
+def test_parallel_memmap_stays_in_scratch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Explicitní scratch má přednost před neplatným výchozím adresářem."""
+    invalid = tmp_path / "file"
+    invalid.touch()
+    monkeypatch.setenv("JOBLIB_TEMP_FOLDER", str(invalid))
+    config = stage_config()
+    with parallel_config(max_nbytes=0):
+        scored = SklearnStageScorer(
+            config,
+            dict.fromkeys(config.text_preprocessing),
+            7,
+            tmp_path / "scratch",
+            Mock(),
+            jobs=2,
+        ).score(config.branches[0].default_params(), _clinical_fold())
+    assert len(scored.scores) == len(Diagnosis)

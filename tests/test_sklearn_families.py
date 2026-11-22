@@ -36,6 +36,7 @@ def test_lightgbm_factory_preserves_determinism_parameters(
     expected = {
         "random_state": 13,
         "deterministic": True,
+        "n_jobs": 4,
         "force_row_wise": True,
         "verbose": -1,
     }

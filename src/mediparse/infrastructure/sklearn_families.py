@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Protocol, assert_never, cast
+from typing import TYPE_CHECKING, Final, Protocol, assert_never, cast
 
 from lightgbm import LGBMClassifier
 from sklearn.linear_model import LogisticRegression
@@ -20,6 +20,10 @@ if TYPE_CHECKING:
     from sklearn.base import BaseEstimator
 
     from mediparse.domain.seed import Seed
+
+
+# Pevný počet vláken zachovává výsledky mezi stroji i počty procesů.
+LIGHTGBM_THREADS: Final = 4
 
 
 def classifier_estimator(
@@ -44,6 +48,7 @@ def classifier_estimator(
             return LGBMClassifier(
                 random_state=seed,
                 deterministic=True,
+                n_jobs=LIGHTGBM_THREADS,
                 force_row_wise=True,
                 verbose=-1,
             )

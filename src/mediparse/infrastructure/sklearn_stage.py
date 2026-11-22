@@ -5,13 +5,15 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from functools import partial
 from itertools import batched
-from typing import TYPE_CHECKING, assert_never, cast
+from typing import TYPE_CHECKING, Protocol, assert_never, cast
 
 import numpy as np
 from gensim.models import Word2Vec
 from gensim.models.word2vec import MAX_WORDS_IN_BATCH
+from joblib import Parallel, delayed
 from sklearn.decomposition import TruncatedSVD
 from sklearn.preprocessing import StandardScaler
+from threadpoolctl import threadpool_limits
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
@@ -43,6 +45,7 @@ if TYPE_CHECKING:
     from gensim.models import KeyedVectors
     from numpy import ndarray
     from scipy.sparse import csr_matrix
+    from sklearn.base import BaseEstimator
 
     from mediparse.domain.clinical_text import TextNormalization
     from mediparse.domain.input_note import InputNote
@@ -62,6 +65,7 @@ class SklearnStageScorer:
     seed: Seed
     scratch: Path
     embeddings: NoteEmbeddings
+    jobs: int = 1
     _prepared: dict[tuple[str, str], str] = field(
         default_factory=dict, init=False, repr=False
     )
@@ -101,24 +105,33 @@ class SklearnStageScorer:
         branch = self.config.branch(params)
         rep, family = branch.params_of(params)
         train, validation, n_features = self._features(branch, rep, fold)
-        scores = {}
-        converged = True
-        for diagnosis in Diagnosis:
+        models = []
+        for _ in Diagnosis:
             model = classifier_estimator(
                 branch.family.family, self.seed, self.scratch
             ).set_params(**family)
             if branch.family.family is ClassifierFamily.LOGREG:
                 # Rozpočet řešiče není hyperparametr a nesmí znevýhodnit rodinu.
                 model.set_params(max_iter=1000)
-            converged &= fit_converged(
-                partial(
-                    model.fit, train, [note.has_label(diagnosis) for note in fold.train]
-                )
+            models.append(model)
+        # DUA: výchozí memmap v /dev/shm by ležel mimo chráněný scratch.
+        results = Parallel(n_jobs=self.jobs, backend="loky", temp_folder=self.scratch)(
+            delayed(_diagnosis_scores)(
+                model,
+                train,
+                [note.has_label(diagnosis) for note in fold.train],
+                validation,
             )
-            scores[diagnosis] = tuple(
-                float(v) for v in positive_scores(model, validation)
-            )
-        return ValidationScores(scores, converged, n_features)
+            for diagnosis, model in zip(Diagnosis, models, strict=True)
+        )
+        return ValidationScores(
+            {
+                diagnosis: result[0]
+                for diagnosis, result in zip(Diagnosis, results, strict=True)
+            },
+            all(result[1] for result in results),
+            n_features,
+        )
 
     def _features(
         self, branch: Branch, rep_params: Mapping[str, ParamValue], fold: Holdout
@@ -197,6 +210,22 @@ class SklearnStageScorer:
             train = reducer.fit_transform(train)
             validation = reducer.transform(validation)
         return train, validation, n_features
+
+
+def _diagnosis_scores(
+    model: BaseEstimator,
+    train: ndarray | csr_matrix,
+    labels: list[bool],
+    validation: ndarray | csr_matrix,
+) -> tuple[tuple[float, ...], bool]:
+    # Jedno vlákno BLAS zrychlí malé fity a odstraní vliv počtu procesů na skóre.
+    with threadpool_limits(limits=1, user_api="blas"):
+        converged = fit_converged(
+            partial(cast("_TrainableModel", model).fit, train, labels)
+        )
+        return tuple(
+            float(value) for value in positive_scores(model, validation)
+        ), converged
 
 
 def encoder_features(
@@ -299,3 +328,7 @@ def _mean_vectors(vectors: KeyedVectors, documents: Sequence[list[str]]) -> ndar
         else np.zeros(vectors.vector_size, dtype=np.float32)
         for tokens in documents
     ])
+
+
+class _TrainableModel(Protocol):
+    def fit(self, features: ndarray | csr_matrix, labels: list[bool]) -> object: ...
