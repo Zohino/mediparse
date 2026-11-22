@@ -70,6 +70,7 @@ def _run(paths: stage_tuning.StageTuningPaths, jobs: int = 1) -> ExitCode:
 
 
 @pytest.mark.parametrize("jobs", [1, 2])
+@pytest.mark.usefixtures("loky_executor")
 def test_end_to_end_metrics_predictions_manifest_and_repeat(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, jobs: int
 ) -> None:

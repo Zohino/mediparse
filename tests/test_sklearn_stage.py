@@ -752,6 +752,7 @@ def _golden_scores(scratch: Path, jobs: int = 1) -> dict:
 
 
 @pytest.mark.parametrize("jobs", [1, 3])
+@pytest.mark.usefixtures("loky_executor")
 def test_scores_match_golden_values(tmp_path: Path, jobs: int) -> None:
     """Hlídá skóre proti kódu před optimalizací.
 
@@ -807,6 +808,7 @@ def test_preprocessing_runs_once_per_text_and_representation(
 
 
 @pytest.mark.parametrize("jobs", [1, 2])
+@pytest.mark.usefixtures("loky_executor")
 def test_parallel_fits_report_nonconvergence(tmp_path: Path, jobs: int) -> None:
     """Limit jedné iterace liblinear hlásí nekonvergenci i z procesu."""
     config = stage_config(
@@ -829,6 +831,7 @@ def test_parallel_fits_report_nonconvergence(tmp_path: Path, jobs: int) -> None:
     assert scored.converged is False
 
 
+@pytest.mark.usefixtures("loky_executor")
 def test_parallel_memmap_stays_in_scratch(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -847,3 +850,12 @@ def test_parallel_memmap_stays_in_scratch(
             jobs=2,
         ).score(config.branches[0].default_params(), _clinical_fold())
     assert len(scored.scores) == len(Diagnosis)
+
+
+@pytest.mark.usefixtures("loky_executor")
+def test_parallel_fits_leave_no_child_processes(tmp_path: Path) -> None:
+    """Paralelní skórování po teardownu nezanechá živé pracovní procesy."""
+    config = stage_config()
+    SklearnStageScorer(
+        config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock(), jobs=2
+    ).score(config.branches[0].default_params(), _clinical_fold())
