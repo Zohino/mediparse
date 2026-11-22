@@ -106,6 +106,7 @@ class SklearnStageScorer:
     def _features(
         self, branch: Branch, rep_params: Mapping[str, ParamValue], fold: Holdout
     ) -> tuple[ndarray | csr_matrix, ndarray | csr_matrix, int]:
+        normalization = self.normalizations[branch.representation.name]
         train_texts = [note.text for note in fold.train]
         validation_texts = [note.text for note in fold.test]
         match branch.representation:
@@ -117,7 +118,7 @@ class SklearnStageScorer:
             case Word2VecRepresentation() as spec:
                 # Více vláken z configu zrychlí trénink za cenu nedeterminismu.
                 train, validation = word2vec_features(
-                    self.normalizations[branch.representation.name],
+                    normalization,
                     {**rep_params, "workers": spec.workers, "seed": self.seed},
                     train_texts,
                     validation_texts,
@@ -125,7 +126,7 @@ class SklearnStageScorer:
                 return train, validation, train.shape[1]
             case TokensSpec():
                 train, validation = token_documents(
-                    self.normalizations[branch.representation.name],
+                    normalization,
                     train_texts,
                     validation_texts,
                 )
@@ -134,7 +135,9 @@ class SklearnStageScorer:
                 })
                 return train, validation, n_features
             case TfidfRepresentation():
-                return self._tfidf(branch, rep_params, train_texts, validation_texts)
+                return self._tfidf(
+                    branch, rep_params, train_texts, validation_texts, normalization
+                )
             case _:
                 assert_never(branch.representation)
 
@@ -144,6 +147,7 @@ class SklearnStageScorer:
         rep_params: Mapping[str, ParamValue],
         train_texts: Sequence[str],
         validation_texts: Sequence[str],
+        normalization: TextNormalization | None,
     ) -> tuple[ndarray | csr_matrix, ndarray | csr_matrix, int]:
         tfidf = TfidfParameters.model_validate(rep_params)
         lsa = (
@@ -155,7 +159,7 @@ class SklearnStageScorer:
         vectorizer = tfidf_from(
             tfidf,
             cast("TfidfRepresentation", branch.representation).analyzer,
-            self.normalizations[branch.representation.name],
+            normalization,
             max_features=lsa.max_features if lsa else None,
         )
         ensure_tokens(vectorizer, train_texts)
