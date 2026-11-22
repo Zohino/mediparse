@@ -114,7 +114,10 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
     assert all(len(counts) == 1 for counts in n_features.values())
 
     affected = {row["trial"] for row in trials if not row["converged"]}
-    assert affected == ({0} if jobs == 1 else set())
+    # Monkeypatch fit_converged do procesů loky nedosáhne; jejich nekonvergenci
+    # ověřuje test_parallel_fits_report_nonconvergence skutečným limitem iterací.
+    if jobs == 1:
+        assert affected == {0}
     assert written.nonconverged_trials == len(affected)
     for field, path in (
         ("dataset_sha256", paths.corpus.cohort),
