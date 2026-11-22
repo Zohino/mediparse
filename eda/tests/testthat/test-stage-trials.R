@@ -14,10 +14,13 @@ stage_test_con <- function(env = parent.frame()) {
 
 testthat::test_that("Kontrakt: oba parquety fixture lze přečíst", {
   paths <- stage_fixture_paths()
-  testthat::expect_equal(nrow(read_stage_trials(paths$results)), 1500L)
+  config <- jsonlite::read_json(config_path("stage_classical.json"))
+  testthat::expect_equal(nrow(read_stage_trials(paths$results)),
+    config$trials * config$folds * length(STAGE_DIAGNOSES))
   con <- stage_test_con()
   source <- stage_predictions_source(con, paths$predictions)
-  testthat::expect_equal(DBI::dbGetQuery(con, paste("SELECT count(*) n FROM", source))$n, 36000)
+  testthat::expect_equal(DBI::dbGetQuery(con, paste("SELECT count(*) n FROM", source))$n,
+    jsonlite::read_json(file.path(CONTRACT_FIXTURES, "stage_trials", "synthetic.json"))$rows)
 })
 
 testthat::test_that("A6 lineage kontroluje všechny tři otisky a jmenuje soubor", {
