@@ -279,10 +279,10 @@ def test_repository_stage_configs(stage: str) -> None:
     )
     if stage == "classical":
         assert len(config.branches) == 10
-        assert budget == (60, 10, 3, 3)
+        assert budget == (60, 10, 3, 5)
         assert config.lsa == StageLsa(components=100, max_features=100000)
         return
-    assert budget == (20, 5, 3, 3)
+    assert budget == (20, 5, 3, 5)
     assert config.lsa is None
     if stage == "embeddings":
         assert [b.name for b in config.branches] == ["mmbert-base-mean/logreg"]
