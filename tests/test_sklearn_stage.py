@@ -701,3 +701,74 @@ def test_stage_inputs_follow_representation(
     } <= vocabulary.keys()
     assert "copd" not in vocabulary
     assert "dm2" not in vocabulary
+
+
+def _golden_scores(scratch: Path) -> dict:
+    configurations = {
+        "classical": load_stage_config(
+            REPOSITORY / "config/stage_classical.json"
+        ).model_copy(update={"lsa": StageLsa(components=3, max_features=100_000)}),
+        "stage": stage_config(),
+        "tokens": token_stage_config(),
+        "word2vec": word2vec_stage_config(),
+        "embeddings": load_stage_config(REPOSITORY / "config/stage_embeddings.json"),
+    }
+    result = {}
+    embeddings = Mock()
+    embeddings.embed.side_effect = lambda _spec, texts: np.array(
+        [
+            [len(text), text.count("e"), text.count(" "), sum(map(ord, text)) % 997]
+            for text in texts
+        ],
+        dtype=float,
+    )
+    for name, config in configurations.items():
+        scorer = SklearnStageScorer(
+            config,
+            stage_normalizations(REPOSITORY_DIAGNOSIS_CANDIDATES, config),
+            7,
+            scratch,
+            embeddings,
+        )
+        for branch in config.branches:
+            if name == "embeddings" and branch.name not in {
+                "mmbert-base-mean-dictionary/logreg",
+                "mmbert-base-mean/logreg",
+            }:
+                continue
+            scored = scorer.score(branch.default_params(), _clinical_fold())
+            result[f"{name}/{branch.name}"] = {
+                "n_features": scored.n_features,
+                "converged": scored.converged,
+                "scores": {
+                    diagnosis.value: list(values)
+                    for diagnosis, values in scored.scores.items()
+                },
+            }
+    return result
+
+
+def test_scores_match_golden_values(tmp_path: Path) -> None:
+    """Hlídá skóre proti kódu před optimalizací.
+
+    Po upgradu scikit-learn, LightGBM, gensimu, fastTextu nebo numpy se vzor
+    přegeneruje funkcí _golden_scores na main před jakoukoli změnou kódu,
+    samostatným commitem test(stage): aktualizuj zlatý vzor skóre stupně.
+    """
+    expected = json.loads((REPOSITORY / "tests/fixtures/stage_golden.json").read_text())
+    actual = _golden_scores(tmp_path)
+    assert actual.keys() == expected.keys()
+    for name, scored in actual.items():
+        assert scored["n_features"] == expected[name]["n_features"]
+        assert scored["converged"] == expected[name]["converged"]
+        for diagnosis, values in scored["scores"].items():
+            tolerance = (
+                {"rel": 1e-4, "abs": 1e-9}
+                if name.startswith("word2vec/")
+                else {"rel": 1e-9, "abs": 1e-12}
+            )
+            assert values == pytest.approx(
+                expected[name]["scores"][diagnosis],
+                rel=tolerance["rel"],
+                abs=tolerance["abs"],
+            )
