@@ -91,6 +91,7 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
         "scikit-learn",
         "lightgbm",
         "fasttext",
+        "gensim",
         "optuna",
         "pyarrow",
         "pydantic",
@@ -242,6 +243,7 @@ def test_encoder_stage_records_encoder_provenance(tmp_path: Path) -> None:
     assert manifest.encoders == (SPEC,)
     assert set(ENCODER_PACKAGES) <= manifest.environment.packages.keys()
     assert "fasttext" in manifest.environment.packages
+    assert "gensim" in manifest.environment.packages
 
 
 @pytest.mark.parametrize("field", ["scratch", "embeddings"])

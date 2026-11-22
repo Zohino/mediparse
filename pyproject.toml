@@ -24,6 +24,7 @@ dependencies = [
     "lightgbm>=4.7.0",
     "optuna>=5.1.0",
     "huggingface-hub>=1.33.0,<2",
+    "gensim>=4.4.0",
 ]
 
 [project.scripts]

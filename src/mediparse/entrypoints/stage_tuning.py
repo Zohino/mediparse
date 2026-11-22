@@ -69,6 +69,7 @@ PACKAGES: Final = (
     "scikit-learn",
     "lightgbm",
     "fasttext",
+    "gensim",
     "optuna",
     "pyarrow",
     "pydantic",
