@@ -307,7 +307,7 @@ def test_repository_stage_configs(stage: str) -> None:
             "negative": 5,
             "sample": 0.001,
         }
-        assert word2vec.workers == 8
+        assert word2vec.workers == 16
         assert word2vec.space.model_dump(mode="json") == {
             "params": [
                 {

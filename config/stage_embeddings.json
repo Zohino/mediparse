@@ -19,7 +19,7 @@
     },
     {
       "name": "word2vec",
-      "workers": 8,
+      "workers": 16,
       "space": {
         "params": [
           {
