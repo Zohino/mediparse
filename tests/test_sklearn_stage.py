@@ -437,11 +437,13 @@ def test_token_documents_preserves_prepared_texts() -> None:
     np.testing.assert_array_equal(test, ["fracture"])
 
 
-@pytest.mark.parametrize("config", [stage_config(), token_stage_config()])
+@pytest.mark.parametrize(
+    "config", [stage_config(), token_stage_config(), word2vec_stage_config()]
+)
 def test_empty_vocabulary_is_invalid_input(
     tmp_path: Path, config: StageTuningConfig
 ) -> None:
-    """TF-IDF i tokenová větev odmítnou trénink bez tokenů."""
+    """TF-IDF, tokenová větev i word2vec odmítnou trénink bez tokenů."""
     fold = replace(
         _clinical_fold(),
         train=tuple(
