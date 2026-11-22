@@ -18,6 +18,7 @@ from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_corpus import (
     ModelCorpusPaths,
     model_corpus,
+    text_normalization,
 )
 from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.file_digest import file_sha256
@@ -97,8 +98,13 @@ def run(
     tuning = load_tuning_config(paths.config)
     row = load_matrix(paths.matrix).row(tuning.row_id)
     source = revision()
-    corpus = model_corpus(paths.corpus, row.input)
-    scorer = _validation_scorer(row.model, corpus.normalization, tuning.seed)
+    corpus = model_corpus(
+        paths.corpus, strip_diagnostic_sections=row.input.strip_diagnostic_sections
+    )
+    normalization = text_normalization(
+        paths.corpus.candidates, row.input.text_preprocessing
+    )
+    scorer = _validation_scorer(row.model, normalization, tuning.seed)
     hardware = machine_hardware(())
     step = ModelTuning(
         table=corpus.table,
@@ -139,7 +145,7 @@ def run(
             train_patients=report.train_patients,
             diagnostic_strip=corpus.strip,
             text_preprocessing=row.input.text_preprocessing,
-            text_normalization=corpus.normalization,
+            text_normalization=normalization,
             environment=Environment(
                 packages=installed_versions(PACKAGES), source=source
             ),

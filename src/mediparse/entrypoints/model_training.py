@@ -22,6 +22,7 @@ from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_corpus import (
     ModelCorpusPaths,
     model_corpus,
+    text_normalization,
 )
 from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.file_digest import file_sha256
@@ -135,7 +136,12 @@ def run(
     tuned = load_tuning_manifest(paths.tuning) if paths.tuning is not None else None
     parameters = _parameters(training, tuned)
     source = revision()
-    corpus = model_corpus(paths.corpus, training.input)
+    corpus = model_corpus(
+        paths.corpus, strip_diagnostic_sections=training.input.strip_diagnostic_sections
+    )
+    normalization = text_normalization(
+        paths.corpus.candidates, training.input.text_preprocessing
+    )
     if tuned is not None:
         try:
             ensure_tuning_lineage(
@@ -146,7 +152,7 @@ def run(
                 split_sha256=corpus.split.read().split.sha256(),
                 diagnostic_strip=corpus.strip,
                 text_preprocessing=training.input.text_preprocessing,
-                text_normalization=corpus.normalization,
+                text_normalization=normalization,
             )
         except InvalidInputError as error:
             msg = f"Manifest {paths.tuning}: {error}"
@@ -157,7 +163,7 @@ def run(
         trainer=LinearSvmTrainer(
             parameters,
             training.seed,
-            normalization=corpus.normalization,
+            normalization=normalization,
             threshold_folds=training.threshold_folds,
         ),
         store=SkopsModelFile(paths.model),
@@ -186,7 +192,7 @@ def run(
             split_sha256=report.split_sha256,
             diagnostic_strip=corpus.strip,
             text_preprocessing=training.input.text_preprocessing,
-            text_normalization=corpus.normalization,
+            text_normalization=normalization,
             model=ESTIMATOR,
             model_revision=None,
             tokenizer_revision=None,

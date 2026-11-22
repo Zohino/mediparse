@@ -29,6 +29,7 @@ from mediparse.entrypoints.model_corpus import (
     ModelCorpusPaths,
     checkpoint_key,
     model_corpus,
+    text_normalization,
 )
 from mediparse.infrastructure.data_access_guard import check_inputs_access
 from mediparse.infrastructure.file_digest import file_sha256
@@ -165,7 +166,12 @@ def run(
     versions = installed_versions(ENCODER_PACKAGES) if config.encoders else {}
     packages = installed_versions(PACKAGES) | versions
     source = revision()
-    corpus = model_corpus(paths.corpus, config.input)
+    corpus = model_corpus(
+        paths.corpus, strip_diagnostic_sections=config.input.strip_diagnostic_sections
+    )
+    normalization = text_normalization(
+        paths.corpus.candidates, config.input.text_preprocessing
+    )
     with gpu_monitor(
         environ.get("CUDA_VISIBLE_DEVICES"), environ.get("CUDA_DEVICE_ORDER")
     ) as monitor:
@@ -177,7 +183,7 @@ def run(
             search=OptunaStageSearch.create(config),
             scorer=SklearnStageScorer(
                 config,
-                corpus.normalization,
+                normalization,
                 config.seed,
                 paths.scratch,
                 NoteEmbeddings(
@@ -223,7 +229,7 @@ def run(
             predictions_sha256=file_sha256(paths.predictions),
             diagnostic_strip=corpus.strip,
             text_preprocessing=config.input.text_preprocessing,
-            text_normalization=corpus.normalization,
+            text_normalization=normalization,
             environment=Environment(packages=packages, source=source),
             hardware=hardware,
         ),
