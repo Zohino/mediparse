@@ -17,6 +17,7 @@ from mediparse.application.patient_cv import patient_holdouts
 from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.representation import Word2VecRepresentation
 from mediparse.domain.split import Holdout
 from mediparse.domain.stage_tuning import StageLsa
 from mediparse.infrastructure import sklearn_stage
@@ -28,11 +29,12 @@ from mediparse.infrastructure.sklearn_stage import (
     SklearnStageScorer,
     encoder_features,
     token_documents,
+    word2vec_features,
 )
 from mediparse.infrastructure.stage_config import load_stage_config
 from tests.hf_encoder_support import SPEC
 from tests.screening_support import notes
-from tests.stage_support import stage_config, token_stage_config
+from tests.stage_support import stage_config, token_stage_config, word2vec_stage_config
 from tests.support import REPOSITORY, REPOSITORY_DIAGNOSIS_CANDIDATES
 
 if TYPE_CHECKING:
@@ -45,6 +47,7 @@ if TYPE_CHECKING:
 
     from mediparse.domain.representation import ClassifierFamily
     from mediparse.domain.stage_tuning import StageTuningConfig
+    from mediparse.domain.tuning import ParamValue
 
 
 def test_logreg_parameters_change_scores(tmp_path: Path) -> None:
@@ -253,12 +256,47 @@ def test_min_df_above_training_documents_is_refused(tmp_path: Path) -> None:
         scorer.score(params, _clinical_fold())
 
 
-def test_encoder_branch_scores_cached_embeddings(tmp_path: Path) -> None:
+@pytest.mark.parametrize(
+    ("family", "param", "value"),
+    [("logreg", "C", 1.0), ("linear_svm", "C", 1.0), ("lightgbm", "n_estimators", 5)],
+)
+def test_encoder_branch_scores_cached_embeddings(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    family: str,
+    param: str,
+    value: float,
+) -> None:
     """Encoder poskytne pět vektorů skóre a šířku čtyř příznaků."""
-    base = stage_config().model_dump(mode="json")
     config = stage_config(
-        representations=[SPEC.model_dump(mode="json")], families=base["families"][:1]
+        representations=[SPEC.model_dump(mode="json")],
+        families=[
+            {
+                "family": family,
+                "space": {
+                    "params": [
+                        {"name": param, "kind": "categorical", "choices": [value]}
+                    ]
+                },
+                "default": {param: value},
+            }
+        ],
     )
+    observed = []
+    original = sklearn_stage.classifier_estimator
+
+    def estimator(family: ClassifierFamily, seed: int, scratch: Path) -> BaseEstimator:
+        model = original(family, seed, scratch).set_params()
+        fit = model.fit
+
+        def recording_fit(features: np.ndarray, labels: list[bool]) -> BaseEstimator:
+            observed.append(features.shape[1])
+            return fit(features, labels)
+
+        monkeypatch.setattr(model, "fit", recording_fit)
+        return model
+
+    monkeypatch.setattr(sklearn_stage, "classifier_estimator", estimator)
     fold = _clinical_fold()
     vectors = {
         n.text: [float(i % 3), float(i % 5), float(i % 7), float(i % 11)]
@@ -274,6 +312,7 @@ def test_encoder_branch_scores_cached_embeddings(tmp_path: Path) -> None:
     assert len(scored.scores) == 5
     assert all(len(scores) == len(fold.test) for scores in scored.scores.values())
     assert scored.n_features == 4
+    assert observed == [4] * 5
     assert embeddings.embed.call_args_list == [
         call(SPEC, [n.text for n in (*fold.train, *fold.test)])
     ]
@@ -397,3 +436,186 @@ def test_empty_vocabulary_is_invalid_input(
         SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
             config.branches[0].default_params(), fold
         )
+
+
+@pytest.fixture
+def word2vec_options() -> dict[str, ParamValue]:
+    """Vrátí parametry malého deterministického modelu.
+
+    Returns:
+        Sedm hyperparametrů a provozní parametry gensim.
+    """
+    spec = word2vec_stage_config().representations[0]
+    assert isinstance(spec, Word2VecRepresentation)
+    return spec.default | {"workers": 1, "seed": 7}
+
+
+@pytest.fixture
+def word2vec_train() -> list[str]:
+    """Vrátí syntetický trénink s jediným vzácným slovem.
+
+    Returns:
+        Opakované věty s jedním výskytem rare.
+    """
+    return ["alpha beta gamma delta"] * 20 + ["alpha beta"] * 20 + ["rare alpha"]
+
+
+def test_word2vec_mean_repeats_tokens(
+    word2vec_options: dict[str, ParamValue], word2vec_train: list[str]
+) -> None:
+    """Afinní standardizace zachová průměr s opakováním tokenů."""
+    _, matrix = word2vec_features(
+        None, word2vec_options, word2vec_train, ["alpha", "beta", "alpha alpha beta"]
+    )
+    np.testing.assert_allclose(
+        matrix[2], (2 * matrix[0] + matrix[1]) / 3, rtol=1e-4, atol=1e-5
+    )
+
+
+@pytest.mark.parametrize("unknown", ["zzzneznamy", "rare"])
+def test_word2vec_ignores_unknown_tokens(
+    word2vec_options: dict[str, ParamValue], word2vec_train: list[str], unknown: str
+) -> None:
+    """Neznámé i podprahové slovo se z průměru vynechá."""
+    _, matrix = word2vec_features(
+        None, word2vec_options, word2vec_train, ["alpha", f"alpha {unknown}"]
+    )
+    np.testing.assert_array_equal(matrix[0], matrix[1])
+
+
+def test_word2vec_empty_and_unknown_are_zero(
+    word2vec_options: dict[str, ParamValue], word2vec_train: list[str]
+) -> None:
+    """Prázdný text a samé neznámé tokeny mají stejný konečný vektor."""
+    _, matrix = word2vec_features(
+        None, word2vec_options, word2vec_train, ["zzzneznamy", ""]
+    )
+    np.testing.assert_array_equal(matrix[0], matrix[1])
+    assert np.isfinite(matrix).all()
+
+
+def test_word2vec_trains_only_on_train(
+    word2vec_options: dict[str, ParamValue], word2vec_train: list[str]
+) -> None:
+    """Změna validace nijak nezmění trénovací matici."""
+    first, _ = word2vec_features(None, word2vec_options, word2vec_train, ["alpha"])
+    second, _ = word2vec_features(
+        None, word2vec_options, word2vec_train, ["gamma delta", "beta"]
+    )
+    assert np.array_equal(first, second)
+
+
+def test_word2vec_applies_normalization(
+    word2vec_options: dict[str, ParamValue],
+) -> None:
+    """Rozvinutí COPD předchází průměru vektorů slov."""
+    normalization = TextNormalization(
+        acronyms={"COPD": "chronic obstructive pulmonary disease"}, variants={}
+    )
+    _, matrix = word2vec_features(
+        normalization,
+        word2vec_options,
+        ["chronic obstructive pulmonary disease"] * 20,
+        ["COPD", "chronic obstructive pulmonary disease"],
+    )
+    np.testing.assert_array_equal(matrix[0], matrix[1])
+
+
+def test_word2vec_splits_long_documents(
+    word2vec_options: dict[str, ParamValue], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Všech 25 000 tokenů dorazí k tréninku v kusech do 10 000."""
+    original = sklearn_stage.Word2Vec.train
+    observed = []
+
+    def train(
+        model: sklearn_stage.Word2Vec, sentences: list[list[str]], **kwargs: object
+    ) -> object:
+        observed.extend(len(sentence) for sentence in sentences)
+        return original(model, sentences, **kwargs)
+
+    monkeypatch.setattr(sklearn_stage.Word2Vec, "train", train)
+    word2vec_features(None, word2vec_options, ["alpha " * 25000], ["alpha"])
+    assert max(observed) <= 10000
+    assert sum(observed) == 25000
+
+
+def test_word2vec_empty_vocabulary_is_invalid_input(
+    word2vec_options: dict[str, ParamValue], word2vec_train: list[str]
+) -> None:
+    """Příliš vysoké min_count vyvolá srozumitelnou doménovou chybu."""
+    with pytest.raises(InvalidInputError, match="min_count"):
+        word2vec_features(
+            None, word2vec_options | {"min_count": 1000}, word2vec_train, ["alpha"]
+        )
+
+
+@pytest.fixture
+def trained_word2vec(monkeypatch: pytest.MonkeyPatch) -> list[sklearn_stage.Word2Vec]:
+    """Zachytí modely vytvořené featurizérem.
+
+    Returns:
+        Modely v pořadí volání konstruktoru.
+    """
+    original = sklearn_stage.Word2Vec
+    models = []
+
+    def model(**kwargs: ParamValue) -> sklearn_stage.Word2Vec:
+        fitted = original(**kwargs)
+        models.append(fitted)
+        return fitted
+
+    monkeypatch.setattr(sklearn_stage, "Word2Vec", model)
+    return models
+
+
+def test_word2vec_params_reach_gensim(
+    word2vec_options: dict[str, ParamValue],
+    word2vec_train: list[str],
+    trained_word2vec: list[sklearn_stage.Word2Vec],
+) -> None:
+    """Model dostane všechny hyperparametry i workers a seed beze změny."""
+    word2vec_features(None, word2vec_options, word2vec_train, ["alpha"])
+    assert len(trained_word2vec) == 1
+    assert {
+        name: getattr(trained_word2vec[0], name) for name in word2vec_options
+    } == word2vec_options
+
+
+def test_word2vec_features_are_standardized_word_means(
+    word2vec_options: dict[str, ParamValue],
+    word2vec_train: list[str],
+    trained_word2vec: list[sklearn_stage.Word2Vec],
+) -> None:
+    """Příznaky odpovídají průměru surových slovních vektorů a populačnímu škálování."""
+    train, _ = word2vec_features(None, word2vec_options, word2vec_train, ["alpha"])
+    wv = trained_word2vec[0].wv
+    raw = np.array([
+        np.mean([wv[word] for word in text.split() if word in wv], axis=0)
+        for text in word2vec_train
+    ])
+    np.testing.assert_allclose(
+        train, (raw - raw.mean(axis=0)) / raw.std(axis=0), rtol=1e-4, atol=1e-5
+    )
+
+
+def test_word2vec_branch_scores(
+    tmp_path: Path, trained_word2vec: list[sklearn_stage.Word2Vec]
+) -> None:
+    """Větev word2vec vrátí pět skóre a sedm příznaků."""
+    config = word2vec_stage_config()
+    fold = _clinical_fold()
+    normalization = TextNormalization(
+        acronyms={"COPD": "chronic obstructive pulmonary disease"}, variants={}
+    )
+    result = SklearnStageScorer(config, normalization, 7, tmp_path, Mock()).score(
+        config.branches[0].default_params(), fold
+    )
+    assert len(result.scores) == 5
+    assert all(len(scores) == len(fold.test) for scores in result.scores.values())
+    assert result.n_features == 7
+    model = trained_word2vec[0]
+    assert "pulmonary" in model.wv.key_to_index
+    assert "copd" not in model.wv.key_to_index
+    assert model.workers == 1
+    assert model.seed == 7

@@ -119,3 +119,43 @@ def token_stage_config() -> StageTuningConfig:
             }
         ],
     )
+
+
+def word2vec_stage_config() -> StageTuningConfig:
+    """Sestaví levnou větev word2vec pro syntetická ověření.
+
+    Returns:
+        Word2vec s jednovláknovým tréninkem a logistickou regresí.
+    """
+    default = {
+        "vector_size": 7,
+        "window": 2,
+        "min_count": 2,
+        "sg": 0,
+        "epochs": 5,
+        "negative": 5,
+        "sample": 0.001,
+    }
+    params: list[dict[str, object]] = [
+        {"kind": "categorical", "name": name, "choices": [value]}
+        for name, value in default.items()
+        if name != "sample"
+    ]
+    params.append({
+        "kind": "float",
+        "name": "sample",
+        "low": 0.001,
+        "high": 0.002,
+        "log": False,
+    })
+    return stage_config(
+        representations=[
+            {
+                "name": "w2v",
+                "workers": 1,
+                "space": {"params": params},
+                "default": default,
+            }
+        ],
+        families=stage_config().model_dump(mode="json")["families"][:1],
+    )

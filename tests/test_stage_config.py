@@ -1,13 +1,15 @@
 """Doménové invarianty podmíněného prostoru a vítěze."""
 
+from __future__ import annotations
+
 import json
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import pytest
 from pydantic import ValidationError
 
 from mediparse.domain import stage_tuning as stage_domain
-from mediparse.domain.representation import TfidfRepresentation
+from mediparse.domain.representation import TfidfRepresentation, Word2VecRepresentation
 from mediparse.domain.stage_tuning import (
     StageLsa,
     StageTrialRecord,
@@ -15,7 +17,10 @@ from mediparse.domain.stage_tuning import (
     best_trial,
 )
 from tests.hf_encoder_support import SPEC
-from tests.stage_support import stage_config, token_stage_config
+from tests.stage_support import stage_config, token_stage_config, word2vec_stage_config
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 def test_branches_and_namespaces() -> None:
@@ -48,25 +53,52 @@ def test_winner_tie_uses_earlier_trial() -> None:
 
 
 @pytest.mark.parametrize(
-    ("changes", "message"),
+    ("factory", "changes", "message"),
     [
+        *[
+            pytest.param(
+                word2vec_stage_config,
+                {("representations", 0, "space", "params", 6, "high"): high},
+                "sample vyžaduje kladný float menší než 1.",
+                id=f"word2vec-sample-boundary-{high}",
+            )
+            for high in (1.0, 2.0)
+        ],
         pytest.param(
+            word2vec_stage_config,
+            {("representations", 0, "workers"): 0},
+            "Input should be greater than 0",
+            id="word2vec-workers-zero",
+        ),
+        pytest.param(
+            word2vec_stage_config,
+            {("representations", 0, "alpha"): 0.025},
+            "Extra inputs are not permitted",
+            id="word2vec-extra-alpha",
+        ),
+        pytest.param(
+            stage_config,
             {("families", 0, "default", "C"): 10000.0},
             "Výchozí parametry rodiny",
             id="family-default-outside",
         ),
         pytest.param(
+            stage_config,
             {("representations", 0, "default", "max_df"): 1},
             "Výchozí parametry reprezentace",
             id="max-df-int-default",
         ),
         pytest.param(
+            stage_config,
             {("representations", 1): {"name": "tok"}},
             "Reprezentace tok nepatří do žádné větve",
             id="unused-representation",
         ),
-        pytest.param({("trials",): 4}, "Rozpočet", id="insufficient-budget"),
         pytest.param(
+            stage_config, {("trials",): 4}, "Rozpočet", id="insufficient-budget"
+        ),
+        pytest.param(
+            stage_config,
             {
                 ("representations", 0, "space", "params", 0): {
                     "kind": "int",
@@ -80,6 +112,7 @@ def test_winner_tie_uses_earlier_trial() -> None:
             id="ngram-int-order",
         ),
         pytest.param(
+            stage_config,
             {
                 ("representations", 0, "space", "params", 2): {
                     "kind": "float",
@@ -94,24 +127,31 @@ def test_winner_tie_uses_earlier_trial() -> None:
             id="min-df-float-space",
         ),
         pytest.param(
+            stage_config,
             {("families", 0, "family"): "fasttext"},
             "Rodina fasttext",
             id="incompatible-family",
         ),
         pytest.param(
+            stage_config,
             {("representations", 1, "name"): "r1"},
             "Jména reprezentací",
             id="duplicate-representation",
         ),
         pytest.param(
-            {("seed",): 4294967286, ("trials",): 60}, "Seed spolu", id="seed-overflow"
+            stage_config,
+            {("seed",): 4294967286, ("trials",): 60},
+            "Seed spolu",
+            id="seed-overflow",
         ),
         pytest.param(
+            stage_config,
             {("representations", 0, "space", "params", 0, "name"): "unknown"},
             "právě pět parametrů",
             id="invalid-parameter-names",
         ),
         pytest.param(
+            stage_config,
             {
                 ("representations", 0, "space", "params", 3): {
                     "kind": "categorical",
@@ -123,6 +163,7 @@ def test_winner_tie_uses_earlier_trial() -> None:
             id="max-df-category",
         ),
         pytest.param(
+            stage_config,
             {
                 ("representations", 0, "space", "params", 4): {
                     "kind": "categorical",
@@ -134,6 +175,7 @@ def test_winner_tie_uses_earlier_trial() -> None:
             id="sublinear-int",
         ),
         pytest.param(
+            stage_config,
             {
                 ("families", 1): {
                     "family": "logreg",
@@ -149,6 +191,7 @@ def test_winner_tie_uses_earlier_trial() -> None:
             id="duplicate-family",
         ),
         pytest.param(
+            stage_config,
             {
                 ("representations", 0, "space", "params", 0, "choices"): [1, 3],
                 ("representations", 0, "space", "params", 1, "choices"): [2, 4],
@@ -156,13 +199,117 @@ def test_winner_tie_uses_earlier_trial() -> None:
             "Maximum ngram_min",
             id="ngram-category-order",
         ),
+        (
+            word2vec_stage_config,
+            {
+                ("representations", 0, "space", "params"): [
+                    p
+                    for p in word2vec_stage_config()
+                    .representations[0]
+                    .model_dump(mode="json")["space"]["params"]
+                    if p["name"] != "epochs"
+                ]
+            },
+            "Prostor word2vec musí obsahovat právě sedm parametrů gensim",
+        ),
+        (
+            word2vec_stage_config,
+            {
+                ("representations", 0, "space", "params"): [
+                    *word2vec_stage_config()
+                    .representations[0]
+                    .model_dump(mode="json")["space"]["params"],
+                    {"name": "alpha", "kind": "categorical", "choices": [1]},
+                ]
+            },
+            "Prostor word2vec musí obsahovat právě sedm parametrů gensim",
+        ),
+        (
+            word2vec_stage_config,
+            {
+                ("representations", 0, "space", "params", 1): {
+                    "name": "window",
+                    "kind": "float",
+                    "low": 1.0,
+                    "high": 2.0,
+                    "log": False,
+                }
+            },
+            "vyžaduje celočíselný prostor",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "space", "params", 0, "choices"): [0]},
+            "Celočíselné parametry word2vec musí být kladné",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "space", "params", 1, "choices"): [0]},
+            "Celočíselné parametry word2vec musí být kladné",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "space", "params", 2, "choices"): [0]},
+            "Celočíselné parametry word2vec musí být kladné",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "space", "params", 4, "choices"): [0]},
+            "Celočíselné parametry word2vec musí být kladné",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "space", "params", 5, "choices"): [0]},
+            "Celočíselné parametry word2vec musí být kladné",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "space", "params", 3, "choices"): [0, 2]},
+            "sg vyžaduje volby 0 nebo 1",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "space", "params", 3, "choices"): [-1, 0]},
+            "sg vyžaduje volby 0 nebo 1",
+        ),
+        (
+            word2vec_stage_config,
+            {
+                ("representations", 0, "space", "params", 6): {
+                    "name": "sample",
+                    "kind": "categorical",
+                    "choices": [0.001],
+                }
+            },
+            "sample vyžaduje kladný float",
+        ),
+        (
+            word2vec_stage_config,
+            {
+                ("representations", 0, "space", "params", 6): {
+                    "name": "sample",
+                    "kind": "float",
+                    "low": 0.0,
+                    "high": 0.01,
+                    "log": False,
+                }
+            },
+            "sample vyžaduje kladný float",
+        ),
+        (
+            word2vec_stage_config,
+            {("representations", 0, "default", "window"): 3},
+            "Výchozí parametry reprezentace",
+        ),
     ],
 )
 def test_invalid_config(
-    changes: dict[tuple[str | int, ...], object], message: str
+    factory: Callable[..., StageTuningConfig],
+    changes: dict[tuple[str | int, ...], object],
+    message: str,
 ) -> None:
     """Každou neplatnou úpravu odmítne její vlastní validační pravidlo."""
-    data = stage_config().model_dump(mode="json")
+    data = factory().model_dump(mode="json")
     for path, value in changes.items():
         target: Any = data
         for key in path[:-1]:
@@ -248,3 +395,33 @@ def test_branch_without_representation_space() -> None:
     }
     assert branch.default_params() == params
     assert branch.params_of(params) == ({}, branch.family.default)
+
+
+def test_word2vec_branch_namespaces() -> None:
+    """Word2vec má vlastní prostor a unie rozliší jeho typ."""
+    config = word2vec_stage_config()
+    assert type(config.representations[0]) is Word2VecRepresentation
+    branch = config.branches[0]
+    assert branch.name == "w2v/logreg"
+    assert {p.name for p in branch.prefixed_space()} == {
+        "w2v.vector_size",
+        "w2v.window",
+        "w2v.min_count",
+        "w2v.sg",
+        "w2v.epochs",
+        "w2v.negative",
+        "w2v.sample",
+        "logreg.C",
+    }
+    assert branch.params_of(branch.default_params()) == (
+        {
+            "vector_size": 7,
+            "window": 2,
+            "min_count": 2,
+            "sg": 0,
+            "epochs": 5,
+            "negative": 5,
+            "sample": 0.001,
+        },
+        {"C": 1.0},
+    )

@@ -17,6 +17,7 @@ from pydantic import ValidationError
 from sklearn.metrics import f1_score
 
 from mediparse.domain.environment import GpuDevice
+from mediparse.domain.representation import ClassifierFamily, Word2VecRepresentation
 from mediparse.domain.run_manifest import StageTuningManifest
 from mediparse.domain.stage_tuning import StageLsa
 from mediparse.entrypoints import stage_tuning
@@ -91,6 +92,7 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
         "scikit-learn",
         "lightgbm",
         "fasttext",
+        "gensim",
         "optuna",
         "pyarrow",
         "pydantic",
@@ -242,6 +244,7 @@ def test_encoder_stage_records_encoder_provenance(tmp_path: Path) -> None:
     assert manifest.encoders == (SPEC,)
     assert set(ENCODER_PACKAGES) <= manifest.environment.packages.keys()
     assert "fasttext" in manifest.environment.packages
+    assert "gensim" in manifest.environment.packages
 
 
 @pytest.mark.parametrize("field", ["scratch", "embeddings"])
@@ -282,13 +285,63 @@ def test_repository_stage_configs(stage: str) -> None:
         assert budget == (60, 10, 3, 5)
         assert config.lsa == StageLsa(components=100, max_features=100000)
         return
-    assert budget == (20, 5, 3, 5)
     assert config.lsa is None
     if stage == "embeddings":
-        assert [b.name for b in config.branches] == ["mmbert-base-mean/logreg"]
+        assert budget == (36, 5, 3, 5)
+        assert [b.name for b in config.branches] == [
+            "mmbert-base-mean/logreg",
+            "mmbert-base-mean/linear_svm",
+            "mmbert-base-mean/lightgbm",
+            "word2vec/logreg",
+            "word2vec/linear_svm",
+            "word2vec/lightgbm",
+        ]
+        word2vec = config.representations[1]
+        assert isinstance(word2vec, Word2VecRepresentation)
+        assert word2vec.default == {
+            "vector_size": 100,
+            "window": 5,
+            "min_count": 5,
+            "sg": 0,
+            "epochs": 5,
+            "negative": 5,
+            "sample": 0.001,
+        }
+        assert word2vec.workers == 16
+        assert word2vec.space.model_dump(mode="json") == {
+            "params": [
+                {
+                    "kind": "categorical",
+                    "name": "vector_size",
+                    "choices": [100, 200, 300],
+                },
+                {"kind": "int", "name": "window", "low": 2, "high": 10, "log": False},
+                {"kind": "int", "name": "min_count", "low": 1, "high": 20, "log": True},
+                {"kind": "categorical", "name": "sg", "choices": [0, 1]},
+                {"kind": "int", "name": "epochs", "low": 3, "high": 10, "log": False},
+                {"kind": "int", "name": "negative", "low": 1, "high": 20, "log": True},
+                {
+                    "kind": "float",
+                    "name": "sample",
+                    "low": 1e-5,
+                    "high": 1e-2,
+                    "log": True,
+                },
+            ]
+        }
+        classical = load_stage_config(REPOSITORY / "config/stage_classical.json")
+        by_family = {family.family: family for family in config.families}
+        classical_by_family = {family.family: family for family in classical.families}
+        for family, source in (
+            (ClassifierFamily.LINEAR_SVM, ClassifierFamily.LINEAR_SVM),
+            (ClassifierFamily.LIGHTGBM, ClassifierFamily.LIGHTGBM_LSA),
+        ):
+            assert by_family[family].space == classical_by_family[source].space
+            assert by_family[family].default == classical_by_family[source].default
         assert config.encoders[0].revision == "c5955035435e2bf121cde7f3c8863ef52ff35d82"
         assert config.families[0].default == {"C": 1.0, "class_weight": None}
     else:
+        assert budget == (20, 5, 3, 5)
         assert [b.name for b in config.branches] == ["word-tokens/fasttext"]
         assert config.families[0].default == {
             "lr": 0.1,

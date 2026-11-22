@@ -14,6 +14,7 @@ from mediparse.domain.representation import (
     Representation,
     TfidfRepresentation,
     TokensSpec,
+    Word2VecRepresentation,
     accepts,
 )
 from mediparse.domain.seed import Seed
@@ -37,7 +38,7 @@ def _tuned(
     representation: Representation,
 ) -> tuple[tuple[Parameter, ...], Mapping[str, ParamValue]]:
     match representation:
-        case TfidfRepresentation():
+        case TfidfRepresentation() | Word2VecRepresentation():
             return representation.space.params, representation.default
         case EncoderSpec() | TokensSpec():
             return (), {}

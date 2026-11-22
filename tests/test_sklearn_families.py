@@ -22,11 +22,15 @@ def test_svm_factory_preserves_seed(tmp_path: Path, family: ClassifierFamily) ->
     assert classifier_estimator(family, 13, tmp_path).get_params()["random_state"] == 13
 
 
+@pytest.mark.parametrize(
+    "family", [ClassifierFamily.LIGHTGBM, ClassifierFamily.LIGHTGBM_LSA]
+)
 def test_lightgbm_factory_preserves_determinism_parameters(
     tmp_path: Path,
+    family: ClassifierFamily,
 ) -> None:
     """Veřejné parametry LightGBM drží seed a determinismus; LSA provádí scorer stupně."""
-    estimator = classifier_estimator(ClassifierFamily.LIGHTGBM_LSA, 13, tmp_path)
+    estimator = classifier_estimator(family, 13, tmp_path)
     params = estimator.get_params()
 
     expected = {
