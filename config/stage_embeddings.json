@@ -2,7 +2,7 @@
   "seed": 0,
   "subsample_parts": 3,
   "folds": 5,
-  "trials": 20,
+  "trials": 36,
   "random_startup_trials": 5,
   "input": {
     "strip_diagnostic_sections": false,
@@ -16,6 +16,75 @@
       "window": 8192,
       "device": "cuda",
       "dtype": "bfloat16"
+    },
+    {
+      "name": "word2vec",
+      "workers": 8,
+      "space": {
+        "params": [
+          {
+            "kind": "categorical",
+            "name": "vector_size",
+            "choices": [
+              100,
+              200,
+              300
+            ]
+          },
+          {
+            "kind": "int",
+            "name": "window",
+            "low": 2,
+            "high": 10,
+            "log": false
+          },
+          {
+            "kind": "int",
+            "name": "min_count",
+            "low": 1,
+            "high": 20,
+            "log": true
+          },
+          {
+            "kind": "categorical",
+            "name": "sg",
+            "choices": [
+              0,
+              1
+            ]
+          },
+          {
+            "kind": "int",
+            "name": "epochs",
+            "low": 3,
+            "high": 10,
+            "log": false
+          },
+          {
+            "kind": "int",
+            "name": "negative",
+            "low": 1,
+            "high": 20,
+            "log": true
+          },
+          {
+            "kind": "float",
+            "name": "sample",
+            "low": 1e-05,
+            "high": 0.01,
+            "log": true
+          }
+        ]
+      },
+      "default": {
+        "vector_size": 100,
+        "window": 5,
+        "min_count": 5,
+        "sg": 0,
+        "epochs": 5,
+        "negative": 5,
+        "sample": 0.001
+      }
     }
   ],
   "families": [
@@ -43,6 +112,73 @@
       "default": {
         "C": 1.0,
         "class_weight": null
+      }
+    },
+    {
+      "family": "linear_svm",
+      "space": {
+        "params": [
+          {
+            "kind": "float",
+            "name": "C",
+            "low": 0.001,
+            "high": 100.0,
+            "log": true
+          },
+          {
+            "kind": "categorical",
+            "name": "class_weight",
+            "choices": [
+              null,
+              "balanced"
+            ]
+          }
+        ]
+      },
+      "default": {
+        "C": 1.0,
+        "class_weight": null
+      }
+    },
+    {
+      "family": "lightgbm",
+      "space": {
+        "params": [
+          {
+            "kind": "int",
+            "name": "n_estimators",
+            "low": 50,
+            "high": 1000,
+            "log": true
+          },
+          {
+            "kind": "float",
+            "name": "learning_rate",
+            "low": 0.01,
+            "high": 0.3,
+            "log": true
+          },
+          {
+            "kind": "int",
+            "name": "num_leaves",
+            "low": 8,
+            "high": 128,
+            "log": true
+          },
+          {
+            "kind": "int",
+            "name": "min_child_samples",
+            "low": 5,
+            "high": 100,
+            "log": true
+          }
+        ]
+      },
+      "default": {
+        "n_estimators": 100,
+        "learning_rate": 0.1,
+        "num_leaves": 31,
+        "min_child_samples": 20
       }
     }
   ]
