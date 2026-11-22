@@ -6,7 +6,7 @@ resources/mimic/screening/<stupeň>_trial_predictions.parquet (řádková data),
 resources/mimic/screening/<stupeň>_trials_checkpoint a
 results/screening/<stupeň>_trials_manifest.json.
 Cache: --embeddings resources/mimic/screening/embeddings.
-Dočasné tokeny: --scratch resources/mimic/screening/scratch.
+Dočasné tokeny zpráv a memmapy matic paralelních fitů: --scratch resources/mimic/screening/scratch.
 Nad MIMIC spouští jen uživatel; řádková data patří mimo results/.
 """
 
@@ -126,7 +126,7 @@ def main() -> ExitCode:
         "--scratch",
         type=Path,
         required=True,
-        help="Dočasné tokeny zpráv; doporučeno resources/mimic/screening/scratch, mimo checkpoint a results/.",
+        help="Dočasné tokeny zpráv a memmapy matic paralelních fitů; doporučeno resources/mimic/screening/scratch, mimo checkpoint a results/.",
     )
     parser.add_argument(
         "--jobs",
