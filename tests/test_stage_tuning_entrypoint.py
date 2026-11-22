@@ -174,9 +174,9 @@ def test_foreign_checkpoint_refused_before_outputs(tmp_path: Path) -> None:
     assert not any(p.exists() for p in (paths.out, paths.predictions, paths.manifest))
 
 
-@pytest.mark.parametrize("jobs", [None, 2, 0, 6])
+@pytest.mark.parametrize(("jobs_args", "jobs"), [([], 3), (["--jobs", "2"], 2)])
 def test_main_accepts_all_required_paths(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, jobs: int | None
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, jobs_args: list[str], jobs: int
 ) -> None:
     """CLI předá explicitní cesty a hodiny vstupnímu bodu."""
     names = (
@@ -195,18 +195,12 @@ def test_main_accepts_all_required_paths(
     argv = ["mediparse-stage-tuning"]
     for name in names:
         argv.extend((f"--{name}", str(tmp_path / name)))
-    if jobs is not None:
-        argv.extend(("--jobs", str(jobs)))
+    argv.extend(jobs_args)
     monkeypatch.setattr("sys.argv", argv)
     run = Mock(return_value=ExitCode.REFUSED)
     monkeypatch.setattr(stage_tuning, "run", run)
-    if jobs in {0, 6}:
-        with pytest.raises(SystemExit):
-            stage_tuning.main()
-        run.assert_not_called()
-        return
     assert stage_tuning.main() is ExitCode.REFUSED
-    assert run.call_args.kwargs["jobs"] == (3 if jobs is None else jobs)
+    assert run.call_args.kwargs["jobs"] == jobs
     paths = run.call_args.kwargs["paths"]
     for name in names:
         assert (
@@ -219,6 +213,17 @@ def test_main_accepts_all_required_paths(
             == tmp_path / name
         )
     assert isinstance(run.call_args.kwargs["clock"], stage_tuning.PerfCounterClock)
+
+
+@pytest.mark.parametrize("jobs", [0, 6])
+def test_main_rejects_jobs_outside_diagnoses(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str], jobs: int
+) -> None:
+    """CLI odmítne počet procesů mimo rozsah diagnóz."""
+    monkeypatch.setattr("sys.argv", ["mediparse-stage-tuning", "--jobs", str(jobs)])
+    with pytest.raises(SystemExit):
+        stage_tuning.main()
+    assert "argument --jobs: invalid choice" in capsys.readouterr().err
 
 
 def test_manifest_rejects_inconsistent_run(tmp_path: Path) -> None:
