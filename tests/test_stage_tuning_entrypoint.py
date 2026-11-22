@@ -17,7 +17,7 @@ from pydantic import ValidationError
 from sklearn.metrics import f1_score
 
 from mediparse.domain.environment import GpuDevice
-from mediparse.domain.representation import Word2VecRepresentation
+from mediparse.domain.representation import ClassifierFamily, Word2VecRepresentation
 from mediparse.domain.run_manifest import StageTuningManifest
 from mediparse.domain.stage_tuning import StageLsa
 from mediparse.entrypoints import stage_tuning
@@ -330,13 +330,14 @@ def test_repository_stage_configs(stage: str) -> None:
             ]
         }
         classical = load_stage_config(REPOSITORY / "config/stage_classical.json")
-        for family, source in zip(
-            config.families[1:],
-            [classical.families[2], classical.families[4]],
-            strict=True,
+        by_family = {family.family: family for family in config.families}
+        classical_by_family = {family.family: family for family in classical.families}
+        for family, source in (
+            (ClassifierFamily.LINEAR_SVM, ClassifierFamily.LINEAR_SVM),
+            (ClassifierFamily.LIGHTGBM, ClassifierFamily.LIGHTGBM_LSA),
         ):
-            assert family.space == source.space
-            assert family.default == source.default
+            assert by_family[family].space == classical_by_family[source].space
+            assert by_family[family].default == classical_by_family[source].default
         assert config.encoders[0].revision == "c5955035435e2bf121cde7f3c8863ef52ff35d82"
         assert config.families[0].default == {"C": 1.0, "class_weight": None}
     else:
