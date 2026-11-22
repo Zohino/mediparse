@@ -28,6 +28,7 @@ class ClassifierFamily(StrEnum):
     LINEAR_SVM = "linear_svm"
     NB_SVM = "nb_svm"
     LIGHTGBM_LSA = "lightgbm_lsa"
+    LIGHTGBM = "lightgbm"
     FASTTEXT = "fasttext"
 
 
@@ -104,7 +105,53 @@ class TfidfRepresentation(BaseModel):
         return self
 
 
-type Representation = TfidfRepresentation | EncoderSpec | TokensSpec
+class Word2VecRepresentation(BaseModel):
+    """Word2vec s laděným prostorem a pevným počtem vláken."""
+
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+
+    name: RepresentationName
+    workers: PositiveInt
+    space: SearchSpace
+    default: dict[str, ParamValue]
+
+    @model_validator(mode="after")
+    def _valid_space(self) -> Self:
+        params = {p.name: p for p in self.space.params}
+        if params.keys() != {
+            "vector_size",
+            "window",
+            "min_count",
+            "sg",
+            "epochs",
+            "negative",
+            "sample",
+        }:
+            msg = "Prostor word2vec musí obsahovat právě sedm parametrů gensim."
+            raise ValueError(msg)
+        for name, param in params.items():
+            if name == "sample":
+                if not isinstance(param, FloatParam) or param.low <= 0:
+                    msg = "sample vyžaduje kladný float."
+                    raise ValueError(msg)
+                continue
+            low, high = _int_choices(param)
+            if name == "sg":
+                if low < 0 or high > 1:
+                    msg = "sg vyžaduje volby 0 nebo 1."
+                    raise ValueError(msg)
+            elif low < 1:
+                msg = "Celočíselné parametry word2vec musí být kladné."
+                raise ValueError(msg)
+        if not self.space.contains(self.default):
+            msg = "Výchozí parametry reprezentace neleží v prostoru."
+            raise ValueError(msg)
+        return self
+
+
+type Representation = (
+    TfidfRepresentation | Word2VecRepresentation | EncoderSpec | TokensSpec
+)
 
 
 def accepts(spec: Representation, family: ClassifierFamily) -> bool:
@@ -114,11 +161,21 @@ def accepts(spec: Representation, family: ClassifierFamily) -> bool:
         Kompatibilita reprezentace a klasifikátoru.
     """
     match spec:
-        case EncoderSpec():
-            return family is ClassifierFamily.LOGREG
+        case EncoderSpec() | Word2VecRepresentation():
+            return family in {
+                ClassifierFamily.LOGREG,
+                ClassifierFamily.LINEAR_SVM,
+                ClassifierFamily.LIGHTGBM,
+            }
         case TokensSpec():
             return family is ClassifierFamily.FASTTEXT
         case TfidfRepresentation():
-            return family is not ClassifierFamily.FASTTEXT
+            return family in {
+                ClassifierFamily.COMPLEMENT_NB,
+                ClassifierFamily.LOGREG,
+                ClassifierFamily.LINEAR_SVM,
+                ClassifierFamily.NB_SVM,
+                ClassifierFamily.LIGHTGBM_LSA,
+            }
         case _:
             assert_never(spec)

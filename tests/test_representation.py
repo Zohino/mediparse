@@ -12,7 +12,7 @@ from mediparse.domain.representation import (
     accepts,
 )
 from tests.hf_encoder_support import SPEC
-from tests.stage_support import stage_config
+from tests.stage_support import stage_config, word2vec_stage_config
 
 
 @pytest.mark.parametrize("family", ClassifierFamily)
@@ -23,7 +23,11 @@ from tests.stage_support import stage_config
             stage_config().representations[0],
             {"complement_nb", "logreg", "linear_svm", "nb_svm", "lightgbm_lsa"},
         ),
-        (SPEC, {"logreg"}),
+        (SPEC, {"logreg", "linear_svm", "lightgbm"}),
+        (
+            word2vec_stage_config().representations[0],
+            {"logreg", "linear_svm", "lightgbm"},
+        ),
         (TokensSpec(name="tok"), {"fasttext"}),
     ],
 )
@@ -32,7 +36,7 @@ def test_accepts_pairs(
     allowed: set[str],
     family: ClassifierFamily,
 ) -> None:
-    """Tři druhy přijímají právě rodiny uvedené v kontraktu."""
+    """Čtyři druhy přijímají právě rodiny uvedené v kontraktu."""
     assert accepts(spec, family) == (family.value in allowed)
 
 
@@ -42,6 +46,7 @@ def test_accepts_pairs(
     [
         stage_config().representations[0],
         SPEC,
+        word2vec_stage_config().representations[0],
         TokensSpec(name="tok"),
     ],
 )

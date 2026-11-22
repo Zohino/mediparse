@@ -4,9 +4,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from functools import partial
+from itertools import batched
 from typing import TYPE_CHECKING, assert_never, cast
 
 import numpy as np
+from gensim.models import Word2Vec
+from gensim.models.word2vec import MAX_WORDS_IN_BATCH
 from sklearn.decomposition import TruncatedSVD
 from sklearn.preprocessing import StandardScaler
 
@@ -17,6 +20,7 @@ from mediparse.domain.representation import (
     EncoderSpec,
     TfidfRepresentation,
     TokensSpec,
+    Word2VecRepresentation,
 )
 from mediparse.domain.tuning import ValidationScores
 from mediparse.infrastructure.sklearn_classifier import (
@@ -32,7 +36,7 @@ from mediparse.infrastructure.sklearn_families import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Sequence
+    from collections.abc import Callable, Mapping, Sequence
     from pathlib import Path
 
     from numpy import ndarray
@@ -109,6 +113,15 @@ class SklearnStageScorer:
                     self.embeddings, spec, train_texts, validation_texts
                 )
                 return train, validation, train.shape[1]
+            case Word2VecRepresentation() as spec:
+                # Více vláken z configu zrychlí trénink za cenu nedeterminismu.
+                train, validation = word2vec_features(
+                    self.normalization,
+                    {**rep_params, "workers": spec.workers, "seed": self.seed},
+                    train_texts,
+                    validation_texts,
+                )
+                return train, validation, train.shape[1]
             case TokensSpec():
                 train, validation = token_documents(
                     self.normalization, train_texts, validation_texts
@@ -164,12 +177,9 @@ def encoder_features(
     Returns:
         Husté matice v pořadí vstupních zpráv.
     """
-    scaler = StandardScaler()
     # Validace nesmí ovlivnit škálování; společná matice načte encoder jen jednou.
     matrix = embeddings.embed(spec, [*train, *validation])
-    return scaler.fit_transform(matrix[: len(train)]), scaler.transform(
-        matrix[len(train) :]
-    )
+    return _standardized(matrix[: len(train)], matrix[len(train) :])
 
 
 def token_documents(
@@ -185,11 +195,66 @@ def token_documents(
     Raises:
         InvalidInputError: Trénovací texty neobsahují token.
     """
-    vectorizer = tfidf_vectorizer(normalization)
-    ensure_tokens(vectorizer, train)
-    analyzer = vectorizer.build_analyzer()
+    analyzer = _train_analyzer(normalization, train)
     # Pevná šířka <U zarovná zprávy na nejdelší: 44 tis. krát 60 tis. znaků je ~9,8 GiB.
     return (
         np.array([" ".join(analyzer(text)) for text in train], dtype=object),
         np.array([" ".join(analyzer(text)) for text in validation], dtype=object),
+    )
+
+
+def _train_analyzer(
+    normalization: TextNormalization | None, train: Sequence[str]
+) -> Callable[[str], list[str]]:
+    vectorizer = tfidf_vectorizer(normalization)
+    ensure_tokens(vectorizer, train)
+    return vectorizer.build_analyzer()
+
+
+def _standardized(train: ndarray, validation: ndarray) -> tuple[ndarray, ndarray]:
+    scaler = StandardScaler()
+    return scaler.fit_transform(train), scaler.transform(validation)
+
+
+def word2vec_features(
+    normalization: TextNormalization | None,
+    options: Mapping[str, ParamValue],
+    train: Sequence[str],
+    validation: Sequence[str],
+) -> tuple[ndarray, ndarray]:
+    """Naučí word2vec jen na tréninku a standardizuje průměry slov.
+
+    Returns:
+        Husté matice zpráv v pořadí tréninku a validace.
+
+    Raises:
+        InvalidInputError: Trénink neobsahuje tokeny nebo je slovník prázdný.
+    """
+    analyzer = _train_analyzer(normalization, train)
+    documents = [analyzer(text) for text in train]
+    # Gensim slova za 10 000. pozicí věty tiše zahodí; kusy zachovají všechny tokeny.
+    sentences = [
+        list(chunk)
+        for tokens in documents
+        for chunk in batched(tokens, MAX_WORDS_IN_BATCH, strict=False)
+    ]
+    model = Word2Vec(**options)
+    model.build_vocab(sentences)
+    # Gensim prázdný slovník neodmítne, train by pak skončil nesrozumitelným RuntimeError.
+    if not model.wv.index_to_key:
+        msg = "Žádné slovo nedosáhlo min_count, slovník word2vec by byl prázdný."
+        raise InvalidInputError(msg)
+    model.train(sentences, total_examples=model.corpus_count, epochs=model.epochs)
+
+    def mean_matrix(documents: Sequence[list[str]]) -> ndarray:
+        # Výchozí pre_normalize=True by průměrovalo jednotkové vektory místo vektorů slov.
+        return np.array([
+            model.wv.get_mean_vector(tokens, pre_normalize=False)
+            if tokens
+            else np.zeros(model.wv.vector_size, dtype=np.float32)
+            for tokens in documents
+        ])
+
+    return _standardized(
+        mean_matrix(documents), mean_matrix([analyzer(text) for text in validation])
     )

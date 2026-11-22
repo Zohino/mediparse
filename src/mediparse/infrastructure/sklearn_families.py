@@ -39,7 +39,7 @@ def classifier_estimator(
             return LinearSVC(random_state=seed)
         case ClassifierFamily.NB_SVM:
             return NbSvmClassifier(random_state=seed)
-        case ClassifierFamily.LIGHTGBM_LSA:
+        case ClassifierFamily.LIGHTGBM | ClassifierFamily.LIGHTGBM_LSA:
             # LightGBM doporučuje force_row_wise pro stabilitu mezi počty vláken.
             return LGBMClassifier(
                 random_state=seed,

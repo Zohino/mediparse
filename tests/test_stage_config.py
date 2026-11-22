@@ -7,7 +7,7 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain import stage_tuning as stage_domain
-from mediparse.domain.representation import TfidfRepresentation
+from mediparse.domain.representation import TfidfRepresentation, Word2VecRepresentation
 from mediparse.domain.stage_tuning import (
     StageLsa,
     StageTrialRecord,
@@ -15,7 +15,7 @@ from mediparse.domain.stage_tuning import (
     best_trial,
 )
 from tests.hf_encoder_support import SPEC
-from tests.stage_support import stage_config, token_stage_config
+from tests.stage_support import stage_config, token_stage_config, word2vec_stage_config
 
 
 def test_branches_and_namespaces() -> None:
@@ -248,3 +248,96 @@ def test_branch_without_representation_space() -> None:
     }
     assert branch.default_params() == params
     assert branch.params_of(params) == ({}, branch.family.default)
+
+
+def test_word2vec_branch_namespaces() -> None:
+    """Word2vec má vlastní prostor a unie rozliší jeho typ."""
+    config = word2vec_stage_config()
+    assert type(config.representations[0]) is Word2VecRepresentation
+    branch = config.branches[0]
+    assert branch.name == "w2v/logreg"
+    assert {p.name for p in branch.prefixed_space()} == {
+        "w2v.vector_size",
+        "w2v.window",
+        "w2v.min_count",
+        "w2v.sg",
+        "w2v.epochs",
+        "w2v.negative",
+        "w2v.sample",
+        "logreg.C",
+    }
+    assert branch.params_of(branch.default_params()) == (
+        {
+            "vector_size": 7,
+            "window": 2,
+            "min_count": 2,
+            "sg": 0,
+            "epochs": 5,
+            "negative": 5,
+            "sample": 0.001,
+        },
+        {"C": 1.0},
+    )
+
+
+@pytest.mark.parametrize(
+    ("name", "parameter", "message"),
+    [
+        ("epochs", None, "Prostor word2vec musí obsahovat právě sedm parametrů gensim"),
+        (
+            "alpha",
+            {"kind": "categorical", "choices": [1]},
+            "Prostor word2vec musí obsahovat právě sedm parametrů gensim",
+        ),
+        (
+            "window",
+            {"kind": "float", "low": 1.0, "high": 2.0, "log": False},
+            "vyžaduje celočíselný prostor",
+        ),
+        *[
+            (
+                name,
+                {"kind": "categorical", "choices": [0]},
+                "Celočíselné parametry word2vec musí být kladné",
+            )
+            for name in ("vector_size", "window", "min_count", "epochs", "negative")
+        ],
+        (
+            "sg",
+            {"kind": "categorical", "choices": [0, 2]},
+            "sg vyžaduje volby 0 nebo 1",
+        ),
+        (
+            "sg",
+            {"kind": "categorical", "choices": [-1, 0]},
+            "sg vyžaduje volby 0 nebo 1",
+        ),
+        (
+            "sample",
+            {"kind": "categorical", "choices": [0.001]},
+            "sample vyžaduje kladný float",
+        ),
+        (
+            "sample",
+            {"kind": "float", "low": 0.0, "high": 0.01, "log": False},
+            "sample vyžaduje kladný float",
+        ),
+        ("default", None, "Výchozí parametry reprezentace"),
+    ],
+)
+def test_invalid_word2vec_space(
+    name: str, parameter: dict[str, object] | None, message: str
+) -> None:
+    """Neplatné parametry odmítne odpovídající pravidlo word2vec."""
+    data = word2vec_stage_config().model_dump(mode="json")
+    spec = data["representations"][0]
+    if name == "default":
+        spec["default"]["window"] = 3
+    else:
+        spec["space"]["params"] = [
+            p for p in spec["space"]["params"] if p["name"] != name
+        ]
+        if parameter is not None:
+            spec["space"]["params"].append({"name": name} | parameter)
+    with pytest.raises(ValidationError, match=message):
+        StageTuningConfig.model_validate_json(json.dumps(data))
