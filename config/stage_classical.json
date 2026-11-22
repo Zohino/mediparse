@@ -1,7 +1,7 @@
 {
   "seed": 0,
   "subsample_parts": 3,
-  "folds": 3,
+  "folds": 5,
   "trials": 60,
   "random_startup_trials": 10,
   "lsa": {"components": 100, "max_features": 100000},

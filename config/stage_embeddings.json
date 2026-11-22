@@ -1,7 +1,7 @@
 {
   "seed": 0,
   "subsample_parts": 3,
-  "folds": 3,
+  "folds": 5,
   "trials": 20,
   "random_startup_trials": 5,
   "input": {

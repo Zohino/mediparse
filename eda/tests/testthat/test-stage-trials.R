@@ -14,10 +14,10 @@ stage_test_con <- function(env = parent.frame()) {
 
 testthat::test_that("Kontrakt: oba parquety fixture lze přečíst", {
   paths <- stage_fixture_paths()
-  testthat::expect_equal(nrow(read_stage_trials(paths$results)), 900L)
+  testthat::expect_equal(nrow(read_stage_trials(paths$results)), 1500L)
   con <- stage_test_con()
   source <- stage_predictions_source(con, paths$predictions)
-  testthat::expect_equal(DBI::dbGetQuery(con, paste("SELECT count(*) n FROM", source))$n, 21600)
+  testthat::expect_equal(DBI::dbGetQuery(con, paste("SELECT count(*) n FROM", source))$n, 36000)
 })
 
 testthat::test_that("A6 lineage kontroluje všechny tři otisky a jmenuje soubor", {
