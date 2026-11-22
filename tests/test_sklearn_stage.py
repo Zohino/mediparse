@@ -557,22 +557,53 @@ def test_word2vec_empty_vocabulary_is_invalid_input(
         )
 
 
+@pytest.fixture
+def trained_word2vec(monkeypatch: pytest.MonkeyPatch) -> list[sklearn_stage.Word2Vec]:
+    """Zachytí modely vytvořené featurizérem.
+
+    Returns:
+        Modely v pořadí volání konstruktoru.
+    """
+    original = sklearn_stage.Word2Vec
+    models = []
+
+    def model(**kwargs: ParamValue) -> sklearn_stage.Word2Vec:
+        fitted = original(**kwargs)
+        models.append(fitted)
+        return fitted
+
+    monkeypatch.setattr(sklearn_stage, "Word2Vec", model)
+    return models
+
+
 def test_word2vec_params_reach_gensim(
     word2vec_options: dict[str, ParamValue],
     word2vec_train: list[str],
-    monkeypatch: pytest.MonkeyPatch,
+    trained_word2vec: list[sklearn_stage.Word2Vec],
 ) -> None:
-    """Konstruktor dostane všechny hyperparametry i workers a seed beze změny."""
-    original = sklearn_stage.Word2Vec
-    observed = []
-
-    def model(**kwargs: ParamValue) -> sklearn_stage.Word2Vec:
-        observed.append(kwargs)
-        return original(**kwargs)
-
-    monkeypatch.setattr(sklearn_stage, "Word2Vec", model)
+    """Model dostane všechny hyperparametry i workers a seed beze změny."""
     word2vec_features(None, word2vec_options, word2vec_train, ["alpha"])
-    assert observed == [word2vec_options]
+    assert len(trained_word2vec) == 1
+    assert {
+        name: getattr(trained_word2vec[0], name) for name in word2vec_options
+    } == word2vec_options
+
+
+def test_word2vec_features_are_standardized_word_means(
+    word2vec_options: dict[str, ParamValue],
+    word2vec_train: list[str],
+    trained_word2vec: list[sklearn_stage.Word2Vec],
+) -> None:
+    """Příznaky odpovídají průměru surových slovních vektorů a populačnímu škálování."""
+    train, _ = word2vec_features(None, word2vec_options, word2vec_train, ["alpha"])
+    wv = trained_word2vec[0].wv
+    raw = np.array([
+        np.mean([wv[word] for word in text.split() if word in wv], axis=0)
+        for text in word2vec_train
+    ])
+    np.testing.assert_allclose(
+        train, (raw - raw.mean(axis=0)) / raw.std(axis=0), rtol=1e-4, atol=1e-5
+    )
 
 
 def test_word2vec_branch_scores(tmp_path: Path) -> None:
