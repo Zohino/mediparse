@@ -274,7 +274,7 @@ stage_lsa_cap_text <- function(trials, config) {
 }
 
 stage_provenance_table <- function(manifest) {
-  x <- manifest$text_preprocessing
+  preprocessing <- manifest$text_preprocessing
   items <- c(
     "Dataset SHA-256" = manifest$dataset_sha256,
     "Split SHA-256" = manifest$split_sha256,
@@ -285,7 +285,7 @@ stage_provenance_table <- function(manifest) {
     "Seed ladění stupně" = as.character(manifest$seed),
     "Vývojové zprávy" = format_number(manifest$development_notes),
     "Vývojoví pacienti" = format_number(manifest$development_patients),
-    "Předzpracování" = paste(names(x), unlist(x), sep = ": ", collapse = "; "),
+    "Předzpracování" = paste(names(preprocessing), unlist(preprocessing), sep = ": ", collapse = "; "),
     "Strip diagnostických sekcí" = if (is.null(manifest$diagnostic_strip)) "ne" else "ano",
     "Revize kódu ladění stupně" = manifest$environment$source$commit,
     "Rozpracovaný strom" = if (manifest$environment$source$dirty) "ano" else "ne",
