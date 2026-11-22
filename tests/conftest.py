@@ -357,14 +357,8 @@ def synthetic_tables(tmp_path: Path) -> tuple[Path, Path]:
 
 
 @pytest.fixture
-def _no_child_processes() -> Iterator[None]:
-    """Po teardownu závislých fixture ověří ukončení pracovních procesů."""
-    yield
-    assert active_children() == []
-
-
-@pytest.fixture
-def loky_executor(_no_child_processes: None) -> Iterator[None]:
+def loky_executor() -> Iterator[None]:
     """Ukončí executor, aby jeho procesy nerušily izolaci testů a mutmut."""
     yield
     get_reusable_executor().shutdown(wait=True)
+    assert active_children() == []

@@ -839,12 +839,3 @@ def test_parallel_memmap_stays_in_scratch(
     assert len(scored.scores) == len(Diagnosis)
     assert (tmp_path / "scratch").is_dir()
     assert not any((tmp_path / "scratch").iterdir())
-
-
-@pytest.mark.usefixtures("loky_executor")
-def test_parallel_fits_leave_no_child_processes(tmp_path: Path) -> None:
-    """Paralelní skórování po teardownu nezanechá živé pracovní procesy."""
-    config = stage_config()
-    SklearnStageScorer(
-        config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock(), jobs=2
-    ).score(config.branches[0].default_params(), _clinical_fold())
