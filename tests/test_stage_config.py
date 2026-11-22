@@ -56,6 +56,18 @@ def test_winner_tie_uses_earlier_trial() -> None:
     ("factory", "changes", "message"),
     [
         pytest.param(
+            word2vec_stage_config,
+            {("representations", 0, "workers"): 0},
+            "Input should be greater than 0",
+            id="word2vec-workers-zero",
+        ),
+        pytest.param(
+            word2vec_stage_config,
+            {("representations", 0, "alpha"): 0.025},
+            "Extra inputs are not permitted",
+            id="word2vec-extra-alpha",
+        ),
+        pytest.param(
             stage_config,
             {("families", 0, "default", "C"): 10000.0},
             "Výchozí parametry rodiny",
