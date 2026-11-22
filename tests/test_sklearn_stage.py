@@ -17,6 +17,7 @@ from mediparse.application.patient_cv import patient_holdouts
 from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.representation import Word2VecRepresentation
 from mediparse.domain.split import Holdout
 from mediparse.domain.stage_tuning import StageLsa
 from mediparse.infrastructure import sklearn_stage
@@ -444,17 +445,9 @@ def word2vec_options() -> dict[str, ParamValue]:
     Returns:
         Sedm hyperparametrů a provozní parametry gensim.
     """
-    return {
-        "vector_size": 7,
-        "window": 2,
-        "min_count": 2,
-        "sg": 0,
-        "epochs": 5,
-        "negative": 5,
-        "sample": 0.001,
-        "workers": 1,
-        "seed": 7,
-    }
+    spec = word2vec_stage_config().representations[0]
+    assert isinstance(spec, Word2VecRepresentation)
+    return spec.default | {"workers": 1, "seed": 7}
 
 
 @pytest.fixture
