@@ -9,7 +9,13 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain import stage_tuning as stage_domain
-from mediparse.domain.representation import TfidfRepresentation, Word2VecRepresentation
+from mediparse.domain.model_input import TextPreprocessing
+from mediparse.domain.representation import (
+    EncoderSpec,
+    TfidfRepresentation,
+    TokensSpec,
+    Word2VecRepresentation,
+)
 from mediparse.domain.stage_tuning import (
     StageLsa,
     StageTrialRecord,
@@ -90,7 +96,12 @@ def test_winner_tie_uses_earlier_trial() -> None:
         ),
         pytest.param(
             stage_config,
-            {("representations", 1): {"name": "tok"}},
+            {
+                ("representations", 1): {
+                    "name": "tok",
+                    "text_preprocessing": "dictionary",
+                }
+            },
             "Reprezentace tok nepatří do žádné větve",
             id="unused-representation",
         ),
@@ -364,7 +375,7 @@ def test_branches_follow_accepted_pairs() -> None:
         representations=[
             base["representations"][0],
             SPEC.model_dump(mode="json") | {"name": "enc"},
-            {"name": "tok"},
+            {"name": "tok", "text_preprocessing": "dictionary"},
         ],
         families=[base["families"][0], token["families"][0]],
     )
@@ -425,3 +436,29 @@ def test_word2vec_branch_namespaces() -> None:
         },
         {"C": 1.0},
     )
+
+
+@pytest.mark.parametrize(
+    "spec",
+    [
+        stage_config().representations[0],
+        word2vec_stage_config().representations[0],
+        TokensSpec(name="tok", text_preprocessing=TextPreprocessing.DICTIONARY),
+        SPEC,
+    ],
+)
+def test_representation_requires_preprocessing(
+    spec: TfidfRepresentation | Word2VecRepresentation | TokensSpec | EncoderSpec,
+) -> None:
+    """Každá reprezentace vyžaduje explicitní vědeckou volbu vstupu."""
+    data = spec.model_dump(mode="json")
+    del data["text_preprocessing"]
+    with pytest.raises(ValidationError, match=r"text_preprocessing\s+Field required"):
+        type(spec).model_validate_json(json.dumps(data))
+
+
+def test_preprocessing_rejects_obsolete_fields() -> None:
+    """Stupeň nepřijímá původní společné nastavení vstupu."""
+    data = stage_config().model_dump(mode="json") | {"input": {}}
+    with pytest.raises(ValidationError, match="Extra inputs are not permitted"):
+        StageTuningConfig.model_validate_json(json.dumps(data))

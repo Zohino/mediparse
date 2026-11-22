@@ -107,8 +107,10 @@ def write_stage_trials_fixtures(directory: Path) -> None:
         results_sha256=hashlib.sha256(results.read_bytes()).hexdigest(),
         predictions_sha256=hashlib.sha256(predictions.read_bytes()).hexdigest(),
         diagnostic_strip=None,
-        text_preprocessing=config.input.text_preprocessing,
-        text_normalization=TextNormalization(acronyms={}, variants={}),
+        text_preprocessing=config.text_preprocessing,
+        text_normalization=dict.fromkeys(
+            config.text_preprocessing, TextNormalization(acronyms={}, variants={})
+        ),
         environment=provenance.environment,
         hardware=provenance.hardware,
     )

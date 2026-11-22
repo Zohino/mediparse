@@ -4,7 +4,6 @@ import json
 from dataclasses import dataclass
 
 from mediparse.domain.stage_tuning import StageTuningConfig
-from tests.model_support import model_input
 
 
 def stage_config(**changes: object) -> StageTuningConfig:
@@ -43,6 +42,7 @@ def stage_config(**changes: object) -> StageTuningConfig:
             }
         representations.append({
             "name": name,
+            "text_preprocessing": "dictionary" if name == "r1" else "none",
             "analyzer": "word",
             "space": {"params": params},
             "default": default,
@@ -55,7 +55,7 @@ def stage_config(**changes: object) -> StageTuningConfig:
                 "folds": 2,
                 "trials": 6,
                 "random_startup_trials": 1,
-                "input": model_input(),
+                "strip_diagnostic_sections": False,
                 "representations": representations,
                 "families": [
                     {
@@ -105,7 +105,7 @@ def token_stage_config() -> StageTuningConfig:
     """
     default = {"lr": 0.5, "epoch": 1, "word_ngrams": 2, "dim": 2}
     return stage_config(
-        representations=[{"name": "tok"}],
+        representations=[{"name": "tok", "text_preprocessing": "dictionary"}],
         families=[
             {
                 "family": "fasttext",
@@ -152,6 +152,7 @@ def word2vec_stage_config() -> StageTuningConfig:
         representations=[
             {
                 "name": "w2v",
+                "text_preprocessing": "dictionary",
                 "workers": 1,
                 "space": {"params": params},
                 "default": default,

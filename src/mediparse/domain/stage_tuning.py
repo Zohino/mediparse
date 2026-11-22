@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING, Annotated, Final, Self, assert_never
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
-from mediparse.domain.model_input import ModelInput
 from mediparse.domain.representation import (
     ClassifierFamily,
     EncoderSpec,
@@ -28,6 +27,7 @@ if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
     from mediparse.domain.diagnosis import Diagnosis
+    from mediparse.domain.model_input import TextPreprocessing
     from mediparse.domain.split import SplitConfig
     from mediparse.domain.tuning import MaxF1
 
@@ -153,9 +153,14 @@ class StageTuningConfig(BaseModel):
     trials: PositiveInt
     random_startup_trials: Annotated[int, Field(ge=0)]
     lsa: StageLsa | None = None
-    input: ModelInput
+    strip_diagnostic_sections: bool
     representations: Annotated[tuple[Representation, ...], Field(min_length=1)]
     families: Annotated[tuple[FamilySpace, ...], Field(min_length=1)]
+
+    @property
+    def text_preprocessing(self) -> dict[str, TextPreprocessing]:
+        """Úrovně předzpracování podle jmen reprezentací."""
+        return {rep.name: rep.text_preprocessing for rep in self.representations}
 
     @property
     def branches(self) -> tuple[Branch, ...]:

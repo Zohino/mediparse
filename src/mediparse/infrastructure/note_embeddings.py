@@ -40,12 +40,16 @@ def cache_key(spec: EncoderSpec, versions: Mapping[str, str]) -> str:
     """Otiskne parametry výpočtu, knihovny a AST encoderu bez I/O cache.
 
     Returns:
-        Klíč obsahové cache nezávislý na jménu reprezentace.
+        Klíč obsahové cache nezávislý na jménu a úrovni předzpracování.
     """
+    # Cache adresuje řádky otiskem textu; předzpracovaný text má vlastní řádky.
+    # Úroveň proto nemění klíč a embeddingy původního textu zůstávají platné.
     return fingerprint([
         *(
             (name, str(value).encode())
-            for name, value in spec.model_dump(exclude={"name"}).items()
+            for name, value in spec.model_dump(
+                exclude={"name", "text_preprocessing"}
+            ).items()
         ),
         *((f"packages/{name}", value.encode()) for name, value in versions.items()),
         ("encoder", module_sha256(Path(hf_encoder.__file__)).encode()),

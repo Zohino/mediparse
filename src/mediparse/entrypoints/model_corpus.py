@@ -1,4 +1,4 @@
-"""Sdílený korpus modelových kroků s tabulkou, normalizací, splitem a otiskem."""
+"""Sdílený korpus modelových kroků s tabulkou, splitem a otiskem."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ if TYPE_CHECKING:
 
     from mediparse.application.ports.experiment import PatientNoteTable, SplitSource
     from mediparse.domain.clinical_text import TextNormalization
-    from mediparse.domain.model_input import ModelInput
+    from mediparse.domain.model_input import TextPreprocessing
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -47,34 +47,36 @@ class ModelCorpus:
 
     table: PatientNoteTable
     strip: DiagnosticStrip | None
-    normalization: TextNormalization | None
     split: SplitSource
     dataset_sha256: str
 
 
-def model_corpus(paths: ModelCorpusPaths, model_input: ModelInput) -> ModelCorpus:
-    """Složí tabulku vstupu, strip, normalizaci, split a otisk kohorty.
+def model_corpus(
+    paths: ModelCorpusPaths, *, strip_diagnostic_sections: bool
+) -> ModelCorpus:
+    """Složí tabulku vstupu, strip, split a otisk kohorty.
 
     Returns:
         Sdílený korpus modelového kroku.
 
     Raises:
-        InvalidInputError: Kohorta chybí nebo lexikon či kandidáti nejsou platní.
+        InvalidInputError: Kohorta chybí nebo lexikon není platný.
     """
     table, strip = model_input_table(
-        cohort=paths.cohort, model_input=model_input, lexicon=paths.lexicon
+        cohort=paths.cohort,
+        strip_diagnostic_sections=strip_diagnostic_sections,
+        lexicon=paths.lexicon,
     )
     return ModelCorpus(
         table=table,
         strip=strip,
-        normalization=text_normalization(paths.candidates, model_input),
         split=ParquetSplitTable(paths.split),
         dataset_sha256=file_sha256(paths.cohort),
     )
 
 
 def model_input_table(
-    cohort: Path, model_input: ModelInput, lexicon: Path
+    *, cohort: Path, strip_diagnostic_sections: bool, lexicon: Path
 ) -> tuple[PatientNoteTable, DiagnosticStrip | None]:
     """Složí tabulku zpráv pro trénink, inferenci i ladění a záznam stripu pro manifest.
 
@@ -83,7 +85,7 @@ def model_input_table(
 
     Args:
         cohort: Cesta k tabulce kohorty.
-        model_input: Volby vstupu s přepínačem stripu.
+        strip_diagnostic_sections: Přepínač odstranění diagnostických sekcí.
         lexicon: Cesta k lexikonu diagnostických sekcí.
 
     Returns:
@@ -91,7 +93,7 @@ def model_input_table(
         diagnostických sekcí a záznam s jejich seřazenými klíči a otiskem lexikonu.
     """
     table = ParquetNoteTable(cohort)
-    if not model_input.strip_diagnostic_sections:
+    if not strip_diagnostic_sections:
         return table, None
     sections = load_section_lexicon(lexicon)
     record = DiagnosticStrip(
@@ -102,22 +104,20 @@ def model_input_table(
 
 
 def text_normalization(
-    candidates: Path, model_input: ModelInput
+    candidates: Path, level: TextPreprocessing
 ) -> TextNormalization | None:
     """Načte pravidla normalizace podle úrovně předzpracování vstupu.
 
     Args:
         candidates: Cesta ke kandidátům diagnóz se zkratkami a variantami.
-        model_input: Volby vstupu s úrovní předzpracování textu.
+        level: Úroveň předzpracování textu.
 
     Returns:
         Pravidla normalizace, nebo ``None`` pro původní text bez předzpracování.
     """
-    if not model_input.text_preprocessing.normalizes:
+    if not level.normalizes:
         return None
-    return load_text_normalization(
-        candidates, variants=model_input.text_preprocessing.rewrites_variants
-    )
+    return load_text_normalization(candidates, variants=level.rewrites_variants)
 
 
 def checkpoint_key(

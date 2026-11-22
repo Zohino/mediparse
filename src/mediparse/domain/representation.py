@@ -8,6 +8,7 @@ from typing import Annotated, Literal, Self, assert_never
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
 from mediparse.domain.digest import CommitSha
+from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.tuning import (
     CategoricalParam,
     FloatParam,
@@ -38,6 +39,7 @@ class EncoderSpec(BaseModel):
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 
     name: RepresentationName
+    text_preprocessing: TextPreprocessing
     model: Annotated[str, Field(min_length=1)]
     revision: CommitSha
     window: PositiveInt
@@ -51,6 +53,7 @@ class TokensSpec(BaseModel):
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 
     name: RepresentationName
+    text_preprocessing: TextPreprocessing
 
 
 def _int_choices(param: Parameter) -> tuple[int, int]:
@@ -70,6 +73,7 @@ class TfidfRepresentation(BaseModel):
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 
     name: RepresentationName
+    text_preprocessing: TextPreprocessing
     analyzer: Literal["word", "char_wb"]
     space: SearchSpace
     default: dict[str, ParamValue]
@@ -111,6 +115,7 @@ class Word2VecRepresentation(BaseModel):
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 
     name: RepresentationName
+    text_preprocessing: TextPreprocessing
     workers: PositiveInt
     space: SearchSpace
     default: dict[str, ParamValue]

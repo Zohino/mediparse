@@ -5,6 +5,7 @@ import json
 import pytest
 from pydantic import ValidationError
 
+from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.representation import (
     ClassifierFamily,
     Representation,
@@ -28,7 +29,10 @@ from tests.stage_support import stage_config, word2vec_stage_config
             word2vec_stage_config().representations[0],
             {"logreg", "linear_svm", "lightgbm"},
         ),
-        (TokensSpec(name="tok"), {"fasttext"}),
+        (
+            TokensSpec(name="tok", text_preprocessing=TextPreprocessing.DICTIONARY),
+            {"fasttext"},
+        ),
     ],
 )
 def test_accepts_pairs(
@@ -47,7 +51,7 @@ def test_accepts_pairs(
         stage_config().representations[0],
         SPEC,
         word2vec_stage_config().representations[0],
-        TokensSpec(name="tok"),
+        TokensSpec(name="tok", text_preprocessing=TextPreprocessing.DICTIONARY),
     ],
 )
 def test_representation_name_rejects_separators(

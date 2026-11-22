@@ -80,7 +80,9 @@ def run(
     check_inputs_access(environ, (paths.cohort, paths.model, paths.predictions))
     table, _ = model_input_table(
         cohort=paths.cohort,
-        model_input=load_training_config(paths.config).input,
+        strip_diagnostic_sections=load_training_config(
+            paths.config
+        ).input.strip_diagnostic_sections,
         lexicon=paths.lexicon,
     )
     step = ModelInference(

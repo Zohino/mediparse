@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.representation import EncoderSpec
 
 SPEC = EncoderSpec(
     name="test",
+    text_preprocessing=TextPreprocessing.NONE,
     model="test",
     revision="a" * 40,
     window=8,

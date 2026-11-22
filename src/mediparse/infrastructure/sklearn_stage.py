@@ -28,6 +28,7 @@ from mediparse.infrastructure.sklearn_classifier import (
     ensure_tokens,
     fit_converged,
     tfidf_from,
+    tfidf_preprocessor,
     tfidf_vectorizer,
 )
 from mediparse.infrastructure.sklearn_families import (
@@ -56,7 +57,7 @@ class SklearnStageScorer:
     """Fitne reprezentaci jednou pro pět diagnóz pokusu a foldu."""
 
     config: StageTuningConfig
-    normalization: TextNormalization | None
+    normalizations: Mapping[str, TextNormalization | None]
     seed: Seed
     scratch: Path
     embeddings: NoteEmbeddings
@@ -106,10 +107,19 @@ class SklearnStageScorer:
     def _features(
         self, branch: Branch, rep_params: Mapping[str, ParamValue], fold: Holdout
     ) -> tuple[ndarray | csr_matrix, ndarray | csr_matrix, int]:
+        normalization = self.normalizations[branch.representation.name]
         train_texts = [note.text for note in fold.train]
         validation_texts = [note.text for note in fold.test]
         match branch.representation:
             case EncoderSpec() as spec:
+                if normalization is not None:
+                    preprocess = partial(
+                        tfidf_preprocessor,
+                        acronyms=dict(normalization.acronyms),
+                        variants=dict(normalization.variants),
+                    )
+                    train_texts = [preprocess(text) for text in train_texts]
+                    validation_texts = [preprocess(text) for text in validation_texts]
                 train, validation = encoder_features(
                     self.embeddings, spec, train_texts, validation_texts
                 )
@@ -117,7 +127,7 @@ class SklearnStageScorer:
             case Word2VecRepresentation() as spec:
                 # Více vláken z configu zrychlí trénink za cenu nedeterminismu.
                 train, validation = word2vec_features(
-                    self.normalization,
+                    normalization,
                     {**rep_params, "workers": spec.workers, "seed": self.seed},
                     train_texts,
                     validation_texts,
@@ -125,14 +135,18 @@ class SklearnStageScorer:
                 return train, validation, train.shape[1]
             case TokensSpec():
                 train, validation = token_documents(
-                    self.normalization, train_texts, validation_texts
+                    normalization,
+                    train_texts,
+                    validation_texts,
                 )
                 n_features = len({
                     token for document in train for token in document.split()
                 })
                 return train, validation, n_features
             case TfidfRepresentation():
-                return self._tfidf(branch, rep_params, train_texts, validation_texts)
+                return self._tfidf(
+                    branch, rep_params, train_texts, validation_texts, normalization
+                )
             case _:
                 assert_never(branch.representation)
 
@@ -142,6 +156,7 @@ class SklearnStageScorer:
         rep_params: Mapping[str, ParamValue],
         train_texts: Sequence[str],
         validation_texts: Sequence[str],
+        normalization: TextNormalization | None,
     ) -> tuple[ndarray | csr_matrix, ndarray | csr_matrix, int]:
         tfidf = TfidfParameters.model_validate(rep_params)
         lsa = (
@@ -153,7 +168,7 @@ class SklearnStageScorer:
         vectorizer = tfidf_from(
             tfidf,
             cast("TfidfRepresentation", branch.representation).analyzer,
-            self.normalization,
+            normalization,
             max_features=lsa.max_features if lsa else None,
         )
         ensure_tokens(vectorizer, train_texts)
