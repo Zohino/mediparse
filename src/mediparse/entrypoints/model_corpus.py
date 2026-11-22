@@ -76,10 +76,10 @@ def model_corpus(paths: ModelCorpusPaths, model_input: ModelInput) -> ModelCorpu
 def model_input_table(
     cohort: Path, model_input: ModelInput, lexicon: Path
 ) -> tuple[PatientNoteTable, DiagnosticStrip | None]:
-    """Složí tabulku zpráv pro trénink, inferenci i screening a záznam stripu pro manifest.
+    """Složí tabulku zpráv pro trénink, inferenci i ladění a záznam stripu pro manifest.
 
-    Funkci volá sdílený korpus tréninku, ladění a screeningu i inference
-    se stejnými volbami, aby klasifikovaly týž text.
+    Trénink, ladění modelů i stupňů a inference používají stejné volby,
+    aby klasifikovaly týž text.
 
     Args:
         cohort: Cesta k tabulce kohorty.

@@ -708,3 +708,20 @@ def test_model_file_of_other_shape_is_invalid_input(tmp_path: Path, shape: str) 
 
     with pytest.raises(InvalidInputError, match=rf"{shape}\.skops.*nemá tvar"):
         SkopsModelFile(path).load()
+
+
+def test_char_ngrams_apply_shared_preprocessor() -> None:
+    """Znakové příznaky vznikají z rozvinutého COPD, ručně určené n-gramy mají 3 až 5 znaků."""
+    vectorizer = tfidf_vectorizer(
+        TextNormalization(
+            acronyms={"COPD": "chronic obstructive pulmonary disease"}, variants={}
+        ),
+        analyzer="char_wb",
+        ngram_range=(3, 5),
+    )
+    vectorizer.fit_transform(["COPD"])
+    vocabulary = set(vectorizer.get_feature_names_out())
+    assert {"chr", "chron", "pulmo", " dise"} <= vocabulary
+    assert "cop" not in vocabulary
+    minimum, maximum = 3, 5
+    assert all(minimum <= len(feature) <= maximum for feature in vocabulary)

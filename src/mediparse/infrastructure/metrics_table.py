@@ -18,7 +18,7 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
     from pathlib import Path
 
-METRIC_FIELDS: Final = (
+_METRIC_FIELDS: Final = (
     pa.field("precision", pa.float64(), nullable=False),
     pa.field("recall", pa.float64(), nullable=False),
     pa.field("f1", pa.float64(), nullable=False),
@@ -32,15 +32,15 @@ SCHEMA: Final = pa.schema([
     pa.field("diagnosis", pa.string(), nullable=False),
     pa.field("test_notes", pa.int64(), nullable=False),
     pa.field("test_positives", pa.int64(), nullable=False),
-    *METRIC_FIELDS,
+    *_METRIC_FIELDS,
 ])
 
 
-def metric_columns(metrics: Sequence[BinaryMetrics]) -> dict[str, list[float]]:
-    """Převede binární metriky na sloupce společné tabulkám evaluace a screeningu.
+def _metric_columns(metrics: Sequence[BinaryMetrics]) -> dict[str, list[float]]:
+    """Převede binární metriky na sloupce tabulky evaluace.
 
     Returns:
-        Šest metrik ve stejném pořadí jako METRIC_FIELDS, řádky v pořadí vstupu.
+        Šest metrik ve stejném pořadí jako _METRIC_FIELDS, řádky v pořadí vstupu.
     """
     return {
         "precision": [item.precision for item in metrics],
@@ -65,7 +65,7 @@ class ParquetMetricsTable:
             "diagnosis": [item.diagnosis.value for item in metrics],
             "test_notes": [item.test_notes for item in metrics],
             "test_positives": [item.test_positives for item in metrics],
-            **metric_columns([item.metrics for item in metrics]),
+            **_metric_columns([item.metrics for item in metrics]),
         }
         write_table(self.path, columns, SCHEMA)
 

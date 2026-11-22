@@ -11,6 +11,7 @@ from mediparse.domain.model_input import ModelInput
 from mediparse.domain.representation import (
     ClassifierFamily,
     EncoderSpec,
+    Representation,
     TfidfRepresentation,
     TokensSpec,
     accepts,
@@ -32,11 +33,8 @@ if TYPE_CHECKING:
 BRANCH_KEY: Final = "branch"
 
 
-type StageRepresentation = TfidfRepresentation | EncoderSpec | TokensSpec
-
-
 def _tuned(
-    representation: StageRepresentation,
+    representation: Representation,
 ) -> tuple[tuple[Parameter, ...], Mapping[str, ParamValue]]:
     match representation:
         case TfidfRepresentation():
@@ -68,7 +66,7 @@ class FamilySpace(BaseModel):
 class Branch:
     """Platná dvojice reprezentace a rodiny se společnými jmennými prostory."""
 
-    representation: StageRepresentation
+    representation: Representation
     family: FamilySpace
 
     @property
@@ -155,7 +153,7 @@ class StageTuningConfig(BaseModel):
     random_startup_trials: Annotated[int, Field(ge=0)]
     lsa: StageLsa | None = None
     input: ModelInput
-    representations: Annotated[tuple[StageRepresentation, ...], Field(min_length=1)]
+    representations: Annotated[tuple[Representation, ...], Field(min_length=1)]
     families: Annotated[tuple[FamilySpace, ...], Field(min_length=1)]
 
     @property
@@ -241,7 +239,7 @@ class StageFoldResult:
     scores: tuple[float, ...]
     max_f1: MaxF1
     converged: bool
-    features: int
+    n_features: int
 
     def __post_init__(self) -> None:
         """Ověří délky sloupců buňky.

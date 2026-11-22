@@ -1,0 +1,56 @@
+{
+  "encoders": [],
+  "dataset_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "config_sha256": "932e27b8b25bc9f75004a86b3a01880fc2cf592518b182bbc5db103ef1bfc4cd",
+  "split_seed": 0,
+  "split_folds": 5,
+  "split_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "seed": 0,
+  "trials": 60,
+  "random_startup_trials": 10,
+  "completed_trials": 60,
+  "nonconverged_trials": 1,
+  "best_trial": 30,
+  "best_branch": "word/complement_nb",
+  "best_params": {
+    "branch": "word/complement_nb",
+    "word.ngram_min": 1,
+    "word.ngram_max": 2,
+    "word.min_df": 1,
+    "word.max_df": 1.0,
+    "word.sublinear_tf": true,
+    "complement_nb.alpha": 1.0
+  },
+  "best_macro_f1": 0.9603451910408433,
+  "sampler": "TPESampler(multivariate=True, group=True)",
+  "pruner": "NopPruner",
+  "seconds": 1830.0,
+  "sample_notes": 72,
+  "sample_patients": 72,
+  "development_notes": 216,
+  "development_patients": 216,
+  "results_sha256": "ce88b827721198f1fe477bf96bff378550c2ecb820a771012d862a8b23f7e4d0",
+  "predictions_sha256": "b4feb4368ee1c2f935d3a414e36d08240d54a1cad4c46e0484ee1ef22f0216e9",
+  "diagnostic_strip": null,
+  "text_preprocessing": "dictionary",
+  "text_normalization": {
+    "acronyms": {},
+    "variants": {}
+  },
+  "environment": {
+    "packages": {
+      "python": "3.13.0"
+    },
+    "source": {
+      "commit": "cccccccccccccccccccccccccccccccccccccccc",
+      "dirty": false
+    }
+  },
+  "hardware": {
+    "cpu_model": "Synthetic CPU",
+    "logical_cores": 8,
+    "available_cores": 2,
+    "memory_bytes": 1024,
+    "gpus": []
+  }
+}

@@ -100,7 +100,7 @@ def test_svm_scores_match_independent_word_bigram_pipeline(
     )
     train = vectorizer.fit_transform([note.text for note in fold.train])
     test = vectorizer.transform([note.text for note in fold.test])
-    assert actual.features == len(vectorizer.vocabulary_)
+    assert actual.n_features == len(vectorizer.vocabulary_)
     assert set(actual.scores) == set(Diagnosis)
     for diagnosis in Diagnosis:
         model = LinearSVC(C=0.5, class_weight="balanced", random_state=seed)
