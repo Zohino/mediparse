@@ -425,3 +425,19 @@ def _assert_trial_features_and_convergence(
     affected = {row["trial"] for row in trials if not row["converged"]}
     assert affected == {0}
     assert written.nonconverged_trials == len(affected)
+
+
+def test_manifest_preserves_diagnostic_strip(tmp_path: Path) -> None:
+    """Zapnutý strip stupně zapíše diagnostické sekce i otisk lexikonu."""
+    paths = _paths(tmp_path)
+    paths.config.write_text(
+        stage_config(strip_diagnostic_sections=True).model_dump_json(), encoding="utf-8"
+    )
+    assert _run(paths) is ExitCode.OK
+    manifest = StageTuningManifest.model_validate_json(paths.manifest.read_bytes())
+    assert manifest.diagnostic_strip is not None
+    assert manifest.diagnostic_strip.sections == ("discharge_diagnosis",)
+    assert (
+        manifest.diagnostic_strip.lexicon_sha256
+        == hashlib.sha256(paths.corpus.lexicon.read_bytes()).hexdigest()
+    )
