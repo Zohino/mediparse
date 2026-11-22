@@ -224,6 +224,7 @@ def test_manifest_rejects_inconsistent_run(tmp_path: Path) -> None:
     assert _run(paths) is ExitCode.OK
     data = json.loads(paths.manifest.read_bytes())
     for changes, message in (
+        ({"jobs": 0}, "greater than 0"),
         ({"completed_trials": 5}, "vyčerpat rozpočet"),
         (
             {"text_preprocessing": {"r1": "none", "r2": "none"}},
