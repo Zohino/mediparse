@@ -129,20 +129,21 @@ class Word2VecRepresentation(BaseModel):
         }:
             msg = "Prostor word2vec musí obsahovat právě sedm parametrů gensim."
             raise ValueError(msg)
-        for name, param in params.items():
-            if name == "sample":
-                if not isinstance(param, FloatParam) or param.low <= 0:
-                    msg = "sample vyžaduje kladný float."
-                    raise ValueError(msg)
-                continue
-            low, high = _int_choices(param)
-            if name == "sg":
-                if low < 0 or high > 1:
-                    msg = "sg vyžaduje volby 0 nebo 1."
-                    raise ValueError(msg)
-            elif low < 1:
-                msg = "Celočíselné parametry word2vec musí být kladné."
-                raise ValueError(msg)
+        sample = params["sample"]
+        # Od 1 gensim chápe sample jako absolutní práh, nikoli podíl korpusu.
+        if not isinstance(sample, FloatParam) or sample.low <= 0 or sample.high >= 1:
+            msg = "sample vyžaduje kladný float menší než 1."
+            raise ValueError(msg)
+        sg_low, sg_high = _int_choices(params["sg"])
+        if sg_low < 0 or sg_high > 1:
+            msg = "sg vyžaduje volby 0 nebo 1."
+            raise ValueError(msg)
+        if any(
+            _int_choices(params[name])[0] < 1
+            for name in ("vector_size", "window", "min_count", "epochs", "negative")
+        ):
+            msg = "Celočíselné parametry word2vec musí být kladné."
+            raise ValueError(msg)
         if not self.space.contains(self.default):
             msg = "Výchozí parametry reprezentace neleží v prostoru."
             raise ValueError(msg)

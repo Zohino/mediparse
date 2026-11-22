@@ -55,6 +55,15 @@ def test_winner_tie_uses_earlier_trial() -> None:
 @pytest.mark.parametrize(
     ("factory", "changes", "message"),
     [
+        *[
+            pytest.param(
+                word2vec_stage_config,
+                {("representations", 0, "space", "params", 6, "high"): high},
+                "sample vyžaduje kladný float menší než 1.",
+                id=f"word2vec-sample-boundary-{high}",
+            )
+            for high in (1.0, 2.0)
+        ],
         pytest.param(
             word2vec_stage_config,
             {("representations", 0, "workers"): 0},
