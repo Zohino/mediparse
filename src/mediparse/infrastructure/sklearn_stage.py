@@ -124,13 +124,9 @@ class SklearnStageScorer:
             )
             for diagnosis, model in zip(Diagnosis, models, strict=True)
         )
+        scores, converged = zip(*results, strict=True)
         return ValidationScores(
-            {
-                diagnosis: result[0]
-                for diagnosis, result in zip(Diagnosis, results, strict=True)
-            },
-            all(result[1] for result in results),
-            n_features,
+            dict(zip(Diagnosis, scores, strict=True)), all(converged), n_features
         )
 
     def _features(
@@ -223,9 +219,8 @@ def _diagnosis_scores(
         converged = fit_converged(
             partial(cast("_TrainableModel", model).fit, train, labels)
         )
-        return tuple(
-            float(value) for value in positive_scores(model, validation)
-        ), converged
+        scores = tuple(float(value) for value in positive_scores(model, validation))
+        return scores, converged
 
 
 def encoder_features(
