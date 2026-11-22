@@ -432,15 +432,15 @@ def test_stage_records_and_passes_normalization_per_representation(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Scorer i manifest dostávají stejné slovníky jednotlivých reprezentací."""
-    tfidf = Mock(wraps=sklearn_stage.tfidf_from)
-    monkeypatch.setattr(sklearn_stage, "tfidf_from", tfidf)
+    tfidf = Mock(wraps=sklearn_stage.tfidf_vectorizer)
+    monkeypatch.setattr(sklearn_stage, "tfidf_vectorizer", tfidf)
     paths = _paths(tmp_path)
     assert _run(paths) is ExitCode.OK
     dictionary = load_text_normalization(paths.corpus.candidates, variants=True)
-    assert any(c.args[2] == dictionary for c in tfidf.call_args_list)
-    assert any(c.args[2] is None for c in tfidf.call_args_list)
+    assert any(c.args[0] == dictionary for c in tfidf.call_args_list)
+    assert any(c.args[0] is None for c in tfidf.call_args_list)
     assert all(
-        c.args[2] == dictionary or c.args[2] is None for c in tfidf.call_args_list
+        c.args[0] == dictionary or c.args[0] is None for c in tfidf.call_args_list
     )
     written = StageTuningManifest.model_validate_json(paths.manifest.read_bytes())
     assert written.text_preprocessing == {

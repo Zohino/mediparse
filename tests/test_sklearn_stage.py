@@ -21,7 +21,7 @@ from mediparse.domain.representation import Word2VecRepresentation
 from mediparse.domain.split import Holdout
 from mediparse.domain.stage_tuning import StageLsa
 from mediparse.entrypoints.stage_tuning import stage_normalizations
-from mediparse.infrastructure import sklearn_stage
+from mediparse.infrastructure import sklearn_classifier, sklearn_stage
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
 from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
@@ -29,6 +29,7 @@ from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.sklearn_stage import (
     SklearnStageScorer,
     encoder_features,
+    joined_tokens,
     token_documents,
     word2vec_features,
 )
@@ -412,24 +413,27 @@ def test_encoder_scaler_fits_only_outer_train() -> None:
 
 def test_token_documents_joins_analyzer_tokens() -> None:
     """Slovní analyzátor odstraní interpunkci a jednopísmenná slova."""
-    train, test = token_documents(None, ["Insulin, glucose!\nA b"], ["Fracture."])
-    assert train.dtype == object
-    assert test.dtype == object
-    np.testing.assert_array_equal(train, ["insulin glucose"])
-    np.testing.assert_array_equal(test, ["fracture"])
+    prepare = joined_tokens(None)
+    assert prepare("Insulin, glucose!\nA b") == "insulin glucose"
+    assert prepare("Fracture.") == "fracture"
 
 
 def test_token_documents_applies_its_normalization() -> None:
     """Rozvinutí COPD dodá stejná slova jako TF-IDF."""
-    train, test = token_documents(
+    prepare = joined_tokens(
         TextNormalization(
             acronyms={"COPD": "chronic obstructive pulmonary disease"}, variants={}
-        ),
-        ["COPD"],
-        ["COPD"],
+        )
     )
-    np.testing.assert_array_equal(train, ["chronic obstructive pulmonary disease"])
-    np.testing.assert_array_equal(test, ["chronic obstructive pulmonary disease"])
+    assert prepare("COPD") == "chronic obstructive pulmonary disease"
+
+
+def test_token_documents_preserves_prepared_texts() -> None:
+    """Hotové tokeny zůstanou řetězci v polích s dtype object."""
+    train, test = token_documents(["insulin glucose"], ["fracture"])
+    assert train.dtype == test.dtype == object
+    np.testing.assert_array_equal(train, ["insulin glucose"])
+    np.testing.assert_array_equal(test, ["fracture"])
 
 
 @pytest.mark.parametrize("config", [stage_config(), token_stage_config()])
@@ -482,7 +486,7 @@ def test_word2vec_mean_repeats_tokens(
 ) -> None:
     """Afinní standardizace zachová průměr s opakováním tokenů."""
     _, matrix = word2vec_features(
-        None, word2vec_options, word2vec_train, ["alpha", "beta", "alpha alpha beta"]
+        word2vec_options, word2vec_train, ["alpha", "beta", "alpha alpha beta"]
     )
     np.testing.assert_allclose(
         matrix[2], (2 * matrix[0] + matrix[1]) / 3, rtol=1e-4, atol=1e-5
@@ -495,7 +499,7 @@ def test_word2vec_ignores_unknown_tokens(
 ) -> None:
     """Neznámé i podprahové slovo se z průměru vynechá."""
     _, matrix = word2vec_features(
-        None, word2vec_options, word2vec_train, ["alpha", f"alpha {unknown}"]
+        word2vec_options, word2vec_train, ["alpha", f"alpha {unknown}"]
     )
     np.testing.assert_array_equal(matrix[0], matrix[1])
 
@@ -504,9 +508,7 @@ def test_word2vec_empty_and_unknown_are_zero(
     word2vec_options: dict[str, ParamValue], word2vec_train: list[str]
 ) -> None:
     """Prázdný text a samé neznámé tokeny mají stejný konečný vektor."""
-    _, matrix = word2vec_features(
-        None, word2vec_options, word2vec_train, ["zzzneznamy", ""]
-    )
+    _, matrix = word2vec_features(word2vec_options, word2vec_train, ["zzzneznamy", ""])
     np.testing.assert_array_equal(matrix[0], matrix[1])
     assert np.isfinite(matrix).all()
 
@@ -515,9 +517,9 @@ def test_word2vec_trains_only_on_train(
     word2vec_options: dict[str, ParamValue], word2vec_train: list[str]
 ) -> None:
     """Změna validace nijak nezmění trénovací matici."""
-    first, _ = word2vec_features(None, word2vec_options, word2vec_train, ["alpha"])
+    first, _ = word2vec_features(word2vec_options, word2vec_train, ["alpha"])
     second, _ = word2vec_features(
-        None, word2vec_options, word2vec_train, ["gamma delta", "beta"]
+        word2vec_options, word2vec_train, ["gamma delta", "beta"]
     )
     assert np.array_equal(first, second)
 
@@ -530,10 +532,9 @@ def test_word2vec_applies_normalization(
         acronyms={"COPD": "chronic obstructive pulmonary disease"}, variants={}
     )
     _, matrix = word2vec_features(
-        normalization,
         word2vec_options,
         ["chronic obstructive pulmonary disease"] * 20,
-        ["COPD", "chronic obstructive pulmonary disease"],
+        [joined_tokens(normalization)("COPD"), "chronic obstructive pulmonary disease"],
     )
     np.testing.assert_array_equal(matrix[0], matrix[1])
 
@@ -552,7 +553,7 @@ def test_word2vec_splits_long_documents(
         return original(model, sentences, **kwargs)
 
     monkeypatch.setattr(sklearn_stage.Word2Vec, "train", train)
-    word2vec_features(None, word2vec_options, ["alpha " * 25000], ["alpha"])
+    word2vec_features(word2vec_options, ["alpha " * 25000], ["alpha"])
     assert max(observed) <= 10000
     assert sum(observed) == 25000
 
@@ -563,7 +564,7 @@ def test_word2vec_empty_vocabulary_is_invalid_input(
     """Příliš vysoké min_count vyvolá srozumitelnou doménovou chybu."""
     with pytest.raises(InvalidInputError, match="min_count"):
         word2vec_features(
-            None, word2vec_options | {"min_count": 1000}, word2vec_train, ["alpha"]
+            word2vec_options | {"min_count": 1000}, word2vec_train, ["alpha"]
         )
 
 
@@ -592,7 +593,7 @@ def test_word2vec_params_reach_gensim(
     trained_word2vec: list[sklearn_stage.Word2Vec],
 ) -> None:
     """Model dostane všechny hyperparametry i workers a seed beze změny."""
-    word2vec_features(None, word2vec_options, word2vec_train, ["alpha"])
+    word2vec_features(word2vec_options, word2vec_train, ["alpha"])
     assert len(trained_word2vec) == 1
     assert {
         name: getattr(trained_word2vec[0], name) for name in word2vec_options
@@ -605,7 +606,7 @@ def test_word2vec_features_are_standardized_word_means(
     trained_word2vec: list[sklearn_stage.Word2Vec],
 ) -> None:
     """Příznaky odpovídají průměru surových slovních vektorů a populačnímu škálování."""
-    train, _ = word2vec_features(None, word2vec_options, word2vec_train, ["alpha"])
+    train, _ = word2vec_features(word2vec_options, word2vec_train, ["alpha"])
     wv = trained_word2vec[0].wv
     raw = np.array([
         np.mean([wv[word] for word in text.split() if word in wv], axis=0)
@@ -772,3 +773,28 @@ def test_scores_match_golden_values(tmp_path: Path) -> None:
                 rel=tolerance["rel"],
                 abs=tolerance["abs"],
             )
+
+
+def test_preprocessing_runs_once_per_text_and_representation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Každý text normalizuje právě jednou napříč foldy a rodinami."""
+    preprocess = Mock(wraps=sklearn_classifier.tfidf_preprocessor)
+    monkeypatch.setattr(sklearn_classifier, "tfidf_preprocessor", preprocess)
+    config = load_stage_config(REPOSITORY / "config/stage_classical.json").model_copy(
+        update={"lsa": StageLsa(components=3, max_features=100_000)}
+    )
+    scorer = SklearnStageScorer(
+        config,
+        stage_normalizations(REPOSITORY_DIAGNOSIS_CANDIDATES, config),
+        7,
+        tmp_path,
+        Mock(),
+    )
+    original = _clinical_fold()
+    corpus = (*original.train, *original.test)
+    for fold in patient_holdouts(corpus, 2, 7, StratifiedGroupFolds()):
+        for name in ("word/logreg", "word/complement_nb"):
+            branch = next(branch for branch in config.branches if branch.name == name)
+            scorer.score(branch.default_params(), fold)
+    assert preprocess.call_count == len({note.text for note in corpus})
