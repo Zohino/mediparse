@@ -850,6 +850,8 @@ def test_parallel_memmap_stays_in_scratch(
             jobs=2,
         ).score(config.branches[0].default_params(), _clinical_fold())
     assert len(scored.scores) == len(Diagnosis)
+    assert (tmp_path / "scratch").is_dir()
+    assert not any((tmp_path / "scratch").iterdir())
 
 
 @pytest.mark.usefixtures("loky_executor")
