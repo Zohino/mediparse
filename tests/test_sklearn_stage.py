@@ -759,7 +759,9 @@ def test_scores_match_golden_values(tmp_path: Path, jobs: int) -> None:
     přegeneruje funkcí _golden_scores na main před jakoukoli změnou kódu,
     samostatným commitem test(stage): aktualizuj zlatý vzor skóre stupně.
     """
-    expected = json.loads((REPOSITORY / "tests/fixtures/stage_golden.json").read_text())
+    expected = json.loads(
+        (REPOSITORY / "tests/fixtures/stage_golden.json").read_text(encoding="utf-8")
+    )
     with parallel_config(max_nbytes=0):
         actual = _golden_scores(tmp_path, jobs)
     assert actual.keys() == expected.keys()
