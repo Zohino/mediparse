@@ -39,17 +39,12 @@ class EncoderSpec(BaseModel):
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 
     name: RepresentationName
+    text_preprocessing: TextPreprocessing
     model: Annotated[str, Field(min_length=1)]
     revision: CommitSha
     window: PositiveInt
     device: Literal["cpu", "cuda"]
     dtype: Literal["float32", "bfloat16"]
-
-    @property
-    def text_preprocessing(self) -> TextPreprocessing:
-        """Úroveň vstupu předtrénovaného tokenizéru."""
-        # Tokenizér čte původní text; property nevstupuje do klíče cache embeddingů.
-        return TextPreprocessing.NONE
 
 
 class TokensSpec(BaseModel):

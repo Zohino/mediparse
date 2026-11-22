@@ -6,11 +6,12 @@ import json
 from typing import TYPE_CHECKING, Any
 
 import pytest
-from pydantic import BaseModel, ValidationError
+from pydantic import ValidationError
 
 from mediparse.domain import stage_tuning as stage_domain
 from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.representation import (
+    EncoderSpec,
     TfidfRepresentation,
     TokensSpec,
     Word2VecRepresentation,
@@ -443,34 +444,21 @@ def test_word2vec_branch_namespaces() -> None:
         stage_config().representations[0],
         word2vec_stage_config().representations[0],
         TokensSpec(name="tok", text_preprocessing=TextPreprocessing.DICTIONARY),
+        SPEC,
     ],
 )
 def test_representation_requires_preprocessing(
-    spec: TfidfRepresentation | Word2VecRepresentation | TokensSpec,
+    spec: TfidfRepresentation | Word2VecRepresentation | TokensSpec | EncoderSpec,
 ) -> None:
-    """Učená reprezentace vyžaduje explicitní vědeckou volbu vstupu."""
+    """Každá reprezentace vyžaduje explicitní vědeckou volbu vstupu."""
     data = spec.model_dump(mode="json")
     del data["text_preprocessing"]
     with pytest.raises(ValidationError, match=r"text_preprocessing\s+Field required"):
         type(spec).model_validate_json(json.dumps(data))
 
 
-@pytest.mark.parametrize(
-    ("model", "data"),
-    [
-        (StageTuningConfig, stage_config().model_dump(mode="json") | {"input": {}}),
-        (type(SPEC), SPEC.model_dump(mode="json") | {"text_preprocessing": "none"}),
-    ],
-)
-def test_preprocessing_rejects_obsolete_fields(
-    model: type[BaseModel], data: dict[str, Any]
-) -> None:
-    """Stupeň ani encoder nepřijímají konfigurační pole předzpracování."""
+def test_preprocessing_rejects_obsolete_fields() -> None:
+    """Stupeň nepřijímá původní společné nastavení vstupu."""
+    data = stage_config().model_dump(mode="json") | {"input": {}}
     with pytest.raises(ValidationError, match="Extra inputs are not permitted"):
-        model.model_validate_json(json.dumps(data))
-
-
-def test_encoder_preprocessing_preserves_cache_spec() -> None:
-    """Původní text encoderu nemění serializaci klíče cache."""
-    assert SPEC.text_preprocessing is TextPreprocessing.NONE
-    assert "text_preprocessing" not in SPEC.model_dump()
+        StageTuningConfig.model_validate_json(json.dumps(data))

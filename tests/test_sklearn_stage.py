@@ -645,7 +645,7 @@ def test_word2vec_branch_scores(
 def test_stage_inputs_follow_representation(
     tmp_path: Path, trained_word2vec: list[sklearn_stage.Word2Vec]
 ) -> None:
-    """Encoder čte původní text a word2vec rozvinuté zkratky téhož foldu."""
+    """Větve encoderu i word2vec dostanou text podle úrovně reprezentace."""
     config = load_stage_config(REPOSITORY / "config/stage_embeddings.json")
     fold = _clinical_fold()
     fold = replace(
@@ -673,6 +673,18 @@ def test_stage_inputs_follow_representation(
     assert embeddings.embed.call_args_list == [
         call(config.encoders[0], [n.text for n in (*fold.train, *fold.test)])
     ]
+    dictionary_encoder = next(
+        b for b in config.branches if b.name == "mmbert-base-mean-dictionary/logreg"
+    )
+    scorer.score(dictionary_encoder.default_params(), fold)
+    assert embeddings.embed.call_args_list[1].args[0] == config.encoders[1]
+    normalized_texts = embeddings.embed.call_args_list[1].args[1]
+    assert len(normalized_texts) == len(fold.train) + len(fold.test)
+    for text in normalized_texts:
+        assert "chronic obstructive pulmonary disease" in text
+        assert "diabetes" in text
+        assert all(acronym not in text for acronym in ("COPD", "copd", "DM2", "dm2"))
+        assert text == text.lower()
     word2vec = next(b for b in config.branches if b.name == "word2vec/logreg")
     scorer.score(
         word2vec.default_params()

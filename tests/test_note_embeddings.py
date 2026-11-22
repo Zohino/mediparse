@@ -11,6 +11,7 @@ import numpy as np
 import pytest
 
 from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.model_input import TextPreprocessing
 from mediparse.infrastructure import note_embeddings
 from mediparse.infrastructure.note_embeddings import SCHEMA, NoteEmbeddings, cache_key
 from mediparse.infrastructure.parquet_file import write_table
@@ -150,3 +151,11 @@ def test_cache_rejects_gap_in_parts(tmp_path: Path) -> None:
     )
     with pytest.raises(InvalidInputError, match="netvoří souvislou řadu"):
         NoteEmbeddings(tmp_path, VERSIONS, Mock()).embed(SPEC, ["a"])
+
+
+def test_cache_key_ignores_preprocessing_level() -> None:
+    """Úroveň vstupu nemění cache adresovanou otiskem přesného textu."""
+    dictionary = SPEC.model_copy(
+        update={"text_preprocessing": TextPreprocessing.DICTIONARY}
+    )
+    assert cache_key(dictionary, VERSIONS) == cache_key(SPEC, VERSIONS)

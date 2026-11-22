@@ -298,6 +298,7 @@ def test_repository_stage_configs(stage: str) -> None:
             },
             "embeddings": {
                 "mmbert-base-mean": TextPreprocessing.NONE,
+                "mmbert-base-mean-dictionary": TextPreprocessing.DICTIONARY,
                 "word2vec": TextPreprocessing.DICTIONARY,
             },
             "networks": {"word-tokens": TextPreprocessing.DICTIONARY},
@@ -317,16 +318,19 @@ def test_repository_stage_configs(stage: str) -> None:
         return
     assert config.lsa is None
     if stage == "embeddings":
-        assert budget == (36, 5, 3, 5)
+        assert budget == (54, 5, 3, 5)
         assert [b.name for b in config.branches] == [
             "mmbert-base-mean/logreg",
             "mmbert-base-mean/linear_svm",
             "mmbert-base-mean/lightgbm",
+            "mmbert-base-mean-dictionary/logreg",
+            "mmbert-base-mean-dictionary/linear_svm",
+            "mmbert-base-mean-dictionary/lightgbm",
             "word2vec/logreg",
             "word2vec/linear_svm",
             "word2vec/lightgbm",
         ]
-        word2vec = config.representations[1]
+        word2vec = config.representations[2]
         assert isinstance(word2vec, Word2VecRepresentation)
         assert word2vec.default == {
             "vector_size": 100,
