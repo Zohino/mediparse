@@ -606,13 +606,23 @@ def test_word2vec_features_are_standardized_word_means(
     )
 
 
-def test_word2vec_branch_scores(tmp_path: Path) -> None:
+def test_word2vec_branch_scores(
+    tmp_path: Path, trained_word2vec: list[sklearn_stage.Word2Vec]
+) -> None:
     """Větev word2vec vrátí pět skóre a sedm příznaků."""
     config = word2vec_stage_config()
     fold = _clinical_fold()
-    result = SklearnStageScorer(config, None, 7, tmp_path, Mock()).score(
+    normalization = TextNormalization(
+        acronyms={"COPD": "chronic obstructive pulmonary disease"}, variants={}
+    )
+    result = SklearnStageScorer(config, normalization, 7, tmp_path, Mock()).score(
         config.branches[0].default_params(), fold
     )
     assert len(result.scores) == 5
     assert all(len(scores) == len(fold.test) for scores in result.scores.values())
     assert result.n_features == 7
+    model = trained_word2vec[0]
+    assert "pulmonary" in model.wv.key_to_index
+    assert "copd" not in model.wv.key_to_index
+    assert model.workers == 1
+    assert model.seed == 7
