@@ -192,15 +192,15 @@ space_range_text <- function(param) {
 
 component_name <- function(component) component$name %||% component$family
 
-stage_component_space_table <- function(component, winner, active) {
+stage_component_space_table <- function(component, params, active) {
   name <- component_name(component)
   rows <- lapply(component$space$params, function(param) {
     value <- "–"
     if (name %in% active) {
-      value <- space_value_text(winner[[paste(name, param$name, sep = ".")]])
+      value <- space_value_text(params[[paste(name, param$name, sep = ".")]])
     }
     data.frame(složka = name, parametr = param$name, rozsah = space_range_text(param),
-      výchozí = space_value_text(component$default[[param$name]]), vítěz = value)
+      výchozí = space_value_text(component$default[[param$name]]), hodnota = value)
   })
   do.call(rbind, rows)
 }
@@ -208,11 +208,11 @@ stage_component_space_table <- function(component, winner, active) {
 stage_space_table <- function(config, winner, second) {
   components <- c(config$representations, config$families)
   table_for <- function(params) do.call(rbind, lapply(components,
-    stage_component_space_table, winner = params,
+    stage_component_space_table, params = params,
     active = strsplit(params$branch, "/", fixed = TRUE)[[1]]))
   table <- table_for(winner)
-  names(table)[names(table) == "vítěz"] <- "nejlepší"
-  table$druhá <- table_for(second)$vítěz
+  names(table)[names(table) == "hodnota"] <- "nejlepší"
+  table$druhá <- table_for(second)$hodnota
   table
 }
 
