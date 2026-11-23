@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import gzip
 import json
+import os
 from dataclasses import dataclass
 from multiprocessing import active_children
 from typing import TYPE_CHECKING, Final
@@ -362,3 +363,25 @@ def loky_executor() -> Iterator[None]:
     yield
     get_reusable_executor().shutdown(wait=True)
     assert active_children() == []
+
+
+@pytest.fixture
+def torch_runtime(monkeypatch: pytest.MonkeyPatch) -> Iterator[None]:
+    """Izoluje vlákna, determinismus a nastavení cuBLAS mezi testy sítě.
+
+    Yields:
+        Jednovláknové prostředí bez přednastaveného cuBLAS.
+    """
+    torch = pytest.importorskip("torch")
+    threads = torch.get_num_threads()
+    deterministic = torch.are_deterministic_algorithms_enabled()
+    warn_only = torch.is_deterministic_algorithms_warn_only_enabled()
+    monkeypatch.delenv("CUBLAS_WORKSPACE_CONFIG", raising=False)
+    torch.set_num_threads(1)
+    try:
+        yield
+    finally:
+        torch.set_num_threads(threads)
+        torch.use_deterministic_algorithms(mode=deterministic, warn_only=warn_only)
+        # Fit může proměnnou vytvořit, i když ji monkeypatch při vstupu nenašel.
+        os.environ.pop("CUBLAS_WORKSPACE_CONFIG", None)

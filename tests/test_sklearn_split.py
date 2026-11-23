@@ -10,10 +10,12 @@ from hypothesis import strategies as st
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.input_note import InputNote
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.language import Language
 from mediparse.domain.split import strata
 from mediparse.infrastructure.sklearn_split import (
     StratifiedGroupFolds,
+    holdout_mask,
     threshold_splits,
 )
 from tests.model_support import separable_notes
@@ -143,3 +145,42 @@ def test_threshold_splits_separate_patients_and_cover_every_index_once(
         tested.extend(test)
     assert len(splits) == folds
     assert sorted(tested) == list(range(len(subjects)))
+
+
+def test_holdout_mask_separates_patients() -> None:
+    """Dvě zprávy pacienta zůstávají spolu a odloží se třetina pacientů."""
+    patients = {note.subject_id: note for note in separable_notes(30)}
+    notes = [note for note in patients.values() for _ in range(2)]
+    stop = holdout_mask(notes, 3, 7)
+    held = {
+        note.subject_id for note, selected in zip(notes, stop, strict=True) if selected
+    }
+    fit = {
+        note.subject_id
+        for note, selected in zip(notes, stop, strict=True)
+        if not selected
+    }
+    assert stop.dtype == bool
+    assert held.isdisjoint(fit)
+    assert held | fit == {note.subject_id for note in notes}
+    assert len(held) == 10
+
+
+def test_holdout_mask_refuses_too_few_patients() -> None:
+    """Dva pacienti nemohou tvořit tři části."""
+    with pytest.raises(InvalidInputError, match="Pacientů je 2"):
+        holdout_mask(separable_notes(2), 3, 7)
+
+
+@given(seed=st.integers(0, 2**32 - 1))
+def test_holdout_mask_repeats_for_seed(seed: int) -> None:
+    """Stejný seed opakuje výběr pacientů odložené části."""
+    notes = separable_notes(30)
+    assert (holdout_mask(notes, 3, seed) == holdout_mask(notes, 3, seed)).all()
+
+
+def test_holdout_mask_changes_with_seed() -> None:
+    """Seed ovlivňuje výběr odložených pacientů."""
+    notes = separable_notes(30)
+    first = holdout_mask(notes, 3, 0)
+    assert any((first != holdout_mask(notes, 3, seed)).any() for seed in range(1, 10))

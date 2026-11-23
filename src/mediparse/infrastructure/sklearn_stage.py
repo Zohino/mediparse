@@ -4,12 +4,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from functools import partial
-from itertools import batched
 from typing import TYPE_CHECKING, Final, Literal, Protocol, assert_never, cast
 
 import numpy as np
-from gensim.models import Word2Vec
-from gensim.models.word2vec import MAX_WORDS_IN_BATCH
 from joblib import Parallel, delayed
 from sklearn.decomposition import TruncatedSVD
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
@@ -37,6 +34,8 @@ from mediparse.infrastructure.sklearn_families import (
     classifier_estimator,
     positive_scores,
 )
+from mediparse.infrastructure.sklearn_split import holdout_mask
+from mediparse.infrastructure.word2vec import trained_vectors
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterable, Mapping, Sequence
@@ -51,7 +50,7 @@ if TYPE_CHECKING:
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.seed import Seed
     from mediparse.domain.split import Holdout
-    from mediparse.domain.stage_tuning import Branch, StageTuningConfig
+    from mediparse.domain.stage_tuning import Branch, StageNetwork, StageTuningConfig
     from mediparse.domain.tuning import ParamValue
     from mediparse.infrastructure.note_embeddings import NoteEmbeddings
 
@@ -111,6 +110,8 @@ class SklearnStageScorer:
         branch = self.config.branch(params)
         rep, family = branch.params_of(params)
         train, validation, n_features = self._features(branch, rep, fold)
+        if branch.family.family is ClassifierFamily.MULTIRESCNN:
+            return self._multilabel_scores(family, train, validation, fold, n_features)
         models = []
         for _ in Diagnosis:
             model = classifier_estimator(
@@ -133,6 +134,31 @@ class SklearnStageScorer:
         scores, converged = zip(*results, strict=True)
         return ValidationScores(
             dict(zip(Diagnosis, scores, strict=True)), all(converged), n_features
+        )
+
+    def _multilabel_scores(
+        self,
+        family: Mapping[str, ParamValue],
+        train: ndarray | csr_matrix,
+        validation: ndarray | csr_matrix,
+        fold: Holdout,
+        n_features: int,
+    ) -> ValidationScores:
+        # Validátor zaručuje síť právě s rodinou multirescnn.
+        network = cast("StageNetwork", self.config.network)
+        stop = holdout_mask(fold.train, network.stopping_parts, self.seed)
+        labels = np.array([
+            [note.has_label(d) for d in Diagnosis] for note in fold.train
+        ])
+        model = classifier_estimator(
+            ClassifierFamily.MULTIRESCNN, self.seed, self.scratch
+        ).set_params(**family, **network.model_dump(exclude={"stopping_parts"}))
+        model.fit(train[~stop], labels[~stop], train[stop], labels[stop])
+        scores = model.decision_function(validation)
+        return ValidationScores(
+            {d: tuple(float(v) for v in scores[:, j]) for j, d in enumerate(Diagnosis)},
+            model.converged_,
+            n_features,
         )
 
     def _features(
@@ -423,30 +449,11 @@ def word2vec_features(
     """
     documents = [text.split() for text in train]
     require_tokens(documents)
-    vectors = _trained_vectors(options, documents)
+    vectors = trained_vectors(options, documents)
     return _standardized(
         _mean_vectors(vectors, documents),
         _mean_vectors(vectors, [text.split() for text in validation]),
     )
-
-
-def _trained_vectors(
-    options: Mapping[str, ParamValue], documents: Sequence[list[str]]
-) -> KeyedVectors:
-    # Gensim slova za 10 000. pozicí věty tiše zahodí; kusy zachovají všechny tokeny.
-    sentences = [
-        list(chunk)
-        for tokens in documents
-        for chunk in batched(tokens, MAX_WORDS_IN_BATCH, strict=False)
-    ]
-    model = Word2Vec(**options)
-    model.build_vocab(sentences)
-    # Gensim prázdný slovník neodmítne, train by pak skončil nesrozumitelným RuntimeError.
-    if not model.wv.index_to_key:
-        msg = "Žádné slovo nedosáhlo min_count, slovník word2vec by byl prázdný."
-        raise InvalidInputError(msg)
-    model.train(sentences, total_examples=model.corpus_count, epochs=model.epochs)
-    return model.wv
 
 
 def _mean_vectors(vectors: KeyedVectors, documents: Sequence[list[str]]) -> ndarray:

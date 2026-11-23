@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.hf_tokenizers import load_tokenizer, special_tokens
+from mediparse.infrastructure.torch_device import require_device
 
 if TYPE_CHECKING:
     from collections.abc import Generator, Sequence
@@ -101,16 +102,14 @@ def load_encoder(spec: EncoderSpec) -> HfMeanEncoder:
         Encoder v eval režimu na explicitním zařízení.
 
     Raises:
-        InvalidInputError: Chybí CUDA, model nelze načíst nebo má neplatné okno.
+        InvalidInputError: Chybí torch či CUDA, model nelze načíst nebo má neplatné okno.
     """
+    require_device(spec.device)
     # Odložené importy zachovají default bez torch a pořadí skops/transformers.
     import torch  # ruff: ignore[import-outside-top-level]
     from huggingface_hub import snapshot_download  # ruff: ignore[import-outside-top-level]
     from transformers import AutoModel  # ruff: ignore[import-outside-top-level]
 
-    if spec.device == "cuda" and not torch.cuda.is_available():
-        msg = "CUDA není dostupná; změň device v configu (změní se i klíč cache)."
-        raise InvalidInputError(msg)
     with _encoder_errors():
         directory = snapshot_download(
             spec.model,

@@ -21,11 +21,11 @@ from mediparse.application.patient_cv import patient_holdouts
 from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.representation import Word2VecRepresentation
+from mediparse.domain.representation import ClassifierFamily, Word2VecRepresentation
 from mediparse.domain.split import Holdout
 from mediparse.domain.stage_tuning import StageLsa
 from mediparse.entrypoints.stage_tuning import stage_normalizations
-from mediparse.infrastructure import sklearn_classifier, sklearn_stage
+from mediparse.infrastructure import sklearn_classifier, sklearn_stage, word2vec
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
 from mediparse.infrastructure.sklearn_classifier import (
@@ -45,7 +45,12 @@ from mediparse.infrastructure.sklearn_stage import (
 from mediparse.infrastructure.stage_config import load_stage_config
 from tests.hf_encoder_support import SPEC
 from tests.screening_support import notes
-from tests.stage_support import stage_config, token_stage_config, word2vec_stage_config
+from tests.stage_support import (
+    network_stage_config,
+    stage_config,
+    token_stage_config,
+    word2vec_stage_config,
+)
 from tests.support import REPOSITORY, REPOSITORY_DIAGNOSIS_CANDIDATES
 
 if TYPE_CHECKING:
@@ -56,7 +61,6 @@ if TYPE_CHECKING:
     from sklearn.base import BaseEstimator
     from sklearn.decomposition import TruncatedSVD
 
-    from mediparse.domain.representation import ClassifierFamily
     from mediparse.domain.stage_tuning import StageTuningConfig
     from mediparse.domain.tuning import ParamValue
 
@@ -539,16 +543,16 @@ def test_word2vec_splits_long_documents(
     word2vec_options: dict[str, ParamValue], monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Všech 25 000 tokenů dorazí k tréninku v kusech do 10 000."""
-    original = sklearn_stage.Word2Vec.train
+    original = word2vec.Word2Vec.train
     observed = []
 
     def train(
-        model: sklearn_stage.Word2Vec, sentences: list[list[str]], **kwargs: object
+        model: word2vec.Word2Vec, sentences: list[list[str]], **kwargs: object
     ) -> object:
         observed.extend(len(sentence) for sentence in sentences)
         return original(model, sentences, **kwargs)
 
-    monkeypatch.setattr(sklearn_stage.Word2Vec, "train", train)
+    monkeypatch.setattr(word2vec.Word2Vec, "train", train)
     word2vec_features(word2vec_options, ["alpha " * 25000], ["alpha"])
     assert max(observed) <= 10000
     assert sum(observed) == 25000
@@ -565,28 +569,28 @@ def test_word2vec_empty_vocabulary_is_invalid_input(
 
 
 @pytest.fixture
-def trained_word2vec(monkeypatch: pytest.MonkeyPatch) -> list[sklearn_stage.Word2Vec]:
+def trained_word2vec(monkeypatch: pytest.MonkeyPatch) -> list[word2vec.Word2Vec]:
     """Zachytí modely vytvořené featurizérem.
 
     Returns:
         Modely v pořadí volání konstruktoru.
     """
-    original = sklearn_stage.Word2Vec
+    original = word2vec.Word2Vec
     models = []
 
-    def model(**kwargs: ParamValue) -> sklearn_stage.Word2Vec:
+    def model(**kwargs: ParamValue) -> word2vec.Word2Vec:
         fitted = original(**kwargs)
         models.append(fitted)
         return fitted
 
-    monkeypatch.setattr(sklearn_stage, "Word2Vec", model)
+    monkeypatch.setattr(word2vec, "Word2Vec", model)
     return models
 
 
 def test_word2vec_params_reach_gensim(
     word2vec_options: dict[str, ParamValue],
     word2vec_train: list[str],
-    trained_word2vec: list[sklearn_stage.Word2Vec],
+    trained_word2vec: list[word2vec.Word2Vec],
 ) -> None:
     """Model dostane všechny hyperparametry i workers a seed beze změny."""
     word2vec_features(word2vec_options, word2vec_train, ["alpha"])
@@ -599,7 +603,7 @@ def test_word2vec_params_reach_gensim(
 def test_word2vec_features_are_standardized_word_means(
     word2vec_options: dict[str, ParamValue],
     word2vec_train: list[str],
-    trained_word2vec: list[sklearn_stage.Word2Vec],
+    trained_word2vec: list[word2vec.Word2Vec],
 ) -> None:
     """Příznaky odpovídají průměru surových slovních vektorů a populačnímu škálování."""
     train, _ = word2vec_features(word2vec_options, word2vec_train, ["alpha"])
@@ -614,7 +618,7 @@ def test_word2vec_features_are_standardized_word_means(
 
 
 def test_word2vec_branch_scores(
-    tmp_path: Path, trained_word2vec: list[sklearn_stage.Word2Vec]
+    tmp_path: Path, trained_word2vec: list[word2vec.Word2Vec]
 ) -> None:
     """Větev word2vec vrátí pět skóre a sedm příznaků."""
     config = word2vec_stage_config()
@@ -640,7 +644,7 @@ def test_word2vec_branch_scores(
 
 
 def test_stage_inputs_follow_representation(
-    tmp_path: Path, trained_word2vec: list[sklearn_stage.Word2Vec]
+    tmp_path: Path, trained_word2vec: list[word2vec.Word2Vec]
 ) -> None:
     """Větve encoderu i word2vec dostanou text podle úrovně reprezentace."""
     config = load_stage_config(REPOSITORY / "config/stage_embeddings.json")
@@ -1024,3 +1028,90 @@ def test_ngram_counts_rebuild_for_unseen_text(
         assert actual.scores[diagnosis] == pytest.approx(
             expected.scores[diagnosis], abs=1e-12
         )
+
+
+@pytest.mark.parametrize("converged", [True, False])
+def test_multirescnn_fits_once_with_patient_stopping_part(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, converged: bool
+) -> None:
+    """Jeden fit drží pacienty oddělené a sloupce ve výčtovém pořadí diagnóz."""
+    config = network_stage_config()
+    corpus = [
+        replace(
+            note,
+            labels=frozenset(
+                d for j, d in enumerate(Diagnosis) if note.subject_id >> j & 1
+            ),
+        )
+        for note in notes(visits=2)
+    ]
+    fold = Holdout(
+        0,
+        tuple(note for note in corpus if note.subject_id > 2),
+        tuple(note for note in corpus if note.subject_id <= 2),
+    )
+    model = Mock(converged_=converged)
+    model.set_params.return_value = model
+    model.decision_function.return_value = np.tile(np.arange(5), (len(fold.test), 1))
+    factory = Mock(return_value=model)
+    monkeypatch.setattr(sklearn_stage, "classifier_estimator", factory)
+    scorer = SklearnStageScorer(config, {"tok": None}, 7, tmp_path, Mock())
+    result = scorer.score(config.branches[0].default_params(), fold)
+    factory.assert_called_once_with(ClassifierFamily.MULTIRESCNN, 7, tmp_path)
+    assert config.network is not None
+    model.set_params.assert_called_once_with(
+        **config.families[0].default,
+        **config.network.model_dump(exclude={"stopping_parts"}),
+    )
+    model.fit.assert_called_once()
+    train, train_labels, stop, stop_labels = model.fit.call_args.args
+    prepared = joined_tokens(None)
+    fit_notes = [note for note in fold.train if prepared(note.text) in train]
+    stop_notes = [note for note in fold.train if prepared(note.text) in stop]
+    assert {note.subject_id for note in fit_notes}.isdisjoint(
+        note.subject_id for note in stop_notes
+    )
+    assert len({note.subject_id for note in stop_notes}) < len({
+        note.subject_id for note in fit_notes
+    })
+    assert set(fit_notes) | set(stop_notes) == set(fold.train)
+    assert set(fit_notes + stop_notes).isdisjoint(fold.test)
+    np.testing.assert_array_equal(
+        train_labels,
+        [[bool(note.subject_id >> j & 1) for j in range(5)] for note in fit_notes],
+    )
+    np.testing.assert_array_equal(
+        stop_labels,
+        [[bool(note.subject_id >> j & 1) for j in range(5)] for note in stop_notes],
+    )
+    assert list(model.decision_function.call_args.args[0]) == [
+        prepared(note.text) for note in fold.test
+    ]
+    assert result.scores == {
+        d: (float(j),) * len(fold.test) for j, d in enumerate(Diagnosis)
+    }
+    assert result.converged is converged
+    assert result.n_features == len({
+        token for note in fold.train for token in prepared(note.text).split()
+    })
+    scorer.score(config.branches[0].default_params(), fold)
+    assert model.fit.call_count == 2
+    for first, second in zip(
+        model.fit.call_args_list[0].args, model.fit.call_args_list[1].args, strict=True
+    ):
+        np.testing.assert_array_equal(first, second)
+
+
+@pytest.mark.usefixtures("torch_runtime")
+def test_multirescnn_branch_scores_tiny_network(tmp_path: Path) -> None:
+    """Skutečná malá síť vrátí konečná skóre všech diagnóz foldu."""
+    config = network_stage_config()
+    fold = patient_holdouts(notes(visits=2), 2, 7, StratifiedGroupFolds())[0]
+    result = SklearnStageScorer(config, {"tok": None}, 7, tmp_path, Mock()).score(
+        config.branches[0].default_params(), fold
+    )
+    assert set(result.scores) == set(Diagnosis)
+    assert all(
+        len(scores) == len(fold.test) and np.isfinite(scores).all()
+        for scores in result.scores.values()
+    )

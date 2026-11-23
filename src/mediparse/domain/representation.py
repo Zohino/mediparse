@@ -18,6 +18,8 @@ from mediparse.domain.tuning import (
     SearchSpace,
 )
 
+Device = Literal["cpu", "cuda"]
+
 RepresentationName = Annotated[str, Field(min_length=1, pattern=r"^[^./]+$")]
 
 
@@ -31,6 +33,7 @@ class ClassifierFamily(StrEnum):
     LIGHTGBM_LSA = "lightgbm_lsa"
     LIGHTGBM = "lightgbm"
     FASTTEXT = "fasttext"
+    MULTIRESCNN = "multirescnn"
 
 
 class EncoderSpec(BaseModel):
@@ -43,7 +46,7 @@ class EncoderSpec(BaseModel):
     model: Annotated[str, Field(min_length=1)]
     revision: CommitSha
     window: PositiveInt
-    device: Literal["cpu", "cuda"]
+    device: Device
     dtype: Literal["float32", "bfloat16"]
 
 
@@ -174,7 +177,7 @@ def accepts(spec: Representation, family: ClassifierFamily) -> bool:
                 ClassifierFamily.LIGHTGBM,
             }
         case TokensSpec():
-            return family is ClassifierFamily.FASTTEXT
+            return family in {ClassifierFamily.FASTTEXT, ClassifierFamily.MULTIRESCNN}
         case TfidfRepresentation():
             return family in {
                 ClassifierFamily.COMPLEMENT_NB,

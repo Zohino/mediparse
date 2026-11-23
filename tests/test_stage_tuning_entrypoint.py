@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sys
 from collections import Counter, defaultdict
 from contextlib import nullcontext
 from dataclasses import replace
@@ -20,7 +21,7 @@ from mediparse.domain.environment import GpuDevice
 from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.representation import ClassifierFamily, Word2VecRepresentation
 from mediparse.domain.run_manifest import StageTuningManifest
-from mediparse.domain.stage_tuning import StageLsa
+from mediparse.domain.stage_tuning import StageLsa, StageNetwork, StageTuningConfig
 from mediparse.entrypoints import stage_tuning
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure import sklearn_stage
@@ -31,7 +32,7 @@ from mediparse.infrastructure.split_table import ParquetSplitTable
 from mediparse.infrastructure.stage_config import load_stage_config
 from tests.hf_encoder_support import SPEC, encoder_parts
 from tests.screening_support import SHARED, notes
-from tests.stage_support import StepClock, stage_config
+from tests.stage_support import StepClock, network_stage_config, stage_config
 from tests.support import REPOSITORY, fixed_revision, mark_synthetic, repository_corpus
 
 if TYPE_CHECKING:
@@ -404,13 +405,50 @@ def test_repository_stage_configs(stage: str) -> None:
         assert config.families[0].default == {"C": 1.0, "class_weight": None}
     else:
         assert budget == (20, 5, 3, 5)
-        assert [b.name for b in config.branches] == ["word-tokens/fasttext"]
+        assert [b.name for b in config.branches] == [
+            "word-tokens/fasttext",
+            "word-tokens/multirescnn",
+        ]
         assert config.families[0].default == {
             "lr": 0.1,
             "epoch": 5,
             "word_ngrams": 1,
             "dim": 100,
         }
+        assert config.families[0].space.model_dump(mode="json")["params"] == [
+            {"kind": "float", "name": "lr", "low": 0.01, "high": 5.0, "log": True},
+            {"kind": "int", "name": "epoch", "low": 5, "high": 100, "log": True},
+            {"kind": "int", "name": "word_ngrams", "low": 1, "high": 2, "log": False},
+            {"kind": "int", "name": "dim", "low": 10, "high": 100, "log": True},
+        ]
+        assert config.families[1].default == {
+            "lr": 0.0005,
+            "weight_decay": 0.0001,
+            "dropout": 0.2,
+            "filter_maps": 50,
+        }
+        assert config.families[1].space.model_dump(mode="json")["params"] == [
+            {"kind": "float", "name": "lr", "low": 1e-4, "high": 5e-3, "log": True},
+            {
+                "kind": "float",
+                "name": "weight_decay",
+                "low": 1e-6,
+                "high": 1e-2,
+                "log": True,
+            },
+            {"kind": "float", "name": "dropout", "low": 0.0, "high": 0.5, "log": False},
+            {"kind": "int", "name": "filter_maps", "low": 25, "high": 100, "log": True},
+        ]
+        assert config.network == StageNetwork(
+            device="cuda",
+            epochs=20,
+            batch_size=16,
+            max_words=4000,
+            warmup_steps=2000,
+            embedding_dim=100,
+            min_count=3,
+            stopping_parts=10,
+        )
 
 
 def test_manifest_records_monitored_gpu(
@@ -476,3 +514,56 @@ def test_stage_records_and_passes_normalization_per_representation(
         "r2": TextPreprocessing.NONE,
     }
     assert written.text_normalization == {"r1": dictionary, "r2": None}
+
+
+@pytest.mark.parametrize("kind", ["encoder", "network"])
+def test_unavailable_cuda_is_refused_before_first_trial(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, kind: str
+) -> None:
+    """Nedostupné zařízení se odmítne před zjišťováním verzí a prvním pokusem."""
+    torch = pytest.importorskip("torch")
+    monkeypatch.setattr(torch.cuda, "is_available", lambda: False)
+    paths = _paths(tmp_path)
+    if kind == "network":
+        data = network_stage_config().model_dump(mode="json")
+        data["network"]["device"] = "cuda"
+        config = StageTuningConfig.model_validate_json(json.dumps(data))
+    else:
+        config = stage_config(
+            representations=[
+                SPEC.model_copy(update={"device": "cuda"}).model_dump(mode="json")
+            ],
+            families=stage_config().model_dump(mode="json")["families"][:1],
+        )
+    paths.config.write_text(config.model_dump_json(), encoding="utf-8")
+    scorer = Mock()
+    versions = Mock()
+    monkeypatch.setattr(stage_tuning, "SklearnStageScorer", scorer)
+    monkeypatch.setattr(stage_tuning, "installed_versions", versions)
+    assert _run(paths) is ExitCode.REFUSED
+    scorer.assert_not_called()
+    versions.assert_not_called()
+
+
+def test_missing_torch_is_refused(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Chybějící torch dostane srozumitelný pokyn k prostředí gpu."""
+    paths = _paths(tmp_path)
+    paths.config.write_text(network_stage_config().model_dump_json(), encoding="utf-8")
+    monkeypatch.setitem(sys.modules, "torch", None)
+    scorer = Mock()
+    monkeypatch.setattr(stage_tuning, "SklearnStageScorer", scorer)
+    assert _run(paths) is ExitCode.REFUSED
+    assert "-e gpu" in caplog.text
+    scorer.assert_not_called()
+
+
+@pytest.mark.usefixtures("torch_runtime")
+def test_manifest_records_torch_for_network_stage(tmp_path: Path) -> None:
+    """CPU síť zapíše torch i transformers mezi verze manifestu."""
+    paths = _paths(tmp_path)
+    paths.config.write_text(network_stage_config().model_dump_json(), encoding="utf-8")
+    assert _run(paths) is ExitCode.OK
+    manifest = StageTuningManifest.model_validate_json(paths.manifest.read_bytes())
+    assert {"torch", "transformers"} <= manifest.environment.packages.keys()

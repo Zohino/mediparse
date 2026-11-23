@@ -8,12 +8,15 @@ from typing import TYPE_CHECKING
 import numpy as np
 from sklearn.model_selection import StratifiedGroupKFold
 
+from mediparse.domain.split import ensure_enough_patients, strata
+
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from numpy import ndarray
 
     from mediparse.domain.identity import SubjectId
+    from mediparse.domain.input_note import InputNote
     from mediparse.domain.seed import Seed
 
 
@@ -70,3 +73,20 @@ def threshold_splits(
         )
         for part in partitions
     ]
+
+
+def holdout_mask(notes: Sequence[InputNote], parts: int, seed: Seed) -> ndarray:
+    """Vybere stratifikovanou odloženou část celých pacientů.
+
+    Returns:
+        Boolovská maska zpráv první části rozdělení.
+
+    Raises:
+        InvalidInputError: Pacientů je méně než částí dělení.
+    """
+    subjects = [note.subject_id for note in notes]
+    ensure_enough_patients(subjects, parts)
+    held = StratifiedGroupFolds.partition(subjects, strata(notes, parts), parts, seed)[
+        0
+    ]
+    return np.array([subject in held for subject in subjects], dtype=bool)

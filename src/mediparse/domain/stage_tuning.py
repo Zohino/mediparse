@@ -9,6 +9,7 @@ from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
 from mediparse.domain.representation import (
     ClassifierFamily,
+    Device,
     EncoderSpec,
     Representation,
     TfidfRepresentation,
@@ -142,6 +143,21 @@ class StageLsa(BaseModel):
         return self
 
 
+class StageNetwork(BaseModel):
+    """Technické podmínky tréninku sítě zahrnuté do hashe configu."""
+
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+
+    device: Device
+    epochs: PositiveInt
+    batch_size: PositiveInt
+    max_words: PositiveInt
+    warmup_steps: Annotated[int, Field(ge=0)]
+    embedding_dim: PositiveInt
+    min_count: PositiveInt
+    stopping_parts: Annotated[int, Field(ge=2)]
+
+
 class StageTuningConfig(BaseModel):
     """Rozpočet jednoho CASH ladění na vývojové části."""
 
@@ -153,6 +169,7 @@ class StageTuningConfig(BaseModel):
     trials: PositiveInt
     random_startup_trials: Annotated[int, Field(ge=0)]
     lsa: StageLsa | None = None
+    network: StageNetwork | None = None
     strip_diagnostic_sections: bool
     representations: Annotated[tuple[Representation, ...], Field(min_length=1)]
     families: Annotated[tuple[FamilySpace, ...], Field(min_length=1)]
@@ -193,6 +210,15 @@ class StageTuningConfig(BaseModel):
     def startup_trials(self) -> int:
         """Počet výchozích a náhodných pokusů před TPE."""
         return len(self.branches) + self.random_startup_trials
+
+    @model_validator(mode="after")
+    def _valid_network(self) -> Self:
+        if (self.network is not None) != any(
+            f.family is ClassifierFamily.MULTIRESCNN for f in self.families
+        ):
+            msg = "Síť musí být zadaná právě s rodinou multirescnn."
+            raise ValueError(msg)
+        return self
 
     @model_validator(mode="after")
     def _valid_stage(self) -> Self:

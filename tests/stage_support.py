@@ -160,3 +160,37 @@ def word2vec_stage_config() -> StageTuningConfig:
         ],
         families=stage_config().model_dump(mode="json")["families"][:1],
     )
+
+
+def network_stage_config() -> StageTuningConfig:
+    """Sestaví levnou CPU síť s pěti výstupy.
+
+    Returns:
+        Tokenová větev s odloženou třetinou pacientů.
+    """
+    default = {"lr": 0.01, "weight_decay": 0.0001, "dropout": 0.0, "filter_maps": 4}
+    return stage_config(
+        representations=[{"name": "tok", "text_preprocessing": "dictionary"}],
+        families=[
+            {
+                "family": "multirescnn",
+                "space": {
+                    "params": [
+                        {"kind": "categorical", "name": name, "choices": [value]}
+                        for name, value in default.items()
+                    ]
+                },
+                "default": default,
+            }
+        ],
+        network={
+            "device": "cpu",
+            "epochs": 2,
+            "batch_size": 4,
+            "max_words": 50,
+            "warmup_steps": 0,
+            "embedding_dim": 8,
+            "min_count": 1,
+            "stopping_parts": 3,
+        },
+    )
