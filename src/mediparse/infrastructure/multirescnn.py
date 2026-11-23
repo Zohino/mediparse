@@ -122,7 +122,7 @@ class MultiResCnnClassifier(BaseEstimator):
         Raises:
             InvalidInputError: Prázdný slovník nebo nedostatek paměti zařízení.
         """
-        # Sonda 6: determinismus float32 dává bitovou shodu bez podstatné ceny.
+        # Sonda 6: determinismus float32 dává bitově stejné výsledky bez podstatné ceny.
         os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
         torch.use_deterministic_algorithms(mode=True)
         torch.manual_seed(self.random_state)
