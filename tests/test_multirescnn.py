@@ -14,6 +14,7 @@ pytest.importorskip("torch")
 
 import torch
 
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure import multirescnn
 from mediparse.infrastructure.multirescnn import MultiResCnnClassifier
 from mediparse.infrastructure.word2vec import trained_vectors
@@ -313,3 +314,17 @@ def test_embeddings_start_from_word2vec(corpus: tuple[list[str], np.ndarray]) ->
     for word in vectors.index_to_key:
         np.testing.assert_array_equal(weights[model.vocabulary_[word]], vectors[word])
     np.testing.assert_array_equal(weights[:2], np.zeros((2, 8), dtype=np.float32))
+
+
+def test_out_of_memory_becomes_domain_error(
+    corpus: tuple[list[str], np.ndarray],
+) -> None:
+    """Nedostatek paměti má doménovou chybu s provozním vysvětlením."""
+    documents, labels = corpus
+    with (
+        patch("torch.optim.AdamW", side_effect=torch.OutOfMemoryError("syntetická")),
+        pytest.raises(InvalidInputError, match="nemá dostatek paměti zařízení"),
+    ):
+        small_model(epochs=1).fit(
+            documents[:60], labels[:60], documents[60:80], labels[60:80]
+        )
