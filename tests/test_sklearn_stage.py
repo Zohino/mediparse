@@ -29,7 +29,6 @@ from mediparse.infrastructure import sklearn_classifier, sklearn_stage
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
 from mediparse.infrastructure.sklearn_classifier import (
-    EMPTY_VOCABULARY,
     TfidfParameters,
     tfidf_vectorizer,
 )
@@ -908,32 +907,33 @@ def test_tfidf_features_match_vectorizer(
         )
 
 
-@pytest.mark.parametrize("case", ["min_df", "pruning", "empty"])
-def test_tfidf_features_errors_match_vectorizer(case: str) -> None:
-    """Chyby mezí a prořezání zachovají hlášku sklearn, prázdný trénink sdílenou."""
+@pytest.mark.parametrize(
+    ("min_df", "max_df", "n_train"),
+    [(102, 1.0, 101), (2, 0.02, 101), (2, 0.02, 100)],
+)
+def test_tfidf_features_errors_match_vectorizer(
+    min_df: int, max_df: float, n_train: int
+) -> None:
+    """Chyby mezí i prořezání na rovnosti mezí přesně odpovídají sklearn."""
     fold = _clinical_fold()
-    train = [note.text for note in fold.train] if case != "empty" else ["!", "?"]
+    train = [note.text for note in fold.train][:n_train]
     validation = [note.text for note in fold.test]
-    # Ve 101 trénovacích zprávách mají termy DF 10, 50, 51 nebo 101; interval [2, 2.02] je prázdný.
+    # Nejmenší DF je 10; intervaly [2, 2.02] i [2, 2] jsou prázdné.
     params = TfidfParameters(
         ngram_max=1,
-        min_df=len(train) + 1 if case == "min_df" else 2,
-        max_df=0.02 if case == "pruning" else 1.0,
+        min_df=min_df,
+        max_df=max_df,
         sublinear_tf=True,
     )
     counts = ngram_counts("word", (1, 1), [*train, *validation])
-    if case == "empty":
-        with pytest.raises(InvalidInputError, match=re.escape(EMPTY_VOCABULARY)):
-            tfidf_features(counts, train, validation, params, None)
-        return
     vectorizer = TfidfVectorizer(
         lowercase=False,
-        min_df=params.min_df,
-        max_df=params.max_df,
+        min_df=min_df,
+        max_df=max_df,
     )
     with pytest.raises(ValueError, match=r"max_df|After pruning") as error:
         vectorizer.fit_transform(train)
-    with pytest.raises(ValueError, match=re.escape(str(error.value))):
+    with pytest.raises(ValueError, match=f"^{re.escape(str(error.value))}$"):
         tfidf_features(counts, train, validation, params, None)
 
 
