@@ -18,6 +18,8 @@ from mediparse.domain.tuning import (
     SearchSpace,
 )
 
+Device = Literal["cpu", "cuda"]
+
 RepresentationName = Annotated[str, Field(min_length=1, pattern=r"^[^./]+$")]
 
 
@@ -43,7 +45,7 @@ class EncoderSpec(BaseModel):
     model: Annotated[str, Field(min_length=1)]
     revision: CommitSha
     window: PositiveInt
-    device: Literal["cpu", "cuda"]
+    device: Device
     dtype: Literal["float32", "bfloat16"]
 
 
