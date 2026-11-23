@@ -170,6 +170,9 @@ def test_empty_document_has_finite_scores(trained: MultiResCnnClassifier) -> Non
     assert scores.shape == (1, 5)
     assert scores.dtype == np.float64
     assert np.isfinite(scores).all()
+    np.testing.assert_array_equal(
+        scores, trained.decision_function(["slovomimoslovnik"])
+    )
 
 
 def test_divergence_has_finite_scores(corpus: tuple[list[str], np.ndarray]) -> None:
