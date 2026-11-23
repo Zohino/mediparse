@@ -255,6 +255,14 @@ class NgramCounts:
     whole_words: ndarray
     ngram_range: tuple[int, int]
 
+    def of(self, texts: Sequence[str]) -> csr_matrix:
+        """Vybere řádky matice v pořadí předaných textů.
+
+        Returns:
+            Četnosti zpráv včetně opakovaných textů ve vstupním pořadí.
+        """
+        return self.matrix[[self.rows[text] for text in texts]]
+
 
 def ngram_counts(
     analyzer: Literal["word", "char_wb"],
@@ -308,7 +316,7 @@ def tfidf_features(
         (counts.lengths >= params.ngram_min) | counts.whole_words
     )
     columns = np.flatnonzero(in_range)
-    train_counts = counts.matrix[[counts.rows[text] for text in train]][:, columns]
+    train_counts = counts.of(train)[:, columns]
     if train_counts.nnz == 0:
         raise InvalidInputError(EMPTY_VOCABULARY)
     max_doc_count = params.max_df * len(train)
@@ -327,9 +335,7 @@ def tfidf_features(
         msg = "After pruning, no terms remain. Try a lower min_df or a higher max_df."
         raise ValueError(msg)
     train_counts = train_counts[:, mask].astype(np.float64)
-    validation_counts = counts.matrix[[counts.rows[text] for text in validation]][
-        :, columns[mask]
-    ].astype(np.float64)
+    validation_counts = counts.of(validation)[:, columns[mask]].astype(np.float64)
     transformer = TfidfTransformer(sublinear_tf=params.sublinear_tf)
     return transformer.fit_transform(train_counts), transformer.transform(
         validation_counts
