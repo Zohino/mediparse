@@ -1,0 +1,48 @@
+---
+title: "Ladění stupně předtrénovaných embeddingů"
+abstract: |
+  Sešit vyhodnocuje společné ladění reprezentace, rodiny a hyperparametrů na vývojové části pacientů podle D40 a D41. Nejlepší a druhá rodina jsou kandidáty pro S39j4; korelace chyb rozhoduje o tasku ensemblu. Held-out test se nepoužívá.
+---
+
+```{r}
+#| include: false
+stage <- "embeddings"
+```
+
+{{< include _partials/stage-setup.qmd >}}
+
+# Úvod
+
+Sešit vybírá dvě kandidátní rodiny předkola pro S39j4 podle D40 a D41. Společně ladí reprezentaci, rodinu a hyperparametry (CASH) [@Thornton2013] na podvzorku vývojových pacientů. Held-out test do výběru nevstupuje.
+
+# Data a metody
+
+## Kandidáti
+
+word2vec se učí vektory slov z jejich kontextu [@Mikolov2013; @Mikolov2013b]. mmBERT je zmražený multilingvní encoder [@Marone2025]; reprezentaci zprávy tvoří průměr tokenů přes masku pozornosti [@Reimers2019]. Logistická regrese, lineární SVM a LightGBM [@Ke2017] klasifikují standardizované embeddingy.
+
+## Protokol
+
+Embedding mmBERT se počítá jednou na zprávu bez labelů. Tři reprezentace se liší oknem (8192 nebo 512 tokenů) a vstupem (bez předzpracování nebo se slovníkem). Zpráva se dělí na okna beze ztrát a embedding je průměr přes všechny pozice všech oken. word2vec se učí jen na tréninku foldu; zpráva je průměrem vektorů slov. Příznaky se standardizují podle tréninku foldu.
+
+{{< include _partials/stage-methods.qmd >}}
+
+# Výsledky
+
+{{< include _partials/stage-results.qmd >}}
+
+# Shrnutí a rozhodnutí
+
+`r stage_selection_text(selection)`
+
+`r stage_ensemble_text(phi, selection)`
+
+# Omezení a ohrožení validity
+
+{{< include _partials/stage-limits.qmd >}}
+
+Okno 512 dělí zprávu na víc oken, jejichž tokeny nevidí kontext sousedních oken; okno 8192 pokryje jedním oknem většinu zpráv.
+
+Surové průměry zmraženého encoderu předtrénovaného maskovaným modelováním jazyka jsou anizotropní [@Ethayarajh2019]; standardizace podle tréninku foldu to odstraní. Případný slabší výsledek mmBERT odpovídá slabině průměrovaných tokenů bez doladění [@Reimers2019] a neříká nic o dotrénovaném mmBERT, který hodnotí stupeň 4.
+
+{{< include _partials/appendix.qmd >}}
