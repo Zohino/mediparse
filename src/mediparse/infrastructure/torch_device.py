@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.inputs import InvalidInputError
 
 if TYPE_CHECKING:
     from mediparse.domain.representation import Device
+
+
+NETWORK_PACKAGES: Final = ("torch", "transformers")
 
 
 def require_device(device: Device) -> None:

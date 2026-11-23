@@ -56,7 +56,7 @@ from mediparse.infrastructure.sklearn_stage import SklearnStageScorer
 from mediparse.infrastructure.source_revision import revision_source
 from mediparse.infrastructure.stage_config import load_stage_config
 from mediparse.infrastructure.stage_trials_table import ParquetStageCheckpoint
-from mediparse.infrastructure.torch_device import require_device
+from mediparse.infrastructure.torch_device import NETWORK_PACKAGES, require_device
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Mapping
@@ -191,7 +191,7 @@ def run(  # ruff: ignore[too-many-arguments]
     versions = installed_versions(ENCODER_PACKAGES) if config.encoders else {}
     packages = installed_versions(PACKAGES) | versions
     if config.network is not None:
-        packages |= installed_versions(("torch", "transformers"))
+        packages |= installed_versions(NETWORK_PACKAGES)
     source = revision()
     corpus = model_corpus(
         paths.corpus, strip_diagnostic_sections=config.strip_diagnostic_sections
