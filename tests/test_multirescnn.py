@@ -187,14 +187,25 @@ def test_scheduler_and_deterministic_mode(corpus: tuple[list[str], np.ndarray]) 
     """Deset zpráv v dávce čtyř po dvě epochy dává šest kroků rozvrhu."""
     from transformers import get_linear_schedule_with_warmup  # ruff: ignore[import-outside-top-level]
 
+    schedules = []
+
+    def record_schedule(
+        optimizer: torch.optim.Optimizer, warmup: int, steps: int
+    ) -> torch.optim.lr_scheduler.LambdaLR:
+        schedule = get_linear_schedule_with_warmup(optimizer, warmup, steps)
+        schedules.append(schedule)
+        return schedule
+
     documents, labels = corpus
     with patch(
         "transformers.get_linear_schedule_with_warmup",
-        wraps=get_linear_schedule_with_warmup,
+        side_effect=record_schedule,
     ) as schedule:
         small_model(epochs=2, batch_size=4, warmup_steps=2).fit(
             documents[:10], labels[:10], documents[60:80], labels[60:80]
         )
     assert schedule.call_args.args[1:] == (2, 6)
+    assert schedules[0].last_epoch == 6
+    assert schedules[0].optimizer.param_groups[0]["lr"] == pytest.approx(0.0, abs=0.0)
     assert torch.are_deterministic_algorithms_enabled()
     assert os.environ["CUBLAS_WORKSPACE_CONFIG"]
