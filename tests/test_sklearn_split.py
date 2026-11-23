@@ -170,3 +170,17 @@ def test_holdout_mask_refuses_too_few_patients() -> None:
     """Dva pacienti nemohou tvořit tři části."""
     with pytest.raises(InvalidInputError, match="Pacientů je 2"):
         holdout_mask(separable_notes(2), 3, 7)
+
+
+@given(seed=st.integers(0, 2**32 - 1))
+def test_holdout_mask_repeats_for_seed(seed: int) -> None:
+    """Stejný seed opakuje výběr pacientů odložené části."""
+    notes = separable_notes(30)
+    assert (holdout_mask(notes, 3, seed) == holdout_mask(notes, 3, seed)).all()
+
+
+def test_holdout_mask_changes_with_seed() -> None:
+    """Seed ovlivňuje výběr odložených pacientů."""
+    notes = separable_notes(30)
+    first = holdout_mask(notes, 3, 0)
+    assert any((first != holdout_mask(notes, 3, seed)).any() for seed in range(1, 10))
