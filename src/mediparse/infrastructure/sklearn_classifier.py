@@ -37,6 +37,11 @@ if TYPE_CHECKING:
     from mediparse.domain.tuning import ParamValue
 
 
+EMPTY_VOCABULARY: Final = (
+    "Trénovací texty neobsahují žádný token, slovník by byl prázdný."
+)
+
+
 class TfidfParameters(BaseModel):
     """Typové meze reprezentace TF-IDF na hranici sklearn."""
 
@@ -239,8 +244,7 @@ def require_tokens(documents: Iterable[Sequence[str]]) -> None:
         InvalidInputError: Trénovací slovník by byl prázdný.
     """
     if not any(documents):
-        msg = "Trénovací texty neobsahují žádný token, slovník by byl prázdný."
-        raise InvalidInputError(msg)
+        raise InvalidInputError(EMPTY_VOCABULARY)
 
 
 # Seznam platí při načtení, ne při uložení: skops model uloží vždy a při načtení
