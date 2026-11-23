@@ -190,8 +190,10 @@ space_range_text <- function(param) {
   range
 }
 
+component_name <- function(component) component$name %||% component$family
+
 stage_component_space_table <- function(component, winner, active) {
-  name <- component$name %||% component$family
+  name <- component_name(component)
   rows <- lapply(component$space$params, function(param) {
     value <- "–"
     if (name %in% active) {
@@ -217,29 +219,33 @@ stage_space_table <- function(config, winner, second) {
 # D41 b. 10 vyžaduje posouzení hran; pásmo zachytí i spojité návrhy TPE poblíž meze.
 STAGE_BOUNDARY_SHARE <- 0.05
 
+stage_component_boundary <- function(component, params, family) {
+  name <- component_name(component)
+  is_evaluated <- function(param) param$kind %in% c("int", "float") &&
+    !(param$kind == "int" && param$high - param$low == 1)
+  rows <- lapply(Filter(is_evaluated, component$space$params), function(param) {
+    value <- params[[paste(name, param$name, sep = ".")]]
+    scale <- if (isTRUE(param$log)) log else identity
+    position <- (scale(value) - scale(param$low)) / (scale(param$high) - scale(param$low))
+    if (position > STAGE_BOUNDARY_SHARE && position < 1 - STAGE_BOUNDARY_SHARE) return(NULL)
+    data.frame(rodina = unname(FAMILY_LABELS[family]), složka = name, parametr = param$name,
+      hodnota = space_value_text(value), rozsah = space_range_text(param),
+      mez = if (position <= STAGE_BOUNDARY_SHARE) "dolní" else "horní")
+  })
+  do.call(rbind, rows)
+}
+
 stage_boundary_params <- function(config, rows) {
   boundary <- data.frame(rodina = character(), složka = character(), parametr = character(),
     hodnota = character(), rozsah = character(), mez = character())
-  for (i in seq_len(nrow(rows))) {
+  candidates <- lapply(seq_len(nrow(rows)), function(i) {
     params <- jsonlite::fromJSON(rows$params[i])
     active <- strsplit(rows$branch[i], "/", fixed = TRUE)[[1]]
-    for (component in c(config$representations, config$families)) {
-      name <- component$name %||% component$family
-      if (!name %in% active) next
-      for (param in component$space$params) {
-        if (!param$kind %in% c("int", "float") ||
-            (param$kind == "int" && param$high - param$low == 1)) next
-        value <- params[[paste(name, param$name, sep = ".")]]
-        scale <- if (isTRUE(param$log)) log else identity
-        position <- (scale(value) - scale(param$low)) / (scale(param$high) - scale(param$low))
-        if (position > STAGE_BOUNDARY_SHARE && position < 1 - STAGE_BOUNDARY_SHARE) next
-        boundary <- rbind(boundary, data.frame(rodina = unname(FAMILY_LABELS[rows$family[i]]),
-          složka = name, parametr = param$name, hodnota = space_value_text(value),
-          rozsah = space_range_text(param), mez = if (position <= STAGE_BOUNDARY_SHARE) "dolní" else "horní"))
-      }
-    }
-  }
-  boundary
+    components <- Filter(function(component) component_name(component) %in% active,
+      c(config$representations, config$families))
+    do.call(rbind, lapply(components, stage_component_boundary, params = params, family = rows$family[i]))
+  })
+  do.call(rbind, c(list(boundary), candidates))
 }
 
 stage_boundary_text <- function(boundary) {
