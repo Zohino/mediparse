@@ -250,17 +250,19 @@ stage_boundary_text <- function(boundary) {
     ". S39j4 před doladěním posoudí, zda lze příslušnou mez posunout (D41).")
 }
 
+stage_macro_text <- function(rows) paste(metric_text(rows$value), "±", metric_text(rows$sd))
+
 stage_representation_table <- function(summary) {
   rows <- stage_best_by(summary, "representation")
   data.frame(reprezentace = rows$representation, pokus = rows$trial,
-    macro = paste(metric_text(rows$value), "±", metric_text(rows$sd)),
+    macro = stage_macro_text(rows),
     pokusy = unname(vapply(rows$representation, function(name) sum(summary$representation == name), integer(1))))
 }
 
 stage_defaults_table <- function(summary) {
   rows <- summary[summary$default, ]
   data.frame(reprezentace = rows$representation, rodina = unname(FAMILY_LABELS[rows$family]),
-    macro = paste(metric_text(rows$value), "±", metric_text(rows$sd)),
+    macro = stage_macro_text(rows),
     konvergence = ifelse(rows$converged, "ano", "ne"), minuty = metric_text(rows$seconds / 60))
 }
 
@@ -269,7 +271,7 @@ stage_family_table <- function(selection, summary) {
   defaults <- summary[summary$default, ]
   data.frame(rodina = unname(FAMILY_LABELS[rows$family]),
     pokus = paste(rows$trial, rows$representation),
-    macro = paste(metric_text(rows$value), "±", metric_text(rows$sd)),
+    macro = stage_macro_text(rows),
     výchozí = metric_text(defaults$value[match(rows$branch, defaults$branch)]),
     pokusy = vapply(rows$family, function(family) sum(summary$family == family), integer(1)))
 }
