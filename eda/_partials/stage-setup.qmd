@@ -1,0 +1,24 @@
+```{r}
+#| include: false
+source("../R/thesis/dua.R")
+source("../R/thesis/contract.R")
+source("../R/thesis/export.R")
+source("R/czech.R")
+source("R/db.R")
+source("R/corpus.R")
+source("R/diagnoses.R")
+source("R/stage_trials.R")
+paths <- stage_trial_paths(stage)
+stage_config_path <- config_path(paste0("stage_", stage, ".json"))
+manifest <- read_stage_manifest(paths, stage_config_path)
+config <- jsonlite::read_json(stage_config_path)
+candidates <- read_candidates(candidates_path())
+trials <- read_stage_trials(paths$results)
+check_stage_trials(trials, manifest, config, candidates)
+summary <- stage_trial_summary(trials)
+selection <- stage_selection(summary, manifest)
+# Příloha A odpojuje připojení pod jménem con.
+con <- DBI::dbConnect(duckdb::duckdb())
+prediction_source <- stage_predictions_source(con, paths$predictions)
+phi <- stage_error_correlation(con, prediction_source, selection$winner, selection$others)
+```

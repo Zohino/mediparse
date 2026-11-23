@@ -1,37 +1,19 @@
 ---
 title: "Ladění klasického stupně klasifikace"
 abstract: |
-  Sešit vyhodnocuje společné ladění reprezentace, rodiny a hyperparametrů klasického stupně na vývojové části pacientů podle D40. Výchozí pokusy popisují kombinace, nejlepší pokus určuje vítěze a korelace chyb s druhou rodinou rozhoduje o tasku ensemblu. Held-out test se nepoužívá.
+  Sešit vyhodnocuje společné ladění reprezentace, rodiny a hyperparametrů klasického stupně na vývojové části pacientů podle D40. Výchozí pokusy popisují kombinace, nejlepší a druhá rodina jsou kandidáty pro S39j4 a korelace chyb s druhou rodinou rozhoduje o tasku ensemblu. Held-out test se nepoužívá.
 ---
 
 ```{r}
 #| include: false
-source("../R/thesis/dua.R")
-source("../R/thesis/contract.R")
-source("../R/thesis/export.R")
-source("R/czech.R")
-source("R/db.R")
-source("R/corpus.R")
-source("R/diagnoses.R")
-source("R/stage_trials.R")
-paths <- stage_trial_paths("classical")
-stage_config_path <- config_path("stage_classical.json")
-manifest <- read_stage_manifest(paths, stage_config_path)
-config <- jsonlite::read_json(stage_config_path)
-candidates <- read_candidates(candidates_path())
-trials <- read_stage_trials(paths$results)
-check_stage_trials(trials, manifest, config, candidates)
-summary <- stage_trial_summary(trials)
-selection <- stage_selection(summary, manifest)
-# Příloha A odpojuje připojení pod jménem con.
-con <- DBI::dbConnect(duckdb::duckdb())
-prediction_source <- stage_predictions_source(con, paths$predictions)
-phi <- stage_error_correlation(con, prediction_source, selection$winner, selection$others)
+stage <- "classical"
 ```
+
+{{< include _partials/stage-setup.qmd >}}
 
 # Úvod
 
-Desátý sešit vybírá vítěze klasického stupně předkola podle D40. Společně ladí reprezentaci, rodinu a hyperparametry (CASH) [@Thornton2013] na vývojové části pacientů, kterou následná evaluace nepoužívá. Held-out test do výběru nevstupuje.
+Desátý sešit vybírá dvě kandidátní rodiny klasického stupně předkola podle D40. Společně ladí reprezentaci, rodinu a hyperparametry (CASH) [@Thornton2013] na vývojové části pacientů, kterou následná evaluace nepoužívá. Held-out test do výběru nevstupuje.
 
 # Data a metody
 
@@ -41,103 +23,14 @@ Complement NB upravuje naivní Bayes pro nevyvážené třídy textu [@Rennie200
 
 ## Protokol
 
-Ladění používá jednu z `r config$subsample_parts` částí vývojových pacientů,
-`r manifest$sample_notes` zpráv a `r manifest$sample_patients` pacientů.
-Rozdělení má `r count_phrase(config$folds, c("fold", "foldy", "foldů"))` po pacientech. Rozpočet je
-`r config$trials` pokusů, z nichž prvních `r sum(summary$default)`
-používá výchozí hodnoty každé větve a dalších `r manifest$random_startup_trials`
-je náhodných. Potom TPE soustředí pokusy do slibných oblastí [@Bergstra2011].
-Optuna [@Akiba2019] používá multivariate a group TPE; sampler je
-`r manifest$sampler`, pruner je `r manifest$pruner` (bez prořezávání).
-Cílem je průměr foldových macro-MaxF1: v každém foldu průměr maxim F1 přes diagnózy.
-Práh se vybírá na validaci foldu, stejně pro všechny pokusy.
 TF-IDF i LSA se fitují pouze na tréninku foldu.
 LightGBM používá `r config$lsa$components` komponent LSA.
 
-```{r}
-#| label: tbl-stage-provenance
-#| tbl-cap: "Provenance ladění stupně; otisky vstupů byly ověřeny."
-#| tbl-colwidths: [30, 70]
-export_table(stage_provenance_table(manifest), col.names = c("Položka", "Hodnota"), align = "ll")
-```
-
-## Prostor ladění
-
-Tabulka zachovává pořadí configu. Pomlčka označuje složku mimo větev vítěze.
-
-```{r}
-#| label: tbl-space
-#| tbl-cap: "Rozsahy hyperparametrů, výchozí hodnoty a hodnoty vítěze; log označuje logaritmickou škálu."
-export_table(stage_space_table(config, jsonlite::fromJSON(selection$winner$params)),
-  col.names = c("Složka", "Parametr", "Rozsah", "Výchozí", "Vítěz"), align = "lllll")
-```
-
-## Kritérium výběru stanovené v D40 před reálným během
-
-Vítězí pokus s nejvyšším cílem; shodu rozhoduje nižší číslo pokusu.
-Nejlepší pokusy rodin se řadí stejným způsobem.
-SD je výběrová směrodatná odchylka foldových macro-MaxF1 (jmenovatel K − 1).
-Nekonvergované fity zůstávají ve výběru.
-
-## Pravidlo ensemblu
-
-Popisně se vítěz porovnává s nejlepším pokusem každé další rodiny.
-O tasku ensemblu rozhoduje jen druhá nejlepší rodina podle D40.
-
-Korelace chybových indikátorů φ je stejná jako korelace indikátorů správnosti. Pro každou buňku (fold, diagnóza) se ze správnosti `predicted == label` obou rodin počítá [@Kuncheva2003]:
-
-$$
-\varphi = \frac{N_{11}N_{00}-N_{01}N_{10}}{\sqrt{(N_{11}+N_{10})(N_{01}+N_{00})(N_{11}+N_{01})(N_{10}+N_{00})}}.
-$$
-
-Hodnota N11 značí obě rodiny správně, N00 obě chybně, N10 pouze vítěze správně a N01 pouze druhou rodinu správně. Při nulovém jmenovateli je φ nedefinované a z průměru přes diagnózy a foldy se vynechá; tabulka uvádí počet definovaných buněk z celkového počtu. Pokud má dvojice vítěze a druhé rodiny průměr φ **ostře menší než 0,5**, vznikne před S39j podtask ensemblu. Hranice vychází z Cohenova vymezení silné korelace [@Cohen1988]. Jinak výsledek patří do diskuse. Pokud rozhodující dvojice nemá definovanou buňku, φ není k dispozici a patří věta do diskuse.
-
-## Kontroly vstupů
-
-Sešit ověřuje otisky výsledků, predikcí a configu proti manifestu,
-úplnost pokusů a buněk fold × diagnóza i konstantní metadata pokusu.
-Nezávisle přepočítává cíl z max-F1 a ověřuje vítěze proti manifestu.
-Predikce páruje úplně a jednoznačně se stejnými labely; do R přicházejí jen agregované četnosti.
+{{< include _partials/stage-methods.qmd >}}
 
 # Výsledky
 
-```{r}
-#| label: tbl-defaults
-#| tbl-cap: "Výchozí pokusy: macro-MaxF1 ± SD přes foldy, konvergence všech fitů a čas."
-export_table(stage_defaults_table(summary),
-  col.names = c("Reprezentace", "Rodina", "Macro-MaxF1 ± SD", "Konvergence", "Minuty"), align = "llrcr")
-```
-
-```{r}
-#| label: fig-history
-#| fig-cap: "Průběh ladění: cíle pokusů podle rodiny a dosud nejlepší cíl. Čárkovaná čára ukončuje výchozí a náhodné startovní pokusy."
-#| fig-width: 6.5
-#| fig-height: 3.5
-export_figure(stage_history_plot(summary, manifest), height_cm = 9)
-```
-
-```{r}
-#| label: tbl-families
-#| tbl-cap: "Nejlepší pokus každé rodiny, jeho výchozí větev a počet pokusů rodiny."
-export_table(stage_family_table(selection, summary),
-  col.names = c("Rodina", "Pokus a reprezentace", "Macro-MaxF1 ± SD", "Výchozí", "Pokusy"), align = "llrrr")
-```
-
-```{r}
-#| label: tbl-diagnoses
-#| tbl-cap: "Průměr max-F1 přes foldy po diagnózách u nejlepšího pokusu každé rodiny."
-export_table(stage_diagnosis_table(trials, selection, candidates),
-  col.names = c("Rodina", "Diagnóza", "Max-F1"), align = "llr")
-```
-
-Vítězný pokus `r selection$winner$trial` dosáhl cíle `r metric_text(selection$winner$value)`.
-
-```{r}
-#| label: tbl-phi
-#| tbl-cap: "Vítěz proti ostatním rodinám: průměr φ a počet definovaných buněk. Rozhoduje druhá rodina."
-export_table(stage_phi_table(phi, selection),
-  col.names = c("Rodina", "Pokus", "φ", "Buňky", "Rozhoduje"), align = "lrrrc")
-```
+{{< include _partials/stage-results.qmd >}}
 
 `r stage_lsa_cap_text(trials, config)`
 
@@ -149,16 +42,7 @@ export_table(stage_phi_table(phi, selection),
 
 # Omezení a ohrožení validity
 
-Výběr nad jedním laděním je pro vítěze optimistický (winner's curse);
-nestranný odhad dá až následná evaluace [@Cawley2010].
-Také práh vybraný na validaci foldu je optimistický, ale společný všem pokusům podle D40.
-
-Rozpočet se dělí mezi větve nerovnoměrně: TPE soustředí pokusy na slibné větve,
-takže nejlepší pokus slabé rodiny je méně vyladěný. Výchozí pokusy dávají každé větvi aspoň jednu šanci.
-Podvzorek jedné z `r config$subsample_parts` částí vývojových pacientů a
-`r count_phrase(config$folds, c("fold", "foldy", "foldů"))` omezují přenositelnost pořadí.
-SD přes korelované foldy podceňuje nejistotu.
-φ popisuje souběh chyb, nikoli výkon ensemblu; nedefinované buňky se vynechávají.
+{{< include _partials/stage-limits.qmd >}}
 
 Random forest je vědomě mimo rozsah: stromové ansámbly zastupuje LightGBM.
 Sešit netvrdí, že je random forest horší.

@@ -1,0 +1,46 @@
+```{r}
+#| label: tbl-defaults
+#| tbl-cap: "Výchozí pokusy: macro-MaxF1 ± SD přes foldy, konvergence všech fitů a čas."
+export_table(stage_defaults_table(summary),
+  col.names = c("Reprezentace", "Rodina", "Macro-MaxF1 ± SD", "Konvergence", "Minuty"), align = "llrcr")
+```
+
+```{r}
+#| label: fig-history
+#| fig-cap: "Průběh ladění: cíle pokusů podle rodiny a dosud nejlepší cíl. Čárkovaná čára ukončuje výchozí a náhodné startovní pokusy."
+#| fig-width: 6.5
+#| fig-height: 3.5
+export_figure(stage_history_plot(summary, manifest), height_cm = 9)
+```
+
+```{r}
+#| label: tbl-families
+#| tbl-cap: "Nejlepší pokus každé rodiny, jeho výchozí větev a počet pokusů rodiny."
+export_table(stage_family_table(selection, summary),
+  col.names = c("Rodina", "Pokus a reprezentace", "Macro-MaxF1 ± SD", "Výchozí", "Pokusy"), align = "llrrr")
+```
+
+```{r}
+#| label: tbl-representations
+#| tbl-cap: "Nejlepší pokus každé reprezentace."
+export_table(stage_representation_table(summary),
+  col.names = c("Reprezentace", "Pokus", "Macro-MaxF1 ± SD", "Pokusy"), align = "lrrr")
+```
+
+```{r}
+#| label: tbl-diagnoses
+#| tbl-cap: "Průměr max-F1 přes foldy po diagnózách u nejlepšího pokusu každé rodiny."
+export_table(stage_diagnosis_table(trials, selection, candidates),
+  col.names = c("Rodina", "Diagnóza", "Max-F1"), align = "llr")
+```
+
+Nejlepší pokus `r selection$winner$trial` dosáhl cíle `r metric_text(selection$winner$value)`; cíl předkola slouží k výběru, ne jako odhad výkonu (D41).
+
+```{r}
+#| label: tbl-phi
+#| tbl-cap: "Vítěz proti ostatním rodinám: průměr φ a počet definovaných buněk. Rozhoduje druhá rodina."
+export_table(stage_phi_table(phi, selection),
+  col.names = c("Rodina", "Pokus", "φ", "Buňky", "Rozhoduje"), align = "lrrrc")
+```
+
+`r stage_boundary_text(stage_boundary_params(config, rbind(selection$winner, selection$second)))`
