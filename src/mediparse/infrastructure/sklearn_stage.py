@@ -1,17 +1,18 @@
-"""Skórování větví stupně s fitováním reprezentace v každém pokusu."""
+"""Skórování větví stupně se sdílenými četnostmi n-gramů mezi pokusy."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
 from functools import partial
 from itertools import batched
-from typing import TYPE_CHECKING, Protocol, assert_never, cast
+from typing import TYPE_CHECKING, Final, Literal, Protocol, assert_never, cast
 
 import numpy as np
 from gensim.models import Word2Vec
 from gensim.models.word2vec import MAX_WORDS_IN_BATCH
 from joblib import Parallel, delayed
 from sklearn.decomposition import TruncatedSVD
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.preprocessing import StandardScaler
 from threadpoolctl import threadpool_limits
 
@@ -26,11 +27,10 @@ from mediparse.domain.representation import (
 )
 from mediparse.domain.tuning import ValidationScores
 from mediparse.infrastructure.sklearn_classifier import (
+    EMPTY_VOCABULARY,
     TfidfParameters,
-    ensure_tokens,
     fit_converged,
     require_tokens,
-    tfidf_from,
     tfidf_vectorizer,
 )
 from mediparse.infrastructure.sklearn_families import (
@@ -39,7 +39,7 @@ from mediparse.infrastructure.sklearn_families import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Mapping, Sequence
+    from collections.abc import Callable, Iterable, Mapping, Sequence
     from pathlib import Path
 
     from gensim.models import KeyedVectors
@@ -56,9 +56,12 @@ if TYPE_CHECKING:
     from mediparse.infrastructure.note_embeddings import NoteEmbeddings
 
 
+MIN_PADDED_WORD_LENGTH: Final = 3
+
+
 @dataclass(frozen=True)
 class SklearnStageScorer:
-    """Fitne reprezentaci jednou pro pět diagnóz pokusu a foldu."""
+    """Sdílí četnosti mezi pokusy a fitne reprezentaci pro pět diagnóz foldu."""
 
     config: StageTuningConfig
     normalizations: Mapping[str, TextNormalization | None]
@@ -67,6 +70,9 @@ class SklearnStageScorer:
     embeddings: NoteEmbeddings
     jobs: int = 1
     _prepared: dict[tuple[str, str], str] = field(
+        default_factory=dict, init=False, repr=False
+    )
+    _counts: dict[str, NgramCounts] = field(
         default_factory=dict, init=False, repr=False
     )
 
@@ -166,10 +172,11 @@ class SklearnStageScorer:
                     token for document in train for token in document.split()
                 })
                 return train, validation, n_features
-            case TfidfRepresentation():
+            case TfidfRepresentation() as spec:
                 prepare = tfidf_vectorizer(normalization).build_preprocessor()
                 return self._tfidf(
                     branch,
+                    spec,
                     rep_params,
                     self._texts(name, fold.train, prepare),
                     self._texts(name, fold.test, prepare),
@@ -180,6 +187,7 @@ class SklearnStageScorer:
     def _tfidf(
         self,
         branch: Branch,
+        spec: TfidfRepresentation,
         rep_params: Mapping[str, ParamValue],
         train_texts: Sequence[str],
         validation_texts: Sequence[str],
@@ -190,22 +198,142 @@ class SklearnStageScorer:
             if branch.family.family is ClassifierFamily.LIGHTGBM_LSA
             else None
         )
-        # SVD alokuje husté matice úměrné šířce; strop drží paměť, jiné rodiny mají celý slovník.
-        vectorizer = tfidf_from(
+        counts = self._ngram_counts(
+            spec.name,
+            spec.analyzer,
+            (tfidf.ngram_min, tfidf.ngram_max),
+            [*train_texts, *validation_texts],
+        )
+        # SVD alokuje husté matice úměrné šířce; strop platí jen pro LSA.
+        train, validation = tfidf_features(
+            counts,
+            train_texts,
+            validation_texts,
             tfidf,
-            cast("TfidfRepresentation", branch.representation).analyzer,
-            None,
             max_features=lsa.max_features if lsa else None,
-        ).set_params(lowercase=False)  # Text už je předzpracovaný a snížený.
-        ensure_tokens(vectorizer, train_texts)
-        train = vectorizer.fit_transform(train_texts)
-        validation = vectorizer.transform(validation_texts)
+        )
         n_features = train.shape[1]
         if lsa is not None:
             reducer = TruncatedSVD(n_components=lsa.components, random_state=self.seed)
             train = reducer.fit_transform(train)
             validation = reducer.transform(validation)
         return train, validation, n_features
+
+    def _ngram_counts(
+        self,
+        name: str,
+        analyzer: Literal["word", "char_wb"],
+        ngram_range: tuple[int, int],
+        texts: Sequence[str],
+    ) -> NgramCounts:
+        cached = self._counts.get(name)
+        if cached is not None:
+            low, high = cached.ngram_range
+            if (
+                low <= ngram_range[0]
+                and high >= ngram_range[1]
+                and all(text in cached.rows for text in texts)
+            ):
+                return cached
+            ngram_range = (min(low, ngram_range[0]), max(high, ngram_range[1]))
+            texts = [*cached.rows, *texts]
+        # Počty zprávy na foldu nezávisí; slovník foldu vyberou trénovací řádky.
+        # Uvolnění obou odkazů zabrání držení staré matice během přestavby.
+        self._counts.pop(name, None)
+        del cached
+        self._counts[name] = ngram_counts(analyzer, ngram_range, texts)
+        return self._counts[name]
+
+
+@dataclass(frozen=True)
+class NgramCounts:
+    """Četnosti všech textů reprezentace a metadata pro výběr n-gramů."""
+
+    matrix: csr_matrix
+    lengths: ndarray
+    rows: Mapping[str, int]
+    whole_words: ndarray
+    ngram_range: tuple[int, int]
+
+
+def ngram_counts(
+    analyzer: Literal["word", "char_wb"],
+    ngram_range: tuple[int, int],
+    texts: Iterable[str],
+) -> NgramCounts:
+    """Spočítá celočíselné četnosti různých textů v pořadí prvního výskytu.
+
+    Returns:
+        Matice s abecedně seřazenými sloupci a metadata rozsahu.
+    """
+    rows = {text: i for i, text in enumerate(dict.fromkeys(texts))}
+    vectorizer = CountVectorizer(
+        analyzer=analyzer,
+        ngram_range=ngram_range,
+        lowercase=False,
+        dtype=np.int32,
+    )
+    matrix = vectorizer.fit_transform(list(rows))
+    lengths = np.empty(len(vectorizer.vocabulary_), dtype=np.int16)
+    whole_words = np.zeros(len(lengths), dtype=bool)
+    for term, column in vectorizer.vocabulary_.items():
+        # Slovní token neobsahuje mezeru; u znaků se počítají i okrajové výplně.
+        lengths[column] = term.count(" ") + 1 if analyzer == "word" else len(term)
+        # Sklearn přidá celé krátké slovo jednou i při délce menší než ngram_min.
+        whole_words[column] = (
+            analyzer == "char_wb"
+            and len(term) >= MIN_PADDED_WORD_LENGTH
+            and term[0] == term[-1] == " "
+        )
+    return NgramCounts(matrix, lengths, rows, whole_words, ngram_range)
+
+
+def tfidf_features(
+    counts: NgramCounts,
+    train: Sequence[str],
+    validation: Sequence[str],
+    params: TfidfParameters,
+    max_features: int | None,
+) -> tuple[csr_matrix, csr_matrix]:
+    """Vybere slovník jen z tréninku a zváží četnosti pokusu.
+
+    Returns:
+        TF-IDF tréninku a validace se společným trénovacím slovníkem.
+
+    Raises:
+        InvalidInputError: Trénink neobsahuje token.
+        ValueError: Meze četností se vylučují nebo odstraní celý slovník.
+    """
+    in_range = (counts.lengths <= params.ngram_max) & (
+        (counts.lengths >= params.ngram_min) | counts.whole_words
+    )
+    columns = np.flatnonzero(in_range)
+    train_counts = counts.matrix[[counts.rows[text] for text in train]][:, columns]
+    if train_counts.nnz == 0:
+        raise InvalidInputError(EMPTY_VOCABULARY)
+    max_doc_count = params.max_df * len(train)
+    if max_doc_count < params.min_df:
+        msg = "max_df corresponds to < documents than min_df"
+        raise ValueError(msg)
+    # Kopie CountVectorizer._limit_features (sklearn 1.9.1) zachová i remízy stropu.
+    df = np.bincount(train_counts.indices, minlength=train_counts.shape[1])
+    mask = (df > 0) & (df >= params.min_df) & (df <= max_doc_count)
+    if max_features is not None and mask.sum() > max_features:
+        tfs = np.asarray(train_counts.astype(np.float64).sum(axis=0)).ravel()
+        selected = np.flatnonzero(mask)[(-tfs[mask]).argsort()[:max_features]]
+        mask = np.zeros(len(df), dtype=bool)
+        mask[selected] = True
+    if not mask.any():
+        msg = "After pruning, no terms remain. Try a lower min_df or a higher max_df."
+        raise ValueError(msg)
+    train_counts = train_counts[:, mask].astype(np.float64)
+    validation_counts = counts.matrix[[counts.rows[text] for text in validation]][
+        :, columns[mask]
+    ].astype(np.float64)
+    transformer = TfidfTransformer(sublinear_tf=params.sublinear_tf)
+    return transformer.fit_transform(train_counts), transformer.transform(
+        validation_counts
+    )
 
 
 def _diagnosis_scores(
