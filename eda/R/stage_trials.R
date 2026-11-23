@@ -329,6 +329,7 @@ stage_lsa_cap_text <- function(trials, config) {
 
 stage_provenance_table <- function(manifest) {
   preprocessing <- manifest$text_preprocessing
+  encoders <- manifest$encoders
   items <- c(
     "Dataset SHA-256" = manifest$dataset_sha256,
     "Split SHA-256" = manifest$split_sha256,
@@ -342,11 +343,9 @@ stage_provenance_table <- function(manifest) {
     "Vývojoví pacienti" = format_number(manifest$development_patients),
     "Předzpracování" = paste(names(preprocessing), unlist(preprocessing), sep = ": ", collapse = "; "),
     "Strip diagnostických sekcí" = if (is.null(manifest$diagnostic_strip)) "ne" else "ano",
-    setNames(vapply(seq_len(nrow(manifest$encoders) %||% 0L), function(i) {
-      encoder <- manifest$encoders[i, ]
-      paste0(encoder$model, "@", encoder$revision, ", okno ", as.character(encoder$window),
-        ", ", encoder$dtype, ", ", encoder$device)
-    }, character(1)), if (length(manifest$encoders$name)) paste("Encoder", manifest$encoders$name) else character()),
+    if (length(encoders)) setNames(paste0(encoders$model, "@", encoders$revision,
+      ", okno ", encoders$window, ", ", encoders$dtype, ", ", encoders$device),
+      paste("Encoder", encoders$name)),
     "GPU" = if (length(manifest$hardware$gpus$name)) paste(manifest$hardware$gpus$name, collapse = "; ") else "žádná",
     "Revize kódu ladění stupně" = manifest$environment$source$commit,
     "Rozpracovaný strom" = if (manifest$environment$source$dirty) "ano" else "ne",
