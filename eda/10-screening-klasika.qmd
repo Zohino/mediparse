@@ -1,7 +1,7 @@
 ---
 title: "Ladění klasického stupně klasifikace"
 abstract: |
-  Sešit vyhodnocuje společné ladění reprezentace, rodiny a hyperparametrů klasického stupně na vývojové části pacientů podle D40. Výchozí pokusy popisují kombinace, nejlepší a druhá rodina jsou kandidáty pro S39j4 a korelace chyb s druhou rodinou rozhoduje o tasku ensemblu. Held-out test se nepoužívá.
+  Sešit vyhodnocuje společné ladění reprezentace, rodiny a hyperparametrů klasického stupně na vývojové části pacientů podle D40 a D41. Výchozí pokusy popisují kombinace, nejlepší a druhá rodina jsou kandidáty pro S39j4 a korelace chyb s druhou rodinou rozhoduje o tasku ensemblu. Held-out test se nepoužívá.
 ---
 
 ```{r}
@@ -13,7 +13,7 @@ stage <- "classical"
 
 # Úvod
 
-Desátý sešit vybírá dvě kandidátní rodiny klasického stupně předkola podle D40. Společně ladí reprezentaci, rodinu a hyperparametry (CASH) [@Thornton2013] na vývojové části pacientů, kterou následná evaluace nepoužívá. Held-out test do výběru nevstupuje.
+Desátý sešit vybírá dvě kandidátní rodiny klasického stupně předkola podle D40 a D41. Společně ladí reprezentaci, rodinu a hyperparametry (CASH) [@Thornton2013] na vývojové části pacientů, kterou následná evaluace nepoužívá. Held-out test do výběru nevstupuje.
 
 # Data a metody
 
