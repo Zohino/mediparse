@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import hashlib
-import json
 from random import Random
 from typing import TYPE_CHECKING, Final
 
@@ -15,7 +14,11 @@ from mediparse.domain.tuning import macro_max_f1, max_f1
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.stage_config import load_stage_config
 from mediparse.infrastructure.stage_trials_table import ParquetStageCheckpoint
-from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
+from mediparse.infrastructure.synthetic_marker import (
+    SyntheticMarker,
+    read_marker,
+    write_marker,
+)
 from tests.manifest_support import training_manifest
 from tests.support import REPOSITORY
 
@@ -46,7 +49,7 @@ def test_stage_trials_fixtures_match_writers_and_manifest_model(tmp_path: Path) 
     assert (tmp_path / "synthetic.json").read_bytes() == (
         CONTRACTS / "synthetic.json"
     ).read_bytes()
-    assert json.loads((CONTRACTS / "synthetic.json").read_bytes())["rows"] == 91_200
+    assert read_marker(CONTRACTS) == SyntheticMarker(prefix="eda-sentinel", rows=91_200)
 
 
 def write_stage_trials_fixtures(directory: Path) -> None:
