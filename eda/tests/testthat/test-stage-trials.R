@@ -358,6 +358,8 @@ testthat::test_that("B4 reprezentace řadí cíl a shody rozhodne číslo pokusu
     value = c(0.80, 0.82, 0.85, 0.82), sd = c(0.02, 0.01, 0.01, 0.03))
   testthat::expect_equal(stage_representation_table(summary), data.frame(reprezentace = c("a", "b"),
     pokus = c(2L, 1L), macro = c("0,850 ± 0,010", "0,820 ± 0,010"), pokusy = c(2L, 2L)))
+  summary$representation <- c("a", "b", "a", "a")
+  testthat::expect_equal(stage_representation_table(summary)$pokusy, c(3L, 1L))
 })
 
 testthat::test_that("B5 kandidáti postupují podle D41 do S39j4", {
