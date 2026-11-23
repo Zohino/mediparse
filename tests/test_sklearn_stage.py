@@ -890,12 +890,7 @@ def test_tfidf_features_match_vectorizer(
         max_features=max_features,
         lowercase=False,
     )
-    try:
-        expected_train = vectorizer.fit_transform(train)
-    except ValueError as error:
-        with pytest.raises(ValueError, match=re.escape(str(error))):
-            tfidf_features(counts, train, validation, params, max_features)
-        return
+    expected_train = vectorizer.fit_transform(train)
     expected_validation = vectorizer.transform(validation)
     actual = tfidf_features(counts, train, validation, params, max_features)
     for ours, expected in zip(
