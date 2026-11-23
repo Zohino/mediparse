@@ -59,17 +59,20 @@ def _paths(root: Path) -> stage_tuning.StageTuningPaths:
     )
 
 
-def _run(paths: stage_tuning.StageTuningPaths) -> ExitCode:
+def _run(paths: stage_tuning.StageTuningPaths, jobs: int = 1) -> ExitCode:
     return stage_tuning.run(
         paths=paths,
         environ={"CODEX_THREAD_ID": "test"},
         revision=fixed_revision,
         clock=StepClock(),
+        jobs=jobs,
     )
 
 
+@pytest.mark.parametrize("jobs", [1, 2])
+@pytest.mark.usefixtures("loky_executor")
 def test_end_to_end_metrics_predictions_manifest_and_repeat(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, jobs: int
 ) -> None:
     """F1 ze skutečných predikcí souhlasí s tabulkou i vítězem v manifestu."""
     original = sklearn_stage.fit_converged
@@ -82,10 +85,11 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
 
     monkeypatch.setattr(sklearn_stage, "fit_converged", fit_once)
     paths = _paths(tmp_path)
-    assert _run(paths) is ExitCode.OK
+    assert _run(paths, jobs=jobs) is ExitCode.OK
     trials = pq.read_table(paths.out).to_pylist()
     predictions = pq.read_table(paths.predictions).to_pylist()
     written = StageTuningManifest.model_validate_json(paths.manifest.read_bytes())
+    assert written.jobs == jobs
     assert written.completed_trials == written.trials == 6
     assert set(written.environment.packages) == {
         "python",
@@ -95,6 +99,8 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
         "lightgbm",
         "fasttext",
         "gensim",
+        "joblib",
+        "threadpoolctl",
         "optuna",
         "pyarrow",
         "pydantic",
@@ -108,7 +114,10 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
     assert all(len(counts) == 1 for counts in n_features.values())
 
     affected = {row["trial"] for row in trials if not row["converged"]}
-    assert affected == {0}
+    # Monkeypatch fit_converged do procesů loky nedosáhne; jejich nekonvergenci
+    # ověřuje test_parallel_fits_report_nonconvergence skutečným limitem iterací.
+    if jobs == 1:
+        assert affected == {0}
     assert written.nonconverged_trials == len(affected)
     for field, path in (
         ("dataset_sha256", paths.corpus.cohort),
@@ -151,7 +160,7 @@ def test_end_to_end_metrics_predictions_manifest_and_repeat(
         assert {p["note_id"] for p in cell} == fold_notes[fold]
     assert len(predictions) == 6 * 5 * len(expected)
     before = paths.out.read_bytes(), paths.predictions.read_bytes()
-    assert _run(paths) is ExitCode.OK
+    assert _run(paths, jobs=jobs) is ExitCode.OK
     assert before == (paths.out.read_bytes(), paths.predictions.read_bytes())
     assert not paths.checkpoint.exists()
 
@@ -165,8 +174,9 @@ def test_foreign_checkpoint_refused_before_outputs(tmp_path: Path) -> None:
     assert not any(p.exists() for p in (paths.out, paths.predictions, paths.manifest))
 
 
+@pytest.mark.parametrize(("jobs_args", "jobs"), [([], 3), (["--jobs", "2"], 2)])
 def test_main_accepts_all_required_paths(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, jobs_args: list[str], jobs: int
 ) -> None:
     """CLI předá explicitní cesty a hodiny vstupnímu bodu."""
     names = (
@@ -185,10 +195,12 @@ def test_main_accepts_all_required_paths(
     argv = ["mediparse-stage-tuning"]
     for name in names:
         argv.extend((f"--{name}", str(tmp_path / name)))
+    argv.extend(jobs_args)
     monkeypatch.setattr("sys.argv", argv)
     run = Mock(return_value=ExitCode.REFUSED)
     monkeypatch.setattr(stage_tuning, "run", run)
     assert stage_tuning.main() is ExitCode.REFUSED
+    assert run.call_args.kwargs["jobs"] == jobs
     paths = run.call_args.kwargs["paths"]
     for name in names:
         assert (
@@ -203,12 +215,24 @@ def test_main_accepts_all_required_paths(
     assert isinstance(run.call_args.kwargs["clock"], stage_tuning.PerfCounterClock)
 
 
+@pytest.mark.parametrize("jobs", [0, 6])
+def test_main_rejects_jobs_outside_diagnoses(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str], jobs: int
+) -> None:
+    """CLI odmítne počet procesů mimo rozsah diagnóz."""
+    monkeypatch.setattr("sys.argv", ["mediparse-stage-tuning", "--jobs", str(jobs)])
+    with pytest.raises(SystemExit):
+        stage_tuning.main()
+    assert "argument --jobs: invalid choice" in capsys.readouterr().err
+
+
 def test_manifest_rejects_inconsistent_run(tmp_path: Path) -> None:
     """Manifest odmítne nevyčerpaný rozpočet a nesoulad předzpracování."""
     paths = _paths(tmp_path)
     assert _run(paths) is ExitCode.OK
     data = json.loads(paths.manifest.read_bytes())
     for changes, message in (
+        ({"jobs": 0}, "greater than 0"),
         ({"completed_trials": 5}, "vyčerpat rozpočet"),
         (
             {"text_preprocessing": {"r1": "none", "r2": "none"}},
@@ -432,15 +456,15 @@ def test_stage_records_and_passes_normalization_per_representation(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Scorer i manifest dostávají stejné slovníky jednotlivých reprezentací."""
-    tfidf = Mock(wraps=sklearn_stage.tfidf_from)
-    monkeypatch.setattr(sklearn_stage, "tfidf_from", tfidf)
+    tfidf = Mock(wraps=sklearn_stage.tfidf_vectorizer)
+    monkeypatch.setattr(sklearn_stage, "tfidf_vectorizer", tfidf)
     paths = _paths(tmp_path)
     assert _run(paths) is ExitCode.OK
     dictionary = load_text_normalization(paths.corpus.candidates, variants=True)
-    assert any(c.args[2] == dictionary for c in tfidf.call_args_list)
-    assert any(c.args[2] is None for c in tfidf.call_args_list)
+    assert any(c.args[0] == dictionary for c in tfidf.call_args_list)
+    assert any(c.args[0] is None for c in tfidf.call_args_list)
     assert all(
-        c.args[2] == dictionary or c.args[2] is None for c in tfidf.call_args_list
+        c.args[0] == dictionary or c.args[0] is None for c in tfidf.call_args_list
     )
     written = StageTuningManifest.model_validate_json(paths.manifest.read_bytes())
     assert written.text_preprocessing == {

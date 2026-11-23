@@ -29,7 +29,7 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.infrastructure.sklearn_split import threshold_splits
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Mapping, Sequence
+    from collections.abc import Callable, Iterable, Mapping, Sequence
     from pathlib import Path
 
     from mediparse.domain.identity import SubjectId
@@ -229,7 +229,16 @@ def ensure_tokens(vectorizer: TfidfVectorizer, texts: Sequence[str]) -> None:
         InvalidInputError: Trénovací slovník by byl prázdný.
     """
     analyzer = vectorizer.build_analyzer()
-    if not any(analyzer(text) for text in texts):
+    require_tokens(analyzer(text) for text in texts)
+
+
+def require_tokens(documents: Iterable[Sequence[str]]) -> None:
+    """Odmítne dokumenty bez jediného tokenu.
+
+    Raises:
+        InvalidInputError: Trénovací slovník by byl prázdný.
+    """
+    if not any(documents):
         msg = "Trénovací texty neobsahují žádný token, slovník by byl prázdný."
         raise InvalidInputError(msg)
 

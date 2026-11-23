@@ -6,6 +6,7 @@
   "split_folds": 5,
   "split_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
   "seed": 0,
+  "jobs": 1,
   "trials": 60,
   "random_startup_trials": 10,
   "completed_trials": 60,

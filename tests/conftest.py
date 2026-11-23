@@ -6,9 +6,11 @@ import csv
 import gzip
 import json
 from dataclasses import dataclass
+from multiprocessing import active_children
 from typing import TYPE_CHECKING, Final
 
 import pytest
+from joblib.externals.loky import get_reusable_executor
 
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.entrypoints.exit_code import ExitCode
@@ -38,7 +40,7 @@ from tests.support import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Sequence
+    from collections.abc import Iterator, Mapping, Sequence
     from pathlib import Path
 
     from mediparse.synthetic.domain.synthetic_plan import SamplerConfig
@@ -352,3 +354,11 @@ def synthetic_tables(tmp_path: Path) -> tuple[Path, Path]:
         is ExitCode.OK
     )
     return discharge, diagnoses
+
+
+@pytest.fixture
+def loky_executor() -> Iterator[None]:
+    """Ukončí executor, aby jeho procesy nerušily izolaci testů a mutmut."""
+    yield
+    get_reusable_executor().shutdown(wait=True)
+    assert active_children() == []
