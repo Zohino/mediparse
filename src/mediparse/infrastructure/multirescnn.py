@@ -22,6 +22,8 @@ if TYPE_CHECKING:
 
 # Li a Yu 2020, Table 2: šest měřítek a jeden reziduální blok.
 KERNEL_SIZES: Final = (3, 5, 9, 15, 19, 25)
+# Řazení v kusech zkrátí výplň a zachová náhodné pořadí, sonda 1.
+BUCKET_BATCHES: Final = 50
 
 
 class _ResidualBranch(nn.Module):
@@ -184,32 +186,15 @@ class MultiResCnnClassifier(BaseEstimator):
         )
         for epoch in range(1, self.epochs + 1):
             self.model_.train()
-            order = torch.randperm(len(train), generator=generator).tolist()
-            batches = []
-            for chunk in batched(order, self.batch_size * 50, strict=False):
-                batches.extend(
-                    batched(
-                        sorted(chunk, key=lambda i: len(train[i])),
-                        self.batch_size,
-                        strict=False,
-                    )
-                )
-            for index in torch.randperm(len(batches), generator=generator).tolist():
-                indices = list(batches[index])
+            for indices in self._epoch_batches(train, generator):
                 optimizer.zero_grad()
-                loss = nn.functional.binary_cross_entropy_with_logits(
+                batch_loss = nn.functional.binary_cross_entropy_with_logits(
                     self.model_(self._pad(train, indices)), target[indices]
                 )
-                loss.backward()
+                batch_loss.backward()
                 optimizer.step()
                 schedule.step()
-            self.model_.eval()
-            with torch.inference_mode():
-                loss = float(
-                    nn.functional.binary_cross_entropy_with_logits(
-                        self._logits(stop), stop_target
-                    ).item()
-                )
+            loss = self._stop_loss(stop, stop_target)
             self.stop_losses_.append(loss)
             if math.isfinite(loss) and loss < best_loss:
                 best_loss = loss
@@ -222,6 +207,32 @@ class MultiResCnnClassifier(BaseEstimator):
         if best_state is not None:
             self.model_.load_state_dict(best_state)
         return self
+
+    def _epoch_batches(
+        self, train: list[torch.Tensor], generator: torch.Generator
+    ) -> list[list[int]]:
+        order = torch.randperm(len(train), generator=generator).tolist()
+        batches = []
+        for chunk in batched(order, self.batch_size * BUCKET_BATCHES, strict=False):
+            batches.extend(
+                list(batch)
+                for batch in batched(
+                    sorted(chunk, key=lambda i: len(train[i])),
+                    self.batch_size,
+                    strict=False,
+                )
+            )
+        return [
+            batches[i]
+            for i in torch.randperm(len(batches), generator=generator).tolist()
+        ]
+
+    def _stop_loss(self, stop: list[torch.Tensor], stop_target: torch.Tensor) -> float:
+        self.model_.eval()
+        with torch.inference_mode():
+            return nn.functional.binary_cross_entropy_with_logits(
+                self._logits(stop), stop_target
+            ).item()
 
     def _encode(self, documents: Sequence[str]) -> list[torch.Tensor]:
         encoded = []
