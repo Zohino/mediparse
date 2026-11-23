@@ -368,6 +368,9 @@ testthat::test_that("B5 kandidáti postupují podle D41 do S39j4", {
     testthat::expect_match(text, value, fixed = TRUE)
   }
   testthat::expect_false(grepl("každém foldu", text, fixed = TRUE))
+  selection <- list(winner = data.frame(family = "logreg", representation = "word", trial = 7),
+    second = data.frame(family = "nb_svm", representation = "char_wb", trial = 3))
+  testthat::expect_match(stage_selection_text(selection), "NB-SVM (char_wb, pokus 3)", fixed = TRUE)
 })
 
 testthat::test_that("B6 provenance uvádí procesy, encodery a GPU", {
