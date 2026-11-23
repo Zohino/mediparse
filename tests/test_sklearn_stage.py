@@ -25,7 +25,7 @@ from mediparse.domain.representation import Word2VecRepresentation
 from mediparse.domain.split import Holdout
 from mediparse.domain.stage_tuning import StageLsa
 from mediparse.entrypoints.stage_tuning import stage_normalizations
-from mediparse.infrastructure import sklearn_classifier, sklearn_stage
+from mediparse.infrastructure import sklearn_classifier, sklearn_stage, word2vec
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
 from mediparse.infrastructure.sklearn_classifier import (
@@ -539,16 +539,16 @@ def test_word2vec_splits_long_documents(
     word2vec_options: dict[str, ParamValue], monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Všech 25 000 tokenů dorazí k tréninku v kusech do 10 000."""
-    original = sklearn_stage.Word2Vec.train
+    original = word2vec.Word2Vec.train
     observed = []
 
     def train(
-        model: sklearn_stage.Word2Vec, sentences: list[list[str]], **kwargs: object
+        model: word2vec.Word2Vec, sentences: list[list[str]], **kwargs: object
     ) -> object:
         observed.extend(len(sentence) for sentence in sentences)
         return original(model, sentences, **kwargs)
 
-    monkeypatch.setattr(sklearn_stage.Word2Vec, "train", train)
+    monkeypatch.setattr(word2vec.Word2Vec, "train", train)
     word2vec_features(word2vec_options, ["alpha " * 25000], ["alpha"])
     assert max(observed) <= 10000
     assert sum(observed) == 25000
@@ -565,28 +565,28 @@ def test_word2vec_empty_vocabulary_is_invalid_input(
 
 
 @pytest.fixture
-def trained_word2vec(monkeypatch: pytest.MonkeyPatch) -> list[sklearn_stage.Word2Vec]:
+def trained_word2vec(monkeypatch: pytest.MonkeyPatch) -> list[word2vec.Word2Vec]:
     """Zachytí modely vytvořené featurizérem.
 
     Returns:
         Modely v pořadí volání konstruktoru.
     """
-    original = sklearn_stage.Word2Vec
+    original = word2vec.Word2Vec
     models = []
 
-    def model(**kwargs: ParamValue) -> sklearn_stage.Word2Vec:
+    def model(**kwargs: ParamValue) -> word2vec.Word2Vec:
         fitted = original(**kwargs)
         models.append(fitted)
         return fitted
 
-    monkeypatch.setattr(sklearn_stage, "Word2Vec", model)
+    monkeypatch.setattr(word2vec, "Word2Vec", model)
     return models
 
 
 def test_word2vec_params_reach_gensim(
     word2vec_options: dict[str, ParamValue],
     word2vec_train: list[str],
-    trained_word2vec: list[sklearn_stage.Word2Vec],
+    trained_word2vec: list[word2vec.Word2Vec],
 ) -> None:
     """Model dostane všechny hyperparametry i workers a seed beze změny."""
     word2vec_features(word2vec_options, word2vec_train, ["alpha"])
@@ -599,7 +599,7 @@ def test_word2vec_params_reach_gensim(
 def test_word2vec_features_are_standardized_word_means(
     word2vec_options: dict[str, ParamValue],
     word2vec_train: list[str],
-    trained_word2vec: list[sklearn_stage.Word2Vec],
+    trained_word2vec: list[word2vec.Word2Vec],
 ) -> None:
     """Příznaky odpovídají průměru surových slovních vektorů a populačnímu škálování."""
     train, _ = word2vec_features(word2vec_options, word2vec_train, ["alpha"])
@@ -614,7 +614,7 @@ def test_word2vec_features_are_standardized_word_means(
 
 
 def test_word2vec_branch_scores(
-    tmp_path: Path, trained_word2vec: list[sklearn_stage.Word2Vec]
+    tmp_path: Path, trained_word2vec: list[word2vec.Word2Vec]
 ) -> None:
     """Větev word2vec vrátí pět skóre a sedm příznaků."""
     config = word2vec_stage_config()
@@ -640,7 +640,7 @@ def test_word2vec_branch_scores(
 
 
 def test_stage_inputs_follow_representation(
-    tmp_path: Path, trained_word2vec: list[sklearn_stage.Word2Vec]
+    tmp_path: Path, trained_word2vec: list[word2vec.Word2Vec]
 ) -> None:
     """Větve encoderu i word2vec dostanou text podle úrovně reprezentace."""
     config = load_stage_config(REPOSITORY / "config/stage_embeddings.json")
