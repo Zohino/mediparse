@@ -1036,7 +1036,20 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
 ) -> None:
     """Jeden fit drží pacienty oddělené a sloupce ve výčtovém pořadí diagnóz."""
     config = network_stage_config()
-    fold = patient_holdouts(notes(visits=2), 2, 7, StratifiedGroupFolds())[0]
+    corpus = [
+        replace(
+            note,
+            labels=frozenset(
+                d for j, d in enumerate(Diagnosis) if note.subject_id >> j & 1
+            ),
+        )
+        for note in notes(visits=2)
+    ]
+    fold = Holdout(
+        0,
+        tuple(note for note in corpus if note.subject_id > 2),
+        tuple(note for note in corpus if note.subject_id <= 2),
+    )
     model = Mock(converged_=converged)
     model.set_params.return_value = model
     model.decision_function.return_value = np.tile(np.arange(5), (len(fold.test), 1))
@@ -1058,13 +1071,18 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
     assert {note.subject_id for note in fit_notes}.isdisjoint(
         note.subject_id for note in stop_notes
     )
+    assert len({note.subject_id for note in stop_notes}) < len({
+        note.subject_id for note in fit_notes
+    })
     assert set(fit_notes) | set(stop_notes) == set(fold.train)
     assert set(fit_notes + stop_notes).isdisjoint(fold.test)
     np.testing.assert_array_equal(
-        train_labels, [[note.has_label(d) for d in Diagnosis] for note in fit_notes]
+        train_labels,
+        [[bool(note.subject_id >> j & 1) for j in range(5)] for note in fit_notes],
     )
     np.testing.assert_array_equal(
-        stop_labels, [[note.has_label(d) for d in Diagnosis] for note in stop_notes]
+        stop_labels,
+        [[bool(note.subject_id >> j & 1) for j in range(5)] for note in stop_notes],
     )
     assert list(model.decision_function.call_args.args[0]) == [
         prepared(note.text) for note in fold.test
@@ -1073,6 +1091,15 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
         d: (float(j),) * len(fold.test) for j, d in enumerate(Diagnosis)
     }
     assert result.converged is converged
+    assert result.n_features == len({
+        token for note in fold.train for token in prepared(note.text).split()
+    })
+    scorer.score(config.branches[0].default_params(), fold)
+    assert model.fit.call_count == 2
+    for first, second in zip(
+        model.fit.call_args_list[0].args, model.fit.call_args_list[1].args, strict=True
+    ):
+        np.testing.assert_array_equal(first, second)
 
 
 def test_multirescnn_branch_scores_tiny_network(tmp_path: Path) -> None:

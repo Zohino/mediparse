@@ -166,7 +166,7 @@ def network_stage_config() -> StageTuningConfig:
     """Sestaví levnou CPU síť s pěti výstupy.
 
     Returns:
-        Tokenová větev s odloženou polovinou pacientů.
+        Tokenová větev s odloženou třetinou pacientů.
     """
     default = {"lr": 0.01, "weight_decay": 0.0001, "dropout": 0.0, "filter_maps": 4}
     return stage_config(
@@ -191,6 +191,6 @@ def network_stage_config() -> StageTuningConfig:
             "warmup_steps": 0,
             "embedding_dim": 8,
             "min_count": 1,
-            "stopping_parts": 2,
+            "stopping_parts": 3,
         },
     )
