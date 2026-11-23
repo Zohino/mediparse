@@ -37,8 +37,8 @@ class _ResidualBranch(nn.Module):
     def forward(self, x: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
         x = torch.tanh(self.initial(x)) * mask
         hidden = torch.tanh(self.first(x)) * mask
-        hidden = self.second(hidden) * mask
-        return torch.tanh(hidden + self.shortcut(x) * mask) * mask
+        # Maskují se vstupy konvolucí; výstup větve maskuje pozornost.
+        return torch.tanh(self.second(hidden) + self.shortcut(x))
 
 
 class _MultiResCnn(nn.Module):
