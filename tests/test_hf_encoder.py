@@ -60,20 +60,17 @@ def test_pooling_matches_position_mean(count: int, *, bf16: bool) -> None:
     if bf16:
         model = model.to(torch.bfloat16)
     text = " ".join(f"w{i}" for i in range(1, count + 1))
-    ids = [tokenizer.convert_tokens_to_ids(f"w{i}") for i in range(1, count + 1)]
+    vocabulary = tokenizer.get_vocab()
+    ids = [vocabulary[f"w{i}"] for i in range(1, count + 1)]
     chunks = (
         [[2, *ids[:6], 3], [2, *ids[6:12], 3], [2, *ids[12:], 3]]
         if count == 13
         else [[2, *ids, 3]]
     )
-    width = max(map(len, chunks))
-    batch = torch.tensor([part + [0] * (width - len(part)) for part in chunks])
-    mask = torch.tensor([
-        [1] * len(part) + [0] * (width - len(part)) for part in chunks
-    ])
+    batch = tokenizer.pad({"input_ids": chunks}, return_tensors="pt")
     with torch.inference_mode():
-        states = model(input_ids=batch, attention_mask=mask).last_hidden_state.float()
-    weights = mask[..., None].float()
+        states = model(**batch).last_hidden_state.float()
+    weights = batch["attention_mask"][..., None].float()
     masked_states = states * weights
     expected = (masked_states.sum((0, 1)) / weights.sum()).numpy()
     actual = HfMeanEncoder(model, tokenizer, 8, "cpu").embed(text)
