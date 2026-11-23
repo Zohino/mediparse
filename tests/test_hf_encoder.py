@@ -51,30 +51,34 @@ def test_windows_preserve_content(
     ("count", "bf16"), [(3, False), (13, False), (0, False), (3, True)]
 )
 def test_pooling_matches_position_mean(count: int, *, bf16: bool) -> None:
-    """Váží pozice, včetně speciálních, a sčítá vždy ve float32."""
+    """Rovná se průměru přes masku pozornosti nad dávkou s výplní.
+
+    Výplň se nepočítá, speciální tokeny ano, sčítá se ve float32.
+    """
     torch = pytest.importorskip("torch")
     model, tokenizer = encoder_parts()
     if bf16:
         model = model.to(torch.bfloat16)
     text = " ".join(f"w{i}" for i in range(1, count + 1))
-    ids = [tokenizer.convert_tokens_to_ids(f"w{i}") for i in range(1, count + 1)]
+    vocabulary = tokenizer.get_vocab()
+    ids = [vocabulary[f"w{i}"] for i in range(1, count + 1)]
     chunks = (
         [[2, *ids[:6], 3], [2, *ids[6:12], 3], [2, *ids[12:], 3]]
         if count == 13
         else [[2, *ids, 3]]
     )
+    batch = tokenizer.pad({"input_ids": chunks}, return_tensors="pt")
     with torch.inference_mode():
-        states = [
-            model(input_ids=torch.tensor([part])).last_hidden_state[0].float()
-            for part in chunks
-        ]
-    expected = torch.cat(states).mean(0).numpy()
+        states = model(**batch).last_hidden_state.float()
+    weights = batch["attention_mask"][..., None].float()
+    masked_states = states * weights
+    expected = (masked_states.sum((0, 1)) / weights.sum()).numpy()
     actual = HfMeanEncoder(model, tokenizer, 8, "cpu").embed(text)
     np.testing.assert_allclose(actual, expected, rtol=0, atol=1e-6)
     assert actual.dtype == np.float32
     if count == 13:
         assert not np.allclose(
-            actual, torch.stack([state.mean(0) for state in states]).mean(0).numpy()
+            actual, (masked_states.sum(1) / weights.sum(1)).mean(0).numpy()
         )
 
 

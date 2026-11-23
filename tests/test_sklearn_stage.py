@@ -674,7 +674,9 @@ def test_stage_inputs_follow_representation(
         b for b in config.branches if b.name == "mmbert-base-mean-dictionary/logreg"
     )
     scorer.score(dictionary_encoder.default_params(), fold)
-    assert embeddings.embed.call_args_list[1].args[0] == config.encoders[1]
+    assert embeddings.embed.call_args_list[1].args[0] == next(
+        e for e in config.encoders if e.name == "mmbert-base-mean-dictionary"
+    )
     normalized_texts = embeddings.embed.call_args_list[1].args[1]
     assert len(normalized_texts) == len(fold.train) + len(fold.test)
     for text in normalized_texts:
