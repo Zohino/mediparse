@@ -23,7 +23,7 @@ word2vec se učí vektory slov z jejich kontextu [@Mikolov2013; @Mikolov2013b]. 
 
 ## Protokol
 
-Embedding mmBERT se počítá jednou na zprávu bez labelů. Tři reprezentace se liší oknem (8192 nebo 512 tokenů) a vstupem (bez předzpracování nebo se slovníkem). Zpráva se dělí na okna beze ztrát a embedding je průměr přes všechny pozice všech oken. word2vec se učí jen na tréninku foldu; zpráva je průměrem vektorů slov. Příznaky se standardizují podle tréninku foldu.
+Embedding mmBERT se počítá jednou na zprávu bez labelů. `r count_phrase(nrow(manifest$encoders), c("reprezentace", "reprezentace", "reprezentací"))` se liší oknem (`r paste(unique(manifest$encoders$window), collapse = " nebo ")` tokenů) a vstupem (bez předzpracování nebo se slovníkem). Zpráva se dělí na okna beze ztrát a embedding je průměr přes všechny pozice všech oken. word2vec se učí jen na tréninku foldu; zpráva je průměrem vektorů slov. Příznaky se standardizují podle tréninku foldu.
 
 {{< include _partials/stage-methods.qmd >}}
 
