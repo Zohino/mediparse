@@ -20,14 +20,14 @@
             "kind": "float",
             "name": "lr",
             "low": 0.01,
-            "high": 1.0,
+            "high": 5.0,
             "log": true
           },
           {
             "kind": "int",
             "name": "epoch",
             "low": 5,
-            "high": 25,
+            "high": 100,
             "log": true
           },
           {
@@ -52,6 +52,57 @@
         "word_ngrams": 1,
         "dim": 100
       }
+    },
+    {
+      "family": "multirescnn",
+      "space": {
+        "params": [
+          {
+            "kind": "float",
+            "name": "lr",
+            "low": 0.0001,
+            "high": 0.005,
+            "log": true
+          },
+          {
+            "kind": "float",
+            "name": "weight_decay",
+            "low": 1e-06,
+            "high": 0.01,
+            "log": true
+          },
+          {
+            "kind": "float",
+            "name": "dropout",
+            "low": 0.0,
+            "high": 0.5,
+            "log": false
+          },
+          {
+            "kind": "int",
+            "name": "filter_maps",
+            "low": 25,
+            "high": 100,
+            "log": true
+          }
+        ]
+      },
+      "default": {
+        "lr": 0.0005,
+        "weight_decay": 0.0001,
+        "dropout": 0.2,
+        "filter_maps": 50
+      }
     }
-  ]
+  ],
+  "network": {
+    "device": "cuda",
+    "epochs": 20,
+    "batch_size": 16,
+    "max_words": 4000,
+    "warmup_steps": 2000,
+    "embedding_dim": 100,
+    "min_count": 3,
+    "stopping_parts": 10
+  }
 }
