@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 from unittest.mock import Mock
 
 import numpy as np
@@ -160,3 +161,12 @@ def test_encoder_preserves_programming_errors(
     with pytest.raises(error_type) as caught:
         HfMeanEncoder(model, tokenizer, 8, "cpu").embed("w1")
     assert caught.value is error
+
+
+def test_missing_torch_uses_shared_device_error(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Přímé načtení bez torch použije stejnou doménovou chybu jako nástroj."""
+    monkeypatch.setitem(sys.modules, "torch", None)
+    with pytest.raises(InvalidInputError, match="-e gpu"):
+        load_encoder(SPEC)
