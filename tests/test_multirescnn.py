@@ -16,6 +16,7 @@ import torch
 
 from mediparse.infrastructure import multirescnn
 from mediparse.infrastructure.multirescnn import MultiResCnnClassifier
+from mediparse.infrastructure.word2vec import trained_vectors
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
@@ -292,3 +293,19 @@ def test_random_state_seeds_vectors_and_batches(
         call.kwargs["generator"].initial_seed() == 13
         for call in permutations.call_args_list
     )
+
+
+def test_embeddings_start_from_word2vec(corpus: tuple[list[str], np.ndarray]) -> None:
+    """Nulová rychlost učení zachová word2vec na řádcích slov a nulové rezervy."""
+    documents, labels = corpus
+    model = small_model(lr=0.0, epochs=1).fit(
+        documents[:60], labels[:60], documents[60:80], labels[60:80]
+    )
+    vectors = trained_vectors(
+        {"vector_size": 8, "min_count": 1, "workers": 1, "seed": 0},
+        [text.split() for text in documents[:60]],
+    )
+    weights = model.model_.embedding.weight.detach().cpu().numpy()
+    for word in vectors.index_to_key:
+        np.testing.assert_array_equal(weights[model.vocabulary_[word]], vectors[word])
+    np.testing.assert_array_equal(weights[:2], np.zeros((2, 8), dtype=np.float32))
