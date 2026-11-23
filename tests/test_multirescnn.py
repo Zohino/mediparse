@@ -14,6 +14,7 @@ pytest.importorskip("torch")
 
 import torch
 
+from mediparse.infrastructure import multirescnn
 from mediparse.infrastructure.multirescnn import MultiResCnnClassifier
 
 if TYPE_CHECKING:
@@ -102,7 +103,7 @@ def test_restores_epoch_with_lowest_stop_loss(
 ) -> None:
     """Negované stop labely vyberou dřívější epochu a nezávislá BCE potvrdí obnovu."""
     documents, labels = corpus
-    model = small_model().fit(
+    model = small_model(dropout=0.3).fit(
         documents[:60], labels[:60], documents[60:80], ~labels[60:80]
     )
     assert len(model.stop_losses_) == model.epochs
@@ -209,3 +210,85 @@ def test_scheduler_and_deterministic_mode(corpus: tuple[list[str], np.ndarray]) 
     assert schedules[0].optimizer.param_groups[0]["lr"] == pytest.approx(0.0, abs=0.0)
     assert torch.are_deterministic_algorithms_enabled()
     assert os.environ["CUBLAS_WORKSPACE_CONFIG"]
+
+
+@pytest.mark.parametrize(
+    ("parameter", "value"),
+    [
+        ("lr", 0.001),
+        ("weight_decay", 0.1),
+        ("dropout", 0.3),
+        ("filter_maps", 6),
+        ("embedding_dim", 12),
+        ("random_state", 13),
+    ],
+)
+def test_parameters_change_scores(
+    corpus: tuple[list[str], np.ndarray], parameter: str, value: float
+) -> None:
+    """Laděný parametr i technické podmínky skutečně ovlivňují skóre."""
+    documents, labels = corpus
+    baseline = small_model(epochs=2).fit(
+        documents[:60], labels[:60], documents[60:80], labels[60:80]
+    )
+    changed = small_model(epochs=2, **{parameter: value}).fit(
+        documents[:60], labels[:60], documents[60:80], labels[60:80]
+    )
+    assert not np.array_equal(
+        baseline.decision_function(documents[80:]),
+        changed.decision_function(documents[80:]),
+    )
+
+
+def test_min_count_selects_vocabulary(corpus: tuple[list[str], np.ndarray]) -> None:
+    """Slovo se dvěma výskyty splní min_count 2 a nesplní min_count 3."""
+    documents, labels = corpus
+    fit = [
+        text + " dvakrat" if i < 2 else text for i, text in enumerate(documents[:60])
+    ]
+    for min_count in (2, 3):
+        model = small_model(epochs=1, min_count=min_count).fit(
+            fit, labels[:60], documents[60:80], labels[60:80]
+        )
+        assert ("dvakrat" in model.vocabulary_) is (min_count == 2)
+
+
+def test_every_optimizer_step_uses_training_mode(
+    corpus: tuple[list[str], np.ndarray], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Režim tréninku platí při každém kroku také ve druhé epoše."""
+    documents, labels = corpus
+    model = small_model(epochs=2, dropout=0.3)
+    original_step = torch.optim.AdamW.step
+    training = []
+
+    def record_step(optimizer: torch.optim.AdamW) -> None:
+        training.append(model.model_.training)
+        original_step(optimizer)
+
+    monkeypatch.setattr(torch.optim.AdamW, "step", record_step)
+    model.fit(documents[:60], labels[:60], documents[60:80], labels[60:80])
+    assert len(training) == 16
+    assert all(training)
+
+
+def test_random_state_seeds_vectors_and_batches(
+    corpus: tuple[list[str], np.ndarray],
+) -> None:
+    """Seed řídí word2vec i generátor pořadí dávek, nejen inicializaci vah."""
+    documents, labels = corpus
+    with (
+        patch.object(
+            multirescnn, "trained_vectors", wraps=multirescnn.trained_vectors
+        ) as vectors,
+        patch("torch.randperm", wraps=torch.randperm) as permutations,
+    ):
+        small_model(epochs=2, random_state=13).fit(
+            documents[:60], labels[:60], documents[60:80], labels[60:80]
+        )
+    assert vectors.call_args.args[0]["seed"] == 13
+    assert permutations.call_count == 4
+    assert all(
+        call.kwargs["generator"].initial_seed() == 13
+        for call in permutations.call_args_list
+    )
