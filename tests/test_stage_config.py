@@ -23,7 +23,12 @@ from mediparse.domain.stage_tuning import (
     best_trial,
 )
 from tests.hf_encoder_support import SPEC
-from tests.stage_support import stage_config, token_stage_config, word2vec_stage_config
+from tests.stage_support import (
+    network_stage_config,
+    stage_config,
+    token_stage_config,
+    word2vec_stage_config,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -461,4 +466,22 @@ def test_preprocessing_rejects_obsolete_fields() -> None:
     """Stupeň nepřijímá původní společné nastavení vstupu."""
     data = stage_config().model_dump(mode="json") | {"input": {}}
     with pytest.raises(ValidationError, match="Extra inputs are not permitted"):
+        StageTuningConfig.model_validate_json(json.dumps(data))
+
+
+def test_network_required_exactly_with_multirescnn() -> None:
+    """Technická nastavení sítě jsou povinná právě s MultiResCNN."""
+    data = network_stage_config().model_dump(mode="json")
+    data["network"] = None
+    with pytest.raises(ValidationError, match="právě s rodinou multirescnn"):
+        StageTuningConfig.model_validate_json(json.dumps(data))
+    with pytest.raises(ValidationError, match="právě s rodinou multirescnn"):
+        stage_config(network=network_stage_config().model_dump(mode="json")["network"])
+
+
+def test_network_stopping_needs_at_least_two_parts() -> None:
+    """Odložení všech pacientů nemůže tvořit trénink."""
+    data = network_stage_config().model_dump(mode="json")
+    data["network"]["stopping_parts"] = 1
+    with pytest.raises(ValidationError, match="greater than or equal to 2"):
         StageTuningConfig.model_validate_json(json.dumps(data))

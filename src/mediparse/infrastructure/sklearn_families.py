@@ -26,7 +26,8 @@ if TYPE_CHECKING:
 LIGHTGBM_THREADS: Final = 4
 
 
-def classifier_estimator(
+# Samostatný návrat každé rodiny drží přímé mapování bez pomocné továrny.
+def classifier_estimator(  # ruff: ignore[too-many-return-statements]
     family: ClassifierFamily, seed: Seed, scratch: Path
 ) -> BaseEstimator:
     """Vytvoří estimator rodiny; LSA provádí scorer stupně.
@@ -54,6 +55,11 @@ def classifier_estimator(
             )
         case ClassifierFamily.FASTTEXT:
             return FastTextClassifier(scratch, random_state=seed)
+        case ClassifierFamily.MULTIRESCNN:
+            # Torch chybí v default; ostatní rodiny musí zůstat importovatelné.
+            from mediparse.infrastructure.multirescnn import MultiResCnnClassifier  # ruff: ignore[import-outside-top-level]
+
+            return MultiResCnnClassifier(random_state=seed)
         case _:
             assert_never(family)
 

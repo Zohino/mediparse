@@ -21,7 +21,7 @@ from mediparse.application.patient_cv import patient_holdouts
 from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.representation import Word2VecRepresentation
+from mediparse.domain.representation import ClassifierFamily, Word2VecRepresentation
 from mediparse.domain.split import Holdout
 from mediparse.domain.stage_tuning import StageLsa
 from mediparse.entrypoints.stage_tuning import stage_normalizations
@@ -45,7 +45,12 @@ from mediparse.infrastructure.sklearn_stage import (
 from mediparse.infrastructure.stage_config import load_stage_config
 from tests.hf_encoder_support import SPEC
 from tests.screening_support import notes
-from tests.stage_support import stage_config, token_stage_config, word2vec_stage_config
+from tests.stage_support import (
+    network_stage_config,
+    stage_config,
+    token_stage_config,
+    word2vec_stage_config,
+)
 from tests.support import REPOSITORY, REPOSITORY_DIAGNOSIS_CANDIDATES
 
 if TYPE_CHECKING:
@@ -56,7 +61,6 @@ if TYPE_CHECKING:
     from sklearn.base import BaseEstimator
     from sklearn.decomposition import TruncatedSVD
 
-    from mediparse.domain.representation import ClassifierFamily
     from mediparse.domain.stage_tuning import StageTuningConfig
     from mediparse.domain.tuning import ParamValue
 
@@ -1024,3 +1028,68 @@ def test_ngram_counts_rebuild_for_unseen_text(
         assert actual.scores[diagnosis] == pytest.approx(
             expected.scores[diagnosis], abs=1e-12
         )
+
+
+@pytest.mark.parametrize("converged", [True, False])
+def test_multirescnn_fits_once_with_patient_stopping_part(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, converged: bool
+) -> None:
+    """Jeden fit drží pacienty oddělené a sloupce ve výčtovém pořadí diagnóz."""
+    config = network_stage_config()
+    fold = patient_holdouts(notes(visits=2), 2, 7, StratifiedGroupFolds())[0]
+    model = Mock(converged_=converged)
+    model.set_params.return_value = model
+    model.decision_function.return_value = np.tile(np.arange(5), (len(fold.test), 1))
+    factory = Mock(return_value=model)
+    monkeypatch.setattr(sklearn_stage, "classifier_estimator", factory)
+    scorer = SklearnStageScorer(config, {"tok": None}, 7, tmp_path, Mock())
+    result = scorer.score(config.branches[0].default_params(), fold)
+    factory.assert_called_once_with(ClassifierFamily.MULTIRESCNN, 7, tmp_path)
+    assert config.network is not None
+    model.set_params.assert_called_once_with(
+        **config.families[0].default,
+        **config.network.model_dump(exclude={"stopping_parts"}),
+    )
+    model.fit.assert_called_once()
+    train, train_labels, stop, stop_labels = model.fit.call_args.args
+    prepared = joined_tokens(None)
+    fit_notes = [note for note in fold.train if prepared(note.text) in train]
+    stop_notes = [note for note in fold.train if prepared(note.text) in stop]
+    assert {note.subject_id for note in fit_notes}.isdisjoint(
+        note.subject_id for note in stop_notes
+    )
+    assert set(fit_notes) | set(stop_notes) == set(fold.train)
+    assert set(fit_notes + stop_notes).isdisjoint(fold.test)
+    np.testing.assert_array_equal(
+        train_labels, [[note.has_label(d) for d in Diagnosis] for note in fit_notes]
+    )
+    np.testing.assert_array_equal(
+        stop_labels, [[note.has_label(d) for d in Diagnosis] for note in stop_notes]
+    )
+    assert list(model.decision_function.call_args.args[0]) == [
+        prepared(note.text) for note in fold.test
+    ]
+    assert result.scores == {
+        d: (float(j),) * len(fold.test) for j, d in enumerate(Diagnosis)
+    }
+    assert result.converged is converged
+
+
+def test_multirescnn_branch_scores_tiny_network(tmp_path: Path) -> None:
+    """Skutečná malá síť vrátí konečná skóre všech diagnóz foldu."""
+    torch = pytest.importorskip("torch")
+    previous = torch.get_num_threads()
+    torch.set_num_threads(1)
+    config = network_stage_config()
+    fold = patient_holdouts(notes(visits=2), 2, 7, StratifiedGroupFolds())[0]
+    try:
+        result = SklearnStageScorer(config, {"tok": None}, 7, tmp_path, Mock()).score(
+            config.branches[0].default_params(), fold
+        )
+    finally:
+        torch.set_num_threads(previous)
+    assert set(result.scores) == set(Diagnosis)
+    assert all(
+        len(scores) == len(fold.test) and np.isfinite(scores).all()
+        for scores in result.scores.values()
+    )

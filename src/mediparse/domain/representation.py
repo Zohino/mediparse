@@ -33,6 +33,7 @@ class ClassifierFamily(StrEnum):
     LIGHTGBM_LSA = "lightgbm_lsa"
     LIGHTGBM = "lightgbm"
     FASTTEXT = "fasttext"
+    MULTIRESCNN = "multirescnn"
 
 
 class EncoderSpec(BaseModel):
@@ -176,7 +177,7 @@ def accepts(spec: Representation, family: ClassifierFamily) -> bool:
                 ClassifierFamily.LIGHTGBM,
             }
         case TokensSpec():
-            return family is ClassifierFamily.FASTTEXT
+            return family in {ClassifierFamily.FASTTEXT, ClassifierFamily.MULTIRESCNN}
         case TfidfRepresentation():
             return family in {
                 ClassifierFamily.COMPLEMENT_NB,

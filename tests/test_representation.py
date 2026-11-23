@@ -31,7 +31,7 @@ from tests.stage_support import stage_config, word2vec_stage_config
         ),
         (
             TokensSpec(name="tok", text_preprocessing=TextPreprocessing.DICTIONARY),
-            {"fasttext"},
+            {"fasttext", "multirescnn"},
         ),
     ],
 )
