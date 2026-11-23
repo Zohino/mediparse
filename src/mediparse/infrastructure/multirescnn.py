@@ -139,7 +139,7 @@ class MultiResCnnClassifier(BaseEstimator):
         stop_documents: Sequence[str],
         stop_labels: np.ndarray,
     ) -> Self:
-        # Transformers i torch chybí v části prostředí; rozvrh se načte až při fitu.
+        # Skops musí předcházet transformers: opačné pořadí selhává při hledání důvěryhodných typů.
         from transformers import get_linear_schedule_with_warmup  # ruff: ignore[import-outside-top-level]
 
         vectors = trained_vectors(
