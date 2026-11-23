@@ -880,7 +880,7 @@ def test_tfidf_features_match_vectorizer(
     )
     fold = _clinical_fold()
     train = [note.text for note in fold.train]
-    validation = [note.text for note in fold.test]
+    validation = [*[note.text for note in fold.test], "zzzz zzzz"]
     counts = ngram_counts(analyzer, (1, upper), [*train, *validation])
     vectorizer = TfidfVectorizer(
         analyzer=analyzer,
