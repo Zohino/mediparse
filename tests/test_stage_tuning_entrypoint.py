@@ -559,16 +559,11 @@ def test_missing_torch_is_refused(
     scorer.assert_not_called()
 
 
+@pytest.mark.usefixtures("torch_runtime")
 def test_manifest_records_torch_for_network_stage(tmp_path: Path) -> None:
     """CPU síť zapíše torch i transformers mezi verze manifestu."""
-    torch = pytest.importorskip("torch")
     paths = _paths(tmp_path)
     paths.config.write_text(network_stage_config().model_dump_json(), encoding="utf-8")
-    previous = torch.get_num_threads()
-    torch.set_num_threads(1)
-    try:
-        assert _run(paths) is ExitCode.OK
-    finally:
-        torch.set_num_threads(previous)
+    assert _run(paths) is ExitCode.OK
     manifest = StageTuningManifest.model_validate_json(paths.manifest.read_bytes())
     assert {"torch", "transformers"} <= manifest.environment.packages.keys()

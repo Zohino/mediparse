@@ -1102,19 +1102,14 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
         np.testing.assert_array_equal(first, second)
 
 
+@pytest.mark.usefixtures("torch_runtime")
 def test_multirescnn_branch_scores_tiny_network(tmp_path: Path) -> None:
     """Skutečná malá síť vrátí konečná skóre všech diagnóz foldu."""
-    torch = pytest.importorskip("torch")
-    previous = torch.get_num_threads()
-    torch.set_num_threads(1)
     config = network_stage_config()
     fold = patient_holdouts(notes(visits=2), 2, 7, StratifiedGroupFolds())[0]
-    try:
-        result = SklearnStageScorer(config, {"tok": None}, 7, tmp_path, Mock()).score(
-            config.branches[0].default_params(), fold
-        )
-    finally:
-        torch.set_num_threads(previous)
+    result = SklearnStageScorer(config, {"tok": None}, 7, tmp_path, Mock()).score(
+        config.branches[0].default_params(), fold
+    )
     assert set(result.scores) == set(Diagnosis)
     assert all(
         len(scores) == len(fold.test) and np.isfinite(scores).all()

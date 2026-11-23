@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import os
-from typing import TYPE_CHECKING
 from unittest.mock import patch
 
 import numpy as np
@@ -19,24 +18,7 @@ from mediparse.infrastructure import multirescnn
 from mediparse.infrastructure.multirescnn import MultiResCnnClassifier
 from mediparse.infrastructure.word2vec import trained_vectors
 
-if TYPE_CHECKING:
-    from collections.abc import Iterator
-
-
-pytestmark = pytest.mark.usefixtures("single_thread")
-
-
-@pytest.fixture
-def single_thread() -> Iterator[None]:
-    """Malé konvoluce neplatí režii mnoha CPU vláken.
-
-    Yields:
-        Jednovláknové výpočty po dobu testu.
-    """
-    previous = torch.get_num_threads()
-    torch.set_num_threads(1)
-    yield
-    torch.set_num_threads(previous)
+pytestmark = pytest.mark.usefixtures("torch_runtime")
 
 
 @pytest.fixture
@@ -215,7 +197,7 @@ def test_scheduler_and_deterministic_mode(corpus: tuple[list[str], np.ndarray]) 
     assert schedules[0].last_epoch == 6
     assert schedules[0].optimizer.param_groups[0]["lr"] == pytest.approx(0.0, abs=0.0)
     assert torch.are_deterministic_algorithms_enabled()
-    assert os.environ["CUBLAS_WORKSPACE_CONFIG"]
+    assert os.environ["CUBLAS_WORKSPACE_CONFIG"] == ":4096:8"
 
 
 @pytest.mark.parametrize(
