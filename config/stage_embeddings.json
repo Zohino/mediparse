@@ -2,7 +2,7 @@
   "seed": 0,
   "subsample_parts": 3,
   "folds": 5,
-  "trials": 54,
+  "trials": 72,
   "random_startup_trials": 5,
   "strip_diagnostic_sections": false,
   "representations": [
@@ -12,6 +12,15 @@
       "model": "jhu-clsp/mmBERT-base",
       "revision": "c5955035435e2bf121cde7f3c8863ef52ff35d82",
       "window": 8192,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    },
+    {
+      "name": "mmbert-base-mean-512",
+      "text_preprocessing": "none",
+      "model": "jhu-clsp/mmBERT-base",
+      "revision": "c5955035435e2bf121cde7f3c8863ef52ff35d82",
+      "window": 512,
       "device": "cuda",
       "dtype": "bfloat16"
     },

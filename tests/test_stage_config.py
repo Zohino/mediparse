@@ -22,11 +22,24 @@ from mediparse.domain.stage_tuning import (
     StageTuningConfig,
     best_trial,
 )
+from mediparse.infrastructure.stage_config import load_stage_config
 from tests.hf_encoder_support import SPEC
 from tests.stage_support import stage_config, token_stage_config, word2vec_stage_config
+from tests.support import REPOSITORY
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+
+
+def test_embeddings_config_includes_short_window_branches() -> None:
+    """Okno 512 má tři rodiny a rozpočet dává šest pokusů na větev."""
+    config = load_stage_config(REPOSITORY / "config/stage_embeddings.json")
+    assert {
+        "mmbert-base-mean-512/logreg",
+        "mmbert-base-mean-512/linear_svm",
+        "mmbert-base-mean-512/lightgbm",
+    } <= {branch.name for branch in config.branches}
+    assert config.trials == 6 * len(config.branches)
 
 
 def test_branches_and_namespaces() -> None:
