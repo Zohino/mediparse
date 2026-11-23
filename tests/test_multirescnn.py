@@ -97,6 +97,7 @@ def test_learns_marker_labels(
         labels[80:], trained.decision_function(documents[80:]), average=None
     )
     assert np.all(aucs >= 0.9), aucs
+    assert trained.converged_
 
 
 def test_restores_epoch_with_lowest_stop_loss(
