@@ -6,12 +6,15 @@ import json
 import re
 from dataclasses import replace
 from random import Random
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Literal
 from unittest.mock import Mock, call
 
 import numpy as np
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 from joblib import parallel_config
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 
 from mediparse.application.patient_cv import patient_holdouts
@@ -25,12 +28,17 @@ from mediparse.entrypoints.stage_tuning import stage_normalizations
 from mediparse.infrastructure import sklearn_classifier, sklearn_stage
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
-from mediparse.infrastructure.sklearn_classifier import tfidf_vectorizer
+from mediparse.infrastructure.sklearn_classifier import (
+    TfidfParameters,
+    tfidf_vectorizer,
+)
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.sklearn_stage import (
     SklearnStageScorer,
     encoder_features,
     joined_tokens,
+    ngram_counts,
+    tfidf_features,
     token_documents,
     word2vec_features,
 )
@@ -839,3 +847,178 @@ def test_parallel_memmap_stays_in_scratch(
     assert len(scored.scores) == len(Diagnosis)
     assert (tmp_path / "scratch").is_dir()
     assert not any((tmp_path / "scratch").iterdir())
+
+
+@given(
+    analyzer=st.sampled_from(["word", "char_wb"]),
+    bounds=st.tuples(st.integers(1, 6), st.integers(1, 6)),
+    document_frequency=st.tuples(
+        st.integers(1, 3), st.floats(min_value=0.5, max_value=1.0)
+    ),
+    sublinear_tf=st.booleans(),
+    max_features=st.one_of(st.none(), st.integers(1, 50)),
+)
+def test_tfidf_features_match_vectorizer(
+    analyzer: Literal["word", "char_wb"],
+    bounds: tuple[int, int],
+    document_frequency: tuple[int, float],
+    *,
+    sublinear_tf: bool,
+    max_features: int | None,
+) -> None:
+    """Výřezy a váhy odpovídají nezávislému vektorizéru včetně remíz stropu."""
+    min_df, max_df = document_frequency
+    upper = 3 if analyzer == "word" else 6
+    low, high = sorted(min(value, upper) for value in bounds)
+    params = TfidfParameters(
+        ngram_min=low,
+        ngram_max=high,
+        min_df=min_df,
+        max_df=max_df,
+        sublinear_tf=sublinear_tf,
+    )
+    fold = _clinical_fold()
+    train = [note.text for note in fold.train]
+    validation = [*[note.text for note in fold.test], "zzzz zzzz"]
+    counts = ngram_counts(analyzer, (1, upper), [*train, *validation])
+    vectorizer = TfidfVectorizer(
+        analyzer=analyzer,
+        ngram_range=(low, high),
+        min_df=min_df,
+        max_df=max_df,
+        sublinear_tf=sublinear_tf,
+        max_features=max_features,
+        lowercase=False,
+    )
+    expected_train = vectorizer.fit_transform(train)
+    expected_validation = vectorizer.transform(validation)
+    actual = tfidf_features(counts, train, validation, params, max_features)
+    for ours, expected in zip(
+        actual, (expected_train, expected_validation), strict=True
+    ):
+        assert ours.shape == expected.shape
+        np.testing.assert_allclose(
+            ours.toarray(), expected.toarray(), rtol=0, atol=1e-12
+        )
+
+
+@pytest.mark.parametrize(
+    ("min_df", "max_df", "n_train"),
+    [(102, 1.0, 101), (2, 0.02, 101), (2, 0.02, 100)],
+)
+def test_tfidf_features_errors_match_vectorizer(
+    min_df: int, max_df: float, n_train: int
+) -> None:
+    """Chyby mezí i prořezání na rovnosti mezí přesně odpovídají sklearn."""
+    fold = _clinical_fold()
+    train = [note.text for note in fold.train][:n_train]
+    validation = [note.text for note in fold.test]
+    # Nejmenší DF je 10; intervaly [2, 2.02] i [2, 2] jsou prázdné.
+    params = TfidfParameters(
+        ngram_max=1,
+        min_df=min_df,
+        max_df=max_df,
+        sublinear_tf=True,
+    )
+    counts = ngram_counts("word", (1, 1), [*train, *validation])
+    vectorizer = TfidfVectorizer(
+        lowercase=False,
+        min_df=min_df,
+        max_df=max_df,
+    )
+    with pytest.raises(ValueError, match=r"max_df|After pruning") as error:
+        vectorizer.fit_transform(train)
+    with pytest.raises(ValueError, match=f"^{re.escape(str(error.value))}$"):
+        tfidf_features(counts, train, validation, params, None)
+
+
+@pytest.fixture
+def counts_scorer(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> tuple[SklearnStageScorer, Mock]:
+    """Vrátí klasický scorer a záznam staveb matice četností.
+
+    Returns:
+        Scorer se syntetickými vstupy a průchozí mock stavby matice.
+    """
+    build = Mock(wraps=sklearn_stage.ngram_counts)
+    monkeypatch.setattr(sklearn_stage, "ngram_counts", build)
+    config = load_stage_config(REPOSITORY / "config/stage_classical.json").model_copy(
+        update={"lsa": StageLsa(components=3, max_features=100_000)}
+    )
+    return SklearnStageScorer(
+        config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
+    ), build
+
+
+def test_ngram_counts_built_once_per_widest_range(
+    counts_scorer: tuple[SklearnStageScorer, Mock],
+) -> None:
+    """Druhý fold i užší rozsahy využijí společnou matici všech textů."""
+    scorer, build = counts_scorer
+    original = _clinical_fold()
+    for fold in patient_holdouts(
+        (*original.train, *original.test), 2, 7, StratifiedGroupFolds()
+    ):
+        for name, bounds in [
+            ("char_wb", (3, 5)),
+            ("char_wb", (2, 6)),
+            ("char_wb", (2, 4)),
+            ("word", (1, 3)),
+            ("word", (1, 1)),
+        ]:
+            branch = next(
+                b for b in scorer.config.branches if b.name == f"{name}/logreg"
+            )
+            scorer.score(
+                branch.default_params()
+                | {f"{name}.ngram_min": bounds[0], f"{name}.ngram_max": bounds[1]},
+                fold,
+            )
+    assert [c.args[:2] for c in build.call_args_list] == [
+        ("char_wb", (3, 5)),
+        ("char_wb", (2, 6)),
+        ("word", (1, 3)),
+    ]
+
+
+def test_ngram_counts_range_grows_to_union(
+    counts_scorer: tuple[SklearnStageScorer, Mock],
+) -> None:
+    """Přestavba ponechá horní mez předchozího rozsahu."""
+    scorer, build = counts_scorer
+    branch = next(b for b in scorer.config.branches if b.name == "char_wb/logreg")
+    for low, high in [(3, 5), (2, 4), (3, 5)]:
+        scorer.score(
+            branch.default_params()
+            | {"char_wb.ngram_min": low, "char_wb.ngram_max": high},
+            _clinical_fold(),
+        )
+    assert [c.args[:2] for c in build.call_args_list] == [
+        ("char_wb", (3, 5)),
+        ("char_wb", (2, 5)),
+    ]
+
+
+def test_ngram_counts_rebuild_for_unseen_text(
+    counts_scorer: tuple[SklearnStageScorer, Mock],
+) -> None:
+    """Nový text rozšíří korpus cache a skóre odpovídá čerstvému scoreru."""
+    scorer, build = counts_scorer
+    branch = next(b for b in scorer.config.branches if b.name == "word/logreg")
+    original = _clinical_fold()
+    scorer.score(branch.default_params(), original)
+    new_text = "novel synthetic validation text"
+    fold = replace(
+        original, test=(replace(original.test[0], text=new_text), *original.test[1:])
+    )
+    actual = scorer.score(branch.default_params(), fold)
+    assert build.call_count == 2
+    assert set(build.call_args.args[2]) == {
+        n.text.lower() for n in (*original.train, *original.test)
+    } | {new_text}
+    expected = replace(scorer).score(branch.default_params(), fold)
+    for diagnosis in Diagnosis:
+        assert actual.scores[diagnosis] == pytest.approx(
+            expected.scores[diagnosis], abs=1e-12
+        )

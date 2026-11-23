@@ -37,6 +37,11 @@ if TYPE_CHECKING:
     from mediparse.domain.tuning import ParamValue
 
 
+EMPTY_VOCABULARY: Final = (
+    "Trénovací texty neobsahují žádný token, slovník by byl prázdný."
+)
+
+
 class TfidfParameters(BaseModel):
     """Typové meze reprezentace TF-IDF na hranici sklearn."""
 
@@ -59,29 +64,6 @@ class SvmParameters(TfidfParameters):
     class_weight: Literal["balanced"] | None
 
 
-def tfidf_from(
-    params: TfidfParameters,
-    analyzer: Literal["word", "char_wb"],
-    normalization: TextNormalization | None,
-    *,
-    max_features: int | None = None,
-) -> TfidfVectorizer:
-    """Sestaví vektorizér ze společných typovaných parametrů.
-
-    Returns:
-        Nenatrénovaný vektorizér s explicitními volbami reprezentace.
-    """
-    return tfidf_vectorizer(
-        normalization,
-        analyzer=analyzer,
-        ngram_range=(params.ngram_min, params.ngram_max),
-        min_df=params.min_df,
-        max_df=params.max_df,
-        sublinear_tf=params.sublinear_tf,
-        max_features=max_features,
-    )
-
-
 def svm_vectorizer(
     params: SvmParameters, normalization: TextNormalization | None
 ) -> TfidfVectorizer:
@@ -90,7 +72,14 @@ def svm_vectorizer(
     Returns:
         Nenatrénovaný vektorizér se společným předzpracováním.
     """
-    return tfidf_from(params, params.analyzer, normalization)
+    return tfidf_vectorizer(
+        normalization,
+        analyzer=params.analyzer,
+        ngram_range=(params.ngram_min, params.ngram_max),
+        min_df=params.min_df,
+        max_df=params.max_df,
+        sublinear_tf=params.sublinear_tf,
+    )
 
 
 def svm_estimator(params: SvmParameters, seed: Seed) -> LinearSVC:
@@ -181,7 +170,6 @@ def tfidf_vectorizer(  # ruff: ignore[too-many-arguments]
     min_df: int = 1,
     max_df: float = 1.0,
     sublinear_tf: bool = True,
-    max_features: int | None = None,
 ) -> TfidfVectorizer:
     """Vectorizer pro trénink, ladění i měření v sešitu EDA.
 
@@ -195,7 +183,6 @@ def tfidf_vectorizer(  # ruff: ignore[too-many-arguments]
         min_df: Nejmenší počet dokumentů s příznakem.
         max_df: Největší podíl dokumentů s příznakem.
         sublinear_tf: Zda použít logaritmickou frekvenci místo počtu výskytů.
-        max_features: Strop slovníku na nejčastější termy, None bez stropu.
 
     Returns:
         Nenatrénovaný vectorizer; bez normalizace je to ablace bez preprocessoru.
@@ -213,7 +200,6 @@ def tfidf_vectorizer(  # ruff: ignore[too-many-arguments]
     )
     return TfidfVectorizer(
         sublinear_tf=sublinear_tf,
-        max_features=max_features,
         min_df=min_df,
         max_df=max_df,
         preprocessor=preprocessor,
@@ -239,8 +225,7 @@ def require_tokens(documents: Iterable[Sequence[str]]) -> None:
         InvalidInputError: Trénovací slovník by byl prázdný.
     """
     if not any(documents):
-        msg = "Trénovací texty neobsahují žádný token, slovník by byl prázdný."
-        raise InvalidInputError(msg)
+        raise InvalidInputError(EMPTY_VOCABULARY)
 
 
 # Seznam platí při načtení, ne při uložení: skops model uloží vždy a při načtení
