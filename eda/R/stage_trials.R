@@ -11,7 +11,8 @@ STAGE_PREDICTION_COLUMNS <- c(
 
 FAMILY_LABELS <- c(
   complement_nb = "Complement NB", logreg = "Logistická regrese",
-  linear_svm = "Lineární SVM", nb_svm = "NB-SVM", lightgbm_lsa = "LightGBM nad LSA"
+  linear_svm = "Lineární SVM", nb_svm = "NB-SVM", lightgbm_lsa = "LightGBM nad LSA",
+  lightgbm = "LightGBM", fasttext = "fastText", multirescnn = "MultiResCNN"
 )
 
 STAGE_DIAGNOSES <- c("diabetes", "copd", "ckd", "pneumonia", "atrial_fibrillation")
@@ -158,9 +159,13 @@ stage_trial_summary <- function(trials) {
   summary[order(summary$trial), ]
 }
 
-stage_selection <- function(summary, manifest) {
+stage_best_by <- function(summary, column) {
   ordered <- summary[order(-summary$value, summary$trial, method = "radix"), ]
-  best <- ordered[!duplicated(ordered$family), ]
+  ordered[!duplicated(ordered[[column]]), ]
+}
+
+stage_selection <- function(summary, manifest) {
+  best <- stage_best_by(summary, "family")
   if (nrow(best) == 1L) stop("stupeň má jedinou rodinu", call. = FALSE)
   if (best$trial[1] != manifest$best_trial) {
     stop("Vítěz neodpovídá manifestu.", call. = FALSE)
@@ -198,11 +203,58 @@ stage_component_space_table <- function(component, winner, active) {
   do.call(rbind, rows)
 }
 
-stage_space_table <- function(config, winner) {
-  active <- strsplit(winner$branch, "/", fixed = TRUE)[[1]]
-  rows <- lapply(c(config$representations, config$families),
-    stage_component_space_table, winner = winner, active = active)
-  do.call(rbind, rows)
+stage_space_table <- function(config, winner, second) {
+  components <- c(config$representations, config$families)
+  table_for <- function(params) do.call(rbind, lapply(components,
+    stage_component_space_table, winner = params,
+    active = strsplit(params$branch, "/", fixed = TRUE)[[1]]))
+  table <- table_for(winner)
+  names(table)[names(table) == "vítěz"] <- "nejlepší"
+  table$druhá <- table_for(second)$vítěz
+  table
+}
+
+# D41 b. 10 vyžaduje posouzení hran; pásmo zachytí i spojité návrhy TPE poblíž meze.
+STAGE_BOUNDARY_SHARE <- 0.05
+
+stage_boundary_params <- function(config, rows) {
+  boundary <- data.frame(rodina = character(), složka = character(), parametr = character(),
+    hodnota = character(), rozsah = character(), mez = character())
+  for (i in seq_len(nrow(rows))) {
+    params <- jsonlite::fromJSON(rows$params[i])
+    active <- strsplit(rows$branch[i], "/", fixed = TRUE)[[1]]
+    for (component in c(config$representations, config$families)) {
+      name <- component$name %||% component$family
+      if (!name %in% active) next
+      for (param in component$space$params) {
+        if (!param$kind %in% c("int", "float") ||
+            (param$kind == "int" && param$high - param$low == 1)) next
+        value <- params[[paste(name, param$name, sep = ".")]]
+        scale <- if (isTRUE(param$log)) log else identity
+        position <- (scale(value) - scale(param$low)) / (scale(param$high) - scale(param$low))
+        if (position > STAGE_BOUNDARY_SHARE && position < 1 - STAGE_BOUNDARY_SHARE) next
+        boundary <- rbind(boundary, data.frame(rodina = unname(FAMILY_LABELS[rows$family[i]]),
+          složka = name, parametr = param$name, hodnota = space_value_text(value),
+          rozsah = space_range_text(param), mez = if (position <= STAGE_BOUNDARY_SHARE) "dolní" else "horní"))
+      }
+    }
+  }
+  boundary
+}
+
+stage_boundary_text <- function(boundary) {
+  if (!nrow(boundary)) return("U kandidátů neleží žádný hodnocený parametr u meze prostoru.")
+  paste0("Parametry kandidátů u meze prostoru: ", paste(sprintf("%s: %s.%s = %s (%s, %s mez)",
+    boundary$rodina, boundary$složka, boundary$parametr, boundary$hodnota,
+    boundary$rozsah, boundary$mez), collapse = "; "),
+    ". S39j4 před doladěním posoudí, zda lze příslušnou mez posunout (D41).")
+}
+
+stage_representation_table <- function(summary) {
+  rows <- stage_best_by(summary, "representation")
+  data.frame(reprezentace = rows$representation, pokus = rows$trial,
+    macro = paste(metric_text(rows$value), "±", metric_text(rows$sd)),
+    pokusy = unname(vapply(rows$representation, function(name) sum(summary$representation == name), integer(1))))
 }
 
 stage_defaults_table <- function(summary) {
@@ -251,11 +303,11 @@ stage_history_plot <- function(summary, manifest) {
 }
 
 stage_selection_text <- function(selection) {
-  sprintf(paste0("Vítězem je %s (%s), pokus %d s cílem %s. Druhá rodina je %s (pokus %d). ",
-    "Vítěz postupuje do matice a dál se ladí v každém foldu s rozpočtem tuning_trials podle D40."),
+  sprintf(paste0("Kandidáty stupně jsou %s (%s, pokus %d) a %s (%s, pokus %d). ",
+    "Podle D41 se oba přepočítají na celé vývojové části a do doladění postoupí rodina s vyšším cílem (S39j4)."),
     FAMILY_LABELS[selection$winner$family], selection$winner$representation,
-    selection$winner$trial, metric_text(selection$winner$value),
-    FAMILY_LABELS[selection$second$family], selection$second$trial)
+    selection$winner$trial, FAMILY_LABELS[selection$second$family],
+    selection$second$representation, selection$second$trial)
 }
 
 stage_ensemble_text <- function(phi, selection) {
@@ -283,10 +335,17 @@ stage_provenance_table <- function(manifest) {
     "Výsledky SHA-256" = manifest$results_sha256,
     "Predikce SHA-256" = manifest$predictions_sha256,
     "Seed ladění stupně" = as.character(manifest$seed),
+    "Procesy (--jobs)" = format_number(manifest$jobs),
     "Vývojové zprávy" = format_number(manifest$development_notes),
     "Vývojoví pacienti" = format_number(manifest$development_patients),
     "Předzpracování" = paste(names(preprocessing), unlist(preprocessing), sep = ": ", collapse = "; "),
     "Strip diagnostických sekcí" = if (is.null(manifest$diagnostic_strip)) "ne" else "ano",
+    setNames(vapply(seq_len(nrow(manifest$encoders) %||% 0L), function(i) {
+      encoder <- manifest$encoders[i, ]
+      paste0(encoder$model, "@", encoder$revision, ", okno ", as.character(encoder$window),
+        ", ", encoder$dtype, ", ", encoder$device)
+    }, character(1)), if (length(manifest$encoders$name)) paste("Encoder", manifest$encoders$name) else character()),
+    "GPU" = if (length(manifest$hardware$gpus$name)) paste(manifest$hardware$gpus$name, collapse = "; ") else "žádná",
     "Revize kódu ladění stupně" = manifest$environment$source$commit,
     "Rozpracovaný strom" = if (manifest$environment$source$dirty) "ano" else "ne",
     "Pokusy" = format_number(manifest$completed_trials),
