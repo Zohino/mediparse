@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import replace
 from typing import TYPE_CHECKING
+from unittest.mock import Mock
 
 import pytest
 
@@ -42,3 +43,17 @@ def test_score_trial_averages_fold_macro_f1() -> None:
             )
 
     assert score_trial(Scorer(), {}, folds).value == pytest.approx(0.75)
+
+
+def test_score_trial_refuses_missing_fold_scores() -> None:
+    """Jeden výsledek na dva foldy nesmí tiše snížit průměr cíle."""
+    notes = (replace(note(1, 0, positive=True), labels=frozenset(Diagnosis)),)
+    folds = tuple(Holdout(fold=i, train=notes, test=notes) for i in range(2))
+    scorer = Mock()
+    scorer.score_folds.return_value = (
+        ValidationScores(
+            dict.fromkeys(Diagnosis, (1.0,)), converged=True, n_features=1
+        ),
+    )
+    with pytest.raises(ValueError, match="zip"):
+        score_trial(scorer, {}, folds)
