@@ -82,7 +82,6 @@ def _paths(root: Path) -> stage_refinement.StageRefinementPaths:
     refinement = root / "refinement.json"
     refinement.write_text(
         json.dumps({
-            "folds": 2,
             "random_startup_trials": 1,
             "widened": {"linear_svm.C": {"high": 100.0}},
         }),
@@ -149,6 +148,7 @@ def test_refinement_uses_widened_space_budget_sampler_and_lineage(
     ):
         assert getattr(manifest, field) == hashlib.sha256(path.read_bytes()).hexdigest()
     assert manifest.split_sha256 == SHARED.split.sha256()
+    assert manifest.folds == 2
     assert manifest.development_notes == 200
     assert [r.default for r in records] == [
         True,

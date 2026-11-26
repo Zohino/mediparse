@@ -141,7 +141,7 @@ class _Scorer:
         return tuple(scores)
 
 
-_REFINEMENT = RefinementConfig(folds=2, random_startup_trials=1, widened={})
+_REFINEMENT = RefinementConfig(random_startup_trials=1, widened={})
 
 
 def _screening() -> tuple[StageTrialRecord, ...]:

@@ -1,5 +1,4 @@
 {
-  "folds": 5,
   "random_startup_trials": 5,
   "widened": {
     "nb_svm.C": {"low": 1e-5},

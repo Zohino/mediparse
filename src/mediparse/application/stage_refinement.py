@@ -69,7 +69,7 @@ class StageRefinement:
         shared = self.split.read()
         shared.split.ensure_covers(self.table.subjects())
         notes = self.table.read_patients(shared.split.development)
-        folds = patient_holdouts(notes, refinement.folds, stage.seed, self.partitioner)
+        folds = patient_holdouts(notes, stage.folds, stage.seed, self.partitioner)
         records = list(self.progress.completed())
         for candidate in candidates[len(records) :]:
             start = self.clock.now()

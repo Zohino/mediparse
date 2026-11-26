@@ -45,7 +45,6 @@ class RefinementConfig(BaseModel):
 
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
 
-    folds: Annotated[int, Field(ge=2)]
     random_startup_trials: Annotated[int, Field(ge=0)]
     widened: dict[str, Bounds]
 

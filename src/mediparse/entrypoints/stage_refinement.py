@@ -261,7 +261,7 @@ def run(  # ruff: ignore[too-many-arguments]
             split_folds=report.split_config.folds,
             split_sha256=report.split_sha256,
             seed=config.seed,
-            folds=refinement.folds,
+            folds=stage.folds,
             tuning_trials=matrix.tuning_trials,
             random_startup_trials=refinement.random_startup_trials,
             candidates=(first, second),

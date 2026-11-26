@@ -44,7 +44,7 @@ def test_widen_refuses_invalid_changes(widened: dict[str, object]) -> None:
     """Zúžení, překlep i nezměněná mez se odmítnou."""
     stage = load_stage_config(REPOSITORY / "config/stage_classical.json")
     refinement = RefinementConfig.model_validate_json(
-        json.dumps({"folds": 5, "random_startup_trials": 5, "widened": widened})
+        json.dumps({"random_startup_trials": 5, "widened": widened})
     )
     with pytest.raises(ValueError, match=r"rozšířit|Neznámé"):
         widen(stage, refinement)
@@ -53,7 +53,6 @@ def test_widen_refuses_invalid_changes(widened: dict[str, object]) -> None:
 def test_repository_refinement_config() -> None:
     """Schválené literály patří právě jednomu stupni a všechny stupně se rozšíří."""
     config = load_refinement_config(REPOSITORY / "config/refinement.json")
-    assert config.folds == 5
     assert config.random_startup_trials == 5
     assert config.widened["nb_svm.C"].low == pytest.approx(1e-5)
     assert config.widened["word.ngram_max"].high == 4
