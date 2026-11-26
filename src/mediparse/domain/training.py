@@ -22,7 +22,7 @@ class TrainingConfig(BaseModel):
 
     ``input`` určuje ablaci diagnostických sekcí a úroveň předzpracování textu TF-IDF.
     ``fold`` je číslo foldu, který slouží jako test; jeho horní mez zná až ``Split``.
-    ``parameters`` jsou pevné jen pro běh bez ladění, jinak se čtou z manifestu.
+    ``parameters`` jsou povinné pevné parametry tréninku.
     ``threshold_folds`` řídí vnitřní CV prahu po pacientech.
     """
 
@@ -32,7 +32,7 @@ class TrainingConfig(BaseModel):
     diagnosis: Diagnosis
     seed: Seed
     fold: Annotated[int, Field(ge=0)]
-    parameters: dict[str, ParamValue] | None
+    parameters: dict[str, ParamValue]
     threshold_folds: Annotated[int, Field(ge=2)]
     input: ModelInput
 

@@ -22,7 +22,7 @@ from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.representation import ClassifierFamily, Word2VecRepresentation
 from mediparse.domain.run_manifest import StageTuningManifest
 from mediparse.domain.stage_tuning import StageLsa, StageNetwork, StageTuningConfig
-from mediparse.entrypoints import stage_tuning
+from mediparse.entrypoints import stage_composition, stage_tuning
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.infrastructure import sklearn_stage
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
@@ -538,8 +538,8 @@ def test_unavailable_cuda_is_refused_before_first_trial(
     paths.config.write_text(config.model_dump_json(), encoding="utf-8")
     scorer = Mock()
     versions = Mock()
-    monkeypatch.setattr(stage_tuning, "SklearnStageScorer", scorer)
-    monkeypatch.setattr(stage_tuning, "installed_versions", versions)
+    monkeypatch.setattr(stage_composition, "SklearnStageScorer", scorer)
+    monkeypatch.setattr(stage_composition, "installed_versions", versions)
     assert _run(paths) is ExitCode.REFUSED
     scorer.assert_not_called()
     versions.assert_not_called()
@@ -553,7 +553,7 @@ def test_missing_torch_is_refused(
     paths.config.write_text(network_stage_config().model_dump_json(), encoding="utf-8")
     monkeypatch.setitem(sys.modules, "torch", None)
     scorer = Mock()
-    monkeypatch.setattr(stage_tuning, "SklearnStageScorer", scorer)
+    monkeypatch.setattr(stage_composition, "SklearnStageScorer", scorer)
     assert _run(paths) is ExitCode.REFUSED
     assert "-e gpu" in caplog.text
     scorer.assert_not_called()

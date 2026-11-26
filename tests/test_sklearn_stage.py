@@ -24,7 +24,7 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.representation import ClassifierFamily, Word2VecRepresentation
 from mediparse.domain.split import Holdout
 from mediparse.domain.stage_tuning import StageLsa
-from mediparse.entrypoints.stage_tuning import stage_normalizations
+from mediparse.entrypoints.stage_composition import stage_normalizations
 from mediparse.infrastructure import sklearn_classifier, sklearn_stage, word2vec
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
@@ -73,8 +73,8 @@ def test_logreg_parameters_change_scores(tmp_path: Path) -> None:
     )
     fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
     params = config.branches[0].default_params()
-    low = scorer.score(params | {"logreg.C": 1e-4}, fold)
-    high = scorer.score(params | {"logreg.C": 1e2}, fold)
+    low = scorer.score_folds(params | {"logreg.C": 1e-4}, (fold,))[0]
+    high = scorer.score_folds(params | {"logreg.C": 1e2}, (fold,))[0]
     assert low.scores[Diagnosis.CKD] != high.scores[Diagnosis.CKD]
 
 
@@ -121,7 +121,7 @@ def test_lightgbm_receives_lsa_components(
         config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
     )
     fold = patient_holdouts(notes(visits=10), 2, 7, StratifiedGroupFolds())[0]
-    scorer.score(config.branches[0].default_params(), fold)
+    scorer.score_folds(config.branches[0].default_params(), (fold,))[0]
     assert observed == [3] * 5
 
 
@@ -160,7 +160,7 @@ def test_vocabulary_cap_applies_only_to_lsa(
     monkeypatch.setattr(sklearn_stage, "TruncatedSVD", svd)
     result = SklearnStageScorer(
         config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
-    ).score(branch.default_params(), fold)
+    ).score_folds(branch.default_params(), (fold,))[0]
     assert observed == ([5] if lsa else [])
     assert result.n_features == (5 if lsa else len(vocabulary))
 
@@ -201,7 +201,7 @@ def test_nondefault_char_tfidf_matches_manual_pipeline(tmp_path: Path) -> None:
         7,
         tmp_path,
         Mock(),
-    ).score(params, fold)
+    ).score_folds(params, (fold,))[0]
     vectorizer = tfidf_vectorizer(
         normalization,
         analyzer="char_wb",
@@ -237,13 +237,13 @@ def test_seeded_scores_repeat(tmp_path: Path, family: str) -> None:
     fold = patient_holdouts(corpus, 2, 7, StratifiedGroupFolds())[0]
     first = SklearnStageScorer(
         config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
-    ).score(branch.default_params(), fold)
+    ).score_folds(branch.default_params(), (fold,))[0]
     repeated = SklearnStageScorer(
         config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
-    ).score(branch.default_params(), fold)
+    ).score_folds(branch.default_params(), (fold,))[0]
     other = SklearnStageScorer(
         config, dict.fromkeys(config.text_preprocessing), 29, tmp_path, Mock()
-    ).score(branch.default_params(), fold)
+    ).score_folds(branch.default_params(), (fold,))[0]
     assert first.scores == repeated.scores
     if family == "lightgbm_lsa":
         assert first.scores != other.scores
@@ -267,7 +267,9 @@ def test_convergence_accumulates_all_diagnoses(
     scorer = SklearnStageScorer(
         config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
     )
-    scored = scorer.score(config.branches[0].default_params(), _clinical_fold())
+    scored = scorer.score_folds(
+        config.branches[0].default_params(), (_clinical_fold(),)
+    )[0]
     assert scored.converged is (failed_call is None)
     assert calls == 5
 
@@ -280,7 +282,7 @@ def test_min_df_above_training_documents_is_refused(tmp_path: Path) -> None:
     )
     params = config.branches[0].default_params() | {"r1.min_df": 100000}
     with pytest.raises(InvalidInputError, match="min_df"):
-        scorer.score(params, _clinical_fold())
+        scorer.score_folds(params, (_clinical_fold(),))[0]
 
 
 @pytest.mark.parametrize(
@@ -335,7 +337,7 @@ def test_encoder_branch_scores_cached_embeddings(
     ])
     scored = SklearnStageScorer(
         config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, embeddings
-    ).score(config.branches[0].default_params(), fold)
+    ).score_folds(config.branches[0].default_params(), (fold,))[0]
     assert len(scored.scores) == 5
     assert all(len(scores) == len(fold.test) for scores in scored.scores.values())
     assert scored.n_features == 4
@@ -378,7 +380,7 @@ def test_tokens_branch_counts_distinct_analyzer_tokens(
         7,
         tmp_path,
         Mock(),
-    ).score(config.branches[0].default_params(), fold)
+    ).score_folds(config.branches[0].default_params(), (fold,))[0]
     assert scored.n_features == features
 
 
@@ -408,7 +410,7 @@ def test_fasttext_family_params_reach_estimator(
     config = token_stage_config()
     SklearnStageScorer(
         config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
-    ).score(config.branches[0].default_params(), _clinical_fold())
+    ).score_folds(config.branches[0].default_params(), (_clinical_fold(),))[0]
     assert observed == [{"lr": 0.5, "epoch": 1, "word_ngrams": 2, "dim": 2}] * 5
 
 
@@ -471,7 +473,7 @@ def test_empty_vocabulary_is_invalid_input(
     ):
         SklearnStageScorer(
             config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock()
-        ).score(config.branches[0].default_params(), fold)
+        ).score_folds(config.branches[0].default_params(), (fold,))[0]
 
 
 @pytest.fixture
@@ -632,7 +634,7 @@ def test_word2vec_branch_scores(
         7,
         tmp_path,
         Mock(),
-    ).score(config.branches[0].default_params(), fold)
+    ).score_folds(config.branches[0].default_params(), (fold,))[0]
     assert len(result.scores) == 5
     assert all(len(scores) == len(fold.test) for scores in result.scores.values())
     assert result.n_features == 7
@@ -670,14 +672,14 @@ def test_stage_inputs_follow_representation(
         embeddings,
     )
     encoder = next(b for b in config.branches if b.name == "mmbert-base-mean/logreg")
-    scorer.score(encoder.default_params(), fold)
+    scorer.score_folds(encoder.default_params(), (fold,))[0]
     assert embeddings.embed.call_args_list == [
         call(config.encoders[0], [n.text for n in (*fold.train, *fold.test)])
     ]
     dictionary_encoder = next(
         b for b in config.branches if b.name == "mmbert-base-mean-dictionary/logreg"
     )
-    scorer.score(dictionary_encoder.default_params(), fold)
+    scorer.score_folds(dictionary_encoder.default_params(), (fold,))[0]
     assert embeddings.embed.call_args_list[1].args[0] == next(
         e for e in config.encoders if e.name == "mmbert-base-mean-dictionary"
     )
@@ -689,11 +691,11 @@ def test_stage_inputs_follow_representation(
         assert all(acronym not in text for acronym in ("COPD", "copd", "DM2", "dm2"))
         assert text == text.lower()
     word2vec = next(b for b in config.branches if b.name == "word2vec/logreg")
-    scorer.score(
+    scorer.score_folds(
         word2vec.default_params()
         | {"word2vec.min_count": 1, "word2vec.vector_size": 7, "word2vec.epochs": 3},
-        fold,
-    )
+        (fold,),
+    )[0]
     vocabulary = trained_word2vec[0].wv.key_to_index
     assert {
         "chronic",
@@ -740,7 +742,7 @@ def _golden_scores(scratch: Path, jobs: int = 1) -> dict:
                 "mmbert-base-mean/logreg",
             }:
                 continue
-            scored = scorer.score(branch.default_params(), _clinical_fold())
+            scored = scorer.score_folds(branch.default_params(), (_clinical_fold(),))[0]
             result[f"{name}/{branch.name}"] = {
                 "n_features": scored.n_features,
                 "converged": scored.converged,
@@ -804,7 +806,7 @@ def test_preprocessing_runs_once_per_text_and_representation(
     for fold in patient_holdouts(corpus, 2, 7, StratifiedGroupFolds()):
         for name in ("word/logreg", "word/complement_nb"):
             branch = next(branch for branch in config.branches if branch.name == name)
-            scorer.score(branch.default_params(), fold)
+            scorer.score_folds(branch.default_params(), (fold,))[0]
     assert preprocess.call_count == len({note.text for note in corpus})
 
 
@@ -828,7 +830,7 @@ def test_parallel_fits_report_nonconvergence(tmp_path: Path, jobs: int) -> None:
     )
     scored = SklearnStageScorer(
         config, dict.fromkeys(config.text_preprocessing), 7, tmp_path, Mock(), jobs=jobs
-    ).score(config.branches[0].default_params(), _clinical_fold())
+    ).score_folds(config.branches[0].default_params(), (_clinical_fold(),))[0]
     assert scored.converged is False
 
 
@@ -849,7 +851,7 @@ def test_parallel_memmap_stays_in_scratch(
             tmp_path / "scratch",
             Mock(),
             jobs=2,
-        ).score(config.branches[0].default_params(), _clinical_fold())
+        ).score_folds(config.branches[0].default_params(), (_clinical_fold(),))[0]
     assert len(scored.scores) == len(Diagnosis)
     assert (tmp_path / "scratch").is_dir()
     assert not any((tmp_path / "scratch").iterdir())
@@ -976,11 +978,11 @@ def test_ngram_counts_built_once_per_widest_range(
             branch = next(
                 b for b in scorer.config.branches if b.name == f"{name}/logreg"
             )
-            scorer.score(
+            scorer.score_folds(
                 branch.default_params()
                 | {f"{name}.ngram_min": bounds[0], f"{name}.ngram_max": bounds[1]},
-                fold,
-            )
+                (fold,),
+            )[0]
     assert [c.args[:2] for c in build.call_args_list] == [
         ("char_wb", (3, 5)),
         ("char_wb", (2, 6)),
@@ -995,11 +997,11 @@ def test_ngram_counts_range_grows_to_union(
     scorer, build = counts_scorer
     branch = next(b for b in scorer.config.branches if b.name == "char_wb/logreg")
     for low, high in [(3, 5), (2, 4), (3, 5)]:
-        scorer.score(
+        scorer.score_folds(
             branch.default_params()
             | {"char_wb.ngram_min": low, "char_wb.ngram_max": high},
-            _clinical_fold(),
-        )
+            (_clinical_fold(),),
+        )[0]
     assert [c.args[:2] for c in build.call_args_list] == [
         ("char_wb", (3, 5)),
         ("char_wb", (2, 5)),
@@ -1013,17 +1015,17 @@ def test_ngram_counts_rebuild_for_unseen_text(
     scorer, build = counts_scorer
     branch = next(b for b in scorer.config.branches if b.name == "word/logreg")
     original = _clinical_fold()
-    scorer.score(branch.default_params(), original)
+    scorer.score_folds(branch.default_params(), (original,))[0]
     new_text = "novel synthetic validation text"
     fold = replace(
         original, test=(replace(original.test[0], text=new_text), *original.test[1:])
     )
-    actual = scorer.score(branch.default_params(), fold)
+    actual = scorer.score_folds(branch.default_params(), (fold,))[0]
     assert build.call_count == 2
     assert set(build.call_args.args[2]) == {
         n.text.lower() for n in (*original.train, *original.test)
     } | {new_text}
-    expected = replace(scorer).score(branch.default_params(), fold)
+    expected = replace(scorer).score_folds(branch.default_params(), (fold,))[0]
     for diagnosis in Diagnosis:
         assert actual.scores[diagnosis] == pytest.approx(
             expected.scores[diagnosis], abs=1e-12
@@ -1056,7 +1058,7 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
     factory = Mock(return_value=model)
     monkeypatch.setattr(sklearn_stage, "classifier_estimator", factory)
     scorer = SklearnStageScorer(config, {"tok": None}, 7, tmp_path, Mock())
-    result = scorer.score(config.branches[0].default_params(), fold)
+    result = scorer.score_folds(config.branches[0].default_params(), (fold,))[0]
     factory.assert_called_once_with(ClassifierFamily.MULTIRESCNN, 7, tmp_path)
     assert config.network is not None
     model.set_params.assert_called_once_with(
@@ -1094,7 +1096,7 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
     assert result.n_features == len({
         token for note in fold.train for token in prepared(note.text).split()
     })
-    scorer.score(config.branches[0].default_params(), fold)
+    scorer.score_folds(config.branches[0].default_params(), (fold,))[0]
     assert model.fit.call_count == 2
     for first, second in zip(
         model.fit.call_args_list[0].args, model.fit.call_args_list[1].args, strict=True
@@ -1107,11 +1109,35 @@ def test_multirescnn_branch_scores_tiny_network(tmp_path: Path) -> None:
     """Skutečná malá síť vrátí konečná skóre všech diagnóz foldu."""
     config = network_stage_config()
     fold = patient_holdouts(notes(visits=2), 2, 7, StratifiedGroupFolds())[0]
-    result = SklearnStageScorer(config, {"tok": None}, 7, tmp_path, Mock()).score(
-        config.branches[0].default_params(), fold
-    )
+    result = SklearnStageScorer(config, {"tok": None}, 7, tmp_path, Mock()).score_folds(
+        config.branches[0].default_params(), (fold,)
+    )[0]
     assert set(result.scores) == set(Diagnosis)
     assert all(
         len(scores) == len(fold.test) and np.isfinite(scores).all()
         for scores in result.scores.values()
     )
+
+
+@pytest.mark.usefixtures("torch_runtime", "loky_executor")
+def test_network_fold_scores_do_not_depend_on_jobs(tmp_path: Path) -> None:
+    """Dva CPU foldy mají bitově stejná skóre v jednom i dvou procesech."""
+    torch = pytest.importorskip("torch")
+    original_threads = torch.get_num_threads()
+    config = network_stage_config()
+    folds = patient_holdouts(notes(visits=2), 2, 7, StratifiedGroupFolds())
+    try:
+        torch.set_num_threads(2)
+        scorer = SklearnStageScorer(config, {"tok": None}, 7, tmp_path, Mock(), jobs=1)
+        sequential = scorer.score_folds(config.branches[0].default_params(), folds)
+        torch.set_num_threads(3)
+        parallel = replace(scorer, jobs=2).score_folds(
+            config.branches[0].default_params(), folds
+        )
+        for first, second in zip(sequential, parallel, strict=True):
+            assert first.converged is second.converged
+            assert first.n_features == second.n_features
+            for diagnosis in Diagnosis:
+                assert np.array_equal(first.scores[diagnosis], second.scores[diagnosis])
+    finally:
+        torch.set_num_threads(original_threads)

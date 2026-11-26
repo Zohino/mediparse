@@ -3,7 +3,6 @@
   "dataset_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
   "predictions_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   "config_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-  "tuning_manifest_sha256": null,
   "parameters": {
     "analyzer": "word",
     "ngram_max": 1,

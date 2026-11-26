@@ -20,8 +20,8 @@ from mediparse.entrypoints import (
     model_evaluation,
     model_inference,
     model_training,
-    model_tuning,
     split_materialization,
+    stage_refinement,
     stage_tuning,
 )
 from mediparse.entrypoints.exit_code import ExitCode
@@ -83,7 +83,6 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
         "model_training": partial(
             model_training.run,
             paths=model_training.TrainingPaths(
-                tuning=None,
                 corpus=repository_corpus(notes, split),
                 config=REPOSITORY_TRAINING_CONFIG,
                 model=model,
@@ -96,14 +95,21 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
             cuda_device_order=None,
             environ=environ,
         ),
-        "model_tuning": partial(
-            model_tuning.run,
-            paths=model_tuning.TuningPaths(
+        "stage_refinement": partial(
+            stage_refinement.run,
+            paths=stage_refinement.StageRefinementPaths(
                 corpus=repository_corpus(notes, split),
                 config=root / "missing.json",
-                matrix=root / "missing.json",
-                storage=root / "tuning/tuning.sqlite3",
-                manifest=root / "tuning/tuning_manifest.json",
+                stage_results=root / "missing-results",
+                stage_manifest=root / "missing-manifest",
+                refinement=root / "missing-refinement",
+                matrix=root / "missing-matrix",
+                out=root / "refinement/trials",
+                predictions=root / "refinement/predictions",
+                checkpoint=root / "refinement/checkpoint",
+                manifest=root / "refinement/manifest",
+                embeddings=root / "embeddings",
+                scratch=root / "scratch",
             ),
             revision=fixed_revision,
             clock=PerfCounterClock(),
@@ -192,7 +198,7 @@ GUARD_CASES: Final = {
     "cohort": _GuardCase(("discharge", "diagnoses"), prepare=_prepare_sources),
     "split_materialization": _GuardCase(("cohort",)),
     "model_training": _GuardCase(("cohort", "split"), corpus=True),
-    "model_tuning": _GuardCase(("cohort", "split"), corpus=True, native=False),
+    "stage_refinement": _GuardCase(("cohort", "split"), corpus=True, native=False),
     "stage_tuning": _GuardCase(("cohort", "split"), corpus=True, native=False),
     "model_evaluation": _GuardCase(("predictions", "cohort", "split")),
     "model_inference": _GuardCase(("cohort", "model", "predictions")),

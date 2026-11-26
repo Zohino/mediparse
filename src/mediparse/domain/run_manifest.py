@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Annotated, Self
+from typing import TYPE_CHECKING, Annotated, Self
 
 from pydantic import (
     BaseModel,
@@ -21,7 +21,11 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.representation import EncoderSpec, RepresentationName
 from mediparse.domain.seed import Seed
-from mediparse.domain.tuning import ParamValue, SearchSpace
+from mediparse.domain.stage_tuning import BRANCH_KEY
+from mediparse.domain.tuning import ParamValue
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 
 class DiagnosticStrip(BaseModel):
@@ -58,6 +62,17 @@ def _ensure_normalization_matches_preprocessing(
         raise ValueError(msg)
 
 
+def _ensure_stage_text(
+    preprocessing: Mapping[str, TextPreprocessing],
+    normalization: Mapping[str, TextNormalization | None],
+) -> None:
+    if preprocessing.keys() != normalization.keys():
+        msg = "Mapy předzpracování a normalizace musí mít stejné reprezentace."
+        raise ValueError(msg)
+    for name, level in preprocessing.items():
+        _ensure_normalization_matches_preprocessing(level, normalization[name])
+
+
 class RunManifest(BaseModel):
     """Provenance tréninku; funkce vstupů a prostředí, bez času běhu.
 
@@ -76,7 +91,6 @@ class RunManifest(BaseModel):
     dataset_sha256: Sha256
     predictions_sha256: Sha256
     config_sha256: Sha256
-    tuning_manifest_sha256: Sha256 | None
     parameters: dict[str, ParamValue]
     threshold: Annotated[float, Field(allow_inf_nan=False)]
     threshold_folds: Annotated[int, Field(ge=2)]
@@ -141,90 +155,6 @@ def ensure_training_lineage(
         raise InvalidInputError(msg)
 
 
-class TuningManifest(BaseModel):
-    """Publikovatelné agregáty ladění a provenance vnějšího tréninku."""
-
-    model_config = ConfigDict(
-        frozen=True, strict=True, extra="forbid", allow_inf_nan=False
-    )
-
-    row_id: RowId
-    fold: Annotated[int, Field(ge=0)]
-    dataset_sha256: Sha256
-    config_sha256: Sha256
-    matrix_sha256: Sha256
-    split_seed: Seed
-    split_folds: Annotated[int, Field(ge=2)]
-    split_sha256: Sha256
-    seed: Seed
-    tuning_trials: PositiveInt
-    completed_trials: Annotated[int, Field(ge=0)]
-    pruned_trials: Annotated[int, Field(ge=0)]
-    nonconverged_trials: Annotated[int, Field(ge=0)]
-    best_macro_f1: Annotated[float, Field(ge=0, le=1)]
-    best: dict[str, ParamValue]
-    space: SearchSpace
-    sampler: str
-    pruner: str
-    seconds: Annotated[float, Field(ge=0)]
-    train_notes: PositiveInt
-    train_patients: PositiveInt
-    diagnostic_strip: DiagnosticStrip | None
-    text_preprocessing: TextPreprocessing
-    text_normalization: TextNormalization | None
-    environment: Environment
-    hardware: Hardware
-
-    @model_validator(mode="after")
-    def _consistent_tuning(self) -> Self:
-        if self.completed_trials + self.pruned_trials != self.tuning_trials:
-            msg = "Dokončené a prořezané pokusy musí vyčerpat rozpočet ladění."
-            raise ValueError(msg)
-        if self.nonconverged_trials > self.tuning_trials:
-            msg = "Nekonvergujících pokusů nesmí být více než rozpočet ladění."
-            raise ValueError(msg)
-        if not self.space.contains(self.best):
-            msg = "Nejlepší parametry nepatří do prostoru ladění."
-            raise ValueError(msg)
-        _ensure_normalization_matches_preprocessing(
-            self.text_preprocessing, self.text_normalization
-        )
-        return self
-
-
-def ensure_tuning_lineage(  # ruff: ignore[too-many-arguments]
-    tuning: TuningManifest,
-    *,
-    row_id: RowId,
-    fold: int,
-    dataset_sha256: str,
-    split_sha256: str,
-    diagnostic_strip: DiagnosticStrip | None,
-    text_preprocessing: TextPreprocessing,
-    text_normalization: TextNormalization | None,
-) -> None:
-    """Ověří původ parametrů vůči řádku, vnějšímu foldu a vstupům tréninku.
-
-    Raises:
-        InvalidInputError: Původ nesedí; zpráva uvádí všechna pole s rozdílem.
-    """
-    actual = {
-        "row_id": row_id,
-        "fold": fold,
-        "dataset_sha256": dataset_sha256,
-        "split_sha256": split_sha256,
-        "diagnostic_strip": diagnostic_strip,
-        "text_preprocessing": text_preprocessing,
-        "text_normalization": text_normalization,
-    }
-    mismatched = [
-        field for field, value in actual.items() if getattr(tuning, field) != value
-    ]
-    if mismatched:
-        msg = f"Manifest ladění neodpovídá tréninku: {', '.join(mismatched)}."
-        raise InvalidInputError(msg)
-
-
 class StageTuningManifest(BaseModel):
     """Provenance CASH stupně, vítěz a otisky obou výstupů.
 
@@ -275,11 +205,120 @@ class StageTuningManifest(BaseModel):
         if self.completed_trials != self.trials:
             msg = "Dokončené pokusy musí vyčerpat rozpočet stupně."
             raise ValueError(msg)
-        if self.text_preprocessing.keys() != self.text_normalization.keys():
-            msg = "Mapy předzpracování a normalizace manifestu stupně musí mít stejné reprezentace."
+        _ensure_stage_text(self.text_preprocessing, self.text_normalization)
+        return self
+
+
+# Jednotlivá pole odpovídají nezávislým vstupům provenance předkola.
+def ensure_stage_lineage(  # ruff: ignore[too-many-arguments]
+    manifest: StageTuningManifest,
+    *,
+    config_sha256: str,
+    results_sha256: str,
+    dataset_sha256: str,
+    split_sha256: str,
+    diagnostic_strip: DiagnosticStrip | None,
+    text_normalization: dict[str, TextNormalization | None],
+    best_trial: int,
+) -> None:
+    """Ověří vstupy a vítěze předkola před kontrolou kandidátů.
+
+    Raises:
+        InvalidInputError: Původ nesedí; zpráva uvádí všechna rozdílná pole.
+    """
+    actual = {
+        "config_sha256": config_sha256,
+        "results_sha256": results_sha256,
+        "dataset_sha256": dataset_sha256,
+        "split_sha256": split_sha256,
+        "diagnostic_strip": diagnostic_strip,
+        "text_normalization": text_normalization,
+        "best_trial": best_trial,
+    }
+    mismatched = [
+        field for field, value in actual.items() if getattr(manifest, field) != value
+    ]
+    if mismatched:
+        msg = f"Manifest předkola neodpovídá vstupům doladění: {', '.join(mismatched)}."
+        raise InvalidInputError(msg)
+
+
+class RefinementCandidate(BaseModel):
+    """Bod rodiny z předkola a jeho cíl při kontrole na celé vývojové části."""
+
+    model_config = ConfigDict(
+        frozen=True, strict=True, extra="forbid", allow_inf_nan=False
+    )
+
+    stage_trial: Annotated[int, Field(ge=0)]
+    branch: str
+    params: dict[str, ParamValue]
+    stage_macro_f1: Annotated[float, Field(ge=0, le=1)]
+    check_macro_f1: Annotated[float, Field(ge=0, le=1)]
+
+    @model_validator(mode="after")
+    def _matching_branch(self) -> Self:
+        if self.params.get(BRANCH_KEY) != self.branch:
+            msg = "Větev kandidáta musí odpovídat jeho parametrům."
             raise ValueError(msg)
-        for name, level in self.text_preprocessing.items():
-            _ensure_normalization_matches_preprocessing(
-                level, self.text_normalization[name]
-            )
+        return self
+
+
+class StageRefinementManifest(BaseModel):
+    """Provenance doladění a vítěz stupně; cíl ladění není odhad výkonu modelu."""
+
+    model_config = ConfigDict(
+        frozen=True, strict=True, extra="forbid", allow_inf_nan=False
+    )
+
+    encoders: tuple[EncoderSpec, ...] = ()
+    dataset_sha256: Sha256
+    stage_config_sha256: Sha256
+    refinement_config_sha256: Sha256
+    matrix_sha256: Sha256
+    stage_manifest_sha256: Sha256
+    stage_results_sha256: Sha256
+    split_seed: Seed
+    split_folds: Annotated[int, Field(ge=2)]
+    split_sha256: Sha256
+    seed: Seed
+    folds: Annotated[int, Field(ge=2)]
+    jobs: PositiveInt
+    tuning_trials: PositiveInt
+    random_startup_trials: Annotated[int, Field(ge=0)]
+    candidates: tuple[RefinementCandidate, RefinementCandidate]
+    best_trial: Annotated[int, Field(ge=0)]
+    best_params: dict[str, ParamValue]
+    best_macro_f1: Annotated[float, Field(ge=0, le=1)]
+    completed_trials: PositiveInt
+    nonconverged_trials: Annotated[int, Field(ge=0)]
+    sampler: str
+    pruner: str
+    seconds: Annotated[float, Field(ge=0)]
+    development_notes: PositiveInt
+    development_patients: PositiveInt
+    results_sha256: Sha256
+    predictions_sha256: Sha256
+    diagnostic_strip: DiagnosticStrip | None
+    text_preprocessing: Annotated[
+        dict[RepresentationName, TextPreprocessing], Field(min_length=1)
+    ]
+    text_normalization: dict[RepresentationName, TextNormalization | None]
+    environment: Environment
+    hardware: Hardware
+
+    @property
+    def winner_branch(self) -> str:
+        """Větev s vyšším cílem kontroly; při stejném cíli dřívější kandidát."""
+        return max(self.candidates, key=lambda c: c.check_macro_f1).branch
+
+    @model_validator(mode="after")
+    def _consistent_refinement(self) -> Self:
+        if self.completed_trials != self.tuning_trials + 1:
+            msg = "Dokončené pokusy musí pokrýt kontrolu i rozpočet doladění."
+            raise ValueError(msg)
+        if self.best_params.get(BRANCH_KEY) != self.winner_branch:
+            msg = "Nejlepší parametry musí patřit vítězné větvi kontroly."
+            raise ValueError(msg)
+        _ensure_stage_text(self.text_preprocessing, self.text_normalization)
         return self

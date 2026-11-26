@@ -1,0 +1,10 @@
+{
+  "random_startup_trials": 5,
+  "widened": {
+    "nb_svm.C": {"low": 1e-5},
+    "word.ngram_max": {"high": 4},
+    "word2vec.epochs": {"low": 1},
+    "fasttext.lr": {"high": 10.0},
+    "fasttext.word_ngrams": {"high": 3}
+  }
+}

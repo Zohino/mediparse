@@ -18,8 +18,8 @@ from mediparse.infrastructure.word2vec import trained_vectors
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.domain.representation import Device
-
+# Loky mění OMP_NUM_THREADS podle jobs; pevné vlákno drží stejné skóre CPU fitů.
+TORCH_THREADS: Final = 1
 # Li a Yu 2020, Table 2: šest měřítek a jeden reziduální blok.
 KERNEL_SIZES: Final = (3, 5, 9, 15, 19, 25)
 # Řazení v kusech zkrátí výplň a zachová náhodné pořadí, sonda 1.
@@ -83,7 +83,7 @@ class MultiResCnnClassifier(BaseEstimator):
         self,
         *,
         random_state: int = 0,
-        device: Device = "cpu",
+        device: str = "cpu",
         epochs: int = 20,
         batch_size: int = 16,
         max_words: int = 4000,
@@ -126,6 +126,7 @@ class MultiResCnnClassifier(BaseEstimator):
         """
         # Sonda 6: determinismus float32 dává bitově stejné výsledky bez podstatné ceny.
         os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+        torch.set_num_threads(TORCH_THREADS)
         torch.use_deterministic_algorithms(mode=True)
         torch.manual_seed(self.random_state)
         try:

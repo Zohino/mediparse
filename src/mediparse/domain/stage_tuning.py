@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, Annotated, Final, Self, assert_never
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
+from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.representation import (
     ClassifierFamily,
     Device,
@@ -33,6 +34,7 @@ if TYPE_CHECKING:
     from mediparse.domain.tuning import MaxF1
 
 BRANCH_KEY: Final = "branch"
+CANDIDATE_COUNT: Final = 2
 
 
 def _tuned(
@@ -286,7 +288,11 @@ class StageFoldResult:
 
 @dataclass(frozen=True)
 class StageTrialRecord:
-    """Parametry, cíl a cena dokončeného pokusu."""
+    """Parametry, cíl a cena dokončeného pokusu.
+
+    ``default`` označuje bod mimo návrhy sampleru: výchozí bod předkola
+    nebo kontrolu kandidáta na celé vývojové části.
+    """
 
     number: int
     params: Mapping[str, ParamValue]
@@ -303,6 +309,28 @@ def best_trial(records: Sequence[StageTrialRecord]) -> StageTrialRecord:
         Vítězný záznam.
     """
     return max(records, key=lambda record: (record.value, -record.number))
+
+
+def family_candidates(
+    records: Sequence[StageTrialRecord],
+) -> tuple[StageTrialRecord, StageTrialRecord]:
+    """Vybere dvě nejlepší rodiny, při stejném cíli dřívější pokus.
+
+    Returns:
+        Nejlepší bod každé ze dvou vedoucích rodin.
+
+    Raises:
+        InvalidInputError: Předkolo obsahuje méně než dvě rodiny.
+    """
+    families = {}
+    for record in sorted(records, key=lambda r: (-r.value, r.number)):
+        family = branch_parts(str(record.params[BRANCH_KEY]))[1]
+        families.setdefault(family, record)
+    if len(families) < CANDIDATE_COUNT:
+        msg = "Kontrola stupně vyžaduje alespoň dvě rodiny."
+        raise InvalidInputError(msg)
+    first, second, *_ = families.values()
+    return first, second
 
 
 @dataclass(frozen=True)

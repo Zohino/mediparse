@@ -21,7 +21,7 @@ from mediparse.infrastructure.stage_trials_table import (
     ParquetStageCheckpoint,
 )
 from tests.screening_support import DEVELOPMENT, SHARED, notes
-from tests.stage_support import StepClock, stage_config
+from tests.stage_support import FixedSearch, MemoryProgress, StepClock, stage_config
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -64,6 +64,11 @@ class _Scorer:
     fail_at: int | None = None
     observed: list[Holdout] = field(default_factory=list)
 
+    def score_folds(
+        self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
+    ) -> tuple[ValidationScores, ...]:
+        return tuple(self.score(params, fold) for fold in folds)
+
     def score(
         self, params: Mapping[str, ParamValue], fold: Holdout
     ) -> ValidationScores:
@@ -82,27 +87,6 @@ class _Scorer:
             converged=True,
             n_features=10 + fold.fold,
         )
-
-
-@dataclass
-class _Progress:
-    """Paměťový checkpoint pro ověření protokolu."""
-
-    records: list[StageTrialRecord] = field(default_factory=list)
-    results: list[StageFoldResult] = field(default_factory=list)
-    finished: bool = False
-
-    def completed(self) -> tuple[StageTrialRecord, ...]:
-        return tuple(self.records)
-
-    def write(
-        self, record: StageTrialRecord, results: Sequence[StageFoldResult]
-    ) -> None:
-        self.results.extend(results)
-        self.records.append(record)
-
-    def finish(self) -> None:
-        self.finished = True
 
 
 _DEVELOPMENT_NOTES = _Table().read_patients(DEVELOPMENT)
@@ -130,7 +114,7 @@ def test_defaults_and_development_sample(
     config = stage_config(subsample_parts=parts)
     samples = []
     for _ in range(2):
-        scorer, progress = _Scorer(), _Progress()
+        scorer, progress = _Scorer(), MemoryProgress()
         search = OptunaStageSearch.create(config)
         report = StageTuning(
             _Table(),
@@ -165,7 +149,7 @@ def test_defaults_and_development_sample(
 def test_fold_features_reach_results() -> None:
     """Počet příznaků každého foldu projde až do všech buněk diagnóz."""
     config = stage_config()
-    scorer, progress = _Scorer(), _Progress()
+    scorer, progress = _Scorer(), MemoryProgress()
     StageTuning(
         _Table(),
         _SplitSource(),
@@ -225,56 +209,22 @@ def test_interrupted_run_resumes_to_identical_outputs(tmp_path: Path, cut: int) 
     )
 
 
-@dataclass
-class _Search:
-    asked: int = 0
-    enqueued: list[tuple[int, Mapping[str, ParamValue]]] = field(default_factory=list)
-    restored: list[tuple[Trial, float]] = field(default_factory=list)
-    values: list[float] = field(default_factory=list)
-
-    def restore(self, trials: Sequence[tuple[Trial, float]]) -> None:
-        self.restored.extend(trials)
-        self.asked = len(trials)
-
-    def enqueue(self, params: Mapping[str, ParamValue]) -> None:
-        self.enqueued.append((self.asked, params))
-
-    def ask(self) -> Trial:
-        trial = Trial(self.asked, self.enqueued[-1][1])
-        self.asked += 1
-        return trial
-
-    @staticmethod
-    def should_prune(trial: Trial, value: float, step: int) -> bool:
-        del trial, value, step
-        return False
-
-    def complete(self, trial: Trial, value: float) -> None:
-        del trial
-        self.values.append(value)
-
-    @staticmethod
-    def prune(trial: Trial) -> None:
-        del trial
-        pytest.fail("Stupeň neprořezává.")
-
-
 @pytest.mark.parametrize("cut", [0, 3, 5])
 def test_enqueue_protocol_and_restore(cut: int) -> None:
     """Výchozí body se vkládají jen před čtyřmi příslušnými ask, při obnově jen zbytek."""
     config = stage_config()
-    initial = _Progress()
+    initial = MemoryProgress()
     StageTuning(
         _Table(),
         _SplitSource(),
         StratifiedGroupFolds(),
-        _Search(),
+        FixedSearch(),
         _Scorer(),
         initial,
         StepClock(),
     ).run(config)
     records = initial.records[:cut]
-    progress, search = _Progress(records=list(records)), _Search()
+    progress, search = MemoryProgress(records=list(records)), FixedSearch()
     if cut >= 4:
         search.enqueued.append((-1, config.branches[-1].default_params()))
     StageTuning(
@@ -332,34 +282,6 @@ def test_checkpoint_round_trip_record_and_fold_results(tmp_path: Path) -> None:
     )
 
 
-def test_stage_rejects_pruned_trial() -> None:
-    """Porušení smlouvy hledání bez pruneru nesmí vytvořit dokončený výstup."""
-
-    class PruningSearch(_Search):
-        @staticmethod
-        def should_prune(trial: Trial, value: float, step: int) -> bool:
-            del trial, value, step
-            return True
-
-        @staticmethod
-        def prune(trial: Trial) -> None:
-            del trial
-
-    progress = _Progress()
-    with pytest.raises(InvalidInputError, match="neprořezává"):
-        StageTuning(
-            _Table(),
-            _SplitSource(),
-            StratifiedGroupFolds(),
-            PruningSearch(),
-            _Scorer(),
-            progress,
-            StepClock(),
-        ).run(stage_config())
-    assert not progress.records
-    assert not progress.finished
-
-
 def test_nonconvergence_counts_each_affected_trial_once() -> None:
     """Nekonvergence jednoho foldu pokusů 1 a 4 se promítne do obou záznamů."""
 
@@ -371,12 +293,12 @@ def test_nonconvergence_counts_each_affected_trial_once() -> None:
             number = (len(self.observed) - 1) // 2
             return replace(scored, converged=not (number in {1, 4} and fold.fold == 0))
 
-    progress = _Progress()
+    progress = MemoryProgress()
     report = StageTuning(
         _Table(),
         _SplitSource(),
         StratifiedGroupFolds(),
-        _Search(),
+        FixedSearch(),
         Nonconverged(),
         progress,
         StepClock(),

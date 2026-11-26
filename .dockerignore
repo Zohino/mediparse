@@ -2,8 +2,8 @@
 !src/
 !tests/
 !workflow/
+!config/refinement.json
 !config/matrix.json
-!config/tuning.json
 !config/smoketest_training.json
 !config/split.json
 !config/stage_classical.json

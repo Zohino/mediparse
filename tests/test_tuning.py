@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-from typing import TYPE_CHECKING
 
 import pytest
 from hypothesis import given
@@ -21,12 +20,7 @@ from mediparse.domain.tuning import (
     macro_max_f1,
     max_f1,
 )
-from mediparse.infrastructure.tuning_config import load_tuning_config
 from tests.screening_support import note
-from tests.support import REPOSITORY
-
-if TYPE_CHECKING:
-    from pathlib import Path
 
 
 @pytest.mark.parametrize(
@@ -137,16 +131,6 @@ def test_space_rejects_invalid_json(params: list[dict[str, object]]) -> None:
         SearchSpace.model_validate_json(json.dumps({"params": params}))
 
 
-def test_repository_tuning_config_and_loader(tmp_path: Path) -> None:
-    """Config z repa má úplný prostor a loader převádí chyby na doménové odmítnutí."""
-    config = load_tuning_config(REPOSITORY / "config/tuning.json")
-    assert config.row_id == "en-svm"
-    invalid = tmp_path / "invalid.json"
-    invalid.write_text('{"row_id": "wrong"}', encoding="utf-8")
-    with pytest.raises(InvalidInputError, match=r"invalid\.json"):
-        load_tuning_config(invalid)
-
-
 @pytest.mark.parametrize(
     ("params", "expected"),
     [
@@ -180,18 +164,6 @@ def test_space_membership_is_complete_and_typed(
         })
     )
     assert space.contains(params) is expected
-
-
-def test_tuning_config_refuses_single_inner_fold(tmp_path: Path) -> None:
-    """Vnitřní CV potřebuje alespoň dva foldy, jeden musí odmítnout loader."""
-    config = load_tuning_config(REPOSITORY / "config/tuning.json")
-    invalid = tmp_path / "invalid.json"
-    invalid.write_text(
-        json.dumps(config.model_dump(mode="json") | {"inner_folds": 1}),
-        encoding="utf-8",
-    )
-    with pytest.raises(InvalidInputError, match="inner_folds"):
-        load_tuning_config(invalid)
 
 
 @pytest.mark.parametrize(
