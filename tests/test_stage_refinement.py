@@ -70,7 +70,7 @@ def test_candidates_group_by_family_not_branch() -> None:
         _record(2, "word/linear_svm", 0.7),
     )
     assert tuple(r.number for r in family_candidates(records)) == (0, 2)
-    with pytest.raises(InvalidInputError):
+    with pytest.raises(InvalidInputError, match="dvě rodiny"):
         family_candidates(records[:2])
 
 
