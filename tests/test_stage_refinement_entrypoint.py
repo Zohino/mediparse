@@ -261,7 +261,10 @@ def test_main_passes_all_required_paths(
 
 @pytest.mark.parametrize("case", ["invalid_widening", "empty_bounds", "budget"])
 def test_refinement_refuses_invalid_study_before_scoring(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, case: str
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    caplog: pytest.LogCaptureFixture,
+    case: str,
 ) -> None:
     """Chybný prostor i rozpočet se odmítnou ještě před prvním bodem kontroly."""
     paths = _paths(tmp_path)
@@ -280,6 +283,8 @@ def test_refinement_refuses_invalid_study_before_scoring(
     scorer.score_folds.side_effect = AssertionError("Neplatná studie nesmí fitovat.")
     monkeypatch.setattr(stage_refinement, "stage_scorer", Mock(return_value=scorer))
     assert _run(paths) is ExitCode.REFUSED
+    if case == "budget":
+        assert "Config větve doladění není platný" in caplog.text
     scorer.score_folds.assert_not_called()
     assert not any(
         p.exists()
