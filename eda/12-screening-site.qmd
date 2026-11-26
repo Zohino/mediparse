@@ -1,0 +1,55 @@
+---
+title: "Ladění stupně sítí učených na úloze"
+abstract: |
+  Sešit vyhodnocuje společné ladění reprezentace, rodiny a hyperparametrů na vývojové části pacientů podle D40 a D41. Nejlepší a druhá rodina jsou kandidáty pro S39j4; korelace chyb rozhoduje o tasku ensemblu. Held-out test se nepoužívá.
+---
+
+```{r}
+#| include: false
+stage <- "networks"
+```
+
+{{< include _partials/stage-setup.qmd >}}
+
+# Úvod
+
+Sešit vybírá dvě kandidátní rodiny předkola pro S39j4 podle D40 a D41. Společně ladí reprezentaci, rodinu a hyperparametry (CASH) [@Thornton2013] na podvzorku vývojových pacientů. Held-out test do výběru nevstupuje.
+
+# Data a metody
+
+## Kandidáti
+
+fastText je mělká síť pro klasifikaci textu [@Joulin2017]. MultiResCNN [@Li2020] je konvoluční síť s více rozlišeními a pozorností po labelech v linii CAML [@Mullenbach2018].
+
+## Protokol
+
+Obě sítě se učí slovník jen na tréninku foldu.
+
+```{r}
+#| label: tbl-network
+#| tbl-cap: "Technické podmínky MultiResCNN mimo prostor ladění."
+export_table(provenance_table(lapply(config$network, space_value_text)),
+  col.names = c("Položka", "Hodnota"), align = "ll")
+```
+
+{{< include _partials/stage-methods.qmd >}}
+
+# Výsledky
+
+{{< include _partials/stage-results.qmd >}}
+
+# Shrnutí a rozhodnutí
+
+`r stage_selection_text(selection)`
+
+`r stage_ensemble_text(phi, selection)`
+
+# Omezení a ohrožení validity
+
+{{< include _partials/stage-limits.qmd >}}
+
+MultiResCNN se učí na `r dua_decimal(100 * (1 - 1 / config$network$stopping_parts))` % pacientů tréninku foldu a zbylá část celých pacientů vybírá epochu. fastText se učí na celém tréninku foldu bez zastavení; srovnání rodin proto není při stejném množství tréninkových dat. Trénink na GPU je deterministický ve float32.
+
+Při `lr` fastTextu blízko horní meze skóre saturují (shody skóre), což snižuje rozlišení prahu. Meze prostoru MultiResCNN jsou technická volba, články je neuvádějí.
+
+{{< include _partials/appendix.qmd >}}

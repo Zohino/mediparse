@@ -1,0 +1,59 @@
+Ladění používá jednu z `r config$subsample_parts` částí vývojových pacientů,
+`r manifest$sample_notes` zpráv a `r manifest$sample_patients` pacientů.
+Rozdělení má `r count_phrase(config$folds, c("fold", "foldy", "foldů"))` po pacientech. Rozpočet je
+`r config$trials` pokusů, z nichž prvních `r sum(summary$default)`
+používá výchozí hodnoty každé větve a dalších `r manifest$random_startup_trials`
+je náhodných. Potom TPE soustředí pokusy do slibných oblastí [@Bergstra2011].
+Optuna [@Akiba2019] používá multivariate a group TPE; sampler je
+`r manifest$sampler`, pruner je `r manifest$pruner` (bez prořezávání).
+Cílem je průměr foldových macro-MaxF1: v každém foldu průměr maxim F1 přes diagnózy.
+Práh se vybírá na validaci foldu, stejně pro všechny pokusy.
+Rozpočet řešičů je pevná technická podmínka mimo prostor ladění; nekonvergované fity zůstávají ve výběru.
+
+```{r}
+#| label: tbl-stage-provenance
+#| tbl-cap: "Provenance ladění stupně; otisky vstupů byly ověřeny."
+#| tbl-colwidths: [30, 70]
+export_table(stage_provenance_table(manifest), col.names = c("Položka", "Hodnota"), align = "ll")
+```
+
+## Prostor ladění
+
+Tabulka zachovává pořadí configu. Pomlčka označuje složku mimo větev příslušného kandidáta.
+
+```{r}
+#| label: tbl-space
+#| tbl-cap: "Rozsahy hyperparametrů, výchozí hodnoty a hodnoty obou kandidátů; log označuje logaritmickou škálu."
+export_table(stage_space_table(config, jsonlite::fromJSON(selection$winner$params),
+  jsonlite::fromJSON(selection$second$params)),
+  col.names = c("Složka", "Parametr", "Rozsah", "Výchozí", "Nejlepší", "Druhá rodina"), align = "llllll")
+```
+
+## Kritérium výběru stanovené v D40 a D41 před reálným renderem
+
+Nejlepší pokus je ten s nejvyšším cílem; shodu rozhoduje nižší číslo pokusu.
+Nejlepší pokusy rodin se řadí stejným způsobem.
+SD je výběrová směrodatná odchylka foldových macro-MaxF1 (jmenovatel K − 1).
+Nejlepší pokusy dvou nejlepších rodin jsou kandidáty; obě se podle D41 přepočítají na celé vývojové části a do doladění postoupí rodina s vyšším cílem (S39j4).
+
+Parametr je u meze, leží-li v dolních nebo horních 5 % rozsahu (na logaritmické škále při log); celočíselné rozsahy se dvěma hodnotami se nehodnotí. S39j4 před doladěním posoudí, zda lze mez posunout; meze dané definicí posunout nelze.
+
+## Pravidlo ensemblu
+
+Popisně se vítěz porovnává s nejlepším pokusem každé další rodiny.
+O tasku ensemblu rozhoduje jen druhá nejlepší rodina podle D40.
+
+Korelace chybových indikátorů φ je stejná jako korelace indikátorů správnosti. Pro každou buňku (fold, diagnóza) se ze správnosti `predicted == label` obou rodin počítá [@Kuncheva2003]:
+
+$$
+\varphi = \frac{N_{11}N_{00}-N_{01}N_{10}}{\sqrt{(N_{11}+N_{10})(N_{01}+N_{00})(N_{11}+N_{01})(N_{10}+N_{00})}}.
+$$
+
+Hodnota N11 značí obě rodiny správně, N00 obě chybně, N10 pouze vítěze správně a N01 pouze druhou rodinu správně. Při nulovém jmenovateli je φ nedefinované a z průměru přes diagnózy a foldy se vynechá; tabulka uvádí počet definovaných buněk z celkového počtu. Pokud má dvojice vítěze a druhé rodiny průměr φ **ostře menší než 0,5**, vznikne před S39j4 podtask ensemblu. Hranice vychází z Cohenova vymezení silné korelace [@Cohen1988]. Jinak výsledek patří do diskuse. Pokud rozhodující dvojice nemá definovanou buňku, φ není k dispozici a patří věta do diskuse.
+
+## Kontroly vstupů
+
+Sešit ověřuje otisky výsledků, predikcí a configu proti manifestu,
+úplnost pokusů a buněk fold × diagnóza i konstantní metadata pokusu.
+Nezávisle přepočítává cíl z max-F1 a ověřuje vítěze proti manifestu.
+Predikce páruje úplně a jednoznačně se stejnými labely; do R přicházejí jen agregované četnosti.

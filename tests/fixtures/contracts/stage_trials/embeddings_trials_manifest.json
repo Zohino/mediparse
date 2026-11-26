@@ -1,0 +1,94 @@
+{
+  "encoders": [
+    {
+      "name": "mmbert-base-mean",
+      "text_preprocessing": "none",
+      "model": "jhu-clsp/mmBERT-base",
+      "revision": "c5955035435e2bf121cde7f3c8863ef52ff35d82",
+      "window": 8192,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    },
+    {
+      "name": "mmbert-base-mean-512",
+      "text_preprocessing": "none",
+      "model": "jhu-clsp/mmBERT-base",
+      "revision": "c5955035435e2bf121cde7f3c8863ef52ff35d82",
+      "window": 512,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    },
+    {
+      "name": "mmbert-base-mean-dictionary",
+      "text_preprocessing": "dictionary",
+      "model": "jhu-clsp/mmBERT-base",
+      "revision": "c5955035435e2bf121cde7f3c8863ef52ff35d82",
+      "window": 8192,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    }
+  ],
+  "dataset_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "config_sha256": "3d545620102466db1e85612ba20eb6a504094e5fadfae168b9885d4c5a501b10",
+  "split_seed": 0,
+  "split_folds": 5,
+  "split_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "seed": 0,
+  "jobs": 1,
+  "trials": 72,
+  "random_startup_trials": 5,
+  "completed_trials": 72,
+  "nonconverged_trials": 1,
+  "best_trial": 30,
+  "best_branch": "mmbert-base-mean-dictionary/logreg",
+  "best_params": {
+    "branch": "mmbert-base-mean-dictionary/logreg",
+    "logreg.C": 1.0,
+    "logreg.class_weight": null
+  },
+  "best_macro_f1": 0.9515121728513034,
+  "sampler": "TPESampler(multivariate=True, group=True)",
+  "pruner": "NopPruner",
+  "seconds": 2628.0,
+  "sample_notes": 120,
+  "sample_patients": 120,
+  "development_notes": 360,
+  "development_patients": 360,
+  "results_sha256": "e6f1b25e373e02e1809c3fb0aed695ad5532fc6b5c57b15ba42b30c48dba72d2",
+  "predictions_sha256": "f0d60ea708554c2a284dff3fb733c45921c0a456851fe94119e78d5ed94ce5c7",
+  "diagnostic_strip": null,
+  "text_preprocessing": {
+    "mmbert-base-mean": "none",
+    "mmbert-base-mean-512": "none",
+    "mmbert-base-mean-dictionary": "dictionary",
+    "word2vec": "dictionary"
+  },
+  "text_normalization": {
+    "mmbert-base-mean": null,
+    "mmbert-base-mean-512": null,
+    "mmbert-base-mean-dictionary": {
+      "acronyms": {},
+      "variants": {}
+    },
+    "word2vec": {
+      "acronyms": {},
+      "variants": {}
+    }
+  },
+  "environment": {
+    "packages": {
+      "python": "3.13.0"
+    },
+    "source": {
+      "commit": "cccccccccccccccccccccccccccccccccccccccc",
+      "dirty": false
+    }
+  },
+  "hardware": {
+    "cpu_model": "Synthetic CPU",
+    "logical_cores": 8,
+    "available_cores": 2,
+    "memory_bytes": 1024,
+    "gpus": []
+  }
+}

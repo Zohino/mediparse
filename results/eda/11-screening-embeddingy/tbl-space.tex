@@ -1,0 +1,21 @@
+\begin{tabular}{llllll}
+\toprule
+Složka & Parametr & Rozsah & Výchozí & Nejlepší & Druhá rodina\\
+\midrule
+word2vec & vector\_size & 100, 200, 300 & 100 & 300 & 300\\
+word2vec & window & 2–10 & 5 & 6 & 7\\
+word2vec & min\_count & 1–20 (log) & 5 & 1 & 2\\
+word2vec & sg & 0, 1 & 0 & 0 & 0\\
+word2vec & epochs & 3–10 & 5 & 4 & 3\\
+word2vec & negative & 1–20 (log) & 5 & 4 & 5\\
+word2vec & sample & 0,00001–0,01 (log) & 0,001 & 0,00002337027 & 0,003490148\\
+logreg & C & 0,001–1 000 (log) & 1 & – & 0,02369278\\
+logreg & class\_weight & žádná, balanced & žádná & – & žádná\\
+linear\_svm & C & 0,001–100 (log) & 1 & 3,008663 & –\\
+linear\_svm & class\_weight & žádná, balanced & žádná & žádná & –\\
+lightgbm & n\_estimators & 50–1 000 (log) & 100 & – & –\\
+lightgbm & learning\_rate & 0,01–0,3 (log) & 0,1 & – & –\\
+lightgbm & num\_leaves & 8–128 (log) & 31 & – & –\\
+lightgbm & min\_child\_samples & 5–100 (log) & 20 & – & –\\
+\bottomrule
+\end{tabular}

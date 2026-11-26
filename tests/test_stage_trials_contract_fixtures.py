@@ -14,7 +14,11 @@ from mediparse.domain.tuning import macro_max_f1, max_f1
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.stage_config import load_stage_config
 from mediparse.infrastructure.stage_trials_table import ParquetStageCheckpoint
-from mediparse.infrastructure.synthetic_marker import SyntheticMarker, write_marker
+from mediparse.infrastructure.synthetic_marker import (
+    SyntheticMarker,
+    read_marker,
+    write_marker,
+)
 from tests.manifest_support import training_manifest
 from tests.support import REPOSITORY
 
@@ -22,22 +26,30 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 CONTRACTS: Final = REPOSITORY / "tests/fixtures/contracts/stage_trials"
-CONFIG: Final = REPOSITORY / "config/stage_classical.json"
+STAGES: Final = tuple(
+    path.stem.removeprefix("stage_")
+    for path in sorted(REPOSITORY.glob("config/stage_*.json"))
+)
 
 
 def test_stage_trials_fixtures_match_writers_and_manifest_model(tmp_path: Path) -> None:
     """Fixture odpovídají zapisovači a manifest projde doménovým modelem."""
     write_stage_trials_fixtures(tmp_path)
-    for name in (
-        "classical_trials.parquet",
-        "classical_trial_predictions.parquet",
-        "classical_trials_manifest.json",
-        "synthetic.json",
-    ):
-        assert (tmp_path / name).read_bytes() == (CONTRACTS / name).read_bytes()
-    StageTuningManifest.model_validate_json(
-        (CONTRACTS / "classical_trials_manifest.json").read_bytes()
-    )
+    for stage in STAGES:
+        for suffix in (
+            "trials.parquet",
+            "trial_predictions.parquet",
+            "trials_manifest.json",
+        ):
+            name = f"{stage}_{suffix}"
+            assert (tmp_path / name).read_bytes() == (CONTRACTS / name).read_bytes()
+        StageTuningManifest.model_validate_json(
+            (CONTRACTS / f"{stage}_trials_manifest.json").read_bytes()
+        )
+    assert (tmp_path / "synthetic.json").read_bytes() == (
+        CONTRACTS / "synthetic.json"
+    ).read_bytes()
+    assert read_marker(CONTRACTS) == SyntheticMarker(prefix="eda-sentinel", rows=91_200)
 
 
 def write_stage_trials_fixtures(directory: Path) -> None:
@@ -48,19 +60,31 @@ def write_stage_trials_fixtures(directory: Path) -> None:
     write_stage_trials_fixtures; write_stage_trials_fixtures(CONTRACTS)'.
     Prefix eda-sentinel váže identity na kanárek v eda-synthetic.sh.
     """
-    config = load_stage_config(CONFIG)
-    results = directory / "classical_trials.parquet"
-    predictions = directory / "classical_trial_predictions.parquet"
+    rows = sum(write_stage_fixture(directory, stage) for stage in STAGES)
+    write_marker(directory, SyntheticMarker(prefix="eda-sentinel", rows=rows))
+
+
+def write_stage_fixture(directory: Path, stage: str) -> int:
+    """Zapíše jeden stupeň a vrátí počet řádků predikcí.
+
+    Returns:
+        Počet řádků predikcí pro syntetickou značku.
+    """
+    rows = 0
+    config_path = REPOSITORY / f"config/stage_{stage}.json"
+    config = load_stage_config(config_path)
+    results = directory / f"{stage}_trials.parquet"
+    predictions = directory / f"{stage}_trial_predictions.parquet"
     checkpoint = ParquetStageCheckpoint(
-        directory / "checkpoint", "synthetic", results, predictions
+        directory / f"{stage}_checkpoint", "synthetic", results, predictions
     )
     records = []
-    rows = 0
     for trial in range(config.trials):
         branch = config.branches[trial % len(config.branches)]
-        family_index = config.families.index(branch.family)
         error_rate = (
-            0.08 + 0.05 * family_index - 0.002 * (trial // len(config.branches))
+            0.08
+            + 0.05 * config.families.index(branch.family)
+            - 0.002 * (trial // len(config.branches))
         )
         cells, value = stage_cells(
             trial,
@@ -88,7 +112,7 @@ def write_stage_trials_fixtures(directory: Path) -> None:
         split_seed=0,
         split_folds=5,
         split_sha256="b" * 64,
-        config_sha256=hashlib.sha256(CONFIG.read_bytes()).hexdigest(),
+        config_sha256=hashlib.sha256(config_path.read_bytes()).hexdigest(),
         seed=config.seed,
         trials=config.trials,
         random_startup_trials=config.random_startup_trials,
@@ -109,14 +133,18 @@ def write_stage_trials_fixtures(directory: Path) -> None:
         predictions_sha256=hashlib.sha256(predictions.read_bytes()).hexdigest(),
         diagnostic_strip=None,
         text_preprocessing=config.text_preprocessing,
-        text_normalization=dict.fromkeys(
-            config.text_preprocessing, TextNormalization(acronyms={}, variants={})
-        ),
+        encoders=config.encoders,
+        text_normalization={
+            name: TextNormalization(acronyms={}, variants={})
+            if level.normalizes
+            else None
+            for name, level in config.text_preprocessing.items()
+        },
         environment=provenance.environment,
         hardware=provenance.hardware,
     )
-    write_model(directory / "classical_trials_manifest.json", manifest)
-    write_marker(directory, SyntheticMarker(prefix="eda-sentinel", rows=rows))
+    write_model(directory / f"{stage}_trials_manifest.json", manifest)
+    return rows
 
 
 def stage_cells(

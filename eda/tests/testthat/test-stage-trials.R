@@ -1,9 +1,6 @@
-stage_fixture_paths <- function(directory = file.path(CONTRACT_FIXTURES, "stage_trials")) {
-  list(
-    results = file.path(directory, "classical_trials.parquet"),
-    predictions = file.path(directory, "classical_trial_predictions.parquet"),
-    manifest = file.path(directory, "classical_trials_manifest.json")
-  )
+stage_fixture_paths <- function(stage = "classical", directory = file.path(CONTRACT_FIXTURES, "stage_trials")) {
+  withr::with_envvar(c(MEDIPARSE_SCREENING = directory,
+    MEDIPARSE_SCREENING_PREDICTIONS = directory), stage_trial_paths(stage))
 }
 
 stage_test_con <- function(env = parent.frame()) {
@@ -12,14 +9,33 @@ stage_test_con <- function(env = parent.frame()) {
   con
 }
 
-testthat::test_that("Kontrakt: oba parquety fixture lze přečíst", {
-  paths <- stage_fixture_paths()
-  config <- jsonlite::read_json(config_path("stage_classical.json"))
-  testthat::expect_equal(nrow(read_stage_trials(paths$results)),
-    config$trials * config$folds * length(STAGE_DIAGNOSES))
+stage_config_files <- function() list.files(dirname(config_path("stage_classical.json")),
+  "^stage_.*\\.json$", full.names = TRUE)
+
+testthat::test_that("B1 všechny rodiny configů mají popisky", {
+  for (path in stage_config_files()) {
+    config <- jsonlite::read_json(path)
+    testthat::expect_true(all(vapply(config$families, `[[`, character(1), "family") %in% names(FAMILY_LABELS)))
+  }
+})
+
+testthat::test_that("B2 kontrakty všech stupňů jsou úplné a souhlasí s manifesty", {
   con <- stage_test_con()
-  source <- stage_predictions_source(con, paths$predictions)
-  testthat::expect_equal(DBI::dbGetQuery(con, paste("SELECT count(*) n FROM", source))$n,
+  rows <- 0
+  for (path in stage_config_files()) {
+    stage <- sub("\\.json$", "", sub("^stage_", "", basename(path)))
+    paths <- stage_fixture_paths(stage)
+    config <- jsonlite::read_json(path)
+    manifest <- read_stage_manifest(paths, path)
+    trials <- read_stage_trials(paths$results)
+    testthat::expect_silent(check_stage_trials(trials, manifest, config, read_candidates(candidates_path())))
+    testthat::expect_equal(nrow(trials), config$trials * config$folds * 5)
+    testthat::expect_equal(stage_selection(stage_trial_summary(trials), manifest)$winner$trial, manifest$best_trial)
+    source <- stage_predictions_source(con, paths$predictions)
+    rows <- rows + DBI::dbGetQuery(con, paste("SELECT count(*) n FROM", source))$n
+  }
+  testthat::expect_equal(rows, 91200)
+  testthat::expect_equal(rows,
     jsonlite::read_json(file.path(CONTRACT_FIXTURES, "stage_trials", "synthetic.json"))$rows)
 })
 
@@ -49,7 +65,7 @@ testthat::test_that("A7 stráž odmítne predikce bez značky před čtením", {
   withr::local_envvar(CODEX_THREAD_ID = "stage-test")
   directory <- withr::local_tempdir()
   con <- stage_test_con()
-  paths <- stage_fixture_paths(directory)
+  paths <- stage_fixture_paths(directory = directory)
   testthat::expect_error(stage_predictions_source(con, paths$predictions), "synthetic.json", fixed = TRUE)
   testthat::expect_error(read_stage_manifest(paths, "config.json"), "synthetic.json", fixed = TRUE)
   testthat::expect_type(stage_predictions_source(con, stage_fixture_paths()$predictions), "character")
@@ -240,12 +256,14 @@ testthat::test_that("A10 prostor ukazuje rozsahy, výchozí hodnoty a aktivní p
       {"kind":"float","name":"C","low":0.001,"high":1000,"log":true}]},"default":{"C":1}}]
   }', simplifyVector = FALSE)
   winner <- list(branch = "word/nb_svm", word.min_df = 3, word.sublinear_tf = FALSE, nb_svm.C = 8.5)
-  table <- stage_space_table(config, winner)
+  second <- list(branch = "word/logreg", word.min_df = 2, word.sublinear_tf = TRUE, logreg.C = 3)
+  table <- stage_space_table(config, winner, second)
   testthat::expect_equal(table$složka, c("word", "word", "nb_svm", "logreg"))
   testthat::expect_equal(table$parametr, c("min_df", "sublinear_tf", "C", "C"))
   testthat::expect_equal(table$rozsah, c("1–20 (log)", "ano, ne", "0,001–100 (log)", "0,001–1 000 (log)"))
   testthat::expect_equal(table$výchozí, c("1", "ano", "1", "1"))
-  testthat::expect_equal(table$vítěz, c("3", "ne", "8,5", "–"))
+  testthat::expect_equal(table$nejlepší, c("3", "ne", "8,5", "–"))
+  testthat::expect_equal(table$druhá, c("2", "ano", "–", "3"))
   testthat::expect_identical(space_value_text(8.5), "8,5")
   testthat::expect_identical(space_value_text(1000), paste0("1", NBSP, "000"))
   testthat::expect_identical(space_value_text(TRUE), "ano")
@@ -288,4 +306,86 @@ testthat::test_that("Provenance vypíše předzpracování po reprezentacích", 
   table <- stage_provenance_table(manifest)
   testthat::expect_equal(table$Hodnota[table$Položka == "Předzpracování"],
     "word: dictionary; char_wb: dictionary")
+})
+
+testthat::test_that("B3 meze respektují škálu, práh a aktivní složky", {
+  config <- jsonlite::fromJSON('{
+    "representations":[{"name":"w","space":{"params":[]}}],
+    "families":[{"family":"fasttext","space":{"params":[
+      {"name":"lr","kind":"float","low":0.01,"high":5,"log":true},
+      {"name":"epoch","kind":"int","low":5,"high":100,"log":true},
+      {"name":"word_ngrams","kind":"int","low":1,"high":2}]}},
+      {"family":"multirescnn","space":{"params":[
+      {"name":"dropout","kind":"float","low":0,"high":0.5},
+      {"name":"filter_maps","kind":"int","low":25,"high":100,"log":true}]}}]
+  }', simplifyVector = FALSE)
+  rows <- data.frame(family = c("fasttext", "multirescnn"), branch = c("w/fasttext", "w/multirescnn"),
+    params = c('{"fasttext.lr":4.8,"fasttext.epoch":100,"fasttext.word_ngrams":2}',
+      '{"multirescnn.dropout":0.02,"multirescnn.filter_maps":50}'))
+  boundary <- stage_boundary_params(config, rows)
+  testthat::expect_equal(boundary, data.frame(rodina = c("fastText", "fastText", "MultiResCNN"),
+    složka = c("fasttext", "fasttext", "multirescnn"), parametr = c("lr", "epoch", "dropout"),
+    hodnota = c("4,8", "100", "0,02"), rozsah = c("0,01–5 (log)", "5–100 (log)", "0–0,5"),
+    mez = c("horní", "horní", "dolní")))
+  text <- stage_boundary_text(boundary)
+  for (value in c("lr", "0,01–5 (log)", "horní mez", "dolní mez")) {
+    testthat::expect_match(text, value, fixed = TRUE)
+  }
+  rows$params <- c('{"fasttext.lr":1.0,"fasttext.epoch":50,"fasttext.word_ngrams":1}',
+    '{"multirescnn.dropout":0.03,"multirescnn.filter_maps":50}')
+  testthat::expect_equal(nrow(stage_boundary_params(config, rows)), 0L)
+  testthat::expect_match(stage_boundary_text(stage_boundary_params(config, rows)), "žádný")
+  for (value in c(0.025, 0.475)) {
+    rows$params[2] <- sprintf('{"multirescnn.dropout":%s,"multirescnn.filter_maps":50}', value)
+    testthat::expect_equal(stage_boundary_params(config, rows)$mez, if (value == 0.025) "dolní" else "horní")
+  }
+  config <- jsonlite::fromJSON('{
+    "representations":[{"name":"word2vec","space":{"params":[
+      {"name":"vector_size","kind":"categorical","choices":[100,200]},
+      {"name":"window","kind":"int","low":2,"high":10}]}}],
+    "families":[{"family":"logreg","space":{"params":[
+      {"name":"C","kind":"float","low":0.001,"high":1000,"log":true},
+      {"name":"class_weight","kind":"categorical","choices":[null,"balanced"]}]}}]
+  }', simplifyVector = FALSE)
+  rows <- data.frame(family = "logreg", branch = "word2vec/logreg",
+    params = '{"word2vec.window":10,"logreg.C":1}')
+  testthat::expect_equal(stage_boundary_params(config, rows), data.frame(rodina = "Logistická regrese",
+    složka = "word2vec", parametr = "window", hodnota = "10", rozsah = "2–10", mez = "horní"))
+})
+
+testthat::test_that("B4 reprezentace řadí cíl a shody rozhodne číslo pokusu", {
+  summary <- data.frame(trial = 0:3, representation = c("a", "b", "a", "b"),
+    value = c(0.80, 0.82, 0.85, 0.82), sd = c(0.02, 0.01, 0.01, 0.03))
+  testthat::expect_equal(stage_representation_table(summary), data.frame(reprezentace = c("a", "b"),
+    pokus = c(2L, 1L), macro = c("0,850 ± 0,010", "0,820 ± 0,010"), pokusy = c(2L, 2L)))
+  summary$representation <- c("a", "b", "a", "a")
+  testthat::expect_equal(stage_representation_table(summary)$pokusy, c(3L, 1L))
+})
+
+testthat::test_that("B5 kandidáti postupují podle D41 do S39j4", {
+  selection <- list(winner = data.frame(family = "fasttext", representation = "word-tokens", trial = 7, value = 0.8123),
+    second = data.frame(family = "multirescnn", representation = "word-tokens", trial = 3))
+  text <- stage_selection_text(selection)
+  for (value in c("fastText (word-tokens, pokus 7)", "MultiResCNN (word-tokens, pokus 3)", "D41", "S39j4")) {
+    testthat::expect_match(text, value, fixed = TRUE)
+  }
+  testthat::expect_false(grepl("každém foldu", text, fixed = TRUE))
+  selection <- list(winner = data.frame(family = "logreg", representation = "word", trial = 7),
+    second = data.frame(family = "nb_svm", representation = "char_wb", trial = 3))
+  testthat::expect_match(stage_selection_text(selection), "NB-SVM (char_wb, pokus 3)", fixed = TRUE)
+})
+
+testthat::test_that("B6 provenance uvádí procesy, encodery a GPU", {
+  manifest <- jsonlite::read_json(stage_fixture_paths()$manifest, simplifyVector = TRUE)
+  table <- stage_provenance_table(manifest)
+  testthat::expect_equal(table$Hodnota[match(c("Procesy (--jobs)", "GPU"), table$Položka)], c("1", "žádná"))
+  manifest$hardware$gpus <- data.frame(name = c("A", "B"))
+  table <- stage_provenance_table(manifest)
+  testthat::expect_equal(table$Hodnota[table$Položka == "GPU"], "A; B")
+  manifest <- jsonlite::read_json(stage_fixture_paths("embeddings")$manifest, simplifyVector = TRUE)
+  table <- stage_provenance_table(manifest)
+  names <- c("mmbert-base-mean", "mmbert-base-mean-512", "mmbert-base-mean-dictionary")
+  testthat::expect_equal(table$Hodnota[match(paste("Encoder", names), table$Položka)],
+    paste0("jhu-clsp/mmBERT-base@c5955035435e2bf121cde7f3c8863ef52ff35d82, okno ",
+      c(8192, 512, 8192), ", bfloat16, cuda"))
 })

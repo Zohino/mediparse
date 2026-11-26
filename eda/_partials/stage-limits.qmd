@@ -1,0 +1,12 @@
+Výběr nad jedním laděním je pro vítěze optimistický (winner's curse);
+nestranný odhad dá až následná evaluace [@Cawley2010].
+Také práh vybraný na validaci foldu je optimistický, ale společný všem pokusům podle D40.
+
+Rozpočet se dělí mezi větve nerovnoměrně: TPE soustředí pokusy na slibné větve,
+takže nejlepší pokus slabé rodiny je méně vyladěný. Výchozí pokusy dávají každé větvi aspoň jednu šanci.
+Podvzorek jedné z `r config$subsample_parts` částí vývojových pacientů a
+`r count_phrase(config$folds, c("fold", "foldy", "foldů"))` omezují přenositelnost pořadí.
+SD přes korelované foldy podceňuje nejistotu.
+φ popisuje souběh chyb, nikoli výkon ensemblu; nedefinované buňky se vynechávají.
+
+Minuty pokusů závisí na počtu procesů (`--jobs`) a hardwaru a nejsou srovnáním nákladů rodin.
