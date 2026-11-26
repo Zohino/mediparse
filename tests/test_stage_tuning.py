@@ -64,6 +64,11 @@ class _Scorer:
     fail_at: int | None = None
     observed: list[Holdout] = field(default_factory=list)
 
+    def score_folds(
+        self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
+    ) -> tuple[ValidationScores, ...]:
+        return tuple(self.score(params, fold) for fold in folds)
+
     def score(
         self, params: Mapping[str, ParamValue], fold: Holdout
     ) -> ValidationScores:
@@ -244,19 +249,9 @@ class _Search:
         self.asked += 1
         return trial
 
-    @staticmethod
-    def should_prune(trial: Trial, value: float, step: int) -> bool:
-        del trial, value, step
-        return False
-
     def complete(self, trial: Trial, value: float) -> None:
         del trial
         self.values.append(value)
-
-    @staticmethod
-    def prune(trial: Trial) -> None:
-        del trial
-        pytest.fail("Stupeň neprořezává.")
 
 
 @pytest.mark.parametrize("cut", [0, 3, 5])
@@ -330,34 +325,6 @@ def test_checkpoint_round_trip_record_and_fold_results(tmp_path: Path) -> None:
         table["params"].to_pylist()
         == ['{"branch": "word/logreg", "logreg.C": 1.0, "word.min_df": 1}'] * 2
     )
-
-
-def test_stage_rejects_pruned_trial() -> None:
-    """Porušení smlouvy hledání bez pruneru nesmí vytvořit dokončený výstup."""
-
-    class PruningSearch(_Search):
-        @staticmethod
-        def should_prune(trial: Trial, value: float, step: int) -> bool:
-            del trial, value, step
-            return True
-
-        @staticmethod
-        def prune(trial: Trial) -> None:
-            del trial
-
-    progress = _Progress()
-    with pytest.raises(InvalidInputError, match="neprořezává"):
-        StageTuning(
-            _Table(),
-            _SplitSource(),
-            StratifiedGroupFolds(),
-            PruningSearch(),
-            _Scorer(),
-            progress,
-            StepClock(),
-        ).run(stage_config())
-    assert not progress.records
-    assert not progress.finished
 
 
 def test_nonconvergence_counts_each_affected_trial_once() -> None:

@@ -12,6 +12,7 @@ if TYPE_CHECKING:
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.seed import Seed
     from mediparse.domain.split import Holdout, SharedSplit
+    from mediparse.domain.stage_tuning import StageFoldResult, StageTrialRecord
     from mediparse.domain.tuning import ParamValue, Trial, ValidationScores
 
 
@@ -89,26 +90,41 @@ class Clock(Protocol):
         """Vrátí čas v sekundách s libovolným pevným počátkem."""
 
 
-class ParameterSearch(Protocol):
-    """Návrhy parametrů a strategie prořezávání bez vlastnictví rozpočtu."""
+class StageSearch(Protocol):
+    """Návrhy větví s výchozími body a obnovou historie."""
 
     def ask(self) -> Trial:
         """Navrhne parametry nového pokusu."""
 
-    def should_prune(self, trial: Trial, value: float, step: int) -> bool:
-        """Zapíše průběžný průměr a rozhodne o prořezání."""
-
     def complete(self, trial: Trial, value: float) -> None:
-        """Uzavře dokončený pokus s cílovou hodnotou."""
+        """Uzavře pokus s cílovou hodnotou."""
 
-    def prune(self, trial: Trial) -> None:
-        """Uzavře prořezaný pokus započítaný do rozpočtu."""
+    def enqueue(self, params: Mapping[str, ParamValue]) -> None:
+        """Vloží parametry následujícího pokusu."""
+
+    def restore(self, trials: Sequence[tuple[Trial, float]]) -> None:
+        """Obnoví dokončené pokusy v pořadí čísel."""
+
+
+class StageProgress(Protocol):
+    """Trvalé pokusy a jejich validační predikce."""
+
+    def completed(self) -> tuple[StageTrialRecord, ...]:
+        """Ověří klíč a vrátí dokončené pokusy."""
+
+    def write(
+        self, record: StageTrialRecord, results: Sequence[StageFoldResult]
+    ) -> None:
+        """Zapíše jeden pokus se všemi foldy a diagnózami."""
+
+    def finish(self) -> None:
+        """Složí výstupy a uklidí checkpoint."""
 
 
 class TrialScorer(Protocol):
     """Skóre validačních zpráv jednoho pokusu."""
 
-    def score(
-        self, params: Mapping[str, ParamValue], fold: Holdout
-    ) -> ValidationScores:
-        """Fitne model na tréninku a vrátí skóre na validaci."""
+    def score_folds(
+        self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
+    ) -> tuple[ValidationScores, ...]:
+        """Fitne modely a vrátí skóre všech foldů v pořadí vstupu."""

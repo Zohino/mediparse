@@ -9,15 +9,12 @@ from typing import TYPE_CHECKING, Annotated, Literal, Self
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from mediparse.domain.diagnosis import Diagnosis
-from mediparse.domain.identity import RowId
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.seed import Seed
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
     from mediparse.domain.input_note import InputNote
-    from mediparse.domain.split import SplitConfig
 
 
 type ParamValue = str | int | float | bool | None
@@ -131,19 +128,6 @@ def _contains(param: Parameter, value: ParamValue) -> bool:
     return type(value) is float and isfinite(value) and param.low <= value <= param.high
 
 
-class TuningConfig(BaseModel):
-    """Řádek a fold evaluace, vnitřní CV a strategie hledání."""
-
-    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
-
-    row_id: RowId
-    fold: Annotated[int, Field(ge=0)]
-    seed: Seed
-    inner_folds: Annotated[int, Field(ge=2)]
-    pruner_startup_trials: Annotated[int, Field(ge=0)]
-    space: SearchSpace
-
-
 @dataclass(frozen=True)
 class Trial:
     """Jeden návrh parametrů bez závislosti na knihovně hledání."""
@@ -240,25 +224,3 @@ def macro_max_f1(f1: Mapping[Diagnosis, MaxF1]) -> float:
         Společný cíl pro řazení konfigurací.
     """
     return sum(item.value for item in f1.values()) / len(Diagnosis)
-
-
-@dataclass(frozen=True)
-class TuningOutcome:
-    """Nejlepší konfigurace a vyčerpání rozpočtu včetně nekonvergence."""
-
-    best: Mapping[str, ParamValue]
-    best_macro_f1: float
-    completed_trials: int
-    pruned_trials: int
-    nonconverged_trials: int
-
-
-@dataclass(frozen=True)
-class TuningReport:
-    """Agregáty tréninku a provenance původního splitu pro manifest."""
-
-    outcome: TuningOutcome
-    train_notes: int
-    train_patients: int
-    split_config: SplitConfig
-    split_sha256: str

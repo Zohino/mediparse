@@ -87,6 +87,16 @@ class SklearnStageScorer:
             texts.append(self._prepared[key])
         return texts
 
+    def score_folds(
+        self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
+    ) -> tuple[ValidationScores, ...]:
+        """Vyhodnotí foldy v pořadí vstupu.
+
+        Returns:
+            Skóre každého foldu bez volby prahu.
+        """
+        return tuple(self.score(params, fold) for fold in folds)
+
     def score(
         self, params: Mapping[str, ParamValue], fold: Holdout
     ) -> ValidationScores:

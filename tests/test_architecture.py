@@ -984,7 +984,6 @@ def test_data_reading_entrypoints_import_access_guard() -> None:
     violations, inspected = _unguarded_data_entrypoints(PACKAGE / "entrypoints")
 
     assert "cohort.py" in inspected
-    assert "model_tuning.py" in inspected
     assert DATA_ACCESS_EXCEPTIONS.keys() <= inspected
     assert violations == []
 

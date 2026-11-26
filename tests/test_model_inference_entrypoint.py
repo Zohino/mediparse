@@ -96,7 +96,6 @@ def _train(
     trained = Trained(notes, config, root / "model.skops", root / "predictions.parquet")
     code = model_training.run(
         paths=model_training.TrainingPaths(
-            tuning=None,
             corpus=replace(repository_corpus(notes, split), candidates=candidates),
             config=config,
             model=trained.model,

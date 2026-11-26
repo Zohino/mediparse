@@ -40,7 +40,6 @@ def _fields(**changes: object) -> dict[str, object]:
         "dataset_sha256": DIGEST,
         "predictions_sha256": DIGEST,
         "config_sha256": DIGEST,
-        "tuning_manifest_sha256": None,
         "parameters": {"c": 1.0},
         "threshold": 0.25,
         "threshold_folds": 3,
@@ -410,7 +409,6 @@ def test_training_manifest_requires_prediction_digest() -> None:
 @pytest.mark.parametrize(
     "field",
     [
-        "tuning_manifest_sha256",
         "parameters",
         "threshold",
         "threshold_folds",
@@ -434,7 +432,6 @@ def test_training_manifest_requires_tuning_record(field: str) -> None:
         ("threshold_folds", 1),
         ("threshold_folds", True),
         ("converged", 1),
-        ("tuning_manifest_sha256", "g" * 64),
     ],
 )
 def test_training_manifest_rejects_invalid_tuning_record(

@@ -47,20 +47,7 @@ def test_stage_maximizes_objective() -> None:
     search = OptunaStageSearch.create(config)
     for value in (0.2, 0.9, 0.5):
         search.complete(search.ask(), value)
-    assert search.best()[1] == pytest.approx(0.9)
-
-
-def test_stage_never_prunes_after_startup() -> None:
-    """Ani výrazný propad po pěti pokusech není důvodem k prořezání."""
-    config = stage_config()
-    search = OptunaStageSearch.create(config)
-    for _ in range(5):
-        trial = search.ask()
-        search.should_prune(trial, 1.0, 0)
-        search.should_prune(trial, 1.0, 1)
-        search.complete(trial, 1.0)
-    trial = search.ask()
-    assert search.should_prune(trial, 0.0, 0) is False
+    assert search.study.best_value == pytest.approx(0.9)
 
 
 def test_sampler_description_uses_actual_options() -> None:
@@ -85,5 +72,5 @@ def test_single_branch_without_representation_params() -> None:
     search.complete(trial, 0.5)
     restored = OptunaStageSearch.create(config)
     restored.restore([(trial, 0.5)])
-    assert restored.best() == search.best()
+    assert restored.study.best_value == search.study.best_value
     assert restored.ask() == search.ask()

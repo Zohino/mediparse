@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
@@ -147,6 +148,13 @@ class ParquetStageCheckpoint:
             ),
             "results": pa.Table.from_pylist(trials, schema=TRIALS_SCHEMA),
         })
+
+        logging.getLogger(__name__).info(
+            "Pokus %d COMPLETE: macro-F1 %.6f, čas %.3f s.",
+            record.number,
+            record.value,
+            record.seconds,
+        )
 
     def finish(self) -> None:
         """Složí oba výstupy a uklidí checkpoint."""

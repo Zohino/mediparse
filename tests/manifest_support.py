@@ -25,7 +25,6 @@ def training_manifest(
         dataset_sha256=dataset_sha256,
         split_sha256=split_sha256,
         config_sha256="d" * 64,
-        tuning_manifest_sha256=None,
         parameters=FIXED_SVM_PARAMS,
         threshold=0.25,
         threshold_folds=3,

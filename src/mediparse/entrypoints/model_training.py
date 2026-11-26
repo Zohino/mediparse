@@ -15,8 +15,7 @@ from typing import TYPE_CHECKING, Final
 from mediparse.application.model_training import ModelTraining
 from mediparse.domain.costs import TrainingCosts
 from mediparse.domain.environment import Environment
-from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.run_manifest import RunManifest, ensure_tuning_lineage
+from mediparse.domain.run_manifest import RunManifest
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_corpus import (
@@ -31,7 +30,6 @@ from mediparse.infrastructure.machine_hardware import machine_hardware
 from mediparse.infrastructure.nvml_gpu import gpu_monitor
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.prediction_table import ParquetPredictionTable
-from mediparse.infrastructure.run_manifest_file import load_tuning_manifest
 from mediparse.infrastructure.sklearn_classifier import (
     ESTIMATOR,
     LinearSvmTrainer,
@@ -44,9 +42,6 @@ if TYPE_CHECKING:
     from collections.abc import Callable, Mapping
 
     from mediparse.domain.environment import SourceRevision
-    from mediparse.domain.run_manifest import TuningManifest
-    from mediparse.domain.training import TrainingConfig
-    from mediparse.domain.tuning import ParamValue
 
 logger = logging.getLogger(__name__)
 
@@ -62,32 +57,12 @@ PACKAGES: Final = (
 )
 
 
-def _parameters(
-    config: TrainingConfig, tuning: TuningManifest | None
-) -> dict[str, ParamValue]:
-    """Vybere právě jeden zdroj parametrů tréninku.
-
-    Returns:
-        Nejlepší parametry manifestu, nebo pevné parametry configu.
-
-    Raises:
-        InvalidInputError: Parametry chybějí, nebo jsou přítomné oba zdroje.
-    """
-    if tuning is None and config.parameters is not None:
-        return config.parameters
-    if tuning is not None and config.parameters is None:
-        return tuning.best
-    msg = "Trénink vyžaduje právě jeden zdroj parametrů: tuning nebo config.parameters."
-    raise InvalidInputError(msg)
-
-
 @dataclass(frozen=True, kw_only=True)
 class TrainingPaths:
     """Vstupní a výstupní cesty tréninku modelu."""
 
     corpus: ModelCorpusPaths
     config: Path
-    tuning: Path | None
     model: Path
     predictions: Path
     manifest: Path
@@ -126,15 +101,12 @@ def run(
         neplatnou tabulku, config, kandidáty (při zapnuté normalizaci), lexikon a soubor splitu,
         pro nečitelnou revizi zdroje, nezjistitelný HW stroje, selhání měření GPU
         a pro neoznačená data v prostředí, které nesmí číst MIMIC. Odmítne také chybějící
-        či dvojitý zdroj parametrů a manifest ladění z jiného tréninku.
+        zdroj parametrů.
 
-    Raises:
-        InvalidInputError: Manifest neodpovídá tréninku; dekorátor přeloží na REFUSED.
     """
     check_inputs_access(environ, paths.corpus.data)
     training = load_training_config(paths.config)
-    tuned = load_tuning_manifest(paths.tuning) if paths.tuning is not None else None
-    parameters = _parameters(training, tuned)
+    parameters = training.parameters
     source = revision()
     corpus = model_corpus(
         paths.corpus, strip_diagnostic_sections=training.input.strip_diagnostic_sections
@@ -142,21 +114,6 @@ def run(
     normalization = text_normalization(
         paths.corpus.candidates, training.input.text_preprocessing
     )
-    if tuned is not None:
-        try:
-            ensure_tuning_lineage(
-                tuned,
-                row_id=training.row_id,
-                fold=training.fold,
-                dataset_sha256=corpus.dataset_sha256,
-                split_sha256=corpus.split.read().split.sha256(),
-                diagnostic_strip=corpus.strip,
-                text_preprocessing=training.input.text_preprocessing,
-                text_normalization=normalization,
-            )
-        except InvalidInputError as error:
-            msg = f"Manifest {paths.tuning}: {error}"
-            raise InvalidInputError(msg) from error
     step = ModelTraining(
         table=corpus.table,
         split=corpus.split,
@@ -179,9 +136,6 @@ def run(
             dataset_sha256=corpus.dataset_sha256,
             predictions_sha256=file_sha256(paths.predictions),
             config_sha256=file_sha256(paths.config),
-            tuning_manifest_sha256=file_sha256(paths.tuning)
-            if paths.tuning is not None
-            else None,
             parameters=parameters,
             threshold=report.threshold,
             threshold_folds=training.threshold_folds,

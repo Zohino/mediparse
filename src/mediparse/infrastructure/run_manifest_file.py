@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mediparse.domain.run_manifest import RunManifest, TuningManifest
+from mediparse.domain.run_manifest import RunManifest, StageTuningManifest
 from mediparse.infrastructure.input_file import parse_file
 
 if TYPE_CHECKING:
@@ -20,10 +20,10 @@ def load_run_manifest(path: Path) -> RunManifest:
     return parse_file(path, RunManifest.model_validate_json)
 
 
-def load_tuning_manifest(path: Path) -> TuningManifest:
+def load_stage_tuning_manifest(path: Path) -> StageTuningManifest:
     """Přečte a přísně validuje manifest ladění.
 
     Returns:
         Manifest, který prošel schématem.
     """
-    return parse_file(path, TuningManifest.model_validate_json)
+    return parse_file(path, StageTuningManifest.model_validate_json)

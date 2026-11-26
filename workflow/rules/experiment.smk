@@ -12,27 +12,6 @@ rule make_splits:
         "../scripts/make_splits.py"
 
 
-rule tune_model:
-    input:
-        cohort="resources/mimic/cohort.parquet",
-        config="config/tuning.json",
-        matrix="config/matrix.json",
-        candidates="config/diagnosis_candidates.json",
-        lexicon="config/section_headers.json",
-        split="resources/mimic/splits.parquet",
-    output:
-        manifest="results/experiment/tuning_manifest.json",
-        storage="resources/mimic/tuning.sqlite3",
-    log:
-        "logs/experiment/tune_model.log",
-    benchmark:
-        "results/experiment/benchmarks/tune_model.tsv"
-    params:
-        code=code_fingerprint("workflow/scripts/tune_model.py"),
-    script:
-        "../scripts/tune_model.py"
-
-
 # config/training.json chybí záměrně: config řádku pro MIMIC dodá S40,
 # smoketest ho přebije vlastním configem. config/smoketest_training.json sem
 # nepatří, protože MIMIC by trénoval pod jeho row_id.
@@ -43,7 +22,6 @@ rule train_model:
         candidates="config/diagnosis_candidates.json",
         lexicon="config/section_headers.json",
         split="resources/mimic/splits.parquet",
-        tuning="results/experiment/tuning_manifest.json",
     output:
         model="resources/mimic/model.skops",
         predictions="resources/mimic/predictions.parquet",
