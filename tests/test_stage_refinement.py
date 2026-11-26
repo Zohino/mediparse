@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field, replace
+from math import log10
 from typing import TYPE_CHECKING
 
 import pytest
@@ -12,8 +13,12 @@ from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.split import SharedSplit, Split, SplitConfig
 from mediparse.domain.stage_refinement import RefinementConfig
-from mediparse.domain.stage_tuning import StageTrialRecord, family_candidates
-from mediparse.domain.tuning import ValidationScores
+from mediparse.domain.stage_tuning import (
+    StageTrialRecord,
+    best_trial,
+    family_candidates,
+)
+from mediparse.domain.tuning import MaxF1, ValidationScores
 from mediparse.infrastructure.optuna_search import OptunaStageSearch
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.stage_trials_table import ParquetStageCheckpoint
@@ -186,29 +191,39 @@ def test_check_picks_family_with_higher_development_score() -> None:
     assert searches.search.restored[0][1] == pytest.approx(0.8)
 
 
-@pytest.mark.parametrize("cut", [1, 2, 4])
+@pytest.mark.parametrize("cut", [1, 2, 3, 7])
 def test_resume_gives_same_outputs_as_uninterrupted_run(
-    tmp_path: Path, cut: int
+    tmp_path: Path, cut: int, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Přerušení v kontrole i doladění zachová bajty obou výstupů a proud TPE."""
+    """Obnova zachová i nekonstantní historii a vítěze kontroly při běhu TPE."""
 
     class MonotonicScorer(_Scorer):
         def score_folds(
             self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
         ) -> tuple[ValidationScores, ...]:
             scored = super().score_folds(params, folds)
-            # Počet správně oddělených pozitiv roste s C; hodnota cíle neklesá.
-            c = params.get("logreg.C", 1.0)
-            assert isinstance(c, float)
-            count = min(10, max(0, round(10 * c / 1000)))
-            results = []
-            for score, fold in zip(scored, folds, strict=True):
-                top = {n.note_id for n in fold.test if n.labels}
-                top = set(sorted(top)[:count])
-                values = tuple(float(n.note_id in top) for n in fold.test)
-                results.append(replace(score, scores=dict.fromkeys(Diagnosis, values)))
-            return tuple(results)
+            c = params.get("logreg.C")
+            value = 0.1 + 0.8 * (log10(c) + 3) / 6 if isinstance(c, float) else 0.0
+            return tuple(
+                replace(
+                    score, scores=dict.fromkeys(Diagnosis, (value,) * len(fold.test))
+                )
+                for score, fold in zip(scored, folds, strict=True)
+            )
 
+    def metrics(
+        notes: Sequence[InputNote], scores: ValidationScores
+    ) -> dict[Diagnosis, MaxF1]:
+        del notes
+        return {d: MaxF1(scores.scores[d][0], 0.5) for d in Diagnosis}
+
+    # Test orchestrace používá analytický cíl v celé log škále C; empirické max-F1
+    # má schody a nedokázalo by rozlišit libovolné dvě obnovené hodnoty.
+    monkeypatch.setattr("mediparse.application.tuning_trial.fold_max_f1", metrics)
+    screening = list(_screening())
+    screening[0] = replace(
+        screening[0], params=dict(screening[0].params) | {"logreg.C": 0.001}
+    )
     checkpoints = [
         ParquetStageCheckpoint(
             tmp_path / name / "parts",
@@ -218,6 +233,24 @@ def test_resume_gives_same_outputs_as_uninterrupted_run(
         )
         for name in ("whole", "resumed")
     ]
+    baseline = MemoryProgress()
+    StageRefinement(
+        _Table(),
+        _Split(),
+        StratifiedGroupFolds(),
+        OptunaStageSearch,
+        MonotonicScorer(),
+        baseline,
+        StepClock(),
+    ).run(stage_config(), _REFINEMENT, screening, trials=12)
+    records = baseline.records
+    winner = best_trial(records[:2])
+    assert records[0].value != records[1].value
+    assert records[2].value > winner.value
+    if cut >= 3:
+        assert any(r.value != winner.value for r in records[2:cut])
+    if cut == 7:
+        assert cut > 1 + 1 + _REFINEMENT.random_startup_trials
     for i, progress in enumerate(checkpoints):
         if i:
             with pytest.raises(RuntimeError, match="přerušení"):
@@ -229,7 +262,7 @@ def test_resume_gives_same_outputs_as_uninterrupted_run(
                     MonotonicScorer(fail_at=cut),
                     progress,
                     StepClock(),
-                ).run(stage_config(), _REFINEMENT, _screening(), trials=10)
+                ).run(stage_config(), _REFINEMENT, screening, trials=12)
             assert len(progress.completed()) == cut
         StageRefinement(
             _Table(),
@@ -239,7 +272,7 @@ def test_resume_gives_same_outputs_as_uninterrupted_run(
             MonotonicScorer(),
             progress,
             StepClock(),
-        ).run(stage_config(), _REFINEMENT, _screening(), trials=10)
+        ).run(stage_config(), _REFINEMENT, screening, trials=12)
     assert checkpoints[0].results.read_bytes() == checkpoints[1].results.read_bytes()
     assert (
         checkpoints[0].predictions.read_bytes()
