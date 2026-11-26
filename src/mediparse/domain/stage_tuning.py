@@ -288,7 +288,11 @@ class StageFoldResult:
 
 @dataclass(frozen=True)
 class StageTrialRecord:
-    """Parametry, cíl a cena dokončeného pokusu."""
+    """Parametry, cíl a cena dokončeného pokusu.
+
+    ``default`` označuje bod mimo návrhy sampleru: výchozí bod předkola
+    nebo kontrolu kandidáta na celé vývojové části.
+    """
 
     number: int
     params: Mapping[str, ParamValue]

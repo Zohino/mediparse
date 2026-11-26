@@ -1,9 +1,19 @@
 """Malé prostory stupně pro syntetická ověření."""
 
-import json
-from dataclasses import dataclass
+from __future__ import annotations
 
-from mediparse.domain.stage_tuning import StageTuningConfig
+import json
+from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
+
+from mediparse.domain.stage_tuning import StageTrialRecord, StageTuningConfig
+from mediparse.domain.tuning import Trial
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping, Sequence
+
+    from mediparse.domain.stage_tuning import StageFoldResult
+    from mediparse.domain.tuning import ParamValue
 
 
 def stage_config(**changes: object) -> StageTuningConfig:
@@ -194,3 +204,65 @@ def network_stage_config() -> StageTuningConfig:
             "stopping_parts": 3,
         },
     )
+
+
+@dataclass
+class MemoryProgress:
+    """Paměťový checkpoint pro ověření protokolu."""
+
+    records: list[StageTrialRecord] = field(default_factory=list)
+    results: list[StageFoldResult] = field(default_factory=list)
+    finished: bool = False
+
+    def completed(self) -> tuple[StageTrialRecord, ...]:
+        """Vrátí dosud uložené pokusy.
+
+        Returns:
+            Záznamy v pořadí zápisu.
+        """
+        return tuple(self.records)
+
+    def write(
+        self, record: StageTrialRecord, results: Sequence[StageFoldResult]
+    ) -> None:
+        """Uloží pokus a jeho predikce."""
+        self.results.extend(results)
+        self.records.append(record)
+
+    def finish(self) -> None:
+        """Označí úspěšné dokončení."""
+        self.finished = True
+
+
+@dataclass
+class FixedSearch:
+    """Paměťová studie s předem určenými návrhy."""
+
+    asked: int = 0
+    enqueued: list[tuple[int, Mapping[str, ParamValue]]] = field(default_factory=list)
+    restored: list[tuple[Trial, float]] = field(default_factory=list)
+    values: list[float] = field(default_factory=list)
+
+    def restore(self, trials: Sequence[tuple[Trial, float]]) -> None:
+        """Obnoví historii pro ověření protokolu."""
+        self.restored.extend(trials)
+        self.asked = len(trials)
+
+    def enqueue(self, params: Mapping[str, ParamValue]) -> None:
+        """Připraví bod pro další návrh."""
+        self.enqueued.append((self.asked, params))
+
+    def ask(self) -> Trial:
+        """Navrhne připravený bod.
+
+        Returns:
+            Nový pokus.
+        """
+        trial = Trial(self.asked, self.enqueued[-1][1])
+        self.asked += 1
+        return trial
+
+    def complete(self, trial: Trial, value: float) -> None:
+        """Uloží cílovou hodnotu dokončeného pokusu."""
+        del trial
+        self.values.append(value)

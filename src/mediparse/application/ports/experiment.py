@@ -12,7 +12,11 @@ if TYPE_CHECKING:
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.seed import Seed
     from mediparse.domain.split import Holdout, SharedSplit
-    from mediparse.domain.stage_tuning import StageFoldResult, StageTrialRecord
+    from mediparse.domain.stage_tuning import (
+        StageFoldResult,
+        StageTrialRecord,
+        StageTuningConfig,
+    )
     from mediparse.domain.tuning import ParamValue, Trial, ValidationScores
 
 
@@ -128,3 +132,10 @@ class TrialScorer(Protocol):
         self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
     ) -> tuple[ValidationScores, ...]:
         """Fitne modely a vrátí skóre všech foldů v pořadí vstupu."""
+
+
+class StageSearches(Protocol):
+    """Továrna studií vznikajících po kontrole kandidátů."""
+
+    def create(self, config: StageTuningConfig) -> StageSearch:
+        """Vytvoří prázdnou studii zadané větve."""

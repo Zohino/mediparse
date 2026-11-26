@@ -19,6 +19,7 @@ if TYPE_CHECKING:
 
     from mediparse.domain.stage_tuning import StageFoldResult
 
+# default je bod mimo návrhy sampleru: výchozí bod předkola nebo kontrola kandidáta.
 TRIALS_SCHEMA: Final = pa.schema([
     pa.field(name, kind, nullable=False)
     for name, kind in (
