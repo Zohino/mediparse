@@ -4,7 +4,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from functools import partial
-from itertools import batched
+from itertools import chain
+from operator import itemgetter
 from typing import TYPE_CHECKING, Final, Literal, Protocol, assert_never, cast
 
 import numpy as np
@@ -36,7 +37,7 @@ from mediparse.infrastructure.sklearn_families import (
     positive_scores,
 )
 from mediparse.infrastructure.sklearn_split import holdout_mask
-from mediparse.infrastructure.torch_device import cuda_device_count, fold_device
+from mediparse.infrastructure.torch_device import cuda_device_count, fold_groups
 from mediparse.infrastructure.word2vec import trained_vectors
 
 if TYPE_CHECKING:
@@ -142,44 +143,49 @@ class SklearnStageScorer:
         self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
     ) -> tuple[ValidationScores, ...]:
         network = cast("StageNetwork", self.config.network)
-        count = cuda_device_count() if network.device == "cuda" else 0
-        jobs = min(self.jobs, count) if network.device == "cuda" else self.jobs
+        jobs, groups = fold_groups(
+            network.device,
+            len(folds),
+            self.jobs,
+            cuda_device_count() if network.device == "cuda" else 0,
+        )
         branch = self.config.branch(params)
         rep, family = branch.params_of(params)
         tasks = []
-        for i, fold in enumerate(folds):
-            train, validation, n_features = self._features(branch, rep, fold)
-            stop = holdout_mask(fold.train, network.stopping_parts, self.seed)
-            labels = np.array([
-                [note.has_label(d) for d in Diagnosis] for note in fold.train
-            ])
-            model = classifier_estimator(
-                ClassifierFamily.MULTIRESCNN, self.seed, self.scratch
-            ).set_params(
-                **family,
-                **network.model_dump(exclude={"stopping_parts", "device"}),
-                device=fold_device(network.device, i, count),
-            )
-            tasks.append(
-                delayed(_network_scores)(
-                    model,
-                    train=cast("ndarray", train[~stop]),
-                    labels=labels[~stop],
-                    stop=cast("ndarray", train[stop]),
-                    stop_labels=labels[stop],
-                    validation=cast("ndarray", validation),
-                    n_features=n_features,
-                )
-            )
-        # Dávky brání tomu, aby rychlejší worker převzal další fold stejné GPU,
-        # zatímco její předchozí fit ještě běží v jiném workeru.
-        results = []
-        with Parallel(
-            n_jobs=jobs, backend="loky", temp_folder=self.scratch
-        ) as parallel:
-            for batch in batched(tasks, jobs, strict=False):
-                results.extend(parallel(batch))
-        return tuple(results)
+        for group in groups:
+            fits = []
+            for i, device in group:
+                fold = folds[i]
+                train, validation, n_features = self._features(branch, rep, fold)
+                stop = holdout_mask(fold.train, network.stopping_parts, self.seed)
+                labels = np.array([
+                    [note.has_label(d) for d in Diagnosis] for note in fold.train
+                ])
+                fits.append((
+                    i,
+                    partial(
+                        _network_scores,
+                        classifier_estimator(
+                            ClassifierFamily.MULTIRESCNN, self.seed, self.scratch
+                        ).set_params(
+                            **family,
+                            **network.model_dump(exclude={"stopping_parts", "device"}),
+                            device=device,
+                        ),
+                        train=cast("ndarray", train[~stop]),
+                        labels=labels[~stop],
+                        stop=cast("ndarray", train[stop]),
+                        stop_labels=labels[stop],
+                        validation=cast("ndarray", validation),
+                        n_features=n_features,
+                    ),
+                ))
+            tasks.append(delayed(_network_group_scores)(fits))
+        results = Parallel(n_jobs=jobs, backend="loky", temp_folder=self.scratch)(tasks)
+        return tuple(
+            score
+            for _, score in sorted(chain.from_iterable(results), key=itemgetter(0))
+        )
 
     def _features(
         self, branch: Branch, rep_params: Mapping[str, ParamValue], fold: Holdout
@@ -386,6 +392,12 @@ def tfidf_features(
     return transformer.fit_transform(train_counts), transformer.transform(
         validation_counts
     )
+
+
+def _network_group_scores(
+    fits: Sequence[tuple[int, Callable[[], ValidationScores]]],
+) -> tuple[tuple[int, ValidationScores], ...]:
+    return tuple((index, fit()) for index, fit in fits)
 
 
 # Fit část, stop část a validace mají samostatné vstupy, aby se při fitu nesmíchaly.

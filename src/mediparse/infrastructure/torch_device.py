@@ -56,3 +56,24 @@ def fold_device(device: Device, fold: int, count: int) -> str:
         msg = "Souběžné foldy vyžadují alespoň jednu GPU."
         raise InvalidInputError(msg)
     return f"cuda:{fold % count}"
+
+
+def fold_groups(
+    device: Device, folds: int, jobs: int, count: int
+) -> tuple[int, tuple[tuple[tuple[int, str], ...], ...]]:
+    """Seskupí foldy do úkolů s výhradním použitím každé GPU.
+
+    Returns:
+        Souběh a skupiny dvojic pořadí foldu a zařízení; CPU má jeden fold na úkol.
+
+    Raises:
+        InvalidInputError: CUDA nemá viditelnou GPU.
+    """
+    first_device = fold_device(device, 0, count)
+    if device == "cpu":
+        return jobs, tuple(((fold, first_device),) for fold in range(folds))
+    groups = []
+    for gpu in range(min(folds, count)):
+        selected = fold_device(device, gpu, count)
+        groups.append(tuple((fold, selected) for fold in range(gpu, folds, count)))
+    return min(jobs, count), tuple(groups)
