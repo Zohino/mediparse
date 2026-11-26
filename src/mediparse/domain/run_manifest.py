@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Annotated, Self
+from typing import TYPE_CHECKING, Annotated, Self
 
 from pydantic import (
     BaseModel,
@@ -23,6 +23,9 @@ from mediparse.domain.representation import EncoderSpec, RepresentationName
 from mediparse.domain.seed import Seed
 from mediparse.domain.stage_tuning import BRANCH_KEY
 from mediparse.domain.tuning import ParamValue
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 
 class DiagnosticStrip(BaseModel):
@@ -57,6 +60,17 @@ def _ensure_normalization_matches_preprocessing(
     ):
         msg = "Úroveň předzpracování normalized nesmí obsahovat varianty diagnóz."
         raise ValueError(msg)
+
+
+def _ensure_stage_text(
+    preprocessing: Mapping[str, TextPreprocessing],
+    normalization: Mapping[str, TextNormalization | None],
+) -> None:
+    if preprocessing.keys() != normalization.keys():
+        msg = "Mapy předzpracování a normalizace musí mít stejné reprezentace."
+        raise ValueError(msg)
+    for name, level in preprocessing.items():
+        _ensure_normalization_matches_preprocessing(level, normalization[name])
 
 
 class RunManifest(BaseModel):
@@ -191,13 +205,7 @@ class StageTuningManifest(BaseModel):
         if self.completed_trials != self.trials:
             msg = "Dokončené pokusy musí vyčerpat rozpočet stupně."
             raise ValueError(msg)
-        if self.text_preprocessing.keys() != self.text_normalization.keys():
-            msg = "Mapy předzpracování a normalizace manifestu stupně musí mít stejné reprezentace."
-            raise ValueError(msg)
-        for name, level in self.text_preprocessing.items():
-            _ensure_normalization_matches_preprocessing(
-                level, self.text_normalization[name]
-            )
+        _ensure_stage_text(self.text_preprocessing, self.text_normalization)
         return self
 
 
@@ -312,11 +320,5 @@ class StageRefinementManifest(BaseModel):
         if self.best_params.get(BRANCH_KEY) != self.winner_branch:
             msg = "Nejlepší parametry musí patřit vítězné větvi kontroly."
             raise ValueError(msg)
-        if self.text_preprocessing.keys() != self.text_normalization.keys():
-            msg = "Mapy předzpracování a normalizace musí mít stejné reprezentace."
-            raise ValueError(msg)
-        for name, level in self.text_preprocessing.items():
-            _ensure_normalization_matches_preprocessing(
-                level, self.text_normalization[name]
-            )
+        _ensure_stage_text(self.text_preprocessing, self.text_normalization)
         return self
