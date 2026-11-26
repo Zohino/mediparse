@@ -55,7 +55,7 @@ def _widen_parameter(param: Parameter, bounds: Bounds) -> Parameter:
     )
     if isinstance(param, CategoricalParam):
         original_choices = {(type(value), value) for value in param.choices}
-        contains = isinstance(changed, CategoricalParam) and original_choices <= {
+        contains = isinstance(changed, CategoricalParam) and original_choices < {
             (type(value), value) for value in changed.choices
         }
     else:

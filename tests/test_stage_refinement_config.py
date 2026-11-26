@@ -7,11 +7,12 @@ import json
 import pytest
 
 from mediparse.domain.stage_refinement import RefinementConfig, branch_config, widen
-from mediparse.domain.tuning import FloatParam
+from mediparse.domain.tuning import CategoricalParam, FloatParam
 from mediparse.infrastructure.stage_config import (
     load_refinement_config,
     load_stage_config,
 )
+from tests.stage_support import stage_config
 from tests.support import REPOSITORY
 
 
@@ -38,6 +39,8 @@ def test_widen_contains_original_candidate() -> None:
         {"nb_svm.C": {"low": 1e-3}},
         {"nb_svm.typo": {"low": 1e-5}},
         {"word.sublinear_tf": {"choices": [True]}},
+        {"word.sublinear_tf": {"choices": [False, True]}},
+        {"word.ngram_min": {"choices": [True]}},
     ],
 )
 def test_widen_refuses_invalid_changes(widened: dict[str, object]) -> None:
@@ -103,3 +106,16 @@ def test_branch_config_keeps_only_required_technology(
         assert (selected.lsa is not None) is lsa
         assert selected.startup_trials == 6
         assert [b.name for b in selected.branches] == [branch.name]
+
+
+def test_widen_accepts_proper_categorical_superset() -> None:
+    """Kategorie ngram_max [2] se rozšíří na [2, 3]."""
+    refinement = RefinementConfig.model_validate_json(
+        '{"random_startup_trials": 1, "widened": {"r1.ngram_max": {"choices": [2, 3]}}}'
+    )
+    widened = widen(stage_config(), refinement)
+    param = next(
+        p for p in widened.branches[0].prefixed_space() if p.name == "r1.ngram_max"
+    )
+    assert isinstance(param, CategoricalParam)
+    assert param.choices == (2, 3)
