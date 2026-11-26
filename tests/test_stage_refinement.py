@@ -107,6 +107,7 @@ class _Split:
 @dataclass
 class _Scorer:
     fail_at: int | None = None
+    nonconverged_at: int | None = None
     params: list[Mapping[str, ParamValue]] = field(default_factory=list)
     observed: list[Holdout] = field(default_factory=list)
 
@@ -133,7 +134,7 @@ class _Scorer:
                     dict.fromkeys(
                         Diagnosis, tuple(float(n.note_id in top) for n in fold.test)
                     ),
-                    converged=True,
+                    converged=len(self.params) != self.nonconverged_at,
                     n_features=1,
                 )
             )
@@ -167,7 +168,11 @@ class _Searches:
 
 def test_check_picks_family_with_higher_development_score() -> None:
     """Kontrola otočí pořadí předkola, vítězný bod se do studie přenese jen jednou."""
-    progress, scorer, searches = MemoryProgress(), _Scorer(), _Searches()
+    progress, scorer, searches = (
+        MemoryProgress(),
+        _Scorer(nonconverged_at=4),
+        _Searches(),
+    )
     screening = _screening()
     report = StageRefinement(
         _Table(),
@@ -179,6 +184,10 @@ def test_check_picks_family_with_higher_development_score() -> None:
         StepClock(),
     ).run(stage_config(), _REFINEMENT, screening, trials=6)
     records = progress.records
+    assert tuple(c.value for c in report.checks) == pytest.approx((0.6, 0.8))
+    assert report.checks == tuple(records[:2])
+    assert report.nonconverged_trials == 1
+    assert [r.converged for r in records] == [True, True, True, False, True, True, True]
     assert tuple(r.params for r in records[:2]) == tuple(r.params for r in screening)
     assert [r.value for r in records[:2]] == pytest.approx([0.6, 0.8])
     assert all(r.params["branch"] == "r1/complement_nb" for r in records[2:])
