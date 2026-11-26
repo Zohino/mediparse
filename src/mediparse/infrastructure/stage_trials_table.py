@@ -19,6 +19,8 @@ if TYPE_CHECKING:
 
     from mediparse.domain.stage_tuning import StageFoldResult
 
+logger = logging.getLogger(__name__)
+
 # default je bod mimo návrhy sampleru: výchozí bod předkola nebo kontrola kandidáta.
 TRIALS_SCHEMA: Final = pa.schema([
     pa.field(name, kind, nullable=False)
@@ -136,8 +138,7 @@ class ParquetStageCheckpoint:
             ),
             "results": pa.Table.from_pylist(trials, schema=TRIALS_SCHEMA),
         })
-
-        logging.getLogger(__name__).info(
+        logger.info(
             "Pokus %d COMPLETE: macro-F1 %.6f, čas %.3f s.",
             record.number,
             record.value,
