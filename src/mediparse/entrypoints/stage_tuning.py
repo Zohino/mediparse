@@ -136,9 +136,9 @@ def main() -> ExitCode:
         choices=range(1, len(Diagnosis) + 1),
         default=3,
         help=(
-            "Procesy pro fity diagnóz; výsledky na počtu nezávisí. "
-            "Každý proces drží vlastní kopii matice u SVM a NB-SVM, "
-            "menší hodnota šetří paměť. Obnova checkpointu s jiným --jobs je platná."
+            "Procesy nezávislých fitů pokusu: diagnózy u klasiky a fastTextu, "
+            "foldy u MultiResCNN (nejvýš jeden fold na GPU, fold i na GPU i mod počet GPU). "
+            "Výsledky na počtu nezávisí."
         ),
     )
     args = parser.parse_args()

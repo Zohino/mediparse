@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from functools import partial
+from itertools import batched
 from typing import TYPE_CHECKING, Final, Literal, Protocol, assert_never, cast
 
 import numpy as np
@@ -35,6 +36,7 @@ from mediparse.infrastructure.sklearn_families import (
     positive_scores,
 )
 from mediparse.infrastructure.sklearn_split import holdout_mask
+from mediparse.infrastructure.torch_device import cuda_device_count, fold_device
 from mediparse.infrastructure.word2vec import trained_vectors
 
 if TYPE_CHECKING:
@@ -90,26 +92,18 @@ class SklearnStageScorer:
     def score_folds(
         self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
     ) -> tuple[ValidationScores, ...]:
-        """Vyhodnotí foldy v pořadí vstupu.
+        """Vyhodnotí foldy, u MultiResCNN souběžně s nejvýš jedním fitem na GPU.
 
         Returns:
-            Skóre každého foldu bez volby prahu.
-        """
-        return tuple(self.score(params, fold) for fold in folds)
-
-    def score(
-        self, params: Mapping[str, ParamValue], fold: Holdout
-    ) -> ValidationScores:
-        """Vrátí skóre validačních zpráv bez volby prahu v adaptéru.
-
-        Returns:
-            Pět vektorů skóre a konvergence všech fitů.
+            Skóre všech foldů v pořadí vstupu.
 
         Raises:
             InvalidInputError: Parametry nebo trénovací slovník nejsou platné.
         """
         try:
-            return self._score(params, fold)
+            if self.config.branch(params).family.family is ClassifierFamily.MULTIRESCNN:
+                return self._network_folds(params, folds)
+            return tuple(self._score(params, fold) for fold in folds)
         except ValueError as error:
             msg = f"Parametry nebo trénovací slovník stupně nejsou platné: {error}"
             raise InvalidInputError(msg) from error
@@ -120,8 +114,6 @@ class SklearnStageScorer:
         branch = self.config.branch(params)
         rep, family = branch.params_of(params)
         train, validation, n_features = self._features(branch, rep, fold)
-        if branch.family.family is ClassifierFamily.MULTIRESCNN:
-            return self._multilabel_scores(family, train, validation, fold, n_features)
         models = []
         for _ in Diagnosis:
             model = classifier_estimator(
@@ -146,30 +138,48 @@ class SklearnStageScorer:
             dict(zip(Diagnosis, scores, strict=True)), all(converged), n_features
         )
 
-    def _multilabel_scores(
-        self,
-        family: Mapping[str, ParamValue],
-        train: ndarray | csr_matrix,
-        validation: ndarray | csr_matrix,
-        fold: Holdout,
-        n_features: int,
-    ) -> ValidationScores:
-        # Validátor zaručuje síť právě s rodinou multirescnn.
+    def _network_folds(
+        self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
+    ) -> tuple[ValidationScores, ...]:
         network = cast("StageNetwork", self.config.network)
-        stop = holdout_mask(fold.train, network.stopping_parts, self.seed)
-        labels = np.array([
-            [note.has_label(d) for d in Diagnosis] for note in fold.train
-        ])
-        model = classifier_estimator(
-            ClassifierFamily.MULTIRESCNN, self.seed, self.scratch
-        ).set_params(**family, **network.model_dump(exclude={"stopping_parts"}))
-        model.fit(train[~stop], labels[~stop], train[stop], labels[stop])
-        scores = model.decision_function(validation)
-        return ValidationScores(
-            {d: tuple(float(v) for v in scores[:, j]) for j, d in enumerate(Diagnosis)},
-            model.converged_,
-            n_features,
-        )
+        count = cuda_device_count() if network.device == "cuda" else 0
+        jobs = min(self.jobs, count) if network.device == "cuda" else self.jobs
+        branch = self.config.branch(params)
+        rep, family = branch.params_of(params)
+        tasks = []
+        for i, fold in enumerate(folds):
+            train, validation, n_features = self._features(branch, rep, fold)
+            stop = holdout_mask(fold.train, network.stopping_parts, self.seed)
+            labels = np.array([
+                [note.has_label(d) for d in Diagnosis] for note in fold.train
+            ])
+            model = classifier_estimator(
+                ClassifierFamily.MULTIRESCNN, self.seed, self.scratch
+            ).set_params(
+                **family,
+                **network.model_dump(exclude={"stopping_parts", "device"}),
+                device=fold_device(network.device, i, count),
+            )
+            tasks.append(
+                delayed(_network_scores)(
+                    model,
+                    train=cast("ndarray", train[~stop]),
+                    labels=labels[~stop],
+                    stop=cast("ndarray", train[stop]),
+                    stop_labels=labels[stop],
+                    validation=cast("ndarray", validation),
+                    n_features=n_features,
+                )
+            )
+        # Dávky brání tomu, aby rychlejší worker převzal další fold stejné GPU,
+        # zatímco její předchozí fit ještě běží v jiném workeru.
+        results = []
+        with Parallel(
+            n_jobs=jobs, backend="loky", temp_folder=self.scratch
+        ) as parallel:
+            for batch in batched(tasks, jobs, strict=False):
+                results.extend(parallel(batch))
+        return tuple(results)
 
     def _features(
         self, branch: Branch, rep_params: Mapping[str, ParamValue], fold: Holdout
@@ -376,6 +386,37 @@ def tfidf_features(
     return transformer.fit_transform(train_counts), transformer.transform(
         validation_counts
     )
+
+
+# Fit část, stop část a validace mají samostatné vstupy, aby se při fitu nesmíchaly.
+def _network_scores(  # ruff: ignore[too-many-arguments]
+    model: BaseEstimator,
+    *,
+    train: ndarray,
+    labels: ndarray,
+    stop: ndarray,
+    stop_labels: ndarray,
+    validation: ndarray,
+    n_features: int,
+) -> ValidationScores:
+    fitted = cast("_NetworkModel", model)
+    fitted.fit(train, labels, stop, stop_labels)
+    scores = fitted.decision_function(validation)
+    return ValidationScores(
+        {d: tuple(float(v) for v in scores[:, j]) for j, d in enumerate(Diagnosis)},
+        fitted.converged_,
+        n_features,
+    )
+
+
+class _NetworkModel(Protocol):
+    converged_: bool
+
+    def fit(
+        self, train: ndarray, labels: ndarray, stop: ndarray, stop_labels: ndarray
+    ) -> object: ...
+
+    def decision_function(self, validation: ndarray) -> ndarray: ...
 
 
 def _diagnosis_scores(

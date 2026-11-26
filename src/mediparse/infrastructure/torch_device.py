@@ -28,3 +28,31 @@ def require_device(device: Device) -> None:
     if device == "cuda" and not torch.cuda.is_available():
         msg = "CUDA není dostupná; změň device v configu (změní se i klíč cache)."
         raise InvalidInputError(msg)
+
+
+def cuda_device_count() -> int:
+    """Zjistí počet GPU viditelných rodičovskému procesu.
+
+    Returns:
+        Počet CUDA zařízení.
+    """
+    import torch  # ruff: ignore[import-outside-top-level]
+
+    return torch.cuda.device_count()
+
+
+def fold_device(device: Device, fold: int, count: int) -> str:
+    """Přiřadí fold zařízení cyklicky podle jeho pořadí.
+
+    Returns:
+        CPU nebo explicitní CUDA zařízení.
+
+    Raises:
+        InvalidInputError: Pro CUDA není k dispozici žádná GPU.
+    """
+    if device == "cpu":
+        return device
+    if count == 0:
+        msg = "Souběžné foldy vyžadují alespoň jednu GPU."
+        raise InvalidInputError(msg)
+    return f"cuda:{fold % count}"
