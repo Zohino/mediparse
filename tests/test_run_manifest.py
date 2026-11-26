@@ -19,9 +19,11 @@ from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.run_manifest import (
     DiagnosticStrip,
     EvaluationManifest,
+    RefinementCandidate,
     RunManifest,
     ensure_training_lineage,
 )
+from tests.manifest_support import refinement_manifest
 
 COMMIT: Final = "a" * 40
 DIGEST: Final = "b" * 64
@@ -440,3 +442,39 @@ def test_training_manifest_rejects_invalid_tuning_record(
     """Práh musí být konečný, CV má aspoň dva foldy a provenance drží přísné typy."""
     with pytest.raises(ValidationError, match=field):
         RunManifest.model_validate(_fields(**{field: value}))
+
+
+@pytest.mark.parametrize("values", [(0.6, 0.8), (0.8, 0.8)])
+def test_refinement_manifest_selects_higher_check_then_first(
+    values: tuple[float, float],
+) -> None:
+    """Vyšší kontrola vítězí; při stejném cíli platí první kandidát."""
+    manifest = refinement_manifest()
+    candidates = tuple(
+        c.model_dump() | {"check_macro_f1": value}
+        for c, value in zip(manifest.candidates, values, strict=True)
+    )
+    winner = "word/linear_svm" if values == (0.6, 0.8) else "word/logreg"
+    loser = "word/logreg" if winner == "word/linear_svm" else "word/linear_svm"
+    accepted = refinement_manifest(
+        candidates=candidates, best_params={"branch": winner}
+    )
+    assert accepted.winner_branch == winner
+    with pytest.raises(ValidationError, match="vítězn"):
+        refinement_manifest(candidates=candidates, best_params={"branch": loser})
+
+
+def test_refinement_manifest_requires_check_and_tuning_budget() -> None:
+    """Samotný rozpočet doladění nepokrývá kontrolu poraženého kandidáta."""
+    manifest = refinement_manifest()
+    with pytest.raises(ValidationError, match="pokrýt"):
+        refinement_manifest(completed_trials=manifest.tuning_trials)
+
+
+def test_refinement_candidate_requires_matching_branch() -> None:
+    """Popis kandidáta musí nést stejnou větev jako jeho parametry."""
+    candidate = refinement_manifest().candidates[0]
+    with pytest.raises(ValidationError, match="Větev kandidáta"):
+        RefinementCandidate.model_validate(
+            candidate.model_dump() | {"branch": "word/linear_svm"}
+        )

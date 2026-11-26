@@ -163,7 +163,7 @@ def test_refinement_uses_widened_space_budget_sampler_and_lineage(
     assert manifest.best_macro_f1 == max(r.value for r in records)
     with pytest.raises(ValidationError, match="vítězn"):
         type(manifest).model_validate(
-            manifest.model_dump() | {"best_params": {"branch": "foreign/logreg"}}
+            manifest.model_dump() | {"best_params": dict(manifest.candidates[1].params)}
         )
     before = paths.out.read_bytes(), paths.predictions.read_bytes()
     assert _run(paths) is ExitCode.OK
