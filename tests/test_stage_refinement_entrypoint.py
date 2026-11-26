@@ -39,7 +39,7 @@ def _paths(root: Path) -> stage_refinement.StageRefinementPaths:
     data = stage_config(random_startup_trials=3, trials=8).model_dump(mode="json")
     data["families"] = [
         {
-            "family": family,
+            "family": "linear_svm",
             "space": {
                 "params": [
                     {
@@ -52,8 +52,8 @@ def _paths(root: Path) -> stage_refinement.StageRefinementPaths:
                 ]
             },
             "default": {"C": 0.5},
-        }
-        for family in ("linear_svm", "logreg")
+        },
+        data["families"][0],
     ]
     config = root / "stage.json"
     config.write_text(
@@ -84,7 +84,7 @@ def _paths(root: Path) -> stage_refinement.StageRefinementPaths:
         json.dumps({
             "folds": 2,
             "random_startup_trials": 1,
-            "widened": {"linear_svm.C": {"high": 100.0}, "logreg.C": {"high": 100.0}},
+            "widened": {"linear_svm.C": {"high": 100.0}},
         }),
         encoding="utf-8",
     )
@@ -127,8 +127,9 @@ def test_refinement_uses_widened_space_budget_sampler_and_lineage(
     manifest = StageRefinementManifest.model_validate_json(paths.manifest.read_bytes())
     records = read_trial_records(paths.out)
     assert manifest.completed_trials == manifest.tuning_trials + 1 == 7
+    assert manifest.winner_branch == "r1/linear_svm"
     assert any(
-        float(str(r.params[f"{manifest.winner_branch.split('/')[1]}.C"])) > 0.51
+        isinstance(r.params["linear_svm.C"], float) and r.params["linear_svm.C"] > 0.51
         for r in records[2:]
     )
     assert (

@@ -301,7 +301,7 @@ class StageRefinementManifest(BaseModel):
 
     @property
     def winner_branch(self) -> str:
-        """Větev s vyšším cílem kontroly; při shodě dřívější kandidát."""
+        """Větev s vyšším cílem kontroly; při stejném cíli dřívější kandidát."""
         return max(self.candidates, key=lambda c: c.check_macro_f1).branch
 
     @model_validator(mode="after")

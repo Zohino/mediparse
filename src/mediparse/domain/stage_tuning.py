@@ -314,7 +314,7 @@ def best_trial(records: Sequence[StageTrialRecord]) -> StageTrialRecord:
 def family_candidates(
     records: Sequence[StageTrialRecord],
 ) -> tuple[StageTrialRecord, StageTrialRecord]:
-    """Vybere dvě nejlepší rodiny, při shodě dřívější pokus.
+    """Vybere dvě nejlepší rodiny, při stejném cíli dřívější pokus.
 
     Returns:
         Nejlepší bod každé ze dvou vedoucích rodin.

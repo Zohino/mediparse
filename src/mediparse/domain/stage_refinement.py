@@ -50,10 +50,10 @@ def _widen_parameter(param: Parameter, bounds: Bounds) -> Parameter:
         param.model_dump() | bounds.model_dump(exclude_none=True)
     )
     if isinstance(param, CategoricalParam):
-        contains = isinstance(changed, CategoricalParam) and all(
-            any(type(old) is type(new) and old == new for new in changed.choices)
-            for old in param.choices
-        )
+        original_choices = {(type(value), value) for value in param.choices}
+        contains = isinstance(changed, CategoricalParam) and original_choices <= {
+            (type(value), value) for value in changed.choices
+        }
     else:
         contains = (
             not isinstance(changed, CategoricalParam)
