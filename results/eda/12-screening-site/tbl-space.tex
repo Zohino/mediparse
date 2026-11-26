@@ -1,0 +1,14 @@
+\begin{tabular}{llllll}
+\toprule
+Složka & Parametr & Rozsah & Výchozí & Nejlepší & Druhá rodina\\
+\midrule
+fasttext & lr & 0,01–5 (log) & 0,1 & – & 4,219353\\
+fasttext & epoch & 5–100 (log) & 5 & – & 41\\
+fasttext & word\_ngrams & 1–2 & 1 & – & 2\\
+fasttext & dim & 10–100 (log) & 100 & – & 16\\
+multirescnn & lr & 0,0001–0,005 (log) & 0,0005 & 0,001923557 & –\\
+multirescnn & weight\_decay & 0,000001–0,01 (log) & 0,0001 & 0,000002440205 & –\\
+multirescnn & dropout & 0–0,5 & 0,2 & 0,4525615 & –\\
+multirescnn & filter\_maps & 25–100 (log) & 50 & 73 & –\\
+\bottomrule
+\end{tabular}

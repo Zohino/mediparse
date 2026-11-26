@@ -1,0 +1,18 @@
+\begin{tabular}{llrcr}
+\toprule
+Reprezentace & Rodina & Macro-MaxF1 ± SD & Konvergence & Minuty\\
+\midrule
+mmbert-base-mean & Logistická regrese & 0,609 ± 0,010 & ano & 48,057\\
+mmbert-base-mean & Lineární SVM & 0,603 ± 0,010 & ano & 2,399\\
+mmbert-base-mean & LightGBM & 0,517 ± 0,012 & ano & 1,651\\
+mmbert-base-mean-512 & Logistická regrese & 0,605 ± 0,010 & ano & 42,554\\
+mmbert-base-mean-512 & Lineární SVM & 0,605 ± 0,010 & ano & 2,143\\
+mmbert-base-mean-512 & LightGBM & 0,526 ± 0,010 & ano & 1,691\\
+mmbert-base-mean-dictionary & Logistická regrese & 0,645 ± 0,005 & ano & 57,547\\
+mmbert-base-mean-dictionary & Lineární SVM & 0,640 ± 0,005 & ano & 2,571\\
+mmbert-base-mean-dictionary & LightGBM & 0,525 ± 0,006 & ano & 1,796\\
+word2vec & Logistická regrese & 0,625 ± 0,008 & ano & 6,120\\
+word2vec & Lineární SVM & 0,628 ± 0,005 & ano & 5,715\\
+word2vec & LightGBM & 0,559 ± 0,009 & ano & 5,488\\
+\bottomrule
+\end{tabular}
