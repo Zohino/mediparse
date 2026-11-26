@@ -331,3 +331,8 @@ def test_row_lookup_returns_declared_row_and_refuses_unknown() -> None:
     assert matrix.row("en-svm") == matrix.rows[0]
     with pytest.raises(InvalidInputError, match="není v experimentální matici"):
         matrix.row("missing")
+
+
+def test_shared_tuning_trials() -> None:
+    """Společný rozpočet matice je 20 pokusů."""
+    assert load_matrix(REPOSITORY_MATRIX).tuning_trials == 20

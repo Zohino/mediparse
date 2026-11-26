@@ -2,6 +2,7 @@
 !src/
 !tests/
 !workflow/
+!config/refinement.json
 !config/matrix.json
 !config/smoketest_training.json
 !config/split.json

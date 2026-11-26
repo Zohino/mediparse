@@ -116,6 +116,11 @@ class ExperimentMatrix(BaseModel):
 
     rows: Annotated[tuple[MatrixRow, ...], Field(min_length=1)]
 
+    @property
+    def tuning_trials(self) -> int:
+        """Společný rozpočet ladění všech řádků."""
+        return self.rows[0].tuning_trials
+
     def row(self, row_id: RowId) -> MatrixRow:
         """Vybere řádek matice podle identity.
 
