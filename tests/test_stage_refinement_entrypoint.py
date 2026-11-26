@@ -178,6 +178,7 @@ def test_refinement_uses_widened_space_budget_sampler_and_lineage(
         "dataset_sha256",
         "split_sha256",
         "text_normalization",
+        "diagnostic_strip",
         "best_trial",
     ],
 )
@@ -197,7 +198,10 @@ def test_refinement_refuses_foreign_screening_before_outputs(
         paths = replace(paths, corpus=replace(paths.corpus, candidates=candidates))
     else:
         manifest = json.loads(paths.stage_manifest.read_text(encoding="utf-8"))
-        manifest[field] = 999 if field == "best_trial" else "f" * 64
+        if field == "diagnostic_strip":
+            manifest[field] = {"sections": ["diagnosis"], "lexicon_sha256": "f" * 64}
+        else:
+            manifest[field] = 999 if field == "best_trial" else "f" * 64
         paths.stage_manifest.write_text(json.dumps(manifest), encoding="utf-8")
     scorer = Mock()
     monkeypatch.setattr(stage_refinement, "stage_scorer", scorer)
