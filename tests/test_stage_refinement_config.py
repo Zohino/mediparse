@@ -6,7 +6,7 @@ import json
 
 import pytest
 
-from mediparse.domain.stage_refinement import RefinementConfig, widen
+from mediparse.domain.stage_refinement import RefinementConfig, branch_config, widen
 from mediparse.domain.tuning import FloatParam
 from mediparse.infrastructure.stage_config import (
     load_refinement_config,
@@ -74,3 +74,33 @@ def test_repository_refinement_config() -> None:
         )
     for stage in stages:
         widen(stage, config)
+
+
+@pytest.mark.parametrize(
+    ("stage_name", "family", "network", "lsa"),
+    [
+        ("networks", "multirescnn", True, False),
+        ("networks", "fasttext", False, False),
+        ("classical", "lightgbm_lsa", False, True),
+        ("classical", "logreg", False, False),
+        ("classical", "linear_svm", False, False),
+        ("classical", "nb_svm", False, False),
+        ("classical", "complement_nb", False, False),
+    ],
+)
+def test_branch_config_keeps_only_required_technology(
+    stage_name: str, family: str, *, network: bool, lsa: bool
+) -> None:
+    """Síť patří jen MultiResCNN, LSA jen příslušné větvi; studie má šest startů."""
+    stage = widen(
+        load_stage_config(REPOSITORY / f"config/stage_{stage_name}.json"),
+        load_refinement_config(REPOSITORY / "config/refinement.json"),
+    )
+    for branch in stage.branches:
+        if branch.name.split("/")[1] != family:
+            continue
+        selected = branch_config(stage, branch.name, trials=20, random_startup_trials=5)
+        assert (selected.network is not None) is network
+        assert (selected.lsa is not None) is lsa
+        assert selected.startup_trials == 6
+        assert [b.name for b in selected.branches] == [branch.name]

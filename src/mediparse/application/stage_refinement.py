@@ -57,6 +57,15 @@ class StageRefinement:
             Vítěz a agregáty kontroly a doladění s původem splitu.
         """
         candidates = family_candidates(screening)
+        studies = {
+            candidate.params[BRANCH_KEY]: branch_config(
+                stage,
+                str(candidate.params[BRANCH_KEY]),
+                trials=trials,
+                random_startup_trials=refinement.random_startup_trials,
+            )
+            for candidate in candidates
+        }
         shared = self.split.read()
         shared.split.ensure_covers(self.table.subjects())
         notes = self.table.read_patients(shared.split.development)
@@ -76,14 +85,8 @@ class StageRefinement:
             self.progress.write(record, trial_results(run, folds))
             records.append(record)
         winner = best_trial(records[:2])
-        search = self.searches.create(
-            branch_config(
-                stage,
-                str(winner.params[BRANCH_KEY]),
-                trials=trials,
-                random_startup_trials=refinement.random_startup_trials,
-            )
-        )
+        study = studies[winner.params[BRANCH_KEY]]
+        search = self.searches.create(study)
         search.restore([
             (Trial(r.number, r.params), r.value) for r in (winner, *records[2:])
         ])
@@ -104,6 +107,7 @@ class StageRefinement:
             records.append(record)
         self.progress.finish()
         return StageRefinementReport(
+            study=study,
             checks=(records[0], records[1]),
             best=best_trial(records),
             completed_trials=len(records),

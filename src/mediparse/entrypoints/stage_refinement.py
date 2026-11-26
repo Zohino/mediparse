@@ -25,8 +25,8 @@ from mediparse.domain.run_manifest import (
     StageRefinementManifest,
     ensure_stage_lineage,
 )
-from mediparse.domain.stage_refinement import branch_config, widen
-from mediparse.domain.stage_tuning import family_candidates
+from mediparse.domain.stage_refinement import widen
+from mediparse.domain.stage_tuning import BRANCH_KEY, family_candidates
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_corpus import (
@@ -256,16 +256,10 @@ def run(  # ruff: ignore[too-many-arguments]
             ),
             clock=clock,
         ).run(config, refinement, screening, matrix.tuning_trials)
-    selected = branch_config(
-        config,
-        str(report.best.params["branch"]),
-        trials=matrix.tuning_trials,
-        random_startup_trials=refinement.random_startup_trials,
-    )
     first, second = (
         RefinementCandidate(
             stage_trial=candidate.number,
-            branch=str(candidate.params["branch"]),
+            branch=str(candidate.params[BRANCH_KEY]),
             params=dict(candidate.params),
             stage_macro_f1=candidate.value,
             check_macro_f1=check.value,
@@ -296,7 +290,7 @@ def run(  # ruff: ignore[too-many-arguments]
             best_macro_f1=report.best.value,
             completed_trials=report.completed_trials,
             nonconverged_trials=report.nonconverged_trials,
-            sampler=stage_sampler(selected.startup_trials),
+            sampler=stage_sampler(report.study.startup_trials),
             pruner=STAGE_PRUNER,
             seconds=report.seconds,
             development_notes=report.development_notes,
@@ -314,7 +308,7 @@ def run(  # ruff: ignore[too-many-arguments]
         "Doladění stupně: %d pokusů, vítěz %d (%s), čas %.3f s.",
         report.completed_trials,
         report.best.number,
-        selected.branches[0].name,
+        report.study.branches[0].name,
         report.seconds,
     )
     return ExitCode.OK

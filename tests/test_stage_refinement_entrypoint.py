@@ -253,3 +253,37 @@ def test_main_passes_all_required_paths(
             else paths
         )
         assert getattr(owner, name.replace("-", "_")) == tmp_path / name
+
+
+@pytest.mark.parametrize("case", ["invalid_widening", "empty_bounds", "budget"])
+def test_refinement_refuses_invalid_study_before_scoring(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, case: str
+) -> None:
+    """Chybný prostor i rozpočet se odmítnou ještě před prvním bodem kontroly."""
+    paths = _paths(tmp_path)
+    if case == "budget":
+        data = json.loads(paths.matrix.read_text(encoding="utf-8"))
+        for row in data["rows"]:
+            row["tuning_trials"] = 1
+        paths.matrix.write_text(json.dumps(data), encoding="utf-8")
+    else:
+        data = json.loads(paths.refinement.read_text(encoding="utf-8"))
+        data["widened"] = {
+            "linear_svm.C": {"low": 1.0} if case == "invalid_widening" else {}
+        }
+        paths.refinement.write_text(json.dumps(data), encoding="utf-8")
+    scorer = Mock()
+    scorer.score_folds.side_effect = AssertionError("Neplatná studie nesmí fitovat.")
+    monkeypatch.setattr(stage_refinement, "stage_scorer", Mock(return_value=scorer))
+    assert _run(paths) is ExitCode.REFUSED
+    scorer.score_folds.assert_not_called()
+    assert not any(
+        p.exists()
+        for p in (
+            paths.out,
+            paths.predictions,
+            paths.manifest,
+            paths.checkpoint,
+            paths.out.parent,
+        )
+    )

@@ -183,6 +183,7 @@ def test_check_picks_family_with_higher_development_score() -> None:
         progress,
         StepClock(),
     ).run(stage_config(), _REFINEMENT, screening, trials=6)
+    assert report.study is searches.config
     records = progress.records
     assert tuple(c.value for c in report.checks) == pytest.approx((0.6, 0.8))
     assert report.checks == tuple(records[:2])

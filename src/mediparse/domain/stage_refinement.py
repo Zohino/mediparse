@@ -5,9 +5,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Annotated, Self
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
-from mediparse.domain.representation import TfidfRepresentation, Word2VecRepresentation
+from mediparse.domain.inputs import InvalidInputError
+from mediparse.domain.representation import (
+    ClassifierFamily,
+    TfidfRepresentation,
+    Word2VecRepresentation,
+)
 from mediparse.domain.stage_tuning import BRANCH_KEY, StageTuningConfig
 from mediparse.domain.tuning import CategoricalParam, Parameter, ParamValue, SearchSpace
 
@@ -120,30 +125,38 @@ def branch_config(
 
     Returns:
         Validovaný config jedné větve nad celou vývojovou částí.
+
+    Raises:
+        InvalidInputError: Rozpočet nebo parametry větve nejsou platné.
     """
     selected = stage.branch({BRANCH_KEY: branch})
-    return StageTuningConfig.model_validate(
-        stage.model_dump()
-        | {
-            "representations": (selected.representation,),
-            "families": (selected.family,),
-            "network": stage.network
-            if selected.family.family.value == "multirescnn"
-            else None,
-            "lsa": stage.lsa
-            if selected.family.family.value == "lightgbm_lsa"
-            else None,
-            "subsample_parts": 1,
-            "trials": trials,
-            "random_startup_trials": random_startup_trials,
-        }
-    )
+    try:
+        return StageTuningConfig.model_validate(
+            stage.model_dump()
+            | {
+                "representations": (selected.representation,),
+                "families": (selected.family,),
+                "network": stage.network
+                if selected.family.family is ClassifierFamily.MULTIRESCNN
+                else None,
+                "lsa": stage.lsa
+                if selected.family.family is ClassifierFamily.LIGHTGBM_LSA
+                else None,
+                "subsample_parts": 1,
+                "trials": trials,
+                "random_startup_trials": random_startup_trials,
+            }
+        )
+    except ValidationError as error:
+        msg = f"Config větve doladění není platný: {error}"
+        raise InvalidInputError(msg) from error
 
 
 @dataclass(frozen=True)
 class StageRefinementReport:
     """Kontrola kandidátů, vítěz doladění a provenance celé vývojové části."""
 
+    study: StageTuningConfig
     checks: tuple[StageTrialRecord, StageTrialRecord]
     best: StageTrialRecord
     completed_trials: int
