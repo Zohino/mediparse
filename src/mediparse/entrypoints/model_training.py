@@ -21,9 +21,9 @@ from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_corpus import (
     ModelCorpusPaths,
     model_corpus,
-    text_normalization,
 )
 from mediparse.infrastructure.data_access_guard import check_inputs_access
+from mediparse.infrastructure.diagnosis_candidates_file import text_normalization
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.json_file import write_model
 from mediparse.infrastructure.machine_hardware import machine_hardware

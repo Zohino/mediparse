@@ -8,7 +8,6 @@ from typing import TYPE_CHECKING
 from mediparse.application.diagnostic_strip import DiagnosticStripTable
 from mediparse.domain.run_manifest import DiagnosticStrip
 from mediparse.infrastructure.code_fingerprint import code_key
-from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.file_digest import file_sha256
 from mediparse.infrastructure.note_table import ParquetNoteTable
 from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
@@ -19,8 +18,6 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     from mediparse.application.ports.experiment import PatientNoteTable, SplitSource
-    from mediparse.domain.clinical_text import TextNormalization
-    from mediparse.domain.model_input import TextPreprocessing
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -101,23 +98,6 @@ def model_input_table(
         lexicon_sha256=file_sha256(lexicon),
     )
     return DiagnosticStripTable(table, sections), record
-
-
-def text_normalization(
-    candidates: Path, level: TextPreprocessing
-) -> TextNormalization | None:
-    """Načte pravidla normalizace podle úrovně předzpracování vstupu.
-
-    Args:
-        candidates: Cesta ke kandidátům diagnóz se zkratkami a variantami.
-        level: Úroveň předzpracování textu.
-
-    Returns:
-        Pravidla normalizace, nebo ``None`` pro původní text bez předzpracování.
-    """
-    if not level.normalizes:
-        return None
-    return load_text_normalization(candidates, variants=level.rewrites_variants)
 
 
 def checkpoint_key(

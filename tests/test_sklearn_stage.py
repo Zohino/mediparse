@@ -24,7 +24,7 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.representation import ClassifierFamily, Word2VecRepresentation
 from mediparse.domain.split import Holdout
 from mediparse.domain.stage_tuning import StageLsa
-from mediparse.entrypoints.stage_tuning import stage_normalizations
+from mediparse.entrypoints.stage_composition import stage_normalizations
 from mediparse.infrastructure import sklearn_classifier, sklearn_stage, word2vec
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.fasttext_classifier import FastTextClassifier

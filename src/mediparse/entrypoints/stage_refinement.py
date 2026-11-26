@@ -17,7 +17,6 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mediparse.application.stage_refinement import StageRefinement
-from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.environment import Environment
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.run_manifest import (
@@ -34,7 +33,8 @@ from mediparse.entrypoints.model_corpus import (
     checkpoint_key,
     model_corpus,
 )
-from mediparse.entrypoints.stage_tuning import (
+from mediparse.entrypoints.stage_composition import (
+    add_stage_work_arguments,
     check_work_paths,
     stage_normalizations,
     stage_packages,
@@ -120,29 +120,7 @@ def main() -> ExitCode:
         "manifest",
     ):
         parser.add_argument(f"--{name}", type=Path, required=True)
-    parser.add_argument(
-        "--embeddings",
-        type=Path,
-        required=True,
-        help="Cache embeddingů; doporučeno resources/mimic/screening/embeddings, mimo results/.",
-    )
-    parser.add_argument(
-        "--scratch",
-        type=Path,
-        required=True,
-        help="Dočasné tokeny zpráv a memmapy matic paralelních fitů; doporučeno resources/mimic/screening/scratch, mimo checkpoint a results/.",
-    )
-    parser.add_argument(
-        "--jobs",
-        type=int,
-        choices=range(1, len(Diagnosis) + 1),
-        default=3,
-        help=(
-            "Procesy nezávislých fitů pokusu: diagnózy u klasiky a fastTextu, "
-            "foldy u MultiResCNN (nejvýš jeden fold na GPU, fold i na GPU i mod počet GPU). "
-            "Výsledky na počtu nezávisí."
-        ),
-    )
+    add_stage_work_arguments(parser)
     args = parser.parse_args()
     return run(
         environ=os.environ,
@@ -192,7 +170,9 @@ def run(  # ruff: ignore[too-many-arguments]
     """
     check_inputs_access(environ, paths.corpus.data)
     check_work_paths(
-        scratch=paths.scratch, embeddings=paths.embeddings, checkpoint=paths.checkpoint
+        scratch=paths.scratch,
+        embeddings=paths.embeddings,
+        checkpoint=paths.checkpoint,
     )
     stage = load_stage_config(paths.config)
     refinement = load_refinement_config(paths.refinement)

@@ -18,6 +18,8 @@ if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping
     from pathlib import Path
 
+    from mediparse.domain.model_input import TextPreprocessing
+
 
 class _Prefixes(BaseModel):
     model_config = ConfigDict(frozen=True, extra="ignore")
@@ -209,3 +211,20 @@ def _selected[T: BaseModel](
         for diagnosis in Diagnosis
         if diagnosis.value in candidates
     }
+
+
+def text_normalization(
+    candidates: Path, level: TextPreprocessing
+) -> TextNormalization | None:
+    """Načte pravidla normalizace podle úrovně předzpracování vstupu.
+
+    Args:
+        candidates: Cesta ke kandidátům diagnóz se zkratkami a variantami.
+        level: Úroveň předzpracování textu.
+
+    Returns:
+        Pravidla normalizace, nebo ``None`` pro původní text bez předzpracování.
+    """
+    if not level.normalizes:
+        return None
+    return load_text_normalization(candidates, variants=level.rewrites_variants)
