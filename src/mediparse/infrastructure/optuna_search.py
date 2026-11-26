@@ -28,19 +28,6 @@ if TYPE_CHECKING:
     from mediparse.domain.tuning import ParamValue
 
 
-@dataclass(frozen=True)
-class OptunaTrials:
-    """Společné reportování a uzavírání pokusů Optuny."""
-
-    study: optuna.Study
-    # Port zná jen číslo; report potřebuje původní objekt Optuny.
-    pending: dict[int, optuna.Trial] = field(default_factory=dict, kw_only=True)
-
-    def complete(self, trial: Trial, value: float) -> None:
-        """Uzavře dokončený pokus s cílovou hodnotou."""
-        self.study.tell(self.pending.pop(trial.number), value)
-
-
 def _distribution(param: FloatParam | IntParam | CategoricalParam) -> BaseDistribution:
     if isinstance(param, FloatParam):
         return FloatDistribution(param.low, param.high, log=param.log)
@@ -76,10 +63,17 @@ def stage_sampler(startup_trials: int) -> str:
 
 
 @dataclass(frozen=True)
-class OptunaStageSearch(OptunaTrials):
+class OptunaStageSearch:
     """Podmíněné CASH návrhy s obnovou z dokončených pokusů."""
 
+    study: optuna.Study
     config: StageTuningConfig
+    # tell potřebuje původní objekt Optuny, port zná jen číslo.
+    pending: dict[int, optuna.Trial] = field(default_factory=dict, kw_only=True)
+
+    def complete(self, trial: Trial, value: float) -> None:
+        """Uzavře dokončený pokus s cílovou hodnotou."""
+        self.study.tell(self.pending.pop(trial.number), value)
 
     @classmethod
     def create(cls, config: StageTuningConfig) -> OptunaStageSearch:
