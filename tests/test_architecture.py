@@ -983,6 +983,7 @@ def test_data_reading_entrypoints_import_access_guard() -> None:
     """Entrypoint s datovým adaptérem zná přímou stráž nebo stráženou databázi EDA."""
     violations, inspected = _unguarded_data_entrypoints(PACKAGE / "entrypoints")
 
+    assert "stage_refinement.py" in inspected
     assert "cohort.py" in inspected
     assert DATA_ACCESS_EXCEPTIONS.keys() <= inspected
     assert violations == []

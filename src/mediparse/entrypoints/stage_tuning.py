@@ -182,16 +182,11 @@ def run(  # ruff: ignore[too-many-arguments]
         OK po dokončení, REFUSED při neplatných vstupech či nepovoleném přístupu.
     """
     check_inputs_access(environ, paths.corpus.data)
-    _check_work_paths(paths)
+    check_work_paths(
+        scratch=paths.scratch, embeddings=paths.embeddings, checkpoint=paths.checkpoint
+    )
     config = load_stage_config(paths.config)
-    for spec in config.encoders:
-        require_device(spec.device)
-    if config.network is not None:
-        require_device(config.network.device)
-    versions = installed_versions(ENCODER_PACKAGES) if config.encoders else {}
-    packages = installed_versions(PACKAGES) | versions
-    if config.network is not None:
-        packages |= installed_versions(NETWORK_PACKAGES)
+    packages = stage_packages(config)
     source = revision()
     corpus = model_corpus(
         paths.corpus, strip_diagnostic_sections=config.strip_diagnostic_sections
@@ -206,14 +201,13 @@ def run(  # ruff: ignore[too-many-arguments]
             split=corpus.split,
             partitioner=StratifiedGroupFolds(),
             search=OptunaStageSearch.create(config),
-            scorer=SklearnStageScorer(
+            scorer=stage_scorer(
                 config,
                 normalizations,
-                config.seed,
-                paths.scratch,
-                NoteEmbeddings(
-                    paths.embeddings, versions, lambda spec: encoders(spec).embed
-                ),
+                embeddings=paths.embeddings,
+                scratch=paths.scratch,
+                versions=packages,
+                encoders=encoders,
                 jobs=jobs,
             ),
             progress=ParquetStageCheckpoint(
@@ -271,10 +265,15 @@ def run(  # ruff: ignore[too-many-arguments]
     return ExitCode.OK
 
 
-def _check_work_paths(paths: StageTuningPaths) -> None:
+def check_work_paths(*, scratch: Path, embeddings: Path, checkpoint: Path) -> None:
+    """Ověří oddělení dočasných souborů od checkpointu.
+
+    Raises:
+        InvalidInputError: Scratch nebo cache leží uvnitř checkpointu.
+    """
     # Pracovní adaptéry zakládají adresáře dřív než checkpoint zapíše svůj klíč.
-    for path in (paths.scratch, paths.embeddings):
-        if path.resolve().is_relative_to(paths.checkpoint.resolve()):
+    for path in (scratch, embeddings):
+        if path.resolve().is_relative_to(checkpoint.resolve()):
             msg = "Scratch a cache embeddingů musí ležet mimo adresář checkpointu."
             raise InvalidInputError(msg)
 
@@ -291,3 +290,52 @@ def stage_normalizations(
         name: text_normalization(candidates, level)
         for name, level in config.text_preprocessing.items()
     }
+
+
+def stage_packages(config: StageTuningConfig) -> dict[str, str]:
+    """Ověří zařízení a zjistí verze knihoven stupně.
+
+    Returns:
+        Balíčky pro manifest a klíč checkpointu.
+    """
+    for spec in config.encoders:
+        require_device(spec.device)
+    if config.network is not None:
+        require_device(config.network.device)
+    versions = installed_versions(ENCODER_PACKAGES) if config.encoders else {}
+    packages = installed_versions(PACKAGES) | versions
+    if config.network is not None:
+        packages |= installed_versions(NETWORK_PACKAGES)
+    return packages
+
+
+# Cesty, encoder a počet procesů jsou nezávislé provozní vstupy composition root.
+def stage_scorer(  # ruff: ignore[too-many-arguments]
+    config: StageTuningConfig,
+    normalizations: Mapping[str, TextNormalization | None],
+    *,
+    embeddings: Path,
+    scratch: Path,
+    versions: Mapping[str, str],
+    encoders: Callable[[EncoderSpec], HfMeanEncoder],
+    jobs: int,
+) -> SklearnStageScorer:
+    """Složí scorer se společnou cache embeddingů.
+
+    Returns:
+        Adaptér pro kontrolu i ladění bodů stupně.
+    """
+    return SklearnStageScorer(
+        config,
+        normalizations,
+        config.seed,
+        scratch,
+        NoteEmbeddings(
+            embeddings,
+            {name: versions[name] for name in ENCODER_PACKAGES}
+            if config.encoders
+            else {},
+            lambda spec: encoders(spec).embed,
+        ),
+        jobs=jobs,
+    )

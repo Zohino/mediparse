@@ -78,24 +78,11 @@ class ParquetStageCheckpoint:
         Returns:
             Záznamy v pořadí čísel pokusů.
         """
-        records = []
-        for path in self.parts.completed_parts():
-            rows = read_table(
-                path,
-                TRIALS_SCHEMA,
-            ).to_pylist()
-            first = rows[0]
-            records.append(
-                StageTrialRecord(
-                    number=first["trial"],
-                    params=json.loads(first["params"]),
-                    default=first["default"],
-                    value=first["value"],
-                    converged=all(row["converged"] for row in rows),
-                    seconds=first["seconds"],
-                )
-            )
-        return tuple(records)
+        return tuple(
+            record
+            for path in self.parts.completed_parts()
+            for record in read_trial_records(path)
+        )
 
     def write(
         self, record: StageTrialRecord, results: Sequence[StageFoldResult]
@@ -160,3 +147,25 @@ class ParquetStageCheckpoint:
     def finish(self) -> None:
         """Složí oba výstupy a uklidí checkpoint."""
         self.parts.finish({"results": self.results, "predictions": self.predictions})
+
+
+def read_trial_records(path: Path) -> tuple[StageTrialRecord, ...]:
+    """Přečte záznam každého pokusu ze souhrnné tabulky nebo dílu checkpointu.
+
+    Returns:
+        Pokusy seřazené číslem, konvergence zahrnuje všechny jejich buňky.
+    """
+    grouped = {}
+    for row in read_table(path, TRIALS_SCHEMA).to_pylist():
+        grouped.setdefault(row["trial"], []).append(row)
+    return tuple(
+        StageTrialRecord(
+            number=number,
+            params=json.loads(rows[0]["params"]),
+            default=rows[0]["default"],
+            value=rows[0]["value"],
+            converged=all(row["converged"] for row in rows),
+            seconds=rows[0]["seconds"],
+        )
+        for number, rows in sorted(grouped.items())
+    )

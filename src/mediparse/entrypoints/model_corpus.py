@@ -15,7 +15,7 @@ from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.split_table import ParquetSplitTable
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Mapping, Sequence
     from pathlib import Path
 
     from mediparse.application.ports.experiment import PatientNoteTable, SplitSource
@@ -125,6 +125,7 @@ def checkpoint_key(
     corpus: ModelCorpusPaths,
     dataset_sha256: str,
     packages: Mapping[str, str],
+    extra: Sequence[Path] = (),
 ) -> str:
     """Otiskne vstupy, kód a verze knihoven pro obnovu modelového kroku.
 
@@ -137,5 +138,6 @@ def checkpoint_key(
         ("split", file_sha256(corpus.split).encode()),
         ("candidates", file_sha256(corpus.candidates).encode()),
         ("lexicon", file_sha256(corpus.lexicon).encode()),
+        *((f"extra/{i}", file_sha256(path).encode()) for i, path in enumerate(extra)),
         *((f"packages/{name}", value.encode()) for name, value in packages.items()),
     ])

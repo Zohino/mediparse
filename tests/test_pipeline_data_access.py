@@ -21,6 +21,7 @@ from mediparse.entrypoints import (
     model_inference,
     model_training,
     split_materialization,
+    stage_refinement,
     stage_tuning,
 )
 from mediparse.entrypoints.exit_code import ExitCode
@@ -92,6 +93,26 @@ def _steps(root: Path, environ: Mapping[str, str]) -> dict[str, partial[ExitCode
             revision=fixed_revision,
             cuda_visible_devices="",
             cuda_device_order=None,
+            environ=environ,
+        ),
+        "stage_refinement": partial(
+            stage_refinement.run,
+            paths=stage_refinement.StageRefinementPaths(
+                corpus=repository_corpus(notes, split),
+                config=root / "missing.json",
+                stage_results=root / "missing-results",
+                stage_manifest=root / "missing-manifest",
+                refinement=root / "missing-refinement",
+                matrix=root / "missing-matrix",
+                out=root / "refinement/trials",
+                predictions=root / "refinement/predictions",
+                checkpoint=root / "refinement/checkpoint",
+                manifest=root / "refinement/manifest",
+                embeddings=root / "embeddings",
+                scratch=root / "scratch",
+            ),
+            revision=fixed_revision,
+            clock=PerfCounterClock(),
             environ=environ,
         ),
         "stage_tuning": partial(
@@ -177,6 +198,7 @@ GUARD_CASES: Final = {
     "cohort": _GuardCase(("discharge", "diagnoses"), prepare=_prepare_sources),
     "split_materialization": _GuardCase(("cohort",)),
     "model_training": _GuardCase(("cohort", "split"), corpus=True),
+    "stage_refinement": _GuardCase(("cohort", "split"), corpus=True, native=False),
     "stage_tuning": _GuardCase(("cohort", "split"), corpus=True, native=False),
     "model_evaluation": _GuardCase(("predictions", "cohort", "split")),
     "model_inference": _GuardCase(("cohort", "model", "predictions")),
