@@ -221,3 +221,22 @@ def test_out_of_memory_refused(
     documents, labels = corpus
     with pytest.raises(InvalidInputError):
         model.fit(documents[:4], labels[:4], documents[60:64], labels[60:64])
+
+
+@pytest.mark.parametrize("freeze_embeddings", [False, True])
+def test_restores_epoch_with_lowest_stop_loss(
+    model: HfWindowClassifier,
+    corpus: tuple[list[str], np.ndarray],
+    *,
+    freeze_embeddings: bool,
+) -> None:
+    """Negované stop labely vyberou dřívější epochu encoderu i hlavy."""
+    documents, labels = corpus
+    model.set_params(freeze_embeddings=freeze_embeddings).fit(
+        documents[:60], labels[:60], documents[60:80], ~labels[60:80]
+    )
+    assert model.best_epoch_ < model.epochs
+    z = model.decision_function(documents[60:80])
+    bce = np.mean(np.logaddexp(0, z) - (~labels[60:80]) * z)
+    assert bce == pytest.approx(model.stop_losses_[model.best_epoch_ - 1], rel=1e-5)
+    assert bce < model.stop_losses_[-1]
