@@ -125,6 +125,8 @@ def test_load_preserves_revision_local_snapshot_and_dtype(
     torch = pytest.importorskip("torch")
     from transformers import AutoModel  # ruff: ignore[import-outside-top-level]
 
+    device_check = Mock(wraps=hf_encoder.require_device)
+    monkeypatch.setattr(hf_encoder, "require_device", device_check)
     model, tokenizer = encoder_parts()
     snapshot = Mock(return_value="/synthetic-model")
     model_loader = Mock(return_value=model)
@@ -134,6 +136,7 @@ def test_load_preserves_revision_local_snapshot_and_dtype(
     monkeypatch.setattr(hf_encoder, "load_tokenizer", tokenizer_loader)
     spec = SPEC.model_copy(update={"window": 64, "dtype": "bfloat16"})
     load_encoder(spec)
+    device_check.assert_called_once_with(spec.device)
     snapshot.assert_called_once()
     assert snapshot.call_args.args == (spec.model,)
     assert snapshot.call_args.kwargs["revision"] == spec.revision

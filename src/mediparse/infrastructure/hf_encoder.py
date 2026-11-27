@@ -42,6 +42,17 @@ def token_windows(
     ]
 
 
+def note_windows(
+    tokenizer: PreTrainedTokenizerBase, text: str, window: int
+) -> list[list[int]]:
+    """Tokenizuje zprávu a rozdělí ji beze ztrát.
+
+    Returns:
+        Obalená okna v pořadí zprávy.
+    """
+    return token_windows(*_token_parts(tokenizer, text), window)
+
+
 def _token_parts(
     tokenizer: PreTrainedTokenizerBase, text: str
 ) -> tuple[list[int], list[int], list[int]]:
@@ -77,13 +88,12 @@ class HfMeanEncoder:
         import torch  # ruff: ignore[import-outside-top-level]
 
         with _encoder_errors():
-            content, prefix, suffix = _token_parts(self.tokenizer, text)
             total = torch.zeros(
                 self.model.config.hidden_size, dtype=torch.float32, device=self.device
             )
             positions = 0
             with torch.inference_mode():
-                for window in token_windows(content, prefix, suffix, self.window):
+                for window in note_windows(self.tokenizer, text, self.window):
                     hidden = (
                         self
                         .model(input_ids=torch.tensor([window], device=self.device))
@@ -104,42 +114,67 @@ def load_encoder(spec: EncoderSpec) -> HfMeanEncoder:
     Raises:
         InvalidInputError: Chybí torch či CUDA, model nelze načíst nebo má neplatné okno.
     """
+    model, tokenizer = load_parts(spec, attn_implementation="sdpa")
+    with _encoder_errors():
+        # Dekorátor transformers ztrácí v ty vazbu self metody to.
+        model.to(spec.device)  # ty: ignore[invalid-argument-type]
+        return HfMeanEncoder(model.eval(), tokenizer, spec.window, spec.device)
+
+
+def pinned_snapshot(model: str, revision: str) -> str:
+    """Stáhne jen soubory připnutého modelu a tokenizéru.
+
+    Returns:
+        Lokální adresář snapshotu.
+    """
+    from huggingface_hub import snapshot_download  # ruff: ignore[import-outside-top-level]
+
+    return snapshot_download(
+        model,
+        revision=revision,
+        allow_patterns=[
+            "config.json",
+            "*.safetensors",
+            "*.safetensors.index.json",
+            "pytorch_model*.bin",
+            "pytorch_model.bin.index.json",
+            "tokenizer*",
+            "special_tokens_map.json",
+            "added_tokens.json",
+            "*.model",
+            "vocab.*",
+            "merges.txt",
+        ],
+    )
+
+
+def load_parts(
+    spec: EncoderSpec, **model_options: object
+) -> tuple[PreTrainedModel, PreTrainedTokenizerBase]:
+    """Načte připnutý model s tokenizérem a ověří kapacitu okna.
+
+    Returns:
+        Model a tokenizér ze stejného snapshotu.
+
+    Raises:
+        InvalidInputError: Zařízení, model nebo okno nelze použít.
+    """
     require_device(spec.device)
     # Odložené importy zachovají default bez torch a pořadí skops/transformers.
     import torch  # ruff: ignore[import-outside-top-level]
-    from huggingface_hub import snapshot_download  # ruff: ignore[import-outside-top-level]
     from transformers import AutoModel  # ruff: ignore[import-outside-top-level]
 
     with _encoder_errors():
-        directory = snapshot_download(
-            spec.model,
-            revision=spec.revision,
-            allow_patterns=[
-                "config.json",
-                "*.safetensors",
-                "*.safetensors.index.json",
-                "pytorch_model*.bin",
-                "pytorch_model.bin.index.json",
-                "tokenizer*",
-                "special_tokens_map.json",
-                "added_tokens.json",
-                "*.model",
-                "vocab.*",
-                "merges.txt",
-            ],
-        )
+        model_options.setdefault("dtype", getattr(torch, spec.dtype))
+        directory = pinned_snapshot(spec.model, spec.revision)
         tokenizer = load_tokenizer(directory, spec.revision)
         # Lokální adresář zabrání auto-konverzi vah přes Space a nepřipnutý PR.
-        model = AutoModel.from_pretrained(
-            directory, dtype=getattr(torch, spec.dtype), attn_implementation="sdpa"
-        )
-        wrapper = special_tokens(tokenizer)
-        if spec.window <= wrapper or spec.window > model.config.max_position_embeddings:
+        model = AutoModel.from_pretrained(directory, **model_options)
+        capacity = model.config.max_position_embeddings
+        if not special_tokens(tokenizer) < spec.window <= capacity:
             msg = "Okno encoderu musí přesáhnout obal a nepřekročit kapacitu modelu."
             raise InvalidInputError(msg)
-        return HfMeanEncoder(
-            model.to(spec.device).eval(), tokenizer, spec.window, spec.device
-        )
+        return model, tokenizer
 
 
 @contextmanager

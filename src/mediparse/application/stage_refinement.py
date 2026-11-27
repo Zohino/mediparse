@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from mediparse.application.patient_cv import patient_holdouts
+from mediparse.application.patient_cv import development_notes, patient_holdouts
 from mediparse.application.tuning_trial import score_trial, trial_results, write_trial
 from mediparse.domain.stage_refinement import StageRefinementReport, branch_config
 from mediparse.domain.stage_tuning import (
@@ -66,9 +66,7 @@ class StageRefinement:
             )
             for candidate in candidates
         }
-        shared = self.split.read()
-        shared.split.ensure_covers(self.table.subjects())
-        notes = self.table.read_patients(shared.split.development)
+        shared, notes = development_notes(self.table, self.split)
         folds = patient_holdouts(notes, stage.folds, stage.seed, self.partitioner)
         records = list(self.progress.completed())
         for candidate in candidates[len(records) :]:

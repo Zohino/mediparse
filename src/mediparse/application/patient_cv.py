@@ -11,10 +11,14 @@ from mediparse.domain.split import Split, ensure_patients_per_class, strata
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from mediparse.application.ports.experiment import PatientPartitioner
+    from mediparse.application.ports.experiment import (
+        PatientNoteTable,
+        PatientPartitioner,
+        SplitSource,
+    )
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.seed import Seed
-    from mediparse.domain.split import Holdout
+    from mediparse.domain.split import Holdout, SharedSplit
 
 
 def patient_holdouts(
@@ -42,3 +46,31 @@ def patient_holdouts(
                 diagnosis, [note.has_label(diagnosis) for note in holdout.test]
             )
     return holdouts
+
+
+def development_notes(
+    table: PatientNoteTable, split: SplitSource
+) -> tuple[SharedSplit, tuple[InputNote, ...]]:
+    """Načte vývojové zprávy po ověření úplnosti splitu.
+
+    Returns:
+        Sdílený split a zprávy jeho vývojových pacientů.
+    """
+    shared = split.read()
+    shared.split.ensure_covers(table.subjects())
+    return shared, table.read_patients(shared.split.development)
+
+
+def development_sample(
+    notes: Sequence[InputNote], parts: int, seed: Seed, partitioner: PatientPartitioner
+) -> Sequence[InputNote]:
+    """Vybere společný pacientský vzorek předkola.
+
+    Returns:
+        Celá množina pro jednu část, jinak první část stratifikace.
+    """
+    return (
+        notes
+        if parts == 1
+        else patient_holdouts(notes, parts, seed, partitioner)[0].test
+    )

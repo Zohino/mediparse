@@ -18,6 +18,8 @@ from mediparse.domain.tuning import (
     SearchSpace,
 )
 
+Aggregation = Literal["max", "mean"]
+
 Device = Literal["cpu", "cuda"]
 
 RepresentationName = Annotated[str, Field(min_length=1, pattern=r"^[^./]+$")]

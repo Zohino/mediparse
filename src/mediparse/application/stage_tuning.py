@@ -5,7 +5,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from mediparse.application.patient_cv import patient_holdouts
+from mediparse.application.patient_cv import (
+    development_notes,
+    development_sample,
+    patient_holdouts,
+)
 from mediparse.application.tuning_trial import score_trial, trial_results, write_trial
 from mediparse.domain.stage_tuning import (
     StageTrialRecord,
@@ -46,15 +50,9 @@ class StageTuning:
             Vítěz a velikosti vzorku s provenance původního splitu.
 
         """
-        shared = self.split.read()
-        shared.split.ensure_covers(self.table.subjects())
-        notes = self.table.read_patients(shared.split.development)
-        sample = (
-            notes
-            if config.subsample_parts == 1
-            else patient_holdouts(
-                notes, config.subsample_parts, config.seed, self.partitioner
-            )[0].test
+        shared, notes = development_notes(self.table, self.split)
+        sample = development_sample(
+            notes, config.subsample_parts, config.seed, self.partitioner
         )
         folds = patient_holdouts(sample, config.folds, config.seed, self.partitioner)
         records = list(self.progress.completed())
