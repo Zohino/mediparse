@@ -321,8 +321,8 @@ class HfWindowClassifier(BaseEstimator):
             hidden = self.model_(
                 input_ids=ids, attention_mask=mask
             ).last_hidden_state.float()
-            weights = mask[..., None].float()
-            logits = self.head_((hidden * weights).sum(1) / weights.sum(1)).float()
+        weights = mask[..., None].float()
+        logits = self.head_((hidden * weights).sum(1) / weights.sum(1))
         groups = logits.split([len(document) for document in documents])
         return torch.stack([
             group.amax(0) if self.aggregation == "max" else group.mean(0)

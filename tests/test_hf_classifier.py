@@ -110,14 +110,20 @@ def test_learns_marker_in_one_window(
     assert bce == pytest.approx(min(trained.stop_losses_), rel=1e-5)
 
 
+@pytest.mark.parametrize("dtype", ["float32", "bfloat16"])
 @pytest.mark.parametrize("aggregation", ["max", "mean"])
 def test_max_aggregation_matches_window_logits(
     model: HfWindowClassifier,
     corpus: tuple[list[str], np.ndarray],
     aggregation: Aggregation,
+    dtype: str,
 ) -> None:
     """Ruční výpočet každého okna odpovídá definici max i mean."""
-    model.set_params(epochs=1, aggregation=aggregation)
+    model.set_params(
+        epochs=1,
+        aggregation=aggregation,
+        encoder=SPEC.model_copy(update={"dtype": dtype}),
+    )
     documents, labels = corpus
     model.fit(documents[:4], labels[:4], documents[60:64], labels[60:64])
     ids = model.tokenizer_(documents[0])["input_ids"][1:-1]
@@ -125,13 +131,17 @@ def test_max_aggregation_matches_window_logits(
     with torch.inference_mode():
         for start in range(0, 18, 6):
             window = torch.tensor([[2, *ids[start : start + 6], 3]])
-            hidden = model.model_(input_ids=window).last_hidden_state.float()
+            with torch.autocast(
+                "cpu", dtype=torch.bfloat16, enabled=dtype == "bfloat16"
+            ):
+                hidden = model.model_(input_ids=window).last_hidden_state.float()
             logits.append(model.head_(hidden.mean(1))[0].numpy())
     expected = (
         np.max(logits, axis=0) if aggregation == "max" else np.mean(logits, axis=0)
     )
+    assert model.head_.weight.dtype == torch.float32
     np.testing.assert_allclose(
-        model.decision_function([documents[0]])[0], expected, atol=1e-5
+        model.decision_function([documents[0]])[0], expected, atol=1e-6, rtol=0
     )
 
 
