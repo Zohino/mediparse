@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from itertools import pairwise
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
 import numpy as np
 import pytest
-from hypothesis import given
+from hypothesis import example, given
 from hypothesis import strategies as st
 from sklearn.metrics import roc_auc_score
 
@@ -27,6 +28,7 @@ if TYPE_CHECKING:
 pytestmark = pytest.mark.usefixtures("torch_runtime")
 
 
+@example(lengths=[(1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8)], budget=16)
 @given(
     lengths=st.lists(
         st.tuples(st.integers(1, 6), st.integers(3, 8)), min_size=1, max_size=60
@@ -43,6 +45,12 @@ def test_batches_cover_each_note_once(
         cost = sum(lengths[i][0] for i in batch) * max(lengths[i][1] for i in batch)
         assert cost <= budget or len(batch) == 1
     assert result == batches(lengths, budget, torch.Generator().manual_seed(7))
+
+    intervals = sorted(
+        (min(lengths[i] for i in batch), max(lengths[i] for i in batch))
+        for batch in result
+    )
+    assert all(left[1] <= right[0] for left, right in pairwise(intervals))
 
 
 @pytest.fixture
@@ -279,3 +287,26 @@ def test_divergence_has_zero_validation_scores(
     for report in reports:
         np.testing.assert_array_equal(report.validation_scores, np.zeros((4, 5)))
     assert model.converged_ is False
+
+
+def test_training_batches_respect_actual_window_lengths(
+    model: HfWindowClassifier, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Krátké poslední okno nesmí snížit rozpočtovanou délku zprávy."""
+    original = model._forward  # ruff: ignore[private-member-access]
+    observed = []
+
+    def checked(documents: list[list[list[int]]]) -> torch.Tensor:
+        if model.model_.training:
+            lengths = [len(window) for document in documents for window in document]
+            observed.append(len(lengths) * max(lengths))
+            assert observed[-1] <= 20 or len(documents) == 1
+        return original(documents)
+
+    monkeypatch.setattr(model, "_forward", checked)
+    texts = ["slovo1 " * 7] * 4
+    labels = np.array([[True] * 5, [False] * 5] * 2)
+    model.set_params(epochs=1, batch_tokens=20).fit(
+        texts, labels, texts[:2], labels[:2]
+    )
+    assert observed
