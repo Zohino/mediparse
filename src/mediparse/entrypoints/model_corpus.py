@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from dataclasses import dataclass, fields
+from pathlib import Path
+from typing import TYPE_CHECKING, Self
 
 from mediparse.application.diagnostic_strip import DiagnosticStripTable
 from mediparse.domain.run_manifest import DiagnosticStrip
@@ -14,8 +15,8 @@ from mediparse.infrastructure.section_lexicon_config import load_section_lexicon
 from mediparse.infrastructure.split_table import ParquetSplitTable
 
 if TYPE_CHECKING:
+    import argparse
     from collections.abc import Mapping, Sequence
-    from pathlib import Path
 
     from mediparse.application.ports.experiment import PatientNoteTable, SplitSource
 
@@ -28,6 +29,28 @@ class ModelCorpusPaths:
     candidates: Path
     lexicon: Path
     split: Path
+
+    @classmethod
+    def add_arguments(cls, parser: argparse.ArgumentParser) -> None:
+        """Přidá povinné argumenty cest korpusu do parseru.
+
+        Args:
+            parser: Parser příkazové řádky modelového kroku.
+        """
+        for field in fields(cls):
+            parser.add_argument(f"--{field.name}", type=Path, required=True)
+
+    @classmethod
+    def from_arguments(cls, args: argparse.Namespace) -> Self:
+        """Sestaví cesty korpusu z argumentů příkazové řádky.
+
+        Args:
+            args: Naparsované argumenty modelového kroku.
+
+        Returns:
+            Sdílené cesty ke korpusu.
+        """
+        return cls(**{field.name: getattr(args, field.name) for field in fields(cls)})
 
     @property
     def data(self) -> tuple[Path, Path]:

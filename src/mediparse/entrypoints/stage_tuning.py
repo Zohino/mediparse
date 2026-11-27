@@ -89,12 +89,9 @@ def main() -> ExitCode:
     """
     configure_logging()
     parser = argparse.ArgumentParser(description=__doc__)
+    ModelCorpusPaths.add_arguments(parser)
     for name in (
-        "cohort",
-        "split",
         "config",
-        "candidates",
-        "lexicon",
         "out",
         "predictions",
         "checkpoint",
@@ -106,12 +103,7 @@ def main() -> ExitCode:
     return run(
         environ=os.environ,
         paths=StageTuningPaths(
-            corpus=ModelCorpusPaths(
-                cohort=args.cohort,
-                split=args.split,
-                candidates=args.candidates,
-                lexicon=args.lexicon,
-            ),
+            corpus=ModelCorpusPaths.from_arguments(args),
             config=args.config,
             out=args.out,
             predictions=args.predictions,

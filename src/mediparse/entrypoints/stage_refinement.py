@@ -104,16 +104,13 @@ def main() -> ExitCode:
     """
     configure_logging()
     parser = argparse.ArgumentParser(description=__doc__)
+    ModelCorpusPaths.add_arguments(parser)
     for name in (
         "stage-results",
         "stage-manifest",
         "refinement",
         "matrix",
-        "cohort",
-        "split",
         "config",
-        "candidates",
-        "lexicon",
         "out",
         "predictions",
         "checkpoint",
@@ -125,12 +122,7 @@ def main() -> ExitCode:
     return run(
         environ=os.environ,
         paths=StageRefinementPaths(
-            corpus=ModelCorpusPaths(
-                cohort=args.cohort,
-                split=args.split,
-                candidates=args.candidates,
-                lexicon=args.lexicon,
-            ),
+            corpus=ModelCorpusPaths.from_arguments(args),
             stage_results=args.stage_results,
             stage_manifest=args.stage_manifest,
             refinement=args.refinement,
