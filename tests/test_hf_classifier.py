@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from copy import deepcopy
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
@@ -240,3 +241,23 @@ def test_restores_epoch_with_lowest_stop_loss(
     bce = np.mean(np.logaddexp(0, z) - (~labels[60:80]) * z)
     assert bce == pytest.approx(model.stop_losses_[model.best_epoch_ - 1], rel=1e-5)
     assert bce < model.stop_losses_[-1]
+
+
+def test_repeated_fit_ignores_global_rng(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Stejný random_state přebije odlišný globální stav RNG při inicializaci."""
+    parts = encoder_parts()
+    monkeypatch.setattr(
+        hf_classifier, "load_parts", lambda *_args, **_kwargs: deepcopy(parts)
+    )
+    model = HfWindowClassifier(encoder=SPEC, epochs=2, random_state=7)
+    scores = []
+    for _ in range(2):
+        torch.rand(3)
+        model.fit(
+            ["w1 w2", "w3"],
+            np.array([[True] * 5, [False] * 5]),
+            ["w4"],
+            np.array([[True] * 5]),
+        )
+        scores.append(model.decision_function(["w1", "w2 w3"]))
+    np.testing.assert_array_equal(scores[0], scores[1])
