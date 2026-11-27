@@ -1,4 +1,4 @@
-"""Sdílený protokol vyhodnocení pokusu přes validační foldy."""
+"""Vyhodnocení pokusu přes validační foldy, zápis výsledků a oznámení dokončení."""
 
 from __future__ import annotations
 
