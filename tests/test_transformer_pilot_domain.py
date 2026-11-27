@@ -82,3 +82,20 @@ def test_pilot_config_matches_stage_sample() -> None:
     stage = load_stage_config(Path("config/stage_networks.json"))
     assert stage.network is not None
     assert pilot.stopping_parts == stage.network.stopping_parts
+
+
+@pytest.mark.parametrize(("seed", "expected"), [(0, {3, 4}), (1, {2, 4})])
+def test_patient_fraction_hash_order(seed: int, expected: set[int]) -> None:
+    """SHA-256 má pro seed 0 pořadí 4,3,2,1 a pro seed 1 pořadí 4,2,3,1."""
+    notes = tuple(note(i, 0, positive=True) for i in range(1, 5))
+    assert {n.subject_id for n in patient_fraction(notes, 0.5, seed)} == expected
+
+
+def test_patient_fraction_seed_changes_selection() -> None:
+    """Dva seedy nad 30 pacienty vybírají různé poloviny, nikoli nejnižší ID."""
+    notes = tuple(note(i, 0, positive=True) for i in range(1, 31))
+    first, second = (
+        {n.subject_id for n in patient_fraction(notes, 0.5, seed)} for seed in (0, 1)
+    )
+    assert first != second
+    assert first != set(range(1, 16)) or second != set(range(1, 16))
