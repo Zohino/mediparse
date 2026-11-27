@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Protocol
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Sequence
+    from collections.abc import Iterator, Mapping, Sequence
 
     from mediparse.domain.evaluation import BinaryMetrics, Classification, Prediction
     from mediparse.domain.identity import SubjectId
@@ -16,6 +16,12 @@ if TYPE_CHECKING:
         StageFoldResult,
         StageTrialRecord,
         StageTuningConfig,
+    )
+    from mediparse.domain.transformer_pilot import (
+        PilotEpoch,
+        PilotRecord,
+        PilotRun,
+        PilotTraining,
     )
     from mediparse.domain.tuning import ParamValue, Trial, ValidationScores
 
@@ -139,3 +145,24 @@ class StageSearches(Protocol):
 
     def create(self, config: StageTuningConfig) -> StageSearch:
         """Vytvoří prázdnou studii zadané větve."""
+
+
+class PilotTrainer(Protocol):
+    """Trénink jedné varianty bez přístupu k labelům validace."""
+
+    def train(
+        self,
+        run: PilotRun,
+        training: PilotTraining,
+        fit: Sequence[InputNote],
+        stop: Sequence[InputNote],
+        validation: Sequence[str],
+    ) -> Iterator[PilotEpoch]:
+        """Vydá měření a skóre po každé epoše."""
+
+
+class PilotSink(Protocol):
+    """Veřejná tabulka agregátů dokončených běhů pilotu."""
+
+    def write(self, records: Sequence[PilotRecord]) -> None:
+        """Přepíše tabulku všemi dosavadními záznamy."""

@@ -322,3 +322,29 @@ class StageRefinementManifest(BaseModel):
             raise ValueError(msg)
         _ensure_stage_text(self.text_preprocessing, self.text_normalization)
         return self
+
+
+class TransformerPilotManifest(BaseModel):
+    """Původ pilotu; jeho optimistický cíl není odhad výkonu modelu."""
+
+    model_config = ConfigDict(
+        frozen=True, strict=True, extra="forbid", allow_inf_nan=False
+    )
+
+    encoders: tuple[EncoderSpec, ...]
+    dataset_sha256: Sha256
+    config_sha256: Sha256
+    split_seed: Seed
+    split_folds: Annotated[int, Field(ge=2)]
+    split_sha256: Sha256
+    seed: Seed
+    runs: PositiveInt
+    seconds: Annotated[float, Field(ge=0)]
+    sample_notes: PositiveInt
+    sample_patients: PositiveInt
+    development_notes: PositiveInt
+    development_patients: PositiveInt
+    results_sha256: Sha256
+    diagnostic_strip: DiagnosticStrip | None
+    environment: Environment
+    hardware: Hardware
