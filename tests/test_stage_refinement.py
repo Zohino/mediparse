@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import re
 from dataclasses import dataclass, field, replace
 from math import log10
 from typing import TYPE_CHECKING
@@ -28,7 +29,7 @@ from tests.screening_support import note
 from tests.stage_support import FixedSearch, MemoryProgress, StepClock, stage_config
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Sequence
+    from collections.abc import Callable, Mapping, Sequence
     from pathlib import Path
 
     from mediparse.domain.input_note import InputNote
@@ -310,31 +311,45 @@ def test_folds_cover_whole_development_part() -> None:
     assert set(validations) == expected
 
 
-@pytest.mark.parametrize("phase", ["tuning", "refinement"])
-def test_completed_trial_is_logged_by_use_case(
-    phase: str, caplog: pytest.LogCaptureFixture
-) -> None:
-    """Use case oznámí první dokončený pokus i s paměťovým průběhem."""
+def _run_tuning(progress: MemoryProgress) -> None:
     config = stage_config()
+    StageTuning(
+        _Table(),
+        _Split(),
+        StratifiedGroupFolds(),
+        OptunaStageSearch.create(config),
+        _Scorer(),
+        progress,
+        StepClock(),
+    ).run(config)
+
+
+def _run_refinement(progress: MemoryProgress) -> None:
+    StageRefinement(
+        _Table(),
+        _Split(),
+        StratifiedGroupFolds(),
+        OptunaStageSearch,
+        _Scorer(),
+        progress,
+        StepClock(),
+    ).run(stage_config(), _REFINEMENT, _screening(), trials=6)
+
+
+@pytest.mark.parametrize(
+    "run_use_case", [_run_tuning, _run_refinement], ids=["tuning", "refinement"]
+)
+def test_completed_trial_is_logged_by_use_case(
+    run_use_case: Callable[[MemoryProgress], None], caplog: pytest.LogCaptureFixture
+) -> None:
+    """Čísla dokončených pokusů v logu odpovídají pořadí jejich zápisu."""
+    progress = MemoryProgress()
     with caplog.at_level(logging.INFO, logger="mediparse.application"):
-        if phase == "tuning":
-            StageTuning(
-                _Table(),
-                _Split(),
-                StratifiedGroupFolds(),
-                OptunaStageSearch.create(config),
-                _Scorer(),
-                MemoryProgress(),
-                StepClock(),
-            ).run(config)
-        else:
-            StageRefinement(
-                _Table(),
-                _Split(),
-                StratifiedGroupFolds(),
-                OptunaStageSearch,
-                _Scorer(),
-                MemoryProgress(),
-                StepClock(),
-            ).run(config, _REFINEMENT, _screening(), trials=6)
+        run_use_case(progress)
     assert "Pokus 0 COMPLETE" in caplog.text
+    logged_numbers = [
+        int(match.group(1))
+        for record in caplog.records
+        if (match := re.match(r"Pokus (\d+) COMPLETE\b", record.getMessage()))
+    ]
+    assert logged_numbers == [record.number for record in progress.records]
