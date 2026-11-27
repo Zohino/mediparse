@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import replace
+from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
 import pytest
@@ -10,13 +11,21 @@ import pytest
 from mediparse.application.patient_cv import development_sample, patient_holdouts
 from mediparse.application.stage_tuning import StageTuning
 from mediparse.application.transformer_pilot import TransformerPilot
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.split import patient_fraction
+from mediparse.domain.tuning import ValidationScores
 from mediparse.infrastructure.optuna_search import OptunaStageSearch
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds, holdout_mask
 from tests.pilot_support import Source, Table, Trainer, corpus, pilot_config
 from tests.stage_support import MemoryProgress, StepClock, stage_config
 from tests.test_stage_tuning import _Scorer  # ruff: ignore[import-private-name]
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator, Sequence
+
+    from mediparse.domain.input_note import InputNote
+    from mediparse.domain.transformer_pilot import PilotEpoch, PilotRun, PilotTraining
 
 
 def test_records_per_run_and_epoch(caplog: pytest.LogCaptureFixture) -> None:
@@ -114,3 +123,49 @@ def test_patient_outside_split_refused() -> None:
             StepClock(),
         ).run(pilot_config())
     assert not trainer.observed
+
+
+@pytest.mark.parametrize(
+    "losses", [(float("nan"), 0.2, 0.5), (float("nan"), float("inf"), -float("inf"))]
+)
+def test_log_selects_only_finite_stop_loss(
+    losses: tuple[float, ...], caplog: pytest.LogCaptureFixture
+) -> None:
+    """Log vybírá konečné minimum, při úplné divergenci neuvádí F1."""
+
+    def train(
+        run: PilotRun,
+        training: PilotTraining,
+        fit: Sequence[InputNote],
+        stop: Sequence[InputNote],
+        validation: Sequence[str],
+    ) -> Iterator[PilotEpoch]:
+        for epoch in Trainer().train(run, training, fit, stop, validation):
+            scores = (
+                epoch.scores
+                if epoch.epoch != 2
+                else ValidationScores(
+                    {
+                        d: tuple(float(int(text) % 2) for text in validation)
+                        for d in Diagnosis
+                    },
+                    converged=True,
+                    n_features=16,
+                )
+            )
+            yield replace(epoch, stop_loss=losses[epoch.epoch - 1], scores=scores)
+
+    trainer = Mock()
+    trainer.train.side_effect = train
+    caplog.set_level("INFO")
+    TransformerPilot(
+        Table(), Source(), StratifiedGroupFolds(), trainer, Mock(), StepClock()
+    ).run(pilot_config())
+    assert len(caplog.records) == 2
+    for record in caplog.records:
+        if losses[1] == pytest.approx(0.2):
+            assert isinstance(record.args, tuple)
+            assert record.args[2] == pytest.approx(1.0)
+        else:
+            assert "nekonvergoval" in record.message
+            assert "macro-F1" not in record.message

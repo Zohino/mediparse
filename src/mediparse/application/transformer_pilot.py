@@ -12,7 +12,11 @@ from mediparse.application.patient_cv import (
     patient_holdouts,
 )
 from mediparse.domain.split import patient_fraction
-from mediparse.domain.transformer_pilot import PilotRecord, TransformerPilotReport
+from mediparse.domain.transformer_pilot import (
+    PilotRecord,
+    TransformerPilotReport,
+    best_pilot_epoch,
+)
 from mediparse.domain.tuning import fold_max_f1, macro_max_f1
 
 if TYPE_CHECKING:
@@ -87,7 +91,16 @@ class TransformerPilot:
             ]
             records.extend(measured)
             self.sink.write(tuple(records))
-            best = min(measured, key=lambda record: record.stop_loss)
+            best = best_pilot_epoch(measured)
+            if best is None:
+                # Bez konečné stop BCE nelze vybrat epochu; F1 by předstíralo vítěze.
+                logger.info(
+                    "Pilot %s: %d epoch, nekonvergoval, %.1f s.",
+                    run.encoder.name,
+                    len(measured),
+                    sum(r.seconds for r in measured),
+                )
+                continue
             logger.info(
                 "Pilot %s: %d epoch, macro-F1 %.4f, %.1f s.",
                 run.encoder.name,

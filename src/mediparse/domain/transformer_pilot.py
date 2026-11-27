@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from math import isfinite
 from typing import TYPE_CHECKING, Annotated, Self
 
 from pydantic import (
@@ -20,6 +21,8 @@ from mediparse.domain.representation import Aggregation, EncoderSpec
 from mediparse.domain.seed import Seed
 
 if TYPE_CHECKING:
+    from collections.abc import Sequence
+
     from mediparse.domain.split import SplitConfig
     from mediparse.domain.tuning import ValidationScores
 
@@ -120,3 +123,13 @@ class TransformerPilotReport:
     split_config: SplitConfig
     split_sha256: str
     seconds: float
+
+
+def best_pilot_epoch(records: Sequence[PilotRecord]) -> PilotRecord | None:
+    """Vybere epochu se stejnou podmínkou konečné stop BCE jako klasifikátor.
+
+    Returns:
+        Epocha s nejnižší konečnou ztrátou, nebo None při úplné divergenci.
+    """
+    finite = [record for record in records if isfinite(record.stop_loss)]
+    return min(finite, key=lambda record: record.stop_loss) if finite else None
