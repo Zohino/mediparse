@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass, field, replace
 from math import log10
 from typing import TYPE_CHECKING
@@ -9,6 +10,7 @@ from typing import TYPE_CHECKING
 import pytest
 
 from mediparse.application.stage_refinement import StageRefinement
+from mediparse.application.stage_tuning import StageTuning
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.split import SharedSplit, Split, SplitConfig
@@ -306,3 +308,33 @@ def test_folds_cover_whole_development_part() -> None:
     expected = {n.note_id for n in _Table().read_patients(_Table.subjects())}
     assert len(validations) == len(set(validations)) == report.development_notes == 100
     assert set(validations) == expected
+
+
+@pytest.mark.parametrize("phase", ["tuning", "refinement"])
+def test_completed_trial_is_logged_by_use_case(
+    phase: str, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Use case oznámí první dokončený pokus i s paměťovým průběhem."""
+    config = stage_config()
+    with caplog.at_level(logging.INFO, logger="mediparse.application"):
+        if phase == "tuning":
+            StageTuning(
+                _Table(),
+                _Split(),
+                StratifiedGroupFolds(),
+                OptunaStageSearch.create(config),
+                _Scorer(),
+                MemoryProgress(),
+                StepClock(),
+            ).run(config)
+        else:
+            StageRefinement(
+                _Table(),
+                _Split(),
+                StratifiedGroupFolds(),
+                OptunaStageSearch,
+                _Scorer(),
+                MemoryProgress(),
+                StepClock(),
+            ).run(config, _REFINEMENT, _screening(), trials=6)
+    assert "Pokus 0 COMPLETE" in caplog.text
