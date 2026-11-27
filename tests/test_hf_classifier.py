@@ -261,3 +261,21 @@ def test_repeated_fit_ignores_global_rng(monkeypatch: pytest.MonkeyPatch) -> Non
         )
         scores.append(model.decision_function(["w1", "w2 w3"]))
     np.testing.assert_array_equal(scores[0], scores[1])
+
+
+def test_divergence_has_zero_validation_scores(
+    model: HfWindowClassifier, corpus: tuple[list[str], np.ndarray]
+) -> None:
+    """Divergence vydá nulová validační skóre a neobnoví žádnou epochu."""
+    documents, labels = corpus
+    model.set_params(epochs=2, lr=float("inf"))
+    reports = list(
+        model.train_epochs(
+            documents[:4], labels[:4], documents[60:64], labels[60:64], documents[80:84]
+        )
+    )
+    assert len(reports) == 2
+    assert all(np.isnan(report.stop_loss) for report in reports)
+    for report in reports:
+        np.testing.assert_array_equal(report.validation_scores, np.zeros((4, 5)))
+    assert model.converged_ is False
