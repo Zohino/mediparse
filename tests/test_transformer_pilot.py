@@ -174,3 +174,36 @@ def test_log_selects_only_finite_stop_loss(
         else:
             assert "nekonvergoval" in record.message
             assert "macro-F1" not in record.message
+
+
+@pytest.mark.parametrize("stop_loss", [0.2, float("nan")])
+def test_each_run_logs_its_name(
+    stop_loss: float, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Zpráva po každém běhu obsahuje jeho jméno i při nekonvergenci."""
+
+    def train(
+        run: PilotRun,
+        training: PilotTraining,
+        fit: Sequence[InputNote],
+        stop: Sequence[InputNote],
+        validation: Sequence[str],
+    ) -> Iterator[PilotEpoch]:
+        for epoch in Trainer().train(run, training, fit, stop, validation):
+            yield replace(epoch, stop_loss=stop_loss)
+
+    config = pilot_config(epochs=1)
+    trainer = Mock()
+    trainer.train.side_effect = train
+    caplog.set_level("INFO", logger="mediparse.application.transformer_pilot")
+    TransformerPilot(
+        Table(), Source(), StratifiedGroupFolds(), trainer, Mock(), StepClock()
+    ).run(config)
+    records = [
+        record
+        for record in caplog.records
+        if record.name == "mediparse.application.transformer_pilot"
+    ]
+    assert len(records) == 2
+    for record, run in zip(records, config.runs, strict=True):
+        assert f"Pilot {run.encoder.name}:" in record.getMessage()
