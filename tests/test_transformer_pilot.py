@@ -43,6 +43,10 @@ def test_records_per_run_and_epoch(caplog: pytest.LogCaptureFixture) -> None:
     assert report.sample_notes == report.sample_patients == 1200
     assert report.split_sha256 == Source().read().split.sha256()
     assert len(caplog.records) == 2
+    for record, name in zip(caplog.records, ("run0", "run1"), strict=True):
+        assert isinstance(record.args, tuple)
+        assert record.args[0] == name
+    assert report.seconds == pytest.approx(1.0)
 
 
 def test_validation_is_fold_zero_of_stage_sample() -> None:
@@ -100,6 +104,8 @@ def test_macro_f1_from_scores() -> None:
     report = TransformerPilot(
         Table(), Source(), StratifiedGroupFolds(), trainer, Mock(), StepClock()
     ).run(pilot_config(epochs=1))
+    assert len(trainer.observed) == 2
+    assert len(report.records) == 2
     for _, _, _, validation in trainer.observed:
         positives = sum(int(text) % 2 for text in validation)
         negatives = len(validation) - positives

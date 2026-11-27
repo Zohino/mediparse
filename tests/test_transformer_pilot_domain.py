@@ -1,5 +1,6 @@
 """Pacientské podíly a striktní podmínky pilotu."""
 
+import json
 from math import ceil
 from pathlib import Path
 
@@ -46,7 +47,7 @@ def test_patient_fraction_example(fraction: float) -> None:
 
 
 @pytest.mark.parametrize(
-    "change", ["duplicate", "zero", "large", "dictionary", "warmup", "empty"]
+    "change", ["none", "duplicate", "zero", "large", "dictionary", "warmup", "empty"]
 )
 def test_config_rejects(change: str) -> None:
     """Odmítne neplatné podíly, preprocessing a nejednoznačné běhy."""
@@ -62,7 +63,11 @@ def test_config_rejects(change: str) -> None:
             config["training"]["warmup_ratio"] = 1.0
         case "empty":
             config["runs"] = []
-    import json  # ruff: ignore[import-outside-top-level]
+    if change == "none":
+        assert TransformerPilotConfig.model_validate_json(
+            json.dumps(config)
+        ) == load_pilot_config(CONFIG)
+        return
 
     with pytest.raises(ValidationError):
         TransformerPilotConfig.model_validate_json(json.dumps(config))
