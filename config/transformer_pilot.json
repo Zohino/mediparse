@@ -1,0 +1,128 @@
+{
+  "seed": 0,
+  "subsample_parts": 3,
+  "folds": 5,
+  "stopping_parts": 10,
+  "strip_diagnostic_sections": false,
+  "training": {
+    "epochs": 4,
+    "batch_tokens": 16384,
+    "lr": 3e-05,
+    "weight_decay": 0.01,
+    "warmup_ratio": 0.1
+  },
+  "runs": [
+    {
+      "encoder": {
+        "name": "xlmr-512-max-f025",
+        "text_preprocessing": "none",
+        "model": "FacebookAI/xlm-roberta-base",
+        "revision": "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
+        "window": 512,
+        "device": "cuda",
+        "dtype": "bfloat16"
+      },
+      "aggregation": "max",
+      "freeze_embeddings": true,
+      "fraction": 0.25
+    },
+    {
+      "encoder": {
+        "name": "xlmr-512-max-f050",
+        "text_preprocessing": "none",
+        "model": "FacebookAI/xlm-roberta-base",
+        "revision": "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
+        "window": 512,
+        "device": "cuda",
+        "dtype": "bfloat16"
+      },
+      "aggregation": "max",
+      "freeze_embeddings": true,
+      "fraction": 0.5
+    },
+    {
+      "encoder": {
+        "name": "xlmr-512-max",
+        "text_preprocessing": "none",
+        "model": "FacebookAI/xlm-roberta-base",
+        "revision": "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
+        "window": 512,
+        "device": "cuda",
+        "dtype": "bfloat16"
+      },
+      "aggregation": "max",
+      "freeze_embeddings": true,
+      "fraction": 1.0
+    },
+    {
+      "encoder": {
+        "name": "xlmr-512-mean",
+        "text_preprocessing": "none",
+        "model": "FacebookAI/xlm-roberta-base",
+        "revision": "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
+        "window": 512,
+        "device": "cuda",
+        "dtype": "bfloat16"
+      },
+      "aggregation": "mean",
+      "freeze_embeddings": true,
+      "fraction": 1.0
+    },
+    {
+      "encoder": {
+        "name": "mmbert-512-max",
+        "text_preprocessing": "none",
+        "model": "jhu-clsp/mmBERT-base",
+        "revision": "c5955035435e2bf121cde7f3c8863ef52ff35d82",
+        "window": 512,
+        "device": "cuda",
+        "dtype": "bfloat16"
+      },
+      "aggregation": "max",
+      "freeze_embeddings": true,
+      "fraction": 1.0
+    },
+    {
+      "encoder": {
+        "name": "mdeberta-512-max",
+        "text_preprocessing": "none",
+        "model": "microsoft/mdeberta-v3-base",
+        "revision": "a0484667b22365f84929a935b5e50a51f71f159d",
+        "window": 512,
+        "device": "cuda",
+        "dtype": "bfloat16"
+      },
+      "aggregation": "max",
+      "freeze_embeddings": true,
+      "fraction": 1.0
+    },
+    {
+      "encoder": {
+        "name": "mmbert-8192",
+        "text_preprocessing": "none",
+        "model": "jhu-clsp/mmBERT-base",
+        "revision": "c5955035435e2bf121cde7f3c8863ef52ff35d82",
+        "window": 8192,
+        "device": "cuda",
+        "dtype": "bfloat16"
+      },
+      "aggregation": "max",
+      "freeze_embeddings": true,
+      "fraction": 1.0
+    },
+    {
+      "encoder": {
+        "name": "xlmr-512-max-unfrozen",
+        "text_preprocessing": "none",
+        "model": "FacebookAI/xlm-roberta-base",
+        "revision": "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
+        "window": 512,
+        "device": "cuda",
+        "dtype": "bfloat16"
+      },
+      "aggregation": "max",
+      "freeze_embeddings": false,
+      "fraction": 1.0
+    }
+  ]
+}

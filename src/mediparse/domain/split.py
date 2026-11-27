@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import math
 from collections import Counter
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Annotated, Final
@@ -281,3 +282,24 @@ def ensure_patients_per_class(
             f"negativních pacientů, odložení potřebuje v každé třídě aspoň {folds}."
         )
         raise InvalidInputError(msg)
+
+
+def patient_fraction(
+    notes: Sequence[InputNote], fraction: float, seed: Seed
+) -> tuple[InputNote, ...]:
+    """Vybere vnořený podíl celých pacientů bez změny pořadí zpráv.
+
+    Returns:
+        Zprávy prvních ceil(fraction * počet pacientů) pacientů v seedovaném pořadí.
+    """
+    # random je v jádře zakázaný kontraktem; otisk dává seedované pořadí,
+    # z něhož jsou podíly vnořené.
+    subjects = sorted(
+        {note.subject_id for note in notes},
+        key=lambda subject: (
+            hashlib.sha256(f"{seed}:{subject}".encode()).hexdigest(),
+            subject,
+        ),
+    )
+    selected = set(subjects[: math.ceil(fraction * len(subjects))])
+    return tuple(note for note in notes if note.subject_id in selected)

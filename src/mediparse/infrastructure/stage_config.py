@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING
 
 from mediparse.domain.stage_refinement import RefinementConfig
 from mediparse.domain.stage_tuning import StageTuningConfig
+from mediparse.domain.transformer_pilot import TransformerPilotConfig
 from mediparse.infrastructure.input_file import parse_file
 
 if TYPE_CHECKING:
@@ -28,3 +29,12 @@ def load_refinement_config(path: Path) -> RefinementConfig:
         Striktně validovaný config doladění.
     """
     return parse_file(path, RefinementConfig.model_validate_json)
+
+
+def load_pilot_config(path: Path) -> TransformerPilotConfig:
+    """Přečte podmínky pilotu transformeru.
+
+    Returns:
+        Striktně validovaný config.
+    """
+    return parse_file(path, TransformerPilotConfig.model_validate_json)
