@@ -37,7 +37,8 @@ def _paths(
     config.write_text(
         pilot_config()
         .model_copy(update={"strip_diagnostic_sections": strip})
-        .model_dump_json()
+        .model_dump_json(),
+        encoding="utf-8",
     )
     mark_synthetic(root)
     return transformer_pilot.TransformerPilotPaths(
