@@ -60,11 +60,8 @@ def main() -> ExitCode:
     """
     configure_logging()
     parser = argparse.ArgumentParser(description=__doc__)
+    ModelCorpusPaths.add_arguments(parser)
     for name in (
-        "cohort",
-        "split",
-        "candidates",
-        "lexicon",
         "config",
         "out",
         "manifest",
@@ -74,12 +71,7 @@ def main() -> ExitCode:
     return run(
         environ=os.environ,
         paths=TransformerPilotPaths(
-            corpus=ModelCorpusPaths(
-                cohort=args.cohort,
-                split=args.split,
-                candidates=args.candidates,
-                lexicon=args.lexicon,
-            ),
+            corpus=ModelCorpusPaths.from_arguments(args),
             config=args.config,
             out=args.out,
             manifest=args.manifest,
