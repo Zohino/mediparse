@@ -172,11 +172,8 @@ def load_parts(
         tokenizer = load_tokenizer(directory, spec.revision)
         # Lokální adresář zabrání auto-konverzi vah přes Space a nepřipnutý PR.
         model = AutoModel.from_pretrained(directory, **model_options)
-        if (
-            not special_tokens(tokenizer)
-            < spec.window
-            <= model.config.max_position_embeddings
-        ):
+        capacity = model.config.max_position_embeddings
+        if not special_tokens(tokenizer) < spec.window <= capacity:
             msg = "Okno encoderu musí přesáhnout obal a nepřekročit kapacitu modelu."
             raise InvalidInputError(msg)
         return model, tokenizer
