@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field, replace
+from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING
 
 import pytest
@@ -21,10 +21,16 @@ from mediparse.infrastructure.stage_trials_table import (
     ParquetStageCheckpoint,
 )
 from tests.screening_support import DEVELOPMENT, SHARED, notes
-from tests.stage_support import FixedSearch, MemoryProgress, StepClock, stage_config
+from tests.stage_support import (
+    CapturingScorer,
+    FixedSearch,
+    MemoryProgress,
+    StepClock,
+    stage_config,
+)
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Sequence
+    from collections.abc import Mapping
     from pathlib import Path
 
     from mediparse.domain.input_note import InputNote
@@ -57,38 +63,6 @@ class _SplitSource:
         return SHARED
 
 
-@dataclass
-class _Scorer:
-    """Deterministická skóre a volitelné přerušení."""
-
-    fail_at: int | None = None
-    observed: list[Holdout] = field(default_factory=list)
-
-    def score_folds(
-        self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
-    ) -> tuple[ValidationScores, ...]:
-        return tuple(self.score(params, fold) for fold in folds)
-
-    def score(
-        self, params: Mapping[str, ParamValue], fold: Holdout
-    ) -> ValidationScores:
-        del params
-        if len(self.observed) == self.fail_at:
-            msg = "syntetické přerušení"
-            raise RuntimeError(msg)
-        self.observed.append(fold)
-        return ValidationScores(
-            {
-                d: tuple(
-                    float(n.has_label(d)) if fold.fold == 0 else 0.0 for n in fold.test
-                )
-                for d in Diagnosis
-            },
-            converged=True,
-            n_features=10 + fold.fold,
-        )
-
-
 _DEVELOPMENT_NOTES = _Table().read_patients(DEVELOPMENT)
 
 
@@ -114,7 +88,7 @@ def test_defaults_and_development_sample(
     config = stage_config(subsample_parts=parts)
     samples = []
     for _ in range(2):
-        scorer, progress = _Scorer(), MemoryProgress()
+        scorer, progress = CapturingScorer(), MemoryProgress()
         search = OptunaStageSearch.create(config)
         report = StageTuning(
             _Table(),
@@ -149,7 +123,7 @@ def test_defaults_and_development_sample(
 def test_fold_features_reach_results() -> None:
     """Počet příznaků každého foldu projde až do všech buněk diagnóz."""
     config = stage_config()
-    scorer, progress = _Scorer(), MemoryProgress()
+    scorer, progress = CapturingScorer(), MemoryProgress()
     StageTuning(
         _Table(),
         _SplitSource(),
@@ -184,7 +158,7 @@ def test_interrupted_run_resumes_to_identical_outputs(tmp_path: Path, cut: int) 
                     _SplitSource(),
                     StratifiedGroupFolds(),
                     OptunaStageSearch.create(config),
-                    _Scorer(fail_at=cut * 2),
+                    CapturingScorer(fail_at=cut * 2),
                     progress,
                     StepClock(),
                 ).run(config)
@@ -197,7 +171,7 @@ def test_interrupted_run_resumes_to_identical_outputs(tmp_path: Path, cut: int) 
             _SplitSource(),
             StratifiedGroupFolds(),
             OptunaStageSearch.create(config),
-            _Scorer(),
+            CapturingScorer(),
             progress,
             StepClock(),
         ).run(config)
@@ -219,7 +193,7 @@ def test_enqueue_protocol_and_restore(cut: int) -> None:
         _SplitSource(),
         StratifiedGroupFolds(),
         FixedSearch(),
-        _Scorer(),
+        CapturingScorer(),
         initial,
         StepClock(),
     ).run(config)
@@ -232,7 +206,7 @@ def test_enqueue_protocol_and_restore(cut: int) -> None:
         _SplitSource(),
         StratifiedGroupFolds(),
         search,
-        _Scorer(),
+        CapturingScorer(),
         progress,
         StepClock(),
     ).run(config)
@@ -285,7 +259,7 @@ def test_checkpoint_round_trip_record_and_fold_results(tmp_path: Path) -> None:
 def test_nonconvergence_counts_each_affected_trial_once() -> None:
     """Nekonvergence jednoho foldu pokusů 1 a 4 se promítne do obou záznamů."""
 
-    class Nonconverged(_Scorer):
+    class Nonconverged(CapturingScorer):
         def score(
             self, params: Mapping[str, ParamValue], fold: Holdout
         ) -> ValidationScores:

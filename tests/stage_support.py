@@ -6,12 +6,14 @@ import json
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.stage_tuning import StageTrialRecord, StageTuningConfig
-from mediparse.domain.tuning import Trial
+from mediparse.domain.tuning import Trial, ValidationScores
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
+    from mediparse.domain.split import Holdout
     from mediparse.domain.stage_tuning import StageFoldResult
     from mediparse.domain.tuning import ParamValue
 
@@ -266,3 +268,48 @@ class FixedSearch:
         """Uloží cílovou hodnotu dokončeného pokusu."""
         del trial
         self.values.append(value)
+
+
+@dataclass
+class CapturingScorer:
+    """Deterministická skóre a volitelné přerušení."""
+
+    fail_at: int | None = None
+    observed: list[Holdout] = field(default_factory=list)
+
+    def score_folds(
+        self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
+    ) -> tuple[ValidationScores, ...]:
+        """Zachytí každý fold.
+
+        Returns:
+            Skóre ve vstupním pořadí foldů.
+        """
+        return tuple(self.score(params, fold) for fold in folds)
+
+    def score(
+        self, params: Mapping[str, ParamValue], fold: Holdout
+    ) -> ValidationScores:
+        """Vydá deterministická skóre nebo přeruší zvolený pokus.
+
+        Returns:
+            Skóre podle labelů první validace, jinak nulová.
+
+        Raises:
+            RuntimeError: Nastal požadovaný bod syntetického přerušení.
+        """
+        del params
+        if len(self.observed) == self.fail_at:
+            msg = "syntetické přerušení"
+            raise RuntimeError(msg)
+        self.observed.append(fold)
+        return ValidationScores(
+            {
+                d: tuple(
+                    float(n.has_label(d)) if fold.fold == 0 else 0.0 for n in fold.test
+                )
+                for d in Diagnosis
+            },
+            converged=True,
+            n_features=10 + fold.fold,
+        )

@@ -18,8 +18,7 @@ from mediparse.domain.tuning import ValidationScores
 from mediparse.infrastructure.optuna_search import OptunaStageSearch
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds, holdout_mask
 from tests.pilot_support import Source, Table, Trainer, corpus, pilot_config
-from tests.stage_support import MemoryProgress, StepClock, stage_config
-from tests.test_stage_tuning import _Scorer  # ruff: ignore[import-private-name]
+from tests.stage_support import CapturingScorer, MemoryProgress, StepClock, stage_config
 
 if TYPE_CHECKING:
     from collections.abc import Iterator, Sequence
@@ -60,7 +59,7 @@ def test_validation_is_fold_zero_of_stage_sample() -> None:
     stage = stage_config(
         seed=config.seed, subsample_parts=config.subsample_parts, folds=config.folds
     )
-    scorer = _Scorer()
+    scorer = CapturingScorer()
     StageTuning(
         Table(),
         Source(),
