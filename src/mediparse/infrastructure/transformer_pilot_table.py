@@ -6,7 +6,8 @@ from dataclasses import asdict, dataclass
 from typing import TYPE_CHECKING, Final
 
 import pyarrow as pa
-import pyarrow.parquet as pq
+
+from mediparse.infrastructure.parquet_file import write_arrow
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -45,10 +46,9 @@ class ParquetPilotSink:
 
     def write(self, records: Sequence[PilotRecord]) -> None:
         """Zapíše jen agregáty s explicitním veřejným schématem."""
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        pq.write_table(
+        write_arrow(
+            self.path,
             pa.Table.from_pylist(
                 [asdict(record) for record in records], schema=PILOT_SCHEMA
             ),
-            self.path,
         )

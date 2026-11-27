@@ -77,6 +77,7 @@ def test_end_to_end_manifest_preserves_diagnostic_strip(
     assert loader.call_args.kwargs["strip_diagnostic_sections"] is strip
     table = pq.read_table(paths.out)
     assert table.schema == PILOT_SCHEMA
+    assert pq.read_metadata(paths.out).row_group(0).column(0).compression == "ZSTD"
     assert table.num_rows == 6
     assert all(row["macro_f1"] == pytest.approx(0.8) for row in table.to_pylist())
     manifest = TransformerPilotManifest.model_validate_json(paths.manifest.read_bytes())
