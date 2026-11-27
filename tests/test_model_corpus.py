@@ -1,15 +1,50 @@
-"""Otisk sdíleného modelového korpusu nezávisle na konkrétním nástroji."""
+"""Argumenty a otisk sdíleného modelového korpusu nezávisle na nástroji."""
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+import argparse
+from pathlib import Path
 
 import pytest
 
 from mediparse.entrypoints import model_corpus
 
-if TYPE_CHECKING:
-    from pathlib import Path
+
+@pytest.mark.parametrize("missing", ["cohort", "split", "candidates", "lexicon"])
+def test_corpus_arguments_are_required(
+    missing: str, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Parser odmítne vynechání kterékoli cesty korpusu."""
+    parser = argparse.ArgumentParser()
+    model_corpus.ModelCorpusPaths.add_arguments(parser)
+    argv = []
+    for name in ("cohort", "split", "candidates", "lexicon"):
+        if name != missing:
+            argv.extend((f"--{name}", name))
+    with pytest.raises(SystemExit):
+        parser.parse_args(argv)
+    assert f"--{missing}" in capsys.readouterr().err
+
+
+def test_corpus_paths_from_arguments() -> None:
+    """Úplné argumenty sestaví všechny cesty se správným přiřazením a typem."""
+    parser = argparse.ArgumentParser()
+    model_corpus.ModelCorpusPaths.add_arguments(parser)
+    args = parser.parse_args([
+        "--cohort",
+        "c",
+        "--split",
+        "s",
+        "--candidates",
+        "k",
+        "--lexicon",
+        "l",
+    ])
+    assert model_corpus.ModelCorpusPaths.from_arguments(args) == (
+        model_corpus.ModelCorpusPaths(
+            cohort=Path("c"), split=Path("s"), candidates=Path("k"), lexicon=Path("l")
+        )
+    )
 
 
 @pytest.mark.parametrize(
