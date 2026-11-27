@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import logging
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
@@ -18,8 +17,6 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     from mediparse.domain.stage_tuning import StageFoldResult
-
-logger = logging.getLogger(__name__)
 
 # default je bod mimo návrhy sampleru: výchozí bod předkola nebo kontrola kandidáta.
 TRIALS_SCHEMA: Final = pa.schema([
@@ -138,12 +135,6 @@ class ParquetStageCheckpoint:
             ),
             "results": pa.Table.from_pylist(trials, schema=TRIALS_SCHEMA),
         })
-        logger.info(
-            "Pokus %d COMPLETE: macro-F1 %.6f, čas %.3f s.",
-            record.number,
-            record.value,
-            record.seconds,
-        )
 
     def finish(self) -> None:
         """Složí oba výstupy a uklidí checkpoint."""

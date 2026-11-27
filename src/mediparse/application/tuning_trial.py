@@ -1,7 +1,8 @@
-"""Sdílený protokol vyhodnocení pokusu přes validační foldy."""
+"""Vyhodnocení pokusu přes validační foldy, zápis výsledků a oznámení dokončení."""
 
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
@@ -12,9 +13,13 @@ from mediparse.domain.tuning import fold_max_f1, macro_max_f1
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
 
-    from mediparse.application.ports.experiment import TrialScorer
+    from mediparse.application.ports.experiment import StageProgress, TrialScorer
     from mediparse.domain.split import Holdout
+    from mediparse.domain.stage_tuning import StageTrialRecord
     from mediparse.domain.tuning import MaxF1, ParamValue, ValidationScores
+
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
@@ -71,4 +76,19 @@ def trial_results(
         )
         for i, fold in enumerate(folds)
         for diagnosis in Diagnosis
+    )
+
+
+def write_trial(
+    progress: StageProgress,
+    record: StageTrialRecord,
+    results: Sequence[StageFoldResult],
+) -> None:
+    """Zapíše hotový pokus do průběhu a oznámí jeho dokončení."""
+    progress.write(record, results)
+    logger.info(
+        "Pokus %d COMPLETE: macro-F1 %.6f, čas %.3f s.",
+        record.number,
+        record.value,
+        record.seconds,
     )

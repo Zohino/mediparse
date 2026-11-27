@@ -184,6 +184,7 @@ ignore_imports = [
     "mediparse.** -> itertools",
     "mediparse.** -> types",
     "mediparse.** -> typing",
+    "mediparse.application.** -> logging",
     # Jen typy pod TYPE_CHECKING; po modulech, ne po vrstvě, protože import-linter
     # typový import od běhového nerozliší a ruff S311 nechytí random.shuffle ani seed.
     "mediparse.application.cohort -> contextlib",
@@ -201,6 +202,7 @@ ignore_imports = [
     "mediparse.entrypoints.** -> logging",
     "mediparse.entrypoints.** -> os",
     "mediparse.entrypoints.** -> pathlib",
+    "mediparse.synthetic.application.** -> logging",
     "mediparse.synthetic.domain.** -> datetime",
     "mediparse.synthetic.domain.** -> hashlib",
     "mediparse.synthetic.domain.** -> math",
