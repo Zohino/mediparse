@@ -338,7 +338,6 @@ class TransformerPilotManifest(BaseModel):
     split_folds: Annotated[int, Field(ge=2)]
     split_sha256: Sha256
     seed: Seed
-    runs: PositiveInt
     seconds: Annotated[float, Field(ge=0)]
     sample_notes: PositiveInt
     sample_patients: PositiveInt

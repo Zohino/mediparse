@@ -87,6 +87,7 @@ def test_end_to_end_manifest_preserves_diagnostic_strip(
         ("dataset_sha256", paths.corpus.cohort),
     ):
         assert getattr(manifest, field) == hashlib.sha256(path.read_bytes()).hexdigest()
+    assert "runs" not in manifest.model_dump()
     assert manifest.encoders == tuple(run.encoder for run in pilot_config().runs)
     assert manifest.split_sha256 == Source().read().split.sha256()
     assert manifest.environment.source == fixed_revision()

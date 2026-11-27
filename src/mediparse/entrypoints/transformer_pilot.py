@@ -141,7 +141,6 @@ def run(
             split_folds=report.split_config.folds,
             split_sha256=report.split_sha256,
             seed=config.seed,
-            runs=len(config.runs),
             seconds=report.seconds,
             sample_notes=report.sample_notes,
             sample_patients=report.sample_patients,
