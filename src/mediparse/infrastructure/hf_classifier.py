@@ -21,7 +21,8 @@ if TYPE_CHECKING:
 
     from mediparse.domain.representation import Aggregation, EncoderSpec
 
-# Kus seskupí podobné délky a přitom zachová náhodnost (~30 dávek po 16 oknech).
+# Kus seskupí podobné délky a zachová náhodnost: při ~6,4 oknech na zprávu
+# je to ~100 dávek po 32 oknech pro okno 512 a rozpočet 16 384 tokenů.
 BUCKET_NOTES: Final = 512
 
 
