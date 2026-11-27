@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from mediparse.application.patient_cv import patient_holdouts
-from mediparse.application.tuning_trial import score_trial, trial_results
+from mediparse.application.tuning_trial import score_trial, trial_results, write_trial
 from mediparse.domain.stage_tuning import (
     StageTrialRecord,
     StageTuningReport,
@@ -75,7 +75,7 @@ class StageTuning:
                 run.converged,
                 self.clock.now() - start,
             )
-            self.progress.write(record, trial_results(run, folds))
+            write_trial(self.progress, record, trial_results(run, folds))
             records.append(record)
         self.progress.finish()
         return StageTuningReport(

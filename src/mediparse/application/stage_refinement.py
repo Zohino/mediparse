@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from mediparse.application.patient_cv import patient_holdouts
-from mediparse.application.tuning_trial import score_trial, trial_results
+from mediparse.application.tuning_trial import score_trial, trial_results, write_trial
 from mediparse.domain.stage_refinement import StageRefinementReport, branch_config
 from mediparse.domain.stage_tuning import (
     BRANCH_KEY,
@@ -82,7 +82,7 @@ class StageRefinement:
                 converged=run.converged,
                 seconds=self.clock.now() - start,
             )
-            self.progress.write(record, trial_results(run, folds))
+            write_trial(self.progress, record, trial_results(run, folds))
             records.append(record)
         winner = best_trial(records[:2])
         study = studies[winner.params[BRANCH_KEY]]
@@ -103,7 +103,7 @@ class StageRefinement:
                 converged=run.converged,
                 seconds=self.clock.now() - start,
             )
-            self.progress.write(record, trial_results(run, folds))
+            write_trial(self.progress, record, trial_results(run, folds))
             records.append(record)
         self.progress.finish()
         return StageRefinementReport(
