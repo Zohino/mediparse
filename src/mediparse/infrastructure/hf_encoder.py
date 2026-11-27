@@ -114,12 +114,7 @@ def load_encoder(spec: EncoderSpec) -> HfMeanEncoder:
     Raises:
         InvalidInputError: Chybí torch či CUDA, model nelze načíst nebo má neplatné okno.
     """
-    require_device(spec.device)
-    import torch  # ruff: ignore[import-outside-top-level]
-
-    model, tokenizer = load_parts(
-        spec, dtype=getattr(torch, spec.dtype), attn_implementation="sdpa"
-    )
+    model, tokenizer = load_parts(spec, attn_implementation="sdpa")
     with _encoder_errors():
         # Dekorátor transformers ztrácí v ty vazbu self metody to.
         model.to(spec.device)  # ty: ignore[invalid-argument-type]
@@ -165,9 +160,12 @@ def load_parts(
         InvalidInputError: Zařízení, model nebo okno nelze použít.
     """
     require_device(spec.device)
+    # Odložené importy zachovají default bez torch a pořadí skops/transformers.
+    import torch  # ruff: ignore[import-outside-top-level]
     from transformers import AutoModel  # ruff: ignore[import-outside-top-level]
 
     with _encoder_errors():
+        model_options.setdefault("dtype", getattr(torch, spec.dtype))
         directory = pinned_snapshot(spec.model, spec.revision)
         tokenizer = load_tokenizer(directory, spec.revision)
         # Lokální adresář zabrání auto-konverzi vah přes Space a nepřipnutý PR.

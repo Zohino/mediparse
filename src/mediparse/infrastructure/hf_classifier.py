@@ -152,6 +152,7 @@ class HfWindowClassifier(BaseEstimator):
         stop_labels: np.ndarray,
         validation_documents: Sequence[str],
     ) -> Iterator[EpochReport]:
+        # Odložené importy zachovají default bez torch a pořadí skops/transformers.
         import torch  # ruff: ignore[import-outside-top-level]
         from transformers import get_linear_schedule_with_warmup  # ruff: ignore[import-outside-top-level]
 
