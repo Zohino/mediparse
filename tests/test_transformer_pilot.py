@@ -13,7 +13,7 @@ from mediparse.application.transformer_pilot import TransformerPilot
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.split import patient_fraction
 from mediparse.infrastructure.optuna_search import OptunaStageSearch
-from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
+from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds, holdout_mask
 from tests.pilot_support import Source, Table, Trainer, corpus, pilot_config
 from tests.stage_support import MemoryProgress, StepClock, stage_config
 from tests.test_stage_tuning import _Scorer  # ruff: ignore[import-private-name]
@@ -59,14 +59,23 @@ def test_validation_is_fold_zero_of_stage_sample() -> None:
     ).run(stage)
     sample = development_sample(corpus(), 3, config.seed, partitioner)
     fold0 = patient_holdouts(sample, config.folds, config.seed, partitioner)[0]
-    for run, (fit, stop, validation) in zip(config.runs, trainer.observed, strict=True):
+    assert [observed[0] for observed in trainer.observed] == list(config.runs)
+    for run, (_, fit, stop, validation) in zip(
+        config.runs, trainer.observed, strict=True
+    ):
         assert (
             list(validation)
             == [n.text for n in scorer.observed[0].test]
             == [n.text for n in fold0.test]
         )
         subset = patient_fraction(fold0.train, run.fraction, config.seed)
-        assert set(fit) | set(stop) == set(subset)
+        mask = holdout_mask(subset, config.stopping_parts, config.seed)
+        assert tuple(stop) == tuple(
+            n for n, held in zip(subset, mask, strict=True) if held
+        )
+        assert tuple(fit) == tuple(
+            n for n, held in zip(subset, mask, strict=True) if not held
+        )
         fit_patients, stop_patients = (
             {n.subject_id for n in group} for group in (fit, stop)
         )
@@ -82,7 +91,7 @@ def test_macro_f1_from_scores() -> None:
     report = TransformerPilot(
         Table(), Source(), StratifiedGroupFolds(), trainer, Mock(), StepClock()
     ).run(pilot_config(epochs=1))
-    for _, _, validation in trainer.observed:
+    for _, _, _, validation in trainer.observed:
         positives = sum(int(text) % 2 for text in validation)
         negatives = len(validation) - positives
         assert positives == negatives

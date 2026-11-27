@@ -124,9 +124,9 @@ class Source:
 class Trainer:
     """Zachytí rozdělení a vydá skóre s ručním optimem F1 0,8."""
 
-    observed: list[tuple[Sequence[InputNote], Sequence[InputNote], Sequence[str]]] = (
-        field(default_factory=list)
-    )
+    observed: list[
+        tuple[PilotRun, Sequence[InputNote], Sequence[InputNote], Sequence[str]]
+    ] = field(default_factory=list)
 
     def train(
         self,
@@ -141,8 +141,7 @@ class Trainer:
         Yields:
             Předepsaný počet deterministických epoch.
         """
-        del run
-        self.observed.append((fit, stop, validation))
+        self.observed.append((run, fit, stop, validation))
         labels = {n.text: bool(n.labels) for n in corpus()}
         counts: Counter[bool] = Counter()
         values = []
