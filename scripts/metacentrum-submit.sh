@@ -51,7 +51,7 @@ if (($#)); then
 fi
 
 echo "== 3/3 odeslání úlohy"
-ssh charon "cd $remote && qsub job.sh | tee job.id && qstat -u \"\$USER\""
+ssh charon "cd $remote && job=\$(qsub job.sh) && echo \"\$job\" | tee job.id && qstat -u \"\$USER\""
 
 cat <<EOF
 
