@@ -492,42 +492,56 @@ def test_network_stopping_needs_at_least_two_parts() -> None:
 
 
 @pytest.mark.parametrize(
-    "change",
+    ("change", "message"),
     [
-        {"transformer": None},
-        {"families": stage_config().model_dump(mode="json")["families"][:1]},
-        {
-            "families": [
-                *transformer_stage_config().model_dump(mode="json")["families"],
-                stage_config().model_dump(mode="json")["families"][0],
-            ],
-            "concurrent_trials": 2,
-        },
-        {
-            "representations": [
-                SPEC.model_dump(mode="json") | {"name": "a", "device": "cpu"},
-                SPEC.model_dump(mode="json") | {"name": "b", "device": "cuda"},
-            ]
-        },
-        {"concurrent_trials": 4, "random_startup_trials": 2},
+        ({"transformer": None}, "právě s rodinou transformer"),
+        (
+            {"families": stage_config().model_dump(mode="json")["families"][:1]},
+            "právě s rodinou transformer",
+        ),
+        (
+            {
+                "families": [
+                    *transformer_stage_config().model_dump(mode="json")["families"],
+                    stage_config().model_dump(mode="json")["families"][0],
+                ],
+                "concurrent_trials": 2,
+            },
+            "Souběh pokusů je povolený jen pro transformer",
+        ),
+        (
+            {
+                "representations": [
+                    SPEC.model_dump(mode="json") | {"name": "a", "device": "cpu"},
+                    SPEC.model_dump(mode="json") | {"name": "b", "device": "cuda"},
+                ]
+            },
+            "stejné zařízení",
+        ),
+        (
+            {"concurrent_trials": 4, "random_startup_trials": 2},
+            "Náhodné starty musí pokrýt souběh minus jeden",
+        ),
     ],
 )
-def test_invalid_transformer_config(change: dict[str, object]) -> None:
+def test_invalid_transformer_config(change: dict[str, object], message: str) -> None:
     """Odmítne neúplný transformer, smíšený souběh a rozdílná zařízení."""
-    with pytest.raises(ValidationError):
+    with pytest.raises(ValidationError, match=message):
         transformer_stage_config(**change)
 
 
 def test_network_rejects_concurrent_trials() -> None:
     """Souběh pokusů patří jen transformeru."""
     data = network_stage_config().model_dump(mode="json") | {"concurrent_trials": 2}
-    with pytest.raises(ValidationError):
+    with pytest.raises(
+        ValidationError, match="Souběh pokusů je povolený jen pro transformer"
+    ):
         StageTuningConfig.model_validate_json(json.dumps(data))
 
 
 def test_transformer_block_without_family() -> None:
     """Technický blok bez příslušné rodiny není platný."""
-    with pytest.raises(ValidationError):
+    with pytest.raises(ValidationError, match="právě s rodinou transformer"):
         stage_config(
             transformer=transformer_stage_config().model_dump(mode="json")[
                 "transformer"
