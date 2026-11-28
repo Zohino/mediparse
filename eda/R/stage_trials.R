@@ -171,7 +171,7 @@ stage_selection <- function(summary, manifest) {
   if (best$trial[1] != manifest$best_trial) {
     stop("Vítěz neodpovídá manifestu.", call. = FALSE)
   }
-  list(winner = best[1, ], candidate_best = best, second = best[2, ], others = best[-1, ])
+  list(winner = best[1, ], candidate_best = best, second = best[2, ], others = best[-1, ], column = column)
 }
 
 space_value_text <- function(x) {
@@ -273,20 +273,29 @@ stage_defaults_table <- function(summary) {
     konvergence = ifelse(rows$converged, "ano", "ne"), minuty = metric_text(rows$seconds / 60))
 }
 
+stage_candidate_labels <- function(values, selection) {
+  if (selection$column == "branch") {
+    return(selection$candidate_best$representation[match(values, selection$candidate_best$branch)])
+  }
+  unname(FAMILY_LABELS[values])
+}
+
 stage_family_table <- function(selection, summary) {
   rows <- selection$candidate_best
+  column <- selection$column
   defaults <- summary[summary$default, ]
-  data.frame(rodina = unname(FAMILY_LABELS[rows$family]),
+  data.frame(rodina = stage_candidate_labels(rows[[column]], selection),
     pokus = paste(rows$trial, rows$representation),
     macro = stage_macro_text(rows),
     výchozí = metric_text(defaults$value[match(rows$branch, defaults$branch)]),
-    pokusy = vapply(rows$family, function(family) sum(summary$family == family), integer(1)))
+    pokusy = vapply(rows[[column]], function(value) sum(summary[[column]] == value), integer(1)))
 }
 
 stage_diagnosis_table <- function(trials, selection, candidates) {
   rows <- trials[trials$trial %in% selection$candidate_best$trial, ]
-  means <- stats::aggregate(rows["max_f1"], rows[c("family", "diagnosis")], mean)
-  data.frame(rodina = unname(FAMILY_LABELS[means$family]),
+  column <- selection$column
+  means <- stats::aggregate(rows["max_f1"], rows[c(column, "diagnosis")], mean)
+  data.frame(rodina = stage_candidate_labels(means[[column]], selection),
     diagnóza = candidate_labels(means$diagnosis, candidates), f1 = metric_text(means$max_f1))
 }
 

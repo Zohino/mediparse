@@ -171,6 +171,7 @@ testthat::test_that("A2 vítěze a shody určuje cíl a číslo pokusu", {
     value = c(0.80, 0.78, 0.82, 0.82, 0.70, 0.70))
   summary$branch <- summary$family
   selection <- stage_selection(summary, list(best_trial = 2))
+  testthat::expect_equal(selection$column, "family")
   testthat::expect_equal(selection$winner$trial, 2L)
   testthat::expect_equal(selection$second$trial, 3L)
   testthat::expect_equal(selection$candidate_best$trial, c(2L, 3L, 4L))
@@ -394,7 +395,9 @@ testthat::test_that("B6 provenance uvádí procesy, encodery a GPU", {
 testthat::test_that("Jedna rodina vybírá dva nejlepší encodery po větvích", {
   summary <- data.frame(trial = 0:3, family = "transformer",
     branch = c("mmbert/transformer", "mmbert/transformer", "xlmr/transformer", "mdeberta/transformer"),
-    value = c(0.90, 0.85, 0.70, 0.88))
+    value = c(0.90, 0.85, 0.70, 0.88), sd = 0,
+    representation = c("mmbert", "mmbert", "xlmr", "mdeberta"),
+    default = c(TRUE, FALSE, TRUE, TRUE))
   for (indices in list(1:4, 4:1)) {
     selection <- stage_selection(summary[indices, ], list(best_trial = 0))
     testthat::expect_equal(selection$winner$trial, 0L)
@@ -405,6 +408,18 @@ testthat::test_that("Jedna rodina vybírá dva nejlepší encodery po větvích"
     testthat::expect_equal(selection$winner$trial, 0L)
     testthat::expect_equal(selection$second$trial, 2L)
   }
+  selection <- stage_selection(summary, list(best_trial = 0))
+  testthat::expect_equal(selection$column, "branch")
+  families <- stage_family_table(selection, summary)
+  testthat::expect_equal(families$rodina, c("mmbert", "mdeberta", "xlmr"))
+  testthat::expect_equal(families$pokusy, c(2L, 1L, 1L))
+  trials <- merge(summary, expand.grid(fold = 0:1, diagnosis = STAGE_DIAGNOSES))
+  trials$max_f1 <- trials$value
+  diagnoses <- stage_diagnosis_table(trials, selection, read_candidates(candidates_path()))
+  testthat::expect_equal(nrow(diagnoses), 15L)
+  testthat::expect_equal(diagnoses$f1[diagnoses$rodina == "mmbert"], rep("0,900", 5))
+  testthat::expect_equal(diagnoses$f1[diagnoses$rodina == "mdeberta"], rep("0,880", 5))
+  testthat::expect_equal(diagnoses$f1[diagnoses$rodina == "xlmr"], rep("0,700", 5))
   testthat::expect_error(stage_selection(summary[1:2, ], list(best_trial = 0)),
     "stupeň má jediného kandidáta")
 })
