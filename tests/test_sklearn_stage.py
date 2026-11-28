@@ -10,7 +10,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
 from random import Random
 from threading import Barrier
-from typing import TYPE_CHECKING, Literal, cast
+from typing import TYPE_CHECKING, Literal
 from unittest.mock import Mock, call
 
 import numpy as np
@@ -25,7 +25,11 @@ from mediparse.application.patient_cv import patient_holdouts
 from mediparse.domain.clinical_text import TextNormalization
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
-from mediparse.domain.representation import ClassifierFamily, Word2VecRepresentation
+from mediparse.domain.representation import (
+    ClassifierFamily,
+    EncoderSpec,
+    Word2VecRepresentation,
+)
 from mediparse.domain.split import Holdout
 from mediparse.domain.stage_tuning import StageLsa
 from mediparse.domain.tuning import ValidationScores
@@ -70,7 +74,6 @@ from tests.support import REPOSITORY, REPOSITORY_DIAGNOSIS_CANDIDATES
 
 if TYPE_CHECKING:
     from collections.abc import Callable
-    from functools import partial
     from pathlib import Path
 
     from scipy.sparse import csr_matrix
@@ -1229,14 +1232,19 @@ def test_transformer_trial_holds_one_device(
     monkeypatch.setattr(torch_device, "cuda_device_count", lambda: 2)
     pool = DevicePool.of("cuda", 2)
     barrier = Barrier(2, timeout=10)
-    observed: list[set[str]] = []
+    observed: dict[str, set[str]] = {}
+
+    def model(*, encoder: EncoderSpec, device: str, **_kwargs: object) -> Mock:
+        observed.setdefault(encoder.name, set()).add(device)
+        return Mock()
+
+    monkeypatch.setattr(sklearn_stage, "HfWindowClassifier", model)
 
     def isolate(function: Callable[[], GroupScores]) -> GroupScores:
-        fits = cast("partial[GroupScores]", function).args[0]
-        observed.append({fit.args[0].device for _, fit in fits})
+        del function
         barrier.wait()
         return tuple(
-            (i, ValidationScores({}, converged=True, n_features=16)) for i, _ in fits
+            (i, ValidationScores({}, converged=True, n_features=16)) for i in range(2)
         )
 
     config = transformer_stage_config()
@@ -1257,7 +1265,7 @@ def test_transformer_trial_holds_one_device(
         ]
         for future in futures:
             assert len(future.result(timeout=10)) == 2
-    assert sorted(observed, key=sorted) == [{"cuda:0"}, {"cuda:1"}]
+    assert sorted(observed.values(), key=sorted) == [{"cuda:0"}, {"cuda:1"}]
     assert pool.free.qsize() == 2
 
 
