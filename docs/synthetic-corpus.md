@@ -134,7 +134,8 @@ ohraničený hranicemi slov (definice EDA).
 - Status `negated` a `family_history`: negační výraz z `mentions.negation.cues`
   stojí nejvýše `mentions.negation.window_chars` (40) znaků před klíčovým slovem
   ve stejné větě, aby zmínku zachytilo i pravidlo negace EDA.
-- Status `uncertain`: zmínka je formulovaná jako nejistá nebo hypotetická.
+- Status `uncertain`: zmínka je formulovaná jako nejistá nebo hypotetická, bez
+  negačního výrazu z `mentions.negation.cues`.
 
 **Volné úseky.** Hodnoty šablonových polí, obsah krátkých sekcí a formát řádků
 léků formuluje model volně, aby korpus nereprodukoval šablony MIMIC (R2).
