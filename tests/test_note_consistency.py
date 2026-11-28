@@ -104,6 +104,12 @@ def test_matching_note_passes(
         pytest.param(MentionStatus.AFFIRMED, "No diabetes.", False, id="potvrzena"),
         pytest.param(
             MentionStatus.NEGATED,
+            "Negative\u00a0for diabetes.",
+            True,
+            id="pevna-mezera",
+        ),
+        pytest.param(
+            MentionStatus.NEGATED,
             "No evidence of diabetes or of any xxxxxxxxxxxx diabetes.",
             True,
             id="poradi-vyrazu",

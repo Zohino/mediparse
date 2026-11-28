@@ -195,10 +195,11 @@ def _negation_violations(
         # Kopíruje negated_pattern z eda/R/mentions.R nad výrazy z configu syntetiky
         # (ty dostává zadání verbalizace): výrazy v pořadí configu a s mezerou jako
         # \s+, protože alternation by je řadila podle délky a mezeru brala doslova.
+        # RE2 v EDA chápe \s a hranice slov jen v ASCII; pevná mezera výraz nespojí.
         negated = re.compile(
             rf"\b(?:{cues})\b[^.;\n]{{0,{negation.window_chars}}}"
             rf"(?:{patterns[diagnosis].pattern})",
-            re.IGNORECASE,
+            re.IGNORECASE | re.ASCII,
         )
         asserted = patterns[diagnosis].search(negated.sub("", text)) is not None
         if status is MentionStatus.UNCERTAIN:
