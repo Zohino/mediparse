@@ -1,7 +1,7 @@
 Jméno: ___ Datum narození: ___
 Pohlaví: Žena Oddělení: CHIRURGIE
 Datum přijetí: ___ Číslo oddělení: ___
-Datum propuštění: ___ Lékař: ___
+Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
 Léky obsahující sulfanilamid
@@ -37,10 +37,10 @@ BŘICHO: měkké, citlivé v pravém horním kvadrantu, pozitivní Murphyho př�
 Významné výsledky:
 Laboratorní výsledky při přijetí: počet bílých krvinek 14,2, ALT 64, AST 51, celkový bilirubin 1,1, lipáza v normě.
 Ultrazvuk: mnohočetné žlučové kameny, ztluštění stěny žlučníku, tekutina v okolí žlučníku, sonografický Murphyho příznak.
-Intraoperačně: zánětlivý žlučník odstraněn bez poškození žlučových cest. Vzorek odeslán do ___ a výsledky čekají na zpracování při propuštění. Konečné vyhodnocení provedeno ___.
+Intraoperačně: zánětlivý žlučník odstraněn bez poškození žlučových cest. Vzorek odeslán do ___ a výsledky čekají na zpracování při propuštění. Závěrečné vyhodnocení provedl ___.
 
 Stručný průběh hospitalizace:
-Pacientka byla přijata na chirurgické oddělení ___, podávány intravenózní tekutiny, ceftriaxon a metronidazol. Byla odeslána na operační sál, kde Dr. ___ provedl nekomplikovanou laparoskopickou cholecystektomii. Po operaci byla postupně zvyšována strava, bolest byla kontrolována perorálním paracetamolem a horečka ustoupila. Byla propuštěna domů v dobrém stavu a zajištěna následná péče prostřednictvím ambulance ___.
+Pacientka byla přijata na chirurgické oddělení ___, podávány intravenózní tekutiny, ceftriaxon a metronidazol. Dr. ___ ji provedl laparoskopickou cholecystektomii bez komplikací. Po operaci byla postupně zaváděna běžná strava, bolest byla kontrolována perorálním paracetamolem a horečka ustoupila. Byla propuštěna domů v dobrém stavu a byla domluvena kontrola v ambulanci ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -49,7 +49,7 @@ Atorvastatin 20 mg večer
 
 Léky při propuštění:
 1. Paracetamol 650 mg každých 6 hodin podle potřeby na bolest.
-2. Oxykodon 5 mg každých 6 hodin podle potřeby na silnou bolest, krátkodobá léčba.
+2. Oxykodon 5 mg každých 6 hodin podle potřeby na silnou bolest, krátkodobě.
 3. Lisinopril 10 mg denně.
 4. Levotyroxin 50 mcg denně.
 5. Atorvastatin 20 mg večer.
@@ -63,13 +63,12 @@ Akutní cholecystitida
 Cholelitiáza
 
 Stav při propuštění:
-Duševní stav: Jasný a orientovaný.
+Duševní stav: Jasný a srozumitelný.
 Úroveň vědomí: Bdělý a reagující.
 Fyzická aktivita: Chodí, soběstačný.
 
 Pokyny pro propuštění:
-
-Byli jste hospitalizováni kvůli zánětu žlučníku, který byl laparoskopicky odstraněn. Udržujte řezné rány čisté a suché a můžete se sprchovat. Po dobu několika týdnů se vyhýbejte zvedání těžších předmětů, než je deset liber (cca 4,5 kg). V případě horečky, zhoršující se bolesti, zvracení, žloutnutí kůže nebo zarudnutí rány volejte na číslo ___ nebo kontaktujte doktora ___. Příští kontrola je naplánována na ___.
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl odstraněn laparoskopicky. Udržujte řezné rány čisté a suché, můžete se sprchovat. Po dobu několika týdnů se vyhýbejte zvedání těžších předmětů, než je deset kilogramů. V případě horečky, zhoršující se bolesti, zvracení, žloutnutí kůže nebo zarudnutí rány volejte na číslo ___ nebo kontaktujte doktora ___. Další kontrola je naplánována na ___.
 
 Pokyny pro další postup:
 ___

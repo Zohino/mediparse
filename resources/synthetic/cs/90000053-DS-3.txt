@@ -13,31 +13,31 @@ Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-___ letý muž odeslán z jeho ordinace v ___ po několika dnech, kdy pociťoval zrychlený, nepravidelný srdeční tep, únavu a mírnou dušnost při námaze. Při vyšetření měl zrychlený a nepravidelný puls. Popíral omdlení nebo bolest na hrudi. Byl odeslán do ___ za účelem regulace srdečního rytmu a antikoagulační terapie.
+___letý muž byl odeslán ze své ordinace v ___ po několika dnech, kdy pociťoval bušení srdce, nepravidelný srdeční rytmus, únavu a mírnou dušnost při námaze. Při vyšetření měl rychlý a nepravidelný puls. Popíral omdlení nebo bolest na hrudi. Byl odeslán do ___ za účelem regulace srdečního rytmu a antikoagulační terapie.
 PŘEHLED SYSTÉMŮ:
 Pozitivní nález únavy, zaznamenáno v ___. Negativní nález horečky, kašle nebo otoku nohou.
 
 Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
 Hypertenze
-Hyperlipidémie
+Hyperlipidemie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec, který utrpěl cévní mozkovou příhodu v ___
+Otec, který prodělal cévní mozkovou příhodu v ___
 
 Fyzikální vyšetření:
-Celkový stav: Dobrý, bez známek úzkosti
+Celkový stav: Dobrý, bez známek potíží
 Břicho: Měkké, netendrovatelné
 Končetiny: Bez otoků
 Kůže: Teplá a suchá
 
 Významné výsledky:
-EKG ukázalo nepravidelný, úzký komplexní rytmus bez výrazných P vln, frekvence 128. Dvakrát negativní troponin. Normální TSH. Draslík 4,1, kreatinin 0,9. Echokardiogram provedený v ___ ukázal mírně rozšířenou levou síň s zachovanou ejekční frakcí.
+EKG prokázalo nepravidelný srdeční rytmus s úzkými komplexy, bez výrazných P vln, frekvence 128. Dvakrát negativní troponin. Normální TSH. Draslík 4,1, kreatinin 0,9. Echokardiografie provedená v ___ ukázala mírně rozšířenou levou síň s zachovanou ejekční frakcí.
 
-Stručný popis průběhu hospitalizace:
+Stručný popis hospitalizace:
 Byl zahájen perorální metoprolol a diltiazem, a jeho srdeční frekvence se během jednoho dne stabilizovala na hodnoty kolem 70. Vzhledem k jeho riziku cévní mozkové příhody byl po diskusi o riziku krvácení zahájen apixaban. Funkce štítné žlázy a elektrolyty byly v normě. Chodil bez potíží a byl propuštěn ___.
 
 Léky při přijetí:
@@ -62,10 +62,11 @@ Hypertenze
 Stav při propuštění:
 Duševní stav: Jasný a srozumitelný.
 Úroveň vědomí: Bdělý a reagující.
-Stav aktivity: Chodí, soběstačný.
+Fyzická aktivita: Chodí, soběstačný.
 
 Pokyny pro propuštění:
-Byli jste přijati s rychlým, nepravidelným srdečním tepem. Užívajte nové léky na regulaci srdečního tepu a antikoagulancia každý den podle pokynů. Okamžitě nahlaste krvácení, černou stolici, omdlení nebo bolest na hrudi. Dodržujte termín návštěvy u ___ a nechte si udělat krevní testy v ___.
 
-Pokyny pro kontrolu:
+Byli jste přijati do nemocnice kvůli rychlému a nepravidelnému srdečnímu tepu. Užívajte nové léky na regulaci srdečního tepu a léky na ředění krve každý den podle pokynů. V případě krvácení, černých stolic, mdlob nebo bolesti na hrudi okamžitě kontaktujte lékaře. Dodržujte termín kontroly u ___ a nechte si udělat krevní testy v ___.
+
+Pokyny pro další postup:
 ___

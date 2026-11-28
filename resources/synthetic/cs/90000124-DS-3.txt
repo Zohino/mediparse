@@ -1,74 +1,85 @@
 Jméno: ___ Datum narození: ___
-Pohlaví: Žena Oddělení: MEDICÍNA
+Pohlaví: Žena Oddělení: Medicína
 Datum přijetí: ___ Číslo oddělení: ___
 Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Žádné známé alergie na léky
+Penicilin
 
 Hlavní potíže:
-Otok nohou a únava
+Kašel a dušnost
 
 Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-___ letá žena s chronickým onemocněním ledvin, která byla odeslána z ___ po třech dnech zhoršujícího se otoku nohou, únavy a snížené chuti k jídlu. Upozornila na snížené množství moči a mírnou dušnost v poloze vleže. Popírala horečku, produktivní kašel nebo jakékoli obavy z pneumonie a zobrazovací vyšetření hrudníku neukázalo žádnou pneumonii. Její lékař v ___ zjistil zvýšenou hladinu kreatininu a odeslal ji. Při přijetí byla v stabilním stavu.
+___letá žena s chronickým onemocněním ledvin se dostavila do nemocnice ___ s třídenním kašlem, mírnou horečkou a dušností, která začala ___. Popírá, že by v minulosti měla pneumonii, a zobrazovací vyšetření hrudníku neukázala žádnou pneumonii. Uvádí sníženou chuť k jídlu, mírný otok nohou a snížené množství moči. Její hladina kreatininu byla vyšší než výchozí hodnota. Byla jí podána tekutina a přijata k monitorování. Při přijetí byly vitální funkce stabilní.
 
 Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
 Hypertenze
 Hyperlipidémie
+Pod dohledem doktora ___ kvůli péči o ledviny
 
 Anamnéza předchozích chirurgických zákroků:
-Cholecystektomie v ___
+Apendektomie v roce ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí. Otec s onemocněním srdce v ___.
+Matka s hypertenzí
 
 Fyzikální vyšetření:
-Bez horečky, v klidu se cítí dobře.
-Hlava, uši, oči, nos, hrdlo: Vlhké sliznice, bez ikteru.
-Plíce: Oboustranně čisté, bez chrůpků.
-Břicho: Měkké, netendrové, neztuhlé.
-Končetiny: 2+ otok s prohlubní až ke kolenům.
-Neurologické: Bdělá, orientovaná, bez ložiskových příznaků.
+Vitální funkce stabilní, bez horečky, v klidu se cítí dobře, dýchá normálně.
+Hlava, oči, uši, nos, hrdlo:
+Vlhké sliznice, bez žloutenky.
+Plíce:
+Oboustranně čisté, bez sípotu.
+Břicho:
+Měkké, netendrovatelné, neztuhlé.
+Končetiny:
+Mírný oboustranný edém.
+Neurologické vyšetření:
+Bdělá, orientovaná, bez ložiskových příznaků.
 
 Významné výsledky:
-Laboratorní výsledky při přijetí z ___ ukázaly kreatinin 3,1, BUN 58, draslík 5,3, glukózu 212 a hemoglobin 10,4. V moči bylo zjištěno 2+ bílkovin a žádná krev. Opakované měření kreatininu dne ___ ukázalo hodnotu 2,6 a draslíku 4,6. Ultrazvuk ledvin ukázal malé echogenní ledviny bez hydronefrózy. Rentgen hrudníku byl pořízen při přijetí.
+Při přijetí byly významné hodnoty kreatininu 2,1 (výchozí hodnota 1,8) a glukózy 210. Počet bílých krvinek normální. Sodík a draslík normální. Rentgen hrudníku ___ ukázal čisté plíce. CT hrudníku provedené ___ neukázalo nic významného, kromě malé oboustranné atelektázy. Vyšetření moči ukázalo mírnou proteinurii bez infekce. Opakované vyšetření kreatininu se zlepšilo na 1,9 při propuštění. Hladina hemoglobinu stabilní na 11,2.
 ZÁVĚR:
-Mírná vaskulární kongesce, bez ložiskové konsolidace nebo výpotku.
+Čisté plíce, žádný akutní kardiopulmonální proces.
 
 Stručný popis průběhu hospitalizace:
-Byla přijata pro objemové přetížení s zhoršující se funkcí ledvin. Byla jí podána intravenózně furosemid, což vedlo k dobré diuréze a úbytku několika kilogramů, a otok nohou se zlepšil. Hladina kreatininu klesla k výchozí hodnotě a hladina draslíku se normalizovala po úpravě stravy. Hladina glukózy byla regulována pomocí inzulínu v dávkování podle glykemie. Nefrologie v ___ prostudovala její případ a souhlasila s ambulantní kontrolou v ___. Při propuštění dobře jedla a chodila samostatně.
+Byla přijata na interní oddělení a vyšetřena týmem ___. Byla jí podána jemná intravenózní tekutina a její hladina kreatininu se postupně vracela k výchozí hodnotě. Její kašel byl připisován virové infekci horních cest dýchacích a ustoupil při podpůrné léčbě; antibiotika nebyla nutná. Saturace kyslíkem zůstala normální při dýchání okolním vzduchem. Hladina cukru v krvi byla regulována obvyklým režimem a pomocí posuvné stupnice. Byla vyšetřena ___ nefrologem v nemocnici ___, který souhlasil s ambulantní kontrolou. Dobře snášela stravu, chodila samostatně a byla propuštěna domů ve stabilním stavu.
 
 Léky při přijetí:
-Metformin, lisinopril, atorvastatin, aspirin denně
+Metformin 500 mg dvakrát denně; amlodipin 5 mg denně; atorvastatin 20 mg večer; kalcitriol 0,25 mcg denně.
 
 Léky při propuštění:
-1. Furosemid 40 mg perorálně denně
-2. Atorvastatin 20 mg perorálně večer
-3. Aspirin 81 mg perorálně denně
-4. Inzulín glargin 10 jednotek před spaním podle pokynů ___
-Metformin a lisinopril byly vysazeny, dokud nebudou znovu zkontrolovány testy funkce ledvin.
+1. Metformin 500 mg perorálně dvakrát denně
+2. Amlodipin 5 mg perorálně jednou denně
+3. Atorvastatin 20 mg perorálně každou noc
+4. Kalcitriol 0,25 mcg perorálně jednou denně
+5. Paracetamol 500 mg každých šest hodin podle potřeby při horečce nebo bolestech
 
 Způsob propuštění:
-Domů s péčí od ___
+Domů
 
 Diagnóza při propuštění:
-Chronické onemocnění ledvin s objemovým přetížením
 Diabetes mellitus 2. typu
+Chronické onemocnění ledvin s akutním zhoršením, které se zlepšilo
+Virové onemocnění horních cest dýchacích
 
 Stav při propuštění:
-Duševní stav: Jasný a srozumitelný.
-Úroveň vědomí: Bdělý a reagující.
-Fyzická aktivita: Schopný chůze, soběstačný.
+Stabilní
+Duševní stav:
+Jasný a srozumitelný.
+Úroveň vědomí:
+Bdělý a reagující.
+Stav aktivity:
+Schopný chůze, soběstačný.
 
-Pokyny pro propuštění:
-Byli jste hospitalizováni, protože se v těle hromadila tekutina v důsledku špatné funkce ledvin. Užívajte diuretikum každé ráno a denně se važte. Volejte na číslo ___, pokud se vaše váha během jednoho dne zvýší o více než jeden a půl kilogramu, nebo pokud se zhorší otoky či dýchání. Omezte příjem soli a vyhýbejte se užívání ibuprofenu. Nechte si v ordinaci ___ do jednoho týdne opakovat krevní testy.
+Pokyny při propuštění:
+Byli jste hospitalizováni kvůli kašli a zhoršení funkce ledvin. Pijte tekutiny podle doporučení a vyhýbejte se ibuprofenu a podobným lékům proti bolesti. Užívajte léky podle seznamu. V případě horečky, zhoršení dušnosti nebo sníženého objemu moči volejte na číslo ___ nebo se vraťte na pohotovost. Vaše nefrologická ambulance na adrese ___ vás bude kontaktovat do ___.
 
 Pokyny pro kontrolu:
 ___

@@ -7,68 +7,67 @@ Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Slabost a snížená chuť k jídlu
+Slabost a nadměrná žízeň
 
 Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-___letá žena odeslána z ___ kliniky po třech dnech únavy, nevolnosti a sníženém příjmu potravy. Popírá horečku, bolest na hrudi nebo pády. Při přijetí byly vitální funkce stabilní.
+Tato ___letá žena s anamnézou špatně kontrolované hladiny cukru v krvi se dostavila na ___ pohotovost s třídenní slabostí, žízní a častým močením.
 
 Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
 Hypertenze
-Hyperlipidémie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka v anamnéze měla chronické onemocnění ledvin. Otec je zdravý.
+V rodině se vyskytuje chronické onemocnění ledvin u její matky.
 
 Fyzikální vyšetření:
 Celkový stav:
-Unavená, v klidu se cítí dobře
+Dobře se cítí, bez známek úzkosti.
 Hlava, oči, uši, nos, hrdlo:
-Suché sliznice
+Suché sliznice.
 Krk:
-Pružný
-Plíce:
-Oboustranně čisté
+Pružný.
+Plicní systém:
+Čistý na obou stranách.
 Končetiny:
-Bez otoků
+Bez otoků.
 
 Významné výsledky:
 LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
-Sodík v dolní normě, kreatinin blízko výchozí hodnoty, glukóza zvýšená. Vyšetření moči bez známek infekce. Rentgen hrudníku ukázal čisté plíce a normální velikost srdce. EKG ukázalo sinusový rytmus.
+Glukóza 412 na ___. Bikarbonát 22, kreatinin 0,9, sodík 135, draslík 4,4. Hemoglobin A1c 11,2 %. V moči zjištěny ketony a glukóza, jinak bezvýznamné.
 
 Stručný popis průběhu hospitalizace:
-Byla vyšetřena týmem ___ a podána intravenózní tekutiny, což vedlo ke zlepšení chuti k jídlu. Glukóza byla regulována inzulínem a následně domácím režimem. Dne ___ chodila samostatně a dobře snášela stravu.
+Byla léčena intravenózními tekutinami a inzulínem, a její hyperglykémie se do ___ zlepšila. Tým ___ jí poskytl informace o výživě a kontrole hladiny glukózy. Byla převedena na subkutánní inzulín a metformin a propuštěna domů ve stabilizovaném stavu.
 
 Léky při přijetí:
-Metformin, lisinopril, atorvastatin
+Metformin 500 mg dvakrát denně
+Lisinopril 10 mg denně
 
 Léky při propuštění:
-Metformin 500 mg dvakrát denně. Lisinopril 10 mg denně. Atorvastatin 20 mg večer. Metformin vysadit, pokud není schopna jíst nebo pít.
+Inzulín glargin 20 jednotek večer
+Metformin 1000 mg dvakrát denně
+Lisinopril 10 mg denně
+Testovací proužky na měření glukózy
 
 Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Diabetes mellitus 2. typu s dehydratací
+Diabetes mellitus 2. typu s hyperglykémií
 
 Stav při propuštění:
-Dobrý
-Duševní stav:
-Bdělá a orientovaná
-Úroveň vědomí:
-Bdělá a pozorná
-Stav aktivity:
-Chodí, soběstačná
+Duševní stav: Jasný a srozumitelný.
+Úroveň vědomí: Bdělá a reaguje.
+Fyzická aktivita: Chodí, soběstačná.
 
 Pokyny pro propuštění:
-Byla léčena pro dehydrataci. Pravidelně pijte tekutiny a užívejte léky podle seznamu. Denně si kontrolujte hladinu cukru v krvi. V případě zvracení nebo slabosti volejte ___. Prosím, co nejdříve navštivte doktora ___.
+Byla jste přijata s velmi vysokou hladinou cukru v krvi. Měřte si glukózu před jídlem a před spaním, užívejte léky podle předpisu a dodržujte termín návštěvy na ___ klinice.
 
 Pokyny pro kontrolu:
 ___

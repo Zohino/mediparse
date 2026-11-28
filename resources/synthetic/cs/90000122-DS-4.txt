@@ -13,7 +13,7 @@ Hlavní chirurgický zákrok nebo invazivní procedura:
 Laparoskopická cholecystektomie provedená doktorem ___
 
 Anamnéza současného onemocnění:
-___ letá žena s žlučovými kameny, která se dostavila do ___ s dvoudenní bolestí v pravém horním kvadrantu břicha, která vyzařuje do zad, doprovázenou nevolností, zvracením a subjektivními příznaky horečky. Bolest začala po konzumaci tučného jídla a neustoupila po užití antacid. Pacientka popírá žloutenku, tmavou moč nebo bledou stolici. Příznaky se objevily ___. Byla převezena na chirurgické vyšetření.
+___letá žena s žlučovými kameny, která se dostavila do ___ s dvoudenní bolestí v pravém horním kvadrantu břicha, která vyzařuje do zad, doprovázenou nevolností, zvracením a subjektivními příznaky horečky. Bolest začala po konzumaci tučného jídla a neustoupila po užití antacid. Pacientka popírá žloutenku, tmavou moč nebo bledou stolici. Příznaky se objevily ___. Byla převezena na chirurgické vyšetření.
 
 Anamnéza předchozích onemocnění:
 Hypertenze
@@ -69,7 +69,8 @@ Fyzická aktivita:
 Chodí, soběstačný
 
 Pokyny pro propuštění:
-Byli jste přijati s zánětem žlučníku a podstoupili jste laparoskopickou operaci k jeho odstranění. Můžete se sprchovat a nechat na incize působit mýdlo, ale nekoupejte se ve vaně. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů než deset kilogramů. V případě horečky, zhoršení bolesti břicha, žloutenky, zvracení nebo zarudnutí v místě incize volejte doktora ___ nebo se vraťte do ___.
 
-Pokyny pro kontrolu:
+Byli jste přijati do nemocnice kvůli zánětu žlučníku a podstoupili jste laparoskopickou operaci, při které byl žlučník odstraněn. Můžete se sprchovat a nechat mýdlo stékat po jizvách, ale nekoupejte se ve vaně. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů, než je deset kilogramů. V případě horečky, zhoršení bolesti břicha, žloutnutí kůže, zvracení nebo zarudnutí v oblasti jizev kontaktujte doktora ___ nebo se vraťte do ___.
+
+Pokyny pro kontrolní vyšetření:
 ___

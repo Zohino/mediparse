@@ -1,5 +1,5 @@
 Jméno: ___ Datum narození: ___
-Pohlaví: M Oddělení: MEDICÍNA
+Pohlaví: muž Oddělení: MEDICÍNA
 Datum přijetí: ___ Číslo oddělení: ___
 Datum propuštění: ___ Ošetřující lékař: ___
 
@@ -13,7 +13,7 @@ Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-___letý muž s hypertenzí se dostavil do ___ s třemi dny trvající horečkou, produktivním kašlem a celkovou slabostí po návratu z cesty ___. Byl vyšetřen svým ošetřujícím lékařem, doktorem ___, který ho odeslal na pohotovostní oddělení k dalšímu vyšetření a léčbě jeho symptomů.
+___letý muž s hypertenzí se dostavil do ___ s třemi dny trvající horečkou, produktivním kašlem a celkovou slabostí po návratu z cesty ___. Byl vyšetřen svým ošetřujícím lékařem, doktorem ___, který ho odeslal na pohotovost k dalšímu vyšetření a léčbě jeho příznaků.
 
 Anamnéza předchozích onemocnění:
 Hypertenze
@@ -37,22 +37,22 @@ Končetiny: teplé, bez otoků.
 
 Významné výsledky:
 Laboratorní vyšetření při přijetí odhalila mírnou leukocytózu a zvýšené CRP. Kultivace krve neprokázala růst bakterií. Rentgen hrudníku provedený v ___ byl zhodnocen radiologem.
-NÁLEZ: Mírné ztluštění stěn průdušek bez ložiskové konsolidace nebo výpotku. Velikost srdce je normální. Žádné akutní abnormality kostí. Není nutné provádět další zobrazovací vyšetření.
+NÁLEZ: Mírné ztluštění stěn průdušek bez ložiskové konsolidace nebo výpotku. Velikost srdce je normální. Žádné akutní abnormality kostí. Není nutné provádět kontrolní zobrazovací vyšetření.
 
 Stručný průběh hospitalizace:
 Byl léčen na akutní bronchitidu perorálním azithromycinem a podpůrnou léčbou. Nebyly zjištěny známky pneumonie na zobrazovacích vyšetřeních a během 24 hodin se horečka ustoupila. Saturace kyslíkem zůstala normální při dýchání okolním vzduchem. Byl vyšetřen ___ a dobře snášel stravu. Byl propuštěn domů ve stabilizovaném stavu s doporučením ambulantní kontroly.
 PŘECHODNÁ OTÁZKY:
-- Opakované rentgenové vyšetření hrudníku za šest týdnů, pokud kašel přetrvává.
+- Opakovat rentgen hrudníku za šest týdnů, pokud kašel přetrvává.
 - Kontrola krevního tlaku u doktora ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně. Multivitamin denně. Ibuprofen podle potřeby.
 
 Léky při propuštění:
-Azithromycin 250 mg, užívejte jednu tabletu denně po dobu dalších čtyř dnů. Lisinopril 10 mg denně. Guaifenesin 600 mg dvakrát denně podle potřeby na kašel. Acetaminofen 650 mg každých šest hodin podle potřeby na horečku.
+Azithromycin 250 mg, užívat jednu tabletu denně po dobu dalších čtyř dnů. Lisinopril 10 mg denně. Guaifenesin 600 mg dvakrát denně podle potřeby na kašel. Acetaminophen 650 mg každých šest hodin podle potřeby na horečku.
 
 Způsob propuštění:
-Domů s péčí od ___
+Domů s pomocí od ___
 
 Diagnóza při propuštění:
 Akutní bronchitida
@@ -60,10 +60,12 @@ Hypertenze
 
 Stav při propuštění:
 Stabilizovaný, bez horečky, dobře snáší stravu.
-Stav aktivity: Samostatný
+Stav aktivity: Samostatný.
 
 Pokyny pro propuštění:
-Byli jste hospitalizováni v ___ kvůli respirační infekci. Užijte si antibiotika podle předpisu, pijte dostatek tekutin a odpočívejte. V případě horečky, zhoršení kašle, dušnosti nebo bolesti na hrudi kontaktujte svého lékaře nebo se vraťte na pohotovostní oddělení. Dodržujte plán kontroly u ___.
 
-Pokyny pro kontrolu:
+Byli jste hospitalizováni v zařízení ___ kvůli respirační infekci. Užijte antibiotika podle předpisu, pijte dostatek tekutin a odpočívejte. V případě horečky, zhoršení kašle, dušnosti nebo bolesti na hrudi kontaktujte svého lékaře nebo se vraťte na pohotovost. Dodržujte plán kontroly u ___.
+
+Pokyny pro kontrolní vyšetření:
+
 ___

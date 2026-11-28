@@ -31,17 +31,17 @@ Matka s hypertenzí
 Fyzikální vyšetření:
 Celkový stav: Bdělá, v pohodě, mírně zvýšená tělesná teplota.
 Krk: Pohyblivý.
-SRDEČNÍ: Pravidelný rytmus, bez šelestů.
-BŘICHO: Měkké, netendrovatelné, neztuhlé.
+SRDEČNÍ: Pravidelný rytmus, bez šelestu.
+BŘICHO: Měkké, netendrovatelné, neztvrdlé.
 NEUROLOGICKÉ: Bez ložiskových příznaků, odpovídá adekvátně.
 
 Významné výsledky:
-Při přijetí laboratorní testy ukázaly zvýšený počet bílých krvinek a hladinu glukózy 245. Krevní kultury odebrané v ___ po dvou dnech nevykázaly růst. Ultrazvukové vyšetření provedené v ___ neprokázalo hlubokou žilní trombózu v pravé noze. Hodnota hemoglobinu A1c byla zvýšená. Kreatinin byl v normě.
+Při přijetí laboratorní testy ukázaly zvýšený počet bílých krvinek a hladinu glukózy 245. Krevní kultury odebrané v ___ po dvou dnech nevykázaly žádný růst. Ultrazvukové vyšetření provedené v ___ neprokázalo hlubokou žilní trombózu v pravé noze. Hodnota hemoglobinu A1c byla zvýšená. Kreatinin byl v normě.
 ZÁVĚR:
 Měkké tkáně jsou oteklé, což odpovídá celulitidě, bez hnisavého abscesu, který by bylo nutné drenovat.
 
 Stručný popis hospitalizace:
-Pacientka byla přijata a zahájena intravenózní léčba cefazolinem. Okraj erytému byl označen a denně sledován. Byla vyšetřena Dr. ___ z hlediska možnosti drenáže případného abscesu, což se neukázalo jako nutné. Hladina glukózy byla regulována pomocí inzulinové pumpy. Krevní tlak zůstal stabilní při užívání domácích léků. Zčervenání a bolest se postupně zlepšovaly a do ___ měla pacientka normální tělesnou teplotu a dobře snášela perorální cefalexin. Před propuštěním byly laboratorní testy znovu zkontrolovány. Pacientka chodila samostatně a byla propuštěna domů.
+Pacientka byla přijata a zahájena intravenózní léčba cefazolinem. Okraj zarudnutí byl označen a denně sledován. Byla vyšetřena Dr. ___ z hlediska možnosti drenáže případného abscesu, což se neukázalo jako nutné. Hladina glukózy byla regulována pomocí inzulinové pumpy. Krevní tlak zůstal stabilní při užívání domácích léků. Zarudnutí a bolest se postupně zlepšovaly a do ___ měla pacientka normální tělesnou teplotu a dobře snášela perorální cefalexin. Před propuštěním byly laboratorní testy znovu zkontrolovány. Pacientka chodila samostatně a byla propuštěna domů.
 
 Léky při přijetí:
 Metformin 500 mg dvakrát denně. Lisinopril 10 mg denně. Aspirin 81 mg denně.
@@ -51,10 +51,10 @@ Léky při propuštění:
 2. Metformin 500 mg perorálně dvakrát denně.
 3. Lisinopril 10 mg perorálně denně.
 4. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest.
-Léky vydala lékárna ___.
+Léky vydány lékárnou ___.
 
 Způsob propuštění:
-Domů s péčí od ___
+Domů s pomocí služeb od ___.
 
 Diagnóza při propuštění:
 Celulitida pravé dolní končetiny
@@ -62,11 +62,11 @@ Diabetes mellitus
 
 Stav při propuštění:
 Dobrý
-Úroveň vědomí: Bdělá a komunikativní
-Stav aktivity: Ambulantní, soběstačná
+Úroveň vědomí: Bdělý a reagující
+Stav aktivity: Chodí, soběstačný
 
 Pokyny pro propuštění:
-Užívejte cefalexin, dokud nedokončíte celou kúru. Při sezení držte nohu ve zvýšené poloze a oblast jemně každý den omyvejte. V případě horečky, šíření zarudnutí, silné bolesti nebo výskytu hnisu se vraťte na kontrolu. V případě dotazů volejte lékaře ___ nebo na číslo ___, pokud máte potíže s domluvením termínu.
+Užívejte cefalexin, dokud nedokončíte celou kúru. Při sezení držte nohu ve zvýšené poloze a oblast jemně každý den omyvejte. V případě horečky, šíření zarudnutí, silné bolesti nebo výskytu hnisu se vraťte do nemocnice. V případě dotazů volejte doktora ___ nebo volejte na číslo ___, pokud budete mít potíže s domluvením termínu.
 
-Pokyny pro kontrolu:
+Pokyny pro kontrolní vyšetření:
 ___

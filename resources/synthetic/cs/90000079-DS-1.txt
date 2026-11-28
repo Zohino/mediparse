@@ -1,5 +1,5 @@
 Jméno: ___ Datum narození: ___
-Pohlaví: Muž Oddělení: MEDICÍNA
+Pohlaví: M Oddělení: MEDICÍNA
 Datum přijetí: ___ Číslo oddělení: ___
 Datum propuštění: ___ Ošetřující lékař: ___
 
@@ -13,7 +13,7 @@ Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný.
 
 Anamnéza současného onemocnění:
-Pacient se dostavil do ___ s několikden trvajícím zhoršováním otoku nohou a únavou při námaze. Byl vyšetřen v ___ svým ošetřujícím lékařem, který zaznamenal zvýšenou srdeční frekvenci a poslal ho na pohotovost. Pacient popřel bolest na hrudi, horečku nebo synkopu. Příznaky se objevily přibližně ___ dní před přijetím a postupně se zhoršovaly.
+Pacient se dostavil do ___ s několikden trvajícím zhoršováním otoku nohou a únavou při námaze. Byl vyšetřen v ___ svým ošetřujícím lékařem, který zaznamenal zvýšenou srdeční frekvenci a odeslal ho na pohotovost. Pacient popřel bolest na hrudi, horečku nebo synkopu. Příznaky se objevily přibližně ___ dní před přijetím a postupně se zhoršovaly.
 
 Anamnéza předchozích onemocnění:
 Fibrilace síní s antikoagulační terapií, hypertenze, hyperlipidemie, hypotyreóza. Pod dohledem Dr. ___ v rámci kardiologické péče.
@@ -27,7 +27,7 @@ Otec s hypertenzí.
 Fyzikální vyšetření:
 Celkový stav: Dobrý, bez známek úzkosti.
 Hlava, oči, uši, nos, hrdlo: Vlhké sliznice.
-Plíce: Slabé bazální chrůpky.
+Plíce: Slabé bilaterální chrůpky.
 Břicho: Měkké, netendrové, neztuhlé.
 Končetiny: Mírný bilaterální otok s prohlubněmi.
 Neurologické vyšetření: Bdělý, bez ložiskových příznaků.
@@ -40,8 +40,8 @@ LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
 Leukocyty 6,8, hemoglobin 12,9, sodík 138, draslík 4,0, kreatinin 1,1.
 
 Stručný průběh hospitalizace:
-Pacient byl přijat a podán intravenózně furosemid, s dobrým diurézním účinkem a postupným zlepšením otoku a dýchání. Srdeční frekvence byla kontrolována pomocí beta-blokátoru, který pacient užívá doma. Echokardiografie provedená v ___ ukázala mírně sníženou systolickou funkci. Kardiolog v ___ případ zhodnotil a souhlasil s navrženým postupem. Pacient byl převeden na perorální diuretika a propuštěn v euvolemickém stavu.
-PŘECHODNÁ OBLASTI:
+Pacient byl přijat a podán mu byl intravenózně furosemid, což vedlo k dobré diuréze a postupnému zlepšení otoku a dýchání. Srdeční frekvence byla kontrolována pomocí beta-blokátoru, který užíval doma. Echokardiografie provedená v ___ ukázala mírně sníženou systolickou funkci. Kardiolog v ___ případ zhodnotil a souhlasil s plánem léčby. Pacient byl převeden na perorální diuretika a propuštěn v euvolemickém stavu.
+PROBLÉMY PŘI PŘECHODU DO DOMÁCÍ PÉČE:
 - Kontrola základního metabolického panelu v ___ do jednoho týdne.
 - Následná kontrola u kardiologa a opakování echokardiografie.
 
@@ -62,12 +62,10 @@ Hypotyreóza
 
 Stav při propuštění:
 Duševní stav: Jasný a srozumitelný.
-Fyzická aktivita: Chodí, soběstačný.
+Fyzická aktivita: Schopný chůze, soběstačný.
 
 Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zadržování tekutin v důsledku srdečního selhání. Každé ráno se zvažte a zavolejte na číslo ___, pokud se vaše váha během jednoho dne zvýší o více než jeden a půl kilogramu. Omezte příjem soli. Užívejte všechny léky podle předpisu. V případě bolesti na hrudi, zhoršení dušnosti nebo mdlob se vraťte do ___.
 
-Byli jste hospitalizováni kvůli přetížení organismu tekutinami v důsledku srdečního selhání. Každé ráno se zvažte a zavolejte na číslo ___, pokud se vaše váha během jednoho dne zvýší o více než jeden a půl kilogramu. Omezte příjem soli. Užívejte všechny léky podle pokynů. V případě bolesti na hrudi, zhoršení dušnosti nebo mdlob se vraťte do ___.
-
-Pokyny pro kontrolní vyšetření:
-
+Pokyny pro kontrolu:
 ___

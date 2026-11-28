@@ -7,69 +7,59 @@ Allergies:
 No known drug allergies
 
 Chief Complaint:
-Right flank pain and fever
+Chest pain
 
 Major Surgical or Invasive Procedure:
 None
 
 History of Present Illness:
-___ year old man with two days of right flank pain and fever, referred from ___ clinic.
+___ year old man presented with chest pain and shortness of breath after ___ days of worsening symptoms.
 
 Past Medical History:
 Hypertension
-Kidney stones
-Appendectomy
+Hyperlipidemia
 
 Social History:
 ___
 
 Family History:
-Father with diabetes. Mother healthy.
+Family history of diabetes mellitus in father. Mother with hypertension.
 
 Physical Exam:
-Gen:
-Uncomfortable, febrile
-HEENT:
-Moist mucosa
-Lungs:
-Clear bilaterally
-CARDIAC:
-Regular rhythm
-Abdomen:
-Right flank tenderness
-Neuro:
-Alert, nonfocal
+Gen: Comfortable, no distress
+HEENT: Normal
+Lungs: Clear bilaterally
+CARDIAC: Regular rhythm
+Abdomen: Soft, nontender
+Neuro: Nonfocal
 
 Pertinent Results:
-White count elevated on admission. Urinalysis showed infection. Imaging showed a small stone without obstruction.
+Troponin negative twice. ECG showed sinus rhythm. Chest radiograph clear. Echocardiogram showed normal ejection fraction.
 
 Brief Hospital Course:
-Treated with intravenous antibiotics and fluids for urinary infection. Fever resolved, pain improved, diet tolerated. Urology at ___ advised outpatient follow up.
+Patient was observed on telemetry, ruled out for myocardial infarction, and improved with rest. Blood pressure regimen was adjusted. He will follow up at ___ clinic.
 
 Medications on Admission:
-Lisinopril daily
+Lisinopril and atorvastatin daily
 
 Discharge Medications:
-Ciprofloxacin twice daily for seven days. Continue lisinopril. Acetaminophen as needed.
+Lisinopril 10 mg daily. Atorvastatin 40 mg nightly. Aspirin 81 mg daily.
 
 Discharge Disposition:
 Home
-Facility:
-___
+Facility: ___
 
 Discharge Diagnosis:
-Pyelonephritis
-Nephrolithiasis
+Non-cardiac chest pain
+Hypertension
 
 Discharge Condition:
 Stable
-Mental Status:
-Clear and coherent
-Level of Consciousness:
-Alert and interactive
+Mental Status: Alert and oriented
+Level of Consciousness: Awake and alert
 
 Discharge Instructions:
-Drink plenty of fluids and finish all antibiotics. Return for fever, vomiting, or worsening pain.
+Take medications as prescribed, avoid strenuous activity, and return for worsening chest pain.
 
 Followup Instructions:
 ___

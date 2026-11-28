@@ -7,69 +7,59 @@ Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest v pravé oblasti boku a horečka
+Bolest na hrudi
 
 Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-___letý muž s bolestí v pravé oblasti boku a horečkou, trvajícími dva dny, odeslán z ___ kliniky.
+___letý muž se dostavil s bolestí na hrudi a dušností po ___ dnech zhoršujících se příznaků.
 
 Anamnéza předchozích onemocnění:
 Hypertenze
-Ledvinové kameny
-Apendektomie
+Hyperlipidemie
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Otec má diabetes. Matka je zdravá.
+V rodině se vyskytuje diabetes mellitus u otce. Matka má hypertenzi.
 
 Fyzikální vyšetření:
-Celkový stav:
-Nepohodlný, má horečku
-Hlava, oči, uši, nos, hrdlo:
-Vlhké sliznice
-Plíce:
-Čisté na obou stranách
-SRDEČNÍ:
-Pravidelný rytmus
-Břicho:
-Citlivost v pravé oblasti boku
-Neurologické:
-Bdělý, bez ložiskových příznaků
+Celkový stav: Dobrý, bez známek úzkosti
+Hlava, oči, uši, nos, hrdlo: Normální
+Plíce: Oboustranně čisté
+SRDCE: Pravidelný rytmus
+Břicho: Měkké, netendrovatelné
+Neurologické: Bez ložiskových příznaků
 
 Významné výsledky:
-Při přijetí zvýšený počet bílých krvinek. Vyšetření moči prokázalo infekci. Zobrazovací metody ukázaly malý kámen bez obstrukce.
+Dvakrát negativní troponin. EKG ukázalo sinusový rytmus. Rentgen hrudníku bez patologických nálezů. Echokardiogram ukázal normální ejekční frakci.
 
 Stručný popis hospitalizace:
-Léčen intravenózními antibiotiky a infuzemi pro léčbu infekce močových cest. Horečka ustoupila, bolest se zlepšila, pacient toleroval stravu. Urolog z ___ doporučil ambulantní sledování.
+Pacient byl monitorován pomocí telemetrie, vyloučena byla myokardiální infarkce a jeho stav se zlepšil po odpočinku. Bylo upraveno schéma léčby hypertenze. Bude pokračovat v léčbě v ambulanci ___.
 
 Léky při přijetí:
-Lisinopril denně
+Lisinopril a atorvastatin denně
 
 Léky při propuštění:
-Ciprofloxacin dvakrát denně po dobu sedmi dnů. Pokračovat v užívání lisinoprilu. Acetaminofen podle potřeby.
+Lisinopril 10 mg denně. Atorvastatin 40 mg večer. Aspirin 81 mg denně.
 
 Způsob propuštění:
 Domů
-Zařízení:
-___
+Zařízení: ___
 
 Diagnóza při propuštění:
-Pyelonefritida
-Nefrolitiáza
+Bolest na hrudi ne kardiovaskulárního původu
+Hypertenze
 
 Stav při propuštění:
 Stabilní
-Duševní stav:
-Jasný a srozumitelný
-Úroveň vědomí:
-Bdělý a reagující
+Duševní stav: Bdělý a orientovaný
+Úroveň vědomí: Bdělý a orientovaný
 
 Pokyny pro propuštění:
-Pijte dostatek tekutin a dokončete všechny antibiotika. V případě horečky, zvracení nebo zhoršení bolesti se vraťte.
+Užívejte léky podle předpisu, vyhýbejte se namáhavé fyzické aktivitě a v případě zhoršení bolesti na hrudi se vraťte.
 
-Pokyny pro další sledování:
+Pokyny pro kontrolu:
 ___

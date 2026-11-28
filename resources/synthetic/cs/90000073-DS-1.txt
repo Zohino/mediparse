@@ -40,7 +40,7 @@ Kreatinin zvýšený na 3,4 s eGFR 14, blízko její předchozí hodnotě zjišt
 
 Stručný průběh hospitalizace:
 Byla léčena dietou s nízkým obsahem draslíku, sorbentem a mírnou diurézou, což vedlo ke zlepšení otoku a elektrolytové rovnováhy. Funkce ledvin se stabilizovala a nefrolog ji vyšetřil v ___. Frekvence zůstala kontrolovaná při domácí medikaci. Hladina glukózy byla regulována obvyklým režimem.
-PŘECHODNÉ PROBLÉMY:
+PŘECHODNÁ OTÁZKY:
 Opakované vyšetření krevních parametrů za jeden týden. Návštěva u nefrologa v ___.
 
 Léky při přijetí:
@@ -51,7 +51,7 @@ Léky při propuštění:
 2. Metoprolol succinat 50 mg denně
 3. Furosemid 40 mg denně
 4. Amlodipin 5 mg denně
-5. Sevelamer s jídlem
+5. Sevelamer během jídla
 Metformin byl vysazen.
 
 Způsob propuštění:
@@ -70,5 +70,5 @@ Stav aktivity: Chodí s pomocí chodítka.
 Pokyny při propuštění:
 Byli jste hospitalizováni kvůli otoku a vysoké hladině draslíku. Každé ráno se važte a volejte ___, pokud se vaše váha zvýší o tři libry. Omezte příjem soli a potravin s vysokým obsahem draslíku. Užívajte léky podle seznamu a docházejte na všechny schůzky s ___.
 
-Pokyny pro další postup:
+Další pokyny:
 ___

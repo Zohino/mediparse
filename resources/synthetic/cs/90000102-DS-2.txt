@@ -13,11 +13,11 @@ Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-Pacientka se dostavila do ___ s třemi dny trvajícím zhoršujícím se otokem, zarudnutím a bolestí pravé dolní končetiny po drobném oděru v oblasti ___. Doma si všimla horečky a byla vyšetřena svým lékařem, který ji odeslal na pohotovost. Vyšetření potvrdilo celulitidu a pacientka byla přijata k intravenózní léčbě antibiotiky.
+Pacientka se dostavila do ___ se třemi dny trvajícím zhoršujícím se otokem, zarudnutím a bolestí pravé dolní nohy po drobném oděru na ___. Doma měla horečku a byla vyšetřena svým lékařem, který ji poslal na pohotovost. Vyšetření potvrdilo celulitidu a pacientka byla přijata k intravenózní léčbě antibiotiky.
 
 Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidémie
+Hyperlipidemie
 Operace kolene v ___
 
 Sociální anamnéza:
@@ -29,13 +29,13 @@ Matka s hypertenzí. Otec s cévní mozkovou příhodou v ___.
 Fyzikální vyšetření:
 Celkový stav: Dobrý, bez známek úzkosti.
 Hlava, oči, uši, nos, hrdlo: Normocefalická, vlhké sliznice.
-Krk: Povolný.
+Krk: Pohyblivý.
 Břicho: Měkké, netendrové.
 Končetiny: Pravé lýtko teplé, zarudlé, oteklé.
 Neurologické vyšetření: Bdělá, bez ložiskových příznaků.
 
 Významné výsledky:
-Laboratorní vyšetření při přijetí ukázala zvýšený počet bílých krvinek a zvýšenou hladinu glukózy, přičemž hladina kreatininu byla v normě. Krevní kultury odebrané v ___ po několika dnech nevykázaly žádný růst. Hodnota hemoglobinu A1c byla zvýšená. Zánětlivé markery se zlepšily ke dni propuštění.
+Laboratorní vyšetření při přijetí ukázala zvýšený počet bílých krvinek a zvýšenou hladinu glukózy, kreatinin byl v normě. Krevní kultury odebrané v ___ po několika dnech nevykázaly žádný růst. Hodnota hemoglobinu A1c byla zvýšená. Zánětlivé markery se zlepšily do doby propuštění.
 ZOBRAZOVACÍ METODY:
 Ultrazvuk pravé dolní končetiny nevykázal hlubokou žilní trombózu. Rentgen hrudníku v ___ bez patologických nálezů.
 
@@ -46,7 +46,7 @@ Léky při přijetí:
 Lisinopril 10 mg denně, atorvastatin 20 mg večer, metformin 500 mg dvakrát denně.
 
 Léky při propuštění:
-Cefalexin 500 mg čtyřikrát denně po dobu sedmi dnů. Pokračujte v užívání lisinoprilu, atorvastatinu a metforminu jako dříve. Paracetamol podle potřeby na bolest. Recepty byly odeslány do lékárny ___.
+Cefalexin 500 mg čtyřikrát denně po dobu sedmi dnů. Pokračovat v užívání lisinoprilu, atorvastatinu a metforminu jako dříve. Paracetamol podle potřeby na bolest. Recepty byly zaslány do lékárny ___.
 
 Způsob propuštění:
 Domů
@@ -60,11 +60,12 @@ Diabetes
 Stav při propuštění:
 Stabilizovaný a zlepšený.
 Duševní stav: Jasný a srozumitelný.
-Úroveň vědomí: Bdělá a reagující.
+Úroveň vědomí: Bdělá a komunikativní.
 Fyzická aktivita: Chodí a je soběstačná.
 
 Pokyny pro propuštění:
-Byla léčena pro kožní infekci nohy. Užívejte všechny předepsané antibiotika, i když zarudnutí ustoupí. Při sezení držte nohu ve zvýšené poloze. V případě horečky, šířícího se zarudnutí nebo zhoršující se bolesti se vraťte a v případě dotazů volejte ___.
 
-Pokyny pro kontrolu:
+Byl/a jste léčen/a na kožní infekci nohy. Užívejte všechna předepsaná antibiotika, i když zarudnutí ustoupí. Při sezení držte nohu ve zvýšené poloze. V případě horečky, šíření zarudnutí nebo zhoršení bolesti se vraťte na kontrolu a v případě dotazů volejte na číslo ___.
+
+Pokyny pro kontrolní vyšetření:
 ___

@@ -1,5 +1,5 @@
 Jméno: ___ Datum narození: ___
-Pohlaví: M Oddělení: MEDICÍNA
+Pohlaví: muž Oddělení: MEDICÍNA
 Datum přijetí: ___ Číslo oddělení: ___
 Datum propuštění: ___ Ošetřující lékař: ___
 
@@ -13,7 +13,7 @@ Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-Pacient se dostavil do ___ s třídenní anamnézou zhoršujícího se kašle, sípání a dušnosti při námaze po návštěvě ___. Popírá horečku, zimnici nebo bolest na hrudi. Rentgenové vyšetření hrudníku v ___ neodhalilo pneumonii. Byl odeslán doktorem ___ a převezen dne ___ k dalšímu vyšetření a léčbě dušnosti.
+Pacient se dostavil do ___ s třemi dny trvajícím zhoršujícím se kašlem, sípáním a dušností při námaze po návštěvě ___. Popírá horečku, zimnici nebo bolest na hrudi. Rentgenové vyšetření hrudníku v ___ neodhalilo pneumonii. Byl odeslán doktorem ___ a převezen dne ___ k dalšímu vyšetření a léčbě dušnosti.
 
 Anamnéza předchozích onemocnění:
 Fibrilace síní, léčena antikoagulanty
@@ -61,18 +61,18 @@ Způsob propuštění:
 Domů
 
 Diagnóza při propuštění:
-Exacerbace chronické obstrukční plicní nemoci
-Fibrilace síní
+Akutní zhoršení chronické obstrukční plicní nemoci
+Předvířová fibrilace
 
 Stav při propuštění:
-Stabilní
+Stabilizovaný
 Úroveň vědomí:
-Bdělý a komunikativní
-Stav aktivity:
-Ambulantní, soběstačný
+Přítomný a reagující
+Úroveň aktivity:
+Schopný chůze, soběstačný
 
 Pokyny pro propuštění:
-Užívejte všechny léky podle předpisu a dokončete celou kúru steroidy. Používejte inhalátor podle pokynů. V případě zhoršení dušnosti, horečky, bolesti na hrudi nebo zrychleného srdečního tepu se vraťte do nemocnice. Přestaňte kouřit a vyhýbejte se pobytu v zakouřeném prostředí. Dodržte termín kontroly v ___ klinice.
+Užívejte všechny léky podle předpisu a dokončete kúru steroidy. Používejte inhalátor podle pokynů. V případě zhoršení dušnosti, horečky, bolesti na hrudi nebo zrychleného srdečního tepu se vraťte do nemocnice. Přestaňte kouřit a vyhýbejte se pobytu v zakouřeném prostředí. Dodržujte termín návštěvy v ___ klinice.
 
-Pokyny pro další postup:
+Pokyny pro kontrolu:
 ___

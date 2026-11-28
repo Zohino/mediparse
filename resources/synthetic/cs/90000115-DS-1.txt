@@ -1,5 +1,5 @@
 Jméno: ___ Datum narození: ___
-Pohlaví: Muž Oddělení: MEDICÍNA
+Pohlaví: M Oddělení: MEDICÍNA
 Datum přijetí: ___ Číslo oddělení: ___
 Datum propuštění: ___ Ošetřující lékař: ___
 
@@ -17,20 +17,20 @@ ___letý muž s diabetem, který se dostavil do ___ s třídenní nevolností, p
 
 Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidémie
-Pod dohledem Dr. ___ v ___
+Hyperlipidemie
+Léčen doktorem ___ v ___
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s vysokým krevním tlakem, pod dohledem v ___
+Matka s vysokým krevním tlakem, léčena v ___
 
 Fyzikální vyšetření:
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
 Suché sliznice, mírně zrychlený puls.
 Krk: Pohyblivý, bez rezistencí
-Plíce: Oboustranně čisté
+Plíce: Čisté na obou stranách
 Břicho: Měkké, mírně citlivé, bez známek peritoneálního dráždění
 Končetiny: Teplé, bez otoků
 
@@ -49,7 +49,7 @@ Atorvastatin 20 mg denně
 
 Léky při propuštění:
 1. Inzulin glargin ___ jednotek subkutánně večer
-2. Inzulin lispro podle klouzavé škály s jídlem
+2. Inzulin lispro podle klouzavé stupnice s jídlem
 3. Metformin 1000 mg dvakrát denně
 4. Lisinopril 10 mg denně
 5. Atorvastatin 20 mg denně
@@ -63,12 +63,13 @@ Diabetická ketoacidóza
 Diabetes mellitus
 
 Stav při propuštění:
-Stabilní.
+Stabilizovaný.
 Duševní stav: Bdělý a orientovaný, schopen plnit pokyny.
 Fyzická aktivita: Chodí samostatně.
 
 Pokyny pro propuštění:
-Byli jste přijati s vysokou hladinou cukru v krvi a s kyselinou v krvi. Byla vám podána infuze a inzulin. Měřte si hladinu cukru v krvi před jídlem a před spaním a zapisujte si hodnoty. Užijte si inzulin přesně podle pokynů. Pokud bude hladina cukru v krvi trvale vysoká nebo pokud nebudete schopni udržet tekutiny v těle, zavolejte na kliniku na číslo ___. V případě zvracení, zmatenosti nebo bolesti břicha se vraťte do ___.
 
-Pokyny pro další léčbu:
+Byli jste přijati do nemocnice kvůli vysoké hladině cukru v krvi a zvýšené aciditě krve. Byla vám podána tekutina a inzulin. Měřte si hladinu cukru v krvi před jídlem a před spaním a zaznamenávejte si hodnoty. Inzulin si aplikujte přesně podle pokynů, které jste obdrželi. Pokud se hladina cukru v krvi i nadále drží na vysoké úrovni nebo pokud máte potíže se zvracením, zavolejte na kliniku na číslo ___. V případě zvracení, zmatenosti nebo bolesti břicha se vraťte do nemocnice ___.
+
+Pokyny pro kontrolní vyšetření:
 ___

@@ -291,7 +291,7 @@ def audit_files(outside_repository: Path) -> AuditFiles:
     return AuditFiles(outside_repository)
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def planned_note() -> PlannedNote:
     """Malý plán s jedinou zmínkou CKD a zpráva, která mu odpovídá.
 

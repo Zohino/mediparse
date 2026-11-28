@@ -13,7 +13,7 @@ Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-___ letá žena s hypertenzí a hypotyreózou, která se dostavila s třemi dny trvajícím zhoršujícím se zčervenáním, horkem a otokem pravé dolní končetiny a horečkou do 38,3 °C doma. Byla vyšetřena u svého ošetřujícího lékaře v ___, dostala dávku perorálních antibiotik a byla odeslána do ___, protože se erytém rozšířil za vyznačenou hranici. Popírala trauma, kousnutí hmyzem nebo nedávné cestování. Na pohotovosti měla horečku a tachykardii, s citlivou erytematózní oblastí od kotníku po koleno. Byly odebrány krevní kultury a před přijetím na oddělení ___ jí byla podána intravenózní antibiotika.
+___ letá žena s hypertenzí a hypotyreózou, která se dostavila s třemi dny trvajícím zhoršujícím se zčervenáním, horkem a otokem pravé dolní končetiny, doprovázeným horečkou až 38,3 °C doma. Byla vyšetřena u svého ošetřujícího lékaře v ___, dostala dávku perorálních antibiotik a byla odeslána do ___, protože erytém se rozšířil za vyznačenou hranici. Popírá trauma, kousnutí hmyzem nebo nedávné cestování. Na pohotovosti měla horečku a tachykardii, s citlivou erytematózní oblastí od kotníku po koleno. Byly odebrány krevní kultury a před přijetím na oddělení ___ jí byla podána intravenózní antibiotika.
 
 Anamnéza předchozích onemocnění:
 Hypertenze
@@ -30,24 +30,25 @@ Matka s hypertenzí. Otec s ischemickou chorobou srdeční.
 
 Významné výsledky:
 LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
-___ 18:10 Krev: WBC-14,2* Hgb-12,1 Plt-310 Kreat-0,9 Na-137 K-4,1 CRP-88*
+___ 18:10 Krev: WBC-14,2* Hgb-12,1 Plt-310 Kreatinin-0,9 Na-137 K-4,1 CRP-88*
 LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
-___ 05:40 Krev: WBC-8,1 Hgb-11,8 Plt-296 Kreat-0,8 Na-139 K-4,0
+___ 05:40 Krev: WBC-8,1 Hgb-11,8 Plt-296 Kreatinin-0,8 Na-139 K-4,0
 ZOBRAZOVACÍ METODY:
 Duplexní ultrazvuk žil pravé dolní končetiny, ___: bez známek hluboké žilní trombózy.
 ZÁVĚR:
-Žádná hluboká žilní trombóza v pravé noze. Difúzní subkutánní edém lýtka.
+Bez hluboké žilní trombózy v pravé noze. Difúzní subkutánní edém lýtka.
 NÁLEZY:
-Běžná femorální, femorální, popliteální a lýtkové žíly jsou stlačitelné s normálním průtokem. V lýtku je přítomné ztluštění kůže a edém. Krevní kultury z ___ nevykazovaly růst po pěti dnech.
+Běžná femorální, femorální, popliteální a lýtkové žíly jsou stlačitelné s normálním průtokem. V lýtku je přítomné ztluštění kůže a edém. Krevní kultury z ___ po pěti dnech nevykazovaly růst.
 
-Stručný průběh hospitalizace:
-Celulitida pravé dolní končetiny: Byla zahájena intravenózní léčba vancomycinem při přijetí a byla vyznačena hranice erytému. Horečka ustoupila do 24 hodin a zčervenání začalo ustupovat druhý den hospitalizace. Duplexní ultrazvuk neprokázal přítomnost trombu. Krevní kultury zůstaly negativní, takže třetí den hospitalizace byla převedena na perorální cefalexin, který dobře snášela. Sestra specializovaná na péči o rány z ___ ji poučila o elevaci nohy a kompresi po akutní fázi. Hypertenze: lisinopril byl první den vysazen kvůli mírnému zvýšení krevního tlaku, poté byl znovu nasazen. Hypotyreóza: levotyroxin byl pokračován. Její ošetřující lékař, Dr. ___, byl telefonicky informován a byly domluveny návštěvy sestry z agentury ___ pro domácí péči.
+Stručný popis hospitalizace:
+
+Celulitida pravé dolní končetiny: Po přijetí byla zahájena intravenózní léčba vancomycinem a ohraničena oblast zarudnutí. Horečka ustoupila během 24 hodin a zarudnutí začalo ustupovat druhý den hospitalizace. Duplexní vyšetření žil neprokázalo přítomnost krevní sraženiny. Kultivace krve zůstaly negativní, proto byl třetí den hospitalizace přechod na perorální cefalexin a pacientka jej dobře tolerovala. Sestra specializovaná na péči o rány z ___ pacientku poučila o elevaci končetiny a použití kompresivních pomůcek po akutní fázi. Hypertenze: první den byla léčba lisinoprilem přerušena kvůli mírnému zvýšení krevního tlaku, poté byla léčba obnovena. Hypotyreóza: léčba levotyroxinem pokračovala. Ošetřující lékař, Dr. ___, byl telefonicky informován a domluvila se návštěva sestry z agentury ___ za účelem domácích kontrol.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
 Levotyroxin 75 mcg denně
 Paracetamol 500 mg podle potřeby
-Cefalexin 500 mg z pohotovostní péče, datum ___
+Cefalexin 500 mg z pohotovostní služby v ___
 
 Léky při propuštění:
 Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších sedmi dnů
@@ -55,7 +56,7 @@ Lisinopril 10 mg perorálně denně
 Levotyroxin 75 mcg perorálně denně
 Paracetamol 500 mg perorálně každých šest hodin podle potřeby při bolesti
 Vápník s vitamínem D, jedna tableta denně
-Kompresivní punčochy, přizpůsobené v ___
+Kompresivní punčochy, zakoupené v ___
 
 Způsob propuštění:
 Domů s poskytovanou péčí
@@ -72,7 +73,7 @@ Hypotyreóza
 Žilní insuficience
 
 Stav při propuštění:
-Stabilní, bez horečky, zlepšující se.
+Stabilní, bez horečky, zlepšení.
 
 Duševní stav:
 Bdělý a orientovaný, schopný porozumět pokynům.
@@ -80,11 +81,11 @@ Bdělý a orientovaný, schopný porozumět pokynům.
 Úroveň vědomí:
 Bdělý a pozorný.
 
-Stav aktivity:
-Schopný chůze, stabilní chůze, soběstačný.
+Fyzická aktivita:
+Chodí, má stabilní chůzi, je soběstačný.
 
 Pokyny při propuštění:
-Byli jste hospitalizováni kvůli infekci kůže a měkkých tkání pravé nohy. Užijte všechna antibiotika, i když se stav nohy zdá lepší. Při sezení držte nohu ve zvýšené poloze a po odeznění otoku noste kompresivní punčochy. V případě horečky, šíření zarudnutí, silné bolesti nebo nového otoku druhé nohy se vraťte do nemocnice. V případě dotazů volejte lékaře ___ nebo na kliniku ___. Každý den kontrolujte kůži a případné nové zarudnutí označte perem.
+Byli jste hospitalizováni kvůli infekci kůže a měkkých tkání pravé nohy. Užívejte všechna antibiotika, i když se stav nohy zlepší. Při sezení držte nohu ve zvýšené poloze a po zlepšení otoku noste kompresivní punčochy. V případě horečky, šíření zarudnutí, silné bolesti nebo nového otoku druhé nohy se vraťte do nemocnice. V případě dotazů volejte Dr. ___ nebo na kliniku ___. Každý den kontrolujte kůži a případné nové zarudnutí označte perem.
 
-Pokyny pro kontrolní vyšetření:
+Pokyny pro další péči:
 ___

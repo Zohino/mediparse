@@ -13,7 +13,7 @@ Hlavní chirurgický zákrok nebo invazivní procedura:
 Laparoskopická cholecystektomie provedená v ___
 
 Anamnéza současného onemocnění:
-Pacientka se dostavila do ___ se stížností na bolest v pravém horním kvadrantu břicha, nevolnost a zvracení po konzumaci tučného jídla, trvající dva dny. Byla vyšetřena svým ošetřujícím lékařem v ___ dne ___ a odeslána na pohotovost. Ultrazvukové vyšetření prokázalo žlučové kameny a ztluštění stěny žlučníku. Pacientka popírala horečku, žloutenku nebo bolest na hrudi a byla přijata na chirurgické oddělení.
+Pacientka se dostavila do ___ s bolestí v pravém horním kvadrantu břicha, nevolností a zvracením po konzumaci tučného jídla, trvajícími dva dny. Byla vyšetřena svým ošetřujícím lékařem v ___ dne ___ a odeslána na pohotovost. Ultrazvukové vyšetření prokázalo žlučové kameny a ztluštění stěny žlučníku. Pacientka popírala horečku, žloutenku nebo bolest na hrudi a byla přijata na chirurgické oddělení.
 
 Anamnéza předchozích onemocnění:
 Hypertenze
@@ -28,28 +28,28 @@ Matka s žlučovými kameny
 
 Fyzikální vyšetření:
 Vitalní funkce:
-T 37,2 °C, puls 78, krevní tlak 126/74, dechová frekvence 16, SpO2 98 % při dýchání okolním vzduchem
+T 37,2 °C, TF 78, TK 126/74, dechová frekvence 16, SpO2 98 % při dýchání okolním vzduchem
 Celkový stav:
 Dobře se cítí, bez známek úzkosti
 Hlava, oči, uši, nos, hrdlo:
-Bez známek ikteru
+Bez ikteru skléry
 Plíce:
 Čisté na obou stranách
 Břicho:
-Měkké, mírná citlivost v místech portů
+Měkké, mírná citlivost v místech punkcí
 Kůže:
-Řezné rány čisté, suché, neporušené
+Řezy čisté, suché, neporušené
 Neurologické vyšetření:
-Bdělost, bez ložiskových příznaků
+Bdělá, bez ložiskových příznaků
 
 Významné výsledky:
 Ultrazvuk v ___: mnohočetné žlučové kameny, ztluštění stěny žlučníku, malé množství tekutiny v okolí žlučníku, žlučovod normální šířky.
 Počet leukocytů 13,2 při přijetí, klesl na 7,1 při propuštění. ALT, AST a bilirubin v normálních mezích. Lipáza normální.
 
-Stručný popis hospitalizace:
-Paní ___ byla přijata s akutní cholecystitidou a zahájena byla intravenózní antibiotická a infuzní terapie. Byla převezena na operační sál doktorem ___ k provedení nekomplikované laparoskopické cholecystektomie. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a pacientka mohla samostatně močit a chodit. Byla propuštěna dne ___ ve stabilizovaném stavu.
-PŘECHODNÁ OBLASTI:
-Vyhodnotit výsledky patologického vyšetření; obnovit domácí léčbu hypotyreózy a hypertenze.
+Stručný popis průběhu hospitalizace:
+Paní ___ byla přijata s akutní cholecystitidou a zahájena byla intravenózní antibiotická a infuzní terapie. Byla převezena na operační sál doktorem ___ k provedení nekomplikované laparoskopické cholecystektomie. Bolest byla kontrolována perorálními léky, dieta byla postupně rozšiřována a pacientka samostatně močila a chodila. Byla propuštěna dne ___ ve stabilizovaném stavu.
+PŘECHODNÁ OTÁZKY:
+Vyhodnotit výsledky histologického vyšetření; pokračovat v domácí léčbě hypotyreózy a hypertenze.
 
 Léky při přijetí:
 Levotyroxin 75 mcg denně
@@ -75,12 +75,11 @@ Duševní stav:
 Jasný a srozumitelný
 Úroveň vědomí:
 Bdělý a reagující
-Fyzická aktivita:
+Stav aktivity:
 Schopný chůze, soběstačný
 
 Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli zánětu žlučníku a žlučník vám byl odstraněn laparoskopicky. Můžete se sprchovat, ale nevystavujte řezné rány dlouhodobému namáčení. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů než 4,5 kilogramu. V případě horečky, zhoršení bolesti, zvracení, žloutnutí kůže nebo výtoku z rány se vraťte do nemocnice nebo zavolejte na číslo ___. Dodržujte termín kontroly u doktora ___.
 
-Byli jste hospitalizováni kvůli zánětu žlučníku a žlučník vám byl odstraněn laparoskopicky. Můžete se sprchovat, ale nesmíte si nechat rány namočit. Po dobu čtyř týdnů se vyhýbejte zvedání těžších předmětů, než je deset liber (cca 4,5 kg). V případě horečky, zhoršení bolesti, zvracení, žloutnutí kůže nebo výtoku z rány se vraťte do nemocnice nebo zavolejte na číslo ___. Dodržte termín vaší kontroly u doktora ___.
-
-Pokyny pro kontrolní vyšetření:
+Pokyny pro další postup:
 ___

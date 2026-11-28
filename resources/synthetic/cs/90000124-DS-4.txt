@@ -30,7 +30,7 @@ Rodinná anamnéza:
 Matka s hypertenzí
 
 Fyzikální vyšetření:
-Při příjezdu unavená, ale v pohodě.
+Při příjezdu unavená, ale v pohodlí.
 FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
 Celkový stav: bdělá, bez známek úzkosti
 Hlava, uši, nos, hrdlo: vlhké sliznice
@@ -45,7 +45,7 @@ LABORATORNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM: kreatinin 3,2, draslík 4,8, bik
 ZÁVĚR: Rentgen hrudníku provedený v ___ ukázal čistá plíce a normální velikost srdce. Ultrazvuk ledvin ukázal malé echogenní ledviny bez hydronefrózy.
 
 Stručný průběh hospitalizace:
-___ byla přijata s dehydratací, hyperkalémií a akutním zhoršením základní funkce ledvin. Draslík byl léčen na pohotovosti a hodnoty se normalizovaly. Lisinopril byl vysazen a pacientka dostávala jemné intravenózní tekutiny, přičemž se hodnoty kreatininu postupně zlepšovaly. Nefrologický tým z ___ zhodnotil její případ a souhlasil s plánem. Glukóza byla regulována inzulínem. Dobře snášela běžnou stravu a byla propuštěna domů ___ ve stabilizovaném stavu, s plánovanou kontrolou v ___.
+___ byla přijata s dehydratací, hyperkalémií a akutním zhoršením základní funkce ledvin. Draslík byl léčen na pohotovosti a jeho hladina se normalizovala. Lisinopril byl vysazen a pacientka dostávala jemné intravenózní tekutiny, přičemž hladina kreatininu se postupně zlepšovala. Nefrologický tým z ___ prostudoval její případ a souhlasil s plánem. Glukóza byla regulována inzulínem. Dobře snášela běžnou stravu a byla propuštěna domů ___ ve stabilizovaném stavu, s plánovanou kontrolou v ___.
 
 Léky při přijetí:
 Lisinopril 20 mg denně
@@ -71,14 +71,12 @@ Hypertenze
 
 Stav při propuštění:
 Stabilizovaný a zlepšený.
-Duševní stav: bdělý a orientovaný
-Úroveň vědomí: bdělý
-Aktivita: soběstačný, s plynulou chůzí.
+Duševní stav: jasný a srozumitelný.
+Úroveň vědomí: bdělý.
+Úroveň aktivity: soběstačný, chůze je stabilní.
 
 Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli slabosti, dehydrataci a vysoké hladině draslíku. Prosím, pravidelně pijte tekutiny a užívejte pouze léky uvedené výše. Každé ráno si změřte hladinu cukru v krvi a veďte si záznamy. V případě zmatenosti, mdlob, bušení srdce nebo velmi malého množství moči se vraťte do nemocnice. V případě dotazů volejte na číslo ___.
 
-Byli jste hospitalizováni kvůli slabosti, dehydrataci a vysoké hladině draslíku. Pravidelně pijte tekutiny a užívejte pouze léky uvedené výše. Každé ráno si změřte hladinu cukru v krvi a zaznamenávejte výsledky. V případě zmatenosti, mdlob, bušení srdce nebo velmi malého množství moči se vraťte do nemocnice. V případě dotazů volejte na číslo ___.
-
-Pokyny pro kontrolní vyšetření:
-
+Pokyny pro kontrolu:
 ___

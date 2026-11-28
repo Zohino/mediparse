@@ -15,6 +15,7 @@ from mediparse.domain.note_text import (
     line_headers,
     segment,
 )
+from mediparse.synthetic.domain.mentions import MentionStatus
 from mediparse.synthetic.domain.note_structure import PreambleValue
 
 if TYPE_CHECKING:
@@ -22,7 +23,7 @@ if TYPE_CHECKING:
 
     from mediparse.domain.diagnosis import Diagnosis
     from mediparse.domain.note_text import Sections
-    from mediparse.synthetic.domain.mentions import MentionModel
+    from mediparse.synthetic.domain.mentions import MentionModel, Negation
     from mediparse.synthetic.domain.note_plan import NotePlan
     from mediparse.synthetic.domain.note_structure import PreambleField, StructureModel
 
@@ -55,6 +56,7 @@ def note_violations(
         *_marked_place_violations(bodies, plan, structure),
         *_form_violations(text, plan),
         *_mention_violations(text, bodies, plan, patterns),
+        *_negation_violations(text, plan, patterns, mentions.negation),
         *_diagnosis_section_violations(
             bodies.get(section), plan, patterns, section, headers[section]
         ),
@@ -175,6 +177,44 @@ def _mention_violations(
         )
     ]
     return unplanned + missing
+
+
+def _negation_violations(
+    text: str, plan: NotePlan, patterns: Patterns, negation: Negation
+) -> list[str]:
+    # Kopíruje negated_pattern z eda/R/mentions.R nad výrazy z configu syntetiky
+    # (ty dostává zadání verbalizace): výrazy v pořadí configu a s mezerou jako
+    # \s+, protože alternation by je řadila podle délky a mezeru brala doslova.
+    cues = "|".join(map(re.escape, negation.cues)).replace(r"\ ", r"\s+")
+    violations: list[str] = []
+    for mention in plan.mentions:
+        diagnosis, status = mention.diagnosis, mention.status
+        if status not in {
+            MentionStatus.NEGATED,
+            MentionStatus.FAMILY_HISTORY,
+            MentionStatus.UNCERTAIN,
+        }:
+            continue
+        # RE2 v EDA chápe \s a hranice slov jen v ASCII; pevná mezera výraz nespojí.
+        negated = re.compile(
+            rf"\b(?:{cues})\b[^.;\n]{{0,{negation.window_chars}}}"
+            rf"(?:{patterns[diagnosis].pattern})",
+            re.IGNORECASE | re.ASCII,
+        )
+        asserted = patterns[diagnosis].search(negated.sub("", text)) is not None
+        if status is MentionStatus.UNCERTAIN:
+            if not asserted:
+                violations.append(
+                    f"Zmínka {diagnosis} se statusem {status} nemá klíčové slovo "
+                    "mimo negační okno, EDA by ji četla jako negovanou."
+                )
+        elif asserted:
+            violations.append(
+                f"Zmínka {diagnosis} se statusem {status} má klíčové slovo mimo "
+                f"negační okno (výraz z configu nejvýš {negation.window_chars} "
+                "znaků před ním ve stejné větě)."
+            )
+    return violations
 
 
 def _diagnosis_section_violations(

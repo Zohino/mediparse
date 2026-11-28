@@ -13,7 +13,7 @@ Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-Mužský pacient s dlouhodobými zdravotními problémy, odeslán z kliniky ___ po několika dnech zhoršující se únavy, snížené chuti k jídlu a otoku nohou. Byl vyšetřen lékařem ___ a doporučeno mu, aby se dostavil na pohotovost ___. Při přijetí byly provedeny laboratorní testy, které ukázaly vysokou hladinu glukózy a abnormální funkci ledvin, což vedlo k hospitalizaci za účelem monitorování.
+Mužský pacient s dlouhodobými zdravotními problémy, odeslán z kliniky ___ po několika dnech zhoršující se únavy, nechutenství a otoku nohou. Byl vyšetřen lékařem ___ a doporučeno mu, aby se dostavil na pohotovost ___. Při přijetí byly provedeny laboratorní testy, které ukázaly vysokou hladinu glukózy a abnormální funkci ledvin, což vedlo k hospitalizaci za účelem monitorování.
 
 Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu, trvající mnoho let
@@ -38,7 +38,7 @@ Při přijetí laboratorní testy odhalily zvýšenou hladinu glukózy a kreatin
 NÁLEZY: Rentgen hrudníku provedený v ___ ukázal čisté plíce bez ložiskové konsolidace a mírnou kardiomegalii. Ultrazvuk ledvin provedený ___ ukázal malé echogenní ledviny bez hydronefrózy.
 
 Stručný průběh hospitalizace:
-Byl přijat na oddělení medicíny ___ a léčen inzulínem a intravenózními tekutinami, s postupným zlepšením hladiny glukózy. Hladina kreatininu se vrátila k výchozí hodnotě. Neměl kašel ani horečku a zobrazovací vyšetření hrudníku neukázalo pneumonii. Nefrolog z ___ zhodnotil případ a upravil dávkování léků. Edukace o dietě byla dokončena s ošetřující sestrou ___. Jeho stav byl stabilní a byl propuštěn domů s dohodnutou následnou péčí ___.
+Byl přijat na oddělení medicíny ___ a léčen inzulínem a intravenózními tekutinami, s postupným zlepšením hladiny glukózy. Hladina kreatininu se vrátila k výchozí hodnotě. Neměl kašel ani horečku a zobrazovací vyšetření hrudníku neukázalo pneumonii. Nefrolog z ___ zhodnotil případ a upravil dávkování léků. Edukace o dietě byla dokončena s ošetřovatelkou ___. Jeho stav byl stabilní a byl propuštěn domů s dohodnutou následnou péčí ___.
 
 Léky při přijetí:
 Metformin 500 mg dvakrát denně. Lisinopril 10 mg denně. Aspirin 81 mg denně.
@@ -55,11 +55,12 @@ Chronické onemocnění ledvin
 
 Stav při propuštění:
 Duševní stav: Jasný a srozumitelný.
-Úroveň vědomí: Bdělý a reagující.
+Úroveň vědomí: Bdělý a komunikativní.
 Fyzická aktivita: Chodí, soběstačný.
 
-Pokyny při propuštění:
-Byli jste hospitalizováni kvůli vysoké hladině cukru v krvi a zhoršující se funkci ledvin. Užívajte léky podle seznamu a měřte si hladinu cukru v krvi každé ráno a večer. Pijte tekutiny podle doporučení, vyhýbejte se protizánětlivým lékům proti bolesti a v případě zvracení, zmatenosti nebo velmi malého množství moči se vraťte.
+Pokyny pro propuštění:
 
-Další pokyny:
+Byli jste hospitalizováni kvůli vysoké hladině cukru v krvi a zhoršující se funkci ledvin. Užívajte léky podle seznamu a měřte si hladinu cukru v krvi každé ráno a večer. Pijte tekutiny podle doporučení, vyhýbejte se protizánětlivým lékům proti bolesti a v případě zvracení, zmatenosti nebo velmi malého množství moči se vraťte do nemocnice.
+
+Pokyny pro kontrolní vyšetření:
 ___

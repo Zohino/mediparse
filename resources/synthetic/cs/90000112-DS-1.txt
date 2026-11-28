@@ -13,12 +13,12 @@ Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-Pacient se dostavil do ___ s třídenní anamnézou produktivního kašle, horečky a zhoršující se dušnosti. Minulý týden ho vyšetřil Dr. ___ v ___ a doporučil mu klid v domácím prostředí. Rentgen hrudníku vzbudil obavy z možné pneumonie, nicméně výsledky nebyly jednoznačné. Příznaky se zhoršily ___, což vedlo k převozu na naše pohotovostní oddělení, kde měl pacient hypoxii a horečku.
+Pacient se dostavil do ___ s třídenní anamnézou produktivního kašle, horečky a zhoršující se dušnosti. Minulý týden ho vyšetřil doktor ___ v ___ a doporučil mu klid v domácím prostředí. Rentgen hrudníku vzbudil obavy z možné pneumonie, nicméně výsledky nebyly jednoznačné. Příznaky se zhoršily ___, což vedlo k převozu na naše pohotovostní oddělení, kde měl pacient hypoxii a horečku.
 
 Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidémie
-Pod dohledem Dr. ___
+Hyperlipidemie
+Pod dohledem doktora ___
 
 Anamnéza předchozích chirurgických zákroků:
 Cholecystektomie v ___
@@ -31,7 +31,7 @@ Otec s ischemickou chorobou srdeční v ___
 
 Fyzikální vyšetření:
 Vitalní funkce:
-Bez horečky, nepravidelný srdeční tep, saturace 95 % při dýchání okolního vzduchu
+Bez horečky, nepravidelný srdeční tep, saturace 95 % při dýchání okolním vzduchem
 Celkový stav:
 Komfortní, bez známek úzkosti
 Hlava, oči, uši, nos, hrdlo:
@@ -39,7 +39,7 @@ Vlhké sliznice
 Plíce:
 Rozptýlené chrůpky v dolní části pravé plíce
 Břicho:
-Měkké, netendrovatelné
+Měkké, netendrové
 Končetiny:
 Bez edému
 Kůže:
@@ -53,8 +53,8 @@ Rentgen hrudníku provedený v ___ ukázal mírné zamlžení dolního laloku pr
 ZÁVĚR:
 Ložisková opacita, infekce versus atelektáza. Laboratorní vyšetření ukázala mírnou leukocytózu, zvýšenou hladinu glukózy na 240, normální hladinu kreatininu a negativní troponin. EKG ukázalo nepravidelný rytmus bez změn ST segmentu.
 
-Stručný průběh hospitalizace:
-Pacient byl přijat a léčen perorálními antibiotiky a kyslíkem, přičemž během dvou dnů došlo ke zlepšení. Telemetrie ukázala fibrilaci síní s kontrolovanou frekvencí a po konzultaci s týmem ___ byl zahájen podávání apixabanu a metoprololu. Jeho diabetes byl léčen pomocí škály dávkování inzulínu, přičemž po vyřešení infekce došlo ke zlepšení hladiny glukózy. Kardiolog z ___ zajistil ambulantní sledování srdečního rytmu.
+Stručný popis hospitalizace:
+Pacient byl přijat a léčen perorálními antibiotiky a kyslíkem, přičemž během dvou dnů došlo ke zlepšení. Telemetrie ukázala fibrilaci síní s kontrolovanou frekvencí a po konzultaci s týmem ___ byl zahájen podávání apixabanu a metoprololu. Jeho diabetes byl léčen pomocí škály dávkování inzulínu, přičemž po vyřešení infekce se zlepšila i hladina glukózy. Kardiolog z ___ zajistil ambulantní sledování srdečního rytmu.
 PŘECHODNÁ OTÁZKY:
 Opakované zobrazovací vyšetření hrudníku za šest týdnů. Zhodnocení tolerance antikoagulační terapie a kontroly glykemie.
 
@@ -63,21 +63,21 @@ Metformin 500 mg dvakrát denně
 Lisinopril 10 mg denně
 Atorvastatin 20 mg večer
 
-Léky při propuštění:
+Léky k užívání po propuštění:
 1. Apixaban 5 mg dvakrát denně
-2. Metoprolol succinate 50 mg denně
+2. Metoprolol sukcinát 50 mg denně
 3. Metformin 500 mg dvakrát denně
 4. Lisinopril 10 mg denně
 5. Atorvastatin 20 mg večer
 6. Azithromycin 250 mg denně po dobu dalších tří dnů
-Vyzvedněte recepty v lékárně ___.
+Léky si vyzvedněte v lékárně ___.
 
 Způsob propuštění:
 Domů
 Zařízení: ___
 
 Diagnóza při propuštění:
-Fibrilace síní
+Atriální fibrilace
 Diabetes mellitus
 
 Stav při propuštění:
@@ -89,7 +89,7 @@ Bdělý a reagující
 Schopný chůze, soběstačný
 
 Pokyny pro propuštění:
-Byli jste hospitalizováni kvůli respirační infekci a bylo zjištěno, že máte nepravidelný srdeční rytmus. Užívajte všechny léky podle předpisu, zejména nový lék na ředění krve. Pijte dostatek tekutin, odpočívejte a denně si kontrolujte hladinu cukru v krvi. V případě horečky, zhoršení dýchání, krvácení nebo bušení srdce kontaktujte doktora ___ nebo se v případě bolesti na hrudi vraťte do ___.
+Byli jste hospitalizováni kvůli respirační infekci a bylo zjištěno, že máte nepravidelný srdeční rytmus. Užívejte všechny léky podle předpisu, zejména nový antikoagulant. Pijte dostatek tekutin, odpočívejte a denně si kontrolujte hladinu cukru v krvi. V případě horečky, zhoršení dýchání, krvácení nebo bušení srdce zavolejte lékaři ___ nebo se v případě bolesti na hrudi vraťte do ___.
 
 Pokyny pro kontrolu:
 ___

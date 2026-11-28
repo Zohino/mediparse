@@ -1,74 +1,92 @@
 Name: ___  Date of Birth: ___
-Sex: F  Service: SURGERY
+Sex: F  Service: MEDICINE
 Admission Date: ___  Unit No: ___
 Discharge Date: ___  Attending: ___
 
 Allergies:
-Penicillins
+Sulfa drugs
 
 Chief Complaint:
-Right upper quadrant abdominal pain
+Painful red right leg with fever
 
 Major Surgical or Invasive Procedure:
-Laparoscopic cholecystectomy on ___
+None; bedside marking of erythema by ___
 
 History of Present Illness:
-Patient is a woman who presented to ___ with two days of right upper quadrant pain, nausea and vomiting after a fatty meal. She was seen at ___ by her primary physician on ___ and sent to the emergency department. Fever to 101 was recorded at home. No jaundice or diarrhea.
+Woman with three days of spreading redness, warmth and pain over the right lower leg after scraping it while gardening. She felt feverish at home and was seen at ___ by her primary clinician, who sent her onward to ___ for intravenous antibiotics. Dr. ___ accepted her to the medical service.
 
 Past Medical History:
 Hypertension
-Hyperlipidemia
-Gastroesophageal reflux
+Hypothyroidism
+Osteoarthritis of the knees
 
 Social History:
 ___
 
 Family History:
-Mother with diabetes mellitus. Father with hypertension.
+Family history is notable for diabetes in her mother. Father had a stroke.
 
 Physical Exam:
-Vitals: afebrile, hemodynamically stable
-Gen: comfortable, no distress
-PULM: clear bilaterally
-CARDIAC: regular rhythm
-ABD: soft, mild RUQ tenderness
-Ext: no edema
-SKIN: warm, dry
-Neuro: alert, nonfocal
+Vitals:
+T 100.4, HR 92, BP 134/78, SpO2 97% room air
+Gen:
+Comfortable, talkative
+PULM:
+Clear
+CARDIAC:
+Regular rhythm
+ABD:
+Soft, nontender
+Ext:
+Right shin warm, swollen, tender
+SKIN:
+Spreading erythema, small scab
+Neuro:
+Nonfocal
 
 Pertinent Results:
-ADMISSION LABS: WBC 13.2, AST 48, ALT 52, total bilirubin 1.1, lipase normal.
-DISCHARGE LABS: WBC 7.8, liver enzymes normalized.
-IMAGING: Right upper quadrant ultrasound shows gallstones, a thickened gallbladder wall and pericholecystic fluid.
-IMPRESSION: Findings consistent with acute cholecystitis, as read by ___.
+ADMISSION LABS:
+White count mildly elevated, creatinine normal.
+DISCHARGE LABS:
+White count normalized.
+IMAGING:
+Ultrasound of the right leg performed at ___.
+IMPRESSION:
+Skin and soft tissue swelling only. No clot seen in the deep veins.
 
 Brief Hospital Course:
-She was admitted to the surgical service, kept NPO, given intravenous fluids and antibiotics. She was taken to the operating room by Dr. ___ and underwent an uncomplicated laparoscopic cholecystectomy. Diet was advanced, pain was controlled with oral medication, and she was discharged on ___ to follow up at ___.
-TRANSITIONAL ISSUES: Review final pathology at clinic visit.
+She received intravenous cefazolin, and the border of redness was outlined and watched daily. Fever resolved within a day, and the swelling and pain eased steadily. Blood cultures stayed negative. She was switched to oral cephalexin, walked the halls without trouble, and was cleared by ___ for discharge. Her nurse, ___, reviewed wound care with her.
+TRANSITIONAL ISSUES:
+Recheck the leg at ___ clinic within one week.
 
 Medications on Admission:
-Lisinopril 10 mg daily
-Atorvastatin 20 mg nightly
+Levothyroxine
+Lisinopril
+Acetaminophen as needed
 
 Discharge Medications:
-1. Lisinopril 10 mg by mouth daily
-2. Atorvastatin 20 mg by mouth nightly
-3. Acetaminophen 650 mg every six hours as needed for pain
-4. Docusate 100 mg twice daily
+1. Cephalexin 500 mg by mouth four times daily for seven more days
+2. Levothyroxine daily
+3. Lisinopril daily
+4. Acetaminophen 650 mg every six hours as needed for pain
 
 Discharge Disposition:
-Home
+Home with visiting nurse services from ___
 
 Discharge Diagnosis:
-Acute calculous cholecystitis
+Cellulitis of the right lower leg
 
 Discharge Condition:
-Mental Status: Clear and coherent.
-Level of Consciousness: Alert and interactive.
-Activity Status: Ambulatory, independent.
+Stable and improved.
+Mental Status:
+Alert and fully oriented.
+Level of Consciousness:
+Awake and attentive.
+Activity Status:
+Walks independently.
 
 Discharge Instructions:
-You were hospitalized with an inflamed gallbladder and had it removed laparoscopically. Keep incisions clean and dry. Do not lift more than ten pounds for four weeks. Call ___ or return to the emergency department for fever, worsening pain, vomiting or yellow skin. Questions may be directed to ___.
+You were treated for a skin infection of your leg. Finish every dose of the antibiotic. Keep the leg raised when seated and watch the edge of the redness. Return promptly for fever, rapidly spreading redness, or worsening pain. Call ___ with any questions.
 
 Followup Instructions:
 ___

@@ -38,10 +38,10 @@ ZÁVĚR:
 Malé ledviny odpovídající dlouhodobému parenchymatóznímu onemocnění; bez obstrukce.
 
 Stručný popis hospitalizace:
-Byl přijat kvůli akutnímu zhoršení funkce ledvin. Intravenózní infuze byla ukončena a dávka diuretik byla upravena. Hladina draslíku byla korigována dietními opatřeními a podáváním léků, které draslík vážou. Hladina kreatininu se do ___ zlepšila a přiblížila se výchozí hodnotě. Lékařský tým z ___ případ zhodnotil a upravil jeho medikaci. Kontrola frekvence a antikoagulační terapie byly pokračovány. Byl propuštěn ve stabilizovaném stavu.
+Byl přijat kvůli akutnímu zhoršení funkce ledvin. Intravenózní infuze byla ukončena a dávka diuretik upravena. Hladina draslíku byla korigována dietními opatřeními a podáváním chelatačního přípravku. Hladina kreatininu se do ___ zlepšila a přiblížila se výchozí hodnotě. Lékařský tým z ___ případ zhodnotil a upravil jeho medikaci. Kontrola frekvence a antikoagulační terapie byly pokračovány. Byl propuštěn ve stabilizovaném stavu.
 PŘECHODNÁ OPATŘENÍ:
 - Opakované laboratorní testy za jeden týden v ___.
-- Kontrolní vyšetření na nefrologické klinice u ___.
+- Kontrolní vyšetření na nefrologické ambulanci u ___.
 
 Léky při přijetí:
 Apixaban 2,5 mg dvakrát denně
@@ -62,11 +62,11 @@ Diagnóza při propuštění:
 Chronické onemocnění ledvin
 
 Stav při propuštění:
-Úroveň vědomí: Bdělý a komunikativní.
+Úroveň vědomí: Bdělý a reagující.
 Stav aktivity: Chodí, soběstačný.
 
 Pokyny pro propuštěného pacienta:
 Byli jste hospitalizováni, protože se zhoršila funkce vašich ledvin. Denně se važte a vyhýbejte se potravinám s vysokým obsahem draslíku. Neužívejte ibuprofen nebo podobné léky proti bolesti. V případě bolesti na hrudi, silné slabosti nebo velmi malého množství moči se vraťte do nemocnice.
 
-Pokyny pro další postup:
+Další pokyny:
 ___

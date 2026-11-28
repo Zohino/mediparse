@@ -1,5 +1,5 @@
 Jméno: ___ Datum narození: ___
-Pohlaví: Muž Oddělení: MEDICÍNA
+Pohlaví: muž Oddělení: MEDICÍNA
 Datum přijetí: ___ Číslo oddělení: ___
 Datum propuštění: ___ Ošetřující lékař: ___
 
@@ -10,9 +10,9 @@ Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-Pacient je ___ letý muž s hypertenzí, který se dostavil po několika dnech palpitací, mírné dušnosti při námaze a únavě. Poprvé byl vyšetřen v ___ klinice dne ___, kde byla zaznamenána nepravidelná srdeční frekvence a byl odeslán na naše pohotovostní oddělení. Byl sledován doktorem ___ kvůli kontrole krevního tlaku. Příznaky se objevily ___ a zhoršovaly se při chůzi do schodů. Popíral bolesti na hrudi, synkopu nebo horečku. Na pohotovostním oddělení dosáhla jeho srdeční frekvence 140 úderů za minutu a elektrokardiogram (EKG) ukázal nepravidelný rytmus. Byl převezen z ___ za účelem kontroly srdeční frekvence a antikoagulační terapie.
+Pacient je ___ letý muž s hypertenzí, který se dostavil po několika dnech palpitací, mírné dušnosti při námaze a únavě. Poprvé byl vyšetřen v ___ klinice dne ___, kde byla zaznamenána nepravidelná srdeční frekvence a byl odeslán na naše pohotovostní oddělení. Dříve byl sledován doktorem ___ kvůli kontrole krevního tlaku. Příznaky se objevily ___ a zhoršovaly se při chůzi do schodů. Popíral bolesti na hrudi, synkopu nebo horečku. Na pohotovostním oddělení dosáhla jeho srdeční frekvence 140 úderů za minutu a elektrokardiogram (EKG) ukázal nepravidelný rytmus. Byl převezen z ___ za účelem kontroly srdeční frekvence a antikoagulační terapie.
 
-Anamnéza předchozích onemocnění:
+Anamnéza v minulosti:
 Hypertenze
 Hyperlipidémie diagnostikována ___
 Apendektomie v ___
@@ -24,12 +24,12 @@ Rodinná anamnéza:
 Otec, který v ___ letech prodělal cévní mozkovou příhodu
 
 Fyzikální vyšetření:
-Celkový stav: Dobrý, bdělý, bez akutní tísně.
-Plíce: Při auskultaci oboustranně čisté, bez chrůpků nebo vlhkých chrůpků.
-Břicho: Měkké, netendrové, neztuhlé, normální střevní zvuky. Srdeční rytmus nepravidelný, bez šelestu. Končetiny teplé, bez edému. Neurologicky v pořádku, pohybuje všemi končetinami.
+Celkový stav: Dobrý, bdělý, bez akutní tíže.
+Plíce: Při auskultaci oboustranně čisté, bez chrůpků nebo vlhkých vrzavých zvuků.
+Břicho: Měkké, netendrové, neztuhlé, normální střevní zvuky. Srdeční rytmus nepravidelně nepravidelný, bez šelestu. Končetiny teplé, bez edému. Neurologicky v pořádku, pohybuje všemi končetinami.
 
 Významné výsledky:
-Laboratorní vyšetření při přijetí, provedená dne ___, ukázala normální hladinu elektrolytů a kreatininu. Troponin byl dvakrát negativní. Hormon stimulující štítnou žlázu byl v normálním rozmezí. Hladina hemoglobinu byla stabilní na 14,2 a hladina krevních destiček byla normální. EKG při přijetí ukázalo nepravidelný rytmus s úzkým QRS komplexem, bez změn ST segmentu. Transtorakální echokardiografie provedená v ___ ukázala zachovanou ejekční frakci, mírné zvětšení levé síně a žádné významné vady chlopní. Rentgen hrudníku ukázal čistá plicní pole a normální srdeční stín. Opakované EKG před propuštěním ukázalo zlepšení ventrikulární frekvence.
+Laboratorní vyšetření při přijetí, provedená dne ___, ukázala normální hladinu elektrolytů a kreatininu. Troponin byl dvakrát negativní. Hormon stimulující štítnou žlázu byl v normálním rozmezí. Hladina hemoglobinu byla stabilní na 14,2 a počet krevních destiček byl normální. EKG při přijetí ukázal nepravidelně nepravidelný rytmus s úzkým QRS komplexem, bez změn ST segmentu. Transtorakální echokardiografie provedená v ___ ukázala zachovanou ejekční frakci, mírné zvětšení levé síně a žádné významné vady chlopní. Rentgen hrudníku ukázal čistá plicní pole a normální siluetu srdce. Opakované EKG před propuštěním ukázalo zlepšení ventrikulární frekvence.
 
 Léky při přijetí:
 Lisinopril 20 mg denně
@@ -44,17 +44,17 @@ Léky při propuštění:
 5. Aspirin byl vysazen, protože byl zahájen apixaban. Recepty byly odeslány do lékárny ___.
 
 Plán propuštění:
-Domů s péčí od ___
+Domů s péčí od ___.
 
-Diagnóza při propuštění:
-Atriální fibrilace s rychlou ventrikulární odpovědí
+Závěrečná diagnóza:
+Přední síňová fibrilace s rychlou komorovou odpovědí.
 
 Stav při propuštění:
-Úroveň vědomí: Bdělý a komunikativní.
-Stav aktivity: Ambulantní, soběstačný.
+Úroveň vědomí: Bdělý a reagující.
+Stav aktivity: Schopný chůze, soběstačný.
 
 Pokyny pro propuštění:
-Byli jste přijati do nemocnice kvůli rychlému a nepravidelnému srdečnímu tepu, kterému se říká arytmie. Pomocí léků jsme zpomalili váš srdeční tep a zahájili podávání antikoagulantu, abychom snížili riziko mrtvice. Užívajte všechny léky přesně podle předpisu a nepřestávejte užívat apixaban. Vyhýbejte se ibuprofenu a podobným lékům proti bolesti. V případě bolesti na hrudi, mdlob, silné dušnosti, slabosti na jedné straně těla, potíží s mluvením nebo jakéhokoli krvácení, které se nezastavuje, se vraťte do nemocnice. Navštivte prosím doktora ___ do jednoho týdne a v případě dotazů volejte na číslo ___. Váš krevní tlak bude znovu zkontrolován na adrese ___.
+Byli jste přijati s rychlým, nepravidelným srdečním tepem, kterému se říká arytmie. Pomocí léků jsme zpomalili váš srdeční tep a zahájili podávání antikoagulantu, abychom snížili riziko mrtvice. Užívajte všechny léky přesně podle předpisu a nepřestávejte užívat apixaban. Vyhýbejte se ibuprofenu a podobným lékům proti bolesti. V případě bolesti na hrudi, mdlob, silné dušnosti, slabosti na jedné straně těla, potíží s řečí nebo jakéhokoli krvácení, které se nezastavuje, se vraťte do nemocnice. Navštivte prosím doktora ___ do jednoho týdne a v případě dotazů volejte na číslo ___. Váš krevní tlak bude znovu zkontrolován na adrese ___.
 
-Pokyny pro kontrolní vyšetření:
+Pokyny pro kontrolu:
 ___

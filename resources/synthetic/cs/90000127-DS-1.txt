@@ -1,5 +1,5 @@
 Jméno: ___ Datum narození: ___
-Pohlaví: Muž Oddělení: MEDICÍNA
+Pohlaví: M Oddělení: MEDICÍNA
 Datum přijetí: ___ Číslo oddělení: ___
 Datum propuštění: ___ Ošetřující lékař: ___
 
@@ -19,7 +19,7 @@ Pozitivní na horečku a bolest nohy. Negativní na bolest na hrudi, kašel, bol
 
 Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidémie
+Hyperlipidemie
 Obezita
 
 Anamnéza předchozích chirurgických zákroků:
@@ -34,22 +34,22 @@ Otec s ischemickou chorobou srdeční.
 Fyzikální vyšetření:
 Horečka, v klidu je pacient v pohodě. Pravá holeně s erytémem, hřejivostí a citlivostí, bez fluktuace.
 FYZIKÁLNÍ VYŠETŘENÍ PŘED PROPUŠTĚNÍM:
-Celkový stav: Dobře vypadající, bez známek úzkosti.
-Hlava, krk, uši, nos, hrdlo: Vlhké sliznice.
-Plíce: Čisté na obou stranách.
-Břicho: Měkké, netendrové.
-Končetiny: Zčervenání pravého lýtka se výrazně zlepšilo, mírný edém.
-Kůže: Hranice erytému je jasně ohraničená a ustupuje.
-Neurologické: Bdělý, bez ložiskových příznaků.
+Celkový stav: Dobře vypadající, bez známek úzkosti
+Hlava, krk, uši, nos, hrdlo: Vlhké sliznice
+Plíce: Čisté na obou stranách
+Břicho: Měkké, netendrové
+Končetiny: Zčervenání pravého lýtka se výrazně zlepšilo, mírný edém
+Kůže: Hranice erytému je jasně ohraničená a ustupuje
+Neurologické: Bdělý, bez ložiskových příznaků
 
 Významné výsledky:
 LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
 Leukocyty 14,2 s převahou neutrofilů, kreatinin 0,9, laktát 1,3. Kultivace krve bez růstu po pěti dnech.
 ZÁVĚR:
-Duplexní vyšetření žil pravé nohy provedené v ___ neprokázalo hlubokou žilní trombózu. Otékání měkkých tkání bez abscesu.
+Venózní duplexní vyšetření pravé nohy provedené v ___ neprokázalo hlubokou žilní trombózu. Otékání měkkých tkání bez abscesu.
 
 Stručný průběh hospitalizace:
-Byl přijat s celulitidou pravé nohy. Kvůli alergii na penicilin dostával intravenózně vancomycin, poté byl po odeznění horečky a ustoupení erytému převeden na perorální doxycyklin. Tým specializovaný na péči o rány z ___ ošetřil oděr. Dr. ___ zkontroloval výsledky duplexního vyšetření. Bolest byla kontrolována paracetamolem a noha byla zvednuta. Pacient chodil samostatně a byl propuštěn ___.
+Byl přijat s celulitidou pravé nohy. Kvůli alergii na penicilin dostával intravenózně vankomycin, poté byl po odeznění horečky a ustoupení erytému převeden na perorální doxycyklin. Tým pro péči o rány z ___ vyčistil oděr. Dr. ___ zkontroloval výsledky duplexního vyšetření. Bolest byla kontrolována paracetamolem a noha byla zvednuta. Pacient chodil samostatně a byl propuštěn dne ___.
 PŘECHODNÁ OTÁZKY:
 Dokončit antibiotickou léčbu. Zkontrolovat nohu na kontrole v ___.
 
@@ -64,7 +64,7 @@ Léky při propuštění:
 4. Atorvastatin 40 mg večer
 
 Způsob propuštění:
-Domů s péčí ___
+Domů s pomocí služeb ___
 
 Diagnóza při propuštění:
 Celulitida pravé dolní končetiny
@@ -72,13 +72,11 @@ Hypertenze
 
 Stav při propuštění:
 Stabilizovaný a zlepšený.
-Duševní stav: Jasný a koherentní.
-Stav aktivity: Ambulantní, soběstačný.
+Duševní stav: Jasný a srozumitelný.
+Úroveň aktivity: Schopný chůze, soběstačný.
 
 Pokyny pro propuštění:
-
-Byli jste hospitalizováni kvůli kožní infekci pravé nohy. Byli jste léčeni antibiotiky a váš stav se zlepšil. Užívajte doxycyklin až do vyčerpání zásoby a když sedíte, mějte nohu ve zvýšené poloze. V případě zhoršení zarudnutí, horečky nebo bolesti se vraťte do nemocnice a v případě dotazů volejte na číslo ___. Navštivte svého lékaře na adrese ___ do jednoho týdne.
+Byli jste hospitalizováni kvůli kožní infekci pravé nohy. Byli jste léčeni antibiotiky a váš stav se zlepšil. Užívajte doxycyklin až do vyčerpání zásoby a při sezení si nohu držte ve zvýšené poloze. V případě zhoršení zarudnutí, horečky nebo bolesti se vraťte do nemocnice a v případě dotazů volejte na číslo ___. Navštivte svého lékaře na adrese ___ do jednoho týdne.
 
 Pokyny pro kontrolní vyšetření:
-
 ___
