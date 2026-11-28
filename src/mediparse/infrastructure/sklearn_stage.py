@@ -20,7 +20,6 @@ from threadpoolctl import threadpool_limits
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.representation import (
-    Aggregation,
     ClassifierFamily,
     EncoderSpec,
     TfidfRepresentation,
@@ -254,11 +253,8 @@ class SklearnStageScorer:
                             encoder=spec,
                             random_state=self.seed,
                             device=device,
-                            lr=cast("float", family["lr"]),
-                            aggregation=cast("Aggregation", family["aggregation"]),
-                            freeze_embeddings=cast("bool", family["freeze_embeddings"]),
                             **transformer.model_dump(exclude={"stopping_parts"}),
-                        ),
+                        ).set_params(**family),
                         train=[
                             text
                             for text, held in zip(texts, stop, strict=True)

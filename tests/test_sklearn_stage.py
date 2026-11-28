@@ -1104,9 +1104,9 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
             encoder=config.encoders[0],
             random_state=7,
             device="cpu",
-            **config.families[0].default,
             **config.transformer.model_dump(exclude={"stopping_parts"}),
         )
+        model.set_params.assert_called_once_with(**config.families[0].default)
     model.fit.assert_called_once()
     train, train_labels, stop, stop_labels = model.fit.call_args.args
     prepared = joined_tokens(None) if family == "multirescnn" else str
