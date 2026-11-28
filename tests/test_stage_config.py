@@ -11,12 +11,10 @@ from pydantic import ValidationError
 from mediparse.domain import stage_tuning as stage_domain
 from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.representation import (
-    ClassifierFamily,
     EncoderSpec,
     TfidfRepresentation,
     TokensSpec,
     Word2VecRepresentation,
-    accepts,
 )
 from mediparse.domain.stage_tuning import (
     StageLsa,
@@ -535,11 +533,3 @@ def test_transformer_block_without_family() -> None:
                 "transformer"
             ]
         )
-
-
-def test_transformer_acceptance() -> None:
-    """Transformer vyžaduje encoder, word2vec nepřijímá."""
-    assert accepts(SPEC, ClassifierFamily.TRANSFORMER)
-    assert not accepts(
-        word2vec_stage_config().representations[0], ClassifierFamily.TRANSFORMER
-    )

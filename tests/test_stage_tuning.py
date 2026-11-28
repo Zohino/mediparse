@@ -3,8 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
-from itertools import count
-from threading import Barrier, Event, Lock
+from threading import Barrier, Event
 from typing import TYPE_CHECKING
 
 import pytest
@@ -411,18 +410,37 @@ def test_concurrent_failure_drains_running_trials(failed: int) -> None:
     barrier = Barrier(3, timeout=10)
     failure = Event()
     log: list[str] = []
-    search = _LoggedSearch(log)
-    calls = count()
-    lock = Lock()
+    config = transformer_stage_config(concurrent_trials=3)
+    family = config.model_dump(mode="json")["families"][0]
+    family["space"]["params"][0] = {
+        "kind": "float",
+        "name": "lr",
+        "low": 1e-5,
+        "high": 1e-4,
+        "log": True,
+    }
+    config = transformer_stage_config(concurrent_trials=3, families=[family])
+
+    class Search(_LoggedSearch):
+        def ask(self) -> Trial:
+            trial = super().ask()
+            return (
+                replace(trial, params=dict(trial.params) | {"transformer.lr": 1e-5})
+                if trial.number == 2
+                else trial
+            )
+
+    search = Search(log)
+    failed_params = config.branches[1].default_params()
+    if failed == 2:
+        failed_params |= {"transformer.lr": 1e-5}
 
     class Scorer(CapturingScorer):
         def score_folds(
             self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
         ) -> tuple[ValidationScores, ...]:
-            with lock:
-                number = next(calls)
             barrier.wait()
-            if number == failed:
+            if params == failed_params:
                 log.append("failure")
                 failure.set()
                 msg = "přerušení"
@@ -432,9 +450,7 @@ def test_concurrent_failure_drains_running_trials(failed: int) -> None:
 
     progress = MemoryProgress()
     with pytest.raises(RuntimeError, match=r"^přerušení$"):
-        _tuning(search, Scorer(), progress).run(
-            transformer_stage_config(concurrent_trials=3)
-        )
+        _tuning(search, Scorer(), progress).run(config)
     # První vlna: A výchozí, B výchozí, B nevýchozí; jeden selže, dva se zapíšou.
     assert search.asked == 3
     assert len(progress.records) == 2
@@ -469,3 +485,34 @@ def test_resume_restores_missing_defaults() -> None:
             for r in progress.records
             if r.default and r.params["branch"] == branch.name
         ] == [branch.default_params()]
+
+
+def test_concurrent_errors_raise_first_started_and_log_only_types(
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    """Pozdější selhání B nevyhraje nad A a log neobsahuje obsah výjimky."""
+    barrier = Barrier(2, timeout=10)
+    b_failed = Event()
+
+    class Scorer:
+        @staticmethod
+        def score_folds(
+            params: Mapping[str, ParamValue], folds: Sequence[Holdout]
+        ) -> tuple[ValidationScores, ...]:
+            del folds
+            barrier.wait()
+            if params["branch"] == "b/transformer":
+                b_failed.set()
+                msg = "syntetický obsah výjimky B"
+                raise ValueError(msg)
+            assert b_failed.wait(10)
+            msg = "první pokus"
+            raise RuntimeError(msg)
+
+    search = FixedSearch()
+    with pytest.raises(RuntimeError, match="první pokus"):
+        _tuning(search, Scorer(), MemoryProgress()).run(
+            transformer_stage_config(concurrent_trials=2)
+        )
+    assert search.asked == 2
+    assert caplog.messages == ["Pokus 1 selhal: ValueError"]

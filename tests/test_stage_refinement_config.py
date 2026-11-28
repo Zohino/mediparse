@@ -119,3 +119,15 @@ def test_widen_accepts_proper_categorical_superset() -> None:
     )
     assert isinstance(param, CategoricalParam)
     assert param.choices == (2, 3)
+
+
+def test_branch_config_preserves_transformer_and_concurrency() -> None:
+    """Vybraná větev zachová techniku transformeru i souběh ve své provenance."""
+    stage = load_stage_config(REPOSITORY / "config/stage_transformers.json")
+    selected = branch_config(
+        stage, "xlmr/transformer", trials=20, random_startup_trials=5
+    )
+    assert selected.transformer == stage.transformer
+    assert selected.concurrent_trials == 4
+    assert selected.network is None
+    assert selected.lsa is None

@@ -358,7 +358,9 @@ def test_repository_stage_configs(stage: str) -> None:
             "aggregation": "max",
             "freeze_embeddings": False,
         }
-        pilot = json.loads((REPOSITORY / "config/transformer_pilot.json").read_text())
+        pilot = json.loads(
+            (REPOSITORY / "config/transformer_pilot.json").read_text(encoding="utf-8")
+        )
         for encoder in config.encoders:
             expected = next(
                 r["encoder"]
