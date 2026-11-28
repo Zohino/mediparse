@@ -125,10 +125,18 @@ def test_negation_window_is_checked(
     expected: bool,
 ) -> None:
     """Status zmínky odpovídá tomu, zda klíčové slovo přežije odstranění negací."""
-    plan = planned_note.plan.model_copy(
+    assert (
+        _negation_reported(planned_note, sampler_config, status, sentence) is expected
+    )
+
+
+def _negation_reported(
+    note: PlannedNote, config: SamplerConfig, status: MentionStatus, sentence: str
+) -> bool:
+    plan = note.plan.model_copy(
         update={
             "mentions": (
-                *planned_note.plan.mentions,
+                *note.plan.mentions,
                 Mention(
                     diagnosis=Diagnosis.DIABETES,
                     status=status,
@@ -137,12 +145,9 @@ def test_negation_window_is_checked(
             )
         }
     )
-    text = planned_note.text.replace("oral intake.", "oral intake. " + sentence)
-    assert text != planned_note.text
-
-    violations = _violations(text, plan, sampler_config)
-
-    assert any("negační okno" in reason for reason in violations) is expected
+    text = note.text.replace("oral intake.", "oral intake. " + sentence)
+    assert text != note.text
+    return any("negační okno" in reason for reason in _violations(text, plan, config))
 
 
 @given(n=st.integers(min_value=2, max_value=80))
@@ -153,26 +158,9 @@ def test_negation_window_boundary(
 ) -> None:
     """Okno zahrnuje právě nejvýš 40 znaků mezi výrazem a klíčovým slovem."""
     sentence = "no" + " " + "x" * (n - 2) + " " + "diabetes."
-    plan = planned_note.plan.model_copy(
-        update={
-            "mentions": (
-                *planned_note.plan.mentions,
-                Mention(
-                    diagnosis=Diagnosis.DIABETES,
-                    status=MentionStatus.NEGATED,
-                    sections=("history_of_present_illness",),
-                ),
-            )
-        }
-    )
-    text = planned_note.text.replace("oral intake.", "oral intake. " + sentence)
-    assert text != planned_note.text
-
-    violations = _violations(text, plan, sampler_config)
-
-    assert any("negační okno" in reason for reason in violations) is (
-        n > sampler_config.mentions.negation.window_chars
-    )
+    assert _negation_reported(
+        planned_note, sampler_config, MentionStatus.NEGATED, sentence
+    ) is (n > sampler_config.mentions.negation.window_chars)
 
 
 @pytest.mark.parametrize(
