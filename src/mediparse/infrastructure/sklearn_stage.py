@@ -6,7 +6,7 @@ import multiprocessing
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass, field
 from functools import partial
-from itertools import chain
+from itertools import chain, compress
 from operator import itemgetter
 from typing import TYPE_CHECKING, Final, Literal, Protocol, assert_never, cast
 
@@ -255,21 +255,15 @@ class SklearnStageScorer:
                             device=device,
                             **transformer.model_dump(exclude={"stopping_parts"}),
                         ).set_params(**family),
-                        train=[
-                            text
-                            for text, held in zip(texts, stop, strict=True)
-                            if not held
-                        ],
+                        train=list(compress(texts, ~stop)),
                         labels=labels[~stop],
-                        stop=[
-                            text for text, held in zip(texts, stop, strict=True) if held
-                        ],
+                        stop=list(compress(texts, stop)),
                         stop_labels=labels[stop],
                         validation=self._encoder_texts(spec, fold.test),
                     ),
                 ))
             results = self.isolate(partial(_network_group_scores, fits))
-        return tuple(score for _, score in sorted(results, key=itemgetter(0)))
+        return tuple(score for _, score in results)
 
     def _features(
         self, branch: Branch, rep_params: Mapping[str, ParamValue], fold: Holdout
