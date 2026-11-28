@@ -5,10 +5,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
-from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.note import note_id
 from mediparse.synthetic.domain.labels import (
+    ACUTE_DIAGNOSIS,
     LabelModel,
     LabelSet,
     acute_given_chronic,
@@ -111,7 +111,7 @@ def _patient_notes(
 ) -> list[SyntheticNote]:
     cells = list(distribution.joint)
     first = rng.choices(cells, weights=[distribution.joint[cell] for cell in cells])[0]
-    chronic = frozenset(d for d in first if d.chronic)
+    chronic = first - {ACUTE_DIAGNOSIS}
     later = [
         chronic | {ACUTE_DIAGNOSIS}
         if rng.random() < distribution.acute[chronic]

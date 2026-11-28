@@ -141,6 +141,13 @@ def test_no_allowed_section_means_no_mention() -> None:
     assert all(m.diagnosis is not Diagnosis.PNEUMONIA for m in mentions)
 
 
+def test_chronic_mention_uses_chronic_sections() -> None:
+    """Chronická diagnóza využije sekci dostupnou jen chronickým zmínkám."""
+    mentions = _flat(_sample(2000, frozenset({Diagnosis.CKD}), (PMH, FAMILY)))
+
+    assert any(PMH in m.sections for m in mentions)
+
+
 def test_negative_statuses_follow_the_model() -> None:
     """U negativního labelu sedí podíl zmínek i rozdělení statusů."""
     mentions = _flat(_sample(LARGE, frozenset()))

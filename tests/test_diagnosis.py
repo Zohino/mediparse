@@ -1,13 +1,13 @@
-"""Diagnóza: pětice a jediná akutní diagnóza."""
+"""Diagnóza: pětice sešitu 8."""
 
 import pytest
 from pydantic import BaseModel, ConfigDict, ValidationError
 
-from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS, Diagnosis, PerDiagnosis
+from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
 
 
-def test_five_follow_notebook_8_with_one_acute_diagnosis() -> None:
-    """Pětice sešitu 8 v pořadí kandidátů; jedinou akutní diagnózou je pneumonie."""
+def test_five_follow_notebook_8() -> None:
+    """Pětice sešitu 8 v pořadí kandidátů."""
     assert [d.value for d in Diagnosis] == [
         "diabetes",
         "copd",
@@ -15,8 +15,6 @@ def test_five_follow_notebook_8_with_one_acute_diagnosis() -> None:
         "pneumonia",
         "atrial_fibrillation",
     ]
-    assert [d for d in Diagnosis if not d.chronic] == [ACUTE_DIAGNOSIS]
-    assert ACUTE_DIAGNOSIS is Diagnosis.PNEUMONIA
 
 
 class _Counts(BaseModel):

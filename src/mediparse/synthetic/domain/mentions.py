@@ -15,6 +15,7 @@ from pydantic import (
 )
 
 from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
+from mediparse.synthetic.domain.labels import ACUTE_DIAGNOSIS
 from mediparse.synthetic.domain.probability import Probability, sums_to_one
 
 if TYPE_CHECKING:
@@ -178,7 +179,9 @@ def _negative_status(model: MentionModel, rng: Random) -> MentionStatus:
 def _narrative_weights(
     diagnosis: Diagnosis, model: MentionModel
 ) -> Mapping[str, float]:
-    return model.chronic_sections if diagnosis.chronic else model.acute_sections
+    return (
+        model.acute_sections if diagnosis is ACUTE_DIAGNOSIS else model.chronic_sections
+    )
 
 
 def _weighted(

@@ -1,11 +1,11 @@
-"""Diagnóza, jejíž přítomnost nese jeden binární label, a jediná akutní diagnóza.
+"""Diagnóza, jejíž přítomnost nese jeden binární label.
 
 ``PerDiagnosis`` je typ pro hodnotu každé diagnózy pětice; pydantic ho načte jako ``dict``.
 """
 
 from collections.abc import Mapping
 from enum import StrEnum
-from typing import Annotated, Final
+from typing import Annotated
 
 from pydantic import AfterValidator
 
@@ -18,14 +18,6 @@ class Diagnosis(StrEnum):
     CKD = "ckd"
     PNEUMONIA = "pneumonia"
     ATRIAL_FIBRILLATION = "atrial_fibrillation"
-
-    @property
-    def chronic(self) -> bool:
-        """Chronická diagnóza platí pro všechny zprávy pacienta, akutní jen pro jednu."""
-        return self is not ACUTE_DIAGNOSIS
-
-
-ACUTE_DIAGNOSIS: Final = Diagnosis.PNEUMONIA
 
 
 def _covers_all_diagnoses[T](value: Mapping[Diagnosis, T]) -> Mapping[Diagnosis, T]:
