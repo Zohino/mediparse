@@ -1,13 +1,13 @@
 """Ladění CASH stupně na vývojové části mimo Snakemake.
 
-Pro stupně classical, embeddings a networks jsou doporučené cesty:
+Pro stupně classical, embeddings, networks a transformers jsou doporučené cesty:
 results/screening/<stupeň>_trials.parquet,
 resources/mimic/screening/<stupeň>_trial_predictions.parquet (řádková data),
 resources/mimic/screening/<stupeň>_trials_checkpoint a
 results/screening/<stupeň>_trials_manifest.json.
 Cache: --embeddings resources/mimic/screening/embeddings.
 Dočasné tokeny zpráv a memmapy matic paralelních fitů: --scratch resources/mimic/screening/scratch.
-Stupeň se sítí: pixi run --frozen -e gpu mediparse-stage-tuning …
+Stupeň se sítí nebo transformerem: pixi run --frozen -e gpu mediparse-stage-tuning …
 Nad MIMIC spouští jen uživatel; řádková data patří mimo results/.
 """
 
@@ -194,7 +194,7 @@ def run(  # ruff: ignore[too-many-arguments]
             best_branch=config.branch(report.best.params).name,
             best_params=dict(report.best.params),
             best_macro_f1=report.best.value,
-            sampler=stage_sampler(config.startup_trials),
+            sampler=stage_sampler(config.sampler_startup_trials),
             pruner=STAGE_PRUNER,
             seconds=report.seconds,
             sample_notes=report.sample_notes,

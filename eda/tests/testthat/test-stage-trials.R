@@ -34,7 +34,7 @@ testthat::test_that("B2 kontrakty všech stupňů jsou úplné a souhlasí s man
     source <- stage_predictions_source(con, paths$predictions)
     rows <- rows + DBI::dbGetQuery(con, paste("SELECT count(*) n FROM", source))$n
   }
-  testthat::expect_equal(rows, 91200)
+  testthat::expect_equal(rows, 103200)
   testthat::expect_equal(rows,
     jsonlite::read_json(file.path(CONTRACT_FIXTURES, "stage_trials", "synthetic.json"))$rows)
 })
@@ -169,17 +169,19 @@ testthat::test_that("A1 a A3 souhrn ověřuje cíl a výběrovou SD foldů", {
 testthat::test_that("A2 vítěze a shody určuje cíl a číslo pokusu", {
   summary <- data.frame(trial = 0:5, family = c("a", "b", "a", "b", "c", "c"),
     value = c(0.80, 0.78, 0.82, 0.82, 0.70, 0.70))
+  summary$branch <- summary$family
   selection <- stage_selection(summary, list(best_trial = 2))
+  testthat::expect_equal(selection$column, "family")
   testthat::expect_equal(selection$winner$trial, 2L)
   testthat::expect_equal(selection$second$trial, 3L)
-  testthat::expect_equal(selection$family_best$trial, c(2L, 3L, 4L))
+  testthat::expect_equal(selection$candidate_best$trial, c(2L, 3L, 4L))
   testthat::expect_equal(selection$others$trial, c(3L, 4L))
-  testthat::expect_equal(selection$family_best$family, c("a", "b", "c"))
+  testthat::expect_equal(selection$candidate_best$family, c("a", "b", "c"))
   testthat::expect_error(stage_selection(summary, list(best_trial = 3)), "manifest")
   summary$value <- 0.8
   testthat::expect_equal(stage_selection(summary, list(best_trial = 0))$winner$trial, 0L)
   testthat::expect_equal(stage_selection(summary, list(best_trial = 0))$second$trial, 1L)
-  testthat::expect_error(stage_selection(summary[summary$family == "a", ], list(best_trial = 0)), "jedinou rodinu")
+  testthat::expect_error(stage_selection(summary[summary$family == "a", ], list(best_trial = 0)), "jediného kandidáta")
 })
 
 testthat::test_that("Shoda mezi rodinami nezávisí na locale ani jméně", {
@@ -213,9 +215,12 @@ testthat::test_that("A8b tabulka vyžaduje přesné pokusy, buňky a konstantní
     testthat::expect_error(check_stage_trials(rows, wrong, config, candidates),
       "není úplná nebo konzistentní")
   }
+  later_default <- rows
+  later_default$default[later_default$trial == 0] <- FALSE
+  later_default$default[later_default$trial == 10] <- TRUE
+  testthat::expect_silent(check(later_default))
   mutations <- list(
     function(x) { x$fold[1] <- config$folds; x },
-    function(x) { x$default[x$trial == 0] <- FALSE; x$default[x$trial == 10] <- TRUE; x },
     function(x) {
       x$representation[x$trial == 10] <- "new"
       x$branch[x$trial == 10] <- "new/complement_nb"
@@ -388,4 +393,52 @@ testthat::test_that("B6 provenance uvádí procesy, encodery a GPU", {
   testthat::expect_equal(table$Hodnota[match(paste("Encoder", names), table$Položka)],
     paste0("jhu-clsp/mmBERT-base@c5955035435e2bf121cde7f3c8863ef52ff35d82, okno ",
       c(8192, 512, 8192), ", bfloat16, cuda"))
+})
+
+testthat::test_that("Jedna rodina vybírá dva nejlepší encodery po větvích", {
+  summary <- data.frame(trial = 0:3, family = "transformer",
+    branch = c("mmbert/transformer", "mmbert/transformer", "xlmr/transformer", "mdeberta/transformer"),
+    value = c(0.90, 0.85, 0.70, 0.88), sd = 0,
+    representation = c("mmbert", "mmbert", "xlmr", "mdeberta"),
+    default = c(TRUE, FALSE, TRUE, TRUE))
+  for (indices in list(1:4, 4:1)) {
+    selection <- stage_selection(summary[indices, ], list(best_trial = 0))
+    testthat::expect_equal(selection$winner$trial, 0L)
+    testthat::expect_equal(selection$second$trial, 3L)
+    tied <- summary
+    tied$value <- 0.9
+    selection <- stage_selection(tied[indices, ], list(best_trial = 0))
+    testthat::expect_equal(selection$winner$trial, 0L)
+    testthat::expect_equal(selection$second$trial, 2L)
+  }
+  selection <- stage_selection(summary, list(best_trial = 0))
+  testthat::expect_equal(selection$column, "branch")
+  families <- stage_family_table(selection, summary)
+  testthat::expect_equal(families$rodina, c("mmbert", "mdeberta", "xlmr"))
+  testthat::expect_equal(families$pokusy, c(2L, 1L, 1L))
+  trials <- merge(summary, expand.grid(fold = 0:1, diagnosis = STAGE_DIAGNOSES))
+  trials$max_f1 <- trials$value
+  diagnoses <- stage_diagnosis_table(trials, selection, read_candidates(candidates_path()))
+  testthat::expect_equal(nrow(diagnoses), 15L)
+  testthat::expect_equal(diagnoses$f1[diagnoses$rodina == "mmbert"], rep("0,900", 5))
+  testthat::expect_equal(diagnoses$f1[diagnoses$rodina == "mdeberta"], rep("0,880", 5))
+  testthat::expect_equal(diagnoses$f1[diagnoses$rodina == "xlmr"], rep("0,700", 5))
+  testthat::expect_error(stage_selection(summary[1:2, ], list(best_trial = 0)),
+    "stupeň má jediného kandidáta")
+})
+
+testthat::test_that("Výchozí pokusy mohou dokončit až po nevýchozím pokusu", {
+  paths <- stage_fixture_paths("transformers")
+  rows <- read_stage_trials(paths$results)
+  rows <- rows[rows$trial < 4, ]
+  rows$trial <- c(0L, 1L, 3L, 2L)[rows$trial + 1L]
+  config <- list(trials = 4L, folds = 5L)
+  manifest <- list(trials = 4L, completed_trials = 4L)
+  candidates <- read_candidates(candidates_path())
+  check <- function(rows) check_stage_trials(rows, manifest, config, candidates)
+  testthat::expect_silent(check(rows))
+  duplicate <- rows
+  duplicate$default[duplicate$trial == 2] <- TRUE
+  testthat::expect_error(check(duplicate), "není úplná nebo konzistentní")
+  testthat::expect_error(check(rows[rows$trial != 2, ]), "není úplná nebo konzistentní")
 })

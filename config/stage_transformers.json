@@ -1,0 +1,82 @@
+{
+  "seed": 0,
+  "subsample_parts": 3,
+  "folds": 5,
+  "trials": 20,
+  "random_startup_trials": 5,
+  "concurrent_trials": 4,
+  "strip_diagnostic_sections": false,
+  "representations": [
+    {
+      "name": "mmbert",
+      "text_preprocessing": "none",
+      "model": "jhu-clsp/mmBERT-base",
+      "revision": "c5955035435e2bf121cde7f3c8863ef52ff35d82",
+      "window": 512,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    },
+    {
+      "name": "xlmr",
+      "text_preprocessing": "none",
+      "model": "FacebookAI/xlm-roberta-base",
+      "revision": "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
+      "window": 512,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    },
+    {
+      "name": "mdeberta",
+      "text_preprocessing": "none",
+      "model": "microsoft/mdeberta-v3-base",
+      "revision": "a0484667b22365f84929a935b5e50a51f71f159d",
+      "window": 512,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    }
+  ],
+  "families": [
+    {
+      "family": "transformer",
+      "space": {
+        "params": [
+          {
+            "kind": "float",
+            "name": "lr",
+            "low": 1e-05,
+            "high": 0.0001,
+            "log": true
+          },
+          {
+            "kind": "categorical",
+            "name": "aggregation",
+            "choices": [
+              "max",
+              "mean"
+            ]
+          },
+          {
+            "kind": "categorical",
+            "name": "freeze_embeddings",
+            "choices": [
+              false,
+              true
+            ]
+          }
+        ]
+      },
+      "default": {
+        "lr": 3e-05,
+        "aggregation": "max",
+        "freeze_embeddings": false
+      }
+    }
+  ],
+  "transformer": {
+    "epochs": 6,
+    "batch_tokens": 16384,
+    "weight_decay": 0.01,
+    "warmup_ratio": 0.1,
+    "stopping_parts": 10
+  }
+}

@@ -138,10 +138,14 @@ def branch_config(
                 "network": stage.network
                 if selected.family.family is ClassifierFamily.MULTIRESCNN
                 else None,
+                "transformer": stage.transformer
+                if selected.family.family is ClassifierFamily.TRANSFORMER
+                else None,
                 "lsa": stage.lsa
                 if selected.family.family is ClassifierFamily.LIGHTGBM_LSA
                 else None,
                 "subsample_parts": 1,
+                "concurrent_trials": 1,
                 "trials": trials,
                 "random_startup_trials": random_startup_trials,
             }

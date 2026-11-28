@@ -12,7 +12,7 @@ STAGE_PREDICTION_COLUMNS <- c(
 FAMILY_LABELS <- c(
   complement_nb = "Complement NB", logreg = "Logistická regrese",
   linear_svm = "Lineární SVM", nb_svm = "NB-SVM", lightgbm_lsa = "LightGBM nad LSA",
-  lightgbm = "LightGBM", fasttext = "fastText", multirescnn = "MultiResCNN"
+  lightgbm = "LightGBM", fasttext = "fastText", multirescnn = "MultiResCNN", transformer = "Transformer"
 )
 
 STAGE_DIAGNOSES <- c("diabetes", "copd", "ckd", "pneumonia", "atrial_fibrillation")
@@ -139,7 +139,7 @@ check_stage_trials <- function(trials, manifest, config, candidates) {
   }
   defaults <- unique(trials[trials$default, c("trial", "branch")])
   if (!nrow(defaults) || anyDuplicated(defaults$branch) ||
-      !setequal(defaults$trial, seq_len(nrow(defaults)) - 1L) ||
+      !setequal(unique(trials$trial), seq_len(length(unique(trials$trial))) - 1L) ||
       !setequal(defaults$branch, trials$branch)) fail()
   invisible(TRUE)
 }
@@ -165,12 +165,13 @@ stage_best_by <- function(summary, column) {
 }
 
 stage_selection <- function(summary, manifest) {
-  best <- stage_best_by(summary, "family")
-  if (nrow(best) == 1L) stop("stupeň má jedinou rodinu", call. = FALSE)
+  column <- if (length(unique(summary$family)) == 1L) "branch" else "family"
+  best <- stage_best_by(summary, column)
+  if (nrow(best) == 1L) stop("stupeň má jediného kandidáta", call. = FALSE)
   if (best$trial[1] != manifest$best_trial) {
     stop("Vítěz neodpovídá manifestu.", call. = FALSE)
   }
-  list(winner = best[1, ], family_best = best, second = best[2, ], others = best[-1, ])
+  list(winner = best[1, ], candidate_best = best, second = best[2, ], others = best[-1, ], column = column)
 }
 
 space_value_text <- function(x) {
@@ -272,20 +273,29 @@ stage_defaults_table <- function(summary) {
     konvergence = ifelse(rows$converged, "ano", "ne"), minuty = metric_text(rows$seconds / 60))
 }
 
+stage_candidate_labels <- function(values, selection) {
+  if (selection$column == "branch") {
+    return(selection$candidate_best$representation[match(values, selection$candidate_best$branch)])
+  }
+  unname(FAMILY_LABELS[values])
+}
+
 stage_family_table <- function(selection, summary) {
-  rows <- selection$family_best
+  rows <- selection$candidate_best
+  column <- selection$column
   defaults <- summary[summary$default, ]
-  data.frame(rodina = unname(FAMILY_LABELS[rows$family]),
+  data.frame(rodina = stage_candidate_labels(rows[[column]], selection),
     pokus = paste(rows$trial, rows$representation),
     macro = stage_macro_text(rows),
     výchozí = metric_text(defaults$value[match(rows$branch, defaults$branch)]),
-    pokusy = vapply(rows$family, function(family) sum(summary$family == family), integer(1)))
+    pokusy = vapply(rows[[column]], function(value) sum(summary[[column]] == value), integer(1)))
 }
 
 stage_diagnosis_table <- function(trials, selection, candidates) {
-  rows <- trials[trials$trial %in% selection$family_best$trial, ]
-  means <- stats::aggregate(rows["max_f1"], rows[c("family", "diagnosis")], mean)
-  data.frame(rodina = unname(FAMILY_LABELS[means$family]),
+  rows <- trials[trials$trial %in% selection$candidate_best$trial, ]
+  column <- selection$column
+  means <- stats::aggregate(rows["max_f1"], rows[c(column, "diagnosis")], mean)
+  data.frame(rodina = stage_candidate_labels(means[[column]], selection),
     diagnóza = candidate_labels(means$diagnosis, candidates), f1 = metric_text(means$max_f1))
 }
 

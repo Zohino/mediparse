@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.stage_tuning import StageTrialRecord, StageTuningConfig
 from mediparse.domain.tuning import Trial, ValidationScores
+from tests.hf_encoder_support import SPEC
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -313,3 +314,46 @@ class CapturingScorer:
             converged=True,
             n_features=10 + fold.fold,
         )
+
+
+def transformer_stage_config(**changes: object) -> StageTuningConfig:
+    """Sestaví dvě malé CPU větve transformeru.
+
+    Returns:
+        Dva encodery s jednou epochou a levnými dávkami.
+    """
+    default = {"lr": 3e-5, "aggregation": "max", "freeze_embeddings": False}
+    return stage_config(
+        **(
+            {
+                "representations": [
+                    SPEC.model_dump(mode="json") | {"name": name} for name in ("a", "b")
+                ],
+                "families": [
+                    {
+                        "family": "transformer",
+                        "space": {
+                            "params": [
+                                {
+                                    "kind": "categorical",
+                                    "name": name,
+                                    "choices": [value],
+                                }
+                                for name, value in default.items()
+                            ]
+                        },
+                        "default": default,
+                    }
+                ],
+                "random_startup_trials": 2,
+                "transformer": {
+                    "epochs": 1,
+                    "batch_tokens": 64,
+                    "weight_decay": 0.01,
+                    "warmup_ratio": 0.1,
+                    "stopping_parts": 3,
+                },
+            }
+            | changes
+        )
+    )

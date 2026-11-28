@@ -34,6 +34,9 @@ def classifier_estimator(  # ruff: ignore[too-many-return-statements]
 
     Returns:
         Nenatrénovaný estimator s výchozími hyperparametry rodiny.
+
+    Raises:
+        ValueError: Transformer vyžaduje encoder větve ve scoreru.
     """
     match family:
         case ClassifierFamily.COMPLEMENT_NB:
@@ -60,6 +63,9 @@ def classifier_estimator(  # ruff: ignore[too-many-return-statements]
             from mediparse.infrastructure.multirescnn import MultiResCnnClassifier  # ruff: ignore[import-outside-top-level]
 
             return MultiResCnnClassifier(random_state=seed)
+        case ClassifierFamily.TRANSFORMER:
+            msg = "Rodinu transformer skládá scorer stupně s encoderem větve."
+            raise ValueError(msg)
         case _:
             assert_never(family)
 

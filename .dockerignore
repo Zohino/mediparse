@@ -9,6 +9,7 @@
 !config/stage_classical.json
 !config/stage_embeddings.json
 !config/stage_networks.json
+!config/stage_transformers.json
 !config/transformer_pilot.json
 !config/decision_rule.json
 !config/section_headers.json

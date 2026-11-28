@@ -1,10 +1,12 @@
-"""Skórování větví stupně se sdílenými četnostmi n-gramů mezi pokusy."""
+"""Skórování větví stupně včetně sítí a izolovaných transformerů na GPU."""
 
 from __future__ import annotations
 
+import multiprocessing
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass, field
 from functools import partial
-from itertools import chain
+from itertools import chain, compress
 from operator import itemgetter
 from typing import TYPE_CHECKING, Final, Literal, Protocol, assert_never, cast
 
@@ -25,6 +27,7 @@ from mediparse.domain.representation import (
     Word2VecRepresentation,
 )
 from mediparse.domain.tuning import ValidationScores
+from mediparse.infrastructure.hf_classifier import HfWindowClassifier
 from mediparse.infrastructure.sklearn_classifier import (
     EMPTY_VOCABULARY,
     TfidfParameters,
@@ -36,8 +39,12 @@ from mediparse.infrastructure.sklearn_families import (
     classifier_estimator,
     positive_scores,
 )
-from mediparse.infrastructure.sklearn_split import holdout_mask
-from mediparse.infrastructure.torch_device import cuda_device_count, fold_groups
+from mediparse.infrastructure.sklearn_split import holdout_mask, label_matrix
+from mediparse.infrastructure.torch_device import (
+    DevicePool,
+    cuda_device_count,
+    fold_groups,
+)
 from mediparse.infrastructure.word2vec import trained_vectors
 
 if TYPE_CHECKING:
@@ -53,12 +60,33 @@ if TYPE_CHECKING:
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.seed import Seed
     from mediparse.domain.split import Holdout
-    from mediparse.domain.stage_tuning import Branch, StageNetwork, StageTuningConfig
+    from mediparse.domain.stage_tuning import (
+        Branch,
+        StageNetwork,
+        StageTransformer,
+        StageTuningConfig,
+    )
     from mediparse.domain.tuning import ParamValue
     from mediparse.infrastructure.note_embeddings import NoteEmbeddings
 
 
 MIN_PADDED_WORD_LENGTH: Final = 3
+
+
+type GroupScores = tuple[tuple[int, ValidationScores], ...]
+
+
+def in_spawned_process[T](function: Callable[[], T]) -> T:
+    """Vyhodnotí pokus v samostatném procesu a vrátí jeho výsledek.
+
+    Returns:
+        Výsledek funkce nebo její výjimka v rodiči.
+    """
+    # Proces odstraní soupeření o GIL a po pokusu uvolní GPU; spawn chrání CUDA před forkem.
+    with ProcessPoolExecutor(
+        max_workers=1, mp_context=multiprocessing.get_context("spawn")
+    ) as pool:
+        return pool.submit(function).result()
 
 
 @dataclass(frozen=True)
@@ -71,6 +99,8 @@ class SklearnStageScorer:
     scratch: Path
     embeddings: NoteEmbeddings
     jobs: int = 1
+    devices: DevicePool | None = None
+    isolate: Callable[[Callable[[], GroupScores]], GroupScores] = in_spawned_process
     _prepared: dict[tuple[str, str], str] = field(
         default_factory=dict, init=False, repr=False
     )
@@ -102,9 +132,13 @@ class SklearnStageScorer:
             InvalidInputError: Parametry nebo trénovací slovník nejsou platné.
         """
         try:
-            if self.config.branch(params).family.family is ClassifierFamily.MULTIRESCNN:
-                return self._network_folds(params, folds)
-            return tuple(self._score(params, fold) for fold in folds)
+            match self.config.branch(params).family.family:
+                case ClassifierFamily.MULTIRESCNN:
+                    return self._network_folds(params, folds)
+                case ClassifierFamily.TRANSFORMER:
+                    return self._transformer_folds(params, folds)
+                case _:
+                    return tuple(self._score(params, fold) for fold in folds)
         except ValueError as error:
             msg = f"Parametry nebo trénovací slovník stupně nejsou platné: {error}"
             raise InvalidInputError(msg) from error
@@ -157,10 +191,7 @@ class SklearnStageScorer:
             for i, device in group:
                 fold = folds[i]
                 train, validation, n_features = self._features(branch, rep, fold)
-                stop = holdout_mask(fold.train, network.stopping_parts, self.seed)
-                labels = np.array([
-                    [note.has_label(d) for d in Diagnosis] for note in fold.train
-                ])
+                stop, labels = self._fit_split(fold, network.stopping_parts)
                 fits.append((
                     i,
                     partial(
@@ -187,6 +218,55 @@ class SklearnStageScorer:
             for _, score in sorted(chain.from_iterable(results), key=itemgetter(0))
         )
 
+    def _fit_split(self, fold: Holdout, parts: int) -> tuple[ndarray, ndarray]:
+        return holdout_mask(fold.train, parts, self.seed), label_matrix(fold.train)
+
+    def _encoder_texts(
+        self, spec: EncoderSpec, notes: Sequence[InputNote]
+    ) -> list[str]:
+        normalization = self.normalizations[spec.name]
+        prepare = (
+            tfidf_vectorizer(normalization).build_preprocessor()
+            if normalization is not None
+            else str
+        )
+        # Souběžná vlákna mohou spočítat tentýž text; zápis stejné hodnoty je pod GIL idempotentní.
+        return self._texts(spec.name, notes, prepare)
+
+    def _transformer_folds(
+        self,
+        params: Mapping[str, ParamValue],
+        folds: Sequence[Holdout],
+    ) -> tuple[ValidationScores, ...]:
+        transformer = cast("StageTransformer", self.config.transformer)
+        branch = self.config.branch(params)
+        spec = cast("EncoderSpec", branch.representation)
+        _, family = branch.params_of(params)
+        fits = []
+        with cast("DevicePool", self.devices).lease() as device:
+            for i, fold in enumerate(folds):
+                texts = self._encoder_texts(spec, fold.train)
+                stop, labels = self._fit_split(fold, transformer.stopping_parts)
+                fits.append((
+                    i,
+                    partial(
+                        _transformer_scores,
+                        HfWindowClassifier(
+                            encoder=spec,
+                            random_state=self.seed,
+                            device=device,
+                            **transformer.model_dump(exclude={"stopping_parts"}),
+                        ).set_params(**family),
+                        train=list(compress(texts, ~stop)),
+                        labels=labels[~stop],
+                        stop=list(compress(texts, stop)),
+                        stop_labels=labels[stop],
+                        validation=self._encoder_texts(spec, fold.test),
+                    ),
+                ))
+            results = self.isolate(partial(_network_group_scores, fits))
+        return tuple(score for _, score in results)
+
     def _features(
         self, branch: Branch, rep_params: Mapping[str, ParamValue], fold: Holdout
     ) -> tuple[ndarray | csr_matrix, ndarray | csr_matrix, int]:
@@ -194,13 +274,8 @@ class SklearnStageScorer:
         normalization = self.normalizations[name]
         match branch.representation:
             case EncoderSpec() as spec:
-                prepare = (
-                    tfidf_vectorizer(normalization).build_preprocessor()
-                    if normalization is not None
-                    else str
-                )
-                train_texts = self._texts(name, fold.train, prepare)
-                validation_texts = self._texts(name, fold.test, prepare)
+                train_texts = self._encoder_texts(spec, fold.train)
+                validation_texts = self._encoder_texts(spec, fold.test)
                 train, validation = encoder_features(
                     self.embeddings, spec, train_texts, validation_texts
                 )
@@ -396,7 +471,7 @@ def tfidf_features(
 
 def _network_group_scores(
     fits: Sequence[tuple[int, Callable[[], ValidationScores]]],
-) -> tuple[tuple[int, ValidationScores], ...]:
+) -> GroupScores:
     return tuple((index, fit()) for index, fit in fits)
 
 
@@ -415,10 +490,38 @@ def _network_scores(  # ruff: ignore[too-many-arguments]
     fitted.fit(train, labels, stop, stop_labels)
     scores = fitted.decision_function(validation)
     return ValidationScores(
-        {d: tuple(float(v) for v in scores[:, j]) for j, d in enumerate(Diagnosis)},
+        _diagnosis_columns(scores),
         fitted.converged_,
         n_features,
     )
+
+
+# Oddělené vstupy chrání fit před stop částí a validací stejně jako u MultiResCNN.
+def _transformer_scores(  # ruff: ignore[too-many-arguments]
+    model: HfWindowClassifier,
+    *,
+    train: Sequence[str],
+    labels: ndarray,
+    stop: Sequence[str],
+    stop_labels: ndarray,
+    validation: Sequence[str],
+) -> ValidationScores:
+    if model.device.startswith("cuda:"):
+        import torch  # ruff: ignore[import-outside-top-level]
+
+        # Knihovny používající aktuální zařízení nesmí založit všem dětem kontext na cuda:0.
+        torch.cuda.set_device(model.device)
+    model.fit(train, labels, stop, stop_labels)
+    # DUA: vracíme jen Python floaty, model a tensory by torch sdílel přes /dev/shm.
+    return ValidationScores(
+        _diagnosis_columns(model.decision_function(validation)),
+        model.converged_,
+        model.model_.config.hidden_size,
+    )
+
+
+def _diagnosis_columns(scores: ndarray) -> dict[Diagnosis, tuple[float, ...]]:
+    return {d: tuple(float(v) for v in scores[:, j]) for j, d in enumerate(Diagnosis)}
 
 
 class _NetworkModel(Protocol):

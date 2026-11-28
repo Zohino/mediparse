@@ -7,6 +7,7 @@ import json
 import pytest
 
 from mediparse.domain.stage_refinement import RefinementConfig, branch_config, widen
+from mediparse.domain.stage_tuning import StageTuningConfig
 from mediparse.domain.tuning import CategoricalParam, FloatParam
 from mediparse.infrastructure.stage_config import (
     load_refinement_config,
@@ -119,3 +120,27 @@ def test_widen_accepts_proper_categorical_superset() -> None:
     )
     assert isinstance(param, CategoricalParam)
     assert param.choices == (2, 3)
+
+
+def test_branch_config_keeps_transformer_and_runs_sequentially() -> None:
+    """Vybraná větev zachová transformer a šest startů sekvenčního doladění."""
+    stage = load_stage_config(REPOSITORY / "config/stage_transformers.json")
+    selected = branch_config(
+        stage, "xlmr/transformer", trials=20, random_startup_trials=5
+    )
+    assert selected.transformer == stage.transformer
+    assert selected.concurrent_trials == 1
+    assert selected.sampler_startup_trials == 6
+    assert selected.network is None
+    assert selected.lsa is None
+
+
+def test_branch_config_clears_transformer_for_mixed_stage() -> None:
+    """Lineární větev smíšeného stupně nepřenáší techniku transformeru."""
+    stage = load_stage_config(REPOSITORY / "config/stage_transformers.json")
+    data = stage.model_dump(mode="json")
+    data["concurrent_trials"] = 1
+    data["families"].append(stage_config().families[0].model_dump(mode="json"))
+    mixed = StageTuningConfig.model_validate_json(json.dumps(data))
+    selected = branch_config(mixed, "xlmr/logreg", trials=20, random_startup_trials=5)
+    assert selected.transformer is None

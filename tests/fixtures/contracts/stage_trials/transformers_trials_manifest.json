@@ -1,0 +1,87 @@
+{
+  "encoders": [
+    {
+      "name": "mmbert",
+      "text_preprocessing": "none",
+      "model": "jhu-clsp/mmBERT-base",
+      "revision": "c5955035435e2bf121cde7f3c8863ef52ff35d82",
+      "window": 512,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    },
+    {
+      "name": "xlmr",
+      "text_preprocessing": "none",
+      "model": "FacebookAI/xlm-roberta-base",
+      "revision": "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
+      "window": 512,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    },
+    {
+      "name": "mdeberta",
+      "text_preprocessing": "none",
+      "model": "microsoft/mdeberta-v3-base",
+      "revision": "a0484667b22365f84929a935b5e50a51f71f159d",
+      "window": 512,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    }
+  ],
+  "dataset_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "config_sha256": "37149fdc9372a8db7fa7ac1849acdd21c275957116f11667f8f5cf23ed5556b4",
+  "split_seed": 0,
+  "split_folds": 5,
+  "split_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "seed": 0,
+  "jobs": 1,
+  "trials": 20,
+  "random_startup_trials": 5,
+  "completed_trials": 20,
+  "nonconverged_trials": 1,
+  "best_trial": 18,
+  "best_branch": "mmbert/transformer",
+  "best_params": {
+    "branch": "mmbert/transformer",
+    "transformer.lr": 0.00003,
+    "transformer.aggregation": "max",
+    "transformer.freeze_embeddings": false
+  },
+  "best_macro_f1": 0.9505313063747846,
+  "sampler": "TPESampler(multivariate=True, group=True)",
+  "pruner": "NopPruner",
+  "seconds": 210.0,
+  "sample_notes": 120,
+  "sample_patients": 120,
+  "development_notes": 360,
+  "development_patients": 360,
+  "results_sha256": "09930910221cf12d6fd64985aa5e433449fd1790eb9f5b1b4f886bdca9b5b8ef",
+  "predictions_sha256": "e97468806b0d67bbfcf8ba4a5cee787c4d780ebc5a59dda6e2e95636fb3cda76",
+  "diagnostic_strip": null,
+  "text_preprocessing": {
+    "mmbert": "none",
+    "xlmr": "none",
+    "mdeberta": "none"
+  },
+  "text_normalization": {
+    "mmbert": null,
+    "xlmr": null,
+    "mdeberta": null
+  },
+  "environment": {
+    "packages": {
+      "python": "3.13.0"
+    },
+    "source": {
+      "commit": "cccccccccccccccccccccccccccccccccccccccc",
+      "dirty": false
+    }
+  },
+  "hardware": {
+    "cpu_model": "Synthetic CPU",
+    "logical_cores": 8,
+    "available_cores": 2,
+    "memory_bytes": 1024,
+    "gpus": []
+  }
+}

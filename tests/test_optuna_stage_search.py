@@ -1,12 +1,18 @@
 """Návrhy aktivních větví a shoda obnovené historie."""
 
 from typing import TYPE_CHECKING
+from unittest.mock import Mock
 
 import pytest
 
 from mediparse.domain.representation import TfidfRepresentation
+from mediparse.infrastructure import optuna_search
 from mediparse.infrastructure.optuna_search import OptunaStageSearch, stage_sampler
-from tests.stage_support import stage_config, token_stage_config
+from tests.stage_support import (
+    stage_config,
+    token_stage_config,
+    transformer_stage_config,
+)
 
 if TYPE_CHECKING:
     from mediparse.domain.tuning import Trial
@@ -52,8 +58,9 @@ def test_stage_maximizes_objective() -> None:
 
 def test_sampler_description_uses_actual_options() -> None:
     """Manifest pojmenuje přesné nastavení TPE včetně group."""
-    assert stage_sampler(20) == (
-        "optuna.samplers.TPESampler(n_startup_trials=20, multivariate=True, group=True)"
+    config = transformer_stage_config(concurrent_trials=3)
+    assert stage_sampler(config.sampler_startup_trials) == (
+        "optuna.samplers.TPESampler(n_startup_trials=2, multivariate=True, group=True, constant_liar=True)"
     )
 
 
@@ -74,3 +81,21 @@ def test_single_branch_without_representation_params() -> None:
     restored.restore([(trial, 0.5)])
     assert restored.study.best_value == search.study.best_value
     assert restored.ask() == search.ask()
+
+
+def test_sampler_receives_compensated_startup_and_actual_options(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Dvě větve a dva náhodné starty při souběhu tři dávají práh dva."""
+    sampler = Mock(wraps=optuna_search.TPESampler)
+    monkeypatch.setattr(optuna_search, "TPESampler", sampler)
+    OptunaStageSearch.create(transformer_stage_config(concurrent_trials=3)).ask()
+    sampler.assert_called_once()
+    assert {
+        key: value for key, value in sampler.call_args.kwargs.items() if key != "seed"
+    } == {
+        "n_startup_trials": 2,
+        "multivariate": True,
+        "group": True,
+        "constant_liar": True,
+    }

@@ -2,11 +2,16 @@
 
 from __future__ import annotations
 
+from contextlib import contextmanager
+from dataclasses import dataclass
+from queue import Queue
 from typing import TYPE_CHECKING, Final
 
 from mediparse.domain.inputs import InvalidInputError
 
 if TYPE_CHECKING:
+    from collections.abc import Generator
+
     from mediparse.domain.representation import Device
 
 
@@ -77,3 +82,41 @@ def fold_groups(
         selected = fold_device(device, gpu, count)
         groups.append(tuple((fold, selected) for fold in range(gpu, folds, count)))
     return min(jobs, count), tuple(groups)
+
+
+@dataclass(frozen=True)
+class DevicePool:
+    """Výhradní zařízení pro souběžné pokusy, na CPU jen počet míst."""
+
+    free: Queue[str]
+
+    @classmethod
+    def of(cls, device: Device, slots: int) -> DevicePool:
+        """Připraví jedno zařízení pro každý současně běžící pokus.
+
+        Returns:
+            Pool s požadovaným počtem míst.
+
+        Raises:
+            InvalidInputError: Viditelných GPU je méně než souběžných pokusů.
+        """
+        if device == "cuda" and cuda_device_count() < slots:
+            msg = "Souběžné pokusy vyžadují alespoň tolik GPU jako míst."
+            raise InvalidInputError(msg)
+        free: Queue[str] = Queue()
+        for index in range(slots):
+            free.put("cpu" if device == "cpu" else f"cuda:{index}")
+        return cls(free)
+
+    @contextmanager
+    def lease(self) -> Generator[str]:
+        """Zapůjčí zařízení do ukončení pokusu i při výjimce.
+
+        Yields:
+            Výhradně zapůjčené zařízení.
+        """
+        device = self.free.get()
+        try:
+            yield device
+        finally:
+            self.free.put(device)

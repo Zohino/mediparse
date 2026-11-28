@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
+from threading import Barrier, Event
 from typing import TYPE_CHECKING
 
 import pytest
@@ -11,7 +12,7 @@ from mediparse.application.stage_tuning import StageTuning
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.split import strata
-from mediparse.domain.stage_tuning import StageFoldResult, StageTrialRecord
+from mediparse.domain.stage_tuning import BRANCH_KEY, StageFoldResult, StageTrialRecord
 from mediparse.domain.tuning import MaxF1, Trial, ValidationScores
 from mediparse.infrastructure.optuna_search import OptunaStageSearch
 from mediparse.infrastructure.parquet_file import read_table
@@ -27,14 +28,21 @@ from tests.stage_support import (
     MemoryProgress,
     StepClock,
     stage_config,
+    transformer_stage_config,
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Mapping, Sequence
     from pathlib import Path
 
+    from mediparse.application.ports.experiment import (
+        StageProgress,
+        StageSearch,
+        TrialScorer,
+    )
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.split import Holdout, SharedSplit
+    from mediparse.domain.stage_tuning import StageTuningConfig
     from mediparse.domain.tuning import ParamValue
 
 
@@ -90,15 +98,7 @@ def test_defaults_and_development_sample(
     for _ in range(2):
         scorer, progress = CapturingScorer(), MemoryProgress()
         search = OptunaStageSearch.create(config)
-        report = StageTuning(
-            _Table(),
-            _SplitSource(),
-            StratifiedGroupFolds(),
-            search,
-            scorer,
-            progress,
-            StepClock(),
-        ).run(config)
+        report = _tuning(search, scorer, progress).run(config)
         assert progress.finished
         sample = {n.note_id for f in scorer.observed[:2] for n in f.test}
         patients = {n.subject_id for f in scorer.observed[:2] for n in f.test}
@@ -124,15 +124,7 @@ def test_fold_features_reach_results() -> None:
     """Počet příznaků každého foldu projde až do všech buněk diagnóz."""
     config = stage_config()
     scorer, progress = CapturingScorer(), MemoryProgress()
-    StageTuning(
-        _Table(),
-        _SplitSource(),
-        StratifiedGroupFolds(),
-        OptunaStageSearch.create(config),
-        scorer,
-        progress,
-        StepClock(),
-    ).run(config)
+    _tuning(OptunaStageSearch.create(config), scorer, progress).run(config)
     assert progress.results
     assert all(result.n_features == 10 + result.fold for result in progress.results)
 
@@ -153,28 +145,18 @@ def test_interrupted_run_resumes_to_identical_outputs(tmp_path: Path, cut: int) 
     for i, progress in enumerate(checkpoints):
         if i:
             with pytest.raises(RuntimeError, match="přerušení"):
-                StageTuning(
-                    _Table(),
-                    _SplitSource(),
-                    StratifiedGroupFolds(),
+                _tuning(
                     OptunaStageSearch.create(config),
                     CapturingScorer(fail_at=cut * 2),
                     progress,
-                    StepClock(),
                 ).run(config)
             records = progress.completed()
             assert len(records) == cut
             with pytest.raises(InvalidInputError, match="patří jinému běhu"):
                 replace(progress, key="foreign").completed()
-        StageTuning(
-            _Table(),
-            _SplitSource(),
-            StratifiedGroupFolds(),
-            OptunaStageSearch.create(config),
-            CapturingScorer(),
-            progress,
-            StepClock(),
-        ).run(config)
+        _tuning(OptunaStageSearch.create(config), CapturingScorer(), progress).run(
+            config
+        )
         assert not progress.directory.exists()
     assert checkpoints[0].results.read_bytes() == checkpoints[1].results.read_bytes()
     assert (
@@ -188,28 +170,12 @@ def test_enqueue_protocol_and_restore(cut: int) -> None:
     """Výchozí body se vkládají jen před čtyřmi příslušnými ask, při obnově jen zbytek."""
     config = stage_config()
     initial = MemoryProgress()
-    StageTuning(
-        _Table(),
-        _SplitSource(),
-        StratifiedGroupFolds(),
-        FixedSearch(),
-        CapturingScorer(),
-        initial,
-        StepClock(),
-    ).run(config)
+    _tuning(FixedSearch(), CapturingScorer(), initial).run(config)
     records = initial.records[:cut]
     progress, search = MemoryProgress(records=list(records)), FixedSearch()
     if cut >= 4:
         search.enqueued.append((-1, config.branches[-1].default_params()))
-    StageTuning(
-        _Table(),
-        _SplitSource(),
-        StratifiedGroupFolds(),
-        search,
-        CapturingScorer(),
-        progress,
-        StepClock(),
-    ).run(config)
+    _tuning(search, CapturingScorer(), progress).run(config)
     assert search.restored == [(Trial(r.number, r.params), r.value) for r in records]
     assert [(n, p) for n, p in search.enqueued if n >= 0] == [
         (n, branch.default_params())
@@ -268,15 +234,7 @@ def test_nonconvergence_counts_each_affected_trial_once() -> None:
             return replace(scored, converged=not (number in {1, 4} and fold.fold == 0))
 
     progress = MemoryProgress()
-    report = StageTuning(
-        _Table(),
-        _SplitSource(),
-        StratifiedGroupFolds(),
-        FixedSearch(),
-        Nonconverged(),
-        progress,
-        StepClock(),
-    ).run(stage_config())
+    report = _tuning(FixedSearch(), Nonconverged(), progress).run(stage_config())
     assert [r.converged for r in progress.records] == [
         True,
         False,
@@ -286,3 +244,239 @@ def test_nonconvergence_counts_each_affected_trial_once() -> None:
         True,
     ]
     assert report.nonconverged_trials == 2
+
+
+class _LoggedSearch(FixedSearch):
+    """Studie zaznamenávající otevřené pokusy a pořadí volání."""
+
+    def __init__(self, log: list[str]) -> None:
+        super().__init__()
+        self.log = log
+        self.opened = 0
+        self.maximum = 0
+
+    def enqueue(self, params: Mapping[str, ParamValue]) -> None:
+        self.log.append("enqueue")
+        super().enqueue(params)
+
+    def ask(self) -> Trial:
+        self.log.append("ask")
+        self.opened += 1
+        self.maximum = max(self.maximum, self.opened)
+        return super().ask()
+
+    def complete(self, trial: Trial, value: float) -> None:
+        self.log.append("complete")
+        self.opened -= 1
+        super().complete(trial, value)
+
+
+class _LoggedProgress(MemoryProgress):
+    """Checkpoint s událostí zápisu ve společném logu."""
+
+    def __init__(self, log: list[str]) -> None:
+        super().__init__()
+        self.log = log
+        self.b_written = Event()
+
+    def write(
+        self, record: StageTrialRecord, results: Sequence[StageFoldResult]
+    ) -> None:
+        self.log.append("write")
+        super().write(record, results)
+        if record.params["branch"] == "b/transformer":
+            self.b_written.set()
+
+
+def _tuning(
+    search: StageSearch, scorer: TrialScorer, progress: StageProgress
+) -> StageTuning:
+    return StageTuning(
+        _Table(),
+        _SplitSource(),
+        StratifiedGroupFolds(),
+        search,
+        scorer,
+        progress,
+        StepClock(),
+    )
+
+
+def _assert_one_default_per_branch(
+    records: Sequence[StageTrialRecord],
+    config: StageTuningConfig,
+) -> None:
+    for branch in config.branches:
+        assert [
+            r.params
+            for r in records
+            if r.default and r.params[BRANCH_KEY] == branch.name
+        ] == [branch.default_params()]
+
+
+def test_sequential_call_order_is_unchanged() -> None:
+    """Čtyři výchozí a dva návrhy zachovají původní pořadí volání."""
+    log: list[str] = []
+    _tuning(_LoggedSearch(log), CapturingScorer(), _LoggedProgress(log)).run(
+        stage_config()
+    )
+    assert (
+        log
+        == ["enqueue", "ask", "complete", "write"] * 4
+        + ["ask", "complete", "write"] * 2
+    )
+
+
+def test_concurrent_trials_run_simultaneously() -> None:
+    """Bariéra vyžaduje skutečný souběh tří pokusů v obou vlnách."""
+    barrier = Barrier(3, timeout=10)
+
+    class Scorer(CapturingScorer):
+        def score_folds(
+            self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
+        ) -> tuple[ValidationScores, ...]:
+            barrier.wait()
+            return super().score_folds(params, folds)
+
+    search = _LoggedSearch([])
+    progress = MemoryProgress()
+    config = transformer_stage_config(concurrent_trials=3)
+    _tuning(search, Scorer(), progress).run(config)
+    assert search.asked == config.trials
+    assert len(progress.records) == 6
+    assert search.maximum == 3
+
+
+def test_out_of_order_completion_keeps_protocol() -> None:
+    """Dokončení B před A neztratí výchozí body ani souvislé číslování."""
+    progress = _LoggedProgress([])
+
+    class Scorer(CapturingScorer):
+        def score_folds(
+            self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
+        ) -> tuple[ValidationScores, ...]:
+            if params["branch"] == "a/transformer":
+                assert progress.b_written.wait(10)
+            return super().score_folds(params, folds)
+
+    config = transformer_stage_config(concurrent_trials=2)
+    search = _LoggedSearch([])
+    _tuning(search, Scorer(), progress).run(config)
+    assert search.asked == config.trials
+    assert [r.number for r in progress.records] == list(range(6))
+    assert progress.records[0].params["branch"] == "b/transformer"
+    _assert_one_default_per_branch(progress.records, config)
+
+
+@pytest.mark.parametrize("failed", [1, 2])
+def test_concurrent_failure_drains_running_trials(failed: int) -> None:
+    """Selhání zastaví návrhy a dovolí zapsat zbylé dva běžící pokusy."""
+    barrier = Barrier(3, timeout=10)
+    failure = Event()
+    log: list[str] = []
+    config = transformer_stage_config(concurrent_trials=3)
+    family = config.model_dump(mode="json")["families"][0]
+    family["space"]["params"][0] = {
+        "kind": "float",
+        "name": "lr",
+        "low": 1e-5,
+        "high": 1e-4,
+        "log": True,
+    }
+    config = transformer_stage_config(concurrent_trials=3, families=[family])
+
+    class Search(_LoggedSearch):
+        def ask(self) -> Trial:
+            trial = super().ask()
+            return (
+                replace(trial, params=dict(trial.params) | {"transformer.lr": 1e-5})
+                if trial.number == 2
+                else trial
+            )
+
+    search = Search(log)
+    failed_params = config.branches[1].default_params()
+    if failed == 2:
+        failed_params |= {"transformer.lr": 1e-5}
+
+    class Scorer(CapturingScorer):
+        def score_folds(
+            self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
+        ) -> tuple[ValidationScores, ...]:
+            barrier.wait()
+            if params == failed_params:
+                log.append("failure")
+                failure.set()
+                msg = "přerušení"
+                raise RuntimeError(msg)
+            assert failure.wait(10)
+            return super().score_folds(params, folds)
+
+    progress = MemoryProgress()
+    with pytest.raises(RuntimeError, match=r"^přerušení$"):
+        _tuning(search, Scorer(), progress).run(config)
+    # První vlna: A výchozí, B výchozí, B nevýchozí; jeden selže, dva se zapíšou.
+    assert search.asked == 3
+    assert len(progress.records) == 2
+    assert "ask" not in log[log.index("failure") + 1 :]
+    assert not progress.finished
+
+
+def test_resume_restores_missing_defaults() -> None:
+    """Checkpoint po SIGKILL doplní jen chybějící výchozí bod B."""
+    config = transformer_stage_config(concurrent_trials=2)
+    a = config.branches[0].default_params()
+    b = config.branches[1].default_params()
+    progress = MemoryProgress(
+        records=[
+            StageTrialRecord(
+                0, a, default=True, value=0.5, converged=True, seconds=1.0
+            ),
+            StageTrialRecord(
+                1, a, default=False, value=0.4, converged=True, seconds=1.0
+            ),
+            StageTrialRecord(
+                2, b, default=False, value=0.3, converged=True, seconds=1.0
+            ),
+        ]
+    )
+    search = FixedSearch()
+    _tuning(search, CapturingScorer(), progress).run(config)
+    assert search.enqueued == [(3, config.branches[1].default_params())]
+    assert sorted(r.number for r in progress.records) == list(range(6))
+    _assert_one_default_per_branch(progress.records, config)
+
+
+@pytest.mark.parametrize("first_failed", ["a", "b"])
+def test_concurrent_errors_raise_first_started_and_log_only_types(
+    caplog: pytest.LogCaptureFixture,
+    first_failed: str,
+) -> None:
+    """Chyba dříve spuštěného A má přednost v obou pořadích selhání."""
+    barrier = Barrier(2, timeout=10)
+    first_failure = Event()
+
+    class Scorer:
+        @staticmethod
+        def score_folds(
+            params: Mapping[str, ParamValue], folds: Sequence[Holdout]
+        ) -> tuple[ValidationScores, ...]:
+            del folds
+            barrier.wait()
+            if params[BRANCH_KEY] == f"{first_failed}/transformer":
+                first_failure.set()
+            else:
+                assert first_failure.wait(10)
+            if params[BRANCH_KEY] == "b/transformer":
+                msg = "syntetický obsah výjimky B"
+                raise ValueError(msg)
+            msg = "první pokus"
+            raise RuntimeError(msg)
+
+    search = FixedSearch()
+    with pytest.raises(RuntimeError, match=r"^první pokus$"):
+        _tuning(search, Scorer(), MemoryProgress()).run(
+            transformer_stage_config(concurrent_trials=2)
+        )
+    assert search.asked == 2
+    assert caplog.messages == ["Pokus 1 selhal: ValueError"]

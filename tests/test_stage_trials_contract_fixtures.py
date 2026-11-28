@@ -49,7 +49,9 @@ def test_stage_trials_fixtures_match_writers_and_manifest_model(tmp_path: Path) 
     assert (tmp_path / "synthetic.json").read_bytes() == (
         CONTRACTS / "synthetic.json"
     ).read_bytes()
-    assert read_marker(CONTRACTS) == SyntheticMarker(prefix="eda-sentinel", rows=91_200)
+    assert read_marker(CONTRACTS) == SyntheticMarker(
+        prefix="eda-sentinel", rows=103_200
+    )
 
 
 def write_stage_trials_fixtures(directory: Path) -> None:

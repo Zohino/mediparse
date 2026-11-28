@@ -185,7 +185,13 @@ class StageTuningManifest(BaseModel):
     best_macro_f1: Annotated[float, Field(ge=0, le=1)]
     sampler: str
     pruner: str
-    seconds: Annotated[float, Field(ge=0)]
+    seconds: Annotated[
+        float,
+        Field(
+            ge=0,
+            description="Součet časů pokusů; při souběhu převyšuje čas na hodinách.",
+        ),
+    ]
     sample_notes: PositiveInt
     sample_patients: PositiveInt
     development_notes: PositiveInt

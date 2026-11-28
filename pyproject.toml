@@ -186,6 +186,8 @@ ignore_imports = [
     "mediparse.** -> types",
     "mediparse.** -> typing",
     "mediparse.application.** -> logging",
+    # Vlákna jen orchestrují pokusy; procesy a GPU zůstávají v infrastructure (D44).
+    "mediparse.application.stage_tuning -> concurrent",
     # Jen typy pod TYPE_CHECKING; po modulech, ne po vrstvě, protože import-linter
     # typový import od běhového nerozliší a ruff S311 nechytí random.shuffle ani seed.
     "mediparse.application.cohort -> contextlib",
@@ -430,7 +432,7 @@ include = ["translation/**"]
 allowed-unresolved-imports = ["torch", "transformers", "vllm", "vllm.**"]
 
 [[tool.ty.overrides]]
-include = ["src/mediparse/infrastructure/multirescnn.py", "src/mediparse/infrastructure/torch_device.py", "tests/test_multirescnn.py", "src/mediparse/infrastructure/hf_encoder.py", "tests/hf_encoder_support.py", "tests/test_hf_encoder.py", "src/mediparse/infrastructure/hf_classifier.py", "tests/test_hf_classifier.py"]
+include = ["src/mediparse/infrastructure/multirescnn.py", "src/mediparse/infrastructure/torch_device.py", "src/mediparse/infrastructure/sklearn_stage.py", "tests/test_multirescnn.py", "src/mediparse/infrastructure/hf_encoder.py", "tests/hf_encoder_support.py", "tests/test_hf_encoder.py", "src/mediparse/infrastructure/hf_classifier.py", "tests/test_hf_classifier.py"]
 [tool.ty.overrides.analysis]
 allowed-unresolved-imports = ["torch"]
 

@@ -43,10 +43,17 @@ class _StageSamplerOptions(TypedDict):
     n_startup_trials: int
     multivariate: bool
     group: bool
+    constant_liar: bool
 
 
 def _stage_sampler_options(startup_trials: int) -> _StageSamplerOptions:
-    return {"n_startup_trials": startup_trials, "multivariate": True, "group": True}
+    # Připnutí výchozí volby chrání provenance před změnou verze Optuny.
+    return {
+        "n_startup_trials": startup_trials,
+        "multivariate": True,
+        "group": True,
+        "constant_liar": True,
+    }
 
 
 def stage_sampler(startup_trials: int) -> str:
@@ -103,7 +110,7 @@ class OptunaStageSearch:
             warnings.simplefilter("ignore", ExperimentalWarning)
             self.study.sampler = TPESampler(
                 seed=self.config.seed + len(self.study.trials),
-                **_stage_sampler_options(self.config.startup_trials),
+                **_stage_sampler_options(self.config.sampler_startup_trials),
             )
         trial = self.study.ask()
         trial.suggest_categorical(

@@ -14,7 +14,11 @@ from mediparse.infrastructure.hf_encoder import ENCODER_PACKAGES, HfMeanEncoder
 from mediparse.infrastructure.note_embeddings import NoteEmbeddings
 from mediparse.infrastructure.package_versions import installed_versions
 from mediparse.infrastructure.sklearn_stage import SklearnStageScorer
-from mediparse.infrastructure.torch_device import NETWORK_PACKAGES, require_device
+from mediparse.infrastructure.torch_device import (
+    NETWORK_PACKAGES,
+    DevicePool,
+    require_device,
+)
 
 if TYPE_CHECKING:
     import argparse
@@ -114,6 +118,9 @@ def stage_scorer(  # ruff: ignore[too-many-arguments]
             lambda spec: encoders(spec).embed,
         ),
         jobs=jobs,
+        devices=DevicePool.of(config.encoders[0].device, config.concurrent_trials)
+        if config.transformer is not None
+        else None,
     )
 
 
@@ -139,6 +146,6 @@ def add_stage_work_arguments(parser: argparse.ArgumentParser) -> None:
         help=(
             "Procesy nezávislých fitů pokusu: diagnózy u klasiky a fastTextu, "
             "foldy u MultiResCNN (nejvýš jeden fold na GPU, fold i na GPU i mod počet GPU). "
-            "Výsledky na počtu nezávisí."
+            "Výsledky na počtu nezávisí. Stupeň 4 --jobs nepoužívá; souběh řídí concurrent_trials v configu."
         ),
     )
