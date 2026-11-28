@@ -145,6 +145,7 @@ def branch_config(
                 if selected.family.family is ClassifierFamily.LIGHTGBM_LSA
                 else None,
                 "subsample_parts": 1,
+                "concurrent_trials": 1,
                 "trials": trials,
                 "random_startup_trials": random_startup_trials,
             }
