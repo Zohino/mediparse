@@ -182,7 +182,7 @@ def _mention_violations(
 def _negation_violations(
     text: str, plan: NotePlan, patterns: Patterns, negation: Negation
 ) -> list[str]:
-    cues = "|".join(r"\s+".join(map(re.escape, cue.split())) for cue in negation.cues)
+    cues = "|".join(map(re.escape, negation.cues)).replace(r"\ ", r"\s+")
     violations: list[str] = []
     for mention in plan.mentions:
         diagnosis, status = mention.diagnosis, mention.status
