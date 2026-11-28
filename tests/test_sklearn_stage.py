@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 import json
+import os
+import pickle  # ruff: ignore[suspicious-pickle-import]
 import re
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
 from random import Random
-from typing import TYPE_CHECKING, Literal
+from threading import Barrier
+from typing import TYPE_CHECKING, Literal, cast
 from unittest.mock import Mock, call
 
 import numpy as np
@@ -24,8 +28,15 @@ from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.representation import ClassifierFamily, Word2VecRepresentation
 from mediparse.domain.split import Holdout
 from mediparse.domain.stage_tuning import StageLsa
-from mediparse.entrypoints.stage_composition import stage_normalizations
-from mediparse.infrastructure import sklearn_classifier, sklearn_stage, word2vec
+from mediparse.domain.tuning import ValidationScores
+from mediparse.entrypoints.stage_composition import stage_normalizations, stage_scorer
+from mediparse.infrastructure import (
+    hf_classifier,
+    sklearn_classifier,
+    sklearn_stage,
+    torch_device,
+    word2vec,
+)
 from mediparse.infrastructure.diagnosis_candidates_file import load_text_normalization
 from mediparse.infrastructure.fasttext_classifier import FastTextClassifier
 from mediparse.infrastructure.sklearn_classifier import (
@@ -34,8 +45,10 @@ from mediparse.infrastructure.sklearn_classifier import (
 )
 from mediparse.infrastructure.sklearn_split import StratifiedGroupFolds
 from mediparse.infrastructure.sklearn_stage import (
+    GroupScores,
     SklearnStageScorer,
     encoder_features,
+    in_spawned_process,
     joined_tokens,
     ngram_counts,
     tfidf_features,
@@ -43,18 +56,21 @@ from mediparse.infrastructure.sklearn_stage import (
     word2vec_features,
 )
 from mediparse.infrastructure.stage_config import load_stage_config
-from tests.hf_encoder_support import SPEC
+from mediparse.infrastructure.torch_device import DevicePool
+from tests.hf_encoder_support import SPEC, VERSIONS, encoder_parts
 from tests.screening_support import notes
 from tests.stage_support import (
     network_stage_config,
     stage_config,
     token_stage_config,
+    transformer_stage_config,
     word2vec_stage_config,
 )
 from tests.support import REPOSITORY, REPOSITORY_DIAGNOSIS_CANDIDATES
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+    from functools import partial
     from pathlib import Path
 
     from scipy.sparse import csr_matrix
@@ -1032,12 +1048,17 @@ def test_ngram_counts_rebuild_for_unseen_text(
         )
 
 
+@pytest.mark.parametrize("family", ["multirescnn", "transformer"])
 @pytest.mark.parametrize("converged", [True, False])
 def test_multirescnn_fits_once_with_patient_stopping_part(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, converged: bool
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, family: str, *, converged: bool
 ) -> None:
     """Jeden fit drží pacienty oddělené a sloupce ve výčtovém pořadí diagnóz."""
-    config = network_stage_config()
+    config = (
+        network_stage_config()
+        if family == "multirescnn"
+        else transformer_stage_config()
+    )
     corpus = [
         replace(
             note,
@@ -1052,22 +1073,43 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
         tuple(note for note in corpus if note.subject_id > 2),
         tuple(note for note in corpus if note.subject_id <= 2),
     )
-    model = Mock(converged_=converged)
+    assert len({note.subject_id for note in fold.train}) >= 10
+    model = Mock(converged_=converged, device="cpu")
+    model.model_.config.hidden_size = 16
     model.set_params.return_value = model
     model.decision_function.return_value = np.tile(np.arange(5), (len(fold.test), 1))
     factory = Mock(return_value=model)
     monkeypatch.setattr(sklearn_stage, "classifier_estimator", factory)
-    scorer = SklearnStageScorer(config, {"tok": None}, 7, tmp_path, Mock())
-    result = scorer.score_folds(config.branches[0].default_params(), (fold,))[0]
-    factory.assert_called_once_with(ClassifierFamily.MULTIRESCNN, 7, tmp_path)
-    assert config.network is not None
-    model.set_params.assert_called_once_with(
-        **config.families[0].default,
-        **config.network.model_dump(exclude={"stopping_parts"}),
+    monkeypatch.setattr(sklearn_stage, "HfWindowClassifier", factory)
+    scorer = SklearnStageScorer(
+        config,
+        dict.fromkeys(config.text_preprocessing),
+        7,
+        tmp_path,
+        Mock(),
+        devices=DevicePool.of("cpu", 1),
+        isolate=lambda function: function(),
     )
+    result = scorer.score_folds(config.branches[0].default_params(), (fold,))[0]
+    if family == "multirescnn":
+        factory.assert_called_once_with(ClassifierFamily.MULTIRESCNN, 7, tmp_path)
+        assert config.network is not None
+        model.set_params.assert_called_once_with(
+            **config.families[0].default,
+            **config.network.model_dump(exclude={"stopping_parts"}),
+        )
+    else:
+        assert config.transformer is not None
+        factory.assert_called_once_with(
+            encoder=config.encoders[0],
+            random_state=7,
+            device="cpu",
+            **config.families[0].default,
+            **config.transformer.model_dump(exclude={"stopping_parts"}),
+        )
     model.fit.assert_called_once()
     train, train_labels, stop, stop_labels = model.fit.call_args.args
-    prepared = joined_tokens(None)
+    prepared = joined_tokens(None) if family == "multirescnn" else str
     fit_notes = [note for note in fold.train if prepared(note.text) in train]
     stop_notes = [note for note in fold.train if prepared(note.text) in stop]
     assert {note.subject_id for note in fit_notes}.isdisjoint(
@@ -1093,9 +1135,12 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
         d: (float(j),) * len(fold.test) for j, d in enumerate(Diagnosis)
     }
     assert result.converged is converged
-    assert result.n_features == len({
-        token for note in fold.train for token in prepared(note.text).split()
-    })
+    expected_features = (
+        len({token for note in fold.train for token in prepared(note.text).split()})
+        if family == "multirescnn"
+        else 16
+    )
+    assert result.n_features == expected_features
     scorer.score_folds(config.branches[0].default_params(), (fold,))[0]
     assert model.fit.call_count == 2
     for first, second in zip(
@@ -1141,3 +1186,110 @@ def test_network_fold_scores_do_not_depend_on_jobs(tmp_path: Path) -> None:
                 assert np.array_equal(first.scores[diagnosis], second.scores[diagnosis])
     finally:
         torch.set_num_threads(original_threads)
+
+
+def _pickle_isolate(function: Callable[[], GroupScores]) -> GroupScores:
+    # Jen vlastní funkce a syntetické výsledky; round-trip ověřuje přenos spawnem.
+    return pickle.loads(pickle.dumps(pickle.loads(pickle.dumps(function))()))  # ruff: ignore[suspicious-pickle-usage]
+
+
+@pytest.mark.usefixtures("torch_runtime")
+def test_transformer_branch_scores_tiny_model(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Dva foldy skutečně natrénují malý encoder a vrátí pět sloupců skóre."""
+    monkeypatch.setattr(hf_classifier, "load_parts", lambda *_, **__: encoder_parts())
+    config = transformer_stage_config()
+    folds = patient_holdouts(notes(visits=2), 2, 7, StratifiedGroupFolds())
+    scorer = SklearnStageScorer(
+        config,
+        dict.fromkeys(config.text_preprocessing),
+        7,
+        tmp_path,
+        Mock(),
+        devices=DevicePool.of("cpu", 1),
+        isolate=_pickle_isolate,
+    )
+    scores = scorer.score_folds(config.branches[0].default_params(), folds)
+    assert len(scores) == 2
+    for fold, scored in zip(folds, scores, strict=True):
+        assert set(scored.scores) == set(Diagnosis)
+        assert all(len(values) == len(fold.test) for values in scored.scores.values())
+        assert scored.n_features == encoder_parts()[0].config.hidden_size
+
+
+def test_transformer_trial_holds_one_device(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Každý souběžný pokus drží jednu GPU pro všechny své foldy."""
+    monkeypatch.setattr(torch_device, "cuda_device_count", lambda: 2)
+    pool = DevicePool.of("cuda", 2)
+    barrier = Barrier(2, timeout=10)
+    observed: list[set[str]] = []
+
+    def isolate(function: Callable[[], GroupScores]) -> GroupScores:
+        fits = cast("partial[GroupScores]", function).args[0]
+        observed.append({fit.args[0].device for _, fit in fits})
+        barrier.wait()
+        return tuple(
+            (i, ValidationScores({}, converged=True, n_features=16)) for i, _ in fits
+        )
+
+    config = transformer_stage_config()
+    folds = patient_holdouts(notes(visits=2), 2, 7, StratifiedGroupFolds())
+    scorer = SklearnStageScorer(
+        config,
+        dict.fromkeys(config.text_preprocessing),
+        7,
+        tmp_path,
+        Mock(),
+        devices=pool,
+        isolate=isolate,
+    )
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        futures = [
+            executor.submit(scorer.score_folds, b.default_params(), folds)
+            for b in config.branches
+        ]
+        for future in futures:
+            assert len(future.result(timeout=10)) == 2
+    assert sorted(observed, key=sorted) == [{"cuda:0"}, {"cuda:1"}]
+    assert pool.free.qsize() == 2
+
+
+def _child_error() -> None:
+    msg = "syntetická chyba dítěte"
+    raise InvalidInputError(msg)
+
+
+def test_in_spawned_process_runs_in_child(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Spawn má vlastní PID a doménová výjimka se přenese rodiči."""
+    # Importlib režim pytestu nepřidává tests do cesty nového interpretu.
+    monkeypatch.syspath_prepend(str(REPOSITORY))
+    assert in_spawned_process(os.getpid) != os.getpid()
+    with pytest.raises(InvalidInputError, match="syntetická chyba dítěte"):
+        in_spawned_process(_child_error)
+
+
+@pytest.mark.parametrize("transformer", [True, False])
+def test_stage_scorer_device_pool(tmp_path: Path, *, transformer: bool) -> None:
+    """Composition root vytvoří místa pouze pro transformer."""
+    config = (
+        transformer_stage_config(concurrent_trials=2) if transformer else stage_config()
+    )
+    scorer = stage_scorer(
+        config,
+        dict.fromkeys(config.text_preprocessing),
+        embeddings=tmp_path / "embeddings",
+        scratch=tmp_path / "scratch",
+        versions=VERSIONS,
+        encoders=Mock(),
+        jobs=1,
+    )
+    if transformer:
+        assert scorer.devices is not None
+        assert scorer.devices.free.qsize() == 2
+    else:
+        assert scorer.devices is None

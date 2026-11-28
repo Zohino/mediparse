@@ -6,12 +6,11 @@ import math
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-import numpy as np
-
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.transformer_pilot import PilotEpoch
 from mediparse.domain.tuning import ValidationScores
 from mediparse.infrastructure.hf_classifier import HfWindowClassifier
+from mediparse.infrastructure.sklearn_split import label_matrix
 
 if TYPE_CHECKING:
     from collections.abc import Iterator, Sequence
@@ -50,9 +49,9 @@ class HfPilotTrainer:
         )
         for epoch in classifier.train_epochs(
             [n.text for n in fit],
-            np.array([[n.has_label(d) for d in Diagnosis] for n in fit]),
+            label_matrix(fit),
             [n.text for n in stop],
-            np.array([[n.has_label(d) for d in Diagnosis] for n in stop]),
+            label_matrix(stop),
             validation,
         ):
             yield PilotEpoch(

@@ -432,7 +432,7 @@ include = ["translation/**"]
 allowed-unresolved-imports = ["torch", "transformers", "vllm", "vllm.**"]
 
 [[tool.ty.overrides]]
-include = ["src/mediparse/infrastructure/multirescnn.py", "src/mediparse/infrastructure/torch_device.py", "tests/test_multirescnn.py", "src/mediparse/infrastructure/hf_encoder.py", "tests/hf_encoder_support.py", "tests/test_hf_encoder.py", "src/mediparse/infrastructure/hf_classifier.py", "tests/test_hf_classifier.py"]
+include = ["src/mediparse/infrastructure/multirescnn.py", "src/mediparse/infrastructure/torch_device.py", "src/mediparse/infrastructure/sklearn_stage.py", "tests/test_multirescnn.py", "src/mediparse/infrastructure/hf_encoder.py", "tests/hf_encoder_support.py", "tests/test_hf_encoder.py", "src/mediparse/infrastructure/hf_classifier.py", "tests/test_hf_classifier.py"]
 [tool.ty.overrides.analysis]
 allowed-unresolved-imports = ["torch"]
 

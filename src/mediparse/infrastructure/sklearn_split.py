@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING
 import numpy as np
 from sklearn.model_selection import StratifiedGroupKFold
 
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.split import ensure_enough_patients, strata
 
 if TYPE_CHECKING:
@@ -90,3 +91,14 @@ def holdout_mask(notes: Sequence[InputNote], parts: int, seed: Seed) -> ndarray:
         0
     ]
     return np.array([subject in held for subject in subjects], dtype=bool)
+
+
+def label_matrix(notes: Sequence[InputNote]) -> ndarray:
+    """Složí boolovské labely se sloupci v pořadí diagnóz.
+
+    Returns:
+        Matice zpráv krát diagnóz.
+    """
+    return np.array(
+        [[note.has_label(d) for d in Diagnosis] for note in notes], dtype=bool
+    )
