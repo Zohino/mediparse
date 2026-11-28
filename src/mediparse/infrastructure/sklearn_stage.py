@@ -1,4 +1,4 @@
-"""Skórování větví stupně se sdílenými četnostmi n-gramů mezi pokusy."""
+"""Skórování větví stupně včetně sítí a izolovaných transformerů na GPU."""
 
 from __future__ import annotations
 

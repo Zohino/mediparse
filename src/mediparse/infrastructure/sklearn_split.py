@@ -1,4 +1,4 @@
-"""Rozdělení pacientů do částí ve scikit-learn."""
+"""Pacientské dělení zpráv a matice labelů pro více diagnóz."""
 
 from __future__ import annotations
 
