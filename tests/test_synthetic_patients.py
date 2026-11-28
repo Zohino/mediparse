@@ -10,10 +10,10 @@ from typing import TYPE_CHECKING
 import pytest
 from pydantic import ValidationError
 
-from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS, Diagnosis
+from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.note import subject_of
-from mediparse.synthetic.domain.labels import LabelModel
+from mediparse.synthetic.domain.labels import ACUTE_DIAGNOSIS, LabelModel
 from mediparse.synthetic.domain.synthetic_patients import (
     PrevalenceNotReachedError,
     continuation_ratio,
@@ -129,7 +129,7 @@ def test_patient_has_at_most_max_notes() -> None:
 def test_chronic_labels_are_shared_by_patient_notes() -> None:
     """Chronické diagnózy platí pro všechny zprávy pacienta, akutní se může lišit."""
     for patient_notes in _by_subject(_sample(LARGE, 1.0)).values():
-        chronic = {frozenset(d for d in n.labels if d.chronic) for n in patient_notes}
+        chronic = {n.labels - {ACUTE_DIAGNOSIS} for n in patient_notes}
         assert len(chronic) == 1
 
 

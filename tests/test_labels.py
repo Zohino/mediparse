@@ -9,6 +9,7 @@ from pydantic import ValidationError
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.synthetic.domain.labels import (
+    ACUTE_DIAGNOSIS,
     InfeasibleMarginalsError,
     IpfNotConvergedError,
     LabelModel,
@@ -27,13 +28,18 @@ PREVALENCE = {
     Diagnosis.PNEUMONIA: 0.05,
 }
 CELLS = 2 ** len(Diagnosis)
-CHRONIC_STATES = 2 ** sum(d.chronic for d in Diagnosis)
+CHRONIC_STATES = 2 ** sum(d is not ACUTE_DIAGNOSIS for d in Diagnosis)
 CORRELATED = {
     (Diagnosis.DIABETES, Diagnosis.CKD): 0.10,
     (Diagnosis.CKD, Diagnosis.COPD): 0.06,
     (Diagnosis.COPD, Diagnosis.ATRIAL_FIBRILLATION): 0.05,
     (Diagnosis.CKD, Diagnosis.PNEUMONIA): 0.03,
 }
+
+
+def test_pneumonia_is_the_only_acute_diagnosis() -> None:
+    """Jedinou akutní diagnózou pětice je podle S20e2 pneumonie."""
+    assert ACUTE_DIAGNOSIS is Diagnosis.PNEUMONIA
 
 
 def _model(

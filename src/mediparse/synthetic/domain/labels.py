@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Annotated, Final, Self
 
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
-from mediparse.domain.diagnosis import ACUTE_DIAGNOSIS, Diagnosis, PerDiagnosis
+from mediparse.domain.diagnosis import Diagnosis, PerDiagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.synthetic.domain.probability import Probability
 
@@ -16,6 +16,9 @@ if TYPE_CHECKING:
     from collections.abc import Callable, Collection, Mapping, Sequence
 
 type LabelSet = frozenset[Diagnosis]
+
+# Chronická diagnóza platí pro všechny zprávy pacienta, akutní jen pro jednu.
+ACUTE_DIAGNOSIS: Final = Diagnosis.PNEUMONIA
 
 _SYMMETRY_TOLERANCE: Final = 1e-3
 
@@ -143,7 +146,7 @@ def acute_given_chronic(joint: Mapping[LabelSet, float]) -> dict[LabelSet, float
     totals: dict[LabelSet, float] = {}
     acute: dict[LabelSet, float] = {}
     for cell, probability in joint.items():
-        chronic = frozenset(d for d in cell if d.chronic)
+        chronic = cell - {ACUTE_DIAGNOSIS}
         totals[chronic] = totals.get(chronic, 0.0) + probability
         if ACUTE_DIAGNOSIS in cell:
             acute[chronic] = acute.get(chronic, 0.0) + probability
