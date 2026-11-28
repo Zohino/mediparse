@@ -118,6 +118,7 @@ class StageTuning:
                 if not running:
                     break
                 done, _ = wait(running, return_when=FIRST_COMPLETED)
+                # Množina done nemá pořadí; současně hotové zapisujeme v pořadí spuštění.
                 self._collect_trials(
                     [future for future in running if future in done],
                     running,
