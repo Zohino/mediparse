@@ -1259,6 +1259,10 @@ def test_transformer_trial_holds_one_device(
     assert pool.free.qsize() == 2
 
 
+def _marker() -> int:
+    return sklearn_stage.MIN_PADDED_WORD_LENGTH
+
+
 def _child_error() -> None:
     msg = "syntetická chyba dítěte"
     raise InvalidInputError(msg)
@@ -1268,6 +1272,8 @@ def test_in_spawned_process_runs_in_child(monkeypatch: pytest.MonkeyPatch) -> No
     """Spawn má vlastní PID a doménová výjimka se přenese rodiči."""
     # Importlib režim pytestu nepřidává tests do cesty nového interpretu.
     monkeypatch.syspath_prepend(str(REPOSITORY))
+    monkeypatch.setattr(sklearn_stage, "MIN_PADDED_WORD_LENGTH", -1)
+    assert in_spawned_process(_marker) == 3
     assert in_spawned_process(os.getpid) != os.getpid()
     with pytest.raises(InvalidInputError, match="syntetická chyba dítěte"):
         in_spawned_process(_child_error)
