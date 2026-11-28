@@ -28,7 +28,7 @@ PREVALENCE = {
     Diagnosis.PNEUMONIA: 0.05,
 }
 CELLS = 2 ** len(Diagnosis)
-CHRONIC_STATES = 2 ** sum(d is not ACUTE_DIAGNOSIS for d in Diagnosis)
+CHRONIC_STATES = CELLS // 2
 CORRELATED = {
     (Diagnosis.DIABETES, Diagnosis.CKD): 0.10,
     (Diagnosis.CKD, Diagnosis.COPD): 0.06,
@@ -111,6 +111,15 @@ def test_ipf_without_enough_passes_fails() -> None:
         max_entropy_joint(_model(CORRELATED, passes=1))
 
     assert isinstance(raised.value, InvalidInputError)
+
+
+def test_acute_given_chronic_matches_hand_computation() -> None:
+    """Podmíněné pravděpodobnosti odpovídají ručnímu výpočtu 0,2/0,8 a 0/0,2."""
+    assert acute_given_chronic({
+        frozenset(): 0.6,
+        frozenset({Diagnosis.PNEUMONIA}): 0.2,
+        frozenset({Diagnosis.DIABETES}): 0.2,
+    }) == pytest.approx({frozenset(): 0.25, frozenset({Diagnosis.DIABETES}): 0.0})
 
 
 def test_acute_given_chronic_is_a_probability_per_chronic_state() -> None:
