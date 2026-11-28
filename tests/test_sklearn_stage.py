@@ -1078,6 +1078,8 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
     model.model_.config.hidden_size = 16
     model.set_params.return_value = model
     model.decision_function.return_value = np.tile(np.arange(5), (len(fold.test), 1))
+    parallel = Mock(wraps=sklearn_stage.Parallel)
+    monkeypatch.setattr(sklearn_stage, "Parallel", parallel)
     factory = Mock(return_value=model)
     monkeypatch.setattr(sklearn_stage, "classifier_estimator", factory)
     monkeypatch.setattr(sklearn_stage, "HfWindowClassifier", factory)
@@ -1092,6 +1094,7 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
     )
     result = scorer.score_folds(config.branches[0].default_params(), (fold,))[0]
     if family == "multirescnn":
+        assert parallel.call_args.kwargs["temp_folder"] == tmp_path
         factory.assert_called_once_with(ClassifierFamily.MULTIRESCNN, 7, tmp_path)
         assert config.network is not None
         model.set_params.assert_called_once_with(
@@ -1135,12 +1138,11 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
         d: (float(j),) * len(fold.test) for j, d in enumerate(Diagnosis)
     }
     assert result.converged is converged
-    expected_features = (
+    assert result.n_features == (
         len({token for note in fold.train for token in prepared(note.text).split()})
         if family == "multirescnn"
         else 16
     )
-    assert result.n_features == expected_features
     scorer.score_folds(config.branches[0].default_params(), (fold,))[0]
     assert model.fit.call_count == 2
     for first, second in zip(
