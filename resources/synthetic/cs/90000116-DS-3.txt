@@ -1,76 +1,92 @@
 Jméno: ___ Datum narození: ___
-Pohlaví: Žena Oddělení: CHIRURGIE
+Pohlaví: Žena Oddělení: MEDICÍNA
 Datum přijetí: ___ Číslo oddělení: ___
 Datum propuštění: ___ Ošetřující lékař: ___
 
 Alergie:
-Penicilin
+Sulfonamidové léky
 
 Hlavní potíže:
-Bolest v pravém horním kvadrantu břicha
+Bolestivá, zarudlá pravá noha s horečkou
 
-Hlavní chirurgický zákrok nebo invazivní procedura:
-Laparoskopická cholecystektomie dne ___
+Významný chirurgický nebo invazivní zákrok:
+Žádný; vyšetření a označení zarudnutí u lůžka pacientky lékařem ___
 
 Anamnéza současného onemocnění:
-Pacientka je žena, která se dostavila do ___ se stížnostmi na bolest v pravém horním kvadrantu břicha, nevolnost a zvracení po konzumaci tučného jídla, trvajícími dva dny. Byla vyšetřena svým ošetřujícím lékařem v ___ dne ___ a odeslána na pohotovost. Doma jí byla naměřena teplota 38,3 °C. Žloutenka ani průjem se nevyskytly.
+Žena s třídenní anamnézou šířícího se zarudnutí, tepla a bolesti v pravé dolní končetině po oděru při zahradničení. Doma měla horečku a byla vyšetřena lékařem ___, který ji odeslal do ___ na intravenózní antibiotika. Lékař ___ ji přijal na oddělení.
 
 Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidemie
-Gastroezofageální reflux
+Hypotyreóza
+Osteoartróza kolen
 
 Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka trpí diabetes mellitus. Otec trpí hypertenzí.
+V rodině se vyskytuje diabetes u matky. Otec prodělal mrtvici.
 
 Fyzikální vyšetření:
-Vitalní funkce: bez horečky, hemodynamicky stabilní
-Celkový stav: v pohodě, bez známek úzkosti
-PLÍCE: čisté na obou stranách
-SRDCE: pravidelný rytmus
-BŘICHO: měkké, mírná citlivost v pravém horním kvadrantu
-Končetiny: bez otoků
-KŮŽE: teplá, suchá
-Neurologické vyšetření: bdělá, bez ložiskových příznaků
+Vitalní funkce:
+T 38,3 °C, TF 92, TK 134/78, SpO2 97 % při dýchání okolního vzduchu
+Celkový stav:
+Dobře se cítí, je komunikativní
+PLÍCE:
+Čisté
+SRDCE:
+Pravidelný rytmus
+BŘICHO:
+Měkké, netendrovatelné
+KONČETINY:
+Pravá holeně teplá, oteklá, bolestivá
+KŮŽE:
+Šířící se zarudnutí, malá krusta
+NEUROLOGIE:
+Bez ložiskových příznaků
 
 Významné výsledky:
-LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ: WBC 13,2, AST 48, ALT 52, celkový bilirubin 1,1, lipáza v normě.
-LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ: WBC 7,8, jaterní enzymy v normě.
-OBRAZOVÁ VYŠETŘENÍ: Ultrazvuk pravého horního kvadrantu břicha ukazuje žlučové kameny, zesílenou stěnu žlučníku a tekutinu v okolí žlučníku.
-ZÁVĚR: Nález odpovídá akutní cholecystitidě, jak hodnotil ___.
+LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
+Mírně zvýšený počet bílých krvinek, normální hladina kreatininu.
+LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
+Počet bílých krvinek se normalizoval.
+ZOBRAZOVACÍ METODY:
+Ultrazvuk pravé nohy proveden v ___.
+ZÁVĚR:
+Pouze otok kůže a podkožní tkáně. V hlubokých žilách nebyla zjištěna žádná krevní sraženina.
 
 Stručný průběh hospitalizace:
-Pacientka byla přijata na chirurgické oddělení, byla jí nařízeno hladovění, podávány intravenózní tekutiny a antibiotika. Byla převezena na operační sál doktorem ___ a podstoupila nekomplikovanou laparoskopickou cholecystektomii. Strava byla postupně rozšiřována, bolest byla kontrolována perorálními léky a pacientka byla propuštěna dne ___ s doporučením kontroly u ___.
-PŘECHODNÁ OTÁZKA: Zkontrolovat konečné výsledky histologického vyšetření při kontrole v ambulanci.
+Pacientka dostávala intravenózně cefazolin, okraj zarudnutí byl ohraničen a denně sledován. Horečka ustoupila během jednoho dne a otok a bolest se postupně zmírňovaly. Kultivace krve byly negativní. Byla převedena na perorální cefalexin, bez problémů chodila po chodbách a byla propuštěna lékařem ___. Její sestra ___ s ní probrala péči o ránu.
+PŘECHODNÁ OPATŘENÍ:
+Kontrola nohy v ambulanci ___ do jednoho týdne.
 
 Léky při přijetí:
-Lisinopril 10 mg denně
-Atorvastatin 20 mg večer
+Levotyroxin
+Lisinopril
+Paracetamol podle potřeby
 
 Léky při propuštění:
-1. Lisinopril 10 mg perorálně denně
-2. Atorvastatin 20 mg perorálně večer
-3. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest
-4. Docusate 100 mg dvakrát denně
+1. Cefalexin 500 mg perorálně čtyřikrát denně po dobu dalších sedmi dnů
+2. Levotyroxin denně
+3. Lisinopril denně
+4. Paracetamol 650 mg každých šest hodin podle potřeby na bolest
 
 Způsob propuštění:
-Domů
+Domů s péčí sestry z ___
 
 Diagnóza při propuštění:
-Akutní kalcifikovaná cholecystitida
+Celulitida pravé dolní končetiny
 
 Stav při propuštění:
-Duševní stav: Jasný a srozumitelný.
-Úroveň vědomí: Bdělá a komunikativní.
-Fyzická aktivita: Chodí, soběstačná.
+Stabilizovaný a zlepšený.
+Duševní stav:
+Bdělý a plně orientovaný.
+Úroveň vědomí:
+Probuzený a pozorný.
+Úroveň aktivity:
+Chodí samostatně.
 
 Pokyny pro propuštění:
+Byl/a jste léčen/a na kožní infekci nohy. Dokončete celou kúru antibiotik. Při sezení držte nohu ve zvýšené poloze a sledujte okraj zarudnutí. V případě horečky, rychlého šíření zarudnutí nebo zhoršování bolesti se co nejdříve vraťte. V případě jakýchkoli dotazů volejte na číslo ___.
 
-Byli jste hospitalizováni kvůli zánětu žlučníku, který byl odstraněn laparoskopicky. Udržujte řezné rány čisté a suché. Po dobu čtyř týdnů nezvedejte nic, co váží více než pět kilogramů. V případě horečky, zhoršující se bolesti, zvracení nebo žluté barvy kůže volejte na číslo ___ nebo se vraťte na pohotovost. V případě dotazů se obraťte na číslo ___.
-
-Pokyny pro kontrolní vyšetření:
-
+Pokyny pro kontrolu:
 ___

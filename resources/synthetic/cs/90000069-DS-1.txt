@@ -13,7 +13,7 @@ Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-___ letá žena, která se dostavila do ___ s třídenní anamnézou zhoršující se únavy, nevolnosti a sníženého příjmu potravy. Byla vyšetřena svým lékařem v ___ a bylo jí doporučeno, aby se dostavila na pohotovost. Laboratorní výsledky ukázaly mírnou dehydrataci a abnormality elektrolytů. Byla přijata k monitorování a podávání tekutin.
+___letá žena, která se dostavila do ___ s třemi dny trvající se zhoršující únavou, nevolností a špatným příjmem potravy. Byla vyšetřena svým lékařem v ___ a bylo jí doporučeno, aby se dostavila na pohotovost. Laboratorní výsledky ukázaly mírnou dehydrataci a abnormality elektrolytů. Byla přijata k monitorování a podávání tekutin.
 
 Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
@@ -25,21 +25,21 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-V rodině se vyskytla pneumonie u její matky. Jiné známé nemoci nejsou.
+V rodině se u matky vyskytla pneumonie. Jiné známé nemoci nejsou.
 
 Fyzikální vyšetření:
 HEENT: Vlhké sliznice.
 Krk: Pohyblivý.
 Plíce: Oboustranně čisté.
 Břicho: Měkké, netendrovatelné.
-Končetiny: Bez edému.
+Končetiny: Bez otoků.
 Neurologické: Bdělá, bez ložiskových příznaků.
 
 Významné výsledky:
-Při přijetí byly laboratorní výsledky významné hodnotou kreatininu na výchozí úrovni, mírně zvýšenou glukózou a draslíkem v normálním rozmezí. Rentgen hrudníku provedený v ___ neukázal žádný akutní proces. Opakované laboratorní testy provedené ___ ukázaly zlepšení hodnot sodíku a stabilní hodnotu kreatininu. Vyšetření moči bylo bez patologických nálezů. EKG ukázalo sinusový rytmus bez akutních změn. Hodnota hemoglobinu byla během hospitalizace stabilní.
+Při přijetí byly laboratorní výsledky významné hodnotou kreatininu na výchozí úrovni, mírně zvýšenou glukózou a draslíkem v normálních mezích. Rentgen hrudníku provedený v ___ neukázal žádný akutní proces. Opakované laboratorní testy provedené ___ ukázaly zlepšení hodnot sodíku a stabilní hodnotu kreatininu. Vyšetření moči bylo bez patologických nálezů. EKG ukázalo sinusový rytmus bez akutních změn. Hodnota hemoglobinu byla během hospitalizace stabilní.
 
 Stručný průběh hospitalizace:
-Byla léčena intravenózními tekutinami a její příznaky se během dvou dnů zlepšily. Léky, které užívala doma, byly zpočátku vysazeny a poté znovu nasazeny. Hladina glukózy byla regulována pomocí stupňovitého dávkování a byla vyšetřena nutričním týmem v ___. Hodnota kreatininu zůstala blízko výchozí úrovni. Dobře snášela běžnou stravu a mohla se samostatně pohybovat. Dr. ___ souhlasil s propuštěním čtvrtý den hospitalizace. Bude pokračovat v péči u svého ošetřujícího lékaře.
+Byla léčena intravenózními tekutinami a její příznaky se během dvou dnů zmírnily. Léky, které užívala doma, byly zpočátku vysazeny a poté znovu nasazeny. Její hladina glukózy byla regulována pomocí stupňovitého dávkování a byla vyšetřena nutričním týmem v ___. Její hodnota kreatininu zůstala blízko výchozí úrovni. Dobře snášela běžnou stravu a mohla se samostatně pohybovat. Dr. ___ souhlasil s propuštěním čtvrtý den hospitalizace. Bude pokračovat v péči u svého praktického lékaře.
 
 Léky při přijetí:
 Metformin 500 mg dvakrát denně.
@@ -64,10 +64,12 @@ Chronické onemocnění ledvin
 Stav při propuštění:
 Stabilní
 Duševní stav: Jasný a srozumitelný.
-Úroveň vědomí: Bdělá a reagující.
+Úroveň vědomí: Bdělá a komunikativní.
 
 Pokyny pro propuštění:
-Byli jste hospitalizováni kvůli dehydrataci. Dostali jste tekutiny a váš stav se zlepšil. Užijte si léky podle předpisu a pijte dostatek tekutin. Pokud máte zvracení, horečku nebo závratě, zavolejte svého lékaře na čísle ___. Pokud se příznaky zhorší, vraťte se do ___. Vaše kontrolní vyšetření je naplánováno na ___.
+
+Byli jste hospitalizováni kvůli dehydrataci. Byla vám podána tekutina a váš stav se zlepšil. Užijte si léky podle předpisu a pijte dostatek tekutin. Pokud se u vás objeví zvracení, horečka nebo závratě, zavolejte svému lékaři na číslo ___. Pokud se vaše příznaky zhorší, vraťte se do ___. Vaše kontrolní vyšetření je naplánováno na ___.
 
 Pokyny pro kontrolní vyšetření:
+
 ___

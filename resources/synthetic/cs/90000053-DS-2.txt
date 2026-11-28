@@ -29,11 +29,11 @@ Bez významných údajů
 
 Fyzikální vyšetření:
 FYZIKÁLNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
-HLAVA, OČI, UŠI, NOS, KRK: Normocefalický, vlhké sliznice.
-PLÍCE: Při auskultaci oboustranně čisté.
-KONČETINY: Teplé, bez otoků.
-KŮŽE: Intaktní, bez vyrážky.
-NEUROLOGIE: Bdělý, bez ložiskových příznaků.
+Hlava, uši, nos, hrdlo: Normocefalický, vlhké sliznice.
+Plíce: Při auskultaci oboustranně čisté.
+Končetiny: Teplé, bez otoků.
+Kůže: Intaktní, bez vyrážky.
+Neurologické: Bdělý, bez ložiskových příznaků.
 
 Významné výsledky:
 LABORATORNÍ VYŠETŘENÍ PŘI PROPUŠTĚNÍ:
@@ -64,7 +64,9 @@ Duševní stav: Jasný a srozumitelný.
 Úroveň vědomí: Bdělý a reagující.
 
 Pokyny pro propuštění:
-Byli jste hospitalizováni kvůli rychlému nepravidelnému srdečnímu tepu. Užijte si nový lék na ředění krve každý den a nepřestávejte ho užívat. Kontrolujte si hladinu cukru v krvi jako dříve. V případě bolesti na hrudi, mdlob nebo krvácení volejte ___ nebo se vraťte.
 
-Pokyny pro další postup:
+Byli jste hospitalizováni kvůli rychlému a nepravidelnému srdečnímu tepu. Užívajte nové léky na ředění krve každý den a nepřestávejte je užívat. Stejně jako dříve si pravidelně měřte hladinu cukru v krvi. V případě bolesti na hrudi, mdlob nebo krvácení volejte na číslo ___ nebo se vraťte do nemocnice.
+
+Pokyny pro kontrolní vyšetření:
+
 ___

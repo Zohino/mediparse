@@ -1,7 +1,7 @@
 Jméno: ___ Datum narození: ___
 Pohlaví: Žena Oddělení: CHIRURGIE
 Datum přijetí: ___ Číslo oddělení: ___
-Datum propuštění: ___ Ošetřující lékař: ___
+Datum propuštění: ___ Lékař: ___
 
 Alergie:
 Žádné známé alergie na léky
@@ -25,7 +25,7 @@ ___
 
 Fyzikální vyšetření:
 Celkový stav:
-Nepohodlí, ale bez akutní distrese, bez horečky.
+Nepohodlí, ale bez akutní tíže, bez horečky.
 Krk:
 Pružný, bez zvětšených lymfatických uzlin.
 Břicho:
@@ -46,8 +46,8 @@ Atorvastatin 20 mg večer
 Metformin 500 mg dvakrát denně
 
 Léky při propuštění:
-1. Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti.
-2. Oxykodon 5 mg každých šest hodin podle potřeby proti silné bolesti.
+1. Acetaminofen 650 mg každých šest hodin podle potřeby na bolest.
+2. Oxykodon 5 mg každých šest hodin podle potřeby na silnou bolest.
 3. Dokusát 100 mg dvakrát denně při užívání oxykodonu.
 4. Inzulín glargin ___ jednotek večer.
 5. Lisinopril 10 mg denně.
@@ -64,13 +64,12 @@ Stav při propuštění:
 Duševní stav:
 Jasný a srozumitelný.
 Úroveň vědomí:
-Bdělý a komunikativní.
-Fyzická aktivita:
-Chodí, soběstačný.
+Bdělý a reagující.
+Stav aktivity:
+Schopný chůze, soběstačný.
 
 Pokyny pro propuštění:
+Byli jste hospitalizováni kvůli infekci žlučníku, který byl následně odstraněn. Udržujte řezné rány čisté a suché a můžete se sprchovat. Během čtyř týdnů nezvedejte nic, co váží více než 4,5 kilogramu. V případě horečky, zhoršující se bolesti, zvracení, zarudnutí v oblasti řezných ran nebo žluté barvy kůže kontaktujte doktora ___ na čísle ___. V případě závažných příznaků se vraťte do ___. Telefonní číslo ordinace ___.
 
-Byli jste hospitalizováni kvůli zánětu žlučníku, který byl následně chirurgicky odstraněn. Udržujte řezné rány čisté a suché a můžete se sprchovat. Během čtyř týdnů nezvedejte nic, co váží více než 4,5 kilogramu. V případě horečky, zhoršující se bolesti, zvracení, zarudnutí v oblasti řezných ran nebo žluté barvy kůže kontaktujte doktora ___ na telefonním čísle ___. V případě závažných příznaků se vraťte do ___. Telefonní číslo ordinace: ___.
-
-Pokyny pro kontrolní vyšetření:
+Pokyny pro kontrolu:
 ___

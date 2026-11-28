@@ -8,7 +8,7 @@
     "generated_on": "2026-10-14",
     "specification_commit": "3e979e3f6a9521dae52efa814dca5d7e42229c1e"
   },
-  "audit_sha256": "048c02d9418cc53493f406058e0d52703d8eb53335f93dcf40c588eab9999991",
+  "audit_sha256": "88119dcdf09d4d022febaa5de3cab9f547a01f4aa3498cafa4f0cc730ce158c2",
   "translation": {
     "model": "google/translategemma-27b-it",
     "revision": "7d10f0b72f89a2d0f268cea30727d8b77c0d25c2",
@@ -21,12 +21,36 @@
         106
       ]
     },
-    "requests_sha256": "ae97b6d24888f60339ca018f4fd11e62d23dbd4a25b237ee840204208c349f86",
+    "requests_sha256": "eeb6f151c5e644b115c304452fd52c3d5a75f4db4af3c13c0f680d64988ba85b",
     "runs": [
       {
         "started": "2026-10-14T04:22:11.845276Z",
         "requests_sha256": "ae97b6d24888f60339ca018f4fd11e62d23dbd4a25b237ee840204208c349f86",
         "script_sha256": "80adedd695e13df1f80c481ed24588cb501dce180085ea79c8038329d160cdd9",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "cuda": "13.0",
+        "packages": {
+          "vllm": "0.30.0",
+          "torch": "2.13.0",
+          "transformers": "5.18.0"
+        }
+      },
+      {
+        "started": "2026-11-28T09:35:53.976033Z",
+        "requests_sha256": "9a694f1909e2a5598200bddb333a7d2dcaffc18f5d1b3758c2598427a2b13654",
+        "script_sha256": "b33e92f66c78d04abfbd9135f62d776ff5c4e410145adf6320ccbd14cdf31660",
+        "gpu": "NVIDIA H100 NVL",
+        "cuda": "13.0",
+        "packages": {
+          "vllm": "0.30.0",
+          "torch": "2.13.0",
+          "transformers": "5.18.0"
+        }
+      },
+      {
+        "started": "2026-11-28T10:28:31.353768Z",
+        "requests_sha256": "eeb6f151c5e644b115c304452fd52c3d5a75f4db4af3c13c0f680d64988ba85b",
+        "script_sha256": "b33e92f66c78d04abfbd9135f62d776ff5c4e410145adf6320ccbd14cdf31660",
         "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "cuda": "13.0",
         "packages": {

@@ -13,7 +13,7 @@ Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-___letý muž s hypertenzí, který se dostavil do ___ s třídenním zhoršováním zčervenání, tepla a otoku pravé dolní končetiny po drobném oděru, který utrpěl při zahradničení. Uváděl subjektivní pocity horečky a zimnice. Byl vyšetřen svým ošetřujícím lékařem v ___ a odeslán na pohotovost, kde mu byly podány intravenózní antibiotika a byl přijat k dalšímu ošetření.
+___letý muž s hypertenzí, který se dostavil do ___ s třídenní anamnézou zhoršujícího se zčervenání, tepla a otoku pravé dolní končetiny po drobném oděru, který utrpěl při zahradničení. Uváděl subjektivní pocity horečky a zimnice. Byl vyšetřen svým ošetřujícím lékařem v ___ a odeslán na pohotovost, kde mu byla podána intravenózní antibiotika a byl přijat k dalšímu ošetření.
 
 Anamnéza předchozích onemocnění:
 Hypertenze
@@ -31,7 +31,7 @@ Celkový stav: Dobře vypadající, bez známek úzkosti.
 Hlava, oči, uši, nos, hrdlo: Normocefalický, vlhké sliznice.
 Plíce: Čisté na obou stranách.
 Břicho: Měkké, netendrové, neztuhlé.
-Končetiny: Zčervenání pravé holeně s teplem a mírným edémem, okraje výrazně zlepšené.
+Končetiny: Zčervenání pravé holenní kosti s teplem a mírným edémem, okraje výrazně zlepšené.
 Neurologické: Bdělý, hrubě intaktní, bez ložiskových příznaků.
 
 Významné výsledky:
@@ -61,12 +61,10 @@ Hypertenze
 Stav při propuštění:
 Stabilizovaný a zlepšený.
 Úroveň vědomí: Bdělý a orientovaný.
-Stav aktivity: Ambulantní, soběstačný.
+Úroveň aktivity: Schopný chůze, soběstačný.
 
 Pokyny pro propuštění:
-
 Byli jste hospitalizováni kvůli kožní infekci pravé nohy a léčeni antibiotiky. Dokončete celou kúru cefalexinem. Při sezení nohu zvedněte a udržujte pokožku čistou a hydratovanou. V případě, že se zarudnutí rozšíří, bolest se zhorší nebo se objeví horečka, zavolejte na číslo ___. Vraťte se ___ na kontrolu rány, případně dříve, pokud se příznaky zhorší.
 
 Pokyny pro další postup:
-
 ___

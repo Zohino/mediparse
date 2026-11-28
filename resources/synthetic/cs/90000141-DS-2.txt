@@ -24,19 +24,19 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-V rodinné anamnéze se vyskytuje emfyzém u otce. Žádné onemocnění žlučníku.
+V rodinné anamnéze je významná emfyzém u otce. Žádné onemocnění žlučníku.
 
 Fyzikální vyšetření:
 Bez horečky, pacient je v dobrém stavu, s mírnou citlivostí v pravém horním kvadrantu břicha.
-Krk: Pohyblivý, bez zvětšených uzlin.
+Krk: Pohyblivý, bez rezistencí.
 PLÍCE: Oboustranně čisté, bez chrůpků.
 KONČETINY: Teplé, bez otoků.
 
 Významné výsledky:
-Laboratorní vyšetření prokázala zvýšený počet bílých krvinek a mírně zvýšenou hladinu bilirubinu. Ultrazvukové vyšetření prokázalo více žlučových kamenů, ztluštění stěny žlučníku a tekutinu v okolí žlučníku. Rentgen hrudníku byl bez patologických nálezů. Hodnoty jaterních enzymů se po operaci snižovaly. Konečné histologické vyšetření z ___ bylo v době propuštění stále v řešení.
+Laboratorní vyšetření prokázala zvýšený počet bílých krvinek a mírně zvýšený bilirubin. Ultrazvukové vyšetření prokázalo více žlučových kamenů, ztluštění stěny žlučníku a tekutinu v okolí žlučníku. Rentgen hrudníku byl bez patologických nálezů. Jaterní enzymy se po operaci snižovaly. Konečné histopatologické vyšetření z ___ bylo v době propuštění stále v řešení.
 
 Stručný popis hospitalizace:
-Pacient byl přijat, podávány mu byly intravenózní tekutiny a antibiotika, a byl ponechán bez možnosti orální příjmu potravy. Po konzultaci s doktorem ___ byl převezen na operační sál a podstoupil nekomplikovanou laparoskopickou cholecystektomii. Bolest byla kontrolována perorálními léky, pacient začal s běžnou stravou a horečka ustoupila. Řezné rány zůstaly čisté. Byla domluvena kontrolní návštěva v ___.
+Pacient byl přijat, podávány intravenózní tekutiny a antibiotika, a byl ponechán bez možnosti orální příjmu potravy. Po konzultaci s doktorem ___ byl odeslán na operační sál, kde podstoupil nekomplikovanou laparoskopickou cholecystektomii. Bolest byla kontrolována orálními léky, pacient obnovil běžnou stravu a horečka ustoupila. Řezné rány zůstaly čisté. Byla domluvena kontrolní návštěva v ___.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -44,7 +44,7 @@ Atorvastatin 20 mg večer
 Omeprazol 20 mg denně
 
 Léky při propuštění:
-1. Paracetamol 650 mg každých šest hodin podle potřeby proti bolesti.
+1. Acetaminofen 650 mg každých šest hodin podle potřeby proti bolesti.
 2. Lisinopril 10 mg jednou denně.
 3. Atorvastatin 20 mg před spaním.
 4. Omeprazol 20 mg denně.
@@ -58,11 +58,12 @@ Akutní kalcifikovaná cholecystitida
 
 Stav při propuštění:
 Duševní stav: Jasný a srozumitelný.
-Úroveň vědomí: Bdělý a reagující.
-Fyzická aktivita: Chodící, soběstačný.
+Úroveň vědomí: Bdělý a komunikativní.
+Stav aktivity: Ambulantní, soběstačný.
 
-Pokyny pro propuštěného pacienta:
-Byli jste hospitalizováni s zánětem žlučníku, který byl odstraněn malými řezy. Můžete se sprchovat, ale nevystavujte rány nadměrnému namáčení. Vyhýbejte se zvedání těžkých předmětů po dobu několika týdnů. V případě horečky, zhoršení bolesti, zvracení, žloutnutí kůže nebo zarudnutí ran volejte ___ nebo se vraťte na pohotovost.
+Pokyny pro propuštění:
 
-Pokyny pro kontrolu:
+Byli jste hospitalizováni kvůli zánětu žlučníku, který byl odstraněn pomocí malých řezů. Můžete se sprchovat, ale nevystavujte rány dlouhodobému namáčení. Po dobu několika týdnů se vyhýbejte zvedání těžkých předmětů. V případě horečky, zhoršení bolesti, zvracení, žloutnutí kůže nebo zarudnutí ran zavolejte na číslo ___ nebo se vraťte na pohotovost.
+
+Pokyny pro kontrolní vyšetření:
 ___

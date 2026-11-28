@@ -13,7 +13,7 @@ Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný.
 
 Anamnéza současného onemocnění:
-Pacientka je žena, která se dostavila do ___ s třemi dny trvající se zhoršující se dušností, produktivním kašlem a sípavým dýcháním. Uváděla mírné horečky a zvýšené používání svého záchranného inhalátoru. Byla vyšetřena svým ošetřujícím lékařem ___, který doporučil urgentní vyšetření. Na pohotovosti byla hypoxická a dostávala inhalace a kortikosteroidy.
+Pacientka je žena, která se dostavila do ___ s třemi dny trvající se zhoršující se dušností, produktivním kašlem a sípáním. Uváděla mírné horečky a zvýšené používání inhalátoru. Byla vyšetřena svým ošetřujícím lékařem ___, který doporučil urgentní vyšetření. Na pohotovosti byla hypoxická a dostávala inhalace a kortikosteroidy.
 
 PŘEHLED SYSTÉMŮ:
 Pozitivní nález na kašel a dušnost. Negativní nález na bolest na hrudi.
@@ -34,22 +34,22 @@ Matka s hypertenzí. Otec s ___.
 
 Fyzikální vyšetření:
 Vitalní funkce:
-T 99,1, TF 88, TK 128/76, dechová frekvence 20, SpO2 94 % při dýchání okolním vzduchem
+T 37,2 °C, TF 88, TK 128/76, dechová frekvence 20, SpO2 94 % při dýchání okolním vzduchem
 
 Celkový stav:
-Komfortní, bez akutní tíže.
+Dobře se cítí, bez akutní tíže.
 
 Hlava, uši, oči, nos, hrdlo:
-Vlhké sliznice.
+Vlhká sliznice.
 
 Plíce:
-Difúzní sípavé zvuky při výdechu, prodloužený výdech.
+Difúzní sípání při výdechu, prodloužený výdech.
 
 SRDEČNÍ:
 Pravidelný rytmus a frekvence.
 
 Stručný popis průběhu hospitalizace:
-Byla přijata pro akutní hypoxické respirační selhání se sípavým dýcháním v důsledku základního plicního onemocnění, pravděpodobně vyvolané virovou respirační infekcí. Byla léčena pravidelnými inhalacemi, krátkodobou léčbou perorálním prednisonem a doplňkovým kyslíkem, jehož podávání bylo postupně snižováno a ukončeno třetí den hospitalizace. Rentgenové vyšetření hrudníku provedené v ___ neukázalo žádnou ložiskovou konsolidaci. Pokračovala se v podávání léků na krevní tlak. Byla propuštěna ve stabilizovaném stavu po konzultaci s ___.
+Byla přijata pro akutní hypoxické respirační selhání se sípáním v důsledku základního plicního onemocnění, pravděpodobně vyvolané virovou respirační infekcí. Byla léčena pravidelnými inhalacemi, krátkodobou léčbou perorálním prednisonem a doplňkovým kyslíkem, jehož podávání bylo postupně snižováno a ukončeno třetí den hospitalizace. Rentgenové vyšetření hrudníku provedené v ___ neukázalo žádnou ložiskovou konsolidaci. Pokračovalo se v podávání léků na krevní tlak. Byla propuštěna ve stabilizovaném stavu po konzultaci s ___.
 
 Léky při přijetí:
 Inhalátor s albuterolem podle potřeby
@@ -78,11 +78,13 @@ Jasný a srozumitelný.
 Úroveň vědomí:
 Bdělý a reagující.
 
-Stav aktivity:
-Chodící, soběstačný.
+Fyzická aktivita:
+Chodí, soběstačný.
 
-Pokyny při propuštění:
-Byli jste hospitalizováni kvůli potížím s dýcháním a sípavému dýchání. Dokončete užívání prednisonu a používejte inhalátory podle předpisu. Vyhýbejte se kouři a dalším dráždivým látkám. V případě zhoršení dušnosti, horečky, bolesti na hrudi nebo zmatenosti se vraťte do nemocnice. V případě dotazů ohledně léků volejte ___.
+Pokyny pro propuštění:
 
-Pokyny pro další postup:
+Byli jste hospitalizováni kvůli potížím s dýcháním a sípání. Dokončete užívání prednisonu a používejte inhalátory podle předpisu. Vyhýbejte se kouři a dalším dráždivým látkám. V případě zhoršení dušnosti, horečky, bolesti na hrudi nebo zmatenosti se vraťte do nemocnice. Pokud máte dotazy ohledně léků, zavolejte na číslo ___.
+
+Pokyny pro kontrolní vyšetření:
+
 ___

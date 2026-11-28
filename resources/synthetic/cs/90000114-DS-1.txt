@@ -7,13 +7,13 @@ Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Bolest v pravé oblasti boku a horečka
+Bolest v pravé části boku a horečka
 
 Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-___letá žena převezena z ___ s třídenní anamnézou bolesti v pravé oblasti boku, horečkou, zimnicí a pálením při močení. Uvádí sníženou chuť k jídlu a nevolnost, ale bez zvracení. Dne ___ se doma cítila slabě a byla přivezena rodinou. Na pohotovosti měla horečku a zrychlený srdeční tep, byla hydratována a podána antibiotika.
+___letá žena převezena z ___ s třídenní anamnézou bolesti v pravé části boku, horečkou, zimnicí a pálením při močení. Uvádí sníženou chuť k jídlu a nevolnost, ale bez zvracení. Dne ___ se doma cítila slabě a byla přivezena rodinou. Na pohotovosti měla horečku a zrychlený srdeční tep, byla hydratována a podána antibiotika.
 
 Anamnéza předchozích onemocnění:
 Diabetes mellitus 2. typu
@@ -26,7 +26,7 @@ Sociální anamnéza:
 ___
 
 Rodinná anamnéza:
-Matka s hypertenzí, sledována v ___. Otec s ischemickou chorobou srdeční.
+Matka s hypertenzí, léčena v ___. Otec s ischemickou chorobou srdeční.
 
 Fyzikální vyšetření:
 Celkový stav: Unavená žena, v klidu se cítí dobře, bez známek úzkosti.
@@ -38,9 +38,9 @@ LABORATORNÍ VYŠETŘENÍ PŘI PŘIJETÍ:
 Leukocyty 15,2 s převahou neutrofilů, hemoglobin 12,1, trombocyty 260. Sodík 134, draslík 4,2, kreatinin 1,0, glukóza 238. Laktát 2,1. Vyšetření moči ukázalo mnoho bílých krvinek, pozitivní nitrity a bakterie. Kultivace moči prokázala přítomnost E. coli, citlivé na ceftriaxon. Ultrazvuk ledvin neprokázal obstrukci ani kameny.
 
 Stručný průběh hospitalizace:
-Přijata s komplikovanou infekcí močových cest a počínající se sepsí, léčena týmem pod vedením Dr. ___. Rychle se zlepšila po intravenózním podání ceftriaxonu a tekutin, horečka ustoupila do druhého dne. Glukóza byla kontrolována pomocí inzulínu a byla obnovena domácí léčba. Antibiotika byla změněna na perorální terapii. Bylo domluveno kontrolní vyšetření u ___.
+Přijata s komplikovanou infekcí močových cest a počínající se sepsí, léčena týmem pod vedením Dr. ___. Rychle se zlepšila po intravenózním podání ceftriaxonu a tekutin, horečka ustoupila do druhého dne. Hladina glukózy byla kontrolována pomocí inzulinové pumpy a byla obnovena domácí léčba. Antibiotika byla změněna na perorální terapii. Bylo domluveno kontrolní vyšetření u ___.
 PŘECHODNÁ OTÁZKY:
-Dokončení perorální antibiotické léčby. Kontrola glukózy a funkce ledvin při návštěvě praktického lékaře.
+Dokončení perorální antibiotické léčby. Kontrola hladiny glukózy a funkce ledvin při návštěvě praktického lékaře.
 
 Léky při přijetí:
 Metformin 500 mg dvakrát denně
@@ -63,13 +63,11 @@ Akutní pyelonefritida
 Infekce močových cest se sepsí
 
 Stav při propuštění:
-Duševní stav: Jasný a orientovaný.
+Duševní stav: Jasný a srozumitelný.
 Fyzická aktivita: Chodí samostatně.
 
 Pokyny pro propuštění:
-
 Byl/a jste léčen/a na infekci ledvin pomocí antibiotik. Užívejte všechny předepsané léky až do jejich spotřebování a pijte dostatek tekutin. V případě horečky, silné bolesti zad, zvracení nebo zmatenosti se vraťte do nemocnice. V případě dotazů volejte na číslo ___ nebo během dne na kliniku na číslo ___. Mimo pracovní dobu volejte na číslo ___.
 
 Pokyny pro kontrolní vyšetření:
-
 ___

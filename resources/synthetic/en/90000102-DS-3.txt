@@ -7,68 +7,67 @@ Allergies:
 No known drug allergies
 
 Chief Complaint:
-Weakness and poor appetite
+Weakness and excessive thirst
 
 Major Surgical or Invasive Procedure:
 None
 
 History of Present Illness:
-___ year old woman sent from ___ clinic after three days of fatigue, nausea and reduced oral intake. She denied fever, chest pain or falls. Vitals were stable on arrival.
+This ___ year old woman with a history of poorly controlled sugars presented to the ___ emergency department with three days of weakness, thirst and frequent urination.
 
 Past Medical History:
-Diabetes mellitus type 2
+Type 2 diabetes mellitus
 Hypertension
-Hyperlipidemia
 
 Social History:
 ___
 
 Family History:
-Mother had a history of chronic kidney disease. Father healthy.
+Family history of chronic kidney disease in her mother.
 
 Physical Exam:
 General:
-Tired, comfortable at rest
+Comfortable, no distress.
 HEENT:
-Dry mucous membranes
+Dry mucous membranes.
 Neck:
-Supple
+Supple.
 PULM:
-Clear bilaterally
+Clear bilaterally.
 EXTREMITIES:
-No edema
+No edema.
 
 Pertinent Results:
 ADMISSION LABS:
-Sodium low normal, creatinine near baseline, glucose elevated. Urinalysis without infection. Chest film showed clear lungs and normal heart size. ECG showed sinus rhythm.
+Glucose 412 on ___. Bicarbonate 22, creatinine 0.9, sodium 135, potassium 4.4. Hemoglobin A1c 11.2 percent. Urinalysis showed ketones and glucose, otherwise unremarkable.
 
 Brief Hospital Course:
-She was seen by the ___ team and given intravenous fluids with improvement in appetite. Glucose was managed with insulin and then her home regimen. On ___ she walked independently and tolerated diet.
+She received intravenous fluids and insulin, and her hyperglycemia resolved by ___. Nutrition and glucose education were provided by the ___ team. She was transitioned to subcutaneous insulin and metformin and discharged home in stable condition.
 
 Medications on Admission:
-Metformin, lisinopril, atorvastatin
+Metformin 500 mg twice daily
+Lisinopril 10 mg daily
 
 Discharge Medications:
-Metformin 500 mg twice daily. Lisinopril 10 mg daily. Atorvastatin 20 mg nightly. Hold metformin if unable to eat or drink.
+Insulin glargine 20 units nightly
+Metformin 1000 mg twice daily
+Lisinopril 10 mg daily
+Glucose test strips
 
 Discharge Disposition:
 Home
 Facility: ___
 
 Discharge Diagnosis:
-Diabetes mellitus type 2 with dehydration
+Diabetes mellitus type 2 with hyperglycemia
 
 Discharge Condition:
-Good
-Mental Status:
-Alert and oriented
-Level of Consciousness:
-Awake and attentive
-Activity Status:
-Ambulatory, independent
+Mental Status: Clear and coherent.
+Level of Consciousness: Alert and interactive.
+Activity Status: Ambulatory, independent.
 
 Discharge Instructions:
-You were treated for dehydration. Drink fluids regularly and take medicines as listed. Check your sugars daily. Call ___ for vomiting or weakness. Please see Dr. ___ soon.
+You were admitted with very high blood sugars. Check your glucose before meals and at bedtime, take your medications as prescribed, and keep your appointment at the ___ clinic.
 
 Followup Instructions:
 ___

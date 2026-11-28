@@ -13,13 +13,13 @@ Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-___letý muž odeslán z ___ po třech dnech zhoršujícího se kašle, mírné horečky a únavy. Uvádí, že v minulosti neměl pneumonii a zobrazovací vyšetření hrudníku provedené v ___ neprokázalo známky pneumonie. Byla mu podána tekutina a byl odeslán k pozorování kvůli přetrvávající slabosti a špatné chuti k jídlu.
+___letý muž byl odeslán z ___ po třech dnech zhoršujícího se kašle, mírné horečky a únavy. Uvádí, že v minulosti neměl pneumonii a zobrazovací vyšetření hrudníku provedené v ___ neprokázalo známky pneumonie. Byla mu podána tekutina a byl odeslán k pozorování kvůli přetrvávající slabosti a špatné chuti k jídlu.
 PŘEHLED SYSTÉMŮ:
-Pozitivní nález na kašel a celkovou slabost. Negativní nález na bolest na hrudi, zvracení nebo vyrážku.
+Pozitivní nález na kašel a celkový neklid. Negativní nález na bolest na hrudi, zvracení nebo vyrážku.
 
 Anamnéza předchozích onemocnění:
 Hypertenze
-Hyperlipidémie, sledována ___
+Hyperlipidemie, sledována ___
 
 Sociální anamnéza:
 ___
@@ -28,16 +28,16 @@ Rodinná anamnéza:
 Otec s ischemickou chorobou srdeční, léčen v ___
 
 Fyzikální vyšetření:
-Vitalní funkce: T 37,3 °C, TF 88, TK 128/76, dechová frekvence 16, SpO2 97 % při dýchání okolním vzduchem
+Vitalní funkce: T 37,2 °C, TF 88, TK 128/76, dechová frekvence 16, SpO2 97 % při dýchání okolním vzduchem
 Celkový stav: vypadá unaveně, v klidu je v pohodě
 KONČETINY: bez otoků, teplé
-Neurologické vyšetření: bdělý, orientovaný, bez ložiskových příznaků
+Neurologický stav: bdělý, orientovaný, bez ložiskových příznaků
 
 Významné výsledky:
-Laboratorní vyšetření provedená v ___ ukázala mírně zvýšený počet bílých krvinek, normální hladinu hemoglobinu a krevních destiček. Hladiny sodíku, draslíku a kreatininu byly v normálních mezích. Jaterní enzymy byly v normě. Vyšetření na respirační viry bylo pozitivní na chřipku. Rentgen hrudníku, který zhodnotil ___, ukázal průhledná plíce s normálním stínem srdce a bez výpotku.
+Laboratorní vyšetření provedená v ___ ukázala mírně zvýšený počet bílých krvinek, normální hladinu hemoglobinu a krevních destiček. Hladiny sodíku, draslíku a kreatininu byly v normálním rozmezí. Jaterní enzymy byly v normě. Vyšetření na respirační viry bylo pozitivní na chřipku. Rentgen hrudníku, který zhodnotil ___, ukázal průhledná plíce s normálním stínem srdce a bez výpotku.
 
 Stručný průběh hospitalizace:
-Pacient byl přijat s chřipkou a léčen oseltamivirem, tekutinami a paracetamolem. Jeho horečka ustoupila během dvou dnů a kašel se postupně zlepšoval. Saturace kyslíkem zůstala během pobytu v ___ normální při dýchání okolním vzduchem. Krevní tlak byl kontrolován pomocí jeho běžné domácí léčby. Dobře snášel stravu, chodil samostatně a ___ ho propustil domů.
+Pacient byl přijat s chřipkou a léčen oseltamivirem, tekutinami a paracetamolem. Jeho horečka ustoupila během dvou dnů a kašel se postupně zlepšoval. Saturace kyslíkem zůstala během pobytu v ___ normální při dýchání okolním vzduchem. Krevní tlak byl kontrolován pomocí jeho domácí léčby. Dobře snášel stravu, chodil samostatně a ___ ho prohlásil za způsobilého k propuštění domů.
 
 Léky při přijetí:
 Lisinopril 10 mg denně
@@ -60,11 +60,12 @@ Hypertenze
 
 Stav při propuštění:
 Duševní stav: Jasný a srozumitelný.
-Úroveň vědomí: Bdělý a reagující.
-Aktivita: Chodí, je soběstačný.
+Úroveň vědomí: Bdělý a komunikativní.
+Stav aktivity: Ambulantní, soběstačný.
 
-Pokyny při propuštění:
-Byli jste hospitalizováni s chřipkou. Užijte antivirotikum, dokud ho nevyspotřebujete, a pijte hodně tekutin. Odpočívejte doma a vraťte se do ___, pokud se u vás objeví potíže s dýcháním, bolest na hrudi nebo horečka nad 38 °C. V případě dotazů volejte na svou kliniku na čísle ___. Prosím, dodržte termín schůzky s doktorem ___ příští týden.
+Pokyny pro propuštění:
 
-Další pokyny:
+Byli jste hospitalizováni kvůli chřipce. Užívajte antivirotika, dokud je nevyspotřebujete, a pijte dostatek tekutin. Odpočívejte doma a v případě potíží s dýcháním, bolesti na hrudi nebo horečky nad 38,3 °C se vraťte do ___. V případě dotazů volejte na kliniku na číslo ___. Prosím, dodržte termín schůzky s doktorem ___ příští týden.
+
+Pokyny pro kontrolu:
 ___

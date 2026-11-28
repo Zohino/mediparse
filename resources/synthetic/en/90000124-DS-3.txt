@@ -1,74 +1,85 @@
 Name: ___  Date of Birth: ___
-Sex: F  Service: MEDICINE
+Sex: F  Service: Medicine
 Admission Date: ___  Unit No: ___
 Discharge Date: ___  Attending: ___
 
 Allergies:
-No known drug allergies
+Penicillins
 
 Chief Complaint:
-Leg swelling and fatigue
+Cough and shortness of breath
 
 Major Surgical or Invasive Procedure:
 None
 
 History of Present Illness:
-___ year old woman with chronic kidney disease who was sent in from ___ after three days of worsening leg swelling, fatigue and poor appetite. She noted reduced urine output and mild shortness of breath when lying flat. She denied fever, productive cough or any concern for pneumonia, and chest imaging showed no pneumonia. Her physician at ___ found a rising creatinine and referred her. She was stable on arrival.
+___ year old woman with chronic kidney disease presented to ___ Hospital with three days of cough, low-grade fever and shortness of breath that began on ___. She denies pneumonia in the past and chest imaging showed no pneumonia. She reported poor appetite, mild leg swelling and reduced urine output. Her creatinine was above baseline. She was given fluids and admitted for monitoring. Vitals were stable on arrival.
 
 Past Medical History:
 Diabetes mellitus type 2
 Hypertension
 Hyperlipidemia
+Followed by Dr. ___ for kidney care
 
 Past Surgical History:
-Cholecystectomy in ___
+Appendectomy in ___
 
 Social History:
 ___
 
 Family History:
-Mother with hypertension. Father with heart disease at ___.
+Mother with hypertension
 
 Physical Exam:
-Afebrile and comfortable at rest.
-HEENT: Moist mucous membranes, no icterus.
-Lungs: Clear bilaterally, no crackles.
-ABD: Soft, nontender, nondistended.
-Ext: 2+ pitting edema to the knees.
-Neuro: Alert, oriented, nonfocal.
+Vitals stable, afebrile, comfortable at rest on room air.
+HEENT:
+Moist mucous membranes, no icterus.
+Lungs:
+Clear bilaterally, no wheezes.
+ABD:
+Soft, nontender, nondistended.
+Ext:
+Trace bilateral edema.
+Neuro:
+Alert, oriented, nonfocal.
 
 Pertinent Results:
-Admission labs from ___ showed creatinine 3.1, BUN 58, potassium 5.3, glucose 212 and hemoglobin 10.4. Urinalysis had 2+ protein and no blood. Repeat creatinine on ___ was 2.6 and potassium 4.6. Renal ultrasound showed small echogenic kidneys without hydronephrosis. Chest radiograph was obtained on admission.
+Admission labs notable for creatinine 2.1 from baseline 1.8 and glucose 210. White count normal. Sodium and potassium normal. Chest radiograph ___ showed clear lungs. CT chest on ___ was unremarkable apart from small bibasilar atelectasis. Urinalysis showed mild proteinuria without infection. Repeat creatinine improved to 1.9 by discharge. Hemoglobin stable at 11.2.
 IMPRESSION:
-Mild vascular congestion, no focal consolidation or effusion.
+Clear lungs, no acute cardiopulmonary process.
 
 Brief Hospital Course:
-She was admitted for volume overload with worsening kidney function. She received intravenous furosemide with good urine output and lost several pounds, and her leg swelling improved. Creatinine fell toward baseline and potassium normalized after dietary changes. Her glucose was managed with insulin sliding scale. Nephrology at ___ reviewed her case and agreed with outpatient follow up at ___. She was eating well and walking independently by discharge.
+She was admitted to the medicine service and seen by the ___ team. Gentle intravenous fluids were given and her creatinine gradually returned toward baseline. Her cough was attributed to a viral upper respiratory illness and settled with supportive care; she needed no antibiotics. Oxygen saturation stayed normal on room air. Blood sugars were managed with her usual regimen and a sliding scale. She was seen on ___ by nephrology at ___ Hospital, who agreed with outpatient follow up. She tolerated her diet, walked independently and went home in stable condition.
 
 Medications on Admission:
-Metformin, lisinopril, atorvastatin, aspirin daily
+Metformin 500 mg twice daily; amlodipine 5 mg daily; atorvastatin 20 mg nightly; calcitriol 0.25 mcg daily.
 
 Discharge Medications:
-1. Furosemide 40 mg by mouth daily
-2. Atorvastatin 20 mg by mouth nightly
-3. Aspirin 81 mg by mouth daily
-4. Insulin glargine 10 units at bedtime as directed by ___
-Metformin and lisinopril were stopped until your kidney tests are rechecked.
+1. Metformin 500 mg by mouth twice daily
+2. Amlodipine 5 mg by mouth once daily
+3. Atorvastatin 20 mg by mouth every night
+4. Calcitriol 0.25 mcg by mouth once daily
+5. Acetaminophen 500 mg every six hours as needed for fever or aches
 
 Discharge Disposition:
-Home with services from ___
+Home
 
 Discharge Diagnosis:
-Chronic kidney disease with volume overload
 Diabetes mellitus type 2
+Chronic kidney disease with acute worsening, resolved
+Viral upper respiratory illness
 
 Discharge Condition:
-Mental Status: Clear and coherent.
-Level of Consciousness: Alert and interactive.
-Activity Status: Ambulatory, independent.
+Stable
+Mental Status:
+Clear and coherent.
+Level of Consciousness:
+Alert and interactive.
+Activity Status:
+Ambulatory, independent.
 
 Discharge Instructions:
-You were hospitalized because fluid built up as your kidneys worked poorly. Take the water pill every morning and weigh yourself daily. Call ___ if your weight rises by three pounds in a day, or if swelling or breathing worsens. Limit salt and avoid ibuprofen. Have blood tests repeated at the clinic of ___ within one week.
+You were hospitalized for cough and worsening kidney function. Drink fluids as advised and avoid ibuprofen and similar pain medicines. Take your medicines as listed. Call ___ or return to the emergency department for fever, worsening breathlessness or low urine output. Your kidney clinic at ___ will contact you within ___.
 
 Followup Instructions:
 ___

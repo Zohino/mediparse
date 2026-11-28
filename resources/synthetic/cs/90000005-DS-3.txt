@@ -7,13 +7,13 @@ Alergie:
 Žádné známé alergie na léky
 
 Hlavní potíže:
-Zarudnutí a otok levé nohy
+Zčervenání a otok levé nohy
 
 Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-___letý muž s hypertenzí, který se dostavil do ___ s třídenní horečkou, zarudnutím a otokem levé dolní končetiny po drobném oděru při zahradničení. Den předtím byl vyšetřen v ___ a dostal perorální antibiotika, ale stav se nezlepšil. Na pohotovosti měl horečku a zrychlený srdeční tep, byl přijat k intravenózní léčbě antibiotiky.
+___letý muž s hypertenzí, který se dostavil do ___ s třídenní horečkou, zčervenáním a otokem levé dolní končetiny po drobném oděru při zahradničení. Den předtím byl vyšetřen v ___ a dostal perorální antibiotika, ale stav se nezlepšil. Na pohotovosti měl horečku a zrychlený srdeční tep, a byl přijat k intravenózní léčbě antibiotiky.
 PŘEHLED SYSTÉMŮ:
 Pozitivní nález na třes a bolest nohy. Negativní nález na bolest na hrudi, kašel, dysurii.
 
@@ -61,11 +61,13 @@ Hypertenze
 
 Stav při propuštění:
 Duševní stav: Bdělý a plně orientovaný.
-Úroveň vědomí: Bdělý a reagující.
+Úroveň vědomí: Probuzený a komunikativní.
 Stav aktivity: Chodí samostatně.
 
-Pokyny při propuštění:
-Byl jste v nemocnici léčen na kožní infekci levé nohy pomocí intravenózních antibiotik a zarudnutí se zlepšilo. Dokončete celou kúru antibiotik. Při sezení držte nohu ve zvýšené poloze a omyjte případné oděrky mýdlem a vodou. V případě horečky, šířícího se zarudnutí, zhoršující se bolesti nebo otoku se vraťte a v případě dotazů volejte ___ nebo ___, pokud si nebudete moci zajistit léky.
+Pokyny pro propuštění:
 
-Pokyny pro kontrolu:
+V nemocnici jste byl/a léčen/a na kožní infekci levé nohy pomocí intravenózních antibiotik a zarudnutí se zlepšilo. Dokončete celou kúru antibiotik. Při sezení držte nohu ve zvýšené poloze a veškeré oděrky omyjte mýdlem a vodou. V případě horečky, šíření zarudnutí, zhoršení bolesti nebo otoku se vraťte do nemocnice. V případě dotazů volejte na číslo ___ nebo na číslo ___, pokud si nemůžete vyzvednout své léky.
+
+Pokyny pro kontrolní vyšetření:
+
 ___

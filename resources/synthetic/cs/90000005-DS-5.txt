@@ -13,7 +13,7 @@ Významnější chirurgický zákrok nebo invazivní procedura:
 Žádný
 
 Anamnéza současného onemocnění:
-___letý muž s hypertenzí a hyperlipidemií, který se dostavil s třemi dny trvajícím zhoršováním otoku nohou, ortopnoí a dušností při námaze. Byl převezen z ___ poté, co výsledky laboratorních testů provedených v ambulanci dne ___ ukázaly zvýšenou hladinu BNP. Uvedl, že v poslední době konzumoval jídla s vysokým obsahem sodíku.
+___letý muž s hypertenzí a hyperlipidemií se dostavil s třemi dny trvajícím zhoršováním otoku nohou, ortopnoí a dušností při námaze. Byl převezen z ___ poté, co výsledky laboratorních testů provedených v ambulanci dne ___ ukázaly zvýšenou hladinu BNP. Uvedl, že v poslední době konzumoval jídla s vysokým obsahem sodíku.
 
 Anamnéza předchozích onemocnění:
 Hypertenze
@@ -35,13 +35,13 @@ komfortní, bez známek úzkosti
 Hlava, oči, uši, nos, hrdlo:
 vlhké sliznice
 Krk:
-zvýšená JVP (jugulární venózní tlak)
+zvýšená jugulární venózní tlak
 Plíce:
 oboustranné chrůpky
 Srdce:
 pravidelné, přítomna S3
 Břicho:
-měkké, netendrové
+měkké, netendrovatelné
 Kůže:
 teplá
 Neurologické vyšetření:
@@ -51,7 +51,7 @@ Významné výsledky:
 Laboratorní testy provedené dne ___ ukázaly BNP 1900, kreatinin 1,1, draslík 4,0 a normální hodnoty troponinu. Rentgen hrudníku prokázal plicní vaskulární kongesci s malými oboustrannými výpotky. Echokardiografie ukázala ejekční objem 30 procent, což je stejné jako v předchozím vyšetření.
 
 Stručný popis hospitalizace:
-Byl diuretizován intravenózním furosemidem a ztratil přibližně čtyři litry tekutin, což vedlo ke zlepšení oxygenace a ústupu chrůpků. Zobrazovací vyšetření hrudníku neprokázalo pneumonii a pacient zůstal bez horečky. Kardiolog z ___ upravil jeho léčbu a byla domluvena kontrola v ___.
+Byl diuretizován intravenózním furosemidem a vyloučil se přibližně čtyři litry tekutiny, což vedlo ke zlepšení oxygenace a ústupu chrůpků. Zobrazovací vyšetření hrudníku neprokázalo pneumonii a pacient zůstal bez horečky. Kardiolog z ___ upravil jeho léčbu a zajistil kontrolu v ___.
 
 Léky při přijetí:
 Lisinopril 20 mg denně
@@ -75,8 +75,10 @@ Stav při propuštění:
 Duševní stav: Jasný a srozumitelný.
 Fyzická aktivita: Chodí, soběstačný.
 
-Pokyny pro propuštění:
-Byli jste hospitalizováni kvůli zadržování tekutin způsobenému srdečním selháním. Každé ráno se važte a volejte ___, pokud během jednoho dne přiberete více než tři libry. Omezte příjem soli, užívejte léky podle předpisu a dodržujte termín kontroly v ___.
+Pokyny pro propuštění z nemocnice:
 
-Pokyny pro kontrolu:
+Byli jste hospitalizováni kvůli zadržování tekutin způsobenému srdečním selháním. Každé ráno se zvažte a zavolejte na číslo ___, pokud během jednoho dne přiberete více než jeden a půl kilogramu. Omezte příjem soli, užívejte léky podle předpisu a dodržujte termín vaší kontroly u lékaře ___.
+
+Pokyny pro další postup:
+
 ___
