@@ -132,11 +132,13 @@ class SklearnStageScorer:
             InvalidInputError: Parametry nebo trénovací slovník nejsou platné.
         """
         try:
-            if self.config.branch(params).family.family is ClassifierFamily.MULTIRESCNN:
-                return self._network_folds(params, folds)
-            if self.config.branch(params).family.family is ClassifierFamily.TRANSFORMER:
-                return self._transformer_folds(params, folds)
-            return tuple(self._score(params, fold) for fold in folds)
+            match self.config.branch(params).family.family:
+                case ClassifierFamily.MULTIRESCNN:
+                    return self._network_folds(params, folds)
+                case ClassifierFamily.TRANSFORMER:
+                    return self._transformer_folds(params, folds)
+                case _:
+                    return tuple(self._score(params, fold) for fold in folds)
         except ValueError as error:
             msg = f"Parametry nebo trénovací slovník stupně nejsou platné: {error}"
             raise InvalidInputError(msg) from error
