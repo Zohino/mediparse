@@ -1,4 +1,4 @@
-"""Text zprávy: de-identifikační značka a její počet, sekce podle hlaviček na začátku řádku, věková značka."""
+"""Text zprávy: de-identifikační značka a její počet, věková značka."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ import re
 from typing import TYPE_CHECKING, Final
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable, Mapping
+    from collections.abc import Iterable
 
 DEID: Final = "___"
 # Delší řady podtržítek nejsou značka (hlásí je kontrola cizí formy značky). Vzor
@@ -17,8 +17,6 @@ _DEID_PATTERN: Final = re.compile(STANDALONE_DEID)
 # věku s přilepeným pohlavím. Protějšek pro RE2 je v eda/R/text.R.
 AGE_SUFFIX: Final = r"[ -]?(?:years?[ -]?old|yo|y/o|y\.o\.)[mf]?(?![a-z])"
 AGE_MARKER: Final = re.compile(rf"{STANDALONE_DEID}{AGE_SUFFIX}", re.IGNORECASE)
-
-type Sections = tuple[tuple[str, str], ...]
 
 
 def deid_markers(text: str) -> int:
@@ -37,29 +35,3 @@ def alternation(words: Iterable[str]) -> str:
         Escapovaná slova od nejdelšího spojená svislou čarou.
     """
     return "|".join(map(re.escape, sorted(words, key=len, reverse=True)))
-
-
-def line_headers(headers: Iterable[str]) -> re.Pattern[str]:
-    """Hlavičky s dvojtečkou na začátku řádku.
-
-    Returns:
-        Zkompilovaný vzor, skupina ``header`` nese nalezenou hlavičku.
-    """
-    return re.compile(rf"^(?P<header>{alternation(headers)}):", re.MULTILINE)
-
-
-def segment(text: str, headers: Mapping[str, str]) -> tuple[str, Sections]:
-    """Rozdělí text na preambuli a sekce podle kanonických hlaviček na začátku řádku.
-
-    Returns:
-        Preambuli a dvojice klíč sekce, tělo sekce v pořadí textu; text bez
-        hlavičky je celý preambulí a sekce nemá.
-    """
-    keys = {header: key for key, header in headers.items()}
-    matches = list(line_headers(keys).finditer(text))
-    starts = [match.start() for match in matches] + [len(text)]
-    sections = tuple(
-        (keys[match["header"]], text[match.end() : end])
-        for match, end in zip(matches, starts[1:], strict=True)
-    )
-    return text[: starts[0]], sections

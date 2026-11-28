@@ -13,6 +13,7 @@ from mediparse.synthetic.domain.mentions import Mention, MentionStatus
 from mediparse.synthetic.domain.note_consistency import (
     measure_narrative,
     note_violations,
+    segment,
 )
 
 if TYPE_CHECKING:
@@ -381,3 +382,29 @@ def test_narrative_measure_has_named_fields(
     measure = _measure(body, planned_note, sampler_config)
 
     assert (measure.words, measure.marks) == (len(body.split()), 1)
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        pytest.param("no headers", ("no headers", ()), id="bez hlavičky"),
+        pytest.param("", ("", ()), id="prázdný text"),
+        pytest.param(
+            "see Allergies: none",
+            ("see Allergies: none", ()),
+            id="hlavička uprostřed řádku",
+        ),
+        pytest.param(
+            "pre\nAllergies:\nnone\nChief Complaint:\nfatigue",
+            ("pre\n", (("allergies", "\nnone\n"), ("complaint", "\nfatigue"))),
+            id="preambule a dvě sekce",
+        ),
+    ],
+)
+def test_segment_splits_preamble_and_sections(
+    text: str, expected: tuple[str, tuple[tuple[str, str], ...]]
+) -> None:
+    """Text bez hlavičky je celý preambulí, s hlavičkami se dělí na jejich začátcích."""
+    headers = {"allergies": "Allergies", "complaint": "Chief Complaint"}
+
+    assert segment(text, headers) == expected

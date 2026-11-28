@@ -10,7 +10,6 @@ import pytest
 from mediparse.domain.note_text import (
     AGE_MARKER,
     deid_markers,
-    segment,
 )
 from tests.support import AGE_MARKER_CASES
 
@@ -30,29 +29,3 @@ def test_marker_is_exactly_three_underscores() -> None:
 def test_shared_age_marker_cases(case: dict[str, Any]) -> None:
     """Sdílené případy definují masku věku v Pythonu i R."""
     assert len(AGE_MARKER.findall(case["text"])) == case["markers"]
-
-
-@pytest.mark.parametrize(
-    ("text", "expected"),
-    [
-        pytest.param("no headers", ("no headers", ()), id="bez hlavičky"),
-        pytest.param("", ("", ()), id="prázdný text"),
-        pytest.param(
-            "see Allergies: none",
-            ("see Allergies: none", ()),
-            id="hlavička uprostřed řádku",
-        ),
-        pytest.param(
-            "pre\nAllergies:\nnone\nChief Complaint:\nfatigue",
-            ("pre\n", (("allergies", "\nnone\n"), ("complaint", "\nfatigue"))),
-            id="preambule a dvě sekce",
-        ),
-    ],
-)
-def test_segment_splits_preamble_and_sections(
-    text: str, expected: tuple[str, tuple[tuple[str, str], ...]]
-) -> None:
-    """Text bez hlavičky je celý preambulí, s hlavičkami se dělí na jejich začátcích."""
-    headers = {"allergies": "Allergies", "complaint": "Chief Complaint"}
-
-    assert segment(text, headers) == expected

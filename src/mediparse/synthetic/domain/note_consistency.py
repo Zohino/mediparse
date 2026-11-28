@@ -12,8 +12,6 @@ from mediparse.domain.note_text import (
     STANDALONE_DEID,
     alternation,
     deid_markers,
-    line_headers,
-    segment,
 )
 from mediparse.synthetic.domain.mentions import MentionStatus
 from mediparse.synthetic.domain.note_structure import PreambleValue
@@ -22,7 +20,6 @@ if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping, Sequence
 
     from mediparse.domain.diagnosis import Diagnosis
-    from mediparse.domain.note_text import Sections
     from mediparse.synthetic.domain.mentions import MentionModel, Negation
     from mediparse.synthetic.domain.note_plan import NotePlan
     from mediparse.synthetic.domain.note_structure import PreambleField, StructureModel
@@ -30,7 +27,34 @@ if TYPE_CHECKING:
 _NUMERIC_AGE: Final = re.compile(rf"\b\d{{1,3}}{AGE_SUFFIX}", re.IGNORECASE)
 _FOREIGN_MARK: Final = re.compile(r"\[\*\*|\bXXX\b|(?<!_)(?:_{1,2}|_{4,})(?!_)")
 
+type Sections = tuple[tuple[str, str], ...]
 type Patterns = Mapping[Diagnosis, re.Pattern[str]]
+
+
+def line_headers(headers: Iterable[str]) -> re.Pattern[str]:
+    """Hlavičky s dvojtečkou na začátku řádku.
+
+    Returns:
+        Zkompilovaný vzor, skupina ``header`` nese nalezenou hlavičku.
+    """
+    return re.compile(rf"^(?P<header>{alternation(headers)}):", re.MULTILINE)
+
+
+def segment(text: str, headers: Mapping[str, str]) -> tuple[str, Sections]:
+    """Rozdělí text na preambuli a sekce podle kanonických hlaviček na začátku řádku.
+
+    Returns:
+        Preambuli a dvojice klíč sekce, tělo sekce v pořadí textu; text bez
+        hlavičky je celý preambulí a sekce nemá.
+    """
+    keys = {header: key for key, header in headers.items()}
+    matches = list(line_headers(keys).finditer(text))
+    starts = [match.start() for match in matches] + [len(text)]
+    sections = tuple(
+        (keys[match["header"]], text[match.end() : end])
+        for match, end in zip(matches, starts[1:], strict=True)
+    )
+    return text[: starts[0]], sections
 
 
 def note_violations(

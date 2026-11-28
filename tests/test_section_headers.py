@@ -11,7 +11,6 @@ import pytest
 from pydantic import ValidationError
 
 from mediparse.domain.language import Language
-from mediparse.domain.note_text import line_headers
 from mediparse.domain.section_headers import (
     HEADER_PATTERN,
     OTHER,
@@ -23,6 +22,7 @@ from mediparse.domain.section_headers import (
     split_sections,
     strip_diagnostic_sections,
 )
+from mediparse.synthetic.domain.note_consistency import line_headers
 from mediparse.synthetic.infrastructure.sampler_config import load_sampler_config
 from mediparse.synthetic.infrastructure.synthetic_corpus import CorpusDirectory
 from tests.section_support import (
