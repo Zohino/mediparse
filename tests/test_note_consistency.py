@@ -5,7 +5,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pytest
+from hypothesis import example, given
+from hypothesis import strategies as st
 
+from mediparse.domain.diagnosis import Diagnosis
+from mediparse.synthetic.domain.mentions import Mention, MentionStatus
 from mediparse.synthetic.domain.note_consistency import (
     measure_narrative,
     note_violations,
@@ -27,6 +31,136 @@ def test_matching_note_passes(
 ) -> None:
     """Zpráva, která dodržuje plán, nemá žádné porušení."""
     assert _violations(planned_note.text, planned_note.plan, sampler_config) == ()
+
+
+@pytest.mark.parametrize(
+    ("status", "sentence", "expected"),
+    [
+        pytest.param(
+            MentionStatus.NEGATED, "She has no diabetes.", False, id="negace-ok"
+        ),
+        pytest.param(MentionStatus.NEGATED, "NO DIABETES.", False, id="velka-pismena"),
+        pytest.param(
+            MentionStatus.NEGATED,
+            "Negative  for diabetes.",
+            False,
+            id="vic-slov-mezery",
+        ),
+        pytest.param(
+            MentionStatus.FAMILY_HISTORY,
+            "Family history of diabetes in her mother.",
+            False,
+            id="rodina-ok",
+        ),
+        pytest.param(
+            MentionStatus.NEGATED, "She has diabetes.", True, id="odstraneny-vyraz"
+        ),
+        pytest.param(
+            MentionStatus.NEGATED,
+            "She has no fever. She has diabetes.",
+            True,
+            id="jina-veta",
+        ),
+        pytest.param(MentionStatus.NEGATED, "No fever; diabetes.", True, id="strednik"),
+        pytest.param(
+            MentionStatus.NEGATED, "No fever\ndiabetes.", True, id="konec-radku"
+        ),
+        pytest.param(
+            MentionStatus.FAMILY_HISTORY,
+            "Family History:\nMother with diabetes.",
+            True,
+            id="hlavicka-rodiny",
+        ),
+        pytest.param(
+            MentionStatus.NEGATED,
+            "No diabetes. She has diabetes.",
+            True,
+            id="jedna-negovana-druha-ne",
+        ),
+        pytest.param(
+            MentionStatus.UNCERTAIN, "Possible diabetes.", False, id="nejista-ok"
+        ),
+        pytest.param(
+            MentionStatus.UNCERTAIN, "R/o diabetes.", True, id="nejista-negovana"
+        ),
+        pytest.param(
+            MentionStatus.UNCERTAIN,
+            "R/o diabetes. Possible diabetes.",
+            False,
+            id="nejista-jinde-volna",
+        ),
+        pytest.param(
+            MentionStatus.NEGATED,
+            "Nonsmoker with diabetes.",
+            True,
+            id="slovo-konci-vyrazem",
+        ),
+        pytest.param(
+            MentionStatus.NEGATED,
+            "She lives in Reno with diabetes.",
+            True,
+            id="slovo-zacina-vyrazem",
+        ),
+        pytest.param(MentionStatus.AFFIRMED, "No diabetes.", False, id="potvrzena"),
+    ],
+)
+def test_negation_window_is_checked(
+    planned_note: PlannedNote,
+    sampler_config: SamplerConfig,
+    status: MentionStatus,
+    sentence: str,
+    *,
+    expected: bool,
+) -> None:
+    """Status zmínky odpovídá tomu, zda klíčové slovo přežije odstranění negací."""
+    plan = planned_note.plan.model_copy(
+        update={
+            "mentions": (
+                *planned_note.plan.mentions,
+                Mention(
+                    diagnosis=Diagnosis.DIABETES,
+                    status=status,
+                    sections=("history_of_present_illness",),
+                ),
+            )
+        }
+    )
+    text = planned_note.text.replace("oral intake.", "oral intake. " + sentence)
+    assert text != planned_note.text
+
+    violations = _violations(text, plan, sampler_config)
+
+    assert any("negační okno" in reason for reason in violations) is expected
+
+
+@given(n=st.integers(min_value=2, max_value=80))
+@example(n=40)
+@example(n=41)
+def test_negation_window_boundary(
+    planned_note: PlannedNote, sampler_config: SamplerConfig, n: int
+) -> None:
+    """Okno zahrnuje právě nejvýš 40 znaků mezi výrazem a klíčovým slovem."""
+    sentence = "no" + " " + "x" * (n - 2) + " " + "diabetes."
+    plan = planned_note.plan.model_copy(
+        update={
+            "mentions": (
+                *planned_note.plan.mentions,
+                Mention(
+                    diagnosis=Diagnosis.DIABETES,
+                    status=MentionStatus.NEGATED,
+                    sections=("history_of_present_illness",),
+                ),
+            )
+        }
+    )
+    text = planned_note.text.replace("oral intake.", "oral intake. " + sentence)
+    assert text != planned_note.text
+
+    violations = _violations(text, plan, sampler_config)
+
+    assert any("negační okno" in reason for reason in violations) is (
+        n > sampler_config.mentions.negation.window_chars
+    )
 
 
 @pytest.mark.parametrize(
