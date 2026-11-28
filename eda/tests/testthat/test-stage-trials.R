@@ -34,7 +34,7 @@ testthat::test_that("B2 kontrakty všech stupňů jsou úplné a souhlasí s man
     source <- stage_predictions_source(con, paths$predictions)
     rows <- rows + DBI::dbGetQuery(con, paste("SELECT count(*) n FROM", source))$n
   }
-  testthat::expect_equal(rows, 91200)
+  testthat::expect_equal(rows, 103200)
   testthat::expect_equal(rows,
     jsonlite::read_json(file.path(CONTRACT_FIXTURES, "stage_trials", "synthetic.json"))$rows)
 })

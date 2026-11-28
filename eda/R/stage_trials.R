@@ -12,7 +12,7 @@ STAGE_PREDICTION_COLUMNS <- c(
 FAMILY_LABELS <- c(
   complement_nb = "Complement NB", logreg = "Logistická regrese",
   linear_svm = "Lineární SVM", nb_svm = "NB-SVM", lightgbm_lsa = "LightGBM nad LSA",
-  lightgbm = "LightGBM", fasttext = "fastText", multirescnn = "MultiResCNN"
+  lightgbm = "LightGBM", fasttext = "fastText", multirescnn = "MultiResCNN", transformer = "Transformer"
 )
 
 STAGE_DIAGNOSES <- c("diabetes", "copd", "ckd", "pneumonia", "atrial_fibrillation")
