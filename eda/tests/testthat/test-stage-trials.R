@@ -215,9 +215,12 @@ testthat::test_that("A8b tabulka vyžaduje přesné pokusy, buňky a konstantní
     testthat::expect_error(check_stage_trials(rows, wrong, config, candidates),
       "není úplná nebo konzistentní")
   }
+  later_default <- rows
+  later_default$default[later_default$trial == 0] <- FALSE
+  later_default$default[later_default$trial == 10] <- TRUE
+  testthat::expect_silent(check(later_default))
   mutations <- list(
     function(x) { x$fold[1] <- config$folds; x },
-    function(x) { x$default[x$trial == 0] <- FALSE; x$default[x$trial == 10] <- TRUE; x },
     function(x) {
       x$representation[x$trial == 10] <- "new"
       x$branch[x$trial == 10] <- "new/complement_nb"
@@ -422,4 +425,20 @@ testthat::test_that("Jedna rodina vybírá dva nejlepší encodery po větvích"
   testthat::expect_equal(diagnoses$f1[diagnoses$rodina == "xlmr"], rep("0,700", 5))
   testthat::expect_error(stage_selection(summary[1:2, ], list(best_trial = 0)),
     "stupeň má jediného kandidáta")
+})
+
+testthat::test_that("Výchozí pokusy mohou dokončit až po nevýchozím pokusu", {
+  paths <- stage_fixture_paths("transformers")
+  rows <- read_stage_trials(paths$results)
+  rows <- rows[rows$trial < 4, ]
+  rows$trial <- c(0L, 1L, 3L, 2L)[rows$trial + 1L]
+  config <- list(trials = 4L, folds = 5L)
+  manifest <- list(trials = 4L, completed_trials = 4L)
+  candidates <- read_candidates(candidates_path())
+  check <- function(rows) check_stage_trials(rows, manifest, config, candidates)
+  testthat::expect_silent(check(rows))
+  duplicate <- rows
+  duplicate$default[duplicate$trial == 2] <- TRUE
+  testthat::expect_error(check(duplicate), "není úplná nebo konzistentní")
+  testthat::expect_error(check(rows[rows$trial != 2, ]), "není úplná nebo konzistentní")
 })

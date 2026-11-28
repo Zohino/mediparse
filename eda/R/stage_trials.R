@@ -139,7 +139,7 @@ check_stage_trials <- function(trials, manifest, config, candidates) {
   }
   defaults <- unique(trials[trials$default, c("trial", "branch")])
   if (!nrow(defaults) || anyDuplicated(defaults$branch) ||
-      !setequal(defaults$trial, seq_len(nrow(defaults)) - 1L) ||
+      !setequal(unique(trials$trial), seq_len(length(unique(trials$trial))) - 1L) ||
       !setequal(defaults$branch, trials$branch)) fail()
   invisible(TRUE)
 }
