@@ -160,6 +160,18 @@ class StageNetwork(BaseModel):
     stopping_parts: Annotated[int, Field(ge=2)]
 
 
+class StageTransformer(BaseModel):
+    """Technické podmínky dolaďování transformeru zahrnuté do hashe configu."""
+
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+
+    epochs: PositiveInt
+    batch_tokens: PositiveInt
+    weight_decay: Annotated[float, Field(ge=0)]
+    warmup_ratio: Annotated[float, Field(ge=0, lt=1)]
+    stopping_parts: Annotated[int, Field(ge=2)]
+
+
 class StageTuningConfig(BaseModel):
     """Rozpočet jednoho CASH ladění na vývojové části."""
 
@@ -172,6 +184,8 @@ class StageTuningConfig(BaseModel):
     random_startup_trials: Annotated[int, Field(ge=0)]
     lsa: StageLsa | None = None
     network: StageNetwork | None = None
+    transformer: StageTransformer | None = None
+    concurrent_trials: PositiveInt = 1
     strip_diagnostic_sections: bool
     representations: Annotated[tuple[Representation, ...], Field(min_length=1)]
     families: Annotated[tuple[FamilySpace, ...], Field(min_length=1)]
@@ -212,6 +226,32 @@ class StageTuningConfig(BaseModel):
     def startup_trials(self) -> int:
         """Počet výchozích a náhodných pokusů před TPE."""
         return len(self.branches) + self.random_startup_trials
+
+    @property
+    def sampler_startup_trials(self) -> int:
+        """Práh dokončených pokusů pro stejný začátek TPE i při souběhu."""
+        # TPE nepočítá běžící pokusy; odečtení zachová rozpočet náhodných návrhů.
+        return self.startup_trials - (self.concurrent_trials - 1)
+
+    @model_validator(mode="after")
+    def _valid_transformer(self) -> Self:
+        if (self.transformer is not None) != any(
+            f.family is ClassifierFamily.TRANSFORMER for f in self.families
+        ):
+            msg = "Transformer musí být zadaný právě s rodinou transformer."
+            raise ValueError(msg)
+        if self.concurrent_trials > 1 and any(
+            f.family is not ClassifierFamily.TRANSFORMER for f in self.families
+        ):
+            msg = "Souběh pokusů je povolený jen pro transformer."
+            raise ValueError(msg)
+        if self.transformer is not None and len({e.device for e in self.encoders}) > 1:
+            msg = "Encodery transformeru musí mít stejné zařízení."
+            raise ValueError(msg)
+        if self.random_startup_trials < self.concurrent_trials - 1:
+            msg = "Náhodné starty musí pokrýt souběh minus jeden."
+            raise ValueError(msg)
+        return self
 
     @model_validator(mode="after")
     def _valid_network(self) -> Self:

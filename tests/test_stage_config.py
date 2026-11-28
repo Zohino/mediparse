@@ -11,10 +11,12 @@ from pydantic import ValidationError
 from mediparse.domain import stage_tuning as stage_domain
 from mediparse.domain.model_input import TextPreprocessing
 from mediparse.domain.representation import (
+    ClassifierFamily,
     EncoderSpec,
     TfidfRepresentation,
     TokensSpec,
     Word2VecRepresentation,
+    accepts,
 )
 from mediparse.domain.stage_tuning import (
     StageLsa,
@@ -27,6 +29,7 @@ from tests.stage_support import (
     network_stage_config,
     stage_config,
     token_stage_config,
+    transformer_stage_config,
     word2vec_stage_config,
 )
 
@@ -111,7 +114,10 @@ def test_winner_tie_uses_earlier_trial() -> None:
             id="unused-representation",
         ),
         pytest.param(
-            stage_config, {("trials",): 4}, "Rozpočet", id="insufficient-budget"
+            stage_config,
+            {("trials",): 4},
+            "Rozpočet",
+            id="insufficient-budget",
         ),
         pytest.param(
             stage_config,
@@ -485,3 +491,55 @@ def test_network_stopping_needs_at_least_two_parts() -> None:
     data["network"]["stopping_parts"] = 1
     with pytest.raises(ValidationError, match="greater than or equal to 2"):
         StageTuningConfig.model_validate_json(json.dumps(data))
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"transformer": None},
+        {"families": stage_config().model_dump(mode="json")["families"][:1]},
+        {
+            "families": [
+                *transformer_stage_config().model_dump(mode="json")["families"],
+                stage_config().model_dump(mode="json")["families"][0],
+            ],
+            "concurrent_trials": 2,
+        },
+        {
+            "representations": [
+                SPEC.model_dump(mode="json") | {"name": "a", "device": "cpu"},
+                SPEC.model_dump(mode="json") | {"name": "b", "device": "cuda"},
+            ]
+        },
+        {"concurrent_trials": 4, "random_startup_trials": 2},
+    ],
+)
+def test_invalid_transformer_config(change: dict[str, object]) -> None:
+    """Odmítne neúplný transformer, smíšený souběh a rozdílná zařízení."""
+    with pytest.raises(ValidationError):
+        transformer_stage_config(**change)
+
+
+def test_network_rejects_concurrent_trials() -> None:
+    """Souběh pokusů patří jen transformeru."""
+    data = network_stage_config().model_dump(mode="json") | {"concurrent_trials": 2}
+    with pytest.raises(ValidationError):
+        StageTuningConfig.model_validate_json(json.dumps(data))
+
+
+def test_transformer_block_without_family() -> None:
+    """Technický blok bez příslušné rodiny není platný."""
+    with pytest.raises(ValidationError):
+        stage_config(
+            transformer=transformer_stage_config().model_dump(mode="json")[
+                "transformer"
+            ]
+        )
+
+
+def test_transformer_acceptance() -> None:
+    """Transformer vyžaduje encoder, word2vec nepřijímá."""
+    assert accepts(SPEC, ClassifierFamily.TRANSFORMER)
+    assert not accepts(
+        word2vec_stage_config().representations[0], ClassifierFamily.TRANSFORMER
+    )

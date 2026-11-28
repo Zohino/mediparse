@@ -24,7 +24,7 @@ from tests.stage_support import stage_config, word2vec_stage_config
             stage_config().representations[0],
             {"complement_nb", "logreg", "linear_svm", "nb_svm", "lightgbm_lsa"},
         ),
-        (SPEC, {"logreg", "linear_svm", "lightgbm"}),
+        (SPEC, {"logreg", "linear_svm", "lightgbm", "transformer"}),
         (
             word2vec_stage_config().representations[0],
             {"logreg", "linear_svm", "lightgbm"},

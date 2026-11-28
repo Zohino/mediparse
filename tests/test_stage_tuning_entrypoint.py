@@ -309,7 +309,9 @@ def test_manifest_without_encoders_validates_as_empty(tmp_path: Path) -> None:
     assert StageTuningManifest.model_validate_json(json.dumps(data)).encoders == ()
 
 
-@pytest.mark.parametrize("stage", ["classical", "embeddings", "networks"])
+@pytest.mark.parametrize(
+    "stage", ["classical", "embeddings", "networks", "transformers"]
+)
 def test_repository_stage_configs(stage: str) -> None:
     """Produkční stupně deklarují schválené větve, rozpočty a výchozí body."""
     config = load_stage_config(REPOSITORY / f"config/stage_{stage}.json")
@@ -327,6 +329,9 @@ def test_repository_stage_configs(stage: str) -> None:
                 "mmbert-base-mean-dictionary": TextPreprocessing.DICTIONARY,
                 "word2vec": TextPreprocessing.DICTIONARY,
             },
+            "transformers": dict.fromkeys(
+                ("mmbert", "xlmr", "mdeberta"), TextPreprocessing.NONE
+            ),
             "networks": {"word-tokens": TextPreprocessing.DICTIONARY},
         }[stage]
     )
@@ -337,6 +342,38 @@ def test_repository_stage_configs(stage: str) -> None:
         config.subsample_parts,
         config.folds,
     )
+    if stage == "transformers":
+        assert budget == (20, 5, 3, 5)
+        assert config.concurrent_trials == 4
+        assert config.sampler_startup_trials == 5
+        assert config.transformer is not None
+        assert config.transformer.epochs == 6
+        assert [b.name for b in config.branches] == [
+            "mmbert/transformer",
+            "xlmr/transformer",
+            "mdeberta/transformer",
+        ]
+        assert config.families[0].default == {
+            "lr": 3e-5,
+            "aggregation": "max",
+            "freeze_embeddings": False,
+        }
+        pilot = json.loads((REPOSITORY / "config/transformer_pilot.json").read_text())
+        for encoder in config.encoders:
+            expected = next(
+                r["encoder"]
+                for r in pilot["runs"]
+                if r["encoder"]["model"] == encoder.model
+                and r["encoder"]["window"] == 512
+            )
+            for key in ("model", "revision", "window", "dtype"):
+                assert getattr(encoder, key) == expected[key]
+        for key in ("batch_tokens", "weight_decay", "warmup_ratio"):
+            assert getattr(config.transformer, key) == pilot["training"][key]
+        assert config.transformer.stopping_parts == pilot["stopping_parts"]
+        return
+    if stage == "networks":
+        assert config.sampler_startup_trials == len(config.branches) + 5
     if stage == "classical":
         assert len(config.branches) == 10
         assert budget == (60, 10, 3, 5)

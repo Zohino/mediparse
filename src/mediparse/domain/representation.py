@@ -36,6 +36,7 @@ class ClassifierFamily(StrEnum):
     LIGHTGBM = "lightgbm"
     FASTTEXT = "fasttext"
     MULTIRESCNN = "multirescnn"
+    TRANSFORMER = "transformer"
 
 
 class EncoderSpec(BaseModel):
@@ -172,7 +173,14 @@ def accepts(spec: Representation, family: ClassifierFamily) -> bool:
         Kompatibilita reprezentace a klasifikátoru.
     """
     match spec:
-        case EncoderSpec() | Word2VecRepresentation():
+        case EncoderSpec():
+            return family in {
+                ClassifierFamily.LOGREG,
+                ClassifierFamily.LINEAR_SVM,
+                ClassifierFamily.LIGHTGBM,
+                ClassifierFamily.TRANSFORMER,
+            }
+        case Word2VecRepresentation():
             return family in {
                 ClassifierFamily.LOGREG,
                 ClassifierFamily.LINEAR_SVM,
