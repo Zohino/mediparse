@@ -182,6 +182,9 @@ def _mention_violations(
 def _negation_violations(
     text: str, plan: NotePlan, patterns: Patterns, negation: Negation
 ) -> list[str]:
+    # Kopíruje negated_pattern z eda/R/mentions.R nad výrazy z configu syntetiky
+    # (ty dostává zadání verbalizace): výrazy v pořadí configu a s mezerou jako
+    # \s+, protože alternation by je řadila podle délky a mezeru brala doslova.
     cues = "|".join(map(re.escape, negation.cues)).replace(r"\ ", r"\s+")
     violations: list[str] = []
     for mention in plan.mentions:
@@ -192,9 +195,6 @@ def _negation_violations(
             MentionStatus.UNCERTAIN,
         }:
             continue
-        # Kopíruje negated_pattern z eda/R/mentions.R nad výrazy z configu syntetiky
-        # (ty dostává zadání verbalizace): výrazy v pořadí configu a s mezerou jako
-        # \s+, protože alternation by je řadila podle délky a mezeru brala doslova.
         # RE2 v EDA chápe \s a hranice slov jen v ASCII; pevná mezera výraz nespojí.
         negated = re.compile(
             rf"\b(?:{cues})\b[^.;\n]{{0,{negation.window_chars}}}"
