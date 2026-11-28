@@ -12,7 +12,7 @@ from mediparse.application.stage_tuning import StageTuning
 from mediparse.domain.diagnosis import Diagnosis
 from mediparse.domain.inputs import InvalidInputError
 from mediparse.domain.split import strata
-from mediparse.domain.stage_tuning import StageFoldResult, StageTrialRecord
+from mediparse.domain.stage_tuning import BRANCH_KEY, StageFoldResult, StageTrialRecord
 from mediparse.domain.tuning import MaxF1, Trial, ValidationScores
 from mediparse.infrastructure.optuna_search import OptunaStageSearch
 from mediparse.infrastructure.parquet_file import read_table
@@ -462,6 +462,7 @@ def test_resume_restores_missing_defaults() -> None:
     """Checkpoint po SIGKILL doplní jen chybějící výchozí bod B."""
     config = transformer_stage_config(concurrent_trials=2)
     a = config.branches[0].default_params()
+    b = config.branches[1].default_params()
     progress = MemoryProgress(
         records=[
             StageTrialRecord(
@@ -471,7 +472,7 @@ def test_resume_restores_missing_defaults() -> None:
                 1, a, default=False, value=0.4, converged=True, seconds=1.0
             ),
             StageTrialRecord(
-                2, a, default=False, value=0.3, converged=True, seconds=1.0
+                2, b, default=False, value=0.3, converged=True, seconds=1.0
             ),
         ]
     )
@@ -483,7 +484,7 @@ def test_resume_restores_missing_defaults() -> None:
         assert [
             r.params
             for r in progress.records
-            if r.default and r.params["branch"] == branch.name
+            if r.default and r.params[BRANCH_KEY] == branch.name
         ] == [branch.default_params()]
 
 

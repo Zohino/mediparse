@@ -19,6 +19,7 @@ from mediparse.application.tuning_trial import (
     write_trial,
 )
 from mediparse.domain.stage_tuning import (
+    BRANCH_KEY,
     StageTrialRecord,
     StageTuningReport,
     best_trial,
@@ -95,7 +96,7 @@ class StageTuning:
         records: list[StageTrialRecord],
     ) -> None:
         # Pád může ztratit běžící výchozí bod i po dokončení jiných větví.
-        completed_defaults = {r.params["branch"] for r in records if r.default}
+        completed_defaults = {r.params[BRANCH_KEY] for r in records if r.default}
         defaults = iter(
             b.default_params()
             for b in config.branches
