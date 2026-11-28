@@ -10,7 +10,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
 from random import Random
 from threading import Barrier
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, NamedTuple
 from unittest.mock import Mock, call
 
 import numpy as np
@@ -1069,17 +1069,66 @@ def test_ngram_counts_rebuild_for_unseen_text(
         )
 
 
-@pytest.mark.parametrize("family", ["multirescnn", "transformer"])
+class _NetworkCase(NamedTuple):
+    """Rozdíly dvou rodin se stejnou smlouvou pacientského fitu."""
+
+    config: StageTuningConfig
+    prepare: Callable[[str], str]
+    n_features: int
+    constructor: Callable[[Path], object]
+    params: dict[str, object]
+    parallel_calls: int
+
+
+@pytest.mark.parametrize(
+    "case",
+    [
+        _NetworkCase(
+            network_stage_config(),
+            joined_tokens(None),
+            24,
+            lambda scratch: call(ClassifierFamily.MULTIRESCNN, 7, scratch),
+            {
+                key: value
+                for key, value in (
+                    network_stage_config().model_dump(mode="json")["network"]
+                    | network_stage_config().families[0].default
+                ).items()
+                if key != "stopping_parts"
+            },
+            1,
+        ),
+        _NetworkCase(
+            transformer_stage_config(),
+            str,
+            16,
+            lambda _: call(
+                encoder=transformer_stage_config().encoders[0],
+                random_state=7,
+                device="cpu",
+                **{
+                    key: value
+                    for key, value in transformer_stage_config()
+                    .model_dump(mode="json")["transformer"]
+                    .items()
+                    if key != "stopping_parts"
+                },
+            ),
+            dict(transformer_stage_config().families[0].default),
+            0,
+        ),
+    ],
+)
 @pytest.mark.parametrize("converged", [True, False])
-def test_multirescnn_fits_once_with_patient_stopping_part(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, family: str, *, converged: bool
+def test_network_fits_once_with_patient_stopping_part(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    case: _NetworkCase,
+    *,
+    converged: bool,
 ) -> None:
     """Jeden fit drží pacienty oddělené a sloupce ve výčtovém pořadí diagnóz."""
-    config = (
-        network_stage_config()
-        if family == "multirescnn"
-        else transformer_stage_config()
-    )
+    config = case.config
     corpus = [
         replace(
             note,
@@ -1111,26 +1160,15 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
         isolate=lambda function: function(),
     )
     result = scorer.score_folds(config.branches[0].default_params(), (fold,))[0]
-    if family == "multirescnn":
-        assert parallel.call_args.kwargs["temp_folder"] == tmp_path
-        factory.assert_called_once_with(ClassifierFamily.MULTIRESCNN, 7, tmp_path)
-        assert config.network is not None
-        model.set_params.assert_called_once_with(
-            **config.families[0].default,
-            **config.network.model_dump(exclude={"stopping_parts"}),
-        )
-    else:
-        assert config.transformer is not None
-        factory.assert_called_once_with(
-            encoder=config.encoders[0],
-            random_state=7,
-            device="cpu",
-            **config.transformer.model_dump(exclude={"stopping_parts"}),
-        )
-        model.set_params.assert_called_once_with(**config.families[0].default)
+    assert (
+        parallel.call_args_list
+        == [call(n_jobs=1, backend="loky", temp_folder=tmp_path)] * case.parallel_calls
+    )
+    assert factory.call_args_list == [case.constructor(tmp_path)]
+    model.set_params.assert_called_once_with(**case.params)
     model.fit.assert_called_once()
     train, train_labels, stop, stop_labels = model.fit.call_args.args
-    prepared = joined_tokens(None) if family == "multirescnn" else str
+    prepared = case.prepare
     fit_notes = [note for note in fold.train if prepared(note.text) in train]
     stop_notes = [note for note in fold.train if prepared(note.text) in stop]
     assert {note.subject_id for note in fit_notes}.isdisjoint(
@@ -1156,11 +1194,8 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
         d: (float(j),) * len(fold.test) for j, d in enumerate(Diagnosis)
     }
     assert result.converged is converged
-    assert result.n_features == (
-        len({token for note in fold.train for token in prepared(note.text).split()})
-        if family == "multirescnn"
-        else 16
-    )
+    # MultiResCNN: 20 čísel pacientů a synthetic, positive, negative, visit; návštěvy 0/1 jsou příliš krátké.
+    assert result.n_features == case.n_features
     scorer.score_folds(config.branches[0].default_params(), (fold,))[0]
     assert model.fit.call_count == 2
     for first, second in zip(
