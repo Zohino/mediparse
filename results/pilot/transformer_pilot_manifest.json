@@ -1,0 +1,117 @@
+{
+  "encoders": [
+    {
+      "name": "xlmr-512-max-f025",
+      "text_preprocessing": "none",
+      "model": "FacebookAI/xlm-roberta-base",
+      "revision": "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
+      "window": 512,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    },
+    {
+      "name": "xlmr-512-max-f050",
+      "text_preprocessing": "none",
+      "model": "FacebookAI/xlm-roberta-base",
+      "revision": "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
+      "window": 512,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    },
+    {
+      "name": "xlmr-512-max",
+      "text_preprocessing": "none",
+      "model": "FacebookAI/xlm-roberta-base",
+      "revision": "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
+      "window": 512,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    },
+    {
+      "name": "xlmr-512-mean",
+      "text_preprocessing": "none",
+      "model": "FacebookAI/xlm-roberta-base",
+      "revision": "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
+      "window": 512,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    },
+    {
+      "name": "mmbert-512-max",
+      "text_preprocessing": "none",
+      "model": "jhu-clsp/mmBERT-base",
+      "revision": "c5955035435e2bf121cde7f3c8863ef52ff35d82",
+      "window": 512,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    },
+    {
+      "name": "mdeberta-512-max",
+      "text_preprocessing": "none",
+      "model": "microsoft/mdeberta-v3-base",
+      "revision": "a0484667b22365f84929a935b5e50a51f71f159d",
+      "window": 512,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    },
+    {
+      "name": "mmbert-8192",
+      "text_preprocessing": "none",
+      "model": "jhu-clsp/mmBERT-base",
+      "revision": "c5955035435e2bf121cde7f3c8863ef52ff35d82",
+      "window": 8192,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    },
+    {
+      "name": "xlmr-512-max-unfrozen",
+      "text_preprocessing": "none",
+      "model": "FacebookAI/xlm-roberta-base",
+      "revision": "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
+      "window": 512,
+      "device": "cuda",
+      "dtype": "bfloat16"
+    }
+  ],
+  "dataset_sha256": "39f8d71d8cc13af7ea7a596936463de411304257570229908505febe2d6426bb",
+  "config_sha256": "9c4beacaa60687e3c903773577438b13ff6538f377babf096e0fd530532d2ae1",
+  "split_seed": 0,
+  "split_folds": 5,
+  "split_sha256": "d731997935c49905c4f7dc6124d5352abac63be10e809de2df0f0aa36332dc18",
+  "seed": 0,
+  "seconds": 27406.993069251068,
+  "sample_notes": 18422,
+  "sample_patients": 8100,
+  "development_notes": 55266,
+  "development_patients": 24301,
+  "results_sha256": "720fba5a209d3b041b62a782a54d072ee92f84f107816913a086877c98fb9d57",
+  "diagnostic_strip": null,
+  "environment": {
+    "packages": {
+      "python": "3.13.18",
+      "numpy": "2.5.5",
+      "scikit-learn": "1.9.1",
+      "pyarrow": "26.0.1",
+      "pydantic": "2.14.3",
+      "torch": "2.14.1+cu130",
+      "transformers": "5.18.0",
+      "tokenizers": "0.23.2"
+    },
+    "source": {
+      "commit": "9a13f0136427153cab97cf1ba7cba75d3b576971",
+      "dirty": false
+    }
+  },
+  "hardware": {
+    "cpu_model": "AMD EPYC 9454 48-Core Processor",
+    "logical_cores": 192,
+    "available_cores": 8,
+    "memory_bytes": 811264872448,
+    "gpus": [
+      {
+        "name": "NVIDIA L40S",
+        "memory_total_bytes": 48305799168
+      }
+    ]
+  }
+}
