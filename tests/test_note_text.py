@@ -7,10 +7,7 @@ from typing import Any, Final
 
 import pytest
 
-from mediparse.domain.note_text import (
-    AGE_MARKER,
-    deid_markers,
-)
+from mediparse.domain.note_text import AGE_MARKER, deid_markers
 from tests.support import AGE_MARKER_CASES
 
 TWO: Final = 2

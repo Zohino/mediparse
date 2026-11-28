@@ -1,4 +1,4 @@
-"""Text zprávy: de-identifikační značka a její počet, věková značka."""
+"""Text zprávy: de-identifikační značka a její počet, věková značka a alternace slov pro regulární výrazy."""
 
 from __future__ import annotations
 
