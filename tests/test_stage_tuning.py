@@ -373,9 +373,9 @@ def test_concurrent_trials_run_simultaneously() -> None:
 
     search = _LoggedSearch([])
     progress = MemoryProgress()
-    _tuning(search, Scorer(), progress).run(
-        transformer_stage_config(concurrent_trials=3)
-    )
+    config = transformer_stage_config(concurrent_trials=3)
+    _tuning(search, Scorer(), progress).run(config)
+    assert search.asked == config.trials
     assert len(progress.records) == 6
     assert search.maximum == 3
 
@@ -393,7 +393,9 @@ def test_out_of_order_completion_keeps_protocol() -> None:
             return super().score_folds(params, folds)
 
     config = transformer_stage_config(concurrent_trials=2)
-    _tuning(_LoggedSearch([]), Scorer(), progress).run(config)
+    search = _LoggedSearch([])
+    _tuning(search, Scorer(), progress).run(config)
+    assert search.asked == config.trials
     assert [r.number for r in progress.records] == list(range(6))
     assert progress.records[0].params["branch"] == "b/transformer"
     for branch in config.branches:
