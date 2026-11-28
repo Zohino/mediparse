@@ -30,6 +30,8 @@
 !scripts/check-pr-record.sh
 !scripts/verify-mimic.sh
 !scripts/pytest-parallel.sh
+!scripts/metacentrum-submit.sh
+!scripts/metacentrum-fetch.sh
 !pyproject.toml
 !pixi.lock
 !README.md
