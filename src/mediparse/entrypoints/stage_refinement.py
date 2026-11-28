@@ -262,7 +262,7 @@ def run(  # ruff: ignore[too-many-arguments]
             best_macro_f1=report.best.value,
             completed_trials=report.completed_trials,
             nonconverged_trials=report.nonconverged_trials,
-            sampler=stage_sampler(report.study.startup_trials),
+            sampler=stage_sampler(report.study.sampler_startup_trials),
             pruner=STAGE_PRUNER,
             seconds=report.seconds,
             development_notes=report.development_notes,

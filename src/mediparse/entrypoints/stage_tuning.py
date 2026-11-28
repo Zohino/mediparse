@@ -194,7 +194,7 @@ def run(  # ruff: ignore[too-many-arguments]
             best_branch=config.branch(report.best.params).name,
             best_params=dict(report.best.params),
             best_macro_f1=report.best.value,
-            sampler=stage_sampler(config.startup_trials),
+            sampler=stage_sampler(config.sampler_startup_trials),
             pruner=STAGE_PRUNER,
             seconds=report.seconds,
             sample_notes=report.sample_notes,

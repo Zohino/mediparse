@@ -133,7 +133,7 @@ def test_refinement_uses_widened_space_budget_sampler_and_lineage(
     )
     assert (
         manifest.sampler
-        == "optuna.samplers.TPESampler(n_startup_trials=2, multivariate=True, group=True)"
+        == "optuna.samplers.TPESampler(n_startup_trials=2, multivariate=True, group=True, constant_liar=True)"
     )
     assert manifest.random_startup_trials == 1
     for field, path in (

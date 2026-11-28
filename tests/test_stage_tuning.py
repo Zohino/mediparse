@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
+from itertools import count
+from threading import Barrier, Event, Lock
 from typing import TYPE_CHECKING
 
 import pytest
@@ -27,12 +29,14 @@ from tests.stage_support import (
     MemoryProgress,
     StepClock,
     stage_config,
+    transformer_stage_config,
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Mapping, Sequence
     from pathlib import Path
 
+    from mediparse.application.ports.experiment import TrialScorer
     from mediparse.domain.input_note import InputNote
     from mediparse.domain.split import Holdout, SharedSplit
     from mediparse.domain.tuning import ParamValue
@@ -286,3 +290,182 @@ def test_nonconvergence_counts_each_affected_trial_once() -> None:
         True,
     ]
     assert report.nonconverged_trials == 2
+
+
+class _LoggedSearch(FixedSearch):
+    """Studie zaznamenávající otevřené pokusy a pořadí volání."""
+
+    def __init__(self, log: list[str]) -> None:
+        super().__init__()
+        self.log = log
+        self.opened = 0
+        self.maximum = 0
+
+    def enqueue(self, params: Mapping[str, ParamValue]) -> None:
+        self.log.append("enqueue")
+        super().enqueue(params)
+
+    def ask(self) -> Trial:
+        self.log.append("ask")
+        self.opened += 1
+        self.maximum = max(self.maximum, self.opened)
+        return super().ask()
+
+    def complete(self, trial: Trial, value: float) -> None:
+        self.log.append("complete")
+        self.opened -= 1
+        super().complete(trial, value)
+
+
+class _LoggedProgress(MemoryProgress):
+    """Checkpoint s událostí zápisu ve společném logu."""
+
+    def __init__(self, log: list[str]) -> None:
+        super().__init__()
+        self.log = log
+        self.b_written = Event()
+
+    def write(
+        self, record: StageTrialRecord, results: Sequence[StageFoldResult]
+    ) -> None:
+        self.log.append("write")
+        super().write(record, results)
+        if record.params["branch"] == "b/transformer":
+            self.b_written.set()
+
+
+def _tuning(
+    search: FixedSearch, scorer: TrialScorer, progress: MemoryProgress
+) -> StageTuning:
+    return StageTuning(
+        _Table(),
+        _SplitSource(),
+        StratifiedGroupFolds(),
+        search,
+        scorer,
+        progress,
+        StepClock(),
+    )
+
+
+def test_sequential_call_order_is_unchanged() -> None:
+    """Čtyři výchozí a dva návrhy zachovají původní pořadí volání."""
+    log: list[str] = []
+    _tuning(_LoggedSearch(log), CapturingScorer(), _LoggedProgress(log)).run(
+        stage_config()
+    )
+    assert (
+        log
+        == ["enqueue", "ask", "complete", "write"] * 4
+        + ["ask", "complete", "write"] * 2
+    )
+
+
+def test_concurrent_trials_run_simultaneously() -> None:
+    """Bariéra vyžaduje skutečný souběh tří pokusů v obou vlnách."""
+    barrier = Barrier(3, timeout=10)
+
+    class Scorer(CapturingScorer):
+        def score_folds(
+            self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
+        ) -> tuple[ValidationScores, ...]:
+            barrier.wait()
+            return super().score_folds(params, folds)
+
+    search = _LoggedSearch([])
+    progress = MemoryProgress()
+    _tuning(search, Scorer(), progress).run(
+        transformer_stage_config(concurrent_trials=3)
+    )
+    assert len(progress.records) == 6
+    assert search.maximum == 3
+
+
+def test_out_of_order_completion_keeps_protocol() -> None:
+    """Dokončení B před A neztratí výchozí body ani souvislé číslování."""
+    progress = _LoggedProgress([])
+
+    class Scorer(CapturingScorer):
+        def score_folds(
+            self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
+        ) -> tuple[ValidationScores, ...]:
+            if params["branch"] == "a/transformer":
+                assert progress.b_written.wait(10)
+            return super().score_folds(params, folds)
+
+    config = transformer_stage_config(concurrent_trials=2)
+    _tuning(_LoggedSearch([]), Scorer(), progress).run(config)
+    assert [r.number for r in progress.records] == list(range(6))
+    assert progress.records[0].params["branch"] == "b/transformer"
+    for branch in config.branches:
+        assert [
+            r.params
+            for r in progress.records
+            if r.default and r.params["branch"] == branch.name
+        ] == [branch.default_params()]
+
+
+@pytest.mark.parametrize("failed", [1, 2])
+def test_concurrent_failure_drains_running_trials(failed: int) -> None:
+    """Selhání zastaví návrhy a dovolí zapsat zbylé dva běžící pokusy."""
+    barrier = Barrier(3, timeout=10)
+    failure = Event()
+    log: list[str] = []
+    search = _LoggedSearch(log)
+    calls = count()
+    lock = Lock()
+
+    class Scorer(CapturingScorer):
+        def score_folds(
+            self, params: Mapping[str, ParamValue], folds: Sequence[Holdout]
+        ) -> tuple[ValidationScores, ...]:
+            with lock:
+                number = next(calls)
+            barrier.wait()
+            if number == failed:
+                log.append("failure")
+                failure.set()
+                msg = "přerušení"
+                raise RuntimeError(msg)
+            assert failure.wait(10)
+            return super().score_folds(params, folds)
+
+    progress = MemoryProgress()
+    with pytest.raises(RuntimeError, match=r"^přerušení$"):
+        _tuning(search, Scorer(), progress).run(
+            transformer_stage_config(concurrent_trials=3)
+        )
+    # První vlna: A výchozí, B výchozí, B nevýchozí; jeden selže, dva se zapíšou.
+    assert search.asked == 3
+    assert len(progress.records) == 2
+    assert "ask" not in log[log.index("failure") + 1 :]
+    assert not progress.finished
+
+
+def test_resume_restores_missing_defaults() -> None:
+    """Checkpoint po SIGKILL doplní jen chybějící výchozí bod B."""
+    config = transformer_stage_config(concurrent_trials=2)
+    a = config.branches[0].default_params()
+    progress = MemoryProgress(
+        records=[
+            StageTrialRecord(
+                0, a, default=True, value=0.5, converged=True, seconds=1.0
+            ),
+            StageTrialRecord(
+                1, a, default=False, value=0.4, converged=True, seconds=1.0
+            ),
+            StageTrialRecord(
+                2, a, default=False, value=0.3, converged=True, seconds=1.0
+            ),
+        ]
+    )
+    search = FixedSearch()
+    _tuning(search, CapturingScorer(), progress).run(config)
+    assert search.enqueued == [(3, config.branches[1].default_params())]
+    assert sorted(r.number for r in progress.records) == list(range(6))
+    for branch in config.branches:
+        assert [
+            r.params
+            for r in progress.records
+            if r.default and r.params["branch"] == branch.name
+        ] == [branch.default_params()]

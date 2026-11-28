@@ -6,7 +6,11 @@ import pytest
 
 from mediparse.domain.representation import TfidfRepresentation
 from mediparse.infrastructure.optuna_search import OptunaStageSearch, stage_sampler
-from tests.stage_support import stage_config, token_stage_config
+from tests.stage_support import (
+    stage_config,
+    token_stage_config,
+    transformer_stage_config,
+)
 
 if TYPE_CHECKING:
     from mediparse.domain.tuning import Trial
@@ -52,8 +56,9 @@ def test_stage_maximizes_objective() -> None:
 
 def test_sampler_description_uses_actual_options() -> None:
     """Manifest pojmenuje přesné nastavení TPE včetně group."""
-    assert stage_sampler(20) == (
-        "optuna.samplers.TPESampler(n_startup_trials=20, multivariate=True, group=True)"
+    config = transformer_stage_config(concurrent_trials=3)
+    assert stage_sampler(config.sampler_startup_trials) == (
+        "optuna.samplers.TPESampler(n_startup_trials=2, multivariate=True, group=True, constant_liar=True)"
     )
 
 
