@@ -240,13 +240,17 @@ class StageTuningConfig(BaseModel):
         ):
             msg = "Transformer musí být zadaný právě s rodinou transformer."
             raise ValueError(msg)
+        if self.transformer is not None and len({e.device for e in self.encoders}) > 1:
+            msg = "Encodery transformeru musí mít stejné zařízení."
+            raise ValueError(msg)
+        return self
+
+    @model_validator(mode="after")
+    def _valid_concurrency(self) -> Self:
         if self.concurrent_trials > 1 and any(
             f.family is not ClassifierFamily.TRANSFORMER for f in self.families
         ):
             msg = "Souběh pokusů je povolený jen pro transformer."
-            raise ValueError(msg)
-        if self.transformer is not None and len({e.device for e in self.encoders}) > 1:
-            msg = "Encodery transformeru musí mít stejné zařízení."
             raise ValueError(msg)
         if self.random_startup_trials < self.concurrent_trials - 1:
             msg = "Náhodné starty musí pokrýt souběh minus jeden."
