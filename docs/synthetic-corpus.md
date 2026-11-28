@@ -158,6 +158,13 @@ Kontroly jedné zprávy (výstupem jsou `note_id` zpráv k přegenerování):
    stejně jako v kontrolách korpusu. Bez téhle kontroly by medián korpusu závisel
    jen na tom, jak dlouze model píše, a zprávu mimo plán by smyčka přegenerování
    nepoznala.
+6. U zmínek se statusem `negated` a `family_history` po odstranění negovaných
+   úseků (výraz z `mentions.negation.cues`, nejvýš `mentions.negation.window_chars`
+   znaků mimo `.`, `;` a konec řádku, pak klíčové slovo; pravidlo `negated_pattern`
+   EDA) v textu klíčové slovo diagnózy nezbude; u zmínek `uncertain` naopak zbude.
+   Statusy `affirmed` a `affirmed_uncoded` se nekontrolují: zadání verbalizace
+   u nich negační výrazy neomezuje a falešná negace pravidla EDA je chyba pravidla,
+   ne nesoulad s plánem.
 
 Kontroly korpusu (tolerance NÁVRH, v configu):
 
