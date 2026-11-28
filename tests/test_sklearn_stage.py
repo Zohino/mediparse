@@ -1301,3 +1301,29 @@ def test_stage_scorer_device_pool(tmp_path: Path, *, transformer: bool) -> None:
         assert scorer.devices.free.qsize() == 2
     else:
         assert scorer.devices is None
+
+
+@pytest.mark.parametrize(("device", "expected"), [("cuda:1", ["cuda:1"]), ("cpu", [])])
+def test_transformer_selects_only_explicit_cuda_device(
+    monkeypatch: pytest.MonkeyPatch,
+    device: str,
+    expected: list[str],
+) -> None:
+    """Aktuální CUDA zařízení patří pokusu; CPU kontext CUDA nezakládá."""
+    torch = pytest.importorskip("torch")
+    select = Mock()
+    monkeypatch.setattr(torch.cuda, "set_device", select)
+    model = Mock(device=device, converged_=True)
+    model.model_.config.hidden_size = 16
+    model.decision_function.return_value = np.zeros((1, 5))
+    labels = np.zeros((1, 5), dtype=bool)
+    # Hranici dítěte ověřujeme bez skutečného kontextu CUDA.
+    sklearn_stage._transformer_scores(  # ruff: ignore[private-member-access]
+        model,
+        train=["syntetický fit"],
+        labels=labels,
+        stop=["syntetická stop část"],
+        stop_labels=labels,
+        validation=["syntetická validace"],
+    )
+    assert select.call_args_list == [call(value) for value in expected]
