@@ -240,6 +240,24 @@ def test_nondefault_char_tfidf_matches_manual_pipeline(tmp_path: Path) -> None:
         )
 
 
+def _network_scorer(
+    config: StageTuningConfig,
+    scratch: Path,
+    *,
+    devices: DevicePool,
+    isolate: Callable[[Callable[[], GroupScores]], GroupScores],
+) -> SklearnStageScorer:
+    return SklearnStageScorer(
+        config,
+        dict.fromkeys(config.text_preprocessing),
+        7,
+        scratch,
+        Mock(),
+        devices=devices,
+        isolate=isolate,
+    )
+
+
 @pytest.mark.parametrize("family", ["lightgbm_lsa", "linear_svm", "nb_svm"])
 def test_seeded_scores_repeat(tmp_path: Path, family: str) -> None:
     """Stejný seed opakuje skóre; různé seedy rozliší alespoň větev s LSA."""
@@ -1086,12 +1104,9 @@ def test_multirescnn_fits_once_with_patient_stopping_part(
     factory = Mock(return_value=model)
     monkeypatch.setattr(sklearn_stage, "classifier_estimator", factory)
     monkeypatch.setattr(sklearn_stage, "HfWindowClassifier", factory)
-    scorer = SklearnStageScorer(
+    scorer = _network_scorer(
         config,
-        dict.fromkeys(config.text_preprocessing),
-        7,
         tmp_path,
-        Mock(),
         devices=DevicePool.of("cpu", 1),
         isolate=lambda function: function(),
     )
@@ -1195,7 +1210,8 @@ def test_network_fold_scores_do_not_depend_on_jobs(tmp_path: Path) -> None:
 
 def _pickle_isolate(function: Callable[[], GroupScores]) -> GroupScores:
     # Jen vlastní funkce a syntetické výsledky; round-trip ověřuje přenos spawnem.
-    return pickle.loads(pickle.dumps(pickle.loads(pickle.dumps(function))()))  # ruff: ignore[suspicious-pickle-usage]
+    restored = pickle.loads(pickle.dumps(function))  # ruff: ignore[suspicious-pickle-usage]
+    return pickle.loads(pickle.dumps(restored()))  # ruff: ignore[suspicious-pickle-usage]
 
 
 @pytest.mark.usefixtures("torch_runtime")
@@ -1207,12 +1223,9 @@ def test_transformer_branch_scores_tiny_model(
     monkeypatch.setattr(hf_classifier, "load_parts", lambda *_, **__: encoder_parts())
     config = transformer_stage_config()
     folds = patient_holdouts(notes(visits=2), 2, 7, StratifiedGroupFolds())
-    scorer = SklearnStageScorer(
+    scorer = _network_scorer(
         config,
-        dict.fromkeys(config.text_preprocessing),
-        7,
         tmp_path,
-        Mock(),
         devices=DevicePool.of("cpu", 1),
         isolate=_pickle_isolate,
     )
@@ -1249,12 +1262,9 @@ def test_transformer_trial_holds_one_device(
 
     config = transformer_stage_config()
     folds = patient_holdouts(notes(visits=2), 2, 7, StratifiedGroupFolds())
-    scorer = SklearnStageScorer(
+    scorer = _network_scorer(
         config,
-        dict.fromkeys(config.text_preprocessing),
-        7,
         tmp_path,
-        Mock(),
         devices=pool,
         isolate=isolate,
     )
