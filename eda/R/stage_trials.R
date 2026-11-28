@@ -165,12 +165,13 @@ stage_best_by <- function(summary, column) {
 }
 
 stage_selection <- function(summary, manifest) {
-  best <- stage_best_by(summary, "family")
-  if (nrow(best) == 1L) stop("stupeň má jedinou rodinu", call. = FALSE)
+  column <- if (length(unique(summary$family)) == 1L) "branch" else "family"
+  best <- stage_best_by(summary, column)
+  if (nrow(best) == 1L) stop("stupeň má jediného kandidáta", call. = FALSE)
   if (best$trial[1] != manifest$best_trial) {
     stop("Vítěz neodpovídá manifestu.", call. = FALSE)
   }
-  list(winner = best[1, ], family_best = best, second = best[2, ], others = best[-1, ])
+  list(winner = best[1, ], candidate_best = best, second = best[2, ], others = best[-1, ])
 }
 
 space_value_text <- function(x) {
@@ -273,7 +274,7 @@ stage_defaults_table <- function(summary) {
 }
 
 stage_family_table <- function(selection, summary) {
-  rows <- selection$family_best
+  rows <- selection$candidate_best
   defaults <- summary[summary$default, ]
   data.frame(rodina = unname(FAMILY_LABELS[rows$family]),
     pokus = paste(rows$trial, rows$representation),
@@ -283,7 +284,7 @@ stage_family_table <- function(selection, summary) {
 }
 
 stage_diagnosis_table <- function(trials, selection, candidates) {
-  rows <- trials[trials$trial %in% selection$family_best$trial, ]
+  rows <- trials[trials$trial %in% selection$candidate_best$trial, ]
   means <- stats::aggregate(rows["max_f1"], rows[c("family", "diagnosis")], mean)
   data.frame(rodina = unname(FAMILY_LABELS[means$family]),
     diagnóza = candidate_labels(means$diagnosis, candidates), f1 = metric_text(means$max_f1))

@@ -169,17 +169,18 @@ testthat::test_that("A1 a A3 souhrn ověřuje cíl a výběrovou SD foldů", {
 testthat::test_that("A2 vítěze a shody určuje cíl a číslo pokusu", {
   summary <- data.frame(trial = 0:5, family = c("a", "b", "a", "b", "c", "c"),
     value = c(0.80, 0.78, 0.82, 0.82, 0.70, 0.70))
+  summary$branch <- summary$family
   selection <- stage_selection(summary, list(best_trial = 2))
   testthat::expect_equal(selection$winner$trial, 2L)
   testthat::expect_equal(selection$second$trial, 3L)
-  testthat::expect_equal(selection$family_best$trial, c(2L, 3L, 4L))
+  testthat::expect_equal(selection$candidate_best$trial, c(2L, 3L, 4L))
   testthat::expect_equal(selection$others$trial, c(3L, 4L))
-  testthat::expect_equal(selection$family_best$family, c("a", "b", "c"))
+  testthat::expect_equal(selection$candidate_best$family, c("a", "b", "c"))
   testthat::expect_error(stage_selection(summary, list(best_trial = 3)), "manifest")
   summary$value <- 0.8
   testthat::expect_equal(stage_selection(summary, list(best_trial = 0))$winner$trial, 0L)
   testthat::expect_equal(stage_selection(summary, list(best_trial = 0))$second$trial, 1L)
-  testthat::expect_error(stage_selection(summary[summary$family == "a", ], list(best_trial = 0)), "jedinou rodinu")
+  testthat::expect_error(stage_selection(summary[summary$family == "a", ], list(best_trial = 0)), "jediného kandidáta")
 })
 
 testthat::test_that("Shoda mezi rodinami nezávisí na locale ani jméně", {
@@ -388,4 +389,22 @@ testthat::test_that("B6 provenance uvádí procesy, encodery a GPU", {
   testthat::expect_equal(table$Hodnota[match(paste("Encoder", names), table$Položka)],
     paste0("jhu-clsp/mmBERT-base@c5955035435e2bf121cde7f3c8863ef52ff35d82, okno ",
       c(8192, 512, 8192), ", bfloat16, cuda"))
+})
+
+testthat::test_that("Jedna rodina vybírá dva nejlepší encodery po větvích", {
+  summary <- data.frame(trial = 0:3, family = "transformer",
+    branch = c("mmbert/transformer", "mmbert/transformer", "xlmr/transformer", "mdeberta/transformer"),
+    value = c(0.90, 0.85, 0.70, 0.88))
+  for (indices in list(1:4, 4:1)) {
+    selection <- stage_selection(summary[indices, ], list(best_trial = 0))
+    testthat::expect_equal(selection$winner$trial, 0L)
+    testthat::expect_equal(selection$second$trial, 3L)
+    tied <- summary
+    tied$value <- 0.9
+    selection <- stage_selection(tied[indices, ], list(best_trial = 0))
+    testthat::expect_equal(selection$winner$trial, 0L)
+    testthat::expect_equal(selection$second$trial, 2L)
+  }
+  testthat::expect_error(stage_selection(summary[1:2, ], list(best_trial = 0)),
+    "stupeň má jediného kandidáta")
 })
