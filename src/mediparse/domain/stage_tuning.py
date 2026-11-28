@@ -351,25 +351,29 @@ def best_trial(records: Sequence[StageTrialRecord]) -> StageTrialRecord:
     return max(records, key=lambda record: (record.value, -record.number))
 
 
-def family_candidates(
+def stage_candidates(
     records: Sequence[StageTrialRecord],
 ) -> tuple[StageTrialRecord, StageTrialRecord]:
-    """Vybere dvě nejlepší rodiny, při stejném cíli dřívější pokus.
+    """Vybere dvě rodiny, u jediné rodiny dvě větve; shodu rozhodne dřívější pokus.
 
     Returns:
-        Nejlepší bod každé ze dvou vedoucích rodin.
+        Nejlepší bod každé ze dvou vedoucích rodin nebo větví.
 
     Raises:
-        InvalidInputError: Předkolo obsahuje méně než dvě rodiny.
+        InvalidInputError: Předkolo obsahuje méně než dvě rodiny nebo větve.
     """
-    families = {}
+    single_family = (
+        len({branch_parts(str(r.params[BRANCH_KEY]))[1] for r in records}) == 1
+    )
+    candidates = {}
     for record in sorted(records, key=lambda r: (-r.value, r.number)):
-        family = branch_parts(str(record.params[BRANCH_KEY]))[1]
-        families.setdefault(family, record)
-    if len(families) < CANDIDATE_COUNT:
-        msg = "Kontrola stupně vyžaduje alespoň dvě rodiny."
+        branch = str(record.params[BRANCH_KEY])
+        key = branch if single_family else branch_parts(branch)[1]
+        candidates.setdefault(key, record)
+    if len(candidates) < CANDIDATE_COUNT:
+        msg = "Kontrola stupně vyžaduje alespoň dvě rodiny nebo větve."
         raise InvalidInputError(msg)
-    first, second, *_ = families.values()
+    first, second, *_ = candidates.values()
     return first, second
 
 

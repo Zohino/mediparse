@@ -19,7 +19,7 @@ from mediparse.domain.stage_refinement import RefinementConfig
 from mediparse.domain.stage_tuning import (
     StageTrialRecord,
     best_trial,
-    family_candidates,
+    stage_candidates,
 )
 from mediparse.domain.tuning import MaxF1, ValidationScores
 from mediparse.infrastructure.optuna_search import OptunaStageSearch
@@ -58,10 +58,10 @@ def test_candidates_match_r_rule() -> None:
             zip("ababcc", (0.80, 0.78, 0.82, 0.82, 0.70, 0.70), strict=True)
         )
     )
-    assert tuple(r.number for r in family_candidates(records)) == (2, 3)
+    assert tuple(r.number for r in stage_candidates(records)) == (2, 3)
     assert tuple(
         r.number
-        for r in family_candidates(tuple(replace(r, value=0.8) for r in records))
+        for r in stage_candidates(tuple(replace(r, value=0.8) for r in records))
     ) == (0, 1)
 
 
@@ -72,9 +72,37 @@ def test_candidates_group_by_family_not_branch() -> None:
         _record(1, "char_wb/nb_svm", 0.8),
         _record(2, "word/linear_svm", 0.7),
     )
-    assert tuple(r.number for r in family_candidates(records)) == (0, 2)
-    with pytest.raises(InvalidInputError, match="dvě rodiny"):
-        family_candidates(records[:2])
+    assert tuple(r.number for r in stage_candidates(records)) == (0, 2)
+    assert tuple(r.number for r in stage_candidates(records[:2])) == (0, 1)
+
+
+@pytest.mark.parametrize("order", [(0, 1, 2, 3), (3, 2, 1, 0)])
+def test_single_family_candidates_group_by_branch(order: tuple[int, ...]) -> None:
+    """Tři encodery dají nejlepší mmBERT a mDeBERTa, nikoli dva pokusy mmBERT."""
+    records = (
+        _record(0, "mmbert/transformer", 0.90),
+        _record(1, "mmbert/transformer", 0.85),
+        _record(2, "xlmr/transformer", 0.70),
+        _record(3, "mdeberta/transformer", 0.88),
+    )
+    assert tuple(
+        r.number for r in stage_candidates(tuple(records[i] for i in order))
+    ) == (0, 3)
+    tied = tuple(replace(r, value=0.9) for r in records)
+    assert tuple(r.number for r in stage_candidates(tuple(tied[i] for i in order))) == (
+        0,
+        2,
+    )
+
+
+def test_single_branch_has_too_few_candidates() -> None:
+    """Dva pokusy jedné větve nestačí pro kontrolu dvou kandidátů."""
+    records = (
+        _record(0, "mmbert/transformer", 0.90),
+        _record(1, "mmbert/transformer", 0.85),
+    )
+    with pytest.raises(InvalidInputError, match="rodiny nebo větve"):
+        stage_candidates(records)
 
 
 @dataclass(frozen=True)

@@ -1,4 +1,4 @@
-"""Kontrola rodin a doladění vítězné větve na celé vývojové části."""
+"""Kontrola kandidátů a doladění vítězné větve na celé vývojové části."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ from mediparse.domain.stage_tuning import (
     BRANCH_KEY,
     StageTrialRecord,
     best_trial,
-    family_candidates,
+    stage_candidates,
 )
 from mediparse.domain.tuning import Trial
 
@@ -34,7 +34,7 @@ if TYPE_CHECKING:
 
 @dataclass(frozen=True)
 class StageRefinement:
-    """Vyhodnotí dvě rodiny a vyčerpá společný rozpočet vítězné větve."""
+    """Vyhodnotí dva kandidáty a vyčerpá společný rozpočet vítězné větve."""
 
     table: PatientNoteTable
     split: SplitSource
@@ -56,7 +56,7 @@ class StageRefinement:
         Returns:
             Vítěz a agregáty kontroly a doladění s původem splitu.
         """
-        candidates = family_candidates(screening)
+        candidates = stage_candidates(screening)
         studies = {
             candidate.params[BRANCH_KEY]: branch_config(
                 stage,

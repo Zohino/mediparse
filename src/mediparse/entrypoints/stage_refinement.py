@@ -25,7 +25,7 @@ from mediparse.domain.run_manifest import (
     ensure_stage_lineage,
 )
 from mediparse.domain.stage_refinement import widen
-from mediparse.domain.stage_tuning import BRANCH_KEY, family_candidates
+from mediparse.domain.stage_tuning import BRANCH_KEY, stage_candidates
 from mediparse.entrypoints.cli import configure_logging, refusing_invalid_input
 from mediparse.entrypoints.exit_code import ExitCode
 from mediparse.entrypoints.model_corpus import (
@@ -170,7 +170,7 @@ def run(  # ruff: ignore[too-many-arguments]
     refinement = load_refinement_config(paths.refinement)
     matrix = load_matrix(paths.matrix)
     screening = read_trial_records(paths.stage_results)
-    candidates = family_candidates(screening)
+    candidates = stage_candidates(screening)
     corpus = model_corpus(
         paths.corpus, strip_diagnostic_sections=stage.strip_diagnostic_sections
     )
