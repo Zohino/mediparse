@@ -490,12 +490,14 @@ def test_resume_restores_missing_defaults() -> None:
         ] == [branch.default_params()]
 
 
+@pytest.mark.parametrize("first_failed", ["a", "b"])
 def test_concurrent_errors_raise_first_started_and_log_only_types(
     caplog: pytest.LogCaptureFixture,
+    first_failed: str,
 ) -> None:
-    """Pozdější selhání B nevyhraje nad A a log neobsahuje obsah výjimky."""
+    """Chyba dříve spuštěného A má přednost v obou pořadích selhání."""
     barrier = Barrier(2, timeout=10)
-    b_failed = Event()
+    first_failure = Event()
 
     class Scorer:
         @staticmethod
@@ -504,16 +506,18 @@ def test_concurrent_errors_raise_first_started_and_log_only_types(
         ) -> tuple[ValidationScores, ...]:
             del folds
             barrier.wait()
-            if params["branch"] == "b/transformer":
-                b_failed.set()
+            if params[BRANCH_KEY] == f"{first_failed}/transformer":
+                first_failure.set()
+            else:
+                assert first_failure.wait(10)
+            if params[BRANCH_KEY] == "b/transformer":
                 msg = "syntetický obsah výjimky B"
                 raise ValueError(msg)
-            assert b_failed.wait(10)
             msg = "první pokus"
             raise RuntimeError(msg)
 
     search = FixedSearch()
-    with pytest.raises(RuntimeError, match="první pokus"):
+    with pytest.raises(RuntimeError, match=r"^první pokus$"):
         _tuning(search, Scorer(), MemoryProgress()).run(
             transformer_stage_config(concurrent_trials=2)
         )
