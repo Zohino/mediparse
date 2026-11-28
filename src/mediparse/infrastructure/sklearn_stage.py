@@ -189,7 +189,7 @@ class SklearnStageScorer:
             for i, device in group:
                 fold = folds[i]
                 train, validation, n_features = self._features(branch, rep, fold)
-                stop, labels = self._stopping_part(fold, network.stopping_parts)
+                stop, labels = self._fit_split(fold, network.stopping_parts)
                 fits.append((
                     i,
                     partial(
@@ -216,7 +216,7 @@ class SklearnStageScorer:
             for _, score in sorted(chain.from_iterable(results), key=itemgetter(0))
         )
 
-    def _stopping_part(self, fold: Holdout, parts: int) -> tuple[ndarray, ndarray]:
+    def _fit_split(self, fold: Holdout, parts: int) -> tuple[ndarray, ndarray]:
         return holdout_mask(fold.train, parts, self.seed), label_matrix(fold.train)
 
     def _encoder_texts(
@@ -244,7 +244,7 @@ class SklearnStageScorer:
         with cast("DevicePool", self.devices).lease() as device:
             for i, fold in enumerate(folds):
                 texts = self._encoder_texts(spec, fold.train)
-                stop, labels = self._stopping_part(fold, transformer.stopping_parts)
+                stop, labels = self._fit_split(fold, transformer.stopping_parts)
                 fits.append((
                     i,
                     partial(
